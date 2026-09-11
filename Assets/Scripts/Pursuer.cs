@@ -27,8 +27,8 @@ public class Pursuer : MonoBehaviour
         }
         if(kind==0 || kind==2)
         {
-            var signObject=new GameObject(kind==0?"Sandra sign":"Deva ghost sign"); signObject.transform.SetParent(transform,false); signObject.transform.localPosition=new Vector3(0,kind==0?1.32f:1.18f,.30f);
-            var sign=signObject.AddComponent<TextMesh>(); sign.text=kind==0?"Sandra":"Deva ghost"; sign.fontSize=48; sign.characterSize=.045f; sign.anchor=TextAnchor.MiddleCenter; sign.alignment=TextAlignment.Center; sign.color=kind==0?new Color(.95f,.85f,.68f):new Color(.67f,1f,.85f);
+            var signObject=new GameObject(kind==0?"Sylvia sign":"Deva ghost sign"); signObject.transform.SetParent(transform,false); signObject.transform.localPosition=new Vector3(0,kind==0?1.32f:1.18f,.30f);
+            var sign=signObject.AddComponent<TextMesh>(); sign.text=kind==0?"Sylvia":"Deva ghost"; sign.fontSize=48; sign.characterSize=.045f; sign.anchor=TextAnchor.MiddleCenter; sign.alignment=TextAlignment.Center; sign.color=kind==0?new Color(.95f,.85f,.68f):new Color(.67f,1f,.85f);
             var plaque=EscapeGame.Primitive("Sign plaque",PrimitiveType.Cube,signObject.transform.position+new Vector3(0,0,-.035f),new Vector3(kind==0?.76f:1.02f,.23f,.04f),kind==0?new Color(.30f,.13f,.11f):new Color(.08f,.28f,.23f)); plaque.transform.SetParent(transform,true); plaque.transform.SetSiblingIndex(0);
         }
         if(kind==2){var l=gameObject.AddComponent<Light>();l.color=Color.cyan;l.range=4;l.intensity=.8f;}

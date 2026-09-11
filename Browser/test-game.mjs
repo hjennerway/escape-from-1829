@@ -86,7 +86,7 @@ t.start();t.finish(true,layout.exits[0].name);t.escapeCutscene.skip();assert.equ
 t.escapeCutscene.skip();assert.equal(t.state,'won','Repeated skip is harmless');
 t.start();assert.equal(t.escapeCutscene.active,false);assert.equal(elements.get('escapeCutscene').hidden,true);
 assert.equal(elements.get('hud').hidden,false);
-t.finish(false,'Sandra');assert.equal(t.state,'lost');assert.equal(t.escapeCutscene.active,false);
+t.finish(false,'Sylvia');assert.equal(t.state,'lost');assert.equal(t.escapeCutscene.active,false);
 const reducedRoot=element('reduced'),wide=reducedRoot.querySelector('[data-shot="wide"]'),detail=reducedRoot.querySelector('[data-shot="detail"]');
 let completed=0;const reduced=createEscapeCutscene(reducedRoot,()=>completed++,{reducedMotion:true});
 reduced.start();reduced.update(5);assert.equal(wide.style.transform,'none');assert.equal(detail.style.opacity,'1');

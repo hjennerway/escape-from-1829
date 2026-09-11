@@ -108,7 +108,7 @@ function enemyModel(type){
  for(const s of [-1,1]){const arm=box([.14,.72,.17],[s*.34,1.2,0],coat,group);arm.rotation.z=s*.13;if(type!==2){box([.15,.58,.17],[s*.15,.31,0],material(0x1e241e),group);box([.19,.12,.32],[s*.15,.06,.08],material(0x11160f),group);}mesh(new THREE.SphereGeometry(.035,6,6),material(0xf5e0b0,{emissive:type===2?0x9cffe1:0xfa694b,emissiveIntensity:2}),[s*.074,1.89,.185],group);}
  if(type===0){mesh(new THREE.SphereGeometry(.22,12,10,0,Math.PI*2,0,Math.PI*.55),material(0x342a21),[0,1.91,0],group);box([.12,.18,.025],[.15,1.4,.25],material(0xc4c1a6),group);}
  if(type===1){box([.48,.12,.4],[0,2.02,0],material(0x151c26),group);box([.14,.16,.035],[-.13,1.44,.24],material(0xb5b783),group);}
- if(type===0)wornSign(group,'Sandra',1.33,0x5d322b);
+ if(type===0)wornSign(group,'Sylvia',1.33,0x5d322b);
  if(type===2){const l=new THREE.PointLight(0x81d6b5,6,5);l.position.y=1.3;group.add(l);wornSign(group,'Deva ghost',1.18,0x1c4a40);}
  scene.add(group);return group;
 }
@@ -157,7 +157,7 @@ async function init(){
   label('UPPER GALLERY|BOTH STAIRS LEAD TO EXITS',20*layout.cellSize,2.7,16*layout.cellSize);
   floorGroups.push(groupSince(upperSnapshot,FLOOR_HEIGHT));layout=floors[0];floorGroups[1].visible=false;
   torch=new THREE.SpotLight(0xffe4af,24,30,.50,.55,1.2);torchTarget=new THREE.Object3D();scene.add(torch,torchTarget);torch.target=torchTarget;
-  enemies=[['Sandra',8,9],['Security',32,23],['Deva asylum ghost',20,21]].map(([name,x,z],type)=>({name,type,floor:0,spawn:{x:x*2.5,z:z*2.5,floor:0},x:x*2.5,z:z*2.5,mesh:enemyModel(type),path:[],memory:0,rethink:0,route:0,target:null}));
+  enemies=[['Sylvia',8,9],['Security',32,23],['Deva asylum ghost',20,21]].map(([name,x,z],type)=>({name,type,floor:0,spawn:{x:x*2.5,z:z*2.5,floor:0},x:x*2.5,z:z*2.5,mesh:enemyModel(type),path:[],memory:0,rethink:0,route:0,target:null}));
   resetPositions();clock=new THREE.Clock();ready=true;$('start').disabled=false;$('start').innerHTML='ENTER THE BUILDING <span>↗</span>';animate();
  }catch(e){console.error(e);$('start').textContent='RELOAD TO TRY AGAIN';$('start').disabled=false;$('start').onclick=()=>location.reload();$('intro').textContent='The building could not load. Check your connection and reload. '+e.message;}
 }

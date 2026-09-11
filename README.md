@@ -1,6 +1,6 @@
 # Escape from 1829
 
-Escape the 1829 building in Chester while Sandra, Security, and the Deva asylum ghost search the corridors.
+Escape the 1829 building in Chester while Sylvia, Security, and the Deva asylum ghost search the corridors.
 
 ## Play the game
 
