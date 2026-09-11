@@ -5,14 +5,53 @@ const $=id=>document.getElementById(id),canvas=$('game');
 const keys=new Set(),touch=matchMedia('(pointer:coarse)').matches;
 let layout,renderer,scene,camera,torch,torchTarget,clock,ready=false,state='menu',elapsed=0,stamina=1,yaw=0,pitch=0,hold=0,sprint=false,crouch=false,exhausted=false;
 let enemies=[],lights=[],audioCtx,audioOn=true,lastStep=0,lastPulse=0,footPhase=0,dragging=false,previousPointer=null,modelLoaded=false;
-const player={x:50,z:27.5},mapContext=$('map').getContext('2d');
+const player={x:50,z:27.5},mapCanvas=$('map'),mapContext=mapCanvas.getContext('2d'),miniMapCanvas=$('miniMap'),miniMapContext=miniMapCanvas.getContext('2d');
+let mapRefresh=0;
 const material=(color,extra={})=>new THREE.MeshStandardMaterial({color,roughness:.88,...extra});
 const tmp=new THREE.Vector3();
 function mesh(geometry,mat,p,parent=scene){const m=new THREE.Mesh(geometry,mat);m.position.set(...p);parent.add(m);return m;}
 function box(size,p,mat,parent){return mesh(new THREE.BoxGeometry(...size),mat,p,parent);}
 function lamp(x,z,color=0xd6c296){const l=new THREE.PointLight(color,14,13,1.4);l.position.set(x,2.9,z);scene.add(l);lights.push(l);box([.45,.06,.22],[x,3.28,z],material(0xd4c397,{emissive:color,emissiveIntensity:.6}));}
-function label(text,x,y,z,rotate=0){const c=document.createElement('canvas');c.width=640;c.height=192;const g=c.getContext('2d');g.fillStyle='#163527';g.fillRect(0,0,640,192);g.strokeStyle='#a9d7af';g.lineWidth=5;g.strokeRect(10,10,620,172);g.textAlign='center';g.fillStyle='#d9f1c7';const title=text.split('|')[0],size=title.length>17?42:title.length>12?50:62;g.font=`bold ${size}px Arial`;g.fillText(title,320,85);g.font='22px Arial';g.fillText(text.split('|')[1]||'',320,141);const m=mesh(new THREE.PlaneGeometry(2.35,.72),new THREE.MeshBasicMaterial({map:new THREE.CanvasTexture(c),side:THREE.DoubleSide}),[x,y,z]);m.rotation.y=rotate;}
-function wornSign(group,text,y,color=0x1a2b20){const board=box([.7,.29,.045],[0,y, .285],material(color),group);const c=document.createElement('canvas');c.width=512;c.height=160;const g=c.getContext('2d');g.fillStyle='#dce8c4';g.fillRect(0,0,512,160);g.strokeStyle='#31513e';g.lineWidth=10;g.strokeRect(8,8,496,144);g.fillStyle='#142119';g.font='bold 54px Arial';g.textAlign='center';g.textBaseline='middle';g.fillText(text,256,80);const sign=mesh(new THREE.PlaneGeometry(.65,.2),new THREE.MeshBasicMaterial({map:new THREE.CanvasTexture(c),transparent:true}),[0,y,.31],group);sign.name=text+' sign';return board;}
+function twoSidedTextPlane(geometry,texture,frontPosition,parent){
+ const mat=new THREE.MeshBasicMaterial({map:texture,transparent:true,side:THREE.FrontSide});
+ const front=mesh(geometry,mat,frontPosition,parent);
+ const back=mesh(geometry.clone(),mat,[frontPosition[0],frontPosition[1],-frontPosition[2]],parent);
+ back.rotation.y=Math.PI;
+ return {front,back};
+}
+function label(text,x,y,z,rotate=0){const c=document.createElement('canvas');c.width=640;c.height=192;const g=c.getContext('2d');g.fillStyle='#163527';g.fillRect(0,0,640,192);g.strokeStyle='#a9d7af';g.lineWidth=5;g.strokeRect(10,10,620,172);g.textAlign='center';g.fillStyle='#d9f1c7';const title=text.split('|')[0],size=title.length>17?42:title.length>12?50:62;g.font=`bold ${size}px Arial`;g.fillText(title,320,85);g.font='22px Arial';g.fillText(text.split('|')[1]||'',320,141);const signGroup=new THREE.Group();signGroup.position.set(x,y,z);signGroup.rotation.y=rotate;scene.add(signGroup);const texture=new THREE.CanvasTexture(c);twoSidedTextPlane(new THREE.PlaneGeometry(2.35,.72),texture,[0,0,.012],signGroup);}
+function wornSign(group,text,y,color=0x1a2b20){const board=box([.7,.29,.045],[0,y, .285],material(color),group);const c=document.createElement('canvas');c.width=512;c.height=160;const g=c.getContext('2d');g.fillStyle='#dce8c4';g.fillRect(0,0,512,160);g.strokeStyle='#31513e';g.lineWidth=10;g.strokeRect(8,8,496,144);g.fillStyle='#142119';g.font='bold 54px Arial';g.textAlign='center';g.textBaseline='middle';g.fillText(text,256,80);const texture=new THREE.CanvasTexture(c);const signs=twoSidedTextPlane(new THREE.PlaneGeometry(.65,.2),texture,[0,y,.31],group);signs.back.position.z=.26;signs.front.name=text+' sign';signs.back.name=text+' sign (reverse)';return board;}
+const heritageSources=[
+ {url:'https://www.whateversleft.co.uk/wp-content/uploads/2008/11/031.jpg',title:'DEVA ASYLUM · CORRIDOR',credit:'Public Deva archive · Whatevers Left'},
+ {url:'https://www.whateversleft.co.uk/wp-content/uploads/2008/11/007-1.jpg',title:'DEVA ASYLUM · WARD',credit:'Public Deva archive · Whatevers Left'},
+ {url:'https://basedinchurton.co.uk/wp-content/uploads/2025/05/cheshire-lunatic-asylum-report-1855-diagnosis.jpg?w=450',title:'1855 REPORT · DIAGNOSIS',credit:'Based in Churton · Cheshire reports'},
+ {url:'https://basedinchurton.co.uk/wp-content/uploads/2025/05/total-forms-mental-disorder-asylum-1854-1867.jpg',title:'1854–1867 · FORMS OF DISORDER',credit:'Based in Churton · Cheshire reports'},
+ {url:'https://basedinchurton.co.uk/wp-content/uploads/2025/05/1855-occupations-of-patients-admitted.jpg',title:'1855 REPORT · ADMISSIONS',credit:'Based in Churton · Cheshire reports'}
+];
+function heritagePhotoTexture(item){
+ const c=document.createElement('canvas');c.width=640;c.height=420;const g=c.getContext('2d');
+ const drawFallback=()=>{g.fillStyle='#26372d';g.fillRect(0,0,640,420);g.fillStyle='#b9d5bd';g.font='bold 28px Arial';g.textAlign='center';g.fillText(item.title,320,190);g.font='20px Arial';g.fillText('Historical reference panel',320,230);g.font='16px Arial';g.fillStyle='#d4e8cd';g.fillText(item.credit,320,380);};
+ const texture=new THREE.CanvasTexture(c);texture.colorSpace=THREE.SRGBColorSpace;drawFallback();
+ const image=new Image();image.crossOrigin='anonymous';image.onload=()=>{const w=600,h=330,scale=Math.max(w/image.width,h/image.height),dw=image.width*scale,dh=image.height*scale;g.fillStyle='#172219';g.fillRect(0,0,640,420);g.drawImage(image,(640-dw)/2,(h-dh)/2,dw,dh);g.fillStyle='rgba(12,24,17,.92)';g.fillRect(0,330,640,90);g.fillStyle='#d9f1c7';g.font='bold 22px Arial';g.textAlign='center';g.fillText(item.title,320,362);g.font='16px Arial';g.fillStyle='#b7d5ba';g.fillText(item.credit,320,390);texture.needsUpdate=true;};image.onerror=()=>{};image.src=item.url;return texture;
+}
+function heritagePlaqueTexture(){
+ const c=document.createElement('canvas');c.width=640;c.height=420;const g=c.getContext('2d');g.fillStyle='#d8c79c';g.fillRect(0,0,640,420);g.strokeStyle='#4d3b25';g.lineWidth=10;g.strokeRect(16,16,608,388);g.fillStyle='#2d261b';g.textAlign='center';g.font='bold 30px Georgia';g.fillText('CHESHIRE ASYLUM · 1854',320,60);g.font='20px Georgia';g.fillText('A statistical note from the annual report',320,92);g.textAlign='left';g.font='bold 22px Arial';g.fillText('Average residents',54,142);g.fillText('Admissions',54,178);g.fillText('Epilepsy',54,214);g.fillText('General paralysis',54,250);g.fillText('Suicidal tendency',54,286);g.fillText('Attempts before admission',54,322);g.fillText('1 Jan 1855',54,358);g.textAlign='right';g.font='bold 22px Arial';g.fillText('255.75',586,142);g.fillText('102',586,178);g.fillText('8',586,214);g.fillText('9',586,250);g.fillText('42',586,286);g.fillText('26',586,322);g.fillText('254 patients · 108 men / 146 women',586,358);g.textAlign='center';g.font='14px Arial';g.fillStyle='#55462e';g.fillText('Historical terms and categories are transcribed from 19th-century reports.',320,388);const texture=new THREE.CanvasTexture(c);texture.colorSpace=THREE.SRGBColorSpace;return texture;
+}
+function heritageWallSurfaces(){
+ const surfaces=[];
+ for(let z=0;z<layout.height;z++)for(let x=0;x<layout.width;x++)if(layout.cells[z*layout.width+x])for(const [dx,dz] of [[1,0],[-1,0],[0,1],[0,-1]]){
+  const nx=x+dx,nz=z+dz,inside=nx>=0&&nx<layout.width&&nz>=0&&nz<layout.height&&layout.cells[nz*layout.width+nx];if(inside)continue;
+  const px=x*layout.cellSize,pz=z*layout.cellSize,rotation=dx===1?-Math.PI/2:dx===-1?Math.PI/2:dz===1?Math.PI:0;
+  surfaces.push({x:px+dx*layout.cellSize*.5-dx*.07,z:pz+dz*layout.cellSize*.5-dz*.07,rotation});
+ }
+ return surfaces;
+}
+function addHeritagePanel(surface,texture,name,width=1.48,height=1.02){
+ const group=new THREE.Group();group.position.set(surface.x,1.88,surface.z);group.rotation.y=surface.rotation;scene.add(group);box([width+.14,height+.14,.07],[0,0,-.03],material(0x2e2016,{roughness:.76}),group);const panel=mesh(new THREE.PlaneGeometry(width,height),new THREE.MeshBasicMaterial({map:texture,side:THREE.FrontSide}),[0,0,.02],group);panel.name=name;return panel;
+}
+function placeHeritagePanels(){
+ const surfaces=heritageWallSurfaces();for(let i=0;i<surfaces.length;i+=30){if(i===0)addHeritagePanel(surfaces[i],heritagePlaqueTexture(),'1854 history plaque',1.58,1.04);else{const item=heritageSources[(i/30-1)%heritageSources.length];addHeritagePanel(surfaces[i],heritagePhotoTexture(item),item.title);}}
+}
 function enemyModel(type){
  const group=new THREE.Group(),skin=material(type===2?0x91bcad:0xb09a7b),coat=material([0x643632,0x202f42,0x577b6e][type],type===2?{transparent:true,opacity:.68,emissive:0x345e51,emissiveIntensity:.4}:{});
  mesh(new THREE.CylinderGeometry(.23,.37,1.12,8),coat,[0,1.05,0],group);
@@ -46,6 +85,7 @@ async function init(){
    const gltf=await new GLTFLoader().loadAsync('./level.glb');scene.add(gltf.scene);modelLoaded=true;
    gltf.scene.traverse(o=>{if(o.isMesh){o.frustumCulled=false;if(o.material){o.material.roughness=.88;if(o.material.name==='Glass'){o.material.emissive=new THREE.Color(0x3a5743);o.material.emissiveIntensity=.2;}}}});
   }catch(error){console.warn('Blender level unavailable; using the browser-safe layout fallback.',error);buildProcedural();}
+  placeHeritagePanels();
   for(let x=8;x<=32;x+=4)lamp(x*2.5,40);
   for(const x of [8,20,32])for(let z=5;z<=27;z+=6)if(layout.cells[z*layout.width+x])lamp(x*2.5,z*2.5,0xa3baa0);
   layout.exits.forEach((e,i)=>{lamp(e.x*2.5,e.z*2.5,0x77db97);label('EXIT '+(i+1)+'  →|'+e.name,e.x*2.5,2.8,e.z*2.5+(e.z===4?-.5:.5));});
@@ -93,12 +133,18 @@ function update(dt){
  $('warning').textContent=elapsed<5?'YOU HAVE A FIVE-SECOND HEAD START':nearest<4?'SOMEONE IS VERY CLOSE':nearest<10?'YOU ARE NOT ALONE':'';
  const exit=nearExit(layout,player);$('interact').hidden=!exit;if(exit){$('exitName').textContent=exit.name;hold=keys.has('KeyE')?hold+dt:0;$('exitFill').style.width=Math.min(100,hold/1.2*100)+'%';if(hold>=1.2)finish(true,exit.name);}else hold=0;
  $('timer').textContent=`${String(Math.floor(elapsed/60)).padStart(2,'0')}:${String(Math.floor(elapsed%60)).padStart(2,'0')}`;$('staminaFill').style.width=stamina*100+'%';$('stance').textContent=sprint?'SPRINTING · LOUD':crouch?'CROUCHING · QUIET':'STAMINA';
- if(!$('floorMap').hidden)drawMap();
+ mapRefresh-=dt;if(mapRefresh<=0){mapRefresh=.12;drawMap();}
 }
-function drawMap(){const c=mapContext,s=10;c.clearRect(0,0,410,330);for(let z=0;z<layout.height;z++)for(let x=0;x<layout.width;x++)if(layout.cells[z*layout.width+x]){c.fillStyle='#52654c';c.fillRect(x*s,z*s,s-1,s-1);}layout.exits.forEach((e,i)=>{c.fillStyle='#c7e19b';c.fillRect(e.x*s-2,e.z*s-2,13,13);c.font='bold 12px Arial';c.fillText(i+1,e.x*s+13,e.z*s+9);});c.fillStyle='#fff8db';c.beginPath();c.arc(player.x/2.5*s+5,player.z/2.5*s+5,4,0,7);c.fill();c.strokeStyle='#fff8db';c.beginPath();c.moveTo(player.x/2.5*s+5,player.z/2.5*s+5);c.lineTo(player.x/2.5*s+5-Math.sin(yaw)*12,player.z/2.5*s+5-Math.cos(yaw)*12);c.stroke();}
+function drawMapCanvas(c,s){c.clearRect(0,0,c.canvas.width,c.canvas.height);c.fillStyle='#0b120d';c.fillRect(0,0,c.canvas.width,c.canvas.height);for(let z=0;z<layout.height;z++)for(let x=0;x<layout.width;x++)if(layout.cells[z*layout.width+x]){c.fillStyle='#263d2d';c.fillRect(x*s+.8,z*s+.8,s-1.6,s-1.6);for(const [dx,dz] of [[1,0],[-1,0],[0,1],[0,-1]]){const nx=x+dx,nz=z+dz,inside=nx>=0&&nx<layout.width&&nz>=0&&nz<layout.height&&layout.cells[nz*layout.width+nx];if(!inside){c.strokeStyle='#a7bea0';c.lineWidth=Math.max(1,s*.16);c.beginPath();if(dx!==0){const wx=(dx===1?x+1:x)*s;c.moveTo(wx,z*s);c.lineTo(wx,(z+1)*s);}else{const wz=(dz===1?z+1:z)*s;c.moveTo(x*s,wz);c.lineTo((x+1)*s,wz);}c.stroke();}}}
+ const stairs=layout.stairs||[];for(const stair of stairs){const sx=stair.x*s+s*.5,sz=stair.z*s+s*.5;c.fillStyle='#d3ad70';c.fillRect(sx-s*.32,sz-s*.32,s*.64,s*.64);c.strokeStyle='#513b24';c.lineWidth=Math.max(1,s*.08);for(let n=-1;n<=1;n++){c.beginPath();c.moveTo(sx-s*.28,sz+n*s*.12);c.lineTo(sx+s*.28,sz+n*s*.12);c.stroke();}}
+ layout.exits.forEach((e,i)=>{c.fillStyle='#c7e19b';c.fillRect(e.x*s-s*.28,e.z*s-s*.28,s*.56,s*.56);c.font=`bold ${Math.max(8,s*1.2)}px Arial`;c.fillText(i+1,e.x*s+s*.65,e.z*s+s*.35);});
+ const px=player.x/2.5*s+s*.5,pz=player.z/2.5*s+s*.5;c.fillStyle='#fff8db';c.beginPath();c.arc(px,pz,Math.max(2,s*.38),0,7);c.fill();c.strokeStyle='#fff8db';c.lineWidth=Math.max(1,s*.12);c.beginPath();c.moveTo(px,pz);c.lineTo(px-Math.sin(yaw)*s*1.2,pz-Math.cos(yaw)*s*1.2);c.stroke();
+ for(const e of enemies){const ex=e.x/2.5*s+s*.5,ez=e.z/2.5*s+s*.5;c.fillStyle=e.type===0?'#e59a83':e.type===2?'#8fe0c4':'#e1c278';c.beginPath();c.arc(ex,ez,Math.max(2,s*.42),0,7);c.fill();c.fillStyle='#101810';c.font=`bold ${Math.max(7,s*1.1)}px Arial`;c.textAlign='center';c.textBaseline='middle';c.fillText(e.type===0?'S':e.type===2?'G':'K',ex,ez);c.textAlign='left';c.textBaseline='alphabetic';}
+}
+function drawMap(){drawMapCanvas(mapContext,10);drawMapCanvas(miniMapContext,5);}
 function animate(){requestAnimationFrame(animate);const dt=Math.min(clock.getDelta(),.04);if(state==='play')update(dt);else if(state==='menu'){const t=performance.now()/1000;camera.position.set(50,1.7,31);camera.rotation.set(-.035,Math.PI+.12+Math.sin(t*.13)*.07,0);}
  camera.getWorldDirection(tmp);torch.position.copy(camera.position);torchTarget.position.copy(camera.position).addScaledVector(tmp,12);renderer.render(scene,camera);}
-$('start').onclick=start;$('help').onclick=()=>{$('instructions').hidden=false;};$('closeHelp').onclick=()=>{$('instructions').hidden=true;};$('helpPlay').onclick=start;$('retry').onclick=start;$('resume').onclick=resume;$('pause').onclick=pause;$('audio').onchange=e=>audioOn=e.target.checked;
+$('start').onclick=start;$('help').onclick=()=>{$('instructions').hidden=false;};$('closeHelp').onclick=()=>{$('instructions').hidden=true;};$('footageOpen').onclick=()=>{$('footage').hidden=false;};$('closeFootage').onclick=()=>{$('footage').hidden=true;};$('helpPlay').onclick=start;$('retry').onclick=start;$('resume').onclick=resume;$('pause').onclick=pause;$('audio').onchange=e=>audioOn=e.target.checked;
 function toggleMap(){if(state==='play'){$('floorMap').hidden=!$('floorMap').hidden;drawMap();}}
 addEventListener('keydown',e=>{if(['Tab','Space','ArrowUp','ArrowDown'].includes(e.code))e.preventDefault();if(e.repeat)return;if(e.code==='Escape'||e.code==='KeyP'){if(state==='play')pause();else if(state==='paused')resume();return;}if(state!=='play')return;keys.add(e.code);if(e.code==='KeyF')torch.visible=!torch.visible;if(e.code==='Tab'||e.code==='KeyM')toggleMap();});
 addEventListener('keyup',e=>keys.delete(e.code));addEventListener('blur',()=>{keys.clear();pause();});document.addEventListener('visibilitychange',()=>{if(document.hidden)pause();});document.addEventListener('pointerlockchange',()=>{if(!document.pointerLockElement&&state==='play'&&!touch)pause();});
