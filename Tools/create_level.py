@@ -32,6 +32,21 @@ stairs=[dict(x=14,z=12,name='LEFT RECEPTION STAIR',direction='UP',mirror=1,sourc
         dict(x=26,z=12,name='RIGHT RECEPTION STAIR',direction='UP',mirror=-1,source='Mirrored at user request')]
 data=dict(width=W,height=H,cellSize=S,cells=[v for row in grid for v in row],exits=exits,spawn=spawn,stairs=stairs)
 data['geometrySource']='layout'
+upper=[[0]*W for _ in range(H)]
+def upper_carve(x0,z0,x1,z1):
+    for z in range(z0,z1+1):
+        for x in range(x0,x1+1): upper[z][x]=1
+# Fictional, mirrored upper-floor loop: both stairs connect, with side rooms.
+upper_carve(14,8,26,8)
+upper_carve(14,16,26,16)
+for x in (14,26): upper_carve(x,8,x,16)
+upper_carve(10,9,12,11)
+upper_carve(13,10,14,10)
+upper_carve(28,9,30,11)
+upper_carve(26,10,27,10)
+upper_carve(18,5,22,7)
+upper_carve(20,7,20,8)
+data['upperFloor']=dict(name='UPPER FLOOR',cells=[v for row in upper for v in row],source='Fictional mirrored gameplay layout; not surveyed from footage')
 os.makedirs(os.path.join(ROOT,'Assets','Resources'),exist_ok=True)
 with open(os.path.join(ROOT,'Assets','Resources','layout.json'),'w') as f: json.dump(data,f,indent=2)
 bpy.ops.object.select_all(action='SELECT'); bpy.ops.object.delete(use_global=False)

@@ -16,7 +16,7 @@ export function buildArchitecture(THREE, scene, layout) {
     for(const [dx,dz] of [[1,0],[-1,0],[0,1],[0,-1]]) {
       if(open(x+dx,z+dz))continue;
       // Visual stair alcoves lie beyond the navigable ground-floor approach.
-      if(dz===-1&&(layout.stairs||[]).some(t=>t.x===x&&t.z===z))continue;
+      if(dz===-1&&(layout.stairs||[]).some(t=>t.direction==='UP'&&t.x===x&&t.z===z))continue;
       const wx=px+dx*s/2,wz=pz+dz*s/2,w=dx?.16:s,d=dx?s:.16;
       box('Plaster',wx,1.8,wz,w,3.6,d);
       box('Panel',wx-dx*.1,.63,wz-dz*.1,w,.98,d);
@@ -30,9 +30,14 @@ export function buildArchitecture(THREE, scene, layout) {
     if(z===16&&x%4===0)box('Darkwood',px,3.33,pz,.2,.24,7.5);
   }
   for(const t of layout.stairs||[]) {
+    if(t.direction==='DOWN'){
+      box('Carpet',t.x*s,.012,t.z*s,1.8,.024,1.8);
+      for(let n=-2;n<=2;n++)box('Brass',t.x*s,.03,t.z*s+n*.28,1.8,.02,.035);
+      continue;
+    }
     const x=t.x*s,z=(t.z-.5)*s,side=t.mirror||1;
     // Short flight and a mirrored quarter-turn landing inspired by the video.
-    // Upper-floor traversal is intentionally not represented by this one-floor grid.
+    // Holding E at the approach transfers actors to the upper-floor landing.
     for(let n=0;n<6;n++) {
       const h=(n+1)*.12;
       box('Carpet',x,h/2,z-(n+.5)*.28,1.8,h,.28);

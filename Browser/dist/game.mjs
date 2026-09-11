@@ -2,12 +2,15 @@ import * as THREE from 'three';
 import {GLTFLoader} from 'https://cdn.jsdelivr.net/npm/three@0.160.1/examples/jsm/loaders/GLTFLoader.js';
 import {path,walkable,visible,nearExit} from './core.mjs';
 import {buildArchitecture} from './architecture.mjs';
+import {FLOOR_HEIGHT,makeFloors,nearStair,changeFloor,routeBetweenFloors} from './floors.mjs';
 const $=id=>document.getElementById(id),canvas=$('game');
 const keys=new Set(),touch=matchMedia('(pointer:coarse)').matches;
 let layout,renderer,scene,camera,torch,torchTarget,clock,ready=false,state='menu',elapsed=0,stamina=1,yaw=0,pitch=0,hold=0,sprint=false,crouch=false,exhausted=false;
 let enemies=[],lights=[],audioCtx,audioOn=true,lastStep=0,lastPulse=0,footPhase=0,dragging=false,previousPointer=null,modelLoaded=false;
-const player={x:50,z:27.5},mapCanvas=$('map'),mapContext=mapCanvas.getContext('2d'),miniMapCanvas=$('miniMap'),miniMapContext=miniMapCanvas.getContext('2d');
-let mapRefresh=0;
+const player={x:50,z:27.5,floor:0},mapCanvas=$('map'),mapContext=mapCanvas.getContext('2d'),miniMapCanvas=$('miniMap'),miniMapContext=miniMapCanvas.getContext('2d');
+let mapRefresh=0,floors=[],floorGroups=[],stairHold=0,stairLatch=false;
+function groupSince(snapshot,height){const group=new THREE.Group();for(const o of [...scene.children])if(!snapshot.has(o))group.add(o);group.position.y=height;scene.add(group);return group;}
+function showFloor(){layout=floors[player.floor];floorGroups.forEach((g,i)=>g.visible=i===player.floor);$('floorName').textContent=player.floor?'UPPER FLOOR':'GROUND FLOOR';$('mapFloorName').textContent=player.floor?'UPPER FLOOR · GAME ROUTES':'GROUND FLOOR · GAME ROUTES';$('miniFloorName').textContent=player.floor?'UPPER FLOOR':'GROUND FLOOR';}
 const material=(color,extra={})=>new THREE.MeshStandardMaterial({color,roughness:.88,...extra});
 const tmp=new THREE.Vector3();
 function mesh(geometry,mat,p,parent=scene){const m=new THREE.Mesh(geometry,mat);m.position.set(...p);parent.add(m);return m;}
@@ -78,17 +81,19 @@ function buildProcedural(){
 async function init(){
  try{
   layout=await fetch('./layout.json').then(r=>{if(!r.ok)throw Error('Level data could not load');return r.json();});
+  floors=makeFloors(layout);
   renderer=new THREE.WebGLRenderer({canvas,antialias:true,powerPreference:'high-performance'});renderer.setPixelRatio(Math.min(devicePixelRatio,1.5));renderer.setSize(innerWidth,innerHeight);renderer.outputColorSpace=THREE.SRGBColorSpace;renderer.toneMapping=THREE.ACESFilmicToneMapping;renderer.toneMappingExposure=1.25;
   scene=new THREE.Scene();scene.background=new THREE.Color(0x101811);scene.fog=new THREE.FogExp2(0x101b14,.024);
   camera=new THREE.PerspectiveCamera(74,innerWidth/innerHeight,.05,150);camera.rotation.order='YXZ';
   scene.add(new THREE.HemisphereLight(0xb5c8a0,0x33372a,1.05));
+  const groundSnapshot=new Set(scene.children);
   if(layout.geometrySource==='layout')buildArchitecture(THREE,scene,layout);
   else try{
    const gltf=await new GLTFLoader().loadAsync('./level.glb');scene.add(gltf.scene);modelLoaded=true;
    gltf.scene.traverse(o=>{if(o.isMesh){o.frustumCulled=false;if(o.material){o.material.roughness=.88;if(o.material.name==='Glass'){o.material.emissive=new THREE.Color(0x3a5743);o.material.emissiveIntensity=.2;}}}});
   }catch(error){console.warn('Blender level unavailable; using the browser-safe layout fallback.',error);buildProcedural();}
   placeHeritagePanels();
-  for(const stair of layout.stairs||[]){lamp(stair.x*layout.cellSize,(stair.z+1)*layout.cellSize);label(stair.name+'|UPPER FLOOR NOT PLAYABLE',stair.x*layout.cellSize,2.6,stair.z*layout.cellSize);}
+  for(const stair of layout.stairs||[]){lamp(stair.x*layout.cellSize,(stair.z+1)*layout.cellSize);label(stair.name+'|HOLD E TO GO UP',stair.x*layout.cellSize,2.6,stair.z*layout.cellSize);}
   for(let x=8;x<=32;x+=4)lamp(x*2.5,40);
   for(const x of [8,20,32])for(let z=5;z<=27;z+=6)if(layout.cells[z*layout.width+x])lamp(x*2.5,z*2.5,0xa3baa0);
   layout.exits.forEach((e,i)=>{lamp(e.x*2.5,e.z*2.5,0x77db97);label('EXIT '+(i+1)+'  →|'+e.name,e.x*2.5,2.8,e.z*2.5+(e.z===4?-.5:.5));});
@@ -97,12 +102,21 @@ async function init(){
    ['Reception',20,14,0],['NHS England office',32,13,0],['Snug',8,23,0],['Arden and GEM office',32,23,0]
   ];
   roomLabels.forEach(([name,x,z,rotate])=>label(name+'|1829 BUILDING',x*2.5,2.7,z*2.5,rotate));
+  floorGroups.push(groupSince(groundSnapshot,0));
+  layout=floors[1];const upperSnapshot=new Set(scene.children);
+  buildArchitecture(THREE,scene,layout);
+  for(const x of [14,26])for(const z of [8,12,16])lamp(x*layout.cellSize,z*layout.cellSize);
+  for(const x of [18,22])for(const z of [8,16])lamp(x*layout.cellSize,z*layout.cellSize);
+  for(const [x,z] of [[11,10],[29,10],[20,6]])lamp(x*layout.cellSize,z*layout.cellSize);
+  for(const stair of layout.stairs)label(stair.name+'|HOLD E TO GO DOWN',stair.x*layout.cellSize,2.6,stair.z*layout.cellSize);
+  label('UPPER GALLERY|BOTH STAIRS LEAD TO EXITS',20*layout.cellSize,2.7,16*layout.cellSize);
+  floorGroups.push(groupSince(upperSnapshot,FLOOR_HEIGHT));layout=floors[0];floorGroups[1].visible=false;
   torch=new THREE.SpotLight(0xffe4af,24,30,.50,.55,1.2);torchTarget=new THREE.Object3D();scene.add(torch,torchTarget);torch.target=torchTarget;
-  enemies=[['Sandra',8,9],['Security',32,23],['Deva asylum ghost',20,21]].map(([name,x,z],type)=>({name,type,spawn:{x:x*2.5,z:z*2.5},x:x*2.5,z:z*2.5,mesh:enemyModel(type),path:[],memory:0,rethink:0,route:0,target:null}));
+  enemies=[['Sandra',8,9],['Security',32,23],['Deva asylum ghost',20,21]].map(([name,x,z],type)=>({name,type,floor:0,spawn:{x:x*2.5,z:z*2.5,floor:0},x:x*2.5,z:z*2.5,mesh:enemyModel(type),path:[],memory:0,rethink:0,route:0,target:null}));
   resetPositions();clock=new THREE.Clock();ready=true;$('start').disabled=false;$('start').innerHTML='ENTER THE BUILDING <span>↗</span>';animate();
  }catch(e){console.error(e);$('start').textContent='RELOAD TO TRY AGAIN';$('start').disabled=false;$('start').onclick=()=>location.reload();$('intro').textContent='The building could not load. Check your connection and reload. '+e.message;}
 }
-function resetPositions(){player.x=layout.spawn.x*layout.cellSize;player.z=layout.spawn.z*layout.cellSize;yaw=Math.PI;pitch=0;enemies.forEach(e=>{Object.assign(e,{...e.spawn,path:[],memory:0,rethink:0,route:0,target:null});e.mesh.position.set(e.x,0,e.z);});}
+function resetPositions(){player.floor=0;showFloor();stairHold=0;stairLatch=false;mapRefresh=0;lastStep=0;lastPulse=0;camera.position.y=1.65;player.x=layout.spawn.x*layout.cellSize;player.z=layout.spawn.z*layout.cellSize;yaw=Math.PI;pitch=0;enemies.forEach(e=>{Object.assign(e,{...e.spawn,path:[],memory:0,rethink:0,route:0,target:null});e.mesh.position.set(e.x,0,e.z);e.mesh.visible=true;});}
 function uiPlaying(value){document.body.classList.toggle('playing',value);$('menu').hidden=value;$('location').hidden=value;$('footer').hidden=value;$('hud').hidden=!value;$('pause').hidden=!value;$('touch').hidden=!value||!touch;}
 function lock(){if(!touch&&canvas.requestPointerLock){try{const result=canvas.requestPointerLock();result?.catch(()=>{});}catch{}}}
 function start(){if(!ready)return;resetPositions();elapsed=0;stamina=1;hold=0;exhausted=false;keys.clear();state='play';torch.visible=true;uiPlaying(true);$('instructions').hidden=true;$('result').hidden=true;$('floorMap').hidden=true;audioCtx??=new (window.AudioContext||window.webkitAudioContext)();audioCtx.resume().catch(()=>{});lock();}
@@ -117,32 +131,49 @@ function update(dt){
  const speed=crouch?1.6:sprint?5.8:3.1,n=Math.hypot(sx,sz)||1;
  const dx=(Math.cos(yaw)*sx-Math.sin(yaw)*sz)/n*speed*dt,dz=(-Math.sin(yaw)*sx-Math.cos(yaw)*sz)/n*speed*dt;
  if(walkable(layout,player.x+dx,player.z,.34))player.x+=dx;if(walkable(layout,player.x,player.z+dz,.34))player.z+=dz;
- footPhase+=dt*(moving?(sprint?14:9):0);camera.position.set(player.x,THREE.MathUtils.lerp(camera.position.y,crouch?1.1:1.65,Math.min(1,dt*12))+(moving?Math.sin(footPhase)*.018:0),player.z);camera.rotation.set(pitch,yaw,0);
+ footPhase+=dt*(moving?(sprint?14:9):0);camera.position.set(player.x,THREE.MathUtils.lerp(camera.position.y,player.floor*FLOOR_HEIGHT+(crouch?1.1:1.65),Math.min(1,dt*12))+(moving?Math.sin(footPhase)*.018:0),player.z);camera.rotation.set(pitch,yaw,0);
  if(moving&&!crouch&&elapsed-lastStep>(sprint?.30:.48)){beep(95,.11,sprint?.08:.035);lastStep=elapsed;}
  let nearest=99;const noise=sprint?22:crouch?2:moving?7:0;
  for(const e of enemies){
-  let distance=Math.hypot(e.x-player.x,e.z-player.z);nearest=Math.min(nearest,distance);if(elapsed<5)continue;
-  const seen=distance<(crouch?8:e.type===1?22:16)&&visible(layout,e,player),heard=e.type===0&&distance<noise;
+  const sameFloor=e.floor===player.floor,enemyLayout=floors[e.floor];let distance=Math.hypot(e.x-player.x,e.z-player.z);e.mesh.visible=sameFloor;if(sameFloor)nearest=Math.min(nearest,distance);if(elapsed<5)continue;
+  const seen=sameFloor&&distance<(crouch?8:e.type===1?22:16)&&visible(enemyLayout,e,player),heard=sameFloor&&e.type===0&&distance<noise;
   if(seen||heard||e.type===2){e.target={...player};e.memory=e.type===0?8:5;}else e.memory=Math.max(0,e.memory-dt);
-  e.rethink-=dt;if(e.rethink<=0){e.rethink=.45;if(e.memory<=0&&(!e.path.length||Math.hypot(e.x-e.target?.x,e.z-e.target?.z)<1)){const routes=e.type===0?[[8,16],[20,22],[32,16],[20,11]]:[[32,26],[8,26],[8,5],[32,5]],r=routes[e.route++%4];e.target={x:r[0]*2.5,z:r[1]*2.5};}if(e.target)e.path=path(layout,e,e.target);}
+  e.rethink-=dt;if(e.rethink<=0){e.rethink=.45;if(e.memory<=0&&(!e.path.length||Math.hypot(e.x-e.target?.x,e.z-e.target?.z)<1)){const routes=e.floor===1?[[14,8],[26,8],[26,16],[14,16]]:e.type===0?[[8,16],[20,22],[32,16],[20,11]]:[[32,26],[8,26],[8,5],[32,5]],r=routes[e.route++%4];e.target={x:r[0]*layout.cellSize,z:r[1]*layout.cellSize,floor:e.floor};}if(e.target)e.path=routeBetweenFloors(floors,e,e.target);}
   let speed=e.type===0?(e.memory?3.55:2.1):e.type===1?(e.memory?3.85:2.4):2.2;
-  if(e.type===2&&torch.visible&&distance<23&&visible(layout,player,e)){camera.getWorldDirection(tmp);const dot=(tmp.x*(e.x-player.x)+tmp.z*(e.z-player.z))/(distance||1);if(dot>.88)speed=.55;}
-  const target=e.path[0]||(e.memory?e.target:null);if(target){const vx=target.x-e.x,vz=target.z-e.z,d=Math.hypot(vx,vz),step=Math.min(speed*dt,d);if(d>.001){e.x+=vx/d*step;e.z+=vz/d*step;e.mesh.rotation.y=Math.atan2(vx,vz);}if(d<.08&&e.path.length)e.path.shift();}
-  e.mesh.position.set(e.x,e.type===2?Math.sin(elapsed*2)*.11:Math.sin(elapsed*8)*.025,e.z);
-  if(Math.hypot(e.x-player.x,e.z-player.z)<.8){finish(false,e.name);break;}
+  if(sameFloor&&e.type===2&&torch.visible&&distance<23&&visible(layout,player,e)){camera.getWorldDirection(tmp);const dot=(tmp.x*(e.x-player.x)+tmp.z*(e.z-player.z))/(distance||1);if(dot>.88)speed=.55;}
+  const target=e.path[0];if(target&&target.floor!==e.floor){const stair=nearStair(floors,e);if(changeFloor(floors,e,stair))e.path.shift();else e.path=[];}else if(target){const vx=target.x-e.x,vz=target.z-e.z,d=Math.hypot(vx,vz),step=Math.min(speed*dt,d);if(d>.001){e.x+=vx/d*step;e.z+=vz/d*step;e.mesh.rotation.y=Math.atan2(vx,vz);}if(d<.08&&e.path.length)e.path.shift();}
+  e.mesh.position.set(e.x,e.floor*FLOOR_HEIGHT+(e.type===2?Math.sin(elapsed*2)*.11:Math.sin(elapsed*8)*.025),e.z);e.mesh.visible=e.floor===player.floor;
+  if(e.floor===player.floor&&Math.hypot(e.x-player.x,e.z-player.z)<.8){finish(false,e.name);break;}
  }
  if(state!=='play')return;
  if(nearest<15&&elapsed-lastPulse>THREE.MathUtils.mapLinear(Math.min(nearest,15),0,15,.35,1.2)){beep(52,.18,.1*(1-nearest/18));lastPulse=elapsed;}
  $('warning').textContent=elapsed<5?'YOU HAVE A FIVE-SECOND HEAD START':nearest<4?'SOMEONE IS VERY CLOSE':nearest<10?'YOU ARE NOT ALONE':'';
- const exit=nearExit(layout,player);$('interact').hidden=!exit;if(exit){$('exitName').textContent=exit.name;hold=keys.has('KeyE')?hold+dt:0;$('exitFill').style.width=Math.min(100,hold/1.2*100)+'%';if(hold>=1.2)finish(true,exit.name);}else hold=0;
+
+ const stair=nearStair(floors,player),exit=nearExit(layout,player);
+ if(!keys.has('KeyE'))stairLatch=false;
+ $('interact').hidden=!stair&&!exit;
+ if(stair){
+  hold=0;$('interact').querySelector('b').textContent=player.floor?'HOLD E TO GO DOWN':'HOLD E TO GO UP';
+  $('exitName').textContent=stair.name;stairHold=keys.has('KeyE')&&!stairLatch?stairHold+dt:0;
+  $('exitFill').style.width=Math.min(100,stairHold/.8*100)+'%';
+  if(stairHold>=.8&&changeFloor(floors,player,stair)){
+   stairHold=0;stairLatch=true;showFloor();camera.position.y=player.floor*FLOOR_HEIGHT+(crouch?1.1:1.65);
+   camera.position.x=player.x;camera.position.z=player.z;
+   enemies.forEach(e=>{if(e.memory>0||e.type===2){e.target={...player};e.rethink=0;}e.mesh.visible=e.floor===player.floor;});
+   drawMap();
+  }
+ }else{
+  stairHold=0;
+  if(exit){$('interact').querySelector('b').textContent='HOLD E TO ESCAPE';$('exitName').textContent=exit.name;hold=keys.has('KeyE')&&!stairLatch?hold+dt:0;$('exitFill').style.width=Math.min(100,hold/1.2*100)+'%';if(hold>=1.2)finish(true,exit.name);}else hold=0;
+ }
  $('timer').textContent=`${String(Math.floor(elapsed/60)).padStart(2,'0')}:${String(Math.floor(elapsed%60)).padStart(2,'0')}`;$('staminaFill').style.width=stamina*100+'%';$('stance').textContent=sprint?'SPRINTING · LOUD':crouch?'CROUCHING · QUIET':'STAMINA';
  mapRefresh-=dt;if(mapRefresh<=0){mapRefresh=.12;drawMap();}
 }
 function drawMapCanvas(c,s){c.clearRect(0,0,c.canvas.width,c.canvas.height);c.fillStyle='#0b120d';c.fillRect(0,0,c.canvas.width,c.canvas.height);for(let z=0;z<layout.height;z++)for(let x=0;x<layout.width;x++)if(layout.cells[z*layout.width+x]){c.fillStyle='#263d2d';c.fillRect(x*s+.8,z*s+.8,s-1.6,s-1.6);for(const [dx,dz] of [[1,0],[-1,0],[0,1],[0,-1]]){const nx=x+dx,nz=z+dz,inside=nx>=0&&nx<layout.width&&nz>=0&&nz<layout.height&&layout.cells[nz*layout.width+nx];if(!inside){c.strokeStyle='#a7bea0';c.lineWidth=Math.max(1,s*.16);c.beginPath();if(dx!==0){const wx=(dx===1?x+1:x)*s;c.moveTo(wx,z*s);c.lineTo(wx,(z+1)*s);}else{const wz=(dz===1?z+1:z)*s;c.moveTo(x*s,wz);c.lineTo((x+1)*s,wz);}c.stroke();}}}
  const stairs=layout.stairs||[];for(const stair of stairs){const sx=stair.x*s+s*.5,sz=stair.z*s+s*.5;c.fillStyle='#d3ad70';c.fillRect(sx-s*.32,sz-s*.32,s*.64,s*.64);c.strokeStyle='#513b24';c.lineWidth=Math.max(1,s*.08);for(let n=-1;n<=1;n++){c.beginPath();c.moveTo(sx-s*.28,sz+n*s*.12);c.lineTo(sx+s*.28,sz+n*s*.12);c.stroke();}c.fillStyle='#241b12';c.font=`bold ${Math.max(7,s*1.05)}px Arial`;c.textAlign='center';c.textBaseline='middle';c.fillText(stair.direction==='UP'?'U':'D',sx,sz);c.textAlign='left';c.textBaseline='alphabetic';}
  layout.exits.forEach((e,i)=>{c.fillStyle='#c7e19b';c.fillRect(e.x*s-s*.28,e.z*s-s*.28,s*.56,s*.56);c.font=`bold ${Math.max(8,s*1.2)}px Arial`;c.fillText(i+1,e.x*s+s*.65,e.z*s+s*.35);});
- const px=player.x/2.5*s+s*.5,pz=player.z/2.5*s+s*.5;c.fillStyle='#fff8db';c.beginPath();c.arc(px,pz,Math.max(2,s*.38),0,7);c.fill();c.strokeStyle='#fff8db';c.lineWidth=Math.max(1,s*.12);c.beginPath();c.moveTo(px,pz);c.lineTo(px-Math.sin(yaw)*s*1.2,pz-Math.cos(yaw)*s*1.2);c.stroke();
- for(const e of enemies){const ex=e.x/2.5*s+s*.5,ez=e.z/2.5*s+s*.5;c.fillStyle=e.type===0?'#e59a83':e.type===2?'#8fe0c4':'#e1c278';c.beginPath();c.arc(ex,ez,Math.max(2,s*.42),0,7);c.fill();c.fillStyle='#101810';c.font=`bold ${Math.max(7,s*1.1)}px Arial`;c.textAlign='center';c.textBaseline='middle';c.fillText(e.type===0?'S':e.type===2?'G':'K',ex,ez);c.textAlign='left';c.textBaseline='alphabetic';}
+ const px=player.x/layout.cellSize*s+s*.5,pz=player.z/layout.cellSize*s+s*.5;c.fillStyle='#fff8db';c.beginPath();c.arc(px,pz,Math.max(2,s*.38),0,7);c.fill();c.strokeStyle='#fff8db';c.lineWidth=Math.max(1,s*.12);c.beginPath();c.moveTo(px,pz);c.lineTo(px-Math.sin(yaw)*s*1.2,pz-Math.cos(yaw)*s*1.2);c.stroke();
+ for(const e of enemies){if(e.floor!==player.floor)continue;const ex=e.x/layout.cellSize*s+s*.5,ez=e.z/layout.cellSize*s+s*.5;c.fillStyle=e.type===0?'#e59a83':e.type===2?'#8fe0c4':'#e1c278';c.beginPath();c.arc(ex,ez,Math.max(2,s*.42),0,7);c.fill();c.fillStyle='#101810';c.font=`bold ${Math.max(7,s*1.1)}px Arial`;c.textAlign='center';c.textBaseline='middle';c.fillText(e.type===0?'S':e.type===2?'G':'K',ex,ez);c.textAlign='left';c.textBaseline='alphabetic';}
 }
 function drawMap(){drawMapCanvas(mapContext,10);drawMapCanvas(miniMapContext,5);}
 function animate(){requestAnimationFrame(animate);const dt=Math.min(clock.getDelta(),.04);if(state==='play')update(dt);else if(state==='menu'){const t=performance.now()/1000;camera.position.set(50,1.7,31);camera.rotation.set(-.035,Math.PI+.12+Math.sin(t*.13)*.07,0);}
