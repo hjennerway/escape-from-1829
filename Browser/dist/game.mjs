@@ -66,7 +66,7 @@ function heritageWallSurfaces(){
  return surfaces;
 }
 function addHeritagePanel(surface,texture,name,width=1.48,height=1.02){
- const group=new THREE.Group();group.position.set(surface.x,1.88,surface.z);group.rotation.y=surface.rotation;scene.add(group);box([width+.14,height+.14,.07],[0,0,-.03],material(0x2e2016,{roughness:.76}),group);const panel=mesh(new THREE.PlaneGeometry(width,height),new THREE.MeshBasicMaterial({map:texture,side:THREE.FrontSide}),[0,0,.02],group);panel.name=name;return panel;
+ const group=new THREE.Group();group.position.set(surface.x,1.88,surface.z);group.rotation.y=surface.rotation;scene.add(group);mesh(new THREE.PlaneGeometry(width+.14,height+.14),new THREE.MeshBasicMaterial({color:0x2e2016,side:THREE.DoubleSide}),[0,0,-.01],group);const panel=mesh(new THREE.PlaneGeometry(width,height),new THREE.MeshBasicMaterial({map:texture,side:THREE.DoubleSide}),[0,0,.02],group);panel.name=name;return panel;
 }
 function placeHeritagePanels(){
  const surfaces=heritageWallSurfaces();for(let i=0;i<surfaces.length;i+=30){if(i===0)addHeritagePanel(surfaces[i],heritagePlaqueTexture(),'1854 history plaque',1.58,1.04);else{const item=heritageSources[(i/30-1)%heritageSources.length];addHeritagePanel(surfaces[i],heritagePhotoTexture(item),item.title);}}
@@ -79,8 +79,8 @@ function localArtTexture(item){
 }
 function addLocalArtPanel(surface,item,floorIndex,index){
  const group=new THREE.Group();group.position.set(surface.x,1.88,surface.z);group.rotation.y=surface.rotation;scene.add(group);
- box([1.62,1.16,.07],[0,0,-.03],material(0x2e2016,{roughness:.76}),group);
- const panel=mesh(new THREE.PlaneGeometry(1.48,1.02),new THREE.MeshBasicMaterial({map:localArtTexture(item),side:THREE.FrontSide}),[0,0,.02],group);
+ mesh(new THREE.PlaneGeometry(1.62,1.16),new THREE.MeshBasicMaterial({color:0x2e2016,side:THREE.DoubleSide}),[0,0,-.01],group);
+ const panel=mesh(new THREE.PlaneGeometry(1.48,1.02),new THREE.MeshBasicMaterial({map:localArtTexture(item),side:THREE.DoubleSide}),[0,0,.02],group);
  panel.name=item.title+' wall art';
  artPanels.push({panel,x:surface.x,z:surface.z,floor:floorIndex,rotation:surface.rotation,normalX:Math.sin(surface.rotation),normalZ:Math.cos(surface.rotation),title:item.title,credit:item.credit,url:item.url,index});
 }
