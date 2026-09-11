@@ -9,3 +9,4 @@ export function path(l,a,b){
 }
 export function visible(l,a,b){const dist=Math.hypot(b.x-a.x,b.z-a.z),n=Math.ceil(dist/.35);for(let i=1;i<n;i++)if(!walkable(l,a.x+(b.x-a.x)*i/n,a.z+(b.z-a.z)*i/n,.02))return false;return true;}
 export function nearExit(l,p){return l.exits.find(e=>Math.hypot(p.x-e.x*l.cellSize,p.z-e.z*l.cellSize)<2.7);}
+
