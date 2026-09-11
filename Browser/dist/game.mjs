@@ -1,6 +1,7 @@
 import * as THREE from 'three';
 import {GLTFLoader} from 'https://cdn.jsdelivr.net/npm/three@0.160.1/examples/jsm/loaders/GLTFLoader.js';
 import {path,walkable,visible,nearExit} from './core.mjs';
+import {buildArchitecture} from './architecture.mjs';
 const $=id=>document.getElementById(id),canvas=$('game');
 const keys=new Set(),touch=matchMedia('(pointer:coarse)').matches;
 let layout,renderer,scene,camera,torch,torchTarget,clock,ready=false,state='menu',elapsed=0,stamina=1,yaw=0,pitch=0,hold=0,sprint=false,crouch=false,exhausted=false;
@@ -81,11 +82,13 @@ async function init(){
   scene=new THREE.Scene();scene.background=new THREE.Color(0x101811);scene.fog=new THREE.FogExp2(0x101b14,.024);
   camera=new THREE.PerspectiveCamera(74,innerWidth/innerHeight,.05,150);camera.rotation.order='YXZ';
   scene.add(new THREE.HemisphereLight(0xb5c8a0,0x33372a,1.05));
-  try{
+  if(layout.geometrySource==='layout')buildArchitecture(THREE,scene,layout);
+  else try{
    const gltf=await new GLTFLoader().loadAsync('./level.glb');scene.add(gltf.scene);modelLoaded=true;
    gltf.scene.traverse(o=>{if(o.isMesh){o.frustumCulled=false;if(o.material){o.material.roughness=.88;if(o.material.name==='Glass'){o.material.emissive=new THREE.Color(0x3a5743);o.material.emissiveIntensity=.2;}}}});
   }catch(error){console.warn('Blender level unavailable; using the browser-safe layout fallback.',error);buildProcedural();}
   placeHeritagePanels();
+  for(const stair of layout.stairs||[]){lamp(stair.x*layout.cellSize,(stair.z+1)*layout.cellSize);label(stair.name+'|UPPER FLOOR NOT PLAYABLE',stair.x*layout.cellSize,2.6,stair.z*layout.cellSize);}
   for(let x=8;x<=32;x+=4)lamp(x*2.5,40);
   for(const x of [8,20,32])for(let z=5;z<=27;z+=6)if(layout.cells[z*layout.width+x])lamp(x*2.5,z*2.5,0xa3baa0);
   layout.exits.forEach((e,i)=>{lamp(e.x*2.5,e.z*2.5,0x77db97);label('EXIT '+(i+1)+'  →|'+e.name,e.x*2.5,2.8,e.z*2.5+(e.z===4?-.5:.5));});
