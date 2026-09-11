@@ -1387,5 +1387,19 @@
   "spawn": {
     "x": 20,
     "z": 11
-  }
+  },
+  "stairs": [
+    {
+      "x": 20,
+      "z": 10,
+      "name": "NORTH STAIR",
+      "direction": "UP"
+    },
+    {
+      "x": 20,
+      "z": 24,
+      "name": "SOUTH STAIR",
+      "direction": "DOWN"
+    }
+  ]
 }
