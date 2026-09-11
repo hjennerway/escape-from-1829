@@ -25,7 +25,8 @@ exits=[dict(x=8,z=4,name='WEST GARDEN'),dict(x=32,z=4,name='EAST GARDEN'),
        dict(x=8,z=28,name='WEST COURT'),dict(x=32,z=28,name='EAST COURT'),
        dict(x=20,z=25,name='MAIN PORTICO')]
 spawn=dict(x=20,z=11)
-data=dict(width=W,height=H,cellSize=S,cells=[v for row in grid for v in row],exits=exits,spawn=spawn)
+stairs=[dict(x=20,z=10,name='NORTH STAIR',direction='UP'),dict(x=20,z=24,name='SOUTH STAIR',direction='DOWN')]
+data=dict(width=W,height=H,cellSize=S,cells=[v for row in grid for v in row],exits=exits,spawn=spawn,stairs=stairs)
 os.makedirs(os.path.join(ROOT,'Assets','Resources'),exist_ok=True)
 with open(os.path.join(ROOT,'Assets','Resources','layout.json'),'w') as f: json.dump(data,f,indent=2)
 bpy.ops.object.select_all(action='SELECT'); bpy.ops.object.delete(use_global=False)
