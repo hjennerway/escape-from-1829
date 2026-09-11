@@ -1,5 +1,5 @@
 import * as THREE from 'three';
-import {GLTFLoader} from './vendor/GLTFLoader.js';
+import {GLTFLoader} from 'https://cdn.jsdelivr.net/npm/three@0.160.1/examples/jsm/loaders/GLTFLoader.js';
 import {path,walkable,visible,nearExit} from './core.mjs';
 const $=id=>document.getElementById(id),canvas=$('game');
 const keys=new Set(),touch=matchMedia('(pointer:coarse)').matches;
@@ -24,6 +24,17 @@ function enemyModel(type){
  if(type===2){const l=new THREE.PointLight(0x81d6b5,6,5);l.position.y=1.3;group.add(l);wornSign(group,'Deva ghost',1.18,0x1c4a40);}
  scene.add(group);return group;
 }
+function buildProcedural(){
+ const floor=material(0x34382f),wall=material(0x697365),trim=material(0x273a2d);
+ for(let z=0;z<layout.height;z++)for(let x=0;x<layout.width;x++)if(layout.cells[z*layout.width+x]){
+  const px=x*layout.cellSize,pz=z*layout.cellSize,s=layout.cellSize;
+  box([s,.24,s],[px,-.12,pz],floor);
+  for(const [dx,dz] of [[1,0],[-1,0],[0,1],[0,-1]])if(!layout.cells[(z+dz)*layout.width+x+dx]){
+   const vertical=dx!==0;box([vertical?.18:s,3.6,vertical?s:.18],[px+dx*s*.5,1.8,pz+dz*s*.5],wall);
+   box([vertical?.21:s+.06,.75,vertical?s+.06:.21],[px+dx*s*.5,0.6,pz+dz*s*.5],trim);
+  }
+ }
+}
 async function init(){
  try{
   layout=await fetch('./layout.json').then(r=>{if(!r.ok)throw Error('Level data could not load');return r.json();});
@@ -31,8 +42,10 @@ async function init(){
   scene=new THREE.Scene();scene.background=new THREE.Color(0x101811);scene.fog=new THREE.FogExp2(0x101b14,.024);
   camera=new THREE.PerspectiveCamera(74,innerWidth/innerHeight,.05,150);camera.rotation.order='YXZ';
   scene.add(new THREE.HemisphereLight(0xb5c8a0,0x33372a,1.05));
-  const gltf=await new GLTFLoader().loadAsync('./level.glb');scene.add(gltf.scene);modelLoaded=true;
-  gltf.scene.traverse(o=>{if(o.isMesh){o.frustumCulled=false;if(o.material){o.material.roughness=.88;if(o.material.name==='Glass'){o.material.emissive=new THREE.Color(0x3a5743);o.material.emissiveIntensity=.2;}}}});
+  try{
+   const gltf=await new GLTFLoader().loadAsync('./level.glb');scene.add(gltf.scene);modelLoaded=true;
+   gltf.scene.traverse(o=>{if(o.isMesh){o.frustumCulled=false;if(o.material){o.material.roughness=.88;if(o.material.name==='Glass'){o.material.emissive=new THREE.Color(0x3a5743);o.material.emissiveIntensity=.2;}}}});
+  }catch(error){console.warn('Blender level unavailable; using the browser-safe layout fallback.',error);buildProcedural();}
   for(let x=8;x<=32;x+=4)lamp(x*2.5,40);
   for(const x of [8,20,32])for(let z=5;z<=27;z+=6)if(layout.cells[z*layout.width+x])lamp(x*2.5,z*2.5,0xa3baa0);
   layout.exits.forEach((e,i)=>{lamp(e.x*2.5,e.z*2.5,0x77db97);label('EXIT '+(i+1)+'  →|'+e.name,e.x*2.5,2.8,e.z*2.5+(e.z===4?-.5:.5));});
