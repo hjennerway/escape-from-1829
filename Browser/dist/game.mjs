@@ -9,7 +9,7 @@ const keys=new Set(),touch=matchMedia('(pointer:coarse)').matches;
 let layout,renderer,scene,camera,torch,torchTarget,clock,ready=false,state='menu',elapsed=0,stamina=1,yaw=0,pitch=0,hold=0,sprint=false,crouch=false,exhausted=false;
 let enemies=[],lights=[],audioCtx,audioOn=true,lastStep=0,lastPulse=0,footPhase=0,dragging=false,previousPointer=null,modelLoaded=false;
 const player={x:50,z:27.5,floor:0},mapCanvas=$('map'),mapContext=mapCanvas.getContext('2d'),miniMapCanvas=$('miniMap'),miniMapContext=miniMapCanvas.getContext('2d');
-let mapRefresh=0,floors=[],floorGroups=[],stairHold=0,stairLatch=false,artPanels=[],artViewing=null;
+let mapRefresh=0,floors=[],floorGroups=[],stairHold=0,stairLatch=false,artPanels=[],artViewing=null,placedWallPanels=[];
 const escapeCutscene=createEscapeCutscene($('escapeCutscene'),()=>{
  if(state!=='cutscene')return;
  state='won';$('result').hidden=false;$('retry').focus();
@@ -66,27 +66,31 @@ function heritageWallSurfaces(){
  return surfaces;
 }
 function addHeritagePanel(surface,texture,name,width=1.48,height=1.02){
- const group=new THREE.Group();group.position.set(surface.x,1.88,surface.z);group.rotation.y=surface.rotation;scene.add(group);mesh(new THREE.PlaneGeometry(width+.14,height+.14),new THREE.MeshBasicMaterial({color:0x2e2016,side:THREE.DoubleSide}),[0,0,-.01],group);const panel=mesh(new THREE.PlaneGeometry(width,height),new THREE.MeshBasicMaterial({map:texture,side:THREE.DoubleSide}),[0,0,.02],group);panel.name=name;return panel;
+ const group=new THREE.Group();group.position.set(surface.x,1.88,surface.z);group.rotation.y=surface.rotation;scene.add(group);const panel=mesh(new THREE.PlaneGeometry(width,height),new THREE.MeshBasicMaterial({map:texture,side:THREE.DoubleSide}),[0,0,.02],group);panel.name=name;placedWallPanels.push({x:surface.x,z:surface.z,floor:0});return panel;
 }
 function placeHeritagePanels(){
  const surfaces=heritageWallSurfaces();for(let i=0;i<surfaces.length;i+=30){if(i===0)addHeritagePanel(surfaces[i],heritagePlaqueTexture(),'1854 history plaque',1.58,1.04);else{const item=heritageSources[(i/30-1)%heritageSources.length];addHeritagePanel(surfaces[i],heritagePhotoTexture(item),item.title);}}
 }
 function localArtTexture(item){
  const c=document.createElement('canvas');c.width=640;c.height=420;const g=c.getContext('2d');
- const drawFallback=()=>{g.fillStyle='#1c2b22';g.fillRect(0,0,640,420);g.fillStyle='#c9d9bd';g.font='bold 25px Georgia';g.textAlign='center';g.fillText(item.title,320,190);g.font='17px Arial';g.fillText('Wall artwork',320,225);};
+ const drawFallback=()=>{g.clearRect(0,0,640,420);};
  const texture=new THREE.CanvasTexture(c);texture.colorSpace=THREE.SRGBColorSpace;drawFallback();
  const image=new Image();image.onload=()=>{const w=610,h=350,scale=Math.max(w/image.width,h/image.height),dw=image.width*scale,dh=image.height*scale;g.fillStyle='#152219';g.fillRect(0,0,640,420);g.drawImage(image,(640-dw)/2,(350-dh)/2,dw,dh);g.fillStyle='rgba(12,24,17,.9)';g.fillRect(0,350,640,70);g.fillStyle='#d9f1c7';g.font='bold 18px Arial';g.textAlign='center';g.fillText(item.title,320,378);g.font='14px Arial';g.fillStyle='#b7d5ba';g.fillText(item.credit,320,401);texture.needsUpdate=true;};image.onerror=()=>{};image.src=item.url;return texture;
 }
 function addLocalArtPanel(surface,item,floorIndex,index){
  const group=new THREE.Group();group.position.set(surface.x,1.88,surface.z);group.rotation.y=surface.rotation;scene.add(group);
- mesh(new THREE.PlaneGeometry(1.62,1.16),new THREE.MeshBasicMaterial({color:0x2e2016,side:THREE.DoubleSide}),[0,0,-.01],group);
- const panel=mesh(new THREE.PlaneGeometry(1.48,1.02),new THREE.MeshBasicMaterial({map:localArtTexture(item),side:THREE.DoubleSide}),[0,0,.02],group);
- panel.name=item.title+' wall art';
+ const panel=mesh(new THREE.PlaneGeometry(1.48,1.02),new THREE.MeshBasicMaterial({map:localArtTexture(item),side:THREE.DoubleSide,transparent:true}),[0,0,.02],group);
+ panel.name=item.title+' wall art';placedWallPanels.push({x:surface.x,z:surface.z,floor:floorIndex});
  artPanels.push({panel,x:surface.x,z:surface.z,floor:floorIndex,rotation:surface.rotation,normalX:Math.sin(surface.rotation),normalZ:Math.cos(surface.rotation),title:item.title,credit:item.credit,url:item.url,index});
 }
 function placeLocalArtPanels(floorIndex){
  const surfaces=heritageWallSurfaces();const count=Math.min(12,surfaces.length),step=Math.max(1,Math.floor(surfaces.length/count));
- for(let i=0;i<count;i++){const surface=surfaces[(i*step+floorIndex*7)%surfaces.length];addLocalArtPanel(surface,localArtSources[(i+floorIndex*3)%localArtSources.length],floorIndex,i);}
+ let placed=0;
+ for(let i=0;i<surfaces.length&&placed<count;i++){
+  const surface=surfaces[(i*step+floorIndex*7)%surfaces.length];
+  if(placedWallPanels.some(p=>p.floor===floorIndex&&Math.hypot(p.x-surface.x,p.z-surface.z)<1.7))continue;
+  addLocalArtPanel(surface,localArtSources[(placed+floorIndex*3)%localArtSources.length],floorIndex,placed++);
+ }
 }
 function nearbyArt(){
  const forwardX=-Math.sin(yaw),forwardZ=-Math.cos(yaw);let best=null,bestDistance=2.75;
