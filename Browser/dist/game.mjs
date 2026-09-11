@@ -9,7 +9,7 @@ const keys=new Set(),touch=matchMedia('(pointer:coarse)').matches;
 let layout,renderer,scene,camera,torch,torchTarget,clock,ready=false,state='menu',elapsed=0,stamina=1,yaw=0,pitch=0,hold=0,sprint=false,crouch=false,exhausted=false;
 let enemies=[],lights=[],audioCtx,audioOn=true,lastStep=0,lastPulse=0,footPhase=0,dragging=false,previousPointer=null,modelLoaded=false;
 const player={x:50,z:27.5,floor:0},mapCanvas=$('map'),mapContext=mapCanvas.getContext('2d'),miniMapCanvas=$('miniMap'),miniMapContext=miniMapCanvas.getContext('2d');
-let mapRefresh=0,floors=[],floorGroups=[],stairHold=0,stairLatch=false;
+let mapRefresh=0,floors=[],floorGroups=[],stairHold=0,stairLatch=false,artPanels=[],artViewing=null;
 const escapeCutscene=createEscapeCutscene($('escapeCutscene'),()=>{
  if(state!=='cutscene')return;
  state='won';$('result').hidden=false;$('retry').focus();
@@ -37,6 +37,16 @@ const heritageSources=[
  {url:'https://basedinchurton.co.uk/wp-content/uploads/2025/05/total-forms-mental-disorder-asylum-1854-1867.jpg',title:'1854–1867 · FORMS OF DISORDER',credit:'Based in Churton · Cheshire reports'},
  {url:'https://basedinchurton.co.uk/wp-content/uploads/2025/05/1855-occupations-of-patients-admitted.jpg',title:'1855 REPORT · ADMISSIONS',credit:'Based in Churton · Cheshire reports'}
 ];
+const localArtSources=[
+ {url:'./art/front.png',title:'CHESHIRE LUNATIC ASYLUM · FRONT',credit:'Artwork supplied for the 1829 building'},
+ {url:'./art/front2.png',title:'THE ASYLUM · FRONT VIEW',credit:'Artwork supplied for the 1829 building'},
+ {url:'./art/front3.png',title:'THE ASYLUM · ARCHIVE VIEW',credit:'Artwork supplied for the 1829 building'},
+ {url:'./art/annexe.png',title:'THE ASYLUM · ANNEXE',credit:'Artwork supplied for the 1829 building'},
+ {url:'./art/annexe2.png',title:'THE ASYLUM · ANNEXE DETAIL',credit:'Artwork supplied for the 1829 building'},
+ {url:'./art/chimney.png',title:'THE ASYLUM · CHIMNEY',credit:'Artwork supplied for the 1829 building'},
+ {url:'./art/watertower.png',title:'THE ASYLUM · WATER TOWER',credit:'Artwork supplied for the 1829 building'},
+ {url:'./art/cheshire-asylum-1860-discharge-etc.png',title:'CHESHIRE COUNTY ASYLUM · 1860',credit:'Artwork supplied for the 1829 building'}
+];
 function heritagePhotoTexture(item){
  const c=document.createElement('canvas');c.width=640;c.height=420;const g=c.getContext('2d');
  const drawFallback=()=>{g.fillStyle='#26372d';g.fillRect(0,0,640,420);g.fillStyle='#b9d5bd';g.font='bold 28px Arial';g.textAlign='center';g.fillText(item.title,320,190);g.font='20px Arial';g.fillText('Historical reference panel',320,230);g.font='16px Arial';g.fillStyle='#d4e8cd';g.fillText(item.credit,320,380);};
@@ -61,6 +71,32 @@ function addHeritagePanel(surface,texture,name,width=1.48,height=1.02){
 function placeHeritagePanels(){
  const surfaces=heritageWallSurfaces();for(let i=0;i<surfaces.length;i+=30){if(i===0)addHeritagePanel(surfaces[i],heritagePlaqueTexture(),'1854 history plaque',1.58,1.04);else{const item=heritageSources[(i/30-1)%heritageSources.length];addHeritagePanel(surfaces[i],heritagePhotoTexture(item),item.title);}}
 }
+function localArtTexture(item){
+ const c=document.createElement('canvas');c.width=640;c.height=420;const g=c.getContext('2d');
+ const drawFallback=()=>{g.fillStyle='#1c2b22';g.fillRect(0,0,640,420);g.fillStyle='#c9d9bd';g.font='bold 25px Georgia';g.textAlign='center';g.fillText(item.title,320,190);g.font='17px Arial';g.fillText('Wall artwork',320,225);};
+ const texture=new THREE.CanvasTexture(c);texture.colorSpace=THREE.SRGBColorSpace;drawFallback();
+ const image=new Image();image.onload=()=>{const w=610,h=350,scale=Math.max(w/image.width,h/image.height),dw=image.width*scale,dh=image.height*scale;g.fillStyle='#152219';g.fillRect(0,0,640,420);g.drawImage(image,(640-dw)/2,(350-dh)/2,dw,dh);g.fillStyle='rgba(12,24,17,.9)';g.fillRect(0,350,640,70);g.fillStyle='#d9f1c7';g.font='bold 18px Arial';g.textAlign='center';g.fillText(item.title,320,378);g.font='14px Arial';g.fillStyle='#b7d5ba';g.fillText(item.credit,320,401);texture.needsUpdate=true;};image.onerror=()=>{};image.src=item.url;return texture;
+}
+function addLocalArtPanel(surface,item,floorIndex,index){
+ const group=new THREE.Group();group.position.set(surface.x,1.88,surface.z);group.rotation.y=surface.rotation;scene.add(group);
+ box([1.62,1.16,.07],[0,0,-.03],material(0x2e2016,{roughness:.76}),group);
+ const panel=mesh(new THREE.PlaneGeometry(1.48,1.02),new THREE.MeshBasicMaterial({map:localArtTexture(item),side:THREE.FrontSide}),[0,0,.02],group);
+ panel.name=item.title+' wall art';
+ artPanels.push({panel,x:surface.x,z:surface.z,floor:floorIndex,rotation:surface.rotation,normalX:Math.sin(surface.rotation),normalZ:Math.cos(surface.rotation),title:item.title,credit:item.credit,url:item.url,index});
+}
+function placeLocalArtPanels(floorIndex){
+ const surfaces=heritageWallSurfaces();const count=Math.min(12,surfaces.length),step=Math.max(1,Math.floor(surfaces.length/count));
+ for(let i=0;i<count;i++){const surface=surfaces[(i*step+floorIndex*7)%surfaces.length];addLocalArtPanel(surface,localArtSources[(i+floorIndex*3)%localArtSources.length],floorIndex,i);}
+}
+function nearbyArt(){
+ const forwardX=-Math.sin(yaw),forwardZ=-Math.cos(yaw);let best=null,bestDistance=2.75;
+ for(const art of artPanels){if(art.floor!==player.floor)continue;const dx=art.x-player.x,dz=art.z-player.z,d=Math.hypot(dx,dz);if(d>.001&&d<bestDistance){const viewerX=-dx/d,viewerZ=-dz/d,viewDot=forwardX*(dx/d)+forwardZ*(dz/d),normalDot=art.normalX*viewerX+art.normalZ*viewerZ;if(viewDot>.05&&normalDot>.15){best=art;bestDistance=d;}}}
+ return best;
+}
+function openArtViewer(art){
+ if(artViewing===art)return;artViewing=art;$('artViewerImage').src=art.url;$('artViewerImage').alt=art.title;$('artViewerTitle').textContent=art.title;$('artViewerCredit').textContent=art.credit;$('artViewer').hidden=false;$('interact').hidden=true;
+}
+function closeArtViewer(){if(!artViewing)return;artViewing=null;$('artViewer').hidden=true;}
 function enemyModel(type){
  const group=new THREE.Group(),skin=material(type===2?0x91bcad:0xb09a7b),coat=material([0x643632,0x202f42,0x577b6e][type],type===2?{transparent:true,opacity:.68,emissive:0x345e51,emissiveIntensity:.4}:{});
  mesh(new THREE.CylinderGeometry(.23,.37,1.12,8),coat,[0,1.05,0],group);
@@ -97,7 +133,7 @@ async function init(){
    const gltf=await new GLTFLoader().loadAsync('./level.glb');scene.add(gltf.scene);modelLoaded=true;
    gltf.scene.traverse(o=>{if(o.isMesh){o.frustumCulled=false;if(o.material){o.material.roughness=.88;if(o.material.name==='Glass'){o.material.emissive=new THREE.Color(0x3a5743);o.material.emissiveIntensity=.2;}}}});
   }catch(error){console.warn('Blender level unavailable; using the browser-safe layout fallback.',error);buildProcedural();}
-  placeHeritagePanels();
+  placeHeritagePanels();placeLocalArtPanels(0);
   for(const stair of layout.stairs||[]){lamp(stair.x*layout.cellSize,(stair.z+1)*layout.cellSize);label(stair.name+'|HOLD E TO GO UP',stair.x*layout.cellSize,2.6,stair.z*layout.cellSize);}
   for(let x=8;x<=32;x+=4)lamp(x*2.5,40);
   for(const x of [8,20,32])for(let z=5;z<=27;z+=6)if(layout.cells[z*layout.width+x])lamp(x*2.5,z*2.5,0xa3baa0);
@@ -109,7 +145,7 @@ async function init(){
   roomLabels.forEach(([name,x,z,rotate])=>label(name+'|1829 BUILDING',x*2.5,2.7,z*2.5,rotate));
   floorGroups.push(groupSince(groundSnapshot,0));
   layout=floors[1];const upperSnapshot=new Set(scene.children);
-  buildArchitecture(THREE,scene,layout);
+  buildArchitecture(THREE,scene,layout);placeLocalArtPanels(1);
   for(const x of [14,26])for(const z of [8,12,16])lamp(x*layout.cellSize,z*layout.cellSize);
   for(const x of [18,22])for(const z of [8,16])lamp(x*layout.cellSize,z*layout.cellSize);
   for(const [x,z] of [[11,10],[29,10],[20,6]])lamp(x*layout.cellSize,z*layout.cellSize);
@@ -125,13 +161,14 @@ function resetPositions(){player.floor=0;showFloor();stairHold=0;stairLatch=fals
 function uiPlaying(value){document.body.classList.toggle('playing',value);$('menu').hidden=value;$('location').hidden=value;$('footer').hidden=value;$('hud').hidden=!value;$('pause').hidden=!value;$('touch').hidden=!value||!touch;}
 function lock(){if(!touch&&canvas.requestPointerLock){try{const result=canvas.requestPointerLock();result?.catch(()=>{});}catch{}}}
 function start(){if(!ready)return;escapeCutscene.reset();resetPositions();elapsed=0;stamina=1;hold=0;exhausted=false;keys.clear();state='play';torch.visible=true;uiPlaying(true);$('instructions').hidden=true;$('result').hidden=true;$('floorMap').hidden=true;audioCtx??=new (window.AudioContext||window.webkitAudioContext)();audioCtx.resume().catch(()=>{});lock();}
-function pause(){if(state!=='play')return;state='paused';keys.clear();document.exitPointerLock?.();$('resultTag').textContent='TAKE A MOMENT';$('resultTitle').textContent='Hold your breath.';$('resultBody').textContent='The building will wait. Resume when you’re ready.';$('resume').hidden=false;$('retry').textContent='RESTART';$('result').hidden=false;}
-function finish(won,who){state=won?'cutscene':'lost';keys.clear();document.exitPointerLock?.();$('resultTag').textContent=won?'OUTSIDE. AT LAST.':'THE BUILDING KEPT YOU';$('resultTitle').textContent=won?'You made it out.':'Return to office, 3 days per week';$('resultBody').textContent=won?`You escaped through ${who.toLowerCase()} in ${elapsed.toFixed(1)} seconds. Four other routes are waiting.`:`${who} captured you after ${elapsed.toFixed(1)} seconds. Break line of sight, save your sprint, and use the map to find a different route.`;$('resume').hidden=true;$('retry').textContent='TRY ANOTHER ROUTE ↗';$('result').hidden=won;$('interact').hidden=true;
+function pause(){if(state!=='play')return;closeArtViewer();state='paused';keys.clear();document.exitPointerLock?.();$('resultTag').textContent='TAKE A MOMENT';$('resultTitle').textContent='Hold your breath.';$('resultBody').textContent='The building will wait. Resume when you’re ready.';$('resume').hidden=false;$('retry').textContent='RESTART';$('result').hidden=false;}
+function finish(won,who){closeArtViewer();state=won?'cutscene':'lost';keys.clear();document.exitPointerLock?.();$('resultTag').textContent=won?'OUTSIDE. AT LAST.':'THE BUILDING KEPT YOU';$('resultTitle').textContent=won?'You made it out.':'Return to office, 3 days per week';$('resultBody').textContent=won?`You escaped through ${who.toLowerCase()} in ${elapsed.toFixed(1)} seconds. Four other routes are waiting.`:`${who} captured you after ${elapsed.toFixed(1)} seconds. Break line of sight, save your sprint, and use the map to find a different route.`;$('resume').hidden=true;$('retry').textContent='TRY ANOTHER ROUTE ↗';$('result').hidden=won;$('interact').hidden=true;
  if(won){$('hud').hidden=true;$('touch').hidden=true;$('pause').hidden=true;escapeCutscene.start();}
 }
 function resume(){state='play';$('result').hidden=true;lock();}
 function beep(hz,length,volume){if(!audioCtx||!audioOn)return;const t=audioCtx.currentTime,o=audioCtx.createOscillator(),g=audioCtx.createGain();o.type='sine';o.frequency.setValueAtTime(hz,t);o.frequency.exponentialRampToValueAtTime(hz*.5,t+length);g.gain.setValueAtTime(volume,t);g.gain.exponentialRampToValueAtTime(.001,t+length);o.connect(g);g.connect(audioCtx.destination);o.start(t);o.stop(t+length);}
 function update(dt){
+ if(artViewing){if(!keys.has('KeyE'))closeArtViewer();return;}
  elapsed+=dt;const sx=(keys.has('KeyD')?1:0)-(keys.has('KeyA')?1:0),sz=(keys.has('KeyW')?1:0)-(keys.has('KeyS')?1:0),moving=!!(sx||sz);
  crouch=keys.has('ControlLeft')||keys.has('KeyC');if(stamina<.02)exhausted=true;if(stamina>.25)exhausted=false;
  sprint=keys.has('ShiftLeft')&&moving&&!crouch&&!exhausted;stamina=THREE.MathUtils.clamp(stamina+dt*(sprint?-.19:.115),0,1);
@@ -141,7 +178,8 @@ function update(dt){
  footPhase+=dt*(moving?(sprint?14:9):0);camera.position.set(player.x,THREE.MathUtils.lerp(camera.position.y,player.floor*FLOOR_HEIGHT+(crouch?1.1:1.65),Math.min(1,dt*12))+(moving?Math.sin(footPhase)*.018:0),player.z);camera.rotation.set(pitch,yaw,0);
  if(moving&&!crouch&&elapsed-lastStep>(sprint?.30:.48)){beep(95,.11,sprint?.08:.035);lastStep=elapsed;}
  let nearest=99;const noise=sprint?22:crouch?2:moving?7:0;
- for(const e of enemies){
+ if(keys.has('KeyE')){enemies.forEach(e=>e.mesh.visible=e.floor===player.floor);}
+ else for(const e of enemies){
   const sameFloor=e.floor===player.floor,enemyLayout=floors[e.floor];let distance=Math.hypot(e.x-player.x,e.z-player.z);e.mesh.visible=sameFloor;if(sameFloor)nearest=Math.min(nearest,distance);if(elapsed<5)continue;
   const seen=sameFloor&&distance<(crouch?8:e.type===1?22:16)&&visible(enemyLayout,e,player),heard=sameFloor&&e.type===0&&distance<noise;
   if(seen||heard||e.type===2){e.target={...player};e.memory=e.type===0?8:5;}else e.memory=Math.max(0,e.memory-dt);
@@ -156,9 +194,9 @@ function update(dt){
  if(nearest<15&&elapsed-lastPulse>THREE.MathUtils.mapLinear(Math.min(nearest,15),0,15,.35,1.2)){beep(52,.18,.1*(1-nearest/18));lastPulse=elapsed;}
  $('warning').textContent=elapsed<5?'YOU HAVE A FIVE-SECOND HEAD START':nearest<4?'SOMEONE IS VERY CLOSE':nearest<10?'YOU ARE NOT ALONE':'';
 
- const stair=nearStair(floors,player),exit=nearExit(layout,player);
+  const stair=nearStair(floors,player),exit=nearExit(layout,player),art=nearbyArt();
  if(!keys.has('KeyE'))stairLatch=false;
- $('interact').hidden=!stair&&!exit;
+  $('interact').hidden=!stair&&!exit&&!art;
  if(stair){
   hold=0;$('interact').querySelector('b').textContent=player.floor?'HOLD E TO GO DOWN':'HOLD E TO GO UP';
   $('exitName').textContent=stair.name;stairHold=keys.has('KeyE')&&!stairLatch?stairHold+dt:0;
@@ -169,7 +207,9 @@ function update(dt){
    enemies.forEach(e=>{if(e.memory>0||e.type===2){e.target={...player};e.rethink=0;}e.mesh.visible=e.floor===player.floor;});
    drawMap();
   }
- }else{
+  }else if(art){
+   stairHold=0;hold=0;$('interact').querySelector('b').textContent='HOLD E TO VIEW';$('exitName').textContent=art.title;$('exitFill').style.width='0%';if(keys.has('KeyE'))openArtViewer(art);
+  }else{
   stairHold=0;
   if(exit){$('interact').querySelector('b').textContent='HOLD E TO ESCAPE';$('exitName').textContent=exit.name;hold=keys.has('KeyE')&&!stairLatch?hold+dt:0;$('exitFill').style.width=Math.min(100,hold/1.2*100)+'%';if(hold>=1.2)finish(true,exit.name);}else hold=0;
  }
@@ -188,10 +228,10 @@ function animate(){requestAnimationFrame(animate);const dt=Math.min(clock.getDel
 $('start').onclick=start;$('help').onclick=()=>{$('instructions').hidden=false;};$('closeHelp').onclick=()=>{$('instructions').hidden=true;};$('footageOpen').onclick=()=>{$('footage').hidden=false;};$('closeFootage').onclick=()=>{$('footage').hidden=true;};$('helpPlay').onclick=start;$('retry').onclick=start;$('resume').onclick=resume;$('pause').onclick=pause;$('audio').onchange=e=>audioOn=e.target.checked;
 function toggleMap(){if(state==='play'){$('floorMap').hidden=!$('floorMap').hidden;drawMap();}}
 addEventListener('keydown',e=>{if(state==='cutscene'){if(['Escape','Space','Enter'].includes(e.code)){e.preventDefault();escapeCutscene.skip();}return;}if(['Tab','Space','ArrowUp','ArrowDown'].includes(e.code))e.preventDefault();if(e.repeat)return;if(e.code==='Escape'||e.code==='KeyP'){if(state==='play')pause();else if(state==='paused')resume();return;}if(state!=='play')return;keys.add(e.code);if(e.code==='KeyF')torch.visible=!torch.visible;if(e.code==='Tab'||e.code==='KeyM')toggleMap();});
-addEventListener('keyup',e=>keys.delete(e.code));addEventListener('blur',()=>{keys.clear();pause();});document.addEventListener('visibilitychange',()=>{if(document.hidden)pause();});document.addEventListener('pointerlockchange',()=>{if(!document.pointerLockElement&&state==='play'&&!touch)pause();});
+ addEventListener('keyup',e=>{keys.delete(e.code);if(e.code==='KeyE')closeArtViewer();});addEventListener('blur',()=>{keys.clear();closeArtViewer();pause();});document.addEventListener('visibilitychange',()=>{if(document.hidden)pause();});document.addEventListener('pointerlockchange',()=>{if(!document.pointerLockElement&&state==='play'&&!touch)pause();});
 function look(dx,dy){const s=Number($('sensitivity').value)*.0018;yaw-=dx*s;pitch=THREE.MathUtils.clamp(pitch-dy*s,-1.3,1.3);}
 addEventListener('mousemove',e=>{if(state==='play'&&document.pointerLockElement===canvas)look(e.movementX,e.movementY);});
 canvas.addEventListener('pointerdown',e=>{if(state!=='play')return;dragging=true;previousPointer=[e.clientX,e.clientY];canvas.setPointerCapture(e.pointerId);});canvas.addEventListener('pointermove',e=>{if(dragging&&state==='play'&&document.pointerLockElement!==canvas){look(e.clientX-previousPointer[0],e.clientY-previousPointer[1]);previousPointer=[e.clientX,e.clientY];}});canvas.addEventListener('pointerup',()=>dragging=false);canvas.addEventListener('pointercancel',()=>dragging=false);
-document.querySelectorAll('[data-key]').forEach(b=>{b.addEventListener('pointerdown',e=>{e.preventDefault();keys.add(b.dataset.key);b.setPointerCapture(e.pointerId);});for(const t of ['pointerup','pointercancel','lostpointercapture'])b.addEventListener(t,()=>keys.delete(b.dataset.key));});$('touchMap').onclick=toggleMap;$('touchTorch').onclick=()=>torch.visible=!torch.visible;if(touch)document.body.classList.add('touch');
+ document.querySelectorAll('[data-key]').forEach(b=>{b.addEventListener('pointerdown',e=>{e.preventDefault();keys.add(b.dataset.key);b.setPointerCapture(e.pointerId);});for(const t of ['pointerup','pointercancel','lostpointercapture'])b.addEventListener(t,()=>{keys.delete(b.dataset.key);if(b.dataset.key==='KeyE')closeArtViewer();});});$('touchMap').onclick=toggleMap;$('touchTorch').onclick=()=>torch.visible=!torch.visible;if(touch)document.body.classList.add('touch');
 addEventListener('resize',()=>{if(renderer){renderer.setSize(innerWidth,innerHeight);camera.aspect=innerWidth/innerHeight;camera.updateProjectionMatrix();}});
 init();

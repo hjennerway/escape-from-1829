@@ -6,7 +6,7 @@ Escape the 1829 building in Chester while Sandra, Security, and the Deva asylum 
 
 [Launch Escape from 1829 on GitHub Pages](https://hjennerway.github.io/escape-from-1829/)
 
-Use `WASD` to move, the mouse to look, `Shift` to sprint, `C` or `Ctrl` to crouch, `F` to toggle the torch, and `Tab` to open the floor map. Hold `E` at any of the five emergency exits to escape.
+Use `WASD` to move, the mouse to look, `Shift` to sprint, `C` or `Ctrl` to crouch, `F` to toggle the torch, and `Tab` to open the floor map. Hold `E` at wall artwork to inspect it, or at any of the five emergency exits to escape. NPCs pause whenever `E` is held.
 
 The browser build is served from [`Browser/dist`](Browser/dist). The Unity project and Blender source are included for continued development.
 

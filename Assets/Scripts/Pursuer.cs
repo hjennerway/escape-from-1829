@@ -38,6 +38,8 @@ public class Pursuer : MonoBehaviour
     void Update()
     {
         if(game==null||!game.Playing||game.Elapsed<5)return;
+        // Holding E is a deliberate inspection/use moment: freeze every NPC while it is held.
+        if(game.HoldingUse)return;
         float dt=Time.deltaTime; var delta=game.Player.position-transform.position; delta.y=0;
         float distance=delta.magnitude;
         bool sight=distance<(game.Crouching?8:kind==1?22:16)&&!Physics.Linecast(transform.position+Vector3.up*1.6f,game.Player.position+Vector3.up*1.3f);

@@ -32,17 +32,21 @@ function element(id){
  elements.set(id,e);return e;
 }
 const layout=JSON.parse(await readFile(new URL('./dist/layout.json',import.meta.url)));
-const source=(await readFile(new URL('./dist/game.mjs',import.meta.url),'utf8')).replace(/^import .*;\n/gm,'');
+const source=(await readFile(new URL('./dist/game.mjs',import.meta.url),'utf8')).replace(/^import .*;\r?\n/gm,'');
 const sandbox={...core,...floors,buildArchitecture,createEscapeCutscene,THREE,GLTFLoader:class {},
  document:{getElementById:element,createElement:()=>element('canvas'+elements.size),querySelectorAll:()=>[],body:element('body'),addEventListener(){},exitPointerLock(){}},
  window:{AudioContext:class {resume(){return Promise.resolve();}}},Image:class {},
  fetch:async()=>({ok:true,json:async()=>layout}),matchMedia:()=>({matches:false}),
  innerWidth:1280,innerHeight:800,devicePixelRatio:1,addEventListener(){},requestAnimationFrame(){},performance:{now:()=>0},console};
 vm.createContext(sandbox);
-vm.runInContext(source+`\nglobalThis.test={finish,escapeCutscene,start,update,resetPositions,showFloor,player,keys,get enemies(){return enemies;},get groups(){return floorGroups;},get ready(){return ready;},get state(){return state;},get camera(){return camera;},setElapsed(v){elapsed=v;},setAudio(){audioOn=false;}};`,sandbox);
+vm.runInContext(source+`\nglobalThis.test={finish,escapeCutscene,start,update,resetPositions,showFloor,player,keys,get enemies(){return enemies;},get groups(){return floorGroups;},get artPanels(){return artPanels;},get artViewing(){return artViewing;},openArtViewer,closeArtViewer,get ready(){return ready;},get state(){return state;},get camera(){return camera;},setElapsed(v){elapsed=v;},setAudio(){audioOn=false;}};`,sandbox);
 await new Promise(r=>setImmediate(r));
 const t=sandbox.test;assert(t.ready,'init must complete');t.setAudio();t.start();
 assert.equal(t.player.floor,0);assert.equal(t.groups.length,2);
+assert(t.artPanels.length>=16,'supplied artwork must be mounted throughout both floors');
+const frozen=t.enemies.map(e=>({x:e.x,z:e.z,floor:e.floor}));t.setElapsed(6);t.keys.add('KeyE');t.update(.4);
+assert.deepEqual(t.enemies.map(e=>({x:e.x,z:e.z,floor:e.floor})),frozen,'holding E must pause every NPC');t.keys.delete('KeyE');
+t.openArtViewer(t.artPanels[0]);assert.equal(t.artViewing,t.artPanels[0]);assert.equal(elements.get('artViewer').hidden,false);t.update(.4);assert.equal(t.state,'play');t.closeArtViewer();
 for(const stair of layout.stairs){
  Object.assign(t.player,{x:stair.x*layout.cellSize,z:stair.z*layout.cellSize});
  t.keys.add('KeyE');for(let i=0;i<22;i++)t.update(.04);

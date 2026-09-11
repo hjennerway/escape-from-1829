@@ -3,6 +3,8 @@ using UnityEngine;
 
 public class EscapeGame : MonoBehaviour
 {
+    class WallArtDisplay { public Texture2D texture; public Vector3 position, normal; public string title; }
+    struct WallSurface { public Vector3 position, normal; public WallSurface(Vector3 p, Vector3 n) { position=p; normal=n; } }
     public static EscapeGame Instance;
     public BuildingLayout Layout { get; private set; }
     public Transform Player { get; private set; }
@@ -11,6 +13,7 @@ public class EscapeGame : MonoBehaviour
     public bool TorchOn => torch.enabled;
     public bool Sprinting { get; private set; }
     public bool Crouching { get; private set; }
+    public bool HoldingUse => Input.GetKey(KeyCode.E);
     public float Noise => Sprinting ? 22 : Crouching ? 2 : moving ? 7 : 0;
     public float Elapsed { get; private set; }
     CharacterController controller;
@@ -18,6 +21,8 @@ public class EscapeGame : MonoBehaviour
     AudioSource audioSource;
     AudioClip stepClip, pulseClip;
     readonly List<Pursuer> enemies = new List<Pursuer>();
+    readonly List<WallArtDisplay> wallArt = new List<WallArtDisplay>();
+    WallArtDisplay viewedArt;
     int state; // 0 title, 1 playing, 2 escaped, 3 captured
     bool paused, map, moving;
     float pitch, stamina = 1, exitHold, threat, stepClock, pulseClock;
@@ -84,6 +89,7 @@ public class EscapeGame : MonoBehaviour
         RoomSign("NHS England office",Layout.World(32,13)+Vector3.up*2.7f);
         RoomSign("Snug",Layout.World(8,23)+Vector3.up*2.7f);
         RoomSign("Arden and GEM office",Layout.World(32,23)+Vector3.up*2.7f);
+        BuildWallArt();
         for(int i=0;i<Layout.exits.Length;i++)
         {
             var e=Layout.exits[i]; Vector3 p=Layout.World(e.x,e.z);
@@ -114,6 +120,29 @@ public class EscapeGame : MonoBehaviour
         var g=new GameObject("Gallery lamp"); g.transform.position=position;
         var l=g.AddComponent<Light>(); l.type=LightType.Point; l.color=color; l.intensity=intensity; l.range=range;
     }
+    void BuildWallArt()
+    {
+        var textures=Resources.LoadAll<Texture2D>("art"); if(textures==null||textures.Length==0)return;
+        var surfaces=new List<WallSurface>(); int[] dx={1,-1,0,0}, dz={0,0,1,-1};
+        for(int z=0;z<Layout.height;z++)for(int x=0;x<Layout.width;x++)if(Layout.Open(x,z))
+        {
+            Vector3 cell=Layout.World(x,z); for(int d=0;d<4;d++)if(!Layout.Open(x+dx[d],z+dz[d]))
+            {
+                Vector3 outward=new Vector3(dx[d],0,dz[d]);
+                surfaces.Add(new WallSurface(cell+outward*(Layout.cellSize*.5f-.07f)+Vector3.up*1.88f,-outward));
+            }
+        }
+        if(surfaces.Count==0)return;
+        int count=Mathf.Min(14,surfaces.Count), step=Mathf.Max(1,surfaces.Count/count);
+        for(int i=0;i<count;i++)
+        {
+            WallSurface s=surfaces[(i*step)%surfaces.Count]; Texture2D texture=textures[i%textures.Length];
+            var panel=GameObject.CreatePrimitive(PrimitiveType.Quad); panel.name="Wall art - "+texture.name; panel.transform.position=s.position;
+            panel.transform.rotation=Quaternion.Euler(0,Mathf.Atan2(s.normal.x,s.normal.z)*Mathf.Rad2Deg,0); panel.transform.localScale=new Vector3(1.48f,1.02f,1);
+            var renderer=panel.GetComponent<Renderer>(); var material=new Material(Shader.Find("Unlit/Texture")); material.mainTexture=texture; renderer.sharedMaterial=material;
+            Destroy(panel.GetComponent<Collider>()); wallArt.Add(new WallArtDisplay{texture=texture,position=s.position,normal=s.normal,title=texture.name});
+        }
+    }
     void BuildPlayer()
     {
         var g=new GameObject("Player"); Player=g.transform; Player.position=Layout.World(Layout.spawn.x,Layout.spawn.z)+Vector3.up*.05f;
@@ -135,7 +164,7 @@ public class EscapeGame : MonoBehaviour
     public void StartRun()
     {
         controller.enabled=false; Player.position=Layout.World(Layout.spawn.x,Layout.spawn.z)+Vector3.up*.05f; Player.rotation=Quaternion.identity; controller.enabled=true;
-        pitch=0; View.transform.localRotation=Quaternion.identity; stamina=1; Elapsed=0; exitHold=0; state=1; paused=false; map=false; torch.enabled=true;
+        pitch=0; View.transform.localRotation=Quaternion.identity; stamina=1; Elapsed=0; exitHold=0; state=1; paused=false; map=false; viewedArt=null; torch.enabled=true;
         foreach(var e in enemies)e.ResetPursuit(); LockCursor(true);
     }
     void LockCursor(bool locked) { Cursor.lockState=locked?CursorLockMode.Locked:CursorLockMode.None; Cursor.visible=!locked; }
@@ -143,6 +172,7 @@ public class EscapeGame : MonoBehaviour
     void Update()
     {
         if(state!=1)return;
+        if(viewedArt!=null){if(!HoldingUse)viewedArt=null;else return;}
         if(Input.GetKeyDown(KeyCode.Escape)){paused=!paused; LockCursor(!paused);}
         if(!Playing)return;
         Elapsed+=Time.deltaTime;
@@ -169,7 +199,18 @@ public class EscapeGame : MonoBehaviour
             exitHold=Input.GetKey(KeyCode.E)?exitHold+Time.deltaTime:0;
             if(exitHold>=1.2f){state=2; result=near.name; LockCursor(false); PlayerPrefs.SetInt("Escapes",PlayerPrefs.GetInt("Escapes",0)+1);}
         }
-        else exitHold=0;
+        else
+        {
+            exitHold=0; WallArtDisplay art=null; float nearest=2.8f;
+            foreach(var candidate in wallArt)
+            {
+                Vector3 toPlayer=Player.position-candidate.position; float distance=new Vector2(toPlayer.x,toPlayer.z).magnitude;
+                if(distance>=nearest)continue; Vector3 toArt=(candidate.position-View.transform.position).normalized;
+                Vector3 viewerDirection=(View.transform.position-candidate.position).normalized;
+                if(Vector3.Dot(View.transform.forward,toArt)>.05f&&Vector3.Dot(candidate.normal,viewerDirection)>.15f){art=candidate;nearest=distance;}
+            }
+            if(art!=null){prompt="HOLD E  /  VIEW ART";if(HoldingUse)viewedArt=art;}
+        }
     }
     public void Capture(string who)
     {
@@ -188,13 +229,19 @@ public class EscapeGame : MonoBehaviour
     void OnGUI()
     {
         Styles(); GUI.matrix=Matrix4x4.TRS(Vector3.zero,Quaternion.identity,new Vector3(Screen.width/1280f,Screen.height/720f,1));
+        if(viewedArt!=null)
+        {
+            Rect(0,0,1280,720,new Color(.018f,.03f,.028f,.97f)); Label(90,58,1100,35,"ARCHIVE WALL ART",small);
+            GUI.DrawTexture(new UnityEngine.Rect(190,105,900,500),viewedArt.texture,ScaleMode.ScaleToFit,true);
+            Label(90,628,1100,35,viewedArt.title.ToUpperInvariant(),heading); Label(90,671,1100,25,"RELEASE E TO RETURN",small); return;
+        }
         if(state==0||state==2||state==3||paused)
         {
             Rect(0,0,1280,720,new Color(.018f,.03f,.028f,.95f)); Rect(60,70,4,570,mint);
             Label(92,74,1000,30,"CHESTER  /  THE 1829 BUILDING  /  A FICTIONAL NIGHT ESCAPE",small);
             Label(90,123,1090,110,state==2?"YOU MADE IT OUT.":state==3?"Return to office, 3 days per week":paused?"HOLD YOUR BREATH.":"ESCAPE FROM 1829",title);
             Label(94,227,980,65,state==2?"Escaped through "+result+" in "+Elapsed.ToString("0.0")+" seconds.":state==3?"Captured by "+result+" after "+Elapsed.ToString("0.0")+" seconds.":"Five exits. Three pursuers. One chance to find your way through the dark.",heading);
-            Label(94,314,520,152,"WASD  Move     MOUSE  Look\nSHIFT  Sprint     CTRL / C  Crouch\nF  Torch     TAB  Building map\nE  Hold at an exit     ESC  Pause",small);
+            Label(94,314,520,152,"WASD  Move     MOUSE  Look\nSHIFT  Sprint     CTRL / C  Crouch\nF  Torch     TAB  Building map\nE  Hold at art or an exit     ESC  Pause",small);
             Label(690,318,480,150,"SANDRA follows noise and searches your last position.\nSECURITY patrols the wings and chases on sight.\nTHE DEVA ASYLUM GHOST senses you through walls. Aim your torch at it to slow its approach.",small);
             if(GUI.Button(new Rect(94,500,310,60),paused?"RESUME":state==0?"ENTER THE BUILDING":"TRY ANOTHER ROUTE",button))
             { if(paused){paused=false;LockCursor(true);}else StartRun(); }
