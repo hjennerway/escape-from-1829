@@ -10,7 +10,7 @@ Use `WASD` to move, the mouse to look, `Shift` to sprint, `C` or `Ctrl` to crouc
 
 The browser build is served from [`Browser/dist`](Browser/dist). The Unity project and Blender source are included for continued development.
 
-The menu's **Archival footage** panel links to the supplied [Google Photos video](https://photos.google.com/album/AF1QipM4brAjBs5z7ZzHFuhHe1IODU9aByeNRzPCCP_6/photo/AF1QipPcpQFBnV-ct7SJgcE13OOaO8jntpOvVZJssARN).
+The menu's **Archival footage** panel links to the supplied [Google Photos video](https://photos.app.goo.gl/UfHfqXjWSfPtDs3C8).
 
 ## Historical reference panels
 
