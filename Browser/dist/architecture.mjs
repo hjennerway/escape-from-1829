@@ -22,10 +22,6 @@ export function buildArchitecture(THREE, scene, layout) {
       box('Panel',wx-dx*.1,.63,wz-dz*.1,w,.98,d);
       box('Brass',wx-dx*.12,1.18,wz-dz*.12,w+.06,.07,d+.06);
       box('Darkwood',wx-dx*.12,.12,wz-dz*.12,w+.06,.15,d+.06);
-      if((x+z)%3===0&&!approach){
-        box('Glass',wx-dx*.13,2.36,wz-dz*.13,dx?.09:1.15,1.28,dx?1.15:.09);
-        box('Brass',wx-dx*.19,2.36,wz-dz*.19,dx?.07:1.2,.045,dx?1.2:.07);
-      }
     }
     if(z===16&&x%4===0)box('Darkwood',px,3.33,pz,.2,.24,7.5);
   }
