@@ -1,7 +1,9 @@
 // Aerial interpretation of the user's outlined 1829 estate photograph.
 // Front road/reception is +Z; the corrected mast position is rear-left (-X, -Z).
 import {createChapel} from './chapel.mjs';
+import {createWaterTower} from './water-tower.mjs';
 export const ESCAPE_MAST = Object.freeze({x:-69,z:-62,height:42});
+const EAST_SHIFT=7.1,EXTRA_BAY=3.55,OUTER_SHIFT=EAST_SHIFT+EXTRA_BAY;
 // Map the supplied photograph directly onto the triangular tympanum. The UVs
 // select just the relief, leaving the surrounding sky and building out of view.
 export async function loadEscapeFrontage(THREE,exterior){
@@ -33,29 +35,49 @@ export function createEscapeExterior(THREE,aspect){
   function worldUV(geo,scale=3){const p=geo.attributes.position,n=geo.attributes.normal,uv=geo.attributes.uv;for(let i=0;i<p.count;i++)uv.setXY(i,(Math.abs(n.getX(i))>.5?p.getZ(i):p.getX(i))/scale,(Math.abs(n.getY(i))>.5?p.getZ(i):p.getY(i))/scale);return geo;}
   mesh(new THREE.PlaneGeometry(4000,4000),grass,0,-.15,0).rotation.x=-Math.PI/2;
   // Grounds and surrounding access roads. No red annotation or sale graphics.
-  box(path,0,-.015,2,151,.15,103);
-  box(grass,0,.08,28,117,.1,36);box(grass,0,.08,-15,117,.1,45);
-  box(asphalt,0,.09,59,210,.1,11);box(asphalt,-79,.09,-2,10,.1,133);box(asphalt,79,.09,0,9,.1,130);
-  box(path,0,.11,51,151,.1,3);box(asphalt,0,.11,-46,149,.1,8);
+  box(path,OUTER_SHIFT/2,-.015,2,151+OUTER_SHIFT,.15,103);
+  box(grass,OUTER_SHIFT/2,.08,28,117+OUTER_SHIFT,.1,36);box(grass,OUTER_SHIFT/2,.08,-15,117+OUTER_SHIFT,.1,45);
+  box(asphalt,0,.09,59,210,.1,11);box(asphalt,-79,.09,-2,10,.1,133);box(asphalt,79+OUTER_SHIFT,.09,0,9,.1,130);
+  box(path,OUTER_SHIFT/2,.11,51,151+OUTER_SHIFT,.1,3);box(asphalt,OUTER_SHIFT/2,.11,-46,149+OUTER_SHIFT,.1,8);
   for(let x=-100;x<102;x+=9)box(marking,x,.16,59,4,.02,.15);
-  for(let z=-65;z<60;z+=9){box(marking,-79,.16,z,.15,.02,4);box(marking,79,.16,z,.15,.02,4);}
-  box(path,0,.13,34,3.2,.1,34);box(path,0,.13,43,114,.1,2);
-  box(hedge,0,.55,49,142,1.1,.9);
-  // Rough W footprint: three rearward arms with open gaps between them.
-  // No transverse rear ranges enclosing the gaps; reception remains front-centre.
-  const blocks=[
-    [0,12,76,10,12.8],[-46,12,16,15,14.3],[46,12,16,15,14.3],
-    [-31,-10,12,30,11.3],[46,-10,12,30,11.3],
-    [0,-9,10,32,11.5],
+  for(let z=-65;z<60;z+=9){box(marking,-79,.16,z,.15,.02,4);box(marking,79+OUTER_SHIFT,.16,z,.15,.02,4);}
+  box(path,0,.13,34,3.2,.1,34);box(path,OUTER_SHIFT/2,.13,43,114+OUTER_SHIFT,.1,2);
+  box(hedge,OUTER_SHIFT/2,.55,49,142+OUTER_SHIFT,1.1,.9);
+  // Start from the western silhouette and reflect it across Reception.
+  // Each tuple is [x, z, width, depth, eaves height]; front is +Z.
+  const westBlocks=[
+    [-46,12,16,15,14.3],[-31,-10,12,30,11.3],
     // A is the inset rear arm; B is slightly outboard, both inside the
     // western end pavilion. B has a narrow root and a wider stepped foot.
-    [-36.5,23,9,14,8.6],[-35,35,12,16,8.6],[34,29,11,22,8.6],
-    [51,-30,15,11,9.3],[-31,-30,13,11,9.3],
+    [-36.5,23,9,14,8.6],[-35,35,12,16,8.6],
+    [-31,-30,13,11,9.3],
     // Rooms tracing the irregular western silhouette: an outer end room,
     // a shorter front nib, and small rooms beside A's root. The curved bay
     // remains exposed between the outer rooms and B.
     [-56,13,9,16,9.3],[-54.5,23,6,6,7.2],
     [-40,-3,6,8,7.2],[-22.5,3,6,6,7.2]
+  ];
+  const eastBlocks=westBlocks.map(([x,z,w,d,h])=>[-x,z,w,d,h]);
+  // Approximate the red outline: a slightly longer front foot, a shallow
+  // courtyard nib and a stepped outer corner joining the yellow extension.
+  eastBlocks[3]=[35,36,12,18,8.6];
+  eastBlocks[5]=[56,14,10,14,9.3];
+  eastBlocks[6]=[54.5,23,6,6,7.2];
+  eastBlocks[7]=[44,3,5,8,7.2];
+  // Red front wing and yellow curved bay move two window spacings right.
+  // Purple outer rooms move one further spacing, adding a full vertical
+  // window bay to the pavilion between the curved bay and the outer rooms.
+  for(const i of [0,2,3])eastBlocks[i][0]+=EAST_SHIFT;
+  eastBlocks[0][0]+=EXTRA_BAY/2;eastBlocks[0][2]+=EXTRA_BAY;
+  for(const i of [5,6,7])eastBlocks[i][0]+=OUTER_SHIFT;
+  const blocks=[
+    [EAST_SHIFT/2,12,76+EAST_SHIFT,10,12.8],[0,-9,10,32,11.5],
+    ...westBlocks,...eastBlocks,
+    // Yellow-shaded addition: long outer range and a stepped rear return.
+    // Set the return back and towards the outer wing, leaving the rear-left
+    // corner open beside the inset arm (which ends at x=37.5, z=-35.5).
+    [59+OUTER_SHIFT,-14,10,48,9.3],[61+OUTER_SHIFT,12,10,8,9.3],
+    [53.5+OUTER_SHIFT,-38,21,10,9.3],[53.5+OUTER_SHIFT,-44,17,4,9.3]
   ];
   function hipRoof(x,z,w,d,y,rise){
     const a=w/2+.4,b=d/2+.4,inset=Math.min(a,b)*.83;
@@ -112,7 +134,7 @@ export function createEscapeExterior(THREE,aspect){
   box(cream,0,6.7,21.2,5.6,.6,4.0);box(stone,0,7.08,21.2,6,.15,4.3);
   for(let i=0;i<6;i++)box(stone,0,(6-i)*.15,23.7+i*.42,3.7,(6-i)*.3,.44);
   // Faceted bays at the two end blocks, with roof caps and pale string courses.
-  for(const x of [-46,46]){
+  for(const x of [-46,46+EAST_SHIFT]){
     mesh(new THREE.CylinderGeometry(3.15,3.15,13.2,8),brick,x,7.6,19.0,true);
     for(const y of [1.2,5.1,8.8,14.3])mesh(new THREE.CylinderGeometry(3.25,3.25,.23,8),cream,x,y,19);
     mesh(new THREE.ConeGeometry(3.55,2.8,8),roof,x,15.8,19,true);
@@ -120,28 +142,32 @@ export function createEscapeExterior(THREE,aspect){
   }
   // Open rear approaches connect the gaps between the arms to the back road.
   for(const x of [-23,23]){box(asphalt,x,.18,-20,32,.1,45);box(grass,x<0?-17:x-6,.26,-9,9,.1,11);}
-  for(const x of [-64,64]){box(asphalt,x,.17,12,17,.12,62);box(path,x,.16,44,17,.12,2);}
+  for(const [x,w] of [[-64,17],[69+OUTER_SHIFT,7]]){box(asphalt,x,.17,12,w,.12,62);box(path,x,.16,44,w,.12,2);}
+  box(asphalt,45+OUTER_SHIFT/2,.18,-12,17+OUTER_SHIFT,.12,39);
+  box(asphalt,40,.18,-36,7,.12,18);
   box(asphalt,0,.15,-62,106,.12,23);
   const carColors=[material(0xc1c6c4),material(0x3e5363),material(0x713c37),material(0x263338)];
   function car(x,z,rotation=0){const mat=carColors[Math.floor(random()*carColors.length)];box(dark,x,.43,z,1.9,.45,4.0,rotation);box(mat,x,.77,z,1.85,.6,4.0,rotation);box(glass,x,1.23,z,1.55,.47,2.15,rotation);box(mat,x,1.5,z,1.59,.10,1.9,rotation);}
   for(const side of [-1,1])for(let i=0;i<15;i++){
-    const z=-15+i*3.65;box(marking,side*64,.25,z,5,.02,.10);
-    if(i%4!==0)car(side*64,z+1.65,Math.PI/2);
+    const z=-15+i*3.65,x=side<0?-64:69+OUTER_SHIFT;box(marking,x,.25,z,5,.02,.10);
+    if(i%4!==0)car(x,z+1.65,Math.PI/2);
   }
+  for(let i=0;i<8;i++)car(39.5,-26+i*3.8,Math.PI/2);
   for(let i=0;i<22;i++){const x=-48+i*4.4;box(marking,x,.24,-64,.1,.02,5.5);if(i%3)car(x+2,-64);}
   // Broadleaf crowns cast shadows across the front lawn and site edges.
   const bark=material(0x5a4e3d),leaves=[material(0x43583a),material(0x566944),material(0x657448)];
   const crowns=leaves.map(mat=>({mat,items:[]}));
   function tree(x,z,size=1){mesh(new THREE.CylinderGeometry(.18*size,.3*size,4.5*size,6),bark,x,2.25*size,z);
     for(let i=0;i<5;i++)crowns[i%3].items.push({x:x+(random()-.5)*3*size,y:(4.5+random()*2)*size,z:z+(random()-.5)*3*size,s:(1.7+random())*size});}
-  for(const [x,z,s] of [[-51,35,1.4],[-47,43,1.1],[-20,33,1.2],[17,35,1.3],[49,40,1.2],[-65,-35,1.1],[63,-38,1.25],[-17,-9,.85],[18,-9,.9]])tree(x,z,s);
+  for(const [x,z,s] of [[-51,35,1.4],[-47,43,1.1],[-20,33,1.2],[17,35,1.3],[49+EAST_SHIFT,40,1.2],[-65,-35,1.1],[68+OUTER_SHIFT,-38,1.25],[-17,-9,.85],[18,-9,.9]])tree(x,z,s);
   for(let i=0;i<24;i++)tree(-100+i*9,-84-(i%3)*7,1+random()*.6);
-  for(let i=0;i<9;i++){tree(-90,-44+i*12,1.1);tree(92,-47+i*12,1.1);}
+  for(let i=0;i<9;i++){tree(-90,-44+i*12,1.1);tree(92+OUTER_SHIFT,-47+i*12,1.1);}
   // Low surrounding blocks establish the campus without reproducing the sale map.
-  for(const [x,z,w,d] of [[-45,-99,28,12],[38,-104,18,13],[99,-52,14,25],[-109,5,24,15]]){
+  for(const [x,z,w,d] of [[-45,-99,28,12],[38,-104,18,13],[99+OUTER_SHIFT,-52,14,25],[-109,5,24,15]]){
     mesh(new THREE.BoxGeometry(w,6,d),material(0x8a7965),x,3,z,true);hipRoof(x,z,w,d,6,2.8);
   }
   const chapel=createChapel(THREE,{brick,roof,stone,dark,worldUV});model.add(chapel);
+  const waterTower=createWaterTower(THREE,{brick,roof,dark,worldUV});model.add(waterTower);
   box(path,-9,.08,-93,2,.12,15);
   box(path,-7.5,.08,-99.5,3,.12,2);
   // Tapering open lattice, cross bracing and antenna panels from the mast photos.
@@ -165,5 +191,5 @@ export function createEscapeExterior(THREE,aspect){
     items.forEach((b,i)=>{dummy.position.set(b.x,b.y,b.z);dummy.scale.set(b.w,b.h,b.d);dummy.rotation.set(0,b.rotation,0);dummy.updateMatrix();batch.setMatrixAt(i,dummy.matrix);});model.add(batch);}
   for(const {mat,items} of crowns){const batch=new THREE.InstancedMesh(new THREE.IcosahedronGeometry(1,1),mat,items.length);batch.castShadow=true;batch.receiveShadow=true;
     items.forEach((b,i)=>{dummy.position.set(b.x,b.y,b.z);dummy.scale.set(b.s,b.s*.85,b.s);dummy.rotation.set(0,i,0);dummy.updateMatrix();batch.setMatrixAt(i,dummy.matrix);});model.add(batch);}
-  return {scene,camera,model,mast,chapel};
+  return {scene,camera,model,mast,chapel,waterTower};
 }

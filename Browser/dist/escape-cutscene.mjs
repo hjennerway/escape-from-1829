@@ -3,7 +3,7 @@ export function sampleEscape(seconds,{reducedMotion=false,aspect=16/9}={}){
   const t=reducedMotion?.45:Math.max(0,Math.min(1,seconds/ESCAPE_DURATION));
   const eased=t*t*(3-2*t),angle=.48-.32*eased;
   // Keep the estate and rear-left mast in frame on portrait screens too.
-  const distance=193*Math.max(1,Math.min(2.8,1.5/aspect));
+  const distance=193*Math.max(1,Math.min(3.4,1.8/aspect));
   return {position:[Math.sin(angle)*distance,116+eased*6+(distance-193)*.55,Math.cos(angle)*distance],target:[0,1,-7]};
 }
 
@@ -27,3 +27,4 @@ export function createEscapeCutscene(root,onComplete,{reducedMotion=false,getCam
     get active(){return active;}
   };
 }
+
