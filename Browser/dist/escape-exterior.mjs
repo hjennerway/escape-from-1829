@@ -77,6 +77,9 @@ export function createEscapeExterior(THREE,aspect){
     // Set the return back and towards the outer wing, leaving the rear-left
     // corner open beside the inset arm (which ends at x=37.5, z=-35.5).
     [59+OUTER_SHIFT,-14,10,48,9.3],[61+OUTER_SHIFT,12,10,8,9.3],
+    // Duplicate the red-bay section beside the original, creating a full
+    // extra window row before the blue outer range.
+    [48.5+EAST_SHIFT,-3,6,8,7.2],
     [53.5+OUTER_SHIFT,-38,21,10,9.3],[53.5+OUTER_SHIFT,-44,17,4,9.3]
   ];
   function hipRoof(x,z,w,d,y,rise){

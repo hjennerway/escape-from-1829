@@ -34,7 +34,7 @@ for(const x of [-23,23])for(const z of [-17,-26,-30,-34,-40]){
 }
 // The corrected east wing and L-shaped addition must have continuous roofs,
 // while the parking court inside the addition remains uncovered.
-for(const [x,z] of [[31,-20],[35,40],[59,-25],[59,0],[53.5,-38],[53.5,-44],[61,12]]){
+for(const [x,z] of [[31,-20],[42,40],[70,-25],[70,0],[64,-38],[64,-44],[72,12]]){
   ray.set(new THREE.Vector3(x,80,z),new THREE.Vector3(0,-1,0));
   assert(ray.intersectObject(exterior.model,true)[0].point.y>8,'corrected east footprint must contain roof geometry');
 }
