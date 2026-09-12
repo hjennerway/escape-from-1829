@@ -1,5 +1,6 @@
 // Aerial interpretation of the user's outlined 1829 estate photograph.
 // Front road/reception is +Z; the corrected mast position is rear-left (-X, -Z).
+import {createChapel} from './chapel.mjs';
 export const ESCAPE_MAST = Object.freeze({x:-69,z:-62,height:42});
 export function createEscapeExterior(THREE,aspect){
   const scene=new THREE.Scene();scene.background=new THREE.Color(0xb5c7cd);
@@ -110,9 +111,12 @@ export function createEscapeExterior(THREE,aspect){
   for(let i=0;i<24;i++)tree(-100+i*9,-84-(i%3)*7,1+random()*.6);
   for(let i=0;i<9;i++){tree(-90,-44+i*12,1.1);tree(92,-47+i*12,1.1);}
   // Low surrounding blocks establish the campus without reproducing the sale map.
-  for(const [x,z,w,d] of [[-45,-99,28,12],[1,-105,34,15],[38,-104,18,13],[99,-52,14,25],[-109,5,24,15]]){
+  for(const [x,z,w,d] of [[-45,-99,28,12],[38,-104,18,13],[99,-52,14,25],[-109,5,24,15]]){
     mesh(new THREE.BoxGeometry(w,6,d),material(0x8a7965),x,3,z,true);hipRoof(x,z,w,d,6,2.8);
   }
+  const chapel=createChapel(THREE,{brick,roof,stone,dark,worldUV});model.add(chapel);
+  box(path,-9,.08,-93,2,.12,15);
+  box(path,-7.5,.08,-99.5,3,.12,2);
   // Tapering open lattice, cross bracing and antenna panels from the mast photos.
   const mast=new THREE.Group();mast.name='Radio mast · rear left';mast.position.set(ESCAPE_MAST.x,0,ESCAPE_MAST.z);model.add(mast);
   function strut(a,b,r=.075){const start=new THREE.Vector3(...a),end=new THREE.Vector3(...b),v=end.clone().sub(start);const m=new THREE.Mesh(new THREE.CylinderGeometry(r,r,v.length(),5),steel);m.position.copy(start).addScaledVector(v,.5);m.quaternion.setFromUnitVectors(new THREE.Vector3(0,1,0),v.normalize());mast.add(m);}
@@ -134,5 +138,5 @@ export function createEscapeExterior(THREE,aspect){
     items.forEach((b,i)=>{dummy.position.set(b.x,b.y,b.z);dummy.scale.set(b.w,b.h,b.d);dummy.rotation.set(0,b.rotation,0);dummy.updateMatrix();batch.setMatrixAt(i,dummy.matrix);});model.add(batch);}
   for(const {mat,items} of crowns){const batch=new THREE.InstancedMesh(new THREE.IcosahedronGeometry(1,1),mat,items.length);batch.castShadow=true;batch.receiveShadow=true;
     items.forEach((b,i)=>{dummy.position.set(b.x,b.y,b.z);dummy.scale.set(b.s,b.s*.85,b.s);dummy.rotation.set(0,i,0);dummy.updateMatrix();batch.setMatrixAt(i,dummy.matrix);});model.add(batch);}
-  return {scene,camera,model,mast};
+  return {scene,camera,model,mast,chapel};
 }
