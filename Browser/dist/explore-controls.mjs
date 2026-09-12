@@ -1,11 +1,16 @@
 // Ground-level exterior navigation, shared by the page and headless checks.
 export function createWalker(camera,obstacles=[]){
-  const keys=new Set();let yaw=0,pitch=0;
+  const keys=new Set(),defaultFov=camera.fov;let yaw=0,pitch=0;
   camera.rotation.order='YXZ';
-  function reset(){keys.clear();yaw=0;pitch=0;camera.position.set(0,1.8,40);camera.rotation.set(0,0,0);}
+  function reset(){keys.clear();yaw=0;pitch=0;camera.position.set(0,1.8,40);camera.rotation.set(0,0,0);camera.fov=defaultFov;camera.updateProjectionMatrix();}
   function clear(x,z){return Math.abs(x)<180&&z>-170&&z<100&&!obstacles.some(b=>x>b.minX-.4&&x<b.maxX+.4&&z>b.minZ-.4&&z<b.maxZ+.4);}
   reset();
   return {keys,reset,
+    setView({position,target,fov}){
+      keys.clear();camera.position.set(...position);camera.lookAt(...target);
+      yaw=camera.rotation.y;pitch=camera.rotation.x;
+      if(fov){camera.fov=fov;camera.updateProjectionMatrix();}
+    },
     look(dx,dy){yaw-=dx*.002;pitch=Math.max(-1.45,Math.min(1.45,pitch-dy*.002));camera.rotation.set(pitch,yaw,0);},
     update(dt){
       const side=Number(keys.has('KeyD'))-Number(keys.has('KeyA')),forward=Number(keys.has('KeyW'))-Number(keys.has('KeyS'));

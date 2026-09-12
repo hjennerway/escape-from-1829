@@ -9,19 +9,23 @@ import * as THREE from './vendor/three.module.js';
 import {createEscapeExterior,loadEscapeFrontage} from './escape-exterior.mjs';
 import {ESCAPE_WATER_TOWER} from './water-tower.mjs';
 import {createEscapeCutscene} from './escape-cutscene.mjs';
+import {EAST_PHOTO_VIEW} from './east-photo-detail.mjs';
+import {COURTYARD_PHOTO_VIEW} from './courtyard-photo-detail.mjs';
+import {REAR_COURT_PHOTO_VIEW} from './rear-court-photo-detail.mjs';
 const renderer=new THREE.WebGLRenderer({canvas:document.getElementById('game'),antialias:true});renderer.setPixelRatio(Math.min(devicePixelRatio,1.5));renderer.setSize(innerWidth,innerHeight);renderer.outputColorSpace=THREE.SRGBColorSpace;renderer.toneMapping=THREE.ACESFilmicToneMapping;renderer.toneMappingExposure=1.25;renderer.shadowMap.enabled=true;renderer.shadowMap.type=THREE.PCFSoftShadowMap;
 const exterior=createEscapeExterior(THREE,innerWidth/innerHeight),replay=document.getElementById('replay'),clock=new THREE.Clock();
 await loadEscapeFrontage(THREE,exterior);
 const cutscene=createEscapeCutscene(document.getElementById('escapeCutscene'),()=>{replay.hidden=false;},{getCamera:()=>exterior.camera,reducedMotion:matchMedia('(prefers-reduced-motion: reduce)').matches});
 function start(){replay.hidden=true;clock.getDelta();cutscene.start();}replay.onclick=start;
-const view=new URLSearchParams(location.search).get('view'),frontDetail=view==='front',towerDetail=view==='tower',rightDetail=view==='right';
+const view=new URLSearchParams(location.search).get('view'),frontDetail=view==='front',towerDetail=view==='tower',rightDetail=view==='right',photoDetail=['east-photo','courtyard-photo','rear-court-photo'].includes(view);
+function framePhoto(){const shot=view==='rear-court-photo'?REAR_COURT_PHOTO_VIEW:view==='courtyard-photo'?COURTYARD_PHOTO_VIEW:EAST_PHOTO_VIEW;exterior.camera.position.set(...shot.position);exterior.camera.lookAt(...shot.target);exterior.camera.fov=shot.fov;exterior.camera.updateProjectionMatrix();}
 function frameFront(){exterior.camera.position.set(0,10,19.8+34*Math.max(1,1/exterior.camera.aspect));exterior.camera.lookAt(0,9,19.8);}
 function frameTower(){const {x,z}=ESCAPE_WATER_TOWER;exterior.camera.position.set(x+34,25,z+58*Math.max(1,1/exterior.camera.aspect));exterior.camera.lookAt(x,20,z);}
 function frameRight(){exterior.camera.position.set(72,28,108*Math.max(1,1/exterior.camera.aspect));exterior.camera.lookAt(72,9,0);}
-if(rightDetail)frameRight();else if(towerDetail)frameTower();else if(frontDetail)frameFront();else start();
+if(photoDetail)framePhoto();else if(rightDetail)frameRight();else if(towerDetail)frameTower();else if(frontDetail)frameFront();else start();
 function frame(){requestAnimationFrame(frame);const dt=clock.getDelta();if(!document.hidden)cutscene.update(dt);renderer.render(exterior.scene,exterior.camera);}frame();
 document.addEventListener('visibilitychange',()=>clock.getDelta());
 addEventListener('keydown',e=>{if(['Escape','Space','Enter'].includes(e.code)&&cutscene.active){e.preventDefault();cutscene.skip();}});
-addEventListener('resize',()=>{renderer.setSize(innerWidth,innerHeight);exterior.camera.aspect=innerWidth/innerHeight;exterior.camera.updateProjectionMatrix();if(rightDetail)frameRight();else if(towerDetail)frameTower();else if(frontDetail)frameFront();else cutscene.resize();});
+addEventListener('resize',()=>{renderer.setSize(innerWidth,innerHeight);exterior.camera.aspect=innerWidth/innerHeight;exterior.camera.updateProjectionMatrix();if(photoDetail)framePhoto();else if(rightDetail)frameRight();else if(towerDetail)frameTower();else if(frontDetail)frameFront();else cutscene.resize();});
 </script></body></html>
 

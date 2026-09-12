@@ -43,9 +43,61 @@ for(const x of [-23,23])for(const z of [-17,-26,-30,-34,-40]){
 }
 // The corrected east wing and L-shaped addition must have continuous roofs,
 // while the parking court inside the addition remains uncovered.
-for(const [x,z] of [[31,-20],[42,40],[53.1,12],[72.65,12],[89.2,-25],[89.2,0],[83.7,-38],[83.7,-44],[91.2,12]]){
+for(const [x,z] of [[31,-20],[42,40],[53.1,12],[72.65,8],[89.2,-25],[89.2,0],[83.7,-38],[83.7,-44],[91.2,12]]){
   ray.set(new THREE.Vector3(x,80,z),new THREE.Vector3(0,-1,0));
   assert(ray.intersectObject(exterior.model,true)[0].point.y>8,'corrected east footprint must contain roof geometry');
+}
+// Photo 20260912_172141: the service link has a low roof, with the taller
+// range set behind it. Check the actual geometry as well as the sash schedule.
+ray.set(new THREE.Vector3(76,80,16),new THREE.Vector3(0,-1,0));
+const linkRoof=ray.intersectObject(exterior.model,true)[0].point.y;
+assert(linkRoof>4.5&&linkRoof<8,'link roof must sit below the square pavilion first-floor heads');
+const photoOpenings=exterior.model.userData.eastPhotoOpenings;
+const frontWindows=photoOpenings.filter(o=>o.face==='square-front');
+assert.equal(frontWindows.length,6,'square front has exactly two windows on each of three storeys');
+for(const y of [2,6.5,11])assert.equal(frontWindows.filter(o=>o.y===y).length,2);
+const wingWindows=photoOpenings.filter(o=>o.face==='forward-wing-east');
+assert.equal(wingWindows.length,16,'nine wing positions on each floor include one door instead of a sash');
+assert(!wingWindows.some(o=>o.z===38.1),'upper stair and ground door must not have superimposed windows');
+assert.equal(photoOpenings.filter(o=>o.face==='polygonal-bay').length,9,'three visible facets carry windows on all three floors');
+ray.set(new THREE.Vector3(63.65,2,30),new THREE.Vector3(0,0,-1));
+assert(ray.intersectObject(exterior.model,true)[0].object.isInstancedMesh,'ground-floor sash must be visible in front of the white wall');
+// img2.jpg observes the opposite side: a real projecting polygonal bay and
+// two close pairs plus one sash on every floor of the courtyard wall.
+const courtBay=exterior.model.getObjectByName('East courtyard polygonal bay');
+assert(courtBay,'rear courtyard must have its own projecting bay');
+assert(new THREE.Box3().setFromObject(courtBay).min.z<0,'courtyard bay must project beyond the rear wall');
+const paired=exterior.model.userData.courtyardPhotoOpenings.filter(o=>o.face==='courtyard-paired-wall');
+assert.equal(paired.length,15,'courtyard paired wall has five sashes on each of three floors');
+for(const y of [2,6.5,11]){
+  const xs=paired.filter(o=>o.y===y).map(o=>o.x).sort((a,b)=>a-b);
+  assert.equal(xs.length,5);
+  assert(Math.abs(xs[2]-xs[1]-1.5)<.01&&Math.abs(xs[4]-xs[3]-1.5)<.01,'windows must form two close pairs');
+  for(const x of xs){
+    ray.set(new THREE.Vector3(x,y,-5),new THREE.Vector3(0,0,1));
+    const visible=ray.intersectObject(exterior.model,true)[0];
+    assert(visible.point.z>4&&visible.point.z<4.5,'each paired sash must remain exposed, not buried in the projecting bay');
+  }
+}
+assert(exterior.model.getObjectByName('East courtyard two-flight fire escape').children.length>12,'courtyard stair must have structural flights and rails');
+// img8.jpg: explicit windows replace the generic rear-return grid. Verify
+// the five upper openings remain visible and the stair door has no sash on it.
+const rearOpenings=exterior.model.userData.rearCourtPhotoOpenings;
+const rearUpper=rearOpenings.filter(o=>o.face==='rear-return-upper');
+assert.equal(rearUpper.length,5,'rear return has five upper sashes plus its stair door');
+assert(!rearUpper.some(o=>Math.abs(o.x-66.4)<.1),'upper door must not be overlaid by a window');
+for(const o of rearUpper){
+  ray.set(new THREE.Vector3(o.x,o.y,-27),new THREE.Vector3(0,0,-1));
+  const hit=ray.intersectObject(exterior.model,true)[0];
+  assert(hit.point.z<-32.6&&hit.point.z>-33,'each upper return sash must be exposed in front of the rear wall');
+}
+assert.equal(exterior.model.children.filter(o=>o.name==='Rear court blue gabled porch').length,2,'both blue entrance porches must be present');
+assert.equal(exterior.model.children.filter(o=>o.name==='Rear court tall chimney').length,2,'the east wing has two tall chimney stacks');
+const rightGround=rearOpenings.filter(o=>o.face==='rear-court-wing-ground');
+assert(!rightGround.some(o=>o.z===-4.8),'right porch must replace the ground-floor sash');
+for(const x of [42,49,55]){
+  ray.set(new THREE.Vector3(x,80,-38),new THREE.Vector3(0,-1,0));
+  assert(ray.intersectObject(exterior.model,true)[0].point.y<1,'wider return must leave the rear approach open');
 }
 // A roof-free route enters from the rear-left and turns into the side court.
 for(const [x,z] of [[27,-39],[33,-39],[40,-39],[40,-34],[40,-30],[46,-29]]){

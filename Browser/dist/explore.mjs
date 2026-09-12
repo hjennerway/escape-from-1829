@@ -1,6 +1,9 @@
 import * as THREE from './vendor/three.module.js';
 import {createEscapeExterior,loadEscapeFrontage} from './escape-exterior.mjs';
 import {createWalker,exteriorObstacles} from './explore-controls.mjs';
+import {EAST_PHOTO_VIEW} from './east-photo-detail.mjs';
+import {COURTYARD_PHOTO_VIEW} from './courtyard-photo-detail.mjs';
+import {REAR_COURT_PHOTO_VIEW} from './rear-court-photo-detail.mjs';
 const canvas=document.getElementById('game'),hint=document.getElementById('lookHint'),look=document.getElementById('look');
 try{
   const renderer=new THREE.WebGLRenderer({canvas,antialias:true});
@@ -10,6 +13,9 @@ try{
   const exterior=createEscapeExterior(THREE,innerWidth/innerHeight);
   exterior.camera.near=.1;exterior.camera.updateProjectionMatrix();
   const walker=createWalker(exterior.camera,exteriorObstacles(THREE,exterior.model));
+  if(new URLSearchParams(location.search).get('view')==='east-photo')walker.setView(EAST_PHOTO_VIEW);
+  if(new URLSearchParams(location.search).get('view')==='courtyard-photo')walker.setView(COURTYARD_PHOTO_VIEW);
+  if(new URLSearchParams(location.search).get('view')==='rear-court-photo')walker.setView(REAR_COURT_PHOTO_VIEW);
   let active=false,dragging=false,last=null;
   const movement=new Set(['KeyW','KeyA','KeyS','KeyD','ShiftLeft','ShiftRight']);
   function stop(){active=false;dragging=false;last=null;walker.keys.clear();hint.textContent='Click Start exploring to resume, or drag the view to look around.';look.textContent='START EXPLORING ↗';}
