@@ -10,6 +10,14 @@ Use `WASD` to move, the mouse to look, `Shift` to sprint, `C` or `Ctrl` to crouc
 
 The browser build is served from [`Browser/dist`](Browser/dist). The Unity project and Blender source are included for continued development.
 
+## Building arrival (browser)
+
+Starting or restarting plays a four-second 3D exterior sequence: the camera advances and tilts up towards the decorated pediment, then closes in on the red entrance door. At 3 seconds it fades to black over 0.5 seconds, switches to the ground-floor Reception spawn at full black, and fades back in over 0.5 seconds. Controls, pursuers and the gameplay timer remain frozen until the reveal finishes, preserving the full five-second head start. Hidden tabs suspend the sequence; reduced-motion mode uses a still exterior with the same fades and timing.
+
+The Three.js exterior in `Browser/dist/exterior.mjs` is modelled from the four supplied photographs bundled in `Browser/dist/exterior/`. It includes the central pavilion, recessed wings, sash windows, stone bands, pediment, Ionic entrance columns, steps, railings, red panelled door and planted approach. The pediment uses a cropped detail from the supplied frontal photograph. Dimensions are visual approximations, not a measured survey. Repeated architectural trim is instanced, and the exterior renders separately from the interior. This browser addition does not require Blender; the Unity scene and existing binary exports have not been changed.
+
+Camera choreography and timing are isolated in `Browser/dist/arrival-cutscene.mjs`. Run `node Browser/serve.mjs` from the repository root to preview at `http://127.0.0.1:1829`. The game-loop checks include arrival timing at low frame rates, both fades, Reception placement, frozen gameplay, restart and reduced motion.
+
 ## Reception stairs
 
 The left staircase is based on the uploaded `20260216_092540.mp4` and the user's confirmation that it is down a corridor to the left of Reception. The right corridor and staircase are mirrored at the user's request, not independently verified from footage. Corridor lengths and stair dimensions remain gameplay approximations.

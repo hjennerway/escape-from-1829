@@ -6,6 +6,7 @@ import * as core from './dist/core.mjs';
 import * as floors from './dist/floors.mjs';
 import {buildArchitecture} from './dist/architecture.mjs';
 import {createEscapeCutscene} from './dist/escape-cutscene.mjs';
+import {createArrivalCutscene,sampleArrival} from './dist/arrival-cutscene.mjs';
 class Vector {
   constructor(){this.set(0,0,0);}
   set(x,y,z){Object.assign(this,{x,y,z});return this;}
@@ -16,7 +17,7 @@ class Object3D {
   constructor(g,m){this.children=[];this.position=new Vector();this.scale=new Vector();this.rotation=new Vector();this.material=m;this.visible=true;this.instanceMatrix={};}
   add(...objects){for(const o of objects){if(o.parent)o.parent.children=o.parent.children.filter(p=>p!==o);o.parent=this;this.children.push(o);}}
   updateMatrix(){} setMatrixAt(){} setPixelRatio(){} setSize(){} render(){}
-  getWorldDirection(v){return v.set(0,0,-1);} updateProjectionMatrix(){}
+  getWorldDirection(v){return v.set(0,0,-1);} updateProjectionMatrix(){} lookAt(){}
 }
 class Geometry {clone(){return new Geometry();}}
 const THREE={Vector3:Vector,Object3D,Group:Object3D,Scene:Object3D,Mesh:Object3D,InstancedMesh:Object3D,
@@ -33,15 +34,45 @@ function element(id){
 }
 const layout=JSON.parse(await readFile(new URL('./dist/layout.json',import.meta.url)));
 const source=(await readFile(new URL('./dist/game.mjs',import.meta.url),'utf8')).replace(/^import .*;\r?\n/gm,'');
-const sandbox={...core,...floors,buildArchitecture,createEscapeCutscene,THREE,GLTFLoader:class {},
+const sandbox={...core,...floors,buildArchitecture,createEscapeCutscene,createArrivalCutscene,
+ createBuildingExterior:async()=>({scene:new Object3D(),camera:new Object3D()}),THREE,GLTFLoader:class {},
  document:{getElementById:element,createElement:()=>element('canvas'+elements.size),querySelectorAll:()=>[],body:element('body'),addEventListener(){},exitPointerLock(){}},
  window:{AudioContext:class {resume(){return Promise.resolve();}}},Image:class {},
  fetch:async()=>({ok:true,json:async()=>layout}),matchMedia:()=>({matches:false}),
  innerWidth:1280,innerHeight:800,devicePixelRatio:1,addEventListener(){},requestAnimationFrame(){},performance:{now:()=>0},console};
 vm.createContext(sandbox);
-vm.runInContext(source+`\nglobalThis.test={finish,escapeCutscene,start,update,resetPositions,showFloor,player,keys,get enemies(){return enemies;},get groups(){return floorGroups;},get artPanels(){return artPanels;},get artViewing(){return artViewing;},openArtViewer,closeArtViewer,get ready(){return ready;},get state(){return state;},get camera(){return camera;},setElapsed(v){elapsed=v;},setAudio(){audioOn=false;}};`,sandbox);
+vm.runInContext(source+`\nglobalThis.test={finish,escapeCutscene,start,update,animate,resetPositions,showFloor,player,keys,get arrival(){return arrivalCutscene;},get elapsed(){return elapsed;},get enemies(){return enemies;},get groups(){return floorGroups;},get artPanels(){return artPanels;},get artViewing(){return artViewing;},openArtViewer,closeArtViewer,get ready(){return ready;},get state(){return state;},get camera(){return camera;},setElapsed(v){elapsed=v;},setAudio(){audioOn=false;},setFrameDt(v){clock.getDelta=()=>v;}};`,sandbox);
 await new Promise(r=>setImmediate(r));
-const t=sandbox.test;assert(t.ready,'init must complete');t.setAudio();t.start();
+const t=sandbox.test;assert(t.ready,'init must complete');t.setAudio();
+function startPlaying(){t.start();t.arrival.update(4);assert.equal(t.state,'play');}
+
+// Exercise the actual arrival state and animation loop with deliberately slow frames.
+t.start();assert.equal(t.state,'arrival');assert.equal(elements.get('hud').hidden,true);
+const arrivalEnemies=t.enemies.map(e=>({x:e.x,z:e.z,floor:e.floor})),arrivalPlayer={...t.player};
+t.keys.add('KeyW');t.update(2);assert.deepEqual({...t.player},arrivalPlayer);assert.equal(t.elapsed,0);
+t.setFrameDt(.25);
+for(let i=0;i<12;i++)t.animate();
+assert.equal(t.state,'arrival');assert.equal(elements.get('arrivalFade').style.opacity,'0');
+t.animate();assert.equal(elements.get('arrivalFade').style.opacity,'0.5');
+t.animate();assert.equal(elements.get('arrivalFade').style.opacity,'1');assert.equal(t.arrival.inside,true);
+assert.equal(t.camera.position.x,layout.spawn.x*layout.cellSize);assert.equal(t.camera.position.z,layout.spawn.z*layout.cellSize);
+assert.equal(t.camera.position.y,1.65);assert.equal(t.player.floor,0);
+t.animate();assert.equal(elements.get('arrivalFade').style.opacity,'0.5');assert.equal(t.state,'arrival');
+t.animate();assert.equal(t.state,'play');assert.equal(elements.get('arrivalFade').hidden,true);
+assert.equal(elements.get('hud').hidden,false);assert.equal(t.elapsed,0);assert.equal(t.keys.size,0);
+assert.deepEqual(t.enemies.map(e=>({x:e.x,z:e.z,floor:e.floor})),arrivalEnemies);
+t.setFrameDt(.04);t.animate();assert.equal(t.elapsed,.04);
+assert(sampleArrival(1.25).target[1]>sampleArrival(0).target[1],'camera pans up');
+assert(sampleArrival(3).position[2]<sampleArrival(1.25).position[2],'camera continues to the door');
+assert(Math.abs(sampleArrival(3).target[1]-3.65)<1e-10);
+assert.deepEqual(sampleArrival(0,{reducedMotion:true}).position,sampleArrival(3,{reducedMotion:true}).position);
+assert(sampleArrival(0,{aspect:.5}).position[2]>sampleArrival(0).position[2]);
+let enters=0,completes=0;
+const arrival=createArrivalCutscene({camera:new Object3D(),overlay:element('testArrival'),onEnter:()=>enters++,onComplete:()=>completes++});
+arrival.start();arrival.update(5);arrival.update(5);assert.equal(enters,1);assert.equal(completes,1);
+arrival.start();arrival.update(3.25);arrival.reset();assert.equal(arrival.active,false);assert.equal(element('testArrival').hidden,true);
+console.log('PASS: four-second arrival at low FPS, exact half-second fades, reception handoff, frozen input/NPCs/timer, clean restart, reduced motion and portrait framing.');
+startPlaying();
 assert.equal(t.player.floor,0);assert.equal(t.groups.length,2);
 assert(t.artPanels.length>=16,'supplied artwork must be mounted throughout both floors');
 const frozen=t.enemies.map(e=>({x:e.x,z:e.z,floor:e.floor}));t.setElapsed(6);t.keys.add('KeyE');t.update(.4);
@@ -56,7 +87,7 @@ for(const stair of layout.stairs){
  for(let i=0;i<22;i++)t.update(.04);assert.equal(t.player.floor,1,'Held key must not bounce floors');
  t.keys.delete('KeyE');t.update(.04);t.keys.add('KeyE');
  for(let i=0;i<22;i++)t.update(.04);assert.equal(t.player.floor,0);
- t.keys.delete('KeyE');t.update(.04);t.start();
+ t.keys.delete('KeyE');t.update(.04);startPlaying();
 }
 // The ghost uses a staircase, not an x/z-only collision through the ceiling.
 Object.assign(t.player,{x:50,z:20,floor:1});t.showFloor();
@@ -68,12 +99,12 @@ Object.assign(t.player,{x:50,z:20,floor:1});
 for(const e of t.enemies){Object.assign(e,{x:50,z:20,floor:0,memory:0,rethink:0,path:[]});}
 t.update(.04);assert.equal(t.state,'play','Different-floor enemies must not capture player');
 assert(t.enemies.every(e=>!e.mesh.visible));
-t.start();assert.equal(t.player.floor,0);assert(t.enemies.every(e=>e.floor===0));
+startPlaying();assert.equal(t.player.floor,0);assert(t.enemies.every(e=>e.floor===0));
 assert.equal(t.groups[0].visible,true);assert.equal(t.groups[1].visible,false);
 console.log('PASS: real game init, both stair interactions, held-key latch, floor groups/HUD, ghost follows, cross-floor capture isolation, restart.');
 
 for(const exit of layout.exits){
- t.start();t.finish(true,exit.name);
+ startPlaying();t.finish(true,exit.name);
  assert.equal(t.state,'cutscene');assert.equal(elements.get('escapeCutscene').hidden,false);
  assert.equal(elements.get('result').hidden,true);assert.equal(elements.get('hud').hidden,true);
  const position={...t.player};
@@ -82,9 +113,9 @@ for(const exit of layout.exits){
  assert.equal(elements.get('escapeCutscene').hidden,true);
  assert(elements.get('resultBody').textContent.includes(exit.name.toLowerCase()));
 }
-t.start();t.finish(true,layout.exits[0].name);t.escapeCutscene.skip();assert.equal(t.state,'won');
+startPlaying();t.finish(true,layout.exits[0].name);t.escapeCutscene.skip();assert.equal(t.state,'won');
 t.escapeCutscene.skip();assert.equal(t.state,'won','Repeated skip is harmless');
-t.start();assert.equal(t.escapeCutscene.active,false);assert.equal(elements.get('escapeCutscene').hidden,true);
+startPlaying();assert.equal(t.escapeCutscene.active,false);assert.equal(elements.get('escapeCutscene').hidden,true);
 assert.equal(elements.get('hud').hidden,false);
 t.finish(false,'Sylvia');assert.equal(t.state,'lost');assert.equal(t.escapeCutscene.active,false);
 const reducedRoot=element('reduced'),wide=reducedRoot.querySelector('[data-shot="wide"]'),detail=reducedRoot.querySelector('[data-shot="detail"]');
