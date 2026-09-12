@@ -5,7 +5,7 @@ import vm from 'node:vm';
 import * as core from './dist/core.mjs';
 import * as floors from './dist/floors.mjs';
 import {buildArchitecture} from './dist/architecture.mjs';
-import {createEscapeCutscene} from './dist/escape-cutscene.mjs';
+import {createEscapeCutscene,sampleEscape} from './dist/escape-cutscene.mjs';
 import {createArrivalCutscene,sampleArrival} from './dist/arrival-cutscene.mjs';
 class Vector {
   constructor(){this.set(0,0,0);}
@@ -16,7 +16,7 @@ class Vector {
 class Object3D {
   constructor(g,m){this.children=[];this.position=new Vector();this.scale=new Vector();this.rotation=new Vector();this.material=m;this.visible=true;this.instanceMatrix={};}
   add(...objects){for(const o of objects){if(o.parent)o.parent.children=o.parent.children.filter(p=>p!==o);o.parent=this;this.children.push(o);}}
-  updateMatrix(){} setMatrixAt(){} setPixelRatio(){} setSize(){} render(){}
+  updateMatrix(){} setMatrixAt(){} setPixelRatio(){} setSize(){} render(scene,camera){this.lastRender={scene,camera};}
   getWorldDirection(v){return v.set(0,0,-1);} updateProjectionMatrix(){} lookAt(){}
 }
 class Geometry {clone(){return new Geometry();}}
@@ -35,13 +35,14 @@ function element(id){
 const layout=JSON.parse(await readFile(new URL('./dist/layout.json',import.meta.url)));
 const source=(await readFile(new URL('./dist/game.mjs',import.meta.url),'utf8')).replace(/^import .*;\r?\n/gm,'');
 const sandbox={...core,...floors,buildArchitecture,createEscapeCutscene,createArrivalCutscene,
+ createEscapeExterior:()=>({scene:new Object3D(),camera:new Object3D()}),
  createBuildingExterior:async()=>({scene:new Object3D(),camera:new Object3D()}),THREE,GLTFLoader:class {},
  document:{getElementById:element,createElement:()=>element('canvas'+elements.size),querySelectorAll:()=>[],body:element('body'),addEventListener(){},exitPointerLock(){}},
  window:{AudioContext:class {resume(){return Promise.resolve();}}},Image:class {},
  fetch:async()=>({ok:true,json:async()=>layout}),matchMedia:()=>({matches:false}),
  innerWidth:1280,innerHeight:800,devicePixelRatio:1,addEventListener(){},requestAnimationFrame(){},performance:{now:()=>0},console};
 vm.createContext(sandbox);
-vm.runInContext(source+`\nglobalThis.test={finish,escapeCutscene,start,update,animate,resetPositions,showFloor,player,keys,get arrival(){return arrivalCutscene;},get elapsed(){return elapsed;},get enemies(){return enemies;},get groups(){return floorGroups;},get artPanels(){return artPanels;},get artViewing(){return artViewing;},openArtViewer,closeArtViewer,get ready(){return ready;},get state(){return state;},get camera(){return camera;},setElapsed(v){elapsed=v;},setAudio(){audioOn=false;},setFrameDt(v){clock.getDelta=()=>v;}};`,sandbox);
+vm.runInContext(source+`\nglobalThis.test={finish,escapeCutscene,start,update,animate,resetPositions,showFloor,player,keys,get escapeExterior(){return escapeExterior;},get lastRender(){return renderer.lastRender;},get arrival(){return arrivalCutscene;},get elapsed(){return elapsed;},get enemies(){return enemies;},get groups(){return floorGroups;},get artPanels(){return artPanels;},get artViewing(){return artViewing;},openArtViewer,closeArtViewer,get ready(){return ready;},get state(){return state;},get camera(){return camera;},setElapsed(v){elapsed=v;},setAudio(){audioOn=false;},setFrameDt(v){clock.getDelta=()=>v;}};`,sandbox);
 await new Promise(r=>setImmediate(r));
 const t=sandbox.test;assert(t.ready,'init must complete');t.setAudio();
 function startPlaying(){t.start();t.arrival.update(4);assert.equal(t.state,'play');}
@@ -107,9 +108,16 @@ for(const exit of layout.exits){
  startPlaying();t.finish(true,exit.name);
  assert.equal(t.state,'cutscene');assert.equal(elements.get('escapeCutscene').hidden,false);
  assert.equal(elements.get('result').hidden,true);assert.equal(elements.get('hud').hidden,true);
- const position={...t.player};
- t.escapeCutscene.update(5);assert.equal(t.state,'cutscene');assert.deepEqual({...t.player},position);
- t.escapeCutscene.update(5);assert.equal(t.state,'won');assert.equal(elements.get('result').hidden,false);
+ const position={...t.player},pursuers=t.enemies.map(e=>({x:e.x,z:e.z})),gameTime=t.elapsed;
+ const firstCamera={...t.escapeExterior.camera.position};
+ t.setFrameDt(.25);for(let i=0;i<20;i++)t.animate();
+ assert.equal(t.state,'cutscene');assert.deepEqual({...t.player},position);
+ assert.notDeepEqual({...t.escapeExterior.camera.position},firstCamera,'aerial camera must pan');
+ assert.equal(t.lastRender.scene,t.escapeExterior.scene,'escape must render the 3D estate');
+ assert.equal(t.elapsed,gameTime);assert.deepEqual(t.enemies.map(e=>({x:e.x,z:e.z})),pursuers);
+ for(let i=0;i<20;i++)t.animate();
+ assert.equal(t.state,'won');assert.equal(elements.get('result').hidden,false);
+ t.animate();assert.equal(t.lastRender.scene,t.escapeExterior.scene,'result keeps the estate background');
  assert.equal(elements.get('escapeCutscene').hidden,true);
  assert(elements.get('resultBody').textContent.includes(exit.name.toLowerCase()));
 }
@@ -118,8 +126,10 @@ t.escapeCutscene.skip();assert.equal(t.state,'won','Repeated skip is harmless');
 startPlaying();assert.equal(t.escapeCutscene.active,false);assert.equal(elements.get('escapeCutscene').hidden,true);
 assert.equal(elements.get('hud').hidden,false);
 t.finish(false,'Sylvia');assert.equal(t.state,'lost');assert.equal(t.escapeCutscene.active,false);
-const reducedRoot=element('reduced'),wide=reducedRoot.querySelector('[data-shot="wide"]'),detail=reducedRoot.querySelector('[data-shot="detail"]');
-let completed=0;const reduced=createEscapeCutscene(reducedRoot,()=>completed++,{reducedMotion:true});
-reduced.start();reduced.update(5);assert.equal(wide.style.transform,'none');assert.equal(detail.style.opacity,'1');
+const reducedRoot=element('reduced'),reducedCamera=new Object3D();reducedCamera.aspect=16/9;
+let completed=0;const reduced=createEscapeCutscene(reducedRoot,()=>completed++,{reducedMotion:true,getCamera:()=>reducedCamera});
+reduced.start();const still={...reducedCamera.position};reduced.update(5);assert.deepEqual({...reducedCamera.position},still);
 reduced.update(5);assert.equal(completed,1);
-console.log('PASS: cutscene after all five exits, timed completion, skip, retry reset, defeat exclusion, reduced motion.');
+assert(sampleEscape(0,{aspect:.5}).position[1]>sampleEscape(0).position[1],'portrait framing pulls back');
+assert.deepEqual(sampleEscape(30),sampleEscape(10),'camera stops at the final shot');
+console.log('PASS: 3D escape after all five exits, ten-second pan at low FPS, frozen gameplay, retained result background, skip, retry, defeat exclusion, reduced motion.');

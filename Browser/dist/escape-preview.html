@@ -1,0 +1,19 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>1829 · Escape scene preview</title><link rel="stylesheet" href="./style.css"><style>#previewNav{position:fixed;left:24px;top:24px;z-index:31;font:10px Arial;letter-spacing:2px;color:#e4e8db;text-shadow:0 2px 6px #000}#previewNav a{color:inherit}#replay{position:fixed;right:24px;top:24px;z-index:32;background:#17211ae8;padding:14px 20px;border:1px solid #bdcc98}</style></head>
+<body><canvas id="game" aria-label="Aerial 3D view of the 1829 estate"></canvas>
+<div id="previewNav"><a href="./">← BACK TO GAME</a></div>
+<section id="escapeCutscene" role="dialog" aria-modal="true" aria-labelledby="escapeCutsceneTitle" hidden><div class="escape-caption"><span>OUTSIDE. AT LAST.</span><h2 id="escapeCutsceneTitle">You escaped</h2><p>The 1829 building · Chester</p></div><button id="skipCutscene" type="button">SKIP CUTSCENE ↗</button></section>
+<button id="replay" hidden>REPLAY CUTSCENE ↗</button>
+<script type="module">
+import * as THREE from './vendor/three.module.js';
+import {createEscapeExterior} from './escape-exterior.mjs';
+import {createEscapeCutscene} from './escape-cutscene.mjs';
+const renderer=new THREE.WebGLRenderer({canvas:document.getElementById('game'),antialias:true});renderer.setPixelRatio(Math.min(devicePixelRatio,1.5));renderer.setSize(innerWidth,innerHeight);renderer.outputColorSpace=THREE.SRGBColorSpace;renderer.toneMapping=THREE.ACESFilmicToneMapping;renderer.toneMappingExposure=1.25;renderer.shadowMap.enabled=true;renderer.shadowMap.type=THREE.PCFSoftShadowMap;
+const exterior=createEscapeExterior(THREE,innerWidth/innerHeight),replay=document.getElementById('replay'),clock=new THREE.Clock();
+const cutscene=createEscapeCutscene(document.getElementById('escapeCutscene'),()=>{replay.hidden=false;},{getCamera:()=>exterior.camera,reducedMotion:matchMedia('(prefers-reduced-motion: reduce)').matches});
+function start(){replay.hidden=true;clock.getDelta();cutscene.start();}replay.onclick=start;start();
+function frame(){requestAnimationFrame(frame);const dt=clock.getDelta();if(!document.hidden)cutscene.update(dt);renderer.render(exterior.scene,exterior.camera);}frame();
+document.addEventListener('visibilitychange',()=>clock.getDelta());
+addEventListener('keydown',e=>{if(['Escape','Space','Enter'].includes(e.code)&&cutscene.active){e.preventDefault();cutscene.skip();}});
+addEventListener('resize',()=>{renderer.setSize(innerWidth,innerHeight);exterior.camera.aspect=innerWidth/innerHeight;exterior.camera.updateProjectionMatrix();cutscene.resize();});
+</script></body></html>

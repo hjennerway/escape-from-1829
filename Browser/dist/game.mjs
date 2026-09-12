@@ -4,6 +4,7 @@ import {path,walkable,visible,nearExit} from './core.mjs';
 import {buildArchitecture} from './architecture.mjs';
 import {createEscapeCutscene} from './escape-cutscene.mjs';
 import {createBuildingExterior} from './exterior.mjs';
+import {createEscapeExterior} from './escape-exterior.mjs';
 import {createArrivalCutscene} from './arrival-cutscene.mjs';
 import {FLOOR_HEIGHT,makeFloors,nearStair,changeFloor,routeBetweenFloors} from './floors.mjs';
 const $=id=>document.getElementById(id),canvas=$('game');
@@ -12,11 +13,11 @@ let layout,renderer,scene,camera,torch,torchTarget,clock,ready=false,state='menu
 let enemies=[],lights=[],audioCtx,audioOn=true,lastStep=0,lastPulse=0,footPhase=0,dragging=false,previousPointer=null,modelLoaded=false;
 const player={x:50,z:27.5,floor:0},mapCanvas=$('map'),mapContext=mapCanvas.getContext('2d'),miniMapCanvas=$('miniMap'),miniMapContext=miniMapCanvas.getContext('2d');
 let mapRefresh=0,floors=[],floorGroups=[],stairHold=0,stairLatch=false,artPanels=[],artViewing=null,placedWallPanels=[];
-let exterior,arrivalCutscene;
+let exterior,arrivalCutscene,escapeExterior;
 const escapeCutscene=createEscapeCutscene($('escapeCutscene'),()=>{
  if(state!=='cutscene')return;
  state='won';$('result').hidden=false;$('retry').focus();
-},{reducedMotion:matchMedia('(prefers-reduced-motion: reduce)').matches});
+},{reducedMotion:matchMedia('(prefers-reduced-motion: reduce)').matches,getCamera:()=>escapeExterior?.camera});
 function groupSince(snapshot,height){const group=new THREE.Group();for(const o of [...scene.children])if(!snapshot.has(o))group.add(o);group.position.y=height;scene.add(group);return group;}
 function showFloor(){layout=floors[player.floor];floorGroups.forEach((g,i)=>g.visible=i===player.floor);$('floorName').textContent=player.floor?'UPPER FLOOR':'GROUND FLOOR';$('mapFloorName').textContent=player.floor?'UPPER FLOOR · GAME ROUTES':'GROUND FLOOR · GAME ROUTES';$('miniFloorName').textContent=player.floor?'UPPER FLOOR':'GROUND FLOOR';}
 const material=(color,extra={})=>new THREE.MeshStandardMaterial({color,roughness:.88,...extra});
@@ -162,6 +163,8 @@ async function init(){
   torch=new THREE.SpotLight(0xffe4af,24,30,.50,.55,1.2);torchTarget=new THREE.Object3D();scene.add(torch,torchTarget);torch.target=torchTarget;
   enemies=[['Sylvia',8,9],['Security',32,23],['Deva asylum ghost',20,21]].map(([name,x,z],type)=>({name,type,floor:0,spawn:{x:x*2.5,z:z*2.5,floor:0},x:x*2.5,z:z*2.5,mesh:enemyModel(type),path:[],memory:0,rethink:0,route:0,target:null}));
   exterior=await createBuildingExterior(THREE,innerWidth/innerHeight);
+  escapeExterior=createEscapeExterior(THREE,innerWidth/innerHeight);
+  if(renderer.shadowMap){renderer.shadowMap.enabled=true;renderer.shadowMap.type=THREE.PCFSoftShadowMap;}
   arrivalCutscene=createArrivalCutscene({camera:exterior.camera,overlay:$('arrivalFade'),
     reducedMotion:matchMedia('(prefers-reduced-motion: reduce)').matches,
     onEnter(){resetPositions();camera.position.set(player.x,1.65,player.z);camera.rotation.set(pitch,yaw,0);},
@@ -237,11 +240,16 @@ function drawMapCanvas(c,s){c.clearRect(0,0,c.canvas.width,c.canvas.height);c.fi
  for(const e of enemies){if(e.floor!==player.floor)continue;const ex=e.x/layout.cellSize*s+s*.5,ez=e.z/layout.cellSize*s+s*.5;c.fillStyle=e.type===0?'#e59a83':e.type===2?'#8fe0c4':'#e1c278';c.beginPath();c.arc(ex,ez,Math.max(2,s*.42),0,7);c.fill();c.fillStyle='#101810';c.font=`bold ${Math.max(7,s*1.1)}px Arial`;c.textAlign='center';c.textBaseline='middle';c.fillText(e.type===0?'S':e.type===2?'G':'K',ex,ez);c.textAlign='left';c.textBaseline='alphabetic';}
 }
 function drawMap(){drawMapCanvas(mapContext,10);drawMapCanvas(miniMapContext,5);}
-function animate(){requestAnimationFrame(animate);const frameDt=clock.getDelta(),dt=Math.min(frameDt,.04);if(state==='cutscene'){if(!document.hidden)escapeCutscene.update(dt);return;}
+function animate(){requestAnimationFrame(animate);const frameDt=clock.getDelta(),dt=Math.min(frameDt,.04);
+ if(state==='cutscene'||state==='won'){
+  if(state==='cutscene'&&!document.hidden)escapeCutscene.update(frameDt);
+  renderer.render(escapeExterior.scene,escapeExterior.camera);return;
+ }
  if(state==='arrival'){
   if(!document.hidden)arrivalCutscene.update(frameDt);
   if(!arrivalCutscene.inside){renderer.render(exterior.scene,exterior.camera);return;}
  }else if(state==='play')update(dt);else if(state==='menu'){const t=performance.now()/1000;camera.position.set(50,1.7,31);camera.rotation.set(-.035,Math.PI+.12+Math.sin(t*.13)*.07,0);}
+ if(state==='cutscene'){renderer.render(escapeExterior.scene,escapeExterior.camera);return;}
  camera.getWorldDirection(tmp);torch.position.copy(camera.position);torchTarget.position.copy(camera.position).addScaledVector(tmp,12);renderer.render(scene,camera);}
 $('start').onclick=start;$('help').onclick=()=>{$('instructions').hidden=false;};$('closeHelp').onclick=()=>{$('instructions').hidden=true;};$('footageOpen').onclick=()=>{$('footage').hidden=false;};$('closeFootage').onclick=()=>{$('footage').hidden=true;};$('helpPlay').onclick=start;$('retry').onclick=start;$('resume').onclick=resume;$('pause').onclick=pause;$('audio').onchange=e=>audioOn=e.target.checked;
 function toggleMap(){if(state==='play'){$('floorMap').hidden=!$('floorMap').hidden;drawMap();}}
@@ -251,5 +259,5 @@ function look(dx,dy){const s=Number($('sensitivity').value)*.0018;yaw-=dx*s;pitc
 addEventListener('mousemove',e=>{if(state==='play'&&document.pointerLockElement===canvas)look(e.movementX,e.movementY);});
 canvas.addEventListener('pointerdown',e=>{if(state!=='play')return;dragging=true;previousPointer=[e.clientX,e.clientY];canvas.setPointerCapture(e.pointerId);});canvas.addEventListener('pointermove',e=>{if(dragging&&state==='play'&&document.pointerLockElement!==canvas){look(e.clientX-previousPointer[0],e.clientY-previousPointer[1]);previousPointer=[e.clientX,e.clientY];}});canvas.addEventListener('pointerup',()=>dragging=false);canvas.addEventListener('pointercancel',()=>dragging=false);
  document.querySelectorAll('[data-key]').forEach(b=>{b.addEventListener('pointerdown',e=>{e.preventDefault();keys.add(b.dataset.key);b.setPointerCapture(e.pointerId);});for(const t of ['pointerup','pointercancel','lostpointercapture'])b.addEventListener(t,()=>{keys.delete(b.dataset.key);if(b.dataset.key==='KeyE')closeArtViewer();});});$('touchMap').onclick=toggleMap;$('touchTorch').onclick=()=>torch.visible=!torch.visible;if(touch)document.body.classList.add('touch');
-addEventListener('resize',()=>{if(renderer){renderer.setSize(innerWidth,innerHeight);camera.aspect=innerWidth/innerHeight;camera.updateProjectionMatrix();if(exterior){exterior.camera.aspect=camera.aspect;exterior.camera.updateProjectionMatrix();}}});
+addEventListener('resize',()=>{if(renderer){renderer.setSize(innerWidth,innerHeight);camera.aspect=innerWidth/innerHeight;camera.updateProjectionMatrix();if(exterior){exterior.camera.aspect=camera.aspect;exterior.camera.updateProjectionMatrix();}if(escapeExterior){escapeExterior.camera.aspect=camera.aspect;escapeExterior.camera.updateProjectionMatrix();escapeCutscene.resize();}}});
 init();

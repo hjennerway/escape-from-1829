@@ -40,7 +40,11 @@ The menu's **Archival footage** panel links to the supplied [Google Photos video
 
 ## Escape cutscene
 
-Escaping through any of the five exits starts a ten-second photo cutscene of the radio mast before the victory screen. It uses the two user-supplied photographs bundled as `Browser/dist/mast-wide.jpg` and `mast-detail.jpg`, with a gentle zoom and crossfade. Select **Skip cutscene**, or press Escape, Space or Enter, to go straight to the result. Reduced-motion mode uses still images with a simple cut. Losing does not trigger the sequence.
+Escaping through any of the five exits starts a ten-second aerial 3D pan over the 1829 estate with **You escaped** on screen. The model follows the supplied aerial photograph and the user's annotated correction: a rough W footprint with open gaps between the three rearward arms, reception at the front centre, curved window bays, projecting wings, slate roofs, lawns, roads and parking areas. The two rear cross-ranges have been removed so there are no enclosed courtyards. A lattice radio mast sits beyond the rear-left corner, at the upper left from this perspective, following the corrected arrow. The shape and dimensions are an artistic reconstruction, not a surveyed model; the property outline and annotations are not reproduced.
+
+The scene is built in `Browser/dist/escape-exterior.mjs` and the pan is controlled by `Browser/dist/escape-cutscene.mjs`. It uses real geometry, instanced window/trim details, procedural brick/slate materials and directional shadows. It shares the game's renderer and remains behind the result screen. The original mast photographs remain as reference assets but are no longer displayed or loaded by the ending. Gameplay and the timer freeze throughout; hidden tabs suspend playback. Select **Skip cutscene**, or press Escape, Space or Enter, to go straight to the result. Reduced-motion mode holds a still 3D aerial view. Losing does not trigger the sequence.
+
+With the local server running, open `http://127.0.0.1:1829/escape-preview.html` to replay the ending directly. Tests cover all five exits, low-frame-rate duration, replay/reset, the retained result background, actual roofs and open rear gaps, and building/mast framing in landscape and portrait. The Unity build is unchanged.
 
 ## Historical reference panels
 
