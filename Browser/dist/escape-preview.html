@@ -14,13 +14,14 @@ const exterior=createEscapeExterior(THREE,innerWidth/innerHeight),replay=documen
 await loadEscapeFrontage(THREE,exterior);
 const cutscene=createEscapeCutscene(document.getElementById('escapeCutscene'),()=>{replay.hidden=false;},{getCamera:()=>exterior.camera,reducedMotion:matchMedia('(prefers-reduced-motion: reduce)').matches});
 function start(){replay.hidden=true;clock.getDelta();cutscene.start();}replay.onclick=start;
-const view=new URLSearchParams(location.search).get('view'),frontDetail=view==='front',towerDetail=view==='tower';
+const view=new URLSearchParams(location.search).get('view'),frontDetail=view==='front',towerDetail=view==='tower',rightDetail=view==='right';
 function frameFront(){exterior.camera.position.set(0,10,19.8+34*Math.max(1,1/exterior.camera.aspect));exterior.camera.lookAt(0,9,19.8);}
 function frameTower(){const {x,z}=ESCAPE_WATER_TOWER;exterior.camera.position.set(x+34,25,z+58*Math.max(1,1/exterior.camera.aspect));exterior.camera.lookAt(x,20,z);}
-if(towerDetail)frameTower();else if(frontDetail)frameFront();else start();
+function frameRight(){exterior.camera.position.set(72,28,108*Math.max(1,1/exterior.camera.aspect));exterior.camera.lookAt(72,9,0);}
+if(rightDetail)frameRight();else if(towerDetail)frameTower();else if(frontDetail)frameFront();else start();
 function frame(){requestAnimationFrame(frame);const dt=clock.getDelta();if(!document.hidden)cutscene.update(dt);renderer.render(exterior.scene,exterior.camera);}frame();
 document.addEventListener('visibilitychange',()=>clock.getDelta());
 addEventListener('keydown',e=>{if(['Escape','Space','Enter'].includes(e.code)&&cutscene.active){e.preventDefault();cutscene.skip();}});
-addEventListener('resize',()=>{renderer.setSize(innerWidth,innerHeight);exterior.camera.aspect=innerWidth/innerHeight;exterior.camera.updateProjectionMatrix();if(towerDetail)frameTower();else if(frontDetail)frameFront();else cutscene.resize();});
+addEventListener('resize',()=>{renderer.setSize(innerWidth,innerHeight);exterior.camera.aspect=innerWidth/innerHeight;exterior.camera.updateProjectionMatrix();if(rightDetail)frameRight();else if(towerDetail)frameTower();else if(frontDetail)frameFront();else cutscene.resize();});
 </script></body></html>
 

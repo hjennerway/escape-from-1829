@@ -3,7 +3,10 @@
 import {createChapel} from './chapel.mjs';
 import {createWaterTower} from './water-tower.mjs';
 export const ESCAPE_MAST = Object.freeze({x:-69,z:-62,height:42});
-const EAST_SHIFT=7.1,EXTRA_BAY=3.55,OUTER_SHIFT=EAST_SHIFT+EXTRA_BAY;
+const EAST_SHIFT=7.1,EXTRA_BAY=3.55;
+// Retain the added east pavilion and the space made for the outer extension.
+const EAST_PAVILION_WIDTH=16+EXTRA_BAY;
+const OUTER_SHIFT=EAST_SHIFT+EXTRA_BAY+EAST_PAVILION_WIDTH;
 // Map the supplied photograph directly onto the triangular tympanum. The UVs
 // select just the relief, leaving the surrounding sky and building out of view.
 export async function loadEscapeFrontage(THREE,exterior){
@@ -37,9 +40,9 @@ export function createEscapeExterior(THREE,aspect){
   // Grounds and surrounding access roads. No red annotation or sale graphics.
   box(path,OUTER_SHIFT/2,-.015,2,151+OUTER_SHIFT,.15,103);
   box(grass,OUTER_SHIFT/2,.08,28,117+OUTER_SHIFT,.1,36);box(grass,OUTER_SHIFT/2,.08,-15,117+OUTER_SHIFT,.1,45);
-  box(asphalt,0,.09,59,210,.1,11);box(asphalt,-79,.09,-2,10,.1,133);box(asphalt,79+OUTER_SHIFT,.09,0,9,.1,130);
+  box(asphalt,EAST_PAVILION_WIDTH/2,.09,59,210+EAST_PAVILION_WIDTH,.1,11);box(asphalt,-79,.09,-2,10,.1,133);box(asphalt,79+OUTER_SHIFT,.09,0,9,.1,130);
   box(path,OUTER_SHIFT/2,.11,51,151+OUTER_SHIFT,.1,3);box(asphalt,OUTER_SHIFT/2,.11,-46,149+OUTER_SHIFT,.1,8);
-  for(let x=-100;x<102;x+=9)box(marking,x,.16,59,4,.02,.15);
+  for(let x=-100;x<102+EAST_PAVILION_WIDTH;x+=9)box(marking,x,.16,59,4,.02,.15);
   for(let z=-65;z<60;z+=9){box(marking,-79,.16,z,.15,.02,4);box(marking,79+OUTER_SHIFT,.16,z,.15,.02,4);}
   box(path,0,.13,34,3.2,.1,34);box(path,OUTER_SHIFT/2,.13,43,114+OUTER_SHIFT,.1,2);
   box(hedge,OUTER_SHIFT/2,.55,49,142+OUTER_SHIFT,1.1,.9);
@@ -64,22 +67,27 @@ export function createEscapeExterior(THREE,aspect){
   eastBlocks[5]=[56,14,10,14,9.3];
   eastBlocks[6]=[54.5,23,6,6,7.2];
   eastBlocks[7]=[44,3,5,8,7.2];
-  // Red front wing and yellow curved bay move two window spacings right.
-  // Purple outer rooms move one further spacing, adding a full vertical
-  // window bay to the pavilion between the curved bay and the outer rooms.
+  // Retain the previously adjusted front wing and first curved pavilion.
+  // The blue-circled outer rooms move by one complete pavilion width to
+  // make room for an identical second red-circled section on their left.
   for(const i of [0,2,3])eastBlocks[i][0]+=EAST_SHIFT;
   eastBlocks[0][0]+=EXTRA_BAY/2;eastBlocks[0][2]+=EXTRA_BAY;
   for(const i of [5,6,7])eastBlocks[i][0]+=OUTER_SHIFT;
+  const duplicatePavilion=[...eastBlocks[0]];
+  duplicatePavilion[0]+=EAST_PAVILION_WIDTH;
+  // The marked range beside the square projection has two window storeys.
+  duplicatePavilion[4]-=3.4;
+  // Ground-floor passage continues through the shallow room at the rear.
+  const courtyardPassage={x:76,width:7.1,height:5.8};
+  duplicatePavilion.push(courtyardPassage);
+  eastBlocks[7].push(courtyardPassage);
   const blocks=[
     [EAST_SHIFT/2,12,76+EAST_SHIFT,10,12.8],[0,-9,10,32,11.5],
-    ...westBlocks,...eastBlocks,
+    ...westBlocks,...eastBlocks,duplicatePavilion,
     // Yellow-shaded addition: long outer range and a stepped rear return.
     // Set the return back and towards the outer wing, leaving the rear-left
     // corner open beside the inset arm (which ends at x=37.5, z=-35.5).
     [59+OUTER_SHIFT,-14,10,48,9.3],[61+OUTER_SHIFT,12,10,8,9.3],
-    // Duplicate the red-bay section beside the original, creating a full
-    // extra window row before the blue outer range.
-    [48.5+EAST_SHIFT,-3,6,8,7.2],
     [53.5+OUTER_SHIFT,-38,21,10,9.3],[53.5+OUTER_SHIFT,-44,17,4,9.3]
   ];
   function hipRoof(x,z,w,d,y,rise){
@@ -101,16 +109,36 @@ export function createEscapeExterior(THREE,aspect){
     box(cream,x+nx*.18,y-1.12,z+nz*.18,1.7,.16,.33,rotation);
     box(cream,x+nx*.17,y+1.16,z+nz*.17,1.65,.19,.23,rotation);
   }
-  function block(x,z,w,d,h){
-    mesh(worldUV(new THREE.BoxGeometry(w,h-2,d)),brick,x,(h+2)/2,z,true);
-    box(cream,x,1,z,w,2,d);
-    for(const y of [2.1,h-.12])box(cream,x,y,z,w+.23,.22,d+.23);
+  function block(x,z,w,d,h,passage=null){
+    const base=passage?passage.height:2;
+    const body=mesh(worldUV(new THREE.BoxGeometry(w,h-base,d)),brick,x,(h+base)/2,z,true);
+    const lowerRanges=passage?[[x-w/2,Math.max(x-w/2,passage.x-passage.width/2)],[Math.min(x+w/2,passage.x+passage.width/2),x+w/2]]:[[x-w/2,x+w/2]];
+    for(const [left,right] of lowerRanges){
+      if(right<=left)continue;
+      const middle=(left+right)/2,width=right-left;
+      box(cream,middle,1,z,width,2,d);box(cream,middle,2.1,z,width+.23,.22,d+.23);
+      if(passage)mesh(worldUV(new THREE.BoxGeometry(width,base-2,d)),brick,middle,(base+2)/2,z,true);
+    }
+    box(cream,x,h-.12,z,w+.23,.22,d+.23);
+    if(passage){
+      const left=Math.max(x-w/2,passage.x-passage.width/2),right=Math.min(x+w/2,passage.x+passage.width/2);
+      // Visible lintel/soffit above the opening, with no foundation across it.
+      box(stone,(left+right)/2,base+.1,z,right-left,.2,d+.15);
+      body.name='East courtyard bridge';
+    }
     box(stone,x,h+.12,z,w+.48,.22,d+.48);hipRoof(x,z,w,d,h+.23,Math.min(3.8,Math.min(w,d)*.3));
     for(const side of [-1,1]){
-      for(let px=-w/2+2.4;px<w/2-1.5;px+=3.55)for(let y=3.8;y<h-1;y+=3.4)window(x+px,y,z+side*(d/2+.04),side<0?Math.PI:0);
-      for(let pz=-d/2+2.5;pz<d/2-1.5;pz+=3.55)for(let y=3.8;y<h-1;y+=3.4)window(x+side*(w/2+.04),y,z+pz,side*Math.PI/2);
+      for(let px=-w/2+2.4;px<w/2-1.5;px+=3.55)for(let y=3.8;y<h-1;y+=3.4){
+        if(passage&&y<base&&Math.abs(x+px-passage.x)<passage.width/2+.9)continue;
+        window(x+px,y,z+side*(d/2+.04),side<0?Math.PI:0);
+      }
+      for(let pz=-d/2+2.5;pz<d/2-1.5;pz+=3.55)for(let y=3.8;y<h-1;y+=3.4){
+        if(passage&&y<base&&Math.abs(x+side*w/2-passage.x)<passage.width/2+.2)continue;
+        window(x+side*(w/2+.04),y,z+pz,side*Math.PI/2);
+      }
     }
     if(w>13)for(const side of [-1,1]){mesh(worldUV(new THREE.BoxGeometry(.85,2.1,1.3)),brick,x+side*(w*.32),h+2.6,z,true);box(stone,x+side*w*.32,h+3.69,z,1.1,.15,1.5);}
+    return body;
   }
   for(const b of blocks)block(...b);
   // The pediment and columned red doorway identify the central 1829 entrance.
@@ -136,18 +164,24 @@ export function createEscapeExterior(THREE,aspect){
   }
   box(cream,0,6.7,21.2,5.6,.6,4.0);box(stone,0,7.08,21.2,6,.15,4.3);
   for(let i=0;i<6;i++)box(stone,0,(6-i)*.15,23.7+i*.42,3.7,(6-i)*.3,.44);
-  // Faceted bays at the two end blocks, with roof caps and pale string courses.
-  for(const x of [-46,46+EAST_SHIFT]){
-    mesh(new THREE.CylinderGeometry(3.15,3.15,13.2,8),brick,x,7.6,19.0,true);
+  // The original curved bays remain at the west and east pavilions.
+  for(const [name,x] of [['West curved bay',-46],['East curved bay',46+EAST_SHIFT]]){
+    mesh(new THREE.CylinderGeometry(3.15,3.15,13.2,8),brick,x,7.6,19.0,true).name=name;
     for(const y of [1.2,5.1,8.8,14.3])mesh(new THREE.CylinderGeometry(3.25,3.25,.23,8),cream,x,y,19);
     mesh(new THREE.ConeGeometry(3.55,2.8,8),roof,x,15.8,19,true);
     for(const y of [3.4,6.9,10.4])window(x,y,22.04);
   }
+  // Replace the added round bay with a square projection on the blue-marked
+  // window section, to its left. Its face stands 5.5 units beyond the facade.
+  const squareX=65.5,squareZ=20.75,squareWidth=8.5;
+  block(squareX,squareZ,squareWidth,squareWidth,14.3).name='East square projecting bay';
+  for(const y of [5.1,8.8])box(cream,squareX,y,squareZ,squareWidth+.23,.22,squareWidth+.23);
   // Open rear approaches connect the gaps between the arms to the back road.
   for(const x of [-23,23]){box(asphalt,x,.18,-20,32,.1,45);box(grass,x<0?-17:x-6,.26,-9,9,.1,11);}
   for(const [x,w] of [[-64,17],[69+OUTER_SHIFT,7]]){box(asphalt,x,.17,12,w,.12,62);box(path,x,.16,44,w,.12,2);}
   box(asphalt,45+OUTER_SHIFT/2,.18,-12,17+OUTER_SHIFT,.12,39);
   box(asphalt,40,.18,-36,7,.12,18);
+  box(path,courtyardPassage.x,.2,13,courtyardPassage.width,.1,34);
   box(asphalt,0,.15,-62,106,.12,23);
   const carColors=[material(0xc1c6c4),material(0x3e5363),material(0x713c37),material(0x263338)];
   function car(x,z,rotation=0){const mat=carColors[Math.floor(random()*carColors.length)];box(dark,x,.43,z,1.9,.45,4.0,rotation);box(mat,x,.77,z,1.85,.6,4.0,rotation);box(glass,x,1.23,z,1.55,.47,2.15,rotation);box(mat,x,1.5,z,1.59,.10,1.9,rotation);}

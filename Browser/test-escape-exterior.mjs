@@ -14,12 +14,21 @@ assert(towerBounds.min.x>106&&towerBounds.max.z<-84,'tower must occupy the clear
 assert(exterior.mast.children.length>150,'mast must contain real lattice geometry');
 const dragons=exterior.model.getObjectByName('Blue dragons and central coat of arms');
 assert.equal(dragons.geometry.attributes.uv.count,3,'heraldic photo must map onto the triangular pediment');
+const originalBay=exterior.model.getObjectByName('East curved bay');
+const squareBay=exterior.model.getObjectByName('East square projecting bay');
+assert(originalBay&&squareBay,'right frontage must retain the original curved bay and add a square projection');
+assert.equal(exterior.model.getObjectByName('East curved bay duplicate'),undefined,'the added round bay must be removed');
+const bayBounds=new THREE.Box3().setFromObject(squareBay),baySize=bayBounds.getSize(new THREE.Vector3());
+assert.equal(squareBay.geometry.type,'BoxGeometry','replacement has flat walls and square corners');
+assert.equal(baySize.x,baySize.z,'replacement footprint is square');
+assert(bayBounds.max.z>24&&bayBounds.max.y>=14.3,'square bay projects outward at full three-storey height');
+assert(bayBounds.min.x>originalBay.position.x+3.15&&bayBounds.max.x<72.65,'projection occupies the blue-marked section left of the removed round bay');
 for(const aspect of [16/9,4/3,9/16])for(const seconds of [0,1,1.75,2.5]){
   const shot=sampleArrival(seconds,{aspect}),camera=exterior.camera;
   camera.aspect=aspect;camera.updateProjectionMatrix();camera.position.set(...shot.position);camera.lookAt(...shot.target);camera.updateMatrixWorld(true);
   const door=new THREE.Vector3(0,3.5,19.9).project(camera);
   assert(Math.abs(door.x)<1e-10&&Math.abs(door.y)<1e-10,'front door stays centred throughout the rush');
-  if(seconds===0)for(const x of [-54,54])for(const z of [-35,40]){
+  if(seconds===0)for(const x of [-61,97])for(const z of [-46,45]){
     const p=new THREE.Vector3(x,15,z).project(camera);
     assert(Math.abs(p.x)<.95&&Math.abs(p.y)<.95,'arrival initially frames the whole building');
   }
@@ -34,7 +43,7 @@ for(const x of [-23,23])for(const z of [-17,-26,-30,-34,-40]){
 }
 // The corrected east wing and L-shaped addition must have continuous roofs,
 // while the parking court inside the addition remains uncovered.
-for(const [x,z] of [[31,-20],[42,40],[70,-25],[70,0],[64,-38],[64,-44],[72,12]]){
+for(const [x,z] of [[31,-20],[42,40],[53.1,12],[72.65,12],[89.2,-25],[89.2,0],[83.7,-38],[83.7,-44],[91.2,12]]){
   ray.set(new THREE.Vector3(x,80,z),new THREE.Vector3(0,-1,0));
   assert(ray.intersectObject(exterior.model,true)[0].point.y>8,'corrected east footprint must contain roof geometry');
 }
@@ -56,7 +65,7 @@ for(const aspect of [16/9,4/3,9/16])for(const seconds of [0,5,10]){
     const p=new THREE.Vector3(ESCAPE_WATER_TOWER.x,y,ESCAPE_WATER_TOWER.z).project(camera);
     assert(p.x>0&&Math.abs(p.x)<.95&&Math.abs(p.y)<.95,'water tower must stay visible on the right throughout the pan');
   }
-  for(const x of [-61,66])for(const z of [-44,45]){
+  for(const x of [-61,97])for(const z of [-46,45]){
     const p=new THREE.Vector3(x,15,z).project(camera);
     assert(Math.abs(p.x)<.95&&Math.abs(p.y)<.95,'building must stay in frame throughout the pan');
   }
