@@ -1,17 +1,18 @@
-// Seconds: fast approach and fade out 0–1.5, reception reveal 1.5–2.
-export const ARRIVAL_TIMING = Object.freeze({approach:1.5, blackout:1.5, duration:2, fade:.5});
+// Seconds: hold 0–1, fast approach and fade out 1–2.5, reception reveal 2.5–3.
+export const ARRIVAL_TIMING = Object.freeze({delay:1, approach:1.5, blackout:2.5, duration:3, fade:.5});
 const clamp=v=>Math.max(0,Math.min(1,v));
 const mix=(a,b,t)=>a+(b-a)*t;
 
 export function sampleArrival(seconds,{reducedMotion=false,aspect=16/9}={}){
-  const t=Math.max(0,seconds),travel=reducedMotion?0:clamp(t/ARRIVAL_TIMING.approach);
+  const t=Math.max(0,seconds),approachTime=Math.max(0,t-ARRIVAL_TIMING.delay);
+  const travel=reducedMotion?0:clamp(approachTime/ARRIVAL_TIMING.approach);
   // Rush from the aerial view toward the red front door at (0, 3.5, 19.9).
   // Stop outside the portico so the camera never passes through its roof.
   const distance=193*Math.max(1,Math.min(2.8,1.5/aspect));
   return {
     position:[mix(Math.sin(.12)*distance,0,travel),mix(116+(distance-193)*.55,3.5,travel),mix(Math.cos(.12)*distance,25,travel)],
     target:[0,3.5,19.9],
-    opacity:t<ARRIVAL_TIMING.blackout?clamp(t/ARRIVAL_TIMING.blackout):clamp((ARRIVAL_TIMING.duration-t)/ARRIVAL_TIMING.fade),
+    opacity:t<ARRIVAL_TIMING.blackout?clamp(approachTime/ARRIVAL_TIMING.approach):clamp((ARRIVAL_TIMING.duration-t)/ARRIVAL_TIMING.fade),
     inside:t>=ARRIVAL_TIMING.blackout,done:t>=ARRIVAL_TIMING.duration
   };
 }

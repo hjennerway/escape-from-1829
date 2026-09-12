@@ -45,7 +45,7 @@ vm.createContext(sandbox);
 vm.runInContext(source+`\nglobalThis.test={finish,escapeCutscene,start,update,animate,resetPositions,showFloor,player,keys,get escapeExterior(){return escapeExterior;},get lastRender(){return renderer.lastRender;},get arrival(){return arrivalCutscene;},get elapsed(){return elapsed;},get enemies(){return enemies;},get groups(){return floorGroups;},get artPanels(){return artPanels;},get artViewing(){return artViewing;},openArtViewer,closeArtViewer,get ready(){return ready;},get state(){return state;},get camera(){return camera;},setElapsed(v){elapsed=v;},setAudio(){audioOn=false;},setFrameDt(v){clock.getDelta=()=>v;}};`,sandbox);
 await new Promise(r=>setImmediate(r));
 const t=sandbox.test;assert(t.ready,'init must complete');t.setAudio();
-function startPlaying(){t.start();t.arrival.update(2);assert.equal(t.state,'play');}
+function startPlaying(){t.start();t.arrival.update(3);assert.equal(t.state,'play');}
 
 // Exercise the actual arrival state and animation loop with deliberately slow frames.
 t.start();assert.equal(t.state,'arrival');assert.equal(elements.get('hud').hidden,true);
@@ -53,6 +53,8 @@ const arrivalEnemies=t.enemies.map(e=>({x:e.x,z:e.z,floor:e.floor})),arrivalPlay
 t.keys.add('KeyW');t.update(2);assert.deepEqual({...t.player},arrivalPlayer);assert.equal(t.elapsed,0);
 t.setFrameDt(.25);
 assert.equal(elements.get('arrivalFade').style.opacity,'0');
+for(let i=0;i<4;i++)t.animate();
+assert.equal(t.state,'arrival');assert.equal(elements.get('arrivalFade').style.opacity,'0');
 for(let i=0;i<3;i++)t.animate();
 assert.equal(t.state,'arrival');assert.equal(elements.get('arrivalFade').style.opacity,'0.5');
 for(let i=0;i<2;i++)t.animate();
@@ -65,11 +67,12 @@ assert.equal(elements.get('hud').hidden,false);assert.equal(t.elapsed,0);assert.
 assert.deepEqual(t.enemies.map(e=>({x:e.x,z:e.z,floor:e.floor})),arrivalEnemies);
 t.setFrameDt(.04);t.animate();assert.equal(t.elapsed,.04);
 assert(sampleArrival(0).position[1]>100,'intro establishes the whole estate from above');
-const startShot=sampleArrival(0),midShot=sampleArrival(.75),doorShot=sampleArrival(1.5);
+const startShot=sampleArrival(0),midShot=sampleArrival(1.75),doorShot=sampleArrival(2.5);
+for(const seconds of [.5,1])assert.deepEqual(sampleArrival(seconds),startShot,'camera and fade hold for one second');
 assert.deepEqual(doorShot.position,[0,3.5,25],'approach reaches the front entrance at blackout');
 for(let axis=0;axis<3;axis++)assert(Math.abs(midShot.position[axis]-(startShot.position[axis]+doorShot.position[axis])/2)<1e-10,'camera moves at speed throughout the fade');
 assert.deepEqual(doorShot.target,[0,3.5,19.9]);
-assert.equal(sampleArrival(1.49).inside,false);
+assert.equal(sampleArrival(2.49).inside,false);
 assert.equal(doorShot.opacity,1);assert.equal(doorShot.inside,true);
 assert.deepEqual(sampleArrival(0,{reducedMotion:true}).position,sampleArrival(3,{reducedMotion:true}).position);
 assert(sampleArrival(0,{aspect:.5}).position[2]>sampleArrival(0).position[2]);
@@ -77,7 +80,7 @@ let enters=0,completes=0;
 const arrival=createArrivalCutscene({camera:new Object3D(),overlay:element('testArrival'),onEnter:()=>enters++,onComplete:()=>completes++});
 arrival.start();arrival.update(5);arrival.update(5);assert.equal(enters,1);assert.equal(completes,1);
 arrival.start();arrival.update(.75);arrival.reset();assert.equal(arrival.active,false);assert.equal(element('testArrival').hidden,true);
-console.log('PASS: two-second arrival at low FPS, fast approach with 1.5-second fade out and half-second reveal, reception handoff, frozen input/NPCs/timer, clean restart, reduced motion and portrait framing.');
+console.log('PASS: three-second arrival at low FPS, one-second hold, fast approach with 1.5-second fade out and half-second reveal, reception handoff, frozen input/NPCs/timer, clean restart, reduced motion and portrait framing.');
 startPlaying();
 assert.equal(t.player.floor,0);assert.equal(t.groups.length,2);
 assert(t.artPanels.length>=16,'supplied artwork must be mounted throughout both floors');

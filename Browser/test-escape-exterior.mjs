@@ -10,7 +10,7 @@ exterior.scene.updateMatrixWorld(true);
 assert(exterior.mast.children.length>150,'mast must contain real lattice geometry');
 const dragons=exterior.model.getObjectByName('Blue dragons and central coat of arms');
 assert.equal(dragons.geometry.attributes.uv.count,3,'heraldic photo must map onto the triangular pediment');
-for(const aspect of [16/9,4/3,9/16])for(const seconds of [0,.75,1.5]){
+for(const aspect of [16/9,4/3,9/16])for(const seconds of [0,1,1.75,2.5]){
   const shot=sampleArrival(seconds,{aspect}),camera=exterior.camera;
   camera.aspect=aspect;camera.updateProjectionMatrix();camera.position.set(...shot.position);camera.lookAt(...shot.target);camera.updateMatrixWorld(true);
   const door=new THREE.Vector3(0,3.5,19.9).project(camera);
