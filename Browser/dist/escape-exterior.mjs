@@ -45,10 +45,17 @@ export function createEscapeExterior(THREE,aspect){
   // No transverse rear ranges enclosing the gaps; reception remains front-centre.
   const blocks=[
     [0,12,76,10,12.8],[-46,12,16,15,14.3],[46,12,16,15,14.3],
-    [-46,-10,12,30,11.3],[46,-10,12,30,11.3],
+    [-31,-10,12,30,11.3],[46,-10,12,30,11.3],
     [0,-9,10,32,11.5],
-    [-34,29,11,22,8.6],[34,29,11,22,8.6],
-    [51,-30,15,11,9.3],[-50,-30,13,11,9.3]
+    // A is the inset rear arm; B is slightly outboard, both inside the
+    // western end pavilion. B has a narrow root and a wider stepped foot.
+    [-36.5,23,9,14,8.6],[-35,35,12,16,8.6],[34,29,11,22,8.6],
+    [51,-30,15,11,9.3],[-31,-30,13,11,9.3],
+    // Rooms tracing the irregular western silhouette: an outer end room,
+    // a shorter front nib, and small rooms beside A's root. The curved bay
+    // remains exposed between the outer rooms and B.
+    [-56,13,9,16,9.3],[-54.5,23,6,6,7.2],
+    [-40,-3,6,8,7.2],[-22.5,3,6,6,7.2]
   ];
   function hipRoof(x,z,w,d,y,rise){
     const a=w/2+.4,b=d/2+.4,inset=Math.min(a,b)*.83;
@@ -112,7 +119,7 @@ export function createEscapeExterior(THREE,aspect){
     for(const y of [3.4,6.9,10.4])window(x,y,22.04);
   }
   // Open rear approaches connect the gaps between the arms to the back road.
-  for(const x of [-23,23]){box(asphalt,x,.18,-20,32,.1,45);box(grass,x-6,.26,-9,9,.1,11);}
+  for(const x of [-23,23]){box(asphalt,x,.18,-20,32,.1,45);box(grass,x<0?-17:x-6,.26,-9,9,.1,11);}
   for(const x of [-64,64]){box(asphalt,x,.17,12,17,.12,62);box(path,x,.16,44,17,.12,2);}
   box(asphalt,0,.15,-62,106,.12,23);
   const carColors=[material(0xc1c6c4),material(0x3e5363),material(0x713c37),material(0x263338)];
@@ -127,7 +134,7 @@ export function createEscapeExterior(THREE,aspect){
   const crowns=leaves.map(mat=>({mat,items:[]}));
   function tree(x,z,size=1){mesh(new THREE.CylinderGeometry(.18*size,.3*size,4.5*size,6),bark,x,2.25*size,z);
     for(let i=0;i<5;i++)crowns[i%3].items.push({x:x+(random()-.5)*3*size,y:(4.5+random()*2)*size,z:z+(random()-.5)*3*size,s:(1.7+random())*size});}
-  for(const [x,z,s] of [[-60,38,1.4],[-53,43,1.1],[-20,33,1.2],[17,35,1.3],[49,40,1.2],[-65,-35,1.1],[63,-38,1.25],[-23,-9,.85],[18,-9,.9]])tree(x,z,s);
+  for(const [x,z,s] of [[-51,35,1.4],[-47,43,1.1],[-20,33,1.2],[17,35,1.3],[49,40,1.2],[-65,-35,1.1],[63,-38,1.25],[-17,-9,.85],[18,-9,.9]])tree(x,z,s);
   for(let i=0;i<24;i++)tree(-100+i*9,-84-(i%3)*7,1+random()*.6);
   for(let i=0;i<9;i++){tree(-90,-44+i*12,1.1);tree(92,-47+i*12,1.1);}
   // Low surrounding blocks establish the campus without reproducing the sale map.
