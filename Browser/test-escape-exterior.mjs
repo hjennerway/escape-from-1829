@@ -3,10 +3,21 @@ import assert from 'node:assert/strict';
 import * as THREE from './dist/vendor/three.module.js';
 import {createEscapeExterior,ESCAPE_MAST} from './dist/escape-exterior.mjs';
 import {sampleEscape} from './dist/escape-cutscene.mjs';
+import {sampleArrival} from './dist/arrival-cutscene.mjs';
 globalThis.document={createElement:()=>({width:0,height:0,getContext:()=>({fillRect(){}})})};
 const exterior=createEscapeExterior(THREE,16/9);
 exterior.scene.updateMatrixWorld(true);
 assert(exterior.mast.children.length>150,'mast must contain real lattice geometry');
+const dragons=exterior.model.getObjectByName('Blue dragons and central coat of arms');
+assert.equal(dragons.geometry.attributes.uv.count,3,'heraldic photo must map onto the triangular pediment');
+for(const aspect of [16/9,4/3,9/16])for(const seconds of [0,1.5,3.5]){
+  const shot=sampleArrival(seconds,{aspect}),camera=exterior.camera;
+  camera.aspect=aspect;camera.updateProjectionMatrix();camera.position.set(...shot.position);camera.lookAt(...shot.target);camera.updateMatrixWorld(true);
+  for(const x of [-54,54])for(const z of [-35,40]){
+    const p=new THREE.Vector3(x,15,z).project(camera);
+    assert(Math.abs(p.x)<.95&&Math.abs(p.y)<.95,'arrival must frame the whole building');
+  }
+}
 const ray=new THREE.Raycaster(new THREE.Vector3(20,80,12),new THREE.Vector3(0,-1,0));
 const roof=ray.intersectObject(exterior.model,true)[0];
 assert(roof&&roof.point.y>12,'principal range must have a visible roof from above');

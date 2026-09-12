@@ -3,8 +3,7 @@ import {GLTFLoader} from 'https://cdn.jsdelivr.net/npm/three@0.160.1/examples/js
 import {path,walkable,visible,nearExit} from './core.mjs';
 import {buildArchitecture} from './architecture.mjs';
 import {createEscapeCutscene} from './escape-cutscene.mjs';
-import {createBuildingExterior} from './exterior.mjs';
-import {createEscapeExterior} from './escape-exterior.mjs';
+import {createEscapeExterior,loadEscapeFrontage} from './escape-exterior.mjs';
 import {createArrivalCutscene} from './arrival-cutscene.mjs';
 import {FLOOR_HEIGHT,makeFloors,nearStair,changeFloor,routeBetweenFloors} from './floors.mjs';
 const $=id=>document.getElementById(id),canvas=$('game');
@@ -162,8 +161,9 @@ async function init(){
   floorGroups.push(groupSince(upperSnapshot,FLOOR_HEIGHT));layout=floors[0];floorGroups[1].visible=false;
   torch=new THREE.SpotLight(0xffe4af,24,30,.50,.55,1.2);torchTarget=new THREE.Object3D();scene.add(torch,torchTarget);torch.target=torchTarget;
   enemies=[['Sylvia',8,9],['Security',32,23],['Deva asylum ghost',20,21]].map(([name,x,z],type)=>({name,type,floor:0,spawn:{x:x*2.5,z:z*2.5,floor:0},x:x*2.5,z:z*2.5,mesh:enemyModel(type),path:[],memory:0,rethink:0,route:0,target:null}));
-  exterior=await createBuildingExterior(THREE,innerWidth/innerHeight);
   escapeExterior=createEscapeExterior(THREE,innerWidth/innerHeight);
+  await loadEscapeFrontage(THREE,escapeExterior);
+  exterior=escapeExterior;
   if(renderer.shadowMap){renderer.shadowMap.enabled=true;renderer.shadowMap.type=THREE.PCFSoftShadowMap;}
   arrivalCutscene=createArrivalCutscene({camera:exterior.camera,overlay:$('arrivalFade'),
     reducedMotion:matchMedia('(prefers-reduced-motion: reduce)').matches,

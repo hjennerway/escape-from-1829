@@ -5,12 +5,14 @@ const smooth=v=>{const t=clamp(v);return t*t*(3-2*t);};
 const mix=(a,b,t)=>a+(b-a)*t;
 
 export function sampleArrival(seconds,{reducedMotion=false,aspect=16/9}={}){
-  const t=Math.max(0,seconds),travel=smooth(t/3.5),tilt=smooth(t/1.25),door=smooth((t-1.25)/1.75);
-  // Pull back in portrait so the central block and its pediment still fit.
-  const distance=Math.max(1,Math.min(1.8,1/aspect));
+  const t=Math.max(0,seconds),travel=reducedMotion?0:smooth(t/3.5);
+  // Establish the whole estate from the supplied aerial viewpoint, then move
+  // gently toward its front. Preserve the existing blackout/reception timing.
+  const distance=193*Math.max(1,Math.min(2.8,1.5/aspect));
+  const angle=mix(.12,.04,travel),radius=distance*mix(1,.94,travel);
   return {
-    position:reducedMotion?[0,2.5,31*distance]:[mix(-2.8,0,smooth(t/2.6)),mix(2,3.6,travel),mix(31*distance,1.5,travel)],
-    target:reducedMotion?[0,7,0]:[0,mix(mix(5.6,12.8,tilt),3.65,door),0],
+    position:[Math.sin(angle)*radius,116+(distance-193)*.55-travel*4,Math.cos(angle)*radius],
+    target:[0,1,-7],
     opacity:t<3?0:t<3.5?clamp((t-3)/.5):clamp((4-t)/.5),
     inside:t>=3.5,done:t>=4
   };

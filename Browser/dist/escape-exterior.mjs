@@ -2,6 +2,14 @@
 // Front road/reception is +Z; the corrected mast position is rear-left (-X, -Z).
 import {createChapel} from './chapel.mjs';
 export const ESCAPE_MAST = Object.freeze({x:-69,z:-62,height:42});
+// Map the supplied photograph directly onto the triangular tympanum. The UVs
+// select just the relief, leaving the surrounding sky and building out of view.
+export async function loadEscapeFrontage(THREE,exterior){
+  const photo=await new THREE.TextureLoader().loadAsync('./exterior/1829front.webp');
+  photo.colorSpace=THREE.SRGBColorSpace;photo.anisotropy=8;
+  const relief=exterior.model.getObjectByName('Blue dragons and central coat of arms');
+  relief.material.map=photo;relief.material.color.set(0xffffff);relief.material.needsUpdate=true;
+}
 export function createEscapeExterior(THREE,aspect){
   const scene=new THREE.Scene();scene.background=new THREE.Color(0xb5c7cd);
   scene.fog=new THREE.FogExp2(0xb5c7cd,.0019);
@@ -74,14 +82,26 @@ export function createEscapeExterior(THREE,aspect){
   }
   for(const b of blocks)block(...b);
   // The pediment and columned red doorway identify the central 1829 entrance.
-  block(0,13.2,14.2,12.8,14.6);
+  mesh(worldUV(new THREE.BoxGeometry(14.2,12.6,12.8)),brick,0,8.3,13.2,true);
+  box(stone,0,1,13.2,14.2,2,12.8);
+  hipRoof(0,13.2,14.2,12.8,14.65,2.9);
+  for(const y of [2.1,7.1,10.7,14.5])box(cream,0,y,19.68,14.5,.24,.32);
+  for(const x of [-4,0,4])for(const y of [4.3,8.9,12.4])if(x!==0||y!==4.3)window(x,y,19.68);
   const triangle=new THREE.BufferGeometry();triangle.setAttribute('position',new THREE.Float32BufferAttribute([-7.5,0,0,7.5,0,0,0,3.1,0],3));triangle.computeVertexNormals();mesh(triangle,cream,0,14.65,19.72);
-  const relief=triangle.clone();mesh(relief,material(0x477180),0,14.72,19.75).scale.set(.84,.8,1);
-  mesh(new THREE.SphereGeometry(.65,8,6),material(0xab9261),0,15.85,19.86).scale.set(.65,1.1,.18);
+  const relief=triangle.clone();
+  relief.setAttribute('uv',new THREE.Float32BufferAttribute([29/333,1-89/499,305/333,1-89/499,167/333,1-29/499],2));
+  const dragons=mesh(relief,material(0x477180),0,14.72,19.78);dragons.scale.set(.94,.91,1);dragons.name='Blue dragons and central coat of arms';
   for(const side of [-1,1]){const beam=mesh(new THREE.BoxGeometry(8.2,.22,.4),cream,side*3.75,16.2,19.82);beam.rotation.z=-side*Math.atan2(3.1,7.5);}
   box(cream,0,14.65,19.8,15.3,.25,.5);
-  box(stone,0,.9,21.4,5.6,1.8,4.3);box(red,0,3.5,19.8,1.9,3.2,.2);
-  for(const x of [-2.1,2.1]){mesh(new THREE.CylinderGeometry(.23,.3,4.6,12),cream,x,4.1,22.7,true);box(cream,x,6.45,22.7,.8,.3,.8);}
+  box(stone,0,.9,21.4,5.6,1.8,4.3);box(red,0,3.5,19.9,1.9,3.2,.2);
+  for(const x of [-.46,.46])for(const y of [2.45,3.45,4.45])box(material(0x581c23),x,y,20.02,.65,.72,.06);
+  box(glass,0,5.55,19.96,1.9,.65,.12);
+  for(const x of [-1.1,1.1])box(cream,x,3.9,20.03,.18,4.2,.23);
+  box(cream,0,5.99,20.03,2.4,.2,.23);
+  for(const x of [-2.1,2.1])for(const z of [20.25,22.7]){
+    mesh(new THREE.CylinderGeometry(.23,.3,4.6,12),cream,x,4.1,z,true);box(cream,x,6.45,z,.8,.3,.8);box(cream,x,1.91,z,.75,.25,.75);
+    for(const side of [-1,1]){const scroll=mesh(new THREE.CylinderGeometry(.14,.14,.22,12),cream,x+side*.27,6.25,z+.18);scroll.rotation.x=Math.PI/2;}
+  }
   box(cream,0,6.7,21.2,5.6,.6,4.0);box(stone,0,7.08,21.2,6,.15,4.3);
   for(let i=0;i<6;i++)box(stone,0,(6-i)*.15,23.7+i*.42,3.7,(6-i)*.3,.44);
   // Faceted bays at the two end blocks, with roof caps and pale string courses.

@@ -36,7 +36,7 @@ const layout=JSON.parse(await readFile(new URL('./dist/layout.json',import.meta.
 const source=(await readFile(new URL('./dist/game.mjs',import.meta.url),'utf8')).replace(/^import .*;\r?\n/gm,'');
 const sandbox={...core,...floors,buildArchitecture,createEscapeCutscene,createArrivalCutscene,
  createEscapeExterior:()=>({scene:new Object3D(),camera:new Object3D()}),
- createBuildingExterior:async()=>({scene:new Object3D(),camera:new Object3D()}),THREE,GLTFLoader:class {},
+ loadEscapeFrontage:async()=>{},THREE,GLTFLoader:class {},
  document:{getElementById:element,createElement:()=>element('canvas'+elements.size),querySelectorAll:()=>[],body:element('body'),addEventListener(){},exitPointerLock(){}},
  window:{AudioContext:class {resume(){return Promise.resolve();}}},Image:class {},
  fetch:async()=>({ok:true,json:async()=>layout}),matchMedia:()=>({matches:false}),
@@ -63,9 +63,9 @@ t.animate();assert.equal(t.state,'play');assert.equal(elements.get('arrivalFade'
 assert.equal(elements.get('hud').hidden,false);assert.equal(t.elapsed,0);assert.equal(t.keys.size,0);
 assert.deepEqual(t.enemies.map(e=>({x:e.x,z:e.z,floor:e.floor})),arrivalEnemies);
 t.setFrameDt(.04);t.animate();assert.equal(t.elapsed,.04);
-assert(sampleArrival(1.25).target[1]>sampleArrival(0).target[1],'camera pans up');
-assert(sampleArrival(3).position[2]<sampleArrival(1.25).position[2],'camera continues to the door');
-assert(Math.abs(sampleArrival(3).target[1]-3.65)<1e-10);
+assert(sampleArrival(0).position[1]>100,'intro establishes the whole estate from above');
+assert(sampleArrival(3).position[2]<sampleArrival(1.25).position[2],'aerial camera gently approaches');
+assert.deepEqual(sampleArrival(3).target,[0,1,-7]);
 assert.deepEqual(sampleArrival(0,{reducedMotion:true}).position,sampleArrival(3,{reducedMotion:true}).position);
 assert(sampleArrival(0,{aspect:.5}).position[2]>sampleArrival(0).position[2]);
 let enters=0,completes=0;
