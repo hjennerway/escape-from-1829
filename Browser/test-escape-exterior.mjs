@@ -10,12 +10,14 @@ exterior.scene.updateMatrixWorld(true);
 assert(exterior.mast.children.length>150,'mast must contain real lattice geometry');
 const dragons=exterior.model.getObjectByName('Blue dragons and central coat of arms');
 assert.equal(dragons.geometry.attributes.uv.count,3,'heraldic photo must map onto the triangular pediment');
-for(const aspect of [16/9,4/3,9/16])for(const seconds of [0,1.5,3.5]){
+for(const aspect of [16/9,4/3,9/16])for(const seconds of [0,.75,1.5]){
   const shot=sampleArrival(seconds,{aspect}),camera=exterior.camera;
   camera.aspect=aspect;camera.updateProjectionMatrix();camera.position.set(...shot.position);camera.lookAt(...shot.target);camera.updateMatrixWorld(true);
-  for(const x of [-54,54])for(const z of [-35,40]){
+  const door=new THREE.Vector3(0,3.5,19.9).project(camera);
+  assert(Math.abs(door.x)<1e-10&&Math.abs(door.y)<1e-10,'front door stays centred throughout the rush');
+  if(seconds===0)for(const x of [-54,54])for(const z of [-35,40]){
     const p=new THREE.Vector3(x,15,z).project(camera);
-    assert(Math.abs(p.x)<.95&&Math.abs(p.y)<.95,'arrival must frame the whole building');
+    assert(Math.abs(p.x)<.95&&Math.abs(p.y)<.95,'arrival initially frames the whole building');
   }
 }
 const ray=new THREE.Raycaster(new THREE.Vector3(20,80,12),new THREE.Vector3(0,-1,0));
