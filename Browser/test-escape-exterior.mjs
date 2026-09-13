@@ -39,8 +39,9 @@ const ray=new THREE.Raycaster(new THREE.Vector3(20,80,12),new THREE.Vector3(0,-1
 const roof=ray.intersectObject(exterior.model,true)[0];
 assert(roof&&roof.point.y>12,'principal range must have a visible roof from above');
 assert(roof.face.normal.y>0,'roof triangles must face the aerial camera');
-// The inner court now routes west of its raised garden and external stairs.
-for(const x of [-23,9])for(const z of [-17,-26,-30,-34,-40]){
+// The east court routes outside its garden; the mirrored west projection and
+// stairs leave a continuous route nearer the central arm.
+for(const x of [-11,9])for(const z of [-17,-26,-30,-34,-40]){
   // Pass outside the relocated central stair before turning beside the garden.
   ray.set(new THREE.Vector3(x===9&&z<=-34?11:x,80,z),new THREE.Vector3(0,-1,0));
   assert(ray.intersectObject(exterior.model,true)[0].point.y<1,'both W-shaped gaps must open through to the rear road');
@@ -126,14 +127,13 @@ for(const aspect of [16/9,4/3,9/16])for(const seconds of [0,5,10]){
     assert(Math.abs(p.x)<.95&&Math.abs(p.y)<.95,'building must stay in frame throughout the pan');
   }
 }
-// The western end and moved eastern stair section retain their ridge heights.
-// The eastern rear annex now has a separate, lower single-slope roof.
-for(const x of [-31,31]){
+// The eastern stair section retains its established ridge height.
+for(const x of [31]){
   const topAt=z=>{
     ray.set(new THREE.Vector3(x,80,z),new THREE.Vector3(0,-1,0));
     return ray.intersectObject(exterior.model,true)[0];
   };
-  const main=topAt(-10),end=topAt(x<0?-30:-27.5),slope=topAt(x<0?-34:-29.8);
+  const main=topAt(-10),end=topAt(-27.5),slope=topAt(-29.8);
   assert(Math.abs(end.point.y/main.point.y-2/3)<.001,'rear end ridge must be two-thirds of the adjoining wing ridge');
   assert(slope.point.y<end.point.y-.5,'roof must visibly fall from ridge to rear eaves');
   assert(slope.face.normal.y>0&&slope.face.normal.y<.99,'rear roof must have upward-facing pitched surfaces');
@@ -173,6 +173,37 @@ assert(ray.intersectObject(exterior.model,true)[0].object.name==='Inner court sl
 const innerProjection=new THREE.Box3().setFromObject(exterior.model.getObjectByName('Inner east tall rectangular projection'));
 assert(innerProjection.min.x<19&&Math.abs(innerProjection.max.x-25)<.001&&innerProjection.max.y>14,'enclosure must project from the wing at full height');
 assert(exterior.model.getObjectByName('Inner east stepped return'));
+// img15/img16: a reflected copy of the east inner details, with independently
+// observed outer windows and a glazed rear gallery below a single-pitch roof.
+const westProjection=new THREE.Box3().setFromObject(exterior.model.getObjectByName('West mirrored Inner east tall rectangular projection'));
+assert(Math.abs(westProjection.min.x+innerProjection.max.x)<.001&&Math.abs(westProjection.max.x+innerProjection.min.x)<.001,'west projection must reflect across Reception at x=0');
+assert.equal(westProjection.min.z,innerProjection.min.z);
+assert.equal(westProjection.max.y,innerProjection.max.y);
+const westOpenings=exterior.model.userData.westWingPhotoOpenings;
+assert.equal(westOpenings.filter(o=>o.face==='west-wing-outer').length,24,'eight aligned bays across basement and two upper floors');
+assert(!photoOpenings.some(o=>o.face==='west-long-wing'),'superseded west windows must not overlap the replacement');
+for(const o of westOpenings.filter(o=>o.face==='west-wing-outer'&&(o.y>2||o.z<-3))){
+  ray.set(new THREE.Vector3(-45,o.y,o.z),new THREE.Vector3(1,0,0));
+  const hit=ray.intersectObject(exterior.model,true)[0];
+  assert(hit.object.isInstancedMesh&&Math.abs(hit.point.x-o.x)<.2,'outer sashes must remain exposed on the stepped wall');
+}
+const westGallery=westOpenings.filter(o=>o.face==='west-wing-gallery');
+assert.equal(westGallery.filter(o=>o.z<-35).length,3,'rear gallery has three broad glazed bays');
+assert.equal(westGallery.filter(o=>o.x<-37).length,1,'gallery glazing wraps onto the outer side');
+for(const o of westGallery.filter(o=>o.z<-35)){
+  ray.set(new THREE.Vector3(o.x,o.y,-40),new THREE.Vector3(0,0,1));
+  assert(ray.intersectObject(exterior.model,true)[0].point.z<-35.7,'gallery glass must sit in front of its cream frame');
+}
+const westRoof=exterior.model.getObjectByName('West mirrored Inner court rear annex sloped roof');
+const westRoofHeights=[];
+for(const z of [-35,-31.2]){
+  ray.set(new THREE.Vector3(-31.13,80,z),new THREE.Vector3(0,-1,0));
+  const hit=ray.intersectObject(exterior.model,true)[0];
+  assert.equal(hit.object,westRoof,'rear annex must expose the reflected sloped roof');
+  assert(hit.face.normal.clone().transformDirection(hit.object.matrixWorld).y>.8,'reflected roof must face upward');
+  westRoofHeights.push(hit.point.y);
+}
+assert(westRoofHeights[1]-westRoofHeights[0]>1.3,'gallery roof must rise towards the taller wing');
 const innerEastOpenings=exterior.model.userData.innerEastPhotoOpenings;
 assert.equal(innerEastOpenings.filter(o=>o.face==='inner-east-projection-front').length,3,'plain enclosure front has one opening on each floor');
 for(const o of innerEastOpenings){
@@ -243,7 +274,7 @@ ray.set(new THREE.Vector3(0,80,6),new THREE.Vector3(0,-1,0));
 assert(ray.intersectObject(exterior.model,true)[0].point.y>8,'shortened two-storey centre must remain connected to the principal range');
 for(const [x,end] of [[0,centralRear],[-31,wingRear],[31,wingRear]]){
   ray.set(new THREE.Vector3(x,80,end+.5),new THREE.Vector3(0,-1,0));
-  assert(ray.intersectObject(exterior.model,true)[0].point.y>(x===31?5.8:8),'each marked section must reach its mapped rear extent, including the lowered east annex');
+  assert(ray.intersectObject(exterior.model,true)[0].point.y>(Math.abs(x)===31?5.8:8),'each marked section must reach its mapped rear extent, including the lowered east annex');
   ray.set(new THREE.Vector3(x,80,end-1),new THREE.Vector3(0,-1,0));
   assert(ray.intersectObject(exterior.model,true)[0].point.y<1,'rear ends must stop at their mapped extent');
 }

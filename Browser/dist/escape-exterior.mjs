@@ -112,7 +112,7 @@ export function createEscapeExterior(THREE,aspect){
     const faces=w>=d?[[0,1,5],[0,5,4],[1,2,5],[2,3,4],[2,4,5],[3,0,4]]:[[0,1,4],[1,2,5],[1,5,4],[2,3,5],[3,0,4],[3,4,5]];
     const verts=[...corners,...ridge],positions=[],uv=[];
     for(const face of faces)for(const i of [...face].reverse()){positions.push(...verts[i]);uv.push(verts[i][0]/3,(verts[i][2]+verts[i][1])/3);}
-    const g=new THREE.BufferGeometry();g.setAttribute('position',new THREE.Float32BufferAttribute(positions,3));g.setAttribute('uv',new THREE.Float32BufferAttribute(uv,2));g.computeVertexNormals();mesh(g,roof,x,y,z,true);
+    const g=new THREE.BufferGeometry();g.setAttribute('position',new THREE.Float32BufferAttribute(positions,3));g.setAttribute('uv',new THREE.Float32BufferAttribute(uv,2));g.computeVertexNormals();return mesh(g,roof,x,y,z,true);
   }
   function window(x,y,z,rotation=0){
     box(dark,x,y,z,1.42,2.12,.16,rotation);
@@ -168,6 +168,8 @@ export function createEscapeExterior(THREE,aspect){
   }
   const white=material(0xe1e3dc),photoBrick=material(0xb3a5a0,{map:bricks});
   for(const b of blocks){
+    // The west arm is rebuilt from the detailed east arm and img15/img16.
+    if(b[0]===-31&&[-10,-30].includes(b[1]))continue;
     if(innerCourtPhotoProfile(b[0],b[1])){
       const {join,front}=INNER_COURT_SIDE_PROFILE;
       hipRoof(b[0],(join+front)/2,b[2],front-join,REAR_END_HEIGHTS.east-REAR_END_ROOF_RISE,REAR_END_ROOF_RISE);

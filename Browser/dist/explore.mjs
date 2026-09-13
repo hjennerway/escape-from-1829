@@ -8,6 +8,7 @@ import {WEST_FRONT_PHOTO_VIEW} from './west-front-photo-detail.mjs';
 import {WEST_COURT_PHOTO_VIEW} from './west-court-photo-detail.mjs';
 import {centralCourtPhotoView} from './central-court-photo-detail.mjs';
 import {innerEastPhotoView} from './inner-east-elevation.mjs';
+import {WEST_WING_SIDE_VIEW,WEST_WING_END_VIEW} from './west-wing-photo-detail.mjs';
 import {INNER_COURT_PHOTO_VIEW} from './inner-court-photo-detail.mjs';
 const canvas=document.getElementById('game'),hint=document.getElementById('lookHint'),look=document.getElementById('look');
 try{
@@ -26,6 +27,8 @@ try{
   if(new URLSearchParams(location.search).get('view')==='rear-court-photo')walker.setView(REAR_COURT_PHOTO_VIEW);
   if(new URLSearchParams(location.search).get('view')==='inner-east-photo')walker.setView(innerEastPhotoView(exterior.camera.aspect));
   if(new URLSearchParams(location.search).get('view')==='central-court-photo')walker.setView(centralCourtPhotoView(exterior.camera.aspect));
+  if(new URLSearchParams(location.search).get('view')==='west-wing-side')walker.setView(WEST_WING_SIDE_VIEW);
+  if(new URLSearchParams(location.search).get('view')==='west-wing-end')walker.setView(WEST_WING_END_VIEW);
   let active=false,dragging=false,last=null;
   const movement=new Set(['KeyW','KeyA','KeyS','KeyD','ShiftLeft','ShiftRight']);
   function stop(){active=false;dragging=false;last=null;walker.keys.clear();hint.textContent='Click Start exploring to resume, or drag the view to look around.';look.textContent='START EXPLORING ↗';}

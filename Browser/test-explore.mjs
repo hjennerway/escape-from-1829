@@ -57,5 +57,13 @@ assert(exterior.camera.position.x<-45.4,'low glazed extension must block walking
 walk.setView({position:[10,1.8,-14.5],target:[28,1.8,-14.5]});
 walk.keys.add('KeyW');for(let i=0;i<40;i++)walk.update(.1);
 assert(exterior.camera.position.x>17.5&&exterior.camera.position.x<18.8,'new inner-east enclosure must block walking through its projecting front');
+walk.setView({position:[-10,1.8,-14.5],target:[-28,1.8,-14.5]});
+walk.keys.add('KeyW');for(let i=0;i<40;i++)walk.update(.1);
+assert(exterior.camera.position.x< -17.5&&exterior.camera.position.x> -18.8,'reflected west projection must have matching walking collisions');
+walkLeg([-11,-43],[-11,-7],72);
+walkLeg([-11,-7],[-11,-43],72);
+walk.setView({position:[-31,1.8,-45],target:[-31,1.8,-30]});
+walk.keys.add('KeyW');for(let i=0;i<40;i++)walk.update(.1);
+assert(exterior.camera.position.z< -35.5&&exterior.camera.position.z> -37,'glazed west annex must block walking at its rear wall');
 delete globalThis.document;
 console.log('PASS: exterior WASD, normalized diagonals, mouse-relative movement, pitch limits, building collisions, wall sliding, reset and stalled frames.');

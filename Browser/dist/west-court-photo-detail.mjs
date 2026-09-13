@@ -43,11 +43,7 @@ export function addWestCourtPhotoDetails(THREE,{model,box,mesh,worldUV,white,bri
   // are added here, while the new polygonal bay faces the rear court.
   for(const y of [2,6.5,11])for(const z of [8,12,16])sash('west-pavilion-east',-37.95,y,z,Math.PI/2,1.1,2.4);
 
-  // Long wing at the left of the photograph: narrow multi-pane sashes with
-  // continuous exposed brick beneath them. Its lowered rear end is retained.
-  for(const side of [-1,1])for(const y of [1.8,5.5,9.2])for(const z of [-22,-18.2,-14.4,-10.6,-6.8,-3,.8,3])
-    sash('west-long-wing',-31+side*6.05,y,z,side*Math.PI/2,1.02,2.3);
-  for(const y of [1.8,5.5,9.2])for(const x of [-34.5,-31,-27.5])sash('west-long-wing-end',x,y,5.05,0,1.02,2.3);
+  // The rearward arm now uses the mirrored img15/img16 detail module.
   // Recessed corner above the glazed lean-to, with just two tall openings.
   for(const y of [2,6])sash('west-court-inset',-39.6,y,-1.05,Math.PI,1.1,2.3);
   for(const side of [-1,1])for(const y of [2,6])sash('west-court-inset-side',-39.6+side*3.65,y,3,side*Math.PI/2,1.05,2.3);
