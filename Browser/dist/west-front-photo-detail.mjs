@@ -53,7 +53,7 @@ export function addWestFrontPhotoDetails(THREE,{model,box,mesh,worldUV,white,bri
   for(const y of [1.9,6.3]){
     for(const z of [18,21.5,25,28.5,32,35.5,39,42])sash('west-front-forward-west',-41.06,y,z,-Math.PI/2,1.05,2.35);
     // The inner east face is scheduled separately from img18.jpg.
-    for(const x of [-38,-35,-32])sash('west-front-forward-end',x,y,43.06,0,1.15,2.35);
+    // The northward img17 photograph supplies the end wall separately.
   }
   addFrontWingChimneys(THREE,{mesh,worldUV,brick,box});
   // Low glazed extension along the garden side, with a real sloping roof.
@@ -74,9 +74,9 @@ export function addWestFrontPhotoDetails(THREE,{model,box,mesh,worldUV,white,bri
 }
 
 export function addFrontWingChimneys(THREE,{mesh,worldUV,brick,box},side=-1){
-  for(const z of [28.8,39.7]){
-    mesh(worldUV(new THREE.BoxGeometry(1.45,5.4,1.9),1.7),brick,side*35,12.5,z,true).name=side<0?'West front chimney':'East front chimney';
-    for(const y of [15.05,15.3])box(brick,side*35,y,z,1.65,.18,2.1);
-    for(const dz of [-.55,.55])mesh(new THREE.CylinderGeometry(.14,.17,.55,8),brick,side*35,15.65,z+dz,true);
+  for(const [x,z] of [[38.5,28.8],[31.1,39.7]]){
+    mesh(worldUV(new THREE.BoxGeometry(1.45,5.4,1.9),1.7),brick,side*x,12.5,z,true).name=side<0?'West front chimney':'East front chimney';
+    for(const y of [15.05,15.3])box(brick,side*x,y,z,1.65,.18,2.1);
+    for(const dz of [-.55,.55])mesh(new THREE.CylinderGeometry(.14,.17,.55,8),brick,side*x,15.65,z+dz,true);
   }
 }

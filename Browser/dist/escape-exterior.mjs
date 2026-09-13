@@ -51,7 +51,8 @@ export function createEscapeExterior(THREE,aspect){
   box(gravel,EAST_PAVILION_WIDTH/2,.09,59,210+EAST_PAVILION_WIDTH,.1,11);box(gravel,-79,.09,-2,10,.1,133);box(gravel,79+OUTER_SHIFT,.09,0,9,.1,130);
   box(path,OUTER_SHIFT/2,.11,51,151+OUTER_SHIFT,.1,3);box(gravel,OUTER_SHIFT/2,.11,-46,149+OUTER_SHIFT,.1,8);
   box(path,0,.13,34,3.2,.1,34);box(path,OUTER_SHIFT/2,.13,43,114+OUTER_SHIFT,.1,2);
-  box(hedge,OUTER_SHIFT/2,.55,49,142+OUTER_SHIFT,1.1,.9);
+  // Leave the photographed west end's approach open to the front lawn.
+  for(const [left,right] of [[-71,-48],[-27,71+OUTER_SHIFT]])box(hedge,(left+right)/2,.55,49,right-left,1.1,.9);
   // Start from the western silhouette and reflect it across Reception.
   // Each tuple is [x, z, width, depth, eaves height]; front is +Z.
   const westBlocks=[
@@ -262,7 +263,7 @@ export function createEscapeExterior(THREE,aspect){
     plantedBed(x,-64,6,5);
     tree(x,-64,.85);
   }
-  for(const [x,z,s] of [[-33,46.7,.85],[33,46.7,.85],[-65,-35,1.1],[68+OUTER_SHIFT,-38,1.25],[-17,-9,.85],[18,-9,.9]])tree(x,z,s);
+  for(const [x,z,s] of [[-25.5,46.7,.85],[33,46.7,.85],[-65,-35,1.1],[68+OUTER_SHIFT,-38,1.25],[-17,-9,.85],[18,-9,.9]])tree(x,z,s);
   for(let i=0;i<24;i++)tree(-100+i*9,-84-(i%3)*7,1+random()*.6);
   for(let i=0;i<9;i++){
     tree(-90,-44+i*12,1.1);

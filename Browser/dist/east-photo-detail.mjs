@@ -1,3 +1,4 @@
+import {addWestForwardEndPhotoDetails} from './west-forward-end-photo-detail.mjs';
 import {addEastEntranceMirror} from './entrance-symmetry.mjs';
 import {photoDetailPrimitives} from './photo-detail-primitives.mjs';
 import {addWestWingPhotoDetails} from './west-wing-photo-detail.mjs';
@@ -91,6 +92,7 @@ export function addEastPhotoDetails(THREE,{model,box,mesh,worldUV,white,brick,ro
     box(iron,x+1.4,h-.4,z,.8,.1,.3);
   }
   addWestFrontPhotoDetails(THREE,{model,box,mesh,worldUV,white,brick,roof,material,sash,door,rod,iron,stone,hipRoof});
+  addWestForwardEndPhotoDetails(THREE,{model,box,mesh,worldUV,white,brick,material,sash,door,rod,iron});
   addWestCourtPhotoDetails(THREE,{model,box,mesh,worldUV,white,brick,roof,material,sash,door,rod,iron,stone,frame});
   addCourtyardPhotoDetails(THREE,{model,box,mesh,worldUV,white,brick,roof,material,sash,door,rod,iron,stone,frame,glass});
   addInnerCourtPhotoDetails(THREE,{model,box,mesh,worldUV,white,brick,roof,material,sash,door,rod,iron,stone});
