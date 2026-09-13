@@ -149,10 +149,17 @@ export function createEscapeExterior(THREE,aspect){
     }
     const rearEnd=x===-31&&z===-30;
     box(stone,x,rearEnd?h-.1:h+.12,z,w+.48,.22,d+.48);
-    hipRoof(x,z,w,d,rearEnd?h:h+.23,rearEnd?REAR_END_ROOF_RISE:Math.min(3.8,Math.min(w,d)*.3));
+    const principal=x===EAST_SHIFT/2&&z===12;
+    if(principal){
+      // img19: a shallow slate roof sits behind the west-front parapet.
+      hipRoof(-35,12,6,d,h+.23,2);
+      hipRoof(-19.55,12,24.9,d,h+.03,.55).name='Entrance west recessed slate roof';
+      hipRoof(19,12,52.2,d,h+.23,3);
+    }else hipRoof(x,z,w,d,rearEnd?h:h+.23,rearEnd?REAR_END_ROOF_RISE:Math.min(3.8,Math.min(w,d)*.3));
     if(!detail)for(const side of [-1,1]){
       for(let px=-w/2+2.4;px<w/2-1.5;px+=3.55)for(let y=3.8;y<h-1;y+=3.4){
         if(side<0&&x===EAST_SHIFT/2&&z===12&&x+px>37)continue;
+        if(side>0&&principal&&x+px>=-32&&x+px<-7.1)continue;
         if(passage&&y<base&&Math.abs(x+px-passage.x)<passage.width/2+.9)continue;
         window(x+px,y,z+side*(d/2+.04),side<0?Math.PI:0);
       }
@@ -161,7 +168,7 @@ export function createEscapeExterior(THREE,aspect){
         window(x+side*(w/2+.04),y,z+pz,side*Math.PI/2);
       }
     }
-    if(!detail&&w>13)for(const side of [-1,1]){mesh(worldUV(new THREE.BoxGeometry(.85,2.1,1.3)),brick,x+side*(w*.32),h+2.6,z,true);box(stone,x+side*w*.32,h+3.69,z,1.1,.15,1.5);}
+    if(!detail&&w>13)for(const side of [-1,1]){if(principal&&side<0)continue;mesh(worldUV(new THREE.BoxGeometry(.85,2.1,1.3)),brick,x+side*(w*.32),h+2.6,z,true);box(stone,x+side*w*.32,h+3.69,z,1.1,.15,1.5);}
     if(westDetail&&z===3)body.name='West courtyard widened link';
     if(westDetail&&x===-62.5)body.name='West courtyard recessed end';
     if(westDetail&&x===-69)body.name='West courtyard projecting corner';
@@ -178,11 +185,11 @@ export function createEscapeExterior(THREE,aspect){
     else block(...b);
   }
   // The pediment and columned red doorway identify the central 1829 entrance.
-  mesh(worldUV(new THREE.BoxGeometry(14.2,12.6,12.8)),brick,0,8.3,13.2,true);
-  box(stone,0,1,13.2,14.2,2,12.8);
+  mesh(worldUV(new THREE.BoxGeometry(14.2,11.5,12.8),1.7),photoBrick,0,8.85,13.2,true);
+  box(white,0,1.55,13.2,14.2,3.1,12.8);
   hipRoof(0,13.2,14.2,12.8,14.65,2.9);
-  for(const y of [2.1,7.1,10.7,14.5])box(cream,0,y,19.68,14.5,.24,.32);
-  for(const x of [-4,0,4])for(const y of [4.3,8.9,12.4])if(x!==0||y!==4.3)window(x,y,19.68);
+  for(const y of [3.15,7.1,10.7,14.5])box(white,0,y,19.68,14.5,.24,.32);
+  // Reception's fine sash glazing is supplied by the img19 detail module.
   const triangle=new THREE.BufferGeometry();triangle.setAttribute('position',new THREE.Float32BufferAttribute([-7.5,0,0,7.5,0,0,0,3.1,0],3));triangle.computeVertexNormals();mesh(triangle,cream,0,14.65,19.72);
   const relief=triangle.clone();
   relief.setAttribute('uv',new THREE.Float32BufferAttribute([29/333,1-89/499,305/333,1-89/499,167/333,1-29/499],2));
@@ -239,7 +246,7 @@ export function createEscapeExterior(THREE,aspect){
     plantedBed(x,-64,6,5);
     tree(x,-64,.85);
   }
-  for(const [x,z,s] of [[-20,33,1.2],[17,35,1.3],[-65,-35,1.1],[68+OUTER_SHIFT,-38,1.25],[-17,-9,.85],[18,-9,.9]])tree(x,z,s);
+  for(const [x,z,s] of [[-25,44,.7],[17,35,1.3],[-65,-35,1.1],[68+OUTER_SHIFT,-38,1.25],[-17,-9,.85],[18,-9,.9]])tree(x,z,s);
   for(let i=0;i<24;i++)tree(-100+i*9,-84-(i%3)*7,1+random()*.6);
   for(let i=0;i<9;i++){
     tree(-90,-44+i*12,1.1);

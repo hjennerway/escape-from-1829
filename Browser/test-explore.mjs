@@ -62,6 +62,13 @@ walk.keys.add('KeyW');for(let i=0;i<40;i++)walk.update(.1);
 assert(exterior.camera.position.x< -17.5&&exterior.camera.position.x> -18.8,'reflected west projection must have matching walking collisions');
 walkLeg([-11,-43],[-11,-7],72);
 walkLeg([-11,-7],[-11,-43],72);
+// The img19 projection stops the walker; the gravel route to Reception
+// and the gap between the new handrails remain accessible.
+walkLeg([-28,24.5],[-4,24.5],48);
+walkLeg([-11.55,24],[-11.55,18],12);
+walk.setView({position:[-27,1.8,25],target:[-27,1.8,15]});
+walk.keys.add('KeyW');for(let i=0;i<30;i++)walk.update(.1);
+assert(exterior.camera.position.z>20&&exterior.camera.position.z<20.5,'img19 projecting white base must block walking through it');
 // Redesmere's new entrance/bays block walking, while the outside drive and
 // gap in its garden railing give a continuous approach from the marked lawn.
 walkLeg([105,-34],[105,22],112);

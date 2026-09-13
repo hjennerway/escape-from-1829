@@ -37,6 +37,27 @@ for(const aspect of [16/9,4/3,9/16])for(const seconds of [0,1,1.75,2.5]){
   }
 }
 const ray=new THREE.Raycaster(new THREE.Vector3(20,80,12),new THREE.Vector3(0,-1,0));
+// img19: a real stepped frontage, exposed windows, a low roof behind the
+// parapet and two lower doors replacing the old generic ground-floor grid.
+const entranceProjection=exterior.model.getObjectByName('Entrance west three-bay projection');
+const entranceRecess=exterior.model.getObjectByName('Entrance west recessed wall');
+const projectionBounds=new THREE.Box3().setFromObject(entranceProjection);
+const recessBounds=new THREE.Box3().setFromObject(entranceRecess);
+assert(projectionBounds.max.z-recessBounds.max.z>2,'img19 projection must stand forward of the five-bay recess');
+const entranceOpenings=exterior.model.userData.entranceWestPhotoOpenings;
+for(const y of [5.45,9.75])assert.equal(entranceOpenings.filter(o=>o.face==='entrance-west-recess'&&o.y===y).length,5);
+assert.equal(entranceOpenings.filter(o=>o.face==='entrance-west-sidelight').length,4);
+for(const o of entranceOpenings.filter(o=>['entrance-west-recess','entrance-west-projection','entrance-west-lower'].includes(o.face))){
+  ray.set(new THREE.Vector3(o.x,o.y,22),new THREE.Vector3(0,0,-1));
+  const hit=ray.intersectObject(exterior.model,true)[0];
+  assert(hit.object.isInstancedMesh&&hit.point.z>o.z,'img19 glazing must sit in front of its wall');
+}
+assert(!entranceOpenings.some(o=>o.y<3&&[-27.35,-11.55].includes(o.x)),'lower doors must not be overlaid by generic sashes');
+for(const [x,z,name] of [[-27,16,'Entrance west projection slate roof'],[-16,12,'Entrance west recessed slate roof']]){
+  ray.set(new THREE.Vector3(x,30,z),new THREE.Vector3(0,-1,0));
+  const hit=ray.intersectObject(exterior.model,true)[0];
+  assert.equal(hit.object.name,name);assert(hit.face.normal.y>0&&hit.point.y<13.7,'west-front roofs must be shallow and face upwards');
+}
 // Redesmere: the two bays must have real depth, outward-facing roof geometry
 // and exposed glazing. Check rays against the whole estate, not just metadata.
 const redesmereBays=exterior.model.children.filter(o=>o.name==='Redesmere canted bay');
