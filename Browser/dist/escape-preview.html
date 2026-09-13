@@ -1,31 +1,50 @@
 <!doctype html>
-<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>1829 · Escape scene preview</title><link rel="stylesheet" href="./style.css"><style>#previewNav{position:fixed;left:24px;top:24px;z-index:31;font:10px Arial;letter-spacing:2px;color:#e4e8db;text-shadow:0 2px 6px #000}#previewNav a{color:inherit}#replay{position:fixed;right:24px;top:24px;z-index:32;background:#17211ae8;padding:14px 20px;border:1px solid #bdcc98}</style></head>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>1829 · Escape scene preview</title><link rel="stylesheet" href="./style.css"><style>#previewNav{position:fixed;left:24px;top:24px;z-index:31;font:10px Arial;letter-spacing:2px;color:#e4e8db;text-shadow:0 2px 6px #000}#previewNav a{color:inherit}#replay{position:fixed;right:24px;top:24px;z-index:32;background:#17211ae8;padding:14px 20px;border:1px solid #bdcc98}#aerialHelp{position:fixed;bottom:18px;left:24px;right:24px;z-index:31;font:11px/1.8 Arial;color:#e4e8db;text-shadow:0 2px 6px #000}#resetAerial{background:#17211ae8;padding:8px 12px;margin-left:8px}#previewNav{right:220px;line-height:1.8}@media(max-width:650px){#previewNav{right:20px;top:70px}#aerialHelp{font-size:10px}}</style></head>
 <body><canvas id="game" aria-label="Aerial 3D view of the 1829 estate"></canvas>
 <div id="previewNav"><a href="./">← BACK TO GAME</a> · <a href="?view=front">FRONT DETAIL</a> · <a href="?view=tower">WATER TOWER</a> · <a href="./escape-preview.html">AERIAL VIEW</a> · <a href="./explore.html">EXPLORE THE ASYLUM ↗</a></div>
 <section id="escapeCutscene" role="dialog" aria-modal="true" aria-labelledby="escapeCutsceneTitle" hidden><div class="escape-caption"><span>OUTSIDE. AT LAST.</span><h2 id="escapeCutsceneTitle">You escaped</h2><p>The 1829 building · Chester</p></div><button id="skipCutscene" type="button">SKIP CUTSCENE ↗</button></section>
-<button id="replay" hidden>REPLAY CUTSCENE ↗</button>
+<button id="replay">PLAY ESCAPE PAN ↗</button>
+<div id="aerialHelp">Drag to orbit · Right-drag to pan · WASD to move · Scroll to zoom · <button id="resetAerial">RESET VIEW</button></div>
 <script type="module">
 import * as THREE from './vendor/three.module.js';
 import {createEscapeExterior,loadEscapeFrontage} from './escape-exterior.mjs';
 import {ESCAPE_WATER_TOWER} from './water-tower.mjs';
+import {createAerialControls,sampleLanding} from './aerial-controls.mjs';
 import {createEscapeCutscene} from './escape-cutscene.mjs';
 import {EAST_PHOTO_VIEW} from './east-photo-detail.mjs';
 import {COURTYARD_PHOTO_VIEW} from './courtyard-photo-detail.mjs';
 import {REAR_COURT_PHOTO_VIEW} from './rear-court-photo-detail.mjs';
+import {WEST_FRONT_PHOTO_VIEW} from './west-front-photo-detail.mjs';
+import {WEST_COURT_PHOTO_VIEW} from './west-court-photo-detail.mjs';
+import {INNER_COURT_PHOTO_VIEW} from './inner-court-photo-detail.mjs';
 const renderer=new THREE.WebGLRenderer({canvas:document.getElementById('game'),antialias:true});renderer.setPixelRatio(Math.min(devicePixelRatio,1.5));renderer.setSize(innerWidth,innerHeight);renderer.outputColorSpace=THREE.SRGBColorSpace;renderer.toneMapping=THREE.ACESFilmicToneMapping;renderer.toneMappingExposure=1.25;renderer.shadowMap.enabled=true;renderer.shadowMap.type=THREE.PCFSoftShadowMap;
 const exterior=createEscapeExterior(THREE,innerWidth/innerHeight),replay=document.getElementById('replay'),clock=new THREE.Clock();
-await loadEscapeFrontage(THREE,exterior);
-const cutscene=createEscapeCutscene(document.getElementById('escapeCutscene'),()=>{replay.hidden=false;},{getCamera:()=>exterior.camera,reducedMotion:matchMedia('(prefers-reduced-motion: reduce)').matches});
-function start(){replay.hidden=true;clock.getDelta();cutscene.start();}replay.onclick=start;
-const view=new URLSearchParams(location.search).get('view'),frontDetail=view==='front',towerDetail=view==='tower',rightDetail=view==='right',photoDetail=['east-photo','courtyard-photo','rear-court-photo'].includes(view);
-function framePhoto(){const shot=view==='rear-court-photo'?REAR_COURT_PHOTO_VIEW:view==='courtyard-photo'?COURTYARD_PHOTO_VIEW:EAST_PHOTO_VIEW;exterior.camera.position.set(...shot.position);exterior.camera.lookAt(...shot.target);exterior.camera.fov=shot.fov;exterior.camera.updateProjectionMatrix();}
-function frameFront(){exterior.camera.position.set(0,10,19.8+34*Math.max(1,1/exterior.camera.aspect));exterior.camera.lookAt(0,9,19.8);}
-function frameTower(){const {x,z}=ESCAPE_WATER_TOWER;exterior.camera.position.set(x+34,25,z+58*Math.max(1,1/exterior.camera.aspect));exterior.camera.lookAt(x,20,z);}
-function frameRight(){exterior.camera.position.set(72,28,108*Math.max(1,1/exterior.camera.aspect));exterior.camera.lookAt(72,9,0);}
-if(photoDetail)framePhoto();else if(rightDetail)frameRight();else if(towerDetail)frameTower();else if(frontDetail)frameFront();else start();
-function frame(){requestAnimationFrame(frame);const dt=clock.getDelta();if(!document.hidden)cutscene.update(dt);renderer.render(exterior.scene,exterior.camera);}frame();
-document.addEventListener('visibilitychange',()=>clock.getDelta());
+loadEscapeFrontage(THREE,exterior).catch(console.warn);
+const controls=createAerialControls(exterior.camera);let navigationTarget=[12,5,-12],moved=false;
+const cutscene=createEscapeCutscene(document.getElementById('escapeCutscene'),()=>{replay.hidden=false;navigationTarget=[0,1,-7];controls.sync(navigationTarget);},{getCamera:()=>exterior.camera,reducedMotion:matchMedia('(prefers-reduced-motion: reduce)').matches});
+function start(){controls.keys.clear();replay.hidden=true;clock.getDelta();cutscene.start();}replay.onclick=start;
+const view=new URLSearchParams(location.search).get('view'),frontDetail=view==='front',towerDetail=view==='tower',rightDetail=view==='right',photoDetail=['west-front-photo','west-court-photo','inner-court-photo','east-photo','courtyard-photo','rear-court-photo'].includes(view);
+function framePhoto(){const shot=view==='west-front-photo'?WEST_FRONT_PHOTO_VIEW:view==='west-court-photo'?WEST_COURT_PHOTO_VIEW:view==='inner-court-photo'?INNER_COURT_PHOTO_VIEW:view==='rear-court-photo'?REAR_COURT_PHOTO_VIEW:view==='courtyard-photo'?COURTYARD_PHOTO_VIEW:EAST_PHOTO_VIEW;navigationTarget=shot.target;exterior.camera.position.set(...shot.position);exterior.camera.lookAt(...shot.target);exterior.camera.fov=shot.fov;exterior.camera.updateProjectionMatrix();}
+function frameFront(){exterior.camera.position.set(0,10,19.8+34*Math.max(1,1/exterior.camera.aspect));navigationTarget=[0,9,19.8];exterior.camera.lookAt(...navigationTarget);}
+function frameTower(){const {x,z}=ESCAPE_WATER_TOWER;exterior.camera.position.set(x+34,25,z+58*Math.max(1,1/exterior.camera.aspect));navigationTarget=[x,20,z];exterior.camera.lookAt(...navigationTarget);}
+function frameRight(){exterior.camera.position.set(72,28,108*Math.max(1,1/exterior.camera.aspect));navigationTarget=[72,9,0];exterior.camera.lookAt(...navigationTarget);}
+if(photoDetail)framePhoto();else if(rightDetail)frameRight();else if(towerDetail)frameTower();else if(frontDetail)frameFront();else resetAerial();
+controls.sync(navigationTarget);
+function frame(){requestAnimationFrame(frame);const dt=clock.getDelta();if(!document.hidden){if(cutscene.active)cutscene.update(dt);else controls.update(dt);}renderer.render(exterior.scene,exterior.camera);}frame();
+function resetAerial(){cutscene.reset();replay.hidden=false;moved=false;controls.keys.clear();const shot=sampleLanding(0,{aspect:exterior.camera.aspect});navigationTarget=shot.target;exterior.camera.fov=46;exterior.camera.updateProjectionMatrix();exterior.camera.position.set(...shot.position);exterior.camera.lookAt(...shot.target);controls.sync(navigationTarget);}
+document.getElementById('resetAerial').onclick=resetAerial;
+const canvas=document.getElementById('game');let drag=null;
+function takeControl(){if(cutscene.active){cutscene.skip();}if(!moved)controls.sync(navigationTarget);moved=true;}
+function stop(){controls.keys.clear();drag=null;clock.getDelta();}
+canvas.addEventListener('contextmenu',e=>e.preventDefault());
+canvas.addEventListener('pointerdown',e=>{if(e.button!==0&&e.button!==2)return;takeControl();drag={x:e.clientX,y:e.clientY,pan:e.button===2||e.shiftKey};canvas.setPointerCapture(e.pointerId);});
+canvas.addEventListener('pointermove',e=>{if(!drag)return;const dx=e.clientX-drag.x,dy=e.clientY-drag.y;if(drag.pan)controls.panPixels(dx,dy);else controls.orbit(dx,dy);drag.x=e.clientX;drag.y=e.clientY;});
+for(const event of ['pointerup','pointercancel','lostpointercapture'])canvas.addEventListener(event,()=>drag=null);
+canvas.addEventListener('wheel',e=>{e.preventDefault();takeControl();controls.zoom(e.deltaY);},{passive:false});
+addEventListener('keydown',e=>{if(['KeyW','KeyA','KeyS','KeyD','ShiftLeft','ShiftRight'].includes(e.code)){e.preventDefault();takeControl();controls.keys.add(e.code);}if(e.code==='Escape')stop();});
+addEventListener('keyup',e=>controls.keys.delete(e.code));addEventListener('blur',stop);
+document.addEventListener('visibilitychange',stop);
 addEventListener('keydown',e=>{if(['Escape','Space','Enter'].includes(e.code)&&cutscene.active){e.preventDefault();cutscene.skip();}});
-addEventListener('resize',()=>{renderer.setSize(innerWidth,innerHeight);exterior.camera.aspect=innerWidth/innerHeight;exterior.camera.updateProjectionMatrix();if(photoDetail)framePhoto();else if(rightDetail)frameRight();else if(towerDetail)frameTower();else if(frontDetail)frameFront();else cutscene.resize();});
+addEventListener('resize',()=>{renderer.setSize(innerWidth,innerHeight);exterior.camera.aspect=innerWidth/innerHeight;exterior.camera.updateProjectionMatrix();if(cutscene.active)cutscene.resize();else if(!moved){if(photoDetail)framePhoto();else if(rightDetail)frameRight();else if(towerDetail)frameTower();else if(frontDetail)frameFront();else resetAerial();controls.sync(navigationTarget);}});
 </script></body></html>
 

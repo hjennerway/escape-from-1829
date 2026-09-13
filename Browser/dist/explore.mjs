@@ -4,6 +4,9 @@ import {createWalker,exteriorObstacles} from './explore-controls.mjs';
 import {EAST_PHOTO_VIEW} from './east-photo-detail.mjs';
 import {COURTYARD_PHOTO_VIEW} from './courtyard-photo-detail.mjs';
 import {REAR_COURT_PHOTO_VIEW} from './rear-court-photo-detail.mjs';
+import {WEST_FRONT_PHOTO_VIEW} from './west-front-photo-detail.mjs';
+import {WEST_COURT_PHOTO_VIEW} from './west-court-photo-detail.mjs';
+import {INNER_COURT_PHOTO_VIEW} from './inner-court-photo-detail.mjs';
 const canvas=document.getElementById('game'),hint=document.getElementById('lookHint'),look=document.getElementById('look');
 try{
   const renderer=new THREE.WebGLRenderer({canvas,antialias:true});
@@ -15,6 +18,9 @@ try{
   const walker=createWalker(exterior.camera,exteriorObstacles(THREE,exterior.model));
   if(new URLSearchParams(location.search).get('view')==='east-photo')walker.setView(EAST_PHOTO_VIEW);
   if(new URLSearchParams(location.search).get('view')==='courtyard-photo')walker.setView(COURTYARD_PHOTO_VIEW);
+  if(new URLSearchParams(location.search).get('view')==='west-front-photo')walker.setView(WEST_FRONT_PHOTO_VIEW);
+  if(new URLSearchParams(location.search).get('view')==='west-court-photo')walker.setView(WEST_COURT_PHOTO_VIEW);
+  if(new URLSearchParams(location.search).get('view')==='inner-court-photo')walker.setView(INNER_COURT_PHOTO_VIEW);
   if(new URLSearchParams(location.search).get('view')==='rear-court-photo')walker.setView(REAR_COURT_PHOTO_VIEW);
   let active=false,dragging=false,last=null;
   const movement=new Set(['KeyW','KeyA','KeyS','KeyD','ShiftLeft','ShiftRight']);

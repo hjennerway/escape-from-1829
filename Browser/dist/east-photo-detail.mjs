@@ -1,8 +1,11 @@
 // Visible east forecourt, from 20260912_172141.jpg and the user's camera mark.
 // Coordinates are visual estimates. Keep the window schedule explicit so later
 // photographs can correct individual openings without changing the whole estate.
+import {addWestFrontPhotoDetails} from './west-front-photo-detail.mjs';
+import {addWestCourtPhotoDetails} from './west-court-photo-detail.mjs';
 import {addCourtyardPhotoDetails} from './courtyard-photo-detail.mjs';
 import {addRearCourtPhotoDetails} from './rear-court-photo-detail.mjs';
+import {addInnerCourtPhotoDetails} from './inner-court-photo-detail.mjs';
 export const EAST_PHOTO_VIEW=Object.freeze({position:[76,1.8,48],target:[53,5.4,21],fov:76});
 
 export function eastPhotoProfile(x,z){
@@ -11,7 +14,7 @@ export function eastPhotoProfile(x,z){
     (x===65.5&&z===20.75)||(Math.abs(x-74.425)<.01&&[8,15.5].includes(z));
 }
 
-export function addEastPhotoDetails(THREE,{model,box,mesh,worldUV,white,brick,roof,steel,material}){
+export function addEastPhotoDetails(THREE,{model,box,mesh,worldUV,white,brick,roof,steel,material,hipRoof}){
   const frame=material(0xd3dcd8),glass=material(0x78989f,{roughness:.48,metalness:.15});
   const recess=material(0x303d3d),blue=material(0x172e50),iron=material(0x454b49),stone=material(0xb2b6af);
   const openings=[];model.userData.eastPhotoOpenings=openings;
@@ -116,6 +119,9 @@ export function addEastPhotoDetails(THREE,{model,box,mesh,worldUV,white,brick,ro
     rod([x,h-.12,z],[x+1.3,h-.35,z],.06,steel);
     box(iron,x+1.4,h-.4,z,.8,.1,.3);
   }
+  addWestFrontPhotoDetails(THREE,{model,box,mesh,worldUV,white,brick,roof,material,sash,door,rod,iron,stone,hipRoof});
+  addWestCourtPhotoDetails(THREE,{model,box,mesh,worldUV,white,brick,roof,material,sash,door,rod,iron,stone,frame});
   addCourtyardPhotoDetails(THREE,{model,box,mesh,worldUV,white,brick,roof,material,sash,door,rod,iron,stone,frame,glass});
+  addInnerCourtPhotoDetails(THREE,{model,box,mesh,worldUV,white,brick,roof,material,sash,door,rod,iron,stone});
   addRearCourtPhotoDetails(THREE,{model,box,mesh,worldUV,white,brick,roof,material,sash,door,rod,iron,stone,frame,glass});
 }

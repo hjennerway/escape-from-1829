@@ -21,3 +21,5 @@
 .art-viewer-card img{display:block;width:100%;max-height:64vh;object-fit:contain;background:#0a100c;border:8px solid #2e2016;box-shadow:0 10px 35px #0009}
 .art-viewer-card p{margin:16px 0 8px;color:#b7c5ae;font:14px/1.5 Georgia}
 .art-viewer-card>span{font-size:9px;letter-spacing:2px;color:var(--green)}
+
+.aerial-link{color:inherit;text-decoration:none;font-size:9px;letter-spacing:1.2px}.aerial-link:hover{color:var(--cream);text-decoration:underline}

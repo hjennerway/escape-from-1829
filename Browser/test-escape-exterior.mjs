@@ -28,7 +28,7 @@ for(const aspect of [16/9,4/3,9/16])for(const seconds of [0,1,1.75,2.5]){
   camera.aspect=aspect;camera.updateProjectionMatrix();camera.position.set(...shot.position);camera.lookAt(...shot.target);camera.updateMatrixWorld(true);
   const door=new THREE.Vector3(0,3.5,19.9).project(camera);
   assert(Math.abs(door.x)<1e-10&&Math.abs(door.y)<1e-10,'front door stays centred throughout the rush');
-  if(seconds===0)for(const x of [-61,97])for(const z of [-46,45]){
+  if(seconds===0)for(const x of [-72,97])for(const z of [-46,45]){
     const p=new THREE.Vector3(x,15,z).project(camera);
     assert(Math.abs(p.x)<.95&&Math.abs(p.y)<.95,'arrival initially frames the whole building');
   }
@@ -37,7 +37,8 @@ const ray=new THREE.Raycaster(new THREE.Vector3(20,80,12),new THREE.Vector3(0,-1
 const roof=ray.intersectObject(exterior.model,true)[0];
 assert(roof&&roof.point.y>12,'principal range must have a visible roof from above');
 assert(roof.face.normal.y>0,'roof triangles must face the aerial camera');
-for(const x of [-23,23])for(const z of [-17,-26,-30,-34,-40]){
+// The inner court now routes west of its raised garden and external stairs.
+for(const x of [-23,9])for(const z of [-17,-26,-30,-34,-40]){
   ray.set(new THREE.Vector3(x,80,z),new THREE.Vector3(0,-1,0));
   assert(ray.intersectObject(exterior.model,true)[0].point.y<1,'both W-shaped gaps must open through to the rear road');
 }
@@ -117,10 +118,72 @@ for(const aspect of [16/9,4/3,9/16])for(const seconds of [0,5,10]){
     const p=new THREE.Vector3(ESCAPE_WATER_TOWER.x,y,ESCAPE_WATER_TOWER.z).project(camera);
     assert(p.x>0&&Math.abs(p.x)<.95&&Math.abs(p.y)<.95,'water tower must stay visible on the right throughout the pan');
   }
-  for(const x of [-61,97])for(const z of [-46,45]){
+  for(const x of [-72,97])for(const z of [-46,45]){
     const p=new THREE.Vector3(x,15,z).project(camera);
     assert(Math.abs(p.x)<.95&&Math.abs(p.y)<.95,'building must stay in frame throughout the pan');
   }
+}
+// Both circled rear ends have sloped roofs, with ridge heights exactly
+// two-thirds of their adjoining long wing (including that wing's roof).
+for(const x of [-31,31]){
+  const topAt=z=>{
+    ray.set(new THREE.Vector3(x,80,z),new THREE.Vector3(0,-1,0));
+    return ray.intersectObject(exterior.model,true)[0];
+  };
+  const main=topAt(-10),end=topAt(-30),slope=topAt(-34);
+  assert(Math.abs(end.point.y/main.point.y-2/3)<.001,'rear end ridge must be two-thirds of the adjoining wing ridge');
+  assert(slope.point.y<end.point.y-.5,'roof must visibly fall from ridge to rear eaves');
+  assert(slope.face.normal.y>0&&slope.face.normal.y<.99,'rear roof must have upward-facing pitched surfaces');
+}
+// img3: basement glazing must remain exposed and the new garden must not
+// obstruct the continuous route from the rear road into the inner court.
+assert(exterior.model.getObjectByName('Inner court projecting brick block'));
+for(const o of exterior.model.userData.innerCourtPhotoOpenings.filter(o=>o.face==='inner-block-north'||o.face==='inner-block-basement')){
+  ray.set(new THREE.Vector3(o.x,o.y,-37),new THREE.Vector3(0,0,1));
+  const hit=ray.intersectObject(exterior.model,true)[0];
+  assert(hit.point.z<-35.5&&hit.point.z>-36,'north sashes must sit in front of the brick facade');
+}
+assert(exterior.model.getObjectByName('Inner court iron stairs').children.length>=15);
+// img6: the west courtyard bay projects into the court and the paired
+// openings remain visible rather than buried behind the corner link or bay.
+const westBay=exterior.model.getObjectByName('West courtyard polygonal bay');
+assert(westBay&&new THREE.Box3().setFromObject(westBay).min.z<1.2);
+const westSashes=exterior.model.userData.westCourtPhotoOpenings.filter(o=>o.face==='west-court-paired');
+assert.equal(westSashes.length,14,'five sashes per upper floor and four beside the ground door');
+for(const o of westSashes){
+  ray.set(new THREE.Vector3(o.x,o.y,-2),new THREE.Vector3(0,0,1));
+  const hit=ray.intersectObject(exterior.model,true)[0];
+  assert(hit.point.z>4.1&&hit.point.z<4.5,'west paired windows must remain exposed');
+}
+assert(exterior.model.getObjectByName('West courtyard glazed lean-to'));
+// The annotated corner link is doubled in width and the outside end has
+// independent recessed and projecting sections, not a narrow flat wall.
+const westLinkBounds=new THREE.Box3().setFromObject(exterior.model.getObjectByName('West courtyard widened link'));
+assert(Math.abs(westLinkBounds.max.x-westLinkBounds.min.x-7.2)<.001);
+const recessedBounds=new THREE.Box3().setFromObject(exterior.model.getObjectByName('West courtyard recessed end'));
+const cornerBounds=new THREE.Box3().setFromObject(exterior.model.getObjectByName('West courtyard projecting corner'));
+assert(recessedBounds.max.x-recessedBounds.min.x>=7&&cornerBounds.max.x-cornerBounds.min.x>=6);
+assert(cornerBounds.min.z<recessedBounds.min.z-1.9,'outer corner must project from the recessed wall');
+for(const o of exterior.model.userData.westCourtPhotoOpenings.filter(o=>['west-court-recess','west-court-outer'].includes(o.face))){
+  ray.set(new THREE.Vector3(o.x,o.y,-2),new THREE.Vector3(0,0,1));
+  const hit=ray.intersectObject(exterior.model,true)[0];
+  assert(Math.abs(hit.point.z-o.z)<.3,'reworked end windows must remain visible on their own wall planes');
+}
+// img9: exposed square-front and low-extension glazing, plus real iron
+// stair structure and chimney stacks. The original west front bay is retained.
+const westFront=exterior.model.userData.westFrontPhotoOpenings;
+assert.equal(westFront.filter(o=>o.face==='west-front-square').length,6);
+assert.equal(exterior.model.children.filter(o=>o.name==='West curved bay').length,1);
+assert.equal(exterior.model.children.filter(o=>o.name==='West front chimney').length,2);
+assert(exterior.model.getObjectByName('West front iron return stair').children.length>=12);
+for(const o of westFront.filter(o=>o.face==='west-front-square')){
+  ray.set(new THREE.Vector3(o.x,o.y,27),new THREE.Vector3(0,0,-1));
+  assert(ray.intersectObject(exterior.model,true)[0].point.z>25,'front glazing must be outside its brick wall');
+}
+for(const o of westFront.filter(o=>o.face==='west-front-extension')){
+  ray.set(new THREE.Vector3(-46,o.y,o.z),new THREE.Vector3(1,0,0));
+  const hit=ray.intersectObject(exterior.model,true)[0];
+  assert(hit.point.x<-45.4&&hit.point.x>-45.8,'low extension must have exposed wide glazing');
 }
 delete globalThis.document;
 console.log('PASS: real estate geometry, upward-facing roofs, W-shaped openings to the rear, rear-left lattice mast, building/mast framing throughout landscape and portrait pans.');

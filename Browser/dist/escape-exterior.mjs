@@ -1,10 +1,13 @@
 // Aerial interpretation of the user's outlined 1829 estate photograph.
 // Front road/reception is +Z; the corrected mast position is rear-left (-X, -Z).
+import {westFrontPhotoProfile} from './west-front-photo-detail.mjs';
+import {westCourtPhotoProfile} from './west-court-photo-detail.mjs';
 import {createChapel} from './chapel.mjs';
 import {createWaterTower} from './water-tower.mjs';
 import {eastPhotoProfile,addEastPhotoDetails} from './east-photo-detail.mjs';
 import {courtyardPhotoProfile} from './courtyard-photo-detail.mjs';
 import {rearCourtPhotoProfile} from './rear-court-photo-detail.mjs';
+import {innerCourtPhotoProfile,REAR_END_HEIGHTS,REAR_END_ROOF_RISE} from './inner-court-photo-detail.mjs';
 export const ESCAPE_MAST = Object.freeze({x:-69,z:-62,height:42});
 const EAST_SHIFT=7.1,EXTRA_BAY=3.55;
 // Retain the added east pavilion and the space made for the outer extension.
@@ -54,7 +57,7 @@ export function createEscapeExterior(THREE,aspect){
     // A is the inset rear arm; B is slightly outboard, both inside the
     // western end pavilion. B has a narrow root and a wider stepped foot.
     [-36.5,23,9,14,8.6],[-35,35,12,16,8.6],
-    [-31,-30,13,11,9.3],
+    [-31,-30,13,11,REAR_END_HEIGHTS.west-REAR_END_ROOF_RISE],
     // Rooms tracing the irregular western silhouette: an outer end room,
     // a shorter front nib, and small rooms beside A's root. The curved bay
     // remains exposed between the outer rooms and B.
@@ -62,6 +65,11 @@ export function createEscapeExterior(THREE,aspect){
     [-40,-3,6,8,7.2],[-22.5,3,6,6,7.2]
   ];
   const eastBlocks=westBlocks.map(([x,z,w,d,h])=>[-x,z,w,d,h]);
+  westBlocks[0]=[-48.6,12,21.2,15,14.3];
+  westBlocks[6]=[-54.5,22,6,7,14.3]; // Stair recess in img9.jpg.
+  westBlocks[7]=[-39.6,3,7.2,8,11.3]; // Recessed link at the img6 courtyard corner.
+  westBlocks[5]=[-62.5,13,7,16,12.8];
+  westBlocks.push([-69,12,6,18,12.8]); // Three occupied storeys at the west court outer corner.
   eastBlocks[1][4]=14.3; // The courtyard return has three occupied storeys.
   // Approximate the red outline: a slightly longer front foot, a shallow
   // courtyard nib and a stepped outer corner joining the yellow extension.
@@ -114,7 +122,8 @@ export function createEscapeExterior(THREE,aspect){
     box(cream,x+nx*.17,y+1.16,z+nz*.17,1.65,.19,.23,rotation);
   }
   function block(x,z,w,d,h,passage=null){
-    const detail=eastPhotoProfile(x,z)||courtyardPhotoProfile(x,z)||rearCourtPhotoProfile(x,z),foundation=detail?4:2;
+    const westDetail=westCourtPhotoProfile(x,z)||westFrontPhotoProfile(x,z);
+    const detail=westDetail||eastPhotoProfile(x,z)||courtyardPhotoProfile(x,z)||rearCourtPhotoProfile(x,z),foundation=detail&&!westDetail?4:2;
     const base=passage?Math.max(passage.height,foundation):foundation;
     const body=mesh(worldUV(new THREE.BoxGeometry(w,h-base,d),detail?1.7:3),detail?photoBrick:brick,x,(h+base)/2,z,true);
     const lowerRanges=passage?[[x-w/2,Math.max(x-w/2,passage.x-passage.width/2)],[Math.min(x+w/2,passage.x+passage.width/2),x+w/2]]:[[x-w/2,x+w/2]];
@@ -122,8 +131,9 @@ export function createEscapeExterior(THREE,aspect){
       if(right<=left)continue;
       const middle=(left+right)/2,width=right-left;
       const lowerHeight=passage?Math.min(foundation,passage.height):foundation;
-      box(detail?white:cream,middle,lowerHeight/2,z,width,lowerHeight,d);
-      box(detail?white:cream,middle,foundation+(detail?.04:.1),z,width+(detail?.13:.23),detail?.16:.22,d+(detail?.13:.23));
+      if(westDetail)mesh(worldUV(new THREE.BoxGeometry(width,lowerHeight,d),1.7),photoBrick,middle,lowerHeight/2,z,true);
+      else box(detail?white:cream,middle,lowerHeight/2,z,width,lowerHeight,d);
+      if(!westDetail)box(detail?white:cream,middle,foundation+(detail?.04:.1),z,width+(detail?.13:.23),detail?.16:.22,d+(detail?.13:.23));
       if(passage&&base>lowerHeight)mesh(worldUV(new THREE.BoxGeometry(width,base-lowerHeight,d)),detail?photoBrick:brick,middle,(base+lowerHeight)/2,z,true);
     }
     box(cream,x,h-.12,z,w+.23,.22,d+.23);
@@ -133,7 +143,9 @@ export function createEscapeExterior(THREE,aspect){
       box(stone,(left+right)/2,base+.1,z,right-left,.2,d+.15);
       body.name='East courtyard bridge';
     }
-    box(stone,x,h+.12,z,w+.48,.22,d+.48);hipRoof(x,z,w,d,h+.23,Math.min(3.8,Math.min(w,d)*.3));
+    const rearEnd=x===-31&&z===-30;
+    box(stone,x,rearEnd?h-.1:h+.12,z,w+.48,.22,d+.48);
+    hipRoof(x,z,w,d,rearEnd?h:h+.23,rearEnd?REAR_END_ROOF_RISE:Math.min(3.8,Math.min(w,d)*.3));
     if(!detail)for(const side of [-1,1]){
       for(let px=-w/2+2.4;px<w/2-1.5;px+=3.55)for(let y=3.8;y<h-1;y+=3.4){
         if(side<0&&x===EAST_SHIFT/2&&z===12&&x+px>37)continue;
@@ -146,10 +158,16 @@ export function createEscapeExterior(THREE,aspect){
       }
     }
     if(!detail&&w>13)for(const side of [-1,1]){mesh(worldUV(new THREE.BoxGeometry(.85,2.1,1.3)),brick,x+side*(w*.32),h+2.6,z,true);box(stone,x+side*w*.32,h+3.69,z,1.1,.15,1.5);}
+    if(westDetail&&z===3)body.name='West courtyard widened link';
+    if(westDetail&&x===-62.5)body.name='West courtyard recessed end';
+    if(westDetail&&x===-69)body.name='West courtyard projecting corner';
     return body;
   }
   const white=material(0xe1e3dc),photoBrick=material(0xb3a5a0,{map:bricks});
-  for(const b of blocks)block(...b);
+  for(const b of blocks){
+    if(innerCourtPhotoProfile(b[0],b[1]))hipRoof(b[0],b[1],b[2],b[3],REAR_END_HEIGHTS.east-REAR_END_ROOF_RISE,REAR_END_ROOF_RISE);
+    else block(...b);
+  }
   // The pediment and columned red doorway identify the central 1829 entrance.
   mesh(worldUV(new THREE.BoxGeometry(14.2,12.6,12.8)),brick,0,8.3,13.2,true);
   box(stone,0,1,13.2,14.2,2,12.8);
@@ -173,20 +191,13 @@ export function createEscapeExterior(THREE,aspect){
   }
   box(cream,0,6.7,21.2,5.6,.6,4.0);box(stone,0,7.08,21.2,6,.15,4.3);
   for(let i=0;i<6;i++)box(stone,0,(6-i)*.15,23.7+i*.42,3.7,(6-i)*.3,.44);
-  // The original curved bays remain at the west and east pavilions.
-  for(const [name,x] of [['West curved bay',-46],['East curved bay',46+EAST_SHIFT]]){
-    if(x>0)continue; // The photographed east bay is built with its own sash layout below.
-    mesh(new THREE.CylinderGeometry(3.15,3.15,13.2,8),brick,x,7.6,19.0,true).name=name;
-    for(const y of [1.2,5.1,8.8,14.3])mesh(new THREE.CylinderGeometry(3.25,3.25,.23,8),cream,x,y,19);
-    mesh(new THREE.ConeGeometry(3.55,2.8,8),roof,x,15.8,19,true);
-    for(const y of [3.4,6.9,10.4])window(x,y,22.04);
-  }
+  // Both photographed front bays are built by the facade detail modules.
   // Replace the added round bay with a square projection on the blue-marked
   // window section, to its left. Its face stands 5.5 units beyond the facade.
   const squareX=65.5,squareZ=20.75,squareWidth=8.5;
   block(squareX,squareZ,squareWidth,squareWidth,14.3).name='East square projecting bay';
   for(const y of [4.08,8.8])box(white,squareX,y,squareZ,squareWidth+.14,.16,squareWidth+.14);
-  addEastPhotoDetails(THREE,{model,box,mesh,worldUV,white,brick:photoBrick,roof,steel,material});
+  addEastPhotoDetails(THREE,{model,box,mesh,worldUV,white,brick:photoBrick,roof,steel,material,hipRoof});
   // Open rear approaches connect the gaps between the arms to the back road.
   for(const x of [-23,23]){box(gravel,x,.18,-20,32,.1,45);box(grass,x<0?-17:x-6,.26,-9,9,.1,11);}
   for(const [x,w] of [[-64,17],[69+OUTER_SHIFT,7]]){box(gravel,x,.17,12,w,.12,62);box(path,x,.16,44,w,.12,2);}
@@ -209,7 +220,7 @@ export function createEscapeExterior(THREE,aspect){
       crowns[2].items.push({x:x+.65,y:.7,z:z+offset+.25,s:.55});
     }
   }
-  for(const x of [-64,69+OUTER_SHIFT])for(const z of [-10,3,16,29]){
+  for(const x of [-72,69+OUTER_SHIFT])for(const z of (x<0?[-23,-10,29]:[-10,3,16,29])){
     plantedBed(x,z,3.2,8);
     tree(x,z,.65);
   }
@@ -218,7 +229,7 @@ export function createEscapeExterior(THREE,aspect){
     plantedBed(x,-64,6,5);
     tree(x,-64,.85);
   }
-  for(const [x,z,s] of [[-51,35,1.4],[-47,43,1.1],[-20,33,1.2],[17,35,1.3],[-65,-35,1.1],[68+OUTER_SHIFT,-38,1.25],[-17,-9,.85],[18,-9,.9]])tree(x,z,s);
+  for(const [x,z,s] of [[-20,33,1.2],[17,35,1.3],[-65,-35,1.1],[68+OUTER_SHIFT,-38,1.25],[-17,-9,.85],[18,-9,.9]])tree(x,z,s);
   for(let i=0;i<24;i++)tree(-100+i*9,-84-(i%3)*7,1+random()*.6);
   for(let i=0;i<9;i++){tree(-90,-44+i*12,1.1);tree(92+OUTER_SHIFT,-47+i*12,1.1);}
   // Low surrounding blocks establish the campus without reproducing the sale map.
