@@ -7,6 +7,7 @@ import {createWaterTower} from './water-tower.mjs';
 import {eastPhotoProfile,addEastPhotoDetails} from './east-photo-detail.mjs';
 import {courtyardPhotoProfile} from './courtyard-photo-detail.mjs';
 import {rearCourtPhotoProfile} from './rear-court-photo-detail.mjs';
+import {redesmerePhotoProfile} from './redesmere-photo-detail.mjs';
 import {innerCourtPhotoProfile,REAR_END_HEIGHTS,REAR_END_ROOF_RISE,INNER_COURT_SIDE_PROFILE} from './inner-court-photo-detail.mjs';
 export {MAP_REAR_PROPORTIONS} from './central-court-photo-detail.mjs';
 export const ESCAPE_MAST = Object.freeze({x:-69,z:-62,height:42});
@@ -126,7 +127,7 @@ export function createEscapeExterior(THREE,aspect){
   }
   function block(x,z,w,d,h,passage=null){
     const westDetail=westCourtPhotoProfile(x,z)||westFrontPhotoProfile(x,z);
-    const detail=westDetail||eastPhotoProfile(x,z)||courtyardPhotoProfile(x,z)||rearCourtPhotoProfile(x,z),foundation=detail&&!westDetail?4:2;
+    const detail=westDetail||eastPhotoProfile(x,z)||courtyardPhotoProfile(x,z)||rearCourtPhotoProfile(x,z)||redesmerePhotoProfile(x,z),foundation=detail&&!westDetail?4:2;
     const base=passage?Math.max(passage.height,foundation):foundation;
     const body=mesh(worldUV(new THREE.BoxGeometry(w,h-base,d),detail?1.7:3),detail?photoBrick:brick,x,(h+base)/2,z,true);
     const lowerRanges=passage?[[x-w/2,Math.max(x-w/2,passage.x-passage.width/2)],[Math.min(x+w/2,passage.x+passage.width/2),x+w/2]]:[[x-w/2,x+w/2]];
@@ -229,7 +230,7 @@ export function createEscapeExterior(THREE,aspect){
       crowns[2].items.push({x:x+.65,y:.7,z:z+offset+.25,s:.55});
     }
   }
-  for(const x of [-72,69+OUTER_SHIFT])for(const z of (x<0?[-23,-10,29]:[-10,3,16,29])){
+  for(const x of [-72,69+OUTER_SHIFT])for(const z of (x<0?[-23,-10,29]:[29])){
     plantedBed(x,z,3.2,8);
     tree(x,z,.65);
   }
@@ -240,7 +241,12 @@ export function createEscapeExterior(THREE,aspect){
   }
   for(const [x,z,s] of [[-20,33,1.2],[17,35,1.3],[-65,-35,1.1],[68+OUTER_SHIFT,-38,1.25],[-17,-9,.85],[18,-9,.9]])tree(x,z,s);
   for(let i=0;i<24;i++)tree(-100+i*9,-84-(i%3)*7,1+random()*.6);
-  for(let i=0;i<9;i++){tree(-90,-44+i*12,1.1);tree(92+OUTER_SHIFT,-47+i*12,1.1);}
+  for(let i=0;i<9;i++){
+    tree(-90,-44+i*12,1.1);
+    // Clear the marked Redesmere sightline, retaining an edge tree on the
+    // right of the photo and the trees beyond this stretch of the lawn.
+    const z=-47+i*12;if(z<=-35||z>=25)tree(92+OUTER_SHIFT,z,1.1);
+  }
   // Low surrounding blocks establish the campus without reproducing the sale map.
   for(const [x,z,w,d] of [[-45,-99,28,12],[38,-104,18,13],[99+OUTER_SHIFT,-52,14,25],[-109,5,24,15]]){
     mesh(new THREE.BoxGeometry(w,6,d),material(0x8a7965),x,3,z,true);hipRoof(x,z,w,d,6,2.8);

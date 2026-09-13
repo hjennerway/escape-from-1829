@@ -62,6 +62,13 @@ walk.keys.add('KeyW');for(let i=0;i<40;i++)walk.update(.1);
 assert(exterior.camera.position.x< -17.5&&exterior.camera.position.x> -18.8,'reflected west projection must have matching walking collisions');
 walkLeg([-11,-43],[-11,-7],72);
 walkLeg([-11,-7],[-11,-43],72);
+// Redesmere's new entrance/bays block walking, while the outside drive and
+// gap in its garden railing give a continuous approach from the marked lawn.
+walkLeg([105,-34],[105,22],112);
+walkLeg([105,-12],[99,-12],12);
+walk.setView({position:[100,1.8,.1],target:[90,1.8,.1]});
+walk.keys.add('KeyW');for(let i=0;i<20;i++)walk.update(.1);
+assert(exterior.camera.position.x>97.4&&exterior.camera.position.x<98,'Redesmere bay must block walking at its projecting front');
 walk.setView({position:[-31,1.8,-45],target:[-31,1.8,-30]});
 walk.keys.add('KeyW');for(let i=0;i<40;i++)walk.update(.1);
 assert(exterior.camera.position.z< -35.5&&exterior.camera.position.z> -37,'glazed west annex must block walking at its rear wall');

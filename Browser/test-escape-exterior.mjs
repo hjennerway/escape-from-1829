@@ -6,6 +6,7 @@ import {WEST_FRONT_FACADE_Z} from './dist/west-front-photo-detail.mjs';
 import {INNER_COURT_SIDE_PROFILE} from './dist/inner-court-photo-detail.mjs';
 import {sampleEscape} from './dist/escape-cutscene.mjs';
 import {sampleArrival} from './dist/arrival-cutscene.mjs';
+import {REDESMERE_PHOTO_VIEW} from './dist/redesmere-photo-detail.mjs';
 import {ESCAPE_WATER_TOWER} from './dist/water-tower.mjs';
 globalThis.document={createElement:()=>({width:0,height:0,getContext:()=>({fillRect(){}})})};
 const exterior=createEscapeExterior(THREE,16/9);
@@ -36,6 +37,31 @@ for(const aspect of [16/9,4/3,9/16])for(const seconds of [0,1,1.75,2.5]){
   }
 }
 const ray=new THREE.Raycaster(new THREE.Vector3(20,80,12),new THREE.Vector3(0,-1,0));
+// Redesmere: the two bays must have real depth, outward-facing roof geometry
+// and exposed glazing. Check rays against the whole estate, not just metadata.
+const redesmereBays=exterior.model.children.filter(o=>o.name==='Redesmere canted bay');
+assert.equal(redesmereBays.length,2);
+for(const bay of redesmereBays){
+  const bounds=new THREE.Box3().setFromObject(bay);
+  assert(bounds.max.x>97&&Math.abs(bounds.min.y)<1e-6&&bounds.max.y>9,'Redesmere bays project from the brick ground storey to the eaves');
+  ray.set(new THREE.Vector3(96.4,30,(bounds.min.z+bounds.max.z)/2),new THREE.Vector3(0,-1,0));
+  const hit=ray.intersectObject(exterior.model,true)[0];
+  assert.equal(hit.object.name,'Redesmere bay slate roof');
+  assert(hit.face.normal.y>0);
+}
+for(const opening of exterior.model.userData.redesmerePhotoOpenings.filter(o=>o.face==='redesmere-main'||o.face==='redesmere-bay')){
+  ray.set(new THREE.Vector3(100,opening.y,opening.z),new THREE.Vector3(-1,0,0));
+  const hit=ray.intersectObject(exterior.model,true)[0];
+  assert(hit.object.isInstancedMesh&&hit.point.x>opening.x,'Redesmere sash frames must be visible in front of the brick surfaces');
+}
+assert(!exterior.model.userData.redesmerePhotoOpenings.some(o=>Math.abs(o.z+12)<.1&&o.y<4),'the centre doorway must not have a superimposed sash');
+const redesmereCamera=new THREE.PerspectiveCamera(REDESMERE_PHOTO_VIEW.fov,16/9,.1,2000);
+redesmereCamera.position.set(...REDESMERE_PHOTO_VIEW.position);redesmereCamera.lookAt(...REDESMERE_PHOTO_VIEW.target);redesmereCamera.updateMatrixWorld(true);
+for(const bay of redesmereBays){
+  const centre=new THREE.Box3().setFromObject(bay).getCenter(new THREE.Vector3()).project(redesmereCamera);
+  assert(Math.abs(centre.x)<.85&&Math.abs(centre.y)<.85,'both Redesmere bays must fit the marked comparison view');
+}
+ray.set(new THREE.Vector3(20,80,12),new THREE.Vector3(0,-1,0));
 const roof=ray.intersectObject(exterior.model,true)[0];
 assert(roof&&roof.point.y>12,'principal range must have a visible roof from above');
 assert(roof.face.normal.y>0,'roof triangles must face the aerial camera');
