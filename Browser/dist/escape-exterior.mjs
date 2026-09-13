@@ -7,7 +7,8 @@ import {createWaterTower} from './water-tower.mjs';
 import {eastPhotoProfile,addEastPhotoDetails} from './east-photo-detail.mjs';
 import {courtyardPhotoProfile} from './courtyard-photo-detail.mjs';
 import {rearCourtPhotoProfile} from './rear-court-photo-detail.mjs';
-import {innerCourtPhotoProfile,REAR_END_HEIGHTS,REAR_END_ROOF_RISE} from './inner-court-photo-detail.mjs';
+import {innerCourtPhotoProfile,REAR_END_HEIGHTS,REAR_END_ROOF_RISE,INNER_COURT_SIDE_PROFILE} from './inner-court-photo-detail.mjs';
+export {MAP_REAR_PROPORTIONS} from './central-court-photo-detail.mjs';
 export const ESCAPE_MAST = Object.freeze({x:-69,z:-62,height:42});
 const EAST_SHIFT=7.1,EXTRA_BAY=3.55;
 // Retain the added east pavilion and the space made for the outer extension.
@@ -66,10 +67,12 @@ export function createEscapeExterior(THREE,aspect){
   ];
   const eastBlocks=westBlocks.map(([x,z,w,d,h])=>[-x,z,w,d,h]);
   westBlocks[0]=[-48.6,12,21.2,15,14.3];
-  westBlocks[6]=[-54.5,22,6,7,14.3]; // Stair recess in img9.jpg.
+  // The fire-exit doors belong to the existing pavilion wall, not an extra
+  // projecting stair tower. Its former block is omitted below.
   westBlocks[7]=[-39.6,3,7.2,8,11.3]; // Recessed link at the img6 courtyard corner.
-  westBlocks[5]=[-62.5,13,7,16,12.8];
-  westBlocks.push([-69,12,6,18,12.8]); // Three occupied storeys at the west court outer corner.
+  westBlocks[5]=[-62.5,10.25,7,10.5,12.8];
+  westBlocks.push([-69,9.25,6,12.5,12.8]); // Rear steps meet the taller flush frontage at z=15.5.
+  westBlocks.splice(6,1);
   eastBlocks[1][4]=14.3; // The courtyard return has three occupied storeys.
   // Approximate the red outline: a slightly longer front foot, a shallow
   // courtyard nib and a stepped outer corner joining the yellow extension.
@@ -92,7 +95,7 @@ export function createEscapeExterior(THREE,aspect){
   duplicatePavilion.push(courtyardPassage);
   eastBlocks[7].push(courtyardPassage);
   const blocks=[
-    [EAST_SHIFT/2,12,76+EAST_SHIFT,10,12.8],[0,-9,10,32,11.5],
+    [EAST_SHIFT/2,12,76+EAST_SHIFT,10,12.8],
     ...westBlocks,...eastBlocks,duplicatePavilion,
     [duplicatePavilion[0],15.5,EAST_PAVILION_WIDTH,8,4.5,courtyardPassage],
     [69.2,5,6,9,12.8], // Stair block seen behind the cut-through in img2.jpg.
@@ -165,7 +168,10 @@ export function createEscapeExterior(THREE,aspect){
   }
   const white=material(0xe1e3dc),photoBrick=material(0xb3a5a0,{map:bricks});
   for(const b of blocks){
-    if(innerCourtPhotoProfile(b[0],b[1]))hipRoof(b[0],b[1],b[2],b[3],REAR_END_HEIGHTS.east-REAR_END_ROOF_RISE,REAR_END_ROOF_RISE);
+    if(innerCourtPhotoProfile(b[0],b[1])){
+      const {join,front}=INNER_COURT_SIDE_PROFILE;
+      hipRoof(b[0],(join+front)/2,b[2],front-join,REAR_END_HEIGHTS.east-REAR_END_ROOF_RISE,REAR_END_ROOF_RISE);
+    }
     else block(...b);
   }
   // The pediment and columned red doorway identify the central 1829 entrance.
@@ -204,6 +210,7 @@ export function createEscapeExterior(THREE,aspect){
   box(gravel,45+OUTER_SHIFT/2,.18,-12,17+OUTER_SHIFT,.12,39);
   box(gravel,40,.18,-36,7,.12,18);
   box(path,courtyardPassage.x,.2,13,courtyardPassage.width,.1,34);
+  // The corrected centre ends before the existing cross-drive at z=-46.
   box(gravel,0,.15,-62,106,.12,23);
   // Broadleaf crowns cast shadows across the front lawn and site edges.
   const bark=material(0x5a4e3d),leaves=[material(0x43583a),material(0x566944),material(0x657448)];

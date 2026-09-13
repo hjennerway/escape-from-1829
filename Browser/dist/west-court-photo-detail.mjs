@@ -2,7 +2,7 @@
 // The locator image fixes the court; unseen dimensions remain approximations.
 export const WEST_COURT_PHOTO_VIEW=Object.freeze({position:[-51,1.8,-33],target:[-54,7,5],fov:66});
 export function westCourtPhotoProfile(x,z){
-  return (x===-48.6&&z===12)||(x===-62.5&&z===13)||(x===-69&&z===12)||(x===-39.6&&z===3)||(x===-31&&z===-10);
+  return (x===-48.6&&z===12)||(x===-62.5&&z===10.25)||(x===-69&&z===9.25)||(x===-39.6&&z===3)||(x===-31&&z===-10);
 }
 export function addWestCourtPhotoDetails(THREE,{model,box,mesh,worldUV,white,brick,roof,material,sash,door,rod,iron,stone,frame}){
   const start=model.userData.eastPhotoOpenings.length;
@@ -37,7 +37,7 @@ export function addWestCourtPhotoDetails(THREE,{model,box,mesh,worldUV,white,bri
     box(white,-69,y,2.86,6.12,.18,.23);
     box(white,-65.88,y,4,.23,.18,2.3);
   }
-  for(const y of [2,6.4,10.4])for(const z of [6,10,14,18])sash('west-outer-side',-72.05,y,z,-Math.PI/2,1.08,2.25);
+  for(const y of [2,6.4,10.4])for(const z of [6,10,14])sash('west-outer-side',-72.05,y,z,-Math.PI/2,1.08,2.25);
   for(const x of [-65.9,-71.7])box(iron,x,6.3,2.74,.085,12.6,.085);
   // Retain the photographed front curved bay; only its flanking front sashes
   // are added here, while the new polygonal bay faces the rear court.

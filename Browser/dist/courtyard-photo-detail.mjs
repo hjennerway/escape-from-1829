@@ -76,7 +76,7 @@ export function addCourtyardPhotoDetails(THREE,{model,box,mesh,worldUV,white,bri
   for(const y of [2,6.5,11]){
     for(const z of [-22.5,-18.8,-15.1,-11.4,-7.7,-4,-.3,3]){
       sash('courtyard-west-wing',37.05,y,z,Math.PI/2,1.02,2.35);
-      sash('inner-west-wing',24.95,y,z,-Math.PI/2,1.02,2.35);
+      // The inward face has its own img14 window schedule and projections.
     }
     for(const x of [27.5,31,34.5])sash('west-wing-end',x,y,5.05,0,1.02,2.35);
   }

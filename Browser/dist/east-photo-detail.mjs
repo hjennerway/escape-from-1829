@@ -6,6 +6,7 @@ import {addWestCourtPhotoDetails} from './west-court-photo-detail.mjs';
 import {addCourtyardPhotoDetails} from './courtyard-photo-detail.mjs';
 import {addRearCourtPhotoDetails} from './rear-court-photo-detail.mjs';
 import {addInnerCourtPhotoDetails} from './inner-court-photo-detail.mjs';
+import {addCentralCourtPhotoDetails} from './central-court-photo-detail.mjs';
 export const EAST_PHOTO_VIEW=Object.freeze({position:[76,1.8,48],target:[53,5.4,21],fov:76});
 
 export function eastPhotoProfile(x,z){
@@ -123,5 +124,6 @@ export function addEastPhotoDetails(THREE,{model,box,mesh,worldUV,white,brick,ro
   addWestCourtPhotoDetails(THREE,{model,box,mesh,worldUV,white,brick,roof,material,sash,door,rod,iron,stone,frame});
   addCourtyardPhotoDetails(THREE,{model,box,mesh,worldUV,white,brick,roof,material,sash,door,rod,iron,stone,frame,glass});
   addInnerCourtPhotoDetails(THREE,{model,box,mesh,worldUV,white,brick,roof,material,sash,door,rod,iron,stone});
+  addCentralCourtPhotoDetails(THREE,{model,box,mesh,worldUV,white,brick,roof,sash,door,rod,iron,stone,hipRoof});
   addRearCourtPhotoDetails(THREE,{model,box,mesh,worldUV,white,brick,roof,material,sash,door,rod,iron,stone,frame,glass});
 }

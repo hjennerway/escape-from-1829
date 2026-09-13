@@ -1,22 +1,22 @@
 // img9.jpg, located by img9-loc.png: west front garden and stair recess.
 export const WEST_FRONT_PHOTO_VIEW=Object.freeze({position:[-73,1.8,51],target:[-51,7,24],fov:70});
-export function westFrontPhotoProfile(x,z){return (x===-36.5&&z===23)||(x===-35&&z===35)||(x===-54.5&&z===22);}
+export const WEST_FRONT_FACADE_Z=19.5;
+export function westFrontPhotoProfile(x,z){return (x===-36.5&&z===23)||(x===-35&&z===35);}
 export function addWestFrontPhotoDetails(THREE,{model,box,mesh,worldUV,white,brick,roof,material,sash,door,rod,iron,stone,hipRoof}){
   const start=model.userData.eastPhotoOpenings.length;
-  // The photographed square front projects from the already widened west end.
-  mesh(worldUV(new THREE.BoxGeometry(13,15.2,4),1.7),brick,-65.5,7.6,23,true).name='West front square pavilion';
-  hipRoof(-65.5,23,13,4,15.3,1.7);
-  for(const y of [4.05,8.6,15.2])box(white,-65.5,y,23,13.15,.18,4.15);
-  for(const y of [2,6.4,11.8])for(const x of [-68,-62.5])sash('west-front-square',x,y,25.06,0,1.65,2.75);
+  // The square frontage and stair doors share the pavilion's facade plane.
+  mesh(worldUV(new THREE.BoxGeometry(13,15.2,4),1.7),brick,-65.5,7.6,17.5,true).name='West front square pavilion';
+  hipRoof(-65.5,17.5,13,4,15.3,1.7);
+  for(const y of [4.05,8.6,15.2])box(white,-65.5,y,17.5,13.15,.18,4.15);
+  for(const y of [2,6.4,11.8])for(const x of [-68,-62.5])sash('west-front-square',x,y,WEST_FRONT_FACADE_Z+.06,0,1.65,2.75);
   // A white entrance surround belongs only to the narrow west return.
-  box(white,-72.06,2,23,.16,4,4);
-  door(-72.16,23,-Math.PI/2);
-  for(const y of [6.4,11.8])sash('west-front-square-return',-72.08,y,23,-Math.PI/2,1.15,2.8);
-  for(const y of [2,6.4,11.8])sash('west-front-square-east',-58.94,y,23,Math.PI/2,1.15,2.7);
+  box(white,-72.06,2,17.5,.16,4,4);
+  door(-72.16,17.5,-Math.PI/2);
+  for(const y of [6.4,11.8])sash('west-front-square-return',-72.08,y,17.5,-Math.PI/2,1.15,2.8);
   // Tall inset beside the bay: two landing doors and a ground-floor sash.
-  sash('west-front-stair-inset',-55.6,2,25.56,0,1.15,2.5);
-  door(-55.6,25.57,0,4.25);door(-53.6,25.57,0,8.5);
-  for(const y of [4.05,8.6])box(white,-54.5,y,25.62,6.1,.18,.2);
+  sash('west-front-stair-inset',-55.6,2,19.56,0,1.15,2.5);
+  door(-55.6,19.57,0,4.25);door(-53.6,19.57,0,8.5);
+  for(const y of [4.05,8.6])box(white,-48.6,y,19.62,21.32,.18,.2);
   // Fine sash glazing follows the flat facets of the existing west bay.
   const bx=-46,bz=19,r=3.15,apothem=r*Math.cos(Math.PI/8);
   mesh(worldUV(new THREE.CylinderGeometry(r,r,14.3,8),1.7),brick,bx,7.15,bz,true).name='West curved bay';
@@ -26,8 +26,8 @@ export function addWestFrontPhotoDetails(THREE,{model,box,mesh,worldUV,white,bri
     const a=offset*Math.PI/8;
     for(const y of [2,6.5,11])sash('west-front-bay',bx+Math.sin(a)*(apothem+.06),y,bz+Math.cos(a)*(apothem+.06),a,Math.abs(offset)===1?.86:.6,2.5);
   }
-  for(const y of [2,6.5,11])sash('west-front-recess',-50, y,19.56,0,.95,2.4);
-  for(const [x,z,h] of [[-71.8,25.2,15],[-57.35,25.7,14.2],[-41.18,29,8.5]])box(iron,x,h/2,z,.085,h,.085);
+  for(const y of [2,6.5,11])for(const x of [-50,-42])sash('west-front-bay-flank',x,y,19.56,0,.95,2.4);
+  for(const [x,z,h] of [[-71.8,19.7,15],[-57.35,19.7,14.2],[-41.18,29,8.5]])box(iron,x,h/2,z,.085,h,.085);
 
   const stair=new THREE.Group();stair.name='West front iron return stair';model.add(stair);
   function rail(a,b,r=.03){rod(a,b,r);stair.attach(model.children[model.children.length-1]);}
@@ -42,12 +42,12 @@ export function addWestFrontPhotoDetails(THREE,{model,box,mesh,worldUV,white,bri
       rail([x0,y0-.1,z+side*.56],[x1,y1-.1,z+side*.56],.065);
     }
   }
-  box(iron,-53.6,8.5,26.45,2.2,.14,1.8);
-  box(iron,-56.5,4.25,27.15,2.5,.14,3.2);
-  flight(-53.6,8.5,-56.5,4.25,26.65);flight(-56.5,4.25,-53.4,.3,28.2);
-  for(const [x,z,h] of [[-52.6,27.2,8.5],[-54.6,27.2,8.5],[-57.5,28.6,4.25]])rail([x,.2,z],[x,h+1.05,z],.07);
-  rail([-54.6,9.55,27.2],[-52.6,9.55,27.2]);
-  for(let i=0;i<8;i++)box(iron,-54.6+i*.28,9.02,27.2,.035,1.04,.035);
+  box(iron,-53.6,8.5,20.45,2.2,.14,1.8);
+  box(iron,-56.5,4.25,21.15,2.5,.14,3.2);
+  flight(-53.6,8.5,-56.5,4.25,20.65);flight(-56.5,4.25,-53.4,.3,22.2);
+  for(const [x,z,h] of [[-52.6,21.2,8.5],[-54.6,21.2,8.5],[-57.5,22.6,4.25]])rail([x,.2,z],[x,h+1.05,z],.07);
+  rail([-54.6,9.55,21.2],[-52.6,9.55,21.2]);
+  for(let i=0;i<8;i++)box(iron,-54.6+i*.28,9.02,21.2,.035,1.04,.035);
 
   // Lower forward range: brick ground floor, tall upper sashes and slate roof.
   for(const y of [1.9,6.3]){

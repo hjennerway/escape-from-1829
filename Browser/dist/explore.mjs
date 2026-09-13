@@ -6,6 +6,8 @@ import {COURTYARD_PHOTO_VIEW} from './courtyard-photo-detail.mjs';
 import {REAR_COURT_PHOTO_VIEW} from './rear-court-photo-detail.mjs';
 import {WEST_FRONT_PHOTO_VIEW} from './west-front-photo-detail.mjs';
 import {WEST_COURT_PHOTO_VIEW} from './west-court-photo-detail.mjs';
+import {centralCourtPhotoView} from './central-court-photo-detail.mjs';
+import {innerEastPhotoView} from './inner-east-elevation.mjs';
 import {INNER_COURT_PHOTO_VIEW} from './inner-court-photo-detail.mjs';
 const canvas=document.getElementById('game'),hint=document.getElementById('lookHint'),look=document.getElementById('look');
 try{
@@ -22,6 +24,8 @@ try{
   if(new URLSearchParams(location.search).get('view')==='west-court-photo')walker.setView(WEST_COURT_PHOTO_VIEW);
   if(new URLSearchParams(location.search).get('view')==='inner-court-photo')walker.setView(INNER_COURT_PHOTO_VIEW);
   if(new URLSearchParams(location.search).get('view')==='rear-court-photo')walker.setView(REAR_COURT_PHOTO_VIEW);
+  if(new URLSearchParams(location.search).get('view')==='inner-east-photo')walker.setView(innerEastPhotoView(exterior.camera.aspect));
+  if(new URLSearchParams(location.search).get('view')==='central-court-photo')walker.setView(centralCourtPhotoView(exterior.camera.aspect));
   let active=false,dragging=false,last=null;
   const movement=new Set(['KeyW','KeyA','KeyS','KeyD','ShiftLeft','ShiftRight']);
   function stop(){active=false;dragging=false;last=null;walker.keys.clear();hint.textContent='Click Start exploring to resume, or drag the view to look around.';look.textContent='START EXPLORING ↗';}
@@ -39,7 +43,7 @@ try{
   document.addEventListener('keyup',e=>walker.keys.delete(e.code));
   window.addEventListener('blur',stop);
   document.addEventListener('visibilitychange',()=>{if(document.hidden)stop();});
-  window.addEventListener('resize',()=>{renderer.setSize(innerWidth,innerHeight);exterior.camera.aspect=innerWidth/innerHeight;exterior.camera.updateProjectionMatrix();});
+  window.addEventListener('resize',()=>{renderer.setSize(innerWidth,innerHeight);exterior.camera.aspect=innerWidth/innerHeight;if(new URLSearchParams(location.search).get('view')==='inner-east-photo')exterior.camera.fov=innerEastPhotoView(exterior.camera.aspect).fov;if(new URLSearchParams(location.search).get('view')==='central-court-photo')exterior.camera.fov=centralCourtPhotoView(exterior.camera.aspect).fov;exterior.camera.updateProjectionMatrix();});
   const clock=new THREE.Clock();
   renderer.setAnimationLoop(()=>{const dt=clock.getDelta();if(active&&!document.hidden)walker.update(dt);renderer.render(exterior.scene,exterior.camera);});
   loadEscapeFrontage(THREE,exterior).catch(error=>console.warn('Frontage photo unavailable',error));

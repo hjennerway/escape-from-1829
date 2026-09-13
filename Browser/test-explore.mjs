@@ -27,12 +27,13 @@ for(let i=0;i<80;i++)walk.update(.1);
 assert(exterior.camera.position.z<-10,'the ground-floor bridge passage must lead all the way into the courtyard');
 walk.keys.clear();walk.keys.add('KeyS');for(let i=0;i<80;i++)walk.update(.1);
 assert(exterior.camera.position.z>27,'the courtyard passage is traversable back to the front lawn');
-// The garden and both stair structures leave a continuous route along x=9.
-walk.setView({position:[9,1.8,-43],target:[9,1.8,0]});
-walk.keys.add('KeyW');for(let i=0;i<74;i++)walk.update(.1);
-assert(exterior.camera.position.z>-7,'inner courtyard remains reachable from the rear road beside the raised garden');
-walk.keys.clear();walk.keys.add('KeyS');for(let i=0;i<74;i++)walk.update(.1);
-assert(exterior.camera.position.z<-42,'the same inner-court route remains open in reverse');
+// The route passes outside the rear stair, then beside the existing garden.
+function walkLeg(from,to,steps){
+  walk.setView({position:[from[0],1.8,from[1]],target:[to[0],1.8,to[1]]});
+  walk.keys.add('KeyW');for(let i=0;i<steps;i++)walk.update(.1);
+  assert(Math.hypot(exterior.camera.position.x-to[0],exterior.camera.position.z-to[1])<.1,'courtyard route must reach the next turn without colliding');
+}
+for(const [from,to,steps] of [[[11,-43],[11,-34.5],17],[[11,-34.5],[9,-34.5],4],[[9,-34.5],[9,-7],55],[[9,-7],[9,-34.5],55],[[9,-34.5],[11,-34.5],4],[[11,-34.5],[11,-43],17]])walkLeg(from,to,steps);
 walk.setView({position:[-48,1.8,-29],target:[-48,1.8,5]});
 walk.keys.add('KeyW');for(let i=0;i<56;i++)walk.update(.1);
 assert(exterior.camera.position.z> -2,'west courtyard remains accessible to the entrance apron');
@@ -41,9 +42,20 @@ walk.keys.add('KeyW');for(let i=0;i<55;i++)walk.update(.1);
 assert(exterior.camera.position.z<1,'walking must stop at the new polygonal bay');
 walk.setView({position:[-60,1.8,44],target:[-60,1.8,20]});
 walk.keys.add('KeyW');for(let i=0;i<60;i++)walk.update(.1);
-assert(exterior.camera.position.z>25,'west front square pavilion must block walking through its facade');
+assert(exterior.camera.position.z>19.5&&exterior.camera.position.z<21,'west front square pavilion blocks walking at its new aligned facade');
+walk.setView({position:[0,1.8,-55],target:[0,1.8,-30]});
+walk.keys.add('KeyW');for(let i=0;i<50;i++)walk.update(.1);
+assert(exterior.camera.position.z<-39.5&&exterior.camera.position.z>-41,'shortened centre blocks walking at its corrected rear wall');
+for(const x of [-10,10]){
+  walk.setView({position:[x,1.8,-70],target:[x,1.8,-38]});
+  walk.keys.add('KeyW');for(let i=0;i<64;i++)walk.update(.1);
+  assert(exterior.camera.position.z>-39,'both rear approaches remain walkable beside the corrected centre');
+}
 walk.setView({position:[-49,1.8,43],target:[-35,1.8,43]});
 walk.keys.add('KeyW');for(let i=0;i<40;i++)walk.update(.1);
 assert(exterior.camera.position.x<-45.4,'low glazed extension must block walking through its side');
+walk.setView({position:[10,1.8,-14.5],target:[28,1.8,-14.5]});
+walk.keys.add('KeyW');for(let i=0;i<40;i++)walk.update(.1);
+assert(exterior.camera.position.x>17.5&&exterior.camera.position.x<18.8,'new inner-east enclosure must block walking through its projecting front');
 delete globalThis.document;
 console.log('PASS: exterior WASD, normalized diagonals, mouse-relative movement, pitch limits, building collisions, wall sliding, reset and stalled frames.');

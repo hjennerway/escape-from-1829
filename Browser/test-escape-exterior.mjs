@@ -1,7 +1,9 @@
 // Real Three.js geometry/camera checks, without a WebGL context.
 import assert from 'node:assert/strict';
 import * as THREE from './dist/vendor/three.module.js';
-import {createEscapeExterior,ESCAPE_MAST} from './dist/escape-exterior.mjs';
+import {createEscapeExterior,ESCAPE_MAST,MAP_REAR_PROPORTIONS} from './dist/escape-exterior.mjs';
+import {WEST_FRONT_FACADE_Z} from './dist/west-front-photo-detail.mjs';
+import {INNER_COURT_SIDE_PROFILE} from './dist/inner-court-photo-detail.mjs';
 import {sampleEscape} from './dist/escape-cutscene.mjs';
 import {sampleArrival} from './dist/arrival-cutscene.mjs';
 import {ESCAPE_WATER_TOWER} from './dist/water-tower.mjs';
@@ -39,7 +41,8 @@ assert(roof&&roof.point.y>12,'principal range must have a visible roof from abov
 assert(roof.face.normal.y>0,'roof triangles must face the aerial camera');
 // The inner court now routes west of its raised garden and external stairs.
 for(const x of [-23,9])for(const z of [-17,-26,-30,-34,-40]){
-  ray.set(new THREE.Vector3(x,80,z),new THREE.Vector3(0,-1,0));
+  // Pass outside the relocated central stair before turning beside the garden.
+  ray.set(new THREE.Vector3(x===9&&z<=-34?11:x,80,z),new THREE.Vector3(0,-1,0));
   assert(ray.intersectObject(exterior.model,true)[0].point.y<1,'both W-shaped gaps must open through to the rear road');
 }
 // The corrected east wing and L-shaped addition must have continuous roofs,
@@ -123,14 +126,14 @@ for(const aspect of [16/9,4/3,9/16])for(const seconds of [0,5,10]){
     assert(Math.abs(p.x)<.95&&Math.abs(p.y)<.95,'building must stay in frame throughout the pan');
   }
 }
-// Both circled rear ends have sloped roofs, with ridge heights exactly
-// two-thirds of their adjoining long wing (including that wing's roof).
+// The western end and moved eastern stair section retain their ridge heights.
+// The eastern rear annex now has a separate, lower single-slope roof.
 for(const x of [-31,31]){
   const topAt=z=>{
     ray.set(new THREE.Vector3(x,80,z),new THREE.Vector3(0,-1,0));
     return ray.intersectObject(exterior.model,true)[0];
   };
-  const main=topAt(-10),end=topAt(-30),slope=topAt(-34);
+  const main=topAt(-10),end=topAt(x<0?-30:-27.5),slope=topAt(x<0?-34:-29.8);
   assert(Math.abs(end.point.y/main.point.y-2/3)<.001,'rear end ridge must be two-thirds of the adjoining wing ridge');
   assert(slope.point.y<end.point.y-.5,'roof must visibly fall from ridge to rear eaves');
   assert(slope.face.normal.y>0&&slope.face.normal.y<.99,'rear roof must have upward-facing pitched surfaces');
@@ -144,6 +147,45 @@ for(const o of exterior.model.userData.innerCourtPhotoOpenings.filter(o=>o.face=
   assert(hit.point.z<-35.5&&hit.point.z>-36,'north sashes must sit in front of the brick facade');
 }
 assert(exterior.model.getObjectByName('Inner court iron stairs').children.length>=15);
+const stairSection=new THREE.Box3().setFromObject(exterior.model.getObjectByName('Inner court projecting brick block'));
+assert.equal(stairSection.min.z,INNER_COURT_SIDE_PROFILE.join,'tall stair wall must vacate the former rear position');
+assert.equal(stairSection.max.z,INNER_COURT_SIDE_PROFILE.front,'moved stair section replaces the former blank stretch');
+const annexRoof=exterior.model.getObjectByName('Inner court rear annex sloped roof');
+const annexHeights=[];
+for(const z of [-35,-31.2]){
+  ray.set(new THREE.Vector3(31,80,z),new THREE.Vector3(0,-1,0));
+  const hit=ray.intersectObject(exterior.model,true)[0];
+  assert.equal(hit.object,annexRoof,'old stair position must expose the lower annex roof');
+  const normal=hit.face.normal.clone().transformDirection(hit.object.matrixWorld);
+  assert(normal.y>.9&&normal.y<.99,'annex roof must have a real pitch');
+  annexHeights.push(hit.point.y);
+}
+assert(annexHeights[1]-annexHeights[0]>.7&&annexHeights[1]<8,'low roof rises towards the moved stair section');
+for(const o of exterior.model.userData.innerCourtPhotoOpenings.filter(o=>['inner-block-west','inner-annex-west'].includes(o.face))){
+  ray.set(new THREE.Vector3(23.7,o.y,o.z),new THREE.Vector3(1,0,0));
+  const hit=ray.intersectObject(exterior.model,true)[0];
+  assert(hit.object.isInstancedMesh&&hit.point.x>24.1&&hit.point.x<24.45,'windows on both the moved section and low annex remain exposed');
+}
+ray.set(new THREE.Vector3(23.7,6.7,-31),new THREE.Vector3(1,0,0));
+assert(ray.intersectObject(exterior.model,true)[0].object.name==='Inner court sloping annex walls','sloping roof must have outward-facing brick infill beneath it');
+// img14: a tall, narrow enclosure projects into the inner east court while
+// the preceding lowered rear end, glazing and walkable passage are retained.
+const innerProjection=new THREE.Box3().setFromObject(exterior.model.getObjectByName('Inner east tall rectangular projection'));
+assert(innerProjection.min.x<19&&Math.abs(innerProjection.max.x-25)<.001&&innerProjection.max.y>14,'enclosure must project from the wing at full height');
+assert(exterior.model.getObjectByName('Inner east stepped return'));
+const innerEastOpenings=exterior.model.userData.innerEastPhotoOpenings;
+assert.equal(innerEastOpenings.filter(o=>o.face==='inner-east-projection-front').length,3,'plain enclosure front has one opening on each floor');
+for(const o of innerEastOpenings){
+  const sideReturn=['inner-east-projection-return','inner-east-stepped-return'].includes(o.face);
+  ray.set(new THREE.Vector3(sideReturn?o.x:o.x-1,o.y,sideReturn?o.z-1:o.z),new THREE.Vector3(sideReturn?0:1,0,sideReturn?1:0));
+  const hit=ray.intersectObject(exterior.model,true)[0];
+  assert(hit.object.isInstancedMesh&&hit.point.distanceTo(new THREE.Vector3(o.x,o.y,o.z))<.3,'new glazing must be exposed on its own wall, not hidden in the original facade');
+}
+for(const bottom of [2.4,5.9]){
+  ray.set(new THREE.Vector3(23.5,bottom+1.4,-29.8+INNER_COURT_SIDE_PROFILE.stairShift),new THREE.Vector3(1,0,0));
+  const hit=ray.intersectObject(exterior.model,true)[0];
+  assert(hit.object.isInstancedMesh&&hit.point.x>24&&hit.point.x<24.42,'both aligned stair doors remain visible above their landings');
+}
 // img6: the west courtyard bay projects into the court and the paired
 // openings remain visible rather than buried behind the corner link or bay.
 const westBay=exterior.model.getObjectByName('West courtyard polygonal bay');
@@ -178,8 +220,49 @@ assert.equal(exterior.model.children.filter(o=>o.name==='West front chimney').le
 assert(exterior.model.getObjectByName('West front iron return stair').children.length>=12);
 for(const o of westFront.filter(o=>o.face==='west-front-square')){
   ray.set(new THREE.Vector3(o.x,o.y,27),new THREE.Vector3(0,0,-1));
-  assert(ray.intersectObject(exterior.model,true)[0].point.z>25,'front glazing must be outside its brick wall');
+  const hit=ray.intersectObject(exterior.model,true)[0];
+  assert(hit.object.isInstancedMesh&&hit.point.z>WEST_FRONT_FACADE_Z&&hit.point.z<20,'front glazing must be exposed on the aligned facade');
 }
+const westSquareBounds=new THREE.Box3().setFromObject(exterior.model.getObjectByName('West front square pavilion'));
+assert.equal(westSquareBounds.max.z,WEST_FRONT_FACADE_Z);
+const flanking=westFront.filter(o=>o.face==='west-front-bay-flank');
+assert.equal(flanking.length,6,'a sash on both sides of the curved bay on all three floors');
+for(const o of flanking){
+  ray.set(new THREE.Vector3(o.x,o.y,24),new THREE.Vector3(0,0,-1));
+  const hit=ray.intersectObject(exterior.model,true)[0];
+  assert(hit.object.isInstancedMesh&&hit.point.z>19.5&&hit.point.z<20,'bay flanking glazing must remain exposed beside the bay and forward range');
+}
+ray.set(new THREE.Vector3(-54.5,12.7,30),new THREE.Vector3(0,0,-1));
+assert(Math.abs(ray.intersectObject(exterior.model,true)[0].point.z-WEST_FRONT_FACADE_Z)<.01,'stair wall must sit flush with the pavilion');
+assert(new THREE.Box3().setFromObject(exterior.model.getObjectByName('West front iron return stair')).max.z<23,'retained iron stairs move back with the doors');
+// Check actual roof edges against the relative lengths in the yellow marks.
+const {wingRear,centralRear,courtyardRear}=MAP_REAR_PROPORTIONS;
+assert(centralRear<wingRear&&centralRear>courtyardRear,'centre must end between the two wing ends and east courtyard return');
+assert.equal(wingRear-centralRear,4,'centre extends only a short distance beyond the side wings');
+ray.set(new THREE.Vector3(0,80,6),new THREE.Vector3(0,-1,0));
+assert(ray.intersectObject(exterior.model,true)[0].point.y>8,'shortened two-storey centre must remain connected to the principal range');
+for(const [x,end] of [[0,centralRear],[-31,wingRear],[31,wingRear]]){
+  ray.set(new THREE.Vector3(x,80,end+.5),new THREE.Vector3(0,-1,0));
+  assert(ray.intersectObject(exterior.model,true)[0].point.y>(x===31?5.8:8),'each marked section must reach its mapped rear extent, including the lowered east annex');
+  ray.set(new THREE.Vector3(x,80,end-1),new THREE.Vector3(0,-1,0));
+  assert(ray.intersectObject(exterior.model,true)[0].point.y<1,'rear ends must stop at their mapped extent');
+}
+for(const [x,z] of [[-10,-46],[10,-46],[0,-46],[0,-55]]){
+  ray.set(new THREE.Vector3(x,80,z),new THREE.Vector3(0,-1,0));
+  assert(ray.intersectObject(exterior.model,true)[0].point.y<1,'cross-drive is clear behind the shortened centre');
+}
+const centralWindows=exterior.model.userData.centralCourtPhotoOpenings;
+assert.equal(centralWindows.filter(o=>o.face==='central-court-upper').length,7,'img11 long elevation has seven upper windows');
+assert.equal(centralWindows.filter(o=>o.face==='central-court-rear-upper').length,3,'raised rear section has three upper windows beside the door');
+for(const o of centralWindows.filter(o=>!['central-court-west','central-court-rear-end'].includes(o.face))){
+  ray.set(new THREE.Vector3(o.x+.6,o.y,o.z),new THREE.Vector3(-1,0,0));
+  const hit=ray.intersectObject(exterior.model,true)[0];
+  assert(hit.object.isInstancedMesh&&hit.point.x>o.x&&hit.point.x<o.x+.3,'central range windows must stand outside their wall faces');
+}
+const centralBody=new THREE.Box3().setFromObject(exterior.model.getObjectByName('Central court two-storey range'));
+const centralRearBody=new THREE.Box3().setFromObject(exterior.model.getObjectByName('Central court raised rear section'));
+assert(centralBody.max.y<9&&centralRearBody.max.y>9&&centralRearBody.max.y<10,'photo elevation has two occupied storeys and a modest rear height step');
+assert(centralRearBody.max.x>centralBody.max.x&&centralRearBody.max.x-centralBody.max.x<1.5,'rear section projects only slightly into the court');
 for(const o of westFront.filter(o=>o.face==='west-front-extension')){
   ray.set(new THREE.Vector3(-46,o.y,o.z),new THREE.Vector3(1,0,0));
   const hit=ray.intersectObject(exterior.model,true)[0];

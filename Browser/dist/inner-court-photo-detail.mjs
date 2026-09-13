@@ -1,36 +1,58 @@
-// img3.jpg and img3-loc.png: inner eastern court, viewed from the rear.
+// img3.jpg and img14.jpg: inner eastern court, viewed from the rear and side.
 // Architectural proportions are visual estimates; planting and plain ironwork
 // adapt the present-day photograph to the game's circa-1900 grounds.
+import {addInnerEastElevation} from './inner-east-elevation.mjs';
 export const INNER_COURT_PHOTO_VIEW=Object.freeze({position:[10,1.8,-44],target:[23,6,-26],fov:66});
-// Heights include the roof: each end ridge is two-thirds of its adjoining
-// wing ridge. Both ends use a visibly pitched slate roof with a 2.2-unit rise.
+// Keep the established stair-section ridge; the newly identified rear
+// annex is lower and has its own single-slope roof.
 export const REAR_END_ROOF_RISE=2.2;
 export const REAR_END_HEIGHTS=Object.freeze({west:(11.3+.23+3.6)*2/3,east:(14.3+.23+3.6)*2/3});
+export const INNER_COURT_SIDE_PROFILE=Object.freeze({rear:-35.5,join:-30.5,front:-24.5,stairShift:4,rearEaves:6.1,frontEaves:7.2});
 export function innerCourtPhotoProfile(x,z){return x===31&&z===-30;}
 
 export function addInnerCourtPhotoDetails(THREE,{model,box,mesh,worldUV,white,brick,roof,material,sash,door,rod,iron,stone}){
   const start=model.userData.eastPhotoOpenings.length;
   const plinth=material(0xddd0ae,{map:brick.map}),lawn=material(0x638046),bark=material(0xc0bcb0);
   const leaves=[material(0x496b3a),material(0x567943),material(0x65854a)];
-  // The east rear end is lower than the main wing, under a hipped slate roof.
+  // Move the occupied stair section towards +Z (the front), replacing the
+  // blank red-circled stretch. The rear footprint becomes the low annex.
+  const profile=INNER_COURT_SIDE_PROFILE;
   const eaves=REAR_END_HEIGHTS.east-REAR_END_ROOF_RISE;
-  mesh(worldUV(new THREE.BoxGeometry(13,eaves-2,11),1.7),brick,31,(eaves+2)/2,-30,true).name='Inner court projecting brick block';
+  const stairCentre=(profile.join+profile.front)/2,stairDepth=profile.front-profile.join;
+  mesh(worldUV(new THREE.BoxGeometry(13,eaves-2,stairDepth),1.7),brick,31,(eaves+2)/2,stairCentre,true).name='Inner court projecting brick block';
   mesh(worldUV(new THREE.BoxGeometry(13,2,11),1.7),plinth,31,1,-30,true);
-  box(white,31,eaves-.1,-30,13.25,.2,11.25);
+  box(white,31,eaves-.1,stairCentre,13.25,.2,stairDepth+.25);
+  // The yellow-circled roof rises towards the stair block. Build both its
+  // sloping brick side walls and pitched slate surface, not a flat cap.
+  const annexDepth=profile.join-profile.rear,annexCentre=(profile.rear+profile.join)/2;
+  const rise=profile.frontEaves-profile.rearEaves,slope=rise/annexDepth;
+  mesh(worldUV(new THREE.BoxGeometry(13,profile.rearEaves-2,annexDepth),1.7),brick,31,(profile.rearEaves+2)/2,annexCentre,true).name='Inner court low rear annex';
+  const wedge=new THREE.BufferGeometry();
+  const points=[[-6.5,0,-annexDepth/2],[6.5,0,-annexDepth/2],[-6.5,0,annexDepth/2],[6.5,0,annexDepth/2],[-6.5,rise,annexDepth/2],[6.5,rise,annexDepth/2]];
+  const faces=[[0,4,2],[1,3,5],[2,4,5],[2,5,3],[0,1,5],[0,5,4],[0,2,3],[0,3,1]].map(face=>face.reverse());
+  wedge.setAttribute('position',new THREE.Float32BufferAttribute(faces.flatMap(f=>f.flatMap(i=>points[i])),3));
+  wedge.setAttribute('uv',new THREE.Float32BufferAttribute(faces.flatMap(f=>f.flatMap(i=>[points[i][0]/1.7,points[i][1]/1.7])),2));
+  wedge.computeVertexNormals();
+  mesh(worldUV(wedge,1.7),brick,31,profile.rearEaves,annexCentre,true).name='Inner court sloping annex walls';
+  const pitch=-Math.atan(slope),roofLength=(annexDepth+.8)/Math.cos(pitch),roofY=(profile.rearEaves+profile.frontEaves)/2;
+  const annexRoof=mesh(new THREE.BoxGeometry(13.8,.16,roofLength),roof,31,roofY,annexCentre,true);
+  annexRoof.rotation.x=pitch;annexRoof.name='Inner court rear annex sloped roof';
+  for(const x of [24.4,37.6])mesh(new THREE.BoxGeometry(.18,.18,roofLength),white,x,roofY,annexCentre).rotation.x=pitch;
+  for(const z of [profile.rear-.3,profile.join+.3])box(white,31,roofY+(z-annexCentre)*slope,z,13.4,.18,.18);
   for(const x of [24.6,28.85,33.15,37.4])box(white,x,1,-35.57,.16,2,.12);
   box(stone,31,2.04,-35.6,13.15,.16,.26);
   box(stone,24.42,2.04,-30,.26,.16,11);
-  // North elevation: small basement lights, tall middle sashes and a broad
-  // central upper sash between narrower openings.
+  // The low rear has basement and upper windows. The former top row belongs
+  // on the exposed end of the moved stair section, above the annex roof.
   for(const x of [28.8,33.2])sash('inner-block-basement',x,1.1,-35.57,Math.PI,1.2,1.2);
   for(const x of [27,31,35])sash('inner-block-north',x,4.15,-35.57,Math.PI,1.22,2.2);
-  for(const x of [27,31,35])sash('inner-block-north',x,7.9,-35.57,Math.PI,x===31?2.05:1.12,2.2);
-  box(iron,31,5.92,-35.68,13.1,.13,.38);
-  box(white,27.5,5.72,-35.65,6,.18,.3);
+  for(const x of [27,31,35])sash('inner-stair-north',x,8.5,profile.join-.07,Math.PI,x===31?2.05:1.12,1.7);
   for(const x of [28.8,36.8])box(iron,x,2.85,-35.8,.09,5.7,.09);
-  for(const y of [1.1,4.15,7.9])sash('inner-block-west',24.43,y,-33.3,-Math.PI/2,1.1,y===1.1?1.4:2.2);
-  door(24.42,-27.1,-Math.PI/2,2.4);door(24.42,-30.4,-Math.PI/2,5.9);
-  for(const y of [1.1,4.15,7.9])for(const z of [-33,-29,-25.8])sash('inner-block-east',37.56,y,z,Math.PI/2,1.1,y===1.1?1.4:2.2);
+  for(const y of [1.1,4.65])sash('inner-annex-west',24.43,y,-33.3,-Math.PI/2,1.35,y===1.1?1.2:1.8);
+  for(const y of [1.1,4.15,7.9])sash('inner-block-west',24.43,y,-33.3+profile.stairShift,-Math.PI/2,1.1,y===1.1?1.4:2.2);
+  door(24.42,-29.8+profile.stairShift,-Math.PI/2,2.4);door(24.42,-29.8+profile.stairShift,-Math.PI/2,5.9);
+  for(const y of [1.1,4.65])sash('inner-annex-east',37.56,y,-33,Math.PI/2,1.1,y===1.1?1.2:1.8);
+  for(const y of [1.1,4.15,7.9])for(const z of [-29,-25.8])sash('inner-block-east',37.56,y,z,Math.PI/2,1.1,y===1.1?1.4:2.2);
 
   const stairs=new THREE.Group();stairs.name='Inner court iron stairs';model.add(stairs);
   function rail(a,b,r=.03){rod(a,b,r);stairs.attach(model.children[model.children.length-1]);}
@@ -47,19 +69,25 @@ export function addInnerCourtPhotoDetails(THREE,{model,box,mesh,worldUV,white,br
       rail([px,y0-.1,z0],[px,y1-.1,z1],.065);
     }
   }
-  // Return flights run parallel to the west wall, with landings at both doors.
-  box(iron,23.45,5.9,-30.4,2.05,.14,2);
-  box(iron,22.1,2.4,-25.9,4.6,.14,2.5);
-  flight(22,-29.5,5.9,-25.9,2.4);
-  flight(20.4,-25.9,2.4,-31.4,.3);
-  for(const [x,z,h] of [[22.75,-31.3,5.9],[23.9,-29.5,5.9],[19.9,-25,2.4]])rail([x,.2,z],[x,h,z],.075);
-  for(let i=0;i<7;i++)box(iron,22.4,6.43,-31.3+i*.3,.035,1.06,.035);
-  rail([22.4,6.96,-31.3],[22.4,6.96,-29.5]);
-  // Foreground stair beside the central arm, as in the right of the photograph.
-  door(5.08,-22.4,Math.PI/2,4.25);
-  box(iron,6.2,4.25,-22.4,2.2,.14,2.1);
-  flight(6.2,-33,.3,-23.4,4.25,1.8);
-  for(const x of [5.3,7.1])rail([x,.2,-23.2],[x,5.3,-23.2],.075);
+  const stairBox=(mat,x,y,z,...size)=>box(mat,x,y,z+profile.stairShift,...size);
+  const stairRail=(a,b,r)=>rail([a[0],a[1],a[2]+profile.stairShift],[b[0],b[1],b[2]+profile.stairShift],r);
+  const stairFlight=(x,z0,y0,z1,y1)=>flight(x,z0+profile.stairShift,y0,z1+profile.stairShift,y1);
+  // img14 resolves three flights and stacked doors. The middle flight turns
+  // at a half-landing, rather than meeting a displaced doorway.
+  for(const y of [2.4,5.9]){
+    stairBox(iron,22.8,y,-29.8,3.2,.14,1.8);
+    stairRail([21.2,y+1.06,-28.9],[24.4,y+1.06,-28.9]);
+    for(let i=0;i<12;i++)stairBox(iron,21.2+i*.28,y+.53,-28.9,.035,1.06,.035);
+  }
+  stairBox(iron,21.9,4.15,-34.1,2.1,.14,1.6);
+  stairFlight(21.9,-30.7,5.9,-34.1,4.15);
+  stairFlight(21.9,-34.1,4.15,-30.7,2.4);
+  stairFlight(20.3,-29.8,2.4,-34.1,.3);
+  stairBox(iron,20.8,2.4,-29.8,1.4,.14,1.8);
+  for(const [x,z,h] of [[21.2,-28.9,5.9],[24.2,-28.9,5.9],[21,-34.8,4.15],[22.8,-34.8,4.15]])stairRail([x,.2,z],[x,h+1.06,z],.075);
+  stairRail([21,5.21,-34.8],[22.8,5.21,-34.8]);
+  for(let i=0;i<7;i++)stairBox(iron,21+i*.3,4.68,-34.8,.035,1.06,.035);
+  // The opposite central-arm stair is positioned by the img11 module.
 
   // Raised grass, rough stone edging and low white gate walls. The gravel
   // route continues around the garden and through to the rear road.
@@ -88,4 +116,5 @@ export function addInnerCourtPhotoDetails(THREE,{model,box,mesh,worldUV,white,br
     shrub.scale.set(1,.85,1);
   }
   model.userData.innerCourtPhotoOpenings=model.userData.eastPhotoOpenings.slice(start);
+  addInnerEastElevation(THREE,{model,box,mesh,worldUV,white,brick,roof,sash,iron,stone});
 }
