@@ -37,6 +37,56 @@ for(const aspect of [16/9,4/3,9/16])for(const seconds of [0,1,1.75,2.5]){
   }
 }
 const ray=new THREE.Raycaster(new THREE.Vector3(20,80,12),new THREE.Vector3(0,-1,0));
+// img18: windows must remain exposed in front of the actual whole model,
+// and the bay's separate roof must face upward beside the original roof.
+const lawnOpenings=exterior.model.userData.westLawnPhotoOpenings;
+for(const o of lawnOpenings){
+  ray.set(new THREE.Vector3(-24,o.y,o.z),new THREE.Vector3(-1,0,0));
+  const hit=ray.intersectObject(exterior.model,true)[0];
+  assert(hit.object.isInstancedMesh&&hit.point.x>o.x,'img18 glazing must be exposed, not hidden inside the wing or projecting bay');
+}
+ray.set(new THREE.Vector3(-27.5,30,35.5),new THREE.Vector3(0,-1,0));
+const lawnRoof=ray.intersectObject(exterior.model,true)[0];
+assert.equal(lawnRoof.object.name,'West lawn bay slate roof');
+assert(lawnRoof.face.normal.y>0,'img18 bay roof must face upward');
+const lawnBayBounds=new THREE.Box3().setFromObject(exterior.model.getObjectByName('West lawn three-window bay'));
+assert(lawnBayBounds.max.x>-28&&Math.abs(lawnBayBounds.min.y)<1e-6,'img18 bay must project from the wall with a solid foundation');
+// Both inward elevations are exact reflections across the entrance centre.
+for(const [west,east] of [[exterior.model.userData.westLawnPhotoOpenings,exterior.model.userData.eastLawnPhotoOpenings],[exterior.model.userData.entranceWestPhotoOpenings.filter(o=>o.face!=='reception-front-sash'),exterior.model.userData.entranceEastPhotoOpenings]]){
+  assert.deepEqual(east,west.map(o=>({...o,x:-o.x,face:o.face.replaceAll('west','east')})),'east opening schedules must reflect the west without duplicating Reception');
+}
+for(const west of exterior.model.userData.westLawnPhotoOpenings){
+  const hits=[];
+  for(const side of [-1,1]){
+    ray.set(new THREE.Vector3(side*24,west.y,west.z),new THREE.Vector3(side,0,0));
+    const hit=ray.intersectObject(exterior.model,true)[0];
+    assert(hit.object.isInstancedMesh,'both inward elevations must expose their sash frames');
+    hits.push(hit.point.x);
+  }
+  assert(Math.abs(hits[0]+hits[1])<1e-5,'reflected glazing must occupy matching actual wall planes');
+}
+for(const o of exterior.model.userData.entranceEastPhotoOpenings.filter(o=>['entrance-east-recess','entrance-east-projection','entrance-east-lower'].includes(o.face))){
+  ray.set(new THREE.Vector3(o.x,o.y,22),new THREE.Vector3(0,0,-1));
+  const hit=ray.intersectObject(exterior.model,true)[0];
+  assert(hit.object.isInstancedMesh&&hit.point.z>o.z,'east frontage glazing must remain visible ahead of the old principal block');
+}
+for(const [westName,eastName] of [['West lawn three-window bay','East lawn three-window bay'],['Entrance west three-bay projection','Entrance east three-bay projection']]){
+  const west=new THREE.Box3().setFromObject(exterior.model.getObjectByName(westName));
+  const east=new THREE.Box3().setFromObject(exterior.model.getObjectByName(eastName));
+  assert(Math.abs(west.min.x+east.max.x)<1e-5&&Math.abs(west.max.x+east.min.x)<1e-5);
+  assert(Math.abs(west.max.y-east.max.y)<1e-5&&Math.abs(west.max.z-east.max.z)<1e-5);
+}
+for(const [x,z] of [[27.5,35.5],[30,35],[33,24],[16,12]]){
+  const heights=[];
+  for(const side of [-1,1]){
+    ray.set(new THREE.Vector3(side*x,30,z),new THREE.Vector3(0,-1,0));
+    const hit=ray.intersectObject(exterior.model,true)[0];
+    assert(hit.face.normal.y>0,'reflected roofs must remain outward-facing');
+    heights.push(hit.point.y);
+  }
+  assert(Math.abs(heights[0]-heights[1])<1e-5,'inner roof pitches must match across the entrance');
+}
+assert.equal(exterior.model.children.filter(o=>o.name==='East front chimney').length,2);
 // img19: a real stepped frontage, exposed windows, a low roof behind the
 // parapet and two lower doors replacing the old generic ground-floor grid.
 const entranceProjection=exterior.model.getObjectByName('Entrance west three-bay projection');
@@ -53,10 +103,32 @@ for(const o of entranceOpenings.filter(o=>['entrance-west-recess','entrance-west
   assert(hit.object.isInstancedMesh&&hit.point.z>o.z,'img19 glazing must sit in front of its wall');
 }
 assert(!entranceOpenings.some(o=>o.y<3&&[-27.35,-11.55].includes(o.x)),'lower doors must not be overlaid by generic sashes');
-for(const [x,z,name] of [[-27,16,'Entrance west projection slate roof'],[-16,12,'Entrance west recessed slate roof']]){
+for(const [x,z,name] of [[-27,18.4,'Entrance west projection slate roof'],[-16,12,'Entrance west recessed slate roof']]){
   ray.set(new THREE.Vector3(x,30,z),new THREE.Vector3(0,-1,0));
   const hit=ray.intersectObject(exterior.model,true)[0];
-  assert.equal(hit.object.name,name);assert(hit.face.normal.y>0&&hit.point.y<13.7,'west-front roofs must be shallow and face upwards');
+  assert.equal(hit.object.name,name);assert(hit.face.normal.y>0&&hit.point.y>13.35&&hit.point.y<16,'entrance roofs must clear their wall tops and face upwards');
+}
+// Roof surfaces must sit above the solid cornice slab across their whole
+// footprint, not only at the ridge. This catches the former pale cut-outs.
+for(const side of [-1,1]){
+  const roofName=side<0?'Entrance west recessed slate roof':'Entrance east recessed slate roof';
+  const mainCap=exterior.model.getObjectByName(roofName);
+  const points=mainCap.geometry.attributes.position;
+  for(let i=0;i<points.count;i++)assert(points.getY(i)+mainCap.position.y>13.03,'every main roof vertex must clear the cornice slab');
+  const bounds=new THREE.Box3().setFromObject(mainCap);
+  assert(bounds.max.y-bounds.min.y>2,'main entrance roof must have a visible pitch');
+  for(const x of [8,12,16,20,24,28,31])for(const z of [7.2,8,10,12,14,16]){
+    ray.set(new THREE.Vector3(side*x,30,z),new THREE.Vector3(0,-1,0));
+    const hit=ray.intersectObject(exterior.model,true)[0];
+    assert(hit.object.material.map,'roof footprint must expose textured slate rather than the solid trim slab');
+    assert(hit.point.y>13.03,'no entrance roof edge may sink below the cornice');
+  }
+  for(const x of [24,27,30])for(const z of [17.6,18.4,19.2]){
+    ray.set(new THREE.Vector3(side*x,30,z),new THREE.Vector3(0,-1,0));
+    const hit=ray.intersectObject(exterior.model,true)[0];
+    assert.equal(hit.object.name,side<0?'Entrance west projection slate roof':'Entrance east projection slate roof');
+    assert(hit.point.y>13.35,'projecting bay roofs must cover the wall tops all the way to the front');
+  }
 }
 // Redesmere: the two bays must have real depth, outward-facing roof geometry
 // and exposed glazing. Check rays against the whole estate, not just metadata.

@@ -85,6 +85,9 @@ export function createEscapeExterior(THREE,aspect){
   // The blue-circled outer rooms move by one complete pavilion width to
   // make room for an identical second red-circled section on their left.
   for(const i of [0,2,3])eastBlocks[i][0]+=EAST_SHIFT;
+  // Mirror the inward walls at x=29/32, retaining the outer east face x=48.1.
+  eastBlocks[2]=[40.05,23,16.1,14,8.6];
+  eastBlocks[3]=[38.55,35,19.1,16,8.6];
   eastBlocks[0][0]+=EXTRA_BAY/2;eastBlocks[0][2]+=EXTRA_BAY;
   for(const i of [5,6,7])eastBlocks[i][0]+=OUTER_SHIFT;
   const duplicatePavilion=[...eastBlocks[0]];
@@ -126,7 +129,8 @@ export function createEscapeExterior(THREE,aspect){
     box(cream,x+nx*.17,y+1.16,z+nz*.17,1.65,.19,.23,rotation);
   }
   function block(x,z,w,d,h,passage=null){
-    const westDetail=westCourtPhotoProfile(x,z)||westFrontPhotoProfile(x,z);
+    const eastInner=(Math.abs(x-40.05)<.01&&z===23)||(Math.abs(x-38.55)<.01&&z===35);
+    const westDetail=westCourtPhotoProfile(x,z)||westFrontPhotoProfile(x,z)||eastInner;
     const detail=westDetail||eastPhotoProfile(x,z)||courtyardPhotoProfile(x,z)||rearCourtPhotoProfile(x,z)||redesmerePhotoProfile(x,z),foundation=detail&&!westDetail?4:2;
     const base=passage?Math.max(passage.height,foundation):foundation;
     const body=mesh(worldUV(new THREE.BoxGeometry(w,h-base,d),detail?1.7:3),detail?photoBrick:brick,x,(h+base)/2,z,true);
@@ -140,6 +144,8 @@ export function createEscapeExterior(THREE,aspect){
       if(!westDetail)box(detail?white:cream,middle,foundation+(detail?.04:.1),z,width+(detail?.13:.23),detail?.16:.22,d+(detail?.13:.23));
       if(passage&&base>lowerHeight)mesh(worldUV(new THREE.BoxGeometry(width,base-lowerHeight,d)),detail?photoBrick:brick,middle,(base+lowerHeight)/2,z,true);
     }
+    // Outer east white base is retained beyond the mirrored brick inner wing.
+    if(eastInner){box(white,48.12,2,z,.12,4,d);if(z===35)box(white,44.55,2,43.02,7.1,4,.12);}
     box(cream,x,h-.12,z,w+.23,.22,d+.23);
     if(passage){
       const left=Math.max(x-w/2,passage.x-passage.width/2),right=Math.min(x+w/2,passage.x+passage.width/2);
@@ -151,15 +157,25 @@ export function createEscapeExterior(THREE,aspect){
     box(stone,x,rearEnd?h-.1:h+.12,z,w+.48,.22,d+.48);
     const principal=x===EAST_SHIFT/2&&z===12;
     if(principal){
-      // img19: a shallow slate roof sits behind the west-front parapet.
+      // Pitched slate clears the solid cornice slab (top h+.23).
       hipRoof(-35,12,6,d,h+.23,2);
-      hipRoof(-19.55,12,24.9,d,h+.03,.55).name='Entrance west recessed slate roof';
-      hipRoof(19,12,52.2,d,h+.23,3);
+      hipRoof(-19.55,12,24.9,d,h+.26,2.6).name='Entrance west recessed slate roof';
+      hipRoof(19.55,12,24.9,d,h+.26,2.6).name='Entrance east recessed slate roof';
+      hipRoof(38.55,12,13.1,d,h+.23,2);
+    }else if(eastInner){
+      // Keep the inner roof pitch/ridge identical to the west; stretch only
+      // the outward roof slope to join the retained east courtyard elevation.
+      const roofWidth=z===35?12:9,roofX=z===35?35:36.5;
+      const cap=hipRoof(roofX,z,roofWidth,d,h+.23,roofWidth*.3);
+      const vertices=cap.geometry.attributes.position;
+      for(let i=0;i<vertices.count;i++)if(vertices.getX(i)>0)vertices.setX(i,vertices.getX(i)*(1+7.1/(roofWidth/2+.4)));
+      vertices.needsUpdate=true;cap.geometry.computeVertexNormals();
+      cap.name='East entrance wing slate roof';
     }else hipRoof(x,z,w,d,rearEnd?h:h+.23,rearEnd?REAR_END_ROOF_RISE:Math.min(3.8,Math.min(w,d)*.3));
     if(!detail)for(const side of [-1,1]){
       for(let px=-w/2+2.4;px<w/2-1.5;px+=3.55)for(let y=3.8;y<h-1;y+=3.4){
         if(side<0&&x===EAST_SHIFT/2&&z===12&&x+px>37)continue;
-        if(side>0&&principal&&x+px>=-32&&x+px<-7.1)continue;
+        if(side>0&&principal&&Math.abs(x+px)>=7.1&&Math.abs(x+px)<=32)continue;
         if(passage&&y<base&&Math.abs(x+px-passage.x)<passage.width/2+.9)continue;
         window(x+px,y,z+side*(d/2+.04),side<0?Math.PI:0);
       }
@@ -168,7 +184,7 @@ export function createEscapeExterior(THREE,aspect){
         window(x+side*(w/2+.04),y,z+pz,side*Math.PI/2);
       }
     }
-    if(!detail&&w>13)for(const side of [-1,1]){if(principal&&side<0)continue;mesh(worldUV(new THREE.BoxGeometry(.85,2.1,1.3)),brick,x+side*(w*.32),h+2.6,z,true);box(stone,x+side*w*.32,h+3.69,z,1.1,.15,1.5);}
+    if(!detail&&w>13)for(const side of [-1,1]){if(principal)continue;mesh(worldUV(new THREE.BoxGeometry(.85,2.1,1.3)),brick,x+side*(w*.32),h+2.6,z,true);box(stone,x+side*w*.32,h+3.69,z,1.1,.15,1.5);}
     if(westDetail&&z===3)body.name='West courtyard widened link';
     if(westDetail&&x===-62.5)body.name='West courtyard recessed end';
     if(westDetail&&x===-69)body.name='West courtyard projecting corner';
@@ -246,7 +262,7 @@ export function createEscapeExterior(THREE,aspect){
     plantedBed(x,-64,6,5);
     tree(x,-64,.85);
   }
-  for(const [x,z,s] of [[-25,44,.7],[17,35,1.3],[-65,-35,1.1],[68+OUTER_SHIFT,-38,1.25],[-17,-9,.85],[18,-9,.9]])tree(x,z,s);
+  for(const [x,z,s] of [[-33,46.7,.85],[33,46.7,.85],[-65,-35,1.1],[68+OUTER_SHIFT,-38,1.25],[-17,-9,.85],[18,-9,.9]])tree(x,z,s);
   for(let i=0;i<24;i++)tree(-100+i*9,-84-(i%3)*7,1+random()*.6);
   for(let i=0;i<9;i++){
     tree(-90,-44+i*12,1.1);

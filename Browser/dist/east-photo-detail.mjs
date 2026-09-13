@@ -1,3 +1,4 @@
+import {addEastEntranceMirror} from './entrance-symmetry.mjs';
 import {photoDetailPrimitives} from './photo-detail-primitives.mjs';
 import {addWestWingPhotoDetails} from './west-wing-photo-detail.mjs';
 // Visible east forecourt, from 20260912_172141.jpg and the user's camera mark.
@@ -8,6 +9,7 @@ import {addWestCourtPhotoDetails} from './west-court-photo-detail.mjs';
 import {addCourtyardPhotoDetails} from './courtyard-photo-detail.mjs';
 import {addRearCourtPhotoDetails} from './rear-court-photo-detail.mjs';
 import {addRedesmerePhotoDetails} from './redesmere-photo-detail.mjs';
+import {addWestLawnPhotoDetails} from './west-lawn-photo-detail.mjs';
 import {addEntranceWestPhotoDetails} from './entrance-west-photo-detail.mjs';
 import {addInnerCourtPhotoDetails} from './inner-court-photo-detail.mjs';
 import {addCentralCourtPhotoDetails} from './central-court-photo-detail.mjs';
@@ -15,7 +17,7 @@ export const EAST_PHOTO_VIEW=Object.freeze({position:[76,1.8,48],target:[53,5.4,
 
 export function eastPhotoProfile(x,z){
   return (Math.abs(x-54.875)<.01&&z===12)||
-    (Math.abs(x-43.6)<.01&&z===23)||(Math.abs(x-42.1)<.01&&z===36)||
+    (Math.abs(x-40.05)<.01&&z===23)||(Math.abs(x-38.55)<.01&&z===35)||
     (x===65.5&&z===20.75)||(Math.abs(x-74.425)<.01&&[8,15.5].includes(z));
 }
 
@@ -23,10 +25,10 @@ export function addEastPhotoDetails(THREE,{model,box,mesh,worldUV,white,brick,ro
   const {frame,glass,iron,stone,sash,door,rod}=photoDetailPrimitives(THREE,{model,box,mesh,white,steel,material});
   // The two-storey forward wing: nine positions on its east wall. The eighth
   // position is the blue entrance and upper escape door, not another window.
-  const sideZ=[17.3,20,22.3,25.1,27.4,31.2,33.5,38.1,43];
+  const sideZ=[17.3,20,22.3,25.1,27.4,31.2,33.5,38.1,42];
   for(const z of sideZ)if(z!==38.1)for(const y of [2,6.25])sash('forward-wing-east',48.15,y,z,Math.PI/2,1.02,2.45);
-  for(const y of [2,6.25])for(const x of [38.5,42.1,45.7])sash('forward-wing-end',x,y,45.05,0,1.08,2.45);
-  for(const y of [2,6.25])for(const z of [29.5,34,38.5,43])sash('forward-wing-west',36.05,y,z,-Math.PI/2);
+  for(const y of [2,6.25])for(const x of [32,35,38,42.1,45.7])sash('forward-wing-end',x,x<41?(y===2?1.9:6.3):y,43.06,0,x<41?1.15:1.08,2.35);
+  // The inner wall is the reflected img18 elevation, supplied below.
   door(48.18,38.1,Math.PI/2);door(48.18,38.1,Math.PI/2,4.25);
   // External metal stair descends along the wall from the upper blue door.
   box(iron,49.1,4.18,38.1,1.8,.14,2);
@@ -37,12 +39,6 @@ export function addEastPhotoDetails(THREE,{model,box,mesh,worldUV,white,brick,ro
   }
   for(const x of [48.35,49.88])rod([x,5.2,38.9],[x,5.2,36.95]);
   for(const x of [48.35,49.88])rod([x,5.2,36.95],[x,1.36,32.15]);
-  // Three conspicuous tall chimney stacks with three pots each.
-  for(const [z,h] of [[20,2.5],[33.4,3.8],[43.5,2.5]]){
-    mesh(worldUV(new THREE.BoxGeometry(1.25,h,1.1),1.7),brick,43.8,10.1+h/2,z,true);
-    box(stone,43.8,10.1+h,z,1.42,.16,1.26);
-    for(const dx of [-.4,0,.4])mesh(new THREE.CylinderGeometry(.105,.13,.45,8),brick,43.8+dx,10.4+h,z,true);
-  }
   // Recessed three-storey wall flanking the shallow polygonal bay. A broad
   // paired top sash and the blue entrance distinguish the right-hand recess.
   for(const y of [2,6.5,11])sash('pavilion-left',49.6,y,19.55,0,1.02,2.35);
@@ -77,7 +73,7 @@ export function addEastPhotoDetails(THREE,{model,box,mesh,worldUV,white,brick,ro
   }
   for(const x of [71,81.7])sash('low-link',x,1.85,19.55,0,.95,2.15);
   // Dark rainwater pipes break up the long white ground storey.
-  for(const z of [17,29,44.7])box(iron,48.3,4.1,z,.085,8.2,.085);
+  for(const z of [17,29,42.7])box(iron,48.3,4.1,z,.085,8.2,.085);
   for(const x of [61.4,69.6])box(iron,x,7,25.2,.085,14,.085);
   // Photo foreground: an access lane close to the building, a slim young tree
   // and lighting columns, leaving the window elevations readable.
@@ -102,5 +98,7 @@ export function addEastPhotoDetails(THREE,{model,box,mesh,worldUV,white,brick,ro
   addCentralCourtPhotoDetails(THREE,{model,box,mesh,worldUV,white,brick,roof,sash,door,rod,iron,stone,hipRoof});
   addRearCourtPhotoDetails(THREE,{model,box,mesh,worldUV,white,brick,roof,material,sash,door,rod,iron,stone,frame,glass});
   addRedesmerePhotoDetails(THREE,{model,box,mesh,worldUV,white,brick,roof,material,hipRoof,sash,door,rod,iron});
+  addWestLawnPhotoDetails(THREE,{model,box,mesh,worldUV,white,brick,roof,material,hipRoof,sash,iron});
   addEntranceWestPhotoDetails(THREE,{model,box,mesh,worldUV,white,brick,roof,material,hipRoof,sash,door,rod,iron,frame,glass});
+  addEastEntranceMirror(THREE,{model,box,mesh,worldUV,white,brick,roof,material,hipRoof,sash,door,rod,iron,frame,glass});
 }

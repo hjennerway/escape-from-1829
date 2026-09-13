@@ -79,5 +79,19 @@ assert(exterior.camera.position.x>97.4&&exterior.camera.position.x<98,'Redesmere
 walk.setView({position:[-31,1.8,-45],target:[-31,1.8,-30]});
 walk.keys.add('KeyW');for(let i=0;i<40;i++)walk.update(.1);
 assert(exterior.camera.position.z< -35.5&&exterior.camera.position.z> -37,'glazed west annex must block walking at its rear wall');
+// img18: walk the new approach in both directions and stop at the bay.
+walkLeg([-3,35.5],[-26,35.5],46);
+walkLeg([-26,35.5],[-3,35.5],46);
+walk.setView({position:[-24,1.8,35.5],target:[-30,1.8,35.5]});
+walk.keys.add('KeyW');for(let i=0;i<20;i++)walk.update(.1);
+assert(exterior.camera.position.x>-27.2&&exterior.camera.position.x<-26.5,'img18 bay must stop the walker at its projecting face');
+// Matching east approach, door handrail gap, and solid reflected bay.
+walkLeg([3,35.5],[26,35.5],46);
+walkLeg([26,35.5],[3,35.5],46);
+walkLeg([28,24.5],[4,24.5],48);
+walkLeg([11.55,24],[11.55,18],12);
+walk.setView({position:[24,1.8,35.5],target:[30,1.8,35.5]});
+walk.keys.add('KeyW');for(let i=0;i<20;i++)walk.update(.1);
+assert(exterior.camera.position.x<27.2&&exterior.camera.position.x>26.5,'east reflected bay must block walking at the matching position');
 delete globalThis.document;
 console.log('PASS: exterior WASD, normalized diagonals, mouse-relative movement, pitch limits, building collisions, wall sliding, reset and stalled frames.');

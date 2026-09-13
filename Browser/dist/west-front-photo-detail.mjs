@@ -52,14 +52,10 @@ export function addWestFrontPhotoDetails(THREE,{model,box,mesh,worldUV,white,bri
   // Lower forward range: brick ground floor, tall upper sashes and slate roof.
   for(const y of [1.9,6.3]){
     for(const z of [18,21.5,25,28.5,32,35.5,39,42])sash('west-front-forward-west',-41.06,y,z,-Math.PI/2,1.05,2.35);
-    for(const z of [29,32.5,36,39.5,42])sash('west-front-forward-east',-28.94,y,z,Math.PI/2,1.05,2.35);
+    // The inner east face is scheduled separately from img18.jpg.
     for(const x of [-38,-35,-32])sash('west-front-forward-end',x,y,43.06,0,1.15,2.35);
   }
-  for(const z of [28.8,39.7]){
-    mesh(worldUV(new THREE.BoxGeometry(1.4,3.8,1.2),1.7),brick,-35,11.1,z,true).name='West front chimney';
-    box(brick,-35,12.96,z,1.65,.2,1.4);
-    for(const dx of [-.4,0,.4])mesh(new THREE.CylinderGeometry(.11,.14,.5,8),brick,-35+dx,13.3,z,true);
-  }
+  addFrontWingChimneys(THREE,{mesh,worldUV,brick,box});
   // Low glazed extension along the garden side, with a real sloping roof.
   mesh(worldUV(new THREE.BoxGeometry(4.4,3.2,16),1.7),brick,-43.2,1.6,35,true).name='West front glazed extension';
   const leanRoof=mesh(new THREE.BoxGeometry(5.1,.16,16.5),roof,-43.2,3.85,35,true);leanRoof.rotation.z=.27;
@@ -75,4 +71,12 @@ export function addWestFrontPhotoDetails(THREE,{model,box,mesh,worldUV,white,bri
     crown.scale.set(1.35,.65,1.4);
   }
   model.userData.westFrontPhotoOpenings=model.userData.eastPhotoOpenings.slice(start);
+}
+
+export function addFrontWingChimneys(THREE,{mesh,worldUV,brick,box},side=-1){
+  for(const z of [28.8,39.7]){
+    mesh(worldUV(new THREE.BoxGeometry(1.45,5.4,1.9),1.7),brick,side*35,12.5,z,true).name=side<0?'West front chimney':'East front chimney';
+    for(const y of [15.05,15.3])box(brick,side*35,y,z,1.65,.18,2.1);
+    for(const dz of [-.55,.55])mesh(new THREE.CylinderGeometry(.14,.17,.55,8),brick,side*35,15.65,z+dz,true);
+  }
 }

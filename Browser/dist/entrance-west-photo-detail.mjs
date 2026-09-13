@@ -3,7 +3,7 @@
 export const ENTRANCE_WEST_PHOTO_VIEW=Object.freeze({position:[-10,1.8,43.8],target:[-20.7,7.2,18],fov:44});
 export const ENTRANCE_WEST_PROFILE=Object.freeze({left:-32,right:-7.1,step:-22.6,wallZ:17.3,projectionZ:19.7,base:3.1,eaves:12.8});
 
-export function addEntranceWestPhotoDetails(THREE,{model,box,mesh,worldUV,white,brick,roof,material,hipRoof,sash,door,rod,iron,frame,glass}){
+export function addEntranceWestPhotoDetails(THREE,{model,box,mesh,worldUV,white,brick,roof,material,hipRoof,sash,door,rod,iron,frame,glass,includeReception=true}){
   const start=model.userData.eastPhotoOpenings.length;
   const p=ENTRANCE_WEST_PROFILE,trim=material(0xcbd4d1),headStone=material(0xd8dad1),panel=material(0xaab5af);
   function range(name,left,right,back,front,height){
@@ -15,7 +15,7 @@ export function addEntranceWestPhotoDetails(THREE,{model,box,mesh,worldUV,white,
   }
   range('Entrance west recessed wall',p.step,p.right,16.95,p.wallZ,p.eaves);
   const projection=range('Entrance west three-bay projection',p.left,p.step,16.9,p.projectionZ,13.35);
-  hipRoof(projection.x,16.1,projection.w,7.2,13.05,.55).name='Entrance west projection slate roof';
+  hipRoof(projection.x,16.1,projection.w,7.2,13.4,.7).name='Entrance west projection slate roof';
   // Broad parapet cornice, built along the front and the exposed right return.
   function cornice(x,z,w,height,rotation=0){
     for(const [dy,h,depth] of [[0,.58,.24],[-.35,.1,.38],[-.49,.1,.31],[.34,.1,.35]])box(trim,x,height+dy,z,w,h,depth,rotation);
@@ -61,7 +61,7 @@ export function addEntranceWestPhotoDetails(THREE,{model,box,mesh,worldUV,white,
   door(-11.55,p.wallZ+.08,0,-.28);
   // Fine glazing on the Reception front ties the photographed right edge to
   // the new elevation; the red door, columns and heraldry retain their shape.
-  for(const x of [-4,0,4])for(const y of [4.3,8.9,12.4])if(x!==0||y!==4.3)
+  if(includeReception)for(const x of [-4,0,4])for(const y of [4.3,8.9,12.4])if(x!==0||y!==4.3)
     opening('reception-front-sash',x,y,19.68,1.23,2.45,0,true);
   for(const x of [-31.8,-22.85])box(iron,x,6.35,p.projectionZ+.19,.075,12.7,.075);
   box(iron,-7.35,6.1,p.wallZ+.19,.08,12.2,.08);

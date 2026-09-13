@@ -11,6 +11,8 @@ import {innerEastPhotoView} from './inner-east-elevation.mjs';
 import {WEST_WING_SIDE_VIEW,WEST_WING_END_VIEW} from './west-wing-photo-detail.mjs';
 import {INNER_COURT_PHOTO_VIEW} from './inner-court-photo-detail.mjs';
 import {REDESMERE_PHOTO_VIEW} from './redesmere-photo-detail.mjs';
+import {EAST_LAWN_PHOTO_VIEW,ENTRANCE_EAST_PHOTO_VIEW} from './entrance-symmetry.mjs';
+import {WEST_LAWN_PHOTO_VIEW} from './west-lawn-photo-detail.mjs';
 import {ENTRANCE_WEST_PHOTO_VIEW} from './entrance-west-photo-detail.mjs';
 const canvas=document.getElementById('game'),hint=document.getElementById('lookHint'),look=document.getElementById('look');
 try{
@@ -33,6 +35,9 @@ try{
   if(new URLSearchParams(location.search).get('view')==='west-wing-end')walker.setView(WEST_WING_END_VIEW);
   if(new URLSearchParams(location.search).get('view')==='redesmere-photo')walker.setView(REDESMERE_PHOTO_VIEW);
   if(new URLSearchParams(location.search).get('view')==='entrance-west-photo')walker.setView(ENTRANCE_WEST_PHOTO_VIEW);
+  if(new URLSearchParams(location.search).get('view')==='west-lawn-photo')walker.setView(WEST_LAWN_PHOTO_VIEW);
+  if(new URLSearchParams(location.search).get('view')==='east-lawn-photo')walker.setView(EAST_LAWN_PHOTO_VIEW);
+  if(new URLSearchParams(location.search).get('view')==='entrance-east-photo')walker.setView(ENTRANCE_EAST_PHOTO_VIEW);
   let active=false,dragging=false,last=null;
   const movement=new Set(['KeyW','KeyA','KeyS','KeyD','ShiftLeft','ShiftRight']);
   function stop(){active=false;dragging=false;last=null;walker.keys.clear();hint.textContent='Click Start exploring to resume, or drag the view to look around.';look.textContent='START EXPLORING ↗';}
