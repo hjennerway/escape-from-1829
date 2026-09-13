@@ -1,3 +1,5 @@
+import {WEST_FORWARD_END_PHOTO_VIEW} from './dist/west-forward-end-photo-detail.mjs';
+import {exteriorObstacles} from './dist/explore-controls.mjs';
 // Real Three.js geometry/camera checks, without a WebGL context.
 import assert from 'node:assert/strict';
 import * as THREE from './dist/vendor/three.module.js';
@@ -417,6 +419,33 @@ for(const o of westFront.filter(o=>o.face==='west-front-extension')){
   ray.set(new THREE.Vector3(-46,o.y,o.z),new THREE.Vector3(1,0,0));
   const hit=ray.intersectObject(exterior.model,true)[0];
   assert(hit.point.x<-45.4&&hit.point.x>-45.8,'low extension must have exposed wide glazing');
+}
+// img17: inspect actual exposed glazing and access around the new solid stair.
+const forwardEnd=exterior.model.userData.westForwardEndPhotoOpenings;
+assert.equal(forwardEnd.filter(o=>o.face==='west-forward-end-lower').length,4);
+assert.equal(forwardEnd.filter(o=>o.face==='west-forward-end-upper').length,3);
+assert.equal(forwardEnd.filter(o=>o.face==='west-forward-end-transom').length,1);
+assert(!exterior.model.userData.eastPhotoOpenings.some(o=>o.face==='west-front-forward-end'),'old three-column glazing must be removed');
+for(const o of forwardEnd){
+  ray.set(new THREE.Vector3(o.x,o.y,48),new THREE.Vector3(0,0,-1));
+  const hit=ray.intersectObject(exterior.model,true)[0];
+  assert(hit.object.isInstancedMesh&&hit.point.z>43.1&&hit.point.z<43.4,'img17 glazing must remain visible beyond its brick wall');
+}
+ray.set(new THREE.Vector3(-39,6.15,48),new THREE.Vector3(0,0,-1));
+assert(ray.intersectObject(exterior.model,true)[0].point.z>43.3,'upper door glazing must be exposed above its landing');
+const forwardStair=exterior.model.getObjectByName('West forward end masonry return stair');
+const forwardStairBounds=new THREE.Box3().setFromObject(forwardStair);
+assert(forwardStairBounds.min.x<-46&&forwardStairBounds.max.z<47,'stair must return on the left while leaving the front approach clear');
+const obstacles=exteriorObstacles(THREE,exterior.model);
+assert(obstacles.some(b=>-45.75>b.minX&&-45.75<b.maxX&&45.28>b.minZ&&45.28<b.maxZ),'masonry landing must block ground-level walking');
+for(const x of [-46,-40,-35,-30])assert(!obstacles.some(b=>x>b.minX-.4&&x<b.maxX+.4&&48>b.minZ-.4&&48<b.maxZ+.4),'front approach must remain walkable past the stair');
+for(const aspect of [16/9,4/3]){
+  const camera=new THREE.PerspectiveCamera(WEST_FORWARD_END_PHOTO_VIEW.fov,aspect,.1,2000);
+  camera.position.set(...WEST_FORWARD_END_PHOTO_VIEW.position);camera.lookAt(...WEST_FORWARD_END_PHOTO_VIEW.target);camera.updateMatrixWorld(true);
+  for(const x of [-46.5,-29])for(const y of [.2,16]){
+    const p=new THREE.Vector3(x,y,43).project(camera);
+    assert(Math.abs(p.x)<1&&Math.abs(p.y)<1,'photo preset must frame the complete end facade and stairs');
+  }
 }
 delete globalThis.document;
 console.log('PASS: real estate geometry, upward-facing roofs, W-shaped openings to the rear, rear-left lattice mast, building/mast framing throughout landscape and portrait pans.');
