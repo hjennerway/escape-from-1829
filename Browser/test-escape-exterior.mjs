@@ -15,7 +15,7 @@ const exterior=createEscapeExterior(THREE,16/9);
 exterior.scene.updateMatrixWorld(true);
 const towerBounds=new THREE.Box3().setFromObject(exterior.waterTower);
 assert(Math.abs(towerBounds.max.y-17.75*2.2)<.01,'tower including finial must be 2.2 times the main pediment height');
-assert(towerBounds.min.x>106&&towerBounds.max.z<-84,'tower must occupy the clearing beyond the rear-right campus block');
+assert(towerBounds.min.x>136&&towerBounds.max.z<-45,'tower must stand outside the right campus block at the map-corrected rear depth');
 assert(exterior.mast.children.length>150,'mast must contain real lattice geometry');
 const dragons=exterior.model.getObjectByName('Blue dragons and central coat of arms');
 assert.equal(dragons.geometry.attributes.uv.count,3,'heraldic photo must map onto the triangular pediment');
@@ -189,7 +189,7 @@ assert(ray.intersectObject(exterior.model,true)[0].point.z<0,'ground-level sight
 // The low front end is solid brick down to ground level, with no sash frames
 // on its photographed front face and no tall placeholder roofs left above it.
 for(const x of [80.5,82,84,86,89,92,95,98])for(const y of [1,2,3.8]){
-  ray.set(new THREE.Vector3(x,y,28),new THREE.Vector3(0,0,-1));
+  ray.set(new THREE.Vector3(x,y,24),new THREE.Vector3(0,0,-1));
   const hit=ray.intersectObject(exterior.model,true)[0];
   assert.equal(hit.object.name,'Redesmere windowless brick end range');
   assert(hit.object.material.map,'brick texture must continue to the base');

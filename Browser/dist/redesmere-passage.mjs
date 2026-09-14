@@ -1,7 +1,7 @@
 // 20260912_172245.jpg and 20260913_171133.jpg, located by bridge-loc.png.
 // Separate 1829 / Redesmere rooflines with a narrow masonry head across the
 // open lane. Dimensions are visual estimates, in the estate's scene units.
-export const REDESMERE_PASSAGE_VIEW=Object.freeze({position:[80,1.8,55],target:[80,5.8,17],fov:62});
+export const REDESMERE_PASSAGE_VIEW=Object.freeze({position:[80,1.8,47],target:[80,5.8,17],fov:70});
 export function addRedesmerePassage(THREE,{box,mesh,worldUV,white,brick,material}){
   const left=69.75,right=79.55,x=(left+right)/2,width=right-left,z=19;
   const underside=4,top=6,depth=1.3;

@@ -2,7 +2,7 @@
 // Front road/reception is +Z; the corrected mast position is rear-left (-X, -Z).
 import {westFrontPhotoProfile} from './west-front-photo-detail.mjs';
 import {westCourtPhotoProfile} from './west-court-photo-detail.mjs';
-import {createChapel} from './chapel.mjs';
+import {createChapel,ESCAPE_CHAPEL} from './chapel.mjs';
 import {addFrontSteps} from './front-steps.mjs';
 import {addFrontBoundaryWall} from './front-boundary-wall.mjs';
 import {addRedesmerePassage,addRedesmereEndRange} from './redesmere-passage.mjs';
@@ -283,8 +283,8 @@ export function createEscapeExterior(THREE,aspect){
   }
   const chapel=createChapel(THREE,{brick,roof,stone,dark,worldUV});model.add(chapel);
   const waterTower=createWaterTower(THREE,{brick,roof,dark,worldUV});model.add(waterTower);
-  box(path,-9,.08,-93,2,.12,15);
-  box(path,-7.5,.08,-99.5,3,.12,2);
+  box(path,ESCAPE_CHAPEL.x-10,.08,ESCAPE_CHAPEL.z+12,2,.12,15);
+  box(path,ESCAPE_CHAPEL.x-8.5,.08,ESCAPE_CHAPEL.z+5.5,3,.12,2);
   // Tapering open lattice, cross bracing and antenna panels from the mast photos.
   const mast=new THREE.Group();mast.name='Radio mast · rear left';mast.position.set(ESCAPE_MAST.x,0,ESCAPE_MAST.z);model.add(mast);
   function strut(a,b,r=.075){const start=new THREE.Vector3(...a),end=new THREE.Vector3(...b),v=end.clone().sub(start);const m=new THREE.Mesh(new THREE.CylinderGeometry(r,r,v.length(),5),steel);m.position.copy(start).addScaledVector(v,.5);m.quaternion.setFromUnitVectors(new THREE.Vector3(0,1,0),v.normalize());mast.add(m);}

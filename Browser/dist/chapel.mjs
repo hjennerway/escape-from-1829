@@ -1,5 +1,6 @@
-// Photo-based Old Chapel, with its clock gable facing the estate's front (+Z).
-export const ESCAPE_CHAPEL=Object.freeze({x:1,z:-105,rotation:0});
+// Photo-based Old Chapel, placed from the rectangle in scale.png.
+// Its clock gable faces the estate's front (+Z), along the mapped nave axis.
+export const ESCAPE_CHAPEL=Object.freeze({x:-6,z:-120,rotation:0});
 export function createChapel(THREE,{brick,roof,stone,dark,worldUV}){
   const chapel=new THREE.Group();chapel.name='Old Chapel · brick Gothic chapel';
   chapel.position.set(ESCAPE_CHAPEL.x,0,ESCAPE_CHAPEL.z);chapel.rotation.y=ESCAPE_CHAPEL.rotation;
