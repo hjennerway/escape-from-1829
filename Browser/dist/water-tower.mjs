@@ -1,6 +1,6 @@
-// Photo/video-based tower; placement follows the red square in scale.png.
+// Photo/video-based tower; placement estimated from the red landmark in guides.png.
 // Height includes the finial; the main entrance pediment reaches 17.75 units.
-export const ESCAPE_WATER_TOWER=Object.freeze({x:150,z:-53,height:17.75*2.2,width:10.2});
+export const ESCAPE_WATER_TOWER=Object.freeze({x:210,z:-90,height:17.75*2.2,width:10.2});
 export function createWaterTower(THREE,{brick,roof,dark,worldUV}){
   const tower=new THREE.Group();tower.name='Water tower · rear-right clearing';
   tower.position.set(ESCAPE_WATER_TOWER.x,0,ESCAPE_WATER_TOWER.z);

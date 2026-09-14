@@ -9,13 +9,15 @@ import {addEntranceWalks} from './entrance-walks.mjs';
 import {addRedesmerePassage,addRedesmereEndRange} from './redesmere-passage.mjs';
 import {createWaterTower} from './water-tower.mjs';
 import {createNewHospital} from './new-hospital.mjs';
+import {createChurtonWard} from './churton-ward.mjs';
 import {eastPhotoProfile,addEastPhotoDetails} from './east-photo-detail.mjs';
 import {courtyardPhotoProfile} from './courtyard-photo-detail.mjs';
 import {rearCourtPhotoProfile} from './rear-court-photo-detail.mjs';
 import {redesmerePhotoProfile} from './redesmere-photo-detail.mjs';
 import {innerCourtPhotoProfile,REAR_END_HEIGHTS,REAR_END_ROOF_RISE,INNER_COURT_SIDE_PROFILE} from './inner-court-photo-detail.mjs';
 export {MAP_REAR_PROPORTIONS} from './central-court-photo-detail.mjs';
-export const ESCAPE_MAST = Object.freeze({x:-69,z:-62,height:42});
+// guides.png: retain the westward offset and move the base back along its guide.
+export const ESCAPE_MAST = Object.freeze({x:-69,z:-120,height:42});
 const EAST_SHIFT=7.1,EXTRA_BAY=3.55;
 // Retain the added east pavilion and the space made for the outer extension.
 const EAST_PAVILION_WIDTH=16+EXTRA_BAY;
@@ -275,7 +277,8 @@ export function createEscapeExterior(THREE,aspect){
     tree(x,-64,.85);
   }
   for(const [x,z,s] of [[-25.5,46.7,.85],[33,46.7,.85],[-65,-35,1.1],[68+OUTER_SHIFT,-38,1.25],[-17,-9,.85],[18,-9,.9]])tree(x,z,s);
-  for(let i=0;i<24;i++)tree(-100+i*9,-84-(i%3)*7,1+random()*.6);
+  // Clear Churton and its estate-side approach; preserve other tree variations.
+  for(let i=0;i<24;i++){const x=-100+i*9,z=-84-(i%3)*7,size=1+random()*.6;if(x<-60||x>1)tree(x,z,size);else for(let n=0;n<20;n++)random();}
   for(let i=0;i<9;i++){
     tree(-90,-44+i*12,1.1);
     // Clear the marked Redesmere sightline, retaining an edge tree on the
@@ -283,9 +286,10 @@ export function createEscapeExterior(THREE,aspect){
     const z=-47+i*12;if(z<=-35||z>=25)tree(92+OUTER_SHIFT,z,1.1);
   }
   // Low surrounding blocks establish the campus without reproducing the sale map.
-  for(const [x,z,w,d] of [[-45,-99,28,12],[38,-104,18,13],[99+OUTER_SHIFT,-52,14,25],[-109,5,24,15]]){
+  for(const [x,z,w,d] of [[38,-104,18,13],[99+OUTER_SHIFT,-52,14,25],[-109,5,24,15]]){
     mesh(new THREE.BoxGeometry(w,6,d),material(0x8a7965),x,3,z,true);hipRoof(x,z,w,d,6,2.8);
   }
+  const churtonWard=createChurtonWard(THREE,{brick:photoBrick,roof,worldUV,material});model.add(churtonWard);
   const chapel=createChapel(THREE,{brick,roof,stone,dark,worldUV});model.add(chapel);
   const waterTower=createWaterTower(THREE,{brick,roof,dark,worldUV});model.add(waterTower);
   const newHospital=createNewHospital(THREE,{brick:photoBrick,roof,white,steel,material,worldUV,hipRoof});model.add(newHospital);
@@ -312,5 +316,5 @@ export function createEscapeExterior(THREE,aspect){
     items.forEach((b,i)=>{dummy.position.set(b.x,b.y,b.z);dummy.scale.set(b.w,b.h,b.d);dummy.rotation.set(0,b.rotation,0);dummy.updateMatrix();batch.setMatrixAt(i,dummy.matrix);});model.add(batch);}
   for(const {mat,items} of crowns){const batch=new THREE.InstancedMesh(new THREE.IcosahedronGeometry(1,1),mat,items.length);batch.castShadow=true;batch.receiveShadow=true;
     items.forEach((b,i)=>{dummy.position.set(b.x,b.y,b.z);dummy.scale.set(b.s,b.s*.85,b.s);dummy.rotation.set(0,i,0);dummy.updateMatrix();batch.setMatrixAt(i,dummy.matrix);});model.add(batch);}
-  return {scene,camera,model,mast,chapel,waterTower,newHospital};
+  return {scene,camera,model,mast,chapel,waterTower,newHospital,churtonWard};
 }
