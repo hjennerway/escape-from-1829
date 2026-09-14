@@ -1,3 +1,4 @@
+import {NEW_HOSPITAL_GROUND_VIEW} from './new-hospital.mjs';
 import * as THREE from './vendor/three.module.js';
 import {createEscapeExterior,loadEscapeFrontage} from './escape-exterior.mjs';
 import {FRONT_STEPS_VIEW} from './front-steps.mjs';
@@ -46,6 +47,7 @@ try{
   if(new URLSearchParams(location.search).get('view')==='west-forward-end-photo')walker.setView(WEST_FORWARD_END_PHOTO_VIEW);
   if(new URLSearchParams(location.search).get('view')==='front-steps')walker.setView({...FRONT_STEPS_VIEW,position:[6,1.8,34]});
   if(new URLSearchParams(location.search).get('view')==='front-wall')walker.setView({...FRONT_WALL_VIEW,position:[0,1.8,36],target:[-12,.8,49]});
+  if(new URLSearchParams(location.search).get('view')==='new-hospital')walker.setView(NEW_HOSPITAL_GROUND_VIEW);
   let active=false,dragging=false,last=null;
   const movement=new Set(['KeyW','KeyA','KeyS','KeyD','ShiftLeft','ShiftRight']);
   function stop(){active=false;dragging=false;last=null;walker.keys.clear();hint.textContent='Click Start exploring to resume, or drag the view to look around.';look.textContent='START EXPLORING ↗';}

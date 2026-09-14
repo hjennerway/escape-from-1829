@@ -3,7 +3,7 @@
 export const WEST_LAWN_PHOTO_VIEW=Object.freeze({position:[-6,1.8,36.8],target:[-30,5.6,33],fov:53});
 export function addWestLawnPhotoDetails(THREE,{model,box,mesh,worldUV,white,brick,roof,material,hipRoof,sash,iron}){
   const start=model.userData.eastPhotoOpenings.length;
-  const trim=material(0xd2d9d2),archBrick=material(0x80675b),gravel=material(0x939080);
+  const trim=material(0xd2d9d2),archBrick=material(0x80675b);
   // Keep the narrower root recessed behind the main forward wing.
   for(const [x,z,length] of [[-28.88,35,16],[-31.88,23.4,7.2]]){
     for(const y of [4.05,8.48])box(trim,x,y,z,.23,y>8?.3:.2,length);
@@ -29,10 +29,7 @@ export function addWestLawnPhotoDetails(THREE,{model,box,mesh,worldUV,white,bric
   for(const y of [1.95,6.35])for(const z of [34,35.5,37])opening('west-lawn-bay',-27.44,y,z,.7,2.7);
   for(const z of [33.02,37.98])box(iron,-27.27,4.47,z,.075,8.94,.075);
   for(const [x,z] of [[-28.72,27.12],[-31.7,20.1]])box(iron,x,4.25,z,.08,8.5,.08);
-  // Gravel retains the established circa-1900 grounds treatment.
-  mesh(new THREE.BoxGeometry(26.3,.1,3.2),gravel,-14.1,.24,35.5).name='West lawn approach';
-  for(const z of [33.85,37.15])box(trim,-14.1,.26,z,26.3,.16,.16);
-  box(gravel,-27,.24,32.8,1.6,.1,3.8);
+  // The shared entrance walk follows the wall and bay, leaving the lawn open.
   for(const [x,z] of [[-28.7,29],[-27.5,35.5]]){
     box(trim,x,3.1,z,.12,.32,.7);
     for(const y of [3.02,3.1,3.18])box(iron,x+.08,y,z,.04,.025,.56);

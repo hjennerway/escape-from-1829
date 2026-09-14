@@ -19,7 +19,7 @@ export function createAerialControls(camera){
     tilt=Math.max(.2,Math.min(1.2,Math.acos(Math.max(-1,Math.min(1,dy/radius)))));
   }
   function pan(right,forward){
-    target.x=Math.max(-230,Math.min(230,target.x+Math.cos(angle)*right-Math.sin(angle)*forward));
+    target.x=Math.max(-230,Math.min(580,target.x+Math.cos(angle)*right-Math.sin(angle)*forward));
     target.z=Math.max(-230,Math.min(140,target.z-Math.sin(angle)*right-Math.cos(angle)*forward));apply();
   }
   return {keys,sync,

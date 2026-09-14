@@ -5,8 +5,10 @@ import {westCourtPhotoProfile} from './west-court-photo-detail.mjs';
 import {createChapel,ESCAPE_CHAPEL} from './chapel.mjs';
 import {addFrontSteps} from './front-steps.mjs';
 import {addFrontBoundaryWall} from './front-boundary-wall.mjs';
+import {addEntranceWalks} from './entrance-walks.mjs';
 import {addRedesmerePassage,addRedesmereEndRange} from './redesmere-passage.mjs';
 import {createWaterTower} from './water-tower.mjs';
+import {createNewHospital} from './new-hospital.mjs';
 import {eastPhotoProfile,addEastPhotoDetails} from './east-photo-detail.mjs';
 import {courtyardPhotoProfile} from './courtyard-photo-detail.mjs';
 import {rearCourtPhotoProfile} from './rear-court-photo-detail.mjs';
@@ -32,8 +34,8 @@ export function createEscapeExterior(THREE,aspect){
   const camera=new THREE.PerspectiveCamera(46,aspect,.5,2000);
   const model=new THREE.Group();model.name='1829 estate · aerial reconstruction';scene.add(model);
   scene.add(new THREE.HemisphereLight(0xe4eff2,0x59634a,2));
-  const sun=new THREE.DirectionalLight(0xffe2b7,2.8);sun.position.set(-85,120,60);sun.castShadow=true;
-  sun.shadow.mapSize.set(2048,2048);Object.assign(sun.shadow.camera,{left:-130,right:130,top:130,bottom:-130,near:1,far:350});sun.shadow.bias=-.0003;sun.shadow.normalBias=.25;scene.add(sun);
+  const sun=new THREE.DirectionalLight(0xffe2b7,2.8);sun.position.set(145,120,50);sun.target.position.set(230,0,-10);scene.add(sun.target);sun.castShadow=true;
+  sun.shadow.mapSize.set(4096,4096);Object.assign(sun.shadow.camera,{left:-360,right:360,top:300,bottom:-300,near:1,far:850});sun.shadow.bias=-.0003;sun.shadow.normalBias=.25;scene.add(sun);
   const material=(color,extra={})=>new THREE.MeshStandardMaterial({color,roughness:.9,...extra});
   const cream=material(0xd6d0ba),stone=material(0xa39f8a),glass=material(0x56737d,{roughness:.4,metalness:.3}),dark=material(0x303b3b),red=material(0x762c30);
   const grass=material(0x667752),hedge=material(0x3f543b),gravel=material(0x99917b),path=material(0xb0ac97),steel=material(0x78848a,{metalness:.65,roughness:.5});
@@ -50,10 +52,13 @@ export function createEscapeExterior(THREE,aspect){
   mesh(new THREE.PlaneGeometry(4000,4000),grass,0,-.15,0).rotation.x=-Math.PI/2;
   // Grounds and surrounding access roads. No red annotation or sale graphics.
   box(path,OUTER_SHIFT/2,-.015,2,151+OUTER_SHIFT,.15,103);
-  box(grass,OUTER_SHIFT/2,.08,28,117+OUTER_SHIFT,.1,36);box(grass,OUTER_SHIFT/2,.08,-15,117+OUTER_SHIFT,.1,45);
+  box(grass,OUTER_SHIFT/2,.08,29.5,117+OUTER_SHIFT,.1,39);box(grass,OUTER_SHIFT/2,.08,-15,117+OUTER_SHIFT,.1,45);
   box(gravel,EAST_PAVILION_WIDTH/2,.09,59,210+EAST_PAVILION_WIDTH,.1,11);box(gravel,-79,.09,-2,10,.1,133);box(gravel,79+OUTER_SHIFT,.09,0,9,.1,130);
   box(path,OUTER_SHIFT/2,.11,51,151+OUTER_SHIFT,.1,3);box(gravel,OUTER_SHIFT/2,.11,-46,149+OUTER_SHIFT,.1,8);
-  box(path,0,.13,34,3.2,.1,34);box(path,OUTER_SHIFT/2,.13,43,114+OUTER_SHIFT,.1,2);
+  box(path,0,.13,34,3.2,.1,34);
+  // The entrance lawns reach the boundary wall; cross-walks stop at the wings.
+  for(const [left,right] of [[-57,-29],[29,57+OUTER_SHIFT]])box(path,(left+right)/2,.13,43,right-left,.1,2);
+  addEntranceWalks(THREE,{model,material});
   // Stone wall replaces the marked hedge frontage, with an open central path.
   for(const [left,right] of [[-71,-58],[31,71+OUTER_SHIFT]])box(hedge,(left+right)/2,.55,49,right-left,1.1,.9);
   addFrontBoundaryWall(THREE,{model,material,worldUV});
@@ -283,6 +288,7 @@ export function createEscapeExterior(THREE,aspect){
   }
   const chapel=createChapel(THREE,{brick,roof,stone,dark,worldUV});model.add(chapel);
   const waterTower=createWaterTower(THREE,{brick,roof,dark,worldUV});model.add(waterTower);
+  const newHospital=createNewHospital(THREE,{brick:photoBrick,roof,white,steel,material,worldUV,hipRoof});model.add(newHospital);
   box(path,ESCAPE_CHAPEL.x-10,.08,ESCAPE_CHAPEL.z+12,2,.12,15);
   box(path,ESCAPE_CHAPEL.x-8.5,.08,ESCAPE_CHAPEL.z+5.5,3,.12,2);
   // Tapering open lattice, cross bracing and antenna panels from the mast photos.
@@ -306,5 +312,5 @@ export function createEscapeExterior(THREE,aspect){
     items.forEach((b,i)=>{dummy.position.set(b.x,b.y,b.z);dummy.scale.set(b.w,b.h,b.d);dummy.rotation.set(0,b.rotation,0);dummy.updateMatrix();batch.setMatrixAt(i,dummy.matrix);});model.add(batch);}
   for(const {mat,items} of crowns){const batch=new THREE.InstancedMesh(new THREE.IcosahedronGeometry(1,1),mat,items.length);batch.castShadow=true;batch.receiveShadow=true;
     items.forEach((b,i)=>{dummy.position.set(b.x,b.y,b.z);dummy.scale.set(b.s,b.s*.85,b.s);dummy.rotation.set(0,i,0);dummy.updateMatrix();batch.setMatrixAt(i,dummy.matrix);});model.add(batch);}
-  return {scene,camera,model,mast,chapel,waterTower};
+  return {scene,camera,model,mast,chapel,waterTower,newHospital};
 }
