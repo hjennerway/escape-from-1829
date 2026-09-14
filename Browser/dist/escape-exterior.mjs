@@ -3,6 +3,9 @@
 import {westFrontPhotoProfile} from './west-front-photo-detail.mjs';
 import {westCourtPhotoProfile} from './west-court-photo-detail.mjs';
 import {createChapel} from './chapel.mjs';
+import {addFrontSteps} from './front-steps.mjs';
+import {addFrontBoundaryWall} from './front-boundary-wall.mjs';
+import {addRedesmerePassage} from './redesmere-passage.mjs';
 import {createWaterTower} from './water-tower.mjs';
 import {eastPhotoProfile,addEastPhotoDetails} from './east-photo-detail.mjs';
 import {courtyardPhotoProfile} from './courtyard-photo-detail.mjs';
@@ -51,8 +54,9 @@ export function createEscapeExterior(THREE,aspect){
   box(gravel,EAST_PAVILION_WIDTH/2,.09,59,210+EAST_PAVILION_WIDTH,.1,11);box(gravel,-79,.09,-2,10,.1,133);box(gravel,79+OUTER_SHIFT,.09,0,9,.1,130);
   box(path,OUTER_SHIFT/2,.11,51,151+OUTER_SHIFT,.1,3);box(gravel,OUTER_SHIFT/2,.11,-46,149+OUTER_SHIFT,.1,8);
   box(path,0,.13,34,3.2,.1,34);box(path,OUTER_SHIFT/2,.13,43,114+OUTER_SHIFT,.1,2);
-  // Leave the photographed west end's approach open to the front lawn.
-  for(const [left,right] of [[-71,-48],[-27,71+OUTER_SHIFT]])box(hedge,(left+right)/2,.55,49,right-left,1.1,.9);
+  // Stone wall replaces the marked hedge frontage, with an open central path.
+  for(const [left,right] of [[-71,-58],[31,71+OUTER_SHIFT]])box(hedge,(left+right)/2,.55,49,right-left,1.1,.9);
+  addFrontBoundaryWall(THREE,{model,material,worldUV});
   // Start from the western silhouette and reflect it across Reception.
   // Each tuple is [x, z, width, depth, eaves height]; front is +Z.
   const westBlocks=[
@@ -91,18 +95,18 @@ export function createEscapeExterior(THREE,aspect){
   eastBlocks[3]=[38.55,35,19.1,16,8.6];
   eastBlocks[0][0]+=EXTRA_BAY/2;eastBlocks[0][2]+=EXTRA_BAY;
   for(const i of [5,6,7])eastBlocks[i][0]+=OUTER_SHIFT;
-  const duplicatePavilion=[...eastBlocks[0]];
-  duplicatePavilion[0]+=EAST_PAVILION_WIDTH;
-  // The marked range beside the square projection has two window storeys.
-  duplicatePavilion[1]=8;duplicatePavilion[3]=7;duplicatePavilion[4]=9.3;
-  // Ground-floor passage continues through the shallow room at the rear.
-  const courtyardPassage={x:76,width:7.1,height:3.3};
-  duplicatePavilion.push(courtyardPassage);
-  eastBlocks[7].push(courtyardPassage);
+
+  // The photographs show separate buildings, not rooms bridging this lane.
+  // Cut the rear service range at each side and omit the former corner infill.
+  const courtyardPassage={x:76,width:7.1};
+  eastBlocks.splice(7,1);
+  const serviceLeft=64.65,mainEnd=72.2,serviceRight=84.2,annexStart=79.55;
   const blocks=[
     [EAST_SHIFT/2,12,76+EAST_SHIFT,10,12.8],
-    ...westBlocks,...eastBlocks,duplicatePavilion,
-    [duplicatePavilion[0],15.5,EAST_PAVILION_WIDTH,8,4.5,courtyardPassage],
+    ...westBlocks,...eastBlocks,
+    [(serviceLeft+mainEnd)/2,8,mainEnd-serviceLeft,7,9.3],
+    [(annexStart+serviceRight)/2,8,serviceRight-annexStart,7,9.3],
+    [(annexStart+serviceRight)/2,15.5,serviceRight-annexStart,8,4.5],
     [69.2,5,6,9,12.8], // Stair block seen behind the cut-through in img2.jpg.
     // Yellow-shaded addition: long outer range and a stepped rear return.
     // Set the return back and towards the outer wing, leaving the rear-left
@@ -192,6 +196,7 @@ export function createEscapeExterior(THREE,aspect){
     return body;
   }
   const white=material(0xe1e3dc),photoBrick=material(0xb3a5a0,{map:bricks});
+  addRedesmerePassage(THREE,{box,mesh,worldUV,white,brick:photoBrick,material});
   for(const b of blocks){
     // The west arm is rebuilt from the detailed east arm and img15/img16.
     if(b[0]===-31&&[-10,-30].includes(b[1]))continue;
@@ -213,7 +218,7 @@ export function createEscapeExterior(THREE,aspect){
   const dragons=mesh(relief,material(0x477180),0,14.72,19.78);dragons.scale.set(.94,.91,1);dragons.name='Blue dragons and central coat of arms';
   for(const side of [-1,1]){const beam=mesh(new THREE.BoxGeometry(8.2,.22,.4),cream,side*3.75,16.2,19.82);beam.rotation.z=-side*Math.atan2(3.1,7.5);}
   box(cream,0,14.65,19.8,15.3,.25,.5);
-  box(stone,0,.9,21.4,5.6,1.8,4.3);box(red,0,3.5,19.9,1.9,3.2,.2);
+  addFrontSteps(THREE,{model,material});box(red,0,3.5,19.9,1.9,3.2,.2);
   for(const x of [-.46,.46])for(const y of [2.45,3.45,4.45])box(material(0x581c23),x,y,20.02,.65,.72,.06);
   box(glass,0,5.55,19.96,1.9,.65,.12);
   for(const x of [-1.1,1.1])box(cream,x,3.9,20.03,.18,4.2,.23);
@@ -223,7 +228,7 @@ export function createEscapeExterior(THREE,aspect){
     for(const side of [-1,1]){const scroll=mesh(new THREE.CylinderGeometry(.14,.14,.22,12),cream,x+side*.27,6.25,z+.18);scroll.rotation.x=Math.PI/2;}
   }
   box(cream,0,6.7,21.2,5.6,.6,4.0);box(stone,0,7.08,21.2,6,.15,4.3);
-  for(let i=0;i<6;i++)box(stone,0,(6-i)*.15,23.7+i*.42,3.7,(6-i)*.3,.44);
+
   // Both photographed front bays are built by the facade detail modules.
   // Replace the added round bay with a square projection on the blue-marked
   // window section, to its left. Its face stands 5.5 units beyond the facade.

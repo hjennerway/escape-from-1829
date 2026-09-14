@@ -169,15 +169,23 @@ for(const x of [-11,9])for(const z of [-17,-26,-30,-34,-40]){
 }
 // The corrected east wing and L-shaped addition must have continuous roofs,
 // while the parking court inside the addition remains uncovered.
-for(const [x,z] of [[31,-20],[42,40],[53.1,12],[72.65,8],[89.2,-25],[89.2,0],[83.7,-38],[83.7,-44],[91.2,12]]){
+for(const [x,z] of [[31,-20],[42,40],[53.1,12],[71.2,8],[89.2,-25],[89.2,0],[83.7,-38],[83.7,-44],[91.2,12]]){
   ray.set(new THREE.Vector3(x,80,z),new THREE.Vector3(0,-1,0));
   assert(ray.intersectObject(exterior.model,true)[0].point.y>8,'corrected east footprint must contain roof geometry');
 }
-// Photo 20260912_172141: the service link has a low roof, with the taller
-// range set behind it. Check the actual geometry as well as the sash schedule.
-ray.set(new THREE.Vector3(76,80,16),new THREE.Vector3(0,-1,0));
-const linkRoof=ray.intersectObject(exterior.model,true)[0].point.y;
-assert(linkRoof>4.5&&linkRoof<8,'link roof must sit below the square pavilion first-floor heads');
+// September 2026 corner photos: open sky between separate rooflines, with
+// only a half-storey masonry lintel at first-floor level across the lane.
+const lintel=new THREE.Box3().setFromObject(exterior.model.getObjectByName('1829 Redesmere brick lintel'));
+assert(Math.abs(lintel.min.y-4)<1e-5&&Math.abs(lintel.max.y-6)<1e-5,'lintel starts at the first floor and is half a storey high');
+assert(lintel.max.z-lintel.min.z<1.5,'the lintel is a shallow wall, not a roofed room');
+for(const x of [75.5,76,77.5])for(const z of [3,8,12,16,21]){
+  ray.set(new THREE.Vector3(x,30,z),new THREE.Vector3(0,-1,0));
+  assert(ray.intersectObject(exterior.model,true)[0].point.y<.5,'the lane must be open to the sky away from the lintel');
+}
+ray.set(new THREE.Vector3(76,30,19),new THREE.Vector3(0,-1,0));
+assert.equal(ray.intersectObject(exterior.model,true)[0].object.name,'1829 Redesmere lintel coping');
+ray.set(new THREE.Vector3(76,1.8,27),new THREE.Vector3(0,0,-1));
+assert(ray.intersectObject(exterior.model,true)[0].point.z<0,'ground-level sightline must pass under the lintel into the court');
 const photoOpenings=exterior.model.userData.eastPhotoOpenings;
 const frontWindows=photoOpenings.filter(o=>o.face==='square-front');
 assert.equal(frontWindows.length,6,'square front has exactly two windows on each of three storeys');
@@ -449,3 +457,29 @@ for(const aspect of [16/9,4/3]){
 }
 delete globalThis.document;
 console.log('PASS: real estate geometry, upward-facing roofs, W-shaped openings to the rear, rear-left lattice mast, building/mast framing throughout landscape and portrait pans.');
+// The front entrance follows the user's forked stair plan. Trace the actual
+// surfaces through both routes so gaps, hidden treads and wrong rises fail.
+const frontStairs=exterior.model.getObjectByName('Front entrance split staircase');
+assert(frontStairs);
+function stairHeight(x,z){
+  ray.set(new THREE.Vector3(x,3,z),new THREE.Vector3(0,-1,0));
+  const hit=ray.intersectObject(exterior.model,true)[0];
+  assert(hit,'entrance route must have a solid surface');
+  assert(hit.object.name.endsWith(' surface'),'entrance route must expose its stone tread or landing');
+  return hit.point.y;
+}
+const frontRise=(1.8-.18)/8;
+for(let i=0;i<4;i++)assert(Math.abs(stairHeight(0,27.2-i*.4)-(.18+(i+1)*frontRise))<1e-5);
+assert(Math.abs(stairHeight(0,25.2)-.99)<1e-5);
+for(const side of [-1,1]){
+  for(let i=0;i<4;i++)assert(Math.abs(stairHeight(side*(1.3+i*.4),25.2)-(.99+(i+1)*frontRise))<1e-5);
+  for(let z=25.7;z>20.2;z-=.1)assert(Math.abs(stairHeight(side*3.3,z)-1.8)<1e-5,'second turn joins doorstep at a continuous level');
+  for(let x=.1;x<3.8;x+=.1)stairHeight(side*x,25.2);
+  assert.equal(frontStairs.children.filter(o=>new RegExp('^'+(side<0?'Left':'Right')+' lateral step [1-4] surface$').test(o.name)).length,4);
+}
+assert.equal(frontStairs.children.filter(o=>/^Front approach step [1-4] surface$/.test(o.name)).length,4);
+const doorstep=new THREE.Box3().setFromObject(frontStairs.getObjectByName('Front doorway landing surface'));
+assert(doorstep.min.x<-3.8&&doorstep.max.x>3.8&&doorstep.min.z<20,'doorstep must span both returns and reach the door');
+const frontObstacles=exteriorObstacles(THREE,exterior.model);
+assert(frontObstacles.some(b=>0>b.minX&&0<b.maxX&&25.2>b.minZ&&25.2<b.maxZ),'stair foundations retain exterior scenery collisions');
+console.log('PASS: front staircase has four approach treads, four rising treads per branch, and connected forward returns to the doorway landing.');

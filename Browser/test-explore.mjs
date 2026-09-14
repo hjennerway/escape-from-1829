@@ -19,7 +19,13 @@ const exterior=createEscapeExterior(THREE,16/9),obstacles=exteriorObstacles(THRE
 walk.keys.add('KeyW');for(let i=0;i<100;i++)walk.update(.1);
 assert(exterior.camera.position.z>23,'walking toward the entrance stops at its steps');
 walk.keys.add('KeyD');for(let i=0;i<10;i++)walk.update(.1);
-assert(exterior.camera.position.x>1,'the player can slide sideways along an obstacle');
+assert(exterior.camera.position.x>.3&&exterior.camera.position.x<.8,'the stair cheeks stop sideways movement through the masonry');
+walk.keys.clear();walk.keys.add('KeyS');for(let i=0;i<6;i++)walk.update(.1);
+walk.keys.clear();walk.keys.add('KeyD');for(let i=0;i<10;i++)walk.update(.1);
+assert(exterior.camera.position.x>4,'the player can back out of the stair approach and walk around it');
+walk.setView({position:[6,1.8,25],target:[6,1.8,19]});walk.keys.add('KeyW');for(let i=0;i<20;i++)walk.update(.1);
+walk.keys.add('KeyD');for(let i=0;i<10;i++)walk.update(.1);
+assert(exterior.camera.position.x>7,'the player can slide sideways along the frontage');
 walk.reset();assert.equal(exterior.camera.position.z,40);assert.equal(walk.keys.size,0);
 walk.keys.add('KeyW');walk.update(60);assert(exterior.camera.position.z>=39.5,'long frame cannot teleport the player');
 walk.reset();exterior.camera.position.set(76,1.8,28);walk.keys.add('KeyW');
@@ -64,7 +70,7 @@ walkLeg([-11,-43],[-11,-7],72);
 walkLeg([-11,-7],[-11,-43],72);
 // The img19 projection stops the walker; the gravel route to Reception
 // and the gap between the new handrails remain accessible.
-walkLeg([-28,24.5],[-4,24.5],48);
+walkLeg([-28,24.5],[-5,24.5],46);
 walkLeg([-11.55,24],[-11.55,18],12);
 walk.setView({position:[-27,1.8,25],target:[-27,1.8,15]});
 walk.keys.add('KeyW');for(let i=0;i<30;i++)walk.update(.1);
@@ -88,7 +94,7 @@ assert(exterior.camera.position.x>-27.2&&exterior.camera.position.x<-26.5,'img18
 // Matching east approach, door handrail gap, and solid reflected bay.
 walkLeg([3,35.5],[26,35.5],46);
 walkLeg([26,35.5],[3,35.5],46);
-walkLeg([28,24.5],[4,24.5],48);
+walkLeg([28,24.5],[5,24.5],46);
 walkLeg([11.55,24],[11.55,18],12);
 walk.setView({position:[24,1.8,35.5],target:[30,1.8,35.5]});
 walk.keys.add('KeyW');for(let i=0;i<20;i++)walk.update(.1);

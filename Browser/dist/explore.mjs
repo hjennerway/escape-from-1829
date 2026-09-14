@@ -1,5 +1,8 @@
 import * as THREE from './vendor/three.module.js';
 import {createEscapeExterior,loadEscapeFrontage} from './escape-exterior.mjs';
+import {FRONT_STEPS_VIEW} from './front-steps.mjs';
+import {FRONT_WALL_VIEW} from './front-boundary-wall.mjs';
+import {REDESMERE_PASSAGE_VIEW} from './redesmere-passage.mjs';
 import {createWalker,exteriorObstacles} from './explore-controls.mjs';
 import {EAST_PHOTO_VIEW} from './east-photo-detail.mjs';
 import {COURTYARD_PHOTO_VIEW} from './courtyard-photo-detail.mjs';
@@ -24,6 +27,7 @@ try{
   const exterior=createEscapeExterior(THREE,innerWidth/innerHeight);
   exterior.camera.near=.1;exterior.camera.updateProjectionMatrix();
   const walker=createWalker(exterior.camera,exteriorObstacles(THREE,exterior.model));
+  if(new URLSearchParams(location.search).get('view')==='redesmere-passage')walker.setView(REDESMERE_PASSAGE_VIEW);
   if(new URLSearchParams(location.search).get('view')==='east-photo')walker.setView(EAST_PHOTO_VIEW);
   if(new URLSearchParams(location.search).get('view')==='courtyard-photo')walker.setView(COURTYARD_PHOTO_VIEW);
   if(new URLSearchParams(location.search).get('view')==='west-front-photo')walker.setView(WEST_FRONT_PHOTO_VIEW);
@@ -40,6 +44,8 @@ try{
   if(new URLSearchParams(location.search).get('view')==='east-lawn-photo')walker.setView(EAST_LAWN_PHOTO_VIEW);
   if(new URLSearchParams(location.search).get('view')==='entrance-east-photo')walker.setView(ENTRANCE_EAST_PHOTO_VIEW);
   if(new URLSearchParams(location.search).get('view')==='west-forward-end-photo')walker.setView(WEST_FORWARD_END_PHOTO_VIEW);
+  if(new URLSearchParams(location.search).get('view')==='front-steps')walker.setView({...FRONT_STEPS_VIEW,position:[6,1.8,34]});
+  if(new URLSearchParams(location.search).get('view')==='front-wall')walker.setView({...FRONT_WALL_VIEW,position:[0,1.8,36],target:[-12,.8,49]});
   let active=false,dragging=false,last=null;
   const movement=new Set(['KeyW','KeyA','KeyS','KeyD','ShiftLeft','ShiftRight']);
   function stop(){active=false;dragging=false;last=null;walker.keys.clear();hint.textContent='Click Start exploring to resume, or drag the view to look around.';look.textContent='START EXPLORING ↗';}
