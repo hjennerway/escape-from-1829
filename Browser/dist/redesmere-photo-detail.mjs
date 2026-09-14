@@ -77,10 +77,8 @@ export function addRedesmerePhotoDetails(THREE,{model,box,mesh,worldUV,white,bri
   for(const z of [-13.65,-10.35])rod([97.1,2.8,z],[98.55,3.74,z],.055,iron);
   rod([98.63,3.75,-13.7],[98.63,4.89,-12],.06,band);rod([98.63,4.89,-12],[98.63,3.75,-10.3],.06,band);
 
-  // The low side room at the left of the photo sits forward of the existing
-  // end block; its independent slate roof makes the height change legible.
-  mesh(worldUV(new THREE.BoxGeometry(4.6,4.55,9),1.7),brick,97.5,2.275,14.5,true).name='Redesmere low side room';
-  hipRoof(97.5,14.5,4.6,9,4.66,1.65).name='Redesmere low side roof';
+  // The side openings belong to the end range built in redesmere-passage.mjs.
+  // Its front elevation is windowless; this east face follows redesmere.jpg.
   for(const z of [12.7,16.9])window('redesmere-low-room',99.86,2.05,z,Math.PI/2,1.25,2.55);
   door(99.89,14.8,Math.PI/2);
   for(const z of [-37.8,-21.9,-5.55,9.85])box(iron,frontX+.18,4.55,z,.08,9.1,.08);

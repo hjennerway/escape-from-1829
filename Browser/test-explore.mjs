@@ -99,5 +99,11 @@ walkLeg([11.55,24],[11.55,18],12);
 walk.setView({position:[24,1.8,35.5],target:[30,1.8,35.5]});
 walk.keys.add('KeyW');for(let i=0;i<20;i++)walk.update(.1);
 assert(exterior.camera.position.x<27.2&&exterior.camera.position.x>26.5,'east reflected bay must block walking at the matching position');
+// Walk along the low brick front and stop against its actual solid base.
+walkLeg([80,24],[100,24],40);
+walkLeg([100,24],[80,24],40);
+walk.setView({position:[85,1.8,28],target:[85,1.8,18]});
+walk.keys.add('KeyW');for(let i=0;i<24;i++)walk.update(.1);
+assert(exterior.camera.position.z>22.3&&exterior.camera.position.z<22.6,'low end range must block walking at the brick wall');
 delete globalThis.document;
 console.log('PASS: exterior WASD, normalized diagonals, mouse-relative movement, pitch limits, building collisions, wall sliding, reset and stalled frames.');

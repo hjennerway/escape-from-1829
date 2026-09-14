@@ -1,7 +1,7 @@
 // 20260912_172245.jpg and 20260913_171133.jpg, located by bridge-loc.png.
 // Separate 1829 / Redesmere rooflines with a narrow masonry head across the
 // open lane. Dimensions are visual estimates, in the estate's scene units.
-export const REDESMERE_PASSAGE_VIEW=Object.freeze({position:[76,1.8,46],target:[76,6.1,18.5],fov:58});
+export const REDESMERE_PASSAGE_VIEW=Object.freeze({position:[80,1.8,55],target:[80,5.8,17],fov:62});
 export function addRedesmerePassage(THREE,{box,mesh,worldUV,white,brick,material}){
   const left=69.75,right=79.55,x=(left+right)/2,width=right-left,z=19;
   const underside=4,top=6,depth=1.3;
@@ -19,4 +19,20 @@ export function addRedesmerePassage(THREE,{box,mesh,worldUV,white,brick,material
   mesh(new THREE.BoxGeometry(width+.15,.12,depth+.15),coping,x,top+.06,z,true).name='1829 Redesmere lintel coping';
   // Narrow masonry jambs bear on the two buildings, leaving the lane clear.
   for(const px of [left+.16,right-.16])box(white,px,underside/2,z,.32,underside,depth);
+}
+
+// The front of the end range is blank brick all the way down to the ground.
+// Two low slate hips sit in front of the retained taller Redesmere building.
+export function addRedesmereEndRange(THREE,{box,mesh,worldUV,brick,material,hipRoof}){
+  const left=79.55,right=99.8,back=10,front=22,eaves=4.55;
+  const width=right-left,depth=front-back,x=(left+right)/2,z=(back+front)/2;
+  mesh(worldUV(new THREE.BoxGeometry(width,eaves,depth),1.7),brick,x,eaves/2,z,true).name='Redesmere windowless brick end range';
+  const cornice=material(0xa6a18e),gutter=material(0x414645);
+  box(cornice,x,eaves-.08,z,width+.18,.16,depth+.18);
+  for(const [a,b] of [[left,89.05],[89.05,right]]){
+    hipRoof((a+b)/2,z,b-a,depth,eaves+.12,1.95).name='Redesmere low end slate roof';
+  }
+  box(gutter,x,eaves+.03,front+.27,width+.55,.18,.22);
+  // Short central brick parapet belongs to the taller building behind.
+  mesh(worldUV(new THREE.BoxGeometry(4.8,1.4,.35),1.7),brick,87.4,9.4,10.08,true).name='Redesmere rear stepped parapet';
 }

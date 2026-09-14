@@ -5,7 +5,7 @@ import {westCourtPhotoProfile} from './west-court-photo-detail.mjs';
 import {createChapel} from './chapel.mjs';
 import {addFrontSteps} from './front-steps.mjs';
 import {addFrontBoundaryWall} from './front-boundary-wall.mjs';
-import {addRedesmerePassage} from './redesmere-passage.mjs';
+import {addRedesmerePassage,addRedesmereEndRange} from './redesmere-passage.mjs';
 import {createWaterTower} from './water-tower.mjs';
 import {eastPhotoProfile,addEastPhotoDetails} from './east-photo-detail.mjs';
 import {courtyardPhotoProfile} from './courtyard-photo-detail.mjs';
@@ -99,19 +99,19 @@ export function createEscapeExterior(THREE,aspect){
   // The photographs show separate buildings, not rooms bridging this lane.
   // Cut the rear service range at each side and omit the former corner infill.
   const courtyardPassage={x:76,width:7.1};
-  eastBlocks.splice(7,1);
+  // The two tall end-room placeholders are replaced by the low brick range.
+  eastBlocks.splice(5,3);
   const serviceLeft=64.65,mainEnd=72.2,serviceRight=84.2,annexStart=79.55;
   const blocks=[
     [EAST_SHIFT/2,12,76+EAST_SHIFT,10,12.8],
     ...westBlocks,...eastBlocks,
     [(serviceLeft+mainEnd)/2,8,mainEnd-serviceLeft,7,9.3],
     [(annexStart+serviceRight)/2,8,serviceRight-annexStart,7,9.3],
-    [(annexStart+serviceRight)/2,15.5,serviceRight-annexStart,8,4.5],
     [69.2,5,6,9,12.8], // Stair block seen behind the cut-through in img2.jpg.
     // Yellow-shaded addition: long outer range and a stepped rear return.
     // Set the return back and towards the outer wing, leaving the rear-left
     // corner open beside the inset arm (which ends at x=37.5, z=-35.5).
-    [59+OUTER_SHIFT,-14,10,48,9.3],[61+OUTER_SHIFT,12,10,8,9.3],
+    [59+OUTER_SHIFT,-14,10,48,9.3],
     [46+OUTER_SHIFT,-38,36,10,9.3],[46+OUTER_SHIFT,-44,32,4,9.3]
   ];
   function hipRoof(x,z,w,d,y,rise){
@@ -197,6 +197,7 @@ export function createEscapeExterior(THREE,aspect){
   }
   const white=material(0xe1e3dc),photoBrick=material(0xb3a5a0,{map:bricks});
   addRedesmerePassage(THREE,{box,mesh,worldUV,white,brick:photoBrick,material});
+  addRedesmereEndRange(THREE,{box,mesh,worldUV,brick:photoBrick,material,hipRoof});
   for(const b of blocks){
     // The west arm is rebuilt from the detailed east arm and img15/img16.
     if(b[0]===-31&&[-10,-30].includes(b[1]))continue;

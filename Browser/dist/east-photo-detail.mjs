@@ -20,7 +20,7 @@ export function eastPhotoProfile(x,z){
   return (Math.abs(x-54.875)<.01&&z===12)||
     (Math.abs(x-40.05)<.01&&z===23)||(Math.abs(x-38.55)<.01&&z===35)||
     (x===65.5&&z===20.75)||(Math.abs(x-68.425)<.01&&z===8)||
-    (Math.abs(x-81.875)<.01&&[8,15.5].includes(z));
+    (Math.abs(x-81.875)<.01&&z===8);
 }
 
 export function addEastPhotoDetails(THREE,{model,box,mesh,worldUV,white,brick,roof,steel,material,hipRoof}){
@@ -73,7 +73,8 @@ export function addEastPhotoDetails(THREE,{model,box,mesh,worldUV,white,brick,ro
     if(x>79)sash('service-rear',x,y,4.45,Math.PI,1.05,2.2);
     if(x>79)sash('service-front',x,y,11.55,0,1.05,2.2);
   }
-  sash('low-link',81.7,1.85,19.55,0,.95,2.15);
+  // Only the taller rear building has front windows above the low roof.
+  sash('service-background',92.4,7.5,10.05,0,1.15,2.2);
   // Dark rainwater pipes break up the long white ground storey.
   for(const z of [17,29,42.7])box(iron,48.3,4.1,z,.085,8.2,.085);
   for(const x of [61.4,69.6])box(iron,x,7,25.2,.085,14,.085);

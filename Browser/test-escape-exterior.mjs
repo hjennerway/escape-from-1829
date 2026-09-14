@@ -169,7 +169,7 @@ for(const x of [-11,9])for(const z of [-17,-26,-30,-34,-40]){
 }
 // The corrected east wing and L-shaped addition must have continuous roofs,
 // while the parking court inside the addition remains uncovered.
-for(const [x,z] of [[31,-20],[42,40],[53.1,12],[71.2,8],[89.2,-25],[89.2,0],[83.7,-38],[83.7,-44],[91.2,12]]){
+for(const [x,z] of [[31,-20],[42,40],[53.1,12],[71.2,8],[89.2,-25],[89.2,0],[83.7,-38],[83.7,-44],[91.2,5]]){
   ray.set(new THREE.Vector3(x,80,z),new THREE.Vector3(0,-1,0));
   assert(ray.intersectObject(exterior.model,true)[0].point.y>8,'corrected east footprint must contain roof geometry');
 }
@@ -186,6 +186,21 @@ ray.set(new THREE.Vector3(76,30,19),new THREE.Vector3(0,-1,0));
 assert.equal(ray.intersectObject(exterior.model,true)[0].object.name,'1829 Redesmere lintel coping');
 ray.set(new THREE.Vector3(76,1.8,27),new THREE.Vector3(0,0,-1));
 assert(ray.intersectObject(exterior.model,true)[0].point.z<0,'ground-level sightline must pass under the lintel into the court');
+// The low front end is solid brick down to ground level, with no sash frames
+// on its photographed front face and no tall placeholder roofs left above it.
+for(const x of [80.5,82,84,86,89,92,95,98])for(const y of [1,2,3.8]){
+  ray.set(new THREE.Vector3(x,y,28),new THREE.Vector3(0,0,-1));
+  const hit=ray.intersectObject(exterior.model,true)[0];
+  assert.equal(hit.object.name,'Redesmere windowless brick end range');
+  assert(hit.object.material.map,'brick texture must continue to the base');
+  assert(Math.abs(hit.point.z-22)<1e-5,'front wall must be continuous across the end range');
+}
+for(const x of [82,86,92,97])for(const z of [16,20]){
+  ray.set(new THREE.Vector3(x,30,z),new THREE.Vector3(0,-1,0));
+  const hit=ray.intersectObject(exterior.model,true)[0];
+  assert.equal(hit.object.name,'Redesmere low end slate roof');
+  assert(hit.point.y>4.6&&hit.point.y<6.7&&hit.face.normal.y>0,'front roofs must be low and outward-facing');
+}
 const photoOpenings=exterior.model.userData.eastPhotoOpenings;
 const frontWindows=photoOpenings.filter(o=>o.face==='square-front');
 assert.equal(frontWindows.length,6,'square front has exactly two windows on each of three storeys');
