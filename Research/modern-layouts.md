@@ -13,8 +13,12 @@ Source: [shared 1829 Google Earth project](https://earth.google.com/earth/d/1jXu
 | Upton Grange (Part2) | 19 |
 | Lockwood View | 6 |
 | Warren Lane | 15 |
+| Parsons Lane | 9 |
+| Parsons Lane (Upton Lea) | 7 |
+| Parsons Lane (1829 Central) | 6 |
+| Valley drive | 8 |
 
-The four additional paths were fetched from the same live project. All four pre-existing paths were checked against the fresh response and remain unchanged. The Upton extension is saved as `Upton Grange (Part2)`; its displayed name is normalised to `Upton Grange (Part 2)`, with `sourceName` retaining the exact original spelling. The subsequent Warren Lane import adds 15 vertices; there are now nine paths and 94 vertices.
+The four additional paths were fetched from the same live project. All four pre-existing paths were checked against the fresh response and remain unchanged. The Upton extension is saved as `Upton Grange (Part2)`; its displayed name is normalised to `Upton Grange (Part 2)`, with `sourceName` retaining the exact original spelling. The subsequent Warren Lane import adds 15 vertices; that import brought the total to nine paths and 94 vertices. The Parsons Lane and Valley drive import adds 30 vertices, bringing the current total to thirteen paths and 124 vertices.
 
 `Browser/dist/modern-road-data.mjs` retains the original feature geometry coordinates as latitude/longitude pairs, in source order. Camera/view targets are not used. `earth-registration.mjs` uses exactly the same fixed 1829 anchor and approximate metre/axis registration documented in `landmark-placement.md`. The modern roads therefore use the same alignment as the church, water tower and Seren Lodge/Churton correction. No buildings were repositioned for these layers.
 
@@ -27,7 +31,7 @@ The initial state is Historic on / Modern off on each page load. Checkbox change
 
 ## Road-name labels
 
-All nine paths carry their own camera-facing text sprite, created once from a local canvas texture. The full path name, including Part 2 where applicable, is retained. Text is light with a dark outline, stays at a fixed readable screen size, and follows its road’s visibility rule (both layouts for Vivienne Smith Lane; Modern for the other roads). Label anchor candidates are sampled along the saved centreline, one unit above ground. Shorter paths get first choice; the remaining labels choose a clear position along their own road, or the least-overlapping position when the view is crowded. Paths outside the camera view do not show floating labels at the screen edge. The road geometry and road widths are unaffected by labelling.
+All thirteen paths carry their own camera-facing text sprite, created once from a local canvas texture. The full path name, including Part 2 where applicable, is retained. Text is light with a dark outline, stays at a fixed readable screen size, and follows its road’s visibility rule (both layouts for Vivienne Smith Lane; Modern for the other roads). Label anchor candidates are sampled along the saved centreline, one unit above ground. Shorter paths get first choice; the remaining labels choose a clear position along their own road, or the least-overlapping position when the view is crowded. Paths outside the camera view do not show floating labels at the screen edge. The road geometry and road widths are unaffected by labelling.
 
 Checks cover one text label per path, label anchors on their respective polylines, inherited Modern visibility, and consistent screen size across desktop/mobile viewports. The actual aerial page was also rendered and visually checked on desktop and mobile.
 
@@ -44,3 +48,9 @@ The modern-road-data.mjs SHA-256 remains 6914FFD182790FE9F8EF26A3034CE3DED7D479D
 ## Warren Lane and shared Vivienne Smith Lane
 
 Warren Lane was imported from the live shared Google Earth project, preserving all 15 saved vertices and adding its road-name label. The eight existing road coordinate arrays were verified unchanged against the fresh project response. Vivienne Smith Lane now appears in Historic and Modern, with one copy of its geometry and label. It hides when both layouts are off. The curved Reception entrance remains Modern-only. Camera fitting and label placement ignore hidden roads, so Historic does not frame or label the Modern-only network. The earlier data checksum above records the entrance-change snapshot and predates this import.
+
+## Parsons Lane and Valley drive import
+
+The four requested paths were retrieved from the live public Google Earth viewer on 15 September 2026. Parsons Lane retains 9 vertices, Parsons Lane (Upton Lea) 7, Parsons Lane (1829 Central) 6, and Valley drive 8. Names retain the source capitalization. Only the feature line geometry was decoded; saved camera targets were excluded. All nine existing coordinate arrays were checked against the same response and match exactly.
+
+The new paths use the existing fixed 1829 registration, approximate road widths, automatic road-name labels and Modern visibility rule. Expand **13 mapped paths** to see the complete list and use **Fit layouts** to frame the network.

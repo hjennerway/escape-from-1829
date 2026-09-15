@@ -49,7 +49,7 @@ assert(visible(sharedLane.getObjectByName('Road label · Vivienne Smith Lane')),
 assert(!visible(layouts.roads.getObjectByName('Warren Lane')),'Warren Lane is Modern-only');
 layouts.setVisible('historic',false);
 
-assert.deepEqual(MODERN_ROAD_PATHS.map(r=>[r.name,r.coordinates.length]),[['Upton grange',12],['Gerrard Crescent',10],['Frost drive',9],['Vivienne Smith Lane',14],['Ross Avenue',2],['Ross Avenue (Part 2)',7],['Upton Grange (Part 2)',19],['Lockwood View',6],['Warren Lane',15]]);
+assert.deepEqual(MODERN_ROAD_PATHS.map(r=>[r.name,r.coordinates.length]),[['Upton grange',12],['Gerrard Crescent',10],['Frost drive',9],['Vivienne Smith Lane',14],['Ross Avenue',2],['Ross Avenue (Part 2)',7],['Upton Grange (Part 2)',19],['Lockwood View',6],['Warren Lane',15],['Parsons Lane',9],['Parsons Lane (Upton Lea)',7],['Parsons Lane (1829 Central)',6],['Valley drive',8]]);
 assert.deepEqual(earthToScene(53.2116032,-2.8988043),[0,19.5]);
 const tower=earthToScene(53.21234432581698,-2.900961415659128);assert(Math.hypot(tower[0]-148,tower[1]+55.2)<.06,'Road registration must match the verified tower pin');
 for(let i=0;i<MODERN_ROAD_PATHS.length;i++){
@@ -83,4 +83,4 @@ const elements=Object.fromEntries(['historicLayout','modernLayout','fitLayouts',
 bindLayoutToggles(layouts,{querySelector:s=>elements[s.slice(1)]});
 assert(elements.fitLayouts.disabled);elements.modernLayout.checked=true;elements.modernLayout.change();assert(layouts.modern.visible&&layouts.shared.visible&&!layouts.historic.visible);assert(!elements.modernRoadList.hidden&&!elements.fitLayouts.disabled);
 elements.historicLayout.checked=true;elements.historicLayout.change();elements.modernLayout.checked=false;elements.modernLayout.change();assert(layouts.historic.visible&&layouts.shared.visible&&!layouts.modern.visible);assert(elements.modernRoadList.hidden);
-console.log('PASS: independent Historic/Modern controls, shared buildings, preserved transforms, hidden collisions, nine exact custom paths, camera-facing road names, upward road surfaces and full landscape/portrait framing.');
+console.log('PASS: independent Historic/Modern controls, shared buildings, preserved transforms, hidden collisions, thirteen exact custom paths, camera-facing road names, upward road surfaces and full landscape/portrait framing.');
