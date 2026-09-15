@@ -9,6 +9,7 @@ import {addFrontSteps} from './front-steps.mjs';
 import {addFrontBoundaryWall,FRONT_BOUNDARY} from './front-boundary-wall.mjs';
 import {addEntranceWalks} from './entrance-walks.mjs';
 import {addRedesmerePassage,addRedesmereEndRange} from './redesmere-passage.mjs';
+import {addRedesmereEdgeChimney} from './redesmere-edge-chimney.mjs';
 import {createWaterTower} from './water-tower.mjs';
 import {createEstateChimney} from './estate-chimney.mjs';
 import {createAnnexe} from './annexe.mjs';
@@ -215,6 +216,7 @@ export function createEscapeExterior(THREE,aspect){
   const white=material(0xe1e3dc),photoBrick=material(0xb3a5a0,{map:bricks});
   addRedesmerePassage(THREE,{box,mesh,worldUV,white,brick:photoBrick,material});
   addRedesmereEndRange(THREE,{box,mesh,worldUV,brick:photoBrick,material,hipRoof});
+  addRedesmereEdgeChimney(THREE,{model,material});
   for(const b of blocks){
     // The west arm is rebuilt from the detailed east arm and img15/img16.
     if(b[0]===-31&&[-10,-30].includes(b[1]))continue;

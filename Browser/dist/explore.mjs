@@ -8,6 +8,7 @@ import {createEscapeExterior,loadEscapeFrontage} from './escape-exterior.mjs';
 import {FRONT_STEPS_VIEW} from './front-steps.mjs';
 import {FRONT_WALL_VIEW} from './front-boundary-wall.mjs';
 import {REDESMERE_PASSAGE_VIEW} from './redesmere-passage.mjs';
+import {REDESMERE_CHIMNEY_VIEWS} from './redesmere-edge-chimney.mjs';
 import {createWalker,exteriorObstacles} from './explore-controls.mjs';
 import {EAST_PHOTO_VIEW} from './east-photo-detail.mjs';
 import {COURTYARD_PHOTO_VIEW} from './courtyard-photo-detail.mjs';
@@ -36,6 +37,8 @@ try{
   const obstacles=exteriorObstacles(THREE,exterior.model);
   const walker=createWalker(exterior.camera,obstacles);
   bindPlanterToggle(exterior,document,()=>{obstacles.splice(0,obstacles.length,...exteriorObstacles(THREE,exterior.model));});
+  const chimneyView=REDESMERE_CHIMNEY_VIEWS[new URLSearchParams(location.search).get('view')];
+  if(chimneyView)walker.setView(chimneyView);
   if(new URLSearchParams(location.search).get('view')==='redesmere-passage')walker.setView(REDESMERE_PASSAGE_VIEW);
   if(new URLSearchParams(location.search).get('view')==='east-photo')walker.setView(EAST_PHOTO_VIEW);
   if(new URLSearchParams(location.search).get('view')==='courtyard-photo')walker.setView(COURTYARD_PHOTO_VIEW);
