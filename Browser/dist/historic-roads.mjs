@@ -96,9 +96,8 @@ const annexeOuterEastRoad=bezier(outerCrossing,[
  [[421,160],[475,155],[515,145]],[[546,138],[576,129],[600,120]]
 ]);
 export const HISTORIC_ROADS_SOURCE=Object.freeze({clean:'User attachment: roads/clean.png',annotations:'User attachment: roads/annotated.png',revision:'Research/historic-roads/admin-road-reroute.png',previousLayout:'Research/historic-roads/interbuilding-alarm-board.png',previousPhoto:'Research/historic-roads/admin-to-annexe-photo.png',orientation:'Research/historic-roads/admin-to-annexe-orientation.png',note:'Photo-estimated circulation. The original purple/pink marks identify buildings and blue identifies the shared lane. The later yellow/blue aerial relocates islands and extends the Historic roads. The Main/admin-to-annexe photograph refines the curved junction, parking entrance and exposed kerbs; its blue arrow supplies viewing direction only. The later purple selection refines the roads and elongated lawns between Main/admin (blue) and the annexe (yellow); coloured circles are selection guides only. The September aerial moves the purple frontage drive to red, adds the yellow crossing and outer roads, and removes blue perimeter, spur and entrance sections. The shared lane east of the new crossing appears only with Modern.'});
-// The yellow-circled Churton grid is removed; Parsons Lane remains in the shared road layer.
+// The marked Churton grid and church-to-north route are removed; Parsons Lane remains shared.
 export const HISTORIC_ROADS=Object.freeze([
- {name:'North ward road',width:5,points:[[-12,-99],[28,-99],[28,-122],[68,-122]]},
  {name:'Historic lane continuation',width:6,points:adminFrontDrive},
  {name:'Admin roundabout',width:5.5,points:circle(ADMIN_ISLAND_CENTER,9)},
  {name:'Admin roundabout to annexe',width:6,points:bezier([238,63],[[[260,63],[268,51],frontWest]])},
@@ -107,7 +106,6 @@ export const HISTORIC_ROADS=Object.freeze([
  {name:'Annexe inner east road',width:6,points:annexeInnerEastRoad},
  {name:'Annexe outer east road',width:6,points:annexeOuterEastRoad},
  {name:'Northern diagonal road',width:6,points:[frontEast,ap(-198,84),ap(-245,84)]},
- {name:'Northern cross-road',width:5,points:[[68,-122],[130,-139],[197,-146],[247,-175],ap(-245,84)]},
  {name:'Annexe rectangular garden circuit',width:4,points:nearGarden},
  {name:'Admin north service road',width:6,points:[frontWest,[233,-6],[233,-62],[247,-76],[262,-76],[270,-84],[270,-132],[314,-176],[325,-176]]},
  {name:'Annexe east cross-drive',width:5,points:[[96,84],[96,25]].map(p=>ap(...p))},

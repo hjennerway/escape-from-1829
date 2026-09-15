@@ -32,3 +32,39 @@ export function createAerialControls(camera){
     get target(){return {...target};}
   };
 }
+
+// Track fingers separately: one orbits; a pair zooms and pans by its midpoint.
+export function bindAerialGestures(canvas,controls,onStart=()=>{}){
+  const pointers=new Map();
+  function down(e){
+    if(e.button!==0&&e.button!==2)return;
+    e.preventDefault();onStart();
+    pointers.set(e.pointerId,{x:e.clientX,y:e.clientY,pan:e.button===2||e.shiftKey});
+    canvas.setPointerCapture(e.pointerId);
+  }
+  function move(e){
+    const pointer=pointers.get(e.pointerId);if(!pointer)return;
+    e.preventDefault();
+    const pair=[...pointers.values()].slice(0,2);
+    const dx=e.clientX-pointer.x,dy=e.clientY-pointer.y;
+    if(pair.length===2&&pair.includes(pointer)){
+      const distance=Math.hypot(pair[0].x-pair[1].x,pair[0].y-pair[1].y);
+      pointer.x=e.clientX;pointer.y=e.clientY;
+      const nextDistance=Math.hypot(pair[0].x-pair[1].x,pair[0].y-pair[1].y);
+      if(distance>0&&nextDistance>0)controls.zoom(1000*Math.log(distance/nextDistance));
+      controls.panPixels(dx/2,dy/2);
+    }else{
+      pointer.x=e.clientX;pointer.y=e.clientY;
+      if(pair.length===1){if(pointer.pan)controls.panPixels(dx,dy);else controls.orbit(dx,dy);}
+    }
+  }
+  function up(e){pointers.delete(e.pointerId);}
+  function clear(){
+    const ids=[...pointers.keys()];pointers.clear();
+    for(const id of ids)if(canvas.hasPointerCapture(id))canvas.releasePointerCapture(id);
+  }
+  canvas.addEventListener('pointerdown',down);
+  canvas.addEventListener('pointermove',move);
+  for(const event of ['pointerup','pointercancel','lostpointercapture'])canvas.addEventListener(event,up);
+  return {clear};
+}

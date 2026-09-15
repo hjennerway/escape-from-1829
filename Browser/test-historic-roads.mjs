@@ -26,7 +26,7 @@ for(const road of HISTORIC_ROADS){
  });
 }
 for(const name of ['Churton western green','Churton eastern green'])assert(!layouts.historicRoads.getObjectByName(name),'Obsolete grid lawns must not cover Parsons Lane');
-const borderRay=new THREE.Raycaster(new THREE.Vector3(8,2,-96.2),new THREE.Vector3(0,-1,0));
+const borderRay=new THREE.Raycaster(new THREE.Vector3(236.3,2,-40),new THREE.Vector3(0,-1,0));
 assert.equal(borderRay.intersectObject(layouts.historicRoads,true)[0].object.material.color.getHex(),0xb8b9af,'Pale border must be exposed beyond the asphalt');
 // Registration is one similarity transform: no per-building stretching or rotation.
 assert(Math.hypot(...historicOSPoint(249,286).map((v,i)=>v-[0,19.5][i]))<1e-9);
@@ -50,20 +50,14 @@ for(const segment of missing.segments){
 assert(diagonalCount>=2,'Both sides of the orange-marked corridor must remain diagonal');
 assert(missing.segments.some(s=>s.sourceLoop>0),'Internal court edges must survive, not just an enclosing site outline');
 for(const name of ['Central service area · provisional','Northern service range · provisional','West detached block · provisional','Annexe rear service area · provisional','Annexe end service area · provisional'])assert(!layouts.historicRoads.getObjectByName(name),'The earlier incorrect broad outlines must be removed');
-// Check the requested church clearance against the actual model, including trim.
-const churchBounds=new THREE.Box3().setFromObject(exterior.chapel);
-for(const name of ['North ward road']){
- const road=HISTORIC_ROADS.find(r=>r.name===name);
- assert(road.points[0][1]-road.width/2>churchBounds.max.z+2,'Church-front road needs a clear verge beyond the chapel footprint');
-}
 // Ray checks distinguish a real grass island from a painted disk covered by road.
 const ray=new THREE.Raycaster();
 function surfaceAt(x,z){ray.set(new THREE.Vector3(x,2,z),new THREE.Vector3(0,-1,0));return ray.intersectObject(layouts.historicRoads,true)[0]?.object.userData.surface;}
-for(const name of ['Churton west road','Churton north cross-road','Churton estate cross-road']){
+for(const name of ['Churton west road','Churton north cross-road','Churton estate cross-road','North ward road','Northern cross-road']){
  assert(!layouts.historicRoads.getObjectByName(name),'Circled historic roads must be removed');
  assert(!layouts.historicRoads.getObjectByName(name+' border'),'Removed roads must not leave pale borders');
 }
-for(const [x,z] of [[-77,-130],[-100,-99],[-100,-41]])assert(!['black road','stone kerb'].includes(surfaceAt(x,z)),'The cleared grid must expose its grounds');
+for(const [x,z] of [[-77,-130],[-100,-99],[-100,-41],[28,-110],[100,-130.7741935483871],[220,-159.34]])assert(!['black road','stone kerb'].includes(surfaceAt(x,z)),'The cleared grid must expose its grounds');
 assert.equal(surfaceAt(...ADMIN_ISLAND_CENTER),'grass','Roundabout centre must remain grass');
 for(let i=0;i<16;i++){const a=i*Math.PI/8;assert.equal(surfaceAt(ADMIN_ISLAND_CENTER[0]+9*Math.cos(a),ADMIN_ISLAND_CENTER[1]+9*Math.sin(a)),'black road','Roundabout must provide an unbroken circulating road');}
 assert.equal(surfaceAt(245,46),'grass','Relocated teardrop must remain exposed inside its black surround');

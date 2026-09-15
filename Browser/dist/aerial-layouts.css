@@ -10,3 +10,8 @@
 #modernRoadList summary{cursor:pointer;padding:4px 0}
 #modernRoadList ul{padding-left:17px;margin:6px 0 0}
 @media(max-width:650px){#layoutControls{right:12px;bottom:98px;width:210px;padding:12px}#aerialHelp{right:12px;left:12px}#churtonNav{bottom:76px!important;left:12px!important}}
+
+.touch-aerial-help{display:none}
+#aerialHelp{pointer-events:none}
+#resetAerial{pointer-events:auto;min-height:44px}
+@media(pointer:coarse){.desktop-aerial-help{display:none}.touch-aerial-help{display:inline}#aerialHelp{font-size:12px;line-height:1.6}}
