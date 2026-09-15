@@ -3,8 +3,9 @@
 <body><canvas id="game" aria-label="Aerial 3D view of the 1829 estate"></canvas>
 <nav id="previewNav" aria-label="Aerial navigation">
   <a href="./">← BACK TO GAME</a>
+  <a href="./explore.html">EXPLORE THE ASYLUM ↗</a>
   <div id="locationsPicker">
-    <button id="locationsButton" type="button" aria-expanded="false" aria-controls="locationsPanel">Locations</button>
+    <button id="locationsButton" type="button" aria-label="Locations" aria-expanded="false" aria-controls="locationsPanel">Locations</button>
     <div id="locationsPanel" hidden><ul>
       <li><a href="?view=front">FRONT DETAIL</a></li>
       <li><a href="?view=front-steps">FRONT STEPS</a></li>
@@ -19,26 +20,18 @@
       <li><a href="?view=redesmere-passage">CORNER PASSAGE</a></li>
       <li><a href="?view=main-admin">MAIN/ADMIN BUILDING</a></li>
       <li><a href="?view=upton">UPTON/FRITH/OSCROFT</a></li>
-      <li><a href="?view=upton-plan">UPTON PLAN</a></li>
       <li><a href="?view=churton">CHURTON WARD</a></li>
-      <li><a href="?view=churton-plan">WARD PLAN</a></li>
-      <li><a href="?view=churton-4">WARD LAWN</a></li>
       <li><a href="?view=annexe">THE ANNEXE</a></li>
-      <li><a href="?view=annexe-plan">ANNEXE PLAN</a></li>
       <li><a href="?view=annexe-site">SITE PLAN</a></li>
       <li><a href="?view=tower">WATER TOWER</a></li>
-      <li><a href="?view=west-refine">WEST FACADE</a></li>
       <li><a href="?view=inner-east-photo">INNER EAST COURT</a></li>
-      <li><a href="?view=central-court-photo">CENTRE SECTION</a></li>
       <li><a href="?view=historic-roads">HISTORIC ROADS</a></li>
       <li><a href="?view=historic-footprints">OS FOOTPRINTS</a></li>
       <li><a href="?view=historic-admin-grounds">ADMIN GROUNDS</a></li>
-      <li><a href="?view=admin-annexe-photo">ANNEXE ROAD PHOTO</a></li>
       <li><a href="?view=plan">PLAN VIEW</a></li>
       <li><a href="./aerial.html">AERIAL VIEW</a></li>
     </ul></div>
   </div>
-  <a href="./explore.html">EXPLORE THE ASYLUM ↗</a>
 </nav>
 <div id="churtonNav" hidden style="position:fixed;bottom:65px;left:24px;z-index:32;font:12px Arial;color:#e4e8db"></div>
 <section id="layoutControls" aria-label="Estate layouts">
@@ -66,6 +59,7 @@ import {createEscapeExterior,loadEscapeFrontage} from './escape-exterior.mjs';
 import {FRONT_STEPS_VIEW} from './front-steps.mjs';
 import {ANNEXE_VIEWS} from './annexe.mjs';
 import {FRONT_WALL_VIEW} from './front-boundary-wall.mjs';
+import {FRONT_ENTRANCE_VIEW} from './modern-entrance.mjs';
 import {REDESMERE_PASSAGE_VIEW} from './redesmere-passage.mjs';
 import {ESCAPE_WATER_TOWER} from './water-tower.mjs';
 import {createAerialControls,sampleLanding} from './aerial-controls.mjs';
@@ -94,11 +88,11 @@ const controls=createAerialControls(exterior.camera);let navigationTarget=[12,5,
 let fittedLayouts=false;
 function fitLayouts(){const target=fitAerialLayouts(THREE,exterior,layouts);if(!target)return;controls.keys.clear();navigationTarget=target;moved=true;fittedLayouts=true;controls.sync(target);}
 document.getElementById('fitLayouts').onclick=fitLayouts;
-const view=(new URLSearchParams(location.search).get('view')??'').replace(/^new-hospital/,'annexe'),frontDetail=view==='front',towerDetail=view==='tower',rightDetail=view==='right',mapDetail=['plan','west-refine','historic-roads','historic-admin-grounds','historic-footprints'].includes(view),photoDetail=['admin-annexe-photo',...Object.keys(UPTON_VIEWS),...Object.keys(ANNEXE_VIEWS),...Object.keys(MAIN_ADMIN_VIEWS),...Object.keys(CHURTON_VIEWS),'annexe-site','annexe','annexe-plan','annexe-ground','front-wall','redesmere-passage','front-steps','redesmere-garden-photo','east-forward-end-photo','west-forward-end-photo','east-lawn-photo','entrance-east-photo','west-lawn-photo','entrance-west-photo','redesmere-photo','west-wing-side','west-wing-end','central-court-photo','inner-east-photo','west-front-photo','west-court-photo','inner-court-photo','east-photo','courtyard-photo','rear-court-photo'].includes(view);
+const view=(new URLSearchParams(location.search).get('view')??'').replace(/^new-hospital/,'annexe'),frontDetail=view==='front',towerDetail=view==='tower',rightDetail=view==='right',mapDetail=['plan','west-refine','historic-roads','historic-admin-grounds','historic-footprints'].includes(view),photoDetail=['front-entrance','admin-annexe-photo',...Object.keys(UPTON_VIEWS),...Object.keys(ANNEXE_VIEWS),...Object.keys(MAIN_ADMIN_VIEWS),...Object.keys(CHURTON_VIEWS),'annexe-site','annexe','annexe-plan','annexe-ground','front-wall','redesmere-passage','front-steps','redesmere-garden-photo','east-forward-end-photo','west-forward-end-photo','east-lawn-photo','entrance-east-photo','west-lawn-photo','entrance-west-photo','redesmere-photo','west-wing-side','west-wing-end','central-court-photo','inner-east-photo','west-front-photo','west-court-photo','inner-court-photo','east-photo','courtyard-photo','rear-court-photo'].includes(view);
 if(CHURTON_VIEWS[view]){const nav=document.getElementById('churtonNav');nav.hidden=false;nav.innerHTML='CHURTON WARD · '+[1,2,3,4,5,6].map(n=>'<a style="color:inherit;margin-right:12px" href="?view=churton-'+n+'">PHOTO '+n+'</a>').join('')+'<a style="color:inherit" href="./explore.html?view='+(view==='churton'||view==='churton-plan'?'churton-4':view)+'">WALK HERE</a>';}
 if(MAIN_ADMIN_VIEWS[view]){const nav=document.getElementById('churtonNav');nav.hidden=false;nav.innerHTML='MAIN/ADMIN · '+[1,2,3,4].map(n=>'<a style="color:inherit;margin-right:12px" href="?view=main-admin-'+n+'">PHOTO '+n+'</a>').join('')+'<a style="color:inherit;margin-right:12px" href="?view=main-admin-east">EAST SIDE</a><a style="color:inherit;margin-right:12px" href="?view=main-admin-plan">SITE PLAN</a><a style="color:inherit" href="./explore.html?view='+(['main-admin','main-admin-plan'].includes(view)?'main-admin-4':view)+'">WALK HERE</a>';}
 if(ANNEXE_VIEWS[view]){const nav=document.getElementById('churtonNav');nav.hidden=false;nav.innerHTML='THE ANNEXE · '+[['front','FRONT'],['front-right','FRONT RIGHT'],['img1','RIGHT LAWN'],['side','LEFT SIDE'],['side-right','RIGHT SIDE'],['plan','PLAN'],['site','SITE']].map(([key,label])=>'<a style="color:inherit;margin-right:12px" href="?view=annexe-'+key+'">'+label+'</a>').join('')+'<a style="color:inherit" href="./explore.html?view=annexe">WALK HERE</a>';}
-function framePhoto(){exterior.scene.fog.density=['upton-plan','upton','main-admin-plan','annexe-plan','annexe-site'].includes(view)?0:.0019;const shot=(view==='admin-annexe-photo'?ADMIN_ANNEXE_PHOTO_VIEW:null)??UPTON_VIEWS[view]??ANNEXE_VIEWS[view]??MAIN_ADMIN_VIEWS[view]??CHURTON_VIEWS[view]??(view==='front-wall'?FRONT_WALL_VIEW:view==='redesmere-passage'?REDESMERE_PASSAGE_VIEW:view==='front-steps'?FRONT_STEPS_VIEW:view==='redesmere-garden-photo'?REDESMERE_GARDEN_VIEW:view==='east-forward-end-photo'?EAST_FORWARD_END_PHOTO_VIEW:view==='west-forward-end-photo'?WEST_FORWARD_END_PHOTO_VIEW:view==='east-lawn-photo'?EAST_LAWN_PHOTO_VIEW:view==='entrance-east-photo'?ENTRANCE_EAST_PHOTO_VIEW:view==='west-lawn-photo'?WEST_LAWN_PHOTO_VIEW:view==='entrance-west-photo'?ENTRANCE_WEST_PHOTO_VIEW:view==='redesmere-photo'?REDESMERE_PHOTO_VIEW:view==='west-wing-side'?WEST_WING_SIDE_VIEW:view==='west-wing-end'?WEST_WING_END_VIEW:view==='central-court-photo'?centralCourtPhotoView(exterior.camera.aspect):view==='inner-east-photo'?innerEastPhotoView(exterior.camera.aspect):view==='west-front-photo'?WEST_FRONT_PHOTO_VIEW:view==='west-court-photo'?WEST_COURT_PHOTO_VIEW:view==='inner-court-photo'?INNER_COURT_PHOTO_VIEW:view==='rear-court-photo'?REAR_COURT_PHOTO_VIEW:view==='courtyard-photo'?COURTYARD_PHOTO_VIEW:EAST_PHOTO_VIEW);navigationTarget=shot.target;exterior.camera.position.set(...shot.position);if(['upton','upton-plan','main-admin','main-admin-plan','churton','churton-plan','annexe','annexe-plan','annexe-site'].includes(view)){const scale=Math.max(1,1.4/exterior.camera.aspect);exterior.camera.position.sub(new THREE.Vector3(...shot.target)).multiplyScalar(scale).add(new THREE.Vector3(...shot.target));}exterior.camera.lookAt(...shot.target);exterior.camera.fov=shot.fov;exterior.camera.updateProjectionMatrix();}
+function framePhoto(){exterior.scene.fog.density=['upton-plan','upton','main-admin-plan','annexe-plan','annexe-site'].includes(view)?0:.0019;const shot=(view==='front-entrance'?FRONT_ENTRANCE_VIEW:view==='admin-annexe-photo'?ADMIN_ANNEXE_PHOTO_VIEW:null)??UPTON_VIEWS[view]??ANNEXE_VIEWS[view]??MAIN_ADMIN_VIEWS[view]??CHURTON_VIEWS[view]??(view==='front-wall'?FRONT_WALL_VIEW:view==='redesmere-passage'?REDESMERE_PASSAGE_VIEW:view==='front-steps'?FRONT_STEPS_VIEW:view==='redesmere-garden-photo'?REDESMERE_GARDEN_VIEW:view==='east-forward-end-photo'?EAST_FORWARD_END_PHOTO_VIEW:view==='west-forward-end-photo'?WEST_FORWARD_END_PHOTO_VIEW:view==='east-lawn-photo'?EAST_LAWN_PHOTO_VIEW:view==='entrance-east-photo'?ENTRANCE_EAST_PHOTO_VIEW:view==='west-lawn-photo'?WEST_LAWN_PHOTO_VIEW:view==='entrance-west-photo'?ENTRANCE_WEST_PHOTO_VIEW:view==='redesmere-photo'?REDESMERE_PHOTO_VIEW:view==='west-wing-side'?WEST_WING_SIDE_VIEW:view==='west-wing-end'?WEST_WING_END_VIEW:view==='central-court-photo'?centralCourtPhotoView(exterior.camera.aspect):view==='inner-east-photo'?innerEastPhotoView(exterior.camera.aspect):view==='west-front-photo'?WEST_FRONT_PHOTO_VIEW:view==='west-court-photo'?WEST_COURT_PHOTO_VIEW:view==='inner-court-photo'?INNER_COURT_PHOTO_VIEW:view==='rear-court-photo'?REAR_COURT_PHOTO_VIEW:view==='courtyard-photo'?COURTYARD_PHOTO_VIEW:EAST_PHOTO_VIEW);navigationTarget=shot.target;exterior.camera.position.set(...shot.position);if(['upton','upton-plan','main-admin','main-admin-plan','churton','churton-plan','annexe','annexe-plan','annexe-site'].includes(view)){const scale=Math.max(1,1.4/exterior.camera.aspect);exterior.camera.position.sub(new THREE.Vector3(...shot.target)).multiplyScalar(scale).add(new THREE.Vector3(...shot.target));}exterior.camera.lookAt(...shot.target);exterior.camera.fov=shot.fov;exterior.camera.updateProjectionMatrix();}
 function frameFront(){exterior.camera.position.set(0,10,19.8+34*Math.max(1,1/exterior.camera.aspect));navigationTarget=[0,9,19.8];exterior.camera.lookAt(...navigationTarget);}
 function frameTower(){const {x,z}=ESCAPE_WATER_TOWER;exterior.camera.position.set(x+34,25,z+58*Math.max(1,1/exterior.camera.aspect));navigationTarget=[x,20,z];exterior.camera.lookAt(...navigationTarget);}
 function frameMap(){if(view==='historic-footprints'){exterior.scene.fog.density=0;navigationTarget=[110,0,-80];exterior.camera.position.set(110,470*Math.max(1,1.35/exterior.camera.aspect),-79.99);exterior.camera.lookAt(...navigationTarget);return;}if(view==='historic-admin-grounds'){exterior.scene.fog.density=0;navigationTarget=[250,0,10];exterior.camera.position.set(250,285*Math.max(1,1.35/exterior.camera.aspect),85);exterior.camera.lookAt(...navigationTarget);return;}if(view==='historic-roads'){exterior.scene.fog.density=0;navigationTarget=[220,0,-35];exterior.camera.position.set(220,800*Math.max(1,1.5/exterior.camera.aspect),-34.99);exterior.camera.lookAt(...navigationTarget);return;}const plan=view==='plan';navigationTarget=plan?[10,0,-10]:[-51,6,18];exterior.camera.position.set(...(plan?[10,245*Math.max(1,1.4/exterior.camera.aspect),-9.99]:[-89,38,80]));exterior.camera.lookAt(...navigationTarget);}

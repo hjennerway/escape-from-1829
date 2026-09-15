@@ -34,11 +34,13 @@ A single scale-and-rotation fit anchors Reception and checks the chapel and Chur
 
 Use `aerial.html?view=historic-footprints` for the focused overhead comparison. The tracing script, saved pixel contours and registration are in `Tools/trace_historic_footprints.py`, `Browser/dist/historic-footprint-data.mjs` and `Browser/dist/historic-footprints.mjs`. These are ground markers only, visible with Historic.
 
-## Front boundary and modern entrance
+## Front boundary and entrance
 
-The front boundary wall and its hedge continuations move straight forward by 18 scene units, from z=49 to z=67, following the user-marked frontage guide. Their orientation and the masonry gate opening are retained. The old broad outer gravel strip and adjacent narrow outer strip are removed, lawn extends to the new boundary, and the existing Reception path continues through the gate.
+The blue-marked frontage correction moves the wall and hedge continuations to z=74, keeping their orientation and central opening. This leaves approximately one six-unit road width of grass between the boundary and the fixed Vivienne Smith Lane. The lawns and Reception approach extend to the moved wall.
 
-Modern adds a sweeping, flared asphalt entrance between the gate and Vivienne Smith Lane. Its curved kerbs meet the lane edge; the mouth follows the existing saved lane vertices. The Google Earth paths and all building locations remain unchanged. The curve and wall offset are estimates from the two supplied screenshots. The moved boundary and lawn are shared between layouts; the new asphalt junction belongs to Modern. See `Browser/dist/modern-entrance.mjs` and `Browser/test-modern-entrance.mjs` for geometry and access checks.
+The sweeping, flared asphalt entrance is shared by Historic and Modern, using one copy alongside the shared lane. Its colour follows the selected layout and its curved kerbs meet the lane edge. A 26-unit-diameter semicircular paved forecourt now sits directly outside Reception, as clarified for the pink-marked area, with its flat side facing the door and its rounded edge opening onto the central approach. The curved edging leaves the approach open.
+
+Use `aerial.html?view=front-entrance` to inspect the forecourt, gate, grass verge and junction together. Reference: `Research/front-entrance-annotated.png`. Dimensions remain photo-based estimates. The saved lane vertices and building locations are unchanged. The wall and forecourt also appear in walking/gameplay; the mapped lane junction belongs to the aerial layouts. Unity and Blender exports are unchanged. `Browser/test-modern-entrance.mjs` covers the shared curve, verge width, forecourt shape, surface continuity and clear gate-to-door walking access.
 
 ## Main/admin building
 

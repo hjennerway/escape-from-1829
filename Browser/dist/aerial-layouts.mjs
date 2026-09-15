@@ -12,7 +12,7 @@ export function createAerialLayouts(THREE,exterior){
     if(child===exterior.terrain)continue;
     (historicObjects.has(child)?historic:shared).add(child);
   }
-  const roads=createModernRoads(THREE),entrance=createModernEntrance(THREE);shared.add(roads);modern.add(entrance);
+  const roads=createModernRoads(THREE),entrance=createModernEntrance(THREE);shared.add(roads,entrance);
   exterior.model.add(shared,historic,modern);
   const historicRoads=createHistoricRoads(THREE,exterior);historic.add(historicRoads);
   // Retire inferred tracks while the photo-based historic network is shown.
@@ -28,6 +28,7 @@ export function createAerialLayouts(THREE,exterior){
     shared.visible=state.historic||state.modern;
     for(const object of superseded)object.visible=!state.historic;
     for(const [material,color] of laneMaterials)material.color.copy(state.historic?new THREE.Color(0x17191a):color);
+    entrance.getObjectByName('Sweeping entrance asphalt').material.color.set(state.historic?0x17191a:0x555b5c);
     for(const road of roads.children)road.visible=state.modern||(state.historic&&road.name==='Vivienne Smith Lane');
   }
   setVisible('modern',false);

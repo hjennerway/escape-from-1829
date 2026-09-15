@@ -1,7 +1,8 @@
 // Low weathered masonry from the supplied view looking out of Reception.
 // Extents follow the two red-marked stretches in the aerial reference.
-// The red frontage guide moves the complete boundary 18 units toward the fixed lane.
-export const FRONT_BOUNDARY=Object.freeze({oldZ:49,z:67});
+// The blue frontage guide leaves approximately one six-unit road width of
+// grass between the wall and the fixed lane near edge (around z=80).
+export const FRONT_BOUNDARY=Object.freeze({oldZ:49,z:74});
 export const FRONT_WALL_VIEW=Object.freeze({position:[-4,8,90],target:[-10,.7,FRONT_BOUNDARY.z],fov:55});
 
 export function addFrontBoundaryWall(THREE,{model,material,worldUV}){

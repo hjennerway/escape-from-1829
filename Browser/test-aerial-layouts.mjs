@@ -33,7 +33,7 @@ for(const historic of [true,false])for(const modern of [true,false]){
   if(!historic&&!modern){assert.equal(target,null);continue;}
   assert(target);updateRoadLabels(THREE,layouts.roads,exterior.camera,aspect*1000,1000);assert.equal(exterior.scene.fog.density,0,'Fit must clear distance fog so the road network is visible');exterior.camera.updateMatrixWorld(true);
   for(const group of [layouts.shared,layouts.historic,layouts.modern].filter(g=>g.visible)){
-   const b=visibleLayoutBounds(THREE,group);
+   const b=visibleLayoutBounds(THREE,group);if(b.isEmpty())continue;
    for(const x of [b.min.x,b.max.x])for(const y of [b.min.y,b.max.y])for(const z of [b.min.z,b.max.z]){
     const p=new THREE.Vector3(x,y,z).project(exterior.camera);assert(Math.abs(p.x)<1&&Math.abs(p.y)<1&&Math.abs(p.z)<1,'Fit must contain visible estate and complete road paths in every aspect');
    }

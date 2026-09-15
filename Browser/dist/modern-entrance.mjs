@@ -14,6 +14,8 @@ export function lanePointAtX(x){
   throw new Error('Entrance lies outside the saved Vivienne Smith Lane path');
 }
 
+export const FRONT_ENTRANCE_VIEW=Object.freeze({position:[0,140,128],target:[0,0,51],fov:46});
+
 export function createModernEntrance(THREE){
   const entrance=new THREE.Group();entrance.name='Curved 1829 entrance from Vivienne Smith Lane';
   const neckZ=FRONT_BOUNDARY.z+.5,halfNeck=1.6,halfMouth=17;
