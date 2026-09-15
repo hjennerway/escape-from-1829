@@ -1,5 +1,35 @@
 # Escape from 1829
 
+## Historic and Modern aerial layouts
+
+The aerial preview has separate **Historic** and **Modern** checkboxes. Historic starts on and Modern starts off. Either, both, or neither can be visible. Shared 1829/Redesmere geometry, the water tower, Churton and church appear once whenever either layout is on. The Annexe, Main/admin building, its connecting corridor and the freestanding chimney belong to Historic. Existing shared grounds and site context follow the shared group; switching both layouts off leaves the terrain.
+
+Modern includes nine saved Google Earth paths: Upton grange, Gerrard Crescent, Frost drive, Vivienne Smith Lane, Ross Avenue, Ross Avenue (Part 2), Upton Grange (Part 2), Lockwood View and Warren Lane. Vivienne Smith Lane and its label also appear in Historic, using the same single copy when both layouts are enabled. Each path has a camera-facing road-name label anchored to its centreline; the text stays readable while orbiting and zooming and follows its road’s layout visibility. **Fit layouts** frames all currently visible buildings and roads; ordinary toggles retain the camera for comparison. Expand **9 mapped paths** to see the road names. The layout controls are available throughout the aerial preview. Gameplay and walking retain the existing estate. The independent H planter toggle continues to work.
+
+The paths are bundled locally from the shared Google Earth project, with all 94 saved vertices retained and registered to the fixed 1829 anchor. Road widths are approximate. See [road provenance and layout details](Research/modern-layouts.md). Run `npm test` in `Browser`; the suite includes all four layout combinations, unchanged transforms, road geometry and landscape/portrait fitting.
+
+## Historic roads from the alarm-board plan
+
+The Historic aerial layout now uses the supplied `roads/clean.png` and `roads/annotated.png` attachments to replace the earlier broad access tracks with straight black road segments. The blue-marked part identifies the existing shared Vivienne Smith Lane; purple identifies Churton and pink identifies the annexe. Light grey approaches are textured gravel, green islands remain grass, and missing OS building footprints have brown outlines. The annexe has a front avenue, a perimeter route, a garden circuit and a rear service spur; the western grid follows Churton.
+
+Use `escape-preview.html?view=historic-roads` for the overhead comparison. These are visual estimates fitted around the established building positions, not a literal image projection or surveyed coordinates. The northern roads obscured by glare remain approximate. Geometry and provenance are in `Browser/dist/historic-roads.mjs`. This refinement belongs to the Historic aerial layer; Modern restores its existing access surfaces. Walking, gameplay, Unity and Blender retain their previous grounds.
+
+The red-circled admin-grounds refinement adds a small grass-centred roundabout outside the right side of Main/admin, a teardrop grass island with a gravel walk beyond it, and softened/tapered edges to the annexe garden and front lawn nearest 1829. The former narrow rectangular island is replaced by the teardrop, and a tapered forecourt lawn replaces the old oval lawn beneath the approach road. The church-front cross-road and its eastern continuation move six scene units towards 1829, leaving clearance from the chapel. Use `escape-preview.html?view=historic-admin-grounds` for the closer view. These grounds remain photo-based estimates in the Historic aerial layout.
+
+### Missing OS building footprints
+
+The `roads2/clean.png` and `roads2/annotated.png` correction replaces all five earlier broad brown outlines. Brown marks now trace solid OS building walls and courtyard openings inside the blue-circled area. Scan wobble is simplified and the corners are fitted together to horizontal, vertical and 45-degree wall runs in the estate axes; courtyards stay closed and the building exclusions are applied afterwards. Yellow identifies 1829; green identifies the chapel and Churton. These circles are registration/selection guides, not building edges. The source is saved in `Research/historic-footprints/`.
+
+A single scale-and-rotation fit anchors Reception and checks the chapel and Churton, accounting for the map's different orientation without moving the estate. The two check landmarks agree within six scene units; the low-resolution scan and model placement make the outlines approximate. The source contours are clipped to the blue region and against the actual existing building footprints, including rotated walls. Clipping leaves open ends rather than inventing a wall along the blue circle or an overlap boundary. Low landscaping and trees do not count as existing buildings.
+
+Use `escape-preview.html?view=historic-footprints` for the focused overhead comparison. The tracing script, saved pixel contours and registration are in `Tools/trace_historic_footprints.py`, `Browser/dist/historic-footprint-data.mjs` and `Browser/dist/historic-footprints.mjs`. These are ground markers only, visible with Historic.
+
+## Front boundary and modern entrance
+
+The front boundary wall and its hedge continuations move straight forward by 18 scene units, from z=49 to z=67, following the user-marked frontage guide. Their orientation and the masonry gate opening are retained. The old broad outer gravel strip and adjacent narrow outer strip are removed, lawn extends to the new boundary, and the existing Reception path continues through the gate.
+
+Modern adds a sweeping, flared asphalt entrance between the gate and Vivienne Smith Lane. Its curved kerbs meet the lane edge; the mouth follows the existing saved lane vertices. The Google Earth paths and all building locations remain unchanged. The curve and wall offset are estimates from the two supplied screenshots. The moved boundary and lawn are shared between layouts; the new asphalt junction belongs to Modern. See `Browser/dist/modern-entrance.mjs` and `Browser/test-modern-entrance.mjs` for geometry and access checks.
+
 ## Main/admin building
 
 The Main/admin building stands east of 1829/Redesmere. `Browser/dist/main-admin-building.mjs` uses the supplied `midwifery-school/os.png` for its central range, two projecting end pavilions and low west rooms. The OS silhouette takes precedence over `scale.png`; coloured circles and camera arrows are reference annotations only. Pixel scale is estimated against the existing estate with Reception as the origin, so placement and dimensions are approximate rather than surveyed.
@@ -10,7 +40,7 @@ The main_refine correction gives both front window bays 45-degree chamfered corn
 
 The east elevation now follows chimney/img1.jpg, with chimney/img1-loc.png locating the southeast camera looking northwest. The inferred window grid is replaced by one upper sash column, separate ground-floor openings, two side chimney breasts/stacks and a low hipped-roof wing with a recessed connection. Curved gravel approaches follow the photographed circulation. Open escape-preview.html?view=main-admin-east or explore.html?view=main-admin-east for the comparison.
 
-The freestanding brick chimney in Browser/dist/estate-chimney.mjs is placed at x=238, z=-66, estimated from the X in chimney-location.png relative to the water tower. It has a tapered shaft, soot-darkened rim and an open throat. Its total height is exactly 1.3 times ESCAPE_WATER_TOWER.height (50.765 scene units at the current tower height). Position and diameter remain screenshot estimates; the chimney is an independent scene group.
+The freestanding brick chimney in Browser/dist/estate-chimney.mjs is placed at x=180, z=-31, estimated from the latest red X on the user-supplied aerial screenshot, on the lawn between the water tower and Main/admin building. It has a tapered shaft, soot-darkened rim and an open throat. Its total height is exactly 1.3 times ESCAPE_WATER_TOWER.height (50.765 scene units at the current tower height). Position and diameter remain screenshot estimates; the chimney is an independent scene group.
 
 The black OS connection is an independent group, **1829 to Main/admin connecting corridor**, with provisional low brick walls and a slate roof for later refinement. Its masonry crosses the former straight outside drive; walking collision now follows this mapped footprint. The escape pan includes the new building and retains the mast and water tower.
 

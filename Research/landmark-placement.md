@@ -23,3 +23,8 @@ The central front entrance is approximately (434, 265) in the image and (0, 19.5
 The tower square is centred near (34, 26), yielding X=150, Z=-53 (previously 124, -103). The church rectangle is centred near (117, 493), yielding X=-6, Z=-120 (previously 1, -105). Coordinates are rounded to whole scene units. The church nave already follows the rectangle's northeast/southwest axis, so its orientation and both landmarks' dimensions are retained.
 
 The church approach uses offsets from its new position. The escape camera pulls back enough to retain the relocated tower in landscape and portrait.
+
+
+## Chimney correction from the marked aerial screenshot
+
+The subsequent user-supplied aerial image (codex-clipboard-71ea211f-e5f3-4b7e-8203-5c51149071cb.png, 1318 × 766) marks the new chimney base with a red X near image pixel (979, 410). Registering the ground plane against the existing mast base, water-tower base, old chimney base and front-drive corners gives approximately scene (180.4, -30.8), rounded to (180, -31). The ground registration residuals are within roughly four image pixels; placement remains a screenshot estimate. The chimney moves from (238, -66) to (180, -31). Its geometry, height, rotation, Historic membership and every other building position remain unchanged. This supersedes the old chimney anchor referenced in the earlier landmark check above.

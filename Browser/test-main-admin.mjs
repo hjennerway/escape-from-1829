@@ -82,15 +82,15 @@ for(const name of ['East curved carriage drive','East wing side access']){const 
 const chimney=exterior.estateChimney,bounds=new THREE.Box3().setFromObject(chimney);
 assert.equal(chimney.parent,exterior.model,'Freestanding chimney must be independent of the admin building');
 assert(Math.abs(bounds.max.y-bounds.min.y-ESCAPE_WATER_TOWER.height*1.3)<1e-5,'Chimney must be exactly 1.3 times the water tower');
-assert.deepEqual([chimney.position.x,chimney.position.z],[238,-66],'Chimney retains the original marked-X position when the water tower moves');
-// The Google Earth correction moves only the tower; the chimney retains its own anchor.
-assert(chimney.position.x>ESCAPE_WATER_TOWER.x);
-assert(obs.some(o=>obstacleContains(o,238,-66)),'Chimney base must block walking');
-ray.set(new THREE.Vector3(238,ESTATE_CHIMNEY.height+1,-66),new THREE.Vector3(0,-1,0));
+assert.deepEqual([chimney.position.x,chimney.position.z],[180,-31],'Chimney base follows the latest red X on the aerial screenshot');
+// The new chimney anchor lies to the right and forward of the water tower.
+assert(chimney.position.x>ESCAPE_WATER_TOWER.x&&chimney.position.z>ESCAPE_WATER_TOWER.z);
+assert(obs.some(o=>obstacleContains(o,ESTATE_CHIMNEY.x,ESTATE_CHIMNEY.z)),'Chimney base must block walking');
+ray.set(new THREE.Vector3(ESTATE_CHIMNEY.x,ESTATE_CHIMNEY.height+1,ESTATE_CHIMNEY.z),new THREE.Vector3(0,-1,0));
 assert.equal(ray.intersectObject(chimney,true)[0].object.name,'Recessed chimney opening','The top must have an open, recessed throat');
 for(const aspect of [16/9,4/3,9/16])for(const seconds of [0,5,10]){
  const shot=sampleEscape(seconds,{aspect}),camera=new THREE.PerspectiveCamera(46,aspect,.5,2000);camera.position.set(...shot.position);camera.lookAt(...shot.target);camera.updateMatrixWorld(true);
- for(const y of [0,ESTATE_CHIMNEY.height]){const p=new THREE.Vector3(238,y,-66).project(camera);assert(Math.abs(p.x)<.95&&Math.abs(p.y)<.95,'Freestanding chimney must fit the escape pan');}
+ for(const y of [0,ESTATE_CHIMNEY.height]){const p=new THREE.Vector3(ESTATE_CHIMNEY.x,y,ESTATE_CHIMNEY.z).project(camera);assert(Math.abs(p.x)<.95&&Math.abs(p.y)<.95,'Freestanding chimney must fit the escape pan');}
 }
 
 console.log('PASS: east photo geometry, marked camera, independent chimney height/location, chamfered bays, open low-wing recess, OS registration, four photo starts, exposed sashes, slate roofs, masonry collision, clear approach and separate corridor.');

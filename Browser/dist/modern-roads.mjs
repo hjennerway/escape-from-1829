@@ -1,0 +1,32 @@
+import {MODERN_ROAD_PATHS,MODERN_ROADS_SOURCE} from './modern-road-data.mjs';
+import {earthToScene} from './earth-registration.mjs';
+import {createRoadLabel} from './road-labels.mjs';
+
+export function createModernRoads(THREE){
+  const roads=new THREE.Group();roads.name='Modern roads · Google Earth paths';
+  roads.userData.source=MODERN_ROADS_SOURCE;
+  const asphalt=new THREE.MeshStandardMaterial({color:0x555b5c,roughness:1,polygonOffset:true,polygonOffsetFactor:-2,polygonOffsetUnits:-4});
+  const edge=new THREE.MeshStandardMaterial({color:0xb8b9af,roughness:1,polygonOffset:true,polygonOffsetFactor:-1,polygonOffsetUnits:-1});
+  // Widths are visual estimates. The saved centreline vertices are unchanged.
+  function ribbon(points,width,y,material){
+    const positions=[],indices=[];
+    for(let i=1;i<points.length;i++){
+      const [ax,az]=points[i-1],[bx,bz]=points[i],dx=bx-ax,dz=bz-az,length=Math.hypot(dx,dz);
+      if(length<.0001)continue;
+      const ox=-dz/length*width/2,oz=dx/length*width/2,n=positions.length/3;
+      positions.push(ax+ox,y,az+oz,ax-ox,y,az-oz,bx+ox,y,bz+oz,bx-ox,y,bz-oz);
+      indices.push(n,n+2,n+1,n+1,n+2,n+3);
+    }
+    const geometry=new THREE.BufferGeometry();geometry.setAttribute('position',new THREE.Float32BufferAttribute(positions,3));geometry.setIndex(indices);geometry.computeVertexNormals();
+    const group=new THREE.Group(),surface=new THREE.Mesh(geometry,material);surface.receiveShadow=true;surface.renderOrder=material===asphalt?2:1;group.add(surface);
+    const capGeometry=new THREE.CircleGeometry(width/2,20);capGeometry.rotateX(-Math.PI/2);
+    for(const [x,z] of points){const cap=new THREE.Mesh(capGeometry,material);cap.position.set(x,y,z);cap.receiveShadow=true;cap.renderOrder=surface.renderOrder;group.add(cap);}
+    return group;
+  }
+  for(const path of MODERN_ROAD_PATHS){
+    const road=new THREE.Group(),points=path.coordinates.map(p=>earthToScene(...p));
+    road.name=path.name;road.userData.centerline=points;road.userData.coordinates=path.coordinates;
+    road.add(ribbon(points,7.2,.32,edge),ribbon(points,6,.34,asphalt),createRoadLabel(THREE,path.name,points));roads.add(road);
+  }
+  return roads;
+}

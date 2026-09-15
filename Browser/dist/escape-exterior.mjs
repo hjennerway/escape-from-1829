@@ -5,7 +5,7 @@ import {westFrontPhotoProfile} from './west-front-photo-detail.mjs';
 import {westCourtPhotoProfile} from './west-court-photo-detail.mjs';
 import {createChapel,ESCAPE_CHAPEL} from './chapel.mjs';
 import {addFrontSteps} from './front-steps.mjs';
-import {addFrontBoundaryWall} from './front-boundary-wall.mjs';
+import {addFrontBoundaryWall,FRONT_BOUNDARY} from './front-boundary-wall.mjs';
 import {addEntranceWalks} from './entrance-walks.mjs';
 import {addRedesmerePassage,addRedesmereEndRange} from './redesmere-passage.mjs';
 import {createWaterTower} from './water-tower.mjs';
@@ -55,18 +55,23 @@ export function createEscapeExterior(THREE,aspect){
   function box(mat,x,y,z,w,h,d,rotation=0){if(!batches.has(mat))batches.set(mat,[]);batches.get(mat).push({x,y,z,w,h,d,rotation});}
   function mesh(geo,mat,x=0,y=0,z=0,shadow=false){const m=new THREE.Mesh(geo,mat);m.position.set(x,y,z);m.castShadow=shadow;m.receiveShadow=true;model.add(m);return m;}
   function worldUV(geo,scale=3){const p=geo.attributes.position,n=geo.attributes.normal,uv=geo.attributes.uv;for(let i=0;i<p.count;i++)uv.setXY(i,(Math.abs(n.getX(i))>.5?p.getZ(i):p.getX(i))/scale,(Math.abs(n.getY(i))>.5?p.getZ(i):p.getY(i))/scale);return geo;}
-  mesh(new THREE.PlaneGeometry(4000,4000),grass,0,-.15,0).rotation.x=-Math.PI/2;
+  const terrain=mesh(new THREE.PlaneGeometry(4000,4000),grass,0,-.15,0);terrain.rotation.x=-Math.PI/2;terrain.name='Estate terrain';
+  const legacyAccess=new THREE.Group();legacyAccess.name='Earlier estate access tracks';model.add(legacyAccess);
+  function legacyRoad(mat,x,y,z,w,h,d){const road=mesh(new THREE.BoxGeometry(w,h,d),mat,x,y,z);legacyAccess.add(road);}
   // Grounds and surrounding access roads. No red annotation or sale graphics.
-  box(path,OUTER_SHIFT/2,-.015,2,151+OUTER_SHIFT,.15,103);
+  legacyRoad(path,OUTER_SHIFT/2,-.015,2,151+OUTER_SHIFT,.15,103);
   box(grass,OUTER_SHIFT/2,.08,29.5,117+OUTER_SHIFT,.1,39);box(grass,OUTER_SHIFT/2,.08,-15,117+OUTER_SHIFT,.1,45);
-  box(gravel,EAST_PAVILION_WIDTH/2,.09,59,210+EAST_PAVILION_WIDTH,.1,11);box(gravel,-79,.09,-2,10,.1,133);box(gravel,79+OUTER_SHIFT,.09,0,9,.1,130);
-  box(path,OUTER_SHIFT/2,.11,51,151+OUTER_SHIFT,.1,3);box(gravel,OUTER_SHIFT/2,.11,-46,149+OUTER_SHIFT,.1,8);
-  box(path,0,.13,34,3.2,.1,34);
+  // Remove the old full-width outer gravel drive; retain the estate-side access lanes.
+  legacyRoad(gravel,-79,.09,-2,10,.1,133);legacyRoad(gravel,79+OUTER_SHIFT,.09,0,9,.1,130);
+  legacyRoad(gravel,OUTER_SHIFT/2,.11,-46,149+OUTER_SHIFT,.1,8);
+  const frontLawn=mesh(new THREE.BoxGeometry(151+OUTER_SHIFT,.1,FRONT_BOUNDARY.z-FRONT_BOUNDARY.oldZ+1.5),grass,OUTER_SHIFT/2,.08,(FRONT_BOUNDARY.oldZ+FRONT_BOUNDARY.z+1.5)/2);frontLawn.name='Extended front lawn';
+  const approachEnd=FRONT_BOUNDARY.z+.5;
+  const frontApproach=mesh(new THREE.BoxGeometry(3.2,.1,approachEnd-17),path,0,.13,(approachEnd+17)/2);frontApproach.name='Extended Reception approach';
   // The entrance lawns reach the boundary wall; cross-walks stop at the wings.
   for(const [left,right] of [[-57,-29],[29,57+OUTER_SHIFT]])box(path,(left+right)/2,.13,43,right-left,.1,2);
   addEntranceWalks(THREE,{model,material});
   // Stone wall replaces the marked hedge frontage, with an open central path.
-  for(const [left,right] of [[-71,-58],[31,71+OUTER_SHIFT]])box(hedge,(left+right)/2,.55,49,right-left,1.1,.9);
+  for(const [left,right] of [[-71,-58],[31,71+OUTER_SHIFT]])box(hedge,(left+right)/2,.55,FRONT_BOUNDARY.z,right-left,1.1,.9);
   addFrontBoundaryWall(THREE,{model,material,worldUV});
   // Start from the western silhouette and reflect it across Reception.
   // Each tuple is [x, z, width, depth, eaves height]; front is +Z.
@@ -252,7 +257,7 @@ export function createEscapeExterior(THREE,aspect){
   box(gravel,40,.18,-36,7,.12,18);
   box(path,courtyardPassage.x,.2,13,courtyardPassage.width,.1,34);
   // The corrected centre ends before the existing cross-drive at z=-46.
-  box(gravel,0,.15,-62,106,.12,23);
+  legacyRoad(gravel,0,.15,-62,106,.12,23);
   // Broadleaf crowns cast shadows across the front lawn and site edges.
   const bark=material(0x5a4e3d),leaves=[material(0x43583a),material(0x566944),material(0x657448)];
   const crowns=leaves.map(mat=>({mat,items:[]}));
@@ -323,5 +328,5 @@ export function createEscapeExterior(THREE,aspect){
     items.forEach((b,i)=>{dummy.position.set(b.x,b.y,b.z);dummy.scale.set(b.w,b.h,b.d);dummy.rotation.set(0,b.rotation,0);dummy.updateMatrix();batch.setMatrixAt(i,dummy.matrix);});model.add(batch);}
   for(const [parent,canopy] of [[model,crowns],[planters,planterCrowns]])for(const {mat,items} of canopy){const batch=new THREE.InstancedMesh(new THREE.IcosahedronGeometry(1,1),mat,items.length);batch.castShadow=true;batch.receiveShadow=true;
     items.forEach((b,i)=>{dummy.position.set(b.x,b.y,b.z);dummy.scale.set(b.s,b.s*.85,b.s);dummy.rotation.set(0,i,0);dummy.updateMatrix();batch.setMatrixAt(i,dummy.matrix);});parent.add(batch);}
-  return {scene,camera,model,mast,chapel,waterTower,estateChimney,annexe,newHospital:annexe,churtonWard,mainAdmin,adminCorridor,planters};
+  return {scene,camera,model,terrain,legacyAccess,mast,chapel,waterTower,estateChimney,annexe,newHospital:annexe,churtonWard,mainAdmin,adminCorridor,planters};
 }

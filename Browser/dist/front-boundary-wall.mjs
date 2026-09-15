@@ -1,9 +1,11 @@
 // Low weathered masonry from the supplied view looking out of Reception.
 // Extents follow the two red-marked stretches in the aerial reference.
-export const FRONT_WALL_VIEW=Object.freeze({position:[-4,8,72],target:[-10,.7,49],fov:55});
+// The red frontage guide moves the complete boundary 18 units toward the fixed lane.
+export const FRONT_BOUNDARY=Object.freeze({oldZ:49,z:67});
+export const FRONT_WALL_VIEW=Object.freeze({position:[-4,8,90],target:[-10,.7,FRONT_BOUNDARY.z],fov:55});
 
 export function addFrontBoundaryWall(THREE,{model,material,worldUV}){
-  const wall=new THREE.Group();wall.name='Front boundary wall';model.add(wall);
+  const wall=new THREE.Group();wall.name='Front boundary wall';wall.position.z=FRONT_BOUNDARY.z-FRONT_BOUNDARY.oldZ;model.add(wall);
   const canvas=document.createElement('canvas');canvas.width=canvas.height=512;
   const g=canvas.getContext('2d');g.fillStyle='#827c6c';g.fillRect(0,0,512,512);
   let seed=1949;

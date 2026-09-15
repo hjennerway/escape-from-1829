@@ -1,8 +1,8 @@
 // Freestanding tapered brick chimney in chimney/img1.jpg.
-// The marked X is southeast of the existing water tower. Position and diameter
+// User-marked aerial red X: on the lawn between the tower and Main/admin. Position and diameter
 // are screenshot/photo estimates; total height is the user's exact 1.3 ratio.
 import {ESCAPE_WATER_TOWER} from './water-tower.mjs';
-export const ESTATE_CHIMNEY=Object.freeze({x:238,z:-66,height:ESCAPE_WATER_TOWER.height*1.3,baseRadius:2.45,topRadius:1.23});
+export const ESTATE_CHIMNEY=Object.freeze({x:180,z:-31,height:ESCAPE_WATER_TOWER.height*1.3,baseRadius:2.45,topRadius:1.23});
 export function createEstateChimney(THREE,{brick,material}){
   const chimney=new THREE.Group();chimney.name='Freestanding brick chimney';chimney.position.set(ESTATE_CHIMNEY.x,0,ESTATE_CHIMNEY.z);
   const masonry=brick.clone();masonry.color.set(0xc4a18d);
@@ -25,6 +25,6 @@ export function createEstateChimney(THREE,{brick,material}){
   cylinder(topRadius-.24,topRadius-.24,1.4,height-.7,inside,'Dark chimney throat',true);
   const rim=new THREE.Mesh(new THREE.RingGeometry(topRadius-.24,topRadius+.08,48),soot);rim.rotation.x=-Math.PI/2;rim.position.y=height;rim.name='Open masonry chimney lip';chimney.add(rim);
   const opening=new THREE.Mesh(new THREE.CircleGeometry(topRadius-.24,48),dark);opening.rotation.x=-Math.PI/2;opening.position.y=height-1.4;opening.name='Recessed chimney opening';chimney.add(opening);
-  chimney.userData.height=height;chimney.userData.reference='chimney-location.png X; chimney/img1.jpg; 1.3 times the water-tower height';
+  chimney.userData.height=height;chimney.userData.reference='User-marked aerial red X (15 September 2026); chimney/img1.jpg; 1.3 times the water-tower height';
   return chimney;
 }
