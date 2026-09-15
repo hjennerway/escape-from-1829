@@ -1,5 +1,7 @@
+import {bindPlanterToggle} from './planter-layer.mjs';
 import {CHURTON_VIEWS} from './churton-ward.mjs';
-import {NEW_HOSPITAL_GROUND_VIEW} from './new-hospital.mjs';
+import {MAIN_ADMIN_VIEWS} from './main-admin-building.mjs';
+import {ANNEXE_VIEWS} from './annexe.mjs';
 import * as THREE from './vendor/three.module.js';
 import {createEscapeExterior,loadEscapeFrontage} from './escape-exterior.mjs';
 import {FRONT_STEPS_VIEW} from './front-steps.mjs';
@@ -30,7 +32,9 @@ try{
   renderer.shadowMap.enabled=true;renderer.shadowMap.type=THREE.PCFSoftShadowMap;
   const exterior=createEscapeExterior(THREE,innerWidth/innerHeight);
   exterior.camera.near=.1;exterior.camera.updateProjectionMatrix();
-  const walker=createWalker(exterior.camera,exteriorObstacles(THREE,exterior.model));
+  const obstacles=exteriorObstacles(THREE,exterior.model);
+  const walker=createWalker(exterior.camera,obstacles);
+  bindPlanterToggle(exterior,document,()=>{obstacles.splice(0,obstacles.length,...exteriorObstacles(THREE,exterior.model));});
   if(new URLSearchParams(location.search).get('view')==='redesmere-passage')walker.setView(REDESMERE_PASSAGE_VIEW);
   if(new URLSearchParams(location.search).get('view')==='east-photo')walker.setView(EAST_PHOTO_VIEW);
   if(new URLSearchParams(location.search).get('view')==='courtyard-photo')walker.setView(COURTYARD_PHOTO_VIEW);
@@ -52,8 +56,10 @@ try{
   if(new URLSearchParams(location.search).get('view')==='west-forward-end-photo')walker.setView(WEST_FORWARD_END_PHOTO_VIEW);
   if(new URLSearchParams(location.search).get('view')==='front-steps')walker.setView({...FRONT_STEPS_VIEW,position:[6,1.8,34]});
   if(new URLSearchParams(location.search).get('view')==='front-wall')walker.setView({...FRONT_WALL_VIEW,position:[0,1.8,36],target:[-12,.8,49]});
-  if(new URLSearchParams(location.search).get('view')==='new-hospital')walker.setView(NEW_HOSPITAL_GROUND_VIEW);
+  const annexeView=(new URLSearchParams(location.search).get('view')??'').replace(/^new-hospital/,'annexe');
+  if(ANNEXE_VIEWS[annexeView])walker.setView(ANNEXE_VIEWS[['annexe','annexe-plan','annexe-site'].includes(annexeView)?'annexe-ground':annexeView]);
   const churtonView=new URLSearchParams(location.search).get('view');
+  if(MAIN_ADMIN_VIEWS[churtonView])walker.setView(MAIN_ADMIN_VIEWS[churtonView==='main-admin'||churtonView==='main-admin-plan'?'main-admin-4':churtonView]);
   if(CHURTON_VIEWS[churtonView])walker.setView(CHURTON_VIEWS[churtonView==='churton'||churtonView==='churton-plan'?'churton-4':churtonView]);
   let active=false,dragging=false,last=null;
   const movement=new Set(['KeyW','KeyA','KeyS','KeyD','ShiftLeft','ShiftRight']);

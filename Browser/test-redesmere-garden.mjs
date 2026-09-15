@@ -1,10 +1,35 @@
+import {bindPlanterToggle} from './dist/planter-layer.mjs';
 import assert from 'node:assert/strict';
 import * as THREE from './dist/vendor/three.module.js';
 import {createEscapeExterior} from './dist/escape-exterior.mjs';
 import {REDESMERE_GARDEN_VIEW} from './dist/redesmere-garden-photo-detail.mjs';
 import {exteriorObstacles,obstacleContains} from './dist/explore-controls.mjs';
 globalThis.document={createElement:()=>({width:0,height:0,getContext:()=>({fillRect(){}})})};
-const {model}=createEscapeExterior(THREE,4/3);
+const exterior=createEscapeExterior(THREE,4/3),{model,planters}=exterior;
+assert.equal(planters.visible,false,'the planter layer starts hidden');
+let visibleMeshes=0;planters.traverseVisible(o=>{if(o.isMesh)visibleMeshes++;});
+assert.equal(visibleMeshes,0,'hidden planters contribute no renderable meshes');
+const beds=planters.children.filter(o=>o.name==='Redesmere garden timber bed');
+assert.equal(beds.length,4);
+for(const bed of beds)assert.equal(bed.children.length,120,'timber, soil, stems, leaves and flowers all belong to the bed');
+assert.equal(planters.children.filter(o=>o.isInstancedMesh).reduce((sum,o)=>sum+o.count,0),15,'east corner shrubs and tree crowns must be separate from estate planting');
+const centres=[[80.4,26.8],[87,26],[73,33.5],[69,37],[99.2,29]];
+function checkCollisions(expected){
+  const obstacles=exteriorObstacles(THREE,model);
+  for(const [x,z] of centres)assert.equal(obstacles.some(o=>obstacleContains(o,x,z)),expected,'planter collisions follow visibility');
+}
+checkCollisions(false);
+let keydown,changes=0;
+bindPlanterToggle(exterior,{addEventListener(type,handler){assert.equal(type,'keydown');keydown=handler;}},()=>changes++);
+function press(extra={}){keydown({code:'KeyH',preventDefault(){},...extra});}
+press();assert.equal(planters.visible,true);checkCollisions(true);
+press({repeat:true});assert.equal(planters.visible,true,'holding H must not flicker');
+press({target:{tagName:'INPUT'}});assert.equal(planters.visible,true,'typing must not toggle scenery');
+press({ctrlKey:true});assert.equal(planters.visible,true,'browser shortcuts must remain available');
+press();assert.equal(planters.visible,false);checkCollisions(false);
+assert.equal(changes,2);
+press(); // Existing garden checks below also exercise the visible planter layer.
+
 model.updateMatrixWorld(true);
 const openings=model.userData.redesmereGardenOpenings,ray=new THREE.Raycaster();
 assert.equal(openings.filter(o=>o.face==='garden-pavilion-upper-pair').length,2);
@@ -31,7 +56,7 @@ ray.set(new THREE.Vector3(76,30,8.5),new THREE.Vector3(0,-1,0));
 assert.equal(ray.intersectObject(model,true)[0].object.name,'1829 Redesmere lintel coping');
 for(const [x,z] of [[80.4,26.8],[87,26],[73,33.5],[69,37]])assert(obstacles.some(o=>obstacleContains(o,x,z)),'solid timber beds must block walking through their centres');
 assert.equal(model.children.filter(o=>o.name==='Redesmere garden bench').length,2);
-assert.equal(model.children.filter(o=>o.name==='Redesmere garden timber bed').length,4);
+assert.equal(planters.children.filter(o=>o.name==='Redesmere garden timber bed').length,4);
 assert(model.children.filter(o=>o.name==='Redesmere garden ivy').reduce((sum,o)=>sum+o.count,0)>5000,'ivy should use fine instanced leaves');
 assert(!obstacles.some(o=>obstacleContains(o,REDESMERE_GARDEN_VIEW.position[0],REDESMERE_GARDEN_VIEW.position[2])),'camera must start on clear ground');
 ray.set(new THREE.Vector3(65.5,30,14),new THREE.Vector3(0,-1,0));

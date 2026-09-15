@@ -6,6 +6,7 @@ import * as core from './dist/core.mjs';
 import * as floors from './dist/floors.mjs';
 import {buildArchitecture} from './dist/architecture.mjs';
 import {createEscapeCutscene,sampleEscape} from './dist/escape-cutscene.mjs';
+import {bindPlanterToggle} from './dist/planter-layer.mjs';
 import {sampleLanding} from './dist/aerial-controls.mjs';
 import {createArrivalCutscene,sampleArrival} from './dist/arrival-cutscene.mjs';
 class Vector {
@@ -35,7 +36,7 @@ function element(id){
 }
 const layout=JSON.parse(await readFile(new URL('./dist/layout.json',import.meta.url)));
 const source=(await readFile(new URL('./dist/game.mjs',import.meta.url),'utf8')).replace(/^import .*;\r?\n/gm,'');
-const sandbox={sampleLanding,...core,...floors,buildArchitecture,createEscapeCutscene,createArrivalCutscene,
+const sandbox={bindPlanterToggle,sampleLanding,...core,...floors,buildArchitecture,createEscapeCutscene,createArrivalCutscene,
  createEscapeExterior:()=>({scene:new Object3D(),camera:new Object3D()}),
  loadEscapeFrontage:async()=>{},THREE,GLTFLoader:class {},
  document:{getElementById:element,createElement:()=>element('canvas'+elements.size),querySelectorAll:()=>[],body:element('body'),addEventListener(){},exitPointerLock(){}},

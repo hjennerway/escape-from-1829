@@ -75,9 +75,12 @@ walkLeg([-11.55,24],[-11.55,18],12);
 walk.setView({position:[-27,1.8,25],target:[-27,1.8,15]});
 walk.keys.add('KeyW');for(let i=0;i<30;i++)walk.update(.1);
 assert(exterior.camera.position.z>20&&exterior.camera.position.z<20.5,'img19 projecting white base must block walking through it');
-// Redesmere's new entrance/bays block walking, while the outside drive and
-// gap in its garden railing give a continuous approach from the marked lawn.
-walkLeg([105,-34],[105,22],112);
+// The OS connecting corridor now crosses the outside drive. Its north
+// approach and the garden railing gap remain accessible.
+walkLeg([105,-34],[105,5],78);
+walk.setView({position:[105,1.8,5],target:[105,1.8,22]});
+walk.keys.add('KeyW');for(let i=0;i<40;i++)walk.update(.1);
+assert(exterior.camera.position.z<6.5,'OS corridor must stop walking through its masonry');
 walkLeg([105,-12],[99,-12],12);
 walk.setView({position:[100,1.8,.1],target:[90,1.8,.1]});
 walk.keys.add('KeyW');for(let i=0;i<20;i++)walk.update(.1);

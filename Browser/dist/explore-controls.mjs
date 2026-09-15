@@ -47,6 +47,6 @@ export function exteriorObstacles(THREE,model){
       obstacles.push(obstacle);
     }
   }
-  model.traverse(o=>{if(!o.isMesh)return;if(o.isInstancedMesh){for(let i=0;i<o.count;i++){o.getMatrixAt(i,matrix);world.multiplyMatrices(o.matrixWorld,matrix);add(o.geometry,world);}}else add(o.geometry,o.matrixWorld,o.userData.orientedCollision);});
+  model.traverseVisible(o=>{if(!o.isMesh)return;if(o.isInstancedMesh){for(let i=0;i<o.count;i++){o.getMatrixAt(i,matrix);world.multiplyMatrices(o.matrixWorld,matrix);add(o.geometry,world);}}else add(o.geometry,o.matrixWorld,o.userData.orientedCollision);});
   return obstacles;
 }

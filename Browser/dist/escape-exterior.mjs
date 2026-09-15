@@ -1,5 +1,6 @@
 // Aerial interpretation of the user's outlined 1829 estate photograph.
 // Front road/reception is +Z; the corrected mast position is rear-left (-X, -Z).
+import {createPlanterLayer} from './planter-layer.mjs';
 import {westFrontPhotoProfile} from './west-front-photo-detail.mjs';
 import {westCourtPhotoProfile} from './west-court-photo-detail.mjs';
 import {createChapel,ESCAPE_CHAPEL} from './chapel.mjs';
@@ -8,8 +9,9 @@ import {addFrontBoundaryWall} from './front-boundary-wall.mjs';
 import {addEntranceWalks} from './entrance-walks.mjs';
 import {addRedesmerePassage,addRedesmereEndRange} from './redesmere-passage.mjs';
 import {createWaterTower} from './water-tower.mjs';
-import {createNewHospital} from './new-hospital.mjs';
+import {createAnnexe} from './annexe.mjs';
 import {createChurtonWard} from './churton-ward.mjs';
+import {createMainAdminBuilding} from './main-admin-building.mjs';
 import {eastPhotoProfile,addEastPhotoDetails} from './east-photo-detail.mjs';
 import {courtyardPhotoProfile} from './courtyard-photo-detail.mjs';
 import {rearCourtPhotoProfile} from './rear-court-photo-detail.mjs';
@@ -35,6 +37,7 @@ export function createEscapeExterior(THREE,aspect){
   scene.fog=new THREE.FogExp2(0xb5c7cd,.0019);
   const camera=new THREE.PerspectiveCamera(46,aspect,.5,2000);
   const model=new THREE.Group();model.name='1829 estate · aerial reconstruction';scene.add(model);
+  const planters=createPlanterLayer(THREE,model);
   scene.add(new THREE.HemisphereLight(0xe4eff2,0x59634a,2));
   const sun=new THREE.DirectionalLight(0xffe2b7,2.8);sun.position.set(145,120,50);sun.target.position.set(230,0,-10);scene.add(sun.target);sun.castShadow=true;
   sun.shadow.mapSize.set(4096,4096);Object.assign(sun.shadow.camera,{left:-360,right:360,top:300,bottom:-300,near:1,far:850});sun.shadow.bias=-.0003;sun.shadow.normalBias=.25;scene.add(sun);
@@ -252,21 +255,25 @@ export function createEscapeExterior(THREE,aspect){
   // Broadleaf crowns cast shadows across the front lawn and site edges.
   const bark=material(0x5a4e3d),leaves=[material(0x43583a),material(0x566944),material(0x657448)];
   const crowns=leaves.map(mat=>({mat,items:[]}));
-  function tree(x,z,size=1){mesh(new THREE.CylinderGeometry(.18*size,.3*size,4.5*size,6),bark,x,2.25*size,z);
-    for(let i=0;i<5;i++)crowns[i%3].items.push({x:x+(random()-.5)*3*size,y:(4.5+random()*2)*size,z:z+(random()-.5)*3*size,s:(1.7+random())*size});}
+  function tree(x,z,size=1,parent=model,canopy=crowns){parent.add(mesh(new THREE.CylinderGeometry(.18*size,.3*size,4.5*size,6),bark,x,2.25*size,z));
+    for(let i=0;i<5;i++)canopy[i%3].items.push({x:x+(random()-.5)*3*size,y:(4.5+random()*2)*size,z:z+(random()-.5)*3*size,s:(1.7+random())*size});}
   // Former parking rows become garden borders, with gravel access alongside.
   const soil=material(0x65513c);
-  function plantedBed(x,z,w,d){
-    box(stone,x,.25,z,w+.25,.18,d+.25);
-    box(soil,x,.36,z,w,.12,d);
+  const planterCrowns=leaves.map(mat=>({mat,items:[]}));
+  function plantedBed(x,z,w,d,parent=model,canopy=crowns){
+    const bedBox=parent===model?box:(mat,x,y,z,w,h,d)=>parent.add(mesh(new THREE.BoxGeometry(w,h,d),mat,x,y,z));
+    bedBox(stone,x,.25,z,w+.25,.18,d+.25);
+    bedBox(soil,x,.36,z,w,.12,d);
     for(let offset=-d/2+1;offset<d/2;offset+=1.6){
-      crowns[1].items.push({x:x-.65,y:.85,z:z+offset,s:.7});
-      crowns[2].items.push({x:x+.65,y:.7,z:z+offset+.25,s:.55});
+      canopy[1].items.push({x:x-.65,y:.85,z:z+offset,s:.7});
+      canopy[2].items.push({x:x+.65,y:.7,z:z+offset+.25,s:.55});
     }
   }
   for(const x of [-72,69+OUTER_SHIFT])for(const z of (x<0?[-23,-10,29]:[29])){
-    plantedBed(x,z,3.2,8);
-    tree(x,z,.65);
+    // The east corner shrub bed belongs to the optional planter layer.
+    const parent=x>0?planters:model,canopy=x>0?planterCrowns:crowns;
+    plantedBed(x,z,3.2,8,parent,canopy);
+    tree(x,z,.65,parent,canopy);
   }
   // Rear garden: small orchard groups separated by open walking routes.
   for(const x of [-42,-28,-14,14,28,42]){
@@ -287,9 +294,10 @@ export function createEscapeExterior(THREE,aspect){
     mesh(new THREE.BoxGeometry(w,6,d),material(0x8a7965),x,3,z,true);hipRoof(x,z,w,d,6,2.8);
   }
   const churtonWard=createChurtonWard(THREE,{brick:photoBrick,roof,worldUV,material});model.add(churtonWard);
+  const {building:mainAdmin,corridor:adminCorridor}=createMainAdminBuilding(THREE,{brick:photoBrick,roof,worldUV,material});model.add(mainAdmin,adminCorridor);
   const chapel=createChapel(THREE,{brick,roof,stone,dark,worldUV});model.add(chapel);
   const waterTower=createWaterTower(THREE,{brick,roof,dark,worldUV});model.add(waterTower);
-  const newHospital=createNewHospital(THREE,{brick:photoBrick,roof,white,steel,material,worldUV,hipRoof});model.add(newHospital);
+  const annexe=createAnnexe(THREE,{brick:photoBrick,roof,white,steel,material,worldUV,hipRoof});model.add(annexe);
   box(path,ESCAPE_CHAPEL.x-10,.08,ESCAPE_CHAPEL.z+12,2,.12,15);
   box(path,ESCAPE_CHAPEL.x-8.5,.08,ESCAPE_CHAPEL.z+5.5,3,.12,2);
   // Tapering open lattice, cross bracing and antenna panels from the mast photos.
@@ -311,7 +319,7 @@ export function createEscapeExterior(THREE,aspect){
   const dummy=new THREE.Object3D();
   for(const [mat,items] of batches){const batch=new THREE.InstancedMesh(new THREE.BoxGeometry(1,1,1),mat,items.length);batch.receiveShadow=true;
     items.forEach((b,i)=>{dummy.position.set(b.x,b.y,b.z);dummy.scale.set(b.w,b.h,b.d);dummy.rotation.set(0,b.rotation,0);dummy.updateMatrix();batch.setMatrixAt(i,dummy.matrix);});model.add(batch);}
-  for(const {mat,items} of crowns){const batch=new THREE.InstancedMesh(new THREE.IcosahedronGeometry(1,1),mat,items.length);batch.castShadow=true;batch.receiveShadow=true;
-    items.forEach((b,i)=>{dummy.position.set(b.x,b.y,b.z);dummy.scale.set(b.s,b.s*.85,b.s);dummy.rotation.set(0,i,0);dummy.updateMatrix();batch.setMatrixAt(i,dummy.matrix);});model.add(batch);}
-  return {scene,camera,model,mast,chapel,waterTower,newHospital,churtonWard};
+  for(const [parent,canopy] of [[model,crowns],[planters,planterCrowns]])for(const {mat,items} of canopy){const batch=new THREE.InstancedMesh(new THREE.IcosahedronGeometry(1,1),mat,items.length);batch.castShadow=true;batch.receiveShadow=true;
+    items.forEach((b,i)=>{dummy.position.set(b.x,b.y,b.z);dummy.scale.set(b.s,b.s*.85,b.s);dummy.rotation.set(0,i,0);dummy.updateMatrix();batch.setMatrixAt(i,dummy.matrix);});parent.add(batch);}
+  return {scene,camera,model,mast,chapel,waterTower,annexe,newHospital:annexe,churtonWard,mainAdmin,adminCorridor,planters};
 }

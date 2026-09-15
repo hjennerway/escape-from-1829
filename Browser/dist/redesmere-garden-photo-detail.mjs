@@ -75,7 +75,8 @@ export function addRedesmereGardenDetails(THREE,{model,box,mesh,worldUV,white,br
   // Timber beds stay outside the passage at x=76 and the front cross-walk.
   const greens=[material(0x4b6544),material(0x647948)],flower=material(0x7973a0);
   for(const [x,z,w,d] of [[80.4,26.8,2.8,3.6],[87,26,3.1,2.4],[73,33.5,3.3,2.3],[69,37,3,2.5]]){
-    const bed=new THREE.Group();bed.name='Redesmere garden timber bed';model.add(bed);
+    const bed=new THREE.Group();bed.name='Redesmere garden timber bed';model.getObjectByName('Garden planters').add(bed);
+    function bedMesh(...args){const m=mesh(...args);bed.add(m);return m;}
     const base=mesh(new THREE.BoxGeometry(w,.7,d),soil,x,.25,z);bed.attach(base);
     for(let level=0;level<3;level++){
       for(const dx of [-w/2,w/2]){const plank=mesh(new THREE.BoxGeometry(.12,.2,d+.14),timber,x+dx,.3+level*.22,z,true);bed.attach(plank);}
@@ -83,9 +84,9 @@ export function addRedesmereGardenDetails(THREE,{model,box,mesh,worldUV,white,br
     }
     for(let i=0;i<17;i++){
       const px=x+Math.sin(i*2.4)*w*.35,pz=z+Math.cos(i*2.4)*d*.35,h=(x<82?.55:.2)+(i%5)*(x<82?.18:.07);
-      rod([px,.5,pz],[px,.7+h,pz],.025,greens[i%2]);
-      for(let n=0;n<5;n++){const a=i*2.4+n*2.1;const leaf=mesh(new THREE.IcosahedronGeometry(.12,1),greens[i%2],px+Math.sin(a)*.12,.62+h*n/5,pz+Math.cos(a)*.12);leaf.scale.set(.7,.35,1.9);leaf.rotation.set(Math.sin(a)*.5,a,Math.cos(a)*.65);}
-      if(i%4===0)mesh(new THREE.IcosahedronGeometry(.07,1),flower,px,.72+h,pz);
+      bedMesh(new THREE.CylinderGeometry(.025,.025,.2+h,5),greens[i%2],px,.6+h/2,pz);
+      for(let n=0;n<5;n++){const a=i*2.4+n*2.1;const leaf=bedMesh(new THREE.IcosahedronGeometry(.12,1),greens[i%2],px+Math.sin(a)*.12,.62+h*n/5,pz+Math.cos(a)*.12);leaf.scale.set(.7,.35,1.9);leaf.rotation.set(Math.sin(a)*.5,a,Math.cos(a)*.65);}
+      if(i%4===0)bedMesh(new THREE.IcosahedronGeometry(.07,1),flower,px,.72+h,pz);
     }
   }
 }
