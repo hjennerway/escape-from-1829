@@ -56,6 +56,26 @@ export function createMainAdminBuilding(THREE,{brick,roof,worldUV,material}){
   function range(spec){
     const [u0,v0,u1,v1]=spec.rect,a=adminMapPoint(u0,v0),b=adminMapPoint(u1,v1);
     const x=(a[0]+b[0])/2-MAIN_ADMIN.x,z=(a[1]+b[1])/2-MAIN_ADMIN.z,w=b[0]-a[0],d=b[1]-a[1],h=spec.height;
+    if(spec.name==='Low east side room'){
+      // img3: angled end lights, hipped roof and exposed brick base.
+      const cut=2.1,outline=[[-w/2,-d/2],[w/2-cut,-d/2],[w/2,-d/2+cut],[w/2,d/2-cut],[w/2-cut,d/2],[-w/2,d/2]];
+      prism(brick,x,0,z,outline,h,spec.name+' walls');
+      for(const [y,depth,mat] of [[0,.55,red],[h-.2,.17,stone],[h,.18,pale]])prism(mat,x,y,z,outline.map(([a,b])=>[a*1.02,b*1.02]),depth,spec.name+' canted course');
+      const positions=[],uv=[],edge=outline.map(([a,b])=>[a*1.045,h+.18,b*1.045]);
+      for(let i=0;i<edge.length;i++)for(const p of [edge[(i+1)%edge.length],edge[i],[0,h+.18+spec.rise,0]]){positions.push(...p);uv.push(p[0]/2.8,(p[2]+p[1])/2.8);}
+      const g=new THREE.BufferGeometry();g.setAttribute('position',new THREE.Float32BufferAttribute(positions,3));g.setAttribute('uv',new THREE.Float32BufferAttribute(uv,2));g.computeVertexNormals();mesh(g,roof,x,0,z,spec.name+' slate roof');
+      ranges.push({...spec,x,z,w,d});return {x,z,w,d,h};
+    }
+    if(spec.name==='Low east side room'){
+      // img3: angled end lights, hipped roof and exposed brick base.
+      const cut=2.1,outline=[[-w/2,-d/2],[w/2-cut,-d/2],[w/2,-d/2+cut],[w/2,d/2-cut],[w/2-cut,d/2],[-w/2,d/2]];
+      prism(brick,x,0,z,outline,h,spec.name+' walls');
+      for(const [y,depth,mat] of [[0,.55,red],[h-.2,.17,stone],[h,.18,pale]])prism(mat,x,y,z,outline.map(([a,b])=>[a*1.02,b*1.02]),depth,spec.name+' canted course');
+      const positions=[],uv=[],edge=outline.map(([a,b])=>[a*1.045,h+.18,b*1.045]);
+      for(let i=0;i<edge.length;i++)for(const p of [edge[(i+1)%edge.length],edge[i],[0,h+.18+spec.rise,0]]){positions.push(...p);uv.push(p[0]/2.8,(p[2]+p[1])/2.8);}
+      const g=new THREE.BufferGeometry();g.setAttribute('position',new THREE.Float32BufferAttribute(positions,3));g.setAttribute('uv',new THREE.Float32BufferAttribute(uv,2));g.computeVertexNormals();mesh(g,roof,x,0,z,spec.name+' slate roof');
+      ranges.push({...spec,x,z,w,d});return {x,z,w,d,h};
+    }
     solid(brick,x,h/2,z,w,h,d,spec.name+' walls');solid(stone,x,.2,z,w+.12,.4,d+.12,spec.name+' plinth');
     for(const y of h>5?[4.65,9.4,13.9]:[h-.2])solid(y===13.9?pale:stone,x,y,z,w+.16,.17,d+.16,spec.name+' stone course');
     solid(pale,x,h+.06,z,w+.38,.22,d+.38,spec.name+' eaves');hip(x,z,w,d,h+.18,spec.rise,spec.name);
@@ -115,11 +135,12 @@ export function createMainAdminBuilding(THREE,{brick,roof,worldUV,material}){
   for(const z of [low.z-4.6,low.z,low.z+4.6])sash('low west end',low.x-low.w/2-.025,2.15,z,1.3,2.9,-Math.PI/2);
   // East low room: three tall end sashes, pale heads, low brick plinth and
   // a recessed connection. Front/east elevations are visible in the new photo.
-  for(const dz of [-3.8,0,3.8])sash('east low end',eastLow.x+eastLow.w/2+.025,2.5,eastLow.z+dz,1.35,2.8,Math.PI/2);
-  for(const dx of [-2.7,2.7])sash('east low south',eastLow.x+dx,2.5,eastLow.z+eastLow.d/2+.025,1.35,2.8);
+  sash('east low end',eastLow.x+eastLow.w/2+.025,2.65,eastLow.z,1.65,3.05,Math.PI/2);
+  for(const side of [-1,1])sash('east low end',eastLow.x+eastLow.w/2-1.05+.025,2.65,eastLow.z+side*(eastLow.d/2-1.05+.025),1.4,3.05,side===1?Math.PI/4:3*Math.PI/4);
+  for(const dx of [-2.7,2.2])sash('east low south',eastLow.x+dx,2.5,eastLow.z+eastLow.d/2+.025,1.35,2.8);
   sash('east recessed connection',eastLink.x,2.25,eastLink.z+eastLink.d/2+.025,1.4,2.7);
-  solid(red,eastLow.x,.43,eastLow.z,eastLow.w+.12,.58,eastLow.d+.12,'East low exposed brick base');
-  for(const z of [eastLow.z-eastLow.d/2+.15,eastLow.z+eastLow.d/2-.15])box(dark,eastLow.x+eastLow.w/2+.1,2.35,z,.085,4.7,.085);
+  for(const dx of [-2.7,2.2])sash('east low north',eastLow.x+dx,2.65,eastLow.z-eastLow.d/2-.025,1.35,3.05,Math.PI);
+  for(const z of [eastLow.z-eastLow.d/2+2.25,eastLow.z+eastLow.d/2-2.25])box(dark,eastLow.x+eastLow.w/2+.1,2.35,z,.085,4.7,.085);
   // Shallow external flue piers line up with the two edge chimney stacks.
   for(const z of [10,-1]){
     solid(brick,east.x+east.w/2+.12,7,z,.24,14,2.6,'East elevation chimney breast');

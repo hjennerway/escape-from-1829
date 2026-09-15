@@ -1,3 +1,4 @@
+import {TOWER_ROOF_CONTACTS} from './tower-roof-profiles.mjs';
 // Four ground-level photographs, registered using tower/locationa.png.
 // Perspective convergence in the photos is not a taper in the masonry.
 export const ESCAPE_WATER_TOWER=Object.freeze({x:148,z:-55.2,height:17.75*2.2,width:10.2});
@@ -113,7 +114,9 @@ export function createWaterTower(THREE,{brick,roof,dark,worldUV}){
           :[[-4.57,.55],[4.57,.55],[4.57,6.4],[.15,apex],[-4.57,6.1]];
       polygon(infill,gable,5.112,face,'Former gable brick infill');
       const rising=number===1?[[0,apex],[4.58,6.45]]:number===3?[[-4.58,6.15],[0,apex]]:[[-4.58,6.15],[.15,apex],[4.58,6.45]];
-      const falling=number===1?[[0,8.3],[4.58,11.65]]:number===3?[[-4.58,12.1],[0,8.3]]:[[-4.58,12.1],[-.25,8.3],[4.58,11.65]];
+      // The latest blue traces identify these inward-falling contacts.
+      // Use the same profile as the adjoining roof, including the flat arch strip.
+      const falling=TOWER_ROOF_CONTACTS.faces.find(f=>f.side===number).profile;
       scar(face,rising,.28,faint,'Rising former gable outline');
       scar(face,falling,number===3?.28:.4,soot,'Descending intersecting roof scars');
       opening(face,{w:3.35,spring:4.85,y:7.15,fill:repair,name:'Large bricked upper opening'});

@@ -26,7 +26,9 @@ for(const road of HISTORIC_ROADS){
  });
 }
 for(const name of ['Churton western green','Churton eastern green'])assert(!layouts.historicRoads.getObjectByName(name),'Obsolete grid lawns must not cover Parsons Lane');
-const borderRay=new THREE.Raycaster(new THREE.Vector3(236.3,2,-40),new THREE.Vector3(0,-1,0));
+const serviceRoad=HISTORIC_ROADS.find(r=>r.name==='Admin north service road');
+const ba=serviceRoad.points[30],bb=serviceRoad.points[31],bl=Math.hypot(bb[0]-ba[0],bb[1]-ba[1]);
+const borderRay=new THREE.Raycaster(new THREE.Vector3((ba[0]+bb[0])/2-(bb[1]-ba[1])/bl*3.3,2,(ba[1]+bb[1])/2+(bb[0]-ba[0])/bl*3.3),new THREE.Vector3(0,-1,0));
 assert.equal(borderRay.intersectObject(layouts.historicRoads,true)[0].object.material.color.getHex(),0xb8b9af,'Pale border must be exposed beyond the asphalt');
 // Registration is one similarity transform: no per-building stretching or rotation.
 assert(Math.hypot(...historicOSPoint(249,286).map((v,i)=>v-[0,19.5][i]))<1e-9);

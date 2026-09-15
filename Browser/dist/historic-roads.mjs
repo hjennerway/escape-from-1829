@@ -85,7 +85,11 @@ export const HISTORIC_ROADS=Object.freeze([
  {name:'Annexe inner east road',width:6,points:annexeInnerEastRoad},
  {name:'Annexe outer east road',width:6,points:annexeOuterEastRoad},
  {name:'Northern diagonal road',width:6,points:[frontEast,ap(-198,84),ap(-245,84)]},
- {name:'Admin north service road',width:6,points:[frontWest,[233,-6],[233,-62],[247,-76],[262,-76],[270,-84],[270,-132],[314,-176],[325,-176]]},
+ // img4: the service court opens beside admin, then follows the east range.
+ {name:'Admin north service road',width:6,points:bezier(frontWest,[
+  [[255,23],[239,10],[233,1]],[[229,-5],[229,-10],[229,-19]],
+  [[229,-32],[229,-51],[233,-62]],[[236,-68],[242,-76],[247,-76]]
+ ]).concat([[262,-76],[270,-84],[270,-132],[314,-176],[325,-176]])},
  {name:'Annexe east cross-drive',width:5,points:[[96,84],[96,25]].map(p=>ap(...p))},
  {name:'Annexe east court circuit',width:4.5,points:annexeCourtLoop},
  {name:'Annexe end lawn circuit',width:4.5,points:annexeEndLoop},
@@ -98,6 +102,7 @@ export const HISTORIC_GRAVEL=Object.freeze([
 ]);
 // Filled black aprons sit below the grass islands; road ribbons sit above them.
 export const HISTORIC_PAVING=Object.freeze([
+ {name:'Tower service court',points:[[146,-16.1],[185.5,-16.1],[185.5,-12.5],[221.3,-12.5],[225.5,-18],[229,-18],[232,-6],[233,1],[240,10],[242,13],[234,13],[222,2],[215,-5],[146,-5]]},
  {name:'Admin teardrop black surround',points:teardropSurround},
  {name:'Admin east black link',points:junction},
  {name:'Annexe front black apron',points:[ap(-141,49),ap(96,49),ap(96,81),ap(-141,81)]},
@@ -146,7 +151,8 @@ export function createHistoricRoads(THREE,exterior){
   for(const [x,z] of points){const cap=new THREE.Mesh(geometry,mat);cap.position.set(x,y,z);cap.receiveShadow=true;cap.renderOrder=mat===asphalt?2:mat===edge?1:0;cap.userData.surface=mat===asphalt?'black road':mat===kerb||mat===edge?'stone kerb':'provisional brown outline';part.add(cap);}
  }
  for(const area of HISTORIC_GRAVEL)polygon(area.name,area.points,gravel,.265);
- for(const area of HISTORIC_PAVING)polygon(area.name,area.points,paving,.28);
+ // The service court meets the road without a pale border across its mouth.
+ for(const area of HISTORIC_PAVING)polygon(area.name,area.points,area.name==='Tower service court'?asphalt:paving,area.name==='Tower service court'?.345:.28);
  for(const area of HISTORIC_GRASS)polygon(area.name,area.points,grass,.31);
  for(const road of HISTORIC_ROADS)ribbon(road.name+' border',road.points,road.width+2*ROAD_STYLE.edgeWidth,edge,.32);
  for(const road of HISTORIC_ROADS)ribbon(road.name,road.points,road.width,asphalt,.34);

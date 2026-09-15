@@ -54,6 +54,10 @@ export function missingHistoricFootprints(THREE,exterior){
  for(let building=0;building<OS_FOOTPRINTS.length;building++)for(let loopIndex=0;loopIndex<OS_FOOTPRINTS[building].loops.length;loopIndex++){
   const pixels=OS_FOOTPRINTS[building].loops[loopIndex],loop=pixels.map(p=>historicOSPoint(...p));
   for(let i=0;i<loop.length;i++){
+   // The photo-corrected stores turn 90 degrees: retire their old OS edge
+   // rather than leaving an orange outline of the superseded orientation.
+   const towerEdges=exterior.towerBuildings?.userData.replacedOSEdges;
+   if(towerEdges&&building===towerEdges.sourceBuilding&&loopIndex===towerEdges.sourceLoop&&towerEdges.indices.includes(i))continue;
    const replaced=exterior.uptonFrithOscroft?.userData.replacedOSEdges;
    const isReplaced=replaced&&building===replaced.sourceBuilding&&loopIndex===replaced.sourceLoop;
    if(isReplaced&&i>=replaced.start&&i<replaced.end)continue;

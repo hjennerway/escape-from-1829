@@ -1,6 +1,7 @@
 import {createHistoricRoads} from './historic-roads.mjs';
 import {createModernRoads} from './modern-roads.mjs';
 import {createModernEntrance} from './modern-entrance.mjs';
+import {createTowerBuildings} from './tower-buildings.mjs';
 
 // Opt in from the aerial preview: gameplay and walking keep their existing estate.
 export function createAerialLayouts(THREE,exterior){
@@ -14,6 +15,8 @@ export function createAerialLayouts(THREE,exterior){
   }
   const roads=createModernRoads(THREE),entrance=createModernEntrance(THREE);shared.add(roads,entrance);
   exterior.model.add(shared,historic,modern);
+  const towerBuildings=createTowerBuildings(THREE,exterior);historic.add(towerBuildings);
+  exterior.towerBuildings=towerBuildings;
   const historicRoads=createHistoricRoads(THREE,exterior);historic.add(historicRoads);
   // Retire inferred tracks while the photo-based historic network is shown.
   const superseded=[exterior.legacyAccess];
@@ -31,7 +34,7 @@ export function createAerialLayouts(THREE,exterior){
     lane.getObjectByName('Vivienne Smith Lane eastern continuation').visible=state.modern;
   }
   setVisible('modern',false);
-  exterior.layouts={shared,historic,modern,roads,entrance,historicRoads,setVisible,get state(){return {...state};}};
+  exterior.layouts={shared,historic,modern,roads,entrance,historicRoads,towerBuildings,setVisible,get state(){return {...state};}};
   return exterior.layouts;
 }
 
