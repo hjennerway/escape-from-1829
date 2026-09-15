@@ -8,8 +8,7 @@ import {VIVIENNE_LANE} from './modern-entrance.mjs';
 // existing Reception, Churton and annexe rather than moving those buildings.
 const ap=(x,z)=>{const p=annexePoint(x,0,z);return [p[0],p[2]];};
 const frontWest=ap(150,84),frontEast=ap(-155,84);
-// Curves are reserved for the source's circular/teardrop islands and softened
-// garden corners. The established long roads keep their straight centre lines.
+// Sample rounded islands, garden edges and the later marked road curves.
 function bezier(start,segments,steps=12){
  const points=[start];let a=start;
  for(const [b,c,d] of segments){for(let i=1;i<=steps;i++){const t=i/steps,q=1-t;points.push([0,1].map(k=>q*q*q*a[k]+3*q*q*t*b[k]+3*q*t*t*c[k]+t*t*t*d[k]));}a=d;}
@@ -74,21 +73,42 @@ const annexeCourtLoop=[[96,25],[140,25],[146,31],[146,45],[140,51],[96,51]].map(
 const annexeEndLoop=[[96,51],[147,51],[153,57],[153,78],[147,84],[96,84]].map(p=>ap(...p));
 const annexeCourtGrass=[[99,28],[139,28],[143,32],[143,44],[139,48],[99,48]].map(p=>ap(...p));
 const annexeEndGrass=[[99,54],[146,54],[150,58],[150,76],[146,80],[99,80]].map(p=>ap(...p));
-export const HISTORIC_ROADS_SOURCE=Object.freeze({clean:'User attachment: roads/clean.png',annotations:'User attachment: roads/annotated.png',revision:'Research/historic-roads/interbuilding-alarm-board.png',previousPhoto:'Research/historic-roads/admin-to-annexe-photo.png',orientation:'Research/historic-roads/admin-to-annexe-orientation.png',note:'Photo-estimated circulation. The original purple/pink marks identify buildings and blue identifies the shared lane. The later yellow/blue aerial relocates islands and extends the Historic roads. The Main/admin-to-annexe photograph refines the curved junction, parking entrance and exposed kerbs; its blue arrow supplies viewing direction only. The later purple selection refines the roads and elongated lawns between Main/admin (blue) and the annexe (yellow); coloured circles are selection guides only.'});
+// September marked aerial: purple moves to red along the admin frontage;
+// yellow supplies the crossing drive and two outer routes; blue is removed.
+// Fit to the existing apron, chimney, roundabout and annexe avenue junction.
+// The retained shared lane ends exactly at the new crossing in Historic.
+const eastCrossing=VIVIENNE_LANE[11],outerCrossing=[216,131];
+const adminFrontDrive=bezier(VIVIENNE_LANE[8],[
+ [[145,59],[149,58],[155,55]],[[169,47],[184,46],[195,46]],
+ [[208,46],[219,47],[223,49]],[[226,51],[229,52],[229,54]]
+]);
+const adminEastDrive=bezier(frontWest,[
+ [[266,39],[259,48],[252,53]],[[248,65],[246,86],eastCrossing],
+ [[233,111],[224,124],outerCrossing],[[211,141],[207,153],[204,161]]
+]);
+const annexeInnerEastRoad=bezier(eastCrossing,[
+ [[267,107],[292,113],[318,115]],[[368,115],[425,111],[468,106]],
+ [[489,103],[502,94],[510,89]],[[527,79],[543,65],[551,39]]
+]);
+const annexeOuterEastRoad=bezier(outerCrossing,[
+ [[229,138],[253,142],[274,144]],[[306,151],[338,158],[371,159]],
+ [[421,160],[475,155],[515,145]],[[546,138],[576,129],[600,120]]
+]);
+export const HISTORIC_ROADS_SOURCE=Object.freeze({clean:'User attachment: roads/clean.png',annotations:'User attachment: roads/annotated.png',revision:'Research/historic-roads/admin-road-reroute.png',previousLayout:'Research/historic-roads/interbuilding-alarm-board.png',previousPhoto:'Research/historic-roads/admin-to-annexe-photo.png',orientation:'Research/historic-roads/admin-to-annexe-orientation.png',note:'Photo-estimated circulation. The original purple/pink marks identify buildings and blue identifies the shared lane. The later yellow/blue aerial relocates islands and extends the Historic roads. The Main/admin-to-annexe photograph refines the curved junction, parking entrance and exposed kerbs; its blue arrow supplies viewing direction only. The later purple selection refines the roads and elongated lawns between Main/admin (blue) and the annexe (yellow); coloured circles are selection guides only. The September aerial moves the purple frontage drive to red, adds the yellow crossing and outer roads, and removes blue perimeter, spur and entrance sections. The shared lane east of the new crossing appears only with Modern.'});
 export const HISTORIC_ROADS=Object.freeze([
  {name:'Churton west road',width:5,points:[[-77,-155],[-77,-99],[-77,-41],[-77,36]]},
  {name:'Churton north cross-road',width:5,points:[[-115,-99],[-77,-99],[-12,-99]]},
  {name:'Churton estate cross-road',width:5,points:[[-115,-41],[-77,-41],[-51,-41],[-12,-41]]},
  {name:'North ward road',width:5,points:[[-12,-99],[28,-99],[28,-122],[68,-122]]},
- {name:'Historic lane continuation',width:6,points:[VIVIENNE_LANE[7],VIVIENNE_LANE[8],[171,60],[210,63],[220,63]]},
+ {name:'Historic lane continuation',width:6,points:[VIVIENNE_LANE[7],...adminFrontDrive]},
  {name:'Admin roundabout',width:5.5,points:circle(ADMIN_ISLAND_CENTER,9)},
  {name:'Admin roundabout to annexe',width:6,points:bezier([238,63],[[[260,63],[268,51],frontWest]])},
  {name:'Annexe front avenue',width:6,points:[frontWest,ap(62,84),ap(-62,84),frontEast]},
- {name:'Annexe perimeter road',width:6,points:[frontWest,ap(172,72),ap(182,40),ap(182,-22),ap(170,-66),ap(143,-80),ap(95,-80),ap(80,-68)]},
- {name:'Annexe rear service spur',width:5,points:[ap(95,-80),ap(70,-80),ap(58,-61)]},
+ {name:'Admin east crossing drive',width:6,points:adminEastDrive},
+ {name:'Annexe inner east road',width:6,points:annexeInnerEastRoad},
+ {name:'Annexe outer east road',width:6,points:annexeOuterEastRoad},
  {name:'Northern diagonal road',width:6,points:[frontEast,ap(-198,84),ap(-245,84)]},
  {name:'Northern cross-road',width:5,points:[[68,-122],[130,-139],[197,-146],[247,-175],ap(-245,84)]},
- {name:'Eastern entrance road',width:6,points:bezier([229,72],[[[241,74],[252,83],[255,97]]]).concat([[273,151],[285,206]])},
  {name:'Annexe rectangular garden circuit',width:4,points:nearGarden},
  {name:'Admin north service road',width:6,points:[frontWest,[233,-6],[233,-62],[247,-76],[262,-76],[270,-84],[270,-132],[314,-176],[325,-176]]},
  {name:'Annexe east cross-drive',width:5,points:[[96,84],[96,25]].map(p=>ap(...p))},

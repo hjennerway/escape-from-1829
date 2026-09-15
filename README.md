@@ -26,6 +26,8 @@ The purple-marked Main/admin-to-annexe correction replaces the cramped end loops
 
 All estate lawns and Historic grass islands now share the circled terrain's mottled texture, colour and world scale. The pattern continues across rotated and scaled lawn meshes, including the roundabout, teardrop, annexe, Main/admin, Churton and smaller courtyard lawns. Shared grass projection is in `Browser/dist/estate-grass.mjs`.
 
+The September marked aerial moves the purple frontage road onto the red route directly in front of Main/admin. Yellow adds a crossing drive from the annexe junction and two sweeping eastern roads. Blue removes the old annexe perimeter, rear spur and eastern entrance road; the shared Vivienne Smith Lane ends at the new crossing in Historic, while Modern retains its full saved route. The roundabout, teardrop and buildings stay in place. Reference: `Research/historic-roads/admin-road-reroute.png`. Routes are visual estimates registered against the existing scene.
+
 ### Missing OS building footprints
 
 The `roads2/clean.png` and `roads2/annotated.png` correction replaces all five earlier broad brown outlines. Brown marks now trace solid OS building walls and courtyard openings inside the blue-circled area. Scan wobble is simplified and every building edge is fitted to horizontal or vertical runs in the estate axes, forming right-angle corners. Only the user’s orange-marked connecting corridor retains its 45-degree alignment. Courtyards stay closed and the building exclusions are applied afterwards. Yellow identifies 1829; green identifies the chapel and Churton. These circles are registration/selection guides, not building edges. The source is saved in `Research/historic-footprints/`.

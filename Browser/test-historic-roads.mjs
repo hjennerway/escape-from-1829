@@ -69,7 +69,7 @@ for(const p of [[96,25],[96,51],[96,84],[146,39],[153,66],[119,123]])
  assert.equal(annexeSurface(...p),'black road','Court, avenue and parking connections must remain open');
 assert.equal(annexeSurface(111,101),'grass','Expanded garden must replace the oversized black margin');
 // Sample both road edges as well as centre lines against the assembled buildings.
-const extensions=['Admin north service road','Annexe east cross-drive','Annexe east court circuit','Annexe end lawn circuit'];
+const extensions=['Historic lane continuation','Admin east crossing drive','Annexe inner east road','Annexe outer east road','Admin north service road','Annexe east cross-drive','Annexe east court circuit','Annexe end lawn circuit'];
 for(const name of extensions){
  const road=HISTORIC_ROADS.find(road=>road.name===name);assert(road);
  for(let i=1;i<road.points.length;i++){
@@ -80,10 +80,19 @@ for(const name of extensions){
   }
  }
 }
+// The red frontage lies on the apron; the old purple and blue sections are grass.
+assert.equal(surfaceAt(195,46),'black road');
+assert.notEqual(surfaceAt(210,63),'black road');
+for(const p of [[323.85,127.5],[425.99,105.17],[273,151],[255,97]])
+ assert.notEqual(surfaceAt(...p),'black road','Removed blue road must expose the ground');
+for(const name of ['Annexe perimeter road','Annexe rear service spur','Eastern entrance road'])
+ assert(!layouts.historicRoads.getObjectByName(name));
+for(const p of [VIVIENNE_LANE[11],[216,131]])assert.equal(surfaceAt(...p),'black road','New roads must meet at the marked crossings');
 const garden=annexePoint(75,0,110);assert.equal(surfaceAt(garden[0],garden[2]),'grass','Near annexe garden must have a grass interior');
 for(const historic of [true,false])for(const modern of [true,false]){
  layouts.setVisible('historic',historic);layouts.setVisible('modern',modern);
  assert.equal(effective(layouts.historicRoads),historic);
+ assert.equal(effective(layouts.roads.getObjectByName('Vivienne Smith Lane eastern continuation')),modern,'Blue eastern lane continuation belongs only to Modern');
  assert.equal(effective(exterior.legacyAccess),!historic&&modern,'Legacy tracks must disappear in Historic and return in Modern');
  const lane=layouts.roads.getObjectByName('Vivienne Smith Lane');assert.equal(lane.children[1].children[0].material.color.getHex(),historic?0x17191a:0x555b5c);
  const other=layouts.roads.getObjectByName('Warren Lane');assert.equal(other.children[1].children[0].material.color.getHex(),0x555b5c,'Changing shared-lane colour must not recolour other Modern roads');

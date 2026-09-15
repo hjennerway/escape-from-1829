@@ -26,7 +26,14 @@ export function createModernRoads(THREE){
   for(const path of MODERN_ROAD_PATHS){
     const road=new THREE.Group(),points=path.coordinates.map(p=>earthToScene(...p));
     road.name=path.name;road.userData.centerline=points;road.userData.coordinates=path.coordinates;
-    road.add(ribbon(points,7.2,.32,edge),ribbon(points,6,.34,asphalt),createRoadLabel(THREE,path.name,points));roads.add(road);
+    // Historic ends at the new eastern crossing; Modern retains every saved vertex.
+    const sharedPoints=path.name==='Vivienne Smith Lane'?points.slice(0,12):points;
+    road.add(ribbon(sharedPoints,7.2,.32,edge),ribbon(sharedPoints,6,.34,asphalt),createRoadLabel(THREE,path.name,points));
+    if(path.name==='Vivienne Smith Lane'){
+      const tail=new THREE.Group();tail.name='Vivienne Smith Lane eastern continuation';tail.userData.modernOnly=true;
+      tail.add(ribbon(points.slice(11),7.2,.32,edge),ribbon(points.slice(11),6,.34,asphalt));road.add(tail);
+    }
+    roads.add(road);
   }
   return roads;
 }

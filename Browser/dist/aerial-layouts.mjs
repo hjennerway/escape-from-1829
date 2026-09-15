@@ -30,6 +30,7 @@ export function createAerialLayouts(THREE,exterior){
     for(const [material,color] of laneMaterials)material.color.copy(state.historic?new THREE.Color(0x17191a):color);
     entrance.getObjectByName('Sweeping entrance asphalt').material.color.set(state.historic?0x17191a:0x555b5c);
     for(const road of roads.children)road.visible=state.modern||(state.historic&&road.name==='Vivienne Smith Lane');
+    lane.getObjectByName('Vivienne Smith Lane eastern continuation').visible=state.modern;
   }
   setVisible('modern',false);
   exterior.layouts={shared,historic,modern,roads,entrance,historicRoads,setVisible,get state(){return {...state};}};
