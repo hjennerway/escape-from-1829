@@ -13,18 +13,18 @@ const halfLocal=halfOS.map(([x,z])=>[x-sourceCentre,z+195]);
 export const UPTON_FOOTPRINT=Object.freeze([
   ...halfLocal,...halfLocal.slice(1,-1).reverse().map(([x,z])=>[-x,z])
 ].map(([x,z])=>Object.freeze([ESCAPE_CHAPEL.x+x,z-195])));
-export const UPTON_FRIST_OSCROFT=Object.freeze({x:ESCAPE_CHAPEL.x,z:-195,eave:7.8,storeys:2,
+export const UPTON_FRITH_OSCROFT=Object.freeze({x:ESCAPE_CHAPEL.x,z:-195,eave:7.8,storeys:2,
   source:'Research/historic-footprints/clean.png',
-  aerial:'Research/upton-frist-oscroft/aerial.png',
-  symmetry:'Research/upton-frist-oscroft/symmetry.png'});
+  aerial:'Research/upton-frith-oscroft/aerial.png',
+  symmetry:'Research/upton-frith-oscroft/symmetry.png'});
 export const UPTON_VIEWS=Object.freeze({
   upton:{position:[-51,97,-79],target:[ESCAPE_CHAPEL.x,2,-191],fov:48},
   'upton-plan':{position:[ESCAPE_CHAPEL.x,178,-194.99],target:[ESCAPE_CHAPEL.x,0,-195],fov:46},
   'upton-ground':{position:[-28,1.8,-164],target:[ESCAPE_CHAPEL.x,4,-195],fov:58}
 });
-export function createUptonFristOscroft(THREE,{brick,roof,worldUV,material}){
-  const building=new THREE.Group();building.name='Upton/Frist/Oscroft';
-  const {x:cx,z:cz,eave}=UPTON_FRIST_OSCROFT;building.position.set(cx,0,cz);
+export function createUptonFrithOscroft(THREE,{brick,roof,worldUV,material}){
+  const building=new THREE.Group();building.name='Upton/Frith/Oscroft';
+  const {x:cx,z:cz,eave}=UPTON_FRITH_OSCROFT;building.position.set(cx,0,cz);
   const footprint=UPTON_FOOTPRINT.map(([x,z])=>[x-cx,z-cz]);
   const white=material(0xc8c5b5),steel=material(0x414d50),plinth=material(0x68574d);
   const batches=new Map(),openings=[];let mirrorDetails=true;
@@ -105,6 +105,6 @@ export function createUptonFristOscroft(THREE,{brick,roof,worldUV,material}){
     const batch=new THREE.InstancedMesh(new THREE.BoxGeometry(1,1,1),mat,items.length);batch.name='Upton sash windows, stone bands and rainwater goods';batch.castShadow=true;batch.receiveShadow=true;
     items.forEach((b,i)=>{dummy.position.set(b.x,b.y,b.z);dummy.rotation.set(0,b.r,0);dummy.scale.set(b.w,b.h,b.d);dummy.updateMatrix();batch.setMatrixAt(i,dummy.matrix);});building.add(batch);
   }
-  building.userData={...building.userData,source:UPTON_FRIST_OSCROFT,footprint:UPTON_FOOTPRINT,openings,roofs,storeys:2,replacedOSEdges:{sourceBuilding:0,sourceLoop:0,start:109,end:128,endPoint:[contour[108][0],contour[129][1]]}};
+  building.userData={...building.userData,source:UPTON_FRITH_OSCROFT,footprint:UPTON_FOOTPRINT,openings,roofs,storeys:2,replacedOSEdges:{sourceBuilding:0,sourceLoop:0,start:109,end:128,endPoint:[contour[108][0],contour[129][1]]}};
   return building;
 }

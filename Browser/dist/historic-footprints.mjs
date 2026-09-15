@@ -54,7 +54,7 @@ export function missingHistoricFootprints(THREE,exterior){
  for(let building=0;building<OS_FOOTPRINTS.length;building++)for(let loopIndex=0;loopIndex<OS_FOOTPRINTS[building].loops.length;loopIndex++){
   const pixels=OS_FOOTPRINTS[building].loops[loopIndex],loop=pixels.map(p=>historicOSPoint(...p));
   for(let i=0;i<loop.length;i++){
-   const replaced=exterior.uptonFristOscroft?.userData.replacedOSEdges;
+   const replaced=exterior.uptonFrithOscroft?.userData.replacedOSEdges;
    const isReplaced=replaced&&building===replaced.sourceBuilding&&loopIndex===replaced.sourceLoop;
    if(isReplaced&&i>=replaced.start&&i<replaced.end)continue;
    // Retire the superseded unequal range while preserving its adjoining complex.

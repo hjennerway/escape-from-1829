@@ -1,6 +1,6 @@
 import {bindPlanterToggle} from './planter-layer.mjs';
 import {CHURTON_VIEWS} from './churton-ward.mjs';
-import {UPTON_VIEWS} from './upton-frist-oscroft.mjs';
+import {UPTON_VIEWS} from './upton-frith-oscroft.mjs';
 import {MAIN_ADMIN_VIEWS} from './main-admin-building.mjs';
 import {ANNEXE_VIEWS} from './annexe.mjs';
 import * as THREE from './vendor/three.module.js';

@@ -2,15 +2,15 @@ import assert from 'node:assert/strict';
 import * as THREE from './dist/vendor/three.module.js';
 import {createEscapeExterior} from './dist/escape-exterior.mjs';
 import {createAerialLayouts} from './dist/aerial-layouts.mjs';
-import {UPTON_FOOTPRINT,UPTON_VIEWS} from './dist/upton-frist-oscroft.mjs';
+import {UPTON_FOOTPRINT,UPTON_VIEWS} from './dist/upton-frith-oscroft.mjs';
 import {historicOSPoint,pointInFootprint} from './dist/historic-footprints.mjs';
 import {OS_FOOTPRINTS} from './dist/historic-footprint-data.mjs';
 import {ESCAPE_CHAPEL} from './dist/chapel.mjs';
 import {exteriorObstacles,obstacleContains,createWalker} from './dist/explore-controls.mjs';
 globalThis.document={createElement:()=>({getContext:()=>({fillRect(){},measureText(t){return {width:t.length*16}},strokeText(){},fillText(){}})})};
-const exterior=createEscapeExterior(THREE,16/9),building=exterior.uptonFristOscroft;
+const exterior=createEscapeExterior(THREE,16/9),building=exterior.uptonFrithOscroft;
 const layouts=createAerialLayouts(THREE,exterior);exterior.scene.updateMatrixWorld(true);
-assert.equal(building.name,'Upton/Frist/Oscroft');assert.equal(building.userData.storeys,2);
+assert.equal(building.name,'Upton/Frith/Oscroft');assert.equal(building.userData.storeys,2);
 assert.equal(building.parent,layouts.shared);
 const os=OS_FOOTPRINTS[0].loops[0].map(p=>historicOSPoint(...p));
 // The explicit symmetry correction supersedes the unequal OS east wing.
