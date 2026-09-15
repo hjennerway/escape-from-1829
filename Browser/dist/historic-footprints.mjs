@@ -29,7 +29,16 @@ export function existingBuildingFootprints(THREE,exterior){
   if(o.userData.collisionFootprint)corners=o.userData.collisionFootprint;
   else if(g.type==='CylinderGeometry')corners=Array.from({length:24},(_,i)=>[(b.min.x+b.max.x)/2+(size.x/2+.7)*Math.cos(i*Math.PI/12),(b.min.z+b.max.z)/2+(size.z/2+.7)*Math.sin(i*Math.PI/12)]);
   else corners=[[b.min.x-.7,b.min.z-.7],[b.max.x+.7,b.min.z-.7],[b.max.x+.7,b.max.z+.7],[b.min.x-.7,b.max.z+.7]];
-  footprints.push(corners.map(([x,z])=>{const p=new THREE.Vector3(x,0,z).applyMatrix4(o.matrixWorld);return [p.x,p.z];}));
+  const polygon=corners.map(([x,z])=>{const p=new THREE.Vector3(x,0,z).applyMatrix4(o.matrixWorld);return [p.x,p.z];});
+  footprints.push(polygon);
+  // A newly modelled traced wall needs the same marker clearance as box walls.
+  // Thin edge buffers suppress its brown ground trace without filling recesses.
+  const padding=o.userData.historicOutlinePadding;
+  if(padding)for(let i=0;i<polygon.length;i++){
+   const a=polygon[i],b=polygon[(i+1)%polygon.length],length=Math.hypot(b[0]-a[0],b[1]-a[1]);if(length<1e-6)continue;
+   const dx=(b[0]-a[0])/length*padding,dz=(b[1]-a[1])/length*padding;
+   footprints.push([[a[0]-dx-dz,a[1]-dz+dx],[b[0]+dx-dz,b[1]+dz+dx],[b[0]+dx+dz,b[1]+dz-dx],[a[0]-dx+dz,a[1]-dz-dx]]);
+  }
  });return footprints;
 }
 function intersections(a,b,polygon){
@@ -45,7 +54,11 @@ export function missingHistoricFootprints(THREE,exterior){
  for(let building=0;building<OS_FOOTPRINTS.length;building++)for(let loopIndex=0;loopIndex<OS_FOOTPRINTS[building].loops.length;loopIndex++){
   const pixels=OS_FOOTPRINTS[building].loops[loopIndex],loop=pixels.map(p=>historicOSPoint(...p));
   for(let i=0;i<loop.length;i++){
-   const a=loop[i],b=loop[(i+1)%loop.length],at=t=>[a[0]+(b[0]-a[0])*t,a[1]+(b[1]-a[1])*t];
+   const replaced=exterior.uptonFristOscroft?.userData.replacedOSEdges;
+   const isReplaced=replaced&&building===replaced.sourceBuilding&&loopIndex===replaced.sourceLoop;
+   if(isReplaced&&i>=replaced.start&&i<replaced.end)continue;
+   // Retire the superseded unequal range while preserving its adjoining complex.
+   const a=isReplaced&&i===replaced.end?replaced.endPoint:loop[i],b=loop[(i+1)%loop.length],at=t=>[a[0]+(b[0]-a[0])*t,a[1]+(b[1]-a[1])*t];
    const stops=[0,1,...intersections(a,b,region),...occupied.flatMap(p=>intersections(a,b,p))].sort((a,b)=>a-b);
    for(let k=1;k<stops.length;k++){
     const lo=stops[k-1],hi=stops[k];if(hi-lo<1e-6)continue;const middle=at((lo+hi)/2);

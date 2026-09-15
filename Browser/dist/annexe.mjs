@@ -29,6 +29,7 @@ export const ANNEXE_VIEWS=Object.freeze({
 export const ANNEXE_REAR_EAST=Object.freeze({angle:22*Math.PI/180,pivot:[4,-28.5]});
 // Black masonry, expressed as rectangles in the OS building's 15-degree axes.
 // Front ward courts and rear courts remain open to the sky.
+// Only the central pavilions retain three storeys; outer wards have two.
 export const ANNEXE_RANGES=Object.freeze([
  {name:'Central hall',rect:[-11,-6,11,10],h:7.4,rise:8.0,custom:true},
  {name:'Entrance range',rect:[-9,10,9,15],h:4.7,rise:2.5,custom:true},
@@ -37,7 +38,7 @@ export const ANNEXE_RANGES=Object.freeze([
   return [
    {name:label+' front pavilion',rect:mirror([11,4,20,17]),h:13.2,rise:3.3,custom:true},
    {name:label+' square tower',rect:mirror([12,-5,18,2]),h:20.8,rise:3.1,custom:true},
-   {name:label+' front connecting ward',rect:mirror([20,5,70,11]),h:11.8,rise:2.6},
+   {name:label+' front connecting ward',rect:mirror([20,5,70,11]),h:8.4,rise:2.6},
    {name:label+' court inner return',rect:mirror([27,11,32,25]),h:8.4,rise:2},
    {name:label+' court front range',rect:mirror([27,23,51,29]),h:8.4,rise:2.3},
    {name:label+' court outer return',rect:mirror([46,11,51,25]),h:8.4,rise:2},
@@ -45,19 +46,19 @@ export const ANNEXE_RANGES=Object.freeze([
    {name:label+' court corner infill',rect:mirror([39,17,46,23]),h:8.4,rise:2}
   ];
  }),
- {name:'West end ward',rect:[-77,-11,-70,12],h:11.8,rise:2.6},
- {name:'West rear pavilion',rect:[-77,-19,-63,-12],h:11.8,rise:2.8},
+ {name:'West end ward',rect:[-77,-11,-70,12],h:8.4,rise:2.6},
+ {name:'West rear pavilion',rect:[-77,-19,-63,-12],h:8.4,rise:2.8},
  {name:'West rear link',rect:[-67,-16,-63,5],h:4.3,rise:1.3},
  {name:'West end projecting rooms',rect:[-82,-3,-75,8],h:8.4,rise:2.1},
- {name:'East end ward',rect:[70,-12,77,12],h:11.8,rise:2.6},
- {name:'East rear pavilion',rect:[65,-22,81,-16],h:11.8,rise:2.8},
+ {name:'East end ward',rect:[70,-12,77,12],h:8.4,rise:2.6},
+ {name:'East rear pavilion',rect:[65,-22,81,-16],h:8.4,rise:2.8},
  {name:'East rear link',rect:[64,-17,68,5],h:4.3,rise:1.3},
  {name:'East end projecting rooms',rect:[76,-2,84,6],h:8.4,rise:2.1},
  {name:'Central rear spine',rect:[-5,-32,5,-5],h:8.4,rise:2.6},
  {name:'Rear west angled service range',rect:[-13,-48,-5,-29],h:8.4,rise:2.4,angle:.28},
  {name:'Rear service head',rect:[-18,-49,-5,-42],h:8.4,rise:2.5},
  {name:'Rear east connecting range',rect:[4,-31,34,-26],h:8.4,rise:2.2,section:'rear-east'},
- {name:'Rear east end pavilion',rect:[30,-42,37,-26],h:11.8,rise:2.8,section:'rear-east'}
+ {name:'Rear east end pavilion',rect:[30,-42,37,-26],h:8.4,rise:2.8,section:'rear-east'}
 ]);
 export function createAnnexe(THREE,{brick,roof,material,worldUV,hipRoof}){
  const model=new THREE.Group();model.name='The annexe';model.position.set(ANNEXE.x,0,ANNEXE.z);model.rotation.y=ANNEXE.rotation;

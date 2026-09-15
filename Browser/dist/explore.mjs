@@ -1,5 +1,6 @@
 import {bindPlanterToggle} from './planter-layer.mjs';
 import {CHURTON_VIEWS} from './churton-ward.mjs';
+import {UPTON_VIEWS} from './upton-frist-oscroft.mjs';
 import {MAIN_ADMIN_VIEWS} from './main-admin-building.mjs';
 import {ANNEXE_VIEWS} from './annexe.mjs';
 import * as THREE from './vendor/three.module.js';
@@ -59,6 +60,7 @@ try{
   const annexeView=(new URLSearchParams(location.search).get('view')??'').replace(/^new-hospital/,'annexe');
   if(ANNEXE_VIEWS[annexeView])walker.setView(ANNEXE_VIEWS[['annexe','annexe-plan','annexe-site'].includes(annexeView)?'annexe-ground':annexeView]);
   const churtonView=new URLSearchParams(location.search).get('view');
+  if(UPTON_VIEWS[churtonView])walker.setView(UPTON_VIEWS['upton-ground']);
   if(MAIN_ADMIN_VIEWS[churtonView])walker.setView(MAIN_ADMIN_VIEWS[churtonView==='main-admin'||churtonView==='main-admin-plan'?'main-admin-4':churtonView]);
   if(CHURTON_VIEWS[churtonView])walker.setView(CHURTON_VIEWS[churtonView==='churton'||churtonView==='churton-plan'?'churton-4':churtonView]);
   let active=false,dragging=false,last=null;

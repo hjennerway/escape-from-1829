@@ -31,16 +31,27 @@ def simplify(points,tolerance=1):
  dist,i=max((distance(points[i],points[0],points[-1]),i) for i in range(1,len(points)-1))
  return simplify(points[:i+1],tolerance)[:-1]+simplify(points[i:],tolerance) if dist>tolerance else [points[0],points[-1]]
 def straighten(points):
- # Work in the registered estate axes; snap wall directions in 45-degree steps.
+ # Buildings use right angles. Only the user-marked diagonal connecting
+ # corridor (source pixels approximately 86,300 to 114,230) keeps 45 degrees.
  # A least-squares projection fits all corners together so closed contours stay
  # closed, rather than accumulating drift by snapping one edge at a time.
  a,b=-.6013081600905106,-1.285207184273794
  transform=np.array([[a,b],[-b,a]])
  original=np.asarray(points,dtype=float)@transform.T
  n=len(original);constraints=np.zeros((n,n*2))
+ corridor_start=np.array([86.,300.]);corridor_end=np.array([114.,230.])
+ corridor_delta=corridor_end-corridor_start
+ def on_corridor(p):
+  t=np.dot(p-corridor_start,corridor_delta)/np.dot(corridor_delta,corridor_delta)
+  nearest=corridor_start+max(0,min(1,t))*corridor_delta
+  return -.06<t<1.06 and np.linalg.norm(p-nearest)<4.5
  for i in range(n):
   j=(i+1)%n;delta=original[j]-original[i]
-  angle=round(math.atan2(delta[1],delta[0])/(math.pi/4))*(math.pi/4)
+  theta=math.atan2(delta[1],delta[0])
+  diagonal=abs(abs(delta[0])-abs(delta[1]))<np.linalg.norm(delta)*.35
+  marked=on_corridor(np.asarray(points[i])) and on_corridor(np.asarray(points[j])) and diagonal
+  step=math.pi/4 if marked else math.pi/2
+  angle=round(theta/step)*step
   normal=np.array([-math.sin(angle),math.cos(angle)])
   constraints[i,i*2:i*2+2]=-normal;constraints[i,j*2:j*2+2]=normal
  flat=original.reshape(-1)
@@ -53,7 +64,7 @@ def straighten(points):
   for i in range(len(result)):
    prev=result[i-1];cur=result[i];nxt=result[(i+1)%len(result)]
    v=cur-prev;w=nxt-cur
-   if np.linalg.norm(v)<1e-6 or (abs(float(v[0]*w[1]-v[1]*w[0]))<1e-6 and np.dot(v,w)>=0):
+   if np.linalg.norm(v)<1e-6 or (abs(float(v[0]*w[1]-v[1]*w[0]))<1e-6):
     result.pop(i);changed=True;break
  return (np.asarray(result)@np.linalg.inv(transform).T).tolist()
 
@@ -75,7 +86,7 @@ for part in components:
  records.append({'pixelArea':len(part),'loops':loops})
 records.sort(key=lambda r:min(p[1] for loop in r['loops'] for p in loop))
 Path=__import__('pathlib').Path
-Path('Browser/dist/historic-footprint-data.mjs').write_text('// OS masonry regularized to 90/45-degree estate axes; see Tools/trace_historic_footprints.py.\nexport const OS_BLUE_REGION='+json.dumps(blue)+';\nexport const OS_FOOTPRINTS='+json.dumps(records)+';\n',encoding='utf-8')
+Path('Browser/dist/historic-footprint-data.mjs').write_text('// OS building walls squared to estate axes; only the marked connecting corridor is diagonal; see Tools/trace_historic_footprints.py.\nexport const OS_BLUE_REGION='+json.dumps(blue)+';\nexport const OS_FOOTPRINTS='+json.dumps(records)+';\n',encoding='utf-8')
 json.dump({'blue':blue,'footprints':records},open(root+'traced-pixels.json','w'),indent=2)
 # Review the extraction on the original reference; annotations are QA only.
 review=im.resize((864,1203));draw=ImageDraw.Draw(review)

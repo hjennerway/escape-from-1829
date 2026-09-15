@@ -3,7 +3,7 @@ import assert from 'node:assert/strict';
 import * as THREE from './dist/vendor/three.module.js';
 import {createEscapeExterior} from './dist/escape-exterior.mjs';
 import {createAerialLayouts} from './dist/aerial-layouts.mjs';
-import {HISTORIC_ROADS,ADMIN_ISLAND_CENTER} from './dist/historic-roads.mjs';
+import {HISTORIC_ROADS,HISTORIC_GRAVEL,HISTORIC_PAVING,ADMIN_ISLAND_CENTER} from './dist/historic-roads.mjs';
 import {annexePoint} from './dist/annexe.mjs';
 import {VIVIENNE_LANE} from './dist/modern-entrance.mjs';
 globalThis.document={createElement:()=>({getContext:()=>({fillRect(){},measureText(text){return {width:text.length*16}},strokeText(){},fillText(){}})})};
@@ -18,12 +18,20 @@ for(const name of ['chapel','churton']){const anchor=HISTORIC_OS_REGISTRATION[na
 const missing=layouts.historicRoads.userData.missingFootprints;
 assert(missing.occupied.length>40,'Clipping must inspect the assembled existing estate, not an empty reparented model');
 assert(missing.segments.length>100,'Missing outlines must retain individual stepped walls and court edges');
+let diagonalCount=0;
+const corridorStart=historicOSPoint(86,300),corridorEnd=historicOSPoint(114,230);
+function distanceToCorridor(p){const dx=corridorEnd[0]-corridorStart[0],dz=corridorEnd[1]-corridorStart[1],t=Math.max(0,Math.min(1,((p[0]-corridorStart[0])*dx+(p[1]-corridorStart[1])*dz)/(dx*dx+dz*dz)));return Math.hypot(p[0]-corridorStart[0]-t*dx,p[1]-corridorStart[1]-t*dz);}
 for(const segment of missing.segments){
  const [a,b]=segment.points;
  const dx=Math.abs(b[0]-a[0]),dz=Math.abs(b[1]-a[1]);
- assert(Math.min(dx,dz,Math.abs(dx-dz))<1e-7,'Marked walls must remain horizontal, vertical or 45-degree diagonals after clipping');
+ if(Math.min(dx,dz)>1e-7){
+  diagonalCount++;
+  assert(Math.abs(dx-dz)<1e-7,'The marked corridor must retain its 45-degree angle');
+  assert(distanceToCorridor(a)<10&&distanceToCorridor(b)<10,'Only the orange-marked connecting corridor may have diagonal edges');
+ }
  for(const t of [.01,.25,.5,.75,.99]){const p=[a[0]+(b[0]-a[0])*t,a[1]+(b[1]-a[1])*t];assert(pointInFootprint(p,missing.region),'Every marked wall must be inside the blue source region');assert(!missing.occupied.some(polygon=>pointInFootprint(p,polygon)),'No missing-building mark may run through an existing building');}
 }
+assert(diagonalCount>=2,'Both sides of the orange-marked corridor must remain diagonal');
 assert(missing.segments.some(s=>s.sourceLoop>0),'Internal court edges must survive, not just an enclosing site outline');
 for(const name of ['Central service area · provisional','Northern service range · provisional','West detached block · provisional','Annexe rear service area · provisional','Annexe end service area · provisional'])assert(!layouts.historicRoads.getObjectByName(name),'The earlier incorrect broad outlines must be removed');
 // Check the requested church clearance against the actual model, including trim.
@@ -36,9 +44,32 @@ for(const name of ['Churton north cross-road','North ward road']){
 const ray=new THREE.Raycaster();
 function surfaceAt(x,z){ray.set(new THREE.Vector3(x,2,z),new THREE.Vector3(0,-1,0));return ray.intersectObject(layouts.historicRoads,true)[0]?.object.userData.surface;}
 assert.equal(surfaceAt(...ADMIN_ISLAND_CENTER),'grass','Roundabout centre must remain grass');
-for(let i=0;i<16;i++){const a=i*Math.PI/8;assert.equal(surfaceAt(237+9*Math.cos(a),62+9*Math.sin(a)),'black road','Roundabout must provide an unbroken circulating road');}
-assert.equal(surfaceAt(261,14),'grass','Teardrop island must remain exposed');
-assert.equal(surfaceAt(250,16),'gravel','A separate gravel walk must skirt the teardrop');
+for(let i=0;i<16;i++){const a=i*Math.PI/8;assert.equal(surfaceAt(ADMIN_ISLAND_CENTER[0]+9*Math.cos(a),ADMIN_ISLAND_CENTER[1]+9*Math.sin(a)),'black road','Roundabout must provide an unbroken circulating road');}
+assert.equal(surfaceAt(245,46),'grass','Relocated teardrop must remain exposed inside its black surround');
+assert.equal(surfaceAt(239,53),'black road','The relocated teardrop must have a black circulating route');
+assert.notEqual(surfaceAt(261,14),'grass','The old teardrop position must be cleared');
+assert(!HISTORIC_GRAVEL.some(area=>area.name.startsWith('Annexe')),'No annexe gravel surfaces may remain in Historic');
+for(const area of HISTORIC_PAVING){
+ const mesh=layouts.historicRoads.getObjectByName(area.name);
+ assert.equal(mesh.userData.surface,'black road');
+ assert.equal(mesh.material.color.getHex(),0x17191a);
+}
+const endIsland=annexePoint(125,0,65);
+assert.equal(surfaceAt(endIsland[0],endIsland[2]),'grass','New end-lawn circuit must retain its grass island');
+const crossDrive=annexePoint(96,0,64);
+assert.equal(surfaceAt(crossDrive[0],crossDrive[2]),'black road','New cross-drive must cut through the former continuous lawn');
+// Sample both road edges as well as centre lines against the assembled buildings.
+const extensions=['Admin north service road','Annexe east cross-drive','Annexe east court circuit','Annexe end lawn circuit','Annexe end lawn avenue link','Annexe end lawn cross-drive link'];
+for(const name of extensions){
+ const road=HISTORIC_ROADS.find(road=>road.name===name);assert(road);
+ for(let i=1;i<road.points.length;i++){
+  const a=road.points[i-1],b=road.points[i],dx=b[0]-a[0],dz=b[1]-a[1],length=Math.hypot(dx,dz),steps=Math.ceil(length);
+  for(let j=0;j<=steps;j++)for(const offset of [-road.width/2,0,road.width/2]){
+   const t=j/steps,p=[a[0]+dx*t-dz/length*offset,a[1]+dz*t+dx/length*offset];
+   assert(!missing.occupied.some(polygon=>pointInFootprint(p,polygon)),name+' must clear existing buildings across its full width');
+  }
+ }
+}
 const garden=annexePoint(75,0,110);assert.equal(surfaceAt(garden[0],garden[2]),'grass','Near annexe garden must have a grass interior');
 for(const historic of [true,false])for(const modern of [true,false]){
  layouts.setVisible('historic',historic);layouts.setVisible('modern',modern);
