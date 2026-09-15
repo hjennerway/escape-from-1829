@@ -75,8 +75,8 @@ export function addWestFrontPhotoDetails(THREE,{model,box,mesh,worldUV,white,bri
 
 export function addFrontWingChimneys(THREE,{mesh,worldUV,brick,box},side=-1){
   for(const [x,z] of [[38.5,28.8],[31.1,39.7]]){
-    mesh(worldUV(new THREE.BoxGeometry(1.45,5.4,1.9),1.7),brick,side*x,12.5,z,true).name=side<0?'West front chimney':'East front chimney';
-    for(const y of [15.05,15.3])box(brick,side*x,y,z,1.65,.18,2.1);
-    for(const dz of [-.55,.55])mesh(new THREE.CylinderGeometry(.14,.17,.55,8),brick,side*x,15.65,z+dz,true);
+    mesh(worldUV(new THREE.BoxGeometry(side>0?.7:1.45,side>0&&z>30?3.4:5.4,side>0?1.25:1.9),1.7),brick,side*x,side>0&&z>30?11.5:12.5,z,true).name=side<0?'West front chimney':'East front chimney';
+    for(const y of [15.05,15.3])box(brick,side*x,y-(side>0&&z>30?2:0),z,side>0?.9:1.65,.18,side>0?1.45:2.1);
+    for(const dz of [-.55,.55])mesh(new THREE.CylinderGeometry(.14,.17,.55,8),brick,side*x,side>0&&z>30?13.65:15.65,z+dz*(side>0?.65:1),true);
   }
 }

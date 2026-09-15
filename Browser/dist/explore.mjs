@@ -17,6 +17,8 @@ import {WEST_WING_SIDE_VIEW,WEST_WING_END_VIEW} from './west-wing-photo-detail.m
 import {INNER_COURT_PHOTO_VIEW} from './inner-court-photo-detail.mjs';
 import {REDESMERE_PHOTO_VIEW} from './redesmere-photo-detail.mjs';
 import {EAST_LAWN_PHOTO_VIEW,ENTRANCE_EAST_PHOTO_VIEW} from './entrance-symmetry.mjs';
+import {REDESMERE_GARDEN_VIEW} from './redesmere-garden-photo-detail.mjs';
+import {EAST_FORWARD_END_PHOTO_VIEW} from './east-forward-end-photo-detail.mjs';
 import {WEST_FORWARD_END_PHOTO_VIEW} from './west-forward-end-photo-detail.mjs';
 import {WEST_LAWN_PHOTO_VIEW} from './west-lawn-photo-detail.mjs';
 import {ENTRANCE_WEST_PHOTO_VIEW} from './entrance-west-photo-detail.mjs';
@@ -45,6 +47,8 @@ try{
   if(new URLSearchParams(location.search).get('view')==='west-lawn-photo')walker.setView(WEST_LAWN_PHOTO_VIEW);
   if(new URLSearchParams(location.search).get('view')==='east-lawn-photo')walker.setView(EAST_LAWN_PHOTO_VIEW);
   if(new URLSearchParams(location.search).get('view')==='entrance-east-photo')walker.setView(ENTRANCE_EAST_PHOTO_VIEW);
+  if(new URLSearchParams(location.search).get('view')==='redesmere-garden-photo')walker.setView(REDESMERE_GARDEN_VIEW);
+  if(new URLSearchParams(location.search).get('view')==='east-forward-end-photo')walker.setView(EAST_FORWARD_END_PHOTO_VIEW);
   if(new URLSearchParams(location.search).get('view')==='west-forward-end-photo')walker.setView(WEST_FORWARD_END_PHOTO_VIEW);
   if(new URLSearchParams(location.search).get('view')==='front-steps')walker.setView({...FRONT_STEPS_VIEW,position:[6,1.8,34]});
   if(new URLSearchParams(location.search).get('view')==='front-wall')walker.setView({...FRONT_WALL_VIEW,position:[0,1.8,36],target:[-12,.8,49]});

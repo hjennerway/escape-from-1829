@@ -3,7 +3,7 @@
 // open lane. Dimensions are visual estimates, in the estate's scene units.
 export const REDESMERE_PASSAGE_VIEW=Object.freeze({position:[80,1.8,47],target:[80,5.8,17],fov:70});
 export function addRedesmerePassage(THREE,{box,mesh,worldUV,white,brick,material}){
-  const left=69.75,right=79.55,x=(left+right)/2,width=right-left,z=19;
+  const left=69.75,right=79.55,x=(left+right)/2,width=right-left,z=8.5;
   const underside=4,top=6,depth=1.3;
   const coping=material(0x696761);
   mesh(worldUV(new THREE.BoxGeometry(width,top-underside,depth),1.7),brick,x,(top+underside)/2,z,true).name='1829 Redesmere brick lintel';

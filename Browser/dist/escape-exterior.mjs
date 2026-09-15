@@ -97,9 +97,10 @@ export function createEscapeExterior(THREE,aspect){
   // The blue-circled outer rooms move by one complete pavilion width to
   // make room for an identical second red-circled section on their left.
   for(const i of [0,2,3])eastBlocks[i][0]+=EAST_SHIFT;
-  // Mirror the inward walls at x=29/32, retaining the outer east face x=48.1.
-  eastBlocks[2]=[40.05,23,16.1,14,8.6];
-  eastBlocks[3]=[38.55,35,19.1,16,8.6];
+  // img1 restores the narrow forward end: inner walls remain at x=29/32,
+  // and the outer return, its windows and stairs align at x=41.
+  eastBlocks[2]=[36.5,23,9,14,8.6];
+  eastBlocks[3]=[35,35,12,16,8.6];
   eastBlocks[0][0]+=EXTRA_BAY/2;eastBlocks[0][2]+=EXTRA_BAY;
   for(const i of [5,6,7])eastBlocks[i][0]+=OUTER_SHIFT;
 
@@ -108,13 +109,11 @@ export function createEscapeExterior(THREE,aspect){
   const courtyardPassage={x:76,width:7.1};
   // The two tall end-room placeholders are replaced by the low brick range.
   eastBlocks.splice(5,3);
-  const serviceLeft=64.65,mainEnd=72.2,serviceRight=84.2,annexStart=79.55;
+  const serviceRight=84.2,annexStart=79.55;
   const blocks=[
     [EAST_SHIFT/2,12,76+EAST_SHIFT,10,12.8],
     ...westBlocks,...eastBlocks,
-    [(serviceLeft+mainEnd)/2,8,mainEnd-serviceLeft,7,9.3],
     [(annexStart+serviceRight)/2,8,serviceRight-annexStart,7,9.3],
-    [69.2,5,6,9,12.8], // Stair block seen behind the cut-through in img2.jpg.
     // Yellow-shaded addition: long outer range and a stepped rear return.
     // Set the return back and towards the outer wing, leaving the rear-left
     // corner open beside the inset arm (which ends at x=37.5, z=-35.5).
@@ -141,7 +140,7 @@ export function createEscapeExterior(THREE,aspect){
     box(cream,x+nx*.17,y+1.16,z+nz*.17,1.65,.19,.23,rotation);
   }
   function block(x,z,w,d,h,passage=null){
-    const eastInner=(Math.abs(x-40.05)<.01&&z===23)||(Math.abs(x-38.55)<.01&&z===35);
+    const eastInner=(x===36.5&&z===23)||(x===35&&z===35);
     const westDetail=westCourtPhotoProfile(x,z)||westFrontPhotoProfile(x,z)||eastInner;
     const detail=westDetail||eastPhotoProfile(x,z)||courtyardPhotoProfile(x,z)||rearCourtPhotoProfile(x,z)||redesmerePhotoProfile(x,z),foundation=detail&&!westDetail?4:2;
     const base=passage?Math.max(passage.height,foundation):foundation;
@@ -157,7 +156,7 @@ export function createEscapeExterior(THREE,aspect){
       if(passage&&base>lowerHeight)mesh(worldUV(new THREE.BoxGeometry(width,base-lowerHeight,d)),detail?photoBrick:brick,middle,(base+lowerHeight)/2,z,true);
     }
     // Outer east white base is retained beyond the mirrored brick inner wing.
-    if(eastInner){box(white,48.12,2,z,.12,4,d);if(z===35)box(white,44.55,2,43.02,7.1,4,.12);}
+    if(eastInner)box(white,41.02,2,z,.12,4,d);
     box(cream,x,h-.12,z,w+.23,.22,d+.23);
     if(passage){
       const left=Math.max(x-w/2,passage.x-passage.width/2),right=Math.min(x+w/2,passage.x+passage.width/2);
@@ -175,14 +174,12 @@ export function createEscapeExterior(THREE,aspect){
       hipRoof(19.55,12,24.9,d,h+.26,2.6).name='Entrance east recessed slate roof';
       hipRoof(38.55,12,13.1,d,h+.23,2);
     }else if(eastInner){
-      // Keep the inner roof pitch/ridge identical to the west; stretch only
-      // the outward roof slope to join the retained east courtyard elevation.
+      // Both pitches now meet the photo-corrected narrow footprint.
       const roofWidth=z===35?12:9,roofX=z===35?35:36.5;
       const cap=hipRoof(roofX,z,roofWidth,d,h+.23,roofWidth*.3);
-      const vertices=cap.geometry.attributes.position;
-      for(let i=0;i<vertices.count;i++)if(vertices.getX(i)>0)vertices.setX(i,vertices.getX(i)*(1+7.1/(roofWidth/2+.4)));
-      vertices.needsUpdate=true;cap.geometry.computeVertexNormals();
       cap.name='East entrance wing slate roof';
+    }else if(x===65.5&&z===15){
+      // The img3 side-return builder supplies the continuous pavilion roof.
     }else hipRoof(x,z,w,d,rearEnd?h:h+.23,rearEnd?REAR_END_ROOF_RISE:Math.min(3.8,Math.min(w,d)*.3));
     if(!detail)for(const side of [-1,1]){
       for(let px=-w/2+2.4;px<w/2-1.5;px+=3.55)for(let y=3.8;y<h-1;y+=3.4){
@@ -240,9 +237,9 @@ export function createEscapeExterior(THREE,aspect){
   // Both photographed front bays are built by the facade detail modules.
   // Replace the added round bay with a square projection on the blue-marked
   // window section, to its left. Its face stands 5.5 units beyond the facade.
-  const squareX=65.5,squareZ=20.75,squareWidth=8.5;
-  block(squareX,squareZ,squareWidth,squareWidth,14.3).name='East square projecting bay';
-  for(const y of [4.08,8.8])box(white,squareX,y,squareZ,squareWidth+.14,.16,squareWidth+.14);
+  const squareX=65.5,squareZ=15,squareWidth=8.5,squareDepth=20;
+  block(squareX,squareZ,squareWidth,squareDepth,14.3).name='East garden pavilion';
+  for(const y of [4.08,8.8])box(white,squareX,y,squareZ,squareWidth+.14,.16,squareDepth+.14);
   addEastPhotoDetails(THREE,{model,box,mesh,worldUV,white,brick:photoBrick,roof,steel,material,hipRoof});
   // Open rear approaches connect the gaps between the arms to the back road.
   for(const x of [-23,23]){box(gravel,x,.18,-20,32,.1,45);box(grass,x<0?-17:x-6,.26,-9,9,.1,11);}
@@ -276,7 +273,7 @@ export function createEscapeExterior(THREE,aspect){
     plantedBed(x,-64,6,5);
     tree(x,-64,.85);
   }
-  for(const [x,z,s] of [[-25.5,46.7,.85],[33,46.7,.85],[-65,-35,1.1],[68+OUTER_SHIFT,-38,1.25],[-17,-9,.85],[18,-9,.9]])tree(x,z,s);
+  for(const [x,z,s] of [[-25.5,46.7,.85],[24,46.7,.6],[-65,-35,1.1],[68+OUTER_SHIFT,-38,1.25],[-17,-9,.85],[18,-9,.9]])tree(x,z,s);
   // Clear Churton and its estate-side approach; preserve other tree variations.
   for(let i=0;i<24;i++){const x=-100+i*9,z=-84-(i%3)*7,size=1+random()*.6;if(x<-60||x>1)tree(x,z,size);else for(let n=0;n<20;n++)random();}
   for(let i=0;i<9;i++){

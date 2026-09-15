@@ -20,12 +20,13 @@ assert(exterior.mast.children.length>150,'mast must contain real lattice geometr
 const dragons=exterior.model.getObjectByName('Blue dragons and central coat of arms');
 assert.equal(dragons.geometry.attributes.uv.count,3,'heraldic photo must map onto the triangular pediment');
 const originalBay=exterior.model.getObjectByName('East curved bay');
-const squareBay=exterior.model.getObjectByName('East square projecting bay');
+const squareBay=exterior.model.getObjectByName('East garden pavilion');
 assert(originalBay&&squareBay,'right frontage must retain the original curved bay and add a square projection');
 assert.equal(exterior.model.getObjectByName('East curved bay duplicate'),undefined,'the added round bay must be removed');
 const bayBounds=new THREE.Box3().setFromObject(squareBay),baySize=bayBounds.getSize(new THREE.Vector3());
 assert.equal(squareBay.geometry.type,'BoxGeometry','replacement has flat walls and square corners');
-assert.equal(baySize.x,baySize.z,'replacement footprint is square');
+assert.equal(baySize.x,8.5,'south frontage retains its width');
+assert.equal(baySize.z,20,'blue-marked side is widened as one rectangular pavilion');
 assert(bayBounds.max.z>24&&bayBounds.max.y>=14.3,'square bay projects outward at full three-storey height');
 assert(bayBounds.min.x>originalBay.position.x+3.15&&bayBounds.max.x<72.65,'projection occupies the blue-marked section left of the removed round bay');
 for(const aspect of [16/9,4/3,9/16])for(const seconds of [0,1,1.75,2.5]){
@@ -169,7 +170,7 @@ for(const x of [-11,9])for(const z of [-17,-26,-30,-34,-40]){
 }
 // The corrected east wing and L-shaped addition must have continuous roofs,
 // while the parking court inside the addition remains uncovered.
-for(const [x,z] of [[31,-20],[42,40],[53.1,12],[71.2,8],[89.2,-25],[89.2,0],[83.7,-38],[83.7,-44],[91.2,5]]){
+for(const [x,z] of [[31,-20],[39,40],[53.1,12],[68,8],[89.2,-25],[89.2,0],[83.7,-38],[83.7,-44],[91.2,5]]){
   ray.set(new THREE.Vector3(x,80,z),new THREE.Vector3(0,-1,0));
   assert(ray.intersectObject(exterior.model,true)[0].point.y>8,'corrected east footprint must contain roof geometry');
 }
@@ -178,11 +179,11 @@ for(const [x,z] of [[31,-20],[42,40],[53.1,12],[71.2,8],[89.2,-25],[89.2,0],[83.
 const lintel=new THREE.Box3().setFromObject(exterior.model.getObjectByName('1829 Redesmere brick lintel'));
 assert(Math.abs(lintel.min.y-4)<1e-5&&Math.abs(lintel.max.y-6)<1e-5,'lintel starts at the first floor and is half a storey high');
 assert(lintel.max.z-lintel.min.z<1.5,'the lintel is a shallow wall, not a roofed room');
-for(const x of [75.5,76,77.5])for(const z of [3,8,12,16,21]){
+for(const x of [75.5,76,77.5])for(const z of [3,6.5,12,18.5,21]){
   ray.set(new THREE.Vector3(x,30,z),new THREE.Vector3(0,-1,0));
   assert(ray.intersectObject(exterior.model,true)[0].point.y<.5,'the lane must be open to the sky away from the lintel');
 }
-ray.set(new THREE.Vector3(76,30,19),new THREE.Vector3(0,-1,0));
+ray.set(new THREE.Vector3(76,30,8.5),new THREE.Vector3(0,-1,0));
 assert.equal(ray.intersectObject(exterior.model,true)[0].object.name,'1829 Redesmere lintel coping');
 ray.set(new THREE.Vector3(76,1.8,27),new THREE.Vector3(0,0,-1));
 assert(ray.intersectObject(exterior.model,true)[0].point.z<0,'ground-level sightline must pass under the lintel into the court');
@@ -190,7 +191,8 @@ assert(ray.intersectObject(exterior.model,true)[0].point.z<0,'ground-level sight
 // on its photographed front face and no tall placeholder roofs left above it.
 for(const x of [80.5,82,84,86,89,92,95,98])for(const y of [1,2,3.8]){
   ray.set(new THREE.Vector3(x,y,24),new THREE.Vector3(0,0,-1));
-  const hit=ray.intersectObject(exterior.model,true)[0];
+  // img3 adds ivy and boarded panels; check the continuous wall behind them.
+  const hit=ray.intersectObject(exterior.model.getObjectByName('Redesmere windowless brick end range'))[0];
   assert.equal(hit.object.name,'Redesmere windowless brick end range');
   assert(hit.object.material.map,'brick texture must continue to the base');
   assert(Math.abs(hit.point.z-22)<1e-5,'front wall must be continuous across the end range');

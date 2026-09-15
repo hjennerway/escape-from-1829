@@ -33,19 +33,24 @@ export function addCourtyardPhotoDetails(THREE,{model,box,mesh,worldUV,white,bri
     for(const y of [2,6.5,11])sash('courtyard-bay',bayX+Math.sin(a)*(apothem+.055),y,bayZ+Math.cos(a)*(apothem+.055),a,Math.abs(offset)===1?1.25:.72,2.45);
   }
 
-  // Stair tower to the left of the bay. The top and middle landings reach
+  // Keep the observed courtyard stairs on the widened block, without a separate tower.
+  {
+  const courtBox=(mat,x,y,z,...rest)=>box(mat,x-2,y,z+4.5,...rest);
+  const courtSash=(face,x,y,z,...rest)=>sash(face,x-2,y,z+4.5,...rest);
+  const courtDoor=(x,z,...rest)=>door(x-2,z+4.5,...rest);
+  const courtRod=(a,b,...rest)=>rod([a[0]-2,a[1],a[2]+4.5],[b[0]-2,b[1],b[2]+4.5],...rest);
+  // Stairs attach to the rear face of the single widened pavilion. Landings reach
   // separate blue doors, with windows at the ground level below the flights.
-  for(const y of [4.06,8.25])box(white,69.2,y,.37,6.12,.18,.22);
+  for(const y of [4.06,8.25])courtBox(white,68.8,y,.37,5.5,.18,.22);
   for(const [x,y] of [[67.25,2],[69.1,2],[71,2],[67.25,6.3],[67.25,10.5]])
-    sash('courtyard-stair-block',x,y,.43,Math.PI,1.02,2.25);
-  door(70.3,.4,Math.PI,4.25);door(68.7,.4,Math.PI,8.5);
-  for(const y of [2,6.3,10.5])sash('courtyard-stair-return',72.25,y,3.1,Math.PI/2,.9,2.2);
+    courtSash('courtyard-stair-block',x,y,.43,Math.PI,1.02,2.25);
+  courtDoor(70.3,.4,Math.PI,4.25);courtDoor(68.7,.4,Math.PI,8.5);
   // Zigzag steel fire escape, with open risers, railings, stringers and legs.
   const stair=new THREE.Group();stair.name='East courtyard two-flight fire escape';model.add(stair);
-  function stairRod(a,b,r=.027){rod(a,b,r);const m=model.children[model.children.length-1];stair.attach(m);}
+  function stairRod(a,b,r=.027){courtRod(a,b,r);const m=model.children[model.children.length-1];stair.attach(m);}
   function landing(x,y){
-    box(iron,x,y,-.6,2.5,.13,2.1);
-    for(let i=0;i<9;i++)box(iron,x-1.2+i*.3,y+.56,-1.64,.035,1.05,.035);
+    courtBox(iron,x,y,-.6,2.5,.13,2.1);
+    for(let i=0;i<9;i++)courtBox(iron,x-1.2+i*.3,y+.56,-1.64,.035,1.05,.035);
     stairRod([x-1.2,y+1.08,-1.64],[x+1.2,y+1.08,-1.64]);
   }
   landing(69,8.5);landing(73,4.25);
@@ -53,8 +58,8 @@ export function addCourtyardPhotoDetails(THREE,{model,box,mesh,worldUV,white,bri
     const count=18,run=(x1-x0)/count,rise=(y1-y0)/count;
     for(let i=0;i<count;i++){
       const x=x0+(i+.5)*run,y=y0+(i+.5)*rise;
-      box(iron,x,y,z,Math.abs(run)+.04,.07,1.15);
-      for(const side of [-1,1])box(iron,x,y+.55,z+side*.59,.03,1.1,.03);
+      courtBox(iron,x,y,z,Math.abs(run)+.04,.07,1.15);
+      for(const side of [-1,1])courtBox(iron,x,y+.55,z+side*.59,.03,1.1,.03);
     }
     for(const side of [-1,1]){
       stairRod([x0,y0+1.08,z+side*.59],[x1,y1+1.08,z+side*.59]);
@@ -62,9 +67,10 @@ export function addCourtyardPhotoDetails(THREE,{model,box,mesh,worldUV,white,bri
     }
   }
   flight(69.9,8.5,74,4.25,-1.5);flight(73,4.25,68.9,.3,-2.8);
-  box(iron,73.2,4.25,-1.8,2.6,.13,3.1);
+  courtBox(iron,73.2,4.25,-1.8,2.6,.13,3.1);
   for(const [x,z,h] of [[68,-1.6,8.5],[70,-1.6,8.5],[74,-2.9,4.25]])stairRod([x,.2,z],[x,h,z],.07);
 
+  }
   // Left two-storey range and right three-storey return retain their footprints
   // but now have occupied white ground floors and finer vertical sash windows.
   for(const y of [2,6.25]){
@@ -92,7 +98,7 @@ export function addCourtyardPhotoDetails(THREE,{model,box,mesh,worldUV,white,bri
   for(const offset of [-1.4,0,1.4])box(frame,41.3,4.71+offset*Math.sin(.72),5.25+offset*Math.cos(.72),5.25,.09,.09);
   // Gutters, vertical soil pipes and branching waste pipes are distinctive in
   // the photograph, particularly between the paired window groups.
-  for(const [x,z,h] of [[45.4,4.1,13.8],[48.1,4.1,13.8],[52.7,4.1,13.8],[65.5,4.1,12.7],[37.23,-3,13.8]])
+  for(const [x,z,h] of [[45.4,4.1,13.8],[48.1,4.1,13.8],[52.7,4.1,13.8],[65.5,4.85,13.8],[37.23,-3,13.8]])
     box(iron,x,h/2,z,.09,h,.09);
   for(const x of [48.1,52.7])for(const y of [4.3,9.1])rod([x,y,4.09],[x+1.65,y,4.09],.04);
   rod([45.4,3.5,4.1],[43.8,3.5,4.1],.045);
