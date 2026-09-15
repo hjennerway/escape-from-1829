@@ -9,7 +9,7 @@ import {VIVIENNE_LANE} from './dist/modern-entrance.mjs';
 globalThis.document={createElement:()=>({getContext:()=>({fillRect(){},measureText(text){return {width:text.length*16}},strokeText(){},fillText(){}})})};
 const exterior=createEscapeExterior(THREE,1.5),layouts=createAerialLayouts(THREE,exterior);
 const effective=o=>{for(;o;o=o.parent)if(!o.visible)return false;return true;};
-assert.deepEqual(HISTORIC_ROADS.find(r=>r.name==='Historic lane continuation').points.slice(0,2),VIVIENNE_LANE.slice(7,9),'Historic continuation must meet the saved lane exactly');
+assert.deepEqual(HISTORIC_ROADS.find(r=>r.name==='Historic lane continuation').points[0],VIVIENNE_LANE[8],'Historic continuation must begin at the junction without duplicating the shared lane');
 exterior.model.updateMatrixWorld(true);
 layouts.historicRoads.traverse(o=>{if(!o.isMesh)return;const g=o.geometry,p=g.attributes.position;for(let i=0;i<p.count;i++)assert(Number.isFinite(p.getX(i))&&Number.isFinite(p.getY(i))&&Number.isFinite(p.getZ(i)));const n=g.attributes.normal,normal=new THREE.Vector3(),matrix=new THREE.Matrix3().getNormalMatrix(o.matrixWorld);for(let i=0;i<n.count;i++){normal.fromBufferAttribute(n,i).applyMatrix3(matrix);assert(normal.y>.99,'All surface triangles must face up');}const bounds=new THREE.Box3().setFromObject(o);assert(bounds.min.y>.25&&bounds.max.y<.4,'Road surfaces must clear terrain and remain below walking collision height');});
 // Compare rendered road materials and sample the visible pale border.
@@ -21,8 +21,11 @@ for(const road of HISTORIC_ROADS){
   if(!mesh.isMesh)return;
   assert(mesh.material.color.equals(reference.material.color),'Historic road and border colours must match Modern');
   assert.equal(mesh.material.roughness,reference.material.roughness);
+  assert.equal(mesh.material.polygonOffsetFactor,reference.material.polygonOffsetFactor,'Joined roads must use the same drawing depth');
+  assert.equal(mesh.material.polygonOffsetUnits,reference.material.polygonOffsetUnits);
  });
 }
+for(const name of ['Churton western green','Churton eastern green'])assert(!layouts.historicRoads.getObjectByName(name),'Obsolete grid lawns must not cover Parsons Lane');
 const borderRay=new THREE.Raycaster(new THREE.Vector3(8,2,-96.2),new THREE.Vector3(0,-1,0));
 assert.equal(borderRay.intersectObject(layouts.historicRoads,true)[0].object.material.color.getHex(),0xb8b9af,'Pale border must be exposed beyond the asphalt');
 // Registration is one similarity transform: no per-building stretching or rotation.

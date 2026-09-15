@@ -99,7 +99,7 @@ export const HISTORIC_ROADS_SOURCE=Object.freeze({clean:'User attachment: roads/
 // The yellow-circled Churton grid is removed; Parsons Lane remains in the shared road layer.
 export const HISTORIC_ROADS=Object.freeze([
  {name:'North ward road',width:5,points:[[-12,-99],[28,-99],[28,-122],[68,-122]]},
- {name:'Historic lane continuation',width:6,points:[VIVIENNE_LANE[7],...adminFrontDrive]},
+ {name:'Historic lane continuation',width:6,points:adminFrontDrive},
  {name:'Admin roundabout',width:5.5,points:circle(ADMIN_ISLAND_CENTER,9)},
  {name:'Admin roundabout to annexe',width:6,points:bezier([238,63],[[[260,63],[268,51],frontWest]])},
  {name:'Annexe front avenue',width:6,points:[frontWest,ap(62,84),ap(-62,84),frontEast]},
@@ -132,8 +132,6 @@ export const HISTORIC_PAVING=Object.freeze([
  {name:'Annexe end lawn black apron',points:[[96,51],[147,51],[153,57],[153,78],[147,84],[96,84]].map(p=>ap(...p))}
 ]);
 export const HISTORIC_GRASS=Object.freeze([
- {name:'Churton western green',points:[[-112,-95],[-81,-95],[-81,-45],[-112,-45]]},
- {name:'Churton eastern green',points:[[-17,-95],[22,-95],[22,-49],[-17,-49]]},
  {name:'Admin tapered forecourt lawn',points:bezier([150,56],[
   [[165,52],[176,49],[190,49]],[[207,49],[220,51],[225,56]],
   [[207,56],[172,56],[150,56]]
@@ -152,7 +150,7 @@ export function createHistoricRoads(THREE,exterior){
  const asphalt=material(ROAD_STYLE.asphalt),paving=material(ROAD_STYLE.asphalt),gravel=material(0xb4b3aa),grass=material(0x60784b),brown=material(0x87542f),kerb=material(ROAD_STYLE.edge),edge=material(ROAD_STYLE.edge);
  matchEstateGrass(grass,exterior.terrain.material);
  // Separate close ground layers at the higher OS overview camera as well.
- for(const [mat,order] of [[gravel,1],[paving,2],[grass,3],[edge,3],[asphalt,4],[brown,5],[kerb,6]]){mat.polygonOffset=true;mat.polygonOffsetFactor=-order;mat.polygonOffsetUnits=-order*2;}
+ for(const [mat,order] of [[gravel,1],[paving,2],[grass,3],[edge,ROAD_STYLE.edgeLayer],[asphalt,ROAD_STYLE.asphaltLayer],[brown,5],[kerb,6]]){mat.polygonOffset=true;mat.polygonOffsetFactor=-order;mat.polygonOffsetUnits=-order*2;}
  // Deterministic stone flecks, at world scale, remain legible on close approach.
  const size=64,data=new Uint8Array(size*size*4);let seed=1829;
  for(let i=0;i<size*size;i++){seed=(Math.imul(seed,1664525)+1013904223)>>>0;const v=175+(seed%66);data.set([v,v,Math.max(0,v-7),255],i*4);}

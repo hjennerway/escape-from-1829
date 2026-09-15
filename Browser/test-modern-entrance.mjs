@@ -15,6 +15,8 @@ assert(obs.some(o=>obstacleContains(o,-10,FRONT_BOUNDARY.z)),'Moved masonry must
 const surfaces=[];exterior.model.traverseVisible(o=>{if(o.isMesh)surfaces.push(o)});const ray=new THREE.Raycaster();function surfaceAt(x,z){ray.set(new THREE.Vector3(x,40,z),new THREE.Vector3(0,-1,0));return ray.intersectObjects(surfaces,false)[0];}
 for(const x of [-40,30,70])assert.equal(surfaceAt(x,59).object.name,'Extended front lawn','The old outer gravel strip must become lawn');
 assert.equal(surfaceAt(-95,59).object.name,'Estate terrain');
+// The eastern hedge must end before the bend crosses the frontage.
+for(const x of [94,96,98,100])assert.equal(surfaceAt(x,FRONT_BOUNDARY.z).object.material.color.getHex(),0x555b5c,'The frontage hedge must not protrude through Vivienne Smith Lane');
 const entrance=layouts.entrance;assert.equal(entrance.parent,layouts.shared);
 for(const point of entrance.userData.mouth)assert.deepEqual(point,lanePointAtX(point[0]),'The driveway mouth must meet the unchanged lane centreline');
 for(let z=30;z<=84;z+=.5){assert(!obs.some(o=>obstacleContains(o,0,z)),'Door approach through gate and entrance must stay clear');const hit=surfaceAt(0,z);assert(hit&&hit.point.y>.1,'Walk, curved drive and lane must have a continuous surface');}

@@ -74,7 +74,8 @@ export function createEscapeExterior(THREE,aspect){
   for(const [left,right] of [[-57,-29],[29,57+OUTER_SHIFT]])box(path,(left+right)/2,.13,43,right-left,.1,2);
   addEntranceWalks(THREE,{model,material});
   // Stone wall replaces the marked hedge frontage, with an open central path.
-  for(const [left,right] of [[-71,-58],[31,71+OUTER_SHIFT]])box(hedge,(left+right)/2,.55,FRONT_BOUNDARY.z,right-left,1.1,.9);
+  // Stop before the saved lane turns across the frontage: retain a verge at the east tip.
+  for(const [left,right] of [[-71,-58],[31,89]])box(hedge,(left+right)/2,.55,FRONT_BOUNDARY.z,right-left,1.1,.9);
   addFrontBoundaryWall(THREE,{model,material,worldUV});
   // Start from the western silhouette and reflect it across Reception.
   // Each tuple is [x, z, width, depth, eaves height]; front is +Z.

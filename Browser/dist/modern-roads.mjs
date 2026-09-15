@@ -6,8 +6,8 @@ import {ROAD_STYLE} from './road-style.mjs';
 export function createModernRoads(THREE){
   const roads=new THREE.Group();roads.name='Modern roads · Google Earth paths';
   roads.userData.source=MODERN_ROADS_SOURCE;
-  const asphalt=new THREE.MeshStandardMaterial({color:ROAD_STYLE.asphalt,roughness:1,polygonOffset:true,polygonOffsetFactor:-2,polygonOffsetUnits:-4});
-  const edge=new THREE.MeshStandardMaterial({color:ROAD_STYLE.edge,roughness:1,polygonOffset:true,polygonOffsetFactor:-1,polygonOffsetUnits:-1});
+  const asphalt=new THREE.MeshStandardMaterial({color:ROAD_STYLE.asphalt,roughness:1,polygonOffset:true,polygonOffsetFactor:-ROAD_STYLE.asphaltLayer,polygonOffsetUnits:-2*ROAD_STYLE.asphaltLayer});
+  const edge=new THREE.MeshStandardMaterial({color:ROAD_STYLE.edge,roughness:1,polygonOffset:true,polygonOffsetFactor:-ROAD_STYLE.edgeLayer,polygonOffsetUnits:-2*ROAD_STYLE.edgeLayer});
   // Widths are visual estimates. The saved centreline vertices are unchanged.
   function ribbon(points,width,y,material){
     const positions=[],indices=[];
