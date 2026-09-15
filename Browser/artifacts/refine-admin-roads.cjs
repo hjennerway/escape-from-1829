@@ -46,7 +46,7 @@ replace(' for(const road of HISTORIC_ROADS)ribbon(road.name,road.points,road.wid
  for(const road of HISTORIC_ROADS)ribbon(road.name,road.points,road.width,asphalt,.34);
  for(const edge of HISTORIC_KERBS)ribbon(edge.name,edge.points,.32,kerb,.38);`);
 fs.writeFileSync(file,s);
-const preview='Browser/dist/escape-preview.html';s=fs.readFileSync(preview,'utf8').replace(/\r\n/g,'\n');
+const preview='Browser/dist/aerial.html';s=fs.readFileSync(preview,'utf8').replace(/\r\n/g,'\n');
 replace("import {bindPlanterToggle}","import {ADMIN_ANNEXE_PHOTO_VIEW} from './historic-roads.mjs';\nimport {bindPlanterToggle}");
 replace("photoDetail=[...Object.keys(UPTON_VIEWS)","photoDetail=['admin-annexe-photo',...Object.keys(UPTON_VIEWS)");
 replace('const shot=UPTON_VIEWS[view]','const shot=(view===\'admin-annexe-photo\'?ADMIN_ANNEXE_PHOTO_VIEW:null)??UPTON_VIEWS[view]');

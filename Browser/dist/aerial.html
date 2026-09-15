@@ -1,10 +1,46 @@
 <!doctype html>
-<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>1829 · Escape scene preview</title><link rel="stylesheet" href="./style.css"><style>#previewNav{position:fixed;left:24px;top:24px;z-index:31;font:10px Arial;letter-spacing:2px;color:#e4e8db;text-shadow:0 2px 6px #000}#previewNav a{color:inherit}#replay{position:fixed;right:24px;top:24px;z-index:32;background:#17211ae8;padding:14px 20px;border:1px solid #bdcc98}#aerialHelp{position:fixed;bottom:18px;left:24px;right:24px;z-index:31;font:11px/1.8 Arial;color:#e4e8db;text-shadow:0 2px 6px #000}#resetAerial{background:#17211ae8;padding:8px 12px;margin-left:8px}#previewNav{right:220px;line-height:1.8}@media(max-width:650px){#previewNav{right:20px;top:70px}#aerialHelp{font-size:10px}}</style><link rel="stylesheet" href="./aerial-layouts.css"></head>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>1829 · Aerial view</title><link rel="stylesheet" href="./style.css"><style>#previewNav{position:fixed;left:24px;top:24px;z-index:31;font:10px Arial;letter-spacing:2px;color:#e4e8db;text-shadow:0 2px 6px #000}#previewNav a{color:inherit}#aerialHelp{position:fixed;bottom:18px;left:24px;right:24px;z-index:31;font:11px/1.8 Arial;color:#e4e8db;text-shadow:0 2px 6px #000}#resetAerial{background:#17211ae8;padding:8px 12px;margin-left:8px}#previewNav{right:24px;line-height:1.8}@media(max-width:650px){#previewNav{right:20px;top:24px}#aerialHelp{font-size:10px}}</style><link rel="stylesheet" href="./aerial-layouts.css"><link rel="stylesheet" href="./aerial-locations.css"></head>
 <body><canvas id="game" aria-label="Aerial 3D view of the 1829 estate"></canvas>
-<div id="previewNav"><a href="./">← BACK TO GAME</a> · <a href="?view=front">FRONT DETAIL</a> · <a href="?view=front-steps">FRONT STEPS</a> · <a href="?view=front-wall">FRONT WALL</a> · <a href="?view=east-forward-end-photo">EAST WING FRONT</a> · <a href="?view=west-forward-end-photo">WEST WING FRONT</a> · <a href="?view=west-lawn-photo">WEST LAWN</a> · <a href="?view=east-lawn-photo">EAST LAWN</a> · <a href="?view=entrance-west-photo">ENTRANCE WEST</a> · <a href="?view=redesmere-photo">REDESMERE</a> · <a href="?view=redesmere-garden-photo">CORNER GARDEN</a> · <a href="?view=redesmere-passage">CORNER PASSAGE</a> · <a href="?view=main-admin">MAIN/ADMIN BUILDING</a> · <a href="?view=upton">UPTON/FRITH/OSCROFT</a> · <a href="?view=upton-plan">UPTON PLAN</a> · <a href="?view=churton">CHURTON WARD</a> · <a href="?view=churton-plan">WARD PLAN</a> · <a href="?view=churton-4">WARD LAWN</a> · <a href="?view=annexe">THE ANNEXE</a> · <a href="?view=annexe-plan">ANNEXE PLAN</a> · <a href="?view=annexe-site">SITE PLAN</a> · <a href="?view=tower">WATER TOWER</a> · <a href="?view=west-refine">WEST FACADE</a> · <a href="?view=inner-east-photo">INNER EAST COURT</a> · <a href="?view=central-court-photo">CENTRE SECTION</a> · <a href="?view=historic-roads">HISTORIC ROADS</a> · <a href="?view=historic-footprints">OS FOOTPRINTS</a> · <a href="?view=historic-admin-grounds">ADMIN GROUNDS</a> · <a href="?view=admin-annexe-photo">ANNEXE ROAD PHOTO</a> · <a href="?view=plan">PLAN VIEW</a> · <a href="./escape-preview.html">AERIAL VIEW</a> · <a href="./explore.html">EXPLORE THE ASYLUM ↗</a></div>
+<nav id="previewNav" aria-label="Aerial navigation">
+  <a href="./">← BACK TO GAME</a>
+  <div id="locationsPicker">
+    <button id="locationsButton" type="button" aria-expanded="false" aria-controls="locationsPanel">Locations</button>
+    <div id="locationsPanel" hidden><ul>
+      <li><a href="?view=front">FRONT DETAIL</a></li>
+      <li><a href="?view=front-steps">FRONT STEPS</a></li>
+      <li><a href="?view=front-wall">FRONT WALL</a></li>
+      <li><a href="?view=east-forward-end-photo">EAST WING FRONT</a></li>
+      <li><a href="?view=west-forward-end-photo">WEST WING FRONT</a></li>
+      <li><a href="?view=west-lawn-photo">WEST LAWN</a></li>
+      <li><a href="?view=east-lawn-photo">EAST LAWN</a></li>
+      <li><a href="?view=entrance-west-photo">ENTRANCE WEST</a></li>
+      <li><a href="?view=redesmere-photo">REDESMERE</a></li>
+      <li><a href="?view=redesmere-garden-photo">CORNER GARDEN</a></li>
+      <li><a href="?view=redesmere-passage">CORNER PASSAGE</a></li>
+      <li><a href="?view=main-admin">MAIN/ADMIN BUILDING</a></li>
+      <li><a href="?view=upton">UPTON/FRITH/OSCROFT</a></li>
+      <li><a href="?view=upton-plan">UPTON PLAN</a></li>
+      <li><a href="?view=churton">CHURTON WARD</a></li>
+      <li><a href="?view=churton-plan">WARD PLAN</a></li>
+      <li><a href="?view=churton-4">WARD LAWN</a></li>
+      <li><a href="?view=annexe">THE ANNEXE</a></li>
+      <li><a href="?view=annexe-plan">ANNEXE PLAN</a></li>
+      <li><a href="?view=annexe-site">SITE PLAN</a></li>
+      <li><a href="?view=tower">WATER TOWER</a></li>
+      <li><a href="?view=west-refine">WEST FACADE</a></li>
+      <li><a href="?view=inner-east-photo">INNER EAST COURT</a></li>
+      <li><a href="?view=central-court-photo">CENTRE SECTION</a></li>
+      <li><a href="?view=historic-roads">HISTORIC ROADS</a></li>
+      <li><a href="?view=historic-footprints">OS FOOTPRINTS</a></li>
+      <li><a href="?view=historic-admin-grounds">ADMIN GROUNDS</a></li>
+      <li><a href="?view=admin-annexe-photo">ANNEXE ROAD PHOTO</a></li>
+      <li><a href="?view=plan">PLAN VIEW</a></li>
+      <li><a href="./aerial.html">AERIAL VIEW</a></li>
+    </ul></div>
+  </div>
+  <a href="./explore.html">EXPLORE THE ASYLUM ↗</a>
+</nav>
 <div id="churtonNav" hidden style="position:fixed;bottom:65px;left:24px;z-index:32;font:12px Arial;color:#e4e8db"></div>
-<section id="escapeCutscene" role="dialog" aria-modal="true" aria-labelledby="escapeCutsceneTitle" hidden><div class="escape-caption"><span>OUTSIDE. AT LAST.</span><h2 id="escapeCutsceneTitle">You escaped</h2><p>The 1829 building · Chester</p></div><button id="skipCutscene" type="button">SKIP CUTSCENE ↗</button></section>
-<button id="replay">PLAY ESCAPE PAN ↗</button>
 <section id="layoutControls" aria-label="Estate layouts">
   <h2>LAYOUTS</h2>
   <div class="layout-options">
@@ -16,6 +52,7 @@
   <button id="fitLayouts" type="button">FIT LAYOUTS ↗</button>
 </section>
 <div id="aerialHelp">Drag to orbit · Right-drag to pan · WASD to move · Scroll to zoom · H to show/hide planters · <button id="resetAerial">RESET VIEW</button></div>
+<script type="module" src="./aerial-locations.mjs"></script>
 <script type="module">
 import {ADMIN_ANNEXE_PHOTO_VIEW} from './historic-roads.mjs';
 import {bindPlanterToggle} from './planter-layer.mjs';
@@ -32,7 +69,6 @@ import {FRONT_WALL_VIEW} from './front-boundary-wall.mjs';
 import {REDESMERE_PASSAGE_VIEW} from './redesmere-passage.mjs';
 import {ESCAPE_WATER_TOWER} from './water-tower.mjs';
 import {createAerialControls,sampleLanding} from './aerial-controls.mjs';
-import {createEscapeCutscene} from './escape-cutscene.mjs';
 import {EAST_PHOTO_VIEW} from './east-photo-detail.mjs';
 import {COURTYARD_PHOTO_VIEW} from './courtyard-photo-detail.mjs';
 import {REAR_COURT_PHOTO_VIEW} from './rear-court-photo-detail.mjs';
@@ -50,16 +86,14 @@ import {WEST_FORWARD_END_PHOTO_VIEW} from './west-forward-end-photo-detail.mjs';
 import {WEST_LAWN_PHOTO_VIEW} from './west-lawn-photo-detail.mjs';
 import {ENTRANCE_WEST_PHOTO_VIEW} from './entrance-west-photo-detail.mjs';
 const renderer=new THREE.WebGLRenderer({canvas:document.getElementById('game'),antialias:true});renderer.setPixelRatio(Math.min(devicePixelRatio,1.5));renderer.setSize(innerWidth,innerHeight);renderer.outputColorSpace=THREE.SRGBColorSpace;renderer.toneMapping=THREE.ACESFilmicToneMapping;renderer.toneMappingExposure=1.25;renderer.shadowMap.enabled=true;renderer.shadowMap.type=THREE.PCFSoftShadowMap;
-const exterior=createEscapeExterior(THREE,innerWidth/innerHeight),replay=document.getElementById('replay'),clock=new THREE.Clock();
+const exterior=createEscapeExterior(THREE,innerWidth/innerHeight),clock=new THREE.Clock();
 const layouts=createAerialLayouts(THREE,exterior);bindLayoutToggles(layouts,document.getElementById('layoutControls'));
 bindPlanterToggle(exterior,document);
 loadEscapeFrontage(THREE,exterior).catch(console.warn);
 const controls=createAerialControls(exterior.camera);let navigationTarget=[12,5,-12],moved=false;
-const cutscene=createEscapeCutscene(document.getElementById('escapeCutscene'),()=>{replay.hidden=false;navigationTarget=[55,1,-7];controls.sync(navigationTarget);},{getCamera:()=>exterior.camera,reducedMotion:matchMedia('(prefers-reduced-motion: reduce)').matches});
 let fittedLayouts=false;
-function fitLayouts(){const target=fitAerialLayouts(THREE,exterior,layouts);if(!target)return;cutscene.reset();replay.hidden=false;controls.keys.clear();navigationTarget=target;moved=true;fittedLayouts=true;controls.sync(target);}
+function fitLayouts(){const target=fitAerialLayouts(THREE,exterior,layouts);if(!target)return;controls.keys.clear();navigationTarget=target;moved=true;fittedLayouts=true;controls.sync(target);}
 document.getElementById('fitLayouts').onclick=fitLayouts;
-function start(){exterior.scene.fog.density=.0019;fittedLayouts=false;controls.keys.clear();replay.hidden=true;clock.getDelta();cutscene.start();}replay.onclick=start;
 const view=(new URLSearchParams(location.search).get('view')??'').replace(/^new-hospital/,'annexe'),frontDetail=view==='front',towerDetail=view==='tower',rightDetail=view==='right',mapDetail=['plan','west-refine','historic-roads','historic-admin-grounds','historic-footprints'].includes(view),photoDetail=['admin-annexe-photo',...Object.keys(UPTON_VIEWS),...Object.keys(ANNEXE_VIEWS),...Object.keys(MAIN_ADMIN_VIEWS),...Object.keys(CHURTON_VIEWS),'annexe-site','annexe','annexe-plan','annexe-ground','front-wall','redesmere-passage','front-steps','redesmere-garden-photo','east-forward-end-photo','west-forward-end-photo','east-lawn-photo','entrance-east-photo','west-lawn-photo','entrance-west-photo','redesmere-photo','west-wing-side','west-wing-end','central-court-photo','inner-east-photo','west-front-photo','west-court-photo','inner-court-photo','east-photo','courtyard-photo','rear-court-photo'].includes(view);
 if(CHURTON_VIEWS[view]){const nav=document.getElementById('churtonNav');nav.hidden=false;nav.innerHTML='CHURTON WARD · '+[1,2,3,4,5,6].map(n=>'<a style="color:inherit;margin-right:12px" href="?view=churton-'+n+'">PHOTO '+n+'</a>').join('')+'<a style="color:inherit" href="./explore.html?view='+(view==='churton'||view==='churton-plan'?'churton-4':view)+'">WALK HERE</a>';}
 if(MAIN_ADMIN_VIEWS[view]){const nav=document.getElementById('churtonNav');nav.hidden=false;nav.innerHTML='MAIN/ADMIN · '+[1,2,3,4].map(n=>'<a style="color:inherit;margin-right:12px" href="?view=main-admin-'+n+'">PHOTO '+n+'</a>').join('')+'<a style="color:inherit;margin-right:12px" href="?view=main-admin-east">EAST SIDE</a><a style="color:inherit;margin-right:12px" href="?view=main-admin-plan">SITE PLAN</a><a style="color:inherit" href="./explore.html?view='+(['main-admin','main-admin-plan'].includes(view)?'main-admin-4':view)+'">WALK HERE</a>';}
@@ -71,11 +105,11 @@ function frameMap(){if(view==='historic-footprints'){exterior.scene.fog.density=
 function frameRight(){exterior.camera.position.set(72,28,108*Math.max(1,1/exterior.camera.aspect));navigationTarget=[72,9,0];exterior.camera.lookAt(...navigationTarget);}
 if(mapDetail)frameMap();else if(photoDetail)framePhoto();else if(rightDetail)frameRight();else if(towerDetail)frameTower();else if(frontDetail)frameFront();else resetAerial();
 controls.sync(navigationTarget);
-function frame(){requestAnimationFrame(frame);const dt=clock.getDelta();if(!document.hidden){if(cutscene.active)cutscene.update(dt);else controls.update(dt);}updateRoadLabels(THREE,layouts.roads,exterior.camera,innerWidth,innerHeight);renderer.render(exterior.scene,exterior.camera);}frame();
-function resetAerial(){exterior.scene.fog.density=.0019;cutscene.reset();replay.hidden=false;moved=false;fittedLayouts=false;controls.keys.clear();const shot=sampleLanding(0,{aspect:exterior.camera.aspect});navigationTarget=shot.target;exterior.camera.fov=46;exterior.camera.updateProjectionMatrix();exterior.camera.position.set(...shot.position);exterior.camera.lookAt(...shot.target);controls.sync(navigationTarget);}
+function frame(){requestAnimationFrame(frame);const dt=clock.getDelta();if(!document.hidden){controls.update(dt);}updateRoadLabels(THREE,layouts.roads,exterior.camera,innerWidth,innerHeight);renderer.render(exterior.scene,exterior.camera);}frame();
+function resetAerial(){exterior.scene.fog.density=.0019;moved=false;fittedLayouts=false;controls.keys.clear();const shot=sampleLanding(0,{aspect:exterior.camera.aspect});navigationTarget=shot.target;exterior.camera.fov=46;exterior.camera.updateProjectionMatrix();exterior.camera.position.set(...shot.position);exterior.camera.lookAt(...shot.target);controls.sync(navigationTarget);}
 document.getElementById('resetAerial').onclick=resetAerial;
 const canvas=document.getElementById('game');let drag=null;
-function takeControl(){fittedLayouts=false;if(cutscene.active){cutscene.skip();}if(!moved)controls.sync(navigationTarget);moved=true;}
+function takeControl(){fittedLayouts=false;if(!moved)controls.sync(navigationTarget);moved=true;}
 function stop(){controls.keys.clear();drag=null;clock.getDelta();}
 canvas.addEventListener('contextmenu',e=>e.preventDefault());
 canvas.addEventListener('pointerdown',e=>{if(e.button!==0&&e.button!==2)return;takeControl();drag={x:e.clientX,y:e.clientY,pan:e.button===2||e.shiftKey};canvas.setPointerCapture(e.pointerId);});
@@ -85,6 +119,5 @@ canvas.addEventListener('wheel',e=>{e.preventDefault();takeControl();controls.zo
 addEventListener('keydown',e=>{if(['KeyW','KeyA','KeyS','KeyD','ShiftLeft','ShiftRight'].includes(e.code)){e.preventDefault();takeControl();controls.keys.add(e.code);}if(e.code==='Escape')stop();});
 addEventListener('keyup',e=>controls.keys.delete(e.code));addEventListener('blur',stop);
 document.addEventListener('visibilitychange',stop);
-addEventListener('keydown',e=>{if(['Escape','Space','Enter'].includes(e.code)&&cutscene.active){e.preventDefault();cutscene.skip();}});
-addEventListener('resize',()=>{renderer.setSize(innerWidth,innerHeight);exterior.camera.aspect=innerWidth/innerHeight;exterior.camera.updateProjectionMatrix();if(cutscene.active)cutscene.resize();else if(fittedLayouts)fitLayouts();else if(!moved){if(mapDetail)frameMap();else if(photoDetail)framePhoto();else if(rightDetail)frameRight();else if(towerDetail)frameTower();else if(frontDetail)frameFront();else resetAerial();controls.sync(navigationTarget);}});
+addEventListener('resize',()=>{renderer.setSize(innerWidth,innerHeight);exterior.camera.aspect=innerWidth/innerHeight;exterior.camera.updateProjectionMatrix();if(fittedLayouts)fitLayouts();else if(!moved){if(mapDetail)frameMap();else if(photoDetail)framePhoto();else if(rightDetail)frameRight();else if(towerDetail)frameTower();else if(frontDetail)frameFront();else resetAerial();controls.sync(navigationTarget);}});
 </script></body></html>

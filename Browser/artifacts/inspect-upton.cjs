@@ -8,7 +8,7 @@ const path=require('node:path');
   const page=await browser.newPage({viewport:{width:1440,height:1000}}),errors=[];
   page.on('pageerror',e=>errors.push(e.message));
   for(const view of ['upton','upton-plan','upton-ground']){
-   await page.goto('http://127.0.0.1:1829/escape-preview.html?view='+view);
+   await page.goto('http://127.0.0.1:1829/aerial.html?view='+view);
    await page.waitForTimeout(1800);
    await page.addStyleTag({content:'#previewNav,#layoutControls,#aerialHelp,#replay {display:none!important}'});
    await page.screenshot({path:path.join(__dirname,view+'.png')});
