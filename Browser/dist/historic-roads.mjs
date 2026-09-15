@@ -26,32 +26,14 @@ const teardropSurround=bezier([266,32],[
  [[262,40],[258,46],[253,51]],[[248,57],[240,59],[237,53]],
  [[232,47],[235,39],[243,37]],[[250,36],[260,33],[266,32]]
 ]);
-const nearGarden=bezier([102,84],[
- [[106,89],[119,93],[119,104]],[[119,113],[119,121],[116,126]],
- [[113,133],[106,136],[100,136]],[[82,136],[62,136],[45,136]],
- [[45,119],[45,101],[45,84]]
-]).map(p=>ap(...p));
-const nearGardenGrass=bezier([100.5,87],[
- [[105,92],[116.5,94],[116.5,104]],[[116.5,112],[116.5,118],[116.5,119]],
- [[116.5,122],[115,125],[113.8,127]],[[111,131],[105,133.5],[99,133.5]],
- [[82,133.5],[65,133.5],[47.5,133.5]],[[47.5,118],[47.5,103],[47.5,87]],
- [[65,87],[85,87],[100.5,87]]
-]).map(p=>ap(...p));
-const nearFrontLawn=bezier([14,53],[
- [[40,53],[70,53],[92,53]],[[92,60],[92,67],[92,74]],
- [[70,74],[46,74],[29,74]],[[21,74],[14,69],[14,63]],
- [[14,59],[14,56],[14,53]]
-]).map(p=>ap(...p));
-// Main/admin photograph: camera looks across the near junction towards the
-// annexe. The left-hand circuit encloses parking with a rounded near end and
-// a grass strip along the avenue. Trees hide the far edge; retain the map fit.
+// Extend the lawns to the avenue's inner border, leaving one six-unit road.
+// Matching quarter-circle corners flare the central approach into both sides.
+const entranceCorner=bezier([25,80.4],[[[15.059,80.4],[7,72.341],[7,62.4]]],24);
+const frontLawn=(side,end)=>[[7,53],[end,53],[end,80.4],...entranceCorner]
+ .map(([x,z])=>ap(side*x,z));
+const nearFrontLawn=frontLawn(1,92),westFrontLawn=frontLawn(-1,141);
+// Main/admin photograph: elevated view across the junction towards the annexe.
 export const ADMIN_ANNEXE_PHOTO_VIEW=Object.freeze({position:[244,11,37],target:[294,2,1],fov:58});
-const parkingEdge=bezier([52,114],[
- [[69,114],[89,114],[103,114]],[[109,114],[112,116],[112,121]],
- [[110,127],[105,129],[98,129]],[[83,129],[65,129],[52,129]],
- [[52,124],[52,118],[52,114]]
-]).map(p=>ap(...p));
-const parkingMouth=[[110,119],[121,119],[121,127],[108,127]].map(p=>ap(...p));
 const junction=bezier([249,39],[
  [[256,36],[262,30],frontWest],[[276,34],[269,47],[261,53]],
  [[256,57],[251,58],[245,55]],[[245,50],[247,44],[249,39]]
@@ -59,11 +41,8 @@ const junction=bezier([249,39],[
 // Only exposed boundaries receive kerbs: no kerb crosses a road mouth.
 export const HISTORIC_KERBS=Object.freeze([
  {name:'Admin island kerb',points:ADMIN_TEARDROP},
- {name:'Annexe avenue lawn kerb',points:nearFrontLawn},
- // Follow the actual lawn edge, leaving the parking entrance open.
- {name:'Annexe parking-side kerb',points:nearGardenGrass.slice(36,61)},
- {name:'Annexe junction inner kerb',points:nearGardenGrass.slice(72).concat(nearGardenGrass.slice(1,25))}
-
+ {name:'Annexe avenue lawn kerb',points:nearFrontLawn.concat([nearFrontLawn[0]])},
+ {name:'Annexe west avenue lawn kerb',points:westFrontLawn.concat([westFrontLawn[0]])}
 ]);
 // Blue markings are route guides. Regularise the new roads to the estate axes
 // north of admin and the annexe axes at its courts, with 45-degree corner cuts.
@@ -95,7 +74,7 @@ const annexeOuterEastRoad=bezier(outerCrossing,[
  [[229,138],[253,142],[274,144]],[[306,151],[338,158],[371,159]],
  [[421,160],[475,155],[515,145]],[[546,138],[576,129],[600,120]]
 ]);
-export const HISTORIC_ROADS_SOURCE=Object.freeze({clean:'User attachment: roads/clean.png',annotations:'User attachment: roads/annotated.png',revision:'Research/historic-roads/admin-road-reroute.png',previousLayout:'Research/historic-roads/interbuilding-alarm-board.png',previousPhoto:'Research/historic-roads/admin-to-annexe-photo.png',orientation:'Research/historic-roads/admin-to-annexe-orientation.png',note:'Photo-estimated circulation. The original purple/pink marks identify buildings and blue identifies the shared lane. The later yellow/blue aerial relocates islands and extends the Historic roads. The Main/admin-to-annexe photograph refines the curved junction, parking entrance and exposed kerbs; its blue arrow supplies viewing direction only. The later purple selection refines the roads and elongated lawns between Main/admin (blue) and the annexe (yellow); coloured circles are selection guides only. The September aerial moves the purple frontage drive to red, adds the yellow crossing and outer roads, and removes blue perimeter, spur and entrance sections. The shared lane east of the new crossing appears only with Modern.'});
+export const HISTORIC_ROADS_SOURCE=Object.freeze({clean:'User attachment: roads/clean.png',annotations:'User attachment: roads/annotated.png',revision:'Research/historic-roads/annexe-grass-road-correction.png',previousRevision:'Research/historic-roads/admin-road-reroute.png',previousLayout:'Research/historic-roads/interbuilding-alarm-board.png',previousPhoto:'Research/historic-roads/admin-to-annexe-photo.png',orientation:'Research/historic-roads/admin-to-annexe-orientation.png',note:'Photo-estimated circulation. The original purple/pink marks identify buildings and blue identifies the shared lane. The later yellow/blue aerial relocates islands and extends the Historic roads. The Main/admin-to-annexe photograph refines the curved junction, parking entrance and exposed kerbs; its blue arrow supplies viewing direction only. The later purple selection refines the roads and elongated lawns between Main/admin (blue) and the annexe (yellow); coloured circles are selection guides only. The September aerial moves the purple frontage drive to red, adds the yellow crossing and outer roads, and removes blue perimeter, spur and entrance sections. The shared lane east of the new crossing appears only with Modern. The latest blue/yellow correction removes the garden circuit and parking to expose terrain grass, restores a single-width annexe avenue and curves both sides of its central entrance.'});
 // The marked Churton grid and church-to-north route are removed; Parsons Lane remains shared.
 export const HISTORIC_ROADS=Object.freeze([
  {name:'Historic lane continuation',width:6,points:adminFrontDrive},
@@ -106,7 +85,6 @@ export const HISTORIC_ROADS=Object.freeze([
  {name:'Annexe inner east road',width:6,points:annexeInnerEastRoad},
  {name:'Annexe outer east road',width:6,points:annexeOuterEastRoad},
  {name:'Northern diagonal road',width:6,points:[frontEast,ap(-198,84),ap(-245,84)]},
- {name:'Annexe rectangular garden circuit',width:4,points:nearGarden},
  {name:'Admin north service road',width:6,points:[frontWest,[233,-6],[233,-62],[247,-76],[262,-76],[270,-84],[270,-132],[314,-176],[325,-176]]},
  {name:'Annexe east cross-drive',width:5,points:[[96,84],[96,25]].map(p=>ap(...p))},
  {name:'Annexe east court circuit',width:4.5,points:annexeCourtLoop},
@@ -122,8 +100,7 @@ export const HISTORIC_GRAVEL=Object.freeze([
 export const HISTORIC_PAVING=Object.freeze([
  {name:'Admin teardrop black surround',points:teardropSurround},
  {name:'Admin east black link',points:junction},
- {name:'Annexe garden black margin',points:nearGarden},
- {name:'Annexe front black apron',points:[ap(-141,49),ap(96,49),ap(96,84),ap(-141,84)]},
+ {name:'Annexe front black apron',points:[ap(-141,49),ap(96,49),ap(96,81),ap(-141,81)]},
  {name:'Annexe central entrance black approach',points:[ap(-7,25),ap(7,25),ap(7,79),ap(-7,79)]},
  {name:'Annexe west court black approach',points:[ap(-78,18),ap(-52,18),ap(-52,48),ap(-78,48)]},
  {name:'Annexe east court black approach',points:[ap(52,18),ap(78,18),ap(78,48),ap(52,48)]},
@@ -136,11 +113,10 @@ export const HISTORIC_GRASS=Object.freeze([
  ])},
  {name:'Admin roundabout grass island',points:circle(ADMIN_ISLAND_CENTER,5.9)},
  {name:'Admin teardrop grass island',points:ADMIN_TEARDROP},
- {name:'Annexe rectangular grass island',points:nearGardenGrass},
  {name:'East annexe front lawn',points:nearFrontLawn},
  {name:'Annexe east court grass island',points:annexeCourtGrass},
  {name:'Annexe end grass island',points:annexeEndGrass},
- {name:'West annexe front lawn',points:[ap(-14,52),ap(-130,52),ap(-130,72),ap(-14,72)]}
+ {name:'West annexe front lawn',points:westFrontLawn}
 ]);
 export function createHistoricRoads(THREE,exterior){
  const group=new THREE.Group();group.name='Historic roads and surfaces';group.userData.source=HISTORIC_ROADS_SOURCE;
@@ -172,8 +148,6 @@ export function createHistoricRoads(THREE,exterior){
  for(const area of HISTORIC_GRAVEL)polygon(area.name,area.points,gravel,.265);
  for(const area of HISTORIC_PAVING)polygon(area.name,area.points,paving,.28);
  for(const area of HISTORIC_GRASS)polygon(area.name,area.points,grass,.31);
- polygon('Annexe inset parking surface',parkingEdge,asphalt,.325);
- polygon('Annexe parking entrance',parkingMouth,asphalt,.33);
  for(const road of HISTORIC_ROADS)ribbon(road.name+' border',road.points,road.width+2*ROAD_STYLE.edgeWidth,edge,.32);
  for(const road of HISTORIC_ROADS)ribbon(road.name,road.points,road.width,asphalt,.34);
  for(const edge of HISTORIC_KERBS)ribbon(edge.name,edge.points,.32,kerb,.38);

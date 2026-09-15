@@ -80,9 +80,30 @@ for(const x of [104,115,125,138]){
  assert.equal(annexeSurface(x,66),'grass','End lawn must not be swallowed by the former apron');
  assert.equal(annexeSurface(x,51),'black road','The shared drive must remain continuous between both lawns');
 }
-for(const p of [[96,25],[96,51],[96,84],[146,39],[153,66],[119,123]])
- assert.equal(annexeSurface(...p),'black road','Court, avenue and parking connections must remain open');
-assert.equal(annexeSurface(111,101),'grass','Expanded garden must replace the oversized black margin');
+for(const p of [[96,25],[96,51],[96,84],[146,39],[153,66]])
+ assert.equal(annexeSurface(...p),'black road','Court and avenue connections must remain open');
+// The blue selection must expose terrain across the old road, pad and kerbs.
+for(const name of ['Annexe rectangular garden circuit','Annexe rectangular garden circuit border','Annexe garden black margin','Annexe inset parking surface','Annexe parking entrance','Annexe parking-side kerb','Annexe junction inner kerb'])
+ assert(!layouts.historicRoads.getObjectByName(name),'Removed garden geometry must leave no paving or kerbs');
+for(const [x,z] of [[45,110],[75,136],[119,104],[119,123],[75,121],[111,101]]){
+ const p=annexePoint(x,0,z);ray.set(new THREE.Vector3(p[0],2,p[2]),new THREE.Vector3(0,-1,0));
+ const visibleMeshes=[];exterior.model.traverseVisible(o=>{if(o.isMesh)visibleMeshes.push(o);});
+ const hits=ray.intersectObjects(visibleMeshes,false);
+ assert.equal(hits[0]?.object,exterior.terrain,'The whole cleared garden and parking must expose terrain grass');
+}
+// Sample the full avenue width, including the strip previously paved twice.
+for(const x of [-120,-80,-40,40,60,80]){
+ for(const z of [75,78,80])assert.equal(annexeSurface(x,z),'grass','Lawns must reach the avenue border');
+ for(const z of [81.2,84,86.8])assert.equal(annexeSurface(x,z),'black road','Avenue must retain its six-unit carriageway');
+ for(const z of [80.7,87.3])assert.equal(annexeSurface(x,z),'stone kerb','Both avenue edges must have exposed borders');
+ assert.notEqual(annexeSurface(x,88),'black road','No second road width may remain beyond the avenue');
+}
+// Both turns must be open, symmetric and curve progressively into the approach.
+for(const side of [-1,1]){
+ for(const p of [[6,55],[7,68],[10,75],[19,80],[25,83]])assert.equal(annexeSurface(side*p[0],p[1]),'black road','Each sweeping turn must be continuously paved');
+ for(const p of [[9,62],[12,68],[18,75],[28,79]])assert.equal(annexeSurface(side*p[0],p[1]),'grass','Grass must follow both rounded entrance corners');
+}
+for(const z of [30,45,60,75,84])assert.equal(annexeSurface(0,z),'black road','Entrance centre must stay open without a crossing kerb');
 // Sample both road edges as well as centre lines against the assembled buildings.
 const extensions=['Historic lane continuation','Admin east crossing drive','Annexe inner east road','Annexe outer east road','Admin north service road','Annexe east cross-drive','Annexe east court circuit','Annexe end lawn circuit'];
 for(const name of extensions){
@@ -103,7 +124,7 @@ for(const p of [[323.85,127.5],[425.99,105.17],[273,151],[255,97]])
 for(const name of ['Annexe perimeter road','Annexe rear service spur','Eastern entrance road'])
  assert(!layouts.historicRoads.getObjectByName(name));
 for(const p of [VIVIENNE_LANE[11],[216,131]])assert.equal(surfaceAt(...p),'black road','New roads must meet at the marked crossings');
-const garden=annexePoint(75,0,110);assert.equal(surfaceAt(garden[0],garden[2]),'grass','Near annexe garden must have a grass interior');
+
 for(const historic of [true,false])for(const modern of [true,false]){
  layouts.setVisible('historic',historic);layouts.setVisible('modern',modern);
  assert.equal(effective(layouts.historicRoads),historic);

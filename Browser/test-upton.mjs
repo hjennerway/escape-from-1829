@@ -28,6 +28,16 @@ assert(Math.abs((bounds.min.x+bounds.max.x)/2-axis)<1e-5,'All architectural deta
 for(const o of building.userData.openings)assert(building.userData.openings.some(p=>Math.abs(p.x+o.x)<1e-8&&p.y===o.y&&p.z===o.z),'Both storeys must have exactly mirrored windows');
 assert(new THREE.Box3().setFromObject(building).max.z<new THREE.Box3().setFromObject(exterior.chapel).min.z-20,'Building must stand behind the chapel with a clear lawn');
 const ray=new THREE.Raycaster(),obs=exteriorObstacles(THREE,exterior.model);
+assert.equal(building.userData.bays.length,4,'The outward facade has two mirrored pairs of canted bays');
+for(const bay of building.userData.bays){
+  const x=axis+bay.x,z=building.position.z+bay.z;
+  assert(obs.some(b=>obstacleContains(b,x,z-1.3)),'Projecting bay walls must stop a walker');
+  assert(!obs.some(b=>obstacleContains(b,x+2.75,z-1.8,.05)),'Canted bay corners must remain walkable');
+}
+for(const o of building.userData.openings){
+  assert.equal(o.style,'photo-two-light','Every facade uses the reference window style');
+  assert(o.y+o.h/2+.36<7.215,'Stone heads must clear the brick cornice');
+}
 for(const [x,z] of [[-20,-198],[-4.9,-185],[30,-201],[44,-186]])assert(obs.some(b=>obstacleContains(b,x,z)),'Mapped masonry must stop a walker');
 for(const [x,z] of [[-20,-186],[1,-185],[-55,-198]]){
   assert(!obs.some(b=>obstacleContains(b,x,z)),'OS recess must stay walkable');
