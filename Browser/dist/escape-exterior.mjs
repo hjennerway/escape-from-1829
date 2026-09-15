@@ -1,3 +1,4 @@
+import {matchEstateGrass} from './estate-grass.mjs';
 // Aerial interpretation of the user's outlined 1829 estate photograph.
 // Front road/reception is +Z; the corrected mast position is rear-left (-X, -Z).
 import {createPlanterLayer} from './planter-layer.mjs';
@@ -43,7 +44,8 @@ export function createEscapeExterior(THREE,aspect){
   scene.add(new THREE.HemisphereLight(0xe4eff2,0x59634a,2));
   const sun=new THREE.DirectionalLight(0xffe2b7,2.8);sun.position.set(145,120,50);sun.target.position.set(230,0,-10);scene.add(sun.target);sun.castShadow=true;
   sun.shadow.mapSize.set(4096,4096);Object.assign(sun.shadow.camera,{left:-360,right:360,top:300,bottom:-300,near:1,far:850});sun.shadow.bias=-.0003;sun.shadow.normalBias=.25;scene.add(sun);
-  const material=(color,extra={})=>new THREE.MeshStandardMaterial({color,roughness:.9,...extra});
+  const lawnColours=new Set([0x667752,0x638046,0x667b49]);
+  const material=(color,extra={})=>{const mat=new THREE.MeshStandardMaterial({color,roughness:.9,...extra});if(lawnColours.has(color))mat.userData.estateGrass=true;return mat;};
   const cream=material(0xd6d0ba),stone=material(0xa39f8a),glass=material(0x56737d,{roughness:.4,metalness:.3}),dark=material(0x303b3b),red=material(0x762c30);
   const grass=material(0x667752),hedge=material(0x3f543b),gravel=material(0x99917b),path=material(0xb0ac97),steel=material(0x78848a,{metalness:.65,roughness:.5});
   const batches=new Map();let seed=1829;
@@ -326,5 +328,8 @@ export function createEscapeExterior(THREE,aspect){
     items.forEach((b,i)=>{dummy.position.set(b.x,b.y,b.z);dummy.scale.set(b.w,b.h,b.d);dummy.rotation.set(0,b.rotation,0);dummy.updateMatrix();batch.setMatrixAt(i,dummy.matrix);});model.add(batch);}
   for(const [parent,canopy] of [[model,crowns],[planters,planterCrowns]])for(const {mat,items} of canopy){const batch=new THREE.InstancedMesh(new THREE.IcosahedronGeometry(1,1),mat,items.length);batch.castShadow=true;batch.receiveShadow=true;
     items.forEach((b,i)=>{dummy.position.set(b.x,b.y,b.z);dummy.scale.set(b.s,b.s*.85,b.s);dummy.rotation.set(0,i,0);dummy.updateMatrix();batch.setMatrixAt(i,dummy.matrix);});parent.add(batch);}
+  const lawnMaterials=new Set();
+  model.traverse(object=>{for(const mat of (Array.isArray(object.material)?object.material:[object.material]))if(mat?.userData.estateGrass)lawnMaterials.add(mat);});
+  for(const mat of lawnMaterials)matchEstateGrass(mat,grass);
   return {scene,camera,model,terrain,legacyAccess,mast,chapel,waterTower,estateChimney,annexe,newHospital:annexe,churtonWard,uptonFrithOscroft,mainAdmin,adminCorridor,planters};
 }

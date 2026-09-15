@@ -1,3 +1,4 @@
+import {matchEstateGrass} from './estate-grass.mjs';
 import {missingHistoricFootprints} from './historic-footprints.mjs';
 import {annexePoint} from './annexe.mjs';
 import {VIVIENNE_LANE} from './modern-entrance.mjs';
@@ -30,10 +31,11 @@ const nearGarden=bezier([102,84],[
  [[113,133],[106,136],[100,136]],[[82,136],[62,136],[45,136]],
  [[45,119],[45,101],[45,84]]
 ]).map(p=>ap(...p));
-const nearGardenGrass=bezier([99,90],[
- [[103,95],[114,96],[114,105]],[[114,113],[114,119],[111,124]],
- [[108,129],[103,131],[98,131]],[[82,131],[64,131],[50,131]],
- [[50,118],[50,104],[50,90]],[[65,90],[85,90],[99,90]]
+const nearGardenGrass=bezier([100.5,87],[
+ [[105,92],[116.5,94],[116.5,104]],[[116.5,112],[116.5,118],[116.5,119]],
+ [[116.5,122],[115,125],[113.8,127]],[[111,131],[105,133.5],[99,133.5]],
+ [[82,133.5],[65,133.5],[47.5,133.5]],[[47.5,118],[47.5,103],[47.5,87]],
+ [[65,87],[85,87],[100.5,87]]
 ]).map(p=>ap(...p));
 const nearFrontLawn=bezier([14,53],[
  [[40,53],[70,53],[92,53]],[[92,60],[92,67],[92,74]],
@@ -49,7 +51,7 @@ const parkingEdge=bezier([52,114],[
  [[110,127],[105,129],[98,129]],[[83,129],[65,129],[52,129]],
  [[52,124],[52,118],[52,114]]
 ]).map(p=>ap(...p));
-const parkingMouth=[[110,119],[117,119],[117,125],[108,125]].map(p=>ap(...p));
+const parkingMouth=[[110,119],[121,119],[121,127],[108,127]].map(p=>ap(...p));
 const junction=bezier([249,39],[
  [[256,36],[262,30],frontWest],[[276,34],[269,47],[261,53]],
  [[256,57],[251,58],[245,55]],[[245,50],[247,44],[249,39]]
@@ -58,22 +60,21 @@ const junction=bezier([249,39],[
 export const HISTORIC_KERBS=Object.freeze([
  {name:'Admin island kerb',points:ADMIN_TEARDROP},
  {name:'Annexe avenue lawn kerb',points:nearFrontLawn},
- {name:'Annexe parking-side kerb',points:bezier([50,131],[
-  [[67,131],[83,131],[98,131]],[[104,131],[109,129],[112,125]]
- ]).map(p=>ap(...p))},
- {name:'Annexe junction inner kerb',points:bezier([114,119],[
-  [[114,114],[114,109],[114,105]],[[114,96],[103,95],[99,90]],
-  [[85,90],[65,90],[50,90]]
- ]).map(p=>ap(...p))},
- {name:'Annexe junction outer kerb',points:bezier([45,139],[
-  [[64,139],[84,139],[100,139]],[[109,139],[116,135],[119,128]],
-  [[123,121],[122,112],[122,104]],[[122,92],[109,86],[106,83]]
- ]).map(p=>ap(...p))}
+ // Follow the actual lawn edge, leaving the parking entrance open.
+ {name:'Annexe parking-side kerb',points:nearGardenGrass.slice(36,61)},
+ {name:'Annexe junction inner kerb',points:nearGardenGrass.slice(72).concat(nearGardenGrass.slice(1,25))}
+
 ]);
 // Blue markings are route guides. Regularise the new roads to the estate axes
 // north of admin and the annexe axes at its courts, with 45-degree corner cuts.
-const annexeEndLoop=[[106,74],[145,74],[153,66],[153,62],[147,56],[106,56],[102,60],[102,70],[106,74]].map(p=>ap(...p));
-export const HISTORIC_ROADS_SOURCE=Object.freeze({clean:'User attachment: roads/clean.png',annotations:'User attachment: roads/annotated.png',revision:'Research/historic-roads/admin-to-annexe-photo.png',orientation:'Research/historic-roads/admin-to-annexe-orientation.png',note:'Photo-estimated circulation. The original purple/pink marks identify buildings and blue identifies the shared lane. The later yellow/blue aerial relocates islands and extends the Historic roads. The Main/admin-to-annexe photograph refines the curved junction, parking entrance and exposed kerbs; its blue arrow supplies viewing direction only.'});
+// The purple selection on the alarm board contains parallel elongated lawns.
+// A shared cross-lane replaces overlapping loops and the oversized black apron.
+// Coordinates follow the annexe axes; dimensions remain visual estimates.
+const annexeCourtLoop=[[96,25],[140,25],[146,31],[146,45],[140,51],[96,51]].map(p=>ap(...p));
+const annexeEndLoop=[[96,51],[147,51],[153,57],[153,78],[147,84],[96,84]].map(p=>ap(...p));
+const annexeCourtGrass=[[99,28],[139,28],[143,32],[143,44],[139,48],[99,48]].map(p=>ap(...p));
+const annexeEndGrass=[[99,54],[146,54],[150,58],[150,76],[146,80],[99,80]].map(p=>ap(...p));
+export const HISTORIC_ROADS_SOURCE=Object.freeze({clean:'User attachment: roads/clean.png',annotations:'User attachment: roads/annotated.png',revision:'Research/historic-roads/interbuilding-alarm-board.png',previousPhoto:'Research/historic-roads/admin-to-annexe-photo.png',orientation:'Research/historic-roads/admin-to-annexe-orientation.png',note:'Photo-estimated circulation. The original purple/pink marks identify buildings and blue identifies the shared lane. The later yellow/blue aerial relocates islands and extends the Historic roads. The Main/admin-to-annexe photograph refines the curved junction, parking entrance and exposed kerbs; its blue arrow supplies viewing direction only. The later purple selection refines the roads and elongated lawns between Main/admin (blue) and the annexe (yellow); coloured circles are selection guides only.'});
 export const HISTORIC_ROADS=Object.freeze([
  {name:'Churton west road',width:5,points:[[-77,-155],[-77,-99],[-77,-41],[-77,36]]},
  {name:'Churton north cross-road',width:5,points:[[-115,-99],[-77,-99],[-12,-99]]},
@@ -90,11 +91,9 @@ export const HISTORIC_ROADS=Object.freeze([
  {name:'Eastern entrance road',width:6,points:bezier([229,72],[[[241,74],[252,83],[255,97]]]).concat([[273,151],[285,206]])},
  {name:'Annexe rectangular garden circuit',width:4,points:nearGarden},
  {name:'Admin north service road',width:6,points:[frontWest,[233,-6],[233,-62],[247,-76],[262,-76],[270,-84],[270,-132],[314,-176],[325,-176]]},
- {name:'Annexe east cross-drive',width:6,points:[[96,84],[96,28]].map(p=>ap(...p))},
- {name:'Annexe east court circuit',width:6,points:[[96,28],[100,24],[124,24],[128,28],[128,44],[124,48],[96,48]].map(p=>ap(...p))},
- {name:'Annexe end lawn circuit',width:6,points:annexeEndLoop},
- {name:'Annexe end lawn avenue link',width:6,points:[[110,84],[110,74]].map(p=>ap(...p))},
- {name:'Annexe end lawn cross-drive link',width:6,points:[[96,56],[106,56]].map(p=>ap(...p))},
+ {name:'Annexe east cross-drive',width:5,points:[[96,84],[96,25]].map(p=>ap(...p))},
+ {name:'Annexe east court circuit',width:4.5,points:annexeCourtLoop},
+ {name:'Annexe end lawn circuit',width:4.5,points:annexeEndLoop},
 ]);
 export const HISTORIC_GRAVEL=Object.freeze([
  {name:'1829 west side gravel',points:[[-73,-36],[-55,-36],[-55,44],[-73,44]]},
@@ -107,11 +106,11 @@ export const HISTORIC_PAVING=Object.freeze([
  {name:'Admin teardrop black surround',points:teardropSurround},
  {name:'Admin east black link',points:junction},
  {name:'Annexe garden black margin',points:nearGarden},
- {name:'Annexe front black apron',points:[ap(-141,49),ap(141,49),ap(141,84),ap(-141,84)]},
+ {name:'Annexe front black apron',points:[ap(-141,49),ap(96,49),ap(96,84),ap(-141,84)]},
  {name:'Annexe central entrance black approach',points:[ap(-7,25),ap(7,25),ap(7,79),ap(-7,79)]},
  {name:'Annexe west court black approach',points:[ap(-78,18),ap(-52,18),ap(-52,48),ap(-78,48)]},
  {name:'Annexe east court black approach',points:[ap(52,18),ap(78,18),ap(78,48),ap(52,48)]},
- {name:'Annexe end lawn black apron',points:[[102,53],[145,53],[157,65],[145,79],[102,79]].map(p=>ap(...p))}
+ {name:'Annexe end lawn black apron',points:[[96,51],[147,51],[153,57],[153,78],[147,84],[96,84]].map(p=>ap(...p))}
 ]);
 export const HISTORIC_GRASS=Object.freeze([
  {name:'Churton western green',points:[[-112,-95],[-81,-95],[-81,-45],[-112,-45]]},
@@ -124,13 +123,15 @@ export const HISTORIC_GRASS=Object.freeze([
  {name:'Admin teardrop grass island',points:ADMIN_TEARDROP},
  {name:'Annexe rectangular grass island',points:nearGardenGrass},
  {name:'East annexe front lawn',points:nearFrontLawn},
- {name:'Annexe end grass island',points:[[108,60],[142,60],[146,64],[146,66],[142,70],[108,70]].map(p=>ap(...p))},
+ {name:'Annexe east court grass island',points:annexeCourtGrass},
+ {name:'Annexe end grass island',points:annexeEndGrass},
  {name:'West annexe front lawn',points:[ap(-14,52),ap(-130,52),ap(-130,72),ap(-14,72)]}
 ]);
 export function createHistoricRoads(THREE,exterior){
  const group=new THREE.Group();group.name='Historic roads and surfaces';group.userData.source=HISTORIC_ROADS_SOURCE;
  const material=color=>new THREE.MeshStandardMaterial({color,roughness:1});
  const asphalt=material(0x17191a),paving=material(0x17191a),gravel=material(0xb4b3aa),grass=material(0x60784b),brown=material(0x87542f),kerb=material(0xa8a79b);
+ matchEstateGrass(grass,exterior.terrain.material);
  // Separate close ground layers at the higher OS overview camera as well.
  for(const [mat,order] of [[gravel,1],[paving,2],[grass,3],[asphalt,4],[brown,5],[kerb,6]]){mat.polygonOffset=true;mat.polygonOffsetFactor=-order;mat.polygonOffsetUnits=-order*2;}
  // Deterministic stone flecks, at world scale, remain legible on close approach.

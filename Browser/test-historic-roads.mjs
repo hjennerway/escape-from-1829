@@ -58,8 +58,18 @@ const endIsland=annexePoint(125,0,65);
 assert.equal(surfaceAt(endIsland[0],endIsland[2]),'grass','New end-lawn circuit must retain its grass island');
 const crossDrive=annexePoint(96,0,64);
 assert.equal(surfaceAt(crossDrive[0],crossDrive[2]),'black road','New cross-drive must cut through the former continuous lawn');
+// The selected gap now has two exposed elongated lawns and a connected lane.
+const annexeSurface=(x,z)=>{const p=annexePoint(x,0,z);return surfaceAt(p[0],p[2]);};
+for(const x of [104,115,125,138]){
+ assert.equal(annexeSurface(x,39),'grass','Court lawn must stay exposed along its length');
+ assert.equal(annexeSurface(x,66),'grass','End lawn must not be swallowed by the former apron');
+ assert.equal(annexeSurface(x,51),'black road','The shared drive must remain continuous between both lawns');
+}
+for(const p of [[96,25],[96,51],[96,84],[146,39],[153,66],[119,123]])
+ assert.equal(annexeSurface(...p),'black road','Court, avenue and parking connections must remain open');
+assert.equal(annexeSurface(111,101),'grass','Expanded garden must replace the oversized black margin');
 // Sample both road edges as well as centre lines against the assembled buildings.
-const extensions=['Admin north service road','Annexe east cross-drive','Annexe east court circuit','Annexe end lawn circuit','Annexe end lawn avenue link','Annexe end lawn cross-drive link'];
+const extensions=['Admin north service road','Annexe east cross-drive','Annexe east court circuit','Annexe end lawn circuit'];
 for(const name of extensions){
  const road=HISTORIC_ROADS.find(road=>road.name===name);assert(road);
  for(let i=1;i<road.points.length;i++){
