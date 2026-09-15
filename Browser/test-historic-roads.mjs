@@ -12,6 +12,19 @@ const effective=o=>{for(;o;o=o.parent)if(!o.visible)return false;return true;};
 assert.deepEqual(HISTORIC_ROADS.find(r=>r.name==='Historic lane continuation').points.slice(0,2),VIVIENNE_LANE.slice(7,9),'Historic continuation must meet the saved lane exactly');
 exterior.model.updateMatrixWorld(true);
 layouts.historicRoads.traverse(o=>{if(!o.isMesh)return;const g=o.geometry,p=g.attributes.position;for(let i=0;i<p.count;i++)assert(Number.isFinite(p.getX(i))&&Number.isFinite(p.getY(i))&&Number.isFinite(p.getZ(i)));const n=g.attributes.normal,normal=new THREE.Vector3(),matrix=new THREE.Matrix3().getNormalMatrix(o.matrixWorld);for(let i=0;i<n.count;i++){normal.fromBufferAttribute(n,i).applyMatrix3(matrix);assert(normal.y>.99,'All surface triangles must face up');}const bounds=new THREE.Box3().setFromObject(o);assert(bounds.min.y>.25&&bounds.max.y<.4,'Road surfaces must clear terrain and remain below walking collision height');});
+// Compare rendered road materials and sample the visible pale border.
+const modernRoad=layouts.roads.getObjectByName('Warren Lane');
+for(const road of HISTORIC_ROADS){
+ const surface=layouts.historicRoads.getObjectByName(road.name),border=layouts.historicRoads.getObjectByName(road.name+' border');
+ assert.equal(Math.round((border.userData.width-road.width)*10)/10,1.2,'Historic roads need the same 0.6-unit border on each side');
+ for(const [part,reference] of [[surface,modernRoad.children[1].children[0]],[border,modernRoad.children[0].children[0]]])part.traverse(mesh=>{
+  if(!mesh.isMesh)return;
+  assert(mesh.material.color.equals(reference.material.color),'Historic road and border colours must match Modern');
+  assert.equal(mesh.material.roughness,reference.material.roughness);
+ });
+}
+const borderRay=new THREE.Raycaster(new THREE.Vector3(8,2,-96.2),new THREE.Vector3(0,-1,0));
+assert.equal(borderRay.intersectObject(layouts.historicRoads,true)[0].object.material.color.getHex(),0xb8b9af,'Pale border must be exposed beyond the asphalt');
 // Registration is one similarity transform: no per-building stretching or rotation.
 assert(Math.hypot(...historicOSPoint(249,286).map((v,i)=>v-[0,19.5][i]))<1e-9);
 for(const name of ['chapel','churton']){const anchor=HISTORIC_OS_REGISTRATION[name],p=historicOSPoint(...anchor.pixel);assert(Math.hypot(p[0]-anchor.world[0],p[1]-anchor.world[1])<6,'Identified landmarks must agree within the reference-pick tolerance');}
@@ -36,13 +49,18 @@ assert(missing.segments.some(s=>s.sourceLoop>0),'Internal court edges must survi
 for(const name of ['Central service area · provisional','Northern service range · provisional','West detached block · provisional','Annexe rear service area · provisional','Annexe end service area · provisional'])assert(!layouts.historicRoads.getObjectByName(name),'The earlier incorrect broad outlines must be removed');
 // Check the requested church clearance against the actual model, including trim.
 const churchBounds=new THREE.Box3().setFromObject(exterior.chapel);
-for(const name of ['Churton north cross-road','North ward road']){
+for(const name of ['North ward road']){
  const road=HISTORIC_ROADS.find(r=>r.name===name);
  assert(road.points[0][1]-road.width/2>churchBounds.max.z+2,'Church-front road needs a clear verge beyond the chapel footprint');
 }
 // Ray checks distinguish a real grass island from a painted disk covered by road.
 const ray=new THREE.Raycaster();
 function surfaceAt(x,z){ray.set(new THREE.Vector3(x,2,z),new THREE.Vector3(0,-1,0));return ray.intersectObject(layouts.historicRoads,true)[0]?.object.userData.surface;}
+for(const name of ['Churton west road','Churton north cross-road','Churton estate cross-road']){
+ assert(!layouts.historicRoads.getObjectByName(name),'Circled historic roads must be removed');
+ assert(!layouts.historicRoads.getObjectByName(name+' border'),'Removed roads must not leave pale borders');
+}
+for(const [x,z] of [[-77,-130],[-100,-99],[-100,-41]])assert(!['black road','stone kerb'].includes(surfaceAt(x,z)),'The cleared grid must expose its grounds');
 assert.equal(surfaceAt(...ADMIN_ISLAND_CENTER),'grass','Roundabout centre must remain grass');
 for(let i=0;i<16;i++){const a=i*Math.PI/8;assert.equal(surfaceAt(ADMIN_ISLAND_CENTER[0]+9*Math.cos(a),ADMIN_ISLAND_CENTER[1]+9*Math.sin(a)),'black road','Roundabout must provide an unbroken circulating road');}
 assert.equal(surfaceAt(245,46),'grass','Relocated teardrop must remain exposed inside its black surround');
@@ -52,7 +70,7 @@ assert(!HISTORIC_GRAVEL.some(area=>area.name.startsWith('Annexe')),'No annexe gr
 for(const area of HISTORIC_PAVING){
  const mesh=layouts.historicRoads.getObjectByName(area.name);
  assert.equal(mesh.userData.surface,'black road');
- assert.equal(mesh.material.color.getHex(),0x17191a);
+ assert.equal(mesh.material.color.getHex(),0x555b5c);
 }
 const endIsland=annexePoint(125,0,65);
 assert.equal(surfaceAt(endIsland[0],endIsland[2]),'grass','New end-lawn circuit must retain its grass island');
@@ -94,7 +112,7 @@ for(const historic of [true,false])for(const modern of [true,false]){
  assert.equal(effective(layouts.historicRoads),historic);
  assert.equal(effective(layouts.roads.getObjectByName('Vivienne Smith Lane eastern continuation')),modern,'Blue eastern lane continuation belongs only to Modern');
  assert.equal(effective(exterior.legacyAccess),!historic&&modern,'Legacy tracks must disappear in Historic and return in Modern');
- const lane=layouts.roads.getObjectByName('Vivienne Smith Lane');assert.equal(lane.children[1].children[0].material.color.getHex(),historic?0x17191a:0x555b5c);
- const other=layouts.roads.getObjectByName('Warren Lane');assert.equal(other.children[1].children[0].material.color.getHex(),0x555b5c,'Changing shared-lane colour must not recolour other Modern roads');
+ const lane=layouts.roads.getObjectByName('Vivienne Smith Lane');assert.equal(lane.children[1].children[0].material.color.getHex(),0x555b5c);
+ const other=layouts.roads.getObjectByName('Warren Lane');assert.equal(other.children[1].children[0].material.color.getHex(),0x555b5c,'Road colours must remain consistent in every layout');
 }
 console.log('PASS: historic surface normals/heights, finite geometry, registered OS wall contours, existing-building exclusions, church clearance, circular island circulation, teardrop and annexe lawn surfaces, saved-lane junction, isolated materials and replacement visibility in all four layout combinations.');

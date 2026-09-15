@@ -1,6 +1,7 @@
 import {MODERN_ROAD_PATHS} from './modern-road-data.mjs';
 import {earthToScene} from './earth-registration.mjs';
 import {FRONT_BOUNDARY} from './front-boundary-wall.mjs';
+import {ROAD_STYLE} from './road-style.mjs';
 
 // The lane is fixed. Only this new, photo-estimated entrance joins its saved centreline.
 export const VIVIENNE_LANE=MODERN_ROAD_PATHS.find(path=>path.name==='Vivienne Smith Lane').coordinates.map(p=>earthToScene(...p));
@@ -32,9 +33,9 @@ export function createModernEntrance(THREE){
   const mouth=[left,...VIVIENNE_LANE.filter(([x])=>x>left[0]&&x<right[0]),right];
   const outline=[[-halfNeck,FRONT_BOUNDARY.z-1],...sides[0].map(p=>[p.x,p.z]),...mouth,...sides[1].slice().reverse().map(p=>[p.x,p.z]),[halfNeck,FRONT_BOUNDARY.z-1]];
   const shape=new THREE.Shape(outline.map(([x,z])=>new THREE.Vector2(x,-z)));
-  const asphalt=new THREE.MeshStandardMaterial({color:0x555b5c,roughness:1,polygonOffset:true,polygonOffsetFactor:-3,polygonOffsetUnits:-6});
+  const asphalt=new THREE.MeshStandardMaterial({color:ROAD_STYLE.asphalt,roughness:1,polygonOffset:true,polygonOffsetFactor:-3,polygonOffsetUnits:-6});
   const surface=new THREE.Mesh(new THREE.ShapeGeometry(shape),asphalt);surface.rotation.x=-Math.PI/2;surface.position.y=.36;surface.receiveShadow=true;surface.renderOrder=3;surface.name='Sweeping entrance asphalt';entrance.add(surface);
-  const kerb=new THREE.MeshStandardMaterial({color:0xb8b9af,roughness:1,polygonOffset:true,polygonOffsetFactor:-3,polygonOffsetUnits:-7});
+  const kerb=new THREE.MeshStandardMaterial({color:ROAD_STYLE.edge,roughness:1,polygonOffset:true,polygonOffsetFactor:-3,polygonOffsetUnits:-7});
   // Kerbs follow only the curved sides: no transverse stripe across the lane mouth or gate.
   for(let side=0;side<2;side++){
     const points=[new THREE.Vector3((side===0?-1:1)*halfNeck,.375,FRONT_BOUNDARY.z-1),...sides[side]],positions=[],indices=[];

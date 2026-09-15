@@ -1,12 +1,22 @@
 # Escape from 1829
 
+## Play the game
+
+[Launch Escape from 1829 on GitHub Pages](https://hjennerway.github.io/escape-from-1829/)
+
+Use `WASD` to move, the mouse to look, `Shift` to sprint, `C` or `Ctrl` to crouch, `F` to toggle the torch, and `Tab` to open the floor map. Hold `E` at wall artwork to inspect it, or at any of the five emergency exits to escape. NPCs pause whenever `E` is held.
+
+The browser build is served from [`Browser/dist`](Browser/dist). The Unity project and Blender source are included for continued development.
+
 ## Historic and Modern aerial layouts
 
 The aerial preview has separate **Historic** and **Modern** checkboxes. Historic starts on and Modern starts off. Either, both, or neither can be visible. Shared 1829/Redesmere geometry, the water tower, Churton and church appear once whenever either layout is on. The Annexe, Main/admin building, its connecting corridor and the freestanding chimney belong to Historic. Existing shared grounds and site context follow the shared group; switching both layouts off leaves the terrain.
 
-Modern includes thirteen saved Google Earth paths: Upton grange, Gerrard Crescent, Frost drive, Vivienne Smith Lane, Ross Avenue, Ross Avenue (Part 2), Upton Grange (Part 2), Lockwood View, Warren Lane, Parsons Lane, Parsons Lane (Upton Lea), Parsons Lane (1829 Central) and Valley drive. Vivienne Smith Lane and its label also appear in Historic, using the same single copy when both layouts are enabled. Each path has a camera-facing road-name label anchored to its centreline; the text stays readable while orbiting and zooming and follows its road’s layout visibility. **Fit layouts** frames all currently visible buildings and roads; ordinary toggles retain the camera for comparison. Expand **13 mapped paths** to see the road names. The layout controls are available throughout the aerial preview. Gameplay and walking retain the existing estate. The independent H planter toggle continues to work.
+Modern includes thirteen saved Google Earth paths: Upton grange, Gerrard Crescent, Frost drive, Vivienne Smith Lane, Ross Avenue, Ross Avenue (Part 2), Upton Grange (Part 2), Lockwood View, Warren Lane, Parsons Lane, Parsons Lane (Upton Lea), Parsons Lane (1829 Central) and Valley drive. Vivienne Smith Lane and all three Parsons Lane sections, with their labels, also appear in Historic, using the same single copies when both layouts are enabled. Each path has a camera-facing road-name label anchored to its centreline; the text stays readable while orbiting and zooming and follows its road’s layout visibility. **Fit layouts** frames all currently visible buildings and roads; ordinary toggles retain the camera for comparison. Expand **13 mapped paths** to see the road names. The layout controls are available throughout the aerial preview. Gameplay and walking retain the existing estate. The independent H planter toggle continues to work.
 
 The paths are bundled locally from the shared Google Earth project, with all 124 saved vertices retained and registered to the fixed 1829 anchor. Road widths are approximate. See [road provenance and layout details](Research/modern-layouts.md). Run `npm test` in `Browser`; the suite includes all four layout combinations, unchanged transforms, road geometry and landscape/portrait fitting.
+
+Historic and Modern roads share grey asphalt, pale 0.6-unit borders, and rounded joins and ends. Historic aprons and parking surfaces use the same asphalt colour, and exposed kerbs use the shared pale edge colour. Remaining Historic routes retain their existing widths and positions. The yellow-circled western Churton road and its two cross-roads have been removed; Parsons Lane remains visible in both layouts.
 
 ## Historic roads from the alarm-board plan
 
@@ -40,7 +50,7 @@ Use `aerial.html?view=historic-footprints` for the focused overhead comparison. 
 
 The blue-marked frontage correction moves the wall and hedge continuations to z=74, keeping their orientation and central opening. This leaves approximately one six-unit road width of grass between the boundary and the fixed Vivienne Smith Lane. The lawns and Reception approach extend to the moved wall.
 
-The sweeping, flared asphalt entrance is shared by Historic and Modern, using one copy alongside the shared lane. Its colour follows the selected layout and its curved kerbs meet the lane edge. A 26-unit-diameter semicircular paved forecourt now sits directly outside Reception, as clarified for the pink-marked area, with its flat side facing the door and its rounded edge opening onto the central approach. The curved edging leaves the approach open.
+The sweeping, flared asphalt entrance is shared by Historic and Modern, using one copy alongside the shared lane. Its grey asphalt and pale kerbs match the roads in both layouts. A 26-unit-diameter semicircular paved forecourt now sits directly outside Reception, as clarified for the pink-marked area, with its flat side facing the door and its rounded edge opening onto the central approach. The curved edging leaves the approach open.
 
 Use `aerial.html?view=front-entrance` to inspect the forecourt, gate, grass verge and junction together. Reference: `Research/front-entrance-annotated.png`. Dimensions remain photo-based estimates. The saved lane vertices and building locations are unchanged. The wall and forecourt also appear in walking/gameplay; the mapped lane junction belongs to the aerial layouts. Unity and Blender exports are unchanged. `Browser/test-modern-entrance.mjs` covers the shared curve, verge width, forecourt shape, surface continuity and clear gate-to-door walking access.
 
@@ -64,14 +74,6 @@ Open `aerial.html?view=main-admin` for an aerial, `?view=main-admin-plan` to com
 The outer east elevation of Redesmere follows `redesmere.jpg`, with `redesmere-loc.png` locating the westward view from the lawn and `redesmere-render.png` showing the previous model. It now has two canted brick bays, a pale green central entrance with a gabled canopy, fine sash windows and splayed stone heads, pale floor bands, slate roofs, tall chimney stacks and a low side room. The garden border and iron railing follow the established circa-1900 treatment; trees leave the marked sightline clear. The inner courtyard details and access routes remain in place. Open `aerial.html?view=redesmere-photo` for the comparison or `explore.html?view=redesmere-photo` to walk from it. Geometry is in `Browser/dist/redesmere-photo-detail.mjs`; dimensions and obscured details are visual estimates. The Unity and Blender exports are unchanged.
 
 Escape the 1829 building in Chester while Sylvia, Security, and the Deva asylum ghost search the corridors.
-
-## Play the game
-
-[Launch Escape from 1829 on GitHub Pages](https://hjennerway.github.io/escape-from-1829/)
-
-Use `WASD` to move, the mouse to look, `Shift` to sprint, `C` or `Ctrl` to crouch, `F` to toggle the torch, and `Tab` to open the floor map. Hold `E` at wall artwork to inspect it, or at any of the five emergency exits to escape. NPCs pause whenever `E` is held.
-
-The browser build is served from [`Browser/dist`](Browser/dist). The Unity project and Blender source are included for continued development.
 
 ## Building arrival (browser)
 

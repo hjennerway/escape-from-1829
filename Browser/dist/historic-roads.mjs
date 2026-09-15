@@ -2,6 +2,7 @@ import {matchEstateGrass} from './estate-grass.mjs';
 import {missingHistoricFootprints} from './historic-footprints.mjs';
 import {annexePoint} from './annexe.mjs';
 import {VIVIENNE_LANE} from './modern-entrance.mjs';
+import {ROAD_STYLE} from './road-style.mjs';
 
 // clean.png supplies straight edges; annotated.png identifies roads and buildings.
 // The alarm-board plan is schematic, not a survey. Coordinates are fitted to the
@@ -95,10 +96,8 @@ const annexeOuterEastRoad=bezier(outerCrossing,[
  [[421,160],[475,155],[515,145]],[[546,138],[576,129],[600,120]]
 ]);
 export const HISTORIC_ROADS_SOURCE=Object.freeze({clean:'User attachment: roads/clean.png',annotations:'User attachment: roads/annotated.png',revision:'Research/historic-roads/admin-road-reroute.png',previousLayout:'Research/historic-roads/interbuilding-alarm-board.png',previousPhoto:'Research/historic-roads/admin-to-annexe-photo.png',orientation:'Research/historic-roads/admin-to-annexe-orientation.png',note:'Photo-estimated circulation. The original purple/pink marks identify buildings and blue identifies the shared lane. The later yellow/blue aerial relocates islands and extends the Historic roads. The Main/admin-to-annexe photograph refines the curved junction, parking entrance and exposed kerbs; its blue arrow supplies viewing direction only. The later purple selection refines the roads and elongated lawns between Main/admin (blue) and the annexe (yellow); coloured circles are selection guides only. The September aerial moves the purple frontage drive to red, adds the yellow crossing and outer roads, and removes blue perimeter, spur and entrance sections. The shared lane east of the new crossing appears only with Modern.'});
+// The yellow-circled Churton grid is removed; Parsons Lane remains in the shared road layer.
 export const HISTORIC_ROADS=Object.freeze([
- {name:'Churton west road',width:5,points:[[-77,-155],[-77,-99],[-77,-41],[-77,36]]},
- {name:'Churton north cross-road',width:5,points:[[-115,-99],[-77,-99],[-12,-99]]},
- {name:'Churton estate cross-road',width:5,points:[[-115,-41],[-77,-41],[-51,-41],[-12,-41]]},
  {name:'North ward road',width:5,points:[[-12,-99],[28,-99],[28,-122],[68,-122]]},
  {name:'Historic lane continuation',width:6,points:[VIVIENNE_LANE[7],...adminFrontDrive]},
  {name:'Admin roundabout',width:5.5,points:circle(ADMIN_ISLAND_CENTER,9)},
@@ -150,10 +149,10 @@ export const HISTORIC_GRASS=Object.freeze([
 export function createHistoricRoads(THREE,exterior){
  const group=new THREE.Group();group.name='Historic roads and surfaces';group.userData.source=HISTORIC_ROADS_SOURCE;
  const material=color=>new THREE.MeshStandardMaterial({color,roughness:1});
- const asphalt=material(0x17191a),paving=material(0x17191a),gravel=material(0xb4b3aa),grass=material(0x60784b),brown=material(0x87542f),kerb=material(0xa8a79b);
+ const asphalt=material(ROAD_STYLE.asphalt),paving=material(ROAD_STYLE.asphalt),gravel=material(0xb4b3aa),grass=material(0x60784b),brown=material(0x87542f),kerb=material(ROAD_STYLE.edge),edge=material(ROAD_STYLE.edge);
  matchEstateGrass(grass,exterior.terrain.material);
  // Separate close ground layers at the higher OS overview camera as well.
- for(const [mat,order] of [[gravel,1],[paving,2],[grass,3],[asphalt,4],[brown,5],[kerb,6]]){mat.polygonOffset=true;mat.polygonOffsetFactor=-order;mat.polygonOffsetUnits=-order*2;}
+ for(const [mat,order] of [[gravel,1],[paving,2],[grass,3],[edge,3],[asphalt,4],[brown,5],[kerb,6]]){mat.polygonOffset=true;mat.polygonOffsetFactor=-order;mat.polygonOffsetUnits=-order*2;}
  // Deterministic stone flecks, at world scale, remain legible on close approach.
  const size=64,data=new Uint8Array(size*size*4);let seed=1829;
  for(let i=0;i<size*size;i++){seed=(Math.imul(seed,1664525)+1013904223)>>>0;const v=175+(seed%66);data.set([v,v,Math.max(0,v-7),255],i*4);}
@@ -161,7 +160,7 @@ export function createHistoricRoads(THREE,exterior){
  function polygon(name,points,mat,y){
   const shape=new THREE.Shape(points.map(([x,z])=>new THREE.Vector2(x,-z))),geometry=new THREE.ShapeGeometry(shape);
   const uv=geometry.attributes.uv;for(let i=0;i<uv.count;i++)uv.setXY(i,uv.getX(i)/3,uv.getY(i)/3);
-  const mesh=new THREE.Mesh(geometry,mat);mesh.rotation.x=-Math.PI/2;mesh.position.y=y;mesh.name=name;mesh.receiveShadow=true;mesh.userData.surface=(mat===asphalt||mat===paving)?'black road':mat===gravel?'gravel':mat===grass?'grass':mat===kerb?'stone kerb':'provisional brown outline';group.add(mesh);return mesh;
+  const mesh=new THREE.Mesh(geometry,mat);mesh.rotation.x=-Math.PI/2;mesh.position.y=y;mesh.name=name;mesh.receiveShadow=true;mesh.renderOrder=mat===asphalt?2:mat===edge?1:0;mesh.userData.surface=(mat===asphalt||mat===paving)?'black road':mat===gravel?'gravel':mat===grass?'grass':mat===kerb||mat===edge?'stone kerb':'provisional brown outline';group.add(mesh);return mesh;
  }
  function ribbon(name,points,width,mat,y){
   const part=new THREE.Group();part.name=name;part.userData.centerline=points;part.userData.width=width;group.add(part);
@@ -171,14 +170,15 @@ export function createHistoricRoads(THREE,exterior){
    const ox=-dz/length*width/2,oz=dx/length*width/2;
    part.add(polygon(name+' surface',[[a[0]+ox,a[1]+oz],[a[0]-ox,a[1]-oz],[b[0]-ox,b[1]-oz],[b[0]+ox,b[1]+oz]],mat,y));
   }
-  const geometry=new THREE.CircleGeometry(width/2,16);geometry.rotateX(-Math.PI/2);
-  for(const [x,z] of points){const cap=new THREE.Mesh(geometry,mat);cap.position.set(x,y,z);cap.receiveShadow=true;cap.userData.surface=mat===asphalt?'black road':mat===kerb?'stone kerb':'provisional brown outline';part.add(cap);}
+  const geometry=new THREE.CircleGeometry(width/2,ROAD_STYLE.roundSegments);geometry.rotateX(-Math.PI/2);
+  for(const [x,z] of points){const cap=new THREE.Mesh(geometry,mat);cap.position.set(x,y,z);cap.receiveShadow=true;cap.renderOrder=mat===asphalt?2:mat===edge?1:0;cap.userData.surface=mat===asphalt?'black road':mat===kerb||mat===edge?'stone kerb':'provisional brown outline';part.add(cap);}
  }
  for(const area of HISTORIC_GRAVEL)polygon(area.name,area.points,gravel,.265);
  for(const area of HISTORIC_PAVING)polygon(area.name,area.points,paving,.28);
  for(const area of HISTORIC_GRASS)polygon(area.name,area.points,grass,.31);
  polygon('Annexe inset parking surface',parkingEdge,asphalt,.325);
  polygon('Annexe parking entrance',parkingMouth,asphalt,.33);
+ for(const road of HISTORIC_ROADS)ribbon(road.name+' border',road.points,road.width+2*ROAD_STYLE.edgeWidth,edge,.32);
  for(const road of HISTORIC_ROADS)ribbon(road.name,road.points,road.width,asphalt,.34);
  for(const edge of HISTORIC_KERBS)ribbon(edge.name,edge.points,.32,kerb,.38);
  const missing=missingHistoricFootprints(THREE,exterior);group.userData.missingFootprints=missing;

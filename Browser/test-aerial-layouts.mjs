@@ -25,7 +25,7 @@ for(const historic of [true,false])for(const modern of [true,false]){
  layouts.setVisible('historic',historic);layouts.setVisible('modern',modern);
  for(const o of [frontage,exterior.chapel,exterior.waterTower,exterior.churtonWard])assert.equal(visible(o),historic||modern);
  for(const o of [exterior.annexe,exterior.mainAdmin,exterior.adminCorridor,exterior.estateChimney])assert.equal(visible(o),historic);
- for(const o of layouts.roads.children)assert.equal(visible(o),o.name==='Vivienne Smith Lane'?(historic||modern):modern);
+ for(const o of layouts.roads.children)assert.equal(visible(o),(o.name==='Vivienne Smith Lane'||o.name.startsWith('Parsons Lane'))?(historic||modern):modern);
  assert.equal(visible(exterior.terrain),true);
  assert.equal(exteriorObstacles(THREE,exterior.model).some(o=>obstacleContains(o,ESTATE_CHIMNEY.x,ESTATE_CHIMNEY.z)),historic,'A hidden chimney must not leave a collision obstacle');
  for(const aspect of [16/9,4/3,9/16]){
@@ -43,9 +43,15 @@ for(const historic of [true,false])for(const modern of [true,false]){
 layouts.setVisible('historic',true);layouts.setVisible('modern',false);
 const sharedLane=layouts.roads.getObjectByName('Vivienne Smith Lane');
 assert.equal(layouts.roads.children.filter(r=>r.name==='Vivienne Smith Lane').length,1,'Both layouts must use one copy of Vivienne Smith Lane');
-const historicRoadBounds=visibleLayoutBounds(THREE,layouts.roads),laneBounds=visibleLayoutBounds(THREE,sharedLane);assert(historicRoadBounds.equals(laneBounds),'Historic fitting must exclude every Modern-only road');
+const historicRoadBounds=visibleLayoutBounds(THREE,layouts.roads),sharedRoadBounds=new THREE.Box3();
+for(const road of layouts.roads.children.filter(r=>r.name==='Vivienne Smith Lane'||r.name.startsWith('Parsons Lane'))){
+ sharedRoadBounds.union(visibleLayoutBounds(THREE,road));
+ assert.equal(layouts.roads.children.filter(r=>r.name===road.name).length,1,'Shared roads must have only one copy');
+}
+assert(historicRoadBounds.equals(sharedRoadBounds),'Historic fitting must include Parsons Lane and exclude Modern-only roads');
 fitAerialLayouts(THREE,exterior,layouts);updateRoadLabels(THREE,layouts.roads,exterior.camera,900,1600);
 assert(visible(sharedLane.getObjectByName('Road label · Vivienne Smith Lane')),'The shared lane name must render in Historic');
+for(const road of layouts.roads.children.filter(r=>r.name.startsWith('Parsons Lane')))assert(visible(road.getObjectByName('Road label · '+road.name)),'Every Parsons Lane section must have a visible Historic label');
 assert(!visible(layouts.roads.getObjectByName('Warren Lane')),'Warren Lane is Modern-only');
 layouts.setVisible('historic',false);
 

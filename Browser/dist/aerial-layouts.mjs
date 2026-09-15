@@ -19,17 +19,15 @@ export function createAerialLayouts(THREE,exterior){
   const superseded=[exterior.legacyAccess];
   exterior.annexe.traverse(o=>{if(o.name==='Annexe drive')superseded.push(o);});
   exterior.mainAdmin.traverse(o=>{if(['Admin carriage approach','Admin forecourt lawn','Curved lawn stone edging','West side access','East curved carriage drive','East wing side access'].some(name=>o.name===name||o.name===name+' stone kerb'))superseded.push(o);});
-  const lane=roads.getObjectByName('Vivienne Smith Lane'),laneMaterials=new Map();
-  const clones=new Map();lane.traverse(o=>{if(!o.isMesh)return;if(!clones.has(o.material))clones.set(o.material,o.material.clone());o.material=clones.get(o.material);laneMaterials.set(o.material,o.material.color.clone());});
+  const lane=roads.getObjectByName('Vivienne Smith Lane');
+  const sharedRoads=new Set(['Vivienne Smith Lane','Parsons Lane','Parsons Lane (Upton Lea)','Parsons Lane (1829 Central)']);
   const state={historic:true,modern:false};
   function setVisible(layout,visible){
     if(layout!=='historic'&&layout!=='modern')throw new Error('Unknown estate layout: '+layout);
     state[layout]=Boolean(visible);historic.visible=state.historic;modern.visible=state.modern;
     shared.visible=state.historic||state.modern;
     for(const object of superseded)object.visible=!state.historic;
-    for(const [material,color] of laneMaterials)material.color.copy(state.historic?new THREE.Color(0x17191a):color);
-    entrance.getObjectByName('Sweeping entrance asphalt').material.color.set(state.historic?0x17191a:0x555b5c);
-    for(const road of roads.children)road.visible=state.modern||(state.historic&&road.name==='Vivienne Smith Lane');
+    for(const road of roads.children)road.visible=state.modern||(state.historic&&sharedRoads.has(road.name));
     lane.getObjectByName('Vivienne Smith Lane eastern continuation').visible=state.modern;
   }
   setVisible('modern',false);

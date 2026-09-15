@@ -34,6 +34,6 @@ assert.notEqual(surfaceAt(12,39).object.name,'Semicircular Reception paved forec
 for(const historic of [true,false])for(const modern of [true,false]){
  layouts.setVisible('historic',historic);layouts.setVisible('modern',modern);
  assert.equal(entrance.parent.visible,historic||modern,'The curve follows the shared lane in every layout combination');
- assert.equal(entrance.getObjectByName('Sweeping entrance asphalt').material.color.getHex(),historic?0x17191a:0x555b5c);
+ assert.equal(entrance.getObjectByName('Sweeping entrance asphalt').material.color.getHex(),0x555b5c);
 }
 console.log('PASS: wall translated without rotation, outer gravel replaced by grass, fixed-lane curved junction, upward kerbs and clear gate-to-door access.');
