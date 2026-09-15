@@ -1,4 +1,4 @@
-// The annexe, reconstructed from annexe/os-clean.png (417 x 433).
+// The annexe, registered against the original OS extract (417 x 433).
 // Similarity registration: 1829 Reception and chapel stay fixed. Pixel picks,
 // heights and concealed elevations are estimates; this is not a measured survey.
 export const ANNEXE_OS_REGISTRATION=Object.freeze({
@@ -19,10 +19,14 @@ export const ANNEXE_VIEWS=Object.freeze({
  'annexe-front-right':shot([10,1.8,108],[3,9,14],48),
  'annexe-img1':shot([28,1.8,124],[4,9,14],52),
  'annexe-side':shot([-57,2.5,-12],[-18,10,-3],63),
+ 'annexe-side-right':shot([57,2.5,-12],[18,10,-3],63),
  'annexe-ground':shot([0,1.8,89],[0,8,14],61),
  'annexe-plan':{position:[south[0],360,south[1]],target:[ANNEXE.x,0,ANNEXE.z],fov:52},
  'annexe-site':{position:[site[0]+(ANNEXE.x-north[0])*.01,680,site[1]+(ANNEXE.z-north[1])*.01],target:[site[0],0,site[1]],fov:59}
 });
+// The rear east L turns approximately 22 degrees counter-clockwise on the OS
+// plan. Both ranges rotate about their junction with the central spine.
+export const ANNEXE_REAR_EAST=Object.freeze({angle:22*Math.PI/180,pivot:[4,-28.5]});
 // Black masonry, expressed as rectangles in the OS building's 15-degree axes.
 // Front ward courts and rear courts remain open to the sky.
 export const ANNEXE_RANGES=Object.freeze([
@@ -37,7 +41,8 @@ export const ANNEXE_RANGES=Object.freeze([
    {name:label+' court inner return',rect:mirror([27,11,32,25]),h:8.4,rise:2},
    {name:label+' court front range',rect:mirror([27,23,51,29]),h:8.4,rise:2.3},
    {name:label+' court outer return',rect:mirror([46,11,51,25]),h:8.4,rise:2},
-   {name:label+' low rear gallery',rect:mirror([4,-18,65,-15]),h:4.3,rise:1.4}
+   // A solid corner projects into each void, leaving an L-shaped court.
+   {name:label+' court corner infill',rect:mirror([39,17,46,23]),h:8.4,rise:2}
   ];
  }),
  {name:'West end ward',rect:[-77,-11,-70,12],h:11.8,rise:2.6},
@@ -51,8 +56,8 @@ export const ANNEXE_RANGES=Object.freeze([
  {name:'Central rear spine',rect:[-5,-32,5,-5],h:8.4,rise:2.6},
  {name:'Rear west angled service range',rect:[-13,-48,-5,-29],h:8.4,rise:2.4,angle:.28},
  {name:'Rear service head',rect:[-18,-49,-5,-42],h:8.4,rise:2.5},
- {name:'Rear east connecting range',rect:[4,-31,34,-26],h:8.4,rise:2.2},
- {name:'Rear east end pavilion',rect:[30,-42,37,-26],h:11.8,rise:2.8}
+ {name:'Rear east connecting range',rect:[4,-31,34,-26],h:8.4,rise:2.2,section:'rear-east'},
+ {name:'Rear east end pavilion',rect:[30,-42,37,-26],h:11.8,rise:2.8,section:'rear-east'}
 ]);
 export function createAnnexe(THREE,{brick,roof,material,worldUV,hipRoof}){
  const model=new THREE.Group();model.name='The annexe';model.position.set(ANNEXE.x,0,ANNEXE.z);model.rotation.y=ANNEXE.rotation;
@@ -94,7 +99,12 @@ export function createAnnexe(THREE,{brick,roof,material,worldUV,hipRoof}){
   box(red,x,base-.14,z+.05,w+.25,.25,.26);
  }
  for(const spec of ANNEXE_RANGES){
-  const [x0,z0,x1,z1]=spec.rect.map(v=>v*ANNEXE_MAP_SCALE),b={...spec,x:(x0+x1)/2,z:(z0+z1)/2,w:x1-x0,d:z1-z0,r:spec.angle??0};ranges.push(b);
+  const [x0,z0,x1,z1]=spec.rect.map(v=>v*ANNEXE_MAP_SCALE),b={...spec,x:(x0+x1)/2,z:(z0+z1)/2,w:x1-x0,d:z1-z0,r:spec.angle??0};
+  if(spec.section==='rear-east'){
+   const {angle,pivot}=ANNEXE_REAR_EAST,px=pivot[0]*ANNEXE_MAP_SCALE,pz=pivot[1]*ANNEXE_MAP_SCALE,dx=b.x-px,dz=b.z-pz;
+   b.x=px+Math.cos(angle)*dx+Math.sin(angle)*dz;b.z=pz-Math.sin(angle)*dx+Math.cos(angle)*dz;b.r+=angle;
+  }
+  ranges.push(b);
   solid(brick,b.x,b.h/2,b.z,b.w,b.h,b.d,b.name+' brick walls',b.r);
   box(red,b.x,.25,b.z,b.w+.13,.5,b.d+.13,b.r);
   for(const y of [4.35,8.65,12.6])if(y<b.h)box(red,b.x,y,b.z,b.w+.16,.32,b.d+.16,b.r);
@@ -170,12 +180,16 @@ export function createAnnexe(THREE,{brick,roof,material,worldUV,hipRoof}){
  beam([0,bellY+5.35,bellZ],[0,bellY+7,bellZ],.09,dark,'Bell tower weather vane');
  beam([-.5,bellY+6.65,bellZ],[.5,bellY+6.65,bellZ],.07,dark,'Weather vane crossbar');
  for(const b of ranges.filter(b=>b.h>7&&!b.name.includes('tower')&&!b.name.includes('hall'))){
-  const x=b.x+b.w*.28,z=b.z,base=b.h+b.rise*.65,top=base+2.55;
-  solid(brick,x,(base+top)/2,z,1.65,top-base,1,b.name+' chimney stack');
-  for(const dy of [-.24,0])box(red,x,top+dy,z,1.96,.18,1.28);
-  for(const dx of [-.5,0,.5])mesh(new THREE.CylinderGeometry(.13,.17,.8,8),red,x+dx,top+.43,z,'Terracotta chimney pot');
+  const [x,z]=position(b,b.w*.28,0),base=b.h+b.rise*.65,top=base+2.55;
+  solid(brick,x,(base+top)/2,z,1.65,top-base,1,b.name+' chimney stack',b.r);
+  for(const dy of [-.24,0])box(red,x,top+dy,z,1.96,.18,1.28,b.r);
+  for(const dx of [-.5,0,.5]){const p=position(b,b.w*.28+dx,0);mesh(new THREE.CylinderGeometry(.13,.17,.8,8),red,p[0],top+.43,p[1],'Terracotta chimney pot');}
  }
  
+ // Build the side.jpg details once, then reflect the entire assembly across
+ // the entrance axis, including its glazing, gutters, landing and fire stair.
+ const sideMeshStart=model.children.length,sideOpeningStart=openings.length;
+ const sideBatchStarts=new Map([...batches].map(([mat,items])=>[mat,items.length]));
  // Low canted bay visible ahead of the west tower in side.jpg.
  const bayPoints=[[-29,-17],[-37,-17],[-40,-14],[-40,-8],[-37,-5],[-29,-5]];
  const bayShape=new THREE.Shape();bayPoints.forEach(([x,z],i)=>i?bayShape.lineTo(x,-z):bayShape.moveTo(x,-z));bayShape.closePath();
@@ -199,6 +213,12 @@ export function createAnnexe(THREE,{brick,roof,material,worldUV,hipRoof}){
  for(let i=0;i<18;i++)solid(blue,tx-7,.2+i*.27,tz+6-i*.36,1.65,.10,.42,'Blue external stair tread');
  for(const side of [-1,1])beam([tx-7+side*.87,1.1,tz+6],[tx-7+side*.87,5.7,tz-.5],.08,blue,'Blue stair handrail');
  for(let i=0;i<6;i++)for(const side of [-1,1])beam([tx-7+side*.87,.2+i*.81,tz+6-i*1.08],[tx-7+side*.87,1.1+i*.81,tz+6-i*1.08],.06,blue,'Blue stair baluster');
+ const westSide=new THREE.Group();westSide.name='West mirrored side details';
+ for(const child of model.children.slice(sideMeshStart))westSide.add(child);model.add(westSide);
+ const eastSide=westSide.clone(true);eastSide.name='East mirrored side details';eastSide.scale.x=-1;
+ eastSide.traverse(o=>{o.name=o.name.replace(/^West /,'East ');});model.add(eastSide);
+ for(const [mat,items] of batches)for(const item of items.slice(sideBatchStarts.get(mat)??0))items.push({...item,x:-item.x,r:-item.r});
+ for(const o of openings.slice(sideOpeningStart))openings.push({...o,name:o.name.replace(/^West /,'East '),x:-o.x,rotation:-o.rotation});
  function drive(x0,z0,x1,z1,w){const dx=x1-x0,dz=z1-z0;solid(road,(x0+x1)/2,.025,(z0+z1)/2,Math.hypot(dx,dz),.09,w,'Annexe drive',Math.atan2(-dz,dx));}
  drive(0,28,0,101,6);drive(-144,65,144,65,5);drive(-144,65,-144,-62,5);drive(144,65,144,-46,5);
  const dummy=new THREE.Object3D();

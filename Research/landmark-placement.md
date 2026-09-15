@@ -1,3 +1,19 @@
+# Google Earth landmark correction — 15 September 2026
+
+Source: [shared 1829 Google Earth project](https://earth.google.com/earth/d/1jXu49Oe3iXWoHLAS1GdS8lUhKcpg8cUk?usp=sharing). Read the project through the public Earth viewer and decoded its `document/getmapdata` response. These are feature geometry/pin coordinates, not saved camera targets. In particular, the Water tower camera target (53.2119851514, -2.8997763616) is different from its pin.
+
+| Earth feature | Latitude | Longitude | Previous scene X, Z | Corrected scene X, Z |
+| --- | ---: | ---: | --- | --- |
+| 1829 Building | 53.2116032 | -2.8988043 | 0, 19.5 (entrance anchor) | unchanged |
+| The Old Church | 53.2108814 | -2.9005010 | -6, -171.5 | -4.9, -119.2 |
+| Water tower | 53.21234432581698 | -2.900961415659128 | 210, -90 | 148, -55.2 |
+| Seren Lodge (Churton Ward) | 53.2108487 | -2.8995082 | -30.2, -111.5 | -44.3, -65.9 |
+
+Registration retains the existing approximate site scale (one scene unit per metre) and the north-up satellite alignment below. The 1829 pin is associated with the existing central entrance at (0, 19.5); 1829 geometry is untouched. For each pin, compute east = longitude difference × 111320 × cos(53.2116032°), north = latitude difference × 111320. With L = hypot(0.55, 0.835), scene X = (-0.55 × east + 0.835 × north) / L and Z = 19.5 + (0.835 × east + 0.55 × north) / L. Round to 0.1 scene unit. Scale, axis registration and pin-to-model anchor correspondence remain approximate; the decimal precision does not imply a surveyed reconstruction.
+
+Only the chapel, tower and Churton group positions change. Their dimensions and rotations stay fixed. Churton's local grounds and photo views and the chapel's relative approach follow their existing position references; walking obstacles derive from the moved geometry. The mast, chimney, 1829, other buildings and surrounding planting retain their positions. The older chimney test's relative-Z assumption was removed because that independent chimney is explicitly not moved with the tower.
+
+## Earlier screenshot placement (superseded)
 # Landmark placement from scale.png
 
 Reference: user-supplied Downloads/1829/newmap/scale.png (659 × 524 pixels). Only the landmark outlines are placement evidence.

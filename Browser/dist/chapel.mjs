@@ -1,6 +1,6 @@
-// guides.png: the 59-unit centre depth leaves a 118-unit gap to the +14 nave end.
+// Google Earth marker registered to the fixed 1829 entrance; see Research/landmark-placement.md.
 // Its clock gable faces the estate's front (+Z), along the mapped nave axis.
-export const ESCAPE_CHAPEL=Object.freeze({x:-6,z:-171.5,rotation:0});
+export const ESCAPE_CHAPEL=Object.freeze({x:-4.9,z:-119.2,rotation:0});
 export function createChapel(THREE,{brick,roof,stone,dark,worldUV}){
   const chapel=new THREE.Group();chapel.name='Old Chapel · brick Gothic chapel';
   chapel.position.set(ESCAPE_CHAPEL.x,0,ESCAPE_CHAPEL.z);chapel.rotation.y=ESCAPE_CHAPEL.rotation;

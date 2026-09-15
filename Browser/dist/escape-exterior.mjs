@@ -9,6 +9,7 @@ import {addFrontBoundaryWall} from './front-boundary-wall.mjs';
 import {addEntranceWalks} from './entrance-walks.mjs';
 import {addRedesmerePassage,addRedesmereEndRange} from './redesmere-passage.mjs';
 import {createWaterTower} from './water-tower.mjs';
+import {createEstateChimney} from './estate-chimney.mjs';
 import {createAnnexe} from './annexe.mjs';
 import {createChurtonWard} from './churton-ward.mjs';
 import {createMainAdminBuilding} from './main-admin-building.mjs';
@@ -296,6 +297,7 @@ export function createEscapeExterior(THREE,aspect){
   const churtonWard=createChurtonWard(THREE,{brick:photoBrick,roof,worldUV,material});model.add(churtonWard);
   const {building:mainAdmin,corridor:adminCorridor}=createMainAdminBuilding(THREE,{brick:photoBrick,roof,worldUV,material});model.add(mainAdmin,adminCorridor);
   const chapel=createChapel(THREE,{brick,roof,stone,dark,worldUV});model.add(chapel);
+  const estateChimney=createEstateChimney(THREE,{brick,material});model.add(estateChimney);
   const waterTower=createWaterTower(THREE,{brick,roof,dark,worldUV});model.add(waterTower);
   const annexe=createAnnexe(THREE,{brick:photoBrick,roof,white,steel,material,worldUV,hipRoof});model.add(annexe);
   box(path,ESCAPE_CHAPEL.x-10,.08,ESCAPE_CHAPEL.z+12,2,.12,15);
@@ -321,5 +323,5 @@ export function createEscapeExterior(THREE,aspect){
     items.forEach((b,i)=>{dummy.position.set(b.x,b.y,b.z);dummy.scale.set(b.w,b.h,b.d);dummy.rotation.set(0,b.rotation,0);dummy.updateMatrix();batch.setMatrixAt(i,dummy.matrix);});model.add(batch);}
   for(const [parent,canopy] of [[model,crowns],[planters,planterCrowns]])for(const {mat,items} of canopy){const batch=new THREE.InstancedMesh(new THREE.IcosahedronGeometry(1,1),mat,items.length);batch.castShadow=true;batch.receiveShadow=true;
     items.forEach((b,i)=>{dummy.position.set(b.x,b.y,b.z);dummy.scale.set(b.s,b.s*.85,b.s);dummy.rotation.set(0,i,0);dummy.updateMatrix();batch.setMatrixAt(i,dummy.matrix);});parent.add(batch);}
-  return {scene,camera,model,mast,chapel,waterTower,annexe,newHospital:annexe,churtonWard,mainAdmin,adminCorridor,planters};
+  return {scene,camera,model,mast,chapel,waterTower,estateChimney,annexe,newHospital:annexe,churtonWard,mainAdmin,adminCorridor,planters};
 }

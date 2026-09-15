@@ -1,6 +1,8 @@
 import assert from 'node:assert/strict';
 import * as THREE from './dist/vendor/three.module.js';
 import {createEscapeExterior} from './dist/escape-exterior.mjs';
+import {ESTATE_CHIMNEY} from './dist/estate-chimney.mjs';
+import {ESCAPE_WATER_TOWER} from './dist/water-tower.mjs';
 import {sampleEscape} from './dist/escape-cutscene.mjs';
 import {MAIN_ADMIN,MAIN_ADMIN_VIEWS,adminMapPoint} from './dist/main-admin-building.mjs';
 import {exteriorObstacles,obstacleContains} from './dist/explore-controls.mjs';
@@ -43,4 +45,52 @@ for(const aspect of [16/9,4/3,9/16])for(const seconds of [0,5,10]){
  }
 }
 
-console.log('PASS: OS registration, four photo starts, exposed sashes, slate roofs, masonry collision, clear approach and separate corridor.');
+
+// The removed front corners must be open above ground and walkable; geometry
+// and collision must both follow the chamfers, rather than their enclosing box.
+const bays=[];building.traverse(o=>{if(o.name==='Chamfered two-storey bay walls')bays.push(o);});
+assert.equal(bays.length,2);
+for(const bay of bays){
+ for(const side of [-1,1]){
+  const p=bay.localToWorld(new THREE.Vector3(side*3.99,30,1.99));
+  ray.set(p,new THREE.Vector3(0,-1,0));
+  assert(!ray.intersectObject(building,true).some(h=>h.point.y>.5),'Cut bay corner must have no masonry or roof');
+  assert(!obs.some(o=>obstacleContains(o,p.x,p.z)),'Cut bay corner must be walkable');
+ }
+ const p=bay.localToWorld(new THREE.Vector3(0,1.8,1));
+ assert(obs.some(o=>obstacleContains(o,p.x,p.z)),'Central bay masonry must still stop walking');
+}
+// The new notch in the low west wing is open from the forecourt to the
+// recessed sash. Its old full-depth wall and roof must both be gone.
+for(const x of [156.6,158.7])for(const z of [32,33.4]){
+ ray.set(new THREE.Vector3(x,30,z),new THREE.Vector3(0,-1,0));
+ assert(!ray.intersectObject(building,true).some(h=>h.point.y>.5),'Low wing front recess must remain open to the sky');
+ assert(!obs.some(o=>obstacleContains(o,x,z)),'Low wing front recess must remain walkable');
+}
+const lowFront=building.userData.openings.filter(o=>o.face==='low west frontage'),link=building.userData.openings.find(o=>o.face==='recessed low connection');
+assert.equal(lowFront.length,3);assert(link.z<lowFront[0].z-3,'Single connection sash must step back behind the three-window room');
+
+
+// The east photo replaces the invented window grid and keeps the low wing exposed.
+const eastShot=MAIN_ADMIN_VIEWS['main-admin-east'];
+assert(!obs.some(o=>obstacleContains(o,eastShot.position[0],eastShot.position[2])),'East photo camera must start in open ground');
+assert(eastShot.position[0]>eastShot.target[0]&&eastShot.position[2]>eastShot.target[2],'Marked camera must look northwest');
+assert.equal(building.userData.openings.filter(o=>o.face==='east photo upper column').length,2);
+assert.equal(building.userData.openings.filter(o=>o.face==='east low end').length,3);
+assert(!building.userData.openings.some(o=>o.face==='east return inferred'));
+for(const name of ['East curved carriage drive','East wing side access']){const road=building.getObjectByName(name);assert(road&&road.geometry.attributes.normal.getY(0)>.99,'East approach gravel must face upwards');}
+const chimney=exterior.estateChimney,bounds=new THREE.Box3().setFromObject(chimney);
+assert.equal(chimney.parent,exterior.model,'Freestanding chimney must be independent of the admin building');
+assert(Math.abs(bounds.max.y-bounds.min.y-ESCAPE_WATER_TOWER.height*1.3)<1e-5,'Chimney must be exactly 1.3 times the water tower');
+assert.deepEqual([chimney.position.x,chimney.position.z],[238,-66],'Chimney retains the original marked-X position when the water tower moves');
+// The Google Earth correction moves only the tower; the chimney retains its own anchor.
+assert(chimney.position.x>ESCAPE_WATER_TOWER.x);
+assert(obs.some(o=>obstacleContains(o,238,-66)),'Chimney base must block walking');
+ray.set(new THREE.Vector3(238,ESTATE_CHIMNEY.height+1,-66),new THREE.Vector3(0,-1,0));
+assert.equal(ray.intersectObject(chimney,true)[0].object.name,'Recessed chimney opening','The top must have an open, recessed throat');
+for(const aspect of [16/9,4/3,9/16])for(const seconds of [0,5,10]){
+ const shot=sampleEscape(seconds,{aspect}),camera=new THREE.PerspectiveCamera(46,aspect,.5,2000);camera.position.set(...shot.position);camera.lookAt(...shot.target);camera.updateMatrixWorld(true);
+ for(const y of [0,ESTATE_CHIMNEY.height]){const p=new THREE.Vector3(238,y,-66).project(camera);assert(Math.abs(p.x)<.95&&Math.abs(p.y)<.95,'Freestanding chimney must fit the escape pan');}
+}
+
+console.log('PASS: east photo geometry, marked camera, independent chimney height/location, chamfered bays, open low-wing recess, OS registration, four photo starts, exposed sashes, slate roofs, masonry collision, clear approach and separate corridor.');

@@ -1,8 +1,8 @@
 // Churton Ward: six supplied photographs and the yellow satellite outline.
 // Single-storey masonry with two long returns and a shorter oblique rear wing.
-// Approximate registration against the existing chapel and radio mast; units
+// Seren Lodge marker registered to the fixed 1829 entrance; units
 // and concealed details are visual estimates, not a measured building survey.
-export const CHURTON_WARD=Object.freeze({x:-30.2,z:-111.5,rotation:0});
+export const CHURTON_WARD=Object.freeze({x:-44.3,z:-65.9,rotation:0});
 
 export function churtonPoint(x,y,z){
   const c=Math.cos(CHURTON_WARD.rotation),s=Math.sin(CHURTON_WARD.rotation);
