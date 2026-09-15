@@ -3,6 +3,7 @@ import {missingHistoricFootprints} from './historic-footprints.mjs';
 import {annexePoint} from './annexe.mjs';
 import {VIVIENNE_LANE} from './modern-entrance.mjs';
 import {ROAD_STYLE} from './road-style.mjs';
+import {TOWER_ADMIN_SHIFT} from './tower-buildings.mjs';
 
 // clean.png supplies straight edges; annotated.png identifies roads and buildings.
 // The alarm-board plan is schematic, not a survey. Coordinates are fitted to the
@@ -102,7 +103,7 @@ export const HISTORIC_GRAVEL=Object.freeze([
 ]);
 // Filled black aprons sit below the grass islands; road ribbons sit above them.
 export const HISTORIC_PAVING=Object.freeze([
- {name:'Tower service court',points:[[146,-16.1],[185.5,-16.1],[185.5,-12.5],[221.3,-12.5],[225.5,-18],[229,-18],[232,-6],[233,1],[240,10],[242,13],[234,13],[222,2],[215,-5],[146,-5]]},
+ {name:'Tower service court',points:[[146,-16.1],[162.3,-16.1],[162.3,-16.1+TOWER_ADMIN_SHIFT],[185.5,-16.1+TOWER_ADMIN_SHIFT],[185.5,-12.5+TOWER_ADMIN_SHIFT],[221.3,-12.5+TOWER_ADMIN_SHIFT],[225.5,-18+TOWER_ADMIN_SHIFT],[229,-18+TOWER_ADMIN_SHIFT],[232,-6],[233,1],[240,10],[242,13],[234,13],[222,2],[215,-5+TOWER_ADMIN_SHIFT],[162.3,-5+TOWER_ADMIN_SHIFT],[162.3,-5],[146,-5]]},
  {name:'Admin teardrop black surround',points:teardropSurround},
  {name:'Admin east black link',points:junction},
  {name:'Annexe front black apron',points:[ap(-141,49),ap(96,49),ap(96,81),ap(-141,81)]},

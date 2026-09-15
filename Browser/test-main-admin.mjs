@@ -82,7 +82,7 @@ for(const name of ['East curved carriage drive','East wing side access']){const 
 const chimney=exterior.estateChimney,bounds=new THREE.Box3().setFromObject(chimney);
 assert.equal(chimney.parent,exterior.model,'Freestanding chimney must be independent of the admin building');
 assert(Math.abs(bounds.max.y-bounds.min.y-ESCAPE_WATER_TOWER.height*1.3)<1e-5,'Chimney must be exactly 1.3 times the water tower');
-assert.deepEqual([chimney.position.x,chimney.position.z],[177.5,-35.5],'Chimney base follows the latest tower-buildings red X');
+assert.deepEqual([chimney.position.x,chimney.position.z],[177.5,-35.5],'The chimney stays at the red X while the buildings move');
 // The new chimney anchor lies to the right and forward of the water tower.
 assert(chimney.position.x>ESCAPE_WATER_TOWER.x&&chimney.position.z>ESCAPE_WATER_TOWER.z);
 assert(obs.some(o=>obstacleContains(o,ESTATE_CHIMNEY.x,ESTATE_CHIMNEY.z)),'Chimney base must block walking');

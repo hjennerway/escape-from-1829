@@ -4,7 +4,8 @@ import {createEscapeExterior} from './dist/escape-exterior.mjs';
 import {createAerialLayouts} from './dist/aerial-layouts.mjs';
 import {ESCAPE_WATER_TOWER} from './dist/water-tower.mjs';
 import {ESTATE_CHIMNEY} from './dist/estate-chimney.mjs';
-import {TOWER_RANGES,TOWER_ROOF_CONTACTS,TOWER_SERVICE_FRONT} from './dist/tower-buildings.mjs';
+import {HISTORIC_ROADS} from './dist/historic-roads.mjs';
+import {TOWER_RANGES,TOWER_ROOF_CONTACTS,TOWER_SERVICE_FRONT,TOWER_ADMIN_SHIFT} from './dist/tower-buildings.mjs';
 globalThis.document={createElement:()=>({getContext:()=>({fillRect(){},measureText:t=>({width:t.length*16}),strokeText(){},fillText(){}})})};
 const exterior=createEscapeExterior(THREE,1.5),layouts=createAerialLayouts(THREE,exterior),group=layouts.towerBuildings;
 exterior.model.updateMatrixWorld(true);
@@ -68,6 +69,21 @@ for(const [x,z,n] of [[148,-48,[0,0,-1]],[148,-62,[0,0,1]],[155,-55.2,[-1,0,0]]]
 }
 ray.set(new THREE.Vector3(141.5,30,-55.2),new THREE.Vector3(0,-1,0));
 assert.equal(ray.intersectObject(group,true).length,0,'Only the Redesmere/1829 tower face remains unobstructed');
+// Latest yellow-to-blue ridge extension and green/red corner correction.
+assert(!group.getObjectByName('Low west stores ridge'),'Remove the short perpendicular ridge in the green corner');
+const extendedRidge=new THREE.Box3().setFromObject(group.getObjectByName('Tower east dormered range ridge'));
+assert(Math.abs(extendedRidge.min.x-156)<1e-5,'Main ridge must reach the blue point beside the tower');
+assert(Math.abs(extendedRidge.getCenter(new THREE.Vector3()).z+50.1)<1e-5,'Extended ridge must meet the tower-corner ridge junction');
+for(const x of [157,160,168])for(const z of [-43,-45.5,-47]){
+ const hit=roofAt(x,z),expected=9+(group.userData.towerJunction.peak-9)*(-40.5-z)/9.6;
+ assert.equal(hit?.object.name,'Tower south continuous slate roof','The green area must be one continuous roof slope');
+ assert(Math.abs(hit.point.y-expected)<1e-5,'No extra ridge or dip may cross the green slope');
+}
+for(const x of [150,155,161])for(const z of [-40,-38,-36.6]){
+ const hit=roofAt(x,z);
+ assert.equal(hit?.object.name,'Low west stores south flat return','The red area must be flat');
+ assert(Math.abs(hit.point.y-9)<1e-5&&hit.face.normal.y>.999,'The red return must have a level roof surface');
+}
 const paired=group.userData.dormers.filter(d=>d.name.startsWith('East range'));
 const single=group.userData.dormers.filter(d=>d.name.startsWith('Central hall'));
 assert.equal(paired.length,2);assert.equal(single.length,1);
@@ -83,14 +99,24 @@ for(const d of paired){
  const glazing=group.userData.openings.find(o=>o.label===d.name+' glazing');
  assert(glazing.y-.5>hostRidgeBounds.max.y,'Ridge placement must keep the blue protrusion glazing above the slate');
 }
+for(const d of group.userData.dormers){
+ const glazing=group.userData.openings.find(o=>o.label===d.name+' glazing');
+ const normal=new THREE.Vector3(Math.sin(glazing.r),0,Math.cos(glazing.r)),ridgeAxis=d.axis==='x'?new THREE.Vector3(1,0,0):new THREE.Vector3(0,0,1);
+ assert(Math.abs(normal.dot(ridgeAxis))<1e-5,'Blue protrusion glazing must face down the slope, not along the ridge');
+ if(d.axis==='x')assert(glazing.z>d.z&&Math.abs(glazing.x-d.x)<1e-5,'Paired roof vents belong on the marked south cheeks');
+ else assert(glazing.x>d.x&&Math.abs(glazing.z-d.z)<1e-5,'North/south roof vents belong on the east cheeks');
+ const oldFront=new THREE.Vector3(d.x,glazing.y,d.z).addScaledVector(ridgeAxis,2.8);
+ ray.set(oldFront,ridgeAxis.clone().negate());
+ assert.equal(ray.intersectObject(group,true)[0]?.object.name,d.name+' walls','The former ridge-end glazing face must now be plain blue');
+}
 const centralHall=TOWER_RANGES.find(r=>r.name==='Dormered central service hall');
 assert.equal(single[0].x,191);assert.equal(single[0].z,(centralHall.rect[1]+centralHall.rect[3])/2,'Keep the single protrusion centred on the reshaped hall');
 const centralWallBounds=new THREE.Box3().setFromObject(group.getObjectByName(centralHall.name+' walls'));
 const adjacentBounds=new THREE.Box3().setFromObject(group.getObjectByName('Tower east dormered range walls'));
 assert(Math.abs(centralWallBounds.min.z-adjacentBounds.min.z)<1e-5,'Both far edges must align with the green line');
 assert.equal(centralHall.rect[3],-32,'Central hall must extend to the near edge of the blue footprint');
-assert(centralWallBounds.max.z>ESTATE_CHIMNEY.z+ESTATE_CHIMNEY.baseRadius&&centralWallBounds.max.z<ESTATE_CHIMNEY.z+5,'The hall must finish just beyond the relocated chimney');
-assert.deepEqual([exterior.estateChimney.position.x,exterior.estateChimney.position.z],[177.5,-35.5],'Chimney must occupy the new red-X position');
+assert(TOWER_ADMIN_SHIFT>HISTORIC_ROADS.find(r=>r.name==='Admin north service road').width,'User chose additional movement to clear the fixed chimney');
+assert.deepEqual([exterior.estateChimney.position.x,exterior.estateChimney.position.z],[177.5,-35.5],'Chimney must stay fixed while the outlined buildings move');
 for(const x of [165,172,182])for(const z of [-78,-72,-66])assert(!roofAt(x,z),'The yellow-circled building and its details must be removed');
 assert(!group.children.some(o=>o.name.startsWith('Northern boiler hall')));
 ray.set(new THREE.Vector3(158,10,-66),new THREE.Vector3(-1,0,0));
@@ -106,19 +132,20 @@ assert.equal(flatFront.roof,'flat');assert.equal(stores.rect[3],flatFront.rect[1
 // unchanged blue-circled stores. Check the meshes, not only range metadata.
 for(const name of ['West stores flat front','Chimney service hall','Ramp entrance link','South cross-gabled stores']){
  const bounds=new THREE.Box3().setFromObject(group.getObjectByName(name+' walls'));
- assert(Math.abs(bounds.max.z-TOWER_SERVICE_FRONT)<1e-5,'All four front walls must follow the yellow line: '+name);
+ const shift=name==='West stores flat front'?0:TOWER_ADMIN_SHIFT;
+ assert(Math.abs(bounds.max.z-(TOWER_SERVICE_FRONT+shift))<1e-5,'Only the outlined front walls move towards admin: '+name);
 }
 for(const x of [187,191,194])for(const z of [-30,-25,-20]){
- const hit=roofAt(x,z);
- assert.equal(hit?.object.name,'Ramp entrance link flat roof','The flat entrance link must meet the newly extended hall');
+ const hit=roofAt(x,z+TOWER_ADMIN_SHIFT);
+ assert.equal(hit?.object.name,'Ramp entrance link flat roof','The entrance roof must move with its building');
  assert(Math.abs(hit.point.y-6.56)<1e-5,'The infill must continue the existing level roof');
 }
 for(const x of [187,194,200])for(const z of [-41,-37,-33])assert.equal(roofAt(x,z)?.object.name,'Dormered central service hall slate roof','The blue-footprint extension must have the hall roof');
 const flatLink=TOWER_RANGES.find(r=>r.name==='Ramp entrance link');
-assert.equal(flatLink.rect[1],centralHall.rect[3],'Entrance link must end at the new hall gable');
+assert.equal(flatLink.rect[1]-centralHall.rect[3],TOWER_ADMIN_SHIFT,'The unselected central hall stays in place as the entrance link slides south');
 assert(!group.getObjectByName('Round boiler gable light'),'The purple central gable must have no circular window');
 const roundWindow=group.getObjectByName('Chimney hall circular window');
-assert(roundWindow,'The building pierced by the chimney must carry the circular window');
+assert(roundWindow,'The translated hall keeps its circular window');
 const chimneyHall=TOWER_RANGES.find(r=>r.name==='Chimney service hall');
 assert(roundWindow.position.x>chimneyHall.rect[2],'Anticlockwise rotation moves the circular gable to the east end');
 assert.equal(roundWindow.position.z,(chimneyHall.rect[1]+chimneyHall.rect[3])/2);
@@ -127,10 +154,23 @@ assert(windowNormal.x>.999&&Math.abs(windowNormal.z)<1e-5,'The round glazing mus
 const chimneyRidgeBounds=new THREE.Box3().setFromObject(group.getObjectByName('Chimney service hall ridge'));
 const chimneyRidgeSize=chimneyRidgeBounds.getSize(new THREE.Vector3());
 assert(chimneyRidgeSize.x>15&&chimneyRidgeSize.z<.3,'The chimney roof ridge now runs east/west');
-assert.equal(roofAt(ESTATE_CHIMNEY.x,ESTATE_CHIMNEY.z)?.object.name,'Chimney service hall slate roof','The relocated chimney must pass through the pitched roof with the circular-window gable');
+assert(!roofAt(ESTATE_CHIMNEY.x,ESTATE_CHIMNEY.z),'No building roof may cover the fixed chimney');
+// Sample the actual foundation and tapered shaft, including every façade,
+// plinth, roof and instanced detail, rather than testing only wall rectangles.
+const clearanceRay=new THREE.Raycaster();
+for(const y of [.1,.4,.79,.86,1,3,6.5,8,10,14,25,40]){
+ const radius=y<.8?2.8-.05*y/.8:ESTATE_CHIMNEY.baseRadius+(ESTATE_CHIMNEY.topRadius-ESTATE_CHIMNEY.baseRadius)*(y-.8)/(ESTATE_CHIMNEY.height-2.4);
+ clearanceRay.far=radius+.01;
+ for(let i=0;i<128;i++){
+  const angle=i*Math.PI/64;
+  clearanceRay.set(new THREE.Vector3(ESTATE_CHIMNEY.x,y,ESTATE_CHIMNEY.z),new THREE.Vector3(Math.cos(angle),0,Math.sin(angle)));
+  const hit=clearanceRay.intersectObject(group,true)[0];
+  assert(!hit,'Chimney and foundation must clear all building geometry: '+hit?.object.name+' at height '+y+' angle '+angle);
+ }
+}
 assert(!group.getObjectByName('Chimney service hall flat roof'),'The new pitch replaces the former flat front section');
 for(const x of [162.7,167,174,184.8])for(const z of [-40,-34,-26,-17.1]){
- assert(['Chimney service hall slate roof','Dormered central service hall slate roof'].includes(roofAt(x,z)?.object.name),'The joined roof must cover the chimney hall: '+x+','+z);
+ assert(['Chimney service hall slate roof','Dormered central service hall slate roof'].includes(roofAt(x,z+TOWER_ADMIN_SHIFT)?.object.name),'The translated roof must cover the chimney hall: '+x+','+z);
 }
 ray.set(new THREE.Vector3(roundWindow.position.x+2,roundWindow.position.y+.2,roundWindow.position.z-.3),new THREE.Vector3(-1,0,0));
 assert.equal(ray.intersectObject(group,true)[0]?.object,roundWindow,'The circular glazing must be exposed in front of its brick gable');
@@ -139,7 +179,7 @@ assert.equal(ray.intersectObject(group,true)[0]?.object.name,'Dormered central s
 assert(!group.getObjectByName('West stores circular window'),'No circular window on the tower-connected roof');
 assert(!group.getObjectByName('Low west stores south brick gable'),'Restore the tower-connected hip in place of the mistaken gable');
 assert(roofAt(151,-44).point.y<roofAt(155.5,-44).point.y,'The restored roof must fall west towards Redesmere');
-assert(roofAt(156,-37).point.y<roofAt(156,-42).point.y,'The restored outer hip must slope down to the flat stores roof');
+assert(roofAt(156,-37).point.y<roofAt(156,-42).point.y,'The continuous slope must end above the flat red return');
 const rear=TOWER_RANGES.find(r=>r.name==='Rear hipped service building');
 const rearRoof=group.getObjectByName(rear.name+' slate roof');
 const rearBounds=new THREE.Box3().setFromObject(group.getObjectByName(rear.name+' walls'));
@@ -156,7 +196,7 @@ assert(roofAt(211.5,-73.8).point.y<roofAt(211.5,-70.8).point.y,'Rear roof must h
 assert(roofAt(211.5,-63).point.y<roofAt(211.5,-66.2).point.y,'Rear roof must have a south hip');
 const ramp=group.getObjectByName('Sloping service ramp');
 for(const x of [187,195,205,217]){
- ray.set(new THREE.Vector3(x,4,-14),new THREE.Vector3(0,-1,0));
+ ray.set(new THREE.Vector3(x,4,-14+TOWER_ADMIN_SHIFT),new THREE.Vector3(0,-1,0));
  const hit=ray.intersectObject(ramp)[0];assert(hit,'Ramp must be a continuous upward-facing surface');
  assert(Math.abs(hit.point.y-(1.3+(x-185.9)/(219.4-185.9)*(.28-1.3)))<1e-5);
 }
@@ -167,4 +207,4 @@ ray.set(new THREE.Vector3(227,2,-10),new THREE.Vector3(0,-1,0));
 assert.equal(ray.intersectObject(layouts.historicRoads,true)[0]?.object.userData.surface,'black road','Court entrance must not have a crossing kerb');
 const eastEnd=exterior.mainAdmin.getObjectByName('Low east side room walls');
 assert.equal(eastEnd.userData.collisionFootprint.length,6,'Admin east end has two angled corners');
-console.log('PASS: Historical ownership, exposed service glazing, upward roofs, three tower abutments, three traced face profiles, continuous corner joins, flat arch junctions, shallow final-third pitches, ridge-aligned dormers, aligned front walls, green-edge alignment, blue-footprint extension, red-X chimney position, removed northern hall, joined entrance link, rotated full-span chimney roof and east gable window, restored tower hip, separate rear hipped building, continuous ramp and retained blue-block exclusion.');
+console.log('PASS: Historical ownership, exposed service glazing, upward roofs, three tower abutments, three traced face profiles, continuous corner joins, flat arch junctions, shallow final-third pitches, ridge-aligned dormers with downslope glazing, aligned front walls, green-edge alignment, blue-footprint extension, marked-group translation with fixed chimney clearance, removed northern hall, translated entrance link and ramp, rotated full-span chimney roof and east gable window, extended tower ridge, single green-corner slope, flat red return, separate rear hipped building, continuous ramp and retained blue-block exclusion.');

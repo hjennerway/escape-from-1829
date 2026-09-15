@@ -1,4 +1,5 @@
 import {ESCAPE_WATER_TOWER} from './water-tower.mjs';
+import {ESTATE_CHIMNEY} from './estate-chimney.mjs';
 
 import {TOWER_ROOF_CONTACTS} from './tower-roof-profiles.mjs';
 export {TOWER_ROOF_CONTACTS} from './tower-roof-profiles.mjs';
@@ -20,6 +21,10 @@ export const TOWER_BUILDING_VIEWS=Object.freeze({
 });
 // The marked yellow frontage follows the unchanged eastern stores wall.
 export const TOWER_SERVICE_FRONT=-16.6;
+// Slide towards main/admin (+Z); the user chose extra travel to clear the fixed chimney.
+export const TOWER_ADMIN_SHIFT=8.5;
+const shiftedRanges=new Set(['Chimney service hall','Ramp entrance link','South cross-gabled stores','Long east service range','North east stepped link']);
+const towardsAdmin=z=>z+TOWER_ADMIN_SHIFT;
 export const TOWER_RANGES=Object.freeze([
  {name:'Tower east traced abutment',rect:[153.1,-60.3,158.2,-50.1],height:8.84,roof:'traced'},
  {name:'Tower east dormered range',rect:[158.2,-60.3,180,-40.5],height:8.84,rise:3.9,axis:'x',roof:'traced',hipInset:5},
@@ -32,17 +37,23 @@ export const TOWER_RANGES=Object.freeze([
  // section and a hipped ridge terminating against the tower's south wall.
  {name:'Low west stores',rect:[146.3,-50.1,162.3,-36.3],height:8.84,rise:4.076470588235294,axis:'z',roof:'corridor',attach:'north'},
  {name:'West stores flat front',rect:[146.3,-36.3,162.3,TOWER_SERVICE_FRONT],height:8.84,roof:'flat'},
- {name:'Chimney service hall',rect:[159.3,-40.5,185.83,TOWER_SERVICE_FRONT],roofRect:[162.3,-40.5,185.83,TOWER_SERVICE_FRONT],height:6.4,rise:7.2,axis:'x',roof:'hip-gable',gableEnd:'east',hipInset:4},
+ // The old buried wall overlap under the west stores is not part of the moved outline.
+ {name:'Chimney service hall',rect:[162.3,-40.5,185.83,TOWER_SERVICE_FRONT],roofRect:[162.3,-40.5,185.83,TOWER_SERVICE_FRONT],height:6.4,rise:7.2,axis:'x',roof:'hip-gable',gableEnd:'east',hipInset:4},
  {name:'Ramp entrance link',rect:[185.83,-32,196,TOWER_SERVICE_FRONT],height:6.4,roof:'flat'},
  {name:'South cross-gabled stores',rect:[196,-28.1,220.86,TOWER_SERVICE_FRONT],height:6.4,rise:3.9,axis:'x',roof:'gable'},
  {name:'Long east service range',rect:[208.8,-57.2,220.86,-28.1],height:6.4,rise:3.5,axis:'z',roof:'hip'},
  {name:'North east stepped link',rect:[202,-57.2,211.4,-49],height:5.5,rise:2.1,axis:'x',roof:'gable'}
-]);
+].map(range=>{
+ if(!shiftedRanges.has(range.name))return range;
+ const translate=([x0,z0,x1,z1])=>[x0,towardsAdmin(z0),x1,towardsAdmin(z1)];
+ return {...range,rect:translate(range.rect),...(range.roofRect?{roofRect:translate(range.roofRect)}:{})};
+}));
 
 export function createTowerBuildings(THREE,exterior){
  const group=new THREE.Group();group.name='Tower service buildings';
  group.userData.reference='Research/tower-buildings/README.md';
  group.userData.ranges=TOWER_RANGES;group.userData.layout='historic';
+ group.userData.adminShift={distance:TOWER_ADMIN_SHIFT,axis:'z',ranges:[...shiftedRanges]};
  group.userData.replacedOSEdges={sourceBuilding:0,sourceLoop:0,indices:[82,83,84]};
  const brick=exterior.mainAdmin.getObjectByName('Central administration range walls').material.clone();
  brick.color.multiplyScalar(1.13);
@@ -57,6 +68,22 @@ export function createTowerBuildings(THREE,exterior){
  function detail(m,x,y,z,w,h,d,r=0){if(!batches.has(m))batches.set(m,[]);batches.get(m).push({x,y,z,w,h,d,r});}
  function poly(points,m,name){const g=new THREE.BufferGeometry();g.setAttribute('position',new THREE.Float32BufferAttribute(points.flat(),3));g.computeVertexNormals();return mesh(uv(g),m,0,0,0,name);}
  function line(a,b,m,r=.065,name=''){const v=new THREE.Vector3(...b).sub(new THREE.Vector3(...a));const o=mesh(new THREE.CylinderGeometry(r,r,v.length(),8),m,...a.map((n,i)=>(n+b[i])/2),name);o.quaternion.setFromUnitVectors(new THREE.Vector3(0,1,0),v.normalize());return o;}
+ // Recess only the stationary hall's low masonry beside the wider chimney
+ // foundation. Its walls and roof above this small recess stay in position.
+ function foundationClearedBox(material,rect,y0,y1,name){
+  const [x0,z0,x1,z1]=rect,cutX=ESTATE_CHIMNEY.x+3,cutZ0=ESTATE_CHIMNEY.z-1.75,cutZ1=ESTATE_CHIMNEY.z+1.75,cutY=.85,points=[];
+  function part(a,b,c,d,lo,hi){
+   if(c<=a||d<=b||hi<=lo)return;
+   const g=new THREE.BoxGeometry(c-a,hi-lo,d-b).toNonIndexed();g.translate((a+c)/2,(lo+hi)/2,(b+d)/2);
+   const positions=g.attributes.position;for(let i=0;i<positions.count;i++)points.push([positions.getX(i),positions.getY(i),positions.getZ(i)]);g.dispose();
+  }
+  part(x0,z0,x1,z1,Math.max(y0,cutY),y1);
+  const top=Math.min(y1,cutY);
+  part(cutX,z0,x1,z1,y0,top);part(x0,z0,cutX,cutZ0,y0,top);part(x0,cutZ1,cutX,z1,y0,top);
+  const result=poly(points,material,name);
+  result.userData.collisionFootprint=[[x0,z0],[x1,z0],[x1,z1],[x0,z1],[x0,cutZ1],[cutX,cutZ1],[cutX,cutZ0],[x0,cutZ0]];
+  return result;
+ }
  function pitched(spec){
   const {rect:[x0,z0,x1,z1],height:h,rise,axis,roof:type,name}=spec;
   const cx=(x0+x1)/2,cz=(z0+z1)/2,w=x1-x0,d=z1-z0,e=h+.14;
@@ -78,6 +105,9 @@ export function createTowerBuildings(THREE,exterior){
    // Retain the stepped tower corridor after removing the yellow-marked hall.
    box(brick,151.6,h/2,-69.5,10.6,h,9.2,name+' west walls');
    box(brick,154.3,h/2,-62.6,16,h,4.6,name+' tower walls');
+  }else if(name==='Dormered central service hall'){
+   foundationClearedBox(brick,[x0,z0,x1,z1],0,h,name+' walls');
+   foundationClearedBox(red,[x0-.04,z0-.04,x1+.04,z1+.04],0,.6,name+' plinth');
   }else{
    box(brick,cx,h/2,cz,w,h,d,name+' walls');
    box(red,cx,.3,cz,w+.08,.6,d+.08,name+' plinth');
@@ -107,6 +137,8 @@ export function createTowerBuildings(THREE,exterior){
   box(flat,(x0+flatX)/2,deck-.08,(z0+z1)/2,flatX-x0,.16,z1-z0,name+' arch-front flat roof');
   // No parapet crosses the arch or the join from the flat strip to slate.
   box(stone,x0+.06,deck+.015,(z0+z1)/2+(attach==='north'?.125:-.125),.18,.12,z1-z0-.25,name+' outer flat coping');
+  // This corner now shares the east-range ridge; its south return is flat.
+  if(name==='Low west stores')continue;
   const hipLength=5.2;
   const v=[[flatX,deck,z0],[x1,deck,z0],[x1,deck,z1],[flatX,deck,z1],
    [ridgeX,peak,z0+(attach==='north'?0:hipLength)],[ridgeX,peak,z1-(attach==='south'?0:hipLength)]];
@@ -139,6 +171,10 @@ export function createTowerBuildings(THREE,exterior){
  // parapet across the traced contact lines or central arch-front channel.
  const corridorHeight=x=>junction.deck+(junction.peak-junction.deck)*Math.max(0,1-Math.abs(x-junction.ridgeX)/6.3);
  const neckHeight=(x,z)=>junction.deck+Math.max(0,(Math.abs(z+55.2)-1.7)/3.4)*(corridorHeight(x)-junction.deck);
+ const eastRidge={startX:junction.ridgeX,endX:175,z:-50.1,height:junction.peak},southEaveZ=-40.5;
+ const southNeckHeight=(x,z)=>junction.deck+Math.max(0,(z+53.5)/3.4)*(eastRidge.height-junction.deck)*Math.min(1,Math.max(0,(x-junction.flatEndX)/6.3));
+ const southRoofHeight=(x,z)=>junction.deck+(eastRidge.height-junction.deck)*Math.max(0,Math.min(1,(x-junction.flatEndX)/6.3,(180-x)/5,(southEaveZ-z)/(southEaveZ-eastRidge.z)));
+
  function roofGrid(name,xs,zs,height,material=roof){
   const tris=[];
   for(let i=1;i<xs.length;i++)for(let j=1;j<zs.length;j++){
@@ -150,22 +186,29 @@ export function createTowerBuildings(THREE,exterior){
  }
  const neckXs=[153.1,156,158.2];
  roofGrid('Tower east north contact slate roof',neckXs,[-60.3,-56.9],neckHeight);
- roofGrid('Tower east south contact slate roof',neckXs,[-53.5,-50.1],neckHeight);
+ roofGrid('Tower east south contact slate roof',neckXs,[-53.5,-50.1],southNeckHeight);
  roofGrid('Tower east arch-front flat roof',neckXs,[-56.9,-53.5],()=>junction.deck,flat);
  line([156,junction.peak,-60.3],[156,junction.deck,-56.9],red,.09,'North contact hip ridge');
  line([156,junction.deck,-53.5],[156,junction.peak,-50.1],red,.09,'South contact hip ridge');
  for(const z of [-60.3,-50.1])mesh(new THREE.SphereGeometry(.095,12,8),red,156,junction.peak,z,'Contact ridge joint');
  // Blend the traced west edge into the existing eastern hall roof without
  // a height step. The south edge meets the offset corridor at the same level.
- const mainXs=[158.2,159.5,161,163.2,166,171,175,177.5,180],mainZs=[-60.3,-56.9,-55.2,-53.5,-50.4,-50.1,-45.6,-40.5];
+ const mainXs=[158.2,159.5,161,163.2,166,171,175,177.5,180],mainZs=[-60.3,-56.9,-55.2,-53.5,eastRidge.z];
  function mainRoofHeight(x,z){
-  const hip=junction.deck+3.9*Math.max(0,Math.min(1,(x-158.2)/5,(180-x)/5,1-Math.abs(z+50.4)/9.9));
+  if(z>=eastRidge.z)return southRoofHeight(x,z);
+  const hip=junction.deck+(eastRidge.height-junction.deck)*Math.max(0,Math.min(1,(180-x)/5,(z+60.3)/(eastRidge.z+60.3)));
   const blend=Math.min(1,Math.max(0,(x-158.2)/5));
-  const contact=z<=-50.1?neckHeight(158.2,z):corridorHeight(158.2);
+  const contact=z<=-53.5?neckHeight(158.2,z):southNeckHeight(158.2,z);
   return contact*(1-blend)+hip*blend;
  }
  roofGrid('Tower east dormered range slate roof',mainXs,mainZs,mainRoofHeight);
- const eastRidge={startX:163.2,endX:175,z:-50.4,height:junction.deck+3.9};
+ // One continuous south-facing roof, with a west hip where the ridge ends
+ // at the user's blue point. No second north/south ridge crosses this slope.
+ const a=[junction.flatEndX,junction.deck,eastRidge.z],b=[eastRidge.startX,eastRidge.height,eastRidge.z],
+  c=[eastRidge.endX,eastRidge.height,eastRidge.z],d=[180,junction.deck,eastRidge.z],
+  e=[180,junction.deck,southEaveZ],f=[junction.flatEndX,junction.deck,southEaveZ];
+ poly([...skyTriangle(a,b,f),...skyTriangle(b,c,e),...skyTriangle(b,e,f),...skyTriangle(c,d,e)],roof,'Tower south continuous slate roof');
+ box(flat,(junction.flatEndX+junction.endX)/2,junction.deck-.08,(southEaveZ-36.3)/2,junction.endX-junction.flatEndX,.16,-36.3-southEaveZ,'Low west stores south flat return');
  line([eastRidge.startX,eastRidge.height+.05,eastRidge.z],[eastRidge.endX,eastRidge.height+.05,eastRidge.z],red,.10,'Tower east dormered range ridge');
  // Exposed eaves have brick beneath them; the roof never floats over the wall.
  for(const z of [-60.3,-40.5]){
@@ -191,15 +234,15 @@ export function createTowerBuildings(THREE,exterior){
   detail(stone,x,y+h/2+.15,z,w+.38,.2,.22,r);openings.push({x,y,z,r,label});
  }
  // Main south face: four taller lights, recessed entry and lower ramp-side lights.
- for(const x of [163,168,173,178])sash(x,3.35,TOWER_SERVICE_FRONT+.03,1.45,2.9);
- door(190,3.45,-16.57,2.4,4.3,0,dark,'Ramp entrance');
- for(const x of [199,207])sash(x,2.45,-16.57,2.0,1.8);
- door(216,1.65,-16.56,1.65,3.0,0,dark);
+ for(const x of [163,168,173,178])sash(x,3.35,towardsAdmin(TOWER_SERVICE_FRONT+.03),1.45,2.9);
+ door(190,3.45,towardsAdmin(-16.57),2.4,4.3,0,dark,'Ramp entrance');
+ for(const x of [199,207])sash(x,2.45,towardsAdmin(-16.57),2.0,1.8);
+ door(216,1.65,towardsAdmin(-16.56),1.65,3.0,0,dark);
  // img3: blue double doors and a high gable light at the east end, with a
  // repeated high sash rhythm continuing north along the long range.
- door(220.89,2.05,-21.9,3.4,3.8,Math.PI/2,blue,'Blue stores double doors');
- sash(220.9,8.0,-22.35,1.3,2.1,Math.PI/2,'High stores gable sash');
- for(const z of [-30.4,-34.9,-39.4,-43.9,-48.4,-52.8])sash(220.89,4.2,z,1.3,2.4,Math.PI/2);
+ door(220.89,2.05,towardsAdmin(-21.9),3.4,3.8,Math.PI/2,blue,'Blue stores double doors');
+ sash(220.9,8.0,towardsAdmin(-22.35),1.3,2.1,Math.PI/2,'High stores gable sash');
+ for(const z of [-30.4,-34.9,-39.4,-43.9,-48.4,-52.8])sash(220.89,4.2,towardsAdmin(z),1.3,2.4,Math.PI/2);
  for(const z of [-20.8,-26,-31.5,-37,-42.5,-47])sash(146.27,3.3,z,1.25,2.7,-Math.PI/2);
  for(const x of [149,154,159])sash(x,3.3,TOWER_SERVICE_FRONT+.03,1.3,2.7);
  // The chimney identifies the green img2 building. The tower-connected stores
@@ -231,8 +274,9 @@ export function createTowerBuildings(THREE,exterior){
   }
   const part=poly(sides,blue,name+' walls');part.userData.roofDormer=name;dormers.push({name,x,z,axis});
   pitched({name,rect:[x-1.9,z-1.85,x+1.9,z+1.85],height:top,rise:1.1,axis,roof:'gable',gableMaterial:blue});
-  if(axis==='z')sash(x,top-.6,z+1.78,2.6,1.0,0,name+' glazing');
-  else sash(x+1.83,top-.6,z,2.6,1.0,Math.PI/2,name+' glazing');
+  // Glazing faces down the host slope, perpendicular to the roof ridge.
+  if(axis==='z')sash(x+1.83,top-.6,z,2.6,1.0,Math.PI/2,name+' glazing');
+  else sash(x,top-.6,z+1.78,2.6,1.0,0,name+' glazing');
  }
  // Marked ridge correction: both protrusions straddle the east/west crest.
  // Keep their glazing above the higher host roof at this new position.
@@ -244,18 +288,18 @@ export function createTowerBuildings(THREE,exterior){
  dormer('Rear building blue dormer',211.5,-68.5,9.94,11.4,'z');
  group.userData.dormers=dormers;
  // Flush rooflight sits on the near-facing slope of the southern cross range.
- const light=box(frame,202,8.85,-20.0,1.7,.10,1.7,'Stores rooflight frame');light.rotation.x=Math.atan2(3.9,5.95);
- const pane=box(glass,202,8.92,-19.96,1.4,.055,1.4,'Stores rooflight glass');pane.rotation.x=light.rotation.x;
+ const light=box(frame,202,8.85,towardsAdmin(-20.0),1.7,.10,1.7,'Stores rooflight frame');light.rotation.x=Math.atan2(3.9,5.95);
+ const pane=box(glass,202,8.92,towardsAdmin(-19.96),1.4,.055,1.4,'Stores rooflight glass');pane.rotation.x=light.rotation.x;
  // Ramp shared by img2 and img3: higher entrance at the west, low east landing.
- const x0=185.9,x1=219.4,z0=-15.9,z1=-12.8,high=1.30,low=.28;
+ const x0=185.9,x1=219.4,z0=towardsAdmin(-15.9),z1=towardsAdmin(-12.8),high=1.30,low=.28;
  poly([[x0,high,z0],[x0,high,z1],[x1,low,z1],[x0,high,z0],[x1,low,z1],[x1,low,z0]],stone,'Sloping service ramp');
  poly([[x0,.18,z1],[x1,.18,z1],[x1,low,z1],[x0,.18,z1],[x1,low,z1],[x0,high,z1]],brick,'Ramp brick retaining wall');
- box(stone,189.5,high-.1,-17.6,4,.2,4,'Raised entrance landing');
+ box(stone,189.5,high-.1,towardsAdmin(-17.6),4,.2,4,'Raised entrance landing');
  for(const z of [z1]){
   for(let i=0;i<=6;i++){const t=i/6,x=x0+(x1-x0)*t,y=high+(low-high)*t;line([x,y,z],[x,y+1.05,z],blue,.055,'Ramp handrail post');}
   for(const h of [.52,1.05])line([x0,high+h,z],[x1,low+h,z],blue,.05,'Ramp handrail');
  }
- for(const [x,z,h] of [[220.99,-17,6.3],[220.99,-56.8,6.3],[196.15,-16.45,6.3],[153.25,-36.2,6.3]])line([x,.3,z],[x,h,z],dark,.07,'Service downpipe');
+ for(const [x,z,h] of [[220.99,towardsAdmin(-17),6.3],[220.99,towardsAdmin(-56.8),6.3],[196.15,towardsAdmin(-16.45),6.3],[153.25,-36.2,6.3]])line([x,.3,z],[x,h,z],dark,.07,'Service downpipe');
  const dummy=new THREE.Object3D();
  for(const [m,items] of batches){const batch=new THREE.InstancedMesh(new THREE.BoxGeometry(1,1,1),m,items.length);batch.name='Service glazing and trim';batch.castShadow=true;batch.receiveShadow=true;items.forEach((b,i)=>{dummy.position.set(b.x,b.y,b.z);dummy.scale.set(b.w,b.h,b.d);dummy.rotation.set(0,b.r,0);dummy.updateMatrix();batch.setMatrixAt(i,dummy.matrix);});group.add(batch);}
  group.userData.openings=openings;

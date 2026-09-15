@@ -164,3 +164,46 @@ circular-window building's roof. The extended hall ends just beyond its
 southern side. Chimney height and diameter are unchanged. The yellow removal,
 green alignment, blue extent and chimney placement are checked against the
 actual meshes; the main/admin, Historical-layer and footprint checks pass.
+
+## Slide the yellow-marked service group towards main/admin
+
+`admin-slide-correction.png` selects the circular-window hall, flat entrance
+link, southern stores, long eastern range and their short connecting range.
+The user explicitly keeps the chimney fixed at (177.5,-35.5), with no building
+intersecting it. After the six-unit road-width shift left an overlap, the user
+chose to slide the selected group farther while preserving its shapes. The
+final translation is +8.5 in Z towards main/admin; visible widths, depths,
+heights and roof forms are preserved. The old hidden masonry overlap beneath
+the unselected west stores is trimmed to the selected roof boundary, so no
+unroofed strip is exposed by the slide. Doors, sashes, the circular window, rooflight,
+downpipes, landing, ramp and rails translate with their buildings.
+
+The unselected tower ranges, central hall and separate rear building stay in
+place. A small low recess in the stationary central hall's masonry clears the
+chimney's wider foundation; its upper walls, roof and blue protrusion retain
+their positions. The service court follows the moved frontage to keep the
+ramp accessible. Everything remains on Historical.
+
+Checks sample the chimney circumference at twelve heights from foundation to
+shaft against all actual building meshes and details, with a 0.01-unit margin.
+The chimney position, preserved tower roof contacts, exposed glazing, ramp,
+road clearances and all Historical/Modern combinations are also checked.
+
+## Tower corner ridge and flat return
+
+`tower-corner-ridge-correction.png` extends the paired-protrusion roof ridge
+west from x=163.2 to the blue point at x=156, z=-50.1. The main ridge meets the
+existing tower-corner height. The perpendicular ridge over the west stores
+is removed. One continuous south-facing slate roof and its west hip cover
+the green area; the red return at z=-40.5..-36.3 is flat at y=9. Both the
+main ridge and paired protrusions share the updated line. The three traced
+tower contacts still meet their prescribed heights and corner joins.
+
+## Blue protrusion glazing faces
+
+`blue-protrusion-glazing-correction.png` puts the vents/windows on the side
+faces pointing down the host roof slopes. The east/west pair has south-facing
+glazing; the central and rear north/south protrusions have east-facing glazing.
+Their former ridge-end faces are plain blue. Counts, positions and roof
+orientations are preserved. Tests verify the glazing normals are perpendicular
+to the ridge, that the glass is exposed, and that the old faces are plain.
