@@ -1,4 +1,4 @@
-import {annexePoint} from './annexe.mjs';
+import {annexeGroundPoint} from './annexe-ground-placement.mjs';
 import {ESTATES_SERVICE_COURT,ESTATES_SERVICE_GRASS} from './estates-service-court.mjs';
 import {VIVIENNE_LANE} from './modern-entrance.mjs';
 import {TOWER_ADMIN_SHIFT} from './tower-buildings.mjs';
@@ -9,7 +9,7 @@ import {mainAdminLaneJunctions,parsonsNorthEndJunction} from './admin-road-junct
 // layout.png supplies edges; layout.-annotated.png selects the road network.
 // Fit the photographed plan to the established buildings: its perspective and
 // the independently refined building models do not support a survey transform.
-const ap=(x,z)=>{const p=annexePoint(x,0,z);return [p[0],p[2]];};
+const ap=(x,z)=>{const p=annexeGroundPoint(x,0,z);return [p[0],p[2]];};
 function bezier(start,segments,steps=16){
  const points=[start];let a=start;
  for(const [b,c,d] of segments){

@@ -1,5 +1,11 @@
 # Pharmacy rear court
 
+The latest [workshop and cylinder placement](../tower-buildings/README.md#workshop-and-cylinder-placement)
+supersedes the positions below. The cylinders now stand beside the fixed chimney
+at (168.5,-27.8) and (181.4,-27.8), in the space opened by moving the purple group
+towards Main/admin. Their sizes are unchanged; narrow walking gaps remain around
+both cylinders. The pharmacy camera views and rear stairs follow this correction.
+
 The user supplied `img1-loc.png` to locate the rear façades, the ground-level
 photo direction (red arrow), and two gas storage cylinders (yellow circles).
 `img1.jpg` supplies the tall white multipane sashes, dark sills, raised masonry

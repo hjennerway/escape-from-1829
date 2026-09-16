@@ -4,7 +4,7 @@ import * as THREE from './dist/vendor/three.module.js';
 import {createEscapeExterior} from './dist/escape-exterior.mjs';
 import {createAerialLayouts} from './dist/aerial-layouts.mjs';
 import {HISTORIC_ROADS,HISTORIC_GRAVEL,HISTORIC_PAVING,HISTORIC_ROAD_TRACES,ADMIN_ISLAND_CENTER,ADMIN_SEMICIRCLE_RADIUS} from './dist/historic-roads.mjs';
-import {annexePoint} from './dist/annexe.mjs';
+import {annexeGroundPoint} from './dist/annexe-ground-placement.mjs';
 import {VIVIENNE_LANE} from './dist/modern-entrance.mjs';
 import {distanceToSharedLane} from './dist/historic-road-clearance.mjs';
 globalThis.document={createElement:()=>({getContext:()=>({fillRect(){},measureText(text){return {width:text.length*16}},strokeText(){},fillText(){}})})};
@@ -35,10 +35,10 @@ assert(Math.hypot(...historicOSPoint(249,286).map((v,i)=>v-[0,19.5][i]))<1e-9);
 for(const name of ['chapel','churton']){const anchor=HISTORIC_OS_REGISTRATION[name],p=historicOSPoint(...anchor.pixel);assert(Math.hypot(p[0]-anchor.world[0],p[1]-anchor.world[1])<6,'Identified landmarks must agree within the reference-pick tolerance');}
 const missing=layouts.historicRoads.userData.missingFootprints;
 assert(missing.occupied.length>40,'Clipping must inspect the assembled existing estate, not an empty reparented model');
-// Hale and its courts now replace another group of OS segments. Check an
-// independently located remaining range instead of a shrinking segment count.
-assert(missing.segments.some(s=>s.sourceBuilding===0&&s.points.every(([x,z])=>x>213&&x<222&&z>-102&&z<-73)),
- 'The adjoining unmodelled range beside Irby/Ashley must retain its wall traces');
+// The workshop row now replaces the remaining OS marks beside Irby's end.
+// Its actual new walls must participate in clipping those archived outlines.
+assert(missing.occupied.some(polygon=>pointInFootprint([217,-75],polygon)),
+ 'The moved workshop must replace the old adjoining outline beside Irby/Ashley');
 let diagonalCount=0;
 const corridorStart=historicOSPoint(86,300),corridorEnd=historicOSPoint(114,230);
 function distanceToCorridor(p){const dx=corridorEnd[0]-corridorStart[0],dz=corridorEnd[1]-corridorStart[1],t=Math.max(0,Math.min(1,((p[0]-corridorStart[0])*dx+(p[1]-corridorStart[1])*dz)/(dx*dx+dz*dz)));return Math.hypot(p[0]-corridorStart[0]-t*dx,p[1]-corridorStart[1]-t*dz);}
@@ -113,7 +113,7 @@ for(const name of ['Admin roundabout','Admin roundabout to annexe','Annexe outer
  assert(!layouts.historicRoads.getObjectByName(name+' border'),'Unmarked roads must not leave borders');
 }
 for(const local of [[110,51],[146,39],[120,51],[75,121]]){
- const p=annexePoint(local[0],0,local[1]);
+ const p=annexeGroundPoint(local[0],0,local[1]);
  assert(!['black road','stone kerb'].includes(surfaceAt(p[0],p[2])),'Unmarked annexe approaches and loops must expose their grounds: '+local);
 }
 // The blue/red revision restores the outer lawn and doubles the island northwards.

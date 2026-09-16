@@ -2,15 +2,15 @@
 // the rear court. The photograph supplies the sash, stair and tank details.
 // Positions and dimensions are visual estimates, not surveyed measurements.
 export const PHARMACY_VIEWS=Object.freeze({
- pharmacy:{position:[264,67,-117],target:[194,4,-47],fov:42},
- 'pharmacy-photo':{position:[224,1.8,-56],target:[192,4,-50],fov:65},
- 'pharmacy-plan':{position:[201,80,-60.99],target:[201,0,-61],fov:46}
+ pharmacy:{position:[290,125,-95],target:[193,4,-38],fov:46},
+ 'pharmacy-photo':{position:[184,1.8,-48],target:[175,5,-26],fov:65},
+ 'pharmacy-plan':{position:[191,120,-35.99],target:[191,0,-36],fov:46}
 });
 export const PHARMACY_TANKS=Object.freeze([
- // Centre the row between the main rear wall (z ≈ -49) and workshops
- // (z = -73.5), leaving about seven units of clearance on either side.
- {name:'East pharmacy gas cylinder',x:213,z:-61.25,radius:5,plinth:2.7,height:11.5},
- {name:'West pharmacy gas cylinder',x:199,z:-61.25,radius:5,plinth:2.7,height:11.5}
+ // Blue X marks beside the fixed chimney, in the space opened by the purple
+ // group. Keep one narrow walking gap beside the stores and moved hall.
+ {name:'East pharmacy gas cylinder',x:181.4,z:-27.8,radius:5,plinth:2.7,height:11.5},
+ {name:'West pharmacy gas cylinder',x:168.5,z:-27.8,radius:5,plinth:2.7,height:11.5}
 ].map(Object.freeze));
 
 export function addPharmacyCourt(THREE,{group,brick,stone,blue,dark,mat,box,detail,line,sash,door}){

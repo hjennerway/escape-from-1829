@@ -2,12 +2,39 @@ import assert from 'node:assert/strict';
 import * as THREE from './dist/vendor/three.module.js';
 import {createEscapeExterior} from './dist/escape-exterior.mjs';
 import {ANNEXE,ANNEXE_VIEWS,ANNEXE_MAP_SCALE,annexeMapPoint,annexePoint} from './dist/annexe.mjs';
+import {ANNEXE_PLACEMENT_REFERENCE,annexePlacementMapPoint} from './dist/annexe-placement.mjs';
+import {annexeGroundPoint} from './dist/annexe-ground-placement.mjs';
 import {createWalker,exteriorObstacles,obstacleContains} from './dist/explore-controls.mjs';
 globalThis.document={createElement:()=>({getContext:()=>({fillRect(){}})})};
 const exterior=createEscapeExterior(THREE,16/9),annexe=exterior.annexe;
 exterior.scene.updateMatrixWorld(true);
 assert.equal(annexe.name,'The annexe');
 assert.equal(exterior.newHospital,annexe,'legacy integration resolves to the same model');
+// The latest placement uses the front section and the three stationary landmarks.
+assert.deepEqual(exterior.chapel.position.toArray(),[-4.9,0,-119.2]);
+assert.deepEqual(exterior.churtonWard.position.toArray(),[-44.3,0,-65.9]);
+assert.deepEqual(exterior.graftonEdge.position.toArray(),[73.5,0,-155.8]);
+for(const {pixel,world} of ANNEXE_PLACEMENT_REFERENCE.landmarks){
+ const fitted=annexePlacementMapPoint(pixel);
+ assert(Math.hypot(...fitted.map((v,i)=>v-world[i]))<5,'Map registration agrees with all three fixed landmarks within scan precision');
+}
+const frontCorners=['West','East'].map((side,i)=>{
+ const wall=annexe.getObjectByName(side+' front pavilion brick walls');wall.geometry.computeBoundingBox();
+ const bounds=wall.geometry.boundingBox;
+ return wall.localToWorld(new THREE.Vector3(i?bounds.max.x:bounds.min.x,0,bounds.max.z));
+});
+const line=ANNEXE_PLACEMENT_REFERENCE.frontLine.map(annexePlacementMapPoint),mid=frontCorners[0].clone().add(frontCorners[1]).multiplyScalar(.5);
+assert(Math.hypot(mid.x-(line[0][0]+line[1][0])/2,mid.z-(line[0][1]+line[1][1])/2)<1e-8,'Actual front masonry is centred on the purple line');
+const direction=frontCorners[1].clone().sub(frontCorners[0]).normalize(),lineDirection=new THREE.Vector3(line[1][0]-line[0][0],0,line[1][1]-line[0][1]).normalize();
+assert(direction.dot(lineDirection)>1-1e-10,'Front masonry runs parallel to the purple line, with the rear on the correct side');
+assert(Math.abs(frontCorners[0].distanceTo(frontCorners[1])-64.82363778290825)<1e-6,'The front section retains its previous width (Float32 vertices)');
+assert.deepEqual(annexe.scale.toArray(),[1,1,1]);
+const legacyDrives=[];annexe.traverse(o=>{if(o.name==='Annexe drive')legacyDrives.push(o);});
+for(const [i,centre] of [[0,[0,.025,64.5]],[1,[0,.025,65]],[2,[-144,.025,1.5]],[3,[144,.025,9.5]]]){
+ assert(legacyDrives[i].getWorldPosition(new THREE.Vector3()).distanceTo(new THREE.Vector3(...annexeGroundPoint(...centre)))<1e-8,'Existing gameplay drives remain fixed');
+}
+console.log('PASS: fixed church/Churton/Grafton, purple-line frontage alignment, preserved annexe width and fixed gameplay roads.');
+// The original outline transform still supplies unchanged local dimensions.
 for(const [pixel,world] of [[[285,308],[0,13]],[[215,351],[-6,-120]]]){
  const p=annexeMapPoint(...pixel);assert(Math.hypot(p[0]-world[0],p[1]-world[1])<1e-8);
 }

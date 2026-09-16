@@ -256,3 +256,27 @@ Open `aerial.html?view=tower-workshop-copy` to inspect the result. The twin-gabl
 photo and walking start move to the eastern side of the court, clear of the new
 building and both cylinders. The copy follows Historic visibility, supplies
 walking collisions and clips covered OS outlines through its actual walls.
+
+## Workshop and cylinder placement
+
+`service-court-placement.png` is the latest user annotation: yellow selects the
+three rear workshops, purple the chimney hall, central dormered hall and adjoining
+service ranges; blue X marks place the cylinders. Irby/Ashley is excluded.
+
+The three workshops translate +11.5 X, +11 Z. Their common rear wall is at
+Z=-76.5, alongside Irby's fixed cross-wing end at -77.3. The 0.8-unit wall gap
+keeps their projecting roofs apart. The eastward component also clears the fixed
+tower range, which a straight southward slide would intersect.
+
+The complete purple group translates +7.5 X, +10.2 Z. Cylinders now stand at
+(168.5,-27.8) and (181.4,-27.8), beside the unchanged chimney at (177.5,-35.5).
+Their existing sizes and details are retained. The tightest wall clearances are
+approximately 0.8–1.0 units at the plinths; the exterior walker can pass through
+the narrow lanes beside and between them. The ramp stops short of Main/admin.
+Irby, the water tower, tower-attached ranges and Main/admin retain their transforms.
+
+`service-court-placement.mjs` records the translations. Geometry is created in
+its original coordinates, then moved with its openings, dormers, stairs, ramp,
+trim and collision footprints. The pharmacy and workshop views follow the moves.
+The tower and pharmacy tests check fixed landmarks, workshop/Irby separation,
+chimney clearance, exposed glazing, continuous roofs and actual walking routes.

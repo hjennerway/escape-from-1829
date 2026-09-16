@@ -1,7 +1,8 @@
-import {ANNEXE,ANNEXE_RANGES,ANNEXE_MAP_SCALE,annexePoint} from './annexe.mjs';
+import {ANNEXE_RANGES,ANNEXE_MAP_SCALE} from './annexe.mjs';
+import {annexeGroundPoint,annexeGroundLocal} from './annexe-ground-placement.mjs';
 import {SHARED_HISTORIC_LANES} from './historic-road-clearance.mjs';
 
-const ap=([x,z])=>{const p=annexePoint(x,0,z);return [p[0],p[2]];};
+const ap=([x,z])=>{const p=annexeGroundPoint(x,0,z);return [p[0],p[2]];};
 const frontRanges=ANNEXE_RANGES.filter(r=>r.rect[1]<29&&r.rect[3]>0);
 const frontage=(Math.max(...frontRanges.map(r=>r.rect[2]))-Math.min(...frontRanges.map(r=>r.rect[0])))*ANNEXE_MAP_SCALE;
 export const ANNEXE_ACCESS=Object.freeze({
@@ -23,7 +24,7 @@ const right=left.map(([x,z])=>[-x,z]);
 const rear=ANNEXE_ACCESS.forecourtRearZ;
 const forecourt=[[-halfCourt,rear],[-halfCourt,64],[halfCourt,64],[halfCourt,rear]];
 const northLane=SHARED_HISTORIC_LANES.find(p=>p.name==='Parsons Lane (North)');
-function local([x,z]){const c=Math.cos(ANNEXE.rotation),s=Math.sin(ANNEXE.rotation),dx=x-ANNEXE.x,dz=z-ANNEXE.z;return [c*dx-s*dz,s*dx+c*dz];}
+const local=annexeGroundLocal;
 
 // Pick the middle of surveyed straight segments, never move the saved lane.
 // The mouth ends exactly at its three-unit asphalt edge. Only the pale border
@@ -70,4 +71,3 @@ export const ANNEXE_ACCESS_KERBS=Object.freeze([
  {name:'Annexe east sweeping entrance kerb',points:right.slice(0,-1).map(ap)},
  ...[-1,1].map(side=>({name:(side<0?'Annexe west':'Annexe east')+' forecourt exposed kerb',points:[[side*7,rear],[side*halfCourt,rear],[side*halfCourt,64],[side*halfEntrance,64]].map(ap)}))
 ]);
-

@@ -4,7 +4,8 @@ import * as THREE from './dist/vendor/three.module.js';
 import {createEscapeExterior} from './dist/escape-exterior.mjs';
 import {createAerialLayouts} from './dist/aerial-layouts.mjs';
 import {PHARMACY_VIEWS,PHARMACY_TANKS} from './dist/pharmacy-court.mjs';
-import {TOWER_RANGES} from './dist/tower-buildings.mjs';
+import {TOWER_RANGES,TOWER_WORKSHOP_COPY} from './dist/tower-buildings.mjs';
+import {ESTATE_CHIMNEY} from './dist/estate-chimney.mjs';
 import {exteriorObstacles,obstacleContains,createWalker} from './dist/explore-controls.mjs';
 globalThis.document={createElement:()=>({getContext:()=>({fillRect(){},measureText:t=>({width:t.length*16}),strokeText(){},fillText(){}})})};
 const exterior=createEscapeExterior(THREE,4/3),layouts=createAerialLayouts(THREE,exterior),group=layouts.towerBuildings;
@@ -22,6 +23,9 @@ for(const tank of tanks){
   const [x0,z0,x1,z1]=range.rect,dx=Math.max(x0-x,0,x-x1),dz=Math.max(z0-z,0,z-z1);
   assert(Math.hypot(dx,dz)>radius+.8,'Gas cylinder must clear existing walls and workshop entrances: '+range.name);
  }
+ const chimneyDistance=Math.hypot(x-ESTATE_CHIMNEY.x,z-ESTATE_CHIMNEY.z);
+ assert(chimneyDistance>radius+2.8+.8,'Relocated cylinders clear the fixed chimney foundation');
+ assert(chimneyDistance<13,'Both cylinders sit beside the chimney at the blue marks');
  assert(obstacles.some(b=>obstacleContains(b,x,z)),'Gas cylinder must block walking through its base');
  assert(!obstacles.some(b=>obstacleContains(b,x+radius*.83,z+radius*.83,0)),'Tank collisions follow the round footprint, not an oversized square');
  tank.traverse(o=>{if(o.isMesh)for(const attribute of Object.values(o.geometry.attributes))assert([...attribute.array].every(Number.isFinite),'Tank geometry must be finite');});
@@ -30,14 +34,31 @@ const [a,b]=PHARMACY_TANKS;
 assert(Math.hypot(a.x-b.x,a.z-b.z)>a.radius+b.radius+2,'There must be a walking gap between the two cylinders');
 const photo=PHARMACY_VIEWS['pharmacy-photo'];
 assert(!obstacles.some(b=>obstacleContains(b,photo.position[0],photo.position[2])),'New photo viewpoint starts outside all collisions');
-// Exercise real movement across the front and rear access lanes, with tanks,
-// stair foundations and all the existing building collisions enabled.
-// The enlarged west workshop now occupies the former rear-lane start.
-for(const [startX,z] of [[181.5,-54],[191.5,-71.5]]){
+// Walk through the vacated tank court, and through each narrow access gap
+// around the cylinders at their new position beside the fixed chimney.
+for(const [start,target] of [
+ [[184,-50],[232,-50]],
+ [[163,-33],[163,-20]],
+ [[174.8,-31],[174.8,-22]],
+ [[186.99,-33],[186.99,-22.3]],
+ [[164,-22.28],[186,-22.28]]
+]){
  const camera=new THREE.PerspectiveCamera(),walker=createWalker(camera,obstacles);
- walker.setView({position:[startX,1.8,z],target:[224,1.8,z]});walker.keys.add('KeyW');
- for(let i=0;i<Math.ceil((222-startX)/.5);i++)walker.update(.1);
- assert(camera.position.x>221,'The route around the cylinders must remain open at z='+z+'; stopped at '+camera.position.toArray());
+ walker.setView({position:[start[0],1.8,start[1]],target:[target[0],1.8,target[1]]});walker.keys.add('KeyW');
+ for(let i=0;i<Math.ceil(Math.hypot(target[0]-start[0],target[1]-start[1])/.5);i++)walker.update(.1);
+ assert(Math.hypot(camera.position.x-target[0],camera.position.z-target[1])<.6,'The cylinder access route remains open: '+start+' to '+target+'; stopped at '+camera.position.toArray());
+}
+// The marked rear edge runs alongside Irby's existing end, with a small
+// clearance for both buildings' roof overhangs. Irby's transform stays fixed.
+assert.deepEqual(exterior.irbyAshley.position.toArray(),[234,0,-93.4]);
+const irbyEnd=exterior.irbyAshley.userData.roofs.find(r=>r.name==='Tower-facing cross wing').rect[3];
+const irbyObstacles=exteriorObstacles(THREE,exterior.irbyAshley);
+for(const range of [...TOWER_RANGES.filter(r=>r.name.startsWith('Rear ')),TOWER_WORKSHOP_COPY]){
+ assert(range.rect[1]>irbyEnd&&range.rect[1]-irbyEnd<1,'Workshop rear aligns with the green-marked Irby end without overlap');
+ const bounds=new THREE.Box3().setFromObject(group.getObjectByName(range.name+' walls'));
+ for(let x=bounds.min.x+.1;x<bounds.max.x;x+=.5)for(let z=bounds.min.z+.1;z<bounds.max.z;z+=.5){
+  assert(!irbyObstacles.some(o=>obstacleContains(o,x,z,.25)),'No moved workshop may intersect Irby');
+ }
 }
 const rear=group.userData.pharmacy.windows;
 assert(rear.filter(w=>w.y>4).length>=9&&rear.filter(w=>w.y<4).length>=7,'The three existing rear ranges need both rows of windows');

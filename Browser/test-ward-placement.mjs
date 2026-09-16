@@ -69,4 +69,4 @@ for(const historic of [false,true])for(const modern of [false,true]){
  const visible=new Set(exteriorObstacles(THREE,exterior.model).map(obstacle=>JSON.stringify(obstacle)));
  for(const [key,collision] of collisionKeys)assert.equal(visible.has(collision),historic,key+' collisions follow Historic visibility');
 }
-console.log('PASS: five map positions, both fixed anchors, unchanged building shapes and complete corridor geometry, translated footprints, plan/walking cameras and Historic collisions.');
+console.log('PASS: five corrected positions, both fixed anchors, source building geometry, generated corridor geometry, translated footprints, plan/walking cameras and Historic collisions.');

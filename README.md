@@ -43,6 +43,13 @@ Use `aerial.html?view=historic-roads` for the whole network or `?view=historic-a
 The later annexe annotations add a sweeping central entrance, now reduced to 60% of its initial width, and a central forecourt finished in the same asphalt as the road. The pale frontage strips and entrance gates are removed. Yellow adds both side approaches, two rear connections from Parsons Lane and the marked hardstandings. The red-circled Main/admin road ends now form continuous junctions, the teardrop has a smooth inner lawn edge, and the northern estate boundary connects around the annexe to Parsons Lane (North). These additions belong to Historic. Use `aerial.html?view=annexe-access` or `?view=annexe-entrance`; see the [updated reference notes](Research/historic-roads/README.md).
 ### Annexe wards
 
+The latest OS correction aligns the annexe's central frontage with the purple
+reference line using the fixed church, Churton and Grafton/Edge. Only the annexe
+building moves and rotates; all dimensions, other buildings and road positions
+are preserved. The oversized wings remain unchanged, so some now cross the
+existing annexe access roads. See the [alignment and validation notes](Research/annexe-placement/README.md),
+or open `aerial.html?view=annexe-site` for the updated overhead view.
+
 The later overhead correction moves the east rear pavilion to the inner side of its link, roughly matching the blue-marked position. The yellow-marked Leighton/Newton connecting leg is 40% shorter, with its end pavilion moved inward to retain the L and the existing 22-degree angle. Roofs, windows, chimneys and walking collisions follow the revised footprints. These changes apply to the browser model; the Blender and Unity exports are unchanged.
 
 The supplied Oakmere lawn photograph now refines the central rear range with a taller two-storey elevation, a central gable and circular vent, divided sash windows, brick bands and low end rooms. The circled belfry and tower retain their geometry, as do the earlier front and side details. Choose **Oakmere lawn elevation** in Locations, or open `aerial.html?view=oakmere-photo`. See [reference and preservation checks](Research/oakmere/README.md).
@@ -84,6 +91,13 @@ The white single-storey Hospital Shop block follows the blue footprint in the su
 Choose **Hospital Shop** in Locations, or open `aerial.html?view=laundry`, `?view=laundry-photo` or `?view=laundry-plan`. The building follows Historic visibility and appears in browser walking with solid collisions. Placement, dimensions and concealed faces remain visual estimates. References and modelling notes: [Research/laundry/README.md](Research/laundry/README.md). Unity and Blender exports are unchanged.
 
 ## Pharmacy rear court
+
+The latest yellow/purple annotation moves the three workshops towards Main/admin,
+aligning their rear beside the fixed Irby end with a narrow roof clearance.
+The purple service group also moves towards Main/admin, opening just enough room
+for both gas cylinders beside the fixed chimney at the blue marks. Building details,
+stairs, ramp, camera views and walking collisions follow the new placement.
+See [the placement correction](Research/tower-buildings/README.md#workshop-and-cylinder-placement).
 
 The service court now includes the photographed rear sash windows, two raised masonry stairs with pale blue railings, and two large ribbed gas storage cylinders on brick bases at the yellow-marked locations. Select **Pharmacy rear court** in Locations, or open `aerial.html?view=pharmacy` and `explore.html?view=pharmacy`. The additions follow Historic visibility, with solid foundations and accessible paths around the cylinders. The existing roofs and building footprints remain. See [reference and modelling notes](Research/pharmacy/README.md).
 

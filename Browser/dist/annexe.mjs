@@ -1,7 +1,9 @@
 import {addOakmereElevation} from './annexe-oakmere-detail.mjs';
-// The annexe, registered against the original OS extract (417 x 433).
-// Similarity registration: 1829 Reception and chapel stay fixed. Pixel picks,
-// heights and concealed elevations are estimates; this is not a measured survey.
+import {ANNEXE_PLACEMENT_REFERENCE,annexePlacementMapPoint,placeAnnexeFront} from './annexe-placement.mjs';
+import {ANNEXE_GROUNDS,annexeGroundPoint} from './annexe-ground-placement.mjs';
+// Original 417 x 433 outline registration supplies the existing dimensions.
+// Placement now uses the later church/Churton/Grafton map and purple frontage;
+// keep this outline scale independent so moving the annexe cannot resize it.
 export const ANNEXE_OS_REGISTRATION=Object.freeze({
  reception:{pixel:[285,308],world:[0,13]},chapel:{pixel:[215,351],world:[-6,-120]},
  redesmere:{pixel:[242,265],world:[94.5,-14]}
@@ -9,8 +11,7 @@ export const ANNEXE_OS_REGISTRATION=Object.freeze({
 const a=-5299/6749,b=-9568/6749;
 export const ANNEXE_MAP_SCALE=Math.hypot(a,b);
 export function annexeMapPoint(u,v){return [a*(u-285)+b*(v-308),13-b*(u-285)+a*(v-308)];}
-const origin=annexeMapPoint(138,83),c=Math.cos(Math.PI/12),s=Math.sin(Math.PI/12);
-export const ANNEXE=Object.freeze({x:origin[0],z:origin[1],rotation:Math.atan2(b*c-a*s,a*c+b*s)});
+export const ANNEXE=placeAnnexeFront(17*ANNEXE_MAP_SCALE);
 export function annexePoint(x,y,z){const c=Math.cos(ANNEXE.rotation),s=Math.sin(ANNEXE.rotation);return [ANNEXE.x+c*x+s*z,y,ANNEXE.z-s*x+c*z];}
 const shot=(p,t,fov=55)=>Object.freeze({position:annexePoint(...p),target:annexePoint(...t),fov});
 // The supplied coloured circles identify wards, not new building outlines.
@@ -34,7 +35,8 @@ export const ANNEXE_WARDS=Object.freeze([
 ].map(ward=>Object.freeze({...ward,rangeNames:Object.freeze(ward.rangeNames)})));
 export const ANNEXE_WARD_VIEWS=Object.freeze(Object.fromEntries(ANNEXE_WARDS.map(ward=>[ward.id,ward.aerial])));
 export const ANNEXE_WARD_WALKS=Object.freeze(Object.fromEntries(ANNEXE_WARDS.map(ward=>[ward.id,ward.walk])));
-const north=annexeMapPoint(138,82),south=[ANNEXE.x+(ANNEXE.x-north[0])*.01,ANNEXE.z+(ANNEXE.z-north[1])*.01],site=annexeMapPoint(205,203);
+const mapNorth=annexePlacementMapPoint([0,0]),mapSouth=annexePlacementMapPoint([0,1]);
+const southOffset=mapSouth.map((value,i)=>(value-mapNorth[i])*.01),site=annexePlacementMapPoint([155,192]);
 export const ANNEXE_VIEWS=Object.freeze({
  ...ANNEXE_WARD_VIEWS,
  'oakmere-photo':shot([-79,2.2,-54],[-4,8,-27],49),
@@ -48,8 +50,8 @@ export const ANNEXE_VIEWS=Object.freeze({
  'annexe-side':shot([-57,2.5,-12],[-18,10,-3],63),
  'annexe-side-right':shot([57,2.5,-12],[18,10,-3],63),
  'annexe-ground':shot([0,1.8,89],[0,8,14],61),
- 'annexe-plan':{position:[south[0],360,south[1]],target:[ANNEXE.x,0,ANNEXE.z],fov:52},
- 'annexe-site':{position:[site[0]+(ANNEXE.x-north[0])*.01,680,site[1]+(ANNEXE.z-north[1])*.01],target:[site[0],0,site[1]],fov:59}
+ 'annexe-plan':{position:[ANNEXE.x+southOffset[0],360,ANNEXE.z+southOffset[1]],target:[ANNEXE.x,0,ANNEXE.z],fov:52},
+ 'annexe-site':{position:[site[0]+southOffset[0],680,site[1]+southOffset[1]],target:[site[0],0,site[1]],fov:59}
 });
 // The rear east L turns approximately 22 degrees counter-clockwise on the OS
 // plan. Both ranges rotate about their junction with the central spine.
@@ -265,7 +267,12 @@ export function createAnnexe(THREE,{brick,roof,material,worldUV,hipRoof}){
  eastSide.traverse(o=>{o.name=o.name.replace(/^West /,'East ');});model.add(eastSide);
  for(const [mat,items] of batches)for(const item of items.slice(sideBatchStarts.get(mat)??0))items.push({...item,x:-item.x,r:-item.r});
  for(const o of openings.slice(sideOpeningStart))openings.push({...o,name:o.name.replace(/^West /,'East '),x:-o.x,rotation:-o.rotation});
- function drive(x0,z0,x1,z1,w){const dx=x1-x0,dz=z1-z0;solid(road,(x0+x1)/2,.025,(z0+z1)/2,Math.hypot(dx,dz),.09,w,'Annexe drive',Math.atan2(-dz,dx));}
+ function drive(x0,z0,x1,z1,w){
+  // The legacy gameplay tracks also stay fixed in world space.
+  const dx=x1-x0,dz=z1-z0,p=annexeGroundPoint((x0+x1)/2,.025,(z0+z1)/2);
+  const c=Math.cos(ANNEXE.rotation),s=Math.sin(ANNEXE.rotation),x=p[0]-ANNEXE.x,z=p[2]-ANNEXE.z;
+  solid(road,c*x-s*z,p[1],s*x+c*z,Math.hypot(dx,dz),.09,w,'Annexe drive',Math.atan2(-dz,dx)+ANNEXE_GROUNDS.rotation-ANNEXE.rotation);
+ }
  drive(0,28,0,101,6);drive(-144,65,144,65,5);drive(-144,65,-144,-62,5);drive(144,65,144,-46,5);
  const dummy=new THREE.Object3D();
  for(const [mat,items] of batches){
@@ -280,5 +287,6 @@ export function createAnnexe(THREE,{brick,roof,material,worldUV,hipRoof}){
  model.userData.wards=wards;
  model.userData.oakmereElevation=addOakmereElevation(THREE,{model,host:ranges.find(b=>b.name==='Central rear spine'),brick,roof,material,worldUV,hipRoof});
  model.userData.ranges=ranges;model.userData.annexeOpenings=openings;model.userData.osRegistration=ANNEXE_OS_REGISTRATION;
+ model.userData.placement=ANNEXE_PLACEMENT_REFERENCE;
  return model;
 }

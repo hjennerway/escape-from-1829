@@ -4,8 +4,8 @@ import {photoDetailPrimitives} from './photo-detail-primitives.mjs';
 import {wardMapPoint} from './ward-placement.mjs';
 
 // Retain the OS contour as modelling coordinates. The later yellow-line
-// correction rotates it clockwise; the blue-to-yellow correction then slides
-// the entire building 6.5 units towards the tower without changing that angle.
+// correction rotates it clockwise. The latest overhead-map registration
+// supplies its position while preserving that angle and its local geometry.
 export const ESTATES_SOURCE_FOOTPRINT=Object.freeze(OS_FOOTPRINTS[1].loops[0]
  .map(p=>Object.freeze(historicOSPoint(...p))));
 const sourceOrigin={x:244,z:-49.5};
