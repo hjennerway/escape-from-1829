@@ -3,6 +3,7 @@ import {CHURTON_VIEWS} from './churton-ward.mjs';
 import {UPTON_VIEWS} from './upton-frith-oscroft.mjs';
 import {IRBY_ASHLEY_VIEWS} from './irby-ashley.mjs';
 import {FARNDON_VIEWS} from './farndon-ward.mjs';
+import {WITBY_VIEWS} from './witby-ward.mjs';
 import {MAIN_ADMIN_VIEWS} from './main-admin-building.mjs';
 import {createAerialLayouts} from './aerial-layouts.mjs';
 import {ANNEXE_VIEWS} from './annexe.mjs';
@@ -75,6 +76,7 @@ try{
   const churtonView=new URLSearchParams(location.search).get('view');
   if(UPTON_VIEWS[churtonView])walker.setView(UPTON_VIEWS['upton-ground']);
   if(FARNDON_VIEWS[churtonView])walker.setView(FARNDON_VIEWS['farndon-2']);
+  if(WITBY_VIEWS[churtonView])walker.setView(WITBY_VIEWS['witby-ground']);
   if(IRBY_ASHLEY_VIEWS[churtonView])walker.setView(IRBY_ASHLEY_VIEWS[churtonView==='irby-ashley-3'?churtonView:'irby-ashley-1']);
   if(MAIN_ADMIN_VIEWS[churtonView]){
     const shot=MAIN_ADMIN_VIEWS[churtonView==='main-admin'||churtonView==='main-admin-plan'?'main-admin-4':churtonView];

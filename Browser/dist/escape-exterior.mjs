@@ -19,6 +19,7 @@ import {createChurtonWard} from './churton-ward.mjs';
 import {createUptonFrithOscroft} from './upton-frith-oscroft.mjs';
 import {createIrbyAshley} from './irby-ashley.mjs';
 import {createFarndon} from './farndon-ward.mjs';
+import {createWitbyWard} from './witby-ward.mjs';
 import {createMainAdminBuilding} from './main-admin-building.mjs';
 import {eastPhotoProfile,addEastPhotoDetails} from './east-photo-detail.mjs';
 import {courtyardPhotoProfile} from './courtyard-photo-detail.mjs';
@@ -306,6 +307,7 @@ export function createEscapeExterior(THREE,aspect){
   const uptonFrithOscroft=createUptonFrithOscroft(THREE,{brick:photoBrick,roof,worldUV,material});model.add(uptonFrithOscroft);
   const irbyAshley=createIrbyAshley(THREE,{brick:photoBrick,roof,worldUV,material});model.add(irbyAshley);
   const farndonWard=createFarndon(THREE,{brick:photoBrick,roof,worldUV,material});model.add(farndonWard);
+  const witbyWard=createWitbyWard(farndonWard);model.add(witbyWard);
   const {building:mainAdmin,corridor:adminCorridor}=createMainAdminBuilding(THREE,{brick:photoBrick,roof,worldUV,material});model.add(mainAdmin,adminCorridor);
   const chapel=createChapel(THREE,{brick,roof,stone,dark,worldUV});model.add(chapel);
   const estateChimney=createEstateChimney(THREE,{brick,material});model.add(estateChimney);
@@ -337,5 +339,5 @@ export function createEscapeExterior(THREE,aspect){
   const lawnMaterials=new Set();
   model.traverse(object=>{for(const mat of (Array.isArray(object.material)?object.material:[object.material]))if(mat?.userData.estateGrass)lawnMaterials.add(mat);});
   for(const mat of lawnMaterials)matchEstateGrass(mat,grass);
-  return {scene,camera,model,terrain,legacyAccess,mast,chapel,waterTower,estateChimney,annexe,newHospital:annexe,churtonWard,uptonFrithOscroft,irbyAshley,farndonWard,mainAdmin,adminCorridor,planters};
+  return {scene,camera,model,terrain,legacyAccess,mast,chapel,waterTower,estateChimney,annexe,newHospital:annexe,churtonWard,uptonFrithOscroft,irbyAshley,farndonWard,witbyWard,mainAdmin,adminCorridor,planters};
 }

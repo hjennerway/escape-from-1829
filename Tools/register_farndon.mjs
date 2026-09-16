@@ -24,4 +24,3 @@ const point=([u,v])=>[(h[0]*u+h[1]*v+h[2])/(h[6]*u+h[7]*v+1),(h[3]*u+h[4]*v+h[5]
 const blue=[[428,327],[457,326],[457,366],[502,363],[502,346],[498,346],[498,320],[527,319],[527,346],[519,346],[519,361],[558,356],[558,340],[594,340],[597,452],[564,452],[564,388],[465,393],[466,467],[426,469],[427,394],[412,395],[414,371],[428,370]];
 console.log('Fit RMS (scene units)',Math.sqrt(controls.reduce((s,[p,q])=>s+point(p).reduce((t,n,i)=>t+(n-q[i])**2,0),0)/controls.length));
 console.log('Blue world points',JSON.stringify(blue.map(p=>point(p).map(n=>+n.toFixed(2)))));
-

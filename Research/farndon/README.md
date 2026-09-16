@@ -43,8 +43,33 @@ Choose **Farndon ward** from Locations, or open:
 - `explore.html?view=farndon` — walk from the garden approach.
 
 `node Browser/test-farndon.mjs` checks the marked solid/recess picks, roof
-coverage at 582 interior samples, roof normals, single-storey window exposure,
+coverage at 587 interior samples, roof normals, single-storey window exposure,
 walking collisions, retained adjacent OS connections and layout visibility.
 `node Browser/artifacts/inspect-farndon.cjs` renders the four aerial/photo
 views, walking and mobile navigation. Unity and Blender exports are unchanged.
 
+## Central garden projection correction
+
+Rechecking `img2.jpg` and `gable-projection-reference.png` resolves the central
+gabled section as a shallow projecting bay, rather than a flush triangular
+gable. Its seven-unit-wide brick wall now stands 0.9 scene units forward of the
+cross-range, with three tall sashes, solid short returns, continuous cornice and
+gutters, and a pitched slate roof joining the main roof. The unified footprint
+and walking collisions include the projection. Projection depth is a visual
+estimate; the overall ward position, height and outer wings are retained.
+
+## Continuous H ridge correction
+
+The yellow lines in `ridge-alignment-reference.png` require a continuous H
+of roof ridges. Both former junctions used overlapping hipped rectangles with
+offset ridge centres and different heights. The main roof now uses shared
+ridge vertices and valley edges, with no interior hip cutting across either
+junction. The cross ridge at z=-156.8 joins straight wing ridges at x=189.25
+and x=153.65, all at height 6.75. The rear wall steps remain; the short rear
+slopes are consequently unequal in width. Hips occur only at the two outer
+rear ends. The garden gable roof still joins the cross ridge, and the lower
+rear room, link and side room retain their roof forms.
+
+The Farndon check now includes 503 samples on the actual H-shaped roof ridge
+and small offsets around both marked junctions, in addition to the 587 roof
+coverage samples, exposed-window and walking checks.

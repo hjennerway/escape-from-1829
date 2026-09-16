@@ -75,12 +75,12 @@ walkLeg([-11.55,24],[-11.55,18],12);
 walk.setView({position:[-27,1.8,25],target:[-27,1.8,15]});
 walk.keys.add('KeyW');for(let i=0;i<30;i++)walk.update(.1);
 assert(exterior.camera.position.z>20&&exterior.camera.position.z<20.5,'img19 projecting white base must block walking through it');
-// The OS connecting corridor now crosses the outside drive. Its north
-// approach and the garden railing gap remain accessible.
-walkLeg([105,-34],[105,5],78);
-walk.setView({position:[105,1.8,5],target:[105,1.8,22]});
+// The deeper hipped connector building now meets the drive at z=1.2.
+// Its north approach and the garden railing gap remain accessible.
+walkLeg([105,-34],[105,0],68);
+walk.setView({position:[105,1.8,0],target:[105,1.8,22]});
 walk.keys.add('KeyW');for(let i=0;i<40;i++)walk.update(.1);
-assert(exterior.camera.position.z<6.5,'OS corridor must stop walking through its masonry');
+assert(exterior.camera.position.z<1.2,'Hipped connector building must stop walking through its masonry');
 walkLeg([105,-12],[99,-12],12);
 walk.setView({position:[100,1.8,.1],target:[90,1.8,.1]});
 walk.keys.add('KeyW');for(let i=0;i<20;i++)walk.update(.1);

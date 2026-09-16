@@ -264,13 +264,29 @@ export function createMainAdminBuilding(THREE,{brick,roof,worldUV,material}){
   }
   lane([[230,46],[244,47],[257,54],[267,67],[275,87]],8,'East curved carriage drive');
   lane([[260,58],[257,44],[254,28],[254,8],[250,-13]],6.5,'East wing side access');
-  // Retain the independent OS link; the winter painting refines its elevation.
+  // The red-marked photo identifies a substantial hipped building over the
+  // first 60% of the exposed connection from Redesmere, then a low admin link.
+  // Keep the small concealed joint below the existing Redesmere roofs. Its
+  // ivy-fronted range ends at x=99.8 (roof overhang to 100.2); neither it nor
+  // its separate chimney is part of this refinement.
   const start=94.65,end=adminMapPoint(169,35)[0],cz=adminMapPoint(148,35)[1];
+  const buildingStart=100.45,split=buildingStart+(end-buildingStart)*.6,connectorFront=cz+3.2;
+  const sections=[
+    {name:'Redesmere concealed connector',start,end:buildingStart,cz,depth:6.4,height:3.6,rise:.64},
+    {name:'Redesmere connector building',start:buildingStart,end:split,cz:connectorFront-5.9,depth:11.8,height:4.8,rise:3.2},
+    {name:'Connecting corridor',start:split,end,cz,depth:6.4,height:3.6,rise:.64}
+  ];
   const corridorBrick=brick.clone();corridorBrick.color.set(0xc7a391);
-  solid(corridorBrick,(start+end)/2,1.8,cz,end-start,3.6,6.4,'Connecting corridor walls',corridor);
-  hip((start+end)/2,cz,end-start,6.4,3.66,.64,'Connecting corridor',corridor);
-  addAdminCorridorDetail(THREE,{corridor,start,end,cz,brick,material,worldUV});
-  corridor.userData.footprint={minX:start,maxX:end,minZ:cz-3.2,maxZ:cz+3.2};
+  for(const section of sections){
+    const {name,start:a,end:b,cz:z,depth,height,rise}=section,x=(a+b)/2;
+    solid(corridorBrick,x,height/2,z,b-a,height,depth,name+' walls',corridor);
+    hip(x,z,b-a,depth,height+.06,rise,name,corridor);
+    if(a>=buildingStart)addAdminCorridorDetail(THREE,{corridor,...section,brick,material,worldUV});
+  }
+  corridor.userData.sections=sections;
+  corridor.userData.footprints=sections.map(s=>({minX:s.start,maxX:s.end,minZ:s.cz-s.depth/2,maxZ:s.cz+s.depth/2}));
+  corridor.userData.footprint={minX:start,maxX:end,minZ:connectorFront-11.8,maxZ:connectorFront};
+  corridor.userData.reference='Research/admin-corridor/README.md: the red-marked photograph refines the Redesmere-side 60% into a deeper single-storey building with a raised hipped slate roof; the rest stays a low corridor. Front wall alignment and concealed Redesmere joint retained. Ivy-fronted range and its chimney unchanged. Heights/depth and concealed elevations are estimates; arched window detail follows the earlier winter reference.';
   const dummy=new THREE.Object3D();
   for(const [m,items] of batches){const batch=new THREE.InstancedMesh(new THREE.BoxGeometry(1,1,1),m,items.length);batch.name='Admin sash and masonry details';batch.userData.orientedCollision=true;batch.castShadow=true;batch.receiveShadow=true;items.forEach((b,i)=>{dummy.position.set(b.x,b.y,b.z);dummy.scale.set(b.w,b.h,b.d);dummy.rotation.set(0,b.r,0);dummy.updateMatrix();batch.setMatrixAt(i,dummy.matrix);});building.add(batch);}
   building.userData.openings=openings;building.userData.ranges=ranges;

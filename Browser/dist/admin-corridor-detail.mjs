@@ -1,6 +1,6 @@
 // The supplied winter painting shows low red-brick galleries with small
 // round-headed lights. Window spacing and the unseen north side are inferred.
-export function addAdminCorridorDetail(THREE,{corridor,start,end,cz,brick,material,worldUV}){
+export function addAdminCorridorDetail(THREE,{corridor,start,end,cz,depth=6.4,height=3.6,brick,material,worldUV}){
   const stone=material(0xc8c6b7),paint=material(0xd5d8ce);
   const shadow=material(0x283334),glass=material(0x536c72,{roughness:.52,metalness:.12});
   const iron=material(0x303d40),red=brick.clone();red.color.set(0xc7a391);
@@ -20,15 +20,15 @@ export function addAdminCorridorDetail(THREE,{corridor,start,end,cz,brick,materi
     shape.lineTo(-r+t,0);shape.absarc(0,0,r-t,Math.PI,0,true);shape.closePath();
     return mesh(new THREE.ExtrudeGeometry(shape,{depth,bevelEnabled:false,curveSegments:24}),m,0,y,z,name,parent);
   }
-  corridor.userData.openings=[];
+  corridor.userData.openings??=[];
   for(const side of [-1,1]){
     const face=new THREE.Group();face.name=side===1?'Corridor south windows':'Corridor north windows';
-    face.position.set(mid,0,cz+side*3.2);face.rotation.y=side===1?0:Math.PI;corridor.add(face);
+    face.position.set(mid,0,cz+side*depth/2);face.rotation.y=side===1?0:Math.PI;corridor.add(face);
     // A dark continuous gutter, narrow corbelled brick eaves and low plinth.
     box(red,0,.18,.045,end-start,.36,.09,'Corridor brick plinth',face);
-    box(red,0,3.39,.055,end-start,.12,.11,'Corridor brick eaves course',face);
-    box(red,0,3.49,.105,end-start,.10,.21,'Corridor projecting brick eaves',face);
-    box(iron,0,3.64,.22,end-start+.36,.14,.22,'Corridor gutter',face);
+    box(red,0,height-.21,.055,end-start,.12,.11,'Corridor brick eaves course',face);
+    box(red,0,height-.11,.105,end-start,.10,.21,'Corridor projecting brick eaves',face);
+    box(iron,0,height+.04,.22,end-start+.36,.14,.22,'Corridor gutter',face);
     for(let i=0;i<count;i++){
       const x=(i-(count-1)/2)*spacing,window=new THREE.Group();
       window.name='Corridor round-headed window';window.position.set(x,sill,0);face.add(window);
@@ -52,12 +52,11 @@ export function addAdminCorridorDetail(THREE,{corridor,start,end,cz,brick,materi
         const joint=box(shadow,Math.cos(a)*r,spring+Math.sin(a)*r,.149,.15,.012,.008,'Corridor arch joint',window);
         joint.rotation.z=a;joint.castShadow=false;
       }
-      corridor.userData.openings.push({x:mid+side*x,y:sill,z:cz+side*3.2,width,spring,radius,side});
+      corridor.userData.openings.push({x:mid+side*x,y:sill,z:cz+side*depth/2,width,spring,radius,side});
     }
     for(const x of [-(end-start)/2+1.1,0,(end-start)/2-1.1]){
-      box(iron,x,1.8,.19,.09,3.5,.10,'Corridor downpipe',face);
-      for(const y of [.55,2.85])box(iron,x,y,.17,.16,.075,.17,'Corridor pipe bracket',face);
+      box(iron,x,height/2,.19,.09,height-.1,.10,'Corridor downpipe',face);
+      for(const y of [.55,height-.75])box(iron,x,y,.17,.16,.075,.17,'Corridor pipe bracket',face);
     }
   }
-  corridor.userData.reference='Research/admin-corridor/winter-corridor-reference.png: low red brick, small semicircular-headed windows, pale surrounds and sills, shallow slate roof. North elevation and repeated bay spacing inferred; mapped footprint retained.';
 }

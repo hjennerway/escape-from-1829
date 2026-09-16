@@ -6,7 +6,7 @@ const {chromium}=require('C:/Users/Harry/.cache/codex-runtimes/codex-primary-run
  const page=await browser.newPage({viewport:{width:1200,height:800}}),errors=[];
  page.on('pageerror',e=>errors.push(e.message));
  const photoOnly=process.argv.includes('--photo');
- for(const view of photoOnly?['farndon-2']:['farndon','farndon-plan','farndon-site','farndon-2']){
+ for(const view of photoOnly?['farndon','farndon-2']:['farndon','farndon-plan','farndon-site','farndon-2']){
   await page.goto('http://127.0.0.1:1829/aerial.html?view='+view);
   await page.waitForTimeout(1700);
   assert((await page.locator('#churtonNav').textContent()).includes('FARNDON'));

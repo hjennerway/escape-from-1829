@@ -54,3 +54,35 @@ collisions, retained adjacent OS connection and independent layout visibility.
 Unity and Blender exports are unchanged.
 
 The blue-arrow greenhouse correction turns the roof fall through 90 degrees: its high edge meets the west garden wing at x=247.7 and it slopes down into the court towards x=236.5. The footprint stays in place; side glazing and frame heights follow the revised slope. Reference: greenhouse-slope-correction.png.
+
+
+## Rear conservatory and octagonal corners
+
+The marked rear photograph in `rear-correction-reference.png` and prior
+render in `rear-correction-render.png` supersede the earlier garden-bay
+spacing. The colours identify corrections only. The conservatory now runs
+to z=-142, extending 4.5 scene units past the west wing's z=-137.5 end;
+its newly exposed west side has matching glazing and a low brick wall.
+The previously corrected roof fall across X is retained.
+
+A quarter-octagonal, hipped corner fills the junction at x=247.7, z=-122.7.
+The adjacent half-octagonal bay moves to x=232.8, leaving 0.9 units between
+its masonry edge and the conservatory. Two upper sashes occupy the flat
+wall between that bay and the corner. The west-wing upper sash pair is
+spread across the remaining exposed return. The other garden bay retains
+its position. Dimensions are visual estimates from the supplied marks.
+
+The new corner and conservatory walls participate in walking collisions.
+The Irby checks cover the extension, retained roof slope, octagonal corner,
+bay clearance, both window pairs, exposed glazing and walking access.
+
+Use `aerial.html?view=irby-ashley-rear` (REAR in the location links) for
+the marked render comparison, or the existing BLUE VIEW for the facade.
+
+
+The yellow-line roof correction in `corner-roof-ridge-correction.png`
+joins the quarter-octagonal peak directly to the west wing's ridge end.
+The old descending rear gable verge and low junction patch (circled blue)
+are removed. Slate slopes now share the new connecting ridge, with a rear
+valley meeting the continuous garden range. Walls and glazing retain their
+previous positions.

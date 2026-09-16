@@ -37,7 +37,8 @@ assert(Math.hypot(...historicOSPoint(249,286).map((v,i)=>v-[0,19.5][i]))<1e-9);
 for(const name of ['chapel','churton']){const anchor=HISTORIC_OS_REGISTRATION[name],p=historicOSPoint(...anchor.pixel);assert(Math.hypot(p[0]-anchor.world[0],p[1]-anchor.world[1])<6,'Identified landmarks must agree within the reference-pick tolerance');}
 const missing=layouts.historicRoads.userData.missingFootprints;
 assert(missing.occupied.length>40,'Clipping must inspect the assembled existing estate, not an empty reparented model');
-assert(missing.segments.length>100,'Missing outlines must retain individual stepped walls and court edges');
+// Twenty Witby Ward edges now have a model; the remaining ranges retain their detailed traces.
+assert(missing.segments.length>80,'Missing outlines must retain individual stepped walls and court edges');
 let diagonalCount=0;
 const corridorStart=historicOSPoint(86,300),corridorEnd=historicOSPoint(114,230);
 function distanceToCorridor(p){const dx=corridorEnd[0]-corridorStart[0],dz=corridorEnd[1]-corridorStart[1],t=Math.max(0,Math.min(1,((p[0]-corridorStart[0])*dx+(p[1]-corridorStart[1])*dz)/(dx*dx+dz*dz)));return Math.hypot(p[0]-corridorStart[0]-t*dx,p[1]-corridorStart[1]-t*dz);}

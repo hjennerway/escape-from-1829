@@ -10,8 +10,8 @@ const exterior=createEscapeExterior(THREE,1.5),ward=exterior.farndonWard;
 const layouts=createAerialLayouts(THREE,exterior);exterior.scene.updateMatrixWorld(true);
 assert.equal(ward.userData.storeys,1);
 assert.equal(ward.parent,layouts.historic);
-const solids=[[190,-176],[190,-144],[179,-157],[153,-175],[154,-150],[171,-144],[172,-150],[196,-157]];
-const courts=[[177,-172],[182,-146],[162,-144],[165,-182],[199,-170]];
+const solids=[[171.1,-161.4],[167.65,-161.4],[174.55,-161.4],[190,-176],[190,-144],[179,-157],[153,-175],[154,-150],[171,-144],[172,-150],[196,-157]];
+const courts=[[166.5,-162.5],[175.8,-162.5],[171.1,-163],[177,-172],[182,-146],[162,-144],[165,-182],[199,-170]];
 const ray=new THREE.Raycaster();
 function down(x,z){ray.set(new THREE.Vector3(x,20,z),new THREE.Vector3(0,-1,0));return ray.intersectObject(ward,true).find(hit=>hit.object.name.endsWith('slate roof'));}
 for(const p of solids){
@@ -25,6 +25,24 @@ for(let x=150;x<198;x+=1.3)for(let z=-180.5;z<-140.5;z+=1.3){
  if(!pointInFootprint([x,z],FARNDON_FOOTPRINT))continue;
  assert(down(x,z)?.object.name.includes('roof'),'Uncovered roof sample: '+[x,z]);checked++;
 }
+// Check the rendered roof surface, rather than just the decorative ridge caps.
+// The yellow H must have no offset, dip, raised crossing, or hidden end hip.
+let ridgeSamples=0;
+function assertRidge(x,z){
+ const hit=down(x,z);
+ assert(hit&&Math.abs(hit.point.y-6.75)<.0002,'Ridge must remain level and exposed: '+[x,z,hit?.point.y]);
+ ridgeSamples++;
+}
+for(let x=153.65;x<=189.25;x+=.2)assertRidge(x,-156.8);
+for(const [x,start,end] of [[189.25,-181.3,-144.8],[153.65,-179.1,-151.4]]){
+ for(let z=start;z<=end;z+=.2)assertRidge(x,z);
+ assertRidge(x,-156.8);
+ // Approaches from all four directions converge on the same junction.
+ for(const [dx,dz] of [[.01,0],[-.01,0],[0,.01],[0,-.01]]){
+  const hit=down(x+dx,-156.8+dz);
+  assert(hit&&Math.abs(hit.point.y-6.75)<.015,'Continuous roof around the circled junction: '+[x,dx,dz]);
+ }
+}
 ward.traverse(o=>{
  if(!o.isMesh)return;
  for(const a of Object.values(o.geometry.attributes))assert([...a.array].every(Number.isFinite));
@@ -36,6 +54,8 @@ for(const o of ward.userData.openings){
  ray.set(p.clone().addScaledVector(n,.6),n.negate());
  assert(ray.intersectObject(ward,true)[0]?.object.isInstancedMesh,'Sash must sit outside the wall: '+JSON.stringify(o));
 }
+const bayWindows=ward.userData.openings.filter(o=>Math.abs(o.z+ward.position.z+161.83)<.01);
+assert.equal(bayWindows.length,3,'The projecting gable section has three exposed sashes');
 const obstacles=exteriorObstacles(THREE,exterior.model);
 for(const p of solids)assert(obstacles.some(o=>obstacleContains(o,...p)),'Solid collisions: '+p);
 for(const p of [...courts,FARNDON_VIEWS['farndon-2'].position.filter((_,i)=>i!==1)])assert(!obstacles.some(o=>obstacleContains(o,...p)),'Open courtyard/photo camera: '+p);
@@ -48,6 +68,4 @@ for(const historic of [false,true])for(const modern of [false,true]){
  assert.equal(visible(ward),historic);
  assert.equal(exteriorObstacles(THREE,exterior.model).some(o=>obstacleContains(o,190,-176)),historic);
 }
-console.log('PASS: corrected Farndon footprint, '+checked+' roof samples, single-storey glazing, open garden, walking collisions, OS corridor retention and Historic visibility.');
-
-
+console.log('PASS: corrected Farndon footprint, '+checked+' roof samples, '+ridgeSamples+' continuous H-ridge samples, single-storey glazing, open garden, walking collisions, OS corridor retention and Historic visibility.');

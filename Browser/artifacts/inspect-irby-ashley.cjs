@@ -6,7 +6,7 @@ const {chromium}=require('C:/Users/Harry/.cache/codex-runtimes/codex-primary-run
   const page=await browser.newPage({viewport:{width:1200,height:800}}),errors=[];
   page.on('pageerror',e=>errors.push(e.message));
   const mobileOnly=process.argv.includes('--mobile');
-  for(const view of mobileOnly?[]:['irby-ashley','irby-ashley-plan','irby-ashley-1','irby-ashley-3','irby-ashley-4']){
+  for(const view of mobileOnly?[]:['irby-ashley','irby-ashley-rear','irby-ashley-plan','irby-ashley-1','irby-ashley-3','irby-ashley-4']){
    await page.goto('http://127.0.0.1:1829/aerial.html?view='+view);
    await page.waitForTimeout(1600);
    assert(await page.locator('#churtonNav').isVisible());
@@ -30,6 +30,6 @@ const {chromium}=require('C:/Users/Harry/.cache/codex-runtimes/codex-primary-run
   assert(links.y+links.height<controls.y,'Photo links must clear the mobile layout controls');
   await page.screenshot({path:'Browser/artifacts/irby-ashley-mobile.jpg',type:'jpeg',quality:80});
   assert.deepEqual(errors,[]);
-  console.log(mobileOnly?'PASS: portrait plan and unobstructed mobile photo navigation.':'PASS: five aerial/photo views, Locations entry, walking view and portrait plan render without browser errors.');
+  console.log(mobileOnly?'PASS: portrait plan and unobstructed mobile photo navigation.':'PASS: six aerial/photo views, Locations entry, walking view and portrait plan render without browser errors.');
  }finally{await browser.close();}
 })().catch(e=>{console.error(e);process.exitCode=1;});
