@@ -52,7 +52,8 @@ export const ANNEXE_ACCESS_ROADS=Object.freeze([
   [east.inside,[95,-64],[86,-61]],[[82,-59],[76,-61],[72,-61]]
  ]).map(ap)},
  {name:'Annexe rear ward approach',width:5,points:curve([56,-93],[[[65,-94],[70,-84],[72,-75]],[[74,-61],[68,-51],[66,-45]]]).map(ap)},
- {name:'Annexe rear east return',width:5,points:curve([89,-63],[[[93,-54],[92,-41],[95,-31]]]).map(ap)}
+ // Stop before the pavilion moved to the inner side of the east rear link.
+ {name:'Annexe rear east return',width:5,points:curve([89,-63],[[[93,-54],[92,-46],[95,-40]]]).map(ap)}
 ]);
 export const ANNEXE_ACCESS_PAVING=Object.freeze([
  {name:'Annexe sweeping entrance',surface:'junction',points:[...left,...right.slice().reverse()].map(ap)},
