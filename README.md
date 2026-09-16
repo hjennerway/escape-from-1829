@@ -323,3 +323,29 @@ side, at 90 degrees to Main, with Farndon's receiving wing aligned to it.
 Witby, Grafton and Hale's links reach their moved walls. Estates is also aligned
 to the same church/Churton map reference. See the updated
 [ward positions and overhead comparison](Research/ward-placement/README.md).
+
+## Garages and mortuary
+
+The Historic estate now includes the roadside garages in the blue-marked area
+opposite Main/admin and the separate T-shaped mortuary in the yellow area.
+The photos guide the low brick row, pale blue garage doors, taller workshop,
+office windows, slate roofs and mortuary chimneys. Choose **Garages & Mortuary**
+in Locations for the aerial, two photo angles, mortuary detail and plan views;
+`explore.html?view=garages` starts beside the row. Buildings have walking
+collisions and leave the road junction clear. [References and modelling notes](Research/garages/README.md)
+record approximate dimensions and hidden details. Run
+`node Browser/test-garages-mortuary.mjs` for geometry, clearance and layout checks.
+
+## Greenhouses and gardeners buildings
+
+The Historic browser layout now includes the red-marked access road south of
+Vivienne Smith Lane, three parallel glasshouses on the yellow marks, and two
+brick service buildings along the blue marks. The supplied photograph guides
+their hipped tiled roofs, blue doors, pale windows and working yard. The purple
+camera position is available as **Photo view**. Select **Greenhouses & gardeners
+buildings** in Locations, or open `aerial.html?view=greenhouses`; use
+`explore.html?view=greenhouses` to walk there. See the
+[placement and reference notes](Research/greenhouses/README.md).
+Run `node Browser/test-greenhouses.mjs` for roof, access, collision and layout
+checks. Dimensions and concealed details are estimated from the references;
+Unity and Blender exports are unchanged.

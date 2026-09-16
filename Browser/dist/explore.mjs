@@ -8,6 +8,8 @@ import {ESTATES_VIEWS} from './estates-department.mjs';
 import {FARNDON_VIEWS} from './farndon-ward.mjs';
 import {FARNDON_CORRIDOR_WALK,WARD_CORRIDOR_WALK} from './farndon-corridor.mjs';
 import {WITBY_VIEWS} from './witby-ward.mjs';
+import {GARAGE_MORTUARY_VIEWS} from './garages-mortuary.mjs';
+import {GREENHOUSE_VIEWS} from './greenhouses.mjs';
 import {LAUNDRY_VIEWS} from './laundry.mjs';
 import {MAIN_ADMIN_VIEWS} from './main-admin-building.mjs';
 import {createAerialLayouts,bindLayoutToggles} from './aerial-layouts.mjs';
@@ -88,6 +90,8 @@ try{
   if(ANNEXE_VIEWS[annexeView])walker.setView(ANNEXE_WARD_WALKS[annexeView]??ANNEXE_VIEWS[['annexe','annexe-plan','annexe-site'].includes(annexeView)?'annexe-ground':annexeView]);
   const churtonView=new URLSearchParams(location.search).get('view');
   if(ESTATES_VIEWS[churtonView])walker.setView(ESTATES_VIEWS['estates-photo']);
+  if(GREENHOUSE_VIEWS[churtonView])walker.setView(GREENHOUSE_VIEWS['greenhouses-photo']);
+  if(GARAGE_MORTUARY_VIEWS[churtonView])walker.setView(GARAGE_MORTUARY_VIEWS[churtonView.startsWith('mortuary')?'mortuary-ground':churtonView==='garages-2'?'garages-2':'garages-1']);
   if(LAUNDRY_VIEWS[churtonView])walker.setView(LAUNDRY_VIEWS['laundry-photo']);
   if(UPTON_VIEWS[churtonView])walker.setView(UPTON_VIEWS['upton-ground']);
   if(FARNDON_VIEWS[churtonView])walker.setView(FARNDON_VIEWS['farndon-2']);

@@ -1,0 +1,2 @@
+import {spawnSync} from 'node:child_process';import fs from 'node:fs';
+for(const file of ['test-annexe-photo-placement.mjs','test-historic-roads.mjs']){const r=spawnSync(process.execPath,['--import','./artifacts/without-garages.mjs',file],{encoding:'utf8',maxBuffer:1024*1024*8});fs.writeFileSync('artifacts/garages-baseline-'+file+'.log',r.stdout+r.stderr);console.log(file+' without new buildings: '+(r.status===0?'PASS':'FAIL')+' '+(r.stderr.match(/AssertionError[^\r\n]+/)?.[0]??r.error??''));}

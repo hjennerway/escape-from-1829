@@ -375,9 +375,11 @@ export function createTowerBuildings(THREE,exterior){
   }
   const part=poly(sides,blue,name+' walls');part.userData.roofDormer=name;dormers.push({name,x,z,axis,placement});
   pitched({name,rect:[x-1.9,z-1.85,x+1.9,z+1.85],height:top,rise:1.1,axis,roof:'gable',gableMaterial:blue});
-  // Glazing faces down the host slope, perpendicular to the roof ridge.
-  if(axis==='z')sash(x+1.83,top-.6,z,2.6,1.0,Math.PI/2,name+' glazing');
-  else sash(x,top-.6,z+1.78,2.6,1.0,0,name+' glazing');
+  // Matching vents face down both host slopes, perpendicular to the ridge.
+  for(const side of [1,-1]){
+   if(axis==='z')sash(x+side*1.83,top-.6,z,2.6,1.0,side*Math.PI/2,name+' glazing');
+   else sash(x,top-.6,z+side*1.78,2.6,1.0,side===1?0:Math.PI,name+' glazing');
+  }
  }
  // Marked ridge correction: both protrusions straddle the east/west crest.
  // Keep their glazing above the higher host roof at this new position.

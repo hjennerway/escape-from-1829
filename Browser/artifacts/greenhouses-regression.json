@@ -1,0 +1,155 @@
+[
+  {
+    "file": "test.mjs",
+    "status": 0
+  },
+  {
+    "file": "test-game.mjs",
+    "status": 0
+  },
+  {
+    "file": "test-east-forward-end.mjs",
+    "status": 0
+  },
+  {
+    "file": "test-redesmere-garden.mjs",
+    "status": 0
+  },
+  {
+    "file": "test-laundry.mjs",
+    "status": 0
+  },
+  {
+    "file": "test-escape-exterior.mjs",
+    "status": 0
+  },
+  {
+    "file": "test-water-tower.mjs",
+    "status": 0
+  },
+  {
+    "file": "test-tower-buildings.mjs",
+    "status": 0
+  },
+  {
+    "file": "test-pharmacy.mjs",
+    "status": 0
+  },
+  {
+    "file": "test-irby-ashley.mjs",
+    "status": 0
+  },
+  {
+    "file": "test-irby-roads.mjs",
+    "status": 0
+  },
+  {
+    "file": "test-grafton-edge.mjs",
+    "status": 0
+  },
+  {
+    "file": "test-hale-ward.mjs",
+    "status": 0
+  },
+  {
+    "file": "test-estates.mjs",
+    "status": 0
+  },
+  {
+    "file": "test-farndon.mjs",
+    "status": 0
+  },
+  {
+    "file": "test-ward-placement.mjs",
+    "status": 0
+  },
+  {
+    "file": "test-ward-corridors.mjs",
+    "status": 0
+  },
+  {
+    "file": "test-explore.mjs",
+    "status": 0
+  },
+  {
+    "file": "test-annexe.mjs",
+    "status": 0
+  },
+  {
+    "file": "test-annexe-os-refinement.mjs",
+    "status": 0
+  },
+  {
+    "file": "test-annexe-photo-placement.mjs",
+    "status": 1
+  },
+  {
+    "file": "test-annexe-outer-front.mjs",
+    "status": 0
+  },
+  {
+    "file": "test-oakmere.mjs",
+    "status": 0
+  },
+  {
+    "file": "test-annexe-wards.mjs",
+    "status": 0
+  },
+  {
+    "file": "test-churton.mjs",
+    "status": 0
+  },
+  {
+    "file": "test-upton.mjs",
+    "status": 0
+  },
+  {
+    "file": "test-garages-mortuary.mjs",
+    "status": 0
+  },
+  {
+    "file": "test-greenhouses.mjs",
+    "status": 0
+  },
+  {
+    "file": "test-main-admin.mjs",
+    "status": 0
+  },
+  {
+    "file": "test-main-admin-refine2.mjs",
+    "status": 0
+  },
+  {
+    "file": "test-aerial-controls.mjs",
+    "status": 0
+  },
+  {
+    "file": "test-device-location.mjs",
+    "status": 0
+  },
+  {
+    "file": "test-aerial-layouts.mjs",
+    "status": 0,
+    "note": "Passed after adding the new Historic group to the expected children and visibility checks."
+  },
+  {
+    "file": "test-modern-entrance.mjs",
+    "status": 0
+  },
+  {
+    "file": "test-parsons-retrace.mjs",
+    "status": 0
+  },
+  {
+    "file": "test-historic-roads.mjs",
+    "status": 1
+  },
+  {
+    "file": "test-annexe-access.mjs",
+    "status": 0
+  },
+  {
+    "file": "test-performance.mjs",
+    "status": 0
+  }
+]
