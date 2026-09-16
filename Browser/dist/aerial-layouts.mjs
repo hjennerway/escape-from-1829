@@ -3,12 +3,12 @@ import {createModernRoads} from './modern-roads.mjs';
 import {createModernEntrance} from './modern-entrance.mjs';
 import {createTowerBuildings} from './tower-buildings.mjs';
 
-// Opt in from the aerial preview: gameplay and walking keep their existing estate.
+// Shared by the aerial preview and exterior walk; gameplay keeps its existing estate.
 export function createAerialLayouts(THREE,exterior){
   if(exterior.layouts)return exterior.layouts;
   const shared=new THREE.Group(),historic=new THREE.Group(),modern=new THREE.Group();
   shared.name='Shared estate';historic.name='Historic layout';modern.name='Modern layout';
-  const historicObjects=new Set([exterior.annexe,exterior.mainAdmin,exterior.adminCorridor,exterior.estateChimney,exterior.irbyAshley,exterior.farndonWard,exterior.witbyWard]);
+  const historicObjects=new Set([exterior.annexe,exterior.mainAdmin,exterior.adminCorridor,exterior.estateChimney,exterior.irbyAshley,exterior.farndonWard,exterior.witbyWard,exterior.laundry]);
   for(const child of [...exterior.model.children]){
     if(child===exterior.terrain)continue;
     (historicObjects.has(child)?historic:shared).add(child);
@@ -38,14 +38,15 @@ export function createAerialLayouts(THREE,exterior){
   return exterior.layouts;
 }
 
-export function bindLayoutToggles(layouts,root){
+export function bindLayoutToggles(layouts,root,onChange=()=>{}){
   const historic=root.querySelector('#historicLayout'),modern=root.querySelector('#modernLayout');
   const fit=root.querySelector('#fitLayouts'),roadList=root.querySelector('#modernRoadList');
   function refresh(){
     historic.checked=layouts.state.historic;modern.checked=layouts.state.modern;
-    fit.disabled=!historic.checked&&!modern.checked;roadList.hidden=!modern.checked;
+    if(fit)fit.disabled=!historic.checked&&!modern.checked;
+    if(roadList)roadList.hidden=!modern.checked;
   }
-  for(const [input,key] of [[historic,'historic'],[modern,'modern']])input.addEventListener('change',()=>{layouts.setVisible(key,input.checked);refresh();});
+  for(const [input,key] of [[historic,'historic'],[modern,'modern']])input.addEventListener('change',()=>{layouts.setVisible(key,input.checked);refresh();onChange(layouts.state);});
   refresh();
 }
 

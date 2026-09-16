@@ -25,5 +25,6 @@ picker.addEventListener('focusout',event=>{
 });
 
 for(const link of panel.querySelectorAll('a')){
-  if(new URL(link.href).search===location.search)link.setAttribute('aria-current','page');
+  const url=new URL(link.href);
+  if(url.pathname===location.pathname&&url.search===location.search)link.setAttribute('aria-current','page');
 }

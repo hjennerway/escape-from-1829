@@ -20,6 +20,7 @@ import {createUptonFrithOscroft} from './upton-frith-oscroft.mjs';
 import {createIrbyAshley} from './irby-ashley.mjs';
 import {createFarndon} from './farndon-ward.mjs';
 import {createWitbyWard} from './witby-ward.mjs';
+import {createLaundry} from './laundry.mjs';
 import {createMainAdminBuilding} from './main-admin-building.mjs';
 import {eastPhotoProfile,addEastPhotoDetails} from './east-photo-detail.mjs';
 import {courtyardPhotoProfile} from './courtyard-photo-detail.mjs';
@@ -309,6 +310,7 @@ export function createEscapeExterior(THREE,aspect){
   const farndonWard=createFarndon(THREE,{brick:photoBrick,roof,worldUV,material});model.add(farndonWard);
   const witbyWard=createWitbyWard(farndonWard);model.add(witbyWard);
   const {building:mainAdmin,corridor:adminCorridor}=createMainAdminBuilding(THREE,{brick:photoBrick,roof,worldUV,material});model.add(mainAdmin,adminCorridor);
+  const laundry=createLaundry(THREE,{brick:photoBrick,roof,worldUV,material,adminCorridor});model.add(laundry);
   const chapel=createChapel(THREE,{brick,roof,stone,dark,worldUV});model.add(chapel);
   const estateChimney=createEstateChimney(THREE,{brick,material});model.add(estateChimney);
   const waterTower=createWaterTower(THREE,{brick,roof,dark,worldUV});model.add(waterTower);
@@ -339,5 +341,5 @@ export function createEscapeExterior(THREE,aspect){
   const lawnMaterials=new Set();
   model.traverse(object=>{for(const mat of (Array.isArray(object.material)?object.material:[object.material]))if(mat?.userData.estateGrass)lawnMaterials.add(mat);});
   for(const mat of lawnMaterials)matchEstateGrass(mat,grass);
-  return {scene,camera,model,terrain,legacyAccess,mast,chapel,waterTower,estateChimney,annexe,newHospital:annexe,churtonWard,uptonFrithOscroft,irbyAshley,farndonWard,witbyWard,mainAdmin,adminCorridor,planters};
+  return {scene,camera,model,terrain,legacyAccess,mast,chapel,waterTower,estateChimney,annexe,newHospital:annexe,churtonWard,uptonFrithOscroft,irbyAshley,farndonWard,witbyWard,mainAdmin,adminCorridor,laundry,planters};
 }

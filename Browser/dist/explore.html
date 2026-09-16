@@ -1,9 +1,56 @@
 <!doctype html>
-<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Explore the asylum · 1829</title><link rel="icon" href="./favicon.svg"><link rel="stylesheet" href="./style.css"><link rel="stylesheet" href="./explore.css"></head>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Explore the asylum · 1829</title><link rel="icon" href="./favicon.svg"><link rel="stylesheet" href="./style.css"><link rel="stylesheet" href="./aerial-layouts.css"><link rel="stylesheet" href="./aerial-locations.css"><link rel="stylesheet" href="./explore.css"></head>
 <body>
 <canvas id="game" tabindex="0" aria-label="Walk around the asylum exterior in 3D"></canvas>
-<nav class="explore-nav"><a href="./">← BACK TO GAME</a><a href="?view=main-admin">MAIN/ADMIN BUILDING</a> · <a href="?view=churton">CHURTON WARD</a><a href="?view=annexe">THE ANNEXE</a><button id="resetView">RETURN TO ENTRANCE</button></nav>
+<nav class="explore-nav" aria-label="Explore navigation">
+  <a href="./">← BACK TO GAME</a>
+  <div id="locationsPicker">
+    <button id="locationsButton" type="button" aria-label="Locations" aria-expanded="false" aria-controls="locationsPanel">Locations</button>
+    <div id="locationsPanel" hidden><ul>
+      <li><a href="./explore.html">ENTRANCE</a></li>
+      <li><a href="?view=front">FRONT DETAIL</a></li>
+      <li><a href="?view=front-steps">FRONT STEPS</a></li>
+      <li><a href="?view=front-wall">FRONT WALL</a></li>
+      <li><a href="?view=east-forward-end-photo">EAST WING FRONT</a></li>
+      <li><a href="?view=west-forward-end-photo">WEST WING FRONT</a></li>
+      <li><a href="?view=west-lawn-photo">WEST LAWN</a></li>
+      <li><a href="?view=east-lawn-photo">EAST LAWN</a></li>
+      <li><a href="?view=entrance-west-photo">ENTRANCE WEST</a></li>
+      <li><a href="?view=redesmere-photo">REDESMERE</a></li>
+      <li><a href="?view=laundry">LAUNDRY</a></li>
+      <li><a href="?view=redesmere-chimney">REDESMERE CHIMNEY</a></li>
+      <li><a href="?view=redesmere-garden-photo">CORNER GARDEN</a></li>
+      <li><a href="?view=redesmere-passage">CORNER PASSAGE</a></li>
+      <li><a href="?view=main-admin">MAIN/ADMIN BUILDING</a></li>
+      <li><a href="?view=main-admin-corridor">CONNECTING CORRIDOR</a></li>
+      <li><a href="?view=upton">UPTON/FRITH/OSCROFT</a></li>
+      <li><a href="?view=irby-ashley">IRBY/ASHLEY</a></li>
+      <li><a href="?view=farndon">FARNDON WARD</a></li>
+      <li><a href="?view=witby">WITBY WARD</a></li>
+      <li><a href="?view=churton">CHURTON WARD</a></li>
+      <li><a href="?view=annexe">THE ANNEXE</a></li>
+      <li><a href="./aerial.html?view=annexe-site">SITE PLAN ↗</a></li>
+      <li><a href="?view=tower">WATER TOWER</a></li>
+      <li><a href="?view=tower-buildings">TOWER BUILDINGS</a></li>
+      <li><a href="?view=inner-east-photo">INNER EAST COURT</a></li>
+      <li><a href="./aerial.html?view=historic-roads">HISTORIC ROADS ↗</a></li>
+      <li><a href="./aerial.html?view=historic-footprints">OS FOOTPRINTS ↗</a></li>
+      <li><a href="./aerial.html?view=historic-admin-grounds">ADMIN GROUNDS ↗</a></li>
+      <li><a href="./aerial.html?view=plan">PLAN VIEW ↗</a></li>
+      <li><a href="./aerial.html">AERIAL VIEW ↗</a></li>
+    </ul></div>
+  </div>
+</nav>
+<section id="layoutControls" aria-label="Estate layouts">
+  <h2>LAYOUTS</h2>
+  <div class="layout-options">
+    <label><input id="historicLayout" type="checkbox" checked><span>Historic</span></label>
+    <label><input id="modernLayout" type="checkbox"><span>Modern</span></label>
+  </div>
+  <p>Show either layout, or both.</p>
+</section>
 <div class="explore-guide"><h1>Explore the asylum</h1><p>WASD move · Mouse look · Shift walk faster · H show/hide planters · Esc release mouse</p><p id="lookHint" role="status">Loading the grounds…</p><button id="look" disabled>START EXPLORING ↗</button></div>
 <span class="crosshair" aria-hidden="true">·</span>
+<script type="module" src="./aerial-locations.mjs"></script>
 <script type="module" src="./explore.mjs"></script>
 </body></html>

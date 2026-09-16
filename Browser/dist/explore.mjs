@@ -4,8 +4,11 @@ import {UPTON_VIEWS} from './upton-frith-oscroft.mjs';
 import {IRBY_ASHLEY_VIEWS} from './irby-ashley.mjs';
 import {FARNDON_VIEWS} from './farndon-ward.mjs';
 import {WITBY_VIEWS} from './witby-ward.mjs';
+import {LAUNDRY_VIEWS} from './laundry.mjs';
 import {MAIN_ADMIN_VIEWS} from './main-admin-building.mjs';
-import {createAerialLayouts} from './aerial-layouts.mjs';
+import {createAerialLayouts,bindLayoutToggles} from './aerial-layouts.mjs';
+import {WATER_TOWER_VIEWS} from './water-tower.mjs';
+import {TOWER_BUILDING_VIEWS} from './tower-buildings.mjs';
 import {ANNEXE_VIEWS} from './annexe.mjs';
 import * as THREE from './vendor/three.module.js';
 import {createEscapeExterior,loadEscapeFrontage} from './escape-exterior.mjs';
@@ -38,16 +41,21 @@ try{
   renderer.shadowMap.enabled=true;renderer.shadowMap.type=THREE.PCFSoftShadowMap;
   const exterior=createEscapeExterior(THREE,innerWidth/innerHeight);
   exterior.camera.near=.1;exterior.camera.updateProjectionMatrix();
-  // Main/admin photo walks use the same Historic buildings and service court
-  // as their aerial views, including the range visible in img2.
-  if(MAIN_ADMIN_VIEWS[new URLSearchParams(location.search).get('view')]){
-    const layouts=createAerialLayouts(THREE,exterior);
-    // Road-name sprites are map overlays; keep them out of the walking view.
-    layouts.roads.traverse(object=>{if(object.isSprite)object.visible=false;});
-  }
+  const layouts=createAerialLayouts(THREE,exterior);
+  // Road-name sprites are map overlays; keep them out of the walking view.
+  layouts.roads.traverse(object=>{if(object.isSprite)object.visible=false;});
   const obstacles=exteriorObstacles(THREE,exterior.model);
   const walker=createWalker(exterior.camera,obstacles);
-  bindPlanterToggle(exterior,document,()=>{obstacles.splice(0,obstacles.length,...exteriorObstacles(THREE,exterior.model));});
+  function refreshObstacles(){obstacles.splice(0,obstacles.length,...exteriorObstacles(THREE,exterior.model));}
+  bindLayoutToggles(layouts,document.getElementById('layoutControls'),refreshObstacles);
+  bindPlanterToggle(exterior,document,refreshObstacles);
+  const view=new URLSearchParams(location.search).get('view');
+  if(view==='front')walker.setView({position:[0,1.8,40],target:[0,9,19.8]});
+  if(view==='tower'||WATER_TOWER_VIEWS[view])walker.setView(WATER_TOWER_VIEWS[view==='tower'?'tower-2':view]);
+  if(TOWER_BUILDING_VIEWS[view]){
+    const shot=TOWER_BUILDING_VIEWS['tower-buildings-3'];
+    walker.setView({...shot,position:[shot.position[0],1.8,shot.position[2]]});
+  }
   const chimneyView=REDESMERE_CHIMNEY_VIEWS[new URLSearchParams(location.search).get('view')];
   if(chimneyView)walker.setView(chimneyView);
   if(new URLSearchParams(location.search).get('view')==='redesmere-passage')walker.setView(REDESMERE_PASSAGE_VIEW);
@@ -74,6 +82,7 @@ try{
   const annexeView=(new URLSearchParams(location.search).get('view')??'').replace(/^new-hospital/,'annexe');
   if(ANNEXE_VIEWS[annexeView])walker.setView(ANNEXE_VIEWS[['annexe','annexe-plan','annexe-site'].includes(annexeView)?'annexe-ground':annexeView]);
   const churtonView=new URLSearchParams(location.search).get('view');
+  if(LAUNDRY_VIEWS[churtonView])walker.setView(LAUNDRY_VIEWS['laundry-photo']);
   if(UPTON_VIEWS[churtonView])walker.setView(UPTON_VIEWS['upton-ground']);
   if(FARNDON_VIEWS[churtonView])walker.setView(FARNDON_VIEWS['farndon-2']);
   if(WITBY_VIEWS[churtonView])walker.setView(WITBY_VIEWS['witby-ground']);
@@ -89,7 +98,10 @@ try{
   function begin(){active=true;canvas.focus();hint.textContent='Walk with WASD. If the cursor stays visible, hold and drag to look around.';}
   function lock(){begin();try{canvas.requestPointerLock?.()?.catch(()=>{hint.textContent='Mouse capture is unavailable here. Hold and drag the view to look around; WASD moves.';});}catch{hint.textContent='Hold and drag the view to look around; WASD moves.';}}
   look.disabled=false;hint.textContent='Click Start exploring for mouse look, or hold and drag the view.';look.onclick=lock;
-  document.getElementById('resetView').onclick=()=>{walker.reset();begin();};
+  for(const controls of document.querySelectorAll('.explore-nav,#layoutControls')){
+    controls.addEventListener('pointerdown',stop);
+    controls.addEventListener('focusin',stop);
+  }
   canvas.addEventListener('pointerdown',e=>{if(e.button!==0)return;begin();dragging=true;last={x:e.clientX,y:e.clientY};canvas.setPointerCapture(e.pointerId);});
   canvas.addEventListener('pointerup',()=>{dragging=false;last=null;});
   canvas.addEventListener('pointercancel',()=>{dragging=false;last=null;walker.keys.clear();});
