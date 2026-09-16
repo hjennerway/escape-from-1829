@@ -18,6 +18,7 @@ Source: [shared 1829 Google Earth project](https://earth.google.com/earth/d/1jXu
 | Parsons Lane (1829 Central) | 6 |
 | Valley drive | 8 |
 | Parsons Lane (North) | 27 |
+| Caldecott Close | 8 |
 
 The four additional paths were fetched from the same live project. All four pre-existing paths were checked against the fresh response and remain unchanged. The Upton extension is saved as `Upton Grange (Part2)`; its displayed name is normalised to `Upton Grange (Part 2)`, with `sourceName` retaining the exact original spelling. The subsequent Warren Lane import adds 15 vertices; that import brought the total to nine paths and 94 vertices. The Parsons Lane and Valley drive import adds 30 vertices, bringing the total then to thirteen paths and 124 vertices. The North section adds 27 vertices, for fourteen paths and 151 vertices.
 
@@ -32,7 +33,7 @@ The initial state is Historic on / Modern off on each page load. Checkbox change
 
 ## Road-name labels
 
-All fourteen paths carry their own camera-facing text sprite, created once from a local canvas texture. The full path name, including Part 2 where applicable, is retained. Text is light with a dark outline, stays at a fixed readable screen size, and follows its road’s visibility rule (both layouts for Vivienne Smith Lane and the four Parsons Lane sections; Modern for the other roads). Label anchor candidates are sampled along the saved centreline, one unit above ground. Shorter paths get first choice; the remaining labels choose a clear position along their own road, or the least-overlapping position when the view is crowded. Paths outside the camera view do not show floating labels at the screen edge. The road geometry and road widths are unaffected by labelling.
+All fifteen paths carry their own camera-facing text sprite, created once from a local canvas texture. The full path name, including Part 2 where applicable, is retained. Text is light with a dark outline, stays at a fixed readable screen size, and follows its road’s visibility rule (both layouts for Vivienne Smith Lane and the four Parsons Lane sections; Modern for the other roads). Label anchor candidates are sampled along the saved centreline, one unit above ground. Shorter paths get first choice; the remaining labels choose a clear position along their own road, or the least-overlapping position when the view is crowded. Paths outside the camera view do not show floating labels at the screen edge. The road geometry and road widths are unaffected by labelling.
 
 Checks cover one text label per path, label anchors on their respective polylines, inherited Modern visibility, and consistent screen size across desktop/mobile viewports. The actual aerial page was also rendered and visually checked on desktop and mobile.
 
@@ -66,3 +67,9 @@ Its single road and label appear whenever Historic or Modern is enabled, and hid
 ## Parsons Lane crossing cleanup
 
 The two photo-estimated annexe east roads now stop just short of Parsons Lane (North). Their unsupported continuations beyond the saved route are removed, with clearance for both roads’ asphalt, pale borders and rounded ends. All Google Earth paths and their coordinates are retained.
+
+## Caldecott Close import — 16 September 2026
+
+Caldecott Close was retrieved from the same live public Google Earth project's `document/getmapdata` response (feature `044C7547BE41E13B7457`). All eight polyline vertices retain their saved order and precision; camera coordinates are excluded. All fourteen existing paths were verified against the fresh response and remain unchanged. The total is now fifteen paths and 159 saved vertices.
+
+The road uses the fixed 1829 registration, existing asphalt and pale borders, rounded joins and ends, and an automatic road-name label. Its geometry and label appear only when Modern is enabled, in both aerial and walking views. The aerial list shows **15 mapped paths**, including Caldecott Close, and **Fit layouts** includes its complete route.

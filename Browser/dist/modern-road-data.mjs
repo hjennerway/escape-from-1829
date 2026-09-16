@@ -1,4 +1,4 @@
-// Saved Google Earth custom paths, retrieved 2026-09-15; North section added 2026-09-16. Coordinates are [latitude, longitude].
+// Saved Google Earth custom paths, retrieved 2026-09-15; North section and Caldecott Close added 2026-09-16. Coordinates are [latitude, longitude].
 // Preserve feature vertices: camera targets are not road coordinates.
 export const MODERN_ROADS_SOURCE="https://earth.google.com/earth/d/1jXu49Oe3iXWoHLAS1GdS8lUhKcpg8cUk?usp=sharing";
 export const MODERN_ROAD_PATHS=[
@@ -674,6 +674,43 @@ export const MODERN_ROAD_PATHS=[
       [
         53.21536165017384,
         -2.9048129327263252
+      ]
+    ]
+  },
+  {
+    "name": "Caldecott Close",
+    "coordinates": [
+      [
+        53.21326016361508,
+        -2.8976625346881457
+      ],
+      [
+        53.21310875598049,
+        -2.897752954418559
+      ],
+      [
+        53.21301098474764,
+        -2.897836304800525
+      ],
+      [
+        53.21294791350605,
+        -2.897965163176285
+      ],
+      [
+        53.21289590501128,
+        -2.8981875587026993
+      ],
+      [
+        53.212859547888115,
+        -2.898457894986998
+      ],
+      [
+        53.21299246175613,
+        -2.898512818635337
+      ],
+      [
+        53.21293155641066,
+        -2.8988695440218972
       ]
     ]
   }
