@@ -1,0 +1,67 @@
+// img1-loc's circles register the existing belfry and west tower. Its arrow
+// selects the west face of the central rear spine, not the rear service head.
+export const OAKMERE_REFERENCE=Object.freeze({photo:'Research/oakmere/img1.jpg',location:'Research/oakmere/img1-loc.png'});
+export function addOakmereElevation(THREE,{model,host,brick,roof,material,worldUV,hipRoof}){
+ const group=new THREE.Group();group.name='Oakmere lawn elevation';
+ group.position.set(host.x-host.w/2,0,host.z);group.rotation.y=-Math.PI/2;
+ group.userData.reference=OAKMERE_REFERENCE;model.add(group);
+ const trim=material(0xa35b40),pale=material(0xc0b69c),frame=material(0xe1e0cf),glass=material(0x293b3a,{roughness:.5,metalness:.1}),iron=material(0x303b3b);
+ const batches=new Map(),openings=[];
+ const mesh=(geometry,mat,x,y,z,name)=>{const m=new THREE.Mesh(geometry,mat);m.position.set(x,y,z);m.name=name;m.castShadow=true;m.receiveShadow=true;group.add(m);return m;};
+ const box=(mat,x,y,z,w,h,d)=>{if(!batches.has(mat))batches.set(mat,[]);batches.get(mat).push({x,y,z,w,h,d});};
+ const wall=(x,z,w,h,d,name)=>{const m=mesh(worldUV(new THREE.BoxGeometry(w,h,d),1.7),brick,x,h/2,z,name);m.userData.orientedCollision=true;return m;};
+ function beam(a,b,width,mat,name){const p=new THREE.Vector3(...a),q=new THREE.Vector3(...b),v=q.clone().sub(p);const m=mesh(new THREE.CylinderGeometry(width/2,width/2,v.length(),8),mat,...p.add(q).multiplyScalar(.5).toArray(),name);m.quaternion.setFromUnitVectors(new THREE.Vector3(0,1,0),v.normalize());}
+ function sash(x,y,z,{blind=false,h=2.65,w=1.2}={}){
+  openings.push({x,y,z,w,h,blind});box(blind?pale:glass,x,y,z+.055,w,h,.07);
+  for(const side of [-1,1])box(frame,x+side*w/2,y,z+.11,.07,h+.1,.09);
+  for(const side of [-1,1])box(frame,x,y+side*h/2,z+.11,w+.12,.075,.09);
+  if(!blind){for(const dx of [-w/6,w/6])box(frame,x+dx,y,z+.12,.032,h,.07);for(let row=1;row<8;row++)box(frame,x,y-h/2+row*h/8,z+.12,w,row===4?.065:.032,.075);}
+  box(pale,x,y-h/2-.09,z+.1,w+.3,.14,.25);box(trim,x,y+h/2+.12,z+.045,w+.3,.2,.12);
+ }
+ // The 4 / 5 / 4 rhythm is confined to this face. Shallow projections retain
+ // the registered spine and its original roof, opposite face and end joins.
+ const half=host.d/2,centreWidth=15.8,leftWidth=half-centreWidth/2,eaves=12.4;
+ // This photo resolves the formerly inferred low spine: its two tall storeys
+ // stand higher than the neighbouring ward ranges. Add the upper masonry
+ // above the saved body, keeping the previous facade on the unpictured side.
+ mesh(worldUV(new THREE.BoxGeometry(host.d,eaves-host.h,host.w),1.7),brick,0,(eaves+host.h)/2,-host.w/2,'Oakmere raised spine upper masonry');
+ const mainCap=hipRoof(0,-host.w/2+.3,host.d,host.w+.6,eaves,3.2);group.add(mainCap);mainCap.name='Oakmere raised spine slate roof';
+ wall(-(half+centreWidth/2)/2,.35,leftWidth,eaves,.6,'Oakmere four-bay left face');
+ wall(0,.55,centreWidth,eaves,.8,'Oakmere five-bay gabled face');
+ wall((half+centreWidth/2)/2,.35,leftWidth,eaves,.6,'Oakmere four-bay right face');
+ const columns=[...[-19.8,-16.25,-12.7,-9.15].map(x=>({x,z:.67})),...[-6.4,-3.2,0,3.2,6.4].map(x=>({x,z:.97})),...[9.3,12.65,16,19.35].map((x,i)=>({x,z:.67,blind:i%2===0}))];
+ for(const p of columns){sash(p.x,3.0,p.z,{h:4,w:1.4});sash(p.x,9.2,p.z,{blind:p.blind,h:4,w:1.4});}
+ for(const [x,w,z] of [[-(half+centreWidth/2)/2,leftWidth,.72],[0,centreWidth,1.02],[(half+centreWidth/2)/2,leftWidth,.72]]){
+  for(const [y,h] of [[.24,.4],[6.1,.4],[eaves-.24,.35]])box(trim,x,y,z,w,h,.15);
+  box(pale,x,6.35,z+.02,w,.075,.08);
+ }
+ // Raised cross gable, terracotta raking bands and a recessed round vent.
+ const base=eaves,rise=3.5,front=.99,back=-host.w/2;
+ const triangle=new THREE.Shape();triangle.moveTo(-centreWidth/2,0);triangle.lineTo(centreWidth/2,0);triangle.lineTo(0,rise);triangle.closePath();
+ mesh(worldUV(new THREE.ExtrudeGeometry(triangle,{depth:1.0,bevelEnabled:false}),1.7),brick,0,base,front-1,'Oakmere central brick pediment');
+ const v=[[-centreWidth/2-.2,base,front+.17],[0,base+rise,front+.17],[centreWidth/2+.2,base,front+.17],[-centreWidth/2-.2,base,back],[0,base+3.2,back],[centreWidth/2+.2,base,back]],positions=[],uv=[];
+ for(const face of [[0,3,4],[0,4,1],[1,4,5],[1,5,2]])for(const i of [...face].reverse()){positions.push(...v[i]);uv.push(v[i][0]/3,v[i][2]/3);}
+ const g=new THREE.BufferGeometry();g.setAttribute('position',new THREE.Float32BufferAttribute(positions,3));g.setAttribute('uv',new THREE.Float32BufferAttribute(uv,2));g.computeVertexNormals();
+ mesh(g,roof,0,0,0,'Oakmere cross-gable slate roof');
+ for(const side of [-1,1])for(const inset of [0,.27])beam([side*(centreWidth/2+.03),base-inset,front+.18],[0,base+rise-inset,front+.18],.14,trim,'Oakmere pediment raking band');
+ for(const y of [base+.36,base+1.05]){const w=centreWidth*(1-(y-base)/rise)-.18;box(trim,0,y,front+.07,w,.14,.14);}
+ const ventY=base+1.75;
+ mesh(new THREE.CircleGeometry(.48,32),iron,0,ventY,front+.045,'Oakmere recessed circular vent');
+ mesh(new THREE.TorusGeometry(.52,.1,8,32),pale,0,ventY,front+.12,'Oakmere circular vent stone ring');
+ mesh(new THREE.TorusGeometry(.68,.06,8,32),trim,0,ventY,front+.1,'Oakmere circular vent brick ring');
+ for(const x of [-.17,0,.17])box(frame,x,ventY,front+.13,.032,.65,.05);
+ // Low end rooms sit against the existing adjoining masonry. Their backs
+ // overlap that masonry; the photographed exposed fronts receive glazing.
+ const lowRooms=[{x:-half-2,z:14.2,w:4.2,d:7.5,h:5.0,name:'Oakmere low rear end room',count:2},{x:half+3.15,z:11.2,w:6.5,d:5.6,h:5.0,name:'Oakmere low hall link',count:4}];
+ for(const b of lowRooms){
+  wall(b.x,b.z-b.d/2,b.w,b.h,b.d,b.name+' brick walls');
+  const cap=hipRoof(b.x,b.z-b.d/2,b.w,b.d,b.h,1.5);group.add(cap);cap.name=b.name+' slate roof';
+  for(let i=0;i<b.count;i++)sash(b.x+(i-(b.count-1)/2)*(b.w-.9)/b.count,2.2,b.z+.025,{w:.98,h:2.7});
+  box(trim,b.x,.24,b.z+.06,b.w,.4,.15);box(iron,b.x,b.h+.02,b.z+.2,b.w+.6,.12,.14);
+ }
+ for(const [x,z] of [[-half+.12,.77],[-centreWidth/2,1.11],[centreWidth/2,1.11],[half-.12,.77]])box(iron,x,eaves/2,z,.09,eaves,.09);
+ const dummy=new THREE.Object3D();
+ for(const [mat,items] of batches){const m=new THREE.InstancedMesh(new THREE.BoxGeometry(1,1,1),mat,items.length);m.name='Oakmere sash and masonry details';m.castShadow=true;m.receiveShadow=true;items.forEach((b,i)=>{dummy.position.set(b.x,b.y,b.z);dummy.scale.set(b.w,b.h,b.d);dummy.updateMatrix();m.setMatrixAt(i,dummy.matrix);});group.add(m);}
+ group.userData.openings=openings;group.userData.hostRange=host.name;
+ return group;
+}

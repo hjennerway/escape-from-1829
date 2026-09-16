@@ -3,7 +3,7 @@
 // Positions and dimensions are visual estimates, not surveyed measurements.
 export const PHARMACY_VIEWS=Object.freeze({
  pharmacy:{position:[290,125,-95],target:[193,4,-38],fov:46},
- 'pharmacy-photo':{position:[184,1.8,-48],target:[175,5,-26],fov:65},
+ 'pharmacy-photo':{position:[184,1.8,-44],target:[175,5,-26],fov:65},
  'pharmacy-plan':{position:[191,120,-35.99],target:[191,0,-36],fov:46}
 });
 export const PHARMACY_TANKS=Object.freeze([

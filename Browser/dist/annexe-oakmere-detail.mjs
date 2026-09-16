@@ -2,8 +2,13 @@
 // selects the west face of the central rear spine, not the rear service head.
 export const OAKMERE_REFERENCE=Object.freeze({photo:'Research/oakmere/img1.jpg',location:'Research/oakmere/img1-loc.png'});
 export function addOakmereElevation(THREE,{model,host,brick,roof,material,worldUV,hipRoof}){
+ const depth=host.d;
+ // Keep the photographed elevation's proportions in its own frame, then fit
+ // its length to the shorter link in front of the OS rear courtyard.
+ host={...host,d:27*Math.hypot(-5299/6749,-9568/6749)};
  const group=new THREE.Group();group.name='Oakmere lawn elevation';
  group.position.set(host.x-host.w/2,0,host.z);group.rotation.y=-Math.PI/2;
+ group.scale.x=depth/host.d;
  group.userData.reference=OAKMERE_REFERENCE;model.add(group);
  const trim=material(0xa35b40),pale=material(0xc0b69c),frame=material(0xe1e0cf),glass=material(0x293b3a,{roughness:.5,metalness:.1}),iron=material(0x303b3b);
  const batches=new Map(),openings=[];

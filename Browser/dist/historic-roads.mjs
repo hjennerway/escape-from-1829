@@ -35,7 +35,7 @@ export function createHistoricRoads(THREE,exterior){
   const geometry=new THREE.CircleGeometry(width/2,ROAD_STYLE.roundSegments);geometry.rotateX(-Math.PI/2);
   for(const [x,z] of points){const cap=new THREE.Mesh(geometry,mat);cap.position.set(x,y,z);cap.receiveShadow=true;cap.renderOrder=mat===asphalt?2:mat===edge?1:0;cap.userData.surface=mat===asphalt?'black road':'stone kerb';part.add(cap);}
  }
- for(const area of HISTORIC_GRAVEL)polygon(area.name,area.points,gravel,.265);
+ for(const area of HISTORIC_GRAVEL)polygon(area.name,area.points,gravel,area.height??.265);
  // The service court meets the road without a pale border across its mouth.
  for(const area of HISTORIC_PAVING){
   const type=area.surface,mat=type==='junction edge'?edge:type==='junction'||type==='asphalt apron'||area.name==='Tower service court'?asphalt:paving;

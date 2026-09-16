@@ -1,5 +1,5 @@
 import {MODERN_ROAD_PATHS,MODERN_ROADS_SOURCE} from './modern-road-data.mjs';
-import {earthToScene} from './earth-registration.mjs';
+import {roadCenterline} from './road-centerlines.mjs';
 import {createRoadLabel} from './road-labels.mjs';
 import {ROAD_STYLE} from './road-style.mjs';
 
@@ -8,7 +8,7 @@ export function createModernRoads(THREE){
   roads.userData.source=MODERN_ROADS_SOURCE;
   const asphalt=new THREE.MeshStandardMaterial({color:ROAD_STYLE.asphalt,roughness:1,polygonOffset:true,polygonOffsetFactor:-ROAD_STYLE.asphaltLayer,polygonOffsetUnits:-2*ROAD_STYLE.asphaltLayer});
   const edge=new THREE.MeshStandardMaterial({color:ROAD_STYLE.edge,roughness:1,polygonOffset:true,polygonOffsetFactor:-ROAD_STYLE.edgeLayer,polygonOffsetUnits:-2*ROAD_STYLE.edgeLayer});
-  // Widths are visual estimates. The saved centreline vertices are unchanged.
+  // Widths are visual estimates; use the shared, refined scene centrelines.
   function ribbon(points,width,y,material){
     const positions=[],indices=[];
     for(let i=1;i<points.length;i++){
@@ -25,9 +25,9 @@ export function createModernRoads(THREE){
     return group;
   }
   for(const path of MODERN_ROAD_PATHS){
-    const road=new THREE.Group(),points=path.coordinates.map(p=>earthToScene(...p));
+    const road=new THREE.Group(),points=roadCenterline(path);
     road.name=path.name;road.userData.centerline=points;road.userData.coordinates=path.coordinates;
-    // Historic ends at the new eastern crossing; Modern retains every saved vertex.
+    // Historic ends at the eastern crossing; Modern also includes the tail.
     const sharedPoints=path.name==='Vivienne Smith Lane'?points.slice(0,12):points;
     road.add(ribbon(sharedPoints,6+2*ROAD_STYLE.edgeWidth,.32,edge),ribbon(sharedPoints,6,.34,asphalt),createRoadLabel(THREE,path.name,points));
     if(path.name==='Vivienne Smith Lane'){

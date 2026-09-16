@@ -1,10 +1,10 @@
 import {MODERN_ROAD_PATHS} from './modern-road-data.mjs';
-import {earthToScene} from './earth-registration.mjs';
+import {roadCenterline} from './road-centerlines.mjs';
 import {ROAD_STYLE} from './road-style.mjs';
 
 export const SHARED_HISTORIC_LANES=Object.freeze(MODERN_ROAD_PATHS
  .filter(p=>p.name==='Vivienne Smith Lane'||p.name.startsWith('Parsons Lane'))
- .map(p=>({name:p.name,points:p.coordinates.map(c=>earthToScene(...c))})));
+ .map(p=>({name:p.name,points:roadCenterline(p)})));
 const segments=SHARED_HISTORIC_LANES.flatMap(p=>p.points.slice(1).map((b,i)=>[p.points[i],b]));
 export function distanceToSharedLane([x,z]){
  return Math.min(...segments.map(([a,b])=>{

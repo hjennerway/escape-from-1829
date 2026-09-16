@@ -30,7 +30,7 @@ Modern includes fourteen saved Google Earth paths: Upton grange, Gerrard Crescen
 
 The paths are bundled locally from the shared Google Earth project, with all 151 saved vertices retained and registered to the fixed 1829 anchor. Road widths are approximate. See [road provenance and layout details](Research/modern-layouts.md). Run `npm test` in `Browser`; the suite includes all four layout combinations, unchanged transforms, road geometry and landscape/portrait fitting.
 
-Historic and Modern roads share grey asphalt, pale 0.6-unit borders, and rounded joins and ends. The saved Parsons Lane and Vivienne Smith Lane vertices are unchanged. Historic roads are trimmed against the complete saved paths, including both roads' borders and end caps, so they do not overlap either lane.
+Historic and Modern roads share grey asphalt, pale 0.6-unit borders, and rounded joins and ends. Parsons Lane retains its saved vertices. Vivienne Smith Lane follows the September 16 red-marked route across the lawn south of Main/admin, with its western fork moved back to the start of the marked line. Both layouts, labels, junctions and clearance use the refined centreline; the original Google Earth coordinates remain available as source data. Historic roads are trimmed against the complete saved paths, including both roads' borders and end caps, so they do not overlap either lane.
 
 ## Historic roads from the marked layout
 
@@ -40,15 +40,29 @@ The Main/admin forecourt has a straight frontage and one semicircular drive arou
 
 Use `aerial.html?view=historic-roads` for the whole network or `?view=historic-admin-grounds` for the closer comparison. Source images and reconstruction notes are in [Research/historic-roads/README.md](Research/historic-roads/README.md). Route data, clearance and rendering are separated in `historic-road-layout.mjs`, `historic-road-clearance.mjs` and `historic-roads.mjs`. The road tests check both saved lanes across every ribbon's full width, building clearance, semicircle/teardrop surfaces, removed routes and all layout combinations. This layout supersedes the earlier alarm-board and aerial road revisions.
 
-The later annexe annotations add a sweeping central entrance, now reduced to 60% of its initial width, and a central forecourt finished in the same asphalt as the road. The pale frontage strips and entrance gates are removed. Yellow adds both side approaches, two rear connections from Parsons Lane and the marked hardstandings. The red-circled Main/admin road ends now form continuous junctions, the teardrop has a smooth inner lawn edge, and the northern estate boundary connects around the annexe to Parsons Lane (North). These additions belong to Historic. Use `aerial.html?view=annexe-access` or `?view=annexe-entrance`; see the [updated reference notes](Research/historic-roads/README.md).
+The latest annexe annotation keeps the red-circled asphalt forecourt intact and narrows its sweeping entrance to a slim neck with a smooth flare onto the avenue. The frontage side approaches and yellow-circled rear roads, junction mouths and hardstanding are removed. The red-circled Main/admin road ends form continuous junctions, the teardrop has a smooth inner lawn edge, and the northern estate boundary connects around the annexe to Parsons Lane (North). These surfaces belong to Historic. Use `aerial.html?view=annexe-access` or `?view=annexe-entrance`; see the [current frontage notes](Research/annexe-frontage-adjustment/README.md).
 ### Annexe wards
 
-The latest OS correction aligns the annexe's central frontage with the purple
-reference line using the fixed church, Churton and Grafton/Edge. Only the annexe
-building moves and rotates; all dimensions, other buildings and road positions
-are preserved. The oversized wings remain unchanged, so some now cross the
-existing annexe access roads. See the [alignment and validation notes](Research/annexe-placement/README.md),
-or open `aerial.html?view=annexe-site` for the updated overhead view.
+The colour-matched OS map supplies the approved side wards and rear blocks,
+including the separate front courts and open rear courtyard. The later rear
+aerial supplies its overall setting. The user's subsequent review sets the
+whole annexe to 72% of the OS footprint's width and depth, 12.5% larger than the
+first aerial fit, and brings it closer to the red frontage line. Heights and
+detailed shapes are retained. It fits inside the Parsons loop and clears the
+teardrop. See the [current placement and frontage](Research/annexe-frontage-adjustment/README.md),
+[initial aerial correction](Research/annexe-photo-placement/README.md)
+and [OS shape comparison](Research/annexe-os-refinement/README.md), or open
+`aerial.html?view=annexe-plan`. The **Annexe / Main · aerial photo** location
+shows the wider relationship. This supersedes the earlier dimensions and
+placement described below.
+
+The OS correction aligns the annexe's central frontage using the fixed church,
+Churton and Grafton/Edge, preserving its dimensions. The later road annotation
+moves the frontage avenue to the red line, translates the teardrop intact toward
+Main/admin and adds the yellow gravel path. The central sweeping entrance is
+reconnected; both front-side approaches are removed. Buildings and rear access
+remain fixed. See the [alignment and validation notes](Research/annexe-placement/README.md),
+or open `aerial.html?view=annexe-roads` for the updated road layout.
 
 The later overhead correction moves the east rear pavilion to the inner side of its link, roughly matching the blue-marked position. The yellow-marked Leighton/Newton connecting leg is 40% shorter, with its end pavilion moved inward to retain the L and the existing 22-degree angle. Roofs, windows, chimneys and walking collisions follow the revised footprints. These changes apply to the browser model; the Blender and Unity exports are unchanged.
 

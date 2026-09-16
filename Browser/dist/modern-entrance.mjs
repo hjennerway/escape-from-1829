@@ -1,10 +1,8 @@
-import {MODERN_ROAD_PATHS} from './modern-road-data.mjs';
-import {earthToScene} from './earth-registration.mjs';
+import {VIVIENNE_LANE} from './road-centerlines.mjs';
+export {VIVIENNE_LANE} from './road-centerlines.mjs';
 import {FRONT_BOUNDARY} from './front-boundary-wall.mjs';
 import {ROAD_STYLE} from './road-style.mjs';
 
-// The lane is fixed. Only this new, photo-estimated entrance joins its saved centreline.
-export const VIVIENNE_LANE=MODERN_ROAD_PATHS.find(path=>path.name==='Vivienne Smith Lane').coordinates.map(p=>earthToScene(...p));
 export function lanePointAtX(x){
   for(let i=1;i<VIVIENNE_LANE.length;i++){
     const a=VIVIENNE_LANE[i-1],b=VIVIENNE_LANE[i];

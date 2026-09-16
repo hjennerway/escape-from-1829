@@ -1,0 +1,177 @@
+[
+  {
+    "file": "test.mjs",
+    "status": 0,
+    "output": "WEST GARDEN: reachable in 27 grid steps\nEAST GARDEN: reachable in 27 grid steps\nWEST COURT: reachable in 29 grid steps\nEAST COURT: reachable in 29 grid steps\nMAIN PORTICO: reachable in 14 grid steps\nPASS: five exits, all rooms connected, wall collision and sight obstruction.\nPASS: mirrored reception stair approaches, canonical/browser parity.\nPASS: both stairs up/down, all upper rooms reachable, cross-floor pursuer routes, downstairs-only exits.\n"
+  },
+  {
+    "file": "test-game.mjs",
+    "status": 0,
+    "output": "PASS: three-second arrival at low FPS, one-second hold, fast approach with 1.5-second fade out and half-second reveal, reception handoff, frozen input/NPCs/timer, clean restart, reduced motion and portrait framing.\nPASS: real game init, both stair interactions, held-key latch, floor groups/HUD, ghost follows, cross-floor capture isolation, restart.\nPASS: 3D escape after all five exits, ten-second pan at low FPS, frozen gameplay, retained result background, skip, retry, defeat exclusion, reduced motion.\n"
+  },
+  {
+    "file": "test-east-forward-end.mjs",
+    "status": 0,
+    "output": "PASS: img1 end/side glazing exposed, continuous brick base, slender stacks, open forecourt route and north-facing camera.\n"
+  },
+  {
+    "file": "test-redesmere-garden.mjs",
+    "status": 0,
+    "output": "PASS: one widened coplanar pavilion face, no separate rear tower, exposed glazing, attached courtyard details and clear passage.\n"
+  },
+  {
+    "file": "test-laundry.mjs",
+    "status": 0,
+    "output": "PASS: Laundry hipped roof, flat brick link, continuous contacts, exposed glazing, garden access and Historic-only visibility/collisions.\n"
+  },
+  {
+    "file": "test-escape-exterior.mjs",
+    "status": 0,
+    "output": "PASS: real estate geometry, upward-facing roofs, W-shaped openings to the rear, rear-left lattice mast, building/mast framing throughout landscape and portrait pans.\nPASS: front staircase has four approach treads, four rising treads per branch, and connected forward returns to the doorway landing.\n"
+  },
+  {
+    "file": "test-water-tower.mjs",
+    "status": 0,
+    "output": "PASS: tower side registration, exposed doors and blind slits, shallow scars, finite geometry, photo framing and isolated materials.\n"
+  },
+  {
+    "file": "test-tower-buildings.mjs",
+    "status": 0,
+    "output": "PASS: Historical ownership, exposed service glazing, upward roofs, three tower abutments, three traced face profiles, continuous corner joins, flat arch junctions, shallow final-third pitches, ridge-aligned dormers with downslope glazing, aligned front walls, retracted central-hall rear, retained front, marked-group translation with fixed chimney clearance, removed northern hall, translated entrance link and ramp, rotated full-span chimney roof and east gable window, extended tower ridge, single green-corner slope, flat red return, paired outward-moved gabled workshops, photo sightlines and walkable court, continuous ramp and retained blue-block exclusion.\n"
+  },
+  {
+    "file": "test-pharmacy.mjs",
+    "status": 0,
+    "output": "PASS: pharmacy rear glazing and stairs, two ribbed gas cylinders, building clearance, circular collisions, Historic visibility and walking routes around both tanks.\n"
+  },
+  {
+    "file": "test-irby-ashley.mjs",
+    "status": 0,
+    "output": "PASS: yellow-footprint placement, open courts, roof coverage/normals, exposed sashes, extended conservatory, quarter-octagonal hip, separated bay, corrected window pairs, walking clearances, retained neighbouring OS connection and independent Historic visibility.\n"
+  },
+  {
+    "file": "test-irby-roads.mjs",
+    "status": 0,
+    "output": "PASS: rear grass, no road beneath Irby/Ashley, flush east-side access and continuous front connection.\n"
+  },
+  {
+    "file": "test-grafton-edge.mjs",
+    "status": 0,
+    "output": "PASS: Grafton placement, unchanged Irby/Ashley, flat rear with one central bay, continuous veranda canopy, bay junction, cleared greenhouse, walking route and independent visibility.\n"
+  },
+  {
+    "file": "test-hale-ward.mjs",
+    "status": 0,
+    "output": "PASS: Hale/Daresbury/Huxley/Dunham right-angle footprint, two storeys, matching sashes, two red-marked corridor links, continuous roofs, exposed junction windows, open courts, walking access and Historic visibility.\n"
+  },
+  {
+    "file": "test-estates.mjs",
+    "status": 0,
+    "output": "PASS: Estates clockwise alignment, preserved OS dimensions, stepped wings, open court, roof coverage, exposed glazing, door pair, walking access, selective trace retirement and Historic visibility.\n"
+  },
+  {
+    "file": "test-farndon.mjs",
+    "status": 0,
+    "output": "PASS: corrected Farndon footprint, 587 roof samples, 503 continuous H-ridge samples, single-storey glazing, open garden, walking collisions, replaced corridor marker and Historic visibility.\n"
+  },
+  {
+    "file": "test-ward-placement.mjs",
+    "status": 0,
+    "output": "PASS: five corrected positions, both fixed anchors, source building geometry, generated corridor geometry, translated footprints, plan/walking cameras and Historic collisions.\n"
+  },
+  {
+    "file": "test-ward-corridors.mjs",
+    "status": 0,
+    "output": "PASS: one straight Main/tower/Farndon gallery, fixed Upton anchor, six current ward contacts, 2421 roof samples, angled collisions, open grass, walking starts and Historic visibility.\n"
+  },
+  {
+    "file": "test-explore.mjs",
+    "status": 0,
+    "output": "PASS: exterior WASD, normalized diagonals, mouse-relative movement, pitch limits, building collisions, wall sliding, reset and stalled frames.\n"
+  },
+  {
+    "file": "test-annexe.mjs",
+    "status": 0,
+    "output": "PASS: fixed church/Churton/Grafton, purple-line frontage alignment, preserved annexe width and fixed gameplay roads.\nPASS: annexe OS registration and scale, independent Redesmere alignment, open courts, roofs, arched glazing, bell tower and walking collisions.\nPASS: L-shaped courts, removed galleries, connected angled rear wing and mirrored side bays/stairs.\nPASS: orange, purple and brown OS courtyard picks are free of masonry and roofs.\n"
+  },
+  {
+    "file": "test-annexe-outer-front.mjs",
+    "status": 0,
+    "output": "PASS: reflected facade openings are visible and both photo viewpoints are outside masonry.\n"
+  },
+  {
+    "file": "test-oakmere.mjs",
+    "status": 0,
+    "output": "PASS: all new Oakmere glazing is exposed, roof slopes face upward, walking approach and facade collisions work, and details follow Historic visibility.\n"
+  },
+  {
+    "file": "test-annexe-wards.mjs",
+    "status": 0,
+    "output": "PASS: five ward groups and reference colours, complete range ownership, aerial framing, accessible walking destinations and Historic visibility.\n"
+  },
+  {
+    "file": "test-churton.mjs",
+    "status": 0,
+    "output": "Churton Ward: six walk starts, wall collisions, rear recesses, exposed openings, slate roofs and single-storey height passed.\n"
+  },
+  {
+    "file": "test-upton.mjs",
+    "status": 0,
+    "output": "PASS: Upton mirrored OS footprint, fixed church alignment, church clearance, two storeys, exposed sashes, slate roof normals, open recesses, walking access and shared layout visibility.\n"
+  },
+  {
+    "file": "test-aerial-controls.mjs",
+    "status": 0,
+    "output": "PASS: pinch in/out, two-finger pan, finger handoff, cancellation, capture loss, blur cleanup, coincident/extra fingers, desktop pan.\n"
+  },
+  {
+    "file": "test-device-location.mjs",
+    "status": 0,
+    "output": "Device location: perimeter, exact 100 m cutoff, corners, coordinate alignment, fresh fixes, retries and errors passed.\n"
+  },
+  {
+    "file": "test-aerial-layouts.mjs",
+    "status": 0,
+    "output": "PASS: independent Historic/Modern controls, shared buildings, preserved transforms, hidden collisions, fourteen exact custom paths, camera-facing road names, upward road surfaces and full landscape/portrait framing.\n"
+  },
+  {
+    "file": "test-modern-entrance.mjs",
+    "status": 0,
+    "output": "PASS: wall translated without rotation, outer gravel replaced by grass, fixed-lane curved junction, upward kerbs and clear gate-to-door access.\n"
+  },
+  {
+    "file": "test-parsons-retrace.mjs",
+    "status": 1,
+    "output": "node:internal/modules/run_main:107\r\n    triggerUncaughtException(\r\n    ^\r\n\r\nAssertionError [ERR_ASSERTION]: Lane must clear buildings: Northern Parsons Lane connection 410.9036735010087,-117.13504118070892\r\n    at file:///C:/Users/Harry/Documents/_escape-from-1829/Browser/test-parsons-retrace.mjs:23:5\r\n    at ModuleJob.run (node:internal/modules/esm/module_job:561:25)\r\n    at async node:internal/modules/esm/loader:647:26\r\n    at async asyncRunEntryPointWithESMLoader (node:internal/modules/run_main:101:5) {\r\n  generatedMessage: false,\r\n  code: 'ERR_ASSERTION',\r\n  actual: false,\r\n  expected: true,\r\n  operator: '==',\r\n  diff: 'simple'\r\n}\r\n\r\nNode.js v24.20.0\r\n"
+  },
+  {
+    "file": "test-historic-roads.mjs",
+    "status": 1,
+    "output": "node:internal/modules/run_main:107\r\n    triggerUncaughtException(\r\n    ^\r\n\r\nAssertionError [ERR_ASSERTION]: Annexe rear north access must clear all building walls across its full width [482.915173080159,56.74798510818179]\r\n    at file:///C:/Users/Harry/Documents/_escape-from-1829/Browser/test-historic-roads.mjs:74:5\r\n    at ModuleJob.run (node:internal/modules/esm/module_job:561:25)\r\n    at async node:internal/modules/esm/loader:647:26\r\n    at async asyncRunEntryPointWithESMLoader (node:internal/modules/run_main:101:5) {\r\n  generatedMessage: false,\r\n  code: 'ERR_ASSERTION',\r\n  actual: false,\r\n  expected: true,\r\n  operator: '==',\r\n  diff: 'simple'\r\n}\r\n\r\nNode.js v24.20.0\r\n"
+  },
+  {
+    "file": "test-annexe-access.mjs",
+    "status": 1,
+    "output": "node:internal/modules/run_main:107\r\n    triggerUncaughtException(\r\n    ^\r\n\r\nAssertionError [ERR_ASSERTION]: Admin teardrop circulation must clear all buildings across its full width\r\n    at file:///C:/Users/Harry/Documents/_escape-from-1829/Browser/test-annexe-access.mjs:80:4\r\n    at ModuleJob.run (node:internal/modules/esm/module_job:561:25)\r\n    at async node:internal/modules/esm/loader:647:26\r\n    at async asyncRunEntryPointWithESMLoader (node:internal/modules/run_main:101:5) {\r\n  generatedMessage: false,\r\n  code: 'ERR_ASSERTION',\r\n  actual: false,\r\n  expected: true,\r\n  operator: '==',\r\n  diff: 'simple'\r\n}\r\n\r\nNode.js v24.20.0\r\n"
+  },
+  {
+    "file": "test-performance.mjs",
+    "status": 0,
+    "output": "PASS: indexed collisions match full scans across all layouts and padded boundaries; idle and distant collision work skipped; refreshed obstacles and cached-shadow invalidation.\n"
+  },
+  {
+    "file": "test-main-admin.mjs",
+    "status": 0,
+    "output": "PASS: east photo geometry, marked camera, independent chimney height/location, chamfered bays, open low-wing recess, OS registration, four photo starts, exposed sashes, slate roofs, masonry collision, clear approach and separate corridor.\n"
+  },
+  {
+    "file": "test-main-admin-refine2.mjs",
+    "status": 0,
+    "output": "PASS: shared corner in both photos, three-sided pitched room, recessed link, retained red block/bay, exposed panes, camera starts, collisions and green exclusion.\n"
+  },
+  {
+    "file": "test-annexe-os-refinement.mjs",
+    "status": 0,
+    "output": "{\n  count: 1705,\n  digest: '499867c2be597500db52a2c1472e44117c7442664a520836ff13f949edce33b0'\n}\n"
+  }
+]

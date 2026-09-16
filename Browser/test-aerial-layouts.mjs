@@ -5,6 +5,7 @@ import {createAerialLayouts,bindLayoutToggles,fitAerialLayouts,visibleLayoutBoun
 import {MODERN_ROAD_PATHS} from './dist/modern-road-data.mjs';
 import {updateRoadLabels} from './dist/road-labels.mjs';
 import {earthToScene} from './dist/earth-registration.mjs';
+import {roadCenterline} from './dist/road-centerlines.mjs';
 import {ESTATE_CHIMNEY} from './dist/estate-chimney.mjs';
 import {exteriorObstacles,obstacleContains} from './dist/explore-controls.mjs';
 const drawnRoadNames=[];
@@ -60,7 +61,13 @@ assert.deepEqual(earthToScene(53.2116032,-2.8988043),[0,19.5]);
 const tower=earthToScene(53.21234432581698,-2.900961415659128);assert(Math.hypot(tower[0]-148,tower[1]+55.2)<.06,'Road registration must match the verified tower pin');
 for(let i=0;i<MODERN_ROAD_PATHS.length;i++){
  const path=MODERN_ROAD_PATHS[i],road=layouts.roads.children[i];assert.equal(road.name,path.name);
- assert.deepEqual(road.userData.centerline,path.coordinates.map(p=>earthToScene(...p)),'Every saved path vertex must be preserved in order');
+ assert.deepEqual(road.userData.centerline,roadCenterline(path),'Rendering and labels must use the shared refined centreline');
+ const saved=path.coordinates.map(p=>earthToScene(...p));
+ if(path.name==='Vivienne Smith Lane'){
+  assert.deepEqual(road.userData.centerline.slice(7,11),[[90,77.76],[100,73.5],[150,85],[195,94]],'The admin stretch follows the red lawn trace');
+  assert.deepEqual(road.userData.centerline.slice(0,7),saved.slice(0,7));
+  assert.deepEqual(road.userData.centerline.slice(11),saved.slice(11),'Retain the eastern crossing and Modern tail');
+ }else assert.deepEqual(road.userData.centerline,saved,'Other mapped lanes retain their saved vertices');
  road.traverse(o=>{if(!o.isMesh)return;const normals=o.geometry.attributes.normal;for(let n=0;n<normals.count;n++)assert(normals.getY(n)>.99,'Roads must face upwards');const b=new THREE.Box3().setFromObject(o);assert(b.min.y>.3&&b.max.y<.4,'Road overlays must clear terrain without becoming walking obstacles');});
 }
 // Each path gets its own text texture; labels are actual road children and inherit Modern visibility.

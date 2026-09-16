@@ -263,10 +263,13 @@ walking collisions and clips covered OS outlines through its actual walls.
 three rear workshops, purple the chimney hall, central dormered hall and adjoining
 service ranges; blue X marks place the cylinders. Irby/Ashley is excluded.
 
-The three workshops translate +11.5 X, +11 Z. Their common rear wall is at
-Z=-76.5, alongside Irby's fixed cross-wing end at -77.3. The 0.8-unit wall gap
-keeps their projecting roofs apart. The eastward component also clears the fixed
-tower range, which a straight southward slide would intersect.
+The latest yellow-circle/green-line correction moves all three workshops a
+further 8 units towards Main/admin: their total translation is +11.5 X, +19 Z.
+Their common rear wall is now at Z=-68.5, approximately matching the green
+guide in the oblique screenshot. Their sizes, heights, orientation and adjoining
+spacing are retained. The eastward component still clears the fixed tower range.
+Roof details, openings, walking collisions and workshop camera views follow
+the same translation.
 
 The complete purple group translates +7.5 X, +10.2 Z. Cylinders now stand at
 (168.5,-27.8) and (181.4,-27.8), beside the unchanged chimney at (177.5,-35.5).

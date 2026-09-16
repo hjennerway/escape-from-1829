@@ -40,5 +40,18 @@ export function mainAdminLaneJunctions(roads){
 export function parsonsNorthEndJunction(roads){
  const lane=SHARED_HISTORIC_LANES.find(p=>p.name==='Parsons Lane (North)').points,origin=lane.at(-1);
  const road=roads.find(r=>r.name==='Northern Parsons Lane connection');
- return junction('Parsons north end junction',origin,[along(origin,lane.at(-2),12),inFromEnd(road,true,7)]);
+ // Follow the saved endpoint exactly: a smoothed two-arm mouth can cut the
+ // corner and leave a gap when the retraced approach changes direction.
+ const centers=[inFromEnd(road,true,7),origin,along(origin,lane.at(-2),12)];
+ const directions=centers.slice(1).map((p,i)=>unit(p.map((v,k)=>v-centers[i][k])));
+ const normals=directions.map(([x,z])=>[-z,x]);
+ const middle=unit(normals[0].map((v,i)=>v+normals[1][i]));
+ const scale=1/(middle[0]*normals[0][0]+middle[1]*normals[0][1]);
+ const offsets=[normals[0],middle.map(v=>v*scale),normals[1]];
+ const outline=radius=>[1,-1].flatMap(sign=>{
+  const side=centers.map((p,i)=>p.map((v,k)=>v+sign*radius*offsets[i][k]));
+  return sign===1?side:side.reverse();
+ });
+ return [{name:'Parsons north end junction border',surface:'junction edge',points:outline(3.6),junctionOrigin:origin},
+  {name:'Parsons north end junction',surface:'junction',points:outline(3),junctionOrigin:origin}];
 }

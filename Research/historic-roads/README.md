@@ -23,6 +23,14 @@ Open `aerial.html?view=historic-roads` for the whole network or `aerial.html?vie
 
 ## Annexe access and later junction corrections
 
+The subsequent [red/yellow/purple screenshot](../annexe-placement/front-roads-annotated.png)
+relocates the frontage avenue and teardrop and adds a gravel link to the service
+court. The teardrop is translated intact; only its connecting approaches are
+reshaped. The central sweeping entrance follows the relocated annexe, while
+both front-side roads and the east roadside hardstanding are removed. Rear
+access remains. This supersedes the front-side access details below; see the
+[latest layout and checks](../annexe-placement/README.md#frontage-roads-from-the-later-redyellowpurple-annotation).
+
 [The annexe annotation](annexe-access-annotated.png) adds a sweeping approach from the existing front avenue. [The latest entrance revision](annexe-entrance-revision.png) reduces the complete sweep to 60% of its initial width, removes the pale strips across the frontage and all gate geometry, and replaces the red-selected central apron with the same asphalt as the road. This supersedes the earlier 20% gate and 80% pale forecourt. The central apron reaches the entrance steps. Yellow adds the asymmetric front-side approaches, roadside and rear hardstandings, and two rear roads from Parsons Lane around the projecting rear wing. These additions supersede the earlier removal of all annexe approaches; other unmarked loops remain absent.
 
 The Parsons rear junctions meet its saved asphalt edge and cover the pale border only within their open mouths. All route ribbons retain full-width building and lane clearance. The entrance remains open for walking, without gate piers or invisible collisions. New annexe features belong to Historic. Use `aerial.html?view=annexe-access` for an overview or `?view=annexe-entrance` for the narrowed sweep and asphalt forecourt.
@@ -48,3 +56,7 @@ the north and entrance edges, retaining tower-side access. The island doubles
 in depth towards Irby/Ashley, from 7 to 14 units, with its Estates-facing edge
 fixed. The north service route clears the enlarged island; the former east
 return and southern cross-lane are removed.
+
+## Parsons Lane yellow retrace
+
+The 16 September yellow/blue annotation (parsons-yellow-retrace.png) replaces the northern detour with a sweep from the western boundary past Irby/Ashley, across the frontage avenue and into the saved Parsons Lane north endpoint. The yellow southern fork joins the frontage avenue. The blue outer loop and upper service/frontage spurs return to grass. This supersedes the earlier northern connection. Ground-plane picks are fitted to the screenshot; road width and materials stay consistent. The saved Modern road vertices are unchanged. Verify with node Browser/test-parsons-retrace.mjs.

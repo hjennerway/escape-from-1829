@@ -37,7 +37,7 @@ assert(!obstacles.some(b=>obstacleContains(b,photo.position[0],photo.position[2]
 // Walk through the vacated tank court, and through each narrow access gap
 // around the cylinders at their new position beside the fixed chimney.
 for(const [start,target] of [
- [[184,-50],[232,-50]],
+ [[184,-44],[232,-44]],
  [[163,-33],[163,-20]],
  [[174.8,-31],[174.8,-22]],
  [[186.99,-33],[186.99,-22.3]],
@@ -48,13 +48,14 @@ for(const [start,target] of [
  for(let i=0;i<Math.ceil(Math.hypot(target[0]-start[0],target[1]-start[1])/.5);i++)walker.update(.1);
  assert(Math.hypot(camera.position.x-target[0],camera.position.z-target[1])<.6,'The cylinder access route remains open: '+start+' to '+target+'; stopped at '+camera.position.toArray());
 }
-// The marked rear edge runs alongside Irby's existing end, with a small
-// clearance for both buildings' roof overhangs. Irby's transform stays fixed.
+// The green guide moves the common rear edge closer to Main/admin.
+// Irby's transform stays fixed and the larger gap remains unobstructed.
 assert.deepEqual(exterior.irbyAshley.position.toArray(),[234,0,-93.4]);
 const irbyEnd=exterior.irbyAshley.userData.roofs.find(r=>r.name==='Tower-facing cross wing').rect[3];
 const irbyObstacles=exteriorObstacles(THREE,exterior.irbyAshley);
 for(const range of [...TOWER_RANGES.filter(r=>r.name.startsWith('Rear ')),TOWER_WORKSHOP_COPY]){
- assert(range.rect[1]>irbyEnd&&range.rect[1]-irbyEnd<1,'Workshop rear aligns with the green-marked Irby end without overlap');
+ assert.equal(range.rect[1],-68.5,'All three rear walls align with the latest green guide');
+ assert(range.rect[1]>irbyEnd,'Workshop rear clears Irby without overlap');
  const bounds=new THREE.Box3().setFromObject(group.getObjectByName(range.name+' walls'));
  for(let x=bounds.min.x+.1;x<bounds.max.x;x+=.5)for(let z=bounds.min.z+.1;z<bounds.max.z;z+=.5){
   assert(!irbyObstacles.some(o=>obstacleContains(o,x,z,.25)),'No moved workshop may intersect Irby');

@@ -20,10 +20,10 @@ export const MAIN_ADMIN_VIEWS=Object.freeze({
   'main-admin-3':shot([-68,1.8,34],[-8,7,3],56),
   'main-admin-4':shot([-62,1.8,52],[0,7,4],53),
   // chimney/img1-loc.png: southeast lawn, looking northwest along the east side.
-  // Step forward on the same sightline to clear the relocated annexe wing.
-  'main-admin-east':shot([68,1.8,46.12],[24,8,-19],63),
+  // Step forward on the same sightline to clear the OS-refined annexe ward.
+  'main-admin-east':shot([63.8010694154,1.8,39.9055827348],[24,8,-19],68),
   // main_refine3/cameras.png: yellow arrow at the east end, blue in the rear court.
-  'main-admin-annexe-end':{position:[275,2.3,23],target:[233,9.3,23],fov:48},
+  'main-admin-annexe-end':{position:[254.5,2.3,23],target:[233,9.3,23],fov:80},
   // Keep the rear-court camera in the Estates gateway as that OS range is modelled.
   'main-admin-rear-court':{position:[235,2.4,-49],target:[220,8.5,17],fov:50},
   'main-admin-corridor':{position:[128,21,48],target:[128,3,9.8],fov:63}

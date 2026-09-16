@@ -53,3 +53,40 @@ The browser model is updated; Blender and Unity exports are unchanged.
 Open `aerial.html?view=annexe-site` or `aerial.html?view=annexe-plan` locally.
 
 ![Aligned site with the three fixed reference buildings](alignment-check.png)
+
+## Frontage roads from the later red/yellow/purple annotation
+
+The user's `front-roads-annotated.png` supersedes the decision to keep the
+frontage roads fixed. The long avenue follows the red line between the northern
+boundary and the translated teardrop. A short curved mouth joins the teardrop;
+the remaining frontage is straight. Its former alignment through the annexe
+is removed.
+
+The complete teardrop carriageway, resurfacing, lawn and inner kerb translate
+by (-16, -12) scene units toward Main/admin. Every original curve vertex,
+road width and relative dimension is retained. Its connecting approach roads
+are adjusted locally to maintain open junctions and clear the buildings.
+
+A 2.4-unit-wide gravel path follows the yellow line from the service court to
+the avenue, with an open mouth through the road kerb. The central asphalt
+forecourt and 60%-width sweeping entrance now meet the annexe front and the
+new avenue. Both side approach roads, their kerbs and the associated east
+roadside hardstanding are removed. Rear roads and the rear hardstanding remain
+at their existing coordinates. Buildings, the Main/admin semicircular forecourt
+and saved modern lanes are unchanged.
+
+`Browser/dist/annexe-front-roads.mjs` records the annotation picks, road endpoints,
+teardrop translation and gravel path. Screenshot registration is approximate;
+the north endpoint is snapped to the existing boundary road, and the teardrop
+position allows clearance from Main/admin within the purple-marked area.
+
+The updated access test checks original teardrop vertex signatures, full-width
+building clearance for the edited roads, continuous walking/asphalt between
+the front door and avenue, gravel access, removed side roads, rear junctions
+and Historic/Modern visibility. A pre/post snapshot confirms unchanged building
+geometry and transforms. The wider road-clearance test still reports the
+pre-existing Admin north service road overlap outside this frontage work.
+
+Open `aerial.html?view=annexe-roads` for this view.
+
+![Relocated frontage road, teardrop and gravel path](front-roads-after.png)
