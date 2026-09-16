@@ -29,12 +29,11 @@ export const ADMIN_OS_RANGES=Object.freeze([
   // new-shape.png: outer five-eighths projects beyond the recessed connection.
   {name:'Low west side rooms',rect:[160,40,165.625,50],height:4.5,rise:1.65},
   {name:'Recessed low west connection',rect:[165.625,40,169,48],height:4.2,rise:.6},
-  // chimney/img1.jpg adds the previously unseen low east rooms.
-  {name:'Low east side room',rect:[220,41,227,48.5],height:7.1,rise:2.5,cant:'east'},
-  {name:'Recessed low east connection',rect:[217,41,220,46.5],height:5.5,rise:.8},
-  // Img1: a lower square return and raised rear room behind the canted bay.
-  {name:'East stepped rear link',rect:[220,37,227,41],height:5.9,roof:'flat'},
-  {name:'East square rear room',rect:[220,33.7,227,37],height:7.2,roof:'flat'},
+  {name:'Recessed low east connection',rect:[217,37,220,41],height:5.5,rise:.8},
+  // The marked correction removes the extra canted bay. The red side wing
+  // has one pointed roof; its recessed connection meets the rear shoulder.
+  {name:'East stepped rear link',rect:[220,37,227,41],height:7.2,roof:'pointed-wing'},
+  {name:'East square rear room',rect:[220,33.7,227,37],height:7.2,roof:'pointed-wing'},
   // Img2: upper projection, hipped stair bay and flat court block.
   {name:'Rear projecting window range',rect:[200,35.75,209.3333333333,40],height:14.1,rise:3.5},
   {name:'Rear canted stair bay',rect:[211,35.25,216.3333333333,39],height:10.5,rise:2.5,cant:'north',cut:1.2},
@@ -71,7 +70,7 @@ export function createMainAdminBuilding(THREE,{brick,roof,worldUV,material}){
     const [u0,v0,u1,v1]=spec.rect,a=adminMapPoint(u0,v0),b=adminMapPoint(u1,v1);
     const x=(a[0]+b[0])/2-MAIN_ADMIN.x,z=(a[1]+b[1])/2-MAIN_ADMIN.z,w=b[0]-a[0],d=b[1]-a[1],h=spec.height;
     if(spec.cant){
-      // img3: angled end lights, hipped roof and exposed brick base.
+      // Photo-supported canted end/stair bays with matching roof outlines.
       const cut=spec.cut??2.1,outline=spec.cant==='north'
         ?[[-w/2,-d/2+cut],[-w/2+cut,-d/2],[w/2-cut,-d/2],[w/2,-d/2+cut],[w/2,d/2],[-w/2,d/2]]
         :[[-w/2,-d/2],[w/2-cut,-d/2],[w/2,-d/2+cut],[w/2,d/2-cut],[w/2-cut,d/2],[-w/2,d/2]];
@@ -83,6 +82,11 @@ export function createMainAdminBuilding(THREE,{brick,roof,worldUV,material}){
       ranges.push({...spec,x,z,w,d});return {x,z,w,d,h};
     }
     solid(brick,x,h/2,z,w,h,d,spec.name+' walls');solid(stone,x,.2,z,w+.12,.4,d+.12,spec.name+' plinth');
+    if(spec.roof==='pointed-wing'){
+      // Both parts support the shared roof added after the ranges are assembled.
+      solid(pale,x,h+.06,z,w+.38,.22,d+.38,spec.name+' eaves');
+      ranges.push({...spec,x,z,w,d});return {x,z,w,d,h};
+    }
     if(spec.roof==='flat'){
       solid(dark,x,h+.07,z,w,.14,d,spec.name+' flat roof');
       for(const edgeZ of [z-d/2,z+d/2]){
@@ -96,11 +100,25 @@ export function createMainAdminBuilding(THREE,{brick,roof,worldUV,material}){
       solid(red,x,h-.32,z,w+.12,.22,d+.12,spec.name+' parapet string');
       ranges.push({...spec,x,z,w,d});return {x,z,w,d,h};
     }
-    for(const y of h>12?[4.65,9.4,13.9]:[h-.2])solid(y===13.9?pale:stone,x,y,z,w+.16,.17,d+.16,spec.name+' stone course');
+    for(const y of h>12?[4.65,9.4,13.9]:h>9?[4.65,9.4,h-.2]:[h-.2])solid(y===13.9?pale:stone,x,y,z,w+.16,.17,d+.16,spec.name+' stone course');
     solid(pale,x,h+.06,z,w+.38,.22,d+.38,spec.name+' eaves');hip(x,z,w,d,h+.18,spec.rise,spec.name);
     ranges.push({...spec,x,z,w,d});return {x,z,w,d,h};
   }
-  const [core,west,east,low,lowLink,eastLow,eastLink,eastStep,eastRear,rearProjection,rearStair,rearCourt,eastShoulder]=ADMIN_OS_RANGES.map(range);
+  const [core,west,east,low,lowLink,eastLink,eastStep,eastRear,rearProjection,rearStair,rearCourt,eastShoulder]=ADMIN_OS_RANGES.map(range);
+  // Img1's pointed roof belongs to the red-marked wing, not an extra bay
+  // in front of it. Four slopes share one apex with no flat decks/parapets.
+  const wingNorth=eastRear.z-eastRear.d/2,wingSouth=eastStep.z+eastStep.d/2;
+  const wingZ=(wingNorth+wingSouth)/2,wingW=eastStep.w,wingD=wingSouth-wingNorth;
+  const roofY=7.38,roofRise=3.2;
+  const roofCorners=[[-wingW/2-.22,roofY,-wingD/2-.22],[wingW/2+.22,roofY,-wingD/2-.22],[wingW/2+.22,roofY,wingD/2+.22],[-wingW/2-.22,roofY,wingD/2+.22]];
+  const roofPositions=[],roofUV=[];
+  for(let i=0;i<4;i++)for(const p of [roofCorners[(i+1)%4],roofCorners[i],[0,roofY+roofRise,0]]){
+    roofPositions.push(...p);roofUV.push(p[0]/2.8,(p[2]+p[1])/2.8);
+  }
+  const wingRoofGeometry=new THREE.BufferGeometry();
+  wingRoofGeometry.setAttribute('position',new THREE.Float32BufferAttribute(roofPositions,3));
+  wingRoofGeometry.setAttribute('uv',new THREE.Float32BufferAttribute(roofUV,2));wingRoofGeometry.computeVertexNormals();
+  mesh(wingRoofGeometry,roof,eastStep.x,0,wingZ,'East pointed side wing slate roof');
   function sash(face,x,y,z,w=1.4,h=2.8,r=0){
     const dx=Math.cos(r),dz=-Math.sin(r),nx=Math.sin(r),nz=Math.cos(r);
     const part=(m,u,v,n,pw,ph,pd)=>box(m,x+dx*u+nx*n,y+v,z+dz*u+nz*n,pw,ph,pd,r);
@@ -152,20 +170,16 @@ export function createMainAdminBuilding(THREE,{brick,roof,worldUV,material}){
   sash('recessed low connection',lowLink.x,2.05,lowLink.z+lowLink.d/2+.025,1.4,2.7);
   sash('low west stepped return',low.x+low.w/2+.025,2.05,low.z+low.d/2-1.6,1.1,2.7,Math.PI/2);
   for(const z of [low.z-4.6,low.z,low.z+4.6])sash('low west end',low.x-low.w/2-.025,2.15,z,1.3,2.9,-Math.PI/2);
-  // Img1: paired end lights, canted cheeks and a tall exposed brick base.
-  for(const dz of [-1.7,1.7])sash('east low end',eastLow.x+eastLow.w/2+.025,4.65,eastLow.z+dz,1.65,3.45,Math.PI/2);
-  for(const side of [-1,1])sash('east low chamfer',eastLow.x+eastLow.w/2-1.05+.025,4.65,eastLow.z+side*(eastLow.d/2-1.05+.025),1.25,3.45,side===1?Math.PI/4:3*Math.PI/4);
-  for(const dx of [-2.7,2.2])sash('east low south',eastLow.x+dx,4.65,eastLow.z+eastLow.d/2+.025,1.35,3.45);
   sash('east recessed connection',eastLink.x,3.0,eastLink.z+eastLink.d/2+.025,1.4,3.3);
   sash('east shoulder light',eastShoulder.x+eastShoulder.w/2+.025,9.1,eastShoulder.z,1.4,1.7,Math.PI/2);
   sash('east step small sash',eastStep.x+eastStep.w/2+.025,3.15,eastStep.z,1.45,1.75,Math.PI/2);
   sash('east rear room sash',eastRear.x+eastRear.w/2+.025,4.5,eastRear.z,1.65,2.85,Math.PI/2);
   sash('east rear basement light',eastRear.x+eastRear.w/2+.025,.9,eastRear.z,1.6,.75,Math.PI/2);
   for(const dx of [-2.5,2.5])sash('east square rear face',eastRear.x+dx,4.5,eastRear.z-eastRear.d/2-.025,1.4,2.85,Math.PI);
-  const eastCourse=[[-eastLow.w/2,-eastLow.d/2],[eastLow.w/2-2.1,-eastLow.d/2],[eastLow.w/2,-eastLow.d/2+2.1],[eastLow.w/2,eastLow.d/2-2.1],[eastLow.w/2-2.1,eastLow.d/2],[-eastLow.w/2,eastLow.d/2]];
-  prism(stone,eastLow.x,2.6,eastLow.z,eastCourse.map(([x,z])=>[x*1.012,z*1.012]),.13,'East bay raised sill course');
   for(const room of [eastStep,eastRear])box(stone,room.x+room.w/2+.06,2.6,room.z,.14,.13,room.d);
-  for(const z of [eastLow.z-eastLow.d/2+2.25,eastLow.z+eastLow.d/2-2.25])box(dark,eastLow.x+eastLow.w/2+.1,3.5,z,.085,7,.085);
+  for(const dx of [-2.5,2.5])sash('east pointed wing south',eastStep.x+dx,4.5,wingSouth+.025,1.45,2.85);
+  box(stone,eastStep.x,2.6,wingSouth+.06,wingW,.13,.14);
+  for(const z of [wingNorth+.2,wingSouth-.2])box(dark,eastStep.x+wingW/2+.12,3.6,z,.085,7.2,.085);
   // Img2 puts the close upper group on a projecting rear face.
   for(const dx of [-2.1,0,2.1])sash('rear grouped upper',rearProjection.x+dx,11.65,rearProjection.z-rearProjection.d/2-.025,1.45,2.75,Math.PI);
   for(const dx of [-3.7,0,3.7])for(const y of [2.3,7.05])sash('rear projection sash',rearProjection.x+dx,y,rearProjection.z-rearProjection.d/2-.025,1.35,2.85,Math.PI);
@@ -252,6 +266,6 @@ export function createMainAdminBuilding(THREE,{brick,roof,worldUV,material}){
   const dummy=new THREE.Object3D();
   for(const [m,items] of batches){const batch=new THREE.InstancedMesh(new THREE.BoxGeometry(1,1,1),m,items.length);batch.name='Admin sash and masonry details';batch.userData.orientedCollision=true;batch.castShadow=true;batch.receiveShadow=true;items.forEach((b,i)=>{dummy.position.set(b.x,b.y,b.z);dummy.scale.set(b.w,b.h,b.d);dummy.rotation.set(0,b.r,0);dummy.updateMatrix();batch.setMatrixAt(i,dummy.matrix);});building.add(batch);}
   building.userData.openings=openings;building.userData.ranges=ranges;
-  building.userData.reference='OS footprint and img1–4; chamfered bays and stepped low west rooms refined from main_refine/front.png and new-shape.png. main_redfine2/img1 refines the raised east bay and square stepped returns; img2 supplies the grouped rear projection, hipped stair bay and flat court block. Concealed joins and dimensions are estimates. See Research/main-refine2/README.md.';
+  building.userData.reference='OS footprint and img1–4; chamfered bays and stepped low west rooms refined from main_refine/front.png and new-shape.png. The marked main_redfine2 correction removes the nonexistent east bay and gives the retained side wing one pointed roof following img1; img2 supplies the grouped rear projection, hipped stair bay and flat court block. Concealed joins and dimensions are estimates. See Research/main-refine2/README.md.';
   return {building,corridor};
 }

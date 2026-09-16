@@ -8,7 +8,7 @@ export function createAerialLayouts(THREE,exterior){
   if(exterior.layouts)return exterior.layouts;
   const shared=new THREE.Group(),historic=new THREE.Group(),modern=new THREE.Group();
   shared.name='Shared estate';historic.name='Historic layout';modern.name='Modern layout';
-  const historicObjects=new Set([exterior.annexe,exterior.mainAdmin,exterior.adminCorridor,exterior.estateChimney]);
+  const historicObjects=new Set([exterior.annexe,exterior.mainAdmin,exterior.adminCorridor,exterior.estateChimney,exterior.irbyAshley]);
   for(const child of [...exterior.model.children]){
     if(child===exterior.terrain)continue;
     (historicObjects.has(child)?historic:shared).add(child);
@@ -23,7 +23,7 @@ export function createAerialLayouts(THREE,exterior){
   exterior.annexe.traverse(o=>{if(o.name==='Annexe drive')superseded.push(o);});
   exterior.mainAdmin.traverse(o=>{if(['Admin carriage approach','Admin forecourt lawn','Curved lawn stone edging','West side access','East curved carriage drive','East wing side access'].some(name=>o.name===name||o.name===name+' stone kerb'))superseded.push(o);});
   const lane=roads.getObjectByName('Vivienne Smith Lane');
-  const sharedRoads=new Set(['Vivienne Smith Lane','Parsons Lane','Parsons Lane (Upton Lea)','Parsons Lane (1829 Central)']);
+  const sharedRoads=new Set(['Vivienne Smith Lane','Parsons Lane','Parsons Lane (Upton Lea)','Parsons Lane (1829 Central)','Parsons Lane (North)']);
   const state={historic:true,modern:false};
   function setVisible(layout,visible){
     if(layout!=='historic'&&layout!=='modern')throw new Error('Unknown estate layout: '+layout);

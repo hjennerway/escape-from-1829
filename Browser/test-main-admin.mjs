@@ -76,7 +76,7 @@ const eastShot=MAIN_ADMIN_VIEWS['main-admin-east'];
 assert(!obs.some(o=>obstacleContains(o,eastShot.position[0],eastShot.position[2])),'East photo camera must start in open ground');
 assert(eastShot.position[0]>eastShot.target[0]&&eastShot.position[2]>eastShot.target[2],'Marked camera must look northwest');
 assert.equal(building.userData.openings.filter(o=>o.face==='east photo upper column').length,2);
-assert.equal(building.userData.openings.filter(o=>o.face==='east low end').length,2);
+assert.equal(building.userData.openings.filter(o=>o.face==='east low end').length,0);
 assert(!building.userData.openings.some(o=>o.face==='east return inferred'));
 for(const name of ['East curved carriage drive','East wing side access']){const road=building.getObjectByName(name);assert(road&&road.geometry.attributes.normal.getY(0)>.99,'East approach gravel must face upwards');}
 const chimney=exterior.estateChimney,bounds=new THREE.Box3().setFromObject(chimney);

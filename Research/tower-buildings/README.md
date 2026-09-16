@@ -2,7 +2,7 @@
 
 The nine references here were supplied on 15 September 2026. The photographs
 are architectural evidence; coloured arrows mark camera positions and viewing
-directions. The blue circle in img4 selects a block to leave unmodelled.
+directions. The blue circle in img4 selects the separate Irby/Ashley range, now modelled by the later Irby/Ashley task.
 
 `Browser/dist/tower-buildings.mjs` reconstructs the brick service ranges east
 and south of the water tower: gabled and hipped halls, flat links with parapets,
@@ -23,7 +23,7 @@ Img3 refines the low east end of Main/admin into a canted brick room with a
 matching hipped roof, tall sash lights, pale stone trim and exposed brick base.
 Img4 informs the curved service-road approach and the paved court around the
 ramp. The road widths, kerb colour and annexe-side route retain the established
-scene treatment. The blue-circled building is left as an OS outline.
+scene treatment. The blue-circled building is now modelled separately as Irby/Ashley; see ../irby-ashley/README.md.
 
 New service buildings, ramp and court are created only in the Historical aerial
 layer. Main/admin already belongs to that layer. Modern-only views hide them.

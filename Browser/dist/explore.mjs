@@ -1,6 +1,7 @@
 import {bindPlanterToggle} from './planter-layer.mjs';
 import {CHURTON_VIEWS} from './churton-ward.mjs';
 import {UPTON_VIEWS} from './upton-frith-oscroft.mjs';
+import {IRBY_ASHLEY_VIEWS} from './irby-ashley.mjs';
 import {MAIN_ADMIN_VIEWS} from './main-admin-building.mjs';
 import {ANNEXE_VIEWS} from './annexe.mjs';
 import * as THREE from './vendor/three.module.js';
@@ -64,6 +65,7 @@ try{
   if(ANNEXE_VIEWS[annexeView])walker.setView(ANNEXE_VIEWS[['annexe','annexe-plan','annexe-site'].includes(annexeView)?'annexe-ground':annexeView]);
   const churtonView=new URLSearchParams(location.search).get('view');
   if(UPTON_VIEWS[churtonView])walker.setView(UPTON_VIEWS['upton-ground']);
+  if(IRBY_ASHLEY_VIEWS[churtonView])walker.setView(IRBY_ASHLEY_VIEWS[churtonView==='irby-ashley-3'?churtonView:'irby-ashley-1']);
   if(MAIN_ADMIN_VIEWS[churtonView]){
     const shot=MAIN_ADMIN_VIEWS[churtonView==='main-admin'||churtonView==='main-admin-plan'?'main-admin-4':churtonView];
     walker.setView(churtonView==='main-admin-corridor'?{...shot,position:[136,1.8,28],target:[128,2.1,13]}:shot);

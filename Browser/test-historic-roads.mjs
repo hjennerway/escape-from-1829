@@ -6,6 +6,8 @@ import {createAerialLayouts} from './dist/aerial-layouts.mjs';
 import {HISTORIC_ROADS,HISTORIC_GRAVEL,HISTORIC_PAVING,ADMIN_ISLAND_CENTER} from './dist/historic-roads.mjs';
 import {annexePoint} from './dist/annexe.mjs';
 import {VIVIENNE_LANE} from './dist/modern-entrance.mjs';
+import {MODERN_ROAD_PATHS} from './dist/modern-road-data.mjs';
+import {earthToScene} from './dist/earth-registration.mjs';
 globalThis.document={createElement:()=>({getContext:()=>({fillRect(){},measureText(text){return {width:text.length*16}},strokeText(){},fillText(){}})})};
 const exterior=createEscapeExterior(THREE,1.5),layouts=createAerialLayouts(THREE,exterior);
 const effective=o=>{for(;o;o=o.parent)if(!o.visible)return false;return true;};
@@ -55,6 +57,26 @@ for(const name of ['Central service area · provisional','Northern service range
 // Ray checks distinguish a real grass island from a painted disk covered by road.
 const ray=new THREE.Raycaster();
 function surfaceAt(x,z){ray.set(new THREE.Vector3(x,2,z),new THREE.Vector3(0,-1,0));return ray.intersectObject(layouts.historicRoads,true)[0]?.object.userData.surface;}
+// Inferred eastern extensions must stop before every saved Parsons Lane edge.
+const savedParsons=MODERN_ROAD_PATHS.filter(p=>p.name.startsWith('Parsons Lane')).map(p=>p.coordinates.map(c=>earthToScene(...c)));
+function pointSegmentDistance(p,a,b){
+ const dx=b[0]-a[0],dz=b[1]-a[1],t=Math.max(0,Math.min(1,((p[0]-a[0])*dx+(p[1]-a[1])*dz)/(dx*dx+dz*dz)));
+ return Math.hypot(p[0]-a[0]-t*dx,p[1]-a[1]-t*dz);
+}
+function segmentDistance(a,b,c,d){
+ const cross=(u,v)=>u[0]*v[1]-u[1]*v[0],r=b.map((v,k)=>v-a[k]),s=d.map((v,k)=>v-c[k]),q=c.map((v,k)=>v-a[k]),den=cross(r,s);
+ if(Math.abs(den)>1e-9){const t=cross(q,s)/den,u=cross(q,r)/den;if(t>=0&&t<=1&&u>=0&&u<=1)return 0;}
+ return Math.min(pointSegmentDistance(a,c,d),pointSegmentDistance(b,c,d),pointSegmentDistance(c,a,b),pointSegmentDistance(d,a,b));
+}
+for(const name of ['Annexe inner east road','Annexe outer east road']){
+ const road=HISTORIC_ROADS.find(r=>r.name===name);let nearest=Infinity;
+ for(let i=1;i<road.points.length;i++)for(const points of savedParsons)for(let j=1;j<points.length;j++)
+  nearest=Math.min(nearest,segmentDistance(road.points[i-1],road.points[i],points[j-1],points[j]));
+ assert(nearest>road.width/2+.6+3.6,name+' asphalt, rounded caps and borders must clear Parsons Lane');
+ assert.equal(surfaceAt(...road.points[0]),'black road','The existing estate-side approach must remain');
+}
+for(const p of [[442.71559648559054,108.65503009896166],[353.56228338991866,157.9269650357649],[551,39],[600,120]])
+ assert(!['black road','stone kerb'].includes(surfaceAt(...p)),'Removed crossings and outer stubs must leave no inferred asphalt or kerbs');
 for(const name of ['Churton west road','Churton north cross-road','Churton estate cross-road','North ward road','Northern cross-road']){
  assert(!layouts.historicRoads.getObjectByName(name),'Circled historic roads must be removed');
  assert(!layouts.historicRoads.getObjectByName(name+' border'),'Removed roads must not leave pale borders');

@@ -206,5 +206,5 @@ assert.equal(ray.intersectObject(group,true).length,0);
 ray.set(new THREE.Vector3(227,2,-10),new THREE.Vector3(0,-1,0));
 assert.equal(ray.intersectObject(layouts.historicRoads,true)[0]?.object.userData.surface,'black road','Court entrance must not have a crossing kerb');
 const eastEnd=exterior.mainAdmin.getObjectByName('Low east side room walls');
-assert.equal(eastEnd.userData.collisionFootprint.length,6,'Admin east end has two angled corners');
+assert(!eastEnd,'The blue-marked extra admin bay must be removed');
 console.log('PASS: Historical ownership, exposed service glazing, upward roofs, three tower abutments, three traced face profiles, continuous corner joins, flat arch junctions, shallow final-third pitches, ridge-aligned dormers with downslope glazing, aligned front walls, green-edge alignment, blue-footprint extension, marked-group translation with fixed chimney clearance, removed northern hall, translated entrance link and ramp, rotated full-span chimney roof and east gable window, extended tower ridge, single green-corner slope, flat red return, separate rear hipped building, continuous ramp and retained blue-block exclusion.');

@@ -3,6 +3,8 @@ import {missingHistoricFootprints} from './historic-footprints.mjs';
 import {annexePoint} from './annexe.mjs';
 import {VIVIENNE_LANE} from './modern-entrance.mjs';
 import {ROAD_STYLE} from './road-style.mjs';
+import {MODERN_ROAD_PATHS} from './modern-road-data.mjs';
+import {earthToScene} from './earth-registration.mjs';
 import {TOWER_ADMIN_SHIFT} from './tower-buildings.mjs';
 
 // clean.png supplies straight edges; annotated.png identifies roads and buildings.
@@ -75,6 +77,33 @@ const annexeOuterEastRoad=bezier(outerCrossing,[
  [[229,138],[253,142],[274,144]],[[306,151],[338,158],[371,159]],
  [[421,160],[475,155],[515,145]],[[546,138],[576,129],[600,120]]
 ]);
+// Saved Parsons Lane takes precedence over the inferred eastern extensions.
+// Stop at its first outer edge and discard the unsupported road beyond it.
+const parsonsSegments=MODERN_ROAD_PATHS.filter(path=>path.name.startsWith('Parsons Lane')).flatMap(path=>{
+ const points=path.coordinates.map(p=>earthToScene(...p));return points.slice(1).map((b,i)=>[points[i],b]);
+});
+function distanceToParsons([x,z]){
+ return Math.min(...parsonsSegments.map(([a,b])=>{
+  const dx=b[0]-a[0],dz=b[1]-a[1],length2=dx*dx+dz*dz;
+  const t=length2?Math.max(0,Math.min(1,((x-a[0])*dx+(z-a[1])*dz)/length2)):0;
+  return Math.hypot(x-a[0]-t*dx,z-a[1]-t*dz);
+ }));
+}
+function stopBeforeParsons(points,width){
+ // Include both 0.6-unit borders and rounded end caps, with a small grass gap.
+ const clearance=(width+6)/2+2*ROAD_STYLE.edgeWidth+.2,kept=[points[0]];
+ for(let i=1;i<points.length;i++){
+  const a=points[i-1],b=points[i],dx=b[0]-a[0],dz=b[1]-a[1],steps=Math.max(1,Math.ceil(Math.hypot(dx,dz)));
+  const point=t=>[a[0]+dx*t,a[1]+dz*t];
+  for(let j=1;j<=steps;j++)if(distanceToParsons(point(j/steps))<clearance){
+   let lo=(j-1)/steps,hi=j/steps;
+   for(let n=0;n<32;n++){const mid=(lo+hi)/2;if(distanceToParsons(point(mid))<clearance)hi=mid;else lo=mid;}
+   kept.push(point(lo));return kept;
+  }
+  kept.push(b);
+ }
+ return kept;
+}
 export const HISTORIC_ROADS_SOURCE=Object.freeze({clean:'User attachment: roads/clean.png',annotations:'User attachment: roads/annotated.png',revision:'Research/historic-roads/annexe-grass-road-correction.png',previousRevision:'Research/historic-roads/admin-road-reroute.png',previousLayout:'Research/historic-roads/interbuilding-alarm-board.png',previousPhoto:'Research/historic-roads/admin-to-annexe-photo.png',orientation:'Research/historic-roads/admin-to-annexe-orientation.png',note:'Photo-estimated circulation. The original purple/pink marks identify buildings and blue identifies the shared lane. The later yellow/blue aerial relocates islands and extends the Historic roads. The Main/admin-to-annexe photograph refines the curved junction, parking entrance and exposed kerbs; its blue arrow supplies viewing direction only. The later purple selection refines the roads and elongated lawns between Main/admin (blue) and the annexe (yellow); coloured circles are selection guides only. The September aerial moves the purple frontage drive to red, adds the yellow crossing and outer roads, and removes blue perimeter, spur and entrance sections. The shared lane east of the new crossing appears only with Modern. The latest blue/yellow correction removes the garden circuit and parking to expose terrain grass, restores a single-width annexe avenue and curves both sides of its central entrance.'});
 // The marked Churton grid and church-to-north route are removed; Parsons Lane remains shared.
 export const HISTORIC_ROADS=Object.freeze([
@@ -83,8 +112,8 @@ export const HISTORIC_ROADS=Object.freeze([
  {name:'Admin roundabout to annexe',width:6,points:bezier([238,63],[[[260,63],[268,51],frontWest]])},
  {name:'Annexe front avenue',width:6,points:[frontWest,ap(62,84),ap(-62,84),frontEast]},
  {name:'Admin east crossing drive',width:6,points:adminEastDrive},
- {name:'Annexe inner east road',width:6,points:annexeInnerEastRoad},
- {name:'Annexe outer east road',width:6,points:annexeOuterEastRoad},
+ {name:'Annexe inner east road',width:6,points:stopBeforeParsons(annexeInnerEastRoad,6)},
+ {name:'Annexe outer east road',width:6,points:stopBeforeParsons(annexeOuterEastRoad,6)},
  {name:'Northern diagonal road',width:6,points:[frontEast,ap(-198,84),ap(-245,84)]},
  // The service lane skirts the square east rooms revealed in main_redfine2/img1,
  // returning to the established tower-side route north of the new extension.
