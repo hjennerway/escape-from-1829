@@ -15,3 +15,4 @@
 #aerialHelp{pointer-events:none}
 #resetAerial{pointer-events:auto;min-height:44px}
 @media(pointer:coarse){.desktop-aerial-help{display:none}.touch-aerial-help{display:inline}#aerialHelp{font-size:12px;line-height:1.6}}
+@media(max-width:650px){#churtonNav.pharmacy-navigation{top:78px;bottom:auto!important;left:12px!important;right:12px;background:#142018e8;padding:6px 10px;line-height:1.6}#churtonNav.pharmacy-navigation a{display:inline-block;line-height:32px}}

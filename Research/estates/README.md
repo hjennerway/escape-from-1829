@@ -50,3 +50,15 @@ and Irby/Ashley recesses become one grey asphalt service court, matching the
 existing road material. Internal kerbs are covered at the joins. A single small
 rounded grass island remains between the two buildings; the Estates cobbled
 courtyard is excluded from the asphalt. Dimensions remain screenshot estimates.
+
+## Outer grass and longer island
+
+The latest `grass-road-revision.png` replaces the blue-circled road east and
+south of Estates with the surrounding grass. Its asphalt and pale kerbs are
+removed, and the service court now follows the building's north and entrance
+edges. The tower-side access and cobbled entrance remain open.
+
+The red-circled island keeps its width and Estates-facing edge at z=-76.
+Its depth doubles from 7 to 14 units, extending to z=-90 towards Irby/Ashley.
+The service route passes north of the enlarged island. This supersedes the
+outer paved loop and smaller island in the previous purple annotation.

@@ -1,4 +1,5 @@
 import {photoDetailPrimitives} from './photo-detail-primitives.mjs';
+import {FARNDON_CORRIDOR} from './farndon-corridor.mjs';
 
 // The corrected blue outline in img1.png overrides the older OS silhouette.
 // See Tools/register_farndon.mjs and Research/farndon/README.md.
@@ -45,12 +46,13 @@ export function createFarndon(THREE,{brick,roof,worldUV,material}){
  const {x:cx,z:cz,eave}=FARNDON;building.position.set(cx,0,cz);
  brick=brick.clone();brick.color.set(0xe2c9b7);
  const white=material(0xc8c7b7),steel=material(0x354344),red=material(0x86503c),plinth=material(0x66564a);
- const batches=new Map(),openings=[],roofSurfaces=[];
+ const batches=new Map(),connectionBatches=new Map(),openings=[],roofSurfaces=[];
+ let activeBatches=batches;
  function mesh(g,m,x=0,y=0,z=0,name=''){
   const o=new THREE.Mesh(g,m);o.position.set(x,y,z);o.name=name;o.castShadow=true;o.receiveShadow=true;building.add(o);return o;
  }
  function box(m,x,y,z,w,h,d,r=0){
-  if(!batches.has(m))batches.set(m,[]);batches.get(m).push({x,y,z,w,h,d,r});
+  if(!activeBatches.has(m))activeBatches.set(m,[]);activeBatches.get(m).push({x,y,z,w,h,d,r});
  }
  const local=points=>points.map(([x,z])=>[x-cx,z-cz]);
  function mass(points,height,mat,name,bottom=0){
@@ -70,9 +72,12 @@ export function createFarndon(THREE,{brick,roof,worldUV,material}){
  detail.blue.color.set(0xc5cec9);
  function sash(wx,wz,r,w=1.32,h=2.85,y=2.24){
   const x=wx-cx,z=wz-cz;
+  const corridorContact=Math.abs(wz+147.27)<.01&&Math.abs(wx-FARNDON_CORRIDOR.x)<FARNDON_CORRIDOR.width/2+w/2;
+  activeBatches=corridorContact?connectionBatches:batches;
   detail.sash('Farndon tall multi-pane sash',x,y,z,r,w,h);
   box(red,x+Math.sin(r)*.075,y+h/2+.17,z+Math.cos(r)*.075,w+.31,.18,.19,r);
-  openings.push({x,y,z,r,w,h});
+  activeBatches=batches;
+  openings.push({x,y,z,r,w,h,...corridorContact?{corridorContact:true}:{}});
  }
  function door(wx,wz,r){detail.door(wx-cx,wz-cz,r);}
  function trim(a,b,height=eave){
@@ -186,9 +191,10 @@ export function createFarndon(THREE,{brick,roof,worldUV,material}){
   box(steel,x,h+.005,z,.79,.05,.79);
  }
  const dummy=new THREE.Object3D();
- for(const [mat,items] of batches){
+ const connectionSash=new THREE.Group();connectionSash.name='Farndon rear connection sash';building.add(connectionSash);
+ for(const [source,parent] of [[batches,building],[connectionBatches,connectionSash]])for(const [mat,items] of source){
   const batch=new THREE.InstancedMesh(new THREE.BoxGeometry(1,1,1),mat,items.length);batch.name='Farndon sashes, doors, masonry and rainwater goods';batch.castShadow=true;batch.receiveShadow=true;batch.userData.orientedCollision=true;
-  items.forEach((b,i)=>{dummy.position.set(b.x,b.y,b.z);dummy.rotation.set(0,b.r,0);dummy.scale.set(b.w,b.h,b.d);dummy.updateMatrix();batch.setMatrixAt(i,dummy.matrix);});building.add(batch);
+  items.forEach((b,i)=>{dummy.position.set(b.x,b.y,b.z);dummy.rotation.set(0,b.r,0);dummy.scale.set(b.w,b.h,b.d);dummy.updateMatrix();batch.setMatrixAt(i,dummy.matrix);});parent.add(batch);
  }
  building.userData={...building.userData,source:FARNDON,storeys:1,footprint:FARNDON_FOOTPRINT,gardenBay:FARNDON_GARDEN_BAY,openings,roofs:FARNDON_ROOFS,roofRidges:FARNDON_RIDGES,
   // Both connecting OS corridor edges remain; only the selected ward retires.

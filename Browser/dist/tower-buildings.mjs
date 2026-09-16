@@ -1,5 +1,6 @@
 import {ESCAPE_WATER_TOWER} from './water-tower.mjs';
 import {ESTATE_CHIMNEY} from './estate-chimney.mjs';
+import {addPharmacyCourt,PHARMACY_VIEWS} from './pharmacy-court.mjs';
 
 import {TOWER_ROOF_CONTACTS} from './tower-roof-profiles.mjs';
 export {TOWER_ROOF_CONTACTS} from './tower-roof-profiles.mjs';
@@ -8,9 +9,12 @@ export {TOWER_ROOF_CONTACTS} from './tower-roof-profiles.mjs';
 // outer ranges; roof heights and obscured internal divisions are estimates.
 // The block circled blue in img4 is deliberately outside this reconstruction.
 export const TOWER_BUILDING_VIEWS=Object.freeze({
+ ...PHARMACY_VIEWS,
  'tower-buildings':{position:[279,108,81],target:[179,8,-36],fov:52},
  'tower-buildings-roofs':{position:[105,89,2],target:[166,7,-46],fov:52},
- 'tower-twin-gables':{position:[191,1.8,-55.5],target:[205,5.2,-74],fov:64},
+ // The enlarged third workshop fills the former western camera position.
+ 'tower-twin-gables':{position:[223,1.8,-71],target:[204.5,5.2,-74],fov:68},
+ 'tower-workshop-copy':{position:[122,72,-158],target:[185,5,-68],fov:46},
  'tower-twin-gables-site':{position:[99,100,-172],target:[185,4,-48],fov:52},
  'tower-roof-white-door':{position:[148,15,-26],target:[148,10,-51],fov:55},
  'tower-roof-north':{position:[148,15,-86],target:[148,10,-59.5],fov:55},
@@ -54,6 +58,14 @@ export const TOWER_RANGES=Object.freeze([
  return {...range,rect:translate(range.rect),...(range.roofRect?{roofRect:translate(range.roofRect)}:{})};
 }));
 
+// Red/yellow screenshot correction: copy the west workshop into the adjoining
+// yellow footprint, retaining its north edge and the original building height.
+export const TOWER_WORKSHOP_COPY=Object.freeze({
+ name:'Enlarged west workshop',source:'Rear west gabled workshop',
+ dormer:'Enlarged workshop blue dormer',sourceDormer:'Rear building blue dormer 2',
+ footprintScale:1.5,rect:Object.freeze([169.5,-87.5,190.5,-66.5])
+});
+
 export function createTowerBuildings(THREE,exterior){
  const group=new THREE.Group();group.name='Tower service buildings';
  group.userData.reference='Research/tower-buildings/README.md';
@@ -68,11 +80,12 @@ export function createTowerBuildings(THREE,exterior){
  roof.color.multiplyScalar(1.15);
  const mat=color=>new THREE.MeshStandardMaterial({color,roughness:.88});
  const stone=mat(0xb9b5a5),frame=mat(0xd5dcd5),glass=mat(0x526b70),dark=mat(0x343d3b),red=mat(0x995f49),blue=mat(0x739eae),flat=mat(0x4e5450);
- const batches=new Map(),openings=[];
+ const batches=new Map(),openings=[],copyMeshes=[],copyDetails=[];
+ let captureWorkshop=false;
  function uv(g){const p=g.attributes.position,n=g.attributes.normal,a=[];for(let i=0;i<p.count;i++){const x=Math.abs(n.getX(i)),y=Math.abs(n.getY(i)),z=Math.abs(n.getZ(i));a.push((x>z?p.getZ(i):p.getX(i))/1.7,(y>.5?p.getZ(i):p.getY(i))/1.7);}g.setAttribute('uv',new THREE.Float32BufferAttribute(a,2));return g;}
- function mesh(g,m,x=0,y=0,z=0,name=''){const o=new THREE.Mesh(g,m);o.position.set(x,y,z);o.name=name;o.castShadow=true;o.receiveShadow=true;group.add(o);return o;}
+ function mesh(g,m,x=0,y=0,z=0,name=''){const o=new THREE.Mesh(g,m);o.position.set(x,y,z);o.name=name;o.castShadow=true;o.receiveShadow=true;group.add(o);if(captureWorkshop)copyMeshes.push(o);return o;}
  function box(m,x,y,z,w,h,d,name=''){return mesh(uv(new THREE.BoxGeometry(w,h,d)),m,x,y,z,name);}
- function detail(m,x,y,z,w,h,d,r=0){if(!batches.has(m))batches.set(m,[]);batches.get(m).push({x,y,z,w,h,d,r});}
+ function detail(m,x,y,z,w,h,d,r=0){if(!batches.has(m))batches.set(m,[]);const item={x,y,z,w,h,d,r};batches.get(m).push(item);if(captureWorkshop)copyDetails.push({material:m,item});}
  function poly(points,m,name){const g=new THREE.BufferGeometry();g.setAttribute('position',new THREE.Float32BufferAttribute(points.flat(),3));g.computeVertexNormals();return mesh(uv(g),m,0,0,0,name);}
  function line(a,b,m,r=.065,name=''){const v=new THREE.Vector3(...b).sub(new THREE.Vector3(...a));const o=mesh(new THREE.CylinderGeometry(r,r,v.length(),8),m,...a.map((n,i)=>(n+b[i])/2),name);o.quaternion.setFromUnitVectors(new THREE.Vector3(0,1,0),v.normalize());return o;}
  // Recess only the stationary hall's low masonry beside the wider chimney
@@ -108,6 +121,7 @@ export function createTowerBuildings(THREE,exterior){
  }
  for(const spec of TOWER_RANGES){
   const {rect:[x0,z0,x1,z1],height:h,name}=spec,cx=(x0+x1)/2,cz=(z0+z1)/2,w=x1-x0,d=z1-z0;
+  captureWorkshop=name===TOWER_WORKSHOP_COPY.source;
   if(name==='North tower range'){
    // Retain the stepped tower corridor after removing the yellow-marked hall.
    box(brick,151.6,h/2,-69.5,10.6,h,9.2,name+' west walls');
@@ -126,6 +140,7 @@ export function createTowerBuildings(THREE,exterior){
   }else if(!['corridor','traced'].includes(spec.roof))pitched({...spec,rect:spec.roofRect??spec.rect});
   for(const z of (name.startsWith('Rear ')&&spec.roof==='gable'?[]:[z0,z1])){const endX=name==='North tower range'&&z===z0?156.9:x1;detail(dark,(x0+endX)/2,h+.05,z,endX-x0+.3,.13,.14);}
  }
+ captureWorkshop=false;
  // Img1: the corridor begins one third of the way across each N/S face.
  // Its centre strip is flat in front of the upper arch; the shallow slope
  // starts at the final third and rises to a ridge east of the tower wall.
@@ -245,6 +260,7 @@ export function createTowerBuildings(THREE,exterior){
  const workshops=TOWER_RANGES.filter(r=>r.name.startsWith('Rear ')&&r.roof==='gable');
  const workshopBlue=mat(0x28778d);
  for(const spec of workshops){
+  captureWorkshop=spec.name===TOWER_WORKSHOP_COPY.source;
   const [x0,z0,x1,z1]=spec.rect,cx=(x0+x1)/2,front=z1+.24;
   const west=spec.name.includes('west'),doorWidth=west?2.5:4.1;
   // Close the eave-height joint beneath the slightly overhanging gable.
@@ -273,6 +289,7 @@ export function createTowerBuildings(THREE,exterior){
   }
   line([x1-.10,.18,front+.08],[x1-.10,6.4,front+.08],dark,.06,spec.name+' yard downpipe');
  }
+ captureWorkshop=false;
  // Paved passage exposed by shortening the central hall, continuous up to
  // the workshop doors. Ground-level surfacing does not block the walker.
  box(flat,201.15,.19,-61.25,41.7,.38,24.5,'Twin workshop paved court');
@@ -351,8 +368,23 @@ export function createTowerBuildings(THREE,exterior){
  // The existing blue roof protrusion moves with the yellow building and
  // is duplicated with it. Both remain aligned with their north/south ridges.
  for(const [i,spec] of workshops.entries()){
+  captureWorkshop=spec.name===TOWER_WORKSHOP_COPY.source;
   dormer('Rear building blue dormer '+(i+1),(spec.rect[0]+spec.rect[2])/2,(spec.rect[1]+spec.rect[3])/2,9.94,11.4,'z');
  }
+ captureWorkshop=false;
+ // Clone the actual shell, roof, dormer and facade details together. Keeping
+ // BoxGeometry on the copied walls also supplies walking/OS-marker clearance.
+ const copy=TOWER_WORKSHOP_COPY,source=workshops.find(r=>r.name===copy.source);
+ const sx=(source.rect[0]+source.rect[2])/2,sz=(source.rect[1]+source.rect[3])/2;
+ const cx=(copy.rect[0]+copy.rect[2])/2,cz=(copy.rect[1]+copy.rect[3])/2,s=copy.footprintScale;
+ const copied=new THREE.Group();copied.name=copy.name;copied.scale.set(s,1,s);
+ copied.position.set(cx-s*sx,0,cz-s*sz);group.add(copied);
+ const copyName=name=>name.replace(copy.source,copy.name).replace(copy.sourceDormer,copy.dormer);
+ for(const original of copyMeshes){const part=original.clone();part.name=copyName(part.name);if(part.userData.roofDormer)part.userData.roofDormer=copy.dormer;copied.add(part);}
+ for(const {material,item:b} of copyDetails)detail(material,cx+(b.x-sx)*s,b.y,cz+(b.z-sz)*s,b.w*s,b.h,b.d*s,b.r);
+ for(const o of [...openings])if(o.label.startsWith(copy.source)||o.label.startsWith(copy.sourceDormer))openings.push({...o,x:cx+(o.x-sx)*s,z:cz+(o.z-sz)*s,label:copyName(o.label)});
+ dormers.push({name:copy.dormer,x:cx,z:cz,axis:'z',footprintScale:s});
+ group.userData.workshopCopy=copy;
  group.userData.dormers=dormers;
  // Flush rooflight sits on the near-facing slope of the southern cross range.
  const light=box(frame,202,8.85,towardsAdmin(-20.0),1.7,.10,1.7,'Stores rooflight frame');light.rotation.x=Math.atan2(3.9,5.95);
@@ -367,6 +399,7 @@ export function createTowerBuildings(THREE,exterior){
   for(const h of [.52,1.05])line([x0,high+h,z],[x1,low+h,z],blue,.05,'Ramp handrail');
  }
  for(const [x,z,h] of [[220.99,towardsAdmin(-17),6.3],[220.99,towardsAdmin(-56.8),6.3],[196.15,towardsAdmin(-16.45),6.3],[153.25,-36.2,6.3]])line([x,.3,z],[x,h,z],dark,.07,'Service downpipe');
+ addPharmacyCourt(THREE,{group,brick,stone,blue,dark,mat,box,detail,line,sash,door});
  const dummy=new THREE.Object3D();
  for(const [m,items] of batches){const batch=new THREE.InstancedMesh(new THREE.BoxGeometry(1,1,1),m,items.length);batch.name='Service glazing and trim';batch.castShadow=true;batch.receiveShadow=true;items.forEach((b,i)=>{dummy.position.set(b.x,b.y,b.z);dummy.scale.set(b.w,b.h,b.d);dummy.rotation.set(0,b.r,0);dummy.updateMatrix();batch.setMatrixAt(i,dummy.matrix);});group.add(batch);}
  group.userData.openings=openings;

@@ -2,8 +2,11 @@ import {bindPlanterToggle} from './planter-layer.mjs';
 import {CHURTON_VIEWS} from './churton-ward.mjs';
 import {UPTON_VIEWS} from './upton-frith-oscroft.mjs';
 import {IRBY_ASHLEY_VIEWS} from './irby-ashley.mjs';
+import {GRAFTON_EDGE_VIEWS} from './grafton-edge.mjs';
+import {HALE_WARD_VIEWS} from './hale-daresbury-huxley-dunham.mjs';
 import {ESTATES_VIEWS} from './estates-department.mjs';
 import {FARNDON_VIEWS} from './farndon-ward.mjs';
+import {FARNDON_CORRIDOR_WALK,WARD_CORRIDOR_WALK} from './farndon-corridor.mjs';
 import {WITBY_VIEWS} from './witby-ward.mjs';
 import {LAUNDRY_VIEWS} from './laundry.mjs';
 import {MAIN_ADMIN_VIEWS} from './main-admin-building.mjs';
@@ -54,7 +57,7 @@ try{
   if(view==='front')walker.setView({position:[0,1.8,40],target:[0,9,19.8]});
   if(view==='tower'||WATER_TOWER_VIEWS[view])walker.setView(WATER_TOWER_VIEWS[view==='tower'?'tower-2':view]);
   if(TOWER_BUILDING_VIEWS[view]){
-    const shot=TOWER_BUILDING_VIEWS[view==='tower-twin-gables'||view==='tower-twin-gables-site'?'tower-twin-gables':'tower-buildings-3'];
+    const shot=TOWER_BUILDING_VIEWS[view.startsWith('pharmacy')?'pharmacy-photo':view==='tower-twin-gables'||view==='tower-twin-gables-site'?'tower-twin-gables':'tower-buildings-3'];
     walker.setView({...shot,position:[shot.position[0],1.8,shot.position[2]]});
   }
   const chimneyView=REDESMERE_CHIMNEY_VIEWS[new URLSearchParams(location.search).get('view')];
@@ -88,10 +91,12 @@ try{
   if(UPTON_VIEWS[churtonView])walker.setView(UPTON_VIEWS['upton-ground']);
   if(FARNDON_VIEWS[churtonView])walker.setView(FARNDON_VIEWS['farndon-2']);
   if(WITBY_VIEWS[churtonView])walker.setView(WITBY_VIEWS['witby-ground']);
+  if(GRAFTON_EDGE_VIEWS[churtonView])walker.setView(GRAFTON_EDGE_VIEWS['grafton-edge-ground']);
+  if(HALE_WARD_VIEWS[churtonView])walker.setView(HALE_WARD_VIEWS['hale-daresbury-huxley-dunham-ground']);
   if(IRBY_ASHLEY_VIEWS[churtonView])walker.setView(IRBY_ASHLEY_VIEWS[churtonView==='irby-ashley-3'?churtonView:'irby-ashley-1']);
   if(MAIN_ADMIN_VIEWS[churtonView]){
     const shot=MAIN_ADMIN_VIEWS[churtonView==='main-admin'||churtonView==='main-admin-plan'?'main-admin-4':churtonView];
-    walker.setView(churtonView==='main-admin-corridor'?{...shot,position:[136,1.8,28],target:[128,2.1,13]}:shot);
+    walker.setView(churtonView.startsWith('ward-corridors')?WARD_CORRIDOR_WALK:churtonView.startsWith('farndon-corridor')?FARNDON_CORRIDOR_WALK:churtonView==='main-admin-corridor'?{...shot,position:[136,1.8,28],target:[128,2.1,13]}:shot);
   }
   if(CHURTON_VIEWS[churtonView])walker.setView(CHURTON_VIEWS[churtonView==='churton'||churtonView==='churton-plan'?'churton-4':churtonView]);
   let active=false,dragging=false,last=null;

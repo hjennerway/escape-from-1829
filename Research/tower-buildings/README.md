@@ -242,3 +242,17 @@ The full browser regression suite passes.
 
 The photograph-established open court also clips obsolete OS building marks;
 this does not add building or walking obstacles to the paved yard.
+
+## Enlarged workshop in the yellow footprint
+
+`workshop-copy-footprint.png` selects the western twin workshop in red and
+marks the new adjoining footprint in yellow. A complete copy, including the
+gable roof, blue dormer, doors, glazing, coping and drainage, is scaled by 1.5
+in width and depth into x=169.5..190.5, z=-87.5..-66.5. Walls, roof and dormer
+retain their original heights. Its rear edge remains aligned with
+the original workshops. Placement and scale are estimated from the annotation.
+
+Open `aerial.html?view=tower-workshop-copy` to inspect the result. The twin-gable
+photo and walking start move to the eastern side of the court, clear of the new
+building and both cylinders. The copy follows Historic visibility, supplies
+walking collisions and clips covered OS outlines through its actual walls.

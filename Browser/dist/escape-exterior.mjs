@@ -18,6 +18,8 @@ import {createAnnexe} from './annexe.mjs';
 import {createChurtonWard} from './churton-ward.mjs';
 import {createUptonFrithOscroft} from './upton-frith-oscroft.mjs';
 import {createIrbyAshley} from './irby-ashley.mjs';
+import {createGraftonEdge} from './grafton-edge.mjs';
+import {createHaleWard} from './hale-daresbury-huxley-dunham.mjs';
 import {createEstatesDepartment} from './estates-department.mjs';
 import {createFarndon} from './farndon-ward.mjs';
 import {createWitbyWard} from './witby-ward.mjs';
@@ -308,9 +310,16 @@ export function createEscapeExterior(THREE,aspect){
   const churtonWard=createChurtonWard(THREE,{brick:photoBrick,roof,worldUV,material});model.add(churtonWard);
   const uptonFrithOscroft=createUptonFrithOscroft(THREE,{brick:photoBrick,roof,worldUV,material});model.add(uptonFrithOscroft);
   const irbyAshley=createIrbyAshley(THREE,{brick:photoBrick,roof,worldUV,material});model.add(irbyAshley);
+  const graftonEdge=createGraftonEdge(THREE,{brick:photoBrick,roof,worldUV,material});model.add(graftonEdge);
+  const haleWard=createHaleWard(THREE,{brick:photoBrick,roof,worldUV,material});model.add(haleWard);
   const estatesDepartment=createEstatesDepartment(THREE,{brick:photoBrick,roof,worldUV,material});model.add(estatesDepartment);
   const farndonWard=createFarndon(THREE,{brick:photoBrick,roof,worldUV,material});model.add(farndonWard);
   const witbyWard=createWitbyWard(farndonWard);model.add(witbyWard);
+  // Both rear sashes become corridor joints after the complete ward is copied.
+  farndonWard.getObjectByName('Farndon rear connection sash').removeFromParent();
+  farndonWard.userData.openings=farndonWard.userData.openings.filter(o=>!o.corridorContact);
+  witbyWard.getObjectByName('Witby rear connection sash').removeFromParent();
+  witbyWard.userData.openings=witbyWard.userData.openings.filter(o=>!o.corridorContact);
   const {building:mainAdmin,corridor:adminCorridor}=createMainAdminBuilding(THREE,{brick:photoBrick,roof,worldUV,material});model.add(mainAdmin,adminCorridor);
   const laundry=createLaundry(THREE,{brick:photoBrick,roof,worldUV,material,adminCorridor});model.add(laundry);
   const chapel=createChapel(THREE,{brick,roof,stone,dark,worldUV});model.add(chapel);
@@ -343,5 +352,5 @@ export function createEscapeExterior(THREE,aspect){
   const lawnMaterials=new Set();
   model.traverse(object=>{for(const mat of (Array.isArray(object.material)?object.material:[object.material]))if(mat?.userData.estateGrass)lawnMaterials.add(mat);});
   for(const mat of lawnMaterials)matchEstateGrass(mat,grass);
-  return {scene,camera,model,terrain,legacyAccess,mast,chapel,waterTower,estateChimney,annexe,newHospital:annexe,churtonWard,uptonFrithOscroft,irbyAshley,estatesDepartment,farndonWard,witbyWard,mainAdmin,adminCorridor,laundry,planters};
+  return {scene,camera,model,terrain,legacyAccess,mast,chapel,waterTower,estateChimney,annexe,newHospital:annexe,churtonWard,uptonFrithOscroft,irbyAshley,graftonEdge,haleWard,estatesDepartment,farndonWard,witbyWard,mainAdmin,adminCorridor,laundry,planters};
 }

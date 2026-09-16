@@ -53,7 +53,7 @@ export function missingHistoricFootprints(THREE,exterior){
  const occupied=existingBuildingFootprints(THREE,exterior),region=OS_BLUE_REGION.map(p=>historicOSPoint(...p)),segments=[];
  // Photo-established open courts also retire obsolete marks without making
  // those walkable surfaces into building footprints or road obstacles.
- const excluded=[...occupied,...(exterior.towerBuildings?.userData.replacedOSAreas??[])];
+ const excluded=[...occupied,...(exterior.towerBuildings?.userData.replacedOSAreas??[]),...(exterior.graftonEdge?.userData.replacedOSAreas??[]),...(exterior.haleWard?.userData.replacedOSAreas??[])];
  for(let building=0;building<OS_FOOTPRINTS.length;building++)for(let loopIndex=0;loopIndex<OS_FOOTPRINTS[building].loops.length;loopIndex++){
   const pixels=OS_FOOTPRINTS[building].loops[loopIndex],loop=pixels.map(p=>historicOSPoint(...p));
   for(let i=0;i<loop.length;i++){
@@ -67,6 +67,8 @@ export function missingHistoricFootprints(THREE,exterior){
    if(irbyEdges&&building===irbyEdges.sourceBuilding&&loopIndex===irbyEdges.sourceLoop&&irbyEdges.indices.includes(i))continue;
    const farndonEdges=exterior.farndonWard?.userData.replacedOSEdges;
    if(farndonEdges&&building===farndonEdges.sourceBuilding&&loopIndex===farndonEdges.sourceLoop&&farndonEdges.indices.includes(i))continue;
+   const corridorEdges=exterior.adminCorridor?.userData.replacedOSEdges;
+   if(corridorEdges&&building===corridorEdges.sourceBuilding&&loopIndex===corridorEdges.sourceLoop&&corridorEdges.indices.includes(i))continue;
    const witbyEdges=exterior.witbyWard?.userData.replacedOSEdges;
    if(witbyEdges&&building===witbyEdges.sourceBuilding&&loopIndex===witbyEdges.sourceLoop&&witbyEdges.indices.includes(i))continue;
    const replaced=exterior.uptonFrithOscroft?.userData.replacedOSEdges;

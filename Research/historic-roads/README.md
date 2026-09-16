@@ -16,7 +16,7 @@ Implementation:
 
 - `Browser/dist/historic-road-layout.mjs`: selected paths, curves, islands and source provenance.
 - `Browser/dist/historic-road-clearance.mjs`: shared-lane clearance and route splitting.
-- `Browser/dist/historic-roads.mjs`: the existing shared-material surface renderer and missing-building outlines.
+- `Browser/dist/historic-roads.mjs`: the shared-material surface renderer. Brown OS building outlines are removed; reference metadata remains available for placement and clearance checks.
 - `Browser/test-historic-roads.mjs`: full-width lane/building clearance, rounded ends, D-shaped forecourt, closed teardrop, removed surfaces and layout visibility.
 
 Open `aerial.html?view=historic-roads` for the whole network or `aerial.html?view=historic-admin-grounds` for the forecourt and service roads. Geometry remains a visual reconstruction, not surveyed coordinates.
@@ -41,3 +41,10 @@ Only a small rounded grass island remains between the buildings, and the
 existing cobbled Estates court is a hole in the asphalt. The Estates model
 slides towards the tower so its blue edge meets the yellow guide, retaining
 its 19-degree rotation. The geometry is in `Browser/dist/estates-service-court.mjs`.
+
+The latest [blue/red grass revision](../estates/grass-road-revision.png) removes
+the outer road and kerbs east and south of Estates. The asphalt court follows
+the north and entrance edges, retaining tower-side access. The island doubles
+in depth towards Irby/Ashley, from 7 to 14 units, with its Estates-facing edge
+fixed. The north service route clears the enlarged island; the former east
+return and southern cross-lane are removed.

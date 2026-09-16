@@ -60,7 +60,7 @@ const obstacles=exteriorObstacles(THREE,exterior.model);
 for(const p of solids)assert(obstacles.some(o=>obstacleContains(o,...p)),'Solid collisions: '+p);
 for(const p of [...courts,FARNDON_VIEWS['farndon-2'].position.filter((_,i)=>i!==1)])assert(!obstacles.some(o=>obstacleContains(o,...p)),'Open courtyard/photo camera: '+p);
 const segments=layouts.historicRoads.userData.missingFootprints.segments;
-assert(segments.some(s=>s.points.every(p=>Math.abs(p[0]-159.04)<.02)&&s.points.some(p=>p[1]>-140)),'Adjacent northern OS corridor must remain');
+assert(!segments.some(s=>s.points.every(p=>Math.abs(p[0]-159.04)<.02)&&s.points.some(p=>p[1]>-140)),'The modelled Farndon corridor replaces its former OS marker');
 assert(!segments.some(s=>s.points.some(([x,z])=>x>149&&x<198&&z<-163&&z>-182)),'Superseded Farndon OS outline must retire');
 const visible=o=>{for(;o;o=o.parent)if(!o.visible)return false;return true;};
 for(const historic of [false,true])for(const modern of [false,true]){
@@ -68,4 +68,4 @@ for(const historic of [false,true])for(const modern of [false,true]){
  assert.equal(visible(ward),historic);
  assert.equal(exteriorObstacles(THREE,exterior.model).some(o=>obstacleContains(o,190,-176)),historic);
 }
-console.log('PASS: corrected Farndon footprint, '+checked+' roof samples, '+ridgeSamples+' continuous H-ridge samples, single-storey glazing, open garden, walking collisions, OS corridor retention and Historic visibility.');
+console.log('PASS: corrected Farndon footprint, '+checked+' roof samples, '+ridgeSamples+' continuous H-ridge samples, single-storey glazing, open garden, walking collisions, replaced corridor marker and Historic visibility.');

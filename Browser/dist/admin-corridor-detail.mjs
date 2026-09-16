@@ -1,6 +1,6 @@
 // The supplied winter painting shows low red-brick galleries with small
 // round-headed lights. Window spacing and the unseen north side are inferred.
-export function addAdminCorridorDetail(THREE,{corridor,start,end,cz,depth=6.4,height=3.6,brick,material,worldUV}){
+export function addAdminCorridorDetail(THREE,{corridor,start,end,cz,depth=6.4,height=3.6,brick,material,worldUV,omitWindow=()=>false}){
   const stone=material(0xc8c6b7),paint=material(0xd5d8ce);
   const shadow=material(0x283334),glass=material(0x536c72,{roughness:.52,metalness:.12});
   const iron=material(0x303d40),red=brick.clone();red.color.set(0xc7a391);
@@ -30,7 +30,8 @@ export function addAdminCorridorDetail(THREE,{corridor,start,end,cz,depth=6.4,he
     box(red,0,height-.11,.105,end-start,.10,.21,'Corridor projecting brick eaves',face);
     box(iron,0,height+.04,.22,end-start+.36,.14,.22,'Corridor gutter',face);
     for(let i=0;i<count;i++){
-      const x=(i-(count-1)/2)*spacing,window=new THREE.Group();
+      const x=(i-(count-1)/2)*spacing;if(omitWindow(mid+side*x,side))continue;
+      const window=new THREE.Group();
       window.name='Corridor round-headed window';window.position.set(x,sill,0);face.add(window);
       mesh(new THREE.ShapeGeometry(arch(width+.10,spring),24),shadow,0,-.03,.016,'Corridor window reveal',window);
       const pane=mesh(new THREE.ShapeGeometry(arch(width,spring),24),glass,0,0,.038,'Corridor arched glazing',window);pane.castShadow=false;

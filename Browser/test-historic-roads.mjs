@@ -35,8 +35,8 @@ assert(Math.hypot(...historicOSPoint(249,286).map((v,i)=>v-[0,19.5][i]))<1e-9);
 for(const name of ['chapel','churton']){const anchor=HISTORIC_OS_REGISTRATION[name],p=historicOSPoint(...anchor.pixel);assert(Math.hypot(p[0]-anchor.world[0],p[1]-anchor.world[1])<6,'Identified landmarks must agree within the reference-pick tolerance');}
 const missing=layouts.historicRoads.userData.missingFootprints;
 assert(missing.occupied.length>40,'Clipping must inspect the assembled existing estate, not an empty reparented model');
-// Twenty Witby Ward edges now have a model; the remaining ranges retain their detailed traces.
-assert(missing.segments.filter(s=>s.sourceBuilding===0).length>60,'The remaining unmodelled ranges must retain individual stepped walls and court edges');
+// The wards and their new corridors have models; other ranges retain their traces.
+assert(missing.segments.filter(s=>s.sourceBuilding===0).length>35,'The remaining unmodelled ranges must retain individual stepped walls and court edges');
 let diagonalCount=0;
 const corridorStart=historicOSPoint(86,300),corridorEnd=historicOSPoint(114,230);
 function distanceToCorridor(p){const dx=corridorEnd[0]-corridorStart[0],dz=corridorEnd[1]-corridorStart[1],t=Math.max(0,Math.min(1,((p[0]-corridorStart[0])*dx+(p[1]-corridorStart[1])*dz)/(dx*dx+dz*dz)));return Math.hypot(p[0]-corridorStart[0]-t*dx,p[1]-corridorStart[1]-t*dz);}
@@ -50,7 +50,7 @@ for(const segment of missing.segments){
  }
  for(const t of [.01,.25,.5,.75,.99]){const p=[a[0]+(b[0]-a[0])*t,a[1]+(b[1]-a[1])*t];assert(pointInFootprint(p,missing.region),'Every marked wall must be inside the blue source region');assert(!missing.occupied.some(polygon=>pointInFootprint(p,polygon)),'No missing-building mark may run through an existing building');}
 }
-assert(diagonalCount>=2,'Both sides of the orange-marked corridor must remain diagonal');
+assert.equal(diagonalCount,0,'The new diagonal corridor replaces the old diagonal ground markers');
 assert(missing.segments.some(s=>s.sourceLoop>0),'Internal court edges must survive, not just an enclosing site outline');
 for(const name of ['Central service area · provisional','Northern service range · provisional','West detached block · provisional','Annexe rear service area · provisional','Annexe end service area · provisional'])assert(!layouts.historicRoads.getObjectByName(name),'The earlier incorrect broad outlines must be removed');
 // Ray checks distinguish a real grass island from a painted disk covered by road.
@@ -114,19 +114,26 @@ for(const local of [[110,51],[146,39],[120,51],[75,121]]){
  const p=annexePoint(local[0],0,local[1]);
  assert(!['black road','stone kerb'].includes(surfaceAt(p[0],p[2])),'Unmarked annexe approaches and loops must expose their grounds: '+local);
 }
-// The later purple selection is a connected asphalt court, with one small lawn.
-for(const p of [[226,-106],[245,-106],[229,-93],[224,-66],[224,-40],[238,-35],[264,-54],[250,-68],[239,-84],[248,-74]])
- assert.equal(surfaceAt(...p),'black road','Purple-selected ground must match the roads: '+p);
-for(const p of [[239,-79],[248,-79],[259,-79]])
- assert.equal(surfaceAt(...p),'grass','Retain the small Irby/Estates grass island');
+// The blue/red revision restores the outer lawn and doubles the island northwards.
+for(const p of [[226,-106],[245,-106],[229,-93],[224,-66],[224,-40],[250,-68],[248,-74],[248,-94]])
+ assert.equal(surfaceAt(...p),'black road','Retain the tower-side court and Irby access: '+p);
+for(const p of [[239,-79],[248,-79],[259,-79],[239,-87],[248,-87],[259,-87]])
+ assert.equal(surfaceAt(...p),'grass','The grass island must extend towards Irby/Ashley');
+const islandBounds=new THREE.Box3().setFromObject(layouts.historicRoads.getObjectByName('Irby Estates small grass island'));
+assert(Math.abs(islandBounds.min.z+90)<1e-5&&Math.abs(islandBounds.max.z+76)<1e-5,'Double the seven-unit island depth towards Irby, keeping its Estates-facing edge fixed');
+for(const p of [[238,-35],[264,-54],[248,-30],[270,-87],[270,-60],[270,-30],[273.3,-54],[255,-27]])
+ assert(!['black road','stone kerb'].includes(surfaceAt(...p)),'The blue-selected outer road and kerbs must expose grass: '+p);
+for(const name of ['Tower east court cross-lane','Tower east court return']){
+ assert(!layouts.historicRoads.getObjectByName(name),'Remove the outer road geometry');
+ assert(!layouts.historicRoads.getObjectByName(name+' border'),'Remove the outer kerb geometry');
+}
 const court=layouts.historicRoads.getObjectByName('Irby Estates continuous service court');
-for(const p of [[248,-79],[244,-49.5],[250,-45]]){
+for(const p of [[248,-79],[248,-87],[244,-49.5],[250,-45],[264,-54],[248,-30]]){
  ray.set(new THREE.Vector3(p[0],2,p[1]),new THREE.Vector3(0,-1,0));
- assert.equal(ray.intersectObject(court).length,0,'The asphalt must have real holes for the lawn and Estates courtyard');
+ assert.equal(ray.intersectObject(court).length,0,'The asphalt must exclude the enlarged lawn, outer grass and Estates courtyard');
 }
 assert.equal(surfaceAt(229,-48),'black road','Tower-side north/south service lane must stay open');
 assert.equal(surfaceAt(246,-72),'black road','Marked upper court cross-lane must remain');
-assert.equal(surfaceAt(248,-30),'black road','Lower court lane must pass south of Estates');
 assert(!['black road','stone kerb'].includes(surfaceAt(244,-49.5)),'The court road must not run through the new Estates building');
 
 for(const historic of [true,false])for(const modern of [true,false]){

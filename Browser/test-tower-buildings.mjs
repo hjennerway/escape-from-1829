@@ -5,7 +5,7 @@ import {createAerialLayouts} from './dist/aerial-layouts.mjs';
 import {ESCAPE_WATER_TOWER} from './dist/water-tower.mjs';
 import {ESTATE_CHIMNEY} from './dist/estate-chimney.mjs';
 import {HISTORIC_ROADS} from './dist/historic-roads.mjs';
-import {TOWER_RANGES,TOWER_ROOF_CONTACTS,TOWER_SERVICE_FRONT,TOWER_ADMIN_SHIFT,TOWER_BUILDING_VIEWS} from './dist/tower-buildings.mjs';
+import {TOWER_RANGES,TOWER_ROOF_CONTACTS,TOWER_SERVICE_FRONT,TOWER_ADMIN_SHIFT,TOWER_BUILDING_VIEWS,TOWER_WORKSHOP_COPY} from './dist/tower-buildings.mjs';
 import {exteriorObstacles,obstacleContains,createWalker} from './dist/explore-controls.mjs';
 globalThis.document={createElement:()=>({getContext:()=>({fillRect(){},measureText:t=>({width:t.length*16}),strokeText(){},fillText(){}})})};
 const exterior=createEscapeExterior(THREE,1.5),layouts=createAerialLayouts(THREE,exterior),group=layouts.towerBuildings;
@@ -118,7 +118,10 @@ assert(Math.abs(centralWallBounds.min.z+49)<1e-5&&centralWallBounds.min.z>adjace
 assert.equal(centralHall.rect[3],-32,'Central hall must extend to the near edge of the blue footprint');
 assert(TOWER_ADMIN_SHIFT>HISTORIC_ROADS.find(r=>r.name==='Admin north service road').width,'User chose additional movement to clear the fixed chimney');
 assert.deepEqual([exterior.estateChimney.position.x,exterior.estateChimney.position.z],[177.5,-35.5],'Chimney must stay fixed while the outlined buildings move');
-for(const x of [165,172,182])for(const z of [-78,-72,-66])assert(!roofAt(x,z),'The yellow-circled building and its details must be removed');
+for(const x of [165,172,182])for(const z of [-78,-72,-66]){
+ const hit=roofAt(x,z);
+ assert(!hit||hit.object.parent.name===TOWER_WORKSHOP_COPY.name,'Only the new yellow-footprint workshop may occupy the removed northern hall area');
+}
 assert(!group.children.some(o=>o.name.startsWith('Northern boiler hall')));
 ray.set(new THREE.Vector3(158,10,-66),new THREE.Vector3(-1,0,0));
 assert.equal(ray.intersectObject(group,true)[0]?.object.name,'North tower range exposed return walls','Removing the hall must leave a closed corridor wall below the roof cut');
@@ -191,7 +194,7 @@ assert(Math.abs(workshopBounds[0].min.z-(-75.5-12))<1e-5,'The selected building 
 assert(Math.abs(workshopBounds[0].min.x-workshopBounds[1].max.x)<1e-5,'The two photographed fronts must adjoin');
 const rearDormers=group.userData.dormers.filter(d=>d.name.startsWith('Rear building'));
 assert.equal(rearDormers.length,2,'Duplicate the selected roof protrusion with its building');
-assert.equal(group.userData.dormers.length,5);
+assert.equal(group.userData.dormers.length,6);
 for(const [i,r] of workshops.entries()){
  const [x0,z0,x1,z1]=r.rect,cx=(x0+x1)/2,roofMesh=group.getObjectByName(r.name+' slate roof');
  const normals=roofMesh.geometry.attributes.normal;
@@ -211,16 +214,30 @@ for(const segment of layouts.historicRoads.userData.missingFootprints.segments)f
  assert(!(x>180.3&&x<222&&z>-73.5&&z<-49),'Old building outlines must not cross the photographed open yard');
 }
 const photo=TOWER_BUILDING_VIEWS['tower-twin-gables'];
-assert(photo.position[0]>180&&photo.position[0]<202&&photo.position[2]>-60.3&&photo.position[2]<-49,'The photo camera must occupy the formerly blocked purple-hall rear');
+assert(photo.position[0]>218.5&&photo.position[2]>-73.5&&photo.position[2]<-60.3,'The photo camera must clear the enlarged workshop and use the eastern court');
 const obstacles=exteriorObstacles(THREE,exterior.model);
+const copy=TOWER_WORKSHOP_COPY,copyWalls=new THREE.Box3().setFromObject(group.getObjectByName(copy.name+' walls'));
+assert.deepEqual(copyWalls.getSize(new THREE.Vector3()).toArray().map(n=>+n.toFixed(5)),[21,6.4,21],'The workshop keeps its original wall height within the larger yellow footprint');
+for(const [originalName,copiedName] of [[copy.source,copy.name],[copy.sourceDormer,copy.dormer]])for(const part of [' walls',' slate roof',' ridge']){
+ const originalBounds=new THREE.Box3().setFromObject(group.getObjectByName(originalName+part));
+ const copiedBounds=new THREE.Box3().setFromObject(group.getObjectByName(copiedName+part));
+ assert(Math.abs(originalBounds.min.y-copiedBounds.min.y)<1e-5&&Math.abs(originalBounds.max.y-copiedBounds.max.y)<1e-5,'Copied walls, roof and dormer retain the original vertical extents: '+copiedName+part);
+}
+assert(Math.abs(copyWalls.max.x-workshopBounds[1].min.x)<1e-5&&Math.abs(copyWalls.min.z-workshopBounds[1].min.z)<1e-5,'The copy adjoins the selected west workshop and aligns with its rear edge');
+assert(group.getObjectByName(copy.dormer+' walls'),'The copy retains its blue roof dormer');
+assert.equal(group.userData.openings.filter(o=>o.label===copy.name+' upper sash').length,3,'The complete front glazing duplicates with the workshop');
+assert(group.userData.openings.some(o=>o.label===copy.name+' blue door'));
+assert(obstacles.some(b=>obstacleContains(b,180,-77)),'The enlarged workshop has solid walking collisions');
 assert(!obstacles.some(b=>obstacleContains(b,photo.position[0],photo.position[2])),'Photo camera must be outside every building collision');
 for(const r of workshops){
  const cx=(r.rect[0]+r.rect[2])/2,front=r.rect[3]+.24;
- for(const y of [1.8,6.7,9]){
-  const target=new THREE.Vector3(cx,y,front),origin=new THREE.Vector3(...photo.position),direction=target.clone().sub(origin);
+ for(const y of [1.8,6.7,r.height+r.rise+.14-.2]){
+  // Aim at the rendered door/frame plane. At the new oblique angle, aiming
+  // behind that surface shifts the hit sideways even when it is unobstructed.
+  const target=new THREE.Vector3(cx,y,front+(y<3?.14:y<8?.205:0)),origin=new THREE.Vector3(...photo.position),direction=target.clone().sub(origin);
   ray.set(origin,direction.clone().normalize());ray.far=direction.length()+.4;
   const hit=ray.intersectObject(group,true)[0];
-  assert(hit&&hit.point.distanceTo(target)<.5,'Both workshop doors, windows and peaks must be visible from the marked camera');
+  assert(hit&&hit.point.distanceTo(target)<.5,'Both workshop doors, windows and peaks must be visible from the marked camera: '+r.name+' at y='+y+' hit '+hit?.object.name+' '+hit?.point.toArray());
  }
  const camera=new THREE.PerspectiveCamera();
  const walking=createWalker(camera,obstacles);

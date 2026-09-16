@@ -1,3 +1,4 @@
+import {addOakmereElevation} from './annexe-oakmere-detail.mjs';
 // The annexe, registered against the original OS extract (417 x 433).
 // Similarity registration: 1829 Reception and chapel stay fixed. Pixel picks,
 // heights and concealed elevations are estimates; this is not a measured survey.
@@ -36,6 +37,8 @@ export const ANNEXE_WARD_WALKS=Object.freeze(Object.fromEntries(ANNEXE_WARDS.map
 const north=annexeMapPoint(138,82),south=[ANNEXE.x+(ANNEXE.x-north[0])*.01,ANNEXE.z+(ANNEXE.z-north[1])*.01],site=annexeMapPoint(205,203);
 export const ANNEXE_VIEWS=Object.freeze({
  ...ANNEXE_WARD_VIEWS,
+ 'oakmere-photo':shot([-79,2.2,-54],[-4,8,-27],49),
+ 'oakmere-lawn':shot([-95,60,-88],[-2,5,-28],51),
  annexe:shot([-150,135,215],[0,3,-10],56),
  'annexe-access':shot([0,360,130],[0,0,-5],52),
  'annexe-entrance':shot([0,15,112],[0,1,60],65),
@@ -152,6 +155,7 @@ export function createAnnexe(THREE,{brick,roof,material,worldUV,hipRoof}){
  for(const b of ranges){
   currentWard=b.wardId;
   for(const face of ['long','end'])for(const side of [-1,1]){
+   if(b.name==='Central rear spine'&&face==='end'&&side<0)continue;
    const span=face==='long'?b.w:b.d,count=Math.max(1,Math.floor((span-1.5)/3.8));
    for(let i=0;i<count;i++){
     const u=(i-(count-1)/2)*3.8,[x,z]=face==='long'?position(b,u,side*(b.d/2+.035)):position(b,side*(b.w/2+.035),u);
@@ -270,6 +274,7 @@ export function createAnnexe(THREE,{brick,roof,material,worldUV,hipRoof}){
  }
  for(const ward of ANNEXE_WARDS)wards[ward.id].userData.ranges=ranges.filter(b=>b.wardId===ward.id);
  model.userData.wards=wards;
+ model.userData.oakmereElevation=addOakmereElevation(THREE,{model,host:ranges.find(b=>b.name==='Central rear spine'),brick,roof,material,worldUV,hipRoof});
  model.userData.ranges=ranges;model.userData.annexeOpenings=openings;model.userData.osRegistration=ANNEXE_OS_REGISTRATION;
  return model;
 }

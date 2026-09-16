@@ -40,8 +40,9 @@ const parsonsNorthEnd=SHARED_HISTORIC_LANES.find(p=>p.name==='Parsons Lane (Nort
 const northJunction=[325,-176],eastCrossing=VIVIENNE_LANE[11];
 const northService=bezier([270,18],[
  [[255,15],[254,6],[245,2]],[[233,0],[229,-9],[229,-19]],
- [[229,-40],[229,-65],[229,-79]],[[229,-87],[240,-87],[247,-87]],
- [[256,-87],[270,-87],[270,-98]],[[270,-114],[270,-124],[270,-132]],
+ [[229,-40],[229,-65],[229,-79]],[[229,-91],[233,-94],[241,-94]],
+ [[247,-94],[254,-94],[260,-94]],[[268,-94],[270,-95],[270,-104]],
+ [[270,-114],[270,-124],[270,-132]],
  [[287,-148],[307,-171],northJunction]
 ]);
 export const HISTORIC_ROAD_TRACES=Object.freeze([
@@ -66,11 +67,8 @@ export const HISTORIC_ROAD_TRACES=Object.freeze([
   [[267,107],[292,113],[318,115]],[[339,117],[365,121],[388,122]]
  ])},
  {name:'Admin north service road',width:6,points:northService},
- // Red arms of the service courts run beside the pink ranges, with a single
- // outer lane beside Irby/Ashley rather than the former annexe garden loops.
- {name:'Tower north court lane',width:5,points:[[229,-72],[270,-72]]},
- {name:'Tower east court cross-lane',width:5,points:[[229,-30],[270,-30]]},
- {name:'Tower east court return',width:5,points:[[270,-30],[270,-87]]},
+ // Keep access north of Estates; the blue-selected outer east/south loop is grass.
+ {name:'Tower north court lane',width:5,points:[[229,-72],[260,-72]]},
  {name:'Northern estate boundary',width:6,points:bezier([-79,-94],[
   [[-90,-125],[-94,-188],[-94,-215]],[[ -94,-232],[-102,-242],[-90,-242]],
   [[-15,-244],[102,-244],[175,-238]],[[184,-233],[183,-219],[194,-208]],
