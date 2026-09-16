@@ -299,8 +299,11 @@ export function createEscapeExterior(THREE,aspect){
     tree(x,-64,.85);
   }
   for(const [x,z,s] of [[-25.5,46.7,.85],[24,46.7,.6],[-65,-35,1.1],[68+OUTER_SHIFT,-38,1.25],[-17,-9,.85],[18,-9,.9]])tree(x,z,s);
-  // Clear Churton and its estate-side approach; preserve other tree variations.
-  for(let i=0;i<24;i++){const x=-100+i*9,z=-84-(i%3)*7,size=1+random()*.6;if(x<-60||x>1)tree(x,z,size);else for(let n=0;n<20;n++)random();}
+  // Clear Churton and Hale's new cross range, including crown clearance.
+  // Consume the same random draws so the remaining trees retain their shapes.
+  for(let i=0;i<24;i++){const x=-100+i*9,z=-84-(i%3)*7,size=1+random()*.6;
+    const haleRoof=x>=80&&x<=148.5&&z>=-93&&z<=-77;
+    if((x<-60||x>1)&&!haleRoof)tree(x,z,size);else for(let n=0;n<20;n++)random();}
   for(let i=0;i<9;i++){
     tree(-90,-44+i*12,1.1);
     // Clear the marked Redesmere sightline, retaining an edge tree on the

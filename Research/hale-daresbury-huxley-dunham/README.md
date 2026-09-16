@@ -31,6 +31,10 @@ spacing, eaves, slate hips and collision boundaries move together; the two
 affected wing chimneys move inward onto their shortened roofs. The spine,
 opposite ends and both storey heights retain their dimensions.
 
+The two inferred Churton road approaches stop clear of the new walls and their
+kerbs. Two orchard trees whose crowns intersected the cross range are removed;
+the remaining tree shapes and saved modern road paths retain their values.
+
 The new group belongs to Historic and appears in browser walking/gameplay.
 Collision follows the concave footprint, leaving the courts accessible. The
 superseded OS marks are removed from this ward and its courts. Choose

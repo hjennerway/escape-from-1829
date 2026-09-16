@@ -35,8 +35,10 @@ assert(Math.hypot(...historicOSPoint(249,286).map((v,i)=>v-[0,19.5][i]))<1e-9);
 for(const name of ['chapel','churton']){const anchor=HISTORIC_OS_REGISTRATION[name],p=historicOSPoint(...anchor.pixel);assert(Math.hypot(p[0]-anchor.world[0],p[1]-anchor.world[1])<6,'Identified landmarks must agree within the reference-pick tolerance');}
 const missing=layouts.historicRoads.userData.missingFootprints;
 assert(missing.occupied.length>40,'Clipping must inspect the assembled existing estate, not an empty reparented model');
-// The wards and their new corridors have models; other ranges retain their traces.
-assert(missing.segments.filter(s=>s.sourceBuilding===0).length>35,'The remaining unmodelled ranges must retain individual stepped walls and court edges');
+// Hale and its courts now replace another group of OS segments. Check an
+// independently located remaining range instead of a shrinking segment count.
+assert(missing.segments.some(s=>s.sourceBuilding===0&&s.points.every(([x,z])=>x>213&&x<222&&z>-102&&z<-73)),
+ 'The adjoining unmodelled range beside Irby/Ashley must retain its wall traces');
 let diagonalCount=0;
 const corridorStart=historicOSPoint(86,300),corridorEnd=historicOSPoint(114,230);
 function distanceToCorridor(p){const dx=corridorEnd[0]-corridorStart[0],dz=corridorEnd[1]-corridorStart[1],t=Math.max(0,Math.min(1,((p[0]-corridorStart[0])*dx+(p[1]-corridorStart[1])*dz)/(dx*dx+dz*dz)));return Math.hypot(p[0]-corridorStart[0]-t*dx,p[1]-corridorStart[1]-t*dz);}

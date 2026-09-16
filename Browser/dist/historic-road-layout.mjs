@@ -76,8 +76,10 @@ export const HISTORIC_ROAD_TRACES=Object.freeze([
   [[364,-179],[427,-190],frontEast],[[524,-186],[583,-182],[625,-183]]
  ])},
  {name:'North west ward approach',width:5,points:bezier([-91,-166],[[[-76,-166],[-51,-165],[-39,-165]],[[-29,-165],[-26,-166],[-23,-173]]])},
- {name:'Churton upper cross-road',width:6,points:bezier([-74,-99],[[[-57,-99],[23,-98],[87,-96]],[[98,-96],[107,-95],[116,-95]]])},
- {name:'Churton eastern link',width:5,points:[[116,-95],[116,-52]]},
+ // Hale's spine and cross range replace the inferred junction at [116,-95].
+ // Stop the two approaches clear of its walls, including their rounded kerbs.
+ {name:'Churton upper cross-road',width:6,points:bezier([-74,-99],[[[-57,-99],[23,-98],[87,-96]],[[98,-96],[103,-95],[107,-95]]])},
+ {name:'Churton eastern link',width:5,points:[[116,-76],[116,-52]]},
  {name:'Tower western approach',width:5,points:[[88,-51.74],[113,-52],[135,-52]]},
 ]);
 export const HISTORIC_ROADS=Object.freeze(HISTORIC_ROAD_TRACES.flatMap(clearSharedLanes));
