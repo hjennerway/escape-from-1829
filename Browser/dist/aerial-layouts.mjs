@@ -33,6 +33,7 @@ export function createAerialLayouts(THREE,exterior){
     for(const object of superseded)object.visible=!state.historic;
     for(const road of roads.children)road.visible=state.modern||(state.historic&&sharedRoads.has(road.name));
     lane.getObjectByName('Vivienne Smith Lane eastern continuation').visible=state.modern;
+    exterior.invalidateShadows();
   }
   setVisible('modern',false);
   exterior.layouts={shared,historic,modern,roads,entrance,historicRoads,towerBuildings,setVisible,get state(){return {...state};}};

@@ -1,4 +1,6 @@
 import {photoDetailPrimitives} from './photo-detail-primitives.mjs';
+import {HALE_CORRIDOR_RUNS} from './hale-corridors.mjs';
+import {FARNDON_CORRIDOR} from './farndon-corridor.mjs';
 
 // The green strokes describe ward ranges in an oblique aerial, not screen-
 // space angles. Fit them to the estate axes between Grafton and the tower.
@@ -69,7 +71,8 @@ export function createHaleWard(THREE,{brick,roof,worldUV,material}){
   for(let n=0;n<count;n++){
    const t=(n+.5)/count,x=a[0]+dx*t+nx*.035,z=a[1]+dz*t+nz*.035;
    const entry=(i===0||i===8)&&n===Math.floor(count/2);
-   if(entry)detail.door(x,z,r);else sash(x,2.05,z,r,2.65);
+   const corridorContact=nx>.9&&HALE_CORRIDOR_RUNS.some(run=>Math.abs(x+cx-run.wardFaceX)<.1&&Math.abs(z+cz-run.start[1])<FARNDON_CORRIDOR.width/2+.86);
+   if(!corridorContact){if(entry)detail.door(x,z,r);else sash(x,2.05,z,r,2.65);}
    sash(x,5.9,z,r,2.75);
   }
   if(length>5)box(steel,a[0]+dx*.07+nx*.2,4.1,a[1]+dz*.07+nz*.2,.095,8.1,.095);

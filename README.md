@@ -8,6 +8,12 @@ Use `WASD` to move, the mouse to look, `Shift` to sprint, `C` or `Ctrl` to crouc
 
 The browser build is served from [`Browser/dist`](Browser/dist). The Unity project and Blender source are included for continued development.
 
+## Browser performance
+
+The exterior's fixed sunlight shadow map is rendered once and reused while walking, orbiting, and playing the arrival/escape camera sequences. Changing the Historic/Modern layouts or garden planters refreshes the shadows; restoring a lost WebGL context also refreshes them. Shadow resolution and building detail are unchanged. Code that moves exterior geometry or sunlight at runtime must call `exterior.invalidateShadows()` afterward.
+
+Exterior walking uses a spatial index to check nearby foundations and trunks, retaining the existing polygon collisions, wall sliding, and movement speeds. Idle movement skips collision work. Layout and planter changes rebuild the index with `walker.setObstacles(...)`. Run `npm test` in `Browser` for the navigation checks and collision comparisons across all four layout combinations.
+
 ## Historic and Modern aerial layouts
 
 The aerial preview has separate **Historic** and **Modern** checkboxes. Historic starts on and Modern starts off. Either, both, or neither can be visible. Shared 1829/Redesmere geometry, the water tower, Churton and church appear once whenever either layout is on. The Annexe, Main/admin building, its connecting corridor and the freestanding chimney belong to Historic. Existing shared grounds and site context follow the shared group; switching both layouts off leaves the terrain.

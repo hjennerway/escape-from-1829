@@ -10,6 +10,7 @@ export function bindPlanterToggle(exterior,target,onChange=()=>{}){
     if(event.target?.isContentEditable||['INPUT','TEXTAREA','SELECT'].includes(event.target?.tagName))return;
     event.preventDefault();
     exterior.planters.visible=!exterior.planters.visible;
+    exterior.invalidateShadows?.();
     onChange(exterior.planters.visible);
   });
 }

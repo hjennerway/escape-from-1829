@@ -35,6 +35,21 @@ The two inferred Churton road approaches stop clear of the new walls and their
 kerbs. Two orchard trees whose crowns intersected the cross range are removed;
 the remaining tree shapes and saved modern road paths retain their values.
 
+## Two corridor links
+
+`corridor-reference.png` adds the two red-marked connections from the tower-side
+cross range and the middle courtyard wing to the existing north/south gallery.
+They follow the wing axes at z=-85.155 and z=-107.705, from the shortened ends
+at x=145 and x=137 to the gallery centre at x=156.3. The third wing stays open.
+
+Both links reuse the existing corridor builder: 5.4-unit width, 3.6-unit walls,
+shallow slate pitches, brickwork and small round-headed windows. Their ridges
+meet the main gallery roof, and their ward ends tuck into the taller walls.
+Ground-floor sashes and gallery lights covered by the joins are omitted;
+the upper ward windows remain. The links belong to the Historic corridor
+group and use the same exterior collisions as the other enclosed galleries.
+Geometry and placement data are in `Browser/dist/hale-corridors.mjs`.
+
 The new group belongs to Historic and appears in browser walking/gameplay.
 Collision follows the concave footprint, leaving the courts accessible. The
 superseded OS marks are removed from this ward and its courts. Choose

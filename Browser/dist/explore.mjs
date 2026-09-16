@@ -44,13 +44,14 @@ try{
   renderer.outputColorSpace=THREE.SRGBColorSpace;renderer.toneMapping=THREE.ACESFilmicToneMapping;renderer.toneMappingExposure=1.25;
   renderer.shadowMap.enabled=true;renderer.shadowMap.type=THREE.PCFSoftShadowMap;
   const exterior=createEscapeExterior(THREE,innerWidth/innerHeight);
+  canvas.addEventListener('webglcontextrestored',exterior.invalidateShadows);
   exterior.camera.near=.1;exterior.camera.updateProjectionMatrix();
   const layouts=createAerialLayouts(THREE,exterior);
   // Road-name sprites are map overlays; keep them out of the walking view.
   layouts.roads.traverse(object=>{if(object.isSprite)object.visible=false;});
   const obstacles=exteriorObstacles(THREE,exterior.model);
   const walker=createWalker(exterior.camera,obstacles);
-  function refreshObstacles(){obstacles.splice(0,obstacles.length,...exteriorObstacles(THREE,exterior.model));}
+  function refreshObstacles(){walker.setObstacles(exteriorObstacles(THREE,exterior.model));}
   bindLayoutToggles(layouts,document.getElementById('layoutControls'),refreshObstacles);
   bindPlanterToggle(exterior,document,refreshObstacles);
   const view=new URLSearchParams(location.search).get('view');

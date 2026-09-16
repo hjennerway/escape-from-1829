@@ -54,6 +54,10 @@ export function createEscapeExterior(THREE,aspect){
   scene.add(new THREE.HemisphereLight(0xe4eff2,0x59634a,2));
   const sun=new THREE.DirectionalLight(0xffe2b7,2.8);sun.position.set(145,120,50);sun.target.position.set(230,0,-10);scene.add(sun.target);sun.castShadow=true;
   sun.shadow.mapSize.set(4096,4096);Object.assign(sun.shadow.camera,{left:-360,right:360,top:300,bottom:-300,near:1,far:850});sun.shadow.bias=-.0003;sun.shadow.normalBias=.25;scene.add(sun);
+  // Buildings and sunlight are fixed. Camera movement does not change this map.
+  sun.shadow.autoUpdate=false;
+  const invalidateShadows=()=>{sun.shadow.needsUpdate=true;};
+  invalidateShadows();
   const lawnColours=new Set([0x667752,0x638046,0x667b49]);
   const material=(color,extra={})=>{const mat=new THREE.MeshStandardMaterial({color,roughness:.9,...extra});if(lawnColours.has(color))mat.userData.estateGrass=true;return mat;};
   const cream=material(0xd6d0ba),stone=material(0xa39f8a),glass=material(0x56737d,{roughness:.4,metalness:.3}),dark=material(0x303b3b),red=material(0x762c30);
@@ -355,5 +359,5 @@ export function createEscapeExterior(THREE,aspect){
   const lawnMaterials=new Set();
   model.traverse(object=>{for(const mat of (Array.isArray(object.material)?object.material:[object.material]))if(mat?.userData.estateGrass)lawnMaterials.add(mat);});
   for(const mat of lawnMaterials)matchEstateGrass(mat,grass);
-  return {scene,camera,model,terrain,legacyAccess,mast,chapel,waterTower,estateChimney,annexe,newHospital:annexe,churtonWard,uptonFrithOscroft,irbyAshley,graftonEdge,haleWard,estatesDepartment,farndonWard,witbyWard,mainAdmin,adminCorridor,laundry,planters};
+  return {scene,camera,model,terrain,legacyAccess,mast,chapel,waterTower,estateChimney,annexe,newHospital:annexe,churtonWard,uptonFrithOscroft,irbyAshley,graftonEdge,haleWard,estatesDepartment,farndonWard,witbyWard,mainAdmin,adminCorridor,laundry,planters,invalidateShadows};
 }

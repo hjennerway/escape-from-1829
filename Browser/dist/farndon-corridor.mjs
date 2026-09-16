@@ -12,7 +12,7 @@ export const FARNDON_CORRIDOR_VIEWS=Object.freeze({
 export const FARNDON_CORRIDOR_WALK=Object.freeze({position:[166,1.8,-113],target:[157,2,-143],fov:62});
 export const WARD_CORRIDOR_WALK=Object.freeze({position:[111,1.8,-188],target:[99,2,-196],fov:62});
 
-export function createCorridorRun(THREE,{name,start,end,width=5.4,height=3.6,rise=.64,detailRanges,brick,roof,material,worldUV}){
+export function createCorridorRun(THREE,{name,start,end,width=5.4,height=3.6,rise=.64,detailRanges,omitWindow,brick,roof,material,worldUV}){
  const length=Math.hypot(end[0]-start[0],end[1]-start[1]),route={width,height,rise};
  const branch=new THREE.Group();branch.name=name;
  branch.position.set(start[0],0,start[1]);branch.rotation.y=Math.atan2(start[1]-end[1],end[0]-start[0]);
@@ -31,14 +31,14 @@ export function createCorridorRun(THREE,{name,start,end,width=5.4,height=3.6,ris
  mesh(g,roof,0,0,0,name+' slate roof');
  mesh(new THREE.BoxGeometry(length,.13,.18),ridge,length/2,top+.04,0,name+' ridge');
  for(const [a,b] of detailRanges??[[0,length]]){
-  addAdminCorridorDetail(THREE,{corridor:branch,start:a,end:b,cz:0,depth:route.width,height:route.height,brick,material,worldUV});
+  addAdminCorridorDetail(THREE,{corridor:branch,start:a,end:b,cz:0,depth:route.width,height:route.height,brick,material,worldUV,omitWindow});
  }
  return branch;
 }
 
-export function addFarndonCorridor(THREE,{corridor,...materials}){
+export function addFarndonCorridor(THREE,{corridor,omitWindow,...materials}){
  const route=FARNDON_CORRIDOR;
- const branch=createCorridorRun(THREE,{...materials,name:'Straight corridor to Farndon',start:[route.x,route.startZ],end:[route.x,route.endZ],
+ const branch=createCorridorRun(THREE,{...materials,omitWindow,name:'Straight corridor to Farndon',start:[route.x,route.startZ],end:[route.x,route.endZ],
   // Only the exposed runs have windows; the middle passes through tower ranges.
   detailRanges:[[6.6,-16.6],[-74.1,-147.3]].map(([south,north])=>[route.startZ-south,route.startZ-north])});
  branch.userData.route=route;corridor.add(branch);

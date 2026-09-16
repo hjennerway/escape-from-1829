@@ -4,6 +4,7 @@
 import {addAdminCorridorDetail} from './admin-corridor-detail.mjs';
 import {addFarndonCorridor,FARNDON_CORRIDOR,FARNDON_CORRIDOR_VIEWS} from './farndon-corridor.mjs';
 import {addWardCorridors} from './ward-corridors.mjs';
+import {addHaleCorridors,HALE_CORRIDOR_RUNS} from './hale-corridors.mjs';
 export const ADMIN_OS_REGISTRATION=Object.freeze({u:62,v:37,x:0,z:13,scaleX:1.5,scaleZ:1.6});
 export function adminMapPoint(u,v){const r=ADMIN_OS_REGISTRATION;return [r.x+(u-r.u)*r.scaleX,r.z+(v-r.v)*r.scaleZ];}
 const origin=adminMapPoint(194,44);
@@ -291,8 +292,10 @@ export function createMainAdminBuilding(THREE,{brick,roof,worldUV,material}){
   corridor.userData.sections=sections;
   corridor.userData.footprints=sections.map(s=>({minX:s.start,maxX:s.end,minZ:s.cz-s.depth/2,maxZ:s.cz+s.depth/2}));
   corridor.userData.footprint={minX:start,maxX:end,minZ:connectorFront-11.8,maxZ:connectorFront};
-  addFarndonCorridor(THREE,{corridor,brick,roof,material,worldUV});
+  addFarndonCorridor(THREE,{corridor,brick,roof,material,worldUV,
+    omitWindow:(distance,side)=>side===-1&&HALE_CORRIDOR_RUNS.some(run=>Math.abs(FARNDON_CORRIDOR.startZ-distance-run.end[1])<FARNDON_CORRIDOR.width/2+.8)});
   addWardCorridors(THREE,{corridor,brick,roof,material,worldUV});
+  addHaleCorridors(THREE,{corridor,brick,roof,material,worldUV});
   corridor.userData.reference='Research/admin-corridor/README.md: the red-marked photograph refines the Redesmere-side 60% into a deeper single-storey building with a raised hipped slate roof; the rest stays a low corridor. Front wall alignment and concealed Redesmere joint retained. Ivy-fronted range and its chimney unchanged. Heights/depth and concealed elevations are estimates; arched window detail follows the earlier winter reference.';
   const dummy=new THREE.Object3D();
   for(const [m,items] of batches){const batch=new THREE.InstancedMesh(new THREE.BoxGeometry(1,1,1),m,items.length);batch.name='Admin sash and masonry details';batch.userData.orientedCollision=true;batch.castShadow=true;batch.receiveShadow=true;items.forEach((b,i)=>{dummy.position.set(b.x,b.y,b.z);dummy.scale.set(b.w,b.h,b.d);dummy.rotation.set(0,b.r,0);dummy.updateMatrix();batch.setMatrixAt(i,dummy.matrix);});building.add(batch);}

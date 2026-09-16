@@ -6,6 +6,8 @@ import {createAerialLayouts} from './dist/aerial-layouts.mjs';
 import {HALE_WARD,HALE_WARD_FOOTPRINT,HALE_WARD_VIEWS} from './dist/hale-daresbury-huxley-dunham.mjs';
 import {pointInFootprint} from './dist/historic-footprints.mjs';
 import {exteriorObstacles,obstacleContains} from './dist/explore-controls.mjs';
+import {HALE_CORRIDOR_RUNS} from './dist/hale-corridors.mjs';
+import {FARNDON_CORRIDOR} from './dist/farndon-corridor.mjs';
 
 globalThis.document={createElement:()=>({getContext:()=>({fillRect(){},measureText:t=>({width:t.length*16}),strokeText(){},fillText(){}})})};
 const exterior=createEscapeExterior(THREE,1.5),ward=exterior.haleWard;
@@ -46,10 +48,40 @@ for(const o of ward.userData.openings){
  assert(ray.intersectObject(ward,true)[0]?.object.isInstancedMesh,'Sash glazing must face out of the wall');
 }
 const start=HALE_WARD_VIEWS['hale-daresbury-huxley-dunham-ground'].position;
+const links=exterior.adminCorridor.getObjectByName('Hale connecting corridors');
+assert.equal(links.children.length,2,'Only the two red-marked wings get corridor links');
+assert.deepEqual(HALE_CORRIDOR_RUNS.map(run=>[run.wardFaceX,run.start[1]]),[[145,-85.155],[137,-107.705]]);
+for(const run of HALE_CORRIDOR_RUNS){
+ assert(pointInFootprint(run.start,footprint),'Link starts within the ward wall');
+ assert.equal(run.end[0],FARNDON_CORRIDOR.x,'Link reaches the existing gallery ridge');
+ assert.equal(run.start[1],run.end[1],'Link continues the wing axis at a right angle to the gallery');
+ const branch=links.getObjectByName(run.name);
+ assert.equal(branch.userData.width,FARNDON_CORRIDOR.width);
+ for(let x=run.wardFaceX+.05;x<=run.end[0];x+=.25)for(const offset of [-2.5,0,2.5]){
+  ray.set(new THREE.Vector3(x,20,run.start[1]+offset),new THREE.Vector3(0,-1,0));
+  const roof=ray.intersectObject(exterior.adminCorridor,true).find(hit=>hit.object.name.endsWith('slate roof'));
+  assert(roof&&roof.point.y>=3.6&&roof.point.y<4.4,'No gap or tall roof at the corridor joins');
+ }
+ const faceWindows=ward.userData.openings.filter(o=>Math.abs(o.x+ward.position.x-run.wardFaceX)<.1);
+ assert.equal(faceWindows.filter(o=>o.y<4).length,0,'Covered ground-floor sashes become the corridor contact');
+ assert.equal(faceWindows.filter(o=>o.y>4).length,2,'Both upper sashes remain above each new link');
+ branch.traverse(o=>{if(o.isMesh&&o.name.endsWith('slate roof')){
+  const normal=o.geometry.attributes.normal;for(let i=0;i<normal.count;i++)assert(normal.getY(i)>0);
+ }});
+}
+const gallery=exterior.adminCorridor.getObjectByName('Straight corridor to Farndon');
+for(const run of HALE_CORRIDOR_RUNS){
+ const joinedLights=gallery.userData.openings.filter(o=>Math.abs(FARNDON_CORRIDOR.startZ-o.x-run.end[1])<FARNDON_CORRIDOR.width/2+.8);
+ assert(!joinedLights.some(o=>o.side===-1),'No gallery glazing inside the new junctions');
+ assert(joinedLights.some(o=>o.side===1),'Opposite gallery windows stay in place');
+}
+ray.set(new THREE.Vector3(135,20,-127),new THREE.Vector3(0,-1,0));
+assert.equal(ray.intersectObject(links,true).length,0,'The unmarked third wing has no new corridor');
 for(const historic of [true,false])for(const modern of [true,false]){
  layouts.setVisible('historic',historic);layouts.setVisible('modern',modern);
  const obstacles=exteriorObstacles(THREE,exterior.model);
  for(const p of solids)assert.equal(obstacles.some(o=>obstacleContains(o,...p)),historic,'Walking follows visible ward walls: '+p);
+ for(const p of [[149,-85.155],[146,-107.705]])assert.equal(obstacles.some(o=>obstacleContains(o,...p)),historic,'The two corridor links follow Historic collisions');
  for(const p of [[134,-96],[133,-117],[104,-107],[start[0],start[2]]])assert(!obstacles.some(o=>obstacleContains(o,...p)),'Courtyard and walking start must remain accessible: '+p);
 }
 const outline=layouts.historicRoads.userData.missingFootprints.segments;
@@ -58,4 +90,4 @@ for(const page of ['aerial.html','explore.html']){
  const html=await readFile(new URL('./dist/'+page,import.meta.url),'utf8');
  assert(html.includes('href="?view=hale-daresbury-huxley-dunham"'),'Ward must be accessible from Locations in '+page);
 }
-console.log('PASS: Hale/Daresbury/Huxley/Dunham right-angle footprint, two storeys, matching sash style, complete roofs, open courts, walking access, Historic visibility and location links.');
+console.log('PASS: Hale/Daresbury/Huxley/Dunham right-angle footprint, two storeys, matching sashes, two red-marked corridor links, continuous roofs, exposed junction windows, open courts, walking access and Historic visibility.');

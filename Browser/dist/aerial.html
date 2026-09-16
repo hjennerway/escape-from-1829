@@ -110,6 +110,7 @@ import {WEST_LAWN_PHOTO_VIEW} from './west-lawn-photo-detail.mjs';
 import {ENTRANCE_WEST_PHOTO_VIEW} from './entrance-west-photo-detail.mjs';
 const renderer=new THREE.WebGLRenderer({canvas:document.getElementById('game'),antialias:true});renderer.setPixelRatio(Math.min(devicePixelRatio,1.5));renderer.setSize(innerWidth,innerHeight);renderer.outputColorSpace=THREE.SRGBColorSpace;renderer.toneMapping=THREE.ACESFilmicToneMapping;renderer.toneMappingExposure=1.25;renderer.shadowMap.enabled=true;renderer.shadowMap.type=THREE.PCFSoftShadowMap;
 const exterior=createEscapeExterior(THREE,innerWidth/innerHeight),clock=new THREE.Clock();
+renderer.domElement.addEventListener('webglcontextrestored',exterior.invalidateShadows);
 // Portrait framing pulls far back; keep the estate visible at every zoom.
 exterior.scene.fog.density=0;
 const layouts=createAerialLayouts(THREE,exterior);bindLayoutToggles(layouts,document.getElementById('layoutControls'));
