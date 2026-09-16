@@ -207,3 +207,38 @@ glazing; the central and rear north/south protrusions have east-facing glazing.
 Their former ridge-end faces are plain blue. Counts, positions and roof
 orientations are preserved. Tests verify the glazing normals are perpendicular
 to the ridge, that the glass is exposed, and that the old faces are plain.
+
+## Twin workshop gables and cleared photo viewpoint
+
+The 16 September correction in `twin-workshops/img1-loc.png` selects the
+small detached building in yellow and the central hall in purple.
+`twin-workshops/img1.jpg` supplies the twin brick gable fronts, blue doors,
+three upper windows per gable, pale lintels and red ridge/coping details.
+
+The selected 14-by-14 building moves twelve scene units along -Z, following
+the blue arrow, to x=204.5..218.5, z=-87.5..-73.5. Its copy adjoins it on
+the tower side at x=190.5..204.5. Both retain their wall and ridge heights;
+the roofs now have just two pitches facing west towards the water tower and
+east towards Estates, with brick gables facing the yard. The existing blue
+roof protrusion moves and duplicates with its host.
+
+The purple hall's rear moves from z=-60.3 to -49 towards Main/admin while
+its front remains at z=-32. Its roof shortens and its single protrusion stays
+centred. The opened paved court allows the camera at (191,1.8,-55.5), inside
+the former hall footprint, to see both fronts and walk to both doors.
+Distances and concealed elevations remain visual estimates. This supersedes
+the earlier separate hipped rear building and central rear-edge alignment.
+
+Open `aerial.html?view=tower-twin-gables` for the photo comparison,
+`?view=tower-twin-gables-site` for context, or
+`explore.html?view=tower-twin-gables` to walk from the marked viewpoint.
+The Locations menu includes **Twin workshops**. Geometry belongs to Historic
+in the browser; the Unity and Blender exports are unchanged.
+
+Validation checks actual roof normals and ridge extents, duplicated dimensions
+and protrusions, both photo sightlines, walking access and solid workshop
+walls, the shortened hall, existing tower contacts and chimney clearance.
+The full browser regression suite passes.
+
+The photograph-established open court also clips obsolete OS building marks;
+this does not add building or walking obstacles to the paved yard.

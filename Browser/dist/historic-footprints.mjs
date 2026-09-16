@@ -51,6 +51,9 @@ function intersections(a,b,polygon){
 }
 export function missingHistoricFootprints(THREE,exterior){
  const occupied=existingBuildingFootprints(THREE,exterior),region=OS_BLUE_REGION.map(p=>historicOSPoint(...p)),segments=[];
+ // Photo-established open courts also retire obsolete marks without making
+ // those walkable surfaces into building footprints or road obstacles.
+ const excluded=[...occupied,...(exterior.towerBuildings?.userData.replacedOSAreas??[])];
  for(let building=0;building<OS_FOOTPRINTS.length;building++)for(let loopIndex=0;loopIndex<OS_FOOTPRINTS[building].loops.length;loopIndex++){
   const pixels=OS_FOOTPRINTS[building].loops[loopIndex],loop=pixels.map(p=>historicOSPoint(...p));
   for(let i=0;i<loop.length;i++){
@@ -58,6 +61,8 @@ export function missingHistoricFootprints(THREE,exterior){
    // rather than leaving an orange outline of the superseded orientation.
    const towerEdges=exterior.towerBuildings?.userData.replacedOSEdges;
    if(towerEdges&&building===towerEdges.sourceBuilding&&loopIndex===towerEdges.sourceLoop&&towerEdges.indices.includes(i))continue;
+   const estatesEdges=exterior.estatesDepartment?.userData.replacedOSEdges;
+   if(estatesEdges&&building===estatesEdges.sourceBuilding&&loopIndex===estatesEdges.sourceLoop&&estatesEdges.indices.includes(i))continue;
    const irbyEdges=exterior.irbyAshley?.userData.replacedOSEdges;
    if(irbyEdges&&building===irbyEdges.sourceBuilding&&loopIndex===irbyEdges.sourceLoop&&irbyEdges.indices.includes(i))continue;
    const farndonEdges=exterior.farndonWard?.userData.replacedOSEdges;
@@ -69,10 +74,10 @@ export function missingHistoricFootprints(THREE,exterior){
    if(isReplaced&&i>=replaced.start&&i<replaced.end)continue;
    // Retire the superseded unequal range while preserving its adjoining complex.
    const a=isReplaced&&i===replaced.end?replaced.endPoint:loop[i],b=loop[(i+1)%loop.length],at=t=>[a[0]+(b[0]-a[0])*t,a[1]+(b[1]-a[1])*t];
-   const stops=[0,1,...intersections(a,b,region),...occupied.flatMap(p=>intersections(a,b,p))].sort((a,b)=>a-b);
+   const stops=[0,1,...intersections(a,b,region),...excluded.flatMap(p=>intersections(a,b,p))].sort((a,b)=>a-b);
    for(let k=1;k<stops.length;k++){
     const lo=stops[k-1],hi=stops[k];if(hi-lo<1e-6)continue;const middle=at((lo+hi)/2);
-    if(!pointInFootprint(middle,region)||occupied.some(p=>pointInFootprint(middle,p)))continue;
+    if(!pointInFootprint(middle,region)||excluded.some(p=>pointInFootprint(middle,p)))continue;
     segments.push({name:`OS missing building ${building+1} · contour ${loopIndex+1}`,points:[at(lo),at(hi)],sourceBuilding:building,sourceLoop:loopIndex});
    }
   }

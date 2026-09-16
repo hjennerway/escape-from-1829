@@ -19,7 +19,8 @@ export const MAIN_ADMIN_VIEWS=Object.freeze({
   'main-admin-east':shot([74,1.8,55],[24,8,-19],57),
   // main_refine3/cameras.png: yellow arrow at the east end, blue in the rear court.
   'main-admin-annexe-end':{position:[275,2.3,23],target:[233,9.3,23],fov:48},
-  'main-admin-rear-court':{position:[239,2.4,-54],target:[220,8.5,17],fov:50},
+  // Keep the rear-court camera in the Estates gateway as that OS range is modelled.
+  'main-admin-rear-court':{position:[235,2.4,-49],target:[220,8.5,17],fov:50},
   'main-admin-corridor':{position:[128,21,48],target:[128,3,9.8],fov:63}
 });
 export const ADMIN_OS_RANGES=Object.freeze([

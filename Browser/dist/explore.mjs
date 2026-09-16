@@ -2,6 +2,7 @@ import {bindPlanterToggle} from './planter-layer.mjs';
 import {CHURTON_VIEWS} from './churton-ward.mjs';
 import {UPTON_VIEWS} from './upton-frith-oscroft.mjs';
 import {IRBY_ASHLEY_VIEWS} from './irby-ashley.mjs';
+import {ESTATES_VIEWS} from './estates-department.mjs';
 import {FARNDON_VIEWS} from './farndon-ward.mjs';
 import {WITBY_VIEWS} from './witby-ward.mjs';
 import {LAUNDRY_VIEWS} from './laundry.mjs';
@@ -9,7 +10,7 @@ import {MAIN_ADMIN_VIEWS} from './main-admin-building.mjs';
 import {createAerialLayouts,bindLayoutToggles} from './aerial-layouts.mjs';
 import {WATER_TOWER_VIEWS} from './water-tower.mjs';
 import {TOWER_BUILDING_VIEWS} from './tower-buildings.mjs';
-import {ANNEXE_VIEWS} from './annexe.mjs';
+import {ANNEXE_VIEWS,ANNEXE_WARD_WALKS} from './annexe.mjs';
 import * as THREE from './vendor/three.module.js';
 import {createEscapeExterior,loadEscapeFrontage} from './escape-exterior.mjs';
 import {FRONT_STEPS_VIEW} from './front-steps.mjs';
@@ -53,7 +54,7 @@ try{
   if(view==='front')walker.setView({position:[0,1.8,40],target:[0,9,19.8]});
   if(view==='tower'||WATER_TOWER_VIEWS[view])walker.setView(WATER_TOWER_VIEWS[view==='tower'?'tower-2':view]);
   if(TOWER_BUILDING_VIEWS[view]){
-    const shot=TOWER_BUILDING_VIEWS['tower-buildings-3'];
+    const shot=TOWER_BUILDING_VIEWS[view==='tower-twin-gables'||view==='tower-twin-gables-site'?'tower-twin-gables':'tower-buildings-3'];
     walker.setView({...shot,position:[shot.position[0],1.8,shot.position[2]]});
   }
   const chimneyView=REDESMERE_CHIMNEY_VIEWS[new URLSearchParams(location.search).get('view')];
@@ -80,8 +81,9 @@ try{
   if(new URLSearchParams(location.search).get('view')==='front-steps')walker.setView({...FRONT_STEPS_VIEW,position:[6,1.8,34]});
   if(new URLSearchParams(location.search).get('view')==='front-wall')walker.setView({...FRONT_WALL_VIEW,position:[0,1.8,36],target:[-12,.8,49]});
   const annexeView=(new URLSearchParams(location.search).get('view')??'').replace(/^new-hospital/,'annexe');
-  if(ANNEXE_VIEWS[annexeView])walker.setView(ANNEXE_VIEWS[['annexe','annexe-plan','annexe-site'].includes(annexeView)?'annexe-ground':annexeView]);
+  if(ANNEXE_VIEWS[annexeView])walker.setView(ANNEXE_WARD_WALKS[annexeView]??ANNEXE_VIEWS[['annexe','annexe-plan','annexe-site'].includes(annexeView)?'annexe-ground':annexeView]);
   const churtonView=new URLSearchParams(location.search).get('view');
+  if(ESTATES_VIEWS[churtonView])walker.setView(ESTATES_VIEWS['estates-photo']);
   if(LAUNDRY_VIEWS[churtonView])walker.setView(LAUNDRY_VIEWS['laundry-photo']);
   if(UPTON_VIEWS[churtonView])walker.setView(UPTON_VIEWS['upton-ground']);
   if(FARNDON_VIEWS[churtonView])walker.setView(FARNDON_VIEWS['farndon-2']);

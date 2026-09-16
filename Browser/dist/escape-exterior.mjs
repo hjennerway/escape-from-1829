@@ -18,6 +18,7 @@ import {createAnnexe} from './annexe.mjs';
 import {createChurtonWard} from './churton-ward.mjs';
 import {createUptonFrithOscroft} from './upton-frith-oscroft.mjs';
 import {createIrbyAshley} from './irby-ashley.mjs';
+import {createEstatesDepartment} from './estates-department.mjs';
 import {createFarndon} from './farndon-ward.mjs';
 import {createWitbyWard} from './witby-ward.mjs';
 import {createLaundry} from './laundry.mjs';
@@ -307,6 +308,7 @@ export function createEscapeExterior(THREE,aspect){
   const churtonWard=createChurtonWard(THREE,{brick:photoBrick,roof,worldUV,material});model.add(churtonWard);
   const uptonFrithOscroft=createUptonFrithOscroft(THREE,{brick:photoBrick,roof,worldUV,material});model.add(uptonFrithOscroft);
   const irbyAshley=createIrbyAshley(THREE,{brick:photoBrick,roof,worldUV,material});model.add(irbyAshley);
+  const estatesDepartment=createEstatesDepartment(THREE,{brick:photoBrick,roof,worldUV,material});model.add(estatesDepartment);
   const farndonWard=createFarndon(THREE,{brick:photoBrick,roof,worldUV,material});model.add(farndonWard);
   const witbyWard=createWitbyWard(farndonWard);model.add(witbyWard);
   const {building:mainAdmin,corridor:adminCorridor}=createMainAdminBuilding(THREE,{brick:photoBrick,roof,worldUV,material});model.add(mainAdmin,adminCorridor);
@@ -341,5 +343,5 @@ export function createEscapeExterior(THREE,aspect){
   const lawnMaterials=new Set();
   model.traverse(object=>{for(const mat of (Array.isArray(object.material)?object.material:[object.material]))if(mat?.userData.estateGrass)lawnMaterials.add(mat);});
   for(const mat of lawnMaterials)matchEstateGrass(mat,grass);
-  return {scene,camera,model,terrain,legacyAccess,mast,chapel,waterTower,estateChimney,annexe,newHospital:annexe,churtonWard,uptonFrithOscroft,irbyAshley,farndonWard,witbyWard,mainAdmin,adminCorridor,laundry,planters};
+  return {scene,camera,model,terrain,legacyAccess,mast,chapel,waterTower,estateChimney,annexe,newHospital:annexe,churtonWard,uptonFrithOscroft,irbyAshley,estatesDepartment,farndonWard,witbyWard,mainAdmin,adminCorridor,laundry,planters};
 }

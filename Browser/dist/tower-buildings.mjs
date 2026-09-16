@@ -10,6 +10,8 @@ export {TOWER_ROOF_CONTACTS} from './tower-roof-profiles.mjs';
 export const TOWER_BUILDING_VIEWS=Object.freeze({
  'tower-buildings':{position:[279,108,81],target:[179,8,-36],fov:52},
  'tower-buildings-roofs':{position:[105,89,2],target:[166,7,-46],fov:52},
+ 'tower-twin-gables':{position:[191,1.8,-55.5],target:[205,5.2,-74],fov:64},
+ 'tower-twin-gables-site':{position:[99,100,-172],target:[185,4,-48],fov:52},
  'tower-roof-white-door':{position:[148,15,-26],target:[148,10,-51],fov:55},
  'tower-roof-north':{position:[148,15,-86],target:[148,10,-59.5],fov:55},
  'tower-roof-away':{position:[179,16,-55.2],target:[153,10,-55.2],fov:55},
@@ -29,9 +31,12 @@ export const TOWER_RANGES=Object.freeze([
  {name:'Tower east traced abutment',rect:[153.1,-60.3,158.2,-50.1],height:8.84,roof:'traced'},
  {name:'Tower east dormered range',rect:[158.2,-60.3,180,-40.5],height:8.84,rise:3.9,axis:'x',roof:'traced',hipInset:5},
  {name:'North tower range',rect:[146.3,-74.1,162.3,-60.3],height:8.84,rise:4.076470588235294,axis:'z',roof:'corridor',attach:'south'},
- {name:'Dormered central service hall',rect:[180,-60.3,202,-32],height:7.3,rise:4.6,axis:'z',roof:'gable'},
- // Small distant roof just right of the purple gable in img2, separated by a short passage.
- {name:'Rear hipped service building',rect:[204.5,-75.5,218.5,-61.5],height:6.4,rise:3.4,axis:'z',roof:'hip',hipInset:4},
+ // towerbuildings2/img1-loc: retract the purple hall's rear towards admin.
+ {name:'Dormered central service hall',rect:[180,-49,202,-32],height:7.3,rise:4.6,axis:'z',roof:'gable'},
+ // Move the yellow building twelve units outwards (-Z), then duplicate it
+ // towards the tower. East/west slopes leave south gables facing the yard.
+ {name:'Rear east gabled workshop',rect:[204.5,-87.5,218.5,-73.5],height:6.4,rise:3.4,axis:'z',roof:'gable'},
+ {name:'Rear west gabled workshop',rect:[190.5,-87.5,204.5,-73.5],height:6.4,rise:3.4,axis:'z',roof:'gable'},
  {name:'Western tower flat link',rect:[153.1,-40.5,159.3,-36.3],height:6.4,roof:'flat'},
  // Yellow correction: the long axis turns north/south, with a flat front
  // section and a hipped ridge terminating against the tower's south wall.
@@ -55,6 +60,8 @@ export function createTowerBuildings(THREE,exterior){
  group.userData.ranges=TOWER_RANGES;group.userData.layout='historic';
  group.userData.adminShift={distance:TOWER_ADMIN_SHIFT,axis:'z',ranges:[...shiftedRanges]};
  group.userData.replacedOSEdges={sourceBuilding:0,sourceLoop:0,indices:[82,83,84]};
+ // The photograph establishes an open yard here, superseding old OS marks.
+ group.userData.replacedOSAreas=[[[180.3,-73.5],[222,-73.5],[222,-49],[180.3,-49]]];
  const brick=exterior.mainAdmin.getObjectByName('Central administration range walls').material.clone();
  brick.color.multiplyScalar(1.13);
  const roof=exterior.mainAdmin.getObjectByName('Central administration range slate roof').material.clone();
@@ -117,7 +124,7 @@ export function createTowerBuildings(THREE,exterior){
    for(const z of [z0,z1]){box(brick,cx,h+.26,z,w,.45,.25);box(stone,cx,h+.5,z,w+.15,.12,.38);}
    for(const x of [x0,x1]){box(brick,x,h+.26,cz,.25,.45,d);box(stone,x,h+.5,cz,.38,.12,d+.15);}
   }else if(!['corridor','traced'].includes(spec.roof))pitched({...spec,rect:spec.roofRect??spec.rect});
-  for(const z of [z0,z1]){const endX=name==='North tower range'&&z===z0?156.9:x1;detail(dark,(x0+endX)/2,h+.05,z,endX-x0+.3,.13,.14);}
+  for(const z of (name.startsWith('Rear ')&&spec.roof==='gable'?[]:[z0,z1])){const endX=name==='North tower range'&&z===z0?156.9:x1;detail(dark,(x0+endX)/2,h+.05,z,endX-x0+.3,.13,.14);}
  }
  // Img1: the corridor begins one third of the way across each N/S face.
  // Its centre strip is flat in front of the upper arch; the shallow slope
@@ -233,6 +240,42 @@ export function createTowerBuildings(THREE,exterior){
   for(const side of [-1,1])detail(stone,x+Math.cos(r)*side*(w/2+.09),y,z-Math.sin(r)*side*(w/2+.09),.15,h+.22,.19,r);
   detail(stone,x,y+h/2+.15,z,w+.38,.2,.22,r);openings.push({x,y,z,r,label});
  }
+ // Img1's adjoining workshop gables: tall middle sash, smaller flanking
+ // lights, stone heads and blue service doors. Hidden elevations are inferred.
+ const workshops=TOWER_RANGES.filter(r=>r.name.startsWith('Rear ')&&r.roof==='gable');
+ const workshopBlue=mat(0x28778d);
+ for(const spec of workshops){
+  const [x0,z0,x1,z1]=spec.rect,cx=(x0+x1)/2,front=z1+.24;
+  const west=spec.name.includes('west'),doorWidth=west?2.5:4.1;
+  // Close the eave-height joint beneath the slightly overhanging gable.
+  for(const z of [z0,z1])box(brick,cx,spec.height+.07,z,x1-x0+.4,.14,.42,spec.name+' gable base course');
+  door(cx,1.95,front,doorWidth,3.8,0,workshopBlue,spec.name+' blue door');
+  // Recessed timber panels and glazed transom above each blue door.
+  detail(dark,cx,3.21,front+.16,doorWidth-.24,.9,.06);
+  detail(glass,cx,3.21,front+.20,doorWidth-.4,.72,.04);
+  for(const u of (west?[-1,-1/3,1/3,1]:[-1,0,1]))detail(workshopBlue,cx+u*(doorWidth-.3)/2,3.21,front+.24,.07,.86,.05);
+  if(west)detail(workshopBlue,cx,3.21,front+.24,doorWidth,.065,.05);
+  detail(workshopBlue,cx,2.77,front+.24,doorWidth,.10,.06);
+  if(!west)detail(dark,cx,1.43,front+.16,.035,2.6,.03);
+  detail(dark,cx+(west?-1:.35),1.5,front+.23,.09,.28,.08);
+  for(const [dx,y,w,h] of [[0,6.7,1.7,3.1],[-3.35,6.4,1.2,2.3],[3.35,6.4,1.2,2.3]]){
+   sash(cx+dx,y,front,w,h,0,spec.name+' upper sash');
+   detail(stone,cx+dx,y+h/2+.22,front+.15,w+.48,.36,.25);
+  }
+  detail(stone,cx,4.13,front+.15,doorWidth+.6,.38,.3);
+  const peak=spec.height+.14+spec.rise;
+  for(const side of [-1,1]){
+   line([cx+side*7.16,spec.height+.2,front],[cx,peak+.10,front],red,.12,spec.name+' gable coping');
+  }
+  line([cx,peak,front],[cx,peak+.48,front],red,.075,spec.name+' ridge finial');
+  for(const x of [x0,x1]){
+   line([x,spec.height+.05,z0],[x,spec.height+.05,z1],dark,.075,spec.name+' eaves gutter');
+  }
+  line([x1-.10,.18,front+.08],[x1-.10,6.4,front+.08],dark,.06,spec.name+' yard downpipe');
+ }
+ // Paved passage exposed by shortening the central hall, continuous up to
+ // the workshop doors. Ground-level surfacing does not block the walker.
+ box(flat,201.15,.19,-61.25,41.7,.38,24.5,'Twin workshop paved court');
  // Main south face: four taller lights, recessed entry and lower ramp-side lights.
  for(const x of [163,168,173,178])sash(x,3.35,towardsAdmin(TOWER_SERVICE_FRONT+.03),1.45,2.9);
  door(190,3.45,towardsAdmin(-16.57),2.4,4.3,0,dark,'Ramp entrance');
@@ -305,8 +348,11 @@ export function createTowerBuildings(THREE,exterior){
  // Red correction / img3: one protrusion centred on the central hall roof.
  const centralHall=TOWER_RANGES.find(r=>r.name==='Dormered central service hall');
  dormer('Central hall blue dormer',(centralHall.rect[0]+centralHall.rect[2])/2,(centralHall.rect[1]+centralHall.rect[3])/2,10.3,13.3,'z');
- // Img2 also shows a smaller, separate hipped building further back.
- dormer('Rear building blue dormer',211.5,-68.5,9.94,11.4,'z');
+ // The existing blue roof protrusion moves with the yellow building and
+ // is duplicated with it. Both remain aligned with their north/south ridges.
+ for(const [i,spec] of workshops.entries()){
+  dormer('Rear building blue dormer '+(i+1),(spec.rect[0]+spec.rect[2])/2,(spec.rect[1]+spec.rect[3])/2,9.94,11.4,'z');
+ }
  group.userData.dormers=dormers;
  // Flush rooflight sits on the near-facing slope of the southern cross range.
  const light=box(frame,202,8.85,towardsAdmin(-20.0),1.7,.10,1.7,'Stores rooflight frame');light.rotation.x=Math.atan2(3.9,5.95);

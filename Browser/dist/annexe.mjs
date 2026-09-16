@@ -12,9 +12,33 @@ const origin=annexeMapPoint(138,83),c=Math.cos(Math.PI/12),s=Math.sin(Math.PI/12
 export const ANNEXE=Object.freeze({x:origin[0],z:origin[1],rotation:Math.atan2(b*c-a*s,a*c+b*s)});
 export function annexePoint(x,y,z){const c=Math.cos(ANNEXE.rotation),s=Math.sin(ANNEXE.rotation);return [ANNEXE.x+c*x+s*z,y,ANNEXE.z-s*x+c*z];}
 const shot=(p,t,fov=55)=>Object.freeze({position:annexePoint(...p),target:annexePoint(...t),fov});
+// The supplied coloured circles identify wards, not new building outlines.
+// Long connecting ranges, the entrance and the unmarked east end stay shared.
+export const ANNEXE_WARDS=Object.freeze([
+ {id:'larkton-jodrell',name:'Larkton/Jodrell',referenceColor:'yellow',
+  rangeNames:['West end ward','West rear pavilion','West rear link','West end projecting rooms'],
+  aerial:shot([-166,80,70],[-116,5,-8]),walk:shot([-148,1.8,-15],[-120,6,-12],65)},
+ {id:'tarvin-jarman',name:'Tarvin/Jarman',referenceColor:'blue',
+  rangeNames:['West court inner return','West court front range','West court outer return','West court corner infill'],
+  aerial:shot([-96,88,126],[-63,4,31]),walk:shot([-63,1.8,60],[-63,7,40],65)},
+ {id:'leighton-newton',name:'Leighton/Newton',referenceColor:'red',
+  rangeNames:['Rear east connecting range','Rear east end pavilion'],
+  aerial:shot([65,83,-141],[34,5,-65]),walk:shot([72,1.8,-74],[42,6,-68],65)},
+ {id:'oakmere',name:'Oakmere',referenceColor:'purple',
+  rangeNames:['Rear west angled service range','Rear service head'],
+  aerial:shot([-51,72,-125],[-17,5,-65]),walk:shot([-45,1.8,-67],[-19,6,-67],65)},
+ {id:'picton-carden',name:'Picton/Carden',referenceColor:'green',
+  rangeNames:['East court inner return','East court front range','East court outer return','East court corner infill'],
+  aerial:shot([101,88,126],[63,4,31]),walk:shot([63,1.8,60],[63,7,40],65)}
+].map(ward=>Object.freeze({...ward,rangeNames:Object.freeze(ward.rangeNames)})));
+export const ANNEXE_WARD_VIEWS=Object.freeze(Object.fromEntries(ANNEXE_WARDS.map(ward=>[ward.id,ward.aerial])));
+export const ANNEXE_WARD_WALKS=Object.freeze(Object.fromEntries(ANNEXE_WARDS.map(ward=>[ward.id,ward.walk])));
 const north=annexeMapPoint(138,82),south=[ANNEXE.x+(ANNEXE.x-north[0])*.01,ANNEXE.z+(ANNEXE.z-north[1])*.01],site=annexeMapPoint(205,203);
 export const ANNEXE_VIEWS=Object.freeze({
+ ...ANNEXE_WARD_VIEWS,
  annexe:shot([-150,135,215],[0,3,-10],56),
+ 'annexe-access':shot([0,360,130],[0,0,-5],52),
+ 'annexe-entrance':shot([0,15,112],[0,1,60],65),
  'annexe-front':shot([0,1.8,120],[0,9,14],48),
  'annexe-front-right':shot([10,1.8,108],[3,9,14],48),
  'annexe-img1':shot([28,1.8,124],[4,9,14],52),
@@ -62,18 +86,26 @@ export const ANNEXE_RANGES=Object.freeze([
 ]);
 export function createAnnexe(THREE,{brick,roof,material,worldUV,hipRoof}){
  const model=new THREE.Group();model.name='The annexe';model.position.set(ANNEXE.x,0,ANNEXE.z);model.rotation.y=ANNEXE.rotation;
+ const wards=Object.fromEntries(ANNEXE_WARDS.map(ward=>{
+  const group=new THREE.Group();group.name=ward.name;
+  group.userData.wardId=ward.id;group.userData.referenceColor=ward.referenceColor;
+  model.add(group);return [ward.id,group];
+ }));
+ const rangeWards=new Map(ANNEXE_WARDS.flatMap(ward=>ward.rangeNames.map(name=>[name,ward.id])));
+ let currentWard=null;
+ const parent=()=>wards[currentWard]??model;
  const red=material(0x9d4935),blue=material(0x285575),frame=material(0xe0e3da),glass=material(0x536c75,{roughness:.48,metalness:.15});
  const dark=material(0x202927),stone=material(0x9e9683),lead=material(0x8c999b),road=material(0x96968a);
  const batches=new Map(),ranges=[],openings=[];
- function mesh(g,m,x,y,z,name){const o=new THREE.Mesh(g,m);o.position.set(x,y,z);o.name=name;o.castShadow=true;o.receiveShadow=true;model.add(o);return o;}
+ function mesh(g,m,x,y,z,name){const o=new THREE.Mesh(g,m);o.position.set(x,y,z);o.name=name;o.castShadow=true;o.receiveShadow=true;parent().add(o);return o;}
  function solid(m,x,y,z,w,h,d,name,r=0){const o=mesh(worldUV(new THREE.BoxGeometry(w,h,d),1.7),m,x,y,z,name);o.rotation.y=r;o.userData.orientedCollision=true;return o;}
- function box(m,x,y,z,w,h,d,r=0){if(!batches.has(m))batches.set(m,[]);batches.get(m).push({x,y,z,w,h,d,r});}
+ function box(m,x,y,z,w,h,d,r=0){if(!batches.has(m))batches.set(m,[]);batches.get(m).push({x,y,z,w,h,d,r,wardId:currentWard});}
  function beam(p,q,width,m,name){const a=new THREE.Vector3(...p),b=new THREE.Vector3(...q),v=b.clone().sub(a);const o=mesh(new THREE.CylinderGeometry(width/2,width/2,v.length(),6),m,...a.add(b).multiplyScalar(.5).toArray(),name);o.quaternion.setFromUnitVectors(new THREE.Vector3(0,1,0),v.normalize());return o;}
- function hip(x,z,w,d,y,rise,name,r=0){const o=hipRoof(x,z,w,d,y,rise);model.add(o);o.rotation.y=r;o.name=name+' slate roof';return o;}
+ function hip(x,z,w,d,y,rise,name,r=0){const o=hipRoof(x,z,w,d,y,rise);parent().add(o);o.rotation.y=r;o.name=name+' slate roof';return o;}
  function position(b,u,n){const c=Math.cos(b.r),s=Math.sin(b.r);return [b.x+c*u+s*n,b.z-s*u+c*n];}
  function occupied(x,y,z,self){return ranges.some(b=>{if(b===self||y>b.h)return false;const dx=x-b.x,dz=z-b.z,c=Math.cos(b.r),s=Math.sin(b.r);return Math.abs(c*dx-s*dz)<b.w/2+.05&&Math.abs(s*dx+c*dz)<b.d/2+.05;});}
  function sash(name,x,y,z,w=1.35,h=2.75,r=0,arched=false){
-  openings.push({name,x,y,z,w,h,rotation:r,arched});
+  openings.push({name,x,y,z,w,h,rotation:r,arched,wardId:currentWard});
   const c=Math.cos(r),s=Math.sin(r),part=(m,u,v,n,pw,ph,pd)=>box(m,x+c*u+s*n,y+v,z-s*u+c*n,pw,ph,pd,r);
   const radius=w/2,shoulder=h/2-(arched?radius:0);
   if(arched){
@@ -100,7 +132,8 @@ export function createAnnexe(THREE,{brick,roof,material,worldUV,hipRoof}){
   box(red,x,base-.14,z+.05,w+.25,.25,.26);
  }
  for(const spec of ANNEXE_RANGES){
-  const [x0,z0,x1,z1]=spec.rect.map(v=>v*ANNEXE_MAP_SCALE),b={...spec,x:(x0+x1)/2,z:(z0+z1)/2,w:x1-x0,d:z1-z0,r:spec.angle??0};
+  currentWard=rangeWards.get(spec.name)??null;
+  const [x0,z0,x1,z1]=spec.rect.map(v=>v*ANNEXE_MAP_SCALE),b={...spec,wardId:currentWard,x:(x0+x1)/2,z:(z0+z1)/2,w:x1-x0,d:z1-z0,r:spec.angle??0};
   if(spec.section==='rear-east'){
    const {angle,pivot}=ANNEXE_REAR_EAST,px=pivot[0]*ANNEXE_MAP_SCALE,pz=pivot[1]*ANNEXE_MAP_SCALE,dx=b.x-px,dz=b.z-pz;
    b.x=px+Math.cos(angle)*dx+Math.sin(angle)*dz;b.z=pz-Math.sin(angle)*dx+Math.cos(angle)*dz;b.r+=angle;
@@ -117,6 +150,7 @@ export function createAnnexe(THREE,{brick,roof,material,worldUV,hipRoof}){
   }
  }
  for(const b of ranges){
+  currentWard=b.wardId;
   for(const face of ['long','end'])for(const side of [-1,1]){
    const span=face==='long'?b.w:b.d,count=Math.max(1,Math.floor((span-1.5)/3.8));
    for(let i=0;i<count;i++){
@@ -131,6 +165,7 @@ export function createAnnexe(THREE,{brick,roof,material,worldUV,hipRoof}){
   }
   for(const side of [-1,1]){const [x,z]=position(b,side*(b.w/2-.4),b.d/2+.32);if(!occupied(x,b.h/2,z,b))box(blue,x,b.h/2,z,.105,b.h,.105);}
  }
+ currentWard=null;
  const hall=ranges[0],entrance=ranges[1],front=hall.z+hall.d/2+.04,entryZ=entrance.z+entrance.d/2+.05;
  // Three round-headed, pedimented dormers above the low entrance roof.
  for(const x of [-11,0,11]){
@@ -181,12 +216,14 @@ export function createAnnexe(THREE,{brick,roof,material,worldUV,hipRoof}){
  beam([0,bellY+5.35,bellZ],[0,bellY+7,bellZ],.09,dark,'Bell tower weather vane');
  beam([-.5,bellY+6.65,bellZ],[.5,bellY+6.65,bellZ],.07,dark,'Weather vane crossbar');
  for(const b of ranges.filter(b=>b.h>7&&!b.name.includes('tower')&&!b.name.includes('hall'))){
+  currentWard=b.wardId;
   const [x,z]=position(b,b.w*.28,0),base=b.h+b.rise*.65,top=base+2.55;
   solid(brick,x,(base+top)/2,z,1.65,top-base,1,b.name+' chimney stack',b.r);
   for(const dy of [-.24,0])box(red,x,top+dy,z,1.96,.18,1.28,b.r);
   for(const dx of [-.5,0,.5]){const p=position(b,b.w*.28+dx,0);mesh(new THREE.CylinderGeometry(.13,.17,.8,8),red,p[0],top+.43,p[1],'Terracotta chimney pot');}
  }
  
+ currentWard=null;
  // Build the side.jpg details once, then reflect the entire assembly across
  // the entrance axis, including its glazing, gutters, landing and fire stair.
  const sideMeshStart=model.children.length,sideOpeningStart=openings.length;
@@ -223,9 +260,16 @@ export function createAnnexe(THREE,{brick,roof,material,worldUV,hipRoof}){
  function drive(x0,z0,x1,z1,w){const dx=x1-x0,dz=z1-z0;solid(road,(x0+x1)/2,.025,(z0+z1)/2,Math.hypot(dx,dz),.09,w,'Annexe drive',Math.atan2(-dz,dx));}
  drive(0,28,0,101,6);drive(-144,65,144,65,5);drive(-144,65,-144,-62,5);drive(144,65,144,-46,5);
  const dummy=new THREE.Object3D();
- for(const [mat,items] of batches){const m=new THREE.InstancedMesh(new THREE.BoxGeometry(1,1,1),mat,items.length);m.receiveShadow=true;m.castShadow=true;m.name=mat===blue?'Blue gutters and downpipes':'Annexe facade details';
-  for(let i=0;i<items.length;i++){const b=items[i];dummy.position.set(b.x,b.y,b.z);dummy.scale.set(b.w,b.h,b.d);dummy.rotation.set(0,b.r,0);dummy.updateMatrix();m.setMatrixAt(i,dummy.matrix);}model.add(m);
+ for(const [mat,items] of batches){
+  const byWard=new Map();
+  for(const item of items){if(!byWard.has(item.wardId))byWard.set(item.wardId,[]);byWard.get(item.wardId).push(item);}
+  for(const [wardId,details] of byWard){
+   const m=new THREE.InstancedMesh(new THREE.BoxGeometry(1,1,1),mat,details.length);m.receiveShadow=true;m.castShadow=true;m.name=mat===blue?'Blue gutters and downpipes':'Annexe facade details';
+   for(let i=0;i<details.length;i++){const b=details[i];dummy.position.set(b.x,b.y,b.z);dummy.scale.set(b.w,b.h,b.d);dummy.rotation.set(0,b.r,0);dummy.updateMatrix();m.setMatrixAt(i,dummy.matrix);}(wards[wardId]??model).add(m);
+  }
  }
+ for(const ward of ANNEXE_WARDS)wards[ward.id].userData.ranges=ranges.filter(b=>b.wardId===ward.id);
+ model.userData.wards=wards;
  model.userData.ranges=ranges;model.userData.annexeOpenings=openings;model.userData.osRegistration=ANNEXE_OS_REGISTRATION;
  return model;
 }

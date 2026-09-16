@@ -24,7 +24,7 @@ for(const name of ['West curved entrance kerb','East curved entrance kerb']){
  const edge=entrance.getObjectByName(name),vertices=edge.geometry.attributes.position,last=vertices.count-2;assert(Math.abs(lanePointAtX(vertices.getX(last))[1]-vertices.getZ(last)-3.3)<.001,'Kerbs must merge into the near lane edge, not end in the carriageway');for(const y of edge.geometry.attributes.normal.array.filter((_,i)=>i%3===1))assert(y>.99,'Curved kerbs must face up');
 }
 const walk=createWalker(exterior.camera,obs);walk.setView({position:[0,1.8,80],target:[0,1.8,40]});walk.keys.add('KeyW');for(let i=0;i<100;i++)walk.update(.1);assert(exterior.camera.position.z<31,'Walking from the lane must pass through the relocated gate');
-layouts.setVisible('modern',false);layouts.setVisible('historic',true);assert(entrance.parent.visible&&wall.parent.visible,'The sweeping junction and wall must remain visible in Historic');
+layouts.setVisible('modern',false);layouts.setVisible('historic',true);assert(entrance.visible&&entrance.parent.visible&&wall.parent.visible,'Historic retains the sweeping driveway and shared boundary');
 // Surface sampling verifies the intended lawn clearance and filled forecourt.
 for(const x of [-40,-20,20,40,60]){
  const clearance=lanePointAtX(x)[1]-3.6-(FRONT_BOUNDARY.z+.46);
@@ -35,7 +35,7 @@ for(const [x,z] of [[0,29],[0,39],[8,32],[-8,32]])assert.equal(surfaceAt(x,z).ob
 assert.notEqual(surfaceAt(12,39).object.name,'Semicircular Reception paved forecourt','The court must have a rounded edge rather than rectangular corners');
 for(const historic of [true,false])for(const modern of [true,false]){
  layouts.setVisible('historic',historic);layouts.setVisible('modern',modern);
- assert.equal(entrance.parent.visible,historic||modern,'The curve follows the shared lane in every layout combination');
+ assert.equal(entrance.visible,historic||modern,'The sweeping driveway is visible whenever either layout is enabled');
  assert.equal(entrance.getObjectByName('Sweeping entrance asphalt').material.color.getHex(),0x555b5c);
 }
 console.log('PASS: wall translated without rotation, outer gravel replaced by grass, fixed-lane curved junction, upward kerbs and clear gate-to-door access.');

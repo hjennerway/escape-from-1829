@@ -8,7 +8,7 @@ export function createAerialLayouts(THREE,exterior){
   if(exterior.layouts)return exterior.layouts;
   const shared=new THREE.Group(),historic=new THREE.Group(),modern=new THREE.Group();
   shared.name='Shared estate';historic.name='Historic layout';modern.name='Modern layout';
-  const historicObjects=new Set([exterior.annexe,exterior.mainAdmin,exterior.adminCorridor,exterior.estateChimney,exterior.irbyAshley,exterior.farndonWard,exterior.witbyWard,exterior.laundry]);
+  const historicObjects=new Set([exterior.annexe,exterior.mainAdmin,exterior.adminCorridor,exterior.estateChimney,exterior.irbyAshley,exterior.estatesDepartment,exterior.farndonWard,exterior.witbyWard,exterior.laundry]);
   for(const child of [...exterior.model.children]){
     if(child===exterior.terrain)continue;
     (historicObjects.has(child)?historic:shared).add(child);
@@ -29,6 +29,7 @@ export function createAerialLayouts(THREE,exterior){
     if(layout!=='historic'&&layout!=='modern')throw new Error('Unknown estate layout: '+layout);
     state[layout]=Boolean(visible);historic.visible=state.historic;modern.visible=state.modern;
     shared.visible=state.historic||state.modern;
+    entrance.visible=state.historic||state.modern; // Shared sweeping approach from Vivienne Smith Lane into 1829.
     for(const object of superseded)object.visible=!state.historic;
     for(const road of roads.children)road.visible=state.modern||(state.historic&&sharedRoads.has(road.name));
     lane.getObjectByName('Vivienne Smith Lane eastern continuation').visible=state.modern;

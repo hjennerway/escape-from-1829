@@ -12,4 +12,4 @@
 @media(max-width:650px){#previewNav{display:grid;grid-template-columns:1fr auto;left:12px;right:12px;top:12px;gap:8px 12px}#previewNav>a{grid-column:1}#locationsPicker{grid-column:2;grid-row:1 / span 2;align-self:start}#locationsPanel{position:fixed;right:12px;top:64px;box-sizing:border-box;max-width:calc(100vw - 24px);max-height:calc(100dvh - 150px)}}
 
 /* Irby/Ashley's photo links sit above the scene on narrow screens. */
-@media(max-width:650px){#churtonNav.irby-navigation,#churtonNav.farndon-navigation,#churtonNav.witby-navigation{top:76px;bottom:auto!important;right:12px!important;padding:8px 10px;background:#142018e8;font-size:10px!important;line-height:1.8}}
+@media(max-width:650px){#churtonNav.irby-navigation,#churtonNav.farndon-navigation,#churtonNav.witby-navigation,#churtonNav.estates-navigation,#churtonNav.annexe-ward-navigation{top:76px;bottom:auto!important;right:12px!important;padding:8px 10px;background:#142018e8;font-size:10px!important;line-height:1.8}}

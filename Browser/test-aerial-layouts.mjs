@@ -15,7 +15,7 @@ const layouts=createAerialLayouts(THREE,exterior);
 assert.equal(createAerialLayouts(THREE,exterior),layouts,'Repeated setup must not duplicate scene groups or roads');
 exterior.model.updateMatrixWorld(true);for(const [o,matrix]of before)assert(o.matrixWorld.equals(matrix),'Grouping must preserve all existing transforms');
 assert.equal(exterior.terrain.parent,exterior.model);
-assert.deepEqual(layouts.historic.children,[exterior.irbyAshley,exterior.farndonWard,exterior.witbyWard,exterior.mainAdmin,exterior.adminCorridor,exterior.laundry,exterior.estateChimney,exterior.annexe,exterior.towerBuildings,layouts.historicRoads]);
+assert.deepEqual(layouts.historic.children,[exterior.irbyAshley,exterior.estatesDepartment,exterior.farndonWard,exterior.witbyWard,exterior.mainAdmin,exterior.adminCorridor,exterior.laundry,exterior.estateChimney,exterior.annexe,exterior.towerBuildings,layouts.historicRoads]);
 assert.equal(exterior.chapel.parent,layouts.shared);assert.equal(exterior.waterTower.parent,layouts.shared);assert.equal(exterior.churtonWard.parent,layouts.shared);
 const frontage=layouts.shared.getObjectByName('Blue dragons and central coat of arms');assert(frontage,'1829 must remain in the common estate');
 assert(layouts.shared.getObjectByName('Redesmere canted bay'),'Redesmere must remain in the common estate');
@@ -24,7 +24,7 @@ const visible=o=>{for(;o;o=o.parent)if(!o.visible)return false;return true};
 for(const historic of [true,false])for(const modern of [true,false]){
  layouts.setVisible('historic',historic);layouts.setVisible('modern',modern);
  for(const o of [frontage,exterior.chapel,exterior.waterTower,exterior.churtonWard])assert.equal(visible(o),historic||modern);
- for(const o of [exterior.witbyWard,exterior.farndonWard,exterior.irbyAshley,exterior.towerBuildings,exterior.annexe,exterior.mainAdmin,exterior.adminCorridor,exterior.laundry,exterior.estateChimney])assert.equal(visible(o),historic);
+ for(const o of [exterior.estatesDepartment,exterior.witbyWard,exterior.farndonWard,exterior.irbyAshley,exterior.towerBuildings,exterior.annexe,exterior.mainAdmin,exterior.adminCorridor,exterior.laundry,exterior.estateChimney])assert.equal(visible(o),historic);
  for(const o of layouts.roads.children)assert.equal(visible(o),(o.name==='Vivienne Smith Lane'||o.name.startsWith('Parsons Lane'))?(historic||modern):modern);
  assert.equal(visible(exterior.terrain),true);
  assert.equal(exteriorObstacles(THREE,exterior.model).some(o=>obstacleContains(o,ESTATE_CHIMNEY.x,ESTATE_CHIMNEY.z)),historic,'A hidden chimney must not leave a collision obstacle');
