@@ -1,12 +1,18 @@
 import {createCorridorRun,FARNDON_CORRIDOR} from './farndon-corridor.mjs';
+import {WITBY} from './witby-ward.mjs';
+import {GRAFTON_EDGE} from './grafton-edge.mjs';
+import {wardPlacementOffset} from './ward-placement.mjs';
 
 // Red reference: diagonal spine with three short, axis-aligned ward branches.
 // Centre the diagonal between the registered OS corridor edges; its 45-degree
 // direction is the exception to the surrounding square building footprints.
+const witbyOffset=wardPlacementOffset('witby',WITBY),graftonOffset=wardPlacementOffset('graftonEdge',GRAFTON_EDGE);
+const farndon=[FARNDON_CORRIDOR.x,-117.1];
+const diagonal=farndon[0]-farndon[1],upton=[38.15764920096168,-198.3];
+const witby=[100.3+witbyOffset.x,-198.5+witbyOffset.z],grafton=[78.82+graftonOffset.x,-152.2+graftonOffset.z];
 export const WARD_CORRIDOR_NODES=Object.freeze({
- farndon:[FARNDON_CORRIDOR.x,-117.1],elbow:[75.1,-198.3],
- upton:[38.15764920096168,-198.3],grafton:[78.82,-152.2],
- graftonJunction:[121.2,-152.2],witby:[100.3,-198.5],witbyJunction:[100.3,-173.1]
+ farndon,elbow:[upton[1]+diagonal,upton[1]],upton,grafton,
+ graftonJunction:[grafton[1]+diagonal,grafton[1]],witby,witbyJunction:[witby[0],witby[0]-diagonal]
 });
 const n=WARD_CORRIDOR_NODES;
 export const WARD_CORRIDOR_RUNS=Object.freeze([

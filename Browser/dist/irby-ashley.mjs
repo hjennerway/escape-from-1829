@@ -1,4 +1,5 @@
 import {photoDetailPrimitives} from './photo-detail-primitives.mjs';
+import {placeWardViews} from './ward-placement.mjs';
 
 // location.png is a perspective aerial: register its ground-level brown OS
 // corners first, then regularise the yellow revision along the estate axes.
@@ -13,7 +14,7 @@ export const IRBY_ASHLEY_FOOTPRINT=Object.freeze([
   [211.9,-131.8],[219.2,-131.8],[219.2,-122.7],[247.7,-122.7],
   [247.7,-137.5],[263.2,-137.5],[263.2,-124.2],[260.6,-124.2]
 ].map(p=>Object.freeze(p)));
-export const IRBY_ASHLEY_VIEWS=Object.freeze({
+export const IRBY_ASHLEY_VIEWS=placeWardViews('irbyAshley',IRBY_ASHLEY,{
   'irby-ashley':{position:[283,55,-181],target:[234,3.5,-118],fov:48},
   // Looking +Z keeps the service road on the left, as in location.png.
   'irby-ashley-rear':{position:[223,35,-181],target:[238,4,-126],fov:48},

@@ -3,7 +3,7 @@
 // Map pixels, photograph-derived heights and concealed elevations are estimates.
 import {addAdminCorridorDetail} from './admin-corridor-detail.mjs';
 import {addFarndonCorridor,FARNDON_CORRIDOR,FARNDON_CORRIDOR_VIEWS} from './farndon-corridor.mjs';
-import {addWardCorridors} from './ward-corridors.mjs';
+import {addWardCorridors,WARD_CORRIDOR_NODES} from './ward-corridors.mjs';
 import {addHaleCorridors,HALE_CORRIDOR_RUNS} from './hale-corridors.mjs';
 export const ADMIN_OS_REGISTRATION=Object.freeze({u:62,v:37,x:0,z:13,scaleX:1.5,scaleZ:1.6});
 export function adminMapPoint(u,v){const r=ADMIN_OS_REGISTRATION;return [r.x+(u-r.u)*r.scaleX,r.z+(v-r.v)*r.scaleZ];}
@@ -293,7 +293,7 @@ export function createMainAdminBuilding(THREE,{brick,roof,worldUV,material}){
   corridor.userData.footprints=sections.map(s=>({minX:s.start,maxX:s.end,minZ:s.cz-s.depth/2,maxZ:s.cz+s.depth/2}));
   corridor.userData.footprint={minX:start,maxX:end,minZ:connectorFront-11.8,maxZ:connectorFront};
   addFarndonCorridor(THREE,{corridor,brick,roof,material,worldUV,
-    omitWindow:(distance,side)=>side===-1&&HALE_CORRIDOR_RUNS.some(run=>Math.abs(FARNDON_CORRIDOR.startZ-distance-run.end[1])<FARNDON_CORRIDOR.width/2+.8)});
+    omitWindow:(z,side)=>side===-1&&[...HALE_CORRIDOR_RUNS.map(run=>run.end[1]),WARD_CORRIDOR_NODES.farndon[1]].some(jointZ=>Math.abs(z-jointZ)<FARNDON_CORRIDOR.width/2+.8)});
   addWardCorridors(THREE,{corridor,brick,roof,material,worldUV});
   addHaleCorridors(THREE,{corridor,brick,roof,material,worldUV});
   corridor.userData.reference='Research/admin-corridor/README.md: the red-marked photograph refines the Redesmere-side 60% into a deeper single-storey building with a raised hipped slate roof; the rest stays a low corridor. Front wall alignment and concealed Redesmere joint retained. Ivy-fronted range and its chimney unchanged. Heights/depth and concealed elevations are estimates; arched window detail follows the earlier winter reference.';

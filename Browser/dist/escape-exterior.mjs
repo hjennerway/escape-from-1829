@@ -23,6 +23,7 @@ import {createHaleWard} from './hale-daresbury-huxley-dunham.mjs';
 import {createEstatesDepartment} from './estates-department.mjs';
 import {createFarndon} from './farndon-ward.mjs';
 import {createWitbyWard} from './witby-ward.mjs';
+import {placeWard} from './ward-placement.mjs';
 import {createLaundry} from './laundry.mjs';
 import {createMainAdminBuilding} from './main-admin-building.mjs';
 import {eastPhotoProfile,addEastPhotoDetails} from './east-photo-detail.mjs';
@@ -327,6 +328,10 @@ export function createEscapeExterior(THREE,aspect){
   farndonWard.userData.openings=farndonWard.userData.openings.filter(o=>!o.corridorContact);
   witbyWard.getObjectByName('Witby rear connection sash').removeFromParent();
   witbyWard.userData.openings=witbyWard.userData.openings.filter(o=>!o.corridorContact);
+  // Reposition only the selected buildings after copying their source geometry.
+  // Corridor routes independently reconnect to these final ward positions.
+  placeWard(irbyAshley,'irbyAshley');placeWard(farndonWard,'farndon');placeWard(witbyWard,'witby');
+  placeWard(graftonEdge,'graftonEdge');placeWard(haleWard,'haleWard');
   const {building:mainAdmin,corridor:adminCorridor}=createMainAdminBuilding(THREE,{brick:photoBrick,roof,worldUV,material});model.add(mainAdmin,adminCorridor);
   const laundry=createLaundry(THREE,{brick:photoBrick,roof,worldUV,material,adminCorridor});model.add(laundry);
   const chapel=createChapel(THREE,{brick,roof,stone,dark,worldUV});model.add(chapel);

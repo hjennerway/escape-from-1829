@@ -1,6 +1,7 @@
 import {OS_FOOTPRINTS} from './historic-footprint-data.mjs';
 import {historicOSPoint} from './historic-footprints.mjs';
 import {photoDetailPrimitives} from './photo-detail-primitives.mjs';
+import {wardMapPoint} from './ward-placement.mjs';
 
 // Retain the OS contour as modelling coordinates. The later yellow-line
 // correction rotates it clockwise; the blue-to-yellow correction then slides
@@ -8,7 +9,11 @@ import {photoDetailPrimitives} from './photo-detail-primitives.mjs';
 export const ESTATES_SOURCE_FOOTPRINT=Object.freeze(OS_FOOTPRINTS[1].loops[0]
  .map(p=>Object.freeze(historicOSPoint(...p))));
 const sourceOrigin={x:244,z:-49.5};
-export const ESTATES=Object.freeze({x:246.3,z:-49.5,rotation:-19*Math.PI/180,eave:7.6,layout:'historic',
+// Blue-circled Estates centre in the latest OS reference, fitted to the same
+// fixed church and Churton anchors as the wards. Retain the established angle.
+export const ESTATES_MAP_REFERENCE=Object.freeze({source:'Research/ward-placement/estates-plan.png',pixel:[167,145]});
+const [estatesX,estatesZ]=wardMapPoint(ESTATES_MAP_REFERENCE.pixel).map(n=>Math.round(n*10)/10);
+export const ESTATES=Object.freeze({x:estatesX,z:estatesZ,rotation:-19*Math.PI/180,eave:7.6,layout:'historic',
  reference:'Research/estates/README.md'});
 export function estatesPoint(x,y,z){
  const c=Math.cos(ESTATES.rotation),s=Math.sin(ESTATES.rotation),dx=x-sourceOrigin.x,dz=z-sourceOrigin.z;
@@ -20,7 +25,7 @@ export const ESTATES_VIEWS=Object.freeze({
  estates:{position:estatesPoint(201,36,-78),target:estatesPoint(244,3,-49.5),fov:48},
  'estates-plan':{position:[ESTATES.x,76,ESTATES.z+.01],target:[ESTATES.x,0,ESTATES.z],fov:46},
  'estates-photo':{position:estatesPoint(227,1.9,-47.4),target:estatesPoint(248.5,3.9,-49.5),fov:64},
- 'estates-site':{position:[161,129,-206],target:[233,0,-77],fov:48}
+ 'estates-site':{position:[161+ESTATES.x-246.3,129,-206+ESTATES.z+49.5],target:[233+ESTATES.x-246.3,0,-77+ESTATES.z+49.5],fov:48}
 });
 
 export function createEstatesDepartment(THREE,{brick,roof,worldUV,material}){

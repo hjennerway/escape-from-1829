@@ -35,6 +35,12 @@ The two inferred Churton road approaches stop clear of the new walls and their
 kerbs. Two orchard trees whose crowns intersected the cross range are removed;
 the remaining tree shapes and saved modern road paths retain their values.
 
+The later blue/yellow end-alignment annotation shortens the opposite end of
+the tower-side cross range from x=83.8 to x=95.62, aligning it with the
+Grafton-side end return. The 11.82-unit reduction carries the walls, sash
+spacing, roof hip and walking boundary inward together. These are source
+coordinates; both ends receive the same ward-placement offset.
+
 ## Two corridor links
 
 `corridor-reference.png` adds the two red-marked connections from the tower-side

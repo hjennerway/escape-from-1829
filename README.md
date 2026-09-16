@@ -285,3 +285,13 @@ Choose **Farndon ward** in Locations, or use `aerial.html?view=farndon`, `?view=
 ## Witby Ward
 
 Witby Ward duplicates Farndon in the yellow-circled OS footprint southwest of the original, retaining its size, roof details, windows and open courts. It appears in Historic and walking/gameplay. Choose **Witby Ward** in Locations, or open aerial.html?view=witby, ?view=witby-plan, ?view=witby-site, or explore.html?view=witby. [Placement notes](Research/witby/README.md) record the approximate OS alignment.
+
+The later colour-marked overhead map repositions Witby, Farndon, Ashley/Irby,
+Grafton/Edge and Hale/Daresbury/Huxley/Dunham against the fixed church and
+Churton. Building shapes, sizes and orientations are retained; their camera
+views and walking collisions follow the moves. The corridor reconnection keeps
+the Main–tower–Farndon gallery perfectly straight beside the tower's chimney
+side, at 90 degrees to Main, with Farndon's receiving wing aligned to it.
+Witby, Grafton and Hale's links reach their moved walls. Estates is also aligned
+to the same church/Churton map reference. See the updated
+[ward positions and overhead comparison](Research/ward-placement/README.md).

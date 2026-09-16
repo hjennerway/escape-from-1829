@@ -1,16 +1,26 @@
 import {addAdminCorridorDetail} from './admin-corridor-detail.mjs';
+import {WARD_POSITIONS} from './ward-placement.mjs';
 
 // The blue route leaves the east/west admin connector at a right angle,
 // follows the tower's existing service ranges and meets Farndon's rear wing.
-export const FARNDON_CORRIDOR=Object.freeze({x:156.3,startZ:9.8,endZ:-147.5,width:5.4,height:3.6,rise:.64});
+// A single axis passes into Main/admin, through the tower service range and
+// into Farndon's moved rear wing. No dogleg or intermediate turn.
+export const FARNDON_SOURCE_CONTACT_X=156.3;
+export const FARNDON_CORRIDOR=Object.freeze({x:156.3,startZ:9.8,
+ endZ:-147.5+WARD_POSITIONS.farndon.z+160.8,width:5.4,height:3.6,rise:.64});
+const route=FARNDON_CORRIDOR;
+export const FARNDON_CORRIDOR_RUNS=Object.freeze([
+ Object.freeze({name:'Straight corridor to Farndon',start:[route.x,route.startZ],end:[route.x,route.endZ],
+  detailRanges:[[3.2,26.4],[83.9,route.startZ-route.endZ-.4]]})
+]);
 export const FARNDON_CORRIDOR_VIEWS=Object.freeze({
  'farndon-corridor':{position:[205,178,142],target:[170,2,-65],fov:49},
  'farndon-corridor-plan':{position:[158,275,-68.99],target:[158,0,-69],fov:48},
  'ward-corridors':{position:[149,196,32],target:[94,0,-147],fov:49},
  'ward-corridors-plan':{position:[78,265,-160.99],target:[78,0,-161],fov:48}
 });
-export const FARNDON_CORRIDOR_WALK=Object.freeze({position:[166,1.8,-113],target:[157,2,-143],fov:62});
-export const WARD_CORRIDOR_WALK=Object.freeze({position:[111,1.8,-188],target:[99,2,-196],fov:62});
+export const FARNDON_CORRIDOR_WALK=Object.freeze({position:[166,1.8,-113],target:[156.3,2,-130],fov:62});
+export const WARD_CORRIDOR_WALK=Object.freeze({position:[124,1.8,-184],target:[115.6,2,-194.2],fov:62});
 
 export function createCorridorRun(THREE,{name,start,end,width=5.4,height=3.6,rise=.64,detailRanges,omitWindow,brick,roof,material,worldUV}){
  const length=Math.hypot(end[0]-start[0],end[1]-start[1]),route={width,height,rise};
@@ -37,13 +47,13 @@ export function createCorridorRun(THREE,{name,start,end,width=5.4,height=3.6,ris
 }
 
 export function addFarndonCorridor(THREE,{corridor,omitWindow,...materials}){
- const route=FARNDON_CORRIDOR;
- const branch=createCorridorRun(THREE,{...materials,omitWindow,name:'Straight corridor to Farndon',start:[route.x,route.startZ],end:[route.x,route.endZ],
-  // Only the exposed runs have windows; the middle passes through tower ranges.
-  detailRanges:[[6.6,-16.6],[-74.1,-147.3]].map(([south,north])=>[route.startZ-south,route.startZ-north])});
+ const run=FARNDON_CORRIDOR_RUNS[0],route=FARNDON_CORRIDOR;
+ const branch=createCorridorRun(THREE,{...materials,...run,
+  omitWindow:(distance,side)=>omitWindow?.(run.start[1]-distance,side)});
  branch.userData.route=route;corridor.add(branch);
- branch.userData.footprint={minX:route.x-route.width/2,maxX:route.x+route.width/2,minZ:route.endZ,maxZ:route.startZ};
- corridor.userData.footprints.push(branch.userData.footprint);
- corridor.userData.footprint={...corridor.userData.footprint,minZ:route.endZ};
+ const footprint={minX:route.x-route.width/2,maxX:route.x+route.width/2,minZ:route.endZ,maxZ:route.startZ};
+ branch.userData.footprint=footprint;corridor.userData.footprints.push(footprint);
+ for(const key of ['minX','minZ'])corridor.userData.footprint[key]=Math.min(corridor.userData.footprint[key],footprint[key]);
+ for(const key of ['maxX','maxZ'])corridor.userData.footprint[key]=Math.max(corridor.userData.footprint[key],footprint[key]);
  return branch;
 }

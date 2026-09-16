@@ -1,5 +1,6 @@
 import {IRBY_ASHLEY,createIrbyAshley} from './irby-ashley.mjs';
 import {GRAFTON_REAR_ELEVATION,GRAFTON_REAR_FOOTPRINT} from './grafton-veranda.mjs';
+import {placeWardViews} from './ward-placement.mjs';
 
 // The marked bay is the OS range beside Upton/Frith/Oscroft. Its upper
 // (yellow) and lower (orange) edges are z=-188.01 and z=-141.74.
@@ -19,7 +20,7 @@ const [x,z]=graftonEdgePoint([IRBY_ASHLEY.x,IRBY_ASHLEY.z]);
 export const GRAFTON_EDGE=Object.freeze({...IRBY_ASHLEY,x,z,name:'Grafton/Edge',
  reference:'Research/grafton-edge/README.md'});
 export const GRAFTON_EDGE_FOOTPRINT=Object.freeze(GRAFTON_REAR_FOOTPRINT.map(p=>Object.freeze(graftonEdgePoint(p))));
-export const GRAFTON_EDGE_VIEWS=Object.freeze({
+export const GRAFTON_EDGE_VIEWS=placeWardViews('graftonEdge',GRAFTON_EDGE,{
  'grafton-edge':{position:[109,63,-111],target:[65.66,3,-164.88],fov:48},
  'grafton-edge-plan':{position:[65.66,107,-164.87],target:[65.66,0,-164.88],fov:46},
  'grafton-edge-site':{position:[139,205,68],target:[130,0,-166],fov:48},

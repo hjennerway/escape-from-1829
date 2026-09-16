@@ -1,6 +1,7 @@
 import {photoDetailPrimitives} from './photo-detail-primitives.mjs';
-import {HALE_CORRIDOR_RUNS} from './hale-corridors.mjs';
+import {HALE_CORRIDOR_CONTACTS} from './hale-corridors.mjs';
 import {FARNDON_CORRIDOR} from './farndon-corridor.mjs';
+import {placeWardViews} from './ward-placement.mjs';
 
 // The green strokes describe ward ranges in an oblique aerial, not screen-
 // space angles. Fit them to the estate axes between Grafton and the tower.
@@ -12,17 +13,17 @@ export const HALE_WARD_FOOTPRINT=Object.freeze([
  [95.62,-140.89],[121.86,-140.89],[121.86,-131],[131,-131],
  [131,-123],[121.86,-123],[121.86,-111.71],[137,-111.71],
  [137,-103.7],[121.86,-103.7],[121.86,-89.11],[145,-89.11],
- [145,-81.2],[83.8,-81.2],[83.8,-89.11],[112.54,-89.11],
+ [145,-81.2],[95.62,-81.2],[95.62,-89.11],[112.54,-89.11],
  [112.54,-132],[95.62,-132]
 ].map(p=>Object.freeze(p)));
 export const HALE_WARD_ROOFS=Object.freeze([
- {name:'Tower-side cross range',rect:[83.8,-89.11,145,-81.2],axis:'x',rise:2.25},
+ {name:'Tower-side cross range',rect:[95.62,-89.11,145,-81.2],axis:'x',rise:2.25},
  {name:'Connecting spine',rect:[112.54,-140.89,121.86,-81.2],axis:'z',rise:2.65},
  {name:'Middle courtyard wing',rect:[112.54,-111.71,137,-103.7],axis:'x',rise:2.3},
  {name:'Grafton-side courtyard wing',rect:[112.54,-131,131,-123],axis:'x',rise:2.3},
  {name:'Opposite end return',rect:[95.62,-140.89,121.86,-132],axis:'x',rise:2.5}
 ]);
-export const HALE_WARD_VIEWS=Object.freeze({
+export const HALE_WARD_VIEWS=placeWardViews('haleWard',HALE_WARD,{
  'hale-daresbury-huxley-dunham':{position:[62,89,-210],target:[119,2,-111],fov:48},
  'hale-daresbury-huxley-dunham-plan':{position:[118.7,113,-110.99],target:[118.7,0,-111],fov:46},
  'hale-daresbury-huxley-dunham-site':{position:[33,183,-291],target:[114,3,-115],fov:48},
@@ -71,7 +72,7 @@ export function createHaleWard(THREE,{brick,roof,worldUV,material}){
   for(let n=0;n<count;n++){
    const t=(n+.5)/count,x=a[0]+dx*t+nx*.035,z=a[1]+dz*t+nz*.035;
    const entry=(i===0||i===8)&&n===Math.floor(count/2);
-   const corridorContact=nx>.9&&HALE_CORRIDOR_RUNS.some(run=>Math.abs(x+cx-run.wardFaceX)<.1&&Math.abs(z+cz-run.start[1])<FARNDON_CORRIDOR.width/2+.86);
+   const corridorContact=nx>.9&&HALE_CORRIDOR_CONTACTS.some(run=>Math.abs(x+cx-run.wardFaceX)<.1&&Math.abs(z+cz-run.start[1])<FARNDON_CORRIDOR.width/2+.86);
    if(!corridorContact){if(entry)detail.door(x,z,r);else sash(x,2.05,z,r,2.65);}
    sash(x,5.9,z,r,2.75);
   }

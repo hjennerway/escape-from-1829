@@ -35,3 +35,12 @@ in `explore.html`. Geometry is in `farndon-corridor.mjs` and `ward-corridors.mjs
 `node Browser/test-ward-corridors.mjs` checks all ward contacts, roof continuity,
 the perpendicular and diagonal routes, open grass, collisions and visibility.
 Unity and Blender exports are unchanged.
+
+The later ward-placement correction retains the blue gallery axis at x=156.3,
+directly beside the tower on its chimney side. The gallery is one straight
+run perpendicular to Main, shortened to the moved Farndon rear face at
+z=-132.1. Farndon's receiving wing is aligned to this axis. The 45-degree
+spine and Upton endpoint stay fixed; Witby and Grafton's branch endpoints and
+Hale's two links now follow their corrected building positions. This supersedes
+the extension endpoints above. See the current [overhead comparison and
+positions](../ward-placement/README.md).

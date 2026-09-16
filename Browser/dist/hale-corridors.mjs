@@ -1,11 +1,18 @@
 import {createCorridorRun,FARNDON_CORRIDOR} from './farndon-corridor.mjs';
+import {WARD_POSITIONS} from './ward-placement.mjs';
 
 // The two red strokes extend the shortened wing axes to the existing gallery.
 // Start just inside the ward walls; end on the gallery ridge for a closed T join.
-export const HALE_CORRIDOR_RUNS=Object.freeze([
+export const HALE_CORRIDOR_CONTACTS=Object.freeze([
  {name:'Hale tower-side corridor',wardFaceX:145,start:[144.7,-85.155],end:[FARNDON_CORRIDOR.x,-85.155]},
  {name:'Hale middle-wing corridor',wardFaceX:137,start:[136.7,-107.705],end:[FARNDON_CORRIDOR.x,-107.705]}
 ].map(run=>Object.freeze({...run,start:Object.freeze(run.start),end:Object.freeze(run.end)})));
+const offset={x:WARD_POSITIONS.haleWard.x-118.7,z:WARD_POSITIONS.haleWard.z+111};
+export const HALE_CORRIDOR_RUNS=Object.freeze(HALE_CORRIDOR_CONTACTS.map(run=>{
+ const z=run.start[1]+offset.z;
+ return Object.freeze({...run,wardFaceX:run.wardFaceX+offset.x,
+  start:Object.freeze([run.start[0]+offset.x,z]),end:Object.freeze([FARNDON_CORRIDOR.x,z])});
+}));
 
 export function addHaleCorridors(THREE,{corridor,...materials}){
  const group=new THREE.Group();group.name='Hale connecting corridors';corridor.add(group);

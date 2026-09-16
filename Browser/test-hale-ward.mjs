@@ -7,28 +7,29 @@ import {HALE_WARD,HALE_WARD_FOOTPRINT,HALE_WARD_VIEWS} from './dist/hale-daresbu
 import {pointInFootprint} from './dist/historic-footprints.mjs';
 import {exteriorObstacles,obstacleContains} from './dist/explore-controls.mjs';
 import {HALE_CORRIDOR_RUNS} from './dist/hale-corridors.mjs';
-import {FARNDON_CORRIDOR} from './dist/farndon-corridor.mjs';
+import {FARNDON_CORRIDOR,FARNDON_CORRIDOR_RUNS} from './dist/farndon-corridor.mjs';
 
 globalThis.document={createElement:()=>({getContext:()=>({fillRect(){},measureText:t=>({width:t.length*16}),strokeText(){},fillText(){}})})};
 const exterior=createEscapeExterior(THREE,1.5),ward=exterior.haleWard;
+const offset=ward.userData.placement.offset,placed=([x,z])=>[x+offset.x,z+offset.z];
 assert.equal(ward.name,'Hale/Daresbury/Huxley/Dunham');assert.equal(ward.userData.storeys,2);
 assert.equal(HALE_WARD.eave,exterior.irbyAshley.userData.source.eave);
 assert.deepEqual(exterior.waterTower.position.toArray(),[148,0,-55.2]);
-assert.deepEqual(exterior.irbyAshley.position.toArray(),[234,0,-118]);
+assert.deepEqual(exterior.irbyAshley.position.toArray(),[234,0,-93.4]);
 const footprint=HALE_WARD_FOOTPRINT;
 for(let i=0;i<footprint.length;i++){
  const a=footprint[i],b=footprint[(i+1)%footprint.length],c=footprint[(i+2)%footprint.length];
  assert(Math.abs((b[0]-a[0])*(c[0]-b[0])+(b[1]-a[1])*(c[1]-b[1]))<1e-9,'Every turn must be 90 degrees in ground plan');
 }
 // Independently chosen interior picks in every green stroke, and its open courts.
-const solids=[[89,-85],[143,-85],[117,-96],[131,-107],[117,-118],[127,-127],[104,-136],[117,-138]];
-const clear=[[104,-107],[134,-96],[133,-117],[146,-125],[132,-138],[87,-135],[149,-85],[141,-107],[136,-127]];
+const solids=[[97,-85],[143,-85],[117,-96],[131,-107],[117,-118],[127,-127],[104,-136],[117,-138]];
+const clear=[[89,-85],[94.5,-85],[104,-107],[134,-96],[133,-117],[146,-125],[132,-138],[87,-135],[149,-85],[141,-107],[136,-127]];
 for(const p of solids)assert(pointInFootprint(p,footprint),'Green ward range must be solid: '+p);
 for(const p of clear)assert(!pointInFootprint(p,footprint),'Open court must remain outside the walls: '+p);
 const layouts=createAerialLayouts(THREE,exterior);exterior.scene.updateMatrixWorld(true);
 assert.equal(ward.parent,layouts.historic);
 const ray=new THREE.Raycaster();
-function down(x,z){ray.set(new THREE.Vector3(x,30,z),new THREE.Vector3(0,-1,0));return ray.intersectObject(ward,true)[0];}
+function down(x,z){ray.set(new THREE.Vector3(x+offset.x,30,z+offset.z),new THREE.Vector3(0,-1,0));return ray.intersectObject(ward,true)[0];}
 for(const p of solids){down(...p);assert(ray.intersectObject(ward,true).some(hit=>hit.object.name.endsWith('slate roof')),'Roof must cover every ward wing: '+p);}
 for(const p of clear)assert(!down(...p),'Roof must leave court open: '+p);
 // Sample the connected roof at its re-entrant junctions as well as wing centres.
@@ -50,10 +51,13 @@ for(const o of ward.userData.openings){
 const start=HALE_WARD_VIEWS['hale-daresbury-huxley-dunham-ground'].position;
 const links=exterior.adminCorridor.getObjectByName('Hale connecting corridors');
 assert.equal(links.children.length,2,'Only the two red-marked wings get corridor links');
-assert.deepEqual(HALE_CORRIDOR_RUNS.map(run=>[run.wardFaceX,run.start[1]]),[[145,-85.155],[137,-107.705]]);
+for(const [i,contact] of [[145,-85.155],[137,-107.705]].entries()){
+ assert(Math.abs(HALE_CORRIDOR_RUNS[i].wardFaceX-contact[0]-offset.x)<1e-9);
+ assert(Math.abs(HALE_CORRIDOR_RUNS[i].start[1]-contact[1]-offset.z)<1e-9);
+}
 for(const run of HALE_CORRIDOR_RUNS){
- assert(pointInFootprint(run.start,footprint),'Link starts within the ward wall');
- assert.equal(run.end[0],FARNDON_CORRIDOR.x,'Link reaches the existing gallery ridge');
+ assert(pointInFootprint(run.start,ward.userData.footprint),'Link starts within the moved ward wall');
+ assert.equal(run.end[0],FARNDON_CORRIDOR.x,'Link reaches the straight gallery ridge');
  assert.equal(run.start[1],run.end[1],'Link continues the wing axis at a right angle to the gallery');
  const branch=links.getObjectByName(run.name);
  assert.equal(branch.userData.width,FARNDON_CORRIDOR.width);
@@ -69,20 +73,21 @@ for(const run of HALE_CORRIDOR_RUNS){
   const normal=o.geometry.attributes.normal;for(let i=0;i<normal.count;i++)assert(normal.getY(i)>0);
  }});
 }
-const gallery=exterior.adminCorridor.getObjectByName('Straight corridor to Farndon');
 for(const run of HALE_CORRIDOR_RUNS){
- const joinedLights=gallery.userData.openings.filter(o=>Math.abs(FARNDON_CORRIDOR.startZ-o.x-run.end[1])<FARNDON_CORRIDOR.width/2+.8);
+ const galleryRun=FARNDON_CORRIDOR_RUNS.find(segment=>segment.start[0]===run.end[0]&&segment.end[0]===run.end[0]);
+ const gallery=exterior.adminCorridor.getObjectByName(galleryRun.name);
+ const joinedLights=gallery.userData.openings.filter(o=>Math.abs(galleryRun.start[1]-o.x-run.end[1])<FARNDON_CORRIDOR.width/2+.8);
  assert(!joinedLights.some(o=>o.side===-1),'No gallery glazing inside the new junctions');
- assert(joinedLights.some(o=>o.side===1),'Opposite gallery windows stay in place');
+ if(run.end[1]<-74.1)assert(joinedLights.some(o=>o.side===1),'Opposite exposed gallery windows stay in place');
 }
 ray.set(new THREE.Vector3(135,20,-127),new THREE.Vector3(0,-1,0));
 assert.equal(ray.intersectObject(links,true).length,0,'The unmarked third wing has no new corridor');
 for(const historic of [true,false])for(const modern of [true,false]){
  layouts.setVisible('historic',historic);layouts.setVisible('modern',modern);
  const obstacles=exteriorObstacles(THREE,exterior.model);
- for(const p of solids)assert.equal(obstacles.some(o=>obstacleContains(o,...p)),historic,'Walking follows visible ward walls: '+p);
- for(const p of [[149,-85.155],[146,-107.705]])assert.equal(obstacles.some(o=>obstacleContains(o,...p)),historic,'The two corridor links follow Historic collisions');
- for(const p of [[134,-96],[133,-117],[104,-107],[start[0],start[2]]])assert(!obstacles.some(o=>obstacleContains(o,...p)),'Courtyard and walking start must remain accessible: '+p);
+ for(const p of solids)assert.equal(obstacles.some(o=>obstacleContains(o,...placed(p))),historic,'Walking follows visible ward walls: '+p);
+ for(const run of HALE_CORRIDOR_RUNS)assert.equal(obstacles.some(o=>obstacleContains(o,(run.start[0]+run.end[0])/2,run.start[1])),historic,'The two corridor links follow Historic collisions');
+ for(const p of [...[[89,-85],[94.5,-85],[134,-96],[133,-117],[104,-107]].map(placed),[start[0],start[2]]])assert(!obstacles.some(o=>obstacleContains(o,...p)),'Cleared end, courtyard and walking start must remain accessible: '+p);
 }
 const outline=layouts.historicRoads.userData.missingFootprints.segments;
 assert(!outline.some(s=>s.points.some(([x,z])=>x>84&&x<152&&z>-141&&z<-71)),'Superseded outlines must not cross the new courts');

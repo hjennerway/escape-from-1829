@@ -1,5 +1,6 @@
 import {photoDetailPrimitives} from './photo-detail-primitives.mjs';
-import {FARNDON_CORRIDOR} from './farndon-corridor.mjs';
+import {FARNDON_CORRIDOR,FARNDON_SOURCE_CONTACT_X} from './farndon-corridor.mjs';
+import {placeWardViews} from './ward-placement.mjs';
 
 // The corrected blue outline in img1.png overrides the older OS silhouette.
 // See Tools/register_farndon.mjs and Research/farndon/README.md.
@@ -21,13 +22,14 @@ const bayFront=FARNDON_GARDEN_BAY.wallZ-FARNDON_GARDEN_BAY.depth;
 const bayOutline=[[bayX0,-160.9],[bayX0,bayFront],[bayX1,bayFront],[bayX1,-160.9]];
 export const FARNDON_FOOTPRINT=Object.freeze(FARNDON_BLUE_FOOTPRINT.flatMap((p,i)=>
  i===16?[p,...bayOutline]:[p]).map(p=>Object.freeze(p)));
-export const FARNDON_VIEWS=Object.freeze({
+export const FARNDON_MODEL_VIEWS=Object.freeze({
  farndon:{position:[209,57,-224],target:[173.7,1.8,-159],fov:48},
  'farndon-plan':{position:[173.7,96,-160.81],target:[173.7,0,-160.8],fov:46},
  'farndon-site':{position:[147,195,-269],target:[147,0,-137],fov:54},
  // Yellow dot is beyond the open garden, looking towards the transverse range.
- 'farndon-2':{position:[157.5,1.9,-207],target:[174.5,2.9,-160.9],fov:60}
+ 'farndon-2':{position:[161.5,1.9,-207],target:[174.5,2.9,-160.9],fov:60}
 });
+export const FARNDON_VIEWS=placeWardViews('farndon',FARNDON,FARNDON_MODEL_VIEWS);
 // Yellow ridge correction: one level H, with straight wing ridges even where
 // the rear walls step inward. Only the two outer rear ends retain hips.
 export const FARNDON_RIDGES=Object.freeze({
@@ -72,7 +74,7 @@ export function createFarndon(THREE,{brick,roof,worldUV,material}){
  detail.blue.color.set(0xc5cec9);
  function sash(wx,wz,r,w=1.32,h=2.85,y=2.24){
   const x=wx-cx,z=wz-cz;
-  const corridorContact=Math.abs(wz+147.27)<.01&&Math.abs(wx-FARNDON_CORRIDOR.x)<FARNDON_CORRIDOR.width/2+w/2;
+  const corridorContact=Math.abs(wz+147.27)<.01&&Math.abs(wx-FARNDON_SOURCE_CONTACT_X)<FARNDON_CORRIDOR.width/2+w/2;
   activeBatches=corridorContact?connectionBatches:batches;
   detail.sash('Farndon tall multi-pane sash',x,y,z,r,w,h);
   box(red,x+Math.sin(r)*.075,y+h/2+.17,z+Math.cos(r)*.075,w+.31,.18,.19,r);
