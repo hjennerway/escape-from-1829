@@ -2,7 +2,6 @@ import {addRedesmereGardenDetails} from './redesmere-garden-photo-detail.mjs';
 import {addEastForwardEndPhotoDetails} from './east-forward-end-photo-detail.mjs';
 import {addWestForwardEndPhotoDetails} from './west-forward-end-photo-detail.mjs';
 import {addEastEntranceMirror} from './entrance-symmetry.mjs';
-import {photoDetailPrimitives} from './photo-detail-primitives.mjs';
 import {addWestWingPhotoDetails} from './west-wing-photo-detail.mjs';
 // Visible east forecourt, from 20260912_172141.jpg and the user's camera mark.
 // Coordinates are visual estimates. Keep the window schedule explicit so later
@@ -25,8 +24,8 @@ export function eastPhotoProfile(x,z){
     (Math.abs(x-81.875)<.01&&z===8);
 }
 
-export function addEastPhotoDetails(THREE,{model,box,mesh,worldUV,white,brick,roof,steel,material,hipRoof}){
-  const {frame,glass,iron,stone,sash,door,rod}=photoDetailPrimitives(THREE,{model,box,mesh,white,steel,material});
+export function addEastPhotoDetails(THREE,{model,box,mesh,worldUV,white,brick,roof,steel,material,hipRoof,details}){
+  const {frame,glass,iron,stone,sash,door,rod}=details;
   // The two-storey forward wing: nine positions on its east wall. The eighth
   // position is the blue entrance and upper escape door, not another window.
   const sideZ=[17.3,20,22.3,25.1,27.4,31.2,33.5,38.1,42];

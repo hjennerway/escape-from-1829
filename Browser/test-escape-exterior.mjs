@@ -40,6 +40,41 @@ for(const aspect of [16/9,4/3,9/16])for(const seconds of [0,1,1.75,2.5]){
   }
 }
 const ray=new THREE.Raycaster(new THREE.Vector3(20,80,12),new THREE.Vector3(0,-1,0));
+
+// The marked rear-arm joins are solid and meet the main ridge without a gap
+// or a height step. Sample the completed model, including intersecting roofs.
+for(const side of [-1,1]){
+  const join=exterior.model.getObjectByName((side<0?'West':'East')+' wing connecting walls');
+  const bounds=new THREE.Box3().setFromObject(join);
+  assert(bounds.min.z<=5&&bounds.max.z>=7,'connecting walls close the former separation');
+  const ridgeHeights=[];
+  for(const z of [2,4,5,5.5,6,6.5,7,9,11.9,12,12.01]){
+    ray.set(new THREE.Vector3(side*31,30,z),new THREE.Vector3(0,-1,0));
+    const hit=ray.intersectObject(exterior.model,true)[0];
+    assert(hit.object.material.map&&hit.face.normal.clone().transformDirection(hit.object.matrixWorld).y>0,'junction exposes upward-facing slate');
+    ridgeHeights.push(hit.point.y);
+  }
+  assert(Math.max(...ridgeHeights)-Math.min(...ridgeHeights)<.02,'wing junction ridge stays level into the main roof');
+  ray.set(new THREE.Vector3(side*22,30,12),new THREE.Vector3(0,-1,0));
+  assert(Math.abs(ray.intersectObject(exterior.model,true)[0].point.y-ridgeHeights[0])<1e-5,'connecting and main ridges have the same height');
+  for(const dx of [-5,-3,0,3,5])for(const z of [5.25,6,6.75]){
+    ray.set(new THREE.Vector3(side*31+dx,30,z),new THREE.Vector3(0,-1,0));
+    assert(ray.intersectObject(exterior.model,true)[0].point.y>13,'slate covers the entire former roof gap');
+  }
+}
+// Previously generic windows on both marked front sections now expose the
+// same three-light sash glazing and fine frame material as the photo windows.
+for(const x of [-32.9,42.5]){
+  const o=exterior.model.userData.eastPhotoOpenings.find(o=>o.face==='1829-range-sash'&&Math.abs(o.x-x)<.01&&Math.abs(o.y-10.6)<.01&&o.z>17);
+  assert(o,'remaining front opening uses the shared sash schedule');
+  for(const [offset,color] of [[0,0x78989f],[-o.w/6,0xd3dcd8],[o.w/6,0xd3dcd8]]){
+    ray.set(new THREE.Vector3(o.x+offset,o.y+o.h/12,22),new THREE.Vector3(0,0,-1));
+    const hit=ray.intersectObject(exterior.model,true)[0];
+    assert(hit.point.z>o.z&&hit.point.z<o.z+.25,'updated sash is exposed on its wall');
+    assert.equal(hit.object.material.color.getHex(),color,'three-light panes and frame finish match the shared style');
+  }
+}
+
 // img18: windows must remain exposed in front of the actual whole model,
 // and the bay's separate roof must face upward beside the original roof.
 const lawnOpenings=exterior.model.userData.westLawnPhotoOpenings;

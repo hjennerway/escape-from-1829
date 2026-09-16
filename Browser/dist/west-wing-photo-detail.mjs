@@ -2,6 +2,7 @@
 // coordinates, reusing its inner elevation and stairs, then reflect at x=0.
 import {addInnerCourtPhotoDetails,INNER_COURT_SIDE_PROFILE} from './inner-court-photo-detail.mjs';
 import {photoDetailPrimitives} from './photo-detail-primitives.mjs';
+import {wingWallGeometry,addWingRoofJunction} from './wing-roof-junctions.mjs';
 
 export const WEST_WING_SIDE_VIEW=Object.freeze({position:[-65,1.8,-21],target:[-34,7,-12],fov:65});
 export const WEST_WING_END_VIEW=Object.freeze({position:[-31,1.8,-60],target:[-31,7,-29],fov:57});
@@ -21,7 +22,7 @@ export function addWestWingPhotoDetails(THREE,{model,worldUV,white,brick,roof,st
   const ctx={model:wing,box,mesh,worldUV,white,brick,roof,steel,material};
   const details=photoDetailPrimitives(THREE,ctx),{sash,iron,stone,frame,glass}=details;
   // The same 12 x 30 main arm and 13 x 11 end footprint as the east wing.
-  mesh(worldUV(new THREE.BoxGeometry(12,14.3,30),1.7),brick,31,7.15,-10,true).name='West wing main brick range';
+  mesh(worldUV(wingWallGeometry(THREE),1.7),brick,31,7.15,-10,true).name='West wing main brick range';
   addInnerCourtPhotoDetails(THREE,{...ctx,...details},{
     profile:WEST_WING_PROFILE,eaves:14.3,customOuterFaces:true,includeGrounds:false
   });
@@ -33,8 +34,12 @@ export function addWestWingPhotoDetails(THREE,{model,worldUV,white,brick,roof,st
     box(white,x,14.05,z,w+.35,.16,d+.35);
     box(white,x,14.42,z,w+.35,.22,d+.35);
   }
-  cornice(31,-10,12,30);cornice(31,-27.5,13,6);
-  hipRoof(-31,-12.75,13,35.5,14.53,3.6).name='West wing grey hipped roof';
+  cornice(31,-27.5,13,6);
+  // Build the junction in source coordinates before reflecting this group.
+  addWingRoofJunction(THREE,{worldUV,brick,white,roof,
+    mesh:(geometry,mat,x,y,z,...rest)=>mesh(geometry,mat,-x,y,z,...rest),
+    box:(mat,x,y,z,...rest)=>box(mat,-x,y,z,...rest)
+  },-1);
   const outerColumns=[-29,-25.8,-22,-18.1,-14.2,-10.3,-6.4,-2.5];
   for(const z of outerColumns){
     const x=z<-24.5?37.57:37.07;
@@ -43,7 +48,7 @@ export function addWestWingPhotoDetails(THREE,{model,worldUV,white,brick,roof,st
   }
   for(const [x,z,d] of [[37.09,-10,30],[37.59,-27.5,6]]){
     box(white,x,4.02,z,.25,.4,d);
-    box(iron,x+.06,14,z,.13,.12,d);
+    if(z<-24.5)box(iron,x+.06,14,z,.13,.12,d);
   }
   // Three upper end openings: the central sash is wider with narrow sidelights.
   for(const x of [27,31,35])sash('west-wing-upper-end',x,11.55,-30.58,Math.PI,x===31?1.45:1.4,2.7);
@@ -76,7 +81,7 @@ export function addWestWingPhotoDetails(THREE,{model,worldUV,white,brick,roof,st
     const seam=mesh(new THREE.BoxGeometry(.035,.06,5.8/Math.cos(pitch)),iron,x,(WEST_WING_PROFILE.rearEaves+WEST_WING_PROFILE.frontEaves)/2+.11,-33);
     seam.rotation.x=pitch;
   }
-  for(const z of [-24.45,4.75])box(iron,37.22,7,z,.09,14,.09);
+  for(const z of [-24.45,4.75])box(iron,37.22,z>0?6.35:7,z,.09,z>0?12.7:14,.09);
 
   const dummy=new THREE.Object3D();
   for(const [mat,items] of batches){

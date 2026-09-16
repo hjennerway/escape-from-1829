@@ -40,8 +40,8 @@ export const TOWER_RANGES=Object.freeze([
  // The old buried wall overlap under the west stores is not part of the moved outline.
  {name:'Chimney service hall',rect:[162.3,-40.5,185.83,TOWER_SERVICE_FRONT],roofRect:[162.3,-40.5,185.83,TOWER_SERVICE_FRONT],height:6.4,rise:7.2,axis:'x',roof:'hip-gable',gableEnd:'east',hipInset:4},
  {name:'Ramp entrance link',rect:[185.83,-32,196,TOWER_SERVICE_FRONT],height:6.4,roof:'flat'},
- {name:'South cross-gabled stores',rect:[196,-28.1,220.86,TOWER_SERVICE_FRONT],height:6.4,rise:3.9,axis:'x',roof:'gable'},
- {name:'Long east service range',rect:[208.8,-57.2,220.86,-28.1],height:6.4,rise:3.5,axis:'z',roof:'hip'},
+ {name:'South cross-gabled stores',rect:[196,-28.1,220.86,TOWER_SERVICE_FRONT],height:9.0,rise:3.9,axis:'x',roof:'gable'},
+ {name:'Long east service range',rect:[208.8,-57.2,220.86,-28.1],height:9.0,rise:3.5,axis:'z',roof:'hip'},
  {name:'North east stepped link',rect:[202,-57.2,211.4,-49],height:5.5,rise:2.1,axis:'x',roof:'gable'}
 ].map(range=>{
  if(!shiftedRanges.has(range.name))return range;
@@ -241,8 +241,29 @@ export function createTowerBuildings(THREE,exterior){
  // img3: blue double doors and a high gable light at the east end, with a
  // repeated high sash rhythm continuing north along the long range.
  door(220.89,2.05,towardsAdmin(-21.9),3.4,3.8,Math.PI/2,blue,'Blue stores double doors');
- sash(220.9,8.0,towardsAdmin(-22.35),1.3,2.1,Math.PI/2,'High stores gable sash');
- for(const z of [-30.4,-34.9,-39.4,-43.9,-48.4,-52.8])sash(220.89,4.2,towardsAdmin(z),1.3,2.4,Math.PI/2);
+ sash(220.9,10.55,towardsAdmin(-22.35),1.3,1.9,Math.PI/2,'High stores gable sash');
+ // main_redfine2/img2: tall upper sashes above a mostly solid ground storey.
+ for(const z of [-30.4,-34.9,-39.4,-43.9,-48.4,-52.8])sash(220.89,6.5,towardsAdmin(z),1.3,3.05,Math.PI/2,'Rear lane upper sash');
+ for(const z of [-51.1,-42.2])sash(220.89,1.65,towardsAdmin(z),1.45,1.95,Math.PI/2,'Rear lane ground sash');
+ door(220.9,1.6,towardsAdmin(-46.7),1.55,3.05,Math.PI/2,dark,'Rear lane recessed door');
+ door(220.9,1.85,towardsAdmin(-27.05),1.55,3.5,Math.PI/2,frame,'Court end pale service door');
+ // Shallow segmental brick heads sit above the lower openings.
+ for(const [z,width,head] of [[-51.1,1.45,2.74],[-42.2,1.45,2.74],[-46.7,1.55,3.24]]){
+  const triangles=[],radius=width/2+.12;
+  for(let i=0;i<16;i++){
+   const a=i*Math.PI/16,b=(i+1)*Math.PI/16;
+   const p=(t,outer)=>[221.04,head+Math.sin(t)*(.3+(outer?.2:0)),towardsAdmin(z)+Math.cos(t)*(radius+(outer?.2:0))];
+   triangles.push(p(a,false),p(b,true),p(b,false),p(a,false),p(a,true),p(b,true));
+  }
+  poly(triangles,red,'Rear lane segmental brick head');
+ }
+ const laneRange=TOWER_RANGES.find(r=>r.name==='Long east service range');
+ const laneZ=(laneRange.rect[1]+laneRange.rect[3])/2;
+ box(dark,220.98,9.04,laneZ,.17,.18,laneRange.rect[3]-laneRange.rect[1],'Rear lane eaves gutter');
+ for(const z of [-32.1,-40.5,-54.9]){
+  box(dark,221.02,4.5,towardsAdmin(z),.11,9,.11,'Rear lane downpipe');
+  line([221.02,.22,towardsAdmin(z)],[221.3,.22,towardsAdmin(z)+.4],dark,.055,'Rear lane drain shoe');
+ }
  for(const z of [-20.8,-26,-31.5,-37,-42.5,-47])sash(146.27,3.3,z,1.25,2.7,-Math.PI/2);
  for(const x of [149,154,159])sash(x,3.3,TOWER_SERVICE_FRONT+.03,1.3,2.7);
  // The chimney identifies the green img2 building. The tower-connected stores

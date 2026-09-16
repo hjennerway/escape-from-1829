@@ -86,9 +86,10 @@ export const HISTORIC_ROADS=Object.freeze([
  {name:'Annexe inner east road',width:6,points:annexeInnerEastRoad},
  {name:'Annexe outer east road',width:6,points:annexeOuterEastRoad},
  {name:'Northern diagonal road',width:6,points:[frontEast,ap(-198,84),ap(-245,84)]},
- // img4: the service court opens beside admin, then follows the east range.
+ // The service lane skirts the square east rooms revealed in main_redfine2/img1,
+ // returning to the established tower-side route north of the new extension.
  {name:'Admin north service road',width:6,points:bezier(frontWest,[
-  [[255,23],[239,10],[233,1]],[[229,-5],[229,-10],[229,-19]],
+  [[255,28],[254,16],[254,8]],[[254,0],[245,0],[239,-2]],[[230,-5],[229,-10],[229,-19]],
   [[229,-32],[229,-51],[233,-62]],[[236,-68],[242,-76],[247,-76]]
  ]).concat([[262,-76],[270,-84],[270,-132],[314,-176],[325,-176]])},
  {name:'Annexe east cross-drive',width:5,points:[[96,84],[96,25]].map(p=>ap(...p))},

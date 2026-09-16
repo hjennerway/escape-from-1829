@@ -1,4 +1,6 @@
 import {matchEstateGrass} from './estate-grass.mjs';
+import {photoDetailPrimitives} from './photo-detail-primitives.mjs';
+import {wingWallGeometry,addWingRoofJunction} from './wing-roof-junctions.mjs';
 // Aerial interpretation of the user's outlined 1829 estate photograph.
 // Front road/reception is +Z; the corrected mast position is rear-left (-X, -Z).
 import {createPlanterLayer} from './planter-layer.mjs';
@@ -144,21 +146,15 @@ export function createEscapeExterior(THREE,aspect){
     const g=new THREE.BufferGeometry();g.setAttribute('position',new THREE.Float32BufferAttribute(positions,3));g.setAttribute('uv',new THREE.Float32BufferAttribute(uv,2));g.computeVertexNormals();return mesh(g,roof,x,y,z,true);
   }
   function window(x,y,z,rotation=0){
-    box(dark,x,y,z,1.42,2.12,.16,rotation);
-    const dx=Math.cos(rotation),dz=-Math.sin(rotation),nx=Math.sin(rotation),nz=Math.cos(rotation);
-    box(glass,x+nx*.09,y,z+nz*.09,1.23,1.92,.06,rotation);
-    for(const s of [-1,1])box(cream,x+dx*s*.65+nx*.14,y,z+dz*s*.65+nz*.14,.085,2.12,.10,rotation);
-    for(const sy of [-1,0,1])box(cream,x+nx*.15,y+sy*1.01,z+nz*.15,1.42,.075,.12,rotation);
-    box(cream,x+nx*.16,y,z+nz*.16,.055,2,.08,rotation);
-    box(cream,x+nx*.18,y-1.12,z+nz*.18,1.7,.16,.33,rotation);
-    box(cream,x+nx*.17,y+1.16,z+nz*.17,1.65,.19,.23,rotation);
+    details.sash('1829-range-sash',x,y,z,rotation,1.12,2.45);
   }
   function block(x,z,w,d,h,passage=null){
     const eastInner=(x===36.5&&z===23)||(x===35&&z===35);
     const westDetail=westCourtPhotoProfile(x,z)||westFrontPhotoProfile(x,z)||eastInner;
     const detail=westDetail||eastPhotoProfile(x,z)||courtyardPhotoProfile(x,z)||rearCourtPhotoProfile(x,z)||redesmerePhotoProfile(x,z),foundation=detail&&!westDetail?4:2;
     const base=passage?Math.max(passage.height,foundation):foundation;
-    const body=mesh(worldUV(new THREE.BoxGeometry(w,h-base,d),detail?1.7:3),detail?photoBrick:brick,x,(h+base)/2,z,true);
+    const rearArm=x===31&&z===-10;
+    const body=mesh(worldUV(rearArm?wingWallGeometry(THREE,base):new THREE.BoxGeometry(w,h-base,d),detail?1.7:3),detail?photoBrick:brick,x,(h+base)/2,z,true);
     const lowerRanges=passage?[[x-w/2,Math.max(x-w/2,passage.x-passage.width/2)],[Math.min(x+w/2,passage.x+passage.width/2),x+w/2]]:[[x-w/2,x+w/2]];
     for(const [left,right] of lowerRanges){
       if(right<=left)continue;
@@ -171,7 +167,7 @@ export function createEscapeExterior(THREE,aspect){
     }
     // Outer east white base is retained beyond the mirrored brick inner wing.
     if(eastInner)box(white,41.02,2,z,.12,4,d);
-    box(cream,x,h-.12,z,w+.23,.22,d+.23);
+    if(!rearArm)box(cream,x,h-.12,z,w+.23,.22,d+.23);
     if(passage){
       const left=Math.max(x-w/2,passage.x-passage.width/2),right=Math.min(x+w/2,passage.x+passage.width/2);
       // Visible lintel/soffit above the opening, with no foundation across it.
@@ -179,14 +175,14 @@ export function createEscapeExterior(THREE,aspect){
       body.name='East courtyard bridge';
     }
     const rearEnd=x===-31&&z===-30;
-    box(stone,x,rearEnd?h-.1:h+.12,z,w+.48,.22,d+.48);
+    if(!rearArm)box(stone,x,rearEnd?h-.1:h+.12,z,w+.48,.22,d+.48);
     const principal=x===EAST_SHIFT/2&&z===12;
     if(principal){
       // Pitched slate clears the solid cornice slab (top h+.23).
-      hipRoof(-35,12,6,d,h+.23,2);
-      hipRoof(-19.55,12,24.9,d,h+.26,2.6).name='Entrance west recessed slate roof';
-      hipRoof(19.55,12,24.9,d,h+.26,2.6).name='Entrance east recessed slate roof';
-      hipRoof(38.55,12,13.1,d,h+.23,2);
+      hipRoof(-22.55,12,30.9,d,h+.26,2.6).name='Entrance west recessed slate roof';
+      hipRoof(26.1,12,38,d,h+.26,2.6).name='Entrance east recessed slate roof';
+    }else if(rearArm){
+      addWingRoofJunction(THREE,{mesh,worldUV,box,brick:photoBrick,white,roof},1);
     }else if(eastInner){
       // Both pitches now meet the photo-corrected narrow footprint.
       const roofWidth=z===35?12:9,roofX=z===35?35:36.5;
@@ -200,7 +196,9 @@ export function createEscapeExterior(THREE,aspect){
         if(side<0&&x===EAST_SHIFT/2&&z===12&&x+px>37)continue;
         if(side>0&&principal&&Math.abs(x+px)>=7.1&&Math.abs(x+px)<=32)continue;
         if(passage&&y<base&&Math.abs(x+px-passage.x)<passage.width/2+.9)continue;
-        window(x+px,y,z+side*(d/2+.04),side<0?Math.PI:0);
+        // Leave the whole sash clear of the projecting west frontage.
+        const wx=principal&&side>0&&x+px< -32&&x+px> -32.9?-32.9:x+px;
+        window(wx,y,z+side*(d/2+.04),side<0?Math.PI:0);
       }
       for(let pz=-d/2+2.5;pz<d/2-1.5;pz+=3.55)for(let y=3.8;y<h-1;y+=3.4){
         if(passage&&y<base&&Math.abs(x+side*w/2-passage.x)<passage.width/2+.2)continue;
@@ -214,6 +212,7 @@ export function createEscapeExterior(THREE,aspect){
     return body;
   }
   const white=material(0xe1e3dc),photoBrick=material(0xb3a5a0,{map:bricks});
+  const details=photoDetailPrimitives(THREE,{model,box,mesh,white,steel,material});
   addRedesmerePassage(THREE,{box,mesh,worldUV,white,brick:photoBrick,material});
   addRedesmereEndRange(THREE,{box,mesh,worldUV,brick:photoBrick,material,hipRoof});
   addRedesmereEdgeChimney(THREE,{model,material});
@@ -255,7 +254,7 @@ export function createEscapeExterior(THREE,aspect){
   const squareX=65.5,squareZ=15,squareWidth=8.5,squareDepth=20;
   block(squareX,squareZ,squareWidth,squareDepth,14.3).name='East garden pavilion';
   for(const y of [4.08,8.8])box(white,squareX,y,squareZ,squareWidth+.14,.16,squareDepth+.14);
-  addEastPhotoDetails(THREE,{model,box,mesh,worldUV,white,brick:photoBrick,roof,steel,material,hipRoof});
+  addEastPhotoDetails(THREE,{model,box,mesh,worldUV,white,brick:photoBrick,roof,steel,material,hipRoof,details});
   // Open rear approaches connect the gaps between the arms to the back road.
   for(const x of [-23,23]){box(gravel,x,.18,-20,32,.1,45);box(grass,x<0?-17:x-6,.26,-9,9,.1,11);}
   for(const [x,w] of [[-64,17],[69+OUTER_SHIFT,7]]){box(gravel,x,.17,12,w,.12,62);box(path,x,.16,44,w,.12,2);}

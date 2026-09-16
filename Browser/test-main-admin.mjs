@@ -30,7 +30,7 @@ for(const range of building.userData.ranges){
  assert(Math.abs(range.x+MAIN_ADMIN.x-(p[0]+q[0])/2)<1e-8);
  assert(Math.abs(range.w-(q[0]-p[0]))<1e-8);
  ray.set(new THREE.Vector3(range.x+MAIN_ADMIN.x+.3,40,range.z+MAIN_ADMIN.z+.7),new THREE.Vector3(0,-1,0));
- assert(ray.intersectObject(building,true).some(h=>h.object.name.endsWith('slate roof')&&h.face.normal.y>0),'Each range needs upward-facing slate');
+ assert(ray.intersectObject(building,true).some(h=>h.object.name.endsWith(range.roof==='flat'?'flat roof':'slate roof')&&h.face.normal.y>0),'Each range needs its upward-facing roof');
  assert(obs.some(o=>obstacleContains(o,range.x+MAIN_ADMIN.x,range.z+MAIN_ADMIN.z)),'Masonry must block walking');
 }
 for(let x=140;x<245;x+=2)assert(!obs.some(o=>obstacleContains(o,x,47)),'Front carriage approach stays walkable');
@@ -76,7 +76,7 @@ const eastShot=MAIN_ADMIN_VIEWS['main-admin-east'];
 assert(!obs.some(o=>obstacleContains(o,eastShot.position[0],eastShot.position[2])),'East photo camera must start in open ground');
 assert(eastShot.position[0]>eastShot.target[0]&&eastShot.position[2]>eastShot.target[2],'Marked camera must look northwest');
 assert.equal(building.userData.openings.filter(o=>o.face==='east photo upper column').length,2);
-assert.equal(building.userData.openings.filter(o=>o.face==='east low end').length,3);
+assert.equal(building.userData.openings.filter(o=>o.face==='east low end').length,2);
 assert(!building.userData.openings.some(o=>o.face==='east return inferred'));
 for(const name of ['East curved carriage drive','East wing side access']){const road=building.getObjectByName(name);assert(road&&road.geometry.attributes.normal.getY(0)>.99,'East approach gravel must face upwards');}
 const chimney=exterior.estateChimney,bounds=new THREE.Box3().setFromObject(chimney);

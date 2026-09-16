@@ -84,7 +84,7 @@ export function addCourtyardPhotoDetails(THREE,{model,box,mesh,worldUV,white,bri
       sash('courtyard-west-wing',37.05,y,z,Math.PI/2,1.02,2.35);
       // The inward face has its own img14 window schedule and projections.
     }
-    for(const x of [27.5,31,34.5])sash('west-wing-end',x,y,5.05,0,1.02,2.35);
+    // The former end at z=5 now continues directly into the main range.
   }
 
   // Low brick enclosure with a sloping glazed top in the inset right corner.
