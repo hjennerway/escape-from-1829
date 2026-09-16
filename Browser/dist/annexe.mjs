@@ -78,14 +78,18 @@ export const ANNEXE_RANGES=Object.freeze([
  {name:'West rear link',rect:[-67,-16,-63,5],h:4.3,rise:1.3},
  {name:'West end projecting rooms',rect:[-82,-3,-75,8],h:8.4,rise:2.1},
  {name:'East end ward',rect:[70,-12,77,12],h:8.4,rise:2.6},
- {name:'East rear pavilion',rect:[65,-22,81,-16],h:8.4,rise:2.8},
+ // The red-to-blue plan correction places this pavilion on the inner side
+ // of the rear link (x=66), retaining its dimensions and a joined corner.
+ {name:'East rear pavilion',rect:[51,-22,67,-16],h:8.4,rise:2.8},
  {name:'East rear link',rect:[64,-17,68,5],h:4.3,rise:1.3},
  {name:'East end projecting rooms',rect:[76,-2,84,6],h:8.4,rise:2.1},
  {name:'Central rear spine',rect:[-5,-32,5,-5],h:8.4,rise:2.6},
  {name:'Rear west angled service range',rect:[-13,-48,-5,-29],h:8.4,rise:2.4,angle:.28},
  {name:'Rear service head',rect:[-18,-49,-5,-42],h:8.4,rise:2.5},
- {name:'Rear east connecting range',rect:[4,-31,34,-26],h:8.4,rise:2.2,section:'rear-east'},
- {name:'Rear east end pavilion',rect:[30,-42,37,-26],h:8.4,rise:2.8,section:'rear-east'}
+ // Shorten the yellow-marked L leg from 30 to 18 map units; its return
+ // moves inward by the same 12 units before the whole L is rotated.
+ {name:'Rear east connecting range',rect:[4,-31,22,-26],h:8.4,rise:2.2,section:'rear-east'},
+ {name:'Rear east end pavilion',rect:[18,-42,25,-26],h:8.4,rise:2.8,section:'rear-east'}
 ]);
 export function createAnnexe(THREE,{brick,roof,material,worldUV,hipRoof}){
  const model=new THREE.Group();model.name='The annexe';model.position.set(ANNEXE.x,0,ANNEXE.z);model.rotation.y=ANNEXE.rotation;

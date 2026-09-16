@@ -1,10 +1,14 @@
 <!doctype html>
-<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>1829 · Aerial view</title><link rel="stylesheet" href="./style.css"><style>#previewNav{position:fixed;left:24px;top:24px;z-index:31;font:10px Arial;letter-spacing:2px;color:#e4e8db;text-shadow:0 2px 6px #000}#previewNav a{color:inherit}#aerialHelp{position:fixed;bottom:18px;left:24px;right:24px;z-index:31;font:11px/1.8 Arial;color:#e4e8db;text-shadow:0 2px 6px #000}#resetAerial{background:#17211ae8;padding:8px 12px;margin-left:8px}#previewNav{right:24px;line-height:1.8}@media(max-width:650px){#previewNav{right:20px;top:24px}#aerialHelp{font-size:10px}}</style><link rel="stylesheet" href="./aerial-layouts.css"><link rel="stylesheet" href="./aerial-locations.css"></head>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>1829 · Aerial view</title><link rel="stylesheet" href="./style.css"><style>#previewNav{position:fixed;left:24px;top:24px;z-index:31;font:10px Arial;letter-spacing:2px;color:#e4e8db;text-shadow:0 2px 6px #000}#previewNav a{color:inherit}#aerialHelp{position:fixed;bottom:18px;left:24px;right:24px;z-index:31;font:11px/1.8 Arial;color:#e4e8db;text-shadow:0 2px 6px #000}#resetAerial{background:#17211ae8;padding:8px 12px;margin-left:8px}#previewNav{right:24px;line-height:1.8}@media(max-width:650px){#previewNav{right:20px;top:24px}#aerialHelp{font-size:10px}}</style><link rel="stylesheet" href="./aerial-layouts.css"><link rel="stylesheet" href="./aerial-locations.css"><link rel="stylesheet" href="./device-location.css"></head>
 <body><canvas id="game" aria-label="Aerial 3D view of the 1829 estate"></canvas>
+
 <nav id="previewNav" aria-label="Aerial navigation">
   <a href="./">← BACK TO GAME</a>
   <a href="./explore.html">EXPLORE THE ASYLUM ↗</a>
   <div id="locationsPicker">
+    <button id="deviceLocationButton" type="button" aria-label="Show my location" title="Show my location" aria-describedby="deviceLocationStatus" disabled>
+      <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="7"/><circle cx="12" cy="12" r="2"/><path d="M12 2v4m0 12v4M2 12h4m12 0h4"/></svg>
+    </button>
     <button id="locationsButton" type="button" aria-label="Locations" aria-expanded="false" aria-controls="locationsPanel">Locations</button>
     <div id="locationsPanel" hidden><ul>
       <li><a href="?view=front">FRONT DETAIL</a></li>
@@ -53,6 +57,7 @@
     </ul></div>
   </div>
 </nav>
+<div id="deviceLocationStatus" role="status" aria-live="polite" aria-atomic="true"></div>
 <div id="churtonNav" hidden style="position:fixed;bottom:65px;left:24px;z-index:32;font:12px Arial;color:#e4e8db"></div>
 <section id="layoutControls" aria-label="Estate layouts">
   <h2>LAYOUTS</h2>
@@ -70,6 +75,7 @@
 import {TOWER_BUILDING_VIEWS} from './tower-buildings.mjs';
 import {ADMIN_ANNEXE_PHOTO_VIEW} from './historic-roads.mjs';
 import {bindPlanterToggle} from './planter-layer.mjs';
+import {createDeviceLocationMarker,bindDeviceLocation} from './device-location.mjs';
 import {createAerialLayouts,bindLayoutToggles,fitAerialLayouts} from './aerial-layouts.mjs';
 import {updateRoadLabels} from './road-labels.mjs';
 import {CHURTON_VIEWS} from './churton-ward.mjs';
@@ -118,6 +124,14 @@ bindPlanterToggle(exterior,document);
 loadEscapeFrontage(THREE,exterior).catch(console.warn);
 const controls=createAerialControls(exterior.camera);let navigationTarget=[12,5,-12],moved=false;
 let fittedLayouts=false;
+const deviceLocationMarker=createDeviceLocationMarker(THREE,exterior.scene);
+bindDeviceLocation({button:document.getElementById('deviceLocationButton'),status:document.getElementById('deviceLocationStatus'),marker:deviceLocationMarker,onLocate({x,z}){
+  controls.keys.clear();moved=true;fittedLayouts=false;navigationTarget=[x,0,z];
+  exterior.camera.fov=46;exterior.camera.updateProjectionMatrix();
+  const distance=180*Math.max(1,1/exterior.camera.aspect);
+  exterior.camera.position.set(x+distance*.35,distance,z+distance*.65);
+  exterior.camera.lookAt(...navigationTarget);controls.sync(navigationTarget);
+}});
 function fitLayouts(){const target=fitAerialLayouts(THREE,exterior,layouts);if(!target)return;controls.keys.clear();navigationTarget=target;moved=true;fittedLayouts=true;controls.sync(target);}
 document.getElementById('fitLayouts').onclick=fitLayouts;
 const view=(new URLSearchParams(location.search).get('view')??'').replace(/^new-hospital/,'annexe'),frontDetail=view==='front',towerDetail=view==='tower',rightDetail=view==='right',mapDetail=['plan','west-refine','historic-roads','historic-admin-grounds','historic-footprints'].includes(view),photoDetail=[...Object.keys(ESTATES_VIEWS),...Object.keys(LAUNDRY_VIEWS),...Object.keys(WITBY_VIEWS),...Object.keys(FARNDON_VIEWS),...Object.keys(IRBY_ASHLEY_VIEWS),...Object.keys(GRAFTON_EDGE_VIEWS),...Object.keys(HALE_WARD_VIEWS),...Object.keys(TOWER_BUILDING_VIEWS),...Object.keys(REDESMERE_CHIMNEY_VIEWS),...Object.keys(WATER_TOWER_VIEWS),'front-entrance','admin-annexe-photo',...Object.keys(UPTON_VIEWS),...Object.keys(ANNEXE_VIEWS),...Object.keys(MAIN_ADMIN_VIEWS),...Object.keys(CHURTON_VIEWS),'annexe-site','annexe','annexe-plan','annexe-ground','front-wall','redesmere-passage','front-steps','redesmere-garden-photo','east-forward-end-photo','west-forward-end-photo','east-lawn-photo','entrance-east-photo','west-lawn-photo','entrance-west-photo','redesmere-photo','west-wing-side','west-wing-end','central-court-photo','inner-east-photo','west-front-photo','west-court-photo','inner-court-photo','east-photo','courtyard-photo','rear-court-photo'].includes(view);
@@ -149,7 +163,7 @@ function frameMap(){if(view==='historic-footprints'){exterior.scene.fog.density=
 function frameRight(){exterior.camera.position.set(72,28,108*Math.max(1,1/exterior.camera.aspect));navigationTarget=[72,9,0];exterior.camera.lookAt(...navigationTarget);}
 if(mapDetail)frameMap();else if(photoDetail)framePhoto();else if(rightDetail)frameRight();else if(towerDetail)frameTower();else if(frontDetail)frameFront();else resetAerial();
 controls.sync(navigationTarget);
-function frame(){requestAnimationFrame(frame);const dt=clock.getDelta();if(!document.hidden){controls.update(dt);}updateRoadLabels(THREE,layouts.roads,exterior.camera,innerWidth,innerHeight);renderer.render(exterior.scene,exterior.camera);}frame();
+function frame(){requestAnimationFrame(frame);const dt=clock.getDelta();if(!document.hidden){controls.update(dt);}updateRoadLabels(THREE,layouts.roads,exterior.camera,innerWidth,innerHeight);deviceLocationMarker.update(exterior.camera,innerHeight);renderer.render(exterior.scene,exterior.camera);}frame();
 function resetAerial(){exterior.scene.fog.density=0;moved=false;fittedLayouts=false;controls.keys.clear();const shot=sampleLanding(0,{aspect:exterior.camera.aspect});navigationTarget=shot.target;exterior.camera.fov=46;exterior.camera.updateProjectionMatrix();exterior.camera.position.set(...shot.position);exterior.camera.lookAt(...shot.target);controls.sync(navigationTarget);}
 document.getElementById('resetAerial').onclick=resetAerial;
 const canvas=document.getElementById('game');

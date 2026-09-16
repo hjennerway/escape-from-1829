@@ -85,7 +85,7 @@ const rear=annexe.userData.ranges.filter(b=>b.section==='rear-east');
 assert.equal(rear.length,2);
 assert(rear.every(b=>b.r>.3&&b.r<.5),'rear L wing rotates counter-clockwise relative to the frontage');
 const pivot=[4*ANNEXE_MAP_SCALE,-28.5*ANNEXE_MAP_SCALE];
-const joint=[pivot[0]+Math.cos(rear[0].r)*28*ANNEXE_MAP_SCALE,pivot[1]-Math.sin(rear[0].r)*28*ANNEXE_MAP_SCALE];
+const joint=[pivot[0]+Math.cos(rear[0].r)*16*ANNEXE_MAP_SCALE,pivot[1]-Math.sin(rear[0].r)*16*ANNEXE_MAP_SCALE];
 for(const b of rear){
  const dx=joint[0]-b.x,dz=joint[1]-b.z;
  assert(Math.abs(Math.cos(b.r)*dx-Math.sin(b.r)*dz)<b.w/2&&Math.abs(Math.sin(b.r)*dx+Math.cos(b.r)*dz)<b.d/2,'rotated sections retain their L junction');

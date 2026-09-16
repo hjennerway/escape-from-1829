@@ -8,6 +8,14 @@ Use `WASD` to move, the mouse to look, `Shift` to sprint, `C` or `Ctrl` to crouc
 
 The browser build is served from [`Browser/dist`](Browser/dist). The Unity project and Blender source are included for continued development.
 
+## Device location in aerial mode
+
+The crosshair button beside **Locations** requests the device's current location. Inside the estate or within 100 m of its outer edge, it places a red pin and centres the aerial view there. Farther away it shows “This only works near the West Cheshire Hospital site”. The button also explains denied permissions, unavailable location and timeouts, and can be pressed again to refresh the fix.
+
+Location requires HTTPS (or localhost for development) and browser permission. Each press requests a fresh, high-accuracy fix; coordinates remain in the page and are not saved or sent to a server. The reported device accuracy appears with the result. The pin remains visible across layout changes. This control appears only in aerial mode.
+
+The perimeter in `Browser/dist/device-location.mjs` approximates the whole modelled estate, including the annexe and southern grounds, from the existing outer roads. The 100 m buffer is measured to the nearest perimeter segment, with all interior points accepted. Both the boundary and the existing `earth-registration.mjs` alignment are approximate, not surveyed. Run `node Browser/test-device-location.mjs` for distance, coordinate and permission/error checks.
+
 ## Browser performance
 
 The exterior's fixed sunlight shadow map is rendered once and reused while walking, orbiting, and playing the arrival/escape camera sequences. Changing the Historic/Modern layouts or garden planters refreshes the shadows; restoring a lost WebGL context also refreshes them. Shadow resolution and building detail are unchanged. Code that moves exterior geometry or sunlight at runtime must call `exterior.invalidateShadows()` afterward.
@@ -34,6 +42,8 @@ Use `aerial.html?view=historic-roads` for the whole network or `?view=historic-a
 
 The later annexe annotations add a sweeping central entrance, now reduced to 60% of its initial width, and a central forecourt finished in the same asphalt as the road. The pale frontage strips and entrance gates are removed. Yellow adds both side approaches, two rear connections from Parsons Lane and the marked hardstandings. The red-circled Main/admin road ends now form continuous junctions, the teardrop has a smooth inner lawn edge, and the northern estate boundary connects around the annexe to Parsons Lane (North). These additions belong to Historic. Use `aerial.html?view=annexe-access` or `?view=annexe-entrance`; see the [updated reference notes](Research/historic-roads/README.md).
 ### Annexe wards
+
+The later overhead correction moves the east rear pavilion to the inner side of its link, roughly matching the blue-marked position. The yellow-marked Leighton/Newton connecting leg is 40% shorter, with its end pavilion moved inward to retain the L and the existing 22-degree angle. Roofs, windows, chimneys and walking collisions follow the revised footprints. These changes apply to the browser model; the Blender and Unity exports are unchanged.
 
 The supplied Oakmere lawn photograph now refines the central rear range with a taller two-storey elevation, a central gable and circular vent, divided sash windows, brick bands and low end rooms. The circled belfry and tower retain their geometry, as do the earlier front and side details. Choose **Oakmere lawn elevation** in Locations, or open `aerial.html?view=oakmere-photo`. See [reference and preservation checks](Research/oakmere/README.md).
 
