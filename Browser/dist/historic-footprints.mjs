@@ -60,6 +60,8 @@ export function missingHistoricFootprints(THREE,exterior){
    if(towerEdges&&building===towerEdges.sourceBuilding&&loopIndex===towerEdges.sourceLoop&&towerEdges.indices.includes(i))continue;
    const irbyEdges=exterior.irbyAshley?.userData.replacedOSEdges;
    if(irbyEdges&&building===irbyEdges.sourceBuilding&&loopIndex===irbyEdges.sourceLoop&&irbyEdges.indices.includes(i))continue;
+   const farndonEdges=exterior.farndonWard?.userData.replacedOSEdges;
+   if(farndonEdges&&building===farndonEdges.sourceBuilding&&loopIndex===farndonEdges.sourceLoop&&farndonEdges.indices.includes(i))continue;
    const replaced=exterior.uptonFrithOscroft?.userData.replacedOSEdges;
    const isReplaced=replaced&&building===replaced.sourceBuilding&&loopIndex===replaced.sourceLoop;
    if(isReplaced&&i>=replaced.start&&i<replaced.end)continue;

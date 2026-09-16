@@ -1,5 +1,15 @@
 # Main/admin annexe end and rear court
 
+## Superseded corner interpretation
+
+The later [paired, colour-marked photographs](../main-refine3/README.md) supersede
+the low-wing and roof interpretation recorded below. The pitched room connects
+through a recessed link to the existing red court block; no separate square
+end room is retained. Both comparison directions now include the Historic
+service buildings and court in Explore. The following notes preserve the
+earlier interpretation and reference history.
+
+
 The four images in this directory were supplied on 16 September 2026 from
 `main_redfine2`. The photographs are architectural references. Red dots and
 arrows on the location images identify the camera positions and directions;
@@ -10,12 +20,19 @@ they are not building outlines. The blue-circled foreground structure in
 `marked-bay-roof-correction.png` supersedes the first reconstruction: the
 blue-circled forward canted projection does not exist and is removed, including
 its windows, trim, roof and walking collision. Its old forward connection is
-also removed. The two red-circled roof sections become one four-sided slate
-roof rising to a single apex, with no retained flat decks or parapets. The
-shorter wall rises to support the continuous eaves; the retained wing connects
+also removed. The red-circled roof sections share one slate roof with no flat decks or parapets. The
+wall tops support the continuous eaves; the retained wing connects
 to the rear shoulder through a recessed link. This leaves the blue footprint
 as open ground. The tall pavilion's stepped rear roof, chimney breasts and
 stacks remain in place.
+
+The later `marked-three-sided-roof.png` moves the high point from the blue dot
+to the stair-bay wall at the red dot. Three sloping planes now run from this
+wall junction to the wing eaves. The fourth slope facing the main building and
+the separate small connector roof are removed; the shared roof also covers
+the recessed connection. The wing footprint stays in place. The eaves are lowered with the wall
+junction so the apex sits below the existing stair-window sill, matching the
+red mark and keeping that window visible.
 
 `img2.jpg` replaces the inferred rear window grid with a broad hipped projection
 and three close upper sashes, a smaller canted stair bay with a pitched roof,

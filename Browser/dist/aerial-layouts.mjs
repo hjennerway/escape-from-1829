@@ -8,7 +8,7 @@ export function createAerialLayouts(THREE,exterior){
   if(exterior.layouts)return exterior.layouts;
   const shared=new THREE.Group(),historic=new THREE.Group(),modern=new THREE.Group();
   shared.name='Shared estate';historic.name='Historic layout';modern.name='Modern layout';
-  const historicObjects=new Set([exterior.annexe,exterior.mainAdmin,exterior.adminCorridor,exterior.estateChimney,exterior.irbyAshley]);
+  const historicObjects=new Set([exterior.annexe,exterior.mainAdmin,exterior.adminCorridor,exterior.estateChimney,exterior.irbyAshley,exterior.farndonWard]);
   for(const child of [...exterior.model.children]){
     if(child===exterior.terrain)continue;
     (historicObjects.has(child)?historic:shared).add(child);

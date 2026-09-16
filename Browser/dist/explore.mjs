@@ -2,7 +2,9 @@ import {bindPlanterToggle} from './planter-layer.mjs';
 import {CHURTON_VIEWS} from './churton-ward.mjs';
 import {UPTON_VIEWS} from './upton-frith-oscroft.mjs';
 import {IRBY_ASHLEY_VIEWS} from './irby-ashley.mjs';
+import {FARNDON_VIEWS} from './farndon-ward.mjs';
 import {MAIN_ADMIN_VIEWS} from './main-admin-building.mjs';
+import {createAerialLayouts} from './aerial-layouts.mjs';
 import {ANNEXE_VIEWS} from './annexe.mjs';
 import * as THREE from './vendor/three.module.js';
 import {createEscapeExterior,loadEscapeFrontage} from './escape-exterior.mjs';
@@ -35,6 +37,13 @@ try{
   renderer.shadowMap.enabled=true;renderer.shadowMap.type=THREE.PCFSoftShadowMap;
   const exterior=createEscapeExterior(THREE,innerWidth/innerHeight);
   exterior.camera.near=.1;exterior.camera.updateProjectionMatrix();
+  // Main/admin photo walks use the same Historic buildings and service court
+  // as their aerial views, including the range visible in img2.
+  if(MAIN_ADMIN_VIEWS[new URLSearchParams(location.search).get('view')]){
+    const layouts=createAerialLayouts(THREE,exterior);
+    // Road-name sprites are map overlays; keep them out of the walking view.
+    layouts.roads.traverse(object=>{if(object.isSprite)object.visible=false;});
+  }
   const obstacles=exteriorObstacles(THREE,exterior.model);
   const walker=createWalker(exterior.camera,obstacles);
   bindPlanterToggle(exterior,document,()=>{obstacles.splice(0,obstacles.length,...exteriorObstacles(THREE,exterior.model));});
@@ -65,6 +74,7 @@ try{
   if(ANNEXE_VIEWS[annexeView])walker.setView(ANNEXE_VIEWS[['annexe','annexe-plan','annexe-site'].includes(annexeView)?'annexe-ground':annexeView]);
   const churtonView=new URLSearchParams(location.search).get('view');
   if(UPTON_VIEWS[churtonView])walker.setView(UPTON_VIEWS['upton-ground']);
+  if(FARNDON_VIEWS[churtonView])walker.setView(FARNDON_VIEWS['farndon-2']);
   if(IRBY_ASHLEY_VIEWS[churtonView])walker.setView(IRBY_ASHLEY_VIEWS[churtonView==='irby-ashley-3'?churtonView:'irby-ashley-1']);
   if(MAIN_ADMIN_VIEWS[churtonView]){
     const shot=MAIN_ADMIN_VIEWS[churtonView==='main-admin'||churtonView==='main-admin-plan'?'main-admin-4':churtonView];

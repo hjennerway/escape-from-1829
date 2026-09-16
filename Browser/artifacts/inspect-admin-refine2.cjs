@@ -5,11 +5,12 @@ const {chromium}=require('C:/Users/Harry/.cache/codex-runtimes/codex-primary-run
   const page=await browser.newPage({viewport:{width:1200,height:840}}),errors=[];
   page.on('pageerror',e=>errors.push(e.message));
   const shots=[
+   ['wall-roof-join',[282,39,21],[235,7,17],41],
    ['marked-correction',[281,57,64],[236,4,20],43],
    ['annexe-end',[279,2.3,42],[238,9.8,25],49],
    ['rear-court',[239,2.4,-49],[212,9,18],57],
    ['overview',[295,94,-53],[216,5,6],53]
-  ];
+  ].filter(shot=>!process.argv[3]||shot[0]===process.argv[3]);
   for(const [name,position,target,fov] of shots){
    await page.route('**/main-admin-building.mjs',async route=>{
     const response=await route.fetch();
@@ -23,6 +24,6 @@ const {chromium}=require('C:/Users/Harry/.cache/codex-runtimes/codex-primary-run
    await page.unroute('**/main-admin-building.mjs');
   }
   if(errors.length)throw Error(errors.join('\n'));
-  console.log('PASS: three admin refinement views render without browser errors.');
+  console.log('PASS: '+shots.length+' admin refinement views render without browser errors.');
  }finally{await browser.close();}
 })();
