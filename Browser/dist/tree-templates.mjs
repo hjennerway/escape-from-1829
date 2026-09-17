@@ -68,7 +68,7 @@ export function placeTreeCopies(THREE,trees,template,specs,metadataKey,recolour)
     const spec=specs[index],group=index?copyTreeTemplate(THREE,template):template;
     group.traverse(object=>{object.name=object.name.replace(base.name,spec.name);});
     group.position.set(spec.x,template.position.y,spec.z);
-    group.rotation.y=index*2.399963229728653;
+    group.rotation.y=spec.rotation??index*2.399963229728653;
     group.scale.set(spec.radius/base.radius,spec.height/base.height,spec.radius/base.radius);
     group.userData[metadataKey]={...spec};
     if(index&&recolour)recolour(group,spec);

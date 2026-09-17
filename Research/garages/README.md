@@ -1,5 +1,24 @@
 # Garages and mortuary
 
+The September 17 blue-circle correction in `tree-clearance-move.png` translates the garages, mortuary,
+their aprons and paths, and the adjoining Vivienne Smith Lane stretch by
+9.5 scene units in +Z, away from Main/admin. This leaves a small grass gap
+outside the pine canopies. The garage origin is now (177, 108.9), and the
+mortuary is approximately (165.39, 112.54). The earlier dimensions and
+relative placement below are retained. Both lane junctions reconnect, with
+the southern drive's first curve moving with the buildings before easing
+back to its existing route. The adjacent east road returns to its existing
+trace at the pine-road junction. Main/admin and all trees stay fixed.
+
+The shared lane follows this correction in Historic and Modern; the buildings
+remain Historic. Aerial and walking camera starts follow the moved buildings.
+Before/after views are in `Browser/artifacts/garage-relocation-*.png`.
+The canopy-envelope measurements leave at least 1.15 units between Pine1
+and the lane's outside border, including all foliage detail levels. Garage,
+layout, annexe-access, entrance and greenhouse checks pass. The broader
+historic-road test retains its pre-existing Admin north service road/building
+clearance failure at approximately (228.89, -4.52).
+
 The original five supplied references are retained here. `locations.png` assigns the
 blue area to the garages and the yellow area to the separate mortuary, south
 of Vivienne Smith Lane opposite Main/admin. The red camera looks west along

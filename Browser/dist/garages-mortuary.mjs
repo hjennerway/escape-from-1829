@@ -1,9 +1,11 @@
 // locations.png fixes the roadside footprints and the two camera directions.
 // Photo-derived dimensions and the obscured rear elevations are estimates.
-import {VIVIENNE_LANE} from './road-centerlines.mjs';
-export const GARAGES=Object.freeze({x:177,z:99.4,rotation:-Math.atan(.1),length:52.5,depth:7.2,eave:3.2});
+import {VIVIENNE_LANE,GARAGE_LANE_SHIFT} from './road-centerlines.mjs';
+export const GARAGES=Object.freeze({x:177,z:99.4+GARAGE_LANE_SHIFT,rotation:-Math.atan(.1),length:52.5,depth:7.2,eave:3.2});
 const transform=(site,x,y,z)=>[site.x+Math.cos(site.rotation)*x+Math.sin(site.rotation)*z,y,site.z-Math.sin(site.rotation)*x+Math.cos(site.rotation)*z];
-export const MORTUARY_PREVIOUS=Object.freeze({x:164,z:110,rotation:GARAGES.rotation,eave:3.35});
+// Express the earlier mortuary correction in the translated site's frame so
+// the whole building and its path move by exactly the same amount as the lane.
+export const MORTUARY_PREVIOUS=Object.freeze({x:164,z:110+GARAGE_LANE_SHIFT,rotation:GARAGES.rotation,eave:3.35});
 // Halve the entrance-to-kerb distance along the road normal. The red/blue
 // correction extends each crossbar end three units, keeping both arms equal.
 const roadA=VIVIENNE_LANE[9],roadB=VIVIENNE_LANE[10],roadDX=roadB[0]-roadA[0],roadDZ=roadB[1]-roadA[1],roadLength=Math.hypot(roadDX,roadDZ);
@@ -13,9 +15,9 @@ export const MORTUARY=Object.freeze({...MORTUARY_PREVIOUS,x:MORTUARY_PREVIOUS.x+
 export const garagePoint=(x,y,z)=>transform(GARAGES,x,y,z);
 export const mortuaryPoint=(x,y,z)=>transform(MORTUARY,x,y,z);
 export const GARAGE_MORTUARY_VIEWS=Object.freeze({
- 'garages':{position:[222,45,65],target:[195,2,105],fov:53},
- 'garages-site':{position:[166,95,185],target:[190,0,66],fov:49},
- 'garages-plan':{position:[195,104,104.01],target:[195,0,104],fov:48},
+ 'garages':{position:[222,45,65+GARAGE_LANE_SHIFT],target:[195,2,105+GARAGE_LANE_SHIFT],fov:53},
+ 'garages-site':{position:[166,95,185+GARAGE_LANE_SHIFT],target:[190,0,66+GARAGE_LANE_SHIFT],fov:49},
+ 'garages-plan':{position:[195,104,104.01+GARAGE_LANE_SHIFT],target:[195,0,104+GARAGE_LANE_SHIFT],fov:48},
  'garages-1':{position:garagePoint(54,1.85,-4.8),target:garagePoint(22,2,-.1),fov:66},
  'garages-2':{position:garagePoint(13,1.85,-12),target:garagePoint(3,2.25,1),fov:69},
  'mortuary':{position:mortuaryPoint(12,9,-18),target:mortuaryPoint(0,2,1),fov:48},

@@ -1,26 +1,14 @@
 import {addFoliageLevels,placeTreeCopies} from './tree-templates.mjs';
-// Eleven blue crosses in Research/admin-pine-trees/marked-locations.png.
-// Ground positions are fitted to the fixed Shop and admin forecourt landmarks.
-export const ADMIN_PINE_TREES=Object.freeze([
-  {x:141.25,z:74.86,height:24,radius:5.8},
-  {x:156.88,z:77.42,height:26,radius:6.3},
-  {x:171.42,z:79.50,height:23.5,radius:5.8},
-  {x:183.57,z:81.71,height:25,radius:6.1},
-  {x:194.73,z:74.82,height:27,radius:6.5},
-  {x:198.50,z:83.82,height:23,radius:5.6},
-  {x:224.86,z:83.45,height:25.5,radius:6.2},
-  {x:237.55,z:84.56,height:24,radius:5.9},
-  {x:268.86,z:70.81,height:27,radius:6.6},
-  {x:266.54,z:86.01,height:24.5,radius:6.1},
-  {x:280.11,z:90.88,height:26,radius:6.3}
-].map((tree,index)=>Object.freeze({...tree,name:`Admin lawn pine ${index+1}`,seed:182900+index})));
+import {KML_PINE_TREES} from './kml-tree-data.mjs';
+// Pine1–Pine13 replace every earlier screenshot-derived pine position.
+export const ADMIN_PINE_TREES=KML_PINE_TREES;
 
 export function addAdminPineTrees(THREE,trees){
   const bark=new THREE.MeshStandardMaterial({color:0x65513d,roughness:1});
   const branchGeometry=new THREE.CylinderGeometry(.56,1,1,7);
   const trunkGeometry=new THREE.CylinderGeometry(.06,1,1,10,6);
   // Opaque needle cutouts give the boughs fine edges in walking views. Shared
-  // textures and instanced sprays keep the eleven mature crowns light.
+  // textures and instanced sprays keep the thirteen mature crowns light.
   const resolution=128,pixels=new Uint8Array(resolution*resolution*4),needles=[];
   for(let row=0;row<15;row++)for(const side of [-1,1]){
     const y=-.85+row*.108,length=.34+.22*Math.sin(row/15*Math.PI);

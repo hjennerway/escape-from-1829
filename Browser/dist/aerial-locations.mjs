@@ -1,6 +1,19 @@
 const button=document.getElementById('locationsButton');
 const panel=document.getElementById('locationsPanel');
 const picker=document.getElementById('locationsPicker');
+const list=panel.querySelector('ul');
+const alphabetical=new Intl.Collator('en-GB',{sensitivity:'base',numeric:true});
+
+function sortLocations(){
+  const items=[...list.children];
+  const sorted=[...items].sort((a,b)=>alphabetical.compare(a.textContent.trim(),b.textContent.trim()));
+  // Only move nodes when needed, so observing the reorder cannot loop.
+  if(sorted.some((item,index)=>item!==items[index]))list.append(...sorted);
+}
+
+sortLocations();
+// Shared by aerial and walking menus, including later additions or renames.
+new MutationObserver(sortLocations).observe(list,{childList:true,subtree:true,characterData:true});
 
 function closeLocations(){
   panel.hidden=true;

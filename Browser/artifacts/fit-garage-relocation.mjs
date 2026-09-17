@@ -1,0 +1,11 @@
+import {readFileSync} from 'node:fs';
+import {garagePoint} from '../dist/garages-mortuary.mjs';
+let script=readFileSync('Browser/artifacts/fit-admin-pines.mjs','utf8');
+const world=[garagePoint(-.18,3.28,-.2),garagePoint(-.18,3.28,7.4),garagePoint(52.68,3.28,-.2),garagePoint(52.68,3.28,7.4),garagePoint(52.68,4.46,3.6),[183.8,.34,47],[212.2,.34,47]];
+script=script.replace(/const world=.*?;\r?\nconst pixels=.*?;\r?\nconst marks=.*?;/s,`const world=${JSON.stringify(world)};
+const pixels=[[393,352],[401,388],[650,305],[660,341],[656,317],[342,161],[461,134]];
+const marks=[];`);
+script=script.replace('let p=[-110,200,165,-1.05,.52,1100,557,383]','let p=[158,180,306,-.28,.62,800,465.5,284]');
+script=script.replace('const step=solve(a,b)','a[6][6]+=1e18;a[7][7]+=1e18;const step=solve(a,b)');
+script=script.replace('Research/admin-pine-trees/placement-fit.json','Browser/artifacts/garage-relocation-camera.json');
+await import('data:text/javascript;base64,'+Buffer.from(script).toString('base64'));

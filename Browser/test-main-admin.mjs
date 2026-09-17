@@ -5,6 +5,8 @@ import {ESTATE_CHIMNEY} from './dist/estate-chimney.mjs';
 import {ESCAPE_WATER_TOWER} from './dist/water-tower.mjs';
 import {sampleEscape} from './dist/escape-cutscene.mjs';
 import {MAIN_ADMIN,MAIN_ADMIN_VIEWS,adminMapPoint} from './dist/main-admin-building.mjs';
+import {ADMIN_FRONT_CORRIDOR} from './dist/admin-front-corridor.mjs';
+import {FARNDON_CORRIDOR} from './dist/farndon-corridor.mjs';
 import {exteriorObstacles,obstacleContains} from './dist/explore-controls.mjs';
 globalThis.document={createElement:()=>({getContext:()=>({fillRect(){}})})};
 const exterior=createEscapeExterior(THREE,16/9),building=exterior.mainAdmin;
@@ -61,14 +63,52 @@ for(const bay of bays){
  assert(obs.some(o=>obstacleContains(o,p.x,p.z)),'Central bay masonry must still stop walking');
 }
 // The new notch in the low west wing is open from the forecourt to the
-// recessed sash. Its old full-depth wall and roof must both be gone.
+// recessed corridor door. Its old full-depth wall and roof must both be gone.
 for(const x of [156.6,158.7])for(const z of [32,33.4]){
  ray.set(new THREE.Vector3(x,30,z),new THREE.Vector3(0,-1,0));
  assert(!ray.intersectObject(building,true).some(h=>h.point.y>.5),'Low wing front recess must remain open to the sky');
  assert(!obs.some(o=>obstacleContains(o,x,z)),'Low wing front recess must remain walkable');
 }
-const lowFront=building.userData.openings.filter(o=>o.face==='low west frontage'),link=building.userData.openings.find(o=>o.face==='recessed low connection');
-assert.equal(lowFront.length,3);assert(link.z<lowFront[0].z-3,'Single connection sash must step back behind the three-window room');
+const lowFront=building.userData.openings.filter(o=>o.face==='low west frontage');
+assert.equal(lowFront.length,3);
+assert(!building.userData.openings.some(o=>o.face==='recessed low connection'),'The marked end has a door instead of the old sash');
+assert(!building.getObjectByName('Recessed low west connection walls'),'The offset room is replaced by the aligned corridor');
+const r=ADMIN_FRONT_CORRIDOR,corridor=exterior.adminCorridor;
+const extension=corridor.getObjectByName(r.name),door=corridor.getObjectByName('Main/admin corridor front doorway');
+const near=(a,b,message)=>assert(Math.abs(a-b)<1e-5,message);
+assert.deepEqual(extension.userData.centerline,[[156.3,30.6],[156.3,9.8]],'Only the new front extension occupies the marked route');
+const existingAxis=corridor.getObjectByName('Straight corridor to Farndon').userData.centerline;
+assert.deepEqual(existingAxis[0],[156.3,9.8],'The existing Farndon corridor start stays fixed');
+near(existingAxis[1][0],156.3,'Existing Farndon x stays fixed');near(existingAxis[1][1],-132.1,'Existing Farndon endpoint stays fixed');
+near(door.userData.door.x,FARNDON_CORRIDOR.x,'Door is on the existing Farndon axis');
+near(door.userData.door.z,30.6,'Door retains the marked recessed frontage');
+assert(door.userData.door.z<MAIN_ADMIN.z+lowFront[0].z-3,'Door steps back behind the three-window room');
+const roomBounds=new THREE.Box3().setFromObject(building.getObjectByName('Low west side rooms walls'));
+near(roomBounds.min.x,147,'Outer low-room wall stays fixed');
+near(roomBounds.min.z,17.8,'Low-room rear stays fixed');near(roomBounds.max.z,33.8,'Low-room frontage stays fixed');
+near(roomBounds.max.x,r.x-r.width/2,'Only the inner room edge gives way to the corridor');
+// Sample both sides of the T junction and the complete new corridor width.
+for(let z=r.joinZ-.5;z<r.frontZ;z+=.25){
+ for(const dx of [-2.5,0,2.5]){
+  ray.set(new THREE.Vector3(r.x+dx,15,z),new THREE.Vector3(0,-1,0));
+  const hit=ray.intersectObject(corridor,true).find(h=>h.object.name.endsWith('slate roof'));
+  assert(hit&&hit.point.y>=r.height,'The front extension has continuous roof coverage');
+  if(dx===0)near(hit.point.y,r.height+.06+r.rise,'A single level ridge runs through the existing junction');
+  assert(obs.some(o=>obstacleContains(o,r.x+dx,z)),'Extension walls block exterior walking');
+ }
+}
+for(const x of [r.x+.445,r.x-.445]){
+ ray.set(new THREE.Vector3(x,2.12,r.frontZ+1),new THREE.Vector3(0,0,-1));
+ assert.equal(ray.intersectObject(exterior.model,true)[0]?.object.name,'Corridor door glazing','New door panes are fully exposed');
+}
+ray.set(new THREE.Vector3(r.x,4.05,r.frontZ+1),new THREE.Vector3(0,0,-1));
+assert.equal(ray.intersectObject(corridor,true)[0]?.object.name,'Main/admin corridor front brick gable','The roof end above the door is closed');
+for(let z=r.frontZ+.8;z<=46;z+=.5)assert(!obs.some(o=>obstacleContains(o,r.x,z)),'Door can be approached directly from the front');
+for(const group of [extension,door])group.traverse(o=>{
+ if(!o.isMesh)return;
+ for(const a of Object.values(o.geometry.attributes))assert([...a.array].every(Number.isFinite),'Finite new geometry');
+ if(o.name.endsWith('slate roof'))for(const y of o.geometry.attributes.normal.array.filter((_,i)=>i%3===1))assert(y>0,'New slate faces upward');
+});
 
 
 // The east photo replaces the invented window grid and keeps the low wing exposed.

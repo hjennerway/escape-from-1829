@@ -6,6 +6,8 @@ import {addFarndonCorridor,FARNDON_CORRIDOR,FARNDON_CORRIDOR_VIEWS} from './farn
 import {addWardCorridors,WARD_CORRIDOR_NODES} from './ward-corridors.mjs';
 import {addHaleCorridors,HALE_CORRIDOR_RUNS} from './hale-corridors.mjs';
 import {addIrbyCorridor,IRBY_CORRIDOR_VIEWS} from './irby-corridor.mjs';
+import {MAIN_KITCHEN,createMainKitchen} from './main-kitchen.mjs';
+import {ADMIN_FRONT_CORRIDOR,addAdminFrontCorridor} from './admin-front-corridor.mjs';
 export const ADMIN_OS_REGISTRATION=Object.freeze({u:62,v:37,x:0,z:13,scaleX:1.5,scaleZ:1.6});
 export function adminMapPoint(u,v){const r=ADMIN_OS_REGISTRATION;return [r.x+(u-r.u)*r.scaleX,r.z+(v-r.v)*r.scaleZ];}
 const origin=adminMapPoint(194,44);
@@ -34,9 +36,9 @@ export const ADMIN_OS_RANGES=Object.freeze([
   {name:'Central administration range',rect:[175,40,213,51],height:14.1,rise:3.3},
   {name:'West projecting pavilion',rect:[169,33,178,53],height:14.1,rise:3.8},
   {name:'East projecting pavilion',rect:[208,43,217,54],height:14.1,rise:3.8},
-  // new-shape.png: outer five-eighths projects beyond the recessed connection.
-  {name:'Low west side rooms',rect:[160,40,165.625,50],height:4.5,rise:1.65},
-  {name:'Recessed low west connection',rect:[165.625,40,169,48],height:4.2,rise:.6},
+  // The marked front corridor reuses Farndon's fixed axis. Only the room's
+  // inner edge moves; its outer wall, front and rear remain in place.
+  {name:'Low west side rooms',rect:[160,40,62+(ADMIN_FRONT_CORRIDOR.x-ADMIN_FRONT_CORRIDOR.width/2)/1.5,50],height:4.5,rise:1.65},
   // main_refine3 replaces the earlier combined-roof interpretation. The side wing
   // has a pitched two-window room and a recessed link to the existing court block.
   {name:'East stepped rear link',rect:[217,37,223,41],height:7.2,roof:'corner-hip'},
@@ -112,7 +114,7 @@ export function createMainAdminBuilding(THREE,{brick,roof,worldUV,material}){
     solid(pale,x,h+.06,z,w+.38,.22,d+.38,spec.name+' eaves');hip(x,z,w,d,h+.18,spec.rise,spec.name);
     ranges.push({...spec,x,z,w,d});return {x,z,w,d,h};
   }
-  const [core,west,east,low,lowLink,eastStep,eastRearLink,eastUpper,rearProjection,rearStair,rearCourt,eastShoulder]=ADMIN_OS_RANGES.map(range);
+  const [core,west,east,low,eastStep,eastRearLink,eastUpper,rearProjection,rearStair,rearCourt,eastShoulder]=ADMIN_OS_RANGES.map(range);
   // main_refine3 identifies the blue wing from both directions. The steep
   // three-sided hip covers only the two-window room. Its lower flat link meets
   // the east side of the red court block: img1 and img2 show that same block.
@@ -179,8 +181,7 @@ export function createMainAdminBuilding(THREE,{brick,roof,worldUV,material}){
     for(const x of [west.x-2.6,west.x+2.6])sash('west rear inferred',x,y,west.z-west.d/2-.025,1.4,h,Math.PI);
 
   }
-  for(const dx of [-2.55,0,2.55])sash('low west frontage',low.x+dx,2.15,low.z+low.d/2+.025,1.45,2.9);
-  sash('recessed low connection',lowLink.x,2.05,lowLink.z+lowLink.d/2+.025,1.4,2.7);
+  for(const dx of [-2.05,0,2.05])sash('low west frontage',low.x+dx,2.15,low.z+low.d/2+.025,1.45,2.9);
   sash('low west stepped return',low.x+low.w/2+.025,2.05,low.z+low.d/2-1.6,1.1,2.7,Math.PI/2);
   for(const z of [low.z-4.6,low.z,low.z+4.6])sash('low west end',low.x-low.w/2-.025,2.15,z,1.3,2.9,-Math.PI/2);
   // Paired tall sashes occupy the pitched room. The small sash steps back
@@ -272,13 +273,13 @@ export function createMainAdminBuilding(THREE,{brick,roof,worldUV,material}){
   }
   lane([[230,46],[244,47],[257,54],[267,67],[275,87]],8,'East curved carriage drive');
   lane([[260,58],[257,44],[254,28],[254,8],[250,-13]],6.5,'East wing side access');
-  // The red-marked photo identifies a substantial hipped building over the
-  // first 60% of the exposed connection from Redesmere, then a low admin link.
-  // Keep the small concealed joint below the existing Redesmere roofs. Its
+  // Retain the deeper Redesmere connector up to the new kitchen's west wall;
+  // continue the low corridor along the kitchen's south wall. Keep the small
+  // concealed joint below the existing Redesmere roofs. Its
   // ivy-fronted range ends at x=99.8 (roof overhang to 100.2); neither it nor
   // its separate chimney is part of this refinement.
   const start=94.65,end=adminMapPoint(169,35)[0],cz=adminMapPoint(148,35)[1];
-  const buildingStart=100.45,split=buildingStart+(end-buildingStart)*.6,connectorFront=cz+3.2;
+  const buildingStart=100.45,split=MAIN_KITCHEN.minX,connectorFront=cz+3.2;
   const sections=[
     {name:'Redesmere concealed connector',start,end:buildingStart,cz,depth:6.4,height:3.6,rise:.64},
     {name:'Redesmere connector building',start:buildingStart,end:split,cz:connectorFront-5.9,depth:11.8,height:4.8,rise:3.2},
@@ -290,17 +291,19 @@ export function createMainAdminBuilding(THREE,{brick,roof,worldUV,material}){
     solid(corridorBrick,x,height/2,z,b-a,height,depth,name+' walls',corridor);
     hip(x,z,b-a,depth,height+.06,rise,name,corridor);
     if(a>=buildingStart)addAdminCorridorDetail(THREE,{corridor,...section,brick,material,worldUV,
-      omitWindow:(x,side)=>side===-1&&Math.abs(x-FARNDON_CORRIDOR.x)<FARNDON_CORRIDOR.width/2+.8});
+      omitWindow:(x,side)=>Math.abs(x-FARNDON_CORRIDOR.x)<FARNDON_CORRIDOR.width/2+.8||side===-1&&x>=MAIN_KITCHEN.minX-1&&x<=MAIN_KITCHEN.maxX+1});
   }
   corridor.userData.sections=sections;
   corridor.userData.footprints=sections.map(s=>({minX:s.start,maxX:s.end,minZ:s.cz-s.depth/2,maxZ:s.cz+s.depth/2}));
   corridor.userData.footprint={minX:start,maxX:end,minZ:connectorFront-11.8,maxZ:connectorFront};
   addFarndonCorridor(THREE,{corridor,brick,roof,material,worldUV,
-    omitWindow:(z,side)=>side===-1&&[...HALE_CORRIDOR_RUNS.map(run=>run.end[1]),WARD_CORRIDOR_NODES.farndon[1]].some(jointZ=>Math.abs(z-jointZ)<FARNDON_CORRIDOR.width/2+.8)});
+    omitWindow:(z,side)=>side===-1&&((z>=MAIN_KITCHEN.minZ-1&&z<=MAIN_KITCHEN.maxZ+1)||[...HALE_CORRIDOR_RUNS.map(run=>run.end[1]),WARD_CORRIDOR_NODES.farndon[1]].some(jointZ=>Math.abs(z-jointZ)<FARNDON_CORRIDOR.width/2+.8))});
   addWardCorridors(THREE,{corridor,brick,roof,material,worldUV});
   addHaleCorridors(THREE,{corridor,brick,roof,material,worldUV});
   addIrbyCorridor(THREE,{corridor,brick,roof,material,worldUV});
-  corridor.userData.reference='Research/admin-corridor/README.md: the red-marked photograph refines the Redesmere-side 60% into a deeper single-storey building with a raised hipped slate roof; the rest stays a low corridor. Front wall alignment and concealed Redesmere joint retained. Ivy-fronted range and its chimney unchanged. Heights/depth and concealed elevations are estimates; arched window detail follows the earlier winter reference.';
+  corridor.add(createMainKitchen(THREE,{brick,material,worldUV}));
+  addAdminFrontCorridor(THREE,{corridor,brick,roof,material,worldUV});
+  corridor.userData.reference='Research/admin-corridor/README.md; Research/main-kitchen/README.md: the deeper Redesmere connector now ends at the kitchen west wall, and the low corridor follows its south wall. Front alignment, concealed Redesmere joint, ivy-fronted range and chimney are retained.';
   const dummy=new THREE.Object3D();
   for(const [m,items] of batches){const batch=new THREE.InstancedMesh(new THREE.BoxGeometry(1,1,1),m,items.length);batch.name='Admin sash and masonry details';batch.userData.orientedCollision=true;batch.castShadow=true;batch.receiveShadow=true;items.forEach((b,i)=>{dummy.position.set(b.x,b.y,b.z);dummy.scale.set(b.w,b.h,b.d);dummy.rotation.set(0,b.r,0);dummy.updateMatrix();batch.setMatrixAt(i,dummy.matrix);});building.add(batch);}
   building.userData.openings=openings;building.userData.ranges=ranges;

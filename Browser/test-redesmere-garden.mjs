@@ -30,6 +30,15 @@ for(const extra of [{repeat:true},{target:{tagName:'INPUT'}},{target:{tagName:'T
 }
 press();assert.equal(trees.visible,true);checkTreeCollisions(true);
 assert.equal(changes,2);
+// Layout checkboxes retain focus after a click. T must still hide and restore
+// trees (and walking collisions) without changing either checkbox.
+for(const id of ['historicLayout','modernLayout'])for(const checked of [true,false]){
+  const target={tagName:'INPUT',type:'checkbox',id,checked};
+  press({target});assert.equal(trees.visible,false,`T must hide trees while ${id} has focus`);checkTreeCollisions(false);
+  press({target});assert.equal(trees.visible,true,`T must restore trees while ${id} has focus`);checkTreeCollisions(true);
+  assert.equal(target.checked,checked,'T must preserve the selected layout');
+}
+assert.equal(changes,10,'Checkbox-focused toggles must refresh walking collisions');
 
 model.updateMatrixWorld(true);
 const openings=model.userData.redesmereGardenOpenings,ray=new THREE.Raycaster();

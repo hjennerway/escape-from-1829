@@ -1,5 +1,10 @@
 # Main/admin lawn pine trees
 
+**Superseded:** the later `1829 (2).kml` request replaces all eleven of these
+positions with Pine1–Pine13 and adds Oak1–Oak2. See the current
+[KML tree placement](../kml-trees/README.md). The screenshot and camera fit below
+remain as an archive of the earlier placement.
+
 The eleven blue crosses in `marked-locations.png`, supplied on 17 September
 2026, place large pine trees on the lawns beside Main/admin, Vivienne Smith
 Lane and the annexe. The user requested the same trees in both Historic and

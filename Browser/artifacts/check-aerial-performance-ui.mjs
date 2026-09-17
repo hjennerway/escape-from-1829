@@ -26,8 +26,17 @@ try{
     await page.locator('#historicLayout').setChecked(historic);await page.locator('#modernLayout').setChecked(modern);await rendered();
     assert.deepEqual(await page.evaluate(()=>window.__aerialTest.layouts.state),{historic,modern});
     assert.equal(await page.evaluate(()=>window.__aerialTest.layouts.shared.visible),historic||modern);
+    for(const id of ['historicLayout','modernLayout']){
+      await page.locator('#'+id).focus();
+      await page.keyboard.press('t');await rendered();
+      assert.equal(await page.evaluate(()=>window.__aerialTest.exterior.trees.visible),false,`T must hide trees while ${id} has focus`);
+      await page.keyboard.press('t');await rendered();
+      assert.equal(await page.evaluate(()=>window.__aerialTest.exterior.trees.visible),true,`T must restore trees while ${id} has focus`);
+      assert.equal(await page.evaluate(()=>document.activeElement.id),id,'Tree toggles must preserve keyboard focus');
+      assert.deepEqual(await page.evaluate(()=>window.__aerialTest.layouts.state),{historic,modern});
+    }
   }
-  await page.locator('#historicLayout').blur();await page.keyboard.press('t');await rendered();
+  await page.keyboard.press('t');await rendered();
   assert.equal(await page.evaluate(()=>window.__aerialTest.exterior.trees.visible),false);
   await page.keyboard.press('t');await page.locator('#resetAerial').click();await rendered();
   assert.deepEqual(await page.evaluate(()=>window.__aerialTest.exterior.camera.position.toArray()),original);

@@ -1,5 +1,6 @@
 import {ESTATES_SERVICE_COURT,IRBY_SIDE_ROAD} from './estates-service-court.mjs';
 import {VIVIENNE_LANE} from './modern-entrance.mjs';
+import {GARAGE_LANE_SHIFT} from './road-centerlines.mjs';
 import {TOWER_ADMIN_SHIFT} from './tower-buildings.mjs';
 import {clearSharedLanes,SHARED_HISTORIC_LANES} from './historic-road-clearance.mjs';
 import {ANNEXE_ACCESS_ROADS,ANNEXE_ACCESS_PAVING,ANNEXE_ACCESS_KERBS} from './annexe-access.mjs';
@@ -17,7 +18,9 @@ function bezier(start,segments,steps=16){
 }
 export const HISTORIC_ROADS_SOURCE=Object.freeze({
  clean:'Research/historic-roads/layout.png',annotations:'Research/historic-roads/layout.-annotated.png',
- revision:'2026-09-17 red-circled chapel cross-road and tower T-junction removed',
+ revision:'2026-09-17 Main/admin pine-road rerouted along the red lawn path',
+ adminPineRoad:'Research/historic-roads/pine-road-reroute.png',
+ adminFrontage:'Research/historic-roads/admin-frontage-closer.png',
  parsonsRetrace:'Research/historic-roads/parsons-yellow-retrace.png',
  annexeFrontRoads:'Research/annexe-placement/front-roads-annotated.png',
  annexeRearRemoval:'Research/annexe-frontage-adjustment/remove-rear-roads.png',annexeSweepRevision:'Research/annexe-frontage-adjustment/narrow-entrance.png',
@@ -25,9 +28,12 @@ export const HISTORIC_ROADS_SOURCE=Object.freeze({
  note:'The yellow Parsons retrace replaces the blue northern detour and upper spurs, retaining its southern fork and connecting to the saved northern lane endpoint. The earlier annexe screenshot relocates the frontage avenue to the red line, translates the complete teardrop toward Main/admin without changing its shape or size, and adds the yellow gravel link. The central sweep has a slim neck and smooth flare, while the red-circled apron retains its footprint. Both frontage side approaches and the later yellow-circled rear roads, junction mouths and hardstanding are removed. Colours identify features, not surface colours. Saved Parsons Lane and Vivienne Smith Lane surfaces retain precedence.'
 });
 export const ADMIN_ANNEXE_PHOTO_VIEW=Object.freeze({position:[244,11,37],target:[294,2,1],fov:58});
-export const ADMIN_ISLAND_CENTER=Object.freeze([198,49]);
+// Translate the complete D-shaped court 5.5 units towards Main/admin. Its
+// radius, carriageway width and lawn outline retain their approved dimensions.
+export const ADMIN_ISLAND_CENTER=Object.freeze([198,43.5]);
 export const ADMIN_SEMICIRCLE_RADIUS=18;
-const semicircle=Array.from({length:49},(_,i)=>{const t=Math.PI-i*Math.PI/48;return [198+18*Math.cos(t),49+18*Math.sin(t)];});
+const adminCourtPoint=([x,z])=>[ADMIN_ISLAND_CENTER[0]+x,ADMIN_ISLAND_CENTER[1]+z];
+const semicircle=Array.from({length:49},(_,i)=>{const t=Math.PI-i*Math.PI/48;return adminCourtPoint([ADMIN_SEMICIRCLE_RADIUS*Math.cos(t),ADMIN_SEMICIRCLE_RADIUS*Math.sin(t)]);});
 // The point faces the north junction. The rounded, wider base faces the drive.
 export const ADMIN_TEARDROP=bezier([270,25],[
  [[268,33],[260,43],[261,48]],[[262,53],[272,54],[274,48]],
@@ -41,6 +47,17 @@ const parsonsNorthEnd=SHARED_HISTORIC_LANES.find(p=>p.name==='Parsons Lane (Nort
 // Ground-plane picks from parsons-yellow-retrace.png, registered against the
 // western bend, service-road elbow and the former northern boundary junctions.
 const northJunction=[270,-117],parsonsCrossing=[355,-107.85],eastCrossing=VIVIENNE_LANE[11];
+const annexeInnerEastRoad=bezier([eastCrossing[0],eastCrossing[1]-GARAGE_LANE_SHIFT],[
+ [[267,107],[292,113],[318,115]],[[339,117],[365,121],[388,122]]
+]).map(([x,z],index)=>{
+ // Ease the moved lane junction back to the existing pine-road meeting point.
+ // Everything from that meeting point eastwards retains its current trace.
+ const t=Math.min(1,index/13);
+ return [x,z+GARAGE_LANE_SHIFT*(1-t*t*(3-2*t))];
+});
+// The red path leaves the upper drive before the pines and meets the existing
+// east road farther along the lawn. Its former lower arm returns to grass.
+const pineRoadJoin=annexeInnerEastRoad[13];
 const northService=bezier(shiftAnnexeTeardrop([270,18]),[
  [[249.5,3],[247,2.5],[245,2]],[[233,0],[229,-9],[229,-19]],
  [[229,-40],[229,-57],[229,-63]],[[229,-69],[233,-70],[241,-70]],
@@ -58,21 +75,25 @@ export const HISTORIC_ROAD_TRACES=Object.freeze([
   [[286,-108],[305,-105],[316,-104]],[[329,-102],[336,-93],[333.63,-84.91]]
  ])},
  {name:'Historic lane continuation',width:6,points:bezier(VIVIENNE_LANE[8],[
-  [[145,58],[153,52],[167,49]],[[177,48],[184,49],[198,49]],[[214,49],[226,49],[238,52]],[[240,52],[240,47],shiftAnnexeTeardrop([264,56])]
+  [[145,55],[153,49],[167,45]],[[173,45],[174,43.5],semicircle[0]],
+  [[192,43.5],[204,43.5],[214,43.5]],
+  // Clear the projecting east bay, then turn into the existing side road.
+  [[217,43.5],[218,46.6],[224,46.6]],[[231,46.6],[236,46],[238,42]],
+  [[240,37],[239.5,34],teardropRoad[12]]
  ])},
  {name:'Admin forecourt semicircle',width:5.5,points:semicircle},
  {name:'Admin teardrop circulation',width:5,points:teardropRoad},
  {...ANNEXE_FRONT_AVENUE,points:[...ANNEXE_FRONT_AVENUE.points.slice(0,-1),parsonsCrossing]},
  {name:'Admin east crossing drive',width:6,points:bezier(shiftAnnexeTeardrop([278,49]),[
-  [[265,50],[258,64],[255,76]],[[252,89],[246,96],eastCrossing]
+  [[264,45],[261.5,51],[267,57]],[[277,66],[277,83],[288,94]],
+  [[293,100],[298,109],pineRoadJoin]
  ])},
  {name:'Southern estate drive',width:6,points:bezier(eastCrossing,[
-  [[233,114],[220,137],[216,154]],[[210,180],[205,202],[199,222]],
+  [[233,114+GARAGE_LANE_SHIFT],[220,137+GARAGE_LANE_SHIFT],[216,154+GARAGE_LANE_SHIFT]],
+  [[210,180+GARAGE_LANE_SHIFT],[205,202],[199,222]],
   [[191,247],[187,272],[176,297]],[[170,310],[167,327],[166,340]]
  ])},
- {name:'Annexe inner east road',width:6,points:bezier(eastCrossing,[
-  [[267,107],[292,113],[318,115]],[[339,117],[365,121],[388,122]]
- ])},
+ {name:'Annexe inner east road',width:6,points:annexeInnerEastRoad},
  {name:'Admin north service road',width:6,points:northService},
  // Keep access north of Estates; the blue-selected outer east/south loop is grass.
  {name:'Tower north court lane',width:5,points:[[229,-70.4],[260,-70.4]]},
@@ -97,9 +118,9 @@ export const HISTORIC_PAVING=Object.freeze([
  {name:'Admin teardrop inner resurfacing',surface:'junction',points:teardropRoad},
  {name:'Tower service court',points:[[146,-16.1],[162.3,-16.1],[162.3,-16.1+TOWER_ADMIN_SHIFT],[185.5,-16.1+TOWER_ADMIN_SHIFT],[185.5,-12.5+TOWER_ADMIN_SHIFT],[221.3,-12.5+TOWER_ADMIN_SHIFT],[225.5,-18+TOWER_ADMIN_SHIFT],[231,-17],[235,-6],[233,1],[240,10],[242,13],[234,13],[222,2],[215,-5+TOWER_ADMIN_SHIFT],[162.3,-5+TOWER_ADMIN_SHIFT],[162.3,-5],[146,-5]]}
 ]);
-const lawnArc=Array.from({length:41},(_,i)=>{const t=Math.PI-i*Math.PI/40;return [198+14.6*Math.cos(t),49+14.6*Math.sin(t)];});
+const lawnArc=Array.from({length:41},(_,i)=>{const t=Math.PI-i*Math.PI/40;return [14.6*Math.cos(t),14.6*Math.sin(t)];});
 export const HISTORIC_GRASS=Object.freeze([
- {name:'Admin semicircular grass island',points:[[183.8,52.5],...lawnArc.filter(p=>p[1]>=52.5),[212.2,52.5]]},
+ {name:'Admin semicircular grass island',points:[[-14.2,3.5],...lawnArc.filter(p=>p[1]>=3.5),[14.2,3.5]].map(adminCourtPoint)},
  {name:'Admin teardrop grass island',points:ADMIN_TEARDROP,raisedIsland:true}
 ]);
 export const HISTORIC_KERBS=Object.freeze([...ANNEXE_ACCESS_KERBS,{name:'Admin smooth teardrop inner kerb',points:ADMIN_TEARDROP}]);

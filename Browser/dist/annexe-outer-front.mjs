@@ -2,13 +2,22 @@ import {ANNEXE_OUTER_FRONT_FITS} from './annexe-os-refinement.mjs';
 // Both outer frontages use the same photographed elevation, fitted to the OS.
 // Dimensions are inferred from img1.jpg; the registered ward bodies stay fixed.
 export function addOuterFronts(THREE,{model,scale,brick,roof,material,worldUV,hipRoof}){
+ return addFronts(THREE,{model,scale,brick,roof,material,worldUV,hipRoof});
+}
+// Copy the paired apex elevation onto the two marked courtyard fronts. Their
+// existing ranges set the fit; the outer wings' entrance rooms stay separate.
+export function addCourtFronts(THREE,options){
+ return addFronts(THREE,{...options,court:true});
+}
+function addFronts(THREE,{model,scale,brick,roof,material,worldUV,hipRoof,ranges,court=false}){
  const trim=material(0xa34d32),stone=material(0xb7ac90),frame=material(0xdedfd4),glass=material(0x273a3b),iron=material(0x30464d);
  const groups=[];
  for(const side of [-1,1]){
-  const group=new THREE.Group();group.name=(side<0?'West':'East')+' outer front elevation';group.scale.x=side;
-  (side<0?model.userData.wards['larkton-jodrell']:model).add(group);groups.push(group);
+  const label=side<0?'West':'East',group=new THREE.Group();group.name=label+(court?' court':' outer')+' front elevation';group.scale.x=side;
+  const parent=court?model.userData.wards[side<0?'tarvin-jarman':'picton-carden']:(side<0?model.userData.wards['larkton-jodrell']:model);
+  parent.add(group);groups.push(group);
   const z=12*scale+.08,h=8.4,start=51*scale,end=77*scale,batches=new Map(),openings=[];
-  function mesh(g,m,x,y,z,name){const o=new THREE.Mesh(g,m);o.position.set(x,y,z);o.name=name;o.castShadow=true;o.receiveShadow=true;group.add(o);return o;}
+  function mesh(g,m,x,y,z,name){const o=new THREE.Mesh(g,m);o.position.set(x,y,z);o.name=court?name.replace(/^Outer/,'Court'):name;o.castShadow=true;o.receiveShadow=true;group.add(o);return o;}
   function box(m,x,y,z,w,h,d){if(!batches.has(m))batches.set(m,[]);batches.get(m).push({x,y,z,w,h,d});}
   function wall(x,z,w,h,d,name){const o=mesh(worldUV(new THREE.BoxGeometry(w,h,d),1.7),brick,x,h/2,z,name);o.userData.orientedCollision=true;return o;}
   function beam(a,b,width,m,name){const p=new THREE.Vector3(...a),q=new THREE.Vector3(...b),v=q.clone().sub(p),o=mesh(new THREE.CylinderGeometry(width/2,width/2,v.length(),6),m,...p.add(q).multiplyScalar(.5).toArray(),name);o.quaternion.setFromUnitVectors(new THREE.Vector3(0,1,0),v.normalize());}
@@ -27,10 +36,10 @@ export function addOuterFronts(THREE,{model,scale,brick,roof,material,worldUV,hi
   const gables=[54*scale,70.5*scale],gw=7.9;
   for(let x=start+1.45;x<end-1;x+=2.65){
    if(gables.some(g=>Math.abs(x-g)<gw/2+.45))continue;
-   if(x>73*scale)continue;
+   if(!court&&x>73*scale)continue;
    for(const y of [2.05,6.4])sash(x,y,z);
   }
-  for(const x of [74.5*scale,76.3*scale])sash(x,6.4,z);
+  if(!court)for(const x of [74.5*scale,76.3*scale])sash(x,6.4,z);
   for(const x of gables){
    const front=z+1.05,depth=6.7,base=8.4,rise=3.0;
    wall(x,front-1.1,gw,h,2.2,'Outer projecting gable brick walls');
@@ -51,6 +60,7 @@ export function addOuterFronts(THREE,{model,scale,brick,roof,material,worldUV,hi
    beam([x,base+rise,front],[x,base+rise+.45,front],.08,iron,'Outer gable finial');
   }
   // Recessed arch and low projecting room at the outer end of each elevation.
+  if(!court){
   const door=74.5*scale,room=77*scale,front=z+3.4;
   box(glass,door,1.6,z+.12,1.55,3.2,.1);
   for(const dx of [-.95,.95])box(trim,door+dx,1.55,z+.23,.3,3.1,.35);
@@ -64,10 +74,13 @@ export function addOuterFronts(THREE,{model,scale,brick,roof,material,worldUV,hi
   const stackX=72.9*scale,stackY=11.3;
   wall(stackX,z-3,1.3,stackY,1.1,'Outer tall chimney stack');
   for(const y of [stackY-.3,stackY])box(trim,stackX,y,z-3,1.6,.18,1.4);
+  }
   const dummy=new THREE.Object3D();
-  for(const [mat,items] of batches){const m=new THREE.InstancedMesh(new THREE.BoxGeometry(1,1,1),mat,items.length);m.name='Outer frontage window and brick details';m.castShadow=true;m.receiveShadow=true;items.forEach((b,i)=>{dummy.position.set(b.x,b.y,b.z);dummy.scale.set(b.w,b.h,b.d);dummy.updateMatrix();m.setMatrixAt(i,dummy.matrix);});group.add(m);}
+  for(const [mat,items] of batches){const m=new THREE.InstancedMesh(new THREE.BoxGeometry(1,1,1),mat,items.length);m.name=(court?'Court':'Outer')+' frontage window and brick details';m.castShadow=true;m.receiveShadow=true;if(court)m.userData.orientedCollision=true;items.forEach((b,i)=>{dummy.position.set(b.x,b.y,b.z);dummy.scale.set(b.w,b.h,b.d);dummy.updateMatrix();m.setMatrixAt(i,dummy.matrix);});group.add(m);}
   group.userData.openings=openings;
-  const fit=ANNEXE_OUTER_FRONT_FITS[side<0?'west':'east'],stretch=(fit.end-fit.start)/26;
+  const host=court?ranges.find(b=>b.name===label+' court front range'):null;
+  const fit=host?{start:(side*host.x-host.w/2)/scale,end:(side*host.x+host.w/2)/scale,front:(host.z+host.d/2)/scale}:ANNEXE_OUTER_FRONT_FITS[side<0?'west':'east'];
+  const stretch=(fit.end-fit.start)/26;
   group.scale.x=side*stretch;group.position.x=side*(fit.start-51*stretch)*scale;
   group.position.z=(fit.front-12)*scale;
  }

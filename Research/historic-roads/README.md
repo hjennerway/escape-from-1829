@@ -1,5 +1,40 @@
 # Historic road layout — 16 September 2026
 
+## Main/admin frontage correction — 17 September 2026
+
+The latest [red outline](admin-frontage-closer.png) brings the frontage drive
+directly outside Main/admin. The semicircle and its D-shaped lawn move 5.5 scene
+units towards the building, with no rotation or scaling: the road centreline
+radius remains 18 units and its width remains 5.5 units. The six-unit frontage
+drive joins both ends of the semicircle along its straight diameter, clears the
+projecting bays and entrance steps, and turns into the existing teardrop side
+road. Its western approach blends back into the existing lane junction.
+
+This supersedes the previous frontage position. The teardrop and buildings
+retain their geometry. The change is in the browser Historic layout.
+
+## Pine-road reroute — 17 September 2026
+
+The latest [blue-circle/red-path screenshot](pine-road-reroute.png) removes the
+lower Main/admin drive beneath the pines. Its replacement curves across the
+lawn east of the trees and joins the existing annexe inner east road farther
+along. The former northern arm and its junction apron are removed, exposing
+the terrain. The southern drive retains an open three-way junction.
+
+The replacement retains the six-unit asphalt width and pale borders. Pine
+positions, the semicircular forecourt, the upper teardrop and the existing
+east road stay in place. This road belongs to Historic, including exterior
+walking. The screenshot is fitted approximately to the garage roof and lawn;
+the new endpoint snaps to the existing east road's centreline.
+
+`Browser/artifacts/pine-road-preview.mjs` renders the fitted view with and
+without trees. The `pine-road-before` and `pine-road-after` images record the
+change. Annexe access, aerial layouts and Modern entrance checks pass. The
+annexe check samples the new road for continuous asphalt and the removed
+section for exposed grass. The broader historic-road test has the same
+pre-existing north-service-road building-clearance failure at
+`[228.88947100550808, -4.523245293100267]` before and after this change.
+
 The initial road-network reference is the user's [clean layout](layout.png) and [annotated layout](layout.-annotated.png). These supersede the earlier alarm-board and aerial road corrections in this directory.
 
 Red selects the roads. Blue identifies the semicircular forecourt outside Main/admin; yellow identifies the narrow teardrop. Purple identifies Main/admin, green the water tower, and pink the existing tower service buildings. The annotation colours identify features and do not become surface colours.

@@ -64,9 +64,10 @@ for(let i=0;i<MODERN_ROAD_PATHS.length;i++){
  assert.deepEqual(road.userData.centerline,roadCenterline(path),'Rendering and labels must use the shared refined centreline');
  const saved=path.coordinates.map(p=>earthToScene(...p));
  if(path.name==='Vivienne Smith Lane'){
-  assert.deepEqual(road.userData.centerline.slice(7,11),[[90,77.76],[100,73.5],[150,85],[195,94]],'The admin stretch follows the red lawn trace');
+  assert.deepEqual(road.userData.centerline.slice(7,11),[[90,77.76],[100,73.5],[150,94.5],[195,103.5]],'The garage stretch moves clear of the trees while the western fork stays fixed');
   assert.deepEqual(road.userData.centerline.slice(0,7),saved.slice(0,7));
-  assert.deepEqual(road.userData.centerline.slice(11),saved.slice(11),'Retain the eastern crossing and Modern tail');
+  assert.deepEqual(road.userData.centerline[11],[saved[11][0],saved[11][1]+9.5],'The eastern crossing follows the garage stretch');
+  assert.deepEqual(road.userData.centerline.slice(12),saved.slice(12),'Retain the rest of the Modern tail');
  }else assert.deepEqual(road.userData.centerline,saved,'Other mapped lanes retain their saved vertices');
  road.traverse(o=>{if(!o.isMesh)return;const normals=o.geometry.attributes.normal;for(let n=0;n<normals.count;n++)assert(normals.getY(n)>.99,'Roads must face upwards');const b=new THREE.Box3().setFromObject(o);assert(b.min.y>.3&&b.max.y<.4,'Road overlays must clear terrain without becoming walking obstacles');});
 }

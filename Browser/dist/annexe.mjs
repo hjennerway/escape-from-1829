@@ -1,5 +1,5 @@
 import {addOakmereElevation} from './annexe-oakmere-detail.mjs';
-import {addOuterFronts} from './annexe-outer-front.mjs';
+import {addOuterFronts,addCourtFronts} from './annexe-outer-front.mjs';
 import {refineAnnexeRanges,ANNEXE_OS_REFINEMENT} from './annexe-os-refinement.mjs';
 import {ANNEXE_PHOTO_PLACEMENT} from './annexe-photo-placement.mjs';
 import {ANNEXE_PLACEMENT_REFERENCE,annexePlacementMapPoint,placeAnnexeFront} from './annexe-placement.mjs';
@@ -166,6 +166,7 @@ export function createAnnexe(THREE,{brick,roof,material,worldUV,hipRoof}){
    const q=position(b,side*(b.w/2+.25),0);box(blue,q[0],b.h+.02,q[1],.16,.14,b.d+.7,b.r);
   }
  }
+ const courtFrontRanges=ranges.filter(b=>b.name.endsWith('court front range'));
  for(const b of ranges){
   currentWard=b.wardId;
   for(const face of ['long','end'])for(const side of [-1,1]){
@@ -175,6 +176,7 @@ export function createAnnexe(THREE,{brick,roof,material,worldUV,hipRoof}){
     const u=(i-(count-1)/2)*3.8,[x,z]=face==='long'?position(b,u,side*(b.d/2+.035)):position(b,side*(b.w/2+.035),u);
     const r=b.r+(face==='long'?(side<0?Math.PI:0):side*Math.PI/2);
     if(face==='long'&&side>0&&Math.abs(x)>=51*ANNEXE_MAP_SCALE&&/front connecting ward|end ward/.test(b.name))continue;
+    if(face==='long'&&side>0&&courtFrontRanges.some(front=>Math.abs(z-front.z-front.d/2-.035)<.01&&Math.abs(x-front.x)<front.w/2))continue;
     for(const y of b.h>11?[2.15,6.5,10.7]:b.h>7?[2.15,6.5]:[2.15]){
      if(b.custom&&(face==='long'&&side>0||b.name.includes('tower')))continue;
      if([-.8,0,.8].some(u=>occupied(x+Math.cos(r)*u+Math.sin(r)*.3,y,z-Math.sin(r)*u+Math.cos(r)*.3,b)))continue;
@@ -295,6 +297,7 @@ export function createAnnexe(THREE,{brick,roof,material,worldUV,hipRoof}){
  for(const ward of ANNEXE_WARDS)wards[ward.id].userData.ranges=ranges.filter(b=>b.wardId===ward.id);
  model.userData.wards=wards;
  model.userData.outerFronts=addOuterFronts(THREE,{model,scale:ANNEXE_MAP_SCALE,brick,roof,material,worldUV,hipRoof});
+ model.userData.courtFronts=addCourtFronts(THREE,{model,ranges,scale:ANNEXE_MAP_SCALE,brick,roof,material,worldUV,hipRoof});
  model.userData.oakmereElevation=addOakmereElevation(THREE,{model,host:ranges.find(b=>b.name==='Central rear spine'),brick,roof,material,worldUV,hipRoof});
  model.userData.ranges=ranges;model.userData.annexeOpenings=openings;model.userData.osRegistration=ANNEXE_OS_REGISTRATION;
  model.userData.placement=ANNEXE_PLACEMENT_REFERENCE;model.userData.osRefinement=ANNEXE_OS_REFINEMENT;model.userData.photoPlacement=ANNEXE_PHOTO_PLACEMENT;

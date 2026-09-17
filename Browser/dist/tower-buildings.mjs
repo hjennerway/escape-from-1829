@@ -3,6 +3,7 @@ import {ESTATE_CHIMNEY} from './estate-chimney.mjs';
 import {addPharmacyCourt,PHARMACY_VIEWS} from './pharmacy-court.mjs';
 import {SERVICE_COURT_MOVES,moveServiceRect,moveServiceView} from './service-court-placement.mjs';
 import {IRBY_CORRIDOR} from './irby-corridor.mjs';
+import {MAIN_KITCHEN} from './main-kitchen.mjs';
 
 import {TOWER_ROOF_CONTACTS} from './tower-roof-profiles.mjs';
 export {TOWER_ROOF_CONTACTS} from './tower-roof-profiles.mjs';
@@ -51,7 +52,8 @@ const sourceRanges=[
  // Yellow correction: the long axis turns north/south, with a flat front
  // section and a hipped ridge terminating against the tower's south wall.
  {name:'Low west stores',rect:[146.3,-50.1,162.3,-36.3],height:8.84,rise:4.076470588235294,axis:'z',roof:'corridor',attach:'north'},
- {name:'West stores flat front',rect:[146.3,-36.3,162.3,TOWER_SERVICE_FRONT],height:8.84,roof:'flat'},
+ {name:'West stores flat front',rect:[146.3,-36.3,162.3,TOWER_SERVICE_FRONT],height:8.84,roof:'flat',
+  footprint:[[146.3,-36.3],[162.3,-36.3],[162.3,TOWER_SERVICE_FRONT],[MAIN_KITCHEN.maxX,TOWER_SERVICE_FRONT],[MAIN_KITCHEN.maxX,MAIN_KITCHEN.minZ],[146.3,MAIN_KITCHEN.minZ]]},
  // The old buried wall overlap under the west stores is not part of the moved outline.
  {name:'Chimney service hall',rect:[162.3,-40.5,185.83,TOWER_SERVICE_FRONT],roofRect:[162.3,-40.5,185.83,TOWER_SERVICE_FRONT],height:6.4,rise:7.2,axis:'x',roof:'hip-gable',gableEnd:'east',hipInset:4},
  {name:'Ramp entrance link',rect:[185.83,-32,196,TOWER_SERVICE_FRONT],height:6.4,roof:'flat'},
@@ -141,6 +143,25 @@ export function createTowerBuildings(THREE,exterior){
  for(const spec of sourceRanges){
   placement=rangeMove(spec.name);
   const {rect:[x0,z0,x1,z1],height:h,name}=spec,cx=(x0+x1)/2,cz=(z0+z1)/2,w=x1-x0,d=z1-z0;
+  if(spec.footprint){
+   // Cut the entire stores shell and roof back around the kitchen corner.
+   // A polygon collision preserves the recess instead of blocking its bounds.
+   function shapePart(m,bottom,height,suffix){
+    const shape=new THREE.Shape(spec.footprint.map(([x,z])=>new THREE.Vector2(x,-z)));
+    const g=new THREE.ExtrudeGeometry(shape,{depth:height,bevelEnabled:false});g.rotateX(-Math.PI/2);
+    const part=mesh(uv(g),m,0,bottom,0,name+suffix);part.userData.collisionFootprint=spec.footprint;return part;
+   }
+   shapePart(brick,0,h,' walls');shapePart(red,0,.6,' plinth');shapePart(flat,h,.16,' flat roof');
+   for(let i=0;i<spec.footprint.length;i++){
+    const a=spec.footprint[i],b=spec.footprint[(i+1)%spec.footprint.length];
+    const alongX=a[1]===b[1],length=Math.hypot(b[0]-a[0],b[1]-a[1]);
+    // Only exposed edges receive a parapet; the north side remains joined.
+    if(a[1]===z0&&b[1]===z0)continue;
+    box(brick,(a[0]+b[0])/2,h+.26,(a[1]+b[1])/2,alongX?length:.25,.45,alongX?.25:length,name+' stepped parapet');
+    box(stone,(a[0]+b[0])/2,h+.5,(a[1]+b[1])/2,alongX?length:.38,.12,alongX?.38:length,name+' stepped coping');
+   }
+   continue;
+  }
   captureWorkshop=name===TOWER_WORKSHOP_COPY.source;
   if(name==='North tower range'){
    // Retain the stepped tower corridor after removing the yellow-marked hall.
@@ -350,8 +371,8 @@ export function createTowerBuildings(THREE,exterior){
   line([221.02,.22,towardsAdmin(z)],[221.3,.22,towardsAdmin(z)+.4],dark,.055,'Rear lane drain shoe');
  }
  placement=null;
- for(const z of [-20.8,-26,-31.5,-37,-42.5,-47])sash(146.27,3.3,z,1.25,2.7,-Math.PI/2);
- for(const x of [149,154,159])sash(x,3.3,TOWER_SERVICE_FRONT+.03,1.3,2.7);
+ for(const z of [-31.5,-37,-42.5,-47])sash(146.27,3.3,z,1.25,2.7,-Math.PI/2);
+ for(const x of [156,160])sash(x,3.3,TOWER_SERVICE_FRONT+.03,1.3,2.7);
  // The chimney identifies the green img2 building. The tower-connected stores
  // retain their hipped end; only the chimney hall carries the circular light.
  placement='purple';

@@ -6,8 +6,10 @@ import {wingWallGeometry,addWingRoofJunction} from './wing-roof-junctions.mjs';
 // Aerial interpretation of the user's outlined 1829 estate photograph.
 // Front road/reception is +Z; the corrected mast position is rear-left (-X, -Z).
 import {createTreeLayer} from './tree-layer.mjs';
+import {ANNEXE_ROAD_TREES} from './annexe-road-trees.mjs';
 import {addFrontLawnTrees} from './front-lawn-trees.mjs';
 import {addAdminPineTrees} from './admin-pine-trees.mjs';
+import {addOakTrees} from './oak-trees.mjs';
 import {westFrontPhotoProfile} from './west-front-photo-detail.mjs';
 import {westCourtPhotoProfile} from './west-court-photo-detail.mjs';
 import {createChapel} from './chapel.mjs';
@@ -62,6 +64,7 @@ export function createEscapeExterior(THREE,aspect){
   const trees=createTreeLayer(THREE,model);
   addFrontLawnTrees(THREE,trees);
   addAdminPineTrees(THREE,trees);
+  addOakTrees(THREE,trees);
   scene.add(new THREE.HemisphereLight(0xe4eff2,0x59634a,2));
   const sun=new THREE.DirectionalLight(0xffe2b7,2.8);sun.position.set(145,120,50);sun.target.position.set(230,0,-10);scene.add(sun.target);sun.castShadow=true;
   sun.shadow.mapSize.set(4096,4096);Object.assign(sun.shadow.camera,{left:-360,right:360,top:300,bottom:-300,near:1,far:850});sun.shadow.bias=-.0003;sun.shadow.normalBias=.25;scene.add(sun);
@@ -286,8 +289,13 @@ export function createEscapeExterior(THREE,aspect){
   // Broadleaf crowns cast shadows across the front lawn and site edges.
   const bark=material(0x5a4e3d),leaves=[material(0x43583a),material(0x566944),material(0x657448)];
   const crowns=leaves.map(mat=>({mat,items:[]}));
-  function tree(x,z,size=1){trees.add(mesh(new THREE.CylinderGeometry(.18*size,.3*size,4.5*size,6),bark,x,2.25*size,z));
-    for(let i=0;i<5;i++)crowns[i%3].items.push({x:x+(random()-.5)*3*size,y:(4.5+random()*2)*size,z:z+(random()-.5)*3*size,s:(1.7+random())*size});}
+  function tree(x,z,size=1){const trunk=mesh(new THREE.CylinderGeometry(.18*size,.3*size,4.5*size,6),bark,x,2.25*size,z);trees.add(trunk);
+    const treeCrowns=[];
+    for(let i=0;i<5;i++){
+      const crown={x:x+(random()-.5)*3*size,y:(4.5+random()*2)*size,z:z+(random()-.5)*3*size,s:(1.7+random())*size};
+      treeCrowns.push(crown);crowns[i%3].items.push({...crown,treeId:trunk.uuid});
+    }
+    trunk.userData.broadleafTree={x,z,size,crowns:treeCrowns};return trunk;}
   // Former parking rows become garden borders, with gravel access alongside.
   const soil=material(0x65513c);
   const shrubs=leaves.map(mat=>({mat,items:[]}));
@@ -323,6 +331,9 @@ export function createEscapeExterior(THREE,aspect){
     // right of the photo and the trees beyond this stretch of the lawn.
     const z=-47+i*12;if(z<=-35||z>=25)tree(92+OUTER_SHIFT,z,1.1);
   }
+  // Reuse the reference's small broadleaf crowns after all existing trees,
+  // preserving their random shapes and sharing the same foliage batches.
+  for(const spec of ANNEXE_ROAD_TREES){const trunk=tree(spec.x,spec.z,spec.size);trunk.name=spec.name;trunk.userData.annexeRoadTree=spec;}
   const churtonWard=createChurtonWard(THREE,{brick:photoBrick,roof,worldUV,material});model.add(churtonWard);
   const uptonFrithOscroft=createUptonFrithOscroft(THREE,{brick:photoBrick,roof,worldUV,material});model.add(uptonFrithOscroft);
   const irbyAshley=createIrbyAshley(THREE,{brick:photoBrick,roof,worldUV,material});model.add(irbyAshley);
@@ -370,6 +381,7 @@ export function createEscapeExterior(THREE,aspect){
   for(const [mat,items] of batches){const batch=new THREE.InstancedMesh(new THREE.BoxGeometry(1,1,1),mat,items.length);batch.receiveShadow=true;
     items.forEach((b,i)=>{dummy.position.set(b.x,b.y,b.z);dummy.scale.set(b.w,b.h,b.d);dummy.rotation.set(0,b.rotation,0);dummy.updateMatrix();batch.setMatrixAt(i,dummy.matrix);});model.add(batch);}
   for(const [parent,canopy] of [[trees,crowns],[model,shrubs]])for(const {mat,items} of canopy){if(!items.length)continue;const batch=new THREE.InstancedMesh(new THREE.IcosahedronGeometry(1,1),mat,items.length);batch.castShadow=true;batch.receiveShadow=true;
+    if(parent===trees)batch.userData.treeIds=items.map(item=>item.treeId);
     items.forEach((b,i)=>{dummy.position.set(b.x,b.y,b.z);dummy.scale.set(b.s,b.s*.85,b.s);dummy.rotation.set(0,i,0);dummy.updateMatrix();batch.setMatrixAt(i,dummy.matrix);});parent.add(batch);}
   const lawnMaterials=new Set();
   model.traverse(object=>{for(const mat of (Array.isArray(object.material)?object.material:[object.material]))if(mat?.userData.estateGrass)lawnMaterials.add(mat);});

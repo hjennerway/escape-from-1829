@@ -1,0 +1,97 @@
+[
+  {
+    "file": "test-annexe-outer-front.mjs",
+    "status": 0,
+    "failure": null
+  },
+  {
+    "file": "test-oakmere.mjs",
+    "status": 0,
+    "failure": null
+  },
+  {
+    "file": "test-annexe-wards.mjs",
+    "status": 0,
+    "failure": null
+  },
+  {
+    "file": "test-churton.mjs",
+    "status": 0,
+    "failure": null
+  },
+  {
+    "file": "test-upton.mjs",
+    "status": 0,
+    "failure": null
+  },
+  {
+    "file": "test-garages-mortuary.mjs",
+    "status": 0,
+    "failure": null
+  },
+  {
+    "file": "test-greenhouses.mjs",
+    "status": 0,
+    "failure": null
+  },
+  {
+    "file": "test-main-admin.mjs",
+    "status": 0,
+    "failure": null
+  },
+  {
+    "file": "test-main-admin-refine2.mjs",
+    "status": 0,
+    "failure": null
+  },
+  {
+    "file": "test-aerial-controls.mjs",
+    "status": 0,
+    "failure": null
+  },
+  {
+    "file": "test-device-location.mjs",
+    "status": 0,
+    "failure": null
+  },
+  {
+    "file": "test-aerial-layouts.mjs",
+    "status": 0,
+    "failure": null
+  },
+  {
+    "file": "test-modern-entrance.mjs",
+    "status": 0,
+    "failure": null
+  },
+  {
+    "file": "test-parsons-retrace.mjs",
+    "status": 0,
+    "failure": null
+  },
+  {
+    "file": "test-historic-roads.mjs",
+    "status": 1,
+    "failure": "AssertionError [ERR_ASSERTION]: Admin north service road must clear all building walls across its full width [228.88947100550808,-4.523245293100267]\r"
+  },
+  {
+    "file": "test-annexe-access.mjs",
+    "status": 0,
+    "failure": null
+  },
+  {
+    "file": "test-performance.mjs",
+    "status": 0,
+    "failure": null
+  },
+  {
+    "file": "test-aerial-performance.mjs",
+    "status": 1,
+    "failure": "AssertionError [ERR_ASSERTION]: Distant trees should submit substantially less geometry\r"
+  },
+  {
+    "file": "test-outhouse.mjs",
+    "status": 0,
+    "failure": null
+  }
+]

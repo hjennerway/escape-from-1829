@@ -1,0 +1,10 @@
+import {readFileSync} from 'node:fs';
+import {garagePoint} from '../dist/garages-mortuary.mjs';
+let script=readFileSync('Browser/artifacts/fit-admin-pines.mjs','utf8');
+script=script.replace(/const world=.*?;\r?\nconst pixels=.*?;\r?\nconst marks=.*?;/s,`const world=${JSON.stringify([garagePoint(-.18,3.28,-.2),garagePoint(-.18,3.28,7.4),garagePoint(52.68,3.28,-.2),garagePoint(52.68,3.28,7.4),garagePoint(52.68,4.46,3.6),[183.8,.34,52.5],[212.2,.34,52.5]])};
+const pixels=[[339,509],[344,552],[665,447],[678,492],[672,470],[353,294],[507,258]];
+const marks=[[747,200],[798,219],[843,242],[889,274],[937,314],[985,341],[1034,366],[1087,382]];`);
+script=script.replace('let p=[-110,200,165,-1.05,.52,1100,557,383]','let p=[158,180,306,-.28,.62,1000,696,310.5]');
+script=script.replace('Research/admin-pine-trees/placement-fit.json','Browser/artifacts/pine-road-fit.json');
+script=script.replace("'pine'+(i+1)","'route'+(i+1)");
+await import('data:text/javascript;base64,'+Buffer.from(script).toString('base64'));

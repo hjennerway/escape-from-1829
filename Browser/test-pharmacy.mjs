@@ -1,5 +1,4 @@
 import assert from 'node:assert/strict';
-import {readFileSync} from 'node:fs';
 import * as THREE from './dist/vendor/three.module.js';
 import {createEscapeExterior} from './dist/escape-exterior.mjs';
 import {createAerialLayouts} from './dist/aerial-layouts.mjs';
@@ -82,5 +81,4 @@ for(const historic of [false,true])for(const modern of [false,true]){
  const visibleObstacles=exteriorObstacles(THREE,exterior.model);
  for(const tank of PHARMACY_TANKS)assert.equal(visibleObstacles.some(b=>obstacleContains(b,tank.x,tank.z)),historic,'Tank collisions must follow Historic visibility');
 }
-for(const file of ['aerial.html','explore.html'])assert(readFileSync(new URL('./dist/'+file,import.meta.url),'utf8').includes('href="?view=pharmacy"'),'Both location menus link to the new court');
 console.log('PASS: pharmacy rear glazing and stairs, two ribbed gas cylinders, building clearance, circular collisions, Historic visibility and walking routes around both tanks.');

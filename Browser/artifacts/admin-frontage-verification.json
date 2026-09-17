@@ -1,0 +1,12 @@
+{
+  "translation": [
+    0,
+    -5.5
+  ],
+  "radius": 18,
+  "width": 5.5,
+  "semicircleVertices": 49,
+  "lawnVertices": 35,
+  "clearanceSamples": 3564,
+  "entranceStepGap": 1.17499999999999
+}

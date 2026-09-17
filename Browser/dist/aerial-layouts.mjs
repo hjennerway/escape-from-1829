@@ -1,7 +1,7 @@
 import {createHistoricRoads} from './historic-roads.mjs';
 import {createModernRoads} from './modern-roads.mjs';
 import {createModernEntrance} from './modern-entrance.mjs';
-import {createModernRearHardstanding} from './modern-rear-hardstanding.mjs';
+import {createModernCarPark,partitionCarParkTrees} from './modern-car-park.mjs';
 import {createTowerBuildings} from './tower-buildings.mjs';
 
 // Shared by the aerial preview and exterior walk; gameplay keeps its existing estate.
@@ -15,7 +15,8 @@ export function createAerialLayouts(THREE,exterior){
     (historicObjects.has(child)?historic:shared).add(child);
   }
   const roads=createModernRoads(THREE),entrance=createModernEntrance(THREE);shared.add(roads,entrance);
-  modern.add(createModernRearHardstanding(THREE,roads.getObjectByName('Parsons Lane (1829 Central)')));
+  const carPark=createModernCarPark(THREE);modern.add(carPark);
+  const carParkTrees=partitionCarParkTrees(THREE,exterior.trees);
   exterior.model.add(shared,historic,modern);
   const towerBuildings=createTowerBuildings(THREE,exterior);historic.add(towerBuildings);
   exterior.towerBuildings=towerBuildings;
@@ -31,6 +32,7 @@ export function createAerialLayouts(THREE,exterior){
     if(layout!=='historic'&&layout!=='modern')throw new Error('Unknown estate layout: '+layout);
     state[layout]=Boolean(visible);historic.visible=state.historic;modern.visible=state.modern;
     shared.visible=state.historic||state.modern;
+    carParkTrees.visible=!state.modern;
     entrance.visible=state.historic||state.modern; // Shared sweeping approach from Vivienne Smith Lane into 1829.
     for(const object of superseded)object.visible=!state.historic;
     for(const road of roads.children)road.visible=state.modern||(state.historic&&sharedRoads.has(road.name));
@@ -40,7 +42,7 @@ export function createAerialLayouts(THREE,exterior){
   setVisible('modern',false);
   // Individually toggled meshes must stay out of static aerial batches.
   const visibilityObjects=[...superseded,...roads.children,lane.getObjectByName('Vivienne Smith Lane eastern continuation')];
-  exterior.layouts={shared,historic,modern,roads,entrance,historicRoads,towerBuildings,visibilityObjects,setVisible,get state(){return {...state};}};
+  exterior.layouts={shared,historic,modern,roads,entrance,carPark,carParkTrees,historicRoads,towerBuildings,visibilityObjects,setVisible,get state(){return {...state};}};
   return exterior.layouts;
 }
 

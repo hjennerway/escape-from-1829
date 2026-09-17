@@ -93,6 +93,6 @@ const outline=layouts.historicRoads.userData.missingFootprints.segments;
 assert(!outline.some(s=>s.points.some(([x,z])=>x>84&&x<152&&z>-141&&z<-71)),'Superseded outlines must not cross the new courts');
 for(const page of ['aerial.html','explore.html']){
  const html=await readFile(new URL('./dist/'+page,import.meta.url),'utf8');
- assert(html.includes('href="?view=hale-daresbury-huxley-dunham"'),'Ward must be accessible from Locations in '+page);
+ for(const id of ['hale-daresbury','huxley-dunham'])assert(html.includes('href="?view='+id+'"'),id+' must be accessible from Locations in '+page);
 }
 console.log('PASS: Hale/Daresbury/Huxley/Dunham right-angle footprint, two storeys, matching sashes, two red-marked corridor links, continuous roofs, exposed junction windows, open courts, walking access and Historic visibility.');

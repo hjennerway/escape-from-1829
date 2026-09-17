@@ -19,11 +19,17 @@ export const IRBY_ASHLEY_ORIGINAL_FOOTPRINT=Object.freeze([
 // Latest blue footprint: extend the rectangular tower-side return to the
 // corridor side. The entire earlier cross wing/cap in yellow is removed.
 const connectionFront=IRBY_CONNECTION_FRONT-(WARD_POSITIONS.irbyAshley.z-IRBY_ASHLEY.z);
+// September 17 yellow-to-purple edge correction: translate the complete
+// rear range towards the fixed front by seven scene units. Its wings, bays,
+// glazing and roof junctions retain their dimensions; only the front links
+// shorten. The independently refined Grafton copy uses the original geometry.
+export const IRBY_REAR_SHIFT=7;
+const rearZ=z=>z+IRBY_REAR_SHIFT;
 export const IRBY_ASHLEY_FOOTPRINT=Object.freeze([
  ...IRBY_ASHLEY_ORIGINAL_FOOTPRINT.slice(0,8),
  [221.7,connectionFront],[211.9,connectionFront],
  ...IRBY_ASHLEY_ORIGINAL_FOOTPRINT.slice(12)
-].map(p=>Object.freeze(p)));
+].map(([x,z])=>Object.freeze([x,z<=-112.7?rearZ(z):z])));
 export const IRBY_ASHLEY_VIEWS=placeWardViews('irbyAshley',IRBY_ASHLEY,{
   'irby-ashley':{position:[283,55,-181],target:[234,3.5,-118],fov:48},
   // Looking +Z keeps the service road on the left, as in location.png.
@@ -49,12 +55,14 @@ export const IRBY_ASHLEY_ORIGINAL_ROOFS=Object.freeze([
 export const IRBY_ASHLEY_ROOFS=Object.freeze([
  ...IRBY_ASHLEY_ORIGINAL_ROOFS.filter(r=>r.name!=='Tower-facing cross wing')
   .map(r=>r.name==='Tower-side return'?{...r,rect:[211.9,-122.7,221.7,connectionFront]}:r)
+  .map(r=>({...r,rect:r.rect.map((v,i)=>i%2&&v<=-112.7?rearZ(v):v)}))
 ]);
 
 export function createIrbyAshley(THREE,{brick,roof,worldUV,material,rearElevation=null}){
   const building=new THREE.Group();building.name='Irby/Ashley';
   brick=brick.clone();brick.color.set(0xf2ded0);
   const {x:cx,z:cz,eave}=IRBY_ASHLEY;building.position.set(cx,0,cz);
+  const rz=z=>rearElevation?z:rearZ(z);
   const footprint=rearElevation?.footprint??IRBY_ASHLEY_FOOTPRINT;
   const roofs=rearElevation?.roofs??IRBY_ASHLEY_ROOFS;
   const local=footprint.map(([x,z])=>[x-cx,z-cz]);
@@ -74,10 +82,10 @@ export function createIrbyAshley(THREE,{brick,roof,worldUV,material,rearElevatio
     return wall;
   }
   // The tiny side projection has a lower roof and a continuous tall main wall.
-  const mainFootprint=rearElevation?local:local.filter(([x,z])=>!(Math.abs(x+cx-208.1)<.01&&[-122.7,-127].some(v=>Math.abs(z+cz-v)<.01)));
+  const mainFootprint=rearElevation?local:local.filter(([x,z])=>!(Math.abs(x+cx-208.1)<.01&&[-122.7,-127].some(v=>Math.abs(z+cz-rz(v))<.01)));
   mass(mainFootprint,eave,0,brick,'Yellow-refined Irby/Ashley walls').userData.historicOutlinePadding=.7;
   mass(mainFootprint,.38,0,material(0x685549),'Weathered brick foundation');
-  const projection=[[208.1,-127],[211.9,-127],[211.9,-122.7],[208.1,-122.7]].map(([x,z])=>[x-cx,z-cz]);
+  const projection=[[208.1,-127],[211.9,-127],[211.9,-122.7],[208.1,-122.7]].map(([x,z])=>[x-cx,rz(z)-cz]);
   if(!rearElevation)mass(projection,4,0,brick,'Low east service room').userData.historicOutlinePadding=.7;
   const detail=photoDetailPrimitives(THREE,{model:building,box,mesh,white,steel,material});
   function sash(x,y,z,r,w=1.3,h=2.75,label='Tall multi-pane sash'){
@@ -107,8 +115,8 @@ export function createIrbyAshley(THREE,{brick,roof,worldUV,material,rearElevatio
     const o=mesh(g,mat,0,0,0,name);if(upward)roofSurfaces.push(o);return o;
   }
   function ridge(a,b,r=.06,mat=red){detail.rod(a,b,r,mat);}
-  const conservatory={x0:236.5,x1:247.7,z0:-142,z1:-122.7};
-  const cornerX=247.7-cx,cornerZ=-122.7-cz,cornerRadius=3.6;
+  const conservatory={x0:236.5,x1:247.7,z0:rz(-142),z1:rz(-122.7)};
+  const cornerX=247.7-cx,cornerZ=rz(-122.7)-cz,cornerRadius=3.6;
   const cornerInset=cornerRadius*(Math.SQRT2-1);
   const cornerOutline=[[cornerX,cornerZ],[cornerX,cornerZ-cornerRadius],
     [cornerX-cornerInset,cornerZ-cornerRadius],
@@ -137,7 +145,7 @@ export function createIrbyAshley(THREE,{brick,roof,worldUV,material,rearElevatio
       ridge(v[2],v[5],.095,red);
       ridge(v[4],v[5],.085);
       ridge(v[5],cornerPeak,.085);
-      surface([v[5],cornerPeak,cornerValley,[(x0+x1)/2,y,-117.7-cz]],
+      surface([v[5],cornerPeak,cornerValley,[(x0+x1)/2,y,rz(-117.7)-cz]],
         [[0,1,2],[0,2,3]],roof,'Corner to west ridge junction slate roof',true);
       continue;
     }
@@ -172,7 +180,7 @@ export function createIrbyAshley(THREE,{brick,roof,worldUV,material,rearElevatio
     }
     corner={footprint:cornerOutline.map(([x,z])=>[x+cx,z+cz])};
     for(const bx of [232.8,225.1]){
-      const x=bx-cx,z=-122.7-cz;
+      const x=bx-cx,z=rz(-122.7)-cz;
       const outline=[[x+2.8,z+.03],[x+2.8,z-.48],[x+1.65,z-1.65],[x-1.65,z-1.65],[x-2.8,z-.48],[x-2.8,z+.03]];
       mass(outline,eave,0,brick,'Canted garden window bay');
       const v=outline.map(([u,w])=>[u,eave+.05,w]);v[0][1]=v[5][1]=eave+1.75;v[0][2]=v[5][2]=z+1.9;
@@ -183,7 +191,7 @@ export function createIrbyAshley(THREE,{brick,roof,worldUV,material,rearElevatio
         const dx=b[0]-a[0],dz=b[1]-a[1],l=Math.hypot(dx,dz),r=Math.atan2(-dz/l,dx/l);
         for(const y of [2.05,5.9])sash((a[0]+b[0])/2+Math.sin(r)*.025,y,(a[1]+b[1])/2+Math.cos(r)*.025,r,i===2?1.35:.86,2.7,'Canted bay sash');
       }
-      bays.push({x:bx,z:-122.7,footprint:outline.map(([u,v])=>[u+cx,v+cz])});
+      bays.push({x:bx,z:rz(-122.7),footprint:outline.map(([u,v])=>[u+cx,v+cz])});
     }
   }
   // Positive-area main perimeter: (dz, -dx) is the outward normal.
@@ -193,9 +201,9 @@ export function createIrbyAshley(THREE,{brick,roof,worldUV,material,rearElevatio
     const nx=dz/length,nz=-dx/length,r=Math.atan2(nx,nz);
     const wx=(a[0]+b[0])/2+cx,wz=(a[1]+b[1])/2+cz;
     if(rearElevation&&a[1]+cz<=-122.7+.001&&b[1]+cz<=-122.7+.001)continue;
-    const gardenGable=nz<-.9&&(wz<-131);
-    const westGardenReturn=Math.abs(wx-247.7)<.1&&wz<-122.7;
-    const gardenWall=nz<-.9&&Math.abs(wz+122.7)<.1;
+    const gardenGable=nz<-.9&&(wz<rz(-131));
+    const westGardenReturn=Math.abs(wx-247.7)<.1&&wz<rz(-122.7);
+    const gardenWall=nz<-.9&&Math.abs(wz-rz(-122.7))<.1;
     // Stop the old eaves at the new corner instead of crossing its hip roof.
     trim(westGardenReturn?[a[0],cornerZ-cornerRadius]:a,gardenWall?[cornerX-cornerRadius,b[1]]:b,{outward:-1});
     const count=gardenGable?1:westGardenReturn?2:gardenWall?4:Math.max(0,Math.floor((length-.8)/3.55));
@@ -205,13 +213,13 @@ export function createIrbyAshley(THREE,{brick,roof,worldUV,material,rearElevatio
       // the corner addition, matching the purple marks in the photograph.
       const t=gardenGable?.24:(n+.5)/count;
       const x=(gardenWall?[221,228.95,238.15,241.55][n]-cx:a[0]+dx*t)+nx*.035;
-      const z=(westGardenReturn?[-135.9,-127.8][n]-cz:a[1]+dz*t)+nz*.035;
+      const z=(westGardenReturn?rz([-135.9,-127.8][n])-cz:a[1]+dz*t)+nz*.035;
       if(gardenWall&&bays.some(bay=>Math.abs(x+cx-bay.x)<3.35))continue;
       // Low side room and glazed lean-to cover these ground-floor sections.
-      const covered=(Math.abs(x+cx-211.9)<.1&&z+cz<-122.6&&z+cz>-127.1)||
+      const covered=(Math.abs(x+cx-211.9)<.1&&z+cz<rz(-122.6)&&z+cz>rz(-127.1))||
         (gardenWall&&x+cx>conservatory.x0&&x+cx<conservatory.x1)||
         (westGardenReturn&&z+cz>conservatory.z0&&z+cz<conservatory.z1);
-      const entry=n===Math.floor(count/2)&&((nz>.9&&wx>250)||(nz<-.9&&wz<-131));
+      const entry=n===Math.floor(count/2)&&((nz>.9&&wx>250)||(nz<-.9&&wz<rz(-131)));
       if(entry)detail.door(x,z,r);
       const corridorContact=!rearElevation&&nz>.9&&x+cx>211.8&&x+cx<221.8&&
         Math.abs(z+cz-connectionFront)<.1;
@@ -223,12 +231,12 @@ export function createIrbyAshley(THREE,{brick,roof,worldUV,material,rearElevatio
   // Gable chimney breasts and tall, narrow stacks are prominent in both photos.
   const chimneys=[[255.45,-137.05,12.8],[255.5,-99.3,12.2],[238.55,-113.5,13.6],[224.6,-117.7,12.7],[215.55,-130.9,12.5]];
   for(const [wx,wz,height] of chimneys.filter(c=>!rearElevation||c[1]>-130)){
-    const x=wx-cx,z=wz-cz;
+    const x=wx-cx,z=(wz<=-112.7?rz(wz):wz)-cz;
     const o=mesh(worldUV(new THREE.BoxGeometry(1.15,height-eave+1,1.05),1.7),brick,x,(height+eave-1)/2,z,'Brick chimney stack');
     for(const [y,w,d] of [[height-.35,1.32,1.22],[height-.13,1.42,1.3]])box(red,x,y,z,w,.17,d);
     box(steel,x,height-.025,z,1.04,.055,.91);
     if(wz<-130){
-      const breast=mesh(worldUV(new THREE.BoxGeometry(.82,8.5,.28),1.7),brick,x,4.25,wz<-135?-137.58-cz:-131.88-cz,'Garden gable chimney breast');
+      const breast=mesh(worldUV(new THREE.BoxGeometry(.82,8.5,.28),1.7),brick,x,4.25,rz(wz<-135?-137.58:-131.88)-cz,'Garden gable chimney breast');
       breast.userData.orientedCollision=true;
     }
   }
@@ -240,7 +248,7 @@ export function createIrbyAshley(THREE,{brick,roof,worldUV,material,rearElevatio
     // Fall across X into the court, perpendicular to the previous Z slope.
     const roofY=x=>2.85+(x-x0)/(x1-x0)*.9;
     // The extension passes the wing's end, exposing a new right-hand side.
-    for(const [a,b] of [[[x0,z0],[x1,z0]],[[x0,z1],[x0,z0]],[[x1,z0],[x1,-137.5-cz]]]){
+    for(const [a,b] of [[[x0,z0],[x1,z0]],[[x0,z1],[x0,z0]],[[x1,z0],[x1,rz(-137.5)-cz]]]){
       const dx=b[0]-a[0],dz=b[1]-a[1],len=Math.hypot(dx,dz),r=Math.atan2(-dz,dx),mid=[(a[0]+b[0])/2,(a[1]+b[1])/2];
       const wall=mesh(worldUV(new THREE.BoxGeometry(len,1.05,.3),1.7),brick,mid[0],.525,mid[1],'Conservatory low brick wall');wall.rotation.y=r;wall.userData.orientedCollision=true;
       surface([[a[0],1.05,a[1]],[b[0],1.05,b[1]],[b[0],roofY(b[0]),b[1]],[a[0],roofY(a[0]),a[1]]],[[0,2,1],[0,3,2]],glass,'Conservatory side glazing');

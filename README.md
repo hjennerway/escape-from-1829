@@ -1,4 +1,23 @@
+## Play the game
+
+[Explore 1829 and the Asylum](https://hjennerway.github.io/escape-from-1829/)
+
+Use `WASD` to move, the mouse to look, `Shift` to sprint, `C` or `Ctrl` to crouch, `F` to toggle the torch, and `Tab` to open the floor map. Hold `E` at wall artwork to inspect it, or at any of the five emergency exits to escape. NPCs pause whenever `E` is held.
+
 # Escape from 1829
+
+The Modern car park follows the **Car park** polygon from the supplied KML,
+replacing the earlier rectangular rear hardstanding. Its 62 boundary vertices
+are retained. Fourteen intersecting broadleaf trees disappear while Modern is
+enabled; Historic alone restores them, and the KML oaks remain in both layouts.
+See the [car park import and validation notes](Research/car-park/README.md).
+
+**Main kitchen** fills the red-marked courtyard footprint with a single storey
+and three parallel white hipped roofs. Its walls meet both corridor legs;
+the deeper connector is shortened and the tower stores have a stepped corner
+so the buildings do not overlap. Choose **Main kitchen** in Locations for
+aerial, plan, roof and walking views. See the
+[placement and geometry notes](Research/main-kitchen/README.md).
 
 The water-tower corridor now turns 90 degrees towards Irby/Ashley, aligned with
 the gravel path. The three marked workshops move towards Main/admin, with the
@@ -8,10 +27,12 @@ The three workshop backs now extend directly to the other side of the corridor.
 Choose **Water tower / Irby corridor** in Locations for aerial, plan and walking
 views. See the [placement notes](Research/irby-corridor/README.md).
 
-Eleven large pine trees now occupy the blue-marked lawns beside Main/admin,
-Vivienne Smith Lane and the annexe. They share the same positions in Historic
-and Modern and follow the **Trees** toggle. Choose **Admin grounds** in
-Locations to inspect them. See the [placement notes](Research/admin-pine-trees/README.md).
+Thirteen large pines and thirteen large oaks now use the Pine1–Pine13 and Oak1–Oak12
+points from the supplied KMLs, including both distinct points named Oak8.
+The pines replace the earlier blue-marked planting.
+Each species shares one model with stable random rotations. All twenty-six appear
+in Historic and Modern and follow the **Trees** toggle. See the
+[KML placement notes](Research/kml-trees/README.md).
 
 The church grounds now follow the supplied aerial reference, with four short
 approach paths, a curved perimeter walk and grass pockets beside Parsons Lane.
@@ -39,13 +60,6 @@ photo directions, or open `explore.html?view=outhouse` to walk there. The
 brickwork, blue trim, weathered boarding, plinth and entrance paving appear
 in both layouts. [Reference and modelling notes](Research/outhouse/README.md).
 
-## Play the game
-
-[Explore 1829 and the Asylum](https://hjennerway.github.io/escape-from-1829/)
-
-Use `WASD` to move, the mouse to look, `Shift` to sprint, `C` or `Ctrl` to crouch, `F` to toggle the torch, and `Tab` to open the floor map. Hold `E` at wall artwork to inspect it, or at any of the five emergency exits to escape. NPCs pause whenever `E` is held.
-
-The browser build is served from [`Browser/dist`](Browser/dist). The Unity project and Blender source are included for continued development.
 
 ## Device location in aerial mode
 
@@ -56,6 +70,8 @@ Location requires HTTPS (or localhost for development) and browser permission. E
 The perimeter in `Browser/dist/device-location.mjs` approximates the whole modelled estate, including the annexe and southern grounds, from the existing outer roads. The 100 m buffer is measured to the nearest perimeter segment, with all interior points accepted. Both the boundary and the existing `earth-registration.mjs` alignment are approximate, not surveyed. Run `node Browser/test-device-location.mjs` for distance, coordinate and permission/error checks.
 
 ## Browser performance
+
+The browser build is served from [`Browser/dist`](Browser/dist). The Unity project and Blender source are included for continued development.
 
 Aerial mode compiles compatible opaque building pieces into material batches within their existing parents and 64-unit cells. This reduces draw submissions while retaining local view culling and independent layout switches. The original named objects remain available for material updates; walking continues to use the original collision geometry. Static scene transforms are cached, and road labels and the device-location marker remain dynamic. Material shaders are warmed asynchronously after the frontage image loads, before navigation rendering starts. Hidden browser tabs skip rendering.
 

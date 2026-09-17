@@ -86,3 +86,21 @@ The old descending rear gable verge and low junction patch (circled blue)
 are removed. Slate slopes now share the new connecting ridge, with a rear
 valley meeting the continuous garden range. Walls and glazing retain their
 previous positions.
+
+## Rear range moved towards the front, 17 September 2026
+
+`rear-shift-reference.png` identifies the front with the green arrow and the
+rear with the orange arrow. The yellow rear edge moves left to the purple
+line; the oak in `rear-shift-photo.png` remains at its existing location.
+Registering the visible roof corners gives an approximately seven-unit move
+along positive Z. The centre range, rear gables, bays, corner, service room,
+conservatory and their details translate together without scaling. The front
+ends and corridor contact remain fixed, with the connecting wings shortened.
+The road keeps its outer boundary; adjoining paving is trimmed to the new walls.
+
+Rear source coordinates in earlier notes now have seven added to Z: the west
+gable ends at -130.5 and the conservatory at -135, before ward placement.
+`Browser/artifacts/irby-rear-shift-after.png` shows the result from a camera
+fitted to the supplied screenshot. The corresponding `-clear.png` hides trees
+only for inspection. `verify-irby-rear-shift.mjs` compares the rear meshes and
+detail instances against the prior version to confirm their shapes are retained.

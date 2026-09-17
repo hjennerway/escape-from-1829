@@ -31,9 +31,14 @@ function junction(name,origin,centres){
 }
 export function mainAdminLaneJunctions(roads){
  const road=name=>roads.find(r=>r.name===name),west=VIVIENNE_LANE[8],east=VIVIENNE_LANE[11];
+ const drive=road('Admin east crossing drive'),inner=road('Annexe inner east road');
+ const join=drive.points.at(-1),split=inner.points.findIndex(p=>p[0]>join[0]);
+ const westArm={points:[join,...inner.points.slice(0,split).reverse()]};
+ const eastArm={points:[join,...inner.points.slice(split)]};
  return [
   ...junction('Admin west lane junction',west,[along(west,VIVIENNE_LANE[7],13),along(west,VIVIENNE_LANE[9],13),inFromEnd(road('Historic lane continuation'),false)]),
-  ...junction('Admin east four-way junction',east,[along(east,VIVIENNE_LANE[10],14),inFromEnd(road('Admin east crossing drive'),true),inFromEnd(road('Southern estate drive'),false),inFromEnd(road('Annexe inner east road'),false)])
+  ...junction('Admin south lane junction',east,[along(east,VIVIENNE_LANE[10],14),inFromEnd(road('Southern estate drive'),false),inFromEnd(inner,false)]),
+  ...junction('Admin pine road east junction',join,[inFromEnd(westArm,false,12),inFromEnd(drive,true,12),inFromEnd(eastArm,false,12)])
  ];
 }
 

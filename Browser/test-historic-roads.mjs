@@ -92,9 +92,9 @@ for(const [x,z] of half.points){
  assert(Math.abs(Math.hypot(x-ADMIN_ISLAND_CENTER[0],z-ADMIN_ISLAND_CENTER[1])-ADMIN_SEMICIRCLE_RADIUS)<1e-8);
  assert.equal(surfaceAt(x,z),'black road','The semicircular carriageway must remain continuous');
 }
-for(const x of [180,190,198,207,216])assert.equal(surfaceAt(x,49),'black road','The diameter must be the straight frontage road');
-for(const [x,z] of [[192,57],[198,60],[204,57]])assert.equal(surfaceAt(x,z),'grass','The half-disc must retain its grass lawn');
-assert.notEqual(surfaceAt(198,31),'black road','The removed northern half must leave no asphalt');
+for(const x of [-18,-8,0,9,18])assert.equal(surfaceAt(ADMIN_ISLAND_CENTER[0]+x,ADMIN_ISLAND_CENTER[1]),'black road','The diameter must be the straight frontage road');
+for(const [x,z] of [[-6,8],[0,11],[6,8]])assert.equal(surfaceAt(ADMIN_ISLAND_CENTER[0]+x,ADMIN_ISLAND_CENTER[1]+z),'grass','The half-disc must retain its grass lawn');
+assert.notEqual(surfaceAt(ADMIN_ISLAND_CENTER[0],ADMIN_ISLAND_CENTER[1]-ADMIN_SEMICIRCLE_RADIUS),'black road','The removed northern half must leave no asphalt');
 for(const [x,z] of [[267,42],[269,47]].map(shiftAnnexeTeardrop))assert.equal(surfaceAt(x,z),'grass','The slender teardrop must retain visible grass');
 const tear=HISTORIC_ROADS.find(r=>r.name==='Admin teardrop circulation');
 assert.deepEqual(tear.points[0],tear.points.at(-1),'The pointed teardrop road must close at its northern tip');
@@ -102,7 +102,7 @@ for(const p of tear.points)assert.equal(surfaceAt(...p),'black road','Teardrop c
 assert(Math.max(...tear.points.map(p=>p[1]))-Math.min(...tear.points.map(p=>p[1]))>1.5*(Math.max(...tear.points.map(p=>p[0]))-Math.min(...tear.points.map(p=>p[0]))),'Teardrop must be narrow and point north, not lie sideways');
 
 assert.deepEqual(HISTORIC_GRAVEL.map(p=>p.name),['Annexe service court gravel path'],'Only the yellow-marked gravel link is added');
-for(const name of ['Tower service court','Annexe sweeping entrance','Annexe central asphalt forecourt','Admin west lane junction','Admin east four-way junction'])assert(HISTORIC_PAVING.some(p=>p.name===name),'Retain each explicitly marked approach or junction: '+name);
+for(const name of ['Tower service court','Annexe sweeping entrance','Annexe central asphalt forecourt','Admin west lane junction','Admin south lane junction','Admin pine road east junction'])assert(HISTORIC_PAVING.some(p=>p.name===name),'Retain each explicitly marked approach or junction: '+name);
 for(const area of HISTORIC_PAVING){
  const mesh=layouts.historicRoads.getObjectByName(area.name);
  assert.equal(mesh.userData.surface,area.surface==='junction edge'?'stone kerb':'black road');

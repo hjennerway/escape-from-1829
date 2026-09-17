@@ -10,6 +10,12 @@ VIVIENNE_LANE[8]=[100,73.5];
 VIVIENNE_LANE[9]=[150,85];
 VIVIENNE_LANE[10]=[195,94];
 
+// Move the garage/mortuary stretch away from Main/admin just beyond the pine
+// crowns. Buildings use the same offset; the west approach and east tail
+// reconnect to the existing lane beyond this translated section.
+export const GARAGE_LANE_SHIFT=9.5;
+for(const index of [9,10,11])VIVIENNE_LANE[index]=[VIVIENNE_LANE[index][0],VIVIENNE_LANE[index][1]+GARAGE_LANE_SHIFT];
+
 export function roadCenterline(path){
   return path.name==='Vivienne Smith Lane'?VIVIENNE_LANE:path.coordinates.map(p=>earthToScene(...p));
 }

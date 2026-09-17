@@ -42,11 +42,19 @@ for(const name of ['Annexe rear north access','Annexe rear east access','Annexe 
 for(const p of [[12,-88],[56,-93],[72,-75],[86,-61]]){
  const q=annexeGroundPoint(p[0],0,p[1]);assert(!['black road','stone kerb'].includes(surface(q[0],q[2])),'Former rear roads and hardstanding return to grass');
 }
-// Join the exact red-circled western and four-way junctions, including old caps.
-for(const [name,index] of [['Historic lane continuation',8],['Admin east crossing drive',11],['Southern estate drive',11],['Annexe inner east road',11]]){
- const road=HISTORIC_ROADS.find(r=>r.name===name),end=name==='Admin east crossing drive',p=end?road.points.at(-1):road.points[0],a=VIVIENNE_LANE[index];
+// Keep the western and southern mouths open after removing the pine-side arm.
+for(const [name,index] of [['Historic lane continuation',8],['Southern estate drive',11],['Annexe inner east road',11]]){
+ const road=HISTORIC_ROADS.find(r=>r.name===name),p=road.points[0],a=VIVIENNE_LANE[index];
  for(let i=0;i<=32;i++){const t=i/32;assert.equal(surface(a[0]+(p[0]-a[0])*t,a[1]+(p[1]-a[1])*t),'black road','Red-circled gap must be joined: '+name);}
 }
+const pineDrive=HISTORIC_ROAD_TRACES.find(r=>r.name==='Admin east crossing drive');
+for(let i=1;i<pineDrive.points.length;i++){
+ const a=pineDrive.points[i-1],b=pineDrive.points[i];
+ for(let j=0;j<=8;j++)assert.equal(surface(a[0]+(b[0]-a[0])*j/8,a[1]+(b[1]-a[1])*j/8),'black road','The red lawn route and its new junction must be continuous');
+}
+for(const p of [[260.75,56.875],[257.78,66.67],[255,76],[252.25,84.64],[248.77,91.15],[247,94.5]])
+ assert(!['black road','stone kerb'].includes(surface(...p)),'The blue-circled road and former north junction mouth must return to grass');
+assert(!l.historicRoads.getObjectByName('Admin east four-way junction'),'Remove the former four-way apron');
 // The two newly circled northern road ends connect around the annexe.
 const northern=HISTORIC_ROADS.find(r=>r.name==='Northern Parsons Lane connection');
 assert.deepEqual(northern.points[0],[270,-117]);
