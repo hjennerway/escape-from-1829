@@ -16,6 +16,7 @@ try{
  for(const [name,position,target,fov] of [
   ['aerial',[158,81,72],[158,3,15],34],
   ['door',[157,5,44],[156.3,2.4,28],55],
+  ['side',[125,29,46],[157,4,17],42],
   ['plan',[157,88,16.01],[157,0,16],38]
  ]){
   await page.evaluate(({position,target,fov})=>{

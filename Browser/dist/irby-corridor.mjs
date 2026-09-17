@@ -34,6 +34,29 @@ export function addIrbyCorridor(THREE,{corridor,...materials}){
  geometry.computeVertexNormals();
  const brick=materials.brick.clone();brick.color.set(0xc7a391);
  const cap=new THREE.Mesh(materials.worldUV(geometry,1.7),brick);cap.name='Irby corridor exposed end gable';cap.castShadow=true;cap.receiveShadow=true;branch.add(cap);
+ // Purple circle: a closed entrance centred on the exposed end beside Irby.
+ const door=new THREE.Group();door.name='Irby corridor end doorway';
+ door.position.set(length,0,0);door.rotation.y=Math.PI/2;branch.add(door);
+ door.userData.reference='Research/irby-corridor/door-reference.png';
+ const {material}=materials,stone=material(0xc8c6b7),paint=material(0xd5d8ce);
+ const timber=material(0x3f504f),shadow=material(0x283334);
+ const glass=material(0x536c72,{roughness:.52,metalness:.12});
+ function box(m,x,y,z,w,h,d,name){
+  const mesh=new THREE.Mesh(new THREE.BoxGeometry(w,h,d),m);mesh.name='Irby corridor door '+name;
+  mesh.position.set(x,y,z);mesh.castShadow=true;mesh.receiveShadow=true;door.add(mesh);
+ }
+ box(shadow,0,1.43,.028,1.82,2.86,.056,'reveal');
+ box(timber,0,1.41,.074,1.58,2.74,.064,'timber leaf');
+ for(const side of [-1,1]){
+  box(paint,side*.86,1.43,.12,.12,2.86,.15,'jamb');
+  box(glass,side*.32,2.10,.117,.55,.88,.024,'upper glazing');
+  box(timber,side*.32,.84,.134,.53,1.02,.07,'lower panel');
+ }
+ for(const x of [-.625,0,.625])box(paint,x,2.10,.145,.055,1,.055,'glazing stile');
+ for(const y of [1.62,2.58])box(paint,0,y,.145,1.30,.065,.055,'glazing rail');
+ box(stone,0,2.95,.10,2.08,.18,.22,'lintel');
+ box(stone,0,.065,.25,2.04,.13,.60,'threshold');
+ box(stone,.61,1.38,.19,.045,.23,.06,'handle');
  corridor.add(branch);
  const footprint={minX:run.start[0],maxX:run.end[0],minZ:run.start[1]-run.width/2,maxZ:run.start[1]+run.width/2};
  branch.userData.footprint=footprint;corridor.userData.footprints.push(footprint);

@@ -1,0 +1,542 @@
+[
+  {
+    "view": "default",
+    "mode": "full",
+    "medianRenderMs": 713.3999999985099,
+    "drawCalls": 2693,
+    "triangles": 1052779
+  },
+  {
+    "view": "default",
+    "mode": "auto",
+    "medianRenderMs": 512.8999999985099,
+    "drawCalls": 2659,
+    "triangles": 683329,
+    "lod": {
+      "windows": 2702,
+      "parts": 42329,
+      "groups": 28,
+      "patterns": 373,
+      "atlasPages": 3
+    },
+    "levels": [
+      {
+        "name": "West wing mirrored from east",
+        "level": 2
+      },
+      {
+        "name": "Churton Ward",
+        "level": 1
+      },
+      {
+        "name": "Upton/Frith/Oscroft",
+        "level": 2
+      },
+      {
+        "name": "Shared estate",
+        "level": 1
+      },
+      {
+        "name": "Irby/Ashley",
+        "level": 2
+      },
+      {
+        "name": "Grafton/Edge",
+        "level": 2
+      },
+      {
+        "name": "Hale/Daresbury/Huxley/Dunham",
+        "level": 2
+      },
+      {
+        "name": "Estates department",
+        "level": 2
+      },
+      {
+        "name": "Farndon ward",
+        "level": 2
+      },
+      {
+        "name": "Witby Ward",
+        "level": 2
+      },
+      {
+        "name": "Main/admin building",
+        "level": 1
+      },
+      {
+        "name": "Main kitchen window",
+        "level": 2
+      },
+      {
+        "name": "Main kitchen window",
+        "level": 2
+      },
+      {
+        "name": "Main kitchen window",
+        "level": 2
+      },
+      {
+        "name": "Main kitchen window",
+        "level": 2
+      },
+      {
+        "name": "Main kitchen window",
+        "level": 2
+      },
+      {
+        "name": "Main kitchen window",
+        "level": 2
+      },
+      {
+        "name": "Main kitchen window",
+        "level": 2
+      },
+      {
+        "name": "Main kitchen window",
+        "level": 2
+      },
+      {
+        "name": "Main/admin corridor front doorway",
+        "level": 2
+      },
+      {
+        "name": "Laundry and brick connecting corridor",
+        "level": 2
+      },
+      {
+        "name": "Larkton/Jodrell",
+        "level": 1
+      },
+      {
+        "name": "Tarvin/Jarman",
+        "level": 1
+      },
+      {
+        "name": "Leighton/Newton",
+        "level": 1
+      },
+      {
+        "name": "Oakmere",
+        "level": 1
+      },
+      {
+        "name": "Picton/Carden",
+        "level": 1
+      },
+      {
+        "name": "Oakmere lawn elevation",
+        "level": 1
+      },
+      {
+        "name": "The annexe",
+        "level": 1
+      }
+    ]
+  },
+  {
+    "view": "historic-admin-grounds",
+    "mode": "full",
+    "medianRenderMs": 9.5,
+    "drawCalls": 1702,
+    "triangles": 1095071
+  },
+  {
+    "view": "historic-admin-grounds",
+    "mode": "auto",
+    "medianRenderMs": 10.5,
+    "drawCalls": 1665,
+    "triangles": 623153,
+    "lod": {
+      "windows": 2702,
+      "parts": 42329,
+      "groups": 28,
+      "patterns": 373,
+      "atlasPages": 3
+    },
+    "levels": [
+      {
+        "name": "West wing mirrored from east",
+        "level": 1
+      },
+      {
+        "name": "Churton Ward",
+        "level": 1
+      },
+      {
+        "name": "Upton/Frith/Oscroft",
+        "level": 2
+      },
+      {
+        "name": "Shared estate",
+        "level": 1
+      },
+      {
+        "name": "Irby/Ashley",
+        "level": 1
+      },
+      {
+        "name": "Grafton/Edge",
+        "level": 2
+      },
+      {
+        "name": "Hale/Daresbury/Huxley/Dunham",
+        "level": 1
+      },
+      {
+        "name": "Estates department",
+        "level": 2
+      },
+      {
+        "name": "Farndon ward",
+        "level": 2
+      },
+      {
+        "name": "Witby Ward",
+        "level": 2
+      },
+      {
+        "name": "Main/admin building",
+        "level": 1
+      },
+      {
+        "name": "Main kitchen window",
+        "level": 2
+      },
+      {
+        "name": "Main kitchen window",
+        "level": 2
+      },
+      {
+        "name": "Main kitchen window",
+        "level": 2
+      },
+      {
+        "name": "Main kitchen window",
+        "level": 2
+      },
+      {
+        "name": "Main kitchen window",
+        "level": 2
+      },
+      {
+        "name": "Main kitchen window",
+        "level": 2
+      },
+      {
+        "name": "Main kitchen window",
+        "level": 2
+      },
+      {
+        "name": "Main kitchen window",
+        "level": 2
+      },
+      {
+        "name": "Main/admin corridor front doorway",
+        "level": 2
+      },
+      {
+        "name": "Laundry and brick connecting corridor",
+        "level": 2
+      },
+      {
+        "name": "Larkton/Jodrell",
+        "level": 1
+      },
+      {
+        "name": "Tarvin/Jarman",
+        "level": 1
+      },
+      {
+        "name": "Leighton/Newton",
+        "level": 1
+      },
+      {
+        "name": "Oakmere",
+        "level": 1
+      },
+      {
+        "name": "Picton/Carden",
+        "level": 1
+      },
+      {
+        "name": "Oakmere lawn elevation",
+        "level": 1
+      },
+      {
+        "name": "The annexe",
+        "level": 1
+      }
+    ]
+  },
+  {
+    "view": "annexe",
+    "mode": "full",
+    "medianRenderMs": 6.199999999254942,
+    "drawCalls": 727,
+    "triangles": 567502
+  },
+  {
+    "view": "annexe",
+    "mode": "auto",
+    "medianRenderMs": 12.599999997764826,
+    "drawCalls": 718,
+    "triangles": 309162,
+    "lod": {
+      "windows": 2702,
+      "parts": 42329,
+      "groups": 28,
+      "patterns": 373,
+      "atlasPages": 3
+    },
+    "levels": [
+      {
+        "name": "West wing mirrored from east",
+        "level": 2
+      },
+      {
+        "name": "Churton Ward",
+        "level": 1
+      },
+      {
+        "name": "Upton/Frith/Oscroft",
+        "level": 0
+      },
+      {
+        "name": "Shared estate",
+        "level": 1
+      },
+      {
+        "name": "Irby/Ashley",
+        "level": 1
+      },
+      {
+        "name": "Grafton/Edge",
+        "level": 1
+      },
+      {
+        "name": "Hale/Daresbury/Huxley/Dunham",
+        "level": 1
+      },
+      {
+        "name": "Estates department",
+        "level": 2
+      },
+      {
+        "name": "Farndon ward",
+        "level": 1
+      },
+      {
+        "name": "Witby Ward",
+        "level": 1
+      },
+      {
+        "name": "Main/admin building",
+        "level": 2
+      },
+      {
+        "name": "Main kitchen window",
+        "level": 2
+      },
+      {
+        "name": "Main kitchen window",
+        "level": 2
+      },
+      {
+        "name": "Main kitchen window",
+        "level": 2
+      },
+      {
+        "name": "Main kitchen window",
+        "level": 2
+      },
+      {
+        "name": "Main kitchen window",
+        "level": 2
+      },
+      {
+        "name": "Main kitchen window",
+        "level": 2
+      },
+      {
+        "name": "Main kitchen window",
+        "level": 2
+      },
+      {
+        "name": "Main kitchen window",
+        "level": 2
+      },
+      {
+        "name": "Main/admin corridor front doorway",
+        "level": 2
+      },
+      {
+        "name": "Laundry and brick connecting corridor",
+        "level": 2
+      },
+      {
+        "name": "Larkton/Jodrell",
+        "level": 1
+      },
+      {
+        "name": "Tarvin/Jarman",
+        "level": 1
+      },
+      {
+        "name": "Leighton/Newton",
+        "level": 2
+      },
+      {
+        "name": "Oakmere",
+        "level": 2
+      },
+      {
+        "name": "Picton/Carden",
+        "level": 2
+      },
+      {
+        "name": "Oakmere lawn elevation",
+        "level": 1
+      },
+      {
+        "name": "The annexe",
+        "level": 1
+      }
+    ]
+  },
+  {
+    "view": "front",
+    "mode": "full",
+    "medianRenderMs": 11.199999999254942,
+    "drawCalls": 1294,
+    "triangles": 566543
+  },
+  {
+    "view": "front",
+    "mode": "auto",
+    "medianRenderMs": 15.400000002235174,
+    "drawCalls": 1287,
+    "triangles": 472403,
+    "lod": {
+      "windows": 2702,
+      "parts": 42329,
+      "groups": 28,
+      "patterns": 373,
+      "atlasPages": 3
+    },
+    "levels": [
+      {
+        "name": "West wing mirrored from east",
+        "level": 0
+      },
+      {
+        "name": "Churton Ward",
+        "level": 0
+      },
+      {
+        "name": "Upton/Frith/Oscroft",
+        "level": 1
+      },
+      {
+        "name": "Shared estate",
+        "level": 0
+      },
+      {
+        "name": "Irby/Ashley",
+        "level": 1
+      },
+      {
+        "name": "Grafton/Edge",
+        "level": 1
+      },
+      {
+        "name": "Hale/Daresbury/Huxley/Dunham",
+        "level": 1
+      },
+      {
+        "name": "Estates department",
+        "level": 1
+      },
+      {
+        "name": "Farndon ward",
+        "level": 1
+      },
+      {
+        "name": "Witby Ward",
+        "level": 1
+      },
+      {
+        "name": "Main/admin building",
+        "level": 0
+      },
+      {
+        "name": "Main kitchen window",
+        "level": 1
+      },
+      {
+        "name": "Main kitchen window",
+        "level": 1
+      },
+      {
+        "name": "Main kitchen window",
+        "level": 1
+      },
+      {
+        "name": "Main kitchen window",
+        "level": 1
+      },
+      {
+        "name": "Main kitchen window",
+        "level": 1
+      },
+      {
+        "name": "Main kitchen window",
+        "level": 1
+      },
+      {
+        "name": "Main kitchen window",
+        "level": 1
+      },
+      {
+        "name": "Main kitchen window",
+        "level": 1
+      },
+      {
+        "name": "Main/admin corridor front doorway",
+        "level": 1
+      },
+      {
+        "name": "Laundry and brick connecting corridor",
+        "level": 0
+      },
+      {
+        "name": "Larkton/Jodrell",
+        "level": 1
+      },
+      {
+        "name": "Tarvin/Jarman",
+        "level": 1
+      },
+      {
+        "name": "Leighton/Newton",
+        "level": 0
+      },
+      {
+        "name": "Oakmere",
+        "level": 0
+      },
+      {
+        "name": "Picton/Carden",
+        "level": 0
+      },
+      {
+        "name": "Oakmere lawn elevation",
+        "level": 0
+      },
+      {
+        "name": "The annexe",
+        "level": 0
+      }
+    ]
+  }
+]

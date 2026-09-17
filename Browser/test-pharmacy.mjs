@@ -12,6 +12,7 @@ exterior.model.updateMatrixWorld(true);
 const tanks=group.children.filter(o=>o.userData.pharmacyTank);
 assert.equal(tanks.length,2,'Exactly two ground-mounted gas cylinders');
 const obstacles=exteriorObstacles(THREE,exterior.model);
+const buildingParts=group.children.filter(o=>!o.userData.pharmacyTank),clearanceRay=new THREE.Raycaster();
 for(const tank of tanks){
  const {x,z,radius,height,name}=tank.userData.pharmacyTank;
  const bounds=new THREE.Box3().setFromObject(tank);
@@ -20,11 +21,20 @@ for(const tank of tanks){
  assert.equal(tank.getObjectByName(name+' vertical corrugations').count,128);
  for(const range of TOWER_RANGES){
   const [x0,z0,x1,z1]=range.rect,dx=Math.max(x0-x,0,x-x1),dz=Math.max(z0-z,0,z-z1);
-  assert(Math.hypot(dx,dz)>radius+.8,'Gas cylinder must clear existing walls and workshop entrances: '+range.name);
+  const gap=Math.hypot(dx,dz)-(radius+.12);
+  if(range.name==='Chimney service hall')assert(gap>.25&&gap<.8,'Both cylinder bases must almost touch the blue-circled hall without overlap');
+  else assert(gap>.68,'Gas cylinder must clear other walls and workshop entrances: '+range.name);
  }
  const chimneyDistance=Math.hypot(x-ESTATE_CHIMNEY.x,z-ESTATE_CHIMNEY.z);
  assert(chimneyDistance>radius+2.8+.8,'Relocated cylinders clear the fixed chimney foundation');
- assert(chimneyDistance<13,'Both cylinders sit beside the chimney at the blue marks');
+ assert(Math.abs(bounds.getCenter(new THREE.Vector3()).z+18.9)<1e-5,'The complete cylinders move towards Main/admin');
+ // Check the real roof, coping, and wall surfaces at several cylinder heights.
+ clearanceRay.far=radius+.14;
+ for(const y of [.3,2.7,6.4,6.55,9,11.5])for(let i=0;i<64;i++){
+  const angle=i*Math.PI/32;
+  clearanceRay.set(new THREE.Vector3(x,y,z),new THREE.Vector3(Math.cos(angle),0,Math.sin(angle)));
+  assert(!clearanceRay.intersectObjects(buildingParts,true).length,'Cylinder shell and plinth must clear the actual building geometry');
+ }
  assert(obstacles.some(b=>obstacleContains(b,x,z)),'Gas cylinder must block walking through its base');
  assert(!obstacles.some(b=>obstacleContains(b,x+radius*.83,z+radius*.83,0)),'Tank collisions follow the round footprint, not an oversized square');
  tank.traverse(o=>{if(o.isMesh)for(const attribute of Object.values(o.geometry.attributes))assert([...attribute.array].every(Number.isFinite),'Tank geometry must be finite');});
@@ -33,14 +43,14 @@ const [a,b]=PHARMACY_TANKS;
 assert(Math.hypot(a.x-b.x,a.z-b.z)>a.radius+b.radius+2,'There must be a walking gap between the two cylinders');
 const photo=PHARMACY_VIEWS['pharmacy-photo'];
 assert(!obstacles.some(b=>obstacleContains(b,photo.position[0],photo.position[2])),'New photo viewpoint starts outside all collisions');
-// Walk through the vacated tank court, and through each narrow access gap
-// around the cylinders at their new position beside the fixed chimney.
+// The hall-side gap is deliberately narrow. Walk behind, beside and between
+// the moved cylinders, rather than through their near-touching wall gap.
 for(const [start,target] of [
  [[184,-44],[232,-44]],
- [[163,-33],[163,-20]],
- [[174.8,-31],[174.8,-22]],
- [[186.99,-33],[186.99,-22.3]],
- [[164,-22.28],[186,-22.28]]
+ [[163,-25],[163,-14]],
+ [[174.8,-26],[174.8,-14]],
+ [[186.99,-26],[186.99,-14]],
+ [[164,-24.5],[186,-24.5]]
 ]){
  const camera=new THREE.PerspectiveCamera(),walker=createWalker(camera,obstacles);
  walker.setView({position:[start[0],1.8,start[1]],target:[target[0],1.8,target[1]]});walker.keys.add('KeyW');

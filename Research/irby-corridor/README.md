@@ -34,6 +34,11 @@ windows are omitted on both sides of the covered joint, and the exposed
 corridor end has a closed brick gable. Service-court asphalt wraps around the
 new footprint. Grafton/Edge retains its independently refined shape.
 
+The later [purple-circled doorway reference](door-reference.png) adds a closed
+blue-green timber door to the centre of that exposed corridor end, facing the
+service court at x=221.7, z=-66.6. Pale jambs, a stone lintel and threshold,
+upper glazing, lower panels and a handle match the existing corridor detailing.
+
 Choose **Water tower / Irby corridor** in Locations, or open
 `aerial.html?view=irby-corridor`, `aerial.html?view=irby-corridor-plan` or
 `explore.html?view=irby-corridor`. The new construction follows the Historic

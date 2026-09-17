@@ -47,6 +47,10 @@ vm.createContext(sandbox);
 vm.runInContext(source+`\nglobalThis.test={finish,escapeCutscene,start,update,animate,resetPositions,showFloor,player,keys,get escapeExterior(){return escapeExterior;},get lastRender(){return renderer.lastRender;},get arrival(){return arrivalCutscene;},get elapsed(){return elapsed;},get enemies(){return enemies;},get groups(){return floorGroups;},get artPanels(){return artPanels;},get artViewing(){return artViewing;},openArtViewer,closeArtViewer,get ready(){return ready;},get state(){return state;},get camera(){return camera;},setElapsed(v){elapsed=v;},setAudio(){audioOn=false;},setFrameDt(v){clock.getDelta=()=>v;}};`,sandbox);
 await new Promise(r=>setImmediate(r));
 const t=sandbox.test;assert(t.ready,'init must complete');t.setAudio();
+assert.deepEqual(Array.from(t.enemies,e=>({name:e.name,type:e.type,x:e.x,z:e.z})),[
+ {name:'Security',type:1,x:80,z:57.5},
+ {name:'Deva asylum ghost',type:2,x:50,z:52.5}
+],'Only Security and the ghost spawn, retaining their behavior types and positions');
 function startPlaying(){t.start();t.arrival.update(3);assert.equal(t.state,'play');}
 
 // Exercise the actual arrival state and animation loop with deliberately slow frames.
@@ -104,7 +108,7 @@ for(const stair of layout.stairs){
 Object.assign(t.player,{x:50,z:20,floor:1});t.showFloor();
 for(const e of t.enemies){Object.assign(e,{x:35,z:30,floor:0,memory:0,rethink:0,path:[]});}
 t.setElapsed(6);t.update(.04);assert.equal(t.state,'play');
-const ghost=t.enemies[2];for(let i=0;i<100&&ghost.floor===0;i++)t.update(.04);
+const ghost=t.enemies.find(e=>e.type===2);for(let i=0;i<100&&ghost.floor===0;i++)t.update(.04);
 assert.equal(ghost.floor,1,'Ghost must follow upstairs via stair route');
 Object.assign(t.player,{x:50,z:20,floor:1});
 for(const e of t.enemies){Object.assign(e,{x:50,z:20,floor:0,memory:0,rethink:0,path:[]});}
@@ -135,7 +139,7 @@ startPlaying();t.finish(true,layout.exits[0].name);t.escapeCutscene.skip();asser
 t.escapeCutscene.skip();assert.equal(t.state,'won','Repeated skip is harmless');
 startPlaying();assert.equal(t.escapeCutscene.active,false);assert.equal(elements.get('escapeCutscene').hidden,true);
 assert.equal(elements.get('hud').hidden,false);
-t.finish(false,'Sylvia');assert.equal(t.state,'lost');assert.equal(t.escapeCutscene.active,false);
+t.finish(false,'Security');assert.equal(t.state,'lost');assert.equal(t.escapeCutscene.active,false);
 const reducedRoot=element('reduced'),reducedCamera=new Object3D();reducedCamera.aspect=16/9;
 let completed=0;const reduced=createEscapeCutscene(reducedRoot,()=>completed++,{reducedMotion:true,getCamera:()=>reducedCamera});
 reduced.start();const still={...reducedCamera.position};reduced.update(5);assert.deepEqual({...reducedCamera.position},still);

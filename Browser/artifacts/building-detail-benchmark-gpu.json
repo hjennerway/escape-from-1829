@@ -1,0 +1,558 @@
+[
+  {
+    "view": "default",
+    "mode": "full",
+    "gpu": "ANGLE (NVIDIA, NVIDIA GeForce RTX 3090 Ti (0x00002203) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+    "medianRenderMs": 9.699999999254942,
+    "meanFrameMs": 16.942499999981372,
+    "drawCalls": 2693,
+    "triangles": 1052779
+  },
+  {
+    "view": "default",
+    "mode": "auto",
+    "gpu": "ANGLE (NVIDIA, NVIDIA GeForce RTX 3090 Ti (0x00002203) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+    "medianRenderMs": 9.599999997764826,
+    "meanFrameMs": 16.845833333333335,
+    "drawCalls": 2659,
+    "triangles": 683329,
+    "lod": {
+      "windows": 2702,
+      "parts": 42329,
+      "groups": 28,
+      "patterns": 373,
+      "atlasPages": 3
+    },
+    "levels": [
+      {
+        "name": "West wing mirrored from east",
+        "level": 2
+      },
+      {
+        "name": "Churton Ward",
+        "level": 1
+      },
+      {
+        "name": "Upton/Frith/Oscroft",
+        "level": 2
+      },
+      {
+        "name": "Shared estate",
+        "level": 1
+      },
+      {
+        "name": "Irby/Ashley",
+        "level": 2
+      },
+      {
+        "name": "Grafton/Edge",
+        "level": 2
+      },
+      {
+        "name": "Hale/Daresbury/Huxley/Dunham",
+        "level": 2
+      },
+      {
+        "name": "Estates department",
+        "level": 2
+      },
+      {
+        "name": "Farndon ward",
+        "level": 2
+      },
+      {
+        "name": "Witby Ward",
+        "level": 2
+      },
+      {
+        "name": "Main/admin building",
+        "level": 1
+      },
+      {
+        "name": "Main kitchen window",
+        "level": 2
+      },
+      {
+        "name": "Main kitchen window",
+        "level": 2
+      },
+      {
+        "name": "Main kitchen window",
+        "level": 2
+      },
+      {
+        "name": "Main kitchen window",
+        "level": 2
+      },
+      {
+        "name": "Main kitchen window",
+        "level": 2
+      },
+      {
+        "name": "Main kitchen window",
+        "level": 2
+      },
+      {
+        "name": "Main kitchen window",
+        "level": 2
+      },
+      {
+        "name": "Main kitchen window",
+        "level": 2
+      },
+      {
+        "name": "Main/admin corridor front doorway",
+        "level": 2
+      },
+      {
+        "name": "Laundry and brick connecting corridor",
+        "level": 2
+      },
+      {
+        "name": "Larkton/Jodrell",
+        "level": 1
+      },
+      {
+        "name": "Tarvin/Jarman",
+        "level": 1
+      },
+      {
+        "name": "Leighton/Newton",
+        "level": 1
+      },
+      {
+        "name": "Oakmere",
+        "level": 1
+      },
+      {
+        "name": "Picton/Carden",
+        "level": 1
+      },
+      {
+        "name": "Oakmere lawn elevation",
+        "level": 1
+      },
+      {
+        "name": "The annexe",
+        "level": 1
+      }
+    ]
+  },
+  {
+    "view": "historic-admin-grounds",
+    "mode": "full",
+    "gpu": "ANGLE (NVIDIA, NVIDIA GeForce RTX 3090 Ti (0x00002203) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+    "medianRenderMs": 8.299999997019768,
+    "meanFrameMs": 16.729999999981374,
+    "drawCalls": 1700,
+    "triangles": 1094952
+  },
+  {
+    "view": "historic-admin-grounds",
+    "mode": "auto",
+    "gpu": "ANGLE (NVIDIA, NVIDIA GeForce RTX 3090 Ti (0x00002203) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+    "medianRenderMs": 12,
+    "meanFrameMs": 17.749166666685294,
+    "drawCalls": 1663,
+    "triangles": 623035,
+    "lod": {
+      "windows": 2702,
+      "parts": 42329,
+      "groups": 28,
+      "patterns": 373,
+      "atlasPages": 3
+    },
+    "levels": [
+      {
+        "name": "West wing mirrored from east",
+        "level": 1
+      },
+      {
+        "name": "Churton Ward",
+        "level": 1
+      },
+      {
+        "name": "Upton/Frith/Oscroft",
+        "level": 2
+      },
+      {
+        "name": "Shared estate",
+        "level": 1
+      },
+      {
+        "name": "Irby/Ashley",
+        "level": 1
+      },
+      {
+        "name": "Grafton/Edge",
+        "level": 2
+      },
+      {
+        "name": "Hale/Daresbury/Huxley/Dunham",
+        "level": 1
+      },
+      {
+        "name": "Estates department",
+        "level": 2
+      },
+      {
+        "name": "Farndon ward",
+        "level": 2
+      },
+      {
+        "name": "Witby Ward",
+        "level": 2
+      },
+      {
+        "name": "Main/admin building",
+        "level": 1
+      },
+      {
+        "name": "Main kitchen window",
+        "level": 2
+      },
+      {
+        "name": "Main kitchen window",
+        "level": 2
+      },
+      {
+        "name": "Main kitchen window",
+        "level": 2
+      },
+      {
+        "name": "Main kitchen window",
+        "level": 2
+      },
+      {
+        "name": "Main kitchen window",
+        "level": 2
+      },
+      {
+        "name": "Main kitchen window",
+        "level": 2
+      },
+      {
+        "name": "Main kitchen window",
+        "level": 2
+      },
+      {
+        "name": "Main kitchen window",
+        "level": 2
+      },
+      {
+        "name": "Main/admin corridor front doorway",
+        "level": 2
+      },
+      {
+        "name": "Laundry and brick connecting corridor",
+        "level": 2
+      },
+      {
+        "name": "Larkton/Jodrell",
+        "level": 1
+      },
+      {
+        "name": "Tarvin/Jarman",
+        "level": 1
+      },
+      {
+        "name": "Leighton/Newton",
+        "level": 1
+      },
+      {
+        "name": "Oakmere",
+        "level": 1
+      },
+      {
+        "name": "Picton/Carden",
+        "level": 1
+      },
+      {
+        "name": "Oakmere lawn elevation",
+        "level": 1
+      },
+      {
+        "name": "The annexe",
+        "level": 1
+      }
+    ]
+  },
+  {
+    "view": "annexe",
+    "mode": "full",
+    "gpu": "ANGLE (NVIDIA, NVIDIA GeForce RTX 3090 Ti (0x00002203) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+    "medianRenderMs": 7.300000000745058,
+    "meanFrameMs": 16.811666666685294,
+    "drawCalls": 726,
+    "triangles": 567363
+  },
+  {
+    "view": "annexe",
+    "mode": "auto",
+    "gpu": "ANGLE (NVIDIA, NVIDIA GeForce RTX 3090 Ti (0x00002203) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+    "medianRenderMs": 5.800000000745058,
+    "meanFrameMs": 16.877500000006208,
+    "drawCalls": 717,
+    "triangles": 309107,
+    "lod": {
+      "windows": 2702,
+      "parts": 42329,
+      "groups": 28,
+      "patterns": 373,
+      "atlasPages": 3
+    },
+    "levels": [
+      {
+        "name": "West wing mirrored from east",
+        "level": 2
+      },
+      {
+        "name": "Churton Ward",
+        "level": 1
+      },
+      {
+        "name": "Upton/Frith/Oscroft",
+        "level": 0
+      },
+      {
+        "name": "Shared estate",
+        "level": 1
+      },
+      {
+        "name": "Irby/Ashley",
+        "level": 1
+      },
+      {
+        "name": "Grafton/Edge",
+        "level": 1
+      },
+      {
+        "name": "Hale/Daresbury/Huxley/Dunham",
+        "level": 1
+      },
+      {
+        "name": "Estates department",
+        "level": 2
+      },
+      {
+        "name": "Farndon ward",
+        "level": 1
+      },
+      {
+        "name": "Witby Ward",
+        "level": 1
+      },
+      {
+        "name": "Main/admin building",
+        "level": 2
+      },
+      {
+        "name": "Main kitchen window",
+        "level": 2
+      },
+      {
+        "name": "Main kitchen window",
+        "level": 2
+      },
+      {
+        "name": "Main kitchen window",
+        "level": 2
+      },
+      {
+        "name": "Main kitchen window",
+        "level": 2
+      },
+      {
+        "name": "Main kitchen window",
+        "level": 2
+      },
+      {
+        "name": "Main kitchen window",
+        "level": 2
+      },
+      {
+        "name": "Main kitchen window",
+        "level": 2
+      },
+      {
+        "name": "Main kitchen window",
+        "level": 2
+      },
+      {
+        "name": "Main/admin corridor front doorway",
+        "level": 2
+      },
+      {
+        "name": "Laundry and brick connecting corridor",
+        "level": 2
+      },
+      {
+        "name": "Larkton/Jodrell",
+        "level": 1
+      },
+      {
+        "name": "Tarvin/Jarman",
+        "level": 1
+      },
+      {
+        "name": "Leighton/Newton",
+        "level": 2
+      },
+      {
+        "name": "Oakmere",
+        "level": 2
+      },
+      {
+        "name": "Picton/Carden",
+        "level": 2
+      },
+      {
+        "name": "Oakmere lawn elevation",
+        "level": 1
+      },
+      {
+        "name": "The annexe",
+        "level": 1
+      }
+    ]
+  },
+  {
+    "view": "front",
+    "mode": "full",
+    "gpu": "ANGLE (NVIDIA, NVIDIA GeForce RTX 3090 Ti (0x00002203) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+    "medianRenderMs": 5.600000001490116,
+    "meanFrameMs": 16.882500000018627,
+    "drawCalls": 1293,
+    "triangles": 565478
+  },
+  {
+    "view": "front",
+    "mode": "auto",
+    "gpu": "ANGLE (NVIDIA, NVIDIA GeForce RTX 3090 Ti (0x00002203) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+    "medianRenderMs": 5.600000001490116,
+    "meanFrameMs": 16.671666666679084,
+    "drawCalls": 1286,
+    "triangles": 471645,
+    "lod": {
+      "windows": 2702,
+      "parts": 42329,
+      "groups": 28,
+      "patterns": 373,
+      "atlasPages": 3
+    },
+    "levels": [
+      {
+        "name": "West wing mirrored from east",
+        "level": 0
+      },
+      {
+        "name": "Churton Ward",
+        "level": 0
+      },
+      {
+        "name": "Upton/Frith/Oscroft",
+        "level": 1
+      },
+      {
+        "name": "Shared estate",
+        "level": 0
+      },
+      {
+        "name": "Irby/Ashley",
+        "level": 1
+      },
+      {
+        "name": "Grafton/Edge",
+        "level": 1
+      },
+      {
+        "name": "Hale/Daresbury/Huxley/Dunham",
+        "level": 1
+      },
+      {
+        "name": "Estates department",
+        "level": 1
+      },
+      {
+        "name": "Farndon ward",
+        "level": 1
+      },
+      {
+        "name": "Witby Ward",
+        "level": 1
+      },
+      {
+        "name": "Main/admin building",
+        "level": 0
+      },
+      {
+        "name": "Main kitchen window",
+        "level": 1
+      },
+      {
+        "name": "Main kitchen window",
+        "level": 1
+      },
+      {
+        "name": "Main kitchen window",
+        "level": 1
+      },
+      {
+        "name": "Main kitchen window",
+        "level": 1
+      },
+      {
+        "name": "Main kitchen window",
+        "level": 1
+      },
+      {
+        "name": "Main kitchen window",
+        "level": 1
+      },
+      {
+        "name": "Main kitchen window",
+        "level": 1
+      },
+      {
+        "name": "Main kitchen window",
+        "level": 1
+      },
+      {
+        "name": "Main/admin corridor front doorway",
+        "level": 1
+      },
+      {
+        "name": "Laundry and brick connecting corridor",
+        "level": 0
+      },
+      {
+        "name": "Larkton/Jodrell",
+        "level": 1
+      },
+      {
+        "name": "Tarvin/Jarman",
+        "level": 1
+      },
+      {
+        "name": "Leighton/Newton",
+        "level": 0
+      },
+      {
+        "name": "Oakmere",
+        "level": 0
+      },
+      {
+        "name": "Picton/Carden",
+        "level": 0
+      },
+      {
+        "name": "Oakmere lawn elevation",
+        "level": 0
+      },
+      {
+        "name": "The annexe",
+        "level": 0
+      }
+    ]
+  }
+]

@@ -19,10 +19,11 @@ export function annexePoint(x,y,z){const c=Math.cos(ANNEXE.rotation),s=Math.sin(
 export function annexeLocal([x,z]){const c=Math.cos(ANNEXE.rotation),s=Math.sin(ANNEXE.rotation),dx=x-ANNEXE.x,dz=z-ANNEXE.z;return [(c*dx-s*dz)/ANNEXE.scale,(s*dx+c*dz)/ANNEXE.scale];}
 const shot=(p,t,fov=55)=>Object.freeze({position:annexePoint(p[0],p[1]>30?p[1]*ANNEXE.scale:p[1],p[2]),target:annexePoint(...t),fov});
 // The supplied coloured circles identify wards, not new building outlines.
-// Long connecting ranges, the entrance and the unmarked east end stay shared.
+// The west outer frontage and its court link belong to Larkton/Jodrell.
+// The entrance, east connecting range and unmarked east end stay shared.
 export const ANNEXE_WARDS=Object.freeze([
  {id:'larkton-jodrell',name:'Larkton/Jodrell',referenceColor:'yellow',
-  rangeNames:['West end ward','West rear pavilion','West rear link','West end projecting rooms','West end middle rooms'],
+  rangeNames:['West end ward','West rear pavilion','West rear link','West end projecting rooms','West end middle rooms','West front connecting ward','West court outer link'],
   aerial:shot([-245,125,77],[-156,5,-35]),walk:shot([-196,1.8,-35],[-166,6,-35],65)},
  {id:'tarvin-jarman',name:'Tarvin/Jarman',referenceColor:'blue',
   rangeNames:['West court inner return','West court front range','West court outer return','West court corner infill','West court back range'],

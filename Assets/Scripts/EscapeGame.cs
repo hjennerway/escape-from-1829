@@ -14,7 +14,6 @@ public class EscapeGame : MonoBehaviour
     public bool Sprinting { get; private set; }
     public bool Crouching { get; private set; }
     public bool HoldingUse => Input.GetKey(KeyCode.E);
-    public float Noise => Sprinting ? 22 : Crouching ? 2 : moving ? 7 : 0;
     public float Elapsed { get; private set; }
     CharacterController controller;
     Light torch;
@@ -154,11 +153,11 @@ public class EscapeGame : MonoBehaviour
     }
     void BuildEnemies()
     {
-        int[] xs={8,32,20}, zs={9,23,21}; string[] names={"Sylvia","Security","Deva asylum ghost"};
-        for(int i=0;i<3;i++)
+        int[] xs={32,20}, zs={23,21}, types={1,2}; string[] names={"Security","Deva asylum ghost"};
+        for(int i=0;i<names.Length;i++)
         {
             var g=new GameObject(names[i]); g.transform.position=Layout.World(xs[i],zs[i]);
-            var enemy=g.AddComponent<Pursuer>(); enemy.Configure(this,i); enemies.Add(enemy);
+            var enemy=g.AddComponent<Pursuer>(); enemy.Configure(this,types[i]); enemies.Add(enemy);
         }
     }
     public void StartRun()
@@ -240,9 +239,9 @@ public class EscapeGame : MonoBehaviour
             Rect(0,0,1280,720,new Color(.018f,.03f,.028f,.95f)); Rect(60,70,4,570,mint);
             Label(92,74,1000,30,"CHESTER  /  THE 1829 BUILDING  /  A FICTIONAL NIGHT ESCAPE",small);
             Label(90,123,1090,110,state==2?"YOU MADE IT OUT.":state==3?"Return to office, 3 days per week":paused?"HOLD YOUR BREATH.":"ESCAPE FROM 1829",title);
-            Label(94,227,980,65,state==2?"Escaped through "+result+" in "+Elapsed.ToString("0.0")+" seconds.":state==3?"Captured by "+result+" after "+Elapsed.ToString("0.0")+" seconds.":"Five exits. Three pursuers. One chance to find your way through the dark.",heading);
+            Label(94,227,980,65,state==2?"Escaped through "+result+" in "+Elapsed.ToString("0.0")+" seconds.":state==3?"Captured by "+result+" after "+Elapsed.ToString("0.0")+" seconds.":"Five exits. Two pursuers. One chance to find your way through the dark.",heading);
             Label(94,314,520,152,"WASD  Move     MOUSE  Look\nSHIFT  Sprint     CTRL / C  Crouch\nF  Torch     TAB  Building map\nE  Hold at art or an exit     ESC  Pause",small);
-            Label(690,318,480,150,"SYLVIA follows noise and searches your last position.\nSECURITY patrols the wings and chases on sight.\nTHE DEVA ASYLUM GHOST senses you through walls. Aim your torch at it to slow its approach.",small);
+            Label(690,318,480,150,"SECURITY patrols the wings and chases on sight.\nTHE DEVA ASYLUM GHOST senses you through walls. Aim your torch at it to slow its approach.",small);
             if(GUI.Button(new Rect(94,500,310,60),paused?"RESUME":state==0?"ENTER THE BUILDING":"TRY ANOTHER ROUTE",button))
             { if(paused){paused=false;LockCursor(true);}else StartRun(); }
             Label(450,500,170,25,"LOOK SENSITIVITY",small); sensitivity=GUI.HorizontalSlider(new Rect(450,540,200,20),sensitivity,.4f,4);

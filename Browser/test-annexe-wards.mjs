@@ -40,7 +40,7 @@ for(const ward of ANNEXE_WARDS){
  }
  for(const page of ['aerial.html','explore.html'])assert(readFileSync(new URL('./dist/'+page,import.meta.url),'utf8').includes('href="?view='+ward.id+'"'),page+' links to '+ward.name);
 }
-for(const name of ['Central hall','Entrance range','Central rear spine','West front connecting ward','East front connecting ward','East end ward'])assert.equal(annexe.getObjectByName(name+' brick walls').parent,annexe,'shared and unmarked ranges retain their ownership');
+for(const name of ['Central hall','Entrance range','Central rear spine','East front connecting ward','East end ward'])assert.equal(annexe.getObjectByName(name+' brick walls').parent,annexe,'shared and unmarked ranges retain their ownership');
 for(const historic of [true,false]){
  layouts.setVisible('historic',historic);layouts.setVisible('modern',!historic);
  for(const group of Object.values(annexe.userData.wards)){

@@ -3,14 +3,15 @@
 // Positions and dimensions are visual estimates, not surveyed measurements.
 export const PHARMACY_VIEWS=Object.freeze({
  pharmacy:{position:[290,125,-95],target:[193,4,-38],fov:46},
- 'pharmacy-photo':{position:[184,1.8,-44],target:[175,5,-26],fov:65},
+ 'pharmacy-photo':{position:[184,1.8,-44],target:[175,5,-18.9],fov:65},
  'pharmacy-plan':{position:[191,120,-35.99],target:[191,0,-36],fov:46}
 });
 export const PHARMACY_TANKS=Object.freeze([
- // Blue X marks beside the fixed chimney, in the space opened by the purple
- // group. Keep one narrow walking gap beside the stores and moved hall.
- {name:'East pharmacy gas cylinder',x:181.4,z:-27.8,radius:5,plinth:2.7,height:11.5},
- {name:'West pharmacy gas cylinder',x:168.5,z:-27.8,radius:5,plinth:2.7,height:11.5}
+ // Move 8.9 units towards Main/admin, almost touching the blue-circled hall.
+ // Retain both sizes and their side-to-side spacing; the east plinth coping
+ // stops 0.48 units from its rear wall, with the roof overhang also clear.
+ {name:'East pharmacy gas cylinder',x:181.4,z:-18.9,radius:5,plinth:2.7,height:11.5},
+ {name:'West pharmacy gas cylinder',x:168.5,z:-18.9,radius:5,plinth:2.7,height:11.5}
 ].map(Object.freeze));
 
 export function addPharmacyCourt(THREE,{group,brick,stone,blue,dark,mat,box,detail,line,sash,door}){
@@ -65,7 +66,7 @@ export function addPharmacyCourt(THREE,{group,brick,stone,blue,dark,mat,box,deta
  }
  stair('Pharmacy east rear stairs',218.1,-48.82,1.08);
  stair('Pharmacy west rear stairs',198.6,-49.12,1.08);
- for(const [x,z,h] of [[181,-49.05,7.3],[201.4,-49.05,7.3],[209.2,-48.75,8.9],[220.4,-48.75,8.9]]){
+ for(const [x,z,h] of [[183.5,-49.05,7.3],[201.4,-49.05,7.3],[209.2,-48.75,8.9],[220.4,-48.75,8.9]]){
   line([x,.2,z-.2],[x,h,z-.2],dark,.055,'Pharmacy rear downpipe');
   line([x,.22,z-.2],[x,.22,z-.55],dark,.055,'Pharmacy drain shoe');
  }

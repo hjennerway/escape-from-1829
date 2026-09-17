@@ -14,6 +14,11 @@ Neither the road nor the tower complex moves.
 
 ## Photographs
 
+- `ward-mural.png`: user-supplied photograph added on 17 September 2026,
+  showing the stairwell mural with Irby and Ashley labels. The original is
+  retained without edits. `Browser/build-building-photos.mjs` generates
+  `Browser/dist/building-photos/irby-ashley-mural.webp` as the fourth image
+  in the Irby / Ashley Ward gallery.
 - `img1.jpg`: garden elevation from the purple-dot side, with the broad
   left gable, tall sash windows, chimney breasts and low glazed lean-to.
   The request calls this camera img2, but no img2 was supplied. The purple

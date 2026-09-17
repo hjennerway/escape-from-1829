@@ -1,10 +1,13 @@
 # Pharmacy rear court
 
-The latest [workshop and cylinder placement](../tower-buildings/README.md#workshop-and-cylinder-placement)
-supersedes the positions below. The cylinders now stand beside the fixed chimney
-at (168.5,-27.8) and (181.4,-27.8), in the space opened by moving the purple group
-towards Main/admin. Their sizes are unchanged; narrow walking gaps remain around
-both cylinders. The pharmacy camera views and rear stairs follow this correction.
+The latest [flat court infill and cylinder correction](../tower-buildings/README.md#flat-court-infill-and-cylinders-17-september-2026)
+moves both cylinders 8.9 units towards Main/admin to (168.5,-18.9) and
+(181.4,-18.9), almost touching the blue-circled hall. Their sizes and separation
+are unchanged. The plinth copings remain about 0.48–0.63 units from its walls,
+with no roof intersection. Walking routes remain beside, behind and between
+the cylinders; the narrow hall-side gap is no longer a walking route. Their
+hardstanding extends to the hall, and the pharmacy photo view follows the row.
+This supersedes the earlier cylinder positions below.
 
 The user supplied `img1-loc.png` to locate the rear façades, the ground-level
 photo direction (red arrow), and two gas storage cylinders (yellow circles).

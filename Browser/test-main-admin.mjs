@@ -73,6 +73,8 @@ const lowFront=building.userData.openings.filter(o=>o.face==='low west frontage'
 assert.equal(lowFront.length,3);
 assert(!building.userData.openings.some(o=>o.face==='recessed low connection'),'The marked end has a door instead of the old sash');
 assert(!building.getObjectByName('Recessed low west connection walls'),'The offset room is replaced by the aligned corridor');
+assert(!building.userData.openings.some(o=>o.face==='west return'&&o.y<5),'The roof-obscured ground-floor window is removed');
+assert.equal(building.userData.openings.filter(o=>o.face==='west return'&&o.y>5).length,6,'All upper windows on that side remain');
 const r=ADMIN_FRONT_CORRIDOR,corridor=exterior.adminCorridor;
 const extension=corridor.getObjectByName(r.name),door=corridor.getObjectByName('Main/admin corridor front doorway');
 const near=(a,b,message)=>assert(Math.abs(a-b)<1e-5,message);
@@ -101,6 +103,15 @@ for(const x of [r.x+.445,r.x-.445]){
  ray.set(new THREE.Vector3(x,2.12,r.frontZ+1),new THREE.Vector3(0,0,-1));
  assert.equal(ray.intersectObject(exterior.model,true)[0]?.object.name,'Corridor door glazing','New door panes are fully exposed');
 }
+// The blue side line meets the pavilion continuously, including the former
+// gap behind the low room. Sample the seam closely enough to detect a notch.
+for(let z=13.1;z<r.frontZ;z+=.2)for(const x of [159.25,159.9,160.45]){
+ ray.set(new THREE.Vector3(x,10,z),new THREE.Vector3(0,-1,0));
+ const hit=ray.intersectObject(corridor,true).find(h=>h.object.name.endsWith('slate roof'));
+ assert(hit&&hit.point.y>3.3,'Continuous roof reaches the blue line at the Main/admin wall');
+ assert(obs.some(o=>obstacleContains(o,x,z)),'Side connection has continuous collision');
+}
+assert(extension.userData.openings.every(o=>o.side===-1),'No corridor windows remain on the attached side');
 ray.set(new THREE.Vector3(r.x,4.05,r.frontZ+1),new THREE.Vector3(0,0,-1));
 assert.equal(ray.intersectObject(corridor,true)[0]?.object.name,'Main/admin corridor front brick gable','The roof end above the door is closed');
 for(let z=r.frontZ+.8;z<=46;z+=.5)assert(!obs.some(o=>obstacleContains(o,r.x,z)),'Door can be approached directly from the front');

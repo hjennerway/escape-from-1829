@@ -18,6 +18,10 @@ export function addAdminFrontCorridor(THREE,{corridor,brick,roof,material,worldU
   // have windows; the remaining sides are attached to existing rooms.
   detailRanges:[[r.frontZ-r.roomBackZ,r.frontZ-13]]
  });
+ // The blue-line correction attaches the entire east side to Main/admin.
+ // Keep the exposed west-side detailing; retire the now-internal east face.
+ branch.remove(branch.getObjectByName('Corridor south windows'));
+ branch.userData.openings=branch.userData.openings.filter(o=>o.side===-1);
  corridor.add(branch);
  const front=new THREE.Group();front.name='Main/admin corridor front doorway';
  front.position.set(r.x,0,r.frontZ);corridor.add(front);
@@ -53,7 +57,7 @@ export function addAdminFrontCorridor(THREE,{corridor,brick,roof,material,worldU
 
  // Retain the original contact with the tall pavilion. This narrow attached
  // strip carries the same east roof slope down to its wall, avoiding a new gap.
- const sideWidth=r.adminWallX-(r.x+half),sideDepth=r.frontZ-r.roomBackZ;
+ const sideWidth=r.adminWallX-(r.x+half),sideDepth=r.frontZ-r.joinZ;
  const sideX=half+sideWidth/2,sideHeight=roofY(half+sideWidth)-.03;
  box(masonry,sideX,sideHeight/2,-sideDepth/2,sideWidth,sideHeight,sideDepth,'Corridor pavilion side connection walls');
  surface([[half,roofY(half),0],[half+sideWidth,roofY(half+sideWidth),0],
@@ -66,7 +70,7 @@ export function addAdminFrontCorridor(THREE,{corridor,brick,roof,material,worldU
   [[0,2,1],[0,3,2]],masonry,'Corridor pavilion side connection rear infill');
  const footprint={minX:r.x-half,maxX:r.x+half,minZ:r.joinZ,maxZ:r.frontZ};
  branch.userData.footprint=footprint;
- const sideFootprint={minX:r.x+half,maxX:r.adminWallX,minZ:r.roomBackZ,maxZ:r.frontZ};
+ const sideFootprint={minX:r.x+half,maxX:r.adminWallX,minZ:r.joinZ,maxZ:r.frontZ};
  corridor.userData.footprints.push(footprint,sideFootprint);
  for(const key of ['minX','minZ'])corridor.userData.footprint[key]=Math.min(corridor.userData.footprint[key],footprint[key],sideFootprint[key]);
  for(const key of ['maxX','maxZ'])corridor.userData.footprint[key]=Math.max(corridor.userData.footprint[key],footprint[key],sideFootprint[key]);

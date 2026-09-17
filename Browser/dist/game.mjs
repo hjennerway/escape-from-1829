@@ -108,13 +108,11 @@ function openArtViewer(art){
 }
 function closeArtViewer(){if(!artViewing)return;artViewing=null;$('artViewer').hidden=true;}
 function enemyModel(type){
- const group=new THREE.Group(),skin=material(type===2?0x91bcad:0xb09a7b),coat=material([0x643632,0x202f42,0x577b6e][type],type===2?{transparent:true,opacity:.68,emissive:0x345e51,emissiveIntensity:.4}:{});
+ const group=new THREE.Group(),skin=material(type===2?0x91bcad:0xb09a7b),coat=material(type===2?0x577b6e:0x202f42,type===2?{transparent:true,opacity:.68,emissive:0x345e51,emissiveIntensity:.4}:{});
  mesh(new THREE.CylinderGeometry(.23,.37,1.12,8),coat,[0,1.05,0],group);
  mesh(new THREE.SphereGeometry(.21,12,10),skin,[0,1.86,0],group);
  for(const s of [-1,1]){const arm=box([.14,.72,.17],[s*.34,1.2,0],coat,group);arm.rotation.z=s*.13;if(type!==2){box([.15,.58,.17],[s*.15,.31,0],material(0x1e241e),group);box([.19,.12,.32],[s*.15,.06,.08],material(0x11160f),group);}mesh(new THREE.SphereGeometry(.035,6,6),material(0xf5e0b0,{emissive:type===2?0x9cffe1:0xfa694b,emissiveIntensity:2}),[s*.074,1.89,.185],group);}
- if(type===0){mesh(new THREE.SphereGeometry(.22,12,10,0,Math.PI*2,0,Math.PI*.55),material(0x342a21),[0,1.91,0],group);box([.12,.18,.025],[.15,1.4,.25],material(0xc4c1a6),group);}
  if(type===1){box([.48,.12,.4],[0,2.02,0],material(0x151c26),group);box([.14,.16,.035],[-.13,1.44,.24],material(0xb5b783),group);}
- if(type===0)wornSign(group,'Sylvia',1.33,0x5d322b);
  if(type===2){const l=new THREE.PointLight(0x81d6b5,6,5);l.position.y=1.3;group.add(l);wornSign(group,'Deva ghost',1.18,0x1c4a40);}
  scene.add(group);return group;
 }
@@ -163,7 +161,7 @@ async function init(){
   label('UPPER GALLERY|BOTH STAIRS LEAD TO EXITS',20*layout.cellSize,2.7,16*layout.cellSize);
   floorGroups.push(groupSince(upperSnapshot,FLOOR_HEIGHT));layout=floors[0];floorGroups[1].visible=false;
   torch=new THREE.SpotLight(0xffe4af,24,30,.50,.55,1.2);torchTarget=new THREE.Object3D();scene.add(torch,torchTarget);torch.target=torchTarget;
-  enemies=[['Sylvia',8,9],['Security',32,23],['Deva asylum ghost',20,21]].map(([name,x,z],type)=>({name,type,floor:0,spawn:{x:x*2.5,z:z*2.5,floor:0},x:x*2.5,z:z*2.5,mesh:enemyModel(type),path:[],memory:0,rethink:0,route:0,target:null}));
+  enemies=[['Security',32,23,1],['Deva asylum ghost',20,21,2]].map(([name,x,z,type])=>({name,type,floor:0,spawn:{x:x*2.5,z:z*2.5,floor:0},x:x*2.5,z:z*2.5,mesh:enemyModel(type),path:[],memory:0,rethink:0,route:0,target:null}));
   escapeExterior=createEscapeExterior(THREE,innerWidth/innerHeight);
   canvas.addEventListener('webglcontextrestored',escapeExterior.invalidateShadows);
   bindTreeToggle(escapeExterior,document);
@@ -199,14 +197,14 @@ function update(dt){
  if(walkable(layout,player.x+dx,player.z,.34))player.x+=dx;if(walkable(layout,player.x,player.z+dz,.34))player.z+=dz;
  footPhase+=dt*(moving?(sprint?14:9):0);camera.position.set(player.x,THREE.MathUtils.lerp(camera.position.y,player.floor*FLOOR_HEIGHT+(crouch?1.1:1.65),Math.min(1,dt*12))+(moving?Math.sin(footPhase)*.018:0),player.z);camera.rotation.set(pitch,yaw,0);
  if(moving&&!crouch&&elapsed-lastStep>(sprint?.30:.48)){beep(95,.11,sprint?.08:.035);lastStep=elapsed;}
- let nearest=99;const noise=sprint?22:crouch?2:moving?7:0;
+ let nearest=99;
  if(keys.has('KeyE')){enemies.forEach(e=>e.mesh.visible=e.floor===player.floor);}
  else for(const e of enemies){
   const sameFloor=e.floor===player.floor,enemyLayout=floors[e.floor];let distance=Math.hypot(e.x-player.x,e.z-player.z);e.mesh.visible=sameFloor;if(sameFloor)nearest=Math.min(nearest,distance);if(elapsed<5)continue;
-  const seen=sameFloor&&distance<(crouch?8:e.type===1?22:16)&&visible(enemyLayout,e,player),heard=sameFloor&&e.type===0&&distance<noise;
-  if(seen||heard||e.type===2){e.target={...player};e.memory=e.type===0?8:5;}else e.memory=Math.max(0,e.memory-dt);
-  e.rethink-=dt;if(e.rethink<=0){e.rethink=.45;if(e.memory<=0&&(!e.path.length||Math.hypot(e.x-e.target?.x,e.z-e.target?.z)<1)){const routes=e.floor===1?[[14,8],[26,8],[26,16],[14,16]]:e.type===0?[[8,16],[20,22],[32,16],[20,11]]:[[32,26],[8,26],[8,5],[32,5]],r=routes[e.route++%4];e.target={x:r[0]*layout.cellSize,z:r[1]*layout.cellSize,floor:e.floor};}if(e.target)e.path=routeBetweenFloors(floors,e,e.target);}
-  let speed=e.type===0?(e.memory?3.55:2.1):e.type===1?(e.memory?3.85:2.4):2.2;
+  const seen=sameFloor&&distance<(crouch?8:e.type===1?22:16)&&visible(enemyLayout,e,player);
+  if(seen||e.type===2){e.target={...player};e.memory=5;}else e.memory=Math.max(0,e.memory-dt);
+  e.rethink-=dt;if(e.rethink<=0){e.rethink=.45;if(e.memory<=0&&(!e.path.length||Math.hypot(e.x-e.target?.x,e.z-e.target?.z)<1)){const routes=e.floor===1?[[14,8],[26,8],[26,16],[14,16]]:[[32,26],[8,26],[8,5],[32,5]],r=routes[e.route++%4];e.target={x:r[0]*layout.cellSize,z:r[1]*layout.cellSize,floor:e.floor};}if(e.target)e.path=routeBetweenFloors(floors,e,e.target);}
+  let speed=e.type===1?(e.memory?3.85:2.4):2.2;
   if(sameFloor&&e.type===2&&torch.visible&&distance<23&&visible(layout,player,e)){camera.getWorldDirection(tmp);const dot=(tmp.x*(e.x-player.x)+tmp.z*(e.z-player.z))/(distance||1);if(dot>.88)speed=.55;}
   const target=e.path[0];if(target&&target.floor!==e.floor){const stair=nearStair(floors,e);if(changeFloor(floors,e,stair))e.path.shift();else e.path=[];}else if(target){const vx=target.x-e.x,vz=target.z-e.z,d=Math.hypot(vx,vz),step=Math.min(speed*dt,d);if(d>.001){e.x+=vx/d*step;e.z+=vz/d*step;e.mesh.rotation.y=Math.atan2(vx,vz);}if(d<.08&&e.path.length)e.path.shift();}
   e.mesh.position.set(e.x,e.floor*FLOOR_HEIGHT+(e.type===2?Math.sin(elapsed*2)*.11:Math.sin(elapsed*8)*.025),e.z);e.mesh.visible=e.floor===player.floor;
@@ -242,7 +240,7 @@ function drawMapCanvas(c,s){c.clearRect(0,0,c.canvas.width,c.canvas.height);c.fi
  const stairs=layout.stairs||[];for(const stair of stairs){const sx=stair.x*s+s*.5,sz=stair.z*s+s*.5;c.fillStyle='#d3ad70';c.fillRect(sx-s*.32,sz-s*.32,s*.64,s*.64);c.strokeStyle='#513b24';c.lineWidth=Math.max(1,s*.08);for(let n=-1;n<=1;n++){c.beginPath();c.moveTo(sx-s*.28,sz+n*s*.12);c.lineTo(sx+s*.28,sz+n*s*.12);c.stroke();}c.fillStyle='#241b12';c.font=`bold ${Math.max(7,s*1.05)}px Arial`;c.textAlign='center';c.textBaseline='middle';c.fillText(stair.direction==='UP'?'U':'D',sx,sz);c.textAlign='left';c.textBaseline='alphabetic';}
  layout.exits.forEach((e,i)=>{c.fillStyle='#c7e19b';c.fillRect(e.x*s-s*.28,e.z*s-s*.28,s*.56,s*.56);c.font=`bold ${Math.max(8,s*1.2)}px Arial`;c.fillText(i+1,e.x*s+s*.65,e.z*s+s*.35);});
  const px=player.x/layout.cellSize*s+s*.5,pz=player.z/layout.cellSize*s+s*.5;c.fillStyle='#fff8db';c.beginPath();c.arc(px,pz,Math.max(2,s*.38),0,7);c.fill();c.strokeStyle='#fff8db';c.lineWidth=Math.max(1,s*.12);c.beginPath();c.moveTo(px,pz);c.lineTo(px-Math.sin(yaw)*s*1.2,pz-Math.cos(yaw)*s*1.2);c.stroke();
- for(const e of enemies){if(e.floor!==player.floor)continue;const ex=e.x/layout.cellSize*s+s*.5,ez=e.z/layout.cellSize*s+s*.5;c.fillStyle=e.type===0?'#e59a83':e.type===2?'#8fe0c4':'#e1c278';c.beginPath();c.arc(ex,ez,Math.max(2,s*.42),0,7);c.fill();c.fillStyle='#101810';c.font=`bold ${Math.max(7,s*1.1)}px Arial`;c.textAlign='center';c.textBaseline='middle';c.fillText(e.type===0?'S':e.type===2?'G':'K',ex,ez);c.textAlign='left';c.textBaseline='alphabetic';}
+ for(const e of enemies){if(e.floor!==player.floor)continue;const ex=e.x/layout.cellSize*s+s*.5,ez=e.z/layout.cellSize*s+s*.5;c.fillStyle=e.type===2?'#8fe0c4':'#e1c278';c.beginPath();c.arc(ex,ez,Math.max(2,s*.42),0,7);c.fill();c.fillStyle='#101810';c.font=`bold ${Math.max(7,s*1.1)}px Arial`;c.textAlign='center';c.textBaseline='middle';c.fillText(e.type===2?'G':'K',ex,ez);c.textAlign='left';c.textBaseline='alphabetic';}
 }
 function drawMap(){drawMapCanvas(mapContext,10);drawMapCanvas(miniMapContext,5);}
 function animate(){requestAnimationFrame(animate);const frameDt=clock.getDelta(),dt=Math.min(frameDt,.04);

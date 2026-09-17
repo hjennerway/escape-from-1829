@@ -114,7 +114,7 @@ for(const d of group.userData.dormers){
  assert.equal(ray.intersectObject(group,true)[0]?.object.name,d.name+' walls','The former ridge-end glazing face must now be plain blue');
 }
 const centralHall=TOWER_RANGES.find(r=>r.name==='Dormered central service hall');
-assert.equal(single[0].x,191+purple.x);assert(Math.abs(single[0].z-(centralHall.rect[1]+centralHall.rect[3])/2)<1e-8,'Keep the single protrusion centred on the reshaped hall');
+assert.equal(single[0].x,(centralHall.rect[0]+centralHall.rect[2])/2);assert(Math.abs(single[0].z-(centralHall.rect[1]+centralHall.rect[3])/2)<1e-8,'Keep the single protrusion centred on the reshaped hall');
 const centralWallBounds=new THREE.Box3().setFromObject(group.getObjectByName(centralHall.name+' walls'));
 const adjacentBounds=new THREE.Box3().setFromObject(group.getObjectByName('Tower east dormered range walls'));
 assert(Math.abs(centralWallBounds.min.z-(-49+purple.z))<1e-5&&centralWallBounds.min.z>adjacentBounds.min.z+11,'The complete purple hall moves towards admin while its tower neighbour stays fixed');
@@ -147,9 +147,23 @@ for(const x of [187,191,194])for(const z of [-30,-25,-20]){
  assert.equal(hit?.object.name,'Ramp entrance link flat roof','The entrance roof must move with its building');
  assert(Math.abs(hit.point.y-6.56)<1e-5,'The infill must continue the existing level roof');
 }
-for(const x of [187,194,200])for(const z of [-41,-37,-33])assert.equal(purpleRoofAt(x,z)?.object.name,'Dormered central service hall slate roof','The blue-footprint extension must have the hall roof');
+for(const x of [187,196,200])for(const z of [-41,-37,-33])assert.equal(purpleRoofAt(x,z)?.object.name,'Dormered central service hall slate roof','The blue-footprint extension must have the hall roof');
 const flatLink=TOWER_RANGES.find(r=>r.name==='Ramp entrance link');
-assert(Math.abs(flatLink.rect[1]-centralHall.rect[3]-TOWER_ADMIN_SHIFT)<1e-8,'The central hall and entrance link preserve their separation in the purple group');
+assert(Math.abs(flatLink.rect[1]-centralHall.rect[3])<1e-8,'Extended entrance link must meet the yellow-circled central hall');
+const southStores=TOWER_RANGES.find(r=>r.name==='South cross-gabled stores');
+assert.equal(flatLink.rect[2],209.5,'The extended purple face must reach the pink guide');
+assert.equal(flatLink.rect[2],centralHall.rect[2],'Pink junction aligns with the central hall east wall');
+assert.equal(southStores.rect[0],flatLink.rect[2],'Shortened blue stores meet the enlarged flat link without overlap or gap');
+assert.equal(southStores.rect[2],228.36,'Stores outer end remains fixed');
+const resizedStoresWalls=new THREE.Box3().setFromObject(group.getObjectByName('South cross-gabled stores walls'));
+assert(Math.abs(resizedStoresWalls.min.x-209.5)<1e-5&&Math.abs(resizedStoresWalls.max.y-9)<1e-5,'Blue stores wall follows the pink guide at its unchanged height');
+const resizedStoresRoof=new THREE.Box3().setFromObject(group.getObjectByName('South cross-gabled stores slate roof'));
+assert(Math.abs(resizedStoresRoof.max.y-13.04)<1e-5,'Shortening the blue roof must preserve its ridge height');
+for(const x of [192,199,207])for(const z of [-21.25,-18,-14]){
+ const hit=roofAt(x,z);
+ assert.equal(hit?.object.name,'Ramp entrance link flat roof','The red-edge extension must close the entire gap to the hall');
+ assert(Math.abs(hit.point.y-6.56)<1e-5,'The extended flat roof retains its current height');
+}
 assert(!group.getObjectByName('Round boiler gable light'),'The purple central gable must have no circular window');
 const roundWindow=group.getObjectByName('Chimney hall circular window');
 assert(roundWindow,'The translated hall keeps its circular window');
@@ -176,9 +190,42 @@ for(const y of [.1,.4,.79,.86,1,3,6.5,8,10,14,25,40]){
  }
 }
 assert(!group.getObjectByName('Chimney service hall flat roof'),'The new pitch replaces the former flat front section');
-for(const x of [162.7,167,174,184.8])for(const z of [-40,-34,-26,-17.1]){
- assert(['Chimney service hall slate roof','Dormered central service hall slate roof'].includes(purpleRoofAt(x,z+TOWER_ADMIN_SHIFT)?.object.name),'The translated roof must cover the chimney hall: '+x+','+z);
+for(const x of [162.7,167,174,182])for(const z of [-31.5,-26,-21,-17.1]){
+ assert.equal(purpleRoofAt(x,z+TOWER_ADMIN_SHIFT)?.object.name,'Chimney service hall slate roof','The shortened roof must cover the chimney hall: '+x+','+z);
 }
+// The latest coloured guides retract three wall edges, including the full
+// masonry at ground level. The freed strips must be walkable and unroofed.
+const chimneyWalls=new THREE.Box3().setFromObject(group.getObjectByName('Chimney service hall walls'));
+assert(Math.abs(chimneyWalls.min.z+13.3)<1e-5,'Red rear edge must follow the yellow line');
+assert(Math.abs(chimneyWalls.max.x-190)<1e-5,'Purple gable edge must follow the green line');
+assert(Math.abs(centralWallBounds.min.x-190)<1e-5,'Blue-purple west edge must follow the pink line');
+const entranceWalls=new THREE.Box3().setFromObject(group.getObjectByName('Ramp entrance link walls'));
+assert(Math.abs(entranceWalls.min.x-chimneyWalls.max.x)<1e-5,'Flat entrance link must remain flush with the moved gable');
+assert(Math.abs(entranceWalls.min.z-centralWallBounds.max.z)<1e-5&&Math.abs(entranceWalls.max.x-resizedStoresWalls.min.x)<1e-5,'Actual masonry closes both revised junctions');
+assert(Math.abs(entranceWalls.max.y-6.4)<1e-5,'The purple link keeps its original wall height');
+const revisedObstacles=exteriorObstacles(THREE,exterior.model);
+for(const [x,z] of [[194,-18],[207,-18],[207,-6]])assert(revisedObstacles.some(o=>obstacleContains(o,x,z,.1)),'The enlarged link supplies walking collisions throughout both extensions');
+// The moved east cylinder now occupies the former sample at (181,-17).
+for(const [x,z] of [[176,-17],[188.6,-25],[188.6,-30]]){
+ assert(!roofAt(x,z),'Retracted edges must leave the marked strips unroofed');
+ assert(!revisedObstacles.some(o=>obstacleContains(o,x,z,.1)),'Retracted walls must release their walking collisions');
+}
+// Red-marked court infill joins the four existing ranges at the same level
+// as the broad flat entrance roof, with no parapet across their shared seam.
+const infill=TOWER_RANGES.find(r=>r.name==='East court flat infill');
+const infillWalls=new THREE.Box3().setFromObject(group.getObjectByName(infill.name+' walls'));
+const eastService=TOWER_RANGES.find(r=>r.name==='Long east service range');
+const northStep=TOWER_RANGES.find(r=>r.name==='North east stepped link');
+assert(Math.abs(infillWalls.min.x-flatLink.rect[2])<1e-5&&Math.abs(infillWalls.max.x-eastService.rect[0])<1e-5,'Infill walls must close the red gap from west to east');
+assert(Math.abs(infillWalls.min.z-northStep.rect[3])<1e-5&&Math.abs(infillWalls.max.z-southStores.rect[1])<1e-5,'Infill walls must meet the north and south ranges');
+assert(Math.abs(infillWalls.max.y-6.4)<1e-5,'Infill walls match the flat entrance link height');
+for(const x of [210,212.9,215.8])for(const z of [-29.7,-24,-18,-9.8]){
+ const hit=roofAt(x,z);
+ assert.equal(hit?.object.name,'Ramp entrance link flat roof','The joined flat roof must cover the complete red-marked area');
+ assert(Math.abs(hit.point.y-6.56)<1e-5&&hit.face.normal.y>.999,'The new roof must be level with the adjoining flat roof');
+ assert(revisedObstacles.some(o=>obstacleContains(o,x,z,.1)),'New infill walls supply walking collisions');
+}
+for(const x of [209.3,209.5,209.7])for(const z of [-20,-15,-10])assert(Math.abs(roofAt(x,z).point.y-6.56)<1e-5,'Remove the internal parapet so both flat roof surfaces join continuously');
 ray.set(new THREE.Vector3(roundWindow.position.x+2,roundWindow.position.y+.2,roundWindow.position.z-.3),new THREE.Vector3(-1,0,0));
 assert.equal(ray.intersectObject(group,true)[0]?.object,roundWindow,'The circular glazing must be exposed in front of its brick gable');
 ray.set(new THREE.Vector3(191+purple.x,10.1,-30+purple.z),new THREE.Vector3(0,0,-1));

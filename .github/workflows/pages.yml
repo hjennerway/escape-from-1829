@@ -1,34 +1,63 @@
-name: Deploy browser game to GitHub Pages
+name: Build models and deploy browser game
 
 on:
   push:
+    branches: [main]
+  pull_request:
     branches: [main]
   workflow_dispatch:
 
 permissions:
   contents: read
-  pages: write
-  id-token: write
 
 concurrency:
-  group: pages
+  group: pages-${{ github.ref }}
   cancel-in-progress: true
 
 jobs:
+  build:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    defaults:
+      run:
+        working-directory: Browser
+    steps:
+      - name: Check out source
+        uses: actions/checkout@v4
+      - name: Set up Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+          cache: npm
+          cache-dependency-path: Browser/package-lock.json
+      - name: Install build tools
+        run: npm ci
+      - name: Install model compiler browser
+        run: npx playwright install --with-deps chromium
+      - name: Check aerial modelling and binary format
+        run: npm run test:models
+      - name: Precompile estate geometry and textures
+        run: npm run build:models
+      - name: Verify compiled scene and browser fallback
+        run: npm run test:compiled
+      - name: Upload browser build
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: Browser/dist
   deploy:
+    if: github.event_name != 'pull_request' && github.ref == 'refs/heads/main'
+    needs: build
+    permissions:
+      contents: read
+      pages: write
+      id-token: write
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
     runs-on: ubuntu-latest
     steps:
-      - name: Check out source
-        uses: actions/checkout@v4
       - name: Configure Pages
         uses: actions/configure-pages@v5
-      - name: Upload browser build
-        uses: actions/upload-pages-artifact@v3
-        with:
-          path: Browser/dist
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4

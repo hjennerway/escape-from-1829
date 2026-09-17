@@ -174,7 +174,9 @@ export function createMainAdminBuilding(THREE,{brick,roof,worldUV,material}){
   }
   // main_redfine2 reveals the rear projections, replacing the hidden window grid.
   for(const {y,h} of levels){
-    for(const z of [-13,-8,-3])if(y>5||z===-8)sash('west return',west.x-west.w/2-.025,y,z,1.35,h,-Math.PI/2);
+    // The attached corridor covers this ground-floor face. The marked sash
+    // is removed, while all six upper-floor windows stay in their positions.
+    if(y>5)for(const z of [-13,-8,-3])sash('west return',west.x-west.w/2-.025,y,z,1.35,h,-Math.PI/2);
     if(y>5)sash('east photo upper column',east.x+east.w/2+.025,y,4.5,1.35,h,Math.PI/2);
     else for(const z of [12,-6.4])sash('east photo ground',east.x+east.w/2+.025,y,z,1.55,h,Math.PI/2);
     for(const x of [-20,-13,-6,1])sash('rear retained',x,y,core.z-core.d/2-.025,1.35,h,Math.PI);
@@ -303,6 +305,7 @@ export function createMainAdminBuilding(THREE,{brick,roof,worldUV,material}){
   addIrbyCorridor(THREE,{corridor,brick,roof,material,worldUV});
   corridor.add(createMainKitchen(THREE,{brick,material,worldUV}));
   addAdminFrontCorridor(THREE,{corridor,brick,roof,material,worldUV});
+  corridor.userData.frontExtension=ADMIN_FRONT_CORRIDOR;
   corridor.userData.reference='Research/admin-corridor/README.md; Research/main-kitchen/README.md: the deeper Redesmere connector now ends at the kitchen west wall, and the low corridor follows its south wall. Front alignment, concealed Redesmere joint, ivy-fronted range and chimney are retained.';
   const dummy=new THREE.Object3D();
   for(const [m,items] of batches){const batch=new THREE.InstancedMesh(new THREE.BoxGeometry(1,1,1),m,items.length);batch.name='Admin sash and masonry details';batch.userData.orientedCollision=true;batch.castShadow=true;batch.receiveShadow=true;items.forEach((b,i)=>{dummy.position.set(b.x,b.y,b.z);dummy.scale.set(b.w,b.h,b.d);dummy.rotation.set(0,b.r,0);dummy.updateMatrix();batch.setMatrixAt(i,dummy.matrix);});building.add(batch);}

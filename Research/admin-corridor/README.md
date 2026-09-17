@@ -44,3 +44,33 @@ spine and Upton endpoint stay fixed; Witby and Grafton's branch endpoints and
 Hale's two links now follow their corrected building positions. This supersedes
 the extension endpoints above. See the current [overhead comparison and
 positions](../ward-placement/README.md).
+
+## Front extension and attached side
+
+`front-door-reference.png` marks the new corridor through the former recessed
+low west connection, with a door at its front edge. The extension follows the
+existing Farndon centreline at x=156.3, from the fixed cross-gallery at z=9.8
+to the marked recessed frontage at z=30.6. It retains the gallery's 5.4-unit
+width, 3.6-unit walls and 0.64 roof rise, with a continuous straight ridge.
+The original corridors, their endpoints and the main building position stay
+fixed. Only the low room's inner edge moves, from x=155.4375 to 153.6; its
+outer wall and front/rear edges are retained, with the three front sashes
+respaced onto the narrower wall.
+
+The follow-up `front-side-reference.png` removes the ground-floor sash partly
+hidden by the roof. The east roof slope and wall continue along the full
+blue-marked side to the tall pavilion at x=160.5, closing the earlier notch.
+The six upper windows stay fixed. The old recessed sash becomes a glazed
+double door, with brickwork closing the front gable and a low stone threshold.
+The forecourt approach stays open. This remains exterior geometry with a
+closed door, matching the other modelled ward entrances.
+
+`Browser/dist/admin-front-corridor.mjs` owns the extension. It belongs to the
+existing Historic corridor group and uses the same aerial rendering and
+walking collision system. `node Browser/test-main-admin.mjs` checks the
+fixed Farndon endpoint, continuous ridge and roof coverage, blue side seam,
+removed window, visible door glazing and clear approach. The saved before/after
+comparison in `Browser/artifacts/verify-admin-front-corridor.mjs` additionally
+checks exact vertices and transforms for the 14 original corridor objects,
+and retained Main/admin geometry and openings. Aerial, plan, doorway and side
+renders are in `Browser/artifacts/admin-front-corridor-after-*.png`.

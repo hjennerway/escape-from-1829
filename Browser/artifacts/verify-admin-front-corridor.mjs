@@ -32,7 +32,7 @@ for(const o of before.building.children){
  const current=after.building.children.filter(c=>c.name===o.name)[i];
  assert.deepEqual(signature(current),signature(o),'Unrelated Main/admin geometry stays fixed: '+o.name);
 }
-const retained=o=>!['low west frontage','low west stepped return','recessed low connection'].includes(o.face);
+const retained=o=>!['low west frontage','low west stepped return','recessed low connection'].includes(o.face)&&!(o.face==='west return'&&o.y<5);
 const normalizedOpenings=group=>JSON.parse(JSON.stringify(group.userData.openings.filter(retained),(_,v)=>typeof v==='number'?Number(v.toFixed(10)):v));
 assert.deepEqual(normalizedOpenings(after.building),normalizedOpenings(before.building),'Other Main/admin openings stay fixed within floating-point precision');
 writeFileSync(new URL('./admin-front-corridor-verification.json',import.meta.url),JSON.stringify({preservedCorridorObjects:preserved,oldSectionsUnchanged:true,unrelatedAdminGeometryUnchanged:true},null,2));

@@ -1,0 +1,266 @@
+{
+  "1829-front": {
+    "source": "Browser/dist/exterior/1829front.webp",
+    "width": 333,
+    "height": 499,
+    "bytes": 37386
+  },
+  "1829-front-2": {
+    "source": "Browser/dist/exterior/1829front2.webp",
+    "width": 375,
+    "height": 375,
+    "bytes": 17246
+  },
+  "1829-front-3": {
+    "source": "Browser/dist/exterior/1829front3.webp",
+    "width": 800,
+    "height": 532,
+    "bytes": 53180
+  },
+  "1829-back": {
+    "source": "Research/1829-back/img1.jpg",
+    "width": 1200,
+    "height": 900,
+    "bytes": 164880
+  },
+  "barmere-garden": {
+    "source": "Research/redesmere-chimney/img1.jpg",
+    "width": 688,
+    "height": 917,
+    "bytes": 80340
+  },
+  "barmere-chimney": {
+    "source": "Research/redesmere-chimney/img2.jpg",
+    "width": 1200,
+    "height": 900,
+    "bytes": 226458
+  },
+  "annexe": {
+    "source": "Browser/dist/art/annexe.png",
+    "width": 440,
+    "height": 267,
+    "bytes": 19742
+  },
+  "annexe-2": {
+    "source": "Browser/dist/art/annexe2.png",
+    "width": 375,
+    "height": 375,
+    "bytes": 24356
+  },
+  "chimney": {
+    "source": "Browser/dist/art/chimney.png",
+    "width": 375,
+    "height": 375,
+    "bytes": 18854
+  },
+  "annexe-entrance-road": {
+    "source": "Research/annexe-photos/entrance-road.png",
+    "width": 1200,
+    "height": 756,
+    "bytes": 178890
+  },
+  "jodrell-mural": {
+    "source": "Research/annexe-photos/jodrell-mural.png",
+    "width": 1200,
+    "height": 902,
+    "bytes": 88804
+  },
+  "tarvin-mural": {
+    "source": "Research/annexe-photos/tarvin-mural.png",
+    "width": 397,
+    "height": 526,
+    "bytes": 19702
+  },
+  "carden-mural": {
+    "source": "Research/annexe-photos/carden-mural.png",
+    "width": 415,
+    "height": 380,
+    "bytes": 17154
+  },
+  "jodrell-mural-stairwell": {
+    "source": "Research/annexe-photos/jodrell-mural-stairwell.png",
+    "width": 499,
+    "height": 379,
+    "bytes": 13616
+  },
+  "annexe-outer": {
+    "source": "Research/annexe-outer-front/img1.jpg",
+    "width": 548,
+    "height": 412,
+    "bytes": 48054
+  },
+  "oakmere-lawn": {
+    "source": "Research/oakmere/img1.jpg",
+    "width": 1200,
+    "height": 900,
+    "bytes": 195826
+  },
+  "farndon-2": {
+    "source": "Research/farndon/img2.jpg",
+    "width": 693,
+    "height": 453,
+    "bytes": 42558
+  },
+  "upton": {
+    "source": "Research/upton-frith-oscroft/outward-facade.jpg",
+    "width": 1200,
+    "height": 900,
+    "bytes": 206742
+  },
+  "upton-aerial": {
+    "source": "Research/upton-frith-oscroft/aerial.png",
+    "width": 776,
+    "height": 782,
+    "bytes": 92400
+  },
+  "irby-1": {
+    "source": "Research/irby-ashley/img1.jpg",
+    "width": 1170,
+    "height": 833,
+    "bytes": 213542
+  },
+  "irby-3": {
+    "source": "Research/irby-ashley/img3.jpg",
+    "width": 1200,
+    "height": 901,
+    "bytes": 209440
+  },
+  "irby-4": {
+    "source": "Research/irby-ashley/img4.jpg",
+    "width": 1183,
+    "height": 332,
+    "bytes": 77290
+  },
+  "irby-ashley-mural": {
+    "source": "Research/irby-ashley/ward-mural.png",
+    "width": 634,
+    "height": 462,
+    "bytes": 17444
+  },
+  "shop": {
+    "source": "Research/laundry/img1.jpg",
+    "width": 1200,
+    "height": 801,
+    "bytes": 116936
+  },
+  "garages-1": {
+    "source": "Research/garages/img1.jpg",
+    "width": 1200,
+    "height": 900,
+    "bytes": 119632
+  },
+  "garages-2": {
+    "source": "Research/garages/img2.jpg",
+    "width": 1200,
+    "height": 902,
+    "bytes": 179040
+  },
+  "church": {
+    "source": "Research/church/googleearth.png",
+    "width": 1064,
+    "height": 847,
+    "bytes": 149388
+  },
+  "churton-roadside": {
+    "source": "Research/churton-kelsall/roadside-mast.png",
+    "width": 689,
+    "height": 918,
+    "bytes": 63300
+  },
+  "tower-1": {
+    "source": "Research/water-tower/1.jpg",
+    "width": 688,
+    "height": 917,
+    "bytes": 105550
+  },
+  "tower-2": {
+    "source": "Research/water-tower/2.jpg",
+    "width": 688,
+    "height": 917,
+    "bytes": 113236
+  },
+  "tower-3": {
+    "source": "Research/water-tower/3.jpg",
+    "width": 688,
+    "height": 917,
+    "bytes": 111702
+  },
+  "tower-4": {
+    "source": "Research/water-tower/4.jpg",
+    "width": 688,
+    "height": 917,
+    "bytes": 102556
+  },
+  "outhouse-1": {
+    "source": "Research/outhouse/img1.jpg",
+    "width": 689,
+    "height": 918,
+    "bytes": 124856
+  },
+  "outhouse-2": {
+    "source": "Research/outhouse/img2.jpg",
+    "width": 1200,
+    "height": 900,
+    "bytes": 169996
+  },
+  "outhouse-3": {
+    "source": "Research/outhouse/img3.jpg",
+    "width": 1200,
+    "height": 900,
+    "bytes": 303764
+  },
+  "greenhouses": {
+    "source": "Research/greenhouses/img1.jpg",
+    "width": 1200,
+    "height": 900,
+    "bytes": 171824
+  },
+  "estates": {
+    "source": "Research/estates/img1.jpg",
+    "width": 1200,
+    "height": 900,
+    "bytes": 234994
+  },
+  "stores": {
+    "source": "Research/tower-buildings/img2.jpg",
+    "width": 1200,
+    "height": 901,
+    "bytes": 148180
+  },
+  "grafton": {
+    "source": "Research/grafton-edge/veranda.jpg",
+    "width": 1122,
+    "height": 748,
+    "bytes": 34970
+  },
+  "admin-1": {
+    "source": "Research/main-refine2/img1.jpg",
+    "width": 689,
+    "height": 480,
+    "bytes": 20510
+  },
+  "admin-2": {
+    "source": "Research/main-refine2/img2.jpg",
+    "width": 829,
+    "height": 571,
+    "bytes": 43344
+  },
+  "tower-buildings-1": {
+    "source": "Research/tower-buildings/img1.jpg",
+    "width": 689,
+    "height": 917,
+    "bytes": 92720
+  },
+  "workshops": {
+    "source": "Research/tower-buildings/twin-workshops/img1.jpg",
+    "width": 1200,
+    "height": 900,
+    "bytes": 186296
+  },
+  "admin-corridor": {
+    "source": "Research/historic-roads/admin-to-annexe-photo.png",
+    "width": 920,
+    "height": 336,
+    "bytes": 70962
+  }
+}

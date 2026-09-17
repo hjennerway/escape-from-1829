@@ -1,0 +1,42 @@
+#buildingPhotos{position:fixed;left:24px;bottom:86px;z-index:32;width:326px;max-width:calc(100vw - 48px);max-height:calc(100dvh - 184px);display:flex;flex-direction:column;background:#101d17f5;border:1px solid #dae4d25e;box-shadow:0 14px 50px #0006;color:#f0f2e9;border-radius:12px;overflow:hidden;text-shadow:none}
+#buildingPhotos .building-photo-heading{position:static;display:flex;align-items:flex-start;justify-content:space-between;gap:12px;padding:19px 16px 14px;border-bottom:1px solid #ffffff20}
+.building-photo-eyebrow{margin:0 0 7px;font:600 9px/1.4 Arial;letter-spacing:2px;color:#bacbad}
+#buildingPhotoTitle{margin:0;font:normal 23px/1.17 Georgia,serif;letter-spacing:0}
+#buildingPhotoCount{margin:9px 0 0;font:11px/1.4 Arial;color:#b4c4b7}
+#closeBuildingPhotos{flex:0 0 40px;min-height:44px;margin:-8px -6px 0 0;font:26px/1 Arial;letter-spacing:0;border-radius:7px;background:transparent;color:#eaf0e6}
+#closeBuildingPhotos:hover{background:#ffffff18}
+#buildingPhotoList{min-height:0;overflow-y:auto;overscroll-behavior:contain;touch-action:pan-y;padding:14px 14px 0;scrollbar-width:thin;scrollbar-color:#aabdab #23332a}
+#buildingPhotoList figure{margin:0 0 17px}
+#buildingPhotoList a{display:block;border-radius:6px;overflow:hidden;background:#203228}
+#buildingPhotoList img{display:block;width:100%;height:auto;min-height:80px;max-height:240px;object-fit:contain;background:#0c1611}
+#buildingPhotoList a:hover{outline:1px solid #fff9;outline-offset:2px}
+#buildingPhotoList figcaption{margin-top:8px;font:11px/1.5 Arial;color:#d3dcd0}
+#buildingPhotoList h3{font:600 11px/1.5 Arial;letter-spacing:.4px;margin:7px 0 12px}
+.building-photo-empty,.building-photo-unavailable{display:block;font:13px/1.7 Arial;color:#b8c7ba;margin:4px 0 18px}
+#buildingPhotoHint{flex-shrink:0;margin:0;padding:12px 16px;border-top:1px solid #ffffff20;font:10px/1.5 Arial;color:#b7c8b5}
+#buildingHoverLabel{position:fixed;z-index:34;pointer-events:none;max-width:calc(100vw - 24px);padding:9px 13px;border-radius:5px;background:#14221bf2;border:1px solid #fff9;box-shadow:0 0 18px #ffffff35;font:12px/1.4 Arial;color:white}
+#buildingPhotoPicker{position:relative;pointer-events:auto;font:11px/1.4 Arial;letter-spacing:.4px;color:#e4e8db}
+#buildingPhotoPicker summary{cursor:pointer;list-style:none;min-height:44px;padding:14px 12px;border:1px solid #bdcc9866;background:#142018f2}
+#buildingPhotoPicker summary::after{content:' ▾'}
+.building-photo-choices{position:absolute;top:calc(100% + 8px);right:0;width:300px;max-width:calc(100vw - 24px);max-height:calc(100dvh - 164px);overflow-y:auto;overscroll-behavior:contain;padding:8px;background:#142018fa;border:1px solid #bdcc9866;box-shadow:0 8px 30px #0006}
+.building-photo-choices button{display:block;text-align:left;width:100%;padding:12px;min-height:44px;background:transparent;letter-spacing:.2px;font:12px/1.5 Arial}
+.building-photo-choices button:hover{background:#30432e}
+.building-photo-choices button:disabled{cursor:default;opacity:.4}
+#buildingPhotoPicker summary:focus-visible{outline:2px solid #fff;outline-offset:3px}
+@media(max-width:650px){
+ #buildingPhotoPicker{grid-column:1;grid-row:3;justify-self:start}
+ #buildingPhotoPicker summary{font-size:10px;padding:10px 12px;min-height:36px}
+ .building-photo-choices{position:fixed;left:12px;right:12px;top:114px;width:auto;max-height:calc(100dvh - 140px)}
+ #buildingPhotos{left:12px;right:12px;bottom:max(12px,env(safe-area-inset-bottom));width:auto;max-width:none;height:44dvh;max-height:calc(100dvh - 180px)}
+ #buildingPhotos .building-photo-heading{padding:13px 14px 10px}
+ #buildingPhotoTitle{font-size:21px}
+ .building-photo-eyebrow{display:none}
+ #buildingPhotoCount{margin-top:5px}
+ #buildingPhotoList{padding:12px 12px 0}
+ #buildingPhotoList img{max-height:220px}
+ #buildingPhotoHint{padding:8px 14px;font-size:10px}
+ .building-photos-open #layoutControls{top:76px;bottom:auto;right:12px;width:180px;padding:0 10px}
+ .building-photos-open #layoutControls h2,.building-photos-open #layoutControls p,.building-photos-open #layoutControls button,.building-photos-open #modernRoadList,.building-photos-open #aerialHelp,.building-photos-open #churtonNav{display:none}
+ #buildingHoverLabel{font-size:11px}
+}
+@media(prefers-reduced-motion:reduce){#buildingPhotos,#buildingHoverLabel{transition:none}}

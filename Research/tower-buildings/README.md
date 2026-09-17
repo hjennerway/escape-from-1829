@@ -1,5 +1,74 @@
 # Tower service buildings
 
+## Flat court infill and cylinders, 17 September 2026
+
+`service-infill-cylinders.png` fills the red-marked court between the central
+hall, entrance link, eastern service range and southern stores. The new
+section occupies X=209.5..216.3, Z=-30.3..-9.4 with 6.4-unit brick walls.
+Its roof is level with the entrance link at Y=6.56. One L-shaped roof slab
+covers both flat sections; the former internal parapet is removed so the
+join has no raised divider or shadow seam. The surrounding pitched roofs
+retain their dimensions. The new section belongs to Historic and supplies
+walking collisions across the former gap.
+
+Both cylinders move 8.9 units towards Main/admin to Z=-18.9. Their X positions,
+sizes and spacing stay fixed. Their plinth copings stop approximately 0.48
+and 0.63 units from the blue-circled hall, and the roof overhang remains clear.
+The hardstanding extends beneath their new positions to the hall's rear wall.
+The hall-side slit is intentionally too narrow for walking; routes beside,
+behind and between the cylinders remain open. The pharmacy photo view follows
+the moved row.
+
+The comparison images are `Browser/artifacts/service-infill-before.png` and
+`service-infill-after.png`. Tower, pharmacy, aerial batching and browser render
+checks pass, including actual cylinder/building clearance at six heights,
+flat roof coverage and seam continuity, collision coverage and walking routes.
+
+## Flat entrance link extension, 17 September 2026
+
+The follow-up `service-link-extension.png` extends the flat entrance link's
+red rear edge from Z=-13.3 to Z=-21.8, meeting the yellow-circled central hall.
+Its east face moves from X=203.5 to X=209.5, aligned with that hall's east
+wall and the pink guide. The blue-marked southern stores shorten by the same
+six units at their west end, leaving their east end and front/back edges fixed.
+
+The link retains its 6.4-unit walls and roof surface at 6.56; the stores retain
+their 9-unit walls and slate ridge at 13.04. The stores' front openings and
+rooflight follow their shortened host without changing size or elevation;
+the corner downpipe follows the new joint. The extended walls supply walking
+collisions and both wall junctions meet without a gap. The circular-window
+hall and dormered central hall retain the preceding correction's dimensions.
+
+The fitted comparison is in `Browser/artifacts/service-link-before.png` and
+`service-link-after.png`. Tower, pharmacy and browser rendering checks pass,
+including actual mesh heights, continuous flat roof coverage, connected
+masonry, exposed openings and collision coverage of both extensions.
+
+## Service building edge correction, 17 September 2026
+
+`service-edge-correction.png` retracts three edges in the supplied aerial:
+the circular-window hall's red rear edge moves 8.5 units towards Main/admin
+to the yellow guide at Z=-13.3; its purple east edge moves 3.33 units west
+to the green guide at X=190; and the upper hall's blue-purple west edge
+moves 2.5 units east to the pink guide, also at X=190. The opposite edges
+and building heights remain fixed. These coordinates are fitted to the
+oblique annotation rather than surveyed dimensions.
+
+The pitched roofs follow the shorter footprints, the round window stays
+centred in its gable, and the upper hall's dormer stays centred on its ridge.
+The adjoining flat entrance link extends west to meet the moved gable.
+The rear corner downpipe follows the upper hall's new edge. Its obsolete
+chimney-foundation recess is removed because the entire narrowed wall now
+clears the chimney. Walking collisions follow the actual new walls.
+
+`Browser/artifacts/service-edges-before.png` and `service-edges-after.png`
+show the fitted camera comparison. Tower and pharmacy checks cover exposed
+glazing, roof coverage, released walking areas, cylinder and chimney
+clearance, and Historic visibility. Main kitchen and aerial batching checks
+also pass. The historic-road check still reports an Admin north service road
+overlap at (228.8895,-4.5232); loading the original tower/pharmacy modules
+in memory reproduces the same failure. This changes the browser geometry.
+
 The nine references here were supplied on 15 September 2026. The photographs
 are architectural evidence; coloured arrows mark camera positions and viewing
 directions. The blue circle in img4 selects the separate Irby/Ashley range, now modelled by the later Irby/Ashley task.
