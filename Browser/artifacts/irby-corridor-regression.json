@@ -1,0 +1,202 @@
+[
+  {
+    "file": "test.mjs",
+    "exit": 0,
+    "failure": null
+  },
+  {
+    "file": "test-game.mjs",
+    "exit": 0,
+    "failure": null
+  },
+  {
+    "file": "test-east-forward-end.mjs",
+    "exit": 0,
+    "failure": null
+  },
+  {
+    "file": "test-front-inside-corners.mjs",
+    "exit": 0,
+    "failure": null
+  },
+  {
+    "file": "test-redesmere-garden.mjs",
+    "exit": 0,
+    "failure": null
+  },
+  {
+    "file": "test-laundry.mjs",
+    "exit": 0,
+    "failure": null
+  },
+  {
+    "file": "test-escape-exterior.mjs",
+    "exit": 0,
+    "failure": null
+  },
+  {
+    "file": "test-water-tower.mjs",
+    "exit": 0,
+    "failure": null
+  },
+  {
+    "file": "test-tower-buildings.mjs",
+    "exit": 0,
+    "failure": null
+  },
+  {
+    "file": "test-pharmacy.mjs",
+    "exit": 0,
+    "failure": null
+  },
+  {
+    "file": "test-irby-ashley.mjs",
+    "exit": 0,
+    "failure": null
+  },
+  {
+    "file": "test-irby-roads.mjs",
+    "exit": 0,
+    "failure": null
+  },
+  {
+    "file": "test-grafton-edge.mjs",
+    "exit": 0,
+    "failure": null
+  },
+  {
+    "file": "test-hale-ward.mjs",
+    "exit": 0,
+    "failure": null
+  },
+  {
+    "file": "test-estates.mjs",
+    "exit": 0,
+    "failure": null
+  },
+  {
+    "file": "test-farndon.mjs",
+    "exit": 0,
+    "failure": null
+  },
+  {
+    "file": "test-ward-placement.mjs",
+    "exit": 0,
+    "failure": null
+  },
+  {
+    "file": "test-ward-corridors.mjs",
+    "exit": 0,
+    "failure": null
+  },
+  {
+    "file": "test-explore.mjs",
+    "exit": 0,
+    "failure": null
+  },
+  {
+    "file": "test-annexe.mjs",
+    "exit": 0,
+    "failure": null
+  },
+  {
+    "file": "test-annexe-os-refinement.mjs",
+    "exit": 0,
+    "failure": null
+  },
+  {
+    "file": "test-annexe-photo-placement.mjs",
+    "exit": 1,
+    "failure": "AssertionError [ERR_ASSERTION]: Only the yellow-circled rear roads are removed; the loop stays fixed\r"
+  },
+  {
+    "file": "test-annexe-outer-front.mjs",
+    "exit": 0,
+    "failure": null
+  },
+  {
+    "file": "test-oakmere.mjs",
+    "exit": 0,
+    "failure": null
+  },
+  {
+    "file": "test-annexe-wards.mjs",
+    "exit": 0,
+    "failure": null
+  },
+  {
+    "file": "test-churton.mjs",
+    "exit": 0,
+    "failure": null
+  },
+  {
+    "file": "test-upton.mjs",
+    "exit": 0,
+    "failure": null
+  },
+  {
+    "file": "test-garages-mortuary.mjs",
+    "exit": 0,
+    "failure": null
+  },
+  {
+    "file": "test-greenhouses.mjs",
+    "exit": 0,
+    "failure": null
+  },
+  {
+    "file": "test-main-admin.mjs",
+    "exit": 0,
+    "failure": null
+  },
+  {
+    "file": "test-main-admin-refine2.mjs",
+    "exit": 0,
+    "failure": null
+  },
+  {
+    "file": "test-aerial-controls.mjs",
+    "exit": 0,
+    "failure": null
+  },
+  {
+    "file": "test-device-location.mjs",
+    "exit": 0,
+    "failure": null
+  },
+  {
+    "file": "test-aerial-layouts.mjs",
+    "exit": 0,
+    "failure": null
+  },
+  {
+    "file": "test-modern-entrance.mjs",
+    "exit": 0,
+    "failure": null
+  },
+  {
+    "file": "test-parsons-retrace.mjs",
+    "exit": 0,
+    "failure": null
+  },
+  {
+    "file": "test-historic-roads.mjs",
+    "exit": 1,
+    "failure": "AssertionError [ERR_ASSERTION]: Admin north service road must clear all building walls across its full width [228.88947100550808,-4.523245293100267]\r"
+  },
+  {
+    "file": "test-annexe-access.mjs",
+    "exit": 0,
+    "failure": null
+  },
+  {
+    "file": "test-performance.mjs",
+    "exit": 0,
+    "failure": null
+  },
+  {
+    "file": "test-outhouse.mjs",
+    "exit": 0,
+    "failure": null
+  }
+]

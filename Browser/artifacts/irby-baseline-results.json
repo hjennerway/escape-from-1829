@@ -1,0 +1,12 @@
+[
+  {
+    "file": "test-annexe-photo-placement.mjs",
+    "status": 1,
+    "failure": "AssertionError [ERR_ASSERTION]: Only the yellow-circled rear roads are removed; the loop stays fixed"
+  },
+  {
+    "file": "test-historic-roads.mjs",
+    "status": 1,
+    "failure": "AssertionError [ERR_ASSERTION]: Admin north service road must clear all building walls across its full width [228.88947100550808,-4.523245293100267]"
+  }
+]
