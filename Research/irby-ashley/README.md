@@ -109,3 +109,23 @@ gable ends at -130.5 and the conservatory at -135, before ward placement.
 fitted to the supplied screenshot. The corresponding `-clear.png` hides trees
 only for inspection. `verify-irby-rear-shift.mjs` compares the rear meshes and
 detail instances against the prior version to confirm their shapes are retained.
+
+## Red-to-orange alignment, 17 September 2026
+
+The later `red-orange-shift-reference.png` moves the outlined rear range a
+further three scene units along positive Z, aligning its front edge with the
+orange guide. The total shift from the original geometry is now ten units.
+Both yellow front faces remain at source z=-98.6, with their widths and sash
+positions unchanged; the tower corridor contact also stays fixed. Only the
+connecting wings shorten. Garden gables, bays, the octagonal corner, glazing,
+chimneys and roof junctions retain their dimensions. The west garden gable
+now ends at source z=-127.5 and the conservatory at -132, before ward placement.
+
+The reference-camera before/after views are in
+`Browser/artifacts/irby-red-orange-before.png` and `irby-red-orange-after.png`;
+the `-clear.png` versions hide trees for inspection. The geometry comparison
+records 465 translated mesh vertices, 552 garden-detail instances, fixed front
+endpoints and seven fixed front/corridor sashes in
+`Browser/artifacts/irby-red-orange-verification.json`. Side details on the
+shortened connections are regenerated to fit. Browser sources and the local
+compiled aerial model are updated; Unity and Blender exports are unchanged.

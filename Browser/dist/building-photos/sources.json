@@ -113,6 +113,18 @@
     "height": 453,
     "bytes": 42558
   },
+  "daresbury-corner": {
+    "source": "Research/hale-daresbury-huxley-dunham/inside-corners/img2.jpg",
+    "width": 1200,
+    "height": 901,
+    "bytes": 275784
+  },
+  "dunham-daresbury-garden": {
+    "source": "Research/hale-daresbury-huxley-dunham/inside-corners/img1.jpg",
+    "width": 1200,
+    "height": 901,
+    "bytes": 288244
+  },
   "upton": {
     "source": "Research/upton-frith-oscroft/outward-facade.jpg",
     "width": 1200,
@@ -172,6 +184,12 @@
     "width": 1064,
     "height": 847,
     "bytes": 149388
+  },
+  "church-clock-front": {
+    "source": "Research/church/clock-front-reference.png",
+    "width": 689,
+    "height": 918,
+    "bytes": 64506
   },
   "churton-roadside": {
     "source": "Research/churton-kelsall/roadside-mast.png",
@@ -256,6 +274,30 @@
     "width": 829,
     "height": 571,
     "bytes": 43344
+  },
+  "admin-front-approach": {
+    "source": "Research/main-admin-photos/img3.jpg",
+    "width": 1200,
+    "height": 901,
+    "bytes": 161918
+  },
+  "admin-front-historic": {
+    "source": "Research/main-admin-photos/img4.jpg",
+    "width": 1053,
+    "height": 700,
+    "bytes": 99730
+  },
+  "admin-midwifery": {
+    "source": "Research/main-admin-photos/img1.jpg",
+    "width": 1200,
+    "height": 900,
+    "bytes": 75616
+  },
+  "admin-front-elevated": {
+    "source": "Research/main-admin-photos/img2.jpg",
+    "width": 1200,
+    "height": 901,
+    "bytes": 119550
   },
   "tower-buildings-1": {
     "source": "Research/tower-buildings/img1.jpg",

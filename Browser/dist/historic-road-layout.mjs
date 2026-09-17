@@ -58,10 +58,14 @@ const annexeInnerEastRoad=bezier([eastCrossing[0],eastCrossing[1]-GARAGE_LANE_SH
 // The red path leaves the upper drive before the pines and meets the existing
 // east road farther along the lawn. Its former lower arm returns to grass.
 const pineRoadJoin=annexeInnerEastRoad[13];
+// Keep the full six-unit road between the tower ranges and Estates. The
+// 232.67 neck clears both padded walls; it opens east of the wider workshop
+// farther north, then clears Irby's fixed front at z=-74.
 const northService=bezier(shiftAnnexeTeardrop([270,18]),[
- [[249.5,3],[247,2.5],[245,2]],[[233,0],[229,-9],[229,-19]],
- [[229,-40],[229,-57],[229,-63]],[[229,-69],[233,-70],[241,-70]],
- [[247,-70],[254,-70],[260,-70]],[[268,-70],[270,-74],[270,-82]],
+ [[249.5,3],[247,2.5],[245,2]],[[237,0],[232.67,-9],[232.67,-19]],
+ [[232.67,-25],[232.67,-31],[232.67,-35]],[[232.67,-39],[235,-40],[235,-44]],
+ [[235,-51],[235,-57],[235,-63]],[[235,-66],[239,-68.8],[245,-68.8]],
+ [[251,-68.8],[255,-68.8],[260,-68.8]],[[268,-68.8],[270,-74],[270,-82]],
  [[270,-98],[270,-110],northJunction]
 ]);
 export const HISTORIC_ROAD_TRACES=Object.freeze([
@@ -96,7 +100,7 @@ export const HISTORIC_ROAD_TRACES=Object.freeze([
  {name:'Annexe inner east road',width:6,points:annexeInnerEastRoad},
  {name:'Admin north service road',width:6,points:northService},
  // Keep access north of Estates; the blue-selected outer east/south loop is grass.
- {name:'Tower north court lane',width:5,points:[[229,-70.4],[260,-70.4]]},
+ {name:'Tower north court lane',width:5,points:[[229,-69.6],[260,-69.6]]},
  {name:'Northern estate boundary',width:6,points:bezier([-79,-94],[
   [[-90,-125],[-94,-188],[-94,-215]],[[ -94,-232],[-102,-242],[-90,-242]],
   [[-15,-244],[102,-244],[159,-239]],[[174,-223],[181,-213],[190,-202]],

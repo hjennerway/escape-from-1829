@@ -113,7 +113,9 @@ for(const name of ['Admin roundabout','Admin roundabout to annexe','Annexe outer
  assert(!layouts.historicRoads.getObjectByName(name),name+' is not in the latest marked network');
  assert(!layouts.historicRoads.getObjectByName(name+' border'),'Unmarked roads must not leave borders');
 }
-for(const local of [[110,51],[146,39],[120,51],[75,121]]){
+// The relocated red-line avenue now crosses the old [75,121] kerb sample.
+// Check the removed loop farther out, beyond that approved avenue instead.
+for(const local of [[110,51],[146,39],[120,51],[75,128]]){
  const p=annexeGroundPoint(local[0],0,local[1]);
  assert(!['black road','stone kerb'].includes(surfaceAt(p[0],p[2])),'Unmarked annexe approaches and loops must expose their grounds: '+local);
 }

@@ -1,0 +1,18 @@
+{
+  "format": 1,
+  "revision": "160",
+  "sourceHash": "38091dba3f4f6411f8e1af9a4bc13701d30628055947f23367895f9115f2b30b",
+  "file": "aerial-38f1523940e64e2d3167.bin.gz",
+  "bytes": 10314378,
+  "uncompressedBytes": 89382256,
+  "sha256": "38f1523940e64e2d3167a55365efe4fabb0ab406c22933ed1b191ecbde8f1707",
+  "stats": {
+    "revision": "160",
+    "buildMilliseconds": 825.5,
+    "windows": 2719,
+    "geometries": 9744,
+    "materials": 507,
+    "textures": 41
+  },
+  "totalSeconds": 7.8
+}

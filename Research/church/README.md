@@ -44,3 +44,8 @@ Open `aerial.html?view=church-front`, or select **CLOCK FRONT** from the church
 view. Front and oblique review renders are in
 `Browser/artifacts/church-front-*-after.png`; the corresponding `*-before.png`
 files record the previous geometry. Unity and Blender exports are unchanged.
+
+The same unedited `clock-front-reference.png` is included in the Church's
+**Building photos** gallery as **Church · clock-facing front**, alongside the
+existing aerial photograph. `Browser/build-building-photos.mjs` generates the
+689 × 918 WebP asset and records its source in the photo manifest.

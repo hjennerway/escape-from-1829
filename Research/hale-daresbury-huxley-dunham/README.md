@@ -102,3 +102,11 @@ for the approximate red and blue viewing directions. The same presets work
 in `explore.html`; the ward navigation offers both photo views and a matching
 walking link. Browser source and the compiled aerial model were updated;
 Unity and Blender exports were not regenerated.
+
+## Gallery photographs, 17 September 2026
+
+The user resupplied `Downloads/1829/daresbury/img1.jpg` and `img2.jpg` for both
+the Hale / Daresbury and Huxley / Dunham galleries. Their SHA-256 hashes match
+the existing `inside-corners/img1.jpg` and `img2.jpg` originals respectively.
+The photo build script reuses those originals for the shared garden and
+courtyard-entrance photographs in both ward galleries.

@@ -1,5 +1,12 @@
 # Modern road overlay and aerial layouts
 
+The September 17 Countess Mini Roundabout correction brings Valley drive
+directly into the roundabout, placing the circle at the centre of the three
+road arms. It replaces both the original fork and the first red-marked
+near-side bypass with one smooth approach on Modern. The saved coordinates
+remain archived; the rendered centreline and label use the refined route.
+See [reference and geometry notes](countess-roundabout/README.md).
+
 The September 17 red-marked rear area beside Parsons Lane (1829 Central) is
 covered by one continuous asphalt surface in Modern. It uses the road colour
 and roughness, covers the enclosed grass and older pale paving, and follows

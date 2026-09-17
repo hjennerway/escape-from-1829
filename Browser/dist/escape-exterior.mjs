@@ -1,4 +1,5 @@
 import {matchEstateGrass} from './estate-grass.mjs';
+import {createBowlingGreen} from './bowling-green.mjs';
 import {photoDetailPrimitives} from './photo-detail-primitives.mjs';
 import {refineFrontInsideCorners} from './front-inside-corners.mjs';
 import {addCentralBack} from './central-back.mjs';
@@ -7,11 +8,11 @@ import {wingWallGeometry,addWingRoofJunction} from './wing-roof-junctions.mjs';
 // Front road/reception is +Z; the corrected mast position is rear-left (-X, -Z).
 import {createTreeLayer} from './tree-layer.mjs';
 import {ANNEXE_ROAD_TREES} from './annexe-road-trees.mjs';
-import {addFrontLawnTrees} from './front-lawn-trees.mjs';
+import {addBeechTrees} from './front-lawn-trees.mjs';
 import {addAdminPineTrees} from './admin-pine-trees.mjs';
 import {addOakTrees} from './oak-trees.mjs';
 import {westFrontPhotoProfile} from './west-front-photo-detail.mjs';
-import {westCourtPhotoProfile} from './west-court-photo-detail.mjs';
+import {westCourtPhotoProfile,WEST_COURT_ALIGNMENT} from './west-court-photo-detail.mjs';
 import {createChapel} from './chapel.mjs';
 import {createChurchGrounds} from './church-grounds.mjs';
 import {addFrontSteps} from './front-steps.mjs';
@@ -62,7 +63,7 @@ export function createEscapeExterior(THREE,aspect){
   const camera=new THREE.PerspectiveCamera(46,aspect,.5,2000);
   const model=new THREE.Group();model.name='1829 estate · aerial reconstruction';scene.add(model);
   const trees=createTreeLayer(THREE,model);
-  addFrontLawnTrees(THREE,trees);
+  addBeechTrees(THREE,trees);
   addAdminPineTrees(THREE,trees);
   addOakTrees(THREE,trees);
   scene.add(new THREE.HemisphereLight(0xe4eff2,0x59634a,2));
@@ -120,12 +121,12 @@ export function createEscapeExterior(THREE,aspect){
     [-40,-3,6,8,7.2],[-22.5,3,6,6,7.2]
   ];
   const eastBlocks=westBlocks.map(([x,z,w,d,h])=>[-x,z,w,d,h]);
-  westBlocks[0]=[-48.6,12,21.2,15,14.3];
+  westBlocks[0]=[-48.6,(WEST_COURT_ALIGNMENT.wallZ+WEST_COURT_ALIGNMENT.gardenZ)/2,21.2,WEST_COURT_ALIGNMENT.gardenZ-WEST_COURT_ALIGNMENT.wallZ,14.3];
   // The fire-exit doors belong to the existing pavilion wall, not an extra
   // projecting stair tower. Its former block is omitted below.
   westBlocks[7]=[-39.6,3,7.2,8,11.3]; // Recessed link at the img6 courtyard corner.
-  westBlocks[5]=[-62.5,10.25,7,10.5,12.8];
-  westBlocks.push([-69,9.25,6,12.5,12.8]); // Rear steps meet the taller flush frontage at z=15.5.
+  westBlocks[5]=[-62.5,10.25,7,10.5,14.3];
+  westBlocks.push([-69,9.25,6,12.5,15.2]); // img3: the outer end has one level cornice.
   westBlocks.splice(6,1);
   eastBlocks[1][4]=14.3; // The courtyard return has three occupied storeys.
   // Approximate the red outline: a slightly longer front foot, a shallow
@@ -192,14 +193,14 @@ export function createEscapeExterior(THREE,aspect){
     }
     // Outer east white base is retained beyond the mirrored brick inner wing.
     if(eastInner)box(white,41.02,2,z,.12,4,d);
-    if(!rearArm)box(cream,x,h-.12,z,w+.23,.22,d+.23);
+    if(!rearArm&&x!==-69&&x!==-39.6)box(cream,x,h-.12,z,w+.23,.22,d+.23);
     if(passage){
       const left=Math.max(x-w/2,passage.x-passage.width/2),right=Math.min(x+w/2,passage.x+passage.width/2);
       // Visible lintel/soffit above the opening, with no foundation across it.
       box(stone,(left+right)/2,base+.1,z,right-left,.2,d+.15);
       body.name='East courtyard bridge';
     }
-    if(!rearArm)box(stone,x,h+.12,z,w+.48,.22,d+.48);
+    if(!rearArm&&x!==-69&&x!==-39.6)box(stone,x,h+.12,z,w+.48,.22,d+.48);
     const principal=x===EAST_SHIFT/2&&z===12;
     if(principal){
       // Pitched slate clears the solid cornice slab (top h+.23).
@@ -212,8 +213,8 @@ export function createEscapeExterior(THREE,aspect){
       const roofWidth=z===35?12:9,roofX=z===35?35:36.5;
       const cap=hipRoof(roofX,z,roofWidth,d,h+.23,roofWidth*.3);
       cap.name='East entrance wing slate roof';
-    }else if(x===65.5&&z===15){
-      // The img3 side-return builder supplies the continuous pavilion roof.
+    }else if((x===65.5&&z===15)||x===-69||x===-39.6){
+      // Detailed end roofs and the aligned court range cover these walls.
     }else hipRoof(x,z,w,d,h+.23,Math.min(3.8,Math.min(w,d)*.3));
     if(!detail)for(const side of [-1,1]){
       for(let px=-w/2+2.4;px<w/2-1.5;px+=3.55)for(let y=3.8;y<h-1;y+=3.4){
@@ -231,6 +232,7 @@ export function createEscapeExterior(THREE,aspect){
     }
     if(!detail&&w>13)for(const side of [-1,1]){if(principal)continue;mesh(worldUV(new THREE.BoxGeometry(.85,2.1,1.3)),brick,x+side*(w*.32),h+2.6,z,true);box(stone,x+side*w*.32,h+3.69,z,1.1,.15,1.5);}
     if(westDetail&&z===3)body.name='West courtyard widened link';
+    if(westDetail&&x===-48.6)body.name='West courtyard aligned range';
     if(westDetail&&x===-62.5)body.name='West courtyard recessed end';
     if(westDetail&&x===-69)body.name='West courtyard projecting corner';
     return body;
@@ -324,7 +326,8 @@ export function createEscapeExterior(THREE,aspect){
   // Consume the same random draws so the remaining trees retain their shapes.
   for(let i=0;i<24;i++){const x=-100+i*9,z=-84-(i%3)*7,size=1+random()*.6;
     const haleRoof=x>=80&&x<=148.5&&z>=-93&&z<=-77;
-    if((x<-60||x>1)&&!haleRoof)tree(x,z,size);else for(let n=0;n<20;n++)random();}
+    const bowlingGreenTree=x===107&&z===-98; // Yellow-circled tree in the lawn reference.
+    if((x<-60||x>1)&&!haleRoof&&!bowlingGreenTree)tree(x,z,size);else for(let n=0;n<20;n++)random();}
   for(let i=0;i<9;i++){
     tree(-90,-44+i*12,1.1);
     // Clear the marked Redesmere sightline, retaining an edge tree on the
@@ -351,6 +354,7 @@ export function createEscapeExterior(THREE,aspect){
   // Corridor routes independently reconnect to these final ward positions.
   placeWard(irbyAshley,'irbyAshley');placeWard(farndonWard,'farndon');placeWard(witbyWard,'witby');
   placeWard(graftonEdge,'graftonEdge');placeWard(haleWard,'haleWard');
+  const bowlingGreen=createBowlingGreen(THREE);model.add(bowlingGreen);
   const {building:mainAdmin,corridor:adminCorridor}=createMainAdminBuilding(THREE,{brick:photoBrick,roof,worldUV,material});model.add(mainAdmin,adminCorridor);
   const laundry=createLaundry(THREE,{brick:photoBrick,roof,worldUV,material,adminCorridor});model.add(laundry);
   const garagesMortuary=createGaragesMortuary(THREE,{brick:photoBrick,roof,worldUV,material});model.add(garagesMortuary);
@@ -386,5 +390,5 @@ export function createEscapeExterior(THREE,aspect){
   const lawnMaterials=new Set();
   model.traverse(object=>{for(const mat of (Array.isArray(object.material)?object.material:[object.material]))if(mat?.userData.estateGrass)lawnMaterials.add(mat);});
   for(const mat of lawnMaterials)matchEstateGrass(mat,grass);
-  return {scene,camera,model,terrain,legacyAccess,mast,chapel,churchGrounds,waterTower,estateChimney,annexe,newHospital:annexe,churtonWard,uptonFrithOscroft,irbyAshley,graftonEdge,haleWard,estatesDepartment,farndonWard,witbyWard,mainAdmin,adminCorridor,laundry,garagesMortuary,greenhouses,outhouse,trees,invalidateShadows};
+  return {scene,camera,model,terrain,legacyAccess,mast,chapel,churchGrounds,waterTower,estateChimney,annexe,newHospital:annexe,churtonWard,uptonFrithOscroft,irbyAshley,graftonEdge,haleWard,bowlingGreen,estatesDepartment,farndonWard,witbyWard,mainAdmin,adminCorridor,laundry,garagesMortuary,greenhouses,outhouse,trees,invalidateShadows};
 }

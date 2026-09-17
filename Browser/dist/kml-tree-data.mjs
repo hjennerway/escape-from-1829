@@ -1,7 +1,7 @@
 import {earthToScene} from './earth-registration.mjs';
 
 // Exact Point coordinates from Research/kml-trees/1829.kml (Pine1–13, Oak1–2)
-// and 1829-3.kml (Oak3–12), in KML order:
+// 1829-3.kml (Oak3–12) and 1829-6.kml (Oak13–22, Beech1–2), in KML order:
 // longitude, latitude, altitude. LookAt coordinates are camera targets only.
 export const KML_TREE_POINTS=Object.freeze([
   {name:'Pine1',coordinates:[-2.899462848266841,53.21333437945022,37.49250189993169]},
@@ -30,7 +30,21 @@ export const KML_TREE_POINTS=Object.freeze([
   {name:'Oak9',coordinates:[-2.902762045239078,53.21188861729267,30.7640180335697]},
   {name:'Oak10',coordinates:[-2.903047758876757,53.21165999664634,30.37999153737037]},
   {name:'Oak11',coordinates:[-2.903340424125412,53.21157351354389,29.30406315347999]},
-  {name:'Oak12',coordinates:[-2.903499951363692,53.21152005173493,35.67578333191555]}
+  {name:'Oak12',coordinates:[-2.903499951363692,53.21152005173493,35.67578333191555]},
+  {name:'Oak13',coordinates:[-2.902616970340783,53.21220012335106,30.94236085728614]},
+  {name:'Oak14',coordinates:[-2.902627743655254,53.21212098550448,31.73568098092514]},
+  // This export also has two distinct Oak16 points; keep both as with Oak8.
+  {name:'Oak16',coordinates:[-2.9037191208268,53.21147789128506,25.78102464938219]},
+  {name:'Oak15',coordinates:[-2.902507951119063,53.21270714792458,30.35359356307865]},
+  {name:'Beech1',coordinates:[-2.902574033648992,53.21325450323095,30.33986142819567]},
+  {name:'Beech2',coordinates:[-2.90268629985782,53.2134381102525,32.54689920922267]},
+  {name:'Oak16',coordinates:[-2.902306992751037,53.2130832497179,27.55456090244934]},
+  {name:'Oak17',coordinates:[-2.902483916916045,53.21310649156975,29.30652813870409]},
+  {name:'Oak18',coordinates:[-2.902766242637107,53.2131420723819,34.55476547908182]},
+  {name:'Oak21',coordinates:[-2.903325559043617,53.21301876963101,30.63427113241559]},
+  {name:'Oak22',coordinates:[-2.903513799830775,53.2129581108177,27.84551362613409]},
+  {name:'Oak19',coordinates:[-2.902974648914852,53.21311016843507,32.92018969682149]},
+  {name:'Oak20',coordinates:[-2.903133266722551,53.21306954432858,32.68083544448528]}
 ].map(point=>Object.freeze({...point,coordinates:Object.freeze(point.coordinates)})));
 
 // Stable pseudorandom yaw varies the copies without changing them at reload.
@@ -38,10 +52,12 @@ let rotationSeed=182917;
 export const KML_TREES=Object.freeze(KML_TREE_POINTS.map(point=>{
   const [longitude,latitude,altitude]=point.coordinates,[x,z]=earthToScene(latitude,longitude);
   rotationSeed=(Math.imul(rotationSeed,1664525)+1013904223)>>>0;
-  const pine=point.name.startsWith('Pine');
-  return Object.freeze({name:point.name,species:pine?'pine':'oak',x,z,latitude,longitude,altitude,
-    height:pine?24:22,radius:pine?5.8:10,seed:pine?182900:182902,
+  const species=point.name.startsWith('Pine')?'pine':point.name.startsWith('Beech')?'beech':'oak';
+  const model={pine:{height:24,radius:5.8,seed:182900},oak:{height:22,radius:10,seed:182902},
+    beech:{height:19.5,radius:8.6,seed:1901,copper:false}}[species];
+  return Object.freeze({name:point.name,species,x,z,latitude,longitude,altitude,...model,
     rotation:rotationSeed/2**32*Math.PI*2});
 }));
 export const KML_PINE_TREES=Object.freeze(KML_TREES.filter(tree=>tree.species==='pine'));
 export const KML_OAK_TREES=Object.freeze(KML_TREES.filter(tree=>tree.species==='oak'));
+export const KML_BEECH_TREES=Object.freeze(KML_TREES.filter(tree=>tree.species==='beech'));

@@ -1,4 +1,5 @@
 import {addFoliageLevels,placeTreeCopies} from './tree-templates.mjs';
+import {KML_BEECH_TREES} from './kml-tree-data.mjs';
 // img1.jpg and img1-loc.png: the two yellow crosses on the front lawns.
 // Positions and mature crown dimensions are estimates from the marked view.
 export const FRONT_LAWN_TREES=Object.freeze([
@@ -7,7 +8,8 @@ export const FRONT_LAWN_TREES=Object.freeze([
 ]);
 export const FRONT_LAWN_TREE_VIEW=Object.freeze({position:[27,1.8,27],target:[-4,7.7,61],fov:54});
 
-export function addFrontLawnTrees(THREE,trees){
+// The mapped beeches reuse the front-lawn model, without moving the photo trees.
+export function addBeechTrees(THREE,trees){
   const wood=new THREE.MeshStandardMaterial({color:0x554a3d,roughness:1});
   // Small pointed leaves on a twig, generated locally as an opaque cutout.
   // Instanced sprays retain fine edges without hundreds of thousands of solids.
@@ -93,7 +95,7 @@ export function addFrontLawnTrees(THREE,trees){
       batch.castShadow=true;batch.receiveShadow=true;addFoliageLevels(THREE,group,batch);
     }
   }
-  placeTreeCopies(THREE,trees,template,FRONT_LAWN_TREES,'frontLawnTree',(group,spec)=>{
+  placeTreeCopies(THREE,trees,template,[...FRONT_LAWN_TREES,...KML_BEECH_TREES],'beechTree',(group,spec)=>{
     if(spec.copper)return;
     // Preserve the photographed copper/green distinction on the shared shape.
     group.traverse(batch=>{
@@ -105,4 +107,7 @@ export function addFrontLawnTrees(THREE,trees){
       }
     });
   });
+  for(const tree of trees.children){
+    if(FRONT_LAWN_TREES.some(spec=>spec.name===tree.name))tree.userData.frontLawnTree={...tree.userData.beechTree};
+  }
 }

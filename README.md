@@ -5,7 +5,11 @@ Explore The West Cheshire Hospital site including the historic Chester County As
 An explorable aerial perspective and first-person escape game set in Chester's 1829 building. Explore the asylum and grounds from the air or on foot or play "Asylum Escape" where you have to find one of five exits
 inside 1829 while Security and the Chester County Asylum ghost search the corridors.
 
-The aerial view allows toggling between Modern or Historic views. The pine and oak trees, car parks and modern road layouts as well as exact positions of 1829, the water tower, church, Upton Lea, Churton house and other surviving buildings are exact according to Google Earth.
+The aerial view allows toggling between Modern or Historic views. 
+
+The pine and oak trees, car parks and modern road layouts as well as exact positions of 1829, the water tower, church, Upton Lea, Churton house and other surviving buildings are exact according to Google Earth.
+
+Click on a building to see the name of the building, historical photos and information about that building.
 
 Inside the estate site, click the cross-hairs to pinpoint your position to see what used to be where you stand.
 

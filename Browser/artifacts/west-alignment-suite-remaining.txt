@@ -1,0 +1,19 @@
+RUN test-annexe-access.mjs
+PASS: red-line avenue, clear central sweep, yellow gravel link, removed rear and side roads, protected lane junctions and teardrop, and Historic visibility.
+EXIT 0 test-annexe-access.mjs
+RUN test-performance.mjs
+PASS: indexed collisions match full scans across all layouts and padded boundaries; idle and distant collision work skipped; refreshed obstacles and cached-shadow invalidation.
+EXIT 0 test-performance.mjs
+RUN test-aerial-performance.mjs
+PASS: shared tree buffers, colours and placement; distance detail and hysteresis; 8327 static meshes compiled into 1227 batches; all layout surfaces retained; cached transforms and dynamic labels; 433316 default-view tree triangles.
+EXIT 0 test-aerial-performance.mjs
+RUN test-building-detail.mjs
+PASS: 2712 textured windows; close geometry and all layouts preserved; atlas pixels and rotated placement; viewport/zoom detail with hysteresis; static shadows, structural walls and independent trees.
+EXIT 0 test-building-detail.mjs
+RUN test-outhouse.mjs
+PASS: 1066 roof samples, red-circle registration, exposed boarding, gable lighting, road clearance, three camera starts, walkable approach and shared-layout collisions.
+EXIT 0 test-outhouse.mjs
+RUN test-building-photos.mjs
+PASS: precompiled building metadata and roof selection match the source scene.
+PASS: 33 buildings, every named location, bundled photos, roof picking before/after batching and LOD, empty ground and layout visibility (56472 selection triangles).
+EXIT 0 test-building-photos.mjs

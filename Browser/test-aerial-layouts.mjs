@@ -6,6 +6,7 @@ import {MODERN_ROAD_PATHS} from './dist/modern-road-data.mjs';
 import {updateRoadLabels} from './dist/road-labels.mjs';
 import {earthToScene} from './dist/earth-registration.mjs';
 import {roadCenterline} from './dist/road-centerlines.mjs';
+import {COUNTESS_ROUNDABOUT_CENTER} from './dist/countess-roundabout.mjs';
 import {ESTATE_CHIMNEY} from './dist/estate-chimney.mjs';
 import {exteriorObstacles,obstacleContains} from './dist/explore-controls.mjs';
 const drawnRoadNames=[];
@@ -16,7 +17,7 @@ const layouts=createAerialLayouts(THREE,exterior);
 assert.equal(createAerialLayouts(THREE,exterior),layouts,'Repeated setup must not duplicate scene groups or roads');
 exterior.model.updateMatrixWorld(true);for(const [o,matrix]of before)assert(o.matrixWorld.equals(matrix),'Grouping must preserve all existing transforms');
 assert.equal(exterior.terrain.parent,exterior.model);
-assert.deepEqual(layouts.historic.children,[exterior.irbyAshley,exterior.graftonEdge,exterior.haleWard,exterior.estatesDepartment,exterior.farndonWard,exterior.witbyWard,exterior.mainAdmin,exterior.adminCorridor,exterior.laundry,exterior.garagesMortuary,exterior.greenhouses,exterior.estateChimney,exterior.annexe,exterior.towerBuildings,layouts.historicRoads]);
+assert.deepEqual(layouts.historic.children,[exterior.irbyAshley,exterior.graftonEdge,exterior.haleWard,exterior.estatesDepartment,exterior.farndonWard,exterior.witbyWard,exterior.bowlingGreen,exterior.mainAdmin,exterior.adminCorridor,exterior.laundry,exterior.garagesMortuary,exterior.greenhouses,exterior.estateChimney,exterior.annexe,exterior.towerBuildings,layouts.historicRoads]);
 assert.equal(exterior.chapel.parent,layouts.shared);assert.equal(exterior.waterTower.parent,layouts.shared);assert.equal(exterior.churtonWard.parent,layouts.shared);
 const frontage=layouts.shared.getObjectByName('Blue dragons and central coat of arms');assert(frontage,'1829 must remain in the common estate');
 assert(layouts.shared.getObjectByName('Redesmere canted bay'),'Redesmere must remain in the common estate');
@@ -25,7 +26,7 @@ const visible=o=>{for(;o;o=o.parent)if(!o.visible)return false;return true};
 for(const historic of [true,false])for(const modern of [true,false]){
  layouts.setVisible('historic',historic);layouts.setVisible('modern',modern);
  for(const o of [frontage,exterior.chapel,exterior.waterTower,exterior.churtonWard])assert.equal(visible(o),historic||modern);
- for(const o of [exterior.estatesDepartment,exterior.witbyWard,exterior.farndonWard,exterior.irbyAshley,exterior.graftonEdge,exterior.haleWard,exterior.towerBuildings,exterior.annexe,exterior.mainAdmin,exterior.adminCorridor,exterior.laundry,exterior.garagesMortuary,exterior.greenhouses,exterior.estateChimney])assert.equal(visible(o),historic);
+ for(const o of [exterior.estatesDepartment,exterior.witbyWard,exterior.farndonWard,exterior.irbyAshley,exterior.graftonEdge,exterior.haleWard,exterior.bowlingGreen,exterior.towerBuildings,exterior.annexe,exterior.mainAdmin,exterior.adminCorridor,exterior.laundry,exterior.garagesMortuary,exterior.greenhouses,exterior.estateChimney])assert.equal(visible(o),historic);
  for(const o of layouts.roads.children)assert.equal(visible(o),(o.name==='Vivienne Smith Lane'||o.name.startsWith('Parsons Lane'))?(historic||modern):modern);
  assert.equal(visible(exterior.terrain),true);
  assert.equal(exteriorObstacles(THREE,exterior.model).some(o=>obstacleContains(o,ESTATE_CHIMNEY.x,ESTATE_CHIMNEY.z)),historic,'A hidden chimney must not leave a collision obstacle');
@@ -70,6 +71,10 @@ for(let i=0;i<MODERN_ROAD_PATHS.length;i++){
   assert.deepEqual(road.userData.centerline.slice(12),saved.slice(12),'Retain the rest of the Modern tail');
  }else if(path.name==='Frost drive'){
   assert.deepEqual(road.userData.centerline,saved.slice(0,7),'Frost drive ends at the frontage junction before the removed lawn spur');
+ }else if(path.name==='Valley drive'){
+  assert.deepEqual(road.userData.centerline[0],COUNTESS_ROUNDABOUT_CENTER,'Valley drive must enter the roundabout at its centre');
+  assert.deepEqual(road.userData.centerline.slice(-5),saved.slice(3),'Retain the outer Valley drive beyond the adjusted junction');
+  assert.deepEqual(road.userData.coordinates,path.coordinates,'Preserve the original survey separately from the refined road');
  }else assert.deepEqual(road.userData.centerline,saved,'Other mapped lanes retain their saved vertices');
  road.traverse(o=>{if(!o.isMesh)return;const normals=o.geometry.attributes.normal;for(let n=0;n<normals.count;n++)assert(normals.getY(n)>.99,'Roads must face upwards');const b=new THREE.Box3().setFromObject(o);assert(b.min.y>.3&&b.max.y<.4,'Road overlays must clear terrain without becoming walking obstacles');});
 }

@@ -10,6 +10,70 @@ See [AGENTS.md](AGENTS.md) for coding-agent guidance and the
 
 ## Asylum escape footprint (September 17)
 
+The Countess Mini Roundabout junction is centred on the circle in Modern,
+in both aerial and Explore. Valley drive now curves directly into the
+roundabout; the former fork and the first near-side bypass are removed.
+All three arms meet inside the mapped roundabout, with six-unit asphalt and
+pale borders matching the existing lanes. Labels follow the refined route.
+The reference and estimated route are recorded in the
+[roundabout notes](Research/countess-roundabout/README.md). The exact KML
+polygon and saved road coordinates are retained. Browser sources and the local
+compiled aerial model are updated; Unity and Blender exports are unchanged.
+The full browser suite passes. Route continuity, upward faces, walking
+clearance and all layout visibility combinations pass; source/compiled visual
+checks use `Browser/artifacts/roundabout-approach-*`. The centred-junction
+build and suite logs use `Browser/artifacts/roundabout-centred-*`.
+
+The five new west-wing photographs refine the garden face, outer end and rear
+court. The end now has one level cornice, a white ground storey and sparse
+central glazing. Three-sided bays, wider flanking windows, the relocated fire
+escape, paired lean-to windows, the lower court projection and garden paths
+follow the numbered references. Five matching photo views and an aerial view
+are available in Locations. See [camera mapping and modelling notes](Research/west/README.md).
+The shared browser model is updated; Unity and Blender exports are unchanged.
+The subsequent red/yellow correction aligns the paired-window court wall to
+the fixed corner plane and deepens the lean-to to the green guide measured
+from that plane. The wall's openings, trim, attached bay, roof and collisions
+follow the correction; the garden face stays fixed. See the later section of
+the west reference notes for dimensions and alignment checks.
+The later red-guide correction shifts the lean-to right along that wall,
+leaves a small open gap beside the rear arm and places its door on the exposed
+side marked green. The roof, glazed bars, surround and collisions move together.
+The local compiled model is regenerated. West geometry, visual comparison,
+compiled/source rendering and building selection pass. The full suite and
+remaining checks finish with 46 of 49 passing; the research notes record the
+two existing road assertions and the unrelated Oak14/Farndon collision sample.
+
+Oak13–Oak22 and Beech1–Beech2 are imported from `1829 (6).kml`. Both distinct
+Oak16 points are retained, adding eleven oaks and two beeches. The previous
+front-lawn beeches remain in place. **Countess Mini Roundabout** uses the
+eight-sided Polygon in `1829 (8).kml`, with an estimated white centre marking.
+All additions appear once in Historic, Modern or both. See the
+[tree import notes](Research/kml-trees/README.md) and
+[roundabout notes](Research/countess-roundabout/README.md).
+The browser sources and local compiled aerial model are updated; Unity and
+Blender exports are unchanged. Exact-coordinate import, shared tree buffers,
+layout visibility, tree collisions, walkable roundabout, car park, performance
+and binary checks pass. Compiled and procedural geometry/draw counts match;
+visual comparisons and both-layout screenshots pass. Artifacts use the
+`Browser/artifacts/kml-imports-` prefix. The full browser suite and remaining
+checks were run. The known annexe photo-placement road snapshot and Historic
+Admin north service road clearance failures remain; the separate west-facade
+work also has a `west-refinement` building-photo catalogue assertion.
+Farndon's hidden-wall probe now checks the Historic group independently of the
+new mapped oak that occupies the same ground and remains visible in Modern.
+
+The yellow-marked Hale lawn tree is removed, including its trunk collision, and
+the blue-marked ground becomes a flat bowling lawn with subdued mowing stripes.
+It follows the Historic layout; the adjacent trees are retained. See
+[placement notes](Research/bowling-green/README.md). The local compiled aerial
+model is regenerated; Unity and Blender exports are unchanged.
+Visual review, compiled/source comparison, tree collisions, car park, layout
+visibility and performance checks pass. The browser suite and remaining checks
+were run; the existing annexe photo-placement road snapshot and Historic Admin
+north service road clearance failures remain. Validation artifacts use the
+`Browser/artifacts/bowling-lawn-` prefix.
+
 Both interior floors now roughly follow the modelled 1829 core: a broad front
 gallery, central reception, three rear arms, two projecting front wings and
 unequal end pavilions. Barmere, Redesmere and Saughall are excluded. The rear
@@ -513,6 +577,28 @@ The new two-storey Irby/Ashley range follows the yellow refinement in the suppli
 
 Choose **Irby/Ashley** in Locations, or open `aerial.html?view=irby-ashley`. Plan, purple-camera, blue-camera and Main/admin viewpoints are available; `explore.html?view=irby-ashley` starts on the garden approach. The building belongs to Historic and the walking/gameplay scene. The request refers to img2 at the purple arrow, but the supplied file is img1; that correspondence and concealed details are approximate. Sources and registration notes are in [Research/irby-ashley/README.md](Research/irby-ashley/README.md). Unity and Blender exports are unchanged.
 
+The later red-to-orange screenshot moves the rear range three additional units
+towards the front, for a total positive-Z offset of ten units. The yellow front
+faces keep their positions, widths and sashes; the corridor contact also stays
+fixed. Connecting wings shorten, while the rear roofs, bays, corner and glazing
+keep their dimensions. Paving and walking footprints follow the updated model.
+Reference-camera renders and a comparison of 465 mesh vertices, 552 garden
+detail instances and seven fixed front/corridor sashes are recorded in
+`Browser/artifacts/irby-red-orange-*`.
+
+The requested regression cleanup fixes the annexe road snapshot's scope: it
+protects the named annexe loop, avenue and teardrop rather than unrelated roads
+east of x=240. The separate Historic road failure was a real service-ribbon
+overlap with the refined tower workshops. Its route now clears the tower and
+Estates at full width, and the short cross-lane clears Irby's fixed front. An
+obsolete grass sample on the relocated annexe avenue's kerb moves back into
+the removed loop area. All 49 scripts pass through `npm test`; the final suite
+log is `Browser/artifacts/irby-red-orange-suite-final.txt`. The rebuilt model
+also passes `npm run test:compiled`, including matched rendering, controls and
+fallback loading (`irby-red-orange-compiled-final.txt`); its source fingerprint
+matches the current model. Browser sources and the local compiled aerial model
+are updated; Unity and Blender exports are unchanged.
+
 ## Grafton/Edge
 
 Grafton/Edge is a copy of Irby/Ashley rotated 90 degrees anticlockwise and fitted to the yellow/orange-marked bay beside Upton/Frith/Oscroft. Its church-facing rear follows the supplied veranda photograph: a mostly flat facade, shallow square projections at both ends, and one central half-octagonal bay intersecting a full-length open veranda. The copied greenhouse and paired rear bays are removed. Slate roofing, slender posts, timber end screens and a clear sheltered walk complete the veranda.
@@ -600,3 +686,38 @@ shows pause or defeat. Desktop and mobile popup layouts and visibility were
 checked in WebGL (`Browser/artifacts/result-explore-*.png`). Game checks pass;
 the full suite still stops at the existing annexe photo-placement road snapshot
 mismatch (`Browser/artifacts/result-explore-suite.txt`).
+
+### Hale/Huxley and Main/Admin gallery additions, 17 September 2026
+
+Both Hale / Daresbury and Huxley / Dunham now show the supplied Daresbury
+entrance detail and Dunham / Daresbury garden photograph. The photo build
+script reuses the identical originals in
+`Research/hale-daresbury-huxley-dunham/inside-corners/`. Main / Admin now has
+six photographs: its existing side and rear views plus the four supplied
+frontage, entrance and forecourt views, retained unedited in
+`Research/main-admin-photos/`. Six new WebP assets and their provenance were
+generated through `Browser/build-building-photos.mjs`.
+
+Validation: `node Browser/test-building-photos.mjs` passes for source and
+compiled building selection, and all 49 scripts in `npm test` pass. The npm
+CLI was invoked directly from `C:/Program Files/nodejs/node_modules/npm/bin/`
+because the normal launcher pointed to a missing roaming installation.
+The full output is `Browser/artifacts/hale-main-admin-gallery-suite.txt`.
+All three galleries loaded their expected photos and captions in Chrome;
+desktop screenshots were visually checked, and the mobile Main/Admin panel
+fits the viewport and scrolls to the final image without page errors.
+Screenshots use the `hale-daresbury-gallery`, `huxley-dunham-gallery` and
+`main-admin-gallery-` prefixes in `Browser/artifacts/`. Only gallery sources,
+assets and documentation changed; model geometry and compiled, Unity and
+Blender exports were not regenerated for these additions.
+
+The Church photo gallery now includes the supplied clock-facing front photograph
+alongside its existing aerial view. The attachment matches the unedited
+`Research/church/clock-front-reference.png`; the photo build script generates
+`church-clock-front.webp` at 689 × 918 and records the source in its manifest.
+The gallery check and complete `npm test` suite pass (invoked through the
+installed npm CLI because the shell's npm launcher is broken). Both images load
+in the browser without page errors; the visual check is saved in
+`Browser/artifacts/church-clock-front-gallery.png`, with the suite log in
+`Browser/artifacts/church-gallery-suite.txt`. No model geometry or Unity/Blender
+exports changed.

@@ -1,0 +1,93 @@
+
+> test:compiled
+> node test-precompiled-models.mjs
+
+Checking aerial?models=source
+Checking aerial?models=compiled
+Checking aerial?models=compiled&buildingDetail=full&view=front
+Checking aerial
+Browser: Failed to load resource: the server responded with a status of 404 (Not Found)
+Checking aerial
+Checking aerial
+PASS: compiled estate, shadows, grass shaders, exact draw counts, tree/layout controls, orbit, portrait, full detail and missing/incompatible/damaged model fallback.
+{
+  "source": {
+    "mode": "procedural",
+    "milliseconds": 1331.2000000029802,
+    "triangles": 714406,
+    "calls": 2687,
+    "levels": [
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      1,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      1,
+      1,
+      1,
+      1,
+      1
+    ],
+    "readyMilliseconds": 8108.941000000001
+  },
+  "compiled": {
+    "mode": "compiled",
+    "milliseconds": 1272.6000000014901,
+    "triangles": 714406,
+    "calls": 2687,
+    "levels": [
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      1,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      1,
+      1,
+      1,
+      1,
+      1
+    ],
+    "readyMilliseconds": 9131.488700000002
+  },
+  "identicalScreenshot": false,
+  "pixels": {
+    "significantFraction": 0.00016142857142857143,
+    "meanChannelError": 0.05339619047619048
+  }
+}

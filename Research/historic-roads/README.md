@@ -1,5 +1,22 @@
 # Historic road layout — 16 September 2026
 
+## Service-road clearance correction — 17 September 2026
+
+The previously failing building-clearance assertion identified the old Admin
+north service ribbon crossing the refined tower ranges. The six-unit route
+now passes between the tower and Estates at x=232.67, then eases to x=235 to
+clear the wider workshop. Its northern turn passes Irby's fixed front at
+z=-68.8; the five-unit Tower north court lane moves to z=-69.6. Both roads
+retain their widths and pale borders. Building footprints remain unchanged.
+
+The full-width and rounded-end clearance checks now pass. The removed annexe
+loop's old grass sample at local [75,121] lay on the relocated frontage avenue's
+kerb; it now samples [75,128], beyond that approved road. The annexe-placement
+test protects the actual annexe routes instead of unrelated estate roads.
+Before/after service-court renders are saved as
+`Browser/artifacts/irby-red-orange-road-before-clear.png` and
+`Browser/artifacts/irby-red-orange-road-after-clear.png`.
+
 ## Frost drive lawn spur removed — 17 September 2026
 
 The user's red-circled screenshot removes the dead-end extension below the

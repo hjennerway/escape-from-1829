@@ -32,6 +32,13 @@ not been overwritten to hide that mismatch. The earlier general Historic
 roads test also reported an Admin north service road overlap outside the
 annexe work.
 
+The September 17 test maintenance supersedes that snapshot-failure note:
+`test-annexe-photo-placement.mjs` now protects the named annexe loop, avenue,
+teardrop and Parsons routes and checks removal of all four rear roads. It no
+longer freezes unrelated roads merely because one vertex is east of x=240.
+The archived reference is unchanged. The separate service-road overlap is
+corrected in the [Historic road notes](../historic-roads/README.md).
+
 Open `aerial.html?view=annexe-access` for the layout or
 `aerial.html?view=annexe-entrance` for a closer view. This changes the browser
 model; Blender and Unity exports are unchanged.

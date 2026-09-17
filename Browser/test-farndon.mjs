@@ -69,6 +69,8 @@ const visible=o=>{for(;o;o=o.parent)if(!o.visible)return false;return true;};
 for(const historic of [false,true])for(const modern of [false,true]){
  layouts.setVisible('historic',historic);layouts.setVisible('modern',modern);
  assert.equal(visible(ward),historic);
- assert.equal(exteriorObstacles(THREE,exterior.model).some(o=>obstacleContains(o,...placed([190,-176]))),historic);
+ // Imported oaks remain in Modern at this location. Check the Historic ward
+ // group separately so an independent tree does not masquerade as its wall.
+ assert.equal(exteriorObstacles(THREE,layouts.historic).some(o=>obstacleContains(o,...placed([190,-176]))),historic);
 }
 console.log('PASS: corrected Farndon footprint, '+checked+' roof samples, '+ridgeSamples+' continuous H-ridge samples, single-storey glazing, open garden, walking collisions, replaced corridor marker and Historic visibility.');

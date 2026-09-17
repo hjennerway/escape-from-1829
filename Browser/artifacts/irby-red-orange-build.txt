@@ -1,0 +1,22 @@
+
+> build:models
+> node build-models.mjs
+
+{
+  "format": 1,
+  "revision": "160",
+  "sourceHash": "a23e1f46fc50c2dd417323057b9591241956815f22e75c9d7e181b2a307c2eb2",
+  "file": "aerial-459867171471864bd28b.bin.gz",
+  "bytes": 10376673,
+  "uncompressedBytes": 90076320,
+  "sha256": "459867171471864bd28b13bb2280caadec8ac2207bc8ad050690c73822faf824",
+  "stats": {
+    "revision": "160",
+    "buildMilliseconds": 1881.5,
+    "windows": 2712,
+    "geometries": 9806,
+    "materials": 516,
+    "textures": 41
+  },
+  "totalSeconds": 17.5
+}

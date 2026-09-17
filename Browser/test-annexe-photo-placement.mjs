@@ -10,8 +10,19 @@ import {ANNEXE_FRONT_ROAD_REFERENCE} from './dist/annexe-front-roads.mjs';
 globalThis.document={createElement:()=>({getContext:()=>({fillRect(){}})})};
 const e=createEscapeExterior(THREE,1.5);e.model.updateMatrixWorld(true);
 const previous=JSON.parse(readFileSync(new URL('../Research/annexe-photo-placement/fixed-roads.json',import.meta.url)));
-const roads=[...HISTORIC_ROAD_TRACES,...SHARED_HISTORIC_LANES].filter(r=>r.points.some(p=>p[0]>240));
-assert.deepEqual(roads,previous.roads.filter(r=>!/^Annexe rear /.test(r.name)),'Only the yellow-circled rear roads are removed; the loop stays fixed');
+const roads=[...HISTORIC_ROAD_TRACES,...SHARED_HISTORIC_LANES];
+// Protect the annexe's surrounding loop, avenue and teardrop. Selecting every
+// route with any point east of x=240 also froze unrelated, later-approved
+// Vivienne Smith Lane, garage-junction and Main/admin pine-road revisions.
+for(const name of ['Northern Parsons Lane connection','Parsons Lane southern fork',
+ 'Admin teardrop circulation','Annexe front avenue','Northern estate boundary','Parsons Lane (North)']){
+ const original=previous.roads.find(r=>r.name===name);
+ assert(original,'The reference must contain the protected road: '+name);
+ assert.deepEqual(roads.find(r=>r.name===name),original,'Annexe placement must retain '+name);
+}
+const removedRoads=previous.roads.filter(r=>/^Annexe rear /.test(r.name));
+assert.equal(removedRoads.length,4,'The reference identifies all four removed rear routes');
+for(const {name} of removedRoads)assert(!roads.some(r=>r.name===name),'The yellow-marked rear road stays removed: '+name);
 const loop=previous.loop,footprints=existingBuildingFootprints(THREE,{model:e.annexe});
 const dist=(p,a,b)=>{const dx=b[0]-a[0],dz=b[1]-a[1],length=dx*dx+dz*dz,t=length?Math.max(0,Math.min(1,((p[0]-a[0])*dx+(p[1]-a[1])*dz)/length)):0;return Math.hypot(p[0]-a[0]-t*dx,p[1]-a[1]-t*dz);};
 const edgeDistance=(p,polygon)=>Math.min(...polygon.map((a,i)=>dist(p,a,polygon[(i+1)%polygon.length])));

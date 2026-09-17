@@ -19,11 +19,11 @@ export const IRBY_ASHLEY_ORIGINAL_FOOTPRINT=Object.freeze([
 // Latest blue footprint: extend the rectangular tower-side return to the
 // corridor side. The entire earlier cross wing/cap in yellow is removed.
 const connectionFront=IRBY_CONNECTION_FRONT-(WARD_POSITIONS.irbyAshley.z-IRBY_ASHLEY.z);
-// September 17 yellow-to-purple edge correction: translate the complete
-// rear range towards the fixed front by seven scene units. Its wings, bays,
-// glazing and roof junctions retain their dimensions; only the front links
-// shorten. The independently refined Grafton copy uses the original geometry.
-export const IRBY_REAR_SHIFT=7;
+// The later red-to-orange correction adds three units to the previous seven:
+// translate the complete rear range towards the fixed yellow front faces.
+// Its wings, bays, glazing and roof junctions retain their dimensions; only
+// the front links shorten. Grafton's independent copy keeps its own geometry.
+export const IRBY_REAR_SHIFT=10;
 const rearZ=z=>z+IRBY_REAR_SHIFT;
 export const IRBY_ASHLEY_FOOTPRINT=Object.freeze([
  ...IRBY_ASHLEY_ORIGINAL_FOOTPRINT.slice(0,8),

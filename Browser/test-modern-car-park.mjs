@@ -34,7 +34,9 @@ function crownsByTree(){
 }
 const originalCrowns=crownsByTree(),layouts=createAerialLayouts(THREE,exterior);
 const displaced=layouts.carParkTrees.children.filter(tree=>!tree.isInstancedMesh);
-assert.equal(displaced.length,14,'Clear all fourteen intersecting broadleaf trees');
+assert.equal(displaced.length,13,'Clear the thirteen remaining intersecting broadleaf trees');
+assert(!originalTrees.some(tree=>tree.userData.broadleafTree?.x===107&&tree.userData.broadleafTree?.z===-98),
+  'The yellow-circled bowling lawn tree is permanently removed');
 assert(displaced.every(tree=>tree.userData.broadleafTree));
 assert.equal(layouts.carPark.parent,layouts.modern);
 assert(!exterior.model.getObjectByName('Modern rear hardstanding beside Parsons Lane'));
@@ -62,6 +64,7 @@ const visible=object=>{for(;object;object=object.parent)if(!object.visible)retur
 for(const historic of [true,false])for(const modern of [true,false]){
   layouts.setVisible('historic',historic);layouts.setVisible('modern',modern);
   assert.equal(visible(layouts.carPark),modern);
+  assert.equal(visible(exterior.bowlingGreen),historic,'The bowling lawn belongs to the Historic grounds');
   const crowns=crownsByTree();
   for(const tree of originalTrees){
     const expected=(historic||modern)&&(!modern||!displaced.includes(tree));
@@ -70,6 +73,8 @@ for(const historic of [true,false])for(const modern of [true,false]){
       'All five crown instances must follow their trunk without changing their shape');
   }
   const obstacles=visible(exterior.trees)?exteriorObstacles(THREE,exterior.trees):[];
+  assert(!obstacles.some(obstacle=>obstacleContains(obstacle,107,-98,0)),
+    'The removed lawn tree must leave no trunk collision');
   for(const tree of displaced){
     assert.equal(obstacles.some(obstacle=>obstacleContains(obstacle,tree.position.x,tree.position.z,0)),historic&&!modern,
       'Modern must remove hidden trunk collisions; Historic must restore them');
@@ -77,7 +82,7 @@ for(const historic of [true,false])for(const modern of [true,false]){
 }
 layouts.setVisible('modern',true);
 const oaks=originalTrees.filter(tree=>tree.userData.oakTree);
-assert.equal(oaks.length,13);assert(oaks.every(visible),'Preserve every KML oak, including Oak1 and Oak2 beside the car park');
+assert.equal(oaks.length,24);assert(oaks.every(visible),'Preserve every KML oak, including Oak1 and Oak2 beside the car park');
 let toggle;
 bindTreeToggle(exterior,{addEventListener(type,handler){toggle=handler;}});
 toggle({code:'KeyT',preventDefault(){}});
@@ -86,4 +91,4 @@ layouts.setVisible('historic',true);layouts.setVisible('modern',false);
 assert(originalTrees.every(tree=>!visible(tree)),'Layout switches must respect the hidden Trees layer');
 toggle({code:'KeyT',preventDefault(){}});assert(originalTrees.every(visible));
 delete globalThis.document;
-console.log(`PASS: 62 exact KML vertices, ${area.toFixed(1)} square units, Modern-only car park, concave boundary, fourteen complete trees and collisions cleared only in Modern, all oaks and Historic planting retained.`);
+console.log(`PASS: 62 exact KML vertices, ${area.toFixed(1)} square units, Modern-only car park, concave boundary, thirteen complete trees and collisions cleared only in Modern, bowling lawn tree removed, all oaks retained.`);

@@ -1,0 +1,45 @@
+PASS: original and copied paired apex fronts, exposed glazing without duplicate windows, projecting-bay collisions, clear approaches and ward ownership.
+RESULT test-annexe-outer-front.mjs: 0
+PASS: all new Oakmere glazing is exposed, roof slopes face upward, walking approach and facade collisions work, and details follow Historic visibility.
+RESULT test-oakmere.mjs: 0
+PASS: five ward groups and reference colours, complete range ownership, aerial framing, accessible walking destinations and Historic visibility.
+RESULT test-annexe-wards.mjs: 0
+RESULT test-churton.mjs: 0
+PASS: Upton mirrored OS footprint, fixed church alignment, church clearance, two storeys, exposed sashes, slate roof normals, open recesses, walking access and shared layout visibility.
+RESULT test-upton.mjs: 0
+PASS: garages and T mortuary, 5143 roof samples, exposed photo openings, joined ridge, road clearance (1.30), walking and Historic layout.
+RESULT test-garages-mortuary.mjs: 0
+PASS: three glasshouses, two photo-facing workshops, 4254 roof samples, road junction and clearance, open yard, southern walk and all layout combinations.
+RESULT test-greenhouses.mjs: 0
+PASS: east photo geometry, marked camera, independent chimney height/location, chamfered bays, open low-wing recess, OS registration, four photo starts, exposed sashes, slate roofs, masonry collision, clear approach and separate corridor.
+RESULT test-main-admin.mjs: 0
+PASS: three white four-sided hips, continuous roof coverage, /\/\/\ profile, flush gallery joins, no connector/stores overlap, preserved L-shaped stores, and layout-aware walking collisions.
+RESULT test-main-kitchen.mjs: 0
+PASS: shared corner in both photos, three-sided pitched room, recessed link, retained red block/bay, exposed panes, camera starts, collisions and green exclusion.
+RESULT test-main-admin-refine2.mjs: 0
+PASS: pinch in/out, two-finger pan, finger handoff, cancellation, capture loss, blur cleanup, coincident/extra fingers, desktop pan.
+RESULT test-aerial-controls.mjs: 0
+RESULT test-device-location.mjs: 0
+AssertionError [ERR_ASSERTION]: Expected values to be strictly deep-equal:
+RESULT test-aerial-layouts.mjs: 1
+PASS: front boundary, curved driveway, shared sweeping forecourt branches, open kerb mouths and continuous clear routes to Redesmere and the west fire stairs.
+RESULT test-modern-entrance.mjs: 0
+PASS: 62 exact KML vertices, 13607.4 square units, Modern-only car park, concave boundary, thirteen complete trees and collisions cleared only in Modern, bowling lawn tree removed, all oaks retained.
+RESULT test-modern-car-park.mjs: 0
+PASS: retraced Parsons Lane and fork have continuous asphalt, full-width building clearance, an open saved-lane junction, and grass at removed blue sections.
+RESULT test-parsons-retrace.mjs: 0
+AssertionError [ERR_ASSERTION]: Admin north service road must clear all building walls across its full width [228.88947100550808,-4.523245293100267]
+RESULT test-historic-roads.mjs: 1
+PASS: red-line avenue, clear central sweep, yellow gravel link, removed rear and side roads, protected lane junctions and teardrop, and Historic visibility.
+RESULT test-annexe-access.mjs: 0
+PASS: indexed collisions match full scans across all layouts and padded boundaries; idle and distant collision work skipped; refreshed obstacles and cached-shadow invalidation.
+RESULT test-performance.mjs: 0
+PASS: shared tree buffers, colours and placement; distance detail and hysteresis; 8247 static meshes compiled into 1225 batches; all layout surfaces retained; cached transforms and dynamic labels; 296228 default-view tree triangles.
+RESULT test-aerial-performance.mjs: 0
+PASS: 2719 textured windows; close geometry and all layouts preserved; atlas pixels and rotated placement; viewport/zoom detail with hysteresis; static shadows, structural walls and independent trees.
+RESULT test-building-detail.mjs: 0
+PASS: 1066 roof samples, red-circle registration, exposed boarding, gable lighting, road clearance, three camera starts, walkable approach and shared-layout collisions.
+RESULT test-outhouse.mjs: 0
+PASS: precompiled building metadata and roof selection match the source scene.
+PASS: 33 buildings, every named location, bundled photos, roof picking before/after batching and LOD, empty ground and layout visibility (56434 selection triangles).
+RESULT test-building-photos.mjs: 0

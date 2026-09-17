@@ -1,0 +1,54 @@
+{
+  "fixedFrontEndpoints": [
+    [
+      260.6,
+      -98.6
+    ],
+    [
+      250.4,
+      -98.6
+    ],
+    [
+      241.7,
+      -98.6
+    ],
+    [
+      235.4,
+      -98.6
+    ],
+    [
+      221.7,
+      -93.89999999999999
+    ],
+    [
+      211.9,
+      -93.89999999999999
+    ]
+  ],
+  "fixedFrontSashes": 7,
+  "rearTranslation": [
+    0,
+    0,
+    3
+  ],
+  "verifiedVertices": 465,
+  "verifiedRearDetailInstances": 552,
+  "meshNames": [
+    "Low east service room",
+    "Continuous garden range slate roof",
+    "West garden gable slate roof",
+    "West garden gable brick gables",
+    "East garden gable slate roof",
+    "East garden gable brick gables",
+    "Small east service projection slate roof",
+    "Corner to west ridge junction slate roof",
+    "Quarter-octagonal garden corner",
+    "Quarter-octagonal corner slate roof",
+    "Canted garden window bay",
+    "Canted garden bay slate roof",
+    "Garden gable chimney breast",
+    "Conservatory low brick wall",
+    "Conservatory side glazing",
+    "Glazed courtyard lean-to roof"
+  ]
+}

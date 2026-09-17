@@ -459,7 +459,7 @@ assert.equal(westSashes.length,14,'five sashes per upper floor and four beside t
 for(const o of westSashes){
   ray.set(new THREE.Vector3(o.x,o.y,-2),new THREE.Vector3(0,0,1));
   const hit=ray.intersectObject(exterior.model,true)[0];
-  assert(hit.point.z>4.1&&hit.point.z<4.5,'west paired windows must remain exposed');
+  assert(hit.point.z>-1.4&&hit.point.z<-1,'west paired windows must remain exposed on the aligned red-wall plane');
 }
 assert(exterior.model.getObjectByName('West courtyard glazed lean-to'));
 // The annotated corner link is doubled in width and the outside end has
@@ -490,13 +490,13 @@ for(const o of westFront.filter(o=>o.face==='west-front-square')){
 const westSquareBounds=new THREE.Box3().setFromObject(exterior.model.getObjectByName('West front square pavilion'));
 assert.equal(westSquareBounds.max.z,WEST_FRONT_FACADE_Z);
 const flanking=westFront.filter(o=>o.face==='west-front-bay-flank');
-assert.equal(flanking.length,6,'a sash on both sides of the curved bay on all three floors');
+assert.equal(flanking.length,3,'broad lower glazing flanks the bay, with the fourth position occupied by the garden door');
 for(const o of flanking){
   ray.set(new THREE.Vector3(o.x,o.y,24),new THREE.Vector3(0,0,-1));
   const hit=ray.intersectObject(exterior.model,true)[0];
   assert(hit.object.isInstancedMesh&&hit.point.z>19.5&&hit.point.z<20,'bay flanking glazing must remain exposed beside the bay and forward range');
 }
-ray.set(new THREE.Vector3(-54.5,12.7,30),new THREE.Vector3(0,0,-1));
+ray.set(new THREE.Vector3(-57.5,13.2,30),new THREE.Vector3(0,0,-1));
 assert(Math.abs(ray.intersectObject(exterior.model,true)[0].point.z-WEST_FRONT_FACADE_Z)<.01,'stair wall must sit flush with the pavilion');
 assert(new THREE.Box3().setFromObject(exterior.model.getObjectByName('West front iron return stair')).max.z<23,'retained iron stairs move back with the doors');
 // Check actual roof edges against the relative lengths in the yellow marks.
