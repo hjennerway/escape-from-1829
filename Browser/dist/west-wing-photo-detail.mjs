@@ -6,7 +6,7 @@ import {wingWallGeometry,addWingRoofJunction} from './wing-roof-junctions.mjs';
 
 export const WEST_WING_SIDE_VIEW=Object.freeze({position:[-65,1.8,-21],target:[-34,7,-12],fov:65});
 export const WEST_WING_END_VIEW=Object.freeze({position:[-31,1.8,-60],target:[-31,7,-29],fov:57});
-export const WEST_WING_PROFILE=Object.freeze({...INNER_COURT_SIDE_PROFILE,rearEaves:8.3,frontEaves:10.1});
+export const WEST_WING_PROFILE=INNER_COURT_SIDE_PROFILE;
 
 export function addWestWingPhotoDetails(THREE,{model,worldUV,white,brick,roof,steel,material,hipRoof}){
   const wing=new THREE.Group();wing.name='West wing mirrored from east';
@@ -24,7 +24,7 @@ export function addWestWingPhotoDetails(THREE,{model,worldUV,white,brick,roof,st
   // The same 12 x 30 main arm and 13 x 11 end footprint as the east wing.
   mesh(worldUV(wingWallGeometry(THREE),1.7),brick,31,7.15,-10,true).name='West wing main brick range';
   addInnerCourtPhotoDetails(THREE,{...ctx,...details},{
-    profile:WEST_WING_PROFILE,eaves:14.3,customOuterFaces:true,includeGrounds:false
+    profile:WEST_WING_PROFILE,customOuterFaces:true,includeGrounds:false
   });
   // Keep source object names distinct from the unaltered eastern originals.
   wing.traverse(o=>{if(o.name.startsWith('Inner '))o.name='West mirrored '+o.name;});

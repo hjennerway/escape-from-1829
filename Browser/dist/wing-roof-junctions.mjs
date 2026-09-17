@@ -18,7 +18,9 @@ export function wingWallGeometry(THREE,base=0){
 
 export function addWingRoofJunction(THREE,{mesh,worldUV,box,brick,white,roof},side){
   const p=WING_ROOF_JOIN,x=side*31,label=side<0?'West':'East';
-  const rear=side<0?-30.9:-25.4,half=side<0?6.9:6.4;
+  // Both rear ends carry the main roof over the stair section. The lower
+  // single-pitch annex is the only separate roof level behind it.
+  const rear=-30.9,half=6.9;
   const stations=[
     [rear,half,14.53,14.53],
     [rear+half*.83,half,14.53,18.13],
@@ -32,7 +34,9 @@ export function addWingRoofJunction(THREE,{mesh,worldUV,box,brick,white,roof},si
     const [z0,w0,e0,r0]=stations[i-1],[z1,w1,e1,r1]=stations[i];
     const left0=[-w0,e0,z0],left1=[-w1,e1,z1],right0=[w0,e0,z0],right1=[w1,e1,z1],ridge0=[0,r0,z0],ridge1=[0,r1,z1];
     triangle(left0,left1,ridge1);triangle(left0,ridge1,ridge0);
-    triangle(ridge0,ridge1,right1);triangle(ridge0,right1,right0);
+    // Use the same diagonal on both pitches. Joining ridge0 to right1 at
+    // the rear hip leaves a flat triangle coplanar with the pale cornice.
+    triangle(ridge0,ridge1,right0);triangle(right0,ridge1,right1);
   }
   const geometry=new THREE.BufferGeometry();
   geometry.setAttribute('position',new THREE.Float32BufferAttribute(positions,3));

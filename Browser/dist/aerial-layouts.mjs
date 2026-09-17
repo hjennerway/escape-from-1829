@@ -1,6 +1,7 @@
 import {createHistoricRoads} from './historic-roads.mjs';
 import {createModernRoads} from './modern-roads.mjs';
 import {createModernEntrance} from './modern-entrance.mjs';
+import {createModernRearHardstanding} from './modern-rear-hardstanding.mjs';
 import {createTowerBuildings} from './tower-buildings.mjs';
 
 // Shared by the aerial preview and exterior walk; gameplay keeps its existing estate.
@@ -14,6 +15,7 @@ export function createAerialLayouts(THREE,exterior){
     (historicObjects.has(child)?historic:shared).add(child);
   }
   const roads=createModernRoads(THREE),entrance=createModernEntrance(THREE);shared.add(roads,entrance);
+  modern.add(createModernRearHardstanding(THREE,roads.getObjectByName('Parsons Lane (1829 Central)')));
   exterior.model.add(shared,historic,modern);
   const towerBuildings=createTowerBuildings(THREE,exterior);historic.add(towerBuildings);
   exterior.towerBuildings=towerBuildings;

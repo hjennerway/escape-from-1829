@@ -1,5 +1,14 @@
 # Modern road overlay and aerial layouts
 
+The September 17 red-marked rear area beside Parsons Lane (1829 Central) is
+covered by one continuous asphalt surface in Modern. It uses the road colour
+and roughness, covers the enclosed grass and older pale paving, and follows
+the lane bends to meet its asphalt without a kerb across the join. The footprint
+is estimated from the supplied aerial outline, from x=22 to x=124, with its far
+edge at z=-156 to z=-164. Trees retain their existing positions. The surface
+belongs to the Modern group in both aerial and Explore, so Historic alone
+retains its original grounds.
+
 Source: [shared 1829 Google Earth project](https://earth.google.com/earth/d/1jXu49Oe3iXWoHLAS1GdS8lUhKcpg8cUk?usp=sharing), retrieved 15–16 September 2026 from the public viewer's `document/getmapdata` response.
 
 | Custom path name in Earth | Saved vertices |

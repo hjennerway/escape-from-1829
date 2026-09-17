@@ -9,7 +9,8 @@ import {createTreeLayer} from './tree-layer.mjs';
 import {addFrontLawnTrees} from './front-lawn-trees.mjs';
 import {westFrontPhotoProfile} from './west-front-photo-detail.mjs';
 import {westCourtPhotoProfile} from './west-court-photo-detail.mjs';
-import {createChapel,ESCAPE_CHAPEL} from './chapel.mjs';
+import {createChapel} from './chapel.mjs';
+import {createChurchGrounds} from './church-grounds.mjs';
 import {addFrontSteps} from './front-steps.mjs';
 import {addFrontBoundaryWall,FRONT_BOUNDARY} from './front-boundary-wall.mjs';
 import {addEntranceWalks} from './entrance-walks.mjs';
@@ -36,7 +37,7 @@ import {eastPhotoProfile,addEastPhotoDetails} from './east-photo-detail.mjs';
 import {courtyardPhotoProfile} from './courtyard-photo-detail.mjs';
 import {rearCourtPhotoProfile} from './rear-court-photo-detail.mjs';
 import {redesmerePhotoProfile} from './redesmere-photo-detail.mjs';
-import {innerCourtPhotoProfile,REAR_END_HEIGHTS,REAR_END_ROOF_RISE,INNER_COURT_SIDE_PROFILE} from './inner-court-photo-detail.mjs';
+import {innerCourtPhotoProfile,INNER_COURT_SIDE_PROFILE} from './inner-court-photo-detail.mjs';
 export {MAP_REAR_PROPORTIONS} from './central-court-photo-detail.mjs';
 // Red-X correction: Churton side of the north crossroads (road centre z=-99).
 export const ESCAPE_MAST = Object.freeze({x:-69,z:-89,height:42});
@@ -106,7 +107,7 @@ export function createEscapeExterior(THREE,aspect){
     // A is the inset rear arm; B is slightly outboard, both inside the
     // western end pavilion. B has a narrow root and a wider stepped foot.
     [-36.5,23,9,14,8.6],[-35,35,12,16,8.6],
-    [-31,-30,13,11,REAR_END_HEIGHTS.west-REAR_END_ROOF_RISE],
+    [-31,-30,13,11,INNER_COURT_SIDE_PROFILE.eaves], // Detailed rear end built below.
     // Rooms tracing the irregular western silhouette: an outer end room,
     // a shorter front nib, and small rooms beside A's root. The curved bay
     // remains exposed between the outer rooms and B.
@@ -193,8 +194,7 @@ export function createEscapeExterior(THREE,aspect){
       box(stone,(left+right)/2,base+.1,z,right-left,.2,d+.15);
       body.name='East courtyard bridge';
     }
-    const rearEnd=x===-31&&z===-30;
-    if(!rearArm)box(stone,x,rearEnd?h-.1:h+.12,z,w+.48,.22,d+.48);
+    if(!rearArm)box(stone,x,h+.12,z,w+.48,.22,d+.48);
     const principal=x===EAST_SHIFT/2&&z===12;
     if(principal){
       // Pitched slate clears the solid cornice slab (top h+.23).
@@ -209,7 +209,7 @@ export function createEscapeExterior(THREE,aspect){
       cap.name='East entrance wing slate roof';
     }else if(x===65.5&&z===15){
       // The img3 side-return builder supplies the continuous pavilion roof.
-    }else hipRoof(x,z,w,d,rearEnd?h:h+.23,rearEnd?REAR_END_ROOF_RISE:Math.min(3.8,Math.min(w,d)*.3));
+    }else hipRoof(x,z,w,d,h+.23,Math.min(3.8,Math.min(w,d)*.3));
     if(!detail)for(const side of [-1,1]){
       for(let px=-w/2+2.4;px<w/2-1.5;px+=3.55)for(let y=3.8;y<h-1;y+=3.4){
         if(side<0&&x===EAST_SHIFT/2&&z===12&&x+px>37)continue;
@@ -238,11 +238,9 @@ export function createEscapeExterior(THREE,aspect){
   for(const b of blocks){
     // The west arm is rebuilt from the detailed east arm and img15/img16.
     if(b[0]===-31&&[-10,-30].includes(b[1]))continue;
-    if(innerCourtPhotoProfile(b[0],b[1])){
-      const {join,front}=INNER_COURT_SIDE_PROFILE;
-      hipRoof(b[0],(join+front)/2,b[2],front-join,REAR_END_HEIGHTS.east-REAR_END_ROOF_RISE,REAR_END_ROOF_RISE);
-    }
-    else block(...b);
+    // Its detailed walls meet the joined main roof; no intermediate hip.
+    if(innerCourtPhotoProfile(b[0],b[1]))continue;
+    block(...b);
   }
   // The pediment and columned red doorway identify the central 1829 entrance.
   mesh(worldUV(new THREE.BoxGeometry(14.2,11.5,12.8),1.7),photoBrick,0,8.85,13.2,true);
@@ -346,11 +344,10 @@ export function createEscapeExterior(THREE,aspect){
   const greenhouses=createGreenhouses(THREE,{brick:photoBrick,roof,worldUV,material});model.add(greenhouses);
   const outhouse=createOuthouse(THREE,{worldUV,material});model.add(outhouse);
   const chapel=createChapel(THREE,{brick,roof,stone,dark,worldUV});model.add(chapel);
+  const churchGrounds=createChurchGrounds(THREE);model.add(churchGrounds);
   const estateChimney=createEstateChimney(THREE,{brick,material});model.add(estateChimney);
   const waterTower=createWaterTower(THREE,{brick,roof,dark,worldUV});model.add(waterTower);
   const annexe=createAnnexe(THREE,{brick:photoBrick,roof,white,steel,material,worldUV,hipRoof});model.add(annexe);
-  box(path,ESCAPE_CHAPEL.x-10,.08,ESCAPE_CHAPEL.z+12,2,.12,15);
-  box(path,ESCAPE_CHAPEL.x-8.5,.08,ESCAPE_CHAPEL.z+5.5,3,.12,2);
   // Tapering open lattice, cross bracing and antenna panels from the mast photos.
   const mast=new THREE.Group();mast.name='Radio mast · rear left';mast.position.set(ESCAPE_MAST.x,0,ESCAPE_MAST.z);model.add(mast);
   function strut(a,b,r=.075){const start=new THREE.Vector3(...a),end=new THREE.Vector3(...b),v=end.clone().sub(start);const m=new THREE.Mesh(new THREE.CylinderGeometry(r,r,v.length(),5),steel);m.position.copy(start).addScaledVector(v,.5);m.quaternion.setFromUnitVectors(new THREE.Vector3(0,1,0),v.normalize());mast.add(m);}
@@ -375,5 +372,5 @@ export function createEscapeExterior(THREE,aspect){
   const lawnMaterials=new Set();
   model.traverse(object=>{for(const mat of (Array.isArray(object.material)?object.material:[object.material]))if(mat?.userData.estateGrass)lawnMaterials.add(mat);});
   for(const mat of lawnMaterials)matchEstateGrass(mat,grass);
-  return {scene,camera,model,terrain,legacyAccess,mast,chapel,waterTower,estateChimney,annexe,newHospital:annexe,churtonWard,uptonFrithOscroft,irbyAshley,graftonEdge,haleWard,estatesDepartment,farndonWard,witbyWard,mainAdmin,adminCorridor,laundry,garagesMortuary,greenhouses,outhouse,trees,invalidateShadows};
+  return {scene,camera,model,terrain,legacyAccess,mast,chapel,churchGrounds,waterTower,estateChimney,annexe,newHospital:annexe,churtonWard,uptonFrithOscroft,irbyAshley,graftonEdge,haleWard,estatesDepartment,farndonWard,witbyWard,mainAdmin,adminCorridor,laundry,garagesMortuary,greenhouses,outhouse,trees,invalidateShadows};
 }

@@ -1,5 +1,16 @@
 # Escape from 1829
 
+The church grounds now follow the supplied aerial reference, with four short
+approach paths, a curved perimeter walk and grass pockets beside Parsons Lane.
+Select **Church grounds** in Locations for aerial, plan and walking views.
+The refinement appears in both layouts. See the
+[reference and modelling notes](Research/church/README.md).
+
+The rear wing roofs now have two levels: the main hipped roof and a lower
+single-pitch extension. The east extension matches the west's roof shape,
+and the white triangular glitch on the west hip is fixed. See the
+[marked reference and geometry notes](Research/1829-back/README.md#rear-wing-roof-correction).
+
 The back of the central 1829 entrance block now has the photographed outside
 bevels, landing windows, continuous pale bands and shallow parapet. The marked
 roof ridges run to the existing front apex, and the pediment is solid from
@@ -246,7 +257,7 @@ The in-game photo panels and the 1854 statistics plaque are based on the public 
 The photo/video-based water tower stands beyond the right campus block at x=148, z=-55.2, registered from the shared Google Earth pin (see `Research/landmark-placement.md`); the escape pan widens to keep its finial visible. Its square brick shaft has concentric round arches, paired slit windows, corbelled eaves, a pyramidal tiled roof and a finial. Total height is 39.05 scene units, 2.2 times the main building's 17.75-unit pediment height. Open the preview with ?view=tower for a close-up. The escape camera widens on narrower screens to retain the tower in view.
 
 
-The inner eastern courtyard uses `img3.jpg`, with `img3-loc.png` locating the view and `img3-render.png` showing the earlier model. The projecting block now has an exposed brick basement, multi-pane sash windows, a pale cornice beneath a sloped slate roof, iron return stairs and a raised garden with stone edging and low white walls. Planting and plain stair treads adapt the modern reference to the circa-1900 setting; dimensions remain approximate. Use `aerial.html?view=inner-court-photo` for the comparison view or `explore.html?view=inner-court-photo` to walk from it. The west rear end and east stair section retain slate roof ridges at two-thirds of their adjoining wing ridge height. The corrected east rear annex steps down to a separate sloping roof behind the stair section. The exterior stairs are visual scenery, not climbable routes.
+The inner eastern courtyard uses `img3.jpg`, with `img3-loc.png` locating the view and `img3-render.png` showing the earlier model. The projecting block now has an exposed brick basement, multi-pane sash windows, a pale cornice beneath a sloped slate roof, iron return stairs and a raised garden with stone edging and low white walls. Planting and plain stair treads adapt the modern reference to the circa-1900 setting; dimensions remain approximate. Use `aerial.html?view=inner-court-photo` for the comparison view or `explore.html?view=inner-court-photo` to walk from it. The later marked rear aerial supersedes the separate lowered stair roof: both wings now carry their main roof over the stair section, above matching lower sloping annex roofs. The exterior stairs are visual scenery, not climbable routes.
 
 The west courtyard follows `img6.jpg`, with `img6-loc.png` locating the view and `img6-render.png` showing the earlier model. It now has a polygonal bay, a single sash and two pairs on each upper storey, an entrance beneath the single sash, exposed brick at ground level, pale floor bands, a recessed corner link and a glazed lean-to. The gravel court and planted border preserve the circa-1900 setting. The previously lowered rear wing ends remain in place. Open `aerial.html?view=west-court-photo` or `explore.html?view=west-court-photo` for the comparison view. Dimensions remain visual approximations. The annotated west corner link is widened to 7.2 units; the central wall and bay move outward into a broader frontage, ending in a seven-unit recessed section and a six-unit projecting corner with separate hipped roofs. The gravel apron and planting move outward to clear the enlarged footprint.
 

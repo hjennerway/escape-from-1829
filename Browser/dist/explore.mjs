@@ -1,5 +1,6 @@
 import {bindTreeToggle} from './tree-layer.mjs';
 import {CHURTON_VIEWS} from './churton-ward.mjs';
+import {CHURCH_VIEWS} from './church-grounds.mjs';
 import {UPTON_VIEWS} from './upton-frith-oscroft.mjs';
 import {IRBY_ASHLEY_VIEWS} from './irby-ashley.mjs';
 import {GRAFTON_EDGE_VIEWS} from './grafton-edge.mjs';
@@ -61,6 +62,7 @@ try{
   bindLayoutToggles(layouts,document.getElementById('layoutControls'),refreshObstacles);
   bindTreeToggle(exterior,document,refreshObstacles);
   const view=new URLSearchParams(location.search).get('view');
+  if(CHURCH_VIEWS[view])walker.setView(CHURCH_VIEWS['church-ground']);
   if(CENTRAL_BACK_VIEWS[view])walker.setView(CENTRAL_BACK_VIEWS['central-back-photo']);
   if(view==='front-lawn-trees')walker.setView(FRONT_LAWN_TREE_VIEW);
   if(FRONT_CORNER_VIEWS[view])walker.setView(FRONT_CORNER_VIEWS[view==='front-corners'?'front-corner-2':view]);

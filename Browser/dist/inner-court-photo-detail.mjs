@@ -3,11 +3,9 @@
 // adapt the present-day photograph to the game's circa-1900 grounds.
 import {addInnerEastElevation} from './inner-east-elevation.mjs';
 export const INNER_COURT_PHOTO_VIEW=Object.freeze({position:[10,1.8,-44],target:[23,6,-26],fov:66});
-// Keep the established stair-section ridge; the newly identified rear
-// annex is lower and has its own single-slope roof.
-export const REAR_END_ROOF_RISE=2.2;
-export const REAR_END_HEIGHTS=Object.freeze({west:(11.3+.23+3.6)*2/3,east:(14.3+.23+3.6)*2/3});
-export const INNER_COURT_SIDE_PROFILE=Object.freeze({rear:-35.5,join:-30.5,front:-24.5,stairShift:4,rearEaves:6.1,frontEaves:7.2});
+// The marked rear aerial supersedes the earlier three-level interpretation:
+// both stair sections continue the main roof, above matching sloping annexes.
+export const INNER_COURT_SIDE_PROFILE=Object.freeze({rear:-35.5,join:-30.5,front:-24.5,stairShift:4,rearEaves:8.3,frontEaves:10.1,eaves:14.3});
 export function innerCourtPhotoProfile(x,z){return x===31&&z===-30;}
 
 export function addInnerCourtPhotoDetails(THREE,{model,box,mesh,worldUV,white,brick,roof,material,sash,door,rod,iron,stone},options={}){
@@ -17,7 +15,7 @@ export function addInnerCourtPhotoDetails(THREE,{model,box,mesh,worldUV,white,br
   // Move the occupied stair section towards +Z (the front), replacing the
   // blank red-circled stretch. The rear footprint becomes the low annex.
   const profile=options.profile||INNER_COURT_SIDE_PROFILE;
-  const eaves=options.eaves??REAR_END_HEIGHTS.east-REAR_END_ROOF_RISE;
+  const eaves=profile.eaves;
   const stairCentre=(profile.join+profile.front)/2,stairDepth=profile.front-profile.join;
   mesh(worldUV(new THREE.BoxGeometry(13,eaves-2,stairDepth),1.7),brick,31,(eaves+2)/2,stairCentre,true).name='Inner court projecting brick block';
   mesh(worldUV(new THREE.BoxGeometry(13,2,11),1.7),plinth,31,1,-30,true);
@@ -46,17 +44,17 @@ export function addInnerCourtPhotoDetails(THREE,{model,box,mesh,worldUV,white,br
     // The low rear has basement and upper windows. The former top row belongs
     // on the exposed end of the moved stair section, above the annex roof.
     for(const x of [28.8,33.2])sash('inner-block-basement',x,1.1,-35.57,Math.PI,1.2,1.2);
-    for(const x of [27,31,35])sash('inner-block-north',x,4.15,-35.57,Math.PI,1.22,2.2);
-    for(const x of [27,31,35])sash('inner-stair-north',x,8.5,profile.join-.07,Math.PI,x===31?2.05:1.12,1.7);
-    for(const x of [28.8,36.8])box(iron,x,2.85,-35.8,.09,5.7,.09);
+    for(const x of [27,31,35])sash('inner-block-north',x,6.35,-35.57,Math.PI,1.22,2.5);
+    for(const x of [27,31,35])sash('inner-stair-north',x,11.55,profile.join-.07,Math.PI,x===31?2.05:1.12,2.7);
+    for(const x of [28.8,36.8])box(iron,x,4.1,-35.8,.09,8.2,.09);
   }
-  for(const y of [1.1,4.65])sash('inner-annex-west',24.43,y,-33.3,-Math.PI/2,1.35,y===1.1?1.2:1.8);
+  for(const y of [1.1,6.35])sash('inner-annex-west',24.43,y,-33.3,-Math.PI/2,1.35,y===1.1?1.2:2.5);
   for(const y of [1.1,4.15,7.9])sash('inner-block-west',24.43,y,-33.3+profile.stairShift,-Math.PI/2,1.1,y===1.1?1.4:2.2);
   door(24.42,-29.8+profile.stairShift,-Math.PI/2,2.4);door(24.42,-29.8+profile.stairShift,-Math.PI/2,5.9);
   if(!options.customOuterFaces){
-    for(const y of [1.1,4.65])sash('inner-annex-east',37.56,y,-33,Math.PI/2,1.1,y===1.1?1.2:1.8);
-    for(const y of [1.1,4.15,7.9])for(const z of [-29,-25.8])sash('inner-block-east',37.56,y,z,Math.PI/2,1.1,y===1.1?1.4:2.2);
-
+    sash('inner-block-west',24.43,11.15,-33.3+profile.stairShift,-Math.PI/2,1.1,2.7);
+    for(const y of [1.1,6.35])sash('inner-annex-east',37.56,y,-33,Math.PI/2,1.1,y===1.1?1.2:2.5);
+    for(const y of [1.1,4.15,7.9,11.15])for(const z of [-29,-25.8])sash('inner-block-east',37.56,y,z,Math.PI/2,1.1,y===1.1?1.4:2.2);
   }
   const stairs=new THREE.Group();stairs.name='Inner court iron stairs';model.add(stairs);
   function rail(a,b,r=.03){rod(a,b,r);stairs.attach(model.children[model.children.length-1]);}

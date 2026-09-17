@@ -28,3 +28,27 @@ gameplay, and by Historic and Modern. Select **Central back · Photo** or
 longitudinal ridge, roof coverage, exposed bevel glazing and canted collision.
 `Browser/artifacts/inspect-central-back.mjs` captures the photo direction,
 aerial, roof detail and frontage. Blender and Unity exports are unchanged.
+
+## Rear wing roof correction
+
+The supplied `rear-wings-marked.png` identifies a white triangular glitch on
+the west roof in red, the east rear extension in yellow, and the matching
+west extension in blue. The user's request establishes two roof levels on
+the east wing and a lower extension with roughly the west extension's shape.
+
+Both main roofs now continue over their rear stair sections to a complete
+hip above the lower single-pitch annex. The separate intermediate east hip
+is removed. The annex roofs share their width, depth and eaves heights
+(8.3 rising to 10.1 scene units), while the east sash facade and west glazed
+gallery remain distinct. East upper windows move above the raised annex
+roof. Existing footprints, stairs and rear access are retained.
+
+The west glitch came from a diagonal that left one triangular roof face
+flat and coplanar with the cornice. The corrected triangulation slopes both
+halves of each hip above the trim. This geometry is shared by Historic,
+Modern, Explore and gameplay; Blender and Unity exports are unchanged.
+
+`node Browser/test-escape-exterior.mjs` checks both complete hips, exactly two
+roof surfaces along each rear wing, matching annex profiles and exposed
+windows. `node Browser/artifacts/inspect-rear-wing-roofs.mjs` captures the
+rear aerial and close views of both ends for visual review.
