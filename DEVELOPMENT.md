@@ -470,3 +470,9 @@ buildings** in Locations, or open `aerial.html?view=greenhouses`; use
 Run `node Browser/test-greenhouses.mjs` for roof, access, collision and layout
 checks. Dimensions and concealed details are estimated from the references;
 Unity and Blender exports are unchanged.
+
+### Ward mural gallery additions, 17 September 2026
+
+Added the supplied Jodrell and Irby / Ashley mural photographs, plus the Tarvin, Carden and second Jodrell views cropped from the marked composite. Originals and crop provenance are retained in `Research/annexe-photos/` and `Research/irby-ashley/`. The photo build script produces the gallery WebP files and the building catalogue assigns them to their existing ward groups.
+
+Validation: `node Browser/test-building-photos.mjs` passes, including source and compiled selection. All five additions loaded in the browser galleries; the three composite crops were visually inspected in their panels. The full browser suite stops at the unrelated road-layout assertion in `Browser/test-annexe-photo-placement.mjs:14` ("Only the yellow-circled rear roads are removed; the loop stays fixed"). No model geometry or Unity/Blender exports changed.

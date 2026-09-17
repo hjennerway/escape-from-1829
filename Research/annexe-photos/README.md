@@ -11,7 +11,7 @@ The web gallery uses `Browser/dist/building-photos/annexe-entrance-road.webp`, g
 | Crop | Source rectangle (left, top, width, height) | Gallery |
 | --- | --- | --- |
 | `tarvin-mural.png` | 5, 257, 397, 526 | Tarvin / Jarman |
-| `carden-mural.png` | 410, 8, 415, 380 | Picton / Carden |
+| `carden-mural.png` | 410, 8, 415, 376 | Picton / Carden |
 | `jodrell-mural-stairwell.png` | 428, 399, 499, 379 | Larkton / Jodrell |
 
 Carden is the yellow-outlined upper section, identified by its painted banner. The build script generates matching WebP gallery assets for all three crops. The additional Jodrell view accompanies the earlier standalone image.
