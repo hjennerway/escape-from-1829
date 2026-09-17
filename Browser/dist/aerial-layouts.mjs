@@ -38,7 +38,9 @@ export function createAerialLayouts(THREE,exterior){
     exterior.invalidateShadows();
   }
   setVisible('modern',false);
-  exterior.layouts={shared,historic,modern,roads,entrance,historicRoads,towerBuildings,setVisible,get state(){return {...state};}};
+  // Individually toggled meshes must stay out of static aerial batches.
+  const visibilityObjects=[...superseded,...roads.children,lane.getObjectByName('Vivienne Smith Lane eastern continuation')];
+  exterior.layouts={shared,historic,modern,roads,entrance,historicRoads,towerBuildings,visibilityObjects,setVisible,get state(){return {...state};}};
   return exterior.layouts;
 }
 

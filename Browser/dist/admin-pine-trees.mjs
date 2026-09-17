@@ -1,3 +1,4 @@
+import {addFoliageLevels,placeTreeCopies} from './tree-templates.mjs';
 // Eleven blue crosses in Research/admin-pine-trees/marked-locations.png.
 // Ground positions are fitted to the fixed Shop and admin forecourt landmarks.
 export const ADMIN_PINE_TREES=Object.freeze([
@@ -18,8 +19,8 @@ export function addAdminPineTrees(THREE,trees){
   const bark=new THREE.MeshStandardMaterial({color:0x65513d,roughness:1});
   const branchGeometry=new THREE.CylinderGeometry(.56,1,1,7);
   const trunkGeometry=new THREE.CylinderGeometry(.06,1,1,10,6);
-  // Opaque needle cutouts give the boughs fine edges in walking views. One
-  // shared texture and instanced sprays keep the eleven mature crowns light.
+  // Opaque needle cutouts give the boughs fine edges in walking views. Shared
+  // textures and instanced sprays keep the eleven mature crowns light.
   const resolution=128,pixels=new Uint8Array(resolution*resolution*4),needles=[];
   for(let row=0;row<15;row++)for(const side of [-1,1]){
     const y=-.85+row*.108,length=.34+.22*Math.sin(row/15*Math.PI);
@@ -44,9 +45,10 @@ export function addAdminPineTrees(THREE,trees){
   sprayGeometry.computeVertexNormals();
   const dummy=new THREE.Object3D(),up=new THREE.Vector3(0,1,0),colour=new THREE.Color();
   const palette=[0x344c36,0x405a3d,0x4a6343,0x3c5744,0x536a46];
-  for(const spec of ADMIN_PINE_TREES){
+  let template;
+  {const spec=ADMIN_PINE_TREES[0];
     const group=new THREE.Group();group.name=spec.name;group.position.set(spec.x,-.12,spec.z);
-    group.userData.adminPineTree={...spec};trees.add(group);
+    template=group;
     let seed=spec.seed;
     const random=()=>((seed=(Math.imul(seed,1664525)+1013904223)>>>0)/2**32);
     const trunkRadius=.72+random()*.14,trunk=new THREE.Mesh(trunkGeometry,bark);
@@ -90,6 +92,7 @@ export function addAdminPineTrees(THREE,trees){
     branches.forEach((matrix,i)=>limbs.setMatrixAt(i,matrix));limbs.castShadow=true;limbs.receiveShadow=true;group.add(limbs);
     const crown=new THREE.InstancedMesh(sprayGeometry,foliage,sprays.length);crown.name=spec.name+' needles';
     sprays.forEach((p,i)=>{dummy.position.set(p.x,p.y,p.z);dummy.rotation.set(p.tilt,p.yaw,0);dummy.scale.setScalar(p.size);dummy.updateMatrix();crown.setMatrixAt(i,dummy.matrix);colour.setHex(p.tint);crown.setColorAt(i,colour);});
-    crown.castShadow=true;crown.receiveShadow=true;group.add(crown);
+    crown.castShadow=true;crown.receiveShadow=true;addFoliageLevels(THREE,group,crown);
   }
+  placeTreeCopies(THREE,trees,template,ADMIN_PINE_TREES,'adminPineTree');
 }

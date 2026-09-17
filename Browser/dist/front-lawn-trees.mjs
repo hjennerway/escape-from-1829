@@ -1,3 +1,4 @@
+import {addFoliageLevels,placeTreeCopies} from './tree-templates.mjs';
 // img1.jpg and img1-loc.png: the two yellow crosses on the front lawns.
 // Positions and mature crown dimensions are estimates from the marked view.
 export const FRONT_LAWN_TREES=Object.freeze([
@@ -36,13 +37,14 @@ export function addFrontLawnTrees(THREE,trees){
   for(let i=0;i<positions.count;i++)positions.setZ(i,.12*(1-Math.abs(positions.getY(i))));
   leafGeometry.computeVertexNormals();
   const dummy=new THREE.Object3D(),up=new THREE.Vector3(0,1,0),colour=new THREE.Color();
-  for(const spec of FRONT_LAWN_TREES){
-    const group=new THREE.Group();group.name=spec.name;group.position.set(spec.x,.16,spec.z);trees.add(group);
-    group.userData.frontLawnTree={...spec};
+  const copperPalette=[0x494032,0x584a37,0x66583f,0x716149,0x505039],greenPalette=[0x3e492e,0x50583a,0x626142,0x485033,0x6a6547];
+  let template;
+  {const spec=FRONT_LAWN_TREES[0];
+    const group=new THREE.Group();group.name=spec.name;group.position.set(spec.x,.16,spec.z);template=group;
     let seed=spec.seed;
     const random=()=>((seed=(Math.imul(seed,1664525)+1013904223)>>>0)/2**32);
     const stems=[],leaves=[];
-    const palette=spec.copper?[0x494032,0x584a37,0x66583f,0x716149,0x505039]:[0x3e492e,0x50583a,0x626142,0x485033,0x6a6547];
+    const palette=copperPalette;
     function branch(a,b,radius,tip=radius*.64){
       const start=new THREE.Vector3(...a),end=new THREE.Vector3(...b),delta=end.clone().sub(start);
       // Separate tapered segments give trunks and limbs their narrowing profile.
@@ -88,7 +90,19 @@ export function addFrontLawnTrees(THREE,trees){
     for(const [name,items,geometry] of [['leaf sprays',leaves,leafGeometry]]){
       const batch=new THREE.InstancedMesh(geometry,foliage,items.length);batch.name=spec.name+' '+name;
       items.forEach((p,i)=>{dummy.position.set(p.x,p.y,p.z);dummy.rotation.set(p.tilt??0,p.angle,(p.angle*.37)%1);dummy.scale.set(p.sx,p.sy,p.sz);dummy.updateMatrix();batch.setMatrixAt(i,dummy.matrix);colour.setHex(p.tint);batch.setColorAt(i,colour);});
-      batch.castShadow=true;batch.receiveShadow=true;group.add(batch);
+      batch.castShadow=true;batch.receiveShadow=true;addFoliageLevels(THREE,group,batch);
     }
   }
+  placeTreeCopies(THREE,trees,template,FRONT_LAWN_TREES,'frontLawnTree',(group,spec)=>{
+    if(spec.copper)return;
+    // Preserve the photographed copper/green distinction on the shared shape.
+    group.traverse(batch=>{
+      if(!batch.instanceColor)return;
+      batch.instanceColor=batch.instanceColor.clone();
+      for(let i=0;i<batch.count;i++){
+        batch.getColorAt(i,colour);const index=copperPalette.indexOf(colour.getHex());
+        colour.setHex(greenPalette[index]);batch.setColorAt(i,colour);
+      }
+    });
+  });
 }

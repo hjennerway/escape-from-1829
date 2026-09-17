@@ -1,0 +1,78 @@
+[
+  {
+    "file": "test-annexe-outer-front.mjs",
+    "code": 0
+  },
+  {
+    "file": "test-oakmere.mjs",
+    "code": 0
+  },
+  {
+    "file": "test-annexe-wards.mjs",
+    "code": 0
+  },
+  {
+    "file": "test-churton.mjs",
+    "code": 0
+  },
+  {
+    "file": "test-upton.mjs",
+    "code": 0
+  },
+  {
+    "file": "test-garages-mortuary.mjs",
+    "code": 0
+  },
+  {
+    "file": "test-greenhouses.mjs",
+    "code": 0
+  },
+  {
+    "file": "test-main-admin.mjs",
+    "code": 0
+  },
+  {
+    "file": "test-main-admin-refine2.mjs",
+    "code": 0
+  },
+  {
+    "file": "test-aerial-controls.mjs",
+    "code": 0
+  },
+  {
+    "file": "test-device-location.mjs",
+    "code": 0
+  },
+  {
+    "file": "test-aerial-layouts.mjs",
+    "code": 0
+  },
+  {
+    "file": "test-modern-entrance.mjs",
+    "code": 0
+  },
+  {
+    "file": "test-parsons-retrace.mjs",
+    "code": 0
+  },
+  {
+    "file": "test-historic-roads.mjs",
+    "code": 1
+  },
+  {
+    "file": "test-annexe-access.mjs",
+    "code": 0
+  },
+  {
+    "file": "test-performance.mjs",
+    "code": 0
+  },
+  {
+    "file": "test-aerial-performance.mjs",
+    "code": 0
+  },
+  {
+    "file": "test-outhouse.mjs",
+    "code": 0
+  }
+]

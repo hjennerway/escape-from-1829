@@ -1,0 +1,26 @@
+[
+  {
+    "view": "default",
+    "medianRenderMs": 1187.3999999985099,
+    "p90RenderMs": 1244,
+    "drawCalls": 6767,
+    "triangles": 1215535,
+    "geometries": 7010
+  },
+  {
+    "view": "historic-admin-grounds",
+    "medianRenderMs": 1382.800000000745,
+    "p90RenderMs": 1406.199999999255,
+    "drawCalls": 5542,
+    "triangles": 1328708,
+    "geometries": 6493
+  },
+  {
+    "view": "front-lawn-trees",
+    "medianRenderMs": 10.200000002980232,
+    "p90RenderMs": 13.899999998509884,
+    "drawCalls": 199,
+    "triangles": 286108,
+    "geometries": 4800
+  }
+]

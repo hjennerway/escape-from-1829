@@ -108,6 +108,7 @@ import {OUTHOUSE_VIEWS} from './outhouse.mjs';
 import {LAUNDRY_VIEWS} from './laundry.mjs';
 import {MAIN_ADMIN_VIEWS} from './main-admin-building.mjs';
 import * as THREE from './vendor/three.module.js';
+import {batchAerialMeshes,cacheAerialTransforms} from './aerial-performance.mjs';
 import {createEscapeExterior,loadEscapeFrontage} from './escape-exterior.mjs';
 import {FRONT_STEPS_VIEW} from './front-steps.mjs';
 import {ANNEXE_VIEWS,ANNEXE_WARDS,ANNEXE_WARD_VIEWS} from './annexe.mjs';
@@ -142,8 +143,10 @@ renderer.domElement.addEventListener('webglcontextrestored',exterior.invalidateS
 // Portrait framing pulls far back; keep the estate visible at every zoom.
 exterior.scene.fog.density=0;
 const layouts=createAerialLayouts(THREE,exterior);bindLayoutToggles(layouts,document.getElementById('layoutControls'));
+batchAerialMeshes(THREE,exterior.model,{exclude:[exterior.trees,exterior.terrain,...layouts.visibilityObjects]});
+cacheAerialTransforms(exterior.scene);
 bindTreeToggle(exterior,document);
-loadEscapeFrontage(THREE,exterior).catch(console.warn);
+const frontageReady=loadEscapeFrontage(THREE,exterior).catch(console.warn);
 const controls=createAerialControls(exterior.camera);let navigationTarget=[12,5,-12],moved=false;
 let fittedLayouts=false;
 const deviceLocationMarker=createDeviceLocationMarker(THREE,exterior.scene);
@@ -190,7 +193,7 @@ function frameMap(){if(view==='historic-footprints'){exterior.scene.fog.density=
 function frameRight(){exterior.camera.position.set(72,28,108*Math.max(1,1/exterior.camera.aspect));navigationTarget=[72,9,0];exterior.camera.lookAt(...navigationTarget);}
 if(mapDetail)frameMap();else if(photoDetail)framePhoto();else if(rightDetail)frameRight();else if(towerDetail)frameTower();else if(frontDetail)frameFront();else resetAerial();
 controls.sync(navigationTarget);
-function frame(){requestAnimationFrame(frame);const dt=clock.getDelta();if(!document.hidden){controls.update(dt);}updateRoadLabels(THREE,layouts.roads,exterior.camera,innerWidth,innerHeight);deviceLocationMarker.update(exterior.camera,innerHeight);renderer.render(exterior.scene,exterior.camera);}frame();
+function frame(){requestAnimationFrame(frame);const dt=clock.getDelta();if(document.hidden)return;controls.update(dt);updateRoadLabels(THREE,layouts.roads,exterior.camera,innerWidth,innerHeight);deviceLocationMarker.update(exterior.camera,innerHeight);renderer.render(exterior.scene,exterior.camera);}
 function resetAerial(){exterior.scene.fog.density=0;moved=false;fittedLayouts=false;controls.keys.clear();const shot=sampleLanding(0,{aspect:exterior.camera.aspect});navigationTarget=shot.target;exterior.camera.fov=46;exterior.camera.updateProjectionMatrix();exterior.camera.position.set(...shot.position);exterior.camera.lookAt(...shot.target);controls.sync(navigationTarget);}
 document.getElementById('resetAerial').onclick=resetAerial;
 const canvas=document.getElementById('game');
@@ -203,4 +206,7 @@ addEventListener('keydown',e=>{if(['KeyW','KeyA','KeyS','KeyD','ShiftLeft','Shif
 addEventListener('keyup',e=>controls.keys.delete(e.code));addEventListener('blur',stop);
 document.addEventListener('visibilitychange',stop);
 addEventListener('resize',()=>{renderer.setSize(innerWidth,innerHeight);exterior.camera.aspect=innerWidth/innerHeight;exterior.camera.updateProjectionMatrix();if(fittedLayouts)fitLayouts();else if(!moved){if(mapDetail)frameMap();else if(photoDetail)framePhoto();else if(rightDetail)frameRight();else if(towerDetail)frameTower();else if(frontDetail)frameFront();else resetAerial();controls.sync(navigationTarget);}});
+// Warm all material variants, including hidden layouts and foliage levels,
+// after the frontage texture is ready, before starting camera navigation.
+frontageReady.then(()=>renderer.compileAsync(exterior.scene,exterior.camera)).catch(console.warn).then(frame);
 </script></body></html>
