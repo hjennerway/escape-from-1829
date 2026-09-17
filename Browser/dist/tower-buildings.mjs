@@ -2,6 +2,7 @@ import {ESCAPE_WATER_TOWER} from './water-tower.mjs';
 import {ESTATE_CHIMNEY} from './estate-chimney.mjs';
 import {addPharmacyCourt,PHARMACY_VIEWS} from './pharmacy-court.mjs';
 import {SERVICE_COURT_MOVES,moveServiceRect,moveServiceView} from './service-court-placement.mjs';
+import {IRBY_CORRIDOR} from './irby-corridor.mjs';
 
 import {TOWER_ROOF_CONTACTS} from './tower-roof-profiles.mjs';
 export {TOWER_ROOF_CONTACTS} from './tower-roof-profiles.mjs';
@@ -32,6 +33,10 @@ export const TOWER_SERVICE_FRONT=-16.6;
 export const TOWER_ADMIN_SHIFT=8.5;
 const shiftedRanges=new Set(['Chimney service hall','Ramp entrance link','South cross-gabled stores','Long east service range','North east stepped link']);
 const towardsAdmin=z=>z+TOWER_ADMIN_SHIFT;
+// Latest blue line: grow the three backs to the corridor, holding the
+// courtyard fronts and their photographed roof dormers in place.
+const workshopRear=IRBY_CORRIDOR.start[1]+IRBY_CORRIDOR.width/2-SERVICE_COURT_MOVES.workshops.z;
+const workshopDormerZ=-80.5;
 const sourceRanges=[
  {name:'Tower east traced abutment',rect:[153.1,-60.3,158.2,-50.1],height:8.84,roof:'traced'},
  {name:'Tower east dormered range',rect:[158.2,-60.3,180,-40.5],height:8.84,rise:3.9,axis:'x',roof:'traced',hipInset:5},
@@ -40,8 +45,8 @@ const sourceRanges=[
  {name:'Dormered central service hall',rect:[180,-49,202,-32],height:7.3,rise:4.6,axis:'z',roof:'gable'},
  // Move the yellow building twelve units outwards (-Z), then duplicate it
  // towards the tower. East/west slopes leave south gables facing the yard.
- {name:'Rear east gabled workshop',rect:[204.5,-87.5,218.5,-73.5],height:6.4,rise:3.4,axis:'z',roof:'gable'},
- {name:'Rear west gabled workshop',rect:[190.5,-87.5,204.5,-73.5],height:6.4,rise:3.4,axis:'z',roof:'gable'},
+ {name:'Rear east gabled workshop',rect:[204.5,workshopRear,218.5,-73.5],height:6.4,rise:3.4,axis:'z',roof:'gable'},
+ {name:'Rear west gabled workshop',rect:[190.5,workshopRear,204.5,-73.5],height:6.4,rise:3.4,axis:'z',roof:'gable'},
  {name:'Western tower flat link',rect:[153.1,-40.5,159.3,-36.3],height:6.4,roof:'flat'},
  // Yellow correction: the long axis turns north/south, with a flat front
  // section and a hipped ridge terminating against the tower's south wall.
@@ -67,10 +72,12 @@ export const TOWER_RANGES=Object.freeze(sourceRanges.map(range=>{
 
 // Red/yellow screenshot correction: copy the west workshop into the adjoining
 // yellow footprint, retaining its north edge and the original building height.
+// The later Irby corridor correction shortens its depth to match the other
+// two workshops, preserving the pharmacy approach after the row moves forward.
 const sourceWorkshopCopy=Object.freeze({
  name:'Enlarged west workshop',source:'Rear west gabled workshop',
  dormer:'Enlarged workshop blue dormer',sourceDormer:'Rear building blue dormer 2',
- footprintScale:1.5,rect:Object.freeze([169.5,-87.5,190.5,-66.5])
+ footprintScale:1.5,depthScale:1,rect:Object.freeze([169.5,workshopRear,190.5,-73.5])
 });
 export const TOWER_WORKSHOP_COPY=Object.freeze({...sourceWorkshopCopy,
  rect:Object.freeze(moveServiceRect(sourceWorkshopCopy.rect,SERVICE_COURT_MOVES.workshops))});
@@ -394,22 +401,27 @@ export function createTowerBuildings(THREE,exterior){
  placement='workshops';
  for(const [i,spec] of workshops.entries()){
   captureWorkshop=spec.name===TOWER_WORKSHOP_COPY.source;
-  dormer('Rear building blue dormer '+(i+1),(spec.rect[0]+spec.rect[2])/2,(spec.rect[1]+spec.rect[3])/2,9.94,11.4,'z');
+  dormer('Rear building blue dormer '+(i+1),(spec.rect[0]+spec.rect[2])/2,workshopDormerZ,9.94,11.4,'z');
  }
  captureWorkshop=false;
  // Clone the actual shell, roof, dormer and facade details together. Keeping
  // BoxGeometry on the copied walls also supplies walking/OS-marker clearance.
  const copy=sourceWorkshopCopy,source=workshops.find(r=>r.name===copy.source);
  const sx=(source.rect[0]+source.rect[2])/2,sz=(source.rect[1]+source.rect[3])/2;
- const cx=(copy.rect[0]+copy.rect[2])/2,cz=(copy.rect[1]+copy.rect[3])/2,s=copy.footprintScale;
- const copied=new THREE.Group();copied.name=copy.name;copied.scale.set(s,1,s);
- copied.position.set(cx-s*sx,0,cz-s*sz);group.add(copied);
+ const cx=(copy.rect[0]+copy.rect[2])/2,cz=(copy.rect[1]+copy.rect[3])/2,s=copy.footprintScale,ds=copy.depthScale;
+ const copied=new THREE.Group();copied.name=copy.name;copied.scale.set(s,1,ds);
+ copied.position.set(cx-s*sx,0,cz-ds*sz);group.add(copied);
  movingMeshes.push({object:copied,placement});
  const copyName=name=>name.replace(copy.source,copy.name).replace(copy.sourceDormer,copy.dormer);
  for(const original of copyMeshes){const part=original.clone();part.name=copyName(part.name);if(part.userData.roofDormer)part.userData.roofDormer=copy.dormer;copied.add(part);}
- for(const {material,item:b} of copyDetails)detail(material,cx+(b.x-sx)*s,b.y,cz+(b.z-sz)*s,b.w*s,b.h,b.d*s,b.r);
- for(const o of [...openings])if(o.label.startsWith(copy.source)||o.label.startsWith(copy.sourceDormer))openings.push({...o,x:cx+(o.x-sx)*s,z:cz+(o.z-sz)*s,label:copyName(o.label)});
- dormers.push({name:copy.dormer,x:cx,z:cz,axis:'z',footprintScale:s,placement});
+ for(const {material,item:b} of copyDetails){
+  // Copied facade details use axis-aligned quarter turns; their width runs
+  // along Z on the dormer sides, and along X on the workshop gable front.
+  const turned=Math.abs(Math.sin(b.r))>.5;
+  detail(material,cx+(b.x-sx)*s,b.y,cz+(b.z-sz)*ds,b.w*(turned?ds:s),b.h,b.d*(turned?s:ds),b.r);
+ }
+ for(const o of [...openings])if(o.label.startsWith(copy.source)||o.label.startsWith(copy.sourceDormer))openings.push({...o,x:cx+(o.x-sx)*s,z:cz+(o.z-sz)*ds,label:copyName(o.label)});
+ dormers.push({name:copy.dormer,x:cx,z:workshopDormerZ,axis:'z',footprintScale:s,depthScale:ds,placement});
  group.userData.workshopCopy=TOWER_WORKSHOP_COPY;
  group.userData.dormers=dormers;
  placement='purple';

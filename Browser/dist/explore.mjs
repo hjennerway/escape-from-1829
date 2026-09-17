@@ -8,6 +8,7 @@ import {HALE_WARD_VIEWS} from './hale-daresbury-huxley-dunham.mjs';
 import {ESTATES_VIEWS} from './estates-department.mjs';
 import {FARNDON_VIEWS} from './farndon-ward.mjs';
 import {FARNDON_CORRIDOR_WALK,WARD_CORRIDOR_WALK} from './farndon-corridor.mjs';
+import {IRBY_CORRIDOR_WALK} from './irby-corridor.mjs';
 import {WITBY_VIEWS} from './witby-ward.mjs';
 import {GARAGE_MORTUARY_VIEWS} from './garages-mortuary.mjs';
 import {GREENHOUSE_VIEWS} from './greenhouses.mjs';
@@ -111,7 +112,7 @@ try{
   if(IRBY_ASHLEY_VIEWS[churtonView])walker.setView(IRBY_ASHLEY_VIEWS[churtonView==='irby-ashley-3'?churtonView:'irby-ashley-1']);
   if(MAIN_ADMIN_VIEWS[churtonView]){
     const shot=MAIN_ADMIN_VIEWS[churtonView==='main-admin'||churtonView==='main-admin-plan'?'main-admin-4':churtonView];
-    walker.setView(churtonView.startsWith('ward-corridors')?WARD_CORRIDOR_WALK:churtonView.startsWith('farndon-corridor')?FARNDON_CORRIDOR_WALK:churtonView==='main-admin-corridor'?{...shot,position:[136,1.8,28],target:[128,2.1,13]}:shot);
+    walker.setView(churtonView.startsWith('irby-corridor')?IRBY_CORRIDOR_WALK:churtonView.startsWith('ward-corridors')?WARD_CORRIDOR_WALK:churtonView.startsWith('farndon-corridor')?FARNDON_CORRIDOR_WALK:churtonView==='main-admin-corridor'?{...shot,position:[136,1.8,28],target:[128,2.1,13]}:shot);
   }
   if(CHURTON_VIEWS[churtonView])walker.setView(CHURTON_VIEWS[churtonView==='churton'||churtonView==='churton-plan'?'churton-4':churtonView]);
   let active=false,dragging=false,last=null;

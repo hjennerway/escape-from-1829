@@ -3,6 +3,7 @@ import * as THREE from './dist/vendor/three.module.js';
 import {createEscapeExterior} from './dist/escape-exterior.mjs';
 import {createAerialLayouts} from './dist/aerial-layouts.mjs';
 import {IRBY_ASHLEY_FOOTPRINT,IRBY_ASHLEY_VIEWS} from './dist/irby-ashley.mjs';
+import {IRBY_CONNECTION_FRONT} from './dist/irby-corridor.mjs';
 import {historicOSPoint,pointInFootprint} from './dist/historic-footprints.mjs';
 import {OS_FOOTPRINTS} from './dist/historic-footprint-data.mjs';
 import {exteriorObstacles,obstacleContains} from './dist/explore-controls.mjs';
@@ -14,13 +15,13 @@ const layouts=createAerialLayouts(THREE,exterior);exterior.scene.updateMatrixWor
 assert.equal(building.name,'Irby/Ashley');assert.equal(building.userData.storeys,2);
 assert.equal(building.parent,layouts.historic);
 // Independent interior/exterior picks from the marked yellow silhouette.
-for(const p of [[255,-104],[239,-104],[216,-107],[208,-105],[230,-117],[256,-133],[216,-129]])assert(pointInFootprint(p,IRBY_ASHLEY_FOOTPRINT),'Selected yellow wing must be solid: '+p);
-for(const p of [[245,-103],[228,-104],[232,-132],[266,-121],[206,-115]])assert(!pointInFootprint(p,IRBY_ASHLEY_FOOTPRINT),'Marked recess/road must remain open: '+p);
+for(const p of [[255,-104],[239,-104],[216,-107],[216,-96],[230,-117],[256,-133],[216,-129]])assert(pointInFootprint(p,IRBY_ASHLEY_FOOTPRINT),'Current blue-refined wing must be solid: '+p);
+for(const p of [[245,-103],[228,-104],[232,-132],[266,-121],[206,-115],[208,-105]])assert(!pointInFootprint(p,IRBY_ASHLEY_FOOTPRINT),'Marked recess and removed yellow section must remain open: '+p);
 const bounds=new THREE.Box3().setFromObject(building);
-assert(bounds.min.x>203+offset.x&&bounds.max.x<264+offset.x&&bounds.min.z>-143+offset.z&&bounds.max.z<-97+offset.z,'Building retains its dimensions at the corrected map position');
+assert(bounds.min.x>203+offset.x&&bounds.max.x<264+offset.x&&bounds.min.z>-143+offset.z&&Math.abs(bounds.max.z-IRBY_CONNECTION_FRONT)<.44,'Only the selected tower-facing end and its projecting sills extend beyond the previous ward bounds');
 const ray=new THREE.Raycaster();
 function down(x,z){ray.set(new THREE.Vector3(x+offset.x,25,z+offset.z),new THREE.Vector3(0,-1,0));return ray.intersectObject(building,true)[0];}
-for(const p of [[255,-106],[239,-104],[215,-105],[208,-105],[231,-117],[256,-133],[216,-129]])assert(down(...p)?.point.y>=8.3,'Every main wing needs an upward-facing roof: '+p);
+for(const p of [[255,-106],[239,-104],[215,-105],[216,-96],[231,-117],[256,-133],[216,-129]])assert(down(...p)?.point.y>=8.3,'Every main wing needs an upward-facing roof: '+p);
 for(const p of [[245,-103],[228,-104],[232,-132]])assert(!down(...p),'Roof must not bridge a courtyard: '+p);
 assert(down(242,-129)?.object.name.includes('Glazed'),'The photographed low glazed lean-to must occupy the left court');
 building.traverse(o=>{

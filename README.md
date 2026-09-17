@@ -1,5 +1,18 @@
 # Escape from 1829
 
+The water-tower corridor now turns 90 degrees towards Irby/Ashley, aligned with
+the gravel path. The three marked workshops move towards Main/admin, with the
+widest shortened to keep access open. Irby's front follows the blue rectangular
+footprint, flush with the extended corridor end; the yellow-marked cap is removed.
+The three workshop backs now extend directly to the other side of the corridor.
+Choose **Water tower / Irby corridor** in Locations for aerial, plan and walking
+views. See the [placement notes](Research/irby-corridor/README.md).
+
+Eleven large pine trees now occupy the blue-marked lawns beside Main/admin,
+Vivienne Smith Lane and the annexe. They share the same positions in Historic
+and Modern and follow the **Trees** toggle. Choose **Admin grounds** in
+Locations to inspect them. See the [placement notes](Research/admin-pine-trees/README.md).
+
 The church grounds now follow the supplied aerial reference, with four short
 approach paths, a curved perimeter walk and grass pockets beside Parsons Lane.
 Select **Church grounds** in Locations for aerial, plan and walking views.

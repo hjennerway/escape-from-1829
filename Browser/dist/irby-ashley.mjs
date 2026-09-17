@@ -1,18 +1,28 @@
 import {photoDetailPrimitives} from './photo-detail-primitives.mjs';
-import {placeWardViews} from './ward-placement.mjs';
+import {placeWardViews,WARD_POSITIONS} from './ward-placement.mjs';
+import {IRBY_CONNECTION_FRONT} from './irby-corridor.mjs';
 
 // location.png is a perspective aerial: register its ground-level brown OS
 // corners first, then regularise the yellow revision along the estate axes.
 // Tools/register_irby_ashley.mjs records the independent control-point fit.
 export const IRBY_ASHLEY=Object.freeze({x:234,z:-118,eave:8.4,storeys:2,
   reference:'Research/irby-ashley/README.md',layout:'historic'});
-export const IRBY_ASHLEY_FOOTPRINT=Object.freeze([
+export const IRBY_ASHLEY_ORIGINAL_FOOTPRINT=Object.freeze([
   [260.6,-98.6],[250.4,-98.6],[250.4,-112.7],[241.7,-112.7],
   [241.7,-98.6],[235.4,-98.6],[235.4,-112.7],[221.7,-112.7],
   [221.7,-101.9],[204.2,-101.9],[204.2,-109.4],[211.9,-109.4],
   [211.9,-122.7],[208.1,-122.7],[208.1,-127],[211.9,-127],
   [211.9,-131.8],[219.2,-131.8],[219.2,-122.7],[247.7,-122.7],
   [247.7,-137.5],[263.2,-137.5],[263.2,-124.2],[260.6,-124.2]
+].map(p=>Object.freeze(p)));
+// Retain the original footprint for the independently refined Grafton copy.
+// Latest blue footprint: extend the rectangular tower-side return to the
+// corridor side. The entire earlier cross wing/cap in yellow is removed.
+const connectionFront=IRBY_CONNECTION_FRONT-(WARD_POSITIONS.irbyAshley.z-IRBY_ASHLEY.z);
+export const IRBY_ASHLEY_FOOTPRINT=Object.freeze([
+ ...IRBY_ASHLEY_ORIGINAL_FOOTPRINT.slice(0,8),
+ [221.7,connectionFront],[211.9,connectionFront],
+ ...IRBY_ASHLEY_ORIGINAL_FOOTPRINT.slice(12)
 ].map(p=>Object.freeze(p)));
 export const IRBY_ASHLEY_VIEWS=placeWardViews('irbyAshley',IRBY_ASHLEY,{
   'irby-ashley':{position:[283,55,-181],target:[234,3.5,-118],fov:48},
@@ -26,7 +36,7 @@ export const IRBY_ASHLEY_VIEWS=placeWardViews('irbyAshley',IRBY_ASHLEY,{
   'irby-ashley-3':{position:[220.14,2.3,-145.87],target:[242,4.8,-122.7],fov:66},
   'irby-ashley-4':{position:[229,18,17],target:[237,5,-112],fov:70}
 });
-export const IRBY_ASHLEY_ROOFS=Object.freeze([
+export const IRBY_ASHLEY_ORIGINAL_ROOFS=Object.freeze([
   {name:'Continuous garden range',rect:[211.9,-122.7,260.6,-112.7],axis:'x',rise:2.7},
   {name:'Roadside north wing',rect:[250.4,-124.2,260.6,-98.6],axis:'z',rise:2.8,gable:true},
   {name:'Narrow north wing',rect:[235.4,-118,241.7,-98.6],axis:'z',rise:2.3,gable:true},
@@ -35,6 +45,10 @@ export const IRBY_ASHLEY_ROOFS=Object.freeze([
   {name:'West garden gable',rect:[247.7,-137.5,263.2,-124.2],axis:'z',rise:3,gable:true},
   {name:'East garden gable',rect:[211.9,-131.8,219.2,-118],axis:'z',rise:2.5,gable:true},
   {name:'Small east service projection',rect:[208.1,-127,211.9,-122.7],axis:'z',rise:1.1,eave:4.0}
+]);
+export const IRBY_ASHLEY_ROOFS=Object.freeze([
+ ...IRBY_ASHLEY_ORIGINAL_ROOFS.filter(r=>r.name!=='Tower-facing cross wing')
+  .map(r=>r.name==='Tower-side return'?{...r,rect:[211.9,-122.7,221.7,connectionFront]}:r)
 ]);
 
 export function createIrbyAshley(THREE,{brick,roof,worldUV,material,rearElevation=null}){
@@ -60,7 +74,7 @@ export function createIrbyAshley(THREE,{brick,roof,worldUV,material,rearElevatio
     return wall;
   }
   // The tiny side projection has a lower roof and a continuous tall main wall.
-  const mainFootprint=rearElevation?local:local.filter((_,i)=>i!==13&&i!==14);
+  const mainFootprint=rearElevation?local:local.filter(([x,z])=>!(Math.abs(x+cx-208.1)<.01&&[-122.7,-127].some(v=>Math.abs(z+cz-v)<.01)));
   mass(mainFootprint,eave,0,brick,'Yellow-refined Irby/Ashley walls').userData.historicOutlinePadding=.7;
   mass(mainFootprint,.38,0,material(0x685549),'Weathered brick foundation');
   const projection=[[208.1,-127],[211.9,-127],[211.9,-122.7],[208.1,-122.7]].map(([x,z])=>[x-cx,z-cz]);
@@ -199,7 +213,9 @@ export function createIrbyAshley(THREE,{brick,roof,worldUV,material,rearElevatio
         (westGardenReturn&&z+cz>conservatory.z0&&z+cz<conservatory.z1);
       const entry=n===Math.floor(count/2)&&((nz>.9&&wx>250)||(nz<-.9&&wz<-131));
       if(entry)detail.door(x,z,r);
-      if(!covered&&!entry)sash(x,2.05,z,r,1.3,2.65);
+      const corridorContact=!rearElevation&&nz>.9&&x+cx>211.8&&x+cx<221.8&&
+        Math.abs(z+cz-connectionFront)<.1;
+      if(!covered&&!entry&&!corridorContact)sash(x,2.05,z,r,1.3,2.65);
       sash(x,5.9,z,r,gardenGable?1.4:1.3,2.75);
     }
     if(length>5)box(steel,a[0]+dx*.07+nx*.2,4.1,a[1]+dz*.07+nz*.2,.095,8.1,.095);

@@ -48,13 +48,13 @@ for(const [start,target] of [
  for(let i=0;i<Math.ceil(Math.hypot(target[0]-start[0],target[1]-start[1])/.5);i++)walker.update(.1);
  assert(Math.hypot(camera.position.x-target[0],camera.position.z-target[1])<.6,'The cylinder access route remains open: '+start+' to '+target+'; stopped at '+camera.position.toArray());
 }
-// The green guide moves the common rear edge closer to Main/admin.
-// Irby's transform stays fixed and the larger gap remains unobstructed.
+// The Irby corridor correction moves the common rear edge towards Main/admin.
+// Irby's placement stays fixed, with clearance around its extended end.
 assert.deepEqual(exterior.irbyAshley.position.toArray(),[234,0,-93.4]);
-const irbyEnd=exterior.irbyAshley.userData.roofs.find(r=>r.name==='Tower-facing cross wing').rect[3];
+const irbyEnd=exterior.irbyAshley.userData.roofs.find(r=>r.name==='Tower-side return').rect[3];
 const irbyObstacles=exteriorObstacles(THREE,exterior.irbyAshley);
 for(const range of [...TOWER_RANGES.filter(r=>r.name.startsWith('Rear ')),TOWER_WORKSHOP_COPY]){
- assert.equal(range.rect[1],-68.5,'All three rear walls align with the latest green guide');
+ assert(Math.abs(range.rect[1]+63.9)<1e-9,'All three rear walls meet the new Irby corridor');
  assert(range.rect[1]>irbyEnd,'Workshop rear clears Irby without overlap');
  const bounds=new THREE.Box3().setFromObject(group.getObjectByName(range.name+' walls'));
  for(let x=bounds.min.x+.1;x<bounds.max.x;x+=.5)for(let z=bounds.min.z+.1;z<bounds.max.z;z+=.5){

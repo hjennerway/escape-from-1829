@@ -7,6 +7,7 @@ import {wingWallGeometry,addWingRoofJunction} from './wing-roof-junctions.mjs';
 // Front road/reception is +Z; the corrected mast position is rear-left (-X, -Z).
 import {createTreeLayer} from './tree-layer.mjs';
 import {addFrontLawnTrees} from './front-lawn-trees.mjs';
+import {addAdminPineTrees} from './admin-pine-trees.mjs';
 import {westFrontPhotoProfile} from './west-front-photo-detail.mjs';
 import {westCourtPhotoProfile} from './west-court-photo-detail.mjs';
 import {createChapel} from './chapel.mjs';
@@ -60,6 +61,7 @@ export function createEscapeExterior(THREE,aspect){
   const model=new THREE.Group();model.name='1829 estate · aerial reconstruction';scene.add(model);
   const trees=createTreeLayer(THREE,model);
   addFrontLawnTrees(THREE,trees);
+  addAdminPineTrees(THREE,trees);
   scene.add(new THREE.HemisphereLight(0xe4eff2,0x59634a,2));
   const sun=new THREE.DirectionalLight(0xffe2b7,2.8);sun.position.set(145,120,50);sun.target.position.set(230,0,-10);scene.add(sun.target);sun.castShadow=true;
   sun.shadow.mapSize.set(4096,4096);Object.assign(sun.shadow.camera,{left:-360,right:360,top:300,bottom:-300,near:1,far:850});sun.shadow.bias=-.0003;sun.shadow.normalBias=.25;scene.add(sun);

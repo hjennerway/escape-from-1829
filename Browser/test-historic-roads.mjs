@@ -38,7 +38,7 @@ const missing=layouts.historicRoads.userData.missingFootprints;
 assert(missing.occupied.length>40,'Clipping must inspect the assembled existing estate, not an empty reparented model');
 // The workshop row now replaces the remaining OS marks beside Irby's end.
 // Its actual new walls must participate in clipping those archived outlines.
-assert(missing.occupied.some(polygon=>pointInFootprint([217,-67],polygon)),
+assert(missing.occupied.some(polygon=>pointInFootprint([217,-60],polygon)),
  'The moved workshop must replace the old adjoining outline beside Irby/Ashley');
 let diagonalCount=0;
 const corridorStart=historicOSPoint(86,300),corridorEnd=historicOSPoint(114,230);

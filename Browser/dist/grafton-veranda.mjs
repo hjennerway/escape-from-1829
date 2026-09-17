@@ -1,4 +1,4 @@
-import {IRBY_ASHLEY_FOOTPRINT,IRBY_ASHLEY_ROOFS} from './irby-ashley.mjs';
+import {IRBY_ASHLEY_ORIGINAL_FOOTPRINT as IRBY_ASHLEY_FOOTPRINT,IRBY_ASHLEY_ORIGINAL_ROOFS as IRBY_ASHLEY_ROOFS} from './irby-ashley.mjs';
 
 // Source-space coordinates retain the accepted duplicate's placement/scale.
 // veranda.jpg replaces only the church-facing elevation of Grafton/Edge.

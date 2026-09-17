@@ -1,4 +1,5 @@
 import {ESTATES_SOURCE_FOOTPRINT,estatesPoint} from './estates-department.mjs';
+import {IRBY_CORRIDOR} from './irby-corridor.mjs';
 
 // Retain the Estates entrance court while following the relocated ward frontage.
 const p=ESTATES_SOURCE_FOOTPRINT;
@@ -14,8 +15,9 @@ export const ESTATES_SERVICE_COURT=Object.freeze({
   [241.7,-88.1],[250.4,-88.1],[250.4,-74],[260.6,-74],
   [264,-74],[264,-72],
   ...estateCourtBoundary,[233,-27.5],[233,-18],[236,-7],[240,1],[244,5],[242,13],[234,13],
-  [222,2],[220.86,-8.1],[220.86,-48.7],[220.86,-71],
-  [218.5,-73.5],[218.5,-77.3],[221.7,-77.3]],
+  [222,2],[220.86,-8.1],[220.86,-48.7],
+  [220.86,IRBY_CORRIDOR.end[1]+IRBY_CORRIDOR.width/2],
+  [IRBY_CORRIDOR.end[0],IRBY_CORRIDOR.end[1]+IRBY_CORRIDOR.width/2]],
  reference:'Research/estates/grass-road-revision.png'
 });
 

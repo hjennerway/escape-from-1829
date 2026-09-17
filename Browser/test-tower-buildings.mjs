@@ -7,6 +7,7 @@ import {ESTATE_CHIMNEY} from './dist/estate-chimney.mjs';
 import {HISTORIC_ROADS} from './dist/historic-roads.mjs';
 import {TOWER_RANGES,TOWER_ROOF_CONTACTS,TOWER_SERVICE_FRONT,TOWER_ADMIN_SHIFT,TOWER_BUILDING_VIEWS,TOWER_WORKSHOP_COPY} from './dist/tower-buildings.mjs';
 import {SERVICE_COURT_MOVES} from './dist/service-court-placement.mjs';
+import {IRBY_CORRIDOR} from './dist/irby-corridor.mjs';
 import {exteriorObstacles,obstacleContains,createWalker} from './dist/explore-controls.mjs';
 globalThis.document={createElement:()=>({getContext:()=>({fillRect(){},measureText:t=>({width:t.length*16}),strokeText(){},fillText(){}})})};
 const exterior=createEscapeExterior(THREE,1.5),layouts=createAerialLayouts(THREE,exterior),group=layouts.towerBuildings;
@@ -192,7 +193,7 @@ assert.equal(workshops.length,2);
 assert(!group.getObjectByName('Rear hipped service building walls'),'The original footprint must be vacated');
 const workshopBounds=workshops.map(r=>new THREE.Box3().setFromObject(group.getObjectByName(r.name+' walls')));
 assert.deepEqual(workshopBounds[0].getSize(new THREE.Vector3()).toArray(),workshopBounds[1].getSize(new THREE.Vector3()).toArray(),'Duplicate the complete building dimensions');
-assert(Math.abs(workshopBounds[0].min.z-(-87.5+workshopMove.z))<1e-5,'The workshop row moves towards Main/admin');
+assert(Math.abs(workshopBounds[0].min.z-(IRBY_CORRIDOR.start[1]+IRBY_CORRIDOR.width/2))<1e-5,'The workshop backs extend to the new corridor');
 assert(Math.abs(workshopBounds[0].min.x-workshopBounds[1].max.x)<1e-5,'The two photographed fronts must adjoin');
 const rearDormers=group.userData.dormers.filter(d=>d.name.startsWith('Rear building'));
 assert.equal(rearDormers.length,2,'Duplicate the selected roof protrusion with its building');
@@ -207,7 +208,7 @@ for(const [i,r] of workshops.entries()){
   assert(roofAt(cx-5,z).point.y<roofAt(cx-2,z).point.y,'West pitch must fall towards the tower');
   assert(roofAt(cx+5,z).point.y<roofAt(cx+2,z).point.y,'East pitch must fall towards Estates');
  }
- const d=rearDormers[i];assert.equal(d.x,cx);assert.equal(d.z,(z0+z1)/2);
+ const d=rearDormers[i];assert.equal(d.x,cx);assert.equal(d.z,-80.5+workshopMove.z,'Roof dormer position is retained while the back extends');
  assert.equal(group.userData.openings.filter(o=>o.label===r.name+' upper sash').length,3);
  assert(group.userData.openings.some(o=>o.label===r.name+' blue door'));
 }
@@ -219,7 +220,7 @@ const photo=TOWER_BUILDING_VIEWS['tower-twin-gables'];
 assert(photo.position[0]>218.5+workshopMove.x&&photo.position[2]>-73.5+workshopMove.z&&photo.position[2]<-60.3+workshopMove.z,'The photo camera must clear the enlarged workshop and use the eastern court');
 const obstacles=exteriorObstacles(THREE,exterior.model);
 const copy=TOWER_WORKSHOP_COPY,copyWalls=new THREE.Box3().setFromObject(group.getObjectByName(copy.name+' walls'));
-assert.deepEqual(copyWalls.getSize(new THREE.Vector3()).toArray().map(n=>+n.toFixed(5)),[21,6.4,21],'The workshop keeps its original wall height within the larger yellow footprint');
+assert.deepEqual(copyWalls.getSize(new THREE.Vector3()).toArray().map(n=>+n.toFixed(5)),[21,6.4,16.4],'The wider workshop keeps its height and width, with its back extended to the corridor and the pharmacy approach open');
 for(const [originalName,copiedName] of [[copy.source,copy.name],[copy.sourceDormer,copy.dormer]])for(const part of [' walls',' slate roof',' ridge']){
  const originalBounds=new THREE.Box3().setFromObject(group.getObjectByName(originalName+part));
  const copiedBounds=new THREE.Box3().setFromObject(group.getObjectByName(copiedName+part));
