@@ -1,0 +1,87 @@
+test-annexe-outer-front.mjs
+PASS: original and copied paired apex fronts, exposed glazing without duplicate windows, projecting-bay collisions, clear approaches and ward ownership.
+
+test-oakmere.mjs
+PASS: all new Oakmere glazing is exposed, roof slopes face upward, walking approach and facade collisions work, and details follow Historic visibility.
+
+test-annexe-wards.mjs
+PASS: five ward groups and reference colours, complete range ownership, aerial framing, accessible walking destinations and Historic visibility.
+
+test-churton.mjs
+Churton Ward: six walk starts, wall collisions, rear recesses, exposed openings, slate roofs and single-storey height passed.
+
+test-upton.mjs
+PASS: Upton mirrored OS footprint, fixed church alignment, church clearance, two storeys, exposed sashes, slate roof normals, open recesses, walking access and shared layout visibility.
+
+test-garages-mortuary.mjs
+PASS: garages and T mortuary, 5143 roof samples, exposed photo openings, joined ridge, road clearance (1.30), walking and Historic layout.
+
+test-greenhouses.mjs
+PASS: three glasshouses, two photo-facing workshops, 4254 roof samples, road junction and clearance, open yard, southern walk and all layout combinations.
+
+test-main-admin.mjs
+PASS: east photo geometry, marked camera, independent chimney height/location, chamfered bays, open low-wing recess, OS registration, four photo starts, exposed sashes, slate roofs, masonry collision, clear approach and separate corridor.
+
+test-main-kitchen.mjs
+PASS: three white four-sided hips, continuous roof coverage, /\/\/\ profile, flush gallery joins, no connector/stores overlap, preserved L-shaped stores, and layout-aware walking collisions.
+
+test-main-admin-refine2.mjs
+PASS: shared corner in both photos, three-sided pitched room, recessed link, retained red block/bay, exposed panes, camera starts, collisions and green exclusion.
+
+test-aerial-controls.mjs
+PASS: pinch in/out, two-finger pan, finger handoff, cancellation, capture loss, blur cleanup, coincident/extra fingers, desktop pan.
+
+test-device-location.mjs
+Device location: perimeter, exact 100 m cutoff, corners, coordinate alignment, fresh fixes, retries and errors passed.
+
+test-aerial-layouts.mjs
+PASS: independent Historic/Modern controls, shared buildings, preserved transforms, hidden collisions, fifteen exact custom paths, camera-facing road names, upward road surfaces and full landscape/portrait framing.
+
+test-modern-entrance.mjs
+PASS: front boundary, curved driveway, shared sweeping forecourt branches, open kerb mouths and continuous clear routes to Redesmere and the west fire stairs.
+
+test-modern-car-park.mjs
+PASS: 62 exact KML vertices, 13607.4 square units, Modern-only car park, concave boundary, fourteen complete trees and collisions cleared only in Modern, all oaks and Historic planting retained.
+
+test-parsons-retrace.mjs
+PASS: retraced Parsons Lane and fork have continuous asphalt, full-width building clearance, an open saved-lane junction, and grass at removed blue sections.
+
+test-historic-roads.mjs
+node:internal/modules/run_main:107
+    triggerUncaughtException(
+    ^
+
+AssertionError [ERR_ASSERTION]: Admin north service road must clear all building walls across its full width [228.88947100550808,-4.523245293100267]
+    at file:///C:/Users/Harry/Documents/_escape-from-1829/Browser/test-historic-roads.mjs:74:5
+    at ModuleJob.run (node:internal/modules/esm/module_job:561:25)
+    at async node:internal/modules/esm/loader:647:26
+    at async asyncRunEntryPointWithESMLoader (node:internal/modules/run_main:101:5) {
+  generatedMessage: false,
+  code: 'ERR_ASSERTION',
+  actual: false,
+  expected: true,
+  operator: '==',
+  diff: 'simple'
+}
+
+Node.js v24.20.0
+
+test-annexe-access.mjs
+PASS: red-line avenue, clear central sweep, yellow gravel link, removed rear and side roads, protected lane junctions and teardrop, and Historic visibility.
+
+test-performance.mjs
+PASS: indexed collisions match full scans across all layouts and padded boundaries; idle and distant collision work skipped; refreshed obstacles and cached-shadow invalidation.
+
+test-aerial-performance.mjs
+PASS: shared tree buffers, colours and placement; distance detail and hysteresis; 8237 static meshes compiled into 1223 batches; all layout surfaces retained; cached transforms and dynamic labels; 296228 default-view tree triangles.
+
+test-building-detail.mjs
+PASS: 2719 textured windows; close geometry and all layouts preserved; atlas pixels and rotated placement; viewport/zoom detail with hysteresis; static shadows, structural walls and independent trees.
+
+test-outhouse.mjs
+PASS: 1066 roof samples, red-circle registration, exposed boarding, gable lighting, road clearance, three camera starts, walkable approach and shared-layout collisions.
+
+test-building-photos.mjs
+PASS: precompiled building metadata and roof selection match the source scene.
+PASS: 33 buildings, every named location, bundled photos, roof picking before/after batching and LOD, empty ground and layout visibility (56434 selection triangles).
+

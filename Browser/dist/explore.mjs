@@ -110,7 +110,7 @@ try{
   if(FARNDON_VIEWS[churtonView])walker.setView(FARNDON_VIEWS['farndon-2']);
   if(WITBY_VIEWS[churtonView])walker.setView(WITBY_VIEWS['witby-ground']);
   if(GRAFTON_EDGE_VIEWS[churtonView])walker.setView(GRAFTON_EDGE_VIEWS['grafton-edge-ground']);
-  if(HALE_WARD_VIEWS[churtonView])walker.setView(HALE_WARD_VIEWS['hale-daresbury-huxley-dunham-ground']);
+  if(HALE_WARD_VIEWS[churtonView])walker.setView(HALE_WARD_VIEWS[churtonView.startsWith('hale-corner-photo-')?churtonView:'hale-daresbury-huxley-dunham-ground']);
   if(IRBY_ASHLEY_VIEWS[churtonView])walker.setView(IRBY_ASHLEY_VIEWS[churtonView==='irby-ashley-3'?churtonView:'irby-ashley-1']);
   if(MAIN_ADMIN_VIEWS[churtonView]){
     const shot=MAIN_ADMIN_VIEWS[churtonView==='main-admin'||churtonView==='main-admin-plan'?'main-admin-4':churtonView];

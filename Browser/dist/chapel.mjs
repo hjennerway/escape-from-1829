@@ -1,13 +1,12 @@
 // Google Earth marker registered to the fixed 1829 entrance; see Research/landmark-placement.md.
 // Its clock gable faces the estate's front (+Z), along the mapped nave axis.
+import {addChurchFront} from './church-front.mjs';
 export const ESCAPE_CHAPEL=Object.freeze({x:-4.9,z:-119.2,rotation:0});
 export function createChapel(THREE,{brick,roof,stone,dark,worldUV}){
   const chapel=new THREE.Group();chapel.name='Old Chapel · brick Gothic chapel';
   chapel.position.set(ESCAPE_CHAPEL.x,0,ESCAPE_CHAPEL.z);chapel.rotation.y=ESCAPE_CHAPEL.rotation;
   const trim=new THREE.MeshStandardMaterial({color:0x71634e,roughness:1});
   const glazing=new THREE.MeshStandardMaterial({color:0x35484b,roughness:.55,metalness:.15});
-  const clockFace=new THREE.MeshStandardMaterial({color:0x253d52,roughness:.7});
-  const gold=new THREE.MeshStandardMaterial({color:0xc4b389,roughness:.7});
   function mesh(g,m,x,y,z,parent=chapel){const o=new THREE.Mesh(g,m);o.position.set(x,y,z);o.castShadow=true;o.receiveShadow=true;parent.add(o);return o;}
   function box(m,x,y,z,w,h,d,parent=chapel){return mesh(worldUV(new THREE.BoxGeometry(w,h,d)),m,x,y,z,parent);}
   function beam(a,b,width,mat=trim,parent=chapel){const start=new THREE.Vector3(...a),end=new THREE.Vector3(...b),v=end.clone().sub(start);const o=mesh(new THREE.BoxGeometry(width,v.length(),width),mat,0,0,0,parent);o.position.copy(start).addScaledVector(v,.5);o.quaternion.setFromUnitVectors(new THREE.Vector3(0,1,0),v.normalize());return o;}
@@ -48,17 +47,10 @@ export function createChapel(THREE,{brick,roof,stone,dark,worldUV}){
       const cap=box(trim,side*5.25,6.4,z,1.05,.25,1.05);cap.rotation.z=side*.25;
     }
   }
-  // Tall paired west lancets and the narrow clock bellcote above them.
-  opening(0,3,14.04,3.65,8.8);opening(0,3,-14.04,3.1,8,Math.PI);
-  for(const side of [-1,1])opening(side*3.65,2.1,14.04,1.1,4.6);
-  box(brick,0,15.15,14,2.9,4.5,1.1);gable(2.9,1.1,17.4,3.5,0,14);
-  box(trim,0,13.2,14.1,3.6,.35,1.5);box(trim,0,17.35,14.1,3.2,.24,1.35);
-  mesh(new THREE.TorusGeometry(1.02,.12,6,32),trim,0,15.6,14.65);
-  mesh(new THREE.CircleGeometry(.98,32),clockFace,0,15.6,14.68);
-  for(let i=0;i<12;i++){const a=i*Math.PI/6;const tick=box(gold,Math.sin(a)*.79,15.6+Math.cos(a)*.79,14.71,.055,.16,.025);tick.rotation.z=-a;}
-  beam([0,15.6,14.74],[.56,15.85,14.74],.075,gold);beam([0,15.6,14.74],[-.15,16.3,14.74],.06,gold);
+  opening(0,3,-14.04,3.1,8,Math.PI);
+  addChurchFront(THREE,{chapel,brick,roof,worldUV});
   function cross(x,y,z){box(trim,x,y,z,.16,1.4,.18);box(trim,x,y+.22,z,.85,.15,.18);}
-  cross(0,21.55,14);cross(0,15.65,-14);
+  cross(0,15.65,-14);
   // Projecting entrance porch on the west side of the nave.
   const porch=new THREE.Group();porch.position.set(-5,0,5.5);porch.rotation.y=-Math.PI/2;chapel.add(porch);
   box(brick,0,2.1,1.45,4.6,4.2,3.2,porch);gable(4.6,3.2,4.2,3.0,0,1.45,porch);

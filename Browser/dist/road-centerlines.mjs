@@ -17,5 +17,9 @@ export const GARAGE_LANE_SHIFT=9.5;
 for(const index of [9,10,11])VIVIENNE_LANE[index]=[VIVIENNE_LANE[index][0],VIVIENNE_LANE[index][1]+GARAGE_LANE_SHIFT];
 
 export function roadCenterline(path){
-  return path.name==='Vivienne Smith Lane'?VIVIENNE_LANE:path.coordinates.map(p=>earthToScene(...p));
+  if(path.name==='Vivienne Smith Lane')return VIVIENNE_LANE;
+  const points=path.coordinates.map(p=>earthToScene(...p));
+  // End Frost drive at the Main/admin frontage junction; the red-marked
+  // dead-end extension across the lawn is removed from the rendered layout.
+  return path.name==='Frost drive'?points.slice(0,7):points;
 }

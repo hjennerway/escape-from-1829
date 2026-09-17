@@ -23,6 +23,18 @@
     "height": 900,
     "bytes": 164880
   },
+  "grindley-mural": {
+    "source": "Research/grindley/ward-mural.png",
+    "width": 689,
+    "height": 918,
+    "bytes": 63508
+  },
+  "grindley-interior": {
+    "source": "Research/grindley/interior-steps.png",
+    "width": 689,
+    "height": 918,
+    "bytes": 77000
+  },
   "barmere-garden": {
     "source": "Research/redesmere-chimney/img1.jpg",
     "width": 688,

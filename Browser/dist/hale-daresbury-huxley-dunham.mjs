@@ -23,7 +23,16 @@ export const HALE_WARD_ROOFS=Object.freeze([
  {name:'Grafton-side courtyard wing',rect:[112.54,-131,131,-123],axis:'x',rise:2.3},
  {name:'Opposite end return',rect:[95.62,-140.89,121.86,-132],axis:'x',rise:2.5}
 ]);
+// Every re-entrant turn receives the same photographic corner vocabulary.
+// nx/nz point into its courtyard; the bay follows the north/south spine.
+export const HALE_WARD_CORNERS=Object.freeze(HALE_WARD_FOOTPRINT.flatMap(([x,z],i,points)=>{
+ const a=points[(i+points.length-1)%points.length],b=points[(i+1)%points.length];
+ if((x-a[0])*(b[1]-z)-(z-a[1])*(b[0]-x)>=0)return [];
+ return [Object.freeze({index:i,x,z,nx:Math.sign(a[0]+b[0]-2*x),nz:Math.sign(a[1]+b[1]-2*z)})];
+}));
 export const HALE_WARD_VIEWS=placeWardViews('haleWard',HALE_WARD,{
+ 'hale-corner-photo-1':{position:[94,1.8,-111],target:[112.5,4.4,-131],fov:61},
+ 'hale-corner-photo-2':{position:[102,1.8,-126],target:[111.8,4.35,-130],fov:63},
  'hale-daresbury-huxley-dunham':{position:[62,89,-210],target:[119,2,-111],fov:48},
  'hale-daresbury-huxley-dunham-plan':{position:[118.7,113,-110.99],target:[118.7,0,-111],fov:46},
  'hale-daresbury-huxley-dunham-site':{position:[33,183,-291],target:[114,3,-115],fov:48},
@@ -54,8 +63,8 @@ export function createHaleWard(THREE,{brick,roof,worldUV,material}){
  mass(.38,material(0x685549),'Hale ward brick foundation');
  const detail=photoDetailPrimitives(THREE,{model:building,box,mesh,white,steel,material});
  // Same shared 3-by-6 glazing, dimensions, pale heads and dark sills as Irby/Ashley.
- function sash(x,y,z,r,h){
-  const w=1.3,nx=Math.sin(r),nz=Math.cos(r);
+ function sash(x,y,z,r,h,w=1.3){
+  const nx=Math.sin(r),nz=Math.cos(r);
   detail.sash('Hale ward multi-pane sash',x,y,z,r,w,h);
   box(white,x+nx*.07,y+h/2+.15,z+nz*.07,w+.43,.28,.22,r);
   box(steel,x+nx*.19,y-h/2-.15,z+nz*.19,w+.43,.13,.4,r);
@@ -71,6 +80,9 @@ export function createHaleWard(THREE,{brick,roof,worldUV,material}){
   const count=Math.max(0,Math.floor((length-.8)/3.55));
   for(let n=0;n<count;n++){
    const t=(n+.5)/count,x=a[0]+dx*t+nx*.035,z=a[1]+dz*t+nz*.035;
+   // Replace both adjoining generic grids, including windows hidden by bays.
+   const cornerClearance=Math.abs(dx)>.1?4.1:6.25;
+   if(HALE_WARD_CORNERS.some(c=>((i===c.index&&t*length<cornerClearance)||((i+1)%local.length===c.index&&(1-t)*length<cornerClearance))))continue;
    const entry=(i===0||i===8)&&n===Math.floor(count/2);
    const corridorContact=nx>.9&&HALE_CORRIDOR_CONTACTS.some(run=>Math.abs(x+cx-run.wardFaceX)<.1&&Math.abs(z+cz-run.start[1])<FARNDON_CORRIDOR.width/2+.86);
    if(!corridorContact){if(entry)detail.door(x,z,r);else sash(x,2.05,z,r,2.65);}
@@ -88,6 +100,44 @@ export function createHaleWard(THREE,{brick,roof,worldUV,material}){
   }
   const g=new THREE.BufferGeometry();g.setAttribute('position',new THREE.Float32BufferAttribute(p,3));g.setAttribute('uv',new THREE.Float32BufferAttribute(uv,2));g.computeVertexNormals();
   return mesh(g,roof,0,0,0,name);
+ }
+ const cornerDetails=[];
+ for(const c of HALE_WARD_CORNERS){
+  const x=c.x-cx,z=c.z-cz;
+  const point=(u,v,y=0)=>[x+c.nx*v,y,z+c.nz*u];
+  const plan=[[1.7,-.08],[1.7,0],[2.35,.95],[4.45,.95],[5.1,0],[5.1,-.08]];
+  const outline=plan.map(([u,v])=>{const [px,,pz]=point(u,v);return [px,pz];});
+  const shape=new THREE.Shape(outline.map(([px,pz])=>new THREE.Vector2(px,-pz)));
+  const g=new THREE.ExtrudeGeometry(shape,{depth:eave-.16,bevelEnabled:false});g.rotateX(-Math.PI/2);
+  const bay=mesh(worldUV(g,1.7),brick,0,0,0,'Hale inside corner '+c.index+' canted bay');
+  bay.userData.collisionFootprint=outline;
+  // Canted cheeks and broad front, with glazing and bands following each face.
+  for(let j=1;j<4;j++){
+   const [ax,az]=outline[j],[bx,bz]=outline[j+1],dx=bx-ax,dz=bz-az,len=Math.hypot(dx,dz);
+   let nx=dz/len,nz=-dx/len;
+   const mid=point(3.4,.1);
+   if(nx*((ax+bx)/2-mid[0])+nz*((az+bz)/2-mid[2])<0){nx=-nx;nz=-nz;}
+   const r=Math.atan2(nx,nz),px=(ax+bx)/2,pz=(az+bz)/2;
+   for(const y of [2.05,5.9])sash(px+nx*.035,y,pz+nz*.035,r,y<4?2.65:2.75,j===2?1.3:.58);
+   for(const [mat,y,h,d]of [[steel,3.94,.1,.22],[white,4.08,.15,.18],[red,7.82,.13,.2],[brick,8.05,.18,.28],[steel,8.25,.1,.3]])
+    box(mat,px+nx*.08,y,pz+nz*.08,len+.08,h,d,r);
+   for(let t=.16;t<len;t+=.4)box(red,ax+dx*t/len+nx*.1,7.94,az+dz*t/len+nz*.1,.18,.16,.24,r);
+  }
+  const cap=plan.map(([u,v])=>point(u,v,8.3));cap.push(point(3.4,-.04,8.75));
+  surface(cap,plan.map((_,i)=>[i,(i+1)%plan.length,6]),'Hale inside corner '+c.index+' bay slate roof');
+  // Entrance sits on the perpendicular wall beside the bay, as in img2.
+  const r=c.nz>0?0:Math.PI,doorX=x+c.nx*1.85,doorZ=z+c.nz*.045;
+  detail.door(doorX,doorZ,r);
+  sash(doorX,5.9,doorZ,r,2.75);
+  const canopy=[[-1.08,0,4.0],[1.08,0,4.0],[1.08,1.08,3.3],[-1.08,1.08,3.3]]
+   .map(([u,v,y])=>[doorX+u,y,z+c.nz*v]);
+  surface(canopy,[[0,1,2],[0,2,3]],'Hale inside corner '+c.index+' entrance slate roof');
+  box(steel,doorX,3.28,z+c.nz*1.08,2.25,.13,.16);
+  box(white,doorX,3.13,z+c.nz*.08,2.1,.19,.28);
+  // Thin rainwater pipe beside the entrance, kept clear of the sash.
+  box(steel,x+c.nx*.63,4.08,z+c.nz*.19,.1,8.05,.1);
+  box(steel,x+c.nx*.63,4.4,z+c.nz*.19,.24,.3,.22);
+  cornerDetails.push({index:c.index,footprint:outline,door:[doorX,doorZ],normal:[0,c.nz]});
  }
  for(const spec of HALE_WARD_ROOFS){
   const [wx0,wz0,wx1,wz1]=spec.rect,x0=wx0-cx-.18,x1=wx1-cx+.18,z0=wz0-cz-.18,z1=wz1-cz+.18;
@@ -109,7 +159,7 @@ export function createHaleWard(THREE,{brick,roof,worldUV,material}){
   batch.name='Hale ward sashes, masonry bands and rainwater goods';batch.castShadow=true;batch.receiveShadow=true;batch.userData.orientedCollision=true;
   items.forEach((b,i)=>{dummy.position.set(b.x,b.y,b.z);dummy.rotation.set(0,b.r,0);dummy.scale.set(b.w,b.h,b.d);dummy.updateMatrix();batch.setMatrixAt(i,dummy.matrix);});building.add(batch);
  }
- building.userData={...building.userData,source:HALE_WARD,footprint:HALE_WARD_FOOTPRINT,storeys:2,openings,roofs:HALE_WARD_ROOFS,
+ building.userData={...building.userData,source:HALE_WARD,footprint:HALE_WARD_FOOTPRINT,storeys:2,openings,roofs:HALE_WARD_ROOFS,cornerDetails,
   // The green guide replaces the old stepped OS rooms, including their courts.
   replacedOSAreas:[[[83.1,-141.5],[153.6,-141.5],[153.6,-70.1],[83.1,-70.1]]]};
  return building;

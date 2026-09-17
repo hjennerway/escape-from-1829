@@ -5,7 +5,8 @@ import {ESCAPE_CHAPEL} from './chapel.mjs';
 export const CHURCH_VIEWS=Object.freeze({
  church:{position:[-43,112,-142],target:[-5,0,-123],fov:38},
  'church-plan':{position:[-5,108,-123.01],target:[-5,0,-123],fov:43},
- 'church-ground':{position:[-23,1.8,-130],target:[-10,4,-116],fov:58}
+ 'church-ground':{position:[-23,1.8,-130],target:[-10,4,-116],fov:58},
+ 'church-front':{position:[-4.9,7,-70],target:[-4.9,10,-105.2],fov:40}
 });
 
 function curve(start,segments,steps=20){

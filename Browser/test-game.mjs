@@ -5,6 +5,7 @@ import vm from 'node:vm';
 import * as core from './dist/core.mjs';
 import * as floors from './dist/floors.mjs';
 import {buildArchitecture} from './dist/architecture.mjs';
+import {createInteriorLights} from './dist/interior-lights.mjs';
 import {createEscapeCutscene,sampleEscape} from './dist/escape-cutscene.mjs';
 import {bindTreeToggle} from './dist/tree-layer.mjs';
 import {sampleLanding} from './dist/aerial-controls.mjs';
@@ -16,9 +17,9 @@ class Vector {
   addScaledVector(v,s){this.x+=v.x*s;this.y+=v.y*s;this.z+=v.z*s;return this;}
 }
 class Object3D {
-  constructor(g,m){this.children=[];this.position=new Vector();this.scale=new Vector();this.rotation=new Vector();this.material=m;this.visible=true;this.instanceMatrix={};}
+  constructor(g,m){this.children=[];this.position=new Vector();this.scale=new Vector();this.rotation=new Vector();this.material=m;this.visible=true;this.instanceMatrix={};this.color={setHex(){}};}
   add(...objects){for(const o of objects){if(o.parent)o.parent.children=o.parent.children.filter(p=>p!==o);o.parent=this;this.children.push(o);}}
-  updateMatrix(){} setMatrixAt(){} setPixelRatio(){} setSize(){} render(scene,camera){this.lastRender={scene,camera};}
+  updateMatrix(){} setMatrixAt(){} setPixelRatio(){} setSize(){} render(scene,camera){this.lastRender={scene,camera};this.renders=(this.renders||0)+1;}
   getWorldDirection(v){return v.set(0,0,-1);} updateProjectionMatrix(){} lookAt(){}
 }
 class Geometry {clone(){return new Geometry();}}
@@ -31,12 +32,12 @@ const elements=new Map();
 function element(id){
  if(elements.has(id))return elements.get(id);
  const e={id,style:{},value:1.2,dataset:{},width:410,height:330,hidden:false,focus(){},addEventListener(){},classList:{toggle(){},add(){}},querySelector:s=>element(id+s)};
- const context=new Proxy({canvas:e},{get:(o,k)=>k in o?o[k]:()=>{}});e.getContext=()=>context;
+ const context=new Proxy({canvas:e,fillRect(){e.fills=(e.fills||0)+1;},drawImage(){e.blits=(e.blits||0)+1;}},{get:(o,k)=>k in o?o[k]:()=>{}});e.getContext=()=>context;
  elements.set(id,e);return e;
 }
 const layout=JSON.parse(await readFile(new URL('./dist/layout.json',import.meta.url)));
 const source=(await readFile(new URL('./dist/game.mjs',import.meta.url),'utf8')).replace(/^import .*;\r?\n/gm,'');
-const sandbox={bindTreeToggle,sampleLanding,...core,...floors,buildArchitecture,createEscapeCutscene,createArrivalCutscene,
+const sandbox={bindTreeToggle,sampleLanding,...core,...floors,buildArchitecture,createInteriorLights,createEscapeCutscene,createArrivalCutscene,
  createEscapeExterior:()=>({scene:new Object3D(),camera:new Object3D()}),
  loadEscapeFrontage:async()=>{},THREE,GLTFLoader:class {},
  document:{getElementById:element,createElement:()=>element('canvas'+elements.size),querySelectorAll:()=>[],body:element('body'),addEventListener(){},exitPointerLock(){}},
@@ -47,10 +48,24 @@ vm.createContext(sandbox);
 vm.runInContext(source+`\nglobalThis.test={finish,escapeCutscene,start,update,animate,resetPositions,showFloor,player,keys,get escapeExterior(){return escapeExterior;},get lastRender(){return renderer.lastRender;},get arrival(){return arrivalCutscene;},get elapsed(){return elapsed;},get enemies(){return enemies;},get groups(){return floorGroups;},get artPanels(){return artPanels;},get artViewing(){return artViewing;},openArtViewer,closeArtViewer,get ready(){return ready;},get state(){return state;},get camera(){return camera;},setElapsed(v){elapsed=v;},setAudio(){audioOn=false;},setFrameDt(v){clock.getDelta=()=>v;}};`,sandbox);
 await new Promise(r=>setImmediate(r));
 const t=sandbox.test;assert(t.ready,'init must complete');t.setAudio();
+vm.runInContext('globalThis.perfTest={drawMap,get renders(){return renderer.renders;}}',sandbox);
+const perf=sandbox.perfTest;
+element('floorMap').hidden=true;
+const fullMapBlits=elements.get('map').blits||0;
+perf.drawMap();
+const backgrounds=[...elements.values()].filter(e=>e.id.startsWith('canvas')&&e.fills);
+const backgroundPaints=backgrounds.map(e=>e.fills);
+const miniBlits=elements.get('miniMap').blits;
+for(let i=0;i<5;i++)perf.drawMap();
+assert.equal(elements.get('miniMap').blits,miniBlits+5);
+assert.equal(elements.get('map').blits||0,fullMapBlits,'Hidden full map does no drawing');
+assert.deepEqual(backgrounds.map(e=>e.fills),backgroundPaints,'Static map backgrounds are reused');
+elements.get('floorMap').hidden=false;perf.drawMap();assert.equal(elements.get('map').blits,fullMapBlits+1);
+sandbox.document.hidden=true;const frames=perf.renders;t.animate();assert.equal(perf.renders,frames,'Hidden browser tabs skip rendering');sandbox.document.hidden=false;
 assert.deepEqual(Array.from(t.enemies,e=>({name:e.name,type:e.type,x:e.x,z:e.z})),[
- {name:'Security',type:1,x:80,z:57.5},
- {name:'Deva asylum ghost',type:2,x:50,z:52.5}
-],'Only Security and the ghost spawn, retaining their behavior types and positions');
+ {name:'Security',type:1,x:70,z:30},
+ {name:'Deva asylum ghost',type:2,x:50,z:17.5}
+],'Security and the ghost spawn within the new rear arms, retaining their behavior types');
 function startPlaying(){t.start();t.arrival.update(3);assert.equal(t.state,'play');}
 
 // Exercise the actual arrival state and animation loop with deliberately slow frames.
@@ -105,13 +120,13 @@ for(const stair of layout.stairs){
  t.keys.delete('KeyE');t.update(.04);startPlaying();
 }
 // The ghost uses a staircase, not an x/z-only collision through the ceiling.
-Object.assign(t.player,{x:50,z:20,floor:1});t.showFloor();
-for(const e of t.enemies){Object.assign(e,{x:35,z:30,floor:0,memory:0,rethink:0,path:[]});}
+Object.assign(t.player,{x:50,z:30,floor:1});t.showFloor();
+for(const e of t.enemies){Object.assign(e,{x:40,z:47.5,floor:0,memory:0,rethink:0,path:[]});}
 t.setElapsed(6);t.update(.04);assert.equal(t.state,'play');
 const ghost=t.enemies.find(e=>e.type===2);for(let i=0;i<100&&ghost.floor===0;i++)t.update(.04);
 assert.equal(ghost.floor,1,'Ghost must follow upstairs via stair route');
-Object.assign(t.player,{x:50,z:20,floor:1});
-for(const e of t.enemies){Object.assign(e,{x:50,z:20,floor:0,memory:0,rethink:0,path:[]});}
+Object.assign(t.player,{x:50,z:30,floor:1});
+for(const e of t.enemies){Object.assign(e,{x:50,z:30,floor:0,memory:0,rethink:0,path:[]});}
 t.update(.04);assert.equal(t.state,'play','Different-floor enemies must not capture player');
 assert(t.enemies.every(e=>!e.mesh.visible));
 startPlaying();assert.equal(t.player.floor,0);assert(t.enemies.every(e=>e.floor===0));

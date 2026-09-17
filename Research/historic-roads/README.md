@@ -1,5 +1,16 @@
 # Historic road layout — 16 September 2026
 
+## Frost drive lawn spur removed — 17 September 2026
+
+The user's red-circled screenshot removes the dead-end extension below the
+Main/admin semicircle. Frost drive now ends at its frontage-drive junction
+(the seventh mapped point); its last two points are omitted from the rendered
+centreline. Asphalt, borders and label anchors all use the shortened path.
+The original Google Earth coordinates remain archived in `modern-road-data.mjs`.
+This affects the Modern road shown in aerial and exterior walking layouts,
+including when both layouts are visible. The Historic frontage drive remains.
+See `Browser/artifacts/frost-drive-after.png` for the checked result.
+
 ## Main/admin frontage correction — 17 September 2026
 
 The latest [red outline](admin-frontage-closer.png) brings the frontage drive

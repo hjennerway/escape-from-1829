@@ -3,7 +3,7 @@ const photo=(file,caption)=>({src:`./building-photos/${file}.webp`,caption});
 const front=[photo('1829-front','1829 · front elevation'),photo('1829-front-2','1829 · entrance and wings'),photo('1829-front-3','1829 · entrance detail')];
 const annexe=[photo('annexe','The Annexe · historic photograph'),photo('annexe-2','The Annexe · entrance view'),photo('annexe-entrance-road','The Annexe · entrance road and hospital sign')];
 export const BUILDING_CATALOG=Object.freeze([
- {id:'1829-centre',name:'1829 · Acton / Grindley',locations:['acton','grindley'],photos:[...front,photo('1829-back','Central building · rear elevation')]},
+ {id:'1829-centre',name:'1829 · Acton / Grindley',locations:['acton','grindley'],photos:[...front,photo('1829-back','Central building · rear elevation'),photo('grindley-mural','Grindley Ward · bridge and canal mural'),photo('grindley-interior','Grindley Ward · interior steps and doorway')]},
  {id:'1829-west',name:'1829 · Hampton / Ince',locations:['hampton','ince'],photos:front},
  {id:'1829-east',name:'1829 · Barton / Caldy / Ebnal',locations:['barton','caldy','ebnal'],photos:front},
  {id:'barmere',name:'1829 · Barmere Ward',photos:[photo('barmere-garden','Garden side and chimney'),photo('barmere-chimney','Low range and chimney')]},

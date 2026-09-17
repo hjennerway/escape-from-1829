@@ -3,7 +3,7 @@ import {readFile} from 'node:fs/promises';
 import * as THREE from './dist/vendor/three.module.js';
 import {createEscapeExterior} from './dist/escape-exterior.mjs';
 import {createAerialLayouts} from './dist/aerial-layouts.mjs';
-import {HALE_WARD,HALE_WARD_FOOTPRINT,HALE_WARD_VIEWS} from './dist/hale-daresbury-huxley-dunham.mjs';
+import {HALE_WARD,HALE_WARD_FOOTPRINT,HALE_WARD_VIEWS,HALE_WARD_CORNERS} from './dist/hale-daresbury-huxley-dunham.mjs';
 import {pointInFootprint} from './dist/historic-footprints.mjs';
 import {exteriorObstacles,obstacleContains} from './dist/explore-controls.mjs';
 import {HALE_CORRIDOR_RUNS} from './dist/hale-corridors.mjs';
@@ -42,13 +42,29 @@ ward.traverse(o=>{
  if(o.name.endsWith('slate roof')){const n=o.geometry.attributes.normal;for(let i=0;i<n.count;i++)assert(n.getY(i)>0,'All slate surfaces face upwards');}
 });
 for(const o of ward.userData.openings){
- assert.equal(o.w,1.3);assert.equal(o.h,o.y<4?2.65:2.75);
+ assert([1.3,.58].includes(o.w));assert.equal(o.h,o.y<4?2.65:2.75);
  const n=new THREE.Vector3(Math.sin(o.r),0,Math.cos(o.r));
  const p=new THREE.Vector3(o.x,o.y,o.z).add(ward.position);
  ray.set(p.clone().addScaledVector(n,.6),n.negate());
  assert(ray.intersectObject(ward,true)[0]?.object.isInstancedMesh,'Sash glazing must face out of the wall');
 }
+for(const [i,a]of ward.userData.openings.entries())for(const b of ward.userData.openings.slice(i+1)){
+ if(Math.abs(a.y-b.y)>.1||Math.abs(a.r-b.r)>.001)continue;
+ const dx=b.x-a.x,dz=b.z-a.z;
+ if(Math.abs(dx*Math.sin(a.r)+dz*Math.cos(a.r))>.02)continue;
+ assert(Math.abs(dx*Math.cos(a.r)-dz*Math.sin(a.r))>(a.w+b.w)/2+.43,'Adjacent sash heads must not overlap');
+}
 const start=HALE_WARD_VIEWS['hale-daresbury-huxley-dunham-ground'].position;
+assert.deepEqual(HALE_WARD_CORNERS.map(c=>c.index),[2,5,6,9,10,15,16],'All seven inward turns receive the photo treatment');
+assert.equal(ward.userData.cornerDetails.length,7);
+for(const c of ward.userData.cornerDetails){
+ const centre=c.footprint.reduce((sum,p)=>sum.map((v,i)=>v+p[i]/c.footprint.length),[0,0]);
+ assert(down(centre[0]+HALE_WARD.x,centre[1]+HALE_WARD.z)?.object.name.includes('bay slate roof'),'Every bay has a closed roof');
+ const [x,z]=c.door,n=new THREE.Vector3(c.normal[0],0,c.normal[1]);
+ ray.set(new THREE.Vector3(x+ward.position.x,1.5,z+ward.position.z).addScaledVector(n,1.5),n.clone().negate());
+ const hit=ray.intersectObject(ward,true)[0];
+ assert(hit?.object.isInstancedMesh&&hit.distance>1,'Entrance remains visible below its canopy');
+}
 const links=exterior.adminCorridor.getObjectByName('Hale connecting corridors');
 assert.equal(links.children.length,2,'Only the two red-marked wings get corridor links');
 for(const [i,contact] of [[145,-85.155],[137,-107.705]].entries()){
@@ -85,6 +101,12 @@ assert.equal(ray.intersectObject(links,true).length,0,'The unmarked third wing h
 for(const historic of [true,false])for(const modern of [true,false]){
  layouts.setVisible('historic',historic);layouts.setVisible('modern',modern);
  const obstacles=exteriorObstacles(THREE,exterior.model);
+ for(const c of ward.userData.cornerDetails){
+  const centre=c.footprint.reduce((sum,p)=>sum.map((v,i)=>v+p[i]/c.footprint.length),[0,0]);
+  assert.equal(obstacles.some(o=>obstacleContains(o,centre[0]+ward.position.x,centre[1]+ward.position.z)),historic,'New bay collisions follow Historic visibility');
+  const [x,z]=c.door;
+  assert(!obstacles.some(o=>obstacleContains(o,x+ward.position.x,z+ward.position.z+c.normal[1]*1.6)),'Approach below each canopy stays accessible');
+ }
  for(const p of solids)assert.equal(obstacles.some(o=>obstacleContains(o,...placed(p))),historic,'Walking follows visible ward walls: '+p);
  for(const run of HALE_CORRIDOR_RUNS)assert.equal(obstacles.some(o=>obstacleContains(o,(run.start[0]+run.end[0])/2,run.start[1])),historic,'The two corridor links follow Historic collisions');
  for(const p of [...[[89,-85],[94.5,-85],[134,-96],[133,-117],[104,-107]].map(placed),[start[0],start[2]]])assert(!obstacles.some(o=>obstacleContains(o,...p)),'Cleared end, courtyard and walking start must remain accessible: '+p);

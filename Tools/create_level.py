@@ -6,49 +6,12 @@ import bpy, json, math, os, random
 from mathutils import Vector
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 random.seed(1829)
-W,H,S=41,33,2.5
-grid=[[0]*W for _ in range(H)]
-def carve(x0,z0,x1,z1):
-    for z in range(z0,z1+1):
-        for x in range(x0,x1+1): grid[z][x]=1
-# Transverse gallery, paired longitudinal wings and central administration.
-carve(5,15,35,17)
-for a in (6,30):
-    carve(a,4,a+4,28)
-    # Room partitions leave the main longitudinal corridor open.
-    for z in (8,12,20,24):
-        grid[z][a]=grid[z][a+1]=grid[z][a+3]=grid[z][a+4]=0
-carve(18,10,22,25)
-carve(15,20,25,22)
-# Mirrored approaches branch north from the gallery on either side of Reception.
-# Lengths are gameplay approximations, not surveyed dimensions.
-for x in (14,26): carve(x,12,x,14)
-# Five escape vestibules, all linked to the same navigable component.
-exits=[dict(x=8,z=4,name='WEST GARDEN'),dict(x=32,z=4,name='EAST GARDEN'),
-       dict(x=8,z=28,name='WEST COURT'),dict(x=32,z=28,name='EAST COURT'),
-       dict(x=20,z=25,name='MAIN PORTICO')]
-spawn=dict(x=20,z=11)
-stairs=[dict(x=14,z=12,name='LEFT RECEPTION STAIR',direction='UP',mirror=1,source='Uploaded footage; left-of-reception location confirmed by user'),
-        dict(x=26,z=12,name='RIGHT RECEPTION STAIR',direction='UP',mirror=-1,source='Mirrored at user request')]
-data=dict(width=W,height=H,cellSize=S,cells=[v for row in grid for v in row],exits=exits,spawn=spawn,stairs=stairs)
-data['geometrySource']='layout'
-upper=[[0]*W for _ in range(H)]
-def upper_carve(x0,z0,x1,z1):
-    for z in range(z0,z1+1):
-        for x in range(x0,x1+1): upper[z][x]=1
-# Fictional, mirrored upper-floor loop: both stairs connect, with side rooms.
-upper_carve(14,8,26,8)
-upper_carve(14,16,26,16)
-for x in (14,26): upper_carve(x,8,x,16)
-upper_carve(10,9,12,11)
-upper_carve(13,10,14,10)
-upper_carve(28,9,30,11)
-upper_carve(26,10,27,10)
-upper_carve(18,5,22,7)
-upper_carve(20,7,20,8)
-data['upperFloor']=dict(name='UPPER FLOOR',cells=[v for row in upper for v in row],source='Fictional mirrored gameplay layout; not surveyed from footage')
-os.makedirs(os.path.join(ROOT,'Assets','Resources'),exist_ok=True)
-with open(os.path.join(ROOT,'Assets','Resources','layout.json'),'w') as f: json.dump(data,f,indent=2)
+# The browser layout builder owns navigation; do not regenerate the old floorplan.
+with open(os.path.join(ROOT,'Assets','Resources','layout.json')) as f:
+    data=json.load(f)
+W,H,S=data['width'],data['height'],data['cellSize']
+grid=[data['cells'][z*W:(z+1)*W] for z in range(H)]
+exits,spawn,stairs=data['exits'],data['spawn'],data['stairs']
 bpy.ops.object.select_all(action='SELECT'); bpy.ops.object.delete(use_global=False)
 materials={}
 palette={'Plaster':(.40,.43,.38,1),'Panel':(.095,.17,.155,1),'Stone':(.28,.27,.23,1),
@@ -83,12 +46,12 @@ for z in range(H):
             if (x+z)%3==0:
                 box('SashWindow',wx-dx*.13,2.36,wz-dz*.13,.09 if dx else 1.15,1.28,1.15 if dx else .09,'Glass')
                 box('SashBar',wx-dx*.19,2.36,wz-dz*.19,.07 if dx else 1.2,.045,1.2 if dx else .07,'Brass')
-        if z==16 and x%4==0:
+        if z==data['galleryZ'] and x%4==0:
             box('GalleryBeam',px,3.33,pz,.20,.24,7.5,'Darkwood')
 for e in exits:
-    z=e['z']*S+(-.7 if e['z']==4 else .7)
+    z=e['z']*S+e.get('facing',1)*.7
     box('ExitDoor',e['x']*S,1.25,z,1.7,2.5,.14,'Panel')
-    box('PushBar',e['x']*S,1.05,z+(-.1 if e['z']>4 else .1),1.3,.08,.08,'Brass')
+    box('PushBar',e['x']*S,1.05,z-e.get('facing',1)*.1,1.3,.08,.08,'Brass')
 # Bevel all architectural meshes for readable highlights, join by material.
 for mat in palette:
     bpy.ops.object.select_all(action='DESELECT')

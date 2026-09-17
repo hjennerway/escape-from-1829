@@ -6,7 +6,9 @@ const l=JSON.parse(await readFile(new URL('./dist/layout.json',import.meta.url))
 const spawn={x:l.spawn.x*l.cellSize,z:l.spawn.z*l.cellSize};
 assert.equal(l.exits.length,5);assert.equal(l.cells.length,l.width*l.height);
 for(const e of l.exits){const target={x:e.x*l.cellSize,z:e.z*l.cellSize},route=path(l,spawn,target);assert(route.length>0,e.name+' unreachable');let prev=spawn;for(const p of route){assert.equal(Math.hypot(p.x-prev.x,p.z-prev.z),l.cellSize);assert(walkable(l,p.x,p.z));prev=p;}assert.equal(nearExit(l,target).name,e.name);console.log(e.name+': reachable in '+route.length+' grid steps');}
-assert(!walkable(l,0,0));assert(walkable(l,spawn.x,spawn.z));assert(!visible(l,{x:20,z:10},{x:80,z:10}));assert(visible(l,{x:20,z:40},{x:80,z:40}));
+assert(!walkable(l,0,0));assert(walkable(l,spawn.x,spawn.z));
+assert(!visible(l,{x:30,z:30},{x:70,z:30}),'Rear courts separate the three arms');
+assert(visible(l,{x:10,z:l.galleryZ*l.cellSize},{x:90,z:l.galleryZ*l.cellSize}),'Front gallery joins the wings');
 // Every walkable cell is in the spawn component, including side rooms.
 for(let i=0;i<l.cells.length;i++)if(l.cells[i]){const p={x:i%l.width*l.cellSize,z:Math.floor(i/l.width)*l.cellSize};if(p.x!==spawn.x||p.z!==spawn.z)assert(path(l,spawn,p).length>0,'Disconnected cell '+i);}
 console.log('PASS: five exits, all rooms connected, wall collision and sight obstruction.');
@@ -18,17 +20,33 @@ assert.equal(left.x+right.x,40);
 assert.equal(left.z,right.z);
 assert.equal(left.mirror,-right.mirror);
 for(const t of l.stairs){
-  assert(path(l,{x:20*l.cellSize,z:14*l.cellSize},{x:t.x*l.cellSize,z:t.z*l.cellSize}).length>0);
-  for(let z=t.z;z<=16;z++)assert(walkable(l,t.x*l.cellSize,z*l.cellSize));
+  assert(path(l,spawn,{x:t.x*l.cellSize,z:t.z*l.cellSize}).length>0);
+  for(let z=t.z;z<=l.galleryZ;z++)assert(walkable(l,t.x*l.cellSize,z*l.cellSize));
 }
-for(let z=0;z<l.height;z++)for(let x=0;x<l.width;x++)assert.equal(l.cells[z*l.width+x],l.cells[z*l.width+l.width-1-x]);
+// Model-derived silhouette: three rear arms, open courts, two forward feet,
+// a longer eastern pavilion, and no eastern annexe or rear cross-range.
+for(const floor of [l,l.upperFloor]){
+  const open=(x,z)=>floor.cells[z*l.width+x]===1;
+  for(const x of [12,20,28])for(let z=7;z<=20;z++)assert(open(x,z));
+  assert(open(20,6)&&!open(12,6)&&!open(28,6),'Centre extends beyond side arms');
+  for(let z=6;z<=15;z++){
+    for(const x of [15,16,17,23,24,25])assert(!open(x,z),'Rear courtyard stays open');
+    for(let x=31;x<l.width;x++)assert(!open(x,z),'Excluded eastern ranges stay absent');
+  }
+  for(const x of [11,29])for(let z=21;z<=26;z++)assert(open(x,z));
+  for(let z=22;z<l.height;z++)assert(!open(20,z),'No long invented front central arm');
+  assert(open(36,22)&&!open(4,22),'Keep unequal end pavilion shapes');
+}
 const canonical=JSON.parse(await readFile(new URL('../Assets/Resources/layout.json',import.meta.url)));
 assert.deepEqual(l,canonical);
 console.log('PASS: mirrored reception stair approaches, canonical/browser parity.');
 const floors=makeFloors(l),upper=floors[1];
 assert.equal(upper.exits.length,0);
 assert(upper.stairs.every(t=>t.direction==='DOWN'));
-for(let z=0;z<upper.height;z++)for(let x=0;x<upper.width;x++)assert.equal(upper.cells[z*upper.width+x],upper.cells[z*upper.width+upper.width-1-x]);
+for(const floor of floors)for(const point of [...floor.patrol,...floor.rooms,...floor.enemies]){
+  assert(walkable(floor,point.x*l.cellSize,point.z*l.cellSize),'Patrol, room label and pursuer positions stay inside');
+  assert(path(floor,spawn,{x:point.x*l.cellSize,z:point.z*l.cellSize}).length||point.x===l.spawn.x&&point.z===l.spawn.z);
+}
 const traveller={...spawn,floor:0};
 assert.equal(changeFloor(floors,traveller,l.stairs[0]),false,'Cannot teleport from spawn');
 for(const stair of l.stairs){

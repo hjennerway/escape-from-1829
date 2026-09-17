@@ -23,3 +23,12 @@
 .art-viewer-card>span{font-size:9px;letter-spacing:2px;color:var(--green)}
 
 .aerial-link{color:inherit;text-decoration:none;font-size:9px;letter-spacing:1.2px}.aerial-link:hover{color:var(--cream);text-decoration:underline}
+
+/* Keep survival help beside its game mode, including on narrow screens. */
+.escape-actions{display:flex;align-items:center;gap:14px}
+.menu-actions .help-link{min-width:0;padding:8px 0;background:none;border:0;color:var(--cream);font-size:11px;font-weight:400;letter-spacing:0;text-decoration:underline;text-underline-offset:3px;white-space:nowrap}
+.menu-actions .help-link:hover{color:var(--green)}
+@media(max-width:760px){.menu-actions{max-width:min(360px,86vw)}.escape-actions #start{min-width:0;flex:1}.escape-actions{gap:12px}}
+
+#resultExplore{display:inline-block;margin:8px 8px 0 0;padding:19px 24px;min-width:210px;background:#15201770;border:1px solid #75866a60;border-radius:0;color:#d1d6c4;font:600 11px/1.3 Arial;letter-spacing:1.3px;text-transform:uppercase;text-decoration:none;text-align:left}
+#resultExplore:hover{color:var(--cream)}

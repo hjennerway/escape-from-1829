@@ -1,0 +1,32 @@
+[
+  {
+    "name": "reception",
+    "pointLights": 13,
+    "litPointLights": 13,
+    "drawCalls": 40,
+    "triangles": 17696,
+    "medianFrameMs": 100.10000000000218,
+    "p95FrameMs": 183.40000000000146,
+    "mapMs": 0.005
+  },
+  {
+    "name": "gallery",
+    "pointLights": 13,
+    "litPointLights": 13,
+    "drawCalls": 38,
+    "triangles": 17372,
+    "medianFrameMs": 116.70000000000073,
+    "p95FrameMs": 150,
+    "mapMs": 0.006000000014901161
+  },
+  {
+    "name": "upper",
+    "pointLights": 12,
+    "litPointLights": 12,
+    "drawCalls": 21,
+    "triangles": 16816,
+    "medianFrameMs": 116.70000000000437,
+    "p95FrameMs": 145.49999999850843,
+    "mapMs": 0.01600000001490116
+  }
+]

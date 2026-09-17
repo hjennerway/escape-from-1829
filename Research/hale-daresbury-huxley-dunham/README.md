@@ -71,3 +71,34 @@ Geometry and views live in `Browser/dist/hale-daresbury-huxley-dunham.mjs`.
 `Browser/test-hale-ward.mjs` checks the right-angle footprint, two storeys,
 window exposure, roof coverage, open courts, walking collisions, layer
 visibility and navigation. Unity and Blender exports are unchanged.
+
+## Inside corners, September 17 photographic refinement
+
+`inside-corners/img1.jpg` is the wide lawn view, located by the red dot and
+arrow in `inside-corners/locations.png`. `img2.jpg` is the closer view from
+the blue dot. Both show the same inward corner at the Grafton-side end of
+the broad western lawn. `marked-corners.png` identifies examples elsewhere;
+the user's instruction also includes the other inward right-angle ward joins.
+The image labels and arrows are reference annotations, not scene features.
+
+All seven concave turns now share a shallow two-storey canted window bay on
+the spine, a door and small sloping slate canopy on the perpendicular return,
+an upper sash above the entrance, a rainwater pipe, stone bay bands, dark
+sills, dentilled brick eaves and a slate bay cap. Ordinary wall windows are
+omitted where the corner treatment replaces them. This supersedes the earlier
+uniform sash grids at these junctions; the main right-angle ranges and their
+positions remain the ground reference. Bay footprints supply additional
+walking collisions without closing the entrance approaches or courts.
+
+The bay projection (0.95 units), angled cheek widths, entrance positions and
+roof heights are photographic estimates. Repeating the visible treatment at
+the six other corners follows the user's statement that they were similar;
+it does not establish identical surveyed dimensions. The modern boarding,
+overgrowth and decay in the photographs are not reproduced in the historic
+game setting. Existing glazing is used for the ground-floor openings.
+
+Open `aerial.html?view=hale-corner-photo-1` or `?view=hale-corner-photo-2`
+for the approximate red and blue viewing directions. The same presets work
+in `explore.html`; the ward navigation offers both photo views and a matching
+walking link. Browser source and the compiled aerial model were updated;
+Unity and Blender exports were not regenerated.

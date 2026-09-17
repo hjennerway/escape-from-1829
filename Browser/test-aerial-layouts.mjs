@@ -68,6 +68,8 @@ for(let i=0;i<MODERN_ROAD_PATHS.length;i++){
   assert.deepEqual(road.userData.centerline.slice(0,7),saved.slice(0,7));
   assert.deepEqual(road.userData.centerline[11],[saved[11][0],saved[11][1]+9.5],'The eastern crossing follows the garage stretch');
   assert.deepEqual(road.userData.centerline.slice(12),saved.slice(12),'Retain the rest of the Modern tail');
+ }else if(path.name==='Frost drive'){
+  assert.deepEqual(road.userData.centerline,saved.slice(0,7),'Frost drive ends at the frontage junction before the removed lawn spur');
  }else assert.deepEqual(road.userData.centerline,saved,'Other mapped lanes retain their saved vertices');
  road.traverse(o=>{if(!o.isMesh)return;const normals=o.geometry.attributes.normal;for(let n=0;n<normals.count;n++)assert(normals.getY(n)>.99,'Roads must face upwards');const b=new THREE.Box3().setFromObject(o);assert(b.min.y>.3&&b.max.y<.4,'Road overlays must clear terrain without becoming walking obstacles');});
 }

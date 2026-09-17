@@ -5,6 +5,8 @@ const require=createRequire(import.meta.url),sharp=require('sharp');
 const sources={
  '1829-front':'Browser/dist/exterior/1829front.webp','1829-front-2':'Browser/dist/exterior/1829front2.webp','1829-front-3':'Browser/dist/exterior/1829front3.webp',
  '1829-back':'Research/1829-back/img1.jpg',
+ 'grindley-mural':'Research/grindley/ward-mural.png',
+ 'grindley-interior':'Research/grindley/interior-steps.png',
  'barmere-garden':'Research/redesmere-chimney/img1.jpg','barmere-chimney':'Research/redesmere-chimney/img2.jpg',
  'annexe':'Browser/dist/art/annexe.png','annexe-2':'Browser/dist/art/annexe2.png','chimney':'Browser/dist/art/chimney.png',
  'annexe-entrance-road':'Research/annexe-photos/entrance-road.png',

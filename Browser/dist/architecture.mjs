@@ -10,7 +10,7 @@ export function buildArchitecture(THREE, scene, layout) {
   const open=(x,z)=>x>=0&&z>=0&&x<layout.width&&z<layout.height&&layout.cells[z*layout.width+x]===1;
   for(let z=0;z<layout.height;z++)for(let x=0;x<layout.width;x++)if(open(x,z)) {
     const px=x*s,pz=z*s;
-    const approach=(layout.stairs||[]).some(t=>t.x===x&&z>=t.z&&z<=14);
+    const approach=(layout.stairs||[]).some(t=>t.x===x&&z>=t.z&&z<=layout.galleryZ);
     box(approach?'Carpet':(x+z)%2?'Floor':'Stone',px,-.12,pz,s,.24,s);
     box('Ceiling',px,3.55,pz,s,.15,s);
     for(const [dx,dz] of [[1,0],[-1,0],[0,1],[0,-1]]) {
@@ -23,7 +23,7 @@ export function buildArchitecture(THREE, scene, layout) {
       box('Brass',wx-dx*.12,1.18,wz-dz*.12,w+.06,.07,d+.06);
       box('Darkwood',wx-dx*.12,.12,wz-dz*.12,w+.06,.15,d+.06);
     }
-    if(z===16&&x%4===0)box('Darkwood',px,3.33,pz,.2,.24,7.5);
+    if(z===layout.galleryZ&&x%4===0)box('Darkwood',px,3.33,pz,.2,.24,7.5);
   }
   for(const t of layout.stairs||[]) {
     if(t.direction==='DOWN'){
@@ -52,9 +52,9 @@ export function buildArchitecture(THREE, scene, layout) {
     box('Brass',x-side*.9,1.4,z-1.4,.045,.045,2.4);
   }
   for(const e of layout.exits) {
-    const z=e.z*s+(e.z===4?-.7:.7);
+    const facing=e.facing??1,z=e.z*s+facing*.7;
     box('Panel',e.x*s,1.25,z,1.7,2.5,.14);
-    box('Brass',e.x*s,1.05,z+(e.z>4?-.1:.1),1.3,.08,.08);
+    box('Brass',e.x*s,1.05,z-facing*.1,1.3,.08,.08);
   }
   const geometry=new THREE.BoxGeometry(1,1,1),transform=new THREE.Object3D();
   for(const [kind,items] of batches) {

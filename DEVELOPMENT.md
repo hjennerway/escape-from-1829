@@ -8,6 +8,54 @@ Paths and commands are relative to the repository root unless stated otherwise.
 See [AGENTS.md](AGENTS.md) for coding-agent guidance and the
 [model build guide](Browser/MODEL-BUILD.md) for optional precompiled assets.
 
+## Asylum escape footprint (September 17)
+
+Both interior floors now roughly follow the modelled 1829 core: a broad front
+gallery, central reception, three rear arms, two projecting front wings and
+unequal end pavilions. Barmere, Redesmere and Saughall are excluded. The rear
+court gaps remain open. This replaces the older generic mirrored plan and
+upstairs loop described later in these historical notes. Internal partitions,
+stair dimensions and exits remain gameplay approximations.
+
+`node Browser/build-escape-layout.mjs` regenerates the browser and canonical
+JSON together. Architecture, collision, maps, room signs, lamps, pursuer spawns
+and patrols follow that layout. The defeat heading is **Locked in the basement**.
+The Blender generator now reads the canonical JSON instead of overwriting it
+with the old plan. Unity code and `.blend`, `.fbx` and `.glb` exports were not
+updated or regenerated; the aerial compiled model is unaffected.
+
+`node Browser/test.mjs` and `node Browser/test-game.mjs` pass, including every
+room and exit, both stairs, cross-floor pursuit, arrival and escape sequences.
+The full `npm test` run reaches the existing road snapshot mismatch in
+`test-annexe-photo-placement.mjs`; see `Browser/artifacts/escape-layout-suite.txt`.
+`node Browser/artifacts/check-escape-layout.mjs` also passes in Chrome/WebGL:
+reception, both maps, a real stair transfer and the basement defeat message,
+with no page errors. Reviewed screenshots are `Browser/artifacts/escape-layout-*.png`.
+Shape references and regeneration details are in
+[Research/escape-layout/README.md](Research/escape-layout/README.md).
+
+Frost drive's red-circled dead-end extension below Main/admin is removed from
+the browser road centreline, returning the lawn to grass. Its asphalt, borders
+and label anchors end at the frontage junction. The original mapped coordinates
+remain in the source archive. Aerial layouts, annexe access and Modern entrance
+checks pass, and the rebuilt compiled model passes `test-precompiled-models.mjs`.
+Visual verification is in `Browser/artifacts/frost-drive-after.png`.
+The full `npm test` run stops at the existing annexe photo-placement road
+snapshot mismatch; the historic-road check also has the baseline Admin north
+service road clearance failure. Unity and Blender exports were not changed.
+
+The landing actions run left to right: **Aerial View**, **Explore on foot**, and
+**Asylum escape**, with a small **How to survive** link beside the escape button.
+Only **Aerial View** uses the green primary background; the other two modes use
+the secondary style. The help link opens the existing instructions dialog. On narrow screens the
+actions stack while the escape button and help link stay together.
+The reordered menu was visually checked at 1300 × 900 and 390 × 844 with the
+3D game module isolated and its ready button label applied; previews are in
+`Browser/artifacts/landing-reordered-*.png`. A full game-load preview timed out.
+The browser suite passes game and exploration checks, then stops at the existing
+road snapshot mismatch in `test-annexe-photo-placement.mjs`. No geometry was
+changed for this menu update.
+
 In aerial view, hover over a named building, or tap it on a phone, to give it a
 white glow and open its name and scrollable photograph panel. Click to keep a
 selection while browsing; tap another building to change it. Close the panel
@@ -113,6 +161,16 @@ The exterior's fixed sunlight shadow map is rendered once and reused while walki
 
 Exterior walking uses a spatial index to check nearby foundations and trunks, retaining the existing polygon collisions, wall sliding, and movement speeds. Idle movement skips collision work. Layout and tree changes rebuild the index with `walker.setObstacles(...)`. Run `npm test` in `Browser` for the navigation checks and collision comparisons across all four layout combinations.
 
+### Asylum escape interior performance (September 17)
+
+The interior now uses a fixed pool of 12 nearby lamps from the active floor, replacing 38 downstairs / 31 upstairs lamp lights in every material shader. `Browser/dist/interior-lights.mjs` preserves lamp positions, colours, intensity and attenuation nearby; distant lighting fades over five scene units before the first excluded lamp, capped at a 32-unit radius. Every slot stays visible (with zero intensity when unused), so crossing lamp selection boundaries does not change the shader's light count. Fixtures retain their emissive appearance throughout the building. The torch and ghost light remain independent. Floor changes refresh the pool immediately and normal rendering follows the player. Distant corridors are darker; this is a lighting-detail tradeoff, not an identical rendering.
+
+The minimap and full map cache their static walls, stairs and exits per floor and canvas size. Refreshes copy that background and draw moving markers; the hidden full map does no drawing. Hidden browser tabs skip rendering. Navigation, geometry, pursuer behaviour, artwork, resolution and cutscene timing are unchanged. Only browser runtime sources changed; Unity, Blender, GLB and aerial compiled models were not regenerated.
+
+Run `node Browser/test-interior-lights.mjs` for the light budget, floor isolation, nearest-light brightness and smooth selection boundary checks across every walkable cell. `node Browser/test-game.mjs` also checks map reuse, hidden-map/tab work and gameplay transitions. The full `npm test` command includes these checks. This working-tree run passed 45 of 47 checks; the existing failures are the `test-annexe-photo-placement.mjs` road snapshot and `test-historic-roads.mjs` Admin north service road clearance assertions. Those tests do not import the changed runtime modules. The rest of the suite was run separately after the first failure. Logs are in `Browser/artifacts/escape-performance-suite*.txt`.
+
+`node Browser/artifacts/benchmark-escape.mjs before` / `after`, from the repository root, compare a saved pre-change game source with the current one using local Chrome and software WebGL at 1000 × 700. External historical photos are blocked consistently; local artwork is loaded. Reception, gallery and upstairs median frame intervals fell from 266.8 / 283.4 / 266.7 ms to 100.1 / 116.7 / 116.7 ms (56–62% less). Map CPU submission time fell from approximately 0.6 ms to 0.005–0.016 ms per refresh. Geometry and draw-call counts match in all three views. The JSON results and visually checked before/after screenshots are saved under `Browser/artifacts/escape-performance-*`. These local software-renderer timings establish reduced work, not a hardware FPS guarantee.
+
 ## Historic and Modern aerial layouts
 
 The aerial preview has separate **Historic** and **Modern** checkboxes. Historic starts on and Modern starts off. Either, both, or neither can be visible. Shared 1829/Redesmere geometry, the water tower, Churton and church appear once whenever either layout is on. The Annexe, Main/admin building, its connecting corridor and the freestanding chimney belong to Historic. Existing shared grounds and site context follow the shared group; switching both layouts off leaves the terrain.
@@ -202,6 +260,28 @@ brickwork and slate-roof treatment. Select **Hale/Daresbury/Huxley/Dunham** in
 Locations for aerial, plan, courtyard and walking views. It belongs to Historic;
 the courts remain accessible. See [reference and modelling notes](Research/hale-daresbury-huxley-dunham/README.md).
 
+The September 17 Daresbury photographs refine all seven inward wall joins with
+canted two-storey sash bays, stone bands, dentilled eaves, rainwater pipes and
+small slate entrance canopies. Generic windows near the new details are
+omitted to keep their surrounds separate. Photo 1 and Photo 2 comparison views
+are available in the ward navigation (`hale-corner-photo-1` / `-2`) and Explore.
+Additional polygonal collisions follow the bays and leave the door approaches
+open. Geometry is photo-estimated; the supplied boarded windows and decay are
+not copied into the historic setting. Browser source and compiled aerial
+assets are updated; Unity and Blender exports remain unchanged.
+
+Validation: the extended `test-hale-ward.mjs` checks all seven corners, exposed
+sashes, separated window heads, roof coverage, entrance approaches and bay
+collisions under Historic visibility. The 47-command browser suite and its
+post-failure continuation passed 45 checks; `test-annexe-photo-placement.mjs`
+fails its unrelated saved road-array comparison, and `test-historic-roads.mjs`
+fails Admin north service road clearance at (228.889, -4.523), outside this ward.
+The rebuilt compiled scene passes `test-precompiled-models.mjs`, including
+source/compiled image and draw-count comparisons. The corner inspection script
+in `Browser/artifacts/inspect-hale-corners.mjs` captures both photo directions,
+the courts, plan, walking and mobile. Portrait photo views preserve eye height,
+and the ward links sit below the mobile toolbar.
+
 ## Hospital Shop beside Redesmere
 
 The white single-storey Hospital Shop block follows the blue footprint in the supplied reference view, with a fully hipped slate roof and seven high multi-pane windows along the garden-facing wall. A narrower brick corridor with a flat roof follows the green footprint and joins its rear to the existing Redesmere-to-Main/admin range. The ivy-covered range and chimney retain their positions.
@@ -284,7 +364,7 @@ The two mature front-lawn trees follow `trees/img1.jpg` and the yellow crosses i
 
 The four Redesmere timber planters and east corner shrub bed have been removed, along with the H shortcut. All estate trees, including trunks, branches and crowns, belong to a separate **Trees** layer, visible by default. Press **T** in the aerial view, exterior walk or game to show/hide them. Hidden trees do not cast shadows or block walking.
 
-The menu's **Explore the asylum** button opens a ground-level exterior walk at `explore.html`. Use WASD to move, mouse look (or click and drag when mouse capture is unavailable), Shift to move faster, and Escape to release the mouse and pause movement. The top-right **Locations** button opens the same popup as the aerial view, with walking destinations, an **Entrance** link and links to aerial plans. **Back to game** returns to the menu. **Historic** and **Modern** use the aerial layout visibility rules: Historic starts on, Modern starts off, and either, both or neither can be shown without moving the camera. Walking collisions update with the visible buildings and trees. Losing focus clears movement keys. The exploration page uses bundled Three.js and runs independently of the interior game.
+The menu's **Explore on foot** button opens a ground-level exterior walk at `explore.html`. Use WASD to move, mouse look (or click and drag when mouse capture is unavailable), Shift to move faster, and Escape to release the mouse and pause movement. The top-right **Locations** button opens the same popup as the aerial view, with walking destinations, an **Entrance** link and links to aerial plans. **Back to game** returns to the menu. **Historic** and **Modern** use the aerial layout visibility rules: Historic starts on, Modern starts off, and either, both or neither can be shown without moving the camera. Walking collisions update with the visible buildings and trees. Losing focus clears movement keys. The exploration page uses bundled Three.js and runs independently of the interior game.
 
 Starting or restarting holds the aerial estate view for 1 second, then rushes the camera toward the central front door while fading to black over 1.5 seconds. It switches to the ground-floor Reception spawn at full black, then fades back in over 0.5 seconds, completing the intro in 3 seconds. Controls, pursuers and the gameplay timer remain frozen until the reveal finishes, preserving the full five-second head start. Hidden tabs suspend the sequence; reduced-motion mode uses a still exterior with the same fades and timing.
 
@@ -327,6 +407,27 @@ Escaping through any of the five exits starts a ten-second aerial 3D pan over th
 The scene is built in `Browser/dist/escape-exterior.mjs` and the pan is controlled by `Browser/dist/escape-cutscene.mjs`. It uses real geometry, instanced window/trim details, procedural brick/slate materials and directional shadows. It shares the game's renderer and remains behind the result screen. The original mast photographs remain as reference assets but are no longer displayed or loaded by the ending. Gameplay and the timer freeze throughout; hidden tabs suspend playback. Select **Skip cutscene**, or press Escape, Space or Enter, to go straight to the result. Reduced-motion mode holds a still 3D aerial view. Losing does not trigger the sequence.
 
 The Old Chapel stands behind the rear car park at x=-4.9, z=-119.2, registered from the shared Google Earth marker with 1829 fixed (see `Research/landmark-placement.md`). `Browser/dist/chapel.mjs` builds the photo-based brick chapel with a steep slate gable roof, pointed lancet windows, stepped buttresses, projecting entrance porch, vestry, clock gable and ridge crosses. Its clock face points towards the front of the main building, with the entrance porch on the west side. Dimensions are approximate and styled to match the aerial model.
+
+The September 17 clock-front photograph supersedes the generic front opening.
+`Browser/dist/church-front.mjs` adds two separate leaded lancets, layered stone
+surrounds, frontal buttresses, a shared sill above plain brick, and a shouldered
+clock stage with Roman numerals and a brick pediment. The nave and site placement
+are retained. See `Research/church/README.md` and `aerial.html?view=church-front`.
+`node Browser/test-church-front.mjs` checks exposed glazing/dial/pediment,
+registration, material isolation, buttress collisions and front-path clearance.
+The browser source and generated aerial model are updated; Unity and Blender
+exports are unchanged.
+
+Validation: the church geometry check, front/oblique renders, actual compiled
+clock-front page, binary-format check and compiled/source comparison pass.
+The rebuilt binary is 10,296,180 bytes; both paths submit 677,876 triangles and
+2,667 draw calls in the standard compiled test. The full browser suite stops at
+the existing `test-annexe-photo-placement.mjs:14` road snapshot assertion
+(also recorded in `Browser/artifacts/grindley-suite.txt`). Running the remaining
+checks separately passes except the existing admin north service-road clearance
+failure at `test-historic-roads.mjs:74`, previously recorded in
+`Browser/artifacts/landing-suite-failure.txt`. These road sources were already
+modified before the church refinement and were not changed for this work.
 
 With the local server running, open `http://127.0.0.1:1829/aerial.html` to replay the ending directly. Tests cover all five exits, low-frame-rate duration, replay/reset, the retained result background, actual roofs and open rear gaps, and building/mast framing in landscape and portrait. The Unity build is unchanged.
 
@@ -476,3 +577,26 @@ Unity and Blender exports are unchanged.
 Added the supplied Jodrell and Irby / Ashley mural photographs, plus the Tarvin, Carden and second Jodrell views cropped from the marked composite. Originals and crop provenance are retained in `Research/annexe-photos/` and `Research/irby-ashley/`. The photo build script produces the gallery WebP files and the building catalogue assigns them to their existing ward groups.
 
 Validation: `node Browser/test-building-photos.mjs` passes, including source and compiled selection. All five additions loaded in the browser galleries; the three composite crops were visually inspected in their panels. The full browser suite stops at the unrelated road-layout assertion in `Browser/test-annexe-photo-placement.mjs:14` ("Only the yellow-circled rear roads are removed; the loop stays fixed"). No model geometry or Unity/Blender exports changed.
+
+Added the two supplied Grindley Ward photographs (bridge/canal mural and interior steps) to the shared 1829 · Acton / Grindley gallery, bringing it to six images. Unedited originals are retained in `Research/grindley/`; the photo build script generates both gallery WebP assets. `node Browser/test-building-photos.mjs` passes, and both additions were checked in the browser gallery at their original 689 × 918 dimensions. The full browser suite still stops at the road-layout assertion in `Browser/test-annexe-photo-placement.mjs:14` noted above. No model geometry or Unity/Blender exports changed.
+
+
+The Asylum escape room signs now use the 1829 Locations ward groups: Acton
+at the centre, Hampton / Ince in the west wing and Barton / Caldy / Ebnal in
+the east wing. The central sign identifies Grindley as the basement ward.
+Wing groups follow `Research/location-navigation/README.md`; individual room
+and floor assignments are not supplied, so the signs retain the grouped names.
+This is a browser sign-text change in `Browser/dist/game.mjs`; layout data and
+Unity/Blender exports were not changed by it. Live WebGL checks show the signs
+without page errors (`Browser/artifacts/ward-labels-*.png`). The game checks
+pass; `npm test` stops at the existing annexe photo-placement road snapshot
+mismatch, recorded in `Browser/artifacts/ward-labels-suite.txt`.
+
+
+The successful escape popup includes an **Explore the asylum** link to
+`aerial.html`, styled with the main page’s square-cornered secondary button
+outline, uppercase lettering and matching action height. It appears only for victory and is hidden when the shared dialog
+shows pause or defeat. Desktop and mobile popup layouts and visibility were
+checked in WebGL (`Browser/artifacts/result-explore-*.png`). Game checks pass;
+the full suite still stops at the existing annexe photo-placement road snapshot
+mismatch (`Browser/artifacts/result-explore-suite.txt`).
