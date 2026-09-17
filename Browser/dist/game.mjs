@@ -4,7 +4,7 @@ import {path,walkable,visible,nearExit} from './core.mjs';
 import {buildArchitecture} from './architecture.mjs';
 import {createEscapeCutscene} from './escape-cutscene.mjs';
 import {createEscapeExterior,loadEscapeFrontage} from './escape-exterior.mjs';
-import {bindPlanterToggle} from './planter-layer.mjs';
+import {bindTreeToggle} from './tree-layer.mjs';
 import {sampleLanding} from './aerial-controls.mjs';
 import {createArrivalCutscene} from './arrival-cutscene.mjs';
 import {FLOOR_HEIGHT,makeFloors,nearStair,changeFloor,routeBetweenFloors} from './floors.mjs';
@@ -166,7 +166,7 @@ async function init(){
   enemies=[['Sylvia',8,9],['Security',32,23],['Deva asylum ghost',20,21]].map(([name,x,z],type)=>({name,type,floor:0,spawn:{x:x*2.5,z:z*2.5,floor:0},x:x*2.5,z:z*2.5,mesh:enemyModel(type),path:[],memory:0,rethink:0,route:0,target:null}));
   escapeExterior=createEscapeExterior(THREE,innerWidth/innerHeight);
   canvas.addEventListener('webglcontextrestored',escapeExterior.invalidateShadows);
-  bindPlanterToggle(escapeExterior,document);
+  bindTreeToggle(escapeExterior,document);
   await loadEscapeFrontage(THREE,escapeExterior);
   exterior=escapeExterior;
   if(renderer.shadowMap){renderer.shadowMap.enabled=true;renderer.shadowMap.type=THREE.PCFSoftShadowMap;}

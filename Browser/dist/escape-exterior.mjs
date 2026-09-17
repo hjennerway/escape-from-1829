@@ -1,9 +1,12 @@
 import {matchEstateGrass} from './estate-grass.mjs';
 import {photoDetailPrimitives} from './photo-detail-primitives.mjs';
+import {refineFrontInsideCorners} from './front-inside-corners.mjs';
+import {addCentralBack} from './central-back.mjs';
 import {wingWallGeometry,addWingRoofJunction} from './wing-roof-junctions.mjs';
 // Aerial interpretation of the user's outlined 1829 estate photograph.
 // Front road/reception is +Z; the corrected mast position is rear-left (-X, -Z).
-import {createPlanterLayer} from './planter-layer.mjs';
+import {createTreeLayer} from './tree-layer.mjs';
+import {addFrontLawnTrees} from './front-lawn-trees.mjs';
 import {westFrontPhotoProfile} from './west-front-photo-detail.mjs';
 import {westCourtPhotoProfile} from './west-court-photo-detail.mjs';
 import {createChapel,ESCAPE_CHAPEL} from './chapel.mjs';
@@ -27,6 +30,7 @@ import {placeWard} from './ward-placement.mjs';
 import {createLaundry} from './laundry.mjs';
 import {createGaragesMortuary} from './garages-mortuary.mjs';
 import {createGreenhouses} from './greenhouses.mjs';
+import {createOuthouse} from './outhouse.mjs';
 import {createMainAdminBuilding} from './main-admin-building.mjs';
 import {eastPhotoProfile,addEastPhotoDetails} from './east-photo-detail.mjs';
 import {courtyardPhotoProfile} from './courtyard-photo-detail.mjs';
@@ -53,7 +57,8 @@ export function createEscapeExterior(THREE,aspect){
   scene.fog=new THREE.FogExp2(0xb5c7cd,.0019);
   const camera=new THREE.PerspectiveCamera(46,aspect,.5,2000);
   const model=new THREE.Group();model.name='1829 estate · aerial reconstruction';scene.add(model);
-  const planters=createPlanterLayer(THREE,model);
+  const trees=createTreeLayer(THREE,model);
+  addFrontLawnTrees(THREE,trees);
   scene.add(new THREE.HemisphereLight(0xe4eff2,0x59634a,2));
   const sun=new THREE.DirectionalLight(0xffe2b7,2.8);sun.position.set(145,120,50);sun.target.position.set(230,0,-10);scene.add(sun.target);sun.castShadow=true;
   sun.shadow.mapSize.set(4096,4096);Object.assign(sun.shadow.camera,{left:-360,right:360,top:300,bottom:-300,near:1,far:850});sun.shadow.bias=-.0003;sun.shadow.normalBias=.25;scene.add(sun);
@@ -242,7 +247,7 @@ export function createEscapeExterior(THREE,aspect){
   // The pediment and columned red doorway identify the central 1829 entrance.
   mesh(worldUV(new THREE.BoxGeometry(14.2,11.5,12.8),1.7),photoBrick,0,8.85,13.2,true);
   box(white,0,1.55,13.2,14.2,3.1,12.8);
-  hipRoof(0,13.2,14.2,12.8,14.65,2.9);
+  addCentralBack(THREE,{model,mesh,worldUV,brick:photoBrick,white,roof,material,details,box});
   for(const y of [3.15,7.1,10.7,14.5])box(white,0,y,19.68,14.5,.24,.32);
   // Reception's fine sash glazing is supplied by the img19 detail module.
   const triangle=new THREE.BufferGeometry();triangle.setAttribute('position',new THREE.Float32BufferAttribute([-7.5,0,0,7.5,0,0,0,3.1,0],3));triangle.computeVertexNormals();mesh(triangle,cream,0,14.65,19.72);
@@ -269,6 +274,7 @@ export function createEscapeExterior(THREE,aspect){
   block(squareX,squareZ,squareWidth,squareDepth,14.3).name='East garden pavilion';
   for(const y of [4.08,8.8])box(white,squareX,y,squareZ,squareWidth+.14,.16,squareDepth+.14);
   addEastPhotoDetails(THREE,{model,box,mesh,worldUV,white,brick:photoBrick,roof,steel,material,hipRoof,details});
+  refineFrontInsideCorners(THREE,{model,batches,box,mesh,worldUV,white,brick:photoBrick,roof,material,details});
   // Open rear approaches connect the gaps between the arms to the back road.
   for(const x of [-23,23]){box(gravel,x,.18,-20,32,.1,45);box(grass,x<0?-17:x-6,.26,-9,9,.1,11);}
   for(const [x,w] of [[-64,17],[69+OUTER_SHIFT,7]]){box(gravel,x,.17,12,w,.12,62);box(path,x,.16,44,w,.12,2);}
@@ -280,26 +286,26 @@ export function createEscapeExterior(THREE,aspect){
   // Broadleaf crowns cast shadows across the front lawn and site edges.
   const bark=material(0x5a4e3d),leaves=[material(0x43583a),material(0x566944),material(0x657448)];
   const crowns=leaves.map(mat=>({mat,items:[]}));
-  function tree(x,z,size=1,parent=model,canopy=crowns){parent.add(mesh(new THREE.CylinderGeometry(.18*size,.3*size,4.5*size,6),bark,x,2.25*size,z));
-    for(let i=0;i<5;i++)canopy[i%3].items.push({x:x+(random()-.5)*3*size,y:(4.5+random()*2)*size,z:z+(random()-.5)*3*size,s:(1.7+random())*size});}
+  function tree(x,z,size=1){trees.add(mesh(new THREE.CylinderGeometry(.18*size,.3*size,4.5*size,6),bark,x,2.25*size,z));
+    for(let i=0;i<5;i++)crowns[i%3].items.push({x:x+(random()-.5)*3*size,y:(4.5+random()*2)*size,z:z+(random()-.5)*3*size,s:(1.7+random())*size});}
   // Former parking rows become garden borders, with gravel access alongside.
   const soil=material(0x65513c);
-  const planterCrowns=leaves.map(mat=>({mat,items:[]}));
-  function plantedBed(x,z,w,d,parent=model,canopy=crowns){
-    const bedBox=parent===model?box:(mat,x,y,z,w,h,d)=>parent.add(mesh(new THREE.BoxGeometry(w,h,d),mat,x,y,z));
-    bedBox(stone,x,.25,z,w+.25,.18,d+.25);
-    bedBox(soil,x,.36,z,w,.12,d);
+  const shrubs=leaves.map(mat=>({mat,items:[]}));
+  function plantedBed(x,z,w,d){
+    box(stone,x,.25,z,w+.25,.18,d+.25);
+    box(soil,x,.36,z,w,.12,d);
     for(let offset=-d/2+1;offset<d/2;offset+=1.6){
-      canopy[1].items.push({x:x-.65,y:.85,z:z+offset,s:.7});
-      canopy[2].items.push({x:x+.65,y:.7,z:z+offset+.25,s:.55});
+      shrubs[1].items.push({x:x-.65,y:.85,z:z+offset,s:.7});
+      shrubs[2].items.push({x:x+.65,y:.7,z:z+offset+.25,s:.55});
     }
   }
-  for(const x of [-72,69+OUTER_SHIFT])for(const z of (x<0?[-23,-10,29]:[29])){
-    // The east corner shrub bed belongs to the optional planter layer.
-    const parent=x>0?planters:model,canopy=x>0?planterCrowns:crowns;
-    plantedBed(x,z,3.2,8,parent,canopy);
-    tree(x,z,.65,parent,canopy);
+  for(const z of [-23,-10,29]){
+    plantedBed(-72,z,3.2,8);
+    tree(-72,z,.65);
   }
+  // The removed east corner planter included a small tree. Preserve the
+  // random sequence so the remaining estate trees keep their shapes.
+  for(let n=0;n<20;n++)random();
   // Rear garden: small orchard groups separated by open walking routes.
   for(const x of [-42,-28,-14,14,28,42]){
     plantedBed(x,-64,6,5);
@@ -338,6 +344,7 @@ export function createEscapeExterior(THREE,aspect){
   const laundry=createLaundry(THREE,{brick:photoBrick,roof,worldUV,material,adminCorridor});model.add(laundry);
   const garagesMortuary=createGaragesMortuary(THREE,{brick:photoBrick,roof,worldUV,material});model.add(garagesMortuary);
   const greenhouses=createGreenhouses(THREE,{brick:photoBrick,roof,worldUV,material});model.add(greenhouses);
+  const outhouse=createOuthouse(THREE,{worldUV,material});model.add(outhouse);
   const chapel=createChapel(THREE,{brick,roof,stone,dark,worldUV});model.add(chapel);
   const estateChimney=createEstateChimney(THREE,{brick,material});model.add(estateChimney);
   const waterTower=createWaterTower(THREE,{brick,roof,dark,worldUV});model.add(waterTower);
@@ -363,10 +370,10 @@ export function createEscapeExterior(THREE,aspect){
   const dummy=new THREE.Object3D();
   for(const [mat,items] of batches){const batch=new THREE.InstancedMesh(new THREE.BoxGeometry(1,1,1),mat,items.length);batch.receiveShadow=true;
     items.forEach((b,i)=>{dummy.position.set(b.x,b.y,b.z);dummy.scale.set(b.w,b.h,b.d);dummy.rotation.set(0,b.rotation,0);dummy.updateMatrix();batch.setMatrixAt(i,dummy.matrix);});model.add(batch);}
-  for(const [parent,canopy] of [[model,crowns],[planters,planterCrowns]])for(const {mat,items} of canopy){const batch=new THREE.InstancedMesh(new THREE.IcosahedronGeometry(1,1),mat,items.length);batch.castShadow=true;batch.receiveShadow=true;
+  for(const [parent,canopy] of [[trees,crowns],[model,shrubs]])for(const {mat,items} of canopy){if(!items.length)continue;const batch=new THREE.InstancedMesh(new THREE.IcosahedronGeometry(1,1),mat,items.length);batch.castShadow=true;batch.receiveShadow=true;
     items.forEach((b,i)=>{dummy.position.set(b.x,b.y,b.z);dummy.scale.set(b.s,b.s*.85,b.s);dummy.rotation.set(0,i,0);dummy.updateMatrix();batch.setMatrixAt(i,dummy.matrix);});parent.add(batch);}
   const lawnMaterials=new Set();
   model.traverse(object=>{for(const mat of (Array.isArray(object.material)?object.material:[object.material]))if(mat?.userData.estateGrass)lawnMaterials.add(mat);});
   for(const mat of lawnMaterials)matchEstateGrass(mat,grass);
-  return {scene,camera,model,terrain,legacyAccess,mast,chapel,waterTower,estateChimney,annexe,newHospital:annexe,churtonWard,uptonFrithOscroft,irbyAshley,graftonEdge,haleWard,estatesDepartment,farndonWard,witbyWard,mainAdmin,adminCorridor,laundry,garagesMortuary,greenhouses,planters,invalidateShadows};
+  return {scene,camera,model,terrain,legacyAccess,mast,chapel,waterTower,estateChimney,annexe,newHospital:annexe,churtonWard,uptonFrithOscroft,irbyAshley,graftonEdge,haleWard,estatesDepartment,farndonWard,witbyWard,mainAdmin,adminCorridor,laundry,garagesMortuary,greenhouses,outhouse,trees,invalidateShadows};
 }

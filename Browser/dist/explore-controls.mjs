@@ -71,6 +71,8 @@ export function exteriorObstacles(THREE,model){
       obstacles.push(obstacle);
     }
   }
-  model.traverseVisible(o=>{if(!o.isMesh)return;if(o.isInstancedMesh){for(let i=0;i<o.count;i++){o.getMatrixAt(i,matrix);world.multiplyMatrices(o.matrixWorld,matrix);add(o.geometry,world,o.userData.orientedCollision);}}else add(o.geometry,o.matrixWorld,o.userData.orientedCollision,o.userData.collisionFootprint);});
+  model.traverseVisible(o=>{if(!o.isMesh)return;if(o.isInstancedMesh){for(let i=0;i<o.count;i++){o.getMatrixAt(i,matrix);world.multiplyMatrices(o.matrixWorld,matrix);add(o.geometry,world,o.userData.orientedCollision);}}else if(o.userData.collisionFootprints){
+    for(const footprint of o.userData.collisionFootprints)add(o.geometry,o.matrixWorld,false,footprint);
+  }else add(o.geometry,o.matrixWorld,o.userData.orientedCollision,o.userData.collisionFootprint);});
   return obstacles;
 }

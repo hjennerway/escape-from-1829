@@ -1,4 +1,4 @@
-import {bindPlanterToggle} from './planter-layer.mjs';
+import {bindTreeToggle} from './tree-layer.mjs';
 import {CHURTON_VIEWS} from './churton-ward.mjs';
 import {UPTON_VIEWS} from './upton-frith-oscroft.mjs';
 import {IRBY_ASHLEY_VIEWS} from './irby-ashley.mjs';
@@ -10,6 +10,7 @@ import {FARNDON_CORRIDOR_WALK,WARD_CORRIDOR_WALK} from './farndon-corridor.mjs';
 import {WITBY_VIEWS} from './witby-ward.mjs';
 import {GARAGE_MORTUARY_VIEWS} from './garages-mortuary.mjs';
 import {GREENHOUSE_VIEWS} from './greenhouses.mjs';
+import {OUTHOUSE_VIEWS} from './outhouse.mjs';
 import {LAUNDRY_VIEWS} from './laundry.mjs';
 import {MAIN_ADMIN_VIEWS} from './main-admin-building.mjs';
 import {createAerialLayouts,bindLayoutToggles} from './aerial-layouts.mjs';
@@ -39,6 +40,9 @@ import {EAST_FORWARD_END_PHOTO_VIEW} from './east-forward-end-photo-detail.mjs';
 import {WEST_FORWARD_END_PHOTO_VIEW} from './west-forward-end-photo-detail.mjs';
 import {WEST_LAWN_PHOTO_VIEW} from './west-lawn-photo-detail.mjs';
 import {ENTRANCE_WEST_PHOTO_VIEW} from './entrance-west-photo-detail.mjs';
+import {FRONT_CORNER_VIEWS} from './front-inside-corners.mjs';
+import {CENTRAL_BACK_VIEWS} from './central-back.mjs';
+import {FRONT_LAWN_TREE_VIEW} from './front-lawn-trees.mjs';
 const canvas=document.getElementById('game'),hint=document.getElementById('lookHint'),look=document.getElementById('look');
 try{
   const renderer=new THREE.WebGLRenderer({canvas,antialias:true});
@@ -55,8 +59,11 @@ try{
   const walker=createWalker(exterior.camera,obstacles);
   function refreshObstacles(){walker.setObstacles(exteriorObstacles(THREE,exterior.model));}
   bindLayoutToggles(layouts,document.getElementById('layoutControls'),refreshObstacles);
-  bindPlanterToggle(exterior,document,refreshObstacles);
+  bindTreeToggle(exterior,document,refreshObstacles);
   const view=new URLSearchParams(location.search).get('view');
+  if(CENTRAL_BACK_VIEWS[view])walker.setView(CENTRAL_BACK_VIEWS['central-back-photo']);
+  if(view==='front-lawn-trees')walker.setView(FRONT_LAWN_TREE_VIEW);
+  if(FRONT_CORNER_VIEWS[view])walker.setView(FRONT_CORNER_VIEWS[view==='front-corners'?'front-corner-2':view]);
   if(view==='front')walker.setView({position:[0,1.8,40],target:[0,9,19.8]});
   if(view==='tower'||WATER_TOWER_VIEWS[view])walker.setView(WATER_TOWER_VIEWS[view==='tower'?'tower-2':view]);
   if(TOWER_BUILDING_VIEWS[view]){
@@ -90,6 +97,7 @@ try{
   if(ANNEXE_VIEWS[annexeView])walker.setView(ANNEXE_WARD_WALKS[annexeView]??ANNEXE_VIEWS[['annexe','annexe-plan','annexe-site'].includes(annexeView)?'annexe-ground':annexeView]);
   const churtonView=new URLSearchParams(location.search).get('view');
   if(ESTATES_VIEWS[churtonView])walker.setView(ESTATES_VIEWS['estates-photo']);
+  if(OUTHOUSE_VIEWS[churtonView])walker.setView(OUTHOUSE_VIEWS[/^outhouse-[123]$/.test(churtonView)?churtonView:'outhouse-3']);
   if(GREENHOUSE_VIEWS[churtonView])walker.setView(GREENHOUSE_VIEWS['greenhouses-photo']);
   if(GARAGE_MORTUARY_VIEWS[churtonView])walker.setView(GARAGE_MORTUARY_VIEWS[churtonView.startsWith('mortuary')?'mortuary-ground':churtonView==='garages-2'?'garages-2':'garages-1']);
   if(LAUNDRY_VIEWS[churtonView])walker.setView(LAUNDRY_VIEWS['laundry-photo']);

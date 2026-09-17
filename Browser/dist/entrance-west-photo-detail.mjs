@@ -38,26 +38,21 @@ export function addEntranceWestPhotoDetails(THREE,{model,box,mesh,worldUV,white,
   // Five single sashes per upper floor in the recessed stretch.
   const columns=[-21,-17.85,-14.7,-11.55,-8.4];
   for(const y of [5.45,9.75])for(const x of columns)opening('entrance-west-recess',x,y,p.wallZ+.07,1.22,2.85,0,x===-8.4);
-  for(const x of [-30.45,-24.25])for(const y of [5.6,10])opening('entrance-west-projection',x,y,p.projectionZ+.07,1.25,2.9,0,x===-24.25&&y===5.6);
+  for(const x of [-28.1,-24.25])for(const y of [5.6,10])opening('entrance-west-projection',x,y,p.projectionZ+.07,1.25,2.9,0,y===5.6);
   // Broad central glazing with narrow sidelights and pale upright mullions.
   for(const y of [5.7,10]){
-    opening('entrance-west-central-glazing',-27.35,y,p.projectionZ+.07,1.4,2.9);
-    for(const dx of [-1.03,1.03])opening('entrance-west-sidelight',-27.35+dx,y,p.projectionZ+.07,.35,2.9);
-    for(const dx of [-.83,.83])box(trim,-27.35+dx,y,p.projectionZ+.22,.14,3.1,.2);
+    opening('entrance-west-central-glazing',-26.15,y,p.projectionZ+.07,.98,2.9);
+    for(const dx of [-.8,.8])opening('entrance-west-sidelight',-26.15+dx,y,p.projectionZ+.07,.3,2.9);
+    for(const dx of [-.61,.61])box(trim,-26.15+dx,y,p.projectionZ+.22,.12,3.1,.2);
   }
-  box(panel,-27.35,3.85,p.projectionZ+.17,2.36,.65,.13);
-  box(trim,-27.35,3.5,p.projectionZ+.25,2.65,.14,.3);
+  box(panel,-26.15,3.85,p.projectionZ+.17,1.88,.65,.13);
+  box(trim,-26.15,3.5,p.projectionZ+.25,2.1,.14,.3);
   opening('entrance-west-step-return',p.step+.07,5.45,18.5,1,2.8,Math.PI/2);
   opening('entrance-west-step-return',p.step+.07,1.45,18.5,.7,2.05,Math.PI/2);
   // The white lower level contains two doors, not a third generic sash row.
-  for(const x of [-30.45,-24.25])opening('entrance-west-lower',x,1.45,p.projectionZ+.07,1.25,2.1);
+  for(const x of [-28.1,-24.25])opening('entrance-west-lower',x,1.45,p.projectionZ+.07,1.25,2.1);
   for(const x of [-21,-17.85,-14.7,-8.4])opening('entrance-west-lower',x,1.45,p.wallZ+.07,1.22,2.1);
-  door(-27.35,p.projectionZ+.08,0,-.28);
-  for(const dx of [-1.12,1.12]){
-    box(glass,-27.35+dx,1.7,p.projectionZ+.12,.42,2.1,.08);
-    for(const side of [-1,1])box(frame,-27.35+dx+side*.24,1.7,p.projectionZ+.18,.065,2.2,.08);
-    box(frame,-27.35+dx,2.24,p.projectionZ+.2,.48,.07,.08);
-  }
+  door(-26.15,p.projectionZ+.08,0,-.28);
   door(-11.55,p.wallZ+.08,0,-.28);
   // Fine glazing on the Reception front ties the photographed right edge to
   // the new elevation; the red door, columns and heraldry retain their shape.

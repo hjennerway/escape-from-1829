@@ -19,7 +19,7 @@ export function addWestLawnPhotoDetails(THREE,{model,box,mesh,worldUV,white,bric
   }
   for(const y of [1.9,6.3]){
     for(const z of [42,38.6,31.7,30.1,27.8])opening('west-lawn-main',-28.94,y,z);
-    for(const z of [25.4,23.3,21.2])opening('west-lawn-link',-31.94,y,z,.95,2.2);
+    for(const z of [25.4,23.3])opening('west-lawn-link',-31.94,y,z,.95,2.2);
   }
   // Flat three-window bay, pale plinth and its own shallow slate cap.
   mesh(worldUV(new THREE.BoxGeometry(1.5,8.95,4.7),1.7),brick,-28.25,4.475,35.5,true).name='West lawn three-window bay';

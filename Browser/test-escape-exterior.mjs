@@ -1,5 +1,6 @@
 import {WEST_FORWARD_END_PHOTO_VIEW} from './dist/west-forward-end-photo-detail.mjs';
-import {exteriorObstacles} from './dist/explore-controls.mjs';
+import {exteriorObstacles,obstacleContains} from './dist/explore-controls.mjs';
+import {CENTRAL_BACK_VIEWS} from './dist/central-back.mjs';
 // Real Three.js geometry/camera checks, without a WebGL context.
 import assert from 'node:assert/strict';
 import * as THREE from './dist/vendor/three.module.js';
@@ -18,6 +19,40 @@ assert(Math.abs(towerBounds.max.y-17.75*2.2)<.01,'tower including finial must be
 assert(towerBounds.min.x>136&&towerBounds.max.z<-45,'tower must stand outside the right campus block at the map-corrected rear depth');
 assert(exterior.mast.children.length>150,'mast must contain real lattice geometry');
 const dragons=exterior.model.getObjectByName('Blue dragons and central coat of arms');
+// Rear-corner refinement: test the visible planes and the actual collision
+// outline, plus the fixed front apex and the formerly transparent gable.
+{
+  const roof=exterior.model.getObjectByName('Reception longitudinal ridge and rear hips');
+  const gable=exterior.model.getObjectByName('Reception solid pediment backing');
+  const gableBounds=new THREE.Box3().setFromObject(gable);
+  assert(Math.abs(gableBounds.max.y-17.75)<1e-5,'front apex height is unchanged');
+  assert(gableBounds.max.z-gableBounds.min.z>.13,'pediment has solid depth');
+  const r=new THREE.Raycaster();
+  for(const x of [-3,0,3]){
+    r.set(new THREE.Vector3(x,15.8,19),new THREE.Vector3(0,0,1));
+    assert.equal(r.intersectObject(exterior.model,true)[0]?.object,gable,'the rear of the apex must be opaque');
+  }
+  for(const x of [-6,-3,0,3,6])for(const z of [11,13.2,16,19.4]){
+    r.set(new THREE.Vector3(x,25,z),new THREE.Vector3(0,-1,0));
+    const hit=r.intersectObject(exterior.model,true)[0];
+    assert.equal(hit.object,roof,'all three roof planes meet without holes or overlaps');
+    assert(hit.face.normal.y>0&&hit.point.y<=17.75,'slate faces upward below the existing front apex');
+    if(x===0&&z>=13.2)assert(Math.abs(hit.point.y-(17.55+(z-13.2)*.2/6.36))<1e-5,'ridge runs from the rear hip junction to the front apex');
+  }
+  for(const o of exterior.model.userData.centralBackOpenings.filter(o=>o.face.endsWith('cant'))){
+    for(const u of [-.26,.26])for(const v of [-.27,.27]){
+      r.set(new THREE.Vector3(o.x+Math.cos(o.rotation)*o.w*u+o.nx*.4,o.y+o.h*v,o.z-Math.sin(o.rotation)*o.w*u+o.nz*.4),new THREE.Vector3(-o.nx,0,-o.nz));
+      assert.equal(r.intersectObject(exterior.model,true)[0]?.object.material.color.getHex(),0x78989f,'all bevel panes are exposed ahead of the actual walls');
+    }
+  }
+  const obstacles=exteriorObstacles(THREE,exterior.model);
+  for(const side of [-1,1]){
+    assert(!obstacles.some(o=>obstacleContains(o,side*8.1,5.6,0)),'the outside of the bevel is open');
+    assert(obstacles.some(o=>obstacleContains(o,side*7.7,6,0)),'the inside of the bevel is solid');
+  }
+  const [x,,z]=CENTRAL_BACK_VIEWS['central-back-photo'].position;
+  assert(!obstacles.some(o=>obstacleContains(o,x,z)),'the marked photo view starts in open court');
+}
 assert.equal(dragons.geometry.attributes.uv.count,3,'heraldic photo must map onto the triangular pediment');
 const originalBay=exterior.model.getObjectByName('East curved bay');
 const squareBay=exterior.model.getObjectByName('East garden pavilion');
@@ -64,7 +99,7 @@ for(const side of [-1,1]){
 }
 // Previously generic windows on both marked front sections now expose the
 // same three-light sash glazing and fine frame material as the photo windows.
-for(const x of [-32.9,42.5]){
+for(const x of [-35.6,42.5]){
   const o=exterior.model.userData.eastPhotoOpenings.find(o=>o.face==='1829-range-sash'&&Math.abs(o.x-x)<.01&&Math.abs(o.y-10.6)<.01&&o.z>17);
   assert(o,'remaining front opening uses the shared sash schedule');
   for(const [offset,color] of [[0,0x78989f],[-o.w/6,0xd3dcd8],[o.w/6,0xd3dcd8]]){
@@ -156,12 +191,13 @@ for(const side of [-1,1]){
   const bounds=new THREE.Box3().setFromObject(mainCap);
   assert(bounds.max.y-bounds.min.y>2,'main entrance roof must have a visible pitch');
   for(const x of [8,12,16,20,24,28,31])for(const z of [7.2,8,10,12,14,16]){
+    if(x===31&&z===16)continue; // The new open inside corner cuts into this former roof.
     ray.set(new THREE.Vector3(side*x,30,z),new THREE.Vector3(0,-1,0));
     const hit=ray.intersectObject(exterior.model,true)[0];
     assert(hit.object.material.map,'roof footprint must expose textured slate rather than the solid trim slab');
     assert(hit.point.y>13.03,'no entrance roof edge may sink below the cornice');
   }
-  for(const x of [24,27,30])for(const z of [17.6,18.4,19.2]){
+  for(const x of [24,27,28.7])for(const z of [17.6,18.4,19.2]){
     ray.set(new THREE.Vector3(side*x,30,z),new THREE.Vector3(0,-1,0));
     const hit=ray.intersectObject(exterior.model,true)[0];
     assert.equal(hit.object.name,side<0?'Entrance west projection slate roof':'Entrance east projection slate roof');

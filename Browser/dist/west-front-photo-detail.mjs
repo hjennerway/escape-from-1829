@@ -65,10 +65,11 @@ export function addWestFrontPhotoDetails(THREE,{model,box,mesh,worldUV,white,bri
   // One spreading garden tree leaves the upper windows and stairs visible.
   const bark=material(0x625342),leaf=material(0x4d713d),lawn=material(0x667b49);
   box(lawn,-49,.32,35,7,.1,14);
-  mesh(new THREE.CylinderGeometry(.12,.2,4.5,8),bark,-48.5,2.25,36,true);
+  const trees=model.getObjectByName('Trees');
+  trees.add(mesh(new THREE.CylinderGeometry(.12,.2,4.5,8),bark,-48.5,2.25,36,true));
   for(let i=0;i<12;i++){
     const a=i*2.4,crown=mesh(new THREE.IcosahedronGeometry(1,1),leaf,-48.5+Math.sin(a)*1.8,4.7+(i%3)*.35,36+Math.cos(a)*2,true);
-    crown.scale.set(1.35,.65,1.4);
+    crown.scale.set(1.35,.65,1.4);trees.add(crown);
   }
   model.userData.westFrontPhotoOpenings=model.userData.eastPhotoOpenings.slice(start);
 }

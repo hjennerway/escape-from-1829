@@ -5,7 +5,7 @@ export const REDESMERE_GARDEN_VIEW=Object.freeze({position:[93,1.8,29.5],target:
 
 export function addRedesmereGardenDetails(THREE,{model,box,mesh,worldUV,white,brick,roof,material,hipRoof,sash,door,rod,iron}){
   const start=model.userData.eastPhotoOpenings.length;
-  const trim=material(0xd8ddd5),timber=material(0xa4a18c),darkWood=material(0x4c4438),soil=material(0x554e38),gravel=material(0x99917b);
+  const trim=material(0xd8ddd5),timber=material(0xa4a18c),darkWood=material(0x4c4438),gravel=material(0x99917b);
   // One widened pavilion face replaces the front pavilion plus the separate
   // rear tower. All side openings share the same wall plane.
   hipRoof(65.5,15,8.5,20,14.53,2.55).name='Garden pavilion slate roof';
@@ -72,21 +72,4 @@ export function addRedesmereGardenDetails(THREE,{model,box,mesh,worldUV,white,br
   const lawn=material(0x667752);
   box(lawn,89.7,.28,32,20,.1,14);
   box(lawn,69.5,.28,36,14,.1,12);
-  // Timber beds stay outside the passage at x=76 and the front cross-walk.
-  const greens=[material(0x4b6544),material(0x647948)],flower=material(0x7973a0);
-  for(const [x,z,w,d] of [[80.4,26.8,2.8,3.6],[87,26,3.1,2.4],[73,33.5,3.3,2.3],[69,37,3,2.5]]){
-    const bed=new THREE.Group();bed.name='Redesmere garden timber bed';model.getObjectByName('Garden planters').add(bed);
-    function bedMesh(...args){const m=mesh(...args);bed.add(m);return m;}
-    const base=mesh(new THREE.BoxGeometry(w,.7,d),soil,x,.25,z);bed.attach(base);
-    for(let level=0;level<3;level++){
-      for(const dx of [-w/2,w/2]){const plank=mesh(new THREE.BoxGeometry(.12,.2,d+.14),timber,x+dx,.3+level*.22,z,true);bed.attach(plank);}
-      for(const dz of [-d/2,d/2]){const plank=mesh(new THREE.BoxGeometry(w+.12,.2,.12),timber,x,.3+level*.22,z+dz,true);bed.attach(plank);}
-    }
-    for(let i=0;i<17;i++){
-      const px=x+Math.sin(i*2.4)*w*.35,pz=z+Math.cos(i*2.4)*d*.35,h=(x<82?.55:.2)+(i%5)*(x<82?.18:.07);
-      bedMesh(new THREE.CylinderGeometry(.025,.025,.2+h,5),greens[i%2],px,.6+h/2,pz);
-      for(let n=0;n<5;n++){const a=i*2.4+n*2.1;const leaf=bedMesh(new THREE.IcosahedronGeometry(.12,1),greens[i%2],px+Math.sin(a)*.12,.62+h*n/5,pz+Math.cos(a)*.12);leaf.scale.set(.7,.35,1.9);leaf.rotation.set(Math.sin(a)*.5,a,Math.cos(a)*.65);}
-      if(i%4===0)bedMesh(new THREE.IcosahedronGeometry(.07,1),flower,px,.72+h,pz);
-    }
-  }
 }

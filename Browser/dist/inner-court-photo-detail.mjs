@@ -109,12 +109,13 @@ export function addInnerCourtPhotoDetails(THREE,{model,box,mesh,worldUV,white,br
       mesh(new THREE.ConeGeometry(.42,.25,4),stone,x,1.46,-33.7).rotation.y=Math.PI/4;
     }
     // A birch at the left edge frames the facade without hiding its windows.
+    const trees=model.getObjectByName('Trees');
     const trunk=mesh(new THREE.CylinderGeometry(.17,.3,7.7,8),bark,26,4.55,-43,true);
-    trunk.rotation.z=-.05;
+    trunk.rotation.z=-.05;trees.add(trunk);
     for(let i=0;i<22;i++){
       const a=i*2.4,y=5.5+(i%6)*.62;
       const crown=mesh(new THREE.IcosahedronGeometry(1,1),leaves[i%3],25.8+Math.sin(a)*1.55,y,-43+Math.cos(a)*1.45,true);
-      crown.scale.set(.85,1.45,.85);
+      crown.scale.set(.85,1.45,.85);trees.add(crown);
     }
     for(let i=0;i<10;i++){
       const shrub=mesh(new THREE.IcosahedronGeometry(.52,1),leaves[i%3],18.2,.95,-32+i*.68,true);

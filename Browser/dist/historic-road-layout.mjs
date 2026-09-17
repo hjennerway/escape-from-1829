@@ -17,7 +17,7 @@ function bezier(start,segments,steps=16){
 }
 export const HISTORIC_ROADS_SOURCE=Object.freeze({
  clean:'Research/historic-roads/layout.png',annotations:'Research/historic-roads/layout.-annotated.png',
- revision:'2026-09-16 yellow Parsons Lane retrace; blue northern detour removed',
+ revision:'2026-09-17 red-circled chapel cross-road and tower T-junction removed',
  parsonsRetrace:'Research/historic-roads/parsons-yellow-retrace.png',
  annexeFrontRoads:'Research/annexe-placement/front-roads-annotated.png',
  annexeRearRemoval:'Research/annexe-frontage-adjustment/remove-rear-roads.png',annexeSweepRevision:'Research/annexe-frontage-adjustment/narrow-entrance.png',
@@ -82,11 +82,7 @@ export const HISTORIC_ROAD_TRACES=Object.freeze([
   [[202,-183],[215,-166],[225,-155]],[[239,-140],[256,-121],northJunction]
  ])},
  {name:'North west ward approach',width:5,points:bezier([-91,-166],[[[-76,-166],[-51,-165],[-39,-165]],[[-29,-165],[-26,-166],[-23,-173]]])},
- // Hale's spine and cross range replace the inferred junction at [116,-95].
- // Stop the two approaches clear of its walls, including their rounded kerbs.
- {name:'Churton upper cross-road',width:6,points:bezier([-74,-99],[[[-57,-99],[23,-98],[87,-96]],[[98,-96],[103,-95],[107,-95]]])},
- {name:'Churton eastern link',width:5,points:[[116,-76],[116,-52]]},
- {name:'Tower western approach',width:5,points:[[88,-51.74],[113,-52],[135,-52]]},
+ // The red-circled chapel cross-road and tower T-junction are now lawn.
 ]);
 export const HISTORIC_ROADS=Object.freeze(HISTORIC_ROAD_TRACES.flatMap(clearSharedLanes));
 // The yellow-marked footpath is gravel; vehicular approaches remain asphalt.

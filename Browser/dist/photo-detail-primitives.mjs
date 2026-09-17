@@ -30,6 +30,7 @@ export function photoDetailPrimitives(THREE,{model,box,mesh,white,steel,material
     const p=new THREE.Vector3(...a),q=new THREE.Vector3(...b),v=q.clone().sub(p);
     const m=mesh(new THREE.CylinderGeometry(r,r,v.length(),5),mat,...p.clone().add(q).multiplyScalar(.5).toArray());
     m.quaternion.setFromUnitVectors(new THREE.Vector3(0,1,0),v.normalize());
+    return m;
   }
   return {frame,glass,recess,blue,iron,stone,sash,door,rod};
 }

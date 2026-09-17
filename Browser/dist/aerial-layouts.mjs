@@ -52,7 +52,7 @@ export function bindLayoutToggles(layouts,root,onChange=()=>{}){
   refresh();
 }
 
-// Ignore hidden road children and planter preferences when framing a layout.
+// Ignore hidden road children and trees when framing a layout.
 export function visibleLayoutBounds(THREE,group){
   const bounds=new THREE.Box3();group.updateWorldMatrix(true,true);
   group.traverseVisible(object=>{if(object.isMesh)bounds.union(new THREE.Box3().setFromObject(object));});

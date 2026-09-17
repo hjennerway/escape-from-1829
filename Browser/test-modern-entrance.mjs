@@ -33,9 +33,37 @@ for(const x of [-40,-20,20,40,60]){
 }
 for(const [x,z] of [[0,29],[0,39],[8,32],[-8,32]])assert.equal(surfaceAt(x,z).object.name,'Semicircular Reception paved forecourt');
 assert.notEqual(surfaceAt(12,39).object.name,'Semicircular Reception paved forecourt','The court must have a rounded edge rather than rectangular corners');
+// Follow both complete new routes at player width, checking actual rendered
+// ground rather than only their control points or mesh bounding boxes.
+const forecourt=exterior.model.getObjectByName('Semicircular Reception paved forecourt');
+function pavedRoute(points){
+ for(let i=1;i<points.length;i++){
+  const [ax,az]=points[i-1],[bx,bz]=points[i],length=Math.hypot(bx-ax,bz-az),steps=Math.ceil(length/.2);
+  for(let n=0;n<=steps;n++){
+   const x=ax+(bx-ax)*n/steps,z=az+(bz-az)*n/steps;
+   assert(!obs.some(o=>obstacleContains(o,x,z)),`Path must clear buildings, stair foundations and trees at ${x}, ${z}`);
+   for(const offset of [-.35,0,.35]){
+    ray.set(new THREE.Vector3(x-(bz-az)/length*offset,.5,z+(bx-ax)/length*offset),new THREE.Vector3(0,-1,0));
+    const hit=ray.intersectObjects(surfaces,false)[0];
+    assert(hit?.object.material===forecourt.material,`Continuous matching paving at ${x}, ${z}`);
+   }
+  }
+ }
+}
+for(const side of [-1,1]){
+ pavedRoute([[0,29],[24,29],[26.5,32.2],[26.5,38.8],[28,38.8],[28,46.6]].map(([x,z])=>[side*x,z]));
+ const branch=exterior.model.getObjectByName((side<0?'West':'East')+' sweeping forecourt branch');
+ assert.equal(branch.material,forecourt.material,'Both branches use the exact forecourt material');
+ for(const z of [27.7,28.8,30.2])assert(!/kerb/.test(surfaceAt(side*Math.sqrt(169-(z-27.4)**2),z).object.name),'No kerb crosses the new branch mouth');
+}
+pavedRoute([[28,46.6],[44,46.6],[44,22]]);
+pavedRoute([[44,29.5],[48.1,29.5]]);
+pavedRoute([[-28,46.6],[-28,47.7],[-46.2,47.7]]);
+assert.equal(surfaceAt(48.7,29.5).object.material.color.getHex(),0xb7b9ac,'East branch reaches the existing Redesmere courtyard paving');
 for(const historic of [true,false])for(const modern of [true,false]){
  layouts.setVisible('historic',historic);layouts.setVisible('modern',modern);
  assert.equal(entrance.visible,historic||modern,'The sweeping driveway is visible whenever either layout is enabled');
  assert.equal(entrance.getObjectByName('Sweeping entrance asphalt').material.color.getHex(),0x555b5c);
+ assert.equal(forecourt.parent.visible,historic||modern,'The new entrance walks are shared by both layouts');
 }
-console.log('PASS: wall translated without rotation, outer gravel replaced by grass, fixed-lane curved junction, upward kerbs and clear gate-to-door access.');
+console.log('PASS: front boundary, curved driveway, shared sweeping forecourt branches, open kerb mouths and continuous clear routes to Redesmere and the west fire stairs.');

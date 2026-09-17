@@ -32,11 +32,11 @@ export function addEastForwardEndPhotoDetails(THREE,{model,box,mesh,worldUV,bric
     const shrub=mesh(new THREE.IcosahedronGeometry(1,1),leaf,x,.73+Math.sin(i*1.7)*.07,z,true);
     shrub.scale.set(.85,.52,.62);shrub.rotation.y=i*1.9;
   }
-  const treeX=59,treeZ=46.3;
-  mesh(new THREE.CylinderGeometry(.045,.085,3.8,7),bark,treeX,1.9,treeZ,true).name='East front verge young tree';
+  const treeX=59,treeZ=46.3,trees=model.getObjectByName('Trees');
+  const trunk=mesh(new THREE.CylinderGeometry(.045,.085,3.8,7),bark,treeX,1.9,treeZ,true);trunk.name='East front verge young tree';trees.add(trunk);
   for(let i=0;i<7;i++){
     const angle=i*2.4,y=1.7+i*.25;
-    rod([treeX,y,treeZ],[treeX+Math.sin(angle)*(.75+i*.04),y+.9,treeZ+Math.cos(angle)*.7],.018,bark);
+    trees.add(rod([treeX,y,treeZ],[treeX+Math.sin(angle)*(.75+i*.04),y+.9,treeZ+Math.cos(angle)*.7],.018,bark));
   }
   model.userData.eastForwardEndPhotoOpenings=model.userData.eastPhotoOpenings.slice(start);
 }

@@ -20,7 +20,7 @@ assert.deepEqual(layouts.historic.children,[exterior.irbyAshley,exterior.grafton
 assert.equal(exterior.chapel.parent,layouts.shared);assert.equal(exterior.waterTower.parent,layouts.shared);assert.equal(exterior.churtonWard.parent,layouts.shared);
 const frontage=layouts.shared.getObjectByName('Blue dragons and central coat of arms');assert(frontage,'1829 must remain in the common estate');
 assert(layouts.shared.getObjectByName('Redesmere canted bay'),'Redesmere must remain in the common estate');
-assert.equal(exterior.planters.visible,false,'Grouping must preserve the separate planter preference');
+assert.equal(exterior.trees.visible,true,'Grouping must preserve the visible tree layer');
 const visible=o=>{for(;o;o=o.parent)if(!o.visible)return false;return true};
 for(const historic of [true,false])for(const modern of [true,false]){
  layouts.setVisible('historic',historic);layouts.setVisible('modern',modern);
