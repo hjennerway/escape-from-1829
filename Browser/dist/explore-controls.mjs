@@ -1,3 +1,5 @@
+import {WILLOWS} from './willows.mjs';
+
 // Ground-level exterior navigation, shared by the page and headless checks.
 // Distance to the actual rotated footprint, rather than its enclosing rectangle.
 export function obstacleContains(b,x,z,padding=.4){
@@ -37,7 +39,7 @@ export function createWalker(camera,obstacles=[]){
   const keys=new Set(),defaultFov=camera.fov;let yaw=0,pitch=0,index=createObstacleIndex(obstacles);
   camera.rotation.order='YXZ';
   function reset(){keys.clear();yaw=0;pitch=0;camera.position.set(0,1.8,40);camera.rotation.set(0,0,0);camera.fov=defaultFov;camera.updateProjectionMatrix();}
-  function clear(x,z){return x>-180&&x<580&&z>-245&&z<210&&!index.contains(x,z);}
+  function clear(x,z){return x>-180&&x<Math.max(580,WILLOWS.x+60)&&z>-245&&z<Math.max(210,WILLOWS.z+60)&&!index.contains(x,z);}
   reset();
   return {keys,reset,
     setObstacles(obstacles){index=createObstacleIndex(obstacles);},

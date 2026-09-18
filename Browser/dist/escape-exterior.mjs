@@ -36,6 +36,7 @@ import {createLaundry} from './laundry.mjs';
 import {createGaragesMortuary} from './garages-mortuary.mjs';
 import {createGreenhouses} from './greenhouses.mjs';
 import {createOuthouse} from './outhouse.mjs';
+import {createWillows} from './willows.mjs';
 import {createMainAdminBuilding} from './main-admin-building.mjs';
 import {eastPhotoProfile,addEastPhotoDetails} from './east-photo-detail.mjs';
 import {courtyardPhotoProfile} from './courtyard-photo-detail.mjs';
@@ -360,6 +361,7 @@ export function createEscapeExterior(THREE,aspect){
   const garagesMortuary=createGaragesMortuary(THREE,{brick:photoBrick,roof,worldUV,material});model.add(garagesMortuary);
   const greenhouses=createGreenhouses(THREE,{brick:photoBrick,roof,worldUV,material});model.add(greenhouses);
   const outhouse=createOuthouse(THREE,{worldUV,material});model.add(outhouse);
+  const willows=createWillows(THREE,{worldUV,material});model.add(willows);
   const chapel=createChapel(THREE,{brick,roof,stone,dark,worldUV});model.add(chapel);
   const churchGrounds=createChurchGrounds(THREE);model.add(churchGrounds);
   const estateChimney=createEstateChimney(THREE,{brick,material});model.add(estateChimney);
@@ -390,5 +392,5 @@ export function createEscapeExterior(THREE,aspect){
   const lawnMaterials=new Set();
   model.traverse(object=>{for(const mat of (Array.isArray(object.material)?object.material:[object.material]))if(mat?.userData.estateGrass)lawnMaterials.add(mat);});
   for(const mat of lawnMaterials)matchEstateGrass(mat,grass);
-  return {scene,camera,model,terrain,legacyAccess,mast,chapel,churchGrounds,waterTower,estateChimney,annexe,newHospital:annexe,churtonWard,uptonFrithOscroft,irbyAshley,graftonEdge,haleWard,bowlingGreen,estatesDepartment,farndonWard,witbyWard,mainAdmin,adminCorridor,laundry,garagesMortuary,greenhouses,outhouse,trees,invalidateShadows};
+  return {scene,camera,model,terrain,legacyAccess,mast,chapel,churchGrounds,waterTower,estateChimney,annexe,newHospital:annexe,churtonWard,uptonFrithOscroft,irbyAshley,graftonEdge,haleWard,bowlingGreen,estatesDepartment,farndonWard,witbyWard,mainAdmin,adminCorridor,laundry,garagesMortuary,greenhouses,outhouse,willows,trees,invalidateShadows};
 }

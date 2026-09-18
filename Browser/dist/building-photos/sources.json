@@ -1,4 +1,10 @@
 {
+  "willows": {
+    "source": "Research/willows/img1.jpg",
+    "width": 675,
+    "height": 978,
+    "bytes": 122004
+  },
   "1829-front": {
     "source": "Browser/dist/exterior/1829front.webp",
     "width": 333,

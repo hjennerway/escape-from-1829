@@ -3,6 +3,7 @@ import {placeWardViews} from './ward-placement.mjs';
 import {TOWER_RANGES} from './tower-buildings.mjs';
 import {MAIN_KITCHEN_VIEWS,MAIN_KITCHEN_WALK} from './main-kitchen.mjs';
 import {WEST_REFINEMENT_VIEWS} from './west-refinement.mjs';
+import {WILLOWS_VIEWS,WILLOWS_WALK} from './willows.mjs';
 
 // Named wards use the existing exterior views of their supplied building areas.
 // Keep distinct URLs so selecting one ward highlights only that menu entry.
@@ -40,6 +41,7 @@ const storesRanges=TOWER_RANGES.filter(range=>['South cross-gabled stores','Long
 const storesBounds=[Math.min(...storesRanges.map(r=>r.rect[0])),Math.min(...storesRanges.map(r=>r.rect[1])),Math.max(...storesRanges.map(r=>r.rect[2])),Math.max(...storesRanges.map(r=>r.rect[3]))];
 const storesTarget=[(storesBounds[0]+storesBounds[2])/2,4.5,(storesBounds[1]+storesBounds[3])/2];
 export const LOCATION_VIEWS=Object.freeze({
+  ...WILLOWS_VIEWS,
   ...WEST_REFINEMENT_VIEWS,
   stores:{position:[storesBounds[2]+44,48,storesBounds[3]+51],target:storesTarget,fov:48},
   ...MAIN_KITCHEN_VIEWS,
@@ -49,6 +51,7 @@ export const LOCATION_VIEWS=Object.freeze({
   saughall:rearAerial
 });
 export const LOCATION_WALKS=Object.freeze({
+  ...Object.fromEntries(Object.keys(WILLOWS_VIEWS).map(key=>[key,WILLOWS_WALK])),
   ...Object.fromEntries(Object.entries(WEST_REFINEMENT_VIEWS).filter(([key])=>key!=='west-refinement')),
   stores:{position:[storesBounds[2]+13,1.8,storesBounds[3]+9],target:[storesBounds[2],4,storesTarget[2]],fov:60},
   ...Object.fromEntries(Object.keys(MAIN_KITCHEN_VIEWS).map(key=>[key,MAIN_KITCHEN_WALK])),

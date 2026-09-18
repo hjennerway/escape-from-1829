@@ -34,7 +34,7 @@ function appendGeometry(positions,geometry,matrix,bounds){
 export function createBuildingSelection(THREE,exterior){
  const {layouts}=exterior,roots=new Map(),data=new Map();
  const add=(root,id)=>{if(root)roots.set(root,id);};
- for(const [key,id] of Object.entries({chapel:'church',waterTower:'tower',estateChimney:'estate-chimney',annexe:'annexe',churtonWard:'churton',uptonFrithOscroft:'upton',irbyAshley:'irby-ashley',graftonEdge:'grafton-edge',haleWard:'hale',estatesDepartment:'estates',farndonWard:'farndon',witbyWard:'witby',mainAdmin:'main-admin',adminCorridor:'admin-corridor',laundry:'laundry',greenhouses:'greenhouses',outhouse:'outhouse',towerBuildings:'tower-buildings'}))add(exterior[key],id);
+ for(const [key,id] of Object.entries({chapel:'church',waterTower:'tower',estateChimney:'estate-chimney',annexe:'annexe',churtonWard:'churton',uptonFrithOscroft:'upton',irbyAshley:'irby-ashley',graftonEdge:'grafton-edge',haleWard:'hale',estatesDepartment:'estates',farndonWard:'farndon',witbyWard:'witby',mainAdmin:'main-admin',adminCorridor:'admin-corridor',laundry:'laundry',greenhouses:'greenhouses',outhouse:'outhouse',willows:'willows',towerBuildings:'tower-buildings'}))add(exterior[key],id);
  for(const [id,root] of Object.entries(exterior.annexe.userData.wards))add(root,id);
  add(exterior.garagesMortuary.userData.garages,'garages');add(exterior.garagesMortuary.userData.mortuary,'mortuary');
  add(exterior.model.getObjectByName('Main kitchen'),'main-kitchen');

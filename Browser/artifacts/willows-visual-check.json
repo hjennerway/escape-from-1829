@@ -1,0 +1,102 @@
+{
+  "results": [
+    {
+      "mode": "procedural",
+      "label": "historic",
+      "visible": true,
+      "position": [
+        1294.861651924719,
+        0,
+        387.7038962782487
+      ],
+      "triangles": 4016,
+      "calls": 18
+    },
+    {
+      "mode": "procedural",
+      "label": "modern",
+      "visible": true,
+      "position": [
+        1294.861651924719,
+        0,
+        387.7038962782487
+      ],
+      "triangles": 4016,
+      "calls": 18
+    },
+    {
+      "mode": "procedural",
+      "label": "both",
+      "visible": true,
+      "position": [
+        1294.861651924719,
+        0,
+        387.7038962782487
+      ],
+      "triangles": 4016,
+      "calls": 18
+    },
+    {
+      "mode": "procedural",
+      "label": "neither",
+      "visible": false,
+      "position": [
+        1294.861651924719,
+        0,
+        387.7038962782487
+      ],
+      "triangles": 2,
+      "calls": 1
+    },
+    {
+      "mode": "compiled",
+      "label": "historic",
+      "visible": true,
+      "position": [
+        1294.861651924719,
+        0,
+        387.7038962782487
+      ],
+      "triangles": 4016,
+      "calls": 18
+    },
+    {
+      "mode": "compiled",
+      "label": "modern",
+      "visible": true,
+      "position": [
+        1294.861651924719,
+        0,
+        387.7038962782487
+      ],
+      "triangles": 4016,
+      "calls": 18
+    },
+    {
+      "mode": "compiled",
+      "label": "both",
+      "visible": true,
+      "position": [
+        1294.861651924719,
+        0,
+        387.7038962782487
+      ],
+      "triangles": 4016,
+      "calls": 18
+    },
+    {
+      "mode": "compiled",
+      "label": "neither",
+      "visible": false,
+      "position": [
+        1294.861651924719,
+        0,
+        387.7038962782487
+      ],
+      "triangles": 2,
+      "calls": 1
+    }
+  ],
+  "errors": [],
+  "walkingDistance": 0.49999999999994327
+}

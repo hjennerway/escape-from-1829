@@ -1,3 +1,5 @@
+import {WILLOWS} from './willows.mjs';
+
 export function sampleLanding(seconds,{aspect=16/9,reducedMotion=false}={}){
   const radius=245*Math.max(1,Math.min(3.4,1.8/aspect));
   const angle=.35+(reducedMotion?0:seconds*.025);
@@ -16,17 +18,17 @@ export function createAerialControls(camera){
   function sync(point=[12,5,-12]){
     target={x:point[0],y:point[1],z:point[2]};
     const dx=camera.position.x-target.x,dy=camera.position.y-target.y,dz=camera.position.z-target.z;
-    radius=Math.max(45,Math.min(2400,Math.hypot(dx,dy,dz)));angle=Math.atan2(dx,dz);
+    radius=Math.max(45,Math.min(8000,Math.hypot(dx,dy,dz)));angle=Math.atan2(dx,dz);
     tilt=Math.max(.2,Math.min(1.2,Math.acos(Math.max(-1,Math.min(1,dy/radius)))));
   }
   function pan(right,forward){
-    target.x=Math.max(-230,Math.min(580,target.x+Math.cos(angle)*right-Math.sin(angle)*forward));
-    target.z=Math.max(-230,Math.min(420,target.z-Math.sin(angle)*right-Math.cos(angle)*forward));apply();
+    target.x=Math.max(-230,Math.min(Math.max(580,WILLOWS.x+80),target.x+Math.cos(angle)*right-Math.sin(angle)*forward));
+    target.z=Math.max(-230,Math.min(Math.max(420,WILLOWS.z+80),target.z-Math.sin(angle)*right-Math.cos(angle)*forward));apply();
   }
   return {keys,sync,
     orbit(dx,dy){angle-=dx*.004;tilt=Math.max(.2,Math.min(1.2,tilt+dy*.003));apply();},
     panPixels(dx,dy){pan(-dx*radius*.0015,dy*radius*.0015);},
-    zoom(delta){radius=Math.max(45,Math.min(2400,radius*Math.exp(Math.max(-1,Math.min(1,delta*.001)))));apply();},
+    zoom(delta){radius=Math.max(45,Math.min(8000,radius*Math.exp(Math.max(-1,Math.min(1,delta*.001)))));apply();},
     update(dt){const x=Number(keys.has('KeyD'))-Number(keys.has('KeyA')),z=Number(keys.has('KeyW'))-Number(keys.has('KeyS')),n=Math.hypot(x,z);if(!n)return;
       const distance=Math.min(.1,Math.max(0,dt))*radius*.3*(keys.has('ShiftLeft')||keys.has('ShiftRight')?2:1);pan(x/n*distance,z/n*distance);},
     get target(){return {...target};}

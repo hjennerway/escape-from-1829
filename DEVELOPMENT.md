@@ -8,6 +8,36 @@ Paths and commands are relative to the repository root unless stated otherwise.
 See [AGENTS.md](AGENTS.md) for coding-agent guidance and the
 [model build guide](Browser/MODEL-BUILD.md) for optional precompiled assets.
 
+## The Willows (September 18)
+
+The lower half of the supplied composite photo defines a rectangular brick
+outbuilding with a weathered red pitched roof, pale lintels and three open bays.
+Its footprint centre uses the exact **The Willows** Point in `1829 (9).kml`,
+projected by the existing Earth registration to scene (1294.862, 387.704).
+The building is a single shared object in Historic and Modern. Locations,
+building selection, the photo gallery, close aerial/photo/plan presets and
+Explore walking all include it. Pan and walking bounds now reach this pin;
+layout fitting includes it. The existing terrain already covers the location.
+
+The 24 x 6.4-unit footprint, heights and east-west orientation are estimates
+from the photograph, since the KML supplies no footprint or heading. Actual
+wall openings permit walking inside; the brick walls supply collisions.
+Dark inner linings represent the unlit bays outside the estate's fixed shadow
+map, retaining its current resolution and extent. See
+[reference and modelling notes](Research/willows/README.md).
+
+Validation: the complete `npm test` browser suite passes, including the new
+`test-willows.mjs` checks for the exact KML Point, 960 roof samples, open-bay
+access, wall collisions, distant panning, portrait/landscape fitting and all
+four layout states. The binary round-trip check and rebuilt compiled-scene
+suite pass. `Browser/artifacts/check-willows.mjs` checks the actual source and
+compiled pages, Historic/Modern/both/neither, photo and plan views, mobile
+framing and walking, without browser errors. Reviewed screenshots and logs
+use the `Browser/artifacts/willows-` prefix. The browser sources and local
+compiled aerial asset are updated; Unity and Blender sources/exports are
+unchanged. The local npm wrapper was unavailable; the suite ran through the
+installed Node.js npm CLI.
+
 ## Asylum escape footprint (September 17)
 
 The Countess Mini Roundabout junction is centred on the circle in Modern,

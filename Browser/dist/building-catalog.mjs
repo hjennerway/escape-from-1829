@@ -29,6 +29,7 @@ export const BUILDING_CATALOG=Object.freeze([
  {id:'larkton-jodrell',name:'Annexe · Larkton / Jodrell Ward',photos:[photo('annexe-outer','Annexe · outer west elevation'),photo('jodrell-mural','Jodrell Ward · radio telescope mural'),photo('jodrell-mural-stairwell','Jodrell Ward · radio telescope mural, stairwell view')]},
  {id:'greenhouses',name:'Greenhouses',photos:[photo('greenhouses','Greenhouses and gardeners’ buildings')]},
  {id:'outhouse',name:'Outhouse',photos:[1,2,3].map(n=>photo(`outhouse-${n}`,`Outhouse · view ${n}`))},
+ {id:'willows',name:'The Willows',locations:['willows','willows-photo','willows-plan'],photos:[photo('willows','The Willows · lower photograph supplies the building reference')]},
  {id:'estates',name:'Estates Department',photos:[photo('estates','Estates Department · service court')]},
  {id:'stores',name:'Stores',photos:[photo('stores','Stores · frontage and access ramp')]},
  {id:'grafton-edge',name:'Grafton / Edge Ward',photos:[photo('grafton','Grafton / Edge · veranda')]},
