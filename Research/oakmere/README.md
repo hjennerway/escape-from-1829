@@ -95,3 +95,28 @@ paired positions, checking equal roof heights and an exposed slate surface.
 The check rejects the previous cross-gable. The preview script is
 `Browser/artifacts/annexe-spine-preview.mjs`. This correction changes the
 shared browser model; Unity and Blender exports are unchanged.
+
+## Marked window correction (18 September 2026)
+
+The later [window annotation](window-correction.png) supersedes the window
+counts and blocked upper openings described above. Only sash assemblies change:
+
+- The red-circled west low hall link has three windows, replacing four.
+- The two pale upper openings in the blue circle use the same glazed, divided
+  sashes as their neighbours, at their existing positions and dimensions.
+- The green-circled west face of the central rear spine has six windows per
+  floor, replacing thirteen. The yellow-arrow east face has six per floor;
+  its actual opening positions supply the corrected horizontal spacing and
+  widths. The green face retains its existing sill/head heights and masonry.
+
+The opposite elevation, roofs, walls, bands, pipes, low rooms and adjoining
+buildings are unchanged. `test-oakmere-windows.mjs` checks the requested counts,
+matching columns, exposed glazing and a pre-edit fingerprint of 21,625
+protected primitives. Only individual sash parts in the three marked areas
+are excluded from that fingerprint; masonry in those areas is still checked.
+The older whole-annexe and west-refinement snapshots are rebased after this
+independent preservation check. Before/after source views and the compiled
+views are captured by `Browser/artifacts/oakmere-windows-preview.mjs`.
+
+This updates the shared browser source and generated aerial asset. Unity and
+Blender exports are unchanged.

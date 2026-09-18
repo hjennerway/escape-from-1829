@@ -1,0 +1,77 @@
+npm notice run test
+npm notice run node test.mjs && node test-opening-wall.mjs && node test-estate-periods.mjs && node test-game.mjs && node test-interior-lights.mjs && node test-east-forward-end.mjs && node test-front-inside-corners.mjs && node test-redesmere-garden.mjs && node test-laundry.mjs && node test-escape-exterior.mjs && node test-west-refinement.mjs && node test-water-tower.mjs && node test-church-front.mjs && node test-tower-buildings.mjs && node test-pharmacy.mjs && node test-irby-ashley.mjs && node test-irby-roads.mjs && node test-grafton-edge.mjs && node test-hale-ward.mjs && node test-estates.mjs && node test-farndon.mjs && node test-ward-placement.mjs && node test-ward-corridors.mjs && node test-explore.mjs && node test-annexe.mjs && node test-annexe-os-refinement.mjs && node test-annexe-photo-placement.mjs && node test-annexe-outer-front.mjs && node test-oakmere.mjs && node test-oakmere-west.mjs && node test-oakmere-windows.mjs && node test-annexe-wards.mjs && node test-churton.mjs && node test-upton.mjs && node test-garages-mortuary.mjs && node test-greenhouses.mjs && node test-main-admin.mjs && node test-main-kitchen.mjs && node test-main-admin-refine2.mjs && node test-aerial-controls.mjs && node test-device-location.mjs && node test-aerial-layouts.mjs && node test-kml-imports.mjs && node test-modern-entrance.mjs && node test-modern-car-park.mjs && node test-parsons-retrace.mjs && node test-historic-roads.mjs && node test-annexe-access.mjs && node test-performance.mjs && node test-aerial-performance.mjs && node test-building-detail.mjs && node test-outhouse.mjs && node test-willows.mjs && node test-building-photos.mjs
+WEST GARDEN: reachable in 16 grid steps
+EAST GARDEN: reachable in 16 grid steps
+WEST COURT: reachable in 20 grid steps
+EAST COURT: reachable in 20 grid steps
+MAIN PORTICO: reachable in 2 grid steps
+PASS: five exits, all rooms connected, wall collision and sight obstruction.
+PASS: mirrored reception stair approaches, canonical/browser parity.
+PASS: both stairs up/down, all upper rooms reachable, cross-floor pursuer routes, downstairs-only exits.
+PASS: 1829 east end is closed at every storey and up to the roof; wall and collision disappear with the 1849 wing.
+PASS: all 13 periods, all 22 date rows, original 1829 ranges and tower, later wings, selection, collisions, tree preference, camera and batch visibility.
+PASS: three-second arrival at low FPS, one-second hold, fast approach with 1.5-second fade out and half-second reveal, reception handoff, frozen input/NPCs/timer, clean restart, reduced motion and portrait framing.
+PASS: real game init, both stair interactions, held-key latch, floor groups/HUD, ghost follows, cross-floor capture isolation, restart.
+PASS: 3D escape after all five exits, ten-second pan at low FPS, frozen gameplay, retained result background, skip, retry, defeat exclusion, reduced motion.
+PASS: fixed interior light budget across every floor cell, nearby brightness, floor height/colour, smooth selection boundary and empty floors.
+PASS: img1 end/side glazing exposed, continuous brick base, slender stacks, open forecourt route and north-facing camera.
+PASS: marked footprint, open roofs and foundations, diagonal collisions, clear door route, mirrored sash exposure, photo cameras and no bollards.
+PASS: one widened coplanar pavilion face, no separate rear tower, exposed glazing, attached courtyard details and clear passage.
+PASS: Laundry hipped roof, flat brick link, continuous contacts, exposed glazing, garden access and Historic-only visibility/collisions.
+PASS: real estate geometry, upward-facing roofs, W-shaped openings to the rear, rear-left lattice mast, building/mast framing throughout landscape and portrait pans.
+PASS: front staircase has four approach treads, four rising treads per branch, and connected forward returns to the doorway landing.
+PASS: west reference cameras, exposed glazing, flat and canted bays, continuous roof, blank end walls and walking access.
+PASS: tower side registration, exposed doors and blind slits, shallow scars, finite geometry, photo framing and isolated materials.
+PASS: exposed paired church lancets and clock, brick pediment, fixed registration, buttress collisions and clear front walk.
+PASS: Historical ownership, exposed service glazing, upward roofs, three tower abutments, three traced face profiles, continuous corner joins, flat arch junctions, shallow final-third pitches, ridge-aligned dormers with downslope glazing, aligned front walls, retracted central-hall rear, retained front, marked-group translation with fixed chimney clearance, removed northern hall, translated entrance link and ramp, rotated full-span chimney roof and east gable window, extended tower ridge, single green-corner slope, flat red return, paired outward-moved gabled workshops, photo sightlines and walkable court, continuous ramp and retained blue-block exclusion.
+PASS: pharmacy rear glazing and stairs, two ribbed gas cylinders, building clearance, circular collisions, Historic visibility and walking routes around both tanks.
+PASS: shifted rear range, fixed front contact, open courts, roof coverage/normals, exposed sashes, conservatory, octagonal hip, separated bays, window pairs, cleared former footprint, walking clearances and Historic visibility.
+PASS: rear grass, no road beneath Irby/Ashley, flush east-side access and continuous front connection.
+PASS: Grafton placement, unchanged Irby/Ashley, flat rear with one central bay, continuous veranda canopy, bay junction, cleared greenhouse, walking route and independent visibility.
+PASS: Hale/Daresbury/Huxley/Dunham right-angle footprint, two storeys, matching sashes, two red-marked corridor links, continuous roofs, exposed junction windows, open courts, walking access and Historic visibility.
+PASS: Estates clockwise alignment, preserved OS dimensions, stepped wings, open court, roof coverage, exposed glazing, door pair, walking access, selective trace retirement and Historic visibility.
+PASS: corrected Farndon footprint, 587 roof samples, 503 continuous H-ridge samples, single-storey glazing, open garden, walking collisions, replaced corridor marker and Historic visibility.
+PASS: five corrected positions, both fixed anchors, source building geometry, generated corridor geometry, translated footprints, plan/walking cameras and Historic collisions.
+PASS: one straight Main/tower/Farndon gallery, fixed Upton anchor, six current ward contacts, 2814 roof samples, angled collisions, open grass, walking starts and Historic visibility.
+PASS: exterior WASD, normalized diagonals, mouse-relative movement, pitch limits, building collisions, wall sliding, reset and stalled frames.
+PASS: fixed church/Churton/Grafton, retained frontage orientation, aerial plan scale and fixed gameplay roads.
+PASS: annexe OS registration and scale, independent Redesmere alignment, open courts, roofs, arched glazing, bell tower and walking collisions.
+PASS: L-shaped courts, removed galleries, connected angled rear wing and mirrored side bays/stairs.
+PASS: orange, purple and brown OS courtyard picks are free of masonry and roofs.
+{
+  count: 21893,
+  digest: 'b61d2aaf039bfd798fd381984f4bc561aa501cf8e7fc3d529580b779c45e7f02'
+}
+{
+  count: 1705,
+  digest: '071f618a2a5942f0b3a2a7ace1c10f9c71aff4e5ec8906488a01622902cb1f85'
+}
+PASS: larger annexe moves closer to the red line inside the fixed loop, with only yellow rear roads removed; minimum gaps {"loop":5.977067728296,"teardrop":15.411890647777515,"admin":36.00093078883593,"frontLine":47.334048020373274}
+PASS: original and copied paired apex fronts, exposed glazing without duplicate windows, projecting-bay collisions, clear approaches and ward ownership.
+PASS: Oakmere glazing is exposed, the spine has mirrored hipped roof slopes, walking approach and facade collisions work, and details follow Historic visibility.
+PASS: Oakmere west photo face, glazing, roofs, open court, walking and visibility; 21088 original primitives unchanged.
+PASS: six spine windows per floor, three red-link windows, matching blue sashes; 21625 protected primitives unchanged.
+PASS: five ward groups and reference colours, complete range ownership, aerial framing, accessible walking destinations and Historic visibility.
+Churton Ward: six walk starts, wall collisions, rear recesses, exposed openings, slate roofs and single-storey height passed.
+PASS: Upton mirrored OS footprint, fixed church alignment, church clearance, two storeys, exposed sashes, slate roof normals, open recesses, walking access and shared layout visibility.
+PASS: garages and T mortuary, 5143 roof samples, exposed photo openings, joined ridge, road clearance (1.30), walking and Historic layout.
+PASS: three glasshouses, two photo-facing workshops, 4254 roof samples, road junction and clearance, open yard, southern walk and all layout combinations.
+PASS: east photo geometry, marked camera, independent chimney height/location, chamfered bays, open low-wing recess, OS registration, four photo starts, exposed sashes, slate roofs, masonry collision, clear approach and separate corridor.
+PASS: three white four-sided hips, continuous roof coverage, /\/\/\ profile, flush gallery joins, no connector/stores overlap, preserved L-shaped stores, and layout-aware walking collisions.
+PASS: shared corner in both photos, three-sided pitched room, recessed link, retained red block/bay, exposed panes, camera starts, collisions and green exclusion.
+PASS: pinch in/out, two-finger pan, finger handoff, cancellation, capture loss, blur cleanup, coincident/extra fingers, desktop pan.
+Device location: perimeter, exact 100 m cutoff, corners, coordinate alignment, fresh fixes, retries and errors passed.
+PASS: independent Historic/Modern controls, shared buildings, preserved transforms, hidden collisions, fifteen exact custom paths, camera-facing road names, upward road surfaces and full landscape/portrait framing.
+PASS: 39 exact KML trees, duplicate Oak8/Oak16 points, preserved front beeches, shared visibility and collisions; eight-vertex Countess roundabout (336.1 square units), upward roads, walkable centre and continuous Modern-only approach.
+PASS: front boundary, curved driveway, shared sweeping forecourt branches, open kerb mouths and continuous clear routes to Redesmere and the west fire stairs.
+PASS: 62 exact KML vertices, 13607.4 square units, Modern-only car park, concave boundary, thirteen complete trees and collisions cleared only in Modern, bowling lawn tree removed, all oaks retained.
+PASS: retraced Parsons Lane and fork have continuous asphalt, full-width building clearance, an open saved-lane junction, and grass at removed blue sections.
+PASS: source-selected road network, semicircular forecourt, north-pointing teardrop, full-width building clearance, no Parsons/Vivienne overlaps, retained southern continuation, registered OS contours and all layout combinations.
+PASS: red-line avenue, clear central sweep, yellow gravel link, removed rear and side roads, protected lane junctions and teardrop, and Historic visibility.
+PASS: indexed collisions match full scans across all layouts and padded boundaries; idle and distant collision work skipped; refreshed obstacles and cached-shadow invalidation.
+PASS: shared tree buffers, colours and placement; distance detail and hysteresis; 8353 static meshes compiled into 1237 batches; all layout surfaces retained; cached transforms and dynamic labels; 433316 default-view tree triangles.
+PASS: 2730 textured windows; close geometry and all layouts preserved; atlas pixels and rotated placement; viewport/zoom detail with hysteresis; static shadows, structural walls and independent trees.
+PASS: 1066 roof samples, red-circle registration, exposed boarding, gable lighting, road clearance, three camera starts, walkable approach and shared-layout collisions.
+PASS: The Willows exact KML Point, 960 roof samples, hollow bays, walking, distant aerial pan, layout fitting, selection and all four visibility states.
+PASS: precompiled building metadata and roof selection match the source scene.
+PASS: 34 buildings, every named location, bundled photos, roof picking before/after batching and LOD, empty ground and layout visibility (60408 selection triangles).

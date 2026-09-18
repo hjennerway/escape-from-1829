@@ -1,7 +1,7 @@
 import * as THREE from 'three';
 import {GLTFLoader} from 'https://cdn.jsdelivr.net/npm/three@0.160.1/examples/jsm/loaders/GLTFLoader.js';
 import {path,walkable,visible,nearExit} from './core.mjs';
-import {buildArchitecture} from './architecture.mjs';
+import {buildArchitecture,interiorWallSurfaces} from './architecture.mjs';
 import {createInteriorLights} from './interior-lights.mjs';
 import {createEscapeCutscene} from './escape-cutscene.mjs';
 import {createEscapeExterior,loadEscapeFrontage} from './escape-exterior.mjs';
@@ -28,7 +28,7 @@ const material=(color,extra={})=>new THREE.MeshStandardMaterial({color,roughness
 const tmp=new THREE.Vector3();
 function mesh(geometry,mat,p,parent=scene){const m=new THREE.Mesh(geometry,mat);m.position.set(...p);parent.add(m);return m;}
 function box(size,p,mat,parent){return mesh(new THREE.BoxGeometry(...size),mat,p,parent);}
-function lamp(x,z,color=0xd6c296){const floor=floorGroups.length;lights.push({x,z,y:floor*FLOOR_HEIGHT+2.9,floor,color});box([.45,.06,.22],[x,3.28,z],material(0xd4c397,{emissive:color,emissiveIntensity:.6}));}
+function lamp(x,z,color=0xe1dfd1){const floor=floorGroups.length;lights.push({x,z,y:floor*FLOOR_HEIGHT+2.9,floor,color});}
 function lightFloor(){
  for(let z=0;z<layout.height;z++)for(let x=0;x<layout.width;x++){
   if(layout.cells[z*layout.width+x]&&((z===layout.galleryZ&&x%4===0)||(z%4===0&&x%4===0)))lamp(x*layout.cellSize,z*layout.cellSize);
@@ -52,14 +52,17 @@ const heritageSources=[
  {url:'https://basedinchurton.co.uk/wp-content/uploads/2025/05/1855-occupations-of-patients-admitted.jpg',title:'1855 REPORT · ADMISSIONS',credit:'Based in Churton · Cheshire reports'}
 ];
 const localArtSources=[
- {url:'./art/front.png',title:'CHESHIRE LUNATIC ASYLUM · FRONT',credit:'Artwork supplied for the 1829 building'},
- {url:'./art/front2.png',title:'THE ASYLUM · FRONT VIEW',credit:'Artwork supplied for the 1829 building'},
- {url:'./art/front3.png',title:'THE ASYLUM · ARCHIVE VIEW',credit:'Artwork supplied for the 1829 building'},
- {url:'./art/annexe.png',title:'THE ASYLUM · ANNEXE',credit:'Artwork supplied for the 1829 building'},
- {url:'./art/annexe2.png',title:'THE ASYLUM · ANNEXE DETAIL',credit:'Artwork supplied for the 1829 building'},
- {url:'./art/chimney.png',title:'THE ASYLUM · CHIMNEY',credit:'Artwork supplied for the 1829 building'},
- {url:'./art/watertower.png',title:'THE ASYLUM · WATER TOWER',credit:'Artwork supplied for the 1829 building'},
- {url:'./art/cheshire-asylum-1860-discharge-etc.png',title:'CHESHIRE COUNTY ASYLUM · 1860',credit:'Artwork supplied for the 1829 building'}
+ {url:'./art/front.png',title:'CHESHIRE LUNATIC ASYLUM · FRONT'},
+ {url:'./art/front2.png',title:'THE ASYLUM · FRONT VIEW'},
+ {url:'./art/front3.png',title:'THE ASYLUM · ARCHIVE VIEW'},
+ {url:'./art/annexe.png',title:'THE ASYLUM · ANNEXE'},
+ {url:'./art/annexe2.png',title:'THE ASYLUM · ANNEXE DETAIL'},
+ {url:'./art/chimney.png',title:'THE ASYLUM · CHIMNEY'},
+ {url:'./art/watertower.png',title:'THE ASYLUM · WATER TOWER'},
+ {url:'./art/cheshire-asylum-1860-discharge-etc.png',title:'CHESHIRE COUNTY ASYLUM · 1860'},
+ {url:'./art/asylum-winter-moonlight.png',title:'THE ASYLUM · WINTER MOONLIGHT',imageOnly:true,aspect:1376/918},
+ {url:'./art/asylum-service-tunnels.png',title:'THE ASYLUM · SERVICE TUNNELS'},
+ {url:'./art/daily-account-patients-1854.png',title:'DAILY ACCOUNT OF PATIENTS · 1854'}
 ];
 function heritagePhotoTexture(item){
  const c=document.createElement('canvas');c.width=640;c.height=420;const g=c.getContext('2d');
@@ -71,13 +74,12 @@ function heritagePlaqueTexture(){
  const c=document.createElement('canvas');c.width=640;c.height=420;const g=c.getContext('2d');g.fillStyle='#d8c79c';g.fillRect(0,0,640,420);g.strokeStyle='#4d3b25';g.lineWidth=10;g.strokeRect(16,16,608,388);g.fillStyle='#2d261b';g.textAlign='center';g.font='bold 30px Georgia';g.fillText('CHESHIRE ASYLUM · 1854',320,60);g.font='20px Georgia';g.fillText('A statistical note from the annual report',320,92);g.textAlign='left';g.font='bold 22px Arial';g.fillText('Average residents',54,142);g.fillText('Admissions',54,178);g.fillText('Epilepsy',54,214);g.fillText('General paralysis',54,250);g.fillText('Suicidal tendency',54,286);g.fillText('Attempts before admission',54,322);g.fillText('1 Jan 1855',54,358);g.textAlign='right';g.font='bold 22px Arial';g.fillText('255.75',586,142);g.fillText('102',586,178);g.fillText('8',586,214);g.fillText('9',586,250);g.fillText('42',586,286);g.fillText('26',586,322);g.fillText('254 patients · 108 men / 146 women',586,358);g.textAlign='center';g.font='14px Arial';g.fillStyle='#55462e';g.fillText('Historical terms and categories are transcribed from 19th-century reports.',320,388);const texture=new THREE.CanvasTexture(c);texture.colorSpace=THREE.SRGBColorSpace;return texture;
 }
 function heritageWallSurfaces(){
- const surfaces=[];
- for(let z=0;z<layout.height;z++)for(let x=0;x<layout.width;x++)if(layout.cells[z*layout.width+x])for(const [dx,dz] of [[1,0],[-1,0],[0,1],[0,-1]]){
-  const nx=x+dx,nz=z+dz,inside=nx>=0&&nx<layout.width&&nz>=0&&nz<layout.height&&layout.cells[nz*layout.width+nx];if(inside)continue;
-  const px=x*layout.cellSize,pz=z*layout.cellSize,rotation=dx===1?-Math.PI/2:dx===-1?Math.PI/2:dz===1?Math.PI:0;
-  surfaces.push({x:px+dx*layout.cellSize*.5-dx*.07,z:pz+dz*layout.cellSize*.5-dz*.07,rotation});
- }
- return surfaces;
+ const open=(x,z)=>x>=0&&z>=0&&x<layout.width&&z<layout.height&&layout.cells[z*layout.width+x]===1;
+ return interiorWallSurfaces(layout).filter(({cellX:x,cellZ:z,window})=>{
+  // Narrow passage walls carry projecting arch piers that would cover the image.
+  const arch=z<layout.galleryZ-2&&!open(x-1,z)&&!open(x+1,z)&&open(x,z-1)&&open(x,z+1);
+  return !window&&!arch;
+ }).map(({x,z,dx,dz,rotation})=>({x:x-dx*.115,z:z-dz*.115,rotation}));
 }
 function addHeritagePanel(surface,texture,name,width=1.48,height=1.02){
  const group=new THREE.Group();group.position.set(surface.x,1.88,surface.z);group.rotation.y=surface.rotation;scene.add(group);const panel=mesh(new THREE.PlaneGeometry(width,height),new THREE.MeshBasicMaterial({map:texture,side:THREE.DoubleSide}),[0,0,.02],group);panel.name=name;placedWallPanels.push({x:surface.x,z:surface.z,floor:0});return panel;
@@ -86,22 +88,34 @@ function placeHeritagePanels(){
  const surfaces=heritageWallSurfaces();for(let i=0;i<surfaces.length;i+=30){if(i===0)addHeritagePanel(surfaces[i],heritagePlaqueTexture(),'1854 history plaque',1.58,1.04);else{const item=heritageSources[(i/30-1)%heritageSources.length];addHeritagePanel(surfaces[i],heritagePhotoTexture(item),item.title);}}
 }
 function localArtTexture(item){
- const c=document.createElement('canvas');c.width=640;c.height=420;const g=c.getContext('2d');
- const drawFallback=()=>{g.clearRect(0,0,640,420);};
- const texture=new THREE.CanvasTexture(c);texture.colorSpace=THREE.SRGBColorSpace;drawFallback();
- const image=new Image();image.onload=()=>{const w=610,h=350,scale=Math.max(w/image.width,h/image.height),dw=image.width*scale,dh=image.height*scale;g.fillStyle='#152219';g.fillRect(0,0,640,420);g.drawImage(image,(640-dw)/2,(350-dh)/2,dw,dh);g.fillStyle='rgba(12,24,17,.9)';g.fillRect(0,350,640,70);g.fillStyle='#d9f1c7';g.font='bold 18px Arial';g.textAlign='center';g.fillText(item.title,320,378);g.font='14px Arial';g.fillStyle='#b7d5ba';g.fillText(item.credit,320,401);texture.needsUpdate=true;};image.onerror=()=>{};image.src=item.url;return texture;
+ const c=document.createElement('canvas');c.width=640;c.height=item.imageOnly?Math.round(640/item.aspect):420;const g=c.getContext('2d');
+ const texture=new THREE.CanvasTexture(c);texture.colorSpace=THREE.SRGBColorSpace;
+ const image=new Image();image.onload=()=>{
+  if(item.imageOnly){g.drawImage(image,0,0,c.width,c.height);texture.needsUpdate=true;return;}
+  const imageAreaHeight=item.credit?350:375,w=610,h=imageAreaHeight-20;
+  const scale=Math.min(w/image.width,h/image.height),dw=image.width*scale,dh=image.height*scale;
+  g.fillStyle='#152219';g.fillRect(0,0,640,420);g.drawImage(image,(640-dw)/2,(imageAreaHeight-dh)/2,dw,dh);
+  g.fillStyle='rgba(12,24,17,.9)';g.fillRect(0,imageAreaHeight,640,420-imageAreaHeight);
+  g.fillStyle='#d9f1c7';g.font='bold 18px Arial';g.textAlign='center';g.fillText(item.title,320,item.credit?378:403);
+  if(item.credit){g.font='14px Arial';g.fillStyle='#b7d5ba';g.fillText(item.credit,320,401);}
+  texture.needsUpdate=true;
+ };image.onerror=()=>{};image.src=item.url;return texture;
 }
 function addLocalArtPanel(surface,item,floorIndex,index){
  const group=new THREE.Group();group.position.set(surface.x,1.88,surface.z);group.rotation.y=surface.rotation;scene.add(group);
- const panel=mesh(new THREE.PlaneGeometry(1.48,1.02),new THREE.MeshBasicMaterial({map:localArtTexture(item),side:THREE.DoubleSide,transparent:true}),[0,0,.02],group);
+ const panel=mesh(new THREE.PlaneGeometry(1.48,item.imageOnly?1.48/item.aspect:1.02),new THREE.MeshBasicMaterial({map:localArtTexture(item),side:THREE.DoubleSide,transparent:true}),[0,0,.02],group);
  panel.name=item.title+' wall art';placedWallPanels.push({x:surface.x,z:surface.z,floor:floorIndex});
- artPanels.push({panel,x:surface.x,z:surface.z,floor:floorIndex,rotation:surface.rotation,normalX:Math.sin(surface.rotation),normalZ:Math.cos(surface.rotation),title:item.title,credit:item.credit,url:item.url,index});
+ artPanels.push({panel,x:surface.x,z:surface.z,floor:floorIndex,rotation:surface.rotation,normalX:Math.sin(surface.rotation),normalZ:Math.cos(surface.rotation),title:item.title,credit:item.credit,url:item.url,imageOnly:!!item.imageOnly,index});
 }
 function placeLocalArtPanels(floorIndex){
- const surfaces=heritageWallSurfaces();const count=Math.min(12,surfaces.length),step=Math.max(1,Math.floor(surfaces.length/count));
+ // Shuffle once at load; keep every image on each floor and interaction points clear.
+ const markers=[...(layout.stairs||[]),...(layout.exits||[])];
+ const surfaces=heritageWallSurfaces().filter(s=>!markers.some(m=>Math.hypot(m.x*layout.cellSize-s.x,m.z*layout.cellSize-s.z)<3.5));
+ for(let i=surfaces.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[surfaces[i],surfaces[j]]=[surfaces[j],surfaces[i]];}
+ const count=Math.min(12,surfaces.length);
  let placed=0;
- for(let i=0;i<surfaces.length&&placed<count;i++){
-  const surface=surfaces[(i*step+floorIndex*7)%surfaces.length];
+ for(const surface of surfaces){
+  if(placed===count)break;
   if(placedWallPanels.some(p=>p.floor===floorIndex&&Math.hypot(p.x-surface.x,p.z-surface.z)<1.7))continue;
   addLocalArtPanel(surface,localArtSources[(placed+floorIndex*3)%localArtSources.length],floorIndex,placed++);
  }
@@ -112,7 +126,7 @@ function nearbyArt(){
  return best;
 }
 function openArtViewer(art){
- if(artViewing===art)return;artViewing=art;$('artViewerImage').src=art.url;$('artViewerImage').alt=art.title;$('artViewerTitle').textContent=art.title;$('artViewerCredit').textContent=art.credit;$('artViewer').hidden=false;$('interact').hidden=true;
+ if(artViewing===art)return;artViewing=art;$('artViewer').classList.toggle('image-only',art.imageOnly);$('artViewerImage').src=art.url;$('artViewerImage').alt=art.title;$('artViewerTitle').textContent=art.title;$('artViewerCredit').textContent=art.credit||'';$('artViewerCredit').hidden=!art.credit;$('artViewer').hidden=false;$('interact').hidden=true;
 }
 function closeArtViewer(){if(!artViewing)return;artViewing=null;$('artViewer').hidden=true;}
 function enemyModel(type){
@@ -140,9 +154,9 @@ async function init(){
   layout=await fetch('./layout.json').then(r=>{if(!r.ok)throw Error('Level data could not load');return r.json();});
   floors=makeFloors(layout);
   renderer=new THREE.WebGLRenderer({canvas,antialias:true,powerPreference:'high-performance'});renderer.setPixelRatio(Math.min(devicePixelRatio,1.5));renderer.setSize(innerWidth,innerHeight);renderer.outputColorSpace=THREE.SRGBColorSpace;renderer.toneMapping=THREE.ACESFilmicToneMapping;renderer.toneMappingExposure=1.25;
-  scene=new THREE.Scene();scene.background=new THREE.Color(0x101811);scene.fog=new THREE.FogExp2(0x101b14,.024);
+  scene=new THREE.Scene();scene.background=new THREE.Color(0x343731);scene.fog=new THREE.FogExp2(0x343731,.018);
   camera=new THREE.PerspectiveCamera(74,innerWidth/innerHeight,.05,150);camera.rotation.order='YXZ';
-  scene.add(new THREE.HemisphereLight(0xb5c8a0,0x33372a,1.05));
+  scene.add(new THREE.HemisphereLight(0xe1e0d5,0x777066,1.45));
   const groundSnapshot=new Set(scene.children);
   if(layout.geometrySource==='layout')buildArchitecture(THREE,scene,layout);
   else try{
@@ -153,12 +167,6 @@ async function init(){
   for(const stair of layout.stairs||[]){lamp(stair.x*layout.cellSize,(stair.z+1)*layout.cellSize);label(stair.name+'|HOLD E TO GO UP',stair.x*layout.cellSize,2.6,stair.z*layout.cellSize);}
   lightFloor();
   layout.exits.forEach((e,i)=>{lamp(e.x*layout.cellSize,e.z*layout.cellSize,0x77db97);label('EXIT '+(i+1)+'  →|'+e.name,e.x*layout.cellSize,2.8,e.z*layout.cellSize+e.facing*.5);});
-  // Locations identifies ward groups by wing, not individual rooms or storeys.
-  // Grindley is a basement location; the escape game has no playable basement.
-  layout.rooms.forEach(({x,z})=>{
-   const ward=x<layout.spawn.x?'HAMPTON / INCE|WARDS · WEST WING':x>layout.spawn.x?'BARTON / CALDY / EBNAL|WARDS · EAST WING':'ACTON WARD|GRINDLEY WARD · BASEMENT';
-   label(ward,x*layout.cellSize,2.7,z*layout.cellSize);
-  });
   floorGroups.push(groupSince(groundSnapshot,0));
   layout=floors[1];const upperSnapshot=new Set(scene.children);
   buildArchitecture(THREE,scene,layout);placeLocalArtPanels(1);
@@ -167,7 +175,7 @@ async function init(){
   label('UPPER GALLERY|BOTH STAIRS LEAD TO EXITS',layout.spawn.x*layout.cellSize,2.7,layout.galleryZ*layout.cellSize);
   floorGroups.push(groupSince(upperSnapshot,FLOOR_HEIGHT));layout=floors[0];floorGroups[1].visible=false;
   interiorLights=createInteriorLights(THREE,scene,lights);
-  torch=new THREE.SpotLight(0xffe4af,24,30,.50,.55,1.2);torchTarget=new THREE.Object3D();scene.add(torch,torchTarget);torch.target=torchTarget;
+  torch=new THREE.SpotLight(0xfff3da,20,30,.50,.55,1.2);torchTarget=new THREE.Object3D();scene.add(torch,torchTarget);torch.target=torchTarget;
   enemies=layout.enemies.map(({name,x,z,type})=>({name,type,floor:0,spawn:{x:x*layout.cellSize,z:z*layout.cellSize,floor:0},x:x*layout.cellSize,z:z*layout.cellSize,mesh:enemyModel(type),path:[],memory:0,rethink:0,route:0,target:null}));
   escapeExterior=createEscapeExterior(THREE,innerWidth/innerHeight);
   canvas.addEventListener('webglcontextrestored',escapeExterior.invalidateShadows);
@@ -236,7 +244,7 @@ function update(dt){
    drawMap();
   }
   }else if(art){
-   stairHold=0;hold=0;$('interact').querySelector('b').textContent='HOLD E TO VIEW';$('exitName').textContent=art.title;$('exitFill').style.width='0%';if(keys.has('KeyE'))openArtViewer(art);
+   stairHold=0;hold=0;$('interact').querySelector('b').textContent='HOLD E TO VIEW';$('exitName').textContent=art.imageOnly?'':art.title;$('exitFill').style.width='0%';if(keys.has('KeyE'))openArtViewer(art);
   }else{
   stairHold=0;
   if(exit){$('interact').querySelector('b').textContent='HOLD E TO ESCAPE';$('exitName').textContent=exit.name;hold=keys.has('KeyE')&&!stairLatch?hold+dt:0;$('exitFill').style.width=Math.min(100,hold/1.2*100)+'%';if(hold>=1.2)finish(true,exit.name);}else hold=0;

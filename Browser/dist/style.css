@@ -30,3 +30,8 @@
 
 #resultExplore{display:inline-block;margin:8px 8px 0 0;padding:19px 24px;min-width:210px;background:#15201770;border:1px solid #75866a60;border-radius:0;color:#d1d6c4;font:600 11px/1.3 Arial;letter-spacing:1.3px;text-transform:uppercase;text-decoration:none;text-align:left}
 #resultExplore:hover{color:var(--cream)}
+
+#artViewer.image-only .art-viewer-card{padding:0;background:none;border:0;box-shadow:none}
+#artViewer.image-only .art-viewer-card>:not(img){display:none}
+#artViewer.image-only img{max-height:84vh;border:0;background:none}
+#exitName:empty{display:none}

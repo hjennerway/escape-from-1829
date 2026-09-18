@@ -1,49 +1,164 @@
-// Build from the navigation layout so older binary exports cannot seal new routes.
-export function buildArchitecture(THREE, scene, layout) {
-  const batches = new Map();
-  const colors = {Floor:0x30291f,Stone:0x47453b,Plaster:0x666e61,Panel:0x182b28,Brass:0x75521f,Ceiling:0x4a4d46,Darkwood:0x130d08,Glass:0x214a52,Carpet:0x424854};
-  function box(kind,x,y,z,w,h,d) {
-    if(!batches.has(kind)) batches.set(kind,[]);
-    batches.get(kind).push([x,y,z,w,h,d]);
-  }
-  const s=layout.cellSize;
+import {createInteriorMaterials} from './interior-materials.mjs';
+
+const materialCache=new WeakMap();
+const directions=[[1,0],[-1,0],[0,1],[0,-1]];
+export function interiorWallSurfaces(layout){
+  const s=layout.cellSize,surfaces=[];
   const open=(x,z)=>x>=0&&z>=0&&x<layout.width&&z<layout.height&&layout.cells[z*layout.width+x]===1;
-  for(let z=0;z<layout.height;z++)for(let x=0;x<layout.width;x++)if(open(x,z)) {
-    const px=x*s,pz=z*s;
-    const approach=(layout.stairs||[]).some(t=>t.x===x&&z>=t.z&&z<=layout.galleryZ);
-    box(approach?'Carpet':(x+z)%2?'Floor':'Stone',px,-.12,pz,s,.24,s);
-    box('Ceiling',px,3.55,pz,s,.15,s);
-    for(const [dx,dz] of [[1,0],[-1,0],[0,1],[0,-1]]) {
-      if(open(x+dx,z+dz))continue;
-      // Visual stair alcoves lie beyond the navigable ground-floor approach.
-      if(dz===-1&&(layout.stairs||[]).some(t=>t.direction==='UP'&&t.x===x&&t.z===z))continue;
-      const wx=px+dx*s/2,wz=pz+dz*s/2,w=dx?.16:s,d=dx?s:.16;
-      box('Plaster',wx,1.8,wz,w,3.6,d);
-      box('Panel',wx-dx*.1,.63,wz-dz*.1,w,.98,d);
-      box('Brass',wx-dx*.12,1.18,wz-dz*.12,w+.06,.07,d+.06);
-      box('Darkwood',wx-dx*.12,.12,wz-dz*.12,w+.06,.15,d+.06);
-    }
-    if(z===layout.galleryZ&&x%4===0)box('Darkwood',px,3.33,pz,.2,.24,7.5);
+  for(let z=0;z<layout.height;z++)for(let x=0;x<layout.width;x++)if(open(x,z))for(const [dx,dz] of directions){
+    if(open(x+dx,z+dz))continue;
+    if(dz===-1&&(layout.stairs||[]).some(t=>t.direction==='UP'&&t.x===x&&t.z===z))continue;
+    const nearStair=(layout.stairs||[]).some(t=>Math.abs(t.x-x)<=1&&Math.abs(t.z-z)<=1);
+    const nearExit=(layout.exits||[]).some(e=>Math.abs(e.x-x)<=1&&Math.abs(e.z-z)<=1);
+    // Recesses along straight walls only; corners, stairs and exit signs stay clear.
+    const straight=dx?open(x,z-1)&&open(x,z+1)&&!open(x+dx,z-1)&&!open(x+dx,z+1):
+      open(x-1,z)&&open(x+1,z)&&!open(x-1,z+dz)&&!open(x+1,z+dz);
+    const window=straight&&!nearStair&&!nearExit&&(dx?z%4===0:x%4===2);
+    surfaces.push({cellX:x,cellZ:z,dx,dz,x:x*s+dx*s/2,z:z*s+dz*s/2,window,
+      rotation:dx===1?-Math.PI/2:dx===-1?Math.PI/2:dz===1?Math.PI:0});
   }
-  for(const t of layout.stairs||[]) {
+  return surfaces;
+}
+
+// Miter each run into its neighbour instead of exposing box end caps against
+// perpendicular brickwork. Joined ends have no internal faces to fight over.
+function skirtingGeometry(THREE,walls,size){
+  const corners=new Map(),runs=walls.map(w=>{
+    const n={x:-w.dx,z:-w.dz},t={x:n.z,z:-n.x};
+    const run={wall:w,n,t,ends:[]};
+    for(const side of [-1,1]){
+      const x=w.x+t.x*side*size/2,z=w.z+t.z*side*size/2,key=x+','+z;
+      const end={run,side,x,z,key};run.ends.push(end);
+      if(!corners.has(key))corners.set(key,[]);corners.get(key).push(end);
+    }
+    return run;
+  });
+  const vertices=[];
+  function quad(a,b,c,d){for(const p of [a,b,c,a,c,d])vertices.push(...p);}
+  for(const run of runs){
+    const {wall,n,t}=run;
+    const ends=run.ends.map(end=>{
+      const others=corners.get(end.key).filter(e=>e.run!==run);
+      // At a diagonal grid contact, join around the same navigable cell.
+      const neighbour=others.find(e=>e.run.wall.cellX===wall.cellX&&e.run.wall.cellZ===wall.cellZ)||others[0];
+      const join=neighbour&&Math.abs(n.x*neighbour.run.n.x+n.z*neighbour.run.n.z)<.5?neighbour.run.n:{x:0,z:0};
+      const overhang=neighbour?0:.012;
+      const point=(depth,y)=>[end.x+(n.x+join.x)*depth+t.x*end.side*overhang,y,end.z+(n.z+join.z)*depth+t.z*end.side*overhang];
+      return {joined:!!neighbour,frontLow:point(.148,.01),frontHigh:point(.148,.25),backLow:point(-.072,.01),backHigh:point(-.072,.25)};
+    });
+    const [a,b]=ends;
+    quad(a.frontLow,b.frontLow,b.frontHigh,a.frontHigh);
+    quad(b.backLow,a.backLow,a.backHigh,b.backHigh);
+    quad(a.frontHigh,b.frontHigh,b.backHigh,a.backHigh);
+    quad(a.backLow,b.backLow,b.frontLow,a.frontLow);
+    if(!a.joined)quad(a.backLow,a.frontLow,a.frontHigh,a.backHigh);
+    if(!b.joined)quad(b.frontLow,b.backLow,b.backHigh,b.frontHigh);
+  }
+  const geometry=new THREE.BufferGeometry();geometry.setAttribute('position',new THREE.Float32BufferAttribute(vertices,3));
+  geometry.computeVertexNormals();return geometry;
+}
+
+// Build from navigation cells so the visible architecture follows every route.
+export function buildArchitecture(THREE,scene,layout){
+  const batches=new Map(),s=layout.cellSize,walls=interiorWallSurfaces(layout);
+  // Recess the masonry return behind the trim: coincident jamb faces flicker.
+  const windowRadius=.57,windowRevealRadius=.60;
+  const open=(x,z)=>x>=0&&z>=0&&x<layout.width&&z<layout.height&&layout.cells[z*layout.width+x]===1;
+  function box(kind,x,y,z,w,h,d,ry=0,rz=0){
+    if(!batches.has(kind))batches.set(kind,[]);
+    batches.get(kind).push([x,y,z,w,h,d,ry,rz]);
+  }
+  // Voussoir wedges share a single tapered prism and two instanced materials.
+  function arch(place,radius,spring,depth=.22){
+    const count=19,step=Math.PI/count,thickness=.19;
+    for(let i=0;i<count;i++){
+      const a=(i+.5)*step;
+      place(i%3===1?'BuffArch':'RedArch',Math.cos(a)*(radius+thickness/2),spring+Math.sin(a)*(radius+thickness/2),.10,
+        2*(radius+thickness/2)*Math.tan(step/2)-.008,thickness,depth,a-Math.PI/2,true);
+    }
+  }
+  const finishWall=(place,u,bottom,top,width)=>{
+    if(bottom<1.52){const end=Math.min(top,1.52);if(end>bottom)place('Brick',u,(bottom+end)/2,0,width,end-bottom,.18);}
+    if(top>1.52){const start=Math.max(bottom,1.52);place('Plaster',u,(start+top)/2,0,width,top-start,.18);}
+  };
+  for(let z=0;z<layout.height;z++)for(let x=0;x<layout.width;x++)if(open(x,z)){
+    const px=x*s,pz=z*s;
+    box('Floor',px,-.12,pz,s,.24,s);
+    box('Ceiling',px,3.55,pz,s,.15,s);
+    // A shallow arched cross-passage at the existing narrow ward connectors.
+    // Jambs occupy less than the player's existing .34 m wall clearance.
+    if(!open(x-1,z)&&!open(x+1,z)&&open(x,z-1)&&open(x,z+1)&&z<layout.galleryZ-2){
+      const place=(kind,u,y,inset,w,h,d,angle=0,wedge=false)=>box(kind+(wedge?'Wedge':''),px+u,y,pz,w,h,d,0,angle);
+      arch(place,s/2-.19,2.08,.24);
+      // White brickwork fills the shoulders and crown through to the ceiling.
+      // The striped arch remains slightly proud on both passage faces.
+      place('PlasterPassageHeader',0,0,0,1,1,1);
+      for(const side of [-1,1])for(let i=0;i<10;i++)place(i%3===1?'BuffArch':'RedArch',side*(s/2-.095),.105+i*.208,0,.19,.20,.24);
+    }
+    if((z===layout.galleryZ&&x%4===0)||(z%4===0&&x%4===0))fixture(px,pz);
+  }
+  for(const wall of walls){
+    const {x,z,dx,dz}=wall;
+    const place=(kind,u,y,inset,w,h,d,angle=0,wedge=false)=>{
+      const px=x+(dx?0:u)-dx*inset,pz=z+(dx?-u:0)-dz*inset;
+      if(wedge||angle||kind==='PlasterSpandrel')box(kind+(wedge?'Wedge':''),px,y,pz,w,h,d,dx?Math.PI/2:0,angle);
+      else box(kind,px,y,pz,dx?d:w,h,dx?w:d);
+    };
+    if(!wall.window)finishWall(place,0,0,3.6,s);
+    else{
+      const r=windowRadius,reveal=windowRevealRadius,spring=2.22,sill=1.26;
+      finishWall(place,0,0,sill,s);
+      for(const side of [-1,1])finishWall(place,side*(s/2+reveal)/2,sill,3.6,s/2-reveal);
+      // A continuous curved reveal avoids stepped strips above the opening.
+      place('PlasterSpandrel',0,0,0,1,1,1);
+      place('Recess',0,2.05,-.14,1.2,1.65,.035);
+      place('Glass',0,1.98,-.115,1.03,1.42,.025);
+      // Project beyond the jamb ends so their side faces cannot share a plane.
+      place('Stone',0,sill,.08,1.58,.11,.42);
+      for(const side of [-1,1]){
+        for(let i=0;i<5;i++)place(i%3===1?'BuffArch':'RedArch',side*(r+.095),sill+(i+.5)*(spring-sill)/5,.10,.19,(spring-sill)/5-.009,.25);
+        place('Sash',side*.49,1.95,-.035,.045,1.33,.055);
+      }
+      arch(place,r,spring,.25);
+      for(const y of [1.32,1.77,2.22,2.59])place('Sash',0,y,-.03,y>2.3?.76:1.03,.045,.06);
+      for(const u of [-.31,0,.31]){
+        const top=spring+Math.sqrt(r*r-u*u)-.05;
+        place('Iron',u,(sill+top)/2,.045,.023,top-sill,.035);
+      }
+      place('Iron',0,1.84,.055,1.11,.025,.035);
+    }
+    // Cream checker courses form a continuous band in the red dado.
+    for(let row=0;row<2;row++)for(let i=0;i<10;i++)if((i+row)%2===0){
+      const u=-s/2+(i+.5)*s/10;
+      if(wall.window&&Math.abs(u)<.78)continue;
+      place('BuffArch',u,1.30+row*.13,.102,s/10-.018,.112,.025);
+    }
+    place('Plaster',0,3.38,.018,s,.085,.21);
+    for(let i=0;i<5;i++)place('Plaster',-s/2+(i+.5)*s/5,3.25,.035,.16,.14,.23);
+    place('Fixture',0,3.08,.068,s,.023,.025);
+  }
+  function fixture(x,z){
+    box('Fixture',x,3.40,z,.18,.07,1.24);
+    for(const side of [-1,1])box('Tube',x+side*.046,3.345,z,.032,.032,1.12);
+    for(const end of [-1,1])box('Iron',x,3.33,z+end*.59,.17,.07,.055);
+  }
+  for(const t of layout.stairs||[]){
+    fixture(t.x*s,t.z*s);
     if(t.direction==='DOWN'){
       box('Carpet',t.x*s,.012,t.z*s,1.8,.024,1.8);
-      for(let n=-2;n<=2;n++)box('Brass',t.x*s,.03,t.z*s+n*.28,1.8,.02,.035);
+      for(let n=-2;n<=2;n++)box('Brass',t.x*s,.03,t.z*s+n*.28,1.76,.02,.035);
       continue;
     }
+    fixture(t.x*s,(t.z+1)*s);
     const x=t.x*s,z=(t.z-.5)*s,side=t.mirror||1;
-    // Short flight and a mirrored quarter-turn landing inspired by the video.
-    // Holding E at the approach transfers actors to the upper-floor landing.
-    for(let n=0;n<6;n++) {
+    for(let n=0;n<6;n++){
       const h=(n+1)*.12;
       box('Carpet',x,h/2,z-(n+.5)*.28,1.8,h,.28);
-      box('Stone',x,h-.015,z-n*.28-.025,1.8,.03,.05);
+      // Separate the nosing top/front from the carpet and inset its ends.
+      box('Stone',x,h+.006,z-n*.28-.0205,1.78,.024,.065);
     }
     box('Carpet',x,.36,z-2.18,1.8,.72,1);
-    for(let n=0;n<4;n++) {
-      const h=.72+(n+1)*.12;
-      box('Carpet',x+side*(.9+(n+.5)*.28),h/2,z-2.18,.28,h,1);
-    }
+    for(let n=0;n<4;n++){const h=.72+(n+1)*.12;box('Carpet',x+side*(.9+(n+.5)*.28),h/2,z-2.18,.28,h,1);}
     box('Plaster',x+side*.56,1.8,z-2.8,3.12,3.6,.16);
     box('Plaster',x-side*.98,1.8,z-1.4,.16,3.6,2.8);
     box('Plaster',x+side*2.1,1.8,z-1.4,.16,3.6,2.8);
@@ -51,19 +166,34 @@ export function buildArchitecture(THREE, scene, layout) {
     box('Ceiling',x+side*.56,3.55,z-1.4,3.12,.15,2.8);
     box('Brass',x-side*.9,1.4,z-1.4,.045,.045,2.4);
   }
-  for(const e of layout.exits) {
+  for(const e of layout.exits){
     const facing=e.facing??1,z=e.z*s+facing*.7;
+    fixture(e.x*s,e.z*s);
     box('Panel',e.x*s,1.25,z,1.7,2.5,.14);
     box('Brass',e.x*s,1.05,z-facing*.1,1.3,.08,.08);
   }
-  const geometry=new THREE.BoxGeometry(1,1,1),transform=new THREE.Object3D();
-  for(const [kind,items] of batches) {
-    const material=new THREE.MeshStandardMaterial({color:colors[kind],roughness:.88});
-    const mesh=new THREE.InstancedMesh(geometry,material,items.length);
+  if(!materialCache.has(THREE))materialCache.set(THREE,createInteriorMaterials(THREE,globalThis.document));
+  const materials=materialCache.get(THREE),geometry=new THREE.BoxGeometry(1,1,1),wedge=geometry.clone();
+  function archHeader(radius,spring,halfWidth=radius){
+    const shape=new THREE.Shape();shape.moveTo(-halfWidth,3.6);shape.lineTo(-halfWidth,spring);
+    shape.lineTo(-radius,spring);shape.absarc(0,spring,radius,Math.PI,0,true);
+    shape.lineTo(halfWidth,spring);shape.lineTo(halfWidth,3.6);shape.closePath();
+    const header=new THREE.ExtrudeGeometry(shape,{depth:.18,bevelEnabled:false,curveSegments:32});
+    header.translate(0,0,-.09);return header;
+  }
+  const profiles={PlasterSpandrel:archHeader(windowRevealRadius,2.22),PlasterPassageHeader:archHeader(s/2-.19,2.08,s/2)};
+  const positions=wedge.attributes.position;
+  for(let i=0;i<positions.count;i++)positions.setX(i,positions.getX(i)*(positions.getY(i)>0?1.145:.855));
+  wedge.computeVertexNormals();
+  const transform=new THREE.Object3D();transform.rotation.order='YXZ';
+  for(const [kind,items] of batches){
+    const mesh=new THREE.InstancedMesh(profiles[kind]||(kind.endsWith('Wedge')?wedge:geometry),materials[kind.replace(/Wedge|Spandrel|PassageHeader/g,'')],items.length);
     mesh.name='Layout '+kind;
-    items.forEach(([x,y,z,w,h,d],i)=>{
-      transform.position.set(x,y,z);transform.scale.set(w,h,d);transform.updateMatrix();mesh.setMatrixAt(i,transform.matrix);
+    items.forEach(([x,y,z,w,h,d,ry,rz],i)=>{
+      transform.position.set(x,y,z);transform.scale.set(w,h,d);transform.rotation.set(0,ry,rz);transform.updateMatrix();mesh.setMatrixAt(i,transform.matrix);
     });
     mesh.instanceMatrix.needsUpdate=true;mesh.frustumCulled=false;scene.add(mesh);
   }
+  const skirting=new THREE.Mesh(skirtingGeometry(THREE,walls,s),materials.Skirting);
+  skirting.name='Layout Skirting';skirting.frustumCulled=false;scene.add(skirting);
 }

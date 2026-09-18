@@ -8,3 +8,93 @@ Checking aerial?models=compiled&buildingDetail=full&view=front
 Checking aerial
 Browser: Failed to load resource: the server responded with a status of 404 (Not Found)
 Checking aerial
+Checking aerial
+PASS: compiled estate, shadows, grass shaders, exact draw counts, tree/layout controls, orbit, portrait, full detail and missing/incompatible/damaged model fallback.
+{
+  "source": {
+    "mode": "procedural",
+    "milliseconds": 1654.2000000011176,
+    "triangles": 718782,
+    "calls": 2845,
+    "levels": [
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      1,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1
+    ],
+    "readyMilliseconds": 8742.3491
+  },
+  "compiled": {
+    "mode": "compiled",
+    "milliseconds": 1359.8999999985099,
+    "triangles": 718782,
+    "calls": 2845,
+    "levels": [
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      1,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1
+    ],
+    "readyMilliseconds": 8701.8422
+  },
+  "identicalScreenshot": false,
+  "pixels": {
+    "significantFraction": 0.00016857142857142857,
+    "meanChannelError": 0.051815238095238095
+  }
+}
+PASS: every timeline stop in source/compiled pages, descriptions, URL reload/navigation, keyboard/endpoints, tree focus, selection, mobile reset and live walking collision refresh.

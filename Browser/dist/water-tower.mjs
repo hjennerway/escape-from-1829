@@ -31,8 +31,40 @@ export function createWaterTower(THREE,{brick,roof,dark,worldUV}){
   texture.wrapS=texture.wrapT=THREE.RepeatWrapping;texture.anisotropy=8;
   const masonry=brick.clone();masonry.map=texture;masonry.color.set(0xffffff);
   const tint=color=>{const m=masonry.clone();m.color.set(color);return m;};
-  const dress=tint(0xd4b9a3),recessed=tint(0xc4b8a7),repair=tint(0xe0c9ad),gable=tint(0xe6c4aa);
+  const dress=tint(0xd4b9a3),recessed=tint(0xc4b8a7);
   const soot=tint(0x8b8376),faint=tint(0xded0ba);
+  // Red repairs and lime-mortared blocked openings are distinct from the
+  // older brown shaft. Multiplying its buff texture made both too dark.
+  const redBricks=['#935d4b','#a16650','#9c6c53','#8c5646','#a36e56','#9b6251','#845343','#a8755c'];
+  function brickFinish(palette,mortar){
+    const c=document.createElement('canvas');c.width=c.height=512;
+    const p=c.getContext('2d');p.fillStyle=mortar;p.fillRect(0,0,512,512);
+    for(let row=0;row<32;row++)for(let col=-1;col<17;col++){
+      p.fillStyle=palette[Math.floor(random()*palette.length)];
+      p.fillRect(col*32+(row%2)*16+1,row*16+1,30,14);
+    }
+    for(let i=0;i<12000;i++){p.fillStyle=i%2?'#d2bfa33b':'#39282127';p.fillRect(random()*512,random()*512,2,1);}
+    const m=masonry.clone();m.map=new THREE.CanvasTexture(c);m.map.colorSpace=THREE.SRGBColorSpace;
+    m.map.wrapS=m.map.wrapT=THREE.RepeatWrapping;m.map.anisotropy=8;return m;
+  }
+  const repair=brickFinish([...redBricks,'#b8a084','#bea78b','#776053','#ae9176'],'#b9ab95');
+  const redDress=brickFinish(redBricks,'#a38a73');
+  // Photos 3 and 4 show alternating red and buff-yellow voussoirs in the
+  // ground-level arch heads. Map bands radially, not as horizontal wall courses.
+  const archBrickCount=21,archCanvas=document.createElement('canvas');
+  archCanvas.width=512;archCanvas.height=128;
+  const archCtx=archCanvas.getContext('2d');archCtx.fillStyle='#a79980';archCtx.fillRect(0,0,512,128);
+  const archYellow=['#c6b383','#beaa78','#cdbb8d'],archRed=['#8b5140','#965b46','#824b3c'];
+  for(let i=0;i<archBrickCount;i++){
+    const colours=i%2?archRed:archYellow;
+    archCtx.fillStyle=colours[i%colours.length];archCtx.fillRect(i*512/archBrickCount+1,0,512/archBrickCount-2,128);
+  }
+  // Use an independent noise seed to preserve the surrounding wall textures.
+  let archSeed=1834;
+  const archRandom=()=>{archSeed=(Math.imul(archSeed,1664525)+1013904223)>>>0;return archSeed/4294967296;};
+  for(let i=0;i<6000;i++){archCtx.fillStyle=i%2?'#ecddbd25':'#48342828';archCtx.fillRect(archRandom()*512,archRandom()*128,2,1);}
+  const stripedArch=masonry.clone();stripedArch.name='Alternating red and yellow arch bricks';
+  stripedArch.map=new THREE.CanvasTexture(archCanvas);stripedArch.map.colorSpace=THREE.SRGBColorSpace;stripedArch.map.anisotropy=8;
   const whiteCanvas=document.createElement('canvas');whiteCanvas.width=whiteCanvas.height=512;
   const whiteCtx=whiteCanvas.getContext('2d');whiteCtx.fillStyle='#a4a397';whiteCtx.fillRect(0,0,512,512);
   for(let r=0;r<32;r++)for(let c=-1;c<17;c++){whiteCtx.fillStyle=r%3?'#d7d6c9':'#cccdbf';whiteCtx.fillRect(c*32+(r%2)*16+1,r*16+1,30,14);}
@@ -48,23 +80,60 @@ export function createWaterTower(THREE,{brick,roof,dark,worldUV}){
   function arch(w,spring){const s=new THREE.Shape();s.moveTo(-w/2,0);s.lineTo(w/2,0);s.lineTo(w/2,spring);s.absarc(0,spring,w/2,0,Math.PI,false);s.closePath();return s;}
   function flat(shape,m,x,y,z,parent,name){return mesh(worldUV(new THREE.ShapeGeometry(shape),4.4),m,x,y,z,parent,name);}
   function polygon(points,m,z,parent,name){const s=new THREE.Shape();s.moveTo(...points[0]);for(const p of points.slice(1))s.lineTo(...p);s.closePath();return flat(s,m,0,0,z,parent,name);}
-  function ring(radius,thickness,x,y,z,parent,m=dress,name='Brick arch'){
+  function repairedWall(face,number,profile){
+    // Only the photographed inward-falling contact bounds these repairs.
+    // The outer-to-centre rising triangles in the earlier model were spurious.
+    const left=number===1?-1.9:-4.57,right=number===3?1.9:4.57;
+    const heightAt=x=>{
+      const end=profile.findIndex(p=>p[0]>=x);
+      if(end<=0)return profile[end===0?0:profile.length-1][1];
+      const [a,b]=[profile[end-1],profile[end]];
+      return a[1]+(b[1]-a[1])*(x-a[0])/(b[0]-a[0]);
+    };
+    const edge=[[left,heightAt(left)],...profile.filter(([x])=>x>left&&x<right),[right,heightAt(right)]];
+    const c=document.createElement('canvas');c.width=c.height=1024;
+    const p=c.getContext('2d');p.fillStyle='#ac947b';p.fillRect(0,0,1024,1024);
+    // Broad, irregular lime residue is strongest on side 4's lower right.
+    // It follows brick courses rather than introducing another diagonal seam.
+    const patches=number===1?[[2.5,5.9,2,1.7,.35]]:number===3?[[-3.2,7.2,1.8,1.5,.5],[-2.4,2.7,1.8,2,.3]]:[[2.8,3.1,2.4,3,.7],[2,7.2,2.5,1.3,.45],[-3,6,1.5,1.7,.2]];
+    const sx=1024/10.2,sy=1024/TOWER_ROOF_CONTACTS.corner;
+    for(let row=0;row<Math.ceil(TOWER_ROOF_CONTACTS.corner/.1375);row++)for(let col=-20;col<20;col++){
+      const x=col*.275+(row%2)*.1375,y=row*.1375;
+      const chalk=patches.reduce((n,[cx,cy,w,h,a])=>n+a*Math.exp(-(((x-cx)/w)**2+((y-cy)/h)**2)),0);
+      const mix=Math.min(.72,chalk*(.35+random()*.9));
+      const rgb=redBricks[Math.floor(random()*redBricks.length)].match(/[a-f\d]{2}/g).map(v=>parseInt(v,16));
+      p.fillStyle='rgb('+rgb.map((v,i)=>Math.round(v*(1-mix)+[193,175,149][i]*mix)).join(',')+')';
+      p.fillRect((x+5.1+.009)*sx,1024-(y+.1285)*sy,.257*sx,.1195*sy);
+    }
+    for(let i=0;i<24000;i++){p.fillStyle=i%2?'#e0cfaf36':'#36251e25';p.fillRect(random()*1024,random()*1024,2,1);}
+    const m=masonry.clone();m.map=new THREE.CanvasTexture(c);m.map.colorSpace=THREE.SRGBColorSpace;m.map.anisotropy=8;
+    const wall=polygon([[left,.55],[right,.55],...edge.reverse()],m,5.112,face,'Weathered red brick below roof contact');
+    const g=wall.geometry,pos=g.attributes.position;
+    for(let i=0;i<pos.count;i++)g.attributes.uv.setXY(i,(pos.getX(i)+5.1)/10.2,pos.getY(i)/TOWER_ROOF_CONTACTS.corner);
+  }
+  function ring(radius,thickness,x,y,z,parent,m=dress,name='Brick arch',striped=false){
     const s=new THREE.Shape();s.absarc(0,0,radius,0,Math.PI,false);s.lineTo(-radius+thickness,0);s.absarc(0,0,radius-thickness,Math.PI,0,true);s.closePath();
     const g=new THREE.ExtrudeGeometry(s,{depth:.1,bevelEnabled:false,curveSegments:36});
-    const o=mesh(worldUV(g,4.4),m,x,y,z,parent,name);
-    // Radial mortar joints follow the round head.
-    for(let i=0;i<=Math.ceil(radius*12);i++){
-      const a=i*Math.PI/Math.ceil(radius*12),r=radius-thickness/2;
+    worldUV(g,4.4);
+    if(striped){
+      const p=g.attributes.position,uv=g.attributes.uv;
+      for(let i=0;i<p.count;i++)uv.setXY(i,Math.max(0,Math.min(1,Math.atan2(p.getY(i),p.getX(i))/Math.PI)),(Math.hypot(p.getX(i),p.getY(i))-radius+thickness)/thickness);
+    }
+    const o=mesh(g,striped?stripedArch:m,x,y,z,parent,name);
+    // Radial mortar joints follow the round head and each coloured brick.
+    const count=striped?archBrickCount:Math.ceil(radius*12);
+    for(let i=0;i<=count;i++){
+      const a=i*Math.PI/count,r=radius-thickness/2;
       const joint=box(stone,x+Math.cos(a)*r,y+Math.sin(a)*r,z+.108,thickness,.016,.008,parent);
       joint.rotation.z=a;joint.castShadow=false;
     }
     return o;
   }
-  function opening(face,{w,spring,y,fill,name,surround=dress}){
+  function opening(face,{w,spring,y,fill,name,surround=dress,striped=false}){
     flat(arch(w,spring),recessed,0,y,5.16,face,name+' reveal');
     flat(arch(w-.18,spring-.04),fill,0,y+.04,5.18,face,name);
     for(const x of [-w/2-.13,w/2+.13])box(surround,x,y+spring/2,5.22,.26,spring,.18,face);
-    ring(w/2+.28,.3,0,y+spring,5.2,face,surround,name+' arch');
+    ring(w/2+.28,.3,0,y+spring,5.2,face,surround,name+' arch',striped);
     box(dress,0,y,5.25,w+.55,.16,.3,face);
   }
   // Shallow stepped staining bands, not projecting roof geometry.
@@ -103,25 +172,14 @@ export function createWaterTower(THREE,{brick,roof,dark,worldUV}){
     }
     for(let x=-4.6;x<4.7;x+=.66){box(dress,x,33.05,5.27,.34,.52,.34,face);box(dress,x,33.36,5.39,.48,.16,.55,face);}
     if(number!==2){
-      const apex=number===3?13.65:14.4;
-      // User correction: the two corners adjoining side 2 have no triangular
-      // ghosts. Side 1 keeps only its right half (toward +X / side 4), side 3
-      // only its left half; side 4 retains both intersecting roof sections.
-      const infill=number===1
-        ?[[-4.57,.55],[4.57,.55],[4.57,6.4],[0,apex],[0,6.4],[-4.57,6.4]]
-        :number===3
-          ?[[-4.57,.55],[4.57,.55],[4.57,6.4],[0,6.4],[0,apex],[-4.57,6.1]]
-          :[[-4.57,.55],[4.57,.55],[4.57,6.4],[.15,apex],[-4.57,6.1]];
-      polygon(infill,gable,5.112,face,'Former gable brick infill');
-      const rising=number===1?[[0,apex],[4.58,6.45]]:number===3?[[-4.58,6.15],[0,apex]]:[[-4.58,6.15],[.15,apex],[4.58,6.45]];
-      // The latest blue traces identify these inward-falling contacts.
-      // Use the same profile as the adjoining roof, including the flat arch strip.
+      // Keep the red-marked contacts exactly aligned with the adjoining roofs,
+      // including their flat strip in front of the upper arch.
       const falling=TOWER_ROOF_CONTACTS.faces.find(f=>f.side===number).profile;
-      scar(face,rising,.28,faint,'Rising former gable outline');
+      repairedWall(face,number,falling);
       scar(face,falling,number===3?.28:.4,soot,'Descending intersecting roof scars');
-      opening(face,{w:3.35,spring:4.85,y:7.15,fill:repair,name:'Large bricked upper opening'});
+      opening(face,{w:3.35,spring:4.85,y:7.15,fill:repair,name:'Large bricked upper opening',surround:redDress});
       box(repair,0,6.8,5.145,3.8,.4,.04,face,'Former opening sill repair');
-      opening(face,{w:2.95,spring:4.15,y:.3,fill:number===1?iron:repair,name:number===1?'Arched entrance':'Bricked ground doorway',surround:faint});
+      opening(face,{w:2.95,spring:4.15,y:.3,fill:number===1?iron:repair,name:number===1?'Arched entrance':'Bricked ground doorway',surround:faint,striped:number===3||number===4});
       if(number===1){
         for(const x of [-1.38,1.38])box(paint,x,2.42,5.37,.15,4.22,.12,face);
         box(paint,0,4.43,5.36,2.82,.15,.1,face);

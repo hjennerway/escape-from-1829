@@ -1,5 +1,26 @@
 # Development and modelling notes
 
+## Annexe marked windows (September 18)
+
+The red low link now has three windows; the two blue-marked pale upper panels
+are regular glazed sashes. The green spine face now has six windows per floor,
+using the opposite yellow-arrow face's column positions and widths. Existing
+window heights, masonry and roofs are retained. See the
+[window reference and preservation notes](Research/oakmere/README.md#marked-window-correction-18-september-2026).
+
+`test-oakmere-windows.mjs` checks the counts, column alignment and exposed
+glazing, and verifies that 21,625 protected primitives match their pre-edit
+geometry, materials, transforms, shadows and collision flags. Only sash parts
+in the three requested areas may differ. The older annexe shape snapshots are
+updated after this check. Browser source and the local compiled aerial model
+are updated; Unity and Blender exports are unchanged.
+
+Validation: the complete `npm test` suite and `npm run test:compiled` pass.
+Source and compiled close views of the three marked areas and the opposite
+face were rendered and visually checked. The dedicated window preview reports
+no browser errors. Logs and before/after images use the
+`Browser/artifacts/oakmere-windows-` prefix.
+
 ## Mirrored Annexe spine roof (September 18)
 
 The blue-marked side of the short central rear wing now mirrors the plain
@@ -827,7 +848,7 @@ Open `aerial.html?view=upton-outward` for the garden-facing aerial, `?view=upton
 
 ## Water tower photo refinement
 
-The water tower now follows all four numbered ground-level photographs, with side 2 facing 1829 and side 4 facing the annexe. Distinct arched openings, intersecting former roof scars, brick infill and pale repairs replace the repeated lower facades. The upper blind arcade, three pairs of blocked slits, string course and corbelled eaves use the photographed proportions. Open `aerial.html?view=tower-1` through `tower-4`, or choose a numbered side from the water tower aerial. [Photo mapping and modelling notes](Research/water-tower/README.md). Browser geometry is updated; overall height and location remain unchanged.
+The water tower now follows all four numbered ground-level photographs, with side 2 facing 1829 and side 4 facing the annexe. Distinct arched openings, inward-falling former roof scars, brick infill and pale repairs replace the repeated lower facades. The 18 September colour correction removes the erroneous upward-to-centre triangular patches from sides 1, 3 and 4; redder repair bricks and patchy lime mortar now lie below the retained contacts. The two lower blocked arches on sides 3 and 4 also have the photographed alternating red and buff-yellow radial bricks. Their shared roof profiles and all adjoining roof geometry remain unchanged. The upper blind arcade, three pairs of blocked slits, string course and corbelled eaves use the photographed proportions. Open `aerial.html?view=tower-1` through `tower-4`, or choose a numbered side from the water tower aerial. [Photo mapping and modelling notes](Research/water-tower/README.md). Browser geometry is updated; overall height and location remain unchanged. The colour correction passed the full browser suite and rebuilt source/compiled scene checks, with visual renders of all four faces and an exact comparison of the retained roof marks.
 
 ## Redesmere edge chimney
 
@@ -1059,3 +1080,129 @@ front views render without page errors; screenshots and logs use the
 `Browser/artifacts/oakmere-west-` prefix. The source/compiled comparison passes
 with 0.017% of pixels above its difference threshold. Browser procedural and
 compiled models are updated. Unity and Blender exports are unchanged.
+
+## Asylum escape corridor finishes (September 18)
+
+Both browser escape-game floors now follow the supplied main-corridor photo:
+red brick lower walls, cream-painted upper brick, checker bands, red/buff
+arched window recesses with sash frames and bars, dark skirting, worn stone
+slabs, peeling ceilings and long surface-mounted lights. Narrow ward passages
+have matching shallow arches. This supersedes the older flat green panelling
+and large checkerboard floor. Lighting is more neutral; the existing fixed
+12-lamp pool, torch controls and all gameplay routes are retained.
+
+`architecture.mjs` batches these details and shares materials from the new
+`interior-materials.mjs` between floors. Seeded canvas textures use building-space
+coordinates, preserving brick scale and alignment across wall pieces. Shared
+curved profiles form smooth window reveals. Archive artwork stays on solid
+wall bays rather than covering windows or stairs. The reference and scope are
+in [Research/escape-interior/README.md](Research/escape-interior/README.md).
+
+The browser suite passes. New architecture raycasts pass 16 window aperture
+samples and 36 passage-clearance samples across both floors; the gameplay,
+navigation and pooled-light checks also pass. Real Chrome/WebGL checks cover
+reception, gallery, corridor, window detail, upstairs, torch off, portrait layout
+and an actual held-E stair transfer with no page or shader errors. Screenshots,
+render counts and suite output use the `Browser/artifacts/escape-interior-`
+prefix. The detailed interior uses 21–56 draw calls in those captured views;
+these are diagnostic counts, not a hardware frame-rate claim.
+
+Only the browser game sources changed. Navigation JSON, Unity, Blender and
+GLB exports were not regenerated. The aerial compiled model is unaffected.
+
+## Escape passage arch infill and ward signs (September 18)
+
+Added cream/white-brick masonry between the striped section arches and the
+ceiling on both escape-game floors. The shared curved header closes the space
+above the crown and shoulders, meets the side walls and leaves the existing
+walking opening clear. The header uses the same aligned masonry finish as
+the upper walls. Ward-name room signs are removed from Asylum Escape only;
+exit and stair directions remain, as do ward names in aerial/walking Locations.
+This supersedes the earlier escape ward-sign notes above.
+
+Architecture checks cover 120 header samples from both sides, 36 passage
+clearance samples and 16 window aperture samples. Gameplay checks pass.
+All 55 browser suite checks pass. Chrome/WebGL views of both floors pass with
+no page or shader errors, including the stair-transfer check. Screenshots and
+suite output use the `Browser/artifacts/escape-interior-headers-` prefix. Reference details are in `Research/escape-interior/README.md`.
+Only browser sources changed; navigation JSON and Unity, Blender, GLB and
+compiled aerial exports are unchanged.
+
+## Escape window flicker correction (September 18)
+
+Fixed coplanar wall/jamb and sill/jamb surfaces around the escape-game windows.
+The masonry reveal is recessed 30 mm behind the striped frame laterally and
+radially, while each sill extends 30 mm past the outer jamb. This removes the
+competing faces responsible for the white/red flicker without changing window
+placement, materials or passage clearance. Both floors use the correction.
+
+The architecture check now includes 600 window-edge samples and rejects the
+saved pre-fix geometry. Existing window apertures, passage clearance, overhead
+masonry and gameplay checks pass. All 55 browser suite checks pass. Before/after
+Chrome sweeps cover 50 camera positions on both floors without page or shader
+errors; oblique render comparisons show clean jambs and sill ends. Captures and
+suite output use the `Browser/artifacts/window-flicker-` prefix. See the reference and
+geometry explanation in `Research/escape-interior/README.md`.
+Only browser geometry changed; Unity, Blender, GLB and aerial compiled exports
+are unchanged and do not need regeneration for this fix.
+
+## Random wall artwork in Asylum Escape (September 18)
+
+The three supplied images are bundled unchanged in `Browser/dist/art/`:
+`asylum-winter-moonlight.png`, `asylum-service-tunnels.png` and
+`daily-account-patients-1854.png`. They join the existing local artwork catalogue
+in `game.mjs`. Each floor has 12 panels covering all 11 local images; wall
+locations are shuffled on page load and stay fixed during restarts of that
+session. Placement excludes windows, projecting passage arches, nearby stair
+and exit interaction points, and overlapping panels. The supplied images fit
+fully inside the wall panel, preserving both pages of the 1854 table. Holding E
+opens the original image through the existing artwork viewer.
+
+Validation: the full 55-check browser `npm test` suite passes using the installed
+npm CLI (`Browser/artifacts/escape-wall-art-suite.txt`). The Chrome/WebGL harness
+`node Browser/artifacts/check-escape-wall-art.mjs` checks all 24 panels for solid
+wall placement, exposed faces, walking access, spacing and loaded textures;
+it exercises all three additions on both floors, held-E opening/release, original
+image dimensions and changed wall positions after reload. Desktop and portrait
+screenshots and the zero-error results use the `Browser/artifacts/escape-wall-art-`
+prefix. Reference provenance is in `Research/escape-interior/README.md`.
+
+Only browser artwork assets and runtime placement/rendering changed. Navigation,
+Unity, Blender and GLB exports were not modified. The compiled aerial model does
+not include these game-interior panels and did not need regeneration.
+
+## Escape skirting and stair edge correction (September 18)
+
+Replaced the individual skirting boxes with a merged mesh whose mitered ends
+join continuously at internal and external corners. The end faces that shared
+planes with perpendicular brickwork are removed; open ends finish beyond the
+wall caps. Stair nosing tops and fronts are separated from the carpeted treads,
+and both the nosings and upper landing strips finish inside the carpet edges.
+This fixes the reported flickering at corner caps and stair edges while keeping
+the existing skirting height/projection, stair layout and navigation clearance.
+
+The architecture test covers 760 skirting corner views and 116 stair-edge
+samples, alongside the existing window, arch, and passage checks. The saved
+old model has 162 skirting corner failures; the corrected model has none.
+All 55 browser suite checks pass. Before/after Chrome sweeps cover 52 camera
+positions across both staircases and floors without page or shader errors;
+reviewed renders show continuous corner joins and clean stair nosings. Captures
+and suite output use the `Browser/artifacts/stair-skirting-` prefix; see `Research/escape-interior/README.md`.
+Only browser geometry changed; Unity, Blender, GLB and compiled aerial exports
+are unchanged and do not require regeneration for this fix.
+
+## Artwork title and caption cleanup (September 18)
+
+Winter moonlight now shows the full image alone on both floor walls and in the
+hold-E viewer, without its title, caption or surrounding display card. Its
+original title remains available as accessible image text. The generic
+"Artwork supplied for the 1829 building" caption is removed from all 11 local
+artworks, including their wall textures and enlarged viewers. Other artwork
+titles remain visible, with the freed caption space used for the image.
+
+Chrome/WebGL checks cover the image-only display, caption visibility, all three
+recent additions on both floors, original image dimensions, and E opening and
+release. The existing `check-escape-wall-art.mjs` harness and its screenshots and
+JSON under `Browser/artifacts/escape-wall-art-*` were refreshed with zero page or
+shader errors. Only browser rendering/CSS changed; image files, navigation and
+Unity, Blender, GLB and compiled aerial exports are unchanged.

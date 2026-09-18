@@ -1,0 +1,30 @@
+{
+  "results": [
+    {
+      "name": "reception",
+      "calls": 51,
+      "triangles": 80652
+    },
+    {
+      "name": "gallery",
+      "calls": 34,
+      "triangles": 80198
+    },
+    {
+      "name": "corridor",
+      "calls": 48,
+      "triangles": 80616
+    },
+    {
+      "name": "window",
+      "calls": 45,
+      "triangles": 80660
+    },
+    {
+      "name": "upper",
+      "calls": 22,
+      "triangles": 82636
+    }
+  ],
+  "errors": []
+}

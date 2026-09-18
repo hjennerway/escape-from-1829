@@ -4,7 +4,8 @@ import {readFile} from 'node:fs/promises';
 import vm from 'node:vm';
 import * as core from './dist/core.mjs';
 import * as floors from './dist/floors.mjs';
-import {buildArchitecture} from './dist/architecture.mjs';
+import {buildArchitecture,interiorWallSurfaces} from './dist/architecture.mjs';
+import {BoxGeometry,Shape,ExtrudeGeometry,BufferGeometry,Float32BufferAttribute} from './dist/vendor/three.module.js';
 import {createInteriorLights} from './dist/interior-lights.mjs';
 import {createEscapeCutscene,sampleEscape} from './dist/escape-cutscene.mjs';
 import {bindTreeToggle} from './dist/tree-layer.mjs';
@@ -25,7 +26,7 @@ class Object3D {
 class Geometry {clone(){return new Geometry();}}
 const THREE={Vector3:Vector,Object3D,Group:Object3D,Scene:Object3D,Mesh:Object3D,InstancedMesh:Object3D,
   WebGLRenderer:Object3D,PerspectiveCamera:Object3D,HemisphereLight:Object3D,PointLight:Object3D,SpotLight:Object3D,
-  BoxGeometry:Geometry,PlaneGeometry:Geometry,CylinderGeometry:Geometry,SphereGeometry:Geometry,
+  BoxGeometry,Shape,ExtrudeGeometry,BufferGeometry,Float32BufferAttribute,PlaneGeometry:Geometry,CylinderGeometry:Geometry,SphereGeometry:Geometry,
   MeshStandardMaterial:class {constructor(args){Object.assign(this,args);}},MeshBasicMaterial:class {},CanvasTexture:class {},Color:class {},FogExp2:class {},Clock:class {getDelta(){return .016;}},
   MathUtils:{clamp:(v,a,b)=>Math.min(b,Math.max(a,v)),lerp:(a,b,t)=>a+(b-a)*t,mapLinear:(v,a,b,c,d)=>c+(v-a)/(b-a)*(d-c)}};
 const elements=new Map();
@@ -39,7 +40,7 @@ const layout=JSON.parse(await readFile(new URL('./dist/layout.json',import.meta.
 const source=(await readFile(new URL('./dist/game.mjs',import.meta.url),'utf8')).replace(/^import .*;\r?\n/gm,'');
 const listeners=new Map();
 function keydown(code,repeat=false){const event={code,repeat,defaultPrevented:false,preventDefault(){this.defaultPrevented=true;}};listeners.get('keydown')(event);return event;}
-const sandbox={bindTreeToggle,sampleLanding,...core,...floors,buildArchitecture,createInteriorLights,createEscapeCutscene,createArrivalCutscene,
+const sandbox={bindTreeToggle,sampleLanding,...core,...floors,buildArchitecture,interiorWallSurfaces,createInteriorLights,createEscapeCutscene,createArrivalCutscene,
  createEscapeExterior:()=>({scene:new Object3D(),camera:new Object3D()}),
  loadEscapeFrontage:async()=>{},THREE,GLTFLoader:class {},
  document:{getElementById:element,createElement:()=>element('canvas'+elements.size),querySelectorAll:()=>[],body:element('body'),addEventListener(){},exitPointerLock(){}},

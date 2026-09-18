@@ -22,7 +22,7 @@ crouch, **F** for the torch and **Tab** for the map. Hold **E** at exits, stairs
 or wall artwork. **H** shows survival help; **Esc** pauses. Touch controls are available on mobile.
 
 # Credits
-Made possible by the invaluable help of the members of the [The History of The West Cheshire Hospital](https://www.facebook.com/groups/447285974557565) Facebok group in identifying ad refining the layout of the site. Their photos are viewable when moving around the site.
+Made possible by the invaluable help of the members of the [The History of The West Cheshire Hospital](https://www.facebook.com/groups/447285974557565) Facebook group in identifying and refining the layout of the site. Their photos are viewable when moving around the site.
 
 ## Run locally
 
