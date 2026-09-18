@@ -11,6 +11,7 @@ import {createArrivalCutscene} from './arrival-cutscene.mjs';
 import {FLOOR_HEIGHT,makeFloors,nearStair,changeFloor,routeBetweenFloors} from './floors.mjs';
 const $=id=>document.getElementById(id),canvas=$('game');
 const keys=new Set(),touch=matchMedia('(pointer:coarse)').matches;
+const INTERACTION_HOLD_SECONDS=.5;
 let layout,renderer,scene,camera,torch,torchTarget,clock,ready=false,state='menu',elapsed=0,stamina=1,yaw=0,pitch=0,hold=0,sprint=false,crouch=false,exhausted=false;
 let enemies=[],lights=[],audioCtx,audioOn=true,lastStep=0,lastPulse=0,footPhase=0,dragging=false,previousPointer=null,modelLoaded=false;
 const player={x:50,z:27.5,floor:0},mapCanvas=$('map'),mapContext=mapCanvas.getContext('2d'),miniMapCanvas=$('miniMap'),miniMapContext=miniMapCanvas.getContext('2d');
@@ -23,7 +24,7 @@ const escapeCutscene=createEscapeCutscene($('escapeCutscene'),()=>{
  state='won';$('result').hidden=false;$('retry').focus();
 },{reducedMotion:matchMedia('(prefers-reduced-motion: reduce)').matches,getCamera:()=>escapeExterior?.camera});
 function groupSince(snapshot,height){const group=new THREE.Group();for(const o of [...scene.children])if(!snapshot.has(o))group.add(o);group.position.y=height;scene.add(group);return group;}
-function showFloor(){layout=floors[player.floor];floorGroups.forEach((g,i)=>g.visible=i===player.floor);interiorLights?.update(player);$('floorName').textContent=player.floor?'UPPER FLOOR':'GROUND FLOOR';$('mapFloorName').textContent=player.floor?'UPPER FLOOR · GAME ROUTES':'GROUND FLOOR · GAME ROUTES';$('miniFloorName').textContent=player.floor?'UPPER FLOOR':'GROUND FLOOR';}
+function showFloor(){layout=floors[player.floor];floorGroups.forEach((g,i)=>g.visible=i===player.floor);interiorLights?.update(player);$('floorName').textContent=player.floor?'UPPER FLOOR':'GROUND FLOOR';$('floorExits').textContent=layout.exits.length+' EXITS THIS FLOOR';$('mapFloorName').textContent=player.floor?'UPPER FLOOR · GAME ROUTES':'GROUND FLOOR · GAME ROUTES';$('miniFloorName').textContent=player.floor?'UPPER FLOOR':'GROUND FLOOR';}
 const material=(color,extra={})=>new THREE.MeshStandardMaterial({color,roughness:.88,...extra});
 const tmp=new THREE.Vector3();
 function mesh(geometry,mat,p,parent=scene){const m=new THREE.Mesh(geometry,mat);m.position.set(...p);parent.add(m);return m;}
@@ -34,6 +35,9 @@ function lightFloor(){
   if(layout.cells[z*layout.width+x]&&((z===layout.galleryZ&&x%4===0)||(z%4===0&&x%4===0)))lamp(x*layout.cellSize,z*layout.cellSize);
  }
  for(const stair of layout.stairs)lamp(stair.x*layout.cellSize,stair.z*layout.cellSize);
+}
+function markExits(){
+ layout.exits.forEach((e,i)=>{lamp(e.x*layout.cellSize,e.z*layout.cellSize,0x77db97);label('EXIT '+(i+1)+'  →|'+e.name,e.x*layout.cellSize,2.8,e.z*layout.cellSize+e.facing*.5);});
 }
 function twoSidedTextPlane(geometry,texture,frontPosition,parent){
  const mat=new THREE.MeshBasicMaterial({map:texture,transparent:true,side:THREE.FrontSide});
@@ -166,13 +170,13 @@ async function init(){
   placeHeritagePanels();placeLocalArtPanels(0);
   for(const stair of layout.stairs||[]){lamp(stair.x*layout.cellSize,(stair.z+1)*layout.cellSize);label(stair.name+'|HOLD E TO GO UP',stair.x*layout.cellSize,2.6,stair.z*layout.cellSize);}
   lightFloor();
-  layout.exits.forEach((e,i)=>{lamp(e.x*layout.cellSize,e.z*layout.cellSize,0x77db97);label('EXIT '+(i+1)+'  →|'+e.name,e.x*layout.cellSize,2.8,e.z*layout.cellSize+e.facing*.5);});
+  markExits();
   floorGroups.push(groupSince(groundSnapshot,0));
   layout=floors[1];const upperSnapshot=new Set(scene.children);
   buildArchitecture(THREE,scene,layout);placeLocalArtPanels(1);
-  lightFloor();
+  lightFloor();markExits();
   for(const stair of layout.stairs)label(stair.name+'|HOLD E TO GO DOWN',stair.x*layout.cellSize,2.6,stair.z*layout.cellSize);
-  label('UPPER GALLERY|BOTH STAIRS LEAD TO EXITS',layout.spawn.x*layout.cellSize,2.7,layout.galleryZ*layout.cellSize);
+  label('UPPER GALLERY|EXITS AT ALL THREE REAR ENDS',layout.spawn.x*layout.cellSize,2.7,layout.galleryZ*layout.cellSize);
   floorGroups.push(groupSince(upperSnapshot,FLOOR_HEIGHT));layout=floors[0];floorGroups[1].visible=false;
   interiorLights=createInteriorLights(THREE,scene,lights);
   torch=new THREE.SpotLight(0xfff3da,20,30,.50,.55,1.2);torchTarget=new THREE.Object3D();scene.add(torch,torchTarget);torch.target=torchTarget;
@@ -196,13 +200,13 @@ function uiPlaying(value){document.body.classList.toggle('playing',value);$('men
 function lock(){if(!touch&&canvas.requestPointerLock){try{const result=canvas.requestPointerLock();result?.catch(()=>{});}catch{}}}
 function start(){if(!ready||state==='arrival')return;escapeCutscene.reset();closeArtViewer();resetPositions();elapsed=0;stamina=1;hold=0;exhausted=false;crouch=false;sprint=false;footPhase=0;dragging=false;previousPointer=null;keys.clear();state='arrival';torch.visible=true;uiPlaying(true);$('hud').hidden=true;$('pause').hidden=true;$('touch').hidden=true;$('instructions').hidden=true;$('result').hidden=true;$('floorMap').hidden=true;$('timer').textContent='00:00';$('warning').textContent='';$('interact').hidden=true;arrivalCutscene.start();audioCtx??=new (window.AudioContext||window.webkitAudioContext)();audioCtx.resume().catch(()=>{});lock();}
 function pause(){if(state!=='play')return;closeArtViewer();state='paused';keys.clear();document.exitPointerLock?.();$('resultTag').textContent='TAKE A MOMENT';$('resultTitle').textContent='Hold your breath.';$('resultBody').textContent='The building will wait. Resume when you’re ready.';$('resume').hidden=false;$('resultExplore').hidden=true;$('retry').textContent='RESTART';$('result').hidden=false;}
-function finish(won,who){closeArtViewer();state=won?'cutscene':'lost';keys.clear();document.exitPointerLock?.();$('resultTag').textContent=won?'OUTSIDE. AT LAST.':'THE BUILDING KEPT YOU';$('resultTitle').textContent=won?'You made it out.':'Locked in the basement';$('resultBody').textContent=won?`You escaped through ${who.toLowerCase()} in ${elapsed.toFixed(1)} seconds. Four other routes are waiting.`:`${who} captured you after ${elapsed.toFixed(1)} seconds. Break line of sight, save your sprint, and use the map to find a different route.`;$('resume').hidden=true;$('resultExplore').hidden=!won;$('retry').textContent='TRY ANOTHER ROUTE ↗';$('result').hidden=won;$('interact').hidden=true;
+function finish(won,who){closeArtViewer();state=won?'cutscene':'lost';keys.clear();document.exitPointerLock?.();$('resultTag').textContent=won?'OUTSIDE. AT LAST.':'THE BUILDING KEPT YOU';$('resultTitle').textContent=won?'You made it out.':'Locked in the basement';$('resultBody').textContent=won?`You escaped through ${who.toLowerCase()} in ${elapsed.toFixed(1)} seconds. ${floors.reduce((count,floor)=>count+floor.exits.length,0)-1} other routes are waiting.`:`${who} captured you after ${elapsed.toFixed(1)} seconds. Break line of sight, save your sprint, and use the map to find a different route.`;$('resume').hidden=true;$('resultExplore').hidden=!won;$('retry').textContent='TRY ANOTHER ROUTE ↗';$('result').hidden=won;$('interact').hidden=true;
  if(won){$('hud').hidden=true;$('touch').hidden=true;$('pause').hidden=true;escapeCutscene.start();}
 }
 function resume(){state='play';$('result').hidden=true;$('instructions').hidden=true;lock();}
 function showHelp(){if(state!=='play'&&state!=='paused')return;pause();dragging=false;previousPointer=null;$('result').hidden=true;$('instructions').hidden=false;$('closeHelp').focus();}
 function beep(hz,length,volume){if(!audioCtx||!audioOn)return;const t=audioCtx.currentTime,o=audioCtx.createOscillator(),g=audioCtx.createGain();o.type='sine';o.frequency.setValueAtTime(hz,t);o.frequency.exponentialRampToValueAtTime(hz*.5,t+length);g.gain.setValueAtTime(volume,t);g.gain.exponentialRampToValueAtTime(.001,t+length);o.connect(g);g.connect(audioCtx.destination);o.start(t);o.stop(t+length);}
-function update(dt){
+function update(dt,interactionDt=dt){
  if(state!=='play')return;
  if(artViewing){if(!keys.has('KeyE'))closeArtViewer();return;}
  elapsed+=dt;const sx=(keys.has('KeyD')?1:0)-(keys.has('KeyA')?1:0),sz=(keys.has('KeyW')?1:0)-(keys.has('KeyS')?1:0),moving=!!(sx||sz);
@@ -235,9 +239,9 @@ function update(dt){
   $('interact').hidden=!stair&&!exit&&!art;
  if(stair){
   hold=0;$('interact').querySelector('b').textContent=player.floor?'HOLD E TO GO DOWN':'HOLD E TO GO UP';
-  $('exitName').textContent=stair.name;stairHold=keys.has('KeyE')&&!stairLatch?stairHold+dt:0;
-  $('exitFill').style.width=Math.min(100,stairHold/.8*100)+'%';
-  if(stairHold>=.8&&changeFloor(floors,player,stair)){
+  $('exitName').textContent=stair.name;stairHold=keys.has('KeyE')&&!stairLatch?stairHold+interactionDt:0;
+  $('exitFill').style.width=Math.min(100,stairHold/INTERACTION_HOLD_SECONDS*100)+'%';
+  if(stairHold>=INTERACTION_HOLD_SECONDS&&changeFloor(floors,player,stair)){
    stairHold=0;stairLatch=true;showFloor();camera.position.y=player.floor*FLOOR_HEIGHT+(crouch?1.1:1.65);
    camera.position.x=player.x;camera.position.z=player.z;
    enemies.forEach(e=>{if(e.memory>0||e.type===2){e.target={...player};e.rethink=0;}e.mesh.visible=e.floor===player.floor;});
@@ -247,7 +251,7 @@ function update(dt){
    stairHold=0;hold=0;$('interact').querySelector('b').textContent='HOLD E TO VIEW';$('exitName').textContent=art.imageOnly?'':art.title;$('exitFill').style.width='0%';if(keys.has('KeyE'))openArtViewer(art);
   }else{
   stairHold=0;
-  if(exit){$('interact').querySelector('b').textContent='HOLD E TO ESCAPE';$('exitName').textContent=exit.name;hold=keys.has('KeyE')&&!stairLatch?hold+dt:0;$('exitFill').style.width=Math.min(100,hold/1.2*100)+'%';if(hold>=1.2)finish(true,exit.name);}else hold=0;
+  if(exit){$('interact').querySelector('b').textContent='HOLD E TO ESCAPE';$('exitName').textContent=exit.name;hold=keys.has('KeyE')&&!stairLatch?hold+interactionDt:0;$('exitFill').style.width=Math.min(100,hold/INTERACTION_HOLD_SECONDS*100)+'%';if(hold>=INTERACTION_HOLD_SECONDS)finish(true,exit.name);}else hold=0;
  }
  $('timer').textContent=`${String(Math.floor(elapsed/60)).padStart(2,'0')}:${String(Math.floor(elapsed%60)).padStart(2,'0')}`;$('staminaFill').style.width=stamina*100+'%';$('stance').textContent=sprint?'SPRINTING · LOUD':crouch?'CROUCHING · QUIET':'STAMINA';
  mapRefresh-=dt;if(mapRefresh<=0){mapRefresh=.12;drawMap();}
@@ -274,7 +278,7 @@ function animate(){requestAnimationFrame(animate);const frameDt=clock.getDelta()
  if(state==='arrival'){
   if(!document.hidden)arrivalCutscene.update(frameDt);
   if(!arrivalCutscene.inside){renderer.render(exterior.scene,exterior.camera);return;}
- }else if(state==='play')update(dt);else if(state==='menu'){
+ }else if(state==='play')update(dt,frameDt);else if(state==='menu'){
   if(!document.hidden)landingTime+=Math.min(frameDt,.1);
   const shot=sampleLanding(landingTime,{aspect:exterior.camera.aspect,reducedMotion:landingReducedMotion});
   exterior.camera.position.set(...shot.position);exterior.camera.lookAt(...shot.target);

@@ -2859,6 +2859,26 @@
         "z": 25
       }
     ],
+    "exits": [
+      {
+        "x": 12,
+        "z": 7,
+        "name": "WEST FIRE ESCAPE",
+        "facing": -1
+      },
+      {
+        "x": 20,
+        "z": 6,
+        "name": "CENTRAL FIRE ESCAPE",
+        "facing": -1
+      },
+      {
+        "x": 28,
+        "z": 7,
+        "name": "EAST FIRE ESCAPE",
+        "facing": -1
+      }
+    ],
     "source": "Same approximate 1829 core footprint; upper rooms and partitions are gameplay estimates"
   }
 }

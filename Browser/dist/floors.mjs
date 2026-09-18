@@ -3,7 +3,7 @@ import {path,walkable} from './core.mjs';
 export const FLOOR_HEIGHT=4.2;
 export function makeFloors(ground){
   if(!ground.upperFloor)throw Error('Upper floor layout is missing');
-  const upper={...ground,...ground.upperFloor,exits:[],stairs:ground.stairs.map(s=>({...s,direction:'DOWN'}))};
+  const upper={...ground,...ground.upperFloor,exits:ground.upperFloor.exits||[],stairs:ground.stairs.map(s=>({...s,direction:'DOWN'}))};
   return [ground,upper];
 }
 export function nearStair(floors,actor){

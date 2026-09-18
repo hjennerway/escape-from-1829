@@ -128,13 +128,14 @@ assert.deepEqual(t.enemies.map(e=>({x:e.x,z:e.z,floor:e.floor})),frozen,'holding
 t.openArtViewer(t.artPanels[0]);assert.equal(t.artViewing,t.artPanels[0]);assert.equal(elements.get('artViewer').hidden,false);t.update(.4);assert.equal(t.state,'play');t.closeArtViewer();
 for(const stair of layout.stairs){
  Object.assign(t.player,{x:stair.x*layout.cellSize,z:stair.z*layout.cellSize});
- t.keys.add('KeyE');for(let i=0;i<22;i++)t.update(.04);
- assert.equal(t.player.floor,1);assert.equal(elements.get('floorName').textContent,'UPPER FLOOR');
+ t.keys.add('KeyE');t.update(.49);assert.equal(t.player.floor,0,'Stairs wait for the full half-second hold');t.update(.01);
+ assert.equal(t.player.floor,1);assert.equal(elements.get('floorName').textContent,'UPPER FLOOR');assert.equal(elements.get('floorExits').textContent,'3 EXITS THIS FLOOR');
  assert.equal(t.groups[0].visible,false);assert.equal(t.groups[1].visible,true);
  assert(t.camera.position.y>=floors.FLOOR_HEIGHT+1);
  for(let i=0;i<22;i++)t.update(.04);assert.equal(t.player.floor,1,'Held key must not bounce floors');
  t.keys.delete('KeyE');t.update(.04);t.keys.add('KeyE');
- for(let i=0;i<22;i++)t.update(.04);assert.equal(t.player.floor,0);
+ t.setFrameDt(.25);t.animate();assert.equal(t.player.floor,1);assert.equal(elements.get('exitFill').style.width,'50%');
+ t.animate();assert.equal(t.player.floor,0,'Stairs use half a second of real time at low FPS');t.setFrameDt(.04);
  t.keys.delete('KeyE');t.update(.04);startPlaying();
 }
 // The ghost uses a staircase, not an x/z-only collision through the ceiling.
@@ -148,11 +149,16 @@ for(const e of t.enemies){Object.assign(e,{x:50,z:30,floor:0,memory:0,rethink:0,
 t.update(.04);assert.equal(t.state,'play','Different-floor enemies must not capture player');
 assert(t.enemies.every(e=>!e.mesh.visible));
 startPlaying();assert.equal(t.player.floor,0);assert(t.enemies.every(e=>e.floor===0));
-assert.equal(t.groups[0].visible,true);assert.equal(t.groups[1].visible,false);
+assert.equal(t.groups[0].visible,true);assert.equal(t.groups[1].visible,false);assert.equal(elements.get('floorExits').textContent,'5 EXITS THIS FLOOR');
 console.log('PASS: real game init, both stair interactions, held-key latch, floor groups/HUD, ghost follows, cross-floor capture isolation, restart.');
 
-for(const exit of layout.exits){
- startPlaying();t.finish(true,exit.name);
+for(const [floorIndex,floor] of floors.makeFloors(layout).entries())for(const exit of floor.exits){
+ startPlaying();Object.assign(t.player,{x:exit.x*layout.cellSize,z:exit.z*layout.cellSize,floor:floorIndex});t.showFloor();t.update(.01);
+ assert.equal(elements.get('interact').hidden,false);assert.equal(element('interactb').textContent,'HOLD E TO ESCAPE');assert.equal(elements.get('exitName').textContent,exit.name);
+ t.keys.add('KeyE');t.update(.25);assert.equal(t.state,'play');assert.equal(elements.get('exitFill').style.width,'50%');
+ t.keys.delete('KeyE');t.update(.01);assert.equal(elements.get('exitFill').style.width,'0%','Releasing E cancels the partial hold');
+ t.keys.add('KeyE');t.setFrameDt(.25);t.animate();assert.equal(t.state,'play');assert.equal(elements.get('exitFill').style.width,'50%');
+ t.animate();assert.equal(t.state,'cutscene','Exits use half a second of real time at low FPS');
  assert.equal(t.state,'cutscene');assert.equal(elements.get('escapeCutscene').hidden,false);
  assert.equal(elements.get('result').hidden,true);assert.equal(elements.get('hud').hidden,true);
  const position={...t.player},pursuers=t.enemies.map(e=>({x:e.x,z:e.z})),gameTime=t.elapsed;
@@ -167,6 +173,7 @@ for(const exit of layout.exits){
  t.animate();assert.equal(t.lastRender.scene,t.escapeExterior.scene,'result keeps the estate background');
  assert.equal(elements.get('escapeCutscene').hidden,true);
  assert(elements.get('resultBody').textContent.includes(exit.name.toLowerCase()));
+ assert(elements.get('resultBody').textContent.includes('7 other routes are waiting.'));
 }
 startPlaying();t.finish(true,layout.exits[0].name);t.escapeCutscene.skip();assert.equal(t.state,'won');
 t.escapeCutscene.skip();assert.equal(t.state,'won','Repeated skip is harmless');
@@ -179,4 +186,4 @@ reduced.start();const still={...reducedCamera.position};reduced.update(5);assert
 reduced.update(5);assert.equal(completed,1);
 assert(sampleEscape(0,{aspect:.5}).position[1]>sampleEscape(0).position[1],'portrait framing pulls back');
 assert.deepEqual(sampleEscape(30),sampleEscape(10),'camera stops at the final shot');
-console.log('PASS: 3D escape after all five exits, ten-second pan at low FPS, frozen gameplay, retained result background, skip, retry, defeat exclusion, reduced motion.');
+console.log('PASS: hold-E escape through all eight exits on both floors, ten-second pan at low FPS, frozen gameplay, retained result background, skip, retry, defeat exclusion, reduced motion.');

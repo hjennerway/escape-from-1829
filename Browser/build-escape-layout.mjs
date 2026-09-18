@@ -30,8 +30,11 @@ const layout={width,height,cellSize,cells,geometrySource:'layout',galleryZ:19,
     {name:'NHS England office',x:28,z:16},{name:'Snug',x:11,z:24},{name:'Arden and GEM office',x:29,z:24}],
   enemies:[{name:'Security',x:28,z:12,type:1},{name:'Deva asylum ghost',x:20,z:7,type:2}],patrol,
   upperFloor:{name:'UPPER FLOOR',cells:[...cells],patrol,
+    exits:[{x:12,z:7,name:'WEST FIRE ESCAPE',facing:-1},
+      {x:20,z:6,name:'CENTRAL FIRE ESCAPE',facing:-1},
+      {x:28,z:7,name:'EAST FIRE ESCAPE',facing:-1}],
     source:'Same approximate 1829 core footprint; upper rooms and partitions are gameplay estimates'}
 };
 for(const file of ['./dist/layout.json','../Assets/Resources/layout.json'])
   await writeFile(new URL(file,import.meta.url),JSON.stringify(layout,null,2)+'\n');
-console.log(`1829 escape plan: ${cells.reduce((a,b)=>a+b,0)} cells on each floor, five exits.`);
+console.log(`1829 escape plan: ${cells.reduce((a,b)=>a+b,0)} cells on each floor, five ground-floor exits and three upstairs fire escapes.`);

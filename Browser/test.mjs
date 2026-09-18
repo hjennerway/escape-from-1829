@@ -41,7 +41,17 @@ const canonical=JSON.parse(await readFile(new URL('../Assets/Resources/layout.js
 assert.deepEqual(l,canonical);
 console.log('PASS: mirrored reception stair approaches, canonical/browser parity.');
 const floors=makeFloors(l),upper=floors[1];
-assert.equal(upper.exits.length,0);
+assert.deepEqual(upper.exits.map(({x,z,facing})=>({x,z,facing})),[
+  {x:12,z:7,facing:-1},{x:20,z:6,facing:-1},{x:28,z:7,facing:-1}
+],'Upstairs exits sit at the three marked rear corridor ends');
+assert.equal(nearExit(l,{x:20*l.cellSize,z:6*l.cellSize}),undefined,'Central fire escape belongs upstairs only');
+for(const exit of upper.exits){
+  assert.equal(upper.cells[(exit.z+exit.facing)*upper.width+exit.x],0,'Fire escape faces an exterior wall');
+  const destination={x:exit.x*upper.cellSize,z:exit.z*upper.cellSize,floor:1};
+  assert(walkable(upper,destination.x,destination.z));
+  assert.equal(nearExit(upper,destination),exit);
+  assert.equal(routeBetweenFloors(floors,{...spawn,floor:0},destination).at(-1)?.floor,1,'Fire escape reachable from reception');
+}
 assert(upper.stairs.every(t=>t.direction==='DOWN'));
 for(const floor of floors)for(const point of [...floor.patrol,...floor.rooms,...floor.enemies]){
   assert(walkable(floor,point.x*l.cellSize,point.z*l.cellSize),'Patrol, room label and pursuer positions stay inside');
@@ -57,7 +67,6 @@ for(const stair of l.stairs){
   for(let i=0;i<upper.cells.length;i++)if(upper.cells[i]){
     const destination={x:i%upper.width*upper.cellSize,z:Math.floor(i/upper.width)*upper.cellSize,floor:1};
     if(destination.x!==traveller.x||destination.z!==traveller.z)assert(path(upper,traveller,destination).length>0);
-    assert.equal(nearExit(upper,destination),undefined);
     const route=routeBetweenFloors(floors,{...spawn,floor:0},destination);
     assert(route.length>0);assert.equal(route.at(-1).floor,1);
     assert.equal(route.filter((p,j)=>j>0&&p.floor!==route[j-1].floor).length,1);
@@ -68,4 +77,4 @@ for(const stair of l.stairs){
   }
   assert(changeFloor(floors,traveller,nearStair(floors,traveller)));assert.equal(traveller.floor,0);
 }
-console.log('PASS: both stairs up/down, all upper rooms reachable, cross-floor pursuer routes, downstairs-only exits.');
+console.log('PASS: both stairs up/down, all upper rooms reachable, cross-floor pursuer routes, five ground-floor exits and three reachable upstairs fire escapes.');

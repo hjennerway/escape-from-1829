@@ -6,13 +6,18 @@ import {makeFloors} from './dist/floors.mjs';
 import {walkable} from './dist/core.mjs';
 const layout=JSON.parse(await readFile(new URL('./dist/layout.json',import.meta.url)));
 const snapshot=JSON.stringify(layout),scenes=[];
-let openings=0,passages=0,headers=0,trimSamples=0,skirtingSamples=0,stairSamples=0;
+let openings=0,passages=0,headers=0,trimSamples=0,skirtingSamples=0,stairSamples=0,exitDoors=0;
 for(const floor of makeFloors(layout)){
  const scene=new THREE.Scene();buildArchitecture(THREE,scene,floor);scene.updateMatrixWorld(true);scenes.push(scene);
  assert(scene.children.length<=22,'Architectural details stay batched');
  const surfaces=interiorWallSurfaces(floor),windows=surfaces.filter(w=>w.window);
  assert(windows.length>10,'Arched windows appear throughout both floors');
- const ray=new THREE.Raycaster();ray.far=1;
+ const ray=new THREE.Raycaster();ray.far=3;
+ for(const exit of floor.exits){
+  ray.set(new THREE.Vector3(exit.x*floor.cellSize,1.65,exit.z*floor.cellSize-exit.facing*1.5),new THREE.Vector3(0,0,exit.facing));
+  assert.equal(ray.intersectObjects(scene.children,false)[0]?.object.name,'Layout Panel',exit.name+' door must be visible from the corridor');exitDoors++;
+ }
+ ray.far=1;
  // Inspect actual window apertures in every wall orientation, below and above
  // the spring line: the first hit must be a recessed pane, not solid plaster.
  for(const [dx,dz] of [[1,0],[-1,0],[0,1],[0,-1]]){
@@ -97,4 +102,4 @@ for(const floor of makeFloors(layout)){
 }
 assert.equal(JSON.stringify(layout),snapshot,'Finishes do not alter navigation');
 assert.equal(scenes[0].getObjectByName('Layout Brick').material,scenes[1].getObjectByName('Layout Brick').material,'Floors share finish resources');
-console.log(`PASS: ${openings} exposed arched-window samples, ${passages} unobstructed passage samples, ${headers} solid header samples, ${trimSamples} separated window-trim samples, ${skirtingSamples} skirting joins, ${stairSamples} separated stair edges, navigation unchanged, shared materials and bounded batches.`);
+console.log(`PASS: ${exitDoors} visible exit doors, ${openings} exposed arched-window samples, ${passages} unobstructed passage samples, ${headers} solid header samples, ${trimSamples} separated window-trim samples, ${skirtingSamples} skirting joins, ${stairSamples} separated stair edges, navigation unchanged, shared materials and bounded batches.`);

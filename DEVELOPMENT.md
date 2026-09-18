@@ -1204,5 +1204,22 @@ Chrome/WebGL checks cover the image-only display, caption visibility, all three
 recent additions on both floors, original image dimensions, and E opening and
 release. The existing `check-escape-wall-art.mjs` harness and its screenshots and
 JSON under `Browser/artifacts/escape-wall-art-*` were refreshed with zero page or
-shader errors. Only browser rendering/CSS changed; image files, navigation and
+shader errors. The full 55-check browser suite passes; its output is saved in
+`Browser/artifacts/escape-wall-art-captions-suite.txt`. Only browser rendering/CSS
+changed; image files, navigation and
 Unity, Blender, GLB and compiled aerial exports are unchanged.
+
+## Half-second E interactions (September 18)
+
+Stair transfers and all five exits now use the shared 0.5-second hold duration in
+`Browser/dist/game.mjs`, including the touch USE control. Their progress bars use
+the same duration. Hold timers use elapsed frame time separately from the bounded
+movement step, so low frame rates do not stretch the interaction delay. Artwork
+continues to open immediately while E is held and closes on release.
+
+`Browser/test-game.mjs` verifies the 0.49/0.5-second stair boundary, both staircases,
+held-key latching, cancellation on release, 50% progress after 0.25 seconds, and
+half-second stair/exit interactions at four frames per second. The full browser
+suite output is saved in `Browser/artifacts/interaction-half-second-suite.txt`.
+Only browser gameplay code and checks changed; model assets and exports are
+unaffected.
