@@ -191,7 +191,8 @@ function pause(){if(state!=='play')return;closeArtViewer();state='paused';keys.c
 function finish(won,who){closeArtViewer();state=won?'cutscene':'lost';keys.clear();document.exitPointerLock?.();$('resultTag').textContent=won?'OUTSIDE. AT LAST.':'THE BUILDING KEPT YOU';$('resultTitle').textContent=won?'You made it out.':'Locked in the basement';$('resultBody').textContent=won?`You escaped through ${who.toLowerCase()} in ${elapsed.toFixed(1)} seconds. Four other routes are waiting.`:`${who} captured you after ${elapsed.toFixed(1)} seconds. Break line of sight, save your sprint, and use the map to find a different route.`;$('resume').hidden=true;$('resultExplore').hidden=!won;$('retry').textContent='TRY ANOTHER ROUTE ↗';$('result').hidden=won;$('interact').hidden=true;
  if(won){$('hud').hidden=true;$('touch').hidden=true;$('pause').hidden=true;escapeCutscene.start();}
 }
-function resume(){state='play';$('result').hidden=true;lock();}
+function resume(){state='play';$('result').hidden=true;$('instructions').hidden=true;lock();}
+function showHelp(){if(state!=='play'&&state!=='paused')return;pause();dragging=false;previousPointer=null;$('result').hidden=true;$('instructions').hidden=false;$('closeHelp').focus();}
 function beep(hz,length,volume){if(!audioCtx||!audioOn)return;const t=audioCtx.currentTime,o=audioCtx.createOscillator(),g=audioCtx.createGain();o.type='sine';o.frequency.setValueAtTime(hz,t);o.frequency.exponentialRampToValueAtTime(hz*.5,t+length);g.gain.setValueAtTime(volume,t);g.gain.exponentialRampToValueAtTime(.001,t+length);o.connect(g);g.connect(audioCtx.destination);o.start(t);o.stop(t+length);}
 function update(dt){
  if(state!=='play')return;
@@ -273,9 +274,21 @@ function animate(){requestAnimationFrame(animate);const frameDt=clock.getDelta()
  }
  if(state==='cutscene'){renderer.render(escapeExterior.scene,escapeExterior.camera);return;}
  interiorLights.update(player);camera.getWorldDirection(tmp);torch.position.copy(camera.position);torchTarget.position.copy(camera.position).addScaledVector(tmp,12);renderer.render(scene,camera);}
-$('start').onclick=start;$('help').onclick=()=>{$('instructions').hidden=false;};$('closeHelp').onclick=()=>{$('instructions').hidden=true;};$('helpPlay').onclick=start;$('retry').onclick=start;$('resume').onclick=resume;$('pause').onclick=pause;$('audio').onchange=e=>audioOn=e.target.checked;
+$('start').onclick=start;$('closeHelp').onclick=resume;$('helpPlay').onclick=resume;$('retry').onclick=start;$('resume').onclick=resume;$('pause').onclick=pause;$('audio').onchange=e=>audioOn=e.target.checked;
 function toggleMap(){if(state==='play'){$('floorMap').hidden=!$('floorMap').hidden;drawMap();}}
-addEventListener('keydown',e=>{if(state==='cutscene'){if(['Escape','Space','Enter'].includes(e.code)){e.preventDefault();escapeCutscene.skip();}return;}if(['Tab','Space','ArrowUp','ArrowDown'].includes(e.code))e.preventDefault();if(e.repeat)return;if(e.code==='Escape'||e.code==='KeyP'){if(state==='play')pause();else if(state==='paused')resume();return;}if(state!=='play')return;keys.add(e.code);if(e.code==='KeyF')torch.visible=!torch.visible;if(e.code==='Tab'||e.code==='KeyM')toggleMap();});
+addEventListener('keydown',e=>{
+ if(state==='cutscene'){if(['Escape','Space','Enter'].includes(e.code)){e.preventDefault();escapeCutscene.skip();}return;}
+ if(!$('instructions').hidden){
+  if(!e.repeat&&['KeyH','Escape','KeyP'].includes(e.code)){e.preventDefault();resume();}
+  return;
+ }
+ if(['Tab','Space','ArrowUp','ArrowDown'].includes(e.code))e.preventDefault();
+ if(e.repeat)return;
+ if(e.code==='KeyH'&&(state==='play'||state==='paused')){e.preventDefault();showHelp();return;}
+ if(e.code==='Escape'||e.code==='KeyP'){if(state==='play')pause();else if(state==='paused')resume();return;}
+ if(state!=='play')return;
+ keys.add(e.code);if(e.code==='KeyF')torch.visible=!torch.visible;if(e.code==='Tab'||e.code==='KeyM')toggleMap();
+});
  addEventListener('keyup',e=>{keys.delete(e.code);if(e.code==='KeyE')closeArtViewer();});addEventListener('blur',()=>{keys.clear();closeArtViewer();pause();});document.addEventListener('visibilitychange',()=>{clock?.getDelta();if(document.hidden)pause();});document.addEventListener('pointerlockchange',()=>{if(!document.pointerLockElement&&state==='play'&&!touch)pause();});
 function look(dx,dy){const s=Number($('sensitivity').value)*.0018;yaw-=dx*s;pitch=THREE.MathUtils.clamp(pitch-dy*s,-1.3,1.3);}
 addEventListener('mousemove',e=>{if(state==='play'&&document.pointerLockElement===canvas)look(e.movementX,e.movementY);});

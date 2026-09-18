@@ -1,5 +1,18 @@
 # Modern car park
 
+## Road outline — 18 September 2026
+
+The yellow-marked screenshot requests the same pale outline around the mapped
+car park and its access aprons as the surrounding roads. The saved asphalt
+polygon is unchanged. A 0.6-unit border follows every concave edge, using
+`ROAD_STYLE` colours, depth and rounded joins. It sits beneath the asphalt and
+joining roads, so the road mouths remain open. The border is a child of the
+surface and inherits its layout and timeline visibility (2010 onwards).
+
+The browser source and local compiled aerial model include the outline; Unity
+and Blender exports are unchanged. Aerial and plan checks are saved as
+`Browser/artifacts/car-park-outline-*.png`.
+
 `1829-4.kml` preserves the supplied `1829 (4).kml` byte-for-byte. Only the
 placemark named **Car park** is imported. Its Polygon outer ring contains
 62 distinct vertices and a closing copy of the first point. The saved LookAt

@@ -27,7 +27,7 @@ export const BUILDING_CATALOG=Object.freeze([
  {id:'leighton-newton',name:'Annexe · Leighton / Newton Ward',photos:[],contextPhotos:annexe},
  {id:'oakmere',name:'Annexe · Oakmere Ward',photos:[],contextPhotos:[photo('oakmere-lawn','Oakmere lawn · adjoining central rear range')]},
  {id:'larkton-jodrell',name:'Annexe · Larkton / Jodrell Ward',photos:[photo('annexe-outer','Annexe · outer west elevation'),photo('jodrell-mural','Jodrell Ward · radio telescope mural'),photo('jodrell-mural-stairwell','Jodrell Ward · radio telescope mural, stairwell view')]},
- {id:'greenhouses',name:'Greenhouses',photos:[photo('greenhouses','Greenhouses and gardeners’ buildings')]},
+ {id:'greenhouses',name:'Greenhouses',photos:[photo('greenhouses','Greenhouses and gardeners’ buildings'),photo('greenhouses-interior','Greenhouses · interior and growing benches')]},
  {id:'outhouse',name:'Outhouse',photos:[1,2,3].map(n=>photo(`outhouse-${n}`,`Outhouse · view ${n}`))},
  {id:'willows',name:'The Willows',locations:['willows','willows-photo','willows-plan'],photos:[photo('willows','The Willows · lower photograph supplies the building reference')]},
  {id:'estates',name:'Estates Department',photos:[photo('estates','Estates Department · service court')]},

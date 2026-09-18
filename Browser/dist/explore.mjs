@@ -16,7 +16,9 @@ import {GREENHOUSE_VIEWS} from './greenhouses.mjs';
 import {OUTHOUSE_VIEWS} from './outhouse.mjs';
 import {LAUNDRY_VIEWS} from './laundry.mjs';
 import {MAIN_ADMIN_VIEWS} from './main-admin-building.mjs';
-import {createAerialLayouts,bindLayoutToggles} from './aerial-layouts.mjs';
+import {createAerialLayouts} from './aerial-layouts.mjs';
+import {prepareEstateTimeline} from './estate-timeline.mjs';
+import {bindTimelineControls} from './timeline-controls.mjs';
 import {WATER_TOWER_VIEWS} from './water-tower.mjs';
 import {TOWER_BUILDING_VIEWS} from './tower-buildings.mjs';
 import {ANNEXE_VIEWS,ANNEXE_WARD_WALKS} from './annexe.mjs';
@@ -56,12 +58,13 @@ try{
   canvas.addEventListener('webglcontextrestored',exterior.invalidateShadows);
   exterior.camera.near=.1;exterior.camera.updateProjectionMatrix();
   const layouts=createAerialLayouts(THREE,exterior);
+  const timeline=prepareEstateTimeline(THREE,exterior,layouts);
   // Road-name sprites are map overlays; keep them out of the walking view.
   layouts.roads.traverse(object=>{if(object.isSprite)object.visible=false;});
   const obstacles=exteriorObstacles(THREE,exterior.model);
   const walker=createWalker(exterior.camera,obstacles);
   function refreshObstacles(){walker.setObstacles(exteriorObstacles(THREE,exterior.model));}
-  bindLayoutToggles(layouts,document.getElementById('layoutControls'),refreshObstacles);
+  bindTimelineControls(timeline,document.getElementById('layoutControls'),refreshObstacles);
   bindTreeToggle(exterior,document,refreshObstacles);
   const view=resolveLocationView(new URLSearchParams(location.search).get('view'));
   if(LOCATION_WALKS[view])walker.setView(LOCATION_WALKS[view]);

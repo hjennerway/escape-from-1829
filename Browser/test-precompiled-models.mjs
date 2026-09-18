@@ -8,6 +8,7 @@ import * as THREE from './dist/vendor/three.module.js';
 import {decodeModel} from './dist/model-binary.mjs';
 import {restoreAerialScene} from './dist/aerial-scene.mjs';
 import {modelSourceHash} from './model-build-inputs.mjs';
+import {PERIODS} from './dist/estate-periods.mjs';
 
 const manifest=JSON.parse(await readFile(new URL('./dist/compiled/manifest.json',import.meta.url),'utf8'));
 assert.equal(manifest.sourceHash,await modelSourceHash(),'Rebuild models after editing source');
@@ -72,14 +73,14 @@ try{
   assert(metrics.pixels.significantFraction<.005&&metrics.pixels.meanChannelError<.5,'Precompiled rendering must visually match procedural rendering');
   await page.keyboard.press('t');assert.equal(await page.evaluate(()=>window.__models.exterior.trees.visible),false);
   await page.keyboard.press('t');
-  for(const [historic,modern] of [[true,true],[false,true],[false,false],[true,false]]){
-    await page.locator('#historicLayout').setChecked(historic);await page.locator('#modernLayout').setChecked(modern);
-    assert.deepEqual(await page.evaluate(()=>window.__models.layouts.state),{historic,modern});
+  for(const index of [0,4,6,9,10,11,8]){
+    await page.locator('#periodSlider').fill(String(index));
+    assert.equal(await page.evaluate(()=>window.__models.exterior.timeline.period.year),PERIODS[index].year);
   }
   const before=await page.evaluate(()=>window.__models.exterior.camera.position.toArray());
   await page.mouse.move(500,350);await page.mouse.down();await page.mouse.move(570,370);await page.mouse.up();
   await page.waitForFunction(before=>JSON.stringify(window.__models.exterior.camera.position.toArray())!==JSON.stringify(before),before);
-  await page.setViewportSize({width:390,height:844});await page.locator('#fitLayouts').click();
+  await page.setViewportSize({width:390,height:844});await page.locator('#resetAerial').click();
   assert.equal(await page.evaluate(()=>window.__models.exterior.camera.aspect),390/844);
   await load('?models=compiled&buildingDetail=full&view=front');assert.equal(await page.evaluate(()=>window.__models.buildingDetail),null);
   // Missing, stale/incompatible and damaged assets all keep the page usable.

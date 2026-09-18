@@ -1,0 +1,98 @@
+
+> test:compiled
+> node test-precompiled-models.mjs && node test-timeline-browser.mjs
+
+Checking aerial?models=source
+Checking aerial?models=compiled
+Checking aerial?models=compiled&buildingDetail=full&view=front
+Checking aerial
+Browser: Failed to load resource: the server responded with a status of 404 (Not Found)
+Checking aerial
+Checking aerial
+PASS: compiled estate, shadows, grass shaders, exact draw counts, tree/layout controls, orbit, portrait, full detail and missing/incompatible/damaged model fallback.
+{
+  "source": {
+    "mode": "procedural",
+    "milliseconds": 2175.7999999998137,
+    "triangles": 718284,
+    "calls": 2833,
+    "levels": [
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      1,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      1,
+      1,
+      1,
+      1,
+      1
+    ],
+    "readyMilliseconds": 10580.409500000002
+  },
+  "compiled": {
+    "mode": "compiled",
+    "milliseconds": 1767.5,
+    "triangles": 718284,
+    "calls": 2833,
+    "levels": [
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      1,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      1,
+      1,
+      1,
+      1,
+      1
+    ],
+    "readyMilliseconds": 10350.680400000001
+  },
+  "identicalScreenshot": false,
+  "pixels": {
+    "significantFraction": 0.00015428571428571428,
+    "meanChannelError": 0.05068857142857143
+  }
+}
+PASS: every timeline stop in source/compiled pages, descriptions, URL reload/navigation, keyboard/endpoints, tree focus, selection, mobile fitting and live walking collision refresh.

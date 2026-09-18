@@ -1,4 +1,5 @@
 import {BUILDING_CATALOG} from './building-catalog.mjs';
+import {BUILDING_SECTIONS,existsInYear} from './estate-periods.mjs';
 
 export function isBuildingVisible(root){
  for(let object=root;object;object=object.parent)if(!object.visible)return false;
@@ -49,14 +50,17 @@ export function createBuildingSelection(THREE,exterior){
  ];
  const worldBox=new THREE.Box3(),size=new THREE.Vector3(),centre=new THREE.Vector3(),instance=new THREE.Matrix4(),matrix=new THREE.Matrix4();
  exterior.scene.updateMatrixWorld(true);
- function store(id,root,geometry,transform,bounds){
-  if(!data.has(id))data.set(id,{positions:[],root});
-  appendGeometry(data.get(id).positions,geometry,transform,bounds);
+ function store(id,root,geometry,transform,bounds,section){
+  if(!data.has(id))data.set(id,{parts:new Map(),root});
+  const parts=data.get(id).parts,key=section??BUILDING_SECTIONS[id];
+  if(!parts.has(key))parts.set(key,[]);
+  appendGeometry(parts.get(key),geometry,transform,bounds);
  }
- function visit(object,id=null,root=null){
+ function visit(object,id=null,root=null,section=null){
   if(excluded.has(object)||object.userData.aerialBatch||object.userData.buildingDetailLevel>0)return;
   if(!object.visible&&!object.userData.aerialBatchSource&&object.userData.buildingDetailLevel!==0)return;
   if(roots.has(object)){id=roots.get(object);root=object;}
+  section=object.userData.estateSection??section;
   if(object.isMesh&&!Array.isArray(object.material)&&!object.material.userData.estateGrass){
    const geometry=object.geometry;if(!geometry.boundingBox)geometry.computeBoundingBox();
    for(let i=0;i<(object.isInstancedMesh?object.count:1);i++){
@@ -69,35 +73,44 @@ export function createBuildingSelection(THREE,exterior){
     if(/path|paving|drive|lawn|gravel|flower|hedge|bed|kerb/i.test(object.name))continue;
     if(id==='hale'){
      const boundary=exterior.haleWard.position.z-4;
-     store('hale-daresbury',root,geometry,matrix,[[2,boundary,-1]]);
-     store('huxley-dunham',root,geometry,matrix,[[2,boundary,1]]);
-    }else if(id==='tower-buildings'&&/South cross-gabled stores|Long east service range/.test(object.name))store('stores',root,geometry,matrix);
-    else if(id)store(id,root,geometry,matrix);
+     store('hale-daresbury',root,geometry,matrix,[[2,boundary,-1]],section);
+     store('huxley-dunham',root,geometry,matrix,[[2,boundary,1]],section);
+    }else if(id==='tower-buildings'&&/South cross-gabled stores|Long east service range/.test(object.name))store('stores',root,geometry,matrix,null,section);
+    else if(id)store(id,root,geometry,matrix,null,section);
     else if(centre.x>-82&&centre.x<108&&centre.z>-58&&centre.z<49&&(object.castShadow||object.isInstancedMesh)){
-     for(const [ward,bounds] of coreRegions)store(ward,layouts.shared,geometry,matrix,bounds);
+     for(const [ward,bounds] of coreRegions)store(ward,layouts.shared,geometry,matrix,bounds,section);
     }
    }
   }
-  for(const child of object.children)visit(child,id,root);
+  for(const child of object.children)visit(child,id,root,section);
  }
  visit(exterior.model);
  const material=new THREE.MeshBasicMaterial({color:0xffffff,side:THREE.DoubleSide,toneMapped:false}),entries=[];
+ function geometryFor(entry,sections){
+  const key=sections.join('|');if(entry.geometryCache.has(key))return entry.geometryCache.get(key);
+  const positions=sections.flatMap(section=>entry.parts.get(section)),geometry=new THREE.BufferGeometry();
+  geometry.setAttribute('position',new THREE.Float32BufferAttribute(positions,3));geometry.computeBoundingBox();geometry.computeBoundingSphere();
+  entry.geometryCache.set(key,geometry);return geometry;
+ }
  for(const metadata of BUILDING_CATALOG){
-  const source=data.get(metadata.id);if(!source?.positions.length)continue;
-  const geometry=new THREE.BufferGeometry();geometry.setAttribute('position',new THREE.Float32BufferAttribute(source.positions,3));geometry.computeBoundingBox();geometry.computeBoundingSphere();
-  const mesh=new THREE.Mesh(geometry,material);mesh.name=metadata.name;mesh.userData.buildingId=metadata.id;mesh.matrixAutoUpdate=false;
-  entries.push({...metadata,root:source.root,mesh});
+  const source=data.get(metadata.id);if(!source)continue;
+  const sections=[...source.parts].filter(([,positions])=>positions.length).map(([section])=>section);if(!sections.length)continue;
+  const entry={...metadata,root:source.root,parts:source.parts,sections,geometryCache:new Map()};
+  const mesh=new THREE.Mesh(geometryFor(entry,sections),material);mesh.name=metadata.name;mesh.userData.buildingId=metadata.id;mesh.matrixAutoUpdate=false;
+  entry.mesh=mesh;entries.push(entry);
  }
  const raycaster=new THREE.Raycaster(),point=new THREE.Vector2();
- function refresh(){for(const entry of entries)entry.mesh.visible=isBuildingVisible(entry.root);}
- return {entries,refresh,
+ function visibleSections(entry){return exterior.timeline?.active?entry.sections.filter(section=>existsInYear(section,exterior.timeline.period.year)):entry.sections;}
+ function isVisible(entry){return isBuildingVisible(entry.root)&&visibleSections(entry).length>0;}
+ function refresh(){for(const entry of entries){const sections=visibleSections(entry);entry.mesh.visible=isBuildingVisible(entry.root)&&sections.length>0;if(sections.length)entry.mesh.geometry=geometryFor(entry,sections);}}
+ return {entries,refresh,isVisible,
   pick(clientX,clientY,rect,camera){
    if(!rect.width||!rect.height)return null;
    refresh();camera.updateMatrixWorld();point.set((clientX-rect.left)/rect.width*2-1,-(clientY-rect.top)/rect.height*2+1);raycaster.setFromCamera(point,camera);
    const hit=raycaster.intersectObjects(entries.filter(e=>e.mesh.visible).map(e=>e.mesh),false)[0];
    return hit?entries.find(e=>e.id===hit.object.userData.buildingId):null;
   },
-  dispose(){for(const entry of entries)entry.mesh.geometry.dispose();material.dispose();}
+  dispose(){for(const entry of entries)for(const geometry of entry.geometryCache.values())geometry.dispose();material.dispose();}
  };
 }
 
@@ -118,7 +131,7 @@ export function createBuildingGlow(THREE,renderer,selection){
  return {
   set(entry){selected=entry;},
   render(camera3D){
-   if(!selected||!isBuildingVisible(selected.root))return;
+   if(!selected||!selection.isVisible(selected))return;
    selection.refresh();renderer.getSize(viewportSize);
    const w=Math.ceil(viewportSize.x/2),h=Math.ceil(viewportSize.y/2);
    if(width!==w||height!==h){width=w;height=h;for(const target of [mask,blurX,blurY])target.setSize(w,h);}

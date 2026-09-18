@@ -251,6 +251,12 @@
     "height": 900,
     "bytes": 171824
   },
+  "greenhouses-interior": {
+    "source": "Research/greenhouses/interior.png",
+    "width": 1200,
+    "height": 902,
+    "bytes": 275832
+  },
   "estates": {
     "source": "Research/estates/img1.jpg",
     "width": 1200,

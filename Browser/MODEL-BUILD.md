@@ -17,7 +17,7 @@ Open `http://127.0.0.1:1829/aerial.html` for automatic loading or append `?model
 
 ## What is built
 
-`build-models.mjs` calls the same `buildAerialScene` pipeline as the browser fallback. It bakes the estate, Historic/Modern layouts, material batches, shared tree instances and foliage levels, window atlases and geometry, masonry textures and road labels. It does not change the modelling source or require Blender.
+`build-models.mjs` calls the same `buildAerialScene` pipeline as the browser fallback. It bakes the estate, dated section groups, material batches, shared tree instances and foliage levels, window atlases and geometry, masonry textures and road labels. It does not change the modelling source or require Blender. The period controller restores those groups after loading, so each slider stop uses the same geometry and visibility as the source scene. Assets with an older timeline version, including those that retain later ground surfaces before construction, fall back to source construction.
 
 The output contains `manifest.json` and a content-hashed `aerial-….bin.gz` file. The manifest is published last, after the binary is complete. The binary stores final typed vertex/index/instance buffers, texture pixels and scene metadata, using the repository's vendored Three.js revision. Shared geometry, materials, instance attributes and building references remain shared after loading. The small Three-specific format also preserves layout hierarchy, shadow flags, LOD and custom material metadata; it is not an interchange GLB. Random Three.js UUIDs are normalized to stable IDs.
 

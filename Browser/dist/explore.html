@@ -3,7 +3,7 @@
 <body>
 <canvas id="game" tabindex="0" aria-label="Walk around the asylum exterior in 3D"></canvas>
 <nav class="explore-nav" aria-label="Explore navigation">
-  <a href="./">← BACK TO GAME</a>
+  <a id="backToIntro" href="./">← Back to intro</a>
   <div id="locationsPicker">
     <button id="locationsButton" type="button" aria-label="Locations" aria-expanded="false" aria-controls="locationsPanel">Locations</button>
     <div id="locationsPanel" hidden><ul>
@@ -51,13 +51,12 @@
     </ul></div>
   </div>
 </nav>
-<section id="layoutControls" aria-label="Estate layouts">
-  <h2>LAYOUTS</h2>
-  <div class="layout-options">
-    <label><input id="historicLayout" type="checkbox" checked><span>Historic</span></label>
-    <label><input id="modernLayout" type="checkbox"><span>Modern</span></label>
-  </div>
-  <p>Show either layout, or both.</p>
+<section id="layoutControls" aria-label="Estate timeline">
+  <h2><label for="periodSlider">THROUGH THE YEARS</label></h2>
+  <div class="period-heading" aria-live="polite" aria-atomic="true"><output id="periodYear" for="periodSlider">1916</output><span id="periodTitle">Isolation hospital</span></div>
+  <div class="period-range"><button id="previousPeriod" type="button" aria-label="Previous period">‹</button><input id="periodSlider" type="range" min="0" max="12" step="1" value="8" aria-describedby="periodDescription"><button id="nextPeriod" type="button" aria-label="Next period">›</button></div>
+  <div id="periodTicks" aria-hidden="true"></div><div class="period-endpoints" aria-hidden="true"><span>1829</span><span>2021</span></div>
+  <p id="periodDescription"></p><p id="periodNote" hidden></p>
 </section>
 <div class="explore-guide"><h1>Explore the asylum</h1><p>WASD move · Mouse look · Shift walk faster · T show/hide trees · Esc release mouse</p><p id="lookHint" role="status">Loading the grounds…</p><button id="look" disabled>START EXPLORING ↗</button></div>
 <span class="crosshair" aria-hidden="true">·</span>

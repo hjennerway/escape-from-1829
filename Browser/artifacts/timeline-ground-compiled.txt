@@ -1,0 +1,280 @@
+
+> test:compiled
+> node test-precompiled-models.mjs && node test-timeline-browser.mjs
+
+Checking aerial?models=source
+Checking aerial?models=compiled
+Checking aerial?models=compiled&buildingDetail=full&view=front
+Checking aerial
+Browser: Failed to load resource: the server responded with a status of 404 (Not Found)
+Checking aerial
+Checking aerial
+PASS: compiled estate, shadows, grass shaders, exact draw counts, tree/layout controls, orbit, portrait, full detail and missing/incompatible/damaged model fallback.
+{
+  "source": {
+    "mode": "procedural",
+    "milliseconds": 1678.5,
+    "triangles": 718910,
+    "calls": 2849,
+    "levels": [
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      1,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      1,
+      1,
+      1,
+      1,
+      1
+    ],
+    "readyMilliseconds": 8565.6256
+  },
+  "compiled": {
+    "mode": "compiled",
+    "milliseconds": 1506.0999999996275,
+    "triangles": 718910,
+    "calls": 2849,
+    "levels": [
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      1,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      1,
+      1,
+      1,
+      1,
+      1
+    ],
+    "readyMilliseconds": 10529.783899999999
+  },
+  "identicalScreenshot": false,
+  "pixels": {
+    "significantFraction": 0.00016857142857142857,
+    "meanChannelError": 0.05212809523809524
+  }
+}
+node:internal/modules/run_main:107
+    triggerUncaughtException(
+    ^
+
+AssertionError [ERR_ASSERTION]: Projection facades persist at every date
++ actual - expected
+... Skipped lines
+
+  [
+    {
++     color: 13884632,
++     z: 19.92
+-     color: 16777215,
+-     z: 20.032
+    },
+    {
+      color: 14803932,
+      z: 20.025
+    },
+    {
++     color: 13884632,
++     z: 19.92
+-     color: 16777215,
+-     z: 20.032
+    },
+    {
++     color: 13884632,
++     z: 19.92
+-     color: 16777215,
+-     z: 20.032
+    },
+    {
++     color: 7903391,
++     z: 19.855
+-     color: 16777215,
+-     z: 20.032
+    },
+    {
++     color: 13884632,
++     z: 19.92
+-     color: 16777215,
+-     z: 20.032
+    },
+    {
++     color: 13884632,
++     z: 19.92
+-     color: 16777215,
+-     z: 20.032
+    },
+    {
++     color: 13884632,
++     z: 19.92
+-     color: 16777215,
+-     z: 20.032
+    },
+    {
++     color: 13884632,
++     z: 19.92
+-     color: 16777215,
+-     z: 20.032
+    },
+    {
+      color: 13358289,
+      z: 19.92
+    },
+...
+    {
++     color: 13884632,
++     z: 19.92
+-     color: 16777215,
+-     z: 20.032
+    },
+    {
+      color: 14803932,
+      z: 20.025
+    },
+    {
++     color: 13884632,
++     z: 19.92
+-     color: 16777215,
+-     z: 20.032
+    },
+    {
++     color: 13884632,
++     z: 19.92
+-     color: 16777215,
+-     z: 20.032
+    },
+    {
++     color: 7903391,
++     z: 19.855
+-     color: 16777215,
+-     z: 20.032
+    },
+    {
++     color: 13884632,
++     z: 19.92
+-     color: 16777215,
+-     z: 20.032
+    },
+    {
++     color: 13884632,
++     z: 19.92
+-     color: 16777215,
+-     z: 20.032
+    },
+    {
++     color: 13884632,
++     z: 19.92
+-     color: 16777215,
+-     z: 20.032
+    },
+    {
++     color: 13884632,
++     z: 19.92
+-     color: 16777215,
+-     z: 20.032
+    },
+    {
+      color: 13358289,
+      z: 19.92
+    },
+
+    at file:///C:/Users/Harry/Documents/_escape-from-1829/Browser/test-timeline-browser.mjs:69:20 {
+  generatedMessage: false,
+  code: 'ERR_ASSERTION',
+  actual: [
+    { z: 19.92, color: 13884632 },
+    { z: 20.025, color: 14803932 },
+    { z: 19.92, color: 13884632 },
+    { z: 19.92, color: 13884632 },
+    { z: 19.855, color: 7903391 },
+    { z: 19.92, color: 13884632 },
+    { z: 19.92, color: 13884632 },
+    { z: 19.92, color: 13884632 },
+    { z: 19.92, color: 13884632 },
+    { z: 19.92, color: 13358289 },
+    { z: 19.92, color: 13358289 },
+    { z: 19.92, color: 13358289 },
+    { z: 19.92, color: 13884632 },
+    { z: 20.025, color: 14803932 },
+    { z: 19.92, color: 13884632 },
+    { z: 19.92, color: 13884632 },
+    { z: 19.855, color: 7903391 },
+    { z: 19.92, color: 13884632 },
+    { z: 19.92, color: 13884632 },
+    { z: 19.92, color: 13884632 },
+    { z: 19.92, color: 13884632 },
+    { z: 19.92, color: 13358289 },
+    { z: 19.92, color: 13358289 },
+    { z: 19.92, color: 13358289 }
+  ],
+  expected: [
+    { z: 20.032, color: 16777215 },
+    { z: 20.025, color: 14803932 },
+    { z: 20.032, color: 16777215 },
+    { z: 20.032, color: 16777215 },
+    { z: 20.032, color: 16777215 },
+    { z: 20.032, color: 16777215 },
+    { z: 20.032, color: 16777215 },
+    { z: 20.032, color: 16777215 },
+    { z: 20.032, color: 16777215 },
+    { z: 19.92, color: 13358289 },
+    { z: 19.92, color: 13358289 },
+    { z: 19.92, color: 13358289 },
+    { z: 20.032, color: 16777215 },
+    { z: 20.025, color: 14803932 },
+    { z: 20.032, color: 16777215 },
+    { z: 20.032, color: 16777215 },
+    { z: 20.032, color: 16777215 },
+    { z: 20.032, color: 16777215 },
+    { z: 20.032, color: 16777215 },
+    { z: 20.032, color: 16777215 },
+    { z: 20.032, color: 16777215 },
+    { z: 19.92, color: 13358289 },
+    { z: 19.92, color: 13358289 },
+    { z: 19.92, color: 13358289 }
+  ],
+  operator: 'deepStrictEqual',
+  diff: 'simple'
+}
+
+Node.js v24.20.0

@@ -1,5 +1,218 @@
 # Development and modelling notes
 
+## Remove marked east lawn items (September 18)
+
+Removed the east lawn lighting column, its arm and lamp, and the two small
+iron ground fittings beside Reception from the shared browser model. The
+removal applies before timeline grouping and batching, so none of the 13
+periods can restore them. The mirrored architecture still shares its builder;
+only the marked east fittings are omitted. See the
+[owner's reference](Research/timeline-lawn-items.png).
+
+The local compiled aerial asset is regenerated. The shared source also updates
+exterior walking and the game's estate scene. Unity and Blender exports are
+unchanged. `Browser/artifacts/front-lawn-items-preview.mjs` checks the three
+cleared positions at every stop in source and compiled views and captures
+close views in 1829, 1916 and 2021.
+
+Validation: the full `npm test` suite, `npm run test:compiled` and the lawn
+preview check pass. Source and compiled close views were visually checked.
+Logs are `Browser/artifacts/front-lawn-items-suite.txt` and
+`Browser/artifacts/front-lawn-items-compiled.txt`. Commands used the bundled
+`C:/Program Files/nodejs/npm.cmd` because the roaming npm shim points to a
+missing installation.
+
+## Entrance projections present from opening (September 18)
+
+Both circled three-bay projections beside Reception now appear at every timeline
+stop from 1829. The original frontage boundary includes their masonry, pale
+lower storeys, doors, glazing, cornices and complete slate roofs. The lower
+forward wings retain their 1849 date, and the temporary east closing wall still
+appears only at opening. See the owner's
+[marked reference](Research/timeline-entrance-projections.png) and the updated
+[timeline mapping](Research/timeline.md).
+
+The timeline format version is incremented so older compiled scenes fall back
+to source construction. The local compiled aerial model has been rebuilt.
+Existing period switches continue to invalidate shadows and refresh walking
+obstacles. Browser source and generated aerial assets are updated; Unity and
+Blender sources/exports are unchanged.
+
+`test-estate-periods.mjs` checks complete projection meshes, matching facade
+raycasts at every stop, batched rendering and opening-period collision.
+`test-timeline-browser.mjs` checks the facade in source, compiled and walking
+views. The full `npm test` suite passes. Close source/compiled views at 1829,
+1849 and 2021 pass without browser errors and were visually checked using
+`Browser/artifacts/entrance-projections-preview.mjs`; screenshots and validation
+logs use the `entrance-projections-` prefix.
+
+The compiled-scene checks and complete browser timeline check also pass. The
+compiled check used `Browser/artifacts/entrance-projections-validation/` for
+its output after Windows rejected overwriting an existing comparison screenshot.
+No rendering assertions were changed for that output-path retry.
+
+## Grass beneath unbuilt sections (September 18)
+
+Gravel, paving, low edging and raised lawn patches now follow the building
+section dates in aerial and exterior walking views. Hiding a later wing exposes
+the existing terrain with the same grass colour, texture and world projection
+as the surrounding estate. Raised lawns disappear too, eliminating the faint
+rectangular outlines left by their edges. The original inner courtyards and
+Reception approach remain; the two sweeping branches wait for the 1849 wings.
+
+Ground meshes and instances are partitioned before batching, so date changes
+continue to toggle parents, invalidate shadows and refresh walking obstacles.
+The compiled loader rejects obsolete timeline versions. The roof-height lookup
+for the opening east wall considers all roof fragments, independently of the
+new ground groups' traversal order.
+
+`test-estate-periods.mjs` raycasts the visible surfaces at every stop, before and
+after batching, checking grass texture identity and the absence of raised lawn
+patches before construction. `test-timeline-browser.mjs` repeats these checks
+in source, compiled and walking scenes. Close views and overviews are captured
+by `Browser/artifacts/timeline-ground-preview.mjs`. Browser sources and the local
+compiled aerial model are updated; Unity and Blender exports are unchanged.
+
+Validation: the full `npm test` suite and compiled-scene comparison pass. The
+dedicated ground browser run also passes every period and repeated transitions
+in source, compiled and walking views, with no browser errors. The overview and
+close screenshots were visually checked. Logs are
+`Browser/artifacts/timeline-ground-suite.txt`, `timeline-ground-compiled.txt`
+and `timeline-ground-visual.txt`. The broader timeline browser run in the
+compiled log stopped at a separate projection-facade comparison introduced by
+concurrent frontage work; the dedicated ground run completes independently.
+
+## Navigation and survival help (September 18)
+
+Aerial view now has **Back to intro** and no **Explore the asylum** navigation
+link. Timeline browser validation checks the selected year on location links
+and opens the walking page directly for its existing collision checks.
+
+The intro's **How to survive** link is removed. During Asylum Escape, **H**
+opens the same instructions and settings while pausing the current run, clearing
+movement input and releasing the mouse. **H**, **Esc**, **P**, the close button
+or **Resume** closes help and continues without restarting. The HUD and README
+include the shortcut. Keyboard navigation remains available inside help.
+
+The full browser suite and timeline browser validation pass. Updated game-loop
+checks cover frozen player/enemy positions and elapsed time, repeated H, closing
+help and opening it from pause. `Browser/artifacts/check-help-shortcut.mjs`
+also verifies the real browser game, pointer release, keyboard settings and
+resuming without losing progress, with no page errors. Intro and help screenshots
+at desktop and mobile sizes (`Browser/artifacts/help-*.png`) were visually checked.
+
+## Opening-period east wall (September 18)
+
+The east end exposed by hiding the later wing is closed for the 1829 stop.
+`estate-timeline.mjs` adds masonry across both exposed cut edges, following the
+retained slate roof and reusing the neighbouring brick and pale trim materials.
+The closing wall has its own 1829–1849 section, so it and its walking collision
+disappear when the wing is added. Period changes use the existing shadow and
+obstacle refresh. See the [marked reference](Research/timeline-opening-wall.png).
+
+`test-opening-wall.mjs` checks outward-facing masonry across both elevations,
+the roof infill, and collision before and after 1849. The estate-period and
+browser timeline checks cover its visibility at every stop. Close source and
+compiled views are captured by `Browser/artifacts/opening-wall-preview.mjs`.
+Only the browser timeline geometry and local compiled aerial model change;
+the escape game, Unity and Blender exports retain their existing geometry.
+
+Validation: the full `npm test` suite, source/compiled comparison, and browser
+timeline checks pass. The 1829/1849 close views were visually checked in both
+render paths. Logs are `Browser/artifacts/opening-wall-suite.txt` and
+`Browser/artifacts/opening-wall-compiled.txt`; the rebuilt manifest matches the
+current model source.
+
+## Aerial fit button removed (September 18)
+
+Removed the Fit period button and its unused page camera handler. The timeline
+and Reset view remain available; browser checks now use Reset view for portrait
+framing. Desktop and mobile screenshots in `Browser/artifacts/remove-fit-period-*.png`
+were visually checked, with no page errors. Aerial controls/layout checks pass.
+The full suite currently fails the unrelated 1849 ground-visibility assertion in
+`test-estate-periods.mjs`; compiled validation reports a stale model source hash.
+No model sources or exports were changed for this UI edit.
+
+## Passage head dated 1870 (September 18)
+
+The circled projection beside the east garden pavilion is the western half of
+the masonry passage head. The whole head, coping, white trim and supporting
+jambs now appear from 1870, following the owner's
+[marked reference](Research/timeline-passage-1870.png). The pavilion retains its
+1849 date. A named group keeps the passage intact across the timeline's spatial
+boundary; explicitly dated objects are excluded from geometric partitioning.
+Period changes retain the existing shadow invalidation and walking-obstacle
+refresh. The lane beneath the head remains open.
+
+Browser source and the local compiled model were updated. The close source and
+compiled views at 1849 and 1870 were visually checked in
+`Browser/artifacts/passage-*.png`; the preview script is
+`Browser/artifacts/passage-timeline-preview.mjs`. Unity and Blender exports are
+unchanged.
+
+Validation: the full `npm test` suite and `npm run test:compiled` pass, including
+all timeline stops in source and compiled views and live walking collision
+refresh. The period regression covers the complete passage, both boundary sides,
+support collisions and the clear lane. Logs are saved as
+`Browser/artifacts/passage-timeline-suite.txt` and
+`Browser/artifacts/passage-timeline-compiled.txt`.
+
+## Car park road outline (September 18)
+
+The mapped car park and access aprons now have the same pale 0.6-unit edge as
+the roads. The outline follows the concave KML perimeter and inherits the
+surface's visibility in aerial and walking views. The asphalt footprint stays
+fixed and joining roads cover the border at their mouths. See the
+[car park notes](Research/car-park/README.md). The full browser suite passes;
+source/compiled aerial and plan renders and period visibility were checked in
+`Browser/artifacts/car-park-outline-preview.mjs`. The local compiled aerial
+model is rebuilt; Unity and Blender exports are unchanged.
+
+The compiled-scene comparison passes. The broader timeline browser check also
+passes after comparing the Willows orientation by quaternion, accounting for
+the compiled loader's equivalent Euler-angle representation.
+
+## Period slider (September 18)
+
+Aerial and exterior walking views now use 13 discrete stops: the 12 from the owner's
+Google Sheet plus the requested **1829 — Opening** stop, in place of the Historic/Modern checkboxes. Dates, descriptions,
+complete model coverage, provisional assignments and missing models are recorded
+in [Research/timeline.md](Research/timeline.md). This supersedes the binary layout
+UI described in the historical notes below. The low-level layout groups remain
+for model/test compatibility; dated descendants control the current pages.
+
+`estate-periods.mjs` holds the bundled sheet snapshot and mappings.
+`estate-timeline.mjs` prepares date groups before batching, partitions east-wing
+geometry and attaches the runtime controller. `timeline-controls.mjs` binds both
+pages, preserves the year in navigation URLs and filters unavailable locations.
+Selection, photo choices, static shadows and walking obstacles follow visibility.
+The compiled scene contains the same date groups; rebuild it after model changes.
+
+The owner's red-outlined plan assigns the original central frontage and three
+rear ranges to 1829. Later side and forward wings remain separate; photo outlines
+and walking collisions follow the parts present at each date. The second marked
+view assigns the circled east frontage, forward arm and east/garden pavilions to
+1849; the outer Barmere side and Redesmere/Saughall rear ranges remain 1870.
+The water tower is
+also present from 1829 by explicit correction. The Willows is rotated 90 degrees
+about its existing KML centre; its views and collision footprints rotate with it.
+The default date is 1916; explicit `?period=YEAR` links retain their chosen date.
+
+Validation: `npm test` includes `test-estate-periods.mjs` for all sheet rows,
+construction/demolition boundaries, building and road coverage, east extensions,
+selection, walking collisions, camera/tree preservation and material batches.
+`npm run test:compiled` also runs the actual browser timeline checks across every
+stop in source and compiled modes, keyboard controls, reload/navigation, mobile
+framing and walking collision refresh. Screenshots and results are written to
+`Browser/artifacts/timeline-*`. Browser source and compiled models are changed;
+Unity and Blender exports are unchanged.
+
+The full browser suite, focused period/Willows checks, compiled-scene comparison
+and browser timeline checks pass after these corrections. The 1829 and 1849 plan
+screenshots and rotated Willows plan were visually checked. Validation logs are
+`Browser/artifacts/opening-suite.log`, `opening-browser-tests.log` and
+`opening-compiled-tests.log`.
+
 Implementation details, validation commands and modelling history moved from the
 project README. These notes include earlier interpretations that later entries
 supersede; consult the linked research notes and current source for context.
@@ -751,3 +964,31 @@ in the browser without page errors; the visual check is saved in
 `Browser/artifacts/church-clock-front-gallery.png`, with the suite log in
 `Browser/artifacts/church-gallery-suite.txt`. No model geometry or Unity/Blender
 exports changed.
+
+### Greenhouses gallery addition, 18 September 2026
+
+The supplied interior photograph is now the second image in the Greenhouses
+gallery, captioned “Greenhouses · interior and growing benches”. The unedited
+original is retained at `Research/greenhouses/interior.png`; the photo build
+script generates the 1200 × 902 WebP and records its provenance in
+`Browser/dist/building-photos/sources.json`.
+
+Validation: `node Browser/test-building-photos.mjs` and the complete `npm test`
+suite pass (using the installed npm CLI). Both gallery images load and decode
+without browser errors; the rendered panel was visually checked in
+`Browser/artifacts/greenhouses-interior-gallery.png`. The suite output is saved
+in `Browser/artifacts/greenhouses-gallery-suite.txt`. No model geometry or
+compiled, Unity or Blender exports were changed for this photo addition.
+
+### Aerial navigation styling, 18 September 2026
+
+Removed the visible “THROUGH THE YEARS” heading from the aerial timeline,
+retaining an accessible “Estate period” name on the slider. “Back to intro”
+now shares the Locations button styling and keeps its link destination.
+
+Validation: the complete browser `npm test` suite passes via the installed
+npm CLI (`Browser/artifacts/aerial-controls-style-suite.log`). Desktop,
+390 px mobile and 320 px narrow screenshots were visually checked; navigation
+controls stay within the viewport without overlapping. Both menus, keyboard
+timeline selection and the intro link work without aerial page errors.
+Screenshots are `Browser/artifacts/aerial-controls-style-*.png`.

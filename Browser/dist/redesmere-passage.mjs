@@ -2,7 +2,12 @@
 // Separate 1829 / Redesmere rooflines with a narrow masonry head across the
 // open lane. Dimensions are visual estimates, in the estate's scene units.
 export const REDESMERE_PASSAGE_VIEW=Object.freeze({position:[80,1.8,47],target:[80,5.8,17],fov:70});
-export function addRedesmerePassage(THREE,{box,mesh,worldUV,white,brick,material}){
+export function addRedesmerePassage(THREE,{model,mesh:makeMesh,worldUV,white,brick,material}){
+  // Keep the connecting head, trim and jambs together across the ward boundary.
+  const passage=new THREE.Group();passage.name='1829 Redesmere passage head';model.add(passage);
+  const mesh=(...args)=>{const part=makeMesh(...args);passage.add(part);return part;};
+  const boxes=[];
+  const box=(mat,x,y,z,w,h,d)=>boxes.push({x,y,z,w,h,d});
   const left=69.75,right=79.55,x=(left+right)/2,width=right-left,z=8.5;
   const underside=4,top=6,depth=1.3;
   const coping=material(0x696761);
@@ -19,6 +24,10 @@ export function addRedesmerePassage(THREE,{box,mesh,worldUV,white,brick,material
   mesh(new THREE.BoxGeometry(width+.15,.12,depth+.15),coping,x,top+.06,z,true).name='1829 Redesmere lintel coping';
   // Narrow masonry jambs bear on the two buildings, leaving the lane clear.
   for(const px of [left+.16,right-.16])box(white,px,underside/2,z,.32,underside,depth);
+  const trim=new THREE.InstancedMesh(new THREE.BoxGeometry(1,1,1),white,boxes.length),transform=new THREE.Object3D();
+  trim.name='1829 Redesmere passage trim and jambs';trim.receiveShadow=true;
+  boxes.forEach(({x,y,z,w,h,d},i)=>{transform.position.set(x,y,z);transform.scale.set(w,h,d);transform.updateMatrix();trim.setMatrixAt(i,transform.matrix);});
+  passage.add(trim);
 }
 
 // The front of the end range is blank brick all the way down to the ground.

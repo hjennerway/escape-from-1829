@@ -1,4 +1,5 @@
 import {attachAerialLayouts} from './aerial-layouts.mjs';
+import {prepareEstateTimeline,attachEstateTimeline,ESTATE_TIMELINE_VERSION} from './estate-timeline.mjs';
 import {attachBuildingDetail} from './building-detail.mjs';
 import {cacheAerialTransforms} from './aerial-performance.mjs';
 import {matchEstateGrass} from './estate-grass.mjs';
@@ -10,6 +11,7 @@ export async function buildAerialScene(THREE,aspect,{detail=true}={}){
     import('./escape-exterior.mjs'),import('./aerial-layouts.mjs'),import('./building-detail.mjs'),import('./aerial-performance.mjs')
   ]);
   const exterior=createEscapeExterior(THREE,aspect),layouts=createAerialLayouts(THREE,exterior);
+  prepareEstateTimeline(THREE,exterior,layouts);
   const exclude=[exterior.trees,exterior.terrain,...layouts.visibilityObjects];
   const shadowLight=exterior.scene.children.find(o=>o.isDirectionalLight&&o.castShadow);
   const buildingDetail=detail?createBuildingDetail(THREE,exterior.model,{exclude,shadowLight}):null;
@@ -39,6 +41,8 @@ export function restoreAerialScene(THREE,snapshot,aspect,{detail=true}={}){
   for(const material of materials)matchEstateGrass(material,exterior.terrain.material);
   const layoutRefs=Object.fromEntries(Object.entries(snapshot.layoutRefs).map(([key,id])=>[key,Array.isArray(id)?id.map(ref):ref(id)]));
   const layouts=attachAerialLayouts(exterior,layoutRefs);
+  if(exterior.model.userData.timelinePrepared!==ESTATE_TIMELINE_VERSION)throw new Error('Precompiled estate predates the current period timeline');
+  attachEstateTimeline(exterior,layouts);
   const buildingDetail=snapshot.detail?attachBuildingDetail(THREE,exterior.model,{
     stats:snapshot.detail.stats,shadowLight,
     entries:snapshot.detail.entries.map(e=>({parent:ref(e.parent),levels:e.levels.map(ref),sphere:new THREE.Sphere(new THREE.Vector3(...e.center),e.radius),windowHeight:e.windowHeight,level:0}))

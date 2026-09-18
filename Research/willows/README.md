@@ -1,5 +1,15 @@
 # The Willows
 
+## Quarter-turn correction — 18 September 2026
+
+The owner requested a 90-degree rotation of the existing building. Its yaw is
+now the previous `atan2(.835, .55)` plus `π/2`, about the unchanged KML centre.
+Dimensions, roof and openings are retained. Photo, aerial and walking presets
+follow the new orientation through `willowsPoint`; collision footprints and
+selection follow the building transform. The browser model and compiled aerial
+asset are rebuilt. Unity and Blender exports are unchanged. This supersedes
+the estimated east-west alignment described below.
+
 The supplied `1829 (9).kml` is archived as `1829-9.kml`. Only the placemark
 **The Willows** is used for this addition; its Point is longitude
 -2.904876118400348, latitude 53.22313660074063. The saved LookAt describes a

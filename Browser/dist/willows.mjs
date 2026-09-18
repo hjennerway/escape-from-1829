@@ -1,10 +1,11 @@
 import {earthToScene} from './earth-registration.mjs';
 
 // The KML Point is the building centre, not the saved LookAt camera target.
-// Dimensions and east-west alignment are estimates from the lower photograph.
+// Dimensions are estimated from the lower photograph. The owner subsequently
+// requested a quarter-turn about the same KML centre (18 September 2026).
 export const WILLOWS_PIN=Object.freeze({latitude:53.22313660074063,longitude:-2.904876118400348});
 const [x,z]=earthToScene(WILLOWS_PIN.latitude,WILLOWS_PIN.longitude);
-export const WILLOWS=Object.freeze({x,z,rotation:Math.atan2(.835,.55),length:24,width:6.4,eave:3.1,rise:1.7});
+export const WILLOWS=Object.freeze({x,z,rotation:Math.atan2(.835,.55)+Math.PI/2,length:24,width:6.4,eave:3.1,rise:1.7});
 export const willowsPoint=(x,y,z)=>[WILLOWS.x+Math.cos(WILLOWS.rotation)*x+Math.sin(WILLOWS.rotation)*z,y,WILLOWS.z-Math.sin(WILLOWS.rotation)*x+Math.cos(WILLOWS.rotation)*z];
 export const WILLOWS_VIEWS=Object.freeze({
  willows:{position:willowsPoint(-28,18,32),target:willowsPoint(0,1.8,0),fov:46},

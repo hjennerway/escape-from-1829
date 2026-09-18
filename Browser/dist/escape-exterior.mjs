@@ -240,7 +240,7 @@ export function createEscapeExterior(THREE,aspect){
   }
   const white=material(0xe1e3dc),photoBrick=material(0xb3a5a0,{map:bricks});
   const details=photoDetailPrimitives(THREE,{model,box,mesh,white,steel,material});
-  addRedesmerePassage(THREE,{box,mesh,worldUV,white,brick:photoBrick,material});
+  addRedesmerePassage(THREE,{model,mesh,worldUV,white,brick:photoBrick,material});
   addRedesmereEndRange(THREE,{box,mesh,worldUV,brick:photoBrick,material,hipRoof});
   addRedesmereEdgeChimney(THREE,{model,material});
   for(const b of blocks){

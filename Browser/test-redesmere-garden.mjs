@@ -39,6 +39,10 @@ for(const id of ['historicLayout','modernLayout'])for(const checked of [true,fal
   assert.equal(target.checked,checked,'T must preserve the selected layout');
 }
 assert.equal(changes,10,'Checkbox-focused toggles must refresh walking collisions');
+const timelineInput={tagName:'INPUT',type:'range',id:'periodSlider',value:'8'};
+press({target:timelineInput});assert.equal(trees.visible,false);checkTreeCollisions(false);
+press({target:timelineInput});assert.equal(trees.visible,true);checkTreeCollisions(true);
+assert.equal(timelineInput.value,'8','T must preserve the selected period');
 
 model.updateMatrixWorld(true);
 const openings=model.userData.redesmereGardenOpenings,ray=new THREE.Raycaster();

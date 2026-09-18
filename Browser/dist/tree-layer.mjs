@@ -8,8 +8,8 @@ export function bindTreeToggle(exterior,target,onChange=()=>{}){
   target.addEventListener('keydown',event=>{
     if(event.code!=='KeyT'||event.repeat||event.ctrlKey||event.altKey||event.metaKey)return;
     const input=event.target;
-    // Layout checkboxes keep focus after a click; they must not block T.
-    if(input?.isContentEditable||['TEXTAREA','SELECT'].includes(input?.tagName)||(input?.tagName==='INPUT'&&input.type!=='checkbox'))return;
+    // The timeline keeps focus after a click; it must not block T.
+    if(input?.isContentEditable||['TEXTAREA','SELECT'].includes(input?.tagName)||(input?.tagName==='INPUT'&&!['checkbox','range'].includes(input.type)))return;
     event.preventDefault();
     exterior.trees.visible=!exterior.trees.visible;
     exterior.invalidateShadows?.();

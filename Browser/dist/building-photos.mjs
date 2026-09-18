@@ -1,5 +1,3 @@
-import {isBuildingVisible} from './building-selection.mjs';
-
 // Remembers a hover so the pointer can cross the map to the scroll panel.
 // A click/tap pins it; dragging and multi-touch never select a building.
 export function bindBuildingPhotos({canvas,camera,selection,glow,document:doc=document}){
@@ -15,7 +13,7 @@ export function bindBuildingPhotos({canvas,camera,selection,glow,document:doc=do
   if(restoreFocus){if(focusBefore?.isConnected)focusBefore.focus({preventScroll:true});else canvas.focus({preventScroll:true});}
  }
  function select(entry,pin=false){
-  if(!entry){close();return;}
+  if(!entry||!selection.isVisible(entry)){close();return;}
   pinned=pin;hint.textContent=pin?'Selected · Tap another building to explore.':'Hover another building · Click to keep this selection.';
   if(active===entry)return;
   if(!active)focusBefore=doc.activeElement===doc.body?canvas:doc.activeElement;
@@ -73,13 +71,13 @@ export function bindBuildingPhotos({canvas,camera,selection,glow,document:doc=do
   button.addEventListener('click',()=>{select(entry,true);focusBefore=summary;picker.open=false;closeButton.focus();});choices.append(button);entry.photoButton=button;
  }
  picker.append(choices);doc.querySelector('#previewNav').append(picker);
- picker.addEventListener('toggle',()=>{if(picker.open)for(const entry of selection.entries)entry.photoButton.disabled=!isBuildingVisible(entry.root);});
+ picker.addEventListener('toggle',()=>{if(picker.open)for(const entry of selection.entries)entry.photoButton.disabled=!selection.isVisible(entry);});
  doc.addEventListener('pointerdown',e=>{if(!picker.contains(e.target))picker.open=false;});
  doc.addEventListener('keydown',e=>{if(e.key==='Escape'&&picker.open){picker.open=false;summary.focus();}});
  return {close,select,get active(){return active;},get pinned(){return pinned;},
   update(now=performance.now()){
-   if(picker.open)for(const entry of selection.entries)entry.photoButton.disabled=!isBuildingVisible(entry.root);
-   if(active&&!isBuildingVisible(active.root))close();
+   if(picker.open)for(const entry of selection.entries)entry.photoButton.disabled=!selection.isVisible(entry);
+   if(active&&!selection.isVisible(active))close();
    if(!pending||suspended||pinned||now-lastPick<70)return;
    lastPick=now;const pointer=pending;pending=null;const entry=pick(pointer);
    canvas.style.cursor=entry?'pointer':'';label.hidden=!entry;

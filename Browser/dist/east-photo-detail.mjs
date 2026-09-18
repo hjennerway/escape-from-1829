@@ -80,12 +80,12 @@ export function addEastPhotoDetails(THREE,{model,box,mesh,worldUV,white,brick,ro
   // Dark rainwater pipes break up the long white ground storey.
   for(const z of [17,29,42.7])box(iron,41.2,4.1,z,.085,8.2,.085);
   for(const x of [61.4,69.6])box(iron,x,7,25.2,.085,14,.085);
-  // Photo foreground: an access lane close to the building, a slim young tree
-  // and lighting columns, leaving the window elevations readable.
+  // Photo foreground: an access lane close to the building and a slim young tree.
   const asphalt=material(0x777d79),paving=material(0xb7b9ac);
   box(paving,61,.18,29.5,25,.1,2.1);box(asphalt,64,.19,33,31,.1,4.6);
-  // The img1 verge tree replaces the tall placeholder beside the entrance.
-  for(const [x,z,h] of [[22,43,9.4],[102,39,8]]){
+  // The marked east lawn column is removed in every period; retain the
+  // separate light beside the Redesmere approach.
+  for(const [x,z,h] of [[102,39,8]]){
     mesh(new THREE.CylinderGeometry(.06,.095,h,8),steel,x,h/2,z,true);
     rod([x,h-.12,z],[x+1.3,h-.35,z],.06,steel);
     box(iron,x+1.4,h-.4,z,.8,.1,.3);

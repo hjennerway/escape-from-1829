@@ -37,13 +37,15 @@ function element(id){
 }
 const layout=JSON.parse(await readFile(new URL('./dist/layout.json',import.meta.url)));
 const source=(await readFile(new URL('./dist/game.mjs',import.meta.url),'utf8')).replace(/^import .*;\r?\n/gm,'');
+const listeners=new Map();
+function keydown(code,repeat=false){const event={code,repeat,defaultPrevented:false,preventDefault(){this.defaultPrevented=true;}};listeners.get('keydown')(event);return event;}
 const sandbox={bindTreeToggle,sampleLanding,...core,...floors,buildArchitecture,createInteriorLights,createEscapeCutscene,createArrivalCutscene,
  createEscapeExterior:()=>({scene:new Object3D(),camera:new Object3D()}),
  loadEscapeFrontage:async()=>{},THREE,GLTFLoader:class {},
  document:{getElementById:element,createElement:()=>element('canvas'+elements.size),querySelectorAll:()=>[],body:element('body'),addEventListener(){},exitPointerLock(){}},
  window:{AudioContext:class {resume(){return Promise.resolve();}}},Image:class {},
  fetch:async()=>({ok:true,json:async()=>layout}),matchMedia:()=>({matches:false}),
- innerWidth:1280,innerHeight:800,devicePixelRatio:1,addEventListener(){},requestAnimationFrame(){},performance:{now:()=>0},console};
+ innerWidth:1280,innerHeight:800,devicePixelRatio:1,addEventListener(type,listener){listeners.set(type,listener);},requestAnimationFrame(){},performance:{now:()=>0},console};
 vm.createContext(sandbox);
 vm.runInContext(source+`\nglobalThis.test={finish,escapeCutscene,start,update,animate,resetPositions,showFloor,player,keys,get escapeExterior(){return escapeExterior;},get lastRender(){return renderer.lastRender;},get arrival(){return arrivalCutscene;},get elapsed(){return elapsed;},get enemies(){return enemies;},get groups(){return floorGroups;},get artPanels(){return artPanels;},get artViewing(){return artViewing;},openArtViewer,closeArtViewer,get ready(){return ready;},get state(){return state;},get camera(){return camera;},setElapsed(v){elapsed=v;},setAudio(){audioOn=false;},setFrameDt(v){clock.getDelta=()=>v;}};`,sandbox);
 await new Promise(r=>setImmediate(r));
@@ -67,6 +69,21 @@ assert.deepEqual(Array.from(t.enemies,e=>({name:e.name,type:e.type,x:e.x,z:e.z})
  {name:'Deva asylum ghost',type:2,x:50,z:17.5}
 ],'Security and the ghost spawn within the new rear arms, retaining their behavior types');
 function startPlaying(){t.start();t.arrival.update(3);assert.equal(t.state,'play');}
+
+// Help pauses the current run and every way of closing it preserves progress.
+element('instructions').hidden=true;keydown('KeyH');assert.equal(element('instructions').hidden,true,'H is inactive on the intro');
+startPlaying();t.setElapsed(12);t.player.x+=.25;
+const helpPlayer={...t.player},helpEnemies=t.enemies.map(e=>({x:e.x,z:e.z,floor:e.floor}));
+for(const close of [()=>keydown('KeyH'),()=>keydown('Escape'),()=>keydown('KeyP'),()=>element('closeHelp').onclick(),()=>element('helpPlay').onclick()]){
+ t.keys.add('KeyW');keydown('KeyH');
+ assert.equal(t.state,'paused');assert.equal(element('instructions').hidden,false);assert.equal(element('result').hidden,true);assert.equal(t.keys.size,0);
+ keydown('KeyH',true);assert.equal(element('instructions').hidden,false,'Held H does not toggle help repeatedly');
+ assert.equal(keydown('Tab').defaultPrevented,false,'Help settings remain keyboard accessible');
+ keydown('KeyW');t.update(1);assert.equal(t.keys.size,0);assert.equal(t.elapsed,12);
+ assert.deepEqual({...t.player},helpPlayer);assert.deepEqual(t.enemies.map(e=>({x:e.x,z:e.z,floor:e.floor})),helpEnemies);
+ close();assert.equal(t.state,'play');assert.equal(element('instructions').hidden,true);assert.equal(t.elapsed,12);assert.deepEqual({...t.player},helpPlayer);
+}
+keydown('KeyP');keydown('KeyH');assert.equal(element('instructions').hidden,false,'Help opens while paused');keydown('Escape');assert.equal(t.state,'play');
 
 // Exercise the actual arrival state and animation loop with deliberately slow frames.
 t.start();assert.equal(t.state,'arrival');assert.equal(elements.get('hud').hidden,true);

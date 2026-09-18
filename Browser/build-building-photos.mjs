@@ -27,7 +27,7 @@ const sources={
  'churton-roadside':'Research/churton-kelsall/roadside-mast.png',
  ...Object.fromEntries([1,2,3,4].map(n=>[`tower-${n}`,`Research/water-tower/${n}.jpg`])),
  ...Object.fromEntries([1,2,3].map(n=>[`outhouse-${n}`,`Research/outhouse/img${n}.jpg`])),
- 'greenhouses':'Research/greenhouses/img1.jpg','estates':'Research/estates/img1.jpg','stores':'Research/tower-buildings/img2.jpg','grafton':'Research/grafton-edge/veranda.jpg',
+ 'greenhouses':'Research/greenhouses/img1.jpg','greenhouses-interior':'Research/greenhouses/interior.png','estates':'Research/estates/img1.jpg','stores':'Research/tower-buildings/img2.jpg','grafton':'Research/grafton-edge/veranda.jpg',
  'admin-1':'Research/main-refine2/img1.jpg','admin-2':'Research/main-refine2/img2.jpg',
  'admin-front-approach':'Research/main-admin-photos/img3.jpg','admin-front-historic':'Research/main-admin-photos/img4.jpg',
  'admin-midwifery':'Research/main-admin-photos/img1.jpg','admin-front-elevated':'Research/main-admin-photos/img2.jpg',

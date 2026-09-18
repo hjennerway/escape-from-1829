@@ -1,0 +1,1 @@
+PASS: every period and repeat transitions, matching grass and no raised lawn outlines in source and compiled aerial and walking scenes; overview and close screenshots; no browser errors.

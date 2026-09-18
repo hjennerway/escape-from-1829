@@ -3,8 +3,7 @@
 <body><canvas id="game" aria-label="Aerial 3D view of the 1829 estate"></canvas>
 
 <nav id="previewNav" aria-label="Aerial navigation">
-  <a href="./">← BACK TO GAME</a>
-  <a href="./explore.html">EXPLORE THE ASYLUM ↗</a>
+  <a id="backToIntro" href="./">← Back to intro</a>
   <div id="locationsPicker">
     <button id="deviceLocationButton" type="button" aria-label="Show my location" title="Show my location" aria-describedby="deviceLocationStatus" disabled>
       <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="7"/><circle cx="12" cy="12" r="2"/><path d="M12 2v4m0 12v4M2 12h4m12 0h4"/></svg>
@@ -58,15 +57,11 @@
 </nav>
 <div id="deviceLocationStatus" role="status" aria-live="polite" aria-atomic="true"></div>
 <div id="churtonNav" hidden style="position:fixed;bottom:65px;left:24px;z-index:32;font:12px Arial;color:#e4e8db"></div>
-<section id="layoutControls" aria-label="Estate layouts">
-  <h2>LAYOUTS</h2>
-  <div class="layout-options">
-    <label><input id="historicLayout" type="checkbox" checked><span>Historic</span></label>
-    <label><input id="modernLayout" type="checkbox"><span>Modern</span></label>
-  </div>
-  <p>Show either layout, or both.</p>
-  <details id="modernRoadList" hidden><summary>15 mapped paths</summary><ul><li>Upton grange</li><li>Gerrard Crescent</li><li>Frost drive</li><li>Vivienne Smith Lane · both layouts</li><li>Ross Avenue</li><li>Ross Avenue (Part 2)</li><li>Upton Grange (Part 2)</li><li>Lockwood View</li><li>Warren Lane</li><li>Parsons Lane</li><li>Parsons Lane (Upton Lea)</li><li>Parsons Lane (1829 Central)</li><li>Valley drive</li><li>Parsons Lane (North) · both layouts</li><li>Caldecott Close</li></ul></details>
-  <button id="fitLayouts" type="button">FIT LAYOUTS ↗</button>
+<section id="layoutControls" aria-label="Estate timeline">
+  <div class="period-heading" aria-live="polite" aria-atomic="true"><output id="periodYear" for="periodSlider">1916</output><span id="periodTitle">Isolation hospital</span></div>
+  <div class="period-range"><button id="previousPeriod" type="button" aria-label="Previous period">‹</button><input id="periodSlider" type="range" min="0" max="12" step="1" value="8" aria-label="Estate period" aria-describedby="periodDescription"><button id="nextPeriod" type="button" aria-label="Next period">›</button></div>
+  <div id="periodTicks" aria-hidden="true"></div><div class="period-endpoints" aria-hidden="true"><span>1829</span><span>2021</span></div>
+  <p id="periodDescription"></p><p id="periodNote" hidden></p>
 </section>
 <div id="aerialHelp"><span class="desktop-aerial-help">Hover a building for photos · Drag to orbit · Right-drag to pan · WASD to move · Scroll to zoom · T to show/hide trees</span><span class="touch-aerial-help">Tap a building for photos · One finger to orbit · Pinch to zoom · Two fingers to pan</span> · <button id="resetAerial">RESET VIEW</button></div>
 <script type="module" src="./aerial-locations.mjs"></script>
@@ -76,7 +71,7 @@ import {TOWER_BUILDING_VIEWS} from './tower-buildings.mjs';
 import {ADMIN_ANNEXE_PHOTO_VIEW} from './historic-roads.mjs';
 import {bindTreeToggle} from './tree-layer.mjs';
 import {createDeviceLocationMarker,bindDeviceLocation} from './device-location.mjs';
-import {createAerialLayouts,bindLayoutToggles,fitAerialLayouts} from './aerial-layouts.mjs';
+import {bindTimelineControls} from './timeline-controls.mjs';
 import {updateRoadLabels} from './road-labels.mjs';
 import {CHURTON_VIEWS} from './churton-ward.mjs';
 import {CHURCH_VIEWS} from './church-grounds.mjs';
@@ -130,23 +125,19 @@ const buildingSelection=createBuildingSelection(THREE,exterior);
 renderer.domElement.addEventListener('webglcontextrestored',exterior.invalidateShadows);
 // Portrait framing pulls far back; keep the estate visible at every zoom.
 exterior.scene.fog.density=0;
-bindLayoutToggles(layouts,document.getElementById('layoutControls'));
 bindTreeToggle(exterior,document);
 const frontageReady=loadEscapeFrontage(THREE,exterior).catch(console.warn);
 const controls=createAerialControls(exterior.camera);let navigationTarget=[12,5,-12],moved=false;
-let fittedLayouts=false;
 const buildingGlow=createBuildingGlow(THREE,renderer,buildingSelection);
 const buildingPhotos=bindBuildingPhotos({canvas:renderer.domElement,camera:exterior.camera,selection:buildingSelection,glow:buildingGlow});
 const deviceLocationMarker=createDeviceLocationMarker(THREE,exterior.scene);
 bindDeviceLocation({button:document.getElementById('deviceLocationButton'),status:document.getElementById('deviceLocationStatus'),marker:deviceLocationMarker,onLocate({x,z}){
-  controls.keys.clear();moved=true;fittedLayouts=false;navigationTarget=[x,0,z];
+  controls.keys.clear();moved=true;navigationTarget=[x,0,z];
   exterior.camera.fov=46;exterior.camera.updateProjectionMatrix();
   const distance=180*Math.max(1,1/exterior.camera.aspect);
   exterior.camera.position.set(x+distance*.35,distance,z+distance*.65);
   exterior.camera.lookAt(...navigationTarget);controls.sync(navigationTarget);
 }});
-function fitLayouts(){buildingPhotos.close();const target=fitAerialLayouts(THREE,exterior,layouts);if(!target)return;controls.keys.clear();navigationTarget=target;moved=true;fittedLayouts=true;controls.sync(target);}
-document.getElementById('fitLayouts').onclick=fitLayouts;
 const view=resolveLocationView((new URLSearchParams(location.search).get('view')??'').replace(/^new-hospital/,'annexe')),frontDetail=view==='front',towerDetail=view==='tower',rightDetail=view==='right',mapDetail=['plan','west-refine','historic-roads','historic-admin-grounds','historic-footprints'].includes(view),photoDetail=[...Object.keys(LOCATION_VIEWS),...Object.keys(CHURCH_VIEWS),...Object.keys(CENTRAL_BACK_VIEWS),'front-lawn-trees',...Object.keys(OUTHOUSE_VIEWS),...Object.keys(FRONT_CORNER_VIEWS),...Object.keys(GREENHOUSE_VIEWS),...Object.keys(GARAGE_MORTUARY_VIEWS),...Object.keys(ESTATES_VIEWS),...Object.keys(LAUNDRY_VIEWS),...Object.keys(WITBY_VIEWS),...Object.keys(FARNDON_VIEWS),...Object.keys(IRBY_ASHLEY_VIEWS),...Object.keys(GRAFTON_EDGE_VIEWS),...Object.keys(HALE_WARD_VIEWS),...Object.keys(TOWER_BUILDING_VIEWS),...Object.keys(REDESMERE_CHIMNEY_VIEWS),...Object.keys(WATER_TOWER_VIEWS),'front-entrance','admin-annexe-photo',...Object.keys(UPTON_VIEWS),...Object.keys(ANNEXE_VIEWS),...Object.keys(MAIN_ADMIN_VIEWS),...Object.keys(CHURTON_VIEWS),'annexe-site','annexe','annexe-plan','annexe-ground','front-wall','redesmere-passage','front-steps','redesmere-garden-photo','east-forward-end-photo','west-forward-end-photo','east-lawn-photo','entrance-east-photo','west-lawn-photo','entrance-west-photo','redesmere-photo','west-wing-side','west-wing-end','central-court-photo','inner-east-photo','west-front-photo','west-court-photo','inner-court-photo','east-photo','courtyard-photo','rear-court-photo'].includes(view);
 if(view==='stores'){const nav=document.getElementById('churtonNav');nav.hidden=false;nav.innerHTML='STORES · <a style="color:inherit" href="./explore.html?view=stores">WALK HERE</a>';}
 if(CHURCH_VIEWS[view]){const nav=document.getElementById('churtonNav');nav.hidden=false;nav.innerHTML='CHURCH GROUNDS · <a style="color:inherit;margin-right:12px" href="?view=church">AERIAL</a><a style="color:inherit;margin-right:12px" href="?view=church-plan">PLAN</a><a style="color:inherit;margin-right:12px" href="?view=church-front">CLOCK FRONT</a><a style="color:inherit" href="./explore.html?view=church">WALK HERE</a>';}
@@ -184,11 +175,12 @@ function frameMap(){if(view==='historic-footprints'){exterior.scene.fog.density=
 function frameRight(){exterior.camera.position.set(72,28,108*Math.max(1,1/exterior.camera.aspect));navigationTarget=[72,9,0];exterior.camera.lookAt(...navigationTarget);}
 if(mapDetail)frameMap();else if(photoDetail)framePhoto();else if(rightDetail)frameRight();else if(towerDetail)frameTower();else if(frontDetail)frameFront();else resetAerial();
 controls.sync(navigationTarget);
+bindTimelineControls(exterior.timeline,document.getElementById('layoutControls'),()=>{buildingPhotos.close();buildingSelection.refresh();});
 function frame(){requestAnimationFrame(frame);const dt=clock.getDelta();if(document.hidden)return;controls.update(dt);buildingPhotos.update();buildingDetail?.update(exterior.camera,innerHeight);updateRoadLabels(THREE,layouts.roads,exterior.camera,innerWidth,innerHeight);deviceLocationMarker.update(exterior.camera,innerHeight);renderer.render(exterior.scene,exterior.camera);buildingGlow.render(exterior.camera);}
-function resetAerial(){buildingPhotos.close();exterior.scene.fog.density=0;moved=false;fittedLayouts=false;controls.keys.clear();const shot=sampleLanding(0,{aspect:exterior.camera.aspect});navigationTarget=shot.target;exterior.camera.fov=46;exterior.camera.updateProjectionMatrix();exterior.camera.position.set(...shot.position);exterior.camera.lookAt(...shot.target);controls.sync(navigationTarget);}
+function resetAerial(){buildingPhotos.close();exterior.scene.fog.density=0;moved=false;controls.keys.clear();const shot=sampleLanding(0,{aspect:exterior.camera.aspect});navigationTarget=shot.target;exterior.camera.fov=46;exterior.camera.updateProjectionMatrix();exterior.camera.position.set(...shot.position);exterior.camera.lookAt(...shot.target);controls.sync(navigationTarget);}
 document.getElementById('resetAerial').onclick=resetAerial;
 const canvas=document.getElementById('game');
-function takeControl(){fittedLayouts=false;if(!moved)controls.sync(navigationTarget);moved=true;}
+function takeControl(){if(!moved)controls.sync(navigationTarget);moved=true;}
 const gestures=bindAerialGestures(canvas,controls,takeControl);
 function stop(){controls.keys.clear();gestures.clear();clock.getDelta();}
 canvas.addEventListener('contextmenu',e=>e.preventDefault());
@@ -196,7 +188,7 @@ canvas.addEventListener('wheel',e=>{e.preventDefault();takeControl();controls.zo
 addEventListener('keydown',e=>{if(['KeyW','KeyA','KeyS','KeyD','ShiftLeft','ShiftRight'].includes(e.code)){e.preventDefault();takeControl();controls.keys.add(e.code);}if(e.code==='Escape')stop();});
 addEventListener('keyup',e=>controls.keys.delete(e.code));addEventListener('blur',stop);
 document.addEventListener('visibilitychange',stop);
-addEventListener('resize',()=>{renderer.setSize(innerWidth,innerHeight);exterior.camera.aspect=innerWidth/innerHeight;exterior.camera.updateProjectionMatrix();if(fittedLayouts)fitLayouts();else if(!moved){if(mapDetail)frameMap();else if(photoDetail)framePhoto();else if(rightDetail)frameRight();else if(towerDetail)frameTower();else if(frontDetail)frameFront();else resetAerial();controls.sync(navigationTarget);}});
+addEventListener('resize',()=>{renderer.setSize(innerWidth,innerHeight);exterior.camera.aspect=innerWidth/innerHeight;exterior.camera.updateProjectionMatrix();if(!moved){if(mapDetail)frameMap();else if(photoDetail)framePhoto();else if(rightDetail)frameRight();else if(towerDetail)frameTower();else if(frontDetail)frameFront();else resetAerial();controls.sync(navigationTarget);}});
 // Warm all material variants, including hidden layouts and foliage levels,
 // after the frontage texture is ready, before starting camera navigation.
 frontageReady.then(()=>renderer.compileAsync(exterior.scene,exterior.camera)).catch(console.warn).then(frame);

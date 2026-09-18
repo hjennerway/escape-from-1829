@@ -1,12 +1,14 @@
 {
-  "bytes": 10677558,
-  "uncompressedBytes": 92291864,
+  "bytes": 10804897,
+  "uncompressedBytes": 93570072,
   "source": {
     "mode": "procedural",
-    "milliseconds": 875.5,
-    "triangles": 714338,
-    "calls": 2691,
+    "milliseconds": 1636.4000000003725,
+    "triangles": 718770,
+    "calls": 2845,
     "levels": [
+      2,
+      2,
       2,
       2,
       2,
@@ -36,14 +38,16 @@
       1,
       1
     ],
-    "readyMilliseconds": 5715.5752999999995
+    "readyMilliseconds": 8237.8871
   },
   "compiled": {
     "mode": "compiled",
-    "milliseconds": 727.5,
-    "triangles": 714338,
-    "calls": 2691,
+    "milliseconds": 1284.5,
+    "triangles": 718770,
+    "calls": 2845,
     "levels": [
+      2,
+      2,
       2,
       2,
       2,
@@ -73,11 +77,11 @@
       1,
       1
     ],
-    "readyMilliseconds": 6195.248599999999
+    "readyMilliseconds": 8999.0046
   },
   "identicalScreenshot": false,
   "pixels": {
-    "significantFraction": 0.00016714285714285713,
-    "meanChannelError": 0.05351857142857143
+    "significantFraction": 0.00017571428571428572,
+    "meanChannelError": 0.052308571428571426
   }
 }

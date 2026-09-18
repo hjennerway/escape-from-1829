@@ -16,3 +16,21 @@
 #resetAerial{pointer-events:auto;min-height:44px}
 @media(pointer:coarse){.desktop-aerial-help{display:none}.touch-aerial-help{display:inline}#aerialHelp{font-size:12px;line-height:1.6}}
 @media(max-width:650px){#churtonNav.pharmacy-navigation{top:78px;bottom:auto!important;left:12px!important;right:12px;background:#142018e8;padding:6px 10px;line-height:1.6}#churtonNav.pharmacy-navigation a{display:inline-block;line-height:32px}}
+
+#layoutControls{width:320px;max-width:calc(100vw - 48px);box-sizing:border-box;max-height:calc(100dvh - 180px);overflow-y:auto}
+.period-heading{display:flex;align-items:center;gap:12px;min-height:52px}
+#periodYear{font:34px/1 Georgia;color:#f2f3e9;flex-shrink:0}
+#periodTitle{font:14px/1.3 Georgia;letter-spacing:0}
+.period-range{display:flex;align-items:center;gap:8px;margin-top:6px}
+#layoutControls .period-range button{width:32px;min-width:32px;min-height:44px;padding:0;font:24px Arial;background:transparent;border:0}
+#periodSlider{width:100%;min-width:0;height:36px;margin:0;accent-color:#bdcc98;cursor:pointer}
+#periodTicks{display:flex;justify-content:space-between;margin:0 47px;pointer-events:none}
+#periodTicks span{height:5px;width:1px;background:#bdcc9866}
+#periodTicks .selected{background:#e4e8db;height:8px;margin-top:-3px}
+.period-endpoints{display:flex;justify-content:space-between;margin:3px 40px 10px;font-size:10px;color:#bcc6b7}
+#layoutControls #periodDescription{font-size:12px;line-height:1.55;margin:10px 0}
+#layoutControls #periodNote{font-size:11px;line-height:1.5;color:#bec8b7;margin:10px 0}
+#layoutControls [hidden]{display:none}
+#periodSlider:focus-visible,#layoutControls button:focus-visible{outline:2px solid #e4e8db;outline-offset:3px}
+@media(max-width:650px){#layoutControls{width:280px;max-width:calc(100vw - 24px);padding:12px}#periodYear{font-size:30px}#periodTitle{font-size:13px}}
+@media(max-height:500px){#layoutControls{top:85px;bottom:auto;max-height:calc(100dvh - 100px)}}

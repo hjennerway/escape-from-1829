@@ -15,6 +15,7 @@ const [lon,lat]=placemark.match(/<Point>[\s\S]*?<coordinates>([^<]+)/)[1].split(
 assert.deepEqual(WILLOWS_PIN,{latitude:lat,longitude:lon});
 const e=createEscapeExterior(THREE,1.5),layouts=createAerialLayouts(THREE,e),site=e.willows;
 assert.deepEqual([site.position.x,site.position.z],earthToScene(lat,lon),'Use the Point, not LookAt');
+assert.equal(site.rotation.y,Math.atan2(.835,.55)+Math.PI/2,'Quarter-turn about the unchanged KML centre');
 assert.equal(site.parent,layouts.shared);assert.equal(e.model.getObjectsByProperty('name','The Willows').length,1);
 e.scene.updateMatrixWorld(true);
 const roof=site.getObjectByName('Willows red pitched roof'),ray=new THREE.Raycaster(),down=new THREE.Vector3(0,-1,0);ray.camera=e.camera;

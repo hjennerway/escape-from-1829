@@ -6,6 +6,11 @@ east side of their working yard (blue), and the photo camera (purple).
 `img1.jpg` supplies the brick ranges' hipped tiled roofs, blue plank doors,
 pale divided windows, guttering, chimney and mixed paved/cobbled yard.
 
+`interior.png` is the unedited greenhouse interior photograph supplied on
+18 September 2026. It is included as the second Greenhouses gallery image,
+showing the metal roof framing, growing benches and central aisle. The
+photo build script generates `greenhouses-interior.webp` for the browser.
+
 `camera-fit.json` registers the screenshot using six visible roof and wall
 corners of the unchanged hospital shop. Its stored image coordinates are
 pixels in the supplied 1093 by 817 image; world coordinates are scene units.

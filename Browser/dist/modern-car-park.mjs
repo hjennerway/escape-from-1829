@@ -1,5 +1,6 @@
 import {ROAD_STYLE} from './road-style.mjs';
 import {CAR_PARK_OUTLINE} from './kml-car-park-data.mjs';
+import {mergeGeometries} from './vendor/BufferGeometryUtils.js';
 
 export function createModernCarPark(THREE){
   const shape=new THREE.Shape(CAR_PARK_OUTLINE.map(([x,z])=>new THREE.Vector2(x,-z)));
@@ -10,6 +11,29 @@ export function createModernCarPark(THREE){
   surface.name='Car park';surface.rotation.x=-Math.PI/2;surface.position.y=.36;
   surface.receiveShadow=true;surface.renderOrder=3;
   surface.userData={outline:CAR_PARK_OUTLINE,source:'1829 (4).kml · Car park · Polygon'};
+  // Stroke the saved concave boundary below the asphalt. Its inner half is
+  // covered by the surface, leaving the same pale width as the road ribbons.
+  // Joining road asphalt also covers the stroke, keeping junction mouths open.
+  const parts=[],width=ROAD_STYLE.edgeWidth;
+  for(let i=0;i<CAR_PARK_OUTLINE.length;i++){
+    const [x,z]=CAR_PARK_OUTLINE[i],[nx,nz]=CAR_PARK_OUTLINE[(i+1)%CAR_PARK_OUTLINE.length];
+    const dx=nx-x,dz=nz-z,length=Math.hypot(dx,dz);
+    if(length<1e-6)continue;
+    const ox=-dz/length*width,oz=dx/length*width;
+    const strip=new THREE.Shape([[x+ox,z+oz],[x-ox,z-oz],[nx-ox,nz-oz],[nx+ox,nz+oz]]
+      .map(([px,pz])=>new THREE.Vector2(px,-pz)));
+    parts.push(new THREE.ShapeGeometry(strip));
+    const joint=new THREE.CircleGeometry(width,ROAD_STYLE.roundSegments);
+    joint.translate(x,-z,0);parts.push(joint);
+  }
+  const borderGeometry=mergeGeometries(parts);
+  for(const part of parts)part.dispose();
+  const edge=new THREE.MeshStandardMaterial({color:ROAD_STYLE.edge,roughness:1,
+    polygonOffset:true,polygonOffsetFactor:-ROAD_STYLE.edgeLayer,polygonOffsetUnits:-2*ROAD_STYLE.edgeLayer});
+  const border=new THREE.Mesh(borderGeometry,edge);border.name='Car park border';
+  // The surface's local +Z points upward after its ground-plane rotation.
+  border.position.z=.32-surface.position.y;border.receiveShadow=true;border.renderOrder=1;
+  surface.add(border);
   return surface;
 }
 
