@@ -34,6 +34,9 @@ let browser;const errors=[],metrics={},shots=new Map();
 try{
   browser=await chromium.launch({headless:true,...(process.env.MODEL_CHROME_PATH?{executablePath:process.env.MODEL_CHROME_PATH}:{}),args:['--use-angle=swiftshader','--enable-unsafe-swiftshader']});
   const page=await browser.newPage({viewport:{width:1000,height:700}});
+  // Full-detail startup can exceed 30s with CI's software WebGL. Navigation
+  // needs the same allowance as the rendered-frame check below.
+  page.setDefaultNavigationTimeout(120000);
   page.on('pageerror',error=>{errors.push(error.message);console.error(error.stack);});
   page.on('console',message=>{if(message.type()==='error')console.error('Browser:',message.text());});
   await page.route('**/aerial.html*',async route=>{
@@ -82,7 +85,8 @@ try{
   await page.waitForFunction(before=>JSON.stringify(window.__models.exterior.camera.position.toArray())!==JSON.stringify(before),before);
   await page.setViewportSize({width:390,height:844});await page.locator('#resetAerial').click();
   assert.equal(await page.evaluate(()=>window.__models.exterior.camera.aspect),390/844);
-  await load('?models=compiled&buildingDetail=full&view=front');assert.equal(await page.evaluate(()=>window.__models.buildingDetail),null);
+  metrics.fullDetail=await load('?models=compiled&buildingDetail=full&view=front');
+  assert.equal(metrics.fullDetail.mode,'compiled');assert.equal(await page.evaluate(()=>window.__models.buildingDetail),null);
   // Missing, stale/incompatible and damaged assets all keep the page usable.
   await page.route('**/compiled/manifest.json',route=>route.fulfill({status:404,body:'Not built'}));
   assert.equal((await load('')).mode,'procedural');

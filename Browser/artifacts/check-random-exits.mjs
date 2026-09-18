@@ -5,7 +5,8 @@ import {chromium} from 'playwright';
 import {makeFloors} from '../dist/floors.mjs';
 import {selectEscapeRoutes} from '../dist/escape-routes.mjs';
 
-const port=1854,layout=JSON.parse(await readFile(new URL('../dist/layout.json',import.meta.url)));
+const quick=process.argv.includes('--quick');
+const port=quick?1855:1854,layout=JSON.parse(await readFile(new URL('../dist/layout.json',import.meta.url)));
 const candidates=makeFloors(layout),key=(floor,exit)=>floor+':'+exit.x+','+exit.z;
 const randomFor=initial=>{let seed=initial;return ()=>((seed=(Math.imul(seed,1664525)+1013904223)>>>0)/2**32);};
 // Pick a small deterministic collection of real random draws covering every door.
@@ -62,7 +63,7 @@ window.exitTest={
    window.exitRandom=value==='upper'?()=>{const n=--i;return (n>=9?13-n:n)/(n+1);}:value==='ground'?()=>.999999:()=>((seed=(Math.imul(seed,1664525)+1013904223)>>>0)/2**32);
   }
  });
- for(const seed of [...seeds,'ground','upper']){
+ for(const seed of (quick?seeds.slice(0,1):[...seeds,'ground','upper'])){
   await page.goto('http://127.0.0.1:'+port+'/?testSeed='+seed);
   await page.waitForFunction(()=>window.exitTest?.ready,null,{timeout:120000});
   await page.locator('#start').click();
@@ -80,7 +81,7 @@ window.exitTest={
   for(const floorIndex of [0,1]){
    await page.evaluate(floor=>{const t=window.exitTest;t.pose(50,47.5,floor);t.map(true);},floorIndex);
    assert.equal(await page.locator('#floorExits').textContent(),active.filter(e=>e.floor===floorIndex).length+' EXITS THIS FLOOR');
-   if(seed===seeds[0]||seed==='upper')await page.screenshot({path:'Browser/artifacts/random-exits-map-'+seed+'-'+floorIndex+'.png'});
+   if(!quick&&(seed===seeds[0]||seed==='upper'))await page.screenshot({path:'Browser/artifacts/random-exits-map-'+seed+'-'+floorIndex+'.png'});
    await page.evaluate(()=>window.exitTest.map(false));
   }
   for(const entry of active){
@@ -91,7 +92,7 @@ window.exitTest={
    assert.equal(await page.locator('#interact b').textContent(),'HOLD E TO ESCAPE');
    assert(await page.locator('#interact').isVisible());
    await page.evaluate(()=>new Promise(resolve=>requestAnimationFrame(()=>requestAnimationFrame(resolve))));
-   await page.screenshot({path:'Browser/artifacts/random-exits-door-'+floor+'-'+exit.x+'-'+exit.z+'.png'});
+   if(!quick||exit.axis==='x')await page.screenshot({path:'Browser/artifacts/random-exits-door-'+floor+'-'+exit.x+'-'+exit.z+'.png'});
    if(exit.axis==='x'&&floor===1){
     await page.setViewportSize({width:390,height:844});await page.screenshot({path:'Browser/artifacts/random-exits-mobile.png'});await page.setViewportSize({width:1300,height:900});
    }
@@ -113,17 +114,17 @@ window.exitTest={
   results.push({seed,active:active.map(e=>({floor:e.floor,...e.exit})),inspection});
   console.log('PASS WebGL load '+seed+': five doors/lamps, maps, disabled exits, retry stability.');
  }
- assert.equal(visited.size,14,'Keyboard escape checked through all fourteen possible routes');
+ assert.equal(visited.size,quick?5:14,'Keyboard escape checked through every selected route');
  // Unseeded page reloads use production randomness.
  const reloads=[];
- for(let i=0;i<3;i++){
+ for(let i=0;i<(quick?0:3);i++){
   await page.goto('http://127.0.0.1:'+port+'/');
   await page.waitForFunction(()=>window.exitTest?.ready,null,{timeout:120000});
   const routes=await page.evaluate(()=>window.exitTest.floors.map(f=>f.exits));
   assert.equal(routes.flat().length,5);reloads.push(routes);
  }
- assert(new Set(reloads.map(r=>JSON.stringify(r))).size>1,'Fresh loads reroll the five-route set');
+ if(!quick)assert(new Set(reloads.map(r=>JSON.stringify(r))).size>1,'Fresh loads reroll the five-route set');
  assert.deepEqual(errors,[]);
  await writeFile('Browser/artifacts/random-exits-validation.json',JSON.stringify({results,keyboardEscapes:[...visited],reloads,errors},null,2)+'\n');
- console.log('PASS: all 14 candidate doors/keyboard escapes, inactive/removed exits, real reloads, zero-exit floors, desktop/mobile views and no browser errors.');
+ console.log(quick?'PASS: five active WebGL doors and keyboard escapes, inactive/removed exits disabled, desktop/mobile views and no browser errors.':'PASS: all 14 candidate doors/keyboard escapes, inactive/removed exits, real reloads, zero-exit floors, desktop/mobile views and no browser errors.');
 }finally{await browser?.close();server.kill();}

@@ -47,6 +47,9 @@ async function frontageState(){
 try{
  browser=await chromium.launch({headless:true,...(process.env.MODEL_CHROME_PATH?{executablePath:process.env.MODEL_CHROME_PATH}:{}),args:['--use-angle=swiftshader','--enable-unsafe-swiftshader']});
  const page=await browser.newPage({viewport:{width:1280,height:900}});
+ // Apply the scene startup allowance to all navigations, including reload and
+ // the walking page, before the separate rendered-frame/readiness checks.
+ page.setDefaultNavigationTimeout(120000);
  page.on('pageerror',error=>errors.push(error.stack));
  await page.route('**/aerial.html*',async route=>{const response=await route.fetch();await route.fulfill({response,body:(await response.text()).replace('function frame(){','window.__timeline={exterior,layouts,buildingSelection,renderer,controls};\nfunction frame(){')});});
  async function load(query){await page.goto(base+'/aerial.html'+query);await page.waitForFunction(()=>window.__timeline?.renderer.info.render.frame>3,null,{timeout:120000});}

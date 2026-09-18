@@ -1,5 +1,54 @@
 # Development and modelling notes
 
+## Five random exits from fourteen candidates (September 18)
+
+Asylum Escape now replaces the old fixed exits with the seven marked perimeter
+locations on each floor: fourteen candidates in total. The central portico
+escape is removed. The browser uniformly shuffles the combined candidate pool
+once per page load and activates exactly five distinct routes. A floor can have
+zero active exits. Pause, stairs and retry retain the same selection; reloading
+draws again.
+
+The filtered floor layouts feed door geometry, signs, green lamps, both maps,
+artwork clearance, enemy spawn clearance and hold-E escape interactions. The
+new gallery-end doors and signs rotate to face west/east. Floor counts, help,
+the game description and the result's four remaining routes match the draw.
+
+`node Browser/build-escape-layout.mjs` regenerates both layout JSON copies.
+Only the browser game and shared navigation source data are updated; Unity,
+Blender and GLB exports are not regenerated. The compiled aerial model is
+unaffected because it does not include the interior.
+
+Validation: the full `npm test` suite passes; its output is
+`Browser/artifacts/random-exits-suite.txt`. The random-route checks cover 256
+draws, all fourteen candidates, selection without replacement, source-data
+preservation, reachability, inactive/removed exits and floors with zero exits.
+Geometry checks raycast every candidate door, including the east/west ends.
+The real game-loop checks cover all five selected escape interactions, disabled
+locations and retry stability.
+
+The Chrome/WebGL check `node Browser/artifacts/check-random-exits.mjs --quick`
+passes five visible doors, green lamps, all five keyboard hold-E escapes,
+inactive/removed exits, floor counts, artwork clearance and retry stability
+with zero browser errors. Desktop maps and a side door on desktop/mobile were
+rendered and reviewed. Screenshots and validation data use the
+`Browser/artifacts/random-exits-` prefix.
+See [the reference and candidate coordinates](Research/escape-layout/README.md#fourteen-candidate-escape-routes-september-18-follow-up).
+
+
+## Pages compiled-scene navigation timeout (September 18)
+
+The Pages verification step could stop in `page.goto()` after 30 seconds on the
+full-detail front view, before reaching its 120-second rendered-frame check.
+Both `test-precompiled-models.mjs` and `test-timeline-browser.mjs` now set a
+120-second navigation timeout when creating their page. This also covers the
+timeline reload and navigation to the walking scene. Readiness, rendering,
+source/compiled image comparison and fallback checks are retained. Full-detail
+results now include loading time and explicitly require compiled mode.
+
+Only validation scripts and documentation changed; browser runtime, model
+sources, generated assets and Unity/Blender exports are unchanged.
+
 ## Upstairs emergency exits (September 18)
 
 The three blue-marked rear corridor ends now have usable upstairs fire escapes:

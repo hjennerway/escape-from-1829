@@ -46,3 +46,33 @@ five ground-floor exits retain their previous layout. As with the rest of this
 plan, these positions are gameplay approximations. Browser runtime data is
 updated; Unity, Blender and GLB exports are not regenerated, and aerial
 compiled assets are unaffected.
+
+## Fourteen candidate escape routes (September 18 follow-up)
+
+The owner's [seven purple-marked locations](random-exits-reference.png) replace
+the previous exit lists on both floors, including removal of the main portico
+exit. This supersedes the upstairs-only additions above.
+
+| Location, on each floor | Grid cell (x, z) | Faces |
+| --- | --- | --- |
+| West rear arm | (12, 7) | North |
+| Central rear arm | (20, 6) | North |
+| East rear arm | (28, 7) | North |
+| West gallery end | (2, 19) | West |
+| East gallery end | (38, 19) | East |
+| West forward wing | (11, 26) | South |
+| East forward wing | (29, 26) | South |
+
+The two JSON exit lists now store seven candidates each. At page load,
+`escape-routes.mjs` shuffles the combined pool and selects exactly five distinct
+routes without replacement. Either floor may receive zero exits. The choice
+persists through pause, floor changes and retries; reloading chooses a fresh
+random set, which can occasionally repeat by chance.
+
+Only selected routes receive doors, push bars, signs, green lamps, map markers
+and hold-E interactions. Gallery-end doors and signs face east/west. Ordinary
+walls remain at unselected locations. Corridor cells and stairs are unchanged.
+
+Both canonical and browser navigation JSON files are regenerated. The browser
+interior builds from these cells; Unity, Blender and GLB exports are not
+regenerated. The aerial compiled model does not include this interior.
