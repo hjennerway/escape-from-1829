@@ -1,4 +1,5 @@
 import {addOakmereElevation} from './annexe-oakmere-detail.mjs';
+import {addOakmereWestElevation} from './annexe-oakmere-west.mjs';
 import {addOuterFronts,addCourtFronts} from './annexe-outer-front.mjs';
 import {refineAnnexeRanges,ANNEXE_OS_REFINEMENT} from './annexe-os-refinement.mjs';
 import {ANNEXE_PHOTO_PLACEMENT} from './annexe-photo-placement.mjs';
@@ -44,10 +45,10 @@ const mapNorth=annexePlacementMapPoint([0,0]),mapSouth=annexePlacementMapPoint([
 const southOffset=mapSouth.map((value,i)=>(value-mapNorth[i])*.01),site=annexePlacementMapPoint([155,192]);
 export const ANNEXE_VIEWS=Object.freeze({
  ...ANNEXE_WARD_VIEWS,
- 'oakmere-photo':shot([-79,2.2,-54],[-4,8,-27],49),
+ 'oakmere-photo':shot([-101,2.2,-65],[-31,6,-51],49),
  'annexe-outer-west':shot([-201,2,34],[-146,5.5,0],58),
  'annexe-outer-east':shot([211,2,56],[145,5.5,20],58),
- 'oakmere-lawn':shot([-95,60,-88],[-2,5,-28],51),
+ 'oakmere-lawn':shot([-138,66,-103],[-24,5,-46],51),
  annexe:shot([-215,185,290],[0,3,-30],56),
  'annexe-roads':{position:[350,420,85],target:[330,0,-45],fov:52},
  'annexe-access':shot([0,360,130],[0,0,-5],52),
@@ -299,7 +300,8 @@ export function createAnnexe(THREE,{brick,roof,material,worldUV,hipRoof}){
  model.userData.wards=wards;
  model.userData.outerFronts=addOuterFronts(THREE,{model,scale:ANNEXE_MAP_SCALE,brick,roof,material,worldUV,hipRoof});
  model.userData.courtFronts=addCourtFronts(THREE,{model,ranges,scale:ANNEXE_MAP_SCALE,brick,roof,material,worldUV,hipRoof});
- model.userData.oakmereElevation=addOakmereElevation(THREE,{model,host:ranges.find(b=>b.name==='Central rear spine'),brick,roof,material,worldUV,hipRoof});
+ model.userData.oakmereElevation=addOakmereElevation(THREE,{model,host:ranges.find(b=>b.name==='Central rear spine'),oppositeWindows:openings.filter(o=>o.name==='Central rear spine'&&o.rotation>0),brick,roof,material,worldUV,hipRoof});
+ model.userData.oakmereWestElevation=addOakmereWestElevation(THREE,{model,host:ranges.find(b=>b.name==='Rear court west range'),brick,roof,material,worldUV,hipRoof});
  model.userData.ranges=ranges;model.userData.annexeOpenings=openings;model.userData.osRegistration=ANNEXE_OS_REGISTRATION;
  model.userData.placement=ANNEXE_PLACEMENT_REFERENCE;model.userData.osRefinement=ANNEXE_OS_REFINEMENT;model.userData.photoPlacement=ANNEXE_PHOTO_PLACEMENT;
  return model;

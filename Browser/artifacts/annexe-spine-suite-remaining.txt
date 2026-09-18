@@ -1,0 +1,29 @@
+PASS: larger annexe moves closer to the red line inside the fixed loop, with only yellow rear roads removed; minimum gaps {"loop":5.977067728296,"teardrop":15.411890647777515,"admin":36.00093078883593,"frontLine":47.334048020373274}
+PASS: original and copied paired apex fronts, exposed glazing without duplicate windows, projecting-bay collisions, clear approaches and ward ownership.
+PASS: Oakmere glazing is exposed, the spine has mirrored hipped roof slopes, walking approach and facade collisions work, and details follow Historic visibility.
+PASS: Oakmere west photo face, glazing, roofs, open court, walking and visibility; 21562 original primitives unchanged.
+PASS: five ward groups and reference colours, complete range ownership, aerial framing, accessible walking destinations and Historic visibility.
+Churton Ward: six walk starts, wall collisions, rear recesses, exposed openings, slate roofs and single-storey height passed.
+PASS: Upton mirrored OS footprint, fixed church alignment, church clearance, two storeys, exposed sashes, slate roof normals, open recesses, walking access and shared layout visibility.
+PASS: garages and T mortuary, 5143 roof samples, exposed photo openings, joined ridge, road clearance (1.30), walking and Historic layout.
+PASS: three glasshouses, two photo-facing workshops, 4254 roof samples, road junction and clearance, open yard, southern walk and all layout combinations.
+PASS: east photo geometry, marked camera, independent chimney height/location, chamfered bays, open low-wing recess, OS registration, four photo starts, exposed sashes, slate roofs, masonry collision, clear approach and separate corridor.
+PASS: three white four-sided hips, continuous roof coverage, /\/\/\ profile, flush gallery joins, no connector/stores overlap, preserved L-shaped stores, and layout-aware walking collisions.
+PASS: shared corner in both photos, three-sided pitched room, recessed link, retained red block/bay, exposed panes, camera starts, collisions and green exclusion.
+PASS: pinch in/out, two-finger pan, finger handoff, cancellation, capture loss, blur cleanup, coincident/extra fingers, desktop pan.
+Device location: perimeter, exact 100 m cutoff, corners, coordinate alignment, fresh fixes, retries and errors passed.
+PASS: independent Historic/Modern controls, shared buildings, preserved transforms, hidden collisions, fifteen exact custom paths, camera-facing road names, upward road surfaces and full landscape/portrait framing.
+PASS: 39 exact KML trees, duplicate Oak8/Oak16 points, preserved front beeches, shared visibility and collisions; eight-vertex Countess roundabout (336.1 square units), upward roads, walkable centre and continuous Modern-only approach.
+PASS: front boundary, curved driveway, shared sweeping forecourt branches, open kerb mouths and continuous clear routes to Redesmere and the west fire stairs.
+PASS: 62 exact KML vertices, 13607.4 square units, Modern-only car park, concave boundary, thirteen complete trees and collisions cleared only in Modern, bowling lawn tree removed, all oaks retained.
+PASS: retraced Parsons Lane and fork have continuous asphalt, full-width building clearance, an open saved-lane junction, and grass at removed blue sections.
+PASS: source-selected road network, semicircular forecourt, north-pointing teardrop, full-width building clearance, no Parsons/Vivienne overlaps, retained southern continuation, registered OS contours and all layout combinations.
+PASS: red-line avenue, clear central sweep, yellow gravel link, removed rear and side roads, protected lane junctions and teardrop, and Historic visibility.
+PASS: indexed collisions match full scans across all layouts and padded boundaries; idle and distant collision work skipped; refreshed obstacles and cached-shadow invalidation.
+PASS: shared tree buffers, colours and placement; distance detail and hysteresis; 8354 static meshes compiled into 1236 batches; all layout surfaces retained; cached transforms and dynamic labels; 433316 default-view tree triangles.
+PASS: 2742 textured windows; close geometry and all layouts preserved; atlas pixels and rotated placement; viewport/zoom detail with hysteresis; static shadows, structural walls and independent trees.
+PASS: 1066 roof samples, red-circle registration, exposed boarding, gable lighting, road clearance, three camera starts, walkable approach and shared-layout collisions.
+PASS: The Willows exact KML Point, 960 roof samples, hollow bays, walking, distant aerial pan, layout fitting, selection and all four visibility states.
+PASS: precompiled building metadata and roof selection match the source scene.
+PASS: 34 buildings, every named location, bundled photos, roof picking before/after batching and LOD, empty ground and layout visibility (60504 selection triangles).
+PASS: all remaining npm test checks after the updated annexe snapshot.

@@ -16,12 +16,6 @@
       <li><a href="?view=ebnal">1829: Ebnal Ward (East wing)</a></li>
       <li><a href="?view=farndon">Farndon Ward</a></li>
       <li><a href="?view=grindley">1829: Grindley Ward (Basement)</a></li>
-      <li><a href="?view=west-refinement">1829: West wing · Aerial</a></li>
-      <li><a href="?view=west-1">1829: West wing · Photo 1</a></li>
-      <li><a href="?view=west-2">1829: West wing · Photo 2</a></li>
-      <li><a href="?view=west-3">1829: West wing · Photo 3</a></li>
-      <li><a href="?view=west-4">1829: West wing · Photo 4</a></li>
-      <li><a href="?view=west-5">1829: West wing · Photo 5</a></li>
       <li><a href="?view=hampton">1829: Hampton Ward (West wing)</a></li>
       <li><a href="?view=ince">1829: Ince Ward (West wing)</a></li>
       <li><a href="?view=barmere">1829: Barmere Ward</a></li>
@@ -58,8 +52,9 @@
 <div id="deviceLocationStatus" role="status" aria-live="polite" aria-atomic="true"></div>
 <div id="churtonNav" hidden style="position:fixed;bottom:65px;left:24px;z-index:32;font:12px Arial;color:#e4e8db"></div>
 <section id="layoutControls" aria-label="Estate timeline">
+  <h2><label for="periodSlider">SELECTED PERIOD</label></h2>
   <div class="period-heading" aria-live="polite" aria-atomic="true"><output id="periodYear" for="periodSlider">1916</output><span id="periodTitle">Isolation hospital</span></div>
-  <div class="period-range"><button id="previousPeriod" type="button" aria-label="Previous period">‹</button><input id="periodSlider" type="range" min="0" max="12" step="1" value="8" aria-label="Estate period" aria-describedby="periodDescription"><button id="nextPeriod" type="button" aria-label="Next period">›</button></div>
+  <div class="period-range"><button id="previousPeriod" type="button" aria-label="Previous period">‹</button><input id="periodSlider" type="range" min="0" max="12" step="1" value="8" aria-describedby="periodDescription"><button id="nextPeriod" type="button" aria-label="Next period">›</button></div>
   <div id="periodTicks" aria-hidden="true"></div><div class="period-endpoints" aria-hidden="true"><span>1829</span><span>2021</span></div>
   <p id="periodDescription"></p><p id="periodNote" hidden></p>
 </section>

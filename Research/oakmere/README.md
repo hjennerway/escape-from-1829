@@ -43,3 +43,55 @@ At validation time, the full suite encountered unrelated assertions in
 `test-historic-roads.mjs` (remaining footprint edge count). Both failures were
 reproduced with the Oakmere refinement disabled using the test-only
 `artifacts/oakmere-baseline-loader.mjs`; the other suite checks passed.
+
+The 18 September 2026 gallery replacement is retained unedited as
+`lawn-gallery.png`. The photo build script uses it for `oakmere-lawn.webp`
+(1200 × 900). The earlier `img1.jpg` remains the modelling reference; this
+gallery replacement does not change geometry or ward ownership.
+
+## Red-circled west courtyard face, 18 September 2026
+
+The later `west-lawn-location.png` explicitly selects the west face of
+**Rear court west range**, with the blue dot/arrow on its lawn. This replaces
+the earlier location inference for the requested photo refinement. The green
+outline protects the towers, hall, spine-side details and front side buildings.
+
+`annexe-oakmere-west.mjs` adds a separate **Oakmere west lawn elevation** group:
+four / five / four sash bays, two pale blocked upper openings, a central brick
+pediment with circular vent and raking bands, intersecting slate roofs, brick
+courses, dark rainwater pipes and low end rooms. The reference is the unedited
+`lawn-gallery.png`. Window proportions and heights follow the photograph within
+the existing courtyard footprint; concealed joins and dimensions are estimates.
+The low rear room joins the existing service link, shortened by two source-map
+units at its front end so it meets the courtyard corner without hiding the
+first ground-floor window. The inner court stays open.
+
+Outside that low connector and its immediately adjacent sash details, existing
+annexe geometry is retained, including the separately corrected plain hipped
+roof on the shorter central spine. The new face covers its host's generic
+outer sashes. `west-protected-geometry.json` fingerprints 21,294 pre-existing
+primitives, with geometry, materials, world transforms, shadows and collision
+flags. `test-oakmere-west.mjs` checks this baseline, glazing from beyond the
+connector (so a ray cannot start inside masonry), roofs, lawn access, facade
+collision and Historic visibility. The approved-shape snapshot includes the
+new face and shortened connector; the separate protected-front hash is intact.
+
+`aerial.html?view=oakmere-photo`, `?view=oakmere-lawn` and
+`explore.html?view=oakmere-photo` now address the marked west face. Ward ownership
+is unchanged. Browser source and compiled aerial models are updated; Unity and
+Blender exports are unchanged.
+
+## Mirrored spine roof (18 September 2026)
+
+The owner's [blue/yellow correction](mirrored-roof-reference.png) selects the
+two sides of the short central rear spine. The blue-marked west roof now
+mirrors the yellow-marked plain east hip. This supersedes the projecting
+cross-gable, brick pediment, raking bands and circular vent described above
+for that spine. Its existing continuous hipped roof supplies both slopes;
+the walls, windows, low rooms and joins below remain in place.
+
+`Browser/test-oakmere.mjs` raycasts both sides of the complete annexe at 20
+paired positions, checking equal roof heights and an exposed slate surface.
+The check rejects the previous cross-gable. The preview script is
+`Browser/artifacts/annexe-spine-preview.mjs`. This correction changes the
+shared browser model; Unity and Blender exports are unchanged.

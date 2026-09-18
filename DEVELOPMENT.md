@@ -1,5 +1,26 @@
 # Development and modelling notes
 
+## Mirrored Annexe spine roof (September 18)
+
+The blue-marked side of the short central rear wing now mirrors the plain
+hip on the yellow-marked side. The cross-gable, raised brick pediment, raking
+bands and circular vent are removed; the continuous slate hip and the lower
+walls, glazing and end rooms remain. See the
+[reference and modelling notes](Research/oakmere/README.md#mirrored-spine-roof-18-september-2026).
+
+`test-oakmere.mjs` checks matching exposed roof surfaces at 20 paired points,
+as well as glazing and walking collisions. Its new roof assertion rejects
+the previous geometry. Source and compiled browser views are captured by
+`Browser/artifacts/annexe-spine-preview.mjs`. The shared browser model and
+local compiled aerial asset are updated; Unity and Blender exports are unchanged.
+
+Validation: all browser suite checks pass after updating the approved Annexe
+shape snapshot, with the remaining checks resumed from the earlier snapshot
+failure. The compiled/source comparison, every browser timeline stop and close
+roof views pass. Logs use
+the `Browser/artifacts/annexe-spine-` prefix. Concurrent Oakmere west courtyard
+work has its own builder and preservation check; it retains this roof correction.
+
 ## Remove marked east lawn items (September 18)
 
 Removed the east lawn lighting column, its arm and lamp, and the two small
@@ -992,3 +1013,49 @@ npm CLI (`Browser/artifacts/aerial-controls-style-suite.log`). Desktop,
 controls stay within the viewport without overlapping. Both menus, keyboard
 timeline selection and the intro link work without aerial page errors.
 Screenshots are `Browser/artifacts/aerial-controls-style-*.png`.
+
+### Locations and gallery cleanup, 18 September 2026
+
+Removed the West wing aerial and Photo 1–5 entries from the Locations menus
+in aerial and walking views; Photo 6 was already absent. Hampton and Ince
+remain available, and the existing direct camera URLs still work.
+Oakmere's gallery image now uses the supplied unedited
+`Research/oakmere/lawn-gallery.png`, converted to the 1200 × 900
+`oakmere-lawn.webp` with the existing photo preparation settings.
+Removed `jodrell-mural-stairwell.webp` and `irby-4.webp` from their galleries,
+bundled assets, build source list and generated source manifest.
+
+Validation: the complete browser `npm test` suite passes via the installed
+npm CLI (`Browser/artifacts/oakmere-menu-gallery-suite.log`), including source
+and compiled building selection. Browser checks confirmed both cleaned menus,
+the Oakmere replacement, two remaining Larkton / Jodrell images and three
+remaining Irby / Ashley images. Both removed image URLs return 404 locally;
+the checked pages reported no JavaScript errors. Desktop and mobile screenshots
+are `Browser/artifacts/oakmere-replacement-*.png` and the cleaned menu screenshots
+are `Browser/artifacts/locations-oakmere-cleanup.png` and
+`Browser/artifacts/locations-walking-cleanup.png`. Model geometry and compiled,
+Unity and Blender exports were not changed.
+
+### Oakmere red-circled west face, 18 September 2026
+
+The marked lawn view selects the rear courtyard's west range. Its new separate
+`annexe-oakmere-west.mjs` elevation follows the Oakmere photograph: 4–5–4 sash
+bays, two blocked upper openings, a brick pediment and round vent, slate roof
+intersection, masonry bands, pipes and low end rooms. The low service connector
+ends at the courtyard corner so the first ground-floor window is unobstructed.
+The `oakmere-photo` and `oakmere-lawn` camera presets now frame that marked face.
+See [the reference and preservation notes](Research/oakmere/README.md).
+
+The green-circled structures and the separately corrected spine roof retain
+their geometry. `test-oakmere-west.mjs` compares 21,294 protected primitives
+against the saved pre-edit annexe, and checks all new glazing from the lawn,
+roof normals, the open court, walking access/collision and Historic visibility.
+The complete approved-shape snapshot includes the new work; the protected-front
+snapshot is unchanged. No ward ownership changes were made.
+
+Validation: the complete `npm test` suite, `npm run build:models` and
+`npm run test:compiled` pass. Source and rebuilt compiled photo, context and
+front views render without page errors; screenshots and logs use the
+`Browser/artifacts/oakmere-west-` prefix. The source/compiled comparison passes
+with 0.017% of pixels above its difference threshold. Browser procedural and
+compiled models are updated. Unity and Blender exports are unchanged.

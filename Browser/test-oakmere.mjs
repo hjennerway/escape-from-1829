@@ -16,9 +16,21 @@ for(const o of detail.userData.openings){
  const h=ray.intersectObject(e.annexe,true)[0];
  assert(h&&h.object.parent===detail&&h.object.isInstancedMesh,'New opening must be visible outside existing masonry: '+JSON.stringify(o));
 }
-for(const name of ['Oakmere cross-gable slate roof','Oakmere raised spine slate roof','Oakmere low rear end room slate roof','Oakmere low hall link slate roof']){
+for(const name of ['Oakmere raised spine slate roof','Oakmere low rear end room slate roof','Oakmere low hall link slate roof']){
  const roof=detail.getObjectByName(name),n=roof.geometry.getAttribute('normal');
  assert(roof,name);for(let i=0;i<n.count;i++)assert(n.getY(i)>0,name+' must have upward-facing slopes');
+}
+// The blue side must present the same roof surface as the yellow side reflected
+// across the existing ridge, including where the former cross-gable emerged.
+const cap=detail.getObjectByName('Oakmere raised spine slate roof');
+for(const x of [-12,-6,0,6,12])for(const offset of [1.5,3.5,6,8]){
+ const hits=[-1,1].map(side=>{
+  ray.set(detail.localToWorld(new THREE.Vector3(x,30,cap.position.z+side*offset)),new THREE.Vector3(0,-1,0));
+  const hit=ray.intersectObject(e.annexe,true)[0];
+  assert(hit&&hit.object===cap,'Both sides expose the continuous hip at '+[x,side*offset]);
+  return hit;
+ });
+ assert(Math.abs(hits[0].point.y-hits[1].point.y)<1e-5,'Mirrored roof slopes have matching heights');
 }
 const obstacles=exteriorObstacles(THREE,e.model),view=ANNEXE_VIEWS['oakmere-photo'];
 assert(!obstacles.some(o=>obstacleContains(o,view.position[0],view.position[2])),'Photo viewpoint starts on open lawn');
@@ -28,4 +40,4 @@ walker.setView({position:p.toArray(),target:t.toArray()});walker.keys.add('KeyW'
 assert(detail.worldToLocal(e.camera.position.clone()).z>1,'Raised facade blocks walking');
 const layouts=createAerialLayouts(THREE,e);
 for(const historic of [false,true]){layouts.setVisible('historic',historic);let visible=true;for(let o=detail;o;o=o.parent)visible&&=o.visible;assert.equal(visible,historic);}
-console.log('PASS: all new Oakmere glazing is exposed, roof slopes face upward, walking approach and facade collisions work, and details follow Historic visibility.');
+console.log('PASS: Oakmere glazing is exposed, the spine has mirrored hipped roof slopes, walking approach and facade collisions work, and details follow Historic visibility.');

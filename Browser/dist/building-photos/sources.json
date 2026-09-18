@@ -95,12 +95,6 @@
     "height": 376,
     "bytes": 17110
   },
-  "jodrell-mural-stairwell": {
-    "source": "Research/annexe-photos/jodrell-mural-stairwell.png",
-    "width": 499,
-    "height": 379,
-    "bytes": 13616
-  },
   "annexe-outer": {
     "source": "Research/annexe-outer-front/img1.jpg",
     "width": 548,
@@ -108,10 +102,10 @@
     "bytes": 48054
   },
   "oakmere-lawn": {
-    "source": "Research/oakmere/img1.jpg",
+    "source": "Research/oakmere/lawn-gallery.png",
     "width": 1200,
     "height": 900,
-    "bytes": 195826
+    "bytes": 192280
   },
   "farndon-2": {
     "source": "Research/farndon/img2.jpg",
@@ -154,12 +148,6 @@
     "width": 1200,
     "height": 901,
     "bytes": 209440
-  },
-  "irby-4": {
-    "source": "Research/irby-ashley/img4.jpg",
-    "width": 1183,
-    "height": 332,
-    "bytes": 77290
   },
   "irby-ashley-mural": {
     "source": "Research/irby-ashley/ward-mural.png",

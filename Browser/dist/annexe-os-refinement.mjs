@@ -63,7 +63,9 @@ export function refineAnnexeRanges(ranges){
   {name:'Rear court east range',rect:[5,-44,14,-20]},
   {name:'Rear court back range',rect:[-19,-44,14,-39]},
   {name:'Rear court front range',rect:[-19,-29,14,-20]},
-  {name:'Rear service court link',rect:[-26,-49,-14,-42],h:4.3,rise:1.3}
+  // The marked Oakmere photo face begins at z=-44. Stop the low service link
+  // at that corner so it cannot bury the first ground-floor sash.
+  {name:'Rear service court link',rect:[-26,-49,-14,-44],h:4.3,rise:1.3}
  ].map(spec=>({h:8.4,rise:2.3,...spec}));
 }
 export const ANNEXE_OUTER_FRONT_FITS={west:{start:67,end:108,front:0},east:{start:65,end:109,front:12}};
