@@ -1,5 +1,29 @@
 # Development and modelling notes
 
+## Upstairs emergency exits (September 18)
+
+The three blue-marked rear corridor ends now have usable upstairs fire escapes:
+west, centre and east. `makeFloors` retains `upperFloor.exits`, so the existing
+architecture, floor maps, artwork clearance and hold-E escape action all use
+the same positions. Exit lamps and numbered signs are installed on both floors;
+the signs have dark green backgrounds to stay legible against the pale walls.
+The HUD reports exits on the current floor, and help/retry text reflects eight
+routes in total. This supersedes the downstairs-only exit description in the
+historical playable-upstairs notes below.
+
+`node Browser/build-escape-layout.mjs` regenerates both navigation JSON copies.
+The browser game is updated; Unity, Blender and GLB exports are not regenerated.
+The aerial compiled model does not contain this interior and is unaffected.
+See the [marked reference and coordinates](Research/escape-layout/README.md#upstairs-emergency-exits-september-18).
+
+Validation: the full `npm test` suite passes, including routes from reception,
+both staircase approaches, visible door geometry, lighting and actual hold-E
+escape through all eight exits. The Chrome/WebGL check
+`node Browser/artifacts/check-upstairs-exits.mjs` verifies all three upstairs
+doors, keyboard escape, green lamps, artwork clearance, maps and desktop/mobile
+views without browser errors. Reviewed screenshots, validation data and the
+suite log use the `Browser/artifacts/upstairs-exits-` prefix.
+
 ## Annexe marked windows (September 18)
 
 The red low link now has three windows; the two blue-marked pale upper panels
@@ -1223,3 +1247,70 @@ half-second stair/exit interactions at four frames per second. The full browser
 suite output is saved in `Browser/artifacts/interaction-half-second-suite.txt`.
 Only browser gameplay code and checks changed; model assets and exports are
 unaffected.
+
+## Detailed security guard and walking animation (September 18)
+
+The browser Asylum Escape guard now uses `Browser/dist/security-guard.mjs`.
+Its navy uniform has a folded collar and tie, epaulettes, pockets and buttons,
+shield badge, name plate, chest/back SECURITY patches, radio and antenna,
+duty belt, pouches, key ring, wristwatch, trouser creases and laced boots.
+The face has shaped ears, nose, jaw, eyes and eyebrows under a peaked cap.
+This is a fictional security uniform consistent with the game's character,
+not a historically researched 1829 uniform.
+
+The model has hip, knee, ankle, shoulder and elbow joints. Actual horizontal
+NPC displacement advances the stride, so pursuit increases the cadence and
+an empty route settles to standing. A two-bone leg solve keeps the boots level,
+with floor contact during the stance and clearance during the swing.
+The upper body counter-turns and the arms swing opposite their corresponding
+legs. The old whole-guard vertical bob is removed. Head start, pause/help,
+hold-E, artwork inspection, cutscenes and restart preserve their existing
+gameplay behavior. Floor offsets and visibility still follow the NPC's floor.
+
+Rigid details are merged within each joint: the geometry check measures
+53 meshes and 8,788 triangles without lettering; browser canvas patches add
+one merged mesh and four triangles. No downloaded character assets or extra
+runtime lights are needed. This changes browser sources only; Unity, Blender
+and GLB exports are unchanged. The precompiled aerial model does not contain
+game characters and does not require a rebuild.
+
+Validation: the full `npm test` suite passes, including
+`test-security-guard.mjs` (leg articulation, sole clearance, stationary settle,
+frame-rate-independent stride and reset) and `test-game.mjs` (actual patrol and
+chase movement, pause/interaction freezes, upstairs visibility and head start).
+`node Browser/check-security-guard-browser.mjs` runs the real WebGL review;
+set `MODEL_CHROME_PATH` when using a locally installed Chrome. Front/side/back,
+upstairs and mobile screenshots and the validation JSON are saved under
+`Browser/artifacts/security-guard-*`. The rendered model was visually checked,
+and the real pursuit/hold-E checks passed with no page or Three.js errors.
+
+## Random pursuer starts (September 18)
+
+Each Asylum Escape launch and restart now chooses fresh ground-floor positions
+for Security and the Deva asylum ghost. Candidates are reachable walkable cell
+centres at least 12 scene units from Reception, outside exit and staircase
+interaction areas. The pursuers start at least five units apart, and neither
+reuses its previous starting cell on a restart. Positions are chosen once by
+`start()` and retained through the arrival handoff; the existing five-second
+head start and pause/resume behaviour remain intact. This supersedes the older
+fixed-spawn notes above.
+
+Validation: `Browser/test-game.mjs` covers 24 launches/retries with seeded and
+repeated boundary random values, clearance, reachability, changing positions,
+mesh placement, arrival stability and the head start. The full browser
+`npm test` suite passes. A Chrome/WebGL check exercised the actual Start and
+Restart buttons across three runs with distinct starts and no page errors;
+results and a map capture are saved as
+`Browser/artifacts/random-enemy-spawns-validation.json` and
+`Browser/artifacts/random-enemy-spawns-map.png`. Only browser runtime code,
+tests and documentation changed; navigation/model assets and Unity/Blender
+exports were not regenerated.
+
+## Minimap legend colours (September 18)
+
+The minimap labels now match the canvas markers: You `#fff8db`, Ghost
+`#8fe0c4`, and Security `#e1c278`. The Walls legend entry is removed.
+Only the browser HTML and CSS change. Desktop (1300 × 900) and mobile
+(390 × 844) Chrome screenshots under `Browser/artifacts/minimap-legend-*`
+were visually checked; computed label colours match and there are no page
+errors. `Browser/test-game.mjs` and the full browser `npm test` suite pass.

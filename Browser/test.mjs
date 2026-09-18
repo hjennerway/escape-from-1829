@@ -1,17 +1,18 @@
 import assert from 'node:assert/strict';
 import {readFile} from 'node:fs/promises';
+import {exitDirection} from './dist/escape-routes.mjs';
 import {path,walkable,visible,nearExit} from './dist/core.mjs';
 import {makeFloors,changeFloor,nearStair,routeBetweenFloors} from './dist/floors.mjs';
 const l=JSON.parse(await readFile(new URL('./dist/layout.json',import.meta.url)));
 const spawn={x:l.spawn.x*l.cellSize,z:l.spawn.z*l.cellSize};
-assert.equal(l.exits.length,5);assert.equal(l.cells.length,l.width*l.height);
+assert.equal(l.exits.length,7);assert.equal(l.cells.length,l.width*l.height);
 for(const e of l.exits){const target={x:e.x*l.cellSize,z:e.z*l.cellSize},route=path(l,spawn,target);assert(route.length>0,e.name+' unreachable');let prev=spawn;for(const p of route){assert.equal(Math.hypot(p.x-prev.x,p.z-prev.z),l.cellSize);assert(walkable(l,p.x,p.z));prev=p;}assert.equal(nearExit(l,target).name,e.name);console.log(e.name+': reachable in '+route.length+' grid steps');}
 assert(!walkable(l,0,0));assert(walkable(l,spawn.x,spawn.z));
 assert(!visible(l,{x:30,z:30},{x:70,z:30}),'Rear courts separate the three arms');
 assert(visible(l,{x:10,z:l.galleryZ*l.cellSize},{x:90,z:l.galleryZ*l.cellSize}),'Front gallery joins the wings');
 // Every walkable cell is in the spawn component, including side rooms.
 for(let i=0;i<l.cells.length;i++)if(l.cells[i]){const p={x:i%l.width*l.cellSize,z:Math.floor(i/l.width)*l.cellSize};if(p.x!==spawn.x||p.z!==spawn.z)assert(path(l,spawn,p).length>0,'Disconnected cell '+i);}
-console.log('PASS: five exits, all rooms connected, wall collision and sight obstruction.');
+console.log('PASS: seven ground-floor candidates, all rooms connected, wall collision and sight obstruction.');
 assert.equal(l.geometrySource,'layout','Browser must not use stale binary walls');
 assert.equal(l.stairs.length,2);
 const [left,right]=l.stairs;
@@ -41,12 +42,17 @@ const canonical=JSON.parse(await readFile(new URL('../Assets/Resources/layout.js
 assert.deepEqual(l,canonical);
 console.log('PASS: mirrored reception stair approaches, canonical/browser parity.');
 const floors=makeFloors(l),upper=floors[1];
-assert.deepEqual(upper.exits.map(({x,z,facing})=>({x,z,facing})),[
-  {x:12,z:7,facing:-1},{x:20,z:6,facing:-1},{x:28,z:7,facing:-1}
-],'Upstairs exits sit at the three marked rear corridor ends');
-assert.equal(nearExit(l,{x:20*l.cellSize,z:6*l.cellSize}),undefined,'Central fire escape belongs upstairs only');
+const expectedExits=[
+  {x:12,z:7,axis:'z',facing:-1},{x:20,z:6,axis:'z',facing:-1},{x:28,z:7,axis:'z',facing:-1},
+  {x:2,z:19,axis:'x',facing:-1},{x:38,z:19,axis:'x',facing:1},
+  {x:11,z:26,axis:'z',facing:1},{x:29,z:26,axis:'z',facing:1}
+];
+for(const floor of floors){
+  assert.deepEqual(floor.exits.map(({x,z,axis,facing})=>({x,z,axis,facing})),expectedExits,'Seven marked locations on each floor replace the old exit list');
+  assert.equal(nearExit(floor,{x:20*l.cellSize,z:21*l.cellSize}),undefined,'The former main portico is no longer an exit');
+  for(const exit of floor.exits){const {dx,dz}=exitDirection(exit);assert.equal(floor.cells[(exit.z+dz)*floor.width+exit.x+dx],0,'Exit faces an exterior wall');}
+}
 for(const exit of upper.exits){
-  assert.equal(upper.cells[(exit.z+exit.facing)*upper.width+exit.x],0,'Fire escape faces an exterior wall');
   const destination={x:exit.x*upper.cellSize,z:exit.z*upper.cellSize,floor:1};
   assert(walkable(upper,destination.x,destination.z));
   assert.equal(nearExit(upper,destination),exit);
@@ -77,4 +83,4 @@ for(const stair of l.stairs){
   }
   assert(changeFloor(floors,traveller,nearStair(floors,traveller)));assert.equal(traveller.floor,0);
 }
-console.log('PASS: both stairs up/down, all upper rooms reachable, cross-floor pursuer routes, five ground-floor exits and three reachable upstairs fire escapes.');
+console.log('PASS: both stairs up/down, all upper rooms reachable, cross-floor pursuer routes, fourteen reachable escape-route candidates across both floors.');

@@ -1,4 +1,5 @@
 import {createInteriorMaterials} from './interior-materials.mjs';
+import {exitDirection} from './escape-routes.mjs';
 
 const materialCache=new WeakMap();
 const directions=[[1,0],[-1,0],[0,1],[0,-1]];
@@ -167,10 +168,10 @@ export function buildArchitecture(THREE,scene,layout){
     box('Brass',x-side*.9,1.4,z-1.4,.045,.045,2.4);
   }
   for(const e of layout.exits){
-    const facing=e.facing??1,z=e.z*s+facing*.7;
+    const {dx,dz}=exitDirection(e),x=e.x*s+dx*.7,z=e.z*s+dz*.7,rotation=dx?Math.PI/2:0;
     fixture(e.x*s,e.z*s);
-    box('Panel',e.x*s,1.25,z,1.7,2.5,.14);
-    box('Brass',e.x*s,1.05,z-facing*.1,1.3,.08,.08);
+    box('Panel',x,1.25,z,1.7,2.5,.14,rotation);
+    box('Brass',x-dx*.1,1.05,z-dz*.1,1.3,.08,.08,rotation);
   }
   if(!materialCache.has(THREE))materialCache.set(THREE,createInteriorMaterials(THREE,globalThis.document));
   const materials=materialCache.get(THREE),geometry=new THREE.BoxGeometry(1,1,1),wedge=geometry.clone();

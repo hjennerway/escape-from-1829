@@ -1385,33 +1385,52 @@
   ],
   "exits": [
     {
-      "x": 11,
-      "z": 26,
-      "name": "WEST GARDEN",
-      "facing": 1
-    },
-    {
-      "x": 29,
-      "z": 26,
-      "name": "EAST GARDEN",
-      "facing": 1
-    },
-    {
       "x": 12,
       "z": 7,
-      "name": "WEST COURT",
+      "name": "WEST REAR · GROUND",
+      "axis": "z",
+      "facing": -1
+    },
+    {
+      "x": 20,
+      "z": 6,
+      "name": "CENTRAL REAR · GROUND",
+      "axis": "z",
       "facing": -1
     },
     {
       "x": 28,
       "z": 7,
-      "name": "EAST COURT",
+      "name": "EAST REAR · GROUND",
+      "axis": "z",
       "facing": -1
     },
     {
-      "x": 20,
-      "z": 21,
-      "name": "MAIN PORTICO",
+      "x": 2,
+      "z": 19,
+      "name": "WEST GALLERY · GROUND",
+      "axis": "x",
+      "facing": -1
+    },
+    {
+      "x": 38,
+      "z": 19,
+      "name": "EAST GALLERY · GROUND",
+      "axis": "x",
+      "facing": 1
+    },
+    {
+      "x": 11,
+      "z": 26,
+      "name": "WEST FRONT · GROUND",
+      "axis": "z",
+      "facing": 1
+    },
+    {
+      "x": 29,
+      "z": 26,
+      "name": "EAST FRONT · GROUND",
+      "axis": "z",
       "facing": 1
     }
   ],
@@ -2863,20 +2882,51 @@
       {
         "x": 12,
         "z": 7,
-        "name": "WEST FIRE ESCAPE",
+        "name": "WEST REAR · UPPER",
+        "axis": "z",
         "facing": -1
       },
       {
         "x": 20,
         "z": 6,
-        "name": "CENTRAL FIRE ESCAPE",
+        "name": "CENTRAL REAR · UPPER",
+        "axis": "z",
         "facing": -1
       },
       {
         "x": 28,
         "z": 7,
-        "name": "EAST FIRE ESCAPE",
+        "name": "EAST REAR · UPPER",
+        "axis": "z",
         "facing": -1
+      },
+      {
+        "x": 2,
+        "z": 19,
+        "name": "WEST GALLERY · UPPER",
+        "axis": "x",
+        "facing": -1
+      },
+      {
+        "x": 38,
+        "z": 19,
+        "name": "EAST GALLERY · UPPER",
+        "axis": "x",
+        "facing": 1
+      },
+      {
+        "x": 11,
+        "z": 26,
+        "name": "WEST FRONT · UPPER",
+        "axis": "z",
+        "facing": 1
+      },
+      {
+        "x": 29,
+        "z": 26,
+        "name": "EAST FRONT · UPPER",
+        "axis": "z",
+        "facing": 1
       }
     ],
     "source": "Same approximate 1829 core footprint; upper rooms and partitions are gameplay estimates"

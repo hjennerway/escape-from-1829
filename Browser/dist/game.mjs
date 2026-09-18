@@ -8,7 +8,9 @@ import {createEscapeExterior,loadEscapeFrontage} from './escape-exterior.mjs';
 import {bindTreeToggle} from './tree-layer.mjs';
 import {sampleLanding} from './aerial-controls.mjs';
 import {createArrivalCutscene} from './arrival-cutscene.mjs';
+import {createSecurityGuard,updateSecurityGuard,resetSecurityGuard} from './security-guard.mjs';
 import {FLOOR_HEIGHT,makeFloors,nearStair,changeFloor,routeBetweenFloors} from './floors.mjs';
+import {selectEscapeRoutes,exitDirection} from './escape-routes.mjs';
 const $=id=>document.getElementById(id),canvas=$('game');
 const keys=new Set(),touch=matchMedia('(pointer:coarse)').matches;
 const INTERACTION_HOLD_SECONDS=.5;
@@ -37,7 +39,7 @@ function lightFloor(){
  for(const stair of layout.stairs)lamp(stair.x*layout.cellSize,stair.z*layout.cellSize);
 }
 function markExits(){
- layout.exits.forEach((e,i)=>{lamp(e.x*layout.cellSize,e.z*layout.cellSize,0x77db97);label('EXIT '+(i+1)+'  →|'+e.name,e.x*layout.cellSize,2.8,e.z*layout.cellSize+e.facing*.5);});
+ layout.exits.forEach((e,i)=>{const {dx,dz}=exitDirection(e);lamp(e.x*layout.cellSize,e.z*layout.cellSize,0x77db97);label('EXIT '+(i+1)+'  →|'+e.name,e.x*layout.cellSize+dx*.5,2.8,e.z*layout.cellSize+dz*.5,dx?Math.PI/2:0,true);});
 }
 function twoSidedTextPlane(geometry,texture,frontPosition,parent){
  const mat=new THREE.MeshBasicMaterial({map:texture,transparent:true,side:THREE.FrontSide});
@@ -46,7 +48,7 @@ function twoSidedTextPlane(geometry,texture,frontPosition,parent){
  back.rotation.y=Math.PI;
  return {front,back};
 }
-function label(text,x,y,z,rotate=0){const c=document.createElement('canvas');c.width=640;c.height=192;const g=c.getContext('2d');g.clearRect(0,0,640,192);g.textAlign='center';g.fillStyle='#d9f1c7';const title=text.split('|')[0],size=title.length>17?42:title.length>12?50:62;g.font=`bold ${size}px Arial`;g.fillText(title,320,85);g.font='22px Arial';g.fillText(text.split('|')[1]||'',320,141);const signGroup=new THREE.Group();signGroup.position.set(x,y,z);signGroup.rotation.y=rotate;scene.add(signGroup);const texture=new THREE.CanvasTexture(c);twoSidedTextPlane(new THREE.PlaneGeometry(2.35,.72),texture,[0,0,.012],signGroup);}
+function label(text,x,y,z,rotate=0,backed=false){const c=document.createElement('canvas');c.width=640;c.height=192;const g=c.getContext('2d');g.clearRect(0,0,640,192);if(backed){g.fillStyle='#163422';g.fillRect(0,0,640,192);g.strokeStyle='#8ab49a';g.lineWidth=8;g.strokeRect(4,4,632,184);}g.textAlign='center';g.fillStyle='#d9f1c7';const title=text.split('|')[0],size=title.length>17?42:title.length>12?50:62;g.font=`bold ${size}px Arial`;g.fillText(title,320,85);g.font='22px Arial';g.fillText(text.split('|')[1]||'',320,141);const signGroup=new THREE.Group();signGroup.position.set(x,y,z);signGroup.rotation.y=rotate;scene.add(signGroup);const texture=new THREE.CanvasTexture(c);twoSidedTextPlane(new THREE.PlaneGeometry(2.35,.72),texture,[0,0,.012],signGroup);}
 function wornSign(group,text,y,color=0x1a2b20){const board=box([.7,.29,.045],[0,y, .285],material(color),group);const c=document.createElement('canvas');c.width=512;c.height=160;const g=c.getContext('2d');g.fillStyle='#dce8c4';g.fillRect(0,0,512,160);g.strokeStyle='#31513e';g.lineWidth=10;g.strokeRect(8,8,496,144);g.fillStyle='#142119';g.font='bold 54px Arial';g.textAlign='center';g.textBaseline='middle';g.fillText(text,256,80);const texture=new THREE.CanvasTexture(c);const signs=twoSidedTextPlane(new THREE.PlaneGeometry(.65,.2),texture,[0,y,.31],group);signs.back.position.z=.26;signs.front.name=text+' sign';signs.back.name=text+' sign (reverse)';return board;}
 const heritageSources=[
  {url:'https://www.whateversleft.co.uk/wp-content/uploads/2008/11/031.jpg',title:'DEVA ASYLUM · CORRIDOR',credit:'Public Deva archive · Whatevers Left'},
@@ -134,6 +136,7 @@ function openArtViewer(art){
 }
 function closeArtViewer(){if(!artViewing)return;artViewing=null;$('artViewer').hidden=true;}
 function enemyModel(type){
+ if(type===1){const guard=createSecurityGuard(THREE);scene.add(guard);return guard;}
  const group=new THREE.Group(),skin=material(type===2?0x91bcad:0xb09a7b),coat=material(type===2?0x577b6e:0x202f42,type===2?{transparent:true,opacity:.68,emissive:0x345e51,emissiveIntensity:.4}:{});
  mesh(new THREE.CylinderGeometry(.23,.37,1.12,8),coat,[0,1.05,0],group);
  mesh(new THREE.SphereGeometry(.21,12,10),skin,[0,1.86,0],group);
@@ -156,7 +159,7 @@ function buildProcedural(){
 async function init(){
  try{
   layout=await fetch('./layout.json').then(r=>{if(!r.ok)throw Error('Level data could not load');return r.json();});
-  floors=makeFloors(layout);
+  floors=selectEscapeRoutes(makeFloors(layout));layout=floors[0];
   renderer=new THREE.WebGLRenderer({canvas,antialias:true,powerPreference:'high-performance'});renderer.setPixelRatio(Math.min(devicePixelRatio,1.5));renderer.setSize(innerWidth,innerHeight);renderer.outputColorSpace=THREE.SRGBColorSpace;renderer.toneMapping=THREE.ACESFilmicToneMapping;renderer.toneMappingExposure=1.25;
   scene=new THREE.Scene();scene.background=new THREE.Color(0x343731);scene.fog=new THREE.FogExp2(0x343731,.018);
   camera=new THREE.PerspectiveCamera(74,innerWidth/innerHeight,.05,150);camera.rotation.order='YXZ';
@@ -176,7 +179,7 @@ async function init(){
   buildArchitecture(THREE,scene,layout);placeLocalArtPanels(1);
   lightFloor();markExits();
   for(const stair of layout.stairs)label(stair.name+'|HOLD E TO GO DOWN',stair.x*layout.cellSize,2.6,stair.z*layout.cellSize);
-  label('UPPER GALLERY|EXITS AT ALL THREE REAR ENDS',layout.spawn.x*layout.cellSize,2.7,layout.galleryZ*layout.cellSize);
+  label('UPPER GALLERY|CHECK YOUR MAP FOR ACTIVE EXITS',layout.spawn.x*layout.cellSize,2.7,layout.galleryZ*layout.cellSize);
   floorGroups.push(groupSince(upperSnapshot,FLOOR_HEIGHT));layout=floors[0];floorGroups[1].visible=false;
   interiorLights=createInteriorLights(THREE,scene,lights);
   torch=new THREE.SpotLight(0xfff3da,20,30,.50,.55,1.2);torchTarget=new THREE.Object3D();scene.add(torch,torchTarget);torch.target=torchTarget;
@@ -195,10 +198,25 @@ async function init(){
   resetPositions();clock=new THREE.Clock();ready=true;$('start').disabled=false;$('start').innerHTML='ASYLUM ESCAPE <span>↗</span>';animate();
  }catch(e){console.error(e);$('start').textContent='RELOAD TO TRY AGAIN';$('start').disabled=false;$('start').onclick=()=>location.reload();$('intro').textContent='The building could not load. Check your connection and reload. '+e.message;}
 }
-function resetPositions(){player.floor=0;showFloor();stairHold=0;stairLatch=false;mapRefresh=0;lastStep=0;lastPulse=0;camera.position.y=1.65;player.x=layout.spawn.x*layout.cellSize;player.z=layout.spawn.z*layout.cellSize;yaw=layout.spawn.yaw??0;pitch=0;enemies.forEach(e=>{Object.assign(e,{...e.spawn,path:[],memory:0,rethink:0,route:0,target:null});e.mesh.position.set(e.x,0,e.z);e.mesh.visible=true;});}
+// Choose once per run; the arrival handoff reuses these spawns in resetPositions.
+function randomizeEnemySpawns(){
+ const ground=floors[0],reception={x:ground.spawn.x*ground.cellSize,z:ground.spawn.z*ground.cellSize},candidates=[];
+ for(let z=0;z<ground.height;z++)for(let x=0;x<ground.width;x++){
+  const p={x:x*ground.cellSize,z:z*ground.cellSize,floor:0};
+  if(!walkable(ground,p.x,p.z,.5)||Math.hypot(p.x-reception.x,p.z-reception.z)<12)continue;
+  if(nearExit(ground,p)||nearStair(floors,p)||!path(ground,reception,p).length)continue;
+  candidates.push(p);
+ }
+ const placed=[];
+ for(const e of enemies){
+  const choices=candidates.filter(p=>(p.x!==e.spawn.x||p.z!==e.spawn.z)&&placed.every(other=>Math.hypot(p.x-other.x,p.z-other.z)>=5));
+  e.spawn=choices[Math.floor(Math.random()*choices.length)]||e.spawn;placed.push(e.spawn);
+ }
+}
+function resetPositions(){player.floor=0;showFloor();stairHold=0;stairLatch=false;mapRefresh=0;lastStep=0;lastPulse=0;camera.position.y=1.65;player.x=layout.spawn.x*layout.cellSize;player.z=layout.spawn.z*layout.cellSize;yaw=layout.spawn.yaw??0;pitch=0;enemies.forEach(e=>{Object.assign(e,{...e.spawn,path:[],memory:0,rethink:0,route:0,target:null});e.mesh.position.set(e.x,0,e.z);e.mesh.visible=true;if(e.type===1)resetSecurityGuard(e.mesh);});}
 function uiPlaying(value){document.body.classList.toggle('playing',value);$('menu').hidden=value;$('location').hidden=value;$('hud').hidden=!value;$('pause').hidden=!value;$('touch').hidden=!value||!touch;}
 function lock(){if(!touch&&canvas.requestPointerLock){try{const result=canvas.requestPointerLock();result?.catch(()=>{});}catch{}}}
-function start(){if(!ready||state==='arrival')return;escapeCutscene.reset();closeArtViewer();resetPositions();elapsed=0;stamina=1;hold=0;exhausted=false;crouch=false;sprint=false;footPhase=0;dragging=false;previousPointer=null;keys.clear();state='arrival';torch.visible=true;uiPlaying(true);$('hud').hidden=true;$('pause').hidden=true;$('touch').hidden=true;$('instructions').hidden=true;$('result').hidden=true;$('floorMap').hidden=true;$('timer').textContent='00:00';$('warning').textContent='';$('interact').hidden=true;arrivalCutscene.start();audioCtx??=new (window.AudioContext||window.webkitAudioContext)();audioCtx.resume().catch(()=>{});lock();}
+function start(){if(!ready||state==='arrival')return;escapeCutscene.reset();closeArtViewer();randomizeEnemySpawns();resetPositions();elapsed=0;stamina=1;hold=0;exhausted=false;crouch=false;sprint=false;footPhase=0;dragging=false;previousPointer=null;keys.clear();state='arrival';torch.visible=true;uiPlaying(true);$('hud').hidden=true;$('pause').hidden=true;$('touch').hidden=true;$('instructions').hidden=true;$('result').hidden=true;$('floorMap').hidden=true;$('timer').textContent='00:00';$('warning').textContent='';$('interact').hidden=true;arrivalCutscene.start();audioCtx??=new (window.AudioContext||window.webkitAudioContext)();audioCtx.resume().catch(()=>{});lock();}
 function pause(){if(state!=='play')return;closeArtViewer();state='paused';keys.clear();document.exitPointerLock?.();$('resultTag').textContent='TAKE A MOMENT';$('resultTitle').textContent='Hold your breath.';$('resultBody').textContent='The building will wait. Resume when you’re ready.';$('resume').hidden=false;$('resultExplore').hidden=true;$('retry').textContent='RESTART';$('result').hidden=false;}
 function finish(won,who){closeArtViewer();state=won?'cutscene':'lost';keys.clear();document.exitPointerLock?.();$('resultTag').textContent=won?'OUTSIDE. AT LAST.':'THE BUILDING KEPT YOU';$('resultTitle').textContent=won?'You made it out.':'Locked in the basement';$('resultBody').textContent=won?`You escaped through ${who.toLowerCase()} in ${elapsed.toFixed(1)} seconds. ${floors.reduce((count,floor)=>count+floor.exits.length,0)-1} other routes are waiting.`:`${who} captured you after ${elapsed.toFixed(1)} seconds. Break line of sight, save your sprint, and use the map to find a different route.`;$('resume').hidden=true;$('resultExplore').hidden=!won;$('retry').textContent='TRY ANOTHER ROUTE ↗';$('result').hidden=won;$('interact').hidden=true;
  if(won){$('hud').hidden=true;$('touch').hidden=true;$('pause').hidden=true;escapeCutscene.start();}
@@ -226,8 +244,10 @@ function update(dt,interactionDt=dt){
   e.rethink-=dt;if(e.rethink<=0){e.rethink=.45;if(e.memory<=0&&(!e.path.length||Math.hypot(e.x-e.target?.x,e.z-e.target?.z)<1)){const routes=enemyLayout.patrol,r=routes[e.route++%routes.length];e.target={x:r.x*enemyLayout.cellSize,z:r.z*enemyLayout.cellSize,floor:e.floor};}if(e.target)e.path=routeBetweenFloors(floors,e,e.target);}
   let speed=e.type===1?(e.memory?3.85:2.4):2.2;
   if(sameFloor&&e.type===2&&torch.visible&&distance<23&&visible(layout,player,e)){camera.getWorldDirection(tmp);const dot=(tmp.x*(e.x-player.x)+tmp.z*(e.z-player.z))/(distance||1);if(dot>.88)speed=.55;}
+  const oldX=e.x,oldZ=e.z,oldFloor=e.floor;
   const target=e.path[0];if(target&&target.floor!==e.floor){const stair=nearStair(floors,e);if(changeFloor(floors,e,stair))e.path.shift();else e.path=[];}else if(target){const vx=target.x-e.x,vz=target.z-e.z,d=Math.hypot(vx,vz),step=Math.min(speed*dt,d);if(d>.001){e.x+=vx/d*step;e.z+=vz/d*step;e.mesh.rotation.y=Math.atan2(vx,vz);}if(d<.08&&e.path.length)e.path.shift();}
-  e.mesh.position.set(e.x,e.floor*FLOOR_HEIGHT+(e.type===2?Math.sin(elapsed*2)*.11:Math.sin(elapsed*8)*.025),e.z);e.mesh.visible=e.floor===player.floor;
+  if(e.type===1)updateSecurityGuard(e.mesh,e.floor===oldFloor?Math.hypot(e.x-oldX,e.z-oldZ):0,dt);
+  e.mesh.position.set(e.x,e.floor*FLOOR_HEIGHT+(e.type===2?Math.sin(elapsed*2)*.11:0),e.z);e.mesh.visible=e.floor===player.floor;
   if(e.floor===player.floor&&Math.hypot(e.x-player.x,e.z-player.z)<.8){finish(false,e.name);break;}
  }
  if(state!=='play')return;

@@ -19,22 +19,30 @@ const stairs=[
   {x:24,z:17,name:'RIGHT RECEPTION STAIR',direction:'UP',mirror:-1,source:'Mirrored at user request'}
 ];
 const patrol=[{x:12,z:8},{x:28,z:8},{x:29,z:25},{x:11,z:25}];
+// Seven marked perimeter locations on each floor; the browser chooses five
+// from the complete fourteen-route pool once per page load.
+const exitLocations=[
+  {x:12,z:7,name:'WEST REAR',axis:'z',facing:-1},
+  {x:20,z:6,name:'CENTRAL REAR',axis:'z',facing:-1},
+  {x:28,z:7,name:'EAST REAR',axis:'z',facing:-1},
+  {x:2,z:19,name:'WEST GALLERY',axis:'x',facing:-1},
+  {x:38,z:19,name:'EAST GALLERY',axis:'x',facing:1},
+  {x:11,z:26,name:'WEST FRONT',axis:'z',facing:1},
+  {x:29,z:26,name:'EAST FRONT',axis:'z',facing:1}
+];
+const exitsForFloor=floor=>exitLocations.map(exit=>({...exit,name:exit.name+' · '+floor}));
 const layout={width,height,cellSize,cells,geometrySource:'layout',galleryZ:19,
   source:'Approximate 1829 core footprint, excluding Barmere, Redesmere and Saughall; fictional internal partitions',
   spawn:{x:20,z:19,yaw:0},stairs,
-  exits:[{x:11,z:26,name:'WEST GARDEN',facing:1},{x:29,z:26,name:'EAST GARDEN',facing:1},
-    {x:12,z:7,name:'WEST COURT',facing:-1},{x:28,z:7,name:'EAST COURT',facing:-1},
-    {x:20,z:21,name:'MAIN PORTICO',facing:1}],
+  exits:exitsForFloor('GROUND'),
   rooms:[{name:'NECS Office',x:12,z:8},{name:'Library',x:28,z:8},
     {name:'MLCSU Office',x:12,z:16},{name:'Reception',x:20,z:19},
     {name:'NHS England office',x:28,z:16},{name:'Snug',x:11,z:24},{name:'Arden and GEM office',x:29,z:24}],
   enemies:[{name:'Security',x:28,z:12,type:1},{name:'Deva asylum ghost',x:20,z:7,type:2}],patrol,
   upperFloor:{name:'UPPER FLOOR',cells:[...cells],patrol,
-    exits:[{x:12,z:7,name:'WEST FIRE ESCAPE',facing:-1},
-      {x:20,z:6,name:'CENTRAL FIRE ESCAPE',facing:-1},
-      {x:28,z:7,name:'EAST FIRE ESCAPE',facing:-1}],
+    exits:exitsForFloor('UPPER'),
     source:'Same approximate 1829 core footprint; upper rooms and partitions are gameplay estimates'}
 };
 for(const file of ['./dist/layout.json','../Assets/Resources/layout.json'])
   await writeFile(new URL(file,import.meta.url),JSON.stringify(layout,null,2)+'\n');
-console.log(`1829 escape plan: ${cells.reduce((a,b)=>a+b,0)} cells on each floor, five ground-floor exits and three upstairs fire escapes.`);
+console.log(`1829 escape plan: ${cells.reduce((a,b)=>a+b,0)} cells on each floor, seven exit candidates per floor; five of fourteen active per load.`);

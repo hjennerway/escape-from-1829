@@ -1,0 +1,77 @@
+{
+  "runs": [
+    [
+      {
+        "name": "Security",
+        "x": 12.5,
+        "z": 52.5,
+        "floor": 0,
+        "mesh": [
+          12.5,
+          0,
+          52.5
+        ]
+      },
+      {
+        "name": "Deva asylum ghost",
+        "x": 72.5,
+        "z": 30,
+        "floor": 0,
+        "mesh": [
+          72.5,
+          0,
+          30
+        ]
+      }
+    ],
+    [
+      {
+        "name": "Security",
+        "x": 87.5,
+        "z": 52.5,
+        "floor": 0,
+        "mesh": [
+          87.5,
+          0,
+          52.5
+        ]
+      },
+      {
+        "name": "Deva asylum ghost",
+        "x": 47.5,
+        "z": 22.5,
+        "floor": 0,
+        "mesh": [
+          47.5,
+          0,
+          22.5
+        ]
+      }
+    ],
+    [
+      {
+        "name": "Security",
+        "x": 5,
+        "z": 47.5,
+        "floor": 0,
+        "mesh": [
+          5,
+          0,
+          47.5
+        ]
+      },
+      {
+        "name": "Deva asylum ghost",
+        "x": 65,
+        "z": 47.5,
+        "floor": 0,
+        "mesh": [
+          65,
+          0,
+          47.5
+        ]
+      }
+    ]
+  ],
+  "errors": []
+}

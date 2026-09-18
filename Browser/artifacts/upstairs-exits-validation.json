@@ -1,0 +1,47 @@
+{
+  "results": [
+    {
+      "exit": {
+        "x": 12,
+        "z": 7,
+        "name": "WEST FIRE ESCAPE",
+        "facing": -1
+      },
+      "render": {
+        "calls": 23,
+        "triangles": 79128
+      },
+      "exitLamp": true,
+      "artClear": true
+    },
+    {
+      "exit": {
+        "x": 20,
+        "z": 6,
+        "name": "CENTRAL FIRE ESCAPE",
+        "facing": -1
+      },
+      "render": {
+        "calls": 23,
+        "triangles": 79128
+      },
+      "exitLamp": true,
+      "artClear": true
+    },
+    {
+      "exit": {
+        "x": 28,
+        "z": 7,
+        "name": "EAST FIRE ESCAPE",
+        "facing": -1
+      },
+      "render": {
+        "calls": 23,
+        "triangles": 79128
+      },
+      "exitLamp": true,
+      "artClear": true
+    }
+  ],
+  "errors": []
+}

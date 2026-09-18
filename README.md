@@ -2,7 +2,7 @@
 
 Explore The West Cheshire Hospital site including the historic Chester County Asylum.
 
-An explorable aerial perspective and first-person escape game set in Chester's 1829 building. Explore the asylum and grounds from the air or on foot or play "Asylum Escape" where you have to find one of eight exits across two floors
+An explorable aerial perspective and first-person escape game set in Chester's 1829 building. Explore the asylum and grounds from the air or on foot or play "Asylum Escape" where you have to find one of five active exits, randomly chosen from fourteen possible routes across two floors.
 inside 1829 while Security and the Chester County Asylum ghost search the corridors.
 
 Use the timeline slider in aerial or walking view to explore 13 periods from 1829 to 2021, with buildings and roads appearing as the site develops.

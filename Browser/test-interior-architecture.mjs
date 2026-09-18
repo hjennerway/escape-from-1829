@@ -3,6 +3,7 @@ import {readFile} from 'node:fs/promises';
 import * as THREE from './dist/vendor/three.module.js';
 import {buildArchitecture,interiorWallSurfaces} from './dist/architecture.mjs';
 import {makeFloors} from './dist/floors.mjs';
+import {exitDirection} from './dist/escape-routes.mjs';
 import {walkable} from './dist/core.mjs';
 const layout=JSON.parse(await readFile(new URL('./dist/layout.json',import.meta.url)));
 const snapshot=JSON.stringify(layout),scenes=[];
@@ -14,7 +15,8 @@ for(const floor of makeFloors(layout)){
  assert(windows.length>10,'Arched windows appear throughout both floors');
  const ray=new THREE.Raycaster();ray.far=3;
  for(const exit of floor.exits){
-  ray.set(new THREE.Vector3(exit.x*floor.cellSize,1.65,exit.z*floor.cellSize-exit.facing*1.5),new THREE.Vector3(0,0,exit.facing));
+  const {dx,dz}=exitDirection(exit);
+  ray.set(new THREE.Vector3(exit.x*floor.cellSize-dx*1.5,1.65,exit.z*floor.cellSize-dz*1.5),new THREE.Vector3(dx,0,dz));
   assert.equal(ray.intersectObjects(scene.children,false)[0]?.object.name,'Layout Panel',exit.name+' door must be visible from the corridor');exitDoors++;
  }
  ray.far=1;
