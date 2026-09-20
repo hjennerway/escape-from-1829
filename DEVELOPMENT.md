@@ -46,6 +46,13 @@ timeline reload and navigation to the walking scene. Readiness, rendering,
 source/compiled image comparison and fallback checks are retained. Full-detail
 results now include loading time and explicitly require compiled mode.
 
+Validation: `npm test` and `npm run test:compiled` pass locally with Node.js 24
+and Chrome using software WebGL. A separate run delayed the full-detail page's
+Three.js module by 31 seconds: navigation completed in 31.53 seconds and rendered
+readiness in 34.85 seconds, with every compiled-scene assertion still passing.
+Logs are `Browser/artifacts/pages-timeout-compiled.log`,
+`pages-timeout-slow-navigation.log` and `pages-timeout-suite.log`.
+
 Only validation scripts and documentation changed; browser runtime, model
 sources, generated assets and Unity/Blender exports are unchanged.
 

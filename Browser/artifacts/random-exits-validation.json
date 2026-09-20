@@ -1,0 +1,260 @@
+{
+  "results": [
+    {
+      "seed": 7919,
+      "active": [
+        {
+          "floor": 0,
+          "x": 28,
+          "z": 7,
+          "name": "EAST REAR · GROUND",
+          "axis": "z",
+          "facing": -1
+        },
+        {
+          "floor": 0,
+          "x": 2,
+          "z": 19,
+          "name": "WEST GALLERY · GROUND",
+          "axis": "x",
+          "facing": -1
+        },
+        {
+          "floor": 1,
+          "x": 28,
+          "z": 7,
+          "name": "EAST REAR · UPPER",
+          "axis": "z",
+          "facing": -1
+        },
+        {
+          "floor": 1,
+          "x": 2,
+          "z": 19,
+          "name": "WEST GALLERY · UPPER",
+          "axis": "x",
+          "facing": -1
+        },
+        {
+          "floor": 1,
+          "x": 11,
+          "z": 26,
+          "name": "WEST FRONT · UPPER",
+          "axis": "z",
+          "facing": 1
+        }
+      ],
+      "inspection": [
+        [
+          {
+            "exit": {
+              "x": 12,
+              "z": 7,
+              "name": "WEST REAR · GROUND",
+              "axis": "z",
+              "facing": -1
+            },
+            "floor": 0,
+            "active": false,
+            "door": false,
+            "lamp": false,
+            "artClear": true
+          },
+          {
+            "exit": {
+              "x": 20,
+              "z": 6,
+              "name": "CENTRAL REAR · GROUND",
+              "axis": "z",
+              "facing": -1
+            },
+            "floor": 0,
+            "active": false,
+            "door": false,
+            "lamp": false,
+            "artClear": true
+          },
+          {
+            "exit": {
+              "x": 28,
+              "z": 7,
+              "name": "EAST REAR · GROUND",
+              "axis": "z",
+              "facing": -1
+            },
+            "floor": 0,
+            "active": true,
+            "door": true,
+            "lamp": true,
+            "artClear": true
+          },
+          {
+            "exit": {
+              "x": 2,
+              "z": 19,
+              "name": "WEST GALLERY · GROUND",
+              "axis": "x",
+              "facing": -1
+            },
+            "floor": 0,
+            "active": true,
+            "door": true,
+            "lamp": true,
+            "artClear": true
+          },
+          {
+            "exit": {
+              "x": 38,
+              "z": 19,
+              "name": "EAST GALLERY · GROUND",
+              "axis": "x",
+              "facing": 1
+            },
+            "floor": 0,
+            "active": false,
+            "door": false,
+            "lamp": false,
+            "artClear": true
+          },
+          {
+            "exit": {
+              "x": 11,
+              "z": 26,
+              "name": "WEST FRONT · GROUND",
+              "axis": "z",
+              "facing": 1
+            },
+            "floor": 0,
+            "active": false,
+            "door": false,
+            "lamp": false,
+            "artClear": false
+          },
+          {
+            "exit": {
+              "x": 29,
+              "z": 26,
+              "name": "EAST FRONT · GROUND",
+              "axis": "z",
+              "facing": 1
+            },
+            "floor": 0,
+            "active": false,
+            "door": false,
+            "lamp": false,
+            "artClear": true
+          }
+        ],
+        [
+          {
+            "exit": {
+              "x": 12,
+              "z": 7,
+              "name": "WEST REAR · UPPER",
+              "axis": "z",
+              "facing": -1
+            },
+            "floor": 1,
+            "active": false,
+            "door": false,
+            "lamp": false,
+            "artClear": true
+          },
+          {
+            "exit": {
+              "x": 20,
+              "z": 6,
+              "name": "CENTRAL REAR · UPPER",
+              "axis": "z",
+              "facing": -1
+            },
+            "floor": 1,
+            "active": false,
+            "door": false,
+            "lamp": false,
+            "artClear": true
+          },
+          {
+            "exit": {
+              "x": 28,
+              "z": 7,
+              "name": "EAST REAR · UPPER",
+              "axis": "z",
+              "facing": -1
+            },
+            "floor": 1,
+            "active": true,
+            "door": true,
+            "lamp": true,
+            "artClear": true
+          },
+          {
+            "exit": {
+              "x": 2,
+              "z": 19,
+              "name": "WEST GALLERY · UPPER",
+              "axis": "x",
+              "facing": -1
+            },
+            "floor": 1,
+            "active": true,
+            "door": true,
+            "lamp": true,
+            "artClear": true
+          },
+          {
+            "exit": {
+              "x": 38,
+              "z": 19,
+              "name": "EAST GALLERY · UPPER",
+              "axis": "x",
+              "facing": 1
+            },
+            "floor": 1,
+            "active": false,
+            "door": false,
+            "lamp": false,
+            "artClear": true
+          },
+          {
+            "exit": {
+              "x": 11,
+              "z": 26,
+              "name": "WEST FRONT · UPPER",
+              "axis": "z",
+              "facing": 1
+            },
+            "floor": 1,
+            "active": true,
+            "door": true,
+            "lamp": true,
+            "artClear": true
+          },
+          {
+            "exit": {
+              "x": 29,
+              "z": 26,
+              "name": "EAST FRONT · UPPER",
+              "axis": "z",
+              "facing": 1
+            },
+            "floor": 1,
+            "active": false,
+            "door": false,
+            "lamp": false,
+            "artClear": true
+          }
+        ]
+      ]
+    }
+  ],
+  "keyboardEscapes": [
+    "0:28,7",
+    "0:2,19",
+    "1:28,7",
+    "1:2,19",
+    "1:11,26"
+  ],
+  "reloads": [],
+  "errors": []
+}
