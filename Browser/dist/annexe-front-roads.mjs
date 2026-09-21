@@ -1,4 +1,4 @@
-import {annexeLocal,annexePoint} from './annexe.mjs';
+import {annexeSiteLocal,annexeSitePoint} from './annexe.mjs';
 
 // Ground-plane registration of the red/yellow/purple screenshot. The northern
 // endpoint is snapped to the existing boundary road; all buildings stay fixed.
@@ -19,12 +19,12 @@ const c1=tip.map((v,i)=>v+unit[i]*4),c2=join.map((v,i)=>v-unit[i]*4);
 // follows the registered red line exactly.
 const mouth=Array.from({length:9},(_,i)=>{const t=i/8,q=1-t;return tip.map((v,k)=>q*q*q*v+3*q*q*t*c1[k]+3*q*t*t*c2[k]+t*t*t*join[k]);});
 export const ANNEXE_FRONT_AVENUE=Object.freeze({name:'Annexe front avenue',width:6,points:[...mouth,rb]});
-const local=annexeLocal;
+const local=annexeSiteLocal;
 const [a,b]=ANNEXE_FRONT_ROAD_REFERENCE.redLine.map(local);
 // The marked road is slightly oblique to the frontage. Its actual edge, rather
 // than a parallel approximation, fixes both lips of the sweeping entrance.
 export const annexeAvenueZ=x=>a[1]+(x-a[0])*(b[1]-a[1])/(b[0]-a[0]);
-export const annexeFrontPoint=([x,z])=>{const p=annexePoint(x,0,z);return [p[0],p[2]];};
+export const annexeFrontPoint=([x,z])=>{const p=annexeSitePoint(x,0,z);return [p[0],p[2]];};
 const start=ANNEXE_FRONT_ROAD_REFERENCE.gravelStart;
 const slope=-1.5/47.1;
 const t=(start[1]+slope*(ra[0]-start[0])-ra[1])/((rb[1]-ra[1])-slope*(rb[0]-ra[0]));

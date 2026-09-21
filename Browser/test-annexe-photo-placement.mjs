@@ -2,7 +2,7 @@ import assert from 'node:assert/strict';
 import {readFileSync} from 'node:fs';
 import * as THREE from './dist/vendor/three.module.js';
 import {createEscapeExterior} from './dist/escape-exterior.mjs';
-import {ANNEXE,annexePoint,annexeLocal} from './dist/annexe.mjs';
+import {ANNEXE,ANNEXE_SITE,annexePoint,annexeLocal,annexeSitePoint} from './dist/annexe.mjs';
 import {HISTORIC_ROAD_TRACES,ADMIN_TEARDROP} from './dist/historic-road-layout.mjs';
 import {SHARED_HISTORIC_LANES} from './dist/historic-road-clearance.mjs';
 import {existingBuildingFootprints,pointInFootprint} from './dist/historic-footprints.mjs';
@@ -45,6 +45,9 @@ assert(frontGap<50,'The front centre is brought closer to the red frontage line'
 for(const p of [[-120,-40],[40,20],[0,0]]){
  const world=annexePoint(p[0],0,p[1]),local=annexeLocal([world[0],world[2]]);assert(Math.hypot(local[0]-p[0],local[1]-p[1])<1e-8);
 }
-assert.deepEqual(e.annexe.scale.toArray(),[.72,1,.72]);
-assert.deepEqual([ANNEXE.x,ANNEXE.z],[378,-34]);
-console.log('PASS: larger annexe moves closer to the red line inside the fixed loop, with only yellow rear roads removed; minimum gaps',JSON.stringify({loop:loopGap,teardrop:teardropGap,admin:adminGap,frontLine:frontGap}));
+assert.deepEqual(e.annexe.scale.toArray(),[.648,.9,.648]);
+assert.deepEqual([ANNEXE_SITE.x,ANNEXE_SITE.z,ANNEXE_SITE.scale],[378,-34,.72]);
+const buildingFront=annexePoint(ANNEXE.frontAnchor[0],0,ANNEXE.frontAnchor[1]);
+const pavedAxis=annexeSitePoint(ANNEXE.frontAnchor[0],0,ANNEXE.frontAnchor[1]);
+assert(Math.hypot(buildingFront[0]-pavedAxis[0],buildingFront[2]-pavedAxis[2])<1e-10,'The annexe front centre remains on the fixed paved approach axis');
+console.log('PASS: annexe is uniformly 90% of its preceding size, centred on the fixed paved approach and clear of surrounding roads; minimum gaps',JSON.stringify({loop:loopGap,teardrop:teardropGap,admin:adminGap,frontLine:frontGap}));

@@ -623,16 +623,21 @@ The latest annexe annotation keeps the red-circled asphalt forecourt intact and 
 
 The colour-matched OS map supplies the approved side wards and rear blocks,
 including the separate front courts and open rear courtyard. The later rear
-aerial supplies its overall setting. The user's subsequent review sets the
-whole annexe to 72% of the OS footprint's width and depth, 12.5% larger than the
-first aerial fit, and brings it closer to the red frontage line. Heights and
-detailed shapes are retained. It fits inside the Parsons loop and clears the
-teardrop. See the [current placement and frontage](Research/annexe-frontage-adjustment/README.md),
+aerial supplies its overall setting. An earlier review set the annexe plan to
+72% of the OS footprint and brought it closer to the red frontage line. The
+September 21 annotation then reduces the complete building to 90% of that
+accepted size on all three axes (64.8% plan scale), without editing its local
+geometry. Scaling is anchored at the entrance-facade centre, keeping that point
+on the fixed asphalt forecourt and yellow approach axis. The paving, avenue,
+teardrop and other site geometry remain fixed. The resized annexe fits inside
+the Parsons loop and clears the teardrop. See the [current placement and frontage](Research/annexe-frontage-adjustment/README.md),
 [initial aerial correction](Research/annexe-photo-placement/README.md)
 and [OS shape comparison](Research/annexe-os-refinement/README.md), or open
 `aerial.html?view=annexe-plan`. The **Annexe / Main · aerial photo** location
-shows the wider relationship. This supersedes the earlier dimensions and
-placement described below.
+shows the wider relationship. Focused placement, access, ward and preservation
+checks pass, as do the full browser suite and compiled/source parity checks.
+The browser precompiled scene was regenerated; Blender and Unity exports remain
+unchanged. This supersedes the earlier dimensions and placement described below.
 
 The OS correction aligns the annexe's central frontage using the fixed church,
 Churton and Grafton/Edge, preserving its dimensions. The later road annotation

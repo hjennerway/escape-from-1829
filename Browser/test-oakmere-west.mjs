@@ -4,7 +4,7 @@ import {readFileSync,writeFileSync} from 'node:fs';
 import * as THREE from './dist/vendor/three.module.js';
 import {createEscapeExterior} from './dist/escape-exterior.mjs';
 import {createAerialLayouts} from './dist/aerial-layouts.mjs';
-import {ANNEXE_VIEWS,ANNEXE_MAP_SCALE,annexePoint} from './dist/annexe.mjs';
+import {ANNEXE,ANNEXE_SITE,ANNEXE_VIEWS,ANNEXE_MAP_SCALE,annexePoint} from './dist/annexe.mjs';
 import {exteriorObstacles,obstacleContains,createWalker} from './dist/explore-controls.mjs';
 globalThis.document={createElement:()=>({getContext:()=>({fillRect(){},clearRect(){},strokeText(){},fillText(){},measureText(t){return {width:t.length*16}}})})};
 const e=createEscapeExterior(THREE,16/9),detail=e.annexe.userData.oakmereWestElevation;
@@ -12,6 +12,15 @@ e.scene.updateMatrixWorld(true);
 // Freeze the original annexe outside the red-circled low connector, including
 // the green-circled towers, mirrored details and separately edited spine.
 const records=[],instance=new THREE.Matrix4(),world=new THREE.Matrix4();
+// Compare building primitives in the preceding annexe root frame so an
+// authorized whole-building transform does not masquerade as a local edit.
+// The gameplay drives are independently world-fixed and stay in world space.
+const inverseRoot=e.annexe.matrixWorld.clone().invert();
+const previousRoot=new THREE.Matrix4().compose(
+ new THREE.Vector3(ANNEXE_SITE.x,0,ANNEXE_SITE.z),
+ new THREE.Quaternion().setFromAxisAngle(new THREE.Vector3(0,1,0),ANNEXE.rotation),
+ new THREE.Vector3(ANNEXE_SITE.scale,1,ANNEXE_SITE.scale)
+);
 e.annexe.traverse(o=>{
  if(!o.isMesh||o.name.startsWith('Rear service court link'))return;
  for(let p=o;p;p=p.parent)if(p===detail)return;
@@ -25,7 +34,8 @@ e.annexe.traverse(o=>{
    // Include the surrounding sash frames exposed by shortening this link.
    if(p.x>-26*ANNEXE_MAP_SCALE-1.75&&p.x<-14*ANNEXE_MAP_SCALE+1.75&&p.z>-49*ANNEXE_MAP_SCALE-1.75&&p.z<-42*ANNEXE_MAP_SCALE+1.75&&p.y<6.7)return;
   }
-  records.push(JSON.stringify([geometry,materials,m.elements.map(n=>+n.toFixed(8)),o.castShadow,o.receiveShadow,!!o.userData.orientedCollision]));
+  const comparison=o.name==='Annexe drive'?m:new THREE.Matrix4().multiplyMatrices(previousRoot,new THREE.Matrix4().multiplyMatrices(inverseRoot,m));
+  records.push(JSON.stringify([geometry,materials,comparison.elements.map(n=>+n.toFixed(8)),o.castShadow,o.receiveShadow,!!o.userData.orientedCollision]));
  };
  if(o.isInstancedMesh)for(let i=0;i<o.count;i++){o.getMatrixAt(i,instance);record(world.multiplyMatrices(o.matrixWorld,instance));}else record(o.matrixWorld);
 });

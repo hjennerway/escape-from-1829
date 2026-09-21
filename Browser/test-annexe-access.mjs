@@ -4,7 +4,7 @@ import * as THREE from './dist/vendor/three.module.js';
 import {createEscapeExterior} from './dist/escape-exterior.mjs';
 import {createAerialLayouts} from './dist/aerial-layouts.mjs';
 import {annexeGroundPoint} from './dist/annexe-ground-placement.mjs';
-import {annexePoint} from './dist/annexe.mjs';
+import {annexeSiteLocal,annexeSitePoint} from './dist/annexe.mjs';
 import {ANNEXE_FRONT_AVENUE,ANNEXE_GRAVEL_PATH,shiftAnnexeTeardrop} from './dist/annexe-front-roads.mjs';
 import {exteriorObstacles,obstacleContains} from './dist/explore-controls.mjs';
 import {ANNEXE_ACCESS,ANNEXE_REAR_JUNCTIONS} from './dist/annexe-access.mjs';
@@ -15,7 +15,7 @@ import {VIVIENNE_LANE} from './dist/modern-entrance.mjs';
 globalThis.document={createElement:()=>({getContext:()=>({fillRect(){},measureText(t){return {width:t.length*16}},strokeText(){},fillText(){}})})};
 const e=createEscapeExterior(THREE,1.5),l=createAerialLayouts(THREE,e);e.model.updateMatrixWorld(true);
 const ray=new THREE.Raycaster(),surface=(x,z)=>{ray.set(new THREE.Vector3(x,1,z),new THREE.Vector3(0,-1,0));return ray.intersectObject(l.historicRoads,true)[0]?.object.userData.surface;};
-const world=(x,z)=>{const p=annexePoint(x,0,z);return [p[0],p[2]];};
+const world=(x,z)=>{const p=annexeSitePoint(x,0,z);return [p[0],p[2]];};
 const at=(x,z)=>surface(...world(x,z));
 assert(Math.abs(ANNEXE_ACCESS.entranceWidth/ANNEXE_ACCESS.forecourtWidth-.16)<1e-12,'The yellow-outlined neck is 16% of the protected apron width');
 assert(!l.historicRoads.getObjectByName('Annexe entrance gate'),'Remove the complete gate, including piers and leaves');
@@ -24,7 +24,7 @@ l.historicRoads.traverse(o=>assert.notEqual(o.userData.surface,'stone paving','N
 const forecourt=l.historicRoads.getObjectByName('Annexe central asphalt forecourt');
 const sweep=l.historicRoads.getObjectByName('Annexe sweeping entrance');
 const localXs=[];for(let i=0;i<sweep.geometry.attributes.position.count;i++){
- const p=new THREE.Vector3().fromBufferAttribute(sweep.geometry.attributes.position,i).applyMatrix4(sweep.matrixWorld);localXs.push(e.annexe.worldToLocal(p).x);
+ const p=new THREE.Vector3().fromBufferAttribute(sweep.geometry.attributes.position,i).applyMatrix4(sweep.matrixWorld);localXs.push(annexeSiteLocal([p.x,p.z])[0]);
 }
 assert(Math.abs(Math.max(...localXs)-Math.min(...localXs)-ANNEXE_ACCESS.entranceMouthWidth)<.0001,'The narrow neck flares smoothly to the specified road mouth');
 for(const x of [-25,-15,0,15,25])for(const z of [29,36,51,63])assert.equal(at(x,z),'black road','The red-selected central apron must use road asphalt');

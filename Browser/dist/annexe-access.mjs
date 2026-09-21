@@ -1,4 +1,4 @@
-import {ANNEXE,ANNEXE_MAP_SCALE} from './annexe.mjs';
+import {ANNEXE_MAP_SCALE,ANNEXE_SITE} from './annexe.mjs';
 import {annexeFrontPoint,annexeAvenueZ} from './annexe-front-roads.mjs';
 
 // Keep the entrance's local proportions independent of individual ward edits.
@@ -22,7 +22,7 @@ const halfEntrance=ANNEXE_ACCESS.entranceWidth/2,halfMouth=ANNEXE_ACCESS.entranc
 // End on the avenue's asphalt edge, covering its kerb only at the open mouth.
 const sweepSide=side=>{
  const x=side*halfEntrance,mouthX=side*halfMouth,startZ=ANNEXE_ACCESS.entranceZ-.1;
- const roadEdgeZ=x=>annexeAvenueZ(x)-3/ANNEXE.scale;
+ const roadEdgeZ=x=>annexeAvenueZ(x)-3/ANNEXE_SITE.scale;
  const mouthZ=roadEdgeZ(mouthX),stemZ=startZ+(mouthZ-startZ)*.4;
  // A straight neck leaves grass beside the apron, then turns smoothly onto
  // the oblique road. Each lip follows the road's own edge at the join.

@@ -15,9 +15,22 @@ export const ANNEXE_OS_REGISTRATION=Object.freeze({
 const a=-5299/6749,b=-9568/6749;
 export const ANNEXE_MAP_SCALE=Math.hypot(a,b);
 export function annexeMapPoint(u,v){return [a*(u-285)+b*(v-308),13-b*(u-285)+a*(v-308)];}
-export const ANNEXE=Object.freeze({...placeAnnexeFront(17*ANNEXE_MAP_SCALE),x:ANNEXE_PHOTO_PLACEMENT.x,z:ANNEXE_PHOTO_PLACEMENT.z,scale:ANNEXE_PHOTO_PLACEMENT.planScale});
+const basePlacement=placeAnnexeFront(17*ANNEXE_MAP_SCALE);
+const placementSite=ANNEXE_PHOTO_PLACEMENT.site,relativeScale=ANNEXE_PHOTO_PLACEMENT.relativeScale;
+export const ANNEXE_SITE=Object.freeze({...basePlacement,x:placementSite.x,z:placementSite.z,scale:placementSite.planScale});
+const [frontX,frontMapZ]=ANNEXE_PHOTO_PLACEMENT.frontAnchorMap,frontZ=frontMapZ*ANNEXE_MAP_SCALE;
+const c=Math.cos(basePlacement.rotation),s=Math.sin(basePlacement.rotation),scale=placementSite.planScale*relativeScale;
+// Scale around the entrance-facade centre so it remains on the fixed paved
+// centreline. The local model geometry is untouched.
+export const ANNEXE=Object.freeze({...basePlacement,
+ x:placementSite.x+(placementSite.planScale-scale)*(c*frontX+s*frontZ),
+ z:placementSite.z+(placementSite.planScale-scale)*(-s*frontX+c*frontZ),
+ scale,verticalScale:relativeScale,frontAnchor:Object.freeze([frontX,frontZ])
+});
 export function annexePoint(x,y,z){const c=Math.cos(ANNEXE.rotation),s=Math.sin(ANNEXE.rotation),k=ANNEXE.scale;return [ANNEXE.x+k*(c*x+s*z),y,ANNEXE.z+k*(-s*x+c*z)];}
 export function annexeLocal([x,z]){const c=Math.cos(ANNEXE.rotation),s=Math.sin(ANNEXE.rotation),dx=x-ANNEXE.x,dz=z-ANNEXE.z;return [(c*dx-s*dz)/ANNEXE.scale,(s*dx+c*dz)/ANNEXE.scale];}
+export function annexeSitePoint(x,y,z){const c=Math.cos(ANNEXE_SITE.rotation),s=Math.sin(ANNEXE_SITE.rotation),k=ANNEXE_SITE.scale;return [ANNEXE_SITE.x+k*(c*x+s*z),y,ANNEXE_SITE.z+k*(-s*x+c*z)];}
+export function annexeSiteLocal([x,z]){const c=Math.cos(ANNEXE_SITE.rotation),s=Math.sin(ANNEXE_SITE.rotation),dx=x-ANNEXE_SITE.x,dz=z-ANNEXE_SITE.z;return [(c*dx-s*dz)/ANNEXE_SITE.scale,(s*dx+c*dz)/ANNEXE_SITE.scale];}
 const shot=(p,t,fov=55)=>Object.freeze({position:annexePoint(p[0],p[1]>30?p[1]*ANNEXE.scale:p[1],p[2]),target:annexePoint(...t),fov});
 // The supplied coloured circles identify wards, not new building outlines.
 // The west outer frontage and its court link belong to Larkton/Jodrell.
@@ -104,7 +117,7 @@ export const ANNEXE_RANGES=Object.freeze(refineAnnexeRanges([
  {name:'Rear east end pavilion',rect:[18,-42,25,-26],h:8.4,rise:2.8,section:'rear-east'}
 ]));
 export function createAnnexe(THREE,{brick,roof,material,worldUV,hipRoof}){
- const model=new THREE.Group();model.name='The annexe';model.position.set(ANNEXE.x,0,ANNEXE.z);model.rotation.y=ANNEXE.rotation;model.scale.set(ANNEXE.scale,1,ANNEXE.scale);
+ const model=new THREE.Group();model.name='The annexe';model.position.set(ANNEXE.x,0,ANNEXE.z);model.rotation.y=ANNEXE.rotation;model.scale.set(ANNEXE.scale,ANNEXE.verticalScale,ANNEXE.scale);
  const wards=Object.fromEntries(ANNEXE_WARDS.map(ward=>{
   const group=new THREE.Group();group.name=ward.name;
   group.userData.wardId=ward.id;group.userData.referenceColor=ward.referenceColor;
@@ -284,7 +297,8 @@ export function createAnnexe(THREE,{brick,roof,material,worldUV,hipRoof}){
   // The legacy gameplay tracks also stay fixed in world space.
   const dx=x1-x0,dz=z1-z0,p=annexeGroundPoint((x0+x1)/2,.025,(z0+z1)/2);
   const c=Math.cos(ANNEXE.rotation),s=Math.sin(ANNEXE.rotation),x=p[0]-ANNEXE.x,z=p[2]-ANNEXE.z;
-  solid(road,(c*x-s*z)/ANNEXE.scale,p[1],(s*x+c*z)/ANNEXE.scale,Math.hypot(dx,dz)/ANNEXE.scale,.09,w/ANNEXE.scale,'Annexe drive',Math.atan2(-dz,dx)+ANNEXE_GROUNDS.rotation-ANNEXE.rotation);
+  const track=solid(road,(c*x-s*z)/ANNEXE.scale,p[1]/ANNEXE.verticalScale,(s*x+c*z)/ANNEXE.scale,Math.hypot(dx,dz)/ANNEXE.scale,.09,w/ANNEXE.scale,'Annexe drive',Math.atan2(-dz,dx)+ANNEXE_GROUNDS.rotation-ANNEXE.rotation);
+  track.scale.y=1/ANNEXE.verticalScale;
  }
  drive(0,28,0,101,6);drive(-144,65,144,65,5);drive(-144,65,-144,-62,5);drive(144,65,144,-46,5);
  const dummy=new THREE.Object3D();

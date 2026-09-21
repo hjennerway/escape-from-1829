@@ -43,4 +43,15 @@ Open `aerial.html?view=annexe-access` for the layout or
 `aerial.html?view=annexe-entrance` for a closer view. This changes the browser
 model; Blender and Unity exports are unchanged.
 
+## September 21 annexe scale and centring
+
+The later annotated aerial requests the annexe at 90% of its preceding size,
+without changing its shape, and centres its front on the paved approach. The
+building now receives a uniform 0.9 scale on all three axes. Its transform is
+translated about the centre of the entrance facade, so that facade centre
+retains the exact world point on the established forecourt centreline. The
+asphalt forecourt, sweeping entrance, frontage avenue, teardrop and all other
+site geometry remain fixed. Browser sources only are changed; Blender and
+Unity exports remain unchanged.
+
 ![Narrow entrance and preserved forecourt](annexe-access.png)

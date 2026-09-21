@@ -29,8 +29,8 @@ const fittedFront=annexePoint(0,0,17*ANNEXE_MAP_SCALE);
 assert(Math.hypot(mid.x-fittedFront[0],mid.z-fittedFront[2])<1e-8,'Actual front masonry follows the aerial site placement');
 const direction=frontCorners[1].clone().sub(frontCorners[0]).normalize(),lineDirection=new THREE.Vector3(line[1][0]-line[0][0],0,line[1][1]-line[0][1]).normalize();
 assert(direction.dot(lineDirection)>1-1e-10,'Front masonry runs parallel to the purple line, with the rear on the correct side');
-assert(Math.abs(frontCorners[0].distanceTo(frontCorners[1])-64.82363778290825*.72)<1e-6,'The front section shares the revised plan scale');
-assert.deepEqual(annexe.scale.toArray(),[.72,1,.72],'All plan dimensions change together; heights stay fixed');
+assert(Math.abs(frontCorners[0].distanceTo(frontCorners[1])-64.82363778290825*.648)<1e-6,'The front section is 90% of its preceding size');
+assert.deepEqual(annexe.scale.toArray(),[.648,.9,.648],'All three dimensions receive the same 90% reduction');
 const legacyDrives=[];annexe.traverse(o=>{if(o.name==='Annexe drive')legacyDrives.push(o);});
 for(const [i,centre] of [[0,[0,.025,64.5]],[1,[0,.025,65]],[2,[-144,.025,1.5]],[3,[144,.025,9.5]]]){
  assert(legacyDrives[i].getWorldPosition(new THREE.Vector3()).distanceTo(new THREE.Vector3(...annexeGroundPoint(...centre)))<1e-8,'Existing gameplay drives remain fixed');
