@@ -67,3 +67,28 @@ The slider appears in aerial and exterior walking views. It defaults to 1916, as
 Period groups are created before window-detail processing and material batching. Nothing is moved or rebatched during a period switch; switching toggles dated ancestors, invalidates shadows, and refreshes walking obstacles. The compiled binary preserves those groups and date tags and reattaches the same controller after loading. Older binaries without timeline grouping fall back to source construction.
 
 This changes the browser views and their locally regenerated compiled model. The escape game, Unity project and Blender exports retain their existing representations.
+
+## 1912 road continuity correction - 24 September 2026
+
+The owner's [red/blue annotation](historic-roads/1912-road-correction-marked.png)
+removes the two later annexe access stubs from 1912 and restores the through-road
+between Vivienne Smith Lane, the Main/admin east drive and Parsons Lane (North).
+This supersedes name-only dating for these three surfaces. The Annexe inner east
+road follows The Main (1896-2005); the Parsons Lane southern fork and Admin
+teardrop outer lawn sweep, including their borders, follow the Annexe (1915-2009).
+These dates extend the correction consistently through the existing section
+rules; the annotation itself supplies no additional construction dates.
+
+The restored eastern route also needs an open junction over the clipping gap at
+Parsons Lane. Its local asphalt and border follow the existing six-unit road and
+0.6-unit kerb; the saved lane vertices are retained. Period groups remain created
+before batching. Timeline version 4 rejects older compiled road assignments.
+Browser source and compiled aerial assets change; Unity/Blender exports do not.
+
+## Rear annexe roads and Oakmere court — 24 September 2026
+
+The owner's [blue-road/yellow-paving annotation](historic-roads/annexe-rear-network-marked.png)
+adds four connected rear roads and paving up to Oakmere's walls. These additions,
+including all new borders, appear only at 1915, 1916 and 1938, following the
+Annexe section. This explicit request supersedes the older removed-rear-road
+assumption for the marked areas. Existing through-road dates are unchanged.

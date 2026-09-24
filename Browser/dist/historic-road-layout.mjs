@@ -1,4 +1,5 @@
-import {ANNEXE_LOOP_ROAD,ANNEXE_TRIANGLE_FORK,ANNEXE_FRONT_OUTER_JOIN,IRBY_ANNEXE_APPROACH} from './annexe-loop-road.mjs';
+import {ANNEXE_REAR_SURFACES} from './annexe-rear-roads.mjs';
+import {ANNEXE_LOOP_ROAD,ANNEXE_TRIANGLE_APEX,ANNEXE_TRIANGLE_FORK,ANNEXE_FRONT_OUTER_JOIN,IRBY_ANNEXE_APPROACH} from './annexe-loop-road.mjs';
 import {IRBY_ROUNDING_PAVING,IRBY_ROUNDED_ISLAND,IRBY_ROUNDED_KERB} from './irby-junction-rounding.mjs';
 import {ESTATES_SERVICE_COURT,IRBY_SIDE_ROAD} from './estates-service-court.mjs';
 import {VIVIENNE_LANE} from './modern-entrance.mjs';
@@ -7,6 +8,7 @@ import {TOWER_ADMIN_SHIFT} from './tower-buildings.mjs';
 import {clearSharedLanes} from './historic-road-clearance.mjs';
 import {ANNEXE_ACCESS_ROADS,ANNEXE_ACCESS_PAVING,ANNEXE_ACCESS_KERBS} from './annexe-access.mjs';
 import {mainAdminLaneJunctions} from './admin-road-junctions.mjs';
+import {adminTeardropPaving} from './admin-teardrop-paving.mjs';
 import {PARSONS_NORTH_BEND,PARSONS_NORTH_BEND_PAVING} from './parsons-north-bend.mjs';
 import {ANNEXE_FRONT_AVENUE,ANNEXE_GRAVEL_PATH,shiftAnnexeTeardrop} from './annexe-front-roads.mjs';
 
@@ -24,6 +26,7 @@ export const HISTORIC_ROADS_SOURCE=Object.freeze({
  revision:'2026-09-24 red tree-gap approach to Irby/Ashley, blue outer triangle and yellow gravel alignment',
  irbyTreeJunction:'Research/historic-roads/irby-tree-junction-marked.png',
  irbyRounding:'Research/historic-roads/irby-junction-rounding-marked.png',
+ annexeStraightFrontage:'Research/historic-roads/annexe-straight-frontage-marked.png',
  annexeOuterLoop:ANNEXE_LOOP_ROAD.source,annexeFrontageRevision:ANNEXE_LOOP_ROAD.frontageRevision,
  adminPineRoad:'Research/historic-roads/pine-road-reroute.png',
  adminFrontage:'Research/historic-roads/admin-frontage-closer.png',
@@ -75,7 +78,7 @@ const northService=bezier(shiftAnnexeTeardrop([270,18]),[
  [[270,-98],[270,-110],northJunction]
 ]);
 // The outer road remains straight; its new approach arrives through the trees.
-const parsonsNorthRoad=[ANNEXE_LOOP_ROAD.start,PARSONS_NORTH_BEND.start];
+const parsonsNorthRoad=[ANNEXE_TRIANGLE_APEX,PARSONS_NORTH_BEND.start];
 export {ANNEXE_TRIANGLE_FORK,ANNEXE_TRIANGLE_CORNERS} from './annexe-loop-road.mjs';
 export const HISTORIC_ROAD_TRACES=Object.freeze([
  ...ANNEXE_ACCESS_ROADS,
@@ -91,7 +94,7 @@ export const HISTORIC_ROAD_TRACES=Object.freeze([
  ])},
  {name:'Admin forecourt semicircle',width:5.5,points:semicircle},
  {name:'Admin teardrop circulation',width:5,points:teardropRoad},
- {...ANNEXE_FRONT_AVENUE,points:[...ANNEXE_FRONT_AVENUE.points.slice(0,-1),ANNEXE_TRIANGLE_FORK[0],ANNEXE_FRONT_OUTER_JOIN]},
+ {...ANNEXE_FRONT_AVENUE,points:[...ANNEXE_FRONT_AVENUE.points,ANNEXE_FRONT_OUTER_JOIN]},
  {name:'Admin east crossing drive',width:6,points:bezier(shiftAnnexeTeardrop([278,49]),[
   [[264,45],[261.5,51],[267,57]],[[277,66],[277,83],[288,94]],
   [[293,100],[298,109],pineRoadJoin]
@@ -128,12 +131,14 @@ const larktonJunction={name:'Annexe Larkton Parsons open junction',surface:'junc
 // The yellow-marked footpath is gravel; vehicular approaches remain asphalt.
 export const HISTORIC_GRAVEL=Object.freeze([ANNEXE_GRAVEL_PATH]);
 export const HISTORIC_PAVING=Object.freeze([
+ ...ANNEXE_REAR_SURFACES,
  ...IRBY_ROUNDING_PAVING,
  ESTATES_SERVICE_COURT,
  IRBY_SIDE_ROAD,
  ...ANNEXE_ACCESS_PAVING,
  larktonJunction,
  ...mainAdminLaneJunctions(HISTORIC_ROADS),
+ ...adminTeardropPaving(HISTORIC_ROAD_TRACES),
  ...PARSONS_NORTH_BEND_PAVING,
  // Cover the segmented inner kerb before drawing one smooth grass boundary.
  {name:'Admin teardrop inner resurfacing',surface:'junction',points:teardropRoad},
@@ -146,3 +151,4 @@ export const HISTORIC_GRASS=Object.freeze([
  {name:'Admin teardrop grass island',points:ADMIN_TEARDROP,raisedIsland:true}
 ]);
 export const HISTORIC_KERBS=Object.freeze([IRBY_ROUNDED_KERB,...ANNEXE_ACCESS_KERBS,{name:'Admin smooth teardrop inner kerb',points:ADMIN_TEARDROP}]);
+

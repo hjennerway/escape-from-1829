@@ -1,0 +1,12 @@
+import * as THREE from '../dist/vendor/three.module.js';
+import {createEscapeExterior} from '../dist/escape-exterior.mjs';
+import {ANNEXE_LOOP_ROAD} from '../dist/annexe-loop-road.mjs';
+import {HISTORIC_ROAD_TRACES as roads} from '../dist/historic-road-layout.mjs';
+import {SHARED_HISTORIC_LANES} from '../dist/historic-road-clearance.mjs';
+import {existingBuildingFootprints} from '../dist/historic-footprints.mjs';
+globalThis.document={createElement:()=>({getContext:()=>({fillRect(){}})})};
+const e=createEscapeExterior(THREE,1.5);e.model.updateMatrixWorld(true);
+const dist=(p,a,b)=>{const dx=b[0]-a[0],dz=b[1]-a[1],l=dx*dx+dz*dz,t=Math.max(0,Math.min(1,((p[0]-a[0])*dx+(p[1]-a[1])*dz)/l));return Math.hypot(p[0]-a[0]-t*dx,p[1]-a[1]-t*dz);};
+const hits=[];
+e.annexe.traverse(o=>{if(!o.userData.orientedCollision)return;const polys=existingBuildingFootprints(THREE,{model:o});for(const poly of polys)for(const p of poly){for(const r of [...roads,...SHARED_HISTORIC_LANES]){if(!/Northern Parsons|Annexe inner east|Annexe front avenue|Parsons Lane/.test(r.name))continue;const d=Math.min(...r.points.slice(1).map((b,i)=>dist(p,r.points[i],b)));if(d<7)hits.push({name:o.name,road:r.name,d,p});}}});
+console.log(hits.sort((a,b)=>a.d-b.d).slice(0,30));

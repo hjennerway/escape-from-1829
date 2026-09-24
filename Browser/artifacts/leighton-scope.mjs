@@ -1,3 +1,4 @@
+import {KML_13_ADDITIONS} from '../dist/kml-13-data.mjs';
 import {KML_12_ADDITIONS} from '../dist/kml-12-data.mjs';
 import {createHash} from 'node:crypto';
 export function leightonProtected(THREE,model){
@@ -7,7 +8,7 @@ export function leightonProtected(THREE,model){
   // Later mapped trees are additive; preserve the original surroundings exactly.
   for(let p=o;p;p=p.parent){
    const tree=p.userData.oakTree??p.userData.adminPineTree;
-   if(tree&&KML_12_ADDITIONS.some(point=>point.name===tree.name&&point.coordinates[0]===tree.longitude&&point.coordinates[1]===tree.latitude))return;
+   if(tree&&[...KML_12_ADDITIONS,...KML_13_ADDITIONS].some(point=>point.name===tree.name&&point.coordinates[0]===tree.longitude&&point.coordinates[1]===tree.latitude))return;
   }
   for(let p=o;p;p=p.parent)if(p.userData.wardId==='leighton-newton')return;
   const h=createHash('sha256');for(const [k,a] of Object.entries(o.geometry.attributes).sort()){h.update(k);h.update(Buffer.from(a.array.buffer,a.array.byteOffset,a.array.byteLength));}if(o.geometry.index)h.update(Buffer.from(o.geometry.index.array.buffer));

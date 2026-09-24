@@ -1,0 +1,92 @@
+[
+  {
+    "file": "annexe-frontage-adjustment/front-link-before.json",
+    "key": [
+      "sha256"
+    ]
+  },
+  {
+    "file": "annexe-kitchen/rear-stretch-before.json",
+    "key": [
+      "front"
+    ]
+  },
+  {
+    "file": "carden-picton/outward-protected-geometry.json",
+    "key": []
+  },
+  {
+    "file": "carden-picton/height-extension-before.json",
+    "key": [
+      "protected"
+    ]
+  },
+  {
+    "file": "annexe-kitchen/protected-geometry.json",
+    "key": []
+  },
+  {
+    "file": "oakmere/window-protected-geometry.json",
+    "key": []
+  },
+  {
+    "file": "jarman/protected-geometry.json",
+    "key": []
+  },
+  {
+    "file": "oakmere/court-protected-before.json",
+    "key": []
+  },
+  {
+    "file": "larkton-jodrell/recess-protected-before.json",
+    "key": [
+      "outside"
+    ]
+  },
+  {
+    "file": "larkton-jodrell/recess-protected-before.json",
+    "key": [
+      "retained"
+    ]
+  },
+  {
+    "file": "oakmere/west-protected-geometry.json",
+    "key": []
+  },
+  {
+    "file": "annexe-frontage-adjustment/entrance-alignment-before.json",
+    "key": [
+      "protectedGeometry"
+    ]
+  },
+  {
+    "file": "larkton-jodrell/protected-before.json",
+    "key": []
+  },
+  {
+    "file": "annexe-kitchen/side-alignment-before.json",
+    "key": [
+      "snapshot"
+    ]
+  },
+  {
+    "file": "annexe-frontage-adjustment\\entrance-alignment-before.json",
+    "key": "root matrix"
+  },
+  {
+    "file": "annexe-frontage-adjustment\\front-link-before.json",
+    "key": "root matrix"
+  },
+  {
+    "file": "annexe-kitchen\\rear-stretch-before.json",
+    "key": "root matrix"
+  },
+  {
+    "file": "annexe-kitchen\\side-alignment-before.json",
+    "key": "root matrix"
+  },
+  {
+    "file": "carden-picton\\height-extension-before.json",
+    "key": "root matrix"
+  }
+]

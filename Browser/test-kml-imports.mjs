@@ -31,13 +31,17 @@ for(const {name,xml} of placemarks('kml-trees/1829-12.kml').filter(p=>/^(Oak(2[2
   const coordinates=xml.match(/<Point>[\s\S]*?<coordinates>([^<]+)/)[1].trim().split(',').map(Number);
   if(!points.some(p=>JSON.stringify(p.coordinates)===JSON.stringify(coordinates)))points.push({name,coordinates});
 }
+for(const {name,xml} of placemarks('kml-trees/1829-13.kml').filter(p=>/^Oak(3[1-9]|4[0-4])$/.test(p.name))){
+  const coordinates=xml.match(/<Point>[\s\S]*?<coordinates>([^<]+)/)[1].trim().split(',').map(Number);
+  points.push({name,coordinates});
+}
 assert.deepEqual(KML_TREE_POINTS,points,'Preserve exact tree Point triples from each source export');
-assert.equal(KML_TREES.length,58);assert.equal(KML_PINE_TREES.length,14);assert.equal(KML_OAK_TREES.length,34);assert.equal(KML_BEECH_TREES.length,2);
+assert.equal(KML_TREES.length,72);assert.equal(KML_PINE_TREES.length,14);assert.equal(KML_OAK_TREES.length,48);assert.equal(KML_BEECH_TREES.length,2);
 for(const duplicate of ['Oak8','Oak16','Oak21','Oak22']){
   const locations=KML_TREES.filter(t=>t.name===duplicate);assert.equal(locations.length,2);
   assert.notDeepEqual([locations[0].x,locations[0].z],[locations[1].x,locations[1].z]);
 }
-assert.equal(new Set(KML_TREES.map(t=>t.rotation)).size,58,'Each mapped tree has a distinct stable rotation');
+assert.equal(new Set(KML_TREES.map(t=>t.rotation)).size,72,'Each mapped tree has a distinct stable rotation');
 const roundabout=placemarks('countess-roundabout/1829-8.kml').find(p=>p.name==='Countess Mini Roundabout');
 const ring=roundabout.xml.match(/<Polygon>[\s\S]*?<coordinates>([\s\S]*?)<\/coordinates>/)[1]
   .trim().split(/\s+/).map(point=>point.split(',').map(Number));
@@ -48,7 +52,7 @@ assert.deepEqual(COUNTESS_ROUNDABOUT_OUTLINE,ring.slice(0,-1).map(([lon,lat])=>e
 globalThis.document={createElement:()=>({getContext:()=>({fillRect(){},measureText(text){return {width:text.length*16};},strokeText(){},fillText(){}})})};
 const exterior=createEscapeExterior(THREE,16/9),layouts=createAerialLayouts(THREE,exterior);
 const mapped=exterior.trees.children.filter(t=>(t.userData.adminPineTree||t.userData.oakTree||t.userData.beechTree||t.userData.willowTree)?.species);
-assert.equal(mapped.length,58);
+assert.equal(mapped.length,72);
 for(const spec of KML_TREES){
   const matches=mapped.filter(t=>t.name===spec.name&&t.position.x===spec.x&&t.position.z===spec.z);
   assert.equal(matches.length,1,'One rendered tree per KML Point, even with both layouts enabled');
@@ -128,4 +132,4 @@ for(const {year} of PERIODS){
   for(const tree of mapped)assert(visible(tree),tree.name+' must appear in '+year);
 }
 delete globalThis.document;
-console.log(`PASS: 58 exact KML trees in all periods, duplicate Oak8/Oak16/Oak21/Oak22 points, preserved front beeches, shared visibility and collisions; eight-vertex Countess roundabout (${area.toFixed(1)} square units), upward roads, walkable centre and continuous Modern-only approach.`);
+console.log(`PASS: 72 exact KML trees in all periods, duplicate Oak8/Oak16/Oak21/Oak22 points, preserved front beeches, shared visibility and collisions; eight-vertex Countess roundabout (${area.toFixed(1)} square units), upward roads, walkable centre and continuous Modern-only approach.`);

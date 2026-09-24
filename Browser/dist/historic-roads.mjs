@@ -9,11 +9,15 @@ export function createHistoricRoads(THREE,exterior){
  const material=color=>new THREE.MeshStandardMaterial({color,roughness:1});
  const asphalt=material(ROAD_STYLE.asphalt),paving=material(ROAD_STYLE.asphalt),gravel=material(0xb4b3aa),grass=material(0x60784b),kerb=material(ROAD_STYLE.edge),edge=material(ROAD_STYLE.edge);
  matchEstateGrass(grass,exterior.terrain.material);
+ // Junction resurfacing must win over the buried road end caps and borders
+ // even when overview cameras lose precision between centimetre-high layers.
+ const junction=asphalt.clone();
+ junction.polygonOffset=true;junction.polygonOffsetFactor=-6;junction.polygonOffsetUnits=-12;
  const islandGrass=grass.clone();
  matchEstateGrass(islandGrass,exterior.terrain.material);
- islandGrass.polygonOffset=true;islandGrass.polygonOffsetFactor=-6;islandGrass.polygonOffsetUnits=-12;
+ islandGrass.polygonOffset=true;islandGrass.polygonOffsetFactor=-7;islandGrass.polygonOffsetUnits=-14;
  // Separate close ground layers at the higher OS overview camera as well.
- for(const [mat,order] of [[gravel,1],[paving,2],[grass,3],[edge,ROAD_STYLE.edgeLayer],[asphalt,ROAD_STYLE.asphaltLayer],[kerb,6]]){mat.polygonOffset=true;mat.polygonOffsetFactor=-order;mat.polygonOffsetUnits=-order*2;}
+ for(const [mat,order] of [[gravel,1],[paving,2],[grass,3],[edge,ROAD_STYLE.edgeLayer],[asphalt,ROAD_STYLE.asphaltLayer],[kerb,8]]){mat.polygonOffset=true;mat.polygonOffsetFactor=-order;mat.polygonOffsetUnits=-order*2;}
  // Deterministic stone flecks, at world scale, remain legible on close approach.
  const size=64,data=new Uint8Array(size*size*4);let seed=1829;
  for(let i=0;i<size*size;i++){seed=(Math.imul(seed,1664525)+1013904223)>>>0;const v=175+(seed%66);data.set([v,v,Math.max(0,v-7),255],i*4);}
@@ -23,7 +27,7 @@ export function createHistoricRoads(THREE,exterior){
   for(const hole of holes)shape.holes.push(new THREE.Path(hole.map(([x,z])=>new THREE.Vector2(x,-z))));
   const geometry=new THREE.ShapeGeometry(shape);
   const uv=geometry.attributes.uv;for(let i=0;i<uv.count;i++)uv.setXY(i,uv.getX(i)/3,uv.getY(i)/3);
-  const mesh=new THREE.Mesh(geometry,mat);mesh.rotation.x=-Math.PI/2;mesh.position.y=y;mesh.name=name;mesh.receiveShadow=true;mesh.renderOrder=mat===asphalt?2:mat===edge?1:0;mesh.userData.surface=(mat===asphalt||mat===paving)?'black road':mat===gravel?'gravel':mat===grass||mat===islandGrass?'grass':'stone kerb';group.add(mesh);return mesh;
+  const mesh=new THREE.Mesh(geometry,mat);mesh.rotation.x=-Math.PI/2;mesh.position.y=y;mesh.name=name;mesh.receiveShadow=true;mesh.renderOrder=mat===asphalt?2:mat===edge?1:0;mesh.userData.surface=(mat===asphalt||mat===paving||mat===junction)?'black road':mat===gravel?'gravel':mat===grass||mat===islandGrass?'grass':'stone kerb';group.add(mesh);return mesh;
  }
  function ribbon(name,points,width,mat,y){
   const part=new THREE.Group();part.name=name;part.userData.centerline=points;part.userData.width=width;group.add(part);
@@ -42,7 +46,7 @@ export function createHistoricRoads(THREE,exterior){
  for(const area of HISTORIC_GRAVEL)polygon(area.name,area.points,gravel,area.height??.265);
  // The service court meets the road without a pale border across its mouth.
  for(const area of HISTORIC_PAVING){
-  const type=area.surface,mat=type==='junction edge'?edge:type==='junction'||type==='asphalt apron'||area.name==='Tower service court'?asphalt:paving;
+  const type=area.surface,mat=type==='junction edge'?edge:type==='junction'?junction:type==='asphalt apron'||area.name==='Tower service court'?asphalt:paving;
   const y=type==='junction'?.36:type==='junction edge'?.32:type==='asphalt apron'||area.name==='Tower service court'?.345:.28;
   const mesh=polygon(area.name,area.points,mat,y,area.holes);if(type==='junction')mesh.renderOrder=3;
  }

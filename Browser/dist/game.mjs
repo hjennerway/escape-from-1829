@@ -4,7 +4,8 @@ import {path,walkable,visible,nearExit} from './core.mjs';
 import {buildArchitecture,interiorWallSurfaces} from './architecture.mjs';
 import {createInteriorLights} from './interior-lights.mjs';
 import {createEscapeCutscene} from './escape-cutscene.mjs';
-import {createEscapeExterior,loadEscapeFrontage} from './escape-exterior.mjs';
+import {loadEscapeFrontage} from './escape-exterior.mjs';
+import {createLandingExterior} from './landing-scene.mjs';
 import {bindTreeToggle} from './tree-layer.mjs';
 import {sampleLanding} from './aerial-controls.mjs';
 import {createArrivalCutscene} from './arrival-cutscene.mjs';
@@ -209,7 +210,7 @@ async function init(){
   interiorLights=createInteriorLights(THREE,scene,lights);
   torch=new THREE.SpotLight(0xfff3da,20,30,.50,.55,1.2);torchTarget=new THREE.Object3D();scene.add(torch,torchTarget);torch.target=torchTarget;
   enemies=layout.enemies.map(({name,x,z,type})=>({name,type,floor:0,spawn:{x:x*layout.cellSize,z:z*layout.cellSize,floor:0},x:x*layout.cellSize,z:z*layout.cellSize,mesh:enemyModel(type),path:[],memory:0,rethink:0,route:0,target:null}));
-  escapeExterior=createEscapeExterior(THREE,innerWidth/innerHeight);
+  escapeExterior=await createLandingExterior(THREE,innerWidth/innerHeight);
   canvas.addEventListener('webglcontextrestored',escapeExterior.invalidateShadows);
   bindTreeToggle(escapeExterior,document);
   await loadEscapeFrontage(THREE,escapeExterior);
@@ -327,7 +328,14 @@ function animate(){requestAnimationFrame(animate);const frameDt=clock.getDelta()
   if(!document.hidden)landingTime+=Math.min(frameDt,.1);
   const shot=sampleLanding(landingTime,{aspect:exterior.camera.aspect,reducedMotion:landingReducedMotion});
   exterior.camera.position.set(...shot.position);exterior.camera.lookAt(...shot.target);
-  renderer.render(exterior.scene,exterior.camera);return;
+  // Keep only a quarter of the landing haze; restore the original fog for play.
+  const fog=exterior.scene.fog,fogDensity=fog?.density;
+  if(fog)fog.density=fogDensity*.25;
+  renderer.render(exterior.scene,exterior.camera);
+  if(fog)fog.density=fogDensity;
+  // Reveal the canvas only after its first complete aerial frame is drawn.
+  if(!$('landingPreview').hidden){$('landingPreview').hidden=true;canvas.classList.add('scene-ready');}
+  return;
  }
  if(state==='cutscene'){renderer.render(escapeExterior.scene,escapeExterior.camera);return;}
  interiorLights.update(player);camera.getWorldDirection(tmp);torch.position.copy(camera.position);torchTarget.position.copy(camera.position).addScaledVector(tmp,12);renderer.render(scene,camera);}

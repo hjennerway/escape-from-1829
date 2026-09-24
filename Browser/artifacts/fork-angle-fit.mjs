@@ -1,0 +1,18 @@
+import {readFileSync,copyFileSync,writeFileSync} from 'node:fs';
+import {IRBY_TRIANGLE_ROUNDING} from '../dist/irby-junction-rounding.mjs';
+import {ANNEXE_ACCESS} from '../dist/annexe-access.mjs';
+import {annexeFrontPoint} from '../dist/annexe-front-roads.mjs';
+const {centreX,forecourtWidth,entranceZ}=ANNEXE_ACCESS;
+const court=[-1,1].map(side=>annexeFrontPoint([centreX+side*forecourtWidth/2,entranceZ]));
+console.log({court});
+const world=[...IRBY_TRIANGLE_ROUNDING.arcs.map(a=>a.points[8]),...court].map(([x,z])=>[x,.34,z]);
+const pixels=[[282,356],[387,381],[313,416],[435,190],[536,212]];
+const marks=[[327,434],[385,380],[421,395],[458,392],[613,648]];
+let script=readFileSync(new URL('fit-admin-pines.mjs',import.meta.url),'utf8');
+script=script.replace(/const world=.*?;\r?\nconst pixels=.*?;\r?\nconst marks=.*?;/s,`const world=${JSON.stringify(world)};\nconst pixels=${JSON.stringify(pixels)};\nconst marks=${JSON.stringify(marks)};`);
+script=script.replace('let p=[-110,200,165,-1.05,.52,1100,557,383]','let p=[250,150,-90,-1.83,1.2,1000,390,325]');
+script=script.replace('Research/admin-pine-trees/placement-fit.json','Browser/artifacts/fork-angle-fit.json').replace("'pine'+(i+1)","'mark'+(i+1)");
+await import('data:text/javascript;base64,'+Buffer.from(script).toString('base64'));
+copyFileSync('C:/Users/Harry/AppData/Local/Temp/codex-clipboard-4cd956d9-87b3-457b-8521-b5e72693078f.png','Research/historic-roads/fork-angle-gravel-marked.png');
+let preview=readFileSync(new URL('annexe-island-preview.mjs',import.meta.url),'utf8').replaceAll('annexe-island','fork-angle').replaceAll('962','781').replaceAll('700','649');
+writeFileSync(new URL('fork-angle-preview.mjs',import.meta.url),preview);

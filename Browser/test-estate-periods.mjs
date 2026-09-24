@@ -2,6 +2,8 @@ import assert from 'node:assert/strict';
 import * as THREE from './dist/vendor/three.module.js';
 import {PERIODS,WARD_DATES,BUILDING_SECTIONS,existsInYear,periodForYear,roadSection} from './dist/estate-periods.mjs';
 import {BUILDING_CATALOG} from './dist/building-catalog.mjs';
+import {HISTORIC_ROAD_TRACES} from './dist/historic-road-layout.mjs';
+import {ROAD_STYLE} from './dist/road-style.mjs';
 import {ESTATE_CHIMNEY} from './dist/estate-chimney.mjs';
 import {createEscapeExterior} from './dist/escape-exterior.mjs';
 import {createAerialLayouts} from './dist/aerial-layouts.mjs';
@@ -59,6 +61,27 @@ function checkGround(year){
  }
  for(const [x,z] of [[0,32],[0,60],[-23,-25],[23,-25]])assert(!groundAt(x,z)?.userData.estateGrass,'Original Reception approach and inner courts remain paved');
 }
+// The blue-marked through-road must remain continuous across the saved-lane
+// clipping and junction fills; the red annexe stubs must expose real terrain.
+function checkPeriodRoads(year){
+ exterior.model.updateMatrixWorld(true);
+ const meshes=[];exterior.model.traverseVisible(o=>{if(o.isMesh)meshes.push(o);});
+ const materialAt=(x,z)=>{groundRay.set(new THREE.Vector3(x,.49,z),new THREE.Vector3(0,-1,0));return groundRay.intersectObjects(meshes,false)[0]?.object.material;};
+ const main=existsInYear('The Main',year),annexe=existsInYear('Annexe',year);
+ const points=HISTORIC_ROAD_TRACES.find(r=>r.name==='Annexe inner east road').points;
+ if(main)for(let i=1;i<points.length;i++){
+  const a=points[i-1],b=points[i],dx=b[0]-a[0],dz=b[1]-a[1],length=Math.hypot(dx,dz),steps=Math.ceil(length/.75);
+  for(let j=0;j<=steps;j++)for(const offset of [-2,0,2]){
+   const x=a[0]+dx*j/steps-dz/length*offset,z=a[1]+dz*j/steps+dx/length*offset;
+   assert.equal(materialAt(x,z)?.color.getHex(),ROAD_STYLE.asphalt,`Continuous road through both blue areas at ${x},${z} in ${year}`);
+  }
+ }
+ for(const [x,z] of [[320.5,-73.2],[270,-8]]){
+  const mat=materialAt(x,z);
+  if(annexe)assert.equal(mat?.color.getHex(),ROAD_STYLE.asphalt,`Annexe access returns in ${year}`);
+  else assert(mat?.userData.estateGrass,`Red-marked access is terrain at ${x},${z} in ${year}`);
+ }
+}
 const passage=exterior.model.getObjectByName('1829 Redesmere passage head');
 const openingWall=exterior.model.getObjectByName('1829 east end wall');
 const entranceProjections=[];
@@ -86,7 +109,7 @@ const position=exterior.camera.position.clone(),quaternion=exterior.camera.quate
 for(const period of PERIODS){
  timeline.setPeriod(period.year);selection.refresh();
  assert.equal(isBuildingVisible(layouts.roads.getObjectByName('Parsons Lane northern modern endpoint')),period.year>=2010,'The saved Parsons endpoint returns only from 2010');
- checkGround(period.year);
+ checkGround(period.year);checkPeriodRoads(period.year);
  for(const object of entranceProjections)assert(isBuildingVisible(object),object.name+' is complete from 1829');
  assert.deepEqual(frontageHits(),completeFrontage,'Both complete projection facades persist in '+period.year);
  passage.traverse(object=>assert.equal(isBuildingVisible(object),period.year>=1870,'Complete passage head, trim and supports in '+period.year));
@@ -124,13 +147,30 @@ timeline.setPeriod(2010);obstacles=exteriorObstacles(THREE,exterior.model);
 assert(!obstacles.some(o=>obstacleContains(o,ESTATE_CHIMNEY.x,ESTATE_CHIMNEY.z)),'Demolished chimney loses collision');
 exterior.trees.visible=false;timeline.setPeriod(1849);assert(!exterior.trees.visible,'Changing years preserves the tree preference');
 exterior.trees.visible=true;
+// The three screenshot-positioned oaks belong only to the requested stops.
+const periodOaks=exterior.trees.children.filter(o=>o.userData.estateSection==='Annexe lawn oaks');
+assert.equal(periodOaks.length,3);
+const originalOak=exterior.trees.children.find(o=>o.userData.oakTree&&!o.userData.estateSection);
+for(const oak of periodOaks){
+ assert.equal(oak.children[0].instanceMatrix,originalOak.children[0].instanceMatrix,'Reuse existing oak GPU buffers');
+ for(const {year} of PERIODS){
+  timeline.setPeriod(year);const visible=[1915,1916,1938].includes(year);
+  assert.equal(isBuildingVisible(oak),visible,'Marked oak visibility in '+year);
+  const obstacles=exteriorObstacles(THREE,oak);
+  assert.equal(obstacles.some(o=>obstacleContains(o,oak.position.x,oak.position.z,.1)),visible,'Marked oak trunk collision in '+year);
+ }
+}
+timeline.setPeriod(1916);exterior.trees.visible=false;
+assert(periodOaks.every(o=>!isBuildingVisible(o)),'Trees toggle hides the dated oaks');
+assert.equal(exteriorObstacles(THREE,exterior.trees).length,0,'Hidden trees have no collisions');
+exterior.trees.visible=true;
 // Build batches with all dated parts enabled, as in the source compiler. A
 // period switch must never reveal a batch from an unbuilt section.
 for(const rule of timeline.rules)rule.visible=true;
 batchAerialMeshes(THREE,exterior.model,{exclude:[exterior.trees,exterior.terrain,...layouts.visibilityObjects]});cacheAerialTransforms(exterior.scene);
-for(const year of [1829,1849,1938,2021,1870]){
+for(const year of [1829,1849,1912,1915,1938,2021,1870]){
  timeline.setPeriod(year);
- checkGround(year);
+ checkGround(year);checkPeriodRoads(year);
  assert.deepEqual(frontageHits(),completeFrontage,'Batched projection facades persist in '+year);
  exterior.model.traverse(object=>{if(!object.userData.aerialBatch)return;let ancestor=object;while(ancestor&&!ancestor.userData.estateSection)ancestor=ancestor.parent;if(ancestor)assert.equal(isBuildingVisible(object),existsInYear(ancestor.userData.estateSection,year));});
 }

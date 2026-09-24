@@ -1,4 +1,5 @@
 import {VIVIENNE_LANE} from './modern-entrance.mjs';
+import {SHARED_HISTORIC_LANES} from './historic-road-clearance.mjs';
 
 
 const unit=v=>{const l=Math.hypot(...v);return v.map(n=>n/l);};
@@ -32,12 +33,16 @@ function junction(name,origin,centres){
 export function mainAdminLaneJunctions(roads){
  const road=name=>roads.find(r=>r.name===name),west=VIVIENNE_LANE[8],east=VIVIENNE_LANE[11];
  const drive=road('Admin east crossing drive'),inner=road('Annexe inner east road');
+ const parsons=SHARED_HISTORIC_LANES.find(r=>r.name==='Parsons Lane (North)').points;
+ const eastJoin=parsons[13];
  const join=drive.points.at(-1),split=inner.points.findIndex(p=>p[0]>join[0]);
  const westArm={points:[join,...inner.points.slice(0,split).reverse()]};
  const eastArm={points:[join,...inner.points.slice(split)]};
  return [
   ...junction('Admin west lane junction',west,[along(west,VIVIENNE_LANE[7],13),along(west,VIVIENNE_LANE[9],13),inFromEnd(road('Historic lane continuation'),false)]),
   ...junction('Admin south lane junction',east,[along(east,VIVIENNE_LANE[10],14),inFromEnd(road('Southern estate drive'),false),inFromEnd(inner,false)]),
+  // Reconnect the clipped inner road across the saved lane's border.
+  ...junction('Admin east Parsons junction',eastJoin,[along(eastJoin,parsons[12],14),along(eastJoin,parsons[14],14),inFromEnd(inner,true)]),
   ...junction('Admin pine road east junction',join,[inFromEnd(westArm,false,12),inFromEnd(drive,true,12),inFromEnd(eastArm,false,12)])
  ];
 }

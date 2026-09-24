@@ -352,6 +352,57 @@
           "matchesGrass": true
         }
       ],
+      "periodRoads": [
+        {
+          "x": 320.5,
+          "z": -73.2,
+          "section": "Annexe",
+          "asphalt": false,
+          "grass": true
+        },
+        {
+          "x": 270,
+          "z": -8,
+          "section": "Annexe",
+          "asphalt": false,
+          "grass": true
+        },
+        {
+          "x": 257,
+          "z": 111.3,
+          "section": "The Main",
+          "asphalt": false,
+          "grass": true
+        },
+        {
+          "x": 280,
+          "z": 112.3,
+          "section": "The Main",
+          "asphalt": false,
+          "grass": true
+        },
+        {
+          "x": 340,
+          "z": 117.4,
+          "section": "The Main",
+          "asphalt": false,
+          "grass": true
+        },
+        {
+          "x": 380,
+          "z": 121.5,
+          "section": "The Main",
+          "asphalt": false,
+          "grass": true
+        },
+        {
+          "x": 385,
+          "z": 121.8,
+          "section": "The Main",
+          "asphalt": true,
+          "grass": false
+        }
+      ],
       "frontage": [
         true,
         true,
@@ -729,6 +780,57 @@
           "present": true,
           "grass": true,
           "matchesGrass": true
+        }
+      ],
+      "periodRoads": [
+        {
+          "x": 320.5,
+          "z": -73.2,
+          "section": "Annexe",
+          "asphalt": false,
+          "grass": true
+        },
+        {
+          "x": 270,
+          "z": -8,
+          "section": "Annexe",
+          "asphalt": false,
+          "grass": true
+        },
+        {
+          "x": 257,
+          "z": 111.3,
+          "section": "The Main",
+          "asphalt": false,
+          "grass": true
+        },
+        {
+          "x": 280,
+          "z": 112.3,
+          "section": "The Main",
+          "asphalt": false,
+          "grass": true
+        },
+        {
+          "x": 340,
+          "z": 117.4,
+          "section": "The Main",
+          "asphalt": false,
+          "grass": true
+        },
+        {
+          "x": 380,
+          "z": 121.5,
+          "section": "The Main",
+          "asphalt": false,
+          "grass": true
+        },
+        {
+          "x": 385,
+          "z": 121.8,
+          "section": "The Main",
+          "asphalt": true,
+          "grass": false
         }
       ],
       "frontage": [
@@ -1110,6 +1212,57 @@
           "matchesGrass": true
         }
       ],
+      "periodRoads": [
+        {
+          "x": 320.5,
+          "z": -73.2,
+          "section": "Annexe",
+          "asphalt": false,
+          "grass": true
+        },
+        {
+          "x": 270,
+          "z": -8,
+          "section": "Annexe",
+          "asphalt": false,
+          "grass": true
+        },
+        {
+          "x": 257,
+          "z": 111.3,
+          "section": "The Main",
+          "asphalt": false,
+          "grass": true
+        },
+        {
+          "x": 280,
+          "z": 112.3,
+          "section": "The Main",
+          "asphalt": false,
+          "grass": true
+        },
+        {
+          "x": 340,
+          "z": 117.4,
+          "section": "The Main",
+          "asphalt": false,
+          "grass": true
+        },
+        {
+          "x": 380,
+          "z": 121.5,
+          "section": "The Main",
+          "asphalt": false,
+          "grass": true
+        },
+        {
+          "x": 385,
+          "z": 121.8,
+          "section": "The Main",
+          "asphalt": true,
+          "grass": false
+        }
+      ],
       "frontage": [
         true,
         true,
@@ -1487,6 +1640,57 @@
           "present": true,
           "grass": true,
           "matchesGrass": true
+        }
+      ],
+      "periodRoads": [
+        {
+          "x": 320.5,
+          "z": -73.2,
+          "section": "Annexe",
+          "asphalt": false,
+          "grass": true
+        },
+        {
+          "x": 270,
+          "z": -8,
+          "section": "Annexe",
+          "asphalt": false,
+          "grass": true
+        },
+        {
+          "x": 257,
+          "z": 111.3,
+          "section": "The Main",
+          "asphalt": false,
+          "grass": true
+        },
+        {
+          "x": 280,
+          "z": 112.3,
+          "section": "The Main",
+          "asphalt": false,
+          "grass": true
+        },
+        {
+          "x": 340,
+          "z": 117.4,
+          "section": "The Main",
+          "asphalt": false,
+          "grass": true
+        },
+        {
+          "x": 380,
+          "z": 121.5,
+          "section": "The Main",
+          "asphalt": false,
+          "grass": true
+        },
+        {
+          "x": 385,
+          "z": 121.8,
+          "section": "The Main",
+          "asphalt": true,
+          "grass": false
         }
       ],
       "frontage": [
@@ -1868,6 +2072,57 @@
           "matchesGrass": true
         }
       ],
+      "periodRoads": [
+        {
+          "x": 320.5,
+          "z": -73.2,
+          "section": "Annexe",
+          "asphalt": false,
+          "grass": true
+        },
+        {
+          "x": 270,
+          "z": -8,
+          "section": "Annexe",
+          "asphalt": false,
+          "grass": true
+        },
+        {
+          "x": 257,
+          "z": 111.3,
+          "section": "The Main",
+          "asphalt": false,
+          "grass": true
+        },
+        {
+          "x": 280,
+          "z": 112.3,
+          "section": "The Main",
+          "asphalt": false,
+          "grass": true
+        },
+        {
+          "x": 340,
+          "z": 117.4,
+          "section": "The Main",
+          "asphalt": false,
+          "grass": true
+        },
+        {
+          "x": 380,
+          "z": 121.5,
+          "section": "The Main",
+          "asphalt": false,
+          "grass": true
+        },
+        {
+          "x": 385,
+          "z": 121.8,
+          "section": "The Main",
+          "asphalt": true,
+          "grass": false
+        }
+      ],
       "frontage": [
         true,
         true,
@@ -2245,6 +2500,57 @@
           "present": true,
           "grass": true,
           "matchesGrass": true
+        }
+      ],
+      "periodRoads": [
+        {
+          "x": 320.5,
+          "z": -73.2,
+          "section": "Annexe",
+          "asphalt": false,
+          "grass": true
+        },
+        {
+          "x": 270,
+          "z": -8,
+          "section": "Annexe",
+          "asphalt": false,
+          "grass": true
+        },
+        {
+          "x": 257,
+          "z": 111.3,
+          "section": "The Main",
+          "asphalt": true,
+          "grass": false
+        },
+        {
+          "x": 280,
+          "z": 112.3,
+          "section": "The Main",
+          "asphalt": true,
+          "grass": false
+        },
+        {
+          "x": 340,
+          "z": 117.4,
+          "section": "The Main",
+          "asphalt": true,
+          "grass": false
+        },
+        {
+          "x": 380,
+          "z": 121.5,
+          "section": "The Main",
+          "asphalt": true,
+          "grass": false
+        },
+        {
+          "x": 385,
+          "z": 121.8,
+          "section": "The Main",
+          "asphalt": true,
+          "grass": false
         }
       ],
       "frontage": [
@@ -2626,6 +2932,57 @@
           "matchesGrass": true
         }
       ],
+      "periodRoads": [
+        {
+          "x": 320.5,
+          "z": -73.2,
+          "section": "Annexe",
+          "asphalt": false,
+          "grass": true
+        },
+        {
+          "x": 270,
+          "z": -8,
+          "section": "Annexe",
+          "asphalt": false,
+          "grass": true
+        },
+        {
+          "x": 257,
+          "z": 111.3,
+          "section": "The Main",
+          "asphalt": true,
+          "grass": false
+        },
+        {
+          "x": 280,
+          "z": 112.3,
+          "section": "The Main",
+          "asphalt": true,
+          "grass": false
+        },
+        {
+          "x": 340,
+          "z": 117.4,
+          "section": "The Main",
+          "asphalt": true,
+          "grass": false
+        },
+        {
+          "x": 380,
+          "z": 121.5,
+          "section": "The Main",
+          "asphalt": true,
+          "grass": false
+        },
+        {
+          "x": 385,
+          "z": 121.8,
+          "section": "The Main",
+          "asphalt": true,
+          "grass": false
+        }
+      ],
       "frontage": [
         true,
         true,
@@ -3003,6 +3360,57 @@
           "present": true,
           "grass": true,
           "matchesGrass": true
+        }
+      ],
+      "periodRoads": [
+        {
+          "x": 320.5,
+          "z": -73.2,
+          "section": "Annexe",
+          "asphalt": true,
+          "grass": false
+        },
+        {
+          "x": 270,
+          "z": -8,
+          "section": "Annexe",
+          "asphalt": true,
+          "grass": false
+        },
+        {
+          "x": 257,
+          "z": 111.3,
+          "section": "The Main",
+          "asphalt": true,
+          "grass": false
+        },
+        {
+          "x": 280,
+          "z": 112.3,
+          "section": "The Main",
+          "asphalt": true,
+          "grass": false
+        },
+        {
+          "x": 340,
+          "z": 117.4,
+          "section": "The Main",
+          "asphalt": true,
+          "grass": false
+        },
+        {
+          "x": 380,
+          "z": 121.5,
+          "section": "The Main",
+          "asphalt": true,
+          "grass": false
+        },
+        {
+          "x": 385,
+          "z": 121.8,
+          "section": "The Main",
+          "asphalt": true,
+          "grass": false
         }
       ],
       "frontage": [
@@ -3384,6 +3792,57 @@
           "matchesGrass": true
         }
       ],
+      "periodRoads": [
+        {
+          "x": 320.5,
+          "z": -73.2,
+          "section": "Annexe",
+          "asphalt": true,
+          "grass": false
+        },
+        {
+          "x": 270,
+          "z": -8,
+          "section": "Annexe",
+          "asphalt": true,
+          "grass": false
+        },
+        {
+          "x": 257,
+          "z": 111.3,
+          "section": "The Main",
+          "asphalt": true,
+          "grass": false
+        },
+        {
+          "x": 280,
+          "z": 112.3,
+          "section": "The Main",
+          "asphalt": true,
+          "grass": false
+        },
+        {
+          "x": 340,
+          "z": 117.4,
+          "section": "The Main",
+          "asphalt": true,
+          "grass": false
+        },
+        {
+          "x": 380,
+          "z": 121.5,
+          "section": "The Main",
+          "asphalt": true,
+          "grass": false
+        },
+        {
+          "x": 385,
+          "z": 121.8,
+          "section": "The Main",
+          "asphalt": true,
+          "grass": false
+        }
+      ],
       "frontage": [
         true,
         true,
@@ -3761,6 +4220,57 @@
           "present": true,
           "grass": true,
           "matchesGrass": true
+        }
+      ],
+      "periodRoads": [
+        {
+          "x": 320.5,
+          "z": -73.2,
+          "section": "Annexe",
+          "asphalt": true,
+          "grass": false
+        },
+        {
+          "x": 270,
+          "z": -8,
+          "section": "Annexe",
+          "asphalt": true,
+          "grass": false
+        },
+        {
+          "x": 257,
+          "z": 111.3,
+          "section": "The Main",
+          "asphalt": true,
+          "grass": false
+        },
+        {
+          "x": 280,
+          "z": 112.3,
+          "section": "The Main",
+          "asphalt": true,
+          "grass": false
+        },
+        {
+          "x": 340,
+          "z": 117.4,
+          "section": "The Main",
+          "asphalt": true,
+          "grass": false
+        },
+        {
+          "x": 380,
+          "z": 121.5,
+          "section": "The Main",
+          "asphalt": true,
+          "grass": false
+        },
+        {
+          "x": 385,
+          "z": 121.8,
+          "section": "The Main",
+          "asphalt": true,
+          "grass": false
         }
       ],
       "frontage": [
@@ -4142,6 +4652,57 @@
           "matchesGrass": true
         }
       ],
+      "periodRoads": [
+        {
+          "x": 320.5,
+          "z": -73.2,
+          "section": "Annexe",
+          "asphalt": false,
+          "grass": true
+        },
+        {
+          "x": 270,
+          "z": -8,
+          "section": "Annexe",
+          "asphalt": false,
+          "grass": true
+        },
+        {
+          "x": 257,
+          "z": 111.3,
+          "section": "The Main",
+          "asphalt": false,
+          "grass": true
+        },
+        {
+          "x": 280,
+          "z": 112.3,
+          "section": "The Main",
+          "asphalt": false,
+          "grass": true
+        },
+        {
+          "x": 340,
+          "z": 117.4,
+          "section": "The Main",
+          "asphalt": false,
+          "grass": true
+        },
+        {
+          "x": 380,
+          "z": 121.5,
+          "section": "The Main",
+          "asphalt": false,
+          "grass": true
+        },
+        {
+          "x": 385,
+          "z": 121.8,
+          "section": "The Main",
+          "asphalt": true,
+          "grass": false
+        }
+      ],
       "frontage": [
         true,
         true,
@@ -4521,6 +5082,57 @@
           "matchesGrass": true
         }
       ],
+      "periodRoads": [
+        {
+          "x": 320.5,
+          "z": -73.2,
+          "section": "Annexe",
+          "asphalt": false,
+          "grass": true
+        },
+        {
+          "x": 270,
+          "z": -8,
+          "section": "Annexe",
+          "asphalt": false,
+          "grass": true
+        },
+        {
+          "x": 257,
+          "z": 111.3,
+          "section": "The Main",
+          "asphalt": false,
+          "grass": true
+        },
+        {
+          "x": 280,
+          "z": 112.3,
+          "section": "The Main",
+          "asphalt": false,
+          "grass": true
+        },
+        {
+          "x": 340,
+          "z": 117.4,
+          "section": "The Main",
+          "asphalt": false,
+          "grass": true
+        },
+        {
+          "x": 380,
+          "z": 121.5,
+          "section": "The Main",
+          "asphalt": false,
+          "grass": true
+        },
+        {
+          "x": 385,
+          "z": 121.8,
+          "section": "The Main",
+          "asphalt": true,
+          "grass": false
+        }
+      ],
       "frontage": [
         true,
         true,
@@ -4898,6 +5510,57 @@
           "present": true,
           "grass": true,
           "matchesGrass": true
+        }
+      ],
+      "periodRoads": [
+        {
+          "x": 320.5,
+          "z": -73.2,
+          "section": "Annexe",
+          "asphalt": false,
+          "grass": true
+        },
+        {
+          "x": 270,
+          "z": -8,
+          "section": "Annexe",
+          "asphalt": false,
+          "grass": true
+        },
+        {
+          "x": 257,
+          "z": 111.3,
+          "section": "The Main",
+          "asphalt": false,
+          "grass": true
+        },
+        {
+          "x": 280,
+          "z": 112.3,
+          "section": "The Main",
+          "asphalt": false,
+          "grass": true
+        },
+        {
+          "x": 340,
+          "z": 117.4,
+          "section": "The Main",
+          "asphalt": false,
+          "grass": true
+        },
+        {
+          "x": 380,
+          "z": 121.5,
+          "section": "The Main",
+          "asphalt": false,
+          "grass": true
+        },
+        {
+          "x": 385,
+          "z": 121.8,
+          "section": "The Main",
+          "asphalt": true,
+          "grass": false
         }
       ],
       "frontage": [
@@ -5281,6 +5944,57 @@
           "matchesGrass": true
         }
       ],
+      "periodRoads": [
+        {
+          "x": 320.5,
+          "z": -73.2,
+          "section": "Annexe",
+          "asphalt": false,
+          "grass": true
+        },
+        {
+          "x": 270,
+          "z": -8,
+          "section": "Annexe",
+          "asphalt": false,
+          "grass": true
+        },
+        {
+          "x": 257,
+          "z": 111.3,
+          "section": "The Main",
+          "asphalt": false,
+          "grass": true
+        },
+        {
+          "x": 280,
+          "z": 112.3,
+          "section": "The Main",
+          "asphalt": false,
+          "grass": true
+        },
+        {
+          "x": 340,
+          "z": 117.4,
+          "section": "The Main",
+          "asphalt": false,
+          "grass": true
+        },
+        {
+          "x": 380,
+          "z": 121.5,
+          "section": "The Main",
+          "asphalt": false,
+          "grass": true
+        },
+        {
+          "x": 385,
+          "z": 121.8,
+          "section": "The Main",
+          "asphalt": true,
+          "grass": false
+        }
+      ],
       "frontage": [
         true,
         true,
@@ -5658,6 +6372,57 @@
           "present": true,
           "grass": true,
           "matchesGrass": true
+        }
+      ],
+      "periodRoads": [
+        {
+          "x": 320.5,
+          "z": -73.2,
+          "section": "Annexe",
+          "asphalt": false,
+          "grass": true
+        },
+        {
+          "x": 270,
+          "z": -8,
+          "section": "Annexe",
+          "asphalt": false,
+          "grass": true
+        },
+        {
+          "x": 257,
+          "z": 111.3,
+          "section": "The Main",
+          "asphalt": false,
+          "grass": true
+        },
+        {
+          "x": 280,
+          "z": 112.3,
+          "section": "The Main",
+          "asphalt": false,
+          "grass": true
+        },
+        {
+          "x": 340,
+          "z": 117.4,
+          "section": "The Main",
+          "asphalt": false,
+          "grass": true
+        },
+        {
+          "x": 380,
+          "z": 121.5,
+          "section": "The Main",
+          "asphalt": false,
+          "grass": true
+        },
+        {
+          "x": 385,
+          "z": 121.8,
+          "section": "The Main",
+          "asphalt": true,
+          "grass": false
         }
       ],
       "frontage": [
@@ -6039,6 +6804,57 @@
           "matchesGrass": true
         }
       ],
+      "periodRoads": [
+        {
+          "x": 320.5,
+          "z": -73.2,
+          "section": "Annexe",
+          "asphalt": false,
+          "grass": true
+        },
+        {
+          "x": 270,
+          "z": -8,
+          "section": "Annexe",
+          "asphalt": false,
+          "grass": true
+        },
+        {
+          "x": 257,
+          "z": 111.3,
+          "section": "The Main",
+          "asphalt": false,
+          "grass": true
+        },
+        {
+          "x": 280,
+          "z": 112.3,
+          "section": "The Main",
+          "asphalt": false,
+          "grass": true
+        },
+        {
+          "x": 340,
+          "z": 117.4,
+          "section": "The Main",
+          "asphalt": false,
+          "grass": true
+        },
+        {
+          "x": 380,
+          "z": 121.5,
+          "section": "The Main",
+          "asphalt": false,
+          "grass": true
+        },
+        {
+          "x": 385,
+          "z": 121.8,
+          "section": "The Main",
+          "asphalt": true,
+          "grass": false
+        }
+      ],
       "frontage": [
         true,
         true,
@@ -6416,6 +7232,57 @@
           "present": true,
           "grass": true,
           "matchesGrass": true
+        }
+      ],
+      "periodRoads": [
+        {
+          "x": 320.5,
+          "z": -73.2,
+          "section": "Annexe",
+          "asphalt": false,
+          "grass": true
+        },
+        {
+          "x": 270,
+          "z": -8,
+          "section": "Annexe",
+          "asphalt": false,
+          "grass": true
+        },
+        {
+          "x": 257,
+          "z": 111.3,
+          "section": "The Main",
+          "asphalt": false,
+          "grass": true
+        },
+        {
+          "x": 280,
+          "z": 112.3,
+          "section": "The Main",
+          "asphalt": false,
+          "grass": true
+        },
+        {
+          "x": 340,
+          "z": 117.4,
+          "section": "The Main",
+          "asphalt": false,
+          "grass": true
+        },
+        {
+          "x": 380,
+          "z": 121.5,
+          "section": "The Main",
+          "asphalt": false,
+          "grass": true
+        },
+        {
+          "x": 385,
+          "z": 121.8,
+          "section": "The Main",
+          "asphalt": true,
+          "grass": false
         }
       ],
       "frontage": [
@@ -6797,6 +7664,57 @@
           "matchesGrass": true
         }
       ],
+      "periodRoads": [
+        {
+          "x": 320.5,
+          "z": -73.2,
+          "section": "Annexe",
+          "asphalt": false,
+          "grass": true
+        },
+        {
+          "x": 270,
+          "z": -8,
+          "section": "Annexe",
+          "asphalt": false,
+          "grass": true
+        },
+        {
+          "x": 257,
+          "z": 111.3,
+          "section": "The Main",
+          "asphalt": false,
+          "grass": true
+        },
+        {
+          "x": 280,
+          "z": 112.3,
+          "section": "The Main",
+          "asphalt": false,
+          "grass": true
+        },
+        {
+          "x": 340,
+          "z": 117.4,
+          "section": "The Main",
+          "asphalt": false,
+          "grass": true
+        },
+        {
+          "x": 380,
+          "z": 121.5,
+          "section": "The Main",
+          "asphalt": false,
+          "grass": true
+        },
+        {
+          "x": 385,
+          "z": 121.8,
+          "section": "The Main",
+          "asphalt": true,
+          "grass": false
+        }
+      ],
       "frontage": [
         true,
         true,
@@ -7174,6 +8092,57 @@
           "present": true,
           "grass": true,
           "matchesGrass": true
+        }
+      ],
+      "periodRoads": [
+        {
+          "x": 320.5,
+          "z": -73.2,
+          "section": "Annexe",
+          "asphalt": false,
+          "grass": true
+        },
+        {
+          "x": 270,
+          "z": -8,
+          "section": "Annexe",
+          "asphalt": false,
+          "grass": true
+        },
+        {
+          "x": 257,
+          "z": 111.3,
+          "section": "The Main",
+          "asphalt": true,
+          "grass": false
+        },
+        {
+          "x": 280,
+          "z": 112.3,
+          "section": "The Main",
+          "asphalt": true,
+          "grass": false
+        },
+        {
+          "x": 340,
+          "z": 117.4,
+          "section": "The Main",
+          "asphalt": true,
+          "grass": false
+        },
+        {
+          "x": 380,
+          "z": 121.5,
+          "section": "The Main",
+          "asphalt": true,
+          "grass": false
+        },
+        {
+          "x": 385,
+          "z": 121.8,
+          "section": "The Main",
+          "asphalt": true,
+          "grass": false
         }
       ],
       "frontage": [
@@ -7555,6 +8524,57 @@
           "matchesGrass": true
         }
       ],
+      "periodRoads": [
+        {
+          "x": 320.5,
+          "z": -73.2,
+          "section": "Annexe",
+          "asphalt": false,
+          "grass": true
+        },
+        {
+          "x": 270,
+          "z": -8,
+          "section": "Annexe",
+          "asphalt": false,
+          "grass": true
+        },
+        {
+          "x": 257,
+          "z": 111.3,
+          "section": "The Main",
+          "asphalt": true,
+          "grass": false
+        },
+        {
+          "x": 280,
+          "z": 112.3,
+          "section": "The Main",
+          "asphalt": true,
+          "grass": false
+        },
+        {
+          "x": 340,
+          "z": 117.4,
+          "section": "The Main",
+          "asphalt": true,
+          "grass": false
+        },
+        {
+          "x": 380,
+          "z": 121.5,
+          "section": "The Main",
+          "asphalt": true,
+          "grass": false
+        },
+        {
+          "x": 385,
+          "z": 121.8,
+          "section": "The Main",
+          "asphalt": true,
+          "grass": false
+        }
+      ],
       "frontage": [
         true,
         true,
@@ -7932,6 +8952,57 @@
           "present": true,
           "grass": true,
           "matchesGrass": true
+        }
+      ],
+      "periodRoads": [
+        {
+          "x": 320.5,
+          "z": -73.2,
+          "section": "Annexe",
+          "asphalt": true,
+          "grass": false
+        },
+        {
+          "x": 270,
+          "z": -8,
+          "section": "Annexe",
+          "asphalt": true,
+          "grass": false
+        },
+        {
+          "x": 257,
+          "z": 111.3,
+          "section": "The Main",
+          "asphalt": true,
+          "grass": false
+        },
+        {
+          "x": 280,
+          "z": 112.3,
+          "section": "The Main",
+          "asphalt": true,
+          "grass": false
+        },
+        {
+          "x": 340,
+          "z": 117.4,
+          "section": "The Main",
+          "asphalt": true,
+          "grass": false
+        },
+        {
+          "x": 380,
+          "z": 121.5,
+          "section": "The Main",
+          "asphalt": true,
+          "grass": false
+        },
+        {
+          "x": 385,
+          "z": 121.8,
+          "section": "The Main",
+          "asphalt": true,
+          "grass": false
         }
       ],
       "frontage": [
@@ -8313,6 +9384,57 @@
           "matchesGrass": true
         }
       ],
+      "periodRoads": [
+        {
+          "x": 320.5,
+          "z": -73.2,
+          "section": "Annexe",
+          "asphalt": true,
+          "grass": false
+        },
+        {
+          "x": 270,
+          "z": -8,
+          "section": "Annexe",
+          "asphalt": true,
+          "grass": false
+        },
+        {
+          "x": 257,
+          "z": 111.3,
+          "section": "The Main",
+          "asphalt": true,
+          "grass": false
+        },
+        {
+          "x": 280,
+          "z": 112.3,
+          "section": "The Main",
+          "asphalt": true,
+          "grass": false
+        },
+        {
+          "x": 340,
+          "z": 117.4,
+          "section": "The Main",
+          "asphalt": true,
+          "grass": false
+        },
+        {
+          "x": 380,
+          "z": 121.5,
+          "section": "The Main",
+          "asphalt": true,
+          "grass": false
+        },
+        {
+          "x": 385,
+          "z": 121.8,
+          "section": "The Main",
+          "asphalt": true,
+          "grass": false
+        }
+      ],
       "frontage": [
         true,
         true,
@@ -8690,6 +9812,57 @@
           "present": true,
           "grass": true,
           "matchesGrass": true
+        }
+      ],
+      "periodRoads": [
+        {
+          "x": 320.5,
+          "z": -73.2,
+          "section": "Annexe",
+          "asphalt": true,
+          "grass": false
+        },
+        {
+          "x": 270,
+          "z": -8,
+          "section": "Annexe",
+          "asphalt": true,
+          "grass": false
+        },
+        {
+          "x": 257,
+          "z": 111.3,
+          "section": "The Main",
+          "asphalt": true,
+          "grass": false
+        },
+        {
+          "x": 280,
+          "z": 112.3,
+          "section": "The Main",
+          "asphalt": true,
+          "grass": false
+        },
+        {
+          "x": 340,
+          "z": 117.4,
+          "section": "The Main",
+          "asphalt": true,
+          "grass": false
+        },
+        {
+          "x": 380,
+          "z": 121.5,
+          "section": "The Main",
+          "asphalt": true,
+          "grass": false
+        },
+        {
+          "x": 385,
+          "z": 121.8,
+          "section": "The Main",
+          "asphalt": true,
+          "grass": false
         }
       ],
       "frontage": [
@@ -9071,6 +10244,57 @@
           "matchesGrass": true
         }
       ],
+      "periodRoads": [
+        {
+          "x": 320.5,
+          "z": -73.2,
+          "section": "Annexe",
+          "asphalt": false,
+          "grass": true
+        },
+        {
+          "x": 270,
+          "z": -8,
+          "section": "Annexe",
+          "asphalt": false,
+          "grass": true
+        },
+        {
+          "x": 257,
+          "z": 111.3,
+          "section": "The Main",
+          "asphalt": false,
+          "grass": true
+        },
+        {
+          "x": 280,
+          "z": 112.3,
+          "section": "The Main",
+          "asphalt": false,
+          "grass": true
+        },
+        {
+          "x": 340,
+          "z": 117.4,
+          "section": "The Main",
+          "asphalt": false,
+          "grass": true
+        },
+        {
+          "x": 380,
+          "z": 121.5,
+          "section": "The Main",
+          "asphalt": false,
+          "grass": true
+        },
+        {
+          "x": 385,
+          "z": 121.8,
+          "section": "The Main",
+          "asphalt": true,
+          "grass": false
+        }
+      ],
       "frontage": [
         true,
         true,
@@ -9450,6 +10674,57 @@
           "matchesGrass": true
         }
       ],
+      "periodRoads": [
+        {
+          "x": 320.5,
+          "z": -73.2,
+          "section": "Annexe",
+          "asphalt": false,
+          "grass": true
+        },
+        {
+          "x": 270,
+          "z": -8,
+          "section": "Annexe",
+          "asphalt": false,
+          "grass": true
+        },
+        {
+          "x": 257,
+          "z": 111.3,
+          "section": "The Main",
+          "asphalt": false,
+          "grass": true
+        },
+        {
+          "x": 280,
+          "z": 112.3,
+          "section": "The Main",
+          "asphalt": false,
+          "grass": true
+        },
+        {
+          "x": 340,
+          "z": 117.4,
+          "section": "The Main",
+          "asphalt": false,
+          "grass": true
+        },
+        {
+          "x": 380,
+          "z": 121.5,
+          "section": "The Main",
+          "asphalt": false,
+          "grass": true
+        },
+        {
+          "x": 385,
+          "z": 121.8,
+          "section": "The Main",
+          "asphalt": true,
+          "grass": false
+        }
+      ],
       "frontage": [
         true,
         true,
@@ -9827,6 +11102,57 @@
           "present": true,
           "grass": true,
           "matchesGrass": true
+        }
+      ],
+      "periodRoads": [
+        {
+          "x": 320.5,
+          "z": -73.2,
+          "section": "Annexe",
+          "asphalt": false,
+          "grass": true
+        },
+        {
+          "x": 270,
+          "z": -8,
+          "section": "Annexe",
+          "asphalt": false,
+          "grass": true
+        },
+        {
+          "x": 257,
+          "z": 111.3,
+          "section": "The Main",
+          "asphalt": false,
+          "grass": true
+        },
+        {
+          "x": 280,
+          "z": 112.3,
+          "section": "The Main",
+          "asphalt": false,
+          "grass": true
+        },
+        {
+          "x": 340,
+          "z": 117.4,
+          "section": "The Main",
+          "asphalt": false,
+          "grass": true
+        },
+        {
+          "x": 380,
+          "z": 121.5,
+          "section": "The Main",
+          "asphalt": false,
+          "grass": true
+        },
+        {
+          "x": 385,
+          "z": 121.8,
+          "section": "The Main",
+          "asphalt": true,
+          "grass": false
         }
       ],
       "frontage": [

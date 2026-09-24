@@ -312,10 +312,10 @@
     "bytes": 186296
   },
   "admin-corridor": {
-    "source": "Research/historic-roads/admin-to-annexe-photo.png",
-    "width": 920,
-    "height": 336,
-    "bytes": 70962
+    "source": "Research/admin-corridor/interior-1.png",
+    "width": 500,
+    "height": 333,
+    "bytes": 35014
   },
   "annexe-kitchen": {
     "source": "Research/annexe-kitchen/img1.jpg",
@@ -334,5 +334,11 @@
     "width": 1200,
     "height": 675,
     "bytes": 121130
+  },
+  "admin-corridor-2": {
+    "source": "Research/admin-corridor/interior-2.png",
+    "width": 689,
+    "height": 917,
+    "bytes": 50178
   }
 }

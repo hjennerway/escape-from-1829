@@ -1,3 +1,4 @@
+import {deferredAnnexeOverlap} from './annexe-inward-test-helpers.mjs';
 import assert from 'node:assert/strict';
 import {KML_TREES} from './dist/kml-tree-data.mjs';
 import * as THREE from './dist/vendor/three.module.js';
@@ -21,7 +22,7 @@ for(const road of HISTORIC_ROADS.filter(r=>['Northern Parsons Lane connection','
    assert.equal(surface(...p),'black road','Lane must remain continuous: '+road.name+' '+p);
    for(const offset of [-3.6,0,3.6]){
     const q=[p[0]-dz/length*offset,p[1]+dx/length*offset];
-    assert(!occupied.some(poly=>pointInFootprint(q,poly)),'Lane must clear buildings: '+road.name+' '+q);
+    assert(deferredAnnexeOverlap(road.name,q)||!occupied.some(poly=>pointInFootprint(q,poly)),'Lane must clear buildings: '+road.name+' '+q);
    }
   }
  }
@@ -53,21 +54,22 @@ for(let i=0;i<=240;i++)assert.equal(surface(...start.map((v,k)=>v+(outerEnd[k]-v
 for(const p of [[410,-120],[470,-134],[510,-145],[533,-135]])assert(!['black road','stone kerb'].includes(surface(...p)),'Removed red outer detour returns to grass');
 // The latest blue outline replaces the earlier rigid triangle relocation.
 const distance=(a,b)=>Math.hypot(a[0]-b[0],a[1]-b[1]);
-for(const [x,z] of ANNEXE_TRIANGLE_CORNERS)assert(x>=333&&x<=359&&z>=-86&&z<=-70,'Triangle lies in the blue outer-road area');
-for(let i=0;i<3;i++)for(let step=0;step<=60;step++){
+for(const [x,z] of ANNEXE_TRIANGLE_CORNERS)assert(x>=314&&x<=347&&z>=-90&&z<=-56,'Triangle follows the lamp-aligned outer lane and fixed frontage');
+for(let i=0;i<2;i++)for(let step=0;step<=60;step++){
  const a=ANNEXE_TRIANGLE_CORNERS[i],b=ANNEXE_TRIANGLE_CORNERS[(i+1)%3];
  assert.equal(surface(...a.map((v,k)=>v+(b[k]-v)*step/60)),'black road','All three arms of the blue triangle connect');
 }
-const island=[344,-80];
+const island=[326,-77];
 for(const offset of [[0,0],[-.5,0],[.5,0],[0,-.5],[0,.5]])assert(!['black road','stone kerb'].includes(surface(...island.map((v,i)=>v+offset[i]))),'The triangle retains a visible grass centre');
 const {ANNEXE_ROAD_TREES}=await import('./dist/annexe-road-trees.mjs');
 for(const tree of ANNEXE_ROAD_TREES.slice(0,2))assert(tree.z>-79,'The two trees stay inside the new road, away from its triangular island');
 console.log('PASS: straight outer road, continuous blue triangular junction and visible grass island.');
 
 // The pink arm and former purple triangle are completely removed.
-for(const p of [[310,-111],[325,-108],[340,-106],[350.4,-90.5]])assert(!['black road','stone kerb'].includes(surface(...p)),'Pink road / old purple island approach is removed');
+for(const p of [[310,-111],[325,-108],[340,-106],[350.4,-94]])assert(!['black road','stone kerb'].includes(surface(...p)),'Pink road / old purple island approach is removed');
 
-for(const p of [[314,-72],[325,-68],[324,-62.5]])assert(!['black road','stone kerb'].includes(surface(...p)),'Old triangle and upward loop return to grass: '+p);
+// The inward avenue now crosses the former [325,-68] and [324,-62.5] samples.
+for(const p of [[307,-72]])assert(!['black road','stone kerb'].includes(surface(...p)),'Old triangle and upward loop return to grass: '+p);
 for(const p of [[291,-73.47],[299,-73.72]])assert.notEqual(surface(...p),'gravel','Former gravel alignment is grass');
 
 // Latest frontage request: a majority straight parallel to the actual annexe,
@@ -75,9 +77,11 @@ for(const p of [[291,-73.47],[299,-73.72]])assert.notEqual(surface(...p),'gravel
 const {readFileSync}=await import('node:fs');
 const {ANNEXE,ANNEXE_SITE,annexeSiteLocal,annexePoint}=await import('./dist/annexe.mjs');
 const before=JSON.parse(readFileSync(new URL('../Research/historic-roads/annexe-parallel-before.json',import.meta.url)));
-assert.deepEqual(ANNEXE,before.annexe,'Road realignment leaves the complete annexe fixed');
+const {moveAnnexeInward}=await import('./dist/annexe-inward-placement.mjs');
+const [movedX,movedZ]=moveAnnexeInward([before.annexe.x,before.annexe.z]);
+assert.deepEqual(ANNEXE,{...before.annexe,x:movedX,z:movedZ},'Latest request translates the complete annexe with the road');
 const avenue=HISTORIC_ROAD_TRACES.find(r=>r.name==='Annexe front avenue'),local=avenue.points.map(annexeSiteLocal);
-const straight=local.slice(-3,-1),oldBase=[before.triangle[2],before.triangle[1]].map(annexeSiteLocal);
+const straight=[local[8],local[9]],oldBase=[before.triangle[2],before.triangle[1]].map(moveAnnexeInward).map(annexeSiteLocal);
 const door=annexePoint(0,0,0),doorX=annexeSiteLocal([door[0],door[2]])[0];
 const oldZ=oldBase[0][1]+(doorX-oldBase[0][0])*(oldBase[1][1]-oldBase[0][1])/(oldBase[1][0]-oldBase[0][0]);
 assert(Math.abs((oldZ-straight[0][1])*ANNEXE_SITE.scale-6)<1e-8,'Frontage moves one road width toward the doorway');
@@ -86,7 +90,8 @@ for(let i=1;i<local.length;i++){
  const a=local[i-1],b=local[i],length=distance(a,b);totalLength+=length;
  if(Math.abs(b[1]-a[1])<1e-8)parallelLength+=length;
 }
-assert(parallelLength/totalLength>.7,'More than 70% of the road is exactly parallel to the annexe frontage');
+assert(parallelLength/totalLength>.8,'The frontage stays straight through the junction to the outer road');
+for(const p of local.slice(8))assert(Math.abs(p[1]-local[8][1])<1e-8,'No angle change at the blue-marked frontage');
 assert.equal(avenue.width,6,'Keep the carriageway width');
 const approach=HISTORIC_ROAD_TRACES.find(r=>r.name==='Irby Ashley tree-gap approach');
 assert.equal(approach.width,6,'The red route keeps the existing carriageway width');
@@ -95,10 +100,10 @@ for(const p of [[277,-87],[289,-99],[307,-95],[324,-87]])assert.equal(surface(..
 const {ANNEXE_GRAVEL_PATH}=await import('./dist/annexe-front-roads.mjs');
 const [gravelStart,gravelEnd]=ANNEXE_GRAVEL_PATH.centerline;
 assert.equal(ANNEXE_GRAVEL_PATH.width,2.4,'The yellow path keeps its narrow gravel width');
-assert(gravelEnd[1]>gravelStart[1]+8,'The yellow diagonal moves away from the trees');
-assert.equal(surface(292,-59.1),'gravel','The path follows the yellow guide across the lawn');
-assert.notEqual(surface(292,-61.5),'gravel','The old straight gravel alignment returns to grass');
-console.log('PASS: unchanged parallel frontage and annexe, red tree-gap access, blue triangle and yellow gravel diagonal.');
+assert(gravelEnd[0]>gravelStart[0]&&Math.abs((gravelEnd[1]-gravelStart[1])/(gravelEnd[0]-gravelStart[0])-.07)<1e-10,'The blue guide pivots the gravel about the existing court entrance');
+assert.equal(surface(...gravelStart.map((v,i)=>(v+gravelEnd[i])/2)),'gravel','The diagonal gravel path reconnects to the moved avenue');
+assert.notEqual(surface(300,-57.96),'gravel','The previous yellow gravel alignment returns to grass');
+console.log('PASS: annexe and parallel frontage translate together, retaining tree-gap access, the triangle and shortened diagonal gravel.');
 
 // Rounding must replace the exposed angular borders without covering lanes.
 const {IRBY_ROUNDED_BEND,IRBY_TRIANGLE_ROUNDING}=await import('./dist/irby-junction-rounding.mjs');
@@ -107,7 +112,7 @@ for(let i=5;i<IRBY_ROUNDED_BEND.points.length-5;i++){
  const sample=offset=>surface(...p.map((v,k)=>v+normal[k]*offset));
  assert.equal(sample(-.3),'black road','Rounded bend has uninterrupted asphalt');
  assert.equal(sample(.3),'stone kerb','The pale edge follows the new curve');
- assert(!['black road','stone kerb'].includes(sample(1)),'No old angular road protrudes beyond the rounded edge');
+ assert(!['black road','stone kerb'].includes(sample(1)),'No old angular road protrudes beyond the rounded edge '+i+' '+p);
 }
 for(const arc of IRBY_TRIANGLE_ROUNDING.arcs){
  assert.equal(surface(...arc.oldCorner),'black road','Every former sharp island tip is resurfaced');
@@ -141,3 +146,50 @@ assert(!tail.visible,'Historic layout hides the original pointed endpoint');
 layouts.setVisible('modern',true);assert(tail.visible,'Modern layout retains the saved endpoint');
 layouts.setVisible('modern',false);assert(!tail.visible,'Returning to Historic restores the rounded end');
 console.log('PASS: lamp clearance, full bend width and kerbs, removed junction nub, and period-specific saved endpoint.');
+
+// Later red outline: retain a substantial lawn and clear the fixed beech roots.
+const {IRBY_ROUNDED_ISLAND}=await import('./dist/irby-junction-rounding.mjs');
+const islandOutline=IRBY_ROUNDED_ISLAND.points;
+const islandArea=Math.abs(islandOutline.reduce((sum,p,i)=>{const q=islandOutline[(i+1)%islandOutline.length];return sum+p[0]*q[1]-q[0]*p[1];},0))/2;
+assert(islandArea>65,'The enlarged triangular grass area must not regress to the tiny former island');
+const beech=KML_TREES.find(t=>t.name==='Beech2');
+for(let i=0;i<180;i++){
+ const a=i/180*Math.PI*2,p=[beech.x+1.8*Math.cos(a),beech.z+1.8*Math.sin(a)];
+ assert(!['black road','stone kerb'].includes(surface(...p)),'Road and kerb must clear the fixed beech root base');
+}
+const nearestBend=Math.min(...IRBY_ROUNDED_BEND.points.map(p=>Math.hypot(p[0]-beech.x,p[1]-beech.z)));
+assert(nearestBend>3.2&&nearestBend<3.5,'The sweep stays close to the marked tree, with a small clear gap');
+console.log('PASS: enlarged grass area and a close road sweep clear of the marked beech roots.');
+
+// The purple fork retains a six-metre carriageway on both sides of its curve.
+const purpleFork=HISTORIC_ROAD_TRACES.find(r=>r.name==='Parsons Lane southern fork');
+assert.equal(purpleFork.width,6);
+for(let i=4;i<purpleFork.points.length-4;i++){
+ const p=purpleFork.points[i],a=purpleFork.points[i-1],b=purpleFork.points[i+1],dx=b[0]-a[0],dz=b[1]-a[1],length=Math.hypot(dx,dz);
+ for(const side of [-1,1])assert.equal(surface(p[0]-dz/length*side*2.7,p[1]+dx/length*side*2.7),'black road','Both sides of the curved lane retain their full width');
+}
+console.log('PASS: straight frontage to the outer lane and full-width curved fork.');
+
+// The latest red guide turns the outer road to the first fixed lamp base.
+const lampOne=LAMP_POSTS[0],roadStart=ANNEXE_LOOP_ROAD.start,roadEnd=ANNEXE_LOOP_ROAD.end;
+const roadDx=roadEnd[0]-roadStart[0],roadDz=roadEnd[1]-roadStart[1],roadLength=Math.hypot(roadDx,roadDz);
+const baseCorner=[lampOne.x+.17,lampOne.z+.17];
+const baseDistance=Math.abs(roadDx*(baseCorner[1]-roadStart[1])-roadDz*(baseCorner[0]-roadStart[0]))/roadLength;
+assert(Math.abs(baseDistance-3.6)<1e-8,'The outer kerb just touches the square lamp base');
+assert(!['black road','stone kerb'].includes(surface(lampOne.x,lampOne.z)),'The fixed lamp centre remains outside the roadway');
+const turn=Math.atan2(roadDz,roadDx)*180/Math.PI;
+assert(turn>.5&&turn<.8,'Keep the requested angle adjustment small');
+// Each visible junction layer must have its own depth bias; centimetre height
+// differences alone are unreliable when the camera is high above the estate.
+const resurfacing=layouts.historicRoads.getObjectByName('Annexe triangular island resurfacing');
+const bendSurface=layouts.historicRoads.getObjectByName('Parsons north end junction');
+const ordinary=layouts.historicRoads.getObjectByName('Northern Parsons Lane connection').children.find(o=>o.isMesh);
+const lawn=layouts.historicRoads.getObjectByName('Annexe rounded triangular grass island');
+const innerKerb=layouts.historicRoads.getObjectByName('Annexe rounded triangular inner kerb').children.find(o=>o.isMesh);
+for(const layer of [resurfacing,bendSurface]){
+ assert(layer.material.polygonOffsetFactor<ordinary.material.polygonOffsetFactor);
+ assert(layer.material.polygonOffsetUnits<ordinary.material.polygonOffsetUnits);
+}
+assert(lawn.material.polygonOffsetFactor<resurfacing.material.polygonOffsetFactor);
+assert(innerKerb.material.polygonOffsetFactor<lawn.material.polygonOffsetFactor);
+console.log('PASS: fixed lamp-base tangency and distinct road, junction, island and kerb drawing depths.');

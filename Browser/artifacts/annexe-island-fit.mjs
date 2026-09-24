@@ -1,0 +1,14 @@
+import {readFileSync,writeFileSync,copyFileSync} from 'node:fs';
+import {ANNEXE_GRAVEL_PATH} from '../dist/annexe-front-roads.mjs';
+import {ANNEXE_ROAD_TREES} from '../dist/annexe-road-trees.mjs';
+let script=readFileSync(new URL('fit-admin-pines.mjs',import.meta.url),'utf8');
+const world=[...ANNEXE_GRAVEL_PATH.centerline.map(([x,z])=>[x,.34,z]),...ANNEXE_ROAD_TREES.filter(t=>!t.removed).map(t=>[t.x,5.5,t.z])];
+const pixels=[[190,35],[321,319],[742,538],[678,458],[454,428],[220,387],[141,363],[42,334]];
+const marks=[[566,277],[445,371],[645,411],[380,344],[528,325]];
+script=script.replace(/const world=.*?;\r?\nconst pixels=.*?;\r?\nconst marks=.*?;/s,`const world=${JSON.stringify(world)};\nconst pixels=${JSON.stringify(pixels)};\nconst marks=${JSON.stringify(marks)};`);
+script=script.replace('let p=[-110,200,165,-1.05,.52,1100,557,383]','let p=[390,150,50,.6,1,1100,481,350]');
+script=script.replace('Research/admin-pine-trees/placement-fit.json','Browser/artifacts/annexe-island-fit.json').replace("'pine'+(i+1)","'mark'+(i+1)");
+await import('data:text/javascript;base64,'+Buffer.from(script).toString('base64'));
+let preview=readFileSync(new URL('irby-junction-preview.mjs',import.meta.url),'utf8').replaceAll('irby-junction','annexe-island').replaceAll('811','962').replaceAll('661','700').replaceAll("type:'jpeg',quality:70","type:'jpeg',quality:90");
+writeFileSync(new URL('annexe-island-preview.mjs',import.meta.url),preview);
+copyFileSync('C:/Users/Harry/AppData/Local/Temp/codex-clipboard-ac471e61-b507-4f70-840f-6e73287e9b88.png','Research/historic-roads/annexe-enlarged-island-marked.png');

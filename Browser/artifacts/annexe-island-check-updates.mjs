@@ -1,0 +1,4 @@
+import {readFileSync,writeFileSync} from 'node:fs';
+let p='Browser/dist/annexe-loop-road.mjs',s=readFileSync(p,'utf8').replace('[314,-88.5]','[314.4,-89.1]');writeFileSync(p,s);
+p='Browser/test-parsons-retrace.mjs';s=readFileSync(p,'utf8').replace("for(const [x,z] of ANNEXE_TRIANGLE_CORNERS)assert(x>=333&&x<=359&&z>=-86&&z<=-70,'Triangle lies in the blue outer-road area');", "for(const [x,z] of ANNEXE_TRIANGLE_CORNERS)assert(x>=319&&x<=362&&z>=-86&&z<=-60,'Enlarged triangle follows the later red outline');");writeFileSync(p,s);
+p='Browser/test-annexe-access.mjs';s=readFileSync(p,'utf8').replace("assert.deepEqual(northern.points[0],[333.63,-84.91],'The pink approach is removed back to the loop bend');", "const {ANNEXE_TRIANGLE_APEX}=await import('./dist/annexe-loop-road.mjs');\nassert.deepEqual(northern.points[0],ANNEXE_TRIANGLE_APEX,'The outer road meets the enlarged triangle beside the beech');");writeFileSync(p,s);

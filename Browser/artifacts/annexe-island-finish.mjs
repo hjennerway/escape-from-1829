@@ -1,0 +1,8 @@
+import {readFileSync,writeFileSync} from 'node:fs';
+let p='Browser/dist/annexe-loop-road.mjs',s=readFileSync(p,'utf8').replace('[313.5,-84.913]','[314,-88.5]');
+s=s.replace('// The latest blue triangle sits on the outer-road side of the frontage.\n// Extend the unchanged parallel avenue to its actual outer-road intersection.','// The later red outline enlarges the island toward Beech2 and along the\n// frontage. The outer arm remains on the registered straight boundary road.');
+s=s.replace(/const previousCorner=annexeTrianglePoint\(start\);\r?\nconst originalNear=.*?\r?\nconst avenueSlope=.*?\r?\nconst outerSlope=.*?\r?\n/,'');writeFileSync(p,s);
+p='Browser/dist/irby-junction-rounding.mjs';s=readFileSync(p,'utf8');
+s += `\n// Stop the entrance lip where the widened triangle's frontage arm meets it.\n// Retain the existing circular approach until it reaches the new road verge.\nexport function trimIslandEntranceKerb(points){\n const normal=left(avenueDirection),distance=p=>subtract(p,near).reduce((sum,v,i)=>sum+v*normal[i],0)-(3+ROAD_STYLE.edgeWidth/2);\n const kept=[];\n for(let i=0;i<points.length;i++){\n  const p=points[i],d=distance(p);\n  if(d>=0)kept.push(p);\n  if(i&&d*distance(points[i-1])<0){\n   const a=points[i-1],t=distance(a)/(distance(a)-d),q=a.map((v,k)=>v+(p[k]-v)*t);\n   if(d>=0)kept.splice(kept.length-1,0,q);else kept.push(q);\n  }\n }\n return kept;\n}\n`;
+writeFileSync(p,s);
+p='Browser/dist/historic-road-layout.mjs';s=readFileSync(p,'utf8').replace('IRBY_ROUNDED_KERB,','IRBY_ROUNDED_KERB,trimIslandEntranceKerb,').replace('...ANNEXE_ACCESS_KERBS,{name:',"...ANNEXE_ACCESS_KERBS.map(kerb=>kerb.name.includes('sweeping entrance')?{...kerb,points:trimIslandEntranceKerb(kerb.points)}:kerb),{name:");writeFileSync(p,s);

@@ -1,0 +1,2 @@
+import {readFileSync,writeFileSync} from 'node:fs';
+const p='Browser/test-annexe-rear-roads.mjs';let s=readFileSync(p,'utf8');s=s.replace('const hit=ray.intersectObjects(meshes,false).find(h=>h.point.y<.39);','const hits=ray.intersectObjects(meshes,false),hit=hits[0];');s=s.replace(/assert.equal\(hit.object.material.color.getHex\(\)===0x555b5c,expected,.*?\);/,'assert.equal(hits.some(h=>h.point.y<.39&&h.object.material.color.getHex()===0x555b5c),expected,`${stage} ${year}: road/paving visibility at ${p}`);');writeFileSync(p,s);

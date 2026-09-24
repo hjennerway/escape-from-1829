@@ -36,6 +36,7 @@ export const EXTRA_DATES=Object.freeze({
  '1829 east end wall':{built:1829,demolished:1849},
  'Water tower':{built:1829,demolished:null},
  'Modern site context':{built:2010,demolished:null},
+ 'Annexe lawn oaks':{built:1915,demolished:2010},
  'Earlier planting':{built:1829,demolished:2010},
  'Surviving lamp posts':{built:1915,demolished:null},
  'Site context':{built:1829,demolished:null}
@@ -55,6 +56,15 @@ export function roadSection(name){
  if(/^Upton grange/i.test(name))return 'Upton Grange';
  if(/^Ross Avenue/i.test(name))return 'Ross Avenue';
  return ({'Vivienne Smith Lane':'Vivienne Smith lane','Valley drive':'Valley drive','Warren Lane':'Warren Lane','Lockwood View':'Lockwood View','Gerrard Crescent':'Gerrard Crescent','Frost drive':'Frost Drive','Caldecott Close':'Upton Dene Phase 1'})[name]??null;
+}
+
+export function historicSurfaceSection(name){
+ // This through-road connects Main/admin to the saved lanes before the annexe
+ // exists. Its historical name must not leave holes at either junction.
+ if(/^Annexe inner east road(?: \u00b7 section \d+)?(?: border)?$/.test(name))return 'The Main';
+ // Both are approaches to the later annexe frontage, despite their names.
+ if(/^(Parsons Lane southern fork|Admin teardrop outer lawn sweep)(?: \u00b7 section \d+)?(?: border)?$/.test(name))return 'Annexe';
+ return /annexe/i.test(name)?'Annexe':/churton/i.test(name)?'Kelsall':'The Main';
 }
 
 export const BUILDING_SECTIONS=Object.freeze({

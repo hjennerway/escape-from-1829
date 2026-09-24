@@ -1,6 +1,7 @@
-import {existsInYear,periodForYear,roadSection,DEFAULT_PERIOD} from './estate-periods.mjs';
+import {addAnnexePeriodOaks} from './annexe-period-oaks.mjs';
+import {existsInYear,periodForYear,roadSection,historicSurfaceSection,DEFAULT_PERIOD} from './estate-periods.mjs';
 
-export const ESTATE_TIMELINE_VERSION=3;
+export const ESTATE_TIMELINE_VERSION=5;
 
 // Split triangles at the eastern ward boundary, interpolating every vertex
 // attribute so masonry UVs, normals and the full-period silhouette survive.
@@ -102,6 +103,7 @@ function addOpeningEastWall(THREE,exterior,parent){
 
 export function prepareEstateTimeline(THREE,exterior,layouts){
  if(exterior.model.userData.timelinePrepared)return attachEstateTimeline(exterior,layouts);
+ addAnnexePeriodOaks(THREE,exterior.trees);
  const groupCache=new Map();
  function tag(object,section){if(object)object.userData.estateSection=section;}
  function grouped(parent,section){
@@ -131,7 +133,7 @@ export function prepareEstateTimeline(THREE,exterior,layouts){
  // Grounds follow their associated estate section. Individual ribbons and
  // ground meshes get separate parents before material batching takes place.
  for(const object of [...layouts.historicRoads.children]){
-  const section=/annexe/i.test(object.name)?'Annexe':/churton/i.test(object.name)?'Kelsall':'The Main';
+  const section=historicSurfaceSection(object.name);
   grouped(layouts.historicRoads,section).add(object);
  }
  const excluded=new Set([exterior.trees,exterior.terrain,exterior.legacyAccess,...Object.keys(named).map(key=>exterior[key]),layouts.roads,layouts.entrance,layouts.countessRoundabout]);
@@ -223,3 +225,4 @@ export function attachEstateTimeline(exterior,layouts){
  };
  exterior.timeline=timeline;return timeline;
 }
+

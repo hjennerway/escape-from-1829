@@ -1,15 +1,16 @@
-import {ANNEXE_FRONT_ALIGNMENT} from './annexe-loop-road.mjs';
+import {ANNEXE_FRONT_ALIGNMENT,ANNEXE_TRIANGLE_FORK} from './annexe-loop-road.mjs';
 import {annexeSiteLocal,annexeSitePoint} from './annexe.mjs';
 
 // Ground-plane registration of the red/yellow/purple screenshot. The northern
-// endpoint is snapped to the existing boundary road; all buildings stay fixed.
+// endpoint was snapped to the boundary road. The later inward-placement
+// revision moves this frontage with the annexe and reconnects its fixed ends.
 export const ANNEXE_FRONT_ROAD_REFERENCE=Object.freeze({
  source:'Research/annexe-placement/front-roads-annotated.png',
  revision:ANNEXE_FRONT_ALIGNMENT.source,
  redPixels:[[270,418],[551,19]],yellowPixels:[[280,266],[379,254]],
  teardropShift:[-16,-12],
  redLine:[152,-272].map(x=>{const p=annexeSitePoint(x,0,ANNEXE_FRONT_ALIGNMENT.avenueZ);return [p[0],p[2]];}),
- gravelRevision:'Research/historic-roads/irby-tree-junction-marked.png',
+ gravelRevision:'Research/historic-roads/fork-angle-gravel-marked.png',
  gravelStart:[263.1,-63.3],gravelWidth:2.4
 });
 export const ANNEXE_TEARDROP_SHIFT=ANNEXE_FRONT_ROAD_REFERENCE.teardropShift;
@@ -21,17 +22,19 @@ const c1=tip.map((v,i)=>v+unit[i]*4),c2=join.map((v,i)=>v-unit[i]*4);
 // Blend only the short mouth at the translated teardrop. The long frontage
 // follows the registered red line exactly.
 const mouth=Array.from({length:9},(_,i)=>{const t=i/8,q=1-t;return tip.map((v,k)=>q*q*q*v+3*q*q*t*c1[k]+3*q*t*t*c2[k]+t*t*t*join[k]);});
-export const ANNEXE_FRONT_AVENUE=Object.freeze({name:'Annexe front avenue',width:6,points:[...mouth,rb]});
+// The long frontage continues on one axis through the fork to the outer lane.
+export const ANNEXE_FRONT_FAR_JOIN=Object.freeze([ANNEXE_TRIANGLE_FORK[0]]);
+export const ANNEXE_FRONT_AVENUE=Object.freeze({name:'Annexe front avenue',width:6,points:[...mouth,...ANNEXE_FRONT_FAR_JOIN]});
 const local=annexeSiteLocal;
 const [a,b]=ANNEXE_FRONT_ROAD_REFERENCE.redLine.map(local);
-// The marked road is slightly oblique to the frontage. Its actual edge, rather
-// than a parallel approximation, fixes both lips of the sweeping entrance.
+// The current straight is parallel to the frontage. Its actual edge fixes
+// both lips of the sweeping entrance in the translated site frame.
 export const annexeAvenueZ=x=>a[1]+(x-a[0])*(b[1]-a[1])/(b[0]-a[0]);
 export const annexeFrontPoint=([x,z])=>{const p=annexeSitePoint(x,0,z);return [p[0],p[2]];};
-// The latest yellow guide skews away from the trees as it crosses the lawn.
+// The latest blue guide pivots the path about its fixed service-court end.
 // Both ends meet the existing asphalt, with the original 2.4-metre width.
 const start=ANNEXE_FRONT_ROAD_REFERENCE.gravelStart;
-const slope=8.5/58.8;
+const slope=.07;
 const t=(start[1]+slope*(ra[0]-start[0])-ra[1])/((rb[1]-ra[1])-slope*(rb[0]-ra[0]));
 const end=ra.map((v,i)=>v+(rb[i]-v)*t),length=Math.hypot(end[0]-start[0],end[1]-start[1]);
 const halfWidth=ANNEXE_FRONT_ROAD_REFERENCE.gravelWidth/2;

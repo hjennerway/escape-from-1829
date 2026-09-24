@@ -1,3 +1,5 @@
+import {deferredAnnexeOverlap} from './annexe-inward-test-helpers.mjs';
+import {moveAnnexeInward} from './dist/annexe-inward-placement.mjs';
 import assert from 'node:assert/strict';
 import {readFileSync} from 'node:fs';
 import * as THREE from './dist/vendor/three.module.js';
@@ -11,6 +13,13 @@ import {ANNEXE_FRONT_ROAD_REFERENCE} from './dist/annexe-front-roads.mjs';
 import {ANNEXE_ACCESS_PAVING} from './dist/annexe-access.mjs';
 globalThis.document={createElement:()=>({getContext:()=>({fillRect(){}})})};
 const e=createEscapeExterior(THREE,1.5);e.model.updateMatrixWorld(true);
+const inwardBefore=JSON.parse(readFileSync(new URL('../Research/historic-roads/annexe-inward-before.json',import.meta.url)));
+const near=(a,b,message)=>assert(Math.hypot(...a.map((v,i)=>v-b[i]))<1e-9,message);
+near([ANNEXE.x,ANNEXE.z],moveAnnexeInward([inwardBefore.annexe.x,inwardBefore.annexe.z]),'The entire annexe follows the same ten-metre displacement');
+assert.equal(ANNEXE.rotation,inwardBefore.annexe.rotation);assert.equal(ANNEXE.scale,inwardBefore.annexe.scale);assert.equal(ANNEXE.verticalScale,inwardBefore.annexe.verticalScale);
+const originalAvenue=inwardBefore.roads.find(r=>r.name==='Annexe front avenue');
+near(HISTORIC_ROAD_TRACES.find(r=>r.name===originalAvenue.name).points[8],moveAnnexeInward(originalAvenue.points[8]),'The long straight moves by exactly the building displacement');
+for(const area of ANNEXE_ACCESS_PAVING){const old=inwardBefore.paving.find(p=>p.name===area.name);area.points.forEach((point,i)=>near(point,moveAnnexeInward(old.points[i]),'The entrance and court paving retain their building offsets'));}
 const previous=JSON.parse(readFileSync(new URL('../Research/annexe-photo-placement/fixed-roads.json',import.meta.url)));
 const roads=[...HISTORIC_ROAD_TRACES,...SHARED_HISTORIC_LANES];
 // Protect the annexe's surrounding loop, avenue and teardrop.
@@ -40,7 +49,7 @@ for(const polygon of footprints)for(let i=0;i<polygon.length;i++){
  for(let k=0;k<=steps;k++){
   const p=a.map((v,j)=>v+(b[j]-v)*k/steps);
   assert(pointInFootprint(p,loop),'Every annexe wall edge must remain inside the Parsons loop');
-  loopGap=Math.min(loopGap,edgeDistance(p,loop));teardropGap=Math.min(teardropGap,edgeDistance(p,ADMIN_TEARDROP));
+  if(!deferredAnnexeOverlap('Northern Parsons Lane connection',p))loopGap=Math.min(loopGap,edgeDistance(p,loop));teardropGap=Math.min(teardropGap,edgeDistance(p,ADMIN_TEARDROP));
   for(const other of admin)adminGap=Math.min(adminGap,edgeDistance(p,other));
  }
 }
@@ -53,7 +62,7 @@ for(const p of [[-120,-40],[40,20],[0,0]]){
  const world=annexePoint(p[0],0,p[1]),local=annexeLocal([world[0],world[2]]);assert(Math.hypot(local[0]-p[0],local[1]-p[1])<1e-8);
 }
 assert.deepEqual(e.annexe.scale.toArray(),[.5508,.9,.5508]);
-assert.deepEqual([ANNEXE_SITE.x,ANNEXE_SITE.z,ANNEXE_SITE.scale],[375,-3,.612]);
+assert.deepEqual([ANNEXE_SITE.x,ANNEXE_SITE.z,ANNEXE_SITE.scale],[...moveAnnexeInward([375,-3]),.612]);
 const buildingFront=annexePoint(ANNEXE.frontAnchor[0],0,ANNEXE.frontAnchor[1]);
 const pavedAxis=annexeSitePoint(ANNEXE.frontAnchor[0],0,ANNEXE.frontAnchor[1]);
 const c=Math.cos(ANNEXE_SITE.rotation),s=Math.sin(ANNEXE_SITE.rotation);

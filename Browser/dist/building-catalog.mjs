@@ -36,6 +36,6 @@ export const BUILDING_CATALOG=Object.freeze([
  {id:'main-admin',name:'Main / Admin Building',photos:[photo('admin-1','Main/Admin · side elevation'),photo('admin-2','Main/Admin · rear court'),photo('admin-front-approach','Main/Admin · front approach'),photo('admin-front-historic','Main/Admin · historic front elevation'),photo('admin-midwifery','Main/Admin · School of Nursing & Midwifery entrance'),photo('admin-front-elevated','Main/Admin · elevated view of the entrance and forecourt')]},
  {id:'main-kitchen',name:'Main kitchen',photos:[]},
  {id:'tower-buildings',name:'Tower service buildings',photos:[photo('tower-buildings-1','Service buildings beside the tower'),photo('workshops','Twin workshops')]},
- {id:'admin-corridor',name:'Main / Admin connecting corridor',locations:['ward-corridors'],photos:[photo('admin-corridor','Former corridor location · present-day view')]},
+ {id:'admin-corridor',name:'Main / Admin connecting corridor',locations:['ward-corridors'],photos:[photo('admin-corridor','Main / Admin connecting corridor · interior view 1'),photo('admin-corridor-2','Main / Admin connecting corridor · interior view 2')]},
  {id:'estate-chimney',name:'Estate chimney',locations:['tower-buildings'],photos:[photo('chimney','Estate chimney')]}
 ].map(entry=>Object.freeze({locations:[entry.id],...entry})));

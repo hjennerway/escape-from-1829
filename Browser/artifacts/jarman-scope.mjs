@@ -1,3 +1,4 @@
+import {KML_13_ADDITIONS} from '../dist/kml-13-data.mjs';
 import {KML_12_ADDITIONS} from '../dist/kml-12-data.mjs';
 import {createHash} from 'node:crypto';
 export function jarmanProtected(THREE,root){
@@ -9,7 +10,7 @@ export function jarmanProtected(THREE,root){
   // Exclude only the ten later mapped additions, keeping the older baseline intact.
   for(let p=o;p;p=p.parent){
    const tree=p.userData.oakTree??p.userData.adminPineTree;
-   if(tree&&KML_12_ADDITIONS.some(point=>point.name===tree.name&&point.coordinates[0]===tree.longitude&&point.coordinates[1]===tree.latitude))return;
+   if(tree&&[...KML_12_ADDITIONS,...KML_13_ADDITIONS].some(point=>point.name===tree.name&&point.coordinates[0]===tree.longitude&&point.coordinates[1]===tree.latitude))return;
   }
   if(!o.isMesh)return;
   for(let p=o;p;p=p.parent)if(p.name==='West court front elevation')return;

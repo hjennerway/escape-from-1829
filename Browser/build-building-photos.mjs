@@ -34,7 +34,8 @@ const sources={
  'admin-front-approach':'Research/main-admin-photos/img3.jpg','admin-front-historic':'Research/main-admin-photos/img4.jpg',
  'admin-midwifery':'Research/main-admin-photos/img1.jpg','admin-front-elevated':'Research/main-admin-photos/img2.jpg',
  'tower-buildings-1':'Research/tower-buildings/img1.jpg','workshops':'Research/tower-buildings/twin-workshops/img1.jpg',
- 'admin-corridor':'Research/historic-roads/admin-to-annexe-photo.png'
+ 'admin-corridor':'Research/admin-corridor/interior-1.png',
+ 'admin-corridor-2':'Research/admin-corridor/interior-2.png'
 };
 const root=new URL('../',import.meta.url),output=new URL('./dist/building-photos/',import.meta.url);
 await mkdir(output,{recursive:true});

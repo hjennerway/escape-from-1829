@@ -2089,3 +2089,309 @@ stop and live walking obstacle refresh. The final compiled asset matches the
 current source fingerprint. Source and compiled entrance close-ups were visually
 checked; final previews use `annexe-loop-entrance-overlap-final-compiled-*`.
 Build and validation logs use `Browser/artifacts/annexe-entrance-fix-*`.
+
+
+## Parsons far-end bend and junction cleanup — 24 September 2026
+
+Rounded the historic far-end elbow to an eleven-unit centreline radius around
+the fixed second lamppost, following the red guide. The six-unit road and
+0.6-unit borders remain continuous; the lamppost centre clears the outside
+kerb by approximately 1.55 scene metres. The original saved endpoint becomes
+a Modern-only tail from 2010. Both timeline and layout controls retain the
+correct visibility through batching and compiled-scene restoration.
+
+Trimmed the Larkton approach at its intersection with the outer road, removing
+the initial backwards overshoot responsible for the yellow-circled nub. The
+remaining approach and courtyard stay fixed. See the reference and geometry
+notes in Research/historic-roads/README.md.
+
+Validation: the full npm test suite passes, including road-width, kerb, lawn,
+lamppost clearance, junction continuity and endpoint visibility regressions.
+The rebuilt aerial asset passes source/compiled geometry and image comparison,
+full-detail and fallback checks, every timeline stop, mobile controls and live
+walking collision refresh. Source and compiled oblique/plan views and the
+2010 view were visually checked. Evidence uses Browser/artifacts/parsons-end-*
+with isolated compiled-test screenshots in parsons-end-validation. An initial
+run encountered a concurrently updated geometry snapshot and an output-file
+conflict; the final runs pass. Browser model sources and compiled aerial assets
+were updated; Unity and Blender exports were not regenerated.
+
+## Annexe and frontage moved toward 1829 — 24 September 2026
+
+Moved the complete annexe and the long frontage straight ten scene metres
+along the frontage normal toward 1829, matching the red screenshot guide.
+The apron, sweep, building views and frontage trees follow the same displacement.
+The two outer-boundary trees remain fixed. Short end transitions meet the
+existing road network; the gravel link shortens to the moved straight.
+The blue-circled east section needs no shortening. All 21,647 approved local
+annexe primitives retain their exact fingerprint. The requested far-left
+Larkton/outer-road overlap remains deferred, with only that bounded region
+excluded from clearance assertions. See Research/historic-roads/README.md.
+
+Validation before subsequent concurrent junction edits: dedicated annexe fit,
+rigid displacement, entrance/kerb/walking, historic roads and Parsons checks
+passed. Historical position fingerprints were refreshed only when they matched
+the pre-move state, after confirming the unchanged local building geometry.
+The rebuilt aerial asset passed source/compiled geometry and image comparison,
+full detail and fallback checks, all timeline stops and live walking refresh.
+The source and compiled views were visually inspected; the final close overview
+is Browser/artifacts/annexe-inward-final-compiled-reference.png.
+
+The full npm test run reached annexe access after the earlier tests passed,
+then concurrent changes from the other road tasks changed the shared junction
+and caused its curved-kerb assertion to fail. Those edits were preserved.
+The subsequent combined source fingerprint differs from this task's verified
+asset, so final combined validation/rebuild belongs after those road edits settle.
+Evidence: Browser/artifacts/annexe-inward-suite-verified.log,
+annexe-inward-build-final.log, annexe-inward-compiled-final.log and
+annexe-inward-snapshot-refresh.json. Browser sources and generated aerial assets
+were changed; Unity and Blender exports were not regenerated.
+
+
+## Mobile landing layout and loading stills (24 September 2026)
+
+The index page removes the night-in-the-building eyebrow and the corridors
+sentence. On phones the title starts just below the brand; viewport-aware type,
+48px mode buttons and normal-flow credits keep the actions visible even at
+320 × 480. Vertical scrolling remains available for enlarged text or unusually
+short viewports. Landing styles are scoped away from the other scene pages.
+
+The landing render uses 25% of the original exterior fog density (.000475),
+and the menu vignette uses 25% of its former opacity. The original fog is restored
+after each menu render, preserving arrival and escape scenes. Text shadows and
+solid secondary buttons maintain legibility against the clearer background.
+
+The responsive WebP stills in Browser/dist/exterior/landing-aerial*.webp show the
+same initial aerial camera and reduced fog as the live menu. The HTML picture
+loads independently of Three.js; it covers startup and failure states until the
+first complete aerial frame, when the canvas is revealed. Regenerate with
+npm run capture:landing from Browser (set MODEL_CHROME_PATH if using local Chrome).
+The desktop still is approximately 142 KB and the phone still 56 KB.
+
+Validation: npm run test:landing checks 390 × 704, 360 × 640, 320 × 480,
+430 × 780 and 1440 × 900, including button/credits separation, image loading,
+failed-scene fallback and the real WebGL handoff. Visual checks use the
+landing-mobile-placeholder, landing-small-mobile, landing-desktop-placeholder
+and landing-mobile-loaded JPGs in Browser/artifacts. The full npm test run
+passed the game and aerial controls checks, then stopped at the unrelated
+existing road assertion in test-parsons-retrace.mjs:72 (old triangle/upward loop
+at 314,-72). Its output is in Browser/artifacts/landing-mobile-suite.log.
+No modelling sources or Unity/Blender exports were changed by this update.
+
+## Main/admin teardrop road smoothing — 24 September 2026
+
+Replaced the two bumpy outer road joins beside Main/admin with tangent sweeping
+verges following the user's red guides. Added asphalt up to the stepped east
+wall and low rear link, covering the complete blue-marked grass strip and its
+service-court wedge. The teardrop island and inner kerb keep their exact shape
+and position; road centrelines, buildings and planting remain unchanged.
+
+The new regression check passes for the fixed island fingerprint/position,
+continuous asphalt, single pale borders, exposed lawn beyond the curves, and
+asphalt to the actual wall edges. The historic-road clearance and continuity
+checks pass. The annexe access check also passes after updating one superseded
+grass sample within the newly paved junction notch; all remaining removed-road
+grass samples are retained. An initial unrelated entrance-kerb failure was
+reproduced without the admin changes and resolved by concurrent annexe work.
+Source overhead and oblique previews were visually inspected. Browser model
+sources and the compiled aerial model change; Unity/Blender exports do not.
+
+Final validation: the admin teardrop regression and historic-road clearance
+checks pass after the tighter final lawn-side sweep. The new asphalt also
+passes the annexe access check; its one old grass sample inside the requested
+sweep is now asserted to be asphalt. Full-suite and compiled-comparison runs
+were interrupted by concurrent changes to the separate Irby/annexe triangular
+junction (first a beech-root clearance assertion, then a temporarily empty
+island polygon). The beech failure was independently reproduced with the admin
+paving omitted. Those transient shared-project failures are not recorded as
+successful full-suite validation. The aerial asset was rebuilt again once the
+shared scene became valid; final previews use admin-sweep-final-compiled-*.
+
+## Annexe island and straight frontage correction — 24 September 2026
+
+Enlarged the grass triangle, then applied the later red/yellow/blue/purple
+correction: the frontage now continues on one straight axis to the outer
+road, with no angle change at the blue mark. The purple fork is a separate
+six-metre curved carriageway with the standard 0.6-metre borders. Its previous
+broad resurfacing is removed from the tree-side lawn. All three island tips
+are rounded; the final grass area is about 73 square scene metres.
+
+The fixed beech, its trunk and low roots remain clear of the complete paved
+surface. Tests sample a 1.8-metre circle around its base, both sides of the
+curved carriageway, all rounded inner edges, the retained gravel link, the
+straight frontage axis and the original circular entrance kerbs. Buildings
+and tree placements are unchanged by this correction.
+
+The full browser suite and model-binary checks pass. The aerial model was
+rebuilt; source/compiled geometry and image comparisons, full-detail loading
+and fallback checks pass. Both canopy-visible and tree-hidden source/compiled
+views were visually inspected. Evidence is in Browser/artifacts/annexe-island-*
+and Browser/artifacts/annexe-island-validation. Browser source and compiled
+aerial assets change; Unity and Blender exports were not regenerated.
+
+Final validation also passes every timeline stop, mobile controls, source and
+compiled navigation, and live walking collision refresh. The generated asset
+fingerprint matches the final browser model sources.
+
+
+## Landing estate fixed to 1916 — 24 September 2026
+
+The index backdrop now uses the complete aerial construction pipeline through
+Browser/dist/landing-scene.mjs, with the timeline explicitly set to 1916. This
+includes the tower service buildings and workshops omitted by the former base
+exterior, and hides later roads, parking and the communications mast. Map road
+labels are hidden for the title backdrop. Full building geometry and static
+material batches are retained for the arrival and escape cameras, which reuse
+the same estate. Setting the period invalidates the exterior shadow map.
+
+The desktop and phone loading WebPs were regenerated from this shared setup
+with the existing camera and quarter-density landing fog. Validation: the full
+Browser npm test suite passes (artifacts/landing-1916-suite.log), and the landing
+browser check passes at all five viewport sizes, including failed-load fallback,
+the live handoff, visible tower geometry, 1916 visibility and hidden map labels.
+The refreshed stills and desktop/mobile live screenshots were visually checked.
+No modelling geometry or compiled aerial assets were changed by this fix;
+Unity and Blender exports were not regenerated.
+
+## 1912 roads and missing lane links - 24 September 2026
+
+Corrected the period assignments for the owner's red/blue road annotation.
+The southern Parsons fork and Main/admin outer lawn sweep now follow the Annexe,
+so both road stubs and their pale borders are absent in 1912 and return in 1915.
+The road named Annexe inner east road follows The Main, restoring the complete
+connection across both blue-marked areas before the annexe exists. A local
+junction joins its clipped eastern end to Parsons Lane (North), covering the
+former gap and internal kerb while retaining the saved lane coordinates.
+
+Historic surfaces now use explicit exceptions before the existing name-based
+defaults. Timeline version 4 forces older compiled scenes to fall back to source.
+The existing period-switch shadow invalidation and walking-obstacle refresh
+remain in use; no geometry is moved or rebatched during a period switch.
+See Research/timeline.md and the saved annotation for the dating assumptions.
+
+Validation: the full npm test suite passes. The period regression samples the
+complete restored route at sub-metre intervals across four metres of its width,
+including both junctions, before and after batching. The two removed stubs are
+checked for real grass before construction and asphalt after construction.
+Real-browser tests also sample both blue areas and both red stubs in source,
+compiled and walking scenes. Source and compiled 1912/1915 overhead and oblique
+views were visually inspected. Evidence uses Browser/artifacts/roads-1912-* and
+roads-1915-*. Browser sources and the generated aerial model were updated;
+Unity and Blender exports were not regenerated.
+
+Final compiled validation also passes: source/compiled geometry and image
+comparison, full detail and fallback loading, every period's road samples,
+and walking collision refresh. The generated asset fingerprint is current.
+
+
+## Parsons road lamp alignment and junction depth — 24 September 2026
+
+Turned the long outer Parsons road approximately 0.58 degrees about its saved
+northern endpoint. Its outer kerb meets Surviving Lamp Post #1's concrete base.
+The mapped lamps, annexe frontage, buildings and trees remain fixed; the north
+bend, Larkton access mouth and triangular junction follow the adjusted line.
+The previous outer-road anchor is retained independently when deriving the
+frontage, avoiding an unintended avenue/entrance displacement.
+
+Separated the depth biases for resurfaced junction asphalt, raised island grass
+and inner kerbs. This prevents buried borders and road caps from competing with
+the visible surface at the purple-marked bend and fork. Updated geometric checks
+cover lamp-base alignment, the revised triangle, tree-root clearance and the
+ordered surface layers. The old lawn sample reached by the shifted road moves
+out to the new verge; other removed-road checks remain in place.
+
+The complete npm test suite passes. Source and compiled overhead, oblique,
+distant, close lamp and junction images were rendered. The lamp, both junctions
+and overview were visually inspected.
+The rebuilt aerial asset passes source/compiled geometry and image comparison,
+full-detail rendering and fallback checks. Its source fingerprint was verified.
+Evidence: Browser/artifacts/lamp-road-{suite,build,compiled}.log and the
+lamp-road-final-{source,compiled}-*.png previews. Browser sources and generated
+aerial assets are updated; Unity and Blender exports are not regenerated.
+
+Final compiled validation also passes every timeline stop, mobile controls,
+layout navigation and live walking collision refresh.
+
+
+### Main/admin corridor gallery replacement — 24 September 2026
+
+Replaced the corridor’s former present-day location image with the two supplied interior photographs, in supplied order. Originals are saved as `Research/admin-corridor/interior-1.png` and `interior-2.png`; gallery WebPs use the existing photo-build settings and are registered in the build script and source manifest.
+
+Validation: `npm run test:photos` passes (77 gallery image entries), and the full `npm test` browser suite passes (`Browser/artifacts/admin-corridor-gallery-suite.log`). The corridor panel shows two photographs; both decode and open without page errors. Gallery and portrait viewer screenshots were visually checked. No model geometry or Unity/Blender exports changed.
+
+## Triangular-island fork and gravel angle — 24 September 2026
+
+Applied the latest red/yellow/blue screenshot: the short arm pivots toward the
+yellow guide, while the gravel link turns toward blue about its fixed court
+endpoint. The long frontage and outer roads, entrance sweep, buildings and
+trees stay fixed. The generated island retains about 80 square scene units;
+the existing root-clearance and full carriageway-width assertions still pass.
+See Research/historic-roads/README.md for the annotated reference and coordinates.
+
+Updated the gravel-direction and removed-surface assertions to the new guide.
+The timeline's old fork sample landed on the relocated kerb, so both source
+and browser timeline checks now sample the new arm at (320.5, -73.2).
+The dedicated Parsons, historic-road and annexe-access checks pass. The model
+binary check passes, generated aerial assets were rebuilt, and registered
+source/compiled views were visually checked. Evidence uses
+Browser/artifacts/fork-angle-*. Browser sources and compiled assets changed;
+Unity and Blender exports were not regenerated.
+
+Final validation: the full `npm test` browser suite and `npm run test:compiled`
+passed, including every timeline stop in source/compiled scenes and live walking
+collision refresh. The source/compiled image comparison differed significantly
+in 0.016% of pixels, within the existing visual-equivalence check.
+
+## Three annexe lawn oaks — 24 September 2026
+
+The three blue crosses in the owner's screenshot add three shared-template oaks
+to the 1915, 1916 and 1938 timeline layers. Other timeline stops retain their
+existing planting. See [placement and scope notes](Research/annexe-period-oaks/README.md).
+The dated trees are created during timeline preparation, preserving the KML
+inventory and untimed exterior. They follow the Trees toggle, shadow invalidation
+and walking obstacle refresh. Timeline version 5 rejects older compiled assets.
+
+The full Browser npm test suite and the extended estate-period checks pass,
+including all-stop visibility, shared oak buffers and visible/hidden trunk
+collisions. Screenshot-aligned previews use Browser/artifacts/period-oaks-*.
+Browser source and the local compiled aerial model are updated; Unity and Blender
+exports are unchanged.
+
+## Rear annexe road additions — 24 September 2026
+
+Added the four blue-marked rear-annexe road segments and filled the yellow-marked
+Oakmere court to its stepped building walls. All new asphalt and pale borders
+follow the Annexe section: visible at 1915, 1916 and 1938, absent at every other
+available stop. Timeline version 5 rejects earlier compiled scenes.
+
+The added roads are merged before triangulation. Existing asphalt and junction
+aprons are subtracted from the new surface, preventing duplicate carriageway
+faces. Exact building footprints clip the court and wall-ending spurs; borders
+are restricted to exposed lawn edges. The standard junction depth covers the
+old verge only at the two new open mouths. The existing period-switch shadow
+invalidation and walking-obstacle refresh remain in use.
+
+Geometry and provenance are in Research/historic-roads/annexe-rear-network-input.json
+and its marked screenshot; the generated outlines are in annexe-rear-roads.mjs.
+The optional regeneration script requires Shapely 2; the browser has no new
+runtime dependency. Tests cover both mouths across four metres of width, the
+long wall and projecting bays, and every timeline stop before/after batching.
+Browser sources and the compiled aerial asset are updated. Unity and Blender
+exports are not regenerated.
+
+The rebuilt source/compiled comparison and complete browser timeline suite also
+pass, including live walking collision refresh. The compiled oak preview checks
+exactly three new trees and their visibility/collisions at every stop. Final
+compiled preview: Browser/artifacts/period-oaks-compiled.png. Validation logs:
+period-oaks-suite.log, period-oaks-build.log and period-oaks-compiled-checks.log.
+
+Validation: the full Browser npm test suite and npm run test:compiled pass.
+This includes source/compiled geometry and image comparison, full-detail and
+fallback loading, every timeline stop, mobile controls and live walking collision
+refresh. The dedicated rear-road browser check confirms all six added surface
+objects follow only 1915/1916/1938 in both loading modes. Source and compiled
+reference-angle previews were visually inspected. Regeneration is deterministic,
+and polygon checks find no asphalt overlap with walls, existing carriageways or
+the new border. The final compiled source fingerprint matches the browser files.
+Evidence: Browser/artifacts/rear-roads-{suite,build,compiled}.log and
+rear-roads-final-{source,compiled}.jpg.

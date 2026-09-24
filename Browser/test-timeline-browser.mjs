@@ -31,6 +31,22 @@ function checkGround(samples,year){
   if(year<sample.built)assert(sample.matchesGrass,'Unbuilt sections reveal the same terrain texture and projection');
  }
 }
+async function periodRoadState(){
+ const THREE=await import('./vendor/three.module.js');
+ const {exterior}=window.__walk??window.__timeline,ray=new THREE.Raycaster(),meshes=[];
+ exterior.model.updateMatrixWorld(true);exterior.model.traverseVisible(o=>{if(o.isMesh)meshes.push(o);});
+ return [[320.5,-73.2,'Annexe'],[270,-8,'Annexe'],[257,111.3,'The Main'],[280,112.3,'The Main'],[340,117.4,'The Main'],[380,121.5,'The Main'],[385,121.8,'The Main']].map(([x,z,section])=>{
+  ray.set(new THREE.Vector3(x,.49,z),new THREE.Vector3(0,-1,0));
+  const material=ray.intersectObjects(meshes,false)[0]?.object.material;
+  return {x,z,section,asphalt:material?.color.getHex()===0x555b5c,grass:Boolean(material?.userData.estateGrass)};
+ });
+}
+function checkPeriodRoads(samples,year){
+ for(const sample of samples){
+  if(existsInYear(sample.section,year))assert(sample.asphalt,`Road at ${sample.x},${sample.z} is continuous in ${year}`);
+  else if(sample.section==='Annexe')assert(sample.grass,`Later annexe access is grass in ${year}`);
+ }
+}
 async function frontageState(){
  const THREE=await import('./vendor/three.module.js');
  const {exterior}=window.__walk??window.__timeline,ray=new THREE.Raycaster(),meshes=[];
@@ -69,6 +85,7 @@ try{
    });
    assert.equal(state.year,period.year);assert.deepEqual(state.camera,camera);
    state.ground=await page.evaluate(groundState);checkGround(state.ground,period.year);
+   state.periodRoads=await page.evaluate(periodRoadState);checkPeriodRoads(state.periodRoads,period.year);
    state.frontage=await page.evaluate(frontageState);
    assert(state.frontage.every(Boolean),'Both projections are complete in '+period.year+' '+mode);
    assert.equal(state.passage,period.year>=1870,'The complete passage head follows 1870 in '+mode);
@@ -108,6 +125,7 @@ try{
   await page.locator('#periodSlider').fill(String(index));
   assert.equal(await page.evaluate(()=>window.__walk.timeline.period.year),period.year);
   checkGround(await page.evaluate(groundState),period.year);
+  checkPeriodRoads(await page.evaluate(periodRoadState),period.year);
   const frontage=await page.evaluate(frontageState);
   assert(frontage.every(Boolean),'Both projection facades remain in the walking view');
   assert.deepEqual(await page.evaluate(()=>window.__walk.exterior.camera.position.toArray()),beforeCamera);

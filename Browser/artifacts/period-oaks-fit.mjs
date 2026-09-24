@@ -1,0 +1,16 @@
+import {readFileSync,writeFileSync,mkdirSync,copyFileSync} from 'node:fs';
+import {ANNEXE_ROAD_TREES} from '../dist/annexe-road-trees.mjs';
+import {KML_PINE_TREES} from '../dist/kml-tree-data.mjs';
+const pine=KML_PINE_TREES.find(p=>p.name==='Pine14');
+const world=[...ANNEXE_ROAD_TREES.filter(p=>!p.removed),pine].map(p=>[p.x,-.12,p.z]);
+const pixels=[[297,526],[313,563],[398,625],[508,659],[556,679],[607,698],[786,407]];
+const marks=[[667,415],[705,427],[751,435]];
+let source=readFileSync(new URL('fit-admin-pines.mjs',import.meta.url),'utf8');
+source=source.slice(source.indexOf('function solve'));
+source=source.replace('let p=[-110,200,165,-1.05,.52,1100,557,383]','let p=[240,235,-95,-2.15,.97,820,614,364.5]');
+source=source.replace('p.map((_,i)=>{let q=[...p]','p.map((_,i)=>{let q=[...p]');
+source=source.replace("'pine'+(i+1)","'Annexe lawn oak '+(i+1)");
+source=source.replace('Research/admin-pine-trees/placement-fit.json','../Research/annexe-period-oaks/placement-fit.json');
+mkdirSync('../Research/annexe-period-oaks',{recursive:true});
+copyFileSync('C:/Users/Harry/AppData/Local/Temp/codex-clipboard-83d0568e-a7c7-4a1e-b143-4bd1d28c961a.png','../Research/annexe-period-oaks/marked-locations.png');
+eval(source);

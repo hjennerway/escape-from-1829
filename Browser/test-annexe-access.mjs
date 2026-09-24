@@ -48,13 +48,14 @@ for(const [name,fractions] of [
 // The infill does not consume the equal grass strips beside the paved apron.
 for(const side of [-1,1])for(const z of [30,36,44])assert(!['black road','stone kerb'].includes(at(ANNEXE_ACCESS.centreX+side*(halfApron+2),z)),'Retain side grass');
 const obstacles=exteriorObstacles(THREE,e.model);
-// The two curved lips have one continuous kerb, with clear lawn beyond it.
+// Both entrance lips meet the restored straight frontage without slivers.
 for(const side of [-1,1]){
  const radius=(ANNEXE_ACCESS.entranceMouthWidth-ANNEXE_ACCESS.entranceWidth)/2;
  const centre=[ANNEXE_ACCESS.centreX+side*ANNEXE_ACCESS.entranceMouthWidth/2,ANNEXE_ACCESS.avenueZ-3/ANNEXE_SITE.scale-radius];
  for(const degrees of [55,65,75,80,85,88])for(const [offset,expected] of [[.2,'black road'],[-.3,'stone kerb'],[-.8,undefined]]){
   const angle=degrees*Math.PI/180,r=radius+offset/ANNEXE_SITE.scale;
-  assert.equal(at(centre[0]-side*r*Math.cos(angle),centre[1]+r*Math.sin(angle)),expected,'Single curved kerb and no straight-border sliver at '+side+'/'+degrees+'/'+offset);
+  const p=world(centre[0]-side*r*Math.cos(angle),centre[1]+r*Math.sin(angle));
+  assert.equal(surface(...p),expected,'Single curved kerb and open enlarged-island mouth at '+side+'/'+degrees+'/'+offset);
  }
 }
 assert(!e.model.getObjectByName('Annexe roadside tree 4'),'The red-circled trunk is removed');
@@ -86,12 +87,15 @@ for(let i=1;i<pineDrive.points.length;i++){
  const a=pineDrive.points[i-1],b=pineDrive.points[i];
  for(let j=0;j<=8;j++)assert.equal(surface(a[0]+(b[0]-a[0])*j/8,a[1]+(b[1]-a[1])*j/8),'black road','The red lawn route and its new junction must be continuous');
 }
-for(const p of [[260.75,56.875],[257.78,66.67],[255,76],[252.25,84.64],[248.77,91.15],[247,94.5]])
- assert(!['black road','stone kerb'].includes(surface(...p)),'The blue-circled road and former north junction mouth must return to grass');
+// The latest admin sweep deliberately fills the old road sample nearest the junction.
+assert.equal(surface(260.75,56.875),'black road','The smooth teardrop approach fills the former junction notch');
+for(const p of [[257.78,66.67],[255,76],[252.25,84.64],[248.77,91.15],[247,94.5]])
+ assert(!['black road','stone kerb'].includes(surface(...p)),'The blue-circled road and former north junction mouth must return to grass: '+p);
 assert(!l.historicRoads.getObjectByName('Admin east four-way junction'),'Remove the former four-way apron');
 // The two newly circled northern road ends connect around the annexe.
 const northern=HISTORIC_ROADS.find(r=>r.name==='Northern Parsons Lane connection');
-assert.deepEqual(northern.points[0],[333.63,-84.91],'The pink approach is removed back to the loop bend');
+const {ANNEXE_TRIANGLE_APEX}=await import('./dist/annexe-loop-road.mjs');
+assert.deepEqual(northern.points[0],ANNEXE_TRIANGLE_APEX,'The outer road meets the enlarged triangle beside the beech');
 const {PARSONS_NORTH_BEND}=await import('./dist/parsons-north-bend.mjs');
 for(const p of PARSONS_NORTH_BEND.points)assert.equal(surface(...p),'black road','The curved Parsons end stays continuous');
 assert(northern.points.every(p=>p[1]<-84),'The retraced lane must stay north of the annexe');

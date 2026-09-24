@@ -1,0 +1,2 @@
+import {readFileSync,writeFileSync} from 'node:fs';
+let file='Browser/artifacts/rear-roads-export.mjs',s=readFileSync(file,'utf8');s=s.replace("const lane=SHARED_HISTORIC_LANES.find(r=>r.name==='Parsons Lane (North)').points;","const lanes=SHARED_HISTORIC_LANES.map(r=>r.points);");s=s.replace('for(let i=1;i<lane.length;i++){','for(const lane of lanes)for(let i=1;i<lane.length;i++){');writeFileSync(file,s);

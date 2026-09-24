@@ -1,9 +1,9 @@
 <!doctype html>
 <html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Escape from 1829 — Chester</title><meta name="description" content="Find one of five randomly placed exits in this atmospheric first-person escape game inspired by Chester's 1829 building."><link rel="icon" href="./favicon.svg"><link rel="stylesheet" href="./style.css"><script type="importmap">{"imports":{"three":"https://cdn.jsdelivr.net/npm/three@0.160.1/build/three.module.js"}}</script></head>
-<body><canvas id="game" aria-label="First-person view of the 1829 building"></canvas><div class="vignette"></div>
+<body class="landing"><picture id="landingPreview" aria-hidden="true"><source media="(max-width:760px)" srcset="./exterior/landing-aerial-mobile.webp"><img src="./exterior/landing-aerial.webp" alt="" fetchpriority="high"></picture><canvas id="game" aria-label="First-person view of the 1829 building"></canvas><div class="vignette"></div>
 <div id="arrivalFade" aria-hidden="true" hidden></div>
 <header><a href="./" class="brand">1829<span>CHESTER</span></a><button id="pause" class="icon" aria-label="Pause game" hidden>Ⅱ</button></header>
-<main id="menu"><div class="eyebrow"><span></span> A NIGHT IN THE 1829 BUILDING</div><h1>ESCAPE<br><span>FROM</span> 1829<span class="period">.</span></h1><p class="intro" id="intro">The corridors remember.<br>Explore the asylum or find a way out before they find you.</p><div class="menu-actions"><button id="start" class="secondary" disabled>PREPARING THE BUILDING <span>↗</span></button></div></main>
+<main id="menu"><h1>ESCAPE<br><span>FROM</span> 1829<span class="period">.</span></h1><p class="intro" id="intro">Explore the asylum or find a way out before they find you.</p><div class="menu-actions"><button id="start" class="secondary" disabled>PREPARING THE BUILDING <span>↗</span></button></div></main>
 <script type="module" src="./explore-link.mjs"></script>
 <aside id="location"><span>53°12′ N &nbsp; 2°54′ W</span><b>COUNTESS OF CHESTER<br>THE 1829 BUILDING</b></aside>
 <a class="credits-link" href="https://github.com/hjennerway/escape-from-1829" target="_blank" rel="noopener noreferrer">Credits/Readme</a>

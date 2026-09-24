@@ -1,0 +1,13 @@
+import {readFileSync,writeFileSync} from 'node:fs';
+const paths=['annexe-loop-road','annexe-front-roads','irby-junction-rounding','historic-road-layout'];
+for(const name of paths)writeFileSync(`Browser/artifacts/annexe-island-before-${name}.txt`,readFileSync(`Browser/dist/${name}.mjs`));
+let p='Browser/dist/annexe-loop-road.mjs',s=readFileSync(p,'utf8');
+s=s.replace('const near=annexeTrianglePoint([355,-107.85]);','export const ANNEXE_TRIANGLE_APEX=Object.freeze([319.3,annexeOuterRoadZ(319.3)]);\nconst near=[329,-64];');
+s=s.replace('const avenueSlope=(near[1]-previousCorner[1])/(near[0]-previousCorner[0]);','const originalNear=annexeTrianglePoint([355,-107.85]);\nconst avenueSlope=(originalNear[1]-previousCorner[1])/(originalNear[0]-previousCorner[0]);');
+s=s.replace('[start,ANNEXE_FRONT_OUTER_JOIN,near]','[ANNEXE_TRIANGLE_APEX,ANNEXE_FRONT_OUTER_JOIN,near]').replace('[near,start]','[near,ANNEXE_TRIANGLE_APEX]');
+s=s.replace('[[311,-95],[320,-86],start]','[[312,-94],[313.5,-84.913],ANNEXE_TRIANGLE_APEX]');
+writeFileSync(p,s);
+p='Browser/dist/annexe-front-roads.mjs';s=readFileSync(p,'utf8').replace('ANNEXE_FRONT_ALIGNMENT,ANNEXE_TRIANGLE_FORK','ANNEXE_FRONT_ALIGNMENT,ANNEXE_TRIANGLE_FORK,annexeTrianglePoint');
+s=s.replace('moveAnnexeInward(far).map((v,i)=>v-unit[i]*8)','moveAnnexeInward(annexeTrianglePoint([355,-107.85])).map((v,i)=>v-unit[i]*20)');writeFileSync(p,s);
+p='Browser/dist/historic-road-layout.mjs';s=readFileSync(p,'utf8').replace('ANNEXE_LOOP_ROAD,ANNEXE_TRIANGLE_FORK','ANNEXE_LOOP_ROAD,ANNEXE_TRIANGLE_APEX,ANNEXE_TRIANGLE_FORK').replace('const parsonsNorthRoad=[ANNEXE_LOOP_ROAD.start,','const parsonsNorthRoad=[ANNEXE_TRIANGLE_APEX,');writeFileSync(p,s);
+p='Browser/dist/irby-junction-rounding.mjs';s=readFileSync(p,'utf8').replace('p[0]>=319','p[0]>=309').replace('avenueDirection,15','avenueDirection,9').replace('approachDirection,-14','approachDirection,-8');writeFileSync(p,s);

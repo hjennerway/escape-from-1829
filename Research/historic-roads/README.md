@@ -124,7 +124,7 @@ return and southern cross-lane are removed.
 
 The 16 September yellow/blue annotation (parsons-yellow-retrace.png) replaces the northern detour with a sweep from the western boundary past Irby/Ashley, across the frontage avenue and into the saved Parsons Lane north endpoint. The yellow southern fork joins the frontage avenue. The blue outer loop and upper service/frontage spurs return to grass. This supersedes the earlier northern connection. Ground-plane picks are fitted to the screenshot; road width and materials stay consistent. The saved Modern road vertices are unchanged. Verify with node Browser/test-parsons-retrace.mjs.
 
-## Gravel alignment and northern fork � 24 September 2026
+## Gravel alignment and northern fork � 24 September 2026
 
 The red/blue/yellow screenshot moves the service-court gravel link six units
 north, retaining its 2.4-unit width and slight skew. Its mouth starts on the
@@ -254,3 +254,135 @@ road. Trimming the initial overshoot removes the round nub beyond the far kerb
 without moving the remaining approach or courtyard. This supersedes the old
 requirement to pave all the way to the saved northern endpoint in Historic.
 Implementation is in parsons-north-bend.mjs and annexe-access.mjs.
+
+## Annexe and frontage toward 1829 — 24 September 2026
+
+The [red-line reference](annexe-inward-marked.png) moves the frontage and complete
+annexe ten scene metres toward the 1829 buildings, perpendicular to the accepted
+frontage. The shared displacement is (-6.9372974603, -7.2023540560) in world X/Z.
+The entrance apron, quarter-circle sweep and frontage trees retain their offsets.
+The two trees beside the fixed outer boundary retain their positions. Short
+curves reconnect the straight avenue to the fixed teardrop and outer triangle;
+the gravel path meets the new avenue and the rounded junction edge follows it.
+
+The blue-circled east connecting section fits without shortening. All 21,647
+local annexe primitives retain the approved geometry fingerprint. The far-left
+Larkton entrance room overlaps the outer road, explicitly deferred by the owner.
+The clearance checks allow only that bounded overlap (world X 434–445, Z -86–-77
+on the Northern Parsons connection); all other road/building checks stay active.
+This supersedes prior fixed-annexe placement requirements. Baseline coordinates
+are retained in annexe-inward-before.json. Browser source and compiled aerial
+assets change; Unity and Blender exports are unchanged.
+
+## Main/admin teardrop outer sweeps — 24 September 2026
+
+The [red road edges and blue paving annotation](admin-teardrop-sweeps-marked.png)
+replace the two bumpy outer joins with continuous cubic verges tangent to the
+existing approach roads. Local asphalt fills cover the former internal kerbs;
+the exterior pale borders retain their 0.6-unit width. The central teardrop
+lawn, its position and its inner kerb retain every approved vertex.
+
+The building-side asphalt now reaches the east pavilion, stepped shoulder and
+low rear link, including the small wedge at the service-court connection.
+Building geometry, trees, road centrelines and the semicircular forecourt stay
+fixed. The red lines are approximate edge guides, not a surveyed alignment.
+This supersedes the previous exposed grass strip and angular outer junctions.
+
+Implementation is in Browser/dist/admin-teardrop-paving.mjs. The dedicated
+Browser/test-admin-teardrop.mjs verifies the preserved island fingerprint and
+position, asphalt/kerb/lawn samples along both sweeps, and paving immediately
+beside each wall step. Existing road tests continue to check full-width building
+clearance. Previews and validation logs use Browser/artifacts/admin-sweep-*.
+Browser sources and compiled aerial assets change; Unity and Blender exports
+are not regenerated.
+
+
+## Enlarged annexe grass triangle and straight frontage — 24 September 2026
+
+The [red island outline](annexe-enlarged-island-marked.png) first enlarged the
+small triangular lawn. The [later red/yellow/blue/purple correction](annexe-straight-frontage-marked.png)
+then restores one straight frontage axis all the way to the outer road,
+removing the angle change at the blue mark. It supersedes the intermediate
+189.8-square-metre island and angled lower road arm.
+
+The purple arm is now a separate six-metre curved road with normal 0.6-metre
+borders. Removing the broad resurfacing beside it restores grass around
+Beech2. Both the carriageway and kerbs clear a 1.8-metre circle around the
+fixed tree base, including its low root buttresses. The closest fork verge
+is about 2.75 metres from the tree centre; its approach remains clear too.
+
+The final grass island is about 73 square scene metres, still substantially
+larger than the former small island. Three rounded tips join its straight
+frontage/outer-road edges and curved fork edge. The frontage entrance again
+meets the straight road with its original circular kerbs. Buildings, planting
+and the gravel link are retained. Browser source and compiled aerial assets
+change; Unity and Blender exports do not. Evidence uses annexe-island.
+
+
+## Outer Parsons road at the first lamp — 24 September 2026
+
+The [red road, yellow lamp and purple junction reference](parsons-lamp-alignment-marked.png)
+turns the long outer road about its saved northern endpoint by approximately
+0.58 degrees. Its outer 0.6-metre kerb touches the square base of Surviving
+Lamp Post #1; both mapped lamps retain their coordinates. The northern bend,
+Larkton mouth and triangular junction reconnect to the new straight. The
+annexe frontage, buildings and planting retain their positions.
+
+The former outer-road anchor remains the independent input for the accepted
+annexe frontage alignment. This prevents the boundary-road adjustment from
+moving the avenue or entrance. The triangle expands slightly, and the fork
+still clears the fixed beech roots. This supersedes the former outer-road
+angle and the old grass sample at (350.4, -90.5), now within the moved road.
+
+Junction asphalt, island lawn and inner kerbs have distinct drawing-depth
+biases, so buried road borders do not compete with the resurfaced junctions
+at aerial viewing distances. This applies to the northern bend and the fork
+marked purple. Browser sources and generated aerial assets change; Unity and
+Blender exports are not regenerated. Preview evidence uses lamp-road.
+
+## Short fork angle and blue gravel guide — 24 September 2026
+
+The [red/yellow/blue annotation](fork-angle-gravel-marked.png) pivots the short
+road arm beside the triangular lawn toward the yellow line. Its frontage join
+moves from world X 314 to 322.4 on the fixed avenue axis, while the outer-road
+apex remains fixed. The cubic control nearest the frontage follows the new
+angle. The island and its three rounded corners regenerate from those edges;
+the lawn retains about 80 square scene units and the fixed beech root base
+remains clear.
+
+The gravel link follows the blue direction with a world Z/X slope of 0.07,
+pivoting about its existing service-court endpoint and intersecting the fixed
+frontage avenue. Its 2.4-unit width and open asphalt connections are retained.
+This supersedes the earlier yellow gravel diagonal and short fork alignment.
+Buildings, trees, the entrance sweep and long outer/frontage roads stay fixed.
+Browser source and compiled aerial assets change; Unity and Blender exports
+are not regenerated. Registered before/after views use the fork-angle prefix
+in Browser/artifacts. The screenshot fit is approximate, with ground landmark
+residuals under one pixel; elevated objects are not registration constraints.
+
+## Annexe rear roads and Oakmere paving — 24 September 2026
+
+The owner's [blue routes and yellow paving mark](annexe-rear-network-marked.png)
+restore four connected rear-annexe approaches: the curved outer link, the short
+Leighton/Newton spur, the long side road and its second through-road connection.
+The yellow Oakmere court is paved to the actual long wall, projecting bays and
+service-head recesses. This supersedes the earlier instruction to leave these
+specific rear areas as grass; other removed approaches remain absent.
+
+The new carriageways are six scene metres wide with the existing 0.6-metre pale
+edges. The merged asphalt outline has no internal road overlaps. It is clipped
+to the existing carriageways and junction aprons, and to the exact wall outlines.
+The pale border follows exposed lawn edges only, leaving both road mouths and
+the building edges open. Buildings and tree locations are unchanged.
+
+All new asphalt and borders follow the Annexe section, appearing at **1915,
+1916 and 1938 only**. The stored input includes the screenshot fit, four traces,
+wall outlines and existing road boundaries. It records a visual interpretation
+of the owner's sketch, not new historical survey evidence.
+
+`Browser/build-annexe-rear-roads.py` (Python with Shapely 2) regenerates the merged
+browser polygons from `annexe-rear-network-input.json`. Runtime rendering has no
+new dependency. After any relevant building or adjacent-road edit, refresh the
+input outlines before regenerating; the input records the approved geometry at
+this revision. Browser source and compiled aerial assets are updated; Unity
+and Blender exports are unchanged.

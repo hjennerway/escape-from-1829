@@ -1,9 +1,10 @@
+import {KML_13_ADDITIONS} from './kml-13-data.mjs';
 import {KML_12_ADDITIONS} from './kml-12-data.mjs';
 import {KML_11_POINTS} from './kml-11-data.mjs';
 import {earthToScene} from './earth-registration.mjs';
 
-// Exact Point coordinates from Research/kml-trees/1829.kml (Pine1–13, Oak1–2)
-// 1829-3.kml (Oak3–12) and 1829-6.kml (Oak13–22, Beech1–2), in KML order:
+// Exact Point coordinates from Research/kml-trees/1829.kml (Pine1â€“13, Oak1â€“2)
+// 1829-3.kml (Oak3â€“12) and 1829-6.kml (Oak13â€“22, Beech1â€“2), in KML order:
 // longitude, latitude, altitude. LookAt coordinates are camera targets only.
 export const KML_TREE_POINTS=Object.freeze([
   {name:'Pine1',coordinates:[-2.899462848266841,53.21333437945022,37.49250189993169]},
@@ -51,7 +52,8 @@ export const KML_TREE_POINTS=Object.freeze([
   // Existing Oak21 is already imported; keep the second distinct point only.
   ...KML_11_POINTS.filter(p=>p.name.startsWith('Willow')||(p.name==='Oak21'&&p.coordinates[0]!==-2.903325559043617)),
   // Append only new locations, preserving every earlier seeded rotation.
-  ...KML_12_ADDITIONS
+  ...KML_12_ADDITIONS,
+  ...KML_13_ADDITIONS
 ].map(point=>Object.freeze({...point,coordinates:Object.freeze(point.coordinates)})));
 
 // Stable pseudorandom yaw varies the copies without changing them at reload.

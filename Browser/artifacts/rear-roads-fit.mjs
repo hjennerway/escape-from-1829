@@ -1,0 +1,12 @@
+import {readFileSync} from 'node:fs';
+const landmarks=JSON.parse(readFileSync('Browser/artifacts/rear-roads-landmarks.json'));
+const ids=[3,4,7,8,10,11,6,9],pixels=[[691,217],[704,258],[847,295],[810,303],[880,411],[843,422],[830,310],[857,397]];
+const marks=[[700,281],[720,277],[825,262],[900,263],[987,273],[1054,289],[1116,320],[739,345],[745,394],[1003,352],[997,418],[998,472],[998,550],[981,652],[978,699],[1100,491],[1246,526],[665,338],[665,400]];
+let script=readFileSync('Browser/artifacts/fit-admin-pines.mjs','utf8');
+script=script.replace(/const world=.*?;\r?\nconst pixels=.*?;\r?\nconst marks=.*?;/s,`const world=${JSON.stringify(ids.map(i=>landmarks[i].world))};\nconst pixels=${JSON.stringify(pixels)};\nconst marks=${JSON.stringify(marks)};`);
+script=script.replace('let p=[-110,200,165,-1.05,.52,1100,557,383]','let p=[409,208,30,-2.1,1.4,845,744,376]');
+script=script.replace('const residual=p=>world.flatMap((q,i)=>project(p,q)', 'const residual=p=>world.flatMap((q,i)=>project([...p,744,376.5],q)');
+script=script.replace('let p=[409,208,30,-2.1,1.4,845,744,376]','let p=[409,208,30,-2.1,1.4,845]');
+script=script.replace('const [r,u,f]=axes(p);','p=[...p,744,376.5];const [r,u,f]=axes(p);');
+script=script.replace('Research/admin-pine-trees/placement-fit.json','Browser/artifacts/rear-roads-fit.json');
+await import('data:text/javascript;base64,'+Buffer.from(script).toString('base64'));
