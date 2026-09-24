@@ -1,0 +1,137 @@
+{
+  "build": {
+    "mode": "compiled",
+    "milliseconds": 1140.8000000000466
+  },
+  "access": {
+    "source": "Research/historic-roads/annexe-entrance-revision.png",
+    "frontage": 269.0180967990692,
+    "sweepWidthScale": 0.16,
+    "entranceWidth": 8.608579097570216,
+    "entranceMouthWidth": 52.72754697261757,
+    "forecourtWidth": 30.62916885242419,
+    "centreX": 5.104861475404004,
+    "sweepShiftZ": 0,
+    "entranceZ": 64,
+    "forecourtRearZ": 33.060055269283176,
+    "avenueZ": 116.04642255728288,
+    "rearRemovalSource": "Research/annexe-frontage-adjustment/remove-rear-roads.png",
+    "sweepRevisionSource": "Research/annexe-frontage-adjustment/narrow-entrance.png",
+    "frontageInfillSource": "Research/annexe-frontage-adjustment/front-paving-gaps.png",
+    "alignmentSource": "Research/annexe-frontage-adjustment/entrance-alignment-reference.png",
+    "flareReference": "Research/historic-roads/annexe-frontage-junction-marked.png",
+    "note": "The apron remains on the doorway axis. The latest red edges replace the elongated flare with two quarter circles meeting the orange frontage road. Frontage side approaches and rear access roads remain removed."
+  },
+  "groups": [
+    {
+      "name": "Street lamps · Annexe front avenue",
+      "fixtures": [
+        {
+          "x": 283.92142463114925,
+          "z": -33.24912893283066,
+          "angle": -0.8041415924791988,
+          "local": [
+            72.89753944444924,
+            122.50067092329614
+          ]
+        },
+        {
+          "x": 336.56286894409726,
+          "z": -72.98465924868765,
+          "angle": 2.3374510611105945,
+          "local": [
+            -34.095845114838895,
+            109.59217419127062
+          ]
+        },
+        {
+          "id": "Annexe service-path verge",
+          "x": 313.8033570222955,
+          "z": -62.03136486203795,
+          "angle": -0.8041415924791887,
+          "local": [
+            5.104861475404052,
+            122.50067092329598
+          ]
+        },
+        {
+          "id": "Annexe entrance-side verge",
+          "x": 303.85637962798984,
+          "z": -41.481813997915104,
+          "angle": 2.3374510611106047,
+          "local": [
+            40.10486147540401,
+            109.59217419126978
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Street lamps · Annexe entrance forecourt",
+      "fixtures": [
+        {
+          "id": "Annexe forecourt left",
+          "x": 352.9672803929472,
+          "z": -36.89950528026742,
+          "angle": -2.37493791927415,
+          "local": [
+            -12.497304650154515,
+            48.53002763464156
+          ]
+        },
+        {
+          "id": "Annexe forecourt right",
+          "x": 337.44977160411213,
+          "z": -21.953062287640435,
+          "angle": 0.7666547343157156,
+          "local": [
+            22.707027600962487,
+            48.53002763464157
+          ]
+        }
+      ]
+    }
+  ],
+  "paving": [
+    {
+      "name": "Annexe central asphalt forecourt",
+      "surface": "asphalt apron",
+      "points": [
+        [
+          358.52692258514776,
+          -29.109366281279854
+        ],
+        [
+          345.39097906507106,
+          -42.74720099037978
+        ],
+        [
+          331.8901294119115,
+          -29.743201286628018
+        ],
+        [
+          345.02607293198827,
+          -16.105366577528084
+        ]
+      ],
+      "pixels": [
+        [
+          569.1506087619937,
+          156.7266387333347
+        ],
+        [
+          495.01973539403804,
+          261.79047817786153
+        ],
+        [
+          656.9736069482196,
+          323.85095566787
+        ],
+        [
+          720.2107676016898,
+          208.55809408452842
+        ]
+      ]
+    }
+  ]
+}

@@ -2767,3 +2767,30 @@ geometry snapshots mismatch. Both fingerprints reproduce with the original
 HEAD lamp implementation restored in memory, confirming those failures are
 independent of this feature (day-night-baseline.txt). Browser sources and local
 compiled aerial assets are updated; Unity and Blender exports are unchanged.
+
+## Annexe night-lamp placement — 24 September 2026
+
+Applied the four X-marked locations from Research/annexe-night-lamps-marked.png:
+added two inward-facing lamps beside the central forecourt, removed the circled
+post on the curved junction, and added two inward-facing avenue lamps beside
+the gravel-path mouth and farther along the building-side verge. Placement is
+anchored to the existing Annexe site frame and paving dimensions. All other
+automatically sampled fixtures keep their positions. The Annexe period parents
+supply visibility; 1915–1938 now shows 121 estate fixtures, a net increase of
+three. Counts in the other periods are unchanged.
+
+The change is applied before instancing, batching and collision extraction.
+The existing lighting controller supplies the glow and refreshes shadows; no
+new runtime movement or visibility callbacks were introduced. The local
+compiled aerial model was rebuilt. Browser sources and compiled assets are
+updated; Unity and Blender exports were not regenerated.
+
+Validation: the focused day/night check verifies the four shaft collisions,
+posts off the paving, heads over the intended paved surface, removal of the
+circled post, and every period's fixture/light visibility. Source and compiled
+night previews were visually inspected. Both npm run test:compiled checks pass,
+including source/compiled rendering equivalence and timeline/walking behavior.
+The full npm test suite and all checks after its first failure were run: the
+only failures remain the previously recorded Jarman and Leighton/Newton
+protected-geometry snapshots. These inspect the exterior before roadside lamps
+are added. Evidence and previews use Browser/artifacts/annexe-lamps-*.

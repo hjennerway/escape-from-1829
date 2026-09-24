@@ -401,3 +401,20 @@ from west-parsons-input.json, which records the four existing road centrelines
 and the nearest lane connection points. Refresh that input after moving these
 roads. Browser sources and compiled aerial models change; Unity and Blender
 exports remain unchanged.
+
+
+## Southern estate drive / Parsons junction — 24 September 2026
+
+The owner's [purple-circled screenshot](southern-parsons-marked.png) joins the
+two clipped Southern estate drive ends to the southern endpoint of Parsons Lane
+(North). A local merged asphalt surface fills the gaps and covers the three
+rounded caps. Five-unit corner rounding and continuous 0.6-unit outer kerbs
+leave all three mouths open. Existing road traces, widths and lamps are retained.
+
+Browser/build-southern-junction.py reads the current approved road traces and
+regenerates Browser/dist/southern-drive-junction.mjs using the existing Shapely 2
+road-geometry tools. The 24-unit local patch and its borders follow The Main,
+matching the drive: they appear from 1896 through 1938 at the available timeline
+stops and disappear when the historic drive is hidden. Parsons keeps its
+original endpoint when shown alone. This is a visual junction correction,
+not a change to the mapped coordinates or historical dates.

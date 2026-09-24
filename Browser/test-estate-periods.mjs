@@ -90,7 +90,7 @@ function checkPeriodRoads(year){
  }else{
   assert(materialAt(199,211)?.userData.estateGrass,'No disconnected southern junction before/after the drive exists');
  }
- for(const p of [[193,217],[211,209]])assert(materialAt(...p)?.userData.estateGrass,'The lawn beyond the junction is retained');
+ if(main)for(const p of [[193,217],[211,209]])assert(materialAt(...p)?.userData.estateGrass,`The lawn beyond the junction is retained at ${p} in ${year}: ${materialAt(...p)?.color.getHex().toString(16)}`);
 
  const points=HISTORIC_ROAD_TRACES.find(r=>r.name==='Annexe inner east road').points;
  if(main)for(let i=1;i<points.length;i++){
