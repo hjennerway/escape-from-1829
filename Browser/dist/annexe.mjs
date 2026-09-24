@@ -285,7 +285,8 @@ export function createAnnexe(THREE,{brick,roof,material,worldUV,hipRoof}){
  }
  // Open octagonal belfry, crossed base, visible bell and domed metal cap.
  const bellY=hall.h+hall.rise,bellZ=hall.z;
- solid(lead,0,bellY+.75,bellZ,2.3,1.5,2.3,'Bell tower base');
+ // Embed the whole base perimeter in both slopes while retaining the belfry top.
+ solid(lead,0,bellY+.25,bellZ,2.3,2.5,2.3,'Bell tower base');
  for(const side of [-1,1])for(const sign of [-1,1])beam([-1,bellY+.1+(sign>0?0:1.3),bellZ+side*1.18],[1,bellY+.1+(sign>0?1.3:0),bellZ+side*1.18],.11,dark,'Belfry crossed timber');
  mesh(new THREE.CylinderGeometry(1.48,1.48,.18,8),lead,0,bellY+1.65,bellZ,'Belfry lower cornice');
  for(let i=0;i<8;i++){const t=i*Math.PI/4;mesh(new THREE.CylinderGeometry(.10,.12,2.05,8),frame,1.12*Math.cos(t),bellY+2.65,bellZ+1.12*Math.sin(t),'Belfry open column');}
@@ -297,7 +298,7 @@ export function createAnnexe(THREE,{brick,roof,material,worldUV,hipRoof}){
  for(const b of ranges.filter(b=>b.h>7&&!b.name.includes('tower')&&!b.name.includes('hall')&&b.name!=='West court outer link'&&b.wardId!=='leighton-newton')){
   currentWard=b.wardId;
   currentSection=rearSection(b.name)??annexeFrontSection(b.name);
-  const [x,z]=position(b,b.w*.28,0),base=b.h+b.rise*.65,top=base+2.55;
+  const [x,z]=position(b,b.w*.28,0),top=b.h+b.rise*.65+2.55,base=b.h-.1;
   solid(brick,x,(base+top)/2,z,1.65,top-base,1,b.name+' chimney stack',b.r);
   for(const dy of [-.24,0])box(red,x,top+dy,z,1.96,.18,1.28,b.r);
   for(const dx of [-.5,0,.5]){const p=position(b,b.w*.28+dx,0);mesh(new THREE.CylinderGeometry(.13,.17,.8,8),red,p[0],top+.43,p[1],'Terracotta chimney pot');}

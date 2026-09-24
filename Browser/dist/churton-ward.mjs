@@ -119,7 +119,7 @@ export function createChurtonWard(THREE,{brick,roof,worldUV,material}){
   solid(sill,11.1,.08,-17.6,4.5,.16,1.3,'Entrance threshold');
   // Corbelled brick chimney stacks and clay pots punctuate all three roofs.
   for(const [x,z,y,w] of [[-13,-7,8.1,1.1],[-12,12,8.6,1.3],[15,-10,7.1,1.2],[17,3,7.3,1.1],[4,-6,7.4,1.2],[-1,-5,7.5,1.2]]){
-    solid(brick,x,y+.65,z,w,2.5,.85,'Churton chimney shaft');
+    solid(brick,x,y+.4,z,w,3,.85,'Churton chimney shaft');
     for(const [dy,extra] of [[1.6,.2],[1.82,.34],[1.98,.12]])box(red,x,y+dy,z,w+extra,.16,1+extra);
     for(const side of [-1,1]){mesh(new THREE.CylinderGeometry(.16,.19,.48,10),red,x+side*w*.25,y+2.25,z,'Clay chimney pot');mesh(new THREE.CircleGeometry(.12,10),dark,x+side*w*.25,y+2.495,z,'Open chimney pot').rotation.x=-Math.PI/2;}
   }

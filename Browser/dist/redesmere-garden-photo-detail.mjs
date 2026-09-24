@@ -70,6 +70,12 @@ export function addRedesmereGardenDetails(THREE,{model,box,mesh,worldUV,white,br
   }
   box(gravel,89.6,.22,23.7,20.1,.12,1.7);
   const lawn=material(0x667752);
-  box(lawn,89.7,.28,32,20,.1,14);
-  box(lawn,69.5,.28,36,14,.1,12);
+  // One continuous lawn removes the old raised-patch seams. Follow the inner
+  // walk's curved corner, the bench walk and the extended front cross-walk.
+  const garden=new THREE.Shape();
+  garden.moveTo(45,-43);garden.lineTo(99.7,-43);garden.lineTo(99.7,-25);
+  garden.lineTo(79.7,-25);garden.lineTo(79.7,-30.55);garden.lineTo(46.1,-30.55);
+  garden.quadraticCurveTo(45,-30.55,45,-31.65);garden.closePath();
+  const surface=mesh(new THREE.ShapeGeometry(garden,24),lawn,0,.33,0);
+  surface.rotation.x=-Math.PI/2;surface.name='Redesmere continuous garden lawn';
 }

@@ -105,7 +105,10 @@ export function createEscapeExterior(THREE,aspect){
   const approachEnd=FRONT_BOUNDARY.z+.5;
   const frontApproach=mesh(new THREE.BoxGeometry(3.2,.1,approachEnd-17),path,0,.13,(approachEnd+17)/2);frontApproach.name='Extended Reception approach';
   // The entrance lawns reach the boundary wall; cross-walks stop at the wings.
-  for(const [left,right] of [[-57,-29],[29,57+OUTER_SHIFT]])box(path,(left+right)/2,.13,43,right-left,.1,2);
+  for(const [left,right] of [[-57,-29],[29,45]])box(path,(left+right)/2,.13,43,right-left,.1,2);
+  // Extend the Redesmere end paving to the west apron at its existing z=44 axis.
+  const gardenWalkEnd=69+OUTER_SHIFT-3.5;
+  box(path,(45+gardenWalkEnd)/2,.16,44,gardenWalkEnd-45,.12,2);
   addEntranceWalks(THREE,{model,material});
   // Stone wall replaces the marked hedge frontage, with an open central path.
   // Stop before the saved lane turns across the frontage: retain a verge at the east tip.

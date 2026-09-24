@@ -1,5 +1,24 @@
 # KML tree and lamp placement
 
+## Oak31–Oak44 (September 24 import)
+
+`1829-13.kml` preserves the supplied `1829 (13).kml` byte-for-byte. Only
+Oak31–Oak44 Point placemarks are imported: fourteen additional oaks, bringing
+the mapped total to 72 trees (48 oaks, 14 pines, two beeches and eight willows).
+Oak34 and Oak35 share longitude/latitude; both named points and their distinct
+altitude metadata are retained. Coordinates use the existing earthToScene
+registration, with trunks on flat ground and the unchanged 22-unit oak template.
+Appending points preserves all previous placements and seeded rotations.
+
+The shared Trees layer includes these oaks in Historic, Modern and every
+timeline period, with the existing toggle and trunk collisions. Browser source
+and the local compiled aerial asset are updated; Unity/Blender exports are
+unchanged. Exact-point and all-period source/compiled preview checks pass.
+Validation logs and visual previews use `Browser/artifacts/kml-13-`.
+Existing preservation checks exclude only these added points from their older
+baselines; performance checks retain the per-oak geometry allowance.
+
+
 ## Oak22–Oak30 and Pine14 (later September 24 import)
 
 `1829-12.kml` preserves the supplied `1829 (12).kml` byte-for-byte.

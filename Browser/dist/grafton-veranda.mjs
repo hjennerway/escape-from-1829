@@ -97,7 +97,7 @@ function build(THREE,{building,brick,roof,worldUV,material,mesh,box,surface,sash
   box(brick,x-cx,12.44,-117.7-cz,1.4,.22,1.32);
  }
  const vx=242.5-cx,vz=-117.7-cz;
- box(darkWood,vx,11.45,vz,2.4,1.1,1.7);
+ mesh(worldUV(new THREE.BoxGeometry(2.4,1.1,1.7),1.7),darkWood,vx,11.45,vz,'Grafton roof ventilator base');
  for(let y=11.05;y<11.95;y+=.2)box(wood,vx,y,vz-.88,2.3,.06,.11);
  const ventTop=mesh(new THREE.ConeGeometry(2, .7,4),roof,vx,12.35,vz,'Grafton louvred roof ventilator');ventTop.rotation.y=Math.PI/4;
  return {bays:[{x:centre,z:wallZ,footprint:bay}],corner:null,conservatory:null,

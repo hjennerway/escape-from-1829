@@ -47,7 +47,226 @@ PASS: fixed church/Churton/Grafton, retained frontage orientation, aerial plan s
 PASS: annexe OS registration and scale, independent Redesmere alignment, open courts, roofs, arched glazing, bell tower and walking collisions.
 PASS: L-shaped courts, removed galleries, connected angled rear wing and retained west bay and paired stairs.
 PASS: orange, purple and brown OS courtyard picks are free of masonry and roofs.
-PASS: Larkton removal, paving contact, green courtyard, open full-width Parsons connection, walking clearance, timeline and 18,942 protected primitives.
-PASS: complete wing translation, unchanged neighbouring wards, recessed doors, low room and walking clearance.
-PASS: 19581 untouched primitives; two high tower sashes, removed bay, exact canted conservatory shape, stepped footprint, three reflected hall dormers, exposed glazing, roof normals, collisions and Historic visibility.
-PASS: 294 tower primitives shortened exactly 15%; new roof shortened 15%; 130 conservatory primitives exact; extended low roof/wall, visible windows and collision coverage.
+node:internal/modules/run_main:107
+    triggerUncaughtException(
+    ^
+
+AssertionError [ERR_ASSERTION]: Expected values to be strictly deep-equal:
++ actual - expected
+... Skipped lines
+
+  {
+    count: 17965,
+    root: [
+      -0.3967056614036031,
+      0,
+...
+    ],
++   sha256: '7ab636e322fb54bd7fda4f989c468843cb71a31f540a746241926d24a35c6318'
+-   sha256: '4165ea4cf5f83fd5d9e69429c86eb34a555c9c2400cafe43a1c1b28b1fa295b2'
+  }
+
+    at file:///C:/Users/Harry/Documents/_escape-from-1829/Browser/artifacts/check-larkton-original.mjs:7:8
+    at ModuleJob.run (node:internal/modules/esm/module_job:561:25)
+    at async node:internal/modules/esm/loader:647:26
+    at async asyncRunEntryPointWithESMLoader (node:internal/modules/run_main:101:5) {
+  generatedMessage: true,
+  code: 'ERR_ASSERTION',
+  actual: {
+    count: 17965,
+    sha256: '7ab636e322fb54bd7fda4f989c468843cb71a31f540a746241926d24a35c6318',
+    root: [
+       -0.3967056614036031,   0,
+       0.38210634411159655,   0,
+                         0, 0.9,
+                         0,   0,
+      -0.38210634411159655,   0,
+       -0.3967056614036031,   0,
+         364.7804974623198,   0,
+        -9.106516776244462,   1
+    ]
+  },
+  expected: {
+    count: 17965,
+    sha256: '4165ea4cf5f83fd5d9e69429c86eb34a555c9c2400cafe43a1c1b28b1fa295b2',
+    root: [
+       -0.3967056614036031,   0,
+       0.38210634411159655,   0,
+                         0, 0.9,
+                         0,   0,
+      -0.38210634411159655,   0,
+       -0.3967056614036031,   0,
+         364.7804974623198,   0,
+        -9.106516776244462,   1
+    ]
+  },
+  operator: 'deepStrictEqual',
+  diff: 'simple'
+}
+
+Node.js v24.20.0
+node:internal/errors:986
+  const err = new Error(message);
+              ^
+
+Error: Command failed: C:\Program Files\nodejs\node.exe --import file:///C:/Users/Harry/Documents/_escape-from-1829/Browser/artifacts/larkton-original-entrance-loader.mjs C:\Users\Harry\Documents\_escape-from-1829\Browser\artifacts\check-larkton-original.mjs
+node:internal/modules/run_main:107
+
+    triggerUncaughtException(
+
+    ^
+
+
+
+AssertionError [ERR_ASSERTION]: Expected values to be strictly deep-equal:
+
++ actual - expected
+
+... Skipped lines
+
+
+
+  {
+
+    count: 17965,
+
+    root: [
+
+      -0.3967056614036031,
+
+      0,
+
+...
+
+    ],
+
++   sha256: '7ab636e322fb54bd7fda4f989c468843cb71a31f540a746241926d24a35c6318'
+
+-   sha256: '4165ea4cf5f83fd5d9e69429c86eb34a555c9c2400cafe43a1c1b28b1fa295b2'
+
+  }
+
+
+
+    at file:///C:/Users/Harry/Documents/_escape-from-1829/Browser/artifacts/check-larkton-original.mjs:7:8
+
+    at ModuleJob.run (node:internal/modules/esm/module_job:561:25)
+
+    at async node:internal/modules/esm/loader:647:26
+
+    at async asyncRunEntryPointWithESMLoader (node:internal/modules/run_main:101:5) {
+
+  generatedMessage: true,
+
+  code: 'ERR_ASSERTION',
+
+  actual: {
+
+    count: 17965,
+
+    sha256: '7ab636e322fb54bd7fda4f989c468843cb71a31f540a746241926d24a35c6318',
+
+    root: [
+
+       -0.3967056614036031,   0,
+
+       0.38210634411159655,   0,
+
+                         0, 0.9,
+
+                         0,   0,
+
+      -0.38210634411159655,   0,
+
+       -0.3967056614036031,   0,
+
+         364.7804974623198,   0,
+
+        -9.106516776244462,   1
+
+    ]
+
+  },
+
+  expected: {
+
+    count: 17965,
+
+    sha256: '4165ea4cf5f83fd5d9e69429c86eb34a555c9c2400cafe43a1c1b28b1fa295b2',
+
+    root: [
+
+       -0.3967056614036031,   0,
+
+       0.38210634411159655,   0,
+
+                         0, 0.9,
+
+                         0,   0,
+
+      -0.38210634411159655,   0,
+
+       -0.3967056614036031,   0,
+
+         364.7804974623198,   0,
+
+        -9.106516776244462,   1
+
+    ]
+
+  },
+
+  operator: 'deepStrictEqual',
+
+  diff: 'simple'
+
+}
+
+
+
+Node.js v24.20.0
+
+
+    at genericNodeError (node:internal/errors:986:15)
+    at wrappedFn (node:internal/errors:540:14)
+    at checkExecSyncError (node:child_process:942:11)
+    at execFileSync (node:child_process:978:15)
+    at file:///C:/Users/Harry/Documents/_escape-from-1829/Browser/test-larkton.mjs:19:1
+    at ModuleJob.run (node:internal/modules/esm/module_job:561:25)
+    at async node:internal/modules/esm/loader:647:26
+    at async asyncRunEntryPointWithESMLoader (node:internal/modules/run_main:101:5) {
+  status: 1,
+  signal: null,
+  output: [
+    null,
+    Buffer(0) [Uint8Array] [],
+    Buffer(1714) [Uint8Array] [
+      110, 111, 100, 101,  58, 105, 110, 116, 101, 114, 110,  97,
+      108,  47, 109, 111, 100, 117, 108, 101, 115,  47, 114, 117,
+      110,  95, 109,  97, 105, 110,  58,  49,  48,  55,  13,  10,
+       32,  32,  32,  32, 116, 114, 105, 103, 103, 101, 114,  85,
+      110,  99,  97, 117, 103, 104, 116,  69, 120,  99, 101, 112,
+      116, 105, 111, 110,  40,  13,  10,  32,  32,  32,  32,  94,
+       13,  10,  13,  10,  65, 115, 115, 101, 114, 116, 105, 111,
+      110,  69, 114, 114, 111, 114,  32,  91,  69,  82,  82,  95,
+       65,  83,  83,  69,
+      ... 1614 more items
+    ]
+  ],
+  pid: 24164,
+  stdout: Buffer(0) [Uint8Array] [],
+  stderr: Buffer(1714) [Uint8Array] [
+    110, 111, 100, 101,  58, 105, 110, 116, 101, 114, 110,  97,
+    108,  47, 109, 111, 100, 117, 108, 101, 115,  47, 114, 117,
+    110,  95, 109,  97, 105, 110,  58,  49,  48,  55,  13,  10,
+     32,  32,  32,  32, 116, 114, 105, 103, 103, 101, 114,  85,
+    110,  99,  97, 117, 103, 104, 116,  69, 120,  99, 101, 112,
+    116, 105, 111, 110,  40,  13,  10,  32,  32,  32,  32,  94,
+     13,  10,  13,  10,  65, 115, 115, 101, 114, 116, 105, 111,
+    110,  69, 114, 114, 111, 114,  32,  91,  69,  82,  82,  95,
+     65,  83,  83,  69,
+    ... 1614 more items
+  ]
+}
+
+Node.js v24.20.0

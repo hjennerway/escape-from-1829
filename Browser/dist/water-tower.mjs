@@ -215,7 +215,7 @@ export function createWaterTower(THREE,{brick,roof,dark,worldUV}){
   const corners=[[-a,eave,-a],[-a,eave,a],[a,eave,a],[a,eave,-a]];
   for(let i=0;i<4;i++)for(const p of [corners[i],corners[(i+1)%4],[0,peak,0]]){positions.push(...p);uv.push(p[0]/3,(p[2]+p[1])/3);}
   const g=new THREE.BufferGeometry();g.setAttribute('position',new THREE.Float32BufferAttribute(positions,3));g.setAttribute('uv',new THREE.Float32BufferAttribute(uv,2));g.computeVertexNormals();mesh(g,cap,0,0,0,tower,'Pyramidal slate roof');
-  mesh(new THREE.CylinderGeometry(.09,.17,.6,8),dark,0,38.55,0);
+  mesh(new THREE.CylinderGeometry(.09,.17,.8,8),dark,0,38.45,0,tower,'Water tower roof finial');
   mesh(new THREE.SphereGeometry(.13,8,6),dark,0,38.92,0);
   // Merge small details per face/material, preserving world-scale brick UVs
   // and named openings while avoiding a draw call for every mortar joint.

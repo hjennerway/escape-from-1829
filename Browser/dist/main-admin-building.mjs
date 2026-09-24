@@ -245,8 +245,8 @@ export function createMainAdminBuilding(THREE,{brick,roof,worldUV,material}){
   mesh(new THREE.SphereGeometry(.64,12,10),pale,0,15.35,front+.59,'Pediment crest shield').scale.set(.8,1.15,.24);
   for(const side of [-1,1])for(let i=0;i<4;i++)mesh(new THREE.SphereGeometry(.19,8,6),stone,side*(.6+i*.12),15.65-i*.27,front+.55,'Pediment carved foliage');
   // Broad, tall chimney stacks are a defining feature in all four photographs.
-  for(const [x,z,w,d,top] of [[west.x-5.3,7,2.9,2.2,21.3],[west.x+2,-3,2.3,1.6,20.6],[-21,3,2.5,1.5,21.7],[-9,3,2.5,1.55,21.5],[0,2,2.6,1.55,22],[12,3,2.5,1.55,21.3],[east.x+east.w/2-1.05,10,2.65,3.2,21.9],[east.x+east.w/2-1.05,-1,2.65,3.2,21.5]]){
-    solid(brick,x,(top+14.1)/2,z,w,top-14.1,d,'Tall admin chimney stack');
+  for(const [x,z,w,d,top] of [[west.x-5.3,7,2.9,2.2,21.3],[west.x+2,-3,2.3,1.6,20.6],[-21,3,2.5,1.5,21.7],[-9,3,2.5,1.55,21.5],[0,2,2.6,1.55,22],[12,3,2.5,1.55,21.3],[east.x+east.w/2-1.45,10,2.65,3.2,21.9],[east.x+east.w/2-1.45,-1,2.65,3.2,21.5]]){
+    solid(brick,x,(top+13.4)/2,z,w,top-13.4,d,'Tall admin chimney stack');
     for(const [offset,extra] of [[-.42,.12],[-.17,.28],[0,.18]])box(offset===0?dark:red,x,top+offset,z,w+extra,.17,d+extra);
   }
   for(const x of [-23,-9,9,23])box(dark,x,7,front+.24,.08,13.8,.09);

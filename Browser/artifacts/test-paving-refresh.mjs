@@ -1,0 +1,13 @@
+import assert from 'node:assert/strict';
+import {execFileSync} from 'node:child_process';
+import {readFileSync,writeFileSync} from 'node:fs';
+const run=args=>JSON.parse(execFileSync(process.execPath,args,{encoding:'utf8',windowsHide:true,maxBuffer:1024*1024}));
+const before=run(['--import','./Browser/artifacts/test-paving-before-loader.mjs','Browser/artifacts/test-paving-snapshots.mjs']);
+const after=run(['Browser/artifacts/test-paving-snapshots.mjs']);
+const jarmanPath='Research/jarman/protected-geometry.json',leightonPath='Research/leighton-newton/protected-before.json';
+const jarman=JSON.parse(readFileSync(jarmanPath)),leighton=JSON.parse(readFileSync(leightonPath));
+assert.deepEqual(before.jarman,jarman,'Pre-paving scene must reproduce the saved Jarman baseline exactly');
+assert.deepEqual(before.leighton,leighton.geometry,'Pre-paving scene must reproduce the saved Leighton baseline exactly');
+writeFileSync(jarmanPath,JSON.stringify(after.jarman,null,2)+'\n');
+leighton.geometry=after.leighton;writeFileSync(leightonPath,JSON.stringify(leighton,null,2)+'\n');
+console.log(JSON.stringify({before,after},null,2));

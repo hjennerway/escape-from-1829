@@ -86,13 +86,13 @@ export function addRedesmerePhotoDetails(THREE,{model,box,mesh,worldUV,white,bri
   // Brick stacks and restrained ridge ventilators, omitting modern aerials.
   for(const [z,x,w,h] of [[-3.9,90.2,2.8,2.25],[-20.5,90,1.2,2.6],[-23.8,92,1,3.5],[5.5,89.2,1.4,1.7]]){
     const base=11.05;
-    mesh(worldUV(new THREE.BoxGeometry(.95,h,w),1.7),brick,x,base+h/2,z,true).name='Redesmere chimney stack';
+    mesh(worldUV(new THREE.BoxGeometry(.95,h+.45,w),1.7),brick,x,base+h/2-.225,z,true).name='Redesmere chimney stack';
     for(const offset of [0,.23])box(brick,x,base+h+offset,z,1.13,.14,w+.18);
     const pots=Math.max(2,Math.round(w/.45));
     for(let i=0;i<pots;i++)mesh(new THREE.CylinderGeometry(.105,.14,.48,8),brick,x,base+h+.52,z-w*.38+i*w*.76/(pots-1),true);
   }
   for(const z of [-8,-16]){
-    box(slate,89.2,12.35,z,1.2,.55,2);
+    mesh(worldUV(new THREE.BoxGeometry(1.2,.55,2),1.7),slate,89.2,12.35,z,true).name='Redesmere roof ventilator base';
     hipRoof(89.2,z,1.3,2.1,12.65,.35);
   }
 

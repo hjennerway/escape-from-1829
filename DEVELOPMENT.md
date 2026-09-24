@@ -1,3 +1,20 @@
+## Oak31–Oak44 import (24 September 2026)
+
+Imported all fourteen requested Point placemarks from `1829 (13).kml` into
+Historic, Modern and every timeline period through the shared Trees layer.
+Exact positions, earlier rotations, tree visibility and collisions are preserved.
+Oak34/Oak35 intentionally retain their shared map position from the source.
+See [tree source and modelling notes](Research/kml-trees/README.md).
+
+Browser sources and the local compiled aerial asset are updated; Unity and
+Blender exports are unchanged. Validation artifacts use `Browser/artifacts/kml-13-`.
+Exact KML/period/collision, Modern tree retention, shared-buffer/performance,
+source/compiled comparison and timeline browser checks pass. Source 1829 and
+compiled 2021 previews were visually inspected. The full suite was attempted
+and stopped at a Larkton preservation snapshot mismatch in the shared working
+project; a separate Jarman preservation check also reports a hash mismatch
+with unchanged primitive count. Those unrelated snapshots were not rebased.
+
 ## Oak22–Oak30 and Pine14 import (24 September 2026)
 
 Imported ten new tree Point locations from `1829 (12).kml` onto the shared
@@ -2395,3 +2412,87 @@ and polygon checks find no asphalt overlap with walls, existing carriageways or
 the new border. The final compiled source fingerprint matches the browser files.
 Evidence: Browser/artifacts/rear-roads-{suite,build,compiled}.log and
 rear-roads-final-{source,compiled}.jpg.
+
+## Roof attachment contact audit — 24 September 2026
+
+Extended the annexe belfry plinth into both slopes and lowered annexe chimney
+bases below their host eaves, retaining all chimney tops, pots and caps.
+Churton and Redesmere shafts likewise extend down to eliminate exposed bottom
+edges. Main/admin stacks now start at 13.4; its two eastern stacks move inward
+0.4 so their complete footprints sit over the roof. The water-tower finial
+extends 0.2 into its pyramidal roof while retaining its top height. The two
+previously unnamed ventilator bases are named meshes for contact inspection;
+their geometry and positions are unchanged.
+
+`test-roof-contacts.mjs` checks 106 attachments at 3,816 perimeter samples,
+including the annexe belfry, chimney families, dormer cheeks, ventilator bases
+and water-tower finial. Ground-supported freestanding chimneys and external
+flue breasts are intentionally outside this roof-contact test. The existing
+tower-building tests retain their fitted blue-dormer checks. Historical geometry
+fingerprints were refreshed only after the pre-repair loader reproduced their
+saved values; the refresh scripts and changed-key report are under
+`Browser/artifacts/roof-contact-*`.
+
+All browser-suite checks pass (the initial npm run followed by all remaining
+checks after the east-wing snapshot refresh). The compiled model was rebuilt;
+source/compiled geometry and rendering comparisons, full-detail/fallback loading
+and every timeline/walking check pass. Seven source and compiled close views
+were rendered without page errors, and the final roof contacts were visually
+inspected. Evidence: `roof-contact-suite.log`, `roof-contact-remaining.json`,
+`roof-contact-build.log`, `roof-contact-compiled.log` and `roof-contact-review.jpg`
+in Browser/artifacts. Repairs happen during construction before batching and
+shadow rendering. Browser sources and compiled aerial assets are updated;
+Unity and Blender exports were not regenerated.
+
+## Aerial performance test planting counts (24 September 2026)
+
+The CI modelling check retained a 60-tree expectation after Oak31–Oak44 added
+fourteen oaks. The performance test now derives its total and species counts
+from the mapped planting plus the two photo-positioned front-lawn beeches
+(currently 72 + 2 = 74). Exact source-KML verification remains in
+`test-kml-imports.mjs`. The distant geometry budget uses the same existing
+per-oak, per-pine and per-willow allowances, calculated from imported counts;
+shared buffers, LOD, layout surfaces and transform checks remain enforced.
+
+Validation on Windows with Node 24.20.0 and installed Chrome: `npm test`,
+`npm run test:models`, `npm run test:mobile`, `npm run test:photos`,
+`npm run test:landing`, and the three standalone annexe/new-hospital checks
+pass. The local models were rebuilt and the source/compiled comparison,
+full-detail loading, fallback cases and browser timeline checks passed.
+This fix changes test logic only; it does not change modelling source or
+Unity/Blender exports. Existing concurrent model and snapshot edits were
+preserved during validation.
+
+Concurrent paving work subsequently refreshed the shared compiled asset. Its
+source fingerprint matches the current workspace; the 106-attachment perimeter
+check also passes on that current scene. The final compiled comparison is
+recorded separately in `Browser/artifacts/roof-contact-final-compiled.log`.
+
+The final full-suite rerun detected two estate-wide fingerprints made stale by
+concurrent garden paving edits. Before refreshing Jarman and Leighton/Newton,
+`Browser/artifacts/test-paving-refresh.mjs` loaded only the three paving modules
+from HEAD and reproduced both saved fingerprints exactly, while retaining all
+other current model changes. The current scene has one fewer primitive in each
+scope. Only the geometry fingerprints were refreshed; Leighton placement and
+all explicit geometry, collision and window assertions remain unchanged.
+The full run through the first failure is recorded in
+`Browser/artifacts/test-suite-verification.log`; the resumed checks start at
+Jarman in `Browser/artifacts/test-suite-remaining.log`.
+
+## Redesmere garden paving — 24 September 2026
+
+Removed the two red-marked asphalt remnants, replaced the raised lawn patches
+with one continuous grass surface, and extended the right-hand paving along
+its existing axis and width to the left wing apron. The lawn follows the
+curved inner-path corner and meets the new cross-walk without the old seam.
+See Research/redesmere-garden/README.md and its saved owner annotation.
+
+The shared browser sources and local compiled aerial model are updated;
+Unity and Blender exports were not regenerated. Source and compiled garden
+views were visually inspected. Compiled/source rendering, full-detail and
+fallback loading, every timeline stop and live walking collision refresh pass.
+Whole-estate geometry snapshots were checked against the pre-edit source before
+refreshing the values affected by the intentionally removed garden surfaces.
+Validation evidence uses Browser/artifacts/garden-paving-*.
+
+Final validation: the full Browser npm test suite and npm run test:compiled pass.

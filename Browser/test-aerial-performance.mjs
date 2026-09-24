@@ -5,13 +5,17 @@ import {createAerialLayouts} from './dist/aerial-layouts.mjs';
 import {batchAerialMeshes,cacheAerialTransforms} from './dist/aerial-performance.mjs';
 import {sampleLanding} from './dist/aerial-controls.mjs';
 import {updateRoadLabels} from './dist/road-labels.mjs';
+import {KML_TREES,KML_PINE_TREES,KML_OAK_TREES,KML_BEECH_TREES,KML_WILLOW_TREES} from './dist/kml-tree-data.mjs';
+import {FRONT_LAWN_TREES} from './dist/front-lawn-trees.mjs';
 
 globalThis.document={createElement:()=>({getContext:()=>({fillRect(){},measureText(text){return {width:text.length*16};},strokeText(){},fillText(){}})})};
 const exterior=createEscapeExterior(THREE,16/9),layouts=createAerialLayouts(THREE,exterior);
 const trees=exterior.trees.children.filter(o=>o.userData.adminPineTree||o.userData.beechTree||o.userData.oakTree||o.userData.willowTree);
-assert.equal(trees.length,60);
+assert.equal(trees.length,KML_TREES.length+FRONT_LAWN_TREES.length,'Every mapped and photo-positioned tree is present');
+const expectedFamilies={adminPineTree:KML_PINE_TREES.length,beechTree:KML_BEECH_TREES.length+FRONT_LAWN_TREES.length,oakTree:KML_OAK_TREES.length,willowTree:KML_WILLOW_TREES.length};
 for(const key of ['adminPineTree','beechTree','oakTree','willowTree']){
   const family=trees.filter(o=>o.userData[key]),template=family[0],templateMeshes=[];
+  assert.equal(family.length,expectedFamilies[key],`${key} count matches the planting data`);
   template.traverse(o=>{if(o.isMesh)templateMeshes.push(o);});
   for(const [index,tree] of family.entries()){
     const meshes=[];tree.traverse(o=>{if(o.isMesh)meshes.push(o);});
@@ -71,8 +75,11 @@ for(const [object,matrix] of matrices)assert(object.matrixWorld.equals(matrix));
 const shot=sampleLanding(0);camera.position.set(...shot.position);camera.lookAt(...shot.target);camera.updateMatrixWorld();
 exterior.trees.traverse(o=>{if(o.isLOD)o.update(camera);});
 let treeTriangles=0;exterior.trees.traverseVisible(o=>{if(o.isMesh)treeTriangles+=(o.geometry.index?.count??o.geometry.attributes.position.count)/3*(o.isInstancedMesh?o.count:1);});
-// Added KML oaks allow 11k triangles each at distant detail; Pine14 allows 10k.
-assert(treeTriangles<180000+32*11000+3*10000+8*6500,'Distant trees should submit substantially less geometry');
+// The original budget covers two oaks and eleven pines; retain the existing
+// per-copy allowances as the mapped planting grows. Exact imports are checked
+// independently against the source KML in test-kml-imports.mjs.
+const treeTriangleBudget=180000+(KML_OAK_TREES.length-2)*11000+(KML_PINE_TREES.length-11)*10000+KML_WILLOW_TREES.length*6500;
+assert(treeTriangles<treeTriangleBudget,'Distant trees should submit substantially less geometry');
 updateRoadLabels(THREE,layouts.roads,camera,1300,900);exterior.scene.updateMatrixWorld();
 let labels=0;layouts.roads.traverseVisible(o=>{if(o.isSprite){labels++;assert(o.matrixAutoUpdate);assert(o.matrixWorld.elements.every(Number.isFinite));assert(o.scale.y<.1);}});
 assert(labels>0,'Camera-facing labels remain dynamic after static transform caching');
