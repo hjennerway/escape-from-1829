@@ -1,0 +1,11 @@
+Both Jarman and Leighton protected geometry fingerprints are identical with the original HEAD lamp implementation restored in memory. Their snapshot mismatches are independent of the day/night change.
+[
+  {
+    "primitives": 859427,
+    "sha256": "7bf04b4a1f26f45422069f4882f6bf12bcf912549979e0bd1ae66a4722912f2b"
+  },
+  {
+    "count": 923474,
+    "sha256": "212beae7e7bbbe72e31ec8e35ee90e938e04c4ef6e4e8aa716f2d046a1fd5df9"
+  }
+]

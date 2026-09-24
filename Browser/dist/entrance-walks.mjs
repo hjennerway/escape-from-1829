@@ -44,6 +44,9 @@ export function addEntranceWalks(THREE,{model,material}){
   // Sit just above the old small front strips, avoiding a patchwork of colours.
   paving(polygon([[-27,43],[-29,43],[-47,43],[-47,48.6],[-27,48.6]]),
     'West wing path to fire exit stairs',.28);
+  // Continue around the outer garden edge from the west apron to the stair walk.
+  paving(polygon([[-72.5,42.5],[-47,42.5],[-47,43],[-46.9,43],
+    [-46.9,45],[-72.5,45]]),'West garden outer return path',.28);
   const east=new THREE.Shape();
   east.moveTo(27,-43);east.lineTo(41,-43);east.lineTo(41,-19.6);
   east.lineTo(45,-19.6);east.lineTo(45,-27.4);

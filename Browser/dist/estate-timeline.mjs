@@ -1,7 +1,8 @@
+import {addRoadsideLampPosts} from './street-lamps.mjs';
 import {addAnnexePeriodOaks} from './annexe-period-oaks.mjs';
 import {existsInYear,periodForYear,roadSection,historicSurfaceSection,DEFAULT_PERIOD} from './estate-periods.mjs';
 
-export const ESTATE_TIMELINE_VERSION=5;
+export const ESTATE_TIMELINE_VERSION=6;
 
 // Split triangles at the eastern ward boundary, interpolating every vertex
 // attribute so masonry UVs, normals and the full-period silhouette survive.
@@ -204,6 +205,7 @@ export function prepareEstateTimeline(THREE,exterior,layouts){
  }
  for(const object of [...layouts.shared.children])partition(object);
  addOpeningEastWall(THREE,exterior,layouts.shared);
+ addRoadsideLampPosts(THREE,exterior,layouts);
  exterior.model.userData.timelinePrepared=ESTATE_TIMELINE_VERSION;
  return attachEstateTimeline(exterior,layouts);
 }

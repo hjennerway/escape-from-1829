@@ -1,0 +1,16 @@
+node:internal/fs/promises:1345
+  return new FileHandle(await PromisePrototypeThen(
+                        ^
+
+Error: UNKNOWN: unknown error, open 'C:\Users\Harry\Documents\_escape-from-1829\Browser\artifacts\timeline-1870.png'
+    at async open (node:internal/fs/promises:1345:25)
+    at async Object.writeFile (node:internal/fs/promises:1965:14)
+    at async _Page.screenshot (C:\Users\Harry\Documents\_escape-from-1829\Browser\node_modules\playwright-core\lib\coreBundle.js:61797:11)
+    at async file:///C:/Users/Harry/Documents/_escape-from-1829/Browser/test-timeline-browser.mjs:100:75 {
+  errno: -4094,
+  code: 'UNKNOWN',
+  syscall: 'open',
+  path: 'C:\\Users\\Harry\\Documents\\_escape-from-1829\\Browser\\artifacts\\timeline-1870.png'
+}
+
+Node.js v24.20.0

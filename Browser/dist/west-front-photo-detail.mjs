@@ -74,13 +74,8 @@ export function addWestFrontPhotoDetails(THREE,{model,box,mesh,worldUV,white,bri
   const lawn=material(0x667b49);
   box(lawn,-57.7,.32,34,22.5,.1,17);
   box(material(0x99917b),-46.1,.41,33.5,1.55,.1,18);
-  // Railings edge the short approach to the garden's glazed blue entrance.
+  // The garden's glazed blue entrance has an open, unrailed approach.
   door(-43.6,19.59,0);
-  for(const z of [22.15,24.2]){
-    rod([-47.2,1.15,z],[-42.25,1.15,z],.035,stone);
-    rod([-47.2,.66,z],[-42.25,.66,z],.027,stone);
-    for(const x of [-47.2,-44.8,-42.25])rod([x,.18,z],[x,1.18,z],.04,stone);
-  }
   model.userData.westFrontPhotoOpenings=model.userData.eastPhotoOpenings.slice(start);
 }
 

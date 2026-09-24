@@ -1,0 +1,101 @@
+{
+  "build": {
+    "mode": "procedural",
+    "milliseconds": 1228.5999999999767
+  },
+  "access": {
+    "source": "Research/historic-roads/annexe-entrance-revision.png",
+    "frontage": 269.0180967990692,
+    "sweepWidthScale": 0.16,
+    "entranceWidth": 8.608579097570216,
+    "entranceMouthWidth": 52.72754697261757,
+    "forecourtWidth": 30.62916885242419,
+    "centreX": 5.104861475404004,
+    "sweepShiftZ": 0,
+    "entranceZ": 64,
+    "forecourtRearZ": 33.060055269283176,
+    "avenueZ": 116.04642255728288,
+    "rearRemovalSource": "Research/annexe-frontage-adjustment/remove-rear-roads.png",
+    "sweepRevisionSource": "Research/annexe-frontage-adjustment/narrow-entrance.png",
+    "frontageInfillSource": "Research/annexe-frontage-adjustment/front-paving-gaps.png",
+    "alignmentSource": "Research/annexe-frontage-adjustment/entrance-alignment-reference.png",
+    "flareReference": "Research/historic-roads/annexe-frontage-junction-marked.png",
+    "note": "The apron remains on the doorway axis. The latest red edges replace the elongated flare with two quarter circles meeting the orange frontage road. Frontage side approaches and rear access roads remain removed."
+  },
+  "groups": [
+    {
+      "name": "Street lamps · Annexe front avenue",
+      "fixtures": [
+        {
+          "x": 283.92142463114925,
+          "z": -33.24912893283066,
+          "angle": -0.8041415924791988,
+          "local": [
+            72.89753944444924,
+            122.50067092329614
+          ]
+        },
+        {
+          "x": 312.9823792844294,
+          "z": -50.27196423864546,
+          "angle": 2.3374510611105945,
+          "local": [
+            19.40084716480514,
+            109.59217419127032
+          ]
+        },
+        {
+          "x": 336.56286894409726,
+          "z": -72.98465924868765,
+          "angle": 2.3374510611105945,
+          "local": [
+            -34.095845114838895,
+            109.59217419127062
+          ]
+        }
+      ]
+    }
+  ],
+  "paving": [
+    {
+      "name": "Annexe central asphalt forecourt",
+      "surface": "asphalt apron",
+      "points": [
+        [
+          358.52692258514776,
+          -29.109366281279854
+        ],
+        [
+          345.39097906507106,
+          -42.74720099037978
+        ],
+        [
+          331.8901294119115,
+          -29.743201286628018
+        ],
+        [
+          345.02607293198827,
+          -16.105366577528084
+        ]
+      ],
+      "pixels": [
+        [
+          510.02321485017285,
+          192.1908737204658
+        ],
+        [
+          449.95504498739075,
+          312.7870178637363
+        ],
+        [
+          612.2894470917851,
+          364.0065992915816
+        ],
+        [
+          661.3184056155937,
+          235.7350018942282
+        ]
+      ]
+    }
+  ]
+}

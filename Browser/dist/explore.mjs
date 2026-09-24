@@ -1,3 +1,4 @@
+import {createDayNight,bindDayNight} from './day-night.mjs';
 import {resolveLocationView,LOCATION_WALKS} from './location-views.mjs';
 import {bindTreeToggle} from './tree-layer.mjs';
 import {CHURTON_VIEWS} from './churton-ward.mjs';
@@ -123,7 +124,8 @@ try{
   if(CHURTON_VIEWS[churtonView])walker.setView(CHURTON_VIEWS[churtonView==='churton'||churtonView==='churton-plan'?'churton-4':churtonView]);
   const input=bindExploreInput(walker,{canvas,hint,look,touchControls:document.getElementById('walkTouch')});
   window.addEventListener('resize',()=>{renderer.setSize(innerWidth,innerHeight);exterior.camera.aspect=innerWidth/innerHeight;if(view==='inner-east-photo')exterior.camera.fov=innerEastPhotoView(exterior.camera.aspect).fov;if(view==='central-court-photo')exterior.camera.fov=centralCourtPhotoView(exterior.camera.aspect).fov;exterior.camera.updateProjectionMatrix();});
+  const lighting=createDayNight(THREE,exterior,renderer,{walking:true});bindDayNight(lighting);
   const clock=new THREE.Clock();
-  renderer.setAnimationLoop(()=>{const dt=clock.getDelta();if(input.active&&!document.hidden)walker.update(dt);renderer.render(exterior.scene,exterior.camera);});
+  renderer.setAnimationLoop(()=>{const dt=clock.getDelta();if(input.active&&!document.hidden)walker.update(dt);lighting.update();renderer.render(exterior.scene,exterior.camera);});
   loadEscapeFrontage(THREE,exterior).catch(error=>console.warn('Frontage photo unavailable',error));
 }catch(error){console.error(error);hint.textContent='The grounds could not load. Reload the page to try again.';look.disabled=false;look.textContent='RELOAD ↗';look.onclick=()=>location.reload();}

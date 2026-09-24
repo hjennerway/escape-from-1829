@@ -1,14 +1,16 @@
 <!doctype html>
-<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>1829 · Aerial view</title><link rel="stylesheet" href="./style.css"><style>#previewNav{position:fixed;left:24px;top:24px;z-index:31;font:10px Arial;letter-spacing:2px;color:#e4e8db;text-shadow:0 2px 6px #000}#previewNav a{color:inherit}#aerialHelp{position:fixed;bottom:18px;left:24px;right:24px;z-index:31;font:11px/1.8 Arial;color:#e4e8db;text-shadow:0 2px 6px #000}#resetAerial{background:#17211ae8;padding:8px 12px;margin-left:8px}#previewNav{right:24px;line-height:1.8}@media(max-width:650px){#previewNav{right:20px;top:24px}#aerialHelp{font-size:10px}}</style><link rel="stylesheet" href="./aerial-layouts.css"><link rel="stylesheet" href="./aerial-locations.css"><link rel="stylesheet" href="./device-location.css"><link rel="stylesheet" href="./building-photos.css"></head>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>1829 · Aerial view</title><link rel="stylesheet" href="./style.css"><style>#previewNav{position:fixed;left:24px;top:24px;z-index:31;font:10px Arial;letter-spacing:2px;color:#e4e8db;text-shadow:0 2px 6px #000}#previewNav a{color:inherit}#aerialHelp{position:fixed;bottom:18px;left:24px;right:24px;z-index:31;font:11px/1.8 Arial;color:#e4e8db;text-shadow:0 2px 6px #000}#previewNav{right:24px;line-height:1.8}@media(max-width:650px){#previewNav{right:20px;top:24px}#aerialHelp{font-size:10px}}</style><link rel="stylesheet" href="./aerial-layouts.css"><link rel="stylesheet" href="./aerial-locations.css"><link rel="stylesheet" href="./device-location.css"><link rel="stylesheet" href="./building-photos.css"><link rel="stylesheet" href="./day-night.css"></head>
 <body><canvas id="game" aria-label="Aerial 3D view of the 1829 estate"></canvas>
 
 <nav id="previewNav" aria-label="Aerial navigation">
   <a id="backToIntro" href="./">← Back to intro</a>
+  <button id="dayNightToggle" type="button" aria-label="Day mode. Switch to night" aria-pressed="false" title="Switch to night"><span class="day-glyph" aria-hidden="true">☀</span><span class="night-glyph" aria-hidden="true">☾</span></button>
   <div id="locationsPicker">
     <button id="deviceLocationButton" type="button" aria-label="Show my location" title="Show my location" aria-describedby="deviceLocationStatus" disabled>
       <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="7"/><circle cx="12" cy="12" r="2"/><path d="M12 2v4m0 12v4M2 12h4m12 0h4"/></svg>
     </button>
     <button id="locationsButton" type="button" aria-label="Locations" aria-expanded="false" aria-controls="locationsPanel">Locations</button>
+    <button id="resetAerial" type="button">Reset</button>
     <div id="locationsPanel" hidden><ul>
       <li><a href="?view=acton">1829: Acton Ward (Centre)</a></li>
       <li><a href="?view=barton">1829: Barton Ward (East wing)</a></li>
@@ -66,12 +68,13 @@
   <div id="periodTicks" aria-hidden="true"></div><div class="period-endpoints" aria-hidden="true"><span>1829</span><span>2021</span></div>
   <p id="periodDescription"></p><p id="periodNote" hidden></p>
 </details>
-<div id="aerialHelp"><span class="desktop-aerial-help">Hover a building for photos · Drag to orbit · Right-drag to pan · WASD to move · Scroll to zoom · T to show/hide trees</span><span class="touch-aerial-help">Tap a building for photos · One finger to orbit · Pinch to zoom · Two fingers to pan</span> · <button id="resetAerial">RESET VIEW</button></div>
+<div id="aerialHelp"><span class="desktop-aerial-help">Hover a building for photos · Drag to orbit · Right-drag to pan · WASD to move · Scroll to zoom · T to show/hide trees</span><span class="touch-aerial-help">Tap a building for photos · One finger to orbit · Pinch to zoom · Two fingers to pan</span></div>
 <script type="module" src="./aerial-locations.mjs"></script>
 <script type="module">
 import {resolveLocationView,LOCATION_VIEWS} from './location-views.mjs';
 import {TOWER_BUILDING_VIEWS} from './tower-buildings.mjs';
 import {ADMIN_ANNEXE_PHOTO_VIEW} from './historic-roads.mjs';
+import {createDayNight,bindDayNight} from './day-night.mjs';
 import {bindTreeToggle} from './tree-layer.mjs';
 import {createDeviceLocationMarker,bindDeviceLocation} from './device-location.mjs';
 import {bindTimelineControls} from './timeline-controls.mjs';
@@ -180,9 +183,10 @@ function frameRight(){exterior.camera.position.set(72,28,108*Math.max(1,1/exteri
 if(mapDetail)frameMap();else if(photoDetail)framePhoto();else if(rightDetail)frameRight();else if(towerDetail)frameTower();else if(frontDetail)frameFront();else resetAerial();
 controls.sync(navigationTarget);
 bindTimelineControls(exterior.timeline,document.getElementById('layoutControls'),()=>{buildingPhotos.close();buildingSelection.refresh();});
+const lighting=createDayNight(THREE,exterior,renderer);bindDayNight(lighting);
 // Location links pin the same outline and gallery as clicking a building.
 buildingPhotos.select(buildingSelection.entries.find(entry=>entry.locations.includes(selectedLocation)),true);
-function frame(){requestAnimationFrame(frame);const dt=clock.getDelta();if(document.hidden)return;if(buildingPhotos.lightboxOpen)stop();else controls.update(dt);buildingPhotos.update();buildingDetail?.update(exterior.camera,innerHeight);updateRoadLabels(THREE,layouts.roads,exterior.camera,innerWidth,innerHeight);deviceLocationMarker.update(exterior.camera,innerHeight);renderer.render(exterior.scene,exterior.camera);buildingGlow.render(exterior.camera);}
+function frame(){requestAnimationFrame(frame);const dt=clock.getDelta();if(document.hidden)return;if(buildingPhotos.lightboxOpen)stop();else controls.update(dt);buildingPhotos.update();buildingDetail?.update(exterior.camera,innerHeight);updateRoadLabels(THREE,layouts.roads,exterior.camera,innerWidth,innerHeight);deviceLocationMarker.update(exterior.camera,innerHeight);lighting.update();renderer.render(exterior.scene,exterior.camera);buildingGlow.render(exterior.camera,lighting.night ? .3 : 1);}
 function resetAerial(){buildingPhotos.close();exterior.scene.fog.density=0;moved=false;controls.keys.clear();const shot=sampleLanding(0,{aspect:exterior.camera.aspect});navigationTarget=shot.target;exterior.camera.fov=46;exterior.camera.updateProjectionMatrix();exterior.camera.position.set(...shot.position);exterior.camera.lookAt(...shot.target);controls.sync(navigationTarget);}
 document.getElementById('resetAerial').onclick=resetAerial;
 const canvas=document.getElementById('game');

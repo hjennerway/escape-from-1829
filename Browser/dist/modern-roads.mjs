@@ -30,13 +30,14 @@ export function createModernRoads(THREE){
     road.name=path.name;road.userData.centerline=points;road.userData.coordinates=path.coordinates;
     // Historic ends at the eastern crossing; Modern also includes the tail.
     const sharedPoints=path.name==='Vivienne Smith Lane'?points.slice(0,12):path.name==='Parsons Lane (North)'?PARSONS_NORTH_SHARED_POINTS:points;
+    road.userData.lampPath=sharedPoints;road.userData.width=6;
     road.add(ribbon(sharedPoints,6+2*ROAD_STYLE.edgeWidth,.32,edge),ribbon(sharedPoints,6,.34,asphalt),createRoadLabel(THREE,path.name,points));
     if(path.name==='Vivienne Smith Lane'){
-      const tail=new THREE.Group();tail.name='Vivienne Smith Lane eastern continuation';tail.userData.modernOnly=true;
+      const tail=new THREE.Group();tail.name='Vivienne Smith Lane eastern continuation';tail.userData.modernOnly=true;tail.userData.lampPath=points.slice(11);tail.userData.width=6;
       tail.add(ribbon(points.slice(11),6+2*ROAD_STYLE.edgeWidth,.32,edge),ribbon(points.slice(11),6,.34,asphalt));road.add(tail);
     }
     if(path.name==='Parsons Lane (North)'){
-      const tail=new THREE.Group();tail.name='Parsons Lane northern modern endpoint';tail.userData.modernOnly=true;
+      const tail=new THREE.Group();tail.name='Parsons Lane northern modern endpoint';tail.userData.modernOnly=true;tail.userData.lampPath=PARSONS_NORTH_MODERN_TAIL;tail.userData.width=6;
       tail.add(ribbon(PARSONS_NORTH_MODERN_TAIL,6+2*ROAD_STYLE.edgeWidth,.32,edge),ribbon(PARSONS_NORTH_MODERN_TAIL,6,.34,asphalt));road.add(tail);
     }
     roads.add(road);

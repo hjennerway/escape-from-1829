@@ -99,3 +99,11 @@ The subsequent marked screenshot removes the remaining west ground fittings at
 x=-10, z=32.5/39 and the bare east verge sapling at x=59, z=46.3, including
 its seven branches, in every period. This supersedes the earlier retention of
 the western fittings. The surrounding hedge and paving remain.
+
+## Broad lawn seam correction — 24 September 2026
+
+The owner's yellow/blue-marked screenshots remove the raised grass seams at the
+west forward wing, Parsons Lane and Redesmere. The two broad base lawn slabs
+are omitted at every date; the original continuous terrain now supplies their
+grass. This supersedes retaining those two slabs after their section was built.
+Separate local garden patches still follow their existing section dates.

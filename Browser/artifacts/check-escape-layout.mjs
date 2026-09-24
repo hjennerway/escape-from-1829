@@ -2,7 +2,7 @@ import assert from 'node:assert/strict';
 import {readFile} from 'node:fs/promises';
 import {spawn} from 'node:child_process';
 import {chromium} from 'playwright';
-const port=1844,server=spawn(process.execPath,['Browser/serve.mjs'],{windowsHide:true,stdio:'ignore',env:{...process.env,PORT:String(port)}});
+const port=31844,server=spawn(process.execPath,['Browser/serve.mjs'],{windowsHide:true,stdio:'ignore',env:{...process.env,PORT:String(port)}});
 const browser=await chromium.launch({headless:true,executablePath:process.env.MODEL_CHROME_PATH||'C:/Program Files/Google/Chrome/Application/chrome.exe',args:['--use-angle=swiftshader','--enable-unsafe-swiftshader']});
 try{
  const page=await browser.newPage({viewport:{width:1300,height:900}}),errors=[];
@@ -16,6 +16,7 @@ try{
   const response=await route.fetch();
   await route.fulfill({response,body:await response.text()+`\nwindow.escapeTest={get ready(){return ready;},get state(){return state;},player,keys,get floors(){return floors;},showFloor,drawMap,finish,update,resetPositions,get arrival(){return arrivalCutscene;},get camera(){return camera;},get renderer(){return renderer;},get scene(){return scene;}};`});
  });
+ for(let i=0;i<100;i++){try{await fetch(`http://127.0.0.1:${port}`);break;}catch{await new Promise(r=>setTimeout(r,100));}}
  await page.goto(`http://127.0.0.1:${port}`);
  await page.waitForFunction(()=>window.escapeTest?.ready,{},{timeout:90000});
  await page.locator('#start').click();
@@ -31,8 +32,12 @@ try{
  await page.screenshot({path:'Browser/artifacts/escape-layout-upper-map.png'});
  await page.keyboard.press('m');
  await page.evaluate(()=>window.escapeTest.finish(false,'Security'));
- assert.equal(await page.locator('#resultTitle').textContent(),'Locked in the basement');
+ assert.equal(await page.locator('#resultTitle').textContent(),"You've been captured");
  await page.screenshot({path:'Browser/artifacts/escape-layout-captured.png'});
+ await page.setViewportSize({width:390,height:844});
+ await page.screenshot({path:'Browser/artifacts/escape-capture-mobile.png'});
+ await page.locator('#retry').scrollIntoViewIfNeeded();
+ assert(await page.locator('#retry').isVisible());
  assert.deepEqual(errors,[]);
- console.log('PASS: real WebGL reception, both floor maps, stair transfer and basement defeat message; no page errors.');
+ console.log('PASS: real WebGL reception, both floor maps, stair transfer and randomized capture message; no page errors.');
 }finally{await browser.close();server.kill();}

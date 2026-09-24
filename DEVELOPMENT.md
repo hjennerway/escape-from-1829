@@ -1,3 +1,28 @@
+## West apron planters and return path (24 September 2026)
+
+Removed the three marked beds and long shrub border. Added matching paving
+along the outer garden edge to the stair-side walk. See Research/west/README.md.
+Browser sources and local compiled model updated; Unity and Blender unchanged.
+Visual, west geometry, exterior, walking, compiled/source, full-detail and
+timeline checks pass. Final compiled fingerprint matches source. The full suite
+stops at the Jarman whole-estate snapshot, which includes changed landscaping;
+its baseline was not rebased. Timeline checks passed with separate output files
+after a screenshot save error. Artifacts use Browser/artifacts/west-planters-.
+
+## West entrance landscape cleanup (24 September 2026)
+
+Removed both outer-west doorway hedges and the short garden entrance railings.
+Extended the doorway path straight to Parsons Lane, retaining its width and axis.
+See `Research/west/README.md`. Browser sources and local compiled asset updated;
+Unity and Blender exports unchanged.
+
+West geometry, full path walking clearance, exterior geometry, visual inspection,
+compiled/source comparison (including full detail) and timeline checks pass.
+The compiled fingerprint is current. `npm test` stops at the previously documented
+Jarman preservation snapshot mismatch; its baseline was not changed. Logs use
+`Browser/artifacts/west-entrance-*`; the checked overview is
+`Browser/artifacts/west-aerial-entrance-cleanup.jpg`.
+
 ## Churton remaining lawn rim (24 September 2026)
 
 The follow-up annotation exposed the raised lawn slab's front face and cast
@@ -2637,3 +2662,108 @@ Validation: the complete Browser `npm test` suite passes, including Jarman,
 Leighton/Newton and modern-car-park. `git diff --check` also passes. Full output:
 Browser/artifacts/check-refresh-suite.log. No rendering source changed in this
 follow-up, so the preceding successful compiled/rendering checks remain relevant.
+
+
+## Spotted warning (September 24)
+
+Asylum escape shows "You've been spotted" when either NPC passes its existing
+same-floor sight check after the head start. It persists until the player is
+at least 26 scene units from both NPCs, including floor-height separation.
+Loss of sight and holding E do not clear it. Restart resets it. The ghost's
+continuous through-wall tracking is unchanged. Mobile warnings sit below the minimap.
+
+Validation: the full browser `npm test` suite passed; `test-game.mjs` covers
+both triggers, both-NPC clearance, held-E persistence, retrigger and restart.
+`check-spotted-browser.mjs` verifies the real WebGL warning and dismissal at
+desktop/mobile sizes with no browser errors. Captures and the suite log use
+`Browser/artifacts/spotted-*`. No model assets or Unity/Blender exports changed.
+
+## Randomized capture outcome — 24 September 2026
+
+The defeat dialog now says "You've been captured", followed by a random
+diagnosis and its matching treatment, an independently selected supposed cause
+with description, and the retry invitation. The 11 diagnosis/treatment pairs
+and 14 causes are bundled in Browser/dist/capture-outcome.mjs from the
+Diagnoses and Causes tabs of the supplied sheet:
+https://docs.google.com/spreadsheets/d/107LEc_YgAiATltfdQCZUXCjegXZBKlWfY2cmn6vOl44/edit
+This is a 24 September snapshot, not a live Sheets dependency. Consecutive
+captures within a page session exclude the previous diagnosis. Text is rendered
+with textContent and preserved line breaks; the existing dialog scrolls on
+small screens. No models or Unity/Blender exports changed.
+
+Validation: Browser/test-game.mjs covers capture rerolls, matching treatments,
+cause descriptions and defeat controls; the full Browser npm test suite passes
+(artifacts/capture-suite.log). The real WebGL layout check passes with desktop
+and mobile capture screenshots and no page errors. Windows blocked the old
+preview ports, so the check uses port 31844 and waits for server readiness.
+
+## Raised lawn seams removed (September 24)
+
+Removed the two broad, thin grass boxes from `Browser/dist/escape-exterior.mjs`.
+Their exposed vertical edges produced the marked lines in front of the west
+forward wing, beside Parsons Lane and near Redesmere. The existing continuous
+terrain supplies these lawns with the same grass material and world texture.
+Other garden patches and paving retain their existing geometry. No runtime
+movement or visibility logic changes are required.
+
+Ground raycasts now require terrain at the removed panel samples in every
+period, before and after batching, and in the source/compiled browser timeline
+checks. The local compiled aerial model was rebuilt. All three close views were
+visually checked using `Browser/artifacts/ghost-lawn-preview.mjs`, with no browser
+errors. `npm run test:compiled` passes, including source/compiled equivalence and
+all timeline states in aerial and walking views. Unity and Blender exports were
+not changed.
+
+The full `npm test` run passes through the annexe photo-placement checks but
+stops at `test-jarman.mjs`: its stored whole-estate protected-geometry fingerprint
+includes the deliberately removed lawn boxes and other concurrent workspace
+geometry changes. That historical snapshot was not blindly regenerated. The
+suite and subsequent checks are recorded in `Browser/artifacts/ghost-lawn-suite.txt`
+and `Browser/artifacts/ghost-lawn-remaining.txt`.
+
+The remaining checks all pass except `test-leighton-newton.mjs`, whose protected
+whole-estate snapshot also includes the changed geometry. Both stale snapshot
+checks report 74 fewer primitives in the current shared workspace. Targeted
+ground/timeline, rendering, collision and compiled-model checks pass.
+
+
+## Day/night controls and roadside lighting — 24 September 2026
+
+Aerial view and Explore the asylum now have a sun/moon toggle, defaulting to
+daylight on each page load. Night mode retains the selected period and camera,
+with cool moonlight, distance mist and warm roadside illumination. The narrow
+phone layout keeps the controls clear of the period panel. Building selection
+in night mode multiplies the final white overlay and blurred outline opacity
+by 0.3 (a 70% reduction); returning to day restores the original effect.
+
+The two mapped lamps retain their positions, prefab shape and dates. Additional
+lamps instance that concrete swan-neck prefab beside the existing road traces,
+with their arms facing the carriageway. Their parents are the actual dated
+roads, including modern-only tails; rear-annexe lamps share the Annexe group.
+The entrance and roundabout use their existing outlines. There are 53 visible
+fixtures in 1829, 118 in 1915–1938, and 114 in 2021, including surviving lamps
+where applicable. See Research/street-lamps.md for placement assumptions.
+
+Lamp geometry is compiled with the estate (timeline format version 6).
+Runtime lighting is rebuilt for both source and compiled loads. Emissive heads,
+small halos and instanced ground pools cover visible lamps, while a fixed pool
+of eight unshadowed point lights illuminates nearby masonry and foliage.
+The day settings are restored exactly, and light changes invalidate cached
+shadows. Walking collisions use narrow post footprints, not overhead arms;
+the existing timeline/tree callbacks refresh walking obstacles.
+
+Validation: test-day-night.mjs checks every period, daylight restoration, the
+light budget, hidden-road light removal and shaft collisions. The browser
+checks cover both loading paths, toggling with mouse/keyboard, all periods,
+phone layout, and aerial/walking screenshots. The dedicated night-selection
+browser check clicks three different buildings and verifies alpha multipliers
+of 0.3 at night and 1.0 by day. The compiled model was rebuilt; the standard
+source/compiled image comparison and timeline browser checks pass. Final
+artifacts and logs use the day-night prefix under Browser/artifacts.
+
+The full npm test suite was run, followed by the remaining tests after its
+first failure: 73 of 75 checks pass. The Jarman and Leighton/Newton protected
+geometry snapshots mismatch. Both fingerprints reproduce with the original
+HEAD lamp implementation restored in memory, confirming those failures are
+independent of this feature (day-night-baseline.txt). Browser sources and local
+compiled aerial assets are updated; Unity and Blender exports are unchanged.

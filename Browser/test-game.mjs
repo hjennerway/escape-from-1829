@@ -1,3 +1,4 @@
+import {captureOutcome,diagnoses,causes} from './dist/capture-outcome.mjs';
 // Exercise the real game loop without WebGL or external image/network access.
 import assert from 'node:assert/strict';
 import {readFile} from 'node:fs/promises';
@@ -43,7 +44,7 @@ const layout=JSON.parse(await readFile(new URL('./dist/layout.json',import.meta.
 const source=(await readFile(new URL('./dist/game.mjs',import.meta.url),'utf8')).replace(/^import .*;\r?\n/gm,'');
 const listeners=new Map();
 function keydown(code,repeat=false){const event={code,repeat,defaultPrevented:false,preventDefault(){this.defaultPrevented=true;}};listeners.get('keydown')(event);return event;}
-const sandbox={Math:Object.create(Math),selectEscapeRoutes,exitDirection,createSecurityGuard:()=>createSecurityGuard(GuardTHREE),updateSecurityGuard,resetSecurityGuard,bindTreeToggle,sampleLanding,...core,...floors,buildArchitecture,interiorWallSurfaces,createInteriorLights,createEscapeCutscene,createArrivalCutscene,
+const sandbox={captureOutcome:(previous)=>captureOutcome(previous,sandbox.Math.random),Math:Object.create(Math),selectEscapeRoutes,exitDirection,createSecurityGuard:()=>createSecurityGuard(GuardTHREE),updateSecurityGuard,resetSecurityGuard,bindTreeToggle,sampleLanding,...core,...floors,buildArchitecture,interiorWallSurfaces,createInteriorLights,createEscapeCutscene,createArrivalCutscene,
  createLandingExterior:async()=>({scene:new Object3D(),camera:new Object3D()}),
  loadEscapeFrontage:async()=>{},THREE,GLTFLoader:class {},
  document:{getElementById:element,createElement:()=>element('canvas'+elements.size),querySelectorAll:()=>[],body:element('body'),addEventListener(){},exitPointerLock(){}},
@@ -268,3 +269,43 @@ assert.equal(security.mesh.visible,false,'The detailed guard remains hidden on a
 startPlaying();assert.equal(guardRig.phase,0);assert.equal(guardRig.amount,0);
 const headStartPose=guardPose();t.update(.04);assert.deepEqual(guardPose(),headStartPose,'Five-second head start leaves the guard still');
 console.log('PASS: guard patrol/chase stride integration, hold-E/help/artwork freeze, stationary routes, floor visibility and restart.');
+
+// Detection latches the warning until both NPCs are outside the clearance radius.
+for(const type of [1,2]){
+ startPlaying();t.setElapsed(6);
+ Object.assign(t.player,{x:70,z:38,floor:0});
+ for(const e of t.enemies)Object.assign(e,{x:140,z:100,floor:0,path:[],rethink:10});
+ const observer=t.enemies.find(e=>e.type===type),other=t.enemies.find(e=>e.type!==type);
+ Object.assign(observer,{x:70,z:33});t.update(0);
+ assert.equal(element('warning').textContent,"You've been spotted",`NPC type ${type} triggers the warning`);
+ // Freeze NPCs while moving away, so loss of sight cannot clear the warning.
+ t.keys.add('KeyE');Object.assign(observer,{x:70,z:100});Object.assign(other,{x:70,z:63});t.update(0);
+ assert.equal(element('warning').textContent,"You've been spotted",'The other NPC keeps the warning active within 26 units');
+ other.z=64;t.update(0);
+ assert.equal(element('warning').textContent,'','Warning clears at 26 units from both NPCs, including while E is held');
+ t.keys.clear();observer.z=33;t.update(0);
+ assert.equal(element('warning').textContent,"You've been spotted",'Spotting can trigger again');
+ startPlaying();t.update(0);
+ assert.equal(element('warning').textContent,'YOU HAVE A FIVE-SECOND HEAD START','Restart clears the previous spotted state');
+ t.keys.add('KeyE');t.setElapsed(6);t.update(0);
+ assert.notEqual(element('warning').textContent,"You've been spotted",'No spotting is inherited by a new run');
+}
+console.log('PASS: guard/ghost spotted warning, both-NPC clearance, held-E persistence, retrigger and restart.');
+
+let lastDiagnosis;
+for(const draw of [0,0,.999999,.999999,.5]){
+ sandbox.Math.random=()=>draw;
+ startPlaying();t.finish(false,'Security');
+ assert.equal(element('resultTitle').textContent,"You've been captured");
+ const body=element('resultBody').textContent;
+ const name=body.split('\n')[0].slice('Diagnosis: '.length);
+ const diagnosis=diagnoses.find(d=>d.name===name);
+ assert(diagnosis);assert.notEqual(name,lastDiagnosis);
+ assert(body.includes('Treatment: '+diagnosis.treatment));
+ assert(causes.some(c=>body.includes('Supposed cause: '+c.name+' — '+c.description)));
+ assert(body.endsWith('Try again for a different diagnosis and treatment.'));
+ assert.equal(element('result').hidden,false);assert.equal(element('resume').hidden,true);
+ lastDiagnosis=name;
+}
+delete sandbox.Math.random;
+console.log('PASS: randomized capture diagnoses, matching treatments and causes.');

@@ -79,8 +79,9 @@ export function addWestEndDetails(THREE,{model,box,mesh,worldUV,brick,white,mate
   box(iron,-72.54,7.55,8.83,.07,15.1,.07);
   // A single low hip covers the full end rather than a detached tall front nib.
   hipRoof(-69,11.25,6,16.5,15.47,1.15).name='West end continuous slate roof';
-  const hedge=material(0x3f543b),gravel=material(0x99917b);
-  for(const [z,d] of [[6.65,5.5],[16.65,5.5]])mesh(new THREE.BoxGeometry(1.05,1.15,d),hedge,-74.05,.72,z,true).name='West end low hedge';
-  box(gravel,-76,.2,11.5,7.6,.1,2.65);
+  const gravel=material(0x99917b);
+  // Continue the doorway axis west to Parsons Lane. The far end tucks
+  // beneath its higher road surface, leaving a clean join at the angled edge.
+  mesh(new THREE.BoxGeometry(25.3,.1,2.65),gravel,-84.85,.2,11.5).name='West end entrance path';
   model.userData.westEndPhotoOpenings=model.userData.eastPhotoOpenings.slice(start);
 }

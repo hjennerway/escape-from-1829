@@ -124,13 +124,14 @@ export function createBuildingGlow(THREE,renderer,selection){
  const vertexShader='varying vec2 vUv; void main(){vUv=uv;gl_Position=vec4(position.xy,0.,1.);}';
  const blur=new THREE.ShaderMaterial({depthTest:false,depthWrite:false,uniforms:{image:{value:null},stepSize:{value:new THREE.Vector2()}},vertexShader,fragmentShader:`varying vec2 vUv;uniform sampler2D image;uniform vec2 stepSize;
   void main(){vec4 c=texture2D(image,vUv)*.227027; c+=(texture2D(image,vUv+stepSize*1.384615)+texture2D(image,vUv-stepSize*1.384615))*.316216;c+=(texture2D(image,vUv+stepSize*3.230769)+texture2D(image,vUv-stepSize*3.230769))*.070270;gl_FragColor=c;}`});
- const composite=new THREE.ShaderMaterial({transparent:true,depthTest:false,depthWrite:false,uniforms:{mask:{value:mask.texture},halo:{value:blurY.texture}},vertexShader,fragmentShader:`varying vec2 vUv;uniform sampler2D mask;uniform sampler2D halo;
-  void main(){float solid=texture2D(mask,vUv).r;float glow=texture2D(halo,vUv).r;gl_FragColor=vec4(1.,1.,1.,clamp(solid*.19+glow*(1.-solid)*1.65,0.,.86));}`});
+ const composite=new THREE.ShaderMaterial({transparent:true,depthTest:false,depthWrite:false,uniforms:{mask:{value:mask.texture},halo:{value:blurY.texture},opacityScale:{value:1}},vertexShader,fragmentShader:`varying vec2 vUv;uniform sampler2D mask;uniform sampler2D halo;uniform float opacityScale;
+  void main(){float solid=texture2D(mask,vUv).r;float glow=texture2D(halo,vUv).r;gl_FragColor=vec4(1.,1.,1.,clamp(solid*.19+glow*(1.-solid)*1.65,0.,.86)*opacityScale);}`});
  const quad=new THREE.Mesh(geometry,blur);quad.frustumCulled=false;quadScene.add(quad);
  const savedColor=new THREE.Color(),viewportSize=new THREE.Vector2();let selected=null,width=0,height=0;
  return {
   set(entry){selected=entry;},
-  render(camera3D){
+  render(camera3D,opacity=1){
+   composite.uniforms.opacityScale.value=opacity;
    if(!selected||!selection.isVisible(selected))return;
    selection.refresh();renderer.getSize(viewportSize);
    const w=Math.ceil(viewportSize.x/2),h=Math.ceil(viewportSize.y/2);

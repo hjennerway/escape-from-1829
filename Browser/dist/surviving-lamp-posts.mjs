@@ -2,7 +2,7 @@ import {LAMP_POSTS} from './kml-11-data.mjs';
 
 // Shared low-poly concrete column based on the user's September 24 photograph.
 // Hidden base, overall height and arm bearing are estimates; KML fixes positions.
-export function addSurvivingLampPosts(THREE,model){
+export function createConcreteLampTemplate(THREE){
  const template=new THREE.Group();
  const size=64,pixels=new Uint8Array(size*size*4);let seed=1915;
  for(let i=0;i<size*size;i++){
@@ -16,6 +16,7 @@ export function addSurvivingLampPosts(THREE,model){
  const concrete=new THREE.MeshStandardMaterial({color:0xb4b0a7,map:texture,roughness:1});
  const casing=new THREE.MeshStandardMaterial({color:0x737675,roughness:.88});
  const diffuser=new THREE.MeshStandardMaterial({color:0xbabdb5,roughness:.7});
+ diffuser.userData.streetLampDiffuser=true;
  // Four-sided tapered concrete shaft becomes a swept swan-neck at the top.
  // Rings follow the bend, avoiding overlapping segment joints.
  const path=[[0,0,.17],[0,3.5,.13],[.12,4.55,.12],[.34,5.2,.115],[.66,5.63,.105],[1.08,5.88,.095],[1.52,5.97,.085],[1.97,5.92,.075],[2.28,5.8,.07]];
@@ -36,6 +37,11 @@ export function addSurvivingLampPosts(THREE,model){
  function part(name,geometry,material,y){const mesh=new THREE.Mesh(geometry,material);mesh.name=name;mesh.position.y=y;mesh.castShadow=true;mesh.receiveShadow=true;head.add(mesh);}
  part('Slim rectangular lamp housing',new THREE.BoxGeometry(.95,.17,.28),casing,0);
  part('Recessed lamp underside',new THREE.BoxGeometry(.77,.035,.21),diffuser,-.085);
+ return template;
+}
+
+export function addSurvivingLampPosts(THREE,model){
+ const template=createConcreteLampTemplate(THREE);
  for(const spec of LAMP_POSTS){
   const lamp=template.clone(true);lamp.name=spec.name;lamp.position.set(spec.x,-.15,spec.z);
   lamp.userData={lampPost:{...spec},estateSection:'Surviving lamp posts'};model.add(lamp);

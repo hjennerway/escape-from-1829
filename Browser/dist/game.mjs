@@ -1,3 +1,4 @@
+import {captureOutcome} from './capture-outcome.mjs';
 import * as THREE from 'three';
 import {GLTFLoader} from 'https://cdn.jsdelivr.net/npm/three@0.160.1/examples/jsm/loaders/GLTFLoader.js';
 import {path,walkable,visible,nearExit} from './core.mjs';
@@ -15,6 +16,9 @@ import {selectEscapeRoutes,exitDirection} from './escape-routes.mjs';
 const $=id=>document.getElementById(id),canvas=$('game');
 const keys=new Set(),touch=matchMedia('(pointer:coarse)').matches;
 const INTERACTION_HOLD_SECONDS=.5;
+let previousDiagnosis;
+const SPOTTED_CLEAR_DISTANCE=26;
+let spotted=false;
 let layout,renderer,scene,camera,torch,torchTarget,clock,ready=false,state='menu',elapsed=0,stamina=1,yaw=0,pitch=0,hold=0,sprint=false,crouch=false,exhausted=false;
 let enemies=[],lights=[],audioCtx,audioOn=true,lastStep=0,lastPulse=0,footPhase=0,dragging=false,previousPointer=null,modelLoaded=false;
 const player={x:50,z:27.5,floor:0},mapCanvas=$('map'),mapContext=mapCanvas.getContext('2d'),miniMapCanvas=$('miniMap'),miniMapContext=miniMapCanvas.getContext('2d');
@@ -239,12 +243,12 @@ function randomizeEnemySpawns(){
   e.spawn=choices[Math.floor(Math.random()*choices.length)]||e.spawn;placed.push(e.spawn);
  }
 }
-function resetPositions(){player.floor=0;showFloor();stairHold=0;stairLatch=false;mapRefresh=0;lastStep=0;lastPulse=0;camera.position.y=1.65;player.x=layout.spawn.x*layout.cellSize;player.z=layout.spawn.z*layout.cellSize;yaw=layout.spawn.yaw??0;pitch=0;enemies.forEach(e=>{Object.assign(e,{...e.spawn,path:[],memory:0,rethink:0,route:0,target:null});e.mesh.position.set(e.x,0,e.z);e.mesh.visible=true;if(e.type===1)resetSecurityGuard(e.mesh);});}
+function resetPositions(){spotted=false;player.floor=0;showFloor();stairHold=0;stairLatch=false;mapRefresh=0;lastStep=0;lastPulse=0;camera.position.y=1.65;player.x=layout.spawn.x*layout.cellSize;player.z=layout.spawn.z*layout.cellSize;yaw=layout.spawn.yaw??0;pitch=0;enemies.forEach(e=>{Object.assign(e,{...e.spawn,path:[],memory:0,rethink:0,route:0,target:null});e.mesh.position.set(e.x,0,e.z);e.mesh.visible=true;if(e.type===1)resetSecurityGuard(e.mesh);});}
 function uiPlaying(value){document.body.classList.toggle('playing',value);$('menu').hidden=value;$('location').hidden=value;$('hud').hidden=!value;$('pause').hidden=!value;$('touch').hidden=!value||!touch;}
 function lock(){if(!touch&&canvas.requestPointerLock){try{const result=canvas.requestPointerLock();result?.catch(()=>{});}catch{}}}
 function start(){if(!ready||state==='arrival')return;escapeCutscene.reset();closeArtViewer();randomizeEnemySpawns();resetPositions();elapsed=0;stamina=1;hold=0;exhausted=false;crouch=false;sprint=false;footPhase=0;dragging=false;previousPointer=null;keys.clear();state='arrival';torch.visible=true;uiPlaying(true);$('hud').hidden=true;$('pause').hidden=true;$('touch').hidden=true;$('instructions').hidden=true;$('result').hidden=true;$('floorMap').hidden=true;$('timer').textContent='00:00';$('warning').textContent='';$('interact').hidden=true;arrivalCutscene.start();audioCtx??=new (window.AudioContext||window.webkitAudioContext)();audioCtx.resume().catch(()=>{});lock();}
 function pause(){if(state!=='play')return;closeArtViewer();state='paused';keys.clear();document.exitPointerLock?.();$('resultTag').textContent='TAKE A MOMENT';$('resultTitle').textContent='Hold your breath.';$('resultBody').textContent='The building will wait. Resume when you’re ready.';$('resume').hidden=false;$('resultExplore').hidden=true;$('retry').textContent='RESTART';$('result').hidden=false;}
-function finish(won,who){closeArtViewer();state=won?'cutscene':'lost';keys.clear();document.exitPointerLock?.();$('resultTag').textContent=won?'OUTSIDE. AT LAST.':'THE BUILDING KEPT YOU';$('resultTitle').textContent=won?'You made it out.':'Locked in the basement';$('resultBody').textContent=won?`You escaped through ${who.toLowerCase()} in ${elapsed.toFixed(1)} seconds. ${floors.reduce((count,floor)=>count+floor.exits.length,0)-1} other routes are waiting.`:`${who} captured you after ${elapsed.toFixed(1)} seconds. Break line of sight, save your sprint, and use the map to find a different route.`;$('resume').hidden=true;$('resultExplore').hidden=!won;$('retry').textContent='TRY ANOTHER ROUTE ↗';$('result').hidden=won;$('interact').hidden=true;
+function finish(won,who){const outcome=won?null:captureOutcome(previousDiagnosis);if(outcome)previousDiagnosis=outcome.diagnosis;closeArtViewer();state=won?'cutscene':'lost';keys.clear();document.exitPointerLock?.();$('resultTag').textContent=won?'OUTSIDE. AT LAST.':'THE BUILDING KEPT YOU';$('resultTitle').textContent=won?'You made it out.':"You've been captured";$('resultBody').textContent=won?`You escaped through ${who.toLowerCase()} in ${elapsed.toFixed(1)} seconds. ${floors.reduce((count,floor)=>count+floor.exits.length,0)-1} other routes are waiting.`:outcome.text;$('resume').hidden=true;$('resultExplore').hidden=!won;$('retry').textContent='TRY ANOTHER ROUTE ↗';$('result').hidden=won;$('interact').hidden=true;
  if(won){$('hud').hidden=true;$('touch').hidden=true;$('pause').hidden=true;escapeCutscene.start();}
 }
 function resume(){state='play';$('result').hidden=true;$('instructions').hidden=true;lock();}
@@ -266,6 +270,7 @@ function update(dt,interactionDt=dt){
  else for(const e of enemies){
   const sameFloor=e.floor===player.floor,enemyLayout=floors[e.floor];let distance=Math.hypot(e.x-player.x,e.z-player.z);e.mesh.visible=sameFloor;if(sameFloor)nearest=Math.min(nearest,distance);if(elapsed<5)continue;
   const seen=sameFloor&&distance<(crouch?8:e.type===1?22:16)&&visible(enemyLayout,e,player);
+  if(seen)spotted=true;
   if(seen||e.type===2){e.target={...player};e.memory=5;}else e.memory=Math.max(0,e.memory-dt);
   e.rethink-=dt;if(e.rethink<=0){e.rethink=.45;if(e.memory<=0&&(!e.path.length||Math.hypot(e.x-e.target?.x,e.z-e.target?.z)<1)){const routes=enemyLayout.patrol,r=routes[e.route++%routes.length];e.target={x:r.x*enemyLayout.cellSize,z:r.z*enemyLayout.cellSize,floor:e.floor};}if(e.target)e.path=routeBetweenFloors(floors,e,e.target);}
   let speed=e.type===1?(e.memory?3.85:2.4):2.2;
@@ -278,7 +283,8 @@ function update(dt,interactionDt=dt){
  }
  if(state!=='play')return;
  if(nearest<15&&elapsed-lastPulse>THREE.MathUtils.mapLinear(Math.min(nearest,15),0,15,.35,1.2)){beep(52,.18,.1*(1-nearest/18));lastPulse=elapsed;}
- $('warning').textContent=elapsed<5?'YOU HAVE A FIVE-SECOND HEAD START':nearest<4?'SOMEONE IS VERY CLOSE':nearest<10?'YOU ARE NOT ALONE':'';
+ if(spotted&&enemies.every(e=>Math.hypot(e.x-player.x,e.z-player.z,(e.floor-player.floor)*FLOOR_HEIGHT)>=SPOTTED_CLEAR_DISTANCE))spotted=false;
+ $('warning').textContent=elapsed<5?'YOU HAVE A FIVE-SECOND HEAD START':spotted?"You've been spotted":nearest<4?'SOMEONE IS VERY CLOSE':nearest<10?'YOU ARE NOT ALONE':'';
 
   const stair=nearStair(floors,player),exit=nearExit(layout,player),art=nearbyArt();
  if(!keys.has('KeyE'))stairLatch=false;

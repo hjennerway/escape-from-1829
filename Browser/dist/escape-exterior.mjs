@@ -97,7 +97,8 @@ export function createEscapeExterior(THREE,aspect){
   function legacyRoad(mat,x,y,z,w,h,d){const road=mesh(new THREE.BoxGeometry(w,h,d),mat,x,y,z);legacyAccess.add(road);}
   // Grounds and surrounding access roads. No red annotation or sale graphics.
   legacyRoad(path,OUTER_SHIFT/2,-.015,2,151+OUTER_SHIFT,.15,103);
-  box(grass,OUTER_SHIFT/2,.08,29.5,117+OUTER_SHIFT,.1,39);box(grass,OUTER_SHIFT/2,.08,-15,117+OUTER_SHIFT,.1,45);
+  // Use the continuous terrain for the broad lawns. Raised duplicate slabs
+  // leave thin vertical seams at the frontage, Parsons Lane and Redesmere.
   // Remove the old full-width outer gravel drive; retain the estate-side access lanes.
   legacyRoad(gravel,-79,.09,-2,10,.1,133);legacyRoad(gravel,79+OUTER_SHIFT,.09,0,9,.1,130);
   legacyRoad(gravel,OUTER_SHIFT/2,.11,-46,149+OUTER_SHIFT,.1,8);
@@ -336,7 +337,6 @@ export function createEscapeExterior(THREE,aspect){
     }
   }
   for(const z of [-23,-10,29]){
-    plantedBed(-72,z,3.2,8);
     tree(-72,z,.65);
   }
   // The removed east corner planter included a small tree. Preserve the

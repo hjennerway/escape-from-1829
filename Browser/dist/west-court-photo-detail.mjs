@@ -87,13 +87,8 @@ export function addWestCourtPhotoDetails(THREE,{model,box,mesh,worldUV,white,bri
   for(const y of [4.3,8.9])rod([-50.8,y,wallZ-.32],[-48.3,y,wallZ-.32],.035);
   for(const x of [-50,-54.7])box(stone,x,8.1,wallZ-.4,.4,.3,.15);
 
-  // Unmarked gravel and a low planted border replace the modern parking apron.
-  const gravel=material(0xaaa18a),soil=material(0x635443),leaf=material(0x557344);
+  // The marked planting border is removed, leaving the gravel apron open.
+  const gravel=material(0xaaa18a);
   box(gravel,-54.5,.2,-13,35,.12,26);
-  box(soil,-70,.31,-11,1.5,.2,17);
-  for(let i=0;i<24;i++){
-    const shrub=mesh(new THREE.IcosahedronGeometry(.46,1),leaf,-70+Math.sin(i*2)*.28,.65,-19+i*.68,true);
-    shrub.scale.set(1,.8,1);
-  }
   model.userData.westCourtPhotoOpenings=model.userData.eastPhotoOpenings.slice(start);
 }

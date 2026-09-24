@@ -54,8 +54,8 @@ for(const [key,view] of Object.entries(WEST_REFINEMENT_VIEWS)){
   assert.deepEqual(LOCATION_WALKS[key],view);
   assert(!blocked(view.position[0],view.position[2]),key+' starts on accessible ground');
 }
-for(let x=-82;x<=-73;x+=.3)assert(!blocked(x,11.5),'the path through the end hedges stays accessible');
-assert(blocked(-74.05,6.65)&&blocked(-74.05,16.65),'visible end hedges have walking collisions');
+for(let x=-97;x<=-73;x+=.3)assert(!blocked(x,11.5),'the extended entrance path stays accessible to the road');
+assert(!blocked(-74.05,6.65)&&!blocked(-74.05,16.65),'removed end hedges leave no walking collisions');
 assert(blocked(-50.8,21.5),'the moved garden bay blocks walking through its wall');
 assert(!blocked(-53.8,22.2),'the canted corner does not collide as its bounding rectangle');
 assert.equal(model.userData.westFrontPhotoOpenings.filter(o=>o.face==='west-front-extension').length,8,'four paired lean-to windows');

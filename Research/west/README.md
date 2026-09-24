@@ -111,3 +111,34 @@ above no longer occur in this shared working tree. Validation logs for this
 revision use the `west-lean-to-` prefix in `Browser/artifacts/`.
 The local compiled model is rebuilt and current; compiled/source rendering,
 controls and model-fallback checks also pass.
+
+## West entrance landscape cleanup — 24 September 2026
+
+The latest user annotation removes the two low hedges beside the outer west
+entrance and the pair of short garden entrance railings beside the canted bay.
+The west doorway path retains its width and axis at z=11.5 and extends straight
+out to Parsons Lane, from x=-72.2 to -97.5. Its outer tip lies below the higher
+road surface so the angled road edge provides a clean join. The existing trees
+and fire escapes are retained. Removed hedges no longer create walking obstacles;
+the extended path centreline is clear. Shared browser sources changed, with no
+Unity or Blender regeneration.
+
+## West apron planters and garden return (24 September 2026)
+
+The latest red/blue annotation supersedes the earlier instruction to retain
+these planting beds. Remove the three stone-edged beds at (-72,-23),
+(-72,-10), and (-72,29), plus the long soil/shrub border at (-70,-11).
+The other planting remains. Removed tree calls retain their random draws.
+
+Extend matching entrance paving along the outer garden edge, z=42.5 to 45,
+from the west apron at x=-72.5 to the existing stair-side walk at x=-47.
+The path follows the lawn edge and joins both ends without altering masonry.
+These are shared browser-builder changes; Unity and Blender are unchanged.
+
+West geometry, exterior and walking checks pass. Source and compiled garden
+views were inspected, and the rebuilt model passes source/compiled and full
+detail checks. The full suite stops at the Jarman whole-estate preservation
+snapshot, which includes changed landscaping; its baseline was not rebased.
+Artifacts use the `west-planters-` prefix under `Browser/artifacts/`.
+
+Timeline browser checks also pass, using separate screenshot output paths.

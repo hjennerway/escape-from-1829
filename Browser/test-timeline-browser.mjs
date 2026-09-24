@@ -17,17 +17,17 @@ async function groundState(){
  exterior.model.updateMatrixWorld(true);
  exterior.model.traverseVisible(object=>{if(object.isMesh)meshes.push(object);});
  return [[-64,-10,1849],[60,-10,1849],[17,29,1849],[35,46,1849],[60,-30.5,1870],[100,15,1870],[76,20,1870],[0,32,1829],[-23,-25,1829],
-  [90,32,1870,true],[68,36,1849,true],[-64,37,1849,true],[80,46,1870,true],[55,-34,1870,true]].map(([x,z,built,lawn=false])=>{
+  [90,32,1870,true],[68,36,1849,true],[-64,37,1849,true],[80,46,1870,true,true],[55,-34,1870,true,true],[-55,49,1849,true,true],[-55,7.5,1849,true,true]].map(([x,z,built,lawn=false,terrainOnly=false])=>{
   ray.set(new THREE.Vector3(x,.49,z),new THREE.Vector3(0,-1,0));
   const hit=ray.intersectObjects(meshes,false)[0],material=hit?.object.material,grass=exterior.terrain.material;
-  return {x,z,built,lawn,onTerrain:hit?.object===exterior.terrain,present:Boolean(material),grass:Boolean(material?.userData.estateGrass),matchesGrass:material?.map===grass.map&&material.color.equals(grass.color)&&material.customProgramCacheKey()===grass.customProgramCacheKey()};
+  return {x,z,built,lawn,terrainOnly,onTerrain:hit?.object===exterior.terrain,present:Boolean(material),grass:Boolean(material?.userData.estateGrass),matchesGrass:material?.map===grass.map&&material.color.equals(grass.color)&&material.customProgramCacheKey()===grass.customProgramCacheKey()};
  });
 }
 function checkGround(samples,year){
  for(const sample of samples){
   assert(sample.present,'Ground remains beneath every section');
   assert.equal(sample.grass,sample.lawn||year<sample.built,`Ground at ${sample.x}, ${sample.z} in ${year}`);
-  if(sample.lawn)assert.equal(sample.onTerrain,year<sample.built,'Raised lawn outlines disappear with their section');
+  if(sample.lawn)assert.equal(sample.onTerrain,sample.terrainOnly||year<sample.built,'Raised lawn outlines disappear with their section');
   if(year<sample.built)assert(sample.matchesGrass,'Unbuilt sections reveal the same terrain texture and projection');
  }
 }
