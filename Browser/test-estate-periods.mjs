@@ -68,6 +68,30 @@ function checkPeriodRoads(year){
  const meshes=[];exterior.model.traverseVisible(o=>{if(o.isMesh)meshes.push(o);});
  const materialAt=(x,z)=>{groundRay.set(new THREE.Vector3(x,.49,z),new THREE.Vector3(0,-1,0));return groundRay.intersectObjects(meshes,false)[0]?.object.material;};
  const main=existsInYear('The Main',year),annexe=existsInYear('Annexe',year);
+ // The marked southern T-junction must keep the complete driving width open,
+ // including both former clipped gaps and the pale caps, before/after batching.
+ if(main){
+  const drive=HISTORIC_ROAD_TRACES.find(r=>r.name==='Southern estate drive');
+  for(let i=1;i<drive.points.length;i++){
+   const a=drive.points[i-1],b=drive.points[i];
+   if(b[1]<198||a[1]>237)continue;
+   const dx=b[0]-a[0],dz=b[1]-a[1],length=Math.hypot(dx,dz),steps=Math.ceil(length/.75);
+   for(let j=0;j<=steps;j++)for(const offset of [-2.8,0,2.8]){
+    const x=a[0]+dx*j/steps-dz/length*offset,z=a[1]+dz*j/steps+dx/length*offset;
+    assert.equal(materialAt(x,z)?.color.getHex(),ROAD_STYLE.asphalt,`Southern drive crosses Parsons seamlessly at ${x},${z} in ${year}`);
+   }
+  }
+  // Parsons' original rounded endpoint must open onto that through-road.
+  for(let t=0;t<=1.001;t+=.05)for(const offset of [-2.8,0,2.8]){
+   const dx=15.0830773661,dz=8.9179246745,length=Math.hypot(dx,dz);
+   const x=202.66292561425+dx*t-dz/length*offset,z=217.2141828636556+dz*t+dx/length*offset;
+   assert.equal(materialAt(x,z)?.color.getHex(),ROAD_STYLE.asphalt,'No border across the Parsons mouth');
+  }
+ }else{
+  assert(materialAt(199,211)?.userData.estateGrass,'No disconnected southern junction before/after the drive exists');
+ }
+ for(const p of [[193,217],[211,209]])assert(materialAt(...p)?.userData.estateGrass,'The lawn beyond the junction is retained');
+
  const points=HISTORIC_ROAD_TRACES.find(r=>r.name==='Annexe inner east road').points;
  if(main)for(let i=1;i<points.length;i++){
   const a=points[i-1],b=points[i],dx=b[0]-a[0],dz=b[1]-a[1],length=Math.hypot(dx,dz),steps=Math.ceil(length/.75);
