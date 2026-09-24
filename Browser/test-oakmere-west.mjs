@@ -22,6 +22,7 @@ const previousRoot=new THREE.Matrix4().compose(
  new THREE.Vector3(ANNEXE_SITE.scale,1,ANNEXE_SITE.scale)
 );
 e.annexe.traverse(o=>{
+ for(let p=o;p;p=p.parent)if(p.name==='Oakmere rear court additions')return;
  if(!o.isMesh||o.name.startsWith('Rear service court link'))return;
  for(let p=o;p;p=p.parent)if(p===detail)return;
  const hash=createHash('sha256');

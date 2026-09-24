@@ -1,3 +1,4 @@
+import {KML_WILLOW_TREES} from './kml-tree-data.mjs';
 import {WILLOWS} from './willows.mjs';
 
 export function sampleLanding(seconds,{aspect=16/9,reducedMotion=false}={}){
@@ -22,8 +23,8 @@ export function createAerialControls(camera){
     tilt=Math.max(.2,Math.min(1.2,Math.acos(Math.max(-1,Math.min(1,dy/radius)))));
   }
   function pan(right,forward){
-    target.x=Math.max(-230,Math.min(Math.max(580,WILLOWS.x+80),target.x+Math.cos(angle)*right-Math.sin(angle)*forward));
-    target.z=Math.max(-230,Math.min(Math.max(420,WILLOWS.z+80),target.z-Math.sin(angle)*right-Math.cos(angle)*forward));apply();
+    target.x=Math.max(-230,Math.min(Math.max(580,WILLOWS.x+80,...KML_WILLOW_TREES.map(t=>t.x+80)),target.x+Math.cos(angle)*right-Math.sin(angle)*forward));
+    target.z=Math.max(-230,Math.min(Math.max(420,WILLOWS.z+80,...KML_WILLOW_TREES.map(t=>t.z+80)),target.z-Math.sin(angle)*right-Math.cos(angle)*forward));apply();
   }
   return {keys,sync,
     orbit(dx,dy){angle-=dx*.004;tilt=Math.max(.2,Math.min(1.2,tilt+dy*.003));apply();},

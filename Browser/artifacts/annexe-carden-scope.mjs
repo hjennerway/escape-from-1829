@@ -7,6 +7,8 @@ export function protectedCardenGeometry(THREE,annexe){
  annexe.updateMatrixWorld(true);
  const rows=[],instance=new THREE.Matrix4(),matrix=new THREE.Matrix4();
  annexe.traverse(o=>{
+  // Later additive Oakmere work is independently checked by test-oakmere-court.
+  for(let p=o;p;p=p.parent)if(p.name==='Oakmere rear court additions')return;
   if(!o.isMesh)return;
   let frontShift=0;
   // Independently normalize the concurrent, separately tested east-link restoration.

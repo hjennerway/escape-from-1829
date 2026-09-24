@@ -2,6 +2,9 @@ import {createHash} from 'node:crypto';
 export function jarmanProtected(THREE,root){
  root.updateMatrixWorld(true);const rows=[],instance=new THREE.Matrix4();
  root.traverse(o=>{
+  // Later additive Oakmere work is independently checked by test-oakmere-court.
+  for(let p=o;p;p=p.parent)if(p.name==='Oakmere rear court additions')return;
+  for(let p=o;p;p=p.parent)if(p.userData.lampPost||p.userData.willowTree||(p.userData.oakTree?.name==='Oak21'&&p.userData.oakTree.longitude===-2.903725817733399))return;
   if(!o.isMesh)return;
   for(let p=o;p;p=p.parent)if(p.name==='West court front elevation')return;
   const hash=createHash('sha256');

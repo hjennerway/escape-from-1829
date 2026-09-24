@@ -44,3 +44,42 @@ compiled previews match, and the compiled comparison and every timeline stop
 pass (`Browser/artifacts/larkton-compiled.txt`).
 
 Validation: all 64 browser test commands pass, as do the rebuilt source/compiled comparison and every timeline stop. Source and compiled overhead and close previews render without page errors. Logs and screenshots use `Browser/artifacts/larkton-`.
+
+## Recess between Larkton/Jodrell and Tarvin/Jarman — 24 September 2026
+
+The user's [marked model](recess-marked-model.png), [street photograph](recess-photo.png)
+and [aerial crop](recess-aerial.png) supersede the previous solid join at the inward
+end of the Larkton frontage. All retained Larkton/Jodrell ranges move left by seven
+map units (about 7.35 metres on the placed ground plane). This distance and the
+concealed connection dimensions are estimates from the photographs.
+
+The replacement connection has a two-storey rear range, projecting left cheek,
+recessed terracotta entrance arch, upper sashes, broad chimney and a lower hipped
+room with a pale glazed door. Its narrow paved approach and handrails follow the
+street photo. The other wards retain their placement and geometry. The whole
+Larkton paved court follows the shift, while only the final curve of its Parsons
+approach moves; the existing road junction remains fixed. Saved Larkton views
+follow the translated wing.
+
+`Browser/test-larkton-recess.mjs` compares 21,162 retained primitives against an
+independent pre-edit snapshot after undoing only the rigid translation, excluding
+the replaced connection. A separate fingerprint protects all 18,375 primitives
+outside Larkton/Jodrell without normalization. It also checks retained range
+sizes, exposed doors, the low projection, walking clearance and wall collisions.
+Historical whole-model snapshots advance only after this check passes; the rear
+alignment snapshot retains its original west/head records. Existing paving,
+road-continuity, ward ownership and viewpoint tests remain active.
+
+Browser sources and the locally rebuilt aerial model are updated. Unity and
+Blender sources and exports are unchanged. Previews and validation logs use
+`Browser/artifacts/larkton-recess-`.
+
+The concurrent Oakmere rear-court additions are omitted only during the immutable
+pre-edit fingerprint comparison, then restored before live visibility and walking
+checks. The latest combined aerial scene has been rebuilt and its timeline check
+passes for both source and compiled loading.
+
+Validation: all 68 browser-suite commands pass; the final photo-selection check
+was rerun after moving its probes to the revised frontage and recessed roof.
+Source/compiled rendering comparison and the rebuilt combined scene timeline
+pass. Final oblique, close and ground-level previews render without page errors.

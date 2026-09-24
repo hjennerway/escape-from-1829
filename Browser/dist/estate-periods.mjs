@@ -37,6 +37,7 @@ export const EXTRA_DATES=Object.freeze({
  'Water tower':{built:1829,demolished:null},
  'Modern site context':{built:2010,demolished:null},
  'Earlier planting':{built:1829,demolished:2010},
+ 'Surviving lamp posts':{built:1915,demolished:null},
  'Site context':{built:1829,demolished:null}
 });
 export function sectionDates(section){

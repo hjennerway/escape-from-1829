@@ -1,0 +1,2 @@
+PASS: precompiled building metadata and roof selection match the source scene.
+PASS: 34 buildings, every named location, bundled photos, roof picking before/after batching and LOD, empty ground and layout visibility (61168 selection triangles).

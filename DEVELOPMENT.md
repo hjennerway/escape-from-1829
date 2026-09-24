@@ -1,3 +1,39 @@
+## KML willow planting and concrete lamps (24 September 2026)
+
+Imported the two surviving lamps, Willow1–Willow8 and the second distinct
+Oak21 from `1829 (11).kml`. Existing Oak21 is retained once. Trees use the
+shared procedural template system on all periods; lamps use a photo-based
+low-poly concrete swan-neck prefab from 1915 onward. Saved Locations views
+and navigation reach the far-north willows. Coordinate duplicates are retained
+exactly. See [source and modelling notes](Research/kml-trees/README.md).
+
+Browser source and the local compiled aerial model are updated; Unity and
+Blender exports are unchanged.
+
+Validation: every browser test script passes (the full run reached its final
+photo-catalog check; that check passed after registering the three landscape
+destinations). Source/compiled comparison and every browser timeline stop pass.
+Final source/compiled lamp and willow previews have no page errors. The compiled
+manifest matches the current source. Logs/previews: `Browser/artifacts/kml-11-*`.
+
+## Larkton/Jodrell recessed ward connection (24 September 2026)
+
+Moved the entire retained Larkton/Jodrell wing seven map units left and replaced
+its solid Tarvin/Jarman join with the photographed stepped entrance: recessed
+arch, tall cheek, rear upper range and low projecting room. Paving and saved
+views follow the move; the Parsons junction and neighbouring wards stay fixed.
+See [reference, assumptions and preservation checks](Research/larkton-jodrell/README.md#recess-between-larktonjodrell-and-tarvinjarman--24-september-2026).
+
+The dedicated regression protects retained geometry and neighbouring wards and
+checks door visibility and walking collisions. Historical snapshots were updated
+after that independent check. Browser source and the generated aerial asset are
+updated; Unity and Blender exports are unchanged.
+
+Validation: all 68 browser-suite commands pass; the final photo-selection check
+was rerun after moving its probes to the revised frontage and recessed roof.
+Source/compiled rendering comparison and the rebuilt combined scene timeline
+pass. Final oblique, close and ground-level previews render without page errors.
+
 ## Rear courtyard guide-line alignment (September 24)
 
 The marked west rear range moves left to the blue guide; the angled Oakmere
@@ -1751,3 +1787,32 @@ and every timeline stop pass. The compiled source fingerprint is current.
 The independent retained-wing snapshot preserves 2,516 primitives. Historical
 whole-annexe snapshots were refreshed alongside the concurrent rear-side work;
 initial and final results are retained in Browser/artifacts/east-outer-* logs.
+
+### Oakmere rear courtyard — 24 September 2026
+
+The blue-marked angled wing now extends across its full width into the green
+rear wall. A square low annex occupies the red-marked area behind the service
+head. The supplied photo adds a projecting hip-roof bay, pale divided windows,
+brick bands, pipes, an entrance landing/handrails and evergreen planting. The
+unaltered photo is Oakmere's own gallery image; cars are omitted. See the
+[reference and scope notes](Research/oakmere/README.md#rear-courtyard-join-and-square-annex--24-september-2026).
+
+The additive assembly is constructed before batching and obstacle extraction.
+The dedicated test independently checks the join and retains all 21,256
+pre-existing annexe primitives, including concurrent Larkton work. Historical
+fingerprints exclude only this separately tested addition. Browser sources and
+compiled aerial assets change; Unity and Blender exports are unchanged.
+
+The follow-up blue/green photo circles lengthen the court-facing cross-head
+outward by 14 map units. The low square annex follows that end, improving its
+visibility from the reference direction. The long green wing and existing
+rear-wall connection are retained. The new head roof is continuous over the
+former end hip; collision coverage and the moved annex are checked.
+
+Oakmere validation: dedicated geometry/preservation and annex-sightline checks
+pass; source and compiled plan/detail/gallery previews load without page errors.
+The compiled/source comparison and every timeline browser check pass. Final
+images use `Browser/artifacts/oakmere-court-final-`; test/build logs use the
+`oakmere-court-` prefix.
+
+The full browser suite and its remaining-check rerun leave one unrelated failure: test-building-photos.mjs expects the concurrent willow-planting location in the building catalogue. Oakmere's source/compiled gallery browser check passes. The earlier concurrent oak-count assertion passes after its separate update. See oakmere-court-suite-corrected.log and oakmere-court-suite-remaining.log.

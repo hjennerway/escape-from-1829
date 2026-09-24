@@ -1,4 +1,5 @@
 import {ANNEXE_MAP_SCALE,ANNEXE_SITE,ANNEXE_RANGES,annexePoint,annexeSiteLocal} from './annexe.mjs';
+import {LARKTON_SHIFT} from './annexe-larkton-recess.mjs';
 import {annexeFrontPoint,annexeAvenueZ} from './annexe-front-roads.mjs';
 
 // Keep the entrance's local proportions independent of individual ward edits.
@@ -61,9 +62,9 @@ const wardPoint=([x,z])=>{const p=annexePoint(x*ANNEXE_MAP_SCALE,0,z*ANNEXE_MAP_
 export const LARKTON_PAVING_OUTLINE=Object.freeze([
  [-108,-64],[-73,-64],[-73,-7.92],[-86,-7.92],
  [-86,-49],[-101,-49],[-101,-39.92],[-108,-39.92]
-]);
+].map(([x,z])=>[x+LARKTON_SHIFT,z]));
 export const LARKTON_APPROACH=Object.freeze({name:'Annexe Larkton Parsons approach',width:5,
- points:curve([-176.5,-34.8],[[[-174,-48],[-157,-53],[-143,-54]],[[-128,-56],[-115,-58],[-103,-55]]]).map((p,i)=>i===0?[533,-135]:wardPoint(p))});
+ points:curve([-176.5,-34.8],[[[-174,-48],[-157,-53],[-143,-54]],[[-128+LARKTON_SHIFT,-56],[-115+LARKTON_SHIFT,-58],[-103+LARKTON_SHIFT,-55]]]).map((p,i)=>i===0?[533,-135]:wardPoint(p))});
 export const ANNEXE_ACCESS_ROADS=Object.freeze([LARKTON_APPROACH]);
 export const ANNEXE_ACCESS_PAVING=Object.freeze([
  {name:'Annexe Larkton paved court',surface:'asphalt apron',points:LARKTON_PAVING_OUTLINE.map(wardPoint)},

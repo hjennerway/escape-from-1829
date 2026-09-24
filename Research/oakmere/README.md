@@ -120,3 +120,44 @@ views are captured by `Browser/artifacts/oakmere-windows-preview.mjs`.
 
 This updates the shared browser source and generated aerial asset. Unity and
 Blender exports are unchanged.
+
+## Rear courtyard join and square annex — 24 September 2026
+
+The supplied [marked plan](rear-court-marked.png) extends the blue edge of the
+angled service wing into the green rear courtyard wall. The yellow dot and
+arrow place the camera inside the rear court, looking along Oakmere's eastern
+face. The [marked photograph](rear-court-annex-marked.png) identifies the low
+square annex beyond the service head; the [unaltered original](rear-court-photo.png)
+is now Oakmere's own gallery photo, with the earlier lawn image retained as
+an adjoining-range reference. Cars are not modelled.
+
+`annexe-oakmere-court.mjs` adds 12.5 map units along the wing's existing
+angle, overlapping the full blue end with the green wall. A continuous slate
+ridge covers the former end hip. The square annex is seven map units on
+each side, with a low hip roof, pale openings, a glazed entrance, a small
+landing and handrails. A shallow two-storey hip-roof bay, divided windows,
+brick bands, rainwater pipes and evergreen shrubs follow the photo. Dimensions
+and hidden joins are estimates within the existing registered footprint.
+
+All additions belong to Oakmere and are built before scene batching, shadow
+setup and walking obstacle extraction. They inherit the annexe's dates and
+Historic visibility. No runtime geometry move is introduced.
+
+`test-oakmere-court.mjs` checks the complete blue/green join, upward roof
+surfaces, annex dimensions, collisions, visibility and gallery ownership. The
+pre-edit `court-protected-before.json` preserves every original annexe
+primitive; earlier historical scope tests omit only the new named subtree.
+Source/compiled visual checks use `Browser/artifacts/oakmere-court-preview.mjs`.
+Browser sources and generated aerial assets are updated; Unity and Blender
+sources and exports are unchanged.
+
+### Blue cross-head face correction
+
+The later [render circles](head-face-render-marked.png) and
+[photo circles](head-face-photo-marked.png) distinguish the green long-wing
+face from the blue court-facing cross-head. The blue face grows outward by
+14 map units, retaining the long wing and the previously requested green-wall
+join. Its new face has pale divided sashes, brick bands and a shallow hip-roof
+bay. The low square annex moves with the outer end, attaching to the end-side corner
+of the head and exposing it from the supplied photo direction.
+The dedicated test checks the widened wall/roof and relocated annex as well.

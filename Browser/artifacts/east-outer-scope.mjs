@@ -6,6 +6,8 @@ export function eastOuterProtected(THREE,annexe){
  const group=annexe.userData.eastFrontWing,rows=[],instance=new THREE.Matrix4();
  group.updateMatrixWorld(true);
  group.traverse(o=>{
+  // Later additive Oakmere work is independently checked by test-oakmere-court.
+  for(let p=o;p;p=p.parent)if(p.name==='Oakmere rear court additions')return;
   if(!o.isMesh)return;
   for(let p=o;p&&p!==group;p=p.parent)if(p.name==='East outer veranda')return;
   const local=o.matrix.clone();for(let p=o.parent;p&&p!==group;p=p.parent)local.premultiply(p.matrix);

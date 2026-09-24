@@ -1,3 +1,5 @@
+import {addWillowTrees} from './willow-trees.mjs';
+import {addSurvivingLampPosts} from './surviving-lamp-posts.mjs';
 import {matchEstateGrass} from './estate-grass.mjs';
 import {createBowlingGreen} from './bowling-green.mjs';
 import {photoDetailPrimitives} from './photo-detail-primitives.mjs';
@@ -67,6 +69,8 @@ export function createEscapeExterior(THREE,aspect){
   addBeechTrees(THREE,trees);
   addAdminPineTrees(THREE,trees);
   addOakTrees(THREE,trees);
+  addWillowTrees(THREE,trees);
+  addSurvivingLampPosts(THREE,model);
   scene.add(new THREE.HemisphereLight(0xe4eff2,0x59634a,2));
   const sun=new THREE.DirectionalLight(0xffe2b7,2.8);sun.position.set(145,120,50);sun.target.position.set(230,0,-10);scene.add(sun.target);sun.castShadow=true;
   sun.shadow.mapSize.set(4096,4096);Object.assign(sun.shadow.camera,{left:-360,right:360,top:300,bottom:-300,near:1,far:850});sun.shadow.bias=-.0003;sun.shadow.normalBias=.25;scene.add(sun);

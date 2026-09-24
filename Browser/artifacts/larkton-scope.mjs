@@ -2,6 +2,8 @@ import {createHash} from 'node:crypto';
 export function larktonProtected(THREE,annexe){
  annexe.updateMatrixWorld(true);const rows=[],instance=new THREE.Matrix4();
  annexe.traverse(o=>{
+  // Later additive Oakmere work is independently checked by test-oakmere-court.
+  for(let p=o;p;p=p.parent)if(p.name==='Oakmere rear court additions')return;
   if(!o.isMesh)return;
   for(let p=o;p&&p!==annexe;p=p.parent)if(p.userData.wardId==='larkton-jodrell')return;
   const h=createHash('sha256');for(const [key,a] of Object.entries(o.geometry.attributes).sort()){h.update(key);h.update(Buffer.from(a.array.buffer,a.array.byteOffset,a.array.byteLength));}

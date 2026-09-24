@@ -15,6 +15,8 @@ export function protectedKitchenGeometry(THREE,annexe){
   ANNEXE_SITE.z+(ANNEXE_SITE.scale-ANNEXE.scale)*(-s*x+c*z)
  )).invert();
  annexe.traverse(o=>{
+  // Later additive Oakmere work is independently checked by test-oakmere-court.
+  for(let p=o;p;p=p.parent)if(p.name==='Oakmere rear court additions')return;
   if(!o.isMesh)return;
   let protectedDetail=false;
   for(let p=o;p&&p!==annexe;p=p.parent){

@@ -1,3 +1,5 @@
+import {LOCATION_VIEWS,LOCATION_WALKS} from './dist/location-views.mjs';
+import {LARKTON_SHIFT} from './dist/annexe-larkton-recess.mjs';
 import assert from 'node:assert/strict';
 import {readFile,stat} from 'node:fs/promises';
 import {gunzipSync} from 'node:zlib';
@@ -18,7 +20,10 @@ const selection=createBuildingSelection(THREE,exterior);
 assert.deepEqual(selection.entries.map(e=>e.id),BUILDING_CATALOG.map(e=>e.id),'Every catalogued building has selectable geometry');
 const html=await readFile(new URL('./dist/aerial.html',import.meta.url),'utf8');
 const menu=html.slice(html.indexOf('<div id="locationsPanel"'),html.indexOf('</ul></div>'));
-for(const [,id] of menu.matchAll(/\?view=([^"&]+)/g))assert(BUILDING_CATALOG.some(e=>e.locations.includes(id)),`Named location ${id} is represented`);
+for(const [,id] of menu.matchAll(/\?view=([^"&]+)/g)){
+ if(['willow-planting','lamp-post-1','lamp-post-2'].includes(id)){assert(LOCATION_VIEWS[id]&&LOCATION_WALKS[id],'Landscape location has aerial and walking views');continue;}
+ assert(BUILDING_CATALOG.some(e=>e.locations.includes(id)),`Named location ${id} is represented`);
+}
 for(const entry of BUILDING_CATALOG)for(const photo of [...entry.photos,...entry.contextPhotos??[]])assert((await stat(new URL(`./dist/${photo.src}`,import.meta.url))).size>0,photo.src);
 
 const camera=new THREE.PerspectiveCamera(46,1,.1,3000),rect={left:0,top:0,width:1000,height:1000};
@@ -27,7 +32,7 @@ const camera=new THREE.PerspectiveCamera(46,1,.1,3000),rect={left:0,top:0,width:
 const samples=[];
 // The marked west frontage and its short court link select Larkton/Jodrell,
 // while the neighbouring courtyard and central hall keep their own selections.
-for(const [id,x,z] of [['larkton-jodrell',-90,-4],['larkton-jodrell',-63,-7],['tarvin-jarman',-45,25],['annexe',0,2]]){
+for(const [id,x,z] of [['larkton-jodrell',-90+LARKTON_SHIFT,-4],['larkton-jodrell',-63.5+LARKTON_SHIFT,-6],['tarvin-jarman',-45,25],['annexe',0,2]]){
  const target=annexePoint(x*ANNEXE_MAP_SCALE,0,z*ANNEXE_MAP_SCALE);
  const position=[target[0],200,target[2]+.001];
  camera.position.fromArray(position);camera.lookAt(...target);

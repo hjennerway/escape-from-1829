@@ -68,15 +68,18 @@ const northService=bezier(shiftAnnexeTeardrop([270,18]),[
  [[251,-68.8],[255,-68.8],[260,-68.8]],[[268,-68.8],[270,-74],[270,-82]],
  [[270,-98],[270,-110],northJunction]
 ]);
+// Share the northern carriageway until beyond the mature tree crowns. The
+// former parallel fork widened this stretch and curved directly beneath them.
+const parsonsNorthRoad=bezier(northJunction,[
+ [[291,-113],[328,-108],[338,-106]],[[344,-105],[350,-106],parsonsCrossing],
+ [[403,-119],[460,-132],[510,-145]],[[518,-148],[528,-140],[533,-135]],
+ [[548,-122],[553,-109],parsonsNorthEnd]
+]);
 export const HISTORIC_ROAD_TRACES=Object.freeze([
  ...ANNEXE_ACCESS_ROADS,
- {name:'Northern Parsons Lane connection',width:6,points:bezier(northJunction,[
-  [[291,-113],[328,-108],[338,-106]],[[344,-105],[350,-106],parsonsCrossing],
-  [[403,-119],[460,-132],[510,-145]],[[518,-148],[528,-140],[533,-135]],
-  [[548,-122],[553,-109],parsonsNorthEnd]
- ])},
- {name:'Parsons Lane southern fork',width:6,points:bezier(northJunction,[
-  [[286,-108],[305,-105],[316,-104]],[[329,-102],[336,-93],[333.63,-84.91]]
+ {name:'Northern Parsons Lane connection',width:6,points:parsonsNorthRoad},
+ {name:'Parsons Lane southern fork',width:6,points:bezier(parsonsNorthRoad[12],[
+  [[336,-107],[340,-97],[333.63,-84.91]]
  ])},
  {name:'Historic lane continuation',width:6,points:bezier(VIVIENNE_LANE[8],[
   [[145,55],[153,49],[167,45]],[[173,45],[174,43.5],semicircle[0]],

@@ -1,3 +1,8 @@
+import {KML_WILLOW_TREES} from './kml-tree-data.mjs';
+import {LAMP_POSTS} from './kml-11-data.mjs';
+const planting=KML_WILLOW_TREES[4];
+const importViews=Object.fromEntries([['willow-planting',planting],...LAMP_POSTS.map((p,i)=>['lamp-post-'+(i+1),p])].map(([key,p])=>[key,{position:[p.x+(key.startsWith('lamp')?-8:28),key.startsWith('lamp')?2.5:20,p.z+(key.startsWith('lamp')?-8:32)],target:[p.x,key.startsWith('lamp')?3:5,p.z],fov:48}]));
+const importWalks=Object.fromEntries([['willow-planting',planting],...LAMP_POSTS.map((p,i)=>['lamp-post-'+(i+1),p])].map(([key,p])=>[key,{position:[p.x+12,1.8,p.z+14],target:[p.x,4,p.z],fov:60}]));
 import {HALE_WARD} from './hale-daresbury-huxley-dunham.mjs';
 import {placeWardViews} from './ward-placement.mjs';
 import {TOWER_RANGES} from './tower-buildings.mjs';
@@ -42,6 +47,7 @@ const storesBounds=[Math.min(...storesRanges.map(r=>r.rect[0])),Math.min(...stor
 const storesTarget=[(storesBounds[0]+storesBounds[2])/2,4.5,(storesBounds[1]+storesBounds[3])/2];
 export const LOCATION_VIEWS=Object.freeze({
   ...WILLOWS_VIEWS,
+  ...importViews,
   ...WEST_REFINEMENT_VIEWS,
   stores:{position:[storesBounds[2]+44,48,storesBounds[3]+51],target:storesTarget,fov:48},
   ...MAIN_KITCHEN_VIEWS,
@@ -51,6 +57,7 @@ export const LOCATION_VIEWS=Object.freeze({
   saughall:rearAerial
 });
 export const LOCATION_WALKS=Object.freeze({
+  ...importWalks,
   ...Object.fromEntries(Object.keys(WILLOWS_VIEWS).map(key=>[key,WILLOWS_WALK])),
   ...Object.fromEntries(Object.entries(WEST_REFINEMENT_VIEWS).filter(([key])=>key!=='west-refinement')),
   stores:{position:[storesBounds[2]+13,1.8,storesBounds[3]+9],target:[storesBounds[2],4,storesTarget[2]],fov:60},

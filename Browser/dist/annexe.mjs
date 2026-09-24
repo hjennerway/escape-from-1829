@@ -1,3 +1,5 @@
+import {addOakmereCourt} from './annexe-oakmere-court.mjs';
+import {addLarktonRecess,LARKTON_SHIFT} from './annexe-larkton-recess.mjs';
 import {alignAnnexeRearSide,ANNEXE_REAR_WEST_SHIFT,ANNEXE_REAR_HEAD_SHIFT} from './annexe-rear-side-alignment.mjs';
 import {shortenAnnexeTowers} from './annexe-tower-height.mjs';
 import {addAnnexeEastVeranda} from './annexe-east-veranda.mjs';
@@ -43,6 +45,7 @@ const shot=(p,t,fov=55)=>Object.freeze({position:annexePoint(p[0],p[1]>30?p[1]*A
 const rearShot=(p,t,fov)=>shot([p[0],p[1],stretchAnnexeRearZ(p[2]/ANNEXE_MAP_SCALE)*ANNEXE_MAP_SCALE],[t[0],t[1],stretchAnnexeRearZ(t[2]/ANNEXE_MAP_SCALE)*ANNEXE_MAP_SCALE],fov);
 const rearWardShot=(p,t,fov)=>shot([p[0],p[1],p[2]+ANNEXE_REAR_SHIFT*ANNEXE_MAP_SCALE],[t[0],t[1],t[2]+ANNEXE_REAR_SHIFT*ANNEXE_MAP_SCALE],fov);
 const sideShot=(fn,shift,p,t,fov)=>fn([p[0]+shift[0]*ANNEXE_MAP_SCALE,p[1],p[2]+shift[1]*ANNEXE_MAP_SCALE],[t[0]+shift[0]*ANNEXE_MAP_SCALE,t[1],t[2]+shift[1]*ANNEXE_MAP_SCALE],fov);
+const larktonShot=(p,t,fov)=>sideShot(shot,[LARKTON_SHIFT,0],p,t,fov);
 const rearHeadShot=(p,t,fov)=>sideShot(rearWardShot,ANNEXE_REAR_HEAD_SHIFT,p,t,fov);
 const rearWestShot=(p,t,fov)=>sideShot(rearShot,[ANNEXE_REAR_WEST_SHIFT,0],p,t,fov);
 const eastFrontShot=(p,t,fov)=>shot([p[0]+ANNEXE_EAST_FRONT_SHIFT*ANNEXE_MAP_SCALE,p[1],p[2]],[t[0]+ANNEXE_EAST_FRONT_SHIFT*ANNEXE_MAP_SCALE,t[1],t[2]],fov);
@@ -52,7 +55,7 @@ const eastFrontShot=(p,t,fov)=>shot([p[0]+ANNEXE_EAST_FRONT_SHIFT*ANNEXE_MAP_SCA
 export const ANNEXE_WARDS=Object.freeze([
  {id:'larkton-jodrell',name:'Larkton/Jodrell',referenceColor:'yellow',
   rangeNames:['West end ward','West rear pavilion','West end projecting rooms','West end middle rooms','West front connecting ward','West court outer link'],
-  aerial:shot([-245,125,77],[-156,5,-35]),walk:shot([-196,1.8,-35],[-166,6,-35],65)},
+  aerial:larktonShot([-245,125,77],[-156,5,-35]),walk:larktonShot([-196,1.8,-35],[-166,6,-35],65)},
  {id:'tarvin-jarman',name:'Tarvin/Jarman',referenceColor:'blue',
   rangeNames:['West court inner return','West court front range','West court outer return','West court corner infill','West court back range'],
   aerial:shot([-116,113,145],[-76,4,19]),walk:shot([-76,1.8,65],[-76,7,40],65)},
@@ -73,7 +76,7 @@ const southOffset=mapSouth.map((value,i)=>(value-mapNorth[i])*.01),site=annexePl
 export const ANNEXE_VIEWS=Object.freeze({
  ...ANNEXE_WARD_VIEWS,
  'oakmere-photo':rearWestShot([-101,2.2,-65],[-31,6,-51],49),
- 'annexe-outer-west':shot([-201,2,34],[-146,5.5,0],58),
+ 'annexe-outer-west':larktonShot([-201,2,34],[-146,5.5,0],58),
  'annexe-outer-east':eastFrontShot([211,2,56],[145,5.5,20],58),
  'oakmere-lawn':rearWestShot([-138,66,-103],[-24,5,-46],51),
  annexe:shot([-215,185,290],[0,3,-30],56),
@@ -198,6 +201,8 @@ export function createAnnexe(THREE,{brick,roof,material,worldUV,hipRoof}){
    b.x=px+Math.cos(angle)*dx+Math.sin(angle)*dz;b.z=pz-Math.sin(angle)*dx+Math.cos(angle)*dz;b.r+=angle;
   }
   ranges.push(b);
+  // Keep the neighbouring ward occupancy mask; build the recessed link below.
+  if(b.name==='West court outer link')continue;
   solid(brick,b.x,b.h/2,b.z,b.w,b.h,b.d,b.name+' brick walls',b.r);
   box(red,b.x,.25,b.z,b.w+.13,.5,b.d+.13,b.r);
   for(const y of [4.35,8.65,12.6])if(y<b.h&&!b.kitchen)box(red,b.x,y,b.z,b.w+.16,.32,b.d+.16,b.r);
@@ -212,7 +217,7 @@ export function createAnnexe(THREE,{brick,roof,material,worldUV,hipRoof}){
  for(const b of ranges){
   currentWard=b.wardId;
   currentSection=rearSection(b.name)??annexeFrontSection(b.name);
-  if(b.kitchen)continue;
+  if(b.kitchen||b.name==='West court outer link')continue;
   for(const face of ['long','end'])for(const side of [-1,1]){
    if(face==='end'&&((b.name==='Rear court back range'&&side>0)||(b.name==='Rear court back east range'&&side<0)))continue;
    if(b.name==='Central rear spine'&&side<0)continue; // Preserve the accepted blank rear and west generic faces.
@@ -283,7 +288,7 @@ export function createAnnexe(THREE,{brick,roof,material,worldUV,hipRoof}){
  const dome=mesh(new THREE.SphereGeometry(1.43,16,10,0,Math.PI*2,0,Math.PI/2),lead,0,bellY+3.82,bellZ,'Bell tower dome');dome.scale.y=1.15;
  beam([0,bellY+5.35,bellZ],[0,bellY+7,bellZ],.09,dark,'Bell tower weather vane');
  beam([-.5,bellY+6.65,bellZ],[.5,bellY+6.65,bellZ],.07,dark,'Weather vane crossbar');
- for(const b of ranges.filter(b=>b.h>7&&!b.name.includes('tower')&&!b.name.includes('hall'))){
+ for(const b of ranges.filter(b=>b.h>7&&!b.name.includes('tower')&&!b.name.includes('hall')&&b.name!=='West court outer link')){
   currentWard=b.wardId;
   currentSection=rearSection(b.name)??annexeFrontSection(b.name);
   const [x,z]=position(b,b.w*.28,0),base=b.h+b.rise*.65,top=base+2.55;
@@ -362,6 +367,8 @@ export function createAnnexe(THREE,{brick,roof,material,worldUV,hipRoof}){
  model.userData.eastVeranda=addAnnexeEastVeranda(THREE,{parent:sections.eastOuter,scale:ANNEXE_MAP_SCALE,roof,material,worldUV});
  restoreAnnexeFrontLink({model,sections,wards,ranges,openings,scale:ANNEXE_MAP_SCALE});
  alignAnnexeRearSide({model,sections,wards,ranges,openings,scale:ANNEXE_MAP_SCALE});
+ addLarktonRecess(THREE,{model,ranges,openings,scale:ANNEXE_MAP_SCALE,brick,roof,material,worldUV,hipRoof});
+ addOakmereCourt(THREE,{model,scale:ANNEXE_MAP_SCALE,brick,roof,material,worldUV,hipRoof});
  model.userData.ranges=ranges;model.userData.annexeOpenings=openings;model.userData.osRegistration=ANNEXE_OS_REGISTRATION;
  model.userData.placement=ANNEXE_PLACEMENT_REFERENCE;model.userData.osRefinement=ANNEXE_OS_REFINEMENT;model.userData.photoPlacement=ANNEXE_PHOTO_PLACEMENT;
  shortenAnnexeTowers(THREE,model,ranges,openings);

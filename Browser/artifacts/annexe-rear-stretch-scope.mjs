@@ -6,6 +6,8 @@ export function rearStretchSnapshot(THREE,annexe){
  function fingerprint(root,protectedOnly=false){
   const records=[],localInverse=root===annexe?inverse:root.matrixWorld.clone().invert();
   root.traverse(o=>{
+  // Later additive Oakmere work is independently checked by test-oakmere-court.
+  for(let p=o;p;p=p.parent)if(p.name==='Oakmere rear court additions')return;
    if(!o.isMesh)return;
    if(protectedOnly){
     for(let p=o;p&&p!==annexe;p=p.parent)if(['Rear court west assembly','Oakmere west lawn elevation','Annexe rear kitchen and paving','Oakmere','Leighton/Newton'].includes(p.name))return;

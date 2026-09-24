@@ -25,7 +25,7 @@ export const BUILDING_CATALOG=Object.freeze([
  {id:'picton-carden',name:'Annexe · Picton / Carden Ward',photos:[photo('carden-mural','Carden Ward · archway mural')],contextPhotos:annexe},
  {id:'tarvin-jarman',locations:['tarvin-jarman','annexe-jarman-photo'],name:'Annexe · Tarvin / Jarman Ward',photos:[photo('tarvin-mural','Tarvin Ward · village mural')],contextPhotos:annexe},
  {id:'leighton-newton',name:'Annexe · Leighton / Newton Ward',photos:[],contextPhotos:annexe},
- {id:'oakmere',name:'Annexe · Oakmere Ward',photos:[],contextPhotos:[photo('oakmere-lawn','Oakmere lawn · adjoining central rear range')]},
+ {id:'oakmere',name:'Annexe · Oakmere Ward',photos:[photo('oakmere-rear-court','Oakmere · rear courtyard and square annex')],contextPhotos:[photo('oakmere-lawn','Oakmere lawn · adjoining central rear range')]},
  {id:'larkton-jodrell',name:'Annexe · Larkton / Jodrell Ward',photos:[photo('annexe-outer','Annexe · outer west elevation'),photo('jodrell-mural','Jodrell Ward · radio telescope mural')]},
  {id:'greenhouses',name:'Greenhouses',photos:[photo('greenhouses','Greenhouses and gardeners’ buildings'),photo('greenhouses-interior','Greenhouses · interior and growing benches')]},
  {id:'outhouse',name:'Outhouse',photos:[1,2,3].map(n=>photo(`outhouse-${n}`,`Outhouse · view ${n}`))},

@@ -11,6 +11,8 @@ export function removedCardenBayPart(o,m){
 export function cardenCorrectionSnapshot(THREE,annexe,{excludeConcurrentJarman=false}={}){
  annexe.updateMatrixWorld(true);const rows=[],instance=new THREE.Matrix4();
  annexe.traverse(o=>{
+  // Later additive Oakmere work is independently checked by test-oakmere-court.
+  for(let p=o;p;p=p.parent)if(p.name==='Oakmere rear court additions')return;
   if(!o.isMesh)return;
   if(excludeConcurrentJarman)for(let p=o;p&&p!==annexe;p=p.parent)if(p.name==='West court front elevation')return;
   for(let p=o;p&&p!==annexe;p=p.parent)if(['Carden side elevation','Oakmere lawn elevation'].includes(p.name))return;

@@ -1,3 +1,4 @@
+import {KML_11_POINTS} from './kml-11-data.mjs';
 import {earthToScene} from './earth-registration.mjs';
 
 // Exact Point coordinates from Research/kml-trees/1829.kml (Pine1–13, Oak1–2)
@@ -45,6 +46,9 @@ export const KML_TREE_POINTS=Object.freeze([
   {name:'Oak22',coordinates:[-2.903513799830775,53.2129581108177,27.84551362613409]},
   {name:'Oak19',coordinates:[-2.902974648914852,53.21311016843507,32.92018969682149]},
   {name:'Oak20',coordinates:[-2.903133266722551,53.21306954432858,32.68083544448528]}
+,
+  // Existing Oak21 is already imported; keep the second distinct point only.
+  ...KML_11_POINTS.filter(p=>p.name.startsWith('Willow')||(p.name==='Oak21'&&p.coordinates[0]!==-2.903325559043617))
 ].map(point=>Object.freeze({...point,coordinates:Object.freeze(point.coordinates)})));
 
 // Stable pseudorandom yaw varies the copies without changing them at reload.
@@ -52,12 +56,14 @@ let rotationSeed=182917;
 export const KML_TREES=Object.freeze(KML_TREE_POINTS.map(point=>{
   const [longitude,latitude,altitude]=point.coordinates,[x,z]=earthToScene(latitude,longitude);
   rotationSeed=(Math.imul(rotationSeed,1664525)+1013904223)>>>0;
-  const species=point.name.startsWith('Pine')?'pine':point.name.startsWith('Beech')?'beech':'oak';
+  const species=point.name.startsWith('Pine')?'pine':point.name.startsWith('Beech')?'beech':point.name.startsWith('Willow')?'willow':'oak';
   const model={pine:{height:24,radius:5.8,seed:182900},oak:{height:22,radius:10,seed:182902},
-    beech:{height:19.5,radius:8.6,seed:1901,copper:false}}[species];
+    willow:{height:16,radius:7,seed:182911},beech:{height:19.5,radius:8.6,seed:1901,copper:false}}[species];
   return Object.freeze({name:point.name,species,x,z,latitude,longitude,altitude,...model,
     rotation:rotationSeed/2**32*Math.PI*2});
 }));
 export const KML_PINE_TREES=Object.freeze(KML_TREES.filter(tree=>tree.species==='pine'));
 export const KML_OAK_TREES=Object.freeze(KML_TREES.filter(tree=>tree.species==='oak'));
 export const KML_BEECH_TREES=Object.freeze(KML_TREES.filter(tree=>tree.species==='beech'));
+
+export const KML_WILLOW_TREES=Object.freeze(KML_TREES.filter(tree=>tree.species==='willow'));

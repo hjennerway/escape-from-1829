@@ -1,3 +1,4 @@
+import {LARKTON_SHIFT} from './dist/annexe-larkton-recess.mjs';
 import assert from 'node:assert/strict';
 import {execFileSync} from 'node:child_process';
 import {fileURLToPath} from 'node:url';
@@ -17,9 +18,9 @@ const e=createEscapeExterior(THREE,1.5),a=e.annexe,l=createAerialLayouts(THREE,e
 execFileSync(process.execPath,['--import',new URL('./artifacts/larkton-original-entrance-loader.mjs',import.meta.url).href,fileURLToPath(new URL('./artifacts/check-larkton-original.mjs',import.meta.url))],{windowsHide:true});
 assert(!a.getObjectByName('West rear link brick walls'));assert(!a.getObjectByName('West rear link slate roof'));
 const pavilion=a.userData.ranges.find(r=>r.name==='West rear pavilion');
-assert(Math.abs((pavilion.x+pavilion.w/2)/ANNEXE_MAP_SCALE+86)<1e-9);
+assert(Math.abs((pavilion.x+pavilion.w/2)/ANNEXE_MAP_SCALE+86-LARKTON_SHIFT)<1e-9);
 const obstacles=exteriorObstacles(THREE,e.model),ray=new THREE.Raycaster();
-const world=(x,z)=>{const p=annexePoint(x*ANNEXE_MAP_SCALE,0,z*ANNEXE_MAP_SCALE);return [p[0],p[2]];};
+const world=(x,z)=>{const p=annexePoint((x+LARKTON_SHIFT)*ANNEXE_MAP_SCALE,0,z*ANNEXE_MAP_SCALE);return [p[0],p[2]];};
 const surface=p=>{ray.set(new THREE.Vector3(p[0],1,p[1]),new THREE.Vector3(0,-1,0));return ray.intersectObject(l.historicRoads,true)[0]?.object.userData.surface;};
 for(const [x,z] of [[-81,-44],[-81,-35],[-81,-20],[-81,-10]]){
  const p=world(x,z);assert(!obstacles.some(o=>obstacleContains(o,...p,0)),'Removed wing is walkable');assert.equal(surface(p),'black road');

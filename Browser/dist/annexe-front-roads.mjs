@@ -7,7 +7,7 @@ export const ANNEXE_FRONT_ROAD_REFERENCE=Object.freeze({
  redPixels:[[270,418],[551,19]],yellowPixels:[[280,266],[379,254]],
  teardropShift:[-16,-12],
  redLine:[[251.45,3.47],[428.5,-186.86848406675448]],
- gravelStart:[263.7,-66.6],gravelWidth:2.4
+ gravelStart:[263.7,-72.6],gravelWidth:2.4
 });
 export const ANNEXE_TEARDROP_SHIFT=ANNEXE_FRONT_ROAD_REFERENCE.teardropShift;
 export const shiftAnnexeTeardrop=([x,z])=>[x+ANNEXE_TEARDROP_SHIFT[0],z+ANNEXE_TEARDROP_SHIFT[1]];
@@ -25,6 +25,7 @@ const [a,b]=ANNEXE_FRONT_ROAD_REFERENCE.redLine.map(local);
 // than a parallel approximation, fixes both lips of the sweeping entrance.
 export const annexeAvenueZ=x=>a[1]+(x-a[0])*(b[1]-a[1])/(b[0]-a[0]);
 export const annexeFrontPoint=([x,z])=>{const p=annexeSitePoint(x,0,z);return [p[0],p[2]];};
+// September 24 blue guide: move the complete gravel link six units north.
 const start=ANNEXE_FRONT_ROAD_REFERENCE.gravelStart;
 const slope=-1.5/47.1;
 const t=(start[1]+slope*(ra[0]-start[0])-ra[1])/((rb[1]-ra[1])-slope*(rb[0]-ra[0]));

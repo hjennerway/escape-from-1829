@@ -3,6 +3,8 @@ import {isTowerPart} from '../dist/annexe-tower-height.mjs';
 export function cardenHeightSnapshot(THREE,a){
  a.updateMatrixWorld(true);const protectedRows=[],conservatory=[],towerRows=[],matrix=new THREE.Matrix4(),towers=a.userData.ranges.filter(b=>/^(East|West) square tower$/.test(b.name));
  a.traverse(o=>{
+  // Later additive Oakmere work is independently checked by test-oakmere-court.
+  for(let p=o;p;p=p.parent)if(p.name==='Oakmere rear court additions')return;
   if(!o.isMesh)return;
   const ancestors=[];for(let p=o;p&&p!==a;p=p.parent)ancestors.push(p.name);
   if(ancestors.includes('West court front elevation'))return;

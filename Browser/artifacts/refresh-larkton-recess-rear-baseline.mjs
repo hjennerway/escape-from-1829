@@ -1,0 +1,11 @@
+import assert from 'node:assert/strict';
+import {readFileSync,writeFileSync} from 'node:fs';
+import * as THREE from '../dist/vendor/three.module.js';
+import {createEscapeExterior} from '../dist/escape-exterior.mjs';
+import {rearSideSnapshot} from './rear-side-alignment-scope.mjs';
+globalThis.document={createElement:()=>({getContext:()=>({fillRect(){}})})};
+const a=createEscapeExterior(THREE,1.5).annexe,path=new URL('../../Research/annexe-kitchen/side-alignment-before.json',import.meta.url),before=JSON.parse(readFileSync(path)),now=rearSideSnapshot(THREE,a,{normalise:true});
+for(const k of ['head','west'])assert.deepEqual(now[k],before.snapshot[k]);
+before.snapshot.fixed=now.fixed;
+before.ranges=before.ranges.map(old=>{const r=a.userData.ranges.find(r=>r.name===old.name);if(r?.wardId!=='larkton-jodrell')return old;return {...old,...Object.fromEntries(['x','z','w','d','h','r'].map(k=>[k,r[k]]))};});
+writeFileSync(path,JSON.stringify(before,null,2)+'\n');

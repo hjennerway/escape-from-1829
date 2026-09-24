@@ -1,4 +1,42 @@
-# KML pine, oak and beech placement
+# KML tree and lamp placement
+
+## Willow planting and surviving concrete lamps (September 24)
+
+`1829-11.kml` preserves the supplied `1829 (11).kml` byte-for-byte. Import only
+Surviving Lamp Post #1/#2, Willow1–Willow8 and the additional Oak21 Point.
+The earlier Oak21 also occurs unchanged in this export and is not duplicated;
+the second, distinct Oak21 is retained. There are now 48 mapped trees.
+Willow2/3 and Willow6/7 share longitude/latitude but retain separate named
+objects and source altitude metadata. No points are moved to avoid overlap.
+
+The willows are north of the estate, at the exact registered KML positions.
+Their seeded 16-metre weeping template uses the existing shared tree-generator
+utilities: instanced limbs and leaf sprays, shared copy buffers, narrow leaf
+textures and three foliage detail levels. The new oak uses the existing oak
+template. All nine additions appear on every period and follow the Trees toggle
+and trunk collisions. Terrain already covers their positions; navigation bounds
+now include them. Locations offers Willow planting and each lamp in both views.
+
+The user’s correction and `concrete-lamp-reference.png` supersede the first
+Victorian lantern interpretation. Both lamps share a 92-triangle prefab: a
+plain tapered rectangular concrete column, swept curved arm and slim rectangular
+head, with a seeded rough aggregate texture. Overall height (approximately six
+metres), concealed base and arm bearing are estimates; positions use Point
+coordinates, never LookAt camera values. Lamps use flat ground, preserve KML
+altitudes as metadata, and have their own 1915–current rule independent of the
+Annexe demolition date. They stay visible when trees are hidden. No dynamic
+lights were added. Browser sources and the generated aerial asset are updated;
+Unity and Blender exports are unchanged.
+
+`test-kml-11.mjs` checks exact lamp coordinates, shared low-poly geometry, every
+period boundary, collisions and distant navigation. The existing KML/performance
+checks cover all 48 points, duplicate oak names, shared buffers and foliage LOD.
+The Jarman preservation check excludes only these additive imports, retaining
+its existing 859,968-primitive baseline unchanged. Validation logs and source/
+compiled previews use the `Browser/artifacts/kml-11-` prefix. The rebuilt
+source/compiled comparison and all browser timeline stops pass; final lamp and
+willow source/compiled previews render without page errors.
+
 
 ## Oak13–Oak22 and Beech1–Beech2 (September 17)
 

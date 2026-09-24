@@ -10,6 +10,8 @@ globalThis.document={createElement:()=>({getContext:()=>({fillRect(){}})})};
 const {annexe}=createEscapeExterior(THREE,1.5);annexe.updateMatrixWorld(true);
 const rows=[],instance=new THREE.Matrix4();
 annexe.traverse(o=>{
+  // Later additive Oakmere work is independently checked by test-oakmere-court.
+  for(let p=o;p;p=p.parent)if(p.name==='Oakmere rear court additions')return;
  if(!o.isMesh)return;
  const hash=createHash('sha256');
  for(const [name,a] of Object.entries(o.geometry.attributes).sort())hash.update(name).update(Buffer.from(a.array.buffer,a.array.byteOffset,a.array.byteLength));

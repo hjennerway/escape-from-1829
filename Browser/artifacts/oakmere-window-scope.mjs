@@ -27,6 +27,8 @@ export function protectedWindowGeometry(THREE,annexe){
   new THREE.Vector3(preceding.x,0,preceding.z),annexe.quaternion.clone(),new THREE.Vector3(preceding.planScale,1,preceding.planScale)
  );
  annexe.traverse(object=>{
+  // Later additive Oakmere work is independently checked by test-oakmere-court.
+  for(let p=object;p;p=p.parent)if(p.name==='Oakmere rear court additions')return;
   if(!object.isMesh)return;
   const hash=createHash('sha256');
   for(const [key,a] of Object.entries(object.geometry.attributes).sort()){

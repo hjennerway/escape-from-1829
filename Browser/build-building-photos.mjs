@@ -3,6 +3,7 @@ import {createRequire} from 'node:module';
 import {mkdir,writeFile} from 'node:fs/promises';
 const require=createRequire(import.meta.url),sharp=require('sharp');
 const sources={
+ 'oakmere-rear-court':'Research/oakmere/rear-court-photo.png',
  'willows':'Research/willows/img1.jpg',
  '1829-front':'Browser/dist/exterior/1829front.webp','1829-front-2':'Browser/dist/exterior/1829front2.webp','1829-front-3':'Browser/dist/exterior/1829front3.webp',
  '1829-back':'Research/1829-back/img1.jpg',
