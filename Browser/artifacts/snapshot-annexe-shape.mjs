@@ -5,12 +5,14 @@ import * as THREE from '../dist/vendor/three.module.js';
 import {createEscapeExterior} from '../dist/escape-exterior.mjs';
 globalThis.document={createElement:()=>({getContext:()=>({fillRect(){}})})};
 const {annexe}=createEscapeExterior(THREE,1.5);annexe.updateMatrixWorld(true);
-const inverse=annexe.matrixWorld.clone().invert(),rows=[],instance=new THREE.Matrix4(),matrix=new THREE.Matrix4();
+const rows=[],instance=new THREE.Matrix4(),matrix=new THREE.Matrix4();
 annexe.traverse(o=>{
  if(!o.isMesh||o.name==='Annexe drive')return;
  const hash=createHash('sha256');for(const [key,a] of Object.entries(o.geometry.attributes).sort()){hash.update(key);hash.update(Buffer.from(a.array.buffer,a.array.byteOffset,a.array.byteLength));}
  if(o.geometry.index)hash.update(Buffer.from(o.geometry.index.array.buffer));
- const geometry=hash.digest('hex'),local=new THREE.Matrix4().multiplyMatrices(inverse,o.matrixWorld);
+ const geometry=hash.digest('hex'),local=o.matrix.clone();
+ // Compose local ancestry directly to avoid translation-dependent rounding.
+ for(let p=o.parent;p&&p!==annexe;p=p.parent)local.premultiply(p.matrix);
  const record=m=>rows.push(JSON.stringify([geometry,o.material.color?.getHex(),m.elements.map(n=>+n.toFixed(6))]));
  if(o.isInstancedMesh)for(let i=0;i<o.count;i++){o.getMatrixAt(i,instance);record(matrix.multiplyMatrices(local,instance));}else record(local);
 });

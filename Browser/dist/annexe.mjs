@@ -1,5 +1,7 @@
+import {ANNEXE_REAR_SHIFT,stretchAnnexeRearZ} from './annexe-rear-stretch.mjs';
 import {addOakmereElevation} from './annexe-oakmere-detail.mjs';
 import {addOakmereWestElevation} from './annexe-oakmere-west.mjs';
+import {addAnnexeRearKitchen} from './annexe-rear-kitchen.mjs';
 import {addOuterFronts,addCourtFronts} from './annexe-outer-front.mjs';
 import {refineAnnexeRanges,ANNEXE_OS_REFINEMENT} from './annexe-os-refinement.mjs';
 import {ANNEXE_PHOTO_PLACEMENT} from './annexe-photo-placement.mjs';
@@ -20,11 +22,12 @@ const placementSite=ANNEXE_PHOTO_PLACEMENT.site,relativeScale=ANNEXE_PHOTO_PLACE
 export const ANNEXE_SITE=Object.freeze({...basePlacement,x:placementSite.x,z:placementSite.z,scale:placementSite.planScale});
 const [frontX,frontMapZ]=ANNEXE_PHOTO_PLACEMENT.frontAnchorMap,frontZ=frontMapZ*ANNEXE_MAP_SCALE;
 const c=Math.cos(basePlacement.rotation),s=Math.sin(basePlacement.rotation),scale=placementSite.planScale*relativeScale;
-// Scale around the entrance-facade centre so it remains on the fixed paved
-// centreline. The local model geometry is untouched.
+// Retain the scaled entrance setback, then centre the asymmetric courtyard
+// opening on the paving so the grass strips on its left and right are equal.
+const frontageOffset=-ANNEXE_PHOTO_PLACEMENT.forecourtCentreMapX*ANNEXE_MAP_SCALE*scale;
 export const ANNEXE=Object.freeze({...basePlacement,
- x:placementSite.x+(placementSite.planScale-scale)*(c*frontX+s*frontZ),
- z:placementSite.z+(placementSite.planScale-scale)*(-s*frontX+c*frontZ),
+ x:placementSite.x+(placementSite.planScale-scale)*(c*frontX+s*frontZ)+c*frontageOffset,
+ z:placementSite.z+(placementSite.planScale-scale)*(-s*frontX+c*frontZ)-s*frontageOffset,
  scale,verticalScale:relativeScale,frontAnchor:Object.freeze([frontX,frontZ])
 });
 export function annexePoint(x,y,z){const c=Math.cos(ANNEXE.rotation),s=Math.sin(ANNEXE.rotation),k=ANNEXE.scale;return [ANNEXE.x+k*(c*x+s*z),y,ANNEXE.z+k*(-s*x+c*z)];}
@@ -32,6 +35,8 @@ export function annexeLocal([x,z]){const c=Math.cos(ANNEXE.rotation),s=Math.sin(
 export function annexeSitePoint(x,y,z){const c=Math.cos(ANNEXE_SITE.rotation),s=Math.sin(ANNEXE_SITE.rotation),k=ANNEXE_SITE.scale;return [ANNEXE_SITE.x+k*(c*x+s*z),y,ANNEXE_SITE.z+k*(-s*x+c*z)];}
 export function annexeSiteLocal([x,z]){const c=Math.cos(ANNEXE_SITE.rotation),s=Math.sin(ANNEXE_SITE.rotation),dx=x-ANNEXE_SITE.x,dz=z-ANNEXE_SITE.z;return [(c*dx-s*dz)/ANNEXE_SITE.scale,(s*dx+c*dz)/ANNEXE_SITE.scale];}
 const shot=(p,t,fov=55)=>Object.freeze({position:annexePoint(p[0],p[1]>30?p[1]*ANNEXE.scale:p[1],p[2]),target:annexePoint(...t),fov});
+const rearShot=(p,t,fov)=>shot([p[0],p[1],stretchAnnexeRearZ(p[2]/ANNEXE_MAP_SCALE)*ANNEXE_MAP_SCALE],[t[0],t[1],stretchAnnexeRearZ(t[2]/ANNEXE_MAP_SCALE)*ANNEXE_MAP_SCALE],fov);
+const rearWardShot=(p,t,fov)=>shot([p[0],p[1],p[2]+ANNEXE_REAR_SHIFT*ANNEXE_MAP_SCALE],[t[0],t[1],t[2]+ANNEXE_REAR_SHIFT*ANNEXE_MAP_SCALE],fov);
 // The supplied coloured circles identify wards, not new building outlines.
 // The west outer frontage and its court link belong to Larkton/Jodrell.
 // The entrance, east connecting range and unmarked east end stay shared.
@@ -44,10 +49,10 @@ export const ANNEXE_WARDS=Object.freeze([
   aerial:shot([-116,113,145],[-76,4,19]),walk:shot([-76,1.8,65],[-76,7,40],65)},
  {id:'leighton-newton',name:'Leighton/Newton',referenceColor:'red',
   rangeNames:['Rear east connecting range','Rear east end pavilion'],
-  aerial:shot([102,118,-202],[47,5,-94]),walk:shot([103,1.8,-120],[67,6,-105],65)},
+  aerial:rearWardShot([102,118,-202],[47,5,-94]),walk:rearWardShot([103,1.8,-120],[67,6,-105],65)},
  {id:'oakmere',name:'Oakmere',referenceColor:'purple',
   rangeNames:['Rear west angled service range','Rear service head'],
-  aerial:shot([-112,114,-218],[-52,5,-105]),walk:shot([-87,1.8,-109],[-52,6,-103],65)},
+  aerial:rearWardShot([-112,114,-218],[-52,5,-105]),walk:rearWardShot([-87,1.8,-109],[-52,6,-103],65)},
  {id:'picton-carden',name:'Picton/Carden',referenceColor:'green',
   rangeNames:['East court inner return','East court front range','East court outer return','East court corner infill','East court back range'],
   aerial:shot([119,116,153],[69,4,24]),walk:shot([69,1.8,70],[69,7,45],65)}
@@ -58,10 +63,10 @@ const mapNorth=annexePlacementMapPoint([0,0]),mapSouth=annexePlacementMapPoint([
 const southOffset=mapSouth.map((value,i)=>(value-mapNorth[i])*.01),site=annexePlacementMapPoint([155,192]);
 export const ANNEXE_VIEWS=Object.freeze({
  ...ANNEXE_WARD_VIEWS,
- 'oakmere-photo':shot([-101,2.2,-65],[-31,6,-51],49),
+ 'oakmere-photo':rearShot([-101,2.2,-65],[-31,6,-51],49),
  'annexe-outer-west':shot([-201,2,34],[-146,5.5,0],58),
  'annexe-outer-east':shot([211,2,56],[145,5.5,20],58),
- 'oakmere-lawn':shot([-138,66,-103],[-24,5,-46],51),
+ 'oakmere-lawn':rearShot([-138,66,-103],[-24,5,-46],51),
  annexe:shot([-215,185,290],[0,3,-30],56),
  'annexe-roads':{position:[350,420,85],target:[330,0,-45],fov:52},
  'annexe-access':shot([0,360,130],[0,0,-5],52),
@@ -72,13 +77,15 @@ export const ANNEXE_VIEWS=Object.freeze({
  'annexe-side':shot([-57,2.5,-12],[-18,10,-3],63),
  'annexe-side-right':shot([57,2.5,-12],[18,10,-3],63),
  'annexe-ground':shot([0,1.8,89],[0,8,14],61),
+ 'annexe-kitchen':rearShot([-2,1.8,-62],[0,4,-40],74),
+ 'annexe-rear-court':rearShot([0,66,-103],[0,0,-46],48),
  'annexe-plan':{position:[ANNEXE.x+southOffset[0],370,ANNEXE.z+southOffset[1]],target:[ANNEXE.x,0,ANNEXE.z],fov:52},
  'annexe-photo-site':{position:[620,360,435],target:[200,4,0],fov:48},
  'annexe-site':{position:[site[0]+southOffset[0],680,site[1]+southOffset[1]],target:[site[0],0,site[1]],fov:59}
 });
 // The rear east L turns approximately 22 degrees counter-clockwise on the OS
 // plan. Both ranges rotate about their junction with the central spine.
-export const ANNEXE_REAR_EAST=Object.freeze({angle:22*Math.PI/180,pivot:[9,-42]});
+export const ANNEXE_REAR_EAST=Object.freeze({angle:22*Math.PI/180,pivot:[9,-42+ANNEXE_REAR_SHIFT]});
 // Black masonry, expressed as rectangles in the OS building's 15-degree axes.
 // Front ward courts and rear courts remain open to the sky.
 // Only the central pavilions retain three storeys; outer wards have two.
@@ -135,7 +142,8 @@ export function createAnnexe(THREE,{brick,roof,material,worldUV,hipRoof}){
  function beam(p,q,width,m,name){const a=new THREE.Vector3(...p),b=new THREE.Vector3(...q),v=b.clone().sub(a);const o=mesh(new THREE.CylinderGeometry(width/2,width/2,v.length(),6),m,...a.add(b).multiplyScalar(.5).toArray(),name);o.quaternion.setFromUnitVectors(new THREE.Vector3(0,1,0),v.normalize());return o;}
  function hip(x,z,w,d,y,rise,name,r=0){const o=hipRoof(x,z,w,d,y,rise);parent().add(o);o.rotation.y=r;o.name=name+' slate roof';return o;}
  function position(b,u,n){const c=Math.cos(b.r),s=Math.sin(b.r);return [b.x+c*u+s*n,b.z-s*u+c*n];}
- function occupied(x,y,z,self){return ranges.some(b=>{if(b===self||y>b.h)return false;const dx=x-b.x,dz=z-b.z,c=Math.cos(b.r),s=Math.sin(b.r);return Math.abs(c*dx-s*dz)<b.w/2+.05&&Math.abs(s*dx+c*dz)<b.d/2+.05;});}
+ const wingShift=b=>['oakmere','leighton-newton'].includes(b?.wardId)?ANNEXE_REAR_SHIFT*ANNEXE_MAP_SCALE:0;
+ function occupied(x,y,z,self){return ranges.some(b=>{if(b===self||y>b.h)return false;const dx=x-b.x,dz=z+wingShift(self)-b.z-wingShift(b),c=Math.cos(b.r),s=Math.sin(b.r);return Math.abs(c*dx-s*dz)<b.w/2+.05&&Math.abs(s*dx+c*dz)<b.d/2+.05;});}
  function sash(name,x,y,z,w=1.35,h=2.75,r=0,arched=false){
   openings.push({name,x,y,z,w,h,rotation:r,arched,wardId:currentWard});
   const c=Math.cos(r),s=Math.sin(r),part=(m,u,v,n,pw,ph,pd)=>box(m,x+c*u+s*n,y+v,z-s*u+c*n,pw,ph,pd,r);
@@ -167,13 +175,13 @@ export function createAnnexe(THREE,{brick,roof,material,worldUV,hipRoof}){
   currentWard=rangeWards.get(spec.name)??spec.wardId??null;
   const [x0,z0,x1,z1]=spec.rect.map(v=>v*ANNEXE_MAP_SCALE),b={...spec,wardId:currentWard,x:(x0+x1)/2,z:(z0+z1)/2,w:x1-x0,d:z1-z0,r:spec.angle??0};
   if(spec.section==='rear-east'){
-   const {angle,pivot}=ANNEXE_REAR_EAST,px=pivot[0]*ANNEXE_MAP_SCALE,pz=pivot[1]*ANNEXE_MAP_SCALE,dx=b.x-px,dz=b.z-pz;
+   const {angle,pivot}=ANNEXE_REAR_EAST,px=pivot[0]*ANNEXE_MAP_SCALE,pz=(pivot[1]-ANNEXE_REAR_SHIFT)*ANNEXE_MAP_SCALE,dx=b.x-px,dz=b.z-pz;
    b.x=px+Math.cos(angle)*dx+Math.sin(angle)*dz;b.z=pz-Math.sin(angle)*dx+Math.cos(angle)*dz;b.r+=angle;
   }
   ranges.push(b);
   solid(brick,b.x,b.h/2,b.z,b.w,b.h,b.d,b.name+' brick walls',b.r);
   box(red,b.x,.25,b.z,b.w+.13,.5,b.d+.13,b.r);
-  for(const y of [4.35,8.65,12.6])if(y<b.h)box(red,b.x,y,b.z,b.w+.16,.32,b.d+.16,b.r);
+  for(const y of [4.35,8.65,12.6])if(y<b.h&&!b.kitchen)box(red,b.x,y,b.z,b.w+.16,.32,b.d+.16,b.r);
   box(red,b.x,b.h-.22,b.z,b.w+.18,.35,b.d+.18,b.r);
   hip(b.x,b.z,b.w,b.d,b.h,b.rise,b.name,b.r);
   for(const side of [-1,1]){
@@ -184,8 +192,10 @@ export function createAnnexe(THREE,{brick,roof,material,worldUV,hipRoof}){
  const courtFrontRanges=ranges.filter(b=>b.name.endsWith('court front range'));
  for(const b of ranges){
   currentWard=b.wardId;
+  if(b.kitchen)continue;
   for(const face of ['long','end'])for(const side of [-1,1]){
-   if(b.name==='Central rear spine'&&face==='end'&&side<0)continue;
+   if(face==='end'&&((b.name==='Rear court back range'&&side>0)||(b.name==='Rear court back east range'&&side<0)))continue;
+   if(b.name==='Central rear spine'&&side<0)continue; // Preserve the accepted blank rear and west generic faces.
    const span=face==='long'?b.w:b.d,count=Math.max(1,Math.floor((span-1.5)/3.8));
    for(let i=0;i<count;i++){
     const u=(i-(count-1)/2)*3.8,[x,z]=face==='long'?position(b,u,side*(b.d/2+.035)):position(b,side*(b.w/2+.035),u);
@@ -316,6 +326,15 @@ export function createAnnexe(THREE,{brick,roof,material,worldUV,hipRoof}){
  model.userData.courtFronts=addCourtFronts(THREE,{model,ranges,scale:ANNEXE_MAP_SCALE,brick,roof,material,worldUV,hipRoof});
  model.userData.oakmereElevation=addOakmereElevation(THREE,{model,host:ranges.find(b=>b.name==='Central rear spine'),oppositeWindows:openings.filter(o=>o.name==='Central rear spine'&&o.rotation>0),brick,roof,material,worldUV,hipRoof});
  model.userData.oakmereWestElevation=addOakmereWestElevation(THREE,{model,host:ranges.find(b=>b.name==='Rear court west range'),brick,roof,material,worldUV,hipRoof});
+ model.userData.rearKitchen=addAnnexeRearKitchen(THREE,{model,ranges,scale:ANNEXE_MAP_SCALE,brick,roof,material,worldUV,hipRoof});
+ // Move the attached wings rigidly, retaining their roofs, window spacing
+ // and angled footprints. Metadata follows the rendered groups for picking
+ // and geometric checks; no front-facing assembly is transformed.
+ for(const id of ['oakmere','leighton-newton']){
+  const dz=ANNEXE_REAR_SHIFT*ANNEXE_MAP_SCALE;wards[id].position.z+=dz;
+  for(const b of ranges)if(b.wardId===id)b.z+=dz;
+  for(const o of openings)if(o.wardId===id)o.z+=dz;
+ }
  model.userData.ranges=ranges;model.userData.annexeOpenings=openings;model.userData.osRegistration=ANNEXE_OS_REGISTRATION;
  model.userData.placement=ANNEXE_PLACEMENT_REFERENCE;model.userData.osRefinement=ANNEXE_OS_REFINEMENT;model.userData.photoPlacement=ANNEXE_PHOTO_PLACEMENT;
  return model;

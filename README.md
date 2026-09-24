@@ -21,6 +21,23 @@ Use **WASD** to move, the **mouse** to look, **Shift** to sprint, **C/Ctrl** to
 crouch, **F** for the torch and **Tab** for the map. Hold **E** at exits, stairs
 or wall artwork. **H** shows survival help; **Esc** pauses. Touch controls are available on mobile.
 
+# Running slowly?
+If the view stutters or lags, check hardware accelleration is enabled in your browser
+
+## Chrome
+
+1. Go to chrome://settings/system
+2. Enable "Use graphics acceleration when available"
+3. Relaunch Chrome
+4. Verify at chrome://gpu — look for "Hardware accelerated" next to WebGL, WebGL2, and Canvas. If you see ( "Software only, hardware acceleration unavailable"), you're running without hardware acceleration via the GPU.
+
+## Edge
+
+1. Go to edge://settings/system
+2. Enable "Use graphics acceleration when available"
+3. Relaunch Edge
+4. Verify at edge://gpu — same check as above
+
 # Credits
 Made possible by the invaluable help of the members of the [The History of The West Cheshire Hospital](https://www.facebook.com/groups/447285974557565) Facebook group in identifying and refining the layout of the site. Their photos are viewable when moving around the site.
 

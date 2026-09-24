@@ -15,7 +15,7 @@ const records=[],instance=new THREE.Matrix4(),world=new THREE.Matrix4();
 // Compare building primitives in the preceding annexe root frame so an
 // authorized whole-building transform does not masquerade as a local edit.
 // The gameplay drives are independently world-fixed and stay in world space.
-const inverseRoot=e.annexe.matrixWorld.clone().invert();
+
 const previousRoot=new THREE.Matrix4().compose(
  new THREE.Vector3(ANNEXE_SITE.x,0,ANNEXE_SITE.z),
  new THREE.Quaternion().setFromAxisAngle(new THREE.Vector3(0,1,0),ANNEXE.rotation),
@@ -28,16 +28,19 @@ e.annexe.traverse(o=>{
  for(const [key,a] of Object.entries(o.geometry.attributes).sort()){hash.update(key);hash.update(Buffer.from(a.array.buffer,a.array.byteOffset,a.array.byteLength));}
  if(o.geometry.index)hash.update(Buffer.from(o.geometry.index.array.buffer));
  const geometry=hash.digest('hex'),materials=[o.material].flat().map(m=>[m.type,m.color?.getHex(),m.roughness,m.metalness,m.side]);
- const record=m=>{
+ const local=o.matrix.clone();
+ for(let p=o.parent;p&&p!==e.annexe;p=p.parent)local.premultiply(p.matrix);
+ const reference=new THREE.Matrix4().multiplyMatrices(previousRoot,local);
+ const record=(m,comparison)=>{
   if(o.isInstancedMesh){
    const p=e.annexe.worldToLocal(new THREE.Vector3().setFromMatrixPosition(m));
    // Include the surrounding sash frames exposed by shortening this link.
    if(p.x>-26*ANNEXE_MAP_SCALE-1.75&&p.x<-14*ANNEXE_MAP_SCALE+1.75&&p.z>-49*ANNEXE_MAP_SCALE-1.75&&p.z<-42*ANNEXE_MAP_SCALE+1.75&&p.y<6.7)return;
   }
-  const comparison=o.name==='Annexe drive'?m:new THREE.Matrix4().multiplyMatrices(previousRoot,new THREE.Matrix4().multiplyMatrices(inverseRoot,m));
+  if(o.name==='Annexe drive')comparison=m;
   records.push(JSON.stringify([geometry,materials,comparison.elements.map(n=>+n.toFixed(8)),o.castShadow,o.receiveShadow,!!o.userData.orientedCollision]));
  };
- if(o.isInstancedMesh)for(let i=0;i<o.count;i++){o.getMatrixAt(i,instance);record(world.multiplyMatrices(o.matrixWorld,instance));}else record(o.matrixWorld);
+ if(o.isInstancedMesh)for(let i=0;i<o.count;i++){o.getMatrixAt(i,instance);record(world.multiplyMatrices(o.matrixWorld,instance),new THREE.Matrix4().multiplyMatrices(reference,instance));}else record(o.matrixWorld,reference);
 });
 const fingerprint={primitives:records.length,sha256:createHash('sha256').update(records.sort().join('\n')).digest('hex')};
 const baseline=new URL('../Research/oakmere/west-protected-geometry.json',import.meta.url);

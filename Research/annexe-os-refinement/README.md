@@ -1,6 +1,8 @@
 # Annexe footprint from the colour-matched OS map
 
-The ward shapes documented here remain approved. Their overall scale and site
+The central rear block is further corrected by the [September 24 kitchen
+photograph and access-court instructions](../annexe-kitchen/README.md). The other
+ward shapes documented here remain approved. Their overall scale and site
 position are superseded by the later [aerial-photo correction](../annexe-photo-placement/README.md),
 which restores clearance inside the Parsons loop and beyond the teardrop.
 

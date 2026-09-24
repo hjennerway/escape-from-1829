@@ -21,7 +21,7 @@ export function windowEditPart(object,matrix){
 export function protectedWindowGeometry(THREE,annexe){
  annexe.updateMatrixWorld(true);
  const records=[],instance=new THREE.Matrix4(),world=new THREE.Matrix4();
- const inverseRoot=annexe.matrixWorld.clone().invert();
+
  const preceding=annexe.userData.photoPlacement.site;
  const previousRoot=new THREE.Matrix4().compose(
   new THREE.Vector3(preceding.x,0,preceding.z),annexe.quaternion.clone(),new THREE.Vector3(preceding.planScale,1,preceding.planScale)
@@ -34,14 +34,17 @@ export function protectedWindowGeometry(THREE,annexe){
   }
   if(object.geometry.index)hash.update(Buffer.from(object.geometry.index.array.buffer));
   const geometry=hash.digest('hex'),materials=[object.material].flat().map(m=>[m.type,m.color?.getHex(),m.roughness,m.metalness,m.side]);
-  const record=matrix=>{
-   const comparison=object.name==='Annexe drive'?matrix:new THREE.Matrix4().multiplyMatrices(previousRoot,new THREE.Matrix4().multiplyMatrices(inverseRoot,matrix));
+  const local=object.matrix.clone();
+  for(let p=object.parent;p&&p!==annexe;p=p.parent)local.premultiply(p.matrix);
+  const reference=new THREE.Matrix4().multiplyMatrices(previousRoot,local);
+  const record=(matrix,comparison)=>{
+   if(object.name==='Annexe drive')comparison=matrix;
    records.push(JSON.stringify([object.name,geometry,materials,comparison.elements.map(n=>+n.toFixed(8)),object.castShadow,object.receiveShadow,!!object.userData.orientedCollision]));
   };
   if(object.isInstancedMesh)for(let i=0;i<object.count;i++){
    object.getMatrixAt(i,instance);
-   if(!windowEditPart(object,instance))record(world.multiplyMatrices(object.matrixWorld,instance));
-  }else record(object.matrixWorld);
+   if(!windowEditPart(object,instance))record(world.multiplyMatrices(object.matrixWorld,instance),new THREE.Matrix4().multiplyMatrices(reference,instance));
+  }else record(object.matrixWorld,reference);
  });
  return {primitives:records.length,sha256:createHash('sha256').update(records.sort().join('\n')).digest('hex')};
 }

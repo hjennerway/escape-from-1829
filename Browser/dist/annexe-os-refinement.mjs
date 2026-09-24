@@ -1,3 +1,4 @@
+import {stretchAnnexeRearRange} from './annexe-rear-stretch.mjs';
 // The September OS/render colour match supersedes the earlier symmetric plan.
 // Pixel coordinates refer to the 310 x 395 supplied extract. The blue front is
 // the fixed local anchor; circles identify blocks, not the traced wall edges.
@@ -60,12 +61,17 @@ export function refineAnnexeRanges(ranges){
   {name:'East end middle rooms',rect:[87,-12,100,-3]},
   {name:'East end front rooms',rect:[107,4,116,14]},
   {name:'Rear court west range',rect:[-19,-44,-8,-20]},
-  {name:'Rear court east range',rect:[5,-44,14,-20]},
-  {name:'Rear court back range',rect:[-19,-44,14,-39]},
-  {name:'Rear court front range',rect:[-19,-29,14,-20]},
+  // The kitchen photograph resolves the inner face and the marked rear view
+  // confirms a small access lane, superseding the enclosed OS rectangle.
+  {name:'Rear court east range',rect:[5,-44,14,-32]},
+  {name:'Rear court back range',rect:[-19,-44,-3,-39]},
+  {name:'Rear court back east range',rect:[1,-44,14,-39]},
+  {name:'Rear court front range',rect:[-4.5,-29,6.5,-20],h:6.2,rise:4.5,kitchen:true},
+  {name:'Rear court front west service link',rect:[-19,-26,-4.5,-20],h:3.3,rise:1.5,kitchen:true},
+  {name:'Rear court front east service link',rect:[6.5,-32,14,-20],h:3.6,rise:1.5,kitchen:true},
   // The marked Oakmere photo face begins at z=-44. Stop the low service link
   // at that corner so it cannot bury the first ground-floor sash.
   {name:'Rear service court link',rect:[-26,-49,-14,-44],h:4.3,rise:1.3}
- ].map(spec=>({h:8.4,rise:2.3,...spec}));
+ ].map(spec=>({h:8.4,rise:2.3,...stretchAnnexeRearRange(spec)}));
 }
 export const ANNEXE_OUTER_FRONT_FITS={west:{start:67,end:108,front:0},east:{start:65,end:109,front:12}};

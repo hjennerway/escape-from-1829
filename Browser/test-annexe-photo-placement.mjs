@@ -7,6 +7,7 @@ import {HISTORIC_ROAD_TRACES,ADMIN_TEARDROP} from './dist/historic-road-layout.m
 import {SHARED_HISTORIC_LANES} from './dist/historic-road-clearance.mjs';
 import {existingBuildingFootprints,pointInFootprint} from './dist/historic-footprints.mjs';
 import {ANNEXE_FRONT_ROAD_REFERENCE} from './dist/annexe-front-roads.mjs';
+import {ANNEXE_ACCESS_PAVING} from './dist/annexe-access.mjs';
 globalThis.document={createElement:()=>({getContext:()=>({fillRect(){}})})};
 const e=createEscapeExterior(THREE,1.5);e.model.updateMatrixWorld(true);
 const previous=JSON.parse(readFileSync(new URL('../Research/annexe-photo-placement/fixed-roads.json',import.meta.url)));
@@ -49,5 +50,21 @@ assert.deepEqual(e.annexe.scale.toArray(),[.648,.9,.648]);
 assert.deepEqual([ANNEXE_SITE.x,ANNEXE_SITE.z,ANNEXE_SITE.scale],[378,-34,.72]);
 const buildingFront=annexePoint(ANNEXE.frontAnchor[0],0,ANNEXE.frontAnchor[1]);
 const pavedAxis=annexeSitePoint(ANNEXE.frontAnchor[0],0,ANNEXE.frontAnchor[1]);
-assert(Math.hypot(buildingFront[0]-pavedAxis[0],buildingFront[2]-pavedAxis[2])<1e-10,'The annexe front centre remains on the fixed paved approach axis');
-console.log('PASS: annexe is uniformly 90% of its preceding size, centred on the fixed paved approach and clear of surrounding roads; minimum gaps',JSON.stringify({loop:loopGap,teardrop:teardropGap,admin:adminGap,frontLine:frontGap}));
+const c=Math.cos(ANNEXE_SITE.rotation),s=Math.sin(ANNEXE_SITE.rotation);
+assert(Math.abs(s*(buildingFront[0]-pavedAxis[0])+c*(buildingFront[2]-pavedAxis[2]))<1e-10,'Sideways centring retains the entrance setback');
+// Measure the actual inward masonry faces and the actual paving, rather than
+// comparing two points derived from the same placement anchor.
+const along=([x,z])=>c*(x-ANNEXE_SITE.x)-s*(z-ANNEXE_SITE.z);
+const inwardFaces=['West','East'].map((side,i)=>{
+ const wall=e.annexe.getObjectByName(side+' court inner return brick walls');
+ wall.geometry.computeBoundingBox();const b=wall.geometry.boundingBox;
+ const p=wall.localToWorld(new THREE.Vector3(i?b.min.x:b.max.x,0,0));
+ return along([p.x,p.z]);
+});
+const apron=ANNEXE_ACCESS_PAVING.find(p=>p.name==='Annexe central asphalt forecourt');
+const edges=apron.points.map(along),grassGaps=[Math.min(...edges)-inwardFaces[0],inwardFaces[1]-Math.max(...edges)];
+assert(grassGaps.every(gap=>gap>5),'Both sides of the fixed paving retain a clear grass strip');
+assert(Math.abs(grassGaps[0]-grassGaps[1])<1e-8,'The green strips between the paving and courtyard wings are equal');
+const fixedPaving=JSON.parse(readFileSync(new URL('../Research/annexe-frontage-adjustment/protected-forecourt.json',import.meta.url)));
+for(const original of fixedPaving)assert.deepEqual(ANNEXE_ACCESS_PAVING.find(p=>p.name===original.name),original,'Centring the annexe leaves the paving fixed');
+console.log('PASS: annexe retains its scale and setback, has equal grass strips beside the fixed paving, and clears surrounding roads; minimum gaps',JSON.stringify({grass:grassGaps,loop:loopGap,teardrop:teardropGap,admin:adminGap,frontLine:frontGap}));

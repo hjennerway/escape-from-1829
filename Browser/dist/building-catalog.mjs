@@ -21,7 +21,7 @@ export const BUILDING_CATALOG=Object.freeze([
  {id:'churton',name:'Churton / Kelsall Ward',photos:[photo('churton-roadside','Churton / Kelsall · roadside view and communications mast')]},
  {id:'church',name:'Church',photos:[photo('church','Church and grounds · aerial photograph'),photo('church-clock-front','Church · clock-facing front')]},
  {id:'tower',name:'Water Tower',photos:[1,2,3,4].map(n=>photo(`tower-${n}`,`Water tower · side ${n}${n===2?' · facing 1829':n===4?' · facing the Annexe':''}`))},
- {id:'annexe',name:'The Annexe',photos:annexe},
+ {id:'annexe',name:'The Annexe',locations:['annexe','annexe-kitchen','annexe-rear-court'],photos:[...annexe,photo('annexe-kitchen','The Annexe · rear kitchen and service court')]},
  {id:'picton-carden',name:'Annexe · Picton / Carden Ward',photos:[photo('carden-mural','Carden Ward · archway mural')],contextPhotos:annexe},
  {id:'tarvin-jarman',name:'Annexe · Tarvin / Jarman Ward',photos:[photo('tarvin-mural','Tarvin Ward · village mural')],contextPhotos:annexe},
  {id:'leighton-newton',name:'Annexe · Leighton / Newton Ward',photos:[],contextPhotos:annexe},

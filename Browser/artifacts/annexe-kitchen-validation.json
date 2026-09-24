@@ -1,0 +1,17 @@
+{
+  "suiteChecks": 58,
+  "suite": "All checks passed; final test-building-photos.mjs rerun after gallery mapping correction.",
+  "compiled": "npm run test:compiled passed: source/compiled geometry, image comparison, fallbacks, all timeline stops and walking collision refresh.",
+  "kitchen": "Dedicated geometry, roof normals, full paving coverage, open access lane and walking tests passed.",
+  "visual": "Final source and compiled overview, photo, plan and front views rendered; no page errors.",
+  "preservedPrimitives": 20041,
+  "centralFrontPrimitives": 1705,
+  "changedExports": [
+    "Browser source",
+    "Generated aerial binary"
+  ],
+  "unchangedExports": [
+    "Unity",
+    "Blender"
+  ]
+}

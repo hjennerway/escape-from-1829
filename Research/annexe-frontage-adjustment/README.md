@@ -55,3 +55,27 @@ site geometry remain fixed. Browser sources only are changed; Blender and
 Unity exports remain unchanged.
 
 ![Narrow entrance and preserved forecourt](annexe-access.png)
+
+## September 24: equal grass strips beside the annexe forecourt
+
+The supplied `equal-grass-reference.png` and the user's clarification require
+an equal amount of green on either side of the paved apron. This supersedes
+the September 21 doorway-centred placement above: the two projecting court
+wings are asymmetric, with inward masonry faces at map x=-27 and x=20.
+
+The whole annexe moves sideways by 3.676 scene units, placing the midpoint
+between those faces (map x=-3.5) on the fixed apron centreline. Both grass
+strips now measure 5.309 scene units from paving edge to masonry. The uniform
+90% size, all local building geometry and the frontage setback are retained.
+The central doorway is consequently slightly off the paving centreline; equal
+side grass widths are the user's clarified alignment criterion.
+
+The original apron and entrance-step approach match `protected-forecourt.json`
+exactly. Roads and other buildings remain fixed. Annexe cameras, masonry
+collisions and the rear kitchen follow its placement. Browser sources and the
+compiled aerial model are updated; Unity and Blender exports are unchanged.
+
+Validation: the full browser suite, source/compiled comparison and browser
+timeline checks pass. Source and compiled front and overhead views were
+captured under `Browser/artifacts/annexe-centre-*`; visual inspection confirms
+the balanced grass strips. Existing local geometry snapshots remain unchanged.

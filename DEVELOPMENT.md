@@ -1,5 +1,32 @@
 # Development and modelling notes
 
+## Annexe rear kitchen and paved access court (September 24)
+
+The supplied kitchen photograph and landmark annotations replace the enclosed
+rear court with a lower four-bay kitchen, steep slate roof, ridge ventilator,
+blue service doors and a narrow rear access opening. The whole court and its
+short access lane are paved. The annexe's root placement, front-facing parts,
+both earlier Oakmere photo assemblies and the surrounding estate roads retain
+their geometry. See [the reference and scope notes](Research/annexe-kitchen/README.md).
+
+The new **Annexe: rear kitchen** location works in aerial and walking views;
+`aerial.html?view=annexe-rear-court` shows the access opening from above. The
+unaltered source photograph is also included in the Annexe's photo gallery.
+The shared browser model and generated aerial binary are updated. Unity and
+Blender exports are unchanged.
+
+Validation: the new kitchen check verifies 20,041 protected primitives,
+continuous paving, the roof-free access lane, four exposed openings, roof
+normals, actual walking into the court and stopping at the kitchen, and
+Historic visibility. The existing 1,705-part central frontage fingerprint
+is unchanged. All browser suite checks pass, with the final building-photo
+check rerun after adding the new location's gallery mapping. Binary-format,
+compiled/source comparison and every browser timeline stop pass. Source and
+compiled rear overview, photo direction, plan and retained front views are
+captured by `Browser/artifacts/annexe-kitchen-preview.mjs`; reports and images
+use the `annexe-kitchen-` prefix.
+
+
 ## Five random exits from fourteen candidates (September 18)
 
 Asylum Escape now replaces the old fixed exits with the seven marked perimeter
@@ -1375,3 +1402,25 @@ Only the browser HTML and CSS change. Desktop (1300 × 900) and mobile
 (390 × 844) Chrome screenshots under `Browser/artifacts/minimap-legend-*`
 were visually checked; computed label colours match and there are no page
 errors. `Browser/test-game.mjs` and the full browser `npm test` suite pass.
+
+## Annexe forecourt centring by equal grass widths (September 24)
+
+The clarified placement request uses the grass strips between the fixed paved
+apron and the projecting court wings, rather than the central doorway. The
+inward ward faces sit at map x=-27 and x=20, so the annexe moves sideways by
+3.676 scene units to centre their midpoint. Both grass gaps are 5.309 units.
+The 90% scale, local geometry and frontage setback remain unchanged.
+
+`annexe-photo-placement.mjs` records this alignment separately from the fixed
+site/paving frame. The placement regression measures actual masonry faces
+against the paving edges and checks the protected apron/step-approach snapshot.
+See [the updated frontage notes](Research/annexe-frontage-adjustment/README.md)
+and the supplied reference there. This changes the browser model and its
+compiled aerial asset; Unity and Blender exports are unchanged.
+
+Validation: `npm test` and `npm run test:compiled` pass after rebuilding the
+aerial asset. Source and compiled front, overhead and site views render without
+page errors (`Browser/artifacts/annexe-centre-*`). Existing building-preservation
+snapshots still match: their comparisons now compose local transforms directly,
+avoiding translation-dependent rounding, while the legacy drives retain their
+world-space checks. No approved geometry snapshot was replaced for this move.

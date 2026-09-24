@@ -1,0 +1,11 @@
+import {writeFileSync,mkdirSync} from 'node:fs';
+import * as THREE from '../dist/vendor/three.module.js';
+import {createEscapeExterior} from '../dist/escape-exterior.mjs';
+import {protectedKitchenGeometry} from './annexe-kitchen-scope.mjs';
+globalThis.document={createElement:()=>({getContext:()=>({fillRect(){}})})};
+const {annexe}=createEscapeExterior(THREE,1.5);
+if(annexe.userData.rearKitchen)throw new Error('Capture only the unmodified model');
+mkdirSync(new URL('../../Research/annexe-kitchen/',import.meta.url),{recursive:true});
+const baseline=protectedKitchenGeometry(THREE,annexe);
+writeFileSync(new URL('../../Research/annexe-kitchen/protected-geometry.json',import.meta.url),JSON.stringify(baseline,null,2)+'\n');
+console.log(baseline);
