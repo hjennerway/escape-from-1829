@@ -61,7 +61,7 @@ if(process.argv.includes('--save-baseline')){
   assert(hit?.object.parent===detail&&hit.object.isInstancedMesh,'New opening is exposed: '+JSON.stringify(o));
  }
  const host=e.annexe.userData.ranges.find(b=>b.name==='Rear court west range'),link=e.annexe.userData.ranges.find(b=>b.name==='Rear service court link');
- assert(Math.abs(link.z+link.d/2-(host.z-host.d/2))<1e-8,'Low connector ends at the photographed face corner');
+ assert(!link,'Later green-circle correction removes the complete low connector');
  detail.traverse(o=>{if(!o.name.endsWith('slate roof'))return;const n=o.geometry.attributes.normal;for(let i=0;i<n.count;i++)assert(n.getY(i)>0,o.name+' faces upward');});
  const obstacles=exteriorObstacles(THREE,e.model),view=ANNEXE_VIEWS['oakmere-photo'];
  assert(!obstacles.some(o=>obstacleContains(o,view.position[0],view.position[2])),'Blue camera position is on open lawn');

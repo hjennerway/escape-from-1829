@@ -1,0 +1,352 @@
+[
+  {
+    "file": "test.mjs",
+    "status": 0,
+    "output": "WEST REAR · GROUND: reachable in 20 grid steps\nCENTRAL REAR · GROUND: reachable in 13 grid steps\nEAST REAR · GROUND: reachable in 20 grid steps\nWEST GALLERY · GROUND: reachable in 18 grid steps\nEAST GALLERY · GROUND: reachable in 18 grid steps\nWEST FRONT · GROUND: reachable in 16 grid steps\nEAST FRONT · GROUND: reachable in 16 grid steps\nPASS: seven ground-floor candidates, all rooms connected, wall collision and sight obstruction.\nPASS: mirrored reception stair approaches, canonical/browser parity.\nPASS: both stairs up/down, all upper rooms reachable, cross-floor pursuer routes, fourteen reachable escape-route candidates across both floors.\n"
+  },
+  {
+    "file": "test-escape-routes.mjs",
+    "status": 0,
+    "output": "PASS: exactly five distinct routes per load, all fourteen eligible, varied draws, unchanged candidates, reachability, inactive/old exits disabled and correctly oriented doors, including floors with zero exits.\n"
+  },
+  {
+    "file": "test-opening-wall.mjs",
+    "status": 0,
+    "output": "PASS: 1829 east end is closed at every storey and up to the roof; wall and collision disappear with the 1849 wing.\n"
+  },
+  {
+    "file": "test-estate-periods.mjs",
+    "status": 0,
+    "output": "PASS: all 13 periods, all 22 date rows, original 1829 ranges and tower, later wings, selection, collisions, tree preference, camera and batch visibility.\n"
+  },
+  {
+    "file": "test-game.mjs",
+    "status": 0,
+    "output": "PASS: randomized launch/retry spawns, wall clearance, reachable routes, reception/exit/stair clearance, separate pursuers, arrival stability and head start.\nPASS: three-second arrival at low FPS, one-second hold, fast approach with 1.5-second fade out and half-second reveal, reception handoff, frozen input/NPCs/timer, clean restart, reduced motion and portrait framing.\nPASS: real game init, both stair interactions, held-key latch, floor groups/HUD, ghost follows, cross-floor capture isolation, restart.\nPASS: unselected routes and old portico cannot escape; active routes persist through retry.\nPASS: hold-E escape through all five active exits, ten-second pan at low FPS, frozen gameplay, retained result background, skip, retry, defeat exclusion, reduced motion.\nPASS: guard patrol/chase stride integration, hold-E/help/artwork freeze, stationary routes, floor visibility and restart.\n"
+  },
+  {
+    "file": "test-security-guard.mjs",
+    "status": 0,
+    "output": "PASS: detailed guard (53 batched meshes, 8788 triangles), alternating patrol/chase legs, floor contact, forward knees, stationary settle, frame-rate-independent stride and reset.\n"
+  },
+  {
+    "file": "test-interior-architecture.mjs",
+    "status": 0,
+    "output": "PASS: 14 visible exit doors, 16 exposed arched-window samples, 36 unobstructed passage samples, 120 solid header samples, 552 separated window-trim samples, 760 skirting joins, 116 separated stair edges, navigation unchanged, shared materials and bounded batches.\n"
+  },
+  {
+    "file": "test-interior-lights.mjs",
+    "status": 0,
+    "output": "PASS: fixed interior light budget across every floor cell, nearby brightness, floor height/colour, smooth selection boundary and empty floors.\n"
+  },
+  {
+    "file": "test-east-forward-end.mjs",
+    "status": 0,
+    "output": "PASS: img1 end/side glazing exposed, continuous brick base, slender stacks, open forecourt route and north-facing camera.\n"
+  },
+  {
+    "file": "test-front-inside-corners.mjs",
+    "status": 0,
+    "output": "PASS: marked footprint, open roofs and foundations, diagonal collisions, clear door route, mirrored sash exposure, photo cameras and no bollards.\n"
+  },
+  {
+    "file": "test-redesmere-garden.mjs",
+    "status": 0,
+    "output": "PASS: one widened coplanar pavilion face, no separate rear tower, exposed glazing, attached courtyard details and clear passage.\n"
+  },
+  {
+    "file": "test-laundry.mjs",
+    "status": 0,
+    "output": "PASS: Laundry hipped roof, flat brick link, continuous contacts, exposed glazing, garden access and Historic-only visibility/collisions.\n"
+  },
+  {
+    "file": "test-escape-exterior.mjs",
+    "status": 0,
+    "output": "PASS: real estate geometry, upward-facing roofs, W-shaped openings to the rear, rear-left lattice mast, building/mast framing throughout landscape and portrait pans.\nPASS: front staircase has four approach treads, four rising treads per branch, and connected forward returns to the doorway landing.\n"
+  },
+  {
+    "file": "test-west-refinement.mjs",
+    "status": 0,
+    "output": "PASS: west reference cameras, exposed glazing, flat and canted bays, continuous roof, blank end walls and walking access.\n"
+  },
+  {
+    "file": "test-water-tower.mjs",
+    "status": 0,
+    "output": "PASS: tower side registration, exposed doors and blind slits, shallow scars, finite geometry, photo framing and isolated materials.\n"
+  },
+  {
+    "file": "test-church-front.mjs",
+    "status": 0,
+    "output": "PASS: exposed paired church lancets and clock, brick pediment, fixed registration, buttress collisions and clear front walk.\n"
+  },
+  {
+    "file": "test-tower-buildings.mjs",
+    "status": 0,
+    "output": "PASS: Historical ownership, exposed service glazing, upward roofs, three tower abutments, three traced face profiles, continuous corner joins, flat arch junctions, shallow final-third pitches, ridge-aligned dormers with downslope glazing, aligned front walls, retracted central-hall rear, retained front, marked-group translation with fixed chimney clearance, removed northern hall, translated entrance link and ramp, rotated full-span chimney roof and east gable window, extended tower ridge, single green-corner slope, flat red return, paired outward-moved gabled workshops, photo sightlines and walkable court, continuous ramp and retained blue-block exclusion.\n"
+  },
+  {
+    "file": "test-pharmacy.mjs",
+    "status": 0,
+    "output": "PASS: pharmacy rear glazing and stairs, two ribbed gas cylinders, building clearance, circular collisions, Historic visibility and walking routes around both tanks.\n"
+  },
+  {
+    "file": "test-irby-ashley.mjs",
+    "status": 0,
+    "output": "PASS: shifted rear range, fixed front contact, open courts, roof coverage/normals, exposed sashes, conservatory, octagonal hip, separated bays, window pairs, cleared former footprint, walking clearances and Historic visibility.\n"
+  },
+  {
+    "file": "test-irby-roads.mjs",
+    "status": 0,
+    "output": "PASS: rear grass, no road beneath Irby/Ashley, flush east-side access and continuous front connection.\n"
+  },
+  {
+    "file": "test-grafton-edge.mjs",
+    "status": 0,
+    "output": "PASS: Grafton placement, unchanged Irby/Ashley, flat rear with one central bay, continuous veranda canopy, bay junction, cleared greenhouse, walking route and independent visibility.\n"
+  },
+  {
+    "file": "test-hale-ward.mjs",
+    "status": 0,
+    "output": "PASS: Hale/Daresbury/Huxley/Dunham right-angle footprint, two storeys, matching sashes, two red-marked corridor links, continuous roofs, exposed junction windows, open courts, walking access and Historic visibility.\n"
+  },
+  {
+    "file": "test-estates.mjs",
+    "status": 0,
+    "output": "PASS: Estates clockwise alignment, preserved OS dimensions, stepped wings, open court, roof coverage, exposed glazing, door pair, walking access, selective trace retirement and Historic visibility.\n"
+  },
+  {
+    "file": "test-farndon.mjs",
+    "status": 0,
+    "output": "PASS: corrected Farndon footprint, 587 roof samples, 503 continuous H-ridge samples, single-storey glazing, open garden, walking collisions, replaced corridor marker and Historic visibility.\n"
+  },
+  {
+    "file": "test-ward-placement.mjs",
+    "status": 0,
+    "output": "PASS: five corrected positions, both fixed anchors, source building geometry, generated corridor geometry, translated footprints, plan/walking cameras and Historic collisions.\n"
+  },
+  {
+    "file": "test-ward-corridors.mjs",
+    "status": 0,
+    "output": "PASS: one straight Main/tower/Farndon gallery, fixed Upton anchor, six current ward contacts, 2814 roof samples, angled collisions, open grass, walking starts and Historic visibility.\n"
+  },
+  {
+    "file": "test-explore.mjs",
+    "status": 0,
+    "output": "PASS: exterior WASD, normalized diagonals, mouse-relative movement, pitch limits, building collisions, wall sliding, reset and stalled frames.\n"
+  },
+  {
+    "file": "test-explore-input.mjs",
+    "status": 0,
+    "output": "PASS: touch movement, simultaneous look, normalized diagonals, pointer identity/cancellation/capture loss, keyboard coexistence and pause cleanup.\n"
+  },
+  {
+    "file": "test-annexe.mjs",
+    "status": 0,
+    "output": "PASS: fixed church/Churton/Grafton, retained frontage orientation, aerial plan scale and fixed gameplay roads.\nPASS: annexe OS registration and scale, independent Redesmere alignment, open courts, roofs, arched glazing, bell tower and walking collisions.\nPASS: L-shaped courts, removed galleries, connected angled rear wing and retained west bay and paired stairs.\nPASS: orange, purple and brown OS courtyard picks are free of masonry and roofs.\n"
+  },
+  {
+    "file": "test-larkton.mjs",
+    "status": 1,
+    "baselineStatus": 1,
+    "output": "node:internal/modules/run_main:107\r\n    triggerUncaughtException(\r\n    ^\r\n\r\nAssertionError [ERR_ASSERTION]: Expected values to be strictly deep-equal:\r\n+ actual - expected\r\n... Skipped lines\r\n\r\n  {\r\n+   count: 18279,\r\n-   count: 18942,\r\n    root: [\r\n      -0.46671254282776836,\r\n      0,\r\n      0.4495368754254077,\r\n      0,\r\n...\r\n    ],\r\n+   sha256: '4586f740fe250f879714ac1b023d0e68de80884c9be29401907b045279f6b56d'\r\n-   sha256: 'b50d4369b6eb6771e9c9dca440212e973c12118d039da595f5c3c096db9d3482'\r\n  }\r\n\r\n    at file:///C:/Users/Harry/Documents/_escape-from-1829/Browser/artifacts/check-larkton-original.mjs:7:8\r\n    at ModuleJob.run (node:internal/modules/esm/module_job:561:25)\r\n    at async node:internal/modules/esm/loader:647:26\r\n    at async asyncRunEntryPointWithESMLoader (node:internal/modules/run_main:101:5) {\r\n  generatedMessage: true,\r\n  code: 'ERR_ASSERTION',\r\n  actual: {\r\n    count: 18279,\r\n    sha256: '4586f740fe250f879714ac1b023d0e68de80884c9be29401907b045279f6b56d',\r\n    root: [\r\n      -0.46671254282776836,   0,\r\n        0.4495368754254077,   0,\r\n                         0, 0.9,\r\n                         0,   0,\r\n       -0.4495368754254077,   0,\r\n      -0.46671254282776836,   0,\r\n         374.1385822618687,   0,\r\n        -32.71077967089457,   1\r\n    ]\r\n  },\r\n  expected: {\r\n    count: 18942,\r\n    sha256: 'b50d4369b6eb6771e9c9dca440212e973c12118d039da595f5c3c096db9d3482',\r\n    root: [\r\n      -0.46671254282776836,   0,\r\n        0.4495368754254077,   0,\r\n                         0, 0.9,\r\n                         0,   0,\r\n       -0.4495368754254077,   0,\r\n      -0.46671254282776836,   0,\r\n         374.1385822618687,   0,\r\n        -32.71077967089457,   1\r\n    ]\r\n  },\r\n  operator: 'deepStrictEqual',\r\n  diff: 'simple'\r\n}\r\n\r\nNode.js v24.20.0\r\nnode:internal/errors:986\r\n  const err = new Error(message);\r\n              ^\r\n\r\nError: Command failed: C:\\Program Files\\nodejs\\node.exe --import file:///C:/Users/Harry/Documents/_escape-from-1829/Browser/artifacts/larkton-original-entrance-loader.mjs C:\\Users\\Harry\\Documents\\_escape-from-1829\\Browser\\artifacts\\check-larkton-original.mjs\r\nnode:internal/modules/run_main:107\r\r\n    triggerUncaughtException(\r\r\n    ^\r\r\n\r\r\nAssertionError [ERR_ASSERTION]: Expected values to be strictly deep-equal:\r\r\n+ actual - expected\r\r\n... Skipped lines\r\r\n\r\r\n  {\r\r\n+   count: 18279,\r\r\n-   count: 18942,\r\r\n    root: [\r\r\n      -0.46671254282776836,\r\r\n      0,\r\r\n      0.4495368754254077,\r\r\n      0,\r\r\n...\r\r\n    ],\r\r\n+   sha256: '4586f740fe250f879714ac1b023d0e68de80884c9be29401907b045279f6b56d'\r\r\n-   sha256: 'b50d4369b6eb6771e9c9dca440212e973c12118d039da595f5c3c096db9d3482'\r\r\n  }\r\r\n\r\r\n    at file:///C:/Users/Harry/Documents/_escape-from-1829/Browser/artifacts/check-larkton-original.mjs:7:8\r\r\n    at ModuleJob.run (node:internal/modules/esm/module_job:561:25)\r\r\n    at async node:internal/modules/esm/loader:647:26\r\r\n    at async asyncRunEntryPointWithESMLoader (node:internal/modules/run_main:101:5) {\r\r\n  generatedMessage: true,\r\r\n  code: 'ERR_ASSERTION',\r\r\n  actual: {\r\r\n    count: 18279,\r\r\n    sha256: '4586f740fe250f879714ac1b023d0e68de80884c9be29401907b045279f6b56d',\r\r\n    root: [\r\r\n      -0.46671254282776836,   0,\r\r\n        0.4495368754254077,   0,\r\r\n                         0, 0.9,\r\r\n                         0,   0,\r\r\n       -0.4495368754254077,   0,\r\r\n      -0.46671254282776836,   0,\r\r\n         374.1385822618687,   0,\r\r\n        -32.71077967089457,   1\r\r\n    ]\r\r\n  },\r\r\n  expected: {\r\r\n    count: 18942,\r\r\n    sha256: 'b50d4369b6eb6771e9c9dca440212e973c12118d039da595f5c3c096db9d3482',\r\r\n    root: [\r\r\n      -0.46671254282776836,   0,\r\r\n        0.4495368754254077,   0,\r\r\n                         0, 0.9,\r\r\n                         0,   0,\r\r\n       -0.4495368754254077,   0,\r\r\n      -0.46671254282776836,   0,\r\r\n         374.1385822618687,   0,\r\r\n        -32.71077967089457,   1\r\r\n    ]\r\r\n  },\r\r\n  operator: 'deepStrictEqual',\r\r\n  diff: 'simple'\r\r\n}\r\r\n\r\r\nNode.js v24.20.0\r\r\n\r\n    at genericNodeError (node:internal/errors:986:15)\r\n    at wrappedFn (node:internal/errors:540:14)\r\n    at checkExecSyncError (node:child_process:942:11)\r\n    at execFileSync (node:child_process:978:15)\r\n    at file:///C:/Users/Harry/Documents/_escape-from-1829/Browser/test-larkton.mjs:17:1\r\n    at ModuleJob.run (node:internal/modules/esm/module_job:561:25)\r\n    at async node:internal/modules/esm/loader:647:26\r\n    at async asyncRunEntryPointWithESMLoader (node:internal/modules/run_main:101:5) {\r\n  status: 1,\r\n  signal: null,\r\n  output: [\r\n    null,\r\n    Buffer(0) [Uint8Array] [],\r\n    Buffer(1771) [Uint8Array] [\r\n      110, 111, 100, 101,  58, 105, 110, 116, 101, 114, 110,  97,\r\n      108,  47, 109, 111, 100, 117, 108, 101, 115,  47, 114, 117,\r\n      110,  95, 109,  97, 105, 110,  58,  49,  48,  55,  13,  10,\r\n       32,  32,  32,  32, 116, 114, 105, 103, 103, 101, 114,  85,\r\n      110,  99,  97, 117, 103, 104, 116,  69, 120,  99, 101, 112,\r\n      116, 105, 111, 110,  40,  13,  10,  32,  32,  32,  32,  94,\r\n       13,  10,  13,  10,  65, 115, 115, 101, 114, 116, 105, 111,\r\n      110,  69, 114, 114, 111, 114,  32,  91,  69,  82,  82,  95,\r\n       65,  83,  83,  69,\r\n      ... 1671 more items\r\n    ]\r\n  ],\r\n  pid: 43120,\r\n  stdout: Buffer(0) [Uint8Array] [],\r\n  stderr: Buffer(1771) [Uint8Array] [\r\n    110, 111, 100, 101,  58, 105, 110, 116, 101, 114, 110,  97,\r\n    108,  47, 109, 111, 100, 117, 108, 101, 115,  47, 114, 117,\r\n    110,  95, 109,  97, 105, 110,  58,  49,  48,  55,  13,  10,\r\n     32,  32,  32,  32, 116, 114, 105, 103, 103, 101, 114,  85,\r\n    110,  99,  97, 117, 103, 104, 116,  69, 120,  99, 101, 112,\r\n    116, 105, 111, 110,  40,  13,  10,  32,  32,  32,  32,  94,\r\n     13,  10,  13,  10,  65, 115, 115, 101, 114, 116, 105, 111,\r\n    110,  69, 114, 114, 111, 114,  32,  91,  69,  82,  82,  95,\r\n     65,  83,  83,  69,\r\n    ... 1671 more items\r\n  ]\r\n}\r\n\r\nNode.js v24.20.0\r\n",
+    "baselineOutput": "node:internal/modules/run_main:107\r\n    triggerUncaughtException(\r\n    ^\r\n\r\nAssertionError [ERR_ASSERTION]: Expected values to be strictly deep-equal:\r\n+ actual - expected\r\n... Skipped lines\r\n\r\n  {\r\n+   count: 18279,\r\n-   count: 18942,\r\n    root: [\r\n      -0.46671254282776836,\r\n      0,\r\n      0.4495368754254077,\r\n      0,\r\n...\r\n    ],\r\n+   sha256: '4586f740fe250f879714ac1b023d0e68de80884c9be29401907b045279f6b56d'\r\n-   sha256: 'b50d4369b6eb6771e9c9dca440212e973c12118d039da595f5c3c096db9d3482'\r\n  }\r\n\r\n    at file:///C:/Users/Harry/Documents/_escape-from-1829/Browser/artifacts/check-larkton-original.mjs:7:8\r\n    at ModuleJob.run (node:internal/modules/esm/module_job:561:25)\r\n    at async node:internal/modules/esm/loader:647:26\r\n    at async asyncRunEntryPointWithESMLoader (node:internal/modules/run_main:101:5) {\r\n  generatedMessage: true,\r\n  code: 'ERR_ASSERTION',\r\n  actual: {\r\n    count: 18279,\r\n    sha256: '4586f740fe250f879714ac1b023d0e68de80884c9be29401907b045279f6b56d',\r\n    root: [\r\n      -0.46671254282776836,   0,\r\n        0.4495368754254077,   0,\r\n                         0, 0.9,\r\n                         0,   0,\r\n       -0.4495368754254077,   0,\r\n      -0.46671254282776836,   0,\r\n         374.1385822618687,   0,\r\n        -32.71077967089457,   1\r\n    ]\r\n  },\r\n  expected: {\r\n    count: 18942,\r\n    sha256: 'b50d4369b6eb6771e9c9dca440212e973c12118d039da595f5c3c096db9d3482',\r\n    root: [\r\n      -0.46671254282776836,   0,\r\n        0.4495368754254077,   0,\r\n                         0, 0.9,\r\n                         0,   0,\r\n       -0.4495368754254077,   0,\r\n      -0.46671254282776836,   0,\r\n         374.1385822618687,   0,\r\n        -32.71077967089457,   1\r\n    ]\r\n  },\r\n  operator: 'deepStrictEqual',\r\n  diff: 'simple'\r\n}\r\n\r\nNode.js v24.20.0\r\nnode:internal/errors:986\r\n  const err = new Error(message);\r\n              ^\r\n\r\nError: Command failed: C:\\Program Files\\nodejs\\node.exe --import file:///C:/Users/Harry/Documents/_escape-from-1829/Browser/artifacts/larkton-original-entrance-loader.mjs C:\\Users\\Harry\\Documents\\_escape-from-1829\\Browser\\artifacts\\check-larkton-original.mjs\r\nnode:internal/modules/run_main:107\r\r\n    triggerUncaughtException(\r\r\n    ^\r\r\n\r\r\nAssertionError [ERR_ASSERTION]: Expected values to be strictly deep-equal:\r\r\n+ actual - expected\r\r\n... Skipped lines\r\r\n\r\r\n  {\r\r\n+   count: 18279,\r\r\n-   count: 18942,\r\r\n    root: [\r\r\n      -0.46671254282776836,\r\r\n      0,\r\r\n      0.4495368754254077,\r\r\n      0,\r\r\n...\r\r\n    ],\r\r\n+   sha256: '4586f740fe250f879714ac1b023d0e68de80884c9be29401907b045279f6b56d'\r\r\n-   sha256: 'b50d4369b6eb6771e9c9dca440212e973c12118d039da595f5c3c096db9d3482'\r\r\n  }\r\r\n\r\r\n    at file:///C:/Users/Harry/Documents/_escape-from-1829/Browser/artifacts/check-larkton-original.mjs:7:8\r\r\n    at ModuleJob.run (node:internal/modules/esm/module_job:561:25)\r\r\n    at async node:internal/modules/esm/loader:647:26\r\r\n    at async asyncRunEntryPointWithESMLoader (node:internal/modules/run_main:101:5) {\r\r\n  generatedMessage: true,\r\r\n  code: 'ERR_ASSERTION',\r\r\n  actual: {\r\r\n    count: 18279,\r\r\n    sha256: '4586f740fe250f879714ac1b023d0e68de80884c9be29401907b045279f6b56d',\r\r\n    root: [\r\r\n      -0.46671254282776836,   0,\r\r\n        0.4495368754254077,   0,\r\r\n                         0, 0.9,\r\r\n                         0,   0,\r\r\n       -0.4495368754254077,   0,\r\r\n      -0.46671254282776836,   0,\r\r\n         374.1385822618687,   0,\r\r\n        -32.71077967089457,   1\r\r\n    ]\r\r\n  },\r\r\n  expected: {\r\r\n    count: 18942,\r\r\n    sha256: 'b50d4369b6eb6771e9c9dca440212e973c12118d039da595f5c3c096db9d3482',\r\r\n    root: [\r\r\n      -0.46671254282776836,   0,\r\r\n        0.4495368754254077,   0,\r\r\n                         0, 0.9,\r\r\n                         0,   0,\r\r\n       -0.4495368754254077,   0,\r\r\n      -0.46671254282776836,   0,\r\r\n         374.1385822618687,   0,\r\r\n        -32.71077967089457,   1\r\r\n    ]\r\r\n  },\r\r\n  operator: 'deepStrictEqual',\r\r\n  diff: 'simple'\r\r\n}\r\r\n\r\r\nNode.js v24.20.0\r\r\n\r\n    at genericNodeError (node:internal/errors:986:15)\r\n    at wrappedFn (node:internal/errors:540:14)\r\n    at checkExecSyncError (node:child_process:942:11)\r\n    at execFileSync (node:child_process:978:15)\r\n    at file:///C:/Users/Harry/Documents/_escape-from-1829/Browser/test-larkton.mjs:17:1\r\n    at ModuleJob.run (node:internal/modules/esm/module_job:561:25)\r\n    at async node:internal/modules/esm/loader:647:26\r\n    at async asyncRunEntryPointWithESMLoader (node:internal/modules/run_main:101:5) {\r\n  status: 1,\r\n  signal: null,\r\n  output: [\r\n    null,\r\n    Buffer(0) [Uint8Array] [],\r\n    Buffer(1771) [Uint8Array] [\r\n      110, 111, 100, 101,  58, 105, 110, 116, 101, 114, 110,  97,\r\n      108,  47, 109, 111, 100, 117, 108, 101, 115,  47, 114, 117,\r\n      110,  95, 109,  97, 105, 110,  58,  49,  48,  55,  13,  10,\r\n       32,  32,  32,  32, 116, 114, 105, 103, 103, 101, 114,  85,\r\n      110,  99,  97, 117, 103, 104, 116,  69, 120,  99, 101, 112,\r\n      116, 105, 111, 110,  40,  13,  10,  32,  32,  32,  32,  94,\r\n       13,  10,  13,  10,  65, 115, 115, 101, 114, 116, 105, 111,\r\n      110,  69, 114, 114, 111, 114,  32,  91,  69,  82,  82,  95,\r\n       65,  83,  83,  69,\r\n      ... 1671 more items\r\n    ]\r\n  ],\r\n  pid: 17404,\r\n  stdout: Buffer(0) [Uint8Array] [],\r\n  stderr: Buffer(1771) [Uint8Array] [\r\n    110, 111, 100, 101,  58, 105, 110, 116, 101, 114, 110,  97,\r\n    108,  47, 109, 111, 100, 117, 108, 101, 115,  47, 114, 117,\r\n    110,  95, 109,  97, 105, 110,  58,  49,  48,  55,  13,  10,\r\n     32,  32,  32,  32, 116, 114, 105, 103, 103, 101, 114,  85,\r\n    110,  99,  97, 117, 103, 104, 116,  69, 120,  99, 101, 112,\r\n    116, 105, 111, 110,  40,  13,  10,  32,  32,  32,  32,  94,\r\n     13,  10,  13,  10,  65, 115, 115, 101, 114, 116, 105, 111,\r\n    110,  69, 114, 114, 111, 114,  32,  91,  69,  82,  82,  95,\r\n     65,  83,  83,  69,\r\n    ... 1671 more items\r\n  ]\r\n}\r\n\r\nNode.js v24.20.0\r\n"
+  },
+  {
+    "file": "test-annexe-carden.mjs",
+    "status": 1,
+    "baselineStatus": 1,
+    "output": "node:internal/modules/run_main:107\r\n    triggerUncaughtException(\r\n    ^\r\n\r\nAssertionError [ERR_ASSERTION]: Everything outside the annotated side work and necessary spine join remains exact, including the front and roof landmarks\r\n+ actual - expected\r\n... Skipped lines\r\n\r\n  {\r\n+   primitives: 19916,\r\n-   primitives: 20579,\r\n    root: [\r\n      -0.46671254282776836,\r\n      0,\r\n      0.4495368754254077,\r\n      0,\r\n...\r\n    ],\r\n+   sha256: 'e6ea7d1bfa67a2433e3aa958d7ce2d4628e34ec04dde6b8b1e322676dd3e9290'\r\n-   sha256: '3d279ac00dfe3c13109a22ef82c8cef196e81bbe62a87a61f85969943d1a035c'\r\n  }\r\n\r\n    at file:///C:/Users/Harry/Documents/_escape-from-1829/Browser/test-annexe-carden-correction.mjs:13:8\r\n    at ModuleJob.run (node:internal/modules/esm/module_job:561:25)\r\n    at async node:internal/modules/esm/loader:647:26\r\n    at async asyncRunEntryPointWithESMLoader (node:internal/modules/run_main:101:5) {\r\n  generatedMessage: false,\r\n  code: 'ERR_ASSERTION',\r\n  actual: {\r\n    primitives: 19916,\r\n    sha256: 'e6ea7d1bfa67a2433e3aa958d7ce2d4628e34ec04dde6b8b1e322676dd3e9290',\r\n    root: [\r\n      -0.46671254282776836,   0,\r\n        0.4495368754254077,   0,\r\n                         0, 0.9,\r\n                         0,   0,\r\n       -0.4495368754254077,   0,\r\n      -0.46671254282776836,   0,\r\n         374.1385822618687,   0,\r\n        -32.71077967089457,   1\r\n    ]\r\n  },\r\n  expected: {\r\n    primitives: 20579,\r\n    sha256: '3d279ac00dfe3c13109a22ef82c8cef196e81bbe62a87a61f85969943d1a035c',\r\n    root: [\r\n      -0.46671254282776836,   0,\r\n        0.4495368754254077,   0,\r\n                         0, 0.9,\r\n                         0,   0,\r\n       -0.4495368754254077,   0,\r\n      -0.46671254282776836,   0,\r\n         374.1385822618687,   0,\r\n        -32.71077967089457,   1\r\n    ]\r\n  },\r\n  operator: 'deepStrictEqual',\r\n  diff: 'simple'\r\n}\r\n\r\nNode.js v24.20.0\r\n",
+    "baselineOutput": "node:internal/modules/run_main:107\r\n    triggerUncaughtException(\r\n    ^\r\n\r\nAssertionError [ERR_ASSERTION]: Everything outside the annotated side work and necessary spine join remains exact, including the front and roof landmarks\r\n+ actual - expected\r\n... Skipped lines\r\n\r\n  {\r\n+   primitives: 20422,\r\n-   primitives: 20579,\r\n    root: [\r\n      -0.46671254282776836,\r\n      0,\r\n      0.4495368754254077,\r\n      0,\r\n...\r\n    ],\r\n+   sha256: '731172ddc37949d23acd5eaf319e93cffbacd6b2e5a41e5154a33293cdc10422'\r\n-   sha256: '3d279ac00dfe3c13109a22ef82c8cef196e81bbe62a87a61f85969943d1a035c'\r\n  }\r\n\r\n    at file:///C:/Users/Harry/Documents/_escape-from-1829/Browser/test-annexe-carden-correction.mjs:13:8\r\n    at ModuleJob.run (node:internal/modules/esm/module_job:561:25)\r\n    at async node:internal/modules/esm/loader:647:26\r\n    at async asyncRunEntryPointWithESMLoader (node:internal/modules/run_main:101:5) {\r\n  generatedMessage: false,\r\n  code: 'ERR_ASSERTION',\r\n  actual: {\r\n    primitives: 20422,\r\n    sha256: '731172ddc37949d23acd5eaf319e93cffbacd6b2e5a41e5154a33293cdc10422',\r\n    root: [\r\n      -0.46671254282776836,   0,\r\n        0.4495368754254077,   0,\r\n                         0, 0.9,\r\n                         0,   0,\r\n       -0.4495368754254077,   0,\r\n      -0.46671254282776836,   0,\r\n         374.1385822618687,   0,\r\n        -32.71077967089457,   1\r\n    ]\r\n  },\r\n  expected: {\r\n    primitives: 20579,\r\n    sha256: '3d279ac00dfe3c13109a22ef82c8cef196e81bbe62a87a61f85969943d1a035c',\r\n    root: [\r\n      -0.46671254282776836,   0,\r\n        0.4495368754254077,   0,\r\n                         0, 0.9,\r\n                         0,   0,\r\n       -0.4495368754254077,   0,\r\n      -0.46671254282776836,   0,\r\n         374.1385822618687,   0,\r\n        -32.71077967089457,   1\r\n    ]\r\n  },\r\n  operator: 'deepStrictEqual',\r\n  diff: 'simple'\r\n}\r\n\r\nNode.js v24.20.0\r\n"
+  },
+  {
+    "file": "test-annexe-front-link.mjs",
+    "status": 1,
+    "baselineStatus": 1,
+    "output": "node:internal/modules/run_main:107\r\n    triggerUncaughtException(\r\n    ^\r\n\r\nAssertionError [ERR_ASSERTION]: Expected values to be strictly equal:\r\n\r\n20734 !== 21397\r\n\r\n    at file:///C:/Users/Harry/Documents/_escape-from-1829/Browser/test-annexe-front-link.mjs:12:8\r\n    at ModuleJob.run (node:internal/modules/esm/module_job:561:25)\r\n    at async node:internal/modules/esm/loader:647:26\r\n    at async asyncRunEntryPointWithESMLoader (node:internal/modules/run_main:101:5) {\r\n  generatedMessage: true,\r\n  code: 'ERR_ASSERTION',\r\n  actual: 20734,\r\n  expected: 21397,\r\n  operator: 'strictEqual',\r\n  diff: 'simple'\r\n}\r\n\r\nNode.js v24.20.0\r\n",
+    "baselineOutput": "node:internal/modules/run_main:107\r\n    triggerUncaughtException(\r\n    ^\r\n\r\nAssertionError [ERR_ASSERTION]: Expected values to be strictly equal:\r\n\r\n21240 !== 21397\r\n\r\n    at file:///C:/Users/Harry/Documents/_escape-from-1829/Browser/test-annexe-front-link.mjs:12:8\r\n    at ModuleJob.run (node:internal/modules/esm/module_job:561:25)\r\n    at async node:internal/modules/esm/loader:647:26\r\n    at async asyncRunEntryPointWithESMLoader (node:internal/modules/run_main:101:5) {\r\n  generatedMessage: true,\r\n  code: 'ERR_ASSERTION',\r\n  actual: 21240,\r\n  expected: 21397,\r\n  operator: 'strictEqual',\r\n  diff: 'simple'\r\n}\r\n\r\nNode.js v24.20.0\r\n"
+  },
+  {
+    "file": "test-annexe-east-outer.mjs",
+    "status": 0,
+    "output": "PASS: removed red wing, lowered continuous yellow link, veranda roof and walking access, retained east geometry and historic visibility.\n"
+  },
+  {
+    "file": "test-annexe-kitchen.mjs",
+    "status": 1,
+    "baselineStatus": 1,
+    "output": "node:internal/modules/run_main:107\r\n    triggerUncaughtException(\r\n    ^\r\n\r\nAssertionError [ERR_ASSERTION]: Every protected annexe primitive, including the front and both Oakmere elevations, stays unchanged\r\n+ actual - expected\r\n\r\n  {\r\n+   primitives: 20907,\r\n+   sha256: '6dc148997ffb85efb0b62824380a99cb74991a4d126f49bae77ca8ec496ba2de'\r\n-   primitives: 20852,\r\n-   sha256: '2ce07d2136b2867e190cdee43efa762771ec2a66bffd5185feff1a04d2422fcc'\r\n  }\r\n\r\n    at file:///C:/Users/Harry/Documents/_escape-from-1829/Browser/test-annexe-kitchen.mjs:13:8\r\n    at ModuleJob.run (node:internal/modules/esm/module_job:561:25)\r\n    at async node:internal/modules/esm/loader:647:26\r\n    at async asyncRunEntryPointWithESMLoader (node:internal/modules/run_main:101:5) {\r\n  generatedMessage: false,\r\n  code: 'ERR_ASSERTION',\r\n  actual: {\r\n    primitives: 20907,\r\n    sha256: '6dc148997ffb85efb0b62824380a99cb74991a4d126f49bae77ca8ec496ba2de'\r\n  },\r\n  expected: {\r\n    primitives: 20852,\r\n    sha256: '2ce07d2136b2867e190cdee43efa762771ec2a66bffd5185feff1a04d2422fcc'\r\n  },\r\n  operator: 'deepStrictEqual',\r\n  diff: 'simple'\r\n}\r\n\r\nNode.js v24.20.0\r\n",
+    "baselineOutput": "node:internal/modules/run_main:107\r\n    triggerUncaughtException(\r\n    ^\r\n\r\nAssertionError [ERR_ASSERTION]: Every protected annexe primitive, including the front and both Oakmere elevations, stays unchanged\r\n+ actual - expected\r\n\r\n  {\r\n+   primitives: 21413,\r\n+   sha256: 'ea7d1ceedaca46cecd462ef60edce3a1c95fef12342d3a581375cbf7473caa7b'\r\n-   primitives: 20852,\r\n-   sha256: '2ce07d2136b2867e190cdee43efa762771ec2a66bffd5185feff1a04d2422fcc'\r\n  }\r\n\r\n    at file:///C:/Users/Harry/Documents/_escape-from-1829/Browser/test-annexe-kitchen.mjs:13:8\r\n    at ModuleJob.run (node:internal/modules/esm/module_job:561:25)\r\n    at async node:internal/modules/esm/loader:647:26\r\n    at async asyncRunEntryPointWithESMLoader (node:internal/modules/run_main:101:5) {\r\n  generatedMessage: false,\r\n  code: 'ERR_ASSERTION',\r\n  actual: {\r\n    primitives: 21413,\r\n    sha256: 'ea7d1ceedaca46cecd462ef60edce3a1c95fef12342d3a581375cbf7473caa7b'\r\n  },\r\n  expected: {\r\n    primitives: 20852,\r\n    sha256: '2ce07d2136b2867e190cdee43efa762771ec2a66bffd5185feff1a04d2422fcc'\r\n  },\r\n  operator: 'deepStrictEqual',\r\n  diff: 'simple'\r\n}\r\n\r\nNode.js v24.20.0\r\n"
+  },
+  {
+    "file": "test-annexe-rear-stretch.mjs",
+    "status": 1,
+    "baselineStatus": 0,
+    "output": "node:internal/modules/run_main:107\r\n    triggerUncaughtException(\r\n    ^\r\n\r\nAssertionError [ERR_ASSERTION]: All front geometry and unaffected wards remain unchanged\r\n+ actual - expected\r\n\r\n  {\r\n+   primitives: 15868,\r\n+   sha256: 'bddf9a5efa558fbd9a307ca1713b3a15db42dd800ba2e2ddd9333559c1457e15'\r\n-   primitives: 16374,\r\n-   sha256: '12ebd66e41025ea50ccb03158ce5680425eaddc819d94f1d22215c0606ff9b12'\r\n  }\r\n\r\n    at file:///C:/Users/Harry/Documents/_escape-from-1829/Browser/test-annexe-rear-stretch.mjs:12:8\r\n    at ModuleJob.run (node:internal/modules/esm/module_job:561:25)\r\n    at async node:internal/modules/esm/loader:647:26\r\n    at async asyncRunEntryPointWithESMLoader (node:internal/modules/run_main:101:5) {\r\n  generatedMessage: false,\r\n  code: 'ERR_ASSERTION',\r\n  actual: {\r\n    primitives: 15868,\r\n    sha256: 'bddf9a5efa558fbd9a307ca1713b3a15db42dd800ba2e2ddd9333559c1457e15'\r\n  },\r\n  expected: {\r\n    primitives: 16374,\r\n    sha256: '12ebd66e41025ea50ccb03158ce5680425eaddc819d94f1d22215c0606ff9b12'\r\n  },\r\n  operator: 'deepStrictEqual',\r\n  diff: 'simple'\r\n}\r\n\r\nNode.js v24.20.0\r\n",
+    "baselineOutput": "PASS: rear wall aligned with the yellow guide, fixed widths/heights/front/centring, unchanged rear block shapes, later connector removal; rear shift 10.869 m.\n"
+  },
+  {
+    "file": "test-annexe-rear-side-alignment.mjs",
+    "status": 0,
+    "output": "PASS: marked rear translations, removed connector, all retained primitives preserved, fixed root, paving and walking collisions.\n"
+  },
+  {
+    "file": "test-annexe-os-refinement.mjs",
+    "status": 1,
+    "baselineStatus": 1,
+    "output": "node:internal/modules/run_main:107\r\n    triggerUncaughtException(\r\n    ^\r\n\r\nAssertionError [ERR_ASSERTION]: Approved annexe local geometry remains unchanged\r\n+ actual - expected\r\n\r\n  {\r\n+   count: 21273,\r\n+   digest: '5f6894233c760511838a4fa2a2c4fc19cd4497c37722f7d02c94f01078e497b2'\r\n-   count: 21936,\r\n-   digest: 'a4a17b0d2d292f754c6c16f5e3e04f7e1f6dc7578a00d19ded5020ca1aa76210'\r\n  }\r\n\r\n    at file:///C:/Users/Harry/Documents/_escape-from-1829/Browser/artifacts/snapshot-annexe-shape.mjs:20:105\r\n    at ModuleJob.run (node:internal/modules/esm/module_job:561:25)\r\n    at async node:internal/modules/esm/loader:647:26\r\n    at async asyncRunEntryPointWithESMLoader (node:internal/modules/run_main:101:5) {\r\n  generatedMessage: false,\r\n  code: 'ERR_ASSERTION',\r\n  actual: {\r\n    count: 21273,\r\n    digest: '5f6894233c760511838a4fa2a2c4fc19cd4497c37722f7d02c94f01078e497b2'\r\n  },\r\n  expected: {\r\n    count: 21936,\r\n    digest: 'a4a17b0d2d292f754c6c16f5e3e04f7e1f6dc7578a00d19ded5020ca1aa76210'\r\n  },\r\n  operator: 'deepStrictEqual',\r\n  diff: 'simple'\r\n}\r\n\r\nNode.js v24.20.0\r\n",
+    "baselineOutput": "node:internal/modules/run_main:107\r\n    triggerUncaughtException(\r\n    ^\r\n\r\nAssertionError [ERR_ASSERTION]: Approved annexe local geometry remains unchanged\r\n+ actual - expected\r\n\r\n  {\r\n+   count: 21779,\r\n+   digest: '9f20111afbe818d296aad183527c959473b199601d34023f0c5ceafcb1936df3'\r\n-   count: 21936,\r\n-   digest: 'a4a17b0d2d292f754c6c16f5e3e04f7e1f6dc7578a00d19ded5020ca1aa76210'\r\n  }\r\n\r\n    at file:///C:/Users/Harry/Documents/_escape-from-1829/Browser/artifacts/snapshot-annexe-shape.mjs:20:105\r\n    at ModuleJob.run (node:internal/modules/esm/module_job:561:25)\r\n    at async node:internal/modules/esm/loader:647:26\r\n    at async asyncRunEntryPointWithESMLoader (node:internal/modules/run_main:101:5) {\r\n  generatedMessage: false,\r\n  code: 'ERR_ASSERTION',\r\n  actual: {\r\n    count: 21779,\r\n    digest: '9f20111afbe818d296aad183527c959473b199601d34023f0c5ceafcb1936df3'\r\n  },\r\n  expected: {\r\n    count: 21936,\r\n    digest: 'a4a17b0d2d292f754c6c16f5e3e04f7e1f6dc7578a00d19ded5020ca1aa76210'\r\n  },\r\n  operator: 'deepStrictEqual',\r\n  diff: 'simple'\r\n}\r\n\r\nNode.js v24.20.0\r\n"
+  },
+  {
+    "file": "test-annexe-photo-placement.mjs",
+    "status": 0,
+    "output": "PASS: annexe retains its scale and setback, centres the narrower paving on the doorway with equal side grass, and clears surrounding roads; minimum gaps {\"grass\":[17.32735842954225,17.32735842954223],\"loop\":7.631235814083799,\"teardrop\":15.737186913984873,\"admin\":37.45758337342252,\"frontLine\":47.365382756594265}\n"
+  },
+  {
+    "file": "test-annexe-outer-front.mjs",
+    "status": 0,
+    "output": "PASS: original and copied paired apex fronts, exposed glazing without duplicate windows, projecting-bay collisions, clear approaches and ward ownership.\n"
+  },
+  {
+    "file": "test-jarman.mjs",
+    "status": 1,
+    "baselineStatus": 1,
+    "output": "node:internal/modules/run_main:107\r\n    triggerUncaughtException(\r\n    ^\r\n\r\nAssertionError [ERR_ASSERTION]: All geometry outside the marked frontage stays exact\r\n+ actual - expected\r\n\r\n  {\r\n+   primitives: 859989,\r\n+   sha256: 'b3f2f14d03f63ef297637bbab44c1adb5f3f4f9db8bc16731aec72d376a378a3'\r\n-   primitives: 860652,\r\n-   sha256: '3718386cc13601b06579c241f19363ef486d5f2bfd0b5aa617e1ed9a5e544e82'\r\n  }\r\n\r\n    at file:///C:/Users/Harry/Documents/_escape-from-1829/Browser/test-jarman.mjs:11:8\r\n    at ModuleJob.run (node:internal/modules/esm/module_job:561:25)\r\n    at async node:internal/modules/esm/loader:647:26\r\n    at async asyncRunEntryPointWithESMLoader (node:internal/modules/run_main:101:5) {\r\n  generatedMessage: false,\r\n  code: 'ERR_ASSERTION',\r\n  actual: {\r\n    primitives: 859989,\r\n    sha256: 'b3f2f14d03f63ef297637bbab44c1adb5f3f4f9db8bc16731aec72d376a378a3'\r\n  },\r\n  expected: {\r\n    primitives: 860652,\r\n    sha256: '3718386cc13601b06579c241f19363ef486d5f2bfd0b5aa617e1ed9a5e544e82'\r\n  },\r\n  operator: 'deepStrictEqual',\r\n  diff: 'simple'\r\n}\r\n\r\nNode.js v24.20.0\r\n",
+    "baselineOutput": "node:internal/modules/run_main:107\r\n    triggerUncaughtException(\r\n    ^\r\n\r\nAssertionError [ERR_ASSERTION]: All geometry outside the marked frontage stays exact\r\n+ actual - expected\r\n\r\n  {\r\n+   primitives: 860495,\r\n+   sha256: '2d385f84f379d789d97913dc553dfc21efd19e00f92405de85bb37d63787f910'\r\n-   primitives: 860652,\r\n-   sha256: '3718386cc13601b06579c241f19363ef486d5f2bfd0b5aa617e1ed9a5e544e82'\r\n  }\r\n\r\n    at file:///C:/Users/Harry/Documents/_escape-from-1829/Browser/test-jarman.mjs:11:8\r\n    at ModuleJob.run (node:internal/modules/esm/module_job:561:25)\r\n    at async node:internal/modules/esm/loader:647:26\r\n    at async asyncRunEntryPointWithESMLoader (node:internal/modules/run_main:101:5) {\r\n  generatedMessage: false,\r\n  code: 'ERR_ASSERTION',\r\n  actual: {\r\n    primitives: 860495,\r\n    sha256: '2d385f84f379d789d97913dc553dfc21efd19e00f92405de85bb37d63787f910'\r\n  },\r\n  expected: {\r\n    primitives: 860652,\r\n    sha256: '3718386cc13601b06579c241f19363ef486d5f2bfd0b5aa617e1ed9a5e544e82'\r\n  },\r\n  operator: 'deepStrictEqual',\r\n  diff: 'simple'\r\n}\r\n\r\nNode.js v24.20.0\r\n"
+  },
+  {
+    "file": "test-oakmere.mjs",
+    "status": 0,
+    "output": "PASS: Oakmere glazing is exposed, the west spine slope remains continuous, walking approach and facade collisions work, and details follow Historic visibility.\n"
+  },
+  {
+    "file": "test-oakmere-west.mjs",
+    "status": 1,
+    "baselineStatus": 1,
+    "output": "node:internal/modules/run_main:107\r\n    triggerUncaughtException(\r\n    ^\r\n\r\nAssertionError [ERR_ASSERTION]: Annexe primitives outside the red-circled low connector must remain unchanged\r\n+ actual - expected\r\n\r\n  {\r\n+   primitives: 20689,\r\n+   sha256: '372c981ccddfb9075449bea3250b552085e08b15bdbc2fc7b5d75a588e15b6e2'\r\n-   primitives: 21264,\r\n-   sha256: 'f12402cdea1cd3345b1900e31c183c9395c510ae400c543f5a48202582a2b364'\r\n  }\r\n\r\n    at file:///C:/Users/Harry/Documents/_escape-from-1829/Browser/test-oakmere-west.mjs:52:9\r\n    at ModuleJob.run (node:internal/modules/esm/module_job:561:25)\r\n    at async node:internal/modules/esm/loader:647:26\r\n    at async asyncRunEntryPointWithESMLoader (node:internal/modules/run_main:101:5) {\r\n  generatedMessage: false,\r\n  code: 'ERR_ASSERTION',\r\n  actual: {\r\n    primitives: 20689,\r\n    sha256: '372c981ccddfb9075449bea3250b552085e08b15bdbc2fc7b5d75a588e15b6e2'\r\n  },\r\n  expected: {\r\n    primitives: 21264,\r\n    sha256: 'f12402cdea1cd3345b1900e31c183c9395c510ae400c543f5a48202582a2b364'\r\n  },\r\n  operator: 'deepStrictEqual',\r\n  diff: 'simple'\r\n}\r\n\r\nNode.js v24.20.0\r\n",
+    "baselineOutput": "node:internal/modules/run_main:107\r\n    triggerUncaughtException(\r\n    ^\r\n\r\nAssertionError [ERR_ASSERTION]: Annexe primitives outside the red-circled low connector must remain unchanged\r\n+ actual - expected\r\n\r\n  {\r\n+   primitives: 21195,\r\n+   sha256: '6a8b8856ce16ed07eee6e3b4aa43d1ea4b4e254cdd71569e0ccc3b727d0a9f58'\r\n-   primitives: 21264,\r\n-   sha256: 'f12402cdea1cd3345b1900e31c183c9395c510ae400c543f5a48202582a2b364'\r\n  }\r\n\r\n    at file:///C:/Users/Harry/Documents/_escape-from-1829/Browser/test-oakmere-west.mjs:52:9\r\n    at ModuleJob.run (node:internal/modules/esm/module_job:561:25)\r\n    at async node:internal/modules/esm/loader:647:26\r\n    at async asyncRunEntryPointWithESMLoader (node:internal/modules/run_main:101:5) {\r\n  generatedMessage: false,\r\n  code: 'ERR_ASSERTION',\r\n  actual: {\r\n    primitives: 21195,\r\n    sha256: '6a8b8856ce16ed07eee6e3b4aa43d1ea4b4e254cdd71569e0ccc3b727d0a9f58'\r\n  },\r\n  expected: {\r\n    primitives: 21264,\r\n    sha256: 'f12402cdea1cd3345b1900e31c183c9395c510ae400c543f5a48202582a2b364'\r\n  },\r\n  operator: 'deepStrictEqual',\r\n  diff: 'simple'\r\n}\r\n\r\nNode.js v24.20.0\r\n"
+  },
+  {
+    "file": "test-oakmere-windows.mjs",
+    "status": 1,
+    "baselineStatus": 1,
+    "output": "node:internal/modules/run_main:107\r\n    triggerUncaughtException(\r\n    ^\r\n\r\nAssertionError [ERR_ASSERTION]: Everything except the three marked sets of sash parts stays unchanged\r\n+ actual - expected\r\n\r\n  {\r\n+   primitives: 21185,\r\n+   sha256: '4c06c7cda8534c7ce086c3e323966cdbaee177d1dd996cac8ed73dc53705de69'\r\n-   primitives: 21848,\r\n-   sha256: 'd4afbdbc9d8157103e80135c92e987fa8ee09d4c75c4652d5207ed1f2cbdf21d'\r\n  }\r\n\r\n    at file:///C:/Users/Harry/Documents/_escape-from-1829/Browser/test-oakmere-windows.mjs:18:9\r\n    at ModuleJob.run (node:internal/modules/esm/module_job:561:25)\r\n    at async node:internal/modules/esm/loader:647:26\r\n    at async asyncRunEntryPointWithESMLoader (node:internal/modules/run_main:101:5) {\r\n  generatedMessage: false,\r\n  code: 'ERR_ASSERTION',\r\n  actual: {\r\n    primitives: 21185,\r\n    sha256: '4c06c7cda8534c7ce086c3e323966cdbaee177d1dd996cac8ed73dc53705de69'\r\n  },\r\n  expected: {\r\n    primitives: 21848,\r\n    sha256: 'd4afbdbc9d8157103e80135c92e987fa8ee09d4c75c4652d5207ed1f2cbdf21d'\r\n  },\r\n  operator: 'deepStrictEqual',\r\n  diff: 'simple'\r\n}\r\n\r\nNode.js v24.20.0\r\n",
+    "baselineOutput": "node:internal/modules/run_main:107\r\n    triggerUncaughtException(\r\n    ^\r\n\r\nAssertionError [ERR_ASSERTION]: Everything except the three marked sets of sash parts stays unchanged\r\n+ actual - expected\r\n\r\n  {\r\n+   primitives: 21691,\r\n+   sha256: '635643f853ff73118219169a41dfe96f83150de82348cf8ecc2bef97cab97ad5'\r\n-   primitives: 21848,\r\n-   sha256: 'd4afbdbc9d8157103e80135c92e987fa8ee09d4c75c4652d5207ed1f2cbdf21d'\r\n  }\r\n\r\n    at file:///C:/Users/Harry/Documents/_escape-from-1829/Browser/test-oakmere-windows.mjs:18:9\r\n    at ModuleJob.run (node:internal/modules/esm/module_job:561:25)\r\n    at async node:internal/modules/esm/loader:647:26\r\n    at async asyncRunEntryPointWithESMLoader (node:internal/modules/run_main:101:5) {\r\n  generatedMessage: false,\r\n  code: 'ERR_ASSERTION',\r\n  actual: {\r\n    primitives: 21691,\r\n    sha256: '635643f853ff73118219169a41dfe96f83150de82348cf8ecc2bef97cab97ad5'\r\n  },\r\n  expected: {\r\n    primitives: 21848,\r\n    sha256: 'd4afbdbc9d8157103e80135c92e987fa8ee09d4c75c4652d5207ed1f2cbdf21d'\r\n  },\r\n  operator: 'deepStrictEqual',\r\n  diff: 'simple'\r\n}\r\n\r\nNode.js v24.20.0\r\n"
+  },
+  {
+    "file": "test-annexe-wards.mjs",
+    "status": 0,
+    "output": "PASS: five ward groups and reference colours, complete range ownership, aerial framing, accessible walking destinations and Historic visibility.\n"
+  },
+  {
+    "file": "test-churton.mjs",
+    "status": 0,
+    "output": "Churton Ward: six walk starts, wall collisions, rear recesses, exposed openings, slate roofs and single-storey height passed.\n"
+  },
+  {
+    "file": "test-upton.mjs",
+    "status": 0,
+    "output": "PASS: Upton mirrored OS footprint, fixed church alignment, church clearance, two storeys, exposed sashes, slate roof normals, open recesses, walking access and shared layout visibility.\n"
+  },
+  {
+    "file": "test-garages-mortuary.mjs",
+    "status": 0,
+    "output": "PASS: garages and T mortuary, 5143 roof samples, exposed photo openings, joined ridge, road clearance (1.30), walking and Historic layout.\n"
+  },
+  {
+    "file": "test-greenhouses.mjs",
+    "status": 0,
+    "output": "PASS: three glasshouses, two photo-facing workshops, 4254 roof samples, road junction and clearance, open yard, southern walk and all layout combinations.\n"
+  },
+  {
+    "file": "test-main-admin.mjs",
+    "status": 0,
+    "output": "PASS: east photo geometry, marked camera, independent chimney height/location, chamfered bays, open low-wing recess, OS registration, four photo starts, exposed sashes, slate roofs, masonry collision, clear approach and separate corridor.\n"
+  },
+  {
+    "file": "test-main-kitchen.mjs",
+    "status": 0,
+    "output": "PASS: three white four-sided hips, continuous roof coverage, /\\/\\/\\ profile, flush gallery joins, no connector/stores overlap, preserved L-shaped stores, and layout-aware walking collisions.\n"
+  },
+  {
+    "file": "test-main-admin-refine2.mjs",
+    "status": 0,
+    "output": "PASS: shared corner in both photos, three-sided pitched room, recessed link, retained red block/bay, exposed panes, camera starts, collisions and green exclusion.\n"
+  },
+  {
+    "file": "test-aerial-controls.mjs",
+    "status": 0,
+    "output": "PASS: pinch in/out, two-finger pan, finger handoff, cancellation, capture loss, blur cleanup, coincident/extra fingers, desktop pan.\n"
+  },
+  {
+    "file": "test-device-location.mjs",
+    "status": 0,
+    "output": "Device location: perimeter, exact 100 m cutoff, corners, coordinate alignment, fresh fixes, retries and errors passed.\n"
+  },
+  {
+    "file": "test-aerial-layouts.mjs",
+    "status": 0,
+    "output": "PASS: independent Historic/Modern controls, shared buildings, preserved transforms, hidden collisions, fifteen exact custom paths, camera-facing road names, upward road surfaces and full landscape/portrait framing.\n"
+  },
+  {
+    "file": "test-kml-imports.mjs",
+    "status": 0,
+    "output": "PASS: 39 exact KML trees, duplicate Oak8/Oak16 points, preserved front beeches, shared visibility and collisions; eight-vertex Countess roundabout (336.1 square units), upward roads, walkable centre and continuous Modern-only approach.\n"
+  },
+  {
+    "file": "test-modern-entrance.mjs",
+    "status": 0,
+    "output": "PASS: front boundary, curved driveway, shared sweeping forecourt branches, open kerb mouths and continuous clear routes to Redesmere and the west fire stairs.\n"
+  },
+  {
+    "file": "test-modern-car-park.mjs",
+    "status": 0,
+    "output": "PASS: 62 exact KML vertices, 13607.4 square units, Modern-only car park, concave boundary, thirteen complete trees and collisions cleared only in Modern, bowling lawn tree removed, all oaks retained.\n"
+  },
+  {
+    "file": "test-parsons-retrace.mjs",
+    "status": 0,
+    "output": "PASS: retraced Parsons Lane and fork have continuous asphalt, full-width building clearance, an open saved-lane junction, and grass at removed blue sections.\n"
+  },
+  {
+    "file": "test-historic-roads.mjs",
+    "status": 0,
+    "output": "PASS: source-selected road network, semicircular forecourt, north-pointing teardrop, full-width building clearance, no Parsons/Vivienne overlaps, retained southern continuation, registered OS contours and all layout combinations.\n"
+  },
+  {
+    "file": "test-annexe-access.mjs",
+    "status": 1,
+    "baselineStatus": 1,
+    "output": "PASS: red-line avenue, clear central sweep, yellow gravel link, removed rear and side roads, protected lane junctions and teardrop, and Historic visibility.\nnode:internal/modules/run_main:107\r\n    triggerUncaughtException(\r\n    ^\r\n\r\nAssertionError [ERR_ASSERTION]: Every primitive outside the marked low entrance range remains exact\r\n+ actual - expected\r\n\r\n  {\r\n+   primitives: 21056,\r\n+   sha256: '7ad44bc6cce99fb608c63b89cbcd76add39fe13673a1753832e8ec950291dcb1'\r\n-   primitives: 21719,\r\n-   sha256: '303946f8281251ab3ce564eeb634e35a74795b8717e3c8b75cf7a18d025186d7'\r\n  }\r\n\r\n    at file:///C:/Users/Harry/Documents/_escape-from-1829/Browser/artifacts/annexe-entrance-alignment-scope.mjs:37:8\r\n    at ModuleJob.run (node:internal/modules/esm/module_job:561:25)\r\n    at async node:internal/modules/esm/loader:647:26\r\n    at async file:///C:/Users/Harry/Documents/_escape-from-1829/Browser/test-annexe-access.mjs:129:1 {\r\n  generatedMessage: false,\r\n  code: 'ERR_ASSERTION',\r\n  actual: {\r\n    primitives: 21056,\r\n    sha256: '7ad44bc6cce99fb608c63b89cbcd76add39fe13673a1753832e8ec950291dcb1'\r\n  },\r\n  expected: {\r\n    primitives: 21719,\r\n    sha256: '303946f8281251ab3ce564eeb634e35a74795b8717e3c8b75cf7a18d025186d7'\r\n  },\r\n  operator: 'deepStrictEqual',\r\n  diff: 'simple'\r\n}\r\n\r\nNode.js v24.20.0\r\n",
+    "baselineOutput": "PASS: red-line avenue, clear central sweep, yellow gravel link, removed rear and side roads, protected lane junctions and teardrop, and Historic visibility.\nnode:internal/modules/run_main:107\r\n    triggerUncaughtException(\r\n    ^\r\n\r\nAssertionError [ERR_ASSERTION]: Every primitive outside the marked low entrance range remains exact\r\n+ actual - expected\r\n\r\n  {\r\n+   primitives: 21562,\r\n+   sha256: 'f41ae83d8d15472fe3494a62a2dcfa74e09b3f021707f9cb720d10bbfadf2f5f'\r\n-   primitives: 21719,\r\n-   sha256: '303946f8281251ab3ce564eeb634e35a74795b8717e3c8b75cf7a18d025186d7'\r\n  }\r\n\r\n    at file:///C:/Users/Harry/Documents/_escape-from-1829/Browser/artifacts/annexe-entrance-alignment-scope.mjs:37:8\r\n    at ModuleJob.run (node:internal/modules/esm/module_job:561:25)\r\n    at async node:internal/modules/esm/loader:647:26\r\n    at async file:///C:/Users/Harry/Documents/_escape-from-1829/Browser/test-annexe-access.mjs:129:1 {\r\n  generatedMessage: false,\r\n  code: 'ERR_ASSERTION',\r\n  actual: {\r\n    primitives: 21562,\r\n    sha256: 'f41ae83d8d15472fe3494a62a2dcfa74e09b3f021707f9cb720d10bbfadf2f5f'\r\n  },\r\n  expected: {\r\n    primitives: 21719,\r\n    sha256: '303946f8281251ab3ce564eeb634e35a74795b8717e3c8b75cf7a18d025186d7'\r\n  },\r\n  operator: 'deepStrictEqual',\r\n  diff: 'simple'\r\n}\r\n\r\nNode.js v24.20.0\r\n"
+  },
+  {
+    "file": "test-performance.mjs",
+    "status": 0,
+    "output": "PASS: indexed collisions match full scans across all layouts and padded boundaries; idle and distant collision work skipped; refreshed obstacles and cached-shadow invalidation.\n"
+  },
+  {
+    "file": "test-aerial-performance.mjs",
+    "status": 0,
+    "output": "PASS: shared tree buffers, colours and placement; distance detail and hysteresis; 8676 static meshes compiled into 1272 batches; all layout surfaces retained; cached transforms and dynamic labels; 433316 default-view tree triangles.\n"
+  },
+  {
+    "file": "test-building-detail.mjs",
+    "status": 0,
+    "output": "PASS: 2708 textured windows; close geometry and all layouts preserved; atlas pixels and rotated placement; viewport/zoom detail with hysteresis; static shadows, structural walls and independent trees.\n"
+  },
+  {
+    "file": "test-outhouse.mjs",
+    "status": 0,
+    "output": "PASS: 1066 roof samples, red-circle registration, exposed boarding, gable lighting, road clearance, three camera starts, walkable approach and shared-layout collisions.\n"
+  },
+  {
+    "file": "test-willows.mjs",
+    "status": 0,
+    "output": "PASS: The Willows exact KML Point, 960 roof samples, hollow bays, walking, distant aerial pan, layout fitting, selection and all four visibility states.\n"
+  },
+  {
+    "file": "test-building-photos.mjs",
+    "status": 0,
+    "output": "PASS: precompiled building metadata and roof selection match the source scene.\nPASS: 34 buildings, every named location, bundled photos, roof picking before/after batching and LOD, empty ground and layout visibility (60684 selection triangles).\n"
+  }
+]

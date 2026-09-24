@@ -8,7 +8,7 @@ export function rearStretchSnapshot(THREE,annexe){
   root.traverse(o=>{
    if(!o.isMesh)return;
    if(protectedOnly){
-    for(let p=o;p&&p!==annexe;p=p.parent)if(['Oakmere west lawn elevation','Annexe rear kitchen and paving','Oakmere','Leighton/Newton'].includes(p.name))return;
+    for(let p=o;p&&p!==annexe;p=p.parent)if(['Rear court west assembly','Oakmere west lawn elevation','Annexe rear kitchen and paving','Oakmere','Leighton/Newton'].includes(p.name))return;
     if(/^Rear court |^Rear service court link/.test(o.name))return;
    }
    const hash=createHash('sha256');

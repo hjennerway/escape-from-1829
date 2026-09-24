@@ -1,3 +1,20 @@
+## Rear courtyard guide-line alignment (September 24)
+
+The marked west rear range moves left to the blue guide; the angled Oakmere
+head moves right to the purple guide. The overlapping low connector and rear
+end room are removed completely. The moved blocks retain their shapes,
+heights, roofs, windows and chimneys. Courtyard paving, walking collisions and
+saved building views follow the correction. See
+[the reference and measurements](Research/annexe-kitchen/README.md#rear-side-alignment-and-connector-removal--24-september-2026).
+
+The dedicated preservation test retains 21,782 primitives and independently
+checks both image guide lines, the cleared passage and expanded paving.
+Concurrent east-veranda edits are preserved and isolated for this comparison.
+Validation: the full browser suite, compiled/source comparison, timeline checks,
+walking collisions and final source/compiled visual previews pass.
+
+Browser source and generated aerial models are updated; Unity and Blender
+exports are unchanged.
 # Development and modelling notes
 
 ## Larkton/Jodrell courtyard and Parsons road (24 September 2026)
@@ -1709,3 +1726,28 @@ at the Jarman global geometry snapshot, which also fails with the original
 entrance restored in an isolated process; every subsequent test passes when
 run separately. Logs are in `Browser/artifacts/annexe-entrance-alignment-*`.
 Browser sources and compiled aerial assets change; Unity/Blender exports do not.
+
+## Annexe east outer wing and veranda — 24 September 2026
+
+The latest red/yellow/blue annotation removes the east inner return and raised
+cross-room, exposing the existing continuous single-storey rear-link roof in
+the yellow area. The road-facing blue recess now has an open slate veranda
+with braced timber posts, pale fascia, blue trim and a paved sheltered walk.
+Its vocabulary follows Grafton/Edge and the annexe's existing veranda details.
+Reference dimensions and interpretation are in
+[Research/annexe-east-outer/README.md](Research/annexe-east-outer/README.md).
+
+The change is constructed before batching and walking-obstacle generation.
+The dedicated east-wing check confirms the removed footprint is clear,
+the lower roof is continuous, the canopy faces upwards, post bases collide,
+the walk remains accessible, and the retained east-wing geometry is unchanged.
+Browser source and the compiled aerial asset are updated; Unity and Blender
+sources/exports are unchanged. Source and compiled plan, overview and veranda
+views were inspected under Browser/artifacts/east-outer-*.
+
+Final validation: all 66 browser-suite scripts pass in npm test, including the
+new east-wing check. The rebuilt source/compiled comparison, fallback checks
+and every timeline stop pass. The compiled source fingerprint is current.
+The independent retained-wing snapshot preserves 2,516 primitives. Historical
+whole-annexe snapshots were refreshed alongside the concurrent rear-side work;
+initial and final results are retained in Browser/artifacts/east-outer-* logs.

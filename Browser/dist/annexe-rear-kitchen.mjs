@@ -1,3 +1,4 @@
+import {ANNEXE_REAR_WEST_SHIFT} from './annexe-rear-side-alignment.mjs';
 import {stretchAnnexeRearRect,stretchAnnexeRearZ} from './annexe-rear-stretch.mjs';
 // img1 looks from the rear court towards +Z. The west tower crest is on
 // the photograph's right; the existing freestanding chimney is on its left.
@@ -8,7 +9,7 @@ export const ANNEXE_KITCHEN_REFERENCE=Object.freeze({
  note:'Photo-estimated kitchen and service links; fully paved court and small rear access lane. Front elevations remain unchanged.'
 });
 export const ANNEXE_REAR_PAVING=Object.freeze({
- court:stretchAnnexeRearRect([-8.15,-39.15,8.15,-25.9]),
+ court:stretchAnnexeRearRect([-8.15+ANNEXE_REAR_WEST_SHIFT,-39.15,8.15,-25.9]),
  lane:stretchAnnexeRearRect([-3,-55,1,-38.9])
 });
 

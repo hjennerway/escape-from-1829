@@ -12,9 +12,9 @@ export function addOakmereWestElevation(THREE,{model,host,brick,roof,material,wo
  group.scale.x=depth/host.d;
  group.userData.reference=OAKMERE_WEST_REFERENCE;model.add(group);
  const trim=material(0xa35b40),pale=material(0xc0b69c),frame=material(0xe1e0cf),glass=material(0x293b3a,{roughness:.5,metalness:.1}),iron=material(0x303b3b);
- const batches=new Map(),openings=[];
- const mesh=(geometry,mat,x,y,z,name)=>{const m=new THREE.Mesh(geometry,mat);m.position.set(x,y,z);m.name=name;m.castShadow=true;m.receiveShadow=true;group.add(m);return m;};
- const box=(mat,x,y,z,w,h,d)=>{if(!batches.has(mat))batches.set(mat,[]);batches.get(mat).push({x,y,z,w,h,d});};
+ const batches=new Map(),openings=[];let owner=group;
+ const mesh=(geometry,mat,x,y,z,name)=>{const m=new THREE.Mesh(geometry,mat);m.position.set(x,y,z);m.name=name;m.castShadow=true;m.receiveShadow=true;owner.add(m);return m;};
+ const box=(mat,x,y,z,w,h,d)=>{if(!batches.has(mat))batches.set(mat,[]);batches.get(mat).push({x,y,z,w,h,d,owner});};
  const wall=(x,z,w,h,d,name)=>{const m=mesh(worldUV(new THREE.BoxGeometry(w,h,d),1.7),brick,x,h/2,z,name);m.userData.orientedCollision=true;return m;};
  function beam(a,b,width,mat,name){const p=new THREE.Vector3(...a),q=new THREE.Vector3(...b),v=q.clone().sub(p);const m=mesh(new THREE.CylinderGeometry(width/2,width/2,v.length(),8),mat,...p.add(q).multiplyScalar(.5).toArray(),name);m.quaternion.setFromUnitVectors(new THREE.Vector3(0,1,0),v.normalize());}
  function sash(x,y,z,{blind=false,h=2.65,w=1.2}={}){
@@ -60,19 +60,22 @@ export function addOakmereWestElevation(THREE,{model,host,brick,roof,material,wo
  // overlap that masonry; the photographed exposed fronts receive glazing.
  const lowRooms=[{x:-half-2,z:14.2,w:4.2,d:22.2,h:5.0,name:'Oakmere west low rear end room',count:2},{x:half+3.15,z:1.1,w:6.5,d:host.w+1.1,h:4.7,name:'Oakmere west low hall link',count:3}];
  for(const original of lowRooms){
+  owner=group;if(original.name==='Oakmere west low rear end room'){owner=new THREE.Group();owner.name=original.name;group.add(owner);}const openingStart=openings.length;
   // The end connectors follow their fixed front / moved rear joins rigidly;
   // stretching these small rooms would push their windows into the rear wing.
   const factor=ANNEXE_REAR_STRETCH.factor,edge=Math.sign(original.x)*half;
   const endX=x=>edge+(x-edge)/factor,b={...original,x:endX(original.x),w:original.w/factor};
   wall(b.x,b.z-b.d/2,b.w,b.h,b.d,b.name+' brick walls');
-  const cap=hipRoof(b.x,b.z-b.d/2,b.w,b.d,b.h,1.5);group.add(cap);cap.name=b.name+' slate roof';
+  const cap=hipRoof(b.x,b.z-b.d/2,b.w,b.d,b.h,1.5);owner.add(cap);cap.name=b.name+' slate roof';
   for(let i=0;i<b.count;i++)sash(endX(original.x+(i-(b.count-1)/2)*(original.w-.9)/b.count),2.2,b.z+.025,{w:(b.count===2?1.2:.98)/factor,h:2.7});
   box(trim,b.x,.24,b.z+.06,b.w,.4,.15);box(iron,b.x,b.h+.02,b.z+.2,b.w+.6,.12,.14);
+  if(owner!==group)owner.userData.openings=openings.slice(openingStart);
  }
+ owner=group;
  for(const [x,z] of [[-half+.12,.77],[-centreWidth/2,1.11],[centreWidth/2,1.11],[half-.12,.77]])box(iron,x,eaves/2,z,.09,eaves,.09);
  for(const [x,w] of [[-(half+centreWidth/2)/2,leftWidth],[(half+centreWidth/2)/2,leftWidth]])box(iron,x,eaves+.03,.8,w+.3,.12,.16);
  const dummy=new THREE.Object3D();
- for(const [mat,items] of batches){const m=new THREE.InstancedMesh(new THREE.BoxGeometry(1,1,1),mat,items.length);m.name='Oakmere west sash and masonry details';m.castShadow=true;m.receiveShadow=true;items.forEach((b,i)=>{dummy.position.set(b.x,b.y,b.z);dummy.scale.set(b.w,b.h,b.d);dummy.updateMatrix();m.setMatrixAt(i,dummy.matrix);});group.add(m);}
+ for(const [mat,all] of batches)for(const owner of new Set(all.map(b=>b.owner))){const items=all.filter(b=>b.owner===owner);const m=new THREE.InstancedMesh(new THREE.BoxGeometry(1,1,1),mat,items.length);m.name='Oakmere west sash and masonry details';m.castShadow=true;m.receiveShadow=true;items.forEach((b,i)=>{dummy.position.set(b.x,b.y,b.z);dummy.scale.set(b.w,b.h,b.d);dummy.updateMatrix();m.setMatrixAt(i,dummy.matrix);});owner.add(m);}
  group.userData.openings=openings;group.userData.hostRange=host.name;
  return group;
 }

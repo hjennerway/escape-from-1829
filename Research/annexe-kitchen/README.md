@@ -112,3 +112,45 @@ exports are unchanged. Alignment comparison images use the fixed camera in
 Browser/artifacts/annexe-rear-alignment-preview.mjs.
 
 Validation: all 59 browser checks, compiled/source comparison, every timeline stop, and the source/compiled alignment and kitchen preview pass. The generated model source hash matches the current source. Logs and comparison images use Browser/artifacts/annexe-rear-alignment-; additional views use annexe-kitchen-alignment-after-.
+
+## Rear side alignment and connector removal — 24 September 2026
+
+The later `side-alignment-reference.png` supersedes the connector retention
+and sideways positions described above. The red circle selects the complete
+west courtyard range and its Oakmere facade. It moves nine source-map units
+west, placing the yellow-marked outer eave on the blue guide. Its width, depth,
+height, roof, chimney and facade details remain unchanged. The court paving
+extends to the new inner wall; the existing front and back ranges still overlap
+its ends.
+
+The green circle covers the overlapping `Rear service court link` and
+`Oakmere west low rear end room`. Both are removed, including their roofs,
+windows and collision geometry. The pink circle selects the complete Oakmere
+angled rear head. It translates ten map units along its local right direction
+(x/z displacement `[10*cos(.43), -10*sin(.43)]`), aligning the orange edge
+with the purple guide without changing its angle or shape. These distances
+are image-based estimates, not surveyed measurements.
+
+`annexe-rear-side-alignment.mjs` applies these translations during construction,
+before exterior batching and walking-obstacle generation. The photo, aerial
+and walking destinations follow their respective moved blocks. The annexe
+root, front, central spine and opposite rear L remain fixed.
+
+`side-alignment-before.json` captures the pre-edit geometry. The independent
+`test-annexe-rear-side-alignment.mjs` compares 21,782 retained primitives after
+undoing only the two translations, checks the two annotated lines against a
+fixed fitted camera, and verifies the removed passage and extended paving.
+The simultaneous east-veranda task is normalized only inside an isolated test
+process; its shared-workspace source edits remain intact. Historical whole-model
+fingerprints were refreshed after this preservation check passed. The original
+rear-depth dimensions and wing-shape checks remain active.
+
+Visual comparisons use `Browser/artifacts/annexe-rear-side-preview.mjs` and
+`rear-side-camera.json`, with source/compiled screenshots named
+`annexe-rear-side-final-*`. Browser source and the generated aerial asset are
+updated. Unity and Blender sources/exports are unchanged.
+
+Validation: the full browser suite passed, as did the source/compiled comparison,
+all timeline browser checks, and both final rear-side preview views in source
+and compiled modes. No page errors occurred. Logs use the `rear-side-` prefix
+in `Browser/artifacts`; the compiled marked view matches both requested guides.

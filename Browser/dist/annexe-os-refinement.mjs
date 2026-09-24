@@ -57,8 +57,8 @@ export function refineAnnexeRanges(ranges){
   {name:'West court entrance link',rect:[-28,5,-20,11]},
   {name:'West court outer link',rect:[-68,-8,-58,1]},
   {name:'West end middle rooms',rect:[-100,-27,-93,-20],wardId:'larkton-jodrell'},
-  {name:'East end inner return',rect:[78,-16,87,11]},
-  {name:'East end middle rooms',rect:[87,-12,100,-3]},
+  // Red/yellow correction removes the inner return and raised cross-room.
+  // The existing 4.3-eave rear link now supplies the continuous low roof.
   {name:'East end front rooms',rect:[107,4,116,14]},
   {name:'Central rear low hall link',rect:[-5,-12,5,-5],h:4.7,rise:1.5,kitchen:true},
   {name:'Rear court west range',rect:[-19,-44,-8,-20]},

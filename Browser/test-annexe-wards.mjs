@@ -1,3 +1,4 @@
+import {ANNEXE_REAR_HEAD_SHIFT} from './dist/annexe-rear-side-alignment.mjs';
 import {ANNEXE_REAR_SHIFT} from './dist/annexe-rear-stretch.mjs';
 import assert from 'node:assert/strict';
 import {readFileSync} from 'node:fs';
@@ -17,7 +18,7 @@ for(const ward of ANNEXE_WARDS){
  const group=annexe.userData.wards[ward.id];
  assert.equal(group.name,ward.name);assert.equal(group.parent,annexe);
  const rear=['oakmere','leighton-newton'].includes(ward.id);
- assert.deepEqual(group.position.toArray(),[ward.id==='picton-carden'?7*ANNEXE_MAP_SCALE:0,0,rear?ANNEXE_REAR_SHIFT*ANNEXE_MAP_SCALE:0]);assert.deepEqual(group.scale.toArray(),[1,1,1]);
+ assert.deepEqual(group.position.toArray(),[ward.id==='picton-carden'?7*ANNEXE_MAP_SCALE:ward.id==='oakmere'?ANNEXE_REAR_HEAD_SHIFT[0]*ANNEXE_MAP_SCALE:0,0,(rear?ANNEXE_REAR_SHIFT*ANNEXE_MAP_SCALE:0)+(ward.id==='oakmere'?ANNEXE_REAR_HEAD_SHIFT[1]*ANNEXE_MAP_SCALE:0)]);assert.deepEqual(group.scale.toArray(),[1,1,1]);
  assert.deepEqual(group.userData.ranges.map(r=>r.name).sort(),[...ward.rangeNames].sort());
  for(const name of ward.rangeNames){
   assert(!claimed.has(name),'each existing range belongs to only one ward');claimed.add(name);
