@@ -1,25 +1,6 @@
 import {createConcreteLampTemplate} from './surviving-lamp-posts.mjs';
 import {exteriorObstacles,obstacleContains} from './explore-controls.mjs';
 import {REAR_LAMP_ROUTES} from './street-lamp-paths.mjs';
-import {ANNEXE_ACCESS} from './annexe-access.mjs';
-import {ANNEXE_SITE,annexeSiteLocal} from './annexe.mjs';
-import {annexeFrontPoint,annexeAvenueZ} from './annexe-front-roads.mjs';
-
-// Four owner-marked positions from Research/street-lamps.md, in the same site
-// frame as the entrance paving. Local +X runs along the frontage; +Z is outward.
-function annexeEntranceFixtures(){
- const a=ANNEXE_ACCESS,halfCourt=a.forecourtWidth/2;
- const courtZ=(a.forecourtRearZ+a.entranceZ)/2,verge=1.4/ANNEXE_SITE.scale;
- const make=(id,x,z,dx,dz)=>{
-  const [wx,wz]=annexeFrontPoint([x,z]),[tx,tz]=annexeFrontPoint([x+dx,z+dz]);
-  return {id,x:wx,z:wz,angle:-Math.atan2(tz-wz,tx-wx)};
- };
- return {
-  forecourt:[-1,1].map(side=>make('Annexe forecourt '+(side<0?'left':'right'),a.centreX+side*(halfCourt+verge),courtZ,-side,0)),
-  avenue:[make('Annexe service-path verge',a.centreX,annexeAvenueZ(a.centreX)+3.95/ANNEXE_SITE.scale,0,-1),
-   make('Annexe entrance-side verge',a.centreX+35,annexeAvenueZ(a.centreX+35)-3.95/ANNEXE_SITE.scale,0,1)]
- };
-}
 
 export const STREET_LAMP_SPACING=30;
 export const LAMP_HEAD=[2.5,5.52,0];
@@ -66,7 +47,7 @@ export function addRoadsideLampPosts(THREE,exterior,layouts){
  template.traverse(o=>{if(o.isMesh)parts.push({name:o.name,geometry:o.geometry.clone().applyMatrix4(o.matrixWorld),material:o.material});});
  const matrix=new THREE.Matrix4(),rotation=new THREE.Quaternion(),axis=new THREE.Vector3(0,1,0),scale=new THREE.Vector3(1,1,1);
  for(const route of routes){
-  const fixtures=route.fixtures=[];
+  const fixtures=[];
   for(const [index,p] of sampleLampPath(route.points,route.spacing).entries()){
    // Try either verge when a building, tree trunk or crossing occupies one side.
    for(const side of (route.boundary?[route.side]:(index%2?[-1,1]:[1,-1]))){
@@ -76,18 +57,7 @@ export function addRoadsideLampPosts(THREE,exterior,layouts){
     fixtures.push({x,z,angle:-Math.atan2(-p.nz*side,-p.nx*side)});occupied.push([x,z]);break;
    }
   }
- }
- // Apply the marked entrance edit after sampling, preserving every other
- // roadside placement. The circled fixture is on the building side of the mouth.
- const entrance=annexeEntranceFixtures(),avenue=routes.find(r=>r.owner.name==='Annexe front avenue');
- avenue.fixtures=avenue.fixtures.filter(p=>{
-  const [x,z]=annexeSiteLocal([p.x,p.z]);
-  return !(Math.abs(x-ANNEXE_ACCESS.centreX)<ANNEXE_ACCESS.entranceMouthWidth/2&&z<annexeAvenueZ(x));
- }).concat(entrance.avenue);
- const forecourt=layouts.historicRoads.getObjectByName('Annexe central asphalt forecourt');
- routes.push({owner:forecourt.parent,name:'Annexe entrance forecourt',fixtures:entrance.forecourt});
- for(const route of routes){
-  const {fixtures}=route;if(!fixtures.length)continue;
+  if(!fixtures.length)continue;
   const group=new THREE.Group();group.name='Street lamps · '+(route.name??route.owner.name);
   group.userData.streetLamps=fixtures;route.owner.add(group);
   for(const part of parts){

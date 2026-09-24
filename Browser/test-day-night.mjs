@@ -31,4 +31,22 @@ assert(counts[1915]>counts[1896]);assert(counts[2010]<counts[1938]);assert(count
 timeline.setPeriod(1916);const group=lighting.lamps.find(l=>l.owner.userData.streetLamps).owner,p=group.userData.streetLamps[0];
 const obstacles=exteriorObstacles(THREE,group);assert(obstacles.some(b=>obstacleContains(b,p.x,p.z,0)),'Walking collides with the concrete shaft');
 assert(!obstacles.some(b=>obstacleContains(b,p.x+1.5*Math.cos(p.angle),p.z-1.5*Math.sin(p.angle),0)),'Overhead arms must not block walking');
+// The four screenshot-marked posts stand on the verges with each lamp head
+// above its intended paved surface, and the former swept-junction post is gone.
+const marked=[];exterior.model.updateMatrixWorld(true);
+exterior.model.traverse(owner=>{for(const fixture of owner.userData.streetLamps??[])if(fixture.id?.startsWith('Annexe '))marked.push({owner,fixture});});
+assert.equal(marked.length,4,'Two forecourt and two avenue replacements');
+const groundRay=new THREE.Raycaster(),down=new THREE.Vector3(0,-1,0);
+for(const {owner,fixture:p} of marked){
+ const court=p.id.startsWith('Annexe forecourt');
+ const surface=court?exterior.model.getObjectByName('Annexe central asphalt forecourt'):exterior.model.getObjectByName('Annexe front avenue');
+ const paving=court?[surface]:surface.children.filter(o=>o.isMesh&&o.userData.surface==='black road');
+ groundRay.set(new THREE.Vector3(p.x,1,p.z),down);
+ assert.equal(groundRay.intersectObjects(paving,false).length,0,p.id+' stands off the paving');
+ groundRay.set(new THREE.Vector3(p.x+2.5*Math.cos(p.angle),1,p.z-2.5*Math.sin(p.angle)),down);
+ assert(groundRay.intersectObjects(paving,false).length>0,p.id+' points over the paving');
+ assert(exteriorObstacles(THREE,owner).some(b=>obstacleContains(b,p.x,p.z,0)),p.id+' blocks walking at its shaft');
+}
+exterior.model.traverse(owner=>{for(const p of owner.userData.streetLamps??[])assert(Math.hypot(p.x-312.9823792844294,p.z+50.27196423864546)>1,'Circled junction post stays removed');});
+
 console.log('PASS: day default and restoration, night lighting, fixed light budget, per-period fixtures/pools, hidden-road light removal, narrow post collisions. '+JSON.stringify(counts));

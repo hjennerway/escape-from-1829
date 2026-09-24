@@ -19,14 +19,15 @@ try{
   const {exterior:e,renderer,lighting,THREE}=window.__lamps;
   const {annexeSitePoint,annexeSiteLocal}=await import('./annexe.mjs');
   const {ANNEXE_ACCESS:a,ANNEXE_ACCESS_PAVING}=await import('./annexe-access.mjs');
-  const camera=e.camera,target=annexeSitePoint(a.centreX,0,82);
-  camera.position.set(...annexeSitePoint(a.centreX+28,85,155));camera.up.set(0,1,0);camera.lookAt(...target);camera.fov=48;camera.updateProjectionMatrix();
+  const camera=e.camera,target=annexeSitePoint(a.centreX,0,94);
+  camera.position.set(...annexeSitePoint(a.centreX+38,75,167));camera.up.set(0,1,0);camera.lookAt(...target);camera.fov=48;camera.updateProjectionMatrix();
   e.scene.traverse(o=>{if(o.isSprite)o.visible=false;});lighting.setNight(true);e.invalidateShadows();renderer.render(e.scene,camera);
-  const groups=[];e.model.traverse(o=>{if(o.userData.streetLamps&&/Annexe front/.test(o.name))groups.push({name:o.name,fixtures:o.userData.streetLamps.map(p=>({...p,local:annexeSiteLocal([p.x,p.z])}))});});
+  const groups=[];e.model.traverse(o=>{if(o.userData.streetLamps&&/Annexe (front|entrance)/.test(o.name))groups.push({name:o.name,fixtures:o.userData.streetLamps.map(p=>({...p,local:annexeSiteLocal([p.x,p.z])}))});});
   const project=([x,z])=>{const p=new THREE.Vector3(x,0,z).project(camera);return [(p.x+1)*987/2,(1-p.y)*841/2]};
   return {build:e.modelBuild,access:a,groups,paving:ANNEXE_ACCESS_PAVING.filter(p=>/forecourt/.test(p.name)).map(p=>({...p,pixels:p.points.map(project)}))};
  });
  await page.screenshot({path:fileURLToPath(new URL(`annexe-lamps-${tag}-${mode}.png`,import.meta.url))});
+ await page.screenshot({path:fileURLToPath(new URL(`annexe-lamps-${tag}-${mode}.jpg`,import.meta.url)),quality:55});
  await writeFile(new URL(`annexe-lamps-${tag}-${mode}.json`,import.meta.url),JSON.stringify(report,null,2));
  assert.equal(report.build.mode,mode==='source'?'procedural':'compiled');assert.deepEqual(errors,[]);
  console.log(JSON.stringify(report,null,2));

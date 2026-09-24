@@ -27,3 +27,22 @@ moon uses the existing cached shadow map; street lights do not add shadow maps.
 
 Browser model sources and generated aerial assets are updated. Unity and
 Blender exports are not regenerated.
+
+## Annexe entrance placement correction — 24 September 2026
+
+The owner's [marked night view](annexe-night-lamps-marked.png) adds two posts
+beside the central forecourt (red Xs), removes the post on the curved entrance
+mouth (yellow circle), and adds two on the avenue verges (blue Xs).
+
+The forecourt pair stands 1.4 scene metres outside its side edges, halfway
+between its front and rear. Both arms point inward over the asphalt. The blue
+pair follows the avenue: one opposite the entrance, beside the gravel-path
+mouth, and one on the building-side verge 35 site-frame units to the right of
+the entrance axis. Both use the existing 0.95-metre verge clearance and point
+across the road. Screenshot ground registration is retained in
+Browser/artifacts/annexe-lamps-register.mjs.
+
+These four placements override the automatic sampling locally, after the other
+roadside positions have been generated. The existing Annexe period parents
+control the posts and night lighting. The net change is three additional
+fixtures in the Annexe periods; other periods retain their existing counts.

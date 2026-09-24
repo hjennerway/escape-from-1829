@@ -1,3 +1,4 @@
+import {SOUTHERN_DRIVE_JUNCTION} from './southern-drive-junction.mjs';
 import {WEST_PARSONS_JUNCTIONS} from './west-parsons-junctions.mjs';
 import {ANNEXE_REAR_SURFACES} from './annexe-rear-roads.mjs';
 import {ANNEXE_LOOP_ROAD,ANNEXE_TRIANGLE_APEX,ANNEXE_TRIANGLE_FORK,ANNEXE_FRONT_OUTER_JOIN,IRBY_ANNEXE_APPROACH} from './annexe-loop-road.mjs';
@@ -133,6 +134,7 @@ const larktonJunction={name:'Annexe Larkton Parsons open junction',surface:'junc
 export const HISTORIC_GRAVEL=Object.freeze([ANNEXE_GRAVEL_PATH]);
 export const HISTORIC_PAVING=Object.freeze([
  ...WEST_PARSONS_JUNCTIONS,
+ ...SOUTHERN_DRIVE_JUNCTION,
  ...ANNEXE_REAR_SURFACES,
  ...IRBY_ROUNDING_PAVING,
  ESTATES_SERVICE_COURT,
