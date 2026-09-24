@@ -161,3 +161,33 @@ join. Its new face has pale divided sashes, brick bands and a shallow hip-roof
 bay. The low square annex moves with the outer end, attaching to the end-side corner
 of the head and exposing it from the supplied photo direction.
 The dedicated test checks the widened wall/roof and relocated annex as well.
+
+### Bay depth and rear annex placement — later 24 September 2026 correction
+
+The latest [marked model](bay-annex-placement-marked.png) supersedes the
+shallow cross-head bay and end-side annex placement above. The bay face moves
+4.5 map units into the courtyard (about 4.72 scene metres), estimated from
+the yellow-to-blue guide. Its back stays joined to the head, with deeper
+masonry and a continuous hipped roof; the front sashes, bands and shrubs
+follow the new face. Width and height remain unchanged.
+
+The seven-unit square annex moves to the opposite, rear face of the head,
+flush with its outer end and overlapping the host wall by 0.05 map units.
+Its entrance, landing, handrails and shrubs face the open rear lawn. The
+former annex location is clear. Both changes happen before batching, shadow
+setup and walking-obstacle extraction.
+
+The focused court regression checks the new face, full-depth roof and collision,
+rear attachment, exposed annex and clearance at its old position. It retains
+the existing independent fingerprint protecting original annexe geometry.
+Browser source and the local compiled aerial asset are updated; Unity and
+Blender sources and exports are unchanged. Preview images and validation logs
+use `Browser/artifacts/oakmere-*placement*`.
+
+Validation: source and rear visual checks, bay/annex geometry and walking
+assertions pass. The source/compiled comparison and all timeline stops passed
+on the first rebuilt asset. Concurrent changes elsewhere in the shared
+workspace subsequently invalidated historical preservation snapshots; the full
+suite stopped in the Larkton preservation check, and the whole-annexe Oakmere
+fingerprint also changed. These unrelated snapshots were not rebased here.
+Live Oakmere assertions were rerun independently and passed.

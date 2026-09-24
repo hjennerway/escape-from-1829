@@ -36,6 +36,8 @@
       <li><a href="?view=annexe-jarman-photo">Annexe: Jarman lawn photo</a></li>
       <li><a href="?view=tarvin-jarman">Annexe: Tarvin/Jarman Ward</a></li>
       <li><a href="?view=leighton-newton">Annexe: Leighton/Newton Ward</a></li>
+      <li><a href="?view=leighton-newton-inner">Leighton/Newton: inner elevation</a></li>
+      <li><a href="?view=leighton-newton-outer">Leighton/Newton: veranda elevation</a></li>
       <li><a href="?view=oakmere">Annexe: Oakmere Ward</a></li>
       <li><a href="?view=larkton-jodrell">Annexe: Larkton/Jodrell Ward</a></li>
       <li><a href="?view=greenhouses">Greenhouses</a></li>
@@ -52,13 +54,13 @@
     </ul></div>
   </div>
 </nav>
-<section id="layoutControls" aria-label="Estate timeline">
-  <h2><label for="periodSlider">SELECTED PERIOD</label></h2>
+<details id="layoutControls" aria-label="Estate timeline" open>
+  <summary>SELECTED PERIOD <span class="period-chevron" aria-hidden="true">⌃</span></summary>
   <div class="period-heading" aria-live="polite" aria-atomic="true"><output id="periodYear" for="periodSlider">1916</output><span id="periodTitle">Isolation hospital</span></div>
-  <div class="period-range"><button id="previousPeriod" type="button" aria-label="Previous period">‹</button><input id="periodSlider" type="range" min="0" max="12" step="1" value="8" aria-describedby="periodDescription"><button id="nextPeriod" type="button" aria-label="Next period">›</button></div>
+  <div class="period-range"><button id="previousPeriod" type="button" aria-label="Previous period">‹</button><input id="periodSlider" aria-label="Estate period" type="range" min="0" max="12" step="1" value="8" aria-describedby="periodDescription"><button id="nextPeriod" type="button" aria-label="Next period">›</button></div>
   <div id="periodTicks" aria-hidden="true"></div><div class="period-endpoints" aria-hidden="true"><span>1829</span><span>2021</span></div>
   <p id="periodDescription"></p><p id="periodNote" hidden></p>
-</section>
+</details>
 <div class="explore-guide"><h1>Explore the asylum</h1><p class="desktop-walk-help">WASD move · Mouse look · Shift walk faster · T show/hide trees · Esc release mouse</p><p class="touch-walk-help">Hold arrows to walk · Drag the view to look around</p><p id="lookHint" role="status">Loading the grounds…</p><button id="look" disabled>START EXPLORING ↗</button></div>
 <div id="walkTouch" role="group" aria-label="Walking controls">
   <button type="button" data-key="KeyW" aria-label="Walk forward">↑</button>

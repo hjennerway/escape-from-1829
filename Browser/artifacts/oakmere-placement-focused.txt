@@ -1,0 +1,33 @@
+node:internal/modules/run_main:107
+    triggerUncaughtException(
+    ^
+
+AssertionError [ERR_ASSERTION]: Every pre-existing annexe primitive remains unchanged
++ actual - expected
+
+  {
++   count: 20444,
++   sha256: 'b91bb675e7dfba17e5e7a468b66ae552fa4b6d5c821f77b06f470e006aded562'
+-   count: 21256,
+-   sha256: 'd88c4fdd70c1168bff6013038a0f73e6e882bd9bfb2e28d619f87a4e1faf05a9'
+  }
+
+    at file:///C:/Users/Harry/Documents/_escape-from-1829/Browser/test-oakmere-court.mjs:13:8
+    at ModuleJob.run (node:internal/modules/esm/module_job:561:25)
+    at async node:internal/modules/esm/loader:647:26
+    at async asyncRunEntryPointWithESMLoader (node:internal/modules/run_main:101:5) {
+  generatedMessage: false,
+  code: 'ERR_ASSERTION',
+  actual: {
+    count: 20444,
+    sha256: 'b91bb675e7dfba17e5e7a468b66ae552fa4b6d5c821f77b06f470e006aded562'
+  },
+  expected: {
+    count: 21256,
+    sha256: 'd88c4fdd70c1168bff6013038a0f73e6e882bd9bfb2e28d619f87a4e1faf05a9'
+  },
+  operator: 'deepStrictEqual',
+  diff: 'simple'
+}
+
+Node.js v24.20.0

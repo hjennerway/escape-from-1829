@@ -123,3 +123,16 @@ return and southern cross-lane are removed.
 ## Parsons Lane yellow retrace
 
 The 16 September yellow/blue annotation (parsons-yellow-retrace.png) replaces the northern detour with a sweep from the western boundary past Irby/Ashley, across the frontage avenue and into the saved Parsons Lane north endpoint. The yellow southern fork joins the frontage avenue. The blue outer loop and upper service/frontage spurs return to grass. This supersedes the earlier northern connection. Ground-plane picks are fitted to the screenshot; road width and materials stay consistent. The saved Modern road vertices are unchanged. Verify with node Browser/test-parsons-retrace.mjs.
+
+## Gravel alignment and northern fork — 24 September 2026
+
+The red/blue/yellow screenshot moves the service-court gravel link six units
+north, retaining its 2.4-unit width and slight skew. Its mouth starts on the
+existing side-road edge. The Irby corridor remains fixed at z=-66.6; its former
+dependency on the gravel endpoint is removed to preserve all attached buildings.
+
+The Parsons southern fork now leaves the unchanged northern carriageway beyond
+the tree crowns. This removes the overlapping parallel strip and returns its
+old inside edge to grass. The new curve retains six-unit asphalt width and
+pale borders; sampled segment clearances include the full mapped tree crowns.
+This supersedes the old fork in the annexe road snapshot.

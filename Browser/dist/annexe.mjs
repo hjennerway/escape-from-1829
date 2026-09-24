@@ -1,3 +1,4 @@
+import {addLeightonNewton} from './annexe-leighton-newton.mjs';
 import {addOakmereCourt} from './annexe-oakmere-court.mjs';
 import {addLarktonRecess,LARKTON_SHIFT} from './annexe-larkton-recess.mjs';
 import {alignAnnexeRearSide,ANNEXE_REAR_WEST_SHIFT,ANNEXE_REAR_HEAD_SHIFT} from './annexe-rear-side-alignment.mjs';
@@ -73,7 +74,11 @@ export const ANNEXE_WARD_VIEWS=Object.freeze(Object.fromEntries(ANNEXE_WARDS.map
 export const ANNEXE_WARD_WALKS=Object.freeze(Object.fromEntries(ANNEXE_WARDS.map(ward=>[ward.id,ward.walk])));
 const mapNorth=annexePlacementMapPoint([0,0]),mapSouth=annexePlacementMapPoint([0,1]);
 const southOffset=mapSouth.map((value,i)=>(value-mapNorth[i])*.01),site=annexePlacementMapPoint([155,192]);
+// Photo positions in the unrotated rear-L frame, then follow its rigid shift.
+const leightonPhoto=(p,t)=>{const angle=22*Math.PI/180,c=Math.cos(angle),s=Math.sin(angle),point=([x,y,z])=>annexePoint((9+c*(x-9)+s*(z+42))*ANNEXE_MAP_SCALE,y,(-42-s*(x-9)+c*(z+42)+ANNEXE_REAR_SHIFT)*ANNEXE_MAP_SCALE);return {position:point(p),target:point(t),fov:48};};
 export const ANNEXE_VIEWS=Object.freeze({
+ 'leighton-newton-inner':leightonPhoto([21,1.8,-75],[28,4.5,-49]),
+ 'leighton-newton-outer':leightonPhoto([54,1.8,-14],[29,4.5,-41]),
  ...ANNEXE_WARD_VIEWS,
  'oakmere-photo':rearWestShot([-101,2.2,-65],[-31,6,-51],49),
  'annexe-outer-west':larktonShot([-201,2,34],[-146,5.5,0],58),
@@ -204,6 +209,7 @@ export function createAnnexe(THREE,{brick,roof,material,worldUV,hipRoof}){
   // Keep the neighbouring ward occupancy mask; build the recessed link below.
   if(b.name==='West court outer link')continue;
   solid(brick,b.x,b.h/2,b.z,b.w,b.h,b.d,b.name+' brick walls',b.r);
+  if(currentWard==='leighton-newton'){hip(b.x,b.z,b.w,b.d,b.h,b.rise,b.name,b.r);continue;}
   box(red,b.x,.25,b.z,b.w+.13,.5,b.d+.13,b.r);
   for(const y of [4.35,8.65,12.6])if(y<b.h&&!b.kitchen)box(red,b.x,y,b.z,b.w+.16,.32,b.d+.16,b.r);
   box(red,b.x,b.h-.22,b.z,b.w+.18,.35,b.d+.18,b.r);
@@ -217,7 +223,7 @@ export function createAnnexe(THREE,{brick,roof,material,worldUV,hipRoof}){
  for(const b of ranges){
   currentWard=b.wardId;
   currentSection=rearSection(b.name)??annexeFrontSection(b.name);
-  if(b.kitchen||b.name==='West court outer link')continue;
+  if(b.kitchen||b.name==='West court outer link'||b.wardId==='leighton-newton')continue;
   for(const face of ['long','end'])for(const side of [-1,1]){
    if(face==='end'&&((b.name==='Rear court back range'&&side>0)||(b.name==='Rear court back east range'&&side<0)))continue;
    if(b.name==='Central rear spine'&&side<0)continue; // Preserve the accepted blank rear and west generic faces.
@@ -288,7 +294,7 @@ export function createAnnexe(THREE,{brick,roof,material,worldUV,hipRoof}){
  const dome=mesh(new THREE.SphereGeometry(1.43,16,10,0,Math.PI*2,0,Math.PI/2),lead,0,bellY+3.82,bellZ,'Bell tower dome');dome.scale.y=1.15;
  beam([0,bellY+5.35,bellZ],[0,bellY+7,bellZ],.09,dark,'Bell tower weather vane');
  beam([-.5,bellY+6.65,bellZ],[.5,bellY+6.65,bellZ],.07,dark,'Weather vane crossbar');
- for(const b of ranges.filter(b=>b.h>7&&!b.name.includes('tower')&&!b.name.includes('hall')&&b.name!=='West court outer link')){
+ for(const b of ranges.filter(b=>b.h>7&&!b.name.includes('tower')&&!b.name.includes('hall')&&b.name!=='West court outer link'&&b.wardId!=='leighton-newton')){
   currentWard=b.wardId;
   currentSection=rearSection(b.name)??annexeFrontSection(b.name);
   const [x,z]=position(b,b.w*.28,0),base=b.h+b.rise*.65,top=base+2.55;
@@ -356,6 +362,7 @@ export function createAnnexe(THREE,{brick,roof,material,worldUV,hipRoof}){
  model.userData.oakmereWestElevation=addOakmereWestElevation(THREE,{model,host:ranges.find(b=>b.name==='Rear court west range'),brick,roof,material,worldUV,hipRoof});
  model.userData.rearKitchen=addAnnexeRearKitchen(THREE,{model,ranges,scale:ANNEXE_MAP_SCALE,brick,roof,material,worldUV,hipRoof});
  model.userData.cardenElevation=addCardenElevation(THREE,{model,hall,ranges,frontDormers,brick,roof,material,worldUV,hipRoof});
+ model.userData.leightonNewton=addLeightonNewton(THREE,{ward:wards['leighton-newton'],scale:ANNEXE_MAP_SCALE,brick,roof,material,worldUV,hipRoof});
  // Move the attached wings rigidly, retaining their roofs, window spacing
  // and angled footprints. Metadata follows the rendered groups for picking
  // and geometric checks; no front-facing assembly is transformed.

@@ -12,10 +12,11 @@ globalThis.document={createElement:()=>({getContext:()=>({fillRect(){}})})};
 const e=createEscapeExterior(THREE,1.5);e.model.updateMatrixWorld(true);
 const previous=JSON.parse(readFileSync(new URL('../Research/annexe-photo-placement/fixed-roads.json',import.meta.url)));
 const roads=[...HISTORIC_ROAD_TRACES,...SHARED_HISTORIC_LANES];
-// Protect the annexe's surrounding loop, avenue and teardrop. Selecting every
-// route with any point east of x=240 also froze unrelated, later-approved
+// Protect the annexe's surrounding loop, avenue and teardrop.
+// The September 24 fork curve is checked separately in test-parsons-retrace.
+// Selecting every route with any point east of x=240 also froze later-approved
 // Vivienne Smith Lane, garage-junction and Main/admin pine-road revisions.
-for(const name of ['Northern Parsons Lane connection','Parsons Lane southern fork',
+for(const name of ['Northern Parsons Lane connection',
  'Admin teardrop circulation','Annexe front avenue','Northern estate boundary','Parsons Lane (North)']){
  const original=previous.roads.find(r=>r.name===name);
  assert(original,'The reference must contain the protected road: '+name);

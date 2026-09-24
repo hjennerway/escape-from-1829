@@ -1,0 +1,136 @@
+npm notice run test:compiled
+npm notice run node test-precompiled-models.mjs && node test-timeline-browser.mjs
+Checking aerial?models=source
+Checking aerial?models=compiled
+Checking aerial?models=compiled&buildingDetail=full&view=front
+Checking aerial
+Browser: Failed to load resource: the server responded with a status of 404 (Not Found)
+Checking aerial
+Checking aerial
+PASS: compiled estate, shadows, grass shaders, exact draw counts, tree/layout controls, orbit, portrait, full detail and missing/incompatible/damaged model fallback.
+{
+  "source": {
+    "mode": "procedural",
+    "milliseconds": 1037.699999999255,
+    "triangles": 714943,
+    "calls": 2845,
+    "levels": [
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      1,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      1,
+      1,
+      2,
+      2,
+      1,
+      2,
+      2,
+      1,
+      2,
+      2,
+      1
+    ],
+    "readyMilliseconds": 11036.3555
+  },
+  "compiled": {
+    "mode": "compiled",
+    "milliseconds": 2964.60000000149,
+    "triangles": 714943,
+    "calls": 2845,
+    "levels": [
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      1,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      1,
+      1,
+      2,
+      2,
+      1,
+      2,
+      2,
+      1,
+      2,
+      2,
+      1
+    ],
+    "readyMilliseconds": 21743.319199999998
+  },
+  "identicalScreenshot": false,
+  "pixels": {
+    "significantFraction": 0.00016857142857142857,
+    "meanChannelError": 0.051775238095238096
+  },
+  "fullDetail": {
+    "mode": "compiled",
+    "milliseconds": 1317.9000000022352,
+    "triangles": 399679,
+    "calls": 476,
+    "readyMilliseconds": 7640.836200000005
+  }
+}
+node:internal/modules/run_main:107
+    triggerUncaughtException(
+    ^
+
+AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
++ actual - expected
+
++ 'procedural'
+- 'compiled'
+
+    at file:///C:/Users/Harry/Documents/_escape-from-1829/Browser/test-timeline-browser.mjs:59:10 {
+  generatedMessage: true,
+  code: 'ERR_ASSERTION',
+  actual: 'procedural',
+  expected: 'compiled',
+  operator: 'strictEqual',
+  diff: 'simple'
+}
+
+Node.js v24.20.0

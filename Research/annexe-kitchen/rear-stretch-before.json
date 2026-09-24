@@ -27,8 +27,8 @@
       "sha256": "34b233af5bb014d7877d1382a70783fba671421df257649c7a383d17250bce7b"
     },
     "leighton-newton": {
-      "primitives": 1793,
-      "sha256": "c4f5125865da3086fc0d4f69aefc06dc2a41a39e0a8f42d55b3bfa87c1e5371d"
+      "primitives": 1008,
+      "sha256": "d2a703efb7d1b9d2b4a028a0baec6ac2db9a4d9f2de403b71ba6c66e9ffdcbe1"
     }
   },
   "ranges": [

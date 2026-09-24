@@ -52,3 +52,7 @@ workshop dimensions, fixed fronts, walking start and layout visibility.
 and the retained garden details.
 `Browser/test-irby-roads.mjs` checks that asphalt follows the revised front
 without running beneath the corridor or ward.
+
+The September 24 gravel-path correction moves only the outdoor path. The
+corridor retains its approved z=-66.6 axis, ward contacts and workshop geometry;
+its coordinates no longer derive from the gravel endpoint.

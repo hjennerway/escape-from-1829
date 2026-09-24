@@ -39,6 +39,8 @@
       <li><a href="?view=annexe-jarman-photo">Annexe: Jarman lawn photo</a></li>
       <li><a href="?view=tarvin-jarman">Annexe: Tarvin/Jarman Ward</a></li>
       <li><a href="?view=leighton-newton">Annexe: Leighton/Newton Ward</a></li>
+      <li><a href="?view=leighton-newton-inner">Leighton/Newton: inner elevation</a></li>
+      <li><a href="?view=leighton-newton-outer">Leighton/Newton: veranda elevation</a></li>
       <li><a href="?view=oakmere">Annexe: Oakmere Ward</a></li>
       <li><a href="?view=larkton-jodrell">Annexe: Larkton/Jodrell Ward</a></li>
       <li><a href="?view=greenhouses">Greenhouses</a></li>
@@ -57,13 +59,13 @@
 </nav>
 <div id="deviceLocationStatus" role="status" aria-live="polite" aria-atomic="true"></div>
 <div id="churtonNav" hidden style="position:fixed;bottom:65px;left:24px;z-index:32;font:12px Arial;color:#e4e8db"></div>
-<section id="layoutControls" aria-label="Estate timeline">
-  <h2><label for="periodSlider">SELECTED PERIOD</label></h2>
+<details id="layoutControls" aria-label="Estate timeline" open>
+  <summary>SELECTED PERIOD <span class="period-chevron" aria-hidden="true">⌃</span></summary>
   <div class="period-heading" aria-live="polite" aria-atomic="true"><output id="periodYear" for="periodSlider">1916</output><span id="periodTitle">Isolation hospital</span></div>
-  <div class="period-range"><button id="previousPeriod" type="button" aria-label="Previous period">‹</button><input id="periodSlider" type="range" min="0" max="12" step="1" value="8" aria-describedby="periodDescription"><button id="nextPeriod" type="button" aria-label="Next period">›</button></div>
+  <div class="period-range"><button id="previousPeriod" type="button" aria-label="Previous period">‹</button><input id="periodSlider" aria-label="Estate period" type="range" min="0" max="12" step="1" value="8" aria-describedby="periodDescription"><button id="nextPeriod" type="button" aria-label="Next period">›</button></div>
   <div id="periodTicks" aria-hidden="true"></div><div class="period-endpoints" aria-hidden="true"><span>1829</span><span>2021</span></div>
   <p id="periodDescription"></p><p id="periodNote" hidden></p>
-</section>
+</details>
 <div id="aerialHelp"><span class="desktop-aerial-help">Hover a building for photos · Drag to orbit · Right-drag to pan · WASD to move · Scroll to zoom · T to show/hide trees</span><span class="touch-aerial-help">Tap a building for photos · One finger to orbit · Pinch to zoom · Two fingers to pan</span> · <button id="resetAerial">RESET VIEW</button></div>
 <script type="module" src="./aerial-locations.mjs"></script>
 <script type="module">
@@ -148,7 +150,7 @@ if(MAIN_ADMIN_VIEWS[view]){const nav=document.getElementById('churtonNav');nav.h
 if(view.startsWith('ward-corridors')){const nav=document.getElementById('churtonNav');nav.hidden=false;nav.classList.add('farndon-navigation');nav.innerHTML='WARD CORRIDORS · <a style="color:inherit;margin-right:12px" href="?view=ward-corridors">AERIAL</a><a style="color:inherit;margin-right:12px" href="?view=ward-corridors-plan">PLAN</a><a style="color:inherit" href="./explore.html?view=ward-corridors">WALK HERE</a>';}
 if(view.startsWith('farndon-corridor')){const nav=document.getElementById('churtonNav');nav.hidden=false;nav.classList.add('farndon-navigation');nav.innerHTML='FARNDON CORRIDOR · <a style="color:inherit;margin-right:12px" href="?view=farndon-corridor">AERIAL</a><a style="color:inherit;margin-right:12px" href="?view=farndon-corridor-plan">PLAN</a><a style="color:inherit" href="./explore.html?view=farndon-corridor">WALK HERE</a>';}
 if(view.startsWith('irby-corridor')){const nav=document.getElementById('churtonNav');nav.hidden=false;nav.classList.add('farndon-navigation');nav.innerHTML='WATER TOWER / IRBY · <a style="color:inherit;margin-right:12px" href="?view=irby-corridor">AERIAL</a><a style="color:inherit;margin-right:12px" href="?view=irby-corridor-plan">PLAN</a><a style="color:inherit" href="./explore.html?view=irby-corridor">WALK HERE</a>';}
-if(ANNEXE_VIEWS[view]&&!ANNEXE_WARD_VIEWS[view]){const nav=document.getElementById('churtonNav');nav.hidden=false;nav.innerHTML='THE ANNEXE · '+[['front','FRONT'],['front-right','FRONT RIGHT'],['img1','RIGHT LAWN'],['side','LEFT SIDE'],['side-right','RIGHT SIDE'],['carden-photo','CARDEN SIDE'],['kitchen','REAR KITCHEN'],['rear-court','REAR COURT'],['plan','PLAN'],['site','SITE']].map(([key,label])=>'<a style="color:inherit;margin-right:12px" href="?view=annexe-'+key+'">'+label+'</a>').join('')+'<a style="color:inherit" href="./explore.html?view='+(['annexe-carden-photo','annexe-jarman-photo'].includes(view)?view:['annexe-kitchen','annexe-rear-court'].includes(view)?'annexe-kitchen':'annexe')+'">WALK HERE</a>';}
+if(ANNEXE_VIEWS[view]&&!ANNEXE_WARD_VIEWS[view]){const nav=document.getElementById('churtonNav');nav.hidden=false;nav.innerHTML='THE ANNEXE · '+[['front','FRONT'],['front-right','FRONT RIGHT'],['img1','RIGHT LAWN'],['side','LEFT SIDE'],['side-right','RIGHT SIDE'],['carden-photo','CARDEN SIDE'],['kitchen','REAR KITCHEN'],['rear-court','REAR COURT'],['plan','PLAN'],['site','SITE']].map(([key,label])=>'<a style="color:inherit;margin-right:12px" href="?view=annexe-'+key+'">'+label+'</a>').join('')+'<a style="color:inherit" href="./explore.html?view='+(['annexe-carden-photo','annexe-jarman-photo','leighton-newton-inner','leighton-newton-outer'].includes(view)?view:['annexe-kitchen','annexe-rear-court'].includes(view)?'annexe-kitchen':'annexe')+'">WALK HERE</a>';}
 if(ANNEXE_WARD_VIEWS[view]){
  const ward=ANNEXE_WARDS.find(ward=>ward.id===view),nav=document.getElementById('churtonNav');
  nav.hidden=false;nav.classList.add('annexe-ward-navigation');

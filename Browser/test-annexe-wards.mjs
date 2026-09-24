@@ -25,8 +25,8 @@ for(const ward of ANNEXE_WARDS){
   assert(!claimed.has(name),'each existing range belongs to only one ward');claimed.add(name);
   for(const suffix of [' brick walls',' slate roof'])assert.equal(annexe.getObjectByName(name+suffix).parent,name==='West court outer link'?annexe.userData.larktonRecess.group:group);
  }
- assert(group.children.some(o=>o.isInstancedMesh),'ward owns its glazing and facade details');
- assert(group.children.some(o=>o.name.endsWith('chimney stack')),'ward owns its chimneys');
+ assert((ward.id==='leighton-newton'?annexe.userData.leightonNewton:group).children.some(o=>o.isInstancedMesh),'ward owns its glazing and facade details');
+ assert((ward.id==='leighton-newton'?annexe.userData.leightonNewton:group).children.some(o=>o.name.endsWith('chimney stack')),'ward owns its chimneys');
  const walk=ANNEXE_WARD_WALKS[ward.id],p=walk.position;
  assert.equal(p[1],1.8);assert(!obstacles.some(b=>obstacleContains(b,p[0],p[2])),ward.name+' walking start is clear');
  const walker=createWalker(exterior.camera,obstacles);walker.setView(walk);

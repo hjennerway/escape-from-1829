@@ -1,11 +1,10 @@
 import {createCorridorRun,FARNDON_CORRIDOR} from './farndon-corridor.mjs';
-import {ANNEXE_GRAVEL_PATH} from './annexe-front-roads.mjs';
 
 // September 17 red/green annotation: an eastward branch at the water tower,
-// square to the existing gallery and aligned with the gravel path's mouth.
+// square to the existing gallery. Keep its accepted axis fixed when paths move.
 export const IRBY_CORRIDOR=Object.freeze({
- name:'Water tower to Irby corridor',start:[FARNDON_CORRIDOR.x,ANNEXE_GRAVEL_PATH.centerline[0][1]],
- end:[221.7,ANNEXE_GRAVEL_PATH.centerline[0][1]],width:5.4,height:3.6,rise:.64
+ name:'Water tower to Irby corridor',start:[FARNDON_CORRIDOR.x,-66.6],
+ end:[221.7,-66.6],width:5.4,height:3.6,rise:.64
 });
 // Blue footprint: Irby's rectangular return butts against the ward-side wall
 // of the corridor, with both ends flush at the red line (x=221.7).

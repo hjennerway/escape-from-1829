@@ -1,4 +1,5 @@
 import assert from 'node:assert/strict';
+import {KML_TREES} from './dist/kml-tree-data.mjs';
 import * as THREE from './dist/vendor/three.module.js';
 import {createEscapeExterior} from './dist/escape-exterior.mjs';
 import {createAerialLayouts} from './dist/aerial-layouts.mjs';
@@ -29,3 +30,14 @@ const savedEnd=SHARED_HISTORIC_LANES.find(r=>r.name==='Parsons Lane (North)').po
 for(let j=0;j<=32;j++){const t=j/32;assert.equal(surface(...end.map((v,i)=>v+t*(savedEnd[i]-v))),'black road','Saved lane junction must remain open');}
 for(const p of HISTORIC_ROAD_TRACES.find(r=>r.name==='Annexe front avenue').points)assert.equal(surface(...p),'black road');
 console.log('PASS: retraced Parsons Lane and fork have continuous asphalt, full-width building clearance, an open saved-lane junction, and grass at removed blue sections.');
+
+// The shortened fork must clear complete crowns, including its pale border.
+const fork=HISTORIC_ROAD_TRACES.find(r=>r.name==='Parsons Lane southern fork');
+for(let i=1;i<fork.points.length;i++){
+ const a=fork.points[i-1],b=fork.points[i],dx=b[0]-a[0],dz=b[1]-a[1],len2=dx*dx+dz*dz;
+ for(const tree of KML_TREES){
+  const t=Math.max(0,Math.min(1,((tree.x-a[0])*dx+(tree.z-a[1])*dz)/len2));
+  assert(Math.hypot(tree.x-a[0]-t*dx,tree.z-a[1]-t*dz)>tree.radius+fork.width/2+.6,'Fork clears the crown of '+tree.name);
+ }
+}
+for(const p of [[310,-103],[319,-100]])assert(!['black road','stone kerb'].includes(surface(...p)),'Former double-width fork returns to grass');

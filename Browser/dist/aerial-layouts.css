@@ -1,5 +1,10 @@
 #layoutControls{position:fixed;right:24px;bottom:80px;z-index:32;width:236px;padding:16px;background:#142018f2;border:1px solid #bdcc9866;box-shadow:0 8px 30px #0004;color:#e4e8db;font:12px/1.5 Arial}
-#layoutControls h2{font:600 10px/1.5 Arial;letter-spacing:2px;margin:0 0 8px;color:#bdcc98}
+#layoutControls>summary{display:flex;align-items:center;justify-content:space-between;gap:16px;min-height:44px;cursor:pointer;list-style:none;font:600 10px/1.5 Arial;letter-spacing:2px;color:#bdcc98}
+#layoutControls>summary::-webkit-details-marker{display:none}
+#layoutControls>summary:focus-visible{outline:2px solid #e4e8db;outline-offset:3px}
+.period-chevron{font:20px/1 Arial;letter-spacing:0}
+#layoutControls:not([open]){width:220px;padding-top:0;padding-bottom:0}
+#layoutControls:not([open]) .period-chevron{transform:rotate(180deg)}
 .layout-options{display:flex;gap:8px}
 .layout-options label{display:flex;align-items:center;gap:8px;min-height:44px;flex:1;cursor:pointer}
 .layout-options input{width:19px;height:19px;margin:0;accent-color:#bdcc98;cursor:pointer}

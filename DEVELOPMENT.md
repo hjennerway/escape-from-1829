@@ -1,3 +1,22 @@
+## Oakmere bay and annex placement (24 September 2026)
+
+Validation: source and rear visual checks, bay/annex geometry and walking
+assertions pass. The source/compiled comparison and all timeline stops passed
+on the first rebuilt asset. Concurrent changes elsewhere in the shared
+workspace subsequently invalidated historical preservation snapshots; the full
+suite stopped in the Larkton preservation check, and the whole-annexe Oakmere
+fingerprint also changed. These unrelated snapshots were not rebased here.
+Live Oakmere assertions were rerun independently and passed.
+
+
+Extended the courtyard bay to the marked blue guide and moved the square
+annex behind the cross-head, with its entrance facing the rear lawn. Roofs,
+facade details, shrubs and walking collisions follow the new placement. See
+[reference and dimensions](Research/oakmere/README.md#bay-depth-and-rear-annex-placement--later-24-september-2026-correction).
+
+Browser model source and the local compiled aerial asset are updated; Unity
+and Blender exports are unchanged.
+
 ## KML willow planting and concrete lamps (24 September 2026)
 
 Imported the two surviving lamps, Willow1–Willow8 and the second distinct
@@ -1816,3 +1835,63 @@ images use `Browser/artifacts/oakmere-court-final-`; test/build logs use the
 `oakmere-court-` prefix.
 
 The full browser suite and its remaining-check rerun leave one unrelated failure: test-building-photos.mjs expects the concurrent willow-planting location in the building catalogue. Oakmere's source/compiled gallery browser check passes. The earlier concurrent oak-count assertion passes after its separate update. See oakmere-court-suite-corrected.log and oakmere-court-suite-remaining.log.
+
+## Gravel path and Parsons fork � 24 September 2026
+
+Moved the marked gravel link six units north toward the blue guide, retaining
+its width and angle and joining the existing service-side asphalt. Replaced
+the double-width Parsons fork with a single six-unit curve that branches beyond
+the mapped tree crowns. The Irby corridor's old dependency on the path endpoint
+is removed so this path adjustment preserves the corridor and attached wards.
+
+Road continuity, full-width building clearance, tree-crown clearance, annexe
+access and ward-corridor checks pass. Source oblique and plan previews are saved
+as `Browser/artifacts/road-alignment-final-*.jpg`. The full browser suite stops
+at the unrelated saved annexe geometry assertion in
+`Browser/artifacts/snapshot-annexe-shape.mjs`; no annexe geometry was edited.
+Browser compiled assets were rebuilt. Unity and Blender exports are unchanged.
+
+### Collapsible Selected Period panel, 24 September 2026
+
+The aerial and explore pages use a native details/summary control for Selected
+Period. It starts expanded and collapses to a 220-by-46-pixel bar. Mouse, touch,
+Enter and Space use the browser's built-in disclosure behavior; reopening keeps
+the selected period. The slider retains its accessible Estate period name.
+
+Validation: `Browser/artifacts/check-period-collapse.mjs` passed on both pages
+at 1280x900 and 390x844, checking collapse, keyboard reopening, retained selection
+and subsequent period changes. Desktop aerial and mobile explore screenshots
+were visually checked. `test-explore-input.mjs` and `test-aerial-controls.mjs`
+passed. The full `npm test` run stopped in `test-larkton.mjs` at the unrelated
+original-geometry comparison in `artifacts/check-larkton-original.mjs:7`; output
+is in `Browser/artifacts/period-collapse-suite.txt`. No models or exports changed.
+
+Final validation: the refreshed compiled model loads in compiled mode, and
+`test-timeline-browser.mjs` passes all source/compiled timeline and walking
+checks. Final compiled previews are `Browser/artifacts/road-alignment-verified-*.jpg`.
+A subsequent access recheck passes the road assertions but reaches another
+annexe snapshot mismatch in `annexe-entrance-alignment-scope.mjs` after concurrent
+annexe edits; those unrelated building snapshots were not changed here.
+
+## Leighton / Newton photographic refinement — 24 September 2026
+
+The red/blue camera directions in the supplied ward annotation distinguish the
+inner L elevation from the outer veranda frontage. The existing L dimensions,
+22-degree turn, position and rearward translation are retained. The browser
+ward now has photo-based projecting gables and hips, a veranda, pale divided
+upper sashes, boarded lower openings, blue arched entrance, brick bands and
+multi-pot chimneys. The two original photos are in its gallery, with dedicated
+inner and outer Locations views. See [reference notes](Research/leighton-newton/README.md).
+
+The independent preservation check matches all 923,701 non-ward estate
+primitives. Window exposure, collision, clear veranda access, camera starts,
+roof normals and Historic visibility are checked in test-leighton-newton.mjs.
+Earlier whole-annexe fingerprints were updated after that preservation proof.
+Browser sources and compiled aerial assets change; Unity/Blender do not.
+
+Leighton/Newton final validation: the full npm test suite passes, as do the
+source/compiled model comparison, fallback checks and every timeline stop.
+Both photographed directions and the overview render in source and compiled
+modes without page errors; final images were visually inspected. Results use
+Browser/artifacts/leighton-; the timeline rerun writes separate artifacts to
+avoid a shared screenshot file lock.

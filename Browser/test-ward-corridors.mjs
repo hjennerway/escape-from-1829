@@ -6,7 +6,6 @@ import {FARNDON_CORRIDOR,FARNDON_CORRIDOR_RUNS,FARNDON_CORRIDOR_WALK,WARD_CORRID
 import {HALE_CORRIDOR_RUNS} from './dist/hale-corridors.mjs';
 import {WARD_CORRIDOR_NODES,WARD_CORRIDOR_RUNS} from './dist/ward-corridors.mjs';
 import {IRBY_CORRIDOR,IRBY_CORRIDOR_WALK,IRBY_CONNECTION_FRONT} from './dist/irby-corridor.mjs';
-import {ANNEXE_GRAVEL_PATH} from './dist/annexe-front-roads.mjs';
 import {TOWER_RANGES,TOWER_WORKSHOP_COPY} from './dist/tower-buildings.mjs';
 import {UPTON_FOOTPRINT} from './dist/upton-frith-oscroft.mjs';
 import {pointInFootprint} from './dist/historic-footprints.mjs';
@@ -34,7 +33,7 @@ const obstacles=exteriorObstacles(THREE,exterior.model);
 const irby=IRBY_CORRIDOR,irbyBranch=corridor.getObjectByName(irby.name);
 assert.equal(irby.start[0],route.x,'Irby joins the existing tower gallery');
 assert.equal(irby.start[1],irby.end[1],'New branch is exactly perpendicular to the tower gallery');
-assert.equal(irby.end[1],ANNEXE_GRAVEL_PATH.centerline[0][1],'Corridor aligns with the yellow gravel path mouth');
+assert.equal(irby.end[1],-66.6,'Corridor retains its accepted axis when the gravel path moves');
 assert.equal(irby.end[0],221.7,'Corridor reaches the red endpoint flush with Irby');
 ray.set(new THREE.Vector3(irby.end[0]+2,4,irby.end[1]),new THREE.Vector3(-1,0,0));
 assert.equal(ray.intersectObject(irbyBranch,true)[0]?.object.name,'Irby corridor exposed end gable','The extended corridor has a closed brick end beneath its roof');
