@@ -1,3 +1,17 @@
+## Oak22–Oak30 and Pine14 import (24 September 2026)
+
+Imported ten new tree Point locations from `1829 (12).kml` onto the shared
+Trees layer for all timeline periods and both layouts. Repeated older locations
+are not duplicated; previous placements and rotations remain unchanged. See
+[tree source and modelling notes](Research/kml-trees/README.md).
+
+Browser sources and the local compiled aerial asset are updated; Unity and
+Blender exports are unchanged. Exact coordinate, visibility, collision, shared
+geometry, source/compiled and timeline browser checks pass. Preview and test
+artifacts use the `Browser/artifacts/kml-12-` prefix. Every browser suite script
+passes after updating tree counts and excluding only the ten additions from
+the existing Jarman/Leighton preservation baselines.
+
 ## Oakmere bay and annex placement (24 September 2026)
 
 Validation: source and rear visual checks, bay/annex geometry and walking
@@ -1895,3 +1909,183 @@ Both photographed directions and the overview render in source and compiled
 modes without page errors; final images were visually inspected. Results use
 Browser/artifacts/leighton-; the timeline rerun writes separate artifacts to
 avoid a shared screenshot file lock.
+
+## Annexe loop and frontage roads — 24 September 2026
+
+Straightened the marked outer access road and fitted the complete annexe inside
+it at 85% of its previous plan size, retaining all heights and local detail.
+The follow-up annotation shifts the frontage avenue toward the building,
+replaces the stretched entrance flare with quarter-circle edges, relocates
+the gravel path and original triangular junction, and removes the pink
+approach. References, dimensions and superseded historical constraints are
+in [the road notes](Research/historic-roads/README.md#annexe-outer-loop-and-frontage-revision--24-september-2026).
+
+The annexe's immutable 21,176-primitive local fingerprint still matches.
+Regression checks cover road and paving continuity, the removed routes,
+triangle proportions and grass centre, quarter-circle radii, building
+clearance and walking access. Historical placement fingerprints were rebased
+after the independent preservation check. This changes browser sources and
+compiled aerial assets; Unity and Blender exports are unchanged.
+
+Validation: the full npm test suite passes, as do the rebuilt source/compiled
+geometry and image comparison, fallback checks and every timeline stop.
+Source and compiled overview, plan and entrance views were visually checked
+without page errors. Final previews use Browser/artifacts/annexe-loop-frontage-final-*;
+build, suite and compiled logs use Browser/artifacts/annexe-frontage-revision-*.
+The annexe's minimum padded masonry clearance to the loop centreline is
+8.46 scene metres; the dedicated checks include full road widths and kerbs.
+
+### Annexe gallery addition, 24 September 2026
+
+Added the supplied Carden/Picton-side photograph as the fifth image in The Annexe gallery, captioned “The Annexe · Carden / Picton side and conservatory”. The supplied file matches the existing unedited `Research/carden-picton/img1.jpg` byte-for-byte. The gallery uses a 1200 × 675 WebP generated with the existing photo-build settings; its source is registered in the build script and photo manifest.
+
+Validation: `node Browser/test-building-photos.mjs` passes, including source and compiled selection. The new image decodes correctly in the browser gallery, with five photographs and no page errors; the panel was visually checked in `Browser/artifacts/annexe-carden-picton-gallery.png`. The full `npm test` suite stops at the unrelated geometry fingerprint mismatch in `Browser/artifacts/check-larkton-original.mjs:7`, invoked by `Browser/test-larkton.mjs:19`; output is saved in `Browser/artifacts/annexe-gallery-suite.log`. No model geometry or Unity/Blender exports changed.
+
+## Parallel annexe frontage — 24 September 2026
+
+The latest frontage annotation aligns the main straight with the annexe and
+moves it one six-metre carriageway closer at the doorway axis. The triangular
+island retains its shape; roadside planting, the circular entrance and gravel
+connection follow the revised carriageway. The annexe itself remains fixed.
+Reference and preservation details are in Research/historic-roads/README.md.
+
+Validation: historic road continuity and full-width clearance, measured parallel
+alignment and six-metre offset, triangle dimensions and annexe loop fit pass.
+Source and compiled frontage views were visually checked. The rebuilt model
+passes source/compiled geometry and image comparison, fallback checks and
+every timeline stop, including walking obstacle refresh.
+
+The full npm test run stops at the Larkton historical snapshot after concurrent
+Leighton/Newton window changes add 494 primitives. The same mismatch occurs
+with the original roadside trees. With only those concurrent ward edits
+normalized inside the verification process, the complete annexe shape,
+entrance preservation and quarter-circle checks pass. Reversing only the five
+small tree translations then exactly recovers both pre-road estate hashes;
+the two tree-containing snapshots were refreshed for those translations only.
+No concurrent building edits were changed. Evidence is in
+Browser/artifacts/annexe-parallel-preservation.json; build, full-suite and
+compiled-validation logs use Browser/artifacts/annexe-parallel-*.log.
+Final images use Browser/artifacts/annexe-loop-parallel-final-compiled-*.
+
+## Leighton/Newton glazing and photo lightbox — 24 September 2026
+
+Replaced all 38 boarded lower windows with the same pale divided frames and
+green-grey glazing used upstairs, retaining the existing openings and doors.
+See Research/leighton-newton/README.md for the scope comparison. Browser model
+sources and the generated aerial asset change; Unity/Blender exports do not.
+
+Every photograph in the aerial Building photos gallery, including nearby views,
+now opens in a native modal lightbox. It supports previous/next buttons, arrow
+keys, Escape, close and backdrop dismissal, caption/count display, focus return
+to the thumbnail, a keyboard focus loop and a mobile layout. Aerial movement
+pauses while it is open. Missing photographs show an in-dialog message.
+The gallery currently belongs to the aerial page; the walking model shares
+the window geometry. npm run test:photos runs the catalogue and lightbox checks.
+
+Validation: 76 gallery image entries pass browser checks, including context
+images, navigation, focus, closing, single images and missing-image recovery.
+Desktop and portrait lightboxes and source/compiled inner and outer ward
+elevations were visually checked. Rebuilt source/compiled geometry, image,
+full-detail and fallback checks pass, as do all timeline/walking checks.
+Logs and scope reports use Browser/artifacts/windows- and lightbox- prefixes.
+The final full suite passes the window checks and stops at the unrelated
+road-coordinate assertion in test-parsons-retrace.mjs:54 during concurrent
+road edits. All eight checks after it pass in a separate continuation; see
+windows-lightbox-suite-final.log and windows-lightbox-suite-remaining.json.
+The actual aerial page also passes modal input isolation and focus checks.
+
+
+## Irby/Ashley road and gravel alignment — 24 September 2026
+
+The latest red route now connects the outer road to the Irby/Ashley side court
+between the fixed mature trees. The blue triangular junction occupies the
+outer side of the avenue, whose straight frontage alignment is retained. The
+old upward loop is removed and the narrow gravel path follows the yellow
+diagonal. See [the reference and modelling notes](Research/historic-roads/README.md#irby-tree-gap-road-outer-triangle-and-gravel-diagonal--24-september-2026).
+
+Browser model sources change; Unity and Blender exports are unchanged.
+
+Irby road validation: the full `npm test` suite passes. The compiled aerial
+asset was rebuilt and its fingerprint matches the current browser sources.
+Source/compiled geometry and image comparison, fallback loading, every
+timeline stop and walking collision refresh all pass. The final annotated
+angle, tree-hidden view and overhead preview were checked in both model modes.
+Evidence is saved as `Browser/artifacts/irby-junction-*`.
+
+
+## Rounded Irby junction — 24 September 2026
+
+Smoothed the marked lawn-side bend into the avenue and rounded all three inner
+corners of the triangular grass island. Local resurfacing removes the old
+pointed kerbs; the existing routes, gravel alignment, trees and buildings stay
+fixed. The dedicated checks sample asphalt, pale edging and grass on both sides
+of each new curve. Browser sources and compiled aerial assets change; Unity
+and Blender exports remain unchanged.
+
+## Leighton/Newton inner corner block — 24 September 2026
+
+Replaced the yellow-marked shallow middle projection with a rectangular
+7-by-8-map-unit block in the inside corner, matching the user's red footprint.
+The removed bay is now flush; the new two-storey block joins both existing
+ranges and carries matching brickwork, glazing and a hipped slate roof.
+Covered windows on the two adjoining walls are removed or moved to the exposed
+faces. See [the modelling reference](Research/leighton-newton/README.md#inner-corner-projection-correction--24-september-2026).
+
+Walking obstacles derive from the new masonry before scene batching. Window
+visibility, corner collision, reopened lawn, original L ranges and all 923,701
+estate primitives outside the ward pass the dedicated checks. Historical
+fingerprints were refreshed only where they exactly matched the pre-edit model.
+Browser sources and the generated aerial asset change; Unity/Blender exports do not.
+
+Rounding validation: road continuity, full-width building and trunk clearance,
+curve-side surface samples and annexe access pass. The full browser run reached
+a transient Larkton preservation mismatch; its isolated recheck and complete
+Larkton test pass, and all remaining suite checks pass in the continuation.
+No annexe snapshot was changed. The rebuilt asset matches the current source
+fingerprint. Compiled/source geometry and image comparison, fallback loading,
+all timeline stops and walking collision refresh pass. Source and compiled
+oblique, tree-hidden and plan views were inspected. Logs use
+`Browser/artifacts/irby-rounding-*`; final previews use
+`Browser/artifacts/irby-junction-rounded-final-compiled-*`.
+
+Validation: the full `npm test` suite passed (`leighton-corner-suite.log`).
+The first compiled run passed the source/image comparison, then concurrent
+KML tree-data edits invalidated its asset before the timeline check. The asset
+was rebuilt against those edits. Its final corner, inner elevation, outer
+elevation and plan views rendered without page errors. The compiled corner
+close-up and source ground-level/overhead views were visually inspected.
+Final build/comparison evidence uses `Browser/artifacts/leighton-corner-final-*`;
+final previews use `Browser/artifacts/leighton-corner-after-compiled-*`.
+
+Final rebuilt source/compiled geometry and image comparison, full-detail and
+fallback loading, every timeline stop and live walking collision refresh pass.
+The final generated asset fingerprint matches the current model sources.
+
+## Annexe entrance road overlaps and tree removal — 24 September 2026
+
+Cut the frontage avenue's building-facing border across the entrance mouth,
+removing the two yellow-marked slivers. The circular entrance kerbs now follow
+the lawn side of the asphalt edge at the avenue's 0.6-metre border width and
+join it tangentially. Roadside tree 4, marked red on the carriageway, is removed
+from rendering and walking collision. All other planting retains its position,
+random crown dimensions and original instance rotation.
+
+The independent before/after preservation check restores only the marked tree,
+then excludes its trunk and five crown instances. Both whole-estate fingerprints
+match exactly after that exclusion. Only the two historical snapshots matching
+the original model were refreshed. Evidence is in
+`Browser/artifacts/annexe-entrance-tree-preservation.json`.
+
+Entrance regression checks sample asphalt, kerb and grass around both curved
+lips, verify the removed tree's former position is walkable asphalt, and retain
+the six unmarked roadside trees. The circular-radius, forecourt, building and
+road-continuity assertions also pass. Source close-up and overhead previews
+use `Browser/artifacts/annexe-loop-entrance-overlap-after-source-*`.
+Browser sources and the compiled aerial model change; Unity/Blender exports do not.
+
+Final validation: the full `npm test` suite passes, as do source/compiled
+geometry and image comparison, full-detail and fallback loading, every timeline
+stop and live walking obstacle refresh. The final compiled asset matches the
+current source fingerprint. Source and compiled entrance close-ups were visually
+checked; final previews use `annexe-loop-entrance-overlap-final-compiled-*`.
+Build and validation logs use `Browser/artifacts/annexe-entrance-fix-*`.

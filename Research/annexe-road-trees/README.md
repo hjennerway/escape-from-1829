@@ -18,3 +18,11 @@ the source is a cropped screenshot. Reproduce it with
 `Browser/artifacts/annexe-trees-after.png`.
 
 This updates the browser model; the Blender and Unity exports are unchanged.
+
+## Entrance tree removal — 24 September 2026
+
+The red-circled tree in `../historic-roads/annexe-entrance-overlaps-marked.png`
+removes roadside tree 4 from the entrance carriageway. Its source position is
+retained with a removal flag to preserve stable names and deterministic crown
+shape/rotation sequencing. Six roadside trees remain, unchanged. Both the
+trunk and its five crown instances are omitted, including walking collision.

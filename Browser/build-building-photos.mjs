@@ -12,6 +12,7 @@ const sources={
  'barmere-garden':'Research/redesmere-chimney/img1.jpg','barmere-chimney':'Research/redesmere-chimney/img2.jpg',
  'annexe':'Browser/dist/art/annexe.png','annexe-2':'Browser/dist/art/annexe2.png','chimney':'Browser/dist/art/chimney.png',
  'annexe-kitchen':'Research/annexe-kitchen/img1.jpg',
+ 'annexe-carden-picton':'Research/carden-picton/img1.jpg',
  'annexe-entrance-road':'Research/annexe-photos/entrance-road.png',
  'jodrell-mural':'Research/annexe-photos/jodrell-mural.png',
  'tarvin-mural':'Research/annexe-photos/tarvin-mural.png',

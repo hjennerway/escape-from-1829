@@ -1,0 +1,50 @@
+{
+  "before": {
+    "original": {
+      "jarman": {
+        "primitives": 859654,
+        "sha256": "c9af95de85423c7135db598304525df98621f35bf0bb311df66301aac8f0f021"
+      },
+      "leighton": {
+        "count": 923701,
+        "sha256": "63fd2fb3aa65178b702aca079c2a36d8f5ba88fefe3d3a2e1e8510d278a04cf6"
+      }
+    },
+    "withoutMarkedTree": {
+      "jarman": {
+        "primitives": 859648,
+        "sha256": "0aabae93cec8d7518886ae9aaf27c8fe32b833485375c4ee55851c9ff929d18b"
+      },
+      "leighton": {
+        "count": 923695,
+        "sha256": "c968c9499d992bb7c7b2ebcd9fa531da9904b934cdb046d32f1aea880542dff5"
+      }
+    }
+  },
+  "after": {
+    "original": {
+      "jarman": {
+        "primitives": 859648,
+        "sha256": "0aabae93cec8d7518886ae9aaf27c8fe32b833485375c4ee55851c9ff929d18b"
+      },
+      "leighton": {
+        "count": 923695,
+        "sha256": "c968c9499d992bb7c7b2ebcd9fa531da9904b934cdb046d32f1aea880542dff5"
+      }
+    },
+    "withoutMarkedTree": {
+      "jarman": {
+        "primitives": 859648,
+        "sha256": "0aabae93cec8d7518886ae9aaf27c8fe32b833485375c4ee55851c9ff929d18b"
+      },
+      "leighton": {
+        "count": 923695,
+        "sha256": "c968c9499d992bb7c7b2ebcd9fa531da9904b934cdb046d32f1aea880542dff5"
+      }
+    }
+  },
+  "updated": [
+    "Research/jarman/protected-geometry.json",
+    "Research/leighton-newton/protected-before.json"
+  ]
+}

@@ -2,6 +2,7 @@ import {MODERN_ROAD_PATHS,MODERN_ROADS_SOURCE} from './modern-road-data.mjs';
 import {roadCenterline} from './road-centerlines.mjs';
 import {createRoadLabel} from './road-labels.mjs';
 import {ROAD_STYLE} from './road-style.mjs';
+import {PARSONS_NORTH_SHARED_POINTS,PARSONS_NORTH_MODERN_TAIL} from './parsons-north-bend.mjs';
 
 export function createModernRoads(THREE){
   const roads=new THREE.Group();roads.name='Modern roads · Google Earth paths';
@@ -28,11 +29,15 @@ export function createModernRoads(THREE){
     const road=new THREE.Group(),points=roadCenterline(path);
     road.name=path.name;road.userData.centerline=points;road.userData.coordinates=path.coordinates;
     // Historic ends at the eastern crossing; Modern also includes the tail.
-    const sharedPoints=path.name==='Vivienne Smith Lane'?points.slice(0,12):points;
+    const sharedPoints=path.name==='Vivienne Smith Lane'?points.slice(0,12):path.name==='Parsons Lane (North)'?PARSONS_NORTH_SHARED_POINTS:points;
     road.add(ribbon(sharedPoints,6+2*ROAD_STYLE.edgeWidth,.32,edge),ribbon(sharedPoints,6,.34,asphalt),createRoadLabel(THREE,path.name,points));
     if(path.name==='Vivienne Smith Lane'){
       const tail=new THREE.Group();tail.name='Vivienne Smith Lane eastern continuation';tail.userData.modernOnly=true;
       tail.add(ribbon(points.slice(11),6+2*ROAD_STYLE.edgeWidth,.32,edge),ribbon(points.slice(11),6,.34,asphalt));road.add(tail);
+    }
+    if(path.name==='Parsons Lane (North)'){
+      const tail=new THREE.Group();tail.name='Parsons Lane northern modern endpoint';tail.userData.modernOnly=true;
+      tail.add(ribbon(PARSONS_NORTH_MODERN_TAIL,6+2*ROAD_STYLE.edgeWidth,.32,edge),ribbon(PARSONS_NORTH_MODERN_TAIL,6,.34,asphalt));road.add(tail);
     }
     roads.add(road);
   }

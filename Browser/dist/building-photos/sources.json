@@ -328,5 +328,11 @@
     "width": 1200,
     "height": 902,
     "bytes": 175436
+  },
+  "annexe-carden-picton": {
+    "source": "Research/carden-picton/img1.jpg",
+    "width": 1200,
+    "height": 675,
+    "bytes": 121130
   }
 }

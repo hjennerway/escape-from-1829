@@ -7,9 +7,9 @@
 #closeBuildingPhotos:hover{background:#ffffff18}
 #buildingPhotoList{min-height:0;overflow-y:auto;overscroll-behavior:contain;touch-action:pan-y;padding:14px 14px 0;scrollbar-width:thin;scrollbar-color:#aabdab #23332a}
 #buildingPhotoList figure{margin:0 0 17px}
-#buildingPhotoList a{display:block;border-radius:6px;overflow:hidden;background:#203228}
+#buildingPhotoList .building-photo-open{display:block;width:100%;padding:0;border-radius:6px;overflow:hidden;background:#203228;cursor:zoom-in}
 #buildingPhotoList img{display:block;width:100%;height:auto;min-height:80px;max-height:240px;object-fit:contain;background:#0c1611}
-#buildingPhotoList a:hover{outline:1px solid #fff9;outline-offset:2px}
+#buildingPhotoList .building-photo-open:hover{outline:1px solid #fff9;outline-offset:2px}
 #buildingPhotoList figcaption{margin-top:8px;font:11px/1.5 Arial;color:#d3dcd0}
 #buildingPhotoList h3{font:600 11px/1.5 Arial;letter-spacing:.4px;margin:7px 0 12px}
 .building-photo-empty,.building-photo-unavailable{display:block;font:13px/1.7 Arial;color:#b8c7ba;margin:4px 0 18px}
@@ -40,3 +40,20 @@
  #buildingHoverLabel{font-size:11px}
 }
 @media(prefers-reduced-motion:reduce){#buildingPhotos,#buildingHoverLabel{transition:none}}
+
+#photoLightbox{position:fixed;inset:0;margin:0;padding:24px;width:100vw;max-width:none;height:100dvh;max-height:none;border:0;background:transparent;color:#f0f2e9;overscroll-behavior:contain}
+#photoLightbox[open]{display:grid;place-items:center}
+#photoLightbox::backdrop{background:#030805e8}
+.photo-lightbox-content{display:grid;grid-template-rows:auto minmax(0,1fr) auto;width:min(1200px,100%);height:100%;max-height:980px;min-height:0;background:#101d17;border:1px solid #dae4d25e;border-radius:12px;overflow:hidden;box-shadow:0 20px 80px #0008}
+.photo-lightbox-heading{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:10px 16px}
+#photoLightbox h2{margin:0;font:normal 22px/1.3 Georgia,serif}
+#photoLightbox button{min-width:44px;min-height:44px;padding:10px 14px;border-radius:6px;background:#263b2f;color:#f0f2e9;font:13px/1.4 Arial;letter-spacing:0}
+#photoLightbox button:hover{background:#37513e}
+#photoLightbox .photo-lightbox-close{background:transparent;font-size:28px;padding:0;flex-shrink:0}
+#photoLightbox figure{display:grid;grid-template-rows:minmax(0,1fr) auto;min-height:0;margin:0}
+#photoLightbox img{width:100%;height:100%;min-height:0;object-fit:contain;background:#070e0a}
+#photoLightbox figcaption{padding:12px 20px;font:13px/1.5 Arial;text-align:center;max-height:25dvh;overflow:auto}
+#photoLightbox nav{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:0 16px 12px}
+.photo-lightbox-count{margin:0 auto;font:12px/1.5 Arial;color:#bacbad}
+.photo-lightbox-error{align-self:center;justify-self:center;font:16px/1.5 Arial}
+@media(max-width:650px){#photoLightbox{padding:max(8px,env(safe-area-inset-top)) 8px max(8px,env(safe-area-inset-bottom))}#photoLightbox h2{font-size:19px}.photo-lightbox-heading{padding:8px 10px}#photoLightbox figcaption{padding:10px 12px;font-size:12px}#photoLightbox nav{padding:0 10px 10px}}

@@ -6,15 +6,15 @@ export function addLeightonNewton(THREE,{ward,scale:S,brick,roof,material,worldU
  group.rotation.y=angle;group.position.set((9-c*9+s*42)*S,0,(-42+s*9+c*42)*S);ward.add(group);group.userData.reference=LEIGHTON_REFERENCE;
  const masonry=brick.clone();masonry.color.setHex(0x897969);
  for(const o of ward.children)if(o.name.endsWith('brick walls'))o.material=masonry;
- const trim=material(0xa75a40),frame=material(0xe3e6d9),glass=material(0x324745),board=material(0x202926),blue=material(0x477f99),stone=material(0xa29c89);
+ const trim=material(0xa75a40),frame=material(0xe3e6d9),glass=material(0x324745),blue=material(0x477f99),stone=material(0xa29c89);
  const batches=new Map(),openings=[];
  const mesh=(g,m,x,y,z,name)=>{const o=new THREE.Mesh(g,m);o.position.set(x*S,y,z*S);o.name='Leighton Newton '+name;o.castShadow=o.receiveShadow=true;group.add(o);return o;};
  const box=(m,x,y,z,w,h,d,name,collision=false)=>{const o=mesh(worldUV(new THREE.BoxGeometry(w*S,h,d*S),1.7),m,x,y,z,name);if(collision)o.userData.orientedCollision=true;return o;};
  function part(m,x,y,z,w,h,d,r=0){if(!batches.has(m))batches.set(m,[]);batches.get(m).push({x:x*S,y,z:z*S,w:w*S,h,d:d*S,r});}
  function face(x,z,r=0){const c=Math.cos(r),s=Math.sin(r);return (m,u,y,n,w,h,d)=>part(m,x+c*u+s*n,y,z-s*u+c*n,w,h,d,r);}
- function sash(x,z,r,{w=.85,h=2.8,y=6.45,blocked=false}={}){
-  const p=face(x,z,r);openings.push({x:x*S,y,z:z*S,r,w:w*S,h,blocked});p(blocked?board:glass,0,y,.04,w,h,.05);
-  if(!blocked){for(const u of [-w/2,-w/6,w/6,w/2])p(frame,u,y,.10,.035,h+.06,.05);for(let i=0;i<=8;i++)p(frame,0,y-h/2+i*h/8,.11,w+.07,i===4?.065:.035,.05);}
+ function sash(x,z,r,{w=.85,h=2.8,y=6.45}={}){
+  const p=face(x,z,r);openings.push({x:x*S,y,z:z*S,r,w:w*S,h});p(glass,0,y,.04,w,h,.05);
+  for(const u of [-w/2,-w/6,w/6,w/2])p(frame,u,y,.10,.035,h+.06,.05);for(let i=0;i<=8;i++)p(frame,0,y-h/2+i*h/8,.11,w+.07,i===4?.065:.035,.05);
   p(trim,0,y-h/2-.09,.09,w+.18,.16,.18);p(trim,0,y+h/2+.10,.04,w+.22,.18,.09);
  }
  function entrance(x,z,r){
@@ -28,7 +28,7 @@ export function addLeightonNewton(THREE,{ward,scale:S,brick,roof,material,worldU
  function elevation(x,z,width,r,columns,{door=null,short=false}={}){
   const p=face(x,z,r);for(const [y,h] of [[.22,.35],[2.1,.10],[4.25,.42],[5.08,.10],[6.45,.10],[8.12,.38]])p(trim,0,y,.04,width,h,.09);p(blue,0,8.43,.16,width+.3,.12,.13);
   for(const u of [-width/2+.10,width/2-.10])p(blue,u,4.2,.17,.065,8.4,.065);
-  for(const u of columns){const px=x+Math.cos(r)*u,pz=z-Math.sin(r)*u;sash(px,pz,r,{h:short?1.6:2.8,y:short?7.02:6.45});if(door===null||Math.abs(u-door)>.7)sash(px,pz,r,{y:2.05,h:3.1,blocked:true});}
+  for(const u of columns){const px=x+Math.cos(r)*u,pz=z-Math.sin(r)*u;sash(px,pz,r,{h:short?1.6:2.8,y:short?7.02:6.45});if(door===null||Math.abs(u-door)>.7)sash(px,pz,r,{y:2.05,h:3.1});}
   if(door!==null)entrance(x+Math.cos(r)*door,z-Math.sin(r)*door,r);
  }
  function projection(x,z,w,d,{gable=false,side=1,rise=2.8}={}){
@@ -53,10 +53,15 @@ export function addLeightonNewton(THREE,{ward,scale:S,brick,roof,material,worldU
  mesh(canopy,material(0x536967,{roughness:.48,metalness:.3,side:THREE.DoubleSide}),0,0,0,'veranda roof');box(stone,vx,.035,(back+front)/2,vw,.07,front-back+.3,'veranda paving');part(blue,vx,3.02,front,vw+.25,.14,.12);
  for(let i=0;i<=4;i++){const x=vx-vw/2+i*vw/4;box(blue,x,1.5,front,.09,3,.09,'veranda column',true);box(stone,x,.43,front,.35,.86,.35,'veranda column plinth',true);part(blue,x,2.93,front,.30,.14,.20);}
  for(let i=0;i<=16;i++){const x=(vx-vw/2+i*vw/16)*S,p=new THREE.Vector3(x,3.82,back*S),q=new THREE.Vector3(x,3.07,front*S),v=q.clone().sub(p);const rib=mesh(new THREE.CylinderGeometry(.025,.025,v.length(),5),frame,0,0,0,'veranda roof seam');rib.position.copy(p.add(q).multiplyScalar(.5));rib.quaternion.setFromUnitVectors(new THREE.Vector3(0,1,0),v.normalize());}
- const innerA=projection(17,-46.0,6.4,3.2,{side:-1,rise:2}),innerB=projection(29,-46.0,7,3.2,{side:-1,rise:2.2});
- elevation(17,innerA,6.4,Math.PI,[-1.8,0,1.8],{door:0});elevation(29,innerB,7,Math.PI,[-2,2],{short:true});
- for(const [x,w,cols] of [[11.4,4.8,[-1.3,1.3]],[22.85,5.3,[-1.7,1.7]],[35.75,6.5,[-2,0,2]]])elevation(x,-46,w,Math.PI,cols);
- elevation(39,-56,20,-Math.PI/2,[-8,-4,0,4,8]);elevation(48,-55.5,21,Math.PI/2,[-8,-4,0,4,8]);elevation(43.5,-66,9,Math.PI,[-2.8,0,2.8],{short:true});
+ const innerA=projection(17,-46.0,6.4,3.2,{side:-1,rise:2});
+ elevation(17,innerA,6.4,Math.PI,[-1.8,0,1.8],{door:0});
+ // The marked correction replaces the middle bay with a block in the L's
+ // inner corner: x=32..39, z=-54..-46, joined to both existing ranges.
+ const cornerFront=projection(35.5,-50,7,8,{side:-1,rise:2.2});
+ elevation(35.5,cornerFront,7,Math.PI,[-2,2],{short:true});
+ elevation(32,-50,8,-Math.PI/2,[-2,2],{short:true});
+ for(const [x,w,cols] of [[11.4,4.8,[-1.3,1.3]],[22.85,5.3,[-1.7,1.7]],[28.75,6.5,[-2,2]]])elevation(x,-46,w,Math.PI,cols);
+ elevation(39,-60,12,-Math.PI/2,[-4,0,4]);elevation(48,-55.5,21,Math.PI/2,[-8,-4,0,4,8]);elevation(43.5,-66,9,Math.PI,[-2.8,0,2.8],{short:true});
  for(const [x,z,height,pots] of [[13,-42,12,2],[21,-42,12.8,3],[26,-42,13.8,3],[30,-42,13.5,2],[37,-42,12.8,3],[43.5,-44,13.5,3],[43.5,-53,13.8,2],[43.5,-62,12.7,2]]){
   box(masonry,x,(9+height)/2,z,1.15,height-9,.85,'chimney stack');for(const y of [height-1.1,height-.12])part(trim,x,y,z,1.35,.16,1.02);for(let i=0;i<pots;i++)mesh(new THREE.CylinderGeometry(.12,.15,.75,8),trim,x+(i-(pots-1)/2)*.34,height+.32,z,'terracotta chimney pot');
  }

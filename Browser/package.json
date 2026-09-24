@@ -9,7 +9,8 @@
     "build:models": "node build-models.mjs",
     "build": "npm run build:models",
     "test:models": "node test-opening-wall.mjs && node test-estate-periods.mjs && node test-model-binary.mjs && node test-kml-imports.mjs && node test-kml-11.mjs && node test-building-detail.mjs && node test-aerial-layouts.mjs && node test-aerial-performance.mjs && node test-aerial-controls.mjs",
-    "test:compiled": "node test-precompiled-models.mjs && node test-timeline-browser.mjs"
+    "test:compiled": "node test-precompiled-models.mjs && node test-timeline-browser.mjs",
+    "test:photos": "node test-building-photos.mjs && node test-photo-lightbox.mjs"
   },
   "devDependencies": {
     "playwright": "1.63.0"

@@ -1,0 +1,37 @@
+import {readFileSync} from 'node:fs';
+import * as THREE from '../dist/vendor/three.module.js';
+import {createEscapeExterior} from '../dist/escape-exterior.mjs';
+import {frontLinkSnapshot} from './annexe-front-link-scope.mjs';
+import {rearStretchSnapshot} from './annexe-rear-stretch-scope.mjs';
+import {rearSideSnapshot} from './rear-side-alignment-scope.mjs';
+import {cardenCorrectionSnapshot} from './annexe-carden-correction-scope.mjs';
+import {cardenHeightSnapshot} from './annexe-carden-height-scope.mjs';
+import {protectedKitchenGeometry} from './annexe-kitchen-scope.mjs';
+import {protectedWindowGeometry} from './oakmere-window-scope.mjs';
+import {jarmanProtected} from './jarman-scope.mjs';
+import {oakmereCourtProtected} from './oakmere-court-scope.mjs';
+import {larktonProtected} from './larkton-scope.mjs';
+import {recessProtected} from './larkton-recess-scope.mjs';
+globalThis.document={createElement:()=>({getContext:()=>({fillRect(){},fillText(){},strokeText(){},measureText(t){return {width:t.length*16}}})})};
+const e=createEscapeExterior(THREE,1.5),a=e.annexe,result=[];
+const add=(file,key,value)=>result.push({file,key,value});
+const partial=async(file,cut,expression)=>{const base=new URL(file,import.meta.url),s=readFileSync(base,'utf8').split(cut)[0].replace(/from '(\.[^']+)'/g,(_,p)=>"from '"+new URL(p,base).href+"'");return (await import('data:text/javascript;base64,'+Buffer.from(s.replaceAll('import.meta.url',JSON.stringify(base.href))+'\nexport default '+expression+';').toString('base64'))).default;};
+if(process.argv.includes('entrance'))add('larkton-jodrell/protected-before.json',[],larktonProtected(THREE,a));
+else if(process.argv.includes('east'))add('annexe-kitchen/side-alignment-before.json',['snapshot'],rearSideSnapshot(THREE,a,{normalise:true}));
+else{
+ const front=frontLinkSnapshot(THREE,a),rear=rearStretchSnapshot(THREE,a);
+ for(const key of ['primitives','sha256'])add('annexe-frontage-adjustment/front-link-before.json',[key],front[key]);
+ for(const key of ['front','wings'])add('annexe-kitchen/rear-stretch-before.json',[key],rear[key]);
+ add('carden-picton/outward-protected-geometry.json',[],cardenCorrectionSnapshot(THREE,a,{excludeConcurrentJarman:true}));
+ add('carden-picton/height-extension-before.json',['protected'],cardenHeightSnapshot(THREE,a).protected);
+ add('annexe-kitchen/protected-geometry.json',[],protectedKitchenGeometry(THREE,a));
+ add('oakmere/window-protected-geometry.json',[],protectedWindowGeometry(THREE,a));
+ add('jarman/protected-geometry.json',[],jarmanProtected(THREE,e.model));
+ add('oakmere/court-protected-before.json',[],oakmereCourtProtected(THREE,a));
+ add('larkton-jodrell/recess-protected-before.json',['outside'],larktonProtected(THREE,a));
+ add('larkton-jodrell/recess-protected-before.json',['retained'],recessProtected(THREE,a));
+ add('oakmere/west-protected-geometry.json',[],await partial('../test-oakmere-west.mjs','const baseline=','fingerprint'));
+ add('annexe-frontage-adjustment/entrance-alignment-before.json',['protectedGeometry'],await partial('./annexe-entrance-alignment-scope.mjs','const before=','protectedGeometry'));
+ add('annexe-photo-placement/approved-shape.json',[],await partial('./snapshot-annexe-shape.mjs','if(process.argv','snapshot'));
+}
+console.log(JSON.stringify(result));

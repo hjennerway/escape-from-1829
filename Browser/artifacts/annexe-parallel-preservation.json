@@ -1,0 +1,23 @@
+{
+  "note": "Concurrent Leighton/Newton glazing normalized to HEAD only inside verification process; reversing only roadside tree translations exactly reproduces both older fingerprints.",
+  "jarman": {
+    "before": {
+      "primitives": 859183,
+      "sha256": "b920c1ff2f6fb9b099285181f7b1b9288ed56579e466b9cee7831411cc1c35bc"
+    },
+    "after": {
+      "primitives": 859183,
+      "sha256": "e5c1286a7928c19bef57fca1ca2cb7ed83a0e59d62c2e76a887453e27dd973ce"
+    }
+  },
+  "leighton": {
+    "before": {
+      "count": 923701,
+      "sha256": "cae5eadc5ee1dc559cc66c555b58f630f8ed45b245c5ee634fb5d658c1085294"
+    },
+    "after": {
+      "count": 923701,
+      "sha256": "63fd2fb3aa65178b702aca079c2a36d8f5ba88fefe3d3a2e1e8510d278a04cf6"
+    }
+  }
+}

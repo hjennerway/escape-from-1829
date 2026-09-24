@@ -1,3 +1,4 @@
+import {KML_12_ADDITIONS} from './kml-12-data.mjs';
 import {KML_11_POINTS} from './kml-11-data.mjs';
 import {earthToScene} from './earth-registration.mjs';
 
@@ -48,7 +49,9 @@ export const KML_TREE_POINTS=Object.freeze([
   {name:'Oak20',coordinates:[-2.903133266722551,53.21306954432858,32.68083544448528]}
 ,
   // Existing Oak21 is already imported; keep the second distinct point only.
-  ...KML_11_POINTS.filter(p=>p.name.startsWith('Willow')||(p.name==='Oak21'&&p.coordinates[0]!==-2.903325559043617))
+  ...KML_11_POINTS.filter(p=>p.name.startsWith('Willow')||(p.name==='Oak21'&&p.coordinates[0]!==-2.903325559043617)),
+  // Append only new locations, preserving every earlier seeded rotation.
+  ...KML_12_ADDITIONS
 ].map(point=>Object.freeze({...point,coordinates:Object.freeze(point.coordinates)})));
 
 // Stable pseudorandom yaw varies the copies without changing them at reload.

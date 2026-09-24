@@ -1,0 +1,107 @@
+npm notice run test
+npm notice run node test.mjs && node test-escape-routes.mjs && node test-opening-wall.mjs && node test-estate-periods.mjs && node test-game.mjs && node test-security-guard.mjs && node test-interior-architecture.mjs && node test-interior-lights.mjs && node test-east-forward-end.mjs && node test-front-inside-corners.mjs && node test-redesmere-garden.mjs && node test-laundry.mjs && node test-escape-exterior.mjs && node test-west-refinement.mjs && node test-water-tower.mjs && node test-church-front.mjs && node test-tower-buildings.mjs && node test-pharmacy.mjs && node test-irby-ashley.mjs && node test-irby-roads.mjs && node test-grafton-edge.mjs && node test-hale-ward.mjs && node test-estates.mjs && node test-farndon.mjs && node test-ward-placement.mjs && node test-ward-corridors.mjs && node test-explore.mjs && node test-explore-input.mjs && node test-annexe.mjs && node test-larkton.mjs && node test-larkton-recess.mjs && node test-annexe-carden.mjs && node test-annexe-front-link.mjs && node test-annexe-east-outer.mjs && node test-annexe-kitchen.mjs && node test-annexe-rear-stretch.mjs && node test-annexe-rear-side-alignment.mjs && node test-annexe-os-refinement.mjs && node test-annexe-photo-placement.mjs && node test-annexe-outer-front.mjs && node test-jarman.mjs && node test-oakmere-court.mjs && node test-oakmere.mjs && node test-oakmere-west.mjs && node test-oakmere-windows.mjs && node test-annexe-wards.mjs && node test-leighton-newton.mjs && node test-churton.mjs && node test-upton.mjs && node test-garages-mortuary.mjs && node test-greenhouses.mjs && node test-main-admin.mjs && node test-main-kitchen.mjs && node test-main-admin-refine2.mjs && node test-aerial-controls.mjs && node test-device-location.mjs && node test-aerial-layouts.mjs && node test-kml-imports.mjs && node test-kml-11.mjs && node test-modern-entrance.mjs && node test-modern-car-park.mjs && node test-parsons-retrace.mjs && node test-historic-roads.mjs && node test-annexe-access.mjs && node test-performance.mjs && node test-aerial-performance.mjs && node test-building-detail.mjs && node test-outhouse.mjs && node test-willows.mjs && node test-building-photos.mjs
+WEST REAR · GROUND: reachable in 20 grid steps
+CENTRAL REAR · GROUND: reachable in 13 grid steps
+EAST REAR · GROUND: reachable in 20 grid steps
+WEST GALLERY · GROUND: reachable in 18 grid steps
+EAST GALLERY · GROUND: reachable in 18 grid steps
+WEST FRONT · GROUND: reachable in 16 grid steps
+EAST FRONT · GROUND: reachable in 16 grid steps
+PASS: seven ground-floor candidates, all rooms connected, wall collision and sight obstruction.
+PASS: mirrored reception stair approaches, canonical/browser parity.
+PASS: both stairs up/down, all upper rooms reachable, cross-floor pursuer routes, fourteen reachable escape-route candidates across both floors.
+PASS: exactly five distinct routes per load, all fourteen eligible, varied draws, unchanged candidates, reachability, inactive/old exits disabled and correctly oriented doors, including floors with zero exits.
+PASS: 1829 east end is closed at every storey and up to the roof; wall and collision disappear with the 1849 wing.
+PASS: all 13 periods, all 22 date rows, original 1829 ranges and tower, later wings, selection, collisions, tree preference, camera and batch visibility.
+PASS: randomized launch/retry spawns, wall clearance, reachable routes, reception/exit/stair clearance, separate pursuers, arrival stability and head start.
+PASS: three-second arrival at low FPS, one-second hold, fast approach with 1.5-second fade out and half-second reveal, reception handoff, frozen input/NPCs/timer, clean restart, reduced motion and portrait framing.
+PASS: real game init, both stair interactions, held-key latch, floor groups/HUD, ghost follows, cross-floor capture isolation, restart.
+PASS: unselected routes and old portico cannot escape; active routes persist through retry.
+PASS: hold-E escape through all five active exits, ten-second pan at low FPS, frozen gameplay, retained result background, skip, retry, defeat exclusion, reduced motion.
+PASS: guard patrol/chase stride integration, hold-E/help/artwork freeze, stationary routes, floor visibility and restart.
+PASS: detailed guard (53 batched meshes, 8788 triangles), alternating patrol/chase legs, floor contact, forward knees, stationary settle, frame-rate-independent stride and reset.
+PASS: 14 visible exit doors, 16 exposed arched-window samples, 36 unobstructed passage samples, 120 solid header samples, 552 separated window-trim samples, 760 skirting joins, 116 separated stair edges, navigation unchanged, shared materials and bounded batches.
+PASS: fixed interior light budget across every floor cell, nearby brightness, floor height/colour, smooth selection boundary and empty floors.
+PASS: img1 end/side glazing exposed, continuous brick base, slender stacks, open forecourt route and north-facing camera.
+PASS: marked footprint, open roofs and foundations, diagonal collisions, clear door route, mirrored sash exposure, photo cameras and no bollards.
+PASS: one widened coplanar pavilion face, no separate rear tower, exposed glazing, attached courtyard details and clear passage.
+PASS: Laundry hipped roof, flat brick link, continuous contacts, exposed glazing, garden access and Historic-only visibility/collisions.
+PASS: real estate geometry, upward-facing roofs, W-shaped openings to the rear, rear-left lattice mast, building/mast framing throughout landscape and portrait pans.
+PASS: front staircase has four approach treads, four rising treads per branch, and connected forward returns to the doorway landing.
+PASS: west reference cameras, exposed glazing, flat and canted bays, continuous roof, blank end walls and walking access.
+PASS: tower side registration, exposed doors and blind slits, shallow scars, finite geometry, photo framing and isolated materials.
+PASS: exposed paired church lancets and clock, brick pediment, fixed registration, buttress collisions and clear front walk.
+PASS: Historical ownership, exposed service glazing, upward roofs, three tower abutments, three traced face profiles, continuous corner joins, flat arch junctions, shallow final-third pitches, ridge-aligned dormers with downslope glazing, aligned front walls, retracted central-hall rear, retained front, marked-group translation with fixed chimney clearance, removed northern hall, translated entrance link and ramp, rotated full-span chimney roof and east gable window, extended tower ridge, single green-corner slope, flat red return, paired outward-moved gabled workshops, photo sightlines and walkable court, continuous ramp and retained blue-block exclusion.
+PASS: pharmacy rear glazing and stairs, two ribbed gas cylinders, building clearance, circular collisions, Historic visibility and walking routes around both tanks.
+PASS: shifted rear range, fixed front contact, open courts, roof coverage/normals, exposed sashes, conservatory, octagonal hip, separated bays, window pairs, cleared former footprint, walking clearances and Historic visibility.
+PASS: rear grass, no road beneath Irby/Ashley, flush east-side access and continuous front connection.
+PASS: Grafton placement, unchanged Irby/Ashley, flat rear with one central bay, continuous veranda canopy, bay junction, cleared greenhouse, walking route and independent visibility.
+PASS: Hale/Daresbury/Huxley/Dunham right-angle footprint, two storeys, matching sashes, two red-marked corridor links, continuous roofs, exposed junction windows, open courts, walking access and Historic visibility.
+PASS: Estates clockwise alignment, preserved OS dimensions, stepped wings, open court, roof coverage, exposed glazing, door pair, walking access, selective trace retirement and Historic visibility.
+PASS: corrected Farndon footprint, 587 roof samples, 503 continuous H-ridge samples, single-storey glazing, open garden, walking collisions, replaced corridor marker and Historic visibility.
+PASS: five corrected positions, both fixed anchors, source building geometry, generated corridor geometry, translated footprints, plan/walking cameras and Historic collisions.
+PASS: one straight Main/tower/Farndon gallery, fixed Upton anchor, six current ward contacts, 2814 roof samples, angled collisions, open grass, walking starts and Historic visibility.
+PASS: exterior WASD, normalized diagonals, mouse-relative movement, pitch limits, building collisions, wall sliding, reset and stalled frames.
+PASS: touch movement, simultaneous look, normalized diagonals, pointer identity/cancellation/capture loss, keyboard coexistence and pause cleanup.
+PASS: fixed church/Churton/Grafton, retained frontage orientation, aerial plan scale and fixed gameplay roads.
+PASS: annexe OS registration and scale, independent Redesmere alignment, open courts, roofs, arched glazing, bell tower and walking collisions.
+PASS: L-shaped courts, removed galleries, connected angled rear wing and retained west bay and paired stairs.
+PASS: orange, purple and brown OS courtyard picks are free of masonry and roofs.
+PASS: Larkton removal, paving contact, green courtyard, open full-width Parsons connection, walking clearance, timeline and 18,942 protected primitives.
+PASS: complete wing translation, unchanged neighbouring wards, recessed doors, low room and walking clearance.
+PASS: 19581 untouched primitives; two high tower sashes, removed bay, exact canted conservatory shape, stepped footprint, three reflected hall dormers, exposed glazing, roof normals, collisions and Historic visibility.
+PASS: 294 tower primitives shortened exactly 15%; new roof shortened 15%; 130 conservatory primitives exact; extended low roof/wall, visible windows and collision coverage.
+PASS: reflected entrance corridor, joined symmetric inner faces, rigid movement of all 13 right-hand ranges, 20399 preserved primitives, fixed root, exposed glazing, collisions and Historic visibility.
+PASS: removed red wing, lowered continuous yellow link, veranda roof and walking access, retained east geometry and historic visibility.
+PASS: protected annexe geometry, kitchen openings, full courtyard paving, clear access road, actual walking route and Historic visibility.
+PASS: rear wall aligned with the yellow guide, fixed widths/heights/front/centring, unchanged rear block shapes, later connector removal; rear shift 9.239 m.
+PASS: marked rear translations, removed connector, all retained primitives preserved, fixed root, paving and walking collisions.
+{
+  count: 21647,
+  digest: 'c7c35fdd1a6f3509b422f01acc3f000c69b33d9a2480d0aa0659c8bca5a04b34'
+}
+{
+  count: 1761,
+  digest: '7e851173b8538ca645d7b1a42928bde72524bb38b7a2f7d74988bb86485e34ab'
+}
+PASS: reduced annexe fits the new straight loop, centres the narrower paving on the doorway with equal side grass, and clears surrounding roads; minimum gaps {"grass":[14.728254665110867,14.728254665110846],"loop":8.460612174208963,"teardrop":38.07649962293171,"admin":55.81870491379469,"frontLine":54.35816811793939}
+PASS: original and copied paired apex fronts, exposed glazing without duplicate windows, projecting-bay collisions, clear approaches and ward ownership.
+PASS: Jarman photographed elevation, exposed sashes, veranda roof and walking collision; 859654 outside primitives unchanged.
+PASS: full-width Oakmere wall/roof join, square attached annex, collision, Historic visibility, gallery ownership and all original annexe primitives unchanged.
+PASS: Oakmere glazing is exposed, the west spine slope remains continuous, walking approach and facade collisions work, and details follow Historic visibility.
+PASS: Oakmere west photo face, glazing, roofs, open court, walking and visibility; 20354 original primitives unchanged.
+PASS: three low-spine windows, three red-link windows, matching blue sashes; 20850 protected primitives unchanged.
+PASS: five ward groups and reference colours, complete range ownership, aerial framing, accessible walking destinations and Historic visibility.
+node:internal/modules/run_main:107
+    triggerUncaughtException(
+    ^
+
+AssertionError [ERR_ASSERTION]: Every primitive outside Leighton/Newton remains unchanged
++ actual - expected
+
+  {
++   count: 1149837,
++   sha256: 'c52c5c9c882af54168567d82f42363d4cd255212cf641046caea392c31b9379e'
+-   count: 923701,
+-   sha256: '63fd2fb3aa65178b702aca079c2a36d8f5ba88fefe3d3a2e1e8510d278a04cf6'
+  }
+
+    at file:///C:/Users/Harry/Documents/_escape-from-1829/Browser/test-leighton-newton.mjs:21:8
+    at ModuleJob.run (node:internal/modules/esm/module_job:561:25)
+    at async node:internal/modules/esm/loader:647:26
+    at async asyncRunEntryPointWithESMLoader (node:internal/modules/run_main:101:5) {
+  generatedMessage: false,
+  code: 'ERR_ASSERTION',
+  actual: {
+    count: 1149837,
+    sha256: 'c52c5c9c882af54168567d82f42363d4cd255212cf641046caea392c31b9379e'
+  },
+  expected: {
+    count: 923701,
+    sha256: '63fd2fb3aa65178b702aca079c2a36d8f5ba88fefe3d3a2e1e8510d278a04cf6'
+  },
+  operator: 'deepStrictEqual',
+  diff: 'simple'
+}
+
+Node.js v24.20.0

@@ -1,0 +1,98 @@
+[
+  {
+    "file": "annexe-frontage-adjustment/front-link-before.json",
+    "key": [
+      "primitives"
+    ],
+    "status": "updated"
+  },
+  {
+    "file": "annexe-frontage-adjustment/front-link-before.json",
+    "key": [
+      "sha256"
+    ],
+    "status": "updated"
+  },
+  {
+    "file": "annexe-kitchen/rear-stretch-before.json",
+    "key": [
+      "wings"
+    ],
+    "status": "updated"
+  },
+  {
+    "file": "carden-picton/outward-protected-geometry.json",
+    "key": [],
+    "status": "updated"
+  },
+  {
+    "file": "carden-picton/height-extension-before.json",
+    "key": [
+      "protected"
+    ],
+    "status": "updated"
+  },
+  {
+    "file": "annexe-kitchen/protected-geometry.json",
+    "key": [],
+    "status": "updated"
+  },
+  {
+    "file": "oakmere/window-protected-geometry.json",
+    "key": [],
+    "status": "updated"
+  },
+  {
+    "file": "jarman/protected-geometry.json",
+    "key": [],
+    "status": "updated"
+  },
+  {
+    "file": "oakmere/court-protected-before.json",
+    "key": [],
+    "status": "updated"
+  },
+  {
+    "file": "larkton-jodrell/recess-protected-before.json",
+    "key": [
+      "outside"
+    ],
+    "status": "updated"
+  },
+  {
+    "file": "larkton-jodrell/recess-protected-before.json",
+    "key": [
+      "retained"
+    ],
+    "status": "updated"
+  },
+  {
+    "file": "oakmere/west-protected-geometry.json",
+    "key": [],
+    "status": "updated"
+  },
+  {
+    "file": "annexe-frontage-adjustment/entrance-alignment-before.json",
+    "key": [
+      "protectedGeometry"
+    ],
+    "status": "updated"
+  },
+  {
+    "file": "annexe-photo-placement/approved-shape.json",
+    "key": [],
+    "status": "updated"
+  },
+  {
+    "file": "larkton-jodrell/protected-before.json",
+    "key": [],
+    "status": "updated"
+  },
+  {
+    "file": "annexe-kitchen/side-alignment-before.json",
+    "key": [
+      "snapshot"
+    ],
+    "status": "updated"
+  }
+]

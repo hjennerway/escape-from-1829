@@ -8,6 +8,7 @@ import {createAerialLayouts} from './dist/aerial-layouts.mjs';
 import {ANNEXE_MAP_SCALE,annexePoint} from './dist/annexe.mjs';
 import {exteriorObstacles,obstacleContains} from './dist/explore-controls.mjs';
 import {prepareEstateTimeline} from './dist/estate-timeline.mjs';
+import {annexeOuterRoadZ} from './dist/annexe-loop-road.mjs';
 import {HISTORIC_ROAD_TRACES} from './dist/historic-road-layout.mjs';
 
 globalThis.document={createElement:()=>({getContext:()=>({fillRect(){},measureText(t){return {width:t.length*16}},strokeText(){},fillText(){}})})};
@@ -29,7 +30,8 @@ for(const [x,z] of [[-81,-44],[-81,-35],[-81,-20],[-81,-10]]){
 for(const [x,z] of [[-96,-36],[-89,-31],[-96,-14],[-89,-10]])assert.equal(surface(world(x,z)),undefined,'Small courtyard remains green');
 for(const [x,z] of [[-107,-40.1],[-101.1,-45],[-95,-49.1],[-85.9,-44],[-80,-8.1],[-75,-60]])assert.equal(surface(world(x,z)),'black road','Paving contacts each building edge');
 const road=HISTORIC_ROAD_TRACES.find(r=>r.name==='Annexe Larkton Parsons approach'),parsons=HISTORIC_ROAD_TRACES.find(r=>r.name==='Northern Parsons Lane connection');
-assert(parsons.points.some(p=>p[0]===road.points[0][0]&&p[1]===road.points[0][1]),'Road begins on the preserved Parsons bend');
+assert(Math.abs(road.points[0][1]-annexeOuterRoadZ(road.points[0][0]))<1e-9,'Approach begins on the new straight outer road');
+assert.equal(surface(road.points[0]),'black road','The relocated mouth is open');
 for(let i=1;i<road.points.length;i++){
  const p=road.points[i-1],q=road.points[i],dx=q[0]-p[0],dz=q[1]-p[1],len=Math.hypot(dx,dz);
  for(let j=0;j<=5;j++)for(const offset of [-2,0,2]){

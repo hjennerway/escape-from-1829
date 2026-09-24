@@ -33,6 +33,7 @@ export function createAerialLayouts(THREE,exterior){
 // Reattach runtime behaviour to either freshly built or precompiled scene nodes.
 export function attachAerialLayouts(exterior,{shared,historic,modern,roads,entrance,countessRoundabout,carPark,carParkTrees,historicRoads,towerBuildings,superseded}){
   const lane=roads.getObjectByName('Vivienne Smith Lane');
+  const parsonsTail=roads.getObjectByName('Parsons Lane northern modern endpoint');
   const sharedRoads=new Set(['Vivienne Smith Lane','Parsons Lane','Parsons Lane (Upton Lea)','Parsons Lane (1829 Central)','Parsons Lane (North)']);
   const state={historic:true,modern:false};
   function setVisible(layout,visible){
@@ -44,11 +45,12 @@ export function attachAerialLayouts(exterior,{shared,historic,modern,roads,entra
     for(const object of superseded)object.visible=!state.historic;
     for(const road of roads.children)road.visible=state.modern||(state.historic&&sharedRoads.has(road.name));
     lane.getObjectByName('Vivienne Smith Lane eastern continuation').visible=state.modern;
+    parsonsTail.visible=state.modern;
     exterior.invalidateShadows();
   }
   setVisible('modern',false);
   // Individually toggled meshes must stay out of static aerial batches.
-  const visibilityObjects=[...superseded,...roads.children,lane.getObjectByName('Vivienne Smith Lane eastern continuation')];
+  const visibilityObjects=[...superseded,...roads.children,lane.getObjectByName('Vivienne Smith Lane eastern continuation'),parsonsTail];
   exterior.layouts={shared,historic,modern,roads,entrance,countessRoundabout,carPark,carParkTrees,historicRoads,towerBuildings,superseded,visibilityObjects,setVisible,get state(){return {...state};}};
   return exterior.layouts;
 }

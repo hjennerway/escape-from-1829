@@ -136,3 +136,121 @@ the tree crowns. This removes the overlapping parallel strip and returns its
 old inside edge to grass. The new curve retains six-unit asphalt width and
 pale borders; sampled segment clearances include the full mapped tree crowns.
 This supersedes the old fork in the annexe road snapshot.
+
+## Annexe outer loop and frontage revision — 24 September 2026
+
+The [red/yellow/blue reference](annexe-outer-loop-marked.png) straightens the
+outer access road between the existing frontage corner and the saved northern
+Parsons endpoint. The complete annexe plan is reduced to 85% of its previous
+size and placed at site (375, -3), with plan scale 0.612. Heights and all local
+ward geometry are retained. The Larkton approach reconnects to the straight
+road; the old outer detour returns to grass. This supersedes earlier notes
+requiring that historic road trace and annexe root to remain fixed.
+
+The [later frontage annotation](annexe-frontage-junction-marked.png) then moves
+the frontage avenue nine scene metres toward the annexe, from green to orange.
+The entrance has two true quarter-circle edges, about 13.5 metres in radius,
+with a straight narrow neck. The gravel route moves twelve metres along the
+court to yellow and meets the relocated triangle. Its court end extends to
+the actual asphalt edge. The complete original triangular junction moves to
+the blue area with its size, angles and curved arms retained. The former
+purple triangle and the pink northern approach are removed. Small avenue
+trees follow the moved road; mapped mature tree trunks stay fixed.
+
+The immutable annexe shape digest still matches all 21,176 detail primitives.
+Historical snapshots containing absolute placement, world-fixed legacy
+drives or roadside trees were refreshed only after that comparison. Their
+range dimensions and independently checked detail geometry are retained.
+The older entrance snapshot's rigid-sweep requirement is superseded by the
+explicit circular-edge request; current surface, radius and walking checks
+protect the new entrance. Browser sources and aerial assets are updated;
+Unity and Blender exports are unchanged.
+
+## Parallel annexe frontage — 24 September 2026
+
+The [latest red frontage annotation](annexe-parallel-frontage-marked.png)
+turns the long frontage carriageway onto the annexe's local frontage axis.
+It moves six scene metres, one full road width, toward the building at the
+central doorway axis. More than 70% of the complete frontage trace is now
+exactly straight and parallel; short end links retain the fixed teardrop and
+outer-loop connections. This supersedes the previous orange-line angle.
+
+The triangular junction receives the same rigid turn and inward move, keeping
+its size, angles, curved arms and grass centre. The five small avenue trees
+retain their offsets from the carriageway. The entrance keeps its circular
+edges and shortened connection, while the gravel keeps its alignment and
+extends to the moved triangular arm. Buildings, the remaining two small trees,
+and mature trees stay fixed. The earlier road layout is recorded in
+annexe-parallel-before.json for independent angle, offset and shape checks.
+The annexe's immutable local shape digest remains unchanged.
+
+Browser model sources and compiled aerial assets change; Unity and Blender
+exports do not. Final validation is recorded in DEVELOPMENT.md.
+
+
+## Irby tree-gap road, outer triangle and gravel diagonal — 24 September 2026
+
+The latest [red/blue/yellow screenshot](irby-tree-junction-marked.png) adds a
+six-unit approach from the Irby/Ashley side court through the existing oak and
+beech gap to the outer road. The closest mapped trunk is 5.52 units from the
+centreline, leaving the 3.6-unit half-width including kerb clear. Mature trees
+retain their recorded positions; canopy overhang is intentional.
+
+The triangle moves to the outer-road side of the frontage avenue. Its near
+arm uses the existing diagonal connection, its far arm follows the straight
+outer road, and the avenue extends on its unchanged axis to meet it. The former
+upward loop returns to grass. This supersedes the older triangle-position and
+rigid-proportion constraints. The yellow gravel path keeps its 2.4-unit width
+and skews across the lawn from the service court to the frontage. Buildings,
+other approaches, the annexe entrance and saved Modern lane vertices are fixed.
+
+Ground-plane fitting and before/after views are recorded in
+`Browser/artifacts/irby-junction-*`. The revised checks cover continuous
+asphalt, all triangle sides and its grass centre, removed surfaces, full-width
+building clearance, fixed-tree trunk clearance and both gravel endpoints.
+
+
+## Rounded Irby junction edges — 24 September 2026
+
+The [red curve and three red crosses](irby-junction-rounding-marked.png) soften
+only the lawn-side bend and the triangular island corners. A cubic verge joins
+the existing avenue and tree-gap approach tangentially, with a parallel pale
+border. Local resurfacing covers the old angular kerbs. The island retains its
+straight sides with 1.3-unit circular corner radii and a closed 0.6-unit kerb.
+Buildings, trees, gravel, road centreline connections and the outer road remain
+fixed. The browser uses the same ground materials and layers as its existing
+teardrop island. Preview and validation files use the irby-rounding prefix.
+
+## Annexe entrance kerbs and obstructing tree — 24 September 2026
+
+The [yellow/red screenshot](annexe-entrance-overlaps-marked.png) removes the two
+straight-border slivers beside the curved entrance and roadside tree 4 from
+the carriageway. This supersedes the earlier requirement to retain all seven
+small roadside trees. The other six keep their positions and exact crowns.
+
+The avenue border is cut only across the building-facing entrance mouth.
+The circular asphalt edges end on the avenue asphalt edge; the curved kerbs
+sit toward the lawn and meet the straight 0.6-metre border tangentially. The
+opposite verge, entrance radius, narrow neck and forecourt remain in place.
+The removed trunk contributes no walking obstacle and its five crown instances
+are omitted. Random draws and original crown rotations are preserved.
+
+Browser sources and the generated aerial model change; Unity and Blender
+exports remain unchanged. Validation is recorded in DEVELOPMENT.md.
+
+
+## Parsons far-end curve and side-road nub — 24 September 2026
+
+The [red curve and yellow circle](parsons-end-bend-marked.png) replace the
+historic far-end elbow with an eleven-unit centreline radius, retaining the
+six-unit carriageway and 0.6-unit borders. Both ends meet the existing straight
+roads tangentially. The fixed second lamppost and former pointed corner sit
+on grass. The saved northern lane endpoint is a separate Modern tail, visible
+from 2010; its original coordinates remain intact. Historic/Modern toggles and
+the timeline both control that tail, including compiled scenes.
+
+The Larkton approach now begins at its actual intersection with the outer
+road. Trimming the initial overshoot removes the round nub beyond the far kerb
+without moving the remaining approach or courtyard. This supersedes the old
+requirement to pave all the way to the saved northern endpoint in Historic.
+Implementation is in parsons-north-bend.mjs and annexe-access.mjs.

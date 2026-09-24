@@ -4,7 +4,7 @@ import * as THREE from './dist/vendor/three.module.js';
 import {createEscapeExterior} from './dist/escape-exterior.mjs';
 import {createAerialLayouts} from './dist/aerial-layouts.mjs';
 import {annexeGroundPoint} from './dist/annexe-ground-placement.mjs';
-import {annexeSiteLocal,annexeSitePoint} from './dist/annexe.mjs';
+import {ANNEXE_SITE,annexeSiteLocal,annexeSitePoint} from './dist/annexe.mjs';
 import {ANNEXE_FRONT_AVENUE,ANNEXE_GRAVEL_PATH,shiftAnnexeTeardrop} from './dist/annexe-front-roads.mjs';
 import {exteriorObstacles,obstacleContains} from './dist/explore-controls.mjs';
 import {ANNEXE_ACCESS,ANNEXE_REAR_JUNCTIONS} from './dist/annexe-access.mjs';
@@ -40,7 +40,7 @@ for(const [name,fractions] of [
  for(let i=0;i<=24;i++){
   const x=b.min.x+(b.max.x-b.min.x)*(fractions[0]+(fractions[1]-fractions[0])*i/24);
   const p=wall.localToWorld(new THREE.Vector3(x,0,b.max.z)),[sx,sz]=annexeSiteLocal([p.x,p.z]);
-  if(sx<=ANNEXE_ACCESS.centreX-halfApron+.2||sx>=ANNEXE_ACCESS.centreX+halfApron-.2)continue;
+  if(sx<=ANNEXE_ACCESS.centreX-halfApron+.2/ANNEXE_SITE.scale||sx>=ANNEXE_ACCESS.centreX+halfApron-.2/ANNEXE_SITE.scale)continue;
   for(let z=sz+.12;z<=ANNEXE_ACCESS.forecourtRearZ+.1;z+=.18)
    assert.equal(at(sx,z),'black road','Paving reaches '+name+' without grass or a transverse kerb');
  }
@@ -48,6 +48,22 @@ for(const [name,fractions] of [
 // The infill does not consume the equal grass strips beside the paved apron.
 for(const side of [-1,1])for(const z of [30,36,44])assert(!['black road','stone kerb'].includes(at(ANNEXE_ACCESS.centreX+side*(halfApron+2),z)),'Retain side grass');
 const obstacles=exteriorObstacles(THREE,e.model);
+// The two curved lips have one continuous kerb, with clear lawn beyond it.
+for(const side of [-1,1]){
+ const radius=(ANNEXE_ACCESS.entranceMouthWidth-ANNEXE_ACCESS.entranceWidth)/2;
+ const centre=[ANNEXE_ACCESS.centreX+side*ANNEXE_ACCESS.entranceMouthWidth/2,ANNEXE_ACCESS.avenueZ-3/ANNEXE_SITE.scale-radius];
+ for(const degrees of [55,65,75,80,85,88])for(const [offset,expected] of [[.2,'black road'],[-.3,'stone kerb'],[-.8,undefined]]){
+  const angle=degrees*Math.PI/180,r=radius+offset/ANNEXE_SITE.scale;
+  assert.equal(at(centre[0]-side*r*Math.cos(angle),centre[1]+r*Math.sin(angle)),expected,'Single curved kerb and no straight-border sliver at '+side+'/'+degrees+'/'+offset);
+ }
+}
+assert(!e.model.getObjectByName('Annexe roadside tree 4'),'The red-circled trunk is removed');
+const formerTree=[328.6215725515992,-44.25920536143011];
+assert.equal(surface(...formerTree),'black road','The removed tree was in the entrance carriageway');
+assert(!obstacles.some(o=>obstacleContains(o,...formerTree,.3)),'No invisible trunk collision remains on the entrance');
+for(const n of [1,2,3,5,6,7])assert(e.model.getObjectByName('Annexe roadside tree '+n),'Retain unmarked roadside trees');
+console.log('PASS: both curved entrance kerbs are clean, and only the marked roadside tree is removed.');
+
 for(let z=ANNEXE_ACCESS.forecourtRearZ+3;z<=ANNEXE_ACCESS.avenueZ;z+=.4){
  assert.equal(at(ANNEXE_ACCESS.centreX,z),'black road','The central entrance meets the relocated red-line avenue');
  assert(!obstacles.some(o=>obstacleContains(o,...world(ANNEXE_ACCESS.centreX,z))),'The central entrance is clear for walking');
@@ -75,9 +91,9 @@ for(const p of [[260.75,56.875],[257.78,66.67],[255,76],[252.25,84.64],[248.77,9
 assert(!l.historicRoads.getObjectByName('Admin east four-way junction'),'Remove the former four-way apron');
 // The two newly circled northern road ends connect around the annexe.
 const northern=HISTORIC_ROADS.find(r=>r.name==='Northern Parsons Lane connection');
-assert.deepEqual(northern.points[0],[270,-117]);
-const savedEnd=SHARED_HISTORIC_LANES.find(p=>p.name==='Parsons Lane (North)').points.at(-1),joinedEnd=northern.points.at(-1);
-for(let i=0;i<=32;i++){const t=i/32;assert.equal(surface(savedEnd[0]+(joinedEnd[0]-savedEnd[0])*t,savedEnd[1]+(joinedEnd[1]-savedEnd[1])*t),'black road','The northern Parsons ends must form one continuous road');}
+assert.deepEqual(northern.points[0],[333.63,-84.91],'The pink approach is removed back to the loop bend');
+const {PARSONS_NORTH_BEND}=await import('./dist/parsons-north-bend.mjs');
+for(const p of PARSONS_NORTH_BEND.points)assert.equal(surface(...p),'black road','The curved Parsons end stays continuous');
 assert(northern.points.every(p=>p[1]<-84),'The retraced lane must stay north of the annexe');
 // A single smooth grass edge covers the former segmented inner teardrop kerb.
 const center=shiftAnnexeTeardrop([267.5,44]);
@@ -127,3 +143,21 @@ assert.deepEqual(entrance.rect,[-9,10,9,21]);assert.equal(entrance.h,4.7);
 const door=e.annexe.getObjectByName('Entrance recessed double door').getWorldPosition(new THREE.Vector3());
 assert(Math.abs(annexeSiteLocal([door.x,door.z])[0]-ANNEXE_ACCESS.centreX)<1e-9,'Door, apron and sweep share one axis');
 await import('./artifacts/annexe-entrance-alignment-scope.mjs');
+
+// Both marked edges are true quarter circles, with a straight narrow approach.
+// Fit the circle independently from three rendered boundary points, then check
+// every intermediate point and the perpendicular start/end radii.
+// Paving is triangulated; use its source boundary for the circular-edge check.
+const {ANNEXE_ACCESS_PAVING}=await import('./dist/annexe-access.mjs');
+const boundary=ANNEXE_ACCESS_PAVING.find(p=>p.name==='Annexe sweeping entrance').points;
+for(const arc of [boundary.slice(1,26),boundary.slice(26).reverse().slice(1)]){
+ const [a,b,c]=[arc[0],arc[12],arc.at(-1)],d=2*(a[0]*(b[1]-c[1])+b[0]*(c[1]-a[1])+c[0]*(a[1]-b[1]));
+ const square=p=>p[0]*p[0]+p[1]*p[1];
+ const centre=[(square(a)*(b[1]-c[1])+square(b)*(c[1]-a[1])+square(c)*(a[1]-b[1]))/d,
+ (square(a)*(c[0]-b[0])+square(b)*(a[0]-c[0])+square(c)*(b[0]-a[0]))/d];
+ const radius=Math.hypot(a[0]-centre[0],a[1]-centre[1]);
+ for(const p of arc)assert(Math.abs(Math.hypot(p[0]-centre[0],p[1]-centre[1])-radius)<1e-8,'Round entrance edges have one constant radius');
+ assert(Math.abs((a[0]-centre[0])*(c[0]-centre[0])+(a[1]-centre[1])*(c[1]-centre[1]))<1e-7,'Each entrance edge turns through 90 degrees');
+ assert(radius>12&&radius<15,'Entrance flare is compact');
+}
+console.log('PASS: compact quarter-circle entrance edges.');

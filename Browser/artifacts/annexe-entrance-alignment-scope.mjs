@@ -37,10 +37,7 @@ const protectedGeometry={primitives:protectedRows.length,sha256:createHash('sha2
 const before=JSON.parse(readFileSync(path));
 assert.deepEqual(annexe.matrix.toArray().map(n=>n||0),before.root);
 assert.deepEqual(protectedGeometry,before.protectedGeometry,'Every primitive outside the marked low entrance range remains exact');
- const oldSweep=before.paving.find(p=>p.name==='Annexe sweeping entrance').points,newSweep=ANNEXE_ACCESS_PAVING.find(p=>p.name==='Annexe sweeping entrance').points;
- const delta=newSweep[0].map((v,i)=>v-oldSweep[0][i]);assert.equal(newSweep.length,oldSweep.length);
- for(const [oldPoints,newPoints] of [[oldSweep,newSweep],...before.kerbs.filter(k=>k.name.includes('sweeping')).map(k=>[k.points,ANNEXE_ACCESS_KERBS.find(n=>n.name===k.name).points])]){
-  assert.equal(oldPoints.length,newPoints.length);
-  newPoints.forEach((p,j)=>p.forEach((v,i)=>assert(Math.abs(v-oldPoints[j][i]-delta[i])<1e-9,'The sweep and kerbs move by one rigid translation')));
- }
- console.log('PASS: only entrance-range primitives changed; all other geometry preserved; sweep and both kerbs retain every curve vertex.',{protectedPrimitives:protectedRows.length,delta});
+// The later whole-annexe loop fit supersedes the old rigid sweep translation.
+// test-annexe-access checks the resized apron, kerbs, complete walkable sweep,
+// wall contacts and its fixed-road mouth in the current site frame.
+console.log('PASS: protected local entrance geometry retained after the whole-annexe loop fit.',protectedGeometry);

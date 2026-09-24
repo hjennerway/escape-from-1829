@@ -1,0 +1,19 @@
+PASS: 62 exact KML vertices, 13607.4 square units, Modern-only car park, concave boundary, thirteen complete trees and collisions cleared only in Modern, bowling lawn tree removed, all oaks retained.
+PASS: retraced Parsons Lane and fork have continuous asphalt, full-width building clearance, an open saved-lane junction, and grass at removed blue sections.
+PASS: straight outer road, continuous blue triangular junction and visible grass island.
+PASS: unchanged parallel frontage and annexe, red tree-gap access, blue triangle and yellow gravel diagonal.
+PASS: smooth continuous bend edging, three rounded island corners and clear carriageways.
+PASS: source-selected road network, semicircular forecourt, north-pointing teardrop, full-width building clearance, no Parsons/Vivienne overlaps, retained southern continuation, registered OS contours and all layout combinations.
+PASS: red-line avenue, clear central sweep, yellow gravel link, removed rear and side roads, protected lane junctions and teardrop, and Historic visibility.
+PASS: protected local entrance geometry retained after the whole-annexe loop fit. {
+  primitives: 20721,
+  sha256: 'fec1a88e0ed0fb7b5fe30be1092903e8a254efeb1370f08cd9730a6bb078ea2c'
+}
+PASS: compact quarter-circle entrance edges.
+PASS: indexed collisions match full scans across all layouts and padded boundaries; idle and distant collision work skipped; refreshed obstacles and cached-shadow invalidation.
+PASS: shared tree buffers, colours and placement; distance detail and hysteresis; 9231 static meshes compiled into 1376 batches; all layout surfaces retained; cached transforms and dynamic labels; 597660 default-view tree triangles.
+PASS: 2592 textured windows; close geometry and all layouts preserved; atlas pixels and rotated placement; viewport/zoom detail with hysteresis; static shadows, structural walls and independent trees.
+PASS: 1066 roof samples, red-circle registration, exposed boarding, gable lighting, road clearance, three camera starts, walkable approach and shared-layout collisions.
+PASS: The Willows exact KML Point, 960 roof samples, hollow bays, walking, distant aerial pan, layout fitting, selection and all four visibility states.
+PASS: precompiled building metadata and roof selection match the source scene.
+PASS: 34 buildings, every named location, bundled photos, roof picking before/after batching and LOD, empty ground and layout visibility (60848 selection triangles).

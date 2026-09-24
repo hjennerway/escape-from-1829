@@ -85,6 +85,7 @@ assert.deepEqual(selection.entries.map(e=>e.id),BUILDING_CATALOG.map(e=>e.id),'A
 const position=exterior.camera.position.clone(),quaternion=exterior.camera.quaternion.clone();
 for(const period of PERIODS){
  timeline.setPeriod(period.year);selection.refresh();
+ assert.equal(isBuildingVisible(layouts.roads.getObjectByName('Parsons Lane northern modern endpoint')),period.year>=2010,'The saved Parsons endpoint returns only from 2010');
  checkGround(period.year);
  for(const object of entranceProjections)assert(isBuildingVisible(object),object.name+' is complete from 1829');
  assert.deepEqual(frontageHits(),completeFrontage,'Both complete projection facades persist in '+period.year);

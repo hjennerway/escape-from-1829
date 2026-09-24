@@ -21,7 +21,7 @@ export const BUILDING_CATALOG=Object.freeze([
  {id:'churton',name:'Churton / Kelsall Ward',photos:[photo('churton-roadside','Churton / Kelsall · roadside view and communications mast')]},
  {id:'church',name:'Church',photos:[photo('church','Church and grounds · aerial photograph'),photo('church-clock-front','Church · clock-facing front')]},
  {id:'tower',name:'Water Tower',photos:[1,2,3,4].map(n=>photo(`tower-${n}`,`Water tower · side ${n}${n===2?' · facing 1829':n===4?' · facing the Annexe':''}`))},
- {id:'annexe',name:'The Annexe',locations:['annexe','annexe-kitchen','annexe-rear-court','annexe-carden-photo'],photos:[...annexe,photo('annexe-kitchen','The Annexe · rear kitchen and service court')]},
+ {id:'annexe',name:'The Annexe',locations:['annexe','annexe-kitchen','annexe-rear-court','annexe-carden-photo'],photos:[...annexe,photo('annexe-kitchen','The Annexe · rear kitchen and service court'),photo('annexe-carden-picton','The Annexe · Carden / Picton side and conservatory')]},
  {id:'picton-carden',name:'Annexe · Picton / Carden Ward',photos:[photo('carden-mural','Carden Ward · archway mural')],contextPhotos:annexe},
  {id:'tarvin-jarman',locations:['tarvin-jarman','annexe-jarman-photo'],name:'Annexe · Tarvin / Jarman Ward',photos:[photo('tarvin-mural','Tarvin Ward · village mural')],contextPhotos:annexe},
  {id:'leighton-newton',locations:['leighton-newton','leighton-newton-inner','leighton-newton-outer'],name:'Annexe · Leighton / Newton Ward',photos:[{src:'./building-photos/leighton-newton-inner.jpg',caption:'Leighton / Newton · inner elevation (red camera)'},{src:'./building-photos/leighton-newton-outer.jpg',caption:'Leighton / Newton · veranda elevation (blue camera)'}],contextPhotos:annexe},

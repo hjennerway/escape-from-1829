@@ -1,6 +1,7 @@
 import {matchEstateGrass} from './estate-grass.mjs';
 import {missingHistoricFootprints} from './historic-footprints.mjs';
 import {ROAD_STYLE} from './road-style.mjs';
+import {trimAnnexeEntranceBorder} from './annexe-access.mjs';
 import {HISTORIC_ROADS_SOURCE,HISTORIC_ROADS,HISTORIC_GRAVEL,HISTORIC_PAVING,HISTORIC_GRASS,HISTORIC_KERBS} from './historic-road-layout.mjs';
 export * from './historic-road-layout.mjs';
 export function createHistoricRoads(THREE,exterior){
@@ -26,13 +27,16 @@ export function createHistoricRoads(THREE,exterior){
  }
  function ribbon(name,points,width,mat,y){
   const part=new THREE.Group();part.name=name;part.userData.centerline=points;part.userData.width=width;group.add(part);
+  const trim=name==='Annexe front avenue border';
+  const strip=points=>{for(const piece of trim?trimAnnexeEntranceBorder(points):[points])part.add(polygon(name+' surface',piece,mat,y));};
   // Straight strips with small round joints avoid gaps at bends; no spline drift.
   for(let i=1;i<points.length;i++){
    const a=points[i-1],b=points[i],dx=b[0]-a[0],dz=b[1]-a[1],length=Math.hypot(dx,dz);if(length<1e-6)continue;
    const ox=-dz/length*width/2,oz=dx/length*width/2;
-   part.add(polygon(name+' surface',[[a[0]+ox,a[1]+oz],[a[0]-ox,a[1]-oz],[b[0]-ox,b[1]-oz],[b[0]+ox,b[1]+oz]],mat,y));
+   strip([[a[0]+ox,a[1]+oz],[a[0]-ox,a[1]-oz],[b[0]-ox,b[1]-oz],[b[0]+ox,b[1]+oz]]);
   }
   const geometry=new THREE.CircleGeometry(width/2,ROAD_STYLE.roundSegments);geometry.rotateX(-Math.PI/2);
+  if(trim){for(const [x,z] of points)strip(Array.from({length:ROAD_STYLE.roundSegments},(_,i)=>{const a=i/ROAD_STYLE.roundSegments*Math.PI*2;return [x+Math.cos(a)*width/2,z+Math.sin(a)*width/2];}));geometry.dispose();return;}
   for(const [x,z] of points){const cap=new THREE.Mesh(geometry,mat);cap.position.set(x,y,z);cap.receiveShadow=true;cap.renderOrder=mat===asphalt?2:mat===edge?1:0;cap.userData.surface=mat===asphalt?'black road':'stone kerb';part.add(cap);}
  }
  for(const area of HISTORIC_GRAVEL)polygon(area.name,area.points,gravel,area.height??.265);
@@ -45,7 +49,7 @@ export function createHistoricRoads(THREE,exterior){
  for(const area of HISTORIC_GRASS){const mesh=polygon(area.name,area.points,area.raisedIsland?islandGrass:grass,area.raisedIsland?.37:.31);if(area.raisedIsland)mesh.renderOrder=4;}
  for(const road of HISTORIC_ROADS)ribbon(road.name+' border',road.points,road.width+2*ROAD_STYLE.edgeWidth,edge,.32);
  for(const road of HISTORIC_ROADS)ribbon(road.name,road.points,road.width,asphalt,.34);
- for(const edge of HISTORIC_KERBS)ribbon(edge.name,edge.points,.32,kerb,.38);
+ for(const edge of HISTORIC_KERBS)ribbon(edge.name,edge.points,edge.width??.32,kerb,.38);
  // Retain OS reference metadata for placement and clearance checks without drawing ground outlines.
  group.userData.missingFootprints=missingHistoricFootprints(THREE,exterior);
  return group;

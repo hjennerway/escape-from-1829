@@ -1,4 +1,6 @@
 import {ANNEXE_MAP_SCALE,ANNEXE_SITE,ANNEXE_RANGES,annexePoint,annexeSiteLocal} from './annexe.mjs';
+import {annexeOuterRoadZ} from './annexe-loop-road.mjs';
+import {ROAD_STYLE} from './road-style.mjs';
 import {LARKTON_SHIFT} from './annexe-larkton-recess.mjs';
 import {annexeFrontPoint,annexeAvenueZ} from './annexe-front-roads.mjs';
 
@@ -21,7 +23,8 @@ export const ANNEXE_ACCESS=Object.freeze({
  sweepRevisionSource:'Research/annexe-frontage-adjustment/narrow-entrance.png',
  frontageInfillSource:'Research/annexe-frontage-adjustment/front-paving-gaps.png',
  alignmentSource:'Research/annexe-frontage-adjustment/entrance-alignment-reference.png',
- note:'The low entrance range extends to the green line. The purple lines narrow the apron around the doorway axis. The existing sweep and its kerbs translate together to this axis, preserving their complete curve and avenue join. Frontage side approaches and rear access roads remain removed.'
+ flareReference:'Research/historic-roads/annexe-frontage-junction-marked.png',
+ note:'The apron remains on the doorway axis. The latest red edges replace the elongated flare with two quarter circles meeting the orange frontage road. Frontage side approaches and rear access roads remain removed.'
 });
 function curve(start,segments,steps=24){
  const points=[start];let a=start;
@@ -30,19 +33,21 @@ function curve(start,segments,steps=24){
  }return points;
 }
 const halfEntrance=ANNEXE_ACCESS.entranceWidth/2,halfMouth=ANNEXE_ACCESS.entranceMouthWidth/2,halfCourt=ANNEXE_ACCESS.forecourtWidth/2;
-// End on the avenue's asphalt edge, covering its kerb only at the open mouth.
-const sweepSide=side=>{
- const x=side*halfEntrance,mouthX=side*halfMouth,startZ=64-.1;
+// End the arcs on the avenue edge. Offset kerbs toward the grass so they
+// meet the straight border tangentially with the same width.
+const sweepSide=(side,kerbInset=0)=>{
  const roadEdgeZ=x=>annexeAvenueZ(x)-3/ANNEXE_SITE.scale;
- const mouthZ=roadEdgeZ(mouthX),stemZ=startZ+(mouthZ-startZ)*.4;
- // A straight neck leaves grass beside the apron, then turns smoothly onto
- // the oblique road. Each lip follows the road's own edge at the join.
- return curve([x,startZ],[
-  [[x,startZ+(stemZ-startZ)/3],[x,startZ+(stemZ-startZ)*2/3],[x,stemZ]],
-  [[x,stemZ+(mouthZ-stemZ)*.78],[mouthX*.72,roadEdgeZ(mouthX*.72)],[mouthX,mouthZ]]
- ]);
+ const slope=annexeAvenueZ(1)-annexeAvenueZ(0),length=Math.hypot(1,slope);
+ const u=[1/length,slope/length],v=[-slope/length,1/length];
+ const radius=(halfMouth-halfEntrance)*length,edge=[0,roadEdgeZ(0)];
+ const arc=Array.from({length:25},(_,i)=>{
+  const angle=i/24*Math.PI/2;
+  return [0,1].map(k=>edge[k]+side*(halfEntrance*length+radius)*u[k]-radius*v[k]-side*(radius-kerbInset)*Math.cos(angle)*u[k]+(radius-kerbInset)*Math.sin(angle)*v[k]);
+ });
+ // A straight neck reaches a true quarter-circle flare at the roadway.
+ return [[side*(halfEntrance+kerbInset),64-.1],...arc];
 };
-const translatedSweep=side=>sweepSide(side).map(([x,z])=>[x+centreX,z+sweepShiftZ]);
+const translatedSweep=(side,inset=0)=>sweepSide(side,inset).map(([x,z])=>[x+centreX,z+sweepShiftZ]);
 const left=translatedSweep(-1),right=translatedSweep(1);
 const rear=ANNEXE_ACCESS.forecourtRearZ;
 const courtFront=ANNEXE_ACCESS.entranceZ;
@@ -63,8 +68,15 @@ export const LARKTON_PAVING_OUTLINE=Object.freeze([
  [-108,-64],[-73,-64],[-73,-7.92],[-86,-7.92],
  [-86,-49],[-101,-49],[-101,-39.92],[-108,-39.92]
 ].map(([x,z])=>[x+LARKTON_SHIFT,z]));
+const larktonTrace=curve([-176.5,-34.8],[[[-174,-48],[-157,-53],[-143,-54]],[[-128+LARKTON_SHIFT,-56],[-115+LARKTON_SHIFT,-58],[-103+LARKTON_SHIFT,-55]]]).map(wardPoint);
+// Start where the approach crosses the outer road. Moving just its first
+// point left the next few vertices doubling back and forming a lawn-side nub.
+const entryIndex=larktonTrace.findIndex(p=>p[1]>=annexeOuterRoadZ(p[0]));
+const a=larktonTrace[entryIndex-1],b=larktonTrace[entryIndex];
+const da=a[1]-annexeOuterRoadZ(a[0]),db=b[1]-annexeOuterRoadZ(b[0]);
+const mouth=a.map((v,k)=>v+(b[k]-v)*(-da/(db-da)));
 export const LARKTON_APPROACH=Object.freeze({name:'Annexe Larkton Parsons approach',width:5,
- points:curve([-176.5,-34.8],[[[-174,-48],[-157,-53],[-143,-54]],[[-128+LARKTON_SHIFT,-56],[-115+LARKTON_SHIFT,-58],[-103+LARKTON_SHIFT,-55]]]).map((p,i)=>i===0?[533,-135]:wardPoint(p))});
+ points:[mouth,...larktonTrace.slice(entryIndex)]});
 export const ANNEXE_ACCESS_ROADS=Object.freeze([LARKTON_APPROACH]);
 export const ANNEXE_ACCESS_PAVING=Object.freeze([
  {name:'Annexe Larkton paved court',surface:'asphalt apron',points:LARKTON_PAVING_OUTLINE.map(wardPoint)},
@@ -74,7 +86,23 @@ export const ANNEXE_ACCESS_PAVING=Object.freeze([
  {name:'Annexe entrance step approach',surface:'asphalt apron',points:[[centreX-7,rear],[centreX-7,rear+3],[centreX+7,rear+3],[centreX+7,rear]].map(annexeFrontPoint)}
 ]);
 export const ANNEXE_ACCESS_KERBS=Object.freeze([
- {name:'Annexe west sweeping entrance kerb',points:left.slice(0,-1).map(annexeFrontPoint)},
- {name:'Annexe east sweeping entrance kerb',points:right.slice(0,-1).map(annexeFrontPoint)},
+ ...[-1,1].map(side=>({name:`Annexe ${side<0?'west':'east'} sweeping entrance kerb`,width:ROAD_STYLE.edgeWidth,points:translatedSweep(side,ROAD_STYLE.edgeWidth/2/ANNEXE_SITE.scale).map(annexeFrontPoint)})),
  ...[-1,1].map(side=>({name:(side<0?'Annexe west':'Annexe east')+' forecourt exposed kerb',points:[[centreX+side*halfCourt,hallFront],[centreX+side*halfCourt,courtFront],[centreX+side*halfEntrance,courtFront]].map(annexeFrontPoint)}))
 ]);
+
+// Remove the avenue's building-facing border across the entrance mouth.
+// Subtract in the annexe frame, preserving the opposite verge.
+export function trimAnnexeEntranceBorder(points){
+ let remaining=points.map(annexeSiteLocal);const fragments=[];
+ for(const [axis,edge,sign] of [[0,centreX-halfMouth,1],[0,centreX+halfMouth,-1],[1,ANNEXE_ACCESS.avenueZ,-1]]){
+  const inside=[],outside=[];
+  for(let i=0;i<remaining.length;i++){
+   const p=remaining[i],q=remaining[(i+1)%remaining.length],a=(p[axis]-edge)*sign,b=(q[axis]-edge)*sign;
+   (a>=0?inside:outside).push(p);
+   if((a>=0)!==(b>=0)){const t=a/(a-b),cross=p.map((v,k)=>v+(q[k]-v)*t);inside.push(cross);outside.push(cross);}
+  }
+  if(outside.length>=3)fragments.push(outside.map(annexeFrontPoint));
+  remaining=inside;if(remaining.length<3)break;
+ }
+ return fragments;
+}

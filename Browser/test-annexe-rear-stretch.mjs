@@ -26,8 +26,12 @@ const west=annexe.userData.ranges.find(b=>b.name==='Rear court west range'),link
 assert(!link,'Later green-circle correction removes the connector');
 assert(Math.abs(west.z+west.d/2-anchor)<1e-9,'Court-to-spine join stays fixed');
 const view=ANNEXE_VIEWS['annexe-rear-court'],camera=new THREE.PerspectiveCamera(view.fov,1099/841,.1,2000);
-camera.position.set(...view.position);camera.lookAt(...view.target);camera.updateMatrixWorld();
-const rearEdge=new THREE.Vector3(...annexePoint(-ANNEXE_MAP_SCALE,8.4*ANNEXE.verticalScale,west.z-west.d/2)).project(camera);
+// Compare the historical pixel guide in its original plan scale. The later
+// whole-annexe road fit changes the site scale, not this accepted rear geometry.
+const referenceScale=.648;
+camera.position.set(-1.631612*referenceScale,107.569876,-67.68697*referenceScale);
+camera.lookAt(-2.071306*referenceScale,0,-51.17476*referenceScale);camera.updateMatrixWorld();
+const rearEdge=new THREE.Vector3(-ANNEXE_MAP_SCALE*referenceScale,8.4*ANNEXE.verticalScale,(west.z-west.d/2)*referenceScale).project(camera);
 const pixelY=(1-rearEdge.y)*841/2;
 assert(Math.abs(pixelY-642)<4,'Rear eave aligns with the yellow guide at about y=642 in the 1099 x 841 reference');
 assert(Math.abs((west.z-west.d/2)/ANNEXE_MAP_SCALE+54.35)<1e-9,'Reference sets the rear wall at map z=-54.35');

@@ -1,0 +1,42 @@
+[
+  {
+    "file": "test-historic-roads.mjs",
+    "code": 0,
+    "output": "PASS: source-selected road network, semicircular forecourt, north-pointing teardrop, full-width building clearance, no Parsons/Vivienne overlaps, retained southern continuation, registered OS contours and all layout combinations.\n"
+  },
+  {
+    "file": "test-annexe-access.mjs",
+    "code": 0,
+    "output": "PASS: red-line avenue, clear central sweep, yellow gravel link, removed rear and side roads, protected lane junctions and teardrop, and Historic visibility.\nPASS: protected local entrance geometry retained after the whole-annexe loop fit. {\n  primitives: 20744,\n  sha256: '20cf0af817af078c97e9e78af6444db48d7fc6d1fcda925cf4af559c3916b04d'\n}\nPASS: compact quarter-circle entrance edges.\n"
+  },
+  {
+    "file": "test-performance.mjs",
+    "code": 0,
+    "output": "PASS: indexed collisions match full scans across all layouts and padded boundaries; idle and distant collision work skipped; refreshed obstacles and cached-shadow invalidation.\n"
+  },
+  {
+    "file": "test-aerial-performance.mjs",
+    "code": 0,
+    "output": "PASS: shared tree buffers, colours and placement; distance detail and hysteresis; 9126 static meshes compiled into 1374 batches; all layout surfaces retained; cached transforms and dynamic labels; 490868 default-view tree triangles.\n"
+  },
+  {
+    "file": "test-building-detail.mjs",
+    "code": 0,
+    "output": "PASS: 2592 textured windows; close geometry and all layouts preserved; atlas pixels and rotated placement; viewport/zoom detail with hysteresis; static shadows, structural walls and independent trees.\n"
+  },
+  {
+    "file": "test-outhouse.mjs",
+    "code": 0,
+    "output": "PASS: 1066 roof samples, red-circle registration, exposed boarding, gable lighting, road clearance, three camera starts, walkable approach and shared-layout collisions.\n"
+  },
+  {
+    "file": "test-willows.mjs",
+    "code": 0,
+    "output": "PASS: The Willows exact KML Point, 960 roof samples, hollow bays, walking, distant aerial pan, layout fitting, selection and all four visibility states.\n"
+  },
+  {
+    "file": "test-building-photos.mjs",
+    "code": 0,
+    "output": "PASS: precompiled building metadata and roof selection match the source scene.\nPASS: 34 buildings, every named location, bundled photos, roof picking before/after batching and LOD, empty ground and layout visibility (60824 selection triangles).\n"
+  }
+]

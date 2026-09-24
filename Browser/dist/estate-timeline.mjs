@@ -127,6 +127,7 @@ export function prepareEstateTimeline(THREE,exterior,layouts){
  // the Phase 1 description; all other road dates have explicit Ward dates rows.
  for(const road of layouts.roads.children){const section=roadSection(road.name);if(!section)throw new Error('Unmapped road: '+road.name);tag(road,section);}
  tag(layouts.roads.getObjectByName('Vivienne Smith Lane eastern continuation'),'Modern site context');
+ tag(layouts.roads.getObjectByName('Parsons Lane northern modern endpoint'),'Modern site context');
  // Grounds follow their associated estate section. Individual ribbons and
  // ground meshes get separate parents before material batching takes place.
  for(const object of [...layouts.historicRoads.children]){

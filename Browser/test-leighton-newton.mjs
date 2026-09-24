@@ -9,10 +9,22 @@ import {leightonProtected} from './artifacts/leighton-scope.mjs';
 import {createAerialLayouts} from './dist/aerial-layouts.mjs';
 globalThis.document={createElement:()=>({getContext:()=>({fillRect(){},fillText(){},strokeText(){},measureText(t){return {width:t.length*16}}})})};
 const e=createEscapeExterior(THREE,1.5),a=e.annexe,g=a.userData.leightonNewton,before=JSON.parse(readFileSync(new URL('../Research/leighton-newton/protected-before.json',import.meta.url)));
-assert.deepEqual(leightonProtected(THREE,e.model),before.geometry,'Every primitive outside Leighton/Newton remains unchanged');assert.deepEqual(a.userData.wards['leighton-newton'].userData.ranges,before.ranges,'Approved L placement and dimensions retained');
+assert.deepEqual(a.userData.wards['leighton-newton'].userData.ranges,before.ranges,'Approved L placement and dimensions retained');
 a.updateMatrixWorld(true);const obstacles=exteriorObstacles(THREE,e.model),ray=new THREE.Raycaster();
 for(const o of g.userData.openings){const p=new THREE.Vector3(o.x,o.y,o.z),direction=new THREE.Vector3(Math.sin(o.r),0,Math.cos(o.r));p.addScaledVector(direction,.5);ray.set(g.localToWorld(p),direction.negate().transformDirection(g.matrixWorld));const hit=ray.intersectObject(a,true)[0];assert(hit?.object.isInstancedMesh,'Each photographed window remains exposed '+JSON.stringify(o));}
+// Sample both the central sash bar and a pane, on both floors.
+for(const o of g.userData.openings)for(const [dy,color] of [[0,0xe3e6d9],[o.h/16,0x324745]]){
+ const p=new THREE.Vector3(o.x,o.y+dy,o.z),normal=new THREE.Vector3(Math.sin(o.r),0,Math.cos(o.r));p.addScaledVector(normal,.5);
+ ray.set(g.localToWorld(p),normal.negate().transformDirection(g.matrixWorld));
+ assert.equal(ray.intersectObject(a,true)[0]?.object.material.color.getHex(),color,'Both floors have exposed pale sash bars and matching glass');
+}
+assert.deepEqual(leightonProtected(THREE,e.model),before.geometry,'Every primitive outside Leighton/Newton remains unchanged');
 for(const o of g.children.filter(o=>o.userData.orientedCollision)){const p=o.getWorldPosition(new THREE.Vector3());assert(obstacles.some(b=>obstacleContains(b,p.x,p.z,0)),o.name+' has walking collisions');}
+// Sample the marked footprint in the ward's own frame, including its two
+// joins and the lawn reopened by removal of the former middle projection.
+const solidAt=(x,z)=>{const p=g.localToWorld(new THREE.Vector3(x*ANNEXE_MAP_SCALE,1,z*ANNEXE_MAP_SCALE));return obstacles.some(o=>obstacleContains(o,p.x,p.z,.05));};
+for(const [x,z] of [[32.2,-53.8],[38.8,-53.8],[32.2,-46.2],[38.8,-46.2],[35.5,-46],[39,-50]])assert(solidAt(x,z),'Corner block and both wall joins collide '+[x,z]);
+for(const [x,z] of [[26,-47],[29,-47],[31,-47],[31.5,-52],[35.5,-54.5]])assert(!solidAt(x,z),'Removed middle bay and lawn beside corner remain walkable');
 for(const name of ['leighton-newton-inner','leighton-newton-outer']){const v=ANNEXE_VIEWS[name];assert(!obstacles.some(o=>obstacleContains(o,v.position[0],v.position[2],.25)),name+' walking start is clear');}
 for(const o of g.children.filter(o=>o.name.includes('cross gable slate roof'))){const n=o.geometry.attributes.normal;for(let i=0;i<n.count;i++)assert(n.getY(i)>0,'Cross gable roof faces upward');}
 const walk=g.localToWorld(new THREE.Vector3(31.8*ANNEXE_MAP_SCALE,1.8,-36*ANNEXE_MAP_SCALE));assert(!obstacles.some(o=>obstacleContains(o,walk.x,walk.z,.25)),'Sheltered veranda walk remains clear');

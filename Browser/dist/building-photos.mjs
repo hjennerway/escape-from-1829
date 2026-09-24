@@ -1,7 +1,9 @@
+import {createPhotoLightbox} from './photo-lightbox.mjs';
 // Remembers a hover so the pointer can cross the map to the scroll panel.
 // A click/tap pins it; dragging and multi-touch never select a building.
 export function bindBuildingPhotos({canvas,camera,selection,glow,document:doc=document}){
  canvas.tabIndex=0;
+ const lightbox=createPhotoLightbox(doc);
  const panel=doc.createElement('section');panel.id='buildingPhotos';panel.hidden=true;panel.setAttribute('aria-labelledby','buildingPhotoTitle');
  panel.innerHTML='<header class="building-photo-heading"><div><p class="building-photo-eyebrow">EXPLORE THE ESTATE</p><h2 id="buildingPhotoTitle"></h2><p id="buildingPhotoCount" role="status" aria-live="polite"></p></div><button id="closeBuildingPhotos" type="button" aria-label="Close building photos" title="Close building photos (Esc)">×</button></header><div id="buildingPhotoList" tabindex="0" role="region" aria-label="Building photographs"></div><p id="buildingPhotoHint"></p>';
  const label=doc.createElement('div');label.id='buildingHoverLabel';label.hidden=true;label.setAttribute('aria-hidden','true');doc.body.append(panel,label);
@@ -9,6 +11,7 @@ export function bindBuildingPhotos({canvas,camera,selection,glow,document:doc=do
  let active=null,pinned=false,pending=null,suspended=false,lastPick=0,focusBefore=null;
  const pointers=new Map();
  function close({restoreFocus=false}={}){
+  lightbox.close();
   active=null;pinned=false;pending=null;glow.set(null);panel.hidden=true;label.hidden=true;canvas.style.cursor='';doc.body.classList.remove('building-photos-open');
   if(restoreFocus){if(focusBefore?.isConnected)focusBefore.focus({preventScroll:true});else canvas.focus({preventScroll:true});}
  }
@@ -28,8 +31,9 @@ export function bindBuildingPhotos({canvas,camera,selection,glow,document:doc=do
   if(!entry.photos.length){const empty=doc.createElement('p');empty.className='building-photo-empty';empty.textContent='No photographs of this building have been added yet.';list.append(empty);}
   photos.forEach((photo,index)=>{
    if(index===entry.photos.length&&entry.contextPhotos?.length){const heading=doc.createElement('h3');heading.textContent='Nearby / wider site views';list.append(heading);}
-   const figure=doc.createElement('figure'),link=doc.createElement('a'),img=doc.createElement('img'),caption=doc.createElement('figcaption');
-   link.href=photo.src;link.target='_blank';link.rel='noopener';link.setAttribute('aria-label',`Open photograph: ${photo.caption} (new tab)`);
+   const figure=doc.createElement('figure'),link=doc.createElement('button'),img=doc.createElement('img'),caption=doc.createElement('figcaption');
+   link.type='button';link.className='building-photo-open';link.setAttribute('aria-label',`Open photograph: ${photo.caption}`);link.setAttribute('aria-haspopup','dialog');
+   link.addEventListener('click',()=>{select(entry,true);pending=null;label.hidden=true;lightbox.show(entry,index,link);});
    img.src=photo.src;img.alt=photo.caption;img.loading=index===0?'eager':'lazy';img.decoding='async';
    img.addEventListener('error',()=>{const fallback=doc.createElement('span');fallback.className='building-photo-unavailable';fallback.textContent='Photograph unavailable';link.replaceWith(fallback);},{once:true});
    caption.textContent=photo.caption;link.append(img);figure.append(link,caption);list.append(figure);
@@ -74,7 +78,7 @@ export function bindBuildingPhotos({canvas,camera,selection,glow,document:doc=do
  picker.addEventListener('toggle',()=>{if(picker.open)for(const entry of selection.entries)entry.photoButton.disabled=!selection.isVisible(entry);});
  doc.addEventListener('pointerdown',e=>{if(!picker.contains(e.target))picker.open=false;});
  doc.addEventListener('keydown',e=>{if(e.key==='Escape'&&picker.open){picker.open=false;summary.focus();}});
- return {close,select,get active(){return active;},get pinned(){return pinned;},
+ return {close,select,get active(){return active;},get pinned(){return pinned;},get lightboxOpen(){return lightbox.open;},
   update(now=performance.now()){
    if(picker.open)for(const entry of selection.entries)entry.photoButton.disabled=!selection.isVisible(entry);
    if(active&&!selection.isVisible(active))close();

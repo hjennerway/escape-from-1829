@@ -82,7 +82,7 @@ for(const historic of [true,false])for(const modern of [true,false]){
 }
 layouts.setVisible('modern',true);
 const oaks=originalTrees.filter(tree=>tree.userData.oakTree);
-assert.equal(oaks.length,25);assert(oaks.every(visible),'Preserve every KML oak, including Oak1 and Oak2 beside the car park');
+assert.equal(oaks.length,34);assert(oaks.every(visible),'Preserve every KML oak, including Oak1 and Oak2 beside the car park');
 let toggle;
 bindTreeToggle(exterior,{addEventListener(type,handler){toggle=handler;}});
 toggle({code:'KeyT',preventDefault(){}});

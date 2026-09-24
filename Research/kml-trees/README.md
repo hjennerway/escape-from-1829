@@ -1,5 +1,29 @@
 # KML tree and lamp placement
 
+## Oak22–Oak30 and Pine14 (later September 24 import)
+
+`1829-12.kml` preserves the supplied `1829 (12).kml` byte-for-byte.
+Only ten new Point locations are added: nine oaks, Oak22–Oak30, and Pine14.
+The export also repeats the earlier Oak22 and relabels an existing Oak16 as
+Oak23 at exactly the same coordinates. Those existing locations are not
+duplicated or renamed. The new Oak22 is distinct from the earlier Oak22.
+There are now 58 mapped trees: 34 oaks, 14 pines, two beeches and eight willows.
+
+Longitude/latitude use the existing earthToScene registration. Altitudes remain
+source metadata, with trunks on flat ground. The nine oaks reuse the 22-unit oak
+and Pine14 reuses the 24-unit pine. New points are appended so earlier rotations
+and placements remain unchanged. All additions use the shared Trees layer in
+Historic, Modern and every timeline period, with the Trees toggle and trunk
+collisions. Browser sources and the local compiled aerial asset are updated;
+Unity and Blender exports are unchanged.
+
+The exact-point, shared-buffer, visibility, collision and all-period checks
+pass. The source/compiled comparison and browser timeline checks pass, as do
+new-tree previews in both modes. Jarman and Leighton preservation checks exclude
+only these ten new locations and retain their existing geometry baselines.
+Validation logs and 1829/2021 previews use `Browser/artifacts/kml-12-`.
+
+
 ## Willow planting and surviving concrete lamps (September 24)
 
 `1829-11.kml` preserves the supplied `1829 (11).kml` byte-for-byte. Import only
