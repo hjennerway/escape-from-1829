@@ -1,0 +1,27 @@
+{
+  "rearWallMapZ": -54.35,
+  "previousRearWallMapZ": -47.6,
+  "additionalShiftMetres": 7.089,
+  "totalDepthFactor": 1.43125,
+  "referenceViewport": [
+    1099,
+    841
+  ],
+  "yellowGuideY": 642,
+  "frontAndRootUnchanged": true,
+  "preservedFrontPrimitives": 16365,
+  "preservedRearBlockPrimitives": 3011,
+  "browserChecks": 59,
+  "suite": "passed",
+  "compiledAndTimeline": "passed",
+  "sourceAndCompiledVisualChecks": "passed",
+  "compiledSourceCurrent": true,
+  "exportsUpdated": [
+    "Browser source",
+    "Generated aerial model"
+  ],
+  "exportsUnchanged": [
+    "Unity",
+    "Blender"
+  ]
+}

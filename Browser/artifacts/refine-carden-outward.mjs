@@ -1,0 +1,4 @@
+import {readFileSync,writeFileSync} from 'node:fs';
+const edit=(p,fn)=>{const u=new URL(p,import.meta.url);writeFileSync(u,fn(readFileSync(u,'utf8')));};
+edit('../dist/annexe-carden-detail.mjs',s=>s.replace("const wing={x0:20.3,x1:29.17,z0:-30,z1:-8.1,eave:12.4,rise:3.2};","const wing={x0:20.3,x1:29.17,z0:-21,z1:towerBack,eave:12.4,rise:3.2};").replace(" polygonWall(sideFootprint,4.7,'Carden stepped low side range brick walls');"," polygonWall(sideFootprint,4.7,'Carden stepped low side range brick walls');\n wall(24.735,2.35,-24,8.87,4.7,12,'Carden conservatory low rear link brick walls');\n hip(24.735,-24,8.87,12,4.7,1.9,'Carden conservatory low rear link slate roof');"));
+edit('../test-annexe-carden-correction.mjs',s=>s.replace("assert.equal(wing.z0,points[0][1]);","assert(wing.z0<points[4][1]&&wing.z0>points[0][1],'Gabled section overlaps the conservatory join');"));

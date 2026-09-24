@@ -1,0 +1,3 @@
+import {readFileSync,writeFileSync} from 'node:fs';
+const url=new URL('./annexe-carden-correction-scope.mjs',import.meta.url);let s=readFileSync(url,'utf8');s=s.replace('cardenCorrectionSnapshot(THREE,annexe)','cardenCorrectionSnapshot(THREE,annexe,{excludeConcurrentJarman=false}={})').replace("if(!o.isMesh)return;","if(!o.isMesh)return;\n  if(excludeConcurrentJarman)for(let p=o;p&&p!==annexe;p=p.parent)if(p.name==='West court front elevation')return;");writeFileSync(url,s);
+const test=new URL('../test-annexe-carden-correction.mjs',import.meta.url);s=readFileSync(test,'utf8').replace('cardenCorrectionSnapshot(THREE,a)','cardenCorrectionSnapshot(THREE,a,{excludeConcurrentJarman:true})');writeFileSync(test,s);

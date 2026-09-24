@@ -1,0 +1,113 @@
+npm notice run test:compiled
+npm notice run node test-precompiled-models.mjs && node test-timeline-browser.mjs
+Checking aerial?models=source
+Checking aerial?models=compiled
+Checking aerial?models=compiled&buildingDetail=full&view=front
+Checking aerial
+Browser: Failed to load resource: the server responded with a status of 404 (Not Found)
+Checking aerial
+Checking aerial
+PASS: compiled estate, shadows, grass shaders, exact draw counts, tree/layout controls, orbit, portrait, full detail and missing/incompatible/damaged model fallback.
+{
+  "source": {
+    "mode": "procedural",
+    "milliseconds": 2222.5,
+    "triangles": 714943,
+    "calls": 2845,
+    "levels": [
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      1,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      1,
+      1,
+      2,
+      2,
+      1,
+      1,
+      1,
+      2,
+      2,
+      1
+    ],
+    "readyMilliseconds": 9419.306199999999
+  },
+  "compiled": {
+    "mode": "compiled",
+    "milliseconds": 1475.199999999255,
+    "triangles": 714943,
+    "calls": 2845,
+    "levels": [
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      1,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      1,
+      1,
+      2,
+      2,
+      1,
+      1,
+      1,
+      2,
+      2,
+      1
+    ],
+    "readyMilliseconds": 9652.874200000002
+  },
+  "identicalScreenshot": false,
+  "pixels": {
+    "significantFraction": 0.00016857142857142857,
+    "meanChannelError": 0.05177476190476191
+  },
+  "fullDetail": {
+    "mode": "compiled",
+    "milliseconds": 903.8999999985099,
+    "triangles": 399679,
+    "calls": 476,
+    "readyMilliseconds": 4972.758099999999
+  }
+}
+PASS: every timeline stop in source/compiled pages, descriptions, URL reload/navigation, keyboard/endpoints, tree focus, selection, mobile reset and live walking collision refresh.

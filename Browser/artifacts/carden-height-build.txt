@@ -1,0 +1,20 @@
+npm notice run build:models
+npm notice run node build-models.mjs
+{
+  "format": 1,
+  "revision": "160",
+  "sourceHash": "68362c90c4d5d3c89f227c5b5f168c4ccb1defdadce707695ab7f29c81e04dd3",
+  "file": "aerial-44e96d92415f8503c91f.bin.gz",
+  "bytes": 12620263,
+  "uncompressedBytes": 108983304,
+  "sha256": "44e96d92415f8503c91fbd8d5d0ad2cef5abd70276a4886fb5cb9289c005f0f4",
+  "stats": {
+    "revision": "160",
+    "buildMilliseconds": 1002.8000000007451,
+    "windows": 2764,
+    "geometries": 10374,
+    "materials": 551,
+    "textures": 49
+  },
+  "totalSeconds": 13.2
+}

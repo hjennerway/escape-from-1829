@@ -1,0 +1,20 @@
+{
+  "depthFactor": 1.15,
+  "rearShiftMetres": 3.781,
+  "frontAndRootUnchanged": true,
+  "preservedFrontPrimitives": 16365,
+  "preservedRearBlockPrimitives": 3011,
+  "browserChecks": 59,
+  "suite": "passed",
+  "compiledAndTimeline": "passed",
+  "sourceAndCompiledVisualChecks": "passed",
+  "compiledSourceCurrent": true,
+  "exportsUpdated": [
+    "Browser source",
+    "Generated aerial model"
+  ],
+  "exportsUnchanged": [
+    "Unity",
+    "Blender"
+  ]
+}

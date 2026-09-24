@@ -1,0 +1,12 @@
+import assert from 'node:assert/strict';
+import {writeFileSync,copyFileSync} from 'node:fs';
+import * as THREE from '../dist/vendor/three.module.js';
+import {createEscapeExterior} from '../dist/escape-exterior.mjs';
+import {cardenCorrectionSnapshot} from './annexe-carden-correction-scope.mjs';
+globalThis.document={createElement:()=>({getContext:()=>({fillRect(){}})})};
+const {annexe}=createEscapeExterior(THREE,1.5);
+assert(annexe.getObjectByName('East low canted bay walls'),'Capture only the pre-correction scene');
+const dir=new URL('../../Research/carden-picton/',import.meta.url);
+writeFileSync(new URL('correction-protected-geometry.json',dir),JSON.stringify(cardenCorrectionSnapshot(THREE,annexe),null,2)+'\n');
+copyFileSync(new URL('../../Research/annexe-photo-placement/protected-front-local.json',import.meta.url),new URL('front-before-correction.json',dir));
+console.log('Saved pre-correction protected geometry.');

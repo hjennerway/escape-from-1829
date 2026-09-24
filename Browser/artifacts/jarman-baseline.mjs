@@ -1,0 +1,10 @@
+import {mkdirSync,writeFileSync,copyFileSync} from 'node:fs';
+import * as THREE from '../dist/vendor/three.module.js';
+import {createEscapeExterior} from '../dist/escape-exterior.mjs';
+import {jarmanProtected} from './jarman-scope.mjs';
+globalThis.document={createElement:()=>({getContext:()=>({fillRect(){},clearRect(){},fillText(){},strokeText(){},measureText(t){return {width:t.length*16}}})})};
+const dir=new URL('../../Research/jarman/',import.meta.url);mkdirSync(dir,{recursive:true});
+const e=createEscapeExterior(THREE,16/9);
+writeFileSync(new URL('protected-geometry.json',dir),JSON.stringify(jarmanProtected(THREE,e.model),null,2)+'\n');
+for(const name of ['img1-loc.png','img1.jpg','jarman3.jpg'])copyFileSync('C:/Users/Harry/Downloads/1829/jarman/'+name,new URL(name,dir));
+console.log('Captured all estate geometry outside the marked frontage.');

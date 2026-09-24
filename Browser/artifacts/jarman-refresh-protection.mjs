@@ -1,0 +1,10 @@
+import assert from 'node:assert/strict';
+import {copyFileSync,writeFileSync} from 'node:fs';
+import * as THREE from '../dist/vendor/three.module.js';
+import {createEscapeExterior} from '../dist/escape-exterior.mjs';
+import {legacyExterior} from './jarman-compare.mjs';
+import {jarmanProtected} from './jarman-scope.mjs';
+const original=jarmanProtected(THREE,legacyExterior(THREE,16/9).model),current=jarmanProtected(THREE,createEscapeExterior(THREE,16/9).model);
+assert.deepEqual(current,original,'Independent legacy/current construction has identical geometry outside Jarman');
+copyFileSync(new URL('../../Research/jarman/protected-geometry.json',import.meta.url),new URL('../../Research/jarman/initial-estate-snapshot.json',import.meta.url));
+writeFileSync(new URL('../../Research/jarman/protected-geometry.json',import.meta.url),JSON.stringify(original,null,2)+'\n');

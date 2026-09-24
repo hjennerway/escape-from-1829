@@ -1,0 +1,13 @@
+{
+  "sourceHash": "22530798846268fe03836cf85de97532e43d49fe7789a15e9d1d9e461252cff4",
+  "compiledFile": "aerial-c31a56bfeb22a03b9917.bin.gz",
+  "browserChecks": 61,
+  "preservedPrimitives": 21929,
+  "movedRanges": 13,
+  "shiftMapUnits": 7,
+  "shiftSceneMetres": 7.35100052458175,
+  "sourceCompiledComparison": "passed",
+  "timeline": "passed with isolated screenshot output",
+  "frontageFingerprint": "unchanged",
+  "preview": "annexe-front-link-final-compiled-front.png"
+}

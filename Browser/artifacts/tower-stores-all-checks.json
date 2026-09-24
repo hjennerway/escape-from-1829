@@ -1,0 +1,250 @@
+[
+  {
+    "file": "test.mjs",
+    "status": 0
+  },
+  {
+    "file": "test-escape-routes.mjs",
+    "status": 0
+  },
+  {
+    "file": "test-opening-wall.mjs",
+    "status": 0
+  },
+  {
+    "file": "test-estate-periods.mjs",
+    "status": 0
+  },
+  {
+    "file": "test-game.mjs",
+    "status": 0
+  },
+  {
+    "file": "test-security-guard.mjs",
+    "status": 0
+  },
+  {
+    "file": "test-interior-architecture.mjs",
+    "status": 0
+  },
+  {
+    "file": "test-interior-lights.mjs",
+    "status": 0
+  },
+  {
+    "file": "test-east-forward-end.mjs",
+    "status": 0
+  },
+  {
+    "file": "test-front-inside-corners.mjs",
+    "status": 0
+  },
+  {
+    "file": "test-redesmere-garden.mjs",
+    "status": 0
+  },
+  {
+    "file": "test-laundry.mjs",
+    "status": 0
+  },
+  {
+    "file": "test-escape-exterior.mjs",
+    "status": 0
+  },
+  {
+    "file": "test-west-refinement.mjs",
+    "status": 0
+  },
+  {
+    "file": "test-water-tower.mjs",
+    "status": 0
+  },
+  {
+    "file": "test-church-front.mjs",
+    "status": 0
+  },
+  {
+    "file": "test-tower-buildings.mjs",
+    "status": 0
+  },
+  {
+    "file": "test-pharmacy.mjs",
+    "status": 0
+  },
+  {
+    "file": "test-irby-ashley.mjs",
+    "status": 0
+  },
+  {
+    "file": "test-irby-roads.mjs",
+    "status": 0
+  },
+  {
+    "file": "test-grafton-edge.mjs",
+    "status": 0
+  },
+  {
+    "file": "test-hale-ward.mjs",
+    "status": 0
+  },
+  {
+    "file": "test-estates.mjs",
+    "status": 0
+  },
+  {
+    "file": "test-farndon.mjs",
+    "status": 0
+  },
+  {
+    "file": "test-ward-placement.mjs",
+    "status": 0
+  },
+  {
+    "file": "test-ward-corridors.mjs",
+    "status": 0
+  },
+  {
+    "file": "test-explore.mjs",
+    "status": 0
+  },
+  {
+    "file": "test-explore-input.mjs",
+    "status": 0
+  },
+  {
+    "file": "test-annexe.mjs",
+    "status": 0
+  },
+  {
+    "file": "test-annexe-carden.mjs",
+    "status": 0
+  },
+  {
+    "file": "test-annexe-front-link.mjs",
+    "status": 0
+  },
+  {
+    "file": "test-annexe-kitchen.mjs",
+    "status": 0
+  },
+  {
+    "file": "test-annexe-rear-stretch.mjs",
+    "status": 0
+  },
+  {
+    "file": "test-annexe-os-refinement.mjs",
+    "status": 0
+  },
+  {
+    "file": "test-annexe-photo-placement.mjs",
+    "status": 0
+  },
+  {
+    "file": "test-annexe-outer-front.mjs",
+    "status": 0
+  },
+  {
+    "file": "test-oakmere.mjs",
+    "status": 0
+  },
+  {
+    "file": "test-oakmere-west.mjs",
+    "status": 0
+  },
+  {
+    "file": "test-oakmere-windows.mjs",
+    "status": 0
+  },
+  {
+    "file": "test-annexe-wards.mjs",
+    "status": 0
+  },
+  {
+    "file": "test-churton.mjs",
+    "status": 0
+  },
+  {
+    "file": "test-upton.mjs",
+    "status": 0
+  },
+  {
+    "file": "test-garages-mortuary.mjs",
+    "status": 0
+  },
+  {
+    "file": "test-greenhouses.mjs",
+    "status": 0
+  },
+  {
+    "file": "test-main-admin.mjs",
+    "status": 0
+  },
+  {
+    "file": "test-main-kitchen.mjs",
+    "status": 0
+  },
+  {
+    "file": "test-main-admin-refine2.mjs",
+    "status": 0
+  },
+  {
+    "file": "test-aerial-controls.mjs",
+    "status": 0
+  },
+  {
+    "file": "test-device-location.mjs",
+    "status": 0
+  },
+  {
+    "file": "test-aerial-layouts.mjs",
+    "status": 0
+  },
+  {
+    "file": "test-kml-imports.mjs",
+    "status": 0
+  },
+  {
+    "file": "test-modern-entrance.mjs",
+    "status": 0
+  },
+  {
+    "file": "test-modern-car-park.mjs",
+    "status": 0
+  },
+  {
+    "file": "test-parsons-retrace.mjs",
+    "status": 0
+  },
+  {
+    "file": "test-historic-roads.mjs",
+    "status": 0
+  },
+  {
+    "file": "test-annexe-access.mjs",
+    "status": 0
+  },
+  {
+    "file": "test-performance.mjs",
+    "status": 0
+  },
+  {
+    "file": "test-aerial-performance.mjs",
+    "status": 0
+  },
+  {
+    "file": "test-building-detail.mjs",
+    "status": 0
+  },
+  {
+    "file": "test-outhouse.mjs",
+    "status": 0
+  },
+  {
+    "file": "test-willows.mjs",
+    "status": 0
+  },
+  {
+    "file": "test-building-photos.mjs",
+    "status": 0
+  }
+]
