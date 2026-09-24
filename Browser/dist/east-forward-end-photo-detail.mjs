@@ -23,20 +23,15 @@ export function addEastForwardEndPhotoDetails(THREE,{model,box,mesh,worldUV,bric
   for(const x of [29.15,40.85])box(iron,x,4.43,front+.21,.07,8.8,.07);
   box(brick,centre,.23,front+.035,width,.26,.17);
 
-  // Open grassy verge, low irregular hedge and a slim young tree. Gravel
+  // Open grassy verge, low irregular hedge. Gravel
   // and plain ironwork retain the established circa-1900 grounds treatment.
-  const gravel=material(0x99917b),bark=material(0x655c4c),leaf=material(0x526446);
+  const gravel=material(0x99917b),leaf=material(0x526446);
   box(gravel,centre,.21,44.5,width+.8,.1,1.5);
   for(let i=0;i<58;i++){
     const x=32+i*1.13,z=49+Math.sin(i*2.3)*.24;
     const shrub=mesh(new THREE.IcosahedronGeometry(1,1),leaf,x,.73+Math.sin(i*1.7)*.07,z,true);
     shrub.scale.set(.85,.52,.62);shrub.rotation.y=i*1.9;
   }
-  const treeX=59,treeZ=46.3,trees=model.getObjectByName('Trees');
-  const trunk=mesh(new THREE.CylinderGeometry(.045,.085,3.8,7),bark,treeX,1.9,treeZ,true);trunk.name='East front verge young tree';trees.add(trunk);
-  for(let i=0;i<7;i++){
-    const angle=i*2.4,y=1.7+i*.25;
-    trees.add(rod([treeX,y,treeZ],[treeX+Math.sin(angle)*(.75+i*.04),y+.9,treeZ+Math.cos(angle)*.7],.018,bark));
-  }
+  // The marked bare sapling is removed, including its trunk and every branch.
   model.userData.eastForwardEndPhotoOpenings=model.userData.eastPhotoOpenings.slice(start);
 }

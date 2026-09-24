@@ -1,3 +1,52 @@
+## Churton remaining lawn rim (24 September 2026)
+
+The follow-up annotation exposed the raised lawn slab's front face and cast
+shadow. Replaced it with a flat, non-shadow-casting lawn plane at the same
+surface height. It retains grass texture, received shadows and gravel coverage.
+Close-up visual inspection and the Churton geometry/walking check pass. The
+compiled asset was regenerated and source/compiled checks, including full
+detail, pass. The full browser suite stops at the Jarman preservation snapshot
+mismatch; its baseline was not changed. See `Research/churton-kelsall/README.md`.
+Browser source and local compiled output changed; Unity and Blender exports
+were not regenerated. Logs use `Browser/artifacts/churton-lawn-edge-*`.
+
+## Red-circled entrance props (24 September 2026)
+
+Removed both west Reception ground fittings and the east hedge-side bare sapling
+with all branches from the shared browser builders, in every period. See
+Research/timeline.md. Unity and Blender exports are unchanged.
+
+Entrance/exterior geometry checks pass and the source preview was visually
+checked (Browser/artifacts/red-circled-removed.png). The full suite encountered
+a separate tree-collision assertion during concurrent edits. An initial aerial
+build succeeded, but later source changes invalidated it; subsequent rebuilds
+were rejected because sources changed during compilation. Compiled validation
+therefore remains incomplete. Unrelated assertions were not rebased.
+
+## Churton roadside hedge and paving cleanup (24 September 2026)
+
+Removed the marked church-facing hedge and redundant gravel lane slab whose
+ends protruded below the shared road. See `Research/churton-kelsall/README.md`.
+Source visual inspection confirms both road edges are clear. Existing Churton
+walking/geometry and historic-road checks pass. The full suite was attempted
+and stopped on an unrelated Redesmere tree-layer assertion during concurrent
+scene editing. Source/compiled normal-detail comparison passed, but subsequent
+concurrent edits invalidated the asset at the full-detail check. A final rebuild
+was rejected because source changed during compilation; the development server
+will fall back to the updated source until a stable rebuild completes. Browser
+source changed and earlier local compiled builds succeeded; Unity and Blender
+exports were not regenerated.
+
+## Red-circled main-building trees (24 September 2026)
+
+Removed sixteen marked broadleaves, the west front garden tree and rear
+courtyard birch. Planter beds, shrubs and unmarked trees remain. Removed trees
+consume their original random draws and crown rotations to preserve remaining
+shapes. Their trunks no longer enter walking collisions.
+
+Browser sources and local compiled aerial asset updated; Unity and Blender
+exports unchanged. See Research/main-tree-removal/README.md.
+
 ## Oak31–Oak44 import (24 September 2026)
 
 Imported all fourteen requested Point placemarks from `1829 (13).kml` into
@@ -2496,3 +2545,95 @@ refreshing the values affected by the intentionally removed garden surfaces.
 Validation evidence uses Browser/artifacts/garden-paving-*.
 
 Final validation: the full Browser npm test suite and npm run test:compiled pass.
+
+
+## Aerial location photos — 24 September 2026
+
+Removed the separate Building photos picker. Aerial location links now pin the
+matching catalogue building after the initial timeline is applied, using the
+same white outline and photo panel as a building click. Selection uses the
+original location name so ward aliases retain their correct building even
+when sharing camera views. Landscape destinations have no building selection.
+
+Validation: Browser `npm test`, the catalogue/lightbox tests and
+`test-aerial-location-photos.mjs` pass. The latter is included in `test:photos`
+and checks actual menu navigation, ward aliases, pinned panels, closing and
+landscape destinations. Desktop and mobile screenshots were visually checked
+in `Browser/artifacts/location-selection-*.png`. No model geometry or generated
+models changed; Unity and Blender exports were not regenerated.
+
+## Western Parsons road joins — 24 September 2026
+
+Joined Northern estate boundary to Parsons Lane and North west ward approach
+to Parsons Lane (Upton Lea), matching the two circled gaps in the owner image.
+Local merged asphalt covers the clipped caps and internal kerbs, with rounded
+continuous outer borders. The saved shared-lane and historic centrelines stay
+fixed. Joins follow The Main, the same period group as both historic roads.
+
+The dedicated test scans the full driving width across both old gaps and checks
+period ownership. It and the historic-road checks pass; the source preview was
+visually inspected. The full npm test run stopped at the unrelated Jarman estate
+fingerprint. All remaining suite checks were run separately: Leighton/Newton
+also has a protected-estate fingerprint mismatch, and modern-car-park expects
+13 intersecting trees where current concurrent tree edits leave 12. Those
+baselines were not changed. These failures concern geometry constructed before
+the aerial road layouts are added.
+
+Evidence: Browser/artifacts/west-parsons-suite.log,
+west-parsons-remaining.json, west-parsons-joins.png, west-parsons-build.log and
+west-parsons-compiled.log. Browser sources and the local compiled aerial model
+were updated; Unity and Blender exports were not regenerated.
+
+Final compiled validation passes: source/compiled geometry and image comparison,
+full-detail and fallback loading, every timeline stop, mobile controls and live
+walking collision refresh. The close compiled junction preview was visually
+checked against source in west-parsons-joins-compiled.png.
+
+## Blue-marked west cross-walk and yellow lawn panel — 24 September 2026
+
+Removed the western z=43 cross-walk and z=44 apron cap beside the west front
+wing. Trimmed the adjoining gravel slab to the garden edge so it does not leave
+a narrow exposed paving strip. Removed the redundant `Extended front lawn`
+box outlined in yellow; the estate terrain now supplies that frontage grass.
+The entrance-surface assertion follows the terrain instead of the removed box.
+Changes are made during scene construction, before batching, obstacle creation
+and initial shadow rendering. Browser sources and the local compiled aerial
+model are updated; Unity and Blender exports are unchanged.
+
+Source close view: Browser/artifacts/marked-paving-after.png. Validation evidence:
+marked-paving-suite.log, marked-paving-remaining.json, marked-paving-build.log
+and marked-paving-compiled.log in Browser/artifacts. The full suite stops at the
+Jarman protected-estate snapshot; remaining checks are run separately. Those
+historical estate-wide snapshots are not rebased as part of this surface edit.
+
+Final validation: west refinement and modern entrance checks pass. Compiled/source
+geometry and image comparison, full-detail and fallback loading, every timeline
+stop and live walking collision refresh pass. Of the 32 checks after Jarman,
+30 pass; Leighton/Newton also reports a protected-estate snapshot mismatch and
+modern-car-park reports its previously recorded tree-count mismatch. The full
+suite is therefore not green. The final source close view was visually checked.
+
+## Reconcile scene regression expectations — 24 September 2026
+
+The Jarman and Leighton/Newton protected-estate fingerprints still included
+approved tree, ground-fitting, Churton roadside and west-front paving removals.
+Loading the seven affected model modules from HEAD reproduces both saved
+fingerprints exactly. The reviewed current modules produce a net decrease of
+147 primitives in each scope. Refreshed only those two geometry fingerprints;
+Leighton/Newton placement, explicit architecture checks and collision checks
+remain intact. The audit and before/after values are recorded in
+Browser/artifacts/check-refresh-{before-loader,snapshots,baselines}.mjs and
+check-refresh-audit.json.
+
+The car-park expectation included the deliberately removed broadleaf at
+(98.2,-38). Before/after comparison confirms it is the sole change to the
+intersecting population. The check now asserts the twelve exact remaining
+positions and permanent absence of that tree, while retaining all crown,
+layout visibility, collision, mapped-boundary and oak-preservation assertions.
+This follow-up changes test expectations only; model sources, compiled assets,
+Unity and Blender exports are unchanged.
+
+Validation: the complete Browser `npm test` suite passes, including Jarman,
+Leighton/Newton and modern-car-park. `git diff --check` also passes. Full output:
+Browser/artifacts/check-refresh-suite.log. No rendering source changed in this
+follow-up, so the preceding successful compiled/rendering checks remain relevant.

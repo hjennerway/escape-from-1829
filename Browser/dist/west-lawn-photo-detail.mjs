@@ -1,7 +1,7 @@
 // img18.jpg: westward lawn view beside Reception, located by img18-loc.png.
 // Dimensions and obscured returns are visual estimates, not survey data.
 export const WEST_LAWN_PHOTO_VIEW=Object.freeze({position:[-6,1.8,36.8],target:[-30,5.6,33],fov:53});
-export function addWestLawnPhotoDetails(THREE,{model,box,mesh,worldUV,white,brick,roof,material,hipRoof,sash,iron,includeGroundFittings=true}){
+export function addWestLawnPhotoDetails(THREE,{model,box,mesh,worldUV,white,brick,roof,material,hipRoof,sash,iron}){
   const start=model.userData.eastPhotoOpenings.length;
   const trim=material(0xd2d9d2),archBrick=material(0x80675b);
   // Keep the narrower root recessed behind the main forward wing.
@@ -34,6 +34,6 @@ export function addWestLawnPhotoDetails(THREE,{model,box,mesh,worldUV,white,bric
     box(trim,x,3.1,z,.12,.32,.7);
     for(const y of [3.02,3.1,3.18])box(iron,x+.08,y,z,.04,.025,.56);
   }
-  if(includeGroundFittings)for(const z of [32.5,39])box(iron,-10,.18,z,.65,.06,.8);
+  // The marked west lawn ground fittings are removed in every period.
   model.userData.westLawnPhotoOpenings=model.userData.eastPhotoOpenings.slice(start);
 }

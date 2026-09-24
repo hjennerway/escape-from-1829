@@ -34,7 +34,14 @@ function crownsByTree(){
 }
 const originalCrowns=crownsByTree(),layouts=createAerialLayouts(THREE,exterior);
 const displaced=layouts.carParkTrees.children.filter(tree=>!tree.isInstancedMesh);
-assert.equal(displaced.length,13,'Clear the thirteen remaining intersecting broadleaf trees');
+// The marked tree at (98.2,-38) was permanently removed from both layouts.
+// Assert identities, not only a count, so an omitted or wrongly displaced tree fails.
+const expectedDisplaced=[[8,-84],[14,-64],[17,-91],[26,-98],[28,-64],[35,-84],
+  [42,-64],[44,-91],[53,-98],[62,-84],[71,-91],[80,-98]];
+assert.deepEqual(displaced.map(tree=>[tree.userData.broadleafTree?.x,tree.userData.broadleafTree?.z])
+  .sort((a,b)=>a[0]-b[0]||a[1]-b[1]),expectedDisplaced,'Clear exactly the remaining intersecting broadleaf trees');
+assert(!originalTrees.some(tree=>tree.userData.broadleafTree?.x===98.2&&tree.userData.broadleafTree?.z===-38),
+  'The red-circled east tree stays removed in both layouts');
 assert(!originalTrees.some(tree=>tree.userData.broadleafTree?.x===107&&tree.userData.broadleafTree?.z===-98),
   'The yellow-circled bowling lawn tree is permanently removed');
 assert(displaced.every(tree=>tree.userData.broadleafTree));
@@ -91,4 +98,4 @@ layouts.setVisible('historic',true);layouts.setVisible('modern',false);
 assert(originalTrees.every(tree=>!visible(tree)),'Layout switches must respect the hidden Trees layer');
 toggle({code:'KeyT',preventDefault(){}});assert(originalTrees.every(visible));
 delete globalThis.document;
-console.log(`PASS: 62 exact KML vertices, ${area.toFixed(1)} square units, Modern-only car park, concave boundary, thirteen complete trees and collisions cleared only in Modern, bowling lawn tree removed, all oaks retained.`);
+console.log(`PASS: 62 exact KML vertices, ${area.toFixed(1)} square units, Modern-only car park, concave boundary, ${expectedDisplaced.length} complete trees and collisions cleared only in Modern, bowling lawn tree removed, all oaks retained.`);

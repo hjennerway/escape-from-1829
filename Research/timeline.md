@@ -92,3 +92,10 @@ adds four connected rear roads and paving up to Oakmere's walls. These additions
 including all new borders, appear only at 1915, 1916 and 1938, following the
 Annexe section. This explicit request supersedes the older removed-rear-road
 assumption for the marked areas. Existing through-road dates are unchanged.
+
+## Red-circled entrance objects — 24 September 2026
+
+The subsequent marked screenshot removes the remaining west ground fittings at
+x=-10, z=32.5/39 and the bare east verge sapling at x=59, z=46.3, including
+its seven branches, in every period. This supersedes the earlier retention of
+the western fittings. The surrounding hedge and paving remain.

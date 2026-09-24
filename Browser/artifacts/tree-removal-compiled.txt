@@ -1,0 +1,20 @@
+npm notice run test:compiled
+npm notice run node test-precompiled-models.mjs && node test-timeline-browser.mjs
+Checking aerial?models=source
+Checking aerial?models=compiled
+Checking aerial?models=compiled&buildingDetail=full&view=front
+Checking aerial
+
+{ ready: 'complete', debug: false, frame: undefined, build: undefined }
+node:internal/modules/run_main:107
+    triggerUncaughtException(
+    ^
+
+page.waitForFunction: Timeout 120000ms exceeded.
+    at load (C:\Users\Harry\Documents\_escape-from-1829\Browser\test-precompiled-models.mjs:49:20)
+    at async file:///C:/Users/Harry/Documents/_escape-from-1829/Browser/test-precompiled-models.mjs:92:17 {
+  log: [],
+  name: 'TimeoutError'
+}
+
+Node.js v24.20.0

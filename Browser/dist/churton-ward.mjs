@@ -25,7 +25,7 @@ export function createChurtonWard(THREE,{brick,roof,worldUV,material}){
   ward.position.set(CHURTON_WARD.x,0,CHURTON_WARD.z);ward.rotation.y=CHURTON_WARD.rotation;
   const red=material(0x8c4837),plinth=material(0x665449),frame=material(0xd4d8cb);
   const glass=material(0x68838a,{roughness:.43,metalness:.15}),dark=material(0x303635);
-  const sill=material(0x796657),gravel=material(0x99917b),grass=material(0x667752),hedge=material(0x43583a);
+  const sill=material(0x796657),gravel=material(0x99917b),grass=material(0x667752);
   const batches=new Map(),openings=[],ranges=[];
   function mesh(g,m,x,y,z,name,parent=ward){const o=new THREE.Mesh(g,m);o.position.set(x,y,z);o.name=name;o.castShadow=true;o.receiveShadow=true;parent.add(o);return o;}
   function solid(m,x,y,z,w,h,d,name,parent=ward){const o=mesh(worldUV(new THREE.BoxGeometry(w,h,d),1.7),m,x,y,z,name,parent);o.userData.orientedCollision=true;return o;}
@@ -124,13 +124,14 @@ export function createChurtonWard(THREE,{brick,roof,worldUV,material}){
     for(const side of [-1,1]){mesh(new THREE.CylinderGeometry(.16,.19,.48,10),red,x+side*w*.25,y+2.25,z,'Clay chimney pot');mesh(new THREE.CircleGeometry(.12,10),dark,x+side*w*.25,y+2.495,z,'Open chimney pot').rotation.x=-Math.PI/2;}
   }
   for(const [x,z] of [[-17.9,-13.8],[-17.9,18.8],[21.4,9.2],[21.4,-16.5],[-2.1,18.8]])box(dark,x,2.6,z,.09,5.2,.09);
-  // Gravel follows the estate's existing period treatment; the lawn and low
-  // hedge retain the photographed church-facing setting and open entrances.
+  // Keep the church-facing lawn open. The shared road supplies the lane;
+  // the old rectangular gravel strip protruded beyond its curved edges.
   solid(gravel,0,-.015,0,49,.16,44,'Ward perimeter gravel');
-  solid(grass,1,.085,-25,44,.1,14,'Church-facing lawn');
+  // A flat lawn overlay keeps the gravel masked without a raised, shadowed
+  // front face that looks like a remaining hedge along the road.
+  const lawn=mesh(new THREE.PlaneGeometry(44,14),grass,1,.135,-25,'Church-facing lawn');
+  lawn.rotation.x=-Math.PI/2; lawn.castShadow=false;
   solid(gravel,11.1,.16,-24.7,2.7,.08,15,'Lawn entrance walk');
-  for(const [x,w] of [[-6.5,29],[18.3,10]])solid(hedge,x,.52,-32.3,w,1.0,1.0,'Low lawn hedge');
-  solid(gravel,1,-.005,-36.5,51,.12,6,'Church-side lane');
   solid(gravel,-25,-.01,-5,6,.12,65,'Mast-side access');
   solid(gravel,0,-.01,25,56,.12,6,'Estate-side access');
   const dummy=new THREE.Object3D();

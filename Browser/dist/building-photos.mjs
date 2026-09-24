@@ -66,21 +66,8 @@ export function bindBuildingPhotos({canvas,camera,selection,glow,document:doc=do
  closeButton.addEventListener('click',()=>close({restoreFocus:true}));
  doc.addEventListener('keydown',e=>{if(e.key==='Escape'&&active)close({restoreFocus:panel.contains(doc.activeElement)});});
  doc.defaultView.addEventListener('blur',()=>{pointers.clear();pending=null;label.hidden=true;suspended=false;});
- // An explicit keyboard route complements spatial pointer interaction.
- const picker=doc.createElement('details');picker.id='buildingPhotoPicker';
- const summary=doc.createElement('summary');summary.textContent='Building photos';summary.setAttribute('aria-label','Choose a building to view photographs');picker.append(summary);
- const choices=doc.createElement('div');choices.className='building-photo-choices';
- for(const entry of [...selection.entries].sort((a,b)=>a.name.localeCompare(b.name))){
-  const button=doc.createElement('button');button.type='button';button.textContent=entry.name;
-  button.addEventListener('click',()=>{select(entry,true);focusBefore=summary;picker.open=false;closeButton.focus();});choices.append(button);entry.photoButton=button;
- }
- picker.append(choices);doc.querySelector('#previewNav').append(picker);
- picker.addEventListener('toggle',()=>{if(picker.open)for(const entry of selection.entries)entry.photoButton.disabled=!selection.isVisible(entry);});
- doc.addEventListener('pointerdown',e=>{if(!picker.contains(e.target))picker.open=false;});
- doc.addEventListener('keydown',e=>{if(e.key==='Escape'&&picker.open){picker.open=false;summary.focus();}});
  return {close,select,get active(){return active;},get pinned(){return pinned;},get lightboxOpen(){return lightbox.open;},
   update(now=performance.now()){
-   if(picker.open)for(const entry of selection.entries)entry.photoButton.disabled=!selection.isVisible(entry);
    if(active&&!selection.isVisible(active))close();
    if(!pending||suspended||pinned||now-lastPick<70)return;
    lastPick=now;const pointer=pending;pending=null;const entry=pick(pointer);

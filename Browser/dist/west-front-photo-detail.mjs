@@ -70,8 +70,8 @@ export function addWestFrontPhotoDetails(THREE,{model,box,mesh,worldUV,white,bri
   }
   door(-45.46,38.15,-Math.PI/2);
   sash('west-front-extension-end',-43.2,1.65,43.07,0,2.6,1.45);
-  // One spreading garden tree leaves the upper windows and stairs visible.
-  const bark=material(0x625342),leaf=material(0x4d713d),lawn=material(0x667b49);
+  // Retain the garden and approach after the marked tree removal.
+  const lawn=material(0x667b49);
   box(lawn,-57.7,.32,34,22.5,.1,17);
   box(material(0x99917b),-46.1,.41,33.5,1.55,.1,18);
   // Railings edge the short approach to the garden's glazed blue entrance.
@@ -80,12 +80,6 @@ export function addWestFrontPhotoDetails(THREE,{model,box,mesh,worldUV,white,bri
     rod([-47.2,1.15,z],[-42.25,1.15,z],.035,stone);
     rod([-47.2,.66,z],[-42.25,.66,z],.027,stone);
     for(const x of [-47.2,-44.8,-42.25])rod([x,.18,z],[x,1.18,z],.04,stone);
-  }
-  const trees=model.getObjectByName('Trees');
-  trees.add(mesh(new THREE.CylinderGeometry(.12,.2,4.5,8),bark,-48.5,2.25,42.5,true));
-  for(let i=0;i<12;i++){
-    const a=i*2.4,crown=mesh(new THREE.IcosahedronGeometry(1,1),leaf,-48.5+Math.sin(a)*1.8,4.7+(i%3)*.35,42.5+Math.cos(a)*2,true);
-    crown.scale.set(1.35,.65,1.4);trees.add(crown);
   }
   model.userData.westFrontPhotoOpenings=model.userData.eastPhotoOpenings.slice(start);
 }

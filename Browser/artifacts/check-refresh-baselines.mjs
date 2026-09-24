@@ -1,0 +1,17 @@
+import assert from 'node:assert/strict';
+import {execFileSync} from 'node:child_process';
+import {readFileSync,writeFileSync} from 'node:fs';
+const run=args=>JSON.parse(execFileSync(process.execPath,args,{encoding:'utf8',windowsHide:true,maxBuffer:1024*1024}));
+const before=run(['--import','./Browser/artifacts/check-refresh-before-loader.mjs','Browser/artifacts/check-refresh-snapshots.mjs']);
+const after=run(['Browser/artifacts/check-refresh-snapshots.mjs']);
+const jarmanPath='Research/jarman/protected-geometry.json',leightonPath='Research/leighton-newton/protected-before.json';
+const jarman=JSON.parse(readFileSync(jarmanPath)),leighton=JSON.parse(readFileSync(leightonPath));
+assert.deepEqual(before.jarman,jarman,'Pre-edit scene must reproduce the saved Jarman baseline exactly');
+assert.deepEqual(before.leighton,leighton.geometry,'Pre-edit scene must reproduce the saved Leighton baseline exactly');
+assert.equal(before.jarman.primitives-after.jarman.primitives,147);
+assert.equal(before.leighton.count-after.leighton.count,147);
+assert.deepEqual(after.displaced,before.displaced.filter(([x,z])=>x!==98.2||z!==-38),'Only the explicitly removed east tree changes the car-park population');
+writeFileSync(jarmanPath,JSON.stringify(after.jarman,null,2)+'\n');
+leighton.geometry=after.leighton;writeFileSync(leightonPath,JSON.stringify(leighton,null,2)+'\n');
+writeFileSync('Browser/artifacts/check-refresh-audit.json',JSON.stringify({before,after},null,2)+'\n');
+console.log('Verified old snapshots, 147 approved removed primitives, and the single car-park tree removal; refreshed geometry fingerprints.');

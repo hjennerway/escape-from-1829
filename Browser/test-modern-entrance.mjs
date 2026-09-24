@@ -13,7 +13,7 @@ const bounds=new THREE.Box3().setFromObject(wall);assert(bounds.min.z>73&&bounds
 const obs=exteriorObstacles(THREE,exterior.model);
 assert(obs.some(o=>obstacleContains(o,-10,FRONT_BOUNDARY.z)),'Moved masonry must block walking');assert(!obs.some(o=>obstacleContains(o,-10,49)),'No obsolete wall collision may remain');
 const surfaces=[];exterior.model.traverseVisible(o=>{if(o.isMesh)surfaces.push(o)});const ray=new THREE.Raycaster();function surfaceAt(x,z){ray.set(new THREE.Vector3(x,40,z),new THREE.Vector3(0,-1,0));return ray.intersectObjects(surfaces,false)[0];}
-for(const x of [-40,30,70])assert.equal(surfaceAt(x,59).object.name,'Extended front lawn','The old outer gravel strip must become lawn');
+for(const x of [-40,30,70])assert.equal(surfaceAt(x,59).object.name,'Estate terrain','The frontage uses continuous terrain without the duplicate lawn panel');
 assert.equal(surfaceAt(-95,59).object.name,'Estate terrain');
 // The eastern hedge must end before the bend crosses the frontage.
 for(const x of [94,96,98,100])assert.equal(surfaceAt(x,FRONT_BOUNDARY.z).object.material.color.getHex(),0x555b5c,'The frontage hedge must not protrude through Vivienne Smith Lane');

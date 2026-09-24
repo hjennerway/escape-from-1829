@@ -1,3 +1,4 @@
+import {WEST_PARSONS_JUNCTIONS} from './west-parsons-junctions.mjs';
 import {ANNEXE_REAR_SURFACES} from './annexe-rear-roads.mjs';
 import {ANNEXE_LOOP_ROAD,ANNEXE_TRIANGLE_APEX,ANNEXE_TRIANGLE_FORK,ANNEXE_FRONT_OUTER_JOIN,IRBY_ANNEXE_APPROACH} from './annexe-loop-road.mjs';
 import {IRBY_ROUNDING_PAVING,IRBY_ROUNDED_ISLAND,IRBY_ROUNDED_KERB} from './irby-junction-rounding.mjs';
@@ -131,6 +132,7 @@ const larktonJunction={name:'Annexe Larkton Parsons open junction',surface:'junc
 // The yellow-marked footpath is gravel; vehicular approaches remain asphalt.
 export const HISTORIC_GRAVEL=Object.freeze([ANNEXE_GRAVEL_PATH]);
 export const HISTORIC_PAVING=Object.freeze([
+ ...WEST_PARSONS_JUNCTIONS,
  ...ANNEXE_REAR_SURFACES,
  ...IRBY_ROUNDING_PAVING,
  ESTATES_SERVICE_COURT,

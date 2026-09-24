@@ -9,10 +9,12 @@ const exterior=createEscapeExterior(THREE,4/3),{model,trees}=exterior;
 assert.equal(trees.visible,true,'the tree layer starts visible');
 assert.equal(model.getObjectByName('Garden planters'),undefined,'the planter layer is removed');
 assert.equal(model.getObjectByName('Redesmere garden timber bed'),undefined,'timber planters are removed');
-assert(trees.getObjectByName('East front verge young tree'),'the young verge tree belongs to the tree layer');
-// Probe the general trees and the separately modelled west garden and birch trunks.
-const treeCentres=[[-25.5,46.7],[-48.5,42.5],[26,-43],[13,61],[-13,62]];
+assert.equal(trees.getObjectByName('East front verge young tree'),undefined,'the marked young verge tree is removed');
+// Probe retained roadside trees and mature front-lawn trees.
+const treeCentres=[[-90,-44],[-90,4],[13,61],[-13,62]];
 let obstaclesAfterToggle=exteriorObstacles(THREE,model);
+for(const [x,z] of [[-25.5,46.7],[-48.5,42.5],[26,-43]])
+  assert(!obstaclesAfterToggle.some(o=>obstacleContains(o,x,z)),'removed marked trees leave no trunk collision');
 function checkTreeCollisions(expected){
   for(const [x,z] of treeCentres)assert.equal(obstaclesAfterToggle.some(o=>obstacleContains(o,x,z)),expected,'tree collisions follow visibility');
 }

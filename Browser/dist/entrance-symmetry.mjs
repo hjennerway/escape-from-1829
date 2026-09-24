@@ -15,7 +15,7 @@ export function addEastEntranceMirror(THREE,helpers){
     door:(x,z,r=0,bottom=0)=>door(-x,z,-r,bottom)
   };
   // The two marked east lawn fittings are omitted at every timeline stop.
-  addWestLawnPhotoDetails(THREE,{...reflected,includeGroundFittings:false});
+  addWestLawnPhotoDetails(THREE,reflected);
   model.userData.eastLawnPhotoOpenings=model.userData.westLawnPhotoOpenings;
   addEntranceWestPhotoDetails(THREE,reflected);
   model.userData.entranceEastPhotoOpenings=model.userData.entranceWestPhotoOpenings;

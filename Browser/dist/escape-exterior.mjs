@@ -101,11 +101,11 @@ export function createEscapeExterior(THREE,aspect){
   // Remove the old full-width outer gravel drive; retain the estate-side access lanes.
   legacyRoad(gravel,-79,.09,-2,10,.1,133);legacyRoad(gravel,79+OUTER_SHIFT,.09,0,9,.1,130);
   legacyRoad(gravel,OUTER_SHIFT/2,.11,-46,149+OUTER_SHIFT,.1,8);
-  const frontLawn=mesh(new THREE.BoxGeometry(151+OUTER_SHIFT,.1,FRONT_BOUNDARY.z-FRONT_BOUNDARY.oldZ+1.5),grass,OUTER_SHIFT/2,.08,(FRONT_BOUNDARY.oldZ+FRONT_BOUNDARY.z+1.5)/2);frontLawn.name='Extended front lawn';
+  // The shared terrain supplies the frontage lawn without a duplicate raised panel.
   const approachEnd=FRONT_BOUNDARY.z+.5;
   const frontApproach=mesh(new THREE.BoxGeometry(3.2,.1,approachEnd-17),path,0,.13,(approachEnd+17)/2);frontApproach.name='Extended Reception approach';
   // The entrance lawns reach the boundary wall; cross-walks stop at the wings.
-  for(const [left,right] of [[-57,-29],[29,45]])box(path,(left+right)/2,.13,43,right-left,.1,2);
+  box(path,37,.13,43,16,.1,2);
   // Extend the Redesmere end paving to the west apron at its existing z=44 axis.
   const gardenWalkEnd=69+OUTER_SHIFT-3.5;
   box(path,(45+gardenWalkEnd)/2,.16,44,gardenWalkEnd-45,.12,2);
@@ -290,7 +290,12 @@ export function createEscapeExterior(THREE,aspect){
   refineFrontInsideCorners(THREE,{model,batches,box,mesh,worldUV,white,brick:photoBrick,roof,material,details});
   // Open rear approaches connect the gaps between the arms to the back road.
   for(const x of [-23,23]){box(gravel,x,.18,-20,32,.1,45);box(grass,x<0?-17:x-6,.26,-9,9,.1,11);}
-  for(const [x,w] of [[-64,17],[69+OUTER_SHIFT,7]]){box(gravel,x,.17,12,w,.12,62);box(path,x,.16,44,w,.12,2);}
+  // End the western apron at the garden edge, without the thin exposed cross-strip.
+  box(gravel,(-72.5-68.95)/2,.17,12,3.55,.12,62);
+  box(gravel,(-68.95-55.5)/2,.17,11.75,13.45,.12,61.5);
+  box(gravel,69+OUTER_SHIFT,.17,12,7,.12,62);
+  // Retain only the eastern end paving; the marked western cross-walk is removed.
+  box(path,69+OUTER_SHIFT,.16,44,7,.12,2);
   box(gravel,45+OUTER_SHIFT/2,.18,-12,17+OUTER_SHIFT,.12,39);
   box(gravel,40,.18,-36,7,.12,18);
   box(path,courtyardPassage.x,.2,13,courtyardPassage.width,.1,34);
@@ -299,7 +304,20 @@ export function createEscapeExterior(THREE,aspect){
   // Broadleaf crowns cast shadows across the front lawn and site edges.
   const bark=material(0x5a4e3d),leaves=[material(0x43583a),material(0x566944),material(0x657448)];
   const crowns=leaves.map(mat=>({mat,items:[],nextRotation:0}));
-  function tree(x,z,size=1){const trunk=mesh(new THREE.CylinderGeometry(.18*size,.3*size,4.5*size,6),bark,x,2.25*size,z);trees.add(trunk);
+  // Red-circled planting removal, September 24. Keep random draws and crown
+  // rotation indices stable so every unmarked tree retains its exact shape.
+  const removedTrees=new Set([
+    [-100,-84],[-91,-91],[-82,-98],[-73,-84],[-64,-91],
+    [-65,-35],[-72,-23],[-72,-10],[-72,29],[-25.5,46.7],
+    [98.2,-38],[122.2,-47],[122.2,-35],
+    [122.2,25],[122.2,37],[122.2,49]
+  ].map(([x,z])=>`${x},${z}`));
+  function tree(x,z,size=1){
+    if(removedTrees.has(`${x},${z}`)){
+      for(let i=0;i<5;i++){for(let n=0;n<4;n++)random();crowns[i%3].nextRotation++;}
+      return null;
+    }
+    const trunk=mesh(new THREE.CylinderGeometry(.18*size,.3*size,4.5*size,6),bark,x,2.25*size,z);trees.add(trunk);
     const treeCrowns=[];
     for(let i=0;i<5;i++){
       const crown={x:x+(random()-.5)*3*size,y:(4.5+random()*2)*size,z:z+(random()-.5)*3*size,s:(1.7+random())*size};

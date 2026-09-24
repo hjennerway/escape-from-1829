@@ -386,3 +386,18 @@ new dependency. After any relevant building or adjacent-road edit, refresh the
 input outlines before regenerating; the input records the approved geometry at
 this revision. Browser source and compiled aerial assets are updated; Unity
 and Blender exports are unchanged.
+
+## Western Parsons junctions — 24 September 2026
+
+The owner's west-parsons-marked.png identifies the Northern estate boundary
+connection to Parsons Lane and North west ward approach to Parsons Lane
+(Upton Lea). The saved shared lanes and historic centrelines remain fixed.
+Local merged asphalt bridges the clipped road ends; continuous 0.6-metre borders
+follow the exposed edges with rounded corners. Both joins and borders follow
+The Main, matching the adjoining historic roads, so they disappear together.
+
+Browser/build-west-parsons-junctions.py regenerates the outlines using Shapely 2
+from west-parsons-input.json, which records the four existing road centrelines
+and the nearest lane connection points. Refresh that input after moving these
+roads. Browser sources and compiled aerial models change; Unity and Blender
+exports remain unchanged.
