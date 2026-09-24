@@ -32,6 +32,7 @@ for(const [index,group] of courts.entries()){
  }
  const host=e.annexe.userData.ranges.find(b=>b.name===(index?'East':'West')+' court front range');
  assert(!e.annexe.userData.annexeOpenings.some(o=>o.rotation===0&&Math.abs(o.z-host.z-host.d/2-.035)<.01&&Math.abs(o.x-host.x)<host.w/2),'Old front and return windows cannot overlap the copied elevation');
+ if(index===0)continue; // Jarman now follows its own supplied photograph.
  // Cross-gable geometry is shared with the red-marked source design.
  const originals=groups[index].children.filter(o=>/Outer (decorated brick gable|cross-gable slate roof|circular gable vent|circular vent surround)/.test(o.name));
  const copies=group.children.filter(o=>/Court (decorated brick gable|cross-gable slate roof|circular gable vent|circular vent surround)/.test(o.name));

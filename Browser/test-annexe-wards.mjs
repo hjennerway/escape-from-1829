@@ -1,8 +1,9 @@
+import {ANNEXE_REAR_SHIFT} from './dist/annexe-rear-stretch.mjs';
 import assert from 'node:assert/strict';
 import {readFileSync} from 'node:fs';
 import * as THREE from './dist/vendor/three.module.js';
 import {createEscapeExterior} from './dist/escape-exterior.mjs';
-import {ANNEXE_WARDS,ANNEXE_WARD_VIEWS,ANNEXE_WARD_WALKS} from './dist/annexe.mjs';
+import {ANNEXE_MAP_SCALE,ANNEXE_WARDS,ANNEXE_WARD_VIEWS,ANNEXE_WARD_WALKS} from './dist/annexe.mjs';
 import {createAerialLayouts} from './dist/aerial-layouts.mjs';
 import {createWalker,exteriorObstacles,obstacleContains} from './dist/explore-controls.mjs';
 
@@ -15,7 +16,8 @@ const claimed=new Set();
 for(const ward of ANNEXE_WARDS){
  const group=annexe.userData.wards[ward.id];
  assert.equal(group.name,ward.name);assert.equal(group.parent,annexe);
- assert.deepEqual(group.position.toArray(),[0,0,0]);assert.deepEqual(group.scale.toArray(),[1,1,1]);
+ const rear=['oakmere','leighton-newton'].includes(ward.id);
+ assert.deepEqual(group.position.toArray(),[ward.id==='picton-carden'?7*ANNEXE_MAP_SCALE:0,0,rear?ANNEXE_REAR_SHIFT*ANNEXE_MAP_SCALE:0]);assert.deepEqual(group.scale.toArray(),[1,1,1]);
  assert.deepEqual(group.userData.ranges.map(r=>r.name).sort(),[...ward.rangeNames].sort());
  for(const name of ward.rangeNames){
   assert(!claimed.has(name),'each existing range belongs to only one ward');claimed.add(name);
@@ -40,7 +42,8 @@ for(const ward of ANNEXE_WARDS){
  }
  for(const page of ['aerial.html','explore.html'])assert(readFileSync(new URL('./dist/'+page,import.meta.url),'utf8').includes('href="?view='+ward.id+'"'),page+' links to '+ward.name);
 }
-for(const name of ['Central hall','Entrance range','Central rear spine','East front connecting ward','East end ward'])assert.equal(annexe.getObjectByName(name+' brick walls').parent,annexe,'shared and unmarked ranges retain their ownership');
+for(const name of ['Central hall','Entrance range','Central rear spine'])assert.equal(annexe.getObjectByName(name+' brick walls').parent,annexe,'shared and unmarked ranges retain their ownership');
+for(const name of ['East front connecting ward','East end ward'])assert.equal(annexe.getObjectByName(name+' brick walls').parent,annexe.userData.eastFrontWing,'Shared east ranges move together');
 for(const historic of [true,false]){
  layouts.setVisible('historic',historic);layouts.setVisible('modern',!historic);
  for(const group of Object.values(annexe.userData.wards)){

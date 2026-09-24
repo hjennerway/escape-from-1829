@@ -36,21 +36,21 @@ const rects={
  'East court outer return':[56,-4,65,34],
  'East court corner infill':[38,14,56,23],
  'West end ward':[-108,-40,-99,0],
- 'West rear pavilion':[-101,-49,-79,-39],
- 'West rear link':[-84,-40,-79,-8],
+ // September 24 yellow outline removes the return and the pavilion end.
+ 'West rear pavilion':[-101,-49,-86,-39],
  'West end projecting rooms':[-115,-24,-106,-9],
  'East end ward':[99,-25,109,12],
  'East rear pavilion':[83,-47,105,-38],
  'East rear link':[94,-39,100,5],
  'East end projecting rooms':[107,-25,119,-15],
- 'Central rear spine':[-5,-20,5,-5],
+ 'Central rear spine':[-5,-20,5,-12],
  'Rear west angled service range':[-37,-77,-25,-47],
  'Rear service head':[-45,-79,-23,-69],
  'Rear east connecting range':[9,-46,48,-38],
  'Rear east end pavilion':[39,-66,48,-38]
 };
 export function refineAnnexeRanges(ranges){
- return [...ranges.map(spec=>({...spec,...(rects[spec.name]?{rect:rects[spec.name]}:{}),
+ return [...ranges.filter(spec=>spec.name!=='West rear link').map(spec=>({...spec,...(rects[spec.name]?{rect:rects[spec.name]}:{}),
   ...(/Rear west angled service range|Rear service head/.test(spec.name)?{angle:.43}:{})})),
   {name:'West court back range',rect:[-67,-6,-27,1],wardId:'tarvin-jarman'},
   {name:'East court back range',rect:[20,-4,65,3],wardId:'picton-carden'},
@@ -60,6 +60,7 @@ export function refineAnnexeRanges(ranges){
   {name:'East end inner return',rect:[78,-16,87,11]},
   {name:'East end middle rooms',rect:[87,-12,100,-3]},
   {name:'East end front rooms',rect:[107,4,116,14]},
+  {name:'Central rear low hall link',rect:[-5,-12,5,-5],h:4.7,rise:1.5,kitchen:true},
   {name:'Rear court west range',rect:[-19,-44,-8,-20]},
   // The kitchen photograph resolves the inner face and the marked rear view
   // confirms a small access lane, superseding the enclosed OS rectangle.

@@ -1,3 +1,4 @@
+import {ANNEXE_REAR_STRETCH} from './annexe-rear-stretch.mjs';
 // The red outline and blue camera arrow select the rear court's west face.
 // Keep the separately protected spine, towers and front side details intact.
 export const OAKMERE_WEST_REFERENCE=Object.freeze({photo:'Research/oakmere/lawn-gallery.png',location:'Research/oakmere/west-lawn-location.png'});
@@ -58,10 +59,14 @@ export function addOakmereWestElevation(THREE,{model,host,brick,roof,material,wo
  // Low end rooms sit against the existing adjoining masonry. Their backs
  // overlap that masonry; the photographed exposed fronts receive glazing.
  const lowRooms=[{x:-half-2,z:14.2,w:4.2,d:22.2,h:5.0,name:'Oakmere west low rear end room',count:2},{x:half+3.15,z:1.1,w:6.5,d:host.w+1.1,h:4.7,name:'Oakmere west low hall link',count:3}];
- for(const b of lowRooms){
+ for(const original of lowRooms){
+  // The end connectors follow their fixed front / moved rear joins rigidly;
+  // stretching these small rooms would push their windows into the rear wing.
+  const factor=ANNEXE_REAR_STRETCH.factor,edge=Math.sign(original.x)*half;
+  const endX=x=>edge+(x-edge)/factor,b={...original,x:endX(original.x),w:original.w/factor};
   wall(b.x,b.z-b.d/2,b.w,b.h,b.d,b.name+' brick walls');
   const cap=hipRoof(b.x,b.z-b.d/2,b.w,b.d,b.h,1.5);group.add(cap);cap.name=b.name+' slate roof';
-  for(let i=0;i<b.count;i++)sash(b.x+(i-(b.count-1)/2)*(b.w-.9)/b.count,2.2,b.z+.025,{w:b.count===2?1.2:.98,h:2.7});
+  for(let i=0;i<b.count;i++)sash(endX(original.x+(i-(b.count-1)/2)*(original.w-.9)/b.count),2.2,b.z+.025,{w:(b.count===2?1.2:.98)/factor,h:2.7});
   box(trim,b.x,.24,b.z+.06,b.w,.4,.15);box(iron,b.x,b.h+.02,b.z+.2,b.w+.6,.12,.14);
  }
  for(const [x,z] of [[-half+.12,.77],[-centreWidth/2,1.11],[centreWidth/2,1.11],[half-.12,.77]])box(iron,x,eaves/2,z,.09,eaves,.09);

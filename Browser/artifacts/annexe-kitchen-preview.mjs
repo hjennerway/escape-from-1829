@@ -26,11 +26,11 @@ try{
    ['plan',[0,88,-56],[0,0,-55.9],48],
    ['front',[0,1.8,120],[0,9,14],48]
   ]){
-   await page.evaluate(async({p,t,fov})=>{
-    const {exterior,controls}=window.__kitchen,{annexePoint}=await import('/annexe.mjs');
-    exterior.scene.fog.density=0;exterior.scene.traverse(o=>{if(o.isSprite)o.material.visible=false;});exterior.camera.position.set(...annexePoint(...p));
-    const target=annexePoint(...t);exterior.camera.lookAt(...target);exterior.camera.fov=fov;exterior.camera.updateProjectionMatrix();controls.sync(target);
-   },{p,t,fov});
+   await page.evaluate(async({p,t,fov,name})=>{
+    const {exterior,controls}=window.__kitchen,{annexePoint,ANNEXE_VIEWS}=await import('/annexe.mjs');
+    exterior.scene.fog.density=0;exterior.scene.traverse(o=>{if(o.isSprite)o.material.visible=false;});exterior.camera.position.set(...(name==='photo'?ANNEXE_VIEWS['annexe-kitchen'].position:annexePoint(...p)));
+    const target=name==='photo'?ANNEXE_VIEWS['annexe-kitchen'].target:annexePoint(...t);exterior.camera.lookAt(...target);exterior.camera.fov=fov;exterior.camera.updateProjectionMatrix();controls.sync(target);
+   },{p,t,fov,name});
    await page.evaluate(()=>new Promise(resolve=>requestAnimationFrame(()=>requestAnimationFrame(resolve))));
    await page.screenshot({path:fileURLToPath(new URL('annexe-kitchen-'+phase+'-'+mode+'-'+name+'.png',import.meta.url))});
   }

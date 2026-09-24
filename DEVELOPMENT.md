@@ -1,5 +1,179 @@
 # Development and modelling notes
 
+## Larkton/Jodrell courtyard and Parsons road (24 September 2026)
+
+Removed the marked west rear return and shortened its rear pavilion. New
+asphalt paving wraps the retained building and meets the front range, leaving
+a small green courtyard. A curved five-metre access road follows the blue
+reference from the existing Parsons Lane bend to the court, with an open
+junction. See [the annotation and footprint notes](Research/larkton-jodrell/README.md).
+
+The focused regression verifies paving contact, retained grass, removed
+roof/collision geometry, full-width access and timeline visibility. The
+independent pre-edit comparison preserves 18,942 non-Larkton primitives,
+normalizing only the concurrent entrance-depth change in an isolated check.
+Browser sources and the regenerated local aerial model change; Unity and
+Blender exports are unchanged.
+
+Validation: all 64 browser test commands pass, as do the rebuilt source/compiled comparison and every timeline stop. Source and compiled overhead and close previews render without page errors. Logs and screenshots use `Browser/artifacts/larkton-`.
+
+
+## Tower-side stores door, base and roof edge (24 September 2026)
+
+Added a pale-blue panelled door between the two west-facing windows beside
+the water tower, with matching stone surround, handle and threshold. The
+brick parapet and stone coping now continue from the flat front along both
+exposed edges of the adjoining roof, retaining the tower arch contact and
+uninterrupted flat-deck joins. Stacking the flat-front walls above the plinth
+removes the coincident faces that caused the marked texture flicker.
+See `Research/tower-buildings/README.md` and its saved annotated reference.
+
+All 62 browser test scripts, compiled/source comparison and every timeline
+stop pass. Focused geometry checks cover the door,
+continuous coping, base separation, roof contacts, kitchen clearance and
+walking collisions. Source and compiled close, overhead and door-level
+previews render without page errors; images and validation logs use
+`Browser/artifacts/tower-stores-`. The local compiled aerial model has been
+regenerated. Browser sources and that generated asset are updated; Unity
+and Blender exports are unchanged.
+
+
+## Annexe marked side correction (September 24)
+
+The latest annotation replaces the tall rear tower glazing with two high
+sashes, removes the east brick bay, and gives the glazed conservatory that
+bay's exact canted footprint. The side wall now follows the purple step and
+recess, with matching polygon walking collisions. The incorrect pair of side
+dormers is removed; three rear hall projections reuse the accepted front
+geometry reflected through the ridge. The tall spine is shortened at the
+hall and joined by a low hipped connector so the rear windows remain exposed.
+The front-facing geometry, towers and belfry retain their original shapes.
+See [the latest correction](Research/carden-picton/README.md#marked-correction--24-september-2026).
+
+The independent pre-edit comparison retains 21,445 unaffected primitives.
+Browser sources and the rebuilt aerial asset change; Unity and Blender do not.
+The earlier Carden description below records the superseded first pass.
+## Chimney relocation (24 September 2026)
+
+Moved the freestanding estate chimney from (177.5,-35.5) to (167,-37), matching
+the new red X beside the tower's low service buildings. The complete chimney
+retains its size and materials. Placement notes and the supplied reference are
+in Research/tower-buildings/README.md.
+
+The full Browser npm test suite passes, including chimney/building clearance,
+base collisions, Historic visibility and nearby walking routes. Regenerated
+the compiled aerial model and visually checked both source and compiled views;
+both load at the new position without page errors. Preview evidence is saved
+as Browser/artifacts/chimney-relocation-after-source.png and
+Browser/artifacts/chimney-relocation-after-compiled.png. Browser sources and
+local compiled assets are updated; Unity and Blender exports are unchanged.
+
+
+## Detailed emergency exits (September 24)
+
+Asylum Escape's selected routes now have framed, weathered green doors with
+panic-bar mechanisms, bolted kick plates, hinges, grooved thresholds and door
+closers. Framed illuminated signs show the running-person pictogram, exit
+number, route name and forward arrow; separate instruction plaques sit above
+the bars. Geometry stays in the existing architecture batches, with a shared
+seeded paint texture and no additional point lights. Four-way orientation,
+route selection, navigation and escape timing are preserved. See
+[the finish notes](Research/escape-interior/README.md#emergency-exit-fittings-september-24).
+
+Validation: 61 of the 62 scripts in `npm test` pass, including all exit-route,
+game-loop, architecture and lighting checks. The final building-photo check
+fails on the unrelated compiled aerial estate-chimney selection; the existing
+compiled manifest hash differs from the current aerial source hash. The log is
+`Browser/artifacts/emergency-exits-suite.txt`. The real Chrome/WebGL check
+`node Browser/artifacts/check-emergency-exits.mjs --quick` passes five selected
+keyboard escapes, active/inactive geometry and lamps, artwork clearance, maps,
+retry stability and desktop/mobile rendering with no browser errors. Reviewed
+screenshots and its report use the `emergency-exits-` prefix. The harness uses
+an automatically assigned local port because Windows reserves port 1829 on
+this machine.
+
+Only browser game sources are changed; no Unity, Blender, GLB or aerial
+compiled exports are regenerated for this interior-only refinement.
+
+## Mobile walking controls (September 24)
+
+Explore on foot now has four touch movement arrows and supports dragging the
+scene with a second finger to look while walking. Touch starts movement directly,
+without pointer lock. The pad shares the existing walker speed, diagonal
+normalization and collisions. Keyboard and touch states remain independent;
+pointer release, cancellation, capture loss, navigation/timeline focus, tab hiding
+and window blur clear the appropriate inputs. Touch instructions and controls fit
+portrait and landscape screens, while desktop retains WASD and mouse look.
+
+`npm test` includes `test-explore-input.mjs` for input lifecycle regressions.
+`npm run test:mobile` uses Playwright/Chromium for real multitouch events, actual
+camera movement, timeline/navigation access and desktop keyboard/drag regression.
+Set `MODEL_CHROME_PATH` if using a locally installed Chrome. Visual checks cover
+390×844 and 320×568 portrait, 844×390 and 568×320 landscape, and desktop;
+captures use `Browser/artifacts/explore-mobile-`. The full browser suite passes
+(`Browser/artifacts/explore-mobile-suite.log`). Only browser controls and UI
+changed; model geometry and generated exports are unaffected.
+
+Validation: all 62 browser test scripts pass. Rebuilt source/compiled comparison, every timeline stop, and the seven source/compiled Carden views pass without page errors. The annotation and plan views confirm the canted conservatory, stepped footprint and all three rear hall projections. Logs and images use Browser/artifacts/annexe-carden-correction-.
+
+## Annexe Carden/Picton side photo (September 24)
+
+The east/rear lawn photo now refines the steep side roof with two arched
+terracotta dormers, a blind cross-gable and chimney, low hipped side rooms,
+white glazed porch and the near tower's rear stair glazing. The original
+front-facing geometry, two square towers and belfry remain fixed. The west
+spine roof surface retains its exact vertices; only the east eave and upper
+masonry are reshaped. This supersedes the earlier mirrored-east-slope inference.
+See [the reference and preservation notes](Research/carden-picton/README.md).
+
+Use **Annexe: Carden side photo** in Locations, or
+`aerial.html?view=annexe-carden-photo`; the matching walking view starts on
+the lawn. The shared browser source and rebuilt aerial model change; Unity
+and Blender exports are unchanged. The independent check retains 21,929
+original primitives outside the two permitted spine meshes and the original
+1,705-primitive central-front fingerprint. The concurrent entrance-corridor
+restoration is independently normalized and tested, retaining both tasks' work.
+
+Validation: all 61 browser test scripts pass, as do the rebuilt source/compiled comparison and every timeline stop. The source and compiled photo, close, overhead and front previews render without page errors, and the Carden WALK HERE link retains its viewpoint and selected period. The new-geometry ray check keeps both tower roofs and the belfry clear from the reference direction. Logs and screenshots use Browser/artifacts/annexe-carden-.
+
+## Annexe rear wall moved to the yellow guide (September 24)
+
+The latest marked view supersedes the earlier 15% depth increase. The rear
+wall moves a further 7.089 metres, to map z=-54.35. The court stays anchored
+to the central spine; its width and height stay fixed. Both attached rear
+blocks translate by the same amount, and the paving and access lane extend
+with the court. The front geometry and whole-annexe placement remain fixed.
+The rear overview uses a fixed camera matched to the supplied annotation.
+See [the reference and measurement](Research/annexe-kitchen/README.md#rear-wall-aligned-to-the-yellow-guide--24-september-2026).
+
+The independent check retains the original front and rear-block baselines,
+checks the yellow-line projection, and verifies continuous joins. Walking,
+window exposure and the original central-frontage fingerprint pass.
+Browser source and the generated aerial asset are updated; Unity and Blender
+exports are unchanged.
+
+
+Validation: all 59 browser checks, compiled/source comparison, every timeline stop, and the source/compiled alignment and kitchen preview pass. The generated model source hash matches the current source. Logs and comparison images use Browser/artifacts/annexe-rear-alignment-; additional views use annexe-kitchen-alignment-after-.
+
+## Annexe rear court 15% longer (September 24)
+
+The yellow-circled kitchen/courtyard block is 15% deeper away from its fixed
+join to the central spine. Widths and heights stay unchanged. Both attached
+rear wings translate backwards by 3.781 metres, retaining their geometry,
+window spacing and roof shapes. The annexe front and current centring remain
+fixed. Court paving and camera views follow the extension; end connectors
+retain clear windows and continuous joins. See the
+[reference and exact transform](Research/annexe-kitchen/README.md#rear-court-depth-correction--24-september-2026).
+
+The independent rear-stretch check compares against a captured pre-edit
+baseline and verifies the 15% ratio, fixed front/root, unchanged rear-block
+shapes and joined connector. The shared browser source and generated aerial
+model are updated; Unity and Blender exports are unchanged.
+
+
+Validation: all 59 checks in npm test pass, as do npm run test:compiled and the source/compiled rear-court, photo, plan and front preview. The preservation check retains 16,365 unaffected primitives and all 3,011 primitives in the two rigidly moved rear blocks. Logs use Browser/artifacts/annexe-rear-stretch-; images use Browser/artifacts/annexe-kitchen-stretch-.
+
+
 ## Annexe rear kitchen and paved access court (September 24)
 
 The supplied kitchen photograph and landmark annotations replace the enclosed
@@ -1424,3 +1598,114 @@ page errors (`Browser/artifacts/annexe-centre-*`). Existing building-preservatio
 snapshots still match: their comparisons now compose local transforms directly,
 avoiding translation-dependent rounding, while the legacy drives retain their
 world-space checks. No approved geometry snapshot was replaced for this move.
+
+## Annexe paving extended to the front walls (September 24)
+
+Matching asphalt fills the blue-marked gaps against the recessed entrance and
+its two pavilion faces. `annexe-access.mjs` derives the added paving from the
+placed front ranges, including the narrow side recesses, and removes the old
+kerb across the join. The original apron, building position and equal side
+grass widths stay fixed. The existing access test now checks continuous asphalt
+from the actual masonry faces back to the apron. Reference and scope are in
+[the frontage notes](Research/annexe-frontage-adjustment/README.md). Browser
+sources and compiled aerial assets are updated; Unity/Blender exports are unchanged.
+
+Validation: the frontage surface and equal-grass placement checks pass.
+The aerial asset was rebuilt; source/compiled comparison, browser timeline
+checks and close front/overhead screenshots pass without page errors.
+`npm test` stops at the unrelated `test-annexe-wards.mjs:18` expectation that
+every ward group remains at local (0,0,0), which conflicts with the current
+rear-wing stretch. That assertion is outside this paving change.
+All 22 checks after that failure were run separately and pass; see `Browser/artifacts/annexe-paving-suite-remaining.log`.
+
+## Annexe entrance corridor restored (September 24)
+
+The short left entrance corridor is reflected onto the right, with the complete
+east courtyard and outer ward assemblies shifted seven map units (7.351 scene
+metres) outward. Their shapes and details remain intact. The inward courtyard
+faces now mirror across the central entrance, while the central building,
+accepted root position, paving and roads remain fixed. The right grass strip
+therefore widens. See the reference and preservation scope in
+[the frontage notes](Research/annexe-frontage-adjustment/README.md).
+
+`annexe-front-links.mjs` applies the two group translations and copies the whole
+link during construction, before render batching and obstacle generation.
+Ward views and range/opening metadata follow the moved geometry. The independent
+corridor regression preserves 21,929 pre-edit primitives outside the separate,
+concurrent Carden roof work and checks the joins, exposed glazing, mirrored
+inner faces, walking collisions and Historic visibility. Browser source and
+compiled aerial models are updated; Unity and Blender exports are unchanged.
+
+Validation: all 61 browser checks pass, along with the final corridor/Carden preservation checks, source/compiled rendering comparison and every timeline stop. The compiled source fingerprint is current. Front and overview images under `Browser/artifacts/annexe-front-link-final-compiled-*` were visually reviewed. Timeline validation used its own artifact folder after concurrent runs collided while writing a shared screenshot; the isolated rerun passes.
+
+### Annexe conservatory and roof correction — 24 September 2026
+
+Moved the Carden conservatory outward 8.87 local units so its back edge follows
+the marked side-wall line; retained its canted outline and glazed its newly
+exposed edge. Lowered the central spine to 4.7-unit eaves / 6.6-unit ridge,
+including its masonry and windows. Added a tower-side gabled range with three
+side sashes and a low connection joining the conservatory. Reference and
+geometry rationale: `Research/carden-picton/README.md`.
+
+The dedicated Carden check verifies preservation outside this change and the
+concurrent Jarman frontage, roof levels and joins, exposed glazing, footprint
+translation and walking collisions. Browser source and generated aerial assets
+were updated; Unity/Blender exports were not regenerated.
+
+## Jarman lawn frontage — 24 September 2026
+
+The supplied red outline and blue camera marker replace only the west courtyard
+front elevation with the photographed Jarman frontage. The reference, dimensional
+assumptions and scope are recorded in [Research/jarman/README.md](Research/jarman/README.md).
+The browser model now has the 2/3/5/3 upper sash arrangement, detailed projecting
+gables, ventilated brick stacks and the glazed blue-trimmed lean-to veranda.
+The building’s accepted footprint and surrounding ward/site geometry are retained.
+
+The Locations menus include **Jarman lawn photo** (`annexe-jarman-photo`) in both
+aerial and walking modes. The new veranda participates in walking collisions.
+Dedicated checks verify exposed glazing, roof coverage, walking, ward ownership
+and unchanged geometry outside the marked elevation. Historical annexe snapshots
+were refreshed after independent old/new facade construction confirmed preservation.
+The shared browser sources and compiled aerial asset are updated; Unity and Blender
+sources and exports are unchanged. Logs and views use `Browser/artifacts/jarman-*`
+and `Browser/artifacts/annexe-jarman-*`.
+
+Validation: all 63 browser-suite scripts pass. The rebuilt source/compiled comparison and every timeline stop pass. Final source and compiled lawn, oblique, overview and plan views render without page errors; the lawn viewpoint links to the matching walking view. Final visual review confirms the veranda joins and unchanged courtyard layout. The compiled asset was rebuilt again after whitespace-only cleanup and its final viewpoint previews confirm compiled loading.
+
+The later marked correction shortens both complete square towers and the new
+Carden high roof by exactly 15%, keeping x/z fixed. The low rear link extends
+6.5 local units to z=-36.5 while retaining its existing hipped-roof form. The
+user withdrew the roof-shape request. The conservatory's geometry, glazing,
+materials and position are unchanged, independently verified against
+`Research/carden-picton/height-extension-before.json`. The new height test is
+included through `test-annexe-carden.mjs`; source previews pass without errors.
+
+Final height/extension validation: the full `npm test` suite passes, including
+both Carden checks and the concurrent Jarman check. `npm run test:compiled`
+passes source/compiled geometry and image comparison, full-detail loading,
+fallback checks and every timeline stop. Seven source and compiled Carden
+previews pass without page errors. Logs use `Browser/artifacts/carden-height-`;
+final images use `Browser/artifacts/annexe-carden-height-final-`.
+The shared Jarman preservation snapshot was updated only after an isolated
+pre-height replay matched its prior 861,075-primitive baseline and the exact
+height/conservatory checks passed.
+
+## Annexe central entrance and paving alignment (September 24)
+
+The latest yellow/green/purple annotation deepens only the low entrance range,
+from source-map z=15 to z=21 with its rear fixed at z=10. The complete portal,
+roof, windows and steps follow the new front. The apron narrows to map
+x=-10.5/+10.5 and centres on the doorway. The existing sweep and both kerbs move
+right as one rigid assembly, retaining every curve vertex and both joins onto
+the oblique avenue. The historical fixed-apron requirement is superseded.
+See [the frontage notes](Research/annexe-frontage-adjustment/README.md).
+
+The independent pre-edit geometry comparison confirms that only the low
+entrance changes; 21,719 other annexe primitives remain exact. The access,
+walking, alignment and preservation checks pass. The rebuilt aerial asset
+passes source/compiled and timeline validation, and source/compiled front,
+plan and overview screenshots were visually checked. The browser suite stops
+at the Jarman global geometry snapshot, which also fails with the original
+entrance restored in an isolated process; every subsequent test passes when
+run separately. Logs are in `Browser/artifacts/annexe-entrance-alignment-*`.
+Browser sources and compiled aerial assets change; Unity/Blender exports do not.

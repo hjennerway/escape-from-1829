@@ -1,3 +1,4 @@
+import {addJarmanFront} from './annexe-jarman-detail.mjs';
 import {ANNEXE_OUTER_FRONT_FITS} from './annexe-os-refinement.mjs';
 // Both outer frontages use the same photographed elevation, fitted to the OS.
 // Dimensions are inferred from img1.jpg; the registered ward bodies stay fixed.
@@ -13,6 +14,7 @@ function addFronts(THREE,{model,scale,brick,roof,material,worldUV,hipRoof,ranges
  const trim=material(0xa34d32),stone=material(0xb7ac90),frame=material(0xdedfd4),glass=material(0x273a3b),iron=material(0x30464d);
  const groups=[];
  for(const side of [-1,1]){
+  if(court&&side<0){groups.push(addJarmanFront(THREE,{model,host:ranges.find(b=>b.name==='West court front range'),brick,roof,material,worldUV}));continue;}
   const label=side<0?'West':'East',group=new THREE.Group();group.name=label+(court?' court':' outer')+' front elevation';group.scale.x=side;
   const parent=court?model.userData.wards[side<0?'tarvin-jarman':'picton-carden']:(side<0?model.userData.wards['larkton-jodrell']:model);
   parent.add(group);groups.push(group);

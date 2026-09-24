@@ -110,12 +110,24 @@ export const HISTORIC_ROAD_TRACES=Object.freeze([
  // The red-circled chapel cross-road and tower T-junction are now lawn.
 ]);
 export const HISTORIC_ROADS=Object.freeze(HISTORIC_ROAD_TRACES.flatMap(clearSharedLanes));
+// Cover the lane border across the new mouth without moving Parsons Lane.
+const larktonRoad=HISTORIC_ROAD_TRACES.find(r=>r.name==='Annexe Larkton Parsons approach');
+const larktonMouth=larktonRoad.points.slice(0,7);
+const larktonOffsets=larktonMouth.map((p,i)=>{
+ const a=larktonMouth[Math.max(0,i-1)],b=larktonMouth[Math.min(larktonMouth.length-1,i+1)],dx=b[0]-a[0],dz=b[1]-a[1],length=Math.hypot(dx,dz);
+ return [-dz/length*larktonRoad.width/2,dx/length*larktonRoad.width/2];
+});
+const larktonJunction={name:'Annexe Larkton Parsons open junction',surface:'junction',points:[
+ ...larktonMouth.map((p,i)=>p.map((v,k)=>v+larktonOffsets[i][k])),
+ ...larktonMouth.map((p,i)=>p.map((v,k)=>v-larktonOffsets[i][k])).reverse()
+]};
 // The yellow-marked footpath is gravel; vehicular approaches remain asphalt.
 export const HISTORIC_GRAVEL=Object.freeze([ANNEXE_GRAVEL_PATH]);
 export const HISTORIC_PAVING=Object.freeze([
  ESTATES_SERVICE_COURT,
  IRBY_SIDE_ROAD,
  ...ANNEXE_ACCESS_PAVING,
+ larktonJunction,
  ...mainAdminLaneJunctions(HISTORIC_ROADS),
  ...parsonsNorthEndJunction(HISTORIC_ROADS),
  // Cover the segmented inner kerb before drawing one smooth grass boundary.

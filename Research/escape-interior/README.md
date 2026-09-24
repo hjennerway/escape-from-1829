@@ -1,5 +1,24 @@
 # Asylum escape interior finishes
 
+## Emergency exit fittings (September 24)
+
+The active exits now have worn green painted leaves, deep metal jamb returns,
+dark rebates, three hinges, a projecting panic bar with mounting cases, a
+bolted kick plate, grooved threshold and overhead closer. These are visual
+game fittings, not a historical reconstruction. Door paint is generated locally
+with deterministic brush marks, edge chips and lower scuffs; geometry reuses
+the existing material batches on both floors.
+
+Each exit has a framed illuminated green sign with a running-person pictogram,
+route number/name and forward arrow, plus a separate PUSH BAR TO OPEN plaque.
+The sign and hardware share a corridor-facing coordinate system for north,
+south, east and west doors. Existing pooled green lamps supply the lighting.
+The five-route random selection, maps, collision cells and hold-E interaction
+retain the layout described in `../escape-layout/README.md`.
+
+Only browser runtime sources change. Unity, Blender and GLB exports are not
+regenerated; the aerial compiled model does not contain the game interior.
+
 The supplied `main-corridor-reference.png` guides the browser game's interior
 finish update of September 18. It shows cream-painted upper brickwork, a red
 brick dado with two cream checker courses, red/buff striped arches, barred

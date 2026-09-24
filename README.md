@@ -21,6 +21,8 @@ Use **WASD** to move, the **mouse** to look, **Shift** to sprint, **C/Ctrl** to
 crouch, **F** for the torch and **Tab** for the map. Hold **E** at exits, stairs
 or wall artwork. **H** shows survival help; **Esc** pauses. Touch controls are available on mobile.
 
+In **Explore on foot** on mobile, hold the on-screen arrows to walk and drag the view with another finger to look around.
+
 # Running slowly?
 If the view stutters or lags, check hardware accelleration is enabled in your browser
 

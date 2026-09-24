@@ -39,7 +39,32 @@ function lightFloor(){
  for(const stair of layout.stairs)lamp(stair.x*layout.cellSize,stair.z*layout.cellSize);
 }
 function markExits(){
- layout.exits.forEach((e,i)=>{const {dx,dz}=exitDirection(e);lamp(e.x*layout.cellSize,e.z*layout.cellSize,0x77db97);label('EXIT '+(i+1)+'  →|'+e.name,e.x*layout.cellSize+dx*.5,2.8,e.z*layout.cellSize+dz*.5,dx?Math.PI/2:0,true);});
+ layout.exits.forEach((e,i)=>{
+  const {dx,dz}=exitDirection(e),group=new THREE.Group();
+  lamp(e.x*layout.cellSize,e.z*layout.cellSize,0x77db97);
+  group.name='Emergency exit signage';group.position.set(e.x*layout.cellSize+dx*.7,0,e.z*layout.cellSize+dz*.7);group.rotation.y=Math.atan2(-dx,-dz);scene.add(group);
+  function plate(width,height,y,inset,paint){
+   const c=document.createElement('canvas');c.width=1024;c.height=256;paint(c.getContext('2d'));
+   const texture=new THREE.CanvasTexture(c);texture.colorSpace=THREE.SRGBColorSpace;texture.anisotropy=4;
+   return mesh(new THREE.PlaneGeometry(width,height),new THREE.MeshBasicMaterial({map:texture}),[0,y,inset],group);
+  }
+  plate(1.80,.35,2.96,.158,g=>{
+   g.fillStyle='#125138';g.fillRect(0,0,1024,256);g.strokeStyle='#c6e9c9';g.lineWidth=4;g.strokeRect(8,8,1008,240);
+   // Running-person pictogram through a doorway, with an upward route arrow.
+   g.fillStyle='#e5f5d9';g.fillRect(40,43,65,159);g.fillStyle='#125138';g.fillRect(40,61,47,141);
+   g.fillStyle='#e5f5d9';g.beginPath();g.arc(154,61,16,0,Math.PI*2);g.fill();
+   g.strokeStyle='#e5f5d9';g.lineWidth=19;g.lineCap='round';g.lineJoin='round';
+   for(const points of [[[149,94],[128,140],[166,160],[182,198]],[[130,140],[100,187],[72,187]],[[142,100],[182,124],[205,105]],[[142,100],[113,95],[95,121]]]){
+    g.beginPath();points.forEach(([x,y],j)=>j?g.lineTo(x,y):g.moveTo(x,y));g.stroke();
+   }
+   g.textAlign='left';g.font='bold 82px Arial';g.fillText('EXIT '+(i+1),256,113);
+   g.font='32px Arial';g.fillText(e.name.toUpperCase(),258,182,625);
+   g.lineWidth=15;g.beginPath();g.moveTo(948,184);g.lineTo(948,69);g.moveTo(915,103);g.lineTo(948,67);g.lineTo(981,103);g.stroke();
+  }).name='Illuminated exit route sign';
+  plate(.79,.16,1.43,.109,g=>{
+   g.fillStyle='#dde4cf';g.fillRect(0,0,1024,256);g.fillStyle='#244937';g.textAlign='center';g.font='bold 86px Arial';g.fillText('PUSH BAR TO OPEN',512,158);
+  }).name='Push bar instruction';
+ });
 }
 function twoSidedTextPlane(geometry,texture,frontPosition,parent){
  const mat=new THREE.MeshBasicMaterial({map:texture,transparent:true,side:THREE.FrontSide});

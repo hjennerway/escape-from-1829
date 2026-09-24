@@ -48,7 +48,7 @@ assert(Math.abs(Math.hypot(u[0]-p[0],u[1]-p[1])-Math.hypot(v[0]-p[0],v[1]-p[1]))
 assert(Math.abs((u[0]-p[0])*(v[0]-p[0])+(u[1]-p[1])*(v[1]-p[1]))<1e-8);
 assert.equal(annexe.getObjectByName('Central hall brick walls').material,exterior.model.getObjectByName('Redesmere outer brick elevation').material);
 const obstacles=exteriorObstacles(THREE,exterior.model),ray=new THREE.Raycaster();
-for(const [x,z] of [[-42,10],[33,10],[-91,-22],[90,-23],[-1,-34]]){
+for(const [x,z] of [[-42,10],[40,10],[-91,-22],[97,-23],[-1,-34]]){
  const p=annexePoint(x*ANNEXE_MAP_SCALE,40,z*ANNEXE_MAP_SCALE);
  assert(!obstacles.some(b=>obstacleContains(b,p[0],p[2],0)),'OS courtyard centre remains walkable');
  ray.set(new THREE.Vector3(...p),new THREE.Vector3(0,-1,0));
@@ -67,10 +67,11 @@ const walk=createWalker(exterior.camera,obstacles);walk.setView(ANNEXE_VIEWS['an
 const before=exterior.camera.position.clone();walk.keys.add('KeyW');walk.update(.1);
 assert(exterior.camera.position.distanceTo(before)>.45,'front approach is accessible');
 const b=annexe.userData.ranges.find(b=>b.name==='West court front range');
-walk.setView({position:annexePoint(b.x,1.8,b.z+b.d/2+5),target:annexePoint(b.x,1.8,b.z)});
+const jarmanFront=annexe.userData.courtFronts[0].userData.veranda.front;
+walk.setView({position:annexePoint(b.x,1.8,jarmanFront+5),target:annexePoint(b.x,1.8,b.z)});
 walk.keys.add('KeyW');for(let i=0;i<30;i++)walk.update(.1);
 const local=annexe.worldToLocal(exterior.camera.position.clone());
-assert(local.z>b.z+b.d/2&&local.z<b.z+b.d/2+1/ANNEXE.scale,'walking stops at the scaled, rotated masonry face');
+assert(local.z>jarmanFront&&local.z<jarmanFront+1/ANNEXE.scale,'walking stops at the scaled, rotated Jarman veranda face');
 for(const o of arches){
  const outward=new THREE.Vector3(Math.sin(o.rotation),0,Math.cos(o.rotation));
  const start=new THREE.Vector3(o.x,o.y,o.z).addScaledVector(outward,.7);
@@ -90,7 +91,7 @@ assert(ray.intersectObject(annexe,true).some(h=>h.object.name==='West canted bay
 
 
 // The orange/purple courts are separately traced, each with two open arms.
-for(const [side,arms,notch] of [[-1,[[-53,7],[-42,7],[-42,17],[-38,-16.5]],[-52,17]],[1,[[33,8],[49,8],[33,19],[38,-16.5]],[46,19]]]){
+for(const [side,arms,notch] of [[-1,[[-53,7],[-42,7],[-42,17],[-38,-16.5]],[-52,17]],[1,[[40,8],[56,8],[40,19],[45,-16.5]],[53,19]]]){
  for(const [x,z] of arms){
   const p=annexePoint(x*ANNEXE_MAP_SCALE,40,z*ANNEXE_MAP_SCALE);
   assert(!obstacles.some(o=>obstacleContains(o,p[0],p[2],.25)),'court arms and former rear-gallery route are clear');
@@ -102,14 +103,12 @@ for(const [side,arms,notch] of [[-1,[[-53,7],[-42,7],[-42,17],[-38,-16.5]],[-52,
  const label=side<0?'West':'East';
  assert(!annexe.getObjectByName(label+' low rear gallery brick walls'));
  ray.set(new THREE.Vector3(...annexePoint(side*35,40,-11)),new THREE.Vector3(0,-1,0));
- assert(ray.intersectObject(annexe,true).some(h=>h.object.name===label+' canted bay slate roof'),'both side bays have exposed roofs');
+ if(side<0)assert(ray.intersectObject(annexe,true).some(h=>h.object.name==='West canted bay slate roof'),'Unmarked west bay roof stays exposed');
+ else assert(!annexe.getObjectByName('East canted bay slate roof'),'Marked east bay is removed');
 }
 const leftSide=annexe.getObjectByName('West mirrored side details'),rightSide=annexe.getObjectByName('East mirrored side details');
-assert.equal(leftSide.children.length,rightSide.children.length,'both assemblies include every bay and stair component');
-for(const o of annexe.userData.annexeOpenings.filter(o=>o.name==='West low canted bay')){
- const r=annexe.userData.annexeOpenings.find(r=>r.name==='East low canted bay'&&Math.abs(r.x+o.x)<1e-8&&r.y===o.y&&r.z===o.z);
- assert(r&&r.rotation===-o.rotation,'right-side glazing reflects left-side positions and directions');
-}
+assert.equal(rightSide.children.length,leftSide.children.filter(o=>!/canted bay/.test(o.name)).length,'East bay is removed while every stair part remains');
+assert(!annexe.userData.annexeOpenings.some(o=>o.name==='East low canted bay'),'No glazing remains from removed east bay');
 const rear=annexe.userData.ranges.filter(b=>b.section==='rear-east');
 assert.equal(rear.length,2);
 assert(rear.every(b=>b.r>.3&&b.r<.5),'rear L wing rotates counter-clockwise relative to the frontage');
@@ -124,11 +123,11 @@ for(const o of annexe.userData.annexeOpenings.filter(o=>o.name.startsWith('Rear 
  annexe.localToWorld(start);outward.transformDirection(annexe.matrixWorld);ray.set(start,outward.negate());
  assert(ray.intersectObject(annexe,true)[0]?.object.isInstancedMesh,'rotated rear-wing windows remain exposed');
 }
-console.log('PASS: L-shaped courts, removed galleries, connected angled rear wing and mirrored side bays/stairs.');
+console.log('PASS: L-shaped courts, removed galleries, connected angled rear wing and retained west bay and paired stairs.');
 // Independent pixel checks catch a mirrored courtyard or filled rear court.
 for(const block of ANNEXE_OS_REFINEMENT.blocks.filter(b=>b.court)){
  const centre=block.court.reduce((p,q)=>p.map((v,i)=>v+q[i]/block.court.length),[0,0]);
- const [x,z]=annexeRefinementPixel(centre),p=annexePoint(x*ANNEXE_MAP_SCALE,40,z*ANNEXE_MAP_SCALE);
+ const [x,z]=annexeRefinementPixel(centre),p=annexePoint((x+(block.colour==='purple'?7:0))*ANNEXE_MAP_SCALE,40,z*ANNEXE_MAP_SCALE);
  assert(!obstacles.some(o=>obstacleContains(o,p[0],p[2],0)),block.colour+' source courtyard remains open');
  ray.set(new THREE.Vector3(...p),new THREE.Vector3(0,-1,0));
  assert(!ray.intersectObject(annexe,true).some(h=>h.object.name.endsWith('slate roof')),block.colour+' source courtyard has open sky');

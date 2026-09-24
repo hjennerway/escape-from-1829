@@ -29,6 +29,7 @@ import {FRONT_WALL_VIEW} from './front-boundary-wall.mjs';
 import {REDESMERE_PASSAGE_VIEW} from './redesmere-passage.mjs';
 import {REDESMERE_CHIMNEY_VIEWS} from './redesmere-edge-chimney.mjs';
 import {createWalker,exteriorObstacles} from './explore-controls.mjs';
+import {bindExploreInput} from './explore-input.mjs';
 import {EAST_PHOTO_VIEW} from './east-photo-detail.mjs';
 import {COURTYARD_PHOTO_VIEW} from './courtyard-photo-detail.mjs';
 import {REAR_COURT_PHOTO_VIEW} from './rear-court-photo-detail.mjs';
@@ -120,28 +121,9 @@ try{
     walker.setView(churtonView.startsWith('irby-corridor')?IRBY_CORRIDOR_WALK:churtonView.startsWith('ward-corridors')?WARD_CORRIDOR_WALK:churtonView.startsWith('farndon-corridor')?FARNDON_CORRIDOR_WALK:churtonView==='main-admin-corridor'?{...shot,position:[136,1.8,28],target:[128,2.1,13]}:shot);
   }
   if(CHURTON_VIEWS[churtonView])walker.setView(CHURTON_VIEWS[churtonView==='churton'||churtonView==='churton-plan'?'churton-4':churtonView]);
-  let active=false,dragging=false,last=null;
-  const movement=new Set(['KeyW','KeyA','KeyS','KeyD','ShiftLeft','ShiftRight']);
-  function stop(){active=false;dragging=false;last=null;walker.keys.clear();hint.textContent='Click Start exploring to resume, or drag the view to look around.';look.textContent='START EXPLORING ↗';}
-  function begin(){active=true;canvas.focus();hint.textContent='Walk with WASD. If the cursor stays visible, hold and drag to look around.';}
-  function lock(){begin();try{canvas.requestPointerLock?.()?.catch(()=>{hint.textContent='Mouse capture is unavailable here. Hold and drag the view to look around; WASD moves.';});}catch{hint.textContent='Hold and drag the view to look around; WASD moves.';}}
-  look.disabled=false;hint.textContent='Click Start exploring for mouse look, or hold and drag the view.';look.onclick=lock;
-  for(const controls of document.querySelectorAll('.explore-nav,#layoutControls')){
-    controls.addEventListener('pointerdown',stop);
-    controls.addEventListener('focusin',stop);
-  }
-  canvas.addEventListener('pointerdown',e=>{if(e.button!==0)return;begin();dragging=true;last={x:e.clientX,y:e.clientY};canvas.setPointerCapture(e.pointerId);});
-  canvas.addEventListener('pointerup',()=>{dragging=false;last=null;});
-  canvas.addEventListener('pointercancel',()=>{dragging=false;last=null;walker.keys.clear();});
-  canvas.addEventListener('pointermove',e=>{if(document.pointerLockElement===canvas||!dragging)return;if(last)walker.look(e.clientX-last.x,e.clientY-last.y);last={x:e.clientX,y:e.clientY};});
-  document.addEventListener('mousemove',e=>{if(active&&document.pointerLockElement===canvas)walker.look(e.movementX,e.movementY);});
-  document.addEventListener('pointerlockchange',()=>{const locked=document.pointerLockElement===canvas;document.body.classList.toggle('mouse-locked',locked);if(locked)begin();else stop();});
-  document.addEventListener('keydown',e=>{if(e.code==='Escape'){stop();document.exitPointerLock?.();return;}if(active&&movement.has(e.code)){e.preventDefault();walker.keys.add(e.code);}});
-  document.addEventListener('keyup',e=>walker.keys.delete(e.code));
-  window.addEventListener('blur',stop);
-  document.addEventListener('visibilitychange',()=>{if(document.hidden)stop();});
+  const input=bindExploreInput(walker,{canvas,hint,look,touchControls:document.getElementById('walkTouch')});
   window.addEventListener('resize',()=>{renderer.setSize(innerWidth,innerHeight);exterior.camera.aspect=innerWidth/innerHeight;if(view==='inner-east-photo')exterior.camera.fov=innerEastPhotoView(exterior.camera.aspect).fov;if(view==='central-court-photo')exterior.camera.fov=centralCourtPhotoView(exterior.camera.aspect).fov;exterior.camera.updateProjectionMatrix();});
   const clock=new THREE.Clock();
-  renderer.setAnimationLoop(()=>{const dt=clock.getDelta();if(active&&!document.hidden)walker.update(dt);renderer.render(exterior.scene,exterior.camera);});
+  renderer.setAnimationLoop(()=>{const dt=clock.getDelta();if(input.active&&!document.hidden)walker.update(dt);renderer.render(exterior.scene,exterior.camera);});
   loadEscapeFrontage(THREE,exterior).catch(error=>console.warn('Frontage photo unavailable',error));
 }catch(error){console.error(error);hint.textContent='The grounds could not load. Reload the page to try again.';look.disabled=false;look.textContent='RELOAD ↗';look.onclick=()=>location.reload();}

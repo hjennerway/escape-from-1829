@@ -1,5 +1,47 @@
 # Tower service buildings
 
+## Tower-side stores door and continuous roof edge, 24 September 2026
+
+`stores-door-parapet-reference.png` marks a new doorway in blue, overlapping
+base faces in red, and the existing raised roof edge in yellow with its missing
+continuations in green. The west-facing blue panelled door is centred at
+X=146.24, Z=-44.75 between the two existing sashes next to the tower. Its pale
+surround, handle and threshold use the existing service-building materials.
+
+The low stores now carry the same brick parapet and stone coping as the flat
+front along both exposed edges, joining at Z=-36.3. The coping top is Y=9.4.
+The tower arch contact, slate slopes and open joins between the flat decks
+remain intact. This supersedes the low west strip's earlier flush coping.
+The flat front's brick shell starts at Y=0.6 above its plinth, removing the
+coincident outer faces responsible for the red-marked texture flicker.
+Footprints, walking obstacles and Historical visibility are preserved.
+
+Browser source and the local compiled aerial asset are updated. Unity and
+Blender exports are unchanged. Close, overhead and door-level visual previews
+use `Browser/artifacts/tower-stores-`; the preview script checks both source
+and compiled paths. Geometry checks cover exposed door placement, level
+continuous copings, uninterrupted flat decks and non-overlapping base faces.
+
+
+## Chimney closer to the tower, 24 September 2026
+
+`chimney-relocation-reference.png` records the user's new red X in the open
+corner east of the flat west stores and south of the tower's dormered range.
+It supersedes the earlier instructions to keep the chimney at (177.5,-35.5).
+The chimney now stands at (167,-37), a move of about 10.6 model units towards
+the water tower. The centre-to-centre distance falls from 35.5 to 26.3 units.
+Height, diameter, materials and surrounding buildings are retained.
+The screenshot fit estimates (166.82,-37.16); the rounded model anchor is
+within 0.25 units. These are visual estimates, not surveyed coordinates.
+
+The complete foundation and shaft move together at scene construction, so
+source scene batches, shadows and walking obstacles use the new transform.
+Existing checks cover actual mesh clearance at twelve heights, collision at
+the chimney base, Historic visibility and walking routes around the cylinders.
+Camera fitting and matched source/compiled previews are saved under
+`Browser/artifacts/chimney-relocation-*` and `fit-chimney-relocation.mjs`.
+Only the browser model is changed; Unity and Blender exports are unchanged.
+
 ## Flat court infill and cylinders, 17 September 2026
 
 `service-infill-cylinders.png` fills the red-marked court between the central

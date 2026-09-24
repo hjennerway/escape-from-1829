@@ -28,7 +28,8 @@ for(let z=-38.7;z<=-29.5;z+=.65)for(let x=-7.7;x<=4.7;x+=.65){
 }
 const walker=createWalker(e.camera,obstacles);
 walker.setView({position:point(-1,1.8,-54),target:point(-1,1.8,-30)});walker.keys.add('KeyW');
-for(let i=0;i<52;i++)walker.update(.1);
+const travel=Math.hypot(...point(-1,1.8,-32).map((n,i)=>n-point(-1,1.8,-54)[i]));
+for(let i=0;i<Math.ceil(travel/.5);i++)walker.update(.1);
 assert(annexe.worldToLocal(e.camera.position.clone()).z>stretchAnnexeRearZ(-35)*ANNEXE_MAP_SCALE,'Walk from outside through the opening into the court');
 for(let i=0;i<20;i++)walker.update(.1);
 assert(annexe.worldToLocal(e.camera.position.clone()).z<stretchAnnexeRearZ(-29)*ANNEXE_MAP_SCALE,'The kitchen wall still blocks walking');

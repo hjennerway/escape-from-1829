@@ -76,6 +76,24 @@ export function createInteriorMaterials(THREE, document) {
     grain(g,n,14);
   });
   const brickMap=brick(false),plasterMap=brick(true);
+  const exitPaint=canvasTexture((g,n)=>{
+    g.fillStyle='#476655';g.fillRect(0,0,n,n);
+    stains(g,n,45,.10);
+    // Fine vertical brush marks and chips concentrated around the leaf edges.
+    for(let i=0;i<650;i++){
+      g.fillStyle=i%2?'rgba(203,216,180,.045)':'rgba(20,40,30,.05)';
+      g.fillRect(random()*n,random()*n,1,20+random()*150);
+    }
+    for(let i=0;i<190;i++){
+      const x=i%2?random()*24:n-random()*24,y=random()*n;
+      flake(g,x,y,1+random()*5,i%3?'#839082':'#514c3c');
+    }
+    for(let i=0;i<95;i++){
+      const x=random()*n,y=n*(.58+random()*.40);
+      g.fillStyle='rgba(194,194,158,.20)';g.fillRect(x,y,3+random()*18,1+random()*2);
+    }
+    grain(g,n,7);
+  },512);
   function material(color,map,tileSize,extra={}){
     const m=new THREE.MeshStandardMaterial({color,roughness:.94,...(map?{map,bumpMap:map,bumpScale:.018}:{}),...extra});
     if(!map)return m;
@@ -112,7 +130,7 @@ export function createInteriorMaterials(THREE, document) {
     RedArch:material(0x894e40),BuffArch:material(0xc5b388),
     Mortar:material(0x9c9180),Sash:material(0x9b9b88),Iron:material(0x575e59),
     Recess:material(0x303b35),Glass:material(0x768783,null,1,{emissive:0x7c8c81,emissiveIntensity:.25}),
-    Panel:material(0x39443d),Brass:material(0x918263),Carpet:material(0x595d56),
+    Panel:new THREE.MeshStandardMaterial({color:exitPaint?0xffffff:0x476655,roughness:.72,...(exitPaint?{map:exitPaint,bumpMap:exitPaint,bumpScale:.003}:{})}),Brass:material(0x918263),Carpet:material(0x595d56),
     Fixture:material(0x9c9c8f),Tube:material(0xeee9d5,null,1,{emissive:0xe1e4d6,emissiveIntensity:.75}),
   };
 }

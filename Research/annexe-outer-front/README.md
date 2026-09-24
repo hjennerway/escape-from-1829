@@ -20,3 +20,7 @@ Use the **Tarvin/Jarman** and **Picton/Carden** Locations entries for inspection
 clear approaches and collisions. The approved annexe geometry snapshot now
 includes these requested fronts; central entrance geometry and site placement
 are unchanged. Before/after views are in `Browser/artifacts/annexe-court-fronts-*`.
+
+The later September 24 Jarman photographs supersede the copied west court
+frontage only; see [Jarman lawn frontage](../jarman/README.md). The east court
+and both outer elevations retain the design described above.

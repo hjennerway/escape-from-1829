@@ -17,7 +17,7 @@ const e=createEscapeExterior(THREE,1.5),l=createAerialLayouts(THREE,e);e.model.u
 const ray=new THREE.Raycaster(),surface=(x,z)=>{ray.set(new THREE.Vector3(x,1,z),new THREE.Vector3(0,-1,0));return ray.intersectObject(l.historicRoads,true)[0]?.object.userData.surface;};
 const world=(x,z)=>{const p=annexeSitePoint(x,0,z);return [p[0],p[2]];};
 const at=(x,z)=>surface(...world(x,z));
-assert(Math.abs(ANNEXE_ACCESS.entranceWidth/ANNEXE_ACCESS.forecourtWidth-.16)<1e-12,'The yellow-outlined neck is 16% of the protected apron width');
+assert(Math.abs(ANNEXE_ACCESS.entranceWidth/(ANNEXE_ACCESS.frontage*.2)-.16)<1e-12,'The sweep retains its original neck width despite the narrower apron');
 assert(!l.historicRoads.getObjectByName('Annexe entrance gate'),'Remove the complete gate, including piers and leaves');
 for(const name of ['Annexe paved forecourt','Annexe central door walk'])assert(!l.historicRoads.getObjectByName(name),'Remove the pale paving sections');
 l.historicRoads.traverse(o=>assert.notEqual(o.userData.surface,'stone paving','No pale frontage paving remains'));
@@ -27,12 +27,30 @@ const localXs=[];for(let i=0;i<sweep.geometry.attributes.position.count;i++){
  const p=new THREE.Vector3().fromBufferAttribute(sweep.geometry.attributes.position,i).applyMatrix4(sweep.matrixWorld);localXs.push(annexeSiteLocal([p.x,p.z])[0]);
 }
 assert(Math.abs(Math.max(...localXs)-Math.min(...localXs)-ANNEXE_ACCESS.entranceMouthWidth)<.0001,'The narrow neck flares smoothly to the specified road mouth');
-for(const x of [-25,-15,0,15,25])for(const z of [29,36,51,63])assert.equal(at(x,z),'black road','The red-selected central apron must use road asphalt');
+for(const fraction of [-.45,-.25,0,.25,.45])for(const z of [ANNEXE_ACCESS.forecourtRearZ+.2,42,51,63])assert.equal(at(ANNEXE_ACCESS.centreX+fraction*ANNEXE_ACCESS.forecourtWidth,z),'black road','The red-selected central apron must use road asphalt');
 for(const x of [-70,-40,40,70])for(const z of [57,62])assert(!['black road','stone kerb','stone paving'].includes(at(x,z)),'The removed frontage strips must expose grass');
+// Check every formerly exposed strip against the actual masonry: the entry
+// face, both side recesses and the pavilion faces within the apron width.
+const halfApron=ANNEXE_ACCESS.forecourtWidth/2;
+for(const [name,fractions] of [
+ ['Entrance range',[0,1]],['West front pavilion',[0,1]],['East front pavilion',[0,1]],
+ ['Central hall',[0,2/22]],['Central hall',[20/22,1]]
+]){
+ const wall=e.annexe.getObjectByName(name+' brick walls');wall.geometry.computeBoundingBox();const b=wall.geometry.boundingBox;
+ for(let i=0;i<=24;i++){
+  const x=b.min.x+(b.max.x-b.min.x)*(fractions[0]+(fractions[1]-fractions[0])*i/24);
+  const p=wall.localToWorld(new THREE.Vector3(x,0,b.max.z)),[sx,sz]=annexeSiteLocal([p.x,p.z]);
+  if(sx<=ANNEXE_ACCESS.centreX-halfApron+.2||sx>=ANNEXE_ACCESS.centreX+halfApron-.2)continue;
+  for(let z=sz+.12;z<=ANNEXE_ACCESS.forecourtRearZ+.1;z+=.18)
+   assert.equal(at(sx,z),'black road','Paving reaches '+name+' without grass or a transverse kerb');
+ }
+}
+// The infill does not consume the equal grass strips beside the paved apron.
+for(const side of [-1,1])for(const z of [30,36,44])assert(!['black road','stone kerb'].includes(at(ANNEXE_ACCESS.centreX+side*(halfApron+2),z)),'Retain side grass');
 const obstacles=exteriorObstacles(THREE,e.model);
-for(let z=28;z<=ANNEXE_ACCESS.avenueZ;z+=.4){
- assert.equal(at(0,z),'black road','The central entrance meets the relocated red-line avenue');
- assert(!obstacles.some(o=>obstacleContains(o,...world(0,z))),'The central entrance is clear for walking');
+for(let z=ANNEXE_ACCESS.forecourtRearZ+3;z<=ANNEXE_ACCESS.avenueZ;z+=.4){
+ assert.equal(at(ANNEXE_ACCESS.centreX,z),'black road','The central entrance meets the relocated red-line avenue');
+ assert(!obstacles.some(o=>obstacleContains(o,...world(ANNEXE_ACCESS.centreX,z))),'The central entrance is clear for walking');
 }
 for(const name of ['Annexe west side access','Annexe east side access','Annexe east roadside hardstanding','Annexe roadside hardstanding exposed kerb'])
  for(const suffix of ['',' border'])assert(!l.historicRoads.getObjectByName(name+suffix),'Removed side access must leave no road or kerb');
@@ -99,6 +117,13 @@ assert.equal(surface(...start),'black road','Gravel starts on the existing servi
 assert.equal(surface(...end),'black road','Gravel meets the frontage asphalt without a kerb across its mouth');
 for(const historic of [true,false])for(const modern of [true,false]){
  l.setVisible('historic',historic);l.setVisible('modern',modern);
- for(const object of [sweep,forecourt]){let visible=true;for(let o=object;o;o=o.parent)visible&&=o.visible;assert.equal(visible,historic,'Annexe access belongs to Historic');}
+ for(const object of [sweep,forecourt,l.historicRoads.getObjectByName('Annexe frontage infill')]){let visible=true;for(let o=object;o;o=o.parent)visible&&=o.visible;assert.equal(visible,historic,'Annexe access belongs to Historic');}
 }
 console.log('PASS: red-line avenue, clear central sweep, yellow gravel link, removed rear and side roads, protected lane junctions and teardrop, and Historic visibility.');
+
+// The marked low range gains depth while its hall junction and height stay fixed.
+const entrance=e.annexe.userData.ranges.find(b=>b.name==='Entrance range');
+assert.deepEqual(entrance.rect,[-9,10,9,21]);assert.equal(entrance.h,4.7);
+const door=e.annexe.getObjectByName('Entrance recessed double door').getWorldPosition(new THREE.Vector3());
+assert(Math.abs(annexeSiteLocal([door.x,door.z])[0]-ANNEXE_ACCESS.centreX)<1e-9,'Door, apron and sweep share one axis');
+await import('./artifacts/annexe-entrance-alignment-scope.mjs');

@@ -141,7 +141,8 @@ export function createTowerBuildings(THREE,exterior){
     const g=new THREE.ExtrudeGeometry(shape,{depth:height,bevelEnabled:false});g.rotateX(-Math.PI/2);
     const part=mesh(uv(g),m,0,bottom,0,name+suffix);part.userData.collisionFootprint=spec.footprint;return part;
    }
-   shapePart(brick,0,h,' walls');shapePart(red,0,.6,' plinth');shapePart(flat,h,.16,' flat roof');
+   // Stack the wall above its plinth instead of rendering coincident faces.
+   shapePart(brick,.6,h-.6,' walls');shapePart(red,0,.6,' plinth');shapePart(flat,h,.16,' flat roof');
    for(let i=0;i<spec.footprint.length;i++){
     const a=spec.footprint[i],b=spec.footprint[(i+1)%spec.footprint.length];
     const alongX=a[1]===b[1],length=Math.hypot(b[0]-a[0],b[1]-a[1]);
@@ -196,7 +197,7 @@ export function createTowerBuildings(THREE,exterior){
   const {name,rect:[x0,z0,x1,z1],attach}=spec,{flatEndX:flatX,ridgeX,deck,peak}=junction;
   box(flat,(x0+flatX)/2,deck-.08,(z0+z1)/2,flatX-x0,.16,z1-z0,name+' arch-front flat roof');
   // No parapet crosses the arch or the join from the flat strip to slate.
-  box(stone,x0+.06,deck+.015,(z0+z1)/2+(attach==='north'?.125:-.125),.18,.12,z1-z0-.25,name+' outer flat coping');
+  if(name!=='Low west stores')box(stone,x0+.06,deck+.015,(z0+z1)/2+(attach==='north'?.125:-.125),.18,.12,z1-z0-.25,name+' outer flat coping');
   // This corner now shares the east-range ridge; its south return is flat.
   if(name==='Low west stores')continue;
   const hipLength=5.2;
@@ -269,6 +270,13 @@ export function createTowerBuildings(THREE,exterior){
   e=[180,junction.deck,southEaveZ],f=[junction.flatEndX,junction.deck,southEaveZ];
  poly([...skyTriangle(a,b,f),...skyTriangle(b,c,e),...skyTriangle(b,e,f),...skyTriangle(c,d,e)],roof,'Tower south continuous slate roof');
  box(flat,(junction.flatEndX+junction.endX)/2,junction.deck-.08,(southEaveZ-36.3)/2,junction.endX-junction.flatEndX,.16,-36.3-southEaveZ,'Low west stores south flat return');
+ // Continue the front parapet around both exposed edges of the adjoining
+ // flat roof, up to the tower and slate eaves. Keep the arch contact and
+ // the join between the level decks open, with no internal raised divider.
+ for(const [x,z0,z1,edge] of [[146.3,-50.1,-36.3,'west'],[162.3,-40.5,-36.3,'east']]){
+  box(brick,x,8.84+.26,(z0+z1)/2,.25,.45,z1-z0,'Low west stores '+edge+' parapet');
+  box(stone,x,8.84+.5,(z0+z1)/2,.38,.12,z1-z0,'Low west stores '+edge+' coping');
+ }
  line([eastRidge.startX,eastRidge.height+.05,eastRidge.z],[eastRidge.endX,eastRidge.height+.05,eastRidge.z],red,.10,'Tower east dormered range ridge');
  // Exposed eaves have brick beneath them; the roof never floats over the wall.
  for(const z of [-60.3,-40.5]){
@@ -372,6 +380,11 @@ export function createTowerBuildings(THREE,exterior){
  }
  placement=null;
  for(const z of [-31.5,-37,-42.5,-47])sash(146.27,3.3,z,1.25,2.7,-Math.PI/2);
+ // Blue-marked bay beside the water tower: retain both flanking sashes.
+ door(146.24,1.9,-44.75,1.65,3.7,-Math.PI/2,blue,'Tower-side stores entrance');
+ for(const y of [1.0,2.65])detail(dark,146.08,y,-44.75,.99,1.15,.04,-Math.PI/2);
+ detail(stone,146.02,1.85,-44.19,.08,.25,.08,-Math.PI/2);
+ box(stone,146.14,.07,-44.75,.40,.14,2.03,'Tower-side stores threshold');
  for(const x of [156,160])sash(x,3.3,TOWER_SERVICE_FRONT+.03,1.3,2.7);
  // The chimney identifies the green img2 building. The tower-connected stores
  // retain their hipped end; only the chimney hall carries the circular light.

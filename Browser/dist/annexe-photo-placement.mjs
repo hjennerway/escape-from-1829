@@ -5,13 +5,14 @@ export const ANNEXE_PHOTO_PLACEMENT=Object.freeze({
  source:'Research/annexe-photo-placement/aerial.png',
  annotated:'Research/annexe-photo-placement/aerial-annotated.png',
  // Keep the accepted forecourt/site frame fixed and the uniform 90% scale.
- // The inward court walls are at map x=-27 and x=20: their midpoint, rather
+ // Retain the placement accepted before the east corridor was restored.
+ // At that time the inward court walls were at map x=-27 and x=20; their midpoint, rather
  // than the doorway, centres the grass strips beside the fixed paved apron.
  site:Object.freeze({planScale:.72,x:378,z:-34}),
  relativeScale:.9,frontAnchorMap:[0,15],
  forecourtCentreMapX:(-27+20)/2,
  centringReference:'Research/annexe-frontage-adjustment/equal-grass-reference.png',
  frontageReference:'Research/annexe-placement/front-roads-annotated.png',
- revision:'Annexe translated sideways to give equal grass strips beside the forecourt',
- note:'The complete annexe retains its 90% scale and shape. The midpoint between the inward courtyard walls aligns with the fixed asphalt forecourt centreline, giving equal green space on both sides. The frontage setback, paving, roads, Parsons Lane, Vivienne Smith Lane and teardrop stay fixed.'
+ revision:'Retain the accepted root placement while restoring the east entrance link',
+ note:'The annexe retains its accepted 90% scale, root position and frontage setback. The later corridor restoration moves the east courtyard and outer wards seven map units right, widening the grass on that side. Paving, roads, Parsons Lane, Vivienne Smith Lane and teardrop stay fixed.'
 });

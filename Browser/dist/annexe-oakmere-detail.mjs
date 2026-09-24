@@ -26,12 +26,10 @@ export function addOakmereElevation(THREE,{model,host,oppositeWindows,brick,roof
  }
  // Retain the shallow masonry projections, roof, opposite face and end joins.
  // Only the marked sash columns are corrected to match the opposite elevation.
- const half=host.d/2,centreWidth=15.8,leftWidth=half-centreWidth/2,eaves=12.4;
- // This photo resolves the formerly inferred low spine: its two tall storeys
- // stand higher than the neighbouring ward ranges. Add the upper masonry
- // above the saved body, keeping the previous facade on the unpictured side.
- mesh(worldUV(new THREE.BoxGeometry(host.d,eaves-host.h,host.w),1.7),brick,0,(eaves+host.h)/2,-host.w/2,'Oakmere raised spine upper masonry');
- const mainCap=hipRoof(0,-host.w/2+.3,host.d,host.w+.6,eaves,3.2);group.add(mainCap);mainCap.name='Oakmere raised spine slate roof';
+ const half=host.d/2,centreWidth=15.8,leftWidth=half-centreWidth/2,eaves=4.7;
+ // The latest marked roof correction lowers this entire spine to the adjacent links.
+ const mainCap=hipRoof(0,-host.w/2+.3,host.d,host.w+.6,eaves,1.9);group.add(mainCap);mainCap.name='Oakmere raised spine slate roof';
+
  wall(-(half+centreWidth/2)/2,.35,leftWidth,eaves,.6,'Oakmere four-bay left face');
  wall(0,.55,centreWidth,eaves,.8,'Oakmere five-bay centre face');
  wall((half+centreWidth/2)/2,.35,leftWidth,eaves,.6,'Oakmere four-bay right face');
@@ -40,13 +38,12 @@ export function addOakmereElevation(THREE,{model,host,oppositeWindows,brick,roof
   const x=(o.z-host.z)/group.scale.x;
   return {x,z:Math.abs(x)<centreWidth/2?.97:.67,w:o.w/group.scale.x};
  });
- for(const p of columns){sash(p.x,3.0,p.z,{h:4,w:p.w});sash(p.x,9.2,p.z,{h:4,w:p.w});}
+ for(const p of columns)sash(p.x,2.5,p.z,{h:3,w:p.w});
  for(const [x,w,z] of [[-(half+centreWidth/2)/2,leftWidth,.72],[0,centreWidth,1.02],[(half+centreWidth/2)/2,leftWidth,.72]]){
-  for(const [y,h] of [[.24,.4],[6.1,.4],[eaves-.24,.35]])box(trim,x,y,z,w,h,.15);
-  box(pale,x,6.35,z+.02,w,.075,.08);
+  for(const [y,h] of [[.24,.4],[eaves-.24,.35]])box(trim,x,y,z,w,h,.15);
  }
- // One continuous hip supplies both mirrored slopes. No cross-gable, raised
- // pediment or vent projects through the west slope selected in blue.
+ // One low continuous hip caps the shortened spine. No
+ // pediment or vent projects through the retained plain west slope.
  // Low end rooms sit against the existing adjoining masonry. Their backs
  // overlap that masonry; the photographed exposed fronts receive glazing.
  const lowRooms=[{x:-half-2,z:14.2,w:4.2,d:7.5,h:5.0,name:'Oakmere low rear end room',count:2},{x:half+3.15,z:11.2,w:6.5,d:5.6,h:5.0,name:'Oakmere low hall link',count:4}];

@@ -1,8 +1,8 @@
 // Freestanding tapered brick chimney in chimney/img1.jpg.
-// The chimney stays at the latest red X while the yellow-marked buildings move towards main/admin.
+// September 2026 red X: move into the open corner closer to the water tower.
 // Position and diameter are marked-photo estimates; height retains the user's exact 1.3 ratio.
 import {ESCAPE_WATER_TOWER} from './water-tower.mjs';
-export const ESTATE_CHIMNEY=Object.freeze({x:177.5,z:-35.5,height:ESCAPE_WATER_TOWER.height*1.3,baseRadius:2.45,topRadius:1.23});
+export const ESTATE_CHIMNEY=Object.freeze({x:167,z:-37,height:ESCAPE_WATER_TOWER.height*1.3,baseRadius:2.45,topRadius:1.23});
 export function createEstateChimney(THREE,{brick,material}){
   const chimney=new THREE.Group();chimney.name='Freestanding brick chimney';chimney.position.set(ESTATE_CHIMNEY.x,0,ESTATE_CHIMNEY.z);
   const masonry=brick.clone();masonry.color.set(0xc4a18d);
@@ -25,6 +25,6 @@ export function createEstateChimney(THREE,{brick,material}){
   cylinder(topRadius-.24,topRadius-.24,1.4,height-.7,inside,'Dark chimney throat',true);
   const rim=new THREE.Mesh(new THREE.RingGeometry(topRadius-.24,topRadius+.08,48),soot);rim.rotation.x=-Math.PI/2;rim.position.y=height;rim.name='Open masonry chimney lip';chimney.add(rim);
   const opening=new THREE.Mesh(new THREE.CircleGeometry(topRadius-.24,48),dark);opening.rotation.x=-Math.PI/2;opening.position.y=height-1.4;opening.name='Recessed chimney opening';chimney.add(opening);
-  chimney.userData.height=height;chimney.userData.reference='Research/tower-buildings/central-hall-footprint-correction.png red X; fixed during the later building slide (15 September 2026); chimney/img1.jpg; 1.3 times the water-tower height';
+  chimney.userData.height=height;chimney.userData.reference='Research/tower-buildings/chimney-relocation-reference.png red X; relocated towards the tower (24 September 2026); chimney/img1.jpg; 1.3 times the water-tower height';
   return chimney;
 }

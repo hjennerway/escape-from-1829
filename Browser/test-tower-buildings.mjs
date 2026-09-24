@@ -57,7 +57,10 @@ const contactPoint=(side,u)=>side===1?[148+u,-50.07]:side===3?[148-u,-60.33]:[15
 for(const {side,profile} of TOWER_ROOF_CONTACTS.faces){
  for(let i=1;i<profile.length;i++)for(const t of [.02,.25,.5,.75,.98]){
   const [u0,y0]=profile[i-1],[u1,y1]=profile[i],u=u0+(u1-u0)*t;
-  const p=contactPoint(side,u),hit=roofAt(...p);
+  const p=contactPoint(side,u);roofAt(...p);
+  // Sample the deck/slate itself: the new perimeter coping stands above
+  // the outer edge of the flat strip without changing its tower contact.
+  const hit=ray.intersectObject(group,true).find(hit=>hit.object.name.endsWith('flat roof')||hit.object.name.endsWith('slate roof'));
   assert(hit,'Missing roof contact on tower face '+side);
   assert(Math.abs(hit.point.y-(y0+(y1-y0)*t))<.04,'Rendered roof must follow the traced line on face '+side+' at '+u+': '+hit.point.y+' / '+(y0+(y1-y0)*t)+' '+hit.object.name);
  }
@@ -120,7 +123,7 @@ const adjacentBounds=new THREE.Box3().setFromObject(group.getObjectByName('Tower
 assert(Math.abs(centralWallBounds.min.z-(-49+purple.z))<1e-5&&centralWallBounds.min.z>adjacentBounds.min.z+11,'The complete purple hall moves towards admin while its tower neighbour stays fixed');
 assert.equal(centralHall.rect[3],-32+purple.z,'Central hall moves with the purple group');
 assert(TOWER_ADMIN_SHIFT>HISTORIC_ROADS.find(r=>r.name==='Admin north service road').width,'User chose additional movement to clear the fixed chimney');
-assert.deepEqual([exterior.estateChimney.position.x,exterior.estateChimney.position.z],[177.5,-35.5],'Chimney must stay fixed while the outlined buildings move');
+assert.deepEqual([exterior.estateChimney.position.x,exterior.estateChimney.position.z],[167,-37],'Chimney follows the latest red-X correction towards the tower');
 for(const x of [165,172,182])for(const z of [-78,-72,-66]){
  const hit=roofAt(x,z);
  assert(!hit||hit.object.parent.name===TOWER_WORKSHOP_COPY.name,'Only the new yellow-footprint workshop may occupy the removed northern hall area');
@@ -135,6 +138,26 @@ const stores=TOWER_RANGES.find(r=>r.name==='Low west stores');
 assert.equal(stores.axis,'z');assert.equal(stores.attach,'north');
 const flatFront=TOWER_RANGES.find(r=>r.name==='West stores flat front');
 assert.equal(flatFront.roof,'flat');assert.equal(stores.rect[3],flatFront.rect[1],'Rotated stores must join their flat front section');
+// The raised border is continuous across the former section boundary.
+for(const [x,zs] of [[146.3,[-49.9,-47,-40.5,-36.31,-36.29,-33,-30]],[162.3,[-40.3,-38,-36.31,-36.29,-30,-20]]]){
+ for(const z of zs){
+  const hit=roofAt(x,z);
+  assert(hit?.object.name.endsWith('coping'),'Every exposed flat-roof edge has a coping');
+  assert(Math.abs(hit.point.y-9.4)<1e-5,'Both old and extended parapets have the same height');
+ }
+}
+for(const x of [148,155,160])for(const z of [-36.31,-36.29]){
+ assert(Math.abs(roofAt(x,z).point.y-9)<1e-5,'No internal parapet crosses the joined flat decks');
+}
+const storesWall=group.getObjectByName('West stores flat front walls'),storesPlinth=group.getObjectByName('West stores flat front plinth');
+const wallBounds=new THREE.Box3().setFromObject(storesWall),plinthBounds=new THREE.Box3().setFromObject(storesPlinth);
+assert(Math.abs(wallBounds.min.y-plinthBounds.max.y)<1e-6,'Wall starts where plinth finishes without overlapping side faces');
+ray.set(new THREE.Vector3(140,.3,-31.5),new THREE.Vector3(1,0,0));
+assert.equal(ray.intersectObject(storesWall,false).length,0,'Brick wall cannot flicker through the exposed plinth');
+assert(ray.intersectObject(storesPlinth,false).length>0,'Retain a solid brick base course');
+const towerDoor=group.userData.openings.find(o=>o.label==='Tower-side stores entrance');
+assert(towerDoor&&towerDoor.r===-Math.PI/2&&towerDoor.z>-47&&towerDoor.z<-42.5,'New west-facing door occupies the blue-marked bay between the retained sashes');
+
 // The marked yellow line is one shared front wall plane, including the
 // unchanged blue-circled stores. Check the meshes, not only range metadata.
 for(const name of ['West stores flat front','Chimney service hall','Ramp entrance link','South cross-gabled stores']){

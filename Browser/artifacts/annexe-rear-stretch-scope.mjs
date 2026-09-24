@@ -21,7 +21,7 @@ export function rearStretchSnapshot(THREE,annexe){
    if(root!==annexe)local.elements[14]-=root.userData.ranges[0].z-root.position.z;
    const record=m=>{
     const x=m.elements[12],z=m.elements[14];
-    if(protectedOnly&&o.parent===annexe&&(o.isInstancedMesh||o.name==='Terracotta chimney pot')&&x>-44&&x<25&&z<-31.8&&z>-88)return;
+    if(protectedOnly&&o.parent===annexe&&(o.isInstancedMesh||o.name==='Terracotta chimney pot')&&x>-44&&x<25&&z<-31.8&&z>-110)return;
     records.push(JSON.stringify([o.name,geometry,materials,m.elements.map(n=>+n.toFixed(5)),o.castShadow,o.receiveShadow,!!o.userData.orientedCollision]));
    };
    if(o.isInstancedMesh)for(let i=0;i<o.count;i++){o.getMatrixAt(i,instance);record(matrix.multiplyMatrices(local,instance));}else record(local);

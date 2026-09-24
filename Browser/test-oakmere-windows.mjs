@@ -17,9 +17,9 @@ if(process.argv.includes('--save-baseline')){
 }else{
  assert.deepEqual(fingerprint,JSON.parse(readFileSync(path)),'Everything except the three marked sets of sash parts stays unchanged');
  const opposite=annexe.userData.annexeOpenings.filter(o=>o.name==='Central rear spine'&&o.rotation>0);
- for(const [y,oppositeY] of [[3,2.15],[9.2,6.5]]){
+ for(const [y,oppositeY] of [[2.5,2.15]]){
   const windows=spine.userData.openings.filter(o=>o.y===y),reference=opposite.filter(o=>o.y===oppositeY);
-  assert.equal(reference.length,6,'Yellow-arrow face has six windows per floor');
+  assert.equal(reference.length,3,'Shortened spine retains three evenly spaced columns per floor');
   assert.equal(windows.length,reference.length,'Green face matches the opposite window count');
   for(let i=0;i<windows.length;i++){
    const p=annexe.worldToLocal(spine.localToWorld(new THREE.Vector3(windows[i].x,y,windows[i].z)));
@@ -37,5 +37,5 @@ if(process.argv.includes('--save-baseline')){
   const hit=ray.intersectObject(annexe,true)[0];
   assert(hit?.object.parent===detail&&hit.object.isInstancedMesh,'Sash remains exposed: '+JSON.stringify(o));
  }
- console.log('PASS: six spine windows per floor, three red-link windows, matching blue sashes; '+fingerprint.primitives+' protected primitives unchanged.');
+ console.log('PASS: three low-spine windows, three red-link windows, matching blue sashes; '+fingerprint.primitives+' protected primitives unchanged.');
 }

@@ -34,7 +34,9 @@
       <li><a href="?view=tower">Water Tower</a></li>
       <li><a href="?view=annexe">Annexe</a></li>
       <li><a href="?view=annexe-kitchen">Annexe: rear kitchen</a></li>
+      <li><a href="?view=annexe-carden-photo">Annexe: Carden side photo</a></li>
       <li><a href="?view=picton-carden">Annexe: Picton/Carden Ward</a></li>
+      <li><a href="?view=annexe-jarman-photo">Annexe: Jarman lawn photo</a></li>
       <li><a href="?view=tarvin-jarman">Annexe: Tarvin/Jarman Ward</a></li>
       <li><a href="?view=leighton-newton">Annexe: Leighton/Newton Ward</a></li>
       <li><a href="?view=oakmere">Annexe: Oakmere Ward</a></li>
@@ -143,7 +145,7 @@ if(MAIN_ADMIN_VIEWS[view]){const nav=document.getElementById('churtonNav');nav.h
 if(view.startsWith('ward-corridors')){const nav=document.getElementById('churtonNav');nav.hidden=false;nav.classList.add('farndon-navigation');nav.innerHTML='WARD CORRIDORS · <a style="color:inherit;margin-right:12px" href="?view=ward-corridors">AERIAL</a><a style="color:inherit;margin-right:12px" href="?view=ward-corridors-plan">PLAN</a><a style="color:inherit" href="./explore.html?view=ward-corridors">WALK HERE</a>';}
 if(view.startsWith('farndon-corridor')){const nav=document.getElementById('churtonNav');nav.hidden=false;nav.classList.add('farndon-navigation');nav.innerHTML='FARNDON CORRIDOR · <a style="color:inherit;margin-right:12px" href="?view=farndon-corridor">AERIAL</a><a style="color:inherit;margin-right:12px" href="?view=farndon-corridor-plan">PLAN</a><a style="color:inherit" href="./explore.html?view=farndon-corridor">WALK HERE</a>';}
 if(view.startsWith('irby-corridor')){const nav=document.getElementById('churtonNav');nav.hidden=false;nav.classList.add('farndon-navigation');nav.innerHTML='WATER TOWER / IRBY · <a style="color:inherit;margin-right:12px" href="?view=irby-corridor">AERIAL</a><a style="color:inherit;margin-right:12px" href="?view=irby-corridor-plan">PLAN</a><a style="color:inherit" href="./explore.html?view=irby-corridor">WALK HERE</a>';}
-if(ANNEXE_VIEWS[view]&&!ANNEXE_WARD_VIEWS[view]){const nav=document.getElementById('churtonNav');nav.hidden=false;nav.innerHTML='THE ANNEXE · '+[['front','FRONT'],['front-right','FRONT RIGHT'],['img1','RIGHT LAWN'],['side','LEFT SIDE'],['side-right','RIGHT SIDE'],['kitchen','REAR KITCHEN'],['rear-court','REAR COURT'],['plan','PLAN'],['site','SITE']].map(([key,label])=>'<a style="color:inherit;margin-right:12px" href="?view=annexe-'+key+'">'+label+'</a>').join('')+'<a style="color:inherit" href="./explore.html?view='+(['annexe-kitchen','annexe-rear-court'].includes(view)?'annexe-kitchen':'annexe')+'">WALK HERE</a>';}
+if(ANNEXE_VIEWS[view]&&!ANNEXE_WARD_VIEWS[view]){const nav=document.getElementById('churtonNav');nav.hidden=false;nav.innerHTML='THE ANNEXE · '+[['front','FRONT'],['front-right','FRONT RIGHT'],['img1','RIGHT LAWN'],['side','LEFT SIDE'],['side-right','RIGHT SIDE'],['carden-photo','CARDEN SIDE'],['kitchen','REAR KITCHEN'],['rear-court','REAR COURT'],['plan','PLAN'],['site','SITE']].map(([key,label])=>'<a style="color:inherit;margin-right:12px" href="?view=annexe-'+key+'">'+label+'</a>').join('')+'<a style="color:inherit" href="./explore.html?view='+(['annexe-carden-photo','annexe-jarman-photo'].includes(view)?view:['annexe-kitchen','annexe-rear-court'].includes(view)?'annexe-kitchen':'annexe')+'">WALK HERE</a>';}
 if(ANNEXE_WARD_VIEWS[view]){
  const ward=ANNEXE_WARDS.find(ward=>ward.id===view),nav=document.getElementById('churtonNav');
  nav.hidden=false;nav.classList.add('annexe-ward-navigation');
