@@ -30,6 +30,7 @@ export function createGaragesMortuary(THREE,{brick,roof,worldUV,material}){
  const blue=material(0x78a4ba),blueDark=material(0x477286),blueLight=material(0x93bacb);
  const iron=material(0x354244),stone=material(0xaaa697),frame=material(0xc1c9c5);
  const glass=material(0x597477,{roughness:.53}),recess=material(0x273334),red=material(0x965945);
+ glass.userData.windowGlass=true;
  const concrete=material(0x98968b),brickBase=material(0x644436),slate=roof.clone();
  slate.color.set(0xadb5ba);brick=brick.clone();brick.color.set(0xcdb3a9);
  const rect=(x0,z0,x1,z1)=>[[x0,z0],[x1,z0],[x1,z1],[x0,z1]];
@@ -137,6 +138,7 @@ export function createGaragesMortuary(THREE,{brick,roof,worldUV,material}){
  // A broad, low blue ridge vent matches the tower service buildings' blue
  // roof dormers. Its walls emerge from the host slopes.
  const ventBlue=material(0x739eae),ventFrame=material(0xd5dcd5),ventGlass=material(0x526b70);
+ ventGlass.userData.windowGlass=true;
  m.solid(rect(-1.4,2.7,1.4,4.3),1.22,'Mortuary blue ridge vent walls',ventBlue,4.4);
  m.pitched(-1.4,2.7,1.4,4.3,5.62,.28,'Mortuary ridge vent','x',ventBlue);
  for(const side of [-1,1]){

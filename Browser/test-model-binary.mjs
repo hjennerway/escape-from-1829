@@ -15,7 +15,8 @@ function fixture(){
   const scene=new THREE.Scene(),camera=new THREE.PerspectiveCamera(46,1.3,.5,2000);
   scene.background=new THREE.Color(0xb5c7cd);scene.fog=new THREE.FogExp2(0xb5c7cd,.0019);
   const light=new THREE.DirectionalLight(0xffe2b7,2.8);light.target.position.set(23,0,-10);scene.add(light,light.target);
-  const geometry=new THREE.BoxGeometry(2,3,4);geometry.attributes.position.setX(0,2.75);geometry.setDrawRange(0,30);
+  const geometry=new THREE.BoxGeometry(2,3,4);
+  geometry.setAttribute('nightWindowId',new THREE.InstancedBufferAttribute(new Float32Array([1,2]),1));geometry.attributes.position.setX(0,2.75);geometry.setDrawRange(0,30);
   const texture=new THREE.DataTexture(new Uint8Array([255,30,10,255,0,10,250,180]),2,1);texture.colorSpace=THREE.SRGBColorSpace;texture.repeat.set(3,4);
   const material=new THREE.MeshStandardMaterial({color:0x8090a0,map:texture,roughness:.72,alphaTest:.2});
   const mesh=new THREE.InstancedMesh(geometry,material,2);mesh.name='Template';mesh.position.set(3,1,-9);mesh.rotation.y=.7;mesh.castShadow=true;
@@ -28,6 +29,8 @@ function fixture(){
 }
 const {scene,camera}=fixture(),encoded=encodeModel(serializeScene(THREE,scene,camera)),snapshot=decodeModel(encoded.buffer);
 const restored=deserializeScene(THREE,snapshot),a=restored.scene.getObjectByName('Template'),b=restored.scene.getObjectByName('Copy');
+assert(a.geometry.attributes.nightWindowId.isInstancedBufferAttribute);
+assert.deepEqual([...a.geometry.attributes.nightWindowId.array],[1,2]);
 assert.equal(a.geometry,b.geometry);assert.equal(a.material,b.material);
 assert.equal(restored.scene.userData.selected.tree,a);assert.equal(restored.scene.userData.selected.copies[0],b);
 assert.equal(a.instanceMatrix,b.instanceMatrix);assert.equal(a.instanceColor,b.instanceColor);

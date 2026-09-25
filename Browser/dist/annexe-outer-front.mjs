@@ -12,6 +12,7 @@ export function addCourtFronts(THREE,options){
 }
 function addFronts(THREE,{model,scale,brick,roof,material,worldUV,hipRoof,ranges,court=false}){
  const trim=material(0xa34d32),stone=material(0xb7ac90),frame=material(0xdedfd4),glass=material(0x273a3b),iron=material(0x30464d);
+ glass.userData.windowGlass=true;
  const groups=[];
  for(const side of [-1,1]){
   if(court&&side<0){groups.push(addJarmanFront(THREE,{model,host:ranges.find(b=>b.name==='West court front range'),brick,roof,material,worldUV}));continue;}

@@ -157,3 +157,17 @@ four layout states. The aerial layout, aerial performance, collision performance
 and walking tests pass. Shared GPU buffers and foliage detail levels remain
 active. With eleven added oaks, the default aerial view submits 299,196 tree
 triangles, within the updated 301,000-triangle budget (11,000 extra per oak).
+
+## Oak24 annexe roof clearance - 25 September 2026
+
+The owner's [circled tree](annexe-roof-tree-marked.png) is Oak24 beside the
+Oakmere west range. Reduce only this tree uniformly to 55% of the mature oak:
+12.1 units high and 5.5 units nominal crown radius. Its exact KML coordinates,
+grounded root position and seeded rotation remain unchanged. These dimensions
+are a visual clearance adjustment, not new survey measurements.
+
+The existing height/radius placement path scales the shared tree model,
+including branches, leaves and all foliage detail levels. At 60%, conservative
+branch/foliage bounds still reach the nearby roof bounds; at 55%, all are clear.
+The source change applies to browser scenes and the rebuilt local aerial model.
+Unity and Blender exports are unchanged.

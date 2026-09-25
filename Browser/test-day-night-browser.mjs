@@ -25,18 +25,28 @@ try{
    await page.locator('#periodSlider').fill(String(i));await page.evaluate(()=>new Promise(r=>requestAnimationFrame(r)));
    counts.push(await page.evaluate(()=>{const {lighting}=window.__night;return {year:window.__night.exterior.timeline.period.year,lamps:lighting.pools.count,night:lighting.night};}));
    assert(counts[i].lamps>20&&counts[i].night);
+   const windows=await page.evaluate(()=>{const w=window.__night.lighting.windows;return {count:w.count,visible:w.visibleCount,lit:w.selected.length};});
+   assert(windows.count>2500);assert.equal(windows.lit,Math.round(windows.visible/15));
   }
   report[mode]=counts;
   await shot(mode+'-2021');await page.locator('#resetAerial').click();assert.equal(await button.getAttribute('aria-pressed'),'true');
   await page.locator('#periodSlider').fill('8');
   await page.evaluate(()=>{const {exterior,controls}=window.__night;exterior.camera.position.set(320,24,-147);exterior.camera.lookAt(350,0,-96);controls.sync([350,0,-96]);});await shot(mode+'-road');
-  await button.click();assert.equal(await page.evaluate(()=>window.__night.lighting.lights.every(l=>l.intensity===0)),true);
+  const first=await page.evaluate(()=>[...window.__night.lighting.windows.selected]);
+  await button.click();assert.equal(await page.evaluate(()=>window.__night.lighting.lights.every(l=>l.intensity===0)&&window.__night.lighting.windows.selected.length===0),true);
+  await button.click();const second=await page.evaluate(()=>[...window.__night.lighting.windows.selected]);assert.notDeepEqual(first,second);
+  await page.evaluate(()=>{const {exterior,controls}=window.__night;exterior.camera.position.set(-32,13,74);exterior.camera.lookAt(0,8,20);controls.sync([0,8,20]);});
+  await shot(mode+'-windows');
+  assert.deepEqual(await page.evaluate(()=>window.__night.lighting.windows.selected),second,'Camera movement does not reshuffle windows');
+  await button.click();
  }
  if(report.compiled)assert.deepEqual(report.compiled,report.source);
  for(const width of [320,390,1200]){
   await page.setViewportSize({width,height:760});await page.goto(base+'/explore.html?view=front');await page.waitForFunction(()=>window.__night?.renderer.info.render.frame>3);
   assert.equal(await page.locator('#dayNightToggle').getAttribute('aria-pressed'),'false');await page.locator('#dayNightToggle').click();
   await shot('explore-'+width);
+  const windows=await page.evaluate(()=>{const w=window.__night.lighting.windows;return {visible:w.visibleCount,lit:w.selected.length};});
+  assert.equal(windows.lit,Math.round(windows.visible/15));
   if(width<=390){const toggle=await page.locator('#dayNightToggle').boundingBox(),panel=await page.locator('#layoutControls').boundingBox();assert(toggle.y+toggle.height<=panel.y,'Phone controls clear the timeline');}
   if(width===1200){await page.evaluate(()=>{const {lighting,walker}=window.__night;const lamp=lighting.lamps.filter(l=>l.visible).sort((a,b)=>Math.hypot(a.position.x,a.position.z-65)-Math.hypot(b.position.x,b.position.z-65))[0];const p=lamp.position;walker.setView({position:[p.x+8,1.8,p.z+11],target:[p.x,4,p.z]});});await shot('explore-lamp');}await page.locator('#periodSlider').fill('0');await page.locator('#periodSlider').fill('12');
   const bounds=await page.locator('#dayNightToggle').boundingBox();assert(bounds.x>=0&&bounds.x+bounds.width<=width&&bounds.height>=44);

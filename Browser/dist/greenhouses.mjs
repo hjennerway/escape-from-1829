@@ -21,6 +21,7 @@ export function createGreenhouses(THREE,{brick,roof,worldUV,material}){
  site.userData.layout='historic';site.userData.reference='Research/greenhouses/README.md';
  const frame=material(0xb8c7c0),iron=material(0x354343),stone=material(0xaaa799),cream=material(0xd6dbcc);
  const blue=material(0x3886a6),blueDark=material(0x315f70),recess=material(0x283431),windowGlass=material(0x536c70,{roughness:.4});
+ windowGlass.userData.windowGlass=true;
  const glass=material(0x93b8b4,{transparent:true,opacity:.33,depthWrite:false,side:THREE.DoubleSide,metalness:.12,roughness:.25});
  const soil=material(0x4f4b32),leaves=material(0x48623a),wood=material(0x77705b),concrete=material(0x8d9086);
  const wall=brick.clone();wall.color.set(0xc8aca0);

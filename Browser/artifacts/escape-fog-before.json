@@ -1,0 +1,254 @@
+[
+  {
+    "name": "mobile",
+    "reducedMotion": "no-preference",
+    "seconds": 0,
+    "state": "cutscene",
+    "aspect": 0.5539772727272727,
+    "density": 0.0019,
+    "storedDensity": 0.0019,
+    "opacity": [
+      0.9913563078819233,
+      0.9956016334729026,
+      0.9859707255126638
+    ]
+  },
+  {
+    "name": "mobile",
+    "reducedMotion": "no-preference",
+    "seconds": 5,
+    "state": "cutscene",
+    "aspect": 0.5539772727272727,
+    "density": 0.0019,
+    "storedDensity": 0.0019,
+    "opacity": [
+      0.9908335677079793,
+      0.9950729232721536,
+      0.9864131635170141
+    ]
+  },
+  {
+    "name": "mobile",
+    "reducedMotion": "no-preference",
+    "seconds": 10,
+    "state": "won",
+    "aspect": 0.5539772727272727,
+    "density": 0.0019,
+    "storedDensity": 0.0019,
+    "opacity": [
+      0.9902997081097396,
+      0.9944067766337858,
+      0.9869876238821534
+    ]
+  },
+  {
+    "name": "narrow",
+    "reducedMotion": "no-preference",
+    "seconds": 0,
+    "state": "cutscene",
+    "aspect": 0.46153846153846156,
+    "density": 0.0019,
+    "storedDensity": 0.0019,
+    "opacity": [
+      0.9945000506528064,
+      0.9972851932229451,
+      0.9908641227170241
+    ]
+  },
+  {
+    "name": "narrow",
+    "reducedMotion": "no-preference",
+    "seconds": 5,
+    "state": "cutscene",
+    "aspect": 0.46153846153846156,
+    "density": 0.0019,
+    "storedDensity": 0.0019,
+    "opacity": [
+      0.994151414610009,
+      0.9969438211016801,
+      0.9911659578394857
+    ]
+  },
+  {
+    "name": "narrow",
+    "reducedMotion": "no-preference",
+    "seconds": 10,
+    "state": "won",
+    "aspect": 0.46153846153846156,
+    "density": 0.0019,
+    "storedDensity": 0.0019,
+    "opacity": [
+      0.9937942373516054,
+      0.9965111490163094,
+      0.9915571379878184
+    ]
+  },
+  {
+    "name": "desktop",
+    "reducedMotion": "no-preference",
+    "seconds": 0,
+    "state": "cutscene",
+    "aspect": 1.6,
+    "density": 0.0019,
+    "storedDensity": 0.0019,
+    "opacity": [
+      0.43162863843876154,
+      0.5559661887829453,
+      0.33425953094012406
+    ]
+  },
+  {
+    "name": "desktop",
+    "reducedMotion": "no-preference",
+    "seconds": 5,
+    "state": "cutscene",
+    "aspect": 1.6,
+    "density": 0.0019,
+    "storedDensity": 0.0019,
+    "opacity": [
+      0.42010336249353053,
+      0.5359671783313017,
+      0.3409898425688864
+    ]
+  },
+  {
+    "name": "desktop",
+    "reducedMotion": "no-preference",
+    "seconds": 10,
+    "state": "won",
+    "aspect": 1.6,
+    "density": 0.0019,
+    "storedDensity": 0.0019,
+    "opacity": [
+      0.40899052485183196,
+      0.5131826447542174,
+      0.3499769909702646
+    ]
+  },
+  {
+    "name": "mobile",
+    "reducedMotion": "reduce",
+    "seconds": 0,
+    "state": "cutscene",
+    "aspect": 0.5539772727272727,
+    "density": 0.0019,
+    "storedDensity": 0.0019,
+    "opacity": [
+      0.9909128505533658,
+      0.99516038836059,
+      0.9863380478733221
+    ]
+  },
+  {
+    "name": "mobile",
+    "reducedMotion": "reduce",
+    "seconds": 5,
+    "state": "cutscene",
+    "aspect": 0.5539772727272727,
+    "density": 0.0019,
+    "storedDensity": 0.0019,
+    "opacity": [
+      0.9909128505533658,
+      0.99516038836059,
+      0.9863380478733221
+    ]
+  },
+  {
+    "name": "mobile",
+    "reducedMotion": "reduce",
+    "seconds": 10,
+    "state": "won",
+    "aspect": 0.5539772727272727,
+    "density": 0.0019,
+    "storedDensity": 0.0019,
+    "opacity": [
+      0.9909128505533658,
+      0.99516038836059,
+      0.9863380478733221
+    ]
+  },
+  {
+    "name": "narrow",
+    "reducedMotion": "reduce",
+    "seconds": 0,
+    "state": "cutscene",
+    "aspect": 0.46153846153846156,
+    "density": 0.0019,
+    "storedDensity": 0.0019,
+    "opacity": [
+      0.994204362704641,
+      0.9970004245125217,
+      0.9911147458954759
+    ]
+  },
+  {
+    "name": "narrow",
+    "reducedMotion": "reduce",
+    "seconds": 5,
+    "state": "cutscene",
+    "aspect": 0.46153846153846156,
+    "density": 0.0019,
+    "storedDensity": 0.0019,
+    "opacity": [
+      0.994204362704641,
+      0.9970004245125217,
+      0.9911147458954759
+    ]
+  },
+  {
+    "name": "narrow",
+    "reducedMotion": "reduce",
+    "seconds": 10,
+    "state": "won",
+    "aspect": 0.46153846153846156,
+    "density": 0.0019,
+    "storedDensity": 0.0019,
+    "opacity": [
+      0.994204362704641,
+      0.9970004245125217,
+      0.9911147458954759
+    ]
+  },
+  {
+    "name": "desktop",
+    "reducedMotion": "reduce",
+    "seconds": 0,
+    "state": "cutscene",
+    "aspect": 1.6,
+    "density": 0.0019,
+    "storedDensity": 0.0019,
+    "opacity": [
+      0.42180889554602374,
+      0.5391474382539543,
+      0.33983663257602914
+    ]
+  },
+  {
+    "name": "desktop",
+    "reducedMotion": "reduce",
+    "seconds": 5,
+    "state": "cutscene",
+    "aspect": 1.6,
+    "density": 0.0019,
+    "storedDensity": 0.0019,
+    "opacity": [
+      0.42180889554602374,
+      0.5391474382539543,
+      0.33983663257602914
+    ]
+  },
+  {
+    "name": "desktop",
+    "reducedMotion": "reduce",
+    "seconds": 10,
+    "state": "won",
+    "aspect": 1.6,
+    "density": 0.0019,
+    "storedDensity": 0.0019,
+    "opacity": [
+      0.42180889554602374,
+      0.5391474382539543,
+      0.33983663257602914
+    ]
+  }
+]

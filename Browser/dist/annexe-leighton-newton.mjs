@@ -7,6 +7,7 @@ export function addLeightonNewton(THREE,{ward,scale:S,brick,roof,material,worldU
  const masonry=brick.clone();masonry.color.setHex(0x897969);
  for(const o of ward.children)if(o.name.endsWith('brick walls'))o.material=masonry;
  const trim=material(0xa75a40),frame=material(0xe3e6d9),glass=material(0x324745),blue=material(0x477f99),stone=material(0xa29c89);
+ glass.userData.windowGlass=true;
  const batches=new Map(),openings=[];
  const mesh=(g,m,x,y,z,name)=>{const o=new THREE.Mesh(g,m);o.position.set(x*S,y,z*S);o.name='Leighton Newton '+name;o.castShadow=o.receiveShadow=true;group.add(o);return o;};
  const box=(m,x,y,z,w,h,d,name,collision=false)=>{const o=mesh(worldUV(new THREE.BoxGeometry(w*S,h,d*S),1.7),m,x,y,z,name);if(collision)o.userData.orientedCollision=true;return o;};

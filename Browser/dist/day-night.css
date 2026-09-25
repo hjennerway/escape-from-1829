@@ -3,12 +3,13 @@
 #dayNightToggle[aria-pressed="false"] .day-glyph{background:#d4dfb9;color:#26331d;opacity:1}
 #dayNightToggle[aria-pressed="true"] .night-glyph{background:#293e60;color:#ffe4af;opacity:1}
 #dayNightToggle:focus-visible{outline:2px solid #e3d5a4;outline-offset:3px}
-#previewNav #dayNightToggle,.explore-nav #dayNightToggle{margin-left:auto}
+.explore-nav #dayNightToggle{margin-left:auto}
 #previewNav #locationsPicker,.explore-nav #locationsPicker{margin-left:0;display:flex;align-items:center;gap:8px}
+#previewNav #locationsPicker{margin-left:auto}
 
 /* Keep both rows of controls clear of the walking timeline on narrow phones. */
 @media(max-width:650px){
- #previewNav #dayNightToggle{grid-column:2;grid-row:1;margin-left:0;justify-self:end}
+ #previewNav #locationsPanel{top:116px}
  #previewNav #locationsPicker{grid-column:1 / -1;grid-row:2;justify-self:end}
  .explore-nav{display:grid;grid-template-columns:1fr auto;gap:8px}
  .explore-nav #dayNightToggle{grid-column:2;grid-row:1;margin-left:0;justify-self:end;order:0}
@@ -18,3 +19,6 @@
  body.explore-touch .explore-nav~#layoutControls{max-height:calc(100dvh - 372px)}
 }
 @media(min-width:500px) and (max-width:650px) and (max-height:500px){body.explore-touch .explore-nav~#layoutControls{max-height:calc(100dvh - 144px)}}
+
+/* Keep all four aerial actions on one row on narrow phones. */
+@media(max-width:350px){#previewNav #dayNightToggle span{width:22px}}

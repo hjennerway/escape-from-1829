@@ -12,9 +12,15 @@ const exterior=createEscapeExterior(THREE,1.5),layouts=createAerialLayouts(THREE
 const renderer={toneMappingExposure:1.25},lighting=createDayNight(THREE,exterior,renderer),dayColor=exterior.scene.background.clone(),dayFog=exterior.scene.fog.density;
 assert.equal(lighting.night,false);assert(lighting.lamps.length>100);assert.equal(lighting.lights.length,STREET_LIGHT_LIMIT);
 assert(lighting.lights.every(l=>l.intensity===0&&!l.castShadow));
+assert(lighting.windows.count>2500);assert.equal(lighting.windows.selected.length,0);
 const counts={};
 for(const {year} of PERIODS){
  timeline.setPeriod(year);lighting.setNight(true);
+ assert.equal(lighting.windows.selected.length,Math.round(lighting.windows.visibleCount/15));
+ const selected=[...lighting.windows.selected];lighting.update();lighting.setNight(true);
+ assert.deepEqual(lighting.windows.selected,selected,'Updates and repeated night setting keep the same windows');
+ lighting.setNight(false);assert.equal(lighting.windows.selected.length,0);assert(lighting.windows.selection.image.data.every(v=>v===0));
+ lighting.setNight(true);assert.notDeepEqual(lighting.windows.selected,selected,'Entering night again picks a fresh random set');
  const visible=lighting.lamps.filter(l=>visibleInScene(l.owner));counts[year]=visible.length;
  assert(visible.length>20);assert.equal(lighting.pools.count,visible.length);
  for(const lamp of lighting.lamps){

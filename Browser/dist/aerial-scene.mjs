@@ -1,6 +1,7 @@
 import {attachAerialLayouts} from './aerial-layouts.mjs';
 import {prepareEstateTimeline,attachEstateTimeline,ESTATE_TIMELINE_VERSION} from './estate-timeline.mjs';
 import {attachBuildingDetail} from './building-detail.mjs';
+import {prepareWindowLights} from './window-lights.mjs';
 import {cacheAerialTransforms} from './aerial-performance.mjs';
 import {matchEstateGrass} from './estate-grass.mjs';
 import {MODEL_FORMAT,decodeModel,serializeScene,deserializeScene} from './model-binary.mjs';
@@ -14,6 +15,7 @@ export async function buildAerialScene(THREE,aspect,{detail=true}={}){
   prepareEstateTimeline(THREE,exterior,layouts);
   const exclude=[exterior.trees,exterior.terrain,...layouts.visibilityObjects];
   const shadowLight=exterior.scene.children.find(o=>o.isDirectionalLight&&o.castShadow);
+  prepareWindowLights(THREE,exterior.model);
   const buildingDetail=detail?createBuildingDetail(THREE,exterior.model,{exclude,shadowLight}):null;
   batchAerialMeshes(THREE,exterior.model,{exclude});cacheAerialTransforms(exterior.scene);
   return {exterior,layouts,buildingDetail};

@@ -9,6 +9,7 @@ export function addLarktonRecess(THREE,{model,ranges,openings,scale,brick,roof,m
  const group=new THREE.Group();group.name='Larkton recessed ward entrance';ward.add(group);
  const paving=material(0x77796f);
  const trim=material(0xa34d32),frame=material(0xdedfd4),glass=material(0x273a3b),iron=material(0x30464d),stone=material(0xb7ac90);
+ glass.userData.windowGlass=true;
  const mesh=(g,m,x,y,z,name)=>{const o=new THREE.Mesh(g,m);o.position.set(x,y,z);o.name=name;o.castShadow=o.receiveShadow=true;group.add(o);return o;};
  const box=(m,x,y,z,w,h,d,name,collision=false)=>{const o=mesh(worldUV(new THREE.BoxGeometry(w,h,d),1.7),m,x,y,z,name);if(collision)o.userData.orientedCollision=true;return o;};
  const wall=(x,z,w,h,d,name)=>box(brick,x*scale,h/2,z*scale,w*scale,h,d*scale,name,true);

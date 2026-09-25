@@ -1,4 +1,5 @@
 import {LAMP_HEAD,visibleInScene} from './street-lamps.mjs';
+import {createWindowLights} from './window-lights.mjs';
 export const STREET_LIGHT_LIMIT=8;
 
 function glowTexture(THREE){
@@ -17,6 +18,7 @@ function glowTexture(THREE){
 // network readable, with emissive heads and small halos at every visible lamp.
 export function createDayNight(THREE,exterior,renderer,{walking=false}={}){
  const {scene,camera,model}=exterior,lamps=[],diffusers=new Set();
+ const windows=createWindowLights(THREE,model);
  scene.updateMatrixWorld(true);
  model.traverse(owner=>{
   if(owner.userData.streetLamps)for(const p of owner.userData.streetLamps){
@@ -50,6 +52,7 @@ export function createDayNight(THREE,exterior,renderer,{walking=false}={}){
  }
  function update(){
   if(!night)return;
+  windows.update();
   scene.fog.density=walking?.0032:.00065;
   refreshFixtures();
   focus.copy(camera.position);
@@ -65,6 +68,7 @@ export function createDayNight(THREE,exterior,renderer,{walking=false}={}){
   });
  }
  function setNight(value){
+  windows.setNight(Boolean(value));
   night=Boolean(value);effects.visible=night;
   scene.background.copy(night?new THREE.Color(0x070e1b):day.background);
   scene.fog.color.copy(night?new THREE.Color(0x111d30):day.fog);scene.fog.density=night?(walking?.0032:.00065):day.density;
@@ -75,7 +79,7 @@ export function createDayNight(THREE,exterior,renderer,{walking=false}={}){
   if(!night)for(const light of lights)light.intensity=0;
   exterior.invalidateShadows();update();
  }
- return {setNight,update,lamps,lights,pools,get night(){return night;}};
+ return {setNight,update,lamps,lights,pools,windows,get night(){return night;}};
 }
 
 export function bindDayNight(lighting,root=document){

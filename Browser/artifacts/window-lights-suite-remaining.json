@@ -1,0 +1,130 @@
+[
+  {
+    "command": "node test-oakmere-court.mjs",
+    "code": 0
+  },
+  {
+    "command": "node test-oakmere.mjs",
+    "code": 0
+  },
+  {
+    "command": "node test-oakmere-west.mjs",
+    "code": 0
+  },
+  {
+    "command": "node test-oakmere-windows.mjs",
+    "code": 0
+  },
+  {
+    "command": "node test-annexe-wards.mjs",
+    "code": 0
+  },
+  {
+    "command": "node test-leighton-newton.mjs",
+    "code": 1
+  },
+  {
+    "command": "node test-churton.mjs",
+    "code": 0
+  },
+  {
+    "command": "node test-upton.mjs",
+    "code": 0
+  },
+  {
+    "command": "node test-garages-mortuary.mjs",
+    "code": 0
+  },
+  {
+    "command": "node test-greenhouses.mjs",
+    "code": 0
+  },
+  {
+    "command": "node test-main-admin.mjs",
+    "code": 0
+  },
+  {
+    "command": "node test-main-kitchen.mjs",
+    "code": 0
+  },
+  {
+    "command": "node test-main-admin-refine2.mjs",
+    "code": 0
+  },
+  {
+    "command": "node test-aerial-controls.mjs",
+    "code": 0
+  },
+  {
+    "command": "node test-device-location.mjs",
+    "code": 0
+  },
+  {
+    "command": "node test-aerial-layouts.mjs",
+    "code": 0
+  },
+  {
+    "command": "node test-kml-imports.mjs",
+    "code": 0
+  },
+  {
+    "command": "node test-kml-11.mjs",
+    "code": 0
+  },
+  {
+    "command": "node test-modern-entrance.mjs",
+    "code": 0
+  },
+  {
+    "command": "node test-modern-car-park.mjs",
+    "code": 0
+  },
+  {
+    "command": "node test-parsons-retrace.mjs",
+    "code": 0
+  },
+  {
+    "command": "node test-historic-roads.mjs",
+    "code": 0
+  },
+  {
+    "command": "node test-west-parsons-junctions.mjs",
+    "code": 0
+  },
+  {
+    "command": "node test-admin-teardrop.mjs",
+    "code": 0
+  },
+  {
+    "command": "node test-annexe-access.mjs",
+    "code": 0
+  },
+  {
+    "command": "node test-annexe-rear-roads.mjs",
+    "code": 0
+  },
+  {
+    "command": "node test-performance.mjs",
+    "code": 0
+  },
+  {
+    "command": "node test-aerial-performance.mjs",
+    "code": 0
+  },
+  {
+    "command": "node test-building-detail.mjs",
+    "code": 0
+  },
+  {
+    "command": "node test-outhouse.mjs",
+    "code": 0
+  },
+  {
+    "command": "node test-willows.mjs",
+    "code": 0
+  },
+  {
+    "command": "node test-building-photos.mjs",
+    "code": 0
+  }
+]

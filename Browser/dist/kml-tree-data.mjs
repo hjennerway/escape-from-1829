@@ -64,8 +64,11 @@ export const KML_TREES=Object.freeze(KML_TREE_POINTS.map(point=>{
   const species=point.name.startsWith('Pine')?'pine':point.name.startsWith('Beech')?'beech':point.name.startsWith('Willow')?'willow':'oak';
   const model={pine:{height:24,radius:5.8,seed:182900},oak:{height:22,radius:10,seed:182902},
     willow:{height:16,radius:7,seed:182911},beech:{height:19.5,radius:8.6,seed:1901,copper:false}}[species];
+  // The marked Oak24 crown intersected the annexe roof. Scale only this tree,
+  // preserving its surveyed root, seeded rotation and shared model geometry.
+  const scale=point.name==='Oak24'?.55:1;
   return Object.freeze({name:point.name,species,x,z,latitude,longitude,altitude,...model,
-    rotation:rotationSeed/2**32*Math.PI*2});
+    height:model.height*scale,radius:model.radius*scale,rotation:rotationSeed/2**32*Math.PI*2});
 }));
 export const KML_PINE_TREES=Object.freeze(KML_TREES.filter(tree=>tree.species==='pine'));
 export const KML_OAK_TREES=Object.freeze(KML_TREES.filter(tree=>tree.species==='oak'));

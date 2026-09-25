@@ -1,3 +1,4 @@
+import {prepareWindowLights} from './window-lights.mjs';
 const controllers=new WeakMap();
 
 // Aerial-only window LOD. Bake the existing rectangular panes, frames and sills
@@ -5,6 +6,7 @@ const controllers=new WeakMap();
 // Source meshes remain intact in the close level, including their shadow flags.
 export function createBuildingDetail(THREE,root,{exclude=[],shadowLight=null}={}){
   if(controllers.has(root))return controllers.get(root);
+  prepareWindowLights(THREE,root);
   const excluded=new Set(exclude),entries=[],patterns=new Map(),pages=[];
   const stats={windows:0,parts:0,groups:0,patterns:0,atlasPages:0};
   const cellSize=4,tileW=72,tileH=104,padding=4,imageW=64,imageH=96,atlasSize=1024,columns=14,rows=9;
@@ -14,7 +16,7 @@ export function createBuildingDetail(THREE,root,{exclude=[],shadowLight=null}={}
   function atlasTile(parts,bounds){
     const commands=parts.slice().sort((a,b)=>a.n+a.d/2-b.n-b.d/2).map(p=>[
       (p.u-p.w/2-bounds.minU)/bounds.w*imageW,(p.y-p.h/2-bounds.minY)/bounds.h*imageH,
-      p.w/bounds.w*imageW,p.h/bounds.h*imageH,p.box.source.material.color.getHex()
+      p.w/bounds.w*imageW,p.h/bounds.h*imageH,p.box.source.material.color.getHex(),p.box.pane?1:0
     ]);
     const key=JSON.stringify(commands.map(c=>c.map(v=>Math.round(v*100)/100)));
     if(patterns.has(key))return patterns.get(key);
@@ -24,10 +26,14 @@ export function createBuildingDetail(THREE,root,{exclude=[],shadowLight=null}={}
       texture.name='Distant window atlas '+pageIndex;texture.colorSpace=THREE.SRGBColorSpace;
       texture.generateMipmaps=true;texture.minFilter=THREE.LinearMipmapLinearFilter;texture.magFilter=THREE.LinearFilter;
       const material=new THREE.MeshStandardMaterial({map:texture,alphaTest:.15,roughness:.8,metalness:.05,side:THREE.DoubleSide});
-      pages.push({pixels,texture,material});
+      const emission=new Uint8Array(atlasSize*atlasSize*4),emissiveMap=new THREE.DataTexture(emission,atlasSize,atlasSize);
+      emissiveMap.name='Distant window glass mask '+pageIndex;
+      emissiveMap.generateMipmaps=true;emissiveMap.minFilter=THREE.LinearMipmapLinearFilter;
+      material.emissiveMap=emissiveMap;material.userData.nightWindowGlass=true;
+      pages.push({pixels,texture,material,emission,emissiveMap});
     }
     const page=pages[pageIndex],ox=slot%columns*tileW+padding,oy=Math.floor(slot/columns)*tileH+padding;
-    for(const [x,y,w,h,hex] of commands){
+    for(const [x,y,w,h,hex,glass] of commands){
       const rgb=[hex>>16&255,hex>>8&255,hex&255];
       for(let py=Math.max(0,Math.floor(y));py<Math.min(imageH,Math.ceil(y+h));py++)for(let px=Math.max(0,Math.floor(x));px<Math.min(imageW,Math.ceil(x+w));px++){
         const cover=Math.max(0,Math.min(px+1,x+w)-Math.max(px,x))*Math.max(0,Math.min(py+1,y+h)-Math.max(py,y));
@@ -35,6 +41,8 @@ export function createBuildingDetail(THREE,root,{exclude=[],shadowLight=null}={}
         if(!alpha)continue;
         for(let c=0;c<3;c++)page.pixels[offset+c]=(rgb[c]*cover+page.pixels[offset+c]*oldAlpha*(1-cover))/alpha;
         page.pixels[offset+3]=alpha*255;
+        for(let c=0;c<3;c++)page.emission[offset+c]=(255*glass*cover+page.emission[offset+c]*oldAlpha*(1-cover))/alpha;
+        page.emission[offset+3]=alpha*255;
       }
     }
     const tile={page:pageIndex,u0:ox/atlasSize,v0:oy/atlasSize,u1:(ox+imageW)/atlasSize,v1:(oy+imageH)/atlasSize};
@@ -74,6 +82,8 @@ export function createBuildingDetail(THREE,root,{exclude=[],shadowLight=null}={}
     copy.name=source.name+' · reduced detail';copy.position.copy(source.position);copy.quaternion.copy(source.quaternion);copy.scale.copy(source.scale);
     copy.castShadow=source.castShadow;copy.receiveShadow=source.receiveShadow;copy.layers.mask=source.layers.mask;copy.renderOrder=source.renderOrder;
     keep.forEach((index,i)=>{source.getMatrixAt(index,local);copy.setMatrixAt(i,local);if(source.instanceColor){source.getColorAt(index,colour);copy.setColorAt(i,colour);}});
+    const ids=source.geometry.attributes.nightWindowId;
+    if(ids){copy.geometry=source.geometry.clone();copy.geometry.setAttribute('nightWindowId',new THREE.InstancedBufferAttribute(new Float32Array(keep.map(i=>ids.getX(i))),1));}
     copy.computeBoundingSphere();return copy;
   }
 
@@ -109,7 +119,8 @@ export function createBuildingDetail(THREE,root,{exclude=[],shadowLight=null}={}
       const minY=Math.min(...parts.map(p=>p.y-p.h/2)),maxY=Math.max(...parts.map(p=>p.y+p.h/2));
       const bounds={minU,minY,w:maxU-minU,h:maxY-minY},tile=atlasTile(parts,bounds);
       const depth=Math.max(...parts.map(p=>p.n+p.d/2))+.002;
-      windows.push({centre:c.clone().addScaledVector(normal,depth),normal,tangent,bounds,tile});
+      const ids=pane.source.geometry.attributes.nightWindowId,id=ids?.getX(pane.source.isInstancedMesh?pane.index:0)??0;
+      windows.push({centre:c.clone().addScaledVector(normal,depth),normal,tangent,bounds,tile,id});
       for(const p of parts)p.box.used=true;
       stats.windows++;stats.parts+=parts.length;
     }
@@ -126,12 +137,12 @@ export function createBuildingDetail(THREE,root,{exclude=[],shadowLight=null}={}
     }
     const byPage=new Map(),worldBounds=new THREE.Box3();let windowHeight=0;
     for(const window of windows){
-      const {centre,normal,tangent,bounds:b,tile}=window;
-      if(!byPage.has(tile.page))byPage.set(tile.page,{positions:[],normals:[],uv:[]});
+      const {centre,normal,tangent,bounds:b,tile,id}=window;
+      if(!byPage.has(tile.page))byPage.set(tile.page,{positions:[],normals:[],uv:[],ids:[]});
       const data=byPage.get(tile.page);
       for(const [u,v] of [[0,0],[1,0],[1,1],[0,0],[1,1],[0,1]]){
         const p=centre.clone().addScaledVector(tangent,b.minU+u*b.w);p.y+=b.minY+v*b.h;
-        data.positions.push(...p.toArray());data.normals.push(...normal.toArray());data.uv.push(u?tile.u1:tile.u0,v?tile.v1:tile.v0);
+        data.positions.push(...p.toArray());data.normals.push(...normal.toArray());data.uv.push(u?tile.u1:tile.u0,v?tile.v1:tile.v0);data.ids.push(id);
         worldBounds.expandByPoint(p.applyMatrix4(parent.matrixWorld));
       }
       windowHeight=Math.max(windowHeight,b.h*new THREE.Vector3().setFromMatrixColumn(parent.matrixWorld,1).length());
@@ -139,13 +150,14 @@ export function createBuildingDetail(THREE,root,{exclude=[],shadowLight=null}={}
     for(const [page,data] of byPage){
       const geometry=new THREE.BufferGeometry();
       for(const [name,values,count] of [['position',data.positions,3],['normal',data.normals,3],['uv',data.uv,2]])geometry.setAttribute(name,new THREE.Float32BufferAttribute(values,count));
+      geometry.setAttribute('nightWindowId',new THREE.Float32BufferAttribute(data.ids,1));
       geometry.computeBoundingSphere();
       for(const level of [1,2]){const mesh=new THREE.Mesh(geometry,pages[page].material);mesh.name=parent.name+' · textured windows';mesh.receiveShadow=true;mesh.userData.buildingWindowProxy=true;levels[level].add(mesh);}
     }
     entries.push({parent,levels,sphere:worldBounds.getBoundingSphere(new THREE.Sphere()),windowHeight,level:0});
   }
   visit(root);
-  for(const page of pages)page.texture.needsUpdate=true;
+  for(const page of pages){page.texture.needsUpdate=true;page.emissiveMap.needsUpdate=true;}
   stats.groups=entries.length;stats.patterns=patterns.size;stats.atlasPages=pages.length;
   return attachBuildingDetail(THREE,root,{entries,stats,shadowLight});
 }

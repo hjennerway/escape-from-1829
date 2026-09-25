@@ -41,7 +41,7 @@ export function decodeModel(buffer){
   });
 }
 
-const attribute=a=>({array:a.array,itemSize:a.itemSize,normalized:a.normalized,usage:a.usage});
+const attribute=a=>({array:a.array,itemSize:a.itemSize,normalized:a.normalized,usage:a.usage,...(a.isInstancedBufferAttribute?{meshPerAttribute:a.meshPerAttribute}:{})});
 const sphere=b=>b?{center:b.center.toArray(),radius:b.radius}:null;
 const box=b=>b?{min:b.min.toArray(),max:b.max.toArray()}:null;
 
@@ -98,7 +98,7 @@ export function deserializeScene(THREE,data){
   if(data.revision!==THREE.REVISION)throw new Error('Precompiled model uses a different Three.js revision');
   const attributes=new WeakMap();
   function attr(a,instance=false){
-    if(!attributes.has(a.array))attributes.set(a.array,new (instance?THREE.InstancedBufferAttribute:THREE.BufferAttribute)(a.array,a.itemSize,a.normalized).setUsage(a.usage));
+    if(!attributes.has(a.array))attributes.set(a.array,new (instance||a.meshPerAttribute!==undefined?THREE.InstancedBufferAttribute:THREE.BufferAttribute)(a.array,a.itemSize,a.normalized,a.meshPerAttribute??1).setUsage(a.usage));
     return attributes.get(a.array);
   }
   const readBox=b=>b?new THREE.Box3(new THREE.Vector3(...b.min),new THREE.Vector3(...b.max)):null;

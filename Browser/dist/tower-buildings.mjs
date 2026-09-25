@@ -105,6 +105,7 @@ export function createTowerBuildings(THREE,exterior){
  roof.color.multiplyScalar(1.15);
  const mat=color=>new THREE.MeshStandardMaterial({color,roughness:.88});
  const stone=mat(0xb9b5a5),frame=mat(0xd5dcd5),glass=mat(0x526b70),dark=mat(0x343d3b),red=mat(0x995f49),blue=mat(0x739eae),flat=mat(0x4e5450);
+ glass.userData.windowGlass=true;
  const batches=new Map(),openings=[],copyMeshes=[],copyDetails=[];
  const movingMeshes=[];
  let placement=null;

@@ -321,11 +321,19 @@ function drawMapCanvas(c,s){
  for(const e of enemies){if(e.floor!==player.floor)continue;const ex=e.x/layout.cellSize*s+s*.5,ez=e.z/layout.cellSize*s+s*.5;c.fillStyle=e.type===2?'#8fe0c4':'#e1c278';c.beginPath();c.arc(ex,ez,Math.max(2,s*.42),0,7);c.fill();c.fillStyle='#101810';c.font=`bold ${Math.max(7,s*1.1)}px Arial`;c.textAlign='center';c.textBaseline='middle';c.fillText(e.type===2?'G':'K',ex,ez);c.textAlign='left';c.textBaseline='alphabetic';}
 }
 function drawMap(){if(!$('floorMap').hidden)drawMapCanvas(mapContext,10);drawMapCanvas(miniMapContext,5);}
+function renderAerialBackdrop(exterior){
+ // Distant portrait cameras need light haze to keep the estate visible.
+ // Restore the shared fog after drawing so arrival retains its atmosphere.
+ const fog=exterior.scene.fog,fogDensity=fog?.density;
+ if(fog)fog.density=fogDensity*.25;
+ renderer.render(exterior.scene,exterior.camera);
+ if(fog)fog.density=fogDensity;
+}
 function animate(){requestAnimationFrame(animate);const frameDt=clock.getDelta(),dt=Math.min(frameDt,.04);
  if(document.hidden)return;
  if(state==='cutscene'||state==='won'){
   if(state==='cutscene'&&!document.hidden)escapeCutscene.update(frameDt);
-  renderer.render(escapeExterior.scene,escapeExterior.camera);return;
+  renderAerialBackdrop(escapeExterior);return;
  }
  if(state==='arrival'){
   if(!document.hidden)arrivalCutscene.update(frameDt);
@@ -334,16 +342,12 @@ function animate(){requestAnimationFrame(animate);const frameDt=clock.getDelta()
   if(!document.hidden)landingTime+=Math.min(frameDt,.1);
   const shot=sampleLanding(landingTime,{aspect:exterior.camera.aspect,reducedMotion:landingReducedMotion});
   exterior.camera.position.set(...shot.position);exterior.camera.lookAt(...shot.target);
-  // Keep only a quarter of the landing haze; restore the original fog for play.
-  const fog=exterior.scene.fog,fogDensity=fog?.density;
-  if(fog)fog.density=fogDensity*.25;
-  renderer.render(exterior.scene,exterior.camera);
-  if(fog)fog.density=fogDensity;
+  renderAerialBackdrop(exterior);
   // Reveal the canvas only after its first complete aerial frame is drawn.
   if(!$('landingPreview').hidden){$('landingPreview').hidden=true;canvas.classList.add('scene-ready');}
   return;
  }
- if(state==='cutscene'){renderer.render(escapeExterior.scene,escapeExterior.camera);return;}
+ if(state==='cutscene'){renderAerialBackdrop(escapeExterior);return;}
  interiorLights.update(player);camera.getWorldDirection(tmp);torch.position.copy(camera.position);torchTarget.position.copy(camera.position).addScaledVector(tmp,12);renderer.render(scene,camera);}
 $('start').onclick=start;$('closeHelp').onclick=resume;$('helpPlay').onclick=resume;$('retry').onclick=start;$('resume').onclick=resume;$('pause').onclick=pause;$('audio').onchange=e=>audioOn=e.target.checked;
 function toggleMap(){if(state==='play'){$('floorMap').hidden=!$('floorMap').hidden;drawMap();}}

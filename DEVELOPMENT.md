@@ -2794,3 +2794,123 @@ The full npm test suite and all checks after its first failure were run: the
 only failures remain the previously recorded Jarman and Leighton/Newton
 protected-geometry snapshots. These inspect the exterior before roadside lamps
 are added. Evidence and previews use Browser/artifacts/annexe-lamps-*.
+
+
+## Southern estate drive / Parsons seamless junction — 24 September 2026
+
+Joined the owner's three circled road ends with one local asphalt surface.
+The through-road verge remains continuous, the two inside corners are rounded,
+and pale kerbs follow exposed grass edges only. The junction and its borders
+inherit the Southern estate drive's Historic/The Main visibility, so the
+separate Parsons endpoint is retained outside those periods and layouts.
+See Research/historic-roads/README.md for the reference and regeneration steps.
+
+The period regression samples nearly the full six-unit carriageway through
+both former gaps and across the Parsons mouth, before and after batching.
+It also checks that the junction is absent when the drive is absent. Dedicated
+historic-road and annexe-access tests pass. The full npm test suite and its
+continuation pass 73 of 75 checks; the Jarman and Leighton/Newton protected
+geometry fingerprints fail identically with the new junction excluded by an
+in-memory module hook, confirming that both failures are independent.
+
+Rebuilt the local aerial model. npm run test:compiled passes, including source
+image comparison, full detail, fallback loading, every timeline stop, mobile
+controls and walking collision refresh. Overhead and oblique source/compiled
+junction previews were visually inspected. Evidence uses the
+Browser/artifacts/southern-junction-* prefix. Browser sources and generated
+aerial assets changed; Unity and Blender exports were not regenerated.
+
+## Escape ending visibility on phones — 25 September 2026
+
+Portrait escape cameras pull back to frame the estate, making the original
+exponential fog almost opaque over the buildings. The menu, escape pan and
+success background now share the quarter-density aerial rendering helper in
+Browser/dist/game.mjs (.000475 during rendering). Both escape render paths use
+it, including the frame when an exit is first triggered. The shared scene fog
+is restored after each render so retrying keeps the arrival atmosphere.
+
+The real game-loop checks pass for all five active exits, timing, skip, retry
+and reduced motion. Real WebGL checks pass at 390 × 704, 360 × 780 and
+1440 × 900, at 0/5/10 seconds with normal and reduced motion (18 combinations),
+including skip and restoration of arrival fog on retry, with no page errors.
+Fog opacity over sampled building points falls from as much as 99.7% to 30.9%.
+Before/after phone and desktop captures were visually checked; evidence uses
+Browser/artifacts/escape-fog-*. Only browser rendering changed; no models or
+Unity/Blender exports were regenerated for this fix.
+The full npm test run passes the game and escape-exterior checks, then stops
+at the previously documented test-jarman.mjs protected-geometry fingerprint
+failure; its log is Browser/artifacts/escape-fog-suite.log.
+
+### Aerial action order and spacing — 25 September 2026
+
+The aerial action row now groups the crosshairs/location button, day/night
+mode, Locations and Reset in that order with a shared 8 px gap. On phones the
+row sits below Back to intro and the Locations menu opens below it. At widths
+up to 350 px the day/night glyph cells narrow so all four actions still fit.
+
+Validation: aerial controls, device location and day/night checks pass. Chrome
+checks confirm the order, alignment, viewport bounds and exact 8 px gaps at
+320, 350, 351, 390, 650, 651 and 1200 px, with working menu, keyboard toggling
+and Reset. Desktop and 320 px screenshots were visually checked. The full
+npm test run stopped at the previously documented test-jarman.mjs protected
+geometry snapshot failure; its log is Browser/artifacts/aerial-button-order-suite.log.
+This change updates browser markup/styles only; model sources and exports
+were not changed.
+
+## Random window lighting at night — 25 September 2026
+
+Aerial and walking night modes now illuminate a random one-in-fifteen sample
+of the windows in currently visible buildings (rounded to the nearest whole
+window). Each transition from day to night draws fresh random priorities;
+camera movement and repeated calls to setNight(true) preserve that selection.
+Period/layout changes reuse those priorities and select from the buildings
+that are present. Daylight clears the selection and restores ordinary glazing.
+
+The panes use the street-lamp diffuser colour (0xffd28e) and emissive intensity
+3, without adding point lights to the existing eight-light budget. Window IDs
+are assigned before batching and carried through detailed glass, distant
+window atlases and compiled scenes. A separate atlas glass mask keeps frames,
+sills and sash bars unlit. Older opaque glass materials receive explicit tags;
+roof glazing and masonry are excluded. The binary reader/writer now preserves
+custom per-instance attributes alongside the existing vertex attributes.
+
+Validation: the focused day/night, building-detail and binary tests pass,
+including selection density, reshuffling, daylight restoration, individual
+proxy identities and the unlit frame mask. Source/compiled night previews,
+all periods, camera stability, desktop/mobile walking and keyboard controls
+were checked. The UI section passed again after concurrent navigation edits;
+the separate night building-selection check also passes. Rebuilt the local
+aerial asset, and npm run test:compiled passes its image, full-detail, fallback,
+timeline and walking-collision checks. Source and compiled overviews and a
+close window view were visually inspected.
+
+The full npm test suite and every check after its first failure were run:
+73 of 75 pass. Jarman and Leighton/Newton fingerprints exactly match the
+previously recorded failures in day-night-baseline.txt. Logs use
+Browser/artifacts/window-lights-*, with previews in day-night-*-windows.png
+and the day-night night/mobile/walking captures. Browser sources and the local
+compiled aerial model changed; Unity and Blender exports were not regenerated.
+
+## Oak24 annexe roof clearance - 25 September 2026
+
+Reduced the owner's circled Oak24 uniformly to 55% of its original size through
+its existing height/radius placement data. Its KML root coordinates, ground
+height, seeded rotation and shared geometry are unchanged, as are all other
+trees. The final nominal dimensions are 12.1 units high and 5.5 units crown
+radius. See Research/kml-trees/README.md and its marked screenshot.
+
+The placement and aerial-performance checks pass. A focused comparison with
+HEAD verifies that only Oak24's height/radius changed, and 263,307 conservative
+branch/foliage bound comparisons across all detail levels clear the eleven
+nearby roofs. The local compiled aerial model was rebuilt, and the source and
+compiled annexe previews were visually inspected with no browser errors.
+
+The full npm test suite and its continuation pass 73 of 75 checks. The existing
+Jarman and Leighton/Newton protected-geometry snapshot failures reproduce with
+Oak24's original scale restored in memory, with identical failing fingerprints.
+Validation logs and previews use Browser/artifacts/annexe-tree-roof-*.
+Browser source and local compiled assets are updated; Unity and Blender exports
+were not regenerated.
+
+npm run test:compiled passes, including source/compiled image comparison,
+model fallback cases, every timeline stop and walking collision refresh.
