@@ -1,5 +1,22 @@
 # Tower service buildings
 
+## Continuous chimney-yard paving, 25 September 2026
+
+`chimney-yard-paving-reference.png` marks the complete enclosed yard in blue.
+The existing Tower service court now extends beneath the chimney and both
+cylinders, around the service ranges, and through the strip beside Main/admin.
+Its west and north edges meet the Farndon and Irby corridor faces (X=159 and
+Z=-63.9); the southern boundary follows Main/admin's stepped rear walls.
+This supersedes the separated pads and intervening grass visible in the
+reference. The established grey asphalt material and adjoining road levels
+are retained, with the surrounding lawns outside the enclosure unchanged.
+
+The surface remains owned by The Main's Historic period. The change is to
+`Browser/dist/historic-road-layout.mjs`; buildings, trees and walking obstacles
+are unchanged. Browser source and the locally generated aerial model are
+updated; Unity and Blender exports are unchanged. Source/compiled visual
+previews and validation logs use `Browser/artifacts/chimney-paving-`.
+
 ## Tower-side stores door and continuous roof edge, 24 September 2026
 
 `stores-door-parapet-reference.png` marks a new doorway in blue, overlapping

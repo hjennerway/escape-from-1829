@@ -1,0 +1,64 @@
+{
+  "samples": 30,
+  "results": [
+    {
+      "name": "aerial-day",
+      "revision": "160",
+      "medianFrameMs": 650.2999999999993,
+      "p90FrameMs": 666.9000000000015,
+      "drawCalls": 2802,
+      "triangles": 708339,
+      "gpu": "ANGLE (Google, Vulkan 1.3.0 (SwiftShader Device (Subzero) (0x0000C0DE)), SwiftShader driver)"
+    },
+    {
+      "name": "aerial-night",
+      "revision": "160",
+      "medianFrameMs": 683.5,
+      "p90FrameMs": 716.8999999999942,
+      "drawCalls": 2804,
+      "triangles": 708581,
+      "gpu": "ANGLE (Google, Vulkan 1.3.0 (SwiftShader Device (Subzero) (0x0000C0DE)), SwiftShader driver)"
+    },
+    {
+      "name": "walking-day",
+      "revision": "160",
+      "medianFrameMs": 450.2000000000007,
+      "p90FrameMs": 466.90000000000146,
+      "drawCalls": 2681,
+      "triangles": 430035,
+      "gpu": "ANGLE (Google, Vulkan 1.3.0 (SwiftShader Device (Subzero) (0x0000C0DE)), SwiftShader driver)"
+    },
+    {
+      "name": "walking-night",
+      "revision": "160",
+      "medianFrameMs": 450.1999999999971,
+      "p90FrameMs": 466.8000000000029,
+      "drawCalls": 2683,
+      "triangles": 430277,
+      "gpu": "ANGLE (Google, Vulkan 1.3.0 (SwiftShader Device (Subzero) (0x0000C0DE)), SwiftShader driver)"
+    },
+    {
+      "name": "game-reception",
+      "revision": "160",
+      "medianFrameMs": 166.70000000000073,
+      "p90FrameMs": 166.79999999999927,
+      "drawCalls": 34,
+      "triangles": 82682,
+      "gpu": "ANGLE (Google, Vulkan 1.3.0 (SwiftShader Device (Subzero) (0x0000C0DE)), SwiftShader driver)"
+    },
+    {
+      "name": "game-upper",
+      "revision": "160",
+      "medianFrameMs": 166.70000000000073,
+      "p90FrameMs": 183.40000000000146,
+      "drawCalls": 31,
+      "triangles": 80920,
+      "gpu": "ANGLE (Google, Vulkan 1.3.0 (SwiftShader Device (Subzero) (0x0000C0DE)), SwiftShader driver)"
+    }
+  ],
+  "errors": [],
+  "warnings": [
+    "THREE.WebGLRenderer: KHR_parallel_shader_compile extension not supported.",
+    "WARNING: Multiple instances of Three.js being imported."
+  ]
+}

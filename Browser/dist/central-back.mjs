@@ -77,6 +77,16 @@ export function addCentralBack(THREE,{model,mesh,worldUV,brick,white,roof,materi
   cap.setAttribute('position',new THREE.Float32BufferAttribute(positions,3));
   cap.setAttribute('uv',new THREE.Float32BufferAttribute(uv,2));cap.computeVertexNormals();
   mesh(cap,roof,0,0,0,true).name='Reception longitudinal ridge and rear hips';
+  // The circled roof junctions match the long, square-ended brick stacks in
+  // exterior/1829front2.webp and 1829front3.webp. Their narrow ends face the
+  // lawn, with their bases sunk into slate and caps below the front apex.
+  for(const side of [-1,1]){
+    const name='Reception '+(side<0?'west':'east')+' chimney';
+    const x=side*7.05,z=14.1;
+    mesh(worldUV(new THREE.BoxGeometry(.72,3,4.6),1.7),brick,x,15.6,z,true).name=name+' stack';
+    mesh(worldUV(new THREE.BoxGeometry(.8,.14,4.68),1.7),brick,x,16.95,z,true).name=name+' corbel';
+    mesh(worldUV(new THREE.BoxGeometry(.88,.16,4.76),1.7),brick,x,17.18,z,true).name=name+' cap';
+  }
   // The original heraldic face is a one-sided triangle. A closed masonry
   // backing meets the slate at the gable, making it opaque from the rear.
   const gableShape=new THREE.Shape([new THREE.Vector2(-7.5,0),new THREE.Vector2(7.5,0),new THREE.Vector2(0,3.1)]);

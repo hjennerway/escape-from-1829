@@ -291,9 +291,7 @@ export function createEscapeExterior(THREE,aspect){
   refineFrontInsideCorners(THREE,{model,batches,box,mesh,worldUV,white,brick:photoBrick,roof,material,details});
   // Open rear approaches connect the gaps between the arms to the back road.
   for(const x of [-23,23]){box(gravel,x,.18,-20,32,.1,45);box(grass,x<0?-17:x-6,.26,-9,9,.1,11);}
-  // End the western apron at the garden edge, without the thin exposed cross-strip.
-  box(gravel,(-72.5-68.95)/2,.17,12,3.55,.12,62);
-  box(gravel,(-68.95-55.5)/2,.17,11.75,13.45,.12,61.5);
+  // The west court and apron share the continuous surface in addEntranceWalks.
   box(gravel,69+OUTER_SHIFT,.17,12,7,.12,62);
   // Retain only the eastern end paving; the marked western cross-walk is removed.
   box(path,69+OUTER_SHIFT,.16,44,7,.12,2);
@@ -355,7 +353,9 @@ export function createEscapeExterior(THREE,aspect){
     const bowlingGreenTree=x===107&&z===-98; // Yellow-circled tree in the lawn reference.
     if((x<-60||x>1)&&!haleRoof&&!bowlingGreenTree)tree(x,z,size);else for(let n=0;n<20;n++)random();}
   for(let i=0;i<9;i++){
-    tree(-90,-44+i*12,1.1);
+    // Move the Churton/Kelsall junction tree onto the blue-X lawn; retain
+    // its place in the seeded sequence so every crown keeps its shape.
+    tree(i===0?-82:-90,i===0?-54:-44+i*12,1.1);
     // Clear the marked Redesmere sightline, retaining an edge tree on the
     // right of the photo and the trees beyond this stretch of the lawn.
     const z=-47+i*12;if(z<=-35||z>=25)tree(92+OUTER_SHIFT,z,1.1);

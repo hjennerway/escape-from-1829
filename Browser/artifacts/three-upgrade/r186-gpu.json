@@ -1,0 +1,68 @@
+{
+  "samples": 30,
+  "hardware": true,
+  "results": [
+    {
+      "name": "aerial-day",
+      "revision": "186",
+      "medianFrameMs": 16.699999999999818,
+      "p90FrameMs": 16.799999999999727,
+      "drawCalls": 2802,
+      "triangles": 706967,
+      "gpu": "ANGLE (NVIDIA, NVIDIA GeForce RTX 3090 Ti (0x00002203) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+      "medianRenderMs": 9.800000000745058
+    },
+    {
+      "name": "aerial-night",
+      "revision": "186",
+      "medianFrameMs": 16.699999999999818,
+      "p90FrameMs": 16.800000000000182,
+      "drawCalls": 2804,
+      "triangles": 707209,
+      "gpu": "ANGLE (NVIDIA, NVIDIA GeForce RTX 3090 Ti (0x00002203) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+      "medianRenderMs": 11.099999999627471
+    },
+    {
+      "name": "walking-day",
+      "revision": "186",
+      "medianFrameMs": 16.699999999999818,
+      "p90FrameMs": 16.800000000000182,
+      "drawCalls": 2681,
+      "triangles": 429599,
+      "gpu": "ANGLE (NVIDIA, NVIDIA GeForce RTX 3090 Ti (0x00002203) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+      "medianRenderMs": 13.5
+    },
+    {
+      "name": "walking-night",
+      "revision": "186",
+      "medianFrameMs": 16.699999999999818,
+      "p90FrameMs": 16.800000000000182,
+      "drawCalls": 2683,
+      "triangles": 429841,
+      "gpu": "ANGLE (NVIDIA, NVIDIA GeForce RTX 3090 Ti (0x00002203) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+      "medianRenderMs": 10.400000000372529
+    },
+    {
+      "name": "game-reception",
+      "revision": "186",
+      "medianFrameMs": 16.699999999999818,
+      "p90FrameMs": 16.800000000000182,
+      "drawCalls": 41,
+      "triangles": 80668,
+      "gpu": "ANGLE (NVIDIA, NVIDIA GeForce RTX 3090 Ti (0x00002203) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+      "medianRenderMs": 0.2999999988824129
+    },
+    {
+      "name": "game-upper",
+      "revision": "186",
+      "medianFrameMs": 16.699999999999818,
+      "p90FrameMs": 16.800000000000182,
+      "drawCalls": 37,
+      "triangles": 81496,
+      "gpu": "ANGLE (NVIDIA, NVIDIA GeForce RTX 3090 Ti (0x00002203) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+      "medianRenderMs": 0.3999999985098839
+    }
+  ],
+  "errors": [],
+  "warnings": []
+}

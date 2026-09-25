@@ -1,0 +1,70 @@
+{
+  "samples": 30,
+  "hardware": true,
+  "results": [
+    {
+      "name": "aerial-day",
+      "revision": "160",
+      "medianFrameMs": 16.699999999999818,
+      "p90FrameMs": 16.700000000000273,
+      "drawCalls": 2802,
+      "triangles": 708339,
+      "gpu": "ANGLE (NVIDIA, NVIDIA GeForce RTX 3090 Ti (0x00002203) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+      "medianRenderMs": 9.699999999254942
+    },
+    {
+      "name": "aerial-night",
+      "revision": "160",
+      "medianFrameMs": 16.699999999999818,
+      "p90FrameMs": 16.800000000000182,
+      "drawCalls": 2804,
+      "triangles": 708581,
+      "gpu": "ANGLE (NVIDIA, NVIDIA GeForce RTX 3090 Ti (0x00002203) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+      "medianRenderMs": 11.400000000372529
+    },
+    {
+      "name": "walking-day",
+      "revision": "160",
+      "medianFrameMs": 16.699999999999818,
+      "p90FrameMs": 16.799999999999727,
+      "drawCalls": 2681,
+      "triangles": 430035,
+      "gpu": "ANGLE (NVIDIA, NVIDIA GeForce RTX 3090 Ti (0x00002203) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+      "medianRenderMs": 15.299999998882413
+    },
+    {
+      "name": "walking-night",
+      "revision": "160",
+      "medianFrameMs": 16.699999999999818,
+      "p90FrameMs": 16.800000000000182,
+      "drawCalls": 2683,
+      "triangles": 430277,
+      "gpu": "ANGLE (NVIDIA, NVIDIA GeForce RTX 3090 Ti (0x00002203) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+      "medianRenderMs": 10.900000000372529
+    },
+    {
+      "name": "game-reception",
+      "revision": "160",
+      "medianFrameMs": 16.699999999999818,
+      "p90FrameMs": 16.800000000000182,
+      "drawCalls": 41,
+      "triangles": 80668,
+      "gpu": "ANGLE (NVIDIA, NVIDIA GeForce RTX 3090 Ti (0x00002203) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+      "medianRenderMs": 0.2000000011175871
+    },
+    {
+      "name": "game-upper",
+      "revision": "160",
+      "medianFrameMs": 16.699999999999818,
+      "p90FrameMs": 16.700000000000728,
+      "drawCalls": 37,
+      "triangles": 81496,
+      "gpu": "ANGLE (NVIDIA, NVIDIA GeForce RTX 3090 Ti (0x00002203) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+      "medianRenderMs": 0.30000000074505806
+    }
+  ],
+  "errors": [],
+  "warnings": [
+    "WARNING: Multiple instances of Three.js being imported."
+  ]
+}

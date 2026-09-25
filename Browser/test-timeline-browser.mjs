@@ -123,7 +123,7 @@ try{
  const panel=await page.locator('#layoutControls').boundingBox();assert(panel.x>=0&&panel.x+panel.width<=390&&panel.y>=0&&panel.y+panel.height<=844);
  assert(await page.locator('#periodSlider').isVisible());
  await page.screenshot({path:fileURLToPath(new URL('timeline-mobile.png',artifacts))});
- await page.route('**/explore.mjs',async route=>{const response=await route.fetch();await route.fulfill({response,body:(await response.text()).replace('function refreshObstacles(){','let refreshCount=0;function refreshObstacles(){refreshCount++;').replace('const clock=new THREE.Clock();','window.__walk={exterior,layouts,timeline,walker,get refreshCount(){return refreshCount;}};const clock=new THREE.Clock();')});});
+ await page.route('**/explore.mjs',async route=>{const response=await route.fetch();await route.fulfill({response,body:(await response.text()).replace('function refreshObstacles(){','let refreshCount=0;function refreshObstacles(){refreshCount++;').replace('const clock=new THREE.Timer();','window.__walk={exterior,layouts,timeline,walker,get refreshCount(){return refreshCount;}};const clock=new THREE.Timer();')});});
  await page.goto(base+'/explore.html?period=1896');await page.waitForFunction(()=>window.__walk,null,{timeout:120000});
  assert.equal(await page.locator('#periodYear').textContent(),'1896');
  const beforeRefresh=await page.evaluate(()=>window.__walk.refreshCount),beforeCamera=await page.evaluate(()=>window.__walk.exterior.camera.position.toArray());

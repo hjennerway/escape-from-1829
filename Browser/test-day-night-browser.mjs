@@ -11,7 +11,7 @@ try{
  const page=await browser.newPage({viewport:{width:1200,height:760}});page.setDefaultTimeout(120000);page.setDefaultNavigationTimeout(120000);
  page.on('pageerror',e=>errors.push(e.message));page.on('console',m=>{if(m.type()==='error')errors.push(m.text());});
  await page.route('**/aerial.html*',async route=>{const response=await route.fetch();await route.fulfill({response,body:(await response.text()).replace('function frame(){','window.__night={exterior,renderer,lighting,controls};function frame(){')});});
- await page.route('**/explore.mjs',async route=>{const response=await route.fetch();await route.fulfill({response,body:(await response.text()).replace('  const clock=new THREE.Clock();','  window.__night={exterior,renderer,lighting,walker};const clock=new THREE.Clock();')});});
+ await page.route('**/explore.mjs',async route=>{const response=await route.fetch();await route.fulfill({response,body:(await response.text()).replace('  const clock=new THREE.Timer();','  window.__night={exterior,renderer,lighting,walker};const clock=new THREE.Timer();')});});
  await mkdir(new URL('./artifacts/',import.meta.url),{recursive:true});
  async function shot(name){await page.evaluate(()=>new Promise(r=>requestAnimationFrame(()=>requestAnimationFrame(r))));await page.screenshot({path:new URL('./artifacts/day-night-'+name+'.png',import.meta.url).pathname.replace(/^\/([A-Z]:)/,'$1')});}
  for(const mode of (process.env.DAY_NIGHT_UI_ONLY?[]:process.env.DAY_NIGHT_SOURCE_ONLY?['source']:['source','compiled'])){

@@ -52,3 +52,18 @@ Modern, Explore and gameplay; Blender and Unity exports are unchanged.
 roof surfaces along each rear wing, matching annex profiles and exposed
 windows. `node Browser/artifacts/inspect-rear-wing-roofs.mjs` captures the
 rear aerial and close views of both ends for visual review.
+
+## Front entrance chimneys (25 September 2026)
+
+The two orange circles in `front-chimneys-marked.png` locate the stacks on
+opposite sides of the central entrance roof. The existing front photographs
+`Browser/dist/exterior/1829front2.webp` and `1829front3.webp` show long,
+square-ended red-brick stacks with narrow lawn-facing ends and simple brick
+caps. They are visual references, not additional task instructions.
+
+Both stacks run front-to-back, centred at x=+/-7.05, z=14.1. Their estimated
+shafts are 0.72 wide, 4.6 long and 3 high, with the bases embedded at y=14.1
+and caps finishing at y=17.26, below the retained 17.75 pediment apex.
+The entrance brick material and world-scaled texture are shared. The roof,
+heraldry, facade and rear parapet remain in place. Browser geometry is shared
+by aerial, Explore and gameplay; Unity and Blender exports are unchanged.

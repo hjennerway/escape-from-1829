@@ -87,8 +87,6 @@ export function addWestCourtPhotoDetails(THREE,{model,box,mesh,worldUV,white,bri
   for(const y of [4.3,8.9])rod([-50.8,y,wallZ-.32],[-48.3,y,wallZ-.32],.035);
   for(const x of [-50,-54.7])box(stone,x,8.1,wallZ-.4,.4,.3,.15);
 
-  // The marked planting border is removed, leaving the gravel apron open.
-  const gravel=material(0xaaa18a);
-  box(gravel,-54.5,.2,-13,35,.12,26);
+  // The court gravel is part of the continuous west surface in addEntranceWalks.
   model.userData.westCourtPhotoOpenings=model.userData.eastPhotoOpenings.slice(start);
 }

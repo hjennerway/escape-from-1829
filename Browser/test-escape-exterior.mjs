@@ -27,6 +27,21 @@ const dragons=exterior.model.getObjectByName('Blue dragons and central coat of a
   const gableBounds=new THREE.Box3().setFromObject(gable);
   assert(Math.abs(gableBounds.max.y-17.75)<1e-5,'front apex height is unchanged');
   assert(gableBounds.max.z-gableBounds.min.z>.13,'pediment has solid depth');
+  // Photo-matched stacks flank the entrance, with long square-ended sides
+  // behind the heraldry. The roof-contact audit samples their whole bases.
+  for(const side of ['west','east']){
+    const stack=exterior.model.getObjectByName('Reception '+side+' chimney stack');
+    const cap=exterior.model.getObjectByName('Reception '+side+' chimney cap');
+    assert(stack&&cap,'both marked entrance roof junctions have capped chimneys');
+    assert.equal(stack.geometry.type,'BoxGeometry','chimney faces and ends are square');
+    const b=new THREE.Box3().setFromObject(stack),c=new THREE.Box3().setFromObject(cap);
+    const size=b.getSize(new THREE.Vector3());
+    assert(size.z>size.x*5&&size.y>2.5,'front stacks have the photographed long, narrow proportions');
+    assert(b.min.z>10.4&&b.max.z<19.56,'stacks stay on the central roof behind the pediment');
+    assert(c.max.y<gableBounds.max.y&&c.max.y>16.8,'caps rise above the side roofs below the apex');
+    assert.equal(stack.material,gable.material,'stacks reuse the entrance brickwork');
+    assert(stack.castShadow&&cap.castShadow,'chimneys cast shadows over the roof');
+  }
   const r=new THREE.Raycaster();
   for(const x of [-3,0,3]){
     r.set(new THREE.Vector3(x,15.8,19),new THREE.Vector3(0,0,1));
@@ -584,6 +599,17 @@ for(const side of [-1,1]){
 assert.equal(frontStairs.children.filter(o=>/^Front approach step [1-4] surface$/.test(o.name)).length,4);
 const doorstep=new THREE.Box3().setFromObject(frontStairs.getObjectByName('Front doorway landing surface'));
 assert(doorstep.min.x<-3.8&&doorstep.max.x>3.8&&doorstep.min.z<20,'doorstep must span both returns and reach the door');
+// The annotated grass strip must be covered by the landing and every branch
+// tread, including the seam against the existing doorstep wall.
+for(const object of frontStairs.children.filter(o=>/^(Front stair branching landing|Left lateral step [1-4]|Right lateral step [1-4]) surface$/.test(o.name))){
+  const bounds=new THREE.Box3().setFromObject(object);
+  assert(Math.abs(bounds.min.z-doorstep.max.z)<1e-5,'every branch surface meets the doorstep wall');
+  assert(Math.abs(bounds.max.z-25.8)<1e-5,'the outer stair edge stays fixed');
+  for(const z of [doorstep.max.z+.001,23.8,24.1,24.59,25.2]){
+    assert(Math.abs(stairHeight(object.position.x,z)-bounds.max.y)<1e-5,'the former grass strip exposes the correct stone surface');
+  }
+}
 const frontObstacles=exteriorObstacles(THREE,exterior.model);
 assert(frontObstacles.some(b=>0>b.minX&&0<b.maxX&&25.2>b.minZ&&25.2<b.maxZ),'stair foundations retain exterior scenery collisions');
-console.log('PASS: front staircase has four approach treads, four rising treads per branch, and connected forward returns to the doorway landing.');
+for(const x of [-2.5,0,2.5])assert(frontObstacles.some(b=>obstacleContains(b,x,24.1,0)),'extended stair foundations block walking through the former gap');
+console.log('PASS: front staircase retains both four-tread branches and forward returns, with solid stone surfaces and collisions up to the doorway wall.');

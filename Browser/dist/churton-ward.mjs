@@ -126,14 +126,19 @@ export function createChurtonWard(THREE,{brick,roof,worldUV,material}){
   for(const [x,z] of [[-17.9,-13.8],[-17.9,18.8],[21.4,9.2],[21.4,-16.5],[-2.1,18.8]])box(dark,x,2.6,z,.09,5.2,.09);
   // Keep the church-facing lawn open. The shared road supplies the lane;
   // the old rectangular gravel strip protruded beyond its curved edges.
-  solid(gravel,0,-.015,0,49,.16,44,'Ward perimeter gravel');
+  // One level surface joins the perimeter and both access paths. Separate
+  // raised slabs left a fine side/shadow line down the mast-side path.
+  // Recess the lawn corner to z=-18 so no paving tab projects past its edge.
+  const pavingOutline=[[-28,-37.5],[-22,-37.5],[-22,-18],[23,-18],
+    [23,-22],[24.5,-22],[24.5,22],[28,22],[28,28],[-28,28]];
+  const paving=mesh(new THREE.ShapeGeometry(new THREE.Shape(pavingOutline.map(([x,z])=>new THREE.Vector2(x,-z)))),
+    gravel,0,.065,0,'Ward perimeter gravel');
+  paving.rotation.x=-Math.PI/2;paving.castShadow=false;
   // A flat lawn overlay keeps the gravel masked without a raised, shadowed
   // front face that looks like a remaining hedge along the road.
-  const lawn=mesh(new THREE.PlaneGeometry(44,14),grass,1,.135,-25,'Church-facing lawn');
+  const lawn=mesh(new THREE.PlaneGeometry(45,14),grass,.5,.135,-25,'Church-facing lawn');
   lawn.rotation.x=-Math.PI/2; lawn.castShadow=false;
   solid(gravel,11.1,.16,-24.7,2.7,.08,15,'Lawn entrance walk');
-  solid(gravel,-25,-.01,-5,6,.12,65,'Mast-side access');
-  solid(gravel,0,-.01,25,56,.12,6,'Estate-side access');
   const dummy=new THREE.Object3D();
   for(const [m,items] of batches){const batch=new THREE.InstancedMesh(new THREE.BoxGeometry(1,1,1),m,items.length);batch.name='Churton window and masonry details';batch.castShadow=true;batch.receiveShadow=true;items.forEach((b,i)=>{dummy.position.set(b.x,b.y,b.z);dummy.scale.set(b.w,b.h,b.d);dummy.rotation.set(0,b.r,0);dummy.updateMatrix();batch.setMatrixAt(i,dummy.matrix);});ward.add(batch);}
   ward.userData.openings=openings;ward.userData.ranges=ranges;

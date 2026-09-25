@@ -1,0 +1,12 @@
+[
+  {
+    "name": "test-jarman.mjs",
+    "status": "fail",
+    "message": "All geometry outside the marked frontage stays exact\n+ actual - expected\n\n  {\n+   primitives: 859422,\n+   sha256: '0822009f1ace5eea25237eff79bc72a2ce91c20f1369a58eec4d37ecdd1b0f95'\n-   primitives: 859427,\n-   sha256: '5f24e1630166cfc7bc1a1f25b6a5e743a63d994ad30f6542417a9d97d1156c94'\n  }\n"
+  },
+  {
+    "name": "test-leighton-newton.mjs",
+    "status": "fail",
+    "message": "Every primitive outside Leighton/Newton remains unchanged\n+ actual - expected\n\n  {\n+   count: 923469,\n+   sha256: '1739dedca5b2e0c9d514bfc17441f853027f2f6414250fab12d64e488c98096e'\n-   count: 923474,\n-   sha256: '137be53ec863b0453ecc179b133e72d257738e6958cb477e967143abea921ed6'\n  }\n"
+  }
+]

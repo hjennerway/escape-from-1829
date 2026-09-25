@@ -73,7 +73,7 @@ export function addWestFrontPhotoDetails(THREE,{model,box,mesh,worldUV,white,bri
   // Retain the garden and approach after the marked tree removal.
   const lawn=material(0x667b49);
   box(lawn,-57.7,.32,34,22.5,.1,17);
-  box(material(0x99917b),-46.1,.41,33.5,1.55,.1,18);
+  box(material(0xa39e88),-46.1,.41,33.5,1.55,.1,18);
   // The garden's glazed blue entrance has an open, unrailed approach.
   door(-43.6,19.59,0);
   model.userData.westFrontPhotoOpenings=model.userData.eastPhotoOpenings.slice(start);

@@ -15,7 +15,7 @@ try{
  import {sampleLanding} from './aerial-controls.mjs';
  const renderer=new THREE.WebGLRenderer({antialias:true});
  renderer.outputColorSpace=THREE.SRGBColorSpace;renderer.toneMapping=THREE.ACESFilmicToneMapping;renderer.toneMappingExposure=1.25;
- renderer.shadowMap.enabled=true;renderer.shadowMap.type=THREE.PCFSoftShadowMap;
+ renderer.shadowMap.enabled=true;renderer.shadowMap.type=THREE.PCFShadowMap;
  const exterior=await createLandingExterior(THREE,innerWidth/innerHeight);
  await loadEscapeFrontage(THREE,exterior);exterior.scene.fog.density*=.25;
  window.capture=async(width,height)=>{

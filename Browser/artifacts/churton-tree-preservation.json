@@ -1,0 +1,20 @@
+{
+  "from": [
+    -90,
+    2.475,
+    -44
+  ],
+  "to": [
+    -82,
+    2.475,
+    -54
+  ],
+  "surroundings": {
+    "primitives": 1486201,
+    "excluded": 6,
+    "sha256": "d53a836e8cdbca835e9d90718a2915b8fd2ff6981527a745bc1f736e1f377ffc"
+  },
+  "oldPositionClear": true,
+  "newPositionBlocked": true,
+  "hiddenTreeClear": true
+}

@@ -1,0 +1,27 @@
+{
+  "samples": 30,
+  "results": [
+    {
+      "name": "game-reception",
+      "revision": "160",
+      "medianFrameMs": 166.70000000000073,
+      "p90FrameMs": 183.39999999999964,
+      "drawCalls": 41,
+      "triangles": 80668,
+      "gpu": "ANGLE (Google, Vulkan 1.3.0 (SwiftShader Device (Subzero) (0x0000C0DE)), SwiftShader driver)"
+    },
+    {
+      "name": "game-upper",
+      "revision": "160",
+      "medianFrameMs": 166.70000000000073,
+      "p90FrameMs": 183.40000000000146,
+      "drawCalls": 37,
+      "triangles": 81496,
+      "gpu": "ANGLE (Google, Vulkan 1.3.0 (SwiftShader Device (Subzero) (0x0000C0DE)), SwiftShader driver)"
+    }
+  ],
+  "errors": [],
+  "warnings": [
+    "WARNING: Multiple instances of Three.js being imported."
+  ]
+}

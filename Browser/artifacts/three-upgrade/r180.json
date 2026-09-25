@@ -1,0 +1,63 @@
+{
+  "samples": 5,
+  "results": [
+    {
+      "name": "aerial-day",
+      "revision": "180",
+      "medianFrameMs": 650.2999999999993,
+      "p90FrameMs": 666.9000000000015,
+      "drawCalls": 2802,
+      "triangles": 706967,
+      "gpu": "ANGLE (Google, Vulkan 1.3.0 (SwiftShader Device (Subzero) (0x0000C0DE)), SwiftShader driver)"
+    },
+    {
+      "name": "aerial-night",
+      "revision": "180",
+      "medianFrameMs": 700.2000000000044,
+      "p90FrameMs": 733.6000000000058,
+      "drawCalls": 2804,
+      "triangles": 707209,
+      "gpu": "ANGLE (Google, Vulkan 1.3.0 (SwiftShader Device (Subzero) (0x0000C0DE)), SwiftShader driver)"
+    },
+    {
+      "name": "walking-day",
+      "revision": "180",
+      "medianFrameMs": 450.2999999999993,
+      "p90FrameMs": 466.8000000000011,
+      "drawCalls": 2681,
+      "triangles": 429599,
+      "gpu": "ANGLE (Google, Vulkan 1.3.0 (SwiftShader Device (Subzero) (0x0000C0DE)), SwiftShader driver)"
+    },
+    {
+      "name": "walking-night",
+      "revision": "180",
+      "medianFrameMs": 450.20000000000437,
+      "p90FrameMs": 466.90000000000146,
+      "drawCalls": 2683,
+      "triangles": 429841,
+      "gpu": "ANGLE (Google, Vulkan 1.3.0 (SwiftShader Device (Subzero) (0x0000C0DE)), SwiftShader driver)"
+    },
+    {
+      "name": "game-reception",
+      "revision": "180",
+      "medianFrameMs": 166.6999999999989,
+      "p90FrameMs": 166.8000000000011,
+      "drawCalls": 41,
+      "triangles": 80668,
+      "gpu": "ANGLE (Google, Vulkan 1.3.0 (SwiftShader Device (Subzero) (0x0000C0DE)), SwiftShader driver)"
+    },
+    {
+      "name": "game-upper",
+      "revision": "180",
+      "medianFrameMs": 183.29999999999927,
+      "p90FrameMs": 200.09999999999854,
+      "drawCalls": 37,
+      "triangles": 81496,
+      "gpu": "ANGLE (Google, Vulkan 1.3.0 (SwiftShader Device (Subzero) (0x0000C0DE)), SwiftShader driver)"
+    }
+  ],
+  "errors": [],
+  "warnings": [
+    "THREE.WebGLRenderer: KHR_parallel_shader_compile extension not supported."
+  ]
+}

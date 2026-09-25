@@ -1,0 +1,31 @@
+{
+  "chimneyParts": 6,
+  "jarman": {
+    "withChimneys": {
+      "primitives": 859428,
+      "sha256": "0d80ec4234cb8b5d29f089c08037cfd6073eba38ad8178a84e42d144d9b6b9e4"
+    },
+    "withoutChimneys": {
+      "primitives": 859422,
+      "sha256": "0822009f1ace5eea25237eff79bc72a2ce91c20f1369a58eec4d37ecdd1b0f95"
+    },
+    "baseline": {
+      "primitives": 859427,
+      "sha256": "5f24e1630166cfc7bc1a1f25b6a5e743a63d994ad30f6542417a9d97d1156c94"
+    }
+  },
+  "leighton": {
+    "withChimneys": {
+      "count": 923475,
+      "sha256": "50a0b898b419a9531cbb6fe91c345e9db87aaade292ae3aa11b9f7d775b894db"
+    },
+    "withoutChimneys": {
+      "count": 923469,
+      "sha256": "1739dedca5b2e0c9d514bfc17441f853027f2f6414250fab12d64e488c98096e"
+    },
+    "baseline": {
+      "count": 923474,
+      "sha256": "137be53ec863b0453ecc179b133e72d257738e6958cb477e967143abea921ed6"
+    }
+  }
+}

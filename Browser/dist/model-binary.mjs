@@ -111,7 +111,7 @@ export function deserializeScene(THREE,data){
     geometry.boundingBox=readBox(g.box);geometry.boundingSphere=readSphere(g.sphere);geometries[g.uuid]=geometry;
   }
   const loader=new THREE.ObjectLoader(),images={};
-  for(const image of data.images)images[image.uuid]=new THREE.Source({data:image.data,width:image.width,height:image.height});
+  for(const image of data.images)images[image.uuid]=new THREE.TextureSource({data:image.data,width:image.width,height:image.height});
   const textures=loader.parseTextures(data.textures,images),materials=loader.parseMaterials(data.materials,textures);
   const scene=loader.parseObject(data.object,geometries,materials,textures,{}),camera=loader.parseObject(data.camera,{}, {}, {}, {}),nodes=new Map();
   scene.traverse(object=>{

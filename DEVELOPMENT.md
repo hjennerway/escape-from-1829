@@ -1,3 +1,163 @@
+## Front entrance chimneys (25 September 2026)
+
+Added the two long, square-ended brick stacks at the marked central entrance
+roof junctions, using the existing front photographs for their proportions
+and stepped brick caps. Bases penetrate the slate, and the caps stay below
+the original pediment apex. Source geometry is shared by aerial, Explore and
+gameplay. The local compiled aerial model was rebuilt; Unity and Blender
+exports were not regenerated. Reference details are in
+`Research/1829-back/README.md`.
+
+Validation: entrance geometry and roof contacts pass (108 roof attachments,
+3,888 perimeter samples). Source and compiled close, front and photo-direction
+renders pass without browser errors. `npm run test:compiled` passes, including
+all timeline stops, fallback paths and source/compiled image comparison.
+The full `npm test` run stops at Jarman's whole-estate preservation snapshot;
+continuing the remaining commands finds only the equivalent Leighton/Newton
+snapshot failure. Both snapshots also fail with all six new chimney pieces
+removed from the in-memory scene, so unrelated current workspace geometry is
+involved. Those baselines were not overwritten. Evidence is saved under
+`Browser/artifacts/front-chimneys-*`, including the with/without comparison.
+
+## Front entrance stairs meet the doorway wall (25 September 2026)
+
+Extended the middle landing and both lateral stair branches back to the
+existing doorway landing wall, covering the grass strip in the user's
+annotation. The branch depth increases from 1.2 to 2.25 scene units; the
+outside edge, tread heights, approach steps, returns and railings retain
+their positions. See [reference notes](Research/front-steps/README.md).
+
+The existing exterior geometry check now samples the former grass strip,
+including the wall seam, and verifies solid walking obstacles there. It
+passes, and before/after browser captures show the continuous stone surfaces.
+The rebuilt compiled model passes source/render comparisons, exact draw counts,
+full detail, controls and missing/incompatible/corrupt model fallbacks. The
+compiled entrance close-up is visually checked; every timeline stop and live
+walking collision refresh pass. The generated source fingerprint is current.
+Browser sources and local compiled output changed; Unity and Blender exports
+are unchanged.
+
+Validation artifacts use the Browser/artifacts/front-steps- prefix. Existing
+Jarman and Leighton/Newton whole-estate preservation snapshots already fail
+with the pre-change stair dimensions restored in memory: both have five
+fewer primitives than their saved baselines. Those baselines are unchanged.
+
+## Three.js r186.1 migration (25 September 2026)
+
+The browser runtime now uses pinned Three.js **0.186.1**, retaining
+`WebGLRenderer`. The migration was checked at r170 and r180 before r186.
+All three entry points use the same local library; the game and GLTF loader no
+longer download a second copy from jsDelivr. The upstream core module,
+GLTFLoader, BufferGeometryUtils, SkeletonUtils and MIT licence are vendored
+from the exact development dependency recorded in the npm lockfile.
+
+After `npm ci`, use `npm run vendor:three` to regenerate those files and
+`npm run check:three` to verify their contents and loader imports. The full
+suite, model checks and model build verify this pin, including in Pages CI.
+The only edits to upstream add-ons are their local import paths.
+
+Compatibility changes use `PCFShadowMap` (the current soft PCF filter),
+`TextureSource` when restoring binary textures, and `Timer` with explicit
+per-frame updates and document visibility handling. Aerial timing resets after
+shader warmup. Existing grass, interior finish, night-window and building-glow
+shaders remain on WebGL. Lighting exposure and material parameters are retained.
+Current Three.js requires WebGL 2; WebGL 1-only devices are no longer supported.
+WebGPU and cascaded sunlight shadows were not introduced by this migration.
+See the upstream [migration guide](https://github.com/mrdoob/three.js/wiki/Migration-Guide)
+and [r186 release](https://github.com/mrdoob/three.js/releases/tag/r186).
+
+The pre-upgrade full suite passed. The final full suite passes all 77 commands,
+including dependency verification. Raw geometry fingerprints depended on the
+older extrusion/triangulation and primitive generation. Before refreshing
+21 hashes in the preservation snapshots, the same modelling source was built
+under r160 and r186: all 8,697 scene objects retained exact hierarchy, transforms,
+material values, instance transforms and shadow flags; all 7,723 geometries
+retained bounds, surface area and oriented volume within the audit tolerance.
+Cone builders remove degenerate faces and extrusion triangulation/UV ordering
+changes. Counts and independent roof, opening, placement and walking assertions
+were retained. The old/new hashes and audit report are in
+`Browser/artifacts/three-upgrade/fingerprint-migration.json` and
+`geometry-audit.json`; the audit script is `Browser/artifacts/audit-three-upgrade.mjs`.
+It accepts a path to the original r160 module as its first argument.
+
+The local compiled estate has been regenerated for revision 186 (13,460,180
+compressed bytes). Source/compiled rendering, exact draw counts, shared buffers,
+full detail, controls and missing/incompatible/corrupt model fallback pass.
+The source/compiled comparison differs significantly in 0.0166% of pixels,
+within the existing 0.5% tolerance. Every timeline period, walking collision
+refresh, desktop/mobile day/night controls, building selection, software/GPU
+visibility profiles, real emulated multitouch movement and responsive landing
+loading/failure behavior also pass. Browser checks use headless Chrome with
+software WebGL; hardware profiles and mobile input are simulated.
+Browser sources and local compiled output changed; Unity and Blender exports
+were not changed. Generated estate binaries remain ignored and are rebuilt by CI.
+
+Run `npm run benchmark:three -- label` for repeatable day/night aerial and
+walking captures plus a fixed-layout game comparison. Use `MODEL_CHROME_PATH`
+when using an installed Chrome; `THREE_SAMPLES` defaults to 30. The benchmark
+uses a 1000 × 700 viewport and SwiftShader by default, with remote photos excluded
+equally. Set `THREE_HARDWARE=1` to use and verify a real GPU; hardware runs also
+measure synchronous rendering cost separately from the display frame interval.
+Its fixed exit/artwork/NPC choices are injected only by the test. Migration
+screenshots and JSON reports are under `Browser/artifacts/three-upgrade/`.
+The `three-validation-output.mjs` hook redirects browser-test output there,
+preserving earlier screenshots. Timing numbers are local diagnostics, not
+hardware FPS guarantees.
+
+The final NVIDIA RTX 3090 Ti comparison sustained approximately 60 FPS in all
+six views on both r160 and r186. Median synchronous rendering costs (ms) were:
+
+| View | r160 | r186 |
+| --- | ---: | ---: |
+| Aerial day | 9.7 | 9.8 |
+| Aerial night | 11.4 | 11.1 |
+| Walking day | 15.3 | 13.5 |
+| Walking night | 10.9 | 10.4 |
+| Game reception | 0.2 | 0.3 |
+| Game upstairs | 0.3 | 0.4 |
+
+These single-run measurements show no broad hardware FPS gain or regression.
+The software-rendered aerial daytime sample was slower: median frame interval
+650.3 → 1200.3 ms. Night aerial was 683.5 → 633.6 ms, walking stayed near
+450 ms, and game samples were 166.7 → 166.8/183.4 ms. The daytime change
+coincides with the newer shadow implementation; this comparison does not
+isolate its cause. Both versions were benchmarked with trees explicitly on,
+which overrides the existing software-renderer default of hiding trees. No
+shadow-quality reduction was applied. This remains a software-rendering
+limitation, and is not representative of GPU performance. Final benchmark
+runs have no page or shader errors and no duplicate-library/deprecation
+warnings (SwiftShader still lacks KHR_parallel_shader_compile). Before/after
+aerial, night walking and fixed-layout interior screenshots were visually
+checked. Raw results: `Browser/artifacts/three-upgrade/performance-comparison.json`.
+
+## Automatic tree visibility for software graphics (25 September 2026)
+
+Aerial view and Explore on Foot now inspect their active WebGL renderer once
+at startup, before drawing. Known software renderers (including SwiftShader,
+Mesa software rasterizers and Microsoft Basic Render Driver/WARP) start with
+the Trees layer hidden. GPU or unavailable/unrecognised renderer information
+keeps the existing visible default. Browsers do not expose their acceleration
+preference directly; the check uses the optional
+[WebGL renderer information](https://registry.khronos.org/webgl/extensions/WEBGL_debug_renderer_info/)
+and the ordinary renderer string, tolerating restricted or missing information.
+
+The T shortcut still overrides visibility for the current page, including after
+period changes. Reloading checks the renderer again. Automatic hiding invalidates
+cached shadows and refreshes the walking obstacle index, so hidden trunks do not
+block movement. The check lives outside the model-building imports and applies
+after either aerial loading path. No geometry or generated models were changed;
+the existing compiled fingerprint remains current. Unity and Blender exports
+are unchanged, as is the interior game's tree default.
+
+Validation: the full browser suite and the dedicated graphics checks pass.
+Browser checks use real SwiftShader rendering for source/compiled aerial and
+walking pages, plus simulated GPU and restricted-information responses. They
+cover startup visibility, period changes, manual overrides, shadows, obstacle
+refresh and reloads. Aerial hidden/shown and walking screenshots were visually
+inspected. Source/compiled rendering comparisons, full detail and model-load
+fallback checks and every timeline stop pass. Validation artifacts use
+Browser/artifacts/tree-rendering-.
+
 ## West apron planters and return path (24 September 2026)
 
 Removed the three marked beds and long shrub border. Added matching paving
@@ -3005,3 +3165,127 @@ ci-screenshot-timeout-compiled.log and ci-screenshot-timeout-delayed.log.
 Only validation scripts and documentation changed. The existing compiled
 asset matched the current source fingerprint; no model rebuild was needed.
 Browser runtime, model sources and Unity/Blender exports were unchanged.
+
+## Churton/Kelsall junction tree relocation - 25 September 2026
+
+Moved the blue-circled small broadleaf beside Parsons Lane from x=-90, z=-44
+to the blue-X lawn at x=-82, z=-54. Its 1.1 size, trunk height, seeded crown
+shapes and generation order remain unchanged. Source placement generates the
+trunk and all five batched crowns together; walking collision uses the new
+root and the old position is clear. See Research/churton-kelsall/README.md
+and tree-move-marked.png for the screenshot-based placement reference.
+
+The isolated before/after comparison verifies all 1,486,201 other primitives
+are exact. It also verifies unchanged crown shapes, the old/new collision
+positions and hidden-tree collision removal. Refreshed the Jarman and
+Leighton/Newton full-estate fingerprints only after reproducing their saved
+before states; primitive counts are unchanged by this tree move. The existing
+Redesmere garden tree-toggle check now probes the new position and explicitly
+checks that the old position is clear.
+
+Browser source and the local compiled aerial model were updated. Source and
+compiled close previews were visually inspected; Unity and Blender exports
+were not regenerated. Evidence uses Browser/artifacts/churton-tree-*.
+
+## West-side gravel extension (25 September 2026)
+
+Extended the west path beside 1829 along the user's red guide to Parsons Lane.
+The court, apron and outer garden return now form one gravel surface, and the
+doorway approach and garden-side walk use its colour. The former overlapping
+court and apron slabs are removed. See `Research/west/README.md` and its saved
+annotation for the geometry and reference.
+
+The source and locally rebuilt compiled views were visually checked. West-wing,
+exterior, walking, player-width path continuity, source/compiled image matching,
+full-detail loading, model fallbacks and every timeline stop pass. The compiled
+source fingerprint was verified current. The full browser suite reaches the
+Jarman whole-estate preservation snapshot, whose stored ground geometry differs
+from the current landscaping. Its baseline was not changed for this task.
+Validation files use `Browser/artifacts/west-path-`.
+Browser sources and local generated model updated; Unity and Blender exports
+were not regenerated.
+
+The suite was continued after Jarman: 31 of 32 remaining checks pass. The other
+failure is Leighton/Newton's whole-estate preservation snapshot, which also
+includes the edited grounds and concurrent scene changes. Both snapshot files
+were left untouched by this task; all focused path and browser-rendering checks
+pass. The final local compiled fingerprint remains current.
+
+## Churton paving corner and ghost seam - 25 September 2026
+
+Trimmed the blue-marked corner to the church-facing lawn and replaced the
+three overlapping perimeter/access slabs with one flat gravel surface. The
+lawn now reaches the same edge, with the concealed paving cut back to avoid
+a fine pale sliver. The long red-circled seam is gone. Reference and geometry
+notes are in Research/churton-kelsall/README.md.
+
+Churton's geometry, six walking viewpoints, collisions, windows and roof checks
+pass. Source and rebuilt compiled close views were inspected; both show the
+clean corner and continuous paving, with no browser errors. The compiled
+source fingerprint matched the current source. An in-memory before/after
+comparison verifies every estate primitive outside the four edited ground
+meshes is unchanged by this correction; merging the slabs removes two meshes.
+
+The full npm test sequence was attempted. Its initial tree-visibility failure
+came from the concurrently relocated roadside tree; that test was subsequently
+updated by the tree task. Later full-suite attempts were interrupted. A focused
+rerun confirms the Jarman estate snapshot differs (859,422 current primitives
+versus 859,427 saved); restoring only the original Churton paving still differs
+at 859,424, so concurrent landscaping also contributes. The Jarman and Leighton/
+Newton saved snapshots were left unchanged by this task. Evidence and preview
+files use Browser/artifacts/churton-paving-*.
+
+Browser source and the local compiled aerial model are updated. Unity and
+Blender exports were not regenerated.
+
+The final compiled/source browser validation passes, including image matching,
+full-detail loading, layout/tree controls, camera movement and model fallbacks.
+The delivered compiled fingerprint was checked again after validation and is
+current. Its log is Browser/artifacts/churton-paving-compiled-final.log.
+The final timeline browser validation also passes every period in source and
+compiled views, navigation, tree focus, mobile reset and live walking collision
+refresh (Browser/artifacts/churton-paving-timeline-final.log).
+
+
+## Continuous chimney-yard paving (September 25)
+
+Extended the existing Tower service court polygon in
+Browser/dist/historic-road-layout.mjs to cover the entire blue-circled yard:
+the chimney base, cylinder court, gaps beside the service buildings, and the
+strip along Main/admin. The perimeter meets the Farndon/Irby corridor faces
+and follows Main/admin's stepped rear walls. The same grey asphalt material
+and ground height join the existing approach; exterior lawns are retained.
+See Research/tower-buildings/README.md and chimney-yard-paving-reference.png.
+
+This changes a ground surface at scene construction. Building transforms,
+walking obstacles and runtime visibility behavior are unchanged. The paving
+retains The Main's existing Historic timeline ownership. Browser source and
+the local compiled aerial asset include the change; Unity and Blender
+exports are unchanged.
+
+Validation: historic-roads, tower-buildings and pharmacy checks pass, covering
+surface normals/heights, adjoining road clearance, historical visibility,
+chimney/building clearance and walking routes. Source and compiled yard views
+were visually checked, with no grass remaining inside the marked enclosure.
+The complete source-versus-compiled browser comparison passes, including
+image similarity, exact draw counts, controls and asset fallbacks. Evidence
+uses Browser/artifacts/chimney-paving-*.
+
+The initial npm test attempt encountered an unrelated Redesmere tree-collision
+assertion; all 65 later commands were run separately, with 63 passing and the
+Jarman/Leighton protected-geometry snapshots failing. Loading the original
+courtyard definition reproduces those failures. Other modelling tasks were
+editing the shared project during validation. Later full-suite and timeline
+browser reruns were interrupted; they are not recorded as complete passes.
+
+Final validation for the tree relocation: all 77 commands in the Browser
+npm test sequence were attempted (27 before interruption, then 50 resumed).
+75 pass. The Jarman and Leighton/Newton saved-geometry checks fail after
+concurrent paving/stair edits changed their protected surroundings; the tree
+move itself preserved both primitive counts and passed its isolated check.
+The existing tree-visibility/collision, walking, layout, KML and performance
+checks pass. Source/compiled browser comparison passes, including shadows,
+image similarity, draw counts, controls and fallback cases. A subsequent
+timeline run fell back to source because concurrent modelling changed the
+asset fingerprint, so the full timeline run is not recorded as a pass.
+Logs and per-command results are in Browser/artifacts/churton-tree-*.

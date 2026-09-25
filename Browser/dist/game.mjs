@@ -1,6 +1,6 @@
 import {captureOutcome} from './capture-outcome.mjs';
 import * as THREE from 'three';
-import {GLTFLoader} from 'https://cdn.jsdelivr.net/npm/three@0.160.1/examples/jsm/loaders/GLTFLoader.js';
+import {GLTFLoader} from './vendor/GLTFLoader.js';
 import {path,walkable,visible,nearExit} from './core.mjs';
 import {buildArchitecture,interiorWallSurfaces} from './architecture.mjs';
 import {createInteriorLights} from './interior-lights.mjs';
@@ -219,13 +219,13 @@ async function init(){
   bindTreeToggle(escapeExterior,document);
   await loadEscapeFrontage(THREE,escapeExterior);
   exterior=escapeExterior;
-  if(renderer.shadowMap){renderer.shadowMap.enabled=true;renderer.shadowMap.type=THREE.PCFSoftShadowMap;}
+  if(renderer.shadowMap){renderer.shadowMap.enabled=true;renderer.shadowMap.type=THREE.PCFShadowMap;}
   arrivalCutscene=createArrivalCutscene({camera:exterior.camera,overlay:$('arrivalFade'),
     reducedMotion:matchMedia('(prefers-reduced-motion: reduce)').matches,
     onEnter(){resetPositions();camera.position.set(player.x,1.65,player.z);camera.rotation.set(pitch,yaw,0);},
     onComplete(){if(state!=='arrival')return;keys.clear();state='play';uiPlaying(true);drawMap();}
   });
-  resetPositions();clock=new THREE.Clock();ready=true;$('start').disabled=false;$('start').innerHTML='ASYLUM ESCAPE <span>↗</span>';animate();
+  resetPositions();clock=new THREE.Timer();clock.connect(document);ready=true;$('start').disabled=false;$('start').innerHTML='ASYLUM ESCAPE <span>↗</span>';animate();
  }catch(e){console.error(e);$('start').textContent='RELOAD TO TRY AGAIN';$('start').disabled=false;$('start').onclick=()=>location.reload();$('intro').textContent='The building could not load. Check your connection and reload. '+e.message;}
 }
 // Choose once per run; the arrival handoff reuses these spawns in resetPositions.
@@ -329,7 +329,7 @@ function renderAerialBackdrop(exterior){
  renderer.render(exterior.scene,exterior.camera);
  if(fog)fog.density=fogDensity;
 }
-function animate(){requestAnimationFrame(animate);const frameDt=clock.getDelta(),dt=Math.min(frameDt,.04);
+function animate(){requestAnimationFrame(animate);clock.update();const frameDt=clock.getDelta(),dt=Math.min(frameDt,.04);
  if(document.hidden)return;
  if(state==='cutscene'||state==='won'){
   if(state==='cutscene'&&!document.hidden)escapeCutscene.update(frameDt);

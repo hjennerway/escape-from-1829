@@ -1,0 +1,178 @@
+[
+  {
+    "test": "test-larkton.mjs",
+    "status": 1
+  },
+  {
+    "test": "test-larkton-recess.mjs",
+    "status": 1
+  },
+  {
+    "test": "test-annexe-carden.mjs",
+    "status": 1
+  },
+  {
+    "test": "test-annexe-front-link.mjs",
+    "status": 1
+  },
+  {
+    "test": "test-annexe-east-outer.mjs",
+    "status": 1
+  },
+  {
+    "test": "test-annexe-kitchen.mjs",
+    "status": 1
+  },
+  {
+    "test": "test-annexe-rear-stretch.mjs",
+    "status": 1
+  },
+  {
+    "test": "test-annexe-rear-side-alignment.mjs",
+    "status": 1
+  },
+  {
+    "test": "test-annexe-os-refinement.mjs",
+    "status": 1
+  },
+  {
+    "test": "test-annexe-photo-placement.mjs",
+    "status": 0
+  },
+  {
+    "test": "test-annexe-outer-front.mjs",
+    "status": 0
+  },
+  {
+    "test": "test-jarman.mjs",
+    "status": 1
+  },
+  {
+    "test": "test-oakmere-court.mjs",
+    "status": 1
+  },
+  {
+    "test": "test-oakmere.mjs",
+    "status": 0
+  },
+  {
+    "test": "test-oakmere-west.mjs",
+    "status": 1
+  },
+  {
+    "test": "test-oakmere-windows.mjs",
+    "status": 1
+  },
+  {
+    "test": "test-annexe-wards.mjs",
+    "status": 0
+  },
+  {
+    "test": "test-leighton-newton.mjs",
+    "status": 1
+  },
+  {
+    "test": "test-churton.mjs",
+    "status": 0
+  },
+  {
+    "test": "test-upton.mjs",
+    "status": 0
+  },
+  {
+    "test": "test-garages-mortuary.mjs",
+    "status": 0
+  },
+  {
+    "test": "test-greenhouses.mjs",
+    "status": 0
+  },
+  {
+    "test": "test-main-admin.mjs",
+    "status": 0
+  },
+  {
+    "test": "test-main-kitchen.mjs",
+    "status": 0
+  },
+  {
+    "test": "test-main-admin-refine2.mjs",
+    "status": 0
+  },
+  {
+    "test": "test-aerial-controls.mjs",
+    "status": 0
+  },
+  {
+    "test": "test-device-location.mjs",
+    "status": 0
+  },
+  {
+    "test": "test-aerial-layouts.mjs",
+    "status": 0
+  },
+  {
+    "test": "test-kml-imports.mjs",
+    "status": 0
+  },
+  {
+    "test": "test-kml-11.mjs",
+    "status": 0
+  },
+  {
+    "test": "test-modern-entrance.mjs",
+    "status": 0
+  },
+  {
+    "test": "test-modern-car-park.mjs",
+    "status": 0
+  },
+  {
+    "test": "test-parsons-retrace.mjs",
+    "status": 0
+  },
+  {
+    "test": "test-historic-roads.mjs",
+    "status": 0
+  },
+  {
+    "test": "test-west-parsons-junctions.mjs",
+    "status": 0
+  },
+  {
+    "test": "test-admin-teardrop.mjs",
+    "status": 0
+  },
+  {
+    "test": "test-annexe-access.mjs",
+    "status": 1
+  },
+  {
+    "test": "test-annexe-rear-roads.mjs",
+    "status": 0
+  },
+  {
+    "test": "test-performance.mjs",
+    "status": 0
+  },
+  {
+    "test": "test-aerial-performance.mjs",
+    "status": 0
+  },
+  {
+    "test": "test-building-detail.mjs",
+    "status": 0
+  },
+  {
+    "test": "test-outhouse.mjs",
+    "status": 0
+  },
+  {
+    "test": "test-willows.mjs",
+    "status": 0
+  },
+  {
+    "test": "test-building-photos.mjs",
+    "status": 1
+  }
+]

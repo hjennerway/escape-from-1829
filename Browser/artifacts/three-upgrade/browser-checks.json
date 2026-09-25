@@ -1,0 +1,26 @@
+[
+  {
+    "test": "test-timeline-browser.mjs",
+    "exitCode": 0
+  },
+  {
+    "test": "test-day-night-browser.mjs",
+    "exitCode": 0
+  },
+  {
+    "test": "test-night-selection-browser.mjs",
+    "exitCode": 0
+  },
+  {
+    "test": "test-tree-rendering-browser.mjs",
+    "exitCode": 0
+  },
+  {
+    "test": "test-explore-mobile.mjs",
+    "exitCode": 0
+  },
+  {
+    "test": "test-landing-mobile.mjs",
+    "exitCode": 0
+  }
+]

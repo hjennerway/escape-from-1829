@@ -126,8 +126,8 @@ import {WEST_LAWN_PHOTO_VIEW} from './west-lawn-photo-detail.mjs';
 import {ENTRANCE_WEST_PHOTO_VIEW} from './entrance-west-photo-detail.mjs';
 import {FRONT_CORNER_VIEWS} from './front-inside-corners.mjs';
 import {FRONT_LAWN_TREE_VIEW} from './front-lawn-trees.mjs';
-const renderer=new THREE.WebGLRenderer({canvas:document.getElementById('game'),antialias:true});renderer.setPixelRatio(Math.min(devicePixelRatio,1.5));renderer.setSize(innerWidth,innerHeight);renderer.outputColorSpace=THREE.SRGBColorSpace;renderer.toneMapping=THREE.ACESFilmicToneMapping;renderer.toneMappingExposure=1.25;renderer.shadowMap.enabled=true;renderer.shadowMap.type=THREE.PCFSoftShadowMap;
-const {exterior,layouts,buildingDetail}=await loadAerialScene(THREE,innerWidth/innerHeight),clock=new THREE.Clock();
+const renderer=new THREE.WebGLRenderer({canvas:document.getElementById('game'),antialias:true});renderer.setPixelRatio(Math.min(devicePixelRatio,1.5));renderer.setSize(innerWidth,innerHeight);renderer.outputColorSpace=THREE.SRGBColorSpace;renderer.toneMapping=THREE.ACESFilmicToneMapping;renderer.toneMappingExposure=1.25;renderer.shadowMap.enabled=true;renderer.shadowMap.type=THREE.PCFShadowMap;
+const {exterior,layouts,buildingDetail}=await loadAerialScene(THREE,innerWidth/innerHeight),clock=new THREE.Timer();clock.connect(document);
 applyTreeRenderingDefault(renderer,exterior);
 const buildingSelection=createBuildingSelection(THREE,exterior);
 renderer.domElement.addEventListener('webglcontextrestored',exterior.invalidateShadows);
@@ -188,13 +188,13 @@ bindTimelineControls(exterior.timeline,document.getElementById('layoutControls')
 const lighting=createDayNight(THREE,exterior,renderer);bindDayNight(lighting);
 // Location links pin the same outline and gallery as clicking a building.
 buildingPhotos.select(buildingSelection.entries.find(entry=>entry.locations.includes(selectedLocation)),true);
-function frame(){requestAnimationFrame(frame);const dt=clock.getDelta();if(document.hidden)return;if(buildingPhotos.lightboxOpen)stop();else controls.update(dt);buildingPhotos.update();buildingDetail?.update(exterior.camera,innerHeight);updateRoadLabels(THREE,layouts.roads,exterior.camera,innerWidth,innerHeight);deviceLocationMarker.update(exterior.camera,innerHeight);lighting.update();renderer.render(exterior.scene,exterior.camera);buildingGlow.render(exterior.camera,lighting.night ? .3 : 1);}
+function frame(){requestAnimationFrame(frame);clock.update();const dt=clock.getDelta();if(document.hidden)return;if(buildingPhotos.lightboxOpen)stop();else controls.update(dt);buildingPhotos.update();buildingDetail?.update(exterior.camera,innerHeight);updateRoadLabels(THREE,layouts.roads,exterior.camera,innerWidth,innerHeight);deviceLocationMarker.update(exterior.camera,innerHeight);lighting.update();renderer.render(exterior.scene,exterior.camera);buildingGlow.render(exterior.camera,lighting.night ? .3 : 1);}
 function resetAerial(){buildingPhotos.close();exterior.scene.fog.density=0;moved=false;controls.keys.clear();const shot=sampleLanding(0,{aspect:exterior.camera.aspect});navigationTarget=shot.target;exterior.camera.fov=46;exterior.camera.updateProjectionMatrix();exterior.camera.position.set(...shot.position);exterior.camera.lookAt(...shot.target);controls.sync(navigationTarget);}
 document.getElementById('resetAerial').onclick=resetAerial;
 const canvas=document.getElementById('game');
 function takeControl(){if(!moved)controls.sync(navigationTarget);moved=true;}
 const gestures=bindAerialGestures(canvas,controls,takeControl);
-function stop(){controls.keys.clear();gestures.clear();clock.getDelta();}
+function stop(){controls.keys.clear();gestures.clear();clock.reset();}
 canvas.addEventListener('contextmenu',e=>e.preventDefault());
 canvas.addEventListener('wheel',e=>{e.preventDefault();takeControl();controls.zoom(e.deltaY);},{passive:false});
 addEventListener('keydown',e=>{if(['KeyW','KeyA','KeyS','KeyD','ShiftLeft','ShiftRight'].includes(e.code)){e.preventDefault();takeControl();controls.keys.add(e.code);}if(e.code==='Escape')stop();});
@@ -203,5 +203,5 @@ document.addEventListener('visibilitychange',stop);
 addEventListener('resize',()=>{renderer.setSize(innerWidth,innerHeight);exterior.camera.aspect=innerWidth/innerHeight;exterior.camera.updateProjectionMatrix();if(!moved){if(mapDetail)frameMap();else if(photoDetail)framePhoto();else if(rightDetail)frameRight();else if(towerDetail)frameTower();else if(frontDetail)frameFront();else resetAerial();controls.sync(navigationTarget);}});
 // Warm all material variants, including hidden layouts and foliage levels,
 // after the frontage texture is ready, before starting camera navigation.
-frontageReady.then(()=>renderer.compileAsync(exterior.scene,exterior.camera)).catch(console.warn).then(frame);
+frontageReady.then(()=>renderer.compileAsync(exterior.scene,exterior.camera)).catch(console.warn).then(()=>{clock.reset();frame();});
 </script></body></html>

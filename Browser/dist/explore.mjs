@@ -56,7 +56,7 @@ try{
   const renderer=new THREE.WebGLRenderer({canvas,antialias:true});
   renderer.setPixelRatio(Math.min(devicePixelRatio,1.5));renderer.setSize(innerWidth,innerHeight);
   renderer.outputColorSpace=THREE.SRGBColorSpace;renderer.toneMapping=THREE.ACESFilmicToneMapping;renderer.toneMappingExposure=1.25;
-  renderer.shadowMap.enabled=true;renderer.shadowMap.type=THREE.PCFSoftShadowMap;
+  renderer.shadowMap.enabled=true;renderer.shadowMap.type=THREE.PCFShadowMap;
   const exterior=createEscapeExterior(THREE,innerWidth/innerHeight);
   canvas.addEventListener('webglcontextrestored',exterior.invalidateShadows);
   exterior.camera.near=.1;exterior.camera.updateProjectionMatrix();
@@ -127,7 +127,7 @@ try{
   const input=bindExploreInput(walker,{canvas,hint,look,touchControls:document.getElementById('walkTouch')});
   window.addEventListener('resize',()=>{renderer.setSize(innerWidth,innerHeight);exterior.camera.aspect=innerWidth/innerHeight;if(view==='inner-east-photo')exterior.camera.fov=innerEastPhotoView(exterior.camera.aspect).fov;if(view==='central-court-photo')exterior.camera.fov=centralCourtPhotoView(exterior.camera.aspect).fov;exterior.camera.updateProjectionMatrix();});
   const lighting=createDayNight(THREE,exterior,renderer,{walking:true});bindDayNight(lighting);
-  const clock=new THREE.Clock();
-  renderer.setAnimationLoop(()=>{const dt=clock.getDelta();if(input.active&&!document.hidden)walker.update(dt);lighting.update();renderer.render(exterior.scene,exterior.camera);});
+  const clock=new THREE.Timer();clock.connect(document);
+  renderer.setAnimationLoop(()=>{clock.update();const dt=clock.getDelta();if(input.active&&!document.hidden)walker.update(dt);lighting.update();renderer.render(exterior.scene,exterior.camera);});
   loadEscapeFrontage(THREE,exterior).catch(error=>console.warn('Frontage photo unavailable',error));
 }catch(error){console.error(error);hint.textContent='The grounds could not load. Reload the page to try again.';look.disabled=false;look.textContent='RELOAD ↗';look.onclick=()=>location.reload();}

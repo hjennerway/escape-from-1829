@@ -1,0 +1,51 @@
+[
+  {
+    "profile": "software",
+    "path": "aerial.html?models=source",
+    "visible": false,
+    "mode": "procedural",
+    "renderer": "ANGLE (Google, Vulkan 1.3.0 (SwiftShader Device (Subzero) (0x0000C0DE)), SwiftShader driver)"
+  },
+  {
+    "profile": "software",
+    "path": "aerial.html?models=compiled",
+    "visible": false,
+    "mode": "compiled",
+    "renderer": "ANGLE (Google, Vulkan 1.3.0 (SwiftShader Device (Subzero) (0x0000C0DE)), SwiftShader driver)"
+  },
+  {
+    "profile": "software",
+    "path": "explore.html",
+    "visible": false,
+    "refreshCount": 2,
+    "renderer": "ANGLE (Google, Vulkan 1.3.0 (SwiftShader Device (Subzero) (0x0000C0DE)), SwiftShader driver)"
+  },
+  {
+    "profile": "hardware",
+    "path": "aerial.html?models=compiled",
+    "visible": true,
+    "mode": "compiled",
+    "renderer": "ANGLE (Intel, Intel(R) UHD Graphics 620 Direct3D11)"
+  },
+  {
+    "profile": "hardware",
+    "path": "explore.html",
+    "visible": true,
+    "refreshCount": 1,
+    "renderer": "ANGLE (Intel, Intel(R) UHD Graphics 620 Direct3D11)"
+  },
+  {
+    "profile": "restricted",
+    "path": "aerial.html?models=source",
+    "visible": true,
+    "mode": "procedural",
+    "renderer": null
+  },
+  {
+    "profile": "restricted",
+    "path": "explore.html",
+    "visible": true,
+    "refreshCount": 1,
+    "renderer": null
+  }
+]

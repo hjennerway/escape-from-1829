@@ -142,3 +142,29 @@ snapshot, which includes changed landscaping; its baseline was not rebased.
 Artifacts use the `west-planters-` prefix under `Browser/artifacts/`.
 
 Timeline browser checks also pass, using separate screenshot output paths.
+
+## Continuous outer path and gravel (25 September 2026)
+
+The user's `path-gravel-annotation.png` requests a straight outer path following
+its red line and a single gravel colour across the two blue-circled surfaces.
+The court, west apron and garden return are now one surface in
+`Browser/dist/entrance-walks.mjs`, using the existing entrance gravel material
+(0xa39e88). Its outer edge is x=-73.5 from the Parsons Lane join at z=-38 to
+the existing garden return at z=45. The narrow road link retains the adjacent
+grass verge, and its tip lies beneath the higher road surface. Coordinates
+are visual estimates from the annotation.
+
+Removed the overlapping court slab and two apron slabs. The western doorway
+approach and narrow garden-side walk use the same gravel colour. The garden
+lawn and building geometry are retained. These changes affect the shared
+browser source and local compiled model; Unity and Blender exports are unchanged.
+
+The new route passes the existing player-width surface and walking-clearance
+check in `Browser/test-modern-entrance.mjs`, including the approach beside the
+retained stone doorway threshold. Source and rebuilt compiled previews match;
+full-detail, fallback and timeline browser checks pass. Validation evidence
+uses `Browser/artifacts/west-path-`.
+
+The full suite's Jarman and Leighton/Newton whole-estate snapshots differ after
+landscaping changes; their baselines were not refreshed for this edit. All other
+suite checks pass when continued after the first snapshot failure.

@@ -1,0 +1,26 @@
+{
+  "oldJarman": {
+    "primitives": 859424,
+    "sha256": "98bb3d1a8b09e20922c496066949598f686cff40ea71dd4dc4969b7bccfda108"
+  },
+  "newJarman": {
+    "primitives": 859422,
+    "sha256": "0822009f1ace5eea25237eff79bc72a2ce91c20f1369a58eec4d37ecdd1b0f95"
+  },
+  "oldLeighton": {
+    "count": 923471,
+    "sha256": "56bd54cf2e2bf105acdd6d529318fec5e4245b0d008af0ad425a45e7b5208a5f"
+  },
+  "newLeighton": {
+    "count": 923469,
+    "sha256": "1739dedca5b2e0c9d514bfc17441f853027f2f6414250fab12d64e488c98096e"
+  },
+  "savedJarman": {
+    "primitives": 859427,
+    "sha256": "5f24e1630166cfc7bc1a1f25b6a5e743a63d994ad30f6542417a9d97d1156c94"
+  },
+  "savedLeighton": {
+    "count": 923474,
+    "sha256": "137be53ec863b0453ecc179b133e72d257738e6958cb477e967143abea921ed6"
+  }
+}

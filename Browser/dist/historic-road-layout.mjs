@@ -146,7 +146,17 @@ export const HISTORIC_PAVING=Object.freeze([
  ...PARSONS_NORTH_BEND_PAVING,
  // Cover the segmented inner kerb before drawing one smooth grass boundary.
  {name:'Admin teardrop inner resurfacing',surface:'junction',points:teardropRoad},
- {name:'Tower service court',points:[[146,-16.1],[162.3,-16.1],[162.3,-16.1+TOWER_ADMIN_SHIFT],[185.5,-16.1+TOWER_ADMIN_SHIFT],[185.5,-12.5+TOWER_ADMIN_SHIFT],[221.3,-12.5+TOWER_ADMIN_SHIFT],[225.5,-18+TOWER_ADMIN_SHIFT],[231,-17],[235,-6],[233,1],[240,10],[242,13],[234,13],[222,2],[215,-5+TOWER_ADMIN_SHIFT],[162.3,-5+TOWER_ADMIN_SHIFT],[162.3,-5],[146,-5]]}
+ // Blue-circled chimney yard: continue the existing asphalt right across
+ // the enclosure, from the Farndon/Irby corridor faces to Main/admin's
+ // stepped rear walls. One surface closes the gaps between the former pads.
+ {name:'Tower service court',points:[
+  [146,-16.1],[159,-16.1],[159,-63.9],[220.86,-63.9],
+  [220.86,-12.5+TOWER_ADMIN_SHIFT],[221.3,-12.5+TOWER_ADMIN_SHIFT],
+  [225.5,-18+TOWER_ADMIN_SHIFT],[231,-17],[235,-6],[233,1],[240,10],[242,13],
+  [237,13],[237,10.2],[231.5,10.2],[231.5,6.2],[219,6.2],
+  [219,11],[207,11],[207,17.8],[174,17.8],[174,6.6],[159,6.6],
+  [159,-5],[146,-5]
+ ]}
 ]);
 const lawnArc=Array.from({length:41},(_,i)=>{const t=Math.PI-i*Math.PI/40;return [14.6*Math.cos(t),14.6*Math.sin(t)];});
 export const HISTORIC_GRASS=Object.freeze([

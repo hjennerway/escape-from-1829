@@ -1,0 +1,44 @@
+{
+  "geometry": {
+    "count": 923474,
+    "sha256": "6180949af770eaecfa56b425fd94008ad61dabc577ec37f759bc8a196e4a1287"
+  },
+  "ranges": [
+    {
+      "h": 8.4,
+      "rise": 2.2,
+      "name": "Rear east connecting range",
+      "rect": [
+        9,
+        -46,
+        48,
+        -38
+      ],
+      "section": "rear-east",
+      "wardId": "leighton-newton",
+      "x": 43.88574079512094,
+      "z": -96.67607498318878,
+      "w": 63.203046838335545,
+      "d": 12.96472755658165,
+      "r": 0.3839724354387525
+    },
+    {
+      "h": 8.4,
+      "rise": 2.8,
+      "name": "Rear east end pavilion",
+      "rect": [
+        39,
+        -66,
+        48,
+        -38
+      ],
+      "section": "rear-east",
+      "wardId": "leighton-newton",
+      "x": 60.35368664442467,
+      "z": -120.80819336584415,
+      "w": 14.585318501154354,
+      "d": 45.37654644803577,
+      "r": 0.3839724354387525
+    }
+  ]
+}

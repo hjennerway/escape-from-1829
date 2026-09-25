@@ -1,0 +1,15 @@
+import * as THREE from '../dist/vendor/three.module.js';
+import {createEscapeExterior} from '../dist/escape-exterior.mjs';
+import {jarmanProtected} from './jarman-scope.mjs';
+import {leightonProtected} from './leighton-scope.mjs';
+import {readFileSync,writeFileSync} from 'node:fs';
+globalThis.document={createElement:()=>({getContext:()=>({fillRect(){},clearRect(){},fillText(){},strokeText(){},measureText(t){return {width:t.length*16}}})})};
+const e=createEscapeExterior(THREE,1.5),parts=[];
+e.model.traverse(o=>{if(/^Reception (west|east) chimney (stack|corbel|cap)$/.test(o.name))parts.push(o);});
+const withChimneys=jarmanProtected(THREE,e.model),leightonWith=leightonProtected(THREE,e.model);
+for(const o of parts)o.removeFromParent();
+const withoutChimneys=jarmanProtected(THREE,e.model);
+const baseline=JSON.parse(readFileSync(new URL('../../Research/jarman/protected-geometry.json',import.meta.url)));
+const result={chimneyParts:parts.length,jarman:{withChimneys,withoutChimneys,baseline},leighton:{withChimneys:leightonWith,withoutChimneys:leightonProtected(THREE,e.model),baseline:JSON.parse(readFileSync(new URL('../../Research/leighton-newton/protected-before.json',import.meta.url))).geometry}};
+writeFileSync(new URL('./front-chimneys-preservation.json',import.meta.url),JSON.stringify(result,null,2)+'\n');
+console.log(JSON.stringify(result,null,2));

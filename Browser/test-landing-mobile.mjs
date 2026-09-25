@@ -11,8 +11,7 @@ try{
  browser=await chromium.launch({headless:true,...(process.env.MODEL_CHROME_PATH?{executablePath:process.env.MODEL_CHROME_PATH}:{}),args:['--use-angle=swiftshader','--enable-unsafe-swiftshader']});
  const page=await browser.newPage({viewport:{width:390,height:704},isMobile:true,hasTouch:true,deviceScaleFactor:1,reducedMotion:'reduce'});
  const errors=[];page.on('pageerror',e=>errors.push(e.message));
- // Use the vendored copy of the exact production Three.js version offline.
- await page.route('https://cdn.jsdelivr.net/npm/three@0.160.1/**',route=>route.fulfill({path:fileURLToPath(new URL('./dist/vendor/'+new URL(route.request().url()).pathname.split('/').at(-1),import.meta.url)),contentType:'text/javascript'}));
+ // Production Three.js and its loader are served locally.
  await page.route(/https:\/\/(www\.whateversleft\.co\.uk|basedinchurton\.co\.uk)\//,route=>route.abort());
  const holdGame=route=>route.fulfill({contentType:'text/javascript',body:''});
  await page.route('**/game.mjs',holdGame);

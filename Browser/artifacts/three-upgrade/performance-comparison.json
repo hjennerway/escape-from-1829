@@ -1,0 +1,77 @@
+{
+  "gpu": "ANGLE (NVIDIA, NVIDIA GeForce RTX 3090 Ti (0x00002203) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+  "viewport": [
+    1000,
+    700
+  ],
+  "samples": 30,
+  "trees": true,
+  "rows": [
+    {
+      "view": "aerial-day",
+      "gpuRenderMsBefore": 9.699999999254942,
+      "gpuRenderMsAfter": 9.800000000745058,
+      "gpuFrameMsBefore": 16.699999999999818,
+      "gpuFrameMsAfter": 16.699999999999818,
+      "softwareFrameMsBefore": 650.2999999999993,
+      "softwareFrameMsAfter": 1200.300000000003,
+      "drawCallsBefore": 2802,
+      "drawCallsAfter": 2802
+    },
+    {
+      "view": "aerial-night",
+      "gpuRenderMsBefore": 11.400000000372529,
+      "gpuRenderMsAfter": 11.099999999627471,
+      "gpuFrameMsBefore": 16.699999999999818,
+      "gpuFrameMsAfter": 16.699999999999818,
+      "softwareFrameMsBefore": 683.5,
+      "softwareFrameMsAfter": 633.6000000000058,
+      "drawCallsBefore": 2804,
+      "drawCallsAfter": 2804
+    },
+    {
+      "view": "walking-day",
+      "gpuRenderMsBefore": 15.299999998882413,
+      "gpuRenderMsAfter": 13.5,
+      "gpuFrameMsBefore": 16.699999999999818,
+      "gpuFrameMsAfter": 16.699999999999818,
+      "softwareFrameMsBefore": 450.2000000000007,
+      "softwareFrameMsAfter": 450.09999999999854,
+      "drawCallsBefore": 2681,
+      "drawCallsAfter": 2681
+    },
+    {
+      "view": "walking-night",
+      "gpuRenderMsBefore": 10.900000000372529,
+      "gpuRenderMsAfter": 10.400000000372529,
+      "gpuFrameMsBefore": 16.699999999999818,
+      "gpuFrameMsAfter": 16.699999999999818,
+      "softwareFrameMsBefore": 450.1999999999971,
+      "softwareFrameMsAfter": 450.09999999999854,
+      "drawCallsBefore": 2683,
+      "drawCallsAfter": 2683
+    },
+    {
+      "view": "game-reception",
+      "gpuRenderMsBefore": 0.2000000011175871,
+      "gpuRenderMsAfter": 0.2999999988824129,
+      "gpuFrameMsBefore": 16.699999999999818,
+      "gpuFrameMsAfter": 16.699999999999818,
+      "softwareFrameMsBefore": 166.70000000000073,
+      "softwareFrameMsAfter": 166.79999999999927,
+      "drawCallsBefore": 41,
+      "drawCallsAfter": 41
+    },
+    {
+      "view": "game-upper",
+      "gpuRenderMsBefore": 0.30000000074505806,
+      "gpuRenderMsAfter": 0.3999999985098839,
+      "gpuFrameMsBefore": 16.699999999999818,
+      "gpuFrameMsAfter": 16.699999999999818,
+      "softwareFrameMsBefore": 166.70000000000073,
+      "softwareFrameMsAfter": 183.40000000000146,
+      "drawCallsBefore": 37,
+      "drawCallsAfter": 37
+    }
+  ]
+}

@@ -13,7 +13,7 @@ try{
   let page=await browser.newPage({viewport:{width:390,height:844},isMobile:true,hasTouch:true,deviceScaleFactor:1});
   const errors=[];page.on('pageerror',error=>errors.push(error.message));
   const instrument=async route=>{
-    const response=await route.fetch();await route.fulfill({response,body:(await response.text()).replace('const clock=new THREE.Clock();','window.__walk={exterior,walker,input,renderer};const clock=new THREE.Clock();')});
+    const response=await route.fetch();await route.fulfill({response,body:(await response.text()).replace('const clock=new THREE.Timer();','window.__walk={exterior,walker,input,renderer};const clock=new THREE.Timer();')});
   };
   await page.route('**/explore.mjs',instrument);
   await page.goto(base+'/explore.html',{timeout:120000});

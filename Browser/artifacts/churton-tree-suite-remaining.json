@@ -1,0 +1,54 @@
+[
+  {
+    "command": "node test-ward-corridors.mjs",
+    "status": 0
+  },
+  {
+    "command": "node test-day-night.mjs",
+    "status": 0
+  },
+  {
+    "command": "node test-tree-rendering.mjs",
+    "status": 0
+  },
+  {
+    "command": "node test-explore.mjs",
+    "status": 0
+  },
+  {
+    "command": "node test-explore-input.mjs",
+    "status": 0
+  },
+  {
+    "command": "node test-annexe.mjs",
+    "status": 0
+  },
+  {
+    "command": "node test-larkton.mjs",
+    "status": 0
+  },
+  {
+    "command": "node test-larkton-recess.mjs",
+    "status": 0
+  },
+  {
+    "command": "node test-annexe-carden.mjs",
+    "status": 0
+  },
+  {
+    "command": "node test-annexe-front-link.mjs",
+    "status": 0
+  },
+  {
+    "command": "node test-annexe-east-outer.mjs",
+    "status": 0
+  },
+  {
+    "command": "node test-annexe-kitchen.mjs",
+    "status": 0
+  },
+  {
+    "command": "node test-annexe-rear-stretch.mjs",
+    "status": 0
+  }
+]

@@ -36,11 +36,15 @@ export function addFrontSteps(THREE,{model,material}){
   }
   // Broad upper doorstep, with side entries outside the portico columns.
   slab('Front doorway landing',0,21.7,7.8,3.7,top);
-  slab('Front stair branching landing',0,25.2,2.2,1.2,mid);
+  // Extend the full split flight back to the doorstep wall, closing the grass
+  // strip while retaining the front edge and the original tread heights.
+  const branchBack=21.7+3.7/2,branchFront=25.8;
+  const branchZ=(branchBack+branchFront)/2,branchDepth=branchFront-branchBack;
+  slab('Front stair branching landing',0,branchZ,2.2,branchDepth,mid);
   for(let i=0;i<4;i++)slab('Front approach step '+(i+1),0,27.2-i*.4,2.2,.4,ground+(i+1)*rise);
   for(const side of [-1,1]){
     const label=side<0?'Left':'Right';
-    for(let i=0;i<4;i++)slab(label+' lateral step '+(i+1),side*(1.3+i*.4),25.2,.4,1.2,mid+(i+1)*rise);
+    for(let i=0;i<4;i++)slab(label+' lateral step '+(i+1),side*(1.3+i*.4),branchZ,.4,branchDepth,mid+(i+1)*rise);
     // The second 90-degree turn is level with the doorstep, not another flight.
     slab(label+' forward return landing',side*3.3,24.1,1.2,3.4,top);
     // Solid red-brown masonry cheeks and pale coping follow the photographed stairs.

@@ -31,7 +31,7 @@ class Geometry {clone(){return new Geometry();}}
 const THREE={Vector3:Vector,Object3D,Group:Object3D,Scene:Object3D,Mesh:Object3D,InstancedMesh:Object3D,
   WebGLRenderer:Object3D,PerspectiveCamera:Object3D,HemisphereLight:Object3D,PointLight:Object3D,SpotLight:Object3D,
   BoxGeometry,Shape,ExtrudeGeometry,BufferGeometry,Float32BufferAttribute,PlaneGeometry:Geometry,CylinderGeometry:Geometry,SphereGeometry:Geometry,
-  MeshStandardMaterial:class {constructor(args){Object.assign(this,args);}},MeshBasicMaterial:class {},CanvasTexture:class {},Color:class {},FogExp2:class {},Clock:class {getDelta(){return .016;}},
+  MeshStandardMaterial:class {constructor(args){Object.assign(this,args);}},MeshBasicMaterial:class {},CanvasTexture:class {},Color:class {},FogExp2:class {},Timer:class {connect(){}update(){}getDelta(){return .016;}},
   MathUtils:{clamp:(v,a,b)=>Math.min(b,Math.max(a,v)),lerp:(a,b,t)=>a+(b-a)*t,mapLinear:(v,a,b,c,d)=>c+(v-a)/(b-a)*(d-c)}};
 const elements=new Map();
 function element(id){

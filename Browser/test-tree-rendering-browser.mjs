@@ -38,7 +38,7 @@ try{
       }
     },profile);
     await page.route('**/aerial.html*',async route=>{const response=await route.fetch();await route.fulfill({response,body:(await response.text()).replace('function frame(){','window.__trees={renderer,exterior,layouts};\nfunction frame(){')});});
-    await page.route('**/explore.mjs',async route=>{const response=await route.fetch();await route.fulfill({response,body:(await response.text()).replace('function refreshObstacles(){','let refreshCount=0;function refreshObstacles(){refreshCount++;').replace('const clock=new THREE.Clock();','window.__trees={renderer,exterior,layouts,walker,get refreshCount(){return refreshCount;}};const clock=new THREE.Clock();')});});
+    await page.route('**/explore.mjs',async route=>{const response=await route.fetch();await route.fulfill({response,body:(await response.text()).replace('function refreshObstacles(){','let refreshCount=0;function refreshObstacles(){refreshCount++;').replace('const clock=new THREE.Timer();','window.__trees={renderer,exterior,layouts,walker,get refreshCount(){return refreshCount;}};const clock=new THREE.Timer();')});});
     await page.goto(base+'/'+path+'&period=1916'.replace(/^&/,path.includes('?')?'&':'?'));
     await page.waitForFunction(()=>window.__trees?.renderer.info.render.frame>3);
     const initial=await page.evaluate(()=>{

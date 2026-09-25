@@ -1,0 +1,136 @@
+{
+  "source": [
+    {
+      "year": 1829,
+      "lamps": 53,
+      "night": true
+    },
+    {
+      "year": 1849,
+      "lamps": 53,
+      "night": true
+    },
+    {
+      "year": 1856,
+      "lamps": 53,
+      "night": true
+    },
+    {
+      "year": 1860,
+      "lamps": 53,
+      "night": true
+    },
+    {
+      "year": 1870,
+      "lamps": 53,
+      "night": true
+    },
+    {
+      "year": 1896,
+      "lamps": 105,
+      "night": true
+    },
+    {
+      "year": 1912,
+      "lamps": 105,
+      "night": true
+    },
+    {
+      "year": 1915,
+      "lamps": 121,
+      "night": true
+    },
+    {
+      "year": 1916,
+      "lamps": 121,
+      "night": true
+    },
+    {
+      "year": 1938,
+      "lamps": 121,
+      "night": true
+    },
+    {
+      "year": 2010,
+      "lamps": 93,
+      "night": true
+    },
+    {
+      "year": 2016,
+      "lamps": 104,
+      "night": true
+    },
+    {
+      "year": 2021,
+      "lamps": 113,
+      "night": true
+    }
+  ],
+  "compiled": [
+    {
+      "year": 1829,
+      "lamps": 53,
+      "night": true
+    },
+    {
+      "year": 1849,
+      "lamps": 53,
+      "night": true
+    },
+    {
+      "year": 1856,
+      "lamps": 53,
+      "night": true
+    },
+    {
+      "year": 1860,
+      "lamps": 53,
+      "night": true
+    },
+    {
+      "year": 1870,
+      "lamps": 53,
+      "night": true
+    },
+    {
+      "year": 1896,
+      "lamps": 105,
+      "night": true
+    },
+    {
+      "year": 1912,
+      "lamps": 105,
+      "night": true
+    },
+    {
+      "year": 1915,
+      "lamps": 121,
+      "night": true
+    },
+    {
+      "year": 1916,
+      "lamps": 121,
+      "night": true
+    },
+    {
+      "year": 1938,
+      "lamps": 121,
+      "night": true
+    },
+    {
+      "year": 2010,
+      "lamps": 93,
+      "night": true
+    },
+    {
+      "year": 2016,
+      "lamps": 104,
+      "night": true
+    },
+    {
+      "year": 2021,
+      "lamps": 113,
+      "night": true
+    }
+  ]
+}

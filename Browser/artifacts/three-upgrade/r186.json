@@ -1,0 +1,63 @@
+{
+  "samples": 30,
+  "results": [
+    {
+      "name": "aerial-day",
+      "revision": "186",
+      "medianFrameMs": 1200.300000000003,
+      "p90FrameMs": 1200.4000000000015,
+      "drawCalls": 2802,
+      "triangles": 706967,
+      "gpu": "ANGLE (Google, Vulkan 1.3.0 (SwiftShader Device (Subzero) (0x0000C0DE)), SwiftShader driver)"
+    },
+    {
+      "name": "aerial-night",
+      "revision": "186",
+      "medianFrameMs": 633.6000000000058,
+      "p90FrameMs": 683.5999999999913,
+      "drawCalls": 2804,
+      "triangles": 707209,
+      "gpu": "ANGLE (Google, Vulkan 1.3.0 (SwiftShader Device (Subzero) (0x0000C0DE)), SwiftShader driver)"
+    },
+    {
+      "name": "walking-day",
+      "revision": "186",
+      "medianFrameMs": 450.09999999999854,
+      "p90FrameMs": 450.2000000000007,
+      "drawCalls": 2681,
+      "triangles": 429599,
+      "gpu": "ANGLE (Google, Vulkan 1.3.0 (SwiftShader Device (Subzero) (0x0000C0DE)), SwiftShader driver)"
+    },
+    {
+      "name": "walking-night",
+      "revision": "186",
+      "medianFrameMs": 450.09999999999854,
+      "p90FrameMs": 450.20000000000437,
+      "drawCalls": 2683,
+      "triangles": 429841,
+      "gpu": "ANGLE (Google, Vulkan 1.3.0 (SwiftShader Device (Subzero) (0x0000C0DE)), SwiftShader driver)"
+    },
+    {
+      "name": "game-reception",
+      "revision": "186",
+      "medianFrameMs": 166.79999999999927,
+      "p90FrameMs": 183.40000000000146,
+      "drawCalls": 41,
+      "triangles": 80668,
+      "gpu": "ANGLE (Google, Vulkan 1.3.0 (SwiftShader Device (Subzero) (0x0000C0DE)), SwiftShader driver)"
+    },
+    {
+      "name": "game-upper",
+      "revision": "186",
+      "medianFrameMs": 183.40000000000146,
+      "p90FrameMs": 200.10000000000218,
+      "drawCalls": 37,
+      "triangles": 81496,
+      "gpu": "ANGLE (Google, Vulkan 1.3.0 (SwiftShader Device (Subzero) (0x0000C0DE)), SwiftShader driver)"
+    }
+  ],
+  "errors": [],
+  "warnings": [
+    "THREE.WebGLRenderer: KHR_parallel_shader_compile extension not supported."
+  ]
+}
