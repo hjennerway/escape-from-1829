@@ -1,0 +1,130 @@
+[
+  {
+    "file": "test-oakmere-court.mjs",
+    "status": 0
+  },
+  {
+    "file": "test-oakmere.mjs",
+    "status": 0
+  },
+  {
+    "file": "test-oakmere-west.mjs",
+    "status": 0
+  },
+  {
+    "file": "test-oakmere-windows.mjs",
+    "status": 0
+  },
+  {
+    "file": "test-annexe-wards.mjs",
+    "status": 0
+  },
+  {
+    "file": "test-leighton-newton.mjs",
+    "status": 1
+  },
+  {
+    "file": "test-churton.mjs",
+    "status": 0
+  },
+  {
+    "file": "test-upton.mjs",
+    "status": 0
+  },
+  {
+    "file": "test-garages-mortuary.mjs",
+    "status": 0
+  },
+  {
+    "file": "test-greenhouses.mjs",
+    "status": 0
+  },
+  {
+    "file": "test-main-admin.mjs",
+    "status": 0
+  },
+  {
+    "file": "test-main-kitchen.mjs",
+    "status": 0
+  },
+  {
+    "file": "test-main-admin-refine2.mjs",
+    "status": 0
+  },
+  {
+    "file": "test-aerial-controls.mjs",
+    "status": 0
+  },
+  {
+    "file": "test-device-location.mjs",
+    "status": 0
+  },
+  {
+    "file": "test-aerial-layouts.mjs",
+    "status": 0
+  },
+  {
+    "file": "test-kml-imports.mjs",
+    "status": 0
+  },
+  {
+    "file": "test-kml-11.mjs",
+    "status": 0
+  },
+  {
+    "file": "test-modern-entrance.mjs",
+    "status": 0
+  },
+  {
+    "file": "test-modern-car-park.mjs",
+    "status": 0
+  },
+  {
+    "file": "test-parsons-retrace.mjs",
+    "status": 0
+  },
+  {
+    "file": "test-historic-roads.mjs",
+    "status": 0
+  },
+  {
+    "file": "test-west-parsons-junctions.mjs",
+    "status": 0
+  },
+  {
+    "file": "test-admin-teardrop.mjs",
+    "status": 0
+  },
+  {
+    "file": "test-annexe-access.mjs",
+    "status": 0
+  },
+  {
+    "file": "test-annexe-rear-roads.mjs",
+    "status": 0
+  },
+  {
+    "file": "test-performance.mjs",
+    "status": 0
+  },
+  {
+    "file": "test-aerial-performance.mjs",
+    "status": 0
+  },
+  {
+    "file": "test-building-detail.mjs",
+    "status": 0
+  },
+  {
+    "file": "test-outhouse.mjs",
+    "status": 0
+  },
+  {
+    "file": "test-willows.mjs",
+    "status": 0
+  },
+  {
+    "file": "test-building-photos.mjs",
+    "status": 0
+  }
+]

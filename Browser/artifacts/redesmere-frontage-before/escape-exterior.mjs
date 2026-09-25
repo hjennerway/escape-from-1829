@@ -231,7 +231,7 @@ export function createEscapeExterior(THREE,aspect){
       const roofWidth=z===35?12:9,roofX=z===35?35:36.5;
       const cap=hipRoof(roofX,z,roofWidth,d,h+.23,roofWidth*.3);
       cap.name='East entrance wing slate roof';
-    }else if((Math.abs(x-54.175)<.01&&z===12)||(x===65.5&&z===16.15)||x===-69||x===-39.6){
+    }else if((x===65.5&&z===16.15)||x===-69||x===-39.6){
       // Detailed end roofs and the aligned court range cover these walls.
     }else hipRoof(x,z,w,d,h+.23,Math.min(3.8,Math.min(w,d)*.3));
     if(!detail)for(const side of [-1,1]){
@@ -241,8 +241,6 @@ export function createEscapeExterior(THREE,aspect){
         if(passage&&y<base&&Math.abs(x+px-passage.x)<passage.width/2+.9)continue;
         // Leave the whole sash clear of the projecting west frontage.
         const wx=principal&&side>0&&x+px< -32&&x+px> -32.9?-32.9:x+px;
-        // The filled Redesmere strip uses its adjoining frontage's floor heights.
-        if(principal&&side>0&&wx>41&&wx<45.1)continue;
         window(wx,y,z+side*(d/2+.04),side<0?Math.PI:0);
       }
       for(let pz=-d/2+2.5;pz<d/2-1.5;pz+=3.55)for(let y=3.8;y<h-1;y+=3.4){

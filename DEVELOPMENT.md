@@ -1,3 +1,47 @@
+## Protected estate test snapshots refreshed (25 September 2026)
+
+The Jarman and Leighton/Newton tests still held whole-estate fingerprints
+from before the accepted exterior corrections in `56c5470` and `bab9d54`.
+The development and research notes record those failures after the paving,
+steps, roof/trim, courtyard wall and tree changes. The annexe model sources
+are unchanged across those commits; both snapshots include the edited
+surrounding estate.
+
+Refreshed only the two stored counts and SHA-256 fingerprints from the
+current source: Jarman 859,427 -> 859,378 primitives and Leighton/Newton
+923,474 -> 923,425. Exact snapshot equality, scope filters and all focused
+window, roof, collision and visibility assertions remain active. The saved
+Leighton/Newton footprint ranges are unchanged. No runtime/model sources,
+generated aerial assets, Unity sources or Blender exports changed in this
+repair, so no model rebuild or new rendering validation is required.
+
+Validation: the complete `npm test` sequence passes all 77 commands,
+including both refreshed snapshots and the focused exterior checks.
+`git diff --check` passes.
+
+## Kelsall/Churton roof tree removal (25 September 2026)
+
+Removed the small orchard tree at x=-42, z=-64 whose foliage protruded
+through the oblique wing roof and brick wall. The existing exclusion path
+removes its trunk and all five crowns while preserving random draws and
+rotation indices. Before/after scene comparison confirms exactly one tree
+removed and every remaining broadleaf position and crown shape unchanged.
+Building geometry and planting beds are retained; walking obstacles derive
+from the scene without the removed trunk. Reference details are in
+[the Churton notes](Research/churton-kelsall/README.md).
+
+Source and rebuilt compiled close-ups were visually checked with trees
+explicitly enabled and no browser errors. Churton, tree rendering, walking,
+layout and performance checks pass. Compiled/source rendering comparison,
+full detail, fallback loading, all timeline stops and live walking collision
+refresh pass. The full browser suite and its continuation report only the
+Jarman and Leighton/Newton whole-estate snapshot failures; both also fail
+in the saved pre-edit scene, and their baselines were not changed. Evidence
+uses `Browser/artifacts/kelsall-roof-tree-*`.
+
+Browser sources and local compiled models are updated. Unity and Blender
+exports are unchanged.
+
 ## Rear wings lowered to the connecting roof (25 September 2026)
 
 Lowered both 1829 rear main roofs to the blue-marked connecting eaves in
@@ -3488,3 +3532,41 @@ Leighton/Newton whole-estate snapshots already fail on the saved pre-edit
 working tree (859,385/923,432 primitives versus saved 859,427/923,474). This
 cleanup removes one net primitive; their baselines were left unchanged.
 Evidence and preview files use Browser/artifacts/garden-cleanup-*.
+
+
+## Redesmere-facing frontage and roof-access door — 25 September 2026
+
+The owner's blue-marked recess is removed: the narrow wall beside the forward
+wing now aligns with the bay frontage. Its three sash openings, white base,
+floor courses, cornice and slate roof follow the new plane. Only the garden
+side is filled; the earlier rear courtyard recess remains open.
+
+The red/yellow area gains the photographed blank two-storey projection,
+level grey roof, pale coping and narrow glazed upper door opening directly
+onto it. Its front aligns with the square pavilion. The neighbouring middle
+window is broadened and the entrance and upper sash shift left to clear it.
+See Research/redesmere-frontage/README.md and the three saved owner images.
+
+The shared browser source is updated. The local aerial model is rebuilt
+separately; Unity and Blender exports are unchanged. Focused checks verify
+wall alignment, exposed glazing, slate coverage and normals, roof level,
+door threshold and walking clearances. Preview evidence uses
+Browser/artifacts/redesmere-frontage-*.
+
+Validation: the focused checks and rebuilt compiled browser suite pass,
+including source/compiled image comparison, full-detail loading, fallback
+cases, every historical period and live walking-collision refresh. Final
+source and compiled reference, detail and overhead views were inspected.
+
+The two whole-estate snapshots initially flagged the intended facade edit.
+Both pass on the saved pre-edit model. A separate exact comparison verifies
+that all 1,485,398 primitives outside x=40–64, z=3–26 remain unchanged; the
+marked region changes from 760 to 786 primitives. Only after that comparison
+were the Jarman and Leighton/Newton stored geometry hashes refreshed, keeping
+their range data and every test assertion intact. The before sources, hashes
+and comparison helper are saved with the frontage evidence.
+
+All 77 standard check commands pass across the initial suite, its remaining
+commands and the two refreshed-snapshot rechecks. The final compiled source
+fingerprint matches the delivered browser source. Validation logs and scope
+comparison JSON use Browser/artifacts/redesmere-frontage-*.

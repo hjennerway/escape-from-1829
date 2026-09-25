@@ -130,3 +130,52 @@ for(const x of [48,60,73.6,76,79.4]){
 }
 for(const [x,z] of [[47,33],[54,34],[80,30]])assert(groundAt(x,z)?.object.material.userData.estateGrass,'Unmarked garden lawn is retained');
 console.log('PASS: clean Redesmere brick join, square level gravel corner, matching cross-walk and gravel-filled recess.');
+
+
+// The blue-marked strip must be a real flush wall on every floor. Its fill
+// must not close the previously refined courtyard on the other side.
+function frontHit(x,y){
+  ray.set(new THREE.Vector3(x,y,30),new THREE.Vector3(0,0,-1));
+  return ray.intersectObject(model,true)[0];
+}
+for(const y of [1,5,9.5,13.5]){
+  const strip=frontHit(44.3,y),adjoining=frontHit(47,y);
+  assert(Math.abs(strip.point.z-adjoining.point.z)<1e-5,'The marked strip is flush with the adjoining wall');
+}
+assert(!model.userData.eastPhotoOpenings.some(o=>o.face==='1829-range-sash'&&o.x>41&&o.x<45.1&&o.z>17),'No old sash remains buried behind the new wall');
+const frontageOpenings=model.userData.eastPhotoOpenings.filter(o=>['pavilion-flush','pavilion-right'].includes(o.face));
+assert.equal(frontageOpenings.length,5);
+for(const o of frontageOpenings){
+  const hit=frontHit(o.x+o.w/12,o.y+o.h/12);
+  assert.equal(hit.object.material.color.getHex(),0x78989f,'The corrected front windows expose their glazing');
+}
+const slate=model.getObjectByName('Redesmere aligned frontage slate roof');
+assert(slate,'The aligned wall has a joined roof');
+for(let i=0;i<slate.geometry.attributes.normal.count;i++)
+  assert(slate.geometry.attributes.normal.getY(i)>0,'Every roof face points upwards, including the stepped corner');
+for(const [x,z] of [[42,18],[44.3,18.5],[46,18.5]]){
+  ray.set(new THREE.Vector3(x,30,z),new THREE.Vector3(0,-1,0));
+  assert(ray.intersectObject(model,true)[0].object===slate,'Slate covers the former recessed strip and adjoining range');
+}
+const roofSurface=model.getObjectByName('Redesmere flat roof');
+assert(roofSurface,'The photographed flat roof exists');
+const roofBounds=new THREE.Box3().setFromObject(roofSurface);
+const doorBounds=new THREE.Box3().setFromObject(model.getObjectByName('Redesmere roof-access door'));
+assert(Math.abs(doorBounds.min.y-roofBounds.max.y)<1e-5,'Upper door opens directly onto the roof');
+assert(doorBounds.min.x>roofBounds.min.x&&doorBounds.max.x<roofBounds.max.x,'The door fits within the roof width');
+for(const x of [59.5,60.6])for(const z of [20.6,22,24.5]){
+  ray.set(new THREE.Vector3(x,13,z),new THREE.Vector3(0,-1,0));
+  const hit=ray.intersectObject(model,true)[0];
+  assert(hit.object===roofSurface,'The projection has one exposed flat top');
+  assert(Math.abs(hit.point.y-roofBounds.max.y)<1e-5,'The flat roof is level');
+}
+assert.equal(frontHit(60.22,10.2).object.name,'Redesmere roof-access door','The upper door is visible above the projection');
+for(const y of [2,6.5]){
+  const hit=frontHit(60.2,y);
+  assert.equal(hit.object.name,y<4?'Redesmere flat-roof projection white base':'Redesmere flat-roof projection brick');
+  assert(Math.abs(hit.point.z-25)<1e-5,'The blank projection aligns with the square pavilion');
+}
+const blocked=(x,z)=>obstacles.some(o=>obstacleContains(o,x,z,.4));
+for(const [x,z] of [[43,18.3],[60.2,22.5],[60.2,24.5]])assert(blocked(x,z),'Walking stops at the new masonry');
+for(const [x,z] of [[43,20.5],[57.2,22],[58.3,24],[60.2,26],[64.75,6.4]])assert(!blocked(x,z),'Door approach and retained courtyard remain walkable');
+console.log('PASS: flush Redesmere frontage, exposed windows, joined slate, level flat roof, upper door threshold and walking clearances.');

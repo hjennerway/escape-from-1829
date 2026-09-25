@@ -157,8 +157,8 @@ for(const side of [-1,1]){
 }
 // Previously generic windows on both marked front sections now expose the
 // same three-light sash glazing and fine frame material as the photo windows.
-for(const x of [-35.6,42.5]){
-  const o=exterior.model.userData.eastPhotoOpenings.find(o=>o.face==='1829-range-sash'&&Math.abs(o.x-x)<.01&&Math.abs(o.y-10.6)<.01&&o.z>17);
+for(const [x,y,face] of [[-35.6,10.6,'1829-range-sash'],[43.05,11,'pavilion-flush']]){
+  const o=exterior.model.userData.eastPhotoOpenings.find(o=>o.face===face&&Math.abs(o.x-x)<.01&&Math.abs(o.y-y)<.01&&o.z>17);
   assert(o,'remaining front opening uses the shared sash schedule');
   for(const [offset,color] of [[0,0x78989f],[-o.w/6,0xd3dcd8],[o.w/6,0xd3dcd8]]){
     ray.set(new THREE.Vector3(o.x+offset,o.y+o.h/12,22),new THREE.Vector3(0,0,-1));

@@ -27,31 +27,6 @@ export function eastPhotoProfile(x,z){
 
 export function addEastPhotoDetails(THREE,{model,box,mesh,worldUV,white,brick,roof,steel,material,hipRoof,details}){
   const {frame,glass,iron,stone,sash,door,rod}=details;
-  // The blue-marked strip is flush with the bay frontage, not recessed at
-  // z=17. Only the garden side is filled; retain the rear courtyard outline.
-  mesh(worldUV(new THREE.BoxGeometry(4.1,10.3,2.5),1.7),brick,43.05,9.15,18.25,true).name='Redesmere flush frontage brick';
-  mesh(new THREE.BoxGeometry(4.1,4,2.5),white,43.05,2,18.25,true).name='Redesmere flush frontage white base';
-  for(const y of [4.06,8.8])box(white,51.125,y,19.52,20.25,.18,.2);
-  for(const [y,h,d] of [[14.18,.22,.23],[14.42,.22,.48]])
-    box(white,43.05,y,18.25,4.1+d,h,2.5+d);
-  for(const y of [2,6.5,11])sash('pavilion-flush',43.05,y,19.55,0,1.12,2.35);
-  // One stepped hip covers the original range and the filled strip. The
-  // courtyard eaves and ridge stay in place, with no small detached hip.
-  const roofPoints=[
-    [44.7,14.55,4.1],[63.65,14.55,4.1],[63.65,14.55,19.9],
-    [40.6,14.55,19.9],[40.6,14.55,16.6],[44.7,14.55,16.6],
-    [51.257,18.33,12],[57.093,18.33,12]
-  ];
-  const roofFaces=[[0,1,7],[0,7,6],[1,2,7],[2,3,6],[2,6,7],[3,4,5],[3,5,6],[5,0,6]];
-  const positions=[],uv=[];
-  for(const face of roofFaces)for(const i of [...face].reverse()){
-    const [x,y,z]=roofPoints[i];positions.push(x,y,z);uv.push(x/3,(z+y-14.55)/3);
-  }
-  const rangeRoof=new THREE.BufferGeometry();
-  rangeRoof.setAttribute('position',new THREE.Float32BufferAttribute(positions,3));
-  rangeRoof.setAttribute('uv',new THREE.Float32BufferAttribute(uv,2));rangeRoof.computeVertexNormals();
-  mesh(rangeRoof,roof,0,0,0,true).name='Redesmere aligned frontage slate roof';
-
   // The two-storey forward wing: nine positions on its east wall. The eighth
   // position is the blue entrance and upper escape door, not another window.
   const sideZ=[17.3,20,22.3,25.1,27.4,31.2,33.5,38.1,42];
@@ -68,35 +43,13 @@ export function addEastPhotoDetails(THREE,{model,box,mesh,worldUV,white,brick,ro
   }
   for(const x of [41.25,42.78])rod([x,5.2,38.9],[x,5.2,36.95]);
   for(const x of [41.25,42.78])rod([x,5.2,36.95],[x,1.36,32.15]);
-  // Three-storey wall flanking the shallow polygonal bay. The right-hand
-  // entrance has broad middle glazing and a roof-access door above the
-  // adjoining two-storey, blank-fronted projection (owner's September photo).
+  // Recessed three-storey wall flanking the shallow polygonal bay. A broad
+  // paired top sash and the blue entrance distinguish the right-hand recess.
   for(const y of [2,6.5,11])sash('pavilion-left',49.6,y,19.55,0,1.02,2.35);
-  sash('pavilion-right',57.35,11,19.55,0,2.25,2.4);
-  sash('pavilion-right',57.2,6.5,19.55,0,1.7,2.55);
-  door(57.2,19.6);
-  box(white,57.35,3.55,20.05,3.55,.2,1.15);
-  const projectionLeft=59.2,projectionRight=61.25,projectionX=(projectionLeft+projectionRight)/2;
-  mesh(worldUV(new THREE.BoxGeometry(2.05,5.35,5.5),1.7),brick,projectionX,6.675,22.25,true).name='Redesmere flat-roof projection brick';
-  mesh(new THREE.BoxGeometry(2.05,4,5.5),white,projectionX,2,22.25,true).name='Redesmere flat-roof projection white base';
-  mesh(new THREE.BoxGeometry(2.23,.23,5.68),white,projectionX,9.465,22.25,true).name='Redesmere flat roof coping';
-  const flatRoof=material(0x606868,{roughness:.94});
-  mesh(new THREE.BoxGeometry(2.05,.065,5.5),flatRoof,projectionX,9.6125,22.25,true).name='Redesmere flat roof';
-  // Narrow pale door: lower solid panel and six glazed lights above. Its
-  // threshold sits directly on the flat roof, not at a generic floor level.
-  const doorX=60.22,doorBottom=9.645,doorZ=19.62,doorWidth=1.03,doorHeight=2.55;
-  const paleDoor=material(0xc2cbc5),doorRecess=material(0x303d3d);
-  const access=mesh(new THREE.BoxGeometry(doorWidth,doorHeight,.12),paleDoor,doorX,doorBottom+doorHeight/2,doorZ,true);
-  access.name='Redesmere roof-access door';
-  box(doorRecess,doorX,doorBottom+1.86,doorZ+.08,.78,1.12,.035);
-  box(glass,doorX,doorBottom+1.86,doorZ+.11,.7,1.04,.035);
-  for(const dx of [-.43,0,.43])box(frame,doorX+dx,doorBottom+1.86,doorZ+.14,.045,1.18,.06);
-  for(const dy of [1.28,1.67,2.06,2.45])box(frame,doorX,doorBottom+dy,doorZ+.14,.88,.045,.06);
-  for(const side of [-1,1])box(white,doorX+side*.6,doorBottom+1.31,doorZ,.12,2.72,.2);
-  box(white,doorX,doorBottom+2.68,doorZ,1.35,.15,.24);
-  box(iron,doorX+.32,doorBottom+1.15,doorZ+.12,.055,.15,.065);
-  box(stone,doorX,doorBottom+.025,19.8,1.3,.05,.35);
-  box(iron,59.13,4.65,25.08,.065,9.3,.065);
+  sash('pavilion-right',58.2,11,19.55,0,2.25,2.4);
+  sash('pavilion-right',59.6,6.5,19.55,0,.55,2.2);
+  door(58.4,19.6);
+  box(white,58.4,3.55,20.05,3.25,.2,1.15);
   // Match the west half-octagonal bays: one broad front, two canted cheeks,
   // matching bands/hip and world-scale brickwork instead of cylinder UVs.
   addWestCantedBay(THREE,{model,mesh,worldUV,brick,white,roof,sash},{
