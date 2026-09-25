@@ -34,8 +34,10 @@ let browser;const errors=[],metrics={},shots=new Map();
 try{
   browser=await chromium.launch({headless:true,...(process.env.MODEL_CHROME_PATH?{executablePath:process.env.MODEL_CHROME_PATH}:{}),args:['--use-angle=swiftshader','--enable-unsafe-swiftshader']});
   const page=await browser.newPage({viewport:{width:1000,height:700}});
-  // Full-detail startup can exceed 30s with CI's software WebGL. Navigation
-  // needs the same allowance as the rendered-frame check below.
+  // CI's software WebGL can take more than 30s to start or capture a frame.
+  // Navigation has a separate timeout; screenshots and controls need the same
+  // bounded allowance as the rendered-frame check below.
+  page.setDefaultTimeout(120000);
   page.setDefaultNavigationTimeout(120000);
   page.on('pageerror',error=>{errors.push(error.message);console.error(error.stack);});
   page.on('console',message=>{if(message.type()==='error')console.error('Browser:',message.text());});
