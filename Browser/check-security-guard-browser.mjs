@@ -1,6 +1,6 @@
 // Manual WebGL review: node Browser/check-security-guard-browser.mjs
 import assert from 'node:assert/strict';
-import {readFile,writeFile,mkdir} from 'node:fs/promises';
+import {readFile,writeFile,mkdir,rename} from 'node:fs/promises';
 import {spawn} from 'node:child_process';
 import {fileURLToPath} from 'node:url';
 import {chromium} from 'playwright';
@@ -11,6 +11,11 @@ try{
  const address=await new Promise((resolve,reject)=>{server.stdout.on('data',chunk=>{const match=String(chunk).match(/http:\/\/127\.0\.0\.1:\d+/);if(match)resolve(match[0]);});server.once('error',reject);server.once('exit',code=>reject(Error('Server exited: '+code)));});
  browser=await chromium.launch({headless:true,...(process.env.MODEL_CHROME_PATH?{executablePath:process.env.MODEL_CHROME_PATH}:{}),args:['--use-angle=swiftshader','--enable-unsafe-swiftshader']});
  const page=await browser.newPage({viewport:{width:1300,height:900}}),errors=[];
+ async function capture(name,options={}){
+  const path=fileURLToPath(new URL(name,artifacts)),temporary=path+'.tmp';
+  // Replace complete images so Windows preview readers can keep old files open.
+  await page.screenshot({...options,path:temporary,type:'png'});await rename(temporary,path);
+ }
  page.on('pageerror',e=>errors.push(e.message));
  page.on('console',m=>{if(m.type()==='error'&&m.text().includes('THREE'))errors.push(m.text());});
  await page.route('https://**/*',async route=>{
@@ -29,14 +34,18 @@ try{
  await page.locator('#start').click();
  await page.evaluate(()=>{const t=window.guardReview;t.arrival.update(3);t.pose();});
  await page.waitForTimeout(200);
- await page.screenshot({path:fileURLToPath(new URL('security-guard-corridor.png',artifacts))});
+ await capture('security-guard-corridor.png');
  const snapshots=[];
  for(const [name,floor,turn] of [['front',0,0],['side',0,Math.PI/2],['back',1,Math.PI]]){
   await page.evaluate(({floor,turn})=>{const t=window.guardReview;t.pose(floor,turn);t.reset();for(let i=0;i<26;i++)t.step(2.4/60,1/60);},{floor,turn});
   await page.waitForTimeout(150);
-  await page.screenshot({path:fileURLToPath(new URL('security-guard-'+name+'.png',artifacts))});
+  await capture('security-guard-'+name+'.png');
   snapshots.push(await page.evaluate(name=>{const t=window.guardReview;return {name,render:t.render(),phase:t.rig.phase,knees:t.rig.legs.map(l=>l.knee.rotation.x),hipHeight:t.rig.pelvis.position.y};},name));
  }
+ // A closer three-quarter standing view makes the collar, face and hands reviewable.
+ await page.evaluate(()=>{const t=window.guardReview;t.pose(0,.38);t.reset();});
+ await page.waitForTimeout(150);
+ await capture('security-guard-detail.png',{clip:{x:485,y:180,width:340,height:550}});
  // Observe a genuine route update, not just the isolated animation function.
  const live=await page.evaluate(()=>{
   const t=window.guardReview;t.pose();t.reset();Object.assign(t.player,{x:70,z:38,floor:0});Object.assign(t.guard,{path:[{x:70,z:38,floor:0}],memory:5,rethink:10});t.play();
@@ -46,7 +55,7 @@ try{
  assert(live.after.z>live.before.z&&live.after.phase!==live.before.phase);assert.equal(live.frozen,live.held);
  await page.setViewportSize({width:390,height:844});
  await page.evaluate(()=>window.guardReview.pose());await page.waitForTimeout(150);
- await page.screenshot({path:fileURLToPath(new URL('security-guard-mobile.png',artifacts))});
+ await capture('security-guard-mobile.png');
  assert.deepEqual(errors,[]);
  await writeFile(new URL('security-guard-validation.json',artifacts),JSON.stringify({snapshots,live,errors},null,2)+'\n');
  console.log('PASS: real WebGL guard front/side/back, upstairs, mobile, live pursuit animation and hold-E freeze; no browser errors.');

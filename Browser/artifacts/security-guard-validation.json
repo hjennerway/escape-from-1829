@@ -3,8 +3,8 @@
     {
       "name": "front",
       "render": {
-        "calls": 79,
-        "triangles": 88156
+        "calls": 96,
+        "triangles": 92150
       },
       "phase": 3.9603107390707692,
       "knees": [
@@ -16,8 +16,8 @@
     {
       "name": "side",
       "render": {
-        "calls": 79,
-        "triangles": 88156
+        "calls": 96,
+        "triangles": 92150
       },
       "phase": 3.9603107390707692,
       "knees": [
@@ -29,8 +29,8 @@
     {
       "name": "back",
       "render": {
-        "calls": 79,
-        "triangles": 87924
+        "calls": 92,
+        "triangles": 92642
       },
       "phase": 3.9603107390707692,
       "knees": [

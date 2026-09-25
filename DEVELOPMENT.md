@@ -2914,3 +2914,73 @@ were not regenerated.
 
 npm run test:compiled passes, including source/compiled image comparison,
 model fallback cases, every timeline stop and walking collision refresh.
+
+## Guard silhouette and uniform refinement (September 25)
+
+The browser guard's rounded head/jaw, shoulder balls, tubular clothing and
+mitten hands have been replaced with shaped cross-section meshes. The head
+now has a continuous jaw/cheek/forehead outline, recessed small eyes and lids,
+nose planes and sparse facial creases. The uniform has sloping shoulders,
+a fitted chest/waist, shaped sleeves and trouser legs, pointed collar/pocket
+flaps, a tapered tie and subdued cloth seams. Separate fingers, boot toe caps
+and crossed laces, a structured peaked cap, badge inset, radio cable, buckle
+pin and belt torch improve close views. The existing displacement-driven
+patrol/chase animation and two-bone leg solve are retained.
+
+GitHub candidates and verified MIT licence findings are recorded in
+[Research/security-guard/README.md](Research/security-guard/README.md).
+Two MIT character-authoring/base-mesh candidates were found, but neither was
+a ready-made guard. The game continues to use original procedural geometry;
+no external model, code, texture or animation was imported.
+
+The model measures 66 batched meshes and 10,602 triangles in the geometry
+check; browser lettering adds one mesh and four triangles. No extra runtime
+lights or downloads are needed. This changes browser source only. Unity,
+Blender and interchange exports were not regenerated. The aerial compiled
+binary excludes the game guard, so no aerial model rebuild is required.
+
+Validation:
+- Guard geometry, patrol/chase foot contact, alternate steps, stationary
+  settle, frame-rate independence and reset pass.
+- The real game integration checks pass, including hold-E, help/artwork
+  freezes, upstairs visibility, capture, cutscenes and restart.
+- The WebGL review passes for front/side/back, upstairs, mobile and live
+  pursuit, with no page or Three.js errors. The final images were visually
+  inspected, including the corrected collar placement.
+- The visual-check script adds a focused three-quarter standing screenshot,
+  Browser/artifacts/security-guard-detail.png. Screenshot outputs are replaced
+  atomically so Windows preview readers do not block an overwrite.
+- All 75 tests in the npm test sequence were attempted: 73 pass.
+  The sequence stops at test-jarman.mjs, so the remaining tests were run
+  separately. test-leighton-newton.mjs also fails. Both failures are existing
+  protected-building snapshot mismatches (each has 74 fewer primitives than
+  its stored baseline); their 128-file import dependency union contains no
+  modified files and does not import security-guard.mjs. Baselines were not
+  changed as part of this character update.
+
+## Protected-estate snapshot repair - 25 September 2026
+
+The Jarman and Leighton/Newton checks retained expectations from before the
+approved west landscaping cleanup and raised-lawn removal. Restoring only
+escape-exterior.mjs, west-court-photo-detail.mjs, west-front-photo-detail.mjs,
+west-refinement.mjs and entrance-walks.mjs from commit
+4752500a5635d0f01d964d4e31864705514eac30 through an in-memory module loader
+reproduces both saved fingerprints exactly with all other current sources.
+The landscaping changes are documented above and in Research/west/README.md.
+
+The net decrease is 74 primitives in each protected scope: two lawn panels,
+36 planter parts, 25 long-border parts, ten railing parts and two hedges were
+removed, and one garden return path was added. The existing west entrance
+path was also extended without changing its primitive count. Refreshed only
+the two geometry snapshots, to 859,427 Jarman and 923,474 Leighton/Newton
+primitives. The exact hash comparisons and all architecture, placement,
+glazing and collision assertions remain active.
+
+This repair changes test expectations and documentation only. Browser model
+sources and compiled assets were not changed or regenerated; Unity and
+Blender exports were not changed.
+
+Validation: all 75 scripts in the complete Browser npm test sequence pass,
+including both repaired snapshot checks. git diff --check passes. Full output
+is saved in Browser/artifacts/test-snapshot-repair-suite.log. No rendering
+changes were made by this repair, so no model rebuild or visual rerun was needed.
