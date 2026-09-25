@@ -52,10 +52,14 @@ export function addEntranceWalks(THREE,{model,material}){
     [-47,42.5],[-47,43],[-46.9,43],[-46.9,45],[-73.5,45]]),
     'West courtyard and outer return path',.28);
   const east=new THREE.Shape();
-  east.moveTo(27,-43);east.lineTo(41,-43);east.lineTo(41,-19.6);
-  east.lineTo(45,-19.6);east.lineTo(45,-27.4);
+  // Fill the small grass recess against the cross-range wall. Continue the
+  // same surface through the garden cross-walk and passage, with one straight
+  // lawn edge at z=30.55 instead of overlapping slabs ending at different z.
+  east.moveTo(27,-43);east.lineTo(41,-43);east.lineTo(41,-16.9);
+  east.lineTo(45,-16.9);east.lineTo(45,-27.4);
   east.quadraticCurveTo(45,-28.45,46.1,-28.45);
-  east.lineTo(48.6,-28.45);east.lineTo(48.6,-30.55);
+  east.lineTo(72.45,-28.45);east.lineTo(72.45,4);
+  east.lineTo(79.55,4);east.lineTo(79.55,-30.55);
   east.lineTo(46.1,-30.55);east.quadraticCurveTo(45,-30.55,45,-31.65);
   east.lineTo(45,-47.8);east.lineTo(27,-47.8);east.closePath();
   paving(east,'East wing path to Redesmere courtyard',.28);

@@ -67,7 +67,14 @@ export function refineFrontInsideCorners(THREE,{model,batches,box,mesh,worldUV,b
   // Perform the cut before adding the replacement masonry, openings and yard.
   model.updateMatrixWorld(true);
   const bounds=new THREE.Box3(),dummy=new THREE.Object3D();
-  const cuts=[-1,1].map(side=>({side,outline:reflectedOutline(side),minX:side<0?-33.725:29.075,maxX:side<0?-29.075:33.725}));
+  // Extend the two open ends through the slate overhang. Closing the roof cut
+  // on the wall footprint leaves triangular roof tongues over the courtyard.
+  const roofOutline=FRONT_CORNER_OUTLINE.map(p=>[...p]);
+  roofOutline[0][1]=20.2;
+  roofOutline[5]=[31.55,21.5];
+  const cuts=[-1,1].map(side=>({side,outline:reflectedOutline(side),
+    roofOutline:side===1?roofOutline:roofOutline.map(([x,z])=>[-x,z]).reverse(),
+    minX:side<0?-33.725:29.075,maxX:side<0?-29.075:33.725}));
   const overlaps=(b,c)=>b.max.y>.5&&b.max.x>c.minX&&b.min.x<c.maxX&&b.max.z>15.5&&b.min.z<21.05;
   function clip(object,cut){
     const oldGeometry=object.geometry,transform=object.matrixWorld.clone();
@@ -81,13 +88,13 @@ export function refineFrontInsideCorners(THREE,{model,batches,box,mesh,worldUV,b
     object.userData.collisionFootprints=footprints.flatMap(polygon=>subtract(polygon.map(([x,z])=>{
       const p=new THREE.Vector3(x,0,z).applyMatrix4(transform);return [p.x,0,p.z];
     }),cut.outline).map(polygon=>polygon.map(p=>[p[0],p[2]])));
-    object.geometry=cutGeometry(THREE,oldGeometry,transform,cut.outline);
+    object.geometry=cutGeometry(THREE,oldGeometry,transform,object.material===roof?cut.roofOutline:cut.outline);
     object.position.set(0,0,0);object.rotation.set(0,0,0);object.scale.set(1,1,1);object.updateMatrixWorld(true);
     // All affected meshes are direct model children; geometry now uses estate coordinates.
     if(!object.geometry.attributes.position.count)object.removeFromParent();
   }
   for(const object of [...model.children]){
-    if(!object.isMesh||object.isInstancedMesh)continue;
+    if(!object.isMesh||object.isInstancedMesh||object.userData.frontCornerTrim)continue;
     bounds.setFromObject(object);
     for(const cut of cuts)if(overlaps(bounds,cut))clip(object,cut);
   }
@@ -121,6 +128,15 @@ export function refineFrontInsideCorners(THREE,{model,batches,box,mesh,worldUV,b
       const nx=-side*dz/length,nz=side*dx/length;
       return {x:a[0]+t*dx+nx*offset,z:a[1]+t*dz+nz*offset,nx,nz,length,rotation:Math.atan2(nx,nz)};
     }
+    // Shared offsets put both ends of each coping on the same mitre line.
+    function copingPoint(i,t,offset){
+      const p=wallPoint(i,t);
+      const vertex=t===0?i:t===1?i+1:null;
+      if(vertex===null||vertex===0||vertex===points.length-1)return wallPoint(i,t,offset);
+      const a=wallPoint(vertex-1),b=wallPoint(vertex),nx=a.nx+b.nx,nz=a.nz+b.nz;
+      const scale=offset/(nx*b.nx+nz*b.nz);
+      return {...p,x:p.x+nx*scale,z:p.z+nz*scale};
+    }
     function wall(i,height){
       const p=wallPoint(i,.5,-.085);
       const body=mesh(worldUV(new THREE.BoxGeometry(p.length+.08,height,.17),1.7),brick,p.x,height/2,p.z,true);
@@ -139,19 +155,25 @@ export function refineFrontInsideCorners(THREE,{model,batches,box,mesh,worldUV,b
     for(const [i,height] of [[0,13.35],[1,13.35],[2,12.8],[3,8.6],[4,8.6]]){
       const vertices=[],uv=[],capVertices=[],orientation=wallPoint(i).rotation;
       const triangles=side===1?[[0,1,2],[0,2,3]]:[[0,2,1],[0,3,2]];
-      for(let k=0;k<24;k++){
-        const a=wallPoint(i,k/24,-.015),b=wallPoint(i,(k+1)/24,-.015);
+      const samples=Array.from({length:25},(_,k)=>k/24);
+      // Carry the low coping over the slate overhang to the wing's eaves,
+      // while keeping its masonry closure on the original wall footprint.
+      if(i===4)for(let k=1;k<=4;k++)samples.push(1+.4/(33.725-32)*k/4);
+      for(let k=0;k<samples.length-1;k++){
+        const a=copingPoint(i,samples[k],-.015),b=copingPoint(i,samples[k+1],-.015);
         const top=p=>{ray.set(new THREE.Vector3(p.x,25,p.z),new THREE.Vector3(0,-1,0));return Math.max(height,ray.intersectObjects(slate,false)[0]?.point.y??height);};
         const ya=top(a),yb=top(b);
         const quad=[[a.x,height,a.z],[b.x,height,b.z],[b.x,yb,b.z],[a.x,ya,a.z]];
-        for(const triangle of triangles)for(const n of triangle){
+        if(samples[k]<1)for(const triangle of triangles)for(const n of triangle){
           const v=quad[n];vertices.push(...v);uv.push((v[0]*Math.cos(orientation)-v[2]*Math.sin(orientation))/1.7,v[1]/1.7);
         }
-        const frontA=[a.x+a.nx*.09,ya-.1,a.z+a.nz*.09],frontB=[b.x+b.nx*.09,yb-.1,b.z+b.nz*.09];
+        const fa=copingPoint(i,samples[k],.075),fb=copingPoint(i,samples[k+1],.075);
+        const ra=copingPoint(i,samples[k],-.115),rb=copingPoint(i,samples[k+1],-.115);
+        const frontA=[fa.x,ya-.1,fa.z],frontB=[fb.x,yb-.1,fb.z];
         const topA=[frontA[0],ya+.03,frontA[2]],topB=[frontB[0],yb+.03,frontB[2]];
         // Keep stepped roof contacts as brick returns, without turning a
         // horizontal coping into a tall vertical white stripe at the step.
-        if(Math.abs(yb-ya)<.35)for(const corners of [[frontA,frontB,topB,topA],[topA,topB,[b.x-b.nx*.1,yb+.03,b.z-b.nz*.1],[a.x-a.nx*.1,ya+.03,a.z-a.nz*.1]]])
+        if(i!==0&&Math.abs(yb-ya)<.35)for(const corners of [[frontA,frontB,topB,topA],[topA,topB,[rb.x,yb+.03,rb.z],[ra.x,ya+.03,ra.z]]])
           for(const triangle of triangles)for(const n of triangle)capVertices.push(...corners[n]);
       }
       const g=new THREE.BufferGeometry();g.setAttribute('position',new THREE.Float32BufferAttribute(vertices,3));g.setAttribute('uv',new THREE.Float32BufferAttribute(uv,2));g.computeVertexNormals();

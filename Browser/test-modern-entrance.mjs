@@ -64,7 +64,8 @@ pavedRoute([[-28,46.6],[-28,47.7],[-46.2,47.7]]);
 pavedRoute([[-73.12,-36],[-73.12,43.7],[-48,43.7]]);
 for(const [x,z] of [[-64,-10],[-71,-20],[-71.8,1]])assert.equal(surfaceAt(x,z).object.material,forecourt.material,'Court and outer path use one gravel material');
 assert.equal(exterior.model.getObjectByName('West end entrance path').material.color.getHex(),forecourt.material.color.getHex(),'West doorway approach matches the joined gravel');
-assert.equal(surfaceAt(48.7,29.5).object.material.color.getHex(),0xb7b9ac,'East branch reaches the existing Redesmere courtyard paving');
+assert.equal(surfaceAt(48.7,29.5).object.material,forecourt.material,'East branch and Redesmere cross-walk share one gravel material');
+pavedRoute([[48.1,29.5],[76,29.5],[76,6]]);
 for(const historic of [true,false])for(const modern of [true,false]){
  layouts.setVisible('historic',historic);layouts.setVisible('modern',modern);
  assert.equal(entrance.visible,historic||modern,'The sweeping driveway is visible whenever either layout is enabled');

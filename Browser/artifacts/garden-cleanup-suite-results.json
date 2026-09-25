@@ -1,0 +1,310 @@
+[
+  {
+    "command": "node vendor-three.mjs --check",
+    "status": 0
+  },
+  {
+    "command": "node test.mjs",
+    "status": 0
+  },
+  {
+    "command": "node test-escape-routes.mjs",
+    "status": 0
+  },
+  {
+    "command": "node test-opening-wall.mjs",
+    "status": 0
+  },
+  {
+    "command": "node test-estate-periods.mjs",
+    "status": 0
+  },
+  {
+    "command": "node test-game.mjs",
+    "status": 0
+  },
+  {
+    "command": "node test-security-guard.mjs",
+    "status": 0
+  },
+  {
+    "command": "node test-interior-architecture.mjs",
+    "status": 0
+  },
+  {
+    "command": "node test-interior-lights.mjs",
+    "status": 0
+  },
+  {
+    "command": "node test-east-forward-end.mjs",
+    "status": 0
+  },
+  {
+    "command": "node test-front-inside-corners.mjs",
+    "status": 0
+  },
+  {
+    "command": "node test-redesmere-garden.mjs",
+    "status": 0
+  },
+  {
+    "command": "node test-laundry.mjs",
+    "status": 0
+  },
+  {
+    "command": "node test-escape-exterior.mjs",
+    "status": 0
+  },
+  {
+    "command": "node test-roof-contacts.mjs",
+    "status": 0
+  },
+  {
+    "command": "node test-west-refinement.mjs",
+    "status": 0
+  },
+  {
+    "command": "node test-water-tower.mjs",
+    "status": 0
+  },
+  {
+    "command": "node test-church-front.mjs",
+    "status": 0
+  },
+  {
+    "command": "node test-tower-buildings.mjs",
+    "status": 0
+  },
+  {
+    "command": "node test-pharmacy.mjs",
+    "status": 0
+  },
+  {
+    "command": "node test-irby-ashley.mjs",
+    "status": 0
+  },
+  {
+    "command": "node test-irby-roads.mjs",
+    "status": 0
+  },
+  {
+    "command": "node test-grafton-edge.mjs",
+    "status": 0
+  },
+  {
+    "command": "node test-hale-ward.mjs",
+    "status": 0
+  },
+  {
+    "command": "node test-estates.mjs",
+    "status": 0
+  },
+  {
+    "command": "node test-farndon.mjs",
+    "status": 0
+  },
+  {
+    "command": "node test-ward-placement.mjs",
+    "status": 0
+  },
+  {
+    "command": "node test-ward-corridors.mjs",
+    "status": 0
+  },
+  {
+    "command": "node test-day-night.mjs",
+    "status": 0
+  },
+  {
+    "command": "node test-tree-rendering.mjs",
+    "status": 0
+  },
+  {
+    "command": "node test-explore.mjs",
+    "status": 0
+  },
+  {
+    "command": "node test-explore-input.mjs",
+    "status": 0
+  },
+  {
+    "command": "node test-annexe.mjs",
+    "status": 0
+  },
+  {
+    "command": "node test-larkton.mjs",
+    "status": 0
+  },
+  {
+    "command": "node test-larkton-recess.mjs",
+    "status": 0
+  },
+  {
+    "command": "node test-annexe-carden.mjs",
+    "status": 0
+  },
+  {
+    "command": "node test-annexe-front-link.mjs",
+    "status": 0
+  },
+  {
+    "command": "node test-annexe-east-outer.mjs",
+    "status": 0
+  },
+  {
+    "command": "node test-annexe-kitchen.mjs",
+    "status": 0
+  },
+  {
+    "command": "node test-annexe-rear-stretch.mjs",
+    "status": 0
+  },
+  {
+    "command": "node test-annexe-rear-side-alignment.mjs",
+    "status": 0
+  },
+  {
+    "command": "node test-annexe-os-refinement.mjs",
+    "status": 0
+  },
+  {
+    "command": "node test-annexe-photo-placement.mjs",
+    "status": 0
+  },
+  {
+    "command": "node test-annexe-outer-front.mjs",
+    "status": 0
+  },
+  {
+    "command": "node test-jarman.mjs",
+    "status": 1
+  },
+  {
+    "command": "node test-oakmere-court.mjs",
+    "status": 0
+  },
+  {
+    "command": "node test-oakmere.mjs",
+    "status": 0
+  },
+  {
+    "command": "node test-oakmere-west.mjs",
+    "status": 0
+  },
+  {
+    "command": "node test-oakmere-windows.mjs",
+    "status": 0
+  },
+  {
+    "command": "node test-annexe-wards.mjs",
+    "status": 0
+  },
+  {
+    "command": "node test-leighton-newton.mjs",
+    "status": 1
+  },
+  {
+    "command": "node test-churton.mjs",
+    "status": 0
+  },
+  {
+    "command": "node test-upton.mjs",
+    "status": 0
+  },
+  {
+    "command": "node test-garages-mortuary.mjs",
+    "status": 0
+  },
+  {
+    "command": "node test-greenhouses.mjs",
+    "status": 0
+  },
+  {
+    "command": "node test-main-admin.mjs",
+    "status": 0
+  },
+  {
+    "command": "node test-main-kitchen.mjs",
+    "status": 0
+  },
+  {
+    "command": "node test-main-admin-refine2.mjs",
+    "status": 0
+  },
+  {
+    "command": "node test-aerial-controls.mjs",
+    "status": 0
+  },
+  {
+    "command": "node test-device-location.mjs",
+    "status": 0
+  },
+  {
+    "command": "node test-aerial-layouts.mjs",
+    "status": 0
+  },
+  {
+    "command": "node test-kml-imports.mjs",
+    "status": 0
+  },
+  {
+    "command": "node test-kml-11.mjs",
+    "status": 0
+  },
+  {
+    "command": "node test-modern-entrance.mjs",
+    "status": 0
+  },
+  {
+    "command": "node test-modern-car-park.mjs",
+    "status": 0
+  },
+  {
+    "command": "node test-parsons-retrace.mjs",
+    "status": 0
+  },
+  {
+    "command": "node test-historic-roads.mjs",
+    "status": 0
+  },
+  {
+    "command": "node test-west-parsons-junctions.mjs",
+    "status": 0
+  },
+  {
+    "command": "node test-admin-teardrop.mjs",
+    "status": 0
+  },
+  {
+    "command": "node test-annexe-access.mjs",
+    "status": 0
+  },
+  {
+    "command": "node test-annexe-rear-roads.mjs",
+    "status": 0
+  },
+  {
+    "command": "node test-performance.mjs",
+    "status": 0
+  },
+  {
+    "command": "node test-aerial-performance.mjs",
+    "status": 0
+  },
+  {
+    "command": "node test-building-detail.mjs",
+    "status": 0
+  },
+  {
+    "command": "node test-outhouse.mjs",
+    "status": 0
+  },
+  {
+    "command": "node test-willows.mjs",
+    "status": 0
+  },
+  {
+    "command": "node test-building-photos.mjs",
+    "status": 0
+  }
+]

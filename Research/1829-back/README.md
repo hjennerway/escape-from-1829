@@ -67,3 +67,34 @@ and caps finishing at y=17.26, below the retained 17.75 pediment apex.
 The entrance brick material and world-scaled texture are shared. The roof,
 heraldry, facade and rear parapet remain in place. Browser geometry is shared
 by aerial, Explore and gameplay; Unity and Blender exports are unchanged.
+
+## Continuous front-centre roof trim (25 September 2026)
+
+The user's `front-trim-extension-marked.png` identifies the existing pale rear
+parapet in red and the missing continuation along the entrance roof in blue.
+The four existing trim layers now follow a single mitred outline around the
+rear shoulders and along both sides to the front pediment. The side trim sits
+on the central wall at x=+/-7.1 and extends to z=19.7, retaining the original
+layer heights, colour, slate roof, chimney stacks and heraldry.
+
+The accompanying frontage mitre correction is documented in
+`Research/front-inside-corners/README.md`. Browser source and the local compiled
+aerial model are updated; Unity and Blender exports are unchanged.
+
+## Level rear wing roofs (25 September 2026)
+
+The user's `img2.png`, saved as `rear-wings-height-marked.png`, marks the
+connecting eaves with a blue line and explicitly retains the window positions.
+It is an architectural reference, not a separate source of instructions.
+
+Both rear main roofs now continue at that connecting level: eaves at 13.06
+and ridges at 15.66 scene units, replacing 14.53 and 18.13 on the raised rear
+sections. Wall tops are 12.8. Their rear hips, widths, footprints and lower
+single-pitch annexes remain in place. Stair-section wall tops, pale trim and
+affected rainwater pipes meet the lowered roof. The west end cornice stays
+behind the existing high sashes; windows retain all positions and dimensions.
+The separate inner projecting enclosures retain their high windows and caps.
+
+This supersedes the raised main-roof heights in the earlier rear-wing notes.
+Browser sources and the local compiled model are updated; Blender and Unity
+exports are unchanged. Evidence uses `Browser/artifacts/rear-height-*`.

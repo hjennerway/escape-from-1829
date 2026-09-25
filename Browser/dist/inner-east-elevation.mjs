@@ -1,3 +1,4 @@
+import {WING_ROOF_JOIN} from './wing-roof-junctions.mjs';
 // img14.jpg, looking east from the marked position beside the central arm.
 // The projecting enclosure and stepped return are estimates from the photo;
 // the estate's map proportions stay intact. The corrected rear side profile
@@ -32,6 +33,9 @@ export function addInnerEastElevation(THREE,{model,box,mesh,worldUV,white,brick,
   for(const y of [13.9,14.2])box(white,24,y,-5.5,2.2,.2,5);
   for(const y of [3,6.5,11])sash('inner-east-stepped-front',22.94,y,-5.5,-Math.PI/2,1.12,y===3?1.7:2.35);
   for(const y of [6.5,11])sash('inner-east-stepped-return',24,y,-7.96,Math.PI,1.05,2.35);
-  for(const z of [-24.65,-8.1])box(iron,24.54,6.9,z,.085,13.8,.085);
+  for(const z of [-24.65,-8.1]){
+    const height=z<-24?WING_ROOF_JOIN.wall:13.8;
+    box(iron,24.54,height/2,z,.085,height,.085);
+  }
   model.userData.innerEastPhotoOpenings=model.userData.eastPhotoOpenings.slice(start);
 }

@@ -7,6 +7,9 @@ globalThis.document={createElement:()=>({width:0,height:0,getContext:()=>({fillR
 const {model,camera}=createEscapeExterior(THREE,4/3);
 model.updateMatrixWorld(true);
 const obstacles=exteriorObstacles(THREE,model),ray=new THREE.Raycaster();
+const slate=model.getObjectByName('Entrance east projection slate roof').material;
+const roofs=model.children.filter(o=>o.isMesh&&o.material===slate);
+const cornices=model.children.filter(o=>o.isMesh&&/^Entrance (east|west) mitred cornice/.test(o.name));
 function down(x,z){ray.set(new THREE.Vector3(x,30,z),new THREE.Vector3(0,-1,0));return ray.intersectObject(model,true)[0];}
 // The six bends use a uniform 0.075 scale from the user's yellow pixel trace.
 const pixels=[[99,156],[99,124],[123,100],[160,100],[161,151],[138,174]];
@@ -29,6 +32,20 @@ for(const side of [-1,1]){
   for(const [x,z] of [[30.8,25.7],[30.8,23],[31.5,21],[31.5,19],[31.5,17],[31.5,16.2]])
     assert(!obstacles.some(o=>obstacleContains(o,side*x,z)),'a player-width route must reach the rear door');
   assert(down(side*28,18).point.y>13,'the retained projecting frontage must still have its slate roof');
+  ray.set(new THREE.Vector3(side*22.5,30,17.42),new THREE.Vector3(0,-1,0));
+  const joinRoof=ray.intersectObjects(roofs,false)[0],joinTrim=ray.intersectObjects(cornices,false)[0];
+  assert(joinTrim&&joinRoof&&Math.abs(joinTrim.point.y-joinRoof.point.y)<.08,'The trim transition follows the roof instead of ending in a raised blade');
+  // The open ends of the cut extend through the roof overhangs. These two
+  // probes catch the slate tongues missed by the broader courtyard checks.
+  for(const [x,z] of [[29.25,20],[31.7,21.15]]){
+    ray.set(new THREE.Vector3(side*x,30,z),new THREE.Vector3(0,-1,0));
+    assert.equal(ray.intersectObjects(roofs,false).length,0,'No slate tip projects across the courtyard wall edge');
+  }
+  for(const [x,z] of [[28.95,19.95],[31.8,21.3],[32.2,21.05]]){
+    ray.set(new THREE.Vector3(side*x,30,z),new THREE.Vector3(0,-1,0));
+    const hit=ray.intersectObjects(roofs,false)[0];
+    assert(hit&&hit.face.normal.y>0,'Trimming the tips retains the adjoining upward-facing slate');
+  }
 }
 const openings=model.userData.frontInsideCornerOpenings;
 assert.equal(openings.length,26);

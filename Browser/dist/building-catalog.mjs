@@ -3,12 +3,13 @@ const photo=(file,caption)=>({src:`./building-photos/${file}.webp`,caption});
 const front=[photo('1829-front','1829 · front elevation'),photo('1829-front-2','1829 · entrance and wings'),photo('1829-front-3','1829 · entrance detail')];
 const annexe=[photo('annexe','The Annexe · historic photograph'),photo('annexe-2','The Annexe · entrance view'),photo('annexe-entrance-road','The Annexe · entrance road and hospital sign')];
 const haleHuxley=[photo('daresbury-corner','Daresbury · courtyard entrance detail'),photo('dunham-daresbury-garden','Dunham / Daresbury · garden and ward elevations')];
+const redesmereCourtyard=[photo('redesmere-courtyard','Courtyard and adjoining ward elevations'),photo('redesmere-courtyard-2','Courtyard-facing elevation and entrances')];
 export const BUILDING_CATALOG=Object.freeze([
  {id:'1829-centre',name:'1829 · Acton / Grindley',locations:['acton','grindley'],photos:[...front,photo('1829-back','Central building · rear elevation'),photo('grindley-mural','Grindley Ward · bridge and canal mural'),photo('grindley-interior','Grindley Ward · interior steps and doorway')]},
  {id:'1829-west',name:'1829 · Hampton / Ince',locations:['hampton','ince','west-refinement','west-1','west-2','west-3','west-4','west-5'],photos:front},
  {id:'1829-east',name:'1829 · Barton / Caldy / Ebnal',locations:['barton','caldy','ebnal'],photos:front},
- {id:'barmere',name:'1829 · Barmere Ward',photos:[photo('barmere-garden','Garden side and chimney'),photo('barmere-chimney','Low range and chimney')]},
- {id:'redesmere',name:'1829 · Redesmere / Saughall',locations:['redesmere','saughall'],photos:[]},
+ {id:'barmere',name:'1829 · Barmere Ward',photos:[photo('barmere-garden','Garden side and chimney'),photo('barmere-chimney','Low range and chimney'),...redesmereCourtyard]},
+ {id:'redesmere',name:'1829 · Redesmere / Saughall',locations:['redesmere','saughall'],photos:[...redesmereCourtyard,photo('barmere-garden','Garden side and chimney')]},
  {id:'farndon',name:'Farndon Ward',photos:[photo('farndon-2','Farndon · historic photograph')]},
  {id:'hale-daresbury',name:'Hale / Daresbury Ward',photos:haleHuxley},
  {id:'huxley-dunham',name:'Huxley / Dunham Ward',photos:haleHuxley},

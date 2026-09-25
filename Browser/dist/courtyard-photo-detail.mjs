@@ -1,3 +1,5 @@
+import {WING_ROOF_JOIN} from './wing-roof-junctions.mjs';
+import {addWestCantedBay} from './west-refinement.mjs';
 // img2.jpg: camera in the east court, looking from the rear towards +Z.
 // The two close pairs and the single sash beside them are observed openings;
 // dimensions and the portions beyond the photograph remain visual estimates.
@@ -7,7 +9,7 @@ export function courtyardPhotoProfile(x,z){
     (x===69.2&&z===5)||(Math.abs(x-74.2)<.01&&z===3);
 }
 
-export function addCourtyardPhotoDetails(THREE,{model,box,mesh,worldUV,white,brick,roof,material,sash,door,rod,iron,stone,frame,glass}){
+export function addCourtyardPhotoDetails(THREE,{model,box,mesh,worldUV,white,brick,roof,material,sash,door,rod,iron,stone,frame,glass,hipRoof}){
   const courtOpeningsStart=model.userData.eastPhotoOpenings.length;
   // Looking towards +Z reverses screen left/right: the single window is at
   // the west end, then two pairs, then the projecting bay towards the east.
@@ -20,20 +22,34 @@ export function addCourtyardPhotoDetails(THREE,{model,box,mesh,worldUV,white,bri
   sash('courtyard-inset',41.4,10.15,6.68,Math.PI,1.16,2.15);
   sash('courtyard-inset',38.15,6.3,6.68,Math.PI,1.12,2.35);
 
-  // An octagonal bay projects into this court. Its forward corner separates
-  // the two broad, windowed facets; each outer return has a narrower sash.
-  const bayX=60.8,bayZ=2.5,r=4.25,apothem=r*Math.cos(Math.PI/8);
-  const bay=mesh(worldUV(new THREE.CylinderGeometry(r,r,10.3,8),1.7),brick,bayX,9.15,bayZ,true);
-  bay.name='East courtyard polygonal bay';
-  mesh(new THREE.CylinderGeometry(r,r,4,8),white,bayX,2,bayZ,true);
-  for(const y of [4.06,8.8,14.3])mesh(new THREE.CylinderGeometry(r+.08,r+.08,.18,8),white,bayX,y,bayZ);
-  mesh(new THREE.ConeGeometry(r+.22,1.2,8),roof,bayX,14.95,bayZ,true);
-  for(const offset of [-3,-1,1,3]){
-    const a=Math.PI+offset*Math.PI/8;
-    for(const y of [2,6.5,11])sash('courtyard-bay',bayX+Math.sin(a)*(apothem+.055),y,bayZ+Math.cos(a)*(apothem+.055),a,Math.abs(offset)===1?1.25:.72,2.45);
+  // September 25 photo correction: a half octagon with a flat front and
+  // 45-degree cheeks, then a recessed wall and a shallow fire-exit corner.
+  // Looking towards +Z, increasing X runs left in the reference photograph.
+  const half=3.45,flat=half*(Math.SQRT2-1);
+  addWestCantedBay(THREE,{model,mesh,worldUV,brick,white,roof,sash},{
+    x:59.8,z:4.5,side:-1,name:'East courtyard polygonal bay',face:'courtyard-bay',
+    width:half*2,depth:half,frontWidth:flat*2,returnDepth:flat,height:14.3,baseHeight:4,
+    bandHeights:[4.06,8.8,14.3],
+    windowRows:[2,6.5,11].map(y=>({y,width:1.25,sideWidth:1.25,height:2.45}))
+  });
+  // The existing pavilion now begins at z=7.3. Only this end returns to z=5;
+  // the three-unit-wide recess remains a real, walkable indentation.
+  mesh(worldUV(new THREE.BoxGeometry(3.5,10.3,2.3),1.7),brick,68,9.15,6.15,true).name='East courtyard fire-exit corner';
+  mesh(new THREE.BoxGeometry(3.5,4,2.3),white,68,2,6.15,true).name='East courtyard fire-exit corner white base';
+  hipRoof(68,7.5,3.5,5,14.53,1.2).name='East courtyard fire-exit corner slate roof';
+  for(const y of [4.06,8.8,14.3]){
+    box(white,64.75,y,7.22,3.1,.18,.22);
+    box(white,68,y,4.92,3.64,.18,.22);
+    box(white,66.17,y,6.15,.22,.18,2.4);
+    box(white,63.32,y,5.9,.22,.18,2.9);
   }
+  for(const [dy,h,d] of [[-.12,.22,.23],[.12,.22,.48]]){
+    box(white,68,14.3+dy,6.15,3.5+d,h,2.3+d);
+    box(white,64.75,14.3+dy,7.3-d/2,3.1,h,d);
+  }
+  for(const y of [2,6.3,10.5])sash('courtyard-recess',64.75,y,7.23,Math.PI,1.12,2.25);
 
-  // Keep the observed courtyard stairs on the widened block, without a separate tower.
+  // Keep the observed courtyard stairs attached to the shallow end projection.
   {
   const courtBox=(mat,x,y,z,...rest)=>box(mat,x-2,y,z+4.5,...rest);
   const courtSash=(face,x,y,z,...rest)=>sash(face,x-2,y,z+4.5,...rest);
@@ -41,10 +57,9 @@ export function addCourtyardPhotoDetails(THREE,{model,box,mesh,worldUV,white,bri
   const courtRod=(a,b,...rest)=>rod([a[0]-2,a[1],a[2]+4.5],[b[0]-2,b[1],b[2]+4.5],...rest);
   // Stairs attach to the rear face of the single widened pavilion. Landings reach
   // separate blue doors, with windows at the ground level below the flights.
-  for(const y of [4.06,8.25])courtBox(white,68.8,y,.37,5.5,.18,.22);
-  for(const [x,y] of [[67.25,2],[69.1,2],[71,2],[67.25,6.3],[67.25,10.5]])
+  for(const [x,y] of [[69.1,2],[71,2]])
     courtSash('courtyard-stair-block',x,y,.43,Math.PI,1.02,2.25);
-  courtDoor(70.3,.4,Math.PI,4.25);courtDoor(68.7,.4,Math.PI,8.5);
+  courtDoor(70.3,.4,Math.PI,4.25);courtDoor(69.5,.4,Math.PI,8.5);
   // Zigzag steel fire escape, with open risers, railings, stringers and legs.
   const stair=new THREE.Group();stair.name='East courtyard two-flight fire escape';model.add(stair);
   function stairRod(a,b,r=.027){courtRod(a,b,r);const m=model.children[model.children.length-1];stair.attach(m);}
@@ -53,7 +68,9 @@ export function addCourtyardPhotoDetails(THREE,{model,box,mesh,worldUV,white,bri
     for(let i=0;i<9;i++)courtBox(iron,x-1.2+i*.3,y+.56,-1.64,.035,1.05,.035);
     stairRod([x-1.2,y+1.08,-1.64],[x+1.2,y+1.08,-1.64]);
   }
-  landing(69,8.5);landing(73,4.25);
+  landing(69.5,8.5);landing(73,4.25);
+  // Connect the middle door to its return landing with a deck along the wall.
+  courtBox(iron,71.25,4.25,-.6,3.6,.13,2.1);
   function flight(x0,y0,x1,y1,z){
     const count=18,run=(x1-x0)/count,rise=(y1-y0)/count;
     for(let i=0;i<count;i++){
@@ -98,7 +115,7 @@ export function addCourtyardPhotoDetails(THREE,{model,box,mesh,worldUV,white,bri
   for(const offset of [-1.4,0,1.4])box(frame,41.3,4.71+offset*Math.sin(.72),5.25+offset*Math.cos(.72),5.25,.09,.09);
   // Gutters, vertical soil pipes and branching waste pipes are distinctive in
   // the photograph, particularly between the paired window groups.
-  for(const [x,z,h] of [[45.4,4.1,13.8],[48.1,4.1,13.8],[52.7,4.1,13.8],[65.5,4.85,13.8],[37.23,-3,13.8]])
+  for(const [x,z,h] of [[45.4,4.1,13.8],[48.1,4.1,13.8],[52.7,4.1,13.8],[66.08,7.08,13.8],[37.23,-3,WING_ROOF_JOIN.wall]])
     box(iron,x,h/2,z,.09,h,.09);
   for(const x of [48.1,52.7])for(const y of [4.3,9.1])rod([x,y,4.09],[x+1.65,y,4.09],.04);
   rod([45.4,3.5,4.1],[43.8,3.5,4.1],.045);

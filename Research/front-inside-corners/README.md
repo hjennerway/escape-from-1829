@@ -38,3 +38,39 @@ clear overhead space, surviving masonry, diagonal collision, a walkable route
 to the rear door, exposed panes, symmetry, camera starts and removed bollards.
 `Browser/artifacts/inspect-front-corners.mjs` captures both photo directions,
 the west reflection and the aerial view from the running browser scene.
+
+## Mitred frontage trim (25 September 2026)
+
+The user's `trim-mitres-marked.png` circles overlapping cornice ends at the
+frontage step and pointed pieces left by the earlier courtyard cut. The four
+cornice layers now use connected offset outlines with shared mitres. The high
+section turns around the shortened frontage and into the courtyard's short
+return. It is built to the corrected footprint and excluded from the old
+rectangular-geometry cut, which would otherwise recreate the pointed ends.
+The thinner sloping coping also shares mitred endpoints at each bend. The
+entrance builder reflects this detail onto the other side of Reception.
+
+These are trim changes to the browser model; the marked recess, walking routes,
+windows and roof surfaces are retained. Unity and Blender exports are unchanged.
+
+## Roof tips and stepped cornice follow-up (25 September 2026)
+
+The latest `roof-tips-marked.png` locates an abrupt raised trim end and slate
+triangles protruding into the courtyard at the upper and lower roof edges.
+The previous wall-footprint cut closed before the slate overhangs ended. The
+roof-only cut now continues the first return to z=20.2 and the last diagonal
+to x=31.55, z=21.5, reflected on the west. Wall footprints and walking space
+are retained.
+
+The entrance cornice uses a continuous height transition: a short rise from
+the recessed frontage, a roof-seated corner, and a return meeting the sloping
+courtyard coping. The separate overlapping coping on the first return is
+omitted. The low coping continues through the 0.4-unit overhang to the eaves;
+its masonry closure remains on the wall. These details supersede the earlier
+flat high-return cornice described above.
+
+The focused inside-corner check now probes both former slate tips, the retained
+roof immediately beside them, and the trim height at the formerly raised end.
+The new height check fails against the saved before geometry and passes after
+the correction. Browser sources and local compiled assets are updated; Unity
+and Blender exports are unchanged. Evidence uses Browser/artifacts/roof-junctions-*.

@@ -2,10 +2,11 @@
 // Architectural proportions are visual estimates; planting and plain ironwork
 // adapt the present-day photograph to the game's circa-1900 grounds.
 import {addInnerEastElevation} from './inner-east-elevation.mjs';
+import {WING_ROOF_JOIN} from './wing-roof-junctions.mjs';
 export const INNER_COURT_PHOTO_VIEW=Object.freeze({position:[10,1.8,-44],target:[23,6,-26],fov:66});
 // The marked rear aerial supersedes the earlier three-level interpretation:
 // both stair sections continue the main roof, above matching sloping annexes.
-export const INNER_COURT_SIDE_PROFILE=Object.freeze({rear:-35.5,join:-30.5,front:-24.5,stairShift:4,rearEaves:8.3,frontEaves:10.1,eaves:14.3});
+export const INNER_COURT_SIDE_PROFILE=Object.freeze({rear:-35.5,join:-30.5,front:-24.5,stairShift:4,rearEaves:8.3,frontEaves:10.1,eaves:WING_ROOF_JOIN.wall});
 export function innerCourtPhotoProfile(x,z){return x===31&&z===-30;}
 
 export function addInnerCourtPhotoDetails(THREE,{model,box,mesh,worldUV,white,brick,roof,material,sash,door,rod,iron,stone},options={}){

@@ -1,3 +1,78 @@
+## Rear wings lowered to the connecting roof (25 September 2026)
+
+Lowered both 1829 rear main roofs to the blue-marked connecting eaves in
+`Research/1829-back/rear-wings-height-marked.png`. Eaves are now 13.06 and
+ridges 15.66 scene units throughout, with the supporting wall tops, rear
+stair-section trim and affected rainwater pipes fitted to that level.
+The rear hips, footprints, low annex roofs and all window positions and
+sizes are retained. The separate inner projecting enclosures keep their
+high windows and caps. This supersedes the previous rising rear-arm roof.
+
+All 67 recorded opening schedules match the pre-edit scene exactly. The
+exterior check now verifies the level rear ridges and eaves and ray-tests
+the upper glazing close to the lowered trim on both sides and both ends.
+Exterior, roof-contact and west-refinement checks pass. Source and rebuilt
+compiled east, west, rear and end views were visually checked without browser
+errors. Source/compiled image comparison, draw counts, full detail, controls
+and loading fallback checks pass, as do all timeline stops and live walking
+collision refresh. The full browser suite and its continuation finish with
+only the two whole-estate preservation snapshot failures. Those snapshots
+for Jarman and Leighton/Newton fail both before and after this edit; their
+stored baselines are unchanged. Evidence uses `Browser/artifacts/rear-height-*`.
+
+Browser sources and local compiled models are updated; Unity and Blender
+exports are unchanged. Reference and geometry details are in
+`Research/1829-back/README.md`.
+
+## East courtyard bay, recess and fire-exit corner (25 September 2026)
+
+The courtyard beside Redesmere now has a regular half-octagonal bay with a
+flat front and 45-degree cheeks, followed to the photograph's left by a real
+recess and a shallow projecting fire-exit corner. The cross range and garden
+pavilion stop behind the indentation. White foundations, floor bands, slate
+roof edges, windows and walking collision follow the corrected walls; both
+escape doors meet the stair landings. The garden-facing side remains coplanar
+and the adjoining passage remains clear. Photo references, estimated dimensions
+and comparison views are in [the courtyard notes](Research/east-courtyard/README.md).
+
+Browser geometry shared by aerial, Explore and gameplay is updated, and the
+local compiled aerial model is rebuilt. Unity and Blender exports are unchanged.
+Source and compiled aerial, ground, detail and plan views were visually checked
+without browser errors. Focused facade, roof-contact, western bay and Redesmere
+garden checks pass. The compiled/source comparison, full-detail loading,
+fallbacks, all timeline stops and live walking collision refresh pass.
+
+The full browser suite stops at Jarman's whole-estate snapshot. Continuing the
+remaining checks separately also reaches the Leighton/Newton snapshot failure.
+Both failures reproduce using the saved pre-edit source via a loader; their
+snapshot baselines are unchanged. All other suite checks pass, including the
+31 remaining checks outside the Leighton/Newton failure. Evidence uses
+Browser/artifacts/courtyard-bay-*.
+
+## East frontage half-octagonal bay (25 September 2026)
+
+Replaced the marked east frontage cylinder with the same broad-fronted,
+canted half-octagonal bay used on the west side. Walls, white ground floor,
+bands, slate hip, nine sash windows and walking collision share the new
+outline. Brickwork now uses the surrounding walls' material and texture
+scale instead of stretching one texture across the cylinder. Reference and
+dimensions are recorded in [the bay notes](Research/east-bay/README.md).
+
+Browser sources and the local compiled aerial model are updated; Unity and
+Blender exports are unchanged. The shared builder's optional settings retain
+both western bays' exact geometry attributes, materials, transforms,
+collision footprints and window schedules, checked against the prior source.
+
+Validation: the exterior/bay, roof-contact and west-refinement checks pass.
+Source and compiled close, front and overhead views were visually checked,
+with no browser errors. Compiled/source comparison, exact draw counts, full
+detail, loading fallbacks and every timeline stop pass, including live
+walking collision refresh. The compiled source fingerprint is current.
+The full browser suite stops at Jarman's whole-estate snapshot; continuing
+the remaining checks finds only the equivalent Leighton/Newton snapshot
+failure. Both failures were reproduced before the bay edit, and their
+baselines were not changed. Evidence uses `Browser/artifacts/east-bay-*`.
+
 ## Front entrance chimneys (25 September 2026)
 
 Added the two long, square-ended brick stacks at the marked central entrance
@@ -3289,3 +3364,127 @@ image similarity, draw counts, controls and fallback cases. A subsequent
 timeline run fell back to source because concurrent modelling changed the
 asset fingerprint, so the full timeline run is not recorded as a pass.
 Logs and per-command results are in Browser/artifacts/churton-tree-*.
+
+## Continuous central roof trim and mitred frontage (25 September 2026)
+
+Extended the four pale cornice/parapet layers from the rear of Reception
+around both shoulders and along both side roof edges to the front pediment.
+Each layer is a continuous mitred strip, with its inner side seated on the
+central wall. The roof, chimney stacks, heraldry and existing profile heights
+are retained. See Research/1829-back/README.md and the saved marked image.
+
+Replaced the separate overlapping entrance cornice bars with joined offset
+outlines. Their corners share mitres at the frontage step and the courtyard
+return, removing the clipped pointed ends. The thin sloping coping also uses
+shared mitred endpoints around the courtyard bends. The west builder supplies
+the mirrored east trim. See Research/front-inside-corners/README.md.
+
+Browser geometry and the local compiled aerial model are updated; Unity and
+Blender exports were not regenerated. This is construction-time geometry, with
+no changes to runtime layout or tree visibility. Evidence and previews use
+Browser/artifacts/front-trim-*.
+
+Validation: exterior, roof-contact and inside-corner checks pass, including
+slate coverage, exposed windows, courtyard clearance and walking routes.
+The complete npm test sequence was attempted, continuing after its Jarman
+snapshot stop; only Jarman and Leighton/Newton fail. Loading all three original
+model files from HEAD in memory also fails both saved-estate snapshots, at
+859,428/923,475 primitives versus the saved 859,427/923,474. The trim consolidation
+removes eight primitives, leaving 859,420/923,467. Saved snapshots were not
+changed. The source/compiled browser comparison passes, including image
+similarity, full-detail loading, controls and missing/incompatible/corrupt asset
+fallbacks. The final source centre and both mirrored entrance joins were
+visually inspected.
+
+Final compiled validation passes every timeline stop, mobile reset, selection,
+URL navigation and live walking collision refresh. The rebuilt central roof
+and both mirrored corner views were visually checked. All 77 standard checks
+were run: 75 pass and the two saved-estate snapshots above fail. The delivered
+compiled fingerprint matches the current source. Shared browser-test evidence
+was saved under Browser/artifacts/front-trim-validation/.
+
+## Courtyard roof-tip follow-up (25 September 2026)
+
+The latest marked view exposed two slate tips beyond the front inside-corner
+walls and a raised end on the entrance cornice. The roof cut now extends its
+open ends through the overhangs, while the wall cut and walking footprints
+retain their original outline. The lower coping reaches the wing eaves.
+
+The four entrance trim layers now share a swept profile with a short height
+transition from the recessed facade. Both return heights are sampled from
+the supporting slate; the court-side end meets the existing sloping coping.
+Its overlapping first coping segment is omitted. Both front corners use the
+same reflected geometry. See Research/front-inside-corners/README.md and
+roof-tips-marked.png. Browser sources and the local compiled model were updated;
+Unity and Blender exports were not regenerated.
+
+The focused inside-corner check covers the two former slate tips, adjoining
+retained roof, and the formerly raised trim end. Loading the saved before files
+reproduces the new height assertion failure; the corrected geometry passes.
+Exterior and walking checks also pass. Source and compiled close views of both
+corners were visually reviewed. Evidence uses Browser/artifacts/roof-junctions-*.
+
+Final validation for the roof-tip follow-up: all 77 standard commands ran,
+continuing after Jarman; 75 pass and the previously failing Jarman and
+Leighton/Newton saved-estate snapshots still differ. No saved baselines were
+changed. The complete compiled browser suite passes, including source/image
+comparison, full-detail loading, fallback cases, every timeline stop, mobile
+reset and walking collision refresh. The final source fingerprint matches the
+local compiled model. Shared validation outputs were copied into
+Browser/artifacts/roof-junctions-validation/; concurrent unrelated model edits
+in the shared workspace were retained.
+
+## Redesmere / Saughall and Barmere gallery additions — 25 September 2026
+
+Added the supplied courtyard photographs to both galleries. The unchanged
+originals are in Research/redesmere-saughall/; two 1200 × 900 WebP copies use
+the existing photo-build settings and are registered in the build script and
+source manifest. The supplied redesmere3.jpg is byte-identical to
+Research/redesmere-chimney/img1.jpg, so its existing barmere-garden asset is
+reused. Redesmere / Saughall now has three photographs; Barmere has four,
+retaining its other existing chimney view without duplicating the garden photo.
+
+Validation: npm run test:photos passes, including all 82 gallery entries,
+source/compiled building selection, location aliases and mobile lightbox checks
+(Browser/artifacts/redesmere-gallery-photos.log). The Redesmere, Saughall and
+Barmere galleries decode every image and open without page errors; desktop
+panels and the mobile portrait viewer were visually checked. Evidence uses
+Browser/artifacts/redesmere-gallery-added.png, saughall-gallery-added.png,
+barmere-gallery-added.png and redesmere-added-*.png.
+
+The full npm test suite stops at the unrelated saved-geometry assertion in
+Browser/test-jarman.mjs:11 (859,413 primitives versus the saved 859,427), the
+same protected-surroundings check documented by earlier modelling changes.
+See Browser/artifacts/redesmere-gallery-suite.log. No model geometry or
+Unity/Blender exports changed, and no model rebuild was required.
+
+
+## Redesmere wall overlap and garden gravel cleanup (25 September 2026)
+
+Cut the service room's lower wall, white base and floor band back to their
+join with the low brick end range, removing the coplanar surfaces that caused
+the marked flicker. The upper service room and passage head remain in place.
+Joined the east apron, garden cross-walk and passage into one level gravel
+surface with a straight garden edge, and paved the small marked grass recess
+against the forward wing. See Research/redesmere-garden/README.md and
+cleanup-annotation.png for the owner reference and geometry bounds.
+
+Focused checks sample the exposed brick to reject overlapping wall planes,
+the filled recess and complete straight gravel edge, retained garden lawn,
+and a player-width walking route through the cross-walk and passage.
+Browser sources and the local compiled aerial model are updated; Unity and
+Blender exports are unchanged. No runtime layout/visibility behavior changes.
+
+
+Validation: the focused wall, surface and player-width route checks pass;
+the saved before geometry fails both new wall and paving regressions. Source
+and rebuilt compiled reference, wall and overhead views were visually checked.
+The compiled suite passes rendering/image matching, exact draw counts, full
+detail, controls, fallback cases, every historical period and live walking
+collision refresh. The final compiled fingerprint matches the source.
+
+All 77 standard browser commands ran: 75 pass. Jarman and
+Leighton/Newton whole-estate snapshots already fail on the saved pre-edit
+working tree (859,385/923,432 primitives versus saved 859,427/923,474). This
+cleanup removes one net primitive; their baselines were left unchanged.
+Evidence and preview files use Browser/artifacts/garden-cleanup-*.

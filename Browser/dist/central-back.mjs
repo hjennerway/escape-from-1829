@@ -23,27 +23,31 @@ export function addCentralBack(THREE,{model,mesh,worldUV,brick,white,roof,materi
   prism('Central back canted masonry',outline,1.4,13.2,brick);
   prism('Central back canted white plinth',outline,0,1.4,white);
 
-  function face(i,t=.5,offset=0){
-    const a=outline[i],b=outline[i+1],dx=b[0]-a[0],dz=b[1]-a[1],length=Math.hypot(dx,dz);
+  function face(i,t=.5,offset=0,points=outline){
+    const a=points[i],b=points[i+1],dx=b[0]-a[0],dz=b[1]-a[1],length=Math.hypot(dx,dz);
     const nx=dz/length,nz=-dx/length;
     return {x:a[0]+dx*t+nx*offset,z:a[1]+dz*t+nz*offset,nx,nz,rotation:Math.atan2(nx,nz)};
   }
   // Mitred profiles keep every pale course continuous across both bevels.
-  function offsetLine(distance){
-    return outline.map(([x,z],i)=>{
-      const a=face(Math.max(0,i-1)),b=face(Math.min(i,outline.length-2));
+  function offsetLine(distance,points=outline){
+    return points.map(([x,z],i)=>{
+      const a=face(Math.max(0,i-1),.5,0,points),b=face(Math.min(i,points.length-2),.5,0,points);
       const nx=a.nx+b.nx,nz=a.nz+b.nz,scale=distance/(nx*b.nx+nz*b.nz);
       return [x+nx*scale,z+nz*scale];
     });
   }
-  function course(name,y,h,out,inside=.08){
-    prism(name,[...offsetLine(out),...offsetLine(-inside).reverse()],y-h/2,h,trim);
+  function course(name,y,h,out,inside=.08,points=outline){
+    prism(name,[...offsetLine(out,points),...offsetLine(-inside,points).reverse()],y-h/2,h,trim);
   }
   for(const y of [3.15,7.1,10.7])course('Central back continuous floor band',y,.24,.17);
-  course('Central back lower cornice',14.32,.12,.23);
-  course('Central back parapet',14.61,.44,.14,.2);
-  course('Central back parapet moulding',14.55,.065,.2);
-  course('Central back projecting coping',14.89,.13,.26,.25);
+  // Continue the same profile around the shoulders and along both roof edges
+  // to the front pediment. One mitred strip per layer avoids overlapping ends.
+  // Its inside edge sits on Reception's wall; the coping meets the pediment.
+  const roofOutline=[[-7.35,19.7],[-7.35,10.4],...outline,[7.35,10.4],[7.35,19.7]];
+  course('Central back lower cornice',14.32,.12,.23,.25,roofOutline);
+  course('Central back parapet',14.61,.44,.14,.25,roofOutline);
+  course('Central back parapet moulding',14.55,.065,.2,.25,roofOutline);
+  course('Central back projecting coping',14.89,.13,.26,.25,roofOutline);
 
   function window(i,t,y,w,h){
     const p=face(i,t,.065),name='central-back-'+(i===2?'rear':i===1?'west-cant':'east-cant');

@@ -1,3 +1,4 @@
+import {FRONT_CORNER_OUTLINE} from './front-inside-corners.mjs';
 // img19.jpg: northward view from the lawn immediately west of Reception.
 // Window positions and the projecting three-bay section are photo estimates.
 export const ENTRANCE_WEST_PHOTO_VIEW=Object.freeze({position:[-10,1.8,43.8],target:[-20.7,7.2,18],fov:44});
@@ -16,13 +17,51 @@ export function addEntranceWestPhotoDetails(THREE,{model,box,mesh,worldUV,white,
   range('Entrance west recessed wall',p.step,p.right,16.95,p.wallZ,p.eaves);
   const projection=range('Entrance west three-bay projection',p.left,p.step,16.9,p.projectionZ,13.35);
   hipRoof(projection.x,16.1,projection.w,7.2,13.4,.7).name='Entrance west projection slate roof';
-  // Broad parapet cornice, built along the front and the exposed right return.
-  function cornice(x,z,w,height,rotation=0){
-    for(const [dy,h,depth] of [[0,.58,.24],[-.35,.1,.38],[-.49,.1,.31],[.34,.1,.35]])box(trim,x,height+dy,z,w,h,depth,rotation);
+  // Offset the connected centreline once per moulding, giving adjacent runs
+  // identical mitres. The high cornice turns down the courtyard's short return
+  // instead of leaving pointed fragments at the old rectangular wall end.
+  const corner=FRONT_CORNER_OUTLINE[0],returnEnd=FRONT_CORNER_OUTLINE[1];
+  const line=[[p.right,p.wallZ+.1],[p.step+.8,p.wallZ+.1],[p.step+.1,p.wallZ+.1],
+    [p.step+.1,p.projectionZ+.1],[-corner[0]+.1,p.projectionZ+.1],[-returnEnd[0]+.1,returnEnd[1]]];
+  function offset(distance){
+    const normals=line.slice(1).map((b,i)=>{
+      const a=line[i],dx=b[0]-a[0],dz=b[1]-a[1],length=Math.hypot(dx,dz);
+      return [dz/length,-dx/length];
+    });
+    return line.map(([x,z],i)=>{
+      const a=normals[Math.max(0,i-1)],b=normals[Math.min(i,normals.length-1)];
+      const nx=a[0]+b[0],nz=a[1]+b[1],scale=distance/(nx*b[0]+nz*b[1]);
+      return [x+nx*scale,z+nz*scale];
+    });
   }
-  cornice((p.left+p.step)/2,p.projectionZ+.1,p.step-p.left+.15,13.3);
-  cornice(p.step+.08,(p.wallZ+p.projectionZ)/2,p.projectionZ-p.wallZ+.2,13.3,Math.PI/2);
-  cornice((p.step+p.right)/2,p.wallZ+.1,p.right-p.step+.2,12.75);
+  // The return at the recessed wall climbs to the higher projection without
+  // an upright cut end. The courtyard return rises into its sloping coping.
+  const endNormal={x:-1-Math.SQRT1_2,z:Math.SQRT1_2};
+  const endOffset=distance=>({x:-returnEnd[0]+endNormal.x*distance/(1+Math.SQRT1_2),
+    z:returnEnd[1]+endNormal.z*distance/(1+Math.SQRT1_2)});
+  model.updateMatrixWorld(true);
+  const slate=model.children.filter(o=>o.isMesh&&o.material===roof),ray=new THREE.Raycaster();
+  function roofTop(x,z){
+    ray.set(new THREE.Vector3(x,25,z),new THREE.Vector3(0,-1,0));
+    return ray.intersectObjects(slate,false)[0].point.y+.03;
+  }
+  const sample=endOffset(-.015),endTop=roofTop(sample.x,sample.z);
+  const heights=[12.75,12.75,roofTop(...line[2])-.39,13.3,13.3,endTop-.39];
+  for(const [layer,[dy,h,depth]] of [[0,.58,.24],[-.35,.1,.38],[-.49,.1,.31],[.34,.1,.35]].entries()){
+    const outer=offset(depth/2),inner=offset(-depth/2);
+    const a=endOffset(.075),b=endOffset(-.115);
+    outer[5]=[a.x,a.z];inner[5]=[b.x,b.z];
+    const vertices=[],faces=[[0,1,5,4],[1,2,6,5],[2,3,7,6],[3,0,4,7],[4,5,6,7],[3,2,1,0]];
+    for(let i=0;i<line.length-1;i++){
+      const plan=[outer[i],outer[i+1],inner[i+1],inner[i]];
+      const levels=[heights[i],heights[i+1],heights[i+1],heights[i]];
+      const points=[...plan.map(([x,z],j)=>[x,levels[j]+dy-h/2,z]),...plan.map(([x,z],j)=>[x,levels[j]+dy+h/2,z])];
+      for(const [a,b,c,d] of faces)for(const index of [a,c,b,a,d,c])vertices.push(...points[index]);
+    }
+    const geometry=new THREE.BufferGeometry();geometry.setAttribute('position',new THREE.Float32BufferAttribute(vertices,3));geometry.computeVertexNormals();
+    const part=mesh(geometry,trim,0,0,0,true);part.name='Entrance west mitred cornice layer '+layer;
+    part.userData.frontCornerTrim=true;
+  }
   box(trim,p.step+.06,p.base+.05,18.5,.18,.2,2.5);
   // Pale white base and floor bands wrap onto the west side of Reception.
   box(white,-7.16,1.55,18.35,.15,3.1,2.7);

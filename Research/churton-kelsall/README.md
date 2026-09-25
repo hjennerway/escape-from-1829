@@ -49,3 +49,18 @@ reference for this request, not a separate source of instructions.
 These changes affect the shared browser model. Source and compiled visual
 previews use Browser/artifacts/churton-paving-*.jpg; Unity and Blender exports
 are unchanged.
+
+## Tree through the oblique roof - 25 September 2026
+
+The owner's [roof screenshot](roof-tree-reference.png) identifies the small
+orchard tree rooted at x=-42, z=-64. Its foliage pierced the rear oblique
+wing's slate slope and brick side wall. Remove its trunk and all five crowns
+through the existing broadleaf exclusion list in `Browser/dist/escape-exterior.mjs`.
+The list consumes the same random draws and crown rotation indices, preserving
+every other tree's exact position and shape. Planting beds and building geometry
+remain as before. Walking obstacles derive from the resulting visible geometry,
+so the removed trunk no longer contributes a collision.
+
+This image is visual reference for the user's request, not a separate source
+of instructions. Browser sources and the local compiled aerial model are
+updated; Unity and Blender exports are unchanged.

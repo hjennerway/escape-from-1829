@@ -340,5 +340,17 @@
     "width": 689,
     "height": 917,
     "bytes": 50178
+  },
+  "redesmere-courtyard": {
+    "source": "Research/redesmere-saughall/redesmere.jpg",
+    "width": 1200,
+    "height": 900,
+    "bytes": 288530
+  },
+  "redesmere-courtyard-2": {
+    "source": "Research/redesmere-saughall/redesmere2.jpg",
+    "width": 1200,
+    "height": 900,
+    "bytes": 149454
   }
 }

@@ -153,11 +153,13 @@ export function createEscapeExterior(THREE,aspect){
   eastBlocks[2]=[36.5,23,9,14,8.6];
   eastBlocks[3]=[35,35,12,16,8.6];
   eastBlocks[0][0]+=EXTRA_BAY/2;eastBlocks[0][2]+=EXTRA_BAY;
+  // Stop the cross range at the courtyard bay's east return. The photographed
+  // recess beside it is open back to z=7.3, rather than filled by this block.
+  eastBlocks[0][0]-=.7;eastBlocks[0][2]-=1.4;
   for(const i of [5,6,7])eastBlocks[i][0]+=OUTER_SHIFT;
 
   // The photographs show separate buildings, not rooms bridging this lane.
   // Cut the rear service range at each side and omit the former corner infill.
-  const courtyardPassage={x:76,width:7.1};
   // The two tall end-room placeholders are replaced by the low brick range.
   eastBlocks.splice(5,3);
   const serviceRight=84.2,annexStart=79.55;
@@ -189,15 +191,22 @@ export function createEscapeExterior(THREE,aspect){
     const detail=westDetail||eastPhotoProfile(x,z)||courtyardPhotoProfile(x,z)||rearCourtPhotoProfile(x,z)||redesmerePhotoProfile(x,z),foundation=detail&&!westDetail?4:2;
     const base=passage?Math.max(passage.height,foundation):foundation;
     const rearArm=x===31&&z===-10;
-    const body=mesh(worldUV(rearArm?wingWallGeometry(THREE,base):new THREE.BoxGeometry(w,h-base,d),detail?1.7:3),detail?photoBrick:brick,x,(h+base)/2,z,true);
+    // The service room meets the low brick range at z=10. Its white base,
+    // floor band and lower brickwork stop there instead of overlapping the
+    // end range's west-facing wall over z=10..11.5.
+    const serviceJoin=Math.abs(x-81.875)<.01&&z===8;
+    const bodyBase=serviceJoin?4.55:base;
+    const body=mesh(worldUV(rearArm?wingWallGeometry(THREE,base):new THREE.BoxGeometry(w,h-bodyBase,d),detail?1.7:3),detail?photoBrick:brick,x,(h+bodyBase)/2,z,true);
+    const lowerDepth=serviceJoin?5.5:d,lowerZ=serviceJoin?7.25:z;
+    if(serviceJoin)mesh(worldUV(new THREE.BoxGeometry(w,bodyBase-base,lowerDepth),1.7),photoBrick,x,(bodyBase+base)/2,lowerZ,true).name='Redesmere service wall above white base';
     const lowerRanges=passage?[[x-w/2,Math.max(x-w/2,passage.x-passage.width/2)],[Math.min(x+w/2,passage.x+passage.width/2),x+w/2]]:[[x-w/2,x+w/2]];
     for(const [left,right] of lowerRanges){
       if(right<=left)continue;
       const middle=(left+right)/2,width=right-left;
       const lowerHeight=passage?Math.min(foundation,passage.height):foundation;
       if(westDetail)mesh(worldUV(new THREE.BoxGeometry(width,lowerHeight,d),1.7),photoBrick,middle,lowerHeight/2,z,true);
-      else box(detail?white:cream,middle,lowerHeight/2,z,width,lowerHeight,d);
-      if(!westDetail)box(detail?white:cream,middle,foundation+(detail?.04:.1),z,width+(detail?.13:.23),detail?.16:.22,d+(detail?.13:.23));
+      else box(detail?white:cream,middle,lowerHeight/2,lowerZ,width,lowerHeight,lowerDepth);
+      if(!westDetail)box(detail?white:cream,middle,foundation+(detail?.04:.1),serviceJoin?lowerZ-.0325:z,width+(detail?.13:.23),detail?.16:.22,serviceJoin?lowerDepth+.065:d+(detail?.13:.23));
       if(passage&&base>lowerHeight)mesh(worldUV(new THREE.BoxGeometry(width,base-lowerHeight,d)),detail?photoBrick:brick,middle,(base+lowerHeight)/2,z,true);
     }
     // Outer east white base is retained beyond the mirrored brick inner wing.
@@ -222,7 +231,7 @@ export function createEscapeExterior(THREE,aspect){
       const roofWidth=z===35?12:9,roofX=z===35?35:36.5;
       const cap=hipRoof(roofX,z,roofWidth,d,h+.23,roofWidth*.3);
       cap.name='East entrance wing slate roof';
-    }else if((x===65.5&&z===15)||x===-69||x===-39.6){
+    }else if((x===65.5&&z===16.15)||x===-69||x===-39.6){
       // Detailed end roofs and the aligned court range cover these walls.
     }else hipRoof(x,z,w,d,h+.23,Math.min(3.8,Math.min(w,d)*.3));
     if(!detail)for(const side of [-1,1]){
@@ -284,7 +293,7 @@ export function createEscapeExterior(THREE,aspect){
   // Both photographed front bays are built by the facade detail modules.
   // Replace the added round bay with a square projection on the blue-marked
   // window section, to its left. Its face stands 5.5 units beyond the facade.
-  const squareX=65.5,squareZ=15,squareWidth=8.5,squareDepth=20;
+  const squareX=65.5,squareZ=16.15,squareWidth=8.5,squareDepth=17.7;
   block(squareX,squareZ,squareWidth,squareDepth,14.3).name='East garden pavilion';
   for(const y of [4.08,8.8])box(white,squareX,y,squareZ,squareWidth+.14,.16,squareDepth+.14);
   addEastPhotoDetails(THREE,{model,box,mesh,worldUV,white,brick:photoBrick,roof,steel,material,hipRoof,details});
@@ -297,7 +306,7 @@ export function createEscapeExterior(THREE,aspect){
   box(path,69+OUTER_SHIFT,.16,44,7,.12,2);
   box(gravel,45+OUTER_SHIFT/2,.18,-12,17+OUTER_SHIFT,.12,39);
   box(gravel,40,.18,-36,7,.12,18);
-  box(path,courtyardPassage.x,.2,13,courtyardPassage.width,.1,34);
+  // The passage paving is joined to the garden cross-walk in addEntranceWalks.
   // The corrected centre ends before the existing cross-drive at z=-46.
   legacyRoad(gravel,0,.15,-62,106,.12,23);
   // Broadleaf crowns cast shadows across the front lawn and site edges.
@@ -309,7 +318,8 @@ export function createEscapeExterior(THREE,aspect){
     [-100,-84],[-91,-91],[-82,-98],[-73,-84],[-64,-91],
     [-65,-35],[-72,-23],[-72,-10],[-72,29],[-25.5,46.7],
     [98.2,-38],[122.2,-47],[122.2,-35],
-    [122.2,25],[122.2,37],[122.2,49]
+    [122.2,25],[122.2,37],[122.2,49],
+    [-42,-64] // Orchard tree protruding through the Churton/Kelsall oblique roof.
   ].map(([x,z])=>`${x},${z}`));
   function tree(x,z,size=1){
     if(removedTrees.has(`${x},${z}`)){

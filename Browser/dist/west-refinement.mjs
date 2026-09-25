@@ -13,9 +13,11 @@ export const WEST_REFINEMENT_VIEWS=Object.freeze({
 // Building the wall, bands and roof from the same outline avoids the pointed
 // central arris of the former octagonal cylinder.
 export function addWestCantedBay(THREE,{model,mesh,worldUV,brick,white,roof,sash},
-  {x,z,side,name,face,height=14.6,width=6.2,depth=2.8,windowWidth=1.25}){
-  const half=width/2,flat=half*.5;
-  const outline=[[-half,0],[-half,depth*.28],[-flat,depth],[flat,depth],[half,depth*.28],[half,0]];
+  {x,z,side,name,face,height=14.6,width=6.2,depth=2.8,frontWidth=width*.5,returnDepth=depth*.28,windowWidth=1.25,baseHeight=0,
+    bandHeights=[4.05,8.6,height-.08,height+.15],
+    windowRows=[2,6.45,11.35].map(y=>({y,width:windowWidth,sideWidth:.72,height:2.5}))}){
+  const half=width/2,flat=frontWidth/2;
+  const outline=[[-half,0],[-half,returnDepth],[-flat,depth],[flat,depth],[half,returnDepth],[half,0]];
   function prism(top,bottom,expand=0){
     const vertices=[],uv=[];
     const points=outline.map(([u,v])=>[u+Math.sign(u)*expand,side*(v+expand)]);
@@ -31,9 +33,13 @@ export function addWestCantedBay(THREE,{model,mesh,worldUV,brick,white,roof,sash
     const g=new THREE.BufferGeometry();g.setAttribute('position',new THREE.Float32BufferAttribute(vertices,3));
     g.setAttribute('uv',new THREE.Float32BufferAttribute(uv,2));g.computeVertexNormals();return g;
   }
-  const wall=mesh(worldUV(prism(height,0),1.7),brick,x,0,z,true);wall.name=name;
+  const wall=mesh(worldUV(prism(height,baseHeight),1.7),brick,x,0,z,true);wall.name=name;
   wall.userData.collisionFootprint=outline.map(([u,v])=>[u,side*v]);
-  for(const y of [4.05,8.6,height-.08,height+.15])mesh(prism(y+.1,y-.1,.1),white,x,0,z).name=name+' stone band';
+  if(baseHeight>0){
+    const base=mesh(prism(baseHeight,0),white,x,0,z,true);base.name=name+' white base';
+    base.userData.collisionFootprint=wall.userData.collisionFootprint;
+  }
+  for(const y of bandHeights)mesh(prism(y+.1,y-.1,.1),white,x,0,z).name=name+' stone band';
   const positions=[],uv=[];
   for(let i=0;i<outline.length;i++){
     const a=outline[i],b=outline[(i+1)%outline.length];
@@ -48,7 +54,7 @@ export function addWestCantedBay(THREE,{model,mesh,worldUV,brick,white,roof,sash
     const a=outline[i],b=outline[i+1],dx=b[0]-a[0],dz=side*(b[1]-a[1]);
     const length=Math.hypot(dx,dz),nx=-dz/length*side,nz=dx/length*side;
     const rotation=Math.atan2(nx,nz);
-    for(const y of [2,6.45,11.35])sash(face,x+(a[0]+b[0])/2+nx*.065,y,z+side*(a[1]+b[1])/2+nz*.065,rotation,i===2?windowWidth:.72,2.5);
+    for(const row of windowRows)sash(face,x+(a[0]+b[0])/2+nx*.065,row.y,z+side*(a[1]+b[1])/2+nz*.065,rotation,i===2?row.width:row.sideWidth,row.height);
   }
   return wall;
 }

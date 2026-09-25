@@ -10,6 +10,7 @@ const sources={
  'grindley-mural':'Research/grindley/ward-mural.png',
  'grindley-interior':'Research/grindley/interior-steps.png',
  'barmere-garden':'Research/redesmere-chimney/img1.jpg','barmere-chimney':'Research/redesmere-chimney/img2.jpg',
+ 'redesmere-courtyard':'Research/redesmere-saughall/redesmere.jpg','redesmere-courtyard-2':'Research/redesmere-saughall/redesmere2.jpg',
  'annexe':'Browser/dist/art/annexe.png','annexe-2':'Browser/dist/art/annexe2.png','chimney':'Browser/dist/art/chimney.png',
  'annexe-kitchen':'Research/annexe-kitchen/img1.jpg',
  'annexe-carden-picton':'Research/carden-picton/img1.jpg',

@@ -28,11 +28,11 @@ export function addWestWingPhotoDetails(THREE,{model,worldUV,white,brick,roof,st
   });
   // Keep source object names distinct from the unaltered eastern originals.
   wing.traverse(o=>{if(o.name.startsWith('Inner '))o.name='West mirrored '+o.name;});
-  // Pale eaves follow the stepped walls beneath one continuous grey hipped
+  // Pale eaves follow the level walls beneath one continuous grey hipped
   // roof, matching the other wings. The lower gallery roof stays separate.
   function cornice(x,z,w,d){
-    box(white,x,14.05,z,w+.35,.16,d+.35);
-    box(white,x,14.42,z,w+.35,.22,d+.35);
+    // Keep the rear edge behind the unchanged high end sashes.
+    box(white,x,WEST_WING_PROFILE.eaves+.11,z,w+.35,.2,d+.25);
   }
   cornice(31,-27.5,13,6);
   // Build the junction in source coordinates before reflecting this group.
@@ -48,7 +48,7 @@ export function addWestWingPhotoDetails(THREE,{model,worldUV,white,brick,roof,st
   }
   for(const [x,z,d] of [[37.09,-10,30],[37.59,-27.5,6]]){
     box(white,x,4.02,z,.25,.4,d);
-    if(z<-24.5)box(iron,x+.06,14,z,.13,.12,d);
+    if(z<-24.5)box(iron,x+.06,WEST_WING_PROFILE.eaves+.09,z,.13,.12,d);
   }
   // Three upper end openings: the central sash is wider with narrow sidelights.
   for(const x of [27,31,35])sash('west-wing-upper-end',x,11.55,-30.58,Math.PI,x===31?1.45:1.4,2.7);
@@ -81,7 +81,10 @@ export function addWestWingPhotoDetails(THREE,{model,worldUV,white,brick,roof,st
     const seam=mesh(new THREE.BoxGeometry(.035,.06,5.8/Math.cos(pitch)),iron,x,(WEST_WING_PROFILE.rearEaves+WEST_WING_PROFILE.frontEaves)/2+.11,-33);
     seam.rotation.x=pitch;
   }
-  for(const z of [-24.45,4.75])box(iron,37.22,z>0?6.35:7,z,.09,z>0?12.7:14,.09);
+  for(const z of [-24.45,4.75]){
+    const height=z>0?12.7:WEST_WING_PROFILE.eaves;
+    box(iron,37.22,height/2,z,.09,height,.09);
+  }
 
   const dummy=new THREE.Object3D();
   for(const [mat,items] of batches){

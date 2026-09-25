@@ -73,10 +73,52 @@ const originalBay=exterior.model.getObjectByName('East curved bay');
 const squareBay=exterior.model.getObjectByName('East garden pavilion');
 assert(originalBay&&squareBay,'right frontage must retain the original curved bay and add a square projection');
 assert.equal(exterior.model.getObjectByName('East curved bay duplicate'),undefined,'the added round bay must be removed');
+// The marked east frontage bay shares the west half-octagonal plan, with
+// physical brick courses, aligned roof/bands and a solid white ground floor.
+{
+  const base=exterior.model.getObjectByName('East curved bay white base');
+  const west=exterior.model.getObjectByName('West curved bay');
+  const normalize=points=>{
+    const w=Math.max(...points.map(p=>p[0]))-Math.min(...points.map(p=>p[0]));
+    const d=Math.max(...points.map(p=>p[1]));
+    return points.map(([x,z])=>[x/w,z/d]);
+  };
+  assert.deepEqual(normalize(base.userData.collisionFootprint),normalize(west.userData.collisionFootprint),'east and west bays have the same half-octagonal proportions');
+  const r=new THREE.Raycaster(),hit=(x,y,z,dx=0,dz=-1)=>{
+    r.set(new THREE.Vector3(x,y,z),new THREE.Vector3(dx,0,dz).normalize());
+    return r.intersectObject(exterior.model,true)[0];
+  };
+  const eastLow=hit(53.1,12.7,25),eastHigh=hit(53.1,13.1,25);
+  const wallLow=hit(48,12.7,25),wallHigh=hit(48,13.1,25);
+  assert.equal(eastLow.object,originalBay);
+  assert.equal(eastLow.object.material,wallLow.object.material,'bay reuses the adjoining masonry material');
+  assert(Math.abs((eastHigh.uv.y-eastLow.uv.y)-(wallHigh.uv.y-wallLow.uv.y))<1e-6,'bay brick courses match the adjoining wall scale');
+  assert(Math.abs((hit(53.5,12.7,25).uv.x-eastLow.uv.x)-(hit(48.4,12.7,25).uv.x-wallLow.uv.x))<1e-6,'front brick lengths match the adjoining wall scale');
+  assert.equal(hit(53.1,3.5,25).object,base,'white ground floor follows the bay');
+  assert.equal(hit(52.3,13,25).point.z,hit(53.9,13,25).point.z,'the bay has one broad flat front');
+  for(const o of exterior.model.userData.eastPhotoOpenings.filter(o=>o.face==='polygonal-bay')){
+    const normal=new THREE.Vector3(Math.sign(o.x-53.1)*2.016,0,Math.abs(o.x-53.1)<.1?1:1.275).normalize();
+    const tangent=new THREE.Vector3(normal.z,0,-normal.x);
+    for(const offset of [-.3,0,.3]){
+      const p=new THREE.Vector3(o.x,o.y+o.h/12,o.z).addScaledVector(tangent,offset*o.w).addScaledVector(normal,.5);
+      r.set(p,normal.clone().negate());
+      assert.equal(r.intersectObject(exterior.model,true)[0].object.material.color.getHex(),0x78989f,'all three window faces remain exposed on all floors');
+    }
+  }
+  for(const [x,z] of [[51.1,20.8],[53.1,22],[55.1,20.8]]){
+    r.set(new THREE.Vector3(x,30,z),new THREE.Vector3(0,-1,0));
+    const roof=r.intersectObject(exterior.model,true)[0];
+    assert.equal(roof.object.name,'East curved bay slate roof');
+    assert(roof.face.normal.y>0,'half-octagonal roof covers every face');
+  }
+  const obstacles=exteriorObstacles(THREE,exterior.model),blocked=(x,z)=>obstacles.some(o=>obstacleContains(o,x,z,.05));
+  assert(blocked(53.1,22.1)&&blocked(51.3,21.1),'front and cheek masonry block walking');
+  assert(!blocked(50.6,22.1)&&!blocked(55.6,22.1),'canted corners leave their actual outside space clear');
+}
 const bayBounds=new THREE.Box3().setFromObject(squareBay),baySize=bayBounds.getSize(new THREE.Vector3());
 assert.equal(squareBay.geometry.type,'BoxGeometry','replacement has flat walls and square corners');
 assert.equal(baySize.x,8.5,'south frontage retains its width');
-assert.equal(baySize.z,20,'blue-marked side is widened as one rectangular pavilion');
+assert(Math.abs(baySize.z-17.7)<1e-5,'pavilion retains its square front and steps back at the courtyard recess');
 assert(bayBounds.max.z>24&&bayBounds.max.y>=14.3,'square bay projects outward at full three-storey height');
 assert(bayBounds.min.x>originalBay.position.x+3.15&&bayBounds.max.x<72.65,'projection occupies the blue-marked section left of the removed round bay');
 for(const aspect of [16/9,4/3,9/16])for(const seconds of [0,1,1.75,2.5]){
@@ -98,13 +140,14 @@ for(const side of [-1,1]){
   const bounds=new THREE.Box3().setFromObject(join);
   assert(bounds.min.z<=5&&bounds.max.z>=7,'connecting walls close the former separation');
   const ridgeHeights=[];
-  for(const z of [2,4,5,5.5,6,6.5,7,9,11.9,12,12.01]){
+  for(const z of [-24.5,-20,-10,-6,-2,2,4,5,5.5,6,6.5,7,9,11.9,12,12.01]){
     ray.set(new THREE.Vector3(side*31,30,z),new THREE.Vector3(0,-1,0));
     const hit=ray.intersectObject(exterior.model,true)[0];
     assert(hit.object.material.map&&hit.face.normal.clone().transformDirection(hit.object.matrixWorld).y>0,'junction exposes upward-facing slate');
     ridgeHeights.push(hit.point.y);
   }
-  assert(Math.max(...ridgeHeights)-Math.min(...ridgeHeights)<.02,'wing junction ridge stays level into the main roof');
+  assert(Math.max(...ridgeHeights)-Math.min(...ridgeHeights)<.02,'entire rear wing ridge stays level into the connecting roof');
+  assert(Math.abs(ridgeHeights[0]-15.66)<1e-5,'rear ridges are lowered to the connecting roof height');
   ray.set(new THREE.Vector3(side*22,30,12),new THREE.Vector3(0,-1,0));
   assert(Math.abs(ray.intersectObject(exterior.model,true)[0].point.y-ridgeHeights[0])<1e-5,'connecting and main ridges have the same height');
   for(const dx of [-5,-3,0,3,5])for(const z of [5.25,6,6.75]){
@@ -303,7 +346,54 @@ assert(ray.intersectObject(exterior.model,true)[0].object.isInstancedMesh,'groun
 // two close pairs plus one sash on every floor of the courtyard wall.
 const courtBay=exterior.model.getObjectByName('East courtyard polygonal bay');
 assert(courtBay,'rear courtyard must have its own projecting bay');
-assert(new THREE.Box3().setFromObject(courtBay).min.z<0,'courtyard bay must project beyond the rear wall');
+assert(new THREE.Box3().setFromObject(courtBay).min.z<1.1,'courtyard bay projects more than three units beyond the rear wall');
+{
+  const base=exterior.model.getObjectByName('East courtyard polygonal bay white base');
+  const outline=courtBay.userData.collisionFootprint;
+  assert.deepEqual(base.userData.collisionFootprint,outline,'white base follows the half-octagonal brick walls');
+  assert.equal(outline.length,6,'half octagon has a flat attachment and five exposed sides');
+  assert.equal(outline[2][1],outline[3][1],'the front is flat, without a central corner');
+  for(const [a,b] of [[outline[1],outline[2]],[outline[3],outline[4]]])
+    assert(Math.abs(Math.abs(b[0]-a[0])-Math.abs(b[1]-a[1]))<1e-8,'cheeks are at 45 degrees');
+  const hit=(x,y,z)=>{
+    ray.set(new THREE.Vector3(x,y,z),new THREE.Vector3(0,0,1));
+    return ray.intersectObject(exterior.model,true)[0];
+  };
+  const front=hit(59.4,12.9,-3),other=hit(60.2,12.9,-3),inset=hit(64.1,12.9,-3),end=hit(68,12.9,-3);
+  assert.equal(front.object,courtBay);assert.equal(other.point.z,front.point.z,'both front probes meet one flat wall');
+  assert(Math.abs(inset.point.z-7.3)<1e-5,'the recess is cut through the old pavilion and cross range');
+  assert.equal(end.object.name,'East courtyard fire-exit corner');
+  assert(end.point.z>front.point.z+3&&end.point.z<inset.point.z-2,'fire-exit corner projects slightly from the recess, behind the main bay');
+  const wallLow=hit(48.8,12.9,-3),wallHigh=hit(48.8,13.3,-3);
+  assert.equal(front.object.material,wallLow.object.material,'bay uses adjoining brick material');
+  assert(Math.abs((hit(59.4,13.3,-3).uv.y-front.uv.y)-(wallHigh.uv.y-wallLow.uv.y))<1e-6,'brick courses share the wall texture scale');
+  const openings=exterior.model.userData.courtyardPhotoOpenings.filter(o=>['courtyard-bay','courtyard-recess'].includes(o.face));
+  assert.equal(openings.length,12,'three bay facets and the recess have windows on all three floors');
+  for(const o of openings){
+    const nx=o.face==='courtyard-bay'&&Math.abs(o.x-59.8)>.1?Math.sign(o.x-59.8):0;
+    const normal=new THREE.Vector3(nx,0,-1).normalize(),tangent=new THREE.Vector3(-normal.z,0,normal.x);
+    for(const offset of [-.3,0,.3]){
+      const p=new THREE.Vector3(o.x,o.y+o.h/12,o.z).addScaledVector(tangent,offset*o.w).addScaledVector(normal,.45);
+      ray.set(p,normal.clone().negate());
+      assert.equal(ray.intersectObject(exterior.model,true)[0]?.object.material.color.getHex(),0x78989f,'bay and inset glazing remain exposed');
+    }
+  }
+  // Ray-test the actual roof joins, including the small end hip, rather than
+  // accepting a wall cap or downward-facing triangle as roof coverage.
+  const roofMaterial=exterior.model.getObjectByName('Garden pavilion slate roof').material;
+  for(const [x,z] of [[59.8,1.2],[57.6,2.4],[62,2.4],[63.1,5.9],[64.8,7.5],[65.9,8.6],[66.5,5.2],[68,5.2],[69.5,5.2],[68,7.5],[68,9.9]]){
+    ray.set(new THREE.Vector3(x,30,z),new THREE.Vector3(0,-1,0));
+    const roof=ray.intersectObject(exterior.model,true)[0];
+    assert.equal(roof.object.material,roofMaterial,'slate covers the courtyard wall tops');
+    assert(roof.face.normal.y>0&&roof.point.y>14.3,'roof faces upward above the cornice');
+  }
+  ray.set(new THREE.Vector3(64.75,30,6.1),new THREE.Vector3(0,-1,0));
+  assert(ray.intersectObject(exterior.model,true)[0].point.y<.5,'recess is open to the sky');
+  const obstacles=exteriorObstacles(THREE,exterior.model),blocked=(x,z)=>obstacles.some(o=>obstacleContains(o,x,z,.05));
+  assert(!blocked(64.75,6.4)&&blocked(64.75,7.7),'walking can enter the recess and stops at its back wall');
+  assert(blocked(68,6)&&blocked(59.8,1.3),'projecting corner and bay foundations remain solid');
+  assert(!blocked(56.8,1.3)&&!blocked(62.8,1.3),'cut-away bay corners leave walking space');
+}
 const paired=exterior.model.userData.courtyardPhotoOpenings.filter(o=>o.face==='courtyard-paired-wall');
 assert.equal(paired.length,15,'courtyard paired wall has five sashes on each of three floors');
 for(const y of [2,6.5,11]){
@@ -363,6 +453,9 @@ for(const aspect of [16/9,4/3,9/16])for(const seconds of [0,5,10]){
 // of each hip: the old triangulation left one half flat against the cornice.
 for(const x of [-31,31]){
   const roof=exterior.model.getObjectByName((x<0?'West':'East')+' wing joined slate roof');
+  const roofY=Array.from({length:roof.geometry.attributes.position.count},(_,i)=>roof.geometry.attributes.position.getY(i));
+  assert(Math.abs(Math.min(...roofY)-13.06)<1e-5,'rear eaves match the blue-marked connecting eaves');
+  assert(Math.abs(Math.max(...roofY)-15.66)<1e-5,'both rear roofs match the connecting ridge');
   const topAt=z=>{
     ray.set(new THREE.Vector3(x,80,z),new THREE.Vector3(0,-1,0));
     return ray.intersectObject(exterior.model,true)[0];
@@ -376,11 +469,24 @@ for(const x of [-31,31]){
       ray.set(new THREE.Vector3(x+dx,80,z),new THREE.Vector3(0,-1,0));
       const hit=ray.intersectObject(exterior.model,true)[0];
       assert.equal(hit.object,roof,'slate must cover the entire hip without pale trim breaking through');
-      assert(hit.point.y>14.6,'hip planes must clear the cornice, including both rear corners');
+      assert(hit.point.y>13.1&&hit.point.y<=15.66+.00001,'lowered hip planes clear the cornice and stay below the connecting ridge');
       const normal=hit.face.normal.clone().transformDirection(hit.object.matrixWorld);
       assert(normal.y>0&&normal.y<.99,'both halves of the hip must slope upward from the eaves');
     }
   }
+}
+// The retained upper sashes must also stay exposed immediately below the
+// lowered eaves, including the taller windows at both rear ends.
+for(const [schedule,faces,normal] of [
+  [exterior.model.userData.courtyardPhotoOpenings,['courtyard-west-wing'],[1,0,0]],
+  [exterior.model.userData.westWingPhotoOpenings,['west-wing-outer'],[-1,0,0]],
+  [exterior.model.userData.innerCourtPhotoOpenings,['inner-stair-north'],[0,0,-1]],
+  [exterior.model.userData.westWingPhotoOpenings,['west-wing-upper-end','west-wing-end-sidelight'],[0,0,-1]]
+])for(const o of schedule.filter(o=>faces.includes(o.face)&&o.y>10)){
+  const n=new THREE.Vector3(...normal),p=new THREE.Vector3(o.x+(n.z?.2*o.w:0),o.y+.45*o.h,o.z+(n.x?.2*o.w:0));
+  ray.set(p.clone().addScaledVector(n,2),n.negate());
+  const hit=ray.intersectObject(exterior.model,true)[0];
+  assert(hit?.object.isInstancedMesh&&hit.point.distanceTo(p)<.2,'lowered eaves leave the tops of the existing sashes exposed');
 }
 // img3: basement glazing must remain exposed and the new garden must not
 // obstruct the continuous route from the rear road into the inner court.

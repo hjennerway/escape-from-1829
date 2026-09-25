@@ -1,13 +1,13 @@
-// The rear arms meet the main range at its eaves and ridge. The taller rear
-// roofs ease down before the junction, leaving no detached front hip or wall.
-export const WING_ROOF_JOIN=Object.freeze({start:-6,level:2,wallEnd:7.2,ridgeZ:12,eaves:13.06,rise:2.6});
+// img2.png's blue line continues the connecting roof level along both rear
+// arms. Their walls, eaves and ridges stay level; window positions are retained.
+export const WING_ROOF_JOIN=Object.freeze({start:-6,level:2,wallEnd:7.2,ridgeZ:12,wall:12.8,eaves:13.06,rise:2.6});
 
-export function wingWallHeight(z){
-  const t=Math.max(0,Math.min(1,(z-WING_ROOF_JOIN.start)/(WING_ROOF_JOIN.level-WING_ROOF_JOIN.start)));
-  return 14.3+(12.8-14.3)*t;
+export function wingWallHeight(){
+  return WING_ROOF_JOIN.wall;
 }
 
 export function wingWallGeometry(THREE,base=0){
+  // Retain the builders' original centre datum and lower only the wall top.
   const geometry=new THREE.BoxGeometry(12,14.3-base,30,1,1,30);
   const positions=geometry.attributes.position,centre=(14.3+base)/2;
   for(let i=0;i<positions.count;i++)if(positions.getY(i)>0)
@@ -22,9 +22,9 @@ export function addWingRoofJunction(THREE,{mesh,worldUV,box,brick,white,roof},si
   // single-pitch annex is the only separate roof level behind it.
   const rear=-30.9,half=6.9;
   const stations=[
-    [rear,half,14.53,14.53],
-    [rear+half*.83,half,14.53,18.13],
-    [p.start,half,14.53,18.13],
+    [rear,half,p.eaves,p.eaves],
+    [rear+half*.83,half,p.eaves,p.eaves+p.rise],
+    [p.start,half,p.eaves,p.eaves+p.rise],
     [p.level,6.4,p.eaves,p.eaves+p.rise],
     [p.ridgeZ,6.4,p.eaves,p.eaves+p.rise]
   ];
@@ -47,7 +47,7 @@ export function addWingRoofJunction(THREE,{mesh,worldUV,box,brick,white,roof},si
   const depth=p.wallEnd-5,z=(p.wallEnd+5)/2,base=side<0?0:4;
   mesh(worldUV(new THREE.BoxGeometry(12,12.8-base,depth),1.7),brick,x,(12.8+base)/2,z,true).name=label+' wing connecting walls';
   if(base)box(white,x,base/2,z,12,base,depth);
-  // Follow the falling wall tops with narrow side cornices; no transverse
+  // Follow the level wall tops with narrow side cornices; no transverse
   // slab or end fascia cuts across the connected roof.
   for(const edge of [-1,1])for(const [a,b] of [[-25,p.start],[p.start,p.level],[p.level,p.wallEnd]]){
     const ya=wingWallHeight(a)+.11,yb=wingWallHeight(b)+.11;

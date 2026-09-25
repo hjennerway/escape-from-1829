@@ -82,7 +82,9 @@ assert(roof.face.normal.y>0,'the rear return roof must face upwards');
 assert.equal(model.getObjectByName('Garden pavilion rear return'),undefined);
 assert.equal(model.getObjectByName('Garden pavilion shallow centre'),undefined);
 const pavilion=new THREE.Box3().setFromObject(model.getObjectByName('East garden pavilion'));
-assert(Math.abs(pavilion.min.z-5)<1e-5&&Math.abs(pavilion.max.z-25)<1e-5);
+assert(Math.abs(pavilion.min.z-7.3)<1e-5&&Math.abs(pavilion.max.z-25)<1e-5,'courtyard recess leaves the garden frontage in place');
+const corner=new THREE.Box3().setFromObject(model.getObjectByName('East courtyard fire-exit corner'));
+assert(Math.abs(corner.min.z-5)<1e-5&&Math.abs(corner.max.x-pavilion.max.x)<1e-5,'fire-exit corner retains the continuous east return');
 const wallPlanes=[];
 for(const z of [5.5,7,10,13,16,19,22,24.5]){
   ray.set(new THREE.Vector3(74,9.65,z),new THREE.Vector3(-1,0,0));
@@ -102,3 +104,29 @@ for(const o of model.userData.courtyardPhotoOpenings.filter(o=>o.face==='courtya
 }
 console.log('PASS: one widened coplanar pavilion face, no separate rear tower, exposed glazing, attached courtyard details and clear passage.');
 
+
+// The marked low-range join must have only one exposed wall plane. White
+// foundation/trim and the taller service room used to overlap this brick face.
+for(const z of [10.1,10.6,11.4])for(const y of [1,3.5,4.04,4.3]){
+  ray.set(new THREE.Vector3(76,y,z),new THREE.Vector3(1,0,0));
+  const hits=ray.intersectObject(model,true);
+  assert.equal(hits[0]?.object.name,'Redesmere windowless brick end range','The low range has an uninterrupted brick side');
+  const planes=new Set(hits.filter(hit=>Math.abs(hit.point.x-79.55)<.001).map(hit=>hit.object.uuid+':'+hit.instanceId));
+  assert.equal(planes.size,1,'No coplanar service wall or white base may flicker through the brick');
+}
+const gravel=model.getObjectByName('East wing path to Redesmere courtyard');
+function groundAt(x,z){
+  ray.set(new THREE.Vector3(x,.7,z),new THREE.Vector3(0,-1,0));
+  return ray.intersectObject(model,true)[0];
+}
+for(const [x,z] of [[42,18],[43.8,18.7],[44,24],[48.7,29.5],[60,29.5],[73.6,30.4],[76,30.4],[79.4,30.4],[76,13]]){
+  const hit=groundAt(x,z);
+  assert.equal(hit?.object,gravel,'The filled recess, cross-walk, square corner and passage are one gravel surface');
+  assert(Math.abs(hit.point.y-.28)<1e-6,'Joined gravel remains level');
+}
+for(const x of [48,60,73.6,76,79.4]){
+  assert.equal(groundAt(x,30.5)?.object,gravel,'The complete cross-walk ends at the same straight edge');
+  assert(groundAt(x,30.65)?.object.material.userData.estateGrass,'Lawn immediately beyond the straight edge stays grass');
+}
+for(const [x,z] of [[47,33],[54,34],[80,30]])assert(groundAt(x,z)?.object.material.userData.estateGrass,'Unmarked garden lawn is retained');
+console.log('PASS: clean Redesmere brick join, square level gravel corner, matching cross-walk and gravel-filled recess.');
