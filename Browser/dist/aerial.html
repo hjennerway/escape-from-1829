@@ -76,6 +76,7 @@ import {TOWER_BUILDING_VIEWS} from './tower-buildings.mjs';
 import {ADMIN_ANNEXE_PHOTO_VIEW} from './historic-roads.mjs';
 import {createDayNight,bindDayNight} from './day-night.mjs';
 import {bindTreeToggle} from './tree-layer.mjs';
+import {applyTreeRenderingDefault} from './tree-rendering.mjs';
 import {createDeviceLocationMarker,bindDeviceLocation} from './device-location.mjs';
 import {bindTimelineControls} from './timeline-controls.mjs';
 import {updateRoadLabels} from './road-labels.mjs';
@@ -127,6 +128,7 @@ import {FRONT_CORNER_VIEWS} from './front-inside-corners.mjs';
 import {FRONT_LAWN_TREE_VIEW} from './front-lawn-trees.mjs';
 const renderer=new THREE.WebGLRenderer({canvas:document.getElementById('game'),antialias:true});renderer.setPixelRatio(Math.min(devicePixelRatio,1.5));renderer.setSize(innerWidth,innerHeight);renderer.outputColorSpace=THREE.SRGBColorSpace;renderer.toneMapping=THREE.ACESFilmicToneMapping;renderer.toneMappingExposure=1.25;renderer.shadowMap.enabled=true;renderer.shadowMap.type=THREE.PCFSoftShadowMap;
 const {exterior,layouts,buildingDetail}=await loadAerialScene(THREE,innerWidth/innerHeight),clock=new THREE.Clock();
+applyTreeRenderingDefault(renderer,exterior);
 const buildingSelection=createBuildingSelection(THREE,exterior);
 renderer.domElement.addEventListener('webglcontextrestored',exterior.invalidateShadows);
 // Portrait framing pulls far back; keep the estate visible at every zoom.

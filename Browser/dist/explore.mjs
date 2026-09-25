@@ -1,6 +1,7 @@
 import {createDayNight,bindDayNight} from './day-night.mjs';
 import {resolveLocationView,LOCATION_WALKS} from './location-views.mjs';
 import {bindTreeToggle} from './tree-layer.mjs';
+import {applyTreeRenderingDefault} from './tree-rendering.mjs';
 import {CHURTON_VIEWS} from './churton-ward.mjs';
 import {CHURCH_VIEWS} from './church-grounds.mjs';
 import {UPTON_VIEWS} from './upton-frith-oscroft.mjs';
@@ -66,6 +67,7 @@ try{
   const obstacles=exteriorObstacles(THREE,exterior.model);
   const walker=createWalker(exterior.camera,obstacles);
   function refreshObstacles(){walker.setObstacles(exteriorObstacles(THREE,exterior.model));}
+  applyTreeRenderingDefault(renderer,exterior,refreshObstacles);
   bindTimelineControls(timeline,document.getElementById('layoutControls'),refreshObstacles);
   bindTreeToggle(exterior,document,refreshObstacles);
   const view=resolveLocationView(new URLSearchParams(location.search).get('view'));

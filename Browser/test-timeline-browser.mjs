@@ -70,7 +70,11 @@ try{
  page.setDefaultNavigationTimeout(120000);
  page.on('pageerror',error=>errors.push(error.stack));
  await page.route('**/aerial.html*',async route=>{const response=await route.fetch();await route.fulfill({response,body:(await response.text()).replace('function frame(){','window.__timeline={exterior,layouts,buildingSelection,renderer,controls};\nfunction frame(){')});});
- async function load(query){await page.goto(base+'/aerial.html'+query);await page.waitForFunction(()=>window.__timeline?.renderer.info.render.frame>3,null,{timeout:120000});}
+ async function load(query){
+  await page.goto(base+'/aerial.html'+query);await page.waitForFunction(()=>window.__timeline?.renderer.info.render.frame>3,null,{timeout:120000});
+  assert.equal(await page.evaluate(()=>window.__timeline.exterior.trees.visible),false,'Software rendering starts without trees');
+  await page.keyboard.press('t');
+}
  for(const mode of ['source','compiled']){
   await load('?models='+mode+'&view=plan');
   assert.equal(await page.locator('#periodYear').textContent(),'1916','The default year is 1916 without a period URL');

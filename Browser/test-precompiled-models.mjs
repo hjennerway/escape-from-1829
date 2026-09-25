@@ -50,6 +50,9 @@ try{
     const start=performance.now();await page.goto(baseURL+'/aerial.html'+query);
     try{await page.waitForFunction(()=>window.__models?.renderer.info.render.frame>3,null,{timeout:120000});}
     catch(error){console.error(await page.evaluate(()=>({ready:document.readyState,debug:!!window.__models,frame:window.__models?.renderer.info.render.frame,build:window.__models?.exterior.modelBuild})));throw error;}
+    assert.equal(await page.evaluate(()=>window.__models.exterior.trees.visible),false,'Software rendering starts without trees');
+    await page.keyboard.press('t');
+    await page.evaluate(()=>new Promise(resolve=>requestAnimationFrame(()=>requestAnimationFrame(resolve))));
     return {...await page.evaluate(()=>({
       ...window.__models.exterior.modelBuild,triangles:window.__models.renderer.info.render.triangles,calls:window.__models.renderer.info.render.calls,
       levels:window.__models.buildingDetail?.entries.map(e=>e.level)

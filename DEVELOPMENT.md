@@ -2984,3 +2984,24 @@ Validation: all 75 scripts in the complete Browser npm test sequence pass,
 including both repaired snapshot checks. git diff --check passes. Full output
 is saved in Browser/artifacts/test-snapshot-repair-suite.log. No rendering
 changes were made by this repair, so no model rebuild or visual rerun was needed.
+
+## Pages compiled-scene screenshot timeout (September 25)
+
+The 120-second navigation setting did not cover screenshot capture, which
+still used Playwright's 30-second general default. Both compiled-scene
+browser scripts now also set the general timeout to 120 seconds before
+loading a page. This covers source/compiled comparisons, timeline and mobile
+screenshots, and browser interactions under software WebGL. Navigation and
+rendered-frame readiness keep their existing 120-second limits; all geometry,
+image comparison, control and fallback assertions remain enabled.
+
+Validation: npm test and npm run test:compiled pass locally with Node.js 24
+and Chrome; the compiled checks use software WebGL. A controlled screenshot
+experiment held font readiness for 35 seconds: the navigation-only setting
+failed at 30.01 seconds, while the added general timeout captured the image
+at 35.02 seconds. Logs are Browser/artifacts/ci-screenshot-timeout-suite.log,
+ci-screenshot-timeout-compiled.log and ci-screenshot-timeout-delayed.log.
+
+Only validation scripts and documentation changed. The existing compiled
+asset matched the current source fingerprint; no model rebuild was needed.
+Browser runtime, model sources and Unity/Blender exports were unchanged.
