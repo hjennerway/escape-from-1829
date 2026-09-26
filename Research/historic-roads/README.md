@@ -418,3 +418,18 @@ matching the drive: they appear from 1896 through 1938 at the available timeline
 stops and disappear when the historic drive is hidden. Parsons keeps its
 original endpoint when shown alone. This is a visual junction correction,
 not a change to the mapped coordinates or historical dates.
+
+## Main/admin frontage paving — 26 September 2026
+
+The owner's [red-circled frontage screenshot](admin-frontage-paving-marked.png)
+extends the existing road beneath the building so no grass remains between
+its front walls and the carriageway. A continuous asphalt apron overlaps the
+central recessed facade and both projecting pavilions by 0.15 scene units,
+then returns along the existing road centreline. The resurfacing layer covers
+the former building-facing kerb and joins the existing east-side paving.
+
+This supersedes the grass setback retained by the 17 September frontage
+correction. The building, road centrelines, semicircular lawn, outer road edge
+and teardrop keep their geometry. The apron follows The Main's existing
+Historic/timeline visibility. Browser modelling source and local compiled
+aerial assets are updated; Unity and Blender exports are unchanged.

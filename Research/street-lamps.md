@@ -46,3 +46,24 @@ These four placements override the automatic sampling locally, after the other
 roadside positions have been generated. The existing Annexe period parents
 control the posts and night lighting. The net change is three additional
 fixtures in the Annexe periods; other periods retain their existing counts.
+
+## Main/admin lamp positions and ground contact (26 September 2026)
+
+The owner's [purple-marked view](admin-lamps-marked.png) identifies the three
+posts around the teardrop lawn. The follow-up request places them right at the
+road edge, on the grass. The two island posts therefore sit just inside its
+kerb, and the third sits outside the outer-road kerb. All three square concrete
+feet clear the kerb by about 0.08 scene metres. Final world X/Z centres are
+(248.883, 25.553), (252.572, 39.621), and (266.558, 22.056), respectively.
+The screenshot positions are approximate placement guides, not survey data.
+
+The island lawn is at Y=0.37 and the outer terrain at Y=-0.15. Each base extends
+0.03 metres below its own ground surface. The instanced columns use a local
+foreground depth bias so the junction's biased paving/lawn layers cannot hide
+the bottom of the shaft and make it appear airborne. Their arm bearings and
+road-period ownership are retained. Night lights follow the per-fixture height.
+
+Placement happens before instancing, batching and walking collision extraction.
+Other roadside fixtures retain their positions. Browser model sources and the
+local generated aerial model are updated; Unity and Blender are not regenerated.
+Registration, ground-contact reports and previews use Browser/artifacts/admin-lamps-*.

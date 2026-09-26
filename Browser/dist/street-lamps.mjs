@@ -86,15 +86,35 @@ export function addRoadsideLampPosts(THREE,exterior,layouts){
  }).concat(entrance.avenue);
  const forecourt=layouts.historicRoads.getObjectByName('Annexe central asphalt forecourt');
  routes.push({owner:forecourt.parent,name:'Annexe entrance forecourt',fixtures:entrance.forecourt});
+ // Three purple-X placements beside Main/admin, registered from the owner's
+ // screenshot (Research/street-lamps.md), then brought to the grass edge with
+ // 8 cm between the concrete foot and kerb. Replace after sampling so adjacent
+ // roads keep their fixtures. Retain each arm's bearing and bury the foot 3 cm
+ // into its actual lawn surface: the teardrop is raised above the main terrain.
+ const admin=routes.find(r=>r.owner.name==='Admin teardrop circulation');
+ const islandY=layouts.historicRoads.getObjectByName('Admin teardrop grass island').position.y;
+ const adminPositions=[
+  {id:'Admin teardrop near lawn',x:248.883,z:25.553,y:islandY-.03},
+  {id:'Admin teardrop far lawn',x:252.572,z:39.621,y:islandY-.03},
+  {id:'Admin outer grass verge',x:266.558,z:22.056,y:exterior.terrain.position.y-.03}
+ ];
+ admin.fixtures=admin.fixtures.map((p,i)=>({...p,...adminPositions[i]}));
  for(const route of routes){
   const {fixtures}=route;if(!fixtures.length)continue;
   const group=new THREE.Group();group.name='Street lamps · '+(route.name??route.owner.name);
   group.userData.streetLamps=fixtures;route.owner.add(group);
   for(const part of parts){
-   const mesh=new THREE.InstancedMesh(part.geometry,part.material,fixtures.length);mesh.name=part.name;
+   let material=part.material;
+   if(route===admin&&part.name.startsWith('Pebbledash')){
+    // The resurfaced junction uses a drawing-depth bias. Apply its foreground
+    // bias to these columns too, so it cannot clip the foot above the lawn.
+    material=material.clone();material.polygonOffset=true;
+    material.polygonOffsetFactor=-8;material.polygonOffsetUnits=-16;
+   }
+   const mesh=new THREE.InstancedMesh(part.geometry,material,fixtures.length);mesh.name=part.name;
    mesh.castShadow=true;mesh.receiveShadow=true;
    if(part.name.startsWith('Pebbledash'))mesh.userData.collisionFootprint=[[-.17,-.17],[.17,-.17],[.17,.17],[-.17,.17]];
-   fixtures.forEach((p,i)=>{rotation.setFromAxisAngle(axis,p.angle);matrix.compose(new THREE.Vector3(p.x,-.15,p.z),rotation,scale);mesh.setMatrixAt(i,matrix);});
+   fixtures.forEach((p,i)=>{rotation.setFromAxisAngle(axis,p.angle);matrix.compose(new THREE.Vector3(p.x,p.y??-.15,p.z),rotation,scale);mesh.setMatrixAt(i,matrix);});
    mesh.instanceMatrix.needsUpdate=true;group.add(mesh);
   }
  }

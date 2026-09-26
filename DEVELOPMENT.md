@@ -3570,3 +3570,28 @@ All 77 standard check commands pass across the initial suite, its remaining
 commands and the two refreshed-snapshot rechecks. The final compiled source
 fingerprint matches the delivered browser source. Validation logs and scope
 comparison JSON use Browser/artifacts/redesmere-frontage-*.
+
+## Main/admin road extended beneath the frontage (26 September 2026)
+
+Added one junction-layer asphalt apron in
+`Browser/dist/historic-road-layout.mjs` across the grass strip in front of
+Main/admin. It overlaps beneath the recessed wall and both projecting bays,
+covering the old kerb where it joins the existing road. The road centrelines,
+outer verge, semicircular island and building geometry retain their positions.
+The surface uses the existing The Main visibility group and remains below
+walking collision height. See the [frontage reference notes](Research/historic-roads/README.md#mainadmin-frontage-paving--26-september-2026).
+
+Source frontage and plan views were visually checked. Thirteen surface probes
+across the former grass strip now reach asphalt; historic-road and admin
+teardrop checks pass. Evidence uses `Browser/artifacts/admin-frontage-paving-*`.
+
+The complete `npm test` suite passes. The local aerial model was rebuilt, and
+its frontage and plan previews were checked with all thirteen former-grass
+surface probes also passing in compiled mode. Unity and Blender exports were
+not regenerated.
+
+The source/compiled rendering comparison, full-detail rendering, fallback
+loading and all timeline/walking checks pass. Concurrent lamp-placement work
+changed the shared source during validation; the local model was refreshed
+again afterward, with a separate final compiled frontage capture. The road
+change does not modify lamp or lighting sources.

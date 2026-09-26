@@ -22,7 +22,7 @@ export function createDayNight(THREE,exterior,renderer,{walking=false}={}){
  scene.updateMatrixWorld(true);
  model.traverse(owner=>{
   if(owner.userData.streetLamps)for(const p of owner.userData.streetLamps){
-   const position=new THREE.Vector3(p.x+Math.cos(p.angle)*LAMP_HEAD[0],LAMP_HEAD[1],p.z-Math.sin(p.angle)*LAMP_HEAD[0]).applyMatrix4(owner.matrixWorld);
+   const position=new THREE.Vector3(p.x+Math.cos(p.angle)*LAMP_HEAD[0],LAMP_HEAD[1]+(p.y??-.15)+.15,p.z-Math.sin(p.angle)*LAMP_HEAD[0]).applyMatrix4(owner.matrixWorld);
    lamps.push({owner,position,visible:false,distance:0});
   }
   if(owner.userData.lampPost)lamps.push({owner,position:new THREE.Vector3(...LAMP_HEAD).add(new THREE.Vector3(0,.15,0)).applyMatrix4(owner.matrixWorld),visible:false,distance:0});

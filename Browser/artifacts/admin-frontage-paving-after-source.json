@@ -1,0 +1,99 @@
+{
+  "build": {
+    "mode": "procedural",
+    "milliseconds": 1279.2999999999302
+  },
+  "samples": [
+    {
+      "point": [
+        161,
+        38.7
+      ],
+      "surface": "black road"
+    },
+    {
+      "point": [
+        168,
+        40.8
+      ],
+      "surface": "black road"
+    },
+    {
+      "point": [
+        173.5,
+        38.7
+      ],
+      "surface": "black road"
+    },
+    {
+      "point": [
+        175,
+        35.5
+      ],
+      "surface": "black road"
+    },
+    {
+      "point": [
+        180,
+        35.5
+      ],
+      "surface": "black road"
+    },
+    {
+      "point": [
+        187,
+        35.5
+      ],
+      "surface": "black road"
+    },
+    {
+      "point": [
+        191,
+        39.8
+      ],
+      "surface": "black road"
+    },
+    {
+      "point": [
+        205,
+        39.8
+      ],
+      "surface": "black road"
+    },
+    {
+      "point": [
+        212,
+        35.5
+      ],
+      "surface": "black road"
+    },
+    {
+      "point": [
+        218.8,
+        38
+      ],
+      "surface": "black road"
+    },
+    {
+      "point": [
+        220,
+        42.5
+      ],
+      "surface": "black road"
+    },
+    {
+      "point": [
+        226,
+        42.5
+      ],
+      "surface": "black road"
+    },
+    {
+      "point": [
+        232.4,
+        40.5
+      ],
+      "surface": "black road"
+    }
+  ]
+}

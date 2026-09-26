@@ -1,0 +1,99 @@
+{
+  "build": {
+    "mode": "procedural",
+    "milliseconds": 1180.7000000000698
+  },
+  "samples": [
+    {
+      "point": [
+        161,
+        38.7
+      ],
+      "surface": null
+    },
+    {
+      "point": [
+        168,
+        40.8
+      ],
+      "surface": null
+    },
+    {
+      "point": [
+        173.5,
+        38.7
+      ],
+      "surface": null
+    },
+    {
+      "point": [
+        175,
+        35.5
+      ],
+      "surface": null
+    },
+    {
+      "point": [
+        180,
+        35.5
+      ],
+      "surface": null
+    },
+    {
+      "point": [
+        187,
+        35.5
+      ],
+      "surface": null
+    },
+    {
+      "point": [
+        191,
+        39.8
+      ],
+      "surface": null
+    },
+    {
+      "point": [
+        205,
+        39.8
+      ],
+      "surface": null
+    },
+    {
+      "point": [
+        212,
+        35.5
+      ],
+      "surface": null
+    },
+    {
+      "point": [
+        218.8,
+        38
+      ],
+      "surface": null
+    },
+    {
+      "point": [
+        220,
+        42.5
+      ],
+      "surface": "stone kerb"
+    },
+    {
+      "point": [
+        226,
+        42.5
+      ],
+      "surface": null
+    },
+    {
+      "point": [
+        232.4,
+        40.5
+      ],
+      "surface": null
+    }
+  ]
+}

@@ -32,6 +32,7 @@ export const HISTORIC_ROADS_SOURCE=Object.freeze({
  annexeOuterLoop:ANNEXE_LOOP_ROAD.source,annexeFrontageRevision:ANNEXE_LOOP_ROAD.frontageRevision,
  adminPineRoad:'Research/historic-roads/pine-road-reroute.png',
  adminFrontage:'Research/historic-roads/admin-frontage-closer.png',
+ adminFrontagePaving:'Research/historic-roads/admin-frontage-paving-marked.png',
  parsonsRetrace:'Research/historic-roads/parsons-yellow-retrace.png',
  annexeFrontRoads:'Research/annexe-placement/front-roads-annotated.png',
  annexeRearRemoval:'Research/annexe-frontage-adjustment/remove-rear-roads.png',annexeSweepRevision:'Research/annexe-frontage-adjustment/narrow-entrance.png',
@@ -130,6 +131,7 @@ const larktonJunction={name:'Annexe Larkton Parsons open junction',surface:'junc
  ...larktonMouth.map((p,i)=>p.map((v,k)=>v+larktonOffsets[i][k])),
  ...larktonMouth.map((p,i)=>p.map((v,k)=>v-larktonOffsets[i][k])).reverse()
 ]};
+const adminFrontageLane=HISTORIC_ROAD_TRACES.find(r=>r.name==='Historic lane continuation').points;
 // The yellow-marked footpath is gravel; vehicular approaches remain asphalt.
 export const HISTORIC_GRAVEL=Object.freeze([ANNEXE_GRAVEL_PATH]);
 export const HISTORIC_PAVING=Object.freeze([
@@ -143,6 +145,13 @@ export const HISTORIC_PAVING=Object.freeze([
  larktonJunction,
  ...mainAdminLaneJunctions(HISTORIC_ROADS),
  ...adminTeardropPaving(HISTORIC_ROAD_TRACES),
+ // Extend the carriageway beneath the recessed facade and projecting bays.
+ // Junction resurfacing also buries the former building-facing road border.
+ {name:'Admin frontage paving',surface:'junction',points:[
+  [160.35,38.45],[173.85,38.45],[173.85,35.25],
+  [219.15,35.25],[219.15,40.05],[232.65,40.05],[232.65,45.9],
+  ...adminFrontageLane.slice(13,72).reverse()
+ ]},
  ...PARSONS_NORTH_BEND_PAVING,
  // Cover the segmented inner kerb before drawing one smooth grass boundary.
  {name:'Admin teardrop inner resurfacing',surface:'junction',points:teardropRoad},
