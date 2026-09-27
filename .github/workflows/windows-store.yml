@@ -1,0 +1,97 @@
+name: Build Windows game and Store package
+
+on:
+  push:
+    branches: [main]
+    paths: ['Browser/**', 'Desktop/**', '.github/workflows/windows-store.yml']
+  pull_request:
+    branches: [main]
+    paths: ['Browser/**', 'Desktop/**', '.github/workflows/windows-store.yml']
+  workflow_dispatch:
+    inputs:
+      package_kind:
+        description: 'Preview for local testing, or Store with Partner Center identity'
+        type: choice
+        options: [preview, store]
+        default: preview
+
+permissions:
+  contents: read
+
+concurrency:
+  group: windows-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  package:
+    runs-on: windows-latest
+    timeout-minutes: 45
+    steps:
+      - name: Check out source
+        uses: actions/checkout@v4
+      - name: Set up Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+          cache: npm
+          cache-dependency-path: |
+            Browser/package-lock.json
+            Desktop/package-lock.json
+      - name: Install browser tools
+        run: npm ci --prefix Browser
+      - name: Install desktop tools
+        run: npm ci --prefix Desktop
+      - name: Install model compiler browser
+        working-directory: Browser
+        run: npx playwright install chromium
+      - name: Check desktop packaging boundaries and Store metadata
+        run: npm test --prefix Desktop
+      - name: Check shared model source
+        run: npm run test:models --prefix Browser
+      - name: Build shared web assets
+        run: npm run build:models --prefix Browser
+      - name: Check compiled scene and timeline
+        run: npm run test:compiled --prefix Browser
+      - name: Set up Microsoft packaging tools
+        run: ./Desktop/scripts/setup-sdk.ps1
+      - name: Package Windows game
+        working-directory: Desktop
+        env:
+          PACKAGE_KIND: ${{ inputs.package_kind || 'preview' }}
+          STORE_IDENTITY_NAME: ${{ vars.STORE_IDENTITY_NAME }}
+          STORE_PUBLISHER: ${{ vars.STORE_PUBLISHER }}
+          STORE_PUBLISHER_DISPLAY_NAME: ${{ vars.STORE_PUBLISHER_DISPLAY_NAME }}
+        run: |
+          if ($env:PACKAGE_KIND -eq 'store') {
+            npm run package:store
+          } else {
+            npm run package:preview
+          }
+          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+      - name: Test packaged game offline
+        working-directory: Desktop
+        run: npm run test:desktop -- --packaged
+      - name: Upload runnable Windows folder
+        uses: actions/upload-artifact@v4
+        with:
+          name: EscapeFrom1829-Windows-x64
+          path: Desktop/out/EscapeFrom1829-win32-x64/
+          if-no-files-found: error
+      - name: Upload MSIX and build inventory
+        uses: actions/upload-artifact@v4
+        with:
+          name: EscapeFrom1829-MSIX-${{ inputs.package_kind || 'preview' }}
+          path: |
+            Desktop/out/*.msix
+            Desktop/out/web-build.json
+          if-no-files-found: error
+      - name: Upload desktop test evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: Windows-test-evidence
+          path: |
+            Desktop/artifacts/*.png
+            Desktop/artifacts/*.json
+            Desktop/artifacts/*.log
+          if-no-files-found: ignore

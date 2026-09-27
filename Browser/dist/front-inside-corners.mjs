@@ -1,3 +1,4 @@
+import {FRONT_BASEMENT_OUTER_FLIGHT} from './front-basement.mjs';
 // The yellow polyline in Research/front-inside-corners/shape.png, registered
 // to the existing east wing's inner wall (x=32) and frontage (z=19.7).
 // Dimensions are photo estimates; the west corner reflects the same plan.
@@ -207,6 +208,14 @@ export function refineFrontInsideCorners(THREE,{model,batches,box,mesh,worldUV,b
     const shape=new THREE.Shape(points.map(([x,z])=>new THREE.Vector2(x,-z)));
     shape.lineTo(side*32,-23.9);shape.lineTo(side*30.5,-25.1);shape.quadraticCurveTo(side*29.1,-24.6,side*28.5,-22.4);shape.lineTo(side*28.4,-19.7);shape.closePath();
     const court=mesh(new THREE.ShapeGeometry(shape),asphalt,0,.205,0);court.rotation.x=-Math.PI/2;court.name=label+' inside corner asphalt court';
+    // The outer semi-basement stairs enter from this corner along the facade.
+    // Remove the court above the treads and the end of the lower walk.
+    const {outer,z,width}=FRONT_BASEMENT_OUTER_FLIGHT;
+    const cut=[[28.4,z-width/2],[outer,z-width/2],[outer,z+width/2],[28.4,z+width/2]].map(([x,z])=>[side*x,z]);
+    if(side<0)cut.reverse();
+    court.updateMatrixWorld(true);const oldCourt=court.geometry;
+    court.geometry=cutGeometry(THREE,oldCourt,court.matrixWorld,cut);oldCourt.dispose();
+    court.position.set(0,0,0);court.rotation.set(0,0,0);
     const drain=mesh(new THREE.BoxGeometry(.4,.025,.28),iron,side*31.4,.226,21.7);drain.name=label+' inside corner drain';
   }
   model.userData.frontInsideCornerOpenings=openings;

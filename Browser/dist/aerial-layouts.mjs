@@ -40,6 +40,8 @@ export function attachAerialLayouts(exterior,{shared,historic,modern,roads,entra
     if(layout!=='historic'&&layout!=='modern')throw new Error('Unknown estate layout: '+layout);
     state[layout]=Boolean(visible);historic.visible=state.historic;modern.visible=state.modern;
     shared.visible=state.historic||state.modern;
+    const excavationFill=exterior.terrain.getObjectByName('Unexcavated frontage terrain');
+    if(excavationFill)excavationFill.visible=!shared.visible;
     carParkTrees.visible=!state.modern;
     entrance.visible=state.historic||state.modern; // Shared sweeping approach from Vivienne Smith Lane into 1829.
     for(const object of superseded)object.visible=!state.historic;

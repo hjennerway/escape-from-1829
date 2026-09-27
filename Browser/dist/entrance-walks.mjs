@@ -1,3 +1,4 @@
+import {WEST_SIDE_BASEMENT} from './west-side-basement.mjs';
 // Matching gravel walks connect Reception's semicircle to both entrance wings.
 export const FRONT_FORECOURT=Object.freeze({center:[0,27.4],radius:13});
 export function addEntranceWalks(THREE,{model,material}){
@@ -8,20 +9,21 @@ export function addEntranceWalks(THREE,{model,material}){
     walk.name=name;model.add(walk);return walk;
   }
   function polygon(points){return new THREE.Shape(points.map(([x,z])=>new THREE.Vector2(x,-z)));}
-  // Inner edge follows the stair cheeks, Reception, recessed frontage and bay;
-  // widen the lawn-facing edge from 1.2 to 2 units without moving the masonry.
-  const outline=[
-    [-1.6,27.4],[-1.6,26.2],[-4.24,26.2],[-4.24,19.6],[-7.1,19.6],
-    [-7.1,17.3],[-22.6,17.3],[-22.6,19.7],[-32,19.7],
+  // The facade strip is now a sunken walk with stairs at both ends. Retain
+  // the original grade only beyond the stair mouths and beside the wing.
+  const inner=[[-1.6,27.4],[-1.6,26.2],[-4.24,26.2],[-4.24,24],
+    [-6.24,24],[-6.24,28.2],[-3.6,28.2],[-3.6,29.4],[-1.6,29.4]];
+  const outer=[
+    [-32,19.7],
     [-32,27],[-29,27],[-29,33.15],[-27.5,33.15],
     [-27.5,37.85],[-29,37.85],[-29,43.2],[-27,43.2],
     [-27,39.85],[-25.5,39.85],[-25.5,31.15],[-27,31.15],
-    [-27,25],[-30,25],[-30,21.7],[-20.6,21.7],
-    [-20.6,19.3],[-9.1,19.3],[-9.1,21.6],[-6.24,21.6],
-    [-6.24,28.2],[-3.6,28.2],[-3.6,29.4],[-1.6,29.4]
+    [-27,25],[-30,25],[-30,21.7],[-30.75,21.7],[-30.75,19.7]
   ];
   for(const side of [1,-1]){
-    paving(polygon(outline.map(([x,z])=>[side*x,z])),(side===1?'West':'East')+' entrance wall walk');
+    const label=side===1?'West':'East';
+    paving(polygon(inner.map(([x,z])=>[side*x,z])),label+' entrance wall walk');
+    paving(polygon(outer.map(([x,z])=>[side*x,z])),label+' entrance wing walk');
   }
   const branchWidth=3.2,branchFront=FRONT_FORECOURT.center[1]+branchWidth;
   for(const side of [-1,1]){
@@ -44,13 +46,19 @@ export function addEntranceWalks(THREE,{model,material}){
   // Sit just above the old small front strips, avoiding a patchwork of colours.
   paving(polygon([[-27,43],[-29,43],[-47,43],[-47,48.6],[-27,48.6]]),
     'West wing path to fire exit stairs',.28);
-  // One gravel surface joins the west court, apron and garden return. The
-  // annotated outer edge runs straight to Parsons Lane; its tip tucks below
-  // the higher road, while the inset keeps the garden lawn and verge intact.
-  paving(polygon([[-73.5,-38],[-71.5,-38],[-71.5,-26],[-37,-26],
-    [-37,0],[-55.5,0],[-55.5,25.5],[-68.95,25.5],[-68.95,42.5],
+  // The court is flush with the lawn beside the basement retaining wall.
+  // A gentle transition beyond the court joins the existing higher apron.
+  paving(polygon([[-73.5,-38],[-71.5,-38],[-71.5,-26],[-39.8,-26],
+    [-39.8,-4.5],[-39,-4.5],[-39,-1],[-37,-1],[-37,0],
+    [-55.5,0],[-73.5,0]]),'West courtyard and outer return path',WEST_SIDE_BASEMENT.grade);
+  const transition=paving(polygon([[-73.5,0],[-55.5,0],[-55.5,4],[-73.5,4]]),
+    'West courtyard gradual apron transition',WEST_SIDE_BASEMENT.grade);
+  const tp=transition.geometry.attributes.position;
+  for(let i=0;i<tp.count;i++)tp.setZ(i,-tp.getY(i)/4*(.28-WEST_SIDE_BASEMENT.grade));
+  transition.geometry.computeVertexNormals();
+  paving(polygon([[-73.5,4],[-55.5,4],[-55.5,25.5],[-68.95,25.5],[-68.95,42.5],
     [-47,42.5],[-47,43],[-46.9,43],[-46.9,45],[-73.5,45]]),
-    'West courtyard and outer return path',.28);
+    'West outer apron and garden return',.28);
   const east=new THREE.Shape();
   // Fill the small grass recess against the cross-range wall. Continue the
   // same surface through the garden cross-walk and passage, with one straight

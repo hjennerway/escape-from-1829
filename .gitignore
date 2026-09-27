@@ -8,6 +8,13 @@
 .utmp/
 /Browser/node_modules/
 /Browser/dist/compiled/
+/Desktop/node_modules/
+/Desktop/web/
+/Desktop/out/
+/Desktop/.cache/
+/Desktop/artifacts/
+/Desktop/assets/
+/Desktop/store-identity.local.json
 /[Ll]ibrary/
 /[Tt]emp/
 /[Oo]bj/

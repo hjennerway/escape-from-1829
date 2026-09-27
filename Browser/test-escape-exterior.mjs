@@ -5,7 +5,7 @@ import {CENTRAL_BACK_VIEWS} from './dist/central-back.mjs';
 import assert from 'node:assert/strict';
 import * as THREE from './dist/vendor/three.module.js';
 import {createEscapeExterior,ESCAPE_MAST,MAP_REAR_PROPORTIONS} from './dist/escape-exterior.mjs';
-import {WEST_FRONT_FACADE_Z} from './dist/west-front-photo-detail.mjs';
+import {WEST_FRONT_E_PLAN} from './dist/west-front-photo-detail.mjs';
 import {INNER_COURT_SIDE_PROFILE} from './dist/inner-court-photo-detail.mjs';
 import {sampleEscape} from './dist/escape-cutscene.mjs';
 import {sampleArrival} from './dist/arrival-cutscene.mjs';
@@ -73,17 +73,17 @@ const originalBay=exterior.model.getObjectByName('East curved bay');
 const squareBay=exterior.model.getObjectByName('East garden pavilion');
 assert(originalBay&&squareBay,'right frontage must retain the original curved bay and add a square projection');
 assert.equal(exterior.model.getObjectByName('East curved bay duplicate'),undefined,'the added round bay must be removed');
-// The marked east frontage bay shares the west half-octagonal plan, with
-// physical brick courses, aligned roof/bands and a solid white ground floor.
+// The east frontage retains its established half-octagonal plan. The west
+// garden bay is now proportioned independently from the front photograph.
 {
   const base=exterior.model.getObjectByName('East curved bay white base');
-  const west=exterior.model.getObjectByName('West curved bay');
   const normalize=points=>{
     const w=Math.max(...points.map(p=>p[0]))-Math.min(...points.map(p=>p[0]));
     const d=Math.max(...points.map(p=>p[1]));
     return points.map(([x,z])=>[x/w,z/d]);
   };
-  assert.deepEqual(normalize(base.userData.collisionFootprint),normalize(west.userData.collisionFootprint),'east and west bays have the same half-octagonal proportions');
+  const expected=[[-.5,0],[-.5,.28],[-.25,1],[.25,1],[.5,.28],[.5,0]];
+  normalize(base.userData.collisionFootprint).forEach((p,i)=>p.forEach((v,j)=>assert(Math.abs(v-expected[i][j])<1e-9,'east bay retains its existing half-octagonal proportions')));
   const r=new THREE.Raycaster(),hit=(x,y,z,dx=0,dz=-1)=>{
     r.set(new THREE.Vector3(x,y,z),new THREE.Vector3(dx,0,dz).normalize());
     return r.intersectObject(exterior.model,true)[0];
@@ -475,6 +475,18 @@ for(const x of [-31,31]){
     }
   }
 }
+// Look below the slate overhang at the stair cornice. Its exposed top must
+// have real clearance over the brick, rather than coplanar competing faces.
+for(const side of [-1,1]){
+  const wall=exterior.model.getObjectByName((side<0?'West mirrored ':'')+'Inner court projecting brick block');
+  const wallTop=new THREE.Box3().setFromObject(wall).max.y;
+  for(const dx of [-6.4,6.4])for(const z of [-30.4,-29,-27.5,-25,-24.6]){
+    ray.set(new THREE.Vector3(side*31+dx,13.04,z),new THREE.Vector3(0,-1,0));
+    const top=ray.intersectObject(exterior.model,true)[0];
+    assert(top.object.isInstancedMesh&&!top.object.material.map,'pale stair cornice covers the wall top');
+    assert(top.point.y-wallTop>.025,'rear cornice must clear brickwork to prevent roof-edge z-fighting');
+  }
+}
 // The retained upper sashes must also stay exposed immediately below the
 // lowered eaves, including the taller windows at both rear ends.
 for(const [schedule,faces,normal] of [
@@ -604,12 +616,12 @@ assert.equal(exterior.model.children.filter(o=>o.name==='West curved bay').lengt
 assert.equal(exterior.model.children.filter(o=>o.name==='West front chimney').length,2);
 assert(exterior.model.getObjectByName('West front iron return stair').children.length>=12);
 for(const o of westFront.filter(o=>o.face==='west-front-square')){
-  ray.set(new THREE.Vector3(o.x,o.y,27),new THREE.Vector3(0,0,-1));
+  ray.set(new THREE.Vector3(o.x,o.y,35),new THREE.Vector3(0,0,-1));
   const hit=ray.intersectObject(exterior.model,true)[0];
-  assert(hit.object.isInstancedMesh&&hit.point.z>WEST_FRONT_FACADE_Z&&hit.point.z<20,'front glazing must be exposed on the aligned facade');
+  assert(hit.object.isInstancedMesh&&hit.point.z>WEST_FRONT_E_PLAN.outerFront&&hit.point.z<WEST_FRONT_E_PLAN.outerFront+.3,'front glazing must be exposed on the extended outer arm');
 }
 const westSquareBounds=new THREE.Box3().setFromObject(exterior.model.getObjectByName('West front square pavilion'));
-assert.equal(westSquareBounds.max.z,WEST_FRONT_FACADE_Z);
+assert.equal(westSquareBounds.max.z,WEST_FRONT_E_PLAN.outerFront);
 const flanking=westFront.filter(o=>o.face==='west-front-bay-flank');
 assert.equal(flanking.length,3,'broad lower glazing flanks the bay, with the fourth position occupied by the garden door');
 for(const o of flanking){
@@ -617,9 +629,10 @@ for(const o of flanking){
   const hit=ray.intersectObject(exterior.model,true)[0];
   assert(hit.object.isInstancedMesh&&hit.point.z>19.5&&hit.point.z<20,'bay flanking glazing must remain exposed beside the bay and forward range');
 }
-ray.set(new THREE.Vector3(-57.5,13.2,30),new THREE.Vector3(0,0,-1));
-assert(Math.abs(ray.intersectObject(exterior.model,true)[0].point.z-WEST_FRONT_FACADE_Z)<.01,'stair wall must sit flush with the pavilion');
-assert(new THREE.Box3().setFromObject(exterior.model.getObjectByName('West front iron return stair')).max.z<23,'retained iron stairs move back with the doors');
+ray.set(new THREE.Vector3(WEST_FRONT_E_PLAN.outerRight+2,13.2,24),new THREE.Vector3(-1,0,0));
+assert(Math.abs(ray.intersectObject(exterior.model,true)[0].point.x-WEST_FRONT_E_PLAN.outerRight)<.01,'stair wall is the inner return of the outer E arm');
+const returnStairBounds=new THREE.Box3().setFromObject(exterior.model.getObjectByName('West front iron return stair'));
+assert(returnStairBounds.min.x>WEST_FRONT_E_PLAN.outerRight&&returnStairBounds.max.x<WEST_FRONT_E_PLAN.outerRight+5&&returnStairBounds.min.z>19.5&&returnStairBounds.max.z<26,'retained stairs fit inside the recess beside their doors');
 // Check actual roof edges against the relative lengths in the yellow marks.
 const {wingRear,centralRear,courtyardRear}=MAP_REAR_PROPORTIONS;
 assert(centralRear<wingRear&&centralRear>courtyardRear,'centre must end between the two wing ends and east courtyard return');

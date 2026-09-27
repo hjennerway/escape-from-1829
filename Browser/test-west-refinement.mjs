@@ -4,6 +4,7 @@ import {createEscapeExterior} from './dist/escape-exterior.mjs';
 import {exteriorObstacles,obstacleContains} from './dist/explore-controls.mjs';
 import {WEST_REFINEMENT_VIEWS} from './dist/west-refinement.mjs';
 import {WEST_COURT_ALIGNMENT} from './dist/west-court-photo-detail.mjs';
+import {WEST_FRONT_E_PLAN} from './dist/west-front-photo-detail.mjs';
 import {LOCATION_VIEWS,LOCATION_WALKS} from './dist/location-views.mjs';
 globalThis.document={createElement:()=>({width:0,height:0,getContext:()=>({fillRect(){}})})};
 const {model}=createEscapeExterior(THREE,4/3);model.updateMatrixWorld(true);
@@ -18,13 +19,13 @@ for(const o of model.userData.westEndPhotoOpenings){
 for(const z of [4.5,15.5,18.5])for(const y of [6.3,11.8])
   assert.equal(hit([-73,y,z],[1,0,0]).object.name,'West end continuous wall','unfenestrated end stays brick');
 assert(!model.userData.eastPhotoOpenings.some(o=>['west-outer-side','west-front-square-return'].includes(o.face)),'remove the superseded window grid');
-for(const z of [4,8,12,16,18.5]){
+for(const z of [4,8,12]){
   const top=hit([-70,30,z],[0,-1,0]);
   assert.equal(top.object.name,'West end continuous slate roof');
   assert(top.face.normal.y>0&&top.point.y>15.4,'one upward-facing hip covers the end');
 }
 for(const [name,face,bx,bz,side,depth] of [
-  ['West curved bay','west-front-bay',-50.8,19.5,1,2.8],
+  ['West curved bay','west-front-bay',WEST_FRONT_E_PLAN.bayX,WEST_FRONT_E_PLAN.bayRoot,1,2.8],
   ['West courtyard polygonal bay','west-court-bay',-58.4,WEST_COURT_ALIGNMENT.wallZ-.1,-1,3.35]
 ]){
   const openings=model.userData.eastPhotoOpenings.filter(o=>o.face===face);
@@ -56,8 +57,46 @@ for(const [key,view] of Object.entries(WEST_REFINEMENT_VIEWS)){
 }
 for(let x=-97;x<=-73;x+=.3)assert(!blocked(x,11.5),'the extended entrance path stays accessible to the road');
 assert(!blocked(-74.05,6.65)&&!blocked(-74.05,16.65),'removed end hedges leave no walking collisions');
-assert(blocked(-50.8,21.5),'the moved garden bay blocks walking through its wall');
-assert(!blocked(-53.8,22.2),'the canted corner does not collide as its bounding rectangle');
+assert(blocked(WEST_FRONT_E_PLAN.bayX,21.5),'the moved garden bay blocks walking through its wall');
+assert(!blocked(WEST_FRONT_E_PLAN.bayX-3,WEST_FRONT_E_PLAN.bayFront-.1),'the canted corner does not collide as its bounding rectangle');
+// The owner's red E is on the front west garden: broad outer arm,
+// shorter canted middle arm, and the retained long inner forward range.
+const outerBounds=new THREE.Box3().setFromObject(model.getObjectByName('West front square pavilion'));
+assert.equal(outerBounds.max.z,WEST_FRONT_E_PLAN.outerFront);
+assert.equal(outerBounds.min.z,15.5,'the outer arm retains its rear connection');
+assert.equal(outerBounds.min.x,-72,'the established outside wall stays fixed');
+assert.equal(outerBounds.max.x,-64,'the yellow face narrows to eight units');
+const {bayX,bayWidth,outerRight,innerX}=WEST_FRONT_E_PLAN;
+const bayOutline=model.getObjectByName('West curved bay').userData.collisionFootprint;
+assert.equal(bayOutline[3][0]-bayOutline[2][0],2.3,'the blue central face has the narrower photographic proportion');
+const branchRoof=model.getObjectByName('West curved bay slate roof'),roofPoints=branchRoof.geometry.attributes.position;
+for(let i=0;i<roofPoints.count;i++)if(roofPoints.getZ(i)===9.25){
+  const point=new THREE.Vector3().fromBufferAttribute(roofPoints,i).applyMatrix4(branchRoof.matrixWorld);
+  ray.set(new THREE.Vector3(point.x,30,point.z),new THREE.Vector3(0,-1,0));
+  const covering=ray.intersectObjects(model.children.filter(o=>o!==branchRoof),true)[0];
+  assert(covering.point.y>=point.y-.002,'the branch rear edge sits inside the retained roof, with no open seam');
+}
+const leftRecessWidth=bayX-bayWidth/2-outerRight,rightRecessWidth=innerX-bayX-bayWidth/2;
+assert(Math.abs(leftRecessWidth-8.4)<1e-5&&Math.abs(rightRecessWidth-8.4)<1e-5,'the purple and green faces have matching broad recesses beside the blue bay');
+for(const x of [-63,-61,-59.1]){
+  assert(blocked(x,19),'masonry closes the widened recess back to the cross range');
+  assert(hit([x,30,18.5],[0,-1,0]).point.y>14.3,'the widened recess has continuous roof coverage');
+}
+assert(WEST_FRONT_E_PLAN.bayFront<outerBounds.max.z&&outerBounds.max.z<43,'three unequal arm lengths follow the aerial reference');
+for(const [x,z,name] of [[-70,25,'West front outer arm slate roof'],[-65.5,WEST_FRONT_E_PLAN.outerFront-.5,'West front outer arm slate roof'],[-65,21,'West front outer arm slate roof'],[bayX,20,'West curved bay slate roof'],[bayX,WEST_FRONT_E_PLAN.bayFront-.5,'West curved bay slate roof']]){
+  const top=hit([x,30,z],[0,-1,0]);
+  assert.equal(top.object.name,name,'continuous roof covers each extended arm');
+  assert(top.face.normal.y>0&&top.point.y>15,'roof faces upward above the occupied floors');
+  assert(blocked(x,z),'new masonry has walking collisions');
+}
+for(const [x,z] of [[-59.8,24],[-45.2,24],[-62.5,26],[-68,WEST_FRONT_E_PLAN.outerFront+1.5],[bayX,WEST_FRONT_E_PLAN.bayFront+1.5]]){
+  assert(!blocked(x,z),'the recesses and garden beyond the arm ends remain walkable');
+  assert(hit([x,30,z],[0,-1,0]).point.y<1,'roof outline leaves both E recesses open to the sky');
+}
+for(const o of model.userData.westFrontPhotoOpenings.filter(o=>o.face==='west-front-stair-inset')){
+  const first=hit([o.x+.6,o.y,o.z],[-1,0,0]);
+  assert(first.object.isInstancedMesh&&first.distance<.7,'the turned stair opening is exposed on the inner return');
+}
 assert.equal(model.userData.westFrontPhotoOpenings.filter(o=>o.face==='west-front-extension').length,8,'four paired lean-to windows');
 // The user's red/yellow alignment is a physical wall plane, not only moved
 // window decals. The garden elevation remains fixed at the opposite side.

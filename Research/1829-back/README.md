@@ -98,3 +98,21 @@ The separate inner projecting enclosures retain their high windows and caps.
 This supersedes the raised main-roof heights in the earlier rear-wing notes.
 Browser sources and the local compiled model are updated; Blender and Unity
 exports are unchanged. Evidence uses `Browser/artifacts/rear-height-*`.
+
+## Rear roof-edge texture glitch (27 September 2026)
+
+The owner's `rear-roof-trim-glitch.png` marks the speckled brick strip across
+the pale stair-section cornice in the east rear court. The screenshot locates
+the defect; it does not add modelling instructions.
+
+The cornice top and brick wall top occupied the same plane at y=12.8. The
+shared stair-section cap now finishes 0.04 units above the masonry, retaining
+its thickness and footprint. This removes the competing surfaces on the east
+wing and its mirrored west counterpart. Roof profiles, wall heights, windows
+and walking footprints are retained. The change is in
+`Browser/dist/inner-court-photo-detail.mjs`; Unity and Blender are unchanged.
+
+The exterior check samples both rear cornices beneath the slate overhang and
+requires pale trim with clearance over the wall. The original geometry fails
+that regression. Before/source/compiled views use
+`Browser/artifacts/rear-roof-glitch-*`.

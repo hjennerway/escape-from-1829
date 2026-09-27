@@ -3,6 +3,7 @@ import * as THREE from './dist/vendor/three.module.js';
 import {createWalker,exteriorObstacles} from './dist/explore-controls.mjs';
 import {createEscapeExterior} from './dist/escape-exterior.mjs';
 import {EAST_PHOTO_VIEW} from './dist/east-photo-detail.mjs';
+import {WEST_FRONT_E_PLAN} from './dist/west-front-photo-detail.mjs';
 const camera=new THREE.PerspectiveCamera(),walker=createWalker(camera);
 walker.keys.add('KeyW');walker.update(.1);assert.equal(camera.position.z,39.5);
 walker.keys.add('KeyD');const before=camera.position.clone();walker.update(.1);assert(Math.abs(camera.position.distanceTo(before)-.5)<1e-10,'diagonal speed stays normalized');
@@ -23,9 +24,9 @@ assert(exterior.camera.position.x>.3&&exterior.camera.position.x<.8,'the stair c
 walk.keys.clear();walk.keys.add('KeyS');for(let i=0;i<6;i++)walk.update(.1);
 walk.keys.clear();walk.keys.add('KeyD');for(let i=0;i<10;i++)walk.update(.1);
 assert(exterior.camera.position.x>4,'the player can back out of the stair approach and walk around it');
-walk.setView({position:[6,1.8,25],target:[6,1.8,19]});walk.keys.add('KeyW');for(let i=0;i<20;i++)walk.update(.1);
+walk.setView({position:[10,1.8,25],target:[10,1.8,19]});walk.keys.add('KeyW');for(let i=0;i<20;i++)walk.update(.1);
 walk.keys.add('KeyD');for(let i=0;i<10;i++)walk.update(.1);
-assert(exterior.camera.position.x>7,'the player can slide sideways along the frontage');
+assert(exterior.camera.position.x>11,'the player can slide sideways along the frontage retaining edge');
 walk.reset();assert.equal(exterior.camera.position.z,40);assert.equal(walk.keys.size,0);
 walk.keys.add('KeyW');walk.update(60);assert(exterior.camera.position.z>=39.5,'long frame cannot teleport the player');
 walk.reset();exterior.camera.position.set(76,1.8,28);walk.keys.add('KeyW');
@@ -46,9 +47,9 @@ assert(exterior.camera.position.z> -2,'west courtyard remains accessible to the 
 walk.setView({position:[-58.4,1.8,-20],target:[-58.4,1.8,5]});
 walk.keys.add('KeyW');for(let i=0;i<55;i++)walk.update(.1);
 assert(exterior.camera.position.z<1,'walking must stop at the new polygonal bay');
-walk.setView({position:[-60,1.8,44],target:[-60,1.8,20]});
+walk.setView({position:[-68,1.8,44],target:[-68,1.8,20]});
 walk.keys.add('KeyW');for(let i=0;i<60;i++)walk.update(.1);
-assert(exterior.camera.position.z>19.5&&exterior.camera.position.z<21,'west front square pavilion blocks walking at its new aligned facade');
+assert(exterior.camera.position.z>WEST_FRONT_E_PLAN.outerFront&&exterior.camera.position.z<WEST_FRONT_E_PLAN.outerFront+1.5,'west front square pavilion blocks walking at its corrected E-arm facade');
 walk.setView({position:[0,1.8,-55],target:[0,1.8,-30]});
 walk.keys.add('KeyW');for(let i=0;i<50;i++)walk.update(.1);
 assert(exterior.camera.position.z<-39.5&&exterior.camera.position.z>-41,'shortened centre blocks walking at its corrected rear wall');
@@ -71,8 +72,9 @@ walkLeg([-11,-7],[-11,-43],72);
 // The img19 projection stops the walker; the gravel route to Reception
 // and the gap between the new handrails remain accessible.
 walkLeg([-28,24.5],[-5,24.5],46);
-walkLeg([-11.55,24],[-11.55,18],12);
-walk.setView({position:[-27,1.8,25],target:[-27,1.8,15]});
+// The lower door is reached from the sunken walk, via either end stair.
+walkLeg([-11.55,18.8],[-11.55,18.3],1);
+walk.setView({position:[-26.15,1.8,20.7],target:[-26.15,1.8,15]});
 walk.keys.add('KeyW');for(let i=0;i<30;i++)walk.update(.1);
 assert(exterior.camera.position.z>20&&exterior.camera.position.z<20.5,'img19 projecting white base must block walking through it');
 // The deeper hipped connector building now meets the drive at z=1.2.
@@ -98,7 +100,7 @@ assert(exterior.camera.position.x>-27.2&&exterior.camera.position.x<-26.5,'img18
 walkLeg([3,35.5],[26,35.5],46);
 walkLeg([26,35.5],[3,35.5],46);
 walkLeg([28,24.5],[5,24.5],46);
-walkLeg([11.55,24],[11.55,18],12);
+walkLeg([11.55,18.8],[11.55,18.3],1);
 walk.setView({position:[24,1.8,35.5],target:[30,1.8,35.5]});
 walk.keys.add('KeyW');for(let i=0;i<20;i++)walk.update(.1);
 assert(exterior.camera.position.x<27.2&&exterior.camera.position.x>26.5,'east reflected bay must block walking at the matching position');

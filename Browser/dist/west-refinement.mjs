@@ -14,7 +14,7 @@ export const WEST_REFINEMENT_VIEWS=Object.freeze({
 // central arris of the former octagonal cylinder.
 export function addWestCantedBay(THREE,{model,mesh,worldUV,brick,white,roof,sash},
   {x,z,side,name,face,height=14.6,width=6.2,depth=2.8,frontWidth=width*.5,returnDepth=depth*.28,windowWidth=1.25,baseHeight=0,
-    bandHeights=[4.05,8.6,height-.08,height+.15],
+    includeRoof=true,bandHeights=[4.05,8.6,height-.08,height+.15],
     windowRows=[2,6.45,11.35].map(y=>({y,width:windowWidth,sideWidth:.72,height:2.5}))}){
   const half=width/2,flat=frontWidth/2;
   const outline=[[-half,0],[-half,returnDepth],[-flat,depth],[flat,depth],[half,returnDepth],[half,0]];
@@ -40,16 +40,18 @@ export function addWestCantedBay(THREE,{model,mesh,worldUV,brick,white,roof,sash
     base.userData.collisionFootprint=wall.userData.collisionFootprint;
   }
   for(const y of bandHeights)mesh(prism(y+.1,y-.1,.1),white,x,0,z).name=name+' stone band';
-  const positions=[],uv=[];
-  for(let i=0;i<outline.length;i++){
-    const a=outline[i],b=outline[(i+1)%outline.length];
-    const triangle=[[a[0]*1.07,height+.3,side*(a[1]+.16)],[b[0]*1.07,height+.3,side*(b[1]+.16)],[0,height+1.28,side*.45]];
-    if(side<0)triangle.reverse();
-    for(const p of triangle){positions.push(...p);uv.push(p[0]/3,p[2]/3);}
+  if(includeRoof){
+    const positions=[],uv=[];
+    for(let i=0;i<outline.length;i++){
+      const a=outline[i],b=outline[(i+1)%outline.length];
+      const triangle=[[a[0]*1.07,height+.3,side*(a[1]+.16)],[b[0]*1.07,height+.3,side*(b[1]+.16)],[0,height+1.28,side*.45]];
+      if(side<0)triangle.reverse();
+      for(const p of triangle){positions.push(...p);uv.push(p[0]/3,p[2]/3);}
+    }
+    const cap=new THREE.BufferGeometry();cap.setAttribute('position',new THREE.Float32BufferAttribute(positions,3));
+    cap.setAttribute('uv',new THREE.Float32BufferAttribute(uv,2));cap.computeVertexNormals();
+    mesh(cap,roof,x,0,z,true).name=name+' slate roof';
   }
-  const cap=new THREE.BufferGeometry();cap.setAttribute('position',new THREE.Float32BufferAttribute(positions,3));
-  cap.setAttribute('uv',new THREE.Float32BufferAttribute(uv,2));cap.computeVertexNormals();
-  mesh(cap,roof,x,0,z,true).name=name+' slate roof';
   for(let i=1;i<=3;i++){
     const a=outline[i],b=outline[i+1],dx=b[0]-a[0],dz=side*(b[1]-a[1]);
     const length=Math.hypot(dx,dz),nx=-dz/length*side,nz=dx/length*side;

@@ -53,6 +53,42 @@ export function addWestCourtPhotoDetails(THREE,{model,box,mesh,worldUV,white,bri
   // The rearward arm now uses the mirrored img15/img16 detail module.
   // The fixed red corner window remains in the newly aligned elevation.
   sash('west-court-inset',-39.6,8.15,-1.05,Math.PI,1.1,2.3);
+  // The marked high corner must be closed above the lower recessed link.
+  // Continue the cross-range masonry and cornice into the rear arm's slate;
+  // the last side sash stays clear in front of this z=-1 wall plane.
+  const halfRoof=z=>z<2?6.9-(z+6)*.5/8:6.4;
+  const rows=[-1,2,7.2].map(z=>{
+    const half=halfRoof(z),edge=-31-half;
+    return [[-38.04,14.3,z],[-37.6,14.3,z],[edge,13.03,z],
+      [-31-half*(1-1.27/2.6),14.3,z],[-33.39,14.3,z]];
+  });
+  const infill=[];
+  function quad(vertices,a,b,c,d){vertices.push(...a,...b,...c,...a,...c,...d);}
+  const foot=p=>[p[0],11.3,p[2]];
+  for(let row=1;row<rows.length;row++)for(let i=1;i<rows[row].length;i++)
+    quad(infill,rows[row-1][i-1],rows[row][i-1],rows[row][i],rows[row-1][i]);
+  for(let i=1;i<rows[0].length;i++){
+    quad(infill,foot(rows[0][i-1]),rows[0][i-1],rows[0][i],foot(rows[0][i]));
+    quad(infill,foot(rows[2][i]),rows[2][i],rows[2][i-1],foot(rows[2][i-1]));
+  }
+  for(let row=1;row<rows.length;row++){
+    quad(infill,foot(rows[row][0]),rows[row][0],rows[row-1][0],foot(rows[row-1][0]));
+    quad(infill,foot(rows[row-1][4]),rows[row-1][4],rows[row][4],foot(rows[row][4]));
+  }
+  function geometry(vertices){
+    const g=new THREE.BufferGeometry();g.setAttribute('position',new THREE.Float32BufferAttribute(vertices,3));
+    g.setAttribute('uv',new THREE.Float32BufferAttribute(new Float32Array(vertices.length/3*2),2));
+    g.computeVertexNormals();return g;
+  }
+  mesh(worldUV(geometry(infill),1.7),brick,0,0,0,true).name='West courtyard upper link infill';
+  // A narrow slate strip bridges just the separation between the two existing
+  // roof edges. Follow their pitches rather than laying a flat cap over them.
+  const seam=[],roofRows=[-1.4,2,7.25].map(z=>{
+    const half=halfRoof(z);return [[-37.63,14.54,z],[-31-half+.015,13.07+.015/half*2.6,z]];
+  });
+  for(let i=1;i<roofRows.length;i++)quad(seam,roofRows[i-1][0],roofRows[i][0],roofRows[i][1],roofRows[i-1][1]);
+  mesh(worldUV(geometry(seam),3),roof,0,0,0,true).name='West courtyard upper link slate closure';
+  for(const [dy,h,d] of [[-.18,.16,.23],[.04,.22,.4],[.22,.1,.55]])box(white,-37.825,14.3+dy,-1.15,.45,h,d);
   const depth=wallZ-leanToFrontZ,centreZ=(wallZ+leanToFrontZ)/2,frontHeight=2.65,rearHeight=3.7;
   // The red side guides shift the complete lean-to 1.8 units along the court
   // wall, leaving a narrow open gap beside the yellow-marked rear arm.

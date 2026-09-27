@@ -1,0 +1,10 @@
+import {writeFile,readFile} from 'node:fs/promises';
+import assert from 'node:assert/strict';
+import * as THREE from '../dist/vendor/three.module.js';
+import {createEscapeExterior} from '../dist/escape-exterior.mjs';
+globalThis.document={createElement:()=>({getContext:()=>({fillRect(){},fillText(){},strokeText(){},measureText(t){return {width:t.length*16}}})})};
+const e=createEscapeExterior(THREE,1.6),before=JSON.parse(await readFile(new URL('front-basement-audit-before.json',import.meta.url)));
+const openings=Object.fromEntries(['entranceWestPhotoOpenings','entranceEastPhotoOpenings'].map(key=>[key,JSON.parse(JSON.stringify(e.model.userData[key]))]));
+for(const [key,schedule] of Object.entries(openings))assert.deepEqual(schedule,before.openings[key],'Front window positions and dimensions remain exact: '+key);
+await writeFile(new URL('front-basement-window-verification.json',import.meta.url),JSON.stringify({unchanged:true,openings},null,2)+'\n');
+console.log('PASS: every front window position and dimension remains exact.');

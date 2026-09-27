@@ -20,6 +20,8 @@ import {createChurchGrounds} from './church-grounds.mjs';
 import {addFrontSteps} from './front-steps.mjs';
 import {addFrontBoundaryWall,FRONT_BOUNDARY} from './front-boundary-wall.mjs';
 import {addEntranceWalks} from './entrance-walks.mjs';
+import {addFrontBasement,excavatedGroundGeometry,frontBasementExcavations,frontBasementShape} from './front-basement.mjs';
+import {addWestSideBasement,westSideBasementExcavation,westCourtAccessExcavation} from './west-side-basement.mjs';
 import {addRedesmerePassage,addRedesmereEndRange} from './redesmere-passage.mjs';
 import {addRedesmereEdgeChimney} from './redesmere-edge-chimney.mjs';
 import {createWaterTower} from './water-tower.mjs';
@@ -92,11 +94,24 @@ export function createEscapeExterior(THREE,aspect){
   function box(mat,x,y,z,w,h,d,rotation=0){if(!batches.has(mat))batches.set(mat,[]);batches.get(mat).push({x,y,z,w,h,d,rotation});}
   function mesh(geo,mat,x=0,y=0,z=0,shadow=false){const m=new THREE.Mesh(geo,mat);m.position.set(x,y,z);m.castShadow=shadow;m.receiveShadow=true;model.add(m);return m;}
   function worldUV(geo,scale=3){const p=geo.attributes.position,n=geo.attributes.normal,uv=geo.attributes.uv;for(let i=0;i<p.count;i++)uv.setXY(i,(Math.abs(n.getX(i))>.5?p.getZ(i):p.getX(i))/scale,(Math.abs(n.getY(i))>.5?p.getZ(i):p.getY(i))/scale);return geo;}
-  const terrain=mesh(new THREE.PlaneGeometry(4000,4000),grass,0,-.15,0);terrain.rotation.x=-Math.PI/2;terrain.name='Estate terrain';
+  const excavations=[...frontBasementExcavations(),westSideBasementExcavation()];
+  const groundGeometry=excavatedGroundGeometry(THREE,[[-2000,-2000],[2000,-2000],[2000,2000],[-2000,2000]],excavations);
+  const groundPositions=groundGeometry.attributes.position,groundUV=groundGeometry.attributes.uv;
+  for(let i=0;i<groundPositions.count;i++)groundUV.setXY(i,(groundPositions.getX(i)+2000)/4000,(groundPositions.getY(i)+2000)/4000);
+  const terrain=mesh(groundGeometry,grass,0,-.15,0);terrain.rotation.x=-Math.PI/2;terrain.name='Estate terrain';
+  // When both estate layouts are hidden, restore continuous undeveloped lawn.
+  const excavationFill=new THREE.Group();excavationFill.name='Unexcavated frontage terrain';excavationFill.visible=false;terrain.add(excavationFill);
+  for(const outline of excavations){
+    const geometry=new THREE.ShapeGeometry(frontBasementShape(THREE,outline)),p=geometry.attributes.position,uv=geometry.attributes.uv;
+    for(let i=0;i<p.count;i++)uv.setXY(i,(p.getX(i)+2000)/4000,(p.getY(i)+2000)/4000);
+    const fill=new THREE.Mesh(geometry,grass);fill.receiveShadow=true;excavationFill.add(fill);
+  }
   const legacyAccess=new THREE.Group();legacyAccess.name='Earlier estate access tracks';model.add(legacyAccess);
   function legacyRoad(mat,x,y,z,w,h,d){const road=mesh(new THREE.BoxGeometry(w,h,d),mat,x,y,z);legacyAccess.add(road);}
   // Grounds and surrounding access roads. No red annotation or sale graphics.
-  legacyRoad(path,OUTER_SHIFT/2,-.015,2,151+OUTER_SHIFT,.15,103);
+  const accessExcavations=[...frontBasementExcavations(),westCourtAccessExcavation()];
+  const access=mesh(excavatedGroundGeometry(THREE,[[-75.5,-49.5],[75.5+OUTER_SHIFT,-49.5],[75.5+OUTER_SHIFT,53.5],[-75.5,53.5]],accessExcavations),path,0,.06,0);
+  access.rotation.x=-Math.PI/2;legacyAccess.add(access);
   // Use the continuous terrain for the broad lawns. Raised duplicate slabs
   // leave thin vertical seams at the frontage, Parsons Lane and Redesmere.
   // Remove the old full-width outer gravel drive; retain the estate-side access lanes.
@@ -111,6 +126,8 @@ export function createEscapeExterior(THREE,aspect){
   const gardenWalkEnd=69+OUTER_SHIFT-3.5;
   box(path,(45+gardenWalkEnd)/2,.16,44,gardenWalkEnd-45,.12,2);
   addEntranceWalks(THREE,{model,material});
+  addFrontBasement(THREE,{model,material});
+  addWestSideBasement(THREE,{model,material,brick,worldUV});
   // Stone wall replaces the marked hedge frontage, with an open central path.
   // Stop before the saved lane turns across the frontage: retain a verge at the east tip.
   for(const [left,right] of [[-71,-58],[31,89]])box(hedge,(left+right)/2,.55,FRONT_BOUNDARY.z,right-left,1.1,.9);
@@ -301,7 +318,19 @@ export function createEscapeExterior(THREE,aspect){
   addEastPhotoDetails(THREE,{model,box,mesh,worldUV,white,brick:photoBrick,roof,steel,material,hipRoof,details});
   refineFrontInsideCorners(THREE,{model,batches,box,mesh,worldUV,white,brick:photoBrick,roof,material,details});
   // Open rear approaches connect the gaps between the arms to the back road.
-  for(const x of [-23,23]){box(gravel,x,.18,-20,32,.1,45);box(grass,x<0?-17:x-6,.26,-9,9,.1,11);}
+  for(const x of [-23,23]){
+    if(x>0)box(gravel,x,.18,-20,32,.1,45);
+    else {
+      // The old broad west approach crossed beneath the rearward arm and
+      // covered its side stairs. Trace the excavation at this slab's edge.
+      const shape=frontBasementShape(THREE,[[-39,-42.5],[-7,-42.5],[-7,2.5],[-39,2.5],
+        [-39,-1],[-37,-1],[-37,-24.5],[-37.5,-24.5],[-37.5,-30.5],
+        [-37.84,-30.5],[-37.84,-36],[-39,-36]]);
+      const approach=mesh(new THREE.ShapeGeometry(shape),gravel,0,.23,0);
+      approach.rotation.x=-Math.PI/2;approach.name='West rear approach beside basement';
+    }
+    box(grass,x<0?-17:x-6,.26,-9,9,.1,11);
+  }
   // The west court and apron share the continuous surface in addEntranceWalks.
   box(gravel,69+OUTER_SHIFT,.17,12,7,.12,62);
   // Retain only the eastern end paving; the marked western cross-walk is removed.

@@ -1,3 +1,171 @@
+## Windows desktop and Microsoft Store packaging (27 September 2026)
+
+`Desktop/` packages the same `Browser/dist` game in Electron for Windows x64.
+The existing `.github/workflows/pages.yml`, browser dependencies and game
+sources are unchanged by this packaging work. The Windows workflow has its own
+jobs, permissions and concurrency group; its success is not a dependency of
+Pages deployment. Neither packaging command uploads to Microsoft or publishes
+a release. Unity and Blender exports are unaffected.
+
+The desktop uses a secure `escape1829://game/` origin and serves only bundled
+assets. It needs no Node installation, local HTTP server or hosted website to
+play. Five optional archive wall images retain their existing external URLs;
+they need internet, and the game's existing fallback artwork is used offline.
+Bundled building photographs remain available offline. The renderer is
+sandboxed with no Node/preload bridge. HTTPS links open
+in the default browser; other external protocols and downloads are blocked.
+F11 toggles fullscreen, and the native Game menu returns to the intro or exits.
+Existing browser controls are retained. Local storage belongs to the desktop
+profile, separate from browser saves; Store updates are delivered by Microsoft.
+The optional position button asks for permission; actual device location still
+depends on Chromium's location provider and Windows services and is not
+covered by offline game testing.
+
+### Local setup and testing
+
+Use Node.js 24 and PowerShell on Windows. From the repository root:
+
+```powershell
+npm ci --prefix Browser
+npm ci --prefix Desktop
+Push-Location Browser
+npx playwright install chromium
+npm run build:models
+Pop-Location
+npm test --prefix Desktop
+npm start --prefix Desktop
+```
+
+Alternatively set `MODEL_CHROME_PATH` to an installed Chrome executable for
+the model compiler and icon rendering. The staging step verifies the compiled
+model's source hash, size and SHA-256, copies web assets byte-for-byte, and
+includes only the current compiled binary, not old local builds. It rejects
+source changes during copying and records `Desktop/out/web-build.json`.
+Rebuild models after changes before packaging, just as for Pages.
+
+```powershell
+npm run package:windows --prefix Desktop
+npm run test:desktop --prefix Desktop -- --packaged
+```
+
+The runnable folder is `Desktop/out/EscapeFrom1829-win32-x64/`; launch
+`EscapeFrom1829.exe`. Distribute the whole folder, not the executable alone.
+The smoke test uses an isolated profile and blocks HTTP(S) requests, then
+checks game startup/map, storage, compiled aerial assets/timeline, walking,
+navigation and renderer isolation. Evidence is saved in `Desktop/artifacts/`.
+Software WebGL is used only by tests, not by the normal desktop launcher.
+Assets for Windows icons/tiles are generated from the existing favicon SVG.
+
+### MSIX preview and Store submission
+
+MSIX requires Windows SDK `MakeAppx.exe`. The build finds an installed SDK;
+`MAKEAPPX_PATH` can override its path. If none is installed, the optional
+`./Desktop/scripts/setup-sdk.ps1` downloads a pinned, checksum-verified
+Microsoft SDK tools package into `Desktop/.cache/`, without a system install.
+
+```powershell
+./Desktop/scripts/setup-sdk.ps1
+npm run package:preview --prefix Desktop
+```
+
+This creates an **unsigned development MSIX** with a `LocalPreview` identity.
+It cannot be submitted as a Store release or installed by double-clicking
+without separate signing/trust setup. Use the runnable folder for local play.
+The packaging scripts do not install packages, generate certificates or
+change certificate trust. MakeAppx semantic validation remains enabled.
+
+After reserving the game in Partner Center, copy
+`Desktop/store-identity.example.json` to `Desktop/store-identity.local.json`
+and replace all three fields with the exact Product identity values. Then run
+`npm run package:store --prefix Desktop`. Missing/example/preview identities
+are rejected. The Store package is unsigned for Microsoft to sign during
+certification; there is no paid signing-certificate dependency for this route.
+Choose New product > Game in Partner Center for this MSIX game. Complete the listing,
+game category, screenshots, ratings, privacy details and certification there.
+Explain `runFullTrust` as the Electron desktop runtime used to run the bundled
+WebGL game; no elevation or background service is requested.
+
+The initial package version is `1.0.0.0`. Before each Store update, increase
+`Desktop/package.json`'s numeric `major.minor.patch` version and refresh its
+lockfile. The fourth Windows version component stays zero for Store use.
+
+`.github/workflows/windows-store.yml` builds previews for relevant main pushes
+and pull requests and uploads the runnable folder, MSIX and test evidence.
+For a real submission build, set repository variables `STORE_IDENTITY_NAME`,
+`STORE_PUBLISHER`, `STORE_PUBLISHER_DISPLAY_NAME`, then manually run the
+workflow with `package_kind: store`. These are public package metadata, not
+passwords or signing keys. Download the artifact and submit it to Microsoft;
+the workflow itself has only repository read permissions and does not deploy.
+
+Store listing text, certification notes and privacy information are in
+`Desktop/store/`. `node Desktop/scripts/capture-store.mjs` captures four direct
+1920x1080 screenshots of the built Windows app into
+`Desktop/out/store-submission/screenshots/`, meeting the desktop screenshot
+size requirement. Publish the privacy text at a public URL before submission.
+The listing still needs the reserved Partner Center identity and completion
+of its IARC questionnaire; local preparation does not submit or publish it.
+
+References: [Electron protocols](https://www.electronjs.org/docs/latest/api/protocol),
+[Electron security](https://www.electronjs.org/docs/latest/tutorial/security),
+[MSIX packaging tools](https://learn.microsoft.com/en-us/windows/msix/package/create-app-package-with-makeappx-tool),
+[Store package signing](https://learn.microsoft.com/en-us/windows/apps/package-and-deploy/publish-first-app).
+
+### Validation of the initial Windows preview
+
+The local x64 executable and unsigned `1.0.0.0` preview MSIX were built with
+Electron 44.4.5 and passed MakeAppx semantic validation. Desktop boundary,
+Store identity/version and compiled-asset corruption tests pass. The packaged
+executable passes the offline smoke test, including mouse capture, and the
+landing, game, aerial and walking screenshots were visually checked. The
+263 archived web files match the build inventory byte-for-byte, with one
+compiled model and no build tools or local identity file in the application.
+The bundled web source is the same source used for Pages; compiled assets were
+regenerated locally. `.github/workflows/pages.yml` retains its original Git
+blob hash `0c1ccfbe45fd36484285741a459c8dba40206c05`.
+
+The compiled/source browser comparison passes, including full detail and
+missing/corrupt-model fallback. The timeline test initially could not overwrite
+an existing screenshot; an isolated copy of the same assertions, changing
+only import/server/output locations, passes all timeline stops and walking
+collision refresh. Its evidence is in `Desktop/artifacts/timeline/`.
+
+The full browser suite stops at the existing Jarman whole-estate fingerprint
+mismatch. Running the remaining checks reports only the analogous
+Leighton/Newton fingerprint mismatch; all other checks pass. Those model
+baselines and game sources were not edited for packaging. Logs and the
+continuation report are in `Desktop/artifacts/`. Microsoft certification,
+signed MSIX installation and device geolocation remain unverified; the
+preview has no real Partner Center identity and has not been published.
+
+## Front semi-basement walks and corrected stair entrances (27 September 2026)
+
+The two facade walks now sit 1.215 scene units below the existing path grade,
+following the owner's 50%-deeper correction. Each has six 0.2025-unit risers
+at both ends. The outer descent runs along the facade from the blue-marked
+corner; the initially modelled stair projection into the lawn is removed.
+The inner flight rises beside Reception. Existing bottom windows, blue doors,
+upper walls and the central split staircase retain their positions. References,
+estimated dimensions and the superseding annotation are in
+[Research/front-basement/README.md](Research/front-basement/README.md).
+
+The shared terrain, legacy ground and corner asphalt are excavated to expose
+the lower paving and every tread. Exposed foundations close the walls beneath
+the windows; retaining edges follow the stepped frontage. Explore follows
+the actual lower floor and tread heights and blocks crossing the retaining
+walls. Height metadata follows the same visibility/obstacle refresh as the
+scene, without changing obstacle-array serialization. Hiding both layouts
+restores plain grass; choosing a timeline period reopens the excavation.
+
+The new `test-front-basement.mjs` covers both complete routes in both directions,
+all four six-tread flights, removal of the lawn projection, surface heights,
+retaining collisions and layout/timeline changes. It is included in `npm test`.
+The corner, exterior, walking, touch-input and KML checks pass. A saved pre-edit
+comparison confirms every front window position and size remains exact.
+Source and rebuilt compiled front, west, east and ground views were inspected.
+Evidence uses `Browser/artifacts/front-basement-*`. Browser model sources and
+local generated aerial models changed; Unity and Blender exports are unchanged.
+
+
 ## Protected estate test snapshots refreshed (25 September 2026)
 
 The Jarman and Leighton/Newton tests still held whole-estate fingerprints
@@ -3534,7 +3702,7 @@ cleanup removes one net primitive; their baselines were left unchanged.
 Evidence and preview files use Browser/artifacts/garden-cleanup-*.
 
 
-## Redesmere-facing frontage and roof-access door — 25 September 2026
+## Redesmere-facing frontage and roof-access door ï¿½ 25 September 2026
 
 The owner's blue-marked recess is removed: the narrow wall beside the forward
 wing now aligns with the bay frontage. Its three sash openings, white base,
@@ -3560,7 +3728,7 @@ source and compiled reference, detail and overhead views were inspected.
 
 The two whole-estate snapshots initially flagged the intended facade edit.
 Both pass on the saved pre-edit model. A separate exact comparison verifies
-that all 1,485,398 primitives outside x=40–64, z=3–26 remain unchanged; the
+that all 1,485,398 primitives outside x=40ï¿½64, z=3ï¿½26 remain unchanged; the
 marked region changes from 760 to 786 primitives. Only after that comparison
 were the Jarman and Leighton/Newton stored geometry hashes refreshed, keeping
 their range data and every test assertion intact. The before sources, hashes
@@ -3595,3 +3763,189 @@ loading and all timeline/walking checks pass. Concurrent lamp-placement work
 changed the shared source during validation; the local model was refreshed
 again afterward, with a separate final compiled frontage capture. The road
 change does not modify lamp or lighting sources.
+
+## Main/admin lamps at the road edge (26 September 2026)
+
+Moved the three purple-circled teardrop-road lamps to the grass-side edges
+nearest the owner's marked positions, following the clarification that the
+posts should stand right beside the road. The whole concrete footprint clears
+the kerb by about 8 cm. Both island posts use the raised lawn height; the outer
+post uses the terrain height. Their feet extend 3 cm into the ground. A local
+column material depth bias prevents the junction surfaces from visually
+clipping the lower shaft. Night lighting follows the per-fixture base height.
+
+The update happens before instancing and walking collision extraction, retaining
+the road's period visibility, the fixture count and the other lamp placements.
+Browser sources and the local generated aerial model are updated; Unity and
+Blender exports were not regenerated. Placement notes and the supplied reference
+are in Research/street-lamps.md.
+
+Validation: npm test and the focused day/night, teardrop and walking checks pass.
+Source and compiled day/night previews were visually inspected. All twelve
+base corners touch grass with 3 cm of overlap in both loading paths; all three
+shaft collisions and their night-light positions are verified. Evidence and
+previews use Browser/artifacts/admin-lamps-final-{source,compiled}-*.
+The complete npm run test:compiled checks also pass, including rendering
+comparison, every timeline stop and live walking collision refresh.
+
+## Rear roof-edge texture glitch (27 September 2026)
+
+Raised the shared rear stair-section cornice by 0.04 scene units so its top
+clears the brick wall instead of occupying the same plane. The pale trim now
+renders cleanly in the owner's marked east rear-court view. The same helper
+supplies the mirrored west wing; roof slopes, wall heights, window schedules
+and walking footprints are retained. See Research/1829-back/README.md.
+
+The exterior check now probes both cornices beneath the slate overhang and
+requires pale trim with positive masonry clearance. The saved original roof
+fails that new regression; the corrected exterior and existing roof-contact
+checks pass. Source and rebuilt compiled rear/detail views were inspected.
+The complete compiled suite passes source/image and draw-count comparison,
+full detail, fallback loading, all historical periods and live walking refresh.
+
+The standard browser suite and its continuation ran every listed command.
+Four checks fail outside this change: Jarman and Leighton/Newton whole-estate
+snapshots also fail on the saved pre-edit state; the two KML checks see the
+concurrently added walkSurfaces property on otherwise empty obstacle arrays
+and also fail when loading the original roof helper. The initial walking-route
+failure passes on recheck after concurrent walking edits. Those sources and
+baselines are left to their ongoing work. Evidence uses
+Browser/artifacts/rear-roof-glitch-*.
+
+Browser modelling source and the local generated aerial model are updated;
+Unity and Blender exports are unchanged. Concurrent shared-source edits
+required a final model refresh after the compiled suite.
+
+## Front semi-basement validation status (27 September 2026)
+
+The full browser suite and continuation completed. The two KML checks initially
+rejected enumerable height metadata on otherwise empty obstacle arrays; that
+regression is fixed by non-enumerable metadata, and both KML checks pass on
+recheck. The focused front, corner, central-stair, walking and input checks pass.
+Jarman and Leighton/Newton whole-estate fingerprints remain different from their
+saved snapshots. Those global baselines were not overwritten while other chats
+were changing the rear roof, west basement and courtyard geometry.
+
+The front was visually checked in both procedural and rebuilt compiled form,
+including the corrected outer stair direction and six risers. Model builds
+succeeded, but repeated full compiled-suite attempts were rejected by source
+fingerprint changes from concurrent work. Thus the final complete compiled
+suite is unverified; the development server falls back to current source when
+the shared manifest becomes stale. See Browser/artifacts/front-basement-build.log,
+front-basement-compiled.log, front-basement-suite.log and the continuation report.
+
+## West side semi-basement and courtyard level (27 September 2026)
+
+Added the owner's marked stairs and sunken passage beside the rearward west
+wing. The follow-up annotation turns the six-tread descent across the passage
+from the lawn, directly towards a blue doorway on the glazed gallery's side.
+There is no added doorway beside the lean-to. The upper corner gap is filled
+with masonry shaped beneath the existing roofs and a narrow slate join.
+
+The final colour and level correction matches the exposed gallery foundation
+and retaining walls to the gallery's existing brick material colour and map.
+The main-arm foundations match their adjoining brickwork. The courtyard and
+stair approach now sit at the lawn level, with only a 0.005 surface separation
+for rendering. The coping is 0.32 above that grade. A gentle transition beyond
+the courtyard joins the retained southern apron, with no step at the marked
+lawn boundary. The lower passage follows the front semi-basement floor level.
+
+The shared browser model cuts the terrain, older underlying access surface,
+rear approach and visible courtyard around the excavation. Walking follows
+the stair treads and lower passage, with collisions at the retaining walls
+and closed doorway. Existing layout callbacks continue to refresh obstacles
+and invalidate shadows; hiding both layouts restores lawn over the excavation.
+See Research/west/README.md and its three owner annotations for the modelling
+reference, final coordinates and superseded first interpretation.
+
+The focused west-side check verifies exposed treads, player-width access in
+both directions, door placement and threshold, the filled upper corner,
+matching brick colour/texture, level lawn/paving in both layouts and hidden
+estate behavior. Exterior, west-refinement, front-corner, roof-contact, walking
+and modern-entrance checks also pass. Source and generated-model previews use
+Browser/artifacts/west-basement-*. Browser modelling sources and the local
+compiled aerial model are updated; Blender and Unity exports are unchanged.
+
+Final west-side validation: the complete compiled browser suite passes,
+including source/render comparison, full-detail loading, fallback handling,
+every timeline stop and live walking collision refresh. The final source and
+compiled reference, stairs, door, passage and upper-junction views were
+visually checked. The preview also probes all six stair heights, the lower
+floor and the matching court/lawn heights in the rendered batched models.
+The generated model's source fingerprint matches the current browser source.
+
+The standard npm test run, focused recheck and continuation cover every listed
+command. All pass except the Jarman and Leighton/Newton saved whole-estate
+geometry comparisons, which also failed before this west-side work; their
+baselines were not changed. The earlier front-corner and KML failures pass on
+the final shared working tree. See west-basement-suite-final.log,
+west-basement-remaining-final.log, west-basement-baseline-jarman.log,
+west-basement-baseline-leighton.log and west-basement-compiled-final.log in
+Browser/artifacts/. Concurrent front-basement and other model edits were
+preserved throughout this change.
+
+## Front west E-shaped garden wing (27 September 2026)
+
+The owner's red outline places the E on the front west side, left of Reception.
+The mistaken rear/east change was undone first. The outer pavilion now projects
+forward to z=29.5, and a short stem brings the retained middle canted bay to
+z=25.8. The existing long forward wing and glazed extension retain their geometry.
+See Research/west/README.md and its saved annotation and aerial reference for
+the estimated plan dimensions.
+
+The front windows and trim follow the extended pavilion; its fire escape and
+doors turn together onto the inner return. Both extended arms have continuous
+slate roofs. The canted-bay helper permits a caller-supplied roof while retaining
+its existing default for all other bays. Building-time geometry continues to
+supply walking collisions through the existing obstacle builder.
+
+The focused west and exterior checks cover exposed glazing, roof coverage,
+the three arm lengths, both open recesses, stair placement and walking access.
+Procedural overhead, oblique and ground-level views were inspected. A before/
+after geometry/material/transform fingerprint matches for 1,484,872 protected
+primitives covering the east side, rear ranges, Reception and the long forward
+wing. Browser/artifacts/west-front-e-audit.mjs records that comparison.
+Browser sources and the local compiled aerial model are updated; Unity and
+Blender exports are unchanged.
+
+The owner's subsequent four-colour alignment shortens the outer arm from
+z=29.5 to 26.5, and the canted bay front from z=25.8 to 23.8 (root z=21).
+These are the final front extents, superseding the initial E dimensions above.
+Widths and heights are retained. The walking test now stops at the revised
+pavilion plane; open-ground checks also cover the cleared former arm ends.
+
+The final face-width reference narrows the yellow outer face from 13 to 8
+units with its outside wall fixed, shifts the unchanged canted bay to x=-52.5,
+and gives the purple/green recesses 8.4 units each. Windows, doorway, trim,
+pipes and stair follow their respective walls. The widened left recess is
+closed and roofed back to the existing cross range. The prior front-depth
+alignment and wall heights are retained. The updated protected-region audit
+excludes the intentionally moved recess glazing while retaining the entire
+long forward wing, its flank windows and lean-to; all 1,484,692 protected
+primitive records match exactly. The saved width references and latest
+coordinates are documented in Research/west/README.md.
+
+The blue central flat face narrows to 2.3 units within the existing 6.2-unit
+bay root. The three-storey glazing, bands, canted masonry, slate roof and
+collision outline share that profile. The east bay's former proportions
+remain explicit in its regression check, independently of this west photo.
+
+Final roof-junction correction: after the bay moves sideways, its branch
+ridge meets the retained cross-range ridge at x=-50.76. The rear edge is
+buried in that roof rather than terminating above its slope. The focused
+roof test verifies coverage of every rear-edge vertex, preventing an open
+seam when viewed from behind or above.
+
+Final validation passes for the west/front geometry, exposed glazing, roof
+contacts, closed branch junction and walking behaviour. The final npm test
+run and continuation cover the complete browser suite: all checks pass except
+the existing Jarman and Leighton/Newton whole-estate fingerprint comparisons.
+Their saved baselines were not changed. The final compiled suite passes source/
+render comparison, full detail, fallback handling, all timeline stops and live
+walking collision refresh. Source and rebuilt overhead, oblique and reference
+views were visually checked after the roof-junction correction.
+
+Final logs use Browser/artifacts/west-front-e-width-final-*. The final previews
+are west-front-e-source-* and west-front-e-compiled-*; reference.png shows all
+four marked faces from the garden. The generated browser model is current.
+Blender and Unity exports were not regenerated.

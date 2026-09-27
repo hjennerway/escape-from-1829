@@ -1,0 +1,23 @@
+{
+  "name": "escape-from-1829-desktop",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Windows desktop packaging for Escape from 1829",
+  "author": "Escape from 1829",
+  "main": "app/main.cjs",
+  "scripts": {
+    "prepare:web": "node scripts/prepare-web.mjs",
+    "start": "npm run prepare:web && electron .",
+    "test": "node --test test/*.test.mjs",
+    "test:desktop": "node test/smoke.mjs",
+    "package:windows": "node scripts/package-windows.mjs",
+    "package:preview": "node scripts/package-store.mjs --preview",
+    "package:store": "node scripts/package-store.mjs"
+  },
+  "devDependencies": {
+    "@electron/fuses": "2.1.3",
+    "@electron/packager": "20.3.0",
+    "electron": "44.4.5"
+  }
+}

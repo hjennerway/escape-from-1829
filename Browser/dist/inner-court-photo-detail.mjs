@@ -20,7 +20,9 @@ export function addInnerCourtPhotoDetails(THREE,{model,box,mesh,worldUV,white,br
   const stairCentre=(profile.join+profile.front)/2,stairDepth=profile.front-profile.join;
   mesh(worldUV(new THREE.BoxGeometry(13,eaves-2,stairDepth),1.7),brick,31,(eaves+2)/2,stairCentre,true).name='Inner court projecting brick block';
   mesh(worldUV(new THREE.BoxGeometry(13,2,11),1.7),plinth,31,1,-30,true);
-  box(white,31,eaves-.1,stairCentre,13.25,.2,stairDepth+.25);
+  // Keep the cap top 4 cm above the brickwork. Coincident top faces flicker
+  // along the exposed roof edge when seen obliquely from the rear court.
+  box(white,31,eaves-.06,stairCentre,13.25,.2,stairDepth+.25);
   // The yellow-circled roof rises towards the stair block. Build both its
   // sloping brick side walls and pitched slate surface, not a flat cap.
   const annexDepth=profile.join-profile.rear,annexCentre=(profile.rear+profile.join)/2;

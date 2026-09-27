@@ -219,6 +219,8 @@ export function attachEstateTimeline(exterior,layouts){
    // These parents are retained for binary/source compatibility. The dated
    // children now own visibility, so surviving buildings render only once.
    for(const group of [layouts.shared,layouts.historic,layouts.modern])group.visible=true;
+   const excavationFill=exterior.terrain.getObjectByName('Unexcavated frontage terrain');
+   if(excavationFill)excavationFill.visible=false;
    for(const object of layouts.superseded)object.visible=false;
    layouts.entrance.visible=true;
    for(const object of rules)object.visible=existsInYear(object.userData.estateSection,period.year);

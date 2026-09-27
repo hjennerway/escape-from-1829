@@ -168,3 +168,112 @@ uses `Browser/artifacts/west-path-`.
 The full suite's Jarman and Leighton/Newton whole-estate snapshots differ after
 landscaping changes; their baselines were not refreshed for this edit. All other
 suite checks pass when continued after the first snapshot failure.
+
+## Rearward wing side semi-basement (27 September 2026)
+
+The owner's [marked view](side-basement-annotation.png) places descending stairs
+at the glazed rear end of the west wing. The red line identifies a sunken passage
+along its outer wall, ending at a door, with a low retaining wall on the right
+when entering from the stairs. This is the rearward arm at x=-37, rather than
+the outer western cross range described by the earlier five photographs.
+
+Browser/dist/west-side-basement.mjs adds five stone treads from z=-35.7 toward
+the recessed corner at z=-1. The floor matches the front semi-basement level
+(y=-0.615), below the courtyard at y=0.28. The brick retaining wall has stone
+coping 0.32 units above the courtyard. It meets the existing lean-to, whose
+flank forms the final side of the passage. A blue, pale-framed door ends the
+route at the lowered floor. Coordinates and unseen door detail are estimates
+from the annotation, using the building's existing materials.
+
+The terrain, underlying access surface, broad rear approach and court paving
+all clear the excavation. Foundations continue down beneath the existing
+gallery cladding and window walls. The passage and stairs supply walking
+heights, and the retaining wall and closed door supply collisions. Hiding both
+estate layouts restores continuous lawn over the excavation. The existing
+front stairs, windows and lean-to entrance retain their positions.
+
+Shared browser sources and the locally generated aerial model are updated;
+Blender and Unity exports are unchanged. Browser/test-west-side-basement.mjs
+checks the exposed stairs and entire lower route, door threshold, low wall,
+walking in both directions and layout visibility. Preview and validation
+evidence uses Browser/artifacts/west-basement-*.
+
+### Superseding direction, doorway and ground corrections
+
+The subsequent side-basement-direction-correction.png places the blue door on
+the gallery side at the blue X, with stairs descending across the passage from
+the lawn towards +X. There is no door at the lean-to end. Six stone treads now
+run from x=-42 to -39.6 at z=-34.7, with a lower landing outside the gallery door.
+The continuous passage turns from this landing and ends at the existing blank
+wall. The upper red-circled junction is closed with brickwork shaped beneath
+the two existing roofs and a narrow slate seam between their edges.
+
+The final side-basement-ground-brick-correction.png matches the foundation and
+retaining masonry to the darker gallery brick colour (0xc5a38d), with the main
+arm foundations using their own adjoining wall colour. The entire courtyard
+is lowered to y=-0.145, only 0.005 above the existing lawn, removing the former
+0.43-unit step at z=-26. A four-unit transition outside the courtyard connects
+to the retained southern apron. The stair entrance uses the same lower grade;
+the coping remains 0.32 above that grade. The lower floor follows the current
+front semi-basement, now y=-1.02 after its independent deepening. The old
+underlying access slab is cut out beneath the courtyard and stair approach.
+These latest positions and levels supersede the first description above.
+
+## Front garden E-shaped plan (27 September 2026)
+
+The owner's [red outline](front-e-shape-marked.png) identifies the front west
+garden, left of Reception. The [aerial reference](front-e-shape-aerial.png)
+shows a broad outer arm, shorter middle canted bay and long inner forward arm.
+This supersedes the earlier flush-front interpretation for the outer pavilion.
+The initially mistaken rear/east-court edit was fully undone before this work.
+
+The retained cross-range garden wall is z=19.5. The outer pavilion retains
+x=-72..-59 and its rear connection at z=15.5, extending to z=29.5. The middle
+arm retains its 6.2-unit width and x=-50.8 centre; a short rectangular stem
+reaches z=23, followed by the original canted profile ending at z=25.8.
+These depths are visual estimates from the supplied outline, not surveyed
+measurements. The long forward wing and its glazed lean-to retain their geometry.
+
+The outer arm has a hipped slate roof, and the middle branch roof joins the
+cross-range ridge. The pavilion's six front windows and bands follow its new
+front wall. The existing fire escape and doors turn onto its inner return,
+within the recess between the outer and middle arms. Other front windows,
+rear details, garden paths and landscaping retain their positions.
+
+Browser sources and the local compiled aerial model are updated; Unity and
+Blender exports are unchanged. Validation and views use the
+Browser/artifacts/west-front-e-* prefix.
+
+### Superseding front-depth alignment
+
+The follow-up [four-colour annotation](front-e-alignment-marked.png) pulls the
+red ground edge of the canted bay back to the yellow guide, and the blue ground
+edge of the broad outer arm back to the purple guide. The outer front is now
+z=26.5 (three units back); the bay root is z=21 and front z=23.8 (two units back).
+These depths supersede those in the first E interpretation above. Widths,
+heights, window counts, stair alignment and the long forward range are retained.
+The roof and wall depths follow the revised ends, and walking collisions clear
+the vacated strips of lawn.
+
+### Superseding face-width proportions
+
+The paired front-e-width-model-marked.png and front-e-width-photo-marked.png
+identify the outer front face (yellow), left recessed face (purple), canted bay
+(blue) and right recessed face (green). Comparing the photograph by storey
+height shows that the outer face was too broad. Its fixed outside wall remains
+x=-72, while its inner return moves from x=-59 to -64: an eight-unit front.
+The two front sash columns now sit closer together with narrower frames.
+
+The bay retains its 6.2-unit canted profile and moves to x=-52.5, leaving
+8.4-unit recessed faces on both sides. Their glazing and garden doorway are
+centred again; the iron stair, landing doors, trim and pipes follow their walls.
+A closed brick and slate infill joins the widened left recess to the retained
+cross range. The agreed front ends (26.5 and 23.8), wall heights, western end,
+rear court, and long forward wing are retained. These estimated face widths
+supersede the previous fixed-width description above.
+
+The blue bay's flat central face is also narrowed from 3.1 to 2.3 units,
+retaining the 6.2-unit overall root and all nine sashes. Its angled faces,
+stone bands, roof and collision outline follow that revised profile. The
+opposite east bay retains its original proportions. The new recessed roof
+uses a low hip to avoid a prominent extra peak above the paired windows.
