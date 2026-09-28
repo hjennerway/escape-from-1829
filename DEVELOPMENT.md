@@ -417,6 +417,41 @@ Browser control still failed at startup with the Windows sandbox ACL error,
 so the file has not been uploaded and certification has not been requested.
 Submission materials and the Packages page URL are in `Desktop/store/listing.md`.
 
+### Electron download recovery (28 September 2026)
+
+The Windows workflow failed in `package:preview` when GitHub returned HTTP 500
+for the pinned Electron 44.4.5 Windows x64 ZIP. Web staging had completed;
+the failure occurred before executable packaging and MakeAppx validation.
+
+`package-windows.mjs` now retries transient Electron download failures after
+5, 15 and 30 seconds (four attempts total), logging each retry and preserving
+the final error. HTTP 408/429/500/502/503/504 and temporary socket, timeout and
+DNS failures qualify; missing releases, checksum failures, configuration and
+filesystem errors still fail immediately. Asset staging and fuse updates sit
+outside the retry loop.
+
+Packaging uses the checksums bundled with the pinned `electron` npm dependency,
+as Electron's installer does, so checking a cached ZIP does not require another
+request for `SHASUMS256.txt`. Checksum verification remains enabled. The workflow
+shares `Desktop/.cache/electron` between npm installation and packaging through
+`electron_config_cache`, and restores/saves it with `actions/cache`, keyed by
+runner OS, x64 architecture and the desktop lockfile. Local packaging honors
+the same environment variable or keeps Electron's default cache location.
+See [Electron Packager download options](https://electron.github.io/packager/main/interfaces/Options.html#download).
+
+Validation: all eight desktop tests pass, including simulated HTTP 500 recovery,
+retry exhaustion, nested fetch errors and immediate non-transient failures.
+The Windows executable and unsigned preview MSIX were rebuilt successfully;
+MakeAppx semantic validation and the packaged offline smoke test passed,
+including renderer isolation, storage, game/map, compiled aerial timeline,
+walking and return navigation. Build and smoke logs are saved in
+`Desktop/artifacts/download-retry-preview.log` and `download-retry-smoke.log`.
+The browser suite stops at the previously documented `test-jarman.mjs`
+whole-estate fingerprint mismatch. No game sources, model sources, Unity or
+Blender exports changed; the existing current compiled model was reused.
+These checks validate the local build; the updated GitHub workflow has not
+been run remotely.
+
 ## Front semi-basement walks and corrected stair entrances (27 September 2026)
 
 The two facade walks now sit 1.215 scene units below the existing path grade,
