@@ -55,7 +55,39 @@ Run `node Desktop/scripts/capture-store.mjs` after building the Windows package.
 Upload the four PNG files in `Desktop/out/store-submission/screenshots/` in
 numbered order. `captions.json` contains their captions. Each image is a direct
 1920x1080 capture of the packaged game; no marketing overlay is added.
-The package supplies its tile/logo assets. Leave first-release release notes blank.
+The package supplies its tile/logo assets. Separate Store listing artwork is
+available in the repository's `Art/` directory:
+
+- Poster: `store-poster-1440x2160.png` (or `store-poster-720x1080.png`).
+- Square box art: `store-box-2160x2160.png` (or `store-box-1080x1080.png`).
+- Tile icons: `store-tile-300x300.png`, `store-tile-150x150.png`,
+  `store-tile-71x71.png`.
+
+Both illustrated covers show the real entrance's blue dragons and central
+coat of arms. Use these in Store logos, and the direct gameplay captures in
+Screenshots. Leave first-release release notes blank.
+
+## Hero and promotional artwork
+
+The additional illustrated PNGs are saved in `Art/`:
+
+| Partner Center slot | File | Title |
+| --- | --- | --- |
+| 16:9 Super hero art | `store-super-hero-3840x2160.png` or `store-super-hero-1920x1080.png` | None |
+| Titled hero art | `xbox-titled-hero-1920x1080.png` | Escape from 1829 |
+| Featured promotional square art | `xbox-featured-square-1080x1080.png` | None |
+| Legacy branded key art | `xbox-branded-key-584x800.png` | Escape from 1829 |
+
+All four compositions retain the visible blue dragons above the entrance.
+The two text-free designs contain no marketing lettering, and the titles in
+the other two are within the upper two-thirds. Every PNG is opaque and below
+50 MB. The 3840x2160 version is an upscale of the generated wide master.
+
+The 584x800 image is included to match the slot in the user's portal screenshot.
+Microsoft's current game-specific [Store listing guidance](https://learn.microsoft.com/en-us/gaming/game-publishing/concepts/store-listing)
+says Branded Key Art is retired and should not be submitted for Xbox submissions.
+It is supplied as a legacy portrait variant without an Xbox branding bar.
+These assets do not change the package's Windows-PC-only device support.
 
 ## Notes for certification
 
@@ -86,11 +118,27 @@ No IARC questionnaire has been submitted or rating obtained for this package.
 
 ## Submission status
 
-Blocked on the reserved product identity and access to Partner Center. The
-existing preview MSIX has a development identity and must not be uploaded as
-the release. Build `package:store` after populating the three identity values.
-The browser automation helper failed to initialise in this publishing session;
-no Store reservation, upload or certification submission has been performed.
+The user supplied the Product identity screenshot on 28 September 2026 for
+Escape from 1829, Store ID `9PK5RS1JJGXG`. The exact values are configured in
+the ignored `Desktop/store-identity.local.json`:
+
+- Name: `HJennerway.Escapefrom1829`
+- Publisher: `CN=51B44ABD-BD81-4C19-9EFC-B4D718A2649C`
+- Publisher display name: `HJennerway`
+
+The Store upload file is now
+`Desktop/out/EscapeFrom1829-1.0.0-x64-store.msix` (193,295,449 bytes).
+MakeAppx validation passed, and the manifest read from inside the final MSIX
+matches all three values and version `1.0.0.0`. Its SHA-256 is
+`E6B9F4FE70AB08F41010E11F520A781CF9835DDD6D4CA68CDEE2F7D4B126B550`.
+The older file named `preview-unsigned.msix` remains a local preview.
+
+The user's Packages page is
+https://partner.microsoft.com/en-us/dashboard/products/9PK5RS1JJGXG/submissions/1152921505701986004/packages
+Browser control still fails during initialisation, so no package upload or
+certification submission has been performed by the agent. Select the Store
+MSIX above on that page. Privacy publication, IARC and the remaining submission
+sections must be complete before requesting certification.
 
 Sources checked 27 September 2026:
 

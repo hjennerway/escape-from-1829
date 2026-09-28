@@ -40,6 +40,11 @@ If the view stutters or lags, check hardware accelleration is enabled in your br
 3. Relaunch Edge
 4. Verify at edge://gpu — same check as above
 
+# Screenshots
+![Aerial view of the asylum](/Art/screenshots/screen1.png?raw=true "Aerial view of the asylum")
+![Night time view](/Art/screenshots/screen2.png?raw=true "Night time view")
+![Asylum Escape](/Art/screenshots/screen3.png?raw=true "Asylum Escape")
+
 # Credits
 Made possible by the invaluable help of the members of the [The History of The West Cheshire Hospital](https://www.facebook.com/groups/447285974557565) Facebook group in identifying and refining the layout of the site. Their photos are viewable when moving around the site.
 

@@ -1,3 +1,55 @@
+## Microsoft Store artwork (28 September 2026)
+
+Seven Store listing PNGs are saved directly in `Art/`: poster artwork at
+1440x2160 and 720x1080, square box art at 2160x2160 and 1080x1080, and tile
+icons at 300x300, 150x150 and 71x71. The selected portrait and square covers
+were made with the built-in image generator using the existing game palette
+and entrance photos. Both retain the three-storey central frontage and the
+visible blue heraldic dragons and coat of arms in its triangular pediment,
+as requested by the owner. These are illustrated cover images, not gameplay
+screenshots. The three small tiles export the existing favicon's door symbol.
+
+Prompts and references are recorded in `Desktop/store/art-prompts.json`.
+`Desktop/scripts/create-store-tiles.mjs` exports the SVG tiles;
+`Desktop/scripts/export-store-art.mjs` exports size variants from the approved
+cover PNGs without cropping. Both refuse to overwrite existing artwork.
+Run the latter with `--check-only` to validate the saved dimensions and produce
+the review contact sheet without changing the artwork. The PNG size checks
+passed, every file is below 50 MB, and both covers and all tiles were visually
+reviewed. Evidence is in `Desktop/artifacts/store-art-validation.json` and
+`store-art-contact-sheet.png`. No game models, runtime assets, Windows package
+contents or GitHub Pages workflow were changed by this artwork task.
+
+### Additional hero and promotional artwork
+
+Five more PNG files in `Art/` cover the requested additional Store slots:
+untitled super hero art at 3840x2160 and 1920x1080, titled hero art at
+1920x1080, untitled featured square at 1080x1080, and legacy branded key art
+at 584x800. The built-in image generator made four distinct compositions
+from the approved square cover and actual entrance photograph. All retain
+the complete blue-dragon pediment and frontal entrance.
+
+`Desktop/store/additional-art-prompts.json` records the prompts, source files,
+and exports. `Desktop/scripts/export-store-promotional-art.mjs` accepts four
+generated sources (super hero, key, titled hero, square) and exports the five
+sizes without overwriting files. Generated source dimensions were 1672x941
+for both wides, 1071x1469 for the portrait, and 1254x1254 for the square.
+Proportions are preserved, with less than 0.13% edge trimming to accommodate
+pixel rounding. The 4K file is an upscaled export, not native 4K generation.
+
+Validation passed for all five files: exact dimensions, valid PNGs, fully
+opaque pixels and less than 50 MB each (largest 14,327,317 bytes). Generated
+images and the exported contact sheet were visually checked for title
+spelling, clear blue dragons, and intact frontage. Evidence is saved in
+`Desktop/artifacts/promotional-art-validation.json` and
+`promotional-art-contact-sheet.png`. The export helper supports `--check-only`.
+No game-code tests were needed for these artwork-only additions.
+
+Current game-specific Microsoft guidance retires the 584x800 Branded Key Art
+format, despite the older portal showing a slot. That file is retained as
+a requested legacy portrait variant without an Xbox branding bar. See
+`Desktop/store/listing.md` for the source and slot mapping.
+
 ## Windows desktop and Microsoft Store packaging (27 September 2026)
 
 `Desktop/` packages the same `Browser/dist` game in Electron for Windows x64.
@@ -102,8 +154,9 @@ Store listing text, certification notes and privacy information are in
 1920x1080 screenshots of the built Windows app into
 `Desktop/out/store-submission/screenshots/`, meeting the desktop screenshot
 size requirement. Publish the privacy text at a public URL before submission.
-The listing still needs the reserved Partner Center identity and completion
-of its IARC questionnaire; local preparation does not submit or publish it.
+The initial Store identity was supplied on 28 September 2026; see the release
+record below. The IARC questionnaire and the remaining Partner Center sections
+still need completion; local preparation does not submit or publish it.
 
 References: [Electron protocols](https://www.electronjs.org/docs/latest/api/protocol),
 [Electron security](https://www.electronjs.org/docs/latest/tutorial/security),
@@ -136,6 +189,27 @@ baselines and game sources were not edited for packaging. Logs and the
 continuation report are in `Desktop/artifacts/`. Microsoft certification,
 signed MSIX installation and device geolocation remain unverified; the
 preview has no real Partner Center identity and has not been published.
+
+### Initial Store package (28 September 2026)
+
+The user supplied the reserved identity for Store product `9PK5RS1JJGXG` in a
+Partner Center screenshot. It is saved in the ignored
+`Desktop/store-identity.local.json`. `npm run package:store --prefix Desktop`
+created `Desktop/out/EscapeFrom1829-1.0.0-x64-store.msix`, version `1.0.0.0`.
+This is an unsigned Store submission package for Microsoft to sign after
+certification. MakeAppx validation passed, and inspection inside the final
+archive confirmed the supplied name, publisher and publisher display name.
+The three desktop packaging tests and a fresh packaged offline gameplay,
+storage, map, aerial timeline, walking and navigation check also passed.
+All 263 bundled web files match the build inventory. The game sources and
+the GitHub Pages workflow were not changed for this identity-specific build.
+
+The package is 193,295,449 bytes; its SHA-256 is
+`E6B9F4FE70AB08F41010E11F520A781CF9835DDD6D4CA68CDEE2F7D4B126B550`.
+Detailed evidence is in `Desktop/artifacts/store-release-verification.json`.
+Browser control still failed at startup with the Windows sandbox ACL error,
+so the file has not been uploaded and certification has not been requested.
+Submission materials and the Packages page URL are in `Desktop/store/listing.md`.
 
 ## Front semi-basement walks and corrected stair entrances (27 September 2026)
 
