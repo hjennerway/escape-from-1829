@@ -1,5 +1,6 @@
 import {LAMP_HEAD,visibleInScene} from './street-lamps.mjs';
-import {createWindowLights} from './window-lights.mjs';
+import {createWindowLights,WINDOWS_PER_LIGHT} from './window-lights.mjs';
+import {createAtmosphere} from './atmosphere.mjs';
 export const STREET_LIGHT_LIMIT=8;
 
 function glowTexture(THREE){
@@ -16,9 +17,10 @@ function glowTexture(THREE){
 // Eight stable light slots illuminate nearby masonry without hundreds of lights
 // in every building shader. Instanced soft pools keep the whole aerial road
 // network readable, with emissive heads and small halos at every visible lamp.
-export function createDayNight(THREE,exterior,renderer,{walking=false}={}){
+export function createDayNight(THREE,exterior,renderer,{walking=false,twilight=false,random=Math.random,reducedMotion}={}){
  const {scene,camera,model}=exterior,lamps=[],diffusers=new Set();
- const windows=createWindowLights(THREE,model);
+ const windows=createWindowLights(THREE,model,{random});
+ const atmosphere=createAtmosphere(THREE,exterior,{reducedMotion});
  scene.updateMatrixWorld(true);
  model.traverse(owner=>{
   if(owner.userData.streetLamps)for(const p of owner.userData.streetLamps){
@@ -30,7 +32,7 @@ export function createDayNight(THREE,exterior,renderer,{walking=false}={}){
  });
  const sun=scene.children.find(o=>o.isDirectionalLight),sky=scene.children.find(o=>o.isHemisphereLight);
  const day={background:scene.background.clone(),fog:scene.fog.color.clone(),density:scene.fog.density,exposure:renderer.toneMappingExposure,
-  sunColor:sun.color.clone(),sunIntensity:sun.intensity,skyColor:sky.color.clone(),groundColor:sky.groundColor.clone(),skyIntensity:sky.intensity};
+  sunColor:sun.color.clone(),sunPosition:sun.position.clone(),sunIntensity:sun.intensity,skyColor:sky.color.clone(),groundColor:sky.groundColor.clone(),skyIntensity:sky.intensity};
  const effects=new THREE.Group();effects.name='Night street-lamp glow';effects.visible=false;scene.add(effects);
  const texture=glowTexture(THREE);
  const poolMaterial=new THREE.MeshBasicMaterial({color:0xffbc69,map:texture,transparent:true,opacity:.42,depthWrite:false,blending:THREE.AdditiveBlending,toneMapped:false,polygonOffset:true,polygonOffsetFactor:-10,polygonOffsetUnits:-20});
@@ -40,7 +42,9 @@ export function createDayNight(THREE,exterior,renderer,{walking=false}={}){
  const halos=new THREE.Points(haloGeometry,new THREE.PointsMaterial({color:0xffdfa2,map:texture,size:1.9,transparent:true,opacity:.85,depthWrite:false,blending:THREE.AdditiveBlending,toneMapped:false}));
  halos.frustumCulled=false;effects.add(halos);
  const lights=Array.from({length:STREET_LIGHT_LIMIT},()=>{const light=new THREE.PointLight(0xffcb83,0,22,2);scene.add(light);return light;});
- const matrix=new THREE.Matrix4(),focus=new THREE.Vector3(),direction=new THREE.Vector3();let night=false;
+ const matrix=new THREE.Matrix4(),focus=new THREE.Vector3(),direction=new THREE.Vector3();let mode='day';
+ atmosphere.setSunDirection(sun.position.clone().sub(sun.target.position));
+ function fogDensity(){return mode==='day'?day.density:mode==='dusk'?((walking||twilight)?.0019:day.density):walking?.0032:.00065;}
  function refreshFixtures(){
   let changed=false;for(const lamp of lamps){const visible=visibleInScene(lamp.owner);if(visible!==lamp.visible){lamp.visible=visible;changed=true;}}
   if(!changed)return;
@@ -50,10 +54,11 @@ export function createDayNight(THREE,exterior,renderer,{walking=false}={}){
   }
   pools.count=count;pools.instanceMatrix.needsUpdate=true;haloGeometry.setDrawRange(0,count);haloGeometry.attributes.position.needsUpdate=true;
  }
- function update(){
-  if(!night)return;
+ function update(dt=0){
+  atmosphere.update(dt);
+  if(mode==='day')return;
   windows.update();
-  scene.fog.density=walking?.0032:.00065;
+  scene.fog.density=fogDensity();
   refreshFixtures();
   focus.copy(camera.position);
   if(!walking){camera.getWorldDirection(direction);if(direction.y<-.05)focus.addScaledVector(direction,Math.min(1800,-camera.position.y/direction.y));}
@@ -67,27 +72,38 @@ export function createDayNight(THREE,exterior,renderer,{walking=false}={}){
    light.position.copy(lamp.position);light.intensity=95*fade*fade*(3-2*fade);
   });
  }
- function setNight(value){
-  windows.setNight(Boolean(value));
-  night=Boolean(value);effects.visible=night;
-  scene.background.copy(night?new THREE.Color(0x070e1b):day.background);
-  scene.fog.color.copy(night?new THREE.Color(0x111d30):day.fog);scene.fog.density=night?(walking?.0032:.00065):day.density;
-  sun.color.copy(night?new THREE.Color(0x8ba9e5):day.sunColor);sun.intensity=night?.55:day.sunIntensity;
-  sky.color.copy(night?new THREE.Color(0xa4b4cf):day.skyColor);sky.groundColor.copy(night?new THREE.Color(0x364152):day.groundColor);sky.intensity=night?.7:day.skyIntensity;
-  renderer.toneMappingExposure=night?1.05:day.exposure;
-  for(const material of diffusers){material.emissive.setHex(night?0xffd28e:0x000000);material.emissiveIntensity=night?3:1;}
-  if(!night)for(const light of lights)light.intensity=0;
+ function setMode(value){
+  if(!['day','dusk','night'].includes(value))throw new Error('Unknown lighting mode: '+value);
+  mode=value;const lit=mode!=='day',dusk=mode==='dusk';
+  windows.setDensity(dusk?2.4:WINDOWS_PER_LIGHT);windows.setNight(lit);effects.visible=lit;
+  atmosphere.setMode(mode);
+  scene.background.copy(lit?new THREE.Color(dusk?0x667872:0x070e1b):day.background);
+  scene.fog.color.copy(lit?new THREE.Color(dusk?0x7b877d:0x111d30):day.fog);scene.fog.density=fogDensity();
+  sun.color.copy(lit?new THREE.Color(dusk?0xffcc8d:0x8ba9e5):day.sunColor);sun.intensity=lit?(dusk?1.65:.55):day.sunIntensity;
+  if(dusk)sun.position.copy(sun.target.position).add(new THREE.Vector3(-100,85,-260));else sun.position.copy(day.sunPosition);
+  atmosphere.setSunDirection(sun.position.clone().sub(sun.target.position));
+  sky.color.copy(lit?new THREE.Color(dusk?0x96bbbe:0xa4b4cf):day.skyColor);sky.groundColor.copy(lit?new THREE.Color(dusk?0x444c36:0x364152):day.groundColor);sky.intensity=lit?(dusk?1.3:.7):day.skyIntensity;
+  renderer.toneMappingExposure=lit?(dusk?1.15:1.05):day.exposure;
+  for(const material of diffusers){material.emissive.setHex(lit?0xffd28e:0x000000);material.emissiveIntensity=lit?3:1;}
+  if(!lit)for(const light of lights)light.intensity=0;
   exterior.invalidateShadows();update();
  }
- return {setNight,update,lamps,lights,pools,windows,get night(){return night;}};
+ function setNight(value){setMode(value?(twilight?'dusk':'night'):'day');}
+ return {setMode,setNight,update,lamps,lights,pools,windows,atmosphere,get night(){return mode==='night';},get mode(){return mode;}};
 }
 
 export function bindDayNight(lighting,root=document){
- const button=root.getElementById('dayNightToggle');
+ const group=root.getElementById('dayNightToggle');
+ // Lucide icons, distributed under ISC/MIT; see vendor/LUCIDE-LICENSE.txt.
+ const icons={
+  day:'<circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2m-7.07-17.07 1.41 1.41m11.32 11.32 1.41 1.41M2 12h2M20 12h2m-15.66 5.66-1.41 1.41m14.14-14.14-1.41 1.41"/>',
+  dusk:'<path d="M12 10V2m-7.07 8.93 1.41 1.41M2 18h2M20 18h2m-2.93-7.07-1.41 1.41M22 22H2m14-16-4 4-4-4m8 12a4 4 0 0 0-8 0"/>',
+  night:'<path d="M20.985 12.486a9 9 0 1 1-9.473-9.472c.405-.022.617.46.402.803a6 6 0 0 0 8.268 8.268c.344-.215.825-.004.803.401"/>',
+ };
+ group.innerHTML=Object.entries(icons).map(([mode,icon])=>`<button type="button" data-lighting="${mode}" aria-label="${mode[0].toUpperCase()+mode.slice(1)}" title="${mode[0].toUpperCase()+mode.slice(1)}"><svg aria-hidden="true" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">${icon}</svg></button>`).join('');
+ const buttons=[...group.querySelectorAll('button')];
  function refresh(){
-  button.setAttribute('aria-pressed',String(lighting.night));
-  button.setAttribute('aria-label',lighting.night?'Night mode. Switch to day':'Day mode. Switch to night');
-  button.title=lighting.night?'Switch to day':'Switch to night';
+  for(const button of buttons)button.setAttribute('aria-pressed',String(lighting.mode===button.dataset.lighting));
  }
- button.addEventListener('click',()=>{lighting.setNight(!lighting.night);refresh();});refresh();
+ for(const button of buttons)button.addEventListener('click',()=>{lighting.setMode(button.dataset.lighting);refresh();});refresh();
 }

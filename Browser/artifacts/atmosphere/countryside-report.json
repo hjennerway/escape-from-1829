@@ -1,0 +1,84 @@
+{
+  "day1440": {
+    "mode": "day",
+    "visible": 15969,
+    "colors": 554,
+    "sky": 28,
+    "lit": 0,
+    "windows": 0,
+    "far": 7000
+  },
+  "dusk1440": {
+    "mode": "dusk",
+    "visible": 15794,
+    "colors": 455,
+    "sky": 133,
+    "lit": 1278,
+    "windows": 3067,
+    "far": 7000
+  },
+  "night1440": {
+    "mode": "night",
+    "visible": 15923,
+    "colors": 176,
+    "sky": 10,
+    "lit": 307,
+    "windows": 3067,
+    "far": 7000
+  },
+  "day390": {
+    "mode": "day",
+    "visible": 16000,
+    "colors": 597,
+    "sky": 27,
+    "lit": 0,
+    "windows": 3067,
+    "far": 7000
+  },
+  "dusk390": {
+    "mode": "dusk",
+    "visible": 15945,
+    "colors": 399,
+    "sky": 19,
+    "lit": 1278,
+    "windows": 3067,
+    "far": 7000
+  },
+  "night390": {
+    "mode": "night",
+    "visible": 16000,
+    "colors": 172,
+    "sky": 2,
+    "lit": 307,
+    "windows": 3067,
+    "far": 7000
+  },
+  "day320": {
+    "mode": "day",
+    "visible": 15997,
+    "colors": 574,
+    "sky": 25,
+    "lit": 0,
+    "windows": 3067,
+    "far": 7000
+  },
+  "dusk320": {
+    "mode": "dusk",
+    "visible": 15961,
+    "colors": 405,
+    "sky": 20,
+    "lit": 1278,
+    "windows": 3067,
+    "far": 7000
+  },
+  "night320": {
+    "mode": "night",
+    "visible": 16000,
+    "colors": 167,
+    "sky": 2,
+    "lit": 307,
+    "windows": 3067,
+    "far": 7000
+  },
+  "shadowMotion": 5918
+}

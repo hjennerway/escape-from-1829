@@ -28,6 +28,30 @@ for(const roof of roofs){
 }
 const ray=new THREE.Raycaster();
 function hits(objects,x,z){ray.set(new THREE.Vector3(x,40,z),new THREE.Vector3(0,-1,0));return ray.intersectObjects(objects,true);}
+// The pale trim must stand clear of the masonry, rather than share its
+// outward face and flicker as the camera moves along the roof edge.
+for(const side of [-1,1]){
+ const z=side<0?b.minZ:b.maxZ;
+ for(const x of [b.minX+3,(b.minX+b.maxX)/2,b.maxX-3]){
+  ray.set(new THREE.Vector3(x,b.eaves-.07,z+side),new THREE.Vector3(0,0,-side));
+  const trimHit=ray.intersectObjects(kitchen.children.filter(o=>o.name==='Main kitchen fascia'))[0];
+  const wallHit=ray.intersectObject(kitchen.getObjectByName('Main kitchen walls'))[0];
+  assert(trimHit&&wallHit&&wallHit.distance-trimHit.distance>=.015,'Fascia face must project clear of the kitchen brickwork');
+ }
+ const x=side<0?b.minX:b.maxX;
+ ray.set(new THREE.Vector3(x+side,b.eaves-.07,(b.minZ+b.maxZ)/2),new THREE.Vector3(-side,0,0));
+ const gutterHit=ray.intersectObjects(kitchen.children.filter(o=>o.name==='Main kitchen side gutter'))[0];
+ const wallHit=ray.intersectObject(kitchen.getObjectByName('Main kitchen walls'))[0];
+ assert(gutterHit&&wallHit&&wallHit.distance-gutterHit.distance>=.015,'Side gutter face must project clear of the kitchen brickwork');
+}
+// Three arms meet: the cross-gallery cap ends flush at the west face of the
+// continuing north/south ridge, with no fourth arm or coplanar cap overlap.
+const crossRidge=new THREE.Box3().setFromObject(exterior.adminCorridor.getObjectByName('Connecting corridor ridge'));
+for(const name of ['Straight corridor to Farndon ridge','Main/admin front corridor ridge']){
+ const throughRidge=new THREE.Box3().setFromObject(exterior.adminCorridor.getObjectByName(name));
+ assert(Math.abs(crossRidge.max.x-throughRidge.min.x)<1e-5,'Cross-gallery ridge must terminate flush at the through ridge to form a T');
+ assert(Math.abs(crossRidge.max.y-throughRidge.max.y)<1e-5,'All three ridge arms meet at one height');
+}
 // Sample the entire footprint, especially the cut-away stores corner and the
 // formerly deeper connector, to catch hidden foundation and roof overlaps.
 for(let x=b.minX+.4;x<b.maxX;x+=.8)for(let z=b.minZ+.4;z<b.maxZ;z+=.8){
@@ -51,4 +75,4 @@ for(const historic of [false,true])for(const modern of [false,true]){
  for(const p of [[130,-10],[150,-23],[128,4]])assert.equal(obstacles.some(o=>obstacleContains(o,...p)),historic,'Kitchen collisions follow Historic visibility');
  assert(!obstacles.some(o=>obstacleContains(o,MAIN_KITCHEN_WALK.position[0],MAIN_KITCHEN_WALK.position[2])),'Walking view starts outside buildings');
 }
-console.log('PASS: three white four-sided hips, continuous roof coverage, /\\/\\/\\ profile, flush gallery joins, no connector/stores overlap, preserved L-shaped stores, and layout-aware walking collisions.');
+console.log('PASS: three white four-sided hips, continuous roof coverage, /\\/\\/\\ profile, clear eave trim, T-shaped ridge caps, flush gallery joins, no connector/stores overlap, preserved L-shaped stores, and layout-aware walking collisions.');

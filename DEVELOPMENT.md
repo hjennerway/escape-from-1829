@@ -1,3 +1,126 @@
+## Aerial countryside and three lighting modes (28 September 2026)
+
+The aerial and walking pages now offer direct Day, Dusk and Night selections.
+Night illuminates one in ten visible windows (rounded to the nearest whole
+window), superseding the one-in-fifteen setting documented below. Dusk retains
+the denser, approximately 42% lit-room treatment. Switching between dusk and
+night preserves room priorities; returning from daylight chooses a fresh set.
+The controls use Lucide icons with accessible labels, pressed states and native
+keyboard activation. Their license is retained in `Browser/dist/vendor/`.
+
+`Browser/dist/countryside.mjs` adds low meadow relief, irregular tree belts and
+interrupted hedges beyond the playable estate, including The Willows. These
+are illustrative surroundings, not historical survey data; see
+[the countryside notes](Research/countryside/README.md). The backdrop has three
+draws, casts no additional shadow maps and is excluded from model selection,
+timeline groups and walking collisions. Existing terrain remains level.
+
+The atmosphere shader adds world-aligned grass/field variation, slowly moving
+cloud shadows and estate-relative distance haze. Cloud detail extends down to
+the horizon, fading continuously into the distant meadow colour. Dusk uses a
+lower sun and warmer openings in the cloud cover. Changing modes invalidates
+cached shadows; daylight restores the original sun position and lighting.
+Reduced motion freezes both cloud drift and cloud shadows. Street illumination
+still uses eight unshadowed point lights. The title preview images are refreshed
+from the final runtime lighting rather than from promotional artwork.
+
+Validation includes `test-atmosphere.mjs`, `test-countryside-browser.mjs`, the
+day/night suite and source/compiled comparisons. Desktop and 390/320-pixel
+phone checks verify nonblank renders, mode-specific window counts, nonoverlapping
+controls and actual cloud-shadow pixel movement. Source and compiled renderings
+have identical draw/triangle counts; 0.016% of screenshot pixels differ
+significantly. The compiled comparison freezes weather via reduced-motion
+emulation so time-dependent shadows cannot invalidate its image comparison.
+The gameplay atmosphere and mobile landing suites also pass, covering animated
+cloud pixels, interior exposure restoration, preview loading/failure states and
+the 1916 title scene. A transient Windows screenshot-write error cleared on
+rerunning the landing suite.
+
+The full browser regression suite and all checks after its first failure were
+run. Only the previously recorded Jarman and Leighton/Newton protected-geometry
+snapshot failures remain; their expectations are unchanged. The browser's local
+compiled asset was rebuilt for the window-lighting source fingerprint. Browser
+runtime sources and loading images are updated; Unity, Blender and packaged
+Windows exports are not regenerated.
+
+## Main kitchen eave flicker and gallery ridge junction (28 September 2026)
+
+The kitchen fascia and side gutters now project 0.025 scene units clear of
+the brick wall faces, removing the coincident surfaces responsible for the
+marked eave flicker. The cross-gallery terracotta cap ends flush against the
+continuing north/south cap, producing a T junction. Reference and dimensions
+are in [the kitchen notes](Research/main-kitchen/README.md).
+
+The kitchen regression check ray-tests exposed trim clearance and the three
+ridge arms' flush contact and equal height. It fails on the original fascia
+and passes after the repair. The Main/admin, ward-corridor, tower-building
+and roof-contact checks also pass. A source comparison confirms exactly five
+changed meshes (two fascias, two side gutters and one ridge cap), with all
+3,414 other Main/admin and corridor meshes retaining their geometry and
+transforms. Evidence and the repeatable capture helper use
+`Browser/artifacts/kitchen-roof-`.
+
+Source and regenerated compiled close-ups were visually checked from shifted
+eave views and both sides of the T junction, with no browser errors. The
+compiled/source comparison passes, including full detail and fallback loading,
+as does every timeline stop and live walking collision refresh. The full
+browser suite stops at the Jarman protected-estate fingerprint; running its
+remaining checks reports only the analogous Leighton/Newton failure. Both
+reproduced their snapshot failures before this repair. Their baselines are
+retained; all other suite commands pass. `git diff --check` passes.
+
+Browser model sources and the local compiled aerial asset are updated.
+Unity, Blender exports and the packaged Windows app were not regenerated.
+
+## Artwork-inspired atmosphere (28 September 2026)
+
+The browser title, arrival and escape scenes now use a dusk treatment inspired
+by `Art/store-super-hero-1920x1080.png` and the square promotional artwork:
+teal cloud cover, a warm horizon, lit rooms and low ground mist. The title
+camera gently moves in front of the entrance, with a wider portrait distance;
+the interactive aerial view keeps its existing map camera. Both loading WebPs
+are regenerated through `Browser/capture-landing.mjs` using the same lighting
+and camera as the live title. Reduced-motion preferences freeze cloud drift
+and the title camera.
+
+`Browser/dist/atmosphere.mjs` adds a runtime sky and composes height-dependent
+mist with the existing grass and window shaders. Clouds share a deterministic
+128-pixel noise texture with the mist. Existing repeated masonry/roof textures
+also supply shallow bump detail; grass, glazing, transparent foliage and photo
+panels are excluded from that treatment. The sky is one unshadowed draw and
+does not enter the model hierarchy, selection meshes or walking obstacles.
+
+Dusk illuminates about 42% of visible windows with a stable seeded selection.
+Close panes have warm colour variation, curtain folds and stronger light toward
+the sill; distant atlases retain their glass-only emission mask. Ordinary
+walking/aerial night mode keeps its random one-in-fifteen selection. Day/night
+switching changes the sky palette and restores daylight lighting. All exterior
+views retain the eight-light street-lamp budget and cached-shadow invalidation.
+Interior fixtures are warmer, with cooler, slightly lower ambient fill; the
+game restores its interior exposure immediately after the arrival handoff.
+
+Validation includes `test-atmosphere.mjs` (also run by `test-day-night.mjs`),
+`test-atmosphere-browser.mjs`, desktop/mobile landing checks and the day/night
+and compiled-model browser suites. The atmosphere browser check captures real
+canvas pixels and composited screenshots at 1280x800 and 390x844, verifies
+visible cloud movement, window density, the light budget and interior exposure.
+Visual evidence is under `Browser/artifacts/atmosphere/`.
+
+All focused browser checks pass, including mobile loading/failure states,
+day/night controls and selection, every historical period and live walking
+collisions. The final compiled/source comparison has identical draw and
+triangle counts, with 0.0176% of pixels differing significantly. A concurrent
+kitchen edit invalidated the first compiled run; verification was repeated
+successfully against the newly rebuilt combined scene.
+
+The full `npm test` run and the checks after its first failure were executed.
+Jarman and Leighton/Newton have pre-existing protected-geometry snapshot
+failures, reproduced using the committed window-light source; all other
+commands passed. Details are in `Browser/artifacts/atmosphere-remaining-tests.json`.
+The local compiled estate was rebuilt for the window-source fingerprint.
+This change updates browser runtime sources and loading images; Unity, Blender,
+GLB exports and the packaged Windows app were not regenerated.
+
 ## Microsoft Store artwork (28 September 2026)
 
 Seven Store listing PNGs are saved directly in `Art/`: poster artwork at
@@ -4023,3 +4146,29 @@ Final logs use Browser/artifacts/west-front-e-width-final-*. The final previews
 are west-front-e-source-* and west-front-e-compiled-*; reference.png shows all
 four marked faces from the garden. The generated browser model is current.
 Blender and Unity exports were not regenerated.
+
+## Shared aerial and walking interface style (28 September 2026)
+
+`Browser/dist/view-ui.css` applies the time-of-day control's dark green surface,
+fine border and 4 px outer / 2 px inset corners to the navigation, timeline,
+location menu/status, walking guide and direction pad, building photos and
+photo viewer. Hover, selected and keyboard-focus states remain visible. The
+stylesheet is loaded only by aerial and explore pages.
+
+The aerial action group puts the location crosshairs before day/dusk/night,
+Locations and Reset in both markup and visual order. On phones the group sits
+below Back; at 430 px and below, Locations/Reset wrap to another row to retain
+44 px lighting targets. Shared navigation offsets keep menus and panels below
+the controls. Timeline arrows also have 44 px targets.
+
+Validation: the complete `npm test` run and continuation cover all 79 commands;
+77 pass, with only the previously documented Jarman and Leighton/Newton
+whole-estate geometry snapshots failing. The existing mobile browser check
+passes touch movement, simultaneous look, cancellation, timeline/navigation
+and desktop keyboard/drag. The interface browser check covers both views at
+320, 390, 430, 431, 650 and 1200 px, plus 568/844 px landscape, with screenshots,
+button order, viewport bounds, reachability, menus, keyboard lighting, Reset
+and photo panels. Evidence uses `Browser/artifacts/view-ui-*`.
+
+This change updates browser interface markup/styles only. No model sources,
+compiled models, Unity exports or Blender exports were changed for this work.

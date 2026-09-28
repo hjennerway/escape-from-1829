@@ -1,0 +1,1490 @@
+[
+  {
+    "mode": "aerial",
+    "width": 1200,
+    "height": 800,
+    "controls": [
+      {
+        "id": "backToIntro",
+        "x": 24,
+        "y": 24,
+        "width": 137.6875,
+        "height": 50,
+        "right": 161.6875,
+        "bottom": 74,
+        "reachable": true
+      },
+      {
+        "id": "deviceLocationButton",
+        "x": 774.640625,
+        "y": 24,
+        "width": 44,
+        "height": 50,
+        "right": 818.640625,
+        "bottom": 74,
+        "reachable": true
+      },
+      {
+        "id": "dayNightToggle",
+        "x": 826.640625,
+        "y": 24,
+        "width": 138,
+        "height": 50,
+        "right": 964.640625,
+        "bottom": 74,
+        "reachable": true
+      },
+      {
+        "id": "locationsButton",
+        "x": 972.640625,
+        "y": 24,
+        "width": 123.671875,
+        "height": 50,
+        "right": 1096.3125,
+        "bottom": 74,
+        "reachable": true
+      },
+      {
+        "id": "resetAerial",
+        "x": 1104.3125,
+        "y": 24,
+        "width": 71.6875,
+        "height": 50,
+        "right": 1176,
+        "bottom": 74,
+        "reachable": true
+      },
+      {
+        "id": "periodSlider",
+        "x": 925,
+        "y": 574.90625,
+        "width": 182,
+        "height": 36,
+        "right": 1107,
+        "bottom": 610.90625,
+        "reachable": true
+      }
+    ],
+    "nav": {
+      "x": 24,
+      "y": 24,
+      "width": 1152,
+      "height": 50,
+      "right": 1176,
+      "bottom": 74
+    },
+    "order": [
+      "deviceLocationButton",
+      "day",
+      "dusk",
+      "night",
+      "locationsButton",
+      "resetAerial"
+    ],
+    "panelRadius": "4px"
+  },
+  {
+    "mode": "aerial",
+    "width": 650,
+    "height": 800,
+    "controls": [
+      {
+        "id": "backToIntro",
+        "x": 12,
+        "y": 12,
+        "width": 121.6875,
+        "height": 50,
+        "right": 133.6875,
+        "bottom": 62,
+        "reachable": true
+      },
+      {
+        "id": "deviceLocationButton",
+        "x": 260.640625,
+        "y": 70,
+        "width": 44,
+        "height": 50,
+        "right": 304.640625,
+        "bottom": 120,
+        "reachable": true
+      },
+      {
+        "id": "dayNightToggle",
+        "x": 312.640625,
+        "y": 70,
+        "width": 138,
+        "height": 50,
+        "right": 450.640625,
+        "bottom": 120,
+        "reachable": true
+      },
+      {
+        "id": "locationsButton",
+        "x": 458.640625,
+        "y": 70,
+        "width": 111.671875,
+        "height": 50,
+        "right": 570.3125,
+        "bottom": 120,
+        "reachable": true
+      },
+      {
+        "id": "resetAerial",
+        "x": 578.3125,
+        "y": 70,
+        "width": 59.6875,
+        "height": 50,
+        "right": 638,
+        "bottom": 120,
+        "reachable": true
+      },
+      {
+        "id": "periodSlider",
+        "x": 423,
+        "y": 560.90625,
+        "width": 150,
+        "height": 36,
+        "right": 573,
+        "bottom": 596.90625,
+        "reachable": true
+      }
+    ],
+    "nav": {
+      "x": 12,
+      "y": 12,
+      "width": 626,
+      "height": 108,
+      "right": 638,
+      "bottom": 120
+    },
+    "order": [
+      "deviceLocationButton",
+      "day",
+      "dusk",
+      "night",
+      "locationsButton",
+      "resetAerial"
+    ],
+    "panelRadius": "4px"
+  },
+  {
+    "mode": "aerial",
+    "width": 431,
+    "height": 800,
+    "controls": [
+      {
+        "id": "backToIntro",
+        "x": 12,
+        "y": 12,
+        "width": 121.6875,
+        "height": 50,
+        "right": 133.6875,
+        "bottom": 62,
+        "reachable": true
+      },
+      {
+        "id": "deviceLocationButton",
+        "x": 41.640625,
+        "y": 70,
+        "width": 44,
+        "height": 50,
+        "right": 85.640625,
+        "bottom": 120,
+        "reachable": true
+      },
+      {
+        "id": "dayNightToggle",
+        "x": 93.640625,
+        "y": 70,
+        "width": 138,
+        "height": 50,
+        "right": 231.640625,
+        "bottom": 120,
+        "reachable": true
+      },
+      {
+        "id": "locationsButton",
+        "x": 239.640625,
+        "y": 70,
+        "width": 111.671875,
+        "height": 50,
+        "right": 351.3125,
+        "bottom": 120,
+        "reachable": true
+      },
+      {
+        "id": "resetAerial",
+        "x": 359.3125,
+        "y": 70,
+        "width": 59.6875,
+        "height": 50,
+        "right": 419,
+        "bottom": 120,
+        "reachable": true
+      },
+      {
+        "id": "periodSlider",
+        "x": 204,
+        "y": 560.90625,
+        "width": 150,
+        "height": 36,
+        "right": 354,
+        "bottom": 596.90625,
+        "reachable": true
+      }
+    ],
+    "nav": {
+      "x": 12,
+      "y": 12,
+      "width": 407,
+      "height": 108,
+      "right": 419,
+      "bottom": 120
+    },
+    "order": [
+      "deviceLocationButton",
+      "day",
+      "dusk",
+      "night",
+      "locationsButton",
+      "resetAerial"
+    ],
+    "panelRadius": "4px"
+  },
+  {
+    "mode": "aerial",
+    "width": 430,
+    "height": 800,
+    "controls": [
+      {
+        "id": "backToIntro",
+        "x": 12,
+        "y": 12,
+        "width": 121.6875,
+        "height": 50,
+        "right": 133.6875,
+        "bottom": 62,
+        "reachable": true
+      },
+      {
+        "id": "deviceLocationButton",
+        "x": 228,
+        "y": 70,
+        "width": 44,
+        "height": 50,
+        "right": 272,
+        "bottom": 120,
+        "reachable": true
+      },
+      {
+        "id": "dayNightToggle",
+        "x": 280,
+        "y": 70,
+        "width": 138,
+        "height": 50,
+        "right": 418,
+        "bottom": 120,
+        "reachable": true
+      },
+      {
+        "id": "locationsButton",
+        "x": 238.640625,
+        "y": 128,
+        "width": 111.671875,
+        "height": 50,
+        "right": 350.3125,
+        "bottom": 178,
+        "reachable": true
+      },
+      {
+        "id": "resetAerial",
+        "x": 358.3125,
+        "y": 128,
+        "width": 59.6875,
+        "height": 50,
+        "right": 418,
+        "bottom": 178,
+        "reachable": true
+      },
+      {
+        "id": "periodSlider",
+        "x": 203,
+        "y": 560.90625,
+        "width": 150,
+        "height": 36,
+        "right": 353,
+        "bottom": 596.90625,
+        "reachable": true
+      }
+    ],
+    "nav": {
+      "x": 12,
+      "y": 12,
+      "width": 406,
+      "height": 166,
+      "right": 418,
+      "bottom": 178
+    },
+    "order": [
+      "deviceLocationButton",
+      "day",
+      "dusk",
+      "night",
+      "locationsButton",
+      "resetAerial"
+    ],
+    "panelRadius": "4px"
+  },
+  {
+    "mode": "aerial",
+    "width": 390,
+    "height": 844,
+    "controls": [
+      {
+        "id": "backToIntro",
+        "x": 12,
+        "y": 12,
+        "width": 121.6875,
+        "height": 50,
+        "right": 133.6875,
+        "bottom": 62,
+        "reachable": true
+      },
+      {
+        "id": "deviceLocationButton",
+        "x": 188,
+        "y": 70,
+        "width": 44,
+        "height": 50,
+        "right": 232,
+        "bottom": 120,
+        "reachable": true
+      },
+      {
+        "id": "dayNightToggle",
+        "x": 240,
+        "y": 70,
+        "width": 138,
+        "height": 50,
+        "right": 378,
+        "bottom": 120,
+        "reachable": true
+      },
+      {
+        "id": "locationsButton",
+        "x": 198.640625,
+        "y": 128,
+        "width": 111.671875,
+        "height": 50,
+        "right": 310.3125,
+        "bottom": 178,
+        "reachable": true
+      },
+      {
+        "id": "resetAerial",
+        "x": 318.3125,
+        "y": 128,
+        "width": 59.6875,
+        "height": 50,
+        "right": 378,
+        "bottom": 178,
+        "reachable": true
+      },
+      {
+        "id": "periodSlider",
+        "x": 163,
+        "y": 604.90625,
+        "width": 150,
+        "height": 36,
+        "right": 313,
+        "bottom": 640.90625,
+        "reachable": true
+      }
+    ],
+    "nav": {
+      "x": 12,
+      "y": 12,
+      "width": 366,
+      "height": 166,
+      "right": 378,
+      "bottom": 178
+    },
+    "order": [
+      "deviceLocationButton",
+      "day",
+      "dusk",
+      "night",
+      "locationsButton",
+      "resetAerial"
+    ],
+    "panelRadius": "4px"
+  },
+  {
+    "mode": "aerial",
+    "width": 320,
+    "height": 568,
+    "controls": [
+      {
+        "id": "backToIntro",
+        "x": 12,
+        "y": 12,
+        "width": 121.6875,
+        "height": 50,
+        "right": 133.6875,
+        "bottom": 62,
+        "reachable": true
+      },
+      {
+        "id": "deviceLocationButton",
+        "x": 118,
+        "y": 70,
+        "width": 44,
+        "height": 50,
+        "right": 162,
+        "bottom": 120,
+        "reachable": true
+      },
+      {
+        "id": "dayNightToggle",
+        "x": 170,
+        "y": 70,
+        "width": 138,
+        "height": 50,
+        "right": 308,
+        "bottom": 120,
+        "reachable": true
+      },
+      {
+        "id": "locationsButton",
+        "x": 128.640625,
+        "y": 128,
+        "width": 111.671875,
+        "height": 50,
+        "right": 240.3125,
+        "bottom": 178,
+        "reachable": true
+      },
+      {
+        "id": "resetAerial",
+        "x": 248.3125,
+        "y": 128,
+        "width": 59.6875,
+        "height": 50,
+        "right": 308,
+        "bottom": 178,
+        "reachable": true
+      },
+      {
+        "id": "periodSlider",
+        "x": 93,
+        "y": 328.90625,
+        "width": 150,
+        "height": 36,
+        "right": 243,
+        "bottom": 364.90625,
+        "reachable": true
+      }
+    ],
+    "nav": {
+      "x": 12,
+      "y": 12,
+      "width": 296,
+      "height": 166,
+      "right": 308,
+      "bottom": 178
+    },
+    "order": [
+      "deviceLocationButton",
+      "day",
+      "dusk",
+      "night",
+      "locationsButton",
+      "resetAerial"
+    ],
+    "panelRadius": "4px"
+  },
+  {
+    "mode": "aerial",
+    "width": 568,
+    "height": 320,
+    "controls": [
+      {
+        "id": "backToIntro",
+        "x": 12,
+        "y": 12,
+        "width": 121.6875,
+        "height": 50,
+        "right": 133.6875,
+        "bottom": 62,
+        "reachable": true
+      },
+      {
+        "id": "deviceLocationButton",
+        "x": 178.640625,
+        "y": 70,
+        "width": 44,
+        "height": 50,
+        "right": 222.640625,
+        "bottom": 120,
+        "reachable": true
+      },
+      {
+        "id": "dayNightToggle",
+        "x": 230.640625,
+        "y": 70,
+        "width": 138,
+        "height": 50,
+        "right": 368.640625,
+        "bottom": 120,
+        "reachable": true
+      },
+      {
+        "id": "locationsButton",
+        "x": 376.640625,
+        "y": 70,
+        "width": 111.671875,
+        "height": 50,
+        "right": 488.3125,
+        "bottom": 120,
+        "reachable": true
+      },
+      {
+        "id": "resetAerial",
+        "x": 496.3125,
+        "y": 70,
+        "width": 59.6875,
+        "height": 50,
+        "right": 556,
+        "bottom": 120,
+        "reachable": true
+      },
+      {
+        "id": "periodSlider",
+        "x": 341,
+        "y": 251,
+        "width": 150,
+        "height": 36,
+        "right": 491,
+        "bottom": 287,
+        "reachable": true
+      }
+    ],
+    "nav": {
+      "x": 12,
+      "y": 12,
+      "width": 544,
+      "height": 108,
+      "right": 556,
+      "bottom": 120
+    },
+    "order": [
+      "deviceLocationButton",
+      "day",
+      "dusk",
+      "night",
+      "locationsButton",
+      "resetAerial"
+    ],
+    "panelRadius": "4px"
+  },
+  {
+    "mode": "aerial",
+    "width": 844,
+    "height": 390,
+    "controls": [
+      {
+        "id": "backToIntro",
+        "x": 24,
+        "y": 24,
+        "width": 137.6875,
+        "height": 50,
+        "right": 161.6875,
+        "bottom": 74,
+        "reachable": true
+      },
+      {
+        "id": "deviceLocationButton",
+        "x": 418.640625,
+        "y": 24,
+        "width": 44,
+        "height": 50,
+        "right": 462.640625,
+        "bottom": 74,
+        "reachable": true
+      },
+      {
+        "id": "dayNightToggle",
+        "x": 470.640625,
+        "y": 24,
+        "width": 138,
+        "height": 50,
+        "right": 608.640625,
+        "bottom": 74,
+        "reachable": true
+      },
+      {
+        "id": "locationsButton",
+        "x": 616.640625,
+        "y": 24,
+        "width": 123.671875,
+        "height": 50,
+        "right": 740.3125,
+        "bottom": 74,
+        "reachable": true
+      },
+      {
+        "id": "resetAerial",
+        "x": 748.3125,
+        "y": 24,
+        "width": 71.6875,
+        "height": 50,
+        "right": 820,
+        "bottom": 74,
+        "reachable": true
+      },
+      {
+        "id": "periodSlider",
+        "x": 569,
+        "y": 209,
+        "width": 182,
+        "height": 36,
+        "right": 751,
+        "bottom": 245,
+        "reachable": true
+      }
+    ],
+    "nav": {
+      "x": 24,
+      "y": 24,
+      "width": 796,
+      "height": 50,
+      "right": 820,
+      "bottom": 74
+    },
+    "order": [
+      "deviceLocationButton",
+      "day",
+      "dusk",
+      "night",
+      "locationsButton",
+      "resetAerial"
+    ],
+    "panelRadius": "4px"
+  },
+  {
+    "mode": "explore",
+    "width": 1200,
+    "height": 800,
+    "controls": [
+      {
+        "id": "backToIntro",
+        "x": 24,
+        "y": 24,
+        "width": 137.6875,
+        "height": 50,
+        "right": 161.6875,
+        "bottom": 74,
+        "reachable": true
+      },
+      {
+        "id": "dayNightToggle",
+        "x": 906.328125,
+        "y": 24,
+        "width": 138,
+        "height": 50,
+        "right": 1044.328125,
+        "bottom": 74,
+        "reachable": true
+      },
+      {
+        "id": "locationsButton",
+        "x": 1052.328125,
+        "y": 24,
+        "width": 123.671875,
+        "height": 50,
+        "right": 1176,
+        "bottom": 74,
+        "reachable": true
+      },
+      {
+        "id": "periodSlider",
+        "x": 925,
+        "y": 199,
+        "width": 182,
+        "height": 36,
+        "right": 1107,
+        "bottom": 235,
+        "reachable": true
+      },
+      {
+        "id": "Walk forward",
+        "x": 68,
+        "y": 632,
+        "width": 48,
+        "height": 48,
+        "right": 116,
+        "bottom": 680,
+        "reachable": true
+      },
+      {
+        "id": "Step left",
+        "x": 16,
+        "y": 684,
+        "width": 48,
+        "height": 48,
+        "right": 64,
+        "bottom": 732,
+        "reachable": true
+      },
+      {
+        "id": "Walk backward",
+        "x": 68,
+        "y": 736,
+        "width": 48,
+        "height": 48,
+        "right": 116,
+        "bottom": 784,
+        "reachable": true
+      },
+      {
+        "id": "Step right",
+        "x": 120,
+        "y": 684,
+        "width": 48,
+        "height": 48,
+        "right": 168,
+        "bottom": 732,
+        "reachable": true
+      }
+    ],
+    "nav": {
+      "x": 24,
+      "y": 24,
+      "width": 1152,
+      "height": 50,
+      "right": 1176,
+      "bottom": 74
+    },
+    "order": [
+      "day",
+      "dusk",
+      "night",
+      "locationsButton"
+    ],
+    "panelRadius": "4px"
+  },
+  {
+    "mode": "explore",
+    "width": 650,
+    "height": 800,
+    "controls": [
+      {
+        "id": "backToIntro",
+        "x": 12,
+        "y": 12,
+        "width": 137.6875,
+        "height": 50,
+        "right": 149.6875,
+        "bottom": 62,
+        "reachable": true
+      },
+      {
+        "id": "dayNightToggle",
+        "x": 368.328125,
+        "y": 70,
+        "width": 138,
+        "height": 50,
+        "right": 506.328125,
+        "bottom": 120,
+        "reachable": true
+      },
+      {
+        "id": "locationsButton",
+        "x": 514.328125,
+        "y": 70,
+        "width": 123.671875,
+        "height": 50,
+        "right": 638,
+        "bottom": 120,
+        "reachable": true
+      },
+      {
+        "id": "periodSlider",
+        "x": 419,
+        "y": 251,
+        "width": 150,
+        "height": 36,
+        "right": 569,
+        "bottom": 287,
+        "reachable": true
+      },
+      {
+        "id": "Walk forward",
+        "x": 68,
+        "y": 632,
+        "width": 48,
+        "height": 48,
+        "right": 116,
+        "bottom": 680,
+        "reachable": true
+      },
+      {
+        "id": "Step left",
+        "x": 16,
+        "y": 684,
+        "width": 48,
+        "height": 48,
+        "right": 64,
+        "bottom": 732,
+        "reachable": true
+      },
+      {
+        "id": "Walk backward",
+        "x": 68,
+        "y": 736,
+        "width": 48,
+        "height": 48,
+        "right": 116,
+        "bottom": 784,
+        "reachable": true
+      },
+      {
+        "id": "Step right",
+        "x": 120,
+        "y": 684,
+        "width": 48,
+        "height": 48,
+        "right": 168,
+        "bottom": 732,
+        "reachable": true
+      }
+    ],
+    "nav": {
+      "x": 12,
+      "y": 12,
+      "width": 626,
+      "height": 108,
+      "right": 638,
+      "bottom": 120
+    },
+    "order": [
+      "day",
+      "dusk",
+      "night",
+      "locationsButton"
+    ],
+    "panelRadius": "4px"
+  },
+  {
+    "mode": "explore",
+    "width": 431,
+    "height": 800,
+    "controls": [
+      {
+        "id": "backToIntro",
+        "x": 12,
+        "y": 12,
+        "width": 137.6875,
+        "height": 50,
+        "right": 149.6875,
+        "bottom": 62,
+        "reachable": true
+      },
+      {
+        "id": "dayNightToggle",
+        "x": 149.328125,
+        "y": 70,
+        "width": 138,
+        "height": 50,
+        "right": 287.328125,
+        "bottom": 120,
+        "reachable": true
+      },
+      {
+        "id": "locationsButton",
+        "x": 295.328125,
+        "y": 70,
+        "width": 123.671875,
+        "height": 50,
+        "right": 419,
+        "bottom": 120,
+        "reachable": true
+      },
+      {
+        "id": "periodSlider",
+        "x": 200,
+        "y": 251,
+        "width": 150,
+        "height": 36,
+        "right": 350,
+        "bottom": 287,
+        "reachable": true
+      },
+      {
+        "id": "Walk forward",
+        "x": 68,
+        "y": 632,
+        "width": 48,
+        "height": 48,
+        "right": 116,
+        "bottom": 680,
+        "reachable": true
+      },
+      {
+        "id": "Step left",
+        "x": 16,
+        "y": 684,
+        "width": 48,
+        "height": 48,
+        "right": 64,
+        "bottom": 732,
+        "reachable": true
+      },
+      {
+        "id": "Walk backward",
+        "x": 68,
+        "y": 736,
+        "width": 48,
+        "height": 48,
+        "right": 116,
+        "bottom": 784,
+        "reachable": true
+      },
+      {
+        "id": "Step right",
+        "x": 120,
+        "y": 684,
+        "width": 48,
+        "height": 48,
+        "right": 168,
+        "bottom": 732,
+        "reachable": true
+      }
+    ],
+    "nav": {
+      "x": 12,
+      "y": 12,
+      "width": 407,
+      "height": 108,
+      "right": 419,
+      "bottom": 120
+    },
+    "order": [
+      "day",
+      "dusk",
+      "night",
+      "locationsButton"
+    ],
+    "panelRadius": "4px"
+  },
+  {
+    "mode": "explore",
+    "width": 430,
+    "height": 800,
+    "controls": [
+      {
+        "id": "backToIntro",
+        "x": 12,
+        "y": 12,
+        "width": 137.6875,
+        "height": 50,
+        "right": 149.6875,
+        "bottom": 62,
+        "reachable": true
+      },
+      {
+        "id": "dayNightToggle",
+        "x": 148.328125,
+        "y": 70,
+        "width": 138,
+        "height": 50,
+        "right": 286.328125,
+        "bottom": 120,
+        "reachable": true
+      },
+      {
+        "id": "locationsButton",
+        "x": 294.328125,
+        "y": 70,
+        "width": 123.671875,
+        "height": 50,
+        "right": 418,
+        "bottom": 120,
+        "reachable": true
+      },
+      {
+        "id": "periodSlider",
+        "x": 199,
+        "y": 251,
+        "width": 150,
+        "height": 36,
+        "right": 349,
+        "bottom": 287,
+        "reachable": true
+      },
+      {
+        "id": "Walk forward",
+        "x": 68,
+        "y": 632,
+        "width": 48,
+        "height": 48,
+        "right": 116,
+        "bottom": 680,
+        "reachable": true
+      },
+      {
+        "id": "Step left",
+        "x": 16,
+        "y": 684,
+        "width": 48,
+        "height": 48,
+        "right": 64,
+        "bottom": 732,
+        "reachable": true
+      },
+      {
+        "id": "Walk backward",
+        "x": 68,
+        "y": 736,
+        "width": 48,
+        "height": 48,
+        "right": 116,
+        "bottom": 784,
+        "reachable": true
+      },
+      {
+        "id": "Step right",
+        "x": 120,
+        "y": 684,
+        "width": 48,
+        "height": 48,
+        "right": 168,
+        "bottom": 732,
+        "reachable": true
+      }
+    ],
+    "nav": {
+      "x": 12,
+      "y": 12,
+      "width": 406,
+      "height": 108,
+      "right": 418,
+      "bottom": 120
+    },
+    "order": [
+      "day",
+      "dusk",
+      "night",
+      "locationsButton"
+    ],
+    "panelRadius": "4px"
+  },
+  {
+    "mode": "explore",
+    "width": 390,
+    "height": 844,
+    "controls": [
+      {
+        "id": "backToIntro",
+        "x": 12,
+        "y": 12,
+        "width": 137.6875,
+        "height": 50,
+        "right": 149.6875,
+        "bottom": 62,
+        "reachable": true
+      },
+      {
+        "id": "dayNightToggle",
+        "x": 108.328125,
+        "y": 70,
+        "width": 138,
+        "height": 50,
+        "right": 246.328125,
+        "bottom": 120,
+        "reachable": true
+      },
+      {
+        "id": "locationsButton",
+        "x": 254.328125,
+        "y": 70,
+        "width": 123.671875,
+        "height": 50,
+        "right": 378,
+        "bottom": 120,
+        "reachable": true
+      },
+      {
+        "id": "periodSlider",
+        "x": 159,
+        "y": 251,
+        "width": 150,
+        "height": 36,
+        "right": 309,
+        "bottom": 287,
+        "reachable": true
+      },
+      {
+        "id": "Walk forward",
+        "x": 68,
+        "y": 676,
+        "width": 48,
+        "height": 48,
+        "right": 116,
+        "bottom": 724,
+        "reachable": true
+      },
+      {
+        "id": "Step left",
+        "x": 16,
+        "y": 728,
+        "width": 48,
+        "height": 48,
+        "right": 64,
+        "bottom": 776,
+        "reachable": true
+      },
+      {
+        "id": "Walk backward",
+        "x": 68,
+        "y": 780,
+        "width": 48,
+        "height": 48,
+        "right": 116,
+        "bottom": 828,
+        "reachable": true
+      },
+      {
+        "id": "Step right",
+        "x": 120,
+        "y": 728,
+        "width": 48,
+        "height": 48,
+        "right": 168,
+        "bottom": 776,
+        "reachable": true
+      }
+    ],
+    "nav": {
+      "x": 12,
+      "y": 12,
+      "width": 366,
+      "height": 108,
+      "right": 378,
+      "bottom": 120
+    },
+    "order": [
+      "day",
+      "dusk",
+      "night",
+      "locationsButton"
+    ],
+    "panelRadius": "4px"
+  },
+  {
+    "mode": "explore",
+    "width": 320,
+    "height": 568,
+    "controls": [
+      {
+        "id": "backToIntro",
+        "x": 12,
+        "y": 12,
+        "width": 137.6875,
+        "height": 50,
+        "right": 149.6875,
+        "bottom": 62,
+        "reachable": true
+      },
+      {
+        "id": "dayNightToggle",
+        "x": 38.328125,
+        "y": 70,
+        "width": 138,
+        "height": 50,
+        "right": 176.328125,
+        "bottom": 120,
+        "reachable": true
+      },
+      {
+        "id": "locationsButton",
+        "x": 184.328125,
+        "y": 70,
+        "width": 123.671875,
+        "height": 50,
+        "right": 308,
+        "bottom": 120,
+        "reachable": true
+      },
+      {
+        "id": "periodSlider",
+        "x": 89,
+        "y": 251,
+        "width": 150,
+        "height": 36,
+        "right": 239,
+        "bottom": 287,
+        "reachable": true
+      },
+      {
+        "id": "Walk forward",
+        "x": 68,
+        "y": 400,
+        "width": 48,
+        "height": 48,
+        "right": 116,
+        "bottom": 448,
+        "reachable": true
+      },
+      {
+        "id": "Step left",
+        "x": 16,
+        "y": 452,
+        "width": 48,
+        "height": 48,
+        "right": 64,
+        "bottom": 500,
+        "reachable": true
+      },
+      {
+        "id": "Walk backward",
+        "x": 68,
+        "y": 504,
+        "width": 48,
+        "height": 48,
+        "right": 116,
+        "bottom": 552,
+        "reachable": true
+      },
+      {
+        "id": "Step right",
+        "x": 120,
+        "y": 452,
+        "width": 48,
+        "height": 48,
+        "right": 168,
+        "bottom": 500,
+        "reachable": true
+      }
+    ],
+    "nav": {
+      "x": 12,
+      "y": 12,
+      "width": 296,
+      "height": 108,
+      "right": 308,
+      "bottom": 120
+    },
+    "order": [
+      "day",
+      "dusk",
+      "night",
+      "locationsButton"
+    ],
+    "panelRadius": "4px"
+  },
+  {
+    "mode": "explore",
+    "width": 568,
+    "height": 320,
+    "controls": [
+      {
+        "id": "backToIntro",
+        "x": 12,
+        "y": 12,
+        "width": 137.6875,
+        "height": 50,
+        "right": 149.6875,
+        "bottom": 62,
+        "reachable": true
+      },
+      {
+        "id": "dayNightToggle",
+        "x": 286.328125,
+        "y": 70,
+        "width": 138,
+        "height": 50,
+        "right": 424.328125,
+        "bottom": 120,
+        "reachable": true
+      },
+      {
+        "id": "locationsButton",
+        "x": 432.328125,
+        "y": 70,
+        "width": 123.671875,
+        "height": 50,
+        "right": 556,
+        "bottom": 120,
+        "reachable": true
+      },
+      {
+        "id": "periodSlider",
+        "x": 337,
+        "y": 251,
+        "width": 150,
+        "height": 36,
+        "right": 487,
+        "bottom": 287,
+        "reachable": true
+      },
+      {
+        "id": "Walk forward",
+        "x": 68,
+        "y": 152,
+        "width": 48,
+        "height": 48,
+        "right": 116,
+        "bottom": 200,
+        "reachable": true
+      },
+      {
+        "id": "Step left",
+        "x": 16,
+        "y": 204,
+        "width": 48,
+        "height": 48,
+        "right": 64,
+        "bottom": 252,
+        "reachable": true
+      },
+      {
+        "id": "Walk backward",
+        "x": 68,
+        "y": 256,
+        "width": 48,
+        "height": 48,
+        "right": 116,
+        "bottom": 304,
+        "reachable": true
+      },
+      {
+        "id": "Step right",
+        "x": 120,
+        "y": 204,
+        "width": 48,
+        "height": 48,
+        "right": 168,
+        "bottom": 252,
+        "reachable": true
+      }
+    ],
+    "nav": {
+      "x": 12,
+      "y": 12,
+      "width": 544,
+      "height": 108,
+      "right": 556,
+      "bottom": 120
+    },
+    "order": [
+      "day",
+      "dusk",
+      "night",
+      "locationsButton"
+    ],
+    "panelRadius": "4px"
+  },
+  {
+    "mode": "explore",
+    "width": 844,
+    "height": 390,
+    "controls": [
+      {
+        "id": "backToIntro",
+        "x": 24,
+        "y": 24,
+        "width": 137.6875,
+        "height": 50,
+        "right": 161.6875,
+        "bottom": 74,
+        "reachable": true
+      },
+      {
+        "id": "dayNightToggle",
+        "x": 550.328125,
+        "y": 24,
+        "width": 138,
+        "height": 50,
+        "right": 688.328125,
+        "bottom": 74,
+        "reachable": true
+      },
+      {
+        "id": "locationsButton",
+        "x": 696.328125,
+        "y": 24,
+        "width": 123.671875,
+        "height": 50,
+        "right": 820,
+        "bottom": 74,
+        "reachable": true
+      },
+      {
+        "id": "periodSlider",
+        "x": 569,
+        "y": 209,
+        "width": 182,
+        "height": 36,
+        "right": 751,
+        "bottom": 245,
+        "reachable": true
+      },
+      {
+        "id": "Walk forward",
+        "x": 68,
+        "y": 222,
+        "width": 48,
+        "height": 48,
+        "right": 116,
+        "bottom": 270,
+        "reachable": true
+      },
+      {
+        "id": "Step left",
+        "x": 16,
+        "y": 274,
+        "width": 48,
+        "height": 48,
+        "right": 64,
+        "bottom": 322,
+        "reachable": true
+      },
+      {
+        "id": "Walk backward",
+        "x": 68,
+        "y": 326,
+        "width": 48,
+        "height": 48,
+        "right": 116,
+        "bottom": 374,
+        "reachable": true
+      },
+      {
+        "id": "Step right",
+        "x": 120,
+        "y": 274,
+        "width": 48,
+        "height": 48,
+        "right": 168,
+        "bottom": 322,
+        "reachable": true
+      }
+    ],
+    "nav": {
+      "x": 24,
+      "y": 24,
+      "width": 796,
+      "height": 50,
+      "right": 820,
+      "bottom": 74
+    },
+    "order": [
+      "day",
+      "dusk",
+      "night",
+      "locationsButton"
+    ],
+    "panelRadius": "4px"
+  }
+]

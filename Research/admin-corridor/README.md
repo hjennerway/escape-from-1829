@@ -74,3 +74,8 @@ comparison in `Browser/artifacts/verify-admin-front-corridor.mjs` additionally
 checks exact vertices and transforms for the 14 original corridor objects,
 and retained Main/admin geometry and openings. Aerial, plan, doorway and side
 renders are in `Browser/artifacts/admin-front-corridor-after-*.png`.
+
+The 28 September [kitchen roof correction](../main-kitchen/README.md#eave-flicker-and-ridge-junction-correction-28-september-2026)
+shortens the east/west terracotta cap to butt against the continuing
+north/south ridge, making a T. It supersedes the original cap's exact-geometry
+preservation above; the corridor endpoints, walls and slate roofs are retained.

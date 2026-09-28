@@ -35,3 +35,23 @@ road and aerial-performance tests have existing failures at the admin north
 service road and distant-tree triangle budget. Running them with the original
 Main/admin and tower-building modules reproduces the same failures; see
 `Browser/artifacts/main-kitchen-baseline-loader.mjs`.
+
+## Eave flicker and ridge junction correction (28 September 2026)
+
+The owner's [red/blue annotation](roof-trim-ridge-reference.png) identifies
+flickering trim along the kitchen eave and a crossed ridge cap at the adjoining
+gallery. The fascia and side gutters previously ended exactly on the kitchen
+wall faces. Their exposed faces now project 0.025 scene units beyond the brick,
+removing the coincident surfaces while retaining all three roof sections and
+the wall footprint.
+
+The east/west gallery's terracotta cap now stops at x=156.21, flush against
+the west face of the 0.18-wide north/south cap centred on x=156.3. The latter
+continues through the junction, producing the requested T. Only the cap is
+shortened; the slate roof coverage, corridor walls and walking routes remain
+in their accepted positions. This supersedes the earlier exact preservation
+of that cap recorded in the admin-corridor front-extension notes.
+
+The kitchen check now ray-tests clearance between trim and brickwork and
+checks that all three cap arms meet flush at the same height. Source and
+compiled close-up captures use `Browser/artifacts/kitchen-roof-`.

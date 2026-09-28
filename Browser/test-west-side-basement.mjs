@@ -66,6 +66,16 @@ for(const modern of [false,true]){
     assert(Math.abs(lawn.point.y-paving.point.y)<.01,'the courtyard meets the lawn without a visible step');
     assert(Math.abs(paving.point.y-basement.grade)<1e-5,'the old access slab cannot cover the lowered courtyard');
   }
+  // At aerial distances the five-millimetre court/lawn separation is smaller
+  // than depth-buffer precision. There must be no terrain under this paving.
+  for(const [x,z] of [[-60,-15],[-72.5,-37],[-72.5,-27],[-72.5,-.1],[-72.5,.02],[-72.5,3.9],[-42.5,-34.7]]){
+    ray.set(new THREE.Vector3(x,.9,z),new THREE.Vector3(0,-1,0));
+    const hits=ray.intersectObjects(visible,false);
+    assert(hits.length>0,'the lowered court, road link, transition and stair approach stay surfaced');
+    assert(!hits.some(hit=>hit.object.name==='Estate terrain'),`no near-coplanar lawn under west paving at ${x}, ${z}`);
+  }
+  for(const [x,z] of [[-60,-30],[-43.1,-34.7],[-40.5,-30],[-73.6,-15]])
+    assert.equal(surface(x,z).object.name,'Estate terrain','the lawn outside the paved outline stays intact');
   ray.set(new THREE.Vector3(-39,.5,-33),new THREE.Vector3(1,0,0));
   const galleryMaterial=ray.intersectObjects(visible,false)[0].object.material;
   const foundationMaterial=group.getObjectByName('West side basement exposed foundation -35.7 -37.79').material;
@@ -74,6 +84,11 @@ for(const modern of [false,true]){
 }
 layouts.setVisible('historic',false);layouts.setVisible('modern',false);
 assert.equal(surface(-38.3,-18).object.parent.name,'Unexcavated frontage terrain','hiding the estate fills the excavation with terrain');
+for(const [x,z] of [[-60,-15],[-72.5,-37],[-72.5,2],[-42.5,-34.7]]){
+  const hit=surface(x,z);
+  assert.equal(hit.object.parent.name,'Unexcavated frontage terrain','hiding the estate restores lawn across the courtyard and approach');
+  assert(Math.abs(hit.point.y+.15)<1e-5);
+}
 assert.equal(exteriorObstacles(THREE,e.model).walkSurfaces.length,0,'hidden passages do not retain walking heights');
 delete globalThis.document;
 console.log('PASS: west-side stairs, fully excavated passage, low wall, end door, both walking directions and layout visibility.');

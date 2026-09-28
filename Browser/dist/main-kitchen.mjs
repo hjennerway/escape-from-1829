@@ -55,8 +55,11 @@ export function createMainKitchen(THREE,{brick,material,worldUV}){
   }
   if(i)box(iron,x0,eave+.008,cz,.14,.025,d,'Main kitchen valley gutter');
  }
- for(const x of [b.minX+.065,b.maxX-.065])box(iron,x,b.eaves-.04,cz,.13,.13,d,'Main kitchen side gutter');
- for(const z of [b.minZ+.06,b.maxZ-.06])box(trim,cx,b.eaves-.08,z,w,.16,.12,'Main kitchen fascia');
+ // Project the visible trim faces clear of the wall. Flush box faces at the
+ // masonry boundary compete for depth and flicker along the entire eave.
+ const trimProjection=.025;
+ for(const x of [b.minX+.065-trimProjection,b.maxX-.065+trimProjection])box(iron,x,b.eaves-.04,cz,.13,.13,d,'Main kitchen side gutter');
+ for(const z of [b.minZ+.06-trimProjection,b.maxZ-.06+trimProjection])box(trim,cx,b.eaves-.08,z,w,.16,.12,'Main kitchen fascia');
  // Modest single-storey service windows on the exposed lawn elevations.
  function window(x,z,rotation){
   const face=new THREE.Group();face.name='Main kitchen window';face.position.set(x,2.65,z);face.rotation.y=rotation;group.add(face);

@@ -1,11 +1,12 @@
 <!doctype html>
-<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Explore the asylum · 1829</title><link rel="icon" href="./favicon.svg"><link rel="stylesheet" href="./style.css"><link rel="stylesheet" href="./aerial-layouts.css"><link rel="stylesheet" href="./aerial-locations.css"><link rel="stylesheet" href="./explore.css"><link rel="stylesheet" href="./day-night.css"></head>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Explore the asylum · 1829</title><link rel="icon" href="./favicon.svg"><link rel="stylesheet" href="./style.css"><link rel="stylesheet" href="./aerial-layouts.css"><link rel="stylesheet" href="./aerial-locations.css"><link rel="stylesheet" href="./explore.css"><link rel="stylesheet" href="./day-night.css"><link rel="stylesheet" href="./view-ui.css"></head>
 <body>
 <canvas id="game" tabindex="0" aria-label="Walk around the asylum exterior in 3D"></canvas>
 <nav class="explore-nav" aria-label="Explore navigation">
   <a id="backToIntro" href="./">← Back to intro</a>
-  <button id="dayNightToggle" type="button" aria-label="Day mode. Switch to night" aria-pressed="false" title="Switch to night"><span class="day-glyph" aria-hidden="true">☀</span><span class="night-glyph" aria-hidden="true">☾</span></button>
-  <div id="locationsPicker">
+  <div class="view-actions">
+    <div id="dayNightToggle" role="group" aria-label="Time of day"></div>
+    <div id="locationsPicker">
     <button id="locationsButton" type="button" aria-label="Locations" aria-expanded="false" aria-controls="locationsPanel">Locations</button>
     <div id="locationsPanel" hidden><ul>
       <li><a href="?view=acton">1829: Acton Ward (Centre)</a></li>
@@ -53,6 +54,7 @@
       <li><a href="?view=main-admin">Main/Admin Building</a></li>
       <li><a href="?view=main-kitchen">Main kitchen</a></li>
     </ul></div>
+    </div>
   </div>
 </nav>
 <details id="layoutControls" aria-label="Estate timeline" open>

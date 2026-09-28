@@ -72,7 +72,7 @@ try{
   if(!modes.has(name))continue;
   await page.goto(base+'/'+path);await page.waitForFunction(()=>window.__threeBench?.renderer.info.render.frame>3);
   if(!await page.evaluate(()=>window.__threeBench.exterior.trees.visible))await page.keyboard.press('t');
-  await capture(name+'-day');await page.locator('#dayNightToggle').click();await capture(name+'-night');
+  await capture(name+'-day');await page.locator('[data-lighting="night"]').click();await capture(name+'-night');
  }
  if(modes.has('game')){
  await page.goto(base+'/');await page.waitForFunction(()=>window.__threeBench?.ready);

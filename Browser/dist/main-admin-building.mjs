@@ -67,14 +67,19 @@ export function createMainAdminBuilding(THREE,{brick,roof,worldUV,material}){
     const g=new THREE.ExtrudeGeometry(shape,{depth:h,bevelEnabled:false});g.rotateX(-Math.PI/2);
     const o=mesh(worldUV(g,1.7),m,x,y,z,name);o.userData.collisionFootprint=points;return o;
   }
-  function hip(x,z,w,d,y,rise,name,parent=building){
+  function hip(x,z,w,d,y,rise,name,parent=building,ridgeEndX){
     const a=w/2+.22,b=d/2+.22,inset=Math.min(a,b)*.9;
     const v=[[-a,0,-b],[a,0,-b],[a,0,b],[-a,0,b],...(w>=d?[[-a+inset,rise,0],[a-inset,rise,0]]:[[0,rise,-b+inset],[0,rise,b-inset]])];
     const faces=w>=d?[[0,1,5],[0,5,4],[1,2,5],[2,3,4],[2,4,5],[3,0,4]]:[[0,1,4],[1,2,5],[1,5,4],[2,3,5],[3,0,4],[3,4,5]];
     const positions=[],uv=[];for(const f of faces)for(const i of [...f].reverse()){positions.push(...v[i]);uv.push(v[i][0]/2.8,(v[i][2]+v[i][1])/2.8);}
     const g=new THREE.BufferGeometry();g.setAttribute('position',new THREE.Float32BufferAttribute(positions,3));g.setAttribute('uv',new THREE.Float32BufferAttribute(uv,2));g.computeVertexNormals();
     mesh(g,roof,x,y,z,name+' slate roof',parent);
-    solid(red,x,y+rise+.04,z,w>=d?w-2*inset:.18,.13,w>=d?.18:d-2*inset,name+' ridge',parent);
+    let ridgeX=x,ridgeWidth=w>=d?w-2*inset:.18;
+    if(ridgeEndX!==undefined){
+      const ridgeStart=x-ridgeWidth/2;
+      ridgeWidth=ridgeEndX-ridgeStart;ridgeX=(ridgeStart+ridgeEndX)/2;
+    }
+    solid(red,ridgeX,y+rise+.04,z,ridgeWidth,.13,w>=d?.18:d-2*inset,name+' ridge',parent);
   }
   function range(spec){
     const [u0,v0,u1,v1]=spec.rect,a=adminMapPoint(u0,v0),b=adminMapPoint(u1,v1);
@@ -291,7 +296,11 @@ export function createMainAdminBuilding(THREE,{brick,roof,worldUV,material}){
   for(const section of sections){
     const {name,start:a,end:b,cz:z,depth,height,rise}=section,x=(a+b)/2;
     solid(corridorBrick,x,height/2,z,b-a,height,depth,name+' walls',corridor);
-    hip(x,z,b-a,depth,height+.06,rise,name,corridor);
+    // Stop the cross-gallery cap at the near face of the continuing ridge.
+    // The north/south caps are .18 wide; a flush butt joint makes a T without
+    // the old fourth arm or overlapping, coplanar terracotta top faces.
+    const ridgeEndX=name==='Connecting corridor'?FARNDON_CORRIDOR.x-.18/2:undefined;
+    hip(x,z,b-a,depth,height+.06,rise,name,corridor,ridgeEndX);
     if(a>=buildingStart)addAdminCorridorDetail(THREE,{corridor,...section,brick,material,worldUV,
       omitWindow:(x,side)=>Math.abs(x-FARNDON_CORRIDOR.x)<FARNDON_CORRIDOR.width/2+.8||side===-1&&x>=MAIN_KITCHEN.minX-1&&x<=MAIN_KITCHEN.maxX+1});
   }

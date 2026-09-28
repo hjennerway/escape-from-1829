@@ -1,4 +1,5 @@
 import assert from 'node:assert/strict';
+import './test-atmosphere.mjs';
 import * as THREE from './dist/vendor/three.module.js';
 import {createEscapeExterior} from './dist/escape-exterior.mjs';
 import {createAerialLayouts} from './dist/aerial-layouts.mjs';
@@ -16,7 +17,7 @@ assert(lighting.windows.count>2500);assert.equal(lighting.windows.selected.lengt
 const counts={};
 for(const {year} of PERIODS){
  timeline.setPeriod(year);lighting.setNight(true);
- assert.equal(lighting.windows.selected.length,Math.round(lighting.windows.visibleCount/15));
+ assert.equal(lighting.windows.selected.length,Math.round(lighting.windows.visibleCount/10));
  const selected=[...lighting.windows.selected];lighting.update();lighting.setNight(true);
  assert.deepEqual(lighting.windows.selected,selected,'Updates and repeated night setting keep the same windows');
  lighting.setNight(false);assert.equal(lighting.windows.selected.length,0);assert(lighting.windows.selection.image.data.every(v=>v===0));

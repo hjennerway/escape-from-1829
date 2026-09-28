@@ -36,7 +36,7 @@ const material=(color,extra={})=>new THREE.MeshStandardMaterial({color,roughness
 const tmp=new THREE.Vector3();
 function mesh(geometry,mat,p,parent=scene){const m=new THREE.Mesh(geometry,mat);m.position.set(...p);parent.add(m);return m;}
 function box(size,p,mat,parent){return mesh(new THREE.BoxGeometry(...size),mat,p,parent);}
-function lamp(x,z,color=0xe1dfd1){const floor=floorGroups.length;lights.push({x,z,y:floor*FLOOR_HEIGHT+2.9,floor,color});}
+function lamp(x,z,color=0xffdbac){const floor=floorGroups.length;lights.push({x,z,y:floor*FLOOR_HEIGHT+2.9,floor,color});}
 function lightFloor(){
  for(let z=0;z<layout.height;z++)for(let x=0;x<layout.width;x++){
   if(layout.cells[z*layout.width+x]&&((z===layout.galleryZ&&x%4===0)||(z%4===0&&x%4===0)))lamp(x*layout.cellSize,z*layout.cellSize);
@@ -193,7 +193,7 @@ async function init(){
   renderer=new THREE.WebGLRenderer({canvas,antialias:true,powerPreference:'high-performance'});renderer.setPixelRatio(Math.min(devicePixelRatio,1.5));renderer.setSize(innerWidth,innerHeight);renderer.outputColorSpace=THREE.SRGBColorSpace;renderer.toneMapping=THREE.ACESFilmicToneMapping;renderer.toneMappingExposure=1.25;
   scene=new THREE.Scene();scene.background=new THREE.Color(0x343731);scene.fog=new THREE.FogExp2(0x343731,.018);
   camera=new THREE.PerspectiveCamera(74,innerWidth/innerHeight,.05,150);camera.rotation.order='YXZ';
-  scene.add(new THREE.HemisphereLight(0xe1e0d5,0x777066,1.45));
+  scene.add(new THREE.HemisphereLight(0xc5d6d4,0x686253,1.1));
   const groundSnapshot=new Set(scene.children);
   if(layout.geometrySource==='layout')buildArchitecture(THREE,scene,layout);
   else try{
@@ -214,7 +214,7 @@ async function init(){
   interiorLights=createInteriorLights(THREE,scene,lights);
   torch=new THREE.SpotLight(0xfff3da,20,30,.50,.55,1.2);torchTarget=new THREE.Object3D();scene.add(torch,torchTarget);torch.target=torchTarget;
   enemies=layout.enemies.map(({name,x,z,type})=>({name,type,floor:0,spawn:{x:x*layout.cellSize,z:z*layout.cellSize,floor:0},x:x*layout.cellSize,z:z*layout.cellSize,mesh:enemyModel(type),path:[],memory:0,rethink:0,route:0,target:null}));
-  escapeExterior=await createLandingExterior(THREE,innerWidth/innerHeight);
+  escapeExterior=await createLandingExterior(THREE,innerWidth/innerHeight,renderer);
   canvas.addEventListener('webglcontextrestored',escapeExterior.invalidateShadows);
   bindTreeToggle(escapeExterior,document);
   await loadEscapeFrontage(THREE,escapeExterior);
@@ -322,6 +322,7 @@ function drawMapCanvas(c,s){
 }
 function drawMap(){if(!$('floorMap').hidden)drawMapCanvas(mapContext,10);drawMapCanvas(miniMapContext,5);}
 function renderAerialBackdrop(exterior){
+ renderer.toneMappingExposure=1.15;
  // Distant portrait cameras need light haze to keep the estate visible.
  // Restore the shared fog after drawing so arrival retains its atmosphere.
  const fog=exterior.scene.fog,fogDensity=fog?.density;
@@ -331,6 +332,8 @@ function renderAerialBackdrop(exterior){
 }
 function animate(){requestAnimationFrame(animate);clock.update();const frameDt=clock.getDelta(),dt=Math.min(frameDt,.04);
  if(document.hidden)return;
+ if(['menu','arrival','cutscene','won'].includes(state))exterior.lighting?.update(frameDt);
+ renderer.toneMappingExposure=['menu','cutscene','won'].includes(state)||(state==='arrival'&&!arrivalCutscene.inside)?1.15:1.25;
  if(state==='cutscene'||state==='won'){
   if(state==='cutscene'&&!document.hidden)escapeCutscene.update(frameDt);
   renderAerialBackdrop(escapeExterior);return;
@@ -340,14 +343,15 @@ function animate(){requestAnimationFrame(animate);clock.update();const frameDt=c
   if(!arrivalCutscene.inside){renderer.render(exterior.scene,exterior.camera);return;}
  }else if(state==='play')update(dt,frameDt);else if(state==='menu'){
   if(!document.hidden)landingTime+=Math.min(frameDt,.1);
-  const shot=sampleLanding(landingTime,{aspect:exterior.camera.aspect,reducedMotion:landingReducedMotion});
+  const shot=sampleLanding(landingTime,{aspect:exterior.camera.aspect,reducedMotion:landingReducedMotion,cinematic:true});
   exterior.camera.position.set(...shot.position);exterior.camera.lookAt(...shot.target);
   renderAerialBackdrop(exterior);
-  // Reveal the canvas only after its first complete aerial frame is drawn.
+  // Reveal the canvas only after its first complete exterior frame is drawn.
   if(!$('landingPreview').hidden){$('landingPreview').hidden=true;canvas.classList.add('scene-ready');}
   return;
  }
  if(state==='cutscene'){renderAerialBackdrop(escapeExterior);return;}
+ renderer.toneMappingExposure=1.25;
  interiorLights.update(player);camera.getWorldDirection(tmp);torch.position.copy(camera.position);torchTarget.position.copy(camera.position).addScaledVector(tmp,12);renderer.render(scene,camera);}
 $('start').onclick=start;$('closeHelp').onclick=resume;$('helpPlay').onclick=resume;$('retry').onclick=start;$('resume').onclick=resume;$('pause').onclick=pause;$('audio').onchange=e=>audioOn=e.target.checked;
 function toggleMap(){if(state==='play'){$('floorMap').hidden=!$('floorMap').hidden;drawMap();}}

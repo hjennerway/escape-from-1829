@@ -128,6 +128,6 @@ try{
   window.addEventListener('resize',()=>{renderer.setSize(innerWidth,innerHeight);exterior.camera.aspect=innerWidth/innerHeight;if(view==='inner-east-photo')exterior.camera.fov=innerEastPhotoView(exterior.camera.aspect).fov;if(view==='central-court-photo')exterior.camera.fov=centralCourtPhotoView(exterior.camera.aspect).fov;exterior.camera.updateProjectionMatrix();});
   const lighting=createDayNight(THREE,exterior,renderer,{walking:true});bindDayNight(lighting);
   const clock=new THREE.Timer();clock.connect(document);
-  renderer.setAnimationLoop(()=>{clock.update();const dt=clock.getDelta();if(input.active&&!document.hidden)walker.update(dt);lighting.update();renderer.render(exterior.scene,exterior.camera);});
+  renderer.setAnimationLoop(()=>{clock.update();const dt=clock.getDelta();if(document.hidden)return;if(input.active)walker.update(dt);lighting.update(dt);renderer.render(exterior.scene,exterior.camera);});
   loadEscapeFrontage(THREE,exterior).catch(error=>console.warn('Frontage photo unavailable',error));
 }catch(error){console.error(error);hint.textContent='The grounds could not load. Reload the page to try again.';look.disabled=false;look.textContent='RELOAD ↗';look.onclick=()=>location.reload();}

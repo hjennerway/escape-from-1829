@@ -1,7 +1,12 @@
 import {KML_WILLOW_TREES} from './kml-tree-data.mjs';
 import {WILLOWS} from './willows.mjs';
 
-export function sampleLanding(seconds,{aspect=16/9,reducedMotion=false}={}){
+export function sampleLanding(seconds,{aspect=16/9,reducedMotion=false,cinematic=false}={}){
+  if(cinematic){
+    const distance=56*Math.max(1,Math.min(2.8,1.25/aspect));
+    const sway=reducedMotion?0:Math.sin(seconds*.035)*.10;
+    return {position:[Math.sin(sway)*distance,6+(distance-56)*.035,19.8+Math.cos(sway)*distance],target:[0,10,19.8]};
+  }
   const radius=245*Math.max(1,Math.min(3.4,1.8/aspect));
   const angle=.35+(reducedMotion?0:seconds*.025);
   return {position:[12+Math.sin(angle)*radius,145+(radius-245)*.6,-12+Math.cos(angle)*radius],target:[12,5,-12]};

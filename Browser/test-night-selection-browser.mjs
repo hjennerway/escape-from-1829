@@ -23,9 +23,10 @@ try{
   await page.mouse.click(500,350);await page.waitForFunction(id=>window.__selection.buildingPhotos.active?.id===id,id);
  }
  await clickBuilding('1829-centre');await page.waitForFunction(()=>window.__selectionOpacity===1);
- await page.locator('#dayNightToggle').click();await page.waitForFunction(()=>window.__selectionOpacity===.3);
+ await page.locator('[data-lighting="night"]').click();await page.waitForFunction(()=>window.__selectionOpacity===.3);
  for(const id of ['1829-west','1829-east']){await clickBuilding(id);await page.waitForFunction(()=>window.__selectionOpacity===.3);}
  await page.screenshot({path:new URL('./artifacts/day-night-selection.png',import.meta.url).pathname.replace(/^\/([A-Z]:)/,'$1')});
- await page.locator('#dayNightToggle').click();await page.waitForFunction(()=>window.__selectionOpacity===1);assert.deepEqual(errors,[]);
+ await page.locator('[data-lighting="dusk"]').click();await page.waitForFunction(()=>window.__selectionOpacity===.6);
+ await page.locator('[data-lighting="day"]').click();await page.waitForFunction(()=>window.__selectionOpacity===1);assert.deepEqual(errors,[]);
  console.log('PASS: actual clicks select three buildings, night multiplies the final overlay/outline alpha by 0.3, and day restores 1.0.');
 }finally{await browser?.close();server.kill();}

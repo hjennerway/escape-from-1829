@@ -16,12 +16,13 @@ try{
  const renderer=new THREE.WebGLRenderer({antialias:true});
  renderer.outputColorSpace=THREE.SRGBColorSpace;renderer.toneMapping=THREE.ACESFilmicToneMapping;renderer.toneMappingExposure=1.25;
  renderer.shadowMap.enabled=true;renderer.shadowMap.type=THREE.PCFShadowMap;
- const exterior=await createLandingExterior(THREE,innerWidth/innerHeight);
+ const exterior=await createLandingExterior(THREE,innerWidth/innerHeight,renderer);
  await loadEscapeFrontage(THREE,exterior);exterior.scene.fog.density*=.25;
  window.capture=async(width,height)=>{
   renderer.setSize(width,height);exterior.camera.aspect=width/height;exterior.camera.updateProjectionMatrix();
-  const shot=sampleLanding(0,{aspect:width/height,reducedMotion:true});
+  const shot=sampleLanding(0,{aspect:width/height,reducedMotion:true,cinematic:true});
   exterior.camera.position.set(...shot.position);exterior.camera.lookAt(...shot.target);
+  exterior.lighting.update();exterior.scene.fog.density=.0019*.25;
   await renderer.compileAsync(exterior.scene,exterior.camera);
   renderer.render(exterior.scene,exterior.camera);
   return renderer.domElement.toDataURL('image/webp',.86).split(',')[1];

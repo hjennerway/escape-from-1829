@@ -33,7 +33,7 @@ const baseURL=await new Promise((resolve,reject)=>{server.stdout.once('data',dat
 let browser;const errors=[],metrics={},shots=new Map();
 try{
   browser=await chromium.launch({headless:true,...(process.env.MODEL_CHROME_PATH?{executablePath:process.env.MODEL_CHROME_PATH}:{}),args:['--use-angle=swiftshader','--enable-unsafe-swiftshader']});
-  const page=await browser.newPage({viewport:{width:1000,height:700}});
+  const page=await browser.newPage({viewport:{width:1000,height:700},reducedMotion:'reduce'});
   // CI's software WebGL can take more than 30s to start or capture a frame.
   // Navigation has a separate timeout; screenshots and controls need the same
   // bounded allowance as the rendered-frame check below.

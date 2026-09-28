@@ -1,5 +1,5 @@
-export const WINDOWS_PER_LIGHT=15;
-export const WINDOW_LIGHT_COLOR=0xffd28e;
+export const WINDOWS_PER_LIGHT=10;
+export const WINDOW_LIGHT_COLOR=0xffaf62;
 
 // Give each pane an identity before batching or window LOD. These attributes
 // survive the compiled scene, so every representation uses the same selection.
@@ -35,7 +35,7 @@ export function prepareWindowLights(THREE,root){
  root.userData.nightWindowCount=count;
 }
 
-export function createWindowLights(THREE,root,{random=Math.random}={}){
+export function createWindowLights(THREE,root,{random=Math.random,windowsPerLight=WINDOWS_PER_LIGHT}={}){
  prepareWindowLights(THREE,root);
  const count=root.userData.nightWindowCount,materials=new Set(),entries=[];
  // A 2D lookup also supports future estates exceeding the GPU texture width.
@@ -49,25 +49,35 @@ export function createWindowLights(THREE,root,{random=Math.random}={}){
  for(const material of materials){
   material.onBeforeCompile=shader=>{
    Object.assign(shader.uniforms,{nightWindows:{value:selection},nightWindowSize:{value:new THREE.Vector2(width,height)},nightWindowsEnabled:enabled,
-    nightWindowColor:{value:new THREE.Color(WINDOW_LIGHT_COLOR).multiplyScalar(3)}});
+    nightWindowColor:{value:new THREE.Color(WINDOW_LIGHT_COLOR).multiplyScalar(2.2)}});
    shader.vertexShader=`attribute float nightWindowId;
 uniform sampler2D nightWindows;
 uniform vec2 nightWindowSize;
 uniform float nightWindowsEnabled;
 varying float vNightWindowLight;
+varying vec2 vNightPaneUv;
+varying float vNightWindowSeed;
 `+shader.vertexShader;
    shader.vertexShader=shader.vertexShader.replace('#include <begin_vertex>',`#include <begin_vertex>
 vec2 nightWindowUV=(vec2(mod(nightWindowId,nightWindowSize.x),floor(nightWindowId/nightWindowSize.x))+.5)/nightWindowSize;
-vNightWindowLight=texture2D(nightWindows,nightWindowUV).r*nightWindowsEnabled;`);
-   shader.fragmentShader='uniform vec3 nightWindowColor;\nvarying float vNightWindowLight;\n'+shader.fragmentShader;
+vNightWindowLight=texture2D(nightWindows,nightWindowUV).r*nightWindowsEnabled;
+vNightPaneUv=uv;vNightWindowSeed=fract(nightWindowId*.6180339);`);
+   shader.fragmentShader='uniform vec3 nightWindowColor;\nvarying float vNightWindowLight;\nvarying vec2 vNightPaneUv;\nvarying float vNightWindowSeed;\n'+shader.fragmentShader;
    shader.fragmentShader=shader.fragmentShader.replace('#include <emissivemap_fragment>',`#include <emissivemap_fragment>
 vec3 windowEmission=nightWindowColor*vNightWindowLight;
 #ifdef USE_EMISSIVEMAP
  windowEmission*=texture2D(emissiveMap,vEmissiveMapUv).rgb;
+#else
+ float curtain=smoothstep(.10,.28,abs(vNightPaneUv.x-.5));
+ float pleats=.64+.36*pow(.5+.5*cos(vNightPaneUv.x*72.0+vNightWindowSeed*6.28),2.0);
+ float lamplight=.48+.62*(1.0-smoothstep(.05,.95,vNightPaneUv.y));
+ float border=smoothstep(0.0,.09,vNightPaneUv.x)*smoothstep(0.0,.09,1.0-vNightPaneUv.x);
+ windowEmission*=mix(1.0,pleats,curtain)*lamplight*mix(.5,1.0,border);
 #endif
+windowEmission*=mix(vec3(1.0,.74,.46),vec3(1.0,.94,.80),vNightWindowSeed);
 totalEmissiveRadiance+=windowEmission;`);
   };
-  material.customProgramCacheKey=()=> 'night-windows-v1';material.needsUpdate=true;
+  material.customProgramCacheKey=()=> 'night-windows-v2';material.needsUpdate=true;
  }
  function isVisible(mesh){
   for(let object=mesh;object;object=object.parent){
@@ -84,12 +94,12 @@ totalEmissiveRadiance+=windowEmission;`);
   if(!changed)return;
   const visible=[...new Set(entries.filter(e=>e.visible).flatMap(e=>e.ids))];
   visible.sort((a,b)=>priorities[a]-priorities[b]||a-b);
-  selected.splice(0,selected.length,...visible.slice(0,Math.round(visible.length/WINDOWS_PER_LIGHT)));
+  selected.splice(0,selected.length,...visible.slice(0,Math.round(visible.length/windowsPerLight)));
   pixels.fill(0);for(const id of selected)pixels[id*4]=255;selection.needsUpdate=true;
  }
  function setNight(value){
   if(value&&!enabled.value){for(let i=1;i<=count;i++)priorities[i]=random();enabled.value=1;update(true);}
   else if(!value){enabled.value=0;selected.length=0;pixels.fill(0);selection.needsUpdate=true;}
  }
- return {setNight,update,count,selected,selection,get visibleCount(){return entries.filter(e=>e.visible).reduce((sum,e)=>sum+e.ids.length,0);}};
+ return {setNight,update,setDensity(value){windowsPerLight=value;update(true);},count,selected,selection,get visibleCount(){return entries.filter(e=>e.visible).reduce((sum,e)=>sum+e.ids.length,0);}};
 }
