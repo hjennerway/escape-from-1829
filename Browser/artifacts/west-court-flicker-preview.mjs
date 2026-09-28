@@ -24,6 +24,8 @@ try{
     ['aerial',[-80,200,130],[-25,0,-8],46],
     ['aerial-shift',[-78,200,132],[-25,0,-8],46],
     ['distant',[-100,530,270],[-45,0,-10],46],
+    ['distant-detail',[-100,530,270],[-50,0,-14],12],
+    ['meadow-seam',[-370,230,-180],[-280,0,-360],32],
     ['court',[-85,35,-48],[-50,0,-12],46],
     ['stairs',[-44,4.7,-39],[-38.7,-.3,-32.8],62]
   ];
@@ -49,6 +51,11 @@ try{
     }
     return results;
   });
+  if(stage!=='before')for(const layout of samples)for(const point of layout.points){
+    if(point.x===-50)continue; // Retained lawn north of the court.
+    assert(point.hits.length>0,'every checked location remains surfaced');
+    if(layout.historic||layout.modern)assert(!point.hits.some(h=>h.name==='Estate terrain'),'no buried terrain at '+[point.x,point.z]);
+  }
   assert.deepEqual(errors,[]);
   await writeFile(`Browser/artifacts/west-court-flicker-${stage}.json`,JSON.stringify({mode,views,samples,errors},null,2)+'\n');
   console.log(`PASS: ${stage} courtyard aerial, shifted, distant, close and stair views; ground surface probes saved.`);

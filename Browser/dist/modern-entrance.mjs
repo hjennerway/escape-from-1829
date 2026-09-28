@@ -2,6 +2,7 @@ import {VIVIENNE_LANE} from './road-centerlines.mjs';
 export {VIVIENNE_LANE} from './road-centerlines.mjs';
 import {FRONT_BOUNDARY} from './front-boundary-wall.mjs';
 import {ROAD_STYLE} from './road-style.mjs';
+import {applyGroundSurface} from './ground-materials.mjs';
 
 export function lanePointAtX(x){
   for(let i=1;i<VIVIENNE_LANE.length;i++){
@@ -32,6 +33,7 @@ export function createModernEntrance(THREE){
   const outline=[[-halfNeck,FRONT_BOUNDARY.z-1],...sides[0].map(p=>[p.x,p.z]),...mouth,...sides[1].slice().reverse().map(p=>[p.x,p.z]),[halfNeck,FRONT_BOUNDARY.z-1]];
   const shape=new THREE.Shape(outline.map(([x,z])=>new THREE.Vector2(x,-z)));
   const asphalt=new THREE.MeshStandardMaterial({color:ROAD_STYLE.asphalt,roughness:1,polygonOffset:true,polygonOffsetFactor:-(ROAD_STYLE.asphaltLayer+1),polygonOffsetUnits:-2*(ROAD_STYLE.asphaltLayer+1)});
+  applyGroundSurface(THREE,asphalt,'asphalt');
   const surface=new THREE.Mesh(new THREE.ShapeGeometry(shape),asphalt);surface.rotation.x=-Math.PI/2;surface.position.y=.36;surface.receiveShadow=true;surface.renderOrder=3;surface.name='Sweeping entrance asphalt';entrance.add(surface);
   const kerb=new THREE.MeshStandardMaterial({color:ROAD_STYLE.edge,roughness:1,polygonOffset:true,polygonOffsetFactor:-(ROAD_STYLE.asphaltLayer+1),polygonOffsetUnits:-2*(ROAD_STYLE.asphaltLayer+1)-1});
   // Kerbs follow only the curved sides: no transverse stripe across the lane mouth or gate.

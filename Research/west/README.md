@@ -277,3 +277,32 @@ retaining the 6.2-unit overall root and all nine sashes. Its angled faces,
 stone bands, roof and collision outline follow that revised profile. The
 opposite east bay retains its original proportions. The new recessed roof
 uses a low hip to avoid a prominent extra peak above the paired windows.
+
+## Courtyard terrain flicker (28 September 2026)
+
+The owner's [red circle](courtyard-flicker-marked.png) identifies the west
+courtyard and adjoining rear wing. The lowered gravel was only 0.005 units
+above the continuous terrain; distant camera views showed grass stripes
+through it as the depth buffer could no longer separate the two surfaces.
+
+The terrain cut now follows the court, narrow Parsons link, southern apron
+transition, stair approach and existing basement in one continuous outline.
+It retains the unpaved lawn north of the court and leaves paving heights,
+stairs, walls and walking routes unchanged. A matching lawn patch restores
+the later court's footprint before 1849; hiding both layouts restores the
+entire cut to lawn. Browser source and the local compiled aerial model are
+updated; Blender and Unity exports are unchanged.
+
+The requested wider audit samples upward ground triangles within 0.025 units
+of the terrain across Historic, Modern, combined and hidden layouts and
+representative timeline years. No other paving conflicts were found. The
+separate distant meadow joins the terrain at the same level; its intentionally
+overlaid material now has depth bias to stabilise that join without lifting
+the ground. Evidence uses Browser/artifacts/west-court-flicker-* and
+Browser/artifacts/terrain-overlap-audit.json.
+
+Final checks include every one of the 13 timeline years. Source and compiled
+visuals, surface probes, the full compiled suite and the west-side regression
+pass. The local compiled model matches the current browser source. The full
+browser suite's two pre-existing whole-estate snapshot failures reproduce
+with the original courtyard geometry as well; their baselines are unchanged.

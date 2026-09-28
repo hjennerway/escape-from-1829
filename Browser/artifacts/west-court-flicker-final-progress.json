@@ -1,0 +1,37 @@
+[
+  {
+    "name": "compiled",
+    "status": 0,
+    "signal": null
+  },
+  {
+    "name": "timeline",
+    "status": 0,
+    "signal": null
+  },
+  {
+    "name": "preview-source",
+    "status": 0,
+    "signal": null
+  },
+  {
+    "name": "preview-compiled",
+    "status": 0,
+    "signal": null
+  },
+  {
+    "name": "west-basement",
+    "status": 0,
+    "signal": null
+  },
+  {
+    "name": "baseline-jarman",
+    "status": 1,
+    "signal": null
+  },
+  {
+    "name": "baseline-leighton",
+    "status": 1,
+    "signal": null
+  }
+]

@@ -1,6 +1,8 @@
 import {addWillowTrees} from './willow-trees.mjs';
 import {addSurvivingLampPosts} from './surviving-lamp-posts.mjs';
 import {matchEstateGrass} from './estate-grass.mjs';
+import {applyGroundSurface} from './ground-materials.mjs';
+import {finishEstateMinerals} from './mineral-materials.mjs';
 import {createBowlingGreen} from './bowling-green.mjs';
 import {photoDetailPrimitives} from './photo-detail-primitives.mjs';
 import {refineFrontInsideCorners} from './front-inside-corners.mjs';
@@ -21,7 +23,7 @@ import {addFrontSteps} from './front-steps.mjs';
 import {addFrontBoundaryWall,FRONT_BOUNDARY} from './front-boundary-wall.mjs';
 import {addEntranceWalks} from './entrance-walks.mjs';
 import {addFrontBasement,excavatedGroundGeometry,frontBasementExcavations,frontBasementShape} from './front-basement.mjs';
-import {addWestSideBasement,westSideBasementExcavation,westCourtAccessExcavation} from './west-side-basement.mjs';
+import {addWestSideBasement,westSideBasementExcavation,westCourtTerrainExcavation,westCourtUnbuiltTerrain,westCourtAccessExcavation} from './west-side-basement.mjs';
 import {addRedesmerePassage,addRedesmereEndRange} from './redesmere-passage.mjs';
 import {addRedesmereEdgeChimney} from './redesmere-edge-chimney.mjs';
 import {createWaterTower} from './water-tower.mjs';
@@ -81,7 +83,13 @@ export function createEscapeExterior(THREE,aspect){
   const invalidateShadows=()=>{sun.shadow.needsUpdate=true;};
   invalidateShadows();
   const lawnColours=new Set([0x667752,0x638046,0x667b49]);
-  const material=(color,extra={})=>{const mat=new THREE.MeshStandardMaterial({color,roughness:.9,...extra});if(lawnColours.has(color))mat.userData.estateGrass=true;return mat;};
+  const gravelColours=new Set([0x99917b,0xa39e88,0x939080,0xb0ac97,0x96968a]);
+  const material=(color,extra={})=>{
+    const mat=new THREE.MeshStandardMaterial({color,roughness:.9,...extra});
+    if(lawnColours.has(color))mat.userData.estateGrass=true;
+    if(!extra.map&&(gravelColours.has(color)||color===0x555b5c))applyGroundSurface(THREE,mat,color===0x555b5c?'asphalt':'gravel');
+    return mat;
+  };
   const cream=material(0xd6d0ba),stone=material(0xa39f8a),glass=material(0x56737d,{roughness:.4,metalness:.3}),dark=material(0x303b3b),red=material(0x762c30);
   const grass=material(0x667752),hedge=material(0x3f543b),gravel=material(0x99917b),path=material(0xb0ac97),steel=material(0x78848a,{metalness:.65,roughness:.5});
   const batches=new Map();let seed=1829;
@@ -90,11 +98,13 @@ export function createEscapeExterior(THREE,aspect){
   const bricks=texture(g=>{g.fillStyle='#897a69';g.fillRect(0,0,512,512);for(let r=0;r<16;r++)for(let c=-1;c<9;c++){const n=random()*25;g.fillStyle=`rgb(${108+n},${57+n*.6},${44+n*.5})`;g.fillRect(c*64+(r%2)*32+1,r*32+1,62,30);}for(let i=0;i<9000;i++){g.fillStyle=i%2?'#fff2':'#0002';g.fillRect(random()*512,random()*512,2,1);}});
   const slates=texture(g=>{g.fillStyle='#3e4c54';g.fillRect(0,0,512,512);for(let r=0;r<16;r++)for(let c=-1;c<10;c++){const n=Math.floor(random()*20);g.fillStyle=`rgb(${66+n},${76+n},${80+n})`;g.fillRect(c*60+(r%2)*30+1,r*32+1,58,30);}});
   const brick=material(0xffffff,{map:bricks}),roof=material(0xc4c9c6,{map:slates});
-  const noise=texture(g=>{g.fillStyle='#c2bfae';g.fillRect(0,0,512,512);for(let i=0;i<19000;i++){g.fillStyle=i%2?'#242e2020':'#eef0d315';g.fillRect(random()*512,random()*512,2,2);}});noise.repeat.set(40,40);grass.map=noise;
+  applyGroundSurface(THREE,grass,'grass');
+  // Preserve the former grass painter's random draws: planting uses this stream.
+  for(let i=0;i<38000;i++)random();
   function box(mat,x,y,z,w,h,d,rotation=0){if(!batches.has(mat))batches.set(mat,[]);batches.get(mat).push({x,y,z,w,h,d,rotation});}
   function mesh(geo,mat,x=0,y=0,z=0,shadow=false){const m=new THREE.Mesh(geo,mat);m.position.set(x,y,z);m.castShadow=shadow;m.receiveShadow=true;model.add(m);return m;}
   function worldUV(geo,scale=3){const p=geo.attributes.position,n=geo.attributes.normal,uv=geo.attributes.uv;for(let i=0;i<p.count;i++)uv.setXY(i,(Math.abs(n.getX(i))>.5?p.getZ(i):p.getX(i))/scale,(Math.abs(n.getY(i))>.5?p.getZ(i):p.getY(i))/scale);return geo;}
-  const excavations=[...frontBasementExcavations(),westSideBasementExcavation()];
+  const excavations=[...frontBasementExcavations(),westCourtTerrainExcavation()];
   const groundGeometry=excavatedGroundGeometry(THREE,[[-2000,-2000],[2000,-2000],[2000,2000],[-2000,2000]],excavations);
   const groundPositions=groundGeometry.attributes.position,groundUV=groundGeometry.attributes.uv;
   for(let i=0;i<groundPositions.count;i++)groundUV.setXY(i,(groundPositions.getX(i)+2000)/4000,(groundPositions.getY(i)+2000)/4000);
@@ -106,6 +116,11 @@ export function createEscapeExterior(THREE,aspect){
     for(let i=0;i<p.count;i++)uv.setXY(i,(p.getX(i)+2000)/4000,(p.getY(i)+2000)/4000);
     const fill=new THREE.Mesh(geometry,grass);fill.receiveShadow=true;excavationFill.add(fill);
   }
+  const courtLawn=new THREE.Mesh(new THREE.ShapeGeometry(frontBasementShape(THREE,westCourtUnbuiltTerrain())),grass);
+  courtLawn.name='West courtyard undeveloped terrain';courtLawn.visible=false;courtLawn.receiveShadow=true;
+  courtLawn.userData.terrainBeforeSection='1829 Wings';terrain.add(courtLawn);
+  const lawnPositions=courtLawn.geometry.attributes.position,lawnUV=courtLawn.geometry.attributes.uv;
+  for(let i=0;i<lawnPositions.count;i++)lawnUV.setXY(i,(lawnPositions.getX(i)+2000)/4000,(lawnPositions.getY(i)+2000)/4000);
   const legacyAccess=new THREE.Group();legacyAccess.name='Earlier estate access tracks';model.add(legacyAccess);
   function legacyRoad(mat,x,y,z,w,h,d){const road=mesh(new THREE.BoxGeometry(w,h,d),mat,x,y,z);legacyAccess.add(road);}
   // Grounds and surrounding access roads. No red annotation or sale graphics.
@@ -462,5 +477,6 @@ export function createEscapeExterior(THREE,aspect){
   const lawnMaterials=new Set();
   model.traverse(object=>{for(const mat of (Array.isArray(object.material)?object.material:[object.material]))if(mat?.userData.estateGrass)lawnMaterials.add(mat);});
   for(const mat of lawnMaterials)matchEstateGrass(mat,grass);
+  finishEstateMinerals(THREE,model);
   return {scene,camera,model,terrain,legacyAccess,mast,chapel,churchGrounds,waterTower,estateChimney,annexe,newHospital:annexe,churtonWard,uptonFrithOscroft,irbyAshley,graftonEdge,haleWard,bowlingGreen,estatesDepartment,farndonWard,witbyWard,mainAdmin,adminCorridor,laundry,garagesMortuary,greenhouses,outhouse,willows,trees,invalidateShadows};
 }

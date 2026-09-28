@@ -1,0 +1,394 @@
+{
+  "mode": "compiled",
+  "views": [
+    [
+      "aerial",
+      [
+        -80,
+        200,
+        130
+      ],
+      [
+        -25,
+        0,
+        -8
+      ],
+      46
+    ],
+    [
+      "aerial-shift",
+      [
+        -78,
+        200,
+        132
+      ],
+      [
+        -25,
+        0,
+        -8
+      ],
+      46
+    ],
+    [
+      "distant",
+      [
+        -100,
+        530,
+        270
+      ],
+      [
+        -45,
+        0,
+        -10
+      ],
+      46
+    ],
+    [
+      "distant-detail",
+      [
+        -100,
+        530,
+        270
+      ],
+      [
+        -50,
+        0,
+        -14
+      ],
+      12
+    ],
+    [
+      "meadow-seam",
+      [
+        -370,
+        230,
+        -180
+      ],
+      [
+        -280,
+        0,
+        -360
+      ],
+      32
+    ],
+    [
+      "court",
+      [
+        -85,
+        35,
+        -48
+      ],
+      [
+        -50,
+        0,
+        -12
+      ],
+      46
+    ],
+    [
+      "stairs",
+      [
+        -44,
+        4.7,
+        -39
+      ],
+      [
+        -38.7,
+        -0.3,
+        -32.8
+      ],
+      62
+    ]
+  ],
+  "samples": [
+    {
+      "historic": false,
+      "modern": false,
+      "points": [
+        {
+          "x": -60,
+          "z": -15,
+          "hits": [
+            {
+              "name": "",
+              "parent": "Unexcavated frontage terrain",
+              "y": -0.14999999999999666
+            }
+          ]
+        },
+        {
+          "x": -73,
+          "z": -33,
+          "hits": [
+            {
+              "name": "",
+              "parent": "Unexcavated frontage terrain",
+              "y": -0.14999999999999267
+            }
+          ]
+        },
+        {
+          "x": -73,
+          "z": 1,
+          "hits": [
+            {
+              "name": "",
+              "parent": "Unexcavated frontage terrain",
+              "y": -0.15000000000000022
+            }
+          ]
+        },
+        {
+          "x": -42.5,
+          "z": -34.7,
+          "hits": [
+            {
+              "name": "",
+              "parent": "Unexcavated frontage terrain",
+              "y": -0.14999999999999228
+            }
+          ]
+        },
+        {
+          "x": -50,
+          "z": -30,
+          "hits": [
+            {
+              "name": "Estate terrain",
+              "parent": "1829 estate · aerial reconstruction",
+              "y": -0.14999999999999333
+            }
+          ]
+        },
+        {
+          "x": -38.3,
+          "z": -18,
+          "hits": [
+            {
+              "name": "",
+              "parent": "Unexcavated frontage terrain",
+              "y": -0.149999999999996
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "historic": false,
+      "modern": true,
+      "points": [
+        {
+          "x": -60,
+          "z": -15,
+          "hits": [
+            {
+              "name": "West courtyard and outer return path",
+              "parent": "Period · 1829 Wings",
+              "y": -0.14499999999999666
+            }
+          ]
+        },
+        {
+          "x": -73,
+          "z": -33,
+          "hits": [
+            {
+              "name": "West courtyard and outer return path",
+              "parent": "Period · 1829 Wings",
+              "y": -0.14499999999999288
+            }
+          ]
+        },
+        {
+          "x": -73,
+          "z": 1,
+          "hits": [
+            {
+              "name": "West courtyard gradual apron transition",
+              "parent": "Period · 1829 Wings",
+              "y": -0.03874999701976797
+            }
+          ]
+        },
+        {
+          "x": -42.5,
+          "z": -34.7,
+          "hits": [
+            {
+              "name": "Aerial batch · West side semi-basement · 11",
+              "parent": "West side semi-basement",
+              "y": -0.14499999582767475
+            }
+          ]
+        },
+        {
+          "x": -50,
+          "z": -30,
+          "hits": [
+            {
+              "name": "Estate terrain",
+              "parent": "1829 estate · aerial reconstruction",
+              "y": -0.14999999999999333
+            }
+          ]
+        },
+        {
+          "x": -38.3,
+          "z": -18,
+          "hits": [
+            {
+              "name": "Aerial batch · West side semi-basement · 11",
+              "parent": "West side semi-basement",
+              "y": -1.0199999809265132
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "historic": true,
+      "modern": false,
+      "points": [
+        {
+          "x": -60,
+          "z": -15,
+          "hits": [
+            {
+              "name": "West courtyard and outer return path",
+              "parent": "Period · 1829 Wings",
+              "y": -0.14499999999999666
+            }
+          ]
+        },
+        {
+          "x": -73,
+          "z": -33,
+          "hits": [
+            {
+              "name": "West courtyard and outer return path",
+              "parent": "Period · 1829 Wings",
+              "y": -0.14499999999999288
+            }
+          ]
+        },
+        {
+          "x": -73,
+          "z": 1,
+          "hits": [
+            {
+              "name": "West courtyard gradual apron transition",
+              "parent": "Period · 1829 Wings",
+              "y": -0.03874999701976797
+            }
+          ]
+        },
+        {
+          "x": -42.5,
+          "z": -34.7,
+          "hits": [
+            {
+              "name": "Aerial batch · West side semi-basement · 11",
+              "parent": "West side semi-basement",
+              "y": -0.14499999582767475
+            }
+          ]
+        },
+        {
+          "x": -50,
+          "z": -30,
+          "hits": [
+            {
+              "name": "Estate terrain",
+              "parent": "1829 estate · aerial reconstruction",
+              "y": -0.14999999999999333
+            }
+          ]
+        },
+        {
+          "x": -38.3,
+          "z": -18,
+          "hits": [
+            {
+              "name": "Aerial batch · West side semi-basement · 11",
+              "parent": "West side semi-basement",
+              "y": -1.0199999809265132
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "historic": true,
+      "modern": true,
+      "points": [
+        {
+          "x": -60,
+          "z": -15,
+          "hits": [
+            {
+              "name": "West courtyard and outer return path",
+              "parent": "Period · 1829 Wings",
+              "y": -0.14499999999999666
+            }
+          ]
+        },
+        {
+          "x": -73,
+          "z": -33,
+          "hits": [
+            {
+              "name": "West courtyard and outer return path",
+              "parent": "Period · 1829 Wings",
+              "y": -0.14499999999999288
+            }
+          ]
+        },
+        {
+          "x": -73,
+          "z": 1,
+          "hits": [
+            {
+              "name": "West courtyard gradual apron transition",
+              "parent": "Period · 1829 Wings",
+              "y": -0.03874999701976797
+            }
+          ]
+        },
+        {
+          "x": -42.5,
+          "z": -34.7,
+          "hits": [
+            {
+              "name": "Aerial batch · West side semi-basement · 11",
+              "parent": "West side semi-basement",
+              "y": -0.14499999582767475
+            }
+          ]
+        },
+        {
+          "x": -50,
+          "z": -30,
+          "hits": [
+            {
+              "name": "Estate terrain",
+              "parent": "1829 estate · aerial reconstruction",
+              "y": -0.14999999999999333
+            }
+          ]
+        },
+        {
+          "x": -38.3,
+          "z": -18,
+          "hits": [
+            {
+              "name": "Aerial batch · West side semi-basement · 11",
+              "parent": "West side semi-basement",
+              "y": -1.0199999809265132
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "errors": []
+}

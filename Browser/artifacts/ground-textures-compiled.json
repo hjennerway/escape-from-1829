@@ -1,0 +1,879 @@
+{
+  "mode": "compiled",
+  "views": [
+    [
+      "reference",
+      [
+        -145,
+        95,
+        -35
+      ],
+      [
+        -43,
+        0,
+        -47
+      ],
+      45
+    ],
+    [
+      "close",
+      [
+        -89,
+        8,
+        -46
+      ],
+      [
+        -73,
+        0,
+        -54
+      ],
+      50
+    ],
+    [
+      "frontage",
+      [
+        9,
+        18,
+        66
+      ],
+      [
+        0,
+        0,
+        38
+      ],
+      48
+    ],
+    [
+      "walking",
+      [
+        6,
+        1.7,
+        48
+      ],
+      [
+        1,
+        0,
+        32
+      ],
+      58
+    ],
+    [
+      "stairs",
+      [
+        10,
+        14,
+        42
+      ],
+      [
+        0,
+        2,
+        24
+      ],
+      45
+    ],
+    [
+      "render",
+      [
+        6,
+        3,
+        32
+      ],
+      [
+        1,
+        2,
+        21
+      ],
+      48
+    ],
+    [
+      "church",
+      [
+        9,
+        8,
+        -91
+      ],
+      [
+        0,
+        5,
+        -105
+      ],
+      45
+    ]
+  ],
+  "errors": [],
+  "materials": [
+    {
+      "surface": "grass",
+      "map": "Estate grass detail",
+      "bump": 1,
+      "anisotropy": 16,
+      "key": "estate-grass-world-v2-weather-v2-meadow"
+    },
+    {
+      "surface": "gravel",
+      "map": "Estate gravel detail",
+      "bump": 0.035,
+      "anisotropy": 16,
+      "key": "estate-ground-world-v1-weather-v2"
+    },
+    {
+      "surface": "gravel",
+      "map": "Estate gravel detail",
+      "bump": 0.035,
+      "anisotropy": 16,
+      "key": "estate-ground-world-v1-weather-v2"
+    },
+    {
+      "surface": "stone",
+      "map": "Estate stone grain",
+      "bump": 0.045,
+      "anisotropy": 16,
+      "key": "estate-mineral-triplanar-v1-weather-v2"
+    },
+    {
+      "surface": "render",
+      "map": "Estate render grain",
+      "bump": 0.018,
+      "anisotropy": 16,
+      "key": "estate-mineral-triplanar-v1-weather-v2"
+    },
+    {
+      "surface": "stone",
+      "map": "Estate stone grain",
+      "bump": 0.045,
+      "anisotropy": 16,
+      "key": "estate-mineral-triplanar-v1-weather-v2"
+    },
+    {
+      "surface": "stone",
+      "map": "Estate stone grain",
+      "bump": 0.045,
+      "anisotropy": 16,
+      "key": "estate-mineral-triplanar-v1-weather-v2"
+    },
+    {
+      "surface": "stone",
+      "map": "Estate stone grain",
+      "bump": 0.045,
+      "anisotropy": 16,
+      "key": "estate-mineral-triplanar-v1-weather-v2"
+    },
+    {
+      "surface": "stone",
+      "map": "Estate stone grain",
+      "bump": 0.045,
+      "anisotropy": 16,
+      "key": "estate-mineral-triplanar-v1-weather-v2"
+    },
+    {
+      "surface": "render",
+      "map": "Estate render grain",
+      "bump": 0.018,
+      "anisotropy": 16,
+      "key": "estate-mineral-triplanar-v1-weather-v2"
+    },
+    {
+      "surface": "stone",
+      "map": "Estate stone grain",
+      "bump": 0.045,
+      "anisotropy": 16,
+      "key": "estate-mineral-triplanar-v1-weather-v2"
+    },
+    {
+      "surface": "render",
+      "map": "Estate render grain",
+      "bump": 0.018,
+      "anisotropy": 16,
+      "key": "estate-mineral-triplanar-v1-weather-v2"
+    },
+    {
+      "surface": "render",
+      "map": "Estate render grain",
+      "bump": 0.018,
+      "anisotropy": 16,
+      "key": "estate-mineral-triplanar-v1-weather-v2"
+    },
+    {
+      "surface": "stone",
+      "map": "Estate stone grain",
+      "bump": 0.045,
+      "anisotropy": 16,
+      "key": "estate-mineral-triplanar-v1-weather-v2"
+    },
+    {
+      "surface": "stone",
+      "map": "Estate stone grain",
+      "bump": 0.045,
+      "anisotropy": 16,
+      "key": "estate-mineral-triplanar-v1-weather-v2"
+    },
+    {
+      "surface": "render",
+      "map": "Estate render grain",
+      "bump": 0.018,
+      "anisotropy": 16,
+      "key": "estate-mineral-triplanar-v1-weather-v2"
+    },
+    {
+      "surface": "stone",
+      "map": "Estate stone grain",
+      "bump": 0.045,
+      "anisotropy": 16,
+      "key": "estate-mineral-triplanar-v1-weather-v2"
+    },
+    {
+      "surface": "gravel",
+      "map": "Estate gravel detail",
+      "bump": 0.035,
+      "anisotropy": 16,
+      "key": "estate-ground-world-v1-weather-v2"
+    },
+    {
+      "surface": "grass",
+      "map": "Estate grass detail",
+      "bump": 1,
+      "anisotropy": 16,
+      "key": "estate-grass-world-v2-weather-v2-meadow"
+    },
+    {
+      "surface": "render",
+      "map": "Estate render grain",
+      "bump": 0.018,
+      "anisotropy": 16,
+      "key": "estate-mineral-triplanar-v1-weather-v2"
+    },
+    {
+      "surface": "stone",
+      "map": "Estate stone grain",
+      "bump": 0.045,
+      "anisotropy": 16,
+      "key": "estate-mineral-triplanar-v1-weather-v2"
+    },
+    {
+      "surface": "stone",
+      "map": "Estate stone grain",
+      "bump": 0.045,
+      "anisotropy": 16,
+      "key": "estate-mineral-triplanar-v1-weather-v2"
+    },
+    {
+      "surface": "stone",
+      "map": "Estate stone grain",
+      "bump": 0.045,
+      "anisotropy": 16,
+      "key": "estate-mineral-triplanar-v1-weather-v2"
+    },
+    {
+      "surface": "stone",
+      "map": "Estate stone grain",
+      "bump": 0.045,
+      "anisotropy": 16,
+      "key": "estate-mineral-triplanar-v1-weather-v2"
+    },
+    {
+      "surface": "stone",
+      "map": "Estate stone grain",
+      "bump": 0.045,
+      "anisotropy": 16,
+      "key": "estate-mineral-triplanar-v1-weather-v2"
+    },
+    {
+      "surface": "render",
+      "map": "Estate render grain",
+      "bump": 0.018,
+      "anisotropy": 16,
+      "key": "estate-mineral-triplanar-v1-weather-v2"
+    },
+    {
+      "surface": "stone",
+      "map": "Estate stone grain",
+      "bump": 0.045,
+      "anisotropy": 16,
+      "key": "estate-mineral-triplanar-v1-weather-v2"
+    },
+    {
+      "surface": "asphalt",
+      "map": "Estate asphalt detail",
+      "bump": 0.018,
+      "anisotropy": 16,
+      "key": "estate-ground-world-v1-weather-v2"
+    },
+    {
+      "surface": "asphalt",
+      "map": "Estate asphalt detail",
+      "bump": 0.018,
+      "anisotropy": 16,
+      "key": "estate-ground-world-v1-weather-v2"
+    },
+    {
+      "surface": "stone",
+      "map": "Estate stone grain",
+      "bump": 0.045,
+      "anisotropy": 16,
+      "key": "estate-mineral-triplanar-v1-weather-v2"
+    },
+    {
+      "surface": "asphalt",
+      "map": "Estate asphalt detail",
+      "bump": 0.018,
+      "anisotropy": 16,
+      "key": "estate-ground-world-v1-weather-v2"
+    },
+    {
+      "surface": "gravel",
+      "map": "Estate gravel detail",
+      "bump": 0.035,
+      "anisotropy": 16,
+      "key": "estate-ground-world-v1-weather-v2"
+    },
+    {
+      "surface": "render",
+      "map": "Estate render grain",
+      "bump": 0.018,
+      "anisotropy": 16,
+      "key": "estate-mineral-triplanar-v1-weather-v2"
+    },
+    {
+      "surface": "grass",
+      "map": "Estate grass detail",
+      "bump": 1,
+      "anisotropy": 16,
+      "key": "estate-grass-world-v2-weather-v2-meadow"
+    },
+    {
+      "surface": "render",
+      "map": "Estate render grain",
+      "bump": 0.018,
+      "anisotropy": 16,
+      "key": "estate-mineral-triplanar-v1-weather-v2"
+    },
+    {
+      "surface": "render",
+      "map": "Estate render grain",
+      "bump": 0.018,
+      "anisotropy": 16,
+      "key": "estate-mineral-triplanar-v1-weather-v2"
+    },
+    {
+      "surface": "stone",
+      "map": "Estate stone grain",
+      "bump": 0.045,
+      "anisotropy": 16,
+      "key": "estate-mineral-triplanar-v1-weather-v2"
+    },
+    {
+      "surface": "render",
+      "map": "Estate render grain",
+      "bump": 0.018,
+      "anisotropy": 16,
+      "key": "estate-mineral-triplanar-v1-weather-v2"
+    },
+    {
+      "surface": "gravel",
+      "map": "Estate gravel detail",
+      "bump": 0.035,
+      "anisotropy": 16,
+      "key": "estate-ground-world-v1-weather-v2"
+    },
+    {
+      "surface": "render",
+      "map": "Estate render grain",
+      "bump": 0.018,
+      "anisotropy": 16,
+      "key": "estate-mineral-triplanar-v1-weather-v2"
+    },
+    {
+      "surface": "grass",
+      "map": "Estate grass detail",
+      "bump": 1,
+      "anisotropy": 16,
+      "key": "estate-grass-world-v2-weather-v2-meadow"
+    },
+    {
+      "surface": "gravel",
+      "map": "Estate gravel detail",
+      "bump": 0.035,
+      "anisotropy": 16,
+      "key": "estate-ground-world-v1-weather-v2"
+    },
+    {
+      "surface": "render",
+      "map": "Estate render grain",
+      "bump": 0.018,
+      "anisotropy": 16,
+      "key": "estate-mineral-triplanar-v1-weather-v2"
+    },
+    {
+      "surface": "gravel",
+      "map": "Estate gravel detail",
+      "bump": 0.035,
+      "anisotropy": 16,
+      "key": "estate-ground-world-v1-weather-v2"
+    },
+    {
+      "surface": "gravel",
+      "map": "Estate gravel detail",
+      "bump": 0.035,
+      "anisotropy": 16,
+      "key": "estate-ground-world-v1-weather-v2"
+    },
+    {
+      "surface": "stone",
+      "map": "Estate stone grain",
+      "bump": 0.045,
+      "anisotropy": 16,
+      "key": "estate-mineral-triplanar-v1-weather-v2"
+    },
+    {
+      "surface": "render",
+      "map": "Estate render grain",
+      "bump": 0.018,
+      "anisotropy": 16,
+      "key": "estate-mineral-triplanar-v1-weather-v2"
+    },
+    {
+      "surface": "render",
+      "map": "Estate render grain",
+      "bump": 0.018,
+      "anisotropy": 16,
+      "key": "estate-mineral-triplanar-v1-weather-v2"
+    },
+    {
+      "surface": "stone",
+      "map": "Estate stone grain",
+      "bump": 0.045,
+      "anisotropy": 16,
+      "key": "estate-mineral-triplanar-v1-weather-v2"
+    },
+    {
+      "surface": "render",
+      "map": "Estate render grain",
+      "bump": 0.018,
+      "anisotropy": 16,
+      "key": "estate-mineral-triplanar-v1-weather-v2"
+    },
+    {
+      "surface": "stone",
+      "map": "Estate stone grain",
+      "bump": 0.045,
+      "anisotropy": 16,
+      "key": "estate-mineral-triplanar-v1-weather-v2"
+    },
+    {
+      "surface": "grass",
+      "map": "Estate grass detail",
+      "bump": 1,
+      "anisotropy": 16,
+      "key": "estate-grass-world-v2-weather-v2-meadow"
+    },
+    {
+      "surface": "gravel",
+      "map": "Estate gravel detail",
+      "bump": 0.035,
+      "anisotropy": 16,
+      "key": "estate-ground-world-v1-weather-v2"
+    },
+    {
+      "surface": "render",
+      "map": "Estate render grain",
+      "bump": 0.018,
+      "anisotropy": 16,
+      "key": "estate-mineral-triplanar-v1-weather-v2"
+    },
+    {
+      "surface": "stone",
+      "map": "Estate stone grain",
+      "bump": 0.045,
+      "anisotropy": 16,
+      "key": "estate-mineral-triplanar-v1-weather-v2"
+    },
+    {
+      "surface": "stone",
+      "map": "Estate stone grain",
+      "bump": 0.045,
+      "anisotropy": 16,
+      "key": "estate-mineral-triplanar-v1-weather-v2"
+    },
+    {
+      "surface": "render",
+      "map": "Estate render grain",
+      "bump": 0.018,
+      "anisotropy": 16,
+      "key": "estate-mineral-triplanar-v1-weather-v2"
+    },
+    {
+      "surface": "stone",
+      "map": "Estate stone grain",
+      "bump": 0.045,
+      "anisotropy": 16,
+      "key": "estate-mineral-triplanar-v1-weather-v2"
+    },
+    {
+      "surface": "render",
+      "map": "Estate render grain",
+      "bump": 0.018,
+      "anisotropy": 16,
+      "key": "estate-mineral-triplanar-v1-weather-v2"
+    },
+    {
+      "surface": "stone",
+      "map": "Estate stone grain",
+      "bump": 0.045,
+      "anisotropy": 16,
+      "key": "estate-mineral-triplanar-v1-weather-v2"
+    },
+    {
+      "surface": "render",
+      "map": "Estate render grain",
+      "bump": 0.018,
+      "anisotropy": 16,
+      "key": "estate-mineral-triplanar-v1-weather-v2"
+    },
+    {
+      "surface": "render",
+      "map": "Estate render grain",
+      "bump": 0.018,
+      "anisotropy": 16,
+      "key": "estate-mineral-triplanar-v1-weather-v2"
+    },
+    {
+      "surface": "stone",
+      "map": "Estate stone grain",
+      "bump": 0.045,
+      "anisotropy": 16,
+      "key": "estate-mineral-triplanar-v1-weather-v2"
+    },
+    {
+      "surface": "stone",
+      "map": "Estate stone grain",
+      "bump": 0.045,
+      "anisotropy": 16,
+      "key": "estate-mineral-triplanar-v1-weather-v2"
+    },
+    {
+      "surface": "stone",
+      "map": "Estate stone grain",
+      "bump": 0.045,
+      "anisotropy": 16,
+      "key": "estate-mineral-triplanar-v1-weather-v2"
+    },
+    {
+      "surface": "gravel",
+      "map": "Estate gravel detail",
+      "bump": 0.035,
+      "anisotropy": 16,
+      "key": "estate-ground-world-v1-weather-v2"
+    },
+    {
+      "surface": "grass",
+      "map": "Estate grass detail",
+      "bump": 1,
+      "anisotropy": 16,
+      "key": "estate-grass-world-v2-weather-v2-meadow"
+    },
+    {
+      "surface": "stone",
+      "map": "Estate stone grain",
+      "bump": 0.045,
+      "anisotropy": 16,
+      "key": "estate-mineral-triplanar-v1-weather-v2"
+    },
+    {
+      "surface": "stone",
+      "map": "Estate stone grain",
+      "bump": 0.045,
+      "anisotropy": 16,
+      "key": "estate-mineral-triplanar-v1-weather-v2"
+    },
+    {
+      "surface": "stone",
+      "map": "Estate stone grain",
+      "bump": 0.045,
+      "anisotropy": 16,
+      "key": "estate-mineral-triplanar-v1-weather-v2"
+    },
+    {
+      "surface": "stone",
+      "map": "Estate stone grain",
+      "bump": 0.045,
+      "anisotropy": 16,
+      "key": "estate-mineral-triplanar-v1-weather-v2"
+    },
+    {
+      "surface": "stone",
+      "map": "Estate stone grain",
+      "bump": 0.045,
+      "anisotropy": 16,
+      "key": "estate-mineral-triplanar-v1-weather-v2"
+    },
+    {
+      "surface": "stone",
+      "map": "Estate stone grain",
+      "bump": 0.045,
+      "anisotropy": 16,
+      "key": "estate-mineral-triplanar-v1-weather-v2"
+    },
+    {
+      "surface": "stone",
+      "map": "Estate stone grain",
+      "bump": 0.045,
+      "anisotropy": 16,
+      "key": "estate-mineral-triplanar-v1-weather-v2"
+    },
+    {
+      "surface": "stone",
+      "map": "Estate stone grain",
+      "bump": 0.045,
+      "anisotropy": 16,
+      "key": "estate-mineral-triplanar-v1-weather-v2"
+    },
+    {
+      "surface": "stone",
+      "map": "Estate stone grain",
+      "bump": 0.045,
+      "anisotropy": 16,
+      "key": "estate-mineral-triplanar-v1-weather-v2"
+    },
+    {
+      "surface": "stone",
+      "map": "Estate stone grain",
+      "bump": 0.045,
+      "anisotropy": 16,
+      "key": "estate-mineral-triplanar-v1-weather-v2"
+    },
+    {
+      "surface": "stone",
+      "map": "Estate stone grain",
+      "bump": 0.045,
+      "anisotropy": 16,
+      "key": "estate-mineral-triplanar-v1-weather-v2"
+    },
+    {
+      "surface": "stone",
+      "map": "Estate stone grain",
+      "bump": 0.045,
+      "anisotropy": 16,
+      "key": "estate-mineral-triplanar-v1-weather-v2"
+    },
+    {
+      "surface": "stone",
+      "map": "Estate stone grain",
+      "bump": 0.045,
+      "anisotropy": 16,
+      "key": "estate-mineral-triplanar-v1-weather-v2"
+    },
+    {
+      "surface": "stone",
+      "map": "Estate stone grain",
+      "bump": 0.045,
+      "anisotropy": 16,
+      "key": "estate-mineral-triplanar-v1-weather-v2"
+    },
+    {
+      "surface": "stone",
+      "map": "Estate stone grain",
+      "bump": 0.045,
+      "anisotropy": 16,
+      "key": "estate-mineral-triplanar-v1-weather-v2"
+    },
+    {
+      "surface": "render",
+      "map": "Estate render grain",
+      "bump": 0.018,
+      "anisotropy": 16,
+      "key": "estate-mineral-triplanar-v1-weather-v2"
+    },
+    {
+      "surface": "render",
+      "map": "Estate render grain",
+      "bump": 0.018,
+      "anisotropy": 16,
+      "key": "estate-mineral-triplanar-v1-weather-v2"
+    },
+    {
+      "surface": "stone",
+      "map": "Estate stone grain",
+      "bump": 0.045,
+      "anisotropy": 16,
+      "key": "estate-mineral-triplanar-v1-weather-v2"
+    },
+    {
+      "surface": "stone",
+      "map": "Estate stone grain",
+      "bump": 0.045,
+      "anisotropy": 16,
+      "key": "estate-mineral-triplanar-v1-weather-v2"
+    },
+    {
+      "surface": "asphalt",
+      "map": "Estate asphalt detail",
+      "bump": 0.018,
+      "anisotropy": 16,
+      "key": "estate-ground-world-v1-weather-v2"
+    },
+    {
+      "surface": "stone",
+      "map": "Estate stone grain",
+      "bump": 0.045,
+      "anisotropy": 16,
+      "key": "estate-mineral-triplanar-v1-weather-v2"
+    },
+    {
+      "surface": "stone",
+      "map": "Estate stone grain",
+      "bump": 0.045,
+      "anisotropy": 16,
+      "key": "estate-mineral-triplanar-v1-weather-v2"
+    },
+    {
+      "surface": "stone",
+      "map": "Estate stone grain",
+      "bump": 0.045,
+      "anisotropy": 16,
+      "key": "estate-mineral-triplanar-v1-weather-v2"
+    },
+    {
+      "surface": "stone",
+      "map": "Estate stone grain",
+      "bump": 0.045,
+      "anisotropy": 16,
+      "key": "estate-mineral-triplanar-v1-weather-v2"
+    },
+    {
+      "surface": "stone",
+      "map": "Estate stone grain",
+      "bump": 0.045,
+      "anisotropy": 16,
+      "key": "estate-mineral-triplanar-v1-weather-v2"
+    },
+    {
+      "surface": "stone",
+      "map": "Estate stone grain",
+      "bump": 0.045,
+      "anisotropy": 16,
+      "key": "estate-mineral-triplanar-v1-weather-v2"
+    },
+    {
+      "surface": "stone",
+      "map": "Estate stone grain",
+      "bump": 0.045,
+      "anisotropy": 16,
+      "key": "estate-mineral-triplanar-v1-weather-v2"
+    },
+    {
+      "surface": "stone",
+      "map": "Estate stone grain",
+      "bump": 0.045,
+      "anisotropy": 16,
+      "key": "estate-mineral-triplanar-v1-weather-v2"
+    },
+    {
+      "surface": "gravel",
+      "map": "Estate gravel detail",
+      "bump": 0.035,
+      "anisotropy": 16,
+      "key": "estate-ground-world-v1-weather-v2"
+    },
+    {
+      "surface": "stone",
+      "map": "Estate stone grain",
+      "bump": 0.045,
+      "anisotropy": 16,
+      "key": "estate-mineral-triplanar-v1-weather-v2"
+    },
+    {
+      "surface": "stone",
+      "map": "Estate stone grain",
+      "bump": 0.045,
+      "anisotropy": 16,
+      "key": "estate-mineral-triplanar-v1-weather-v2"
+    },
+    {
+      "surface": "stone",
+      "map": "Estate stone grain",
+      "bump": 0.045,
+      "anisotropy": 16,
+      "key": "estate-mineral-triplanar-v1-weather-v2"
+    },
+    {
+      "surface": "stone",
+      "map": "Estate stone grain",
+      "bump": 0.045,
+      "anisotropy": 16,
+      "key": "estate-mineral-triplanar-v1-weather-v2"
+    },
+    {
+      "surface": "gravel",
+      "map": "Estate gravel detail",
+      "bump": 0.035,
+      "anisotropy": 16,
+      "key": "estate-ground-world-v1-weather-v2"
+    },
+    {
+      "surface": "asphalt",
+      "map": "Estate asphalt detail",
+      "bump": 0.018,
+      "anisotropy": 16,
+      "key": "estate-ground-world-v1-weather-v2"
+    },
+    {
+      "surface": "stone",
+      "map": "Estate stone grain",
+      "bump": 0.045,
+      "anisotropy": 16,
+      "key": "estate-mineral-triplanar-v1-weather-v2"
+    },
+    {
+      "surface": "asphalt",
+      "map": "Estate asphalt detail",
+      "bump": 0.018,
+      "anisotropy": 16,
+      "key": "estate-ground-world-v1-weather-v2"
+    },
+    {
+      "surface": "grass",
+      "map": "Estate grass detail",
+      "bump": 1,
+      "anisotropy": 16,
+      "key": "estate-grass-world-v2-weather-v2-meadow"
+    },
+    {
+      "surface": "stone",
+      "map": "Estate stone grain",
+      "bump": 0.045,
+      "anisotropy": 16,
+      "key": "estate-mineral-triplanar-v1-weather-v2"
+    },
+    {
+      "surface": "grass",
+      "map": "Estate grass detail",
+      "bump": 1,
+      "anisotropy": 16,
+      "key": "estate-grass-world-v2-weather-v2-meadow"
+    },
+    {
+      "surface": "asphalt",
+      "map": "Estate asphalt detail",
+      "bump": 0.018,
+      "anisotropy": 16,
+      "key": "estate-ground-world-v1-weather-v2"
+    },
+    {
+      "surface": "stone",
+      "map": "Estate stone grain",
+      "bump": 0.045,
+      "anisotropy": 16,
+      "key": "estate-mineral-triplanar-v1-weather-v2"
+    }
+  ],
+  "stairCorners": [
+    {
+      "surface": "gravel",
+      "height": 0.1949999999999942
+    },
+    {
+      "surface": "gravel",
+      "height": 0.19499999284744218
+    }
+  ]
+}

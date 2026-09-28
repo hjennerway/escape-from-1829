@@ -217,7 +217,7 @@
           "built": 1849,
           "lawn": false,
           "terrainOnly": false,
-          "onTerrain": true,
+          "onTerrain": false,
           "present": true,
           "grass": true,
           "matchesGrass": true
@@ -6277,7 +6277,7 @@
           "built": 1849,
           "lawn": false,
           "terrainOnly": false,
-          "onTerrain": true,
+          "onTerrain": false,
           "present": true,
           "grass": true,
           "matchesGrass": true

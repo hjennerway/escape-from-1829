@@ -1,4 +1,5 @@
 import {ROAD_STYLE} from './road-style.mjs';
+import {applyGroundSurface} from './ground-materials.mjs';
 import {CAR_PARK_OUTLINE} from './kml-car-park-data.mjs';
 import {mergeGeometries} from './vendor/BufferGeometryUtils.js';
 
@@ -8,6 +9,7 @@ export function createModernCarPark(THREE){
   const asphalt=new THREE.MeshStandardMaterial({color:ROAD_STYLE.asphalt,roughness:1,
     polygonOffset:true,polygonOffsetFactor:-layer,polygonOffsetUnits:-2*layer});
   const surface=new THREE.Mesh(new THREE.ShapeGeometry(shape),asphalt);
+  applyGroundSurface(THREE,asphalt,'asphalt');
   surface.name='Car park';surface.rotation.x=-Math.PI/2;surface.position.y=.36;
   surface.receiveShadow=true;surface.renderOrder=3;
   surface.userData={outline:CAR_PARK_OUTLINE,source:'1829 (4).kml · Car park · Polygon'};

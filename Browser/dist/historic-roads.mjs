@@ -1,4 +1,5 @@
 import {matchEstateGrass} from './estate-grass.mjs';
+import {applyGroundSurface} from './ground-materials.mjs';
 import {missingHistoricFootprints} from './historic-footprints.mjs';
 import {ROAD_STYLE} from './road-style.mjs';
 import {trimAnnexeEntranceBorder} from './annexe-access.mjs';
@@ -12,16 +13,14 @@ export function createHistoricRoads(THREE,exterior){
  // Junction resurfacing must win over the buried road end caps and borders
  // even when overview cameras lose precision between centimetre-high layers.
  const junction=asphalt.clone();
+ for(const mat of [asphalt,paving,junction])applyGroundSurface(THREE,mat,'asphalt');
+ applyGroundSurface(THREE,gravel,'gravel');
  junction.polygonOffset=true;junction.polygonOffsetFactor=-6;junction.polygonOffsetUnits=-12;
  const islandGrass=grass.clone();
  matchEstateGrass(islandGrass,exterior.terrain.material);
  islandGrass.polygonOffset=true;islandGrass.polygonOffsetFactor=-7;islandGrass.polygonOffsetUnits=-14;
  // Separate close ground layers at the higher OS overview camera as well.
  for(const [mat,order] of [[gravel,1],[paving,2],[grass,3],[edge,ROAD_STYLE.edgeLayer],[asphalt,ROAD_STYLE.asphaltLayer],[kerb,8]]){mat.polygonOffset=true;mat.polygonOffsetFactor=-order;mat.polygonOffsetUnits=-order*2;}
- // Deterministic stone flecks, at world scale, remain legible on close approach.
- const size=64,data=new Uint8Array(size*size*4);let seed=1829;
- for(let i=0;i<size*size;i++){seed=(Math.imul(seed,1664525)+1013904223)>>>0;const v=175+(seed%66);data.set([v,v,Math.max(0,v-7),255],i*4);}
- const texture=new THREE.DataTexture(data,size,size);texture.wrapS=texture.wrapT=THREE.RepeatWrapping;texture.needsUpdate=true;gravel.map=texture;
  function polygon(name,points,mat,y,holes=[]){
   const shape=new THREE.Shape(points.map(([x,z])=>new THREE.Vector2(x,-z)));
   for(const hole of holes)shape.holes.push(new THREE.Path(hole.map(([x,z])=>new THREE.Vector2(x,-z))));

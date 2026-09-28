@@ -1,0 +1,69 @@
+import {Tree} from './vendor/ez-tree/tree.mjs';
+import oakLarge from './vendor/ez-tree/presets/oak_large.mjs';
+import {oak,bark} from './vendor/ez-tree/texture-data.mjs';
+import {installLeafWind} from './front-lawn-wind.mjs';
+
+// Oak Large best matches the broad photographed beeches, not their species.
+export const FRONT_LAWN_EZTREE_PRESET='Oak Large';
+export function frontLawnOptions(seed){
+  const options=structuredClone(oakLarge);
+  options.seed=seed;options.branch.start[1]=.24;
+  options.branch.children={0:15,1:7,2:4};
+  options.leaves.count=16;options.leaves.size=4.5;options.leaves.roundedNormals=true;
+  return options;
+}
+
+function texture(THREE,source,{grey=false,repeat=false}={}){
+  const bytes=Uint8Array.from(atob(source.rgba),c=>c.charCodeAt(0));
+  if(grey)for(let i=0;i<bytes.length;i+=4){
+    const shade=Math.min(255,Math.round((bytes[i]*.2126+bytes[i+1]*.7152+bytes[i+2]*.0722)*1.3));
+    bytes[i]=bytes[i+1]=bytes[i+2]=shade;
+  }
+  const map=new THREE.DataTexture(bytes,source.size,source.size);
+  map.colorSpace=THREE.SRGBColorSpace;map.generateMipmaps=true;
+  map.minFilter=THREE.LinearMipmapLinearFilter;map.magFilter=THREE.LinearFilter;map.anisotropy=8;
+  if(repeat){map.wrapS=map.wrapT=THREE.RepeatWrapping;map.repeat.y=.1;}
+  map.needsUpdate=true;return map;
+}
+
+export function addFrontLawnEZTrees(THREE,trees,specs){
+  const leafMap=texture(THREE,oak,{grey:true}),barkMap=texture(THREE,bark,{repeat:true});
+  const wood=new THREE.MeshStandardMaterial({name:'EZ-Tree lawn bark',color:0x827b6a,map:barkMap,roughness:1});
+  for(const spec of specs){
+    const generator=new Tree();generator.options.copy(frontLawnOptions(spec.seed));
+    const group=new THREE.Group();group.name=spec.name;group.position.set(spec.x,.16,spec.z);
+    group.userData.beechTree={...spec};group.userData.frontLawnTree={...spec};
+    group.userData.ezTree={preset:FRONT_LAWN_EZTREE_PRESET,seed:spec.seed};
+    // Combined branch bounds include the crown; only the trunk blocks walking.
+    group.userData.treeTrunk={radius:.78*spec.radius/specs[0].radius};
+    const leaves=new THREE.MeshStandardMaterial({name:spec.name+' EZ-Tree foliage',map:leafMap,
+      color:spec.copper?0xa18a70:0x929565,alphaTest:.45,side:THREE.DoubleSide,roughness:1});
+    leaves.userData.frontLawnWind={phase:spec.copper?0:2.3,strength:.16};installLeafWind(leaves);
+    const lod=new THREE.LOD();lod.name=spec.name+' EZ-Tree detail';group.add(lod);
+    let fit,crownTop;
+    for(const [distance,detail] of [[0,{}],[95,{sectionStride:3,segmentFactor:.65,leafStride:3,leafScale:1.35}],
+      [210,{sectionStride:6,segmentFactor:.4,leafStride:6,leafScale:1.6,billboard:'single'}]]){
+      const geometry=generator.createGeometry(detail);
+      if(!fit){
+        geometry.leaves.computeBoundingBox();const b=geometry.leaves.boundingBox;crownTop=b.max.y;
+        // Retain the original dimensions and root locations, with natural asymmetry.
+        fit=new THREE.Vector3(spec.radius/Math.max(Math.abs(b.min.x),Math.abs(b.max.x)),
+          spec.height/(crownTop*.62+crownTop*.38*.45),spec.radius/Math.max(Math.abs(b.min.z),Math.abs(b.max.z)));
+      }
+      const level=new THREE.Group();level.name=spec.name+' detail '+distance;
+      for(const [key,material] of [['branches',wood],['leaves',leaves]]){
+        const g=geometry[key],positions=g.attributes.position;
+        // Shorten the preset's tall terminal leader into a rounded mature crown.
+        for(let i=0;i<positions.count;i++){const y=positions.getY(i);if(y>crownTop*.62)positions.setY(i,crownTop*.62+(y-crownTop*.62)*.45);}
+        g.scale(fit.x,fit.y,fit.z);g.computeBoundingBox();g.computeBoundingSphere();
+        if(key==='leaves'){g.boundingBox.expandByScalar(.24);g.boundingSphere.radius+=.24;}
+        const mesh=new THREE.Mesh(g,material);mesh.name=spec.name+' EZ-Tree '+key;
+        mesh.castShadow=true;mesh.receiveShadow=true;mesh.userData.noWalkingCollision=true;level.add(mesh);
+      }
+      lod.addLevel(level,distance,.15);level.visible=distance===0;
+    }
+    trees.add(group);
+    generator.branchesMesh.geometry.dispose();generator.branchesMesh.material.dispose();
+    generator.leavesMesh.geometry.dispose();generator.leavesMesh.material.dispose();
+  }
+}

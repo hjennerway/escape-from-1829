@@ -4,6 +4,7 @@ import {createEscapeExterior} from './dist/escape-exterior.mjs';
 import {createAerialLayouts} from './dist/aerial-layouts.mjs';
 import {exteriorObstacles,obstacleContains,createWalker} from './dist/explore-controls.mjs';
 import {WEST_SIDE_BASEMENT as basement} from './dist/west-side-basement.mjs';
+import {prepareEstateTimeline} from './dist/estate-timeline.mjs';
 
 globalThis.document={createElement:()=>({getContext:()=>({fillRect(){},fillText(){},strokeText(){},measureText(t){return {width:t.length*16}}})})};
 const e=createEscapeExterior(THREE,16/9),layouts=createAerialLayouts(THREE,e);
@@ -74,8 +75,10 @@ for(const modern of [false,true]){
     assert(hits.length>0,'the lowered court, road link, transition and stair approach stay surfaced');
     assert(!hits.some(hit=>hit.object.name==='Estate terrain'),`no near-coplanar lawn under west paving at ${x}, ${z}`);
   }
-  for(const [x,z] of [[-60,-30],[-43.1,-34.7],[-40.5,-30],[-73.6,-15]])
-    assert.equal(surface(x,z).object.name,'Estate terrain','the lawn outside the paved outline stays intact');
+  for(const [x,z] of [[-60,-30],[-43.1,-34.7],[-40.5,-30],[-73.6,-15]]){
+    ray.set(new THREE.Vector3(x,.9,z),new THREE.Vector3(0,-1,0));
+    assert(ray.intersectObject(e.terrain,false).length>0,'terrain outside the paved outline stays intact');
+  }
   ray.set(new THREE.Vector3(-39,.5,-33),new THREE.Vector3(1,0,0));
   const galleryMaterial=ray.intersectObjects(visible,false)[0].object.material;
   const foundationMaterial=group.getObjectByName('West side basement exposed foundation -35.7 -37.79').material;
@@ -90,5 +93,23 @@ for(const [x,z] of [[-60,-15],[-72.5,-37],[-72.5,2],[-42.5,-34.7]]){
   assert(Math.abs(hit.point.y+.15)<1e-5);
 }
 assert.equal(exteriorObstacles(THREE,e.model).walkSurfaces.length,0,'hidden passages do not retain walking heights');
+
+const timeline=prepareEstateTimeline(THREE,e,layouts);
+for(const year of [1829,1849,2021,1829]){
+  timeline.setPeriod(year);
+  for(const [x,z] of [[-60,-15],[-72.5,-37],[-72.5,2]]){
+    const hit=surface(x,z);
+    assert(hit,'removing later paving never leaves a hole in the early landscape');
+    const lawns=[];e.terrain.traverseVisible(o=>{if(o.isMesh)lawns.push(o)});
+    ray.set(new THREE.Vector3(x,.9,z),new THREE.Vector3(0,-1,0));
+    const lawn=ray.intersectObjects(lawns,false)[0];
+    assert.equal(Boolean(lawn),year<1849,'grass fills only the absent later paving');
+    if(lawn)assert(Math.abs(lawn.point.y+.15)<1e-5,'restored lawn stays at the original terrain height');
+    // The northern tip passes underneath the retained rear approach road.
+    if(z!==-37)assert.equal(Boolean(hit.object.material.userData.estateGrass),year<1849);
+  }
+}
+layouts.setVisible('historic',true);layouts.setVisible('modern',false);
+assert(!e.terrain.getObjectByName('West courtyard undeveloped terrain').visible,'layout toggles clear the early-period lawn before restoring paving');
 delete globalThis.document;
 console.log('PASS: west-side stairs, fully excavated passage, low wall, end door, both walking directions and layout visibility.');

@@ -32,6 +32,14 @@ for(const x of [-40,-20,20,40,60]){
  assert.equal(surfaceAt(x,FRONT_BOUNDARY.z+3).object.name,'Estate terrain');
 }
 for(const [x,z] of [[0,29],[0,39],[8,32],[-8,32]])assert.equal(surfaceAt(x,z).object.name,'Semicircular Reception paved forecourt');
+for(const side of [-1,1]){
+  const visibleSurface=(x,z)=>{
+    ray.set(new THREE.Vector3(x,40,z),new THREE.Vector3(0,-1,0));
+    return ray.intersectObjects(surfaces,false).find(hit=>{for(let o=hit.object;o;o=o.parent)if(!o.visible)return false;return true;});
+  };
+  for(const [x,z] of [[3.95,26.05],[4.18,26.17]])assert.equal(visibleSurface(side*x,z).object.material.userData.estateSurface,'gravel','Both tiny stair-foot corners must meet the surrounding gravel');
+  assert(visibleSurface(side*10,25).object.material.userData.estateGrass,'The larger Reception lawns remain grass');
+}
 assert.notEqual(surfaceAt(12,39).object.name,'Semicircular Reception paved forecourt','The court must have a rounded edge rather than rectangular corners');
 // Follow both complete new routes at player width, checking actual rendered
 // ground rather than only their control points or mesh bounding boxes.

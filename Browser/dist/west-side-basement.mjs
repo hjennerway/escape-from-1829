@@ -13,6 +13,22 @@ const outline=startX=>[
   [-39.8,-4.5],[-39.8,-33.7],[startX,-33.7]
 ];
 export const westSideBasementExcavation=()=>outline(WEST_SIDE_BASEMENT.stairX);
+// One terrain cut follows the lowered court, road link, southern transition,
+// stair approach and basement. Grass only 5 mm below the paving fights it in
+// distant aerial views. Join these touching footprints into a single hole,
+// retaining the lawn between the court and Parsons Lane.
+export const westCourtTerrainExcavation=()=>[
+  [-73.5,-38],[-71.5,-38],[-71.5,-26],[-39.8,-26],[-39.8,-33.7],
+  [-43,-33.7],[-43,-35.7],[-37.84,-35.7],[-37.84,-30.5],
+  [-37.5,-30.5],[-37.5,-24.5],[-37,-24.5],[-37,0],
+  [-55.5,0],[-55.5,4],[-73.5,4]
+];
+// The part covered by later west-wing paving returns to lawn before 1849.
+// Stop at the timeline's x=-38 wing boundary; the original basement stays cut.
+export const westCourtUnbuiltTerrain=()=>[
+  [-73.5,-38],[-71.5,-38],[-71.5,-26],[-39.8,-26],[-39.8,-4.5],
+  [-39,-4.5],[-39,-1],[-38,-1],[-38,0],[-55.5,0],[-55.5,4],[-73.5,4]
+];
 // Remove the obsolete underlying access slab beneath the lowered courtyard,
 // its gentle southern transition and the stair's ground-level approach.
 export const westCourtAccessExcavation=()=>[

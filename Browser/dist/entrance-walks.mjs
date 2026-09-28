@@ -11,7 +11,9 @@ export function addEntranceWalks(THREE,{model,material}){
   function polygon(points){return new THREE.Shape(points.map(([x,z])=>new THREE.Vector2(x,-z)));}
   // The facade strip is now a sunken walk with stairs at both ends. Retain
   // the original grade only beyond the stair mouths and beside the wing.
-  const inner=[[-1.6,27.4],[-1.6,26.2],[-4.24,26.2],[-4.24,24],
+  // Follow the stair's stepped outer foot: the 0.34 x 0.20 corner between
+  // the return and turning parapets is gravel, not an isolated grass sliver.
+  const inner=[[-1.6,27.4],[-1.6,26.2],[-3.9,26.2],[-3.9,26],[-4.24,26],[-4.24,24],
     [-6.24,24],[-6.24,28.2],[-3.6,28.2],[-3.6,29.4],[-1.6,29.4]];
   const outer=[
     [-32,19.7],

@@ -1,5 +1,6 @@
 import {earthToScene} from './earth-registration.mjs';
 import {ROAD_STYLE} from './road-style.mjs';
+import {applyGroundSurface} from './ground-materials.mjs';
 
 // Countess Mini Roundabout Polygon in 1829 (8).kml, including its closing point.
 // Saved LookAt coordinates describe the camera, not the road footprint.
@@ -36,6 +37,7 @@ export function createCountessRoundabout(THREE){
   const asphalt=new THREE.MeshStandardMaterial({color:ROAD_STYLE.asphalt,roughness:1,
     polygonOffset:true,polygonOffsetFactor:-layer,polygonOffsetUnits:-2*layer});
   const surface=new THREE.Mesh(new THREE.ShapeGeometry(shape),asphalt);
+  applyGroundSurface(THREE,asphalt,'asphalt');
   surface.name='Countess roundabout asphalt';surface.rotation.x=-Math.PI/2;surface.position.y=.36;
   surface.receiveShadow=true;surface.renderOrder=3;group.add(surface);
   // The KML only defines the outer road edge. The flat white centre is an

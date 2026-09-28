@@ -12,9 +12,9 @@ globalThis.document={createElement:()=>({getContext:()=>({fillRect(){},measureTe
 const exterior=createEscapeExterior(THREE,16/9),layouts=createAerialLayouts(THREE,exterior);
 const trees=exterior.trees.children.filter(o=>o.userData.adminPineTree||o.userData.beechTree||o.userData.oakTree||o.userData.willowTree);
 assert.equal(trees.length,KML_TREES.length+FRONT_LAWN_TREES.length,'Every mapped and photo-positioned tree is present');
-const expectedFamilies={adminPineTree:KML_PINE_TREES.length,beechTree:KML_BEECH_TREES.length+FRONT_LAWN_TREES.length,oakTree:KML_OAK_TREES.length,willowTree:KML_WILLOW_TREES.length};
+const expectedFamilies={adminPineTree:KML_PINE_TREES.length,beechTree:KML_BEECH_TREES.length,oakTree:KML_OAK_TREES.length,willowTree:KML_WILLOW_TREES.length};
 for(const key of ['adminPineTree','beechTree','oakTree','willowTree']){
-  const family=trees.filter(o=>o.userData[key]),template=family[0],templateMeshes=[];
+  const family=trees.filter(o=>o.userData[key]&&!o.userData.frontLawnTree),template=family[0],templateMeshes=[];
   assert.equal(family.length,expectedFamilies[key],`${key} count matches the planting data`);
   template.traverse(o=>{if(o.isMesh)templateMeshes.push(o);});
   for(const [index,tree] of family.entries()){
@@ -26,12 +26,13 @@ for(const key of ['adminPineTree','beechTree','oakTree','willowTree']){
     }
     const spec=tree.userData[key],base=template.userData[key];
     assert.equal(tree.position.x,spec.x);assert.equal(tree.position.z,spec.z);
-    assert.equal(tree.scale.y,spec.height/base.height);assert.equal(tree.scale.x,spec.radius/base.radius);
+    assert(Math.abs(tree.scale.y/template.scale.y-spec.height/base.height)<1e-12);assert(Math.abs(tree.scale.x/template.scale.x-spec.radius/base.radius)<1e-12);
     if(index)assert.notEqual(tree.rotation.y,template.rotation.y);
   }
 }
-const beeches=trees.filter(o=>o.userData.frontLawnTree),leafBatch=tree=>tree.getObjectByProperty('isLOD',true).levels[0].object;
-assert.notDeepEqual(leafBatch(beeches[0]).instanceColor.array,leafBatch(beeches[1]).instanceColor.array,'Copper and green foliage retain different colours');
+const beeches=trees.filter(o=>o.userData.frontLawnTree),leafMaterial=tree=>tree.getObjectByProperty('isLOD',true).levels[0].object.children[1].material;
+assert.equal(beeches.length,2);assert(beeches.every(tree=>tree.userData.ezTree));
+assert.notEqual(leafMaterial(beeches[0]).color.getHex(),leafMaterial(beeches[1]).color.getHex(),'Copper and green foliage retain different colours');
 exterior.scene.updateMatrixWorld(true);
 const lod=trees[0].getObjectByProperty('isLOD',true),position=new THREE.Vector3().setFromMatrixPosition(lod.matrixWorld),camera=exterior.camera;
 function distance(value){camera.position.copy(position).add(new THREE.Vector3(0,0,value));camera.updateMatrixWorld();lod.update(camera);}

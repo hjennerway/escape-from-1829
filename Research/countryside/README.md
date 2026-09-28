@@ -27,3 +27,10 @@ The sky fades to the same horizon colour without a visible ground-edge band.
 
 No Unity, Blender or interchange model exports are changed by this runtime pass.
 Screenshots and pixel checks are under `Browser/artifacts/atmosphere/`.
+
+The September 28 terrain-overlap audit found the meadow's shallow inner join
+coincident with the flat estate terrain below it. The meadow material now
+uses polygon offset (-1 factor, -4 units) so the upper scenic surface renders
+consistently at that join. Geometry, boundary heights and walking remain
+unchanged. This is a runtime browser adjustment; the courtyard's separate
+terrain cut is documented in Research/west/README.md.

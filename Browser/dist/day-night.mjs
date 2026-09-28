@@ -1,6 +1,7 @@
 import {LAMP_HEAD,visibleInScene} from './street-lamps.mjs';
 import {createWindowLights,WINDOWS_PER_LIGHT} from './window-lights.mjs';
 import {createAtmosphere} from './atmosphere.mjs';
+import {createFrontLawnWind} from './front-lawn-wind.mjs';
 export const STREET_LIGHT_LIMIT=8;
 
 function glowTexture(THREE){
@@ -20,6 +21,7 @@ function glowTexture(THREE){
 export function createDayNight(THREE,exterior,renderer,{walking=false,twilight=false,random=Math.random,reducedMotion}={}){
  const {scene,camera,model}=exterior,lamps=[],diffusers=new Set();
  const windows=createWindowLights(THREE,model,{random});
+ const treeWind=createFrontLawnWind(THREE,exterior,{reducedMotion});
  const atmosphere=createAtmosphere(THREE,exterior,{reducedMotion});
  scene.updateMatrixWorld(true);
  model.traverse(owner=>{
@@ -55,6 +57,7 @@ export function createDayNight(THREE,exterior,renderer,{walking=false,twilight=f
   pools.count=count;pools.instanceMatrix.needsUpdate=true;haloGeometry.setDrawRange(0,count);haloGeometry.attributes.position.needsUpdate=true;
  }
  function update(dt=0){
+  treeWind.update(dt);
   atmosphere.update(dt);
   if(mode==='day')return;
   windows.update();
@@ -89,7 +92,7 @@ export function createDayNight(THREE,exterior,renderer,{walking=false,twilight=f
   exterior.invalidateShadows();update();
  }
  function setNight(value){setMode(value?(twilight?'dusk':'night'):'day');}
- return {setMode,setNight,update,lamps,lights,pools,windows,atmosphere,get night(){return mode==='night';},get mode(){return mode;}};
+ return {setMode,setNight,update,lamps,lights,pools,windows,atmosphere,treeWind,get night(){return mode==='night';},get mode(){return mode;}};
 }
 
 export function bindDayNight(lighting,root=document){

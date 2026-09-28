@@ -1,0 +1,14 @@
+{
+  "sourceCompiledMeanChannelError": 0.0031780598958333333,
+  "wind": {
+    "source": {
+      "changedPixels": 88410
+    },
+    "compiled": {
+      "changedPixels": 88411
+    },
+    "walking": {
+      "changedPixels": 88306
+    }
+  }
+}

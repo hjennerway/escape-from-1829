@@ -1,3 +1,86 @@
+## EZ-Tree front lawn pair (28 September 2026)
+
+Replaced only the two photograph-positioned lawn beeches with tuned EZ-Tree
+Oak Large geometry, retaining their root locations, approximate crown extents,
+heights and bronze/olive distinction. The mapped beeches retain their prior
+shared template exactly. See [preset and reference notes](Research/front-lawn-trees/README.md).
+
+The pinned MIT-licensed generator uses the existing vendored Three.js. Local
+baked leaf/bark pixels make generation synchronous in Node, browsers and the
+model compiler, with no external runtime dependency. Three LODs share materials
+and reduce the branch/leaf geometry at 95 and 210 units with hysteresis.
+The existing tree toggle and timeline ownership are retained.
+
+`front-lawn-wind.mjs` applies EZ-Tree's slow three-harmonic leaf sway before
+projection, composing with the atmosphere shader. The shared day/night update
+drives it in aerial, walking and game exterior scenes; the same setup restores
+material hooks and matching shadow-depth materials after binary loading.
+Nearby animation invalidates cached shadows each frame. Beyond 120 units and
+when trees are hidden it pauses to retain cached aerial shadows. Reduced-motion
+mode disables sway. Neither object transforms nor fixed trunk collisions move.
+Explicit trunk footprints prevent the combined branching meshes' large bounds
+from blocking the whole lawn.
+
+Validation: `test-front-lawn-eztree.mjs` covers placement, crown dimensions,
+LOD budgets, trunk/canopy walking, visibility, wind/depth time, reduced motion
+and binary restoration. `test-front-lawn-eztree-browser.mjs` verifies changing
+wind pixels, no shader/page errors, trunk collisions and tree toggling in source,
+compiled and walking views, with screenshots under `Browser/artifacts/eztree-*`.
+Run both with `npm run test:eztree` after `npm run build:models`.
+The tree rendering, KML, aerial performance and day/night checks pass. The
+complete graphics-profile checks and rebuilt compiled-scene/timeline suite
+also pass, including source/compiled draw parity, fallback loading, mobile
+controls and walking collision refresh. The saved lawn close-ups differ by
+0.0032 intensity levels per colour channel between source and compiled paths.
+
+The full `npm test` run and continuation cover every suite command. Only the
+previously documented Jarman and Leighton/Newton whole-estate fingerprints
+fail. Restoring the original front-lawn module in memory reproduces both
+failures (196 extra pre-existing primitives in each); replacing the two trees
+also changes those broad fingerprints, so their saved baselines were retained.
+Exact mapped-beech preservation is recorded in `eztree-mapped-preservation.json`.
+The local compiled estate was rebuilt. Browser sources and compiled aerial
+assets changed; Unity and Blender exports were not regenerated.
+
+## Ground, stone and rendered-wall textures (28 September 2026)
+
+Roads and gravel now share deterministic surface-grain textures, with shallow
+bump shading and world-aligned scale across ribbons, junction caps, courts and
+instanced surfaces. Grass uses a 12-unit tile instead of the former 100-unit
+tile, with finer blade strokes, mipmaps and requested 16× anisotropy. Existing
+planting retains its random stream and placement.
+
+Stone and white render use restrained mineral grain with triplanar sampling,
+so walls, columns, steps and coping retain consistent detail without stretching
+their box UVs. Existing authored brick/slate/boundary maps and other material
+palettes are retained. Material metadata restores both ground and mineral
+shader hooks after loading the precompiled scene; the atmosphere shader
+continues to compose with them. Mineral sills remain eligible for the existing
+distant window atlases, preserving the window-detail optimisation.
+
+The two marked grass slivers at Reception's outer stair feet are now gravel.
+Only the 0.34 × 0.20 corner at each side changes; the larger lawns and stair
+geometry are retained. The existing path outline supplies the infill at the
+same height and with the same material, without an overlapping patch. See
+[the owner's annotations and finish notes](Research/surface-finishes/README.md).
+
+Validation: source and rebuilt compiled close-ups were visually checked for
+roads, lawns, gravel, white render, entrance stonework and church stone. Both
+rendered stair-foot probes hit gravel at y=0.195. Source/compiled comparison,
+full-detail and fallback loading, timeline stops, walking collision refresh,
+road geometry, basement access and window-detail checks pass. The cornice
+regression now identifies pale render by its material role rather than the
+obsolete absence of a texture, and still checks clearance above the brick.
+The full npm suite and its continuation cover every listed check; after that
+cornice assertion update, only the previously recorded Jarman and Leighton/
+Newton whole-estate snapshots fail. Both failures also reproduce with the
+small paving correction removed in memory; their baselines are retained.
+Evidence uses `Browser/artifacts/ground-textures-*` and `surface-finishes-*`.
+
+Browser modelling sources and the local compiled aerial model are updated;
+the generated fingerprint matches the final source. Unity, Blender and packaged
+Windows exports were not regenerated.
+
 ## Aerial countryside and three lighting modes (28 September 2026)
 
 The aerial and walking pages now offer direct Day, Dusk and Night selections.
@@ -4172,3 +4255,49 @@ and photo panels. Evidence uses `Browser/artifacts/view-ui-*`.
 
 This change updates browser interface markup/styles only. No model sources,
 compiled models, Unity exports or Blender exports were changed for this work.
+
+## West courtyard terrain flicker and overlap audit (28 September 2026)
+
+Removed the terrain beneath the lowered west courtyard, its road link,
+southern transition and stair approach. The former 5 mm gap was too small
+for distant depth-buffer precision, visibly producing grass stripes through
+the gravel. A single joined cut avoids touching triangulation holes. Paving
+levels and walking geometry are unchanged. The existing layout fill restores
+the whole cut when both layouts are hidden; a separate grass patch, using the
+same material and projection as the terrain, restores the later courtyard
+before 1849. Its visibility survives model serialization and is refreshed by
+the timeline and layout controllers, which already invalidate shadows.
+
+The focused regression fails against the original overlapping terrain and
+passes after the fix. It covers the court, road link, sloped transition,
+stair mouth, retained surrounding lawn, both layouts, hidden estate and the
+1829/1849/2021 transitions. Existing exterior, west, front-basement, walking,
+path and all 13-period checks also pass. Before/after distant views show the
+stripes removed without raising the courtyard or changing the stairs.
+
+The requested wider audit examines upward triangles, including instances,
+within 2.5 cm of the flat terrain, sampling their clipped polygons and checking
+exposure in Historic, Modern, both/hidden layouts and representative years.
+It found no other paving conflicts. The distant meadow's shallow inner join
+is an intentional grass overlay; local polygon offset gives it stable depth
+priority without altering the scenic geometry or walking boundaries.
+
+The full npm test run and continuation cover all configured checks. Only the
+previously documented Jarman and Leighton/Newton whole-estate snapshots fail;
+their stored baselines are not rebased for this correction. Validation logs
+and before/after/source/compiled images use Browser/artifacts/west-court-flicker-*;
+the wider findings are in Browser/artifacts/terrain-overlap-audit.json.
+
+Browser modelling sources and the local generated aerial model are updated.
+The meadow adjustment is runtime-only. Unity and Blender exports are unchanged.
+Concurrent ground-material edits in the shared checkout were preserved.
+
+Final validation: the complete compiled suite passes source/render comparison,
+full-detail loading, fallback handling, every timeline stop, mobile controls
+and live walking collision refresh. The final source and compiled courtyard,
+stair and meadow-join captures were visually inspected; all surface probes
+pass. The generated model's source fingerprint matches the current checkout.
+The two whole-estate snapshot failures also reproduce with this courtyard
+fix removed by the scoped baseline loader. The completed overlap audit covers
+all 13 timeline years, in addition to the four layout combinations.
+See Browser/artifacts/west-court-flicker-final.json for final status.

@@ -4,6 +4,7 @@ import {createModernEntrance} from './modern-entrance.mjs';
 import {createModernCarPark,partitionCarParkTrees} from './modern-car-park.mjs';
 import {createTowerBuildings} from './tower-buildings.mjs';
 import {createCountessRoundabout} from './countess-roundabout.mjs';
+import {finishEstateMinerals} from './mineral-materials.mjs';
 
 // Shared by the aerial preview and exterior walk; gameplay keeps its existing estate.
 export function createAerialLayouts(THREE,exterior){
@@ -27,6 +28,7 @@ export function createAerialLayouts(THREE,exterior){
   const superseded=[exterior.legacyAccess];
   exterior.annexe.traverse(o=>{if(o.name==='Annexe drive')superseded.push(o);});
   exterior.mainAdmin.traverse(o=>{if(['Admin carriage approach','Admin forecourt lawn','Curved lawn stone edging','West side access','East curved carriage drive','East wing side access'].some(name=>o.name===name||o.name===name+' stone kerb'))superseded.push(o);});
+  finishEstateMinerals(THREE,exterior.model);
   return attachAerialLayouts(exterior,{shared,historic,modern,roads,entrance,countessRoundabout,carPark,carParkTrees,historicRoads,towerBuildings,superseded});
 }
 
@@ -42,6 +44,7 @@ export function attachAerialLayouts(exterior,{shared,historic,modern,roads,entra
     shared.visible=state.historic||state.modern;
     const excavationFill=exterior.terrain.getObjectByName('Unexcavated frontage terrain');
     if(excavationFill)excavationFill.visible=!shared.visible;
+    exterior.terrain.traverse(object=>{if(object.userData.terrainBeforeSection)object.visible=false;});
     carParkTrees.visible=!state.modern;
     entrance.visible=state.historic||state.modern; // Shared sweeping approach from Vivienne Smith Lane into 1829.
     for(const object of superseded)object.visible=!state.historic;

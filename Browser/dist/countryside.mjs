@@ -36,6 +36,9 @@ export function createCountryside(THREE,exterior){
  geometry.setAttribute('uv',new THREE.Float32BufferAttribute(new Float32Array(positions.length/3*2),2));geometry.setIndex(indices);geometry.computeVertexNormals();
  const groundMaterial=exterior.terrain?.material.clone()??new THREE.MeshStandardMaterial({color:0x667752,roughness:1});
  if(exterior.terrain)matchEstateGrass(groundMaterial,exterior.terrain.material);
+ // Relief starts at exactly the underlying lawn height. Give this scenic
+ // overlay stable depth priority along its shallow join without raising it.
+ groundMaterial.polygonOffset=true;groundMaterial.polygonOffsetFactor=-1;groundMaterial.polygonOffsetUnits=-4;
  groundMaterial.userData.estateGrass=true;
  const ground=new THREE.Mesh(geometry,groundMaterial);ground.name='Rolling meadows beyond the estate';ground.receiveShadow=false;group.add(ground);
 

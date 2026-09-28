@@ -84,6 +84,11 @@ export function exteriorObstacles(THREE,model){
     }
   }
   model.traverseVisible(o=>{
+    if(o.userData.treeTrunk){
+      const p=new THREE.Vector3().setFromMatrixPosition(o.matrixWorld),r=o.userData.treeTrunk.radius;
+      obstacles.push({minX:p.x-r,maxX:p.x+r,minZ:p.z-r,maxZ:p.z+r});
+    }
+    if(o.userData.noWalkingCollision)return;
     for(const surface of o.userData.walkSurfaces??[]){
       const corners=surface.outline.map(([x,z])=>{const p=new THREE.Vector3(x,surface.height,z).applyMatrix4(o.matrixWorld);return [p.x,p.z];});
       const height=new THREE.Vector3(0,surface.height,0).applyMatrix4(o.matrixWorld).y;

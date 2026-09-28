@@ -1,0 +1,101 @@
+[
+  {
+    "mode": "source",
+    "trees": [
+      {
+        "name": "East front lawn mature beech",
+        "position": [
+          13,
+          0.16,
+          61
+        ],
+        "preset": "Oak Large",
+        "trunk": true,
+        "underCrown": false,
+        "levels": 3
+      },
+      {
+        "name": "West front lawn mature beech",
+        "position": [
+          -13,
+          0.16,
+          62
+        ],
+        "preset": "Oak Large",
+        "trunk": true,
+        "underCrown": false,
+        "levels": 3
+      }
+    ],
+    "states": 8,
+    "windAdvances": true,
+    "drawCalls": 180,
+    "errors": []
+  },
+  {
+    "mode": "compiled",
+    "trees": [
+      {
+        "name": "East front lawn mature beech",
+        "position": [
+          13,
+          0.16,
+          61
+        ],
+        "preset": "Oak Large",
+        "trunk": true,
+        "underCrown": false,
+        "levels": 3
+      },
+      {
+        "name": "West front lawn mature beech",
+        "position": [
+          -13,
+          0.16,
+          62
+        ],
+        "preset": "Oak Large",
+        "trunk": true,
+        "underCrown": false,
+        "levels": 3
+      }
+    ],
+    "states": 8,
+    "windAdvances": true,
+    "drawCalls": 180,
+    "errors": []
+  },
+  {
+    "mode": "walking",
+    "trees": [
+      {
+        "name": "East front lawn mature beech",
+        "position": [
+          13,
+          0.16,
+          61
+        ],
+        "preset": "Oak Large",
+        "trunk": true,
+        "underCrown": false,
+        "levels": 3
+      },
+      {
+        "name": "West front lawn mature beech",
+        "position": [
+          -13,
+          0.16,
+          62
+        ],
+        "preset": "Oak Large",
+        "trunk": true,
+        "underCrown": false,
+        "levels": 3
+      }
+    ],
+    "states": 8,
+    "windAdvances": true,
+    "drawCalls": 6799,
+    "errors": []
+  }
+]

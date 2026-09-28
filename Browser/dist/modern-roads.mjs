@@ -2,12 +2,14 @@ import {MODERN_ROAD_PATHS,MODERN_ROADS_SOURCE} from './modern-road-data.mjs';
 import {roadCenterline} from './road-centerlines.mjs';
 import {createRoadLabel} from './road-labels.mjs';
 import {ROAD_STYLE} from './road-style.mjs';
+import {applyGroundSurface} from './ground-materials.mjs';
 import {PARSONS_NORTH_SHARED_POINTS,PARSONS_NORTH_MODERN_TAIL} from './parsons-north-bend.mjs';
 
 export function createModernRoads(THREE){
   const roads=new THREE.Group();roads.name='Modern roads · Google Earth paths';
   roads.userData.source=MODERN_ROADS_SOURCE;
   const asphalt=new THREE.MeshStandardMaterial({color:ROAD_STYLE.asphalt,roughness:1,polygonOffset:true,polygonOffsetFactor:-ROAD_STYLE.asphaltLayer,polygonOffsetUnits:-2*ROAD_STYLE.asphaltLayer});
+  applyGroundSurface(THREE,asphalt,'asphalt');
   const edge=new THREE.MeshStandardMaterial({color:ROAD_STYLE.edge,roughness:1,polygonOffset:true,polygonOffsetFactor:-ROAD_STYLE.edgeLayer,polygonOffsetUnits:-2*ROAD_STYLE.edgeLayer});
   // Widths are visual estimates; use the shared, refined scene centrelines.
   function ribbon(points,width,y,material){

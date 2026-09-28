@@ -4,6 +4,8 @@ import {attachBuildingDetail} from './building-detail.mjs';
 import {prepareWindowLights} from './window-lights.mjs';
 import {cacheAerialTransforms} from './aerial-performance.mjs';
 import {matchEstateGrass} from './estate-grass.mjs';
+import {restoreGroundProjection} from './ground-materials.mjs';
+import {restoreMineralProjection} from './mineral-materials.mjs';
 import {MODEL_FORMAT,decodeModel,serializeScene,deserializeScene} from './model-binary.mjs';
 
 // Also used by the offline compiler: there is only one modelling pipeline.
@@ -39,8 +41,12 @@ export function restoreAerialScene(THREE,snapshot,aspect,{detail=true}={}){
   const shadowLight=scene.children.find(o=>o.isDirectionalLight&&o.castShadow);
   shadowLight.shadow.autoUpdate=false;
   exterior.invalidateShadows=()=>{shadowLight.shadow.needsUpdate=true;};
-  const materials=new Set();scene.traverse(o=>{for(const m of [o.material].flat())if(m?.userData.estateGrass)materials.add(m);});
-  for(const material of materials)matchEstateGrass(material,exterior.terrain.material);
+  const materials=new Set();scene.traverse(o=>{for(const m of [o.material].flat())if(m?.userData.estateGrass||m?.userData.estateSurface||m?.userData.mineralFinish)materials.add(m);});
+  for(const material of materials){
+    if(material.userData.estateGrass)matchEstateGrass(material,exterior.terrain.material);
+    else if(material.userData.mineralFinish)restoreMineralProjection(material);
+    else restoreGroundProjection(material);
+  }
   const layoutRefs=Object.fromEntries(Object.entries(snapshot.layoutRefs).map(([key,id])=>[key,Array.isArray(id)?id.map(ref):ref(id)]));
   const layouts=attachAerialLayouts(exterior,layoutRefs);
   if(exterior.model.userData.timelinePrepared!==ESTATE_TIMELINE_VERSION)throw new Error('Precompiled estate predates the current period timeline');

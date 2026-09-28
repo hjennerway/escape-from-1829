@@ -1,5 +1,6 @@
 import {addFoliageLevels,placeTreeCopies} from './tree-templates.mjs';
 import {KML_BEECH_TREES} from './kml-tree-data.mjs';
+import {addFrontLawnEZTrees} from './front-lawn-eztree.mjs';
 // img1.jpg and img1-loc.png: the two yellow crosses on the front lawns.
 // Positions and mature crown dimensions are estimates from the marked view.
 export const FRONT_LAWN_TREES=Object.freeze([
@@ -107,7 +108,7 @@ export function addBeechTrees(THREE,trees){
       }
     });
   });
-  for(const tree of trees.children){
-    if(FRONT_LAWN_TREES.some(spec=>spec.name===tree.name))tree.userData.frontLawnTree={...tree.userData.beechTree};
-  }
+  // Keep the mapped beeches' original templates, rotations and palettes.
+  for(const tree of [...trees.children])if(FRONT_LAWN_TREES.some(spec=>spec.name===tree.name))trees.remove(tree);
+  addFrontLawnEZTrees(THREE,trees,FRONT_LAWN_TREES);
 }

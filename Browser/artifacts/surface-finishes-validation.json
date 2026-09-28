@@ -1,0 +1,27 @@
+[
+  {
+    "command": "C:\\Program Files\\nodejs\\node.exe build-models.mjs",
+    "status": 0,
+    "output": "{\n  \"format\": 1,\n  \"revision\": \"186\",\n  \"sourceHash\": \"8289b641f63b42dd74c9dfb95ea9f5532d33700fe8a81e171b357a6349391a64\",\n  \"file\": \"aerial-379bae8e98626b5e5a41.bin.gz\",\n  \"bytes\": 14913921,\n  \"uncompressedBytes\": 136255160,\n  \"sha256\": \"379bae8e98626b5e5a41bdfb47f8239107b927af5e7814ad1145c3a237fd9c38\",\n  \"stats\": {\n    \"revision\": \"186\",\n    \"buildMilliseconds\": 1303.1000000000931,\n    \"windows\": 2585,\n    \"geometries\": 11756,\n    \"materials\": 614,\n    \"textures\": 61\n  },\n  \"totalSeconds\": 10.7\n}\n"
+  },
+  {
+    "command": "C:\\Program Files\\nodejs\\node.exe test-precompiled-models.mjs",
+    "status": 0,
+    "output": "Checking aerial?models=source\nChecking aerial?models=compiled\nChecking aerial?models=compiled&buildingDetail=full&view=front\nChecking aerial\nChecking aerial\nChecking aerial\nPASS: compiled estate, shadows, grass shaders, exact draw counts, tree/layout controls, orbit, portrait, full detail and missing/incompatible/damaged model fallback.\n{\n  \"source\": {\n    \"mode\": \"procedural\",\n    \"milliseconds\": 1293.1000000000931,\n    \"triangles\": 918271,\n    \"calls\": 2833,\n    \"levels\": [\n      2,\n      2,\n      2,\n      2,\n      2,\n      2,\n      2,\n      2,\n      2,\n      2,\n      2,\n      2,\n      1,\n      2,\n      2,\n      2,\n      2,\n      2,\n      2,\n      2,\n      2,\n      2,\n      2,\n      2,\n      2,\n      2,\n      1,\n      2,\n      2,\n      1,\n      2,\n      2,\n      1,\n      2,\n      2,\n      1\n    ],\n    \"readyMilliseconds\": 13833.5113\n  },\n  \"compiled\": {\n    \"mode\": \"compiled\",\n    \"milliseconds\": 889.7000000001863,\n    \"triangles\": 918271,\n    \"calls\": 2833,\n    \"levels\": [\n      2,\n      2,\n      2,\n      2,\n      2,\n      2,\n      2,\n      2,\n      2,\n      2,\n      2,\n      2,\n      1,\n      2,\n      2,\n      2,\n      2,\n      2,\n      2,\n      2,\n      2,\n      2,\n      2,\n      2,\n      2,\n      2,\n      1,\n      2,\n      2,\n      1,\n      2,\n      2,\n      1,\n      2,\n      2,\n      1\n    ],\n    \"readyMilliseconds\": 16816.6893\n  },\n  \"identicalScreenshot\": false,\n  \"pixels\": {\n    \"significantFraction\": 0.00015857142857142857,\n    \"meanChannelError\": 0.0052823809523809525\n  },\n  \"fullDetail\": {\n    \"mode\": \"compiled\",\n    \"milliseconds\": 779.5999999998603,\n    \"triangles\": 606665,\n    \"calls\": 484,\n    \"readyMilliseconds\": 6422.910299999989\n  }\n}\nBrowser: Failed to load resource: the server responded with a status of 404 (Not Found)\n"
+  },
+  {
+    "command": "C:\\Program Files\\nodejs\\node.exe test-timeline-browser.mjs",
+    "status": 0,
+    "output": "PASS: every timeline stop in source/compiled pages, descriptions, URL reload/navigation, keyboard/endpoints, tree focus, selection, mobile reset and live walking collision refresh.\n"
+  },
+  {
+    "command": "C:\\Program Files\\nodejs\\node.exe Browser/artifacts/ground-textures-preview.mjs compiled",
+    "status": 0,
+    "output": "PASS: compiled ground previews, no rendering errors.\n"
+  },
+  {
+    "command": "C:\\Program Files\\nodejs\\node.exe Browser/artifacts/ground-textures-preview.mjs after",
+    "status": 0,
+    "output": "PASS: after ground previews, no rendering errors.\n"
+  }
+]

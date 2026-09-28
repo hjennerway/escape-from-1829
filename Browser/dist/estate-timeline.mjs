@@ -212,6 +212,7 @@ export function prepareEstateTimeline(THREE,exterior,layouts){
 
 export function attachEstateTimeline(exterior,layouts){
  const rules=[];exterior.model.traverse(object=>{if(object.userData.estateSection)rules.push(object);});
+ const terrainRules=[];exterior.terrain.traverse(object=>{if(object.userData.terrainBeforeSection)terrainRules.push(object);});
  let period=periodForYear(DEFAULT_PERIOD),active=false;
  const timeline={rules,get period(){return period;},get active(){return active;},
   setPeriod(year){
@@ -224,6 +225,7 @@ export function attachEstateTimeline(exterior,layouts){
    for(const object of layouts.superseded)object.visible=false;
    layouts.entrance.visible=true;
    for(const object of rules)object.visible=existsInYear(object.userData.estateSection,period.year);
+   for(const object of terrainRules)object.visible=!existsInYear(object.userData.terrainBeforeSection,period.year);
    exterior.invalidateShadows();return period;
   }
  };

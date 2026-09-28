@@ -1,0 +1,346 @@
+{
+  "tolerance": 0.025,
+  "trianglesNearTerrain": 534,
+  "states": [
+    {
+      "state": "historic",
+      "overlaps": [
+        {
+          "name": "Rolling meadows beyond the estate",
+          "parent": "Distant countryside",
+          "instance": null,
+          "color": "667752",
+          "depthBiased": true,
+          "exposed": true,
+          "samples": [
+            [
+              -267.4506070350131,
+              -0.13750000298023224,
+              -352.3883680678623
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "state": "modern",
+      "overlaps": [
+        {
+          "name": "Rolling meadows beyond the estate",
+          "parent": "Distant countryside",
+          "instance": null,
+          "color": "667752",
+          "depthBiased": true,
+          "exposed": true,
+          "samples": [
+            [
+              -267.4506070350131,
+              -0.13750000298023224,
+              -352.3883680678623
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "state": "both",
+      "overlaps": [
+        {
+          "name": "Rolling meadows beyond the estate",
+          "parent": "Distant countryside",
+          "instance": null,
+          "color": "667752",
+          "depthBiased": true,
+          "exposed": true,
+          "samples": [
+            [
+              -267.4506070350131,
+              -0.13750000298023224,
+              -352.3883680678623
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "state": "hidden",
+      "overlaps": [
+        {
+          "name": "Rolling meadows beyond the estate",
+          "parent": "Distant countryside",
+          "instance": null,
+          "color": "667752",
+          "depthBiased": true,
+          "exposed": true,
+          "samples": [
+            [
+              -267.4506070350131,
+              -0.13750000298023224,
+              -352.3883680678623
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "state": 1829,
+      "overlaps": [
+        {
+          "name": "Rolling meadows beyond the estate",
+          "parent": "Distant countryside",
+          "instance": null,
+          "color": "667752",
+          "depthBiased": true,
+          "exposed": true,
+          "samples": [
+            [
+              -267.4506070350131,
+              -0.13750000298023224,
+              -352.3883680678623
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "state": 1849,
+      "overlaps": [
+        {
+          "name": "Rolling meadows beyond the estate",
+          "parent": "Distant countryside",
+          "instance": null,
+          "color": "667752",
+          "depthBiased": true,
+          "exposed": true,
+          "samples": [
+            [
+              -267.4506070350131,
+              -0.13750000298023224,
+              -352.3883680678623
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "state": 1856,
+      "overlaps": [
+        {
+          "name": "Rolling meadows beyond the estate",
+          "parent": "Distant countryside",
+          "instance": null,
+          "color": "667752",
+          "depthBiased": true,
+          "exposed": true,
+          "samples": [
+            [
+              -267.4506070350131,
+              -0.13750000298023224,
+              -352.3883680678623
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "state": 1860,
+      "overlaps": [
+        {
+          "name": "Rolling meadows beyond the estate",
+          "parent": "Distant countryside",
+          "instance": null,
+          "color": "667752",
+          "depthBiased": true,
+          "exposed": true,
+          "samples": [
+            [
+              -267.4506070350131,
+              -0.13750000298023224,
+              -352.3883680678623
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "state": 1870,
+      "overlaps": [
+        {
+          "name": "Rolling meadows beyond the estate",
+          "parent": "Distant countryside",
+          "instance": null,
+          "color": "667752",
+          "depthBiased": true,
+          "exposed": true,
+          "samples": [
+            [
+              -267.4506070350131,
+              -0.13750000298023224,
+              -352.3883680678623
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "state": 1896,
+      "overlaps": [
+        {
+          "name": "Rolling meadows beyond the estate",
+          "parent": "Distant countryside",
+          "instance": null,
+          "color": "667752",
+          "depthBiased": true,
+          "exposed": true,
+          "samples": [
+            [
+              -267.4506070350131,
+              -0.13750000298023224,
+              -352.3883680678623
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "state": 1912,
+      "overlaps": [
+        {
+          "name": "Rolling meadows beyond the estate",
+          "parent": "Distant countryside",
+          "instance": null,
+          "color": "667752",
+          "depthBiased": true,
+          "exposed": true,
+          "samples": [
+            [
+              -267.4506070350131,
+              -0.13750000298023224,
+              -352.3883680678623
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "state": 1915,
+      "overlaps": [
+        {
+          "name": "Rolling meadows beyond the estate",
+          "parent": "Distant countryside",
+          "instance": null,
+          "color": "667752",
+          "depthBiased": true,
+          "exposed": true,
+          "samples": [
+            [
+              -267.4506070350131,
+              -0.13750000298023224,
+              -352.3883680678623
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "state": 1916,
+      "overlaps": [
+        {
+          "name": "Rolling meadows beyond the estate",
+          "parent": "Distant countryside",
+          "instance": null,
+          "color": "667752",
+          "depthBiased": true,
+          "exposed": true,
+          "samples": [
+            [
+              -267.4506070350131,
+              -0.13750000298023224,
+              -352.3883680678623
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "state": 1938,
+      "overlaps": [
+        {
+          "name": "Rolling meadows beyond the estate",
+          "parent": "Distant countryside",
+          "instance": null,
+          "color": "667752",
+          "depthBiased": true,
+          "exposed": true,
+          "samples": [
+            [
+              -267.4506070350131,
+              -0.13750000298023224,
+              -352.3883680678623
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "state": 2010,
+      "overlaps": [
+        {
+          "name": "Rolling meadows beyond the estate",
+          "parent": "Distant countryside",
+          "instance": null,
+          "color": "667752",
+          "depthBiased": true,
+          "exposed": true,
+          "samples": [
+            [
+              -267.4506070350131,
+              -0.13750000298023224,
+              -352.3883680678623
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "state": 2016,
+      "overlaps": [
+        {
+          "name": "Rolling meadows beyond the estate",
+          "parent": "Distant countryside",
+          "instance": null,
+          "color": "667752",
+          "depthBiased": true,
+          "exposed": true,
+          "samples": [
+            [
+              -267.4506070350131,
+              -0.13750000298023224,
+              -352.3883680678623
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "state": 2021,
+      "overlaps": [
+        {
+          "name": "Rolling meadows beyond the estate",
+          "parent": "Distant countryside",
+          "instance": null,
+          "color": "667752",
+          "depthBiased": true,
+          "exposed": true,
+          "samples": [
+            [
+              -267.4506070350131,
+              -0.13750000298023224,
+              -352.3883680678623
+            ]
+          ]
+        }
+      ]
+    }
+  ]
+}

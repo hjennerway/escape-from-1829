@@ -51,8 +51,10 @@ export function createBuildingDetail(THREE,root,{exclude=[],shadowLight=null}={}
 
   function boxesFor(source){
     const g=source.geometry,m=source.material;
+    // Subtle mineral grain averages to the base colour in distant window
+    // atlases; textured stone sills must not disable the existing window LOD.
     if(!source.isMesh||source.isSkinnedMesh||source.children.length||!source.visible||g.type!=='BoxGeometry'||
-      Array.isArray(m)||m.transparent||m.map||source.instanceColor||source.layers.mask!==1||source.renderOrder!==0||g.drawRange.count!==Infinity||g.index?.count!==36)return [];
+      Array.isArray(m)||m.transparent||(m.map&&!m.userData.mineralFinish)||source.instanceColor||source.layers.mask!==1||source.renderOrder!==0||g.drawRange.count!==Infinity||g.index?.count!==36)return [];
     if(!g.boundingBox)g.computeBoundingBox();
     g.boundingBox.getSize(size);
     // Do not interpret altered/rotated box vertices as an ordinary cuboid.

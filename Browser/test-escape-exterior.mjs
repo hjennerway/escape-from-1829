@@ -483,7 +483,7 @@ for(const side of [-1,1]){
   for(const dx of [-6.4,6.4])for(const z of [-30.4,-29,-27.5,-25,-24.6]){
     ray.set(new THREE.Vector3(side*31+dx,13.04,z),new THREE.Vector3(0,-1,0));
     const top=ray.intersectObject(exterior.model,true)[0];
-    assert(top.object.isInstancedMesh&&!top.object.material.map,'pale stair cornice covers the wall top');
+    assert(top.object.isInstancedMesh&&top.object.material.userData.mineralFinish==='render','pale rendered stair cornice covers the wall top');
     assert(top.point.y-wallTop>.025,'rear cornice must clear brickwork to prevent roof-edge z-fighting');
   }
 }
