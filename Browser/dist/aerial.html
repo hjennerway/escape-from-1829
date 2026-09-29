@@ -1,6 +1,6 @@
 <!doctype html>
 <html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>1829 · Aerial view</title><link rel="stylesheet" href="./style.css"><style>#previewNav{position:fixed;left:24px;top:24px;z-index:31;font:10px Arial;letter-spacing:2px;color:#e4e8db;text-shadow:0 2px 6px #000}#previewNav a{color:inherit}#aerialHelp{position:fixed;bottom:18px;left:24px;right:24px;z-index:31;font:11px/1.8 Arial;color:#e4e8db;text-shadow:0 2px 6px #000}#previewNav{right:24px;line-height:1.8}@media(max-width:650px){#previewNav{right:20px;top:24px}#aerialHelp{font-size:10px}}</style><link rel="stylesheet" href="./aerial-layouts.css"><link rel="stylesheet" href="./aerial-locations.css"><link rel="stylesheet" href="./device-location.css"><link rel="stylesheet" href="./building-photos.css"><link rel="stylesheet" href="./day-night.css"><link rel="stylesheet" href="./view-ui.css"></head>
-<body><canvas id="game" aria-label="Aerial 3D view of the 1829 estate"></canvas>
+<body><script src="./intro-loading.js"></script><canvas id="game" aria-label="Aerial 3D view of the 1829 estate"></canvas>
 
 <nav id="previewNav" aria-label="Aerial navigation">
   <a id="backToIntro" href="./">← Back to intro</a>
@@ -109,6 +109,7 @@ import {REDESMERE_PASSAGE_VIEW} from './redesmere-passage.mjs';
 import {REDESMERE_CHIMNEY_VIEWS} from './redesmere-edge-chimney.mjs';
 import {ESCAPE_WATER_TOWER,WATER_TOWER_VIEWS} from './water-tower.mjs';
 import {createAerialControls,bindAerialGestures,sampleLanding} from './aerial-controls.mjs';
+import {beginIntroFlight} from './intro-navigation.mjs';
 import {EAST_PHOTO_VIEW} from './east-photo-detail.mjs';
 import {COURTYARD_PHOTO_VIEW} from './courtyard-photo-detail.mjs';
 import {REAR_COURT_PHOTO_VIEW} from './rear-court-photo-detail.mjs';
@@ -190,7 +191,8 @@ bindTimelineControls(exterior.timeline,document.getElementById('layoutControls')
 const lighting=createDayNight(THREE,exterior,renderer);bindDayNight(lighting);
 // Location links pin the same outline and gallery as clicking a building.
 buildingPhotos.select(buildingSelection.entries.find(entry=>entry.locations.includes(selectedLocation)),true);
-function frame(){requestAnimationFrame(frame);clock.update();const dt=clock.getDelta();if(document.hidden)return;if(buildingPhotos.lightboxOpen)stop();else controls.update(dt);buildingPhotos.update();buildingDetail?.update(exterior.camera,innerHeight);updateRoadLabels(THREE,layouts.roads,exterior.camera,innerWidth,innerHeight);deviceLocationMarker.update(exterior.camera,innerHeight);lighting.update(dt);renderer.render(exterior.scene,exterior.camera);buildingGlow.render(exterior.camera,lighting.mode==='night' ? .3 : lighting.mode==='dusk' ? .6 : 1);}
+const introFlight=beginIntroFlight(exterior.camera,{fallback:sampleLanding(0,{aspect:exterior.camera.aspect,cinematic:true}),target:navigationTarget,onComplete:()=>controls.sync(navigationTarget)});
+function frame(){requestAnimationFrame(frame);clock.update();const dt=clock.getDelta();if(document.hidden)return;if(introFlight?.active)introFlight.update(dt);else if(buildingPhotos.lightboxOpen)stop();else controls.update(dt);buildingPhotos.update();buildingDetail?.update(exterior.camera,innerHeight);updateRoadLabels(THREE,layouts.roads,exterior.camera,innerWidth,innerHeight);deviceLocationMarker.update(exterior.camera,innerHeight);lighting.update(dt);renderer.render(exterior.scene,exterior.camera);buildingGlow.render(exterior.camera,lighting.mode==='night' ? .3 : lighting.mode==='dusk' ? .6 : 1);introFlight?.afterRender();}
 function resetAerial(){buildingPhotos.close();exterior.scene.fog.density=0;moved=false;controls.keys.clear();const shot=sampleLanding(0,{aspect:exterior.camera.aspect});navigationTarget=shot.target;exterior.camera.fov=46;exterior.camera.updateProjectionMatrix();exterior.camera.position.set(...shot.position);exterior.camera.lookAt(...shot.target);controls.sync(navigationTarget);}
 document.getElementById('resetAerial').onclick=resetAerial;
 const canvas=document.getElementById('game');
@@ -202,7 +204,7 @@ canvas.addEventListener('wheel',e=>{e.preventDefault();takeControl();controls.zo
 addEventListener('keydown',e=>{if(['KeyW','KeyA','KeyS','KeyD','ShiftLeft','ShiftRight'].includes(e.code)){e.preventDefault();takeControl();controls.keys.add(e.code);}if(e.code==='Escape')stop();});
 addEventListener('keyup',e=>controls.keys.delete(e.code));addEventListener('blur',stop);
 document.addEventListener('visibilitychange',stop);
-addEventListener('resize',()=>{renderer.setSize(innerWidth,innerHeight);exterior.camera.aspect=innerWidth/innerHeight;exterior.camera.updateProjectionMatrix();if(!moved){if(mapDetail)frameMap();else if(photoDetail)framePhoto();else if(rightDetail)frameRight();else if(towerDetail)frameTower();else if(frontDetail)frameFront();else resetAerial();controls.sync(navigationTarget);}});
+addEventListener('resize',()=>{renderer.setSize(innerWidth,innerHeight);exterior.camera.aspect=innerWidth/innerHeight;exterior.camera.updateProjectionMatrix();if(!moved){if(mapDetail)frameMap();else if(photoDetail)framePhoto();else if(rightDetail)frameRight();else if(towerDetail)frameTower();else if(frontDetail)frameFront();else resetAerial();controls.sync(navigationTarget);if(introFlight?.active)introFlight.retarget();}});
 // Warm all material variants, including hidden layouts and foliage levels,
 // after the frontage texture is ready, before starting camera navigation.
 frontageReady.then(()=>renderer.compileAsync(exterior.scene,exterior.camera)).catch(console.warn).then(()=>{clock.reset();frame();});

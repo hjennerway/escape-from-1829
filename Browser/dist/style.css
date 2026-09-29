@@ -49,10 +49,10 @@ body.landing .intro{max-width:36em;color:var(--cream)}
 @media(max-width:760px){
  body.landing:not(.playing){min-height:100vh;min-height:100svh;display:flex;flex-direction:column;overflow-y:auto}
  body.landing:not(.playing) header{position:absolute;top:max(20px,env(safe-area-inset-top))}
- body.landing #menu{position:relative;top:auto;left:auto;width:86%;margin:0 auto;padding:90px 0 20px;flex:1}
+ body.landing #menu{position:relative;top:auto;left:auto;width:86%;margin:0 auto;padding:90px 0 20px;flex:1;display:flex;flex-direction:column}
  body.landing #menu h1{font-size:clamp(48px,min(18vw,12svh),74px);margin:0 0 20px}
  body.landing .intro{font-size:14px;line-height:1.5;margin:0 0 24px}
- body.landing .menu-actions{max-width:none;width:100%;gap:8px}
+ body.landing .menu-actions{max-width:none;width:100%;gap:8px;margin-top:auto;flex-shrink:0}
  body.landing .menu-actions button{min-height:48px;padding:15px 20px}
  body.landing:not(.playing) .credits-link{position:relative;left:auto;bottom:auto;transform:none;align-self:center;margin:0 0 max(12px,env(safe-area-inset-bottom));padding:12px;min-height:44px;text-shadow:0 1px 4px #07100d;color:var(--cream)}
 }
@@ -63,3 +63,11 @@ body.landing .intro{max-width:36em;color:var(--cream)}
 }
 
 #resultBody{white-space:pre-line;overflow-wrap:anywhere}
+
+/* Keep the title image on screen until a complete destination frame is ready. */
+body.intro-arriving>:not(#game):not(#introTransition){visibility:hidden}
+#introTransition{position:fixed;inset:0;z-index:100;touch-action:none}
+#introStill{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;pointer-events:none}
+.intro-travel-caption{position:absolute;left:24px;right:24px;bottom:max(24px,env(safe-area-inset-bottom));display:flex;align-items:center;gap:16px;flex-wrap:wrap;color:#e4e8db;font:12px/1.5 Arial;text-shadow:0 2px 6px #000}
+.intro-travel-caption button,.intro-travel-caption a{padding:12px 16px;min-height:44px;box-sizing:border-box;background:#152017e6;border:1px solid #75866a60;color:inherit;font:inherit;text-decoration:none;cursor:pointer}
+.intro-travel-caption span{margin-right:auto}

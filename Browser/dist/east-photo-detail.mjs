@@ -126,8 +126,9 @@ export function addEastPhotoDetails(THREE,{model,box,mesh,worldUV,white,brick,ro
   // The garden cross-walk shares the continuous entrance/passage gravel in
   // entrance-walks.mjs; no differently coloured slab overlaps it here.
   // The marked east lawn column is removed in every period; retain the
-  // separate light beside the Redesmere approach.
-  for(const [x,z,h] of [[102,39,8]]){
+  // separate light beside the Redesmere approach. The Hospital Shop red-X
+  // correction moves the whole fixture onto the lawn beyond the wall-side path.
+  for(const [x,z,h] of [[98.75,39,8]]){
     mesh(new THREE.CylinderGeometry(.06,.095,h,8),steel,x,h/2,z,true);
     rod([x,h-.12,z],[x+1.3,h-.35,z],.06,steel);
     box(iron,x+1.4,h-.4,z,.8,.1,.3);

@@ -1,3 +1,102 @@
+## Geometry snapshot baseline repair (29 September 2026)
+
+The Jarman and Leighton/Newton whole-estate checks retained fingerprints from
+25 September while later approved modelling work changed their surroundings.
+Reconstructing Git revision `58f8bf3` entirely in memory reproduces both saved
+count/hash pairs exactly, establishing their provenance before any refresh.
+
+The audit compares geometry by name and then compares every unnamed primitive
+as a multiset, including geometry, materials, world transforms and shadow/
+collision flags. It retains 819,114 Jarman-protected and 883,161
+Leighton-protected primitives exactly. All other changes fall in the documented
+front-lawn tree replacement/additions/removal, front and west basements and
+access surfaces, west facade/courtyard repairs, inner-court trim clearance,
+kitchen fascia/gutter/ridge correction and Hospital Shop lamp relocation.
+The current concurrent lawn and lamp edits are included in the audited state.
+
+Only the two stored count/hash pairs are refreshed: Jarman now protects 820,016
+primitives and Leighton/Newton 884,063. The original L ranges, all test
+assertions and both snapshot-filter helpers remain unchanged. Both focused
+tests pass, and the final full `npm test` run passes without failures
+(`Browser/artifacts/geometry-snapshot-suite.log`). The source fingerprint still
+matches the audited state after the suite. This repair changes no model geometry
+or exports.
+
+Evidence and repeatable audit helpers use `Browser/artifacts/geometry-snapshot-*`.
+The history loader reads old modules from Git without changing the checkout.
+The refresh helper rejects unknown changed names/regions, a mismatched original
+snapshot, changed ward ranges or a model source fingerprint that moved after
+the audit. Its `--write` option is a one-off repair, not a general snapshot
+acceptance command. Later intentional model edits still require reviewing and
+updating the whole-estate snapshots; the original protections are retained.
+
+## Animated intro navigation (29 September 2026)
+
+The intro's Aerial View and Explore on Foot actions now carry the current title
+camera and a single captured frame into the destination. A small script runs
+before scene loading to show that frame while geometry and shaders prepare.
+Once the first destination frame is rendered, the still blends into daylight
+and a 2.4-second eased camera move reaches the existing aerial or walking start.
+The camera tracks the estate during the rise, including portrait layouts.
+
+The transition blocks movement input until arrival, offers Skip movement and
+Escape, and honours reduced motion with a short crossfade only. Aerial framing
+updates if the viewport changes during the flight. The navigation marker and
+session payload are consumed once, so direct links and reloads retain their
+normal behaviour. Early clicks and unavailable session storage use the bundled
+title still and its matching camera. A Back to intro link remains available
+during loading, including failed scene loads. No persistent drawing buffer is
+enabled; the title renders and captures only when one of these actions is used.
+
+Run `npm run test:intro` from `Browser` for camera endpoint/control handoff,
+portrait framing, resize, skip, reduced-motion and real browser navigation
+checks. Browser checks delay the destination import to verify the loading
+image, sample actual intermediate camera positions, and cover early clicks
+with unavailable storage. Visual captures use `Browser/artifacts/intro-*`.
+The full `npm test` run and all 32 checks after its first failure were run;
+only the previously documented Jarman and Leighton/Newton estate snapshots
+fail. This change touches browser navigation, camera animation and UI only;
+no modelling sources, compiled estate, Unity or Blender exports are changed
+by this work.
+
+## Front lawn planting and shadow coverage (29 September 2026)
+
+The latest marked view removes the small east-wing broadleaf, moves the original
+two lawn trees 30% toward the main facade, enlarges them by 20%, and adds four
+matching trees across the front lawns. All six share greener EZ-Tree geometry,
+materials, textures and depth materials with slight rotations and independent
+LOD selection. Explicit trunk footprints scale with the crowns. The legacy
+template for mapped beeches remains independent of the new lawn dimensions.
+See [placement notes](Research/front-lawn-trees/README.md).
+
+The western tree's absent shadow was near-plane clipping. Moving the sun back
+along the same ray keeps its angle and 4096-pixel map, while enclosing all six
+crowns and their ground shadows. Static shadows remain cached and existing
+wind, visibility and timeline controls retain their invalidation paths.
+
+Validation: the focused tree tests pass in source, compiled and walking views,
+including wind pixels, shadow depth, shared buffers, toggle/collision refresh
+and reduced motion. The annotated-view shadow comparison measures 12,662
+darkened pixels from the western tree in both source and compiled renders.
+The mapped-beech preservation check remains exact. Rendering stays within the
+existing per-copy distant-tree allowance (782,676 tree triangles with trees on);
+sharing cuts geometry/material storage, not the number of rendered trees.
+
+The full browser suite was run through its initial Jarman snapshot stop, with
+every remaining command covered by the continuation. A concurrent audited
+snapshot refresh resolves Jarman and Leighton/Newton; the focused Jarman rerun
+passes. Ground-only entrance probes now exclude overhead trees while preserving
+the full trunk collision checks; their rerun also passes. Validation logs and
+matching aerial previews use `Browser/artifacts/lawn-planting-*`.
+
+The rebuilt compiled-scene and timeline browser suite passes, including exact
+draw-count parity, source/compiled image comparison, full detail, fallback
+loading, every period, mobile controls and live walking collision refresh.
+Model binary round-trip checks also pass.
+
+Browser model sources and the local compiled aerial asset are updated. Unity
+and Blender exports were not regenerated.
+
 ## EZ-Tree front lawn pair (28 September 2026)
 
 Replaced only the two photograph-positioned lawn beeches with tuned EZ-Tree
@@ -1702,11 +1801,15 @@ in both layouts. [Reference and modelling notes](Research/outhouse/README.md).
 
 ## Device location in aerial mode
 
-The crosshair button beside **Locations** requests the device's current location. Inside the estate or within 100 m of its outer edge, it places a red pin and centres the aerial view there. Farther away it shows “This only works near the West Cheshire Hospital site”. The button also explains denied permissions, unavailable location and timeouts, and can be pressed again to refresh the fix.
+The crosshair button beside **Locations** requests the device's current location. Inside the estate or within 100 m of its outer edge, it places a red pillar of light with a pin at its base and centres the aerial view there. Farther away it shows “This only works near the West Cheshire Hospital site”. The button also explains denied permissions, unavailable location and timeouts, and can be pressed again to refresh the fix.
 
 Location requires HTTPS (or localhost for development) and browser permission. Each press requests a fresh, high-accuracy fix; coordinates remain in the page and are not saved or sent to a server. The reported device accuracy appears with the result. The pin remains visible across layout changes. This control appears only in aerial mode.
 
 The perimeter in `Browser/dist/device-location.mjs` approximates the whole modelled estate, including the annexe and southern grounds, from the existing outer roads. The 100 m buffer is measured to the nearest perimeter segment, with all interior points accepted. Both the boundary and the existing `earth-registration.mjs` alignment are approximate, not surveyed. Run `node Browser/test-device-location.mjs` for distance, coordinate and permission/error checks.
+
+The September 29 marker update adds a soft red glow and pale core rising at least 180 scene metres, fading towards the sky. The column stays vertical as the camera orbits and retains a minimum apparent width when zoomed out; the 42-pixel pin keeps the exact ground fix readable in plan views. Both render over trees and buildings, without depth writes, fog or lighting attenuation, and hide together when a fix is refreshed or fails. This is a runtime aerial overlay shared by source and compiled loading; estate models, Unity and Blender exports do not change and need no regeneration.
+
+Validation: the full `npm test` suite passes, including device-location and aerial-controls checks. `Browser/artifacts/location-pillar-review.mjs` verifies a simulated fix beneath the front-lawn canopy with trees enabled in source and compiled scenes, plus mobile, plan, night, period changes and removal after an outside-site fix. The `location-pillar-*.png` captures were visually checked; the report records no browser errors.
 
 ## Browser performance
 
@@ -4336,3 +4439,42 @@ The two whole-estate snapshot failures also reproduce with this courtyard
 fix removed by the scoped baseline loader. The completed overlap audit covers
 all 13 timeline years, in addition to the four layout combinations.
 See Browser/artifacts/west-court-flicker-final.json for final status.
+
+## Mobile title-screen button placement (29 September 2026)
+
+The mobile menu uses a vertical flex layout with automatic space above its
+action group, placing the three buttons near the bottom above Credits/Readme.
+This reveals more of the central entrance and steps. The buttons retain their
+48 px touch targets and remain in document flow so short screens can scroll.
+At 390 × 704 the action group moves down by approximately 98 px. The desktop
+layout is unchanged.
+
+Validation: `node test-landing-mobile.mjs` passes all five viewport sizes,
+loading/failure states and the live scene. Mobile, small-screen and desktop
+screenshots were visually reviewed, with additional tall-phone and short
+landscape checks. Evidence is saved under `Browser/artifacts/mobile-buttons-*`.
+The full `npm test` run and continuation cover every configured check; only the
+previously documented Jarman and Leighton/Newton geometry snapshots fail.
+Only browser CSS changes; no models or exports require regeneration.
+
+## Hospital Shop garden lamp (29 September 2026)
+
+Moved the slender steel lamp from (102, 39) to (98.75, 39), matching the owner's
+red X on the lawn beyond the shop-side path. The post, arm and head translate
+together in the shared exterior builder before batching; height, bearing and
+period ownership are retained. Placement notes are in Research/laundry/README.md.
+The browser source and local generated aerial model are updated; Unity and
+Blender exports were not regenerated. Source and compiled close-up previews
+were visually checked against the supplied screenshot.
+
+The existing Hospital Shop and Redesmere checks pass, including the open garden
+path and layout-dependent walking collisions. Suite, build and compiled logs
+use Browser/artifacts/shop-lamp-*.log.
+
+The complete compiled suite passes rendering comparison, full-detail loading,
+fallbacks, every timeline stop and live walking collision refresh. The wider
+suite's Jarman and Leighton/Newton whole-estate snapshot failures also reproduce
+with this lamp move reverted in memory; their stored baselines are unchanged.
+All other checks in the suite and its continuation pass.
+Concurrent tree edits arrived after the full suite; the model was rebuilt again
+and the final compiled Hospital Shop preview passed with the new lamp position.

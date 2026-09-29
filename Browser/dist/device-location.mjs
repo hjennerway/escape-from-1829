@@ -32,9 +32,25 @@ export function locateOnEstate({latitude,longitude}={}){
   return {x,z,nearby:distanceToEstate(x,z)<=LOCATION_MARGIN_METRES+1e-6};
 }
 
-// A screen-sized pin with its tip at the device's ground position. Drawing it
-// last keeps the location readable even when historic buildings cover the fix.
+// A skyward light column, with a screen-sized pin marking the exact ground fix.
+// Both draw over scenery so foliage and historic buildings cannot hide them.
 export function createDeviceLocationMarker(THREE,scene,doc=document){
+  const marker=new THREE.Group();marker.name='Device location marker';
+  marker.renderOrder=1000;marker.visible=false;scene.add(marker);
+  const beamCanvas=doc.createElement('canvas');beamCanvas.width=64;beamCanvas.height=256;
+  const beamContext=beamCanvas.getContext('2d');
+  const glow=beamContext.createLinearGradient(0,0,64,0);
+  for(const [stop,colour] of [[0,'#ff303000'],[.3,'#ff303040'],[.44,'#ff5656cc'],
+    [.49,'#fff4ec'],[.51,'#fff4ec'],[.56,'#ff5656cc'],[.7,'#ff303040'],[1,'#ff303000']])glow.addColorStop(stop,colour);
+  beamContext.fillStyle=glow;beamContext.fillRect(0,0,64,256);
+  const fade=beamContext.createLinearGradient(0,0,0,256);
+  fade.addColorStop(0,'#ffffff00');fade.addColorStop(.45,'#ffffffcc');fade.addColorStop(1,'#ffffff');
+  beamContext.globalCompositeOperation='destination-in';beamContext.fillStyle=fade;beamContext.fillRect(0,0,64,256);
+  const beamTexture=new THREE.CanvasTexture(beamCanvas);beamTexture.colorSpace=THREE.SRGBColorSpace;
+  const beam=new THREE.Mesh(new THREE.PlaneGeometry(1,1).translate(0,.5,0),
+    new THREE.MeshBasicMaterial({map:beamTexture,transparent:true,side:THREE.DoubleSide,
+      depthTest:false,depthWrite:false,fog:false,toneMapped:false}));
+  beam.name='Device location light pillar';beam.renderOrder=1000;marker.add(beam);
   const canvas=doc.createElement('canvas');canvas.width=64;canvas.height=80;
   const ctx=canvas.getContext('2d');
   ctx.beginPath();ctx.moveTo(32,76);
@@ -47,15 +63,21 @@ export function createDeviceLocationMarker(THREE,scene,doc=document){
   const texture=new THREE.CanvasTexture(canvas);texture.colorSpace=THREE.SRGBColorSpace;
   const material=new THREE.SpriteMaterial({map:texture,sizeAttenuation:false,depthTest:false,depthWrite:false,fog:false,toneMapped:false});
   const sprite=new THREE.Sprite(material);
-  sprite.name='Device location marker';sprite.center.set(.5,0);
-  sprite.renderOrder=1000;sprite.visible=false;scene.add(sprite);
+  sprite.name='Device location pin';sprite.center.set(.5,0);
+  sprite.renderOrder=1001;marker.add(sprite);
   return {
-    show({x,z}){sprite.position.set(x,.6,z);sprite.visible=true;},
-    hide(){sprite.visible=false;},
+    show({x,z}){marker.position.set(x,.6,z);marker.visible=true;},
+    hide(){marker.visible=false;},
     update(camera,viewportHeight){
-      if(!sprite.visible)return;
-      const height=2*Math.tan(camera.fov*Math.PI/360)*42/Math.max(1,viewportHeight);
+      if(!marker.visible)return;
+      const pixelSize=2*Math.tan(camera.getEffectiveFOV()*Math.PI/360)/Math.max(1,viewportHeight);
+      const height=pixelSize*42;
       sprite.scale.set(height*.8,height,1);
+      // Rotate only around vertical: the column remains anchored to the ground
+      // while presenting its soft glow from every orbit direction.
+      beam.rotation.y=Math.atan2(camera.position.x-marker.position.x,camera.position.z-marker.position.z);
+      const worldPixel=pixelSize*camera.position.distanceTo(marker.position);
+      beam.scale.set(Math.max(8,worldPixel*18),Math.max(180,worldPixel*200),1);
     }
   };
 }
@@ -88,7 +110,7 @@ export function bindDeviceLocation({button,status,marker,onLocate=()=>{},geoloca
         if(!point.nearby){finish(OUTSIDE_SITE_MESSAGE);return;}
         marker.show(point);onLocate(point);
         const accuracy=position.coords.accuracy;
-        finish('Your location is marked in red.'+(Number.isFinite(accuracy)&&accuracy>=0?' Accuracy: about '+Math.ceil(accuracy)+' m.':''));
+        finish('Your location is marked in red with a pillar of light.'+(Number.isFinite(accuracy)&&accuracy>=0?' Accuracy: about '+Math.ceil(accuracy)+' m.':''));
       },fail,{enableHighAccuracy:true,timeout:15000,maximumAge:0});
     }catch(error){fail(error);}
   });

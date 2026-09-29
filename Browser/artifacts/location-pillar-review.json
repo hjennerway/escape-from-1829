@@ -1,0 +1,29 @@
+{
+  "source": {
+    "mode": "procedural",
+    "treesVisible": true,
+    "position": [
+      13.0000000002183,
+      0.6,
+      47.800000000137445
+    ],
+    "visible": true,
+    "beamHeight": 180,
+    "depthTest": false,
+    "depthWrite": false
+  },
+  "compiled": {
+    "mode": "compiled",
+    "treesVisible": true,
+    "position": [
+      13.0000000002183,
+      0.6,
+      47.800000000137445
+    ],
+    "visible": true,
+    "beamHeight": 180,
+    "depthTest": false,
+    "depthWrite": false
+  },
+  "errors": []
+}

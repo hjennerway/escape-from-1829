@@ -9,3 +9,13 @@ The photograph informs the off-white rendered walls, seven high multi-pane west-
 The building follows Historic visibility in the aerial layout and is included in the browser exterior and walking collisions. Open aerial.html?view=laundry, ?view=laundry-photo or ?view=laundry-plan; the Hospital Shop location also links to a ground-level walk. Unity and Blender exports are unchanged.
 
 Validation: node Browser/test-laundry.mjs checks the actual roof slopes, flat corridor roof, building contacts, exposed window geometry, garden-path clearance and Historic/Modern visibility/collisions. Browser screenshots are saved under Browser/artifacts/laundry-*.png.
+
+## Garden lamp placement (29 September 2026)
+
+The owner's circled-lamp/red-X screenshot moves the existing slender steel lamp
+from x=102, z=39 to x=98.75, z=39, on the lawn beyond the shop's wall-side path.
+The post, arm and head move together by 3.25 scene metres; their height and
+bearing are retained. The destination is a visual estimate registered against
+the shop roof and original lamp, not a surveyed position. The shared browser
+builder in `east-photo-detail.mjs` supplies this placement before batching and
+collision extraction. This is separate from the concrete roadside lamps.

@@ -32,6 +32,8 @@ import {REDESMERE_PASSAGE_VIEW} from './redesmere-passage.mjs';
 import {REDESMERE_CHIMNEY_VIEWS} from './redesmere-edge-chimney.mjs';
 import {createWalker,exteriorObstacles} from './explore-controls.mjs';
 import {bindExploreInput} from './explore-input.mjs';
+import {sampleLanding} from './aerial-controls.mjs';
+import {beginIntroFlight} from './intro-navigation.mjs';
 import {EAST_PHOTO_VIEW} from './east-photo-detail.mjs';
 import {COURTYARD_PHOTO_VIEW} from './courtyard-photo-detail.mjs';
 import {REAR_COURT_PHOTO_VIEW} from './rear-court-photo-detail.mjs';
@@ -127,7 +129,8 @@ try{
   const input=bindExploreInput(walker,{canvas,hint,look,touchControls:document.getElementById('walkTouch')});
   window.addEventListener('resize',()=>{renderer.setSize(innerWidth,innerHeight);exterior.camera.aspect=innerWidth/innerHeight;if(view==='inner-east-photo')exterior.camera.fov=innerEastPhotoView(exterior.camera.aspect).fov;if(view==='central-court-photo')exterior.camera.fov=centralCourtPhotoView(exterior.camera.aspect).fov;exterior.camera.updateProjectionMatrix();});
   const lighting=createDayNight(THREE,exterior,renderer,{walking:true});bindDayNight(lighting);
+  const introFlight=beginIntroFlight(exterior.camera,{fallback:sampleLanding(0,{aspect:exterior.camera.aspect,cinematic:true})});
   const clock=new THREE.Timer();clock.connect(document);
-  renderer.setAnimationLoop(()=>{clock.update();const dt=clock.getDelta();if(document.hidden)return;if(input.active)walker.update(dt);lighting.update(dt);renderer.render(exterior.scene,exterior.camera);});
+  renderer.setAnimationLoop(()=>{clock.update();const dt=clock.getDelta();if(document.hidden)return;if(introFlight?.active)introFlight.update(dt);else if(input.active)walker.update(dt);lighting.update(dt);renderer.render(exterior.scene,exterior.camera);introFlight?.afterRender();});
   loadEscapeFrontage(THREE,exterior).catch(error=>console.warn('Frontage photo unavailable',error));
-}catch(error){console.error(error);hint.textContent='The grounds could not load. Reload the page to try again.';look.disabled=false;look.textContent='RELOAD ↗';look.onclick=()=>location.reload();}
+}catch(error){console.error(error);window.introHandoff?.fail();hint.textContent='The grounds could not load. Reload the page to try again.';look.disabled=false;look.textContent='RELOAD ↗';look.onclick=()=>location.reload();}

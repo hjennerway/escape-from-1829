@@ -1,5 +1,17 @@
 # Leighton / Newton photographic refinement — 24 September 2026
 
+## Snapshot reconciliation — 29 September 2026
+
+The protected-estate baseline is refreshed to 884,063 primitives after an
+independent reconstruction of `58f8bf3` exactly reproduced the old 923,451-count
+snapshot. Later documented lawn-tree, basement/paving, west-front/courtyard,
+roof-trim and shop-lamp changes account for the difference. The audit retains
+883,161 protected primitives exactly, including 14,392 unnamed meshes, and
+checks every changed name or unnamed position against those regions. Evidence
+is in `Browser/artifacts/geometry-snapshot-repair.json`. The original L ranges,
+all architectural/collision assertions and existing exclusions remain exact.
+This supersedes the historical totals below; no geometry changes in this repair.
+
 The supplied locations.png identifies the existing rear east L. The red dot and
 arrow correspond to img1 (inside the L); blue corresponds to img2 (the outer
 long elevation). The photographs are bundled unaltered as

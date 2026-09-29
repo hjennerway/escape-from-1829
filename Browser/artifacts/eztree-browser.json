@@ -7,7 +7,7 @@
         "position": [
           13,
           0.16,
-          61
+          47.8
         ],
         "preset": "Oak Large",
         "trunk": true,
@@ -19,7 +19,55 @@
         "position": [
           -13,
           0.16,
-          62
+          48.5
+        ],
+        "preset": "Oak Large",
+        "trunk": true,
+        "underCrown": false,
+        "levels": 3
+      },
+      {
+        "name": "West front lawn outer companion beech",
+        "position": [
+          -55,
+          0.16,
+          55
+        ],
+        "preset": "Oak Large",
+        "trunk": true,
+        "underCrown": false,
+        "levels": 3
+      },
+      {
+        "name": "West front lawn inner companion beech",
+        "position": [
+          -34,
+          0.16,
+          56
+        ],
+        "preset": "Oak Large",
+        "trunk": true,
+        "underCrown": false,
+        "levels": 3
+      },
+      {
+        "name": "East front lawn inner companion beech",
+        "position": [
+          51,
+          0.16,
+          55
+        ],
+        "preset": "Oak Large",
+        "trunk": true,
+        "underCrown": false,
+        "levels": 3
+      },
+      {
+        "name": "East front lawn outer companion beech",
+        "position": [
+          77,
+          0.16,
+          55
         ],
         "preset": "Oak Large",
         "trunk": true,
@@ -27,7 +75,7 @@
         "levels": 3
       }
     ],
-    "states": 8,
+    "states": 2,
     "windAdvances": true,
     "drawCalls": 180,
     "errors": []
@@ -40,7 +88,7 @@
         "position": [
           13,
           0.16,
-          61
+          47.8
         ],
         "preset": "Oak Large",
         "trunk": true,
@@ -52,7 +100,55 @@
         "position": [
           -13,
           0.16,
-          62
+          48.5
+        ],
+        "preset": "Oak Large",
+        "trunk": true,
+        "underCrown": false,
+        "levels": 3
+      },
+      {
+        "name": "West front lawn outer companion beech",
+        "position": [
+          -55,
+          0.16,
+          55
+        ],
+        "preset": "Oak Large",
+        "trunk": true,
+        "underCrown": false,
+        "levels": 3
+      },
+      {
+        "name": "West front lawn inner companion beech",
+        "position": [
+          -34,
+          0.16,
+          56
+        ],
+        "preset": "Oak Large",
+        "trunk": true,
+        "underCrown": false,
+        "levels": 3
+      },
+      {
+        "name": "East front lawn inner companion beech",
+        "position": [
+          51,
+          0.16,
+          55
+        ],
+        "preset": "Oak Large",
+        "trunk": true,
+        "underCrown": false,
+        "levels": 3
+      },
+      {
+        "name": "East front lawn outer companion beech",
+        "position": [
+          77,
+          0.16,
+          55
         ],
         "preset": "Oak Large",
         "trunk": true,
@@ -60,7 +156,7 @@
         "levels": 3
       }
     ],
-    "states": 8,
+    "states": 2,
     "windAdvances": true,
     "drawCalls": 180,
     "errors": []
@@ -73,7 +169,7 @@
         "position": [
           13,
           0.16,
-          61
+          47.8
         ],
         "preset": "Oak Large",
         "trunk": true,
@@ -85,7 +181,55 @@
         "position": [
           -13,
           0.16,
-          62
+          48.5
+        ],
+        "preset": "Oak Large",
+        "trunk": true,
+        "underCrown": false,
+        "levels": 3
+      },
+      {
+        "name": "West front lawn outer companion beech",
+        "position": [
+          -55,
+          0.16,
+          55
+        ],
+        "preset": "Oak Large",
+        "trunk": true,
+        "underCrown": false,
+        "levels": 3
+      },
+      {
+        "name": "West front lawn inner companion beech",
+        "position": [
+          -34,
+          0.16,
+          56
+        ],
+        "preset": "Oak Large",
+        "trunk": true,
+        "underCrown": false,
+        "levels": 3
+      },
+      {
+        "name": "East front lawn inner companion beech",
+        "position": [
+          51,
+          0.16,
+          55
+        ],
+        "preset": "Oak Large",
+        "trunk": true,
+        "underCrown": false,
+        "levels": 3
+      },
+      {
+        "name": "East front lawn outer companion beech",
+        "position": [
+          77,
+          0.16,
+          55
         ],
         "preset": "Oak Large",
         "trunk": true,
@@ -93,9 +237,9 @@
         "levels": 3
       }
     ],
-    "states": 8,
+    "states": 2,
     "windAdvances": true,
-    "drawCalls": 6799,
+    "drawCalls": 294,
     "errors": []
   }
 ]

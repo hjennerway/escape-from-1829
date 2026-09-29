@@ -31,8 +31,8 @@ for(const key of ['adminPineTree','beechTree','oakTree','willowTree']){
   }
 }
 const beeches=trees.filter(o=>o.userData.frontLawnTree),leafMaterial=tree=>tree.getObjectByProperty('isLOD',true).levels[0].object.children[1].material;
-assert.equal(beeches.length,2);assert(beeches.every(tree=>tree.userData.ezTree));
-assert.notEqual(leafMaterial(beeches[0]).color.getHex(),leafMaterial(beeches[1]).color.getHex(),'Copper and green foliage retain different colours');
+assert.equal(beeches.length,6);assert(beeches.every(tree=>tree.userData.ezTree));
+assert(beeches.every(tree=>leafMaterial(tree)===leafMaterial(beeches[0])),'Lawn copies share green foliage');
 exterior.scene.updateMatrixWorld(true);
 const lod=trees[0].getObjectByProperty('isLOD',true),position=new THREE.Vector3().setFromMatrixPosition(lod.matrixWorld),camera=exterior.camera;
 function distance(value){camera.position.copy(position).add(new THREE.Vector3(0,0,value));camera.updateMatrixWorld();lod.update(camera);}
@@ -79,7 +79,8 @@ let treeTriangles=0;exterior.trees.traverseVisible(o=>{if(o.isMesh)treeTriangles
 // The original budget covers two oaks and eleven pines; retain the existing
 // per-copy allowances as the mapped planting grows. Exact imports are checked
 // independently against the source KML in test-kml-imports.mjs.
-const treeTriangleBudget=180000+(KML_OAK_TREES.length-2)*11000+(KML_PINE_TREES.length-11)*10000+KML_WILLOW_TREES.length*6500;
+// Four new lawn specimens get the same 11,000-triangle distant-copy allowance.
+const treeTriangleBudget=180000+(KML_OAK_TREES.length-2)*11000+(KML_PINE_TREES.length-11)*10000+KML_WILLOW_TREES.length*6500+(FRONT_LAWN_TREES.length-2)*11000;
 assert(treeTriangles<treeTriangleBudget,'Distant trees should submit substantially less geometry');
 updateRoadLabels(THREE,layouts.roads,camera,1300,900);exterior.scene.updateMatrixWorld();
 let labels=0;layouts.roads.traverseVisible(o=>{if(o.isSprite){labels++;assert(o.matrixAutoUpdate);assert(o.matrixWorld.elements.every(Number.isFinite));assert(o.scale.y<.1);}});

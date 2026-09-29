@@ -3,9 +3,19 @@ import {KML_BEECH_TREES} from './kml-tree-data.mjs';
 import {addFrontLawnEZTrees} from './front-lawn-eztree.mjs';
 // img1.jpg and img1-loc.png: the two yellow crosses on the front lawns.
 // Positions and mature crown dimensions are estimates from the marked view.
-export const FRONT_LAWN_TREES=Object.freeze([
+const ORIGINAL_FRONT_LAWN_TREES=Object.freeze([
   {name:'East front lawn mature beech',x:13,z:61,height:19.5,radius:8.6,seed:1901,copper:true},
   {name:'West front lawn mature beech',x:-13,z:62,height:18,radius:7.7,seed:1902,copper:false}
+]);
+// September 29 annotation: reduce the gap to the main facade (z=17) by 30%,
+// enlarge the original pair by 20%, and fill the four marked lawn positions.
+export const FRONT_LAWN_TREES=Object.freeze([
+  ...ORIGINAL_FRONT_LAWN_TREES.map((spec,i)=>({...spec,z:17+(spec.z-17)*.7,
+    height:spec.height*1.2,radius:spec.radius*1.2,seed:1901,copper:false,rotation:i?-.3:.12})),
+  ...[[-55,55],[-34,56],[51,55],[77,55]].map(([x,z],i)=>({
+    name:`${x<0?'West':'East'} front lawn ${['outer','inner','inner','outer'][i]} companion beech`,
+    x,z,height:21.6,radius:9.24,seed:1901,copper:false,rotation:[.4,-.5,.65,-.2][i]
+  }))
 ]);
 export const FRONT_LAWN_TREE_VIEW=Object.freeze({position:[27,1.8,27],target:[-4,7.7,61],fov:54});
 
@@ -42,7 +52,7 @@ export function addBeechTrees(THREE,trees){
   const dummy=new THREE.Object3D(),up=new THREE.Vector3(0,1,0),colour=new THREE.Color();
   const copperPalette=[0x494032,0x584a37,0x66583f,0x716149,0x505039],greenPalette=[0x3e492e,0x50583a,0x626142,0x485033,0x6a6547];
   let template;
-  {const spec=FRONT_LAWN_TREES[0];
+  {const spec=ORIGINAL_FRONT_LAWN_TREES[0];
     const group=new THREE.Group();group.name=spec.name;group.position.set(spec.x,.16,spec.z);template=group;
     let seed=spec.seed;
     const random=()=>((seed=(Math.imul(seed,1664525)+1013904223)>>>0)/2**32);
@@ -96,7 +106,7 @@ export function addBeechTrees(THREE,trees){
       batch.castShadow=true;batch.receiveShadow=true;addFoliageLevels(THREE,group,batch);
     }
   }
-  placeTreeCopies(THREE,trees,template,[...FRONT_LAWN_TREES,...KML_BEECH_TREES],'beechTree',(group,spec)=>{
+  placeTreeCopies(THREE,trees,template,[...ORIGINAL_FRONT_LAWN_TREES,...KML_BEECH_TREES],'beechTree',(group,spec)=>{
     if(spec.copper)return;
     // Preserve the photographed copper/green distinction on the shared shape.
     group.traverse(batch=>{

@@ -33,7 +33,7 @@ try{
       const before=lighting.treeWind.time;lighting.treeWind.update(.1);
       return {trees,states:states.size,windAdvances:lighting.treeWind.time>before,drawCalls:renderer.info.render.calls};
     });
-    assert(stats.windAdvances);assert.equal(stats.trees.length,2);assert(stats.trees.every(t=>t.trunk&&!t.underCrown&&t.levels===3));
+    assert(stats.windAdvances);assert.equal(stats.trees.length,6);assert(stats.trees.every(t=>t.trunk&&!t.underCrown&&t.levels===3));
     const frames=[];
     for(const time of [0,4]){
       const png=await page.evaluate(time=>{

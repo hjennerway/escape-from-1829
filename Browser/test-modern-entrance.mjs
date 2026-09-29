@@ -12,7 +12,10 @@ const wall=exterior.model.getObjectByName('Front boundary wall');assert.deepEqua
 const bounds=new THREE.Box3().setFromObject(wall);assert(bounds.min.z>73&&bounds.max.z<75,'Whole boundary must move toward the lane without rotation');
 const obs=exteriorObstacles(THREE,exterior.model);
 assert(obs.some(o=>obstacleContains(o,-10,FRONT_BOUNDARY.z)),'Moved masonry must block walking');assert(!obs.some(o=>obstacleContains(o,-10,49)),'No obsolete wall collision may remain');
-const surfaces=[];exterior.model.traverseVisible(o=>{if(o.isMesh)surfaces.push(o)});const ray=new THREE.Raycaster();function surfaceAt(x,z){ray.set(new THREE.Vector3(x,40,z),new THREE.Vector3(0,-1,0));return ray.intersectObjects(surfaces,false)[0];}
+// Ground probes ignore overhead tree crowns; trunk clearance is tested using
+// the full obstacle list above, including the newly planted lawn trees.
+const surfaces=[];exterior.model.traverseVisible(o=>{if(!o.isMesh)return;for(let p=o;p;p=p.parent)if(p===exterior.trees)return;surfaces.push(o);});
+const ray=new THREE.Raycaster();function surfaceAt(x,z){ray.set(new THREE.Vector3(x,40,z),new THREE.Vector3(0,-1,0));return ray.intersectObjects(surfaces,false)[0];}
 for(const x of [-40,30,70])assert.equal(surfaceAt(x,59).object.name,'Estate terrain','The frontage uses continuous terrain without the duplicate lawn panel');
 assert.equal(surfaceAt(-95,59).object.name,'Estate terrain');
 // The eastern hedge must end before the bend crosses the frontage.

@@ -2,6 +2,28 @@
 
 The user supplied img1.jpg and the yellow-X placement plan img1-loc.png on 17 September 2026. Two large mature broadleaf trees stand on opposite sides of the central Reception approach, inside the front boundary wall. The red dot and arrow set a ground-level view from the east entrance wing looking south-west across the lawns.
 
+## Greener lawn planting and shadows (29 September 2026)
+
+The latest [annotated aerial view](lawn-planting-marked.png) supersedes the older
+positions, sizes and bronze/olive distinction for the front lawn. Remove the
+small broadleaf at (24,46.7), circled red. Move the original roots from (13,61)
+and (-13,62) to (13,47.8) and (-13,48.5): 30% of the distance toward the main
+front facade at z=17. Multiply their heights and crown radii by 1.2, giving
+23.4/21.6-unit heights and 10.32/9.24-unit radii.
+
+Interpret the four yellow crosses as lawn roots at (-55,55), (-34,56), (51,55)
+and (77,55), each 21.6 units tall with a 9.24-unit crown radius. These are visual
+placements from the annotation, not surveyed coordinates. All six use a shared
+seed-1901 EZ-Tree template with small rotations and greener leaves (#719b4b).
+Geometry and foliage/shadow materials are shared at all three detail levels.
+The separately mapped KML beeches retain their exact prior model and colours.
+
+The blue-circled western tree already had shadow flags, but the sunlight's near
+plane clipped its crown. Moving the directional light backward along its
+existing ray encloses the lawn trees without changing the lighting angle or
+shadow-map resolution. Tree visibility, animated leaf shadows and trunk-only
+walking collisions continue through the existing shared layer.
+
 ## EZ-Tree replacement (28 September 2026)
 
 The two lawn specimens now use [EZ-Tree](https://www.eztree.dev/) geometry.

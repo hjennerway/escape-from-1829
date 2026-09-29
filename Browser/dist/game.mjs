@@ -26,6 +26,16 @@ let mapRefresh=0,floors=[],floorGroups=[],stairHold=0,stairLatch=false,artPanels
 let exterior,arrivalCutscene,escapeExterior,interiorLights,landingTime=0;
 const mapBackgrounds=new WeakMap();
 const landingReducedMotion=matchMedia('(prefers-reduced-motion: reduce)').matches;
+document.addEventListener('capture-intro',({detail})=>{
+ if(!ready||state!=='menu')return;
+ // Read immediately after rendering; WebGL normally clears its drawing buffer.
+ renderAerialBackdrop(exterior);
+ const preview=document.createElement('canvas'),scale=Math.min(1,1280/canvas.width);
+ preview.width=Math.round(canvas.width*scale);preview.height=Math.round(canvas.height*scale);
+ preview.getContext('2d').drawImage(canvas,0,0,preview.width,preview.height);
+ Object.assign(detail,{position:exterior.camera.position.toArray(),quaternion:exterior.camera.quaternion.toArray(),fov:exterior.camera.fov,target:[0,10,19.8]});
+ try{detail.preview=preview.toDataURL('image/jpeg',.85);}catch{}
+});
 const escapeCutscene=createEscapeCutscene($('escapeCutscene'),()=>{
  if(state!=='cutscene')return;
  state='won';$('result').hidden=false;$('retry').focus();

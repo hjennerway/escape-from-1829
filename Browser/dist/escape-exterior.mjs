@@ -76,8 +76,12 @@ export function createEscapeExterior(THREE,aspect){
   addWillowTrees(THREE,trees);
   addSurvivingLampPosts(THREE,model);
   scene.add(new THREE.HemisphereLight(0xe4eff2,0x59634a,2));
-  const sun=new THREE.DirectionalLight(0xffe2b7,2.8);sun.position.set(145,120,50);sun.target.position.set(230,0,-10);scene.add(sun.target);sun.castShadow=true;
+  const sun=new THREE.DirectionalLight(0xffe2b7,2.8);sun.target.position.set(230,0,-10);
+  // Move back along the same light ray: the previous near plane clipped the
+  // western lawn crowns, so their enabled shadow casters never reached the map.
+  sun.position.copy(sun.target.position).add(new THREE.Vector3(-85,120,60).multiplyScalar(3));scene.add(sun.target);sun.castShadow=true;
   sun.shadow.mapSize.set(4096,4096);Object.assign(sun.shadow.camera,{left:-360,right:360,top:300,bottom:-300,near:1,far:850});sun.shadow.bias=-.0003;sun.shadow.normalBias=.25;scene.add(sun);
+  sun.shadow.camera.updateProjectionMatrix();
   // Buildings and sunlight are fixed. Camera movement does not change this map.
   sun.shadow.autoUpdate=false;
   const invalidateShadows=()=>{sun.shadow.needsUpdate=true;};
@@ -365,7 +369,8 @@ export function createEscapeExterior(THREE,aspect){
     [-65,-35],[-72,-23],[-72,-10],[-72,29],[-25.5,46.7],
     [98.2,-38],[122.2,-47],[122.2,-35],
     [122.2,25],[122.2,37],[122.2,49],
-    [-42,-64] // Orchard tree protruding through the Churton/Kelsall oblique roof.
+    [-42,-64], // Orchard tree protruding through the Churton/Kelsall oblique roof.
+    [24,46.7] // September 29 red circle beside the east forward wing.
   ].map(([x,z])=>`${x},${z}`));
   function tree(x,z,size=1){
     if(removedTrees.has(`${x},${z}`)){

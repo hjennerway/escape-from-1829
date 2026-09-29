@@ -20,15 +20,18 @@ export function installLeafWind(material){
 }
 
 export function createFrontLawnWind(THREE,exterior,{reducedMotion=globalThis.matchMedia?.('(prefers-reduced-motion: reduce)').matches??false}={}){
-  const materials=new Map(),trees=[];
+  const materials=new Map(),depthMaterials=new Map(),trees=[];
   exterior.trees?.traverse(object=>{
     if(object.userData.frontLawnTree&&object.userData.ezTree)trees.push(object);
     const material=object.material;
     if(!material?.userData.frontLawnWind)return;
     if(!materials.has(material))materials.set(material,installLeafWind(material));
     // Recreate hooks after binary loading; all LODs receive matching shadow sway.
-    const depth=new THREE.MeshDepthMaterial({depthPacking:THREE.RGBADepthPacking,map:material.map,alphaTest:material.alphaTest,side:THREE.DoubleSide});
-    depth.userData.frontLawnWind={...material.userData.frontLawnWind};
+    let depth=depthMaterials.get(material);
+    if(!depth){
+      depth=new THREE.MeshDepthMaterial({depthPacking:THREE.RGBADepthPacking,map:material.map,alphaTest:material.alphaTest,side:THREE.DoubleSide});
+      depth.userData.frontLawnWind={...material.userData.frontLawnWind};depthMaterials.set(material,depth);
+    }
     const depthState=installLeafWind(depth),state=materials.get(material);
     materials.set(depth,depthState);object.customDepthMaterial=depth;
     if(reducedMotion){state.amount.value=0;depthState.amount.value=0;}

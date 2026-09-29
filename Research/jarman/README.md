@@ -1,5 +1,17 @@
 # Jarman lawn frontage — 24 September 2026
 
+## Snapshot reconciliation — 29 September 2026
+
+The protected-estate baseline is refreshed to 820,016 primitives after an
+independent reconstruction of `58f8bf3` exactly reproduced the old 859,404-count
+snapshot. The difference is later documented estate work: front-lawn trees,
+basements/access paving, west facade/courtyard repairs, roof trim and the shop
+lamp. The audit retains 819,114 protected primitives exactly, including 14,392
+unnamed meshes, and checks every changed name or unnamed position against those
+regions. `Browser/artifacts/geometry-snapshot-repair.json` records the evidence.
+The frontage assertions and existing exclusion rules are unchanged. This
+supersedes the old total below; no geometry changes as part of this repair.
+
 The user’s red outline in `img1-loc.png` identifies the south-facing front of
 Tarvin/Jarman, with the blue dot and arrow registering the lawn camera. The two
 unaltered photographs, `img1.jpg` and `jarman3.jpg`, supply the architectural
