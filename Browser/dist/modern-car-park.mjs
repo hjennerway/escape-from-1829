@@ -10,7 +10,7 @@ export function createModernCarPark(THREE){
     polygonOffset:true,polygonOffsetFactor:-layer,polygonOffsetUnits:-2*layer});
   const surface=new THREE.Mesh(new THREE.ShapeGeometry(shape),asphalt);
   applyGroundSurface(THREE,asphalt,'asphalt');
-  surface.name='Car park';surface.rotation.x=-Math.PI/2;surface.position.y=.36;
+  surface.name='Car park';surface.rotation.x=-Math.PI/2;surface.position.y=ROAD_STYLE.asphaltY;
   surface.receiveShadow=true;surface.renderOrder=3;
   surface.userData={outline:CAR_PARK_OUTLINE,source:'1829 (4).kml · Car park · Polygon'};
   // Stroke the saved concave boundary below the asphalt. Its inner half is

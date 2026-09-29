@@ -10,8 +10,8 @@ export function createHistoricRoads(THREE,exterior){
  const material=color=>new THREE.MeshStandardMaterial({color,roughness:1});
  const asphalt=material(ROAD_STYLE.asphalt),paving=material(ROAD_STYLE.asphalt),gravel=material(0xb4b3aa),grass=material(0x60784b),kerb=material(ROAD_STYLE.edge),edge=material(ROAD_STYLE.edge);
  matchEstateGrass(grass,exterior.terrain.material);
- // Junction resurfacing must win over the buried road end caps and borders
- // even when overview cameras lose precision between centimetre-high layers.
+ // Junction resurfacing uses depth bias over coplanar road end caps. Keeping
+ // the actual asphalt level shared avoids visible supporting edges at joins.
  const junction=asphalt.clone();
  for(const mat of [asphalt,paving,junction])applyGroundSurface(THREE,mat,'asphalt');
  applyGroundSurface(THREE,gravel,'gravel');
@@ -46,12 +46,12 @@ export function createHistoricRoads(THREE,exterior){
  // The service court meets the road without a pale border across its mouth.
  for(const area of HISTORIC_PAVING){
   const type=area.surface,mat=type==='junction edge'?edge:type==='junction'?junction:type==='asphalt apron'||area.name==='Tower service court'?asphalt:paving;
-  const y=type==='junction'?.36:type==='junction edge'?.32:type==='asphalt apron'||area.name==='Tower service court'?.345:.28;
+  const y=type==='junction edge'?.32:ROAD_STYLE.asphaltY;
   const mesh=polygon(area.name,area.points,mat,y,area.holes);if(type==='junction')mesh.renderOrder=3;
  }
  for(const area of HISTORIC_GRASS){const mesh=polygon(area.name,area.points,area.raisedIsland?islandGrass:grass,area.raisedIsland?.37:.31);if(area.raisedIsland)mesh.renderOrder=4;}
  for(const road of HISTORIC_ROADS)ribbon(road.name+' border',road.points,road.width+2*ROAD_STYLE.edgeWidth,edge,.32);
- for(const road of HISTORIC_ROADS)ribbon(road.name,road.points,road.width,asphalt,.34);
+ for(const road of HISTORIC_ROADS)ribbon(road.name,road.points,road.width,asphalt,ROAD_STYLE.asphaltY);
  for(const edge of HISTORIC_KERBS)ribbon(edge.name,edge.points,edge.width??.32,kerb,.38);
  // Retain OS reference metadata for placement and clearance checks without drawing ground outlines.
  group.userData.missingFootprints=missingHistoricFootprints(THREE,exterior);

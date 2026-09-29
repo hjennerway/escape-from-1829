@@ -290,7 +290,8 @@ const photo=TOWER_BUILDING_VIEWS['tower-twin-gables'];
 assert(photo.position[0]>218.5+workshopMove.x&&photo.position[2]>-73.5+workshopMove.z&&photo.position[2]<-60.3+workshopMove.z,'The photo camera must clear the enlarged workshop and use the eastern court');
 const obstacles=exteriorObstacles(THREE,exterior.model);
 const copy=TOWER_WORKSHOP_COPY,copyWalls=new THREE.Box3().setFromObject(group.getObjectByName(copy.name+' walls'));
-assert.deepEqual(copyWalls.getSize(new THREE.Vector3()).toArray().map(n=>+n.toFixed(5)),[21,6.4,16.4],'The wider workshop keeps its height and width, with its back extended to the corridor and the pharmacy approach open');
+assert.deepEqual([copyWalls.max.x-copyWalls.min.x,copyWalls.max.y,copyWalls.max.z-copyWalls.min.z].map(n=>+n.toFixed(5)),[21,6.4,16.4],'The wider workshop keeps its height above grade and width, with its back extended to the corridor and the pharmacy approach open');
+assert(copyWalls.min.y<exterior.terrain.position.y,'The workshop foundation reaches beneath the lawn');
 for(const [originalName,copiedName] of [[copy.source,copy.name],[copy.sourceDormer,copy.dormer]])for(const part of [' walls',' slate roof',' ridge']){
  const originalBounds=new THREE.Box3().setFromObject(group.getObjectByName(originalName+part));
  const copiedBounds=new THREE.Box3().setFromObject(group.getObjectByName(copiedName+part));

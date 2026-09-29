@@ -1,5 +1,4 @@
 import {addWillowTrees} from './willow-trees.mjs';
-import {groundBuildingBases} from './building-grounding.mjs';
 import {addSurvivingLampPosts} from './surviving-lamp-posts.mjs';
 import {matchEstateGrass} from './estate-grass.mjs';
 import {applyGroundSurface} from './ground-materials.mjs';
@@ -491,7 +490,6 @@ export function createEscapeExterior(THREE,aspect){
   const lawnMaterials=new Set();
   model.traverse(object=>{for(const mat of (Array.isArray(object.material)?object.material:[object.material]))if(mat?.userData.estateGrass)lawnMaterials.add(mat);});
   for(const mat of lawnMaterials)matchEstateGrass(mat,grass);
-  groundBuildingBases(THREE,model,{groundY:terrain.position.y,exclude:[trees,terrain]});
   finishEstateMinerals(THREE,model);
   return {scene,camera,model,terrain,legacyAccess,mast,chapel,churchGrounds,waterTower,estateChimney,annexe,newHospital:annexe,churtonWard,uptonFrithOscroft,irbyAshley,graftonEdge,haleWard,bowlingGreen,estatesDepartment,farndonWard,witbyWard,mainAdmin,adminCorridor,laundry,garagesMortuary,greenhouses,outhouse,willows,trees,invalidateShadows};
 }

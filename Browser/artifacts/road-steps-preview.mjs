@@ -1,5 +1,6 @@
 import {spawn} from 'node:child_process';
 import {writeFile} from 'node:fs/promises';
+import {readFile} from 'node:fs/promises';
 import {chromium} from 'playwright';
 const stage=process.argv[2]??'before',mode=stage==='compiled'?'compiled':'source',walking=stage==='walking';
 const server=spawn(process.execPath,['Browser/serve.mjs'],{windowsHide:true,env:{...process.env,PORT:'0'},stdio:'pipe'});
@@ -10,6 +11,9 @@ try{
  const page=await browser.newPage({viewport:{width:1440,height:800},reducedMotion:'reduce'}),errors=[];
  page.setDefaultTimeout(120000);page.setDefaultNavigationTimeout(120000);
  page.on('pageerror',e=>errors.push(e.message));
+ if(stage==='baseline')for(const name of ['road-style','historic-roads','modern-roads','modern-entrance','countess-roundabout','modern-car-park']){
+  await page.route('**/'+name+'.mjs',async route=>route.fulfill({contentType:'text/javascript',body:await readFile(new URL('./road-steps-before-source/'+name+'.mjs',import.meta.url),'utf8')}));
+ }
  await page.route('**/aerial.html*',async route=>{const response=await route.fetch();await route.fulfill({response,body:(await response.text()).replace('function frame(){requestAnimationFrame(frame);','window.__roads={THREE,exterior,renderer,controls,layouts};function frame(){if(!window.__roadsFreeze)requestAnimationFrame(frame);')});});
  await page.route('**/explore.mjs',async route=>{const response=await route.fetch();await route.fulfill({response,body:(await response.text()).replace('const clock=new THREE.Timer();','window.__roads={THREE,exterior,renderer,walker,layouts:exterior.layouts};const clock=new THREE.Timer();')});});
  await page.goto(base+(walking?'/explore.html':'/aerial.html?models='+mode+'&buildingDetail=full'));
@@ -17,6 +21,7 @@ try{
  await page.addStyleTag({content:'body > :not(canvas){display:none!important}'});
  await page.evaluate(()=>{const {exterior,renderer}=window.__roads;window.__roadsFreeze=true;renderer.setAnimationLoop(null);exterior.trees.visible=true;exterior.invalidateShadows();});
  const views=[
+  ['annexe-seam',[316,1.85,-59],[322,-1.2,-48],67],
   ['annexe-estates',[284,1.85,-59],[313,.35,-68],65],
   ['annexe-avenue',[306,1.85,-65],[330,.35,-50],65],
   ['estates-court',[239,1.85,14],[229,.35,-8],65],

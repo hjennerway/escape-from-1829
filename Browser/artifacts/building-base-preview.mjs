@@ -18,6 +18,18 @@ try{
  await page.addStyleTag({content:'body > :not(canvas){display:none!important}'});
  await page.evaluate(()=>{const {exterior,renderer}=window.__contact;window.__contactFreeze=true;renderer.setAnimationLoop(null);exterior.trees.visible=true;exterior.invalidateShadows();});
  const views=[['estates-reference',estatesPoint(245,1.8,-25),estatesPoint(245,1.6,-36.32),67],['estates-oblique',estatesPoint(259,1,-28),estatesPoint(247,.3,-36.32),65],['estates-court',estatesPoint(228,1.8,-47.4),estatesPoint(248.5,2,-49.5),64]];
+ for(const [name,module,key] of [
+  ['upton','upton-frith-oscroft','upton-outward-photo'],['farndon','farndon-ward','farndon-2'],
+  ['irby','irby-ashley','irby-ashley-3'],['grafton','grafton-edge','grafton-edge-ground'],
+  ['hale','hale-daresbury-huxley-dunham','hale-corner-photo-2'],['carden','annexe','annexe-carden-photo'],
+  ['gardens','greenhouses','greenhouses-photo'],['church','chapel','church-front'],
+  ['services','tower-buildings','tower-twin-gables'],['mortuary','garages-mortuary','mortuary-photo'],
+  ['main','main-admin-building','main-admin-east-photo']
+ ]){
+  const exports=await import('../dist/'+module+'.mjs'),view=Object.values(exports).find(value=>value?.[key])?.[key];
+  if(view)views.push([name,view.position,view.target,view.fov??64]);
+ }
+ views.push(['frontage',[0,2.2,71],[0,3.5,10],70],['west-wing',[-75,1.8,3],[-42,2,3],65],['east-wing',[130,1.8,21],[99,2,20],65]);
  for(const [name,position,target,fov] of views){
   const png=await page.evaluate(({position,target,fov})=>{const {exterior,renderer,controls}=window.__contact;exterior.model.traverse(o=>{if(o.isSprite)o.visible=false;});exterior.camera.near=.1;exterior.camera.position.set(...position);exterior.camera.lookAt(...target);exterior.camera.fov=fov;exterior.camera.updateProjectionMatrix();controls?.sync(target);exterior.invalidateShadows();renderer.render(exterior.scene,exterior.camera);return renderer.domElement.toDataURL('image/png').split(',')[1];},{position,target,fov});
   await writeFile(`Browser/artifacts/building-base-${stage}-${name}.png`,Buffer.from(png,'base64'));
@@ -26,6 +38,6 @@ try{
  await writeFile(`Browser/artifacts/building-base-${stage}.json`,JSON.stringify(result,null,2));
  if(errors.length)throw new Error(errors.join('\n'));
  if(mode==='compiled'&&result.mode!=='compiled')throw new Error('Compiled model did not load');
- console.log('PASS: '+stage+' outhouse-contact previews.');
+ console.log('PASS: '+stage+' building-base previews ('+views.length+' views).');
 }finally{await browser?.close();server.kill();}
 

@@ -902,19 +902,6 @@
     },
     {
       "names": [
-        "Carden stepped low side range brick walls @ Carden side elevation",
-        "Carden tower gabled range brick walls @ Carden side elevation"
-      ],
-      "point": [
-        359.95783901898335,
-        0.12000000000000009,
-        9.046642655290217
-      ],
-      "groundY": -0.15,
-      "visibleConflict": true
-    },
-    {
-      "names": [
         "Low west stores plinth @ Tower service buildings",
         "Western tower flat link plinth @ Tower service buildings"
       ],
@@ -949,7 +936,7 @@
         0.12000000000000002,
         -38.5399998664856
       ],
-      "groundY": 0.3450000000000085,
+      "groundY": 0.3400000000000086,
       "visibleConflict": false
     }
   ]

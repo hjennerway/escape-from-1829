@@ -34,7 +34,7 @@ export function createModernEntrance(THREE){
   const shape=new THREE.Shape(outline.map(([x,z])=>new THREE.Vector2(x,-z)));
   const asphalt=new THREE.MeshStandardMaterial({color:ROAD_STYLE.asphalt,roughness:1,polygonOffset:true,polygonOffsetFactor:-(ROAD_STYLE.asphaltLayer+1),polygonOffsetUnits:-2*(ROAD_STYLE.asphaltLayer+1)});
   applyGroundSurface(THREE,asphalt,'asphalt');
-  const surface=new THREE.Mesh(new THREE.ShapeGeometry(shape),asphalt);surface.rotation.x=-Math.PI/2;surface.position.y=.36;surface.receiveShadow=true;surface.renderOrder=3;surface.name='Sweeping entrance asphalt';entrance.add(surface);
+  const surface=new THREE.Mesh(new THREE.ShapeGeometry(shape),asphalt);surface.rotation.x=-Math.PI/2;surface.position.y=ROAD_STYLE.asphaltY;surface.receiveShadow=true;surface.renderOrder=3;surface.name='Sweeping entrance asphalt';entrance.add(surface);
   const kerb=new THREE.MeshStandardMaterial({color:ROAD_STYLE.edge,roughness:1,polygonOffset:true,polygonOffsetFactor:-(ROAD_STYLE.asphaltLayer+1),polygonOffsetUnits:-2*(ROAD_STYLE.asphaltLayer+1)-1});
   // Kerbs follow only the curved sides: no transverse stripe across the lane mouth or gate.
   for(let side=0;side<2;side++){

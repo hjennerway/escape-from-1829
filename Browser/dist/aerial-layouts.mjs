@@ -24,9 +24,11 @@ export function createAerialLayouts(THREE,exterior){
   const carParkTrees=partitionCarParkTrees(THREE,exterior.trees);
   exterior.model.add(shared,historic,modern);
   const towerBuildings=createTowerBuildings(THREE,exterior);historic.add(towerBuildings);
-  groundBuildingBases(THREE,towerBuildings,{groundY:exterior.terrain.position.y});
   exterior.towerBuildings=towerBuildings;
   const historicRoads=createHistoricRoads(THREE,exterior);historic.add(historicRoads);
+  // Close the complete assembled estate before timeline splitting and batching.
+  // Keep the authored building templates available for historical shape checks.
+  groundBuildingBases(THREE,exterior.model,{groundY:exterior.terrain.position.y,exclude:[exterior.trees,exterior.terrain]});
   // Retire inferred tracks while the photo-based historic network is shown.
   const superseded=[exterior.legacyAccess];
   exterior.annexe.traverse(o=>{if(o.name==='Annexe drive')superseded.push(o);});

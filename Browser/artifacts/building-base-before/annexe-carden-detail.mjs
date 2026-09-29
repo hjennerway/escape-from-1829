@@ -53,9 +53,7 @@ export function addCardenElevation(THREE,{model,hall,ranges,frontDormers,brick,r
  }
  // Purple outline: the wall runs back from the tower, then the conservatory
  // projects with clipped corners before stepping inward to the service range.
- // The tall range occupies the former right-hand step. End the low masonry
- // at that join so its exposed brick skin cannot coincide with the tall wall.
- const sideFootprint=[[8.1,-8.1],[20.3,-8.1],[20.3,-32.75],[8.1,-32.75]];
+ const sideFootprint=[[8.1,-8.1],[29.17,-8.1],[29.17,-18],[20.3,-18],[20.3,-32.75],[8.1,-32.75]];
  polygonWall(sideFootprint,4.7,'Carden stepped low side range brick walls');
  const rearLink={x:24.735,z:-27.25,w:8.87,d:18.5,h:4.7,rise:1.9};
  group.userData.conservatoryRearLink=rearLink;

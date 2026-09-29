@@ -16,7 +16,6 @@ export function meetPlinth(wall,height){
 export function groundBuildingBases(THREE,root,{groundY=-.15,exclude=[]}={}){
  root.updateWorldMatrix(true,true);
  const matrix=new THREE.Matrix4(),world=new THREE.Matrix4(),v=new THREE.Vector3();
- const position=new THREE.Vector3(),scale=new THREE.Vector3(),rotation=new THREE.Quaternion();
  const changes=[];
  root.traverse(o=>{
   if(!o.isMesh)return;
@@ -36,11 +35,11 @@ export function groundBuildingBases(THREE,root,{groundY=-.15,exclude=[]}={}){
    if(b.min.y<groundY+.001||b.min.y>.025||b.min.y<-.051||height<.15)continue;
    const bottom=groundY-.03;
    if(o.isInstancedMesh){
-    matrix.decompose(position,rotation,scale);
     const localDrop=(b.min.y-bottom)/o.matrixWorld.elements[5];
     const span=g.boundingBox.max.y-g.boundingBox.min.y;
-    position.y-=localDrop*g.boundingBox.max.y/span;scale.y+=localDrop/span;
-    matrix.compose(position,rotation,scale);o.setMatrixAt(i,matrix);o.instanceMatrix.needsUpdate=true;
+    matrix.elements[13]-=localDrop*g.boundingBox.max.y/span;
+    matrix.elements[5]+=localDrop/span;
+    o.setMatrixAt(i,matrix);o.instanceMatrix.needsUpdate=true;
     o.boundingBox=null;o.boundingSphere=null;
    }else{
     // Copies such as Witby share geometry with their source ward. Clone before

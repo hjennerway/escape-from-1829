@@ -9,6 +9,7 @@ import {decodeModel} from './dist/model-binary.mjs';
 import {restoreAerialScene} from './dist/aerial-scene.mjs';
 import {modelSourceHash} from './model-build-inputs.mjs';
 import {PERIODS} from './dist/estate-periods.mjs';
+import {assertRoadContinuity} from './test-road-continuity.mjs';
 
 const manifest=JSON.parse(await readFile(new URL('./dist/compiled/manifest.json',import.meta.url),'utf8'));
 assert.equal(manifest.sourceHash,await modelSourceHash(),'Rebuild models after editing source');
@@ -16,6 +17,7 @@ const packed=await readFile(new URL('./dist/compiled/'+manifest.file,import.meta
 assert.equal(createHash('sha256').update(packed).digest('hex'),manifest.sha256);
 const raw=gunzipSync(packed),snapshot=decodeModel(raw.buffer.slice(raw.byteOffset,raw.byteOffset+raw.length));
 const estate=restoreAerialScene(THREE,snapshot,16/9),{exterior,layouts,buildingDetail}=estate;
+assertRoadContinuity(layouts);
 assert.equal(exterior.camera.aspect,16/9);assert(buildingDetail.stats.windows>2400);
 assert.equal(exterior.newHospital,exterior.annexe);assert.equal(exterior.trees.parent,layouts.shared);
 const retiredPath=exterior.mainAdmin.getObjectByName('East wing side access');

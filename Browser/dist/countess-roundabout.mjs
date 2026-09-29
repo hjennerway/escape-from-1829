@@ -38,13 +38,13 @@ export function createCountessRoundabout(THREE){
     polygonOffset:true,polygonOffsetFactor:-layer,polygonOffsetUnits:-2*layer});
   const surface=new THREE.Mesh(new THREE.ShapeGeometry(shape),asphalt);
   applyGroundSurface(THREE,asphalt,'asphalt');
-  surface.name='Countess roundabout asphalt';surface.rotation.x=-Math.PI/2;surface.position.y=.36;
+  surface.name='Countess roundabout asphalt';surface.rotation.x=-Math.PI/2;surface.position.y=ROAD_STYLE.asphaltY;
   surface.receiveShadow=true;surface.renderOrder=3;group.add(surface);
   // The KML only defines the outer road edge. The flat white centre is an
   // illustrative mini-roundabout marking, with an estimated 1.5-unit radius.
   const paint=new THREE.Mesh(new THREE.CircleGeometry(1.5,48),new THREE.MeshStandardMaterial({
     color:0xe8e7df,roughness:1,polygonOffset:true,polygonOffsetFactor:-layer-1,polygonOffsetUnits:-2*(layer+1)}));
   paint.name='Countess roundabout painted centre';paint.rotation.x=-Math.PI/2;
-  paint.position.set(COUNTESS_ROUNDABOUT_CENTER[0],.38,COUNTESS_ROUNDABOUT_CENTER[1]);paint.receiveShadow=true;paint.renderOrder=4;
+  paint.position.set(COUNTESS_ROUNDABOUT_CENTER[0],ROAD_STYLE.asphaltY,COUNTESS_ROUNDABOUT_CENTER[1]);paint.receiveShadow=true;paint.renderOrder=4;
   group.add(paint);return group;
 }
