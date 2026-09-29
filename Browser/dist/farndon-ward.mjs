@@ -1,6 +1,7 @@
 import {photoDetailPrimitives} from './photo-detail-primitives.mjs';
 import {FARNDON_CORRIDOR,FARNDON_SOURCE_CONTACT_X} from './farndon-corridor.mjs';
 import {placeWardViews} from './ward-placement.mjs';
+import {meetPlinth} from './building-grounding.mjs';
 
 // The corrected blue outline in img1.png overrides the older OS silhouette.
 // See Tools/register_farndon.mjs and Research/farndon/README.md.
@@ -67,7 +68,7 @@ export function createFarndon(THREE,{brick,roof,worldUV,material}){
  const link=[[169.7,-152.7],[174.3,-152.7],[174.3,-148],[169.7,-148]];
  const side=[[194.3,-160.6],[198.1,-160.6],[198.1,-153.7],[194.3,-153.7]];
  for(const [p,h,name] of [[main,eave,'Single-storey ward walls'],[room,4.1,'Small rear room'],[link,3.3,'Narrow rear link'],[side,3.25,'Low west side room'],[bayOutline,eave,'Projecting central garden bay']]){
-  mass(p,h,brick,name).userData.historicOutlinePadding=.6;mass(p,.3,plinth,name+' plinth');
+  meetPlinth(mass(p,h,brick,name),.3).userData.historicOutlinePadding=.6;mass(p,.3,plinth,name+' plinth');
  }
  const detail=photoDetailPrimitives(THREE,{model:building,box,mesh,white,steel,material});
  // The garden photograph shows pale painted entrance doors.

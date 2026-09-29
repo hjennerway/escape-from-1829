@@ -31,6 +31,23 @@ for(const o of site.userData.openings){
 }
 const gable=site.getObjectByName('Outhouse brick gables');
 assert(gable.geometry.attributes.normal.getX(0)<0,'Front gable normal points out, matching the wall lighting');
+const plinth=site.getObjectByName('Outhouse projecting brick plinth');
+plinth.geometry.computeBoundingBox();
+assert(plinth.geometry.boundingBox.min.y<e.terrain.position.y,'The brick foundation reaches beneath the lawn');
+assert(Math.abs(plinth.geometry.boundingBox.max.y-.48)<1e-6,'The plinth coping height is retained');
+const moss=site.children.find(o=>o.isInstancedMesh&&o.material.color.getHex()===0x536446),patchMatrix=new THREE.Matrix4();
+assert.equal(moss.count,40,'Retain all seeded moss patches');
+for(let i=0;i<moss.count;i++){
+ moss.getMatrixAt(i,patchMatrix);
+ const patch=new THREE.Box3(new THREE.Vector3(-.5,-.5,-.5),new THREE.Vector3(.5,.5,.5)).applyMatrix4(patchMatrix);
+ const positive=patchMatrix.elements[14]>0,front=positive?patch.max.z:-patch.min.z,back=positive?patch.min.z:-patch.max.z;
+ assert(front>OUTHOUSE.width/2+.125,'Moss faces clear the brick face on both sides without depth fighting');
+ assert(back<OUTHOUSE.width/2+.12,'Moss remains attached to the brick plinth');
+}
+const pine=e.trees.getObjectByName('Pine13 trunk');
+assert(pine,'Inspect the pine beside the outhouse in the reported walking view');
+const pineBounds=new THREE.Box3().setFromObject(pine);
+assert(pineBounds.min.y<e.terrain.position.y,'Pine13 extends into the lawn without a visible gap');
 site.traverse(o=>{if(o.isMesh)for(const a of Object.values(o.geometry.attributes))assert([...a.array].every(Number.isFinite),'Finite geometry');});
 assert.equal(site.userData.openings.filter(o=>o.face==='side').length,2);
 const obstacles=exteriorObstacles(THREE,e.model),blocked=(x,z)=>obstacles.some(o=>obstacleContains(o,x,z));

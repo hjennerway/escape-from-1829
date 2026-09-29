@@ -7,6 +7,9 @@ export function addAdminPineTrees(THREE,trees){
   const bark=new THREE.MeshStandardMaterial({color:0x65513d,roughness:1});
   const branchGeometry=new THREE.CylinderGeometry(.56,1,1,7);
   const trunkGeometry=new THREE.CylinderGeometry(.06,1,1,10,6);
+  // The shortest copy also penetrates the lawn; the upper trunk stays fixed.
+  const trunkVertices=trunkGeometry.attributes.position;
+  for(let i=0;i<trunkVertices.count;i++)if(trunkVertices.getY(i)<-.499)trunkVertices.setY(i,-.51);
   // Opaque needle cutouts give the boughs fine edges in walking views. Shared
   // textures and instanced sprays keep the thirteen mature crowns light.
   const resolution=128,pixels=new Uint8Array(resolution*resolution*4),needles=[];

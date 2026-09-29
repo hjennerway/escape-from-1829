@@ -76,7 +76,7 @@ for(let i=0;i<MODERN_ROAD_PATHS.length;i++){
   assert.deepEqual(road.userData.centerline.slice(-5),saved.slice(3),'Retain the outer Valley drive beyond the adjusted junction');
   assert.deepEqual(road.userData.coordinates,path.coordinates,'Preserve the original survey separately from the refined road');
  }else assert.deepEqual(road.userData.centerline,saved,'Other mapped lanes retain their saved vertices');
- road.traverse(o=>{if(!o.isMesh)return;const normals=o.geometry.attributes.normal;for(let n=0;n<normals.count;n++)assert(normals.getY(n)>.99,'Roads must face upwards');const b=new THREE.Box3().setFromObject(o);assert(b.min.y>.3&&b.max.y<.4,'Road overlays must clear terrain without becoming walking obstacles');});
+ road.traverse(o=>{if(!o.isMesh)return;const normals=o.geometry.attributes.normal;for(let n=0;n<normals.count;n++)assert(o.userData.groundContact?Math.abs(normals.getY(n))<.01:normals.getY(n)>.99,'Road tops face upwards and supporting edges are vertical');const b=new THREE.Box3().setFromObject(o);assert((o.userData.groundContact?b.min.y<exterior.terrain.position.y:b.min.y>.3)&&b.max.y<.4,'Road edges meet terrain without becoming walking obstacles');});
 }
 // Each path gets its own text texture; labels are actual road children and inherit Modern visibility.
 assert.deepEqual(drawnRoadNames,MODERN_ROAD_PATHS.map(p=>p.name));

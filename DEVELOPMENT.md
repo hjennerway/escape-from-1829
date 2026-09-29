@@ -1,3 +1,135 @@
+## Hidden access-path edges beside Estates (29 September 2026)
+
+The one-sided strip in the lawn was the ground-contact edge of Main/admin's
+retired `East wing side access`. `closeGroundEdges` now parents supporting
+faces to individually toggled surfaces supplied by the layout controller.
+Their hidden state therefore applies to the complete surface in source,
+walking and serialized aerial scenes. Other road edges retain their sibling
+structure and material batching. No road footprint or walking obstacle changes.
+
+The grounding regression reproduced the original defect, then passed with
+the repair across all 13 periods and four layout states. Compiled validation
+also checks that the retired path owns its supporting faces. Estates, historic
+roads and aerial batching checks pass. Visual evidence uses
+`Browser/artifacts/estates-stray-*`.
+
+The full compiled/source and timeline suite passed, including fallback loading
+and walking collisions. `npm test` reached the unrelated Annexe entrance
+preservation snapshot (`test-annexe-access.mjs`), where concurrent building
+grounding edits changed the raw Annexe primitive fingerprint. All subsequent
+suite checks pass in `estates-stray-suite-remaining.log`; the original failure
+is retained in `estates-stray-suite.log`. That snapshot constructs the raw
+exterior without either of this repair's changed edge-generation call paths.
+Its baseline was not refreshed here. After those concurrent model edits, the
+local compiled model was rebuilt again and Estates/grounding checks passed.
+
+Source, walking and compiled close-ups were checked from both sides. Browser
+source and local compiled aerial assets are updated; Unity, Blender and
+packaged desktop exports were not regenerated.
+
+## Outhouse base flicker and Pine13 verification (29 September 2026)
+
+The reported green flicker was coincident moss and brick faces on both long
+walls. Moss now projects 0.01 units beyond the plinth; the foundation extends
+to -0.18 below the -0.15 lawn, with its top and footprint retained. Pine13,
+the tree in the supplied screenshot, already has its root extended to -0.36
+by the estate-wide grounding correction below. This repair retains that fix.
+See Research/outhouse/README.md for the supplied reference and modelling notes.
+
+The outhouse regression reproduces each original foundation/moss defect and
+passes after correction, while checking Pine13, roof coverage, open approaches
+and layout collisions. Source and walking close-up previews were visually
+reviewed. The original outhouse reproduces both saved ward snapshot hashes;
+the scope audit proves all surrounding geometry and ward ranges unchanged,
+and limits this repair to the foundation and 40 moss translations. The two
+preservation hashes are refreshed without changing their primitive counts.
+Validation evidence uses Browser/artifacts/outhouse-contact-*.
+
+Final validation: the complete `npm test` and `npm run test:compiled` suites
+pass, including all tree families, every timeline stop, fallback loading and
+walking collision refresh. Source, walking and compiled close-ups of both
+wall faces and Pine13 were visually checked. The rebuilt manifest's source
+fingerprint matches the final checkout.
+
+Browser source and the local compiled aerial model are updated. Unity,
+Blender and packaged desktop exports were not regenerated.
+
+## Road, tree and lamp ground contact (29 September 2026)
+
+The walking-view report exposed flat road and kerb overlays above the estate
+lawn at Y=-0.15. `ground-contact.mjs` closes their boundary edges 0.02 units
+into the terrain. Existing top surfaces, holes, routes, materials and junction
+heights stay intact. Thin boxed paths are supported from their undersides;
+sloping paths retain their gradient. Supporting faces are siblings so aerial
+batching remains effective, and share the original surface's period ownership.
+Their materials deliberately disable polygon offset: horizontal overlay bias
+on vertical faces otherwise produces spikes through adjoining road surfaces.
+The vertical faces use metre-scaled texture UVs, avoiding stretched ground
+projection; that mapping is retained by compiled loading.
+
+Simple broadleaf, mapped beech/oak/pine/willow and all EZ-Tree detail levels
+now extend their root ends into the lawn, preserving crown geometry and X/Z
+placements. Distant tree feet additionally sample the rendered meadow mesh;
+the smooth height function alone left some trunks above its coarse triangles.
+Only the lower trunks extend; the distant crowns and trunk tops stay fixed.
+Lamp positions already meet their respective terrain or raised lawn surfaces.
+
+`test-ground-contact.mjs`, included in `npm test`, audits 3,763 supporting
+outlines, all estate tree families and lawn LODs, 1,327 hillside trees, and
+all lamp columns across the 13 periods and four layout states. It also checks
+that supporting faces cannot obstruct walking and have no slope depth bias.
+Existing road-normal checks now distinguish horizontal tops from vertical edges.
+Source, compiled and walking close-ups use `Browser/artifacts/ground-contact-*`.
+The rebuilt compiled-scene tests pass for source/compiled rendering parity,
+full detail and fallback loading, every period and walking collision refresh.
+The complete `npm test` suite passes; focused grounding, historic-road and
+batching checks also pass after the final edge-texture refinement.
+The final timeline rerun retains all original assertions and saves screenshots
+under `Browser/artifacts/ground-contact-timeline/`, avoiding a write failure
+on the shared `timeline-1829.png`. Its log is `ground-contact-timeline.log`.
+
+The root-only snapshot audit reconstructs the previous source in memory and
+reproduces both saved whole-estate fingerprints before checking the difference.
+Other named geometry, unnamed non-trunk primitives and ward ranges stay exact;
+only the two snapshot hashes change, retaining 820,060 and 884,107 primitives.
+The replay and evidence use `ground-contact-scope-*` and
+`ground-contact-snapshot-check.*`; existing snapshot helpers remain unchanged.
+
+Browser sources and the local compiled aerial model are updated. Unity,
+Blender and packaged desktop exports are not regenerated.
+
+## Evenly spaced orchard planters (29 September 2026)
+
+Added three matching stone-edged tree beds at (0, -64), (56, -64) and (70, -64)
+between Churton and Huxley/Dunham. The standing orchard row now has uniform
+14-unit spacing, with the original bed dimensions, shrubs and small broadleaf
+scale. See [placement reference](Research/orchard-planters/README.md).
+
+The new trees are appended after the existing seeded trees and share their
+foliage batches. A scoped before/after audit confirms exactly 42 new primitives,
+with all previous protected geometry, tree positions and crown shapes intact.
+Tree visibility and collision checks pass. The modern car-park check includes
+the three additional trees in its existing displacement rule.
+
+Validation logs and source/compiled previews use `Browser/artifacts/orchard-planters-`.
+The `npm test` run, continuation and focused reruns cover every suite check.
+The two whole-estate snapshots initially differed because they predated these
+planters and the concurrent front-stair wall correction. A separate gated audit
+reproduces both saved snapshots using the previous basement source and no new
+planters, then verifies exactly the 42 planting additions and two retaining
+walls split at grade with a 3 cm upper setback. Every other primitive stays
+exact. Only the two snapshot count/hash pairs are refreshed; the snapshot
+filters and assertions remain intact. Jarman, Leighton/Newton and modern
+car-park checks pass after the refresh.
+
+Compiled/source geometry and rendering comparison, full detail, model fallback,
+all timeline stops, mobile controls and live walking collision refresh pass.
+The final source and compiled planter views were visually inspected, with no
+browser errors, and the compiled source fingerprint matches the current model.
+
+Browser model source and local compiled aerial assets are updated. Unity and
+Blender exports were not regenerated.
+
 ## Geometry snapshot baseline repair (29 September 2026)
 
 The Jarman and Leighton/Newton whole-estate checks retained fingerprints from
@@ -58,6 +190,31 @@ only the previously documented Jarman and Leighton/Newton estate snapshots
 fail. This change touches browser navigation, camera animation and UI only;
 no modelling sources, compiled estate, Unity or Blender exports are changed
 by this work.
+
+## Original lawn pair colour and size correction (29 September 2026)
+
+The two original front-lawn trees now share the earlier copper-brown foliage
+tint and are each 20% larger in height and crown radius than the four green
+companions. Roots and rotations are retained. The shared template fit is fixed
+at its previous dimensions, preserving all companion buffers and transforms;
+only the original pair's scales and foliage materials change. Wind and shadow
+materials remain shared within each of the two foliage colours.
+
+The before/after audit reproduces both saved geometry snapshots, then removes
+only the original pair from each comparison. All 820,004 Jarman-protected and
+884,051 Leighton-protected outside primitives remain exact, including the four
+green companions. Only the two snapshot hashes are refreshed; protected counts,
+ward ranges and test assertions are retained. Evidence uses
+`Browser/artifacts/lawn-pair-scope-*` and the repeatable snapshot-check helper.
+The corrected source and compiled aerial previews were visually inspected and
+both show a western-tree shadow affecting 16,484 pixels in the isolated shadow
+comparison. Focused size, tint, sharing, collision and shadow checks pass.
+The complete `npm test` suite passes. Source, rebuilt compiled and walking
+browser checks also pass for leaf animation, shadows, trunk collisions,
+walkable canopies and tree visibility. Logs/previews use `lawn-pair-*`.
+
+Browser sources and the local compiled aerial asset are updated; Unity and
+Blender exports were not regenerated.
 
 ## Front lawn planting and shadow coverage (29 September 2026)
 
@@ -4478,3 +4635,57 @@ with this lamp move reverted in memory; their stored baselines are unchanged.
 All other checks in the suite and its continuation pass.
 Concurrent tree edits arrived after the full suite; the model was rebuilt again
 and the final compiled Hospital Shop preview passed with the new lamp position.
+
+## Front basement window flicker (29 September 2026)
+
+The blue-circled window above the outer basement stair exposed coincident brown
+retaining masonry and white facade faces at z=19.7, y=0–0.17. Both mirrored
+stair backings now have a separate lower foundation and an upper face recessed
+0.03 units behind the facade. The lower face remains at the excavation boundary,
+so no ground edge shows through. Window, coping and tread positions are retained.
+See Research/front-basement/README.md and its supplied screenshot.
+
+The front-basement regression probes both facade joins and terrain concealment;
+the original geometry fails and the correction passes. Front-corner and exterior
+checks pass. Source and compiled close/oblique views are visually clean, and
+npm run test:compiled passes, including timeline and walking refresh coverage.
+The rebuilt manifest matches the current source. Evidence is under
+Browser/artifacts/front-sill-*.
+
+npm test encountered a shared estate snapshot mismatch during concurrent model
+work. The continuation passes both subsequently refreshed ward snapshots and
+32 of its 33 checks. Its remaining test-aerial-layouts.mjs failure is the road
+normal assertion, reproduced with the original front-basement module restored
+by a test loader; it is independent of this repair. Existing unrelated changes
+and their snapshot files were not edited by this task.
+
+Browser source and the local compiled aerial model are updated. Unity, Blender
+and packaged desktop exports were not regenerated.
+
+## Mortuary lower-course flicker (29 September 2026)
+
+The T-shaped mortuary's full-height wall overlapped its flush dark plinth on
+all eight exterior segments. The upper wall now begins at y=0.23, exactly
+where the base ends. This removes the coincident visible faces while retaining
+the original footprint, height, materials, world UV projection and collisions.
+The supplied screenshot and modelling notes are in Research/garages/README.md.
+
+The focused regression probes each segment at six heights and three positions;
+it detects the original overlap and passes after the correction. Mortuary roof,
+openings, clearance, layout and walking checks pass. Source, rebuilt compiled
+and walking previews were visually reviewed, including close and oblique base
+views. Evidence is saved under Browser/artifacts/mortuary-base-*.
+
+The original mortuary reproduces both saved estate geometry snapshots. A scoped
+comparison verifies that every other primitive is unchanged, with only the
+mortuary wall's lower vertices moving to the existing plinth top. The two
+snapshot hashes were refreshed after that comparison; primitive counts and
+the Leighton/Newton ward ranges remain unchanged by this repair.
+
+The npm test run and its continuation cover every configured check, with all
+passing after the snapshot refresh. The complete compiled suite passes source
+render comparison, full-detail loading, fallback handling, all timeline stops
+and live walking collision refresh. The final manifest matches current source.
+
+Browser source and the local compiled aerial model are updated. Unity, Blender
+and packaged desktop exports were not regenerated for this repair.

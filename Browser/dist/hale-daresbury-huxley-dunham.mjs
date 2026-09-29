@@ -2,6 +2,7 @@ import {photoDetailPrimitives} from './photo-detail-primitives.mjs';
 import {HALE_CORRIDOR_CONTACTS} from './hale-corridors.mjs';
 import {FARNDON_CORRIDOR} from './farndon-corridor.mjs';
 import {placeWardViews} from './ward-placement.mjs';
+import {meetPlinth} from './building-grounding.mjs';
 
 // The green strokes describe ward ranges in an oblique aerial, not screen-
 // space angles. Fit them to the estate axes between Grafton and the tower.
@@ -59,7 +60,7 @@ export function createHaleWard(THREE,{brick,roof,worldUV,material}){
   const g=new THREE.ExtrudeGeometry(shape,{depth:height,bevelEnabled:false});g.rotateX(-Math.PI/2);
   const o=mesh(worldUV(g,1.7),mat,0,0,0,name);o.userData.collisionFootprint=local;return o;
  }
- mass(eave,brick,'Hale ward two-storey walls').userData.historicOutlinePadding=.7;
+ meetPlinth(mass(eave,brick,'Hale ward two-storey walls'),.38).userData.historicOutlinePadding=.7;
  mass(.38,material(0x685549),'Hale ward brick foundation');
  const detail=photoDetailPrimitives(THREE,{model:building,box,mesh,white,steel,material});
  // Same shared 3-by-6 glazing, dimensions, pale heads and dark sills as Irby/Ashley.

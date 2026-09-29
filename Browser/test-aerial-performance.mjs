@@ -32,7 +32,9 @@ for(const key of ['adminPineTree','beechTree','oakTree','willowTree']){
 }
 const beeches=trees.filter(o=>o.userData.frontLawnTree),leafMaterial=tree=>tree.getObjectByProperty('isLOD',true).levels[0].object.children[1].material;
 assert.equal(beeches.length,6);assert(beeches.every(tree=>tree.userData.ezTree));
-assert(beeches.every(tree=>leafMaterial(tree)===leafMaterial(beeches[0])),'Lawn copies share green foliage');
+assert.equal(leafMaterial(beeches[0]),leafMaterial(beeches[1]),'Original pair shares copper foliage');
+assert(beeches.slice(2).every(tree=>leafMaterial(tree)===leafMaterial(beeches[2])),'Companion copies share green foliage');
+assert.notEqual(leafMaterial(beeches[0]),leafMaterial(beeches[2]));
 exterior.scene.updateMatrixWorld(true);
 const lod=trees[0].getObjectByProperty('isLOD',true),position=new THREE.Vector3().setFromMatrixPosition(lod.matrixWorld),camera=exterior.camera;
 function distance(value){camera.position.copy(position).add(new THREE.Vector3(0,0,value));camera.updateMatrixWorld();lod.update(camera);}

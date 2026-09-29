@@ -41,8 +41,9 @@ export function createOuthouse(THREE,{worldUV,material}){
  beam([a,p+.055,ridgeZ],[c,p+.055,ridgeZ],.14,.15,iron);
  for(const x of [a,c])for(const side of [-1,1])beam([x,e+.02,side*d],[x,peak+.1,ridgeZ],.17,.13,blue);
  for(const z of [-d,d]){box(blue,l/2,e-.035,z,l+.45,.24,.13);box(blueShade,l/2,e+.105,z,l+.5,.085,.17);}
+ // The base penetrates the lawn at -.15; its coping keeps the existing height.
  // Projecting brick base and a sloping coping course continue around each side.
- solid(-.09,-w-.12,l+.09,w+.12,.48,'Outhouse projecting brick plinth',base);
+ solid(-.09,-w-.12,l+.09,w+.12,.66,'Outhouse projecting brick plinth',base,-.18);
  for(const z of [-w,w]){
   const side=Math.sign(z),outer=z+side*.13;
   surface([[[0,.48,outer],[l,.48,outer],[l,.64,z]],[[0,.48,outer],[l,.64,z],[0,.64,z]]],brick,'Outhouse sloping side plinth',1.4,true);
@@ -93,8 +94,8 @@ export function createOuthouse(THREE,{worldUV,material}){
  for(const h of [.7,1.6,2.6,3.25])box(sill,-.2,h,-1.84,.035,.04,.28);
  // Grass surrounds the entrance paving after removal of the approach path and fence.
  solid(-1.35,-3.5,-.15,1.55,.06,'Outhouse entrance paving',concrete,-.035);
- // Restrained moss at the foot of the walls, kept below walking collision height.
- for(let i=0;i<40;i++){const x=random()*l,z=(i%2?1:-1)*(w+.08);box(moss,x,.12,z,.12+random()*.22,.12+random()*.13,.08);}
+ // Moss faces sit .01 ahead of the plinth, avoiding coincident brick/moss depth.
+ for(let i=0;i<40;i++){const x=random()*l,z=(i%2?1:-1)*(w+.09);box(moss,x,.12,z,.12+random()*.22,.12+random()*.13,.08);}
  const dummy=new THREE.Object3D();for(const [mat,items]of batches){const batch=new THREE.InstancedMesh(new THREE.BoxGeometry(1,1,1),mat,items.length);batch.name='Outhouse '+(mat===boards?'weathered boarding':mat===blue?'blue trim':'facade details');batch.castShadow=true;batch.receiveShadow=true;batch.userData.orientedCollision=true;items.forEach((o,i)=>{dummy.rotation.set(0,0,0);if(o.a){const from=new THREE.Vector3(...o.a),to=new THREE.Vector3(...o.b),v=to.sub(from);dummy.position.copy(from).addScaledVector(v,.5);dummy.scale.set(o.width,v.length(),o.depth);dummy.quaternion.setFromUnitVectors(new THREE.Vector3(0,1,0),v.normalize());}else{dummy.position.set(o.x,o.y,o.z);dummy.scale.set(o.dx,o.dy,o.dz);}dummy.updateMatrix();batch.setMatrixAt(i,dummy.matrix);});site.add(batch);}
  site.userData.openings=openings;site.userData.photoDirections={1:'Purple: entrance approach',2:'Blue: blank left side',3:'Yellow: entrance and two-window side'};
  return site;

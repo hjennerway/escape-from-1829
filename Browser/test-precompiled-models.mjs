@@ -18,6 +18,8 @@ const raw=gunzipSync(packed),snapshot=decodeModel(raw.buffer.slice(raw.byteOffse
 const estate=restoreAerialScene(THREE,snapshot,16/9),{exterior,layouts,buildingDetail}=estate;
 assert.equal(exterior.camera.aspect,16/9);assert(buildingDetail.stats.windows>2400);
 assert.equal(exterior.newHospital,exterior.annexe);assert.equal(exterior.trees.parent,layouts.shared);
+const retiredPath=exterior.mainAdmin.getObjectByName('East wing side access');
+assert(retiredPath.children.some(o=>o.userData.groundContact),'Compiled Estates access-path sides must inherit the hidden path visibility');
 for(const historic of [true,false])for(const modern of [true,false]){
   layouts.setVisible('historic',historic);layouts.setVisible('modern',modern);
   assert.deepEqual(layouts.state,{historic,modern});assert.equal(layouts.shared.visible,historic||modern);assert.equal(layouts.carParkTrees.visible,!modern);

@@ -11,7 +11,7 @@ addBeechTrees(THREE,trees);scene.updateMatrixWorld(true);
 const front=trees.children.filter(t=>t.userData.frontLawnTree);
 assert.equal(front.length,6);
 assert.deepEqual(FRONT_LAWN_TREES.slice(0,2).map(t=>[t.x,t.z,t.height,t.radius].map(v=>Number(v.toFixed(4)))),
-  [[13,47.8,23.4,10.32],[-13,48.5,21.6,9.24]]);
+  [[13,47.8,25.92,11.088],[-13,48.5,25.92,11.088]]);
 const geometries=new Set(),foliage=new Set();
 for(const [i,tree] of front.entries()){
   const spec=FRONT_LAWN_TREES[i],lod=tree.children[0];
@@ -27,8 +27,18 @@ for(const [i,tree] of front.entries()){
   assert(tree.userData.ezTree.preset==='Oak Large');
 }
 assert.equal(geometries.size,6,'Six copies share three branch and three foliage geometries');
-assert.equal(foliage.size,1,'All trees share one green foliage material');
-const green=[...foliage][0].color;assert(green.g>green.r&&green.g>green.b);
+assert.equal(foliage.size,2,'Copper pair and green companions share two foliage materials');
+const leafMaterial=tree=>tree.children[0].levels[0].object.children[1].material;
+assert.equal(leafMaterial(front[0]),leafMaterial(front[1]));
+assert.equal(leafMaterial(front[0]).color.getHex(),0xa18a70,'Restore the original copper-brown tint');
+for(const tree of front.slice(2)){
+  assert.equal(leafMaterial(tree),leafMaterial(front[2]));
+  assert.equal(leafMaterial(tree).color.getHex(),0x719b4b,'Keep the four companion trees green');
+  for(const original of front.slice(0,2)){
+    assert(Math.abs(original.scale.x/tree.scale.x-1.2)<1e-12,'Original crown is 20% larger');
+    assert(Math.abs(original.scale.y/tree.scale.y-1.2)<1e-12,'Original height is 20% larger');
+  }
+}
 const obstacles=()=>createObstacleIndex(exteriorObstacles(THREE,trees));
 for(const spec of FRONT_LAWN_TREES){assert(obstacles().contains(spec.x,spec.z));assert(!obstacles().contains(spec.x+2,spec.z),'Can walk under branches');}
 trees.visible=false;assert.equal(exteriorObstacles(THREE,trees).length,0);trees.visible=true;
@@ -57,7 +67,7 @@ restoredTrees.traverse(o=>{if(o.material?.userData.frontLawnWind){
 }});
 const restoredGeometry=new Set(),depths=new Set();
 restoredTrees.traverse(o=>{if(o.material?.userData.frontLawnWind){restoredGeometry.add(o.geometry);depths.add(o.customDepthMaterial);}});
-assert.equal(restoredGeometry.size,3);assert.equal(depths.size,1,'Compiled copies also share their shadow-depth material');
+assert.equal(restoredGeometry.size,3);assert.equal(depths.size,2,'Compiled copies share one shadow-depth material per foliage tint');
 
 // Regression: the old sunlight near plane excluded the western lawn crown.
 globalThis.document={createElement:()=>({getContext:()=>({fillRect(){},measureText:t=>({width:t.length*16}),strokeText(){},fillText(){}})})};

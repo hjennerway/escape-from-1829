@@ -28,3 +28,18 @@ are retained. The grass slivers must not be confused with those larger lawns.
 Browser source and the generated aerial model are updated. Unity, Blender and
 packaged desktop exports are not regenerated. Validation and screenshots use
 `Browser/artifacts/ground-textures-*` and `surface-finishes-*`.
+
+## Ground contact — 29 September 2026
+
+The owner's walking screenshot showed daylight beneath the raised road border.
+The follow-up requests an estate-wide check of roads, trees and lampposts.
+Existing overlay heights are retained to preserve the approved junction and
+building contacts; their exposed outlines now have vertical material faces
+down to Y=-0.17, just beneath the lawn. This also closes path undersides and
+raised grass-island edges, including holes and sloping transitions. The change
+adds no new road traces or historical paving interpretation.
+
+Vertical faces use unbiased depth so hidden ribbon ends cannot bleed through
+the asphalt. They follow the same timeline and layout parents as the surfaces
+they support. See `Browser/dist/ground-contact.mjs`, the estate-wide
+`Browser/test-ground-contact.mjs`, and the `ground-contact-*` visual evidence.

@@ -5,6 +5,8 @@ import {createModernCarPark,partitionCarParkTrees} from './modern-car-park.mjs';
 import {createTowerBuildings} from './tower-buildings.mjs';
 import {createCountessRoundabout} from './countess-roundabout.mjs';
 import {finishEstateMinerals} from './mineral-materials.mjs';
+import {closeGroundEdges} from './ground-contact.mjs';
+import {groundBuildingBases} from './building-grounding.mjs';
 
 // Shared by the aerial preview and exterior walk; gameplay keeps its existing estate.
 export function createAerialLayouts(THREE,exterior){
@@ -22,6 +24,7 @@ export function createAerialLayouts(THREE,exterior){
   const carParkTrees=partitionCarParkTrees(THREE,exterior.trees);
   exterior.model.add(shared,historic,modern);
   const towerBuildings=createTowerBuildings(THREE,exterior);historic.add(towerBuildings);
+  groundBuildingBases(THREE,towerBuildings,{groundY:exterior.terrain.position.y});
   exterior.towerBuildings=towerBuildings;
   const historicRoads=createHistoricRoads(THREE,exterior);historic.add(historicRoads);
   // Retire inferred tracks while the photo-based historic network is shown.
@@ -29,6 +32,7 @@ export function createAerialLayouts(THREE,exterior){
   exterior.annexe.traverse(o=>{if(o.name==='Annexe drive')superseded.push(o);});
   exterior.mainAdmin.traverse(o=>{if(['Admin carriage approach','Admin forecourt lawn','Curved lawn stone edging','West side access','East curved carriage drive','East wing side access'].some(name=>o.name===name||o.name===name+' stone kerb'))superseded.push(o);});
   finishEstateMinerals(THREE,exterior.model);
+  for(const surfaces of [roads,entrance,countessRoundabout,carPark,historicRoads,exterior.legacyAccess])closeGroundEdges(THREE,surfaces,exterior.terrain.position.y);
   return attachAerialLayouts(exterior,{shared,historic,modern,roads,entrance,countessRoundabout,carPark,carParkTrees,historicRoads,towerBuildings,superseded});
 }
 

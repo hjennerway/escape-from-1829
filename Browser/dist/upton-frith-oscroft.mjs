@@ -25,6 +25,7 @@ export const UPTON_VIEWS=Object.freeze({
   'upton-outward-photo':{position:[-52,2.3,-213],target:[-18,4.1,-203],fov:60},
   'upton-ground':{position:[-28,1.8,-164],target:[ESCAPE_CHAPEL.x,4,-195],fov:58}
 });
+import {meetPlinth} from './building-grounding.mjs';
 export function createUptonFrithOscroft(THREE,{brick,roof,worldUV,material}){
   const building=new THREE.Group();building.name='Upton/Frith/Oscroft';
   const {x:cx,z:cz,eave}=UPTON_FRITH_OSCROFT;building.position.set(cx,0,cz);
@@ -39,7 +40,7 @@ export function createUptonFrithOscroft(THREE,{brick,roof,worldUV,material}){
     const wall=mesh(worldUV(g,1.7),mat,0,bottom,0);wall.name=name;
     wall.userData.collisionFootprint=footprint;return wall;
   }
-  mass(eave,0,brick,'Symmetric OS-derived two-storey walls').userData.historicOutlinePadding=.65;
+  meetPlinth(mass(eave,0,brick,'Symmetric OS-derived two-storey walls'),.38).userData.historicOutlinePadding=.65;
   mass(.38,0,plinth,'Stepped masonry plinth');
   const detail=photoDetailPrimitives(THREE,{model:building,box,mesh,white,steel,material});
 
@@ -85,6 +86,7 @@ export function createUptonFrithOscroft(THREE,{brick,roof,worldUV,material}){
       for(const [h,y,mat,name] of [[eave,0,brick,'Canted garden bay'],[.38,0,plinth,'Garden bay plinth']]){
         const g=new THREE.ExtrudeGeometry(shape,{depth:h,bevelEnabled:false});g.rotateX(-Math.PI/2);
         const o=mesh(worldUV(g,1.7),mat,0,y,0);o.name=name;o.userData.collisionFootprint=points;
+        if(name==='Canted garden bay')meetPlinth(o,.38);
       }
       const roofPoints=points.map(([x,z])=>[x,eave+.05,z]);
       roofPoints[0][1]=roofPoints[5][1]=eave+.72;

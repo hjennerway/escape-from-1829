@@ -1,0 +1,70 @@
+{
+  "mode": "procedural",
+  "shadowPixels": 16484,
+  "totalChange": 1614665,
+  "trees": [
+    {
+      "name": "East front lawn mature beech",
+      "x": 13,
+      "z": 47.8,
+      "height": 25.92,
+      "radius": 11.088,
+      "seed": 1901,
+      "copper": true,
+      "rotation": 0.12
+    },
+    {
+      "name": "West front lawn mature beech",
+      "x": -13,
+      "z": 48.5,
+      "height": 25.92,
+      "radius": 11.088,
+      "seed": 1901,
+      "copper": true,
+      "rotation": -0.3
+    },
+    {
+      "name": "West front lawn outer companion beech",
+      "x": -55,
+      "z": 55,
+      "height": 21.6,
+      "radius": 9.24,
+      "seed": 1901,
+      "copper": false,
+      "rotation": 0.4
+    },
+    {
+      "name": "West front lawn inner companion beech",
+      "x": -34,
+      "z": 56,
+      "height": 21.6,
+      "radius": 9.24,
+      "seed": 1901,
+      "copper": false,
+      "rotation": -0.5
+    },
+    {
+      "name": "East front lawn inner companion beech",
+      "x": 51,
+      "z": 55,
+      "height": 21.6,
+      "radius": 9.24,
+      "seed": 1901,
+      "copper": false,
+      "rotation": 0.65
+    },
+    {
+      "name": "East front lawn outer companion beech",
+      "x": 77,
+      "z": 55,
+      "height": 21.6,
+      "radius": 9.24,
+      "seed": 1901,
+      "copper": false,
+      "rotation": -0.2
+    }
+  ],
+  "calls": 3833,
+  "triangles": 2572512,
+  "errors": []
+}

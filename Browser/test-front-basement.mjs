@@ -28,6 +28,22 @@ for(const side of [-1,1]){
   }
   near(hit(side*26.15,22.5)?.point.y,.06,'removed stair projection leaves the original lawn footprint');
   near(hit(side*17,20.5)?.point.y,.06,'existing legacy ground height retained');
+  // The outer stair backing meets the white facade below its corner sash.
+  // Probe both surfaces: a coincident brown face flickers through the render.
+  const label=side<0?'West':'East';
+  for(const x of [28.4,28.6,28.8])for(const y of [.04,.1,.16]){
+    ray.set(new THREE.Vector3(side*x,y,20.5),new THREE.Vector3(0,0,-1));
+    const hits=ray.intersectObject(e.model,true);
+    assert.equal(hits[0].object.name,'Entrance '+label.toLowerCase()+' three-bay projection white lower storey','white facade remains exposed below the sill');
+    const backing=hits.find(h=>h.object.name===label+' semi-basement retaining wall 7');
+    assert(backing&&backing.distance-hits[0].distance>.025,'stair backing must clear the facade plane on both sides');
+  }
+  for(const x of [28.4,28.8,29.5,30.5]){
+    ray.set(new THREE.Vector3(side*x,-.15,20.5),new THREE.Vector3(0,0,-1));
+    const backing=ray.intersectObject(e.model,true)[0];
+    assert.equal(backing.object.name,label+' semi-basement retaining wall 7 foundation');
+    near(backing.point.z,19.7,'lower backing continues to conceal the unexcavated terrain');
+  }
 }
 const obstacles=exteriorObstacles(THREE,e.model),walker=createWalker(e.camera,obstacles);
 function leg(a,b){

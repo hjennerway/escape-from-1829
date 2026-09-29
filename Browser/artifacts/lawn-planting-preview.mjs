@@ -5,6 +5,7 @@ import {fileURLToPath} from 'node:url';
 import {chromium} from 'playwright';
 
 const mode=process.argv[2]??'source';
+const outputPrefix=process.argv[3]??'lawn-planting';
 const server=spawn(process.execPath,['serve.mjs'],{cwd:new URL('../',import.meta.url),windowsHide:true,env:{...process.env,PORT:'0'},stdio:'pipe'});
 const base=await new Promise((resolve,reject)=>{server.stdout.once('data',d=>resolve(String(d).match(/http:\/\/127\.0\.0\.1:\d+/)[0]));server.once('error',reject);});
 let browser;
@@ -35,7 +36,7 @@ try{
     return {mode:e.modelBuild.mode,shadowPixels,totalChange,trees:e.trees.children.filter(t=>t.userData.frontLawnTree).map(t=>t.userData.frontLawnTree),calls:renderer.info.render.calls,triangles:renderer.info.render.triangles};
   });
   assert.equal(data.mode,mode==='source'?'procedural':'compiled');assert(data.shadowPixels>100,'Western tree must visibly darken the rendered scene');assert.deepEqual(errors,[]);
-  await page.screenshot({path:fileURLToPath(new URL(`lawn-planting-${mode}.png`,import.meta.url))});
-  await writeFile(new URL(`lawn-planting-${mode}.json`,import.meta.url),JSON.stringify({...data,errors},null,2)+'\n');
+  await page.screenshot({path:fileURLToPath(new URL(`${outputPrefix}-${mode}.png`,import.meta.url))});
+  await writeFile(new URL(`${outputPrefix}-${mode}.json`,import.meta.url),JSON.stringify({...data,errors},null,2)+'\n');
   console.log(JSON.stringify(data));
 }finally{await browser?.close();server.kill();}

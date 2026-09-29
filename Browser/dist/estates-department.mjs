@@ -2,6 +2,7 @@ import {OS_FOOTPRINTS} from './historic-footprint-data.mjs';
 import {historicOSPoint} from './historic-footprints.mjs';
 import {photoDetailPrimitives} from './photo-detail-primitives.mjs';
 import {wardMapPoint} from './ward-placement.mjs';
+import {meetPlinth} from './building-grounding.mjs';
 
 // Retain the OS contour as modelling coordinates. The later yellow-line
 // correction rotates it clockwise. The latest overhead-map registration
@@ -64,7 +65,7 @@ export function createEstatesDepartment(THREE,{brick,roof,worldUV,material}){
   {name:'Left gabled workshop',points:rect(leftFront,leftEnd,inner,leftInner),height:4},
   {name:'Left entrance stores and screen wall',points:rect(leftFront,leftInner,leftReturn,gateLeft),height:2.85}
  ];
- for(const s of ranges){mass(s.points,s.height,s.name);mass(s.points,.28,s.name+' dark brick plinth',base);}
+ for(const s of ranges){meetPlinth(mass(s.points,s.height,s.name),.28);mass(s.points,.28,s.name+' dark brick plinth',base);}
  const detail=photoDetailPrimitives(THREE,{model:building,box,mesh,white,steel,material});
 
  function face(wx,wz,r){

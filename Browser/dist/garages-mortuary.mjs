@@ -116,7 +116,11 @@ export function createGaragesMortuary(THREE,{brick,roof,worldUV,material}){
 
  const m=builder('T-shaped mortuary',MORTUARY),e=MORTUARY.eave,half=MORTUARY.halfWidth;
  const footprint=[[-half,1],[-1.9,1],[-1.9,-4],[1.9,-4],[1.9,1],[half,1],[half,6],[-half,6]];
- m.solid(footprint,e,'Mortuary T-shaped brick walls');m.solid(footprint,.23,'Mortuary dark brick plinth',brickBase);
+ // The flush plinth and wall meet vertically; overlapping their outside faces
+ // makes the lowest courses z-fight as the camera moves.
+ const plinthHeight=.23;
+ m.solid(footprint,e-plinthHeight,'Mortuary T-shaped brick walls',brick,plinthHeight);
+ m.solid(footprint,plinthHeight,'Mortuary dark brick plinth',brickBase);
  // Continuous cross roof: clip the front slope around the entrance roof's
  // valleys. The entry ridge meets the crossbar at the same ridge height.
  const x0=-half-.2,x1=half+.2,z0=.8,z1=6.2,cz=3.5,y=e+.08,rise=1.6,peak=y+rise;

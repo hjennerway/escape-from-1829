@@ -62,3 +62,13 @@ The red-circled island keeps its width and Estates-facing edge at z=-76.
 Its depth doubles from 7 to 14 units, extending to z=-90 towards Irby/Ashley.
 The service route passes north of the enlarged island. This supersedes the
 outer paved loop and smaller island in the previous purple annotation.
+
+## Stray lawn surface — 29 September 2026
+
+The reported one-sided strip beside Estates was the supporting side of the
+retired Main/admin `East wing side access`. Its path surface was hidden by
+the historic layout, but the newly generated ground-contact sides were
+siblings and remained visible. Individually toggled surfaces now own their
+supporting sides, so both inherit layout and timeline visibility. The grass,
+current roads, Estates building and walking routes retain their geometry.
+Before/after views use `Browser/artifacts/estates-stray-*`.

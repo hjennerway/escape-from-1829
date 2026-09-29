@@ -67,11 +67,20 @@ export function createCountryside(THREE,exterior){
  const crowns=new THREE.InstancedMesh(crownGeometry,foliage,trees.length+hedges.length),trunks=new THREE.InstancedMesh(new THREE.CylinderGeometry(.18,.45,1,5),new THREE.MeshStandardMaterial({color:0x4b4b3c,roughness:1}),trees.length);
  crowns.name='Distant tree belts and field hedges';trunks.name='Distant tree trunks';
  const dummy=new THREE.Object3D(),color=new THREE.Color();
+ ground.updateMatrixWorld(true);
+ const groundRay=new THREE.Raycaster(),down=new THREE.Vector3(0,-1,0);
  for(const [i,t] of [...trees,...hedges].entries()){
   const hedge=i>=trees.length,base=countrysideHeight(t.x,t.z)-.6;
   dummy.position.set(t.x,base+t.h*(hedge?.45:.65),t.z);dummy.rotation.set(0,t.turn,0);dummy.scale.set(hedge?2.3:t.r,t.h*(hedge?.65:.43),hedge?t.r:t.r*.85);dummy.updateMatrix();crowns.setMatrixAt(i,dummy.matrix);
   color.setHSL(.23+t.tint*.055,.19+t.tint*.12,.16+t.tint*.075);crowns.setColorAt(i,color);
-  if(!hedge){dummy.position.y=base+t.h*.25;dummy.scale.set(1,t.h*.5,1);dummy.updateMatrix();trunks.setMatrixAt(i,dummy.matrix);}
+  if(!hedge){
+   // The coarse meadow triangles can lie below the smooth placement function.
+   // Extend only the foot to the rendered hillside, retaining the crown/top.
+   groundRay.set(new THREE.Vector3(t.x,100,t.z),down);
+   const surface=groundRay.intersectObject(ground)[0]?.point.y??-.15;
+   const bottom=Math.min(base,surface-.12),top=base+t.h*.5;
+   dummy.position.y=(bottom+top)/2;dummy.scale.set(1,top-bottom,1);dummy.updateMatrix();trunks.setMatrixAt(i,dummy.matrix);
+  }
  }
  crowns.computeBoundingSphere();trunks.computeBoundingSphere();group.add(crowns,trunks);exterior.scene.add(group);
  return {group,ground,trees,hedges,bounds:b};

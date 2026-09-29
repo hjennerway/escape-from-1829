@@ -12,6 +12,21 @@ const exterior=createEscapeExterior(THREE,1.5),site=exterior.garagesMortuary,lay
 exterior.scene.updateMatrixWorld(true);
 const ray=new THREE.Raycaster(),m=site.userData.mortuary,g=site.userData.garages;
 assert.equal(site.parent,layouts.historic);
+// Every exposed wall segment must have one masonry face at each height.
+// A full-height wall behind the flush plinth makes the bottom courses flicker.
+const masonry=[m.getObjectByName('Mortuary T-shaped brick walls'),m.getObjectByName('Mortuary dark brick plinth')];
+for(let i=0;i<m.userData.footprint.length;i++){
+ const a=m.userData.footprint[i],b=m.userData.footprint[(i+1)%m.userData.footprint.length];
+ const normal=new THREE.Vector3(b[1]-a[1],0,a[0]-b[0]).normalize().transformDirection(m.matrixWorld);
+ for(const t of [.05,.5,.95])for(const y of [.06,.15,.225,.235,1,MORTUARY.eave-.01]){
+  const p=new THREE.Vector3(a[0]+(b[0]-a[0])*t,y,a[1]+(b[1]-a[1])*t).applyMatrix4(m.matrixWorld);
+  ray.set(p.clone().addScaledVector(normal,.6),normal.clone().negate());
+  const hits=ray.intersectObjects(masonry).filter(h=>Math.abs(h.distance-.6)<.001);
+  const faces=new Set(hits.map(h=>h.object));
+  assert.equal(faces.size,1,'Single mortuary masonry face at edge '+i+', height '+y);
+  assert(faces.has(masonry[y<.23?1:0]),'Continuous mortuary wall/plinth join');
+ }
+}
 function roofAt(transform,x,z){const p=transform(x,18,z);ray.set(new THREE.Vector3(...p),new THREE.Vector3(0,-1,0));return ray.intersectObject(site,true).find(h=>h.object.name.endsWith('slate roof')&&!h.object.name.includes('ridge vent'));}
 let roofSamples=0;
 for(const r of g.userData.ranges)for(let x=r.x0+.05;x<r.x1;x+=.35)for(let z=.05;z<r.depth;z+=.35){assert(roofAt(garagePoint,x,z),'Garage roof coverage '+[x,z]);roofSamples++;}

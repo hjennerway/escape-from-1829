@@ -1,5 +1,12 @@
 # Atmospheric countryside backdrop
 
+The September 29 ground-contact audit found that some distant tree bases sat
+above the coarse meadow triangles despite being below the smooth placement
+function. Trunks now extend down to the rendered terrain with 0.12 units of
+burial where needed; their tops and crown placements stay fixed. All 1,327
+background trunks are checked against the actual triangulated ground by
+`Browser/test-ground-contact.mjs`. The backdrop retains its three draws.
+
 The September 28 aerial atmosphere pass takes its colour and lighting direction
 from `Art/store-super-hero-1920x1080.png`: cool cloud undersides, warm openings,
 illuminated rooms and a softer, layered distance. The artwork is illustrative,

@@ -30,3 +30,21 @@ The browser source is shared by aerial, Explore and gameplay. Local compiled
 aerial output must be rebuilt after geometry changes. Unity and Blender
 exports are unchanged. The separate west-side basement work is recorded in
 its own task and is not the stair location shown by this front annotation.
+
+## Front window texture flicker — 29 September 2026
+
+The owner's [blue-circled screenshot](front-sill-flicker.png) locates the join
+below the west corner sash, beside the outer basement stair. It is defect
+evidence, not an additional set of modelling instructions.
+
+The brown retaining-wall face and the white lower facade shared z=19.7 between
+y=0 and 0.17, causing depth-buffer flicker. On both mirrored stairs the upper
+retaining masonry now sits 0.03 units behind the facade. Its lower foundation
+keeps the original face at z=19.7, concealing the unexcavated ground edge. The
+stone coping, windows, treads and approach retain their positions.
+
+`Browser/test-front-basement.mjs` probes the competing surfaces on both sides
+and checks that the lower wall still conceals the terrain. The zero-clearance
+version fails that regression. Browser source and the local compiled aerial
+asset are updated; Unity and Blender exports are unchanged. Close and oblique
+render evidence uses `Browser/artifacts/front-sill-*`.

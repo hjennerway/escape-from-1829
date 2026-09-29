@@ -1,5 +1,16 @@
 # KML tree and lamp placement
 
+## Ground contact audit — 29 September 2026
+
+The owner's estate-wide floating-object follow-up extends the lower ends of
+the pine, oak, beech and willow trunks into the existing lawn. All mapped X/Z
+coordinates, rotations, sizes, crowns and visibility rules are retained. The
+same templates carry this correction to period-specific oak copies. The two
+surviving lamps and all generated roadside columns already meet their ground
+surfaces, including the raised admin island, so their placements are retained.
+`Browser/test-ground-contact.mjs` checks the actual transformed root rings and
+column feet across every period and layout state.
+
 ## Oak31–Oak44 (September 24 import)
 
 `1829-13.kml` preserves the supplied `1829 (13).kml` byte-for-byte. Only

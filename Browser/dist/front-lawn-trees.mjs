@@ -8,13 +8,14 @@ const ORIGINAL_FRONT_LAWN_TREES=Object.freeze([
   {name:'West front lawn mature beech',x:-13,z:62,height:18,radius:7.7,seed:1902,copper:false}
 ]);
 // September 29 annotation: reduce the gap to the main facade (z=17) by 30%,
-// enlarge the original pair by 20%, and fill the four marked lawn positions.
+// The original copper pair is 20% larger than the four green companions.
+const COMPANION_SIZE=Object.freeze({height:21.6,radius:9.24});
 export const FRONT_LAWN_TREES=Object.freeze([
   ...ORIGINAL_FRONT_LAWN_TREES.map((spec,i)=>({...spec,z:17+(spec.z-17)*.7,
-    height:spec.height*1.2,radius:spec.radius*1.2,seed:1901,copper:false,rotation:i?-.3:.12})),
+    height:COMPANION_SIZE.height*1.2,radius:COMPANION_SIZE.radius*1.2,seed:1901,copper:true,rotation:i?-.3:.12})),
   ...[[-55,55],[-34,56],[51,55],[77,55]].map(([x,z],i)=>({
     name:`${x<0?'West':'East'} front lawn ${['outer','inner','inner','outer'][i]} companion beech`,
-    x,z,height:21.6,radius:9.24,seed:1901,copper:false,rotation:[.4,-.5,.65,-.2][i]
+    x,z,...COMPANION_SIZE,seed:1901,copper:false,rotation:[.4,-.5,.65,-.2][i]
   }))
 ]);
 export const FRONT_LAWN_TREE_VIEW=Object.freeze({position:[27,1.8,27],target:[-4,7.7,61],fov:54});
@@ -67,11 +68,11 @@ export function addBeechTrees(THREE,trees){
       }
     }
     // A substantial, slightly leaning trunk and low spreading root buttresses.
-    branch([0,0,0],[.2,3.9,-.14],.78,.56);
+    branch([0,-.4,0],[.2,3.9,-.14],.78,.56);
     branch([.2,3.6,-.14],[-.35,8.3,.25],.58,.22);
     for(let i=0;i<6;i++){
       const a=i*Math.PI/3+random()*.4,r=1.1+random()*.6;
-      branch([Math.sin(a)*r,.05,Math.cos(a)*r],[Math.sin(a)*.3,.65,Math.cos(a)*.3],.08,.29);
+      branch([Math.sin(a)*r,-.4,Math.cos(a)*r],[Math.sin(a)*.3,.65,Math.cos(a)*.3],.08,.29);
     }
     for(let i=0;i<9;i++){
       const a=i*2.39996,reach=spec.radius*(.46+random()*.14),height=6.8+random()*4.6;

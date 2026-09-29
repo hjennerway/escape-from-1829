@@ -36,8 +36,9 @@ const originalCrowns=crownsByTree(),layouts=createAerialLayouts(THREE,exterior);
 const displaced=layouts.carParkTrees.children.filter(tree=>!tree.isInstancedMesh);
 // The marked tree at (98.2,-38) was permanently removed from both layouts.
 // Assert identities, not only a count, so an omitted or wrongly displaced tree fails.
-const expectedDisplaced=[[8,-84],[14,-64],[17,-91],[26,-98],[28,-64],[35,-84],
-  [42,-64],[44,-91],[53,-98],[62,-84],[71,-91],[80,-98]];
+// Includes the three matching orchard fixtures added between Churton and Huxley/Dunham.
+const expectedDisplaced=[[0,-64],[8,-84],[14,-64],[17,-91],[26,-98],[28,-64],[35,-84],
+  [42,-64],[44,-91],[53,-98],[56,-64],[62,-84],[70,-64],[71,-91],[80,-98]];
 assert.deepEqual(displaced.map(tree=>[tree.userData.broadleafTree?.x,tree.userData.broadleafTree?.z])
   .sort((a,b)=>a[0]-b[0]||a[1]-b[1]),expectedDisplaced,'Clear exactly the remaining intersecting broadleaf trees');
 assert(!originalTrees.some(tree=>tree.userData.broadleafTree?.x===98.2&&tree.userData.broadleafTree?.z===-38),

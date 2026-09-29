@@ -1,0 +1,51 @@
+{
+  "sourceHash": "ff05528b729a0e0cd76ba20ef05d301724c298f6b81b54512b5e5824f1cbd892",
+  "before": {
+    "jarman": {
+      "primitives": 820016,
+      "sha256": "25bac564362ac79fb4f6d86da6194254b6bf13db9140e6f2a1c173ae7555a82f"
+    },
+    "leighton": {
+      "count": 884063,
+      "sha256": "5877c62eee005a254d650400404d3841d081e4c40ec2c3f70eabd82d666bd465"
+    }
+  },
+  "after": {
+    "jarman": {
+      "primitives": 820058,
+      "sha256": "6257193eda67445c3424bd5f73b97a82052c7dd07ad76ccf2875cbc410f2c18d"
+    },
+    "leighton": {
+      "count": 884105,
+      "sha256": "1bf57451e0710f17a48e385577a4db827961f76346a948fe3c9ec6ed2e0b68c8"
+    }
+  },
+  "added": {
+    "jarman": {
+      "0": 14,
+      "56": 14,
+      "70": 14
+    },
+    "leighton": {
+      "0": 14,
+      "56": 14,
+      "70": 14
+    }
+  },
+  "baselineMatches": {
+    "jarman": false,
+    "leighton": false
+  },
+  "orchard": [
+    -28,
+    -14,
+    0,
+    14,
+    28,
+    42,
+    56,
+    70
+  ],
+  "existingGeometryUnchanged": true,
+  "treeCollisionsPass": true
+}

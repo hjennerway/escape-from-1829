@@ -14,7 +14,7 @@ const exterior=createEscapeExterior(THREE,1.5),layouts=createAerialLayouts(THREE
 const effective=o=>{for(;o;o=o.parent)if(!o.visible)return false;return true;};
 assert.deepEqual(HISTORIC_ROAD_TRACES.find(r=>r.name==='Historic lane continuation').points[0],VIVIENNE_LANE[8],'The reference trace must start at the saved lane before clipping its overlapping mouth');
 exterior.model.updateMatrixWorld(true);
-layouts.historicRoads.traverse(o=>{if(!o.isMesh)return;const g=o.geometry,p=g.attributes.position;for(let i=0;i<p.count;i++)assert(Number.isFinite(p.getX(i))&&Number.isFinite(p.getY(i))&&Number.isFinite(p.getZ(i)));const n=g.attributes.normal,normal=new THREE.Vector3(),matrix=new THREE.Matrix3().getNormalMatrix(o.matrixWorld);for(let i=0;i<n.count;i++){normal.fromBufferAttribute(n,i).applyMatrix3(matrix);assert(normal.y>.99,'All surface triangles must face up');}const bounds=new THREE.Box3().setFromObject(o);assert(bounds.min.y>.25&&bounds.max.y<.4,'Road surfaces must clear terrain and remain below walking collision height');});
+layouts.historicRoads.traverse(o=>{if(!o.isMesh)return;const g=o.geometry,p=g.attributes.position;for(let i=0;i<p.count;i++)assert(Number.isFinite(p.getX(i))&&Number.isFinite(p.getY(i))&&Number.isFinite(p.getZ(i)));const n=g.attributes.normal,normal=new THREE.Vector3(),matrix=new THREE.Matrix3().getNormalMatrix(o.matrixWorld);for(let i=0;i<n.count;i++){normal.fromBufferAttribute(n,i).applyMatrix3(matrix);assert(o.userData.groundContact?Math.abs(normal.y)<.01:normal.y>.99,'Road tops face up; ground-contact edges are vertical');}g.computeBoundingBox();const bounds=g.boundingBox.clone().applyMatrix4(o.matrixWorld);assert((o.userData.groundContact?bounds.min.y<exterior.terrain.position.y:bounds.min.y>.25)&&bounds.max.y<.4,'Road edges meet terrain and all surfaces remain below walking collision height');});
 // Compare rendered road materials and sample the visible pale border.
 const modernRoad=layouts.roads.getObjectByName('Warren Lane');
 for(const road of HISTORIC_ROADS){
@@ -24,8 +24,8 @@ for(const road of HISTORIC_ROADS){
   if(!mesh.isMesh)return;
   assert(mesh.material.color.equals(reference.material.color),'Historic road and border colours must match Modern');
   assert.equal(mesh.material.roughness,reference.material.roughness);
-  assert.equal(mesh.material.polygonOffsetFactor,reference.material.polygonOffsetFactor,'Joined roads must use the same drawing depth');
-  assert.equal(mesh.material.polygonOffsetUnits,reference.material.polygonOffsetUnits);
+  assert.equal(mesh.material.polygonOffsetFactor,mesh.userData.groundContact?0:reference.material.polygonOffsetFactor,'Road tops share drawing depth; vertical edges have no slope bias');
+  assert.equal(mesh.material.polygonOffsetUnits,mesh.userData.groundContact?0:reference.material.polygonOffsetUnits);
  });
 }
 for(const name of ['Churton western green','Churton eastern green'])assert(!layouts.historicRoads.getObjectByName(name),'Obsolete grid lawns must not cover Parsons Lane');

@@ -1,4 +1,5 @@
 import {addWillowTrees} from './willow-trees.mjs';
+import {groundBuildingBases} from './building-grounding.mjs';
 import {addSurvivingLampPosts} from './surviving-lamp-posts.mjs';
 import {matchEstateGrass} from './estate-grass.mjs';
 import {applyGroundSurface} from './ground-materials.mjs';
@@ -377,7 +378,8 @@ export function createEscapeExterior(THREE,aspect){
       for(let i=0;i<5;i++){for(let n=0;n<4;n++)random();crowns[i%3].nextRotation++;}
       return null;
     }
-    const trunk=mesh(new THREE.CylinderGeometry(.18*size,.3*size,4.5*size,6),bark,x,2.25*size,z);trees.add(trunk);
+    // Bury the trunk foot in the terrain; keep its top and crown unchanged.
+    const trunk=mesh(new THREE.CylinderGeometry(.18*size,.3*size,4.5*size+.18,6),bark,x,2.25*size-.09,z);trees.add(trunk);
     const treeCrowns=[];
     for(let i=0;i<5;i++){
       const crown={x:x+(random()-.5)*3*size,y:(4.5+random()*2)*size,z:z+(random()-.5)*3*size,s:(1.7+random())*size};
@@ -427,6 +429,13 @@ export function createEscapeExterior(THREE,aspect){
     // Consume the removed entrance tree's draws to preserve later crowns.
     if(spec.removed){for(let i=0;i<5;i++){for(let n=0;n<4;n++)random();crowns[i%3].nextRotation++;}continue;}
     const trunk=tree(spec.x,spec.z,spec.size);trunk.name=spec.name;trunk.userData.annexeRoadTree=spec;
+  }
+  // September 29 marked gaps: continue the orchard's 14-unit spacing from
+  // Churton towards Huxley/Dunham. Append after existing trees so their seeded
+  // crowns and shared foliage rotations retain their exact shapes.
+  for(const x of [0,56,70]){
+    plantedBed(x,-64,6,5);
+    tree(x,-64,.85);
   }
   const churtonWard=createChurtonWard(THREE,{brick:photoBrick,roof,worldUV,material});model.add(churtonWard);
   const uptonFrithOscroft=createUptonFrithOscroft(THREE,{brick:photoBrick,roof,worldUV,material});model.add(uptonFrithOscroft);
@@ -482,6 +491,7 @@ export function createEscapeExterior(THREE,aspect){
   const lawnMaterials=new Set();
   model.traverse(object=>{for(const mat of (Array.isArray(object.material)?object.material:[object.material]))if(mat?.userData.estateGrass)lawnMaterials.add(mat);});
   for(const mat of lawnMaterials)matchEstateGrass(mat,grass);
+  groundBuildingBases(THREE,model,{groundY:terrain.position.y,exclude:[trees,terrain]});
   finishEstateMinerals(THREE,model);
   return {scene,camera,model,terrain,legacyAccess,mast,chapel,churchGrounds,waterTower,estateChimney,annexe,newHospital:annexe,churtonWard,uptonFrithOscroft,irbyAshley,graftonEdge,haleWard,bowlingGreen,estatesDepartment,farndonWard,witbyWard,mainAdmin,adminCorridor,laundry,garagesMortuary,greenhouses,outhouse,willows,trees,invalidateShadows};
 }

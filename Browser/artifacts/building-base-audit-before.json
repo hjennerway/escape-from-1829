@@ -1,0 +1,1475 @@
+{
+  "bases": [
+    {
+      "name": "Central back canted white plinth",
+      "parent": "Shared estate",
+      "bottom": -6.368163104047281e-16,
+      "top": 1.399999976158142
+    },
+    {
+      "name": "East curved bay white base",
+      "parent": "Shared estate",
+      "bottom": 0,
+      "top": 4
+    },
+    {
+      "name": "West curved bay",
+      "parent": "Shared estate",
+      "bottom": 0,
+      "top": 14.800000190734863
+    },
+    {
+      "name": "West courtyard polygonal bay",
+      "parent": "Shared estate",
+      "bottom": 0,
+      "top": 15.199999809265137
+    },
+    {
+      "name": "East courtyard polygonal bay white base",
+      "parent": "Shared estate",
+      "bottom": 0,
+      "top": 4
+    },
+    {
+      "name": "Lawn connecting range plinth",
+      "parent": "Churton Ward",
+      "bottom": -2.980232227667301e-9,
+      "top": 0.40000000298023225
+    },
+    {
+      "name": "Mast-side long ward plinth",
+      "parent": "",
+      "bottom": 6.5565109175214076e-9,
+      "top": 0.41999999344348904
+    },
+    {
+      "name": "Church-side return plinth",
+      "parent": "Churton Ward",
+      "bottom": -2.980232227667301e-9,
+      "top": 0.40000000298023225
+    },
+    {
+      "name": "Church-side lawn bay plinth",
+      "parent": "Churton Ward",
+      "bottom": -2.980232227667301e-9,
+      "top": 0.40000000298023225
+    },
+    {
+      "name": "Rear oblique wing plinth",
+      "parent": "",
+      "bottom": 6.5565109175214076e-9,
+      "top": 0.41999999344348904
+    },
+    {
+      "name": "Long elevation cross gable plinth",
+      "parent": "",
+      "bottom": 6.5565109175214076e-9,
+      "top": 0.41999999344348904
+    },
+    {
+      "name": "Symmetric OS-derived two-storey walls",
+      "parent": "Upton/Frith/Oscroft",
+      "bottom": -8.646905137101187e-16,
+      "top": 7.800000190734863
+    },
+    {
+      "name": "Stepped masonry plinth",
+      "parent": "Upton/Frith/Oscroft",
+      "bottom": -8.646905137101187e-16,
+      "top": 0.3799999952316284
+    },
+    {
+      "name": "Canted garden bay",
+      "parent": "Upton/Frith/Oscroft",
+      "bottom": 4.662276864759746e-16,
+      "top": 7.800000190734863
+    },
+    {
+      "name": "Garden bay plinth",
+      "parent": "Upton/Frith/Oscroft",
+      "bottom": 4.662276864759746e-16,
+      "top": 0.3799999952316284
+    },
+    {
+      "name": "Canted garden bay",
+      "parent": "Upton/Frith/Oscroft",
+      "bottom": 4.662276864759746e-16,
+      "top": 7.800000190734863
+    },
+    {
+      "name": "Garden bay plinth",
+      "parent": "Upton/Frith/Oscroft",
+      "bottom": 4.662276864759746e-16,
+      "top": 0.3799999952316284
+    },
+    {
+      "name": "Canted garden bay",
+      "parent": "Upton/Frith/Oscroft",
+      "bottom": 4.662276864759746e-16,
+      "top": 7.800000190734863
+    },
+    {
+      "name": "Garden bay plinth",
+      "parent": "Upton/Frith/Oscroft",
+      "bottom": 4.662276864759746e-16,
+      "top": 0.3799999952316284
+    },
+    {
+      "name": "Canted garden bay",
+      "parent": "Upton/Frith/Oscroft",
+      "bottom": 4.662276864759746e-16,
+      "top": 7.800000190734863
+    },
+    {
+      "name": "Garden bay plinth",
+      "parent": "Upton/Frith/Oscroft",
+      "bottom": 4.662276864759746e-16,
+      "top": 0.3799999952316284
+    },
+    {
+      "name": "Outhouse brick walls",
+      "parent": "Outhouse in front of 1829",
+      "bottom": 0,
+      "top": 3.25
+    },
+    {
+      "name": "Church front dark stone plinth",
+      "parent": "Church photographed clock front",
+      "bottom": 0.004999986886978169,
+      "top": 0.9150000131130218
+    },
+    {
+      "name": "Yellow-refined Irby/Ashley walls",
+      "parent": "Irby/Ashley",
+      "bottom": -1.4756994242779028e-15,
+      "top": 8.399999618530273
+    },
+    {
+      "name": "Weathered brick foundation",
+      "parent": "Irby/Ashley",
+      "bottom": -1.4756994242779028e-15,
+      "top": 0.3799999952316284
+    },
+    {
+      "name": "Low east service room",
+      "parent": "Irby/Ashley",
+      "bottom": -3.245314093176246e-16,
+      "top": 4
+    },
+    {
+      "name": "Quarter-octagonal garden corner",
+      "parent": "Irby/Ashley",
+      "bottom": -3.245314093176246e-16,
+      "top": 8.399999618530273
+    },
+    {
+      "name": "Canted garden window bay",
+      "parent": "Irby/Ashley",
+      "bottom": -3.2636835908242314e-16,
+      "top": 8.399999618530273
+    },
+    {
+      "name": "Canted garden window bay",
+      "parent": "Irby/Ashley",
+      "bottom": -3.2636835908242314e-16,
+      "top": 8.399999618530273
+    },
+    {
+      "name": "Yellow-refined Grafton/Edge walls",
+      "parent": "Grafton/Edge",
+      "bottom": -1.1879073808331638e-15,
+      "top": 8.399999618530273
+    },
+    {
+      "name": "Weathered brick foundation",
+      "parent": "Grafton/Edge",
+      "bottom": -1.1879073808331638e-15,
+      "top": 0.3799999952316284
+    },
+    {
+      "name": "Hale ward two-storey walls",
+      "parent": "Hale/Daresbury/Huxley/Dunham",
+      "bottom": -1.824723691237892e-15,
+      "top": 8.399999618530273
+    },
+    {
+      "name": "Hale ward brick foundation",
+      "parent": "Hale/Daresbury/Huxley/Dunham",
+      "bottom": -1.824723691237892e-15,
+      "top": 0.3799999952316284
+    },
+    {
+      "name": "Hale inside corner 2 canted bay",
+      "parent": "Hale/Daresbury/Huxley/Dunham",
+      "bottom": 1.3287418549072418e-15,
+      "top": 8.239999771118164
+    },
+    {
+      "name": "Hale inside corner 5 canted bay",
+      "parent": "Hale/Daresbury/Huxley/Dunham",
+      "bottom": 4.22503157524438e-16,
+      "top": 8.239999771118164
+    },
+    {
+      "name": "Hale inside corner 6 canted bay",
+      "parent": "Hale/Daresbury/Huxley/Dunham",
+      "bottom": 1.475699477217462e-16,
+      "top": 8.239999771118164
+    },
+    {
+      "name": "Hale inside corner 9 canted bay",
+      "parent": "Hale/Daresbury/Huxley/Dunham",
+      "bottom": -7.592809691934653e-16,
+      "top": 8.239999771118164
+    },
+    {
+      "name": "Hale inside corner 10 canted bay",
+      "parent": "Hale/Daresbury/Huxley/Dunham",
+      "bottom": -1.2362810089343833e-15,
+      "top": 8.239999771118164
+    },
+    {
+      "name": "Hale inside corner 15 canted bay",
+      "parent": "Hale/Daresbury/Huxley/Dunham",
+      "bottom": -1.2362810089343833e-15,
+      "top": 8.239999771118164
+    },
+    {
+      "name": "Hale inside corner 16 canted bay",
+      "parent": "Hale/Daresbury/Huxley/Dunham",
+      "bottom": 9.735941750133145e-16,
+      "top": 8.239999771118164
+    },
+    {
+      "name": "Rear two-storey offices",
+      "parent": "Estates department",
+      "bottom": -8.069289547566838e-16,
+      "top": 7.599999904632568
+    },
+    {
+      "name": "Rear two-storey offices dark brick plinth",
+      "parent": "Estates department",
+      "bottom": -8.069289547566838e-16,
+      "top": 0.2800000011920929
+    },
+    {
+      "name": "Right upper gabled return",
+      "parent": "Estates department",
+      "bottom": -8.069289547566838e-16,
+      "top": 7.599999904632568
+    },
+    {
+      "name": "Right upper gabled return dark brick plinth",
+      "parent": "Estates department",
+      "bottom": -8.069289547566838e-16,
+      "top": 0.2800000011920929
+    },
+    {
+      "name": "Right low entrance room",
+      "parent": "Estates department",
+      "bottom": -8.069289547566838e-16,
+      "top": 4
+    },
+    {
+      "name": "Right low entrance room dark brick plinth",
+      "parent": "Estates department",
+      "bottom": -8.069289547566838e-16,
+      "top": 0.2800000011920929
+    },
+    {
+      "name": "Left gabled workshop",
+      "parent": "Estates department",
+      "bottom": 4.027483110214384e-16,
+      "top": 4
+    },
+    {
+      "name": "Left gabled workshop dark brick plinth",
+      "parent": "Estates department",
+      "bottom": 4.027483110214384e-16,
+      "top": 0.2800000011920929
+    },
+    {
+      "name": "Left entrance stores and screen wall",
+      "parent": "Estates department",
+      "bottom": 9.373003220009051e-17,
+      "top": 2.8499999046325684
+    },
+    {
+      "name": "Left entrance stores and screen wall dark brick plinth",
+      "parent": "Estates department",
+      "bottom": 9.373003220009051e-17,
+      "top": 0.2800000011920929
+    },
+    {
+      "name": "Brick entrance pier",
+      "parent": "Estates department",
+      "bottom": 9.189306258295724e-17,
+      "top": 2.8499999046325684
+    },
+    {
+      "name": "Brick entrance pier",
+      "parent": "Estates department",
+      "bottom": -4.3009908429761856e-16,
+      "top": 3.119999885559082
+    },
+    {
+      "name": "Single-storey ward walls",
+      "parent": "Farndon ward",
+      "bottom": -1.1940305820088652e-15,
+      "top": 4.599999904632568
+    },
+    {
+      "name": "Single-storey ward walls plinth",
+      "parent": "Farndon ward",
+      "bottom": -1.1940305820088652e-15,
+      "top": 0.30000001192092896
+    },
+    {
+      "name": "Small rear room",
+      "parent": "Farndon ward",
+      "bottom": -1.2552630172823522e-15,
+      "top": 4.099999904632568
+    },
+    {
+      "name": "Small rear room plinth",
+      "parent": "Farndon ward",
+      "bottom": -1.2552630172823522e-15,
+      "top": 0.30000001192092896
+    },
+    {
+      "name": "Narrow rear link",
+      "parent": "Farndon ward",
+      "bottom": -7.837739856545074e-16,
+      "top": 3.299999952316284
+    },
+    {
+      "name": "Narrow rear link plinth",
+      "parent": "Farndon ward",
+      "bottom": -7.837739856545074e-16,
+      "top": 0.30000001192092896
+    },
+    {
+      "name": "Low west side room",
+      "parent": "Farndon ward",
+      "bottom": -4.347496128153999e-16,
+      "top": 3.25
+    },
+    {
+      "name": "Low west side room plinth",
+      "parent": "Farndon ward",
+      "bottom": -4.347496128153999e-16,
+      "top": 0.30000001192092896
+    },
+    {
+      "name": "Projecting central garden bay",
+      "parent": "Farndon ward",
+      "bottom": 6.123234262925839e-18,
+      "top": 4.599999904632568
+    },
+    {
+      "name": "Projecting central garden bay plinth",
+      "parent": "Farndon ward",
+      "bottom": 6.123234262925839e-18,
+      "top": 0.30000001192092896
+    },
+    {
+      "name": "Single-storey ward walls",
+      "parent": "Witby Ward",
+      "bottom": -1.1940305820088652e-15,
+      "top": 4.599999904632568
+    },
+    {
+      "name": "Single-storey ward walls plinth",
+      "parent": "Witby Ward",
+      "bottom": -1.1940305820088652e-15,
+      "top": 0.30000001192092896
+    },
+    {
+      "name": "Small rear room",
+      "parent": "Witby Ward",
+      "bottom": -1.2552630172823522e-15,
+      "top": 4.099999904632568
+    },
+    {
+      "name": "Small rear room plinth",
+      "parent": "Witby Ward",
+      "bottom": -1.2552630172823522e-15,
+      "top": 0.30000001192092896
+    },
+    {
+      "name": "Narrow rear link",
+      "parent": "Witby Ward",
+      "bottom": -7.837739856545074e-16,
+      "top": 3.299999952316284
+    },
+    {
+      "name": "Narrow rear link plinth",
+      "parent": "Witby Ward",
+      "bottom": -7.837739856545074e-16,
+      "top": 0.30000001192092896
+    },
+    {
+      "name": "Low west side room",
+      "parent": "Witby Ward",
+      "bottom": -4.347496128153999e-16,
+      "top": 3.25
+    },
+    {
+      "name": "Low west side room plinth",
+      "parent": "Witby Ward",
+      "bottom": -4.347496128153999e-16,
+      "top": 0.30000001192092896
+    },
+    {
+      "name": "Projecting central garden bay",
+      "parent": "Witby Ward",
+      "bottom": 6.123234262925839e-18,
+      "top": 4.599999904632568
+    },
+    {
+      "name": "Projecting central garden bay plinth",
+      "parent": "Witby Ward",
+      "bottom": 6.123234262925839e-18,
+      "top": 0.30000001192092896
+    },
+    {
+      "name": "Central administration range plinth",
+      "parent": "Main/admin building",
+      "bottom": -2.980232227667301e-9,
+      "top": 0.40000000298023225
+    },
+    {
+      "name": "West projecting pavilion plinth",
+      "parent": "Main/admin building",
+      "bottom": -2.980232227667301e-9,
+      "top": 0.40000000298023225
+    },
+    {
+      "name": "East projecting pavilion plinth",
+      "parent": "Main/admin building",
+      "bottom": -2.980232227667301e-9,
+      "top": 0.40000000298023225
+    },
+    {
+      "name": "Low west side rooms plinth",
+      "parent": "Main/admin building",
+      "bottom": -2.980232227667301e-9,
+      "top": 0.40000000298023225
+    },
+    {
+      "name": "East stepped rear link plinth",
+      "parent": "Main/admin building",
+      "bottom": -2.980232227667301e-9,
+      "top": 0.40000000298023225
+    },
+    {
+      "name": "East recessed rear link plinth",
+      "parent": "Main/admin building",
+      "bottom": -2.980232227667301e-9,
+      "top": 0.40000000298023225
+    },
+    {
+      "name": "East upper return plinth",
+      "parent": "Main/admin building",
+      "bottom": -2.980232227667301e-9,
+      "top": 0.40000000298023225
+    },
+    {
+      "name": "Rear projecting window range plinth",
+      "parent": "Main/admin building",
+      "bottom": -2.980232227667301e-9,
+      "top": 0.40000000298023225
+    },
+    {
+      "name": "Rear canted stair bay walls",
+      "parent": "Main/admin building",
+      "bottom": -1.8369701465288538e-16,
+      "top": 10.5
+    },
+    {
+      "name": "Rear canted stair bay canted course",
+      "parent": "Main/admin building",
+      "bottom": -1.873709538871519e-16,
+      "top": 0.550000011920929
+    },
+    {
+      "name": "Rear flat court block plinth",
+      "parent": "Main/admin building",
+      "bottom": -2.980232227667301e-9,
+      "top": 0.40000000298023225
+    },
+    {
+      "name": "East rear shoulder plinth",
+      "parent": "Main/admin building",
+      "bottom": -2.980232227667301e-9,
+      "top": 0.40000000298023225
+    },
+    {
+      "name": "Chamfered two-storey bay walls",
+      "parent": "Main/admin building",
+      "bottom": -1.2246468525851679e-16,
+      "top": 9.4399995803833
+    },
+    {
+      "name": "Chamfered two-storey bay walls",
+      "parent": "Main/admin building",
+      "bottom": -1.2246468525851679e-16,
+      "top": 9.4399995803833
+    },
+    {
+      "name": "Corridor brick plinth",
+      "parent": "Corridor north windows",
+      "bottom": -7.152557379708213e-9,
+      "top": 0.36000000715255737
+    },
+    {
+      "name": "Corridor brick plinth",
+      "parent": "Corridor south windows",
+      "bottom": -7.152557379708213e-9,
+      "top": 0.36000000715255737
+    },
+    {
+      "name": "Corridor brick plinth",
+      "parent": "Corridor north windows",
+      "bottom": -7.152557379708213e-9,
+      "top": 0.36000000715255737
+    },
+    {
+      "name": "Corridor brick plinth",
+      "parent": "Corridor south windows",
+      "bottom": -7.152557379708213e-9,
+      "top": 0.36000000715255737
+    },
+    {
+      "name": "Corridor brick plinth",
+      "parent": "Corridor north windows",
+      "bottom": -7.152557379708213e-9,
+      "top": 0.36000000715255737
+    },
+    {
+      "name": "Corridor brick plinth",
+      "parent": "Corridor south windows",
+      "bottom": -7.152557379708213e-9,
+      "top": 0.36000000715255737
+    },
+    {
+      "name": "Corridor brick plinth",
+      "parent": "Corridor north windows",
+      "bottom": -7.152557379708213e-9,
+      "top": 0.36000000715255737
+    },
+    {
+      "name": "Corridor brick plinth",
+      "parent": "Corridor south windows",
+      "bottom": -7.152557379708213e-9,
+      "top": 0.36000000715255737
+    },
+    {
+      "name": "Corridor brick plinth",
+      "parent": "Corridor north windows",
+      "bottom": -7.152557379708213e-9,
+      "top": 0.36000000715255737
+    },
+    {
+      "name": "Corridor brick plinth",
+      "parent": "Corridor south windows",
+      "bottom": -7.152557379708213e-9,
+      "top": 0.36000000715255737
+    },
+    {
+      "name": "Corridor brick plinth",
+      "parent": "Corridor north windows",
+      "bottom": -7.152557379708213e-9,
+      "top": 0.36000000715255737
+    },
+    {
+      "name": "Corridor brick plinth",
+      "parent": "Corridor south windows",
+      "bottom": -7.152557379708213e-9,
+      "top": 0.36000000715255737
+    },
+    {
+      "name": "Corridor brick plinth",
+      "parent": "Corridor north windows",
+      "bottom": -7.152557379708213e-9,
+      "top": 0.36000000715255737
+    },
+    {
+      "name": "Corridor brick plinth",
+      "parent": "Corridor south windows",
+      "bottom": -7.152557379708213e-9,
+      "top": 0.36000000715255737
+    },
+    {
+      "name": "Corridor brick plinth",
+      "parent": "Corridor north windows",
+      "bottom": -7.152557379708213e-9,
+      "top": 0.36000000715255737
+    },
+    {
+      "name": "Corridor brick plinth",
+      "parent": "Corridor south windows",
+      "bottom": -7.152557379708213e-9,
+      "top": 0.36000000715255737
+    },
+    {
+      "name": "Ward corridor elbow walls",
+      "parent": "Grafton Witby and Upton connecting corridors",
+      "bottom": -1.6532731848155276e-16,
+      "top": 3.5999999046325684
+    },
+    {
+      "name": "Corridor brick plinth",
+      "parent": "Corridor north windows",
+      "bottom": -7.152557379708213e-9,
+      "top": 0.36000000715255737
+    },
+    {
+      "name": "Corridor brick plinth",
+      "parent": "Corridor south windows",
+      "bottom": -7.152557379708213e-9,
+      "top": 0.36000000715255737
+    },
+    {
+      "name": "Corridor brick plinth",
+      "parent": "Corridor north windows",
+      "bottom": -7.152557379708213e-9,
+      "top": 0.36000000715255737
+    },
+    {
+      "name": "Corridor brick plinth",
+      "parent": "Corridor south windows",
+      "bottom": -7.152557379708213e-9,
+      "top": 0.36000000715255737
+    },
+    {
+      "name": "Corridor brick plinth",
+      "parent": "Corridor north windows",
+      "bottom": -7.152557379708213e-9,
+      "top": 0.36000000715255737
+    },
+    {
+      "name": "Corridor brick plinth",
+      "parent": "Corridor south windows",
+      "bottom": -7.152557379708213e-9,
+      "top": 0.36000000715255737
+    },
+    {
+      "name": "Main kitchen plinth",
+      "parent": "Main kitchen",
+      "bottom": 1.1920928966180355e-9,
+      "top": 0.4399999988079071
+    },
+    {
+      "name": "Corridor brick plinth",
+      "parent": "Corridor north windows",
+      "bottom": -7.152557379708213e-9,
+      "top": 0.36000000715255737
+    },
+    {
+      "name": "Laundry weathered base",
+      "parent": "Laundry and brick connecting corridor",
+      "bottom": -5.960464483090178e-9,
+      "top": 0.3000000059604645
+    },
+    {
+      "name": "Western garages and offices walls",
+      "parent": "Garage row",
+      "bottom": -4.4087284046088083e-16,
+      "top": 3.200000047683716
+    },
+    {
+      "name": "Western garages and offices plinth",
+      "parent": "Garage row",
+      "bottom": -4.4240364075480616e-16,
+      "top": 0.23999999463558197
+    },
+    {
+      "name": "Tall workshop bay walls",
+      "parent": "Garage row",
+      "bottom": -5.02105196325029e-16,
+      "top": 4.449999809265137
+    },
+    {
+      "name": "Tall workshop bay plinth",
+      "parent": "Garage row",
+      "bottom": -5.036359966189544e-16,
+      "top": 0.23999999463558197
+    },
+    {
+      "name": "Long eastern garage range walls",
+      "parent": "Garage row",
+      "bottom": -4.4087284046088083e-16,
+      "top": 3.200000047683716
+    },
+    {
+      "name": "Long eastern garage range plinth",
+      "parent": "Garage row",
+      "bottom": -4.4240364075480616e-16,
+      "top": 0.23999999463558197
+    },
+    {
+      "name": "Mortuary dark brick plinth",
+      "parent": "T-shaped mortuary",
+      "bottom": -3.6739402930577075e-16,
+      "top": 0.23000000417232513
+    },
+    {
+      "name": "Low greenhouse brick foundation",
+      "parent": "Greenhouse 1",
+      "bottom": 0,
+      "top": 0.5
+    },
+    {
+      "name": "Low greenhouse brick foundation",
+      "parent": "Greenhouse 2",
+      "bottom": 0,
+      "top": 0.5
+    },
+    {
+      "name": "Low greenhouse brick foundation",
+      "parent": "Greenhouse 3",
+      "bottom": 0,
+      "top": 0.5
+    },
+    {
+      "name": "Gardeners workshop brick walls",
+      "parent": "Gardeners workshop",
+      "bottom": 4.7683716530855236e-8,
+      "top": 3.3499999046325684
+    },
+    {
+      "name": "Gardeners workshop dark brick base",
+      "parent": "Gardeners workshop",
+      "bottom": 3.5762786065873797e-9,
+      "top": 0.3199999928474426
+    },
+    {
+      "name": "Garden stores brick walls",
+      "parent": "Garden stores",
+      "bottom": -4.7683716530855236e-8,
+      "top": 3.1500000953674316
+    },
+    {
+      "name": "Garden stores dark brick base",
+      "parent": "Garden stores",
+      "bottom": 3.5762786065873797e-9,
+      "top": 0.3199999928474426
+    },
+    {
+      "name": "Chimney brick foundation",
+      "parent": "Freestanding brick chimney",
+      "bottom": -5.960464455334602e-9,
+      "top": 0.8000000059604645
+    },
+    {
+      "name": "Jarman veranda brick plinth",
+      "parent": "West court front elevation",
+      "bottom": 2.5749206544745107e-8,
+      "top": 0.9539999742507935
+    },
+    {
+      "name": "Leighton Newton veranda column plinth",
+      "parent": "Leighton Newton photographed elevations",
+      "bottom": -6.437301636186277e-9,
+      "top": 0.7740000064373016
+    },
+    {
+      "name": "Leighton Newton veranda column plinth",
+      "parent": "Leighton Newton photographed elevations",
+      "bottom": -6.437301636186277e-9,
+      "top": 0.7740000064373016
+    },
+    {
+      "name": "Leighton Newton veranda column plinth",
+      "parent": "Leighton Newton photographed elevations",
+      "bottom": -6.437301636186277e-9,
+      "top": 0.7740000064373016
+    },
+    {
+      "name": "Leighton Newton veranda column plinth",
+      "parent": "Leighton Newton photographed elevations",
+      "bottom": -6.437301636186277e-9,
+      "top": 0.7740000064373016
+    },
+    {
+      "name": "Leighton Newton veranda column plinth",
+      "parent": "Leighton Newton photographed elevations",
+      "bottom": -6.437301636186277e-9,
+      "top": 0.7740000064373016
+    },
+    {
+      "name": "Carden stepped low side range brick walls",
+      "parent": "Carden side elevation",
+      "bottom": 4.463837956343949e-16,
+      "top": 4.229999828338623
+    },
+    {
+      "name": "Carden canted conservatory brick plinth",
+      "parent": "Carden side elevation",
+      "bottom": 9.919639267711844e-16,
+      "top": 1.0800000429153442
+    },
+    {
+      "name": "Tower east traced abutment plinth",
+      "parent": "Tower service buildings",
+      "bottom": -1.1920928966180355e-8,
+      "top": 0.600000011920929
+    },
+    {
+      "name": "Tower east dormered range plinth",
+      "parent": "Tower service buildings",
+      "bottom": -1.1920928966180355e-8,
+      "top": 0.600000011920929
+    },
+    {
+      "name": "Dormered central service hall plinth",
+      "parent": "Tower service buildings",
+      "bottom": -1.1920928966180355e-8,
+      "top": 0.600000011920929
+    },
+    {
+      "name": "Rear east gabled workshop plinth",
+      "parent": "Tower service buildings",
+      "bottom": -1.1920928966180355e-8,
+      "top": 0.600000011920929
+    },
+    {
+      "name": "Rear west gabled workshop plinth",
+      "parent": "Tower service buildings",
+      "bottom": -1.1920928966180355e-8,
+      "top": 0.600000011920929
+    },
+    {
+      "name": "Western tower flat link plinth",
+      "parent": "Tower service buildings",
+      "bottom": -1.1920928966180355e-8,
+      "top": 0.600000011920929
+    },
+    {
+      "name": "Low west stores plinth",
+      "parent": "Tower service buildings",
+      "bottom": -1.1920928966180355e-8,
+      "top": 0.600000011920929
+    },
+    {
+      "name": "West stores flat front plinth",
+      "parent": "Tower service buildings",
+      "bottom": 1.0164569008805791e-15,
+      "top": 0.6000000238418579
+    },
+    {
+      "name": "Chimney service hall plinth",
+      "parent": "Tower service buildings",
+      "bottom": -1.1920928966180355e-8,
+      "top": 0.600000011920929
+    },
+    {
+      "name": "Ramp entrance link plinth",
+      "parent": "Tower service buildings",
+      "bottom": -1.1920928966180355e-8,
+      "top": 0.600000011920929
+    },
+    {
+      "name": "East court flat infill plinth",
+      "parent": "Tower service buildings",
+      "bottom": -1.1920928966180355e-8,
+      "top": 0.600000011920929
+    },
+    {
+      "name": "South cross-gabled stores plinth",
+      "parent": "Tower service buildings",
+      "bottom": -1.1920928966180355e-8,
+      "top": 0.600000011920929
+    },
+    {
+      "name": "Long east service range plinth",
+      "parent": "Tower service buildings",
+      "bottom": -1.1920928966180355e-8,
+      "top": 0.600000011920929
+    },
+    {
+      "name": "North east stepped link plinth",
+      "parent": "Tower service buildings",
+      "bottom": -1.1920928966180355e-8,
+      "top": 0.600000011920929
+    },
+    {
+      "name": "Enlarged west workshop plinth",
+      "parent": "Enlarged west workshop",
+      "bottom": -1.1920928966180355e-8,
+      "top": 0.600000011920929
+    },
+    {
+      "name": "East pharmacy gas cylinder brick plinth",
+      "parent": "East pharmacy gas cylinder",
+      "bottom": -2.3841857821338408e-8,
+      "top": 2.700000023841858
+    },
+    {
+      "name": "West pharmacy gas cylinder brick plinth",
+      "parent": "West pharmacy gas cylinder",
+      "bottom": -2.3841857821338408e-8,
+      "top": 2.700000023841858
+    }
+  ],
+  "duplicates": [
+    {
+      "names": [
+        "Church-side lawn bay plinth @ Churton Ward",
+        "Church-side return plinth @ Churton Ward"
+      ],
+      "point": [
+        -23.01000003814697,
+        0.12,
+        -78.28700006780029
+      ]
+    },
+    {
+      "names": [
+        "Stepped masonry plinth @ Upton/Frith/Oscroft",
+        "Symmetric OS-derived two-storey walls @ Upton/Frith/Oscroft"
+      ],
+      "point": [
+        -1.5613446364402541,
+        0.12,
+        -180.87853240966797
+      ]
+    },
+    {
+      "names": [
+        "Canted garden bay @ Upton/Frith/Oscroft",
+        "Garden bay plinth @ Upton/Frith/Oscroft"
+      ],
+      "point": [
+        10.015789593091633,
+        0.12,
+        -202.61407613754272
+      ]
+    },
+    {
+      "names": [
+        "Weathered brick foundation @ Irby/Ashley",
+        "Yellow-refined Irby/Ashley walls @ Irby/Ashley"
+      ],
+      "point": [
+        260.6000003814697,
+        0.12,
+        -87.13684217474137
+      ]
+    },
+    {
+      "names": [
+        "Corridor brick plinth @ Corridor north windows",
+        "Weathered brick foundation @ Irby/Ashley",
+        "Yellow-refined Irby/Ashley walls @ Irby/Ashley"
+      ],
+      "point": [
+        220.15263133867956,
+        0.12,
+        -69.29999961853028
+      ]
+    },
+    {
+      "names": [
+        "Weathered brick foundation @ Grafton/Edge",
+        "Yellow-refined Grafton/Edge walls @ Grafton/Edge"
+      ],
+      "point": [
+        71.07656081016415,
+        0.12,
+        -176.66071216356957
+      ]
+    },
+    {
+      "names": [
+        "Hale ward brick foundation @ Hale/Daresbury/Huxley/Dunham",
+        "Hale ward two-storey walls @ Hale/Daresbury/Huxley/Dunham"
+      ],
+      "point": [
+        98.22000007629394,
+        0.12,
+        -121.10368413176892
+      ]
+    },
+    {
+      "names": [
+        "Rear two-storey offices @ Estates department",
+        "Rear two-storey offices dark brick plinth @ Estates department"
+      ],
+      "point": [
+        250.7217492065203,
+        0.12,
+        -28.427623408432353
+      ]
+    },
+    {
+      "names": [
+        "Right upper gabled return @ Estates department",
+        "Right upper gabled return dark brick plinth @ Estates department"
+      ],
+      "point": [
+        243.18209977014428,
+        0.12,
+        -26.537118928502395
+      ]
+    },
+    {
+      "names": [
+        "Right low entrance room @ Estates department",
+        "Right low entrance room dark brick plinth @ Estates department"
+      ],
+      "point": [
+        236.74305926196678,
+        0.12,
+        -28.75425837855863
+      ]
+    },
+    {
+      "names": [
+        "Left gabled workshop @ Estates department",
+        "Left gabled workshop dark brick plinth @ Estates department"
+      ],
+      "point": [
+        241.85634205050857,
+        0.12,
+        -47.89682942268139
+      ]
+    },
+    {
+      "names": [
+        "Left entrance stores and screen wall @ Estates department",
+        "Left entrance stores and screen wall dark brick plinth @ Estates department"
+      ],
+      "point": [
+        240.09898670091718,
+        0.12,
+        -42.79309890045623
+      ]
+    },
+    {
+      "names": [
+        "Low west side room @ Farndon ward",
+        "Single-storey ward walls @ Farndon ward",
+        "Single-storey ward walls plinth @ Farndon ward"
+      ],
+      "point": [
+        194.30000038146972,
+        0.12,
+        -143.82000007152556
+      ]
+    },
+    {
+      "names": [
+        "Single-storey ward walls @ Farndon ward",
+        "Single-storey ward walls plinth @ Farndon ward"
+      ],
+      "point": [
+        194.30000038146972,
+        0.12,
+        -135.8200001748403
+      ]
+    },
+    {
+      "names": [
+        "Projecting central garden bay @ Farndon ward",
+        "Single-storey ward walls @ Farndon ward",
+        "Single-storey ward walls plinth @ Farndon ward"
+      ],
+      "point": [
+        171.44173923039932,
+        0.12000000000000005,
+        -145.50000000149012
+      ]
+    },
+    {
+      "names": [
+        "Narrow rear link @ Farndon ward",
+        "Single-storey ward walls @ Farndon ward",
+        "Single-storey ward walls plinth @ Farndon ward"
+      ],
+      "point": [
+        172.34260869321838,
+        0.12000000000000005,
+        -137.29999961853028
+      ]
+    },
+    {
+      "names": [
+        "Small rear room @ Farndon ward",
+        "Small rear room plinth @ Farndon ward"
+      ],
+      "point": [
+        167.39999980926513,
+        0.12,
+        -126.43999990065895
+      ]
+    },
+    {
+      "names": [
+        "Narrow rear link @ Farndon ward",
+        "Small rear room @ Farndon ward",
+        "Small rear room plinth @ Farndon ward"
+      ],
+      "point": [
+        172.92999989668527,
+        0.12,
+        -132.59999980926514
+      ]
+    },
+    {
+      "names": [
+        "Narrow rear link @ Farndon ward",
+        "Narrow rear link plinth @ Farndon ward",
+        "Small rear room @ Farndon ward"
+      ],
+      "point": [
+        173.380000055631,
+        0.12,
+        -132.59999980926514
+      ]
+    },
+    {
+      "names": [
+        "Narrow rear link @ Farndon ward",
+        "Narrow rear link plinth @ Farndon ward"
+      ],
+      "point": [
+        169.7,
+        0.12,
+        -133.53999973376594
+      ]
+    },
+    {
+      "names": [
+        "Narrow rear link @ Farndon ward",
+        "Narrow rear link plinth @ Farndon ward",
+        "Single-storey ward walls @ Farndon ward"
+      ],
+      "point": [
+        170.61999996821083,
+        0.12,
+        -137.29999961853028
+      ]
+    },
+    {
+      "names": [
+        "Low west side room @ Farndon ward",
+        "Low west side room plinth @ Farndon ward"
+      ],
+      "point": [
+        195.06000019868213,
+        0.12,
+        -145.19999999701977
+      ]
+    },
+    {
+      "names": [
+        "Low west side room @ Farndon ward",
+        "Low west side room plinth @ Farndon ward",
+        "Single-storey ward walls @ Farndon ward"
+      ],
+      "point": [
+        194.30000038146972,
+        0.12,
+        -139.68000002086166
+      ]
+    },
+    {
+      "names": [
+        "Projecting central garden bay @ Farndon ward",
+        "Projecting central garden bay plinth @ Farndon ward"
+      ],
+      "point": [
+        167.60000009536742,
+        0.12,
+        -145.67999999403955
+      ]
+    },
+    {
+      "names": [
+        "Projecting central garden bay @ Farndon ward",
+        "Projecting central garden bay plinth @ Farndon ward",
+        "Single-storey ward walls @ Farndon ward"
+      ],
+      "point": [
+        173.200000055631,
+        0.12,
+        -145.50000000149012
+      ]
+    },
+    {
+      "names": [
+        "Low west side room @ Witby Ward",
+        "Single-storey ward walls @ Witby Ward",
+        "Single-storey ward walls plinth @ Witby Ward"
+      ],
+      "point": [
+        153.60000038146973,
+        0.12,
+        -205.92000007152558
+      ]
+    },
+    {
+      "names": [
+        "Single-storey ward walls @ Witby Ward",
+        "Single-storey ward walls plinth @ Witby Ward"
+      ],
+      "point": [
+        153.60000038146973,
+        0.12,
+        -197.92000017484028
+      ]
+    },
+    {
+      "names": [
+        "Projecting central garden bay @ Witby Ward",
+        "Single-storey ward walls @ Witby Ward",
+        "Single-storey ward walls plinth @ Witby Ward"
+      ],
+      "point": [
+        130.74173923039933,
+        0.12000000000000005,
+        -207.60000000149012
+      ]
+    },
+    {
+      "names": [
+        "Narrow rear link @ Witby Ward",
+        "Single-storey ward walls @ Witby Ward",
+        "Single-storey ward walls plinth @ Witby Ward"
+      ],
+      "point": [
+        131.6426086932184,
+        0.12000000000000005,
+        -199.39999961853027
+      ]
+    },
+    {
+      "names": [
+        "Small rear room @ Witby Ward",
+        "Small rear room plinth @ Witby Ward"
+      ],
+      "point": [
+        126.69999980926514,
+        0.12,
+        -188.53999990065893
+      ]
+    },
+    {
+      "names": [
+        "Narrow rear link @ Witby Ward",
+        "Small rear room @ Witby Ward",
+        "Small rear room plinth @ Witby Ward"
+      ],
+      "point": [
+        132.22999989668529,
+        0.12,
+        -194.69999980926514
+      ]
+    },
+    {
+      "names": [
+        "Narrow rear link @ Witby Ward",
+        "Narrow rear link plinth @ Witby Ward",
+        "Small rear room @ Witby Ward"
+      ],
+      "point": [
+        132.680000055631,
+        0.12,
+        -194.69999980926514
+      ]
+    },
+    {
+      "names": [
+        "Narrow rear link @ Witby Ward",
+        "Narrow rear link plinth @ Witby Ward"
+      ],
+      "point": [
+        129,
+        0.12,
+        -195.63999973376593
+      ]
+    },
+    {
+      "names": [
+        "Narrow rear link @ Witby Ward",
+        "Narrow rear link plinth @ Witby Ward",
+        "Single-storey ward walls @ Witby Ward"
+      ],
+      "point": [
+        129.91999996821085,
+        0.12,
+        -199.39999961853027
+      ]
+    },
+    {
+      "names": [
+        "Low west side room @ Witby Ward",
+        "Low west side room plinth @ Witby Ward"
+      ],
+      "point": [
+        154.36000019868214,
+        0.12,
+        -207.29999999701977
+      ]
+    },
+    {
+      "names": [
+        "Low west side room @ Witby Ward",
+        "Low west side room plinth @ Witby Ward",
+        "Single-storey ward walls @ Witby Ward"
+      ],
+      "point": [
+        153.60000038146973,
+        0.12,
+        -201.78000002086162
+      ]
+    },
+    {
+      "names": [
+        "Projecting central garden bay @ Witby Ward",
+        "Projecting central garden bay plinth @ Witby Ward"
+      ],
+      "point": [
+        126.90000009536743,
+        0.12,
+        -207.77999999403954
+      ]
+    },
+    {
+      "names": [
+        "Projecting central garden bay @ Witby Ward",
+        "Projecting central garden bay plinth @ Witby Ward",
+        "Single-storey ward walls @ Witby Ward"
+      ],
+      "point": [
+        132.500000055631,
+        0.12,
+        -207.60000000149012
+      ]
+    },
+    {
+      "names": [
+        "East stepped rear link plinth @ Main/admin building",
+        "East upper return plinth @ Main/admin building"
+      ],
+      "point": [
+        233.53200001251696,
+        0.12,
+        12.939999866485596
+      ]
+    },
+    {
+      "names": [
+        "Corridor brick plinth @ Corridor south windows",
+        "Laundry connecting corridor brick walls @ Laundry and brick connecting corridor"
+      ],
+      "point": [
+        106.96666672908597,
+        0.12,
+        12.99999999821186
+      ]
+    },
+    {
+      "names": [
+        "Corridor brick plinth @ Corridor north windows",
+        "Main kitchen plinth @ Main kitchen"
+      ],
+      "point": [
+        141.38181795305456,
+        0.12,
+        6.600000381469727
+      ]
+    },
+    {
+      "names": [
+        "Corridor brick plinth @ Corridor south windows",
+        "Corridor pavilion side connection walls @ Main/admin corridor front doorway"
+      ],
+      "point": [
+        160.5,
+        0.12,
+        13.02999999910593
+      ]
+    },
+    {
+      "names": [
+        "Corridor brick plinth @ Corridor north windows",
+        "Corridor brick plinth @ Corridor south windows",
+        "Tower service court ground contact @ Historic roads and surfaces"
+      ],
+      "point": [
+        159.0600000008941,
+        0.12,
+        6.600000381469728
+      ]
+    },
+    {
+      "names": [
+        "Corridor brick plinth @ Corridor south windows",
+        "Tower service court ground contact @ Historic roads and surfaces"
+      ],
+      "point": [
+        158.99999999821188,
+        0.12,
+        -1.1333331293529918
+      ]
+    },
+    {
+      "names": [
+        "Corridor brick plinth @ Corridor north windows",
+        "Corridor brick plinth @ Corridor south windows"
+      ],
+      "point": [
+        153.53999999910596,
+        0.12,
+        12.999999904632569
+      ]
+    },
+    {
+      "names": [
+        "Carden stepped low side range brick walls @ Carden side elevation",
+        "Carden tower gabled range brick walls @ Carden side elevation"
+      ],
+      "point": [
+        360.03284999618927,
+        0.12000000000000005,
+        9.124519612277638
+      ]
+    },
+    {
+      "names": [
+        "Low west stores plinth @ Tower service buildings",
+        "Western tower flat link plinth @ Tower service buildings"
+      ],
+      "point": [
+        155.90800008821486,
+        0.12,
+        -36.259999942779544
+      ]
+    },
+    {
+      "names": [
+        "Straight corridor to Farndon walls @ Straight corridor to Farndon",
+        "West stores flat front plinth @ Tower service buildings"
+      ],
+      "point": [
+        153.60000610351562,
+        0.12,
+        -17.600000341733292
+      ]
+    },
+    {
+      "names": [
+        "Long east service range plinth @ Tower service buildings",
+        "North east stepped link plinth @ Tower service buildings"
+      ],
+      "point": [
+        217.99199976038932,
+        0.12,
+        -38.5399998664856
+      ]
+    }
+  ]
+}

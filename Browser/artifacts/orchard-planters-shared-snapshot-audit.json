@@ -1,0 +1,52 @@
+{
+  "sourceHash": "373f155d18427c938b634577b816be2d84cffde3556ab770e7b1f8e91e61b73b",
+  "before": {
+    "jarman": {
+      "primitives": 820016,
+      "sha256": "79eb90d535fb5ffa4b6252ccb7bb9684de262f25df8ab557265374e2c55905fc"
+    },
+    "leighton": {
+      "count": 884063,
+      "sha256": "3575f0c0ac3b90d983c1e1d2dd538aaa99d1e7a4fa4b44b42c50dc2df0d1a7ba"
+    }
+  },
+  "after": {
+    "jarman": {
+      "primitives": 820060,
+      "sha256": "c1cd87644773b6b95f0bc83a98ecec6c1c0cd0f6f8885509e7418faaada99389"
+    },
+    "leighton": {
+      "count": 884107,
+      "sha256": "534f71e2587420a94aa93a44124b135b48a11bdc81787c7b3b81da371160253c"
+    }
+  },
+  "added": {
+    "jarman": {
+      "0": 14,
+      "56": 14,
+      "70": 14
+    },
+    "leighton": {
+      "0": 14,
+      "56": 14,
+      "70": 14
+    }
+  },
+  "baselineMatches": {
+    "jarman": true,
+    "leighton": true
+  },
+  "orchard": [
+    -28,
+    -14,
+    0,
+    14,
+    28,
+    42,
+    56,
+    70
+  ],
+  "existingGeometryUnchanged": false,
+  "concurrentStairWallsAudited": true,
+  "treeCollisionsPass": true
+}

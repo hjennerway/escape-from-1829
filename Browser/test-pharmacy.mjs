@@ -16,7 +16,7 @@ const buildingParts=group.children.filter(o=>!o.userData.pharmacyTank),clearance
 for(const tank of tanks){
  const {x,z,radius,height,name}=tank.userData.pharmacyTank;
  const bounds=new THREE.Box3().setFromObject(tank);
- assert(Math.abs(bounds.min.y)<1e-6&&bounds.max.y>height,'Each complete tank stands on the ground');
+ assert(bounds.min.y<exterior.terrain.position.y&&bounds.max.y>height,'Each tank foundation extends beneath the lawn, preserving its top');
  assert.equal(tank.parent,group,'Tanks belong to the same Historic layer as their court');
  assert.equal(tank.getObjectByName(name+' vertical corrugations').count,128);
  for(const range of TOWER_RANGES){

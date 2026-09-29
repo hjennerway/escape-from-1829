@@ -77,3 +77,18 @@ continuous T ridge, exact half-distance move, equal arm extensions, ridge vent, 
 building collisions, open recesses, camera starts and all layout states.
 Browser screenshots are in `Browser/artifacts/garages-*.png` and
 `Browser/artifacts/mortuary.png`.
+
+## Mortuary base flicker (29 September 2026)
+
+The supplied `mortuary-base-flicker.png` shows the lowest courses flickering.
+The full-height T wall and the 0.23-unit dark plinth previously occupied the
+same outside planes. The brick wall now starts at the plinth top, so each
+height has one exposed masonry face. The footprint, eaves, materials, UV
+projection and walking outline retain their existing settings.
+
+The mortuary regression checks all eight perimeter segments below and above
+the join, including both open recesses. It fails with the overlapping model
+and passes with the split wall. Before/after, compiled and walking previews
+from five camera positions are saved as `Browser/artifacts/mortuary-base-*`.
+Only browser sources and the local generated aerial model are updated;
+Unity and Blender exports were not regenerated.

@@ -1,6 +1,30 @@
 # Front lawn trees
 
+## Root contact correction — 29 September 2026
+
+The later estate-wide floating-object check extends only the root ring of
+every lawn EZ-Tree detail level into the terrain. Crown buffers, sizes, colours,
+X/Z locations, group transforms and wind behaviour are retained. The legacy
+mapped beeches also receive longer lower trunk/root ends. This supersedes the
+earlier requirement to retain their root geometry exactly; the upper branches
+and leaf instances remain unchanged. Validation uses `test-ground-contact.mjs`
+and the existing tree checks, with audited whole-estate snapshot updates.
+
 The user supplied img1.jpg and the yellow-X placement plan img1-loc.png on 17 September 2026. Two large mature broadleaf trees stand on opposite sides of the central Reception approach, inside the front boundary wall. The red dot and arrow set a ground-level view from the east entrance wing looking south-west across the lawns.
+
+## Original pair colour and relative size correction (29 September 2026)
+
+The follow-up clarifies that the two original trees should retain dark copper
+red/brown leaves and be 20% larger than the other four front-lawn trees. Both
+now use the original copper tint (#a18a70), with heights of 25.92 and crown radii
+of 11.088, exactly 1.2 times the green companions' 21.6 and 9.24. Their moved
+root positions remain (13,47.8) and (-13,48.5). The four companions retain
+their green tint, sizes and positions. This supersedes the all-green treatment
+and original-pair dimensions in the preceding revision below.
+
+All six still share their geometry and textures, with one foliage material per
+colour. Fixing the template dimensions keeps the companion geometry exact
+while the two original specimens scale up.
 
 ## Greener lawn planting and shadows (29 September 2026)
 

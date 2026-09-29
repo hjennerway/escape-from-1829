@@ -1,5 +1,24 @@
 # Outhouse in front of 1829
 
+## Ground contact and base flicker — 29 September 2026
+
+The owner's [walking screenshot](ground-contact-reference.png) shows Pine13
+beside the blank wall and flickering green patches along the brick base.
+Pine13 is covered by the existing estate-wide root extension: its trunk foot
+is at Y=-0.36, beneath the lawn at -0.15, with its mapped position and upper
+trunk retained. No additional tree translation is needed for this report.
+
+The moss boxes formerly ended exactly on the plinth faces at local
+Z=±2.67. Their exposed faces now sit 0.01 units ahead of the brick, while
+remaining embedded in it. The seeded patch sizes and positions along the
+wall stay intact. The plinth also extends down to Y=-0.18, retaining its
+0.48 top and existing footprint so the foundation meets the lawn.
+
+The outhouse test checks both wall faces, foundation contact and Pine13.
+Source, walking and rebuilt compiled previews use
+`Browser/artifacts/outhouse-contact-*`. This updates browser modelling and
+the local generated aerial asset; Unity and Blender exports are unchanged.
+
 The user's three photographs define the small red-brick outhouse: img1 is
 the purple entrance approach, img2 the blue view along the blank left wall,
 and img3 the yellow view of the entrance and two high side windows.

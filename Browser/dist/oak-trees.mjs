@@ -43,11 +43,11 @@ export function addOakTrees(THREE,trees){
     }
   }
   // Heavy, crooked limbs and exposed root buttresses beneath a broad crown.
-  branch([0,0,0],[.32,4.7,-.2],1.15,.82);
+  branch([0,-.15,0],[.32,4.7,-.2],1.15,.82);
   branch([.32,4.5,-.2],[-.55,10.3,.35],.82,.3);
   for(let n=0;n<7;n++){
     const a=n*Math.PI*2/7+random()*.35,r=1.7+random()*.5;
-    branch([Math.sin(a)*r,.1,Math.cos(a)*r],[Math.sin(a)*.4,.85,Math.cos(a)*.4],.13,.4);
+    branch([Math.sin(a)*r,-.2,Math.cos(a)*r],[Math.sin(a)*.4,.85,Math.cos(a)*.4],.13,.4);
   }
   for(let n=0;n<10;n++){
     const a=n*2.39996,reach=spec.radius*(.54+random()*.16),height=7.6+random()*5.8;

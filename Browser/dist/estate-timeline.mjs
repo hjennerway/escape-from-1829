@@ -1,4 +1,5 @@
 import {addRoadsideLampPosts} from './street-lamps.mjs';
+import {closeGroundEdges} from './ground-contact.mjs';
 import {addAnnexePeriodOaks} from './annexe-period-oaks.mjs';
 import {existsInYear,periodForYear,roadSection,historicSurfaceSection,DEFAULT_PERIOD} from './estate-periods.mjs';
 
@@ -94,7 +95,7 @@ function addOpeningEastWall(THREE,exterior,parent){
   ['side north',[37.85,7],[37.85,12]],
   ['side south',[37.85,12],[37.85,17.3]]
  ]){
-  panel(name+' plinth',a,b,0,2,2,white);
+  panel(name+' plinth',a,b,exterior.terrain.position.y-.03,2,2,white);
   panel(name+' brick',a,b,2,12.8,12.8,brick);
   panel(name+' cornice',a,b,12.8,13.06,13.06,white);
   const outer=([x,z])=>name==='front'?[x,z+.15]:[x+.15,z];
@@ -134,7 +135,7 @@ export function prepareEstateTimeline(THREE,exterior,layouts){
  // Grounds follow their associated estate section. Individual ribbons and
  // ground meshes get separate parents before material batching takes place.
  for(const object of [...layouts.historicRoads.children]){
-  const section=historicSurfaceSection(object.name);
+  const section=historicSurfaceSection(object.userData.groundContactOwner??object.name);
   grouped(layouts.historicRoads,section).add(object);
  }
  const excluded=new Set([exterior.trees,exterior.terrain,exterior.legacyAccess,...Object.keys(named).map(key=>exterior[key]),layouts.roads,layouts.entrance,layouts.countessRoundabout]);
@@ -206,6 +207,7 @@ export function prepareEstateTimeline(THREE,exterior,layouts){
  for(const object of [...layouts.shared.children])partition(object);
  addOpeningEastWall(THREE,exterior,layouts.shared);
  addRoadsideLampPosts(THREE,exterior,layouts);
+ closeGroundEdges(THREE,exterior.model,exterior.terrain.position.y,{visibilityObjects:layouts.visibilityObjects});
  exterior.model.userData.timelinePrepared=ESTATE_TIMELINE_VERSION;
  return attachEstateTimeline(exterior,layouts);
 }

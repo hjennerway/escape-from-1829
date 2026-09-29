@@ -1,6 +1,7 @@
 import {photoDetailPrimitives} from './photo-detail-primitives.mjs';
 import {placeWardViews,WARD_POSITIONS} from './ward-placement.mjs';
 import {IRBY_CONNECTION_FRONT} from './irby-corridor.mjs';
+import {meetPlinth} from './building-grounding.mjs';
 
 // location.png is a perspective aerial: register its ground-level brown OS
 // corners first, then regularise the yellow revision along the estate axes.
@@ -83,7 +84,7 @@ export function createIrbyAshley(THREE,{brick,roof,worldUV,material,rearElevatio
   }
   // The tiny side projection has a lower roof and a continuous tall main wall.
   const mainFootprint=rearElevation?local:local.filter(([x,z])=>!(Math.abs(x+cx-208.1)<.01&&[-122.7,-127].some(v=>Math.abs(z+cz-rz(v))<.01)));
-  mass(mainFootprint,eave,0,brick,'Yellow-refined Irby/Ashley walls').userData.historicOutlinePadding=.7;
+  meetPlinth(mass(mainFootprint,eave,0,brick,'Yellow-refined Irby/Ashley walls'),.38).userData.historicOutlinePadding=.7;
   mass(mainFootprint,.38,0,material(0x685549),'Weathered brick foundation');
   const projection=[[208.1,-127],[211.9,-127],[211.9,-122.7],[208.1,-122.7]].map(([x,z])=>[x-cx,rz(z)-cz]);
   if(!rearElevation)mass(projection,4,0,brick,'Low east service room').userData.historicOutlinePadding=.7;

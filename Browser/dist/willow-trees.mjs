@@ -8,7 +8,7 @@ export function addWillowTrees(THREE,trees){
  const dummy=new THREE.Object3D(),up=new THREE.Vector3(0,1,0),stems=[],sprays=[];
  let seed=182911;const random=()=>((seed=(Math.imul(seed,1664525)+1013904223)>>>0)/2**32);
  function branch(a,b,r){const start=new THREE.Vector3(...a),delta=new THREE.Vector3(...b).sub(start);dummy.position.copy(start).addScaledVector(delta,.5);dummy.quaternion.setFromUnitVectors(up,delta.clone().normalize());dummy.scale.set(r,delta.length(),r);dummy.updateMatrix();stems.push(dummy.matrix.clone());}
- branch([0,0,0],[.25,5,0],.8);branch([.25,4.8,0],[-.3,10,0],.48);
+ branch([0,-.08,0],[.25,5,0],.8);branch([.25,4.8,0],[-.3,10,0],.48);
  for(let n=0;n<18;n++){
   const a=n*2.39996,reach=3.5+random()*3,top=11+random()*3;
   const elbow=[Math.cos(a)*reach*.65,top-1.5,Math.sin(a)*reach*.65];

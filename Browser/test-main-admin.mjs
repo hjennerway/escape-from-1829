@@ -132,7 +132,7 @@ assert(!building.userData.openings.some(o=>o.face==='east return inferred'));
 for(const name of ['East curved carriage drive','East wing side access']){const road=building.getObjectByName(name);assert(road&&road.geometry.attributes.normal.getY(0)>.99,'East approach gravel must face upwards');}
 const chimney=exterior.estateChimney,bounds=new THREE.Box3().setFromObject(chimney);
 assert.equal(chimney.parent,exterior.model,'Freestanding chimney must be independent of the admin building');
-assert(Math.abs(bounds.max.y-bounds.min.y-ESCAPE_WATER_TOWER.height*1.3)<1e-5,'Chimney must be exactly 1.3 times the water tower');
+assert(Math.abs(bounds.max.y-ESCAPE_WATER_TOWER.height*1.3)<1e-5&&bounds.min.y<exterior.terrain.position.y,'Chimney keeps its height above grade, with its foundation beneath the lawn');
 assert.deepEqual([chimney.position.x,chimney.position.z],[167,-37],'The chimney occupies the latest red X closer to the water tower');
 // The new chimney anchor lies to the right and forward of the water tower.
 assert(chimney.position.x>ESCAPE_WATER_TOWER.x&&chimney.position.z>ESCAPE_WATER_TOWER.z);

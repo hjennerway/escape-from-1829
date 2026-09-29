@@ -181,7 +181,7 @@ const lawnRoof=ray.intersectObject(exterior.model,true)[0];
 assert.equal(lawnRoof.object.name,'West lawn bay slate roof');
 assert(lawnRoof.face.normal.y>0,'img18 bay roof must face upward');
 const lawnBayBounds=new THREE.Box3().setFromObject(exterior.model.getObjectByName('West lawn three-window bay'));
-assert(lawnBayBounds.max.x>-28&&Math.abs(lawnBayBounds.min.y)<1e-6,'img18 bay must project from the wall with a solid foundation');
+assert(lawnBayBounds.max.x>-28&&lawnBayBounds.min.y<exterior.terrain.position.y,'img18 bay must project from the wall with its foundation beneath the lawn');
 // Both inward elevations are exact reflections across the entrance centre.
 for(const [west,east] of [[exterior.model.userData.westLawnPhotoOpenings,exterior.model.userData.eastLawnPhotoOpenings],[exterior.model.userData.entranceWestPhotoOpenings.filter(o=>o.face!=='reception-front-sash'),exterior.model.userData.entranceEastPhotoOpenings]]){
   assert.deepEqual(east,west.map(o=>({...o,x:-o.x,face:o.face.replaceAll('west','east')})),'east opening schedules must reflect the west without duplicating Reception');
@@ -268,7 +268,7 @@ const redesmereBays=exterior.model.children.filter(o=>o.name==='Redesmere canted
 assert.equal(redesmereBays.length,2);
 for(const bay of redesmereBays){
   const bounds=new THREE.Box3().setFromObject(bay);
-  assert(bounds.max.x>97&&Math.abs(bounds.min.y)<1e-6&&bounds.max.y>9,'Redesmere bays project from the brick ground storey to the eaves');
+  assert(bounds.max.x>97&&bounds.min.y<exterior.terrain.position.y&&bounds.max.y>9,'Redesmere bays extend beneath the lawn and project to the eaves');
   ray.set(new THREE.Vector3(96.4,30,(bounds.min.z+bounds.max.z)/2),new THREE.Vector3(0,-1,0));
   const hit=ray.intersectObject(exterior.model,true)[0];
   assert.equal(hit.object.name,'Redesmere bay slate roof');

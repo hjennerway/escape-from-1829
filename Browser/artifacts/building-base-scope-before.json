@@ -1,0 +1,7045 @@
+{
+  "original": {
+    "jarman": {
+      "primitives": 820060,
+      "sha256": "e902baceef769b8d6afd464f00a324b3c8779cd61f213bd554cf918048b76676"
+    },
+    "leighton": {
+      "count": 884107,
+      "sha256": "28088ef757a65b9eb7a3cdb80fc2caabba4d545b277bf84b5080708bfe5b97dc"
+    }
+  },
+  "expected": {
+    "jarman": {
+      "primitives": 820060,
+      "sha256": "0c87d36159c5051d4700e2f3e0b275433224201b912af406ca8ea211f82d0130"
+    },
+    "leighton": {
+      "count": 884107,
+      "sha256": "e20209636c90674fa1636de5ea98766b3f31b256d46381ef2fecce343734c553"
+    }
+  },
+  "walls": [
+    "Estates department / Rear two-storey offices",
+    "Estates department / Right upper gabled return",
+    "Estates department / Right low entrance room",
+    "Estates department / Left gabled workshop",
+    "Estates department / Left entrance stores and screen wall",
+    "Farndon ward / Single-storey ward walls",
+    "Farndon ward / Small rear room",
+    "Farndon ward / Narrow rear link",
+    "Farndon ward / Low west side room",
+    "Farndon ward / Projecting central garden bay",
+    "Witby Ward / Single-storey ward walls",
+    "Witby Ward / Small rear room",
+    "Witby Ward / Narrow rear link",
+    "Witby Ward / Low west side room",
+    "Witby Ward / Projecting central garden bay",
+    "Irby/Ashley / Yellow-refined Irby/Ashley walls",
+    "Grafton/Edge / Yellow-refined Grafton/Edge walls",
+    "Hale/Daresbury/Huxley/Dunham / Hale ward two-storey walls",
+    "Upton/Frith/Oscroft / Symmetric OS-derived two-storey walls",
+    "Upton/Frith/Oscroft / Canted garden bay",
+    "Upton/Frith/Oscroft / Canted garden bay",
+    "Upton/Frith/Oscroft / Canted garden bay",
+    "Upton/Frith/Oscroft / Canted garden bay"
+  ],
+  "changes": [
+    {
+      "name": "West semi-basement retaining wall 7",
+      "parent": "West semi-basement walk",
+      "index": null,
+      "from": -8.940696655246327e-10,
+      "to": -0.18
+    },
+    {
+      "name": "East semi-basement retaining wall 7",
+      "parent": "East semi-basement walk",
+      "index": null,
+      "from": -8.940696655246327e-10,
+      "to": -0.18
+    },
+    {
+      "name": "West side basement door handle",
+      "parent": "West side semi-basement",
+      "index": null,
+      "from": -0.04000000149011618,
+      "to": -0.18
+    },
+    {
+      "name": "1829 Redesmere passage trim and jambs",
+      "parent": "1829 Redesmere passage head",
+      "index": 52,
+      "from": 0,
+      "to": -0.18
+    },
+    {
+      "name": "1829 Redesmere passage trim and jambs",
+      "parent": "1829 Redesmere passage head",
+      "index": 53,
+      "from": 0,
+      "to": -0.18
+    },
+    {
+      "name": "Redesmere windowless brick end range",
+      "parent": "1829 estate · aerial reconstruction",
+      "index": null,
+      "from": -9.536743172944284e-8,
+      "to": -0.18
+    },
+    {
+      "name": "Redesmere chimney rendered foot",
+      "parent": "Redesmere low-range edge chimney",
+      "index": null,
+      "from": 0,
+      "to": -0.18
+    },
+    {
+      "name": "",
+      "parent": "1829 estate · aerial reconstruction",
+      "index": null,
+      "from": 0,
+      "to": -0.18
+    },
+    {
+      "name": "",
+      "parent": "1829 estate · aerial reconstruction",
+      "index": null,
+      "from": 0,
+      "to": -0.18
+    },
+    {
+      "name": "",
+      "parent": "1829 estate · aerial reconstruction",
+      "index": null,
+      "from": 0,
+      "to": -0.18
+    },
+    {
+      "name": "",
+      "parent": "1829 estate · aerial reconstruction",
+      "index": null,
+      "from": 0,
+      "to": -0.18
+    },
+    {
+      "name": "",
+      "parent": "1829 estate · aerial reconstruction",
+      "index": null,
+      "from": 0,
+      "to": -0.18
+    },
+    {
+      "name": "",
+      "parent": "1829 estate · aerial reconstruction",
+      "index": null,
+      "from": 0,
+      "to": -0.18
+    },
+    {
+      "name": "Central back canted white plinth",
+      "parent": "1829 estate · aerial reconstruction",
+      "index": null,
+      "from": -6.368163104047281e-16,
+      "to": -0.18
+    },
+    {
+      "name": "Redesmere flush frontage white base",
+      "parent": "1829 estate · aerial reconstruction",
+      "index": null,
+      "from": 0,
+      "to": -0.18
+    },
+    {
+      "name": "Redesmere flat-roof projection white base",
+      "parent": "1829 estate · aerial reconstruction",
+      "index": null,
+      "from": 0,
+      "to": -0.18
+    },
+    {
+      "name": "East curved bay white base",
+      "parent": "1829 estate · aerial reconstruction",
+      "index": null,
+      "from": 0,
+      "to": -0.18
+    },
+    {
+      "name": "",
+      "parent": "1829 estate · aerial reconstruction",
+      "index": null,
+      "from": 0,
+      "to": -0.18
+    },
+    {
+      "name": "West front square pavilion",
+      "parent": "1829 estate · aerial reconstruction",
+      "index": null,
+      "from": 9.536743128535363e-8,
+      "to": -0.18
+    },
+    {
+      "name": "West end continuous wall",
+      "parent": "1829 estate · aerial reconstruction",
+      "index": null,
+      "from": 9.536743128535363e-8,
+      "to": -0.18
+    },
+    {
+      "name": "West end shallow centre",
+      "parent": "1829 estate · aerial reconstruction",
+      "index": null,
+      "from": -1.9073486345888568e-7,
+      "to": -0.18
+    },
+    {
+      "name": "West front widened recess",
+      "parent": "1829 estate · aerial reconstruction",
+      "index": null,
+      "from": -9.536743128535363e-8,
+      "to": -0.18
+    },
+    {
+      "name": "West front middle arm",
+      "parent": "1829 estate · aerial reconstruction",
+      "index": null,
+      "from": -9.536743128535363e-8,
+      "to": -0.18
+    },
+    {
+      "name": "West curved bay",
+      "parent": "1829 estate · aerial reconstruction",
+      "index": null,
+      "from": 0,
+      "to": -0.18
+    },
+    {
+      "name": "West front glazed extension",
+      "parent": "1829 estate · aerial reconstruction",
+      "index": null,
+      "from": -2.3841857821338408e-8,
+      "to": -0.18
+    },
+    {
+      "name": "West courtyard polygonal bay",
+      "parent": "1829 estate · aerial reconstruction",
+      "index": null,
+      "from": 0,
+      "to": -0.18
+    },
+    {
+      "name": "West courtyard bay extended return",
+      "parent": "1829 estate · aerial reconstruction",
+      "index": null,
+      "from": -9.536743128535363e-8,
+      "to": -0.18
+    },
+    {
+      "name": "West court low projecting bay",
+      "parent": "1829 estate · aerial reconstruction",
+      "index": null,
+      "from": 1.9073486345888568e-7,
+      "to": -0.18
+    },
+    {
+      "name": "West courtyard glazed lean-to",
+      "parent": "1829 estate · aerial reconstruction",
+      "index": null,
+      "from": -2.3841857821338408e-8,
+      "to": -0.18
+    },
+    {
+      "name": "West courtyard lean-to side door",
+      "parent": "1829 estate · aerial reconstruction",
+      "index": null,
+      "from": -4.768371586472142e-8,
+      "to": -0.18
+    },
+    {
+      "name": "East courtyard polygonal bay white base",
+      "parent": "1829 estate · aerial reconstruction",
+      "index": null,
+      "from": 0,
+      "to": -0.18
+    },
+    {
+      "name": "East courtyard fire-exit corner white base",
+      "parent": "1829 estate · aerial reconstruction",
+      "index": null,
+      "from": 0,
+      "to": -0.18
+    },
+    {
+      "name": "Courtyard glazed lean-to",
+      "parent": "1829 estate · aerial reconstruction",
+      "index": null,
+      "from": -4.768371586472142e-8,
+      "to": -0.18
+    },
+    {
+      "name": "",
+      "parent": "1829 estate · aerial reconstruction",
+      "index": null,
+      "from": 0,
+      "to": -0.18
+    },
+    {
+      "name": "West wing main brick range",
+      "parent": "West wing mirrored from east",
+      "index": null,
+      "from": -9.536743128535363e-8,
+      "to": -0.18
+    },
+    {
+      "name": "",
+      "parent": "West wing mirrored from east",
+      "index": null,
+      "from": 0,
+      "to": -0.18
+    },
+    {
+      "name": "West wing connecting walls",
+      "parent": "West wing mirrored from east",
+      "index": null,
+      "from": -9.536743128535363e-8,
+      "to": -0.18
+    },
+    {
+      "name": "",
+      "parent": "West wing mirrored from east",
+      "index": 31,
+      "from": 0,
+      "to": -0.18
+    },
+    {
+      "name": "",
+      "parent": "West wing mirrored from east",
+      "index": 44,
+      "from": 0,
+      "to": -0.18
+    },
+    {
+      "name": "",
+      "parent": "West wing mirrored from east",
+      "index": 198,
+      "from": 0,
+      "to": -0.18
+    },
+    {
+      "name": "",
+      "parent": "West wing mirrored from east",
+      "index": 199,
+      "from": 0,
+      "to": -0.18
+    },
+    {
+      "name": "",
+      "parent": "West wing mirrored from east",
+      "index": 201,
+      "from": 0,
+      "to": -0.18
+    },
+    {
+      "name": "",
+      "parent": "West wing mirrored from east",
+      "index": 202,
+      "from": 0,
+      "to": -0.18
+    },
+    {
+      "name": "",
+      "parent": "West wing mirrored from east",
+      "index": 203,
+      "from": 0,
+      "to": -0.18
+    },
+    {
+      "name": "",
+      "parent": "West wing mirrored from east",
+      "index": 204,
+      "from": 0,
+      "to": -0.18
+    },
+    {
+      "name": "",
+      "parent": "West wing mirrored from east",
+      "index": 0,
+      "from": 0,
+      "to": -0.18
+    },
+    {
+      "name": "",
+      "parent": "1829 estate · aerial reconstruction",
+      "index": null,
+      "from": 0,
+      "to": -0.18
+    },
+    {
+      "name": "Redesmere outer brick elevation",
+      "parent": "1829 estate · aerial reconstruction",
+      "index": null,
+      "from": -9.536743128535363e-8,
+      "to": -0.18
+    },
+    {
+      "name": "",
+      "parent": "1829 estate · aerial reconstruction",
+      "index": null,
+      "from": -9.536743128535363e-8,
+      "to": -0.18
+    },
+    {
+      "name": "",
+      "parent": "1829 estate · aerial reconstruction",
+      "index": null,
+      "from": -9.536743128535363e-8,
+      "to": -0.18
+    },
+    {
+      "name": "Redesmere canted bay",
+      "parent": "1829 estate · aerial reconstruction",
+      "index": null,
+      "from": -2.3880614287155263e-16,
+      "to": -0.18
+    },
+    {
+      "name": "Redesmere canted bay",
+      "parent": "1829 estate · aerial reconstruction",
+      "index": null,
+      "from": 1.3654811678405683e-15,
+      "to": -0.18
+    },
+    {
+      "name": "Redesmere central entrance block",
+      "parent": "1829 estate · aerial reconstruction",
+      "index": null,
+      "from": -9.536743128535363e-8,
+      "to": -0.18
+    },
+    {
+      "name": "West lawn three-window bay",
+      "parent": "1829 estate · aerial reconstruction",
+      "index": null,
+      "from": 9.536743128535363e-8,
+      "to": -0.18
+    },
+    {
+      "name": "Entrance west recessed wall white lower storey",
+      "parent": "1829 estate · aerial reconstruction",
+      "index": null,
+      "from": 4.768371586472142e-8,
+      "to": -0.18
+    },
+    {
+      "name": "East lawn three-window bay",
+      "parent": "1829 estate · aerial reconstruction",
+      "index": null,
+      "from": 9.536743128535363e-8,
+      "to": -0.18
+    },
+    {
+      "name": "Entrance east recessed wall white lower storey",
+      "parent": "1829 estate · aerial reconstruction",
+      "index": null,
+      "from": 4.768371586472142e-8,
+      "to": -0.18
+    },
+    {
+      "name": "West inside corner brick facet 0",
+      "parent": "1829 estate · aerial reconstruction",
+      "index": null,
+      "from": -1.9073486345888568e-7,
+      "to": -0.18
+    },
+    {
+      "name": "West inside corner brick facet 1",
+      "parent": "1829 estate · aerial reconstruction",
+      "index": null,
+      "from": -1.9073486345888568e-7,
+      "to": -0.18
+    },
+    {
+      "name": "West inside corner brick facet 2",
+      "parent": "1829 estate · aerial reconstruction",
+      "index": null,
+      "from": -9.536743128535363e-8,
+      "to": -0.18
+    },
+    {
+      "name": "West inside corner brick facet 3",
+      "parent": "1829 estate · aerial reconstruction",
+      "index": null,
+      "from": -1.9073486345888568e-7,
+      "to": -0.18
+    },
+    {
+      "name": "West inside corner brick facet 4",
+      "parent": "1829 estate · aerial reconstruction",
+      "index": null,
+      "from": -1.9073486345888568e-7,
+      "to": -0.18
+    },
+    {
+      "name": "East inside corner brick facet 0",
+      "parent": "1829 estate · aerial reconstruction",
+      "index": null,
+      "from": -1.9073486345888568e-7,
+      "to": -0.18
+    },
+    {
+      "name": "East inside corner brick facet 1",
+      "parent": "1829 estate · aerial reconstruction",
+      "index": null,
+      "from": -1.9073486345888568e-7,
+      "to": -0.18
+    },
+    {
+      "name": "East inside corner brick facet 2",
+      "parent": "1829 estate · aerial reconstruction",
+      "index": null,
+      "from": -9.536743128535363e-8,
+      "to": -0.18
+    },
+    {
+      "name": "East inside corner brick facet 3",
+      "parent": "1829 estate · aerial reconstruction",
+      "index": null,
+      "from": -1.9073486345888568e-7,
+      "to": -0.18
+    },
+    {
+      "name": "East inside corner brick facet 4",
+      "parent": "1829 estate · aerial reconstruction",
+      "index": null,
+      "from": -1.9073486345888568e-7,
+      "to": -0.18
+    },
+    {
+      "name": "Lawn connecting range walls",
+      "parent": "Churton Ward",
+      "index": null,
+      "from": -4.7683715642676816e-8,
+      "to": -0.18
+    },
+    {
+      "name": "Lawn connecting range plinth",
+      "parent": "Churton Ward",
+      "index": null,
+      "from": -2.980232227667301e-9,
+      "to": -0.18
+    },
+    {
+      "name": "Mast-side long ward walls",
+      "parent": "",
+      "index": null,
+      "from": -4.7683715642676816e-8,
+      "to": -0.18
+    },
+    {
+      "name": "Mast-side long ward plinth",
+      "parent": "",
+      "index": null,
+      "from": 6.5565109175214076e-9,
+      "to": -0.18
+    },
+    {
+      "name": "Church-side return walls",
+      "parent": "Churton Ward",
+      "index": null,
+      "from": -4.7683715642676816e-8,
+      "to": -0.18
+    },
+    {
+      "name": "Church-side return plinth",
+      "parent": "Churton Ward",
+      "index": null,
+      "from": -2.980232227667301e-9,
+      "to": -0.18
+    },
+    {
+      "name": "Church-side lawn bay walls",
+      "parent": "Churton Ward",
+      "index": null,
+      "from": -4.7683715642676816e-8,
+      "to": -0.18
+    },
+    {
+      "name": "Church-side lawn bay plinth",
+      "parent": "Churton Ward",
+      "index": null,
+      "from": -2.980232227667301e-9,
+      "to": -0.18
+    },
+    {
+      "name": "Rear oblique wing walls",
+      "parent": "",
+      "index": null,
+      "from": -4.7683715642676816e-8,
+      "to": -0.18
+    },
+    {
+      "name": "Rear oblique wing plinth",
+      "parent": "",
+      "index": null,
+      "from": 6.5565109175214076e-9,
+      "to": -0.18
+    },
+    {
+      "name": "Low side room walls",
+      "parent": "Churton Ward",
+      "index": null,
+      "from": 0,
+      "to": -0.18
+    },
+    {
+      "name": "Long elevation cross gable walls",
+      "parent": "",
+      "index": null,
+      "from": -4.7683715642676816e-8,
+      "to": -0.18
+    },
+    {
+      "name": "Long elevation cross gable plinth",
+      "parent": "",
+      "index": null,
+      "from": 6.5565109175214076e-9,
+      "to": -0.18
+    },
+    {
+      "name": "Pale entrance side wall",
+      "parent": "Churton Ward",
+      "index": null,
+      "from": 4.7683715642676816e-8,
+      "to": -0.18
+    },
+    {
+      "name": "Entrance threshold",
+      "parent": "Churton Ward",
+      "index": null,
+      "from": 1.7881393449270533e-9,
+      "to": -0.18
+    },
+    {
+      "name": "Churton window and masonry details",
+      "parent": "Churton Ward",
+      "index": 102,
+      "from": 0,
+      "to": -0.18
+    },
+    {
+      "name": "Churton window and masonry details",
+      "parent": "Churton Ward",
+      "index": 103,
+      "from": 0,
+      "to": -0.18
+    },
+    {
+      "name": "Churton window and masonry details",
+      "parent": "Churton Ward",
+      "index": 104,
+      "from": 0,
+      "to": -0.18
+    },
+    {
+      "name": "Churton window and masonry details",
+      "parent": "Churton Ward",
+      "index": 105,
+      "from": 0,
+      "to": -0.18
+    },
+    {
+      "name": "Churton window and masonry details",
+      "parent": "Churton Ward",
+      "index": 106,
+      "from": 0,
+      "to": -0.18
+    },
+    {
+      "name": "Churton window and masonry details",
+      "parent": "Churton Ward",
+      "index": 298,
+      "from": 0,
+      "to": -0.18
+    },
+    {
+      "name": "Churton window and masonry details",
+      "parent": "Churton Ward",
+      "index": 299,
+      "from": 0,
+      "to": -0.18
+    },
+    {
+      "name": "Churton window and masonry details",
+      "parent": "Churton Ward",
+      "index": 300,
+      "from": 0,
+      "to": -0.18
+    },
+    {
+      "name": "Stepped masonry plinth",
+      "parent": "Upton/Frith/Oscroft",
+      "index": null,
+      "from": -8.646905137101187e-16,
+      "to": -0.18
+    },
+    {
+      "name": "Garden bay plinth",
+      "parent": "Upton/Frith/Oscroft",
+      "index": null,
+      "from": 4.662276864759746e-16,
+      "to": -0.18
+    },
+    {
+      "name": "Garden bay plinth",
+      "parent": "Upton/Frith/Oscroft",
+      "index": null,
+      "from": 4.662276864759746e-16,
+      "to": -0.18
+    },
+    {
+      "name": "Garden bay plinth",
+      "parent": "Upton/Frith/Oscroft",
+      "index": null,
+      "from": 4.662276864759746e-16,
+      "to": -0.18
+    },
+    {
+      "name": "Garden bay plinth",
+      "parent": "Upton/Frith/Oscroft",
+      "index": null,
+      "from": 4.662276864759746e-16,
+      "to": -0.18
+    },
+    {
+      "name": "Upton sash windows, stone bands and rainwater goods",
+      "parent": "Upton/Frith/Oscroft",
+      "index": 110,
+      "from": -0.02499997615814209,
+      "to": -0.18
+    },
+    {
+      "name": "Upton sash windows, stone bands and rainwater goods",
+      "parent": "Upton/Frith/Oscroft",
+      "index": 111,
+      "from": -0.02499997615814209,
+      "to": -0.18
+    },
+    {
+      "name": "Upton sash windows, stone bands and rainwater goods",
+      "parent": "Upton/Frith/Oscroft",
+      "index": 112,
+      "from": -0.02499997615814209,
+      "to": -0.18
+    },
+    {
+      "name": "Upton sash windows, stone bands and rainwater goods",
+      "parent": "Upton/Frith/Oscroft",
+      "index": 113,
+      "from": -0.02499997615814209,
+      "to": -0.18
+    },
+    {
+      "name": "Upton sash windows, stone bands and rainwater goods",
+      "parent": "Upton/Frith/Oscroft",
+      "index": 188,
+      "from": -0.02499997615814209,
+      "to": -0.18
+    },
+    {
+      "name": "Upton sash windows, stone bands and rainwater goods",
+      "parent": "Upton/Frith/Oscroft",
+      "index": 189,
+      "from": -0.02499997615814209,
+      "to": -0.18
+    },
+    {
+      "name": "Upton sash windows, stone bands and rainwater goods",
+      "parent": "Upton/Frith/Oscroft",
+      "index": 76,
+      "from": 0,
+      "to": -0.18
+    },
+    {
+      "name": "Upton sash windows, stone bands and rainwater goods",
+      "parent": "Upton/Frith/Oscroft",
+      "index": 77,
+      "from": 0,
+      "to": -0.18
+    },
+    {
+      "name": "Upton sash windows, stone bands and rainwater goods",
+      "parent": "Upton/Frith/Oscroft",
+      "index": 136,
+      "from": 0,
+      "to": -0.18
+    },
+    {
+      "name": "Upton sash windows, stone bands and rainwater goods",
+      "parent": "Upton/Frith/Oscroft",
+      "index": 0,
+      "from": 0,
+      "to": -0.18
+    },
+    {
+      "name": "Upton sash windows, stone bands and rainwater goods",
+      "parent": "Upton/Frith/Oscroft",
+      "index": 1,
+      "from": 0,
+      "to": -0.18
+    },
+    {
+      "name": "Upton sash windows, stone bands and rainwater goods",
+      "parent": "Upton/Frith/Oscroft",
+      "index": 2,
+      "from": 0,
+      "to": -0.18
+    },
+    {
+      "name": "Weathered brick foundation",
+      "parent": "Irby/Ashley",
+      "index": null,
+      "from": -1.4756994242779028e-15,
+      "to": -0.18
+    },
+    {
+      "name": "Low east service room",
+      "parent": "Irby/Ashley",
+      "index": null,
+      "from": -3.245314093176246e-16,
+      "to": -0.18
+    },
+    {
+      "name": "Quarter-octagonal garden corner",
+      "parent": "Irby/Ashley",
+      "index": null,
+      "from": -3.245314093176246e-16,
+      "to": -0.18
+    },
+    {
+      "name": "Canted garden window bay",
+      "parent": "Irby/Ashley",
+      "index": null,
+      "from": -3.2636835908242314e-16,
+      "to": -0.18
+    },
+    {
+      "name": "Canted garden window bay",
+      "parent": "Irby/Ashley",
+      "index": null,
+      "from": -3.2636835908242314e-16,
+      "to": -0.18
+    },
+    {
+      "name": "Garden gable chimney breast",
+      "parent": "Irby/Ashley",
+      "index": null,
+      "from": 0,
+      "to": -0.18
+    },
+    {
+      "name": "Garden gable chimney breast",
+      "parent": "Irby/Ashley",
+      "index": null,
+      "from": 0,
+      "to": -0.18
+    },
+    {
+      "name": "Conservatory low brick wall",
+      "parent": "Irby/Ashley",
+      "index": null,
+      "from": 2.384185793236071e-8,
+      "to": -0.18
+    },
+    {
+      "name": "Conservatory low brick wall",
+      "parent": "Irby/Ashley",
+      "index": null,
+      "from": 2.384185793236071e-8,
+      "to": -0.18
+    },
+    {
+      "name": "Conservatory low brick wall",
+      "parent": "Irby/Ashley",
+      "index": null,
+      "from": 2.384185793236071e-8,
+      "to": -0.18
+    },
+    {
+      "name": "Irby/Ashley sashes, masonry bands and rainwater goods",
+      "parent": "Irby/Ashley",
+      "index": 18,
+      "from": 0,
+      "to": -0.18
+    },
+    {
+      "name": "Irby/Ashley sashes, masonry bands and rainwater goods",
+      "parent": "Irby/Ashley",
+      "index": 50,
+      "from": 0,
+      "to": -0.18
+    },
+    {
+      "name": "Irby/Ashley sashes, masonry bands and rainwater goods",
+      "parent": "Irby/Ashley",
+      "index": 64,
+      "from": 0,
+      "to": -0.18
+    },
+    {
+      "name": "Irby/Ashley sashes, masonry bands and rainwater goods",
+      "parent": "Irby/Ashley",
+      "index": 36,
+      "from": -0.02499997615814209,
+      "to": -0.18
+    },
+    {
+      "name": "Irby/Ashley sashes, masonry bands and rainwater goods",
+      "parent": "Irby/Ashley",
+      "index": 37,
+      "from": -0.02499997615814209,
+      "to": -0.18
+    },
+    {
+      "name": "Irby/Ashley sashes, masonry bands and rainwater goods",
+      "parent": "Irby/Ashley",
+      "index": 102,
+      "from": -0.02499997615814209,
+      "to": -0.18
+    },
+    {
+      "name": "Irby/Ashley sashes, masonry bands and rainwater goods",
+      "parent": "Irby/Ashley",
+      "index": 103,
+      "from": -0.02499997615814209,
+      "to": -0.18
+    },
+    {
+      "name": "Irby/Ashley sashes, masonry bands and rainwater goods",
+      "parent": "Irby/Ashley",
+      "index": 132,
+      "from": -0.02499997615814209,
+      "to": -0.18
+    },
+    {
+      "name": "Irby/Ashley sashes, masonry bands and rainwater goods",
+      "parent": "Irby/Ashley",
+      "index": 133,
+      "from": -0.02499997615814209,
+      "to": -0.18
+    },
+    {
+      "name": "Irby/Ashley sashes, masonry bands and rainwater goods",
+      "parent": "Irby/Ashley",
+      "index": 0,
+      "from": 0,
+      "to": -0.18
+    },
+    {
+      "name": "Irby/Ashley sashes, masonry bands and rainwater goods",
+      "parent": "Irby/Ashley",
+      "index": 1,
+      "from": 0,
+      "to": -0.18
+    },
+    {
+      "name": "Irby/Ashley sashes, masonry bands and rainwater goods",
+      "parent": "Irby/Ashley",
+      "index": 2,
+      "from": 0,
+      "to": -0.18
+    },
+    {
+      "name": "Weathered brick foundation",
+      "parent": "Grafton/Edge",
+      "index": null,
+      "from": -1.1879073808331638e-15,
+      "to": -0.18
+    },
+    {
+      "name": "Grafton veranda paving",
+      "parent": "Grafton/Edge",
+      "index": null,
+      "from": 1.7881393449270533e-9,
+      "to": -0.18
+    },
+    {
+      "name": "Grafton/Edge sashes, masonry bands and rainwater goods",
+      "parent": "Grafton/Edge",
+      "index": 2,
+      "from": 0,
+      "to": -0.18
+    },
+    {
+      "name": "Grafton/Edge sashes, masonry bands and rainwater goods",
+      "parent": "Grafton/Edge",
+      "index": 74,
+      "from": 0,
+      "to": -0.18
+    },
+    {
+      "name": "Grafton/Edge sashes, masonry bands and rainwater goods",
+      "parent": "Grafton/Edge",
+      "index": 80,
+      "from": 0,
+      "to": -0.18
+    },
+    {
+      "name": "Grafton/Edge sashes, masonry bands and rainwater goods",
+      "parent": "Grafton/Edge",
+      "index": 96,
+      "from": 0,
+      "to": -0.18
+    },
+    {
+      "name": "Grafton/Edge sashes, masonry bands and rainwater goods",
+      "parent": "Grafton/Edge",
+      "index": 104,
+      "from": 0,
+      "to": -0.18
+    },
+    {
+      "name": "Grafton/Edge sashes, masonry bands and rainwater goods",
+      "parent": "Grafton/Edge",
+      "index": 4,
+      "from": -0.02499997615814209,
+      "to": -0.18
+    },
+    {
+      "name": "Grafton/Edge sashes, masonry bands and rainwater goods",
+      "parent": "Grafton/Edge",
+      "index": 5,
+      "from": -0.02499997615814209,
+      "to": -0.18
+    },
+    {
+      "name": "Grafton/Edge sashes, masonry bands and rainwater goods",
+      "parent": "Grafton/Edge",
+      "index": 150,
+      "from": -0.02499997615814209,
+      "to": -0.18
+    },
+    {
+      "name": "Grafton/Edge sashes, masonry bands and rainwater goods",
+      "parent": "Grafton/Edge",
+      "index": 151,
+      "from": -0.02499997615814209,
+      "to": -0.18
+    },
+    {
+      "name": "Grafton/Edge sashes, masonry bands and rainwater goods",
+      "parent": "Grafton/Edge",
+      "index": 164,
+      "from": -0.02499997615814209,
+      "to": -0.18
+    },
+    {
+      "name": "Grafton/Edge sashes, masonry bands and rainwater goods",
+      "parent": "Grafton/Edge",
+      "index": 165,
+      "from": -0.02499997615814209,
+      "to": -0.18
+    },
+    {
+      "name": "Grafton/Edge sashes, masonry bands and rainwater goods",
+      "parent": "Grafton/Edge",
+      "index": 198,
+      "from": -0.02499997615814209,
+      "to": -0.18
+    },
+    {
+      "name": "Grafton/Edge sashes, masonry bands and rainwater goods",
+      "parent": "Grafton/Edge",
+      "index": 199,
+      "from": -0.02499997615814209,
+      "to": -0.18
+    },
+    {
+      "name": "Grafton/Edge sashes, masonry bands and rainwater goods",
+      "parent": "Grafton/Edge",
+      "index": 216,
+      "from": -0.02499997615814209,
+      "to": -0.18
+    },
+    {
+      "name": "Grafton/Edge sashes, masonry bands and rainwater goods",
+      "parent": "Grafton/Edge",
+      "index": 217,
+      "from": -0.02499997615814209,
+      "to": -0.18
+    },
+    {
+      "name": "Grafton/Edge sashes, masonry bands and rainwater goods",
+      "parent": "Grafton/Edge",
+      "index": 0,
+      "from": 0,
+      "to": -0.18
+    },
+    {
+      "name": "Grafton/Edge sashes, masonry bands and rainwater goods",
+      "parent": "Grafton/Edge",
+      "index": 1,
+      "from": 0,
+      "to": -0.18
+    },
+    {
+      "name": "Grafton/Edge sashes, masonry bands and rainwater goods",
+      "parent": "Grafton/Edge",
+      "index": 2,
+      "from": 0,
+      "to": -0.18
+    },
+    {
+      "name": "Grafton/Edge sashes, masonry bands and rainwater goods",
+      "parent": "Grafton/Edge",
+      "index": 3,
+      "from": 0,
+      "to": -0.18
+    },
+    {
+      "name": "Grafton/Edge sashes, masonry bands and rainwater goods",
+      "parent": "Grafton/Edge",
+      "index": 4,
+      "from": 0,
+      "to": -0.18
+    },
+    {
+      "name": "Grafton/Edge sashes, masonry bands and rainwater goods",
+      "parent": "Grafton/Edge",
+      "index": 1,
+      "from": 0,
+      "to": -0.18
+    },
+    {
+      "name": "Grafton/Edge sashes, masonry bands and rainwater goods",
+      "parent": "Grafton/Edge",
+      "index": 2,
+      "from": 0,
+      "to": -0.18
+    },
+    {
+      "name": "Grafton/Edge sashes, masonry bands and rainwater goods",
+      "parent": "Grafton/Edge",
+      "index": 3,
+      "from": 0,
+      "to": -0.18
+    },
+    {
+      "name": "Grafton/Edge sashes, masonry bands and rainwater goods",
+      "parent": "Grafton/Edge",
+      "index": 4,
+      "from": 0,
+      "to": -0.18
+    },
+    {
+      "name": "Grafton/Edge sashes, masonry bands and rainwater goods",
+      "parent": "Grafton/Edge",
+      "index": 5,
+      "from": 0,
+      "to": -0.18
+    },
+    {
+      "name": "Grafton/Edge sashes, masonry bands and rainwater goods",
+      "parent": "Grafton/Edge",
+      "index": 6,
+      "from": 0,
+      "to": -0.18
+    },
+    {
+      "name": "Grafton/Edge sashes, masonry bands and rainwater goods",
+      "parent": "Grafton/Edge",
+      "index": 7,
+      "from": 0,
+      "to": -0.18
+    },
+    {
+      "name": "Grafton/Edge sashes, masonry bands and rainwater goods",
+      "parent": "Grafton/Edge",
+      "index": 8,
+      "from": 0,
+      "to": -0.18
+    },
+    {
+      "name": "Grafton/Edge sashes, masonry bands and rainwater goods",
+      "parent": "Grafton/Edge",
+      "index": 9,
+      "from": 0,
+      "to": -0.18
+    },
+    {
+      "name": "Grafton/Edge sashes, masonry bands and rainwater goods",
+      "parent": "Grafton/Edge",
+      "index": 10,
+      "from": 0,
+      "to": -0.18
+    },
+    {
+      "name": "Grafton/Edge sashes, masonry bands and rainwater goods",
+      "parent": "Grafton/Edge",
+      "index": 11,
+      "from": 0,
+      "to": -0.18
+    },
+    {
+      "name": "Hale ward brick foundation",
+      "parent": "Hale/Daresbury/Huxley/Dunham",
+      "index": null,
+      "from": -1.824723691237892e-15,
+      "to": -0.18
+    },
+    {
+      "name": "Hale inside corner 2 canted bay",
+      "parent": "Hale/Daresbury/Huxley/Dunham",
+      "index": null,
+      "from": 1.3287418549072418e-15,
+      "to": -0.18
+    },
+    {
+      "name": "Hale inside corner 5 canted bay",
+      "parent": "Hale/Daresbury/Huxley/Dunham",
+      "index": null,
+      "from": 4.22503157524438e-16,
+      "to": -0.18
+    },
+    {
+      "name": "Hale inside corner 6 canted bay",
+      "parent": "Hale/Daresbury/Huxley/Dunham",
+      "index": null,
+      "from": 1.475699477217462e-16,
+      "to": -0.18
+    },
+    {
+      "name": "Hale inside corner 9 canted bay",
+      "parent": "Hale/Daresbury/Huxley/Dunham",
+      "index": null,
+      "from": -7.592809691934653e-16,
+      "to": -0.18
+    },
+    {
+      "name": "Hale inside corner 10 canted bay",
+      "parent": "Hale/Daresbury/Huxley/Dunham",
+      "index": null,
+      "from": -1.2362810089343833e-15,
+      "to": -0.18
+    },
+    {
+      "name": "Hale inside corner 15 canted bay",
+      "parent": "Hale/Daresbury/Huxley/Dunham",
+      "index": null,
+      "from": -1.2362810089343833e-15,
+      "to": -0.18
+    },
+    {
+      "name": "Hale inside corner 16 canted bay",
+      "parent": "Hale/Daresbury/Huxley/Dunham",
+      "index": null,
+      "from": 9.735941750133145e-16,
+      "to": -0.18
+    },
+    {
+      "name": "Hale ward sashes, masonry bands and rainwater goods",
+      "parent": "Hale/Daresbury/Huxley/Dunham",
+      "index": 6,
+      "from": 0,
+      "to": -0.18
+    },
+    {
+      "name": "Hale ward sashes, masonry bands and rainwater goods",
+      "parent": "Hale/Daresbury/Huxley/Dunham",
+      "index": 36,
+      "from": 0,
+      "to": -0.18
+    },
+    {
+      "name": "Hale ward sashes, masonry bands and rainwater goods",
+      "parent": "Hale/Daresbury/Huxley/Dunham",
+      "index": 118,
+      "from": 0,
+      "to": -0.18
+    },
+    {
+      "name": "Hale ward sashes, masonry bands and rainwater goods",
+      "parent": "Hale/Daresbury/Huxley/Dunham",
+      "index": 126,
+      "from": 0,
+      "to": -0.18
+    },
+    {
+      "name": "Hale ward sashes, masonry bands and rainwater goods",
+      "parent": "Hale/Daresbury/Huxley/Dunham",
+      "index": 134,
+      "from": 0,
+      "to": -0.18
+    },
+    {
+      "name": "Hale ward sashes, masonry bands and rainwater goods",
+      "parent": "Hale/Daresbury/Huxley/Dunham",
+      "index": 142,
+      "from": 0,
+      "to": -0.18
+    },
+    {
+      "name": "Hale ward sashes, masonry bands and rainwater goods",
+      "parent": "Hale/Daresbury/Huxley/Dunham",
+      "index": 150,
+      "from": 0,
+      "to": -0.18
+    },
+    {
+      "name": "Hale ward sashes, masonry bands and rainwater goods",
+      "parent": "Hale/Daresbury/Huxley/Dunham",
+      "index": 158,
+      "from": 0,
+      "to": -0.18
+    },
+    {
+      "name": "Hale ward sashes, masonry bands and rainwater goods",
+      "parent": "Hale/Daresbury/Huxley/Dunham",
+      "index": 166,
+      "from": 0,
+      "to": -0.18
+    },
+    {
+      "name": "Hale ward sashes, masonry bands and rainwater goods",
+      "parent": "Hale/Daresbury/Huxley/Dunham",
+      "index": 12,
+      "from": -0.02499997615814209,
+      "to": -0.18
+    },
+    {
+      "name": "Hale ward sashes, masonry bands and rainwater goods",
+      "parent": "Hale/Daresbury/Huxley/Dunham",
+      "index": 13,
+      "from": -0.02499997615814209,
+      "to": -0.18
+    },
+    {
+      "name": "Hale ward sashes, masonry bands and rainwater goods",
+      "parent": "Hale/Daresbury/Huxley/Dunham",
+      "index": 74,
+      "from": -0.02499997615814209,
+      "to": -0.18
+    },
+    {
+      "name": "Hale ward sashes, masonry bands and rainwater goods",
+      "parent": "Hale/Daresbury/Huxley/Dunham",
+      "index": 75,
+      "from": -0.02499997615814209,
+      "to": -0.18
+    },
+    {
+      "name": "Hale ward sashes, masonry bands and rainwater goods",
+      "parent": "Hale/Daresbury/Huxley/Dunham",
+      "index": 243,
+      "from": -0.02499997615814209,
+      "to": -0.18
+    },
+    {
+      "name": "Hale ward sashes, masonry bands and rainwater goods",
+      "parent": "Hale/Daresbury/Huxley/Dunham",
+      "index": 244,
+      "from": -0.02499997615814209,
+      "to": -0.18
+    },
+    {
+      "name": "Hale ward sashes, masonry bands and rainwater goods",
+      "parent": "Hale/Daresbury/Huxley/Dunham",
+      "index": 265,
+      "from": -0.02499997615814209,
+      "to": -0.18
+    },
+    {
+      "name": "Hale ward sashes, masonry bands and rainwater goods",
+      "parent": "Hale/Daresbury/Huxley/Dunham",
+      "index": 266,
+      "from": -0.02499997615814209,
+      "to": -0.18
+    },
+    {
+      "name": "Hale ward sashes, masonry bands and rainwater goods",
+      "parent": "Hale/Daresbury/Huxley/Dunham",
+      "index": 287,
+      "from": -0.02499997615814209,
+      "to": -0.18
+    },
+    {
+      "name": "Hale ward sashes, masonry bands and rainwater goods",
+      "parent": "Hale/Daresbury/Huxley/Dunham",
+      "index": 288,
+      "from": -0.02499997615814209,
+      "to": -0.18
+    },
+    {
+      "name": "Hale ward sashes, masonry bands and rainwater goods",
+      "parent": "Hale/Daresbury/Huxley/Dunham",
+      "index": 309,
+      "from": -0.02499997615814209,
+      "to": -0.18
+    },
+    {
+      "name": "Hale ward sashes, masonry bands and rainwater goods",
+      "parent": "Hale/Daresbury/Huxley/Dunham",
+      "index": 310,
+      "from": -0.02499997615814209,
+      "to": -0.18
+    },
+    {
+      "name": "Hale ward sashes, masonry bands and rainwater goods",
+      "parent": "Hale/Daresbury/Huxley/Dunham",
+      "index": 331,
+      "from": -0.02499997615814209,
+      "to": -0.18
+    },
+    {
+      "name": "Hale ward sashes, masonry bands and rainwater goods",
+      "parent": "Hale/Daresbury/Huxley/Dunham",
+      "index": 332,
+      "from": -0.02499997615814209,
+      "to": -0.18
+    },
+    {
+      "name": "Hale ward sashes, masonry bands and rainwater goods",
+      "parent": "Hale/Daresbury/Huxley/Dunham",
+      "index": 353,
+      "from": -0.02499997615814209,
+      "to": -0.18
+    },
+    {
+      "name": "Hale ward sashes, masonry bands and rainwater goods",
+      "parent": "Hale/Daresbury/Huxley/Dunham",
+      "index": 354,
+      "from": -0.02499997615814209,
+      "to": -0.18
+    },
+    {
+      "name": "Hale ward sashes, masonry bands and rainwater goods",
+      "parent": "Hale/Daresbury/Huxley/Dunham",
+      "index": 375,
+      "from": -0.02499997615814209,
+      "to": -0.18
+    },
+    {
+      "name": "Hale ward sashes, masonry bands and rainwater goods",
+      "parent": "Hale/Daresbury/Huxley/Dunham",
+      "index": 376,
+      "from": -0.02499997615814209,
+      "to": -0.18
+    },
+    {
+      "name": "Hale ward sashes, masonry bands and rainwater goods",
+      "parent": "Hale/Daresbury/Huxley/Dunham",
+      "index": 0,
+      "from": 0,
+      "to": -0.18
+    },
+    {
+      "name": "Hale ward sashes, masonry bands and rainwater goods",
+      "parent": "Hale/Daresbury/Huxley/Dunham",
+      "index": 1,
+      "from": 0,
+      "to": -0.18
+    },
+    {
+      "name": "Hale ward sashes, masonry bands and rainwater goods",
+      "parent": "Hale/Daresbury/Huxley/Dunham",
+      "index": 2,
+      "from": 0,
+      "to": -0.18
+    },
+    {
+      "name": "Hale ward sashes, masonry bands and rainwater goods",
+      "parent": "Hale/Daresbury/Huxley/Dunham",
+      "index": 3,
+      "from": 0,
+      "to": -0.18
+    },
+    {
+      "name": "Hale ward sashes, masonry bands and rainwater goods",
+      "parent": "Hale/Daresbury/Huxley/Dunham",
+      "index": 4,
+      "from": 0,
+      "to": -0.18
+    },
+    {
+      "name": "Hale ward sashes, masonry bands and rainwater goods",
+      "parent": "Hale/Daresbury/Huxley/Dunham",
+      "index": 5,
+      "from": 0,
+      "to": -0.18
+    },
+    {
+      "name": "Hale ward sashes, masonry bands and rainwater goods",
+      "parent": "Hale/Daresbury/Huxley/Dunham",
+      "index": 6,
+      "from": 0,
+      "to": -0.18
+    },
+    {
+      "name": "Hale ward sashes, masonry bands and rainwater goods",
+      "parent": "Hale/Daresbury/Huxley/Dunham",
+      "index": 7,
+      "from": 0,
+      "to": -0.18
+    },
+    {
+      "name": "Hale ward sashes, masonry bands and rainwater goods",
+      "parent": "Hale/Daresbury/Huxley/Dunham",
+      "index": 8,
+      "from": 0,
+      "to": -0.18
+    },
+    {
+      "name": "Rear two-storey offices dark brick plinth",
+      "parent": "Estates department",
+      "index": null,
+      "from": -8.069289547566838e-16,
+      "to": -0.18
+    },
+    {
+      "name": "Right upper gabled return dark brick plinth",
+      "parent": "Estates department",
+      "index": null,
+      "from": -8.069289547566838e-16,
+      "to": -0.18
+    },
+    {
+      "name": "Right low entrance room dark brick plinth",
+      "parent": "Estates department",
+      "index": null,
+      "from": -8.069289547566838e-16,
+      "to": -0.18
+    },
+    {
+      "name": "Left gabled workshop dark brick plinth",
+      "parent": "Estates department",
+      "index": null,
+      "from": 4.027483110214384e-16,
+      "to": -0.18
+    },
+    {
+      "name": "Left entrance stores and screen wall dark brick plinth",
+      "parent": "Estates department",
+      "index": null,
+      "from": 9.373003220009051e-17,
+      "to": -0.18
+    },
+    {
+      "name": "Brick entrance pier",
+      "parent": "Estates department",
+      "index": null,
+      "from": 9.189306258295724e-17,
+      "to": -0.18
+    },
+    {
+      "name": "Brick entrance pier",
+      "parent": "Estates department",
+      "index": null,
+      "from": -4.3009908429761856e-16,
+      "to": -0.18
+    },
+    {
+      "name": "Estates glazing, blue doors, brick bands and rainwater goods",
+      "parent": "Estates department",
+      "index": 6,
+      "from": 0,
+      "to": -0.18
+    },
+    {
+      "name": "Estates glazing, blue doors, brick bands and rainwater goods",
+      "parent": "Estates department",
+      "index": 8,
+      "from": 0,
+      "to": -0.18
+    },
+    {
+      "name": "Estates glazing, blue doors, brick bands and rainwater goods",
+      "parent": "Estates department",
+      "index": 0,
+      "from": 0.009999990463256836,
+      "to": -0.18
+    },
+    {
+      "name": "Estates glazing, blue doors, brick bands and rainwater goods",
+      "parent": "Estates department",
+      "index": 1,
+      "from": 0,
+      "to": -0.18
+    },
+    {
+      "name": "Estates glazing, blue doors, brick bands and rainwater goods",
+      "parent": "Estates department",
+      "index": 2,
+      "from": 0,
+      "to": -0.18
+    },
+    {
+      "name": "Estates glazing, blue doors, brick bands and rainwater goods",
+      "parent": "Estates department",
+      "index": 5,
+      "from": 0.009999990463256836,
+      "to": -0.18
+    },
+    {
+      "name": "Estates glazing, blue doors, brick bands and rainwater goods",
+      "parent": "Estates department",
+      "index": 6,
+      "from": 0,
+      "to": -0.18
+    },
+    {
+      "name": "Estates glazing, blue doors, brick bands and rainwater goods",
+      "parent": "Estates department",
+      "index": 7,
+      "from": 0,
+      "to": -0.18
+    },
+    {
+      "name": "Estates glazing, blue doors, brick bands and rainwater goods",
+      "parent": "Estates department",
+      "index": 10,
+      "from": 0,
+      "to": -0.18
+    },
+    {
+      "name": "Estates glazing, blue doors, brick bands and rainwater goods",
+      "parent": "Estates department",
+      "index": 11,
+      "from": 0,
+      "to": -0.18
+    },
+    {
+      "name": "Estates glazing, blue doors, brick bands and rainwater goods",
+      "parent": "Estates department",
+      "index": 34,
+      "from": 0,
+      "to": -0.18
+    },
+    {
+      "name": "Estates glazing, blue doors, brick bands and rainwater goods",
+      "parent": "Estates department",
+      "index": 37,
+      "from": 0,
+      "to": -0.18
+    },
+    {
+      "name": "Single-storey ward walls plinth",
+      "parent": "Farndon ward",
+      "index": null,
+      "from": -1.1940305820088652e-15,
+      "to": -0.18
+    },
+    {
+      "name": "Small rear room plinth",
+      "parent": "Farndon ward",
+      "index": null,
+      "from": -1.2552630172823522e-15,
+      "to": -0.18
+    },
+    {
+      "name": "Narrow rear link plinth",
+      "parent": "Farndon ward",
+      "index": null,
+      "from": -7.837739856545074e-16,
+      "to": -0.18
+    },
+    {
+      "name": "Low west side room plinth",
+      "parent": "Farndon ward",
+      "index": null,
+      "from": -4.347496128153999e-16,
+      "to": -0.18
+    },
+    {
+      "name": "Projecting central garden bay plinth",
+      "parent": "Farndon ward",
+      "index": null,
+      "from": 6.123234262925839e-18,
+      "to": -0.18
+    },
+    {
+      "name": "Farndon sashes, doors, masonry and rainwater goods",
+      "parent": "Farndon ward",
+      "index": 1,
+      "from": 0,
+      "to": -0.18
+    },
+    {
+      "name": "Farndon sashes, doors, masonry and rainwater goods",
+      "parent": "Farndon ward",
+      "index": 3,
+      "from": 0,
+      "to": -0.18
+    },
+    {
+      "name": "Farndon sashes, doors, masonry and rainwater goods",
+      "parent": "Farndon ward",
+      "index": 5,
+      "from": 0,
+      "to": -0.18
+    },
+    {
+      "name": "Farndon sashes, doors, masonry and rainwater goods",
+      "parent": "Farndon ward",
+      "index": 9,
+      "from": 0,
+      "to": -0.18
+    },
+    {
+      "name": "Farndon sashes, doors, masonry and rainwater goods",
+      "parent": "Farndon ward",
+      "index": 11,
+      "from": 0,
+      "to": -0.18
+    },
+    {
+      "name": "Farndon sashes, doors, masonry and rainwater goods",
+      "parent": "Farndon ward",
+      "index": 13,
+      "from": 0,
+      "to": -0.18
+    },
+    {
+      "name": "Farndon sashes, doors, masonry and rainwater goods",
+      "parent": "Farndon ward",
+      "index": 17,
+      "from": 0,
+      "to": -0.18
+    },
+    {
+      "name": "Farndon sashes, doors, masonry and rainwater goods",
+      "parent": "Farndon ward",
+      "index": 22,
+      "from": 0,
+      "to": -0.18
+    },
+    {
+      "name": "Farndon sashes, doors, masonry and rainwater goods",
+      "parent": "Farndon ward",
+      "index": 24,
+      "from": 0,
+      "to": -0.18
+    },
+    {
+      "name": "Farndon sashes, doors, masonry and rainwater goods",
+      "parent": "Farndon ward",
+      "index": 27,
+      "from": 0,
+      "to": -0.18
+    },
+    {
+      "name": "Farndon sashes, doors, masonry and rainwater goods",
+      "parent": "Farndon ward",
+      "index": 32,
+      "from": 0,
+      "to": -0.18
+    },
+    {
+      "name": "Farndon sashes, doors, masonry and rainwater goods",
+      "parent": "Farndon ward",
+      "index": 36,
+      "from": 0,
+      "to": -0.18
+    },
+    {
+      "name": "Farndon sashes, doors, masonry and rainwater goods",
+      "parent": "Farndon ward",
+      "index": 39,
+      "from": 0,
+      "to": -0.18
+    },
+    {
+      "name": "Farndon sashes, doors, masonry and rainwater goods",
+      "parent": "Farndon ward",
+      "index": 44,
+      "from": 0,
+      "to": -0.18
+    },
+    {
+      "name": "Farndon sashes, doors, masonry and rainwater goods",
+      "parent": "Farndon ward",
+      "index": 48,
+      "from": 0,
+      "to": -0.18
+    },
+    {
+      "name": "Farndon sashes, doors, masonry and rainwater goods",
+      "parent": "Farndon ward",
+      "index": 49,
+      "from": 0,
+      "to": -0.18
+    },
+    {
+      "name": "Farndon sashes, doors, masonry and rainwater goods",
+      "parent": "Farndon ward",
+      "index": 19,
+      "from": 0,
+      "to": -0.18
+    },
+    {
+      "name": "Farndon sashes, doors, masonry and rainwater goods",
+      "parent": "Farndon ward",
+      "index": 40,
+      "from": 0,
+      "to": -0.18
+    },
+    {
+      "name": "Farndon sashes, doors, masonry and rainwater goods",
+      "parent": "Farndon ward",
+      "index": 45,
+      "from": 0,
+      "to": -0.18
+    },
+    {
+      "name": "Farndon sashes, doors, masonry and rainwater goods",
+      "parent": "Farndon ward",
+      "index": 19,
+      "from": -0.02499997615814209,
+      "to": -0.18
+    },
+    {
+      "name": "Farndon sashes, doors, masonry and rainwater goods",
+      "parent": "Farndon ward",
+      "index": 20,
+      "from": -0.02499997615814209,
+      "to": -0.18
+    },
+    {
+      "name": "Farndon sashes, doors, masonry and rainwater goods",
+      "parent": "Farndon ward",
+      "index": 43,
+      "from": -0.02499997615814209,
+      "to": -0.18
+    },
+    {
+      "name": "Farndon sashes, doors, masonry and rainwater goods",
+      "parent": "Farndon ward",
+      "index": 44,
+      "from": -0.02499997615814209,
+      "to": -0.18
+    },
+    {
+      "name": "Farndon sashes, doors, masonry and rainwater goods",
+      "parent": "Farndon ward",
+      "index": 51,
+      "from": -0.02499997615814209,
+      "to": -0.18
+    },
+    {
+      "name": "Farndon sashes, doors, masonry and rainwater goods",
+      "parent": "Farndon ward",
+      "index": 52,
+      "from": -0.02499997615814209,
+      "to": -0.18
+    },
+    {
+      "name": "Farndon sashes, doors, masonry and rainwater goods",
+      "parent": "Farndon ward",
+      "index": 0,
+      "from": 0,
+      "to": -0.18
+    },
+    {
+      "name": "Farndon sashes, doors, masonry and rainwater goods",
+      "parent": "Farndon ward",
+      "index": 1,
+      "from": 0,
+      "to": -0.18
+    },
+    {
+      "name": "Farndon sashes, doors, masonry and rainwater goods",
+      "parent": "Farndon ward",
+      "index": 2,
+      "from": 0,
+      "to": -0.18
+    },
+    {
+      "name": "Single-storey ward walls plinth",
+      "parent": "Witby Ward",
+      "index": null,
+      "from": -1.1940305820088652e-15,
+      "to": -0.18
+    },
+    {
+      "name": "Small rear room plinth",
+      "parent": "Witby Ward",
+      "index": null,
+      "from": -1.2552630172823522e-15,
+      "to": -0.18
+    },
+    {
+      "name": "Narrow rear link plinth",
+      "parent": "Witby Ward",
+      "index": null,
+      "from": -7.837739856545074e-16,
+      "to": -0.18
+    },
+    {
+      "name": "Low west side room plinth",
+      "parent": "Witby Ward",
+      "index": null,
+      "from": -4.347496128153999e-16,
+      "to": -0.18
+    },
+    {
+      "name": "Projecting central garden bay plinth",
+      "parent": "Witby Ward",
+      "index": null,
+      "from": 6.123234262925839e-18,
+      "to": -0.18
+    },
+    {
+      "name": "Witby sashes, doors, masonry and rainwater goods",
+      "parent": "Witby Ward",
+      "index": 1,
+      "from": 0,
+      "to": -0.18
+    },
+    {
+      "name": "Witby sashes, doors, masonry and rainwater goods",
+      "parent": "Witby Ward",
+      "index": 3,
+      "from": 0,
+      "to": -0.18
+    },
+    {
+      "name": "Witby sashes, doors, masonry and rainwater goods",
+      "parent": "Witby Ward",
+      "index": 5,
+      "from": 0,
+      "to": -0.18
+    },
+    {
+      "name": "Witby sashes, doors, masonry and rainwater goods",
+      "parent": "Witby Ward",
+      "index": 9,
+      "from": 0,
+      "to": -0.18
+    },
+    {
+      "name": "Witby sashes, doors, masonry and rainwater goods",
+      "parent": "Witby Ward",
+      "index": 11,
+      "from": 0,
+      "to": -0.18
+    },
+    {
+      "name": "Witby sashes, doors, masonry and rainwater goods",
+      "parent": "Witby Ward",
+      "index": 13,
+      "from": 0,
+      "to": -0.18
+    },
+    {
+      "name": "Witby sashes, doors, masonry and rainwater goods",
+      "parent": "Witby Ward",
+      "index": 17,
+      "from": 0,
+      "to": -0.18
+    },
+    {
+      "name": "Witby sashes, doors, masonry and rainwater goods",
+      "parent": "Witby Ward",
+      "index": 22,
+      "from": 0,
+      "to": -0.18
+    },
+    {
+      "name": "Witby sashes, doors, masonry and rainwater goods",
+      "parent": "Witby Ward",
+      "index": 24,
+      "from": 0,
+      "to": -0.18
+    },
+    {
+      "name": "Witby sashes, doors, masonry and rainwater goods",
+      "parent": "Witby Ward",
+      "index": 27,
+      "from": 0,
+      "to": -0.18
+    },
+    {
+      "name": "Witby sashes, doors, masonry and rainwater goods",
+      "parent": "Witby Ward",
+      "index": 32,
+      "from": 0,
+      "to": -0.18
+    },
+    {
+      "name": "Witby sashes, doors, masonry and rainwater goods",
+      "parent": "Witby Ward",
+      "index": 36,
+      "from": 0,
+      "to": -0.18
+    },
+    {
+      "name": "Witby sashes, doors, masonry and rainwater goods",
+      "parent": "Witby Ward",
+      "index": 39,
+      "from": 0,
+      "to": -0.18
+    },
+    {
+      "name": "Witby sashes, doors, masonry and rainwater goods",
+      "parent": "Witby Ward",
+      "index": 44,
+      "from": 0,
+      "to": -0.18
+    },
+    {
+      "name": "Witby sashes, doors, masonry and rainwater goods",
+      "parent": "Witby Ward",
+      "index": 48,
+      "from": 0,
+      "to": -0.18
+    },
+    {
+      "name": "Witby sashes, doors, masonry and rainwater goods",
+      "parent": "Witby Ward",
+      "index": 49,
+      "from": 0,
+      "to": -0.18
+    },
+    {
+      "name": "Witby sashes, doors, masonry and rainwater goods",
+      "parent": "Witby Ward",
+      "index": 19,
+      "from": 0,
+      "to": -0.18
+    },
+    {
+      "name": "Witby sashes, doors, masonry and rainwater goods",
+      "parent": "Witby Ward",
+      "index": 40,
+      "from": 0,
+      "to": -0.18
+    },
+    {
+      "name": "Witby sashes, doors, masonry and rainwater goods",
+      "parent": "Witby Ward",
+      "index": 45,
+      "from": 0,
+      "to": -0.18
+    },
+    {
+      "name": "Witby sashes, doors, masonry and rainwater goods",
+      "parent": "Witby Ward",
+      "index": 19,
+      "from": -0.02499997615814209,
+      "to": -0.18
+    },
+    {
+      "name": "Witby sashes, doors, masonry and rainwater goods",
+      "parent": "Witby Ward",
+      "index": 20,
+      "from": -0.02499997615814209,
+      "to": -0.18
+    },
+    {
+      "name": "Witby sashes, doors, masonry and rainwater goods",
+      "parent": "Witby Ward",
+      "index": 43,
+      "from": -0.02499997615814209,
+      "to": -0.18
+    },
+    {
+      "name": "Witby sashes, doors, masonry and rainwater goods",
+      "parent": "Witby Ward",
+      "index": 44,
+      "from": -0.02499997615814209,
+      "to": -0.18
+    },
+    {
+      "name": "Witby sashes, doors, masonry and rainwater goods",
+      "parent": "Witby Ward",
+      "index": 51,
+      "from": -0.02499997615814209,
+      "to": -0.18
+    },
+    {
+      "name": "Witby sashes, doors, masonry and rainwater goods",
+      "parent": "Witby Ward",
+      "index": 52,
+      "from": -0.02499997615814209,
+      "to": -0.18
+    },
+    {
+      "name": "Witby sashes, doors, masonry and rainwater goods",
+      "parent": "Witby Ward",
+      "index": 0,
+      "from": 0,
+      "to": -0.18
+    },
+    {
+      "name": "Witby sashes, doors, masonry and rainwater goods",
+      "parent": "Witby Ward",
+      "index": 1,
+      "from": 0,
+      "to": -0.18
+    },
+    {
+      "name": "Witby sashes, doors, masonry and rainwater goods",
+      "parent": "Witby Ward",
+      "index": 2,
+      "from": 0,
+      "to": -0.18
+    },
+    {
+      "name": "Central administration range walls",
+      "parent": "Main/admin building",
+      "index": null,
+      "from": -1.9073486345888568e-7,
+      "to": -0.18
+    },
+    {
+      "name": "Central administration range plinth",
+      "parent": "Main/admin building",
+      "index": null,
+      "from": -2.980232227667301e-9,
+      "to": -0.18
+    },
+    {
+      "name": "West projecting pavilion walls",
+      "parent": "Main/admin building",
+      "index": null,
+      "from": -1.9073486345888568e-7,
+      "to": -0.18
+    },
+    {
+      "name": "West projecting pavilion plinth",
+      "parent": "Main/admin building",
+      "index": null,
+      "from": -2.980232227667301e-9,
+      "to": -0.18
+    },
+    {
+      "name": "East projecting pavilion walls",
+      "parent": "Main/admin building",
+      "index": null,
+      "from": -1.9073486345888568e-7,
+      "to": -0.18
+    },
+    {
+      "name": "East projecting pavilion plinth",
+      "parent": "Main/admin building",
+      "index": null,
+      "from": -2.980232227667301e-9,
+      "to": -0.18
+    },
+    {
+      "name": "Low west side rooms walls",
+      "parent": "Main/admin building",
+      "index": null,
+      "from": 0,
+      "to": -0.18
+    },
+    {
+      "name": "Low west side rooms plinth",
+      "parent": "Main/admin building",
+      "index": null,
+      "from": -2.980232227667301e-9,
+      "to": -0.18
+    },
+    {
+      "name": "East stepped rear link walls",
+      "parent": "Main/admin building",
+      "index": null,
+      "from": 9.536743172944284e-8,
+      "to": -0.18
+    },
+    {
+      "name": "East stepped rear link plinth",
+      "parent": "Main/admin building",
+      "index": null,
+      "from": -2.980232227667301e-9,
+      "to": -0.18
+    },
+    {
+      "name": "East recessed rear link walls",
+      "parent": "Main/admin building",
+      "index": null,
+      "from": -9.536743172944284e-8,
+      "to": -0.18
+    },
+    {
+      "name": "East recessed rear link plinth",
+      "parent": "Main/admin building",
+      "index": null,
+      "from": -2.980232227667301e-9,
+      "to": -0.18
+    },
+    {
+      "name": "East upper return walls",
+      "parent": "Main/admin building",
+      "index": null,
+      "from": 0,
+      "to": -0.18
+    },
+    {
+      "name": "East upper return plinth",
+      "parent": "Main/admin building",
+      "index": null,
+      "from": -2.980232227667301e-9,
+      "to": -0.18
+    },
+    {
+      "name": "Rear projecting window range walls",
+      "parent": "Main/admin building",
+      "index": null,
+      "from": -1.9073486345888568e-7,
+      "to": -0.18
+    },
+    {
+      "name": "Rear projecting window range plinth",
+      "parent": "Main/admin building",
+      "index": null,
+      "from": -2.980232227667301e-9,
+      "to": -0.18
+    },
+    {
+      "name": "Rear canted stair bay walls",
+      "parent": "Main/admin building",
+      "index": null,
+      "from": -1.8369701465288538e-16,
+      "to": -0.18
+    },
+    {
+      "name": "Rear canted stair bay canted course",
+      "parent": "Main/admin building",
+      "index": null,
+      "from": -1.873709538871519e-16,
+      "to": -0.18
+    },
+    {
+      "name": "Rear flat court block walls",
+      "parent": "Main/admin building",
+      "index": null,
+      "from": -4.7683715642676816e-8,
+      "to": -0.18
+    },
+    {
+      "name": "Rear flat court block plinth",
+      "parent": "Main/admin building",
+      "index": null,
+      "from": -2.980232227667301e-9,
+      "to": -0.18
+    },
+    {
+      "name": "East rear shoulder walls",
+      "parent": "Main/admin building",
+      "index": null,
+      "from": 0,
+      "to": -0.18
+    },
+    {
+      "name": "East rear shoulder plinth",
+      "parent": "Main/admin building",
+      "index": null,
+      "from": -2.980232227667301e-9,
+      "to": -0.18
+    },
+    {
+      "name": "Chamfered two-storey bay walls",
+      "parent": "Main/admin building",
+      "index": null,
+      "from": -1.2246468525851679e-16,
+      "to": -0.18
+    },
+    {
+      "name": "Chamfered two-storey bay walls",
+      "parent": "Main/admin building",
+      "index": null,
+      "from": -1.2246468525851679e-16,
+      "to": -0.18
+    },
+    {
+      "name": "East elevation chimney breast",
+      "parent": "Main/admin building",
+      "index": null,
+      "from": 0,
+      "to": -0.18
+    },
+    {
+      "name": "East elevation chimney breast",
+      "parent": "Main/admin building",
+      "index": null,
+      "from": 0,
+      "to": -0.18
+    },
+    {
+      "name": "Recessed main entrance",
+      "parent": "Main/admin building",
+      "index": null,
+      "from": -9.536743172944284e-8,
+      "to": -0.18
+    },
+    {
+      "name": "Portico column pedestal",
+      "parent": "Main/admin building",
+      "index": null,
+      "from": 2.384185793236071e-8,
+      "to": -0.18
+    },
+    {
+      "name": "Portico column pedestal",
+      "parent": "Main/admin building",
+      "index": null,
+      "from": 2.384185793236071e-8,
+      "to": -0.18
+    },
+    {
+      "name": "Portico column pedestal",
+      "parent": "Main/admin building",
+      "index": null,
+      "from": 2.384185793236071e-8,
+      "to": -0.18
+    },
+    {
+      "name": "Portico column pedestal",
+      "parent": "Main/admin building",
+      "index": null,
+      "from": 2.384185793236071e-8,
+      "to": -0.18
+    },
+    {
+      "name": "Entrance step",
+      "parent": "Main/admin building",
+      "index": null,
+      "from": 1.7881393449270533e-9,
+      "to": -0.18
+    },
+    {
+      "name": "Entrance step",
+      "parent": "Main/admin building",
+      "index": null,
+      "from": -1.788139358804841e-9,
+      "to": -0.18
+    },
+    {
+      "name": "Entrance step",
+      "parent": "Main/admin building",
+      "index": null,
+      "from": 9.536743172944284e-9,
+      "to": -0.18
+    },
+    {
+      "name": "Admin sash and masonry details",
+      "parent": "Main/admin building",
+      "index": 81,
+      "from": 0,
+      "to": -0.18
+    },
+    {
+      "name": "Admin sash and masonry details",
+      "parent": "Main/admin building",
+      "index": 82,
+      "from": 0,
+      "to": -0.18
+    },
+    {
+      "name": "Admin sash and masonry details",
+      "parent": "Main/admin building",
+      "index": 96,
+      "from": 0,
+      "to": -0.18
+    },
+    {
+      "name": "Admin sash and masonry details",
+      "parent": "Main/admin building",
+      "index": 103,
+      "from": 0,
+      "to": -0.18
+    },
+    {
+      "name": "Admin sash and masonry details",
+      "parent": "Main/admin building",
+      "index": 104,
+      "from": 0,
+      "to": -0.18
+    },
+    {
+      "name": "Admin sash and masonry details",
+      "parent": "Main/admin building",
+      "index": 105,
+      "from": 0,
+      "to": -0.18
+    },
+    {
+      "name": "Admin sash and masonry details",
+      "parent": "Main/admin building",
+      "index": 106,
+      "from": 0,
+      "to": -0.18
+    },
+    {
+      "name": "Admin sash and masonry details",
+      "parent": "Main/admin building",
+      "index": 658,
+      "from": 0,
+      "to": -0.18
+    },
+    {
+      "name": "Redesmere concealed connector walls",
+      "parent": "1829 to Main/admin connecting corridor",
+      "index": null,
+      "from": 4.768371586472142e-8,
+      "to": -0.18
+    },
+    {
+      "name": "Redesmere connector building walls",
+      "parent": "1829 to Main/admin connecting corridor",
+      "index": null,
+      "from": -9.536743172944284e-8,
+      "to": -0.18
+    },
+    {
+      "name": "Corridor brick plinth",
+      "parent": "Corridor north windows",
+      "index": null,
+      "from": -7.152557379708213e-9,
+      "to": -0.18
+    },
+    {
+      "name": "Corridor brick plinth",
+      "parent": "Corridor south windows",
+      "index": null,
+      "from": -7.152557379708213e-9,
+      "to": -0.18
+    },
+    {
+      "name": "Connecting corridor walls",
+      "parent": "1829 to Main/admin connecting corridor",
+      "index": null,
+      "from": 4.768371586472142e-8,
+      "to": -0.18
+    },
+    {
+      "name": "Corridor brick plinth",
+      "parent": "Corridor north windows",
+      "index": null,
+      "from": -7.152557379708213e-9,
+      "to": -0.18
+    },
+    {
+      "name": "Corridor brick plinth",
+      "parent": "Corridor south windows",
+      "index": null,
+      "from": -7.152557379708213e-9,
+      "to": -0.18
+    },
+    {
+      "name": "Straight corridor to Farndon walls",
+      "parent": "Straight corridor to Farndon",
+      "index": null,
+      "from": 4.768371586472142e-8,
+      "to": -0.18
+    },
+    {
+      "name": "Corridor brick plinth",
+      "parent": "Corridor north windows",
+      "index": null,
+      "from": -7.152557379708213e-9,
+      "to": -0.18
+    },
+    {
+      "name": "Corridor brick plinth",
+      "parent": "Corridor south windows",
+      "index": null,
+      "from": -7.152557379708213e-9,
+      "to": -0.18
+    },
+    {
+      "name": "Corridor brick plinth",
+      "parent": "Corridor north windows",
+      "index": null,
+      "from": -7.152557379708213e-9,
+      "to": -0.18
+    },
+    {
+      "name": "Corridor brick plinth",
+      "parent": "Corridor south windows",
+      "index": null,
+      "from": -7.152557379708213e-9,
+      "to": -0.18
+    },
+    {
+      "name": "Diagonal ward corridor walls",
+      "parent": "Diagonal ward corridor",
+      "index": null,
+      "from": 4.768371586472142e-8,
+      "to": -0.18
+    },
+    {
+      "name": "Corridor brick plinth",
+      "parent": "Corridor north windows",
+      "index": null,
+      "from": -7.152557379708213e-9,
+      "to": -0.18
+    },
+    {
+      "name": "Corridor brick plinth",
+      "parent": "Corridor south windows",
+      "index": null,
+      "from": -7.152557379708213e-9,
+      "to": -0.18
+    },
+    {
+      "name": "Upton Frith Oscroft corridor walls",
+      "parent": "Upton Frith Oscroft corridor",
+      "index": null,
+      "from": 4.768371586472142e-8,
+      "to": -0.18
+    },
+    {
+      "name": "Corridor brick plinth",
+      "parent": "Corridor north windows",
+      "index": null,
+      "from": -7.152557379708213e-9,
+      "to": -0.18
+    },
+    {
+      "name": "Corridor brick plinth",
+      "parent": "Corridor south windows",
+      "index": null,
+      "from": -7.152557379708213e-9,
+      "to": -0.18
+    },
+    {
+      "name": "Grafton corridor walls",
+      "parent": "Grafton corridor",
+      "index": null,
+      "from": 4.768371586472142e-8,
+      "to": -0.18
+    },
+    {
+      "name": "Corridor brick plinth",
+      "parent": "Corridor north windows",
+      "index": null,
+      "from": -7.152557379708213e-9,
+      "to": -0.18
+    },
+    {
+      "name": "Corridor brick plinth",
+      "parent": "Corridor south windows",
+      "index": null,
+      "from": -7.152557379708213e-9,
+      "to": -0.18
+    },
+    {
+      "name": "Witby corridor walls",
+      "parent": "Witby corridor",
+      "index": null,
+      "from": 4.768371586472142e-8,
+      "to": -0.18
+    },
+    {
+      "name": "Corridor brick plinth",
+      "parent": "Corridor north windows",
+      "index": null,
+      "from": -7.152557379708213e-9,
+      "to": -0.18
+    },
+    {
+      "name": "Corridor brick plinth",
+      "parent": "Corridor south windows",
+      "index": null,
+      "from": -7.152557379708213e-9,
+      "to": -0.18
+    },
+    {
+      "name": "Ward corridor elbow walls",
+      "parent": "Grafton Witby and Upton connecting corridors",
+      "index": null,
+      "from": -1.6532731848155276e-16,
+      "to": -0.18
+    },
+    {
+      "name": "Hale tower-side corridor walls",
+      "parent": "Hale tower-side corridor",
+      "index": null,
+      "from": 4.768371586472142e-8,
+      "to": -0.18
+    },
+    {
+      "name": "Corridor brick plinth",
+      "parent": "Corridor north windows",
+      "index": null,
+      "from": -7.152557379708213e-9,
+      "to": -0.18
+    },
+    {
+      "name": "Corridor brick plinth",
+      "parent": "Corridor south windows",
+      "index": null,
+      "from": -7.152557379708213e-9,
+      "to": -0.18
+    },
+    {
+      "name": "Hale middle-wing corridor walls",
+      "parent": "Hale middle-wing corridor",
+      "index": null,
+      "from": 4.768371586472142e-8,
+      "to": -0.18
+    },
+    {
+      "name": "Corridor brick plinth",
+      "parent": "Corridor north windows",
+      "index": null,
+      "from": -7.152557379708213e-9,
+      "to": -0.18
+    },
+    {
+      "name": "Corridor brick plinth",
+      "parent": "Corridor south windows",
+      "index": null,
+      "from": -7.152557379708213e-9,
+      "to": -0.18
+    },
+    {
+      "name": "Water tower to Irby corridor walls",
+      "parent": "Water tower to Irby corridor",
+      "index": null,
+      "from": 4.768371586472142e-8,
+      "to": -0.18
+    },
+    {
+      "name": "Corridor brick plinth",
+      "parent": "Corridor north windows",
+      "index": null,
+      "from": -7.152557379708213e-9,
+      "to": -0.18
+    },
+    {
+      "name": "Corridor brick plinth",
+      "parent": "Corridor south windows",
+      "index": null,
+      "from": -7.152557379708213e-9,
+      "to": -0.18
+    },
+    {
+      "name": "Irby corridor door reveal",
+      "parent": "Irby corridor end doorway",
+      "index": null,
+      "from": 5.245208734017126e-8,
+      "to": -0.18
+    },
+    {
+      "name": "Irby corridor door jamb",
+      "parent": "Irby corridor end doorway",
+      "index": null,
+      "from": 5.245208734017126e-8,
+      "to": -0.18
+    },
+    {
+      "name": "Irby corridor door jamb",
+      "parent": "Irby corridor end doorway",
+      "index": null,
+      "from": 5.245208734017126e-8,
+      "to": -0.18
+    },
+    {
+      "name": "Main kitchen plinth",
+      "parent": "Main kitchen",
+      "index": null,
+      "from": 1.1920928966180355e-9,
+      "to": -0.18
+    },
+    {
+      "name": "Main/admin front corridor walls",
+      "parent": "Main/admin front corridor",
+      "index": null,
+      "from": 4.768371586472142e-8,
+      "to": -0.18
+    },
+    {
+      "name": "Corridor brick plinth",
+      "parent": "Corridor north windows",
+      "index": null,
+      "from": -7.152557379708213e-9,
+      "to": -0.18
+    },
+    {
+      "name": "Corridor door reveal",
+      "parent": "Main/admin corridor front doorway",
+      "index": null,
+      "from": -9.536743172944284e-9,
+      "to": -0.18
+    },
+    {
+      "name": "Corridor door jamb",
+      "parent": "Main/admin corridor front doorway",
+      "index": null,
+      "from": -9.536743172944284e-9,
+      "to": -0.18
+    },
+    {
+      "name": "Corridor door jamb",
+      "parent": "Main/admin corridor front doorway",
+      "index": null,
+      "from": -9.536743172944284e-9,
+      "to": -0.18
+    },
+    {
+      "name": "Corridor pavilion side connection walls",
+      "parent": "Main/admin corridor front doorway",
+      "index": null,
+      "from": 1.8028363912847567e-8,
+      "to": -0.18
+    },
+    {
+      "name": "Laundry white rendered walls",
+      "parent": "Laundry and brick connecting corridor",
+      "index": null,
+      "from": 4.7683715642676816e-8,
+      "to": -0.18
+    },
+    {
+      "name": "Laundry weathered base",
+      "parent": "Laundry and brick connecting corridor",
+      "index": null,
+      "from": -5.960464483090178e-9,
+      "to": -0.18
+    },
+    {
+      "name": "Laundry connecting corridor brick walls",
+      "parent": "Laundry and brick connecting corridor",
+      "index": null,
+      "from": 0,
+      "to": -0.18
+    },
+    {
+      "name": "Laundry glazing and trim",
+      "parent": "Laundry and brick connecting corridor",
+      "index": 18,
+      "from": 0,
+      "to": -0.18
+    },
+    {
+      "name": "Laundry glazing and trim",
+      "parent": "Laundry and brick connecting corridor",
+      "index": 19,
+      "from": 0,
+      "to": -0.18
+    },
+    {
+      "name": "Laundry glazing and trim",
+      "parent": "Laundry and brick connecting corridor",
+      "index": 38,
+      "from": 0,
+      "to": -0.18
+    },
+    {
+      "name": "Laundry glazing and trim",
+      "parent": "Laundry and brick connecting corridor",
+      "index": 40,
+      "from": 0,
+      "to": -0.18
+    },
+    {
+      "name": "Laundry glazing and trim",
+      "parent": "Laundry and brick connecting corridor",
+      "index": 60,
+      "from": 0,
+      "to": -0.18
+    },
+    {
+      "name": "Laundry glazing and trim",
+      "parent": "Laundry and brick connecting corridor",
+      "index": 61,
+      "from": 0,
+      "to": -0.18
+    },
+    {
+      "name": "Laundry glazing and trim",
+      "parent": "Laundry and brick connecting corridor",
+      "index": 80,
+      "from": 0,
+      "to": -0.18
+    },
+    {
+      "name": "Laundry glazing and trim",
+      "parent": "Laundry and brick connecting corridor",
+      "index": 81,
+      "from": 0,
+      "to": -0.18
+    },
+    {
+      "name": "Laundry glazing and trim",
+      "parent": "Laundry and brick connecting corridor",
+      "index": 100,
+      "from": 0,
+      "to": -0.18
+    },
+    {
+      "name": "Laundry glazing and trim",
+      "parent": "Laundry and brick connecting corridor",
+      "index": 102,
+      "from": 0,
+      "to": -0.18
+    },
+    {
+      "name": "Laundry glazing and trim",
+      "parent": "Laundry and brick connecting corridor",
+      "index": 122,
+      "from": 0,
+      "to": -0.18
+    },
+    {
+      "name": "Laundry glazing and trim",
+      "parent": "Laundry and brick connecting corridor",
+      "index": 123,
+      "from": 0,
+      "to": -0.18
+    },
+    {
+      "name": "Laundry glazing and trim",
+      "parent": "Laundry and brick connecting corridor",
+      "index": 142,
+      "from": 0,
+      "to": -0.18
+    },
+    {
+      "name": "Laundry glazing and trim",
+      "parent": "Laundry and brick connecting corridor",
+      "index": 143,
+      "from": 0,
+      "to": -0.18
+    },
+    {
+      "name": "Laundry glazing and trim",
+      "parent": "Laundry and brick connecting corridor",
+      "index": 144,
+      "from": 0,
+      "to": -0.18
+    },
+    {
+      "name": "Laundry glazing and trim",
+      "parent": "Laundry and brick connecting corridor",
+      "index": 145,
+      "from": 0,
+      "to": -0.18
+    },
+    {
+      "name": "Laundry glazing and trim",
+      "parent": "Laundry and brick connecting corridor",
+      "index": 9,
+      "from": 0,
+      "to": -0.18
+    },
+    {
+      "name": "Western garages and offices walls",
+      "parent": "Garage row",
+      "index": null,
+      "from": -4.4087284046088083e-16,
+      "to": -0.18
+    },
+    {
+      "name": "Western garages and offices plinth",
+      "parent": "Garage row",
+      "index": null,
+      "from": -4.4240364075480616e-16,
+      "to": -0.18
+    },
+    {
+      "name": "Tall workshop bay walls",
+      "parent": "Garage row",
+      "index": null,
+      "from": -5.02105196325029e-16,
+      "to": -0.18
+    },
+    {
+      "name": "Tall workshop bay plinth",
+      "parent": "Garage row",
+      "index": null,
+      "from": -5.036359966189544e-16,
+      "to": -0.18
+    },
+    {
+      "name": "Long eastern garage range walls",
+      "parent": "Garage row",
+      "index": null,
+      "from": -4.4087284046088083e-16,
+      "to": -0.18
+    },
+    {
+      "name": "Long eastern garage range plinth",
+      "parent": "Garage row",
+      "index": null,
+      "from": -4.4240364075480616e-16,
+      "to": -0.18
+    },
+    {
+      "name": "Garage row doors, glazing and trim",
+      "parent": "Garage row",
+      "index": 38,
+      "from": 0,
+      "to": -0.18
+    },
+    {
+      "name": "Garage row doors, glazing and trim",
+      "parent": "Garage row",
+      "index": 41,
+      "from": 0,
+      "to": -0.18
+    },
+    {
+      "name": "Garage row doors, glazing and trim",
+      "parent": "Garage row",
+      "index": 44,
+      "from": 0,
+      "to": -0.18
+    },
+    {
+      "name": "Garage row doors, glazing and trim",
+      "parent": "Garage row",
+      "index": 47,
+      "from": 0,
+      "to": -0.18
+    },
+    {
+      "name": "Garage row doors, glazing and trim",
+      "parent": "Garage row",
+      "index": 50,
+      "from": 0,
+      "to": -0.18
+    },
+    {
+      "name": "Garage row doors, glazing and trim",
+      "parent": "Garage row",
+      "index": 53,
+      "from": 0,
+      "to": -0.18
+    },
+    {
+      "name": "Garage row doors, glazing and trim",
+      "parent": "Garage row",
+      "index": 56,
+      "from": 0,
+      "to": -0.18
+    },
+    {
+      "name": "Mortuary dark brick plinth",
+      "parent": "T-shaped mortuary",
+      "index": null,
+      "from": -3.6739402930577075e-16,
+      "to": -0.18
+    },
+    {
+      "name": "T-shaped mortuary doors, glazing and trim",
+      "parent": "T-shaped mortuary",
+      "index": 6,
+      "from": 0,
+      "to": -0.18
+    },
+    {
+      "name": "T-shaped mortuary doors, glazing and trim",
+      "parent": "T-shaped mortuary",
+      "index": 10,
+      "from": 0,
+      "to": -0.18
+    },
+    {
+      "name": "Low greenhouse brick foundation",
+      "parent": "Greenhouse 1",
+      "index": null,
+      "from": 0,
+      "to": -0.18
+    },
+    {
+      "name": "Low greenhouse brick foundation",
+      "parent": "Greenhouse 2",
+      "index": null,
+      "from": 0,
+      "to": -0.18
+    },
+    {
+      "name": "Low greenhouse brick foundation",
+      "parent": "Greenhouse 3",
+      "index": null,
+      "from": 0,
+      "to": -0.18
+    },
+    {
+      "name": "Gardeners workshop brick walls",
+      "parent": "Gardeners workshop",
+      "index": null,
+      "from": 4.7683716530855236e-8,
+      "to": -0.18
+    },
+    {
+      "name": "Gardeners workshop dark brick base",
+      "parent": "Gardeners workshop",
+      "index": null,
+      "from": 3.5762786065873797e-9,
+      "to": -0.18
+    },
+    {
+      "name": "Gardeners workshop frames and details",
+      "parent": "Gardeners workshop",
+      "index": 9,
+      "from": 0,
+      "to": -0.18
+    },
+    {
+      "name": "Gardeners workshop frames and details",
+      "parent": "Gardeners workshop",
+      "index": 10,
+      "from": 0,
+      "to": -0.18
+    },
+    {
+      "name": "Garden stores brick walls",
+      "parent": "Garden stores",
+      "index": null,
+      "from": -4.7683716530855236e-8,
+      "to": -0.18
+    },
+    {
+      "name": "Garden stores dark brick base",
+      "parent": "Garden stores",
+      "index": null,
+      "from": 3.5762786065873797e-9,
+      "to": -0.18
+    },
+    {
+      "name": "Garden stores frames and details",
+      "parent": "Garden stores",
+      "index": 8,
+      "from": 0,
+      "to": -0.18
+    },
+    {
+      "name": "Garden stores frames and details",
+      "parent": "Garden stores",
+      "index": 9,
+      "from": 0,
+      "to": -0.18
+    },
+    {
+      "name": "Outhouse brick walls",
+      "parent": "Outhouse in front of 1829",
+      "index": null,
+      "from": 0,
+      "to": -0.18
+    },
+    {
+      "name": "Outhouse facade details",
+      "parent": "Outhouse in front of 1829",
+      "index": 2,
+      "from": 0.019999980926513672,
+      "to": -0.18
+    },
+    {
+      "name": "Outhouse facade details",
+      "parent": "Outhouse in front of 1829",
+      "index": 3,
+      "from": 0.019999980926513672,
+      "to": -0.18
+    },
+    {
+      "name": "Outhouse facade details",
+      "parent": "Outhouse in front of 1829",
+      "index": 0,
+      "from": -0.004999995231628418,
+      "to": -0.18
+    },
+    {
+      "name": "Outhouse facade details",
+      "parent": "Outhouse in front of 1829",
+      "index": 0,
+      "from": 0.010279737412929535,
+      "to": -0.18
+    },
+    {
+      "name": "Outhouse facade details",
+      "parent": "Outhouse in front of 1829",
+      "index": 1,
+      "from": -0.002031676471233368,
+      "to": -0.18
+    },
+    {
+      "name": "Outhouse facade details",
+      "parent": "Outhouse in front of 1829",
+      "index": 4,
+      "from": 0.0044300854206085205,
+      "to": -0.18
+    },
+    {
+      "name": "Outhouse facade details",
+      "parent": "Outhouse in front of 1829",
+      "index": 10,
+      "from": 0.019760675728321075,
+      "to": -0.18
+    },
+    {
+      "name": "Outhouse facade details",
+      "parent": "Outhouse in front of 1829",
+      "index": 13,
+      "from": -0.0037704408168792725,
+      "to": -0.18
+    },
+    {
+      "name": "Outhouse facade details",
+      "parent": "Outhouse in front of 1829",
+      "index": 14,
+      "from": -0.0025731995701789856,
+      "to": -0.18
+    },
+    {
+      "name": "Outhouse facade details",
+      "parent": "Outhouse in front of 1829",
+      "index": 16,
+      "from": 0.003924109041690826,
+      "to": -0.18
+    },
+    {
+      "name": "Outhouse facade details",
+      "parent": "Outhouse in front of 1829",
+      "index": 17,
+      "from": 0.0123128741979599,
+      "to": -0.18
+    },
+    {
+      "name": "Outhouse facade details",
+      "parent": "Outhouse in front of 1829",
+      "index": 19,
+      "from": 0.009838193655014038,
+      "to": -0.18
+    },
+    {
+      "name": "Outhouse facade details",
+      "parent": "Outhouse in front of 1829",
+      "index": 21,
+      "from": 0.022030018270015717,
+      "to": -0.18
+    },
+    {
+      "name": "Outhouse facade details",
+      "parent": "Outhouse in front of 1829",
+      "index": 26,
+      "from": 0.0027507171034812927,
+      "to": -0.18
+    },
+    {
+      "name": "Outhouse facade details",
+      "parent": "Outhouse in front of 1829",
+      "index": 27,
+      "from": 0.004932954907417297,
+      "to": -0.18
+    },
+    {
+      "name": "Outhouse facade details",
+      "parent": "Outhouse in front of 1829",
+      "index": 29,
+      "from": 0.003793977200984955,
+      "to": -0.18
+    },
+    {
+      "name": "Outhouse facade details",
+      "parent": "Outhouse in front of 1829",
+      "index": 30,
+      "from": 0.011094138026237488,
+      "to": -0.18
+    },
+    {
+      "name": "Outhouse facade details",
+      "parent": "Outhouse in front of 1829",
+      "index": 31,
+      "from": -0.0015965104103088379,
+      "to": -0.18
+    },
+    {
+      "name": "Outhouse facade details",
+      "parent": "Outhouse in front of 1829",
+      "index": 34,
+      "from": 0.0042043402791023254,
+      "to": -0.18
+    },
+    {
+      "name": "Outhouse facade details",
+      "parent": "Outhouse in front of 1829",
+      "index": 39,
+      "from": 0.010444685816764832,
+      "to": -0.18
+    },
+    {
+      "name": "Willows rear brick wall",
+      "parent": "The Willows",
+      "index": null,
+      "from": 4.7683716530855236e-8,
+      "to": -0.18
+    },
+    {
+      "name": "Willows end brick wall",
+      "parent": "The Willows",
+      "index": null,
+      "from": 4.7683716530855236e-8,
+      "to": -0.18
+    },
+    {
+      "name": "Willows end brick wall",
+      "parent": "The Willows",
+      "index": null,
+      "from": 4.7683716530855236e-8,
+      "to": -0.18
+    },
+    {
+      "name": "Willows front brick pier 0",
+      "parent": "The Willows",
+      "index": null,
+      "from": 4.7683716530855236e-8,
+      "to": -0.18
+    },
+    {
+      "name": "Willows faded jamb 0",
+      "parent": "The Willows",
+      "index": null,
+      "from": 2.3841858265427618e-8,
+      "to": -0.18
+    },
+    {
+      "name": "Willows faded jamb 0",
+      "parent": "The Willows",
+      "index": null,
+      "from": 2.3841858265427618e-8,
+      "to": -0.18
+    },
+    {
+      "name": "Willows front brick pier 1",
+      "parent": "The Willows",
+      "index": null,
+      "from": 4.7683716530855236e-8,
+      "to": -0.18
+    },
+    {
+      "name": "Willows faded jamb 1",
+      "parent": "The Willows",
+      "index": null,
+      "from": -4.7683716530855236e-8,
+      "to": -0.18
+    },
+    {
+      "name": "Willows faded jamb 1",
+      "parent": "The Willows",
+      "index": null,
+      "from": -4.7683716530855236e-8,
+      "to": -0.18
+    },
+    {
+      "name": "Willows front brick pier 2",
+      "parent": "The Willows",
+      "index": null,
+      "from": 4.7683716530855236e-8,
+      "to": -0.18
+    },
+    {
+      "name": "Willows faded jamb 2",
+      "parent": "The Willows",
+      "index": null,
+      "from": 2.3841858265427618e-8,
+      "to": -0.18
+    },
+    {
+      "name": "Willows faded jamb 2",
+      "parent": "The Willows",
+      "index": null,
+      "from": 2.3841858265427618e-8,
+      "to": -0.18
+    },
+    {
+      "name": "Willows front end pier",
+      "parent": "The Willows",
+      "index": null,
+      "from": 4.7683716530855236e-8,
+      "to": -0.18
+    },
+    {
+      "name": "Willows interior rear lining",
+      "parent": "The Willows",
+      "index": null,
+      "from": 0.010000042617321014,
+      "to": -0.18
+    },
+    {
+      "name": "Willows interior end lining",
+      "parent": "The Willows",
+      "index": null,
+      "from": 0.010000042617321014,
+      "to": -0.18
+    },
+    {
+      "name": "Willows interior end lining",
+      "parent": "The Willows",
+      "index": null,
+      "from": 0.010000042617321014,
+      "to": -0.18
+    },
+    {
+      "name": "",
+      "parent": "Old Chapel · brick Gothic chapel",
+      "index": null,
+      "from": 1.1920928966180355e-8,
+      "to": -0.18
+    },
+    {
+      "name": "",
+      "parent": "Old Chapel · brick Gothic chapel",
+      "index": null,
+      "from": -1.1920928910669204e-8,
+      "to": -0.18
+    },
+    {
+      "name": "",
+      "parent": "Old Chapel · brick Gothic chapel",
+      "index": null,
+      "from": -1.1920928910669204e-8,
+      "to": -0.18
+    },
+    {
+      "name": "",
+      "parent": "Old Chapel · brick Gothic chapel",
+      "index": null,
+      "from": -1.1920928910669204e-8,
+      "to": -0.18
+    },
+    {
+      "name": "",
+      "parent": "Old Chapel · brick Gothic chapel",
+      "index": null,
+      "from": -1.1920928910669204e-8,
+      "to": -0.18
+    },
+    {
+      "name": "",
+      "parent": "Old Chapel · brick Gothic chapel",
+      "index": null,
+      "from": -1.1920928910669204e-8,
+      "to": -0.18
+    },
+    {
+      "name": "",
+      "parent": "Old Chapel · brick Gothic chapel",
+      "index": null,
+      "from": -1.1920928910669204e-8,
+      "to": -0.18
+    },
+    {
+      "name": "",
+      "parent": "Old Chapel · brick Gothic chapel",
+      "index": null,
+      "from": -1.1920928910669204e-8,
+      "to": -0.18
+    },
+    {
+      "name": "",
+      "parent": "Old Chapel · brick Gothic chapel",
+      "index": null,
+      "from": -1.1920928910669204e-8,
+      "to": -0.18
+    },
+    {
+      "name": "",
+      "parent": "Old Chapel · brick Gothic chapel",
+      "index": null,
+      "from": -1.1920928910669204e-8,
+      "to": -0.18
+    },
+    {
+      "name": "",
+      "parent": "Old Chapel · brick Gothic chapel",
+      "index": null,
+      "from": -1.1920928910669204e-8,
+      "to": -0.18
+    },
+    {
+      "name": "",
+      "parent": "Old Chapel · brick Gothic chapel",
+      "index": null,
+      "from": -1.1920928910669204e-8,
+      "to": -0.18
+    },
+    {
+      "name": "",
+      "parent": "Old Chapel · brick Gothic chapel",
+      "index": null,
+      "from": -1.1920928910669204e-8,
+      "to": -0.18
+    },
+    {
+      "name": "Church front dark stone plinth",
+      "parent": "Church photographed clock front",
+      "index": null,
+      "from": 0.004999986886978169,
+      "to": -0.18
+    },
+    {
+      "name": "Church front corner stone foot",
+      "parent": "Church photographed clock front",
+      "index": null,
+      "from": -1.4305114759416426e-8,
+      "to": -0.18
+    },
+    {
+      "name": "Church front corner stone foot",
+      "parent": "Church photographed clock front",
+      "index": null,
+      "from": -1.4305114759416426e-8,
+      "to": -0.18
+    },
+    {
+      "name": "",
+      "parent": "",
+      "index": null,
+      "from": 9.536743172944284e-8,
+      "to": -0.18
+    },
+    {
+      "name": "",
+      "parent": "",
+      "index": null,
+      "from": -5.960464483090178e-9,
+      "to": -0.18
+    },
+    {
+      "name": "",
+      "parent": "Old Chapel · brick Gothic chapel",
+      "index": null,
+      "from": 0,
+      "to": -0.18
+    },
+    {
+      "name": "Chimney brick foundation",
+      "parent": "Freestanding brick chimney",
+      "index": null,
+      "from": -5.960464455334602e-9,
+      "to": -0.18
+    },
+    {
+      "name": "Square brick shaft",
+      "parent": "Water tower · rear-right clearing",
+      "index": null,
+      "from": 3.8146972514141453e-7,
+      "to": -0.18
+    },
+    {
+      "name": "West front connecting ward brick walls",
+      "parent": "Larkton/Jodrell",
+      "index": null,
+      "from": 1.7166137711299712e-7,
+      "to": -0.18
+    },
+    {
+      "name": "West end ward brick walls",
+      "parent": "Larkton/Jodrell",
+      "index": null,
+      "from": 1.7166137711299712e-7,
+      "to": -0.18
+    },
+    {
+      "name": "West rear pavilion brick walls",
+      "parent": "Larkton/Jodrell",
+      "index": null,
+      "from": 1.7166137711299712e-7,
+      "to": -0.18
+    },
+    {
+      "name": "West end projecting rooms brick walls",
+      "parent": "Larkton/Jodrell",
+      "index": null,
+      "from": 1.7166137711299712e-7,
+      "to": -0.18
+    },
+    {
+      "name": "West end middle rooms brick walls",
+      "parent": "Larkton/Jodrell",
+      "index": null,
+      "from": 1.7166137711299712e-7,
+      "to": -0.18
+    },
+    {
+      "name": "Annexe facade details",
+      "parent": "Larkton/Jodrell",
+      "index": 0,
+      "from": 0,
+      "to": -0.18
+    },
+    {
+      "name": "Annexe facade details",
+      "parent": "Larkton/Jodrell",
+      "index": 3,
+      "from": 0,
+      "to": -0.18
+    },
+    {
+      "name": "Annexe facade details",
+      "parent": "Larkton/Jodrell",
+      "index": 6,
+      "from": 0,
+      "to": -0.18
+    },
+    {
+      "name": "Annexe facade details",
+      "parent": "Larkton/Jodrell",
+      "index": 9,
+      "from": 0,
+      "to": -0.18
+    },
+    {
+      "name": "Annexe facade details",
+      "parent": "Larkton/Jodrell",
+      "index": 12,
+      "from": 0,
+      "to": -0.18
+    },
+    {
+      "name": "Blue gutters and downpipes",
+      "parent": "Larkton/Jodrell",
+      "index": 20,
+      "from": 0,
+      "to": -0.18
+    },
+    {
+      "name": "Blue gutters and downpipes",
+      "parent": "Larkton/Jodrell",
+      "index": 21,
+      "from": 0,
+      "to": -0.18
+    },
+    {
+      "name": "Blue gutters and downpipes",
+      "parent": "Larkton/Jodrell",
+      "index": 22,
+      "from": 0,
+      "to": -0.18
+    },
+    {
+      "name": "Blue gutters and downpipes",
+      "parent": "Larkton/Jodrell",
+      "index": 23,
+      "from": 0,
+      "to": -0.18
+    },
+    {
+      "name": "Blue gutters and downpipes",
+      "parent": "Larkton/Jodrell",
+      "index": 24,
+      "from": 0,
+      "to": -0.18
+    },
+    {
+      "name": "Blue gutters and downpipes",
+      "parent": "Larkton/Jodrell",
+      "index": 25,
+      "from": 0,
+      "to": -0.18
+    },
+    {
+      "name": "Outer frontage brick walls",
+      "parent": "West outer front elevation",
+      "index": null,
+      "from": 1.7166137711299712e-7,
+      "to": -0.18
+    },
+    {
+      "name": "Outer projecting gable brick walls",
+      "parent": "West outer front elevation",
+      "index": null,
+      "from": 1.7166137711299712e-7,
+      "to": -0.18
+    },
+    {
+      "name": "Outer projecting gable brick walls",
+      "parent": "West outer front elevation",
+      "index": null,
+      "from": 1.7166137711299712e-7,
+      "to": -0.18
+    },
+    {
+      "name": "Outer low entrance room brick walls",
+      "parent": "West outer front elevation",
+      "index": null,
+      "from": 4.2915344167226976e-8,
+      "to": -0.18
+    },
+    {
+      "name": "Outer tall chimney stack",
+      "parent": "West outer front elevation",
+      "index": null,
+      "from": -8.583068744627553e-8,
+      "to": -0.18
+    },
+    {
+      "name": "Outer frontage window and brick details",
+      "parent": "West outer front elevation",
+      "index": 45,
+      "from": 0,
+      "to": -0.18
+    },
+    {
+      "name": "Outer frontage window and brick details",
+      "parent": "West outer front elevation",
+      "index": 46,
+      "from": 0,
+      "to": -0.18
+    },
+    {
+      "name": "Outer frontage window and brick details",
+      "parent": "West outer front elevation",
+      "index": 1,
+      "from": 0,
+      "to": -0.18
+    },
+    {
+      "name": "Outer frontage window and brick details",
+      "parent": "West outer front elevation",
+      "index": 2,
+      "from": 0,
+      "to": -0.18
+    },
+    {
+      "name": "Outer frontage window and brick details",
+      "parent": "West outer front elevation",
+      "index": 6,
+      "from": 0,
+      "to": -0.18
+    },
+    {
+      "name": "Outer frontage window and brick details",
+      "parent": "West outer front elevation",
+      "index": 7,
+      "from": 0,
+      "to": -0.18
+    },
+    {
+      "name": "Outer frontage window and brick details",
+      "parent": "West outer front elevation",
+      "index": 28,
+      "from": 0,
+      "to": -0.18
+    },
+    {
+      "name": "West court outer link brick walls",
+      "parent": "Larkton recessed ward entrance",
+      "index": null,
+      "from": 1.7166137711299712e-7,
+      "to": -0.18
+    },
+    {
+      "name": "Recess projecting two-storey cheek",
+      "parent": "Larkton recessed ward entrance",
+      "index": null,
+      "from": 1.7166137711299712e-7,
+      "to": -0.18
+    },
+    {
+      "name": "Recess low entrance room brick walls",
+      "parent": "Larkton recessed ward entrance",
+      "index": null,
+      "from": 4.2915344167226976e-8,
+      "to": -0.18
+    },
+    {
+      "name": "Recess shadowed entrance door",
+      "parent": "Larkton recessed ward entrance",
+      "index": null,
+      "from": -2.1457672083613488e-8,
+      "to": -0.18
+    },
+    {
+      "name": "Recess arch pier",
+      "parent": "Larkton recessed ward entrance",
+      "index": null,
+      "from": -1.716613762248187e-8,
+      "to": -0.18
+    },
+    {
+      "name": "Recess arch pier",
+      "parent": "Larkton recessed ward entrance",
+      "index": null,
+      "from": -1.716613762248187e-8,
+      "to": -0.18
+    },
+    {
+      "name": "Recess pale room door",
+      "parent": "Larkton recessed ward entrance",
+      "index": null,
+      "from": 2.1457671861568883e-8,
+      "to": -0.18
+    },
+    {
+      "name": "Recess entrance landing",
+      "parent": "Larkton recessed ward entrance",
+      "index": null,
+      "from": -3.2186508180931384e-9,
+      "to": -0.18
+    },
+    {
+      "name": "Recess entrance handrail post",
+      "parent": "Larkton recessed ward entrance",
+      "index": null,
+      "from": 0.01799998927116392,
+      "to": -0.18
+    },
+    {
+      "name": "Recess entrance handrail post",
+      "parent": "Larkton recessed ward entrance",
+      "index": null,
+      "from": 0.01799998927116392,
+      "to": -0.18
+    },
+    {
+      "name": "Recess entrance handrail post",
+      "parent": "Larkton recessed ward entrance",
+      "index": null,
+      "from": 0.01799998927116392,
+      "to": -0.18
+    },
+    {
+      "name": "Recess entrance handrail post",
+      "parent": "Larkton recessed ward entrance",
+      "index": null,
+      "from": 0.01799998927116392,
+      "to": -0.18
+    },
+    {
+      "name": "Recess broad chimney stack",
+      "parent": "Larkton recessed ward entrance",
+      "index": null,
+      "from": -8.583068833445395e-8,
+      "to": -0.18
+    },
+    {
+      "name": "West court inner return brick walls",
+      "parent": "Tarvin/Jarman",
+      "index": null,
+      "from": 1.7166137711299712e-7,
+      "to": -0.18
+    },
+    {
+      "name": "West court front range brick walls",
+      "parent": "Tarvin/Jarman",
+      "index": null,
+      "from": 1.7166137711299712e-7,
+      "to": -0.18
+    },
+    {
+      "name": "West court outer return brick walls",
+      "parent": "Tarvin/Jarman",
+      "index": null,
+      "from": 1.7166137711299712e-7,
+      "to": -0.18
+    },
+    {
+      "name": "West court corner infill brick walls",
+      "parent": "Tarvin/Jarman",
+      "index": null,
+      "from": 1.7166137711299712e-7,
+      "to": -0.18
+    },
+    {
+      "name": "West court back range brick walls",
+      "parent": "Tarvin/Jarman",
+      "index": null,
+      "from": 1.7166137711299712e-7,
+      "to": -0.18
+    },
+    {
+      "name": "Annexe facade details",
+      "parent": "Tarvin/Jarman",
+      "index": 0,
+      "from": 0,
+      "to": -0.18
+    },
+    {
+      "name": "Annexe facade details",
+      "parent": "Tarvin/Jarman",
+      "index": 3,
+      "from": 0,
+      "to": -0.18
+    },
+    {
+      "name": "Annexe facade details",
+      "parent": "Tarvin/Jarman",
+      "index": 6,
+      "from": 0,
+      "to": -0.18
+    },
+    {
+      "name": "Annexe facade details",
+      "parent": "Tarvin/Jarman",
+      "index": 9,
+      "from": 0,
+      "to": -0.18
+    },
+    {
+      "name": "Annexe facade details",
+      "parent": "Tarvin/Jarman",
+      "index": 12,
+      "from": 0,
+      "to": -0.18
+    },
+    {
+      "name": "Blue gutters and downpipes",
+      "parent": "Tarvin/Jarman",
+      "index": 20,
+      "from": 0,
+      "to": -0.18
+    },
+    {
+      "name": "Blue gutters and downpipes",
+      "parent": "Tarvin/Jarman",
+      "index": 21,
+      "from": 0,
+      "to": -0.18
+    },
+    {
+      "name": "Blue gutters and downpipes",
+      "parent": "Tarvin/Jarman",
+      "index": 22,
+      "from": 0,
+      "to": -0.18
+    },
+    {
+      "name": "Blue gutters and downpipes",
+      "parent": "Tarvin/Jarman",
+      "index": 23,
+      "from": 0,
+      "to": -0.18
+    },
+    {
+      "name": "Blue gutters and downpipes",
+      "parent": "Tarvin/Jarman",
+      "index": 24,
+      "from": 0,
+      "to": -0.18
+    },
+    {
+      "name": "Blue gutters and downpipes",
+      "parent": "Tarvin/Jarman",
+      "index": 25,
+      "from": 0,
+      "to": -0.18
+    },
+    {
+      "name": "Jarman frontage brick walls",
+      "parent": "West court front elevation",
+      "index": null,
+      "from": 1.7166137711299712e-7,
+      "to": -0.18
+    },
+    {
+      "name": "Court projecting gable brick walls",
+      "parent": "West court front elevation",
+      "index": null,
+      "from": 1.7166137711299712e-7,
+      "to": -0.18
+    },
+    {
+      "name": "Court projecting gable brick walls",
+      "parent": "West court front elevation",
+      "index": null,
+      "from": 1.7166137711299712e-7,
+      "to": -0.18
+    },
+    {
+      "name": "Jarman veranda brick plinth",
+      "parent": "West court front elevation",
+      "index": null,
+      "from": 2.5749206544745107e-8,
+      "to": -0.18
+    },
+    {
+      "name": "Jarman frontage window and brick details",
+      "parent": "West court front elevation",
+      "index": 1,
+      "from": 0,
+      "to": -0.18
+    },
+    {
+      "name": "Jarman frontage window and brick details",
+      "parent": "West court front elevation",
+      "index": 2,
+      "from": 0,
+      "to": -0.18
+    },
+    {
+      "name": "Jarman frontage window and brick details",
+      "parent": "West court front elevation",
+      "index": 3,
+      "from": 0,
+      "to": -0.18
+    },
+    {
+      "name": "Jarman frontage window and brick details",
+      "parent": "West court front elevation",
+      "index": 4,
+      "from": 0,
+      "to": -0.18
+    },
+    {
+      "name": "Jarman frontage window and brick details",
+      "parent": "West court front elevation",
+      "index": 5,
+      "from": 0,
+      "to": -0.18
+    },
+    {
+      "name": "Jarman frontage window and brick details",
+      "parent": "West court front elevation",
+      "index": 6,
+      "from": 0,
+      "to": -0.18
+    },
+    {
+      "name": "Jarman frontage window and brick details",
+      "parent": "West court front elevation",
+      "index": 7,
+      "from": 0,
+      "to": -0.18
+    },
+    {
+      "name": "Jarman frontage window and brick details",
+      "parent": "West court front elevation",
+      "index": 8,
+      "from": 0,
+      "to": -0.18
+    },
+    {
+      "name": "Jarman frontage window and brick details",
+      "parent": "West court front elevation",
+      "index": 9,
+      "from": 0,
+      "to": -0.18
+    },
+    {
+      "name": "Jarman frontage window and brick details",
+      "parent": "West court front elevation",
+      "index": 10,
+      "from": 0,
+      "to": -0.18
+    },
+    {
+      "name": "Jarman frontage window and brick details",
+      "parent": "West court front elevation",
+      "index": 11,
+      "from": 0,
+      "to": -0.18
+    },
+    {
+      "name": "Jarman frontage window and brick details",
+      "parent": "West court front elevation",
+      "index": 12,
+      "from": 0,
+      "to": -0.18
+    },
+    {
+      "name": "Rear east connecting range brick walls",
+      "parent": "Leighton/Newton",
+      "index": null,
+      "from": 1.7166137711299712e-7,
+      "to": -0.18
+    },
+    {
+      "name": "Rear east end pavilion brick walls",
+      "parent": "Leighton/Newton",
+      "index": null,
+      "from": 1.7166137711299712e-7,
+      "to": -0.18
+    },
+    {
+      "name": "Leighton Newton projecting bay brick walls",
+      "parent": "Leighton Newton photographed elevations",
+      "index": null,
+      "from": 1.7166137711299712e-7,
+      "to": -0.18
+    },
+    {
+      "name": "Leighton Newton projecting bay brick walls",
+      "parent": "Leighton Newton photographed elevations",
+      "index": null,
+      "from": 1.7166137711299712e-7,
+      "to": -0.18
+    },
+    {
+      "name": "Leighton Newton veranda garden pier",
+      "parent": "Leighton Newton photographed elevations",
+      "index": null,
+      "from": 4.291534461131619e-9,
+      "to": -0.18
+    },
+    {
+      "name": "Leighton Newton veranda garden pier",
+      "parent": "Leighton Newton photographed elevations",
+      "index": null,
+      "from": 4.291534461131619e-9,
+      "to": -0.18
+    },
+    {
+      "name": "Leighton Newton veranda garden pier",
+      "parent": "Leighton Newton photographed elevations",
+      "index": null,
+      "from": 4.291534461131619e-9,
+      "to": -0.18
+    },
+    {
+      "name": "Leighton Newton veranda garden pier",
+      "parent": "Leighton Newton photographed elevations",
+      "index": null,
+      "from": 4.291534461131619e-9,
+      "to": -0.18
+    },
+    {
+      "name": "Leighton Newton veranda column",
+      "parent": "Leighton Newton photographed elevations",
+      "index": null,
+      "from": 0,
+      "to": -0.18
+    },
+    {
+      "name": "Leighton Newton veranda column plinth",
+      "parent": "Leighton Newton photographed elevations",
+      "index": null,
+      "from": -6.437301636186277e-9,
+      "to": -0.18
+    },
+    {
+      "name": "Leighton Newton veranda column",
+      "parent": "Leighton Newton photographed elevations",
+      "index": null,
+      "from": 0,
+      "to": -0.18
+    },
+    {
+      "name": "Leighton Newton veranda column plinth",
+      "parent": "Leighton Newton photographed elevations",
+      "index": null,
+      "from": -6.437301636186277e-9,
+      "to": -0.18
+    },
+    {
+      "name": "Leighton Newton veranda column",
+      "parent": "Leighton Newton photographed elevations",
+      "index": null,
+      "from": 0,
+      "to": -0.18
+    },
+    {
+      "name": "Leighton Newton veranda column plinth",
+      "parent": "Leighton Newton photographed elevations",
+      "index": null,
+      "from": -6.437301636186277e-9,
+      "to": -0.18
+    },
+    {
+      "name": "Leighton Newton veranda column",
+      "parent": "Leighton Newton photographed elevations",
+      "index": null,
+      "from": 0,
+      "to": -0.18
+    },
+    {
+      "name": "Leighton Newton veranda column plinth",
+      "parent": "Leighton Newton photographed elevations",
+      "index": null,
+      "from": -6.437301636186277e-9,
+      "to": -0.18
+    },
+    {
+      "name": "Leighton Newton veranda column",
+      "parent": "Leighton Newton photographed elevations",
+      "index": null,
+      "from": 0,
+      "to": -0.18
+    },
+    {
+      "name": "Leighton Newton veranda column plinth",
+      "parent": "Leighton Newton photographed elevations",
+      "index": null,
+      "from": -6.437301636186277e-9,
+      "to": -0.18
+    },
+    {
+      "name": "Leighton Newton projecting bay brick walls",
+      "parent": "Leighton Newton photographed elevations",
+      "index": null,
+      "from": 1.7166137711299712e-7,
+      "to": -0.18
+    },
+    {
+      "name": "Leighton Newton projecting bay brick walls",
+      "parent": "Leighton Newton photographed elevations",
+      "index": null,
+      "from": 1.7166137711299712e-7,
+      "to": -0.18
+    },
+    {
+      "name": "Leighton Newton facade details",
+      "parent": "Leighton Newton photographed elevations",
+      "index": 30,
+      "from": 0,
+      "to": -0.18
+    },
+    {
+      "name": "Leighton Newton facade details",
+      "parent": "Leighton Newton photographed elevations",
+      "index": 31,
+      "from": 0,
+      "to": -0.18
+    },
+    {
+      "name": "Leighton Newton facade details",
+      "parent": "Leighton Newton photographed elevations",
+      "index": 106,
+      "from": 0,
+      "to": -0.18
+    },
+    {
+      "name": "Leighton Newton facade details",
+      "parent": "Leighton Newton photographed elevations",
+      "index": 107,
+      "from": 0,
+      "to": -0.18
+    },
+    {
+      "name": "Leighton Newton facade details",
+      "parent": "Leighton Newton photographed elevations",
+      "index": 1,
+      "from": 0,
+      "to": -0.18
+    },
+    {
+      "name": "Leighton Newton facade details",
+      "parent": "Leighton Newton photographed elevations",
+      "index": 2,
+      "from": 0,
+      "to": -0.18
+    },
+    {
+      "name": "Leighton Newton facade details",
+      "parent": "Leighton Newton photographed elevations",
+      "index": 3,
+      "from": 0,
+      "to": -0.18
+    },
+    {
+      "name": "Leighton Newton facade details",
+      "parent": "Leighton Newton photographed elevations",
+      "index": 10,
+      "from": 0,
+      "to": -0.18
+    },
+    {
+      "name": "Leighton Newton facade details",
+      "parent": "Leighton Newton photographed elevations",
+      "index": 11,
+      "from": 0,
+      "to": -0.18
+    },
+    {
+      "name": "Leighton Newton facade details",
+      "parent": "Leighton Newton photographed elevations",
+      "index": 13,
+      "from": 0,
+      "to": -0.18
+    },
+    {
+      "name": "Leighton Newton facade details",
+      "parent": "Leighton Newton photographed elevations",
+      "index": 14,
+      "from": 0,
+      "to": -0.18
+    },
+    {
+      "name": "Leighton Newton facade details",
+      "parent": "Leighton Newton photographed elevations",
+      "index": 16,
+      "from": 0,
+      "to": -0.18
+    },
+    {
+      "name": "Leighton Newton facade details",
+      "parent": "Leighton Newton photographed elevations",
+      "index": 17,
+      "from": 0,
+      "to": -0.18
+    },
+    {
+      "name": "Leighton Newton facade details",
+      "parent": "Leighton Newton photographed elevations",
+      "index": 26,
+      "from": 0,
+      "to": -0.18
+    },
+    {
+      "name": "Leighton Newton facade details",
+      "parent": "Leighton Newton photographed elevations",
+      "index": 27,
+      "from": 0,
+      "to": -0.18
+    },
+    {
+      "name": "Leighton Newton facade details",
+      "parent": "Leighton Newton photographed elevations",
+      "index": 28,
+      "from": 0,
+      "to": -0.18
+    },
+    {
+      "name": "Leighton Newton facade details",
+      "parent": "Leighton Newton photographed elevations",
+      "index": 35,
+      "from": 0,
+      "to": -0.18
+    },
+    {
+      "name": "Leighton Newton facade details",
+      "parent": "Leighton Newton photographed elevations",
+      "index": 36,
+      "from": 0,
+      "to": -0.18
+    },
+    {
+      "name": "Leighton Newton facade details",
+      "parent": "Leighton Newton photographed elevations",
+      "index": 38,
+      "from": 0,
+      "to": -0.18
+    },
+    {
+      "name": "Leighton Newton facade details",
+      "parent": "Leighton Newton photographed elevations",
+      "index": 39,
+      "from": 0,
+      "to": -0.18
+    },
+    {
+      "name": "Leighton Newton facade details",
+      "parent": "Leighton Newton photographed elevations",
+      "index": 41,
+      "from": 0,
+      "to": -0.18
+    },
+    {
+      "name": "Leighton Newton facade details",
+      "parent": "Leighton Newton photographed elevations",
+      "index": 42,
+      "from": 0,
+      "to": -0.18
+    },
+    {
+      "name": "Leighton Newton facade details",
+      "parent": "Leighton Newton photographed elevations",
+      "index": 44,
+      "from": 0,
+      "to": -0.18
+    },
+    {
+      "name": "Leighton Newton facade details",
+      "parent": "Leighton Newton photographed elevations",
+      "index": 45,
+      "from": 0,
+      "to": -0.18
+    },
+    {
+      "name": "Leighton Newton facade details",
+      "parent": "Leighton Newton photographed elevations",
+      "index": 47,
+      "from": 0,
+      "to": -0.18
+    },
+    {
+      "name": "Leighton Newton facade details",
+      "parent": "Leighton Newton photographed elevations",
+      "index": 48,
+      "from": 0,
+      "to": -0.18
+    },
+    {
+      "name": "Leighton Newton facade details",
+      "parent": "Leighton Newton photographed elevations",
+      "index": 50,
+      "from": 0,
+      "to": -0.18
+    },
+    {
+      "name": "Leighton Newton facade details",
+      "parent": "Leighton Newton photographed elevations",
+      "index": 51,
+      "from": 0,
+      "to": -0.18
+    },
+    {
+      "name": "Leighton Newton facade details",
+      "parent": "Leighton Newton photographed elevations",
+      "index": 53,
+      "from": 0,
+      "to": -0.18
+    },
+    {
+      "name": "Leighton Newton facade details",
+      "parent": "Leighton Newton photographed elevations",
+      "index": 54,
+      "from": 0,
+      "to": -0.18
+    },
+    {
+      "name": "Leighton Newton facade details",
+      "parent": "Leighton Newton photographed elevations",
+      "index": 56,
+      "from": 0,
+      "to": -0.18
+    },
+    {
+      "name": "Leighton Newton facade details",
+      "parent": "Leighton Newton photographed elevations",
+      "index": 57,
+      "from": 0,
+      "to": -0.18
+    },
+    {
+      "name": "Leighton Newton facade details",
+      "parent": "Leighton Newton photographed elevations",
+      "index": 1,
+      "from": 0,
+      "to": -0.18
+    },
+    {
+      "name": "Leighton Newton facade details",
+      "parent": "Leighton Newton photographed elevations",
+      "index": 2,
+      "from": 0,
+      "to": -0.18
+    },
+    {
+      "name": "Leighton Newton facade details",
+      "parent": "Leighton Newton photographed elevations",
+      "index": 3,
+      "from": 0,
+      "to": -0.18
+    },
+    {
+      "name": "Leighton Newton facade details",
+      "parent": "Leighton Newton photographed elevations",
+      "index": 4,
+      "from": 0,
+      "to": -0.18
+    },
+    {
+      "name": "Leighton Newton facade details",
+      "parent": "Leighton Newton photographed elevations",
+      "index": 5,
+      "from": 0,
+      "to": -0.18
+    },
+    {
+      "name": "Leighton Newton facade details",
+      "parent": "Leighton Newton photographed elevations",
+      "index": 6,
+      "from": 0,
+      "to": -0.18
+    },
+    {
+      "name": "Leighton Newton facade details",
+      "parent": "Leighton Newton photographed elevations",
+      "index": 7,
+      "from": 0,
+      "to": -0.18
+    },
+    {
+      "name": "Leighton Newton facade details",
+      "parent": "Leighton Newton photographed elevations",
+      "index": 8,
+      "from": 0,
+      "to": -0.18
+    },
+    {
+      "name": "Leighton Newton facade details",
+      "parent": "Leighton Newton photographed elevations",
+      "index": 9,
+      "from": 0,
+      "to": -0.18
+    },
+    {
+      "name": "Leighton Newton facade details",
+      "parent": "Leighton Newton photographed elevations",
+      "index": 10,
+      "from": 0,
+      "to": -0.18
+    },
+    {
+      "name": "Leighton Newton facade details",
+      "parent": "Leighton Newton photographed elevations",
+      "index": 11,
+      "from": 0,
+      "to": -0.18
+    },
+    {
+      "name": "Leighton Newton facade details",
+      "parent": "Leighton Newton photographed elevations",
+      "index": 12,
+      "from": 0,
+      "to": -0.18
+    },
+    {
+      "name": "Leighton Newton facade details",
+      "parent": "Leighton Newton photographed elevations",
+      "index": 13,
+      "from": 0,
+      "to": -0.18
+    },
+    {
+      "name": "Leighton Newton facade details",
+      "parent": "Leighton Newton photographed elevations",
+      "index": 14,
+      "from": 0,
+      "to": -0.18
+    },
+    {
+      "name": "Leighton Newton facade details",
+      "parent": "Leighton Newton photographed elevations",
+      "index": 15,
+      "from": 0,
+      "to": -0.18
+    },
+    {
+      "name": "Leighton Newton facade details",
+      "parent": "Leighton Newton photographed elevations",
+      "index": 16,
+      "from": 0,
+      "to": -0.18
+    },
+    {
+      "name": "Leighton Newton facade details",
+      "parent": "Leighton Newton photographed elevations",
+      "index": 17,
+      "from": 0,
+      "to": -0.18
+    },
+    {
+      "name": "Leighton Newton facade details",
+      "parent": "Leighton Newton photographed elevations",
+      "index": 18,
+      "from": 0,
+      "to": -0.18
+    },
+    {
+      "name": "Leighton Newton facade details",
+      "parent": "Leighton Newton photographed elevations",
+      "index": 19,
+      "from": 0,
+      "to": -0.18
+    },
+    {
+      "name": "Leighton Newton facade details",
+      "parent": "Leighton Newton photographed elevations",
+      "index": 20,
+      "from": 0,
+      "to": -0.18
+    },
+    {
+      "name": "Leighton Newton facade details",
+      "parent": "Leighton Newton photographed elevations",
+      "index": 21,
+      "from": 0,
+      "to": -0.18
+    },
+    {
+      "name": "Leighton Newton facade details",
+      "parent": "Leighton Newton photographed elevations",
+      "index": 22,
+      "from": 0,
+      "to": -0.18
+    },
+    {
+      "name": "Leighton Newton facade details",
+      "parent": "Leighton Newton photographed elevations",
+      "index": 23,
+      "from": 0,
+      "to": -0.18
+    },
+    {
+      "name": "Leighton Newton facade details",
+      "parent": "Leighton Newton photographed elevations",
+      "index": 24,
+      "from": 0,
+      "to": -0.18
+    },
+    {
+      "name": "Leighton Newton facade details",
+      "parent": "Leighton Newton photographed elevations",
+      "index": 25,
+      "from": 0,
+      "to": -0.18
+    },
+    {
+      "name": "Leighton Newton facade details",
+      "parent": "Leighton Newton photographed elevations",
+      "index": 26,
+      "from": 0,
+      "to": -0.18
+    },
+    {
+      "name": "Leighton Newton facade details",
+      "parent": "Leighton Newton photographed elevations",
+      "index": 27,
+      "from": 0,
+      "to": -0.18
+    },
+    {
+      "name": "Leighton Newton facade details",
+      "parent": "Leighton Newton photographed elevations",
+      "index": 28,
+      "from": 0,
+      "to": -0.18
+    },
+    {
+      "name": "Rear west angled service range brick walls",
+      "parent": "Oakmere",
+      "index": null,
+      "from": 1.7166137711299712e-7,
+      "to": -0.18
+    },
+    {
+      "name": "Rear service head brick walls",
+      "parent": "Oakmere",
+      "index": null,
+      "from": 1.7166137711299712e-7,
+      "to": -0.18
+    },
+    {
+      "name": "Annexe facade details",
+      "parent": "Oakmere",
+      "index": 0,
+      "from": 0,
+      "to": -0.18
+    },
+    {
+      "name": "Annexe facade details",
+      "parent": "Oakmere",
+      "index": 3,
+      "from": 0,
+      "to": -0.18
+    },
+    {
+      "name": "Blue gutters and downpipes",
+      "parent": "Oakmere",
+      "index": 8,
+      "from": 0,
+      "to": -0.18
+    },
+    {
+      "name": "Blue gutters and downpipes",
+      "parent": "Oakmere",
+      "index": 9,
+      "from": 0,
+      "to": -0.18
+    },
+    {
+      "name": "Blue gutters and downpipes",
+      "parent": "Oakmere",
+      "index": 10,
+      "from": 0,
+      "to": -0.18
+    },
+    {
+      "name": "Blue gutters and downpipes",
+      "parent": "Oakmere",
+      "index": 11,
+      "from": 0,
+      "to": -0.18
+    },
+    {
+      "name": "Oakmere joined extension brick walls",
+      "parent": "Oakmere rear court additions",
+      "index": null,
+      "from": 1.7166137711299712e-7,
+      "to": -0.18
+    },
+    {
+      "name": "Oakmere court projecting bay brick walls",
+      "parent": "Oakmere rear court additions",
+      "index": null,
+      "from": 1.7166137711299712e-7,
+      "to": -0.18
+    },
+    {
+      "name": "Oakmere bay downpipe",
+      "parent": "Oakmere rear court additions",
+      "index": null,
+      "from": -8.583068833445395e-8,
+      "to": -0.18
+    },
+    {
+      "name": "Oakmere bay downpipe",
+      "parent": "Oakmere rear court additions",
+      "index": null,
+      "from": -8.583068833445395e-8,
+      "to": -0.18
+    },
+    {
+      "name": "Oakmere widened head brick walls",
+      "parent": "Oakmere rear court additions",
+      "index": null,
+      "from": 1.7166137711299712e-7,
+      "to": -0.18
+    },
+    {
+      "name": "Oakmere blue-face projecting bay brick walls",
+      "parent": "Oakmere rear court additions",
+      "index": null,
+      "from": 1.7166137711299712e-7,
+      "to": -0.18
+    },
+    {
+      "name": "Oakmere head downpipe",
+      "parent": "Oakmere rear court additions",
+      "index": null,
+      "from": 1.3732910186803338e-7,
+      "to": -0.18
+    },
+    {
+      "name": "Oakmere head downpipe",
+      "parent": "Oakmere rear court additions",
+      "index": null,
+      "from": 1.3732910186803338e-7,
+      "to": -0.18
+    },
+    {
+      "name": "Oakmere head downpipe",
+      "parent": "Oakmere rear court additions",
+      "index": null,
+      "from": 1.3732910186803338e-7,
+      "to": -0.18
+    },
+    {
+      "name": "Oakmere square annex brick walls",
+      "parent": "Oakmere rear court additions",
+      "index": null,
+      "from": -8.583068855649856e-8,
+      "to": -0.18
+    },
+    {
+      "name": "Oakmere annex entrance landing",
+      "parent": "Oakmere rear court additions",
+      "index": null,
+      "from": 2.41398810663096e-9,
+      "to": -0.18
+    },
+    {
+      "name": "Oakmere annex downpipe",
+      "parent": "Oakmere rear court additions",
+      "index": null,
+      "from": 1.716613762248187e-8,
+      "to": -0.18
+    },
+    {
+      "name": "Oakmere shrub trunk",
+      "parent": "Oakmere rear court additions",
+      "index": null,
+      "from": -1.0728836041806744e-8,
+      "to": -0.18
+    },
+    {
+      "name": "Oakmere shrub trunk",
+      "parent": "Oakmere rear court additions",
+      "index": null,
+      "from": -1.0728836041806744e-8,
+      "to": -0.18
+    },
+    {
+      "name": "Oakmere shrub trunk",
+      "parent": "Oakmere rear court additions",
+      "index": null,
+      "from": -1.0728836041806744e-8,
+      "to": -0.18
+    },
+    {
+      "name": "Oakmere shrub trunk",
+      "parent": "Oakmere rear court additions",
+      "index": null,
+      "from": -1.0728836041806744e-8,
+      "to": -0.18
+    },
+    {
+      "name": "Oakmere shrub trunk",
+      "parent": "Oakmere rear court additions",
+      "index": null,
+      "from": -1.0728836041806744e-8,
+      "to": -0.18
+    },
+    {
+      "name": "Oakmere shrub trunk",
+      "parent": "Oakmere rear court additions",
+      "index": null,
+      "from": -1.0728836041806744e-8,
+      "to": -0.18
+    },
+    {
+      "name": "Oakmere shrub trunk",
+      "parent": "Oakmere rear court additions",
+      "index": null,
+      "from": -1.0728836041806744e-8,
+      "to": -0.18
+    },
+    {
+      "name": "Oakmere shrub trunk",
+      "parent": "Oakmere rear court additions",
+      "index": null,
+      "from": -1.0728836041806744e-8,
+      "to": -0.18
+    },
+    {
+      "name": "East court inner return brick walls",
+      "parent": "Picton/Carden",
+      "index": null,
+      "from": 1.7166137711299712e-7,
+      "to": -0.18
+    },
+    {
+      "name": "East court front range brick walls",
+      "parent": "Picton/Carden",
+      "index": null,
+      "from": 1.7166137711299712e-7,
+      "to": -0.18
+    },
+    {
+      "name": "East court outer return brick walls",
+      "parent": "Picton/Carden",
+      "index": null,
+      "from": 1.7166137711299712e-7,
+      "to": -0.18
+    },
+    {
+      "name": "East court corner infill brick walls",
+      "parent": "Picton/Carden",
+      "index": null,
+      "from": 1.7166137711299712e-7,
+      "to": -0.18
+    },
+    {
+      "name": "East court back range brick walls",
+      "parent": "Picton/Carden",
+      "index": null,
+      "from": 1.7166137711299712e-7,
+      "to": -0.18
+    },
+    {
+      "name": "Annexe facade details",
+      "parent": "Picton/Carden",
+      "index": 0,
+      "from": 0,
+      "to": -0.18
+    },
+    {
+      "name": "Annexe facade details",
+      "parent": "Picton/Carden",
+      "index": 3,
+      "from": 0,
+      "to": -0.18
+    },
+    {
+      "name": "Annexe facade details",
+      "parent": "Picton/Carden",
+      "index": 6,
+      "from": 0,
+      "to": -0.18
+    },
+    {
+      "name": "Annexe facade details",
+      "parent": "Picton/Carden",
+      "index": 9,
+      "from": 0,
+      "to": -0.18
+    },
+    {
+      "name": "Annexe facade details",
+      "parent": "Picton/Carden",
+      "index": 12,
+      "from": 0,
+      "to": -0.18
+    },
+    {
+      "name": "Blue gutters and downpipes",
+      "parent": "Picton/Carden",
+      "index": 20,
+      "from": 0,
+      "to": -0.18
+    },
+    {
+      "name": "Blue gutters and downpipes",
+      "parent": "Picton/Carden",
+      "index": 21,
+      "from": 0,
+      "to": -0.18
+    },
+    {
+      "name": "Blue gutters and downpipes",
+      "parent": "Picton/Carden",
+      "index": 22,
+      "from": 0,
+      "to": -0.18
+    },
+    {
+      "name": "Blue gutters and downpipes",
+      "parent": "Picton/Carden",
+      "index": 23,
+      "from": 0,
+      "to": -0.18
+    },
+    {
+      "name": "Blue gutters and downpipes",
+      "parent": "Picton/Carden",
+      "index": 24,
+      "from": 0,
+      "to": -0.18
+    },
+    {
+      "name": "Blue gutters and downpipes",
+      "parent": "Picton/Carden",
+      "index": 25,
+      "from": 0,
+      "to": -0.18
+    },
+    {
+      "name": "Court frontage brick walls",
+      "parent": "East court front elevation",
+      "index": null,
+      "from": 1.7166137711299712e-7,
+      "to": -0.18
+    },
+    {
+      "name": "Court projecting gable brick walls",
+      "parent": "East court front elevation",
+      "index": null,
+      "from": 1.7166137711299712e-7,
+      "to": -0.18
+    },
+    {
+      "name": "Court projecting gable brick walls",
+      "parent": "East court front elevation",
+      "index": null,
+      "from": 1.7166137711299712e-7,
+      "to": -0.18
+    },
+    {
+      "name": "Court frontage window and brick details",
+      "parent": "East court front elevation",
+      "index": 1,
+      "from": 0,
+      "to": -0.18
+    },
+    {
+      "name": "Court frontage window and brick details",
+      "parent": "East court front elevation",
+      "index": 2,
+      "from": 0,
+      "to": -0.18
+    },
+    {
+      "name": "Court frontage window and brick details",
+      "parent": "East court front elevation",
+      "index": 6,
+      "from": 0,
+      "to": -0.18
+    },
+    {
+      "name": "Court frontage window and brick details",
+      "parent": "East court front elevation",
+      "index": 7,
+      "from": 0,
+      "to": -0.18
+    },
+    {
+      "name": "West court entrance link brick walls",
+      "parent": "West court entrance link",
+      "index": null,
+      "from": 1.7166137711299712e-7,
+      "to": -0.18
+    },
+    {
+      "name": "Annexe facade details",
+      "parent": "West court entrance link",
+      "index": 0,
+      "from": 0,
+      "to": -0.18
+    },
+    {
+      "name": "Blue gutters and downpipes",
+      "parent": "West court entrance link",
+      "index": 4,
+      "from": 0,
+      "to": -0.18
+    },
+    {
+      "name": "East front connecting ward brick walls",
+      "parent": "East outer ward assembly",
+      "index": null,
+      "from": 1.7166137711299712e-7,
+      "to": -0.18
+    },
+    {
+      "name": "East end ward brick walls",
+      "parent": "East outer ward assembly",
+      "index": null,
+      "from": 1.7166137711299712e-7,
+      "to": -0.18
+    },
+    {
+      "name": "East rear pavilion brick walls",
+      "parent": "East outer ward assembly",
+      "index": null,
+      "from": 1.7166137711299712e-7,
+      "to": -0.18
+    },
+    {
+      "name": "East rear link brick walls",
+      "parent": "East outer ward assembly",
+      "index": null,
+      "from": -8.583068855649856e-8,
+      "to": -0.18
+    },
+    {
+      "name": "East end projecting rooms brick walls",
+      "parent": "East outer ward assembly",
+      "index": null,
+      "from": 1.7166137711299712e-7,
+      "to": -0.18
+    },
+    {
+      "name": "East end front rooms brick walls",
+      "parent": "East outer ward assembly",
+      "index": null,
+      "from": 1.7166137711299712e-7,
+      "to": -0.18
+    },
+    {
+      "name": "Annexe facade details",
+      "parent": "East outer ward assembly",
+      "index": 0,
+      "from": 0,
+      "to": -0.18
+    },
+    {
+      "name": "Annexe facade details",
+      "parent": "East outer ward assembly",
+      "index": 3,
+      "from": 0,
+      "to": -0.18
+    },
+    {
+      "name": "Annexe facade details",
+      "parent": "East outer ward assembly",
+      "index": 6,
+      "from": 0,
+      "to": -0.18
+    },
+    {
+      "name": "Annexe facade details",
+      "parent": "East outer ward assembly",
+      "index": 9,
+      "from": 0,
+      "to": -0.18
+    },
+    {
+      "name": "Annexe facade details",
+      "parent": "East outer ward assembly",
+      "index": 11,
+      "from": 0,
+      "to": -0.18
+    },
+    {
+      "name": "Annexe facade details",
+      "parent": "East outer ward assembly",
+      "index": 14,
+      "from": 0,
+      "to": -0.18
+    },
+    {
+      "name": "Blue gutters and downpipes",
+      "parent": "East outer ward assembly",
+      "index": 24,
+      "from": 0,
+      "to": -0.18
+    },
+    {
+      "name": "Blue gutters and downpipes",
+      "parent": "East outer ward assembly",
+      "index": 25,
+      "from": 0,
+      "to": -0.18
+    },
+    {
+      "name": "Blue gutters and downpipes",
+      "parent": "East outer ward assembly",
+      "index": 26,
+      "from": 0,
+      "to": -0.18
+    },
+    {
+      "name": "Blue gutters and downpipes",
+      "parent": "East outer ward assembly",
+      "index": 27,
+      "from": 0,
+      "to": -0.18
+    },
+    {
+      "name": "Blue gutters and downpipes",
+      "parent": "East outer ward assembly",
+      "index": 28,
+      "from": 0,
+      "to": -0.18
+    },
+    {
+      "name": "Blue gutters and downpipes",
+      "parent": "East outer ward assembly",
+      "index": 29,
+      "from": 0,
+      "to": -0.18
+    },
+    {
+      "name": "Blue gutters and downpipes",
+      "parent": "East outer ward assembly",
+      "index": 30,
+      "from": 0,
+      "to": -0.18
+    },
+    {
+      "name": "East veranda timber post",
+      "parent": "East outer veranda",
+      "index": null,
+      "from": 3.4332275467008344e-8,
+      "to": -0.18
+    },
+    {
+      "name": "East veranda post base",
+      "parent": "East outer veranda",
+      "index": null,
+      "from": -5.364418020903372e-9,
+      "to": -0.18
+    },
+    {
+      "name": "East veranda timber post",
+      "parent": "East outer veranda",
+      "index": null,
+      "from": 3.4332275467008344e-8,
+      "to": -0.18
+    },
+    {
+      "name": "East veranda post base",
+      "parent": "East outer veranda",
+      "index": null,
+      "from": -5.364418020903372e-9,
+      "to": -0.18
+    },
+    {
+      "name": "East veranda timber post",
+      "parent": "East outer veranda",
+      "index": null,
+      "from": 3.4332275467008344e-8,
+      "to": -0.18
+    },
+    {
+      "name": "East veranda post base",
+      "parent": "East outer veranda",
+      "index": null,
+      "from": -5.364418020903372e-9,
+      "to": -0.18
+    },
+    {
+      "name": "East veranda timber post",
+      "parent": "East outer veranda",
+      "index": null,
+      "from": 3.4332275467008344e-8,
+      "to": -0.18
+    },
+    {
+      "name": "East veranda post base",
+      "parent": "East outer veranda",
+      "index": null,
+      "from": -5.364418020903372e-9,
+      "to": -0.18
+    },
+    {
+      "name": "East veranda timber post",
+      "parent": "East outer veranda",
+      "index": null,
+      "from": 3.4332275467008344e-8,
+      "to": -0.18
+    },
+    {
+      "name": "East veranda post base",
+      "parent": "East outer veranda",
+      "index": null,
+      "from": -5.364418020903372e-9,
+      "to": -0.18
+    },
+    {
+      "name": "East veranda timber post",
+      "parent": "East outer veranda",
+      "index": null,
+      "from": 3.4332275467008344e-8,
+      "to": -0.18
+    },
+    {
+      "name": "East veranda post base",
+      "parent": "East outer veranda",
+      "index": null,
+      "from": -5.364418020903372e-9,
+      "to": -0.18
+    },
+    {
+      "name": "East veranda timber post",
+      "parent": "East outer veranda",
+      "index": null,
+      "from": 3.4332275467008344e-8,
+      "to": -0.18
+    },
+    {
+      "name": "East veranda post base",
+      "parent": "East outer veranda",
+      "index": null,
+      "from": -5.364418020903372e-9,
+      "to": -0.18
+    },
+    {
+      "name": "East veranda timber post",
+      "parent": "East outer veranda",
+      "index": null,
+      "from": 3.4332275467008344e-8,
+      "to": -0.18
+    },
+    {
+      "name": "East veranda post base",
+      "parent": "East outer veranda",
+      "index": null,
+      "from": -5.364418020903372e-9,
+      "to": -0.18
+    },
+    {
+      "name": "East veranda timber post",
+      "parent": "East outer veranda",
+      "index": null,
+      "from": 3.4332275467008344e-8,
+      "to": -0.18
+    },
+    {
+      "name": "East veranda post base",
+      "parent": "East outer veranda",
+      "index": null,
+      "from": -5.364418020903372e-9,
+      "to": -0.18
+    },
+    {
+      "name": "Outer frontage brick walls",
+      "parent": "East outer front elevation",
+      "index": null,
+      "from": 1.7166137711299712e-7,
+      "to": -0.18
+    },
+    {
+      "name": "Outer projecting gable brick walls",
+      "parent": "East outer front elevation",
+      "index": null,
+      "from": 1.7166137711299712e-7,
+      "to": -0.18
+    },
+    {
+      "name": "Outer projecting gable brick walls",
+      "parent": "East outer front elevation",
+      "index": null,
+      "from": 1.7166137711299712e-7,
+      "to": -0.18
+    },
+    {
+      "name": "Outer low entrance room brick walls",
+      "parent": "East outer front elevation",
+      "index": null,
+      "from": 4.2915344167226976e-8,
+      "to": -0.18
+    },
+    {
+      "name": "Outer tall chimney stack",
+      "parent": "East outer front elevation",
+      "index": null,
+      "from": -8.583068744627553e-8,
+      "to": -0.18
+    },
+    {
+      "name": "Outer frontage window and brick details",
+      "parent": "East outer front elevation",
+      "index": 45,
+      "from": 0,
+      "to": -0.18
+    },
+    {
+      "name": "Outer frontage window and brick details",
+      "parent": "East outer front elevation",
+      "index": 46,
+      "from": 0,
+      "to": -0.18
+    },
+    {
+      "name": "Outer frontage window and brick details",
+      "parent": "East outer front elevation",
+      "index": 1,
+      "from": 0,
+      "to": -0.18
+    },
+    {
+      "name": "Outer frontage window and brick details",
+      "parent": "East outer front elevation",
+      "index": 2,
+      "from": 0,
+      "to": -0.18
+    },
+    {
+      "name": "Outer frontage window and brick details",
+      "parent": "East outer front elevation",
+      "index": 6,
+      "from": 0,
+      "to": -0.18
+    },
+    {
+      "name": "Outer frontage window and brick details",
+      "parent": "East outer front elevation",
+      "index": 7,
+      "from": 0,
+      "to": -0.18
+    },
+    {
+      "name": "Outer frontage window and brick details",
+      "parent": "East outer front elevation",
+      "index": 28,
+      "from": 0,
+      "to": -0.18
+    },
+    {
+      "name": "Rear court west range brick walls",
+      "parent": "Rear court west assembly",
+      "index": null,
+      "from": 1.7166137711299712e-7,
+      "to": -0.18
+    },
+    {
+      "name": "Annexe facade details",
+      "parent": "Rear court west assembly",
+      "index": 0,
+      "from": 0,
+      "to": -0.18
+    },
+    {
+      "name": "Blue gutters and downpipes",
+      "parent": "Rear court west assembly",
+      "index": 4,
+      "from": 0,
+      "to": -0.18
+    },
+    {
+      "name": "Blue gutters and downpipes",
+      "parent": "Rear court west assembly",
+      "index": 5,
+      "from": 0,
+      "to": -0.18
+    },
+    {
+      "name": "Central hall brick walls",
+      "parent": "The annexe",
+      "index": null,
+      "from": -4.2915344167226976e-8,
+      "to": -0.18
+    },
+    {
+      "name": "Entrance range brick walls",
+      "parent": "The annexe",
+      "index": null,
+      "from": 8.583068877854316e-8,
+      "to": -0.18
+    },
+    {
+      "name": "West front pavilion brick walls",
+      "parent": "The annexe",
+      "index": null,
+      "from": 8.583068744627553e-8,
+      "to": -0.18
+    },
+    {
+      "name": "West square tower brick walls",
+      "parent": "The annexe",
+      "index": null,
+      "from": 2.918243406924148e-7,
+      "to": -0.18
+    },
+    {
+      "name": "East front pavilion brick walls",
+      "parent": "The annexe",
+      "index": null,
+      "from": 8.583068744627553e-8,
+      "to": -0.18
+    },
+    {
+      "name": "East square tower brick walls",
+      "parent": "The annexe",
+      "index": null,
+      "from": 2.918243406924148e-7,
+      "to": -0.18
+    },
+    {
+      "name": "Central rear spine brick walls",
+      "parent": "The annexe",
+      "index": null,
+      "from": 8.583068877854316e-8,
+      "to": -0.18
+    },
+    {
+      "name": "Central rear low hall link brick walls",
+      "parent": "The annexe",
+      "index": null,
+      "from": 8.583068877854316e-8,
+      "to": -0.18
+    },
+    {
+      "name": "Rear court east range brick walls",
+      "parent": "The annexe",
+      "index": null,
+      "from": 1.7166137711299712e-7,
+      "to": -0.18
+    },
+    {
+      "name": "Rear court back range brick walls",
+      "parent": "The annexe",
+      "index": null,
+      "from": 1.7166137711299712e-7,
+      "to": -0.18
+    },
+    {
+      "name": "Rear court back east range brick walls",
+      "parent": "The annexe",
+      "index": null,
+      "from": 1.7166137711299712e-7,
+      "to": -0.18
+    },
+    {
+      "name": "Rear court front range brick walls",
+      "parent": "The annexe",
+      "index": null,
+      "from": 8.583068833445395e-8,
+      "to": -0.18
+    },
+    {
+      "name": "Rear court front west service link brick walls",
+      "parent": "The annexe",
+      "index": null,
+      "from": 2.1457671861568883e-8,
+      "to": -0.18
+    },
+    {
+      "name": "Rear court front east service link brick walls",
+      "parent": "The annexe",
+      "index": null,
+      "from": 4.291534438927158e-8,
+      "to": -0.18
+    },
+    {
+      "name": "Entrance recessed double door",
+      "parent": "The annexe",
+      "index": null,
+      "from": 4.291534438927158e-8,
+      "to": -0.18
+    },
+    {
+      "name": "Entrance step",
+      "parent": "The annexe",
+      "index": null,
+      "from": 3.2186508180931384e-9,
+      "to": -0.18
+    },
+    {
+      "name": "Entrance step",
+      "parent": "The annexe",
+      "index": null,
+      "from": 4.82797621326192e-9,
+      "to": -0.18
+    },
+    {
+      "name": "West pavilion door",
+      "parent": "The annexe",
+      "index": null,
+      "from": 2.1457671861568883e-8,
+      "to": -0.18
+    },
+    {
+      "name": "East pavilion door",
+      "parent": "The annexe",
+      "index": null,
+      "from": 2.1457671861568883e-8,
+      "to": -0.18
+    },
+    {
+      "name": "West low canted bay walls",
+      "parent": "West mirrored side details",
+      "index": null,
+      "from": 2.7554552992026197e-16,
+      "to": -0.18
+    },
+    {
+      "name": "Annexe facade details",
+      "parent": "The annexe",
+      "index": 0,
+      "from": 0,
+      "to": -0.18
+    },
+    {
+      "name": "Annexe facade details",
+      "parent": "The annexe",
+      "index": 3,
+      "from": 0,
+      "to": -0.18
+    },
+    {
+      "name": "Annexe facade details",
+      "parent": "The annexe",
+      "index": 6,
+      "from": 0,
+      "to": -0.18
+    },
+    {
+      "name": "Annexe facade details",
+      "parent": "The annexe",
+      "index": 11,
+      "from": 0,
+      "to": -0.18
+    },
+    {
+      "name": "Annexe facade details",
+      "parent": "The annexe",
+      "index": 16,
+      "from": 0,
+      "to": -0.18
+    },
+    {
+      "name": "Annexe facade details",
+      "parent": "The annexe",
+      "index": 21,
+      "from": 0,
+      "to": -0.18
+    },
+    {
+      "name": "Annexe facade details",
+      "parent": "The annexe",
+      "index": 26,
+      "from": 0,
+      "to": -0.18
+    },
+    {
+      "name": "Annexe facade details",
+      "parent": "The annexe",
+      "index": 29,
+      "from": 0,
+      "to": -0.18
+    },
+    {
+      "name": "Annexe facade details",
+      "parent": "The annexe",
+      "index": 31,
+      "from": 0,
+      "to": -0.18
+    },
+    {
+      "name": "Annexe facade details",
+      "parent": "The annexe",
+      "index": 34,
+      "from": 0,
+      "to": -0.18
+    },
+    {
+      "name": "Annexe facade details",
+      "parent": "The annexe",
+      "index": 37,
+      "from": 0,
+      "to": -0.18
+    },
+    {
+      "name": "Annexe facade details",
+      "parent": "The annexe",
+      "index": 40,
+      "from": 0,
+      "to": -0.18
+    },
+    {
+      "name": "Annexe facade details",
+      "parent": "The annexe",
+      "index": 42,
+      "from": 0,
+      "to": -0.18
+    },
+    {
+      "name": "Annexe facade details",
+      "parent": "The annexe",
+      "index": 44,
+      "from": 0,
+      "to": -0.18
+    },
+    {
+      "name": "Annexe facade details",
+      "parent": "The annexe",
+      "index": 192,
+      "from": 0,
+      "to": -0.18
+    },
+    {
+      "name": "Annexe facade details",
+      "parent": "The annexe",
+      "index": 193,
+      "from": 0,
+      "to": -0.18
+    },
+    {
+      "name": "Annexe facade details",
+      "parent": "The annexe",
+      "index": 221,
+      "from": 0,
+      "to": -0.18
+    },
+    {
+      "name": "Annexe facade details",
+      "parent": "The annexe",
+      "index": 222,
+      "from": 0,
+      "to": -0.18
+    },
+    {
+      "name": "Blue gutters and downpipes",
+      "parent": "The annexe",
+      "index": 56,
+      "from": 0,
+      "to": -0.18
+    },
+    {
+      "name": "Blue gutters and downpipes",
+      "parent": "The annexe",
+      "index": 57,
+      "from": 0,
+      "to": -0.18
+    },
+    {
+      "name": "Blue gutters and downpipes",
+      "parent": "The annexe",
+      "index": 58,
+      "from": 0,
+      "to": -0.18
+    },
+    {
+      "name": "Blue gutters and downpipes",
+      "parent": "The annexe",
+      "index": 59,
+      "from": 0,
+      "to": -0.18
+    },
+    {
+      "name": "Blue gutters and downpipes",
+      "parent": "The annexe",
+      "index": 60,
+      "from": 0,
+      "to": -0.18
+    },
+    {
+      "name": "Blue gutters and downpipes",
+      "parent": "The annexe",
+      "index": 61,
+      "from": 0,
+      "to": -0.18
+    },
+    {
+      "name": "Blue gutters and downpipes",
+      "parent": "The annexe",
+      "index": 62,
+      "from": 0,
+      "to": -0.18
+    },
+    {
+      "name": "Blue gutters and downpipes",
+      "parent": "The annexe",
+      "index": 63,
+      "from": 0,
+      "to": -0.18
+    },
+    {
+      "name": "Blue gutters and downpipes",
+      "parent": "The annexe",
+      "index": 64,
+      "from": 0,
+      "to": -0.18
+    },
+    {
+      "name": "Blue gutters and downpipes",
+      "parent": "The annexe",
+      "index": 65,
+      "from": 0,
+      "to": -0.18
+    },
+    {
+      "name": "Blue gutters and downpipes",
+      "parent": "The annexe",
+      "index": 66,
+      "from": 0,
+      "to": -0.18
+    },
+    {
+      "name": "Blue gutters and downpipes",
+      "parent": "The annexe",
+      "index": 67,
+      "from": 0,
+      "to": -0.18
+    },
+    {
+      "name": "Blue gutters and downpipes",
+      "parent": "The annexe",
+      "index": 68,
+      "from": 0,
+      "to": -0.18
+    },
+    {
+      "name": "Blue gutters and downpipes",
+      "parent": "The annexe",
+      "index": 69,
+      "from": 0,
+      "to": -0.18
+    },
+    {
+      "name": "Blue gutters and downpipes",
+      "parent": "The annexe",
+      "index": 70,
+      "from": 0,
+      "to": -0.18
+    },
+    {
+      "name": "Blue gutters and downpipes",
+      "parent": "The annexe",
+      "index": 71,
+      "from": 0,
+      "to": -0.18
+    },
+    {
+      "name": "Oakmere four-bay left face",
+      "parent": "Oakmere lawn elevation",
+      "index": null,
+      "from": 8.583068877854316e-8,
+      "to": -0.18
+    },
+    {
+      "name": "Oakmere five-bay centre face",
+      "parent": "Oakmere lawn elevation",
+      "index": null,
+      "from": 8.583068877854316e-8,
+      "to": -0.18
+    },
+    {
+      "name": "Oakmere four-bay right face",
+      "parent": "Oakmere lawn elevation",
+      "index": null,
+      "from": 8.583068877854316e-8,
+      "to": -0.18
+    },
+    {
+      "name": "Oakmere low rear end room brick walls",
+      "parent": "Oakmere lawn elevation",
+      "index": null,
+      "from": 0,
+      "to": -0.18
+    },
+    {
+      "name": "Oakmere low hall link brick walls",
+      "parent": "Oakmere lawn elevation",
+      "index": null,
+      "from": 0,
+      "to": -0.18
+    },
+    {
+      "name": "Oakmere sash and masonry details",
+      "parent": "Oakmere lawn elevation",
+      "index": 2,
+      "from": 0,
+      "to": -0.18
+    },
+    {
+      "name": "Oakmere sash and masonry details",
+      "parent": "Oakmere lawn elevation",
+      "index": 3,
+      "from": 0,
+      "to": -0.18
+    },
+    {
+      "name": "Oakmere sash and masonry details",
+      "parent": "Oakmere lawn elevation",
+      "index": 4,
+      "from": 0,
+      "to": -0.18
+    },
+    {
+      "name": "Oakmere sash and masonry details",
+      "parent": "Oakmere lawn elevation",
+      "index": 5,
+      "from": 0,
+      "to": -0.18
+    },
+    {
+      "name": "Oakmere west four-bay left face",
+      "parent": "Oakmere west lawn elevation",
+      "index": null,
+      "from": 1.7166137755708633e-7,
+      "to": -0.18
+    },
+    {
+      "name": "Oakmere west five-bay gabled face",
+      "parent": "Oakmere west lawn elevation",
+      "index": null,
+      "from": 1.7166137755708633e-7,
+      "to": -0.18
+    },
+    {
+      "name": "Oakmere west four-bay right face",
+      "parent": "Oakmere west lawn elevation",
+      "index": null,
+      "from": 1.7166137755708633e-7,
+      "to": -0.18
+    },
+    {
+      "name": "Oakmere west low hall link brick walls",
+      "parent": "Oakmere west lawn elevation",
+      "index": null,
+      "from": 8.583068877854316e-8,
+      "to": -0.18
+    },
+    {
+      "name": "Oakmere west sash and masonry details",
+      "parent": "Oakmere west lawn elevation",
+      "index": 1,
+      "from": 0,
+      "to": -0.18
+    },
+    {
+      "name": "Oakmere west sash and masonry details",
+      "parent": "Oakmere west lawn elevation",
+      "index": 2,
+      "from": 0,
+      "to": -0.18
+    },
+    {
+      "name": "Oakmere west sash and masonry details",
+      "parent": "Oakmere west lawn elevation",
+      "index": 3,
+      "from": 0,
+      "to": -0.18
+    },
+    {
+      "name": "Oakmere west sash and masonry details",
+      "parent": "Oakmere west lawn elevation",
+      "index": 4,
+      "from": 0,
+      "to": -0.18
+    },
+    {
+      "name": "Annexe rear kitchen details",
+      "parent": "Annexe rear kitchen and paving",
+      "index": 8,
+      "from": 0,
+      "to": -0.18
+    },
+    {
+      "name": "Annexe rear kitchen details",
+      "parent": "Annexe rear kitchen and paving",
+      "index": 0,
+      "from": 0,
+      "to": -0.18
+    },
+    {
+      "name": "Annexe rear kitchen details",
+      "parent": "Annexe rear kitchen and paving",
+      "index": 1,
+      "from": 0,
+      "to": -0.18
+    },
+    {
+      "name": "Annexe rear kitchen details",
+      "parent": "Annexe rear kitchen and paving",
+      "index": 2,
+      "from": 0,
+      "to": -0.18
+    },
+    {
+      "name": "Annexe rear kitchen details",
+      "parent": "Annexe rear kitchen and paving",
+      "index": 0,
+      "from": 0,
+      "to": -0.18
+    },
+    {
+      "name": "Annexe rear kitchen details",
+      "parent": "Annexe rear kitchen and paving",
+      "index": 1,
+      "from": 0,
+      "to": -0.18
+    },
+    {
+      "name": "Annexe rear kitchen details",
+      "parent": "Annexe rear kitchen and paving",
+      "index": 2,
+      "from": 0,
+      "to": -0.18
+    },
+    {
+      "name": "Annexe rear kitchen details",
+      "parent": "Annexe rear kitchen and paving",
+      "index": 3,
+      "from": 0,
+      "to": -0.18
+    },
+    {
+      "name": "Annexe rear kitchen details",
+      "parent": "Annexe rear kitchen and paving",
+      "index": 4,
+      "from": 0,
+      "to": -0.18
+    },
+    {
+      "name": "Annexe rear kitchen details",
+      "parent": "Annexe rear kitchen and paving",
+      "index": 5,
+      "from": 0,
+      "to": -0.18
+    },
+    {
+      "name": "Annexe rear kitchen details",
+      "parent": "Annexe rear kitchen and paving",
+      "index": 6,
+      "from": 0,
+      "to": -0.18
+    },
+    {
+      "name": "Annexe rear kitchen details",
+      "parent": "Annexe rear kitchen and paving",
+      "index": 7,
+      "from": 0,
+      "to": -0.18
+    },
+    {
+      "name": "Annexe rear kitchen details",
+      "parent": "Annexe rear kitchen and paving",
+      "index": 8,
+      "from": 0,
+      "to": -0.18
+    },
+    {
+      "name": "Annexe rear kitchen details",
+      "parent": "Annexe rear kitchen and paving",
+      "index": 9,
+      "from": 0,
+      "to": -0.18
+    },
+    {
+      "name": "Annexe rear kitchen details",
+      "parent": "Annexe rear kitchen and paving",
+      "index": 10,
+      "from": 0,
+      "to": -0.18
+    },
+    {
+      "name": "Annexe rear kitchen details",
+      "parent": "Annexe rear kitchen and paving",
+      "index": 11,
+      "from": 0,
+      "to": -0.18
+    },
+    {
+      "name": "Annexe rear kitchen details",
+      "parent": "Annexe rear kitchen and paving",
+      "index": 12,
+      "from": 0,
+      "to": -0.18
+    },
+    {
+      "name": "Annexe rear kitchen details",
+      "parent": "Annexe rear kitchen and paving",
+      "index": 13,
+      "from": 0,
+      "to": -0.18
+    },
+    {
+      "name": "Annexe rear kitchen details",
+      "parent": "Annexe rear kitchen and paving",
+      "index": 14,
+      "from": 0,
+      "to": -0.18
+    },
+    {
+      "name": "Annexe rear kitchen details",
+      "parent": "Annexe rear kitchen and paving",
+      "index": 15,
+      "from": 0,
+      "to": -0.18
+    },
+    {
+      "name": "Annexe rear kitchen details",
+      "parent": "Annexe rear kitchen and paving",
+      "index": 16,
+      "from": 0,
+      "to": -0.18
+    },
+    {
+      "name": "Annexe rear kitchen details",
+      "parent": "Annexe rear kitchen and paving",
+      "index": 17,
+      "from": 0,
+      "to": -0.18
+    },
+    {
+      "name": "Annexe rear kitchen details",
+      "parent": "Annexe rear kitchen and paving",
+      "index": 18,
+      "from": 0,
+      "to": -0.18
+    },
+    {
+      "name": "Annexe rear kitchen details",
+      "parent": "Annexe rear kitchen and paving",
+      "index": 19,
+      "from": 0,
+      "to": -0.18
+    },
+    {
+      "name": "Annexe rear kitchen details",
+      "parent": "Annexe rear kitchen and paving",
+      "index": 20,
+      "from": 0,
+      "to": -0.18
+    },
+    {
+      "name": "Annexe rear kitchen details",
+      "parent": "Annexe rear kitchen and paving",
+      "index": 0,
+      "from": 0,
+      "to": -0.18
+    },
+    {
+      "name": "Annexe rear kitchen details",
+      "parent": "Annexe rear kitchen and paving",
+      "index": 1,
+      "from": 0,
+      "to": -0.18
+    },
+    {
+      "name": "Carden stepped low side range brick walls",
+      "parent": "Carden side elevation",
+      "index": null,
+      "from": 4.463837956343949e-16,
+      "to": -0.18
+    },
+    {
+      "name": "Carden conservatory low rear link brick walls",
+      "parent": "Carden side elevation",
+      "index": null,
+      "from": 8.583068877854316e-8,
+      "to": -0.18
+    },
+    {
+      "name": "Carden tower gabled range brick walls",
+      "parent": "Carden side elevation",
+      "index": null,
+      "from": 1.7166136956348055e-8,
+      "to": -0.18
+    },
+    {
+      "name": "Carden canted conservatory brick plinth",
+      "parent": "Carden side elevation",
+      "index": null,
+      "from": 9.919639267711844e-16,
+      "to": -0.18
+    },
+    {
+      "name": "Carden windows and trim",
+      "parent": "Carden side elevation",
+      "index": 4,
+      "from": 0,
+      "to": -0.18
+    },
+    {
+      "name": "Carden windows and trim",
+      "parent": "Carden side elevation",
+      "index": 6,
+      "from": 0,
+      "to": -0.18
+    },
+    {
+      "name": "Carden windows and trim",
+      "parent": "Carden side elevation",
+      "index": 2,
+      "from": 0,
+      "to": -0.18
+    },
+    {
+      "name": "Carden windows and trim",
+      "parent": "Carden side elevation",
+      "index": 3,
+      "from": 0,
+      "to": -0.18
+    },
+    {
+      "name": "Carden windows and trim",
+      "parent": "Carden side elevation",
+      "index": 4,
+      "from": 0,
+      "to": -0.18
+    },
+    {
+      "name": "East court entrance link brick walls",
+      "parent": "East court entrance link",
+      "index": null,
+      "from": 1.7166137711299712e-7,
+      "to": -0.18
+    },
+    {
+      "name": "Annexe facade details",
+      "parent": "East court entrance link",
+      "index": 0,
+      "from": 0,
+      "to": -0.18
+    },
+    {
+      "name": "Blue gutters and downpipes",
+      "parent": "East court entrance link",
+      "index": 4,
+      "from": 0,
+      "to": -0.18
+    },
+    {
+      "name": "",
+      "parent": "1829 estate · aerial reconstruction",
+      "index": 0,
+      "from": 0,
+      "to": -0.18
+    },
+    {
+      "name": "",
+      "parent": "1829 estate · aerial reconstruction",
+      "index": 1,
+      "from": 0,
+      "to": -0.18
+    },
+    {
+      "name": "",
+      "parent": "1829 estate · aerial reconstruction",
+      "index": 3,
+      "from": 0,
+      "to": -0.18
+    },
+    {
+      "name": "",
+      "parent": "1829 estate · aerial reconstruction",
+      "index": 8,
+      "from": 0,
+      "to": -0.18
+    },
+    {
+      "name": "",
+      "parent": "1829 estate · aerial reconstruction",
+      "index": 22,
+      "from": -0.05000000447034836,
+      "to": -0.18
+    },
+    {
+      "name": "",
+      "parent": "1829 estate · aerial reconstruction",
+      "index": 145,
+      "from": 0,
+      "to": -0.18
+    },
+    {
+      "name": "",
+      "parent": "1829 estate · aerial reconstruction",
+      "index": 152,
+      "from": 0,
+      "to": -0.18
+    },
+    {
+      "name": "",
+      "parent": "1829 estate · aerial reconstruction",
+      "index": 174,
+      "from": 0,
+      "to": -0.18
+    },
+    {
+      "name": "",
+      "parent": "1829 estate · aerial reconstruction",
+      "index": 197,
+      "from": 0,
+      "to": -0.18
+    },
+    {
+      "name": "",
+      "parent": "1829 estate · aerial reconstruction",
+      "index": 250,
+      "from": 0,
+      "to": -0.18
+    },
+    {
+      "name": "",
+      "parent": "1829 estate · aerial reconstruction",
+      "index": 252,
+      "from": 0,
+      "to": -0.18
+    },
+    {
+      "name": "",
+      "parent": "1829 estate · aerial reconstruction",
+      "index": 275,
+      "from": 0,
+      "to": -0.18
+    },
+    {
+      "name": "",
+      "parent": "1829 estate · aerial reconstruction",
+      "index": 532,
+      "from": 0,
+      "to": -0.18
+    },
+    {
+      "name": "",
+      "parent": "1829 estate · aerial reconstruction",
+      "index": 552,
+      "from": 0,
+      "to": -0.18
+    },
+    {
+      "name": "",
+      "parent": "1829 estate · aerial reconstruction",
+      "index": 594,
+      "from": 0,
+      "to": -0.18
+    },
+    {
+      "name": "",
+      "parent": "1829 estate · aerial reconstruction",
+      "index": 100,
+      "from": 0,
+      "to": -0.18
+    },
+    {
+      "name": "",
+      "parent": "1829 estate · aerial reconstruction",
+      "index": 102,
+      "from": 0,
+      "to": -0.18
+    },
+    {
+      "name": "",
+      "parent": "1829 estate · aerial reconstruction",
+      "index": 104,
+      "from": 0,
+      "to": -0.18
+    },
+    {
+      "name": "",
+      "parent": "1829 estate · aerial reconstruction",
+      "index": 105,
+      "from": 0,
+      "to": -0.18
+    },
+    {
+      "name": "",
+      "parent": "1829 estate · aerial reconstruction",
+      "index": 106,
+      "from": 0,
+      "to": -0.18
+    },
+    {
+      "name": "",
+      "parent": "1829 estate · aerial reconstruction",
+      "index": 111,
+      "from": 0,
+      "to": -0.18
+    },
+    {
+      "name": "",
+      "parent": "1829 estate · aerial reconstruction",
+      "index": 113,
+      "from": 0,
+      "to": -0.18
+    },
+    {
+      "name": "",
+      "parent": "1829 estate · aerial reconstruction",
+      "index": 115,
+      "from": 0,
+      "to": -0.18
+    },
+    {
+      "name": "",
+      "parent": "1829 estate · aerial reconstruction",
+      "index": 117,
+      "from": 0,
+      "to": -0.18
+    },
+    {
+      "name": "",
+      "parent": "1829 estate · aerial reconstruction",
+      "index": 119,
+      "from": 0,
+      "to": -0.18
+    },
+    {
+      "name": "",
+      "parent": "1829 estate · aerial reconstruction",
+      "index": 138,
+      "from": 0,
+      "to": -0.18
+    },
+    {
+      "name": "",
+      "parent": "1829 estate · aerial reconstruction",
+      "index": 173,
+      "from": -0.02499997615814209,
+      "to": -0.18
+    },
+    {
+      "name": "",
+      "parent": "1829 estate · aerial reconstruction",
+      "index": 174,
+      "from": -0.02499997615814209,
+      "to": -0.18
+    },
+    {
+      "name": "",
+      "parent": "1829 estate · aerial reconstruction",
+      "index": 186,
+      "from": -0.02499997615814209,
+      "to": -0.18
+    },
+    {
+      "name": "",
+      "parent": "1829 estate · aerial reconstruction",
+      "index": 187,
+      "from": -0.02499997615814209,
+      "to": -0.18
+    },
+    {
+      "name": "",
+      "parent": "1829 estate · aerial reconstruction",
+      "index": 215,
+      "from": -0.02499997615814209,
+      "to": -0.18
+    },
+    {
+      "name": "",
+      "parent": "1829 estate · aerial reconstruction",
+      "index": 216,
+      "from": -0.02499997615814209,
+      "to": -0.18
+    },
+    {
+      "name": "",
+      "parent": "1829 estate · aerial reconstruction",
+      "index": 243,
+      "from": 0,
+      "to": -0.18
+    },
+    {
+      "name": "",
+      "parent": "1829 estate · aerial reconstruction",
+      "index": 244,
+      "from": 0,
+      "to": -0.18
+    },
+    {
+      "name": "",
+      "parent": "1829 estate · aerial reconstruction",
+      "index": 252,
+      "from": -0.02499997615814209,
+      "to": -0.18
+    },
+    {
+      "name": "",
+      "parent": "1829 estate · aerial reconstruction",
+      "index": 253,
+      "from": -0.02499997615814209,
+      "to": -0.18
+    },
+    {
+      "name": "",
+      "parent": "1829 estate · aerial reconstruction",
+      "index": 340,
+      "from": -0.02499997615814209,
+      "to": -0.18
+    },
+    {
+      "name": "",
+      "parent": "1829 estate · aerial reconstruction",
+      "index": 341,
+      "from": -0.02499997615814209,
+      "to": -0.18
+    },
+    {
+      "name": "",
+      "parent": "1829 estate · aerial reconstruction",
+      "index": 345,
+      "from": -0.02499997615814209,
+      "to": -0.18
+    },
+    {
+      "name": "",
+      "parent": "1829 estate · aerial reconstruction",
+      "index": 346,
+      "from": -0.02499997615814209,
+      "to": -0.18
+    },
+    {
+      "name": "",
+      "parent": "1829 estate · aerial reconstruction",
+      "index": 374,
+      "from": -0.02499997615814209,
+      "to": -0.18
+    },
+    {
+      "name": "",
+      "parent": "1829 estate · aerial reconstruction",
+      "index": 375,
+      "from": -0.02499997615814209,
+      "to": -0.18
+    },
+    {
+      "name": "",
+      "parent": "1829 estate · aerial reconstruction",
+      "index": 430,
+      "from": 0,
+      "to": -0.18
+    },
+    {
+      "name": "",
+      "parent": "1829 estate · aerial reconstruction",
+      "index": 431,
+      "from": 0,
+      "to": -0.18
+    },
+    {
+      "name": "",
+      "parent": "1829 estate · aerial reconstruction",
+      "index": 459,
+      "from": 0,
+      "to": -0.18
+    },
+    {
+      "name": "",
+      "parent": "1829 estate · aerial reconstruction",
+      "index": 560,
+      "from": 0,
+      "to": -0.18
+    },
+    {
+      "name": "",
+      "parent": "1829 estate · aerial reconstruction",
+      "index": 561,
+      "from": 0,
+      "to": -0.18
+    },
+    {
+      "name": "",
+      "parent": "1829 estate · aerial reconstruction",
+      "index": 562,
+      "from": 0,
+      "to": -0.18
+    },
+    {
+      "name": "",
+      "parent": "1829 estate · aerial reconstruction",
+      "index": 563,
+      "from": 0,
+      "to": -0.18
+    },
+    {
+      "name": "",
+      "parent": "1829 estate · aerial reconstruction",
+      "index": 614,
+      "from": 0,
+      "to": -0.18
+    },
+    {
+      "name": "",
+      "parent": "1829 estate · aerial reconstruction",
+      "index": 627,
+      "from": 0,
+      "to": -0.18
+    },
+    {
+      "name": "",
+      "parent": "1829 estate · aerial reconstruction",
+      "index": 635,
+      "from": 0,
+      "to": -0.18
+    },
+    {
+      "name": "",
+      "parent": "1829 estate · aerial reconstruction",
+      "index": 636,
+      "from": 0,
+      "to": -0.18
+    },
+    {
+      "name": "",
+      "parent": "1829 estate · aerial reconstruction",
+      "index": 717,
+      "from": -0.02499997615814209,
+      "to": -0.18
+    },
+    {
+      "name": "",
+      "parent": "1829 estate · aerial reconstruction",
+      "index": 718,
+      "from": -0.02499997615814209,
+      "to": -0.18
+    },
+    {
+      "name": "",
+      "parent": "1829 estate · aerial reconstruction",
+      "index": 721,
+      "from": 0,
+      "to": -0.18
+    },
+    {
+      "name": "",
+      "parent": "1829 estate · aerial reconstruction",
+      "index": 744,
+      "from": -0.02499997615814209,
+      "to": -0.18
+    },
+    {
+      "name": "",
+      "parent": "1829 estate · aerial reconstruction",
+      "index": 745,
+      "from": -0.02499997615814209,
+      "to": -0.18
+    },
+    {
+      "name": "",
+      "parent": "1829 estate · aerial reconstruction",
+      "index": 792,
+      "from": -0.02499997615814209,
+      "to": -0.18
+    },
+    {
+      "name": "",
+      "parent": "1829 estate · aerial reconstruction",
+      "index": 793,
+      "from": -0.02499997615814209,
+      "to": -0.18
+    },
+    {
+      "name": "",
+      "parent": "1829 estate · aerial reconstruction",
+      "index": 816,
+      "from": 0,
+      "to": -0.18
+    },
+    {
+      "name": "",
+      "parent": "1829 estate · aerial reconstruction",
+      "index": 881,
+      "from": 0,
+      "to": -0.18
+    },
+    {
+      "name": "",
+      "parent": "1829 estate · aerial reconstruction",
+      "index": 0,
+      "from": 0,
+      "to": -0.18
+    },
+    {
+      "name": "",
+      "parent": "1829 estate · aerial reconstruction",
+      "index": 1,
+      "from": 0,
+      "to": -0.18
+    },
+    {
+      "name": "",
+      "parent": "1829 estate · aerial reconstruction",
+      "index": 58,
+      "from": 0,
+      "to": -0.18
+    },
+    {
+      "name": "",
+      "parent": "1829 estate · aerial reconstruction",
+      "index": 62,
+      "from": 0,
+      "to": -0.18
+    },
+    {
+      "name": "",
+      "parent": "1829 estate · aerial reconstruction",
+      "index": 63,
+      "from": 0,
+      "to": -0.18
+    },
+    {
+      "name": "",
+      "parent": "1829 estate · aerial reconstruction",
+      "index": 64,
+      "from": 0,
+      "to": -0.18
+    },
+    {
+      "name": "",
+      "parent": "1829 estate · aerial reconstruction",
+      "index": 65,
+      "from": 0,
+      "to": -0.18
+    },
+    {
+      "name": "",
+      "parent": "1829 estate · aerial reconstruction",
+      "index": 66,
+      "from": 0,
+      "to": -0.18
+    },
+    {
+      "name": "",
+      "parent": "1829 estate · aerial reconstruction",
+      "index": 67,
+      "from": 0,
+      "to": -0.18
+    },
+    {
+      "name": "",
+      "parent": "1829 estate · aerial reconstruction",
+      "index": 68,
+      "from": 0,
+      "to": -0.18
+    },
+    {
+      "name": "",
+      "parent": "1829 estate · aerial reconstruction",
+      "index": 73,
+      "from": 0,
+      "to": -0.18
+    },
+    {
+      "name": "",
+      "parent": "1829 estate · aerial reconstruction",
+      "index": 74,
+      "from": 0,
+      "to": -0.18
+    },
+    {
+      "name": "",
+      "parent": "1829 estate · aerial reconstruction",
+      "index": 75,
+      "from": 0,
+      "to": -0.18
+    },
+    {
+      "name": "",
+      "parent": "1829 estate · aerial reconstruction",
+      "index": 76,
+      "from": 0,
+      "to": -0.18
+    },
+    {
+      "name": "",
+      "parent": "1829 estate · aerial reconstruction",
+      "index": 77,
+      "from": 0,
+      "to": -0.18
+    },
+    {
+      "name": "",
+      "parent": "1829 estate · aerial reconstruction",
+      "index": 78,
+      "from": 0,
+      "to": -0.18
+    },
+    {
+      "name": "",
+      "parent": "1829 estate · aerial reconstruction",
+      "index": 351,
+      "from": 0,
+      "to": -0.18
+    },
+    {
+      "name": "",
+      "parent": "1829 estate · aerial reconstruction",
+      "index": 352,
+      "from": 0,
+      "to": -0.18
+    },
+    {
+      "name": "",
+      "parent": "1829 estate · aerial reconstruction",
+      "index": 353,
+      "from": 0,
+      "to": -0.18
+    },
+    {
+      "name": "",
+      "parent": "1829 estate · aerial reconstruction",
+      "index": 357,
+      "from": 0,
+      "to": -0.18
+    },
+    {
+      "name": "",
+      "parent": "1829 estate · aerial reconstruction",
+      "index": 358,
+      "from": 0,
+      "to": -0.18
+    },
+    {
+      "name": "",
+      "parent": "1829 estate · aerial reconstruction",
+      "index": 359,
+      "from": 0,
+      "to": -0.18
+    },
+    {
+      "name": "",
+      "parent": "1829 estate · aerial reconstruction",
+      "index": 490,
+      "from": 0,
+      "to": -0.18
+    },
+    {
+      "name": "",
+      "parent": "1829 estate · aerial reconstruction",
+      "index": 491,
+      "from": 0,
+      "to": -0.18
+    },
+    {
+      "name": "",
+      "parent": "1829 estate · aerial reconstruction",
+      "index": 492,
+      "from": 0,
+      "to": -0.18
+    },
+    {
+      "name": "",
+      "parent": "1829 estate · aerial reconstruction",
+      "index": 493,
+      "from": 0,
+      "to": -0.18
+    },
+    {
+      "name": "",
+      "parent": "1829 estate · aerial reconstruction",
+      "index": 494,
+      "from": 0,
+      "to": -0.18
+    },
+    {
+      "name": "",
+      "parent": "1829 estate · aerial reconstruction",
+      "index": 495,
+      "from": 0,
+      "to": -0.18
+    },
+    {
+      "name": "",
+      "parent": "1829 estate · aerial reconstruction",
+      "index": 496,
+      "from": 0,
+      "to": -0.18
+    },
+    {
+      "name": "",
+      "parent": "1829 estate · aerial reconstruction",
+      "index": 695,
+      "from": 0,
+      "to": -0.18
+    },
+    {
+      "name": "",
+      "parent": "1829 estate · aerial reconstruction",
+      "index": 696,
+      "from": 0,
+      "to": -0.18
+    },
+    {
+      "name": "",
+      "parent": "1829 estate · aerial reconstruction",
+      "index": 697,
+      "from": 0,
+      "to": -0.18
+    },
+    {
+      "name": "",
+      "parent": "1829 estate · aerial reconstruction",
+      "index": 698,
+      "from": 0,
+      "to": -0.18
+    },
+    {
+      "name": "",
+      "parent": "1829 estate · aerial reconstruction",
+      "index": 699,
+      "from": 0,
+      "to": -0.18
+    },
+    {
+      "name": "",
+      "parent": "1829 estate · aerial reconstruction",
+      "index": 769,
+      "from": 0,
+      "to": -0.18
+    },
+    {
+      "name": "",
+      "parent": "1829 estate · aerial reconstruction",
+      "index": 770,
+      "from": 0,
+      "to": -0.18
+    },
+    {
+      "name": "",
+      "parent": "1829 estate · aerial reconstruction",
+      "index": 771,
+      "from": 0,
+      "to": -0.18
+    },
+    {
+      "name": "",
+      "parent": "1829 estate · aerial reconstruction",
+      "index": 835,
+      "from": 0,
+      "to": -0.18
+    },
+    {
+      "name": "",
+      "parent": "1829 estate · aerial reconstruction",
+      "index": 836,
+      "from": 0,
+      "to": -0.18
+    },
+    {
+      "name": "",
+      "parent": "1829 estate · aerial reconstruction",
+      "index": 837,
+      "from": 0,
+      "to": -0.18
+    },
+    {
+      "name": "",
+      "parent": "1829 estate · aerial reconstruction",
+      "index": 838,
+      "from": 0,
+      "to": -0.18
+    },
+    {
+      "name": "",
+      "parent": "1829 estate · aerial reconstruction",
+      "index": 839,
+      "from": 0,
+      "to": -0.18
+    },
+    {
+      "name": "",
+      "parent": "1829 estate · aerial reconstruction",
+      "index": 847,
+      "from": 0,
+      "to": -0.18
+    },
+    {
+      "name": "",
+      "parent": "1829 estate · aerial reconstruction",
+      "index": 848,
+      "from": 0,
+      "to": -0.18
+    },
+    {
+      "name": "",
+      "parent": "1829 estate · aerial reconstruction",
+      "index": 854,
+      "from": 0,
+      "to": -0.18
+    },
+    {
+      "name": "",
+      "parent": "1829 estate · aerial reconstruction",
+      "index": 855,
+      "from": 0,
+      "to": -0.18
+    },
+    {
+      "name": "",
+      "parent": "1829 estate · aerial reconstruction",
+      "index": 856,
+      "from": 0,
+      "to": -0.18
+    },
+    {
+      "name": "",
+      "parent": "1829 estate · aerial reconstruction",
+      "index": 857,
+      "from": 0,
+      "to": -0.18
+    },
+    {
+      "name": "",
+      "parent": "1829 estate · aerial reconstruction",
+      "index": 858,
+      "from": 0,
+      "to": -0.18
+    },
+    {
+      "name": "",
+      "parent": "1829 estate · aerial reconstruction",
+      "index": 859,
+      "from": 0,
+      "to": -0.18
+    },
+    {
+      "name": "",
+      "parent": "1829 estate · aerial reconstruction",
+      "index": 951,
+      "from": 0,
+      "to": -0.18
+    },
+    {
+      "name": "",
+      "parent": "1829 estate · aerial reconstruction",
+      "index": 952,
+      "from": 0,
+      "to": -0.18
+    },
+    {
+      "name": "",
+      "parent": "1829 estate · aerial reconstruction",
+      "index": 953,
+      "from": 0,
+      "to": -0.18
+    },
+    {
+      "name": "",
+      "parent": "1829 estate · aerial reconstruction",
+      "index": 960,
+      "from": 0,
+      "to": -0.18
+    },
+    {
+      "name": "",
+      "parent": "1829 estate · aerial reconstruction",
+      "index": 961,
+      "from": 0,
+      "to": -0.18
+    },
+    {
+      "name": "",
+      "parent": "1829 estate · aerial reconstruction",
+      "index": 963,
+      "from": 0,
+      "to": -0.18
+    },
+    {
+      "name": "",
+      "parent": "1829 estate · aerial reconstruction",
+      "index": 964,
+      "from": 0,
+      "to": -0.18
+    },
+    {
+      "name": "",
+      "parent": "1829 estate · aerial reconstruction",
+      "index": 965,
+      "from": 0,
+      "to": -0.18
+    },
+    {
+      "name": "",
+      "parent": "1829 estate · aerial reconstruction",
+      "index": 972,
+      "from": 0,
+      "to": -0.18
+    },
+    {
+      "name": "",
+      "parent": "1829 estate · aerial reconstruction",
+      "index": 973,
+      "from": 0,
+      "to": -0.18
+    },
+    {
+      "name": "",
+      "parent": "1829 estate · aerial reconstruction",
+      "index": 974,
+      "from": 0,
+      "to": -0.18
+    },
+    {
+      "name": "",
+      "parent": "1829 estate · aerial reconstruction",
+      "index": 975,
+      "from": 0,
+      "to": -0.18
+    },
+    {
+      "name": "",
+      "parent": "1829 estate · aerial reconstruction",
+      "index": 976,
+      "from": 0,
+      "to": -0.18
+    },
+    {
+      "name": "",
+      "parent": "1829 estate · aerial reconstruction",
+      "index": 977,
+      "from": 0,
+      "to": -0.18
+    },
+    {
+      "name": "",
+      "parent": "1829 estate · aerial reconstruction",
+      "index": 978,
+      "from": 0,
+      "to": -0.18
+    },
+    {
+      "name": "",
+      "parent": "1829 estate · aerial reconstruction",
+      "index": 979,
+      "from": 0,
+      "to": -0.18
+    },
+    {
+      "name": "",
+      "parent": "1829 estate · aerial reconstruction",
+      "index": 0,
+      "from": 0,
+      "to": -0.18
+    },
+    {
+      "name": "",
+      "parent": "1829 estate · aerial reconstruction",
+      "index": 2,
+      "from": 0,
+      "to": -0.18
+    },
+    {
+      "name": "",
+      "parent": "1829 estate · aerial reconstruction",
+      "index": 3,
+      "from": 0,
+      "to": -0.18
+    },
+    {
+      "name": "",
+      "parent": "1829 estate · aerial reconstruction",
+      "index": 4,
+      "from": 0,
+      "to": -0.18
+    },
+    {
+      "name": "",
+      "parent": "1829 estate · aerial reconstruction",
+      "index": 7,
+      "from": 0,
+      "to": -0.18
+    },
+    {
+      "name": "",
+      "parent": "1829 estate · aerial reconstruction",
+      "index": 8,
+      "from": 0,
+      "to": -0.18
+    },
+    {
+      "name": "",
+      "parent": "1829 estate · aerial reconstruction",
+      "index": 10,
+      "from": 0,
+      "to": -0.18
+    },
+    {
+      "name": "",
+      "parent": "1829 estate · aerial reconstruction",
+      "index": 17,
+      "from": 0,
+      "to": -0.18
+    },
+    {
+      "name": "",
+      "parent": "1829 estate · aerial reconstruction",
+      "index": 18,
+      "from": 0,
+      "to": -0.18
+    },
+    {
+      "name": "",
+      "parent": "1829 estate · aerial reconstruction",
+      "index": 20,
+      "from": 0,
+      "to": -0.18
+    },
+    {
+      "name": "",
+      "parent": "1829 estate · aerial reconstruction",
+      "index": 14,
+      "from": 0,
+      "to": -0.18
+    },
+    {
+      "name": "",
+      "parent": "1829 estate · aerial reconstruction",
+      "index": 15,
+      "from": 0,
+      "to": -0.18
+    },
+    {
+      "name": "",
+      "parent": "1829 estate · aerial reconstruction",
+      "index": 16,
+      "from": 0,
+      "to": -0.18
+    },
+    {
+      "name": "",
+      "parent": "1829 estate · aerial reconstruction",
+      "index": 0,
+      "from": 0,
+      "to": -0.18
+    }
+  ],
+  "ranges": [
+    {
+      "h": 8.4,
+      "rise": 2.2,
+      "name": "Rear east connecting range",
+      "rect": [
+        9,
+        -46,
+        48,
+        -38
+      ],
+      "section": "rear-east",
+      "wardId": "leighton-newton",
+      "x": 43.88574079512094,
+      "z": -96.67607498318878,
+      "w": 63.203046838335545,
+      "d": 12.96472755658165,
+      "r": 0.3839724354387525
+    },
+    {
+      "h": 8.4,
+      "rise": 2.8,
+      "name": "Rear east end pavilion",
+      "rect": [
+        39,
+        -66,
+        48,
+        -38
+      ],
+      "section": "rear-east",
+      "wardId": "leighton-newton",
+      "x": 60.35368664442467,
+      "z": -120.80819336584415,
+      "w": 14.585318501154354,
+      "d": 45.37654644803577,
+      "r": 0.3839724354387525
+    }
+  ]
+}

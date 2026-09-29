@@ -1,0 +1,134 @@
+[
+  {
+    "file": "test-jarman.mjs",
+    "exitCode": 0
+  },
+  {
+    "file": "test-oakmere-court.mjs",
+    "exitCode": 0
+  },
+  {
+    "file": "test-oakmere.mjs",
+    "exitCode": 0
+  },
+  {
+    "file": "test-oakmere-west.mjs",
+    "exitCode": 0
+  },
+  {
+    "file": "test-oakmere-windows.mjs",
+    "exitCode": 0
+  },
+  {
+    "file": "test-annexe-wards.mjs",
+    "exitCode": 0
+  },
+  {
+    "file": "test-leighton-newton.mjs",
+    "exitCode": 0
+  },
+  {
+    "file": "test-churton.mjs",
+    "exitCode": 0
+  },
+  {
+    "file": "test-upton.mjs",
+    "exitCode": 0
+  },
+  {
+    "file": "test-garages-mortuary.mjs",
+    "exitCode": 0
+  },
+  {
+    "file": "test-greenhouses.mjs",
+    "exitCode": 0
+  },
+  {
+    "file": "test-main-admin.mjs",
+    "exitCode": 0
+  },
+  {
+    "file": "test-main-kitchen.mjs",
+    "exitCode": 0
+  },
+  {
+    "file": "test-main-admin-refine2.mjs",
+    "exitCode": 0
+  },
+  {
+    "file": "test-aerial-controls.mjs",
+    "exitCode": 0
+  },
+  {
+    "file": "test-device-location.mjs",
+    "exitCode": 0
+  },
+  {
+    "file": "test-aerial-layouts.mjs",
+    "exitCode": 1
+  },
+  {
+    "file": "test-kml-imports.mjs",
+    "exitCode": 0
+  },
+  {
+    "file": "test-kml-11.mjs",
+    "exitCode": 0
+  },
+  {
+    "file": "test-modern-entrance.mjs",
+    "exitCode": 0
+  },
+  {
+    "file": "test-modern-car-park.mjs",
+    "exitCode": 0
+  },
+  {
+    "file": "test-parsons-retrace.mjs",
+    "exitCode": 0
+  },
+  {
+    "file": "test-historic-roads.mjs",
+    "exitCode": 0
+  },
+  {
+    "file": "test-west-parsons-junctions.mjs",
+    "exitCode": 0
+  },
+  {
+    "file": "test-admin-teardrop.mjs",
+    "exitCode": 0
+  },
+  {
+    "file": "test-annexe-access.mjs",
+    "exitCode": 0
+  },
+  {
+    "file": "test-annexe-rear-roads.mjs",
+    "exitCode": 0
+  },
+  {
+    "file": "test-performance.mjs",
+    "exitCode": 0
+  },
+  {
+    "file": "test-aerial-performance.mjs",
+    "exitCode": 0
+  },
+  {
+    "file": "test-building-detail.mjs",
+    "exitCode": 0
+  },
+  {
+    "file": "test-outhouse.mjs",
+    "exitCode": 0
+  },
+  {
+    "file": "test-willows.mjs",
+    "exitCode": 0
+  },
+  {
+    "file": "test-building-photos.mjs",
+    "exitCode": 0
+  }
+]

@@ -28,13 +28,16 @@ function texture(THREE,source,{grey=false,repeat=false}={}){
 
 export function addFrontLawnEZTrees(THREE,trees,specs){
   if(!specs.length)return;
-  const base=specs[0],generator=new Tree();generator.options.copy(frontLawnOptions(base.seed));
+  // Keep the shared buffer fit fixed when resizing an individual specimen.
+  const base={seed:1901,height:19.5*1.2,radius:8.6*1.2},generator=new Tree();generator.options.copy(frontLawnOptions(base.seed));
   const leafMap=texture(THREE,oak,{grey:true}),barkMap=texture(THREE,bark,{repeat:true});
   const wood=new THREE.MeshStandardMaterial({name:'EZ-Tree lawn bark',color:0x827b6a,map:barkMap,roughness:1});
   const leaves=new THREE.MeshStandardMaterial({name:'EZ-Tree green lawn foliage',map:leafMap,
     color:0x719b4b,alphaTest:.45,side:THREE.DoubleSide,roughness:1});
   leaves.userData.frontLawnWind={phase:0,strength:.16};installLeafWind(leaves);
-  // Six rotated copies share all branch/leaf buffers, textures and materials.
+  const copperLeaves=leaves.clone();copperLeaves.name='EZ-Tree copper lawn foliage';
+  copperLeaves.color.setHex(0xa18a70);installLeafWind(copperLeaves);
+  // Six rotated copies share buffers/textures, with two shared foliage tints.
   // Keep independent LOD selection so walking still reveals nearby detail.
   const levels=[];let fit,crownTop;
   for(const [distance,detail] of [[0,{}],[95,{sectionStride:3,segmentFactor:.65,leafStride:3,leafScale:1.35}],
@@ -49,7 +52,10 @@ export function addFrontLawnEZTrees(THREE,trees,specs){
       const g=geometry[key],positions=g.attributes.position;
       // Shorten the preset's tall terminal leader into a rounded mature crown.
       for(let i=0;i<positions.count;i++){const y=positions.getY(i);if(y>crownTop*.62)positions.setY(i,crownTop*.62+(y-crownTop*.62)*.45);}
-      g.scale(fit.x,fit.y,fit.z);g.computeBoundingBox();g.computeBoundingSphere();
+      g.scale(fit.x,fit.y,fit.z);
+      // Only extend the root ring. All copies and LODs retain their crowns.
+      if(key==='branches')for(let i=0;i<positions.count;i++)if(positions.getY(i)<.001)positions.setY(i,-.36);
+      g.computeBoundingBox();g.computeBoundingSphere();
       if(key==='leaves'){g.boundingBox.expandByScalar(.24);g.boundingSphere.radius+=.24;}
     }
     levels.push({distance,geometry});
@@ -64,7 +70,7 @@ export function addFrontLawnEZTrees(THREE,trees,specs){
     const lod=new THREE.LOD();lod.name=spec.name+' EZ-Tree detail';group.add(lod);
     for(const {distance,geometry} of levels){
       const level=new THREE.Group();level.name=spec.name+' detail '+distance;
-      for(const [key,material] of [['branches',wood],['leaves',leaves]]){
+      for(const [key,material] of [['branches',wood],['leaves',spec.copper?copperLeaves:leaves]]){
         const mesh=new THREE.Mesh(geometry[key],material);mesh.name=spec.name+' EZ-Tree '+key;
         mesh.castShadow=true;mesh.receiveShadow=true;mesh.userData.noWalkingCollision=true;level.add(mesh);
       }

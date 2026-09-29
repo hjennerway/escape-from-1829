@@ -75,7 +75,14 @@ export function addFrontBasement(THREE,{model,material}){
       [[20.52,21.78],[30.75,21.78]],[[28.35,19.62],[30.75,19.62]]
     ];
     retaining.forEach(([a,b],i)=>{
-      wall('retaining wall '+i,a,b,level-.08,grade-.025,.16,masonry,true);
+      // The outer stair's back wall meets the white facade at z=19.7.
+      // Recess only the masonry above the facade's foot by 3 cm. The lower
+      // wall must still meet the excavation at z=19.7 to conceal the terrain.
+      if(i===7){
+        wall('retaining wall '+i+' foundation',a,b,level-.08,0,.16,masonry,true);
+        const setback=.03;
+        wall('retaining wall '+i,[a[0],a[1]-setback/2],[b[0],b[1]-setback/2],0,grade-.025,.16-setback,masonry,true);
+      }else wall('retaining wall '+i,a,b,level-.08,grade-.025,.16,masonry,true);
       wall('retaining coping '+i,a,b,grade-.025,grade+.055,.2,stone);
     });
   }

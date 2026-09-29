@@ -75,7 +75,7 @@
         "levels": 3
       }
     ],
-    "states": 2,
+    "states": 4,
     "windAdvances": true,
     "drawCalls": 180,
     "errors": []
@@ -156,7 +156,7 @@
         "levels": 3
       }
     ],
-    "states": 2,
+    "states": 4,
     "windAdvances": true,
     "drawCalls": 180,
     "errors": []
@@ -237,9 +237,9 @@
         "levels": 3
       }
     ],
-    "states": 2,
+    "states": 4,
     "windAdvances": true,
-    "drawCalls": 294,
+    "drawCalls": 6911,
     "errors": []
   }
 ]
