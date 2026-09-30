@@ -1,0 +1,12 @@
+<component name="libraryTable">
+  <library name="Licenses">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/Unity/Library/Bee/Android/Prj/IL2CPP/Gradle/launcher/build/intermediates/compressed_assets/release/compressReleaseAssets/out/assets/Licenses/GPL-3.0.txt.jar!/" />
+      <root url="jar://$PROJECT_DIR$/Unity/Library/Bee/Android/Prj/IL2CPP/Gradle/launcher/build/intermediates/compressed_assets/release/compressReleaseAssets/out/assets/Licenses/EZ-TREE-LICENSE.txt.jar!/" />
+      <root url="jar://$PROJECT_DIR$/Unity/Library/Bee/Android/Prj/IL2CPP/Gradle/launcher/build/intermediates/compressed_assets/release/compressReleaseAssets/out/assets/Licenses/THREE-LICENSE.txt.jar!/" />
+      <root url="jar://$PROJECT_DIR$/Unity/Library/Bee/Android/Prj/IL2CPP/Gradle/launcher/build/intermediates/compressed_assets/release/compressReleaseAssets/out/assets/Licenses/TREE-TEXTURES-LICENSE.txt.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

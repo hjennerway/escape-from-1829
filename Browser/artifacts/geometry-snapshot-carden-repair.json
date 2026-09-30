@@ -1,0 +1,172 @@
+{
+  "originalFailureCount": 11,
+  "previousCardenSource": "edb1924",
+  "correctionCommit": "3cb6ea0",
+  "sourceHash": "bf3f2437f3d857fa77ec5cee686270bad0285909aa683fbd5a815a33316bbb9b",
+  "compiledSourceMatches": true,
+  "unchangedCountsRootsAndRanges": true,
+  "originalBaselineReplay": [
+    {
+      "command": "node test-larkton.mjs",
+      "passed": true
+    },
+    {
+      "command": "node test-larkton-recess.mjs",
+      "passed": true
+    },
+    {
+      "command": "node test-annexe-kitchen.mjs",
+      "passed": true
+    },
+    {
+      "command": "node test-annexe-rear-stretch.mjs",
+      "passed": true
+    },
+    {
+      "command": "node test-annexe-rear-side-alignment.mjs",
+      "passed": true
+    },
+    {
+      "command": "node test-annexe-os-refinement.mjs",
+      "passed": true
+    },
+    {
+      "command": "node test-oakmere-court.mjs",
+      "passed": true
+    },
+    {
+      "command": "node test-oakmere-west.mjs",
+      "passed": true
+    },
+    {
+      "command": "node test-oakmere-windows.mjs",
+      "passed": true
+    },
+    {
+      "command": "node test-annexe-access.mjs",
+      "passed": true
+    }
+  ],
+  "refreshedChecks": [
+    {
+      "command": "node test-ward-placement.mjs",
+      "passed": true
+    },
+    {
+      "command": "node test-larkton.mjs",
+      "passed": true
+    },
+    {
+      "command": "node test-larkton-recess.mjs",
+      "passed": true
+    },
+    {
+      "command": "node test-annexe-kitchen.mjs",
+      "passed": true
+    },
+    {
+      "command": "node test-annexe-rear-stretch.mjs",
+      "passed": true
+    },
+    {
+      "command": "node test-annexe-rear-side-alignment.mjs",
+      "passed": true
+    },
+    {
+      "command": "node test-annexe-os-refinement.mjs",
+      "passed": true
+    },
+    {
+      "command": "node test-oakmere-court.mjs",
+      "passed": true
+    },
+    {
+      "command": "node test-oakmere-west.mjs",
+      "passed": true
+    },
+    {
+      "command": "node test-oakmere-windows.mjs",
+      "passed": true
+    },
+    {
+      "command": "node test-annexe-access.mjs",
+      "passed": true
+    }
+  ],
+  "repairs": [
+    {
+      "file": "Research/larkton-jodrell/protected-before.json",
+      "field": "sha256",
+      "before": "84692504f110cc5c61ae581ffd1042ff88ae9a3f0bc2343f9a7239eaf230cef2",
+      "after": "73862b3b2e0b9b2b2ff7d56f497b4528350d593ca6f98ee28529958928dd50aa"
+    },
+    {
+      "file": "Research/larkton-jodrell/recess-protected-before.json",
+      "field": "retained.sha256",
+      "before": "118a274ed2de93c1b5fba96698986e9ef34e07515c6a391ad39f7364f4efd0eb",
+      "after": "8402870eb5b209881f773d0b26e5aec94d825d6fe5aff68eab21d915dbf20b3e"
+    },
+    {
+      "file": "Research/larkton-jodrell/recess-protected-before.json",
+      "field": "outside.sha256",
+      "before": "0db0dd3ab8736ba6d37cd4d8e555fdf9c9344d8d2e24386864252875388c9db1",
+      "after": "90be88e83c12d92d4dfc4a015cf5a65b3023b3e7f7ce3ee9ee4c529a237b54ca"
+    },
+    {
+      "file": "Research/annexe-kitchen/protected-geometry.json",
+      "field": "sha256",
+      "before": "d15c9d2db3fa40ff1cabc13514853ee1d6dceadaf980d1ce0b2c983707355612",
+      "after": "1417c3cd3fb19399958cfe6b638fb3ff80989ddebe6802dcb4c15c454cc433ec"
+    },
+    {
+      "file": "Research/annexe-kitchen/rear-stretch-before.json",
+      "field": "front.sha256",
+      "before": "c0baf23438b20db98f58c8713298dd87b40430577e2f027d5605b7873ba261c9",
+      "after": "8090fd5d450b49814dd75c566e010955d7f1abbeceacbe12e25221da83bc4027"
+    },
+    {
+      "file": "Research/annexe-kitchen/side-alignment-before.json",
+      "field": "snapshot.fixed.hash",
+      "before": "63e0751733eb9eebdc33a2082755b10ab1e159d3a996e9f482d02ffc67c2ab89",
+      "after": "89aa0fc5f613d4ffc731f617b0261214048249333af9a8c490ede30acd5a3cae"
+    },
+    {
+      "file": "Research/annexe-photo-placement/approved-shape.json",
+      "field": "digest",
+      "before": "c0d052564077ce360239c5dc81859ac3201dc44296a77c3686d568f72dc224d6",
+      "after": "c7c0f4d3e3537c11b1984326d166c9dea19d8edf89c08a3dbbb855cef2a27fb2"
+    },
+    {
+      "file": "Research/oakmere/court-protected-before.json",
+      "field": "sha256",
+      "before": "54a5ae66a924803b1592ced63907b4bc996d378e1178a1130152ac75d746d9a0",
+      "after": "d59a0d6a0b7d262879eb37397aa5f7a378273608ee0b3baf3f65a7fb30ba56bb"
+    },
+    {
+      "file": "Research/oakmere/west-protected-geometry.json",
+      "field": "sha256",
+      "before": "2ddafc4ae8a9e1e895f6b2987c79018c5cec453f648f6e5ecf39c3cc018fd585",
+      "after": "ab742ffea87645f9c8d7a44eaef9d9aafa71e488d9f64dc5fbf4dbea2d57aad9"
+    },
+    {
+      "file": "Research/oakmere/window-protected-geometry.json",
+      "field": "sha256",
+      "before": "3dc3689db250cd85c97e73d3f30cb232b6070f4bc93d16057a133c1b141222a5",
+      "after": "e6c5b839f558b66eb30b493b1add1cd24a7d2ef337fc1d4370189eabd959a99e"
+    },
+    {
+      "file": "Research/annexe-frontage-adjustment/entrance-alignment-before.json",
+      "field": "protectedGeometry.sha256",
+      "before": "352c551298c55d3c6bd6d1e22f96c811cc1b3323725e60649d52c65409ecafb1",
+      "after": "557d55333887d6c7f51f5fabbbb138f8c7d4c61a146f371286c9c90ef19c8924"
+    }
+  ],
+  "validation": {
+    "command": "npm test",
+    "passed": true,
+    "suiteEntries": 83,
+    "additionalCardenPreservationPassed": true,
+    "sourceUnchangedAfterSuite": true,
+    "log": "Browser/artifacts/geometry-snapshot-final-suite.log"
+  }
+}

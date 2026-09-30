@@ -80,9 +80,19 @@ try {
   console.log('Escape game and map passed.');
   await page.evaluate(() => document.exitPointerLock());
 
-  await page.goto('escape1829://game/');
-  await page.locator('#aerial').click();
-  await page.waitForURL('**/aerial.html');
+  await page.goto('escape1829://game/', { waitUntil: 'domcontentloaded' });
+  // The title-frame capture must not race the first software-rendered frame.
+  await page.waitForFunction(() => document.querySelector('#game')?.classList.contains('scene-ready'));
+  console.log('Title scene ready; opening aerial view.');
+  // Check the destination ourselves rather than relying on the click's implicit
+  // navigation wait over CDP. The intro handoff briefly adds ?intro=1.
+  await Promise.all([
+    page.waitForURL(url => url.protocol === 'escape1829:' && url.hostname === 'game' &&
+      url.pathname === '/aerial.html', { waitUntil: 'domcontentloaded' }),
+    page.locator('#aerial').click({ noWaitAfter: true }),
+  ]);
+  console.log('Aerial page opened; waiting for the intro handoff.');
+  await page.waitForFunction(() => !document.body.classList.contains('intro-arriving'));
   // The year change proves scene initialization and the timeline handler finished.
   await page.waitForFunction(() => {
     const slider = document.querySelector('#periodSlider');
@@ -110,8 +120,11 @@ try {
   await page.keyboard.up('w');
   await page.screenshot({ path: join(artifacts, label + '-walking.png') });
   await page.evaluate(() => document.exitPointerLock());
-  await page.locator('#backToIntro').click();
-  await page.waitForURL('escape1829://game/');
+  await Promise.all([
+    page.waitForURL('escape1829://game/', { waitUntil: 'domcontentloaded' }),
+    page.locator('#backToIntro').click({ noWaitAfter: true }),
+  ]);
+  await page.waitForFunction(() => document.querySelector('#start')?.disabled === false);
   assert.equal(context.pages().length, 1);
   assert(externalRequests.every(request => request.type === 'image' &&
     ['www.whateversleft.co.uk', 'basedinchurton.co.uk'].includes(new URL(request.url).hostname)),

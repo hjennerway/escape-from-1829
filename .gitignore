@@ -6,6 +6,19 @@
 # See: https://github.com/github/gitignore/tree/main/Global
 #
 .utmp/
+/NativeAndroid/.tools/
+/NativeAndroid/out/
+/NativeAndroid/artifacts/
+/NativeAndroid/Unity/Library/
+/NativeAndroid/Unity/Temp/
+/NativeAndroid/Unity/Logs/
+/NativeAndroid/Unity/obj/
+/NativeAndroid/Unity/UserSettings/
+/NativeAndroid/Unity/build/
+/NativeAndroid/Unity/Assets/NativePrototype/Generated/
+/NativeAndroid/Unity/Assets/NativePrototype/Baked/
+/NativeAndroid/Unity/Assets/Scenes/
+/NativeAndroid/Unity/Assets/Resources/Archive/
 /Browser/node_modules/
 /Browser/dist/compiled/
 /Desktop/node_modules/

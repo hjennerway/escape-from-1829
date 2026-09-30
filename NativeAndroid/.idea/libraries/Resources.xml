@@ -1,0 +1,10 @@
+<component name="libraryTable">
+  <library name="Resources">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/Unity/Library/Bee/Android/Prj/IL2CPP/Gradle/launcher/build/intermediates/compressed_assets/release/compressReleaseAssets/out/assets/bin/Data/Resources/unity default resources.jar!/" />
+      <root url="jar://$PROJECT_DIR$/Unity/Library/Bee/Android/Prj/IL2CPP/Gradle/launcher/build/intermediates/compressed_assets/release/compressReleaseAssets/out/assets/bin/Data/Resources/unity_builtin_extra.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

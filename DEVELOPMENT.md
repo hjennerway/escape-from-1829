@@ -1,3 +1,264 @@
+## Native Android playable port (30 September 2026)
+
+The isolated `NativeAndroid/Unity` project now provides asylum escape on both
+floors, walking exploration across the estate, and aerial exploration through
+all 13 historical periods. The test APK is `NativeAndroid/out/escape-1829-native.apk`
+(version 0.2.0 / code 2). It retains the prototype's package and debug certificate
+so it can install as an update. Its player-facing name is Escape from 1829.
+This supersedes the prototype's ground-floor/frontage limits below.
+
+Gameplay includes five exits selected once from all fourteen candidates per app
+load, unchanged on retries; the two held-use stair transitions; guard and ghost
+navigation through stairs; the five-second head start; sight, pursuit memory,
+torch slowing, stamina, sprinting and crouching. Inactive exit sites display
+ordinary walls. Signs, mini/full maps, held-use artwork viewing, arrival/escape
+sequences, historical capture outcomes, procedural footsteps/heartbeat, pause,
+audio, look sensitivity and 30/60 FPS choices are native C# implementations.
+
+Exploration includes current source geometry for the whole estate, the timeline,
+three building-detail levels, tree visibility with corresponding collision
+snapshots, building selection, location jumps, dates and local photograph
+browsing with pan/zoom. The archive contains 72 distinct local pictures,
+including eleven wall-art images assigned on each floor. Building selection
+uses source building bounds; it is less precise than the browser's triangle
+picking around courtyards. MY POSITION requests location only when used and
+maps readings with the existing earth anchor/perimeter. Physical GPS readings,
+Android permission interaction and real multitouch require device validation.
+
+The native rendering is tuned for mobile: shadows are disabled, outdoor detail
+follows projected window size, and only nearby lights are enabled. High Detail
+caps rendering at 1920 pixels along the longer screen side; Battery Saver uses
+1280 pixels and fewer lights. Native day/night lighting has street-lamp pools
+and a sparse window-light pattern. It does not reproduce the browser's cloud,
+weather and tree-wind shaders or its exact window-light selection. Local archive
+art is bundled; the browser's additional remote heritage-reference panels are
+not bundled. The port is playable across the complete geometry and gameplay
+scope, rather than a pixel-identical browser renderer.
+
+### Shared assets and regeneration
+
+`NativeAndroid/tools/export-port.mjs` builds the current browser model sources
+in local headless Chrome, captures every period and detail level, and writes
+one shared GLB library plus period membership/navigation metadata. Geometry
+common to different periods is exported once. Two interior libraries contain
+exact source triangles split into a shared core and open/closed neighbourhoods
+for every exit. The guard preserves its source hierarchy for the native
+displacement-driven leg solve. World transforms, reflected winding, surface
+UVs, alpha, texture transforms, linear grain textures, bump and unlit materials
+are converted explicitly. Mineral UVs use a dominant-axis projection instead
+of the source's triplanar shader. Original photograph/art bytes are unchanged;
+local WebP/JPEG/PNG pictures are decoded to generated Unity PNG resources.
+
+The full source/export fingerprint is
+`bf3f2437f3d857fa77ec5cee686270bad0285909aa683fbd5a815a33316bbb9b`.
+The outdoor union has 4,400 meshes / 6,398,079 triangles, the two-floor interior
+334 meshes / 186,332 triangles, and the guard 67 primitives / 10,606 triangles.
+The outdoor number counts every period and detail variant in the library,
+not the triangles rendered simultaneously. Exported vertices are welded without
+removing triangles; Unity uses low mesh compression for packing, omits tangents
+where bump shading is unused, and releases exterior/interior CPU mesh copies
+after uploading. Low compression quantizes packed attributes; source GLBs keep
+their original floating-point coordinates and triangle counts.
+
+Source models, photographs, layouts, dates and capture-outcome content remain
+shared inputs. Browser gameplay and native gameplay remain separate JavaScript
+and C# implementations: future rule/control changes need updating and verifying
+in both. Browser or Blender modelling changes do not update this package until
+the native export and build are regenerated. The older root Unity project and
+Blender exports were not changed by this port; only NativeAndroid exports were
+regenerated. No browser model sources were edited in this work.
+
+With Unity 6000.6.3f1, Android Build Support, SDK/NDK and OpenJDK installed:
+
+```powershell
+powershell -ExecutionPolicy Bypass -File NativeAndroid/tools/build.ps1 -Target Android
+```
+
+`-Target Windows` makes the local native preview; `-Target Prepare` imports and
+validates the scene. Generated models, photos, scene, baked assets, Unity caches
+and build outputs are ignored. Existing prototype export/check scripts and its
+41 MB APK remain as historical comparison/rollback artifacts.
+
+### Validation and device baseline
+
+- `node NativeAndroid/tools/test-port.mjs` passes current source/layout/GLB/image
+  hashes, finite attributes and valid indices, triangle counts, shared period
+  membership, preserved guard joints, both exit-state geometry libraries,
+  fourteen reachable exits and clear outdoor starts for all thirteen periods.
+- Existing `Browser/test-escape-routes.mjs` and `Browser/test-security-guard.mjs`
+  pass. Browser sources were unchanged; the unrelated browser-suite updates in
+  this working directory are not part of the port.
+- Windows and ARM64 IL2CPP Android builds succeed. The final Windows gameplay
+  run is recorded in `NativeAndroid/artifacts/full-port-smoke-signs/smoke.json`.
+  It exercises period switching, tree collisions, archive loading, location-list
+  touch dispatch, help, retry persistence, movement speeds, held-use pauses,
+  upstairs/downstairs latching, enemy stair pursuit, torch slowing, artwork,
+  escape and varied capture outcomes. GPU-rendered captures of the estate,
+  frontage by day/night, both floors and the guard were visually reviewed.
+  Earlier failed smoke folders are superseded by this passing run.
+- Validation caught and corrected distant-window collision bounds, optional
+  nested JSON defaults, upper-floor spawn inheritance and material colour-space
+  conversion. [Unity's shader property documentation](https://docs.unity3d.com/6000.0/Documentation/Manual/SL-PropertiesInPrograms.html)
+  explains why linear glTF factors are converted to sRGB when assigned to Unity
+  Color properties; named linear grain/mask textures retain linear sampling.
+- `NativeAndroid/artifacts/full-apk-verification.json` records the 158,737,660-byte
+  APK, SHA-256 `0D3084952DCA12B4A3EEE8DA3A3474F8D0FCDA59BE48C54DB68B868503A211E2`,
+  verified APK v2 signature, matching prototype certificate, version code 2,
+  Android 8 minimum / target API 36, ARM64 libraries and all four license notices.
+  Location hardware is optional and the manifest requests no network permission.
+
+The user reported the installed prototype at 60 FPS on a Samsung S25 Ultra.
+That is the target for this expanded build, not a measured result for it. No
+device was attached for the final build, and desktop smoke timings include
+automation/loading overhead and are not a phone benchmark. Install the update
+and check escape, walking and aerial modes on that phone before qualifying
+performance. This is a locally signed test APK; release signing, Play packaging,
+store presentation and submission remain separate work.
+
+## Native Android prototype (30 September 2026)
+
+`NativeAndroid/Unity` is an isolated Unity 6000.6.3f1 project. It builds an
+offline native Android player using ARM64 IL2CPP and OpenGL ES 3, with package
+identifier `org.hjennerway.escape1829.prototype`, minimum Android API 26 and
+target API 36. The APK uses Unity's development signing key. Store signing,
+an Android App Bundle and Play Console submission are separate release work.
+
+The playable slice contains the 1916 asylum frontage, a ground-floor escape
+round, a patrol/chase guard, a torch, a route map, pause/background handling,
+touch movement/look and held run/use controls. Five exits are randomly selected
+from the seven canonical ground-floor exits. It does not yet include the
+browser game's first floor, ghost, historical timeline controls or building
+information. The guard reuses the model in a fixed pose with movement/bobbing;
+its articulated browser animation is not ported.
+
+`NativeAndroid/tools/export-assets.mjs` runs the current browser model builders
+in a local headless browser and exports world-space GLBs with embedded textures.
+It crops the exterior to the frontage, rebuilds material batches in 16-metre
+cells and records the original collision footprints and walk surfaces. The
+indoor layout is copied byte-for-byte from `Browser/dist/layout.json`. The
+model-source fingerprint and SHA-256 hashes for the layout and each GLB are
+recorded in the generated manifest and checked before building.
+
+The editor importer converts GLBs into native Unity meshes, materials, textures
+and prefabs before building. Phones do not run Three.js or decode GLBs. There
+are 878 exterior meshes / 633,490 triangles including the prototype ground,
+266 indoor meshes / 82,884 triangles, and 23 guard meshes / 10,606 triangles.
+The source has 369 collision footprints in the exterior crop. The Unity surface
+shader handles base-colour textures, alpha cutouts, double-sided surfaces and
+emission. Browser custom shaders, bump-map extensions and texture-transform
+extensions are not reproduced; lighting/material appearance is approximate.
+Real-time shadows are disabled for this first performance test.
+
+Rebuild from the repository root with:
+
+```powershell
+powershell -ExecutionPolicy Bypass -File NativeAndroid/tools/build.ps1 -Target Android
+```
+
+The script needs the browser dependencies installed (`npm ci` in `Browser`),
+Chrome or a Playwright Chromium installation, Unity 6000.6.3f1 and Unity's
+Android Build Support, SDK/NDK and OpenJDK modules. `-UnityPath` overrides the
+editor location; `MODEL_CHROME_PATH` overrides Chrome. `-Target Windows`
+produces a desktop preview, and `-Target Prepare` exports/imports the scene
+without building a player. Outputs are in `NativeAndroid/out`; validation logs,
+source/import reports and captures are in `NativeAndroid/artifacts`. Generated
+GLBs, baked Unity assets, scene files, engine caches and builds are ignored by
+Git. The APK includes the repository, Three.js, EZ-Tree and tree-texture license
+notices in StreamingAssets.
+
+This bridge avoids hand-remaking building geometry and textures for the native
+prototype. Repeat the export/build after browser model changes; native assets
+do not update automatically in an already-installed APK. New gameplay and
+platform-specific UI/lighting still require work in each runtime. This change
+does not edit browser model sources or regenerate the earlier root Unity or
+Blender exports.
+
+The performance display reports FPS/frame time, and the pause screen offers
+30/60 FPS caps and a lower resolution. Desktop F3 shows extra geometry and
+95th-percentile frame timing. A capped desktop run is a functional test, not
+evidence that this build is faster than the browser or runs smoothly on a
+phone. Phone startup, touch ergonomics, sustained FPS, heat and memory still
+need a real-device test.
+
+Validation of the final prototype:
+
+- `node NativeAndroid/tools/test-assets.mjs` passes source/layout/GLB hashes,
+  finite vertex/index data, triangle counts, all seven routes and exterior spawn.
+- Unity's prepare validation and both Windows and Android player builds pass.
+  The automated Windows preview (`--prototype-smoke <absolute-output-folder>`)
+  passes title actions, pause/resume, torch/map actions, exterior movement,
+  entering the asylum, seven reachable routes, five active exits, escape and
+  capture. `NativeAndroid/artifacts/final-smoke/smoke.json` records that run.
+- Offscreen GPU captures of the actual built player verify the frontage and
+  corridor geometry/textures/lighting. The entry marker is placed above the
+  exported path's Y=.195 surface, and the guard's source-facing direction is
+  corrected after the coordinate conversion. The captures do not contain IMGUI;
+  screen layout and multi-touch ergonomics need the phone check.
+- Focused browser escape-route, interior-architecture, explore and security-guard
+  checks pass. Browser sources are unchanged by this native work.
+- Android build tools verify the final APK's v2 signature, API 26/36 manifest,
+  ARM64 ABI, native IL2CPP library and all four bundled license notices.
+  `NativeAndroid/artifacts/apk-verification.json` records its SHA-256 and size
+  (41,167,176 bytes). The signing certificate is `CN=Android Debug`.
+
+## Geometry snapshots after the Carden wall correction (30 September 2026)
+
+The complete browser suite audit found eleven failing checks: ward placement
+and ten annexe preservation tests. Replaying only the previous Carden low-wall
+footprint from `edb1924` made all ten annexe tests pass, including their later
+assertions. The only model difference is the documented `3cb6ea0` correction
+that ends the low masonry at the tall-range join to remove coincident brick
+faces. No other source edits or snapshot-filter changes were used for replay.
+
+Refreshed eleven hashes in ten saved snapshots for Larkton/recess, kitchen,
+rear stretch/side alignment, the approved annexe shape, Oakmere court/west/
+windows and entrance alignment. The recess check holds two affected hashes.
+Every primitive count, root transform, retained-wing hash and ward range
+outside those eleven refreshed fields remains exact.
+
+The ward-placement test now compares authored building and corridor geometry
+before layout assembly extends foundation bottoms into the lawn. Its camera,
+walking obstacle and Historic-visibility checks still run on the assembled
+scene. `test-building-grounding.mjs` independently checks that all upper
+geometry, texture registration, footprints and transforms survive grounding.
+
+The full browser `npm test` suite passes, as do all eleven affected checks and
+the additional Carden preservation check. The complete suite log is
+`Browser/artifacts/geometry-snapshot-final-suite.log`.
+The compact before/after evidence is
+`Browser/artifacts/geometry-snapshot-carden-repair.json`; the in-memory replay
+uses `geometry-snapshot-carden-before-loader.mjs` in the same directory.
+Model sources and exports are unchanged by this repair; the compiled estate's
+source fingerprint remains current, so no model rebuild is required.
+
+## Packaged desktop navigation smoke check (30 September 2026)
+
+The Windows offline smoke check reported a timeout after clicking Aerial View,
+inside Playwright's implicit navigation wait, with the renderer still reporting
+the intro URL and no runtime errors. The unchanged development smoke check
+passed locally, so the CI failure was not reproduced deterministically.
+
+`Desktop/test/smoke.mjs` now waits for the title's first rendered frame before
+exercising its capture-and-navigation handler. It starts an explicit destination
+wait alongside the real button click, disables only the click's implicit
+navigation wait, and matches the aerial pathname with or without the temporary
+`?intro=1` marker. It then waits for the animated handoff to finish before
+checking the timeline. Return navigation uses the same explicit wait and
+confirms that the start button becomes ready again. Navigation and scene
+readiness checks retain their 120-second limits.
+
+Validation: all eight desktop unit tests pass. The Windows executable was
+rebuilt, and `npm run test:desktop -- --packaged` passed offline, including
+renderer isolation, storage, gameplay/map, the aerial handoff and timeline,
+compiled asset integrity, walking and return navigation. The packaged landing
+and aerial screenshots were visually checked. Evidence is saved in
+`Desktop/artifacts/packaged-smoke.json` and the associated screenshots/log.
+The browser `npm test` run stopped at the unrelated `test-ward-placement.mjs`
+Redesmere concealed-connector snapshot (lower vertices -1.98 versus -1.8).
+This change edits only the desktop smoke test and these notes; no browser
+model sources or Unity/Blender exports were changed. The runnable Windows
+folder was rebuilt for validation; the MSIX packages were not rebuilt.
+
 ## Hidden access-path edges beside Estates (29 September 2026)
 
 The one-sided strip in the lawn was the ground-contact edge of Main/admin's

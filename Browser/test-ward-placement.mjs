@@ -18,7 +18,7 @@ const sourceFarndon=createFarndon(THREE,materials),sourceWitby=createWitbyWard(s
 // Existing corridor-contact window omissions are preserved through the move.
 sourceFarndon.getObjectByName('Farndon rear connection sash').removeFromParent();
 sourceWitby.getObjectByName('Witby rear connection sash').removeFromParent();
-const exterior=createEscapeExterior(THREE,1.5),layouts=createAerialLayouts(THREE,exterior);
+const exterior=createEscapeExterior(THREE,1.5);
 exterior.model.updateMatrixWorld(true);
 assert.deepEqual(exterior.chapel.position.toArray(),[-4.9,0,-119.2]);
 assert.deepEqual(exterior.churtonWard.position.toArray(),[-44.3,0,-65.9]);
@@ -45,7 +45,6 @@ const cases=[
  ['graftonEdge',createGraftonEdge(THREE,materials),[73.5,-155.8],GRAFTON_EDGE_VIEWS,'grafton-edge-ground'],
  ['haleWard',createHaleWard(THREE,materials),[121.3,-98.7],HALE_WARD_VIEWS,'hale-daresbury-huxley-dunham-ground']
 ];
-const obstacles=exteriorObstacles(THREE,exterior.model);
 for(const [key,source,[x,z],views,walkingView] of cases){
  const ward=exterior[key];assert.deepEqual(ward.position.toArray(),[x,0,z]);
  compareGeometry(ward,source,true);
@@ -53,13 +52,19 @@ for(const [key,source,[x,z],views,walkingView] of cases){
  const shifted=source.userData.footprint.map(([px,pz])=>[px+dx,pz+dz]);
  assert.deepEqual(ward.userData.footprint,shifted,'World footprint follows '+key);
  assert.equal(ward.userData.source.x,x);assert.equal(ward.userData.source.z,z);
- const camera=views[walkingView].position;
- assert(!obstacles.some(o=>obstacleContains(o,camera[0],camera[2])),key+' walking camera remains on open ground');
  const plan=Object.entries(views).find(([name])=>name.endsWith('-plan'))[1];
  assert(Math.hypot(plan.target[0]-x,plan.target[2]-z)<2,key+' plan stays centred');
  const bounds=new THREE.Box3().setFromObject(ward),sourceBounds=new THREE.Box3().setFromObject(source);
  assert(bounds.getSize(new THREE.Vector3()).distanceTo(sourceBounds.getSize(new THREE.Vector3()))<1e-8,'Complete building dimensions are preserved');
- const wardObstacles=exteriorObstacles(THREE,ward);
+}
+// Compare authored shapes before assembly extends foundation bottoms into the
+// lawn. test-building-grounding independently protects that later operation.
+const layouts=createAerialLayouts(THREE,exterior);
+const obstacles=exteriorObstacles(THREE,exterior.model);
+for(const [key,source,position,views,walkingView] of cases){
+ const camera=views[walkingView].position;
+ assert(!obstacles.some(o=>obstacleContains(o,camera[0],camera[2])),key+' walking camera remains on open ground');
+ const ward=exterior[key],bounds=new THREE.Box3().setFromObject(ward),wardObstacles=exteriorObstacles(THREE,ward);
  assert(wardObstacles.length>0);
  for(const obstacle of wardObstacles)assert(obstacle.minX>=bounds.min.x-1&&obstacle.maxX<=bounds.max.x+1&&obstacle.minZ>=bounds.min.z-1&&obstacle.maxZ<=bounds.max.z+1,'Collision follows the moved building');
 }
