@@ -10,7 +10,7 @@ on:
   workflow_dispatch:
     inputs:
       package_kind:
-        description: 'Preview for local testing, or Store with Partner Center identity'
+        description: 'Store for Partner Center upload; preview is only for local testing'
         type: choice
         options: [preview, store]
         default: preview
@@ -84,20 +84,31 @@ jobs:
           name: EscapeFrom1829-Windows-x64
           path: Desktop/out/EscapeFrom1829-win32-x64/
           if-no-files-found: error
-      - name: Upload MSIX and build inventory
-        uses: actions/upload-artifact@v4
+      - name: Upload MSIX directly for download
+        id: msix
+        uses: actions/upload-artifact@v7
         with:
-          name: EscapeFrom1829-MSIX-${{ inputs.package_kind || 'preview' }}
-          path: |
-            Desktop/out/*.msix
-            Desktop/out/web-build.json
+          path: Desktop/out/*.msix
+          archive: false
           if-no-files-found: error
+      - name: Explain package download and Store submission
+        env:
+          PACKAGE_KIND: ${{ inputs.package_kind || 'preview' }}
+          MSIX_URL: ${{ steps.msix.outputs.artifact-url }}
+        run: |
+          "Download the [.msix package]($env:MSIX_URL) directly from this run's Artifacts. The Windows folder ZIP is for local play." >> $env:GITHUB_STEP_SUMMARY
+          if ($env:PACKAGE_KIND -eq 'store') {
+            "Upload the file ending in -store.msix to the Packages page in Partner Center." >> $env:GITHUB_STEP_SUMMARY
+          } else {
+            "This is a preview package and cannot be submitted to the Store. For submission, configure STORE_IDENTITY_NAME, STORE_PUBLISHER and STORE_PUBLISHER_DISPLAY_NAME repository variables, then use Run workflow with package_kind set to store." >> $env:GITHUB_STEP_SUMMARY
+          }
       - name: Upload desktop test evidence
         if: always()
         uses: actions/upload-artifact@v4
         with:
           name: Windows-test-evidence
           path: |
+            Desktop/out/web-build.json
             Desktop/artifacts/*.png
             Desktop/artifacts/*.json
             Desktop/artifacts/*.log

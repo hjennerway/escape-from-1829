@@ -39,7 +39,7 @@ try{
     const THREE=await import('/vendor/three.module.js');
     const {GLTFExporter}=await import('/three/examples/jsm/exporters/GLTFExporter.js');
     const {mergeGeometries,mergeVertices}=await import('/vendor/BufferGeometryUtils.js');
-    const {createEscapeExterior}=await import('/escape-exterior.mjs');
+    const {createEscapeExterior,loadEscapeFrontage}=await import('/escape-exterior.mjs');
     const {createAerialLayouts}=await import('/aerial-layouts.mjs');
     const {prepareEstateTimeline}=await import('/estate-timeline.mjs');
     const {createBuildingDetail}=await import('/building-detail.mjs');
@@ -56,8 +56,11 @@ try{
     const {EARTH_ANCHOR}=await import('/earth-registration.mjs');
     const {ESTATE_PERIMETER}=await import('/device-location.mjs');
     const {diagnoses,causes}=await import('/capture-outcome.mjs');
+    const {createCountryside}=await import('/countryside.mjs');
     const layout=await fetch('/layout.json').then(r=>r.json()),floors=makeFloors(layout);
     const exterior=createEscapeExterior(THREE,1),layouts=createAerialLayouts(THREE,exterior);
+    await loadEscapeFrontage(THREE,exterior);
+    const countryside=createCountryside(THREE,exterior);
     prepareEstateTimeline(THREE,exterior,layouts);prepareWindowLights(THREE,exterior.model);
     const selection=createBuildingSelection(THREE,exterior);
     const detail=createBuildingDetail(THREE,exterior.model,{exclude:[exterior.trees,exterior.terrain,...layouts.visibilityObjects]});
@@ -67,7 +70,8 @@ try{
     function materialFor(source,tint=''){
       const key=source.uuid+':'+tint;
       if(!materialCopies.has(key)){
-        const m=source.clone();m.userData={};m.onBeforeCompile=()=>{};
+        const m=source.clone();m.userData={nativeSurface:{offsetFactor:source.polygonOffset?source.polygonOffsetFactor:0,offsetUnits:source.polygonOffset?source.polygonOffsetUnits:0,grass:!!source.userData.estateGrass,wind:!!source.userData.frontLawnWind}};m.onBeforeCompile=()=>{};
+        if(m.map&&!m.bumpMap&&m.roughness>=.8&&!m.transparent&&!m.userData.nativeSurface.grass){m.bumpMap=m.map;m.bumpScale=.055;}
         if(tint)m.color.multiply(new THREE.Color('#'+tint));materialCopies.set(key,m);
       }
       return {key,material:materialCopies.get(key)};
@@ -84,15 +88,20 @@ try{
         if(!object.geometry.boundingBox)object.geometry.computeBoundingBox();
         for(let i=0;i<count;i++){
           if(object.isInstancedMesh){object.getMatrixAt(i,local);world.multiplyMatrices(object.matrixWorld,local);}else world.copy(object.matrixWorld);
-          let tint='';if(object.instanceColor){const c=new THREE.Color();object.getColorAt(i,c);tint=c.getHexString();}
+          let tint='';if(object.instanceColor){const c=new THREE.Color();object.getColorAt(i,c);if(root===countryside.group){c.r=Math.round(c.r*32)/32;c.g=Math.round(c.g*32)/32;c.b=Math.round(c.b*32)/32;}tint=c.getHexString();}
           const material=materialFor(object.material,tint),bounds=object.geometry.boundingBox.clone().applyMatrix4(world);
-          result.push({geometry:object.geometry,matrix:world.clone(),material:material.material,key:material.key,sourceMaterial:object.material,tree,group,level,center:bounds.getCenter(new THREE.Vector3())});
+          result.push({geometry:object.geometry,matrix:world.clone(),material:material.material,key:material.key,sourceMaterial:object.material,tree,group,level,scenic:root===countryside.group,shadow:object.castShadow,center:bounds.getCenter(new THREE.Vector3())});
         }
       });return result;
     }
     function bakePart(part){
-      const g=part.geometry.index?part.geometry.toNonIndexed():part.geometry.clone();g.applyMatrix4(part.matrix);
+      const g=part.geometry.index?part.geometry.toNonIndexed():part.geometry.clone();
+      const wind=part.sourceMaterial.userData.frontLawnWind,wp=g.attributes.position,wu=g.attributes.uv;
+      const windData=new Float32Array(wp.count*2),scale=new THREE.Vector3().setFromMatrixScale(part.matrix).x;
+      if(wind)for(let i=0;i<wp.count;i++){windData[i*2]=wp.getX(i)*.17+wp.getY(i)*.09+wp.getZ(i)*.13+(wind.phase??0);windData[i*2+1]=wu.getY(i)*(wind.strength??.16)*scale;}
+      g.applyMatrix4(part.matrix);
       for(const name of Object.keys(g.attributes))if(!['position','normal','uv'].includes(name))g.deleteAttribute(name);
+      g.setAttribute('uv1',new THREE.Float32BufferAttribute(windData,2));
       if(!g.attributes.normal)g.computeVertexNormals();
       if(!g.attributes.uv)g.setAttribute('uv',new THREE.Float32BufferAttribute(new Float32Array(g.attributes.position.count*2),2));
       const surface=part.sourceMaterial.userData.estateSurface;
@@ -116,7 +125,8 @@ try{
     function addEstate(parts){
       const batches=new Map();
       for(const p of parts){
-        const key=[p.key,Math.floor(p.center.x/32),Math.floor(p.center.z/32),p.tree,p.group,p.level].join(':');
+        const cell=p.scenic?256:32;
+        const key=[p.key,Math.floor(p.center.x/cell),Math.floor(p.center.z/cell),p.tree,p.group,p.level,p.shadow,p.scenic].join(':');
         if(!batches.has(key))batches.set(key,[]);batches.get(key).push(p);
       }
       const ids=[];
@@ -126,16 +136,19 @@ try{
         if(id===undefined){
           id=estate.children.length;registry.set(signature,id);
           const geometries=parts.map(bakePart),geometry=mergeGeometries(geometries);for(const g of geometries)g.dispose();
-          const mesh=new THREE.Mesh(geometry,parts[0].material);mesh.name='estate-'+id;estate.add(mesh);
-          meshFlags.push({tree:parts[0].tree,group:parts[0].group,level:parts[0].level});
+          geometry.computeBoundingBox();
+          const mesh=new THREE.Mesh(geometry,parts[0].material);mesh.name='estate-'+id;mesh.userData.preciseSurface=geometry.boundingBox.max.y-geometry.boundingBox.min.y<2||!!parts[0].sourceMaterial.polygonOffset;estate.add(mesh);
+          meshFlags.push({tree:parts[0].tree,group:parts[0].group,level:parts[0].level,shadow:parts[0].shadow});
         }
         ids.push(id);
       }return ids;
     }
     const nativeFootprint=b=>({...b,...(b.corners?{corners:b.corners.map(([x,z])=>({x,z}))}:{})});
-    const periods=[];
+    const scenicMeshes=addEstate(descriptors(countryside.group));
+    const periods=[],selectionLibrary=new THREE.Group(),selectionIds=new Map();selectionLibrary.name='Exact building selection';
+    const selectionMaterial=new THREE.MeshBasicMaterial({color:0xffffff});
     for(const period of PERIODS){
-      exterior.timeline.setPeriod(period.year);const meshes=new Set();
+      exterior.timeline.setPeriod(period.year);const meshes=new Set(scenicMeshes);
       for(let lod=0;lod<3;lod++){
         for(const e of detail.entries)e.levels.forEach((root,i)=>root.visible=i===lod);
         for(const id of addEstate(descriptors(exterior.model)))meshes.add(id);
@@ -147,7 +160,14 @@ try{
       const buildings=selection.entries.flatMap((entry,index)=>{
         if(!selection.isVisible(entry))return [];
         const b=entry.mesh.geometry.boundingBox;
-        return [{index,minX:b.min.x,maxX:b.max.x,minY:b.min.y,maxY:b.max.y,minZ:b.min.z,maxZ:b.max.z}];
+        let selectionMesh=selectionIds.get(entry.mesh.geometry);
+        if(selectionMesh===undefined){
+          selectionMesh=selectionLibrary.children.length;selectionIds.set(entry.mesh.geometry,selectionMesh);
+          const geometry=entry.mesh.geometry.clone();geometry.computeVertexNormals();
+          geometry.setAttribute('uv',new THREE.Float32BufferAttribute(new Float32Array(geometry.attributes.position.count*2),2));
+          const mesh=new THREE.Mesh(geometry,selectionMaterial);mesh.name='selection-'+selectionMesh;mesh.userData.preciseSurface=true;selectionLibrary.add(mesh);
+        }
+        return [{index,selectionMesh,minX:b.min.x,maxX:b.max.x,minY:b.min.y,maxY:b.max.y,minZ:b.min.z,maxZ:b.max.z}];
       });
       const obstacles=exteriorObstacles(THREE,exterior.model);
       exterior.trees.visible=false;const obstaclesNoTrees=exteriorObstacles(THREE,exterior.model);exterior.trees.visible=true;
@@ -199,7 +219,7 @@ try{
     }
     const guard=copyRig(createSecurityGuard(THREE));
     async function save(name,object){
-      if(metadataOnly)return 0;
+      if(metadataOnly&&name!=='selection.glb')return 0;
       await window.__progress('Serializing '+name);
       object.traverse(mesh=>{if(mesh.isMesh&&!mesh.geometry.index){const original=mesh.geometry;mesh.geometry=mergeVertices(original,1e-6);original.dispose();}});
       const data=new Uint8Array(await new GLTFExporter().parseAsync(object,{binary:true,trs:true,maxTextureSize:1024,onlyVisible:true}));
@@ -209,7 +229,7 @@ try{
       }return data.length;
     }
     const stats=root=>{let triangles=0,meshes=0;root.traverse(o=>{if(o.isMesh){meshes++;triangles+=(o.geometry.index?.count??o.geometry.attributes.position.count)/3;}});return {batches:meshes,triangles};};
-    const bytes={outdoor:await save('outdoor.glb',estate),indoor:await save('indoor.glb',interior),guard:await save('guard.glb',guard)};
+    const bytes={outdoor:await save('outdoor.glb',estate),indoor:await save('indoor.glb',interior),guard:await save('guard.glb',guard),selection:await save('selection.glb',selectionLibrary)};
     const artNames=['front','front2','front3','annexe','annexe2','chimney','watertower','cheshire-asylum-1860-discharge-etc','asylum-winter-moonlight','asylum-service-tunnels','daily-account-patients-1854'];
     const art=artNames.map((key,i)=>({src:'./art/'+key+'.png',title:i===8?'':key.replaceAll('-',' ').toUpperCase(),imageOnly:i===8}));
     const wallArt=[];
@@ -225,7 +245,7 @@ try{
     }
     const buildings=selection.entries.map(e=>({...BUILDING_CATALOG.find(c=>c.id===e.id),sections:e.sections,dates:e.sections.map(s=>({section:s,...sectionDates(s)}))}));
     const locations=Object.entries(LOCATION_VIEWS).map(([key,view])=>({key,position:view.position,target:view.target,fov:view.fov??60,walkPosition:LOCATION_WALKS[key]?.position??null,walkTarget:LOCATION_WALKS[key]?.target??null}));
-    return {schema:2,defaultPeriod:1916,floorHeight:FLOOR_HEIGHT,playBounds:{minX:-400,maxX:950,minZ:-550,maxZ:550},outdoor:stats(estate),indoor:stats(interior),guard:stats(guard),bytes,periods,meshFlags,detailGroups,buildings,locations,art,wallArt,earthAnchor:EARTH_ANCHOR,perimeter:ESTATE_PERIMETER.map(([x,z])=>({x,z})),diagnoses,causes};
+    return {schema:2,defaultPeriod:1916,floorHeight:FLOOR_HEIGHT,playBounds:{minX:-400,maxX:950,minZ:-550,maxZ:550},outdoor:stats(estate),indoor:stats(interior),guard:stats(guard),selection:stats(selectionLibrary),bytes,periods,meshFlags,detailGroups,buildings,locations,art,wallArt,earthAnchor:EARTH_ANCHOR,perimeter:ESTATE_PERIMETER.map(([x,z])=>({x,z})),diagnoses,causes};
   },metadataOnly);
   if(await modelSourceHash()!==sourceHash||!layoutBytes.equals(await readFile(resolve(dist,'layout.json'))))throw Error('Source changed during native export. Repeat export.');
   await mkdir(output,{recursive:true});await mkdir(archive,{recursive:true});
@@ -244,7 +264,7 @@ try{
     await writeFile(resolve(archive,name+'.png'),Buffer.from(result,'base64'));
     imageHashes[item.src]=createHash('sha256').update(sourceBytes).digest('hex');
   }
-  const assetHashes={};for(const name of ['outdoor','indoor','guard']){const file=await readFile(resolve(output,name+'.glb'));assetHashes[name+'.glb']=createHash('sha256').update(file).digest('hex');report.bytes[name]=file.length;}
+  const assetHashes={};for(const name of ['outdoor','indoor','guard','selection']){const file=await readFile(resolve(output,name+'.glb'));assetHashes[name+'.glb']=createHash('sha256').update(file).digest('hex');report.bytes[name]=file.length;}
   const manifest={...report,sourceHash,layoutHash:createHash('sha256').update(layoutBytes).digest('hex'),assetHashes,imageHashes};
   await writeFile(resolve(output,'manifest.json'),JSON.stringify(manifest)+'\n');
   for(const [src,dst] of [['vendor/THREE-LICENSE.txt','THREE-LICENSE.txt'],['vendor/ez-tree/LICENSE','EZ-TREE-LICENSE.txt'],['vendor/ez-tree/TEXTURES-LICENSE.md','TREE-TEXTURES-LICENSE.txt']])await copyFile(resolve(dist,src),resolve(output,dst));

@@ -12,7 +12,8 @@ assert.equal(manifest.schema,2);assert.equal(manifest.sourceHash,await modelSour
 const layoutBytes=await readFile(new URL('layout.json',generated));assert.equal(sha(layoutBytes),manifest.layoutHash);
 assert.deepEqual(layoutBytes,await readFile(new URL('../../Browser/dist/layout.json',import.meta.url)));
 const layout=JSON.parse(layoutBytes),floors=makeFloors(layout);let triangleTotal=0;
-for(const name of ['outdoor','indoor','guard']){
+const selectionBounds=[];
+for(const name of ['outdoor','indoor','guard','selection']){
   const bytes=await readFile(new URL(name+'.glb',generated));assert.equal(sha(bytes),manifest.assetHashes[name+'.glb']);
   assert.equal(bytes.readUInt32LE(0),0x46546c67);assert.equal(bytes.readUInt32LE(4),2);assert.equal(bytes.readUInt32LE(8),bytes.length);
   const length=bytes.readUInt32LE(12),root=JSON.parse(bytes.subarray(20,20+length)),binary=28+length;assert.equal(bytes.readUInt32LE(24+length),0x004e4942);
@@ -32,6 +33,11 @@ for(const name of ['outdoor','indoor','guard']){
   assert.equal(triangles,manifest[name].triangles);triangleTotal+=triangles;
   for(const node of root.nodes)assert.equal(node.matrix,undefined);
   const names=root.nodes.map(n=>n.name);
+  if(name==='selection')for(const node of root.nodes)if(node.mesh!==undefined){
+    assert(node.extras.preciseSurface,'Highlights retain exact surface positions');
+    const primitive=root.meshes[node.mesh].primitives[0],position=root.accessors[primitive.attributes.POSITION];
+    selectionBounds[Number(node.name.slice(10))]={min:position.min,max:position.max};
+  }
   if(name==='outdoor'){for(let i=0;i<manifest.meshFlags.length;i++)assert(names.includes('estate-'+i));}
   if(name==='indoor')for(let f=0;f<2;f++){
     assert(names.some(n=>n?.startsWith(`floor-${f}-core-`)));
@@ -43,6 +49,7 @@ assert.deepEqual(manifest.periods.map(p=>p.year),[1829,1849,1856,1860,1870,1896,
 for(const p of manifest.periods){
   assert(p.meshes.length>0);assert.equal(new Set(p.meshes).size,p.meshes.length);assert(p.meshes.every(i=>i>=0&&i<manifest.meshFlags.length));
   assert(p.obstaclesNoTrees.length<p.obstacles.length);assert(p.walkSurfaces.length>0);assert(p.buildings.every(b=>b.index>=0&&b.index<manifest.buildings.length));
+  for(const b of p.buildings){const bounds=selectionBounds[b.selectionMesh];assert(bounds,'Every historical building has exact highlight geometry');for(const [axis,min,max] of [[0,'minX','maxX'],[1,'minY','maxY'],[2,'minZ','maxZ']]){assert(Math.abs(bounds.min[axis]-b[min])<.001);assert(Math.abs(bounds.max[axis]-b[max])<.001);}}
   const obstacles=p.obstacles.map(b=>({...b,corners:b.corners?.map(v=>[v.x,v.z])}));assert(!obstacles.some(b=>obstacleContains(b,0,40)));
 }
 assert(manifest.meshFlags.length<manifest.periods.reduce((n,p)=>n+p.meshes.length,0)/3,'Most periods reuse shared meshes');

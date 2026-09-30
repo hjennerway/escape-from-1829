@@ -13,8 +13,12 @@ Push-Location $repoRoot
 try {
     & node (Join-Path $PSScriptRoot 'export-port.mjs')
     if ($LASTEXITCODE -ne 0) { throw 'Native asset export failed.' }
+    & node (Join-Path $PSScriptRoot 'export-presentation.mjs')
+    if ($LASTEXITCODE -ne 0) { throw 'Native presentation export failed.' }
     & node (Join-Path $PSScriptRoot 'test-port.mjs')
     if ($LASTEXITCODE -ne 0) { throw 'Native asset validation failed.' }
+    & node (Join-Path $PSScriptRoot 'test-presentation.mjs')
+    if ($LASTEXITCODE -ne 0) { throw 'Native presentation validation failed.' }
     New-Item -ItemType Directory -Force -Path (Join-Path $nativeRoot 'artifacts') | Out-Null
     $method = "NativePrototypeBuild.$Target"
     $log = Join-Path $nativeRoot "artifacts/unity-$($Target.ToLower()).log"

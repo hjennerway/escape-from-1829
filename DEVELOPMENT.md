@@ -1,3 +1,114 @@
+## Native Android navigation and selection revision (30 September 2026)
+
+Version 0.4.0 / code 4 addresses the second phone review. Aerial locations now
+frame each building's full historical bounds from above, using a source shot
+only for its horizontal direction. Ground-level archive views cannot become
+the aerial camera position. Orbit pitch and zoom remain bounded, and an
+additional roof/ground clearance check moves the camera back along its orbit
+ray when a zoom or pan would put it inside a building.
+
+Selection no longer tints everything inside a world-space box starting at
+Y=1.8. The native exporter reuses the browser's clipped ward surfaces and
+historical section filtering, preserving their complete building bases.
+`selection.glb` contains 37 shared mesh variants / 66,640 triangles (4,895,684
+bytes). Only the selected mesh draws, with depth testing and no shadows, at
+0.048 opacity: an 80% reduction from the previous 0.24. It does not recolour
+neighbouring buildings or ground within the selected building's broad bounds.
+Long archive headings also fit above their dates without overlapping.
+
+The title gradient spans the entire physical viewport, including the margins
+outside the centred safe-area interface. Clamped texture edges prevent a
+repeat seam. Both exploration choices now run a 2.4-second eased camera flight
+from the exact live title pose, blending field of view and twilight lighting.
+The aerial path rises above the estate; the walking path approaches the front
+entrance. Touch/mouse navigation waits for handoff, and Skip/Back finishes at
+the exact destination pose. Returning home cancels the flight, and backgrounding
+the app pauses it until focus returns.
+
+Validation: native asset/presentation checks and the Windows gameplay suite
+pass. `NativeAndroid/artifacts/navigation-smoke-final/smoke.json` includes all
+227 visible building/period locations, 2,724 close orbit cases, exact selection
+base bounds, both flight midpoints/endpoints/skip paths, and movement after
+handoff. GPU captures cover the wide title, close walls, corridor selection and
+both transitions. Selected/unselected close-frontage renders were identical
+at every third pixel when selecting the unrelated corridor, confirming the
+old box tint no longer spills onto that frontage. Capture frame rates include
+the automated workload and are not device benchmarks.
+
+The ARM64 Android build and APK v2 signature verification also pass. The update
+is `NativeAndroid/out/escape-1829-native.apk`, 178,071,528 bytes, SHA-256
+`7E497383EF300D39503C9004383C4199D2CA211C0482D7FED08606A5ED1F636F`.
+Its package and signing certificate match 0.3.0, retained as
+`escape-1829-native-v0.3.apk`. See
+`NativeAndroid/artifacts/navigation-apk-verification.json`. An initial native
+compiler invocation ended without diagnostics; the subsequent complete build
+passed. No phone was connected, so this update still needs on-device review.
+
+The selection export was added while retaining the existing outdoor, indoor
+and guard GLBs. Browser model sources, root Unity and Blender exports were not
+changed. The model source hash remains
+`bf3f2437f3d857fa77ec5cee686270bad0285909aa683fbd5a815a33316bbb9b`.
+
+## Native Android presentation revision (30 September 2026)
+
+Version 0.3.0 / code 3 addresses the phone review of the full port. This entry
+supersedes the corresponding rendering limitations in the 0.2.0 notes below.
+
+The interface uses the browser's Arial/Georgia lettering, cream and muted-green
+palette, bordered dark panels and serif headings. Local Chrome bakes the fonts
+as glyph artwork with `NativeAndroid/tools/export-presentation.mjs`; no Windows
+font-program files are shipped and Android needs no installed fonts. Large
+Georgia glyphs use 160 pixels for clear title lettering. Captions are measured
+and fitted to button widths, including both torch states. High Detail and
+Battery Saver are separate choices with the current option highlighted;
+tapping that option keeps it selected. The small map legend also fits its row.
+
+The title uses the browser's 1916 frontage camera, trees, twilight and gentle
+lateral drift, and says **Cheshire County Asylum**. Building photographs open
+in a left-side panel occupying less than one third of the landscape canvas.
+The selected building remains highlighted and aerial camera controls work
+beside the panel. An explicit action expands a photograph for pan/zoom.
+
+The native export now includes the shared countryside, rolling meadows, distant
+tree belts/hedges and the frontage coat-of-arms photograph. Native shaders add
+clouds, moving weather noise, distant haze and height-dependent ground mist.
+EZ-Tree leaves retain local phase and tip weights for the browser's three wind
+harmonics; trunks remain fixed. Foliage mipmaps preserve alpha coverage. High
+Detail adds nearby soft sunlight shadows; Battery Saver disables shadows and
+keeps its lower resolution limit. Directional ambient light, surface detail,
+adjusted sun/corridor lighting and the browser's ACES tone-mapping convention
+replace the former flat appearance.
+
+Road depth offsets previously disappeared during export, and compressed
+coordinates could collapse thin surface layers. Signed material offsets now
+survive into native materials; thin ground/overlay meshes retain uncompressed
+coordinates. Title/aerial near clipping also gives more depth precision.
+The outdoor union now contains 5,535 meshes / 6,604,975 triangles, counting all
+periods, detail variants and scenery. Interior and guard counts are unchanged.
+Scenery tints share quantized material buckets to limit additional draw calls.
+
+Validation: `test-port.mjs` and `test-presentation.mjs` pass, as do the Windows
+and ARM64 Android builds. Full gameplay and presentation checks are recorded
+in `NativeAndroid/artifacts/presentation-smoke-final/smoke.json`. GPU captures
+were visually compared with a fresh browser title reference and cover title,
+sky/horizon, roads, day/night frontage, photo panel, quality choices, help and
+touch controls at 1280×720 and 1560×720. Offscreen UI checks reuse the live
+glyphs, caption measurements, rectangles and drawing functions. These captures
+and their displayed frame timings are not phone benchmarks.
+
+The signed update is `NativeAndroid/out/escape-1829-native.apk`, 176,987,696 bytes,
+SHA-256 `1EB4B9A29DC002C90A62BC3A1D5E2CEAA707398935F345ADB73AF33571F23B81`.
+APK v2 verification passes; package and certificate match the earlier builds.
+Details are in `NativeAndroid/artifacts/presentation-apk-verification.json`.
+The previous full-port APK is retained as `escape-1829-native-v0.2.apk`.
+No device was connected; the S25 Ultra still needs a performance/touch check
+with the restored scenery and High Detail shadows. The reported 60 FPS remains
+the prototype baseline. Play Store release preparation remains separate.
+
+Only NativeAndroid sources/exports were regenerated. Browser models, original
+photographs, root Unity and Blender exports were not changed. The geometry
+source hash remains `bf3f2437f3d857fa77ec5cee686270bad0285909aa683fbd5a815a33316bbb9b`.
+
 ## Native Android playable port (30 September 2026)
 
 The isolated `NativeAndroid/Unity` project now provides asylum escape on both
@@ -869,8 +980,27 @@ and pull requests and uploads the runnable folder, MSIX and test evidence.
 For a real submission build, set repository variables `STORE_IDENTITY_NAME`,
 `STORE_PUBLISHER`, `STORE_PUBLISHER_DISPLAY_NAME`, then manually run the
 workflow with `package_kind: store`. These are public package metadata, not
-passwords or signing keys. Download the artifact and submit it to Microsoft;
+passwords or signing keys. Download the Store MSIX artifact and submit it to Microsoft;
 the workflow itself has only repository read permissions and does not deploy.
+
+The MSIX upload uses `actions/upload-artifact@v7` with `archive: false`, so its
+individual download is the `.msix` file itself. The artifact is named after
+that file: `EscapeFrom1829-<version>-x64-store.msix` for a Store run, or
+`EscapeFrom1829-<version>-x64-preview-unsigned.msix` for a preview. Submit only
+the Store file to Partner Center. The runnable Windows folder and test evidence
+remain ZIP downloads; the web build inventory is included with test evidence.
+The run summary links the MSIX and explains which package kind was built.
+
+Older workflow runs still download `EscapeFrom1829-MSIX-<kind>.zip`. Extract
+that ZIP and use the `.msix` inside it; do not rename the ZIP. A preview MSIX
+still requires a new workflow run with `package_kind: store` and the three
+identity variables configured. See the [direct artifact upload release](https://github.com/actions/upload-artifact/releases/tag/v7.0.0).
+
+Validation (30 September 2026): all eight desktop unit tests pass. The workflow
+YAML and all PowerShell step scripts parse successfully, and both preview and
+Store summary branches generate the expected download link and submission
+instructions. Direct downloads still need verification on the next hosted
+workflow run. This edit does not rebuild the executable, MSIX or game models.
 
 Store listing text, certification notes and privacy information are in
 `Desktop/store/`. `node Desktop/scripts/capture-store.mjs` captures four direct

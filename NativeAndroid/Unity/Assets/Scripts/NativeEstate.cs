@@ -6,6 +6,8 @@ using UnityEngine;
 public sealed partial class NativePrototypeGame
 {
     MeshRenderer[] estateMeshes;bool[] periodMeshSet;int[] detailLevels;
+    public Mesh[] selectionMeshes;public Shader selectionShader;
+    MeshFilter selectionFilter;MeshRenderer selectionRenderer;const float selectionOpacity=.24f*.2f;
     readonly List<InteriorPart> interiorParts=new List<InteriorPart>();
     readonly List<GameObject> floorArtwork=new List<GameObject>();
     class InteriorPart { public MeshRenderer renderer;public int floor,region;public bool open; }
@@ -20,6 +22,10 @@ public sealed partial class NativePrototypeGame
             int index=int.Parse(name.Substring(7));estateMeshes[index]=r;r.shadowCastingMode=UnityEngine.Rendering.ShadowCastingMode.Off;
         }
         for(int i=0;i<estateMeshes.Length;i++)if(!estateMeshes[i])throw new Exception("Estate mesh missing: "+i);
+        var highlight=new GameObject("Selected building surfaces");highlight.transform.SetParent(outside.transform,false);
+        selectionFilter=highlight.AddComponent<MeshFilter>();selectionRenderer=highlight.AddComponent<MeshRenderer>();
+        selectionRenderer.sharedMaterial=new Material(selectionShader);selectionRenderer.sharedMaterial.SetFloat("_Opacity",selectionOpacity);
+        selectionRenderer.shadowCastingMode=UnityEngine.Rendering.ShadowCastingMode.Off;selectionRenderer.receiveShadows=false;selectionRenderer.enabled=false;
         SetPeriod(periodIndex);
     }
     void SetPeriod(int index)
@@ -79,8 +85,33 @@ public sealed partial class NativePrototypeGame
     void ReleaseArchiveTexture(ref Texture2D texture){if(texture){bool wall=false;foreach(var p in floorArtwork)if(p.GetComponent<Renderer>().sharedMaterial.mainTexture==texture)wall=true;if(!wall)Resources.UnloadAsset(texture);}texture=null;}
     void UpdateOrbit(float amount)
     {
-        orbitYaw+=amount*20;var direction=Quaternion.Euler(orbitPitch,orbitYaw,0)*Vector3.back;
+        orbitYaw+=amount*20;orbitPitch=Mathf.Clamp(orbitPitch,8,86);orbitDistance=Mathf.Clamp(orbitDistance,25,1500);
+        var direction=Quaternion.Euler(orbitPitch,orbitYaw,0)*Vector3.back;
+        // Panning or zooming towards a roof must never strand the camera inside
+        // it. Move back along the same orbit ray, retaining a usable target.
+        for(int attempt=0;attempt<=manifest.periods[periodIndex].buildings.Length;attempt++){
+            var position=orbitTarget+direction*orbitDistance;float floor=AerialClearance(position);
+            if(position.y>=floor-.001f)break;
+            orbitDistance=Mathf.Max(orbitDistance,(floor-orbitTarget.y)/direction.y+.1f);
+        }
         view.transform.position=orbitTarget+direction*orbitDistance;view.transform.LookAt(orbitTarget);
+    }
+    float AerialClearance(Vector3 position)
+    {
+        float height=4;foreach(var b in manifest.periods[periodIndex].buildings)
+            if(position.x>b.minX-3&&position.x<b.maxX+3&&-position.z>b.minZ-3&&-position.z<b.maxZ+3)height=Mathf.Max(height,b.maxY+3);
+        return height;
+    }
+    void FrameBuilding(BuildingBounds b,Location shot)
+    {
+        orbitTarget=new Vector3((b.minX+b.maxX)/2,(b.minY+b.maxY)/2,-(b.minZ+b.maxZ)/2);
+        orbitPitch=50;orbitYaw=200;
+        // Browser archive shots include corridor/interior photographs. Reuse
+        // only their direction; frame the exterior from above its full bounds.
+        if(shot!=null){var direction=new Vector3(shot.target[0]-shot.position[0],0,shot.position[2]-shot.target[2]);if(direction.sqrMagnitude>1)orbitYaw=Quaternion.LookRotation(direction).eulerAngles.y;}
+        float radius=new Vector3(b.maxX-b.minX,b.maxY-b.minY,b.maxZ-b.minZ).magnitude*.5f;
+        float halfAngle=Mathf.Min(view.fieldOfView*Mathf.Deg2Rad*.5f,Mathf.Atan(Mathf.Tan(view.fieldOfView*Mathf.Deg2Rad*.5f)*view.aspect));
+        orbitDistance=Mathf.Max(65,radius/Mathf.Sin(halfAngle)*1.15f);UpdateOrbit(0);
     }
     Vector2 aerialDown;bool aerialDragging;float aerialMoved;
     void UpdateAerialInput(float dt)
@@ -104,16 +135,18 @@ public sealed partial class NativePrototypeGame
         foreach(var b in manifest.periods[periodIndex].buildings){var bounds=new UnityEngine.Bounds(new Vector3((b.minX+b.maxX)/2,(b.minY+b.maxY)/2,-(b.minZ+b.maxZ)/2),new Vector3(b.maxX-b.minX,b.maxY-b.minY,b.maxZ-b.minZ));if(bounds.IntersectRay(ray,out float distance)&&distance<nearest){nearest=distance;index=b.index;}}
         if(index>=0)SelectBuilding(index);
     }
-    void SelectBuilding(int index){selectedBuilding=index;photoIndex=0;photoZoom=1;photoPan=Vector2.zero;ReleaseArchiveTexture(ref photoTexture);var photos=BuildingPhotos();if(photos.Count>0)photoTexture=LoadArchive(photos[0].src);UnlockMouse();stickVector=Vector2.zero;}
+    void SelectBuilding(int index){selectedBuilding=index;photoExpanded=false;photoIndex=0;photoZoom=1;photoPan=Vector2.zero;ReleaseArchiveTexture(ref photoTexture);var photos=BuildingPhotos();if(photos.Count>0)photoTexture=LoadArchive(photos[0].src);UnlockMouse();stickVector=Vector2.zero;
+        foreach(var b in manifest.periods[periodIndex].buildings)if(b.index==index){selectionFilter.sharedMesh=selectionMeshes[b.selectionMesh];selectionRenderer.enabled=true;}
+    }
     List<Photo> BuildingPhotos(){var photos=new List<Photo>();if(selectedBuilding<0)return photos;var b=manifest.buildings[selectedBuilding];if(b.photos!=null)photos.AddRange(b.photos);if(b.contextPhotos!=null)photos.AddRange(b.contextPhotos);return photos;}
     string BuildingDates(){var years=new SortedSet<int>();var removed=new SortedSet<int>();var building=manifest.buildings[selectedBuilding];if(building.dates!=null)foreach(var date in building.dates){if(date.built>0)years.Add(date.built);if(date.demolished>0)removed.Add(date.demolished);}return "Built: "+string.Join(" / ",years)+(removed.Count>0?" · Removed: "+string.Join(" / ",removed):"")+" · Viewing "+manifest.periods[periodIndex].year;}
-    void CloseBuilding(){selectedBuilding=-1;ReleaseArchiveTexture(ref photoTexture);if(mode==Mode.Outside)LockMouse();}
+    void CloseBuilding(){selectedBuilding=-1;photoExpanded=false;if(selectionRenderer)selectionRenderer.enabled=false;ReleaseArchiveTexture(ref photoTexture);if(mode==Mode.Outside)LockMouse();}
     void ChangePhoto(int delta){var photos=BuildingPhotos();if(photos.Count==0)return;photoIndex=(photoIndex+delta+photos.Count)%photos.Count;ReleaseArchiveTexture(ref photoTexture);photoTexture=LoadArchive(photos[photoIndex].src);photoZoom=1;photoPan=Vector2.zero;}
     void GoToBuilding(int index)
     {
         foreach(var b in manifest.periods[periodIndex].buildings)if(b.index==index){
             var building=manifest.buildings[index];Location shot=null;foreach(var l in manifest.locations)if(building.locations!=null&&Array.IndexOf(building.locations,l.key)>=0){shot=l;break;}
-            if(mode==Mode.Aerial){var centre=new Vector3((b.minX+b.maxX)/2,5,-(b.minZ+b.maxZ)/2);orbitTarget=centre;orbitDistance=Mathf.Max(65,Mathf.Max(b.maxX-b.minX,b.maxZ-b.minZ)*1.8f);if(shot!=null){var p=new Vector3(shot.position[0],shot.position[1],-shot.position[2]);var t=new Vector3(shot.target[0],shot.target[1],-shot.target[2]);orbitTarget=t;orbitDistance=Vector3.Distance(p,t);var angles=Quaternion.LookRotation(t-p).eulerAngles;orbitYaw=angles.y;orbitPitch=angles.x;}UpdateOrbit(0);}
+            if(mode==Mode.Aerial)FrameBuilding(b,shot);
             else{var p=shot?.walkPosition;player=p!=null?new Vector2(p[0],p[2]):new Vector2(b.maxX+5,(b.minZ+b.maxZ)/2);if(!OutdoorClear(manifest,player.x,player.y,periodIndex,trees)){for(float r=2;r<50;r+=2){var test=new Vector2(b.maxX+r,b.maxZ+r);if(OutdoorClear(manifest,test.x,test.y,periodIndex,trees)){player=test;break;}}}var target=new Vector2((b.minX+b.maxX)/2,(b.minZ+b.maxZ)/2);var d=target-player;yaw=Mathf.Atan2(-d.x,-d.y);pitch=0;PositionView();}
             locationsOpen=false;CloseBuilding();return;
         }locationMessage="That building is not present in "+manifest.periods[periodIndex].year+".";

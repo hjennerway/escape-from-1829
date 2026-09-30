@@ -22,10 +22,13 @@ public static class NativePrototypeBuild
     [Serializable] class View { public int buffer; public int byteOffset; public int byteLength; public int byteStride; }
     [Serializable] class MeshDef { public string name; public Primitive[] primitives; }
     [Serializable] class Primitive { public Attributes attributes; public int indices = -1; public int material = -1; public int mode = 4; }
-    [Serializable] class Attributes { public int POSITION = -1; public int NORMAL = -1; public int TEXCOORD_0 = -1; }
+    [Serializable] class Attributes { public int POSITION = -1; public int NORMAL = -1; public int TEXCOORD_0 = -1; public int TEXCOORD_1=-1; }
     [Serializable] class SceneDef { public int[] nodes; }
-    [Serializable] class NodeDef { public string name; public int mesh = -1; public int[] children; public float[] translation; public float[] rotation; public float[] scale; public float[] matrix; }
-    [Serializable] class MaterialDef { public string name; public Pbr pbrMetallicRoughness; public float[] emissiveFactor; public TextureInfo emissiveTexture; public MaterialExtensions extensions; public bool doubleSided; public string alphaMode; public float alphaCutoff = .5f; }
+    [Serializable] class NodeDef { public string name; public int mesh = -1; public int[] children; public float[] translation; public float[] rotation; public float[] scale; public float[] matrix; public NodeExtras extras; }
+    [Serializable] class NodeExtras { public bool preciseSurface; }
+    [Serializable] class SurfaceExtras { public float offsetFactor,offsetUnits;public bool grass,wind; }
+    [Serializable] class MaterialExtras { public SurfaceExtras nativeSurface; }
+    [Serializable] class MaterialDef { public string name; public Pbr pbrMetallicRoughness; public float[] emissiveFactor; public TextureInfo emissiveTexture; public MaterialExtensions extensions; public bool doubleSided; public string alphaMode; public float alphaCutoff = .5f; public MaterialExtras extras; }
     [Serializable] class MaterialExtensions { public Bump EXT_materials_bump; public Unlit KHR_materials_unlit; public EmissiveStrength KHR_materials_emissive_strength; }
     [Serializable] class Bump { public TextureInfo bumpTexture; public float bumpFactor=1; }
     [Serializable] class Unlit { }
@@ -63,21 +66,28 @@ public static class NativePrototypeBuild
         var outdoor = cached ? AssetDatabase.LoadAssetAtPath<GameObject>(Baked + "/outdoor/outdoor.prefab") : null;
         var indoor = cached ? AssetDatabase.LoadAssetAtPath<GameObject>(Baked + "/indoor/indoor.prefab") : null;
         var guard = cached ? AssetDatabase.LoadAssetAtPath<GameObject>(Baked + "/guard/guard.prefab") : null;
-        if (outdoor && indoor && guard) stats.AddRange(previous.assets);
-        else { outdoor = Import("outdoor", stats); indoor = Import("indoor", stats); guard = Import("guard", stats); }
+        var selection = cached ? AssetDatabase.LoadAssetAtPath<GameObject>(Baked + "/selection/selection.prefab") : null;
+        if (outdoor && indoor && guard && selection) stats.AddRange(previous.assets);
+        else { outdoor = Import("outdoor", stats); indoor = Import("indoor", stats); guard = Import("guard", stats); selection = Import("selection",stats); }
         var scene = EditorSceneManager.NewScene(NewSceneSetup.EmptyScene, NewSceneMode.Single);
         var game = new GameObject("Escape from 1829").AddComponent<NativePrototypeGame>();
         game.outdoorPrefab = outdoor; game.indoorPrefab = indoor; game.guardPrefab = guard;
+        var filters=selection.GetComponentsInChildren<MeshFilter>(true);game.selectionMeshes=new Mesh[filters.Length];
+        foreach(var filter in filters)game.selectionMeshes[int.Parse(filter.transform.parent.name.Substring(10))]=filter.sharedMesh;
+        game.selectionShader=Shader.Find("Escape1829/BuildingSelection");
         game.layoutText = AssetDatabase.LoadAssetAtPath<TextAsset>(Source + "/layout.json");
         game.manifestText = AssetDatabase.LoadAssetAtPath<TextAsset>(Source + "/manifest.json");
         game.worldFont=Resources.GetBuiltinResource<Font>("LegacyRuntime.ttf");
+        game.bodyFont=NativePresentationBuild.LoadFont("arial");game.buttonFont=NativePresentationBuild.LoadFont("arial-bold");game.displayFont=NativePresentationBuild.LoadFont("georgia");game.italicFont=NativePresentationBuild.LoadFont("georgia-italic");
+        game.skyShader=Shader.Find("Escape1829/CloudSky");game.gradeShader=Shader.Find("Escape1829/ColourGrade");
+        game.uiCaptureShader=Shader.Find("Escape1829/UICapture");
         if (!game.layoutText || !game.manifestText) throw new Exception("Exported navigation data could not import.");
         game.outdoorTriangles = stats[0].triangles; game.indoorTriangles = stats[1].triangles;
         game.outdoorBatches = stats[0].meshes; game.indoorBatches = stats[1].meshes;
         EditorSceneManager.SaveScene(scene, ScenePath);
         PlayerSettings.companyName = "Chester Night Games";
         PlayerSettings.productName = "Escape from 1829";
-        PlayerSettings.bundleVersion="0.2.0";PlayerSettings.Android.bundleVersionCode=2;
+        PlayerSettings.bundleVersion="0.4.0";PlayerSettings.Android.bundleVersionCode=4;
         PlayerSettings.SetApplicationIdentifier(NamedBuildTarget.Android, "org.hjennerway.escape1829.prototype");
         PlayerSettings.defaultScreenWidth = 1280; PlayerSettings.defaultScreenHeight = 720;
         PlayerSettings.defaultIsNativeResolution = false;
@@ -110,7 +120,7 @@ public static class NativePrototypeBuild
         var signature = new StringBuilder();
         using (var hash = SHA256.Create())
         {
-            foreach (string file in new[] { Source + "/outdoor.glb", Source + "/indoor.glb", Source + "/guard.glb", "Assets/Editor/NativePrototypeBuild.cs", "Assets/Shaders/NativeSurface.shader" })
+            foreach (string file in new[] { Source + "/outdoor.glb", Source + "/indoor.glb", Source + "/guard.glb", Source + "/selection.glb", "Assets/Editor/NativePrototypeBuild.cs", "Assets/Shaders/NativeSurface.shader" })
             {
                 using (var stream = File.OpenRead(file)) signature.Append(BitConverter.ToString(hash.ComputeHash(stream)));
             }
@@ -159,6 +169,7 @@ public static class NativePrototypeBuild
             importer.wrapMode = TextureWrapMode.Repeat; importer.mipmapEnabled = true;
             bool linear=false;foreach(var texture in root.textures)if(texture.source==i&&texture.name!=null&&(texture.name.StartsWith("Estate ")||texture.name.StartsWith("Distant window glass mask")))linear=true;
             importer.sRGBTexture=!linear;importer.anisoLevel=8;
+            foreach(var m in root.materials)if(m.alphaMode=="MASK"&&m.pbrMetallicRoughness?.baseColorTexture!=null&&root.textures[m.pbrMetallicRoughness.baseColorTexture.index].source==i){importer.alphaIsTransparency=true;importer.mipMapsPreserveCoverage=true;importer.alphaTestReferenceValue=m.alphaCutoff;}
             importer.maxTextureSize = 1024; importer.textureCompression = TextureImporterCompression.Compressed;
             importer.SaveAndReimport(); textures[i] = AssetDatabase.LoadAssetAtPath<Texture2D>(texturePath);
         }
@@ -179,6 +190,8 @@ public static class NativePrototypeBuild
         {
             var definition = root.materials[i]; var pbr = definition.pbrMetallicRoughness;
             var material = new Material(Shader.Find("Escape1829/NativeSurface")); material.name = definition.name ?? name + " material " + i;
+            var surface=definition.extras?.nativeSurface;
+            if(surface!=null){material.SetFloat("_OffsetFactor",surface.offsetFactor);material.SetFloat("_OffsetUnits",surface.offsetUnits);material.SetFloat("_Grass",surface.grass?1:0);if(surface.wind)material.EnableKeyword("_LEAF_WIND");}
             if (pbr != null)
             {
                 // glTF factors are linear; Unity Color properties are supplied
@@ -223,6 +236,7 @@ public static class NativePrototypeBuild
                 var position = Floats(root, bytes, start, primitive.attributes.POSITION, 3);
                 var normal = Floats(root, bytes, start, primitive.attributes.NORMAL, 3);
                 var uv = Floats(root, bytes, start, primitive.attributes.TEXCOORD_0, 2);
+                float[] wind=name=="guard"||name=="selection"?null:Floats(root,bytes,start,primitive.attributes.TEXCOORD_1,2);
                 var vertices = new Vector3[position.Length / 3]; var normals = new Vector3[vertices.Length]; var uvs = new Vector2[vertices.Length];
                 for (int n = 0; n < vertices.Length; n++)
                 {
@@ -237,8 +251,11 @@ public static class NativePrototypeBuild
                 if (indices.Length % 3 != 0) throw new Exception("Invalid triangle index count.");
                 for (int k = 0; k < indices.Length; k += 3) { int t = indices[k + 1]; indices[k + 1] = indices[k + 2]; indices[k + 2] = t; }
                 var mesh = new Mesh { name = root.meshes[i].name ?? name + " mesh " + i, indexFormat = vertices.Length > 65535 ? IndexFormat.UInt32 : IndexFormat.UInt16 };
-                mesh.vertices = vertices; mesh.normals = normals; mesh.uv = uvs; mesh.triangles = indices; mesh.RecalculateBounds();if(materials[primitive.material].IsKeywordEnabled("_BUMP"))mesh.RecalculateTangents();
-                MeshUtility.SetMeshCompression(mesh,ModelImporterMeshCompression.Low);
+                mesh.vertices = vertices; mesh.normals = normals; mesh.uv = uvs; mesh.triangles = indices;
+                if(wind!=null){var weights=new Vector2[vertices.Length];for(int w=0;w<weights.Length;w++)weights[w]=new Vector2(wind[w*2],wind[w*2+1]);mesh.uv2=weights;}
+                mesh.RecalculateBounds();if(materials[primitive.material].IsKeywordEnabled("_BUMP"))mesh.RecalculateTangents();
+                bool precise=false;foreach(var node in root.nodes)if(node.mesh==i&&node.extras!=null&&node.extras.preciseSurface)precise=true;
+                MeshUtility.SetMeshCompression(mesh,precise?ModelImporterMeshCompression.Off:ModelImporterMeshCompression.Low);
                 string path = folder + "/mesh-" + i + "-" + j + ".asset";
                 meshSets[i][j] = (Mesh)SaveAsset(mesh, path); assetStats.meshes++; assetStats.triangles += indices.Length / 3;
             }

@@ -21,9 +21,9 @@ public sealed partial class NativePrototypeGame
     [Serializable] public class Bounds { public float minX, maxX, minZ, maxZ; }
     [Serializable] public class Obstacle : Bounds { public Point[] corners; public float height, grade; }
     [Serializable] public class Stats { public int batches; public long triangles; }
-    [Serializable] public class MeshFlag { public bool tree; public int group, level; }
+    [Serializable] public class MeshFlag { public bool tree,shadow; public int group, level; }
     [Serializable] public class DetailGroup { public float x,y,z,radius,windowHeight; }
-    [Serializable] public class BuildingBounds : Bounds { public int index; public float minY,maxY; }
+    [Serializable] public class BuildingBounds : Bounds { public int index,selectionMesh; public float minY,maxY; }
     [Serializable] public class Period
     {
         public int year; public string title,description; public int[] meshes;
@@ -41,7 +41,7 @@ public sealed partial class NativePrototypeGame
     [Serializable] public class Manifest
     {
         public int schema,defaultPeriod; public float floorHeight; public string sourceHash;
-        public Bounds playBounds; public Stats outdoor,indoor,guard;
+        public Bounds playBounds; public Stats outdoor,indoor,guard,selection;
         public Period[] periods; public MeshFlag[] meshFlags; public DetailGroup[] detailGroups;
         public Building[] buildings; public Location[] locations; public Artwork[] art; public WallArt[] wallArt;
         public EarthAnchor earthAnchor; public Point[] perimeter; public Diagnosis[] diagnoses; public Cause[] causes;

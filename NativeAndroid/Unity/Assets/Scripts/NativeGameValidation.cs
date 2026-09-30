@@ -14,6 +14,8 @@ public sealed partial class NativePrototypeGame
         // An exception in a coroutine would otherwise leave a batch player alive.
         Application.logMessageReceived+=(message,trace,type)=>{if(type==LogType.Exception||type==LogType.Error){File.WriteAllText(Path.Combine(directory,"failure.txt"),message+"\n"+trace);Application.Quit(1);}};
         Directory.CreateDirectory(directory);yield return null;paused=true;
+        yield return PresentationSmoke(directory);
+        yield return NavigationSmoke(directory);
         Check(activeExits.Count==5,"Exactly five exits selected per app session");var exits=new HashSet<int>(activeExits);
         for(int f=0;f<2;f++)foreach(var exit in floors[f].exits)Check(RouteBetweenFloors(floors,Position(floors[0].spawn,floors[0]),0,Position(exit,floors[f]),f).Count>0,"Reachable "+f+" / "+exit.name);
         StartAerial();paused=true;orbitTarget=new Vector3(190,5,30);orbitDistance=590;orbitYaw=192;orbitPitch=55;UpdateOrbit(0);
