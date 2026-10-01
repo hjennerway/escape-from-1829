@@ -22,4 +22,17 @@ for(const name of ['arial','arial-bold','georgia','georgia-italic']){
  for(const c of 'CHESHIRE COUNTY ASYLUMTorch: ONOFF○●←→↗')if(c!=='←')assert(glyphs.has(c.codePointAt(0)),name+' glyph '+c);
  assert(data.size===(name==='georgia'?160:80));for(const g of data.glyphs){assert(g.x>=0&&g.y>=0&&g.x+g.width<=data.width&&g.y+g.height<=data.height);assert(g.advance>=0);}
 }
-console.log(`PASS: countryside, precise road layers, ${animated} wind meshes, and all four browser font atlases.`);
+const icons=JSON.parse(await readFile(new URL('Presentation/lighting-icons.json',root)));
+const lightingSource=await readFile(new URL('../../Browser/dist/day-night.mjs',import.meta.url),'utf8');
+const browserIcons=[...lightingSource.matchAll(/^\s+(day|dusk|night):'([^']+)'/gm)].map(([,mode,paths])=>({mode,paths}));
+assert.deepEqual(icons.icons,browserIcons,'Native lighting glyphs exactly match all three browser SVGs');
+assert.equal(icons.icons.map(icon=>icon.mode).join(','),'day,dusk,night');
+const iconBytes=await readFile(new URL('Presentation/lighting-icons.png',root));
+assert.equal(iconBytes.readUInt32BE(16),288);assert.equal(iconBytes.readUInt32BE(20),96);
+const locationIcon=JSON.parse(await readFile(new URL('Presentation/location-icon.json',root)));
+const aerialSource=await readFile(new URL('../../Browser/dist/aerial.html',import.meta.url),'utf8');
+assert.equal(locationIcon.paths,aerialSource.match(/<svg viewBox="0 0 24 24" aria-hidden="true">([\s\S]*?)<\/svg>/)?.[1],'Native location crosshair matches browser SVG');
+const locationBytes=await readFile(new URL('Presentation/location-icon.png',root));
+assert.equal(locationBytes.readUInt32BE(16),96);assert.equal(locationBytes.readUInt32BE(20),96);
+assert.equal(await readFile(new URL('../Unity/Assets/StreamingAssets/Licenses/LUCIDE-LICENSE.txt',import.meta.url),'utf8'),await readFile(new URL('../../Browser/dist/vendor/LUCIDE-LICENSE.txt',import.meta.url),'utf8'));
+console.log(`PASS: countryside, precise road layers, ${animated} wind meshes, all four browser font atlases, shared Day/Dusk/Night glyphs and location crosshair.`);

@@ -28,11 +28,11 @@ public sealed partial class NativePrototypeGame
         trees=false;RefreshEstateVisibility();foreach(var r in estateMeshes)if(r.enabled)Check(!manifest.meshFlags[Array.IndexOf(estateMeshes,r)].tree,"Hidden trees have no visible meshes");
         Check(manifest.periods[8].obstaclesNoTrees.Length<manifest.periods[8].obstacles.Length,"Tree collision snapshot excludes hidden trees");trees=true;RefreshEstateVisibility();
         StartOutside();paused=true;yield return null;Capture(directory,"frontage.png");Check(Clear(0,40),"Outside start remains walkable");Check(!Clear(manifest.playBounds.maxX+1,40),"Estate boundary blocks movement");
-        night=true;SetLighting(false);yield return null;Check(lampPositions.Count>0&&lampPools.activeSelf,"Night uses estate street-lamp positions");Capture(directory,"frontage-night.png");night=false;SetLighting(false);
+        SetTimeOfDay(LightingMode.Night);yield return null;Check(lampPositions.Count>0&&lampPools.activeSelf,"Night uses estate street-lamp positions");Capture(directory,"frontage-night.png");SetTimeOfDay(LightingMode.Day);
         foreach(var building in manifest.buildings){var photos=new List<Photo>();if(building.photos!=null)photos.AddRange(building.photos);if(building.contextPhotos!=null)photos.AddRange(building.contextPhotos);foreach(var photo in photos){var t=LoadArchive(photo.src);Check(t&&t.width>16&&t.height>16,"Archive loads "+photo.src);ReleaseArchiveTexture(ref t);}}
         foreach(var art in manifest.art)Check(LoadArchive(art.src)!=null,"Wall artwork loads "+art.src);
         StartAerial();paused=true;locationsOpen=true;locationsScroll=Vector2.zero;Check(LocationTouch(101,new Vector2(400,191),0,TouchPhase.Began),"Phone locations accepts touch");LocationTouch(101,new Vector2(400,191),0,TouchPhase.Ended);Check(selectedBuilding>=0&&!locationsOpen,"Phone locations selects a building");CloseBuilding();
-        paused=false;HandleTap(helpButton.center);Check(help,"Touch opens help");HandleTap(helpResumeButton.center);Check(!help,"Touch closes help");
+        StartInside();paused=false;HandleTap(helpButton.center);Check(help,"Touch opens help in asylum escape");HandleTap(helpResumeButton.center);Check(!help,"Touch closes help");
         StartInside();paused=true;Check(exits.SetEquals(activeExits),"Retry preserves open exits");foreach(var e in enemies)Check(Vector2.Distance(e.position,player)>=12,"Random enemy spawn keeps reception clear");
         Check(IndoorClear(floors[1],Position(floors[1].spawn,floors[1]).x,Position(floors[1].spawn,floors[1]).y),"Upper reception spawn remains walkable");
         elapsed=0;var before=enemies[0].position;UpdateEnemies(.2f);Check(before==enemies[0].position,"Five-second head start freezes pursuers");

@@ -26,7 +26,7 @@ public sealed partial class NativePrototypeGame
     }
     void UpdateNight()
     {
-        if(!lampPools)return;bool active=(night||mode==Mode.Title)&&outside.activeSelf;lampPools.SetActive(active);Shader.SetGlobalFloat("_Night",active?1:0);if(!active)return;
+        if(!lampPools)return;bool active=(lightingMode!=LightingMode.Day||mode==Mode.Title)&&outside.activeSelf;lampPools.SetActive(active);Shader.SetGlobalFloat("_Night",active?1:0);if(!active)return;
         nightClock-=Time.unscaledDeltaTime;if(nightClock>0)return;nightClock=.25f;var position=mode==Mode.Aerial?orbitTarget:view.transform.position;
         lampPositions.Sort((a,b)=>((new Vector2(a.x,-a.z)-new Vector2(position.x,position.z)).sqrMagnitude).CompareTo((new Vector2(b.x,-b.z)-new Vector2(position.x,position.z)).sqrMagnitude));
         for(int i=0;i<lightPool.Length;i++){var light=lightPool[i];bool lit=i<8&&i<lampPositions.Count;light.enabled=lit;if(lit){var p=lampPositions[i];light.transform.position=new Vector3(p.x,p.y,-p.z);light.range=22;light.intensity=1.8f;light.color=new Color(1,.72f,.43f);}}

@@ -27,10 +27,10 @@ public sealed partial class NativePrototypeGame
     void CaptureUI(string directory,string name,int width=1280)
     {
         Styles();if(!captureMaterial)captureMaterial=new Material(uiCaptureShader);
-        var target=new RenderTexture(width,720,24,RenderTextureFormat.ARGB32,RenderTextureReadWrite.sRGB);var previous=RenderTexture.active;var old=view.targetTexture;float oldAspect=view.aspect;view.targetTexture=target;view.aspect=width/720f;view.Render();RenderTexture.active=target;
+        var target=new RenderTexture(width,720,24,RenderTextureFormat.ARGB32,RenderTextureReadWrite.sRGB);var previous=RenderTexture.active;var old=view.targetTexture;float oldAspect=view.aspect;view.targetTexture=target;view.aspect=width/720f;UpdateDeviceLocationMarker();view.Render();RenderTexture.active=target;
         GL.PushMatrix();GL.LoadPixelMatrix(0,width,720,0);GL.MultMatrix(Matrix4x4.Translate(new Vector3((width-1280)/2,0,0)));bool oldSrgb=GL.sRGBWrite;GL.sRGBWrite=true;capturingUI=true;
-        var previousViewport=interfaceViewport;interfaceViewport=new Rect((1280-width)/2,0,width,720);
-        try{DrawInterface();}finally{interfaceViewport=previousViewport;capturingUI=false;GL.sRGBWrite=oldSrgb;GL.PopMatrix();}
+        var previousViewport=interfaceViewport;var previousSafe=safeViewport;interfaceViewport=safeViewport=new Rect((1280-width)/2,0,width,720);
+        try{DrawInterface();}finally{interfaceViewport=previousViewport;safeViewport=previousSafe;capturingUI=false;GL.sRGBWrite=oldSrgb;GL.PopMatrix();}
         var image=new Texture2D(width,720,TextureFormat.RGB24,false);image.ReadPixels(new Rect(0,0,width,720),0,0);image.Apply();File.WriteAllBytes(Path.Combine(directory,name),image.EncodeToPNG());
         view.targetTexture=old;view.aspect=oldAspect;RenderTexture.active=previous;target.Release();Destroy(target);Destroy(image);Check(true,"Interface rendered with live controls: "+name);
     }

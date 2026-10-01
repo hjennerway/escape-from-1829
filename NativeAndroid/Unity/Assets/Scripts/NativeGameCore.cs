@@ -17,7 +17,11 @@ public sealed partial class NativePrototypeGame
     float yaw,pitch,elapsed,hold,cinemaTime,stamina=1,lastStep,lastPulse,sensitivity=1.2f;
     float smoothedFrame=.0167f,displayedFPS=60,hudClock;
     bool paused,map,help,spotted,sprinting,crouching,crouchToggle,exhausted,stairLatch,diagnostics;
-    bool initialized,automationMode,audioOn=true,lowGraphics,trees=true,night,useHeld,sprintHeld;
+    bool initialized,automationMode,audioOn=true,lowGraphics,trees=true,useHeld,sprintHeld;
+    enum LightingMode { Day,Dusk,Night }
+    LightingMode lightingMode=LightingMode.Day;
+    bool night=>lightingMode==LightingMode.Night;
+    void SetTimeOfDay(LightingMode value){lightingMode=value;SetLighting(false);}
     string prompt="",status="",previousDiagnosis="";
     readonly Vector2 entrance=new Vector2(0,36);
     readonly HashSet<int> activeExits=new HashSet<int>();
@@ -58,13 +62,13 @@ public sealed partial class NativePrototypeGame
         var m=new Material(Shader.Find("Escape1829/NativeSurface"));m.color=color;m.SetColor("_EmissionColor",color*.4f);body.GetComponent<Renderer>().material=m;return body;
     }
     void ResetInput(){introFlightActive=false;paused=map=help=locationsOpen=false;aerialDragging=false;stickVector=Vector2.zero;stickFinger=lookFinger=listFinger=-1;hold=0;stairLatch=false;useHeld=sprintHeld=false;viewingArt=null;ReleaseArchiveTexture(ref artworkTexture);CloseBuilding();timings.Clear();}
-    void Home(){ResetInput();mode=Mode.Title;SetPeriod(8);trees=true;RefreshEstateVisibility();inside.SetActive(false);artRoot.SetActive(false);outside.SetActive(true);portal.SetActive(false);foreach(var e in enemies)e.model.SetActive(false);SetLighting(false);UnlockMouse();landingTime=0;UpdateLanding(0);}
-    public void StartOutside(){mode=Mode.Outside;ResetInput();elapsed=0;player=new Vector2(0,40);yaw=pitch=0;outside.SetActive(true);portal.SetActive(true);inside.SetActive(false);artRoot.SetActive(false);foreach(var e in enemies)e.model.SetActive(false);SetLighting(false);PositionView();LockMouse();}
+    void Home(){CancelDeviceLocation();ResetInput();mode=Mode.Title;SetPeriod(8);trees=true;RefreshEstateVisibility();inside.SetActive(false);artRoot.SetActive(false);outside.SetActive(true);portal.SetActive(false);foreach(var e in enemies)e.model.SetActive(false);SetLighting(false);UnlockMouse();landingTime=0;UpdateLanding(0);}
+    public void StartOutside(){mode=Mode.Outside;ResetInput();HideDeviceLocation();if(!locatingDevice)locationMessage="";elapsed=0;player=new Vector2(0,40);yaw=pitch=0;outside.SetActive(true);portal.SetActive(true);inside.SetActive(false);artRoot.SetActive(false);foreach(var e in enemies)e.model.SetActive(false);SetLighting(false);PositionView();LockMouse();}
     void StartAerial(){mode=Mode.Aerial;ResetInput();outside.SetActive(true);inside.SetActive(false);artRoot.SetActive(false);portal.SetActive(false);foreach(var e in enemies)e.model.SetActive(false);SetLighting(false);orbitTarget=new Vector3(200,8,10);orbitDistance=500;orbitPitch=52;orbitYaw=200;UpdateOrbit(0);UnlockMouse();}
     void StartArrival(){StartOutside();mode=Mode.Arrival;cinemaTime=0;UnlockMouse();}
     public void StartInside()
     {
-        mode=Mode.Inside;ResetInput();floor=0;layout=floors[0];elapsed=hold=0;stamina=1;spotted=exhausted=crouchToggle=false;player=Position(layout.spawn,layout);yaw=layout.spawn.yaw;pitch=0;stairLatch=false;lastStep=lastPulse=0;
+        CancelDeviceLocation();mode=Mode.Inside;ResetInput();floor=0;layout=floors[0];elapsed=hold=0;stamina=1;spotted=exhausted=crouchToggle=false;player=Position(layout.spawn,layout);yaw=layout.spawn.yaw;pitch=0;stairLatch=false;lastStep=lastPulse=0;
         outside.SetActive(false);portal.SetActive(false);inside.SetActive(true);artRoot.SetActive(true);ShowFloor();
         var placed=new List<Vector2>();foreach(var e in enemies){
             var choices=new List<Vector2>();for(int z=0;z<layout.height;z++)for(int x=0;x<layout.width;x++){
@@ -87,10 +91,10 @@ public sealed partial class NativePrototypeGame
     {
         if(!initialized)return;SetUIScale();TouchInput();float dt=Mathf.Min(Time.unscaledDeltaTime,.08f);smoothedFrame=Mathf.Lerp(smoothedFrame,Time.unscaledDeltaTime,.08f);hudClock+=Time.unscaledDeltaTime;if(hudClock>.3f){displayedFPS=1/Mathf.Max(.001f,smoothedFrame);hudClock=0;}
         if(introFlightActive){UpdateEstateLOD();UpdateNight();UpdateAtmosphere(dt);if(Input.GetKeyDown(KeyCode.Escape))FinishIntroFlight();else if(!paused)UpdateIntroFlight(dt);return;}
-        if(Input.GetKeyDown(KeyCode.Escape)){if(selectedBuilding>=0)CloseBuilding();else if(help)help=false;else if(mode!=Mode.Title)TogglePause();}
+        if(Input.GetKeyDown(KeyCode.Escape)){if(selectedBuilding>=0)CloseBuilding();else if(help)help=false;else if(locationsOpen)locationsOpen=false;else if(Exploring)Home();else if(mode!=Mode.Title)TogglePause();}
         UpdateEstateLOD();UpdateNight();UpdateAtmosphere(dt);if(mode==Mode.Title){if(!paused)UpdateLanding(dt);return;}if(mode==Mode.Arrival||mode==Mode.Escape){UpdateCinema(dt);return;}if(mode==Mode.Escaped||mode==Mode.Caught||paused||help||locationsOpen)return;
         if(selectedBuilding>=0){if(!photoExpanded&&mode==Mode.Aerial)UpdateAerialInput(dt);return;}
-        if(Input.GetKeyDown(KeyCode.Tab)||Input.GetKeyDown(KeyCode.M)){map=!map;if(map)UnlockMouse();else LockMouse();}if(Input.GetKeyDown(KeyCode.H)){help=true;UnlockMouse();return;}if(Input.GetKeyDown(KeyCode.F3))diagnostics=!diagnostics;if(Input.GetKeyDown(KeyCode.F))torch.enabled=!torch.enabled;if(Input.GetKeyDown(KeyCode.T)){trees=!trees;RefreshEstateVisibility();}
+        if(mode==Mode.Inside){if(Input.GetKeyDown(KeyCode.Tab)||Input.GetKeyDown(KeyCode.M)){map=!map;if(map)UnlockMouse();else LockMouse();}if(Input.GetKeyDown(KeyCode.H)){help=true;UnlockMouse();return;}if(Input.GetKeyDown(KeyCode.F))torch.enabled=!torch.enabled;}if(Input.GetKeyDown(KeyCode.F3))diagnostics=!diagnostics;if(Input.GetKeyDown(KeyCode.T)){trees=!trees;RefreshEstateVisibility();}
         if(mode==Mode.Aerial){UpdateAerialInput(dt);return;}bool use=useHeld||Input.GetKey(KeyCode.E);if(viewingArt!=null){if(!use){viewingArt=null;ReleaseArchiveTexture(ref artworkTexture);}return;}
         elapsed+=dt;timings.Enqueue(Time.unscaledDeltaTime);if(timings.Count>300)timings.Dequeue();var movement=stickVector+new Vector2((Input.GetKey(KeyCode.D)?1:0)-(Input.GetKey(KeyCode.A)?1:0),(Input.GetKey(KeyCode.W)?1:0)-(Input.GetKey(KeyCode.S)?1:0));if(movement.sqrMagnitude>1)movement.Normalize();
         crouching=mode==Mode.Inside&&(crouchToggle||Input.GetKey(KeyCode.C)||Input.GetKey(KeyCode.LeftControl));if(stamina<.02f)exhausted=true;if(stamina>.25f)exhausted=false;sprinting=(sprintHeld||Input.GetKey(KeyCode.LeftShift))&&movement.sqrMagnitude>.001f&&!crouching&&!exhausted;if(mode==Mode.Inside)stamina=Mathf.Clamp01(stamina+dt*(sprinting?-.19f:.115f));
@@ -127,8 +131,8 @@ public sealed partial class NativePrototypeGame
     }
     void UpdateCinema(float dt){cinemaTime+=dt;if(mode==Mode.Arrival){float t=Mathf.SmoothStep(0,1,cinemaTime/2);view.transform.position=Vector3.Lerp(new Vector3(0,2.5f,-42),new Vector3(0,1.7f,-31),t);view.transform.LookAt(new Vector3(0,3.5f,-19.8f));if(cinemaTime>=2)StartInside();}else{float t=Mathf.Clamp01(cinemaTime/7);view.transform.position=Vector3.Lerp(new Vector3(0,3,-38),new Vector3(65,65,-110),Mathf.SmoothStep(0,1,t));view.transform.LookAt(new Vector3(0,10,-19.8f));if(cinemaTime>=7)mode=Mode.Escaped;}}
     void TogglePause(){paused=!paused;stickVector=Vector2.zero;stickFinger=lookFinger=-1;useHeld=sprintHeld=false;if(paused)UnlockMouse();else if(mode==Mode.Outside||mode==Mode.Inside)LockMouse();}
-    void OnApplicationPause(bool background){if(automationMode)return;if(introFlightActive){paused=background;return;}if(background&&mode!=Mode.Title&&!paused)TogglePause();}
-    void OnApplicationFocus(bool focus){if(automationMode)return;if(introFlightActive){paused=!focus;return;}if(!focus&&mode!=Mode.Title&&!paused)TogglePause();}
+    void OnApplicationPause(bool background){if(automationMode)return;if(introFlightActive){paused=background;return;}if(background&&mode==Mode.Inside&&!paused)TogglePause();}
+    void OnApplicationFocus(bool focus){if(automationMode)return;if(introFlightActive){paused=!focus;return;}if(!focus&&mode==Mode.Inside&&!paused)TogglePause();}
     void InitializeSound(){audioSource=gameObject.AddComponent<AudioSource>();footstep=Tone(95,.11f);pulse=Tone(52,.18f);}
     AudioClip Tone(float hz,float seconds){int n=Mathf.RoundToInt(seconds*22050);var samples=new float[n];float phase=0;for(int i=0;i<n;i++){float t=(float)i/n;phase+=2*Mathf.PI*hz*Mathf.Pow(.5f,t)/22050;samples[i]=Mathf.Sin(phase)*Mathf.Exp(-t*5);}var clip=AudioClip.Create("Asylum ambience",n,1,22050,false);clip.SetData(samples,0);return clip;}
     void PlaySound(AudioClip clip,float volume){if(audioOn)audioSource.PlayOneShot(clip,volume);}

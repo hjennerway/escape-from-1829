@@ -79,6 +79,8 @@ public static class NativePrototypeBuild
         game.manifestText = AssetDatabase.LoadAssetAtPath<TextAsset>(Source + "/manifest.json");
         game.worldFont=Resources.GetBuiltinResource<Font>("LegacyRuntime.ttf");
         game.bodyFont=NativePresentationBuild.LoadFont("arial");game.buttonFont=NativePresentationBuild.LoadFont("arial-bold");game.displayFont=NativePresentationBuild.LoadFont("georgia");game.italicFont=NativePresentationBuild.LoadFont("georgia-italic");
+        game.lightingIcons=NativePresentationBuild.LoadLightingIcons();
+        game.locationIcon=NativePresentationBuild.LoadLocationIcon();game.deviceLocationShader=Shader.Find("Escape1829/DeviceLocation");
         game.skyShader=Shader.Find("Escape1829/CloudSky");game.gradeShader=Shader.Find("Escape1829/ColourGrade");
         game.uiCaptureShader=Shader.Find("Escape1829/UICapture");
         if (!game.layoutText || !game.manifestText) throw new Exception("Exported navigation data could not import.");
@@ -87,7 +89,7 @@ public static class NativePrototypeBuild
         EditorSceneManager.SaveScene(scene, ScenePath);
         PlayerSettings.companyName = "Chester Night Games";
         PlayerSettings.productName = "Escape from 1829";
-        PlayerSettings.bundleVersion="0.4.0";PlayerSettings.Android.bundleVersionCode=4;
+        PlayerSettings.bundleVersion="0.7.0";PlayerSettings.Android.bundleVersionCode=7;
         PlayerSettings.SetApplicationIdentifier(NamedBuildTarget.Android, "org.hjennerway.escape1829.prototype");
         PlayerSettings.defaultScreenWidth = 1280; PlayerSettings.defaultScreenHeight = 720;
         PlayerSettings.defaultIsNativeResolution = false;

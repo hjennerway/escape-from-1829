@@ -154,6 +154,7 @@ public sealed partial class NativePrototypeGame
     IEnumerator LocateDevice()
     {
         locationMessage="Finding your position…";
+        try{
 #if UNITY_ANDROID && !UNITY_EDITOR
         if(!UnityEngine.Android.Permission.HasUserAuthorizedPermission(UnityEngine.Android.Permission.FineLocation)){
             bool answered=false,granted=false;var callbacks=new UnityEngine.Android.PermissionCallbacks();
@@ -168,8 +169,8 @@ public sealed partial class NativePrototypeGame
         if(Input.location.status!=LocationServiceStatus.Running){locationMessage="Your position could not be found.";Input.location.Stop();yield break;}
         var reading=Input.location.lastData;var a=manifest.earthAnchor;double east=(reading.longitude-a.longitude)*111320*Math.Cos(a.latitude*Math.PI/180),north=(reading.latitude-a.latitude)*111320,L=Math.Sqrt(.55*.55+.835*.835);
         var p=new Vector2(a.x+(float)((-.55*east+.835*north)/L),a.z+(float)((.835*east+.55*north)/L));Input.location.Stop();
-        if(DistanceToEstate(p)>100){locationMessage="This only works near the West Cheshire Hospital site.";yield break;}
-        locationMessage="Your approximate position";if(mode!=Mode.Outside)StartOutside();player=p;PositionView();
+        ApplyDeviceLocation(p,reading.horizontalAccuracy);
+        }finally{Input.location.Stop();locatingDevice=false;locationRoutine=null;}
     }
     float DistanceToEstate(Vector2 p)
     {

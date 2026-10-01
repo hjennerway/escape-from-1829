@@ -5,6 +5,18 @@ using UnityEngine;
 
 public static class NativePresentationBuild
 {
+    public static Texture2D LoadLightingIcons()=>LoadIcon("lighting-icons");
+    public static Texture2D LoadLocationIcon()=>LoadIcon("location-icon");
+    static Texture2D LoadIcon(string name)
+    {
+        string path="Assets/NativePrototype/Presentation/"+name+".png";
+        var importer=(TextureImporter)AssetImporter.GetAtPath(path);
+        if(!importer)throw new Exception("Run export-presentation.mjs before building.");
+        importer.textureCompression=TextureImporterCompression.Uncompressed;importer.sRGBTexture=false;
+        importer.alphaIsTransparency=true;importer.mipmapEnabled=false;importer.filterMode=FilterMode.Bilinear;importer.wrapMode=TextureWrapMode.Clamp;
+        importer.npotScale=TextureImporterNPOTScale.None;importer.SaveAndReimport();
+        return AssetDatabase.LoadAssetAtPath<Texture2D>(path);
+    }
     [Serializable] class Atlas { public int size,width,height,ascent,descent;public Glyph[] glyphs; }
     [Serializable] class Glyph { public int index,advance,minX,maxX,minY,maxY,x,y,width,height; }
     public static Font LoadFont(string name)

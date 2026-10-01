@@ -1,3 +1,141 @@
+## Native Android aerial interface revision (1 October 2026)
+
+Version 0.7.0 / code 7 limits the pause button and its touch target to asylum
+escape. Background/focus changes during exploration no longer open the pause
+panel, including the Android location-permission prompt. Android Back / desktop
+Esc closes the current archive or location list, then returns exploration to
+the title. Escape pause, automatic background pause and its settings remain.
+
+The exploration heading and left controls use a 28-unit inset from the safe
+viewport's left/top edges, instead of the centred 1280-unit canvas. The location
+crosshair and Day/Dusk/Night controls are 52-unit squares; lighting choices form
+a vertical stack aligned with the heading and tree toggle. The location artwork
+is baked from the browser SVG by `export-presentation.mjs` and checked against
+that source. Shared button/panel drawing uses antialiased six-unit corner radii
+with fixed-size corners at every aspect ratio; captures use the same surfaces.
+The period arrows retain their size, placement and behaviour with rounded
+corners. A small shadowed gesture guide runs along the bottom of aerial view.
+
+A successful nearby aerial location fix retains aerial mode, historical period
+and lighting, frames the reported position from above, and draws a red glowing
+pillar and screen-sized ground pin through scenery. The marker follows the
+physical fix across period changes and scales with camera distance. A rejected
+or new fix clears the previous marker. Walking location still positions the
+walker; switching to walking hides the aerial marker. Requests cannot overlap,
+and returning home or entering escape cancels the location service. Location
+data is not saved. Device GPS/permission input needs on-phone validation; smoke
+checks inject nearby, distant and invalid fixes into the same result handler.
+
+Validation: native asset/presentation checks, the full browser `npm test`
+suite, Windows and ARM64 Android builds, and all 47,274 native gameplay,
+navigation and presentation checks pass. Evidence is in
+`NativeAndroid/artifacts/aerial-ui-smoke-final/smoke.json`; the day/dusk/night
+controls in both views, wide layouts, retained escape pause, rounded panels
+and red marker by day/night were visually reviewed. Automated frame timings
+include smoke/loading overhead and are not phone performance measurements.
+
+The signed update is `NativeAndroid/out/escape-1829-native.apk`, 178,768,544
+bytes, SHA-256
+`66512B1D101A9178B56445CCD8C217D8101D165C372DCC4A1047CD729E1813D5`.
+APK v2 signature verification passes; package and certificate match the
+previous versions. Its ARM64 libraries, all five license notices and the
+asylum adaptive launcher icon are present. Details are recorded in
+`NativeAndroid/artifacts/aerial-ui-apk-verification.json`. No phone was
+connected; location permission interaction, physical GPS and real multitouch
+remain to be checked on the device.
+
+Only native C# sources, marker shader, presentation artwork, prepared native
+scene and native player builds are updated. The generated geometry GLBs keep
+source hash `bf3f2437f3d857fa77ec5cee686270bad0285909aa683fbd5a815a33316bbb9b`;
+the geometry exporter was not rerun. Browser models, root Unity and Blender
+exports are unchanged. The previous launcher-icon APK is preserved as
+`NativeAndroid/out/escape-1829-native-v0.6.apk`.
+
+## Native Android launcher icon (1 October 2026)
+
+Version 0.6.0 / code 6 replaces the Unity launcher icon with a head-on
+illustrated view of the asylum entrance, showing both blue heraldic dragons
+and the coat of arms in the triangular pediment, the red door and stone steps.
+The built-in image generator used the actual entrance photograph and existing
+untitled game artwork. The two 1254x1254 opaque PNG sources are retained in
+`NativeAndroid/Unity/Assets/AppIcon/`; prompts and references are recorded in
+`NativeAndroid/art/icon-prompts.json`.
+
+`NativeAppIconBuild.cs` sets the default icon and all six Android adaptive
+sizes before each Android build. The adaptive artwork has extra sky and
+approach around the entrance, preserving the complete pediment and steps
+within launcher masks. The full scene is in the opaque background, with a
+clear foreground layer. Texture imports retain sRGB colour, uncompressed
+pixels, clamped edges and no mipmaps. Unity 6.6 uses adaptive Android icons;
+its former separate Legacy and Round API fields are obsolete errors. The
+layout follows [Android's adaptive-icon guidance](https://developer.android.com/develop/ui/compose/system/icon_design_adaptive).
+
+Validation: `test-port.mjs` and `test-presentation.mjs` pass, as do native
+scene validation and the ARM64 Android build. Circular and rounded-square
+previews were visually checked at 240, 64 and 48 pixels in
+`NativeAndroid/artifacts/icon-contact-sheet.png`. The packaged adaptive XML
+points to both custom layers; the extracted 432px background and clear
+foreground match Unity's exported pixels exactly, and the fallback icon is
+opaque. Evidence is in `icon-settings.json`, `icon-art-validation.json`,
+`icon-packaged-pixels.json` and `icon-apk-verification.json` in that folder.
+
+The update is `NativeAndroid/out/escape-1829-native.apk`, 178,762,328 bytes,
+SHA-256 `033D2903500F0024AB91CEAD06305E6BF6857A2E3BC5D79B0C0EF0333E86EB9F`.
+APK v2 verification passes; its package and signing certificate match version
+0.5.0, retained as `escape-1829-native-v0.5.apk`. The installed phone's launcher
+has not been checked. Gameplay and browser tests were not rerun for this
+launcher artwork change.
+
+The Android icon assets/settings, version, native prepared scene and APK were
+updated. Existing native geometry exports retain model source hash
+`bf3f2437f3d857fa77ec5cee686270bad0285909aa683fbd5a815a33316bbb9b`.
+Browser model sources, original photographs, root Unity and Blender exports,
+and the native Windows player were not changed or regenerated in this revision.
+
+## Native Android exploration controls revision (1 October 2026)
+
+Version 0.5.0 / code 5 limits HELP, MAP, HOLD USE and TORCH to asylum escape.
+Walking and aerial exploration ignore their former touch targets; the hidden
+lower-right buttons no longer block looking or orbiting. Escape controls and
+held-use gameplay remain available inside. The shared native Windows preview
+also limits the corresponding help/map/torch shortcuts to escape, and its
+walking control hint follows the visible controls.
+
+Exploration now has three explicit Day, Dusk and Night choices. Their sun,
+sunset and moon artwork is rasterized directly from the browser SVG definitions
+by `export-presentation.mjs`, with the same selected colours and 44-unit touch
+targets. The Lucide/Feather licence notice is bundled. Selecting the active
+choice keeps it active; changing between walking and aerial views retains the
+choice. Dusk uses the existing title twilight sky, sunlight, haze and colour
+grading, with street lamps and window illumination enabled.
+
+The presentation smoke checks exercise all three choices in both exploration
+views, selection persistence, ignored escape targets and retained escape map,
+help and torch actions. They capture each lighting/view combination with the
+live mobile control drawing. The asset check also verifies the native glyph
+definitions against the browser SVGs and the bundled licence against its source.
+
+Validation: `test-port.mjs`, `test-presentation.mjs`, the full browser `npm test`
+suite, the Windows build and the full native gameplay/presentation smoke pass.
+`NativeAndroid/artifacts/controls-smoke-final/smoke.json` records 47,218 checks.
+The six exploration lighting captures and the wide escape controls were
+visually reviewed. Capture frame timings include the automated workload and
+are not phone benchmarks.
+
+The ARM64 Android build and APK v2 signature verification also pass. The update
+is `NativeAndroid/out/escape-1829-native.apk`, 178,090,152 bytes, SHA-256
+`E0915CCBCB4B234598201CE3095B7DB3B820F48FC19654D519D087CA0FE9E23D`.
+The package and certificate match version 0.4.0, retained as
+`escape-1829-native-v0.4.apk`. The APK includes all five licence notices;
+`NativeAndroid/artifacts/controls-apk-verification.json` records the checks.
+No phone was connected, so real touch behaviour still needs on-device review.
+
+Only native control/lighting sources, presentation textures, the prepared
+native scene and native Windows/Android players were updated or regenerated.
+The geometry exporter was not rerun; the existing generated GLBs retain model
+source hash `bf3f2437f3d857fa77ec5cee686270bad0285909aa683fbd5a815a33316bbb9b`.
+Browser model sources, root Unity and Blender exports were unchanged.
+
 ## Native Android navigation and selection revision (30 September 2026)
 
 Version 0.4.0 / code 4 addresses the second phone review. Aerial locations now
@@ -341,6 +479,53 @@ The compact before/after evidence is
 uses `geometry-snapshot-carden-before-loader.mjs` in the same directory.
 Model sources and exports are unchanged by this repair; the compiled estate's
 source fingerprint remains current, so no model rebuild is required.
+
+## Windows smoke navigation timing (1 October 2026)
+
+Run `36767890588` successfully created the Windows folder and preview MSIX,
+then timed out waiting for the aerial URL with no renderer errors. The previous
+explicit navigation wait still started its 120-second clock alongside the
+button click. Local Playwright diagnostics showed that software rendering can
+spend about 55 seconds in the click's actionability/input checks before the
+destination starts loading; the unchanged test still passed locally.
+
+`Desktop/test/smoke.mjs` now awaits each real navigation click with
+`noWaitAfter`, then checks its destination. `waitForURL` also accepts an already
+reached destination, so fast navigation cannot be missed. Input and navigation
+have separate 120-second limits. The smoke viewport is fixed at 960 by 640 and
+pixel ratio 1, keeping software-rendering work independent of runner display
+size and DPI. The animated handoff, timeline, offline assets, renderer isolation,
+storage, gameplay/map and walking assertions remain enabled. Evidence now
+records viewport and separate click/navigation timings; failures record their
+stage, attempt a bounded focus/visibility/pointer-lock snapshot and screenshot.
+The manually launched Electron also uses Playwright's background timer,
+occluded-window and renderer flags. The game is brought to the front before
+mouse-capture checks, avoiding incidental window backgrounding during CI or
+local automated runs.
+Console checks start with the controlled offline navigation, since optional
+archive-image requests can already be in flight on the automatically opened
+page before CDP blocks the network. JavaScript exceptions remain monitored
+throughout startup.
+
+Validation: all eight desktop unit checks and the full browser `npm test` suite
+pass. The final packaged offline check also passes with Electron, its renderer
+and software GPU restricted to four logical CPUs. Aerial input took 67.6 seconds
+and navigation another 9.0 seconds; walking mouse capture and return navigation
+passed. Evidence is in `Desktop/artifacts/packaged-four-cpu-smoke.json` and
+`packaged-four-cpu.log`; the final landing and aerial captures were inspected.
+All 303 web files inside `app.asar` match the current browser inventory by size
+and SHA-256.
+
+Earlier two-logical-CPU probes reached aerial (100.9 seconds input plus 17.9
+seconds navigation), but stopped at walking mouse capture or the landing click.
+The final four-CPU check matches the CPU count documented for this public
+repository's [standard Windows runner](https://docs.github.com/en/actions/reference/runners/github-hosted-runners),
+without claiming equivalent cloud performance.
+
+Only the desktop smoke test and these notes changed; browser/model sources and
+Unity/Blender/native exports were not edited, and the executable and MSIX were
+not regenerated for this test change. The GitHub workflow has not been rerun
+with this change.
 
 ## Packaged desktop navigation smoke check (30 September 2026)
 

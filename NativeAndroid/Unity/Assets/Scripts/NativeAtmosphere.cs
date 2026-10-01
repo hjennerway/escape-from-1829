@@ -15,7 +15,7 @@ public sealed partial class NativePrototypeGame
     void UpdateAtmosphere(float dt){weatherTime+=dt;Shader.SetGlobalFloat("_WeatherTime",weatherTime);Shader.SetGlobalFloat("_LeafTime",weatherTime);}
     void SetAtmosphere(bool indoors,float titleBlend=0,bool configure=true)
     {
-        float twilight=mode==Mode.Title?1:Mathf.Clamp01(titleBlend);
+        float twilight=mode==Mode.Title||lightingMode==LightingMode.Dusk?1:Mathf.Clamp01(titleBlend);
         Color Blend(uint dusk,uint moon,uint day)=>Color.Lerp(Hex(night?moon:day),Hex(dusk),twilight);
         float BlendNumber(float dusk,float moon,float day)=>Mathf.Lerp(night?moon:day,dusk,twilight);
         var horizon=Blend(0xaca48a,0x26394b,0x99afae);
