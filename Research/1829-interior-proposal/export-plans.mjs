@@ -39,6 +39,7 @@ function exportSVG(floor){
  }
  svg+='</g>';
  svg+=`<path d="${outlinePath}" fill="none" stroke="#394d58" stroke-width="2.2" fill-rule="evenodd"/>`;
+ for(const room of floorRooms)for(const w of room.windows??[]){const dx=w.axis==='x'?0:w.width/2,dz=w.axis==='x'?w.width/2:0;svg+=`<path d="${line([[w.x-dx,w.z-dz],[w.x+dx,w.z+dz]])}" stroke="#faf9f5" stroke-width="6"/><path d="${line([[w.x-dx,w.z-dz],[w.x+dx,w.z+dz]])}" stroke="#448296" stroke-width="3"/>`;}
  for(const r of floorRooms)svg+=text(r.label[0],r.label[1],r.id,18);
  for(const s of stairs.filter(s=>s.floors.includes(floor.id))){const x=s.label[0],z=s.label[1];svg+=`<rect x="${px(x)-17}" y="${py(z)-11}" width="34" height="22" fill="#d5c5df"/>`+text(x,z,s.id,17);}
  if(floor.id!==2)for(const c of [{x:-35.8,z:-8,text:'C2'},{x:5.3,z:-13,text:'C3'},{x:35.8,z:-8,text:'C4'},{x:-30.25,z:34,text:'C5'},{x:30.25,z:34,text:'C6'},{x:-20.5,z:8.2,text:'C1'},{x:20.5,z:8.2,text:'C1'}])svg+=text(c.x,c.z,c.text,17);

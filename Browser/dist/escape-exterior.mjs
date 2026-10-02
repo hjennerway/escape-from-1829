@@ -341,10 +341,12 @@ export function createEscapeExterior(THREE,aspect){
     if(x>0)box(gravel,x,.18,-20,32,.1,45);
     else {
       // The old broad west approach crossed beneath the rearward arm and
-      // covered its side stairs. Trace the excavation at this slab's edge.
+      // covered its side stairs. Keep the paving edge inside the masonry:
+      // the generated vertical ground-contact face must not coincide with
+      // the exposed brick below the basement sills.
       const shape=frontBasementShape(THREE,[[-39,-42.5],[-7,-42.5],[-7,2.5],[-39,2.5],
-        [-39,-1],[-37,-1],[-37,-24.5],[-37.5,-24.5],[-37.5,-30.5],
-        [-37.84,-30.5],[-37.84,-36],[-39,-36]]);
+        [-39,-1],[-36.8,-1],[-36.8,-24.5],[-37.3,-24.5],[-37.3,-30.5],
+        [-37.64,-30.5],[-37.64,-36],[-39,-36]]);
       const approach=mesh(new THREE.ShapeGeometry(shape),gravel,0,.23,0);
       approach.rotation.x=-Math.PI/2;approach.name='West rear approach beside basement';
     }

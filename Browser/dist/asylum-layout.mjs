@@ -36,6 +36,7 @@ export function buildAsylumLayout(plan){
   const shafts=stairs.map(stairOpening);
   const floor={...f,levelElevations:plan.floors.map(f=>f.elevation),geometrySource:'asylum-plan',cellSize:.5,origin:{x:-74,z:-41},width:290,height:172,rooms,corridors,stairs,exits,shafts,walls:[],galleryZ:8.2/.5};
   floor.stairRails=floorStairRails(floor);
+  floor.windows=rooms.flatMap(r=>(r.windows??[]).map(w=>({...w,roomId:r.id})));
   const roomDoors=rooms.filter(r=>r.doorSide).map(r=>{const b=bounds(r.points),vertical=['west','east'].includes(r.doorSide);return {roomId:r.id,x:vertical?(r.doorSide==='west'?b.minX:b.maxX):r.door,z:vertical?r.door:(r.doorSide==='north'?b.minZ:b.maxZ),dx:vertical?0:1,dz:vertical?1:0};});
   const outsideEdges=f.outline.loops.flatMap(edges),pieces=new Map();
   function addWall(a,b,exterior=false){

@@ -306,3 +306,20 @@ visuals, surface probes, the full compiled suite and the west-side regression
 pass. The local compiled model matches the current browser source. The full
 browser suite's two pre-existing whole-estate snapshot failures reproduce
 with the original courtyard geometry as well; their baselines are unchanged.
+
+## Basement sill-strip flicker (2 October 2026)
+
+The owner's [marked view](basement-windows-flicker-marked.png) shows a flickering
+strip beneath the west rear wing's lower sashes. The automatic ground-contact
+edge of `West rear approach beside basement` occupied the same wall plane as
+the brick facade, from y=-0.17 to 0.23. The paving's hidden boundary now sits
+0.2 units inside the masonry at each step of the side wall, so the generated
+face is occluded. The visible passage, retaining wall, steps, door and exterior
+windows retain their positions.
+
+The same request establishes six interior windows per corridor side, grouped
+2, 2, 1, 1 from rear to front; see the updated 1829-interior-proposal notes.
+The focused exterior check now samples 120 wall positions across four period
+transitions and rejects coincident gravel faces. Browser source and the local
+compiled exterior were updated; Unity, Blender and packaged exports were not
+regenerated. Before/after views and validation use Browser/artifacts/basement-windows/.

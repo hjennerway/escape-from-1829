@@ -5,6 +5,19 @@ The owner's [marked revision](owner-revisions.png) is implemented in the
 two-floor proposal retained below. Room divisions remain gameplay estimates,
 not surveyed historical interiors.
 
+## Reception central corridor connection (2 October 2026)
+
+The owner's in-game view and clarification identify the central rear corridor
+entrance beside ground-floor Reception. P1 connects the R11 partition end at
+(4.1, 5.1) to the angled outside wall at (6.7, 5.1). Its centered, level opening
+at (5.4, 5.1) uses the existing 1.9-unit doorway and green timber surround.
+Cream/red masonry and continuous skirting join the existing walls. The original
+R11 side doorway remains available. This ground-floor correction is included
+in both plan JSON copies and the ground-floor drawing; the upper floor and
+basement layouts are unaffected by P1. Validation is in DEVELOPMENT.md.
+
+## Reviewed floor layout
+
 - **C1 follows the rear wall**, with the main-range rooms extending toward
   the front exterior wall.
 - **S2 is removed. S1 occupies former R24**, slightly forward after moving
@@ -183,6 +196,28 @@ remains an owner-directed gameplay reconstruction rather than a surveyed plan.
 Browser sources and research drawings changed; the compiled aerial model,
 Unity, Blender and packaged exports were not regenerated. Before/after views
 and validation are in `../../Browser/artifacts/basement-end/`.
+
+## Basement room windows (2 October 2026 follow-up)
+
+The owner's [marked exterior view](../west/basement-windows-flicker-marked.png)
+and direction confirmation specify six windows on each side of the central
+basement corridor, grouped **2, 2, 1, 1 from rear to front**. B1/B2 and B3/B4
+now have two sashes each; B5/B6 and B7/B8 have one each. The divisions move to
+z=-16.15, -8.35 and -4.45, between the window pairs, with the existing eight
+doorways centred again. The open rear area and its angled walls are retained.
+
+The room schedule is explicit in both plan JSON files and the basement
+drawing. Each interior sash has three lights across and six high, a stone
+sill, masonry above/below and continuous skirting. The opposite side follows
+the same schedule on its straight room lining behind the upper courtyard
+projections. These are owner-directed gameplay interiors, not surveyed
+window reveals; the existing exterior sash positions are retained.
+
+The separate exterior flicker was a generated gravel contact face coincident
+with the brick facade. The hidden paving edge is now 0.2 units inside the
+masonry. Browser sources, the basement drawing and the local compiled aerial
+model are updated. Unity, Blender and packaged applications were not regenerated.
+Validation and before/after views are in `../../Browser/artifacts/basement-windows/`.
 
 ## Original two-floor draft (superseded)
 

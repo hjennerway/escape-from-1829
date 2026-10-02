@@ -1,7 +1,7 @@
 import assert from 'node:assert/strict';
 import {readFile} from 'node:fs/promises';
 import * as THREE from './dist/vendor/three.module.js';
-import {buildAsylumLayout,moveAsylumActor,flatWalkable} from './dist/asylum-layout.mjs';
+import {buildAsylumLayout,moveAsylumActor,flatWalkable,segmentDistance} from './dist/asylum-layout.mjs';
 import {buildAsylumArchitecture} from './dist/asylum-architecture.mjs';
 
 const plan=JSON.parse(await readFile(new URL('./dist/asylum-plan.json',import.meta.url))),floors=buildAsylumLayout(plan).floors;
@@ -11,6 +11,20 @@ for(const floor of floors){
  assert.deepEqual(floor.doorways.filter(d=>d.roomId).map(d=>d.roomId),floor.rooms.filter(r=>r.doorSide&&r.id!=='R24').map(r=>r.id),'Enclosed rooms have framed doorways; open spaces and the Reception stair hall stay open');
  assert.deepEqual(floor.doorways.filter(d=>d.partitionId).map(d=>d.partitionId),(plan.partitions??[]).filter(p=>p.floors.includes(floor.id)).map(p=>p.id),'Corridor partitions retain their doorway');
  assert.equal(scene.children.filter(m=>m.name==='Asylum DoorFrame').length,1,'All frames share one material batch per floor');
+ for(const partition of (plan.partitions??[]).filter(p=>p.floors.includes(floor.id))){
+  const [a,b]=partition.points,d=floor.doorways.find(d=>d.partitionId===partition.id);
+  assert.equal(d.x,(a[0]+b[0])/2);assert.equal(d.z,(a[1]+b[1])/2,'Corridor door is centered between the connected walls');
+  // Inspect the requested joints themselves, including the angled outer wall.
+  for(const [end,sign] of [[a,1],[b,-1]]){
+   assert(floor.walls.filter(w=>segmentDistance(...end,w.a,w.b)<1e-6).length>=2,'Partition endpoints meet the existing wall center lines');
+   // Offset from the center-line junction so the ray starts outside masonry.
+   const x=end[0]+d.dx*sign*.12,z=end[1]+d.dz*sign*.12;
+   for(const y of [.13,.55,1.65,3.2])for(const side of [-1,1]){
+   ray.set(new THREE.Vector3(x-d.dz*side*.4,y,z+d.dx*side*.4),new THREE.Vector3(d.dz*side,0,-d.dx*side));ray.far=.8;
+   assert(ray.intersectObjects(scene.children,false).length,`${partition.id} joins both existing walls at every height`);
+   }
+  }
+ }
  for(const d of floor.doorways){
   const label=`floor ${floor.id} ${d.roomId??d.partitionId}`,normal=[-d.dz,d.dx];
   const point=(u,v,y)=>new THREE.Vector3(d.x+d.dx*u+normal[0]*v,y,d.z+d.dz*u+normal[1]*v);

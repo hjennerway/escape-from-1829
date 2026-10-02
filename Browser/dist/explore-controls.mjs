@@ -78,6 +78,10 @@ export function exteriorObstacles(THREE,model){
     if(!geometry.boundingBox)geometry.computeBoundingBox();const b=geometry.boundingBox.clone().applyMatrix4(transform);
     if(barrier||(b.min.y<1.8&&b.max.y>.5&&b.max.y-b.min.y>.6&&b.max.x-b.min.x>.25&&b.max.z-b.min.z>.25)){
       const obstacle={minX:b.min.x,maxX:b.max.x,minZ:b.min.z,maxZ:b.max.z};
+      // Preserve this mesh's vertical extent. Looking it up later by footprint
+      // can substitute a thin coping/deck with the same X/Z bounds for a wall.
+      // Metadata stays out of existing ground-level footprint snapshots.
+      Object.defineProperties(obstacle,{minY:{value:b.min.y},maxY:{value:b.max.y}});
       if(footprint)obstacle.corners=footprint.map(([x,z])=>{const p=new THREE.Vector3(x,0,z).applyMatrix4(transform);return [p.x,p.z];});
       else if(oriented){const a=geometry.boundingBox;obstacle.corners=[[a.min.x,a.min.z],[a.max.x,a.min.z],[a.max.x,a.max.z],[a.min.x,a.max.z]].map(([x,z])=>{const p=new THREE.Vector3(x,0,z).applyMatrix4(transform);return [p.x,p.z];});}
       obstacles.push(obstacle);

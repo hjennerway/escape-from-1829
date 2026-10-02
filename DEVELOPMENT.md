@@ -1,3 +1,49 @@
+## Outside movement and trapped-player recovery (2 October 2026)
+
+The west rear basement stair could admit a player beside its retaining cheek
+at one height, then lower the player into that cheek's collision band. Every
+subsequent movement was blocked. Outside movement now checks every crossed
+height band, including the landing, before accepting the step. The same rule
+protects other stairs, ledges and sunken paths. Releasing movement also lets
+an unobstructed fall finish.
+
+Exterior obstacles retain the vertical bounds of their own mesh/instance.
+The old footprint-keyed lookup could replace a thick wall's height with a
+thin cap sharing its X/Z bounds, including the Reception doorstep. Reachable
+raised support also takes priority over a lower sunken-path outline. A small
+local recovery handles overlapping poses, including after obstacle refresh;
+it avoids newly encountered walls and cannot return a player to a distant
+remembered position after a door transfer.
+
+`test-asylum-outside.mjs` covers the reported stair edge, the full west basement
+passage, both frontage walks in both directions, all seven upper fire escapes,
+all 23 arrivals, five formerly embedded poses, collision refresh, idle falling
+and batched visibility. Its 1,259,096 cardinal/diagonal movement probes cover
+the asylum perimeter, raised stairs and wider grounds, checking both clearance
+and a way to move away from reached positions. The actual-game regression is
+`test-asylum-outside-browser.mjs`, included in `npm run test:asylum`. It walks
+the west edge/passage/return and recovers a trapped pose through the game loop.
+Desktop/mobile captures and results are in `Browser/artifacts/outside-traps/`.
+The existing browser check also passes all 23 door round trips, indoor stair
+levels and the raised exterior landing, without JavaScript or shader errors.
+
+Validation: the expanded movement check, both actual-game browser checks,
+model rebuild and `npm run test:compiled` pass, including source/compiled
+image comparison, fallback loading, all timeline stops and obstacle refresh.
+Running all suite commands independently records 90 passes and two failures
+in `outside-traps/all-checks.json`. The Jarman and Leighton/Newton whole-estate
+geometry snapshots differ after concurrent exterior paving edits. Both pass
+with the committed exterior geometry and this repaired movement helper, using
+the read-only `outside-traps/exterior-baseline-loader.mjs`; these two snapshot
+fixtures are not changed by the movement repair. The earlier full `npm test`
+attempt stopped at a concurrently changing interior wall fixture, which now
+passes in the independent run. This is not a claim of a green full suite.
+
+This repair changes browser movement and validation, not building geometry.
+The local compiled aerial cache is rebuilt because the shared obstacle helper
+is part of its source fingerprint. Unity, Blender and packaged desktop/Android
+players are not updated by this repair.
+
 ## Player notebook and explored maps (2 October 2026)
 
 TODO item 4 is implemented in browser Asylum Escape. Tab, M, N or J opens the
@@ -5630,3 +5676,85 @@ the suite log are in `Browser/artifacts/asylum-wall-joins/`.
 Only browser interior sources and checks changed. The compiled aerial
 manifest still matches its source hash and requires no rebuild. Unity,
 Blender and packaged desktop/mobile exports were not regenerated.
+
+## Reception central corridor doorway (2 October 2026)
+
+The ground-floor central rear corridor now has a transverse partition between
+R11's exposed end and the angled exterior wall. P1 spans (4.1, 5.1) to
+(6.7, 5.1), with a centered doorway at (5.4, 5.1). The existing renderer supplies
+cream/red masonry, a 2.5-unit head, green trim and a clear, level threshold.
+The R11 side doorway remains. The new partition is limited to the ground floor.
+
+The shared plan supports explicit corridor partitions that bypass room-wall
+corridor clipping. Wall joins, skirting, the navigation grid and notebook map
+all use the resulting walls; doorway geometry uses the existing material
+batches. Both plan JSON copies and the ground-floor drawing were updated.
+The previous chamfer regression now checks its exposed portion, excluding the
+new junction and its walking clearance; doorway checks cover the new joint.
+
+Validation: all 87 framed openings pass 522 bidirectional walking checks,
+including the new portal. The new wall endpoints join existing center lines,
+and masonry/skirting rays cover both joins at four heights. Layout and
+skirting checks pass, as does the complete npm test suite. Its log and the
+actual-game desktop/mobile views are in Browser/artifacts/reception-connection/.
+The render check reports no page or shader errors.
+
+Only browser interior sources and review drawings changed for this connection.
+The compiled aerial manifest still matches its source hash, so no exterior
+rebuild was needed. Unity, Blender and packaged exports were not regenerated.
+
+## Basement room sashes and exterior sill-strip flicker (2 October 2026)
+
+The six main-wall sash positions are now visible inside the basement rooms on
+both sides of BC1, grouped 2, 2, 1, 1 from rear to front as confirmed by the
+owner. Both plan copies record each window's position, width, sill and height.
+Room divisions move to z=-16.15/-8.35/-4.45, with centred corridor doors. The
+B9 open rear area, its flared walls and outside exit remain connected.
+
+asylum-layout.mjs exposes the room window schedule. asylum-architecture.mjs
+merges the basement's collinear masonry before cutting those openings, so
+sampled exterior/lining joins cannot interrupt a sash. The twelve sashes use
+three-by-six glazing, recessed glass, painted bars and stone sills. Masonry
+and continuous skirting remain above/below them; wall collision still blocks
+passing through a window, and artwork placement excludes the window walls.
+The opposite side follows the same schedule on the straight room lining
+behind the courtyard projections. The upper floors keep their existing
+window generation. The basement SVG/PNG review drawing shows the new divisions
+and twelve window symbols.
+
+The marked exterior flicker was reproduced in the real game. A ray through
+pixel (758,357) of the 1860x558 comparison found brick and the generated
+`West rear approach beside basement ground contact` at exactly x=-37 and the
+same distance. escape-exterior.mjs now insets the concealed paving boundary
+by 0.2 units at all three wall steps. Its generated gravel side lies inside
+masonry instead of sharing the visible facade. This is authored geometry,
+assembled before timeline batching and transform caching; no runtime geometry
+mutation is introduced.
+
+Focused checks pass: test-asylum-windows.mjs covers 12 sashes, all 216 panes
+from inside, 2/2/1/1 grouping, eight walkable room doors, solid surrounds and
+window collision. The wall-join survey follows the three moved partitions
+and tests glazing where a sampled join is now a window. The west-side basement
+check adds 120 exposed-facade samples across four period transitions, rejecting
+coincident gravel faces. Existing layout, basement-end, doorway and skirting
+checks pass. Desktop/mobile captures cover all eight rooms and oblique exterior
+angles without page or shader errors. Evidence is in Browser/artifacts/basement-windows/.
+
+The local compiled aerial model was rebuilt. Browser model sources, shared
+plan JSON and the basement review drawing changed; Unity, Blender and packaged
+desktop/mobile applications were not regenerated.
+
+The initial full suite stopped at the Jarman whole-estate fingerprint because
+it includes the changed west approach. The gated audit in
+Browser/artifacts/basement-windows/audit-snapshots.mjs restores only the old
+paving boundary in memory and reproduces both saved Jarman and Leighton/Newton
+snapshots exactly. It verifies six boundary vertices moved 0.2 units inward,
+unchanged topology/transforms, and every other protected exterior primitive
+exact. Only the two SHA-256 fields were refreshed; counts (820,060 and 884,107),
+ward ranges and assertions remain unchanged. snapshot-audit.json records the
+before/after values and source fingerprint.
+
+The rebuilt compiled model passes npm run test:compiled, including procedural
+comparison, full detail, missing/incompatible/corrupt fallback, and every
+timeline stop. The final game captures reproduce the old flicker using saved
+pre-edit source and show the repaired strip from three nearby angles.

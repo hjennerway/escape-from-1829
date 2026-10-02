@@ -1,0 +1,115 @@
+npm notice run test:compiled
+npm notice run node test-precompiled-models.mjs && node test-timeline-browser.mjs
+Checking aerial?models=source
+Checking aerial?models=compiled
+Checking aerial?models=compiled&buildingDetail=full&view=front
+Checking aerial
+Browser: Failed to load resource: the server responded with a status of 404 (Not Found)
+Checking aerial
+Checking aerial
+PASS: compiled estate, shadows, grass shaders, exact draw counts, tree/layout controls, orbit, portrait, full detail and missing/incompatible/damaged model fallback.
+{
+  "source": {
+    "mode": "procedural",
+    "milliseconds": 2331.199999999255,
+    "triangles": 1001311,
+    "calls": 3052,
+    "levels": [
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      1,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      1,
+      2,
+      2,
+      1,
+      2,
+      2,
+      1,
+      2,
+      2,
+      1
+    ],
+    "readyMilliseconds": 14257.475999999999
+  },
+  "compiled": {
+    "mode": "compiled",
+    "milliseconds": 1511.199999999255,
+    "triangles": 1001311,
+    "calls": 3052,
+    "levels": [
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      1,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      1,
+      2,
+      2,
+      1,
+      2,
+      2,
+      1,
+      2,
+      2,
+      1
+    ],
+    "readyMilliseconds": 17841.723299999998
+  },
+  "identicalScreenshot": false,
+  "pixels": {
+    "significantFraction": 0.00015857142857142857,
+    "meanChannelError": 0.005073333333333333
+  },
+  "fullDetail": {
+    "mode": "compiled",
+    "milliseconds": 1525.0999999977648,
+    "triangles": 630445,
+    "calls": 542,
+    "readyMilliseconds": 10960.349199999997
+  }
+}
+PASS: every timeline stop in source/compiled pages, descriptions, URL reload/navigation, keyboard/endpoints, tree focus, selection, mobile reset and live walking collision refresh.

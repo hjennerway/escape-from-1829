@@ -97,6 +97,18 @@ assert.equal(exteriorObstacles(THREE,e.model).walkSurfaces.length,0,'hidden pass
 const timeline=prepareEstateTimeline(THREE,e,layouts);
 for(const year of [1829,1849,2021,1829]){
   timeline.setPeriod(year);
+  // Generated gravel skirts used to share x=-37 with the brick wall, creating
+  // the reported flickering strip beneath the six long-wall basement sashes.
+  e.model.updateMatrixWorld(true);const facade=[];e.model.traverseVisible(o=>{if(o.isMesh)facade.push(o);});
+  for(const z of [-28.7,-27.3,-26.1,-23.4,-20.7,-17.3,-13.8,-9.6,-6.9,-2.7])for(const y of [.07,.16,.21]){
+    const x=z<-24.5?-37.5:-37;
+    ray.set(new THREE.Vector3(x-.7,y,z),new THREE.Vector3(1,0,0));ray.far=.71;
+    const hits=ray.intersectObjects(facade,false).filter(h=>Math.abs(h.point.x-x)<1e-5);
+    assert(hits.length,'The basement facade remains solid below the sills');
+    assert(!hits.some(h=>h.object.userData.groundContact),'Gravel contact faces must remain inside the masonry');
+    assert.equal(new Set(hits.map(h=>h.object.uuid+':'+h.instanceId)).size,1,'Only one exposed surface below each sash');
+  }
+  ray.far=Infinity;
   for(const [x,z] of [[-60,-15],[-72.5,-37],[-72.5,2]]){
     const hit=surface(x,z);
     assert(hit,'removing later paving never leaves a hole in the early landscape');

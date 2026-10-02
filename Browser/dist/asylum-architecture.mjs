@@ -11,7 +11,7 @@ export function asylumWallSurfaces(floor){
   const nx=-(b[1]-a[1])/length,nz=(b[0]-a[0])/length;
   for(let i=0;i<Math.floor(length/2.5);i++){const t=(i+.5)/Math.floor(length/2.5),x=a[0]+(b[0]-a[0])*t,z=a[1]+(b[1]-a[1])*t;
    const normal=insidePolygon(x+nx*.3,z+nz*.3,floor.outline.loops[0])?1:-1;
-   surfaces.push({x:x+nx*.115*normal,z:z+nz*.115*normal,rotation:Math.atan2(nx*normal,nz*normal),dx:-nx*normal,dz:-nz*normal,window:w.exterior});
+   surfaces.push({x:x+nx*.115*normal,z:z+nz*.115*normal,rotation:Math.atan2(nx*normal,nz*normal),dx:-nx*normal,dz:-nz*normal,window:w.exterior||floor.windows?.some(p=>segmentDistance(p.x,p.z,a,b)<.1)});
   }
  }
  return surfaces;
@@ -39,9 +39,35 @@ export function buildAsylumArchitecture(THREE,scene,floor){
  skirting.name='Asylum Skirting';scene.add(skirting);
  const masonry=[];
  const wall=(a,b)=>masonry.push({a,b});
- for(const w of floor.walls){
+ // Basement windows follow the reviewed room schedule, including the room's
+ // straight outer lining behind the upper-storey courtyard projections. Merge
+ // collinear runs first so a window can cross a sampled wall/lining join.
+ const wallRuns=floor.id===2?mergeAsylumMasonry(floor.walls):floor.walls;
+ for(const w of wallRuns){
   const [a,b]=[w.a,w.b],length=Math.hypot(b[0]-a[0],b[1]-a[1]);
-  if(!w.exterior||length<3.5||floor.id===2){wall(a,b);continue;}
+  if(floor.id===2){
+   const dx=(b[0]-a[0])/length,dz=(b[1]-a[1])/length,angle=-Math.atan2(dz,dx);
+   const windows=(floor.windows??[]).filter(p=>segmentDistance(p.x,p.z,a,b)<1e-5).map(p=>({...p,t:(p.x-a[0])*dx+(p.z-a[1])*dz})).sort((p,q)=>p.t-q.t);
+   let previous=a;
+   for(const p of windows){
+    const {x,z,width,height:wh,sill,t}=p,head=sill+wh;
+    if(t-width/2<0||t+width/2>length)throw new Error('Basement window extends past its wall: '+p.roomId);
+    wall(previous,[x-dx*width/2,z-dz*width/2]);
+    box('Brick',x,sill/2,z,width,sill,.18,angle);
+    box('Plaster',x,(height+head)/2,z,width,height-head,.18,angle);
+    box('Glass',x,sill+wh/2,z,width,wh,.04,angle);
+    for(const side of [-1,1]){
+     box('Sash',x+dx*side*(width/2-.035),sill+wh/2,z+dz*side*(width/2-.035),.07,wh,.24,angle);
+     box('Sash',x,sill+(side+1)*wh/2,z,width-.14,.07,.24,angle);
+     box('Sash',x+dx*side*width/6,sill+wh/2,z+dz*side*width/6,.025,wh-.07,.16,angle);
+    }
+    for(let i=1;i<6;i++)box('Sash',x,sill+i*wh/6,z,width-.14,i===3?.055:.025,.20,angle);
+    box('Stone',x,sill-.05,z,width+.2,.1,.32,angle);
+    previous=[x+dx*width/2,z+dz*width/2];
+   }
+   wall(previous,b);continue;
+  }
+  if(!w.exterior||length<3.5){wall(a,b);continue;}
   const dx=(b[0]-a[0])/length,dz=(b[1]-a[1])/length,angle=-Math.atan2(dz,dx),count=Math.floor(length/4.2),width=1.1;
   let previous=a;
   for(let i=0;i<count;i++){

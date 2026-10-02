@@ -44,7 +44,8 @@ for(const fixture of fixtures){
    assert(!flatWalkable(floor,x,z,.01),'Collision includes repaired masonry');
    for(const side of [-1,1])for(const [kind,y] of [['Brick',.55],['Plaster',1.65],['Plaster',2.8]]){
     ray.set(new THREE.Vector3(x-dz*side*.45,y,z+dx*side*.45),new THREE.Vector3(dz*side,0,-dx*side));ray.far=.65;
-    assert(ray.intersectObject(scene.getObjectByName('Asylum '+kind),false).length,`Sealed ${kind} join on floor ${floor.id} at ${x},${z}, side ${side}`);samples++;
+    const window=floor.windows?.find(w=>Math.abs(x-w.x)<.01&&Math.abs(z-w.z)<w.width/2&&y>w.sill&&y<w.sill+w.height),finish=window?'Glass':kind;
+    assert(ray.intersectObject(scene.getObjectByName('Asylum '+finish),false).length,`Sealed ${finish} join on floor ${floor.id} at ${x},${z}, side ${side}`);samples++;
    }
   }
   joins++;
