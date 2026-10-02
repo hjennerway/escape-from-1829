@@ -2,7 +2,7 @@
 export function bindExploreInput(walker,{canvas,hint,look,touchControls}){
   let active=false,drag=null;
   const keyboard=new Set(),pointers=new Map();
-  const movement=new Set(['KeyW','KeyA','KeyS','KeyD','ShiftLeft','ShiftRight']);
+  const movement=new Set(['KeyW','KeyA','KeyS','KeyD','ShiftLeft','ShiftRight','KeyE']);
   const buttons=[...touchControls.querySelectorAll('[data-key]')];
   const touchMedia=matchMedia('(any-pointer:coarse)');
   function enableTouch(){document.body.classList.add('explore-touch');}

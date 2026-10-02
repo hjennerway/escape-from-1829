@@ -38,7 +38,7 @@ for(const floor of [l,l.upperFloor]){
   for(let z=22;z<l.height;z++)assert(!open(20,z),'No long invented front central arm');
   assert(open(36,22)&&!open(4,22),'Keep unequal end pavilion shapes');
 }
-const canonical=JSON.parse(await readFile(new URL('../Assets/Resources/layout.json',import.meta.url)));
+const canonical=JSON.parse(await readFile(new URL('../Research/escape-layout/layout.json',import.meta.url)));
 assert.deepEqual(l,canonical);
 console.log('PASS: mirrored reception stair approaches, canonical/browser parity.');
 const floors=makeFloors(l),upper=floors[1];

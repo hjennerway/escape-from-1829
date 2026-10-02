@@ -1,4 +1,4 @@
-param([ValidateSet('Prepare','Windows','Android')][string]$Target = 'Android', [string]$UnityPath)
+param([ValidateSet('Prepare','Windows','Android')][string]$Target = 'Android', [string]$UnityPath, [switch]$SkipExport)
 $ErrorActionPreference = 'Stop'
 $nativeRoot = Split-Path $PSScriptRoot -Parent
 $repoRoot = Split-Path $nativeRoot -Parent
@@ -11,10 +11,12 @@ if (!$env:MODEL_CHROME_PATH -and (Test-Path 'C:/Program Files/Google/Chrome/Appl
 }
 Push-Location $repoRoot
 try {
-    & node (Join-Path $PSScriptRoot 'export-port.mjs')
-    if ($LASTEXITCODE -ne 0) { throw 'Native asset export failed.' }
-    & node (Join-Path $PSScriptRoot 'export-presentation.mjs')
-    if ($LASTEXITCODE -ne 0) { throw 'Native presentation export failed.' }
+    if (!$SkipExport) {
+        & node (Join-Path $PSScriptRoot 'export-port.mjs')
+        if ($LASTEXITCODE -ne 0) { throw 'Native asset export failed.' }
+        & node (Join-Path $PSScriptRoot 'export-presentation.mjs')
+        if ($LASTEXITCODE -ne 0) { throw 'Native presentation export failed.' }
+    }
     & node (Join-Path $PSScriptRoot 'test-port.mjs')
     if ($LASTEXITCODE -ne 0) { throw 'Native asset validation failed.' }
     & node (Join-Path $PSScriptRoot 'test-presentation.mjs')

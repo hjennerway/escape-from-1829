@@ -6403,3 +6403,50 @@ through the evidence loader. Their protected baselines were not changed by
 this task. Other transient snapshot/eaves failures cleared on current-source
 rechecks. The stair-foot test was updated to expect coping in the filled
 corner and still verifies gravel immediately outside both adjoining faces.
+
+## Interior exploration and walkable estate stairs (2 October 2026)
+
+Explore on foot now starts at dusk and loads the same four-floor asylum plan
+and architectural builder as Asylum Escape. `explore-walker.mjs` adapts the
+existing mouse/keyboard/touch controls to the shared `createAsylumOutside`
+and `createAsylumJump` movement, collision and stair logic. Exploration has
+no NPC instances, notebook, pursuit, timer or escape completion trigger.
+`explore-interior.mjs` supplies the existing finishes and pooled room/corridor
+lighting without loading the game or its character/notebook modules.
+
+All 23 outside door/level connections work in both directions. Press E or tap
+the nearby door button to enter/leave; holding E cannot repeatedly cross the
+door. All seven interior stair connections are walked, including Reception's
+basement and second-floor connections. Location presets, jumping, timeline,
+tree controls and the intro camera handoff remain available. Layout/tree
+changes call `walker.setObstacles()` to rebuild outside collisions and support.
+
+The shared outdoor walker now samples support across the whole estate instead
+of the asylum's original bounded rectangle, and includes solid stone steps.
+This enables the annexe fire stairs, pharmacy steps and main/admin and annexe
+entrance steps even though those buildings have no linked interior. The
+optional precise footprint collector follows unannotated extruded bay outlines
+and splits sloping cylindrical handrails into short sections with their actual
+heights. Their enclosing boxes previously blocked the rotated annexe flights
+and upper landings. Ordinary ground-walker consumers retain their existing
+footprint behavior. Building geometry and floor plans are unchanged.
+
+`test-explore-interior.mjs` covers every door round trip, the held-key latch,
+all seven internal connections in both directions, both split entrance branches,
+both pharmacy stairs, both annexe fire flights/landings, the two other estate
+entrance flights, jumps and walking beyond the game's escape boundary. It is
+included in `npm test`. `npm run test:explore` also runs input and real desktop/
+mobile checks. The focused checks pass, together with the existing Escape
+browser's 23 door round trips and stairs, mobile multitouch, and day/dusk/night
+controls. Desktop/mobile interior and dusk screenshots were visually reviewed;
+the new browser check reports no page or shader errors. Evidence is under
+`Browser/artifacts/explore-interior/`.
+
+Browser runtime sources and the local compiled aerial assets are updated.
+The exterior was rebuilt because its source fingerprint includes the shared
+collision helper. Unity, Blender and packaged desktop/mobile exports were
+not regenerated.
+
+Final validation: `npm test` and `npm run test:compiled` both pass. The rebuilt
+manifest matches the current source fingerprint. Their complete logs and
+the compiled comparison metrics are saved in the evidence folder above.

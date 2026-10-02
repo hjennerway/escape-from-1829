@@ -30,7 +30,9 @@ import {FRONT_STEPS_VIEW} from './front-steps.mjs';
 import {FRONT_WALL_VIEW} from './front-boundary-wall.mjs';
 import {REDESMERE_PASSAGE_VIEW} from './redesmere-passage.mjs';
 import {REDESMERE_CHIMNEY_VIEWS} from './redesmere-edge-chimney.mjs';
-import {createWalker,exteriorObstacles} from './explore-controls.mjs';
+import {createExploreWalker} from './explore-walker.mjs';
+import {buildAsylumLayout} from './asylum-layout.mjs';
+import {createExploreInterior} from './explore-interior.mjs';
 import {bindExploreInput} from './explore-input.mjs';
 import {sampleLanding} from './aerial-controls.mjs';
 import {beginIntroFlight} from './intro-navigation.mjs';
@@ -66,9 +68,12 @@ try{
   const timeline=prepareEstateTimeline(THREE,exterior,layouts);
   // Road-name sprites are map overlays; keep them out of the walking view.
   layouts.roads.traverse(object=>{if(object.isSprite)object.visible=false;});
-  const obstacles=exteriorObstacles(THREE,exterior.model);
-  const walker=createWalker(exterior.camera,obstacles);
-  function refreshObstacles(){walker.setObstacles(exteriorObstacles(THREE,exterior.model));}
+  hint.textContent='Preparing the rooms and stairs…';
+  const response=await fetch('./asylum-plan.json');if(!response.ok)throw Error('Floor plans could not load');
+  const floors=buildAsylumLayout(await response.json()).floors;
+  const interior=createExploreInterior(THREE,floors);
+  const walker=createExploreWalker(THREE,exterior,floors);
+  function refreshObstacles(){walker.setObstacles();}
   applyTreeRenderingDefault(renderer,exterior,refreshObstacles);
   bindTimelineControls(timeline,document.getElementById('layoutControls'),refreshObstacles);
   bindTreeToggle(exterior,document,refreshObstacles);
@@ -128,9 +133,14 @@ try{
   if(CHURTON_VIEWS[churtonView])walker.setView(CHURTON_VIEWS[churtonView==='churton'||churtonView==='churton-plan'?'churton-4':churtonView]);
   const input=bindExploreInput(walker,{canvas,hint,look,touchControls:document.getElementById('walkTouch')});
   window.addEventListener('resize',()=>{renderer.setSize(innerWidth,innerHeight);exterior.camera.aspect=innerWidth/innerHeight;if(view==='inner-east-photo')exterior.camera.fov=innerEastPhotoView(exterior.camera.aspect).fov;if(view==='central-court-photo')exterior.camera.fov=centralCourtPhotoView(exterior.camera.aspect).fov;exterior.camera.updateProjectionMatrix();});
-  const lighting=createDayNight(THREE,exterior,renderer,{walking:true});bindDayNight(lighting);
+  const lighting=createDayNight(THREE,exterior,renderer,{walking:true});lighting.setMode('dusk');bindDayNight(lighting);
+  const doorButton=document.getElementById('exploreDoor');
+  doorButton.addEventListener('click',()=>{walker.useDoor();canvas.focus({preventScroll:true});});
   const introFlight=beginIntroFlight(exterior.camera,{fallback:sampleLanding(0,{aspect:exterior.camera.aspect,cinematic:true})});
   const clock=new THREE.Timer();clock.connect(document);
-  renderer.setAnimationLoop(()=>{clock.update();const dt=clock.getDelta();if(document.hidden)return;if(introFlight?.active)introFlight.update(dt);else if(input.active)walker.update(dt);lighting.update(dt);renderer.render(exterior.scene,exterior.camera);introFlight?.afterRender();});
+  renderer.setAnimationLoop(()=>{clock.update();const dt=clock.getDelta();if(document.hidden)return;if(introFlight?.active)introFlight.update(dt);else if(input.active)walker.update(dt);lighting.update(dt);interior.update(walker.actor);
+    const door=walker.nearbyDoor();doorButton.hidden=!door||!!introFlight?.active;
+    if(door)doorButton.textContent=(walker.actor.outside?'Enter building':'Go outside')+' · E';
+    renderer.render(walker.actor.outside?exterior.scene:interior.scene,exterior.camera);introFlight?.afterRender();});
   loadEscapeFrontage(THREE,exterior).catch(error=>console.warn('Frontage photo unavailable',error));
 }catch(error){console.error(error);window.introHandoff?.fail();hint.textContent='The grounds could not load. Reload the page to try again.';look.disabled=false;look.textContent='RELOAD ↗';look.onclick=()=>location.reload();}

@@ -43,6 +43,6 @@ const layout={width,height,cellSize,cells,geometrySource:'layout',galleryZ:19,
     exits:exitsForFloor('UPPER'),
     source:'Same approximate 1829 core footprint; upper rooms and partitions are gameplay estimates'}
 };
-for(const file of ['./dist/layout.json','../Assets/Resources/layout.json'])
+for(const file of ['./dist/layout.json','../Research/escape-layout/layout.json'])
   await writeFile(new URL(file,import.meta.url),JSON.stringify(layout,null,2)+'\n');
 console.log(`1829 escape plan: ${cells.reduce((a,b)=>a+b,0)} cells on each floor, seven exit candidates per floor; five of fourteen active per load.`);

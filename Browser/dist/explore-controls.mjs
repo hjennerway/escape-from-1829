@@ -78,7 +78,7 @@ export function createWalker(camera,obstacles=[]){
 
 // Use the rendered building foundations and tree trunks, so later estate
 // edits also update walking collisions without a second footprint definition.
-export function exteriorObstacles(THREE,model){
+export function exteriorObstacles(THREE,model,{preciseFootprints=false}={}){
   model.updateMatrixWorld(true);const obstacles=[],matrix=new THREE.Matrix4(),world=new THREE.Matrix4();
   // Keep auxiliary height data out of array enumeration and serialized
   // obstacle snapshots; an empty obstacle list must still compare as [].
@@ -95,6 +95,37 @@ export function exteriorObstacles(THREE,model){
       Object.defineProperties(obstacle,{minY:{value:b.min.y},maxY:{value:b.max.y}});
       if(footprint)obstacle.corners=footprint.map(([x,z])=>{const p=new THREE.Vector3(x,0,z).applyMatrix4(transform);return [p.x,p.z];});
       else if(oriented){const a=geometry.boundingBox;obstacle.corners=[[a.min.x,a.min.z],[a.max.x,a.min.z],[a.max.x,a.max.z],[a.min.x,a.max.z]].map(([x,z])=>{const p=new THREE.Vector3(x,0,z).applyMatrix4(transform);return [p.x,p.z];});}
+      // Unannotated extruded bays can rotate across adjacent stair flights.
+      // Their projected convex boundary is tighter than the enclosing box.
+      if(preciseFootprints&&!obstacle.corners&&geometry.type==='ExtrudeGeometry'){
+        const points=new Map(),v=new THREE.Vector3(),positions=geometry.attributes.position;
+        for(let i=0;i<positions.count;i++){v.fromBufferAttribute(positions,i).applyMatrix4(transform);points.set(v.x.toFixed(5)+','+v.z.toFixed(5),[v.x,v.z]);}
+        const sorted=[...points.values()].sort((a,b)=>a[0]-b[0]||a[1]-b[1]);
+        const cross=(a,b,c)=>(b[0]-a[0])*(c[1]-a[1])-(b[1]-a[1])*(c[0]-a[0]);
+        function half(list){const hull=[];for(const p of list){while(hull.length>1&&cross(hull.at(-2),hull.at(-1),p)<=1e-8)hull.pop();hull.push(p);}hull.pop();return hull;}
+        const corners=[...half(sorted),...half([...sorted].reverse())];if(corners.length>2)obstacle.corners=corners;
+      }
+      // A sloping handrail's axis-aligned box spans the flight beside it.
+      // Keep its narrow projected footprint when sampling elevated walking.
+      if(preciseFootprints&&geometry.type==='CylinderGeometry'&&Math.max(geometry.parameters.radiusTop,geometry.parameters.radiusBottom)<.1){
+        const a=new THREE.Vector3(0,geometry.boundingBox.min.y,0).applyMatrix4(transform),c=new THREE.Vector3(0,geometry.boundingBox.max.y,0).applyMatrix4(transform);
+        const length=Math.hypot(c.x-a.x,c.z-a.z);
+        if(length>.1){const dx=(c.x-a.x)/length,dz=(c.z-a.z)/length,r=Math.max(geometry.parameters.radiusTop,geometry.parameters.radiusBottom)*transform.getMaxScaleOnAxis();
+          // Short sections also preserve the changing rail height. Using the
+          // highest endpoint for the entire rail blocks the upper landing
+          // even where the railing is already below the player's feet.
+          const count=Math.ceil(a.distanceTo(c)/.2);
+          for(let i=0;i<count;i++){
+            const start=length*i/count,end=length*(i+1)/count;
+            const corners=[[start-r,-r],[end+r,-r],[end+r,r],[start-r,r]].map(([along,side])=>[a.x+dx*along-dz*side,a.z+dz*along+dx*side]);
+            const part={corners,minX:Math.min(...corners.map(p=>p[0])),maxX:Math.max(...corners.map(p=>p[0])),minZ:Math.min(...corners.map(p=>p[1])),maxZ:Math.max(...corners.map(p=>p[1]))};
+            const y0=a.y+(c.y-a.y)*i/count,y1=a.y+(c.y-a.y)*(i+1)/count;
+            Object.defineProperties(part,{minY:{value:Math.min(y0,y1)-r},maxY:{value:Math.max(y0,y1)+r}});
+            if(walking)obstacles.push(part);obstacles.jumpObstacles.push(part);
+          }
+          return;
+        }
+      }
       if(walking)obstacles.push(obstacle);
       obstacles.jumpObstacles.push(obstacle);
     }

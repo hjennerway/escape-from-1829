@@ -10,7 +10,7 @@ export function createAsylumOutside(THREE,exterior){
   const visibility=[];
   exterior.model.traverse(o=>{if(o.userData.aerialBatch||o.userData.aerialBatchSource){visibility.push([o,o.visible]);o.visible=!!o.userData.aerialBatchSource;}});
   try{
-  obstacles=exteriorObstacles(THREE,exterior.model);
+  obstacles=exteriorObstacles(THREE,exterior.model,{preciseFootprints:true});
   jumpObstacles=obstacles.jumpObstacles;jumper?.setIndex(createObstacleIndex(jumpObstacles,12,.27));
   walkSurfaces=obstacles.walkSurfaces;supports=new Map();
   // The masonry return stair's solid bases are walkable treads, not walls.
@@ -19,14 +19,17 @@ export function createAsylumOutside(THREE,exterior){
   masonry?.traverse(o=>{if(o.isMesh){const b=new THREE.Box3().setFromObject(o);boxes.push(b);}});
   obstacles=obstacles.filter(b=>!boxes.some(c=>Math.abs(c.min.x-b.minX)<.02&&Math.abs(c.max.x-b.maxX)<.02&&Math.abs(c.min.z-b.minZ)<.02&&Math.abs(c.max.z-b.maxZ)<.02));
   const matrix=new THREE.Matrix4(),world=new THREE.Matrix4();
-  function remember(geometry,transform){
+  function remember(geometry,transform,name){
    if(!geometry.boundingBox)geometry.computeBoundingBox();const local=geometry.boundingBox,b=local.clone().applyMatrix4(transform);
-   if(geometry.type!=='BoxGeometry'||b.max.y>9.1||b.max.x<-85||b.min.x>85||b.max.z<-48||b.min.z>74||b.max.y-b.min.y>.35||b.max.x-b.min.x<.18||b.max.z-b.min.z<.18)return;
+   // Include the whole estate, including annexe fire stairs and solid stone
+   // steps. A staircase need not be connected to an interior door.
+   const solidStep=/\b(?:tread|step|landing)\b/i.test(name)&&!/rail|parapet|cheek|coping|riser/i.test(name);
+   if(geometry.type!=='BoxGeometry'||(!solidStep&&b.max.y-b.min.y>.35)||b.max.x-b.min.x<.18||b.max.z-b.min.z<.18)return;
    const corners=[[local.min.x,local.min.z],[local.max.x,local.min.z],[local.max.x,local.max.z],[local.min.x,local.max.z]].map(([x,z])=>{const p=new THREE.Vector3(x,local.max.y,z).applyMatrix4(transform);return [p.x,p.z];});
    const surface={corners,height:b.max.y,minX:b.min.x,maxX:b.max.x,minZ:b.min.z,maxZ:b.max.z};
-   for(let x=Math.floor(Math.max(-85,b.min.x)/6);x<=Math.floor(Math.min(85,b.max.x)/6);x++)for(let z=Math.floor(Math.max(-48,b.min.z)/6);z<=Math.floor(Math.min(74,b.max.z)/6);z++){const k=x+','+z;if(!supports.has(k))supports.set(k,[]);supports.get(k).push(surface);}
+   for(let x=Math.floor(b.min.x/6);x<=Math.floor(b.max.x/6);x++)for(let z=Math.floor(b.min.z/6);z<=Math.floor(b.max.z/6);z++){const k=x+','+z;if(!supports.has(k))supports.set(k,[]);supports.get(k).push(surface);}
   }
-  exterior.model.traverseVisible(o=>{if(!o.isMesh||o.userData.noWalkingCollision)return;if(o.isInstancedMesh){for(let i=0;i<o.count;i++){o.getMatrixAt(i,matrix);world.multiplyMatrices(o.matrixWorld,matrix);remember(o.geometry,world);}}else remember(o.geometry,o.matrixWorld);});
+  exterior.model.traverseVisible(o=>{if(!o.isMesh||o.userData.noWalkingCollision)return;if(o.isInstancedMesh){for(let i=0;i<o.count;i++){o.getMatrixAt(i,matrix);world.multiplyMatrices(o.matrixWorld,matrix);remember(o.geometry,world,o.name);}}else remember(o.geometry,o.matrixWorld,o.name);});
   for(const b of obstacles)if(b.minY===undefined)Object.assign(b,{minY:-Infinity,maxY:Infinity});
   indices=new Map();
   }finally{for(const [o,visible] of visibility)o.visible=visible;}

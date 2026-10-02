@@ -26,7 +26,7 @@ public static class NativePrototypeBuild
     [Serializable] class SceneDef { public int[] nodes; }
     [Serializable] class NodeDef { public string name; public int mesh = -1; public int[] children; public float[] translation; public float[] rotation; public float[] scale; public float[] matrix; public NodeExtras extras; }
     [Serializable] class NodeExtras { public bool preciseSurface; }
-    [Serializable] class SurfaceExtras { public float offsetFactor,offsetUnits;public bool grass,wind; }
+    [Serializable] class SurfaceExtras { public float offsetFactor,offsetUnits;public bool grass,wind,ceiling,mural; }
     [Serializable] class MaterialExtras { public SurfaceExtras nativeSurface; }
     [Serializable] class MaterialDef { public string name; public Pbr pbrMetallicRoughness; public float[] emissiveFactor; public TextureInfo emissiveTexture; public MaterialExtensions extensions; public bool doubleSided; public string alphaMode; public float alphaCutoff = .5f; public MaterialExtras extras; }
     [Serializable] class MaterialExtensions { public Bump EXT_materials_bump; public Unlit KHR_materials_unlit; public EmissiveStrength KHR_materials_emissive_strength; }
@@ -45,6 +45,9 @@ public static class NativePrototypeBuild
     [MenuItem("Escape 1829/Native prototype/Prepare scene")]
     public static void Prepare()
     {
+        AssetDatabase.Refresh();
+        var surfaceShader=Shader.Find("Escape1829/NativeSurface");
+        if(!surfaceShader||ShaderUtil.ShaderHasError(surfaceShader))throw new Exception("Native surface shader must compile before importing materials.");
         if (!File.Exists(Source + "/manifest.json")) throw new Exception("Run node NativeAndroid/tools/export-port.mjs first.");
         Directory.CreateDirectory(Baked); Directory.CreateDirectory("Assets/Scenes");
         const string notices = "Assets/StreamingAssets/Licenses";
@@ -77,19 +80,20 @@ public static class NativePrototypeBuild
         game.selectionShader=Shader.Find("Escape1829/BuildingSelection");
         game.layoutText = AssetDatabase.LoadAssetAtPath<TextAsset>(Source + "/layout.json");
         game.manifestText = AssetDatabase.LoadAssetAtPath<TextAsset>(Source + "/manifest.json");
+        game.collisionText = AssetDatabase.LoadAssetAtPath<TextAsset>(Source + "/jump-collision.bytes");
         game.worldFont=Resources.GetBuiltinResource<Font>("LegacyRuntime.ttf");
         game.bodyFont=NativePresentationBuild.LoadFont("arial");game.buttonFont=NativePresentationBuild.LoadFont("arial-bold");game.displayFont=NativePresentationBuild.LoadFont("georgia");game.italicFont=NativePresentationBuild.LoadFont("georgia-italic");
         game.lightingIcons=NativePresentationBuild.LoadLightingIcons();
         game.locationIcon=NativePresentationBuild.LoadLocationIcon();game.deviceLocationShader=Shader.Find("Escape1829/DeviceLocation");
         game.skyShader=Shader.Find("Escape1829/CloudSky");game.gradeShader=Shader.Find("Escape1829/ColourGrade");
         game.uiCaptureShader=Shader.Find("Escape1829/UICapture");
-        if (!game.layoutText || !game.manifestText) throw new Exception("Exported navigation data could not import.");
+        if (!game.layoutText || !game.manifestText || !game.collisionText) throw new Exception("Exported navigation data could not import.");
         game.outdoorTriangles = stats[0].triangles; game.indoorTriangles = stats[1].triangles;
         game.outdoorBatches = stats[0].meshes; game.indoorBatches = stats[1].meshes;
         EditorSceneManager.SaveScene(scene, ScenePath);
         PlayerSettings.companyName = "Chester Night Games";
         PlayerSettings.productName = "Escape from 1829";
-        PlayerSettings.bundleVersion="0.7.0";PlayerSettings.Android.bundleVersionCode=7;
+        PlayerSettings.bundleVersion="0.8.0";PlayerSettings.Android.bundleVersionCode=8;
         PlayerSettings.SetApplicationIdentifier(NamedBuildTarget.Android, "org.hjennerway.escape1829.prototype");
         PlayerSettings.defaultScreenWidth = 1280; PlayerSettings.defaultScreenHeight = 720;
         PlayerSettings.defaultIsNativeResolution = false;
@@ -193,7 +197,7 @@ public static class NativePrototypeBuild
             var definition = root.materials[i]; var pbr = definition.pbrMetallicRoughness;
             var material = new Material(Shader.Find("Escape1829/NativeSurface")); material.name = definition.name ?? name + " material " + i;
             var surface=definition.extras?.nativeSurface;
-            if(surface!=null){material.SetFloat("_OffsetFactor",surface.offsetFactor);material.SetFloat("_OffsetUnits",surface.offsetUnits);material.SetFloat("_Grass",surface.grass?1:0);if(surface.wind)material.EnableKeyword("_LEAF_WIND");}
+            if(surface!=null){material.SetFloat("_OffsetFactor",surface.offsetFactor);material.SetFloat("_OffsetUnits",surface.offsetUnits);material.SetFloat("_Grass",surface.grass?1:0);material.SetFloat("_Ceiling",surface.ceiling?1:0);material.SetFloat("_Mural",surface.mural?1:0);if(surface.mural)material.SetTexture("_MuralMap",Resources.Load<Texture2D>("Archive/art_grindley-basement-mural"));if(surface.wind)material.EnableKeyword("_LEAF_WIND");}
             if (pbr != null)
             {
                 // glTF factors are linear; Unity Color properties are supplied
@@ -256,7 +260,7 @@ public static class NativePrototypeBuild
                 mesh.vertices = vertices; mesh.normals = normals; mesh.uv = uvs; mesh.triangles = indices;
                 if(wind!=null){var weights=new Vector2[vertices.Length];for(int w=0;w<weights.Length;w++)weights[w]=new Vector2(wind[w*2],wind[w*2+1]);mesh.uv2=weights;}
                 mesh.RecalculateBounds();if(materials[primitive.material].IsKeywordEnabled("_BUMP"))mesh.RecalculateTangents();
-                bool precise=false;foreach(var node in root.nodes)if(node.mesh==i&&node.extras!=null&&node.extras.preciseSurface)precise=true;
+                bool precise=name=="indoor";foreach(var node in root.nodes)if(node.mesh==i&&node.extras!=null&&node.extras.preciseSurface)precise=true;
                 MeshUtility.SetMeshCompression(mesh,precise?ModelImporterMeshCompression.Off:ModelImporterMeshCompression.Low);
                 string path = folder + "/mesh-" + i + "-" + j + ".asset";
                 meshSets[i][j] = (Mesh)SaveAsset(mesh, path); assetStats.meshes++; assetStats.triangles += indices.Length / 3;
@@ -336,20 +340,20 @@ public static class NativePrototypeBuild
 
     static void Validate(NativePrototypeGame game, List<ImportStats> stats)
     {
-        var layout = JsonUtility.FromJson<NativePrototypeGame.Layout>(game.layoutText.text);
-        if (layout.cells.Length != layout.width * layout.height || layout.exits.Length != 7) throw new Exception("Unexpected escape layout.");
+        var floors=NativePrototypeGame.MakeFloors(JsonUtility.FromJson<NativePrototypeGame.Navigation>(game.layoutText.text));var layout=floors[0];
+        if (layout.cells.Length != layout.width * layout.height || floors.Length!=4) throw new Exception("Unexpected escape layout.");
         var manifest = JsonUtility.FromJson<NativePrototypeGame.Manifest>(game.manifestText.text);
-        if (manifest.schema!=2||manifest.periods.Length!=13||stats[0].triangles != manifest.outdoor.triangles || stats[1].triangles != manifest.indoor.triangles) throw new Exception("Native geometry or historical periods differ from exported source.");
+        if (manifest.schema!=3||manifest.periods.Length!=13||stats[0].triangles != manifest.outdoor.triangles || stats[1].triangles != manifest.indoor.triangles) throw new Exception("Native geometry or historical periods differ from exported source.");
         if (!NativePrototypeGame.IndoorClear(layout, layout.spawn.x * layout.cellSize, layout.spawn.z * layout.cellSize)) throw new Exception("Player spawn blocked.");
-        var floors=NativePrototypeGame.MakeFloors(layout);
-        for(int f=0;f<2;f++)foreach (var exit in floors[f].exits)
+        int exits=0;for(int f=0;f<floors.Length;f++)foreach (var exit in floors[f].exits)
         {
-            var route = NativePrototypeGame.RouteBetweenFloors(floors, new Vector2(layout.spawn.x * layout.cellSize, layout.spawn.z * layout.cellSize),0, new Vector2(exit.x * layout.cellSize, exit.z * layout.cellSize),f);
+            exits++;var route = NativePrototypeGame.RouteBetweenFloors(floors, new Vector2(layout.spawn.x * layout.cellSize, layout.spawn.z * layout.cellSize),0, new Vector2(exit.inside.x,exit.inside.z),f);
             if (route.Count == 0) throw new Exception("Escape exit unreachable: " + exit.name);
         }
         if (!NativePrototypeGame.OutdoorClear(manifest, 0, 40)) throw new Exception("Outdoor spawn blocked.");
         if (NativePrototypeGame.OutdoorClear(manifest, manifest.playBounds.maxX + 1, 40)) throw new Exception("Outdoor boundary must block movement.");
-        Debug.Log("NATIVE_VALIDATION_PASS geometry counts, 13 periods, source spawn, 14 reachable exits and exterior collision bounds");
+        if(exits!=23)throw new Exception("Expected all 23 reviewed outside-door connections.");
+        Debug.Log("NATIVE_VALIDATION_PASS geometry counts, 13 periods, four levels, 23 reachable doors and exterior collision bounds");
     }
 
     [MenuItem("Escape 1829/Native prototype/Build Windows preview")]

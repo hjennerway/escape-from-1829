@@ -4,22 +4,29 @@ using UnityEngine;
 
 public sealed partial class NativePrototypeGame
 {
-    [Serializable] public class Point { public float x, z, yaw; }
-    [Serializable] public class Exit : Point { public string name, axis; public int facing; }
-    [Serializable] public class Stair : Point { public string name, direction; }
+    [Serializable] public class Point { public float x, y, z, yaw; }
+    [Serializable] public class Exit : Point { public string id,name, axis; public int facing;public Point inside,destination; }
+    [Serializable] public class Stair : Point { public string id,name, direction;public Point[] points; }
+    [Serializable] public class Polygon { public Point[] points; }
+    [Serializable] public class Wall { public Point a,b;public float height; }
+    [Serializable] public class Doorway : Point { public float dx,dz,width,height,depth; }
+    [Serializable] public class Room { public string id,name;public Point[] points;public Point label;public float width; }
+    [Serializable] public class Flight { public string id;public int lower,upper;public Point[] route; }
+    [Serializable] public class Navigation { public Layout[] floors;public Flight[] flights; }
     [Serializable] public class Spawn : Point { public string name; public int type; }
     [Serializable] public class Layout
     {
         public int width, height, galleryZ; public float cellSize;
         public int[] cells; public Point spawn; public Exit[] exits;
         public Stair[] stairs; public Point[] patrol; public Spawn[] enemies;
-        public UpperLayout upperFloor;
+        public int id;public string name;public float elevation;public Point origin;
+        public Polygon[] loops,rails;public Wall[] walls,exitHeaders;public Bounds[] shafts;
+        public Doorway[] doorways;public Room[] rooms,corridors;public Point[] safeSpawns,lamps;
+        [NonSerialized] public Flight[] flights;
     }
-    // JsonUtility cannot populate a self-recursive layout class reliably.
-    [Serializable] public class UpperLayout { public int[] cells;public Point spawn;public Exit[] exits;public Point[] patrol; }
-    [Serializable] public class Lamp : Point { public float y; }
+    [Serializable] public class Lamp : Point { }
     [Serializable] public class Bounds { public float minX, maxX, minZ, maxZ; }
-    [Serializable] public class Obstacle : Bounds { public Point[] corners; public float height, grade; }
+    [Serializable] public class Obstacle : Bounds { public Point[] corners; public float height, grade,minY,maxY; }
     [Serializable] public class Stats { public int batches; public long triangles; }
     [Serializable] public class MeshFlag { public bool tree,shadow; public int group, level; }
     [Serializable] public class DetailGroup { public float x,y,z,radius,windowHeight; }
@@ -27,13 +34,13 @@ public sealed partial class NativePrototypeGame
     [Serializable] public class Period
     {
         public int year; public string title,description; public int[] meshes;
-        public Obstacle[] obstacles,obstaclesNoTrees,walkSurfaces; public BuildingBounds[] buildings;public Lamp[] lamps;
+        public Obstacle[] obstacles,obstaclesNoTrees,walkSurfaces;public int[] supportIds; public BuildingBounds[] buildings;public Lamp[] lamps;
     }
     [Serializable] public class Photo { public string src,caption; }
     [Serializable] public class Dates { public string section; public int built,demolished; }
     [Serializable] public class Building { public string id,name; public string[] locations,sections; public Photo[] photos,contextPhotos; public Dates[] dates; }
     [Serializable] public class Location { public string key; public float[] position,target,walkPosition,walkTarget; public float fov; }
-    [Serializable] public class Artwork { public string src,title; public bool imageOnly; }
+    [Serializable] public class Artwork { public string src,title,note,source; public bool imageOnly; }
     [Serializable] public class WallArt : Point { public int floor,index; public float rotation; }
     [Serializable] public class EarthAnchor { public double latitude,longitude; public float x,z; }
     [Serializable] public class Diagnosis { public string name,treatment; }
@@ -45,31 +52,30 @@ public sealed partial class NativePrototypeGame
         public Period[] periods; public MeshFlag[] meshFlags; public DetailGroup[] detailGroups;
         public Building[] buildings; public Location[] locations; public Artwork[] art; public WallArt[] wallArt;
         public EarthAnchor earthAnchor; public Point[] perimeter; public Diagnosis[] diagnoses; public Cause[] causes;
+        public int jumpBounds;public Obstacle[] supportLibrary;
     }
-    public struct Waypoint { public Vector2 position; public int floor; public Waypoint(Vector2 p,int f) { position=p;floor=f; } }
-    public static Layout[] MakeFloors(Layout ground)
+    public struct Waypoint { public Vector2 position; public int floor;public float y; public Waypoint(Vector2 p,int f,float height=0) { position=p;floor=f;y=height; } }
+    public static Layout[] MakeFloors(Navigation navigation)
     {
-        if(ground.upperFloor==null)throw new Exception("Upper floor is missing.");
-        var u=ground.upperFloor;
-        var upper=new Layout { width=ground.width,height=ground.height,cellSize=ground.cellSize,galleryZ=ground.galleryZ,
-            cells=u.cells??ground.cells,spawn=ground.spawn,exits=u.exits??new Exit[0],stairs=ground.stairs,
-            patrol=u.patrol??ground.patrol,enemies=ground.enemies };
-        if(u.spawn!=null&&IndoorClear(upper,u.spawn.x*upper.cellSize,u.spawn.z*upper.cellSize))upper.spawn=u.spawn;
-        return new[]{ground,upper};
+        if(navigation.floors==null||navigation.floors.Length!=4)throw new Exception("Re-export the reviewed four-level plan.");
+        foreach(var floor in navigation.floors)floor.flights=navigation.flights;
+        return navigation.floors;
     }
     static int Cell(float coordinate,float size)=>Mathf.FloorToInt(coordinate/size+.5f);
     public static bool IndoorClear(Layout plan,float x,float z,float radius=.34f)
     {
-        for(int i=-1;i<=1;i+=2)for(int j=-1;j<=1;j+=2){
-            int cx=Cell(x+i*radius,plan.cellSize),cz=Cell(z+j*radius,plan.cellSize);
-            if(cx<0||cz<0||cx>=plan.width||cz>=plan.height||plan.cells[cz*plan.width+cx]!=1)return false;
-        }return true;
+        bool Inside(float px,float pz){foreach(var loop in plan.loops)if(InPolygon(px,pz,loop.points))return true;return false;}
+        if(!Inside(x,z))return false;
+        for(int i=-1;i<=1;i+=2)for(int j=-1;j<=1;j+=2)if(!Inside(x+i*radius,z+j*radius))return false;
+        foreach(var shaft in plan.shafts)if(x>shaft.minX-radius&&x<shaft.maxX+radius&&z>shaft.minZ-radius&&z<shaft.maxZ+radius)return false;
+        foreach(var wall in plan.walls)if(SegmentDistance(x,z,wall.a,wall.b)<radius+.09f)return false;
+        return true;
     }
     public static bool OutdoorClear(Manifest data,float x,float z,int periodIndex=8,bool trees=true)
     {
         var b=data.playBounds;if(x<=b.minX||x>=b.maxX||z<=b.minZ||z>=b.maxZ)return false;
         var period=data.periods[periodIndex];var obstacles=trees?period.obstacles:period.obstaclesNoTrees??period.obstacles;
-        foreach(var o in obstacles)if(Contains(o,x,z,.4f))return false;
+        foreach(var o in obstacles)if(o.maxY>.35f&&o.minY<1.5f&&Contains(o,x,z,.27f))return false;
         return true;
     }
     static bool Contains(Obstacle b,float x,float z,float padding)
@@ -86,7 +92,7 @@ public sealed partial class NativePrototypeGame
     }
     public static List<Vector2> FindPath(Layout plan,Vector2 from,Vector2 to)
     {
-        var result=new List<Vector2>();int ax=Cell(from.x,plan.cellSize),az=Cell(from.y,plan.cellSize),bx=Cell(to.x,plan.cellSize),bz=Cell(to.y,plan.cellSize);
+        var result=new List<Vector2>();int ax=Cell(from.x-plan.origin.x,plan.cellSize),az=Cell(from.y-plan.origin.z,plan.cellSize),bx=Cell(to.x-plan.origin.x,plan.cellSize),bz=Cell(to.y-plan.origin.z,plan.cellSize);
         if(ax<0||az<0||bx<0||bz<0||ax>=plan.width||bx>=plan.width||az>=plan.height||bz>=plan.height)return result;
         int start=az*plan.width+ax,end=bz*plan.width+bx;
         if(plan.cells[start]!=1||plan.cells[end]!=1)return result;
@@ -98,22 +104,12 @@ public sealed partial class NativePrototypeGame
                 int next=nz*plan.width+nx;if(plan.cells[next]!=1||previous[next]>=0)continue;previous[next]=index;queue.Enqueue(next);}
         }
         if(previous[end]<0)return result;
-        for(int n=end;n!=start;n=previous[n])result.Add(new Vector2(n%plan.width*plan.cellSize,n/plan.width*plan.cellSize));
-        result.Reverse();return result;
+        for(int n=end;n!=start;n=previous[n])result.Add(new Vector2(plan.origin.x+n%plan.width*plan.cellSize,plan.origin.z+n/plan.width*plan.cellSize));
+        result.Reverse();if(result.Count>0)result[result.Count-1]=to;return result;
     }
     public static List<Waypoint> RouteBetweenFloors(Layout[] plans,Vector2 from,int fromFloor,Vector2 to,int toFloor)
     {
-        var best=new List<Waypoint>();
-        if(fromFloor==toFloor){foreach(var p in FindPath(plans[fromFloor],from,to))best.Add(new Waypoint(p,fromFloor));return best;}
-        foreach(var stair in plans[fromFloor].stairs){
-            var at=new Vector2(stair.x*plans[fromFloor].cellSize,stair.z*plans[fromFloor].cellSize);
-            var first=FindPath(plans[fromFloor],from,at);var last=FindPath(plans[toFloor],at,to);
-            if((first.Count==0&&(Cell(from.x,plans[fromFloor].cellSize)!=Cell(at.x,plans[fromFloor].cellSize)||Cell(from.y,plans[fromFloor].cellSize)!=Cell(at.y,plans[fromFloor].cellSize)))||
-                (last.Count==0&&(Cell(to.x,plans[toFloor].cellSize)!=Cell(at.x,plans[toFloor].cellSize)||Cell(to.y,plans[toFloor].cellSize)!=Cell(at.y,plans[toFloor].cellSize))))continue;
-            var route=new List<Waypoint>();foreach(var p in first)route.Add(new Waypoint(p,fromFloor));
-            route.Add(new Waypoint(at,fromFloor));route.Add(new Waypoint(at,toFloor));foreach(var p in last)route.Add(new Waypoint(p,toFloor));
-            if(best.Count==0||route.Count<best.Count)best=route;
-        }return best;
+        return PlanRoute(plans,from,fromFloor,to,toFloor);
     }
     static Vector2 Position(Point p,Layout plan)=>new Vector2(p.x*plan.cellSize,p.z*plan.cellSize);
     bool LineOfSight(Layout plan,Vector2 a,Vector2 b)

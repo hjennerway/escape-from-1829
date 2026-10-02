@@ -28,7 +28,7 @@ public sealed partial class NativePrototypeGame
             view.fieldOfView=46;orbitTarget=World(point,0);orbitPitch=54;orbitYaw=208;
             orbitDistance=230*Mathf.Max(1,1/view.aspect);UpdateOrbit(0);
             ShowDeviceLocation(point);locationMessage="Your location is marked in red with a pillar of light.";
-        }else{player=point;PositionView();locationMessage="Your approximate position";}
+        }else{if(Indoors)StartOutside();ResetJump();hasSafeOutside=false;player=point;playerY=OutdoorHeight(player,0);MoveOutside(Vector2.zero,.025f);PositionView();locationMessage="Your approximate position";}
         if(!float.IsNaN(accuracy)&&!float.IsInfinity(accuracy)&&accuracy>=0)locationMessage+=" Accuracy: about "+Mathf.CeilToInt(accuracy)+" m.";
         return true;
     }

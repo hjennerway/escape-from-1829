@@ -45,7 +45,7 @@ try{
  if(report.compiled)assert.deepEqual(report.compiled,report.source);
  for(const width of [320,390,1200]){
   await page.setViewportSize({width,height:760});await page.goto(base+'/explore.html?view=front');await page.waitForFunction(()=>window.__night?.renderer.info.render.frame>3);
-  assert.equal(await page.locator('[data-lighting="day"]').getAttribute('aria-pressed'),'true');await page.locator('[data-lighting="night"]').click();
+  assert.equal(await page.locator('[data-lighting="dusk"]').getAttribute('aria-pressed'),'true');await page.locator('[data-lighting="night"]').click();
   await shot('explore-'+width);
   const windows=await page.evaluate(()=>{const w=window.__night.lighting.windows;return {visible:w.visibleCount,lit:w.selected.length};});
   assert.equal(windows.lit,Math.round(windows.visible/10));

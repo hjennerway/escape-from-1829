@@ -33,7 +33,7 @@ public sealed partial class NativePrototypeGame
         periodIndex=Mathf.Clamp(index,0,manifest.periods.Length-1);Array.Clear(periodMeshSet,0,periodMeshSet.Length);
         foreach(int mesh in manifest.periods[periodIndex].meshes)periodMeshSet[mesh]=true;
         CloseBuilding();RefreshEstateVisibility();RefreshNightEstate();
-        if(mode==Mode.Outside&&!OutdoorClear(manifest,player.x,player.y,periodIndex,trees)){
+        if(mode==Mode.Outside&&!Indoors&&!OutdoorClear(manifest,player.x,player.y,periodIndex,trees)){
             bool found=false;for(float radius=1;radius<=40&&!found;radius+=1)for(int a=0;a<32&&!found;a++){
                 var p=player+new Vector2(Mathf.Cos(a*Mathf.PI/16),Mathf.Sin(a*Mathf.PI/16))*radius;
                 if(OutdoorClear(manifest,p.x,p.y,periodIndex,trees)){player=p;found=true;}
@@ -67,18 +67,18 @@ public sealed partial class NativePrototypeGame
         }
         artRoot=new GameObject("Archive wall art");
         // Keep every archive image on each floor, with a fresh assignment on app load.
-        for(int f=0;f<2;f++){var panels=new List<WallArt>();foreach(var a in manifest.wallArt)if(a.floor==f)panels.Add(a);for(int i=panels.Count-1;i>0;i--){int j=UnityEngine.Random.Range(0,i+1),index=panels[i].index;panels[i].index=panels[j].index;panels[j].index=index;}}
+        for(int f=0;f<floors.Length;f++){var panels=new List<WallArt>();foreach(var a in manifest.wallArt)if(a.floor==f)panels.Add(a);for(int i=panels.Count-1;i>0;i--){int j=UnityEngine.Random.Range(0,i+1),index=panels[i].index;panels[i].index=panels[j].index;panels[j].index=index;}}
         foreach(var art in manifest.wallArt){
             var panel=GameObject.CreatePrimitive(PrimitiveType.Quad);panel.name="Archive picture "+art.index;Destroy(panel.GetComponent<Collider>());
-            panel.transform.SetParent(artRoot.transform,false);panel.transform.position=World(new Vector2(art.x,art.z),art.floor*manifest.floorHeight+1.88f);
+            panel.transform.SetParent(artRoot.transform,false);panel.transform.position=World(new Vector2(art.x,art.z),floors[art.floor].elevation+1.88f);
             panel.transform.rotation=Quaternion.Euler(0,-art.rotation*Mathf.Rad2Deg,0);panel.transform.localScale=new Vector3(1.48f,1.02f,1);
             var material=new Material(Shader.Find("Escape1829/NativeSurface"));material.SetFloat("_Unlit",1);material.SetInt("_Cull",0);material.mainTexture=LoadArchive(manifest.art[art.index].src);panel.GetComponent<Renderer>().material=material;floorArtwork.Add(panel);
         }
     }
     void UpdateInteriorVisibility()
     {
-        foreach(var p in interiorParts)p.renderer.enabled=p.floor==floor&&(p.region<0||p.open==activeExits.Contains(p.floor*7+p.region));
-        for(int i=0;i<floorArtwork.Count;i++)floorArtwork[i].SetActive(manifest.wallArt[i].floor==floor);
+        foreach(var p in interiorParts)p.renderer.enabled=true;
+        for(int i=0;i<floorArtwork.Count;i++)floorArtwork[i].SetActive(true);
     }
     static string ArchiveKey(string src)=>"Archive/"+src.Replace("./","").Substring(0,src.Replace("./","").LastIndexOf('.')).Replace('/','_');
     Texture2D LoadArchive(string src){var texture=Resources.Load<Texture2D>(ArchiveKey(src));if(!texture)Debug.LogError("Archive picture missing: "+src);return texture;}
@@ -144,6 +144,7 @@ public sealed partial class NativePrototypeGame
     void ChangePhoto(int delta){var photos=BuildingPhotos();if(photos.Count==0)return;photoIndex=(photoIndex+delta+photos.Count)%photos.Count;ReleaseArchiveTexture(ref photoTexture);photoTexture=LoadArchive(photos[photoIndex].src);photoZoom=1;photoPan=Vector2.zero;}
     void GoToBuilding(int index)
     {
+        if(Indoors&&Exploring)StartOutside();
         foreach(var b in manifest.periods[periodIndex].buildings)if(b.index==index){
             var building=manifest.buildings[index];Location shot=null;foreach(var l in manifest.locations)if(building.locations!=null&&Array.IndexOf(building.locations,l.key)>=0){shot=l;break;}
             if(mode==Mode.Aerial)FrameBuilding(b,shot);

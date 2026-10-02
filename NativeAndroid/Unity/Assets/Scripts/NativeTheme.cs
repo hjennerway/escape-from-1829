@@ -99,6 +99,6 @@ public sealed partial class NativePrototypeGame
         if(Button(insideButton,"ASYLUM ESCAPE   ↗"))StartArrival();
         if(Button(outsideButton,"EXPLORE ON FOOT     →"))BeginIntroFlight(false);
         if(Button(aerialButton,"AERIAL VIEW   ↗",true))BeginIntroFlight(true);
-        Label(new Rect(108,645,740,35),"TWO FLOORS  ·  FOURTEEN ROUTES  ·  FIVE OPEN EXITS",new GUIStyle(small){fontSize=13});
+        Label(new Rect(108,645,740,35),"FOUR LEVELS  ·  TWENTY-THREE OUTSIDE DOORS",new GUIStyle(small){fontSize=13});
     }
 }

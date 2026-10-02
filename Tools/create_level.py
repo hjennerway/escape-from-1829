@@ -7,7 +7,7 @@ from mathutils import Vector
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 random.seed(1829)
 # The browser layout builder owns navigation; do not regenerate the old floorplan.
-with open(os.path.join(ROOT,'Assets','Resources','layout.json')) as f:
+with open(os.path.join(ROOT,'Research','escape-layout','layout.json')) as f:
     data=json.load(f)
 W,H,S=data['width'],data['height'],data['cellSize']
 grid=[data['cells'][z*W:(z+1)*W] for z in range(H)]
@@ -63,7 +63,7 @@ for mat in palette:
     bevel=obs[0].modifiers.new('Soft masonry edges','BEVEL'); bevel.width=.025; bevel.segments=1
     bpy.ops.object.modifier_apply(modifier=bevel.name)
 bpy.ops.wm.save_as_mainfile(filepath=os.path.join(ROOT,'Art','1829-Level.blend'))
-bpy.ops.export_scene.fbx(filepath=os.path.join(ROOT,'Assets','Resources','1829-Level.fbx'),use_selection=False,object_types={'MESH'},axis_forward='-Z',axis_up='Y',add_leaf_bones=False)
+bpy.ops.export_scene.fbx(filepath=os.path.join(ROOT,'Art','1829-Level.fbx'),use_selection=False,object_types={'MESH'},axis_forward='-Z',axis_up='Y',add_leaf_bones=False)
 # A cutaway overview for review; the saved source and exported FBX retain ceilings.
 for o in bpy.context.scene.objects:
     if o.name=='Ceiling': o.hide_render=True
