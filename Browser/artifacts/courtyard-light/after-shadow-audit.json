@@ -1,0 +1,660 @@
+[
+  {
+    "side": -1,
+    "measurements": [
+      {
+        "kind": "ground",
+        "point": [
+          -24.96,
+          0.23200000000000237,
+          -10.5
+        ],
+        "blocked": true,
+        "blocker": "Aerial batch · Period · 1829 · 40",
+        "distance": 0.07474061258479175,
+        "light": 0
+      },
+      {
+        "kind": "ground",
+        "point": [
+          -24.96,
+          0.2320000000000022,
+          -9.9
+        ],
+        "blocked": true,
+        "blocker": "Aerial batch · Period · 1829 · 40",
+        "distance": 0.07474061258479155,
+        "light": 0
+      },
+      {
+        "kind": "ground",
+        "point": [
+          -24.96,
+          0.23200000000000207,
+          -9.3
+        ],
+        "blocked": true,
+        "blocker": "Aerial batch · Period · 1829 · 40",
+        "distance": 0.07474061258479164,
+        "light": 0
+      },
+      {
+        "kind": "ground",
+        "point": [
+          -24.96,
+          0.23200000000000195,
+          -8.7
+        ],
+        "blocked": true,
+        "blocker": "Aerial batch · Period · 1829 · 40",
+        "distance": 0.07474061258479164,
+        "light": 0
+      },
+      {
+        "kind": "ground",
+        "point": [
+          -24.96,
+          0.23200000000000184,
+          -8.1
+        ],
+        "blocked": true,
+        "blocker": "Aerial batch · Period · 1829 · 40",
+        "distance": 0.0747406125847917,
+        "light": 0
+      },
+      {
+        "kind": "ground",
+        "point": [
+          -24.9,
+          0.23200000000000232,
+          -10.5
+        ],
+        "blocked": true,
+        "blocker": "Aerial batch · Period · 1829 · 40",
+        "distance": 0.1868515314619863,
+        "light": 0
+      },
+      {
+        "kind": "ground",
+        "point": [
+          -24.9,
+          0.2320000000000022,
+          -9.9
+        ],
+        "blocked": true,
+        "blocker": "Aerial batch · Period · 1829 · 40",
+        "distance": 0.18685153146198624,
+        "light": 0
+      },
+      {
+        "kind": "ground",
+        "point": [
+          -24.9,
+          0.23200000000000207,
+          -9.3
+        ],
+        "blocked": true,
+        "blocker": "Aerial batch · Period · 1829 · 40",
+        "distance": 0.18685153146198624,
+        "light": 0
+      },
+      {
+        "kind": "ground",
+        "point": [
+          -24.9,
+          0.23200000000000193,
+          -8.7
+        ],
+        "blocked": true,
+        "blocker": "Aerial batch · Period · 1829 · 40",
+        "distance": 0.18685153146198624,
+        "light": 0
+      },
+      {
+        "kind": "ground",
+        "point": [
+          -24.9,
+          0.23200000000000182,
+          -8.1
+        ],
+        "blocked": true,
+        "blocker": "Aerial batch · Period · 1829 · 40",
+        "distance": 0.18685153146198624,
+        "light": 0
+      },
+      {
+        "kind": "ground",
+        "point": [
+          -24.8,
+          0.23200000000000237,
+          -10.5
+        ],
+        "blocked": true,
+        "blocker": "Aerial batch · Period · 1829 · 40",
+        "distance": 0.37370306292396555,
+        "light": 0
+      },
+      {
+        "kind": "ground",
+        "point": [
+          -24.8,
+          0.23200000000000223,
+          -9.9
+        ],
+        "blocked": true,
+        "blocker": "Aerial batch · Period · 1829 · 40",
+        "distance": 0.37370306292396555,
+        "light": 0
+      },
+      {
+        "kind": "ground",
+        "point": [
+          -24.8,
+          0.23200000000000207,
+          -9.3
+        ],
+        "blocked": true,
+        "blocker": "Aerial batch · Period · 1829 · 40",
+        "distance": 0.37370306292396543,
+        "light": 0
+      },
+      {
+        "kind": "ground",
+        "point": [
+          -24.8,
+          0.23200000000000198,
+          -8.7
+        ],
+        "blocked": true,
+        "blocker": "Aerial batch · Period · 1829 · 40",
+        "distance": 0.37370306292396555,
+        "light": 0
+      },
+      {
+        "kind": "ground",
+        "point": [
+          -24.8,
+          0.2320000000000018,
+          -8.1
+        ],
+        "blocked": true,
+        "blocker": "Aerial batch · Period · 1829 · 40",
+        "distance": 0.3737030629239657,
+        "light": 0
+      },
+      {
+        "kind": "ground",
+        "point": [
+          -24.6,
+          0.23200000000000237,
+          -10.5
+        ],
+        "blocked": true,
+        "blocker": "Aerial batch · Period · 1829 · 40",
+        "distance": 0.7474061258479311,
+        "light": 0
+      },
+      {
+        "kind": "ground",
+        "point": [
+          -24.6,
+          0.23200000000000218,
+          -9.9
+        ],
+        "blocked": true,
+        "blocker": "Aerial batch · Period · 1829 · 40",
+        "distance": 0.747406125847931,
+        "light": 0
+      },
+      {
+        "kind": "ground",
+        "point": [
+          -24.6,
+          0.23200000000000207,
+          -9.3
+        ],
+        "blocked": true,
+        "blocker": "Aerial batch · Period · 1829 · 40",
+        "distance": 0.7474061258479311,
+        "light": 0
+      },
+      {
+        "kind": "ground",
+        "point": [
+          -24.6,
+          0.23200000000000198,
+          -8.7
+        ],
+        "blocked": true,
+        "blocker": "Aerial batch · Period · 1829 · 40",
+        "distance": 0.7474061258479311,
+        "light": 0
+      },
+      {
+        "kind": "wall",
+        "point": [
+          -24.9,
+          0.25,
+          -7.902
+        ],
+        "blocked": true,
+        "blocker": "Aerial batch · Period · 1829 · 40",
+        "distance": 0.18685153146198596,
+        "light": 0
+      },
+      {
+        "kind": "wall",
+        "point": [
+          -24.9,
+          0.7,
+          -7.902
+        ],
+        "blocked": true,
+        "blocker": "Aerial batch · Period · 1829 · 40",
+        "distance": 0.18685153146198596,
+        "light": 0
+      },
+      {
+        "kind": "wall",
+        "point": [
+          -24.9,
+          1.2,
+          -7.902
+        ],
+        "blocked": true,
+        "blocker": "Aerial batch · Period · 1829 · 40",
+        "distance": 0.1868515314619864,
+        "light": 0
+      },
+      {
+        "kind": "wall",
+        "point": [
+          -24.8,
+          0.25,
+          -7.902
+        ],
+        "blocked": true,
+        "blocker": "Aerial batch · Period · 1829 · 40",
+        "distance": 0.3737030629239656,
+        "light": 0
+      },
+      {
+        "kind": "wall",
+        "point": [
+          -24.8,
+          0.7,
+          -7.902
+        ],
+        "blocked": true,
+        "blocker": "Aerial batch · Period · 1829 · 40",
+        "distance": 0.3737030629239657,
+        "light": 0
+      },
+      {
+        "kind": "wall",
+        "point": [
+          -24.8,
+          1.2,
+          -7.902
+        ],
+        "blocked": true,
+        "blocker": "Aerial batch · Period · 1829 · 40",
+        "distance": 0.37370306292396555,
+        "light": 0
+      },
+      {
+        "kind": "wall",
+        "point": [
+          -24.6,
+          0.25,
+          -7.902
+        ],
+        "blocked": true,
+        "blocker": "Aerial batch · Period · 1829 · 40",
+        "distance": 0.7474061258479311,
+        "light": 0
+      },
+      {
+        "kind": "wall",
+        "point": [
+          -24.6,
+          0.7,
+          -7.902
+        ],
+        "blocked": true,
+        "blocker": "Aerial batch · Period · 1829 · 40",
+        "distance": 0.7474061258479311,
+        "light": 0
+      },
+      {
+        "kind": "wall",
+        "point": [
+          -24.6,
+          1.2,
+          -7.902
+        ],
+        "blocked": true,
+        "blocker": "Aerial batch · Period · 1829 · 40",
+        "distance": 0.39705934657944403,
+        "light": 0
+      }
+    ]
+  },
+  {
+    "side": 1,
+    "measurements": [
+      {
+        "kind": "ground",
+        "point": [
+          24.96,
+          0.23200000417232516,
+          -10.5
+        ],
+        "blocked": false,
+        "light": 1
+      },
+      {
+        "kind": "ground",
+        "point": [
+          24.96,
+          0.2320000041723251,
+          -9.9
+        ],
+        "blocked": false,
+        "light": 1
+      },
+      {
+        "kind": "ground",
+        "point": [
+          24.96,
+          0.23200000417232514,
+          -9.3
+        ],
+        "blocked": false,
+        "light": 0.6862745098039216
+      },
+      {
+        "kind": "ground",
+        "point": [
+          24.96,
+          0.23200000417232514,
+          -8.7
+        ],
+        "blocked": true,
+        "blocker": "Aerial batch · Period · 1829 · 238",
+        "distance": 2.1176504374588436,
+        "light": 0
+      },
+      {
+        "kind": "ground",
+        "point": [
+          24.96,
+          0.23200000417232514,
+          -8.1
+        ],
+        "blocked": true,
+        "blocker": "Aerial batch · Period · 1829 · 238",
+        "distance": 1.6782380084482391,
+        "light": 0
+      },
+      {
+        "kind": "ground",
+        "point": [
+          24.9,
+          0.23200000417232516,
+          -10.5
+        ],
+        "blocked": false,
+        "light": 1
+      },
+      {
+        "kind": "ground",
+        "point": [
+          24.9,
+          0.2320000041723251,
+          -9.9
+        ],
+        "blocked": false,
+        "light": 1
+      },
+      {
+        "kind": "ground",
+        "point": [
+          24.9,
+          0.23200000417232514,
+          -9.3
+        ],
+        "blocked": false,
+        "light": 0.8392156862745098
+      },
+      {
+        "kind": "ground",
+        "point": [
+          24.9,
+          0.23200000417232514,
+          -8.7
+        ],
+        "blocked": true,
+        "blocker": "Aerial batch · Period · 1829 · 238",
+        "distance": 2.1176504374588436,
+        "light": 0
+      },
+      {
+        "kind": "ground",
+        "point": [
+          24.9,
+          0.23200000417232516,
+          -8.1
+        ],
+        "blocked": true,
+        "blocker": "Aerial batch · Period · 1829 · 238",
+        "distance": 1.6782380084482391,
+        "light": 0
+      },
+      {
+        "kind": "ground",
+        "point": [
+          24.8,
+          0.23200000417232516,
+          -10.5
+        ],
+        "blocked": false,
+        "light": 1
+      },
+      {
+        "kind": "ground",
+        "point": [
+          24.8,
+          0.23200000417232514,
+          -9.9
+        ],
+        "blocked": false,
+        "light": 1
+      },
+      {
+        "kind": "ground",
+        "point": [
+          24.8,
+          0.23200000417232514,
+          -9.3
+        ],
+        "blocked": false,
+        "light": 0.8901960784313725
+      },
+      {
+        "kind": "ground",
+        "point": [
+          24.8,
+          0.23200000417232516,
+          -8.7
+        ],
+        "blocked": true,
+        "blocker": "Aerial batch · Period · 1829 · 238",
+        "distance": 2.1176504374588436,
+        "light": 0
+      },
+      {
+        "kind": "ground",
+        "point": [
+          24.8,
+          0.23200000417232514,
+          -8.1
+        ],
+        "blocked": true,
+        "blocker": "Aerial batch · Period · 1829 · 238",
+        "distance": 1.6782380084482398,
+        "light": 0
+      },
+      {
+        "kind": "ground",
+        "point": [
+          24.6,
+          0.23200000417232516,
+          -10.5
+        ],
+        "blocked": false,
+        "light": 1
+      },
+      {
+        "kind": "ground",
+        "point": [
+          24.6,
+          0.23200000417232514,
+          -9.9
+        ],
+        "blocked": false,
+        "light": 1
+      },
+      {
+        "kind": "ground",
+        "point": [
+          24.6,
+          0.23200000417232514,
+          -9.3
+        ],
+        "blocked": false,
+        "light": 1
+      },
+      {
+        "kind": "ground",
+        "point": [
+          24.6,
+          0.23200000417232516,
+          -8.7
+        ],
+        "blocked": true,
+        "blocker": "Aerial batch · Period · 1829 · 238",
+        "distance": 2.117650437458843,
+        "light": 0
+      },
+      {
+        "kind": "wall",
+        "point": [
+          24.9,
+          0.25,
+          -7.902
+        ],
+        "blocked": true,
+        "blocker": "Aerial batch · Period · 1829 · 238",
+        "distance": 1.65441444370904,
+        "light": 0
+      },
+      {
+        "kind": "wall",
+        "point": [
+          24.9,
+          0.7,
+          -7.902
+        ],
+        "blocked": true,
+        "blocker": "Aerial batch · Period · 1829 · 238",
+        "distance": 1.0588251871739673,
+        "light": 0
+      },
+      {
+        "kind": "wall",
+        "point": [
+          24.9,
+          1.2,
+          -7.902
+        ],
+        "blocked": true,
+        "blocker": "Aerial batch · Period · 1829 · 238",
+        "distance": 0.39705934657944403,
+        "light": 0
+      },
+      {
+        "kind": "wall",
+        "point": [
+          24.8,
+          0.25,
+          -7.902
+        ],
+        "blocked": true,
+        "blocker": "Aerial batch · Period · 1829 · 238",
+        "distance": 1.65441444370904,
+        "light": 0
+      },
+      {
+        "kind": "wall",
+        "point": [
+          24.8,
+          0.7,
+          -7.902
+        ],
+        "blocked": true,
+        "blocker": "Aerial batch · Period · 1829 · 238",
+        "distance": 1.0588251871739673,
+        "light": 0
+      },
+      {
+        "kind": "wall",
+        "point": [
+          24.8,
+          1.2,
+          -7.902
+        ],
+        "blocked": true,
+        "blocker": "Aerial batch · Period · 1829 · 238",
+        "distance": 0.39705934657944403,
+        "light": 0
+      },
+      {
+        "kind": "wall",
+        "point": [
+          24.6,
+          0.25,
+          -7.902
+        ],
+        "blocked": true,
+        "blocker": "Aerial batch · Period · 1829 · 238",
+        "distance": 1.65441444370904,
+        "light": 0
+      },
+      {
+        "kind": "wall",
+        "point": [
+          24.6,
+          0.7,
+          -7.902
+        ],
+        "blocked": true,
+        "blocker": "Aerial batch · Period · 1829 · 238",
+        "distance": 1.0588251871739673,
+        "light": 0
+      },
+      {
+        "kind": "wall",
+        "point": [
+          24.6,
+          1.2,
+          -7.902
+        ],
+        "blocked": true,
+        "blocker": "Aerial batch · Period · 1829 · 238",
+        "distance": 0.39705934657944403,
+        "light": 0
+      }
+    ]
+  }
+]

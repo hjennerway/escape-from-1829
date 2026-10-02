@@ -332,6 +332,18 @@ for(const x of [82,86,92,97])for(const z of [16,20]){
   assert.equal(hit.object.name,'Redesmere low end slate roof');
   assert(hit.point.y>4.6&&hit.point.y<6.7&&hit.face.normal.y>0,'front roofs must be low and outward-facing');
 }
+// From walking height, the low range must close the band between its wall
+// top and the raised slate. Downward roof rays alone miss this open seam.
+for(const [axis,edge,sign,start,end] of [['x',79.55,-1,10,22],['x',99.8,1,10,22],['z',10,-1,79.55,99.8],['z',22,1,79.55,99.8]]){
+  for(let i=0;i<16;i++)for(const y of [4.60,4.63,4.66]){
+    const along=start+(end-start)*(i+.5)/16;
+    const target=new THREE.Vector3(axis==='x'?edge:along,y,axis==='z'?edge:along);
+    const eye=target.clone();eye[axis]+=sign*10;eye.y=1.8;
+    const distance=eye.distanceTo(target);ray.set(eye,target.clone().sub(eye).normalize());ray.near=distance-.6;ray.far=distance+.01;
+    assert(ray.intersectObject(exterior.model,true).length,`Redesmere eaves must be opaque from walking height: ${axis}=${edge}, along=${along}, y=${y}`);
+  }
+}
+ray.near=0;ray.far=Infinity;
 const photoOpenings=exterior.model.userData.eastPhotoOpenings;
 const frontWindows=photoOpenings.filter(o=>o.face==='square-front');
 assert.equal(frontWindows.length,6,'square front has exactly two windows on each of three storeys');

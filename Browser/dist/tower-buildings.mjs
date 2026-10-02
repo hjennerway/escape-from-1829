@@ -1,4 +1,5 @@
 import {ESCAPE_WATER_TOWER} from './water-tower.mjs';
+import {mitreRightAngleWalls} from './wall-mitres.mjs';
 import {addPharmacyCourt,PHARMACY_VIEWS} from './pharmacy-court.mjs';
 import {SERVICE_COURT_MOVES,moveServiceRect,moveServiceView} from './service-court-placement.mjs';
 import {IRBY_CORRIDOR} from './irby-corridor.mjs';
@@ -174,8 +175,8 @@ export function createTowerBuildings(THREE,exterior){
     mesh(uv(g),flat,0,h,0,name+' flat roof');
    }else if(!spec.joinedRoof)box(flat,cx,h+.08,cz,w,.16,d,name+' flat roof');
    const parapets=spec.parapetEdges??['north','south','west','east'];
-   for(const [edge,z] of [['north',z0],['south',z1]])if(parapets.includes(edge)){box(brick,cx,h+.26,z,w,.45,.25);box(stone,cx,h+.5,z,w+.15,.12,.38);}
-   for(const [edge,x] of [['west',x0],['east',x1]])if(parapets.includes(edge)){box(brick,x,h+.26,cz,.25,.45,d);box(stone,x,h+.5,cz,.38,.12,d+.15);}
+   for(const [edge,z] of [['north',z0],['south',z1]])if(parapets.includes(edge)){box(brick,cx,h+.26,z,w,.45,.25,name+' '+edge+' parapet');box(stone,cx,h+.5,z,w,.12,.38,name+' '+edge+' coping');}
+   for(const [edge,x] of [['west',x0],['east',x1]])if(parapets.includes(edge)){box(brick,x,h+.26,cz,.25,.45,d,name+' '+edge+' parapet');box(stone,x,h+.5,cz,.38,.12,d,name+' '+edge+' coping');}
   }else if(!['corridor','traced'].includes(spec.roof))pitched({...spec,rect:spec.roofRect??spec.rect});
   for(const z of (name.startsWith('Rear ')&&spec.roof==='gable'?[]:[z0,z1])){const endX=name==='North tower range'&&z===z0?156.9:x1;detail(dark,(x0+endX)/2,h+.05,z,endX-x0+.3,.13,.14);}
  }
@@ -481,6 +482,7 @@ export function createTowerBuildings(THREE,exterior){
  // Shared trim batches retain per-detail ownership so no fixed range moves.
  const movePoint=(point,key)=>{const move=SERVICE_COURT_MOVES[key];if(move){point.x+=move.x;point.z+=move.z;}return point;};
  for(const {object,placement:key} of movingMeshes)movePoint(object.position,key);
+ mitreRightAngleWalls(THREE,group.children.filter(o=>o.isMesh&&/parapet|stepped coping|(?:north|south|east|west) coping/.test(o.name)));
  for(const point of [...openings,...dormers]){movePoint(point,point.placement);delete point.placement;}
  movePoint(roundWindow,'purple');
  for(const window of group.userData.pharmacy.windows)movePoint(window,'purple');

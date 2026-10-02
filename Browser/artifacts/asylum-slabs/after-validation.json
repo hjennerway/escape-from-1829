@@ -1,0 +1,197 @@
+{
+  "renders": [
+    {
+      "stair": "S1",
+      "lower": 2,
+      "upper": 0,
+      "name": "ascending",
+      "calls": 167,
+      "triangles": 106350
+    },
+    {
+      "stair": "S1",
+      "lower": 2,
+      "upper": 0,
+      "name": "across-edge",
+      "calls": 97,
+      "triangles": 95206
+    },
+    {
+      "stair": "S1",
+      "lower": 2,
+      "upper": 0,
+      "name": "descending",
+      "calls": 79,
+      "triangles": 95170
+    },
+    {
+      "stair": "S1",
+      "lower": 2,
+      "upper": 0,
+      "name": "under-landing",
+      "calls": 49,
+      "triangles": 95252
+    },
+    {
+      "stair": "S1",
+      "lower": 0,
+      "upper": 1,
+      "name": "ascending",
+      "calls": 162,
+      "triangles": 106340
+    },
+    {
+      "stair": "S1",
+      "lower": 0,
+      "upper": 1,
+      "name": "across-edge",
+      "calls": 97,
+      "triangles": 95206
+    },
+    {
+      "stair": "S1",
+      "lower": 0,
+      "upper": 1,
+      "name": "descending",
+      "calls": 88,
+      "triangles": 95188
+    },
+    {
+      "stair": "S1",
+      "lower": 0,
+      "upper": 1,
+      "name": "under-landing",
+      "calls": 47,
+      "triangles": 95248
+    },
+    {
+      "stair": "S3",
+      "lower": 0,
+      "upper": 1,
+      "name": "ascending",
+      "calls": 41,
+      "triangles": 91176
+    },
+    {
+      "stair": "S3",
+      "lower": 0,
+      "upper": 1,
+      "name": "across-edge",
+      "calls": 173,
+      "triangles": 102444
+    },
+    {
+      "stair": "S3",
+      "lower": 0,
+      "upper": 1,
+      "name": "descending",
+      "calls": 102,
+      "triangles": 95358
+    },
+    {
+      "stair": "S3",
+      "lower": 0,
+      "upper": 1,
+      "name": "under-landing",
+      "calls": 41,
+      "triangles": 91176
+    },
+    {
+      "stair": "S4",
+      "lower": 0,
+      "upper": 1,
+      "name": "ascending",
+      "calls": 31,
+      "triangles": 83476
+    },
+    {
+      "stair": "S4",
+      "lower": 0,
+      "upper": 1,
+      "name": "across-edge",
+      "calls": 33,
+      "triangles": 83480
+    },
+    {
+      "stair": "S4",
+      "lower": 0,
+      "upper": 1,
+      "name": "descending",
+      "calls": 244,
+      "triangles": 106504
+    },
+    {
+      "stair": "S4",
+      "lower": 0,
+      "upper": 1,
+      "name": "under-landing",
+      "calls": 33,
+      "triangles": 85576
+    },
+    {
+      "stair": "S5",
+      "lower": 2,
+      "upper": 0,
+      "name": "ascending",
+      "calls": 165,
+      "triangles": 106346
+    },
+    {
+      "stair": "S5",
+      "lower": 2,
+      "upper": 0,
+      "name": "across-edge",
+      "calls": 195,
+      "triangles": 106406
+    },
+    {
+      "stair": "S5",
+      "lower": 2,
+      "upper": 0,
+      "name": "descending",
+      "calls": 70,
+      "triangles": 95152
+    },
+    {
+      "stair": "S5",
+      "lower": 2,
+      "upper": 0,
+      "name": "under-landing",
+      "calls": 51,
+      "triangles": 95256
+    },
+    {
+      "stair": "S5",
+      "lower": 0,
+      "upper": 1,
+      "name": "ascending",
+      "calls": 159,
+      "triangles": 106266
+    },
+    {
+      "stair": "S5",
+      "lower": 0,
+      "upper": 1,
+      "name": "across-edge",
+      "calls": 194,
+      "triangles": 106404
+    },
+    {
+      "stair": "S5",
+      "lower": 0,
+      "upper": 1,
+      "name": "descending",
+      "calls": 74,
+      "triangles": 95160
+    },
+    {
+      "stair": "S5",
+      "lower": 0,
+      "upper": 1,
+      "name": "under-landing",
+      "calls": 45,
+      "triangles": 95244
+    }
+  ],
+  "errors": []
+}

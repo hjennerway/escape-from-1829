@@ -1,5 +1,6 @@
 // laundry/img1.jpg supplies the elevations; img1-loc.png supplies the blue
 // block and green link footprints. Dimensions and concealed faces are estimates.
+import {mitreRightAngleWalls} from './wall-mitres.mjs';
 export const LAUNDRY=Object.freeze({
   minX:102,maxX:116.6,minZ:28,maxZ:56.8,eaves:4.35,rise:2.05,
   linkMinX:102,linkMaxX:108.6,linkHeight:3.25,layout:'historic'
@@ -90,8 +91,10 @@ export function createLaundry(THREE,{brick,roof,worldUV,material,adminCorridor})
   const lx=(b.linkMinX+b.linkMaxX)/2,lz=(linkBack+linkFront)/2,lw=b.linkMaxX-b.linkMinX,ld=linkFront-linkBack;
   solid(linkBrick,lx,b.linkHeight/2,lz,lw,b.linkHeight,ld,'Laundry connecting corridor brick walls');
   solid(felt,lx,b.linkHeight+.085,lz,lw+.16,.17,ld+.08,'Laundry corridor flat roof');
-  for(const x of [b.linkMinX-.04,b.linkMaxX+.04])box(coping,x,b.linkHeight+.19,lz,.18,.09,ld);
-  for(const z of [linkBack,linkFront])box(coping,lx,b.linkHeight+.19,z,lw+.18,.09,.18);
+  const linkCoping=[];
+  for(const x of [b.linkMinX-.04,b.linkMaxX+.04])linkCoping.push(solid(coping,x,b.linkHeight+.19,lz,.18,.09,ld,'Laundry corridor side coping'));
+  for(const z of [linkBack,linkFront])linkCoping.push(solid(coping,lx,b.linkHeight+.19,z,lw+.08,.09,.18,'Laundry corridor end coping'));
+  mitreRightAngleWalls(THREE,linkCoping);
   for(const z of [linkFront-2.3,linkFront-6.1])window(b.linkMinX-.035,z,-Math.PI/2,1.02,.94,2.39,'Laundry corridor window');
   box(gutter,b.linkMinX-.14,1.55,linkFront-.4,.07,3.1,.07);
   const dummy=new THREE.Object3D();

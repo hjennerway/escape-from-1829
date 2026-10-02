@@ -6,13 +6,13 @@ import {buildAsylumArchitecture} from './dist/asylum-architecture.mjs';
 import {routeBetweenFloors} from './dist/floors.mjs';
 
 const plan=JSON.parse(await readFile(new URL('./dist/asylum-plan.json',import.meta.url))),floors=buildAsylumLayout(plan).floors;
-assert.deepEqual(plan.stairs.find(s=>s.id==='S1').connections,[[2,0],[0,1]],'Reception must reach the basement');
+assert.deepEqual(plan.stairs.find(s=>s.id==='S1').connections,[[2,0],[0,1],[1,3]],'Reception connects basement through second floor');
 const scene=new THREE.Scene();
 for(const floor of floors){const group=new THREE.Group();buildAsylumArchitecture(THREE,group,floor);group.position.y=floor.elevation;scene.add(group);}
 scene.updateMatrixWorld(true);
 const ray=new THREE.Raycaster(),solids=[],rails=[];
 scene.traverse(m=>{if(['Asylum floor','Asylum ceiling','Asylum Stone','Asylum Carpet'].includes(m.name))solids.push(m);if(m.name==='Asylum Handrails')rails.push(m);});
-function cast(meshes,x,y,z,dy){ray.set(new THREE.Vector3(x,y,z),new THREE.Vector3(0,dy,0));ray.far=8;return ray.intersectObjects(meshes,false);}
+function cast(meshes,x,y,z,dy){ray.set(new THREE.Vector3(x,y,z),new THREE.Vector3(0,dy,0));ray.far=20;return ray.intersectObjects(meshes,false);}
 let supports=0,guards=0;
 for(const stair of plan.stairs){
  const [[x0,z0],[x1],,[,z1]]=stair.points;

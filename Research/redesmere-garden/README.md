@@ -40,3 +40,18 @@ These construction-time changes affect the shared browser source used by
 aerial, Explore and gameplay. The local aerial asset is rebuilt separately;
 Unity and Blender exports are unchanged. Before/after and compiled visual
 checks use Browser/artifacts/garden-cleanup-*.
+
+## Low-range eaves closure — 2 October 2026
+
+The owner's walking screenshot identifies the open strip beneath the slate
+roof of the ivy-fronted range beside the round chimney. The screenshot is
+location evidence for that repair, not a change to the building's roof form.
+The existing cornice in `Browser/dist/redesmere-passage.mjs` now closes the
+full 0.4-unit overhang and reaches the roof's eave plane at y=4.67, overlapping
+the wall below. Both slate hips, the wall footprint, ivy, gutter and chimney
+retain their geometry. This supersedes earlier exact preservation of this
+one trim piece during the Main/admin connector work.
+
+The change is shared by the browser game, Explore and aerial scene. The local
+aerial model was rebuilt; Unity and Blender exports were not regenerated.
+Walking-height and overhead evidence is in `Browser/artifacts/redesmere-eaves/`.

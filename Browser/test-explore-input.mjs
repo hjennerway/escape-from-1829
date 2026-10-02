@@ -47,3 +47,11 @@ assert(!input.active);assert.equal(walker.keys.size,0);document.hidden=false;
 canvas.send('pointerdown',{pointerType:'mouse'});document.send('keydown',{code:'KeyW'});walker.update(.1);
 assert(input.active&&walker.keys.has('KeyW'),'desktop drag and keyboard movement still work');
 console.log('PASS: touch movement, simultaneous look, normalized diagonals, pointer identity/cancellation/capture loss, keyboard coexistence and pause cleanup.');
+walker.reset();
+assert(document.send('keydown',{code:'Space'}).defaultPrevented,'Active Space prevents page scrolling');
+walker.update(.1);assert(camera.position.y>1.8,'Space starts a jump');
+for(let i=0;i<100;i++){document.send('keydown',{code:'Space',repeat:true});walker.update(1/60);}
+assert.equal(camera.position.y,1.8,'Holding Space does not bounce on landing');
+document.send('keyup',{code:'Space'});document.send('keydown',{code:'Space'});walker.update(.1);assert(camera.position.y>1.8,'A fresh press jumps again');
+window.send('blur');walker.reset();document.send('keydown',{code:'Space'});walker.update(.1);assert.equal(camera.position.y,1.8,'Inactive Space cannot jump');
+console.log('PASS: Space jumps once per press, prevents scrolling only during play, and stays inactive after blur.');

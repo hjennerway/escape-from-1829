@@ -63,7 +63,9 @@ export function addWestWingPhotoDetails(THREE,{model,worldUV,white,brick,roof,st
     glazing(x,6.35,-35.78,Math.PI,3.8,2.5,9);
   }
   for(const x of [24.55,28.88,33.12,37.45])box(cream,x,4.05,-35.85,.2,8,.22);
-  box(cream,37.62,4.2,-33,.16,8.1,5);
+  // The gallery foundation closes the lower return in brick up to y=0.3.
+  // Start the cream backing there so its end cannot share that exposed face.
+  box(cream,37.62,4.275,-33,.16,7.95,5);
   mesh(worldUV(new THREE.BoxGeometry(.12,3.35,4.65),1.7),infill,37.76,1.95,-33,true);
   glazing(37.78,6.35,-33,Math.PI/2,4.55,2.5,10);
   function glazing(x,y,z,rotation,w,h,lights){

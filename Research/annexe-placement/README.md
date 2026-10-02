@@ -1,5 +1,16 @@
 # Annexe alignment from the marked OS map
 
+## Fire-door support correction — 2 October 2026
+
+The estate-wide exterior-door audit found both tower fire doors below their
+existing landings. Their local sill now meets the landing top at y=5.125,
+with the same 2.8-unit leaf height. A 0.04-unit outward adjustment clears the
+brick band. Each existing blue landing extends to x=-32.2..-29.1 and
+z=-3.6..0.8 before reflection, joining the door continuously to the existing
+top tread. Building placement and the stair flights retain their positions.
+Dimensions remain model estimates. Geometry tests sample the complete deck
+connection and exposed door face; browser views verify both details.
+
 The supplied 322 × 385 extract identifies the annexe in green, church in red,
 Churton in blue and Grafton/Edge in yellow. The purple line identifies the
 central front section, as confirmed by the second supplied screenshot. The

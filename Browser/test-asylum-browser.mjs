@@ -15,7 +15,7 @@ try{
 window.asylumTest={get ready(){return ready;},get state(){return state;},get floors(){return floors;},get scene(){return scene;},get renderer(){return renderer;},get camera(){return camera;},get outsideWalker(){return outsideWalker;},get enemies(){return enemies;},player,keys,start,showFloor,update,drawMap,outsideDoor,useDoor,get arrival(){return arrivalCutscene;},pose(x,z,floor,angle=0,tilt=0){Object.assign(player,{x,z,floor,y:floors[floor].elevation,stair:null,outside:false});scene.add(torch,torchTarget);showFloor();yaw=angle;pitch=tilt;camera.position.set(x,player.y+1.65,z);camera.rotation.set(pitch,yaw,0);state='paused';$('arrivalFade').hidden=true;$('result').hidden=true;$('hud').hidden=false;$('interact').hidden=true;drawMap();},play(){state='play';elapsed=0;keys.clear();},pause(){state='paused';},move(dx,dz){moveAsylumActor(floors,player,dx,dz);showFloor();camera.position.set(player.x,player.y+1.65,player.z);drawMap();},get routes(){return routeBetweenFloors;},setTime(v){elapsed=v;}};` }));
  await page.goto(`http://127.0.0.1:${port}`);
  await page.waitForFunction(()=>window.asylumTest?.ready,null,{timeout:120000});
- assert.equal(await page.evaluate(()=>window.asylumTest.floors.length),3);
+ assert.equal(await page.evaluate(()=>window.asylumTest.floors.length),4);
  await page.evaluate(()=>{const t=window.asylumTest;t.start();t.arrival.update(3);t.pause();});
  const views=[['reception',0,14,0,0,0],['rear-corridor',-20.5,8.2,0,Math.PI/2,0],['ground-room',-20.5,13.3,0,0,0],['first-floor',-20.5,8.2,1,-Math.PI/2,0],['basement-corridor',-31.1,-7,2,0,0],['basement-room',-34.65,-23.5,2,0,0],['new-stair',-33.05,7.4,0,Math.PI,-.2]];
  const renders=[];
@@ -43,5 +43,5 @@ window.asylumTest={get ready(){return ready;},get state(){return state;},get flo
  await page.setViewportSize({width:390,height:844});await page.evaluate(()=>{const t=window.asylumTest;t.pose(-31.1,-7,2);document.getElementById('floorMap').hidden=false;t.drawMap();});await page.waitForTimeout(250);await page.screenshot({path:new URL('basement-mobile.png',destination).pathname.replace(/^\/(\w:)/,'$1')});
  assert.deepEqual(errors,[]);
  await writeFile(new URL('validation.json',destination),JSON.stringify({doors:doors.length,staircase,landing,renders,errors},null,2)+'\n');
- console.log(`PASS: actual three-floor game, ${doors.length} E door round trips with release latch, walked basement/ground/first stair, raised outside landing, desktop/mobile renders, no runtime errors.`);
+ console.log(`PASS: actual four-floor game, ${doors.length} E door round trips with release latch, walked basement/ground/first stair, raised outside landing, desktop/mobile renders, no runtime errors.`);
 }finally{await browser.close();server.kill();}

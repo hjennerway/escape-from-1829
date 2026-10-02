@@ -1,0 +1,35 @@
+{
+  "doors": 109,
+  "states": [
+    {
+      "year": 1829,
+      "checked": 11,
+      "issues": []
+    },
+    {
+      "year": 1849,
+      "checked": 26,
+      "issues": []
+    },
+    {
+      "year": 1870,
+      "checked": 33,
+      "issues": []
+    },
+    {
+      "year": 1916,
+      "checked": 109,
+      "issues": []
+    },
+    {
+      "year": 1938,
+      "checked": 109,
+      "issues": []
+    },
+    {
+      "year": 2021,
+      "checked": 37,
+      "issues": []
+    }
+  ]
+}

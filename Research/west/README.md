@@ -323,3 +323,24 @@ The focused exterior check now samples 120 wall positions across four period
 transitions and rejects coincident gravel faces. Browser source and the local
 compiled exterior were updated; Unity, Blender and packaged exports were not
 regenerated. Before/after views and validation use Browser/artifacts/basement-windows/.
+
+## Gallery lower brick return (2 October 2026)
+
+The owner's yellow-circled screenshot identifies the short lower return where
+the glazed gallery meets the west wing, beside the first basement sash. The
+separate foundation strips left this corner open, exposing pale backing and
+a gravel contact face coincident with the gallery end at z=-30.5.
+
+A matching gallery-brick return now spans x=-37.85..-37.39 and
+z=-30.62..-30.5, from below the passage floor to y=0.3. It replaces the last
+0.12 of the side foundation; the cream backing begins at its top. The paving
+boundary's hidden crosswise step moves to z=-30.7, inside the masonry. The
+cream gallery framing above, sash, door and passage retain their positions.
+Dimensions close the existing model join rather than establishing new survey
+measurements. Browser source and the local compiled aerial model are updated;
+Unity, Blender and packaged applications are not regenerated. Before/after
+and compiled comparison views are in Browser/artifacts/gallery-brick/.
+
+Reference: [owner's yellow-circled view](gallery-lower-return-marked.png).
+The full browser suite, rebuilt compiled/source comparison, timeline checks
+and focused wall/walking checks pass; see the development notes for evidence.

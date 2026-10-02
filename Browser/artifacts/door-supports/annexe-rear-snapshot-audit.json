@@ -1,0 +1,39 @@
+{
+  "changedDoors": 2,
+  "oldCentre": 3.6,
+  "newCentre": 6.525,
+  "report": [
+    {
+      "path": "annexe-kitchen/side-alignment-before.json",
+      "key": "snapshot",
+      "before": {
+        "fixed": {
+          "count": 18747,
+          "hash": "89aa0fc5f613d4ffc731f617b0261214048249333af9a8c490ede30acd5a3cae"
+        },
+        "head": {
+          "count": 1218,
+          "hash": "31f5914aefeb108337163a0b4123602b5b79d13d3a5dca697e57a67b87486e1b"
+        },
+        "west": {
+          "count": 1482,
+          "hash": "e538767ded7a507dc4239bcc2a170ed4f1f86a3e5089a15b59157833d5268aca"
+        }
+      },
+      "after": {
+        "fixed": {
+          "count": 18747,
+          "hash": "8364e4fa9f8520d679fc757a326687b30556510808fee816ee4e3144038fa429"
+        },
+        "head": {
+          "count": 1218,
+          "hash": "31f5914aefeb108337163a0b4123602b5b79d13d3a5dca697e57a67b87486e1b"
+        },
+        "west": {
+          "count": 1482,
+          "hash": "e538767ded7a507dc4239bcc2a170ed4f1f86a3e5089a15b59157833d5268aca"
+        }
+      }
+    }
+  ]
+}

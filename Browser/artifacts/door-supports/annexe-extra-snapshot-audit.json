@@ -1,0 +1,116 @@
+{
+  "changedDoors": 2,
+  "changedLandings": 2,
+  "oldCentre": 3.6,
+  "newCentre": 6.525,
+  "report": [
+    {
+      "path": "larkton-jodrell/recess-protected-before.json",
+      "key": "outside",
+      "before": {
+        "count": 18061,
+        "sha256": "90be88e83c12d92d4dfc4a015cf5a65b3023b3e7f7ce3ee9ee4c529a237b54ca",
+        "root": [
+          -0.3967056614036031,
+          0,
+          0.38210634411159655,
+          0,
+          0,
+          0.9,
+          0,
+          0,
+          -0.38210634411159655,
+          0,
+          -0.3967056614036031,
+          0,
+          364.7804974623198,
+          0,
+          -9.106516776244462,
+          1
+        ]
+      },
+      "after": {
+        "count": 18061,
+        "sha256": "e18e4f15db91ebd4aef850a91a0fe8b6ab324447579b810ccf4c85d158fd974c",
+        "root": [
+          -0.3967056614036031,
+          0,
+          0.38210634411159655,
+          0,
+          0,
+          0.9,
+          0,
+          0,
+          -0.38210634411159655,
+          0,
+          -0.3967056614036031,
+          0,
+          364.7804974623198,
+          0,
+          -9.106516776244462,
+          1
+        ]
+      }
+    },
+    {
+      "path": "larkton-jodrell/recess-protected-before.json",
+      "key": "retained",
+      "before": {
+        "count": 20848,
+        "sha256": "8402870eb5b209881f773d0b26e5aec94d825d6fe5aff68eab21d915dbf20b3e"
+      },
+      "after": {
+        "count": 20848,
+        "sha256": "0946e5775569b9e11e56f820e2e611863f227cdd513b2ac0f0eba13cc8b2e2e6"
+      }
+    },
+    {
+      "path": "oakmere/court-protected-before.json",
+      "key": null,
+      "before": {
+        "count": 20942,
+        "sha256": "d59a0d6a0b7d262879eb37397aa5f7a378273608ee0b3baf3f65a7fb30ba56bb"
+      },
+      "after": {
+        "count": 20942,
+        "sha256": "475739fe9efd730f344b009471853c8e129dd776b69c224a2aecbd59cd715fa0"
+      }
+    },
+    {
+      "path": "oakmere/window-protected-geometry.json",
+      "key": null,
+      "before": {
+        "primitives": 20850,
+        "sha256": "e6c5b839f558b66eb30b493b1add1cd24a7d2ef337fc1d4370189eabd959a99e"
+      },
+      "after": {
+        "primitives": 20850,
+        "sha256": "6c08110b3d43fb8a64a1b179850e7be0b1d5f3bf0949dc2d97267930916df5e0"
+      }
+    },
+    {
+      "path": "annexe-frontage-adjustment/entrance-alignment-before.json",
+      "key": "protectedGeometry",
+      "before": {
+        "primitives": 20721,
+        "sha256": "557d55333887d6c7f51f5fabbbb138f8c7d4c61a146f371286c9c90ef19c8924"
+      },
+      "after": {
+        "primitives": 20721,
+        "sha256": "6d3ddcc25267d8b2da276fc88995a5089af839cebe9deec130ed87031efb45af"
+      }
+    },
+    {
+      "path": "oakmere/west-protected-geometry.json",
+      "key": null,
+      "before": {
+        "primitives": 20354,
+        "sha256": "ab742ffea87645f9c8d7a44eaef9d9aafa71e488d9f64dc5fbf4dbea2d57aad9"
+      },
+      "after": {
+        "primitives": 20354,
+        "sha256": "c70c6cf2a55d4e616ace1fdbafd2539087d290ec765cdf4d7324839913c433e7"
+      }
+    }
+  ]
+}

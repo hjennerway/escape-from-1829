@@ -1,0 +1,139 @@
+{
+  "changedDoors": 2,
+  "oldCentre": 3.6,
+  "newCentre": 6.525,
+  "report": [
+    {
+      "path": "carden-picton/outward-protected-geometry.json",
+      "key": null,
+      "before": {
+        "primitives": 19581,
+        "sha256": "11f41b66c344396bedfcc9b24b00d74645aabe438bf12cfa456a2bf9698c5853",
+        "root": [
+          -0.3967056614036031,
+          0,
+          0.38210634411159655,
+          0,
+          0,
+          0.9,
+          0,
+          0,
+          -0.38210634411159655,
+          0,
+          -0.3967056614036031,
+          0,
+          364.7804974623198,
+          0,
+          -9.106516776244462,
+          1
+        ]
+      },
+      "after": {
+        "primitives": 19581,
+        "sha256": "1665cf2b2b7884fb21c1412783b2401b479df60c6b2be51b52f52aedb271b425",
+        "root": [
+          -0.3967056614036031,
+          0,
+          0.38210634411159655,
+          0,
+          0,
+          0.9,
+          0,
+          0,
+          -0.38210634411159655,
+          0,
+          -0.3967056614036031,
+          0,
+          364.7804974623198,
+          0,
+          -9.106516776244462,
+          1
+        ]
+      }
+    },
+    {
+      "path": "carden-picton/height-extension-before.json",
+      "key": "protected",
+      "before": {
+        "primitives": 19584,
+        "sha256": "a068b1f8f15568666e489186c2edd27ce5023ff52c3cb1a92c7b46b6ae000110"
+      },
+      "after": {
+        "primitives": 19584,
+        "sha256": "96f7191c20a76fed8f8b574e942625b7589846a036beb59e790c88a79d90f19f"
+      }
+    },
+    {
+      "path": "annexe-frontage-adjustment/front-link-before.json",
+      "key": null,
+      "before": {
+        "primitives": 20399,
+        "sha256": "fb9be05c00d572c0238a8d282a87658976fc02fc14171ebcae0c9cdffba0b544"
+      },
+      "after": {
+        "primitives": 20399,
+        "sha256": "7042a55accd5dffdbd94ed1f4604a17f07c37a7d9b441b05dc3b8d188fbbf298"
+      }
+    },
+    {
+      "path": "annexe-kitchen/protected-geometry.json",
+      "key": null,
+      "before": {
+        "primitives": 20572,
+        "sha256": "1417c3cd3fb19399958cfe6b638fb3ff80989ddebe6802dcb4c15c454cc433ec"
+      },
+      "after": {
+        "primitives": 20572,
+        "sha256": "507ea0a4c86d347635fadaa8188cec4e688daa52cc2ebe14c91fc3e3ad02b094"
+      }
+    },
+    {
+      "path": "annexe-east-outer/protected-before.json",
+      "key": null,
+      "before": {
+        "primitives": 2516,
+        "sha256": "7124a10e7ab93fffbd6f07d6f71e34104c6af8d6c7c75b689d33e35ea42dc66b"
+      },
+      "after": {
+        "primitives": 2516,
+        "sha256": "7124a10e7ab93fffbd6f07d6f71e34104c6af8d6c7c75b689d33e35ea42dc66b"
+      }
+    },
+    {
+      "path": "annexe-kitchen/rear-stretch-before.json",
+      "key": "front",
+      "before": {
+        "primitives": 15847,
+        "sha256": "8090fd5d450b49814dd75c566e010955d7f1abbeceacbe12e25221da83bc4027"
+      },
+      "after": {
+        "primitives": 15847,
+        "sha256": "488c5995a8e663614131cc01af832c2fc72f3313f77eb1067bdce912cecc7e63"
+      }
+    },
+    {
+      "path": "annexe-photo-placement/protected-front-local.json",
+      "key": null,
+      "before": {
+        "count": 1761,
+        "digest": "1c1f9f62c1ce2bc10895259703a94ca79493f66da2b5b769ea95c9c06d528a25"
+      },
+      "after": {
+        "count": 1761,
+        "digest": "1a4772bc39be521eccc5823b4ddec6fe248003c030df7847d223f8aec8780983"
+      }
+    },
+    {
+      "path": "annexe-photo-placement/approved-shape.json",
+      "key": null,
+      "before": {
+        "count": 21647,
+        "digest": "c7c0f4d3e3537c11b1984326d166c9dea19d8edf89c08a3dbbb855cef2a27fb2"
+      },
+      "after": {
+        "count": 21647,
+        "digest": "8915d17e2016ff8801a210a4ca7b8502b882b7febf521adfad1f9cdfe77f69aa"
+      }
+    }
+  ]
+}

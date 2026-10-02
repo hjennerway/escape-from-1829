@@ -15,18 +15,23 @@ export function createInteriorMaterials(THREE, document) {
     for(let i=0;i<pixels.data.length;i+=4){const noise=(random()-.5)*amount;for(let k=0;k<3;k++)pixels.data[i+k]+=noise;}
     g.putImageData(pixels,0,0);
   }
-  function stains(g,n,count,strength){
+  const offsets=n=>n?[-n,0,n]:[0];
+  function stains(g,n,count,strength,wrap=false){
     for(let i=0;i<count;i++){
       const x=random()*n,y=random()*n,r=15+random()*n*.14;
-      const gradient=g.createRadialGradient(x,y,0,x,y,r);
-      gradient.addColorStop(0,`rgba(66,53,39,${strength})`);gradient.addColorStop(1,'rgba(66,53,39,0)');
-      g.fillStyle=gradient;g.fillRect(x-r,y-r,r*2,r*2);
+      for(const dx of offsets(wrap?n:0))for(const dy of offsets(wrap?n:0)){
+        const gradient=g.createRadialGradient(x+dx,y+dy,0,x+dx,y+dy,r);
+        gradient.addColorStop(0,`rgba(66,53,39,${strength})`);gradient.addColorStop(1,'rgba(66,53,39,0)');
+        g.fillStyle=gradient;g.fillRect(x+dx-r,y+dy-r,r*2,r*2);
+      }
     }
   }
-  function flake(g,x,y,r,color){
-    g.fillStyle=color;g.beginPath();
-    for(let i=0;i<18;i++){const a=i/18*Math.PI*2,rad=r*(.55+random()*.45);const px=x+Math.cos(a)*rad,py=y+Math.sin(a)*rad*.65;i?g.lineTo(px,py):g.moveTo(px,py);}
-    g.closePath();g.fill();
+  function flake(g,x,y,r,color,period=0){
+    const points=Array.from({length:18},(_,i)=>{const a=i/18*Math.PI*2,rad=r*(.55+random()*.45);return [x+Math.cos(a)*rad,y+Math.sin(a)*rad*.65];});
+    g.fillStyle=color;
+    for(const dx of offsets(period))for(const dy of offsets(period)){
+      g.beginPath();points.forEach(([px,py],i)=>i?g.lineTo(px+dx,py+dy):g.moveTo(px+dx,py+dy));g.closePath();g.fill();
+    }
   }
   const brick=painted=>canvasTexture((g,n)=>{
     g.fillStyle=painted?'#b9b3a3':'#a39b8e';g.fillRect(0,0,n,n);
@@ -51,15 +56,20 @@ export function createInteriorMaterials(THREE, document) {
     grain(g,n,painted?10:20);
   });
   const ceiling=canvasTexture((g,n)=>{
-    g.fillStyle='#cbc8bc';g.fillRect(0,0,n,n);stains(g,n,70,.09);
+    // Wrap entire marks, including their irregular outlines, over every edge.
+    // Drawing fresh random shapes at the opposite edge would still leave seams.
+    g.fillStyle='#cbc8bc';g.fillRect(0,0,n,n);stains(g,n,70,.055,true);
     for(let i=0;i<16;i++){
       const x=random()*n,y=random()*n,r=20+random()*100;
-      flake(g,x,y,r,'#a39c8d');flake(g,x-2,y-3,r*.95,'#b8b0a0');
+      flake(g,x,y,r,'#aea99b',n);flake(g,x-2,y-3,r*.95,'#c0baac',n);
     }
-    g.strokeStyle='#969184';g.lineWidth=1;
+    g.strokeStyle='#b3ae9f';g.lineWidth=1;
     for(let i=0;i<7;i++){
-      let x=random()*n,y=random()*n;g.beginPath();g.moveTo(x,y);
-      for(let k=0;k<7;k++){x+=random()*30-10;y+=random()*35;g.lineTo(x,y);}g.stroke();
+      let x=random()*n,y=random()*n;const points=[[x,y]];
+      for(let k=0;k<7;k++){x+=random()*30-10;y+=random()*35;points.push([x,y]);}
+      for(const dx of offsets(n))for(const dy of offsets(n)){
+        g.beginPath();points.forEach(([px,py],i)=>i?g.lineTo(px+dx,py+dy):g.moveTo(px+dx,py+dy));g.stroke();
+      }
     }
     grain(g,n,9);
   });
@@ -94,7 +104,7 @@ export function createInteriorMaterials(THREE, document) {
     }
     grain(g,n,7);
   },512);
-  function material(color,map,tileSize,extra={}){
+  function material(color,map,tileSize,extra={},varied=false){
     const m=new THREE.MeshStandardMaterial({color,roughness:.94,...(map?{map,bumpMap:map,bumpScale:.018}:{}),...extra});
     if(!map)return m;
     // Project in building coordinates so scaled instances keep brick/slab size,
@@ -117,16 +127,28 @@ export function createInteriorMaterials(THREE, document) {
           vec2 p=n.y>.5?vFinishPosition.xz:(n.x>.5?vFinishPosition.zy:vFinishPosition.xy);
           return p/${tileSize.toFixed(3)};
         }\n`+shader.fragmentShader;
-      shader.fragmentShader=shader.fragmentShader.replace('#include <map_fragment>',THREE.ShaderChunk.map_fragment.replaceAll('vMapUv','finishUv()'));
-      shader.fragmentShader=shader.fragmentShader.replace('#include <bumpmap_pars_fragment>',THREE.ShaderChunk.bumpmap_pars_fragment.replaceAll('vBumpMapUv','finishUv()'));
+      if(varied)shader.fragmentShader=`
+        // Two continuous projections have different scales and directions, so
+        // the five-unit source patch never reappears as a regular ceiling grid.
+        vec4 sampleCeiling(sampler2D finishMap,vec2 uv){
+          vec2 turned=mat2(.8,-.6,.6,.8)*uv*.731+vec2(.37,.61);
+          return mix(texture2D(finishMap,uv),texture2D(finishMap,turned),.45);
+        }\n`+shader.fragmentShader;
+      const project=(chunk,uv)=>{
+        const projected=chunk.replaceAll(uv,'finishUv()');
+        return varied?projected.replaceAll('texture2D(', 'sampleCeiling('):projected;
+      };
+      shader.fragmentShader=shader.fragmentShader.replace('#include <map_fragment>',project(THREE.ShaderChunk.map_fragment,'vMapUv'));
+      shader.fragmentShader=shader.fragmentShader.replace('#include <bumpmap_pars_fragment>',project(THREE.ShaderChunk.bumpmap_pars_fragment,'vBumpMapUv'));
     };
-    m.customProgramCacheKey=()=>`interior-finish-${tileSize}`;
+    m.customProgramCacheKey=()=>`interior-finish-${tileSize}-${varied}`;
     return m;
   }
   return {
     Floor:material(0xffffff,floor,2.5),Stone:material(0xada596),
     Plaster:material(0xffffff,plasterMap,2),Brick:material(0xffffff,brickMap,2),
-    Ceiling:material(0xffffff,ceiling,5),Skirting:material(0x414745),
+    Ceiling:material(0xffffff,ceiling,5,{bumpScale:.009},true),Skirting:material(0x414745),
+    EntrancePaint:material(0x762c30,null,1,{roughness:.72}),EntranceInset:material(0x581c23,null,1,{roughness:.76}),EntranceFrame:material(0xd6d0ba),
     RedArch:material(0x894e40),BuffArch:material(0xc5b388),
     Mortar:material(0x9c9180),Sash:material(0x9b9b88),Iron:material(0x575e59),
     Recess:material(0x303b35),Glass:material(0x768783,null,1,{emissive:0x7c8c81,emissiveIntensity:.25}),

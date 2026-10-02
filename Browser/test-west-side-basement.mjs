@@ -100,6 +100,22 @@ for(const year of [1829,1849,2021,1829]){
   // Generated gravel skirts used to share x=-37 with the brick wall, creating
   // the reported flickering strip beneath the six long-wall basement sashes.
   e.model.updateMatrixWorld(true);const facade=[];e.model.traverseVisible(o=>{if(o.isMesh)facade.push(o);});
+  // The short return between the gallery and main-wing foundations is brick
+  // down to the passage. No cream backing or gravel skirt shares its face.
+  for(const x of [-37.81,-37.72,-37.65,-37.55])for(const y of [-.9,-.4,.07,.16,.21,.29]){
+    ray.set(new THREE.Vector3(x,y,-30),new THREE.Vector3(0,0,-1));ray.far=.7;
+    const hits=ray.intersectObjects(facade,false),hit=hits[0];
+    assert.equal(hit?.object.name,'West side basement gallery foundation return','The marked lower return is continuous brick');
+    assert.equal(hit.object.material.color.getHex(),0xc5a38d);
+    assert.equal(hit.object.material.map,group.getObjectByName('West side basement exposed foundation -35.7 -37.79').material.map);
+    assert(Math.abs(hit.point.z+30.5)<1e-5,'The brick closes the existing gallery end');
+    assert.equal(new Set(hits.filter(h=>Math.abs(h.distance-hit.distance)<1e-4).map(h=>h.object.uuid+':'+h.instanceId)).size,1,'Only one surface occupies the visible return');
+  }
+  ray.set(new THREE.Vector3(-38,.16,-30.56),new THREE.Vector3(1,0,0));ray.far=.3;
+  const returnSide=ray.intersectObjects(facade,false);
+  assert.equal(new Set(returnSide.map(h=>h.object.uuid+':'+h.instanceId)).size,1,'The return replaces the end of the foundation without overlapping its side');
+  ray.set(new THREE.Vector3(-37.65,.35,-30),new THREE.Vector3(0,0,-1));ray.far=.7;
+  assert.equal(ray.intersectObjects(facade,false)[0]?.object.material.color.getHex(),0xded7bb,'The gallery frame above the repaired foundation is retained');
   for(const z of [-28.7,-27.3,-26.1,-23.4,-20.7,-17.3,-13.8,-9.6,-6.9,-2.7])for(const y of [.07,.16,.21]){
     const x=z<-24.5?-37.5:-37;
     ray.set(new THREE.Vector3(x-.7,y,z),new THREE.Vector3(1,0,0));ray.far=.71;

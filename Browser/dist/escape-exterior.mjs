@@ -1,4 +1,5 @@
 import {addWillowTrees} from './willow-trees.mjs';
+import {prepareExteriorShadows} from './exterior-shadows.mjs';
 import {addSurvivingLampPosts} from './surviving-lamp-posts.mjs';
 import {matchEstateGrass} from './estate-grass.mjs';
 import {applyGroundSurface} from './ground-materials.mjs';
@@ -80,7 +81,10 @@ export function createEscapeExterior(THREE,aspect){
   // Move back along the same light ray: the previous near plane clipped the
   // western lawn crowns, so their enabled shadow casters never reached the map.
   sun.position.copy(sun.target.position).add(new THREE.Vector3(-85,120,60).multiplyScalar(3));scene.add(sun.target);sun.castShadow=true;
-  sun.shadow.mapSize.set(4096,4096);Object.assign(sun.shadow.camera,{left:-360,right:360,top:300,bottom:-300,near:1,far:850});sun.shadow.bias=-.0003;sun.shadow.normalBias=.25;scene.add(sun);
+  sun.shadow.mapSize.set(4096,4096);Object.assign(sun.shadow.camera,{left:-360,right:360,top:300,bottom:-300,near:1,far:850});
+  // Centimetre-scale offsets avoid acne without detaching shadows at masonry
+  // contacts. Both wall skins cast, so a large receiver offset is unnecessary.
+  sun.shadow.bias=-.00002;sun.shadow.normalBias=.02;scene.add(sun);
   sun.shadow.camera.updateProjectionMatrix();
   // Buildings and sunlight are fixed. Camera movement does not change this map.
   sun.shadow.autoUpdate=false;
@@ -318,6 +322,8 @@ export function createEscapeExterior(THREE,aspect){
   for(const side of [-1,1]){const beam=mesh(new THREE.BoxGeometry(8.2,.22,.4),cream,side*3.75,16.2,19.82);beam.rotation.z=-side*Math.atan2(3.1,7.5);}
   box(cream,0,14.65,19.8,15.3,.25,.5);
   addFrontSteps(THREE,{model,material});box(red,0,3.5,19.9,1.9,3.2,.2);
+  // Close the ten-centimetre sill above the portico landing.
+  box(stone,0,1.845,20.01,2.15,.11,.46);
   for(const x of [-.46,.46])for(const y of [2.45,3.45,4.45])box(material(0x581c23),x,y,20.02,.65,.72,.06);
   box(glass,0,5.55,19.96,1.9,.65,.12);
   for(const x of [-1.1,1.1])box(cream,x,3.9,20.03,.18,4.2,.23);
@@ -345,8 +351,8 @@ export function createEscapeExterior(THREE,aspect){
       // the generated vertical ground-contact face must not coincide with
       // the exposed brick below the basement sills.
       const shape=frontBasementShape(THREE,[[-39,-42.5],[-7,-42.5],[-7,2.5],[-39,2.5],
-        [-39,-1],[-36.8,-1],[-36.8,-24.5],[-37.3,-24.5],[-37.3,-30.5],
-        [-37.64,-30.5],[-37.64,-36],[-39,-36]]);
+        [-39,-1],[-36.8,-1],[-36.8,-24.5],[-37.3,-24.5],[-37.3,-30.7],
+        [-37.64,-30.7],[-37.64,-36],[-39,-36]]);
       const approach=mesh(new THREE.ShapeGeometry(shape),gravel,0,.23,0);
       approach.rotation.x=-Math.PI/2;approach.name='West rear approach beside basement';
     }
@@ -493,5 +499,6 @@ export function createEscapeExterior(THREE,aspect){
   model.traverse(object=>{for(const mat of (Array.isArray(object.material)?object.material:[object.material]))if(mat?.userData.estateGrass)lawnMaterials.add(mat);});
   for(const mat of lawnMaterials)matchEstateGrass(mat,grass);
   finishEstateMinerals(THREE,model);
+  prepareExteriorShadows(THREE,model,{exclude:[trees]});
   return {scene,camera,model,terrain,legacyAccess,mast,chapel,churchGrounds,waterTower,estateChimney,annexe,newHospital:annexe,churtonWard,uptonFrithOscroft,irbyAshley,graftonEdge,haleWard,bowlingGreen,estatesDepartment,farndonWard,witbyWard,mainAdmin,adminCorridor,laundry,garagesMortuary,greenhouses,outhouse,willows,trees,invalidateShadows};
 }

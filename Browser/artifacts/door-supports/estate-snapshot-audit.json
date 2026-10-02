@@ -1,0 +1,50 @@
+{
+  "old": {
+    "jarman": {
+      "primitives": 820061,
+      "sha256": "f267515427445101238677a2a97166e2a2fd13344a4c9a2a234a140acb25db34"
+    },
+    "leighton": {
+      "count": 884108,
+      "sha256": "cd1d08010eccd1aaa44bcbfae3aba3be8445f19ed4cc3289735f57b46b7cf476"
+    }
+  },
+  "updated": {
+    "jarman": {
+      "primitives": 820082,
+      "sha256": "fc9e9e93301bf0a9e6b68e2850cfea2fcc896c6fef2dee164fb293ebcac524b8"
+    },
+    "leighton": {
+      "count": 884129,
+      "sha256": "198a2a090e08ab944f561008923c42d49405f8597a8fd627b4df4c076a2d691f"
+    }
+  },
+  "expected": {
+    "jarman": {
+      "primitives": 820061,
+      "sha256": "f267515427445101238677a2a97166e2a2fd13344a4c9a2a234a140acb25db34"
+    },
+    "leighton": {
+      "count": 884108,
+      "sha256": "cd1d08010eccd1aaa44bcbfae3aba3be8445f19ed4cc3289735f57b46b7cf476"
+    }
+  },
+  "doorSourceChanges": [
+    "entrance-west-photo-detail.mjs",
+    "annexe.mjs",
+    "churton-ward.mjs",
+    "main-kitchen.mjs",
+    "garages-mortuary.mjs",
+    "escape-exterior.mjs"
+  ],
+  "concurrentWallJoinChanges": [
+    "front-basement.mjs",
+    "west-side-basement.mjs",
+    "front-steps.mjs",
+    "irby-ashley.mjs",
+    "main-admin-building.mjs",
+    "tower-buildings.mjs",
+    "laundry.mjs"
+  ],
+  "concurrentEavesChange": "redesmere-passage.mjs: one eaves-band instance"
+}

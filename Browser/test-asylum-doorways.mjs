@@ -21,6 +21,12 @@ for(const floor of floors){
    const x=end[0]+d.dx*sign*.12,z=end[1]+d.dz*sign*.12;
    for(const y of [.13,.55,1.65,3.2])for(const side of [-1,1]){
    ray.set(new THREE.Vector3(x-d.dz*side*.4,y,z+d.dx*side*.4),new THREE.Vector3(d.dz*side,0,-d.dx*side));ray.far=.8;
+   if(floor.walls.some(w=>segmentDistance(ray.ray.origin.x,ray.ray.origin.z,w.a,w.b)<.09)){
+    // This side starts inside the adjoining angled wall. Its hidden caps
+    // disappear when masonry is united; probe the solid junction from above.
+    ray.set(new THREE.Vector3(x,1.2,z),new THREE.Vector3(0,-1,0));ray.far=.2;
+    assert(ray.intersectObject(scene.getObjectByName('Asylum Brick'),false).length,`${partition.id} has solid masonry at its buried junction`);continue;
+   }
    assert(ray.intersectObjects(scene.children,false).length,`${partition.id} joins both existing walls at every height`);
    }
   }

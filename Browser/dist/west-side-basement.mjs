@@ -1,4 +1,5 @@
 import {FRONT_BASEMENT,frontBasementShape} from './front-basement.mjs';
+import {mitreRightAngleWalls} from './wall-mitres.mjs';
 
 // Owner's marked west-side view, 27 September 2026. Enter beside the glazed
 // rear end. The follow-up arrow turns the descent towards the wing (+X),
@@ -70,20 +71,25 @@ export function addWestSideBasement(THREE,{model,material,brick,worldUV}){
   }
   // Extend the exposed foundations down to the new floor without moving any
   // of the existing windows or upper walls. The lean-to closes the outer end.
-  for(const [x,z0,z1] of [[-37.79,entry,-30.5],[-37.45,-30.5,-24.5],[-36.95,-24.5,-1],[-39.05,-4.5,-1]])
+  for(const [x,z0,z1] of [[-37.79,entry,-30.62],[-37.45,-30.5,-24.5],[-36.95,-24.5,-1],[-39.05,-4.5,-1]])
     block('exposed foundation '+z0+' '+x,x===-37.79?galleryBrick:mainBrick,x,(z0+z1)/2,.12,z1-z0,level-.12,x===-37.79?.3:.02,true);
+  // Close the gallery's stepped end against the main foundation. Replace the
+  // final 0.12 of its side wall so no exposed faces overlap at this corner.
+  block('gallery foundation return',galleryBrick,-37.62,-30.56,.46,.12,level-.12,.3,true);
   block('foundation return',brick,-37.23,-24.46,.58,.1,level-.12,.02,true);
   block('end foundation',brick,-38,-.96,2,.12,level-.12,.02,true);
   // The right-hand edge rises only 32 cm above the courtyard. The stair mouth
   // stays open, and the wall meets the lean-to flank at the far end.
-  block('retaining wall',brick,outer-.1,(-33.7-4.5)/2,.2,29.2,level-.12,grade+.24,true);
-  block('retaining coping',stone,outer-.1,(-33.7-4.5)/2,.28,29.2,grade+.24,grade+.32);
-  for(const [name,z,left,right] of [['rear stair cheek',entry-.1,stairX,-37.84],['front stair cheek',entry+2.1,stairX,outer]]){
-    block(name,brick,(left+right)/2,z,right-left,.2,level-.12,grade+.24,true);
-    block(name+' coping',stone,(left+right)/2,z,right-left,.28,grade+.24,grade+.32);
+  const retaining=[],start=entry+2.1,end=-4.48,wallX=outer-.1;
+  retaining.push(block('retaining wall',brick,wallX,(start+end)/2,.2,end-start,level-.12,grade+.24,true));
+  retaining.push(block('retaining coping',stone,wallX,(start+end)/2,.28,end-start,grade+.24,grade+.32));
+  for(const [name,z,left,right] of [['rear stair cheek',entry-.1,stairX,-37.84],['front stair cheek',start,stairX,wallX]]){
+    retaining.push(block(name,brick,(left+right)/2,z,right-left,.2,level-.12,grade+.24,true));
+    retaining.push(block(name+' coping',stone,(left+right)/2,z,right-left,.28,grade+.24,grade+.32));
   }
-  block('retaining end return',brick,-39.44,-4.48,.92,.16,level-.12,grade+.24,true);
-  block('retaining end coping',stone,-39.44,-4.48,1,.24,grade+.24,grade+.32);
+  retaining.push(block('retaining end return',brick,(wallX-38.98)/2,end,-38.98-wallX,.16,level-.12,grade+.24,true));
+  retaining.push(block('retaining end coping',stone,(wallX-38.94)/2,end,-38.94-wallX,.24,grade+.24,grade+.32));
+  mitreRightAngleWalls(THREE,retaining);
   const doorX=-37.94,doorZ=entry+1,doorTop=level+2.35;
   block('end door',blue,doorX,doorZ,.12,1.28,level,doorTop,true);
   for(const z of [doorZ-.72,doorZ+.72])block('door jamb',white,doorX-.04,z,.16,.13,level,doorTop+.1);

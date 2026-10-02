@@ -1,0 +1,31 @@
+{
+  "sourceHash": "8bc6cf55f18673c50976d5c352d7ec142b075adaf034ff9c7fd11117b0761544",
+  "old": {
+    "jarman": {
+      "primitives": 820060,
+      "sha256": "39f1b03b7ac9277e4d20ca4a3c45142c4982683c03761c1a68aa10a3e6b763ae"
+    },
+    "leighton": {
+      "count": 884107,
+      "sha256": "218fd0a027bc7cfcf0fecfdf5c3df608e5156236a974ee00d5e09f90041299c4"
+    }
+  },
+  "updated": {
+    "jarman": {
+      "primitives": 820061,
+      "sha256": "f267515427445101238677a2a97166e2a2fd13344a4c9a2a234a140acb25db34"
+    },
+    "leighton": {
+      "count": 884108,
+      "sha256": "cd1d08010eccd1aaa44bcbfae3aba3be8445f19ed4cc3289735f57b46b7cf476"
+    }
+  },
+  "added": "gallery foundation return",
+  "changed": [
+    "West side basement exposed foundation -35.7 -37.79",
+    "West rear approach beside basement",
+    "one gallery cream backing instance"
+  ],
+  "pavingVerticesMoved": 2,
+  "allOtherPrimitivesExact": true
+}

@@ -1,5 +1,6 @@
 // 20260913_171036.jpg and the user's plan: approach from +Z, split along X,
 // then turn towards -Z onto the doorstep. Dimensions are visual estimates.
+import {mitreRightAngleWalls} from './wall-mitres.mjs';
 export const FRONT_STEPS_VIEW=Object.freeze({position:[8,6,36],target:[0,2.6,23],fov:48});
 
 export function addFrontSteps(THREE,{model,material}){
@@ -51,8 +52,9 @@ export function addFrontSteps(THREE,{model,material}){
     parapet(label+' approach parapet',[side*1.27,ground+rise+.65,27.4],[side*1.27,mid+.65,25.8],.34);
     parapet(label+' lateral parapet',[side*1.1,mid+.65,26],[side*2.7,top+.65,26],.4);
     slab(label+' outer return parapet',side*4.07,24.1,.34,3.8,top+.65);
-    slab(label+' turning parapet',side*3.3,26,1.2,.4,top+.65);
+    slab(label+' turning parapet',side*(2.7+4.07)/2,26,4.07-2.7,.4,top+.65);
   }
+  mitreRightAngleWalls(THREE,stairs.children.filter(o=>/outer return parapet|turning parapet/.test(o.name)));
   // Close the front edge of the raised doorstep; access is from either side.
   for(const y of [top+.12,top+.86])rail([-2.68,y,23.48],[2.68,y,23.48]);
   for(let i=0;i<=22;i++){const x=-2.68+i*5.36/22;rail([x,top,23.48],[x,top+.86,23.48]);}

@@ -1,0 +1,19 @@
+{
+  "views": 6,
+  "trip": {
+    "outside": true,
+    "latched": true,
+    "returned": true,
+    "position": [
+      31.54,
+      0.205,
+      16.5
+    ],
+    "expected": [
+      31.54,
+      0.205,
+      16.5
+    ]
+  },
+  "errors": []
+}

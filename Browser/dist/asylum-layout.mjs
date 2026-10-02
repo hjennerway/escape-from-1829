@@ -39,6 +39,7 @@ export function buildAsylumLayout(plan){
   floor.windows=rooms.flatMap(r=>(r.windows??[]).map(w=>({...w,roomId:r.id})));
   const roomDoors=rooms.filter(r=>r.doorSide).map(r=>{const b=bounds(r.points),vertical=['west','east'].includes(r.doorSide);return {roomId:r.id,x:vertical?(r.doorSide==='west'?b.minX:b.maxX):r.door,z:vertical?r.door:(r.doorSide==='north'?b.minZ:b.maxZ),dx:vertical?0:1,dz:vertical?1:0};});
   const outsideEdges=f.outline.loops.flatMap(edges),pieces=new Map();
+  floor.exitHeaders=[];
   function addWall(a,b,exterior=false){
    const length=Math.hypot(b[0]-a[0],b[1]-a[1]),count=Math.ceil(length/.22),dx=(b[0]-a[0])/length,dz=(b[1]-a[1])/length;let start=null;
    // Exact jamb cuts also align the overlapping wall planes in the bay rooms.
@@ -46,12 +47,22 @@ export function buildAsylumLayout(plan){
    const doors=exterior?[]:roomDoors.filter(d=>Math.abs(dx*d.dz-dz*d.dx)<1e-6&&Math.abs((d.x-a[0])*dz-(d.z-a[1])*dx)<.95);
    const cuts=Array.from({length:count+1},(_,i)=>length*i/count);
    for(const d of doors)for(const side of [-1,1]){const t=(d.x-a[0])*dx+(d.z-a[1])*dz+side*ROOM_DOOR_WIDTH/2;if(t>0&&t<length)cuts.push(t);}
+   // Reviewed outside openings use exact jambs rather than a circular,
+   // sampled clearance. The cut follows adjoining angled wall returns too.
+   const fittedExits=exits.filter(e=>e.wallOpening&&segmentDistance(e.worldX,e.worldZ,a,b)<1.05);
+   for(const e of fittedExits)for(const [axis,centre,half] of [[0,e.worldX,e.axis==='z'?e.wallOpening.width/2:1.05],[1,e.worldZ,e.axis==='x'?e.wallOpening.width/2:1.05]]){
+    const direction=axis===0?dx:dz;if(Math.abs(direction)<1e-8)continue;
+    for(const side of [-1,1]){const t=(centre+side*half-a[axis])/direction;if(t>0&&t<length)cuts.push(t);}
+   }
    cuts.sort((a,b)=>a-b);
    for(let i=cuts.length-1;i>0;i--)if(cuts[i]-cuts[i-1]<1e-7)cuts.splice(i,1);
    for(let i=0;i<cuts.length;i++){
     const t=(cuts[i]+(cuts[i+1]??cuts[i]))/2,x=a[0]+dx*t,z=a[1]+dz*t;
     const at=[a[0]+dx*cuts[i],a[1]+dz*cuts[i]];
-    const nearDoor=exits.some(e=>Math.hypot(e.worldX-x,e.worldZ-z)<1.05);
+    const nearDoor=exits.find(e=>e.wallOpening
+     ?Math.abs(x-e.worldX)<(e.axis==='z'?e.wallOpening.width/2:1.05)&&Math.abs(z-e.worldZ)<(e.axis==='x'?e.wallOpening.width/2:1.05)
+     :Math.hypot(e.worldX-x,e.worldZ-z)<1.05);
+    if(exterior&&nearDoor?.wallOpening&&i<cuts.length-1)floor.exitHeaders.push({a:at,b:[a[0]+dx*cuts[i+1],a[1]+dz*cuts[i+1]],height:nearDoor.wallOpening.height,exitId:nearDoor.id});
     let keep=i<cuts.length-1&&cuts[i+1]-cuts[i]>1e-7&&!nearDoor;
     if(!exterior){
      keep=keep&&f.outline.loops.some(p=>insidePolygon(x,z,p))&&!outsideEdges.some(([c,d])=>segmentDistance(x,z,c,d)<.18);

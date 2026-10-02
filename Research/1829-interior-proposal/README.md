@@ -1,5 +1,58 @@
 # 1829 revised interior plans — 2 October 2026
 
+## Window and partition clearance (2 October 2026)
+
+The owner's first-floor screenshot identifies a partition meeting a window.
+The ground/first-floor sash generator now considers every joined wall before
+placing its openings. Nineteen sashes move along their existing facade bays,
+leaving at least 0.15 scene units between their full projecting sills and
+adjoining masonry. Window sizes and counts are retained. The twelve basement
+and five second-floor scheduled sashes retain their positions; their internal
+partition clearance is also checked.
+
+R1 and R12's outside room edges move 0.3 units from x=±25 to x=±24.7, aligning
+with the ground-floor exterior wall instead of forming a second solid lining
+behind its window. Both plan JSON copies and ground/first-floor SVG/PNG drawings
+include this correction. Walls, walking collision and navigation are rebuilt
+from the shared plan. These remain owner-directed gameplay adjustments, not
+surveyed historical measurements. Browser sources and review drawings change;
+Unity, Blender, packaged exports and the separate aerial model are not rebuilt.
+Validation and before/after views are in
+`../../Browser/artifacts/window-clearance/` and `../../DEVELOPMENT.md`.
+
+## Reception second floor (2 October 2026)
+
+The owner's [circled exterior reference](reception-second-floor-reference.png)
+requests a second floor above Reception, reached by the existing Reception
+stair, with a semi-open landing and two rooms. The image locates the upper
+canted bay; it is visual evidence, not additional task instructions.
+
+S1 now continues from first to second floor. The guarded stairwell opens
+onto C24, a short landing serving the two south-facing framed doorways.
+R41 has two straight-facing windows and one west 45-degree window; R42 has
+one straight-facing window and one east 45-degree window. The five sash
+centres, widths and heights follow the top row in `central-back.mjs`, with
+the interior glazing set into the actual canted wall planes. No additional
+windows are inferred on this level.
+
+![Reception second-floor layout](second-floor.png)
+
+Both plan JSON copies include the compact upper envelope, rooms, landing
+and S1 connection. The new level uses the browser game's established
+4.2-unit storey spacing (Y=8.4, plan ID 3; ID 2 remains the basement).
+Horizontal window positions match the exterior; this retains the game's
+existing interior height convention rather than revising all lower storeys
+to the separate exterior floor bands. Concealed room divisions and stair
+clearances remain owner-directed gameplay estimates, not measured interiors.
+
+Walls, slabs, windows, walking, pursuer routes and notebook discovery use
+the same plan. The existing 23 outside door/level connections remain. This
+supersedes the three-level scope in the earlier notes below. Browser sources
+and the new SVG/PNG drawing are updated; exterior geometry, compiled aerial
+assets, Unity, Blender and packaged exports were not regenerated.
+Validation and game views are under
+`../../Browser/artifacts/reception-second-floor/` and in DEVELOPMENT.md.
+
 The owner's [marked revision](owner-revisions.png) is implemented in the
 **browser Asylum Escape game**. These corrections supersede the original
 two-floor proposal retained below. Room divisions remain gameplay estimates,
@@ -15,6 +68,37 @@ Cream/red masonry and continuous skirting join the existing walls. The original
 R11 side doorway remains available. This ground-floor correction is included
 in both plan JSON copies and the ground-floor drawing; the upper floor and
 basement layouts are unaffected by P1. Validation is in DEVELOPMENT.md.
+
+## Closed central corridor bend (2 October 2026)
+
+The owner's marked corridor view identifies the gap between R8's wall end
+and R7 beside the widened rear section. R7 now has a solid 45-degree corner
+from (4.1, -24.5) to (5.5, -25.9), joining both wall runs. The cream/red
+masonry and dark skirting follow this angle on the ground and first floors.
+The corridor remains open around the bend and R7 retains its side doorway.
+
+Both plan JSON copies and ground/first-floor SVG/PNG drawings are updated.
+Visible geometry, maps, player collision and pursuer navigation derive from
+the same room boundary. This is an owner-directed browser interior correction;
+the basement and exterior geometry are unchanged. Unity, Blender and packaged
+exports were not regenerated. Visual evidence is in
+`../../Browser/artifacts/corridor-bend/` and validation is in DEVELOPMENT.md.
+
+## East ground-floor corner door D10 (2 October 2026)
+
+The owner's blue-circled view identifies missing masonry above and beside D10.
+Its interior opening is now fitted to the existing frame: 1.58 units wide,
+with a 2.465-unit head and a 0.075-unit inward offset to the actual wall plane.
+The adjoining angled return, cream masonry and skirting continue to the jambs;
+the upper wall reaches the ceiling/floor above. The sign mounts on the inside
+face. These are browser construction dimensions, not historical measurements.
+
+Both plan JSON copies carry this opening metadata. The floor outline, room
+partitions and review drawings are unchanged. The yellow-circled R35 wall
+fragment/pillar is retained following the request's wording that it should
+be there. D10's exterior destination and E interaction remain unchanged.
+Validation and before/after views are in `../../Browser/artifacts/east-corner/`
+and `../../DEVELOPMENT.md`. Unity, Blender and packaged exports were not rebuilt.
 
 ## Reviewed floor layout
 
@@ -219,6 +303,35 @@ masonry. Browser sources, the basement drawing and the local compiled aerial
 model are updated. Unity, Blender and packaged applications were not regenerated.
 Validation and before/after views are in `../../Browser/artifacts/basement-windows/`.
 
+## Walls meeting ceilings (2 October 2026 follow-up)
+
+The owner's in-game view beside basement exit D13 and the S1 Reception stair
+requests continuous wall-to-ceiling joins throughout the interior. Masonry
+now extends through each ceiling to the next floor level, with a small hidden
+overlap, including the sections above room doors and windows. This seals the
+exposed space between storeys beside stair openings. Room ceiling elevations,
+plan boundaries, doors and walking routes retain their existing positions.
+Only the browser interior renderer and its checks change; this is a finish
+correction, not a surveyed construction detail. Validation and before/after
+views are under `../../Browser/artifacts/wall-ceilings/`.
+
+## Solid floors and ceilings at stairwells (2 October 2026 follow-up)
+
+The owner's ascending Reception-stair view exposed the unsealed space between
+the ceiling and the floor above. The previous single-sided sheets had no
+thickness or shaft-edge faces. All three browser floors and ceilings now use
+closed extruded slabs, with outward-facing caps and continuous perimeter and
+stairwell reveals. The floor extends from 0.2 units below its level to the
+existing 0.002-unit walking surface; the ceiling below meets its underside.
+The top-storey ceiling has a 0.2-unit solid cap. These are visual construction
+depths, not surveyed historical dimensions.
+
+The existing stair holes, lowest-level well bottoms, ceiling heights and
+walking routes remain. Browser geometry and validation are updated; Unity,
+Blender and packaged exports were not regenerated. This interior is excluded
+from the compiled aerial model. Validation is in `../../DEVELOPMENT.md` and
+before/after views are under `../../Browser/artifacts/asylum-slabs/`.
+
 ## Original two-floor draft (superseded)
 
 Rough plans for owner review before replacing the existing game interior.
@@ -380,3 +493,19 @@ retain their intended openings. This is a browser construction correction;
 the plan outlines, exterior model, Unity, Blender and packaged exports are
 unaffected by this change. Validation and visual comparisons are recorded in
 `../../DEVELOPMENT.md` and `../../Browser/artifacts/asylum-wall-joins/`.
+
+## Flush angled masonry corners (2 October 2026 follow-up)
+
+The owner's marked Reception view shows a recessed V at an angled wall
+connection above the continuous skirting. Although the centre lines already
+met, the brick and cream wall volumes still ended square. Both finishes now
+use the skirting's shared mitred footprint across basement, ground, first
+and second floors. Intersecting/duplicate partitions share an outer surface;
+nearly parallel ends use a short bevel to avoid an excessively long tip.
+
+This corrects the browser construction of the existing plan. Room outlines,
+door/window schedules, drawings and exterior geometry are unchanged. Unity,
+Blender and packaged exports were not regenerated. The aerial binary excludes
+these interiors and its source fingerprint remains current. Validation and
+before/after game views are in `../../Browser/artifacts/asylum-masonry-corners/`
+and `../../DEVELOPMENT.md`.

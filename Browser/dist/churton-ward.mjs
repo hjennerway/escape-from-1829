@@ -80,7 +80,12 @@ export function createChurtonWard(THREE,{brick,roof,worldUV,material}){
     part(dark,0,0,.015,w+.18,h+.12,.11);part(door?dark:glass,0,0,.09,w,h,.06);
     for(const s of [-1,1]){part(frame,s*w/2,0,.15,.065,h+.08,.09);part(frame,0,s*h/2,.15,w+.09,.07,.09);}
     if(!door){part(frame,0,0,.18,w,.07,.07);for(const s of [-1,1])part(frame,s*w/6,0,.18,.026,h,.04);part(sill,0,-h/2-.11,.18,w+.36,.16,.36);}
-    else{part(frame,0,h*.24,.18,w,.07,.08);part(glass,0,h*.36,.13,w-.08,h*.22,.06);part(frame,w*.3,-.1,.22,.04,.2,.05);part(sill,0,-h/2,.25,w+.35,.1,.55);}
+    else{
+      part(frame,0,h*.24,.18,w,.07,.08);part(glass,0,h*.36,.13,w-.08,h*.22,.06);part(frame,w*.3,-.1,.22,.04,.2,.05);
+      // Keep the sill top at the door, with solid stone down to the lawn.
+      const top=y-h/2+.05,bottom=-.18;
+      part(sill,0,(top+bottom)/2-y,.25,w+.35,top-bottom,.55);
+    }
     // Splayed red brick heads, with a slightly raised keystone.
     for(let i=-3;i<=3;i++)part(red,i*(w+.18)/7,h/2+.2+(i===0?.07:0),.13,(w+.18)/7-.02,.28+(i===0?.14:0),.18);
     part(dark,0,.28-y,.065,.45,.2,.07);

@@ -1,5 +1,6 @@
 import {KML_WILLOW_TREES} from './kml-tree-data.mjs';
 import {WILLOWS} from './willows.mjs';
+import {createObstacleJump} from './jump.mjs';
 
 // Ground-level exterior navigation, shared by the page and headless checks.
 // Distance to the actual rotated footprint, rather than its enclosing rectangle.
@@ -29,7 +30,7 @@ export function createObstacleIndex(obstacles,cellSize=12,padding=.4){
       cells.get(key).push(obstacle);
     }
   }
-  return {contains(x,z){
+  return {at(x,z){return (cells.get(Math.floor(x/cellSize)+','+Math.floor(z/cellSize))??[]).filter(b=>obstacleContains(b,x,z,padding));},contains(x,z){
     const nearby=cells.get(Math.floor(x/cellSize)+','+Math.floor(z/cellSize));
     if(nearby)for(const obstacle of nearby)if(obstacleContains(obstacle,x,z,padding))return true;
     return false;
@@ -38,17 +39,22 @@ export function createObstacleIndex(obstacles,cellSize=12,padding=.4){
 
 export function createWalker(camera,obstacles=[]){
   const keys=new Set(),defaultFov=camera.fov;let yaw=0,pitch=0,index=createObstacleIndex(obstacles),surfaces=obstacles.walkSurfaces??[];
+  let jumper=null;
+  function heightAt(x,z){const surface=surfaces.find(s=>obstacleContains(s,x,z,1e-7));return surface?surface.height-surface.grade:0;}
   function groundHeight(){
-    const surface=surfaces.find(s=>obstacleContains(s,camera.position.x,camera.position.z,1e-7));
-    camera.position.y=1.8+(surface?surface.height-surface.grade:0);
+    camera.position.y=1.8+heightAt(camera.position.x,camera.position.z);
   }
   camera.rotation.order='YXZ';
-  function reset(){keys.clear();yaw=0;pitch=0;camera.position.set(0,1.8,40);camera.rotation.set(0,0,0);camera.fov=defaultFov;camera.updateProjectionMatrix();}
-  function clear(x,z){return x>-180&&x<Math.max(580,WILLOWS.x+60,...KML_WILLOW_TREES.map(t=>t.x+60))&&z>-245&&z<Math.max(210,WILLOWS.z+60,...KML_WILLOW_TREES.map(t=>t.z+60))&&!index.contains(x,z);}
+  function reset(){jumper?.reset();keys.clear();yaw=0;pitch=0;camera.position.set(0,1.8,40);camera.rotation.set(0,0,0);camera.fov=defaultFov;camera.updateProjectionMatrix();}
+  function withinBounds(x,z){return x>-180&&x<Math.max(580,WILLOWS.x+60,...KML_WILLOW_TREES.map(t=>t.x+60))&&z>-245&&z<Math.max(210,WILLOWS.z+60,...KML_WILLOW_TREES.map(t=>t.z+60));}
+  function clear(x,z){return withinBounds(x,z)&&!index.contains(x,z);}
   reset();
   return {keys,reset,
-    setObstacles(obstacles){index=createObstacleIndex(obstacles);surfaces=obstacles.walkSurfaces??[];groundHeight();},
+    jump(){jumper??=createObstacleJump(createObstacleIndex(obstacles.jumpObstacles??obstacles),{groundAt:heightAt,withinBounds});return jumper.start({x:camera.position.x,y:camera.position.y-1.8,z:camera.position.z});},
+    get airborne(){return jumper?.airborne??false;},
+    setObstacles(next){obstacles=next;index=createObstacleIndex(obstacles);surfaces=obstacles.walkSurfaces??[];jumper=null;groundHeight();},
     setView({position,target,fov}){
+      jumper?.reset();
       keys.clear();camera.position.set(...position);camera.lookAt(...target);
       yaw=camera.rotation.y;pitch=camera.rotation.x;
       if(position[1]===1.8)groundHeight();
@@ -57,9 +63,12 @@ export function createWalker(camera,obstacles=[]){
     look(dx,dy){yaw-=dx*.002;pitch=Math.max(-1.45,Math.min(1.45,pitch-dy*.002));camera.rotation.set(pitch,yaw,0);},
     update(dt){
       const side=Number(keys.has('KeyD'))-Number(keys.has('KeyA')),forward=Number(keys.has('KeyW'))-Number(keys.has('KeyS'));
-      if((!side&&!forward)||dt<=0)return;
+      if(dt<=0)return;
       const distance=Math.min(Math.max(dt,0),.1)*(keys.has('ShiftLeft')||keys.has('ShiftRight')?12:5),n=Math.hypot(side,forward)||1;
       const dx=(Math.cos(yaw)*side-Math.sin(yaw)*forward)*distance/n,dz=(-Math.sin(yaw)*side-Math.cos(yaw)*forward)*distance/n;
+      const actor={x:camera.position.x,y:camera.position.y-1.8,z:camera.position.z};
+      if(jumper?.update(actor,dx,dz,dt)){camera.position.set(actor.x,actor.y+1.8,actor.z);return;}
+      if(!side&&!forward)return;
       const steps=Math.max(1,Math.ceil(distance/.15));
       for(let i=0;i<steps;i++){if(dx&&clear(camera.position.x+dx/steps,camera.position.z))camera.position.x+=dx/steps;if(dz&&clear(camera.position.x,camera.position.z+dz/steps))camera.position.z+=dz/steps;}
       groundHeight();
@@ -74,9 +83,11 @@ export function exteriorObstacles(THREE,model){
   // Keep auxiliary height data out of array enumeration and serialized
   // obstacle snapshots; an empty obstacle list must still compare as [].
   Object.defineProperty(obstacles,'walkSurfaces',{value:[]});
+  Object.defineProperty(obstacles,'jumpObstacles',{value:[]});
   function add(geometry,transform,oriented=false,footprint=null,barrier=false){
     if(!geometry.boundingBox)geometry.computeBoundingBox();const b=geometry.boundingBox.clone().applyMatrix4(transform);
-    if(barrier||(b.min.y<1.8&&b.max.y>.5&&b.max.y-b.min.y>.6&&b.max.x-b.min.x>.25&&b.max.z-b.min.z>.25)){
+    const walking=barrier||(b.min.y<1.8&&b.max.y>.5&&b.max.y-b.min.y>.6&&b.max.x-b.min.x>.25&&b.max.z-b.min.z>.25);
+    if(walking||(b.max.y>.5&&b.max.y-b.min.y>.03&&b.max.x-b.min.x>.18&&b.max.z-b.min.z>.18)){
       const obstacle={minX:b.min.x,maxX:b.max.x,minZ:b.min.z,maxZ:b.max.z};
       // Preserve this mesh's vertical extent. Looking it up later by footprint
       // can substitute a thin coping/deck with the same X/Z bounds for a wall.
@@ -84,13 +95,14 @@ export function exteriorObstacles(THREE,model){
       Object.defineProperties(obstacle,{minY:{value:b.min.y},maxY:{value:b.max.y}});
       if(footprint)obstacle.corners=footprint.map(([x,z])=>{const p=new THREE.Vector3(x,0,z).applyMatrix4(transform);return [p.x,p.z];});
       else if(oriented){const a=geometry.boundingBox;obstacle.corners=[[a.min.x,a.min.z],[a.max.x,a.min.z],[a.max.x,a.max.z],[a.min.x,a.max.z]].map(([x,z])=>{const p=new THREE.Vector3(x,0,z).applyMatrix4(transform);return [p.x,p.z];});}
-      obstacles.push(obstacle);
+      if(walking)obstacles.push(obstacle);
+      obstacles.jumpObstacles.push(obstacle);
     }
   }
   model.traverseVisible(o=>{
     if(o.userData.treeTrunk){
       const p=new THREE.Vector3().setFromMatrixPosition(o.matrixWorld),r=o.userData.treeTrunk.radius;
-      obstacles.push({minX:p.x-r,maxX:p.x+r,minZ:p.z-r,maxZ:p.z+r});
+      const trunk={minX:p.x-r,maxX:p.x+r,minZ:p.z-r,maxZ:p.z+r};obstacles.push(trunk);obstacles.jumpObstacles.push(trunk);
     }
     if(o.userData.noWalkingCollision)return;
     for(const surface of o.userData.walkSurfaces??[]){

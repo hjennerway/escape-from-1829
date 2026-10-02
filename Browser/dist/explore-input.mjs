@@ -20,7 +20,7 @@ export function bindExploreInput(walker,{canvas,hint,look,touchControls}){
   }
   function begin(){
     active=true;canvas.focus({preventScroll:true});
-    hint.textContent='Walk with WASD. If the cursor stays visible, hold and drag to look around.';
+    hint.textContent='Walk with WASD · Space to jump. If the cursor stays visible, hold and drag to look around.';
   }
   function lock(){
     begin();
@@ -65,6 +65,7 @@ export function bindExploreInput(walker,{canvas,hint,look,touchControls}){
   });
   document.addEventListener('keydown',e=>{
     if(e.code==='Escape'){stop();document.exitPointerLock?.();return;}
+    if(active&&e.code==='Space'){e.preventDefault();if(!e.repeat&&!keyboard.has(e.code))walker.jump();keyboard.add(e.code);return;}
     if(active&&movement.has(e.code)){e.preventDefault();keyboard.add(e.code);sync();}
   });
   document.addEventListener('keyup',e=>{keyboard.delete(e.code);sync();});

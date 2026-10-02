@@ -1,0 +1,13 @@
+{
+  "report": [
+    {
+      "mode": "before",
+      "build": {
+        "mode": "procedural",
+        "milliseconds": 1602
+      },
+      "views": 14
+    }
+  ],
+  "errors": []
+}

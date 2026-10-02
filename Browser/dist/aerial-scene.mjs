@@ -6,6 +6,7 @@ import {cacheAerialTransforms} from './aerial-performance.mjs';
 import {matchEstateGrass} from './estate-grass.mjs';
 import {restoreGroundProjection} from './ground-materials.mjs';
 import {restoreMineralProjection} from './mineral-materials.mjs';
+import {installExteriorShadowFiltering} from './exterior-shadows.mjs';
 import {MODEL_FORMAT,decodeModel,serializeScene,deserializeScene} from './model-binary.mjs';
 
 // Also used by the offline compiler: there is only one modelling pipeline.
@@ -32,6 +33,7 @@ export function snapshotAerialScene(THREE,{exterior,layouts,buildingDetail}){
 }
 
 export function restoreAerialScene(THREE,snapshot,aspect,{detail=true}={}){
+  installExteriorShadowFiltering(THREE);
   if(snapshot.format!==MODEL_FORMAT)throw new Error('Unsupported precompiled model version');
   const {scene,camera,nodes}=deserializeScene(THREE,snapshot.scene);
   nodes.set(camera.uuid,camera);

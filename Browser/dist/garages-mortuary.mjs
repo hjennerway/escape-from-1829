@@ -77,6 +77,8 @@ export function createGaragesMortuary(THREE,{brick,roof,worldUV,material}){
     box(iron,x+w*.3,centre,z-.177,.045,.23,.055);
    }
    box(stone,x,y+h+.19,z-.06,w+.29,.18,.18);
+   // A shallow sill joins the door base to the concrete apron/path.
+   box(stone,x,y-.02,z-.14,w+.18,.04,.4);
    openings.push({kind,x,z,y:centre,w,h});
   }
   function window(x,z,w=1.65,h=1.6,y=1.95,r=0){

@@ -72,6 +72,7 @@ export function createMainKitchen(THREE,{brick,material,worldUV}){
  for(const z of [-22,-16,-10,-4])window(b.minX-.02,z,-Math.PI/2);
  for(const x of [124,130,136,142])window(x,b.minZ-.02,Math.PI);
  box(door,b.minX-.04,1.48,-.3,.08,2.9,1.8,'Main kitchen service door');
+ box(stone,b.minX-.22,-.075,-.3,.6,.21,2.05,'Main kitchen grounded doorstep');
  box(trim,b.minX-.06,2.96,-.3,.12,.1,2,'Main kitchen door lintel');
  for(const z of [-1.25,.65])box(trim,b.minX-.06,1.48,z,.12,2.9,.1,'Main kitchen door jamb');
  return group;

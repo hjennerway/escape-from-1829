@@ -1,7 +1,8 @@
 import {exteriorObstacles,createObstacleIndex,obstacleContains} from './explore-controls.mjs';
+import {createObstacleJump} from './jump.mjs';
 // Sample the existing rendered treads/decks; no duplicate outside stair model.
 export function createAsylumOutside(THREE,exterior){
- let obstacles,indices,supports,walkSurfaces;
+ let obstacles,indices,supports,walkSurfaces,jumper,jumpObstacles;
  const safePositions=new WeakMap();
  function refresh(){
   // Aerial batching retains its hidden originals for inspection. Use those
@@ -10,6 +11,7 @@ export function createAsylumOutside(THREE,exterior){
   exterior.model.traverse(o=>{if(o.userData.aerialBatch||o.userData.aerialBatchSource){visibility.push([o,o.visible]);o.visible=!!o.userData.aerialBatchSource;}});
   try{
   obstacles=exteriorObstacles(THREE,exterior.model);
+  jumpObstacles=obstacles.jumpObstacles;jumper?.setIndex(createObstacleIndex(jumpObstacles,12,.27));
   walkSurfaces=obstacles.walkSurfaces;supports=new Map();
   // The masonry return stair's solid bases are walkable treads, not walls.
   const masonry=exterior.model.getObjectByName('West forward end masonry return stair');
@@ -79,6 +81,7 @@ export function createAsylumOutside(THREE,exterior){
   }
  }
  function update(actor,dx,dz,dt){
+  if(jumper?.update(actor,dx,dz,dt)){actor.verticalTrend=0;return;}
   recover(actor);
   const steps=Math.max(1,Math.ceil(Math.hypot(dx,dz)/.08));
   for(let i=0;i<steps;i++)for(const [mx,mz] of [[dx/steps,0],[0,dz/steps]]){
@@ -94,5 +97,15 @@ export function createAsylumOutside(THREE,exterior){
   if(!dx&&!dz){const y=heightAt(actor.x,actor.z,actor.y,actor.verticalTrend??0);if(y<actor.y&&clearHeightChange(actor.x,actor.z,actor.y,y))actor.y=Math.max(y,actor.y-5*dt);}
   if(!indexAt(actor.y).contains(actor.x,actor.z))remember(actor);
  }
- return {refresh,heightAt,update,clear:(x,z,y=0)=>!indexAt(y).contains(x,z)};
+ return {refresh,heightAt,update,
+  jump(actor){
+   if(jumper?.airborne)return false;
+   // Door destinations use the nominal landing height; the rendered tread
+   // can sit a few centimetres above it, just as in ordinary stair walking.
+   const support=heightAt(actor.x,actor.z,actor.y);
+   if(support>=actor.y&&support<=actor.y+.48&&clearHeightChange(actor.x,actor.z,actor.y,support))actor.y=support;
+   jumper??=createObstacleJump(createObstacleIndex(jumpObstacles,12,.27),{groundAt:(x,z,y)=>heightAt(x,z,y-.48+1e-7)});return jumper.start(actor);
+  },
+  resetJump(){jumper?.reset();},get airborne(){return jumper?.airborne??false;},
+  clear:(x,z,y=0)=>!indexAt(y).contains(x,z)};
 }

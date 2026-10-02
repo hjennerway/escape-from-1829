@@ -37,7 +37,9 @@ export function addRedesmereEndRange(THREE,{box,mesh,worldUV,brick,material,hipR
   const width=right-left,depth=front-back,x=(left+right)/2,z=(back+front)/2;
   mesh(worldUV(new THREE.BoxGeometry(width,eaves,depth),1.7),brick,x,eaves/2,z,true).name='Redesmere windowless brick end range';
   const cornice=material(0xa6a18e),gutter=material(0x414645);
-  box(cornice,x,eaves-.08,z,width+.18,.16,depth+.18);
+  // Close the raised slate's open underside all the way to its .4 overhang.
+  // The solid band overlaps the wall and meets both hips at their eave plane.
+  box(cornice,x,eaves-.02,z,width+.8,.28,depth+.8);
   for(const [a,b] of [[left,89.05],[89.05,right]]){
     hipRoof((a+b)/2,z,b-a,depth,eaves+.12,1.95).name='Redesmere low end slate roof';
   }

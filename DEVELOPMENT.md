@@ -1,3 +1,314 @@
+## Space to jump in walking and Asylum Escape (2 October 2026)
+
+Space starts one jump per press in Explore on foot and Asylum Escape. The
+walking guide, escape HUD/help and player controls document the shortcut.
+The shared exterior arc rises about 1.69 units, clearing the existing low
+frontage masonry and hedges. Rendered vertical bounds, coping and overhead
+geometry govern airborne collisions; tall walls and tree trunks remain solid.
+Players can land on low obstacles, jump again or walk off and settle without
+holding a movement key. Door arrivals align takeoff to their rendered landing.
+
+Ground walking retains its existing collision/stair rules. The jump index is
+created on demand, follows obstacle refreshes, and uses extra non-enumerable
+height/footprint data without changing the original ground obstacle snapshots.
+Interior jumps retain the reviewed navigation routes and banisters, with
+ceiling slabs and doorway headers limiting headroom. Pause/notebook suspend
+movement; restart, view changes and door transfers reset the jump as needed.
+
+`test-jump.mjs` is included in `npm test`. It covers varied frame rates,
+head impacts, idle landing, wall-top support and step-off, tall/unknown-height
+barriers, input/reset behavior, actual wall/hedge clearance in both exterior
+controllers, all 23 outside arrivals, and indoor floor/doorway headroom.
+The focused jump, explore-input, explore, game and stair checks pass.
+`test-jump-browser.mjs` verifies real Space key events, held-key behavior,
+pause/notebook, restart/door transfer and visible control hints, with reviewed
+walking, Reception, basement and outside captures and no browser/shader errors.
+Evidence is in `Browser/artifacts/jump/` and `Browser/artifacts/jump-browser.log`.
+
+The full suite reached an unrelated Larkton geometry snapshot failure. Running
+the remaining 43 checks recorded 41 passes and two more geometry snapshot
+failures (Oakmere west and Annexe access). Separate checks with the pre-jump
+walking module reproduce all three failures; model snapshots were not changed
+for this feature. The suite log is `Browser/artifacts/jump-npm-test.log`;
+subsequent results are in `Browser/artifacts/jump/remaining-tests.json`.
+Run `npm run test:jump` for the focused physics, input and browser checks.
+
+Only browser controls, movement, tests and documentation change. The compiled
+aerial source fingerprint was verified current; no modelling or generated
+model rebuild is required. Unity, Blender and packaged exports were not changed.
+
+## Redesmere low-range roof gap (2 October 2026)
+
+The ivy-fronted building beside the round chimney had an open strip between
+its 4.55-unit wall top and the slate eave plane at 4.67. The roofs' single-sided
+undersides made the strip visible from a shallow walking angle. The existing
+cornice instance in `redesmere-passage.mjs` now forms a solid 0.28-unit eaves
+band, covering the roofs' 0.4-unit overhang and meeting both hips. Roof shape,
+chimney, walls, ivy and gutter stay fixed; no runtime geometry changes or
+additional draw calls are introduced.
+
+`test-escape-exterior.mjs` now includes 192 oblique coverage rays along all
+four sides. It rejects the saved original geometry and passes after the fix.
+The focused exterior, Redesmere garden, roof-contact and Hospital Shop checks
+pass. `artifacts/redesmere-eaves-scope.mjs` compares the saved original source
+against the repair: just one trim instance changes; 1,446,861 other primitives
+and all walking obstacles match exactly at the time of comparison.
+
+`artifacts/check-redesmere-eaves.mjs` captures walking-height, overhead and
+mobile views in Explore and the rebuilt compiled aerial scene, with no page
+or shader errors. Evidence and validation logs are in
+`Browser/artifacts/redesmere-eaves/`. The local aerial model was regenerated;
+Unity, Blender and packaged exports were not regenerated.
+
+The source/compiled comparison passes, including matching draw counts, image
+comparison, full detail and fallback handling. The timeline test passes every
+period in both modes, mobile navigation and walking collision refresh; its
+unchanged assertions run via `artifacts/check-redesmere-timeline.mjs` with
+isolated screenshot outputs after another validation locked a shared image.
+The final compiled manifest matches current model sources.
+
+The complete `npm test` run stops at `test-larkton-recess.mjs` on the Annexe's
+non-Larkton geometry snapshot. That check does not contain this Redesmere
+range; its source and expected snapshot were left intact. The full suite is
+therefore not reported as passing. `npm-test-final.log` records the failure;
+`compiled-tests.log` and `timeline-isolated.log` record the successful compiled
+comparison and subsequent timeline run. Earlier interrupted attempts are
+retained separately, including a source change detected during compilation.
+
+## Exterior door support audit (2 October 2026)
+
+The four blue facade doors beside Reception previously ended 0.74 units above
+the excavated walks. `entrance-west-photo-detail.mjs` now derives their base
+from `FRONT_BASEMENT.grade - depth`; the east reflection inherits the same
+level. Each complete door moves down without changing its proportions.
+Reception has a shallow stone sill closing its 0.10-unit landing gap.
+
+The wider audit corrects both annexe tower fire doors to the existing platform
+tops, clears their leaves past the brick band, and extends both platforms to
+the existing top treads. Churton's three door sills extend down to the lawn.
+The main-kitchen service door gains a grounded stone step, and the 18 garage
+doors plus mortuary door gain shallow sills meeting their concrete aprons.
+These are construction-time changes before timeline grouping, batching and
+transform caching; existing runtime shadow/collision refresh paths remain.
+
+`test-exterior-door-supports.mjs`, included in `npm test`, surveys 109 rendered
+door leaves across six historical periods with three support probes per sill.
+It also samples each annexe door-to-stair deck continuously and checks that
+the brick band does not conceal the door. It reads actual post-grounding
+geometry, including rotated buildings, mirrored doors and the Witby copy.
+The saved original door sources fail the new survey. Existing outside-walker
+checks cover all seven main-building escape flights and both front walks.
+
+`test-exterior-door-supports-browser.mjs` captures before/after game views,
+desktop/mobile/night contacts, and walks both sunken front routes in both
+directions. Evidence and validation logs are in `Browser/artifacts/door-supports/`.
+Annexe snapshot audits restore just the two old door transforms and two old
+landing slabs to reproduce the previous fingerprints before updating them.
+The estate fingerprint audit also restores the concurrent wall-mitre changes
+and the single Redesmere eaves-band correction, reproducing both existing
+estate snapshots exactly. Its current model adds only the 21 new thresholds;
+the door relocations, landing extensions, wall joins and eaves change retain
+their primitive counts and have separate focused regressions. Snapshot scope
+filters and ward ranges remain unchanged.
+
+The source/compiled rendering comparison, model fallbacks and every timeline
+stop pass. The timeline check uses an isolated artifact directory after a
+shared screenshot-file conflict. `compiled-source-check.json` confirms the
+generated asset matches the current source. Day, night, mobile, kitchen,
+garage, Reception and annexe contact views were visually inspected.
+
+All 101 commands in the browser suite pass across `npm-test-complete.log`
+and `suite-remainder.log`, with the two remaining historical comparisons
+passing after their verified reference updates (`oakmere-west-final.log`
+and `annexe-access-final.log`). The continuation preserves its original
+failure records; the focused final logs record the successful rechecks.
+`git diff --check` also passes.
+
+Browser model sources and local compiled aerial assets are updated. Unity,
+Blender and packaged desktop/mobile exports are not regenerated.
+
+## Grindley basement mural (2 October 2026)
+
+The supplied upright mural now appears on the owner's marked B7 south wall,
+beside the central basement corridor and opposite S5. `basement-mural.mjs`
+blends the unchanged local PNG into the basement brick and plaster materials
+at x=-34.65, z=1.39. The paint is 2.32 units high (80% of the 2.9-unit wall),
+with equal 0.29-unit top/bottom margins and the source proportions retained.
+A polygon following the painted outline removes the photographed surrounding
+plaster at render time, with a 0.10-unit smooth inward feather. The source
+attachment and runtime PNG have matching SHA-256 hashes.
+
+The original wall bump shading, room lighting, opaque depth and existing
+material batches are retained. No decal plane, frame, new draw call, walking
+obstacle or random art interaction is added. Only the two basement masonry
+materials receive the image; the back of the wall and the other floors do
+not. Placement reference and provenance are in
+`Research/escape-interior/README.md`.
+
+`node Browser/artifacts/check-basement-mural.mjs after` checks the actual game,
+the two material layers, the exact 80% height and equal margins, and captures
+three desktop angles plus a phone view. All four final views were visually
+reviewed, with no page or shader errors. The focused asylum layout, basement
+end, interior architecture and interior light checks pass. Evidence is under
+`Browser/artifacts/basement-mural/`; `after.json` records the full-game render.
+
+The full `npm test` run passed the interior checks, then stopped at
+`test-jarman.mjs`: its protected exterior geometry hash no longer matched
+during concurrent exterior modelling. That test builds `escape-exterior.mjs`,
+which does not include this mural or interior renderer. The unrelated exterior
+source and snapshot were left intact; the full suite is not reported as
+passing. The output is saved in `Browser/artifacts/basement-mural/npm-test.log`.
+
+This changes browser interior sources and the local mural asset only. The
+compiled aerial model excludes this interior and needs no rebuild for this
+addition. Unity, Blender and packaged desktop/mobile exports were not
+regenerated.
+
+## Reception second floor (2 October 2026)
+
+The browser Asylum Escape interior now has a compact second floor over
+Reception. S1 continues from the first floor through another guarded return
+flight to the semi-open C24 landing. Its two framed doors lead to R41
+(two straight-facing sashes plus one 45-degree west sash) and R42 (one
+straight-facing sash plus one 45-degree east sash). The five openings use
+the exterior's top canted-bay sash positions and dimensions. The shared
+window renderer now supports explicitly scheduled windows on upper floors
+as well as in the basement, without adding inferred windows elsewhere on
+the new level.
+
+Plan ID 3 is the second floor at Y=8.4; basement ID 2 is retained. Existing
+floor heights and outside-door transfers keep their established gameplay
+convention. The new floor has its own compact notebook bounds and all
+walking, pursuer navigation, stair openings, rails and discovery come from
+the shared plan. The help text includes the additional level. Both JSON
+plans match, and `Research/1829-interior-proposal/second-floor.svg` / `.png`
+record the layout. The drawing exporter accepts an optional output name
+(`second-floor`) and renders diagonal sash symbols.
+
+`test-reception-second-floor.mjs` checks the two-room window schedule
+against the actual exterior generator, 90 unobstructed panes, 45-degree
+faces, retained landing partitions, notebook discovery and 12 physically
+walked routes between the rooms and all lower floors in both directions.
+The existing stair check covers 1,029 support/headroom probes and 70 fall
+barriers; the slab and wall/ceiling checks cover the fourth level too.
+`test-reception-second-floor-browser.mjs` walks the actual game player from
+Reception to each room and back, and captures the landing, both rooms,
+stairwell and mobile room/notebook views. It is included in `test:asylum`;
+the geometry/navigation test is also included in `npm test`.
+
+Validation: the full `npm test` suite passes. Both the new actual-game
+browser check and `test-asylum-browser.mjs` pass, including all 23 outside
+door round trips and the existing basement/ground/first stair route, with
+no page or shader errors. Desktop and mobile captures were visually
+reviewed, including the discovered second-floor notebook sketch. Evidence
+and logs are in `Browser/artifacts/reception-second-floor/`.
+
+Only the browser interior, shared review plan, tests and documentation are
+updated. The aerial compiler excludes this interior; no compiled model
+rebuild is needed. Exterior modelling, Unity, Blender and packaged desktop
+and Android exports were not changed by this addition.
+
+## Ceiling continuity and Reception entrance (2 October 2026)
+
+The ceiling's stains, peeling edges and cracks previously stopped at the
+texture boundary, exposing a five-unit grid. `interior-materials.mjs` now
+wraps each complete mark across both texture axes and blends two continuous
+projections with different directions and scales. Softer colour contrast and
+relief retain the worn plaster without emphasising repeated patches. The
+same sampling drives colour and bump shading on every floor; material sharing,
+texture resolution and the random sequence for other finishes are retained.
+
+Reception's ground-floor D1 now uses a 1.9 × 3.2 red double door with six dark
+panels, matching the exterior entrance's paint and proportions. A cream
+surround, glazed transom and brass handles fit below the existing ceiling.
+Its generic green leaf, panic bar, emergency signs and green exit lamp are
+removed. The doorway position, collision plan, E interaction and destination
+on the existing front steps are retained. Other exits keep their fittings.
+
+`node Browser/test-ceiling-entrance-browser.mjs` checks the actual game on all
+four floors, D1's visible red panels and removed signage, its E round trip and
+release latch, and texture-edge continuity. Mean adjacent-pixel differences
+across the two wrapping edges fell from 8.29/6.20 to 3.17/3.09 intensity
+levels, matching ordinary internal neighbors (3.07/3.16). Nine desktop/mobile
+views per version were captured; visual review found no hard ceiling seams or
+door-surround gaps, and there were no page or shader errors. The complete
+`npm test` suite passes. Evidence and the full-suite log are in
+`Browser/artifacts/ceiling-entrance/`.
+
+Only browser interior sources are changed. The compiled aerial manifest still
+matches its source hash; this interior is outside that build. Unity, Blender
+and packaged desktop/mobile exports were not regenerated.
+
+## Solid interior floor and ceiling slabs (2 October 2026)
+
+The Reception-stair screenshot exposed a separate issue from the masonry
+height correction below: floor and ceiling meshes were single-sided sheets
+with no closing faces around stair openings. From within the inter-storey
+band, their backs were culled and the surrounding rooms showed through.
+`Browser/dist/asylum-architecture.mjs` now extrudes both surfaces into closed
+solids with outward caps and perimeter/shaft reveals. Floors run from -0.2
+to +0.002 relative to their storey. Ceilings retain their 2.9/3.8-unit room
+heights and extend to the next floor's underside; top-storey ceilings are
+0.2 units thick. Adjoining reveals meet without overlapping side faces. The
+existing shared opaque materials and single draw per slab are retained.
+
+`test-asylum-slabs.mjs`, registered in `npm test` and `test:asylum`, checks
+8,420 cap views from both sides, 1,316 oblique shaft/perimeter edge views and
+112 clear shaft samples across all three floors. It rejects the original
+renderer on the first underside sample. Existing stair checks pass all 882
+support/headroom samples, 60 fall barriers and 23 physically walked door
+routes; wall/ceiling checks pass 11,730 masonry probes. The capture runner is
+`Browser/artifacts/check-asylum-slabs.mjs`; before/after images and logs are
+under `Browser/artifacts/asylum-slabs/`.
+
+The full `npm test` suite passes. The actual-game capture run renders 25
+desktop/mobile views across all four stairs and both connections at S1/S5,
+with no page or shader errors. Visual review covers Reception ascent,
+descent, undersides and the adjoining-floor band, plus the other stairwells
+and mobile framing. The previously open bands now have continuous slab
+faces; the stair openings remain clear.
+
+Only the browser interior model changes. Stair routes, collision data and
+plan drawings are unchanged. The aerial compiler excludes this interior;
+Unity, Blender and packaged exports were not regenerated.
+
+## Interior wall-to-ceiling coverage (2 October 2026)
+
+The owner's basement view beside D13 and S1 prompted a three-floor wall-height
+audit. The renderer previously ended masonry exactly at the room ceiling,
+leaving the 0.3/0.4-unit space up to the next floor unfilled where stair shafts
+expose it. Wall tops now continue to the next higher floor, with a 0.001-unit
+overlap below its 0.002-unit walking surface, avoiding raised upper thresholds.
+Top-storey walls overlap their ceiling by 0.02 units. Doorway and window
+headers use the same height. Room ceilings remain at 2.9 units in the basement
+and 3.8 on the upper floors. Plan boundaries,
+door openings, collision, stair geometry and walking routes are not changed
+by this fix.
+
+`test-asylum-wall-ceilings.mjs`, included in `npm test` and `test:asylum`, checks
+673 wall runs and 87 doorway headers using 11,730 masonry raycasts from both
+sides at the ceiling and adjoining-floor heights. An in-memory comparison
+confirms that the same check rejects the original renderer. Existing layout,
+wall-join, basement, window, doorway, stair and skirting checks pass, as does
+the actual-game check covering all 23 outside-door round trips and walking
+between basement, ground and first floors. Seven before/after desktop/mobile
+views were captured and visually checked without page or shader errors.
+Evidence and the capture runner are in `Browser/artifacts/wall-ceilings/` and
+`Browser/artifacts/check-wall-ceilings.mjs`.
+
+The full browser suite was run but stopped at Jarman's protected exterior
+snapshot during concurrent exterior modelling changes. The separate remaining
+suite run passed 32 checks and records the Leighton/Newton exterior snapshot
+mismatch. These
+tests build `escape-exterior.mjs`, which does not import this interior renderer;
+their snapshots and the concurrent edits were left intact. Detailed outcomes
+are retained in the evidence directory.
+
+Only browser interior rendering, regression checks and notes changed for this
+fix. The aerial build dependency graph excludes `asylum-architecture.mjs`, so
+this change needs no compiled aerial rebuild. Unity, Blender and packaged
+desktop/mobile exports were not regenerated.
+
 ## Outside movement and trapped-player recovery (2 October 2026)
 
 The west rear basement stair could admit a player beside its retaining cheek
@@ -71,7 +382,8 @@ Retry clears both the journal and exploration memory.
 
 The notebook includes a 900 × 580 sketch canvas and tabs for discovered levels
 and the grounds. Both it and the minimap use the same per-view fog: one-unit
-cells reveal within 5.5 scene units around the player, with wall sight checks,
+cells reveal within 11 scene units around the player (doubled from 5.5 on
+2 October 2026), with wall sight checks,
 then remain known for that run. The negative coordinate origins of the revised
 interior and the older grid layout are both supported. Browsing a different
 sketch never discovers that level. NPC markers require the current level,
@@ -5762,3 +6074,332 @@ pre-edit source and show the repaired strip from three nearby angles.
 The final complete npm test run passes (suite-final.txt). The final twelve-window
 browser capture also passes with no page/shader errors, including a centred
 390x844 mobile sash view. The compiled source fingerprint remains current.
+
+## Closed central corridor corner (2 October 2026)
+
+The owner's marked view down the corridor away from Reception showed an
+unintended opening between R8's straight wall and R7's offset wall. R7 now
+connects (4.1, -24.5) to (5.5, -25.9) with a solid 45-degree room boundary.
+This produces continuous cream/red masonry and dark skirting on both ground
+and first floors. The room's side doorway and the route around the bend stay
+open. Both shared plan JSON copies and ground/first-floor review drawings
+are updated; rendering, maps, collision and navigation use the same boundary.
+
+`test-asylum-layout.mjs` adds 304 rendered masonry/skirting probes from both
+sides, collision and joined-endpoint checks, and walks around the bend in
+both directions on both affected floors. Layout, doorway, skirting and
+wall-join checks pass. The actual-game capture verifies four player walking
+passes, desktop/mobile views and no page or shader errors. Visual review
+confirms the opening is closed and the finish continues around the angle.
+Before/after evidence and the capture runner are in
+`Browser/artifacts/corridor-bend/` and
+`Browser/artifacts/check-corridor-bend.mjs`.
+
+The complete `npm test` run passes; its output is saved as
+`Browser/artifacts/corridor-bend/npm-test.log`. After concurrent wall-height
+renderer changes, the focused layout test and five actual-game views were
+rerun successfully, including all four player walking passes.
+
+Only browser interior plan sources, checks, drawings and notes were changed
+for this correction. The compiled aerial model excludes the interior and its
+manifest still matches the source fingerprint, so no rebuild was needed.
+Unity, Blender and packaged desktop/mobile exports were not regenerated.
+
+## West gallery lower return brick and flicker (2 October 2026)
+
+The yellow-circled lower join beside the gallery was open between two thin
+foundation strips. The gallery's cream backing ended at y=0.15, and the rear
+approach's generated gravel edge shared its end plane at z=-30.5. A matching
+brick return now closes the foundation to y=0.3, replacing the last 0.12 of
+the gallery side foundation rather than overlapping it. The cream backing
+starts at the brick top. The concealed paving step moves 0.2 towards the
+rear, placing its generated edge inside masonry. Research/west/README.md
+records the model coordinates and the supplied visual reference.
+
+The geometry is authored before timeline batching and transform caching.
+Existing runtime shadow/collision refresh paths are retained. The west-side
+basement regression adds 96 front-face probes across four period transitions,
+plus side-face overlap and retained upper-frame checks; it failed on the
+original model and passes after the repair. West-refinement and ground-contact
+checks also pass. Source and rebuilt compiled captures from three close
+angles show continuous brick without page or console errors.
+
+The initial full suite stopped at its estate-wide geometry snapshot. The
+saved-source audit in Browser/artifacts/gallery-brick/audit-snapshots.mjs
+reproduces both previous snapshots, then restores just the new brick return,
+shortened foundation, cream instance and paving vertices in memory to prove
+all other primitives remain exact. The two snapshots were refreshed only
+after that check, increasing each primitive count by one. The audit report,
+before/after views and validation logs are in Browser/artifacts/gallery-brick/.
+
+Shared browser model sources and the local compiled aerial model are updated.
+Unity, Blender and packaged desktop/mobile applications were not regenerated.
+
+Final validation: the complete npm test suite and npm run test:compiled both
+pass. The compiled checks cover source/image parity, full detail, missing,
+incompatible and corrupt fallbacks, all timeline stops and live walking
+collision refresh. The rebuilt manifest matches the current model source
+fingerprint. Final logs are suite-final.txt and compiled-suite.txt in
+Browser/artifacts/gallery-brick/.
+
+## Asylum pause-menu intro action (2 October 2026)
+
+The Esc pause menu uses compact Restart and Resume buttons on the left and
+a right-aligned Back to intro link styled as a button. It opens `./index.html`
+to return to the title page. On narrow screens the intro action wraps onto
+its own right-aligned row. The compact layout and intro action apply only to
+pause; capture and escape results keep their existing actions. Keyboard
+navigation remains available while paused.
+
+An actual-game browser check passed Esc pause, resume, restart, capture-result
+visibility, keyboard access and navigation back to the index. Screenshots at
+1280, 390 and 320 pixels wide were visually reviewed, with no menu overflow
+or page errors. Evidence is in `Browser/artifacts/pause-menu/`.
+The full `npm test` suite passed; its output is saved there as `npm-test.log`.
+Only browser UI sources changed; model and packaged exports were not rebuilt.
+
+## Inner courtyard light seams (2 October 2026)
+
+The bright floor strip and vertical corner in the west inner courtyard were
+shadow-map leaks at solid masonry contacts. The default back-face shadow pass
+recorded the far wall, and the 25 cm normal offset plus roughly 25 cm depth
+offset detached the filtered shadow from the receiving surface. Reducing the
+offsets alone left a thin light edge.
+
+`exterior-shadows.mjs` makes opaque architectural casters include both wall
+skins in the shadow map while preserving visible-face culling, explicit shadow
+sides, transparent materials and alpha-tested foliage. The shared builders
+apply it to the initial estate and added layout buildings before batching and
+transform caching. The sunlight normal offset is now 2 cm and its depth offset
+is about 1.7 cm. Geometry, materials' visible finishes, collisions, map size
+and cached-shadow invalidation are retained.
+
+`test-exterior-shadows.mjs` audits 6,376 assembled opaque casters, contact
+offsets, foliage/custom-material exclusions and invalidation. It is included
+in `npm test`. `npm run test:shadows` also runs the actual-game pixel survey:
+288 ground/wall samples across both inner courtyards in day, dusk and night.
+Independent rays establish sunlight occlusion; neighbouring rays distinguish
+natural distant shadow penumbras from solid contacts. The original settings
+fail at 37 samples. The corrected settings have no leaks in the surveyed
+solid-shadow regions, and open ground retains direct sunlight. The test also
+captures desktop/mobile views and rejects page or shader errors.
+
+The complete `npm test` suite passed, as did the focused shadow checks and
+`npm run test:compiled` after rebuilding the aerial model. Source/compiled
+renderings match and all timeline stops pass. Visual review covers the
+reported recess, the opposite recess, adjoining bases, the central rear step,
+frontage and daylight aerial scene. Evidence and logs are under
+`Browser/artifacts/courtyard-light/`.
+
+Browser sources and the local compiled aerial asset are updated. Unity,
+Blender and packaged desktop/mobile exports were not regenerated.
+
+## Flush angled interior masonry (2 October 2026)
+
+The marked Reception corner had connected centre lines but square-ended brick
+and cream wall boxes, leaving a recessed V above the mitred skirting. The
+shared `asylum-wall-geometry.mjs` now unions mitred wall footprints for both
+masonry and skirting on all four floors. Internal caps and overlapping faces
+at intersecting or duplicated full-height partitions disappear. Near-parallel
+sampled ends receive a short bevel when the theoretical mitre exceeds four
+half-widths, preventing long tips outside the walking walls.
+
+Masonry is cut around the existing windows before joining. The window bases,
+window heads and doorway headers retain their dimensions and merge with the
+full-height geometry into one draw call per finish. Brick/cream height,
+building-coordinate textures, ceiling overlap, room layouts, collisions,
+window schedules and intended openings are retained.
+
+The wall-join regression now surveys 334 convex corners across all four
+floors, with 2,004 brick/cream coverage probes and outward-facing side checks.
+It retains the 131 sampled gap checks, collision checks and clear doorway
+widths. The saved square-ended renderer fails the new corner survey. Older
+probes that began inside perpendicular walls now check solid coverage from
+above rather than requiring hidden internal caps. The skirting regression
+also rejects long tips at nearly parallel duplicate-wall ends.
+
+Focused layout, wall, ceiling, doorway, window, skirting and second-floor
+checks pass. The actual-game comparison captures 11 views before and after,
+covering both Reception sides, oblique views, the central corridor bend,
+basement flares, first/second floors and mobile. Eight player walking passes
+around the joins succeed in both directions, with no page or shader errors.
+Reviewed images show continuous masonry with no square-end recesses.
+Evidence, the baseline rejection and the full-suite log are under
+`Browser/artifacts/asylum-masonry-corners/`. Run `npm run test:masonry-corners`
+from Browser for the focused geometry and visual checks.
+
+The complete `npm test` suite passes; its output is saved as
+`Browser/artifacts/asylum-masonry-corners/npm-test.log`.
+
+Only browser interior rendering, tests and notes changed. The compiled aerial
+manifest matches its source fingerprint and needs no rebuild for this change.
+Unity, Blender, review drawings and packaged applications were not regenerated.
+
+## East ground-floor D10 wall surround (2 October 2026)
+
+The blue-circled courtyard door used a sampled circular clearance that removed
+masonry beside the frame and all the way to the ceiling. D10 now specifies a
+fitted opening in both shared plan JSON copies. The layout cuts exact jambs,
+retains the angled return, and shares the restored side walls with collision,
+navigation, skirting and the notebook map. Removed upper wall spans become
+cream masonry headers through the ceiling and adjoining floor. The door leaf
+reaches the frame head, and the frame and exit sign align with the interior
+wall face. D10's exterior position, destination and E behaviour are retained.
+The yellow-circled R35 fragment/pillar is retained, following the request's
+wording that it should be there; room boundaries and floor outlines are unchanged.
+
+`test-asylum-east-corner.mjs` passes 206 masonry probes, both jambs' skirting
+and collision checks, the closed leaf and two approach walks. It rejects the
+previous opening. The new browser check passes six desktop/mobile/upper-floor
+views, visible signage, D10's E round trip and release latch, with no page or
+shader errors. Final frontal, oblique and mobile captures were visually reviewed.
+Both checks are included in the relevant package test commands.
+
+`npm test` stops at the unrelated Jarman exterior geometry hash. Running the
+remaining commands also finds Leighton/Newton and annexe entrance-alignment
+hash mismatches; all other commands pass, including the interior regressions
+and the rerun game check after the sign correction. A dependency audit confirms
+none of the three failing tests imports the interior files edited here. Their
+expected snapshots were not changed. Logs, the baseline rejection, dependency
+audit and before/after views are under `Browser/artifacts/east-corner/`.
+
+Only browser interior sources, shared opening metadata, tests and notes were
+changed for this repair. The aerial compiler excludes these interiors; its
+local manifest was already inconsistent with the separate exterior source at
+validation time and was not rebuilt here. Unity, Blender, review drawings and
+packaged desktop/mobile exports were not regenerated.
+
+## Window and internal partition clearance (2 October 2026)
+
+The reported first-floor obstruction came from evenly spacing facade windows
+without consulting the room partitions. `asylum-windows.mjs` now projects the
+joined neighbouring walls into each facade run, excludes their footprints plus
+the full sill and a 0.15-unit clearance, and selects the nearest available
+position in the original bay. Adjacent sills also retain clearance. Window
+cuts, glass, sash and sill move together. Nineteen generated windows shift
+across the ground/first floors; the 257 generated and 17 explicitly scheduled
+windows retain their counts and dimensions.
+
+R1/R12 also had solid outer room linings 0.3 units behind the ground-floor
+windows. Their outer edges now align with x=±24.7 in both plan copies.
+Navigation, collision and wall rendering consume that same correction; no
+runtime exterior geometry or shadow state changes. Ground/first-floor review
+drawings are regenerated. The basement/second-floor schedules remain fixed.
+
+`test-asylum-window-clearance.mjs` checks all 274 sash positions, 1,334 exposed
+pane rays, full sill-to-partition clearance and retained collision. Generated
+sashes are also checked against exterior returns; explicitly scheduled sashes
+retain their existing facade reveals. The test rejects the saved pre-fix
+renderer/plan. It is included in `npm test` and `test:asylum`; run
+`npm run test:window-clearance` for geometry and actual-game visual checks.
+The browser check captures all 19 shifted windows, both adjusted room linings,
+an oblique first-floor corner, basement/second-floor schedules and mobile.
+Evidence and logs are under `Browser/artifacts/window-clearance/`.
+
+The final clearance survey and all relevant interior regressions pass. The
+25 before/after desktop/mobile views have no page or shader errors; visual
+review confirms full windows with masonry clearance beside their frames and
+sills. The complete `npm test` invocation reaches an unrelated Larkton exterior
+snapshot mismatch. Running every remaining command separately also finds
+other annexe protected-geometry snapshot mismatches, recorded in
+`suite-remaining.json` and `suite-remaining.log`. Expected exterior snapshots
+were not altered by this work; the full suite is not reported as passing.
+
+Only browser interior sources, tests, plan data and research drawings change.
+The aerial build dependency graph excludes these modules, so no aerial build
+or compiled-scene test is required. Its existing local manifest is already
+stale against unrelated exterior sources; this change does not refresh it.
+Unity, Blender and packaged applications were not regenerated.
+
+## Front-wall shadow banding (2 October 2026)
+
+The repeating diagonal pattern on 1829's rendered walls and stone coping was
+self-shadowing from the PCF depth comparisons. Disabling received shadows
+removed it while leaving the mineral grain intact. Increasing the constant
+depth bias still left bands and would weaken contact shadows.
+
+`exterior-shadows.mjs` now corrects each PCF comparison for the receiver's
+surface slope. It derives the receiver plane in shadow-map coordinates,
+compares the four neighbouring texel centres at their respective plane depths,
+then interpolates those results at each of the existing five sample positions.
+The light's small depth/normal offsets, shadow-map size, material culling and
+two-sided architectural casters are retained. The filter installs once before
+source or compiled-scene materials compile; `aerial-scene.mjs` installs it when
+restoring the binary too. Vendored Three.js files are unchanged. This uses more
+shader texture instructions; no frame-rate improvement is claimed.
+
+The focused shadow checks pass: 98,304 unobstructed receiver pixels across
+24 straight/oblique wall, angled-wall and ground views in day/dusk/night have
+no false shadows. The stock renderer fails that same regression. All 288
+existing courtyard wall/ground contact samples also pass, preserving the
+earlier light-leak repair. Desktop/mobile captures have no page or shader
+errors. The front walls, coping and courtyard views were visually reviewed.
+Before/after views and logs are under `Browser/artifacts/wall-shadows/`; the
+repeatable pixel survey is in `Browser/artifacts/courtyard-light/`.
+
+The local aerial model was rebuilt and `npm run test:compiled` passes, including
+source/compiled image comparison, full detail, model-load fallbacks and every
+timeline stop. The rebuilt manifest matches the current source. The full
+`npm test` invocation stops at an unrelated Larkton protected-model fingerprint mismatch;
+the same mismatch occurs with this shader correction disabled. Remaining
+suite commands are recorded separately in `remaining-summary.json` under the
+wall-shadow artifacts: 31 pass and 14 fail on existing protected-geometry
+snapshots or the stair-foot gravel-contact assertion. Expected model snapshots
+were not changed by this work.
+
+This repair changes browser shadow filtering and its validation only. Unity,
+Blender and packaged desktop/mobile exports were not regenerated.
+
+## Right-angle exterior wall joins (2 October 2026)
+
+The marked front retaining-wall bend used square-ended boxes meeting at their
+centre lines. This left a missing outer quadrant and overlapping inner top
+faces in both masonry and coping. The estate-wide wall-builder review found
+the same pattern in the mirrored front foundations/retaining walls, entrance
+stair returns, west basement retaining wall, Irby/Ashley conservatory,
+Main/admin and tower-service parapets, and Hospital Shop link coping.
+
+`wall-mitres.mjs` gives each adjoining run matching diagonal ends and removes
+internal caps. It retains named meshes, material finishes, heights and square
+free ends, supports unequal widths and reflected/rotated runs, and records
+exact polygon footprints for walking collisions. The entrance stair return
+and west basement runs now share centre-line endpoints. Their approaches,
+stair mouths, lower paving, doorways and front facade setback are retained.
+Geometry is completed within the builders before batching, transform caching
+and shadow preparation; existing runtime visibility/collision refresh remains.
+
+`test-wall-mitres.mjs`, included in the standard and model-check suites, surveys
+76 exterior wall/coping joins with 1,672 top/side probes and 90 filled-corner
+collision probes. It rejects missing outer corners, overlapping inner tops
+and incorrectly facing side surfaces. Rotated unequal-width examples also
+reject the original boxes and verify removed internal caps. Loading the saved
+pre-repair builders fails the same estate survey at a frontage corner.
+Existing affected-building and walking checks pass. The interior wall survey
+also checks its existing joined masonry on all four floors.
+
+`test-wall-mitres-browser.mjs` captures 15 desktop/mobile views in each source
+and compiled mode; the tower close-up has an additional corrected-camera
+capture. Reviewed frontage, stair, conservatory, basement and parapet images
+show clean mitres. Logs, before/after captures and the original-defect rejection
+are in `Browser/artifacts/wall-mitres/`. Run `npm run test:wall-mitres` after
+`npm run build:models`; `--before` uses the saved builders in that evidence folder.
+The owner's annotated reference and modelling note are in Research/front-basement.
+
+Browser model sources and local compiled aerial assets are updated. Unity,
+Blender and packaged desktop/mobile applications were not regenerated.
+
+Final validation for the right-angle repair: the focused building/walking
+checks, 76-join survey and `npm run test:models` pass. The source/compiled image,
+exact draw-count and fallback checks pass. Timeline checks pass at every stop,
+including mobile and live walking refresh; their screenshots use the task's
+own timeline subfolder after a concurrent write prevented saving a shared PNG.
+The final rebuilt manifest matches the current model-source fingerprint.
+
+The full standard suite was run, and all checks after its first failure were
+also executed. Final rechecks leave three unrelated annexe snapshot failures:
+`test-larkton-recess.mjs`, `test-oakmere-west.mjs` and `test-annexe-access.mjs`.
+Each also fails when this task's seven pre-repair wall builders are restored
+through the evidence loader. Their protected baselines were not changed by
+this task. Other transient snapshot/eaves failures cleared on current-source
+rechecks. The stair-foot test was updated to expect coping in the filled
+corner and still verifies gravel immediately outside both adjoining faces.

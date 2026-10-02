@@ -4,6 +4,7 @@ import * as THREE from './dist/vendor/three.module.js';
 import {buildAsylumLayout,segmentDistance} from './dist/asylum-layout.mjs';
 import {buildAsylumArchitecture} from './dist/asylum-architecture.mjs';
 import {asylumSkirtingGeometry} from './dist/asylum-skirting.mjs';
+import {asylumWallShapes,extrudeAsylumWalls} from './dist/asylum-wall-geometry.mjs';
 
 const ray=new THREE.Raycaster(),material=new THREE.MeshBasicMaterial(),wall=(a,b)=>({a,b});
 let windows=0,surfaces=0,clearances=0;
@@ -40,6 +41,14 @@ const corner=new THREE.Mesh(asylumSkirtingGeometry(THREE,[wall([-2,0],[0,0]),wal
 corner.updateMatrixWorld(true);top(corner,.098,-.097); // Convex mitre beyond both original square ends.
 const caps=new THREE.Mesh(asylumSkirtingGeometry(THREE,[wall([0,0],[2,0])]),material);caps.updateMatrixWorld(true);
 assert(Math.abs(cast(caps,[-.5,.13,0],[1,0,0])[0].point.x+.012)<1e-5,'Free caps clear the brick end plane');
+// Near-parallel sampled room boundaries share a start at the west end. Their
+// theoretical mitre must not become a long spike outside the collision wall.
+const acute=[wall([0,0],[8,0]),wall([0,0],[8,-.35])];
+for(const geometry of [asylumSkirtingGeometry(THREE,acute),extrudeAsylumWalls(THREE,asylumWallShapes(THREE,acute),0,1.1)]){
+ geometry.computeBoundingBox();
+ assert(geometry.boundingBox.min.x>-.02,'An acute duplicate-wall join has a short closed bevel, never a projecting spike');
+ geometry.dispose();
+}
 
 const plan=JSON.parse(await readFile(new URL('./dist/asylum-plan.json',import.meta.url))),floors=buildAsylumLayout(plan).floors;
 for(const floor of floors){

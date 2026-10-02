@@ -1,0 +1,22 @@
+{
+  "walked": {
+    "results": [
+      true,
+      true,
+      true,
+      true
+    ],
+    "floors": [
+      "Ground floor",
+      "First floor",
+      "Basement",
+      "Second floor"
+    ],
+    "views": [
+      "Ground floor",
+      "First floor",
+      "Second floor"
+    ]
+  },
+  "errors": []
+}

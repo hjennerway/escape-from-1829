@@ -324,8 +324,12 @@ export function createAnnexe(THREE,{brick,roof,material,worldUV,hipRoof}){
    for(let k=0;k<count;k++){const f=(k+.5)/count;sash('West low canted bay',p[0]+f*dx+Math.sin(r)*.04,2.3,p[1]+f*dz+Math.cos(r)*.04,1.15,2.9,r);}
   }
  }
- solid(blue,-29.15,3.6,-.2,.15,2.8,1.4,'Tower fire exit door');
- solid(blue,-30.1,5.05,-.2,2.0,.15,2.0,'Fire stair landing');
+ // The door sill meets the top of the existing stair landing. The old
+ // centre height put the entire opening underneath the platform.
+ solid(blue,-29.19,5.05+.15/2+2.8/2,-.2,.15,2.8,1.4,'Tower fire exit door');
+ // Continue the deck to the actual top tread, which lies farther back and
+ // out from the tower. Both reflected doors now have an unbroken escape.
+ solid(blue,-30.65,5.05,-1.4,3.1,.15,4.4,'Fire stair landing');
 
  const tx=-15*ANNEXE_MAP_SCALE,tz=-2*ANNEXE_MAP_SCALE;
  for(let i=0;i<18;i++)solid(blue,tx-7,.2+i*.27,tz+6-i*.36,1.65,.10,.42,'Blue external stair tread');

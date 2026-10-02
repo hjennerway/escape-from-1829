@@ -1,0 +1,25 @@
+{
+  "errors": [],
+  "views": 4,
+  "dimensions": [
+    {
+      "name": "Asylum Brick",
+      "height": 2.32,
+      "width": 1.9885714285714282,
+      "bottom": 0.29000000000000004,
+      "top": 2.61,
+      "centerX": -34.65,
+      "wallZ": 1.39
+    },
+    {
+      "name": "Asylum Plaster",
+      "height": 2.32,
+      "width": 1.9885714285714282,
+      "bottom": 0.29000000000000004,
+      "top": 2.61,
+      "centerX": -34.65,
+      "wallZ": 1.39
+    }
+  ],
+  "isolatedWindows": false
+}

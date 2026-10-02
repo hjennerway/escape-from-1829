@@ -1,0 +1,35 @@
+{
+  "views": 9,
+  "door": {
+    "name": "Asylum Stone",
+    "color": 11380118,
+    "signs": 13,
+    "exits": 13
+  },
+  "trip": {
+    "outside": true,
+    "latched": true,
+    "returned": true,
+    "position": [
+      0,
+      1.8,
+      21.7
+    ],
+    "expected": [
+      0,
+      1.8,
+      21.7
+    ]
+  },
+  "texture": {
+    "seam": [
+      8.287760416666666,
+      6.199544270833348
+    ],
+    "adjacent": [
+      3.1140245702972686,
+      3.1925260034796934
+    ]
+  },
+  "errors": []
+}

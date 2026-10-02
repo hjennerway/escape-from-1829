@@ -1,6 +1,7 @@
 // Owner's marked front view, 27 September 2026: red entrances descend,
 // the yellow walk follows the stepped facade, and the inner blue exits rise.
 // Keep the window schedule and main entrance stairs at their existing heights.
+import {mitreRightAngleWalls} from './wall-mitres.mjs';
 export const FRONT_BASEMENT=Object.freeze({grade:.195,depth:1.215,steps:6,tread:.4});
 export const FRONT_BASEMENT_OUTER_FLIGHT=Object.freeze({inner:28.35,outer:30.75,z:20.7,width:2});
 const floorOutline=[
@@ -44,15 +45,17 @@ export function addFrontBasement(THREE,{model,material}){
       mesh.position.set(side*x,(bottom+top)/2,z);mesh.name=label+' '+name;
       mesh.castShadow=mesh.receiveShadow=true;group.add(mesh);return mesh;
     }
+    const wallRuns=[];
     function wall(name,a,b,bottom,top,width,mat,barrier=false){
       const dx=b[0]-a[0],dz=b[1]-a[1];
       const mesh=block(name,mat,(a[0]+b[0])/2,(a[1]+b[1])/2,Math.hypot(dx,dz),width,bottom,top);
       mesh.rotation.y=-Math.atan2(dz,side*dx);mesh.userData.orientedCollision=true;
-      mesh.userData.walkBarrier=barrier;return mesh;
+      mesh.userData.walkBarrier=barrier;wallRuns.push(mesh);return mesh;
     }
     surface('lower paving',floorOutline,level);
     // Extend only the exposed foundation below the original walls. The bottom
-    // row of windows, blue doors and all existing upper masonry stay fixed.
+    // row of windows and upper masonry stay fixed. The blue doorway builder
+    // shares this paving level so its sills follow the excavation.
     for(let i=0;i<5;i++)wall('exposed foundation '+i,floorOutline[i],floorOutline[i+1],level-.08,.02,.08,white);
     // Six original-height risers make the walk 50% deeper. The outer flight
     // runs along the facade from the blue-marked corner, not into the lawn.
@@ -85,5 +88,6 @@ export function addFrontBasement(THREE,{model,material}){
       }else wall('retaining wall '+i,a,b,level-.08,grade-.025,.16,masonry,true);
       wall('retaining coping '+i,a,b,grade-.025,grade+.055,.2,stone);
     });
+    mitreRightAngleWalls(THREE,wallRuns);
   }
 }

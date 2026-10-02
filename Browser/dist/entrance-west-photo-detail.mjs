@@ -1,4 +1,5 @@
 import {FRONT_CORNER_OUTLINE} from './front-inside-corners.mjs';
+import {FRONT_BASEMENT} from './front-basement.mjs';
 // img19.jpg: northward view from the lawn immediately west of Reception.
 // Window positions and the projecting three-bay section are photo estimates.
 export const ENTRANCE_WEST_PHOTO_VIEW=Object.freeze({position:[-10,1.8,43.8],target:[-20.7,7.2,18],fov:44});
@@ -91,8 +92,11 @@ export function addEntranceWestPhotoDetails(THREE,{model,box,mesh,worldUV,white,
   // The white lower level contains two doors, not a third generic sash row.
   for(const x of [-28.1,-24.25])opening('entrance-west-lower',x,1.45,p.projectionZ+.07,1.25,2.1);
   for(const x of [-21,-17.85,-14.7,-8.4])opening('entrance-west-lower',x,1.45,p.wallZ+.07,1.22,2.1);
-  door(-26.15,p.projectionZ+.08,0,-.28);
-  door(-11.55,p.wallZ+.08,0,-.28);
+  // Both doors open onto the excavated walk. Share its finished level so
+  // deepening the walk cannot leave the doors suspended above the paving.
+  const doorLevel=FRONT_BASEMENT.grade-FRONT_BASEMENT.depth;
+  door(-26.15,p.projectionZ+.08,0,doorLevel);
+  door(-11.55,p.wallZ+.08,0,doorLevel);
   // Fine glazing on the Reception front ties the photographed right edge to
   // the new elevation; the red door, columns and heraldry retain their shape.
   if(includeReception)for(const x of [-4,0,4])for(const y of [4.3,8.9,12.4])if(x!==0||y!==4.3)

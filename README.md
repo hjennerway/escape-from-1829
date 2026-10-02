@@ -16,7 +16,7 @@ Inside the estate site, click the cross-hairs to pinpoint your position to see w
 
 [Play in your browser](https://hjennerway.github.io/escape-from-1829/).
 
-Use **WASD** to move, the **mouse** to look, **Shift** to sprint, **C/Ctrl** to
+Use **WASD** to move, the **mouse** to look, **Shift** to sprint, **Space** to jump over small walls and hedges, **C/Ctrl** to
 crouch, **F** for the torch and **Tab/M/N** for the notebook and explored map. Walk up and down the stairs.
 Press **E** at a door to go outside or return inside; hold **E** to view wall artwork.
 Reach the front path outside to escape. **H** shows survival help; **Esc** pauses.

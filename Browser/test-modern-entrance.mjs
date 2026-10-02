@@ -40,7 +40,12 @@ for(const side of [-1,1]){
     ray.set(new THREE.Vector3(x,40,z),new THREE.Vector3(0,-1,0));
     return ray.intersectObjects(surfaces,false).find(hit=>{for(let o=hit.object;o;o=o.parent)if(!o.visible)return false;return true;});
   };
-  for(const [x,z] of [[3.95,26.05],[4.18,26.17]])assert.equal(visibleSurface(side*x,z).object.material.userData.estateSurface,'gravel','Both tiny stair-foot corners must meet the surrounding gravel');
+  for(const [x,z] of [[3.95,26.05],[4.18,26.17]]){
+    const hit=visibleSurface(side*x,z);
+    assert(/(?:outer return|turning) parapet surface$/.test(hit.object.name),'The former stair-wall notch is filled with continuous coping');
+    assert(Math.abs(hit.point.y-2.45)<1e-5,'Filled coping retains the established parapet height');
+  }
+  for(const [x,z] of [[3.95,26.24],[4.3,26.17]])assert.equal(visibleSurface(side*x,z).object.material.userData.estateSurface,'gravel','Gravel still meets both sides of the square stair foot');
   assert(visibleSurface(side*10,25).object.material.userData.estateGrass,'The larger Reception lawns remain grass');
 }
 assert.notEqual(surfaceAt(12,39).object.name,'Semicircular Reception paved forecourt','The court must have a rounded edge rather than rectangular corners');

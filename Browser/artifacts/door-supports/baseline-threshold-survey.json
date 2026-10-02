@@ -1,0 +1,2705 @@
+{
+  "doors": 109,
+  "states": [
+    {
+      "year": 1829,
+      "checked": 11,
+      "issues": [
+        {
+          "door": "1829 estate · aerial reconstruction -26.15,19.779999999999998",
+          "point": [
+            -26.718,
+            0.2200000286102295,
+            20.08
+          ],
+          "bottom": -0.2799999713897705,
+          "support": "West semi-basement lower paving",
+          "supportY": -1.0200000000000045,
+          "gap": 0.740000028610234
+        },
+        {
+          "door": "1829 estate · aerial reconstruction -26.15,19.779999999999998",
+          "point": [
+            -26.15,
+            0.2200000286102295,
+            20.08
+          ],
+          "bottom": -0.2799999713897705,
+          "support": "West semi-basement lower paving",
+          "supportY": -1.0200000000000045,
+          "gap": 0.740000028610234
+        },
+        {
+          "door": "1829 estate · aerial reconstruction -26.15,19.779999999999998",
+          "point": [
+            -25.581999999999997,
+            0.2200000286102295,
+            20.08
+          ],
+          "bottom": -0.2799999713897705,
+          "support": "West semi-basement lower paving",
+          "supportY": -1.0200000000000045,
+          "gap": 0.740000028610234
+        },
+        {
+          "door": "1829 estate · aerial reconstruction -11.55,17.38",
+          "point": [
+            -12.118,
+            0.2200000286102295,
+            17.68
+          ],
+          "bottom": -0.2799999713897705,
+          "support": "West semi-basement lower paving",
+          "supportY": -1.0200000000000042,
+          "gap": 0.7400000286102337
+        },
+        {
+          "door": "1829 estate · aerial reconstruction -11.55,17.38",
+          "point": [
+            -11.55,
+            0.2200000286102295,
+            17.68
+          ],
+          "bottom": -0.2799999713897705,
+          "support": "West semi-basement lower paving",
+          "supportY": -1.0200000000000042,
+          "gap": 0.7400000286102337
+        },
+        {
+          "door": "1829 estate · aerial reconstruction -11.55,17.38",
+          "point": [
+            -10.982000000000001,
+            0.2200000286102295,
+            17.68
+          ],
+          "bottom": -0.2799999713897705,
+          "support": "West semi-basement lower paving",
+          "supportY": -1.0200000000000042,
+          "gap": 0.7400000286102337
+        },
+        {
+          "door": "1829 estate · aerial reconstruction 26.15,19.779999999999998",
+          "point": [
+            25.581999999999997,
+            0.2200000286102295,
+            20.08
+          ],
+          "bottom": -0.2799999713897705,
+          "support": "East semi-basement lower paving",
+          "supportY": -1.0200000000000045,
+          "gap": 0.740000028610234
+        },
+        {
+          "door": "1829 estate · aerial reconstruction 26.15,19.779999999999998",
+          "point": [
+            26.15,
+            0.2200000286102295,
+            20.08
+          ],
+          "bottom": -0.2799999713897705,
+          "support": "East semi-basement lower paving",
+          "supportY": -1.0200000000000045,
+          "gap": 0.740000028610234
+        },
+        {
+          "door": "1829 estate · aerial reconstruction 26.15,19.779999999999998",
+          "point": [
+            26.718,
+            0.2200000286102295,
+            20.08
+          ],
+          "bottom": -0.2799999713897705,
+          "support": "East semi-basement lower paving",
+          "supportY": -1.0200000000000045,
+          "gap": 0.740000028610234
+        },
+        {
+          "door": "1829 estate · aerial reconstruction 11.55,17.38",
+          "point": [
+            10.982000000000001,
+            0.2200000286102295,
+            17.68
+          ],
+          "bottom": -0.2799999713897705,
+          "support": "East semi-basement lower paving",
+          "supportY": -1.0200000000000042,
+          "gap": 0.7400000286102337
+        },
+        {
+          "door": "1829 estate · aerial reconstruction 11.55,17.38",
+          "point": [
+            11.55,
+            0.2200000286102295,
+            17.68
+          ],
+          "bottom": -0.2799999713897705,
+          "support": "East semi-basement lower paving",
+          "supportY": -1.0200000000000042,
+          "gap": 0.7400000286102337
+        },
+        {
+          "door": "1829 estate · aerial reconstruction 11.55,17.38",
+          "point": [
+            12.118,
+            0.2200000286102295,
+            17.68
+          ],
+          "bottom": -0.2799999713897705,
+          "support": "East semi-basement lower paving",
+          "supportY": -1.020000000000004,
+          "gap": 0.7400000286102335
+        },
+        {
+          "door": "1829 bespoke door 0,19.899999618530273",
+          "point": [
+            -0.76,
+            2.399999976158142,
+            20.099999618530273
+          ],
+          "bottom": 1.899999976158142,
+          "support": "Front doorway landing surface",
+          "supportY": 1.7999999988079072,
+          "gap": 0.09999997735023491
+        },
+        {
+          "door": "1829 bespoke door 0,19.899999618530273",
+          "point": [
+            0,
+            2.399999976158142,
+            20.099999618530273
+          ],
+          "bottom": 1.899999976158142,
+          "support": "Front doorway landing surface",
+          "supportY": 1.7999999988079072,
+          "gap": 0.09999997735023491
+        },
+        {
+          "door": "1829 bespoke door 0,19.899999618530273",
+          "point": [
+            0.76,
+            2.399999976158142,
+            20.099999618530273
+          ],
+          "bottom": 1.899999976158142,
+          "support": "Front doorway landing surface",
+          "supportY": 1.7999999988079072,
+          "gap": 0.09999997735023491
+        }
+      ]
+    },
+    {
+      "year": 1849,
+      "checked": 26,
+      "issues": [
+        {
+          "door": "1829 estate · aerial reconstruction -26.15,19.779999999999998",
+          "point": [
+            -26.718,
+            0.2200000286102295,
+            20.08
+          ],
+          "bottom": -0.2799999713897705,
+          "support": "West semi-basement lower paving",
+          "supportY": -1.0200000000000045,
+          "gap": 0.740000028610234
+        },
+        {
+          "door": "1829 estate · aerial reconstruction -26.15,19.779999999999998",
+          "point": [
+            -26.15,
+            0.2200000286102295,
+            20.08
+          ],
+          "bottom": -0.2799999713897705,
+          "support": "West semi-basement lower paving",
+          "supportY": -1.0200000000000045,
+          "gap": 0.740000028610234
+        },
+        {
+          "door": "1829 estate · aerial reconstruction -26.15,19.779999999999998",
+          "point": [
+            -25.581999999999997,
+            0.2200000286102295,
+            20.08
+          ],
+          "bottom": -0.2799999713897705,
+          "support": "West semi-basement lower paving",
+          "supportY": -1.0200000000000045,
+          "gap": 0.740000028610234
+        },
+        {
+          "door": "1829 estate · aerial reconstruction -11.55,17.38",
+          "point": [
+            -12.118,
+            0.2200000286102295,
+            17.68
+          ],
+          "bottom": -0.2799999713897705,
+          "support": "West semi-basement lower paving",
+          "supportY": -1.0200000000000042,
+          "gap": 0.7400000286102337
+        },
+        {
+          "door": "1829 estate · aerial reconstruction -11.55,17.38",
+          "point": [
+            -11.55,
+            0.2200000286102295,
+            17.68
+          ],
+          "bottom": -0.2799999713897705,
+          "support": "West semi-basement lower paving",
+          "supportY": -1.0200000000000042,
+          "gap": 0.7400000286102337
+        },
+        {
+          "door": "1829 estate · aerial reconstruction -11.55,17.38",
+          "point": [
+            -10.982000000000001,
+            0.2200000286102295,
+            17.68
+          ],
+          "bottom": -0.2799999713897705,
+          "support": "West semi-basement lower paving",
+          "supportY": -1.0200000000000042,
+          "gap": 0.7400000286102337
+        },
+        {
+          "door": "1829 estate · aerial reconstruction 26.15,19.779999999999998",
+          "point": [
+            25.581999999999997,
+            0.2200000286102295,
+            20.08
+          ],
+          "bottom": -0.2799999713897705,
+          "support": "East semi-basement lower paving",
+          "supportY": -1.0200000000000045,
+          "gap": 0.740000028610234
+        },
+        {
+          "door": "1829 estate · aerial reconstruction 26.15,19.779999999999998",
+          "point": [
+            26.15,
+            0.2200000286102295,
+            20.08
+          ],
+          "bottom": -0.2799999713897705,
+          "support": "East semi-basement lower paving",
+          "supportY": -1.0200000000000045,
+          "gap": 0.740000028610234
+        },
+        {
+          "door": "1829 estate · aerial reconstruction 26.15,19.779999999999998",
+          "point": [
+            26.718,
+            0.2200000286102295,
+            20.08
+          ],
+          "bottom": -0.2799999713897705,
+          "support": "East semi-basement lower paving",
+          "supportY": -1.0200000000000045,
+          "gap": 0.740000028610234
+        },
+        {
+          "door": "1829 estate · aerial reconstruction 11.55,17.38",
+          "point": [
+            10.982000000000001,
+            0.2200000286102295,
+            17.68
+          ],
+          "bottom": -0.2799999713897705,
+          "support": "East semi-basement lower paving",
+          "supportY": -1.0200000000000042,
+          "gap": 0.7400000286102337
+        },
+        {
+          "door": "1829 estate · aerial reconstruction 11.55,17.38",
+          "point": [
+            11.55,
+            0.2200000286102295,
+            17.68
+          ],
+          "bottom": -0.2799999713897705,
+          "support": "East semi-basement lower paving",
+          "supportY": -1.0200000000000042,
+          "gap": 0.7400000286102337
+        },
+        {
+          "door": "1829 estate · aerial reconstruction 11.55,17.38",
+          "point": [
+            12.118,
+            0.2200000286102295,
+            17.68
+          ],
+          "bottom": -0.2799999713897705,
+          "support": "East semi-basement lower paving",
+          "supportY": -1.020000000000004,
+          "gap": 0.7400000286102335
+        },
+        {
+          "door": "1829 bespoke door 0,19.899999618530273",
+          "point": [
+            -0.76,
+            2.399999976158142,
+            20.099999618530273
+          ],
+          "bottom": 1.899999976158142,
+          "support": "Front doorway landing surface",
+          "supportY": 1.7999999988079072,
+          "gap": 0.09999997735023491
+        },
+        {
+          "door": "1829 bespoke door 0,19.899999618530273",
+          "point": [
+            0,
+            2.399999976158142,
+            20.099999618530273
+          ],
+          "bottom": 1.899999976158142,
+          "support": "Front doorway landing surface",
+          "supportY": 1.7999999988079072,
+          "gap": 0.09999997735023491
+        },
+        {
+          "door": "1829 bespoke door 0,19.899999618530273",
+          "point": [
+            0.76,
+            2.399999976158142,
+            20.099999618530273
+          ],
+          "bottom": 1.899999976158142,
+          "support": "Front doorway landing surface",
+          "supportY": 1.7999999988079072,
+          "gap": 0.09999997735023491
+        }
+      ]
+    },
+    {
+      "year": 1870,
+      "checked": 33,
+      "issues": [
+        {
+          "door": "1829 estate · aerial reconstruction -26.15,19.779999999999998",
+          "point": [
+            -26.718,
+            0.2200000286102295,
+            20.08
+          ],
+          "bottom": -0.2799999713897705,
+          "support": "West semi-basement lower paving",
+          "supportY": -1.0200000000000045,
+          "gap": 0.740000028610234
+        },
+        {
+          "door": "1829 estate · aerial reconstruction -26.15,19.779999999999998",
+          "point": [
+            -26.15,
+            0.2200000286102295,
+            20.08
+          ],
+          "bottom": -0.2799999713897705,
+          "support": "West semi-basement lower paving",
+          "supportY": -1.0200000000000045,
+          "gap": 0.740000028610234
+        },
+        {
+          "door": "1829 estate · aerial reconstruction -26.15,19.779999999999998",
+          "point": [
+            -25.581999999999997,
+            0.2200000286102295,
+            20.08
+          ],
+          "bottom": -0.2799999713897705,
+          "support": "West semi-basement lower paving",
+          "supportY": -1.0200000000000045,
+          "gap": 0.740000028610234
+        },
+        {
+          "door": "1829 estate · aerial reconstruction -11.55,17.38",
+          "point": [
+            -12.118,
+            0.2200000286102295,
+            17.68
+          ],
+          "bottom": -0.2799999713897705,
+          "support": "West semi-basement lower paving",
+          "supportY": -1.0200000000000042,
+          "gap": 0.7400000286102337
+        },
+        {
+          "door": "1829 estate · aerial reconstruction -11.55,17.38",
+          "point": [
+            -11.55,
+            0.2200000286102295,
+            17.68
+          ],
+          "bottom": -0.2799999713897705,
+          "support": "West semi-basement lower paving",
+          "supportY": -1.0200000000000042,
+          "gap": 0.7400000286102337
+        },
+        {
+          "door": "1829 estate · aerial reconstruction -11.55,17.38",
+          "point": [
+            -10.982000000000001,
+            0.2200000286102295,
+            17.68
+          ],
+          "bottom": -0.2799999713897705,
+          "support": "West semi-basement lower paving",
+          "supportY": -1.0200000000000042,
+          "gap": 0.7400000286102337
+        },
+        {
+          "door": "1829 estate · aerial reconstruction 26.15,19.779999999999998",
+          "point": [
+            25.581999999999997,
+            0.2200000286102295,
+            20.08
+          ],
+          "bottom": -0.2799999713897705,
+          "support": "East semi-basement lower paving",
+          "supportY": -1.0200000000000045,
+          "gap": 0.740000028610234
+        },
+        {
+          "door": "1829 estate · aerial reconstruction 26.15,19.779999999999998",
+          "point": [
+            26.15,
+            0.2200000286102295,
+            20.08
+          ],
+          "bottom": -0.2799999713897705,
+          "support": "East semi-basement lower paving",
+          "supportY": -1.0200000000000045,
+          "gap": 0.740000028610234
+        },
+        {
+          "door": "1829 estate · aerial reconstruction 26.15,19.779999999999998",
+          "point": [
+            26.718,
+            0.2200000286102295,
+            20.08
+          ],
+          "bottom": -0.2799999713897705,
+          "support": "East semi-basement lower paving",
+          "supportY": -1.0200000000000045,
+          "gap": 0.740000028610234
+        },
+        {
+          "door": "1829 estate · aerial reconstruction 11.55,17.38",
+          "point": [
+            10.982000000000001,
+            0.2200000286102295,
+            17.68
+          ],
+          "bottom": -0.2799999713897705,
+          "support": "East semi-basement lower paving",
+          "supportY": -1.0200000000000042,
+          "gap": 0.7400000286102337
+        },
+        {
+          "door": "1829 estate · aerial reconstruction 11.55,17.38",
+          "point": [
+            11.55,
+            0.2200000286102295,
+            17.68
+          ],
+          "bottom": -0.2799999713897705,
+          "support": "East semi-basement lower paving",
+          "supportY": -1.0200000000000042,
+          "gap": 0.7400000286102337
+        },
+        {
+          "door": "1829 estate · aerial reconstruction 11.55,17.38",
+          "point": [
+            12.118,
+            0.2200000286102295,
+            17.68
+          ],
+          "bottom": -0.2799999713897705,
+          "support": "East semi-basement lower paving",
+          "supportY": -1.020000000000004,
+          "gap": 0.7400000286102335
+        },
+        {
+          "door": "1829 bespoke door 0,19.899999618530273",
+          "point": [
+            -0.76,
+            2.399999976158142,
+            20.099999618530273
+          ],
+          "bottom": 1.899999976158142,
+          "support": "Front doorway landing surface",
+          "supportY": 1.7999999988079072,
+          "gap": 0.09999997735023491
+        },
+        {
+          "door": "1829 bespoke door 0,19.899999618530273",
+          "point": [
+            0,
+            2.399999976158142,
+            20.099999618530273
+          ],
+          "bottom": 1.899999976158142,
+          "support": "Front doorway landing surface",
+          "supportY": 1.7999999988079072,
+          "gap": 0.09999997735023491
+        },
+        {
+          "door": "1829 bespoke door 0,19.899999618530273",
+          "point": [
+            0.76,
+            2.399999976158142,
+            20.099999618530273
+          ],
+          "bottom": 1.899999976158142,
+          "support": "Front doorway landing surface",
+          "supportY": 1.7999999988079072,
+          "gap": 0.09999997735023491
+        }
+      ]
+    },
+    {
+      "year": 1916,
+      "checked": 109,
+      "issues": [
+        {
+          "door": "1829 estate · aerial reconstruction -26.15,19.779999999999998",
+          "point": [
+            -26.718,
+            0.2200000286102295,
+            20.08
+          ],
+          "bottom": -0.2799999713897705,
+          "support": "West semi-basement lower paving",
+          "supportY": -1.0200000000000045,
+          "gap": 0.740000028610234
+        },
+        {
+          "door": "1829 estate · aerial reconstruction -26.15,19.779999999999998",
+          "point": [
+            -26.15,
+            0.2200000286102295,
+            20.08
+          ],
+          "bottom": -0.2799999713897705,
+          "support": "West semi-basement lower paving",
+          "supportY": -1.0200000000000045,
+          "gap": 0.740000028610234
+        },
+        {
+          "door": "1829 estate · aerial reconstruction -26.15,19.779999999999998",
+          "point": [
+            -25.581999999999997,
+            0.2200000286102295,
+            20.08
+          ],
+          "bottom": -0.2799999713897705,
+          "support": "West semi-basement lower paving",
+          "supportY": -1.0200000000000045,
+          "gap": 0.740000028610234
+        },
+        {
+          "door": "1829 estate · aerial reconstruction -11.55,17.38",
+          "point": [
+            -12.118,
+            0.2200000286102295,
+            17.68
+          ],
+          "bottom": -0.2799999713897705,
+          "support": "West semi-basement lower paving",
+          "supportY": -1.0200000000000042,
+          "gap": 0.7400000286102337
+        },
+        {
+          "door": "1829 estate · aerial reconstruction -11.55,17.38",
+          "point": [
+            -11.55,
+            0.2200000286102295,
+            17.68
+          ],
+          "bottom": -0.2799999713897705,
+          "support": "West semi-basement lower paving",
+          "supportY": -1.0200000000000042,
+          "gap": 0.7400000286102337
+        },
+        {
+          "door": "1829 estate · aerial reconstruction -11.55,17.38",
+          "point": [
+            -10.982000000000001,
+            0.2200000286102295,
+            17.68
+          ],
+          "bottom": -0.2799999713897705,
+          "support": "West semi-basement lower paving",
+          "supportY": -1.0200000000000042,
+          "gap": 0.7400000286102337
+        },
+        {
+          "door": "1829 estate · aerial reconstruction 26.15,19.779999999999998",
+          "point": [
+            25.581999999999997,
+            0.2200000286102295,
+            20.08
+          ],
+          "bottom": -0.2799999713897705,
+          "support": "East semi-basement lower paving",
+          "supportY": -1.0200000000000045,
+          "gap": 0.740000028610234
+        },
+        {
+          "door": "1829 estate · aerial reconstruction 26.15,19.779999999999998",
+          "point": [
+            26.15,
+            0.2200000286102295,
+            20.08
+          ],
+          "bottom": -0.2799999713897705,
+          "support": "East semi-basement lower paving",
+          "supportY": -1.0200000000000045,
+          "gap": 0.740000028610234
+        },
+        {
+          "door": "1829 estate · aerial reconstruction 26.15,19.779999999999998",
+          "point": [
+            26.718,
+            0.2200000286102295,
+            20.08
+          ],
+          "bottom": -0.2799999713897705,
+          "support": "East semi-basement lower paving",
+          "supportY": -1.0200000000000045,
+          "gap": 0.740000028610234
+        },
+        {
+          "door": "1829 estate · aerial reconstruction 11.55,17.38",
+          "point": [
+            10.982000000000001,
+            0.2200000286102295,
+            17.68
+          ],
+          "bottom": -0.2799999713897705,
+          "support": "East semi-basement lower paving",
+          "supportY": -1.0200000000000042,
+          "gap": 0.7400000286102337
+        },
+        {
+          "door": "1829 estate · aerial reconstruction 11.55,17.38",
+          "point": [
+            11.55,
+            0.2200000286102295,
+            17.68
+          ],
+          "bottom": -0.2799999713897705,
+          "support": "East semi-basement lower paving",
+          "supportY": -1.0200000000000042,
+          "gap": 0.7400000286102337
+        },
+        {
+          "door": "1829 estate · aerial reconstruction 11.55,17.38",
+          "point": [
+            12.118,
+            0.2200000286102295,
+            17.68
+          ],
+          "bottom": -0.2799999713897705,
+          "support": "East semi-basement lower paving",
+          "supportY": -1.020000000000004,
+          "gap": 0.7400000286102335
+        },
+        {
+          "door": "Garage row 15.65,-0.075",
+          "point": [
+            193.89324389679007,
+            0.6200001239776611,
+            110.31295281009818
+          ],
+          "bottom": 0.12000012397766113,
+          "support": "Garage concrete apron",
+          "supportY": 0.08999999612569809,
+          "gap": 0.030000127851963043
+        },
+        {
+          "door": "Garage row 15.65,-0.075",
+          "point": [
+            192.5996955495171,
+            0.6200001239776611,
+            110.18359797537089
+          ],
+          "bottom": 0.12000012397766113,
+          "support": "Garage concrete apron",
+          "supportY": 0.08999999612569809,
+          "gap": 0.030000127851963043
+        },
+        {
+          "door": "Garage row 15.65,-0.075",
+          "point": [
+            191.30614720224412,
+            0.6200001239776611,
+            110.05424314064359
+          ],
+          "bottom": 0.12000012397766113,
+          "support": "Garage concrete apron",
+          "supportY": 0.08999999612569809,
+          "gap": 0.030000127851963043
+        },
+        {
+          "door": "Garage row 11.85,-0.075",
+          "point": [
+            189.83349216073333,
+            0.6200000047683716,
+            109.90697763649251
+          ],
+          "bottom": 0.12000000476837158,
+          "support": "Garage concrete apron",
+          "supportY": 0.08999999612569809,
+          "gap": 0.030000008642673492
+        },
+        {
+          "door": "Garage row 11.85,-0.075",
+          "point": [
+            188.81855422671913,
+            0.6200000047683716,
+            109.8054838430911
+          ],
+          "bottom": 0.12000000476837158,
+          "support": "Garage concrete apron",
+          "supportY": 0.08999999612569809,
+          "gap": 0.030000008642673492
+        },
+        {
+          "door": "Garage row 11.85,-0.075",
+          "point": [
+            187.80361629270493,
+            0.6200000047683716,
+            109.70399004968968
+          ],
+          "bottom": 0.12000000476837158,
+          "support": "Garage concrete apron",
+          "supportY": 0.08999999612569809,
+          "gap": 0.030000008642673492
+        },
+        {
+          "door": "Garage row 1.45,-0.075",
+          "point": [
+            179.42540315113683,
+            0.6200000047683716,
+            108.86616873553285
+          ],
+          "bottom": 0.12000000476837158,
+          "support": "Garage concrete apron",
+          "supportY": 0.08999999612569809,
+          "gap": 0.030000008642673492
+        },
+        {
+          "door": "Garage row 1.45,-0.075",
+          "point": [
+            178.47016744853525,
+            0.6200000047683716,
+            108.7706451652727
+          ],
+          "bottom": 0.12000000476837158,
+          "support": "Garage concrete apron",
+          "supportY": 0.08999999612569809,
+          "gap": 0.030000008642673492
+        },
+        {
+          "door": "Garage row 1.45,-0.075",
+          "point": [
+            177.51493174593367,
+            0.6200000047683716,
+            108.67512159501254
+          ],
+          "bottom": 0.12000000476837158,
+          "support": "Garage concrete apron",
+          "supportY": 0.08999999612569809,
+          "gap": 0.030000008642673492
+        },
+        {
+          "door": "Garage row 4.25,-0.075",
+          "point": [
+            182.2115072837248,
+            0.6200000047683716,
+            109.14477914879166
+          ],
+          "bottom": 0.12000000476837158,
+          "support": "Garage concrete apron",
+          "supportY": 0.08999999612569809,
+          "gap": 0.030000008642673492
+        },
+        {
+          "door": "Garage row 4.25,-0.075",
+          "point": [
+            181.25627158112323,
+            0.6200000047683716,
+            109.0492555785315
+          ],
+          "bottom": 0.12000000476837158,
+          "support": "Garage concrete apron",
+          "supportY": 0.08999999612569809,
+          "gap": 0.030000008642673492
+        },
+        {
+          "door": "Garage row 4.25,-0.075",
+          "point": [
+            180.30103587852165,
+            0.6200000047683716,
+            108.95373200827134
+          ],
+          "bottom": 0.12000000476837158,
+          "support": "Garage concrete apron",
+          "supportY": 0.08999999612569809,
+          "gap": 0.030000008642673492
+        },
+        {
+          "door": "Garage row 8.33,-0.075",
+          "point": [
+            185.59463373043877,
+            0.6200000047683716,
+            109.48309179346305
+          ],
+          "bottom": 0.12000000476837158,
+          "support": "Garage concrete apron",
+          "supportY": 0.08999999612569809,
+          "gap": 0.030000008642673492
+        },
+        {
+          "door": "Garage row 8.33,-0.075",
+          "point": [
+            185.31602331717997,
+            0.6200000047683716,
+            109.45523075213717
+          ],
+          "bottom": 0.12000000476837158,
+          "support": "Garage concrete apron",
+          "supportY": 0.0899999961256982,
+          "gap": 0.03000000864267338
+        },
+        {
+          "door": "Garage row 8.33,-0.075",
+          "point": [
+            185.03741290392117,
+            0.6200000047683716,
+            109.42736971081129
+          ],
+          "bottom": 0.12000000476837158,
+          "support": "Garage concrete apron",
+          "supportY": 0.08999999612569809,
+          "gap": 0.030000008642673492
+        },
+        {
+          "door": "Garage row 6.02,-0.075",
+          "point": [
+            183.2960978210537,
+            0.6200000047683716,
+            109.25323820252454
+          ],
+          "bottom": 0.12000000476837158,
+          "support": "Garage concrete apron",
+          "supportY": 0.08999999612569809,
+          "gap": 0.030000008642673492
+        },
+        {
+          "door": "Garage row 6.02,-0.075",
+          "point": [
+            183.0174874077949,
+            0.6200000047683716,
+            109.22537716119867
+          ],
+          "bottom": 0.12000000476837158,
+          "support": "Garage concrete apron",
+          "supportY": 0.08999999612569809,
+          "gap": 0.030000008642673492
+        },
+        {
+          "door": "Garage row 6.02,-0.075",
+          "point": [
+            182.7388769945361,
+            0.6200000047683716,
+            109.19751611987279
+          ],
+          "bottom": 0.12000000476837158,
+          "support": "Garage concrete apron",
+          "supportY": 0.08999999612569809,
+          "gap": 0.030000008642673492
+        },
+        {
+          "door": "Garage row 19.15,-0.075",
+          "point": [
+            197.08930335174455,
+            0.6200000047683716,
+            110.63255875559364
+          ],
+          "bottom": 0.12000000476837158,
+          "support": "Garage concrete apron",
+          "supportY": 0.08999999612569809,
+          "gap": 0.030000008642673492
+        },
+        {
+          "door": "Garage row 19.15,-0.075",
+          "point": [
+            196.08232571525204,
+            0.6200000047683716,
+            110.53186099194438
+          ],
+          "bottom": 0.12000000476837158,
+          "support": "Garage concrete apron",
+          "supportY": 0.08999999612569809,
+          "gap": 0.030000008642673492
+        },
+        {
+          "door": "Garage row 19.15,-0.075",
+          "point": [
+            195.07534807875953,
+            0.6200000047683716,
+            110.43116322829513
+          ],
+          "bottom": 0.12000000476837158,
+          "support": "Garage concrete apron",
+          "supportY": 0.08999999612569809,
+          "gap": 0.030000008642673492
+        },
+        {
+          "door": "Garage row 22.049999999999997,-0.075",
+          "point": [
+            199.9749112033535,
+            0.6200000047683716,
+            110.92111954075453
+          ],
+          "bottom": 0.12000000476837158,
+          "support": "Garage concrete apron",
+          "supportY": 0.08999999612569809,
+          "gap": 0.030000008642673492
+        },
+        {
+          "door": "Garage row 22.049999999999997,-0.075",
+          "point": [
+            198.967933566861,
+            0.6200000047683716,
+            110.82042177710528
+          ],
+          "bottom": 0.12000000476837158,
+          "support": "Garage concrete apron",
+          "supportY": 0.08999999612569809,
+          "gap": 0.030000008642673492
+        },
+        {
+          "door": "Garage row 22.049999999999997,-0.075",
+          "point": [
+            197.9609559303685,
+            0.6200000047683716,
+            110.71972401345603
+          ],
+          "bottom": 0.12000000476837158,
+          "support": "Garage concrete apron",
+          "supportY": 0.08999999612569809,
+          "gap": 0.030000008642673492
+        },
+        {
+          "door": "Garage row 24.95,-0.075",
+          "point": [
+            202.86051905496248,
+            0.6200000047683716,
+            111.20968032591543
+          ],
+          "bottom": 0.12000000476837158,
+          "support": "Garage concrete apron",
+          "supportY": 0.08999999612569809,
+          "gap": 0.030000008642673492
+        },
+        {
+          "door": "Garage row 24.95,-0.075",
+          "point": [
+            201.85354141846997,
+            0.6200000047683716,
+            111.10898256226618
+          ],
+          "bottom": 0.12000000476837158,
+          "support": "Garage concrete apron",
+          "supportY": 0.08999999612569809,
+          "gap": 0.030000008642673492
+        },
+        {
+          "door": "Garage row 24.95,-0.075",
+          "point": [
+            200.84656378197747,
+            0.6200000047683716,
+            111.00828479861693
+          ],
+          "bottom": 0.12000000476837158,
+          "support": "Garage concrete apron",
+          "supportY": 0.08999999612569809,
+          "gap": 0.030000008642673492
+        },
+        {
+          "door": "Garage row 27.85,-0.075",
+          "point": [
+            205.74612690657148,
+            0.6200000047683716,
+            111.49824111107633
+          ],
+          "bottom": 0.12000000476837158,
+          "support": "Garage concrete apron",
+          "supportY": 0.08999999612569809,
+          "gap": 0.030000008642673492
+        },
+        {
+          "door": "Garage row 27.85,-0.075",
+          "point": [
+            204.73914927007897,
+            0.6200000047683716,
+            111.39754334742707
+          ],
+          "bottom": 0.12000000476837158,
+          "support": "Garage concrete apron",
+          "supportY": 0.08999999612569809,
+          "gap": 0.030000008642673492
+        },
+        {
+          "door": "Garage row 27.85,-0.075",
+          "point": [
+            203.73217163358646,
+            0.6200000047683716,
+            111.29684558377782
+          ],
+          "bottom": 0.12000000476837158,
+          "support": "Garage concrete apron",
+          "supportY": 0.08999999612569809,
+          "gap": 0.030000008642673492
+        },
+        {
+          "door": "Garage row 30.75,-0.075",
+          "point": [
+            208.63173475818044,
+            0.6200000047683716,
+            111.78680189623722
+          ],
+          "bottom": 0.12000000476837158,
+          "support": "Garage concrete apron",
+          "supportY": 0.08999999612569809,
+          "gap": 0.030000008642673492
+        },
+        {
+          "door": "Garage row 30.75,-0.075",
+          "point": [
+            207.62475712168794,
+            0.6200000047683716,
+            111.68610413258797
+          ],
+          "bottom": 0.12000000476837158,
+          "support": "Garage concrete apron",
+          "supportY": 0.08999999612569809,
+          "gap": 0.030000008642673492
+        },
+        {
+          "door": "Garage row 30.75,-0.075",
+          "point": [
+            206.61777948519543,
+            0.6200000047683716,
+            111.58540636893872
+          ],
+          "bottom": 0.12000000476837158,
+          "support": "Garage concrete apron",
+          "supportY": 0.08999999612569809,
+          "gap": 0.030000008642673492
+        },
+        {
+          "door": "Garage row 33.65,-0.075",
+          "point": [
+            211.5173426097894,
+            0.6200000047683716,
+            112.07536268139812
+          ],
+          "bottom": 0.12000000476837158,
+          "support": "Garage concrete apron",
+          "supportY": 0.08999999612569809,
+          "gap": 0.030000008642673492
+        },
+        {
+          "door": "Garage row 33.65,-0.075",
+          "point": [
+            210.5103649732969,
+            0.6200000047683716,
+            111.97466491774887
+          ],
+          "bottom": 0.12000000476837158,
+          "support": "Garage concrete apron",
+          "supportY": 0.08999999612569809,
+          "gap": 0.030000008642673492
+        },
+        {
+          "door": "Garage row 33.65,-0.075",
+          "point": [
+            209.5033873368044,
+            0.6200000047683716,
+            111.87396715409962
+          ],
+          "bottom": 0.12000000476837158,
+          "support": "Garage concrete apron",
+          "supportY": 0.08999999612569809,
+          "gap": 0.030000008642673492
+        },
+        {
+          "door": "Garage row 36.55,-0.075",
+          "point": [
+            214.40295046139838,
+            0.6200000047683716,
+            112.36392346655902
+          ],
+          "bottom": 0.12000000476837158,
+          "support": "Garage concrete apron",
+          "supportY": 0.08999999612569809,
+          "gap": 0.030000008642673492
+        },
+        {
+          "door": "Garage row 36.55,-0.075",
+          "point": [
+            213.39597282490587,
+            0.6200000047683716,
+            112.26322570290976
+          ],
+          "bottom": 0.12000000476837158,
+          "support": "Garage concrete apron",
+          "supportY": 0.08999999612569809,
+          "gap": 0.030000008642673492
+        },
+        {
+          "door": "Garage row 36.55,-0.075",
+          "point": [
+            212.38899518841336,
+            0.6200000047683716,
+            112.16252793926051
+          ],
+          "bottom": 0.12000000476837158,
+          "support": "Garage concrete apron",
+          "supportY": 0.08999999612569809,
+          "gap": 0.030000008642673492
+        },
+        {
+          "door": "Garage row 39.45,-0.075",
+          "point": [
+            217.28855831300734,
+            0.6200000047683716,
+            112.65248425171991
+          ],
+          "bottom": 0.12000000476837158,
+          "support": "Garage concrete apron",
+          "supportY": 0.08999999612569809,
+          "gap": 0.030000008642673492
+        },
+        {
+          "door": "Garage row 39.45,-0.075",
+          "point": [
+            216.28158067651484,
+            0.6200000047683716,
+            112.55178648807066
+          ],
+          "bottom": 0.12000000476837158,
+          "support": "Garage concrete apron",
+          "supportY": 0.08999999612569809,
+          "gap": 0.030000008642673492
+        },
+        {
+          "door": "Garage row 39.45,-0.075",
+          "point": [
+            215.27460304002233,
+            0.6200000047683716,
+            112.45108872442141
+          ],
+          "bottom": 0.12000000476837158,
+          "support": "Garage concrete apron",
+          "supportY": 0.08999999612569809,
+          "gap": 0.030000008642673492
+        },
+        {
+          "door": "Garage row 42.349999999999994,-0.075",
+          "point": [
+            220.1741661646163,
+            0.6200000047683716,
+            112.94104503688081
+          ],
+          "bottom": 0.12000000476837158,
+          "support": "Garage concrete apron",
+          "supportY": 0.08999999612569809,
+          "gap": 0.030000008642673492
+        },
+        {
+          "door": "Garage row 42.349999999999994,-0.075",
+          "point": [
+            219.1671885281238,
+            0.6200000047683716,
+            112.84034727323156
+          ],
+          "bottom": 0.12000000476837158,
+          "support": "Garage concrete apron",
+          "supportY": 0.08999999612569809,
+          "gap": 0.030000008642673492
+        },
+        {
+          "door": "Garage row 42.349999999999994,-0.075",
+          "point": [
+            218.1602108916313,
+            0.6200000047683716,
+            112.7396495095823
+          ],
+          "bottom": 0.12000000476837158,
+          "support": "Garage concrete apron",
+          "supportY": 0.08999999612569809,
+          "gap": 0.030000008642673492
+        },
+        {
+          "door": "Garage row 45.25,-0.075",
+          "point": [
+            223.05977401622528,
+            0.6200000047683716,
+            113.2296058220417
+          ],
+          "bottom": 0.12000000476837158,
+          "support": "Garage concrete apron",
+          "supportY": 0.08999999612569809,
+          "gap": 0.030000008642673492
+        },
+        {
+          "door": "Garage row 45.25,-0.075",
+          "point": [
+            222.05279637973277,
+            0.6200000047683716,
+            113.12890805839245
+          ],
+          "bottom": 0.12000000476837158,
+          "support": "Garage concrete apron",
+          "supportY": 0.08999999612569809,
+          "gap": 0.030000008642673492
+        },
+        {
+          "door": "Garage row 45.25,-0.075",
+          "point": [
+            221.04581874324026,
+            0.6200000047683716,
+            113.0282102947432
+          ],
+          "bottom": 0.12000000476837158,
+          "support": "Garage concrete apron",
+          "supportY": 0.08999999612569809,
+          "gap": 0.030000008642673492
+        },
+        {
+          "door": "Garage row 48.15,-0.075",
+          "point": [
+            225.94538186783424,
+            0.6200000047683716,
+            113.5181666072026
+          ],
+          "bottom": 0.12000000476837158,
+          "support": "Garage concrete apron",
+          "supportY": 0.08999999612569809,
+          "gap": 0.030000008642673492
+        },
+        {
+          "door": "Garage row 48.15,-0.075",
+          "point": [
+            224.93840423134174,
+            0.6200000047683716,
+            113.41746884355335
+          ],
+          "bottom": 0.12000000476837158,
+          "support": "Garage concrete apron",
+          "supportY": 0.08999999612569809,
+          "gap": 0.030000008642673492
+        },
+        {
+          "door": "Garage row 48.15,-0.075",
+          "point": [
+            223.93142659484923,
+            0.6200000047683716,
+            113.3167710799041
+          ],
+          "bottom": 0.12000000476837158,
+          "support": "Garage concrete apron",
+          "supportY": 0.08999999612569809,
+          "gap": 0.030000008642673492
+        },
+        {
+          "door": "Garage row 51.05,-0.075",
+          "point": [
+            228.8309897194432,
+            0.6200000047683716,
+            113.8067273923635
+          ],
+          "bottom": 0.12000000476837158,
+          "support": "Garage concrete apron",
+          "supportY": 0.08999999612569809,
+          "gap": 0.030000008642673492
+        },
+        {
+          "door": "Garage row 51.05,-0.075",
+          "point": [
+            227.8240120829507,
+            0.6200000047683716,
+            113.70602962871425
+          ],
+          "bottom": 0.12000000476837158,
+          "support": "Garage concrete apron",
+          "supportY": 0.08999999612569809,
+          "gap": 0.030000008642673492
+        },
+        {
+          "door": "Garage row 51.05,-0.075",
+          "point": [
+            226.8170344464582,
+            0.6200000047683716,
+            113.605331865065
+          ],
+          "bottom": 0.12000000476837158,
+          "support": "Garage concrete apron",
+          "supportY": 0.08999999612569809,
+          "gap": 0.030000008642673492
+        },
+        {
+          "door": "T-shaped mortuary 0,-4.075",
+          "point": [
+            166.32608303771732,
+            0.6200000047683716,
+            108.34093392841585
+          ],
+          "bottom": 0.12000000476837158,
+          "support": "Mortuary entrance path",
+          "supportY": 0.0949999988079071,
+          "gap": 0.025000005960464478
+        },
+        {
+          "door": "T-shaped mortuary 0,-4.075",
+          "point": [
+            165.8166239963298,
+            0.6200000047683716,
+            108.2899880242771
+          ],
+          "bottom": 0.12000000476837158,
+          "support": "Mortuary entrance path",
+          "supportY": 0.0949999988079071,
+          "gap": 0.025000005960464478
+        },
+        {
+          "door": "T-shaped mortuary 0,-4.075",
+          "point": [
+            165.3071649549423,
+            0.6200000047683716,
+            108.23904212013834
+          ],
+          "bottom": 0.12000000476837158,
+          "support": "Mortuary entrance path",
+          "supportY": 0.0949999988079071,
+          "gap": 0.025000005960464478
+        },
+        {
+          "door": "Main kitchen service door / Main kitchen",
+          "point": [
+            119.75999999999999,
+            0.5299999523162842,
+            -1.0199999809265137
+          ],
+          "bottom": 0.029999952316284162,
+          "support": "Estate terrain",
+          "supportY": -0.14999999999999977,
+          "gap": 0.17999995231628393
+        },
+        {
+          "door": "Main kitchen service door / Main kitchen",
+          "point": [
+            119.75999999999999,
+            0.5299999523162842,
+            -0.30000000000000004
+          ],
+          "bottom": 0.029999952316284162,
+          "support": "Estate terrain",
+          "supportY": -0.14999999999999994,
+          "gap": 0.1799999523162841
+        },
+        {
+          "door": "Main kitchen service door / Main kitchen",
+          "point": [
+            119.75999999999999,
+            0.5299999523162842,
+            0.4199999809265137
+          ],
+          "bottom": 0.029999952316284162,
+          "support": "Estate terrain",
+          "supportY": -0.15000000000000008,
+          "gap": 0.17999995231628424
+        },
+        {
+          "door": "Tower fire exit door / West mirrored side details",
+          "point": [
+            376.7789153912353,
+            2.4800000214576725,
+            -20.08216635741941
+          ],
+          "bottom": 1.9800000214576723,
+          "support": "Estate terrain",
+          "supportY": -0.14999999999999553,
+          "gap": 2.130000021457668
+        },
+        {
+          "door": "Tower fire exit door / West mirrored side details",
+          "point": [
+            376.56493584217685,
+            2.4800000214576725,
+            -20.30432152402215
+          ],
+          "bottom": 1.9800000214576723,
+          "support": "Estate terrain",
+          "supportY": -0.1499999999999955,
+          "gap": 2.130000021457668
+        },
+        {
+          "door": "Tower fire exit door / West mirrored side details",
+          "point": [
+            376.35095629311843,
+            2.4800000214576725,
+            -20.52647669062489
+          ],
+          "bottom": 1.9800000214576723,
+          "support": "Estate terrain",
+          "supportY": -0.14999999999999544,
+          "gap": 2.1300000214576675
+        },
+        {
+          "door": "Tower fire exit door / East mirrored side details",
+          "point": [
+            352.9349220710489,
+            2.4800000214576725,
+            2.027815069491933
+          ],
+          "bottom": 1.9800000214576723,
+          "support": "Estate terrain",
+          "supportY": -0.15,
+          "gap": 2.1300000214576724
+        },
+        {
+          "door": "Tower fire exit door / East mirrored side details",
+          "point": [
+            353.1489016201073,
+            2.4800000214576725,
+            2.2499702360946707
+          ],
+          "bottom": 1.9800000214576723,
+          "support": "Estate terrain",
+          "supportY": -0.1500000000000005,
+          "gap": 2.130000021457673
+        },
+        {
+          "door": "Tower fire exit door / East mirrored side details",
+          "point": [
+            353.36288116916575,
+            2.4800000214576725,
+            2.4721254026974084
+          ],
+          "bottom": 1.9800000214576723,
+          "support": "Estate terrain",
+          "supportY": -0.15000000000000055,
+          "gap": 2.130000021457673
+        },
+        {
+          "door": "1829 bespoke door 0,19.899999618530273",
+          "point": [
+            -0.76,
+            2.399999976158142,
+            20.099999618530273
+          ],
+          "bottom": 1.899999976158142,
+          "support": "Front doorway landing surface",
+          "supportY": 1.7999999988079072,
+          "gap": 0.09999997735023491
+        },
+        {
+          "door": "1829 bespoke door 0,19.899999618530273",
+          "point": [
+            0,
+            2.399999976158142,
+            20.099999618530273
+          ],
+          "bottom": 1.899999976158142,
+          "support": "Front doorway landing surface",
+          "supportY": 1.7999999988079072,
+          "gap": 0.09999997735023491
+        },
+        {
+          "door": "1829 bespoke door 0,19.899999618530273",
+          "point": [
+            0.76,
+            2.399999976158142,
+            20.099999618530273
+          ],
+          "bottom": 1.899999976158142,
+          "support": "Front doorway landing surface",
+          "supportY": 1.7999999988079072,
+          "gap": 0.09999997735023491
+        }
+      ]
+    },
+    {
+      "year": 1938,
+      "checked": 109,
+      "issues": [
+        {
+          "door": "1829 estate · aerial reconstruction -26.15,19.779999999999998",
+          "point": [
+            -26.718,
+            0.2200000286102295,
+            20.08
+          ],
+          "bottom": -0.2799999713897705,
+          "support": "West semi-basement lower paving",
+          "supportY": -1.0200000000000045,
+          "gap": 0.740000028610234
+        },
+        {
+          "door": "1829 estate · aerial reconstruction -26.15,19.779999999999998",
+          "point": [
+            -26.15,
+            0.2200000286102295,
+            20.08
+          ],
+          "bottom": -0.2799999713897705,
+          "support": "West semi-basement lower paving",
+          "supportY": -1.0200000000000045,
+          "gap": 0.740000028610234
+        },
+        {
+          "door": "1829 estate · aerial reconstruction -26.15,19.779999999999998",
+          "point": [
+            -25.581999999999997,
+            0.2200000286102295,
+            20.08
+          ],
+          "bottom": -0.2799999713897705,
+          "support": "West semi-basement lower paving",
+          "supportY": -1.0200000000000045,
+          "gap": 0.740000028610234
+        },
+        {
+          "door": "1829 estate · aerial reconstruction -11.55,17.38",
+          "point": [
+            -12.118,
+            0.2200000286102295,
+            17.68
+          ],
+          "bottom": -0.2799999713897705,
+          "support": "West semi-basement lower paving",
+          "supportY": -1.0200000000000042,
+          "gap": 0.7400000286102337
+        },
+        {
+          "door": "1829 estate · aerial reconstruction -11.55,17.38",
+          "point": [
+            -11.55,
+            0.2200000286102295,
+            17.68
+          ],
+          "bottom": -0.2799999713897705,
+          "support": "West semi-basement lower paving",
+          "supportY": -1.0200000000000042,
+          "gap": 0.7400000286102337
+        },
+        {
+          "door": "1829 estate · aerial reconstruction -11.55,17.38",
+          "point": [
+            -10.982000000000001,
+            0.2200000286102295,
+            17.68
+          ],
+          "bottom": -0.2799999713897705,
+          "support": "West semi-basement lower paving",
+          "supportY": -1.0200000000000042,
+          "gap": 0.7400000286102337
+        },
+        {
+          "door": "1829 estate · aerial reconstruction 26.15,19.779999999999998",
+          "point": [
+            25.581999999999997,
+            0.2200000286102295,
+            20.08
+          ],
+          "bottom": -0.2799999713897705,
+          "support": "East semi-basement lower paving",
+          "supportY": -1.0200000000000045,
+          "gap": 0.740000028610234
+        },
+        {
+          "door": "1829 estate · aerial reconstruction 26.15,19.779999999999998",
+          "point": [
+            26.15,
+            0.2200000286102295,
+            20.08
+          ],
+          "bottom": -0.2799999713897705,
+          "support": "East semi-basement lower paving",
+          "supportY": -1.0200000000000045,
+          "gap": 0.740000028610234
+        },
+        {
+          "door": "1829 estate · aerial reconstruction 26.15,19.779999999999998",
+          "point": [
+            26.718,
+            0.2200000286102295,
+            20.08
+          ],
+          "bottom": -0.2799999713897705,
+          "support": "East semi-basement lower paving",
+          "supportY": -1.0200000000000045,
+          "gap": 0.740000028610234
+        },
+        {
+          "door": "1829 estate · aerial reconstruction 11.55,17.38",
+          "point": [
+            10.982000000000001,
+            0.2200000286102295,
+            17.68
+          ],
+          "bottom": -0.2799999713897705,
+          "support": "East semi-basement lower paving",
+          "supportY": -1.0200000000000042,
+          "gap": 0.7400000286102337
+        },
+        {
+          "door": "1829 estate · aerial reconstruction 11.55,17.38",
+          "point": [
+            11.55,
+            0.2200000286102295,
+            17.68
+          ],
+          "bottom": -0.2799999713897705,
+          "support": "East semi-basement lower paving",
+          "supportY": -1.0200000000000042,
+          "gap": 0.7400000286102337
+        },
+        {
+          "door": "1829 estate · aerial reconstruction 11.55,17.38",
+          "point": [
+            12.118,
+            0.2200000286102295,
+            17.68
+          ],
+          "bottom": -0.2799999713897705,
+          "support": "East semi-basement lower paving",
+          "supportY": -1.020000000000004,
+          "gap": 0.7400000286102335
+        },
+        {
+          "door": "Garage row 15.65,-0.075",
+          "point": [
+            193.89324389679007,
+            0.6200001239776611,
+            110.31295281009818
+          ],
+          "bottom": 0.12000012397766113,
+          "support": "Garage concrete apron",
+          "supportY": 0.08999999612569809,
+          "gap": 0.030000127851963043
+        },
+        {
+          "door": "Garage row 15.65,-0.075",
+          "point": [
+            192.5996955495171,
+            0.6200001239776611,
+            110.18359797537089
+          ],
+          "bottom": 0.12000012397766113,
+          "support": "Garage concrete apron",
+          "supportY": 0.08999999612569809,
+          "gap": 0.030000127851963043
+        },
+        {
+          "door": "Garage row 15.65,-0.075",
+          "point": [
+            191.30614720224412,
+            0.6200001239776611,
+            110.05424314064359
+          ],
+          "bottom": 0.12000012397766113,
+          "support": "Garage concrete apron",
+          "supportY": 0.08999999612569809,
+          "gap": 0.030000127851963043
+        },
+        {
+          "door": "Garage row 11.85,-0.075",
+          "point": [
+            189.83349216073333,
+            0.6200000047683716,
+            109.90697763649251
+          ],
+          "bottom": 0.12000000476837158,
+          "support": "Garage concrete apron",
+          "supportY": 0.08999999612569809,
+          "gap": 0.030000008642673492
+        },
+        {
+          "door": "Garage row 11.85,-0.075",
+          "point": [
+            188.81855422671913,
+            0.6200000047683716,
+            109.8054838430911
+          ],
+          "bottom": 0.12000000476837158,
+          "support": "Garage concrete apron",
+          "supportY": 0.08999999612569809,
+          "gap": 0.030000008642673492
+        },
+        {
+          "door": "Garage row 11.85,-0.075",
+          "point": [
+            187.80361629270493,
+            0.6200000047683716,
+            109.70399004968968
+          ],
+          "bottom": 0.12000000476837158,
+          "support": "Garage concrete apron",
+          "supportY": 0.08999999612569809,
+          "gap": 0.030000008642673492
+        },
+        {
+          "door": "Garage row 1.45,-0.075",
+          "point": [
+            179.42540315113683,
+            0.6200000047683716,
+            108.86616873553285
+          ],
+          "bottom": 0.12000000476837158,
+          "support": "Garage concrete apron",
+          "supportY": 0.08999999612569809,
+          "gap": 0.030000008642673492
+        },
+        {
+          "door": "Garage row 1.45,-0.075",
+          "point": [
+            178.47016744853525,
+            0.6200000047683716,
+            108.7706451652727
+          ],
+          "bottom": 0.12000000476837158,
+          "support": "Garage concrete apron",
+          "supportY": 0.08999999612569809,
+          "gap": 0.030000008642673492
+        },
+        {
+          "door": "Garage row 1.45,-0.075",
+          "point": [
+            177.51493174593367,
+            0.6200000047683716,
+            108.67512159501254
+          ],
+          "bottom": 0.12000000476837158,
+          "support": "Garage concrete apron",
+          "supportY": 0.08999999612569809,
+          "gap": 0.030000008642673492
+        },
+        {
+          "door": "Garage row 4.25,-0.075",
+          "point": [
+            182.2115072837248,
+            0.6200000047683716,
+            109.14477914879166
+          ],
+          "bottom": 0.12000000476837158,
+          "support": "Garage concrete apron",
+          "supportY": 0.08999999612569809,
+          "gap": 0.030000008642673492
+        },
+        {
+          "door": "Garage row 4.25,-0.075",
+          "point": [
+            181.25627158112323,
+            0.6200000047683716,
+            109.0492555785315
+          ],
+          "bottom": 0.12000000476837158,
+          "support": "Garage concrete apron",
+          "supportY": 0.08999999612569809,
+          "gap": 0.030000008642673492
+        },
+        {
+          "door": "Garage row 4.25,-0.075",
+          "point": [
+            180.30103587852165,
+            0.6200000047683716,
+            108.95373200827134
+          ],
+          "bottom": 0.12000000476837158,
+          "support": "Garage concrete apron",
+          "supportY": 0.08999999612569809,
+          "gap": 0.030000008642673492
+        },
+        {
+          "door": "Garage row 8.33,-0.075",
+          "point": [
+            185.59463373043877,
+            0.6200000047683716,
+            109.48309179346305
+          ],
+          "bottom": 0.12000000476837158,
+          "support": "Garage concrete apron",
+          "supportY": 0.08999999612569809,
+          "gap": 0.030000008642673492
+        },
+        {
+          "door": "Garage row 8.33,-0.075",
+          "point": [
+            185.31602331717997,
+            0.6200000047683716,
+            109.45523075213717
+          ],
+          "bottom": 0.12000000476837158,
+          "support": "Garage concrete apron",
+          "supportY": 0.0899999961256982,
+          "gap": 0.03000000864267338
+        },
+        {
+          "door": "Garage row 8.33,-0.075",
+          "point": [
+            185.03741290392117,
+            0.6200000047683716,
+            109.42736971081129
+          ],
+          "bottom": 0.12000000476837158,
+          "support": "Garage concrete apron",
+          "supportY": 0.08999999612569809,
+          "gap": 0.030000008642673492
+        },
+        {
+          "door": "Garage row 6.02,-0.075",
+          "point": [
+            183.2960978210537,
+            0.6200000047683716,
+            109.25323820252454
+          ],
+          "bottom": 0.12000000476837158,
+          "support": "Garage concrete apron",
+          "supportY": 0.08999999612569809,
+          "gap": 0.030000008642673492
+        },
+        {
+          "door": "Garage row 6.02,-0.075",
+          "point": [
+            183.0174874077949,
+            0.6200000047683716,
+            109.22537716119867
+          ],
+          "bottom": 0.12000000476837158,
+          "support": "Garage concrete apron",
+          "supportY": 0.08999999612569809,
+          "gap": 0.030000008642673492
+        },
+        {
+          "door": "Garage row 6.02,-0.075",
+          "point": [
+            182.7388769945361,
+            0.6200000047683716,
+            109.19751611987279
+          ],
+          "bottom": 0.12000000476837158,
+          "support": "Garage concrete apron",
+          "supportY": 0.08999999612569809,
+          "gap": 0.030000008642673492
+        },
+        {
+          "door": "Garage row 19.15,-0.075",
+          "point": [
+            197.08930335174455,
+            0.6200000047683716,
+            110.63255875559364
+          ],
+          "bottom": 0.12000000476837158,
+          "support": "Garage concrete apron",
+          "supportY": 0.08999999612569809,
+          "gap": 0.030000008642673492
+        },
+        {
+          "door": "Garage row 19.15,-0.075",
+          "point": [
+            196.08232571525204,
+            0.6200000047683716,
+            110.53186099194438
+          ],
+          "bottom": 0.12000000476837158,
+          "support": "Garage concrete apron",
+          "supportY": 0.08999999612569809,
+          "gap": 0.030000008642673492
+        },
+        {
+          "door": "Garage row 19.15,-0.075",
+          "point": [
+            195.07534807875953,
+            0.6200000047683716,
+            110.43116322829513
+          ],
+          "bottom": 0.12000000476837158,
+          "support": "Garage concrete apron",
+          "supportY": 0.08999999612569809,
+          "gap": 0.030000008642673492
+        },
+        {
+          "door": "Garage row 22.049999999999997,-0.075",
+          "point": [
+            199.9749112033535,
+            0.6200000047683716,
+            110.92111954075453
+          ],
+          "bottom": 0.12000000476837158,
+          "support": "Garage concrete apron",
+          "supportY": 0.08999999612569809,
+          "gap": 0.030000008642673492
+        },
+        {
+          "door": "Garage row 22.049999999999997,-0.075",
+          "point": [
+            198.967933566861,
+            0.6200000047683716,
+            110.82042177710528
+          ],
+          "bottom": 0.12000000476837158,
+          "support": "Garage concrete apron",
+          "supportY": 0.08999999612569809,
+          "gap": 0.030000008642673492
+        },
+        {
+          "door": "Garage row 22.049999999999997,-0.075",
+          "point": [
+            197.9609559303685,
+            0.6200000047683716,
+            110.71972401345603
+          ],
+          "bottom": 0.12000000476837158,
+          "support": "Garage concrete apron",
+          "supportY": 0.08999999612569809,
+          "gap": 0.030000008642673492
+        },
+        {
+          "door": "Garage row 24.95,-0.075",
+          "point": [
+            202.86051905496248,
+            0.6200000047683716,
+            111.20968032591543
+          ],
+          "bottom": 0.12000000476837158,
+          "support": "Garage concrete apron",
+          "supportY": 0.08999999612569809,
+          "gap": 0.030000008642673492
+        },
+        {
+          "door": "Garage row 24.95,-0.075",
+          "point": [
+            201.85354141846997,
+            0.6200000047683716,
+            111.10898256226618
+          ],
+          "bottom": 0.12000000476837158,
+          "support": "Garage concrete apron",
+          "supportY": 0.08999999612569809,
+          "gap": 0.030000008642673492
+        },
+        {
+          "door": "Garage row 24.95,-0.075",
+          "point": [
+            200.84656378197747,
+            0.6200000047683716,
+            111.00828479861693
+          ],
+          "bottom": 0.12000000476837158,
+          "support": "Garage concrete apron",
+          "supportY": 0.08999999612569809,
+          "gap": 0.030000008642673492
+        },
+        {
+          "door": "Garage row 27.85,-0.075",
+          "point": [
+            205.74612690657148,
+            0.6200000047683716,
+            111.49824111107633
+          ],
+          "bottom": 0.12000000476837158,
+          "support": "Garage concrete apron",
+          "supportY": 0.08999999612569809,
+          "gap": 0.030000008642673492
+        },
+        {
+          "door": "Garage row 27.85,-0.075",
+          "point": [
+            204.73914927007897,
+            0.6200000047683716,
+            111.39754334742707
+          ],
+          "bottom": 0.12000000476837158,
+          "support": "Garage concrete apron",
+          "supportY": 0.08999999612569809,
+          "gap": 0.030000008642673492
+        },
+        {
+          "door": "Garage row 27.85,-0.075",
+          "point": [
+            203.73217163358646,
+            0.6200000047683716,
+            111.29684558377782
+          ],
+          "bottom": 0.12000000476837158,
+          "support": "Garage concrete apron",
+          "supportY": 0.08999999612569809,
+          "gap": 0.030000008642673492
+        },
+        {
+          "door": "Garage row 30.75,-0.075",
+          "point": [
+            208.63173475818044,
+            0.6200000047683716,
+            111.78680189623722
+          ],
+          "bottom": 0.12000000476837158,
+          "support": "Garage concrete apron",
+          "supportY": 0.08999999612569809,
+          "gap": 0.030000008642673492
+        },
+        {
+          "door": "Garage row 30.75,-0.075",
+          "point": [
+            207.62475712168794,
+            0.6200000047683716,
+            111.68610413258797
+          ],
+          "bottom": 0.12000000476837158,
+          "support": "Garage concrete apron",
+          "supportY": 0.08999999612569809,
+          "gap": 0.030000008642673492
+        },
+        {
+          "door": "Garage row 30.75,-0.075",
+          "point": [
+            206.61777948519543,
+            0.6200000047683716,
+            111.58540636893872
+          ],
+          "bottom": 0.12000000476837158,
+          "support": "Garage concrete apron",
+          "supportY": 0.08999999612569809,
+          "gap": 0.030000008642673492
+        },
+        {
+          "door": "Garage row 33.65,-0.075",
+          "point": [
+            211.5173426097894,
+            0.6200000047683716,
+            112.07536268139812
+          ],
+          "bottom": 0.12000000476837158,
+          "support": "Garage concrete apron",
+          "supportY": 0.08999999612569809,
+          "gap": 0.030000008642673492
+        },
+        {
+          "door": "Garage row 33.65,-0.075",
+          "point": [
+            210.5103649732969,
+            0.6200000047683716,
+            111.97466491774887
+          ],
+          "bottom": 0.12000000476837158,
+          "support": "Garage concrete apron",
+          "supportY": 0.08999999612569809,
+          "gap": 0.030000008642673492
+        },
+        {
+          "door": "Garage row 33.65,-0.075",
+          "point": [
+            209.5033873368044,
+            0.6200000047683716,
+            111.87396715409962
+          ],
+          "bottom": 0.12000000476837158,
+          "support": "Garage concrete apron",
+          "supportY": 0.08999999612569809,
+          "gap": 0.030000008642673492
+        },
+        {
+          "door": "Garage row 36.55,-0.075",
+          "point": [
+            214.40295046139838,
+            0.6200000047683716,
+            112.36392346655902
+          ],
+          "bottom": 0.12000000476837158,
+          "support": "Garage concrete apron",
+          "supportY": 0.08999999612569809,
+          "gap": 0.030000008642673492
+        },
+        {
+          "door": "Garage row 36.55,-0.075",
+          "point": [
+            213.39597282490587,
+            0.6200000047683716,
+            112.26322570290976
+          ],
+          "bottom": 0.12000000476837158,
+          "support": "Garage concrete apron",
+          "supportY": 0.08999999612569809,
+          "gap": 0.030000008642673492
+        },
+        {
+          "door": "Garage row 36.55,-0.075",
+          "point": [
+            212.38899518841336,
+            0.6200000047683716,
+            112.16252793926051
+          ],
+          "bottom": 0.12000000476837158,
+          "support": "Garage concrete apron",
+          "supportY": 0.08999999612569809,
+          "gap": 0.030000008642673492
+        },
+        {
+          "door": "Garage row 39.45,-0.075",
+          "point": [
+            217.28855831300734,
+            0.6200000047683716,
+            112.65248425171991
+          ],
+          "bottom": 0.12000000476837158,
+          "support": "Garage concrete apron",
+          "supportY": 0.08999999612569809,
+          "gap": 0.030000008642673492
+        },
+        {
+          "door": "Garage row 39.45,-0.075",
+          "point": [
+            216.28158067651484,
+            0.6200000047683716,
+            112.55178648807066
+          ],
+          "bottom": 0.12000000476837158,
+          "support": "Garage concrete apron",
+          "supportY": 0.08999999612569809,
+          "gap": 0.030000008642673492
+        },
+        {
+          "door": "Garage row 39.45,-0.075",
+          "point": [
+            215.27460304002233,
+            0.6200000047683716,
+            112.45108872442141
+          ],
+          "bottom": 0.12000000476837158,
+          "support": "Garage concrete apron",
+          "supportY": 0.08999999612569809,
+          "gap": 0.030000008642673492
+        },
+        {
+          "door": "Garage row 42.349999999999994,-0.075",
+          "point": [
+            220.1741661646163,
+            0.6200000047683716,
+            112.94104503688081
+          ],
+          "bottom": 0.12000000476837158,
+          "support": "Garage concrete apron",
+          "supportY": 0.08999999612569809,
+          "gap": 0.030000008642673492
+        },
+        {
+          "door": "Garage row 42.349999999999994,-0.075",
+          "point": [
+            219.1671885281238,
+            0.6200000047683716,
+            112.84034727323156
+          ],
+          "bottom": 0.12000000476837158,
+          "support": "Garage concrete apron",
+          "supportY": 0.08999999612569809,
+          "gap": 0.030000008642673492
+        },
+        {
+          "door": "Garage row 42.349999999999994,-0.075",
+          "point": [
+            218.1602108916313,
+            0.6200000047683716,
+            112.7396495095823
+          ],
+          "bottom": 0.12000000476837158,
+          "support": "Garage concrete apron",
+          "supportY": 0.08999999612569809,
+          "gap": 0.030000008642673492
+        },
+        {
+          "door": "Garage row 45.25,-0.075",
+          "point": [
+            223.05977401622528,
+            0.6200000047683716,
+            113.2296058220417
+          ],
+          "bottom": 0.12000000476837158,
+          "support": "Garage concrete apron",
+          "supportY": 0.08999999612569809,
+          "gap": 0.030000008642673492
+        },
+        {
+          "door": "Garage row 45.25,-0.075",
+          "point": [
+            222.05279637973277,
+            0.6200000047683716,
+            113.12890805839245
+          ],
+          "bottom": 0.12000000476837158,
+          "support": "Garage concrete apron",
+          "supportY": 0.08999999612569809,
+          "gap": 0.030000008642673492
+        },
+        {
+          "door": "Garage row 45.25,-0.075",
+          "point": [
+            221.04581874324026,
+            0.6200000047683716,
+            113.0282102947432
+          ],
+          "bottom": 0.12000000476837158,
+          "support": "Garage concrete apron",
+          "supportY": 0.08999999612569809,
+          "gap": 0.030000008642673492
+        },
+        {
+          "door": "Garage row 48.15,-0.075",
+          "point": [
+            225.94538186783424,
+            0.6200000047683716,
+            113.5181666072026
+          ],
+          "bottom": 0.12000000476837158,
+          "support": "Garage concrete apron",
+          "supportY": 0.08999999612569809,
+          "gap": 0.030000008642673492
+        },
+        {
+          "door": "Garage row 48.15,-0.075",
+          "point": [
+            224.93840423134174,
+            0.6200000047683716,
+            113.41746884355335
+          ],
+          "bottom": 0.12000000476837158,
+          "support": "Garage concrete apron",
+          "supportY": 0.08999999612569809,
+          "gap": 0.030000008642673492
+        },
+        {
+          "door": "Garage row 48.15,-0.075",
+          "point": [
+            223.93142659484923,
+            0.6200000047683716,
+            113.3167710799041
+          ],
+          "bottom": 0.12000000476837158,
+          "support": "Garage concrete apron",
+          "supportY": 0.08999999612569809,
+          "gap": 0.030000008642673492
+        },
+        {
+          "door": "Garage row 51.05,-0.075",
+          "point": [
+            228.8309897194432,
+            0.6200000047683716,
+            113.8067273923635
+          ],
+          "bottom": 0.12000000476837158,
+          "support": "Garage concrete apron",
+          "supportY": 0.08999999612569809,
+          "gap": 0.030000008642673492
+        },
+        {
+          "door": "Garage row 51.05,-0.075",
+          "point": [
+            227.8240120829507,
+            0.6200000047683716,
+            113.70602962871425
+          ],
+          "bottom": 0.12000000476837158,
+          "support": "Garage concrete apron",
+          "supportY": 0.08999999612569809,
+          "gap": 0.030000008642673492
+        },
+        {
+          "door": "Garage row 51.05,-0.075",
+          "point": [
+            226.8170344464582,
+            0.6200000047683716,
+            113.605331865065
+          ],
+          "bottom": 0.12000000476837158,
+          "support": "Garage concrete apron",
+          "supportY": 0.08999999612569809,
+          "gap": 0.030000008642673492
+        },
+        {
+          "door": "T-shaped mortuary 0,-4.075",
+          "point": [
+            166.32608303771732,
+            0.6200000047683716,
+            108.34093392841585
+          ],
+          "bottom": 0.12000000476837158,
+          "support": "Mortuary entrance path",
+          "supportY": 0.0949999988079071,
+          "gap": 0.025000005960464478
+        },
+        {
+          "door": "T-shaped mortuary 0,-4.075",
+          "point": [
+            165.8166239963298,
+            0.6200000047683716,
+            108.2899880242771
+          ],
+          "bottom": 0.12000000476837158,
+          "support": "Mortuary entrance path",
+          "supportY": 0.0949999988079071,
+          "gap": 0.025000005960464478
+        },
+        {
+          "door": "T-shaped mortuary 0,-4.075",
+          "point": [
+            165.3071649549423,
+            0.6200000047683716,
+            108.23904212013834
+          ],
+          "bottom": 0.12000000476837158,
+          "support": "Mortuary entrance path",
+          "supportY": 0.0949999988079071,
+          "gap": 0.025000005960464478
+        },
+        {
+          "door": "Main kitchen service door / Main kitchen",
+          "point": [
+            119.75999999999999,
+            0.5299999523162842,
+            -1.0199999809265137
+          ],
+          "bottom": 0.029999952316284162,
+          "support": "Estate terrain",
+          "supportY": -0.14999999999999977,
+          "gap": 0.17999995231628393
+        },
+        {
+          "door": "Main kitchen service door / Main kitchen",
+          "point": [
+            119.75999999999999,
+            0.5299999523162842,
+            -0.30000000000000004
+          ],
+          "bottom": 0.029999952316284162,
+          "support": "Estate terrain",
+          "supportY": -0.14999999999999994,
+          "gap": 0.1799999523162841
+        },
+        {
+          "door": "Main kitchen service door / Main kitchen",
+          "point": [
+            119.75999999999999,
+            0.5299999523162842,
+            0.4199999809265137
+          ],
+          "bottom": 0.029999952316284162,
+          "support": "Estate terrain",
+          "supportY": -0.15000000000000008,
+          "gap": 0.17999995231628424
+        },
+        {
+          "door": "Tower fire exit door / West mirrored side details",
+          "point": [
+            376.7789153912353,
+            2.4800000214576725,
+            -20.08216635741941
+          ],
+          "bottom": 1.9800000214576723,
+          "support": "Estate terrain",
+          "supportY": -0.14999999999999553,
+          "gap": 2.130000021457668
+        },
+        {
+          "door": "Tower fire exit door / West mirrored side details",
+          "point": [
+            376.56493584217685,
+            2.4800000214576725,
+            -20.30432152402215
+          ],
+          "bottom": 1.9800000214576723,
+          "support": "Estate terrain",
+          "supportY": -0.1499999999999955,
+          "gap": 2.130000021457668
+        },
+        {
+          "door": "Tower fire exit door / West mirrored side details",
+          "point": [
+            376.35095629311843,
+            2.4800000214576725,
+            -20.52647669062489
+          ],
+          "bottom": 1.9800000214576723,
+          "support": "Estate terrain",
+          "supportY": -0.14999999999999544,
+          "gap": 2.1300000214576675
+        },
+        {
+          "door": "Tower fire exit door / East mirrored side details",
+          "point": [
+            352.9349220710489,
+            2.4800000214576725,
+            2.027815069491933
+          ],
+          "bottom": 1.9800000214576723,
+          "support": "Estate terrain",
+          "supportY": -0.15,
+          "gap": 2.1300000214576724
+        },
+        {
+          "door": "Tower fire exit door / East mirrored side details",
+          "point": [
+            353.1489016201073,
+            2.4800000214576725,
+            2.2499702360946707
+          ],
+          "bottom": 1.9800000214576723,
+          "support": "Estate terrain",
+          "supportY": -0.1500000000000005,
+          "gap": 2.130000021457673
+        },
+        {
+          "door": "Tower fire exit door / East mirrored side details",
+          "point": [
+            353.36288116916575,
+            2.4800000214576725,
+            2.4721254026974084
+          ],
+          "bottom": 1.9800000214576723,
+          "support": "Estate terrain",
+          "supportY": -0.15000000000000055,
+          "gap": 2.130000021457673
+        },
+        {
+          "door": "1829 bespoke door 0,19.899999618530273",
+          "point": [
+            -0.76,
+            2.399999976158142,
+            20.099999618530273
+          ],
+          "bottom": 1.899999976158142,
+          "support": "Front doorway landing surface",
+          "supportY": 1.7999999988079072,
+          "gap": 0.09999997735023491
+        },
+        {
+          "door": "1829 bespoke door 0,19.899999618530273",
+          "point": [
+            0,
+            2.399999976158142,
+            20.099999618530273
+          ],
+          "bottom": 1.899999976158142,
+          "support": "Front doorway landing surface",
+          "supportY": 1.7999999988079072,
+          "gap": 0.09999997735023491
+        },
+        {
+          "door": "1829 bespoke door 0,19.899999618530273",
+          "point": [
+            0.76,
+            2.399999976158142,
+            20.099999618530273
+          ],
+          "bottom": 1.899999976158142,
+          "support": "Front doorway landing surface",
+          "supportY": 1.7999999988079072,
+          "gap": 0.09999997735023491
+        }
+      ]
+    },
+    {
+      "year": 2021,
+      "checked": 37,
+      "issues": [
+        {
+          "door": "1829 estate · aerial reconstruction -26.15,19.779999999999998",
+          "point": [
+            -26.718,
+            0.2200000286102295,
+            20.08
+          ],
+          "bottom": -0.2799999713897705,
+          "support": "West semi-basement lower paving",
+          "supportY": -1.0200000000000045,
+          "gap": 0.740000028610234
+        },
+        {
+          "door": "1829 estate · aerial reconstruction -26.15,19.779999999999998",
+          "point": [
+            -26.15,
+            0.2200000286102295,
+            20.08
+          ],
+          "bottom": -0.2799999713897705,
+          "support": "West semi-basement lower paving",
+          "supportY": -1.0200000000000045,
+          "gap": 0.740000028610234
+        },
+        {
+          "door": "1829 estate · aerial reconstruction -26.15,19.779999999999998",
+          "point": [
+            -25.581999999999997,
+            0.2200000286102295,
+            20.08
+          ],
+          "bottom": -0.2799999713897705,
+          "support": "West semi-basement lower paving",
+          "supportY": -1.0200000000000045,
+          "gap": 0.740000028610234
+        },
+        {
+          "door": "1829 estate · aerial reconstruction -11.55,17.38",
+          "point": [
+            -12.118,
+            0.2200000286102295,
+            17.68
+          ],
+          "bottom": -0.2799999713897705,
+          "support": "West semi-basement lower paving",
+          "supportY": -1.0200000000000042,
+          "gap": 0.7400000286102337
+        },
+        {
+          "door": "1829 estate · aerial reconstruction -11.55,17.38",
+          "point": [
+            -11.55,
+            0.2200000286102295,
+            17.68
+          ],
+          "bottom": -0.2799999713897705,
+          "support": "West semi-basement lower paving",
+          "supportY": -1.0200000000000042,
+          "gap": 0.7400000286102337
+        },
+        {
+          "door": "1829 estate · aerial reconstruction -11.55,17.38",
+          "point": [
+            -10.982000000000001,
+            0.2200000286102295,
+            17.68
+          ],
+          "bottom": -0.2799999713897705,
+          "support": "West semi-basement lower paving",
+          "supportY": -1.0200000000000042,
+          "gap": 0.7400000286102337
+        },
+        {
+          "door": "1829 estate · aerial reconstruction 26.15,19.779999999999998",
+          "point": [
+            25.581999999999997,
+            0.2200000286102295,
+            20.08
+          ],
+          "bottom": -0.2799999713897705,
+          "support": "East semi-basement lower paving",
+          "supportY": -1.0200000000000045,
+          "gap": 0.740000028610234
+        },
+        {
+          "door": "1829 estate · aerial reconstruction 26.15,19.779999999999998",
+          "point": [
+            26.15,
+            0.2200000286102295,
+            20.08
+          ],
+          "bottom": -0.2799999713897705,
+          "support": "East semi-basement lower paving",
+          "supportY": -1.0200000000000045,
+          "gap": 0.740000028610234
+        },
+        {
+          "door": "1829 estate · aerial reconstruction 26.15,19.779999999999998",
+          "point": [
+            26.718,
+            0.2200000286102295,
+            20.08
+          ],
+          "bottom": -0.2799999713897705,
+          "support": "East semi-basement lower paving",
+          "supportY": -1.0200000000000045,
+          "gap": 0.740000028610234
+        },
+        {
+          "door": "1829 estate · aerial reconstruction 11.55,17.38",
+          "point": [
+            10.982000000000001,
+            0.2200000286102295,
+            17.68
+          ],
+          "bottom": -0.2799999713897705,
+          "support": "East semi-basement lower paving",
+          "supportY": -1.0200000000000042,
+          "gap": 0.7400000286102337
+        },
+        {
+          "door": "1829 estate · aerial reconstruction 11.55,17.38",
+          "point": [
+            11.55,
+            0.2200000286102295,
+            17.68
+          ],
+          "bottom": -0.2799999713897705,
+          "support": "East semi-basement lower paving",
+          "supportY": -1.0200000000000042,
+          "gap": 0.7400000286102337
+        },
+        {
+          "door": "1829 estate · aerial reconstruction 11.55,17.38",
+          "point": [
+            12.118,
+            0.2200000286102295,
+            17.68
+          ],
+          "bottom": -0.2799999713897705,
+          "support": "East semi-basement lower paving",
+          "supportY": -1.020000000000004,
+          "gap": 0.7400000286102335
+        },
+        {
+          "door": "1829 bespoke door 0,19.899999618530273",
+          "point": [
+            -0.76,
+            2.399999976158142,
+            20.099999618530273
+          ],
+          "bottom": 1.899999976158142,
+          "support": "Front doorway landing surface",
+          "supportY": 1.7999999988079072,
+          "gap": 0.09999997735023491
+        },
+        {
+          "door": "1829 bespoke door 0,19.899999618530273",
+          "point": [
+            0,
+            2.399999976158142,
+            20.099999618530273
+          ],
+          "bottom": 1.899999976158142,
+          "support": "Front doorway landing surface",
+          "supportY": 1.7999999988079072,
+          "gap": 0.09999997735023491
+        },
+        {
+          "door": "1829 bespoke door 0,19.899999618530273",
+          "point": [
+            0.76,
+            2.399999976158142,
+            20.099999618530273
+          ],
+          "bottom": 1.899999976158142,
+          "support": "Front doorway landing surface",
+          "supportY": 1.7999999988079072,
+          "gap": 0.09999997735023491
+        }
+      ]
+    }
+  ]
+}

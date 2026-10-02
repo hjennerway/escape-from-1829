@@ -1,5 +1,40 @@
 # Asylum escape interior finishes
 
+## Grindley basement mural (2 October 2026)
+
+The owner's [marked view](basement-mural-placement.png) places the supplied
+Grindley canal mural on B7's south-facing wall beside the central basement
+corridor, opposite the S5 junction stair. The upright attachment is preserved
+byte-for-byte at `../../Browser/dist/art/grindley-basement-mural.png`; the
+earlier original photograph remains in `../grindley/ward-mural.png`.
+
+The painted area is centred at x=-34.65 on the z=1.39 wall face. Its 2.32-unit
+height is 80% of the 2.9-unit room height, leaving 0.29 units above and below.
+The source's proportions are retained. A render-time outline excludes the
+photographed ceiling and surrounding plaster, with a 0.10-unit inward feather
+around the painted edge. The paint blends directly into the basement brick
+and plaster materials, retaining masonry relief and the existing lighting.
+It adds no projecting frame, collision or additional draw call.
+
+This is the owner's requested gameplay placement, not a surveyed historic
+location. Only the browser interior and its local image asset are updated;
+the aerial compiler excludes this interior. Unity, Blender and packaged
+exports were not regenerated. Validation is recorded in `../../DEVELOPMENT.md`.
+
+## Ceiling and Reception entrance (2 October 2026)
+
+The owner's request reduces the visible ceiling tiling while retaining its
+worn plaster appearance. Stains, flakes and cracks now wrap continuously;
+blended projections soften repeated patches across all playable floors.
+
+The door behind the Reception starting position is D1, the main entrance.
+Its interior now follows the existing exterior red double door: six dark
+panels, cream surround and a glazed transom fitted to the interior ceiling.
+This supersedes generic emergency fittings at D1 only. Its route to the front
+steps and E interaction are retained. These are browser visual adaptations,
+not new historical measurements. Validation is in `../../DEVELOPMENT.md` and
+comparisons are in `../../Browser/artifacts/ceiling-entrance/`.
+
 ## Emergency exit fittings (September 24)
 
 The active exits now have worn green painted leaves, deep metal jamb returns,

@@ -2,6 +2,7 @@
 // The map is registered to Reception; +X is east and +Z is south/front.
 // Map pixels, photograph-derived heights and concealed elevations are estimates.
 import {addAdminCorridorDetail} from './admin-corridor-detail.mjs';
+import {mitreRightAngleWalls} from './wall-mitres.mjs';
 import {addFarndonCorridor,FARNDON_CORRIDOR,FARNDON_CORRIDOR_VIEWS} from './farndon-corridor.mjs';
 import {addWardCorridors,WARD_CORRIDOR_NODES} from './ward-corridors.mjs';
 import {addHaleCorridors,HALE_CORRIDOR_RUNS} from './hale-corridors.mjs';
@@ -104,14 +105,16 @@ export function createMainAdminBuilding(THREE,{brick,roof,worldUV,material}){
     }
     if(spec.roof==='flat'){
       solid(dark,x,h+.07,z,w,.14,d,spec.name+' flat roof');
+      const parapets=[];
       for(const edgeZ of [z-d/2,z+d/2]){
-        solid(brick,x,h+.3,edgeZ,w,.6,.24,spec.name+' brick parapet');
-        solid(stone,x,h+.62,edgeZ,w+.18,.13,.4,spec.name+' coping');
+        parapets.push(solid(brick,x,h+.3,edgeZ,w,.6,.24,spec.name+' brick parapet'));
+        parapets.push(solid(stone,x,h+.62,edgeZ,w,.13,.4,spec.name+' coping'));
       }
       for(const edgeX of [x-w/2,x+w/2]){
-        solid(brick,edgeX,h+.3,z,.24,.6,d,spec.name+' brick parapet');
-        solid(stone,edgeX,h+.62,z,.4,.13,d+.18,spec.name+' coping');
+        parapets.push(solid(brick,edgeX,h+.3,z,.24,.6,d,spec.name+' brick parapet'));
+        parapets.push(solid(stone,edgeX,h+.62,z,.4,.13,d,spec.name+' coping'));
       }
+      mitreRightAngleWalls(THREE,parapets);
       solid(red,x,h-.32,z,w+.12,.22,d+.12,spec.name+' parapet string');
       ranges.push({...spec,x,z,w,d});return {x,z,w,d,h};
     }

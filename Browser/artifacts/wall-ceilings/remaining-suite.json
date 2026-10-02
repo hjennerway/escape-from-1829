@@ -1,0 +1,134 @@
+[
+  {
+    "test": "test-oakmere-court.mjs",
+    "code": 0
+  },
+  {
+    "test": "test-oakmere.mjs",
+    "code": 0
+  },
+  {
+    "test": "test-oakmere-west.mjs",
+    "code": 0
+  },
+  {
+    "test": "test-oakmere-windows.mjs",
+    "code": 0
+  },
+  {
+    "test": "test-annexe-wards.mjs",
+    "code": 0
+  },
+  {
+    "test": "test-leighton-newton.mjs",
+    "code": 1
+  },
+  {
+    "test": "test-churton.mjs",
+    "code": 0
+  },
+  {
+    "test": "test-upton.mjs",
+    "code": 0
+  },
+  {
+    "test": "test-garages-mortuary.mjs",
+    "code": 0
+  },
+  {
+    "test": "test-greenhouses.mjs",
+    "code": 0
+  },
+  {
+    "test": "test-main-admin.mjs",
+    "code": 0
+  },
+  {
+    "test": "test-main-kitchen.mjs",
+    "code": 0
+  },
+  {
+    "test": "test-main-admin-refine2.mjs",
+    "code": 0
+  },
+  {
+    "test": "test-aerial-controls.mjs",
+    "code": 0
+  },
+  {
+    "test": "test-device-location.mjs",
+    "code": 0
+  },
+  {
+    "test": "test-aerial-layouts.mjs",
+    "code": 0
+  },
+  {
+    "test": "test-kml-imports.mjs",
+    "code": 0
+  },
+  {
+    "test": "test-kml-11.mjs",
+    "code": 0
+  },
+  {
+    "test": "test-modern-entrance.mjs",
+    "code": 0
+  },
+  {
+    "test": "test-modern-car-park.mjs",
+    "code": 0
+  },
+  {
+    "test": "test-parsons-retrace.mjs",
+    "code": 0
+  },
+  {
+    "test": "test-historic-roads.mjs",
+    "code": 0
+  },
+  {
+    "test": "test-road-continuity.mjs",
+    "code": 0
+  },
+  {
+    "test": "test-west-parsons-junctions.mjs",
+    "code": 0
+  },
+  {
+    "test": "test-admin-teardrop.mjs",
+    "code": 0
+  },
+  {
+    "test": "test-annexe-access.mjs",
+    "code": 0
+  },
+  {
+    "test": "test-annexe-rear-roads.mjs",
+    "code": 0
+  },
+  {
+    "test": "test-performance.mjs",
+    "code": 0
+  },
+  {
+    "test": "test-aerial-performance.mjs",
+    "code": 0
+  },
+  {
+    "test": "test-building-detail.mjs",
+    "code": 0
+  },
+  {
+    "test": "test-outhouse.mjs",
+    "code": 0
+  },
+  {
+    "test": "test-willows.mjs",
+    "code": 0
+  },
+  {
+    "test": "test-building-photos.mjs",
+    "code": 0
+  }
+]

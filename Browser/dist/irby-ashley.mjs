@@ -1,4 +1,5 @@
 import {photoDetailPrimitives} from './photo-detail-primitives.mjs';
+import {mitreRightAngleWalls} from './wall-mitres.mjs';
 import {placeWardViews,WARD_POSITIONS} from './ward-placement.mjs';
 import {IRBY_CONNECTION_FRONT} from './irby-corridor.mjs';
 import {meetPlinth} from './building-grounding.mjs';
@@ -249,9 +250,10 @@ export function createIrbyAshley(THREE,{brick,roof,worldUV,material,rearElevatio
     // Fall across X into the court, perpendicular to the previous Z slope.
     const roofY=x=>2.85+(x-x0)/(x1-x0)*.9;
     // The extension passes the wing's end, exposing a new right-hand side.
+    const lowWalls=[];
     for(const [a,b] of [[[x0,z0],[x1,z0]],[[x0,z1],[x0,z0]],[[x1,z0],[x1,rz(-137.5)-cz]]]){
       const dx=b[0]-a[0],dz=b[1]-a[1],len=Math.hypot(dx,dz),r=Math.atan2(-dz,dx),mid=[(a[0]+b[0])/2,(a[1]+b[1])/2];
-      const wall=mesh(worldUV(new THREE.BoxGeometry(len,1.05,.3),1.7),brick,mid[0],.525,mid[1],'Conservatory low brick wall');wall.rotation.y=r;wall.userData.orientedCollision=true;
+      const wall=mesh(worldUV(new THREE.BoxGeometry(len,1.05,.3),1.7),brick,mid[0],.525,mid[1],'Conservatory low brick wall');wall.rotation.y=r;wall.userData.orientedCollision=true;lowWalls.push(wall);
       surface([[a[0],1.05,a[1]],[b[0],1.05,b[1]],[b[0],roofY(b[0]),b[1]],[a[0],roofY(a[0]),a[1]]],[[0,2,1],[0,3,2]],glass,'Conservatory side glazing');
       const sections=Math.ceil(len/1.25);
       for(let i=0;i<=sections;i++){
@@ -261,6 +263,7 @@ export function createIrbyAshley(THREE,{brick,roof,worldUV,material,rearElevatio
       box(paint,mid[0],1.05,mid[1],len,.075,.1,r);
       ridge([a[0],roofY(a[0])+.02,a[1]],[b[0],roofY(b[0])+.02,b[1]],.055,paint);
     }
+    mitreRightAngleWalls(THREE,lowWalls);
     const roofV=[[x0,roofY(x0),z0],[x1,roofY(x1),z0],[x1,roofY(x1),z1],[x0,roofY(x0),z1]];
     surface(roofV,[[0,1,2],[0,2,3]],glass,'Glazed courtyard lean-to roof',true);
     for(let x=x0;x<=x1+.01;x+=1.25)ridge([x,roofY(x)+.03,z0],[x,roofY(x)+.03,z1],.045,paint);

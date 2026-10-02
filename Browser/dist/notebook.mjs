@@ -1,7 +1,7 @@
 import {visible} from './core.mjs';
 import {insidePolygon,segmentDistance} from './asylum-layout.mjs';
 
-export const REVEAL_RADIUS=5.5;
+export const REVEAL_RADIUS=11;
 export const OUTSIDE_BOUNDS=[-96,96,-52,82];
 export const notebookView=player=>player.outside?'outside':`floor:${player.floor}`;
 export const floorTitle=(floor,index)=>floor.name||(index?'Upper floor':'Ground floor');

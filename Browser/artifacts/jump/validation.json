@@ -1,0 +1,97 @@
+{
+  "wall": {
+    "before": [
+      -10,
+      1.8,
+      74.74166666666662
+    ],
+    "peak": [
+      -10,
+      3.479999999999998,
+      73.69999999999983
+    ],
+    "after": [
+      -10,
+      1.8,
+      69.53333333333269
+    ]
+  },
+  "hedge": {
+    "before": [
+      45,
+      1.8,
+      74.86666666666663
+    ],
+    "peak": [
+      45,
+      3.479999999999998,
+      73.69999999999983
+    ],
+    "after": [
+      45,
+      1.8,
+      69.53333333333269
+    ]
+  },
+  "reception": {
+    "peak": {
+      "x": 0,
+      "z": 14,
+      "floor": 0,
+      "y": 1.6799999999999975,
+      "stair": null,
+      "outside": false,
+      "verticalTrend": 0
+    },
+    "after": {
+      "x": 0,
+      "z": 14,
+      "floor": 0,
+      "y": 0,
+      "stair": null,
+      "outside": false,
+      "verticalTrend": 0
+    }
+  },
+  "basement": {
+    "peak": {
+      "x": -31.1,
+      "z": -7,
+      "floor": 2,
+      "y": -2.5225000000000004,
+      "stair": null,
+      "outside": false,
+      "verticalTrend": 0
+    },
+    "after": {
+      "x": -31.1,
+      "z": -7,
+      "floor": 2,
+      "y": -3.2,
+      "stair": null,
+      "outside": false,
+      "verticalTrend": 0
+    }
+  },
+  "outside": {
+    "peak": {
+      "x": -10,
+      "z": 60,
+      "floor": 0,
+      "y": 1.6703999999999946,
+      "stair": null,
+      "outside": true,
+      "verticalTrend": 0
+    },
+    "after": {
+      "x": -10,
+      "z": 60,
+      "floor": 0,
+      "y": 0,
+      "stair": null,
+      "outside": true,
+      "verticalTrend": 0
+    }
+  },
+  "errors": []
+}

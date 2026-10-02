@@ -1,7 +1,7 @@
 import assert from 'node:assert/strict';
 import {readFile} from 'node:fs/promises';
 import * as THREE from './dist/vendor/three.module.js';
-import {buildAsylumLayout,flatWalkable} from './dist/asylum-layout.mjs';
+import {buildAsylumLayout,flatWalkable,segmentDistance} from './dist/asylum-layout.mjs';
 import {buildAsylumArchitecture} from './dist/asylum-architecture.mjs';
 import {joinAsylumWalls} from './dist/asylum-wall-joins.mjs';
 
@@ -44,6 +44,12 @@ for(const fixture of fixtures){
    assert(!flatWalkable(floor,x,z,.01),'Collision includes repaired masonry');
    for(const side of [-1,1])for(const [kind,y] of [['Brick',.55],['Plaster',1.65],['Plaster',2.8]]){
     ray.set(new THREE.Vector3(x-dz*side*.45,y,z+dx*side*.45),new THREE.Vector3(dz*side,0,-dx*side));ray.far=.65;
+    // A joined T/corner has no internal end cap to hit from inside another
+    // wall. Verify the solid at the target vertically for those buried probes.
+    if(floor.walls.some(w=>segmentDistance(ray.ray.origin.x,ray.ray.origin.z,w.a,w.b)<.09)){
+     ray.set(new THREE.Vector3(x,1.2,z),new THREE.Vector3(0,-1,0));ray.far=.2;
+     assert(ray.intersectObject(scene.getObjectByName('Asylum Brick'),false).length,'Buried join has a continuous solid footprint');continue;
+    }
     const window=floor.windows?.find(w=>Math.abs(x-w.x)<.01&&Math.abs(z-w.z)<w.width/2&&y>w.sill&&y<w.sill+w.height),finish=window?'Glass':kind;
     assert(ray.intersectObject(scene.getObjectByName('Asylum '+finish),false).length,`Sealed ${finish} join on floor ${floor.id} at ${x},${z}, side ${side}`);samples++;
    }
@@ -51,4 +57,50 @@ for(const fixture of fixtures){
   joins++;
  }
 }
-console.log(`PASS: ${joins} surveyed wall joins, ${samples} masonry rays from both sides at three heights, matching collision, stable joins and preserved doorway widths.`);
+// Independently survey convex corners from the reviewed centre lines. The
+// bisector intersects the two offset faces at r / cos(half-angle). Square
+// boxes stop short of that point, even though their centre lines connect.
+let corners=0,cornerSamples=0;
+for(const floor of floors){
+ const scene=new THREE.Scene();buildAsylumArchitecture(THREE,scene,floor);scene.updateMatrixWorld(true);
+ const nextElevation=Math.min(...floor.levelElevations.filter(y=>y>floor.elevation));
+ const wallTop=Math.max(floor.id===2?2.92:3.82,Number.isFinite(nextElevation)?nextElevation-floor.elevation+.001:0);
+ const nodes=new Map();
+ for(const w of floor.walls)for(const [p,q] of [[w.a,w.b],[w.b,w.a]]){
+  const key=p.map(v=>v.toFixed(6)).join(','),length=Math.hypot(q[0]-p[0],q[1]-p[1]),d=[(q[0]-p[0])/length,(q[1]-p[1])/length];
+  if(!nodes.has(key))nodes.set(key,{p,ends:[]});
+  const node=nodes.get(key);if(!node.ends.some(e=>Math.hypot(e[0]-d[0],e[1]-d[1])<1e-6))node.ends.push(d);
+ }
+ for(const {p,ends} of nodes.values()){
+  ends.sort((a,b)=>Math.atan2(a[1],a[0])-Math.atan2(b[1],b[0]));
+  for(let i=0;i<ends.length;i++){
+   const a=ends[i],b=ends[(i+1)%ends.length];if(a[0]*b[1]-a[1]*b[0]>=-1e-6)continue;
+   const n=[-a[1]+b[1],a[0]-b[0]],length=Math.hypot(...n);n[0]/=length;n[1]/=length;
+   const cosine=-n[0]*a[1]+n[1]*a[0],mitreReach=.09/cosine;
+   // At extremely acute duplicate ends, the finite bevel is the line between
+   // the two offset endpoints, rather than the unbounded line intersection.
+   const reach=mitreReach>.36?.09*cosine:mitreReach;
+   for(const fraction of [.80,.93,.99]){
+    const x=p[0]+n[0]*reach*fraction,z=p[1]+n[1]*reach*fraction;
+    for(const [kind,bottom,top] of [['Brick',0,1.1],['Plaster',1.1,wallTop]]){
+     ray.set(new THREE.Vector3(x,top+.3,z),new THREE.Vector3(0,-1,0));ray.far=.4;
+     const hit=ray.intersectObject(scene.getObjectByName('Asylum '+kind),false)[0];
+     assert(hit&&Math.abs(hit.point.y-top)<1e-5,`No recessed ${kind} corner at floor ${floor.id}: ${p}, sample ${fraction}`);
+     // A filled mitre must have outward side faces at both finish heights.
+     const ox=x+n[0]*.4,oz=z+n[1]*.4;
+     ray.set(new THREE.Vector3(ox,top+.3,oz),new THREE.Vector3(0,-1,0));ray.far=.4;
+     const buried=ray.intersectObject(scene.getObjectByName('Asylum '+kind),false).length>0;
+     if(!buried){
+      ray.set(new THREE.Vector3(ox,(bottom+top)/2,oz),new THREE.Vector3(-n[0],0,-n[1]));ray.far=.5;
+      const face=ray.intersectObject(scene.getObjectByName('Asylum '+kind),false)[0];
+      assert(face&&face.distance<=.40001,`Exposed ${kind} corner is closed with outward normals at ${p}`);
+     }
+     cornerSamples++;
+    }
+    assert(!flatWalkable(floor,x,z),`Filled corner remains blocked to the player: ${JSON.stringify({floor:floor.id,p,ends,reach,x,z})}`);
+   }
+   corners++;
+  }
+ }
+}
+console.log(`PASS: ${joins} surveyed wall joins, ${samples} exposed masonry rays, ${corners} mitred corners / ${cornerSamples} brick and plaster probes across all floors, collision and preserved doorways.`);

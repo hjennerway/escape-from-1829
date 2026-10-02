@@ -1,5 +1,21 @@
 # Front semi-basement walks — 27 September 2026
 
+## Door contact correction — 2 October 2026
+
+The owner's floating-door screenshot supersedes the earlier instruction below
+to retain the blue doors' heights. All four facade doors beside Reception now
+use the lower walk's finished level, `FRONT_BASEMENT.grade - depth` (y=-1.02),
+instead of y=-0.28. Both mirrored builders keep the doors' proportions while
+lowering their leaves, glazing, frames and handles together by 0.74 units.
+The windows, excavation and walking routes retain their existing positions.
+
+`Browser/test-exterior-door-supports.mjs` checks actual leaf geometry against
+visible support across the estate and historical periods. The actual-game
+comparison and both directions along the front walks are checked by
+`Browser/test-exterior-door-supports-browser.mjs`; evidence is saved under
+`Browser/artifacts/door-supports/`. These are browser-source corrections;
+local compiled aerial output is rebuilt separately.
+
 The owner's `front-marked.png` identifies the yellow facade walks, outer
 descending stairs and inner ascending stairs beside Reception. The lower
 windows must keep their positions. The circled four-tread branch of the
@@ -48,3 +64,28 @@ and checks that the lower wall still conceals the terrain. The zero-clearance
 version fails that regression. Browser source and the local compiled aerial
 asset are updated; Unity and Blender exports are unchanged. Close and oblique
 render evidence uses `Browser/artifacts/front-sill-*`.
+
+## Right-angle wall joins — 2 October 2026
+
+The owner's [marked corner view](right-angle-wall-joins.png) identifies square
+notches and overlapping faces where the low retaining wall turns in front of
+1829. It is defect evidence. The request also covers equivalent right-angle
+wall joins throughout the browser model.
+
+The frontage's retaining masonry, coping and exposed foundations now use shared
+mitred ends on both sides of Reception. The same repair covers the entrance
+stair returns, west basement retaining-wall bends, Irby/Ashley conservatory,
+Main/admin and tower-service parapets, and Hospital Shop link coping. The west
+retaining wall and stair-return runs terminate at common centre-line junctions;
+their established widths, levels and free ends are retained. Existing closed
+building footprints, correctly butted walls and joined interior masonry remain
+in place. The front outer-stair facade setback from the September fix remains.
+
+`Browser/dist/wall-mitres.mjs` gives adjoining wall and coping runs matching
+diagonal ends, removes their internal caps and supplies exact collision
+footprints before batching. Different wall widths and reflected/rotated runs
+are supported. The geometry survey in `Browser/test-wall-mitres.mjs` checks 76
+exterior joins, including the formerly missing outside square and overlapping
+inside square. Browser captures and logs are in `Browser/artifacts/wall-mitres/`.
+Browser sources and local compiled aerial assets are updated; Unity, Blender
+and packaged applications are not regenerated.

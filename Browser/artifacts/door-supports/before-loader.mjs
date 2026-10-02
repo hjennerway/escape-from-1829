@@ -1,0 +1,10 @@
+import {registerHooks} from 'node:module';
+import {readFileSync} from 'node:fs';
+const names=new Set(['entrance-west-photo-detail.mjs','annexe.mjs','churton-ward.mjs','main-kitchen.mjs','garages-mortuary.mjs','escape-exterior.mjs']);
+const walls=new Set(['front-basement.mjs','west-side-basement.mjs','front-steps.mjs','irby-ashley.mjs','main-admin-building.mjs','tower-buildings.mjs','laundry.mjs']);
+registerHooks({load(url,context,next){const name=url.match(/\/dist\/([^/]+)$/)?.[1];
+ if(names.has(name))return {format:'module',shortCircuit:true,source:readFileSync(new URL('before-'+name,import.meta.url),'utf8')};
+ if(walls.has(name))return {format:'module',shortCircuit:true,source:readFileSync(new URL('../wall-mitres/before/'+name,import.meta.url),'utf8')};
+ if(name==='redesmere-passage.mjs')return {format:'module',shortCircuit:true,source:readFileSync(new URL('../../dist/'+name,import.meta.url),'utf8').replace('box(cornice,x,eaves-.02,z,width+.8,.28,depth+.8);','box(cornice,x,eaves-.08,z,width+.18,.16,depth+.18);')};
+ return next(url,context);
+}});
