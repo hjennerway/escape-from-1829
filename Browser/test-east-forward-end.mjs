@@ -21,7 +21,9 @@ for(const x of [31.95,34.95,37.95,40.4]){
 }
 for(const o of model.userData.eastPhotoOpenings.filter(o=>o.face==='forward-wing-east')){
   ray.set(new THREE.Vector3(41.7,o.y,o.z),new THREE.Vector3(-1,0,0));
-  const hit=ray.intersectObject(model,true)[0];
+  // The flight's continuous pickets can stand in front of lower glazing;
+  // check that the sash itself remains in front of its enclosing masonry.
+  const hit=ray.intersectObject(model,true).find(hit=>!hit.object.userData.stairGuard);
   assert(hit.object.isInstancedMesh&&hit.point.x>41.05&&hit.point.x<41.3,'side sashes must move onto the narrowed wall');
 }
 const obstacles=exteriorObstacles(THREE,model);

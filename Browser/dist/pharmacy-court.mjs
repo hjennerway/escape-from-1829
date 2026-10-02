@@ -14,7 +14,8 @@ export const PHARMACY_TANKS=Object.freeze([
  {name:'West pharmacy gas cylinder',x:168.5,z:-18.9,radius:5,plinth:2.7,height:11.5}
 ].map(Object.freeze));
 
-export function addPharmacyCourt(THREE,{group,brick,stone,blue,dark,mat,box,detail,line,sash,door}){
+import {addExteriorStairRail} from './exterior-stair-rail.mjs';
+export function addPharmacyCourt(THREE,{group,brick,stone,blue,dark,mat,box,detail,line,sash,door,mesh}){
  const rear=[],stairs=[];
  function window(x,y,z,w,h){
   sash(x,y,z,w,h,Math.PI,'Pharmacy rear sash');rear.push({x,y,z,w,h});
@@ -51,17 +52,13 @@ export function addPharmacyCourt(THREE,{group,brick,stone,blue,dark,mat,box,deta
    box(stone,px,top+.055,z-depth/2,run/count+.035,.11,depth+.06,name+' stone tread');
   }
   const railZ=z-depth-.08,lowX=edge-run;
-  for(const offset of [.5,1.02]){
-   line([lowX,height/count+offset,railZ],[edge,height+offset,railZ],blue,.035,name+' sloping handrail');
-   line([edge,height+offset,railZ],[x+landingWidth/2,height+offset,railZ],blue,.035,name+' landing handrail');
-   line([x+landingWidth/2,height+offset,railZ],[x+landingWidth/2,height+offset,z-.12],blue,.035,name+' return handrail');
-  }
-  for(let i=0;i<=12;i++){
-   const t=i/12,px=lowX+run*t,y=height/count+(height-height/count)*t;
-   detail(blue,px,y+.52,railZ,.04,1.04,.04);
-  }
-  for(let i=0;i<=7;i++)detail(blue,edge+landingWidth*i/7,height+.52,railZ,.04,1.04,.04);
-  for(let i=1;i<=6;i++)detail(blue,x+landingWidth/2,height+.52,railZ+depth*i/6,.04,1.04,.04);
+  // Use the service-court factory so guards follow the same placement as
+  // their stairs, doors and landing, including the later purple-range move.
+  const guard=(a,b)=>addExteriorStairRail(THREE,group,blue,a,b,{name:name+' guard',createMesh:mesh});
+  guard([lowX,height/count+.11,railZ],[edge,height+.12,railZ]);
+  guard([edge,height+.12,railZ],[x+landingWidth/2,height+.12,railZ]);
+  guard([x+landingWidth/2,height+.12,railZ],[x+landingWidth/2,height+.12,z-.12]);
+  guard([lowX,height/count+.11,z-.08],[edge,height+.12,z-.08]);
   stairs.push({name,x,z,height,rect:[lowX,z-depth-.13,x+landingWidth/2+.08,z]});
  }
  stair('Pharmacy east rear stairs',218.1,-48.82,1.08);

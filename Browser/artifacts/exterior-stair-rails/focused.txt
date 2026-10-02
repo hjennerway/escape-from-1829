@@ -1,0 +1,1 @@
+PASS: upper and remote stair round trips, 87 guards / 217 fall-prevention probes, timeline removal and batched collision parity.

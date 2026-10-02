@@ -142,10 +142,7 @@ export function refineFrontInsideCorners(THREE,{model,batches,box,mesh,worldUV,b
       const p=wallPoint(i,.5,-.085);
       const body=mesh(worldUV(new THREE.BoxGeometry(p.length+.08,height,.17),1.7),brick,p.x,height/2,p.z,true);
       body.rotation.y=p.rotation;body.userData.orientedCollision=true;body.name=label+' inside corner brick facet '+i;
-      // Recess masonry remains unpainted below the white frontage's floor band.
-      if(i<2){
-        const band=wallPoint(i,.5,.045);box(coping,band.x,3.15,band.z,p.length+.08,.25,.19,p.rotation);
-      }
+      // The continuous entrance course already follows the first two facets.
     }
     wall(0,13.35);wall(1,13.35);wall(2,12.8);wall(3,8.6);wall(4,8.6);
     // Close the cut roof edges down to their supporting wall tops, using the

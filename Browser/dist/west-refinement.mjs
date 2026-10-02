@@ -1,3 +1,4 @@
+import {addFacadeCourse} from './facade-courses.mjs';
 // September 2026 west/locations.png: red/yellow/blue/purple/pink = img1..5.
 // Camera registration and dimensions are visual estimates, not a survey.
 export const WEST_REFINEMENT_VIEWS=Object.freeze({
@@ -81,7 +82,11 @@ export function addWestEndDetails(THREE,{model,box,mesh,worldUV,brick,white,mate
     box(trim,-72.51,y,11.5,.27,.22,5.13);
   }
   for(const [z,d,h] of [[6,6,15.2],[11.5,5.1,15.37],[16.8,5.4,15.2]]){
-    for(const [dy,w,t] of [[-.22,.24,.15],[0,.44,.24],[.2,.6,.1]])box(trim,-72.3,h+dy,z,w,t,d+.13);
+    if(z===6){
+      for(const [dy,t,w] of [[-.18,.16,.23],[.04,.22,.4],[.22,.1,.55]])
+        addFacadeCourse(THREE,{mesh,worldUV},'West outer corner joined cornice '+dy,white,
+          [[-72.3,9.065],[-72.3,2.85],[-65.925,2.85]],h+dy,t,w);
+    }else for(const [dy,w,t] of [[-.22,.24,.15],[0,.44,.24],[.2,.6,.1]])box(trim,-72.3,h+dy,z,w,t,d+.13);
     box(iron,-72.52,h+.3,z,.12,.09,d+.2);
   }
   box(iron,-72.54,7.55,8.83,.07,15.1,.07);

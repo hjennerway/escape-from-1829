@@ -9,11 +9,12 @@ import {createGraftonEdge,GRAFTON_EDGE_VIEWS} from './dist/grafton-edge.mjs';
 import {createHaleWard,HALE_WARD_VIEWS} from './dist/hale-daresbury-huxley-dunham.mjs';
 import {createMainAdminBuilding} from './dist/main-admin-building.mjs';
 import {wardMapPoint} from './dist/ward-placement.mjs';
+import {joinInstancedFacadeCourses} from './dist/facade-courses.mjs';
 import {exteriorObstacles,obstacleContains} from './dist/explore-controls.mjs';
 
 globalThis.document={createElement:()=>({getContext:()=>({fillRect(){},measureText:t=>({width:t.length*16}),strokeText(){},fillText(){}})})};
 const material=color=>new THREE.MeshStandardMaterial({color});
-const materials={brick:material(0x884433),roof:material(0x334455),worldUV:g=>g,material};
+const materials={brick:material(0xb3a5a0),roof:material(0x334455),worldUV:g=>g,material};
 const sourceFarndon=createFarndon(THREE,materials),sourceWitby=createWitbyWard(sourceFarndon);
 // Existing corridor-contact window omissions are preserved through the move.
 sourceFarndon.getObjectByName('Farndon rear connection sash').removeFromParent();
@@ -46,6 +47,8 @@ const cases=[
  ['haleWard',createHaleWard(THREE,materials),[121.3,-98.7],HALE_WARD_VIEWS,'hale-daresbury-huxley-dunham-ground']
 ];
 for(const [key,source,[x,z],views,walkingView] of cases){
+ // Compare both buildings after the same construction-time course repair.
+ joinInstancedFacadeCourses(THREE,source);
  const ward=exterior[key];assert.deepEqual(ward.position.toArray(),[x,0,z]);
  compareGeometry(ward,source,true);
  const dx=x-source.position.x,dz=z-source.position.z;

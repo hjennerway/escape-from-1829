@@ -1,0 +1,21 @@
+{
+  "report": [
+    {
+      "mode": "source",
+      "build": {
+        "mode": "procedural",
+        "milliseconds": 2996.9000000003725
+      },
+      "views": 14
+    },
+    {
+      "mode": "compiled",
+      "build": {
+        "mode": "compiled",
+        "milliseconds": 1300.0999999996275
+      },
+      "views": 14
+    }
+  ],
+  "errors": []
+}

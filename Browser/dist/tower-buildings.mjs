@@ -477,7 +477,7 @@ export function createTowerBuildings(THREE,exterior){
  placement=null;
  line([153.25,.3,-36.2],[153.25,6.3,-36.2],dark,.07,'Service downpipe');
  placement='purple';
- addPharmacyCourt(THREE,{group,brick,stone,blue,dark,mat,box,detail,line,sash,door});
+ addPharmacyCourt(THREE,{group,brick,stone,blue,dark,mat,box,detail,line,sash,door,mesh});
  // Apply each move only after the source roofs have supplied dormer heights.
  // Shared trim batches retain per-detail ownership so no fixed range moves.
  const movePoint=(point,key)=>{const move=SERVICE_COURT_MOVES[key];if(move){point.x+=move.x;point.z+=move.z;}return point;};

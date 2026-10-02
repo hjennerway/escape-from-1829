@@ -1,0 +1,13 @@
+[
+  {
+    "actual": {
+      "primitives": 20836,
+      "sha256": "090569192e16b77b27988d26705800d50d4e550b1e585642bd6b835d64a9ad52"
+    },
+    "expected": {
+      "primitives": 20850,
+      "sha256": "6c08110b3d43fb8a64a1b179850e7be0b1d5f3bf0949dc2d97267930916df5e0"
+    },
+    "message": "Everything except the three marked sets of sash parts stays unchanged"
+  }
+]

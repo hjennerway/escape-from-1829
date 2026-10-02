@@ -35,6 +35,7 @@ public sealed partial class NativePrototypeGame
             Home();paused=true;UpdateLanding(0);var start=view.transform.position;var rotation=view.transform.rotation;float fov=view.fieldOfView;
             HandleTap((aerial?aerialButton:outsideButton).center);paused=true;
             Check(introFlightActive&&view.transform.position==start&&Quaternion.Angle(view.transform.rotation,rotation)<.001f&&view.fieldOfView==fov,"Title touch preserves exact first camera pose");
+            if(!aerial)Check(lightingMode==LightingMode.Dusk,"Walking exploration starts at dusk");
             Check(HandleTap(locationsButton.center)&&!locationsOpen,"Flight blocks exploration input");
             for(int frame=0;frame<12;frame++)UpdateIntroFlight(.1f);
             Check(introFlightActive&&Vector3.Distance(start,view.transform.position)>5&&Vector3.Distance(view.transform.position,introEndPosition)>5,"Intro flight has a moving midpoint");

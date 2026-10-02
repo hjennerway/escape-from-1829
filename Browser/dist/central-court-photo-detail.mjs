@@ -6,6 +6,7 @@ export const CENTRAL_COURT_PHOTO_VIEW=Object.freeze({position:[19.2,1.8,-35],tar
 export function centralCourtPhotoView(aspect){
   return {...CENTRAL_COURT_PHOTO_VIEW,fov:Math.max(76,2*Math.atan(Math.tan(54*Math.PI/180)/aspect)*180/Math.PI)};
 }
+import {addExteriorStairRail} from './exterior-stair-rail.mjs';
 export function addCentralCourtPhotoDetails(THREE,{model,box,mesh,worldUV,white,brick,roof,sash,door,rod,iron,stone,hipRoof}){
   const start=model.userData.eastPhotoOpenings.length;
   const {centralJoin,centralRear,centralWidth}=MAP_REAR_PROPORTIONS,step=-24.5,base=1.4;
@@ -34,19 +35,20 @@ export function addCentralCourtPhotoDetails(THREE,{model,box,mesh,worldUV,white,
   rod([8.17,4.6,-29.8],[8.17,4.5,-32],.05);
   // Relocate the existing central-arm stair to the doorway seen in img11.
   const stair=new THREE.Group();stair.name='Central court rear iron stair';model.add(stair);
+  const guard=(a,b)=>addExteriorStairRail(THREE,stair,iron,a,b);
   function rail(a,b,r=.03){rod(a,b,r);stair.attach(model.children[model.children.length-1]);}
   box(iron,8.9,5.1,-36.3,1.8,.14,2);
   for(let i=0;i<20;i++){
     const t=(i+.5)/20,z=-37.3-t*5.9,y=5.1-t*4.8;
     box(iron,8.9,y,z,1.6,.075,.33);
-    for(const x of [8.12,9.68])box(iron,x,y+.53,z,.035,1.06,.035);
   }
   for(const x of [8.12,9.68]){
-    rail([x,6.16,-37.3],[x,1.36,-43.2]);
+    guard([x,5.17,-37.3],[x,.37,-43.2]);
     rail([x,5,-37.3],[x,.2,-43.2],.065);
     rail([x,.2,-37.2],[x,6.16,-37.2],.07);
   }
-  rail([9.8,6.16,-35.3],[9.8,6.16,-37.3]);
-  for(let i=0;i<8;i++)box(iron,9.8,5.63,-35.3-i*.28,.035,1.06,.035);
+  guard([9.8,5.17,-35.3],[9.8,5.17,-37.3]);
+  // The building closes the west edge; leave its landing door unobstructed.
+  guard([8,5.17,-35.3],[9.8,5.17,-35.3]);
   model.userData.centralCourtPhotoOpenings=model.userData.eastPhotoOpenings.slice(start);
 }

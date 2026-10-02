@@ -12,7 +12,6 @@ export function addEntranceWestPhotoDetails(THREE,{model,box,mesh,worldUV,white,
     const x=(left+right)/2,z=(back+front)/2,w=right-left,d=front-back;
     mesh(worldUV(new THREE.BoxGeometry(w,height-p.base,d),1.7),brick,x,(height+p.base)/2,z,true).name=name;
     mesh(worldUV(new THREE.BoxGeometry(w,p.base,d),1.7),white,x,p.base/2,z,true).name=name+' white lower storey';
-    box(trim,x,p.base+.05,z,w+.12,.2,d+.12);
     return {x,z,w,d};
   }
   range('Entrance west recessed wall',p.step,p.right,16.95,p.wallZ,p.eaves);
@@ -63,13 +62,13 @@ export function addEntranceWestPhotoDetails(THREE,{model,box,mesh,worldUV,white,
     const part=mesh(geometry,trim,0,0,0,true);part.name='Entrance west mitred cornice layer '+layer;
     part.userData.frontCornerTrim=true;
   }
-  box(trim,p.step+.06,p.base+.05,18.5,.18,.2,2.5);
-  // Pale white base and floor bands wrap onto the west side of Reception.
+  // The shared facade course supplies the joined floor bands on both sides.
   box(white,-7.16,1.55,18.35,.15,3.1,2.7);
-  for(const y of [3.15,7.1,10.7,14.5])box(trim,-7.2,y,18.35,.23,.2,2.7);
 
   function opening(face,x,y,z,w=1.25,h=2.85,rotation=0,splayed=false){
-    sash(face,x,y,z,rotation,w,h);
+    // Reception's bottom row sits on the continuous course. A separate sill
+    // here left a second, lower lip protruding through its underside.
+    sash(face,x,y,z,rotation,w,h,{sill:face!=='reception-front-sash'||y!==4.3});
     if(!splayed)return;
     const a=w/2+.07,b=w/2+.34,g=new THREE.BufferGeometry();
     g.setAttribute('position',new THREE.Float32BufferAttribute([-a,0,0,a,0,0,b,.34,0,-a,0,0,b,.34,0,-b,.34,0],3));g.computeVertexNormals();

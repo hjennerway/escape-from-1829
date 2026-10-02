@@ -11,7 +11,7 @@ export function addEastEntranceMirror(THREE,helpers){
   const westLawn=model.userData.westLawnPhotoOpenings,westEntrance=model.userData.entranceWestPhotoOpenings;
   const reflected={...helpers,includeReception:false,
     box:(mat,x,y,z,w,h,d,r=0)=>box(mat,-x,y,z,w,h,d,-r),
-    sash:(face,x,y,z,r=0,w,h)=>sash(face.replaceAll('west','east'),-x,y,z,-r,w,h),
+    sash:(face,x,y,z,r=0,w,h,options)=>sash(face.replaceAll('west','east'),-x,y,z,-r,w,h,options),
     door:(x,z,r=0,bottom=0)=>door(-x,z,-r,bottom)
   };
   // The two marked east lawn fittings are omitted at every timeline stop.

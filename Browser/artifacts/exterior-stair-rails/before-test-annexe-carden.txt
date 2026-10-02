@@ -1,0 +1,2 @@
+PASS: 19581 untouched primitives; two high tower sashes, removed bay, exact canted conservatory shape, stepped footprint, three reflected hall dormers, exposed glazing, roof normals, collisions and Historic visibility.
+PASS: 294 tower primitives shortened exactly 15%; new roof shortened 15%; 130 conservatory primitives exact; extended low roof/wall, visible windows and collision coverage.

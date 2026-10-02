@@ -1,0 +1,1 @@
+PASS: reflected entrance corridor, joined symmetric inner faces, rigid movement of all 13 right-hand ranges, 20399 preserved primitives, fixed root, exposed glazing, collisions and Historic visibility.

@@ -1,0 +1,29 @@
+{
+  "views": [
+    "west-garden",
+    "west-garden-upper",
+    "west-garden-turn",
+    "west-forward",
+    "east-forward",
+    "east-court",
+    "rear-return",
+    "central",
+    "inner-east",
+    "inner-west",
+    "front-steps",
+    "annexe-0",
+    "annexe-1",
+    "pharmacy-0",
+    "pharmacy-1"
+  ],
+  "collision": {
+    "x": -62.1,
+    "y": 4.320000000298023,
+    "z": 26.350000000000005,
+    "floor": 0,
+    "outside": true,
+    "stair": null,
+    "verticalTrend": 0
+  },
+  "errors": []
+}

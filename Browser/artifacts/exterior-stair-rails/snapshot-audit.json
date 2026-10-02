@@ -1,0 +1,82 @@
+[
+  {
+    "file": "test-larkton.mjs",
+    "before": 0,
+    "capture": "test-larkton-fingerprints.json",
+    "after": 0
+  },
+  {
+    "file": "test-larkton-recess.mjs",
+    "before": 0,
+    "capture": "test-larkton-recess-fingerprints.json",
+    "after": 0
+  },
+  {
+    "file": "test-annexe-carden.mjs",
+    "before": 0,
+    "capture": "test-annexe-carden-fingerprints.json",
+    "after": 0
+  },
+  {
+    "file": "test-annexe-front-link.mjs",
+    "before": 0,
+    "capture": "test-annexe-front-link-fingerprints.json",
+    "after": 0
+  },
+  {
+    "file": "test-annexe-kitchen.mjs",
+    "before": 0,
+    "capture": "test-annexe-kitchen-fingerprints.json",
+    "after": 0
+  },
+  {
+    "file": "test-annexe-rear-stretch.mjs",
+    "before": 0,
+    "capture": "test-annexe-rear-stretch-fingerprints.json",
+    "after": 0
+  },
+  {
+    "file": "test-annexe-rear-side-alignment.mjs",
+    "before": 0,
+    "capture": "test-annexe-rear-side-alignment-fingerprints.json",
+    "after": 1
+  },
+  {
+    "file": "test-annexe-os-refinement.mjs",
+    "before": 0,
+    "capture": "test-annexe-os-refinement-fingerprints.json",
+    "after": 1
+  },
+  {
+    "file": "test-jarman.mjs",
+    "before": 1
+  },
+  {
+    "file": "test-oakmere-court.mjs",
+    "before": 0,
+    "capture": "test-oakmere-court-fingerprints.json",
+    "after": 0
+  },
+  {
+    "file": "test-oakmere-west.mjs",
+    "before": 0,
+    "capture": "test-oakmere-west-fingerprints.json",
+    "after": 0
+  },
+  {
+    "file": "test-oakmere-windows.mjs",
+    "before": 0,
+    "capture": "test-oakmere-windows-fingerprints.json",
+    "after": 0
+  },
+  {
+    "file": "test-leighton-newton.mjs",
+    "before": 1
+  },
+  {
+    "file": "test-annexe-access.mjs",
+    "before": 0,
+    "capture": "test-annexe-access-fingerprints.json",
+    "after": 0
+  }
+]

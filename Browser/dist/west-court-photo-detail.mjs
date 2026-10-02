@@ -1,4 +1,5 @@
 import {addWestCantedBay} from './west-refinement.mjs';
+import {addFacadeCourse} from './facade-courses.mjs';
 // west/img4.jpg and img5.jpg refine the earlier img6 rear courtyard reference.
 // The locator image fixes the court; unseen dimensions remain approximations.
 export const WEST_COURT_PHOTO_VIEW=Object.freeze({position:[-51,1.8,-33],target:[-54,7,5],fov:66});
@@ -25,7 +26,7 @@ export function addWestCourtPhotoDetails(THREE,{model,box,mesh,worldUV,white,bri
   // the bay's deeper connection into that retained part of the cross range.
   mesh(worldUV(new THREE.BoxGeometry(3.3,14.3,-shift+.2),1.7),brick,-60,7.15,(wallZ+oldWallZ)/2,true).name='West courtyard bay extended return';
   hipRoof(-60,(wallZ+oldWallZ)/2,3.3,-shift+.2,14.53,1).name='West courtyard bay return roof';
-  for(const y of [4.05,8.6,14.3])box(white,-61.72,y,(wallZ+oldWallZ)/2,.2,.18,-shift+.2);
+  box(white,-61.72,14.3,(wallZ+oldWallZ)/2,.2,.18,-shift+.2);
   // Yellow annotation: a broad recessed wall followed by a projecting corner.
   // The recess has paired windows at the top and middle; the corner's upper
   // front remains blank, with the high openings turned onto its side return.
@@ -34,16 +35,14 @@ export function addWestCourtPhotoDetails(THREE,{model,box,mesh,worldUV,white,bri
   for(const y of [2,6.4])for(const x of [-67.4,-70.2])
     sash('west-court-outer',x,y,2.93,Math.PI,1.12,2.25);
   for(const y of [2,6.4,11.1])sash('west-corner-return',-65.95,y,4.1,Math.PI/2,.78,2.15);
-  for(const y of [4.05,8.6]){
-    box(white,-62.5,y,4.86,7.12,.18,.23);
-    box(white,-69,y,2.86,6.12,.18,.23);
-    box(white,-65.88,y,4,.23,.18,2.3);
-  }
+  // Follow the exposed face of the low bay; the old recessed bars continued
+  // through it and collided with a second strip across its front.
+  for(const y of [4.05,8.6])addFacadeCourse(THREE,{mesh,worldUV},'West courtyard stepped floor band '+y,white,
+    [[-61.72,wallZ-.1],[-61.72,4.86],[-63.57,4.86],[-63.57,2.82],[-72.06,2.82]],y,.18,.23);
   // A shallow two-storey stair projection sits in front of the recess.
   mesh(worldUV(new THREE.BoxGeometry(2.8,8.65,2),1.7),brick,-65.05,4.325,3.9,true).name='West court low projecting bay';
   hipRoof(-65.05,3.9,2.8,2,8.78,.5).name='West court low bay slate cap';
   for(const y of [2,6.4])for(const x of [-64.16,-65.54])sash('west-court-low-bay',x,y,2.84,Math.PI,1.04,2.25);
-  for(const y of [4.05,8.6])box(white,-65.05,y,2.78,2.97,.18,.25);
   box(iron,-66.55,4.33,2.74,.085,8.66,.085);
   for(const x of [-65.9,-71.7])box(iron,x,6.3,2.74,.085,12.6,.085);
   // Retain the photographed front curved bay; only its flanking front sashes
@@ -116,7 +115,7 @@ export function addWestCourtPhotoDetails(THREE,{model,box,mesh,worldUV,white,bri
   box(glazing,doorX-.09,2.1,centreZ,1.42,.6,.08,-Math.PI/2);
   box(frame,doorX-.15,2.1,centreZ,.04,.6,.04,-Math.PI/2);
   for(const [x,z,w,top] of [[-48.6,wallZ-.15,21.3,14.3],[-62.5,4.85,7.1,14.3],[-69,2.85,6.15,15.2]]){
-    for(const [dy,h,d] of [[-.18,.16,.23],[.04,.22,.4],[.22,.1,.55]])box(white,x,top+dy,z,w,h,d);
+    if(x!==-69)for(const [dy,h,d] of [[-.18,.16,.23],[.04,.22,.4],[.22,.1,.55]])box(white,x,top+dy,z,w,h,d);
     box(iron,x,top+.32,z-.2,w+.13,.08,.12);
   }
   for(const x of [-46.4,-50.8,-55.2])box(iron,x,7,wallZ-.32,.085,14,.085);

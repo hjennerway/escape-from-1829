@@ -1,4 +1,5 @@
 import {addLeightonNewton} from './annexe-leighton-newton.mjs';
+import {addExteriorStairRail} from './exterior-stair-rail.mjs';
 import {addOakmereCourt} from './annexe-oakmere-court.mjs';
 import {addLarktonRecess,LARKTON_SHIFT} from './annexe-larkton-recess.mjs';
 import {alignAnnexeRearSide,ANNEXE_REAR_WEST_SHIFT,ANNEXE_REAR_HEAD_SHIFT} from './annexe-rear-side-alignment.mjs';
@@ -327,14 +328,20 @@ export function createAnnexe(THREE,{brick,roof,material,worldUV,hipRoof}){
  // The door sill meets the top of the existing stair landing. The old
  // centre height put the entire opening underneath the platform.
  solid(blue,-29.19,5.05+.15/2+2.8/2,-.2,.15,2.8,1.4,'Tower fire exit door');
- // Continue the deck to the actual top tread, which lies farther back and
- // out from the tower. Both reflected doors now have an unbroken escape.
- solid(blue,-30.65,5.05,-1.4,3.1,.15,4.4,'Fire stair landing');
-
  const tx=-15*ANNEXE_MAP_SCALE,tz=-2*ANNEXE_MAP_SCALE;
+ // An L-shaped deck meets the top tread and turns alongside the flight to
+ // the door. Keep the stairwell open instead of covering the rising treads.
+ const innerEdge=tx-7+.825;
+ solid(blue,-30.65,5.05,-3.875,3.1,.15,1.45,'Fire stair landing');
+ solid(blue,(innerEdge-29.1)/2,5.05,-1.175,-29.1-innerEdge,.15,3.95,'Fire stair door walkway');
  for(let i=0;i<18;i++)solid(blue,tx-7,.2+i*.27,tz+6-i*.36,1.65,.10,.42,'Blue external stair tread');
- for(const side of [-1,1])beam([tx-7+side*.87,1.1,tz+6],[tx-7+side*.87,5.7,tz-.5],.08,blue,'Blue stair handrail');
- for(let i=0;i<6;i++)for(const side of [-1,1])beam([tx-7+side*.87,.2+i*.81,tz+6-i*1.08],[tx-7+side*.87,1.1+i*.81,tz+6-i*1.08],.06,blue,'Blue stair baluster');
+ const guard=(a,b)=>addExteriorStairRail(THREE,model,blue,a,b,{name:'Blue external stair guard'});
+ for(const side of [-1,1])guard([tx-7+side*.87,.25,tz+6],[tx-7+side*.87,4.84,tz+6-17*.36]);
+ // The wall/door side stays open; all exposed edges surround the stairwell.
+ guard([-32.2,5.125,-4.6],[-29.1,5.125,-4.6]);
+ guard([-32.2,5.125,-4.6],[-32.2,5.125,-3.15]);
+ guard([innerEdge,5.125,-3.15],[innerEdge,5.125,.8]);
+ guard([innerEdge,5.125,.8],[-29.1,5.125,.8]);
  const westSide=new THREE.Group();westSide.name='West mirrored side details';
  for(const child of model.children.slice(sideMeshStart))westSide.add(child);model.add(westSide);
  const eastSide=westSide.clone(true);eastSide.name='East mirrored side details';eastSide.scale.x=-1;

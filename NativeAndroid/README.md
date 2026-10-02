@@ -20,8 +20,8 @@ and picture quality choices.
 The highlighted choice is active. **High Detail** adds sunlight shadows;
 **Battery Saver** reduces rendering resolution and switches those shadows off.
 
-In exploration, choose a year and tap a building or **LOCATIONS** to see its
-photographs. Drag to orbit and use two fingers to zoom and pan in the aerial
+Walking exploration begins at dusk. Choose a year and tap a building or
+**LOCATIONS** to see its photographs. Drag to orbit and use two fingers to zoom and pan in the aerial
 view; a small guide at the bottom shows the gestures. Photographs open beside
 the scene; choose **OPEN PHOTOGRAPH** to enlarge one. The stacked sun, sunset
 and moon buttons choose **Day**, **Dusk** and **Night**. The crosshair button

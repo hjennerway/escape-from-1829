@@ -11,6 +11,7 @@ public sealed partial class NativePrototypeGame
         if(introFlightActive||mode!=Mode.Title)return;
         introStartPosition=view.transform.position;introStartRotation=view.transform.rotation;introStartFov=view.fieldOfView;
         introStartAim=new Vector3(0,10,-19.8f);
+        if(!aerial)lightingMode=LightingMode.Dusk;
         if(aerial)StartAerial();else StartOutside();
         introEndPosition=view.transform.position;introEndRotation=view.transform.rotation;introEndFov=view.fieldOfView;
         introEndAim=aerial?orbitTarget:introEndPosition+view.transform.forward*20;

@@ -89,10 +89,12 @@ for(const [x,z,name] of [[-70,25,'West front outer arm slate roof'],[-65.5,WEST_
   assert(top.face.normal.y>0&&top.point.y>15,'roof faces upward above the occupied floors');
   assert(blocked(x,z),'new masonry has walking collisions');
 }
-for(const [x,z] of [[-59.8,24],[-45.2,24],[-62.5,26],[-68,WEST_FRONT_E_PLAN.outerFront+1.5],[bayX,WEST_FRONT_E_PLAN.bayFront+1.5]]){
+for(const [x,z] of [[-59.8,24],[-45.2,24],[-62.5,27.1],[-68,WEST_FRONT_E_PLAN.outerFront+1.5],[bayX,WEST_FRONT_E_PLAN.bayFront+1.5]]){
   assert(!blocked(x,z),'the recesses and garden beyond the arm ends remain walkable');
   assert(hit([x,30,z],[0,-1,0]).point.y<1,'roof outline leaves both E recesses open to the sky');
 }
+const stairTurnTop=hit([-62.5,30,26],[0,-1,0]);
+assert(stairTurnTop.point.y>4.2&&stairTurnTop.point.y<5.5,'the extended guarded turn remains open to the sky above its landing');
 for(const o of model.userData.westFrontPhotoOpenings.filter(o=>o.face==='west-front-stair-inset')){
   const first=hit([o.x+.6,o.y,o.z],[-1,0,0]);
   assert(first.object.isInstancedMesh&&first.distance<.7,'the turned stair opening is exposed on the inner return');

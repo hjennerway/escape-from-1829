@@ -1,0 +1,13 @@
+[
+  {
+    "actual": {
+      "primitives": 15833,
+      "sha256": "4b2dfb0113ff18c1cf733ebac0524b7de5c9fe6edf702c710dfe76bf5f720903"
+    },
+    "expected": {
+      "primitives": 15847,
+      "sha256": "488c5995a8e663614131cc01af832c2fc72f3313f77eb1067bdce912cecc7e63"
+    },
+    "message": "All front geometry and unaffected wards remain unchanged"
+  }
+]

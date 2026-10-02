@@ -1,0 +1,1 @@
+PASS: three low-spine windows, three red-link windows, matching blue sashes; 20836 protected primitives unchanged.

@@ -19,6 +19,9 @@
   Rebuild generated models after modelling changes when testing that path.
 - Browser model changes do not automatically update Unity or Blender exports.
   State accurately which sources and exports were changed or regenerated.
+- The current Unity/Android project is `NativeAndroid/Unity`. Its export,
+  validation and build entry point is `NativeAndroid/tools/build.ps1`.
+  Keep shared modelling inputs outside Unity-specific asset folders.
 
 ## Rendering and walking invariants
 

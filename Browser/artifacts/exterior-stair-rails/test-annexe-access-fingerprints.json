@@ -1,0 +1,31 @@
+[
+  {
+    "actual": {
+      "sha256": "6c6b9a92340631ff33d6ebf44603f601c8b74c2dcd70529f274d9c2907f79034"
+    },
+    "expected": {
+      "sha256": "6c6b9a92340631ff33d6ebf44603f601c8b74c2dcd70529f274d9c2907f79034"
+    },
+    "scalar": true
+  },
+  {
+    "actual": {
+      "sha256": "bd760d9cd0f943e41c075d4ab0a7dee21b4b8db4c440ead466439f2d298700da"
+    },
+    "expected": {
+      "sha256": "bd760d9cd0f943e41c075d4ab0a7dee21b4b8db4c440ead466439f2d298700da"
+    },
+    "scalar": true
+  },
+  {
+    "actual": {
+      "primitives": 20707,
+      "sha256": "e0ba6a0be0544b0f7a3691e95f33697791aeb0e96ea65523d34e0c97f97437f0"
+    },
+    "expected": {
+      "primitives": 20721,
+      "sha256": "6d3ddcc25267d8b2da276fc88995a5089af839cebe9deec130ed87031efb45af"
+    },
+    "message": "Every primitive outside the marked low entrance range remains exact"
+  }
+]

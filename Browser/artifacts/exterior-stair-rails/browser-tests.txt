@@ -1,0 +1,1 @@
+PASS: real exploration railing collision, 14 desktop views, dusk/mobile views, no browser or shader errors.

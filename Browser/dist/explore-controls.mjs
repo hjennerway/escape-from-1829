@@ -1,6 +1,7 @@
 import {KML_WILLOW_TREES} from './kml-tree-data.mjs';
 import {WILLOWS} from './willows.mjs';
 import {createObstacleJump} from './jump.mjs';
+import {stairGuardObstacles} from './exterior-stair-rail.mjs';
 
 // Ground-level exterior navigation, shared by the page and headless checks.
 // Distance to the actual rotated footprint, rather than its enclosing rectangle.
@@ -86,6 +87,13 @@ export function exteriorObstacles(THREE,model,{preciseFootprints=false}={}){
   Object.defineProperty(obstacles,'jumpObstacles',{value:[]});
   function add(geometry,transform,oriented=false,footprint=null,barrier=false){
     if(!geometry.boundingBox)geometry.computeBoundingBox();const b=geometry.boundingBox.clone().applyMatrix4(transform);
+    // A joined course can contain many separate strips. Index each footprint
+    // by its own bounds, rather than the enclosing box of the whole facade.
+    const corners=footprint?.map(([x,z])=>{const p=new THREE.Vector3(x,0,z).applyMatrix4(transform);return [p.x,p.z];});
+    if(corners){
+      b.min.x=Math.min(...corners.map(p=>p[0]));b.max.x=Math.max(...corners.map(p=>p[0]));
+      b.min.z=Math.min(...corners.map(p=>p[1]));b.max.z=Math.max(...corners.map(p=>p[1]));
+    }
     const walking=barrier||(b.min.y<1.8&&b.max.y>.5&&b.max.y-b.min.y>.6&&b.max.x-b.min.x>.25&&b.max.z-b.min.z>.25);
     if(walking||(b.max.y>.5&&b.max.y-b.min.y>.03&&b.max.x-b.min.x>.18&&b.max.z-b.min.z>.18)){
       const obstacle={minX:b.min.x,maxX:b.max.x,minZ:b.min.z,maxZ:b.max.z};
@@ -93,7 +101,7 @@ export function exteriorObstacles(THREE,model,{preciseFootprints=false}={}){
       // can substitute a thin coping/deck with the same X/Z bounds for a wall.
       // Metadata stays out of existing ground-level footprint snapshots.
       Object.defineProperties(obstacle,{minY:{value:b.min.y},maxY:{value:b.max.y}});
-      if(footprint)obstacle.corners=footprint.map(([x,z])=>{const p=new THREE.Vector3(x,0,z).applyMatrix4(transform);return [p.x,p.z];});
+      if(corners)obstacle.corners=corners;
       else if(oriented){const a=geometry.boundingBox;obstacle.corners=[[a.min.x,a.min.z],[a.max.x,a.min.z],[a.max.x,a.max.z],[a.min.x,a.max.z]].map(([x,z])=>{const p=new THREE.Vector3(x,0,z).applyMatrix4(transform);return [p.x,p.z];});}
       // Unannotated extruded bays can rotate across adjacent stair flights.
       // Their projected convex boundary is tighter than the enclosing box.
@@ -136,6 +144,11 @@ export function exteriorObstacles(THREE,model,{preciseFootprints=false}={}){
       const trunk={minX:p.x-r,maxX:p.x+r,minZ:p.z-r,maxZ:p.z+r};obstacles.push(trunk);obstacles.jumpObstacles.push(trunk);
     }
     if(o.userData.noWalkingCollision)return;
+    if(o.userData.stairGuard){
+      const parts=stairGuardObstacles(THREE,o.userData.stairGuard,o.matrixWorld);
+      if(preciseFootprints)obstacles.push(...parts);
+      obstacles.jumpObstacles.push(...parts);return;
+    }
     for(const surface of o.userData.walkSurfaces??[]){
       const corners=surface.outline.map(([x,z])=>{const p=new THREE.Vector3(x,surface.height,z).applyMatrix4(o.matrixWorld);return [p.x,p.z];});
       const height=new THREE.Vector3(0,surface.height,0).applyMatrix4(o.matrixWorld).y;

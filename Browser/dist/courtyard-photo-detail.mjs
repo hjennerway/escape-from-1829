@@ -1,5 +1,6 @@
 import {WING_ROOF_JOIN} from './wing-roof-junctions.mjs';
 import {addWestCantedBay} from './west-refinement.mjs';
+import {addFacadeCourse} from './facade-courses.mjs';
 // img2.jpg: camera in the east court, looking from the rear towards +Z.
 // The two close pairs and the single sash beside them are observed openings;
 // dimensions and the portions beyond the photograph remain visual estimates.
@@ -9,6 +10,7 @@ export function courtyardPhotoProfile(x,z){
     (x===69.2&&z===5)||(Math.abs(x-74.2)<.01&&z===3);
 }
 
+import {addExteriorStairRail} from './exterior-stair-rail.mjs';
 export function addCourtyardPhotoDetails(THREE,{model,box,mesh,worldUV,white,brick,roof,material,sash,door,rod,iron,stone,frame,glass,hipRoof}){
   const courtOpeningsStart=model.userData.eastPhotoOpenings.length;
   // Looking towards +Z reverses screen left/right: the single window is at
@@ -37,12 +39,8 @@ export function addCourtyardPhotoDetails(THREE,{model,box,mesh,worldUV,white,bri
   mesh(worldUV(new THREE.BoxGeometry(3.5,10.3,2.3),1.7),brick,68,9.15,6.15,true).name='East courtyard fire-exit corner';
   mesh(new THREE.BoxGeometry(3.5,4,2.3),white,68,2,6.15,true).name='East courtyard fire-exit corner white base';
   hipRoof(68,7.5,3.5,5,14.53,1.2).name='East courtyard fire-exit corner slate roof';
-  for(const y of [4.06,8.8,14.3]){
-    box(white,64.75,y,7.22,3.1,.18,.22);
-    box(white,68,y,4.92,3.64,.18,.22);
-    box(white,66.17,y,6.15,.22,.18,2.4);
-    box(white,63.32,y,5.9,.22,.18,2.9);
-  }
+  for(const y of [4.06,8.8,14.3])addFacadeCourse(THREE,{mesh,worldUV},'East courtyard stepped floor band '+y,white,
+    [[63.32,4.45],[63.32,7.22],[66.17,7.22],[66.17,4.92],[69.82,4.92]],y,.18,.22);
   for(const [dy,h,d] of [[-.12,.22,.23],[.12,.22,.48]]){
     box(white,68,14.3+dy,6.15,3.5+d,h,2.3+d);
     box(white,64.75,14.3+dy,7.3-d/2,3.1,h,d);
@@ -62,11 +60,10 @@ export function addCourtyardPhotoDetails(THREE,{model,box,mesh,worldUV,white,bri
   courtDoor(70.3,.4,Math.PI,4.25);courtDoor(69.5,.4,Math.PI,8.5);
   // Zigzag steel fire escape, with open risers, railings, stringers and legs.
   const stair=new THREE.Group();stair.name='East courtyard two-flight fire escape';model.add(stair);
+  const guard=(a,b)=>addExteriorStairRail(THREE,stair,iron,[a[0]-2,a[1]+.07,a[2]+4.5],[b[0]-2,b[1]+.07,b[2]+4.5]);
   function stairRod(a,b,r=.027){courtRod(a,b,r);const m=model.children[model.children.length-1];stair.attach(m);}
   function landing(x,y){
-    courtBox(iron,x,y,-.6,2.5,.13,2.1);
-    for(let i=0;i<9;i++)courtBox(iron,x-1.2+i*.3,y+.56,-1.64,.035,1.05,.035);
-    stairRod([x-1.2,y+1.08,-1.64],[x+1.2,y+1.08,-1.64]);
+    courtBox(iron,x,y,y===8.5?-.82:-.6,2.5,.13,y===8.5?2.54:2.1);
   }
   landing(69.5,8.5);landing(73,4.25);
   // Connect the middle door to its return landing with a deck along the wall.
@@ -76,15 +73,25 @@ export function addCourtyardPhotoDetails(THREE,{model,box,mesh,worldUV,white,bri
     for(let i=0;i<count;i++){
       const x=x0+(i+.5)*run,y=y0+(i+.5)*rise;
       courtBox(iron,x,y,z,Math.abs(run)+.04,.07,1.15);
-      for(const side of [-1,1])courtBox(iron,x,y+.55,z+side*.59,.03,1.1,.03);
     }
     for(const side of [-1,1]){
-      stairRod([x0,y0+1.08,z+side*.59],[x1,y1+1.08,z+side*.59]);
+      guard([x0,y0,z+side*.59],[x1,y1,z+side*.59]);
       stairRod([x0,y0-.1,z+side*.54],[x1,y1-.1,z+side*.54],.065);
     }
   }
-  flight(69.9,8.5,74,4.25,-1.5);flight(73,4.25,68.9,.3,-2.8);
-  courtBox(iron,73.2,4.25,-1.8,2.6,.13,3.1);
+  flight(70.75,8.5,74,4.25,-1.5);flight(71.9,4.25,68.9,.3,-2.8);
+  courtBox(iron,73.35,4.25,-1.8,2.9,.13,3.1);
+  for(const [a,b] of [
+    [[68.25,8.5,.45],[68.25,8.5,-2.09]],
+    [[68.25,8.5,-2.09],[70.75,8.5,-2.09]],
+    [[70.75,8.5,.45],[70.75,8.5,-.91]],
+    [[69.45,4.25,.45],[69.45,4.25,-1.65]],
+    [[69.45,4.25,-1.65],[71.9,4.25,-1.65]],
+    [[71.9,4.25,-1.65],[71.9,4.25,-2.21]],
+    [[71.9,4.25,-3.39],[74.8,4.25,-3.39]],
+    [[74.8,4.25,-3.39],[74.8,4.25,.45]],
+    [[74.25,4.25,.45],[74.8,4.25,.45]]
+  ])guard(a,b);
   for(const [x,z,h] of [[68,-1.6,8.5],[70,-1.6,8.5],[74,-2.9,4.25]])stairRod([x,.2,z],[x,h,z],.07);
 
   }

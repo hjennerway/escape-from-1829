@@ -1,0 +1,18 @@
+{
+  "views": [
+    "west-forward",
+    "central",
+    "pharmacy-0",
+    "pharmacy-1"
+  ],
+  "collision": {
+    "x": -62.1,
+    "y": 4.320000000298023,
+    "z": 26.350000000000005,
+    "floor": 0,
+    "outside": true,
+    "stair": null,
+    "verticalTrend": 0
+  },
+  "errors": []
+}

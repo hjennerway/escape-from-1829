@@ -1,3 +1,120 @@
+## Current Unity/Android gameplay port (2 October 2026)
+
+`NativeAndroid/Unity` is the current Unity 6000.6.3f1 project. The native
+game now uses the reviewed four-level asylum plan, including the basement
+and second floor, all 23 outside doors, continuous interior stairs and seven
+exterior fire-escape routes. Security and the Deva ghost follow the same
+interior stair routes. Leaving the building continues the escape on foot;
+reaching the front path completes it. Peaceful walking exploration starts
+at dusk and can enter the same rooms without pursuers or a notebook.
+Changing exploration views or locations retains the chosen lighting.
+
+Space and the touch JUMP button use the current jump arc, rendered obstacle
+heights, landing supports and interior headroom. NOTES records discovered
+places, used doors and inspected artwork, separates observations from
+deductions and reveals maps locally as the player explores. It pauses the
+game and resets with a new attempt. Interior materials retain their source
+texture scale, ceiling projection and the original Grindley mural image.
+
+The schema-3 export includes exact walls, floor outlines, shafts, banisters,
+doorways, heights, safe spawns and stair routes. Shared outdoor jump bounds
+are packed into `jump-collision.bytes` with period/tree visibility masks;
+the native spatial index decodes only nearby records. This avoids repeating
+the detailed geometry bounds in each of the 13 timeline snapshots. Geometry,
+navigation, source files and archive pictures are checked against their
+export hashes before packaging. A source change during export aborts it.
+
+Run `NativeAndroid/tools/build.ps1 -Target Android` from the repository root
+to export, validate and build. `-Target Windows` creates the local gameplay
+preview. `-SkipExport` reuses generated assets but still checks them against
+current source. The Unity importer includes its builder and shader sources
+in the cache signature, keeps interior meshes uncompressed and rejects
+surface-shader errors before importing materials. Generated assets and
+packages remain ignored by Git.
+
+The final export includes the completed courtyard-window/roof repairs,
+facade course joins and exterior stair guards. Its model fingerprint is
+`f700561f8e090031b4d8c91cf0a35c5e8391e503e325c9e0ffba663827128cdc`.
+The four GLBs contain 6,789,085 finite triangles; the interior uses 49 batches
+and 104,676 triangles. All 13 periods, 34 buildings and 73 local archive
+pictures are retained. Source and export checks pass in
+`latest-test-port-final.log` and `latest-test-presentation-final.log` under
+`NativeAndroid/artifacts`.
+
+The final Windows preview and Android builds pass in
+`latest-unity-windows-6.log` and `latest-unity-android-final.log`. The preview
+smoke run passes 67,627 assertions (1,457 distinct messages), including all
+23 door round trips, both second-floor rooms, basement travel, pursuers on
+stairs, seven first-floor outside routes, three upper/remote stair routes,
+guarded landing edges, period-dependent collision removal, jumps and the
+discovered-only notebook. Native exterior close-ups, roof undersides,
+interior rooms, mural and interface captures were visually reviewed in
+`latest-smoke-final/`. The native test routes follow the newly guarded
+landings; the old straight paths would cross the new barriers.
+
+`NativeAndroid/out/escape-1829-native.apk` is version **0.8.0**, code **8**,
+205,795,872 bytes, SHA-256
+`13fde60654af0b681f5ee83ff9891eae123568961e86cade49ab2ae41593cf9f`.
+APK verification confirms ARM64 IL2CPP, minimum Android API 26, target API
+36, a valid v2 signature, all five attribution files and the same signing
+certificate as v0.7, so it can update that installation. The previous APK
+is preserved as `escape-1829-native-v0.7.apk`. Evidence is in
+`latest-apk-verification.json`; no Android device was connected, so this
+does not establish phone performance or on-device runtime validation.
+
+The unused Unity 2022.3 project at the repository root has been removed
+(`Assets`, `Packages` and `ProjectSettings`). The shared historical grid is
+preserved byte-for-byte in `Research/escape-layout/layout.json`; the browser
+layout builder and compatibility test now use that path. The existing FBX
+is preserved byte-for-byte as `Art/1829-Level.fbx`, and the Blender tool now
+exports there. Original archive PNGs remain in `Browser/dist/art`. The
+legacy project's duplicate images and Unity-only scripts were removed.
+The remaining browser layout test passes after removal, and the only Unity
+project version file is under `NativeAndroid/Unity`. Blender models were
+not regenerated. The removal inventory is saved in
+`NativeAndroid/artifacts/legacy-unity-removal.json`.
+
+## Inner courtyard window intersections and roof undersides (2 October 2026)
+
+Both main-wing inner courts now place the lower corner sashes wholly inside
+the exposed recess, replacing the window bisected by the low projecting room
+and its concealed neighbour. The tall and shallow return windows also clear
+the perpendicular facade, downpipe and main roof overhang. The shared east
+builder supplies the west reflection. See the reference and dimension notes
+in `Research/1829-back/README.md`.
+
+`wing-roof-junctions.mjs` replaces narrow cornice strips with a solid soffit
+following the complete slate outline, from the rear hip through the tapered
+sides to the cross-range junction. The low corner rooms' existing upper
+cornices now reach their slate edges. This closes the view-dependent sky gaps
+without changing roof slopes or wall footprints. Geometry is assembled before
+batching and cached transforms; no runtime geometry mutation is introduced.
+
+`test-inner-courtyard.mjs`, included in `npm test`, passes 1,860 window/frame
+clearance samples and 158 shallow-angle/underside roof rays across both wings.
+The saved original definitions fail separately for the intersected sash and
+open eave. All 2,594 ground walking-obstacle records match before/after exactly.
+The roof-contact, front-inside-corner and walking checks pass. Source desktop,
+mobile, low-angle and overhead views were visually reviewed without page or
+shader errors. Evidence is in `Browser/artifacts/inner-courtyard/`.
+
+The full browser suite reached an east-forward-end sash assertion while other
+facade/stair work was modifying the shared checkout. Remaining checks and
+original-courtyard comparisons are recorded in `remaining-results.json` and
+the per-test logs: 60 of 79 subsequent checks pass; all 19 failures also
+reproduce with the original courtyard geometry. No global snapshot baselines
+were changed for this repair. Initial compiled checks were invalidated by concurrent
+model edits, causing the development server to correctly fall back to source.
+A fixed local snapshot passes the full source/compiled rendering comparison,
+exact draw counts, full-detail loading and missing/incompatible/corrupt asset
+fallbacks. Its timeline check passes every period, mobile navigation and
+walking collision refresh. The compiled courtyard captures were visually
+reviewed without page or shader errors. Reports are preserved separately as
+`compiled-comparison.json` and `timeline-comparison.json`. The main workspace's
+aerial asset was rebuilt afterward and its source fingerprint verified current.
+Browser modelling sources and local generated aerial assets are changed;
+Unity, Blender and packaged exports are not regenerated by this repair.
+
 ## Space to jump in walking and Asylum Escape (2 October 2026)
 
 Space starts one jump per press in Explore on foot and Asylum Escape. The
@@ -6450,3 +6567,102 @@ not regenerated.
 Final validation: `npm test` and `npm run test:compiled` both pass. The rebuilt
 manifest matches the current source fingerprint. Their complete logs and
 the compiled comparison metrics are saved in the evidence folder above.
+
+## Reception edges and estate facade courses (2 October 2026)
+
+Joined Reception's uneven front/side floor strips into level continuous courses,
+removed the lowest sashes' duplicate projecting sill lips, and followed the
+lower band through both stepped entrance facades and courtyard facets. Matching
+joins on the lawn bays, west middle bay, courtyard returns and west roof corner
+use the same swept-profile builder. The older instanced ward courses are joined
+before model preparation by material, level and adjacent endpoint geometry.
+The shared repair supports reflected and rotated facades and angled corners;
+its top, underside and side faces have outward normals and no internal caps.
+
+Joined meshes retain exact per-strip collision footprints. Collision indexing
+now bounds each supplied footprint independently, preventing a merged facade's
+enclosing box from expanding the collision index across its courtyards.
+No runtime geometry movement or tree/layout change is introduced.
+
+`test-facade-courses.mjs`, included in the standard and model suites, checks
+20 explicit profiles, 68 explicit and 278 automatically joined corners, and
+2,200 top/underside probes. Whole-model Reception rays reject competing corner
+planes and hanging sill lips. The assembled-estate survey checks 1,915 remaining
+thin pale box strips and finds no exposed matching right-angle overlaps.
+`test-facade-courses-browser.mjs` captures close source/compiled Reception,
+entrance, courtyard, bay, ward and shop views, including portrait Reception.
+Evidence and command logs are under `Browser/artifacts/facade-trim/`; modelling
+notes and the supplied screenshot are in `Research/front-inside-corners/`.
+
+These are browser model/source changes. Unity, Blender and packaged desktop or
+mobile applications were not regenerated by this repair.
+
+## Enclosed exterior stairs (2 October 2026)
+
+Exterior fire stairs and raised landings now have continuous iron guards,
+including the west garden, west masonry return, east forward wing, central
+court, both inner courts, east courtyard, rear return, both annexe stairs and
+both pharmacy stairs. Reception's front balustrade uses the same collision
+handling. The owner's marked reference and the changed landing arrangements
+are recorded in Research/exterior-stair-rails/README.md.
+
+`exterior-stair-rail.mjs` builds the handrails and close-spaced pickets from
+explicit edge endpoints. The same mesh stores its guard endpoints and height.
+`exteriorObstacles` transforms and subdivides those edges into narrow continuous
+barriers for the shared Explore/Escape walker and jumping. This includes rails
+above ground level, preserves sloping heights and reflected/scaled placements,
+and follows normal visibility, timeline and batched-source refreshes. Pharmacy
+rails use the service-court mesh factory so later range placement moves them
+with their treads and doors. Walls close the wall-side edges; guards do not
+cross the door openings.
+
+The west-garden upper flight meets its doorway deck at the edge, with a longer
+lower run and a full turning landing. The east-courtyard return has clearance
+around its rail ends; the inner-court and rear-return landing edges support the
+full turning width. Both annexe stairs now have an open stairwell and an L-shaped
+landing/door walkway instead of a broad deck covering the rising flight.
+
+`test-exterior-stair-rails.mjs`, included in `npm test`, checks the two upper
+flights and remote rear return in both directions, probes the actual supported
+sides of guards across all historic stair groups, rejects a central rail across
+the door, and checks period removal and batched visibility/collision parity.
+The final focused run passes 107 visible guard meshes and 271 attempted guard
+crossings in 1916, including the annexe and pharmacy pairs. The existing exterior
+movement survey, all 23 door round trips, interior stairs, pharmacy/annexe routes
+and both front entrance branches also pass. Annexe tests walk around the open
+stairwell to both tower doors. Door/facade ray tests now start inside the guards
+or exclude the foreground pickets when checking the masonry behind a window.
+
+Desktop, dusk and mobile views and real exploration movement checks are in
+Browser/artifacts/exterior-stair-rails/. Browser model sources and local compiled
+aerial assets are updated; Unity, Blender and packaged application exports were
+not regenerated for this repair.
+
+Validation for the facade repair: the focused course regression, ward placement,
+walking/interior exploration, collision/performance and full `test:models`
+suite pass. The regression rejects the saved original Reception's two competing
+surfaces. All 28 close source/compiled browser views completed without page or
+shader errors; Reception, the west middle bay, lawn bay, courtyard, ward and
+shop views were visually reviewed. Day/dusk Explore comparisons were also
+reviewed. `npm run test:facade` reruns the focused checks after `build:models`.
+
+The complete standard suite was attempted and every command after its first
+failure was run separately. The initial side-sash failure and the later west
+stair-bound/recess failures reproduce with the saved original Reception builder
+and no automatic course repair. Several legacy protected snapshots also fail:
+whole-estate fingerprints include the intentionally changed trim, while the
+annexe-only Carden check's separate 14-primitive discrepancy reproduces with
+the original builder. Protected reference snapshots were not rewritten.
+The ward-placement comparison now prepares both its source and assembled
+buildings with the same course joiner and passes its full geometry checks.
+
+The standard source/compiled comparison passes image similarity, exact render
+counts, full-detail loading and fallback cases. Its first timeline continuation
+fell back to source after concurrent model edits changed the fingerprint; a
+fresh local build and timeline recheck follow in the same evidence directory.
+
+Final facade validation: the refreshed compiled model matches the current
+source fingerprint. The complete timeline browser recheck passes all source
+and compiled periods, navigation/reloads, mobile reset, tree/selection controls
+and live walking collision refresh. Browser sources and local compiled aerial
+assets are updated; the broader standard-suite limitations above remain.

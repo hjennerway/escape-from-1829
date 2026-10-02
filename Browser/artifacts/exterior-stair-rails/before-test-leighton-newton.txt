@@ -1,0 +1,33 @@
+node:internal/modules/run_main:107
+    triggerUncaughtException(
+    ^
+
+AssertionError [ERR_ASSERTION]: Every primitive outside Leighton/Newton remains unchanged
++ actual - expected
+
+  {
++   count: 883699,
++   sha256: 'ed4cc7ea9c884999a1b16c50f0815832927e7110e208a4b9f97cbe95143ac892'
+-   count: 884129,
+-   sha256: '198a2a090e08ab944f561008923c42d49405f8597a8fd627b4df4c076a2d691f'
+  }
+
+    at file:///C:/Users/Harry/Documents/_escape-from-1829/Browser/test-leighton-newton.mjs:21:8
+    at ModuleJob.run (node:internal/modules/esm/module_job:561:25)
+    at async node:internal/modules/esm/loader:647:26
+    at async asyncRunEntryPointWithESMLoader (node:internal/modules/run_main:101:5) {
+  generatedMessage: false,
+  code: 'ERR_ASSERTION',
+  actual: {
+    count: 883699,
+    sha256: 'ed4cc7ea9c884999a1b16c50f0815832927e7110e208a4b9f97cbe95143ac892'
+  },
+  expected: {
+    count: 884129,
+    sha256: '198a2a090e08ab944f561008923c42d49405f8597a8fd627b4df4c076a2d691f'
+  },
+  operator: 'deepStrictEqual',
+  diff: 'simple'
+}
+
+Node.js v24.20.0

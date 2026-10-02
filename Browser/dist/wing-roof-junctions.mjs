@@ -47,12 +47,13 @@ export function addWingRoofJunction(THREE,{mesh,worldUV,box,brick,white,roof},si
   const depth=p.wallEnd-5,z=(p.wallEnd+5)/2,base=side<0?0:4;
   mesh(worldUV(new THREE.BoxGeometry(12,12.8-base,depth),1.7),brick,x,(12.8+base)/2,z,true).name=label+' wing connecting walls';
   if(base)box(white,x,base/2,z,12,base,depth);
-  // Follow the level wall tops with narrow side cornices; no transverse
-  // slab or end fascia cuts across the connected roof.
-  for(const edge of [-1,1])for(const [a,b] of [[-25,p.start],[p.start,p.level],[p.level,p.wallEnd]]){
-    const ya=wingWallHeight(a)+.11,yb=wingWallHeight(b)+.11;
-    const strip=mesh(new THREE.BoxGeometry(.25,.2,Math.hypot(b-a,yb-ya)),white,x+edge*6.08,(ya+yb)/2,(a+b)/2);
-    strip.rotation.x=-Math.atan2(yb-ya,b-a);
-    strip.name=label+' wing continuous eaves';
-  }
+  // Close the entire overhang, including its widening rear sides and hip.
+  // Narrow strips left open sky between the wall top and the single-sided
+  // slate when viewed from below. This solid soffit meets both surfaces;
+  // its hidden front end lies inside the connected cross-range roof.
+  const outline=[[-half,rear],[half,rear],[half,p.start],[6.4,p.level],[6.4,p.ridgeZ],[-6.4,p.ridgeZ],[-6.4,p.level],[-half,p.start]];
+  const shape=new THREE.Shape();outline.forEach(([u,v],i)=>i?shape.lineTo(u,-v):shape.moveTo(u,-v));shape.closePath();
+  const soffit=new THREE.ExtrudeGeometry(shape,{depth:p.eaves-p.wall+.02,bevelEnabled:false,steps:1});
+  soffit.rotateX(-Math.PI/2);
+  mesh(soffit,white,x,p.wall-.02,0,true).name=label+' wing continuous eaves';
 }

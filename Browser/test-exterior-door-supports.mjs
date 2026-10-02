@@ -104,14 +104,16 @@ for(const label of ['West','East']){
  const group=exterior.annexe.getObjectByName(label+' mirrored side details'),deck=group.getObjectByName('Fire stair landing'),door=group.getObjectByName('Tower fire exit door');
  const inverse=group.matrixWorld.clone().invert(),localDeck=deck.geometry.boundingBox.clone().applyMatrix4(deck.matrix);
  const stairX=-15*ANNEXE_MAP_SCALE-7,stairZ=-2*ANNEXE_MAP_SCALE+6-17*.36;
- for(const [a,b] of [[[door.position.x-.3,-.2],[stairX,-.2]],[[stairX,-.2],[stairX,stairZ]]])for(let i=0;i<=20;i++){
+ const decks=[deck,group.getObjectByName('Fire stair door walkway')];
+ for(const [a,b] of [[[door.position.x-.3,-.2],[-29.78,-.2]],[[-29.78,-.2],[-29.78,-4]],[[-29.78,-4],[stairX,-4]],[[stairX,-4],[stairX,stairZ]]])for(let i=0;i<=20;i++){
   const t=i/20,p=new THREE.Vector3(a[0]+(b[0]-a[0])*t,5.5,a[1]+(b[1]-a[1])*t).applyMatrix4(group.matrixWorld);
-  ray.set(p,down);const hit=ray.intersectObject(deck)[0];assert(hit&&Math.abs(hit.point.clone().applyMatrix4(inverse).y-5.125)<1e-5,'Annexe deck continuously joins its door to the top tread');
+  ray.set(p,down);const hit=ray.intersectObjects(decks)[0];assert(hit&&Math.abs(hit.point.clone().applyMatrix4(inverse).y-5.125)<1e-5,'Annexe deck continuously joins its door to the top tread');
  }
- // A facade band must not cut across the relocated doorway.
+ // A facade band must not cut across the relocated doorway. Start on the
+ // landing, inside its outer guard, rather than beyond the new balustrade.
  for(const y of [5.3,6.2,7.4,7.8]){
-  const p=new THREE.Vector3(-33,y,-.2).applyMatrix4(group.matrixWorld),direction=new THREE.Vector3(1,0,0).transformDirection(group.matrixWorld);ray.set(p,direction);
-  const hit=ray.intersectObjects(meshes.filter(visible),false)[0];assert.equal(hit?.object,door,'Annexe fire door remains visible through the facade bands');
+  const p=new THREE.Vector3(door.position.x-.6,y,-.2).applyMatrix4(group.matrixWorld),direction=new THREE.Vector3(1,0,0).transformDirection(group.matrixWorld);ray.set(p,direction);
+  const hit=ray.intersectObjects(meshes.filter(visible),false)[0];assert(hit?.object===door,'Annexe fire door remains visible through the facade bands; hit '+hit?.object.name);
  }
  assert(localDeck.min.x<stairX&&localDeck.min.z<stairZ,'Deck overlaps the top stair in plan');
  const topTread=group.children.filter(o=>o.name==='Blue external stair tread').sort((a,b)=>b.position.y-a.position.y)[0];

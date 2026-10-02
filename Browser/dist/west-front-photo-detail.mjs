@@ -1,4 +1,6 @@
 import {addWestCantedBay,addWestEndDetails} from './west-refinement.mjs';
+import {addExteriorStairRail} from './exterior-stair-rail.mjs';
+import {addFacadeCourse} from './facade-courses.mjs';
 // west/img1..3 refine the earlier img9 garden and outer end interpretation.
 export const WEST_FRONT_PHOTO_VIEW=Object.freeze({position:[-73,1.8,51],target:[-51,7,24],fov:70});
 export const WEST_FRONT_FACADE_Z=19.5;
@@ -15,10 +17,8 @@ export function addWestFrontPhotoDetails(THREE,{model,box,mesh,worldUV,white,bri
   const leftFlank=(outerRight+bayLeft)/2,rightFlank=(bayRight+innerX)/2;
   mesh(worldUV(new THREE.BoxGeometry(outerWidth,15.2,outerFront-outerBack),1.7),brick,outerX,7.6,(outerBack+outerFront)/2,true).name='West front square pavilion';
   hipRoof(outerX,(outerBack+outerFront)/2,outerWidth,outerFront-outerBack,15.47,2.86).name='West front outer arm slate roof';
-  for(const y of [4.05,8.6,15.2]){
-    box(white,outerX,y,outerFront+.08,outerWidth+.15,.18,.18);
-    for(const x of [outerLeft-.08,outerRight+.08])box(white,x,y,(19.5+outerFront)/2,.18,.18,outerFront-19.5+.15);
-  }
+  for(const y of [4.05,8.6,15.2])addFacadeCourse(THREE,{mesh,worldUV},'West outer pavilion continuous floor band '+y,white,
+    [[outerLeft-.08,19.425],[outerLeft-.08,outerFront+.08],[outerRight+.08,outerFront+.08],[outerRight+.08,19.425]],y,.18,.18);
   for(const y of [2,6.4,11.8])for(const x of [outerX-1.8,outerX+1.8])sash('west-front-square',x,y,outerFront+.06,0,1.4,2.75);
   addWestEndDetails(THREE,{model,box,mesh,worldUV,brick,white,material,sash,door,iron,hipRoof});
   // The narrower outer face exposes a longer recessed elevation. Close its
@@ -33,11 +33,14 @@ export function addWestFrontPhotoDetails(THREE,{model,box,mesh,worldUV,white,bri
   const [sx,sz]=stairPoint(-58.6,19.56);
   sash('west-front-stair-inset',sx,2,sz,Math.PI/2,1.05,2.5);
   for(const [x,y] of [[-58.6,4.25],[-58,8.5]]){const [px,pz]=stairPoint(x,19.57);door(px,pz,Math.PI/2,y);}
-  for(const y of [4.05,8.6])box(white,(outerRight-38)/2,y,19.62,-38-outerRight+.12,.18,.2);
+  for(const y of [4.05,8.6])addFacadeCourse(THREE,{mesh,worldUV},'West middle bay continuous floor band '+y,white,
+    [[outerRight+.09,19.62],[bayLeft,19.62],[bayLeft,bayRoot+2.8*.28],
+      [bayX-bayFrontWidth/2,bayRoot+2.8],[bayX+bayFrontWidth/2,bayRoot+2.8],
+      [bayRight,bayRoot+2.8*.28],[bayRight,19.62],[-38,19.62]],y,.2,.2);
   mesh(worldUV(new THREE.BoxGeometry(bayWidth,14.8,bayRoot-19.5),1.7),brick,bayX,7.4,(19.5+bayRoot)/2,true).name='West front middle arm';
-  for(const y of [4.05,8.6,14.72,14.95])for(const x of [bayLeft-.09,bayRight+.09])
+  for(const y of [14.72,14.95])for(const x of [bayLeft-.09,bayRight+.09])
     box(white,x,y,(19.5+bayRoot)/2,.2,.2,bayRoot-19.5+.1);
-  addWestCantedBay(THREE,{model,mesh,worldUV,brick,white,roof,sash},{x:bayX,z:bayRoot,width:bayWidth,frontWidth:bayFrontWidth,side:1,name:'West curved bay',face:'west-front-bay',height:14.8,includeRoof:false});
+  addWestCantedBay(THREE,{model,mesh,worldUV,brick,white,roof,sash},{x:bayX,z:bayRoot,width:bayWidth,frontWidth:bayFrontWidth,side:1,name:'West curved bay',face:'west-front-bay',height:14.8,includeRoof:false,bandHeights:[14.72,14.95]});
   addMiddleArmRoof(THREE,{mesh,roof},bayX,bayWidth,bayFrontWidth,bayRoot);
   // Paired top sashes; broad lower glazing with narrow sidelights.
   for(const x of [leftFlank,rightFlank]){
@@ -52,6 +55,10 @@ export function addWestFrontPhotoDetails(THREE,{model,box,mesh,worldUV,white,bri
   for(const [x,z,h] of [[outerLeft+.2,outerFront+.2,15],[leftFlank-1.85,19.7,14.2],[-41.18,29,8.5]])box(iron,x,h/2,z,.085,h,.085);
 
   const stair=new THREE.Group();stair.name='West front iron return stair';model.add(stair);
+  function guard(a,b){
+    const point=p=>{const [x,z]=stairPoint(p[0]-4.4,p[2]);return [x,p[1]+.07,z];};
+    return addExteriorStairRail(THREE,stair,iron,point(a),point(b));
+  }
   function rail(a,b,r=.03){
     const pa=stairPoint(a[0]-4.4,a[2]),pb=stairPoint(b[0]-4.4,b[2]);
     rod([pa[0],a[1],pa[1]],[pb[0],b[1],pb[1]],r);stair.attach(model.children[model.children.length-1]);
@@ -61,21 +68,29 @@ export function addWestFrontPhotoDetails(THREE,{model,box,mesh,worldUV,white,bri
     for(let i=0;i<18;i++){
       const t=(i+.5)/18,x=x0+(x1-x0)*t,y=y0+(y1-y0)*t;
       stepBox(iron,x,y,z,Math.abs(x1-x0)/18+.04,.075,1.2);
-      for(const side of [-1,1])stepBox(iron,x,y+.53,z+side*.62,.035,1.06,.035);
     }
     for(const side of [-1,1]){
-      rail([x0,y0+1.06,z+side*.62],[x1,y1+1.06,z+side*.62]);
+      guard([x0,y0,z+side*.62],[x1,y1,z+side*.62]);
       rail([x0,y0-.1,z+side*.56],[x1,y1-.1,z+side*.56],.065);
     }
   }
-  stepBox(iron,-53.6,8.5,20.45,2.2,.14,1.8);
-  stepBox(iron,-56.5,4.25,21.15,2.5,.14,3.2);
+  stepBox(iron,-53.6,8.5,20.61,2.2,.14,2.12);
+  stepBox(iron,-58.625,4.25,21.185,1.25,.14,3.27);
   // A short wall-side platform connects the intermediate landing to its door.
-  stepBox(iron,-55.1,4.25,19.95,4,.14,.85);
-  flight(-53.6,8.5,-56.5,4.25,20.65);flight(-56.5,4.25,-53.4,.3,22.2);
-  for(const [x,z,h] of [[-52.6,21.2,8.5],[-54.6,21.2,8.5],[-57.5,22.6,4.25]])rail([x,.2,z],[x,h+1.05,z],.07);
-  rail([-54.6,9.55,21.2],[-52.6,9.55,21.2]);
-  for(let i=0;i<8;i++)stepBox(iron,-54.6+i*.28,9.02,21.2,.035,1.04,.035);
+  stepBox(iron,-56.175,4.25,19.95,6.15,.14,.75);
+  flight(-54.7,8.5,-58,4.25,20.95);flight(-58,4.25,-53.4,.3,22.2);
+  for(const [x,z,h] of [[-52.5,21.67,8.5],[-54.7,21.67,8.5],[-59.25,22.82,4.25]])rail([x,.2,z],[x,h,z],.07);
+  // Enclose both decks and the door walkway, leaving the flight mouths open.
+  for(const [a,b] of [
+    [[-54.7,8.5,21.67],[-52.5,8.5,21.67]],
+    [[-52.5,8.5,21.67],[-52.5,8.5,19.55]],
+    [[-54.7,8.5,19.55],[-54.7,8.5,20.33]],
+    [[-59.25,4.25,19.55],[-59.25,4.25,22.82]],
+    [[-59.25,4.25,22.82],[-58,4.25,22.82]],
+    [[-58,4.25,21.57],[-58,4.25,21.58]],
+    [[-58,4.25,20.325],[-53.1,4.25,20.325]],
+    [[-53.1,4.25,20.325],[-53.1,4.25,19.575]]
+  ])guard(a,b);
 
   // Lower forward range: brick ground floor, tall upper sashes and slate roof.
   for(const y of [1.9,6.3]){

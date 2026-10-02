@@ -11,7 +11,7 @@ const dist=resolve(native,'../Browser/dist'),three=resolve(native,'../Browser/no
 const output=resolve(native,'Unity/Assets/NativePrototype/Generated');
 const archive=resolve(native,'Unity/Assets/Resources/Archive');
 const sourceHash=await modelSourceHash(),layoutBytes=await readFile(resolve(dist,'asylum-plan.json'));
-const interiorInputs=['asylum-plan.json','asylum-layout.mjs','asylum-stairs.mjs','asylum-architecture.mjs','asylum-wall-geometry.mjs','asylum-wall-joins.mjs','asylum-skirting.mjs','asylum-windows.mjs','interior-materials.mjs','basement-mural.mjs','asylum-outside.mjs','explore-controls.mjs','jump.mjs','asylum-jump.mjs','art/grindley-basement-mural.png'];
+const interiorInputs=['asylum-plan.json','architecture.mjs','asylum-layout.mjs','asylum-stairs.mjs','asylum-architecture.mjs','asylum-wall-geometry.mjs','asylum-wall-joins.mjs','asylum-skirting.mjs','asylum-windows.mjs','interior-materials.mjs','basement-mural.mjs','asylum-outside.mjs','explore-controls.mjs','jump.mjs','asylum-jump.mjs','security-guard.mjs','notebook.mjs','capture-outcome.mjs','building-catalog.mjs','location-views.mjs','earth-registration.mjs','device-location.mjs','art/grindley-basement-mural.png'];
 const hash=b=>createHash('sha256').update(b).digest('hex');
 const interiorHashes=Object.fromEntries(await Promise.all(interiorInputs.map(async name=>[name,hash(await readFile(resolve(dist,name)))])));
 const chunks=new Map();

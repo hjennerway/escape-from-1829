@@ -8,6 +8,8 @@ import {createBowlingGreen} from './bowling-green.mjs';
 import {photoDetailPrimitives} from './photo-detail-primitives.mjs';
 import {refineFrontInsideCorners} from './front-inside-corners.mjs';
 import {addCentralBack} from './central-back.mjs';
+import {addFacadeCourse,joinInstancedFacadeCourses} from './facade-courses.mjs';
+import {FRONT_CORNER_OUTLINE} from './front-inside-corners.mjs';
 import {wingWallGeometry,addWingRoofJunction} from './wing-roof-junctions.mjs';
 // Aerial interpretation of the user's outlined 1829 estate photograph.
 // Front road/reception is +Z; the corrected mast position is rear-left (-X, -Z).
@@ -258,7 +260,9 @@ export function createEscapeExterior(THREE,aspect){
       box(stone,(left+right)/2,base+.1,z,right-left,.2,d+.15);
       body.name='East courtyard bridge';
     }
-    if(!rearArm&&x!==-69&&x!==-39.6)box(stone,x,h+.12,z,w+.48,.22,d+.48);
+    const innerCornerRoom=Math.abs(x)===22.5&&z===3;
+    // These two courtyard hips need a solid underside out to the slate edge.
+    if(!rearArm&&x!==-69&&x!==-39.6)box(stone,x,h+.12,z,w+(innerCornerRoom?.8:.48),.22,d+(innerCornerRoom?.8:.48));
     const principal=x===EAST_SHIFT/2&&z===12;
     if(principal){
       // Pitched slate clears the solid cornice slab (top h+.23).
@@ -313,7 +317,16 @@ export function createEscapeExterior(THREE,aspect){
   mesh(worldUV(new THREE.BoxGeometry(14.2,11.5,12.8),1.7),photoBrick,0,8.85,13.2,true);
   box(white,0,1.55,13.2,14.2,3.1,12.8);
   addCentralBack(THREE,{model,mesh,worldUV,brick:photoBrick,white,roof,material,details,box});
-  for(const y of [3.15,7.1,10.7,14.5])box(white,0,y,19.68,14.5,.24,.32);
+  // One level band follows both entrance steps, Reception and the courtyard
+  // returns. The former slabs and side bars had different tops and undersides.
+  const west=[...FRONT_CORNER_OUTLINE.slice(0,3).reverse().map(([x,z])=>[-x,z]),
+    [-22.6,19.7],[-22.6,17.3],[-7.1,17.3],[-7.1,19.68]];
+  addFacadeCourse(THREE,{mesh,worldUV},'Entrance continuous lower floor band',white,
+    [...west,...west.toReversed().map(([x,z])=>[-x,z])],3.15,.24,.32);
+  for(const y of [7.1,10.7])addFacadeCourse(THREE,{mesh,worldUV},'Reception continuous floor band '+y,white,
+    [[-7.1,17.3],[-7.1,19.68],[7.1,19.68],[7.1,17.3]],y,.24,.32);
+  // The roof already has a continuous side parapet; only its front fascia is needed.
+  box(white,0,14.5,19.68,14.5,.24,.32);
   // Reception's fine sash glazing is supplied by the img19 detail module.
   const triangle=new THREE.BufferGeometry();triangle.setAttribute('position',new THREE.Float32BufferAttribute([-7.5,0,0,7.5,0,0,0,3.1,0],3));triangle.computeVertexNormals();mesh(triangle,cream,0,14.65,19.72);
   const relief=triangle.clone();
@@ -498,6 +511,7 @@ export function createEscapeExterior(THREE,aspect){
   const lawnMaterials=new Set();
   model.traverse(object=>{for(const mat of (Array.isArray(object.material)?object.material:[object.material]))if(mat?.userData.estateGrass)lawnMaterials.add(mat);});
   for(const mat of lawnMaterials)matchEstateGrass(mat,grass);
+  joinInstancedFacadeCourses(THREE,model);
   finishEstateMinerals(THREE,model);
   prepareExteriorShadows(THREE,model,{exclude:[trees]});
   return {scene,camera,model,terrain,legacyAccess,mast,chapel,churchGrounds,waterTower,estateChimney,annexe,newHospital:annexe,churtonWard,uptonFrithOscroft,irbyAshley,graftonEdge,haleWard,bowlingGreen,estatesDepartment,farndonWard,witbyWard,mainAdmin,adminCorridor,laundry,garagesMortuary,greenhouses,outhouse,willows,trees,invalidateShadows};

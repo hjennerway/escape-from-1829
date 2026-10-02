@@ -4,6 +4,7 @@
 export const REAR_COURT_PHOTO_VIEW=Object.freeze({position:[47,1.8,-12],target:[80,-.2,-30],fov:64});
 export function rearCourtPhotoProfile(x,z){return Math.abs(x-76.2)<.01&&[-38,-44].includes(z);}
 
+import {addExteriorStairRail} from './exterior-stair-rail.mjs';
 export function addRearCourtPhotoDetails(THREE,{model,box,mesh,worldUV,white,brick,roof,material,sash,door,rod,iron,stone,frame,glass}){
   const start=model.userData.eastPhotoOpenings.length;
   const blue=material(0x182c4c),lintel=material(0xc9c9bb),soil=material(0x625e4a),leaf=material(0x5e6d42),rust=material(0x74594a);
@@ -46,22 +47,31 @@ export function addRearCourtPhotoDetails(THREE,{model,box,mesh,worldUV,white,bri
 
   // A return stair reaches the upper door: two short flights and a half landing.
   const stairGroup=new THREE.Group();stairGroup.name='Rear return external stair';model.add(stairGroup);
+  const guard=(a,b)=>addExteriorStairRail(THREE,stairGroup,iron,[a[0],a[1]+.07,a[2]],[b[0],b[1]+.07,b[2]]);
   function stairRod(a,b,r=.027){rod(a,b,r);stairGroup.attach(model.children[model.children.length-1]);}
-  box(iron,66.4,4.25,-31.85,2,.13,1.8);box(iron,63.7,2.2,-30.9,1.5,.13,2.2);
+  box(iron,66.4,4.25,-31.85,2,.13,1.8);box(iron,63.7,2.2,-30.925,1.5,.13,2.73);
   function flight(x0,y0,x1,y1,z){
     for(let i=0;i<10;i++){
       const t=(i+.5)/10,x=x0+(x1-x0)*t,y=y0+(y1-y0)*t;
       box(iron,x,y,z,Math.abs(x1-x0)/10+.02,.075,1.05);
-      for(const side of [-1,1])box(iron,x,y+.5,z+side*.54,.03,1,.03);
     }
     for(const side of [-1,1]){
-      stairRod([x0,y0+1,z+side*.54],[x1,y1+1,z+side*.54]);
+      guard([x0,y0,z+side*.54],[x1,y1,z+side*.54]);
       stairRod([x0,y0-.08,z+side*.5],[x1,y1-.08,z+side*.5],.06);
     }
   }
   flight(66.3,4.25,63.6,2.2,-31.75);flight(63.6,2.2,66.7,.25,-30.1);
   for(const x of [65.5,67.3])stairRod([x,.2,-31],[x,5.25,-31],.055);
-  stairRod([65.5,5.25,-31],[67.3,5.25,-31]);
+  for(const [a,b] of [
+    [[65.4,4.25,-30.95],[67.4,4.25,-30.95]],
+    [[67.4,4.25,-30.95],[67.4,4.25,-32.75]],
+    [[65.4,4.25,-30.95],[65.4,4.25,-31.21]],
+    [[65.4,4.25,-32.75],[65.4,4.25,-32.29]],
+    [[62.95,2.2,-32.29],[62.95,2.2,-29.56]],
+    [[62.95,2.2,-32.29],[63.6,2.2,-32.29]],
+    [[62.95,2.2,-29.56],[63.6,2.2,-29.56]],
+    [[64.45,2.2,-31.21],[64.45,2.2,-30.64]]
+  ])guard(a,b);
 
   // East wing: the shallow chimney projection interrupts the otherwise flat
   // elevation; the blue porch replaces a ground sash at z=-4.8.

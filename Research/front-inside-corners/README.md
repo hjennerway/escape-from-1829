@@ -74,3 +74,28 @@ roof immediately beside them, and the trim height at the formerly raised end.
 The new height check fails against the saved before geometry and passes after
 the correction. Browser sources and local compiled assets are updated; Unity
 and Blender exports are unchanged. Evidence uses Browser/artifacts/roof-junctions-*.
+
+## Reception courses and estate trim joins (2 October 2026)
+
+The owner's `reception-overlapping-courses.png` locates stepped, overlapping
+stone edges outside Reception. It is a visual reference, not an additional
+instruction source. The front and side strips had different heights, depths
+and finishes; the lowest window sills also projected below the floor course.
+
+Reception now has continuous, level floor bands around both corners. Its lower
+course follows both stepped entrance elevations and the first two courtyard
+facets. The bottom Reception sashes use that course as their sill. Matching
+box-ended strips on both lawn bays, the west middle bay, courtyard returns and
+the western roof corner are replaced with continuous profiles. The existing
+window positions, wall plans and roof forms are retained.
+
+`facade-courses.mjs` also joins eligible thin, level stone bars from the older
+instanced estate builders. Equal-material, equal-height adjoining bars share
+mitred endpoints, with no overlapping top/underside faces or internal caps.
+Rotated/reflected buildings and angled joins are included. The work happens
+before material finishing, batching, transform caching and shadow preparation.
+Exact strip footprints keep elevated walking support out of the open courts.
+
+Browser sources are shared by Explore, the escape game and aerial views.
+This change does not regenerate Unity, Blender or packaged application exports.
+Validation and visual evidence are in `Browser/artifacts/facade-trim/`.

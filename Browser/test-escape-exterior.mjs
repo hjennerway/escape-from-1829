@@ -644,7 +644,7 @@ for(const o of flanking){
 ray.set(new THREE.Vector3(WEST_FRONT_E_PLAN.outerRight+2,13.2,24),new THREE.Vector3(-1,0,0));
 assert(Math.abs(ray.intersectObject(exterior.model,true)[0].point.x-WEST_FRONT_E_PLAN.outerRight)<.01,'stair wall is the inner return of the outer E arm');
 const returnStairBounds=new THREE.Box3().setFromObject(exterior.model.getObjectByName('West front iron return stair'));
-assert(returnStairBounds.min.x>WEST_FRONT_E_PLAN.outerRight&&returnStairBounds.max.x<WEST_FRONT_E_PLAN.outerRight+5&&returnStairBounds.min.z>19.5&&returnStairBounds.max.z<26,'retained stairs fit inside the recess beside their doors');
+assert(returnStairBounds.min.x>WEST_FRONT_E_PLAN.outerRight&&returnStairBounds.max.x<WEST_FRONT_E_PLAN.outerRight+5&&returnStairBounds.min.z>19.5&&returnStairBounds.max.z<WEST_FRONT_E_PLAN.outerFront+.25,'guarded stair turn stays beside its doors, within a quarter unit of the pavilion front');
 // Check actual roof edges against the relative lengths in the yellow marks.
 const {wingRear,centralRear,courtyardRear}=MAP_REAR_PROPORTIONS;
 assert(centralRear<wingRear&&centralRear>courtyardRear,'centre must end between the two wing ends and east courtyard return');

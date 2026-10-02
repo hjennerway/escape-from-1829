@@ -1,6 +1,7 @@
 // img17.jpg faces north towards the west forward wing, as marked in img17-loc.png.
 // Dimensions are visual estimates. Modern aerials, signs and yellow nosings are omitted.
 export const WEST_FORWARD_END_PHOTO_VIEW=Object.freeze({position:[-36.5,1.8,65],target:[-36.5,5.6,43],fov:52});
+import {addExteriorStairRail} from './exterior-stair-rail.mjs';
 export function addWestForwardEndPhotoDetails(THREE,{model,box,mesh,worldUV,white,brick,material,sash,door,rod,iron}){
   const start=model.userData.eastPhotoOpenings.length;
   const trim=material(0xd2d9d2),archBrick=material(0x80675b),gravel=material(0x939080);
@@ -33,9 +34,9 @@ export function addWestForwardEndPhotoDetails(THREE,{model,box,mesh,worldUV,whit
   rod([-37.42,8.55,43.24],[-37.42,3.42,43.24],.035);
   rod([-37.42,3.42,43.24],[-37.13,3.22,43.24],.035);
 
-  // Returning masonry flights at the left of the photo. Solid bases provide
-  // walking collisions; exterior stairs remain non-climbable scenery.
+  // Returning masonry flights at the left of the photo, with guarded landings.
   const stair=new THREE.Group();stair.name='West forward end masonry return stair';model.add(stair);
+  const guard=(a,b)=>addExteriorStairRail(THREE,stair,iron,[a[0],a[1]+.08,a[2]],[b[0],b[1]+.08,b[2]]);
   function masonry(geometry,x,y,z,name){
     const m=mesh(worldUV(geometry,1.7),brick,x,y,z,true);m.name=name;stair.attach(m);return m;
   }
@@ -46,28 +47,23 @@ export function addWestForwardEndPhotoDetails(THREE,{model,box,mesh,worldUV,whit
       const t=(i+.5)/n,x=x0+(x1-x0)*t,y=y0+(y1-y0)*(i+1)/n;
       masonry(new THREE.BoxGeometry(step+.015,y-.12,1.35),x,(y+.12)/2,depth,'West forward end brick stair tread');
       box(trim,x,y+.025,depth,step+.05,.055,1.4);
-      for(const s of [-1,1]){
-        box(iron,x,y+.53,depth+s*.7,.03,1.06,.03);
-        box(iron,x-step*.25,y+.53,depth+s*.7,.025,1.06,.025);
-      }
     }
-    for(const s of [-1,1])rail([x0,y0+1.1,depth+s*.7],[x1,y1+1.1,depth+s*.7]);
+    for(const s of [-1,1])guard([x0,y0,depth+s*.7],[x1,y1,depth+s*.7]);
   }
   flight(-39.35,.2,-45.05,2.24,46.05);
   flight(-45.05,2.24,-39.35,4.28,44.5);
   masonry(new THREE.BoxGeometry(1.45,2.12,2.95),-45.75,1.18,45.28,'West forward end intermediate landing');
   box(trim,-45.75,2.27,45.28,1.5,.08,3.02);
-  box(iron,-39,4.25,44.02,2,.14,1.9);
+  box(iron,-39,4.25,44.135,2,.14,2.13);
   for(const x of [-39.95,-38.05])rail([x,.2,44.92],[x,5.38,44.92],.05);
-  rail([-39.95,5.38,44.92],[-38.05,5.38,44.92]);
-  for(let i=1;i<13;i++)box(iron,-39.95+i*1.9/13,4.83,44.92,.025,1.1,.025);
-  rail([-38.05,5.38,44.92],[-38.05,5.38,43.14]);
-  for(let i=0;i<11;i++)box(iron,-38.05,4.83,43.2+i*.16,.025,1.1,.025);
-  for(const edge of [[[-46.45,3.34,43.78],[-46.45,3.34,46.78]],[[-46.45,3.34,46.78],[-45.05,3.34,46.78]]]){
-    rail(...edge);
-    const a=new THREE.Vector3(...edge[0]),b=new THREE.Vector3(...edge[1]),count=Math.ceil(a.distanceTo(b)/.16);
-    for(let i=0;i<=count;i++){const p=a.clone().lerp(b,i/count);box(iron,p.x,p.y-.53,p.z,.025,1.06,.025);}
-  }
+  guard([-39.35,4.28,45.2],[-38.05,4.28,45.2]);
+  guard([-38.05,4.28,45.2],[-38.05,4.28,43.14]);
+  guard([-40,4.28,43.14],[-40,4.28,43.8]);
+  for(const edge of [
+    [[-46.5,2.24,43.77],[-46.5,2.24,46.79]],
+    [[-46.5,2.24,46.79],[-45.05,2.24,46.79]],
+    [[-46.5,2.24,43.77],[-45.05,2.24,43.77]]
+  ])guard(...edge);
   box(gravel,-37.5,.22,47.65,19,.1,1.45);
   model.userData.westForwardEndPhotoOpenings=model.userData.eastPhotoOpenings.slice(start);
 }

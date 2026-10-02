@@ -1,0 +1,1 @@
+PASS: west reference cameras, exposed glazing, flat and canted bays, continuous roof, blank end walls and walking access.

@@ -56,7 +56,12 @@ exterior.model.traverse(group=>{
  walker.setView({position:[start[0],1.8,start[1]],target:[a[0],1.8,a[2]]});
  const points=route.map(p=>[p[0],p[2]]);follow(points);assert(actor.y>=route.at(-1)[1]-.02&&actor.y<=route.at(-1)[1]+.48,JSON.stringify({actor,top:route.at(-1)}));assert.equal(walker.nearbyDoor(),null);
  const landing=group.children.find(o=>o.name==='Fire stair landing'),box=new THREE.Box3().setFromObject(landing),center=box.getCenter(new THREE.Vector3());
- follow([[center.x,center.z]]);assert(Math.abs(actor.y-box.max.y)<.02);follow([...points].reverse().concat([start]));assert(actor.y<.4);annexeStairs++;
+ const stairTurn=group.localToWorld(new THREE.Vector3(treads[0].position.x,5.125,-4));
+ follow([[stairTurn.x,stairTurn.z],[center.x,center.z]]);assert(Math.abs(actor.y-box.max.y)<.02);
+ // Walk around the open stairwell to the tower door on both mirrored sides.
+ const turn=group.localToWorld(new THREE.Vector3(-29.78,5.125,-4)),door=group.localToWorld(new THREE.Vector3(-29.78,5.125,-.2));
+ follow([[turn.x,turn.z],[door.x,door.z],[turn.x,turn.z],[center.x,center.z]]);
+ follow([[stairTurn.x,stairTurn.z],...points.slice().reverse(),start]);assert(actor.y<.4);annexeStairs++;
 });
 assert.equal(annexeStairs,2);
 let entranceStairs=0;

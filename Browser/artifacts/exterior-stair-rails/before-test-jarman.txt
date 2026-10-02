@@ -1,0 +1,33 @@
+node:internal/modules/run_main:107
+    triggerUncaughtException(
+    ^
+
+AssertionError [ERR_ASSERTION]: All geometry outside the marked frontage stays exact
++ actual - expected
+
+  {
++   primitives: 819652,
++   sha256: '7f0bec99a5c4f3223dc24ad869840dd014d5df806e641dcb1385b3d1a1ae21d6'
+-   primitives: 820082,
+-   sha256: 'fc9e9e93301bf0a9e6b68e2850cfea2fcc896c6fef2dee164fb293ebcac524b8'
+  }
+
+    at file:///C:/Users/Harry/Documents/_escape-from-1829/Browser/test-jarman.mjs:11:8
+    at ModuleJob.run (node:internal/modules/esm/module_job:561:25)
+    at async node:internal/modules/esm/loader:647:26
+    at async asyncRunEntryPointWithESMLoader (node:internal/modules/run_main:101:5) {
+  generatedMessage: false,
+  code: 'ERR_ASSERTION',
+  actual: {
+    primitives: 819652,
+    sha256: '7f0bec99a5c4f3223dc24ad869840dd014d5df806e641dcb1385b3d1a1ae21d6'
+  },
+  expected: {
+    primitives: 820082,
+    sha256: 'fc9e9e93301bf0a9e6b68e2850cfea2fcc896c6fef2dee164fb293ebcac524b8'
+  },
+  operator: 'deepStrictEqual',
+  diff: 'simple'
+}
+
+Node.js v24.20.0

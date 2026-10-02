@@ -1,0 +1,337 @@
+[
+  {
+    "file": "test-east-forward-end.mjs",
+    "status": 1,
+    "beforeStatus": 1
+  },
+  {
+    "file": "test-front-inside-corners.mjs",
+    "status": 0
+  },
+  {
+    "file": "test-redesmere-garden.mjs",
+    "status": 0
+  },
+  {
+    "file": "test-laundry.mjs",
+    "status": 0
+  },
+  {
+    "file": "test-escape-exterior.mjs",
+    "status": 1,
+    "beforeStatus": 1
+  },
+  {
+    "file": "test-inner-courtyard.mjs",
+    "status": 0
+  },
+  {
+    "file": "test-roof-contacts.mjs",
+    "status": 0
+  },
+  {
+    "file": "test-west-refinement.mjs",
+    "status": 1,
+    "beforeStatus": 1
+  },
+  {
+    "file": "test-west-side-basement.mjs",
+    "status": 0
+  },
+  {
+    "file": "test-water-tower.mjs",
+    "status": 0
+  },
+  {
+    "file": "test-church-front.mjs",
+    "status": 0
+  },
+  {
+    "file": "test-tower-buildings.mjs",
+    "status": 0
+  },
+  {
+    "file": "test-pharmacy.mjs",
+    "status": 0
+  },
+  {
+    "file": "test-irby-ashley.mjs",
+    "status": 0
+  },
+  {
+    "file": "test-irby-roads.mjs",
+    "status": 0
+  },
+  {
+    "file": "test-grafton-edge.mjs",
+    "status": 0
+  },
+  {
+    "file": "test-hale-ward.mjs",
+    "status": 0
+  },
+  {
+    "file": "test-estates.mjs",
+    "status": 0
+  },
+  {
+    "file": "test-farndon.mjs",
+    "status": 0
+  },
+  {
+    "file": "test-ward-placement.mjs",
+    "status": 1,
+    "beforeStatus": 1
+  },
+  {
+    "file": "test-ward-corridors.mjs",
+    "status": 0
+  },
+  {
+    "file": "test-ground-contact.mjs",
+    "status": 0
+  },
+  {
+    "file": "test-building-grounding.mjs",
+    "status": 0
+  },
+  {
+    "file": "test-day-night.mjs",
+    "status": 0
+  },
+  {
+    "file": "test-exterior-shadows.mjs",
+    "status": 0
+  },
+  {
+    "file": "test-tree-rendering.mjs",
+    "status": 0
+  },
+  {
+    "file": "test-front-lawn-eztree.mjs",
+    "status": 0
+  },
+  {
+    "file": "test-explore.mjs",
+    "status": 0
+  },
+  {
+    "file": "test-explore-interior.mjs",
+    "status": 1,
+    "beforeStatus": 1
+  },
+  {
+    "file": "test-front-basement.mjs",
+    "status": 0
+  },
+  {
+    "file": "test-exterior-door-supports.mjs",
+    "status": 0
+  },
+  {
+    "file": "test-explore-input.mjs",
+    "status": 0
+  },
+  {
+    "file": "test-jump.mjs",
+    "status": 0
+  },
+  {
+    "file": "test-annexe.mjs",
+    "status": 0
+  },
+  {
+    "file": "test-larkton.mjs",
+    "status": 1,
+    "beforeStatus": 1
+  },
+  {
+    "file": "test-larkton-recess.mjs",
+    "status": 1,
+    "beforeStatus": 1
+  },
+  {
+    "file": "test-annexe-carden.mjs",
+    "status": 1,
+    "beforeStatus": 1
+  },
+  {
+    "file": "test-annexe-front-link.mjs",
+    "status": 1,
+    "beforeStatus": 1
+  },
+  {
+    "file": "test-annexe-east-outer.mjs",
+    "status": 0
+  },
+  {
+    "file": "test-annexe-kitchen.mjs",
+    "status": 1,
+    "beforeStatus": 1
+  },
+  {
+    "file": "test-annexe-rear-stretch.mjs",
+    "status": 1,
+    "beforeStatus": 1
+  },
+  {
+    "file": "test-annexe-rear-side-alignment.mjs",
+    "status": 1,
+    "beforeStatus": 1
+  },
+  {
+    "file": "test-annexe-os-refinement.mjs",
+    "status": 1,
+    "beforeStatus": 1
+  },
+  {
+    "file": "test-annexe-photo-placement.mjs",
+    "status": 0
+  },
+  {
+    "file": "test-annexe-outer-front.mjs",
+    "status": 0
+  },
+  {
+    "file": "test-jarman.mjs",
+    "status": 1,
+    "beforeStatus": 1
+  },
+  {
+    "file": "test-oakmere-court.mjs",
+    "status": 1,
+    "beforeStatus": 1
+  },
+  {
+    "file": "test-oakmere.mjs",
+    "status": 0
+  },
+  {
+    "file": "test-oakmere-west.mjs",
+    "status": 1,
+    "beforeStatus": 1
+  },
+  {
+    "file": "test-oakmere-windows.mjs",
+    "status": 1,
+    "beforeStatus": 1
+  },
+  {
+    "file": "test-annexe-wards.mjs",
+    "status": 0
+  },
+  {
+    "file": "test-leighton-newton.mjs",
+    "status": 1,
+    "beforeStatus": 1
+  },
+  {
+    "file": "test-churton.mjs",
+    "status": 0
+  },
+  {
+    "file": "test-upton.mjs",
+    "status": 0
+  },
+  {
+    "file": "test-garages-mortuary.mjs",
+    "status": 0
+  },
+  {
+    "file": "test-greenhouses.mjs",
+    "status": 0
+  },
+  {
+    "file": "test-main-admin.mjs",
+    "status": 0
+  },
+  {
+    "file": "test-main-kitchen.mjs",
+    "status": 0
+  },
+  {
+    "file": "test-main-admin-refine2.mjs",
+    "status": 0
+  },
+  {
+    "file": "test-aerial-controls.mjs",
+    "status": 0
+  },
+  {
+    "file": "test-device-location.mjs",
+    "status": 0
+  },
+  {
+    "file": "test-aerial-layouts.mjs",
+    "status": 0
+  },
+  {
+    "file": "test-kml-imports.mjs",
+    "status": 0
+  },
+  {
+    "file": "test-kml-11.mjs",
+    "status": 0
+  },
+  {
+    "file": "test-modern-entrance.mjs",
+    "status": 0
+  },
+  {
+    "file": "test-modern-car-park.mjs",
+    "status": 0
+  },
+  {
+    "file": "test-parsons-retrace.mjs",
+    "status": 0
+  },
+  {
+    "file": "test-historic-roads.mjs",
+    "status": 0
+  },
+  {
+    "file": "test-road-continuity.mjs",
+    "status": 0
+  },
+  {
+    "file": "test-west-parsons-junctions.mjs",
+    "status": 0
+  },
+  {
+    "file": "test-admin-teardrop.mjs",
+    "status": 0
+  },
+  {
+    "file": "test-annexe-access.mjs",
+    "status": 1,
+    "beforeStatus": 1
+  },
+  {
+    "file": "test-annexe-rear-roads.mjs",
+    "status": 0
+  },
+  {
+    "file": "test-performance.mjs",
+    "status": 0
+  },
+  {
+    "file": "test-aerial-performance.mjs",
+    "status": 0
+  },
+  {
+    "file": "test-building-detail.mjs",
+    "status": 0
+  },
+  {
+    "file": "test-outhouse.mjs",
+    "status": 0
+  },
+  {
+    "file": "test-willows.mjs",
+    "status": 0
+  },
+  {
+    "file": "test-building-photos.mjs",
+    "status": 0
+  }
+]

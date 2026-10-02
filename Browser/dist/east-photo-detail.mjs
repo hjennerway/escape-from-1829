@@ -1,4 +1,5 @@
 import {addRedesmereGardenDetails} from './redesmere-garden-photo-detail.mjs';
+import {addExteriorStairRail} from './exterior-stair-rail.mjs';
 import {addEastForwardEndPhotoDetails} from './east-forward-end-photo-detail.mjs';
 import {addWestForwardEndPhotoDetails} from './west-forward-end-photo-detail.mjs';
 import {addEastEntranceMirror} from './entrance-symmetry.mjs';
@@ -60,14 +61,17 @@ export function addEastPhotoDetails(THREE,{model,box,mesh,worldUV,white,brick,ro
   // The inner wall is the reflected img18 elevation, supplied below.
   door(41.08,38.1,Math.PI/2);door(41.08,38.1,Math.PI/2,4.25);
   // External metal stair descends along the wall from the upper blue door.
+  const stair=new THREE.Group();stair.name='East forward external stair guards';model.add(stair);
+  const guard=(a,b)=>addExteriorStairRail(THREE,stair,iron,a,b);
   box(iron,42,4.18,38.1,1.8,.14,2);
   for(let i=0;i<17;i++){
     const y=4.1-i*.24,z=36.95-i*.3;
     box(iron,42,y,z,1.6,.09,.32);
-    for(const x of [41.25,42.78])box(iron,x,y+.53,z,.045,1.06,.045);
   }
-  for(const x of [41.25,42.78])rod([x,5.2,38.9],[x,5.2,36.95]);
-  for(const x of [41.25,42.78])rod([x,5.2,36.95],[x,1.36,32.15]);
+  for(const x of [41.25,42.78])guard([x,4.15,36.95],[x,.31,32.15]);
+  guard([42.78,4.25,39.1],[42.78,4.25,36.95]);
+  guard([41.1,4.25,39.1],[42.78,4.25,39.1]);
+  guard([41.1,4.25,37.1],[41.25,4.25,37.1]);
   // Three-storey wall flanking the shallow polygonal bay. The right-hand
   // entrance has broad middle glazing and a roof-access door above the
   // adjoining two-storey, blank-fronted projection (owner's September photo).

@@ -1,0 +1,71 @@
+[
+  {
+    "actual": {
+      "primitives": 19567,
+      "sha256": "3e8e3930c4d33e59ddcd9b5ece891ccb1ec1a392c60ed74c3b06029b3479ad80",
+      "root": [
+        -0.3967056614036031,
+        0,
+        0.38210634411159655,
+        0,
+        0,
+        0.9,
+        0,
+        0,
+        -0.38210634411159655,
+        0,
+        -0.3967056614036031,
+        0,
+        364.7804974623198,
+        0,
+        -9.106516776244462,
+        1
+      ]
+    },
+    "expected": {
+      "primitives": 19581,
+      "sha256": "1665cf2b2b7884fb21c1412783b2401b479df60c6b2be51b52f52aedb271b425",
+      "root": [
+        -0.3967056614036031,
+        0,
+        0.38210634411159655,
+        0,
+        0,
+        0.9,
+        0,
+        0,
+        -0.38210634411159655,
+        0,
+        -0.3967056614036031,
+        0,
+        364.7804974623198,
+        0,
+        -9.106516776244462,
+        1
+      ]
+    },
+    "message": "Everything outside the annotated side work and necessary spine join remains exact, including the front and roof landmarks"
+  },
+  {
+    "actual": {
+      "primitives": 19570,
+      "sha256": "f502c586b921596092e066338f43b440755b7519eb28454005d9aa0d37ff8e65"
+    },
+    "expected": {
+      "primitives": 19584,
+      "sha256": "96f7191c20a76fed8f8b574e942625b7589846a036beb59e790c88a79d90f19f"
+    },
+    "message": "Every primitive outside the marked Carden/tower work and concurrent Jarman frontage stays exact"
+  },
+  {
+    "actual": {
+      "primitives": 130,
+      "sha256": "3f6066b706ef7d0ea09c34a1bdc01cc69c5d4d8815f143e4f816ea1a410c4360"
+    },
+    "expected": {
+      "primitives": 130,
+      "sha256": "3f6066b706ef7d0ea09c34a1bdc01cc69c5d4d8815f143e4f816ea1a410c4360"
+    },
+    "message": "All conservatory masonry, glazing, bars, roof geometry, materials and transforms stay exact"
+  }
+]

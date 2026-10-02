@@ -1,6 +1,7 @@
 // 20260913_171036.jpg and the user's plan: approach from +Z, split along X,
 // then turn towards -Z onto the doorstep. Dimensions are visual estimates.
 import {mitreRightAngleWalls} from './wall-mitres.mjs';
+import {addExteriorStairRail} from './exterior-stair-rail.mjs';
 export const FRONT_STEPS_VIEW=Object.freeze({position:[8,6,36],target:[0,2.6,23],fov:48});
 
 export function addFrontSteps(THREE,{model,material}){
@@ -29,12 +30,6 @@ export function addFrontSteps(THREE,{model,material}){
     cap.rotation.set(0,angle,0);cap.rotateZ(Math.atan2(b[1]-a[1],length));
     cap.name=name+' coping';cap.castShadow=cap.receiveShadow=true;stairs.add(cap);
   }
-  function rail(a,b){
-    const start=new THREE.Vector3(...a),end=new THREE.Vector3(...b),delta=end.clone().sub(start);
-    const m=new THREE.Mesh(new THREE.CylinderGeometry(.025,.025,delta.length(),8),iron);
-    m.position.copy(start).addScaledVector(delta,.5);m.quaternion.setFromUnitVectors(new THREE.Vector3(0,1,0),delta.normalize());
-    m.name='Doorstep iron balustrade';stairs.add(m);
-  }
   // Broad upper doorstep, with side entries outside the portico columns.
   slab('Front doorway landing',0,21.7,7.8,3.7,top);
   // Extend the full split flight back to the doorstep wall, closing the grass
@@ -56,7 +51,6 @@ export function addFrontSteps(THREE,{model,material}){
   }
   mitreRightAngleWalls(THREE,stairs.children.filter(o=>/outer return parapet|turning parapet/.test(o.name)));
   // Close the front edge of the raised doorstep; access is from either side.
-  for(const y of [top+.12,top+.86])rail([-2.68,y,23.48],[2.68,y,23.48]);
-  for(let i=0;i<=22;i++){const x=-2.68+i*5.36/22;rail([x,top,23.48],[x,top+.86,23.48]);}
+  addExteriorStairRail(THREE,stairs,iron,[-2.68,top,23.48],[2.68,top,23.48],{height:.86,name:'Doorstep iron balustrade'});
   return stairs;
 }
