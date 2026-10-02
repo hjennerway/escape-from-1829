@@ -5758,3 +5758,7 @@ The rebuilt compiled model passes npm run test:compiled, including procedural
 comparison, full detail, missing/incompatible/corrupt fallback, and every
 timeline stop. The final game captures reproduce the old flicker using saved
 pre-edit source and show the repaired strip from three nearby angles.
+
+The final complete npm test run passes (suite-final.txt). The final twelve-window
+browser capture also passes with no page/shader errors, including a centred
+390x844 mobile sash view. The compiled source fingerprint remains current.
