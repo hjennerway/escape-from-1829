@@ -2,8 +2,7 @@
 
 Explore The West Cheshire Hospital site including the historic Chester County Asylum.
 
-An explorable aerial perspective and first-person escape game set in Chester's 1829 building. Explore the asylum and grounds from the air or on foot or play "Asylum Escape" where you have to find one of five active exits, randomly chosen from fourteen possible routes across two floors.
-inside 1829 while Security and the Chester County Asylum ghost search the corridors.
+An explorable aerial perspective and first-person escape game set in Chester's 1829 building. Explore the asylum and grounds from the air or on foot, or play "Asylum Escape" through the ground floor, first floor and west basement while Security and the Chester County Asylum ghost search the rooms and corridors. Walk the stairs between levels and use the exterior doors and fire escapes to find a way out.
 
 Use the timeline slider in aerial or walking view to explore 13 periods from 1829 to 2021, with buildings and roads appearing as the site develops.
 
@@ -18,8 +17,11 @@ Inside the estate site, click the cross-hairs to pinpoint your position to see w
 [Play in your browser](https://hjennerway.github.io/escape-from-1829/).
 
 Use **WASD** to move, the **mouse** to look, **Shift** to sprint, **C/Ctrl** to
-crouch, **F** for the torch and **Tab** for the map. Hold **E** at exits, stairs
-or wall artwork. **H** shows survival help; **Esc** pauses. Touch controls are available on mobile.
+crouch, **F** for the torch and **Tab/M/N** for the notebook and explored map. Walk up and down the stairs.
+Press **E** at a door to go outside or return inside; hold **E** to view wall artwork.
+Reach the front path outside to escape. **H** shows survival help; **Esc** pauses.
+The notebook records discoveries and reveals nearby map areas as you explore. Reading it pauses the game.
+Touch controls are available on mobile.
 
 In **Explore on foot** on mobile, hold the on-screen arrows to walk and drag the view with another finger to look around.
 

@@ -1,0 +1,58 @@
+// One footprint drives the slabs, flights, landings, banisters and walking.
+export const STAIR_WIDTH=1.3;
+export const RAIL_HEIGHT=1.05;
+export function stairShape(stair){
+ const xs=stair.points.map(p=>p[0]),zs=stair.points.map(p=>p[1]);
+ const minX=Math.min(...xs),maxX=Math.max(...xs),minZ=Math.min(...zs),maxZ=Math.max(...zs),w=STAIR_WIDTH;
+ return {minX,maxX,minZ,maxZ,left:minX+w/2,right:maxX-w/2,front:minZ+w,back:maxZ-w,
+  portal:minZ+w/2,rear:maxZ-w/2,innerLeft:minX+w,innerRight:maxX-w};
+}
+export function stairRoute(stair,lowerHeight,upperHeight){
+ const s=stairShape(stair),mid=(lowerHeight+upperHeight)/2;
+ return [[s.left,lowerHeight,s.portal],[s.left,lowerHeight,s.front],
+  [s.left,mid,s.back],[s.left,mid,s.rear],[s.right,mid,s.rear],
+  [s.right,mid,s.back],[s.right,upperHeight,s.front],[s.right,upperHeight,s.portal]];
+}
+export function stairOpening(stair){
+ const s=stairShape(stair);
+ return {minX:s.minX,maxX:s.maxX,minZ:s.front,maxZ:s.maxZ};
+}
+export function flightRails(stair,lowerHeight,upperHeight){
+ const s=stairShape(stair),mid=(lowerHeight+upperHeight)/2;
+ // Shared vertices make both the inner and outer returns continuous.
+ return [
+  [[s.innerLeft,lowerHeight,s.front],[s.innerLeft,mid,s.back],[s.innerRight,mid,s.back],[s.innerRight,upperHeight,s.front]],
+  [[s.minX,lowerHeight,s.front],[s.minX,mid,s.back],[s.minX,mid,s.maxZ],[s.maxX,mid,s.maxZ],[s.maxX,mid,s.back],[s.maxX,upperHeight,s.front]],
+ ];
+}
+export function landingRails(stair,floor){
+ const s=stairShape(stair),up=stair.connections.some(([a])=>a===floor),down=stair.connections.some(([,b])=>b===floor),rails=[];
+ if(down)rails.push([[s.minX,0,s.front],[s.minX,0,s.maxZ],[s.maxX,0,s.maxZ],[s.maxX,0,s.front]]);
+ // Leave only the real ascent/descent entrances open. The front landing is
+ // the fourth side of the square; its central well always has a guard.
+ rails.push([[up?s.innerLeft:s.minX,0,s.front],[down?s.innerRight:s.maxX,0,s.front]]);
+ return rails;
+}
+export function floorStairRails(floor){
+ return floor.stairs.flatMap(stair=>[
+  ...landingRails(stair,floor.id),
+  ...stair.connections.filter(([a])=>a===floor.id).flatMap(([,b])=>flightRails(stair,0,floor.levelElevations[b]-floor.elevation)),
+ ]);
+}
+
+// Sweep one rectangular rail through each entire polyline. Shared, mitred
+// rings remove the detached ends and intersecting bars at return corners.
+export function handrailGeometry(THREE,paths){
+ const positions=[],half=.035,triangle=(a,b,c)=>positions.push(...a,...b,...c);
+ for(const path of paths){
+  const directions=path.slice(1).map((b,i)=>{const a=path[i],d=Math.hypot(b[0]-a[0],b[2]-a[2]);return [(b[0]-a[0])/d,(b[2]-a[2])/d];});
+  const rings=path.map((p,i)=>{
+   const a=directions[Math.max(0,i-1)],b=directions[Math.min(i,directions.length-1)],n=[-a[1]-b[1],a[0]+b[0]],den=n[0]*-b[1]+n[1]*b[0];
+   const dx=n[0]*half/den,dz=n[1]*half/den,y=p[1]+RAIL_HEIGHT;
+   return [[p[0]+dx,y-half,p[2]+dz],[p[0]-dx,y-half,p[2]-dz],[p[0]-dx,y+half,p[2]-dz],[p[0]+dx,y+half,p[2]+dz]];
+  });
+  for(let i=1;i<rings.length;i++)for(let j=0;j<4;j++){const a=rings[i-1][j],b=rings[i-1][(j+1)%4],c=rings[i][(j+1)%4],d=rings[i][j];triangle(a,b,c);triangle(a,c,d);}
+  const a=rings[0],b=rings.at(-1);triangle(a[0],a[2],a[1]);triangle(a[0],a[3],a[2]);triangle(b[0],b[1],b[2]);triangle(b[0],b[2],b[3]);
+ }
+ const geometry=new THREE.BufferGeometry();geometry.setAttribute('position',new THREE.Float32BufferAttribute(positions,3));geometry.computeVertexNormals();return geometry;
+}

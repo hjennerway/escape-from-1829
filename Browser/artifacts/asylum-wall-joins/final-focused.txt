@@ -1,0 +1,1 @@
+PASS: 131 surveyed wall joins, 2358 masonry rays from both sides at three heights, matching collision, stable joins and preserved doorway widths.

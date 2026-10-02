@@ -1,0 +1,1 @@
+PASS: actual three-floor game, 23 E door round trips with release latch, walked basement/ground/first stair, raised outside landing, desktop/mobile renders, no runtime errors.

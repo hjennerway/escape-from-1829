@@ -1,0 +1,56 @@
+{
+  "renders": [
+    {
+      "name": "ground-front",
+      "calls": 64,
+      "triangles": 90576
+    },
+    {
+      "name": "ground-room",
+      "calls": 174,
+      "triangles": 101268
+    },
+    {
+      "name": "corridor",
+      "calls": 177,
+      "triangles": 101664
+    },
+    {
+      "name": "upper-room",
+      "calls": 38,
+      "triangles": 84000
+    },
+    {
+      "name": "west-rear",
+      "calls": 200,
+      "triangles": 101710
+    },
+    {
+      "name": "east-rear",
+      "calls": 227,
+      "triangles": 101374
+    },
+    {
+      "name": "south-door",
+      "calls": 207,
+      "triangles": 101334
+    },
+    {
+      "name": "deep-bay",
+      "calls": 26,
+      "triangles": 67512
+    },
+    {
+      "name": "basement",
+      "calls": 60,
+      "triangles": 86650
+    },
+    {
+      "name": "basement-rear",
+      "calls": 39,
+      "triangles": 86608
+    }
+  ],
+  "walks": 3,
+  "errors": []
+}

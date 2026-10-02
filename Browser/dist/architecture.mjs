@@ -1,9 +1,11 @@
 import {createInteriorMaterials} from './interior-materials.mjs';
 import {exitDirection} from './escape-routes.mjs';
+import {buildAsylumArchitecture,asylumWallSurfaces} from './asylum-architecture.mjs';
 
 const materialCache=new WeakMap();
 const directions=[[1,0],[-1,0],[0,1],[0,-1]];
 export function interiorWallSurfaces(layout){
+  if(layout.geometrySource==='asylum-plan')return asylumWallSurfaces(layout);
   const s=layout.cellSize,surfaces=[];
   const open=(x,z)=>x>=0&&z>=0&&x<layout.width&&z<layout.height&&layout.cells[z*layout.width+x]===1;
   for(let z=0;z<layout.height;z++)for(let x=0;x<layout.width;x++)if(open(x,z))for(const [dx,dz] of directions){
@@ -61,6 +63,7 @@ function skirtingGeometry(THREE,walls,size){
 
 // Build from navigation cells so the visible architecture follows every route.
 export function buildArchitecture(THREE,scene,layout){
+  if(layout.geometrySource==='asylum-plan')return buildAsylumArchitecture(THREE,scene,layout);
   const batches=new Map(),s=layout.cellSize,walls=interiorWallSurfaces(layout);
   // Recess the masonry return behind the trim: coincident jamb faces flicker.
   const windowRadius=.57,windowRevealRadius=.60;

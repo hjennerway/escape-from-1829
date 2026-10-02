@@ -1,0 +1,89 @@
+{
+  "renders": [
+    {
+      "stair": "S1",
+      "name": "upper-well",
+      "calls": 53,
+      "triangles": 93662
+    },
+    {
+      "stair": "S1",
+      "name": "return-join",
+      "calls": 95,
+      "triangles": 94136
+    },
+    {
+      "stair": "S1",
+      "name": "ground-entry",
+      "calls": 85,
+      "triangles": 93726
+    },
+    {
+      "stair": "S1",
+      "name": "basement",
+      "calls": 54,
+      "triangles": 93664
+    },
+    {
+      "stair": "S1",
+      "name": "down-to-basement",
+      "calls": 46,
+      "triangles": 93648
+    },
+    {
+      "stair": "S3",
+      "name": "upper-well",
+      "calls": 75,
+      "triangles": 93706
+    },
+    {
+      "stair": "S3",
+      "name": "return-join",
+      "calls": 81,
+      "triangles": 90190
+    },
+    {
+      "stair": "S3",
+      "name": "ground-entry",
+      "calls": 181,
+      "triangles": 104390
+    },
+    {
+      "stair": "S4",
+      "name": "upper-well",
+      "calls": 45,
+      "triangles": 93646
+    },
+    {
+      "stair": "S4",
+      "name": "return-join",
+      "calls": 29,
+      "triangles": 84088
+    },
+    {
+      "stair": "S4",
+      "name": "ground-entry",
+      "calls": 236,
+      "triangles": 104500
+    },
+    {
+      "stair": "S5",
+      "name": "upper-well",
+      "calls": 57,
+      "triangles": 93670
+    },
+    {
+      "stair": "S5",
+      "name": "return-join",
+      "calls": 114,
+      "triangles": 94174
+    },
+    {
+      "stair": "S5",
+      "name": "ground-entry",
+      "calls": 139,
+      "triangles": 104306
+    }
+  ],
+  "errors": []
+}

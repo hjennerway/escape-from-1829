@@ -10,6 +10,15 @@ let browser;
 try{
  browser=await chromium.launch({headless:true,...(process.env.MODEL_CHROME_PATH?{executablePath:process.env.MODEL_CHROME_PATH}:{}),args:['--use-angle=swiftshader','--enable-unsafe-swiftshader']});
  const page=await browser.newPage({viewport:{width:390,height:704},isMobile:true,hasTouch:true,deviceScaleFactor:1,reducedMotion:'reduce'});
+ page.setDefaultTimeout(120000);
+ await page.addInitScript(()=>{
+  window.loadingSamples=[];
+  document.addEventListener('DOMContentLoaded',()=>{
+   const bar=document.getElementById('buildingProgress');
+   const sample=()=>window.loadingSamples.push({value:bar.value,disabled:document.getElementById('start').disabled,rendered:document.getElementById('game').classList.contains('scene-ready')});
+   sample();new MutationObserver(sample).observe(bar,{attributes:true,attributeFilter:['value']});
+  });
+ });
  const errors=[];page.on('pageerror',e=>errors.push(e.message));
  // Production Three.js and its loader are served locally.
  await page.route(/https:\/\/(www\.whateversleft\.co\.uk|basedinchurton\.co\.uk)\//,route=>route.abort());
@@ -20,36 +29,52 @@ try{
   await page.setViewportSize({width,height});await page.goto(base+'/',{waitUntil:'networkidle'});
   await page.waitForFunction(()=>document.querySelector('#landingPreview img').naturalWidth>0);
   assert(await page.locator('#landingPreview').isVisible());assert(await page.locator('#game').isHidden());
+  assert(await page.locator('#buildingProgress').isVisible());assert.equal(await page.locator('#loadingPercent').textContent(),'0%');
   assert(!/a night in the 1829 building|the corridors remember/i.test(await page.locator('#menu').innerText()));
   const bounds=await page.evaluate(()=>{
    const box=selector=>{const r=document.querySelector(selector).getBoundingClientRect();return {top:r.top,bottom:r.bottom,left:r.left,right:r.right,height:r.height};};
-   return {buttons:['#aerial','#explore','#start'].map(box),credits:box('.credits-link'),brand:box('.brand'),menu:box('#menu h1'),scrollWidth:document.documentElement.scrollWidth,scrollHeight:document.documentElement.scrollHeight};
+   return {buttons:['#aerial','#explore','#start'].map(box),loading:box('#buildingLoading'),credits:box('.credits-link'),brand:box('.brand'),menu:box('#menu h1'),scrollWidth:document.documentElement.scrollWidth,scrollHeight:document.documentElement.scrollHeight};
   });
   assert(bounds.scrollWidth<=width,'No horizontal scrolling at '+width);
-  assert(bounds.scrollHeight<=height,'All actions fit viewport at '+width+'x'+height);
+  if(width===320)await shot('landing-small-mobile');
+  assert(bounds.scrollHeight<=height,'All actions fit viewport at '+width+'x'+height+' '+JSON.stringify(bounds));
   assert(bounds.menu.top>bounds.brand.bottom,'Title clears brand');
+  assert(bounds.loading.bottom<bounds.credits.top,'Progress and its status clear the credits');
   for(const b of bounds.buttons){assert(b.height>=44);assert(b.left>=0&&b.right<=width);assert(b.bottom<bounds.credits.top,'Credits do not overlap buttons');}
   console.log('PASS: loading placeholder and all buttons fit '+width+'x'+height);
   if(width===390)await shot('landing-mobile-placeholder');
-  if(width===320)await shot('landing-small-mobile');
   if(width===1440)await shot('landing-desktop-placeholder');
  }
  // A failed scene keeps the still and leaves the independent aerial/walking actions usable.
  await page.unroute('**/game.mjs',holdGame);
  await page.setViewportSize({width:390,height:704});
- await page.route('**/layout.json',route=>route.abort());
+ await page.route('**/asylum-plan.json',route=>route.abort());
  await page.goto(base+'/',{waitUntil:'domcontentloaded',timeout:120000});
  await page.waitForFunction(()=>document.querySelector('#start').textContent.includes('RELOAD TO TRY AGAIN'));
  assert(await page.locator('#landingPreview').isVisible());assert(await page.locator('#game').isHidden());
  assert(await page.locator('#aerial').isEnabled());assert(await page.locator('#explore').isEnabled());
- await page.unroute('**/layout.json');
+ assert(await page.locator('#buildingLoading').isHidden());assert.equal(await page.locator('#gameLaunch').getAttribute('aria-busy'),'false');
+ await page.unroute('**/asylum-plan.json');
  // Inspect the actual menu scene, including its batched geometry, after startup.
  const gameSource=await readFile(new URL('./dist/game.mjs',import.meta.url),'utf8');
  await page.route('**/game.mjs',route=>route.fulfill({contentType:'text/javascript',body:gameSource+'\nwindow.landingExterior=()=>exterior;'}));
+ let release;const held=new Promise(resolve=>{release=resolve;});
+ await page.route('**/exterior/1829front.webp',async route=>{await held;await route.continue();});
  await page.goto(base+'/',{waitUntil:'domcontentloaded',timeout:120000});
+ await page.waitForFunction(()=>document.querySelector('#buildingProgress').value===85);
+ assert(await page.locator('#start').isDisabled());assert.equal(await page.locator('#loadingPercent').textContent(),'85%');
+ await shot('landing-mobile-progress');
+ await page.setViewportSize({width:1440,height:900});await shot('landing-desktop-progress');
+ await page.setViewportSize({width:390,height:704});release();
  await page.waitForFunction(()=>document.querySelector('#game').classList.contains('scene-ready'),null,{timeout:120000});
  assert(await page.locator('#landingPreview').isHidden());assert(await page.locator('#game').isVisible());
  assert(await page.locator('#start').isEnabled());await shot('landing-mobile-loaded');
+ const samples=await page.evaluate(()=>window.loadingSamples);
+ assert(samples.some(s=>s.value>0&&s.value<65));assert(samples.some(s=>s.value===85));
+ assert(samples.every((s,i)=>!i||s.value>=samples[i-1].value),'Progress never goes backwards');
+ assert(samples.filter(s=>s.value<100).every(s=>s.disabled),'Play stays disabled while preparing');
+ assert(samples.some(s=>s.value===100&&s.rendered&&!s.disabled),'Completion waits for a rendered view');
+ assert(await page.locator('#buildingLoading').isHidden());
  const periodScene=await page.evaluate(()=>{
   const exterior=window.landingExterior(),visible=object=>{if(!object)return false;for(;object;object=object.parent)if(!object.visible)return false;return true;};
   const roadLabels=[];exterior.layouts.roads.traverse(object=>{if(object.isSprite&&object.userData.roadName)roadLabels.push(object);});
@@ -62,5 +87,5 @@ try{
  assert(!periodScene.mast&&!periodScene.carPark&&!periodScene.laterRoad,'Later additions are absent');
  await page.setViewportSize({width:1440,height:900});await shot('landing-desktop-loaded');
  assert.deepEqual(errors,[]);
- console.log('PASS: failed loading retains the still; successful first render reveals the 1916 estate with tower buildings.');
+ console.log('PASS: real preparation progress, delayed-download percentage, failure recovery and first-frame completion; mobile/desktop layout and 1916 estate.');
 }finally{await browser?.close();server.kill();}

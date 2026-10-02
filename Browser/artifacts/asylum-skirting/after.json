@@ -1,0 +1,21 @@
+{
+  "positions": 16,
+  "meshes": [
+    {
+      "name": "Asylum Skirting",
+      "instanced": false,
+      "triangles": 3396
+    },
+    {
+      "name": "Asylum Skirting",
+      "instanced": false,
+      "triangles": 3196
+    },
+    {
+      "name": "Asylum Skirting",
+      "instanced": false,
+      "triangles": 732
+    }
+  ],
+  "errors": []
+}

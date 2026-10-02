@@ -1,0 +1,15 @@
+node:internal/modules/run_main:107
+    triggerUncaughtException(
+    ^
+
+AssertionError [ERR_ASSERTION]: Sealed Brick join on floor 0 at -24.895555555555553,-18.2, side -1
+    at file:///C:/Users/Harry/Documents/_escape-from-1829/Browser/test-asylum-wall-joins.mjs:43:5 {
+  generatedMessage: false,
+  code: 'ERR_ASSERTION',
+  actual: 0,
+  expected: true,
+  operator: '==',
+  diff: 'simple'
+}
+
+Node.js v24.20.0

@@ -1,3 +1,60 @@
+## Player notebook and explored maps (2 October 2026)
+
+TODO item 4 is implemented in browser Asylum Escape. Tab, M, N or J opens the
+notebook; touch players use NOTES or the notebook button. Escape, N, M, J, P
+or RESUME closes it. While reading, Tab/Shift+Tab stays within the dialog,
+including the scrollable notes. The header and resume control stay outside
+the scrolling pages on narrow screens.
+
+`notebook.mjs` keeps knowledge for one escape attempt. Visiting levels, rooms
+and corridors adds observations; inspected artwork adds source-labelled record
+notes. The local daily-account image supplies the dates 7–9 December 1854,
+the 1860 table supplies its report date and discharge heading, and the existing
+generated 1854 plaque supplies its printed statistics and period categories.
+Heritage panels now use the same held-E viewer as local artwork. Loading an
+image alone never discovers its contents. Room labels remain fictional game
+divisions, rather than established historical uses.
+
+Discovered facts and deductions have separate sections. Exploring both wings
+can produce a qualified architectural deduction. Door notes distinguish an
+observed sign from a route actually used; staircase notes update when that
+stair is discovered on another level. Existing doors remain
+usable; no locks, treatment documents or future puzzle objectives are invented.
+Repeated inspection deduplicates records, including copies on other floors.
+Retry clears both the journal and exploration memory.
+
+The notebook includes a 900 × 580 sketch canvas and tabs for discovered levels
+and the grounds. Both it and the minimap use the same per-view fog: one-unit
+cells reveal within 5.5 scene units around the player, with wall sight checks,
+then remain known for that run. The negative coordinate origins of the revised
+interior and the older grid layout are both supported. Browsing a different
+sketch never discovers that level. NPC markers require the current level,
+nearby distance, matching height and line of sight; explored areas do not
+expose distant NPCs. `notebook-map.mjs` caches geometry and fog composites so
+stationary map refreshes reuse their canvases.
+
+Reading enters a suspended notebook state, clearing movement/use controls
+and pending hold timers. The gameplay loop, player, NPC navigation/guard
+animation and elapsed timer stop. Rendering continues, and resuming requires
+fresh input. Help, ordinary pause, artwork inspection and retries retain their
+existing behavior. No building geometry, compiled aerial assets, Unity/Blender
+exports or packaged desktop/Android players were regenerated for this item.
+
+Validation: the full browser `npm test` run passes. `test-notebook.mjs` checks
+radius/wall fog, independent levels/grounds, retained exploration, updated
+door/stair observations, document deduplication, deductions, hidden NPCs,
+cached drawing and retry. `test-game.mjs` exercises the real game loop's
+reading state, shortcuts, frozen progress and resume. `npm run test:notebook`
+runs the notebook state and real Chrome checks; the latter verifies keyboard
+and touch-button access, actual masked/remembered canvas pixels, held-E record
+discovery, focus containment, floor browsing, fresh retries and phone-layout
+scrolling with an accessible resume control. The existing asylum browser check
+also passes all 23 door round trips, the walked basement/ground/first stair
+and raised outside landing. No browser JavaScript or shader errors were found.
+Desktop and phone-size renders were visually reviewed; six captures and the
+browser results are in `Browser/artifacts/notebook/`. Mobile input was emulated
+in Chrome, rather than tested on a physical phone.
+
 ## Native Android aerial interface revision (1 October 2026)
 
 Version 0.7.0 / code 7 limits the pause button and its touch target to asylum
@@ -5265,3 +5322,311 @@ and live walking collision refresh. The final manifest matches current source.
 
 Browser source and the local compiled aerial model are updated. Unity, Blender
 and packaged desktop exports were not regenerated for this repair.
+
+## Three-level Asylum Escape interior (2 October 2026)
+
+The owner approved the exterior-based floor proposal with C1 at the rear wall,
+S1 in former R24, S2 removed, and a west basement plus S5 at the marked west
+junction. Revised drawings and the annotation are in
+Research/1829-interior-proposal/README.md. This supersedes the former coarse
+two-floor browser interior and its randomly selected corridor-end exits.
+
+Browser/dist/asylum-plan.json is the shared source. asylum-layout.mjs derives
+continuous wall collision, room openings and a 0.5-unit navigation grid with
+a world-coordinate origin. asylum-architecture.mjs renders the same exterior
+envelope, partitions, local textured finishes, floor/ceiling shaft openings
+and batched return stairs. Existing guard/ghost models, artwork, pause, torch,
+stamina, arrival and escape sequences are retained.
+
+Ground/first/basement elevations are 0/4.2/-3.2. S1/S3/S4 connect ground to
+first; S5 connects basement to ground and ground to first. Stair height changes
+continuously while walking. Cross-floor pursuer routes include stair points;
+replanning waits until an actor leaves the flight. Capture also compares
+height, preventing captures through a stair ceiling.
+
+All 23 existing door/level pairs remain available (13 ground, seven first,
+three basement). E enters the exterior at the matching landing/path and
+returns through the corresponding floor, with a release latch. NPCs stay in
+the building while the player is outside. Escape completion occurs on the
+front path at z>70 within |x|<90, rather than immediately on crossing a door.
+
+asylum-outside.mjs obtains body-height collision and tread/deck support from
+the exterior meshes/instances and basement walk metadata. It inspects hidden
+originals retained by aerial batching, restoring every visibility flag before
+rendering. This avoids collision from a merged batch's enclosing bounds and
+preserves raised landings. Approach direction selects the correct rear return
+flight where stairs overlap in plan. Tree toggles refresh this walking cache.
+
+Legacy layout consumers remain supported by core.mjs, floors.mjs and
+architecture.mjs. The browser game reads asylum-plan.json; the older browser
+and Unity layout JSON and Blender/desktop exports were not regenerated.
+Exterior geometry is unchanged and the compiled aerial manifest still matches
+its source hash; no exterior rebuild is required.
+
+`npm test` passes, including the added test-asylum-layout.mjs (all rooms/doors,
+stairs up/down and three-level pursuer routes) and test-asylum-outside.mjs (all
+arrivals, all seven exterior stairs down/up, batched collision parity and
+visibility). test-asylum-browser.mjs passes with the real renderer, 23 E round
+trips, release latch, all three levels, upper-landing movement and desktop/
+mobile previews. `npm run test:asylum` runs the new checks. Visual/interaction
+evidence is under Browser/artifacts/asylum-remodel/.
+
+## Building preparation progress (2 October 2026)
+
+The title's disabled “Preparing the building” action now shows a percentage,
+native progress bar and a short status for the current preparation step.
+Progress follows completed work: floor data, connected routes, each interior
+floor, lighting/characters, grounds, frontage, outside access and first render.
+These are weighted stage checkpoints, not a download percentage or time estimate.
+Short paint yields between stages keep updates visible; background tabs can
+continue preparing. Completion and the enabled Asylum Escape button wait for
+the first rendered title view. Failure clears the busy state and retains the
+reload action and independent exploration buttons.
+
+The loading display fits desktop and small mobile views down to 320 × 480.
+The landing browser check covers initial progress, a held exterior-image
+download, increasing percentages, failure recovery and first-frame completion.
+Visual evidence is Browser/artifacts/landing-*-progress.jpg. The game-loop check
+uses an immediate paint scheduler; its intro-only help assertion runs before
+the notebook checks start playing. No model sources or exports changed.
+Validation: `npm test`, `node test-game.mjs` and the real-renderer
+`node test-landing-mobile.mjs` all pass.
+
+## Continuous Asylum Escape skirting (2 October 2026)
+
+The revised three-floor browser interior previously built skirting only beside
+window openings. Individual square-ended boards also overlapped at corners and
+at partially duplicated partition runs, exposing brick ends and competing faces.
+
+`Browser/dist/asylum-architecture.mjs` now builds skirting from full wall runs,
+independently of the window masonry. `asylum-skirting.mjs` makes mitred outside
+bends and combines the footprints before extruding one mesh per floor. This
+removes internal caps and overlapping top/side faces at straight, angled, T and
+crossing joins. It retains the 0.24-unit board height, 0.215-unit depth and one
+skirting draw call per floor. Free caps clear the masonry end by 0.012 units;
+partition sampling gaps of up to 0.3 units join along the existing run. Wall,
+door, collision and navigation data are not modified.
+
+`test-asylum-skirting.mjs` is included in `npm test` and `npm run test:asylum`.
+It passes 1,536 window-base samples, 3,405 top-surface samples, synthetic
+inside/outside/angled corners and overlapping partitions, and 69 doorway
+clearance samples across the three floors. `test-asylum-layout.mjs` passes.
+The actual game comparison in `Browser/artifacts/check-asylum-skirting.mjs`
+captures 16 before and 16 after views across the three levels, including camera
+movement and mobile. Visual review confirms continuous window bases and clean
+corner returns; both runs report no page/shader errors. Images and render
+summaries are in `Browser/artifacts/asylum-skirting/`.
+
+The complete `npm test` suite passes; its log is
+`Browser/artifacts/asylum-skirting-suite.txt`. The compiled exterior manifest's
+source hash still matches the current aerial sources.
+
+Only browser interior sources changed. The aerial compiler does not include
+this interior; no compiled exterior rebuild is needed. Unity, Blender and
+packaged desktop/mobile exports were not regenerated.
+
+## Straight Reception corridor corners (2 October 2026)
+
+The two ground/first-floor bends beside Reception now have matching continuous
+45-degree faces. The east outline previously retained eight short sampled
+segments; the west retained a short return plus a fragment of R11's rectangular
+partition that projected into the corridor. Both outlines now join (±6.5, 4.9)
+to (±8.6, 7) directly. R11's polygon follows the west chamfer so no leftover
+partition extends beyond it.
+
+The correction is in `Browser/dist/asylum-plan.json` and the matching research
+plan. Visible masonry, skirting, floor/ceiling edges, maps, collision and
+navigation use that shared boundary. The ground/first SVG and PNG review
+drawings were regenerated. This change does not alter the exterior model;
+its compiled manifest still matches the current source. Unity, Blender and
+packaged exports were not regenerated.
+
+`test-asylum-layout.mjs` now casts 588 rays against the actual brick, plaster
+and skirting faces and walks 196 positions alongside both corners across both
+floors. It rejects the original geometry and passes the correction, together
+with the existing room/door routes and stair checks. `test-asylum-skirting.mjs`
+also passes. `Browser/artifacts/check-reception-corners.mjs` captures 17 views
+for each plan, including frontal/oblique angles, both floors and mobile. Visual
+inspection confirms straight faces and continuous skirting, with no page or
+shader errors. Evidence is in `Browser/artifacts/reception-corners/`.
+The complete `npm test` suite passes; its output is saved there as `suite.txt`.
+
+## Square internal stairwells and Reception basement stairs (2 October 2026)
+
+All four browser interior stairs now have square footprints with two flights,
+a full return landing and a front floor landing around a square central well.
+`Browser/dist/asylum-stairs.mjs` shares the flight route, shaft opening and
+guard paths between navigation and `asylum-architecture.mjs`. Continuous
+mitred handrail meshes replace separately offset bars; posts end beneath the
+rails and start on the actual tread or landing. Closely spaced balusters and
+physical rail collision protect the central well and exposed landing edges.
+Tiny tread nosings close floating-point seams without coplanar top overlaps.
+
+S1 beside Reception now connects basement, ground and first floors. BC3 goes
+around its east side to keep the Reception basement door D13 reachable. The
+floor is cut only when a stair connects from below; the lowest floor remains
+solid. Ceiling openings only occur where a staircase continues upwards.
+This supersedes the earlier S1 ground/first-only connection and rectangular
+return stairs. The matching research plan and all three SVG/PNG drawings were
+updated in `Research/1829-interior-proposal/`.
+
+`test-asylum-stairs.mjs` checks 882 points for visible tread/landing support
+and headroom, 60 attempted falls through flight and landing guards, square
+footprints, open wells with solid bottoms, and physically walks routes from
+Reception to all 23 door/level pairs. Existing layout checks traverse every
+stair in both directions, including both S1 connections. The new test is
+included in `npm test` and `npm run test:asylum`. The browser interaction check
+uses the shared route and still verifies all 23 door round trips, continuous
+three-level walking and raised exterior landings.
+
+The complete browser suite passes; output is in
+`Browser/artifacts/asylum-stairs-suite.txt`. The focused checks and 15
+actual-game desktop/mobile views pass without page or shader errors. Visual
+review confirms joined return rails, square guarded wells and the Reception
+descent. Captures and their runner are `Browser/artifacts/asylum-stairs/` and
+`Browser/artifacts/check-asylum-stairs.mjs`.
+
+Only browser interior sources and research drawings changed. The compiled
+aerial manifest still matches its source hash, so no exterior rebuild was
+needed. Unity, Blender and packaged desktop/mobile exports were not regenerated.
+
+## Framed room doorways (2 October 2026)
+
+The browser Asylum Escape interior now retains corridor-facing room walls
+instead of erasing them with the corridor's clearance margin. Exact 1.9-unit
+openings replace sampled door gaps. All 86 room entrances have cream masonry
+above a 2.5-unit head and worn green painted surrounds, using the existing
+door-paint and sash materials. Deep jambs join the slightly offset bay-room
+partitions. The clear opening is 1.76 units wide and 2.43 units high; thresholds
+remain level and open, with no use interaction required. R24 is the Reception
+stair hall and retains its full-height stair mouth.
+
+`asylum-layout.mjs` derives frames from the actual jamb cuts, and regenerates
+the wall index and navigation cells from the restored partitions. The notebook
+uses those same walls. B9's frontage is at z=-29.5, beside the basement
+corridor, so its door does not close the west exit route. Both shared plan JSON
+files and the SVG/PNG drawings were updated. Frame returns and mouldings join
+without overlapping front faces. All green surrounds share one additional
+material batch per floor; masonry and pale trim use the existing batches.
+
+`test-asylum-doorways.mjs` checks all 86 portals, 516 bidirectional walking
+passes, head-height and threshold clearance, solid walls above/beside each
+door, jamb coverage and non-overlapping frame joints. The existing layout and
+skirting checks pass. `test-asylum-doorways-browser.mjs` captures all four
+orientations, three floors, deep bay openings and desktop/mobile views; it
+also walks the actual player through three sample doors. The existing browser
+interaction test passes all 23 outside-door round trips and stair transitions.
+Both browser runs report no page or shader errors. Captures and render counts
+are in `Browser/artifacts/asylum-doorways/`. Doorway checks are included in
+`npm test` and `npm run test:asylum`.
+
+The complete `npm test` suite passes; its output is saved in
+`Browser/artifacts/asylum-doorways-suite.txt`. The final doorway geometry and
+browser checks also pass after the frame-joint refinement.
+
+Only browser interior sources and review drawings were changed. The compiled
+aerial manifest still matches its source hash and needs no rebuild. Unity,
+Blender and packaged desktop/mobile exports were not regenerated.
+
+## Reception basement partition (2 October 2026)
+
+The owner's marked view adds a transverse wall immediately beyond B11's
+existing north doorway. In both shared plan JSON files B11 now ends at x=0,
+and B12 occupies the eastern section. Their common partition spans z=9.4 to
+19.6, with a 1.9-unit masonry opening centred at z=14.5. The existing renderer
+supplies the cream/red brick finish, continuous skirting, doorway header and
+green painted surround. The threshold remains open and level, consistent with
+the other internal doors. Collision, navigation and notebook walls use the
+same plan; no separate rendering or movement implementation was needed.
+
+The basement review drawing was regenerated. The existing layout and doorway
+checks pass, including room reachability and movement through the opening.
+Browser/artifacts/check-reception-basement.mjs captures both sides, the join
+beside the existing doorway and a mobile view; it verifies actual-player
+crossings and blocked movement against the wall from both directions. The
+captures have no page or shader errors. Evidence is in
+Browser/artifacts/reception-basement/.
+
+The full `npm test` suite passes; its output is saved there as `suite.txt`.
+`test-asylum-browser.mjs` also passes all 23 E door round trips, continuous
+three-level stair movement and raised outside-landing movement. The focused
+layout and doorway checks were rerun successfully after concurrent edits to
+the separate rear basement area; those edits are preserved.
+
+Only browser interior plan sources and research drawings changed for this
+partition. The compiled aerial manifest still matches its source hash; it
+excludes the game interior and needs no rebuild. Unity, Blender and packaged
+exports were not regenerated.
+
+## Open rear basement area (2 October 2026)
+
+The owner's marked view replaces B9's entrance partition and separate BC4
+outside-door lobby with one continuous end space. Beyond B1/B2 the walls
+flare at 45 degrees, from (-32.3, -27.1) to (-38.1, -32.9) and from
+(-29.9, -27.1) to (-24.5, -32.5). The room now reaches across the rear width,
+including the existing D11 outside door. There is no internal entrance frame,
+header or threshold, while B1/B2 retain their side-room doors.
+
+Both shared plan JSON files include the new polygons. `asylum-layout.mjs`
+supports explicit `openEdges` and rooms without a `doorSide`, so walls,
+skirting, collision, pursuer paths and notebook maps agree. The drawing
+exporter respects those open edges and locates door symbols using polygon
+bounds. Review drawings were regenerated. The concurrent Reception basement
+partition is preserved.
+
+`test-asylum-basement-end.mjs` checks 294 rendered masonry/skirting samples
+along the two flares, 200 walking checks, clear full-height passages through
+the former door and across the widened space, floor/ceiling support and
+navigation to both rear corners and D11. Existing layout, doorway and skirting
+checks pass. `test-asylum-basement-end-browser.mjs` captures eight views for
+each version, including both wall angles, the reverse view and mobile; it
+also walks the actual player through the entrance and across the rear room.
+The captures have no page or shader errors. Both tests are included in the
+appropriate `npm test` / `npm run test:asylum` commands. Evidence is under
+`Browser/artifacts/basement-end/`.
+
+The complete `npm test` suite passes (`suite.txt` in that directory).
+Existing browser checks also pass all 23 E door round trips, stair movement
+and room-door traversal. After the concurrent masonry-join update, the layout,
+basement-end, doorway, wall-join, skirting and stair checks were rerun against
+the combined source, and the final basement captures were refreshed.
+
+Only browser interior sources and research drawings changed. The compiled
+aerial manifest still matches its source hash and needs no rebuild. Unity,
+Blender and packaged desktop/mobile exports were not regenerated.
+
+## Sealed interior wall joins (2 October 2026)
+
+The reported slit left of Reception was a sampled partition ending 0.219 units
+short of the adjoining exterior wall. `asylum-wall-joins.mjs` now repairs
+short straight, T and overlapping parallel joins in the shared layout before
+masonry, skirting, doorway frames, maps, collision indices and navigation
+cells are built. Repairs stay within 0.3 units of each original endpoint and
+resolve dependent joins without moving already connected ends. The former
+skirting-only extension is removed so every consumer uses the same walls.
+
+The renderer merges contiguous/overlapping collinear full-height masonry after
+window cuts. This removes internal end caps and the remaining subpixel butt
+seam at Reception, while retaining the existing windows, material batches and
+intentional door/stair openings. No plan outline or exterior geometry was
+changed by this repair.
+
+`test-asylum-wall-joins.mjs` checks a fixed survey of 131 repaired joins
+(56 ground, 58 first, 17 basement), with 2,358 brick/plaster raycasts from both
+sides at three heights, collision coverage, stable joins, bounded extensions,
+clear doorway widths and no internal masonry caps at Reception. The check
+rejects the unjoined layout. It is included in `npm test` and
+`npm run test:asylum`; the latter also runs the new visual check.
+
+The full `npm test` suite passes. The focused wall, layout, doorway and
+skirting checks also pass after the final masonry merge. The actual-game
+check passes all 23 outside-door round trips, basement/ground/first stair
+walking and desktop/mobile views. Nine before and nine final browser views
+cover Reception, oblique angles, both upper floors, an offset bay join and
+the basement, without page or shader errors. Visual review confirms that the
+reported opening and its remaining hairline seam are closed. Evidence and
+the suite log are in `Browser/artifacts/asylum-wall-joins/`.
+
+Only browser interior sources and checks changed. The compiled aerial
+manifest still matches its source hash and requires no rebuild. Unity,
+Blender and packaged desktop/mobile exports were not regenerated.

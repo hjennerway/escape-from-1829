@@ -15,6 +15,9 @@ import {sampleLanding} from './dist/aerial-controls.mjs';
 import {createArrivalCutscene,sampleArrival} from './dist/arrival-cutscene.mjs';
 import * as GuardTHREE from './dist/vendor/three.module.js';
 import {createSecurityGuard,updateSecurityGuard,resetSecurityGuard} from './dist/security-guard.mjs';
+import {createNotebook,notebookView} from './dist/notebook.mjs';
+import {drawNotebookMap} from './dist/notebook-map.mjs';
+import {createLoadingProgress} from './dist/loading-progress.mjs';
 class Vector {
   constructor(){this.set(0,0,0);}
   set(x,y,z){Object.assign(this,{x,y,z});return this;}
@@ -36,7 +39,7 @@ const THREE={Vector3:Vector,Object3D,Group:Object3D,Scene:Object3D,Mesh:Object3D
 const elements=new Map();
 function element(id){
  if(elements.has(id))return elements.get(id);
- const e={id,style:{},value:1.2,dataset:{},width:410,height:330,hidden:false,focus(){},addEventListener(){},classList:{toggle(){},add(){}},querySelector:s=>element(id+s)};
+ const e={id,style:{},value:1.2,dataset:{},width:410,height:330,hidden:false,children:[],focus(){sandbox.document.activeElement=e;},setAttribute(k,v){e[k]=v;},append(...nodes){e.children.push(...nodes);},replaceChildren(...nodes){e.children=nodes;},querySelectorAll(){return e.children;},addEventListener(){},classList:{toggle(){},add(){}},querySelector:s=>element(id+s)};
  const context=new Proxy({canvas:e,fillRect(){e.fills=(e.fills||0)+1;},drawImage(){e.blits=(e.blits||0)+1;}},{get:(o,k)=>k in o?o[k]:()=>{}});e.getContext=()=>context;
  elements.set(id,e);return e;
 }
@@ -44,7 +47,8 @@ const layout=JSON.parse(await readFile(new URL('./dist/layout.json',import.meta.
 const source=(await readFile(new URL('./dist/game.mjs',import.meta.url),'utf8')).replace(/^import .*;\r?\n/gm,'');
 const listeners=new Map();
 function keydown(code,repeat=false){const event={code,repeat,defaultPrevented:false,preventDefault(){this.defaultPrevented=true;}};listeners.get('keydown')(event);return event;}
-const sandbox={captureOutcome:(previous)=>captureOutcome(previous,sandbox.Math.random),Math:Object.create(Math),selectEscapeRoutes,exitDirection,createSecurityGuard:()=>createSecurityGuard(GuardTHREE),updateSecurityGuard,resetSecurityGuard,bindTreeToggle,sampleLanding,...core,...floors,buildArchitecture,interiorWallSurfaces,createInteriorLights,createEscapeCutscene,createArrivalCutscene,
+const sandbox={createNotebook,notebookView,drawNotebookMap:(...args)=>drawNotebookMap(...args,{createCanvas:()=>sandbox.document.createElement('canvas')}),captureOutcome:(previous)=>captureOutcome(previous,sandbox.Math.random),Math:Object.create(Math),selectEscapeRoutes,exitDirection,createSecurityGuard:()=>createSecurityGuard(GuardTHREE),updateSecurityGuard,resetSecurityGuard,bindTreeToggle,sampleLanding,...core,...floors,buildArchitecture,interiorWallSurfaces,createInteriorLights,createEscapeCutscene,createArrivalCutscene,
+ createLoadingProgress:document=>createLoadingProgress(document,{paint:()=>Promise.resolve()}),
  createLandingExterior:async()=>({scene:new Object3D(),camera:new Object3D()}),
  loadEscapeFrontage:async()=>{},THREE,GLTFLoader:class {},
  document:{getElementById:element,createElement:()=>element('canvas'+elements.size),querySelectorAll:()=>[],body:element('body'),addEventListener(){},exitPointerLock(){}},
@@ -52,7 +56,7 @@ const sandbox={captureOutcome:(previous)=>captureOutcome(previous,sandbox.Math.r
  fetch:async()=>({ok:true,json:async()=>layout}),matchMedia:()=>({matches:false}),
  innerWidth:1280,innerHeight:800,devicePixelRatio:1,addEventListener(type,listener){listeners.set(type,listener);},requestAnimationFrame(){},performance:{now:()=>0},console};
 vm.createContext(sandbox);
-vm.runInContext(source+`\nglobalThis.test={finish,escapeCutscene,start,update,animate,resetPositions,showFloor,player,keys,get escapeExterior(){return escapeExterior;},get lastRender(){return renderer.lastRender;},get arrival(){return arrivalCutscene;},get elapsed(){return elapsed;},get enemies(){return enemies;},get floors(){return floors;},get groups(){return floorGroups;},get artPanels(){return artPanels;},get artViewing(){return artViewing;},openArtViewer,closeArtViewer,get ready(){return ready;},get state(){return state;},get camera(){return camera;},setElapsed(v){elapsed=v;},setAudio(){audioOn=false;},setFrameDt(v){clock.getDelta=()=>v;}};`,sandbox);
+vm.runInContext(source+`\nglobalThis.test={finish,escapeCutscene,start,update,animate,resetPositions,showFloor,player,keys,openNotebook,closeNotebook,get notebook(){return notebook;},get escapeExterior(){return escapeExterior;},get lastRender(){return renderer.lastRender;},get arrival(){return arrivalCutscene;},get elapsed(){return elapsed;},get enemies(){return enemies;},get floors(){return floors;},get groups(){return floorGroups;},get artPanels(){return artPanels;},get artViewing(){return artViewing;},openArtViewer,closeArtViewer,get ready(){return ready;},get state(){return state;},get camera(){return camera;},setElapsed(v){elapsed=v;},setAudio(){audioOn=false;},setFrameDt(v){clock.getDelta=()=>v;}};`,sandbox);
 await new Promise(r=>setImmediate(r));
 const t=sandbox.test;assert(t.ready,'init must complete');t.setAudio();
 const routeSnapshot=JSON.stringify(t.floors.map(f=>f.exits));
@@ -79,6 +83,8 @@ assert.deepEqual(Array.from(t.enemies,e=>({name:e.name,type:e.type})),[
 ],'Security and the ghost retain their behavior types');
 function startPlaying(){t.start();t.arrival.update(3);assert.equal(t.state,'play');assert.equal(JSON.stringify(t.floors.map(f=>f.exits)),routeSnapshot,'Retry keeps this page load’s routes');}
 
+keydown('KeyN');assert.notEqual(t.state,'notebook','The notebook is unavailable at the title');
+
 // Help pauses the current run and every way of closing it preserves progress.
 element('instructions').hidden=true;keydown('KeyH');assert.equal(element('instructions').hidden,true,'H is inactive on the intro');
 startPlaying();t.setElapsed(12);t.player.x+=.25;
@@ -93,6 +99,25 @@ for(const close of [()=>keydown('KeyH'),()=>keydown('Escape'),()=>keydown('KeyP'
  close();assert.equal(t.state,'play');assert.equal(element('instructions').hidden,true);assert.equal(t.elapsed,12);assert.deepEqual({...t.player},helpPlayer);
 }
 keydown('KeyP');keydown('KeyH');assert.equal(element('instructions').hidden,false,'Help opens while paused');keydown('Escape');assert.equal(t.state,'play');
+
+// Reading is a distinct suspended state, including at low frame rates and with held controls.
+startPlaying();t.setElapsed(12);
+for(const [open,close] of [['KeyN','Escape'],['Tab','KeyM'],['KeyJ','KeyP']]){
+ t.keys.add('KeyW');keydown(open);assert.equal(t.state,'notebook');assert.equal(element('floorMap').hidden,false);assert.equal(element('hud').hidden,true);assert.equal(t.keys.size,0);
+ const beforePlayer={...t.player},beforeEnemies=t.enemies.map(e=>({x:e.x,z:e.z,floor:e.floor})),time=t.elapsed;
+ keydown(open,true);assert.equal(t.state,'notebook','Key repeat never closes reading');
+ for(const code of ['KeyW','KeyE','KeyF','KeyH'])keydown(code);
+ t.update(10);t.animate();assert.equal(t.elapsed,time);assert.equal(t.keys.size,0);
+ assert.deepEqual({...t.player},beforePlayer);assert.deepEqual(t.enemies.map(e=>({x:e.x,z:e.z,floor:e.floor})),beforeEnemies);
+ assert.equal(keydown('Tab').defaultPrevented,true,'Tab stays inside the reading dialog');
+ keydown(close);assert.equal(t.state,'play');assert.equal(element('floorMap').hidden,true);assert.equal(element('hud').hidden,false);assert.equal(t.keys.size,0);
+}
+const copied=t.artPanels.find(a=>a.url.endsWith('daily-account-patients-1854.png'));
+t.openArtViewer(copied);t.closeArtViewer();const journalRevision=t.notebook.revision;t.openArtViewer(copied);t.closeArtViewer();assert.equal(t.notebook.revision,journalRevision,'Repeated inspection does not duplicate a clue');
+assert(t.notebook.entries.some(e=>e.title.includes('December 1854')));
+t.openNotebook();element('closeNotebook').onclick();assert.equal(t.state,'play');
+startPlaying();assert(!t.notebook.entries.some(e=>e.id.startsWith('archive:')),'A retry has a fresh journal');
+console.log('PASS: notebook shortcuts, focus handling, frozen timer/player/NPCs, repeated-inspection deduplication, resume and fresh retry.');
 
 // Launch and retry choose safe new positions, then keep them through the arrival.
 const enemyPositions=()=>Array.from(t.enemies,e=>({x:e.x,z:e.z,floor:e.floor}));

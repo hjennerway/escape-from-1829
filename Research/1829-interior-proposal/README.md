@@ -1,0 +1,347 @@
+# 1829 revised interior plans — 2 October 2026
+
+The owner's [marked revision](owner-revisions.png) is implemented in the
+**browser Asylum Escape game**. These corrections supersede the original
+two-floor proposal retained below. Room divisions remain gameplay estimates,
+not surveyed historical interiors.
+
+- **C1 follows the rear wall**, with the main-range rooms extending toward
+  the front exterior wall.
+- **S2 is removed. S1 occupies former R24**, slightly forward after moving
+  C1; R24 now denotes the stair hall.
+- **S5 is at the marked west-wing junction**, connecting basement, ground and
+  first floors. Its run leaves the existing corner door D9 clear.
+- The **west basement** follows the yellow area: west rear arm, its main-range
+  connection and the west/central Reception frontage. BC1 is the central
+  corridor, B1–B8 are four pairs of small side rooms, and B9 is the large rear
+  room. B10/B11 occupy the marked frontage area. Three lobbies reach the
+  existing lower west doors.
+
+![Updated ground floor](ground-floor.png)
+
+![Updated first floor](first-floor.png)
+
+![West basement](basement.png)
+
+| Stair | Revised position | Connection |
+| --- | --- | --- |
+| S1 | Former R24, west of Reception | Basement ↔ ground ↔ first |
+| S3 | West rear stair section | Ground ↔ first |
+| S4 | East rear stair section | Ground ↔ first |
+| S5 | Marked west-wing junction | Basement ↔ ground ↔ first |
+
+All internal stairs are walked, with continuous height changes and open floor
+and ceiling shafts. E is used at outside doors. The game keeps all **23
+door/level connections** available: 13 ground, seven first and three basement.
+This replaces the former five random corridor-end routes. Press E to appear
+on the matching outside landing or path; release and press again at that door
+to return inside. A held key cannot bounce between inside and outside.
+
+The added basement doors are D11 (west side, x=-37.94/z=-34.7), D12 (west
+frontage, x=-26.15/z=19.88), and D13 (Reception side, x=-11.55/z=17.48). All
+three reach existing sunken walks at Y=-1.02; the two front door thresholds
+are Y=-0.28. Other F/D connections retain the actual exterior locations in
+the original tables below. The additional Y=8.5 doors at F4/F7 belong to a
+third storey outside this interior scope.
+
+`plan-data.json` matches `Browser/dist/asylum-plan.json`; checks protect that
+agreement. Both upper envelopes retain the exterior trace with the Reception
+corner correction described below. The basement
+outline is estimated from the yellow annotation and its modelled lower doors.
+The game uses elevations 0/4.2/-3.2 for ground/first/basement; exterior door
+transitions retain their individual landing heights. These are scene units,
+not surveyed dimensions. Room uses, corridor width (about 2.4 units) and exact
+internal clearances remain estimates.
+
+The browser's walls, room openings and movement use the same plan. Security
+and the ghost follow physical routes across all three levels; capture checks
+height. NPCs stay inside while the player walks outside. Outside movement,
+torch, map, help and pause remain available, and reaching the front path
+finishes the escape.
+
+Validation passes every room/door route, every internal stair up/down,
+three-level pursuer routes, all seven outside fire escapes down/up, all 23 E
+round trips with the release latch, raised-landing movement, desktop/mobile
+views, and the complete browser test suite. Drawings also pass narrow-screen
+and light/dark review. Evidence is under Browser/artifacts/asylum-remodel/.
+
+Browser sources, help/maps and these drawings are updated. Exterior geometry
+and the compiled aerial model are unchanged; the manifest still matches the
+source. The older Browser/dist/layout.json, Unity Assets/Resources/layout.json,
+Blender and packaged desktop exports were not regenerated.
+
+## Continuous skirting (2 October 2026 follow-up)
+
+The owner's marked in-game view identifies missing skirting below the sash
+windows and flickering corner joins. The three-floor browser model now takes
+skirting from complete wall runs, independently of the window openings above.
+Inside/outside bends have mitred joins; intersecting and partially duplicated
+partition runs share a single solid footprint, without internal caps or
+overlapping visible faces. The existing 0.24-unit height and 0.215-unit total
+depth remain. Free ends project 0.012 units beyond the masonry cap; short gaps
+left by partition sampling are joined along the run, keeping doorways clear.
+
+This is a browser finish correction to the revised plan, not a change to the
+room layout or historical reconstruction. Navigation, Unity, Blender and
+packaged exports are unchanged. The compiled aerial model excludes this
+interior. Validation details are in `../../DEVELOPMENT.md`; visual comparisons
+are in `../../Browser/artifacts/asylum-skirting/`.
+
+## Straight Reception corners (2 October 2026 follow-up)
+
+The owner's two in-game screenshots specify continuous, matching 45-degree
+faces beside Reception, with the west face following the marked purple line.
+The ground/first interior outlines now connect (±6.5, 4.9) directly to
+(±8.6, 7), replacing the sampled east steps and short west return. R11's west
+boundary follows that corner so its former rectangular partition no longer
+projects into the corridor. Walls, skirting, floor/ceiling boundaries, maps
+and walking collision all derive from the corrected plan.
+
+Both plan JSON copies and the ground/first review drawings are updated. The
+basement and exterior trace sources are unchanged. This is a correction to
+the browser interior, not a surveyed historical claim; Unity, Blender and
+packaged exports were not regenerated. Rendered comparisons are in
+`../../Browser/artifacts/reception-corners/`.
+
+## Square stairwells and Reception basement access (2 October 2026 follow-up)
+
+The owner's in-game screenshots identify disconnected banisters and a false
+floor opening beside Reception. All four internal stairs now use square
+footprints, two flights, a full return landing and a front floor landing
+around a square central well. Continuous mitred handrails and closely spaced
+balusters guard the flights, turns and exposed floor edges. Walking collision
+follows those rails, preventing movement into the well or off a flight.
+
+S1 now continues from Reception down to the basement, as requested, as well
+as up to the first floor. BC3 passes along its east side and turns behind it
+to retain access to D13. Floor holes are cut only above a connected lower
+stair; the lowest floor under each well remains solid. Ceiling openings are
+cut only where stairs continue upwards. The updated plan data and drawings
+retain all 23 exterior door/level connections.
+
+This supersedes the earlier S1 ground/first-only connection and rectangular
+return-stair footprints. Browser sources and these plan drawings are updated;
+the aerial model is unaffected. Unity, Blender and packaged exports were not
+regenerated. Checks and visual review are recorded in `../../DEVELOPMENT.md`.
+
+## Framed room doorways (2 October 2026 follow-up)
+
+The owner's in-game view showed rooms open across their corridor-facing wall.
+The corridor cutout extended past its edge and erased those partitions. The
+browser now retains the room fronts, with exact 1.9-unit masonry openings,
+cream brickwork above a 2.5-unit head, and worn green painted surrounds with
+pale stepped trim on both faces. The paint and trim reuse the existing door
+and sash materials. These are visual adaptations of the established finish,
+not surveyed historical fittings.
+
+All 86 room entrances across the three levels have open, level thresholds.
+R24 remains the Reception stair hall with its full-height stair mouth. The
+slightly overlapping bay-room partitions share aligned openings and deep
+jambs. B9's front edge moves from z=-28.3 to z=-29.5 so its doorway sits beside
+BC4, preserving the west basement exit corridor. Both plan JSON files and the
+drawings include that adjustment. The notebook, player collision and pursuer
+navigation derive from the same restored walls.
+
+The doorway check covers all 86 openings, 516 walking passes, solid frontage
+and header surfaces, and non-overlapping frame joints. Desktop/mobile game
+captures are in `../../Browser/artifacts/asylum-doorways/`. Browser interior
+sources and plan drawings changed; Unity, Blender, packaged applications and
+the compiled aerial model were not regenerated.
+
+## Reception basement partition (2 October 2026 follow-up)
+
+The owner's [marked basement view](reception-basement-wall-reference.png)
+places a wall across the room under Reception, just beyond its existing north
+doorway. B11 now ends at x=0; B12 is the eastern room beyond that partition.
+The wall runs from z=9.4 to z=19.6, with a centred doorway at z=14.5. It uses
+the existing cream upper brickwork, red dado, dark skirting and green painted
+surround. The level threshold remains open for walking, matching the other
+internal room doorways.
+
+Both shared plan JSON files and the basement SVG/PNG drawing include the
+partition. Visible walls, collision, pursuer navigation and the notebook map
+derive from those room boundaries. This is an owner-requested browser layout
+correction, not a surveyed historical interior. Unity, Blender and packaged
+exports were not regenerated; the compiled aerial model excludes this interior.
+Before/after desktop and mobile views and validation are under
+`../../Browser/artifacts/reception-basement/`.
+
+## Open basement end (2 October 2026 follow-up)
+
+The owner's marked corridor screenshot replaces B9's framed entrance and the
+separate BC4 exit lobby with one open rear area. After the last side rooms,
+B1/B2, the corridor walls flare out at 45 degrees: from (-32.3, -27.1) to
+(-38.1, -32.9) on the west and from (-29.9, -27.1) to (-24.5, -32.5) on the
+east. The end area spans the rear width and includes outside door D11, with
+no internal partition, door surround or header across its entrance. The two
+side-room doors remain.
+
+Both plan JSON copies and the review drawings reflect this correction. B9's
+open edge is shared by visible walls, skirting, navigation and the notebook
+map. This supersedes the earlier B9 doorway and BC4 lobby descriptions, and
+remains an owner-directed gameplay reconstruction rather than a surveyed plan.
+Browser sources and research drawings changed; the compiled aerial model,
+Unity, Blender and packaged exports were not regenerated. Before/after views
+and validation are in `../../Browser/artifacts/basement-end/`.
+
+## Original two-floor draft (superseded)
+
+Rough plans for owner review before replacing the existing game interior.
+Only these research artifacts were added. Browser game sources, navigation
+JSON, compiled models, Unity and Blender exports are unchanged.
+
+![Ground-floor proposal](ground-floor.png)
+
+![First-floor proposal](first-floor.png)
+
+The SVG copies retain vector lines and text. `plan-data.json` records the
+proposed room divisions, corridors, stair positions and exterior connections.
+All room divisions, internal stairs and arrival points are provisional.
+
+## Basis and scope
+
+The outline follows the **current browser exterior**, including the corrected
+west E-shaped garden frontage, unequal pavilions, recessed front corners,
+three separate rear arms and their side projections. Reception/front is down
+(model +Z); rear is up. The open rear courts and front gardens remain outside.
+
+This keeps the building scope of `../escape-layout/README.md`: the main 1829
+block, its three rear arms and two forward wings. The Barmere outer range and
+the separate Redesmere/Saughall rear cross range are excluded. The first floor
+means the next playable level above the ground floor. Third storeys, roof
+access and semi-basement interiors are outside this two-floor proposal.
+
+Footprints were traced from connected masonry/foundation volumes of
+`Browser/dist/escape-exterior.mjs` and its detail modules, rather than from
+the old compressed corridor grid. Wall-volume samples at model Y=2.4 and
+Y=6 establish the lower and upper envelopes; these are **not proposed floor
+elevations**. The rough outlines use a 0.1-unit sampling grid with slight
+line simplification, so they are unsuitable as measured construction plans.
+Small gaps and concealed interior connections still need confirmation.
+
+The principal reference notes are:
+
+- `../west/README.md`: the latest E-shaped west frontage, including the
+  superseding depth and width corrections; the west court porch and gallery.
+- `../1829-back/README.md`: central rear connection and rear-wing roof levels.
+- `../front-inside-corners/README.md`: the mirrored recessed front courtyards.
+- `../east-courtyard/README.md` and `../east-bay/README.md`: the eastern
+  pavilion recess, fire-exit corner and half-octagonal bays.
+- `../front-basement/README.md`: the semi-basement is a separate level.
+- `../location-navigation/README.md`: the ward/scope identification.
+
+## Rooms, corridors and internal stairs
+
+Most ranges have a corridor along one exterior side, with rooms occupying the
+remaining depth to the opposite exterior wall. C1 is the front cross-range
+connection. C2/C4 follow the outer walls of the west/east rear arms; C3 follows
+the central arm's east wall. C5/C6 follow the Reception-facing walls of the
+forward wings. Short vestibules connect those routes to side-facing doors.
+There is no rear cross-gallery across the courtyard gaps.
+
+R1–R37 identify provisional rooms on both levels; their names describe position,
+not established historical uses. R34 changes slightly upstairs to reserve a
+wall-side passage to the west forward end stair. R38/R39 occupy the low west
+glazed extension and R40 the low west court porch on the ground floor only.
+Hatching indicates their roofs on the upper plan. The small detached east court
+lean-to is hatched because its interior access is not established by the model.
+The larger rear annexes retain rooms on both floors, consistent with their
+existing two-level openings and roof heights.
+
+| Stair | Proposed position | Connection |
+| --- | --- | --- |
+| S1 | West side of Reception | Ground Reception ↔ first-floor landing |
+| S2 | East side of Reception | Ground Reception ↔ first-floor landing |
+| S3 | West rear stair section | Ground ↔ first floor beside F1 |
+| S4 | East rear stair section | Ground ↔ first floor beside F3 |
+
+S1/S2 retain the paired-stair idea from the existing interior; their precise
+positions are not proved by the exterior. S3/S4 sit within the photographed
+rear stair sections, but their internal runs are also proposals. The stairs
+are intended to be walked. The corridor width of 2.4 scene units is a planning
+assumption, and exact stair runs, doors, clearances and room uses need approval.
+
+## Exterior connections
+
+F1–F7 refer to actual outside staircase/door attachments. Their green marks are
+on the modelled side walls, rather than on invented doors at every arm tip.
+The pale outside routes show the existing stair positions schematically.
+
+| ID | Exterior attachment | Ground-floor connection | First-floor connection |
+| --- | --- | --- | --- |
+| F1 | West rear arm, inner court-facing side | Raised lower iron-stair landing, Y=2.4 | Upper landing, Y=5.9 |
+| F2 | Central rear arm, east side near rear | None: the exterior has no lower door here | Iron-stair landing, Y=5.1 |
+| F3 | East rear arm, inner court-facing side | Raised lower iron-stair landing, Y=2.4 | Upper landing, Y=5.9 |
+| F4 | West E-shaped pavilion, inner return | None at the upper escape door | Wall-side deck to middle iron-stair landing, Y=4.25 |
+| F5 | West forward wing, south end wall | None: lower openings are windows | Masonry return-stair upper landing, door Y=4.28 |
+| F6 | East forward wing, east side | Lower outside doorway, Y=0 | Iron-stair landing, door Y=4.25 |
+| F7 | East pavilion, recessed north-facing fire-exit corner | None at the upper escape door | Wall-side deck to zigzag-stair middle landing, Y=4.25 |
+
+These Y values are existing exterior door thresholds in **scene units**,
+not surveyed heights or a proposed universal floor spacing. F1/F3 have
+raised lower doorways; the Reception doorstep is also raised. A later model
+must resolve these differences with appropriate internal steps/landings and
+floor levels. The additional Y=8.5 doors at F4/F7 and the high roof-access door
+are not first-floor exits in this proposal.
+
+| ID | Ground-floor outside door |
+| --- | --- |
+| D1 | Main Reception entrance and split stone doorstep stairs |
+| D2 | West outer entrance, towards Parsons Lane |
+| D3 | West front garden entrance |
+| D4 | West ground-only glazed extension, garden side |
+| D5 | West rear court doorway, from R22 |
+| D6 | West court porch side door, from R40; connection to R22 to confirm |
+| D7 | East front garden entrance |
+| D8 | East outer pavilion entrance/passage |
+| D9 | West recessed inside-corner courtyard door |
+| D10 | East recessed inside-corner courtyard door |
+
+The blue facade doors beside Reception that serve the sunken front walks, and
+the west side semi-basement door, are reserved for separate basement planning.
+The first-floor portico is not assumed to provide a walkable outside exit.
+
+## Planned E behaviour
+
+At an inside connection, pressing E would place the player immediately outside
+the matching door, or on its matching fire-escape landing. Pressing E at that
+outside doorway would return to the same floor and inside threshold. Every
+physical connection is shown; this proposal does not use the current game's
+random selection of five escape routes to decide where exterior doors exist.
+
+`destination` values in `plan-data.json` are rough arrival candidates for later
+implementation. They have not been validated as player spawn positions. Most
+exterior fire stairs are presently scenery, so landing/flight walking surfaces,
+collision clearance, floor-aware outside movement and return interactions must
+be implemented before these routes can be played. No interaction is implemented
+by this planning work.
+
+## Review checks
+
+- Both floor plans rendered and inspected in Chrome at desktop and phone
+  widths, in light and dark themes, without page errors or horizontal overflow.
+- Room centres and all four proposed stair areas lie inside each relevant
+  exterior outline; the three ground-only rooms are absent upstairs.
+- First-floor fire-escape marks agree with the exterior detail modules. The
+  lower/upper availability differs where the exterior has only an upper door.
+- Room, stair and exit selection shows the corresponding description and floor.
+- No game code changed, so the browser game suite and model compilation were
+  not run. Unity, Blender and compiled browser models were not regenerated.
+
+## Sealed wall joins (2 October 2026 follow-up)
+
+The owner's in-game Reception view shows a full-height slit where an internal
+wall stopped short of the front exterior wall. Sampled partition clipping left
+similar gaps elsewhere. The shared browser layout now extends short wall ends
+to their adjoining runs, including straight continuations, T-junctions and
+slightly offset parallel walls with overlapping masonry footprints. Extensions
+are limited to 0.3 scene units from each original sampled end.
+
+Brick, plaster, skirting, maps and collision consume those joined wall lines.
+This supersedes the skirting-only gap repair above. Straight full-height
+masonry runs merge after window cuts to remove internal caps and hairline
+seams. Doorways and stair mouths
+retain their intended openings. This is a browser construction correction;
+the plan outlines, exterior model, Unity, Blender and packaged exports are
+unaffected by this change. Validation and visual comparisons are recorded in
+`../../DEVELOPMENT.md` and `../../Browser/artifacts/asylum-wall-joins/`.

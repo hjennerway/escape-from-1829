@@ -1,0 +1,46 @@
+{
+  "views": 9,
+  "renders": [
+    {
+      "name": "reception-left",
+      "calls": 175,
+      "triangles": 105154
+    },
+    {
+      "name": "reception-left-oblique",
+      "calls": 159,
+      "triangles": 105122
+    },
+    {
+      "name": "reception-left-upper",
+      "calls": 174,
+      "triangles": 105152
+    },
+    {
+      "name": "reception-right",
+      "calls": 54,
+      "triangles": 87916
+    },
+    {
+      "name": "stair-room-rear",
+      "calls": 59,
+      "triangles": 94450
+    },
+    {
+      "name": "east-bay",
+      "calls": 26,
+      "triangles": 70988
+    },
+    {
+      "name": "upper-west-rear",
+      "calls": 58,
+      "triangles": 90530
+    },
+    {
+      "name": "basement-front",
+      "calls": 68,
+      "triangles": 90310
+    }
+  ],
+  "errors": []
+}

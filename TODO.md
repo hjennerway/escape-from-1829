@@ -57,21 +57,30 @@ Increase replayability by randomising selected puzzle and escape elements while 
 
 Add a notebook that records useful information as the player discovers it, replacing conventional quest markers where possible.
 
-- [ ] Design a notebook/journal UI accessible during Asylum Escape.
-- [ ] Automatically add entries when the player discovers important clues.
-- [ ] Potential notebook content:
+- [x] Design a notebook/journal UI accessible during Asylum Escape.
+- [x] Automatically add entries when the player discovers important clues.
+- [x] Consider potential notebook content:
   - rough floor-plan sketches;
   - discovered rooms and routes;
-  - staff/patient names;
   - dates and historical facts relevant to puzzles;
   - diagnoses/treatments found in records;
   - copied or paraphrased document clues;
   - observations such as "The east and west wings appear symmetrical";
   - known locked doors and possible ways around them.
-- [ ] Distinguish discovered facts from deductions/hints.
-- [ ] Avoid turning the notebook into a conventional objective checklist.
-- [ ] Consider allowing entries to update as the player learns more.
-- [ ] Decide whether opening/reading the notebook pauses NPC movement, similar to close inspection of artwork.
+- [x] Distinguish discovered facts from deductions/hints.
+- [x] Avoid turning the notebook into a conventional objective checklist.
+- [x] Consider allowing entries to update as the player learns more.
+- [x] The notebook should include a larger version of the map, which should be changed to have a "fog of war" effect which slowly reveals the map in a small radius around the player as the player explores.
+- [x] Opening/reading the notebook should pause NPC movement, similar to close inspection of artwork.
+
+Implemented in the browser game: **Tab/M/N** (or **J**) and the touch **NOTES**
+button open the notebook. Explored places, inspected records and observed/tested
+doors and stairs add or update notes. Facts and deductions have separate sections.
+Each floor and the grounds retain their own explored sketch for the current run;
+the minimap uses the same fog. Reading freezes the player, NPCs and timer.
+Current outside doors are usable; locked-door and treatment-document notes can
+follow when those puzzle elements exist. Implementation and validation details
+are in `DEVELOPMENT.md`.
 
 ## 5. Upper/lower floor transition
 

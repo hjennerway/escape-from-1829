@@ -1,0 +1,9 @@
+npm notice run test:asylum
+npm notice run node test-asylum-layout.mjs && node test-asylum-stairs.mjs && node test-asylum-skirting.mjs && node test-asylum-outside.mjs && node test-asylum-browser.mjs && node test-asylum-doorways-browser.mjs
+PASS: revised three-floor footprint, all rooms/doors reachable, S1 relocation, S2 removal, S5 basement connection, continuous stairs up/down, batched architecture (2417 ms).
+PASS: square guarded wells, Reception basement connection, 882 visible support/headroom samples, 60 fall barriers, all 23 door routes physically walked.
+PASS: 1538 window skirting samples, 4179 single-surface top samples, convex/concave/angled mitres, intersecting/duplicate partitions, 69 clear door samples, unchanged navigation.
+PASS: every outside arrival clears walls and has support; all seven fire escapes descend/climb using the rendered treads.
+PASS: game exterior batching preserves original collision/support and render visibility.
+PASS: actual three-floor game, 23 E door round trips with release latch, walked basement/ground/first stair, raised outside landing, desktop/mobile renders, no runtime errors.
+PASS: room doorways rendered in all four orientations and on three floors, desktop/mobile captures, actual player traversal, no page or shader errors.

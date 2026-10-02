@@ -1,0 +1,14 @@
+{
+  "captures": [
+    "after-approach.png",
+    "after-entrance.png",
+    "after-open-room.png",
+    "after-reverse.png",
+    "after-left-flare.png",
+    "after-right-flare.png",
+    "after-outside-door.png",
+    "after-mobile.png"
+  ],
+  "walks": 2,
+  "errors": []
+}
