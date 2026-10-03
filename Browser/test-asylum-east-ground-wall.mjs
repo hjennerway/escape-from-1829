@@ -39,5 +39,5 @@ for(const route of [
  const points=reverse?[...route].reverse():route,actor={x:points[0][0],z:points[0][1],floor:0,y:0};
  for(const [x,z] of points.slice(1)){moveAsylumActor(floors,actor,x-actor.x,z-actor.z);assert(Math.hypot(actor.x-x,actor.z-z)<1e-6,`The room doorway and forward corridor remain walkable in both directions: ${actor.x},${actor.z} → ${x},${z}, reverse ${reverse}`);}
 }
-assert(!flatWalkable(floors[1],34.5,19.4,.01),'The owner-requested R35 pillar removal is confined to the ground floor');
-console.log(`PASS: ${samples} masonry/skirting rays, removed ground-floor pillar, continuous diagonal wall, room/corridor walks and retained upper-floor R35 fragment.`);
+assert(flatWalkable(floors[1],34.5,19.4,.34),'The later all-floor request removes the matching first-floor pillar too');
+console.log(`PASS: ${samples} masonry/skirting rays, removed pillars on both floors, continuous diagonal wall and room/corridor walks.`);

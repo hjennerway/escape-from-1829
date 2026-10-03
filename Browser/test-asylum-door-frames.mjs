@@ -6,7 +6,7 @@ import {buildAsylumArchitecture} from './dist/asylum-architecture.mjs';
 
 const plan=JSON.parse(await readFile(new URL('./dist/asylum-plan.json',import.meta.url))),snapshot=JSON.stringify(plan);
 const floors=buildAsylumLayout(plan).floors,ray=new THREE.Raycaster(),matrix=new THREE.Matrix4();
-let exits=0,rooms=0,entrances=0,samples=0;
+let exits=0,rooms=0,entrances=0,samples=0,depthSamples=0;
 for(const floor of floors){
  const scene=new THREE.Scene();buildAsylumArchitecture(THREE,scene,floor);scene.updateMatrixWorld(true);
  const masonry=['Asylum Brick','Asylum Plaster'].map(name=>scene.getObjectByName(name));
@@ -62,18 +62,29 @@ for(const floor of floors){
   exits++;
  }
  for(const door of floor.doorways){
+  const label=`Floor ${floor.id} ${door.roomId??door.partitionId}`;
+  assert(Math.abs(door.depth-.18)<1e-7,`${label}: interior doorway uses regular .18-unit wall thickness`);
   const normal=new THREE.Vector3(-door.dz,0,door.dx),tangent=new THREE.Vector3(door.dx,0,door.dz),centre=new THREE.Vector3(door.x,0,door.z);
   for(const side of [-1,1])for(const y of [.35,1.65,2.4]){
    const p=centre.clone().addScaledVector(tangent,side*(door.width/2+.08));p.y=y;
-   supported(p,normal,scene.getObjectByName('Asylum DoorFrame'),`Floor ${floor.id} ${door.roomId??door.partitionId} jamb`,door.depth+.108);
+   supported(p,normal,scene.getObjectByName('Asylum DoorFrame'),`${label} jamb`,.288);
   }
   for(const u of [-door.width/2,0,door.width/2]){
    const p=centre.clone().addScaledVector(tangent,u);p.y=door.height+.065;
-   supported(p,normal,scene.getObjectByName('Asylum DoorFrame'),`Floor ${floor.id} ${door.roomId??door.partitionId} lintel`,door.depth+.108);
+   supported(p,normal,scene.getObjectByName('Asylum DoorFrame'),`${label} lintel`,.288);
+  }
+  // Survey the outer casing faces independently of doorway metadata.
+  // The regular .18 wall plus .054 casing on each face totals .288.
+  for(const side of [-1,1])for(const u of [-door.width/2+.025,door.width/2-.025]){
+   const p=centre.clone().addScaledVector(tangent,u);p.y=1.65;
+   ray.set(p.addScaledVector(normal,side*.4),normal.clone().multiplyScalar(-side));ray.far=.8;
+   const hit=ray.intersectObject(scene.getObjectByName('Asylum DoorFrame'),false)[0];
+   assert(hit&&Math.abs(hit.distance-(.4-.288/2))<1e-5,`${label}: timber casing has regular depth on both faces`);
+   depthSamples++;
   }
   rooms++;
  }
 }
 assert.equal(JSON.stringify(plan),snapshot,'Frame fitting does not mutate the shared plan');
 assert.equal(exits,22);assert.equal(entrances,1);assert.equal(rooms,89);
-console.log(`PASS: ${exits+entrances} outside frames and ${rooms} room frames on four floors, ${samples} masonry support/face-clearance rays, closed leaves and unchanged exterior anchors.`);
+console.log(`PASS: ${exits+entrances} outside frames and ${rooms} regular-depth room frames on four floors, ${samples} masonry support/face-clearance rays and ${depthSamples} casing-depth rays, closed leaves and unchanged exterior anchors.`);

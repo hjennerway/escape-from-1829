@@ -1,0 +1,78 @@
+[
+  {
+    "test": "test-asylum-wall-ceilings.mjs",
+    "status": 0
+  },
+  {
+    "test": "test-asylum-basement-end.mjs",
+    "status": 0
+  },
+  {
+    "test": "test-asylum-windows.mjs",
+    "status": 0
+  },
+  {
+    "test": "test-asylum-window-clearance.mjs",
+    "status": 0
+  },
+  {
+    "test": "test-asylum-doorways.mjs",
+    "status": 0
+  },
+  {
+    "test": "test-asylum-door-frames.mjs",
+    "status": 0
+  },
+  {
+    "test": "test-asylum-exit-surrounds.mjs",
+    "status": 0
+  },
+  {
+    "test": "test-asylum-east-corner.mjs",
+    "status": 0
+  },
+  {
+    "test": "test-asylum-east-ground-wall.mjs",
+    "status": 0
+  },
+  {
+    "test": "test-asylum-east-corridor.mjs",
+    "status": 0
+  },
+  {
+    "test": "test-asylum-east-rear-wall.mjs",
+    "status": 0
+  },
+  {
+    "test": "test-asylum-east-first-wall.mjs",
+    "status": 0
+  },
+  {
+    "test": "test-asylum-stairs.mjs",
+    "status": 0
+  },
+  {
+    "test": "test-asylum-slabs.mjs",
+    "status": 0
+  },
+  {
+    "test": "test-asylum-skirting.mjs",
+    "status": 0
+  },
+  {
+    "test": "test-asylum-outside.mjs",
+    "status": 0
+  },
+  {
+    "test": "test-interior-architecture.mjs",
+    "status": 0
+  },
+  {
+    "test": "test-interior-lights.mjs",
+    "status": 0
+  },
+  {
+    "test": "test-explore-interior.mjs",
+    "status": 0
+  }
+]

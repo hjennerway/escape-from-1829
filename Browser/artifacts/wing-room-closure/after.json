@@ -1,0 +1,86 @@
+{
+  "views": 18,
+  "movements": [
+    {
+      "floor": 0,
+      "side": -1,
+      "reverse": false,
+      "pass": true,
+      "end": [
+        -37.6601984141073,
+        24.4996124881627
+      ]
+    },
+    {
+      "floor": 0,
+      "side": -1,
+      "reverse": true,
+      "pass": true,
+      "end": [
+        -36.290005748721335,
+        13.842725107188379
+      ]
+    },
+    {
+      "floor": 0,
+      "side": 1,
+      "reverse": false,
+      "pass": true,
+      "end": [
+        37.6601984141073,
+        24.4996124881627
+      ]
+    },
+    {
+      "floor": 0,
+      "side": 1,
+      "reverse": true,
+      "pass": true,
+      "end": [
+        36.290005748721335,
+        13.842725107188379
+      ]
+    },
+    {
+      "floor": 1,
+      "side": -1,
+      "reverse": false,
+      "pass": true,
+      "end": [
+        -37.6601984141073,
+        24.4996124881627
+      ]
+    },
+    {
+      "floor": 1,
+      "side": -1,
+      "reverse": true,
+      "pass": true,
+      "end": [
+        -36.290005748721335,
+        13.842725107188379
+      ]
+    },
+    {
+      "floor": 1,
+      "side": 1,
+      "reverse": false,
+      "pass": true,
+      "end": [
+        37.6601984141073,
+        24.4996124881627
+      ]
+    },
+    {
+      "floor": 1,
+      "side": 1,
+      "reverse": true,
+      "pass": true,
+      "end": [
+        36.290005748721335,
+        13.842725107188379
+      ]
+    }
+  ],
+  "errors": []
+}

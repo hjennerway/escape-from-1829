@@ -44,8 +44,8 @@ for(const floor of floors){
     assert.equal(hits.filter(h=>Math.abs(h.distance-front.distance)<1e-6).length,1,`${label} frame/head joint has no competing faces`);
    }
    for(const u of [-1.2,1.2]){
-    if(floor.id===1&&d.roomId==='R27'&&u<0){
-     // The owner's L-shaped enclosure turns beside this jamb. The old
+    if(d.roomId==='R27'&&floor.id===1&&u<0){
+     // The first-floor L-shaped enclosure turns beside this jamb. The old
      // broad-front probe starts inside that return from the room side;
      // inspect both exposed faces of the new frontage instead.
      ray.set(new THREE.Vector3(48.62+side*.4,1.65,7.65),new THREE.Vector3(-side,0,0));ray.far=.8;

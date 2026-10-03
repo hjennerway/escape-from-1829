@@ -1,5 +1,89 @@
 # 1829 revised interior plans — 2 October 2026
 
+## Enclosed room joins across all floors (3 October 2026)
+
+The owner's [marked pillar-and-gap view](room-closures-reference.png) and
+follow-up request apply the same repair to matching joins throughout the
+building. R33's west forward entrance now matches R35's closed diagonal on
+both ground and first floors: (-36.9, 19.1) to (-34.5, 22.85), mirrored in the
+east. The loose corner piers are removed. R32/R36's forward-room diagonals
+also match on both levels, with corresponding outside 45-degree corners
+retaining the already reviewed corridor clearance.
+
+R22's west cross-range return now continues upstairs. R11 gains its missing
+southern boundary beside the central corridor, with its side doorway and P1
+connection retained. R17 is enclosed between x=-69.65 and -66, z=7.4 and 16.7;
+the reserved north/east/south lobbies keep D2, R18 and F4 connected without
+passing through the room. R30's ground-floor return runs from (67.1, 19.5) to
+(69.7, 20.5), enclosing the room beyond D8's perpendicular lobby. Basement
+B11's west wall follows x=-7.8 from z=9.4 to 17.3, removing its short isolated
+pier while leaving the Reception stair and D13 lobby accessible.
+
+Explicit room variants retain these complete boundaries instead of clipping
+them to corridor widths. Visible masonry, skirting, walking collision,
+navigation and notebook maps use the same plan. R27's separately reviewed
+ground-floor diagonal and first-floor L-shaped return are preserved. The
+second-floor rooms are already enclosed; the four-floor audit finds no
+additional loose room-wall ends beyond fitted openings and stair mouths.
+
+Both shared JSON copies and the ground/first/basement SVG/PNG drawings are
+updated. These are owner-directed gameplay dimensions. Browser interior
+sources and drawings are updated; Unity, Blender and packaged exports were
+not regenerated. The aerial compiler excludes these inputs and its existing
+compiled manifest still matches its sources. Validation and before/after
+views are in `../../Browser/artifacts/wing-room-closure/` and
+`../../DEVELOPMENT.md`. This supersedes the earlier ground-floor-only scope
+for the R35 pillar and R36 enclosure.
+
+## Ground-floor cross-range bends, east and west (3 October 2026)
+
+The owner's [purple/yellow marked view](east-ground-bend-reference.png)
+closes R27's ground-floor northwest opening between the existing wall ends:
+(45.1, 8.5351) to (46.6140, 7). The opposite square outline corner at
+(45.1, 7) is cut back by 1.75 on both sides, creating the requested 45-degree
+face from (43.35, 7) to (45.1, 5.25). The floor and ceiling fill that triangle.
+The C1 corridor keeps just over 2.1 units of clear width at this bend, and
+R27's green doorway remains at (49.75, 7).
+
+The follow-up request covers the corresponding west bend. Its proportions
+are different: R22's northeast opening joins (-39.0976, 2.2) to (-38, 5.2658).
+Opposite it, R4's southwest square room corner becomes a 45-degree face from
+(-34.6, 5.25) to (-32.85, 7). Both existing room doorways remain fitted and
+walkable. Ground-floor variants retain the complete new room edges instead
+of allowing corridor-width clipping to reopen them. Cream upper brick, red
+lower brick and dark skirting share the collision and mapping boundaries.
+
+Both plan JSON copies and the ground-floor SVG/PNG drawing are updated.
+These owner-directed gameplay corrections supersede R27's old ground-floor
+corner; its separate first-floor enclosure retains its established boundary.
+R27's ground-floor diagonal is deliberately independent of that first-floor
+L-shaped return; general room-closure updates should preserve this marked face.
+The aerial compiler excludes these interior inputs, so no aerial rebuild is
+needed. Unity, Blender and packaged exports are not regenerated. Checks and
+reviewed views are under `../../Browser/artifacts/east-ground-bend/`;
+validation details are in `../../DEVELOPMENT.md`.
+
+## Regular interior doorway thickness (3 October 2026)
+
+The owner's green-doorway screenshot requests regular wall thickness for all
+interior surrounds in this style. R21, R30 and R31's north partitions were
+offset from the adjoining cross-range partitions, giving their ground/first
+floor frames depths of 0.58, 0.83 and 0.58 scene units respectively. Both shared
+plan copies now align those north edges at z=19.5. All 89 interior openings
+therefore use the existing 0.18-unit masonry depth, with the same timber
+returns, casing, clear opening and level threshold as the other room doors.
+This supersedes the deep bay-room jambs described in the October 2 entry.
+
+Masonry, skirting, collision, navigation and notebook mapping derive from the
+corrected room boundaries. The ground/first-floor SVG/PNG drawings are
+regenerated. Eight affected wall-join probes follow the corrected corners;
+R30's ground-floor outside pier is checked beyond D8's retained aperture.
+These are owner-directed gameplay dimensions, not historical measurements.
+Validation and before/after views are in
+`../../Browser/artifacts/interior-door-thickness/` and `../../DEVELOPMENT.md`.
+The separate aerial compiler excludes this interior input; Unity, Blender
+and packaged exports are not regenerated for this repair.
+
 ## East rear ground-floor wall closure (3 October 2026)
 
 The owner's [purple-line reference](east-rear-wall-reference.png) closes the

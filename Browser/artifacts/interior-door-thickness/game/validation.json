@@ -1,0 +1,81 @@
+{
+  "renders": [
+    {
+      "name": "ground-front",
+      "calls": 71,
+      "triangles": 120208
+    },
+    {
+      "name": "ground-room",
+      "calls": 179,
+      "triangles": 132488
+    },
+    {
+      "name": "corridor",
+      "calls": 196,
+      "triangles": 132596
+    },
+    {
+      "name": "upper-room",
+      "calls": 49,
+      "triangles": 110534
+    },
+    {
+      "name": "west-rear",
+      "calls": 211,
+      "triangles": 132626
+    },
+    {
+      "name": "east-rear",
+      "calls": 251,
+      "triangles": 133096
+    },
+    {
+      "name": "south-door",
+      "calls": 225,
+      "triangles": 132404
+    },
+    {
+      "name": "east-pavilion",
+      "calls": 28,
+      "triangles": 89532
+    },
+    {
+      "name": "west-bay",
+      "calls": 27,
+      "triangles": 89564
+    },
+    {
+      "name": "east-bay",
+      "calls": 32,
+      "triangles": 89540
+    },
+    {
+      "name": "upper-west-bay",
+      "calls": 28,
+      "triangles": 89600
+    },
+    {
+      "name": "upper-east-bay",
+      "calls": 32,
+      "triangles": 89540
+    },
+    {
+      "name": "upper-east-pavilion",
+      "calls": 28,
+      "triangles": 89532
+    },
+    {
+      "name": "basement",
+      "calls": 57,
+      "triangles": 114078
+    },
+    {
+      "name": "basement-rear",
+      "calls": 40,
+      "triangles": 114044
+    }
+  ],
+  "walks": 9,
+  "errors": []
+}

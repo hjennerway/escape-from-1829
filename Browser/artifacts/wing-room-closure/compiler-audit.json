@@ -1,0 +1,17 @@
+{
+  "inputs": 171,
+  "interiorExcluded": true,
+  "sourceHash": "5489442e7da6da8d2b32480767f428299e8b66b0589e074d6dc471a21ed9af8d",
+  "compiledSourceHash": "5489442e7da6da8d2b32480767f428299e8b66b0589e074d6dc471a21ed9af8d",
+  "compiledMatches": true,
+  "unrelatedTests": {
+    "test-jarman.mjs": {
+      "inputs": 140,
+      "interiorInputs": false
+    },
+    "test-leighton-newton.mjs": {
+      "inputs": 164,
+      "interiorInputs": false
+    }
+  }
+}

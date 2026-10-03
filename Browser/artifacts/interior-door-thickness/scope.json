@@ -1,0 +1,29 @@
+{
+  "sharedEqual": true,
+  "doorwayRooms": [
+    "R21",
+    "R30",
+    "R31"
+  ],
+  "regularDepth": 0.18,
+  "repairedEntrances": 6,
+  "concurrentRooms": [
+    "R4",
+    "R11",
+    "R17",
+    "R22",
+    "R27",
+    "R32",
+    "R33",
+    "R35",
+    "R36",
+    "B11"
+  ],
+  "concurrentFields": [
+    "floors",
+    "corridors"
+  ],
+  "sourceHash": "5489442e7da6da8d2b32480767f428299e8b66b0589e074d6dc471a21ed9af8d",
+  "compiledHash": "5489442e7da6da8d2b32480767f428299e8b66b0589e074d6dc471a21ed9af8d",
+  "compiledCurrent": true
+}

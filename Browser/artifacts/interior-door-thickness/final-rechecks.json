@@ -1,0 +1,10 @@
+[
+  {
+    "test": "test-asylum-door-frames.mjs",
+    "status": 0
+  },
+  {
+    "test": "test-asylum-doorways.mjs",
+    "status": 0
+  }
+]

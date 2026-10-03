@@ -38,8 +38,8 @@ for(const [x,z] of [[31.6,26.7],[31.7,26.5]])for(const [name,y,dy] of [['Asylum 
  ray.set(new THREE.Vector3(x,y,z),new THREE.Vector3(0,dy,0));ray.far=2;
  assert.equal(ray.intersectObjects(scene.children,false)[0]?.object.name,name,'The cut-back triangle has a continuous floor and ceiling');
 }
-assert(!flatWalkable(floors[1],32,26.8,.01),'The first-floor square corner is retained');
-assert(flatWalkable(floors[1],32.65,28.2,.01),'The new purple wall is ground-floor only');
+assert(flatWalkable(floors[1],32,26.8,.34),'The later all-floor request retains matching first-floor corridor clearance');
+assert(!flatWalkable(floors[1],32.65,28.2,.01),'The matching first-floor room has the same enclosure');
 const routes=[
  [[33.3,24.5],[33.3,26],[32.1,26.8],[30.25,29],[30.25,35]],
  [[30.25,32],[33,32]],
@@ -52,4 +52,4 @@ for(const route of routes)for(const reverse of [false,true]){
  for(const [x,z] of points.slice(1)){moveAsylumActor(floors,actor,x-actor.x,z-actor.z);assert(Math.hypot(actor.x-x,actor.z-z)<1e-6,`The bend and both room doorways stay walkable: ${actor.x},${actor.z} → ${x},${z}, reverse ${reverse}`);}
 }
 for(const id of ['R35','R36'])assert(floor.doorways.some(d=>d.roomId===id),'Both green room surrounds remain fitted');
-console.log(`PASS: ${probes} wall/corner masonry and skirting rays, solid joins, widened corner, four routes walked both ways and ground-floor scope.`);
+console.log(`PASS: ${probes} wall/corner masonry and skirting rays, solid joins, widened corners on both floors and four routes walked both ways.`);

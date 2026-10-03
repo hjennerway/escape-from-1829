@@ -1,0 +1,14 @@
+{
+  "ref": "16abbbb",
+  "modules": 132,
+  "geometry": {
+    "jarman": {
+      "primitives": 820082,
+      "sha256": "fc9e9e93301bf0a9e6b68e2850cfea2fcc896c6fef2dee164fb293ebcac524b8"
+    },
+    "leighton": {
+      "count": 884129,
+      "sha256": "198a2a090e08ab944f561008923c42d49405f8597a8fd627b4df4c076a2d691f"
+    }
+  }
+}

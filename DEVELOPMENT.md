@@ -1,3 +1,145 @@
+## Room enclosure and pillar audit across all floors (3 October 2026)
+
+The owner's marked screenshot and later all-floor request extend the existing
+room-closure treatment throughout the browser interior. R33/R35's forward
+entrance diagonals and R32/R36's adjoining forward-room returns now match on
+ground and first floors. Their outside corners reserve the reviewed passage
+width. R22's cross-range closure continues upstairs. R11's southern wall,
+R17's enclosed room with separate north/east/south lobbies, R30's ground-floor
+return beyond D8 and B11's basement lobby-side boundary close the remaining
+unframed openings and remove their short isolated masonry piers. R27's
+separately reviewed ground diagonal and upper L return are preserved.
+
+All changes are explicit shared room/corridor variants. Rendering, maps,
+navigation and collision therefore consume the same new boundaries; existing
+runtime exterior shadow/obstacle refresh paths are unaffected. Both plan JSON
+copies and the ground/first/basement review drawings are updated. Second-floor
+rooms already meet the enclosure requirement and retain their geometry.
+
+The new test-asylum-room-closures.mjs is included in npm test and test:asylum.
+It passes 2,880 two-face masonry/skirting rays over 18 new wall sections,
+36 player collision attempts, removed-pillar footprint checks and an audit of
+710 internal wall ends on all four floors. Fitted room/outside openings,
+existing masonry contacts and guarded stair mouths are the explicit exceptions.
+The original open-wall layout fails the first independent closure probe.
+Two obsolete R17 south-corner probes were retired from the older join fixture;
+129 existing sampled joins and the full mitred-corner survey still pass.
+
+Focused validation passes every room/exit navigation route, all stair
+connections, all 23 physically walked outside-door routes, 89 framed room
+doorways and 534 doorway walking passes, regular frame support/depth,
+274 retained windows, window clearance, skirting, floor/ceiling solids and
+the existing east/west room corrections. Earlier assertions retaining the
+upper R35 pillar or R36 opening now reflect the user's expanded scope.
+
+The actual exploration browser captures 18 before and 18 after desktop/mobile
+views across four floors and walks both entrance approaches in both directions
+on both lower levels (eight passes), without page or shader errors. The
+marked join, mirrored upper join, adjoining forward rooms, west cross-range,
+pavilion lobbies, central room and basement were visually reviewed. Evidence,
+repeatable runners and the original-model rejection are retained in
+Browser/artifacts/wing-room-closure/. Full-suite results are recorded below.
+
+A dependency audit confirms all 171 aerial compiler inputs exclude the edited
+interior plan/layout. The existing compiled manifest matches the source hash,
+so an aerial rebuild is unnecessary and was not performed. Browser interior
+sources, tests and review drawings are updated. Unity, Blender and packaged
+desktop/mobile exports were not regenerated. Concurrent doorway-thickness
+and ground-floor cross-range work in the shared checkout was preserved.
+
+## Regular interior doorway thickness (3 October 2026)
+
+Six green room surrounds were unusually deep because R21, R30 and R31's north
+partitions were offset from their adjoining cross-range walls on the ground
+and first floors. The existing renderer spanned both jamb planes, producing
+0.58, 0.83 and 0.58-unit masonry depths. Both shared plan JSON copies now align
+those room fronts at z=19.5. All 89 interior openings use the regular 0.18-unit
+wall depth and the existing timber casing. Masonry, skirting, walking collision,
+navigation and notebook mapping rebuild from the same corrected boundaries;
+the ground/first-floor SVG/PNG drawings are regenerated. Concurrent interior
+edits in the shared workspace are preserved.
+
+`test-asylum-door-frames.mjs` now requires regular depth for every interior
+opening, with 356 independent rendered casing-depth rays in addition to its
+2,724 masonry support/face-clearance rays and all 23 outside frames. The saved
+original plan fails at R21. Eight wall-join survey entries follow the corrected
+bay corners; the ground R30 outside-pier probe sits beyond D8's retained
+aperture. All 131 surveyed joins and the full mitred-corner survey pass.
+`test-asylum-doorways.mjs` passes all 534 bidirectional walking routes. All 19
+focused interior, stair, window, skirting and Explore checks pass.
+
+Explore before/after captures cover each repaired doorway from both sides,
+with a full-frame phone view. The actual game doorway browser check captures
+all six repaired entrances and passes nine player crossings. The general game
+browser check passes all 23 E door round trips, the release latch, continuous
+basement/ground/first-floor stair travel and raised outside landing. Reviewed
+views have no page or shader errors. Evidence and logs are under
+`Browser/artifacts/interior-door-thickness/`, including `focused-results.json`,
+`regression-before.log`, `game/` and `game-interactions/`.
+
+The final `npm test` run passes the interior and walking checks, then stops in
+`test-jarman.mjs` on the existing protected exterior snapshot: 818,930 actual
+primitives versus 820,082 expected. `jarman-scope.json` verifies that all 140
+imported source modules and the protected snapshot match HEAD and do not load
+the interior. The suite is therefore not reported as passing; the complete
+output is retained in `npm-test-final.log`. No exterior snapshots are changed.
+
+This repair updates browser interior plan sources, checks, review drawings and
+notes. The separate aerial compiler excludes this interior input; its compiled
+manifest retains the current source fingerprint and needs no rebuild. Unity,
+Blender and packaged desktop/Android exports are not regenerated. Modelling
+references are in `Research/1829-interior-proposal/README.md`.
+
+## Ground-floor cross-range wall bends, east and west (3 October 2026)
+
+The owner's purple/yellow ground-floor screenshot closes R27's northwest
+wall gap and replaces the opposite outline's square corner with a 45-degree
+face. The closure joins the existing wall ends at (45.1, 8.5351) and
+(46.6140, 7). The opposite face joins (43.35, 7) to (45.1, 5.25), filling the
+cut-back triangle with floor and ceiling. The corridor retains over 2.1 units
+of clear width, and the green doorway stays at (49.75, 7).
+
+The requested west-wing comparison finds the same open room-front defect at
+R22's corresponding cross-range bend, with different proportions. Its new
+wall joins (-39.0976, 2.2) to (-38, 5.2658); opposite R4's room corner has a
+45-degree face from (-34.6, 5.25) to (-32.85, 7). Ground-floor room variants
+retain complete wall ends and doorway piers. Cream/red masonry, dark skirting,
+walking collision, navigation and notebook mapping derive from the same
+boundaries. Both shared plan copies and the ground-floor SVG/PNG are updated;
+other ongoing doorway and room edits in this checkout are preserved.
+The final merge with the general room-closure work retains R27's marked
+ground-floor diagonal and its separate first-floor L-shaped return. The regular
+doorway survey uses its return-face probe on the first floor only, while the
+ground-floor survey checks the straight frontage beside the retained doorway.
+
+`test-asylum-cross-range-bends.mjs`, included in `npm test` and `test:asylum`,
+passes 640 masonry/skirting rays across both faces of all four new wall runs,
+endpoint joins, floor/ceiling coverage, seven routes walked in both directions,
+retained room surrounds and comparison of the other floors with a control
+plan removing this repair. The original east boundary fails the new solid-wall
+assertion. `test-asylum-cross-range-bends-browser.mjs`, included in
+`test:asylum`, passes 14 walks through Explore's actual input/update adapter
+and captures ten desktop/mobile/first-floor comparison views without page or
+shader errors. The final views are visually reviewed. Evidence, the original
+plan and the control loader are under `Browser/artifacts/east-ground-bend/`.
+The final actual-game check also passes all 23 outside-door E round trips,
+the release latch, walked basement/ground/first-floor stairs, a raised outside
+landing and desktop/mobile rendering without runtime errors. Its output is
+retained in `game-check-final.log` in the same directory.
+
+The full `npm test` run passes the interior, wall-join, window, doorway, stair,
+slab, skirting and walking checks, then stops at the existing Jarman exterior
+snapshot: 818,930 primitives versus 820,082 expected. A control run removing
+only these ground-floor bend changes produces the identical count and hash;
+no exterior snapshot baseline is changed. The logs are `npm-test-final.log` and
+`control-jarman.log` in the evidence directory, so the full suite is not
+reported as passing.
+
+This changes browser interior sources, regression checks and the review plan.
+The aerial compiler excludes these inputs, so no aerial asset rebuild is
+needed. Unity, Blender and packaged desktop/Android exports are not regenerated.
+References and dimensions are in `Research/1829-interior-proposal/README.md`.
+
 ## Exterior U-shaped stairs and clearance audit (3 October 2026)
 
 The inner east-wing exterior stair had two opposed flights in the same lane,

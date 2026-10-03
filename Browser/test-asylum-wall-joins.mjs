@@ -29,6 +29,8 @@ const plan=JSON.parse(await readFile(new URL('./dist/asylum-plan.json',import.me
 const floors=buildAsylumLayout(plan).floors;
 // Fixed survey of the reported Reception seam and equivalent sampled gaps,
 // retained independently of the joining algorithm for rendered regression tests.
+// Bay-room corner probes follow the aligned z=19.5 frontage. Ground R30's
+// outer pier is beyond D8's retained doorway opening, starting at z=19.74.
 const fixtures=JSON.parse(await readFile(new URL('./fixtures/asylum-wall-joins.json',import.meta.url)));
 const ray=new THREE.Raycaster();let joins=0,samples=0;
 for(const fixture of fixtures){

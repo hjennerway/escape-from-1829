@@ -19,7 +19,10 @@ window.doorwayCheck={get ready(){return ready;},get floors(){return floors;},get
   ['ground-front',-20.5,7.2,0,-20.5,12],['ground-room',-22,14,0,-20.5,9.4],
   ['corridor',-27,8.2,0,-15,8.2],['upper-room',20.5,7.2,1,20.5,12],
   ['west-rear',-36.7,-22,0,-32,-21.4],['east-rear',36.8,-14.5,1,32,-14.5],
-  ['south-door',-43.2,38.15,0,-43.2,34],['deep-bay',65.5,17.8,0,65.5,22],
+  ['south-door',-43.2,38.15,0,-43.2,34],['east-pavilion',65.5,17.8,0,65.5,22],
+  ['west-bay',-51.85,17.4,0,-52.5,20.5],['east-bay',53.75,17.4,0,53.1,20.5],
+  ['upper-west-bay',-51.85,17.4,1,-52.5,20.5],['upper-east-bay',53.75,17.4,1,53.1,20.5],
+  ['upper-east-pavilion',66.15,17.4,1,65.5,20.5],
   ['basement',-30.4,-24.3,2,-34,-23.55],['basement-rear',-31.1,-27.8,2,-31.1,-32],
  ];
  const renders=[];
@@ -28,9 +31,13 @@ window.doorwayCheck={get ready(){return ready;},get floors(){return floors;},get
   await page.screenshot({path:fileURLToPath(new URL(name+'.png',destination))});
   renders.push(await page.evaluate(name=>({name,calls:window.doorwayCheck.renderer.info.render.calls,triangles:window.doorwayCheck.renderer.info.render.triangles}),name));
  }
- for(const [floor,id] of [[0,'R23'],[1,'R13'],[2,'B1']])assert(await page.evaluate(([floor,id])=>window.doorwayCheck.walk(floor,id),[floor,id]),'Actual player walks through '+id);
+ const crossings=[[0,'R23'],[1,'R13'],[2,'B1'],...[0,1].flatMap(floor=>['R21','R30','R31'].map(id=>[floor,id]))];
+ for(const [floor,id] of crossings)assert(await page.evaluate(([floor,id])=>window.doorwayCheck.walk(floor,id),[floor,id]),'Actual player walks through '+id+' floor '+floor);
  await page.setViewportSize({width:390,height:844});await page.evaluate(()=>window.doorwayCheck.pose(-20.5,7.2,0,-20.5,12));
- await page.screenshot({path:fileURLToPath(new URL('mobile.png',destination))});assert.deepEqual(errors,[]);
- await writeFile(new URL('validation.json',destination),JSON.stringify({renders,walks:3,errors},null,2)+'\n');
+ await page.screenshot({path:fileURLToPath(new URL('mobile.png',destination))});
+ await page.evaluate(()=>window.doorwayCheck.pose(65.95,14,0,65.5,20.5));
+ await page.evaluate(()=>new Promise(resolve=>requestAnimationFrame(()=>requestAnimationFrame(resolve))));
+ await page.screenshot({path:fileURLToPath(new URL('east-pavilion-mobile.png',destination))});assert.deepEqual(errors,[]);
+ await writeFile(new URL('validation.json',destination),JSON.stringify({renders,walks:crossings.length,errors},null,2)+'\n');
  console.log('PASS: room doorways rendered in all four orientations and on three floors, desktop/mobile captures, actual player traversal, no page or shader errors.');
 }finally{await browser.close();server.kill();}
