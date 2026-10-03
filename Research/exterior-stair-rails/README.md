@@ -1,5 +1,26 @@
 # Exterior stair flights and landings
 
+## Redesmere courtyard middle landing — 3 October 2026
+
+The owner's [walking screenshot](redesmere-landing-reference.png) identifies
+missing floor and railing on the middle landing of the east courtyard's
+two-flight fire escape. The image is visual evidence, not an additional
+instruction source.
+
+`Browser/dist/courtyard-photo-detail.mjs` extends the middle plate to the
+inner rail corner and fills the outer turning deck up to its wall-side edge.
+The guard now continues from the pavilion's end to the outer return guard.
+The door and both flight mouths retain their existing positions and remain
+open. The upper landing retains its existing geometry. These are corrections
+to the authored gameplay geometry, not newly surveyed historical dimensions.
+
+`Browser/test-exterior-stair-rails.mjs` checks 50 actual floor-support samples
+in the former holes, walks the completed deck, attempts six falls through the
+new rail section, and checks both door approaches. The original geometry fails
+at the first missing-floor sample. Browser sources and local generated aerial
+models are updated; Unity, Blender and packaged app exports are not regenerated.
+Before/after views and validation use `Browser/artifacts/redesmere-fire-escape/`.
+
 ## U-shaped returns and overlap clearance — 3 October 2026
 
 The owner's [east-wing walking screenshot](overlapping-east-reference.png)

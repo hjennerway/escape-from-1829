@@ -33,6 +33,8 @@ import {REDESMERE_CHIMNEY_VIEWS} from './redesmere-edge-chimney.mjs';
 import {createExploreWalker} from './explore-walker.mjs';
 import {buildAsylumLayout} from './asylum-layout.mjs';
 import {createExploreInterior} from './explore-interior.mjs';
+import {furnishAsylum} from './asylum-furniture.mjs';
+import {loadFurnitureModels} from './furniture-models.mjs';
 import {bindExploreInput} from './explore-input.mjs';
 import {sampleLanding} from './aerial-controls.mjs';
 import {beginIntroFlight} from './intro-navigation.mjs';
@@ -71,7 +73,8 @@ try{
   hint.textContent='Preparing the rooms and stairs…';
   const response=await fetch('./asylum-plan.json');if(!response.ok)throw Error('Floor plans could not load');
   const floors=buildAsylumLayout(await response.json()).floors;
-  const interior=createExploreInterior(THREE,floors);
+  furnishAsylum(floors);
+  const interior=createExploreInterior(THREE,floors,await loadFurnitureModels(THREE));
   const walker=createExploreWalker(THREE,exterior,floors);
   function refreshObstacles(){walker.setObstacles();}
   applyTreeRenderingDefault(renderer,exterior,refreshObstacles);
@@ -138,7 +141,7 @@ try{
   doorButton.addEventListener('click',()=>{walker.useDoor();canvas.focus({preventScroll:true});});
   const introFlight=beginIntroFlight(exterior.camera,{fallback:sampleLanding(0,{aspect:exterior.camera.aspect,cinematic:true})});
   const clock=new THREE.Timer();clock.connect(document);
-  renderer.setAnimationLoop(()=>{clock.update();const dt=clock.getDelta();if(document.hidden)return;if(introFlight?.active)introFlight.update(dt);else if(input.active)walker.update(dt);lighting.update(dt);interior.update(walker.actor);
+  renderer.setAnimationLoop(()=>{clock.update();const dt=clock.getDelta();if(document.hidden)return;if(introFlight?.active)introFlight.update(dt);else if(input.active)walker.update(dt);lighting.update(dt);interior.update(walker.actor,input.active?dt:0);
     const door=walker.nearbyDoor();doorButton.hidden=!door||!!introFlight?.active;
     if(door)doorButton.textContent=(walker.actor.outside?'Enter building':'Go outside')+' · E';
     renderer.render(walker.actor.outside?exterior.scene:interior.scene,exterior.camera);introFlight?.afterRender();});

@@ -83,3 +83,20 @@ Validation: all 68 browser-suite commands pass; the final photo-selection check
 was rerun after moving its probes to the revised frontage and recessed roof.
 Source/compiled rendering comparison and the rebuilt combined scene timeline
 pass. Final oblique, close and ground-level previews render without page errors.
+
+## Recessed door sill and base-course clearance (3 October 2026)
+
+The wider survey prompted by the west garden door found that the y=0.25
+terracotta course crossed both recessed door leaves. It now stops at the
+arch piers and the pale door's jambs, retaining the course beside each opening.
+The pale door's upper lights were made with a full window sash, including a
+projecting stone sill across the leaf. Those upper lights now omit that sill;
+their glass, frame, glazing rails and the lower door panels are retained.
+
+These changes fit the existing estimated model dimensions and retain all
+ward positions, wall/roof shapes, walking collision and the entrance landing.
+The existing protected-geometry and walking checks pass. The estate survey
+checks all 109 exterior doors across six periods and distinguishes authored
+glazing/panel rails from unintended projecting ledges. Before/after and
+compiled evidence is in `Browser/artifacts/door-trim/`. Browser sources and
+the local compiled aerial model are updated; Unity/Blender exports are unchanged.

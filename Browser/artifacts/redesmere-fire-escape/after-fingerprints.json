@@ -1,0 +1,23 @@
+{
+  "expected": {
+    "jarman": {
+      "primitives": 818930,
+      "sha256": "7cfb26f1ff8383b299619084b1a9e7e01fcb8bb64565b72953a3b6433035e69b"
+    },
+    "leighton": {
+      "count": 882977,
+      "sha256": "f20c539f2eb9060f9c2c0dccf0716e1fb8e51a451f07aa0dd62b459ae8604e74"
+    }
+  },
+  "actual": {
+    "jarman": {
+      "primitives": 818899,
+      "sha256": "648b54490e7aa90948a1ba14551494f3945fab12f7f2c4aaa0ecf1f4c31e9e79"
+    },
+    "leighton": {
+      "count": 882946,
+      "sha256": "2aa407fa83be2c92fc59d6d6b9fd64deac46198432173fc15f93fa6939c10a2d"
+    }
+  },
+  "matches": false
+}

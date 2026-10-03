@@ -49,7 +49,13 @@ export function addWestFrontPhotoDetails(THREE,{model,box,mesh,worldUV,white,bri
       if(x!==rightFlank||y!==2)sash('west-front-bay-flank',x,y,19.56,0,1.55,2.6);
       for(const dx of [-1.25,1.25])sash('west-front-bay-flank-sidelight',x+dx,y,19.56,0,.61,2.6);
     }
-    for(const y of [.53,3.48,4.98,7.93,9.92,12.69])box(white,x,y,19.72,3.78,.17,.24);
+    for(const y of [.53,3.48,4.98,7.93,9.92,12.69]){
+      // The garden entrance replaces the lower central sash. Its sill ends
+      // outside the doorframe, while the two sidelights retain their ledges.
+      if(x===rightFlank&&y===.53){
+        for(const side of [-1,1])box(white,x+side*1.42,y,19.72,.94,.17,.24);
+      }else box(white,x,y,19.72,3.78,.17,.24);
+    }
   }
   for(const x of [bayLeft-.1,bayRight+.25])box(iron,x,7.3,19.83,.075,14.6,.075);
   for(const [x,z,h] of [[outerLeft+.2,outerFront+.2,15],[leftFlank-1.85,19.7,14.2],[-41.18,29,8.5]])box(iron,x,h/2,z,.085,h,.085);

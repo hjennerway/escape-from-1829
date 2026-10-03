@@ -1,0 +1,677 @@
+{
+  "rooms": [
+    {
+      "floor": 0,
+      "id": "R18",
+      "shelves": [
+        {
+          "source": "shelf_B_large",
+          "width": 1.575,
+          "depth": 0.42000000000000004,
+          "height": 2.8499999999999996,
+          "stocked": true,
+          "x": -70.86749999999999,
+          "z": 26.2,
+          "rotation": -3.141592653589793,
+          "edge": 1,
+          "id": "0:R18:fixed:0",
+          "kind": "bookcase",
+          "roomId": "R18",
+          "variable": false,
+          "y": 0.008
+        },
+        {
+          "source": "shelf_B_large",
+          "width": 1.575,
+          "depth": 0.42000000000000004,
+          "height": 2.8499999999999996,
+          "stocked": true,
+          "x": -70.4325,
+          "z": 23.1,
+          "rotation": 0,
+          "edge": 3,
+          "id": "0:R18:fixed:1",
+          "kind": "bookcase",
+          "roomId": "R18",
+          "variable": false,
+          "y": 0.008
+        },
+        {
+          "source": "shelf_B_large",
+          "width": 1.575,
+          "depth": 0.42000000000000004,
+          "height": 2.8499999999999996,
+          "stocked": true,
+          "x": -65.1675,
+          "z": 26.2,
+          "rotation": -3.141592653589793,
+          "edge": 1,
+          "id": "0:R18:fixed:2",
+          "kind": "bookcase",
+          "roomId": "R18",
+          "variable": false,
+          "y": 0.008
+        },
+        {
+          "source": "shelf_B_large",
+          "width": 1.575,
+          "depth": 0.42000000000000004,
+          "height": 2.8499999999999996,
+          "stocked": true,
+          "x": -68.6325,
+          "z": 23.1,
+          "rotation": 0,
+          "edge": 3,
+          "id": "0:R18:fixed:3",
+          "kind": "bookcase",
+          "roomId": "R18",
+          "variable": false,
+          "y": 0.008
+        }
+      ]
+    },
+    {
+      "floor": 0,
+      "id": "R21",
+      "shelves": [
+        {
+          "source": "shelf_B_large",
+          "width": 1.575,
+          "depth": 0.42000000000000004,
+          "height": 2.8499999999999996,
+          "stocked": true,
+          "x": -54.148865274324145,
+          "z": 22.891938209422996,
+          "rotation": 2.330559081670667,
+          "edge": 4,
+          "id": "0:R21:fixed:0",
+          "kind": "bookcase",
+          "roomId": "R21",
+          "variable": false,
+          "y": 0.008
+        },
+        {
+          "source": "shelf_B_large",
+          "width": 1.575,
+          "depth": 0.42000000000000004,
+          "height": 2.8499999999999996,
+          "stocked": true,
+          "x": -50.83486450401254,
+          "z": 22.874811660303717,
+          "rotation": -2.330559081670667,
+          "edge": 2,
+          "id": "0:R21:fixed:1",
+          "kind": "bookcase",
+          "roomId": "R21",
+          "variable": false,
+          "y": 0.008
+        },
+        {
+          "source": "shelf_B_large",
+          "width": 1.575,
+          "depth": 0.42000000000000004,
+          "height": 2.8499999999999996,
+          "stocked": true,
+          "x": -55.300000000000004,
+          "z": 20.8325,
+          "rotation": 1.5707963267948966,
+          "edge": 5,
+          "id": "0:R21:fixed:2",
+          "kind": "bookcase",
+          "roomId": "R21",
+          "variable": false,
+          "y": 0.008
+        },
+        {
+          "source": "shelf_B_large",
+          "width": 1.575,
+          "depth": 0.42000000000000004,
+          "height": 2.8499999999999996,
+          "stocked": true,
+          "x": -49.699999999999996,
+          "z": 20.767500000000002,
+          "rotation": -1.5707963267948966,
+          "edge": 1,
+          "id": "0:R21:fixed:3",
+          "kind": "bookcase",
+          "roomId": "R21",
+          "variable": false,
+          "y": 0.008
+        }
+      ]
+    },
+    {
+      "floor": 0,
+      "id": "R31",
+      "shelves": [
+        {
+          "source": "shelf_B_large",
+          "width": 1.575,
+          "depth": 0.42000000000000004,
+          "height": 2.8499999999999996,
+          "stocked": true,
+          "x": 54.70277243260569,
+          "z": 21.20500865977186,
+          "rotation": -2.1587989303424653,
+          "edge": 2,
+          "id": "0:R31:fixed:0",
+          "kind": "bookcase",
+          "roomId": "R31",
+          "variable": false,
+          "y": 0.008
+        },
+        {
+          "source": "shelf_B_large",
+          "width": 1.575,
+          "depth": 0.42000000000000004,
+          "height": 2.8499999999999996,
+          "stocked": true,
+          "x": 51.524256855689124,
+          "z": 21.225309296050508,
+          "rotation": 2.1471715473860793,
+          "edge": 4,
+          "id": "0:R31:fixed:1",
+          "kind": "bookcase",
+          "roomId": "R31",
+          "variable": false,
+          "y": 0.008
+        }
+      ]
+    },
+    {
+      "floor": 0,
+      "id": "R37",
+      "shelves": [
+        {
+          "source": "shelf_B_large",
+          "width": 1.575,
+          "depth": 0.42000000000000004,
+          "height": 2.8499999999999996,
+          "stocked": true,
+          "x": 30.13250000000002,
+          "z": 42.7,
+          "rotation": -3.141592653589793,
+          "edge": 1,
+          "id": "0:R37:fixed:0",
+          "kind": "bookcase",
+          "roomId": "R37",
+          "variable": false,
+          "y": 0.008
+        },
+        {
+          "source": "shelf_B_large",
+          "width": 1.575,
+          "depth": 0.42000000000000004,
+          "height": 2.8499999999999996,
+          "stocked": true,
+          "x": 39.8325,
+          "z": 42.7,
+          "rotation": -3.141592653589793,
+          "edge": 1,
+          "id": "0:R37:fixed:1",
+          "kind": "bookcase",
+          "roomId": "R37",
+          "variable": false,
+          "y": 0.008
+        },
+        {
+          "source": "shelf_B_large",
+          "width": 1.575,
+          "depth": 0.42000000000000004,
+          "height": 2.8499999999999996,
+          "stocked": true,
+          "x": 30.4675,
+          "z": 39.599999999999994,
+          "rotation": 0,
+          "edge": 3,
+          "id": "0:R37:fixed:2",
+          "kind": "bookcase",
+          "roomId": "R37",
+          "variable": false,
+          "y": 0.008
+        },
+        {
+          "source": "shelf_B_large",
+          "width": 1.575,
+          "depth": 0.42000000000000004,
+          "height": 2.8499999999999996,
+          "stocked": true,
+          "x": 33.73250000000001,
+          "z": 42.7,
+          "rotation": -3.141592653589793,
+          "edge": 1,
+          "id": "0:R37:fixed:3",
+          "kind": "bookcase",
+          "roomId": "R37",
+          "variable": false,
+          "y": 0.008
+        },
+        {
+          "source": "shelf_B_large",
+          "width": 1.575,
+          "depth": 0.42000000000000004,
+          "height": 2.8499999999999996,
+          "stocked": true,
+          "x": 36.332499999999996,
+          "z": 42.7,
+          "rotation": -3.141592653589793,
+          "edge": 1,
+          "id": "0:R37:fixed:4",
+          "kind": "bookcase",
+          "roomId": "R37",
+          "variable": false,
+          "y": 0.008
+        },
+        {
+          "source": "shelf_B_large",
+          "width": 1.575,
+          "depth": 0.42000000000000004,
+          "height": 2.8499999999999996,
+          "stocked": true,
+          "x": 32.2675,
+          "z": 39.599999999999994,
+          "rotation": 0,
+          "edge": 3,
+          "id": "0:R37:fixed:5",
+          "kind": "bookcase",
+          "roomId": "R37",
+          "variable": false,
+          "y": 0.008
+        },
+        {
+          "source": "shelf_B_large",
+          "width": 1.575,
+          "depth": 0.42000000000000004,
+          "height": 2.8499999999999996,
+          "stocked": true,
+          "x": 38.017500000000005,
+          "z": 39.599999999999994,
+          "rotation": 0,
+          "edge": 4,
+          "id": "0:R37:fixed:6",
+          "kind": "bookcase",
+          "roomId": "R37",
+          "variable": false,
+          "y": 0.008
+        },
+        {
+          "source": "shelf_B_large",
+          "width": 1.575,
+          "depth": 0.42000000000000004,
+          "height": 2.8499999999999996,
+          "stocked": true,
+          "x": 40.7,
+          "z": 40.6675,
+          "rotation": -1.5707963267948966,
+          "edge": 0,
+          "id": "0:R37:fixed:7",
+          "kind": "bookcase",
+          "roomId": "R37",
+          "variable": false,
+          "y": 0.008
+        }
+      ]
+    },
+    {
+      "floor": 1,
+      "id": "R18",
+      "shelves": [
+        {
+          "source": "shelf_B_large",
+          "width": 1.575,
+          "depth": 0.42000000000000004,
+          "height": 2.8499999999999996,
+          "stocked": true,
+          "x": -70.86749999999999,
+          "z": 26.2,
+          "rotation": -3.141592653589793,
+          "edge": 1,
+          "id": "1:R18:fixed:0",
+          "kind": "bookcase",
+          "roomId": "R18",
+          "variable": false,
+          "y": 0.008
+        },
+        {
+          "source": "shelf_B_large",
+          "width": 1.575,
+          "depth": 0.42000000000000004,
+          "height": 2.8499999999999996,
+          "stocked": true,
+          "x": -70.4325,
+          "z": 23.1,
+          "rotation": 0,
+          "edge": 3,
+          "id": "1:R18:fixed:1",
+          "kind": "bookcase",
+          "roomId": "R18",
+          "variable": false,
+          "y": 0.008
+        },
+        {
+          "source": "shelf_B_large",
+          "width": 1.575,
+          "depth": 0.42000000000000004,
+          "height": 2.8499999999999996,
+          "stocked": true,
+          "x": -65.1675,
+          "z": 26.2,
+          "rotation": -3.141592653589793,
+          "edge": 1,
+          "id": "1:R18:fixed:2",
+          "kind": "bookcase",
+          "roomId": "R18",
+          "variable": false,
+          "y": 0.008
+        },
+        {
+          "source": "shelf_B_large",
+          "width": 1.575,
+          "depth": 0.42000000000000004,
+          "height": 2.8499999999999996,
+          "stocked": true,
+          "x": -68.6325,
+          "z": 23.1,
+          "rotation": 0,
+          "edge": 3,
+          "id": "1:R18:fixed:3",
+          "kind": "bookcase",
+          "roomId": "R18",
+          "variable": false,
+          "y": 0.008
+        },
+        {
+          "source": "shelf_B_large",
+          "width": 1.575,
+          "depth": 0.42000000000000004,
+          "height": 2.8499999999999996,
+          "stocked": true,
+          "x": -64.3,
+          "z": 24.1675,
+          "rotation": -1.5707963267948966,
+          "edge": 0,
+          "id": "1:R18:fixed:4",
+          "kind": "bookcase",
+          "roomId": "R18",
+          "variable": false,
+          "y": 0.008
+        }
+      ]
+    },
+    {
+      "floor": 1,
+      "id": "R21",
+      "shelves": [
+        {
+          "source": "shelf_B_large",
+          "width": 1.575,
+          "depth": 0.42000000000000004,
+          "height": 2.8499999999999996,
+          "stocked": true,
+          "x": -54.148865274324145,
+          "z": 22.891938209422996,
+          "rotation": 2.330559081670667,
+          "edge": 4,
+          "id": "1:R21:fixed:0",
+          "kind": "bookcase",
+          "roomId": "R21",
+          "variable": false,
+          "y": 0.008
+        },
+        {
+          "source": "shelf_B_large",
+          "width": 1.575,
+          "depth": 0.42000000000000004,
+          "height": 2.8499999999999996,
+          "stocked": true,
+          "x": -50.83486450401254,
+          "z": 22.874811660303717,
+          "rotation": -2.330559081670667,
+          "edge": 2,
+          "id": "1:R21:fixed:1",
+          "kind": "bookcase",
+          "roomId": "R21",
+          "variable": false,
+          "y": 0.008
+        },
+        {
+          "source": "shelf_B_large",
+          "width": 1.575,
+          "depth": 0.42000000000000004,
+          "height": 2.8499999999999996,
+          "stocked": true,
+          "x": -55.300000000000004,
+          "z": 20.8325,
+          "rotation": 1.5707963267948966,
+          "edge": 5,
+          "id": "1:R21:fixed:2",
+          "kind": "bookcase",
+          "roomId": "R21",
+          "variable": false,
+          "y": 0.008
+        },
+        {
+          "source": "shelf_B_large",
+          "width": 1.575,
+          "depth": 0.42000000000000004,
+          "height": 2.8499999999999996,
+          "stocked": true,
+          "x": -49.699999999999996,
+          "z": 20.767500000000002,
+          "rotation": -1.5707963267948966,
+          "edge": 1,
+          "id": "1:R21:fixed:3",
+          "kind": "bookcase",
+          "roomId": "R21",
+          "variable": false,
+          "y": 0.008
+        }
+      ]
+    },
+    {
+      "floor": 1,
+      "id": "R31",
+      "shelves": [
+        {
+          "source": "shelf_B_large",
+          "width": 1.575,
+          "depth": 0.42000000000000004,
+          "height": 2.8499999999999996,
+          "stocked": true,
+          "x": 54.70277243260569,
+          "z": 21.20500865977186,
+          "rotation": -2.1587989303424653,
+          "edge": 2,
+          "id": "1:R31:fixed:0",
+          "kind": "bookcase",
+          "roomId": "R31",
+          "variable": false,
+          "y": 0.008
+        },
+        {
+          "source": "shelf_B_large",
+          "width": 1.575,
+          "depth": 0.42000000000000004,
+          "height": 2.8499999999999996,
+          "stocked": true,
+          "x": 51.524256855689124,
+          "z": 21.225309296050508,
+          "rotation": 2.1471715473860793,
+          "edge": 4,
+          "id": "1:R31:fixed:1",
+          "kind": "bookcase",
+          "roomId": "R31",
+          "variable": false,
+          "y": 0.008
+        }
+      ]
+    },
+    {
+      "floor": 1,
+      "id": "R34",
+      "shelves": [
+        {
+          "source": "shelf_B_large",
+          "width": 1.575,
+          "depth": 0.42000000000000004,
+          "height": 2.8499999999999996,
+          "stocked": true,
+          "x": -30.482499999999995,
+          "z": 39.599999999999994,
+          "rotation": 0,
+          "edge": 3,
+          "id": "1:R34:fixed:0",
+          "kind": "bookcase",
+          "roomId": "R34",
+          "variable": false,
+          "y": 0.008
+        },
+        {
+          "source": "shelf_B_large",
+          "width": 1.575,
+          "depth": 0.42000000000000004,
+          "height": 2.8499999999999996,
+          "stocked": true,
+          "x": -32.9675,
+          "z": 42.7,
+          "rotation": -3.141592653589793,
+          "edge": 1,
+          "id": "1:R34:fixed:1",
+          "kind": "bookcase",
+          "roomId": "R34",
+          "variable": false,
+          "y": 0.008
+        },
+        {
+          "source": "shelf_B_large",
+          "width": 1.575,
+          "depth": 0.42000000000000004,
+          "height": 2.8499999999999996,
+          "stocked": true,
+          "x": -32.2825,
+          "z": 39.599999999999994,
+          "rotation": 0,
+          "edge": 3,
+          "id": "1:R34:fixed:2",
+          "kind": "bookcase",
+          "roomId": "R34",
+          "variable": false,
+          "y": 0.008
+        }
+      ]
+    }
+  ],
+  "geometry": {
+    "instances": 96,
+    "contacts": [
+      {
+        "row": 0,
+        "bottom": 0.3254999816417694,
+        "surface": 0.32250011661538824
+      },
+      {
+        "row": 1,
+        "bottom": 0.3254999816417694,
+        "surface": 0.32249985287800687
+      },
+      {
+        "row": 2,
+        "bottom": 0.9554999470710754,
+        "surface": 0.9525001049612905
+      },
+      {
+        "row": 3,
+        "bottom": 0.9554999470710754,
+        "surface": 0.9524998374128695
+      },
+      {
+        "row": 4,
+        "bottom": 1.5855000019073486,
+        "surface": 1.5825000543597265
+      },
+      {
+        "row": 5,
+        "bottom": 1.5855000019073486,
+        "surface": 1.5824998158269163
+      },
+      {
+        "row": 6,
+        "bottom": 2.2154998779296875,
+        "surface": 2.2125000464881106
+      },
+      {
+        "row": 7,
+        "bottom": 2.2154998779296875,
+        "surface": 2.212499820254047
+      }
+    ]
+  },
+  "walking": [
+    {
+      "floor": 0,
+      "roomId": "R18",
+      "x": -68.01152470021117,
+      "z": 24.664213796926912
+    },
+    {
+      "floor": 0,
+      "roomId": "R21",
+      "x": -52.5,
+      "z": 21.800000000000043
+    },
+    {
+      "floor": 0,
+      "roomId": "R31",
+      "x": 53.1,
+      "z": 21.000000000000032
+    },
+    {
+      "floor": 0,
+      "roomId": "R37",
+      "x": 35.00427285222857,
+      "z": 41.134190446753784
+    },
+    {
+      "floor": 1,
+      "roomId": "R18",
+      "x": -68.01152470021117,
+      "z": 24.664213796926912
+    },
+    {
+      "floor": 1,
+      "roomId": "R21",
+      "x": -52.5,
+      "z": 21.800000000000043
+    },
+    {
+      "floor": 1,
+      "roomId": "R31",
+      "x": 53.1,
+      "z": 21.000000000000032
+    },
+    {
+      "floor": 1,
+      "roomId": "R34",
+      "x": -33.398994814461716,
+      "z": 41.150885520592965
+    }
+  ],
+  "captures": [
+    "explore-0-R18",
+    "explore-0-R21",
+    "explore-0-R31",
+    "explore-0-R37",
+    "explore-1-R18",
+    "explore-1-R21",
+    "explore-1-R31",
+    "explore-1-R34",
+    "east-bay-mobile",
+    "escape-east-bay"
+  ],
+  "escapeExploreMatch": true,
+  "compiledInputs": {
+    "count": 171,
+    "interiorSourcesExcluded": true
+  },
+  "errors": []
+}

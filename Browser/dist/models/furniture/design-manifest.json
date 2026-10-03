@@ -1,0 +1,50 @@
+{
+  "sources": "../../../../Research/room-furnishings/sources/manifest.json",
+  "files": [
+    {
+      "path": "windsor_chair.gltf",
+      "bytes": 1158,
+      "sha256": "0727e7fe1a98c4ccaafda7a4e3e76e7000305f7af23b8d5345c0ab593baa203e"
+    },
+    {
+      "path": "windsor_chair.bin",
+      "bytes": 527904,
+      "sha256": "6cb4a0925e7fd281318b8e8afad1541d187cd38d1d1d0072f98255a2dac769b4"
+    },
+    {
+      "path": "shaker_nightstand.gltf",
+      "bytes": 1138,
+      "sha256": "cf34336b1615525a5cda90348df96b6b40276f9a0fa0cc83207f66d9144a787f"
+    },
+    {
+      "path": "shaker_nightstand.bin",
+      "bytes": 47520,
+      "sha256": "23a9f1c78a406c30ec29d52905cd4051499febb17e6dfc9abac2bb0746bcaa1d"
+    },
+    {
+      "path": "panca_50.gltf",
+      "bytes": 1175,
+      "sha256": "48a0be807f6e3a33d56930a332201cb7dde07067e3a2b8cdfff8a04aa89d1599"
+    },
+    {
+      "path": "panca_50.bin",
+      "bytes": 401760,
+      "sha256": "336e2ae1db1faac01480083df491a4c1c88ffbdc196762fb31476ec436c9f718"
+    },
+    {
+      "path": "panca-source.zip",
+      "bytes": 37635,
+      "sha256": "7091ed1eb1215dab08ff9086a1910752cf44d7140dc353cd7fb0a31e172e51ac"
+    },
+    {
+      "path": "ShopPrentice-MIT.txt",
+      "bytes": 1066,
+      "sha256": "4e2b658ca1b1c2d75b216cc5261a96f03f4707e8f9590d578c36e4b73426faa3"
+    },
+    {
+      "path": "Panca-GPL-3.0.txt",
+      "bytes": 35149,
+      "sha256": "3972dc9744f6499f0f9b2dbf76696f2ae7ad8af9b23dde66d6af86c9dfb36986"
+    }
+  ]
+}

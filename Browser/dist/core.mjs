@@ -1,4 +1,5 @@
 import {flatWalkable} from './asylum-layout.mjs';
+import {furnitureOccludes} from './furniture-collision.mjs';
 export function cell(layout,p){return [Math.round((p.x-(layout.origin?.x??0))/layout.cellSize),Math.round((p.z-(layout.origin?.z??0))/layout.cellSize)];}
 export function open(l,x,z){return x>=0&&z>=0&&x<l.width&&z<l.height&&l.cells[z*l.width+x]===1;}
 export function walkable(l,x,z,r=.28){if(l.geometrySource==='asylum-plan')return flatWalkable(l,x,z,r);return [[-r,-r],[r,-r],[-r,r],[r,r]].every(([dx,dz])=>open(l,Math.floor((x+dx)/l.cellSize+.5),Math.floor((z+dz)/l.cellSize+.5)));}
@@ -26,5 +27,5 @@ function planPath(l,a,b){
  const route=[];for(let n=end;n!==start;n=previous[n])route.push({x:l.origin.x+(n%l.width)*l.cellSize,z:l.origin.z+Math.floor(n/l.width)*l.cellSize});
  route.reverse();if(route.length){route.at(-1).x=b.x;route.at(-1).z=b.z;}return route;
 }
-export function visible(l,a,b){const dist=Math.hypot(b.x-a.x,b.z-a.z),n=Math.ceil(dist/.35);for(let i=1;i<n;i++)if(!walkable(l,a.x+(b.x-a.x)*i/n,a.z+(b.z-a.z)*i/n,.02))return false;return true;}
+export function visible(l,a,b){const dist=Math.hypot(b.x-a.x,b.z-a.z),n=Math.ceil(dist/.35);for(let i=1;i<n;i++){const x=a.x+(b.x-a.x)*i/n,z=a.z+(b.z-a.z)*i/n;if(!(l.geometrySource==='asylum-plan'?flatWalkable(l,x,z,.02,{furniture:false}):walkable(l,x,z,.02)))return false;}return !furnitureOccludes(l,a,b);}
 export function nearExit(l,p){return l.exits.find(e=>l.geometrySource==='asylum-plan'?Math.abs((p.y??l.elevation)-l.elevation)<.5&&Math.hypot(p.x-e.inside.x,p.z-e.inside.z)<1.6&&visible(l,p,e.inside):Math.hypot(p.x-e.x*l.cellSize,p.z-e.z*l.cellSize)<2.7);}

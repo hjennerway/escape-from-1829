@@ -27,7 +27,9 @@ export function addRearCourtPhotoDetails(THREE,{model,box,mesh,worldUV,white,bri
     for(const y of [2,6.5])window('rear-return-back',x,y,-46.05,Math.PI,1.1,2.3);
   }
   for(const y of [2,6.5])for(const z of [-35.3,-39.2,-41.2])window('rear-return-west',58.15,y,z,-Math.PI/2,1.1,2.3);
-  box(white,74.1,4.95,-32.82,20.2,.13,.2);
+  // Leave a short clearance beside each jamb of the upper fire-exit door.
+  for(const [left,right] of [[64,65.43],[67.37,84.2]])
+    box(white,(left+right)/2,4.95,-32.82,right-left,.13,.2);
   for(const x of [64.6,68.6,81.6])box(iron,x,4.55,-32.65,.075,9.1,.075);
 
   function porch(x,z,rotation){
@@ -96,14 +98,14 @@ export function addRearCourtPhotoDetails(THREE,{model,box,mesh,worldUV,white,bri
   }
   for(const z of [-31.9,-22.1,-15.8,-1.7,9])box(iron,83.98,4.55,z,.08,9.1,.08);
   box(iron,84.03,9.3,-14,.18,.16,47.8);
-  // White mono-pitch stair enclosure in the corner, with a narrow glazed strip.
+  // White mono-pitch stair enclosure in the corner, with one upper sash.
   const w=2.2,d=2.6,low=7.4,high=9.1;
   const v=[[-w/2,0,-d/2],[w/2,0,-d/2],[w/2,0,d/2],[-w/2,0,d/2],[-w/2,low,-d/2],[w/2,high,-d/2],[w/2,high,d/2],[-w/2,low,d/2]],pos=[];
   for(const face of [[0,4,5],[0,5,1],[1,5,6],[1,6,2],[2,6,7],[2,7,3],[3,7,4],[3,4,0],[4,7,6],[4,6,5]])for(const i of face)pos.push(...v[i]);
   const shell=new THREE.BufferGeometry();shell.setAttribute('position',new THREE.Float32BufferAttribute(pos,3));shell.computeVertexNormals();
   mesh(shell,white,83.1,0,-31.7,true).name='Rear court white stair enclosure';
   const cap=mesh(new THREE.BoxGeometry(Math.hypot(w,high-low)+.3,.14,d+.3),roof,83.1,8.33,-31.7,true);cap.rotation.z=Math.atan2(high-low,w);
-  for(const y of [1.55,4.25,6.95])window('rear-corner-glazing',84.02,y,-29.8,-Math.PI/2,.65,2.4);
+  window('rear-corner-glazing',84.02,6.5,-29.8,-Math.PI/2,.65,2.4);
   // Wall-mounted ventilation unit next to the stair enclosure.
   box(stone,83.75,3.35,-25.8,.65,1.5,1.35);
   for(let i=0;i<9;i++)box(frame,83.39,2.72+i*.15,-25.8,.035,.045,1.15);

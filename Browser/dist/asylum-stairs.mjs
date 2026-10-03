@@ -1,6 +1,24 @@
 // One footprint drives the slabs, flights, landings, banisters and walking.
 export const STAIR_WIDTH=1.3;
 export const RAIL_HEIGHT=1.05;
+export const STAIR_SLAB_THICKNESS=.18;
+
+// A closed concrete flight: stepped walking surface above one planar soffit.
+// Build from the low end so either direction uses the same tread profile.
+export function stairFlightGeometry(THREE,x,width,z0,z1,y0,y1,steps){
+ const run=Math.abs(z1-z0),direction=Math.sign(z1-z0),tread=run/steps,riser=(y1-y0)/steps;
+ const profile=new THREE.Shape();
+ profile.moveTo(0,y0-STAIR_SLAB_THICKNESS);
+ profile.lineTo(run,y1-STAIR_SLAB_THICKNESS);profile.lineTo(run,y1);
+ for(let i=steps-1;i>=0;i--){
+  profile.lineTo(i*tread,y0+(i+1)*riser);
+  if(i>0)profile.lineTo(i*tread,y0+i*riser);
+ }
+ profile.closePath();
+ const geometry=new THREE.ExtrudeGeometry(profile,{depth:width,bevelEnabled:false,steps:1});
+ geometry.rotateY(-direction*Math.PI/2);geometry.translate(x+direction*width/2,0,z0);
+ return geometry;
+}
 export function stairShape(stair){
  const xs=stair.points.map(p=>p[0]),zs=stair.points.map(p=>p[1]);
  const minX=Math.min(...xs),maxX=Math.max(...xs),minZ=Math.min(...zs),maxZ=Math.max(...zs),w=STAIR_WIDTH;

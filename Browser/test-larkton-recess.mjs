@@ -24,5 +24,14 @@ assert(!blocked(-71.6,-1),'Recess approach is accessible');assert(blocked(-71.6,
 const walker=createWalker(e.camera,obstacles);walker.setView({position:point(-71.6,2),target:point(-71.6,-5)});walker.keys.add('KeyW');for(let i=0;i<30;i++)walker.update(.1);assert(e.camera.position.distanceTo(new THREE.Vector3(...point(-71.6,-5)))>2,'Walker stops at the recessed door');
 const ray=new THREE.Raycaster(),group=a.userData.larktonRecess.group;
 for(const name of ['Recess shadowed entrance door','Recess pale room door']){const o=group.getObjectByName(name),p=o.getWorldPosition(new THREE.Vector3()),out=new THREE.Vector3(0,0,1).transformDirection(group.matrixWorld);p.y-=.3;ray.set(p.clone().addScaledVector(out,.5),out.negate());assert.equal(ray.intersectObject(a,true)[0]?.object.name,o.name,'Door stays visible');}
+for(const name of ['Recess shadowed entrance door','Recess pale room door']){
+ const door=group.getObjectByName(name),out=new THREE.Vector3(0,0,1).transformDirection(group.matrixWorld);
+ for(const dx of [-.55,0,.55])for(const y of [.12,.25,.38,1.515]){
+  const p=group.localToWorld(new THREE.Vector3(door.position.x+dx,y,door.position.z+.6));
+  ray.set(p,out.clone().negate());
+  const first=ray.intersectObject(a,true)[0]?.object.name;
+  assert(first===name||(name==='Recess pale room door'&&first==='Recess door lower panel'),'No base course or window sill crosses '+name+'; hit '+first);
+ }
+}
 const back=group.getObjectByName('West court outer link brick walls'),low=group.getObjectByName('Recess low entrance room brick walls');assert(low.geometry.parameters.height<back.geometry.parameters.height);assert(low.position.z+low.geometry.parameters.depth/2>back.position.z+back.geometry.parameters.depth/2+4,'Low room projects ahead of recessed wall');
 console.log('PASS: complete wing translation, unchanged neighbouring wards, recessed doors, low room and walking clearance.');

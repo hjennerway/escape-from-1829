@@ -1,0 +1,112 @@
+{
+  "doors": 109,
+  "states": [
+    {
+      "year": 1829,
+      "checked": 11,
+      "issues": [],
+      "trimIssues": []
+    },
+    {
+      "year": 1849,
+      "checked": 26,
+      "issues": [],
+      "trimIssues": [
+        {
+          "door": "1829 estate · aerial reconstruction -45.2,19.59",
+          "trim": "",
+          "instance": 171,
+          "y": 0.5299999713897705
+        }
+      ]
+    },
+    {
+      "year": 1870,
+      "checked": 33,
+      "issues": [],
+      "trimIssues": [
+        {
+          "door": "1829 estate · aerial reconstruction -45.2,19.59",
+          "trim": "",
+          "instance": 171,
+          "y": 0.5299999713897705
+        }
+      ]
+    },
+    {
+      "year": 1916,
+      "checked": 109,
+      "issues": [],
+      "trimIssues": [
+        {
+          "door": "1829 estate · aerial reconstruction -45.2,19.59",
+          "trim": "",
+          "instance": 171,
+          "y": 0.5299999713897705
+        },
+        {
+          "door": "Recess shadowed entrance door / Larkton recessed ward entrance",
+          "trim": "Recess terracotta band",
+          "instance": null,
+          "y": 0.225
+        },
+        {
+          "door": "Recess pale room door / Larkton recessed ward entrance",
+          "trim": "Recess terracotta band",
+          "instance": null,
+          "y": 0.225
+        },
+        {
+          "door": "Recess pale room door / Larkton recessed ward entrance",
+          "trim": "Recess sash sill",
+          "instance": null,
+          "y": 1.4354999999999998
+        }
+      ]
+    },
+    {
+      "year": 1938,
+      "checked": 109,
+      "issues": [],
+      "trimIssues": [
+        {
+          "door": "1829 estate · aerial reconstruction -45.2,19.59",
+          "trim": "",
+          "instance": 171,
+          "y": 0.5299999713897705
+        },
+        {
+          "door": "Recess shadowed entrance door / Larkton recessed ward entrance",
+          "trim": "Recess terracotta band",
+          "instance": null,
+          "y": 0.225
+        },
+        {
+          "door": "Recess pale room door / Larkton recessed ward entrance",
+          "trim": "Recess terracotta band",
+          "instance": null,
+          "y": 0.225
+        },
+        {
+          "door": "Recess pale room door / Larkton recessed ward entrance",
+          "trim": "Recess sash sill",
+          "instance": null,
+          "y": 1.4354999999999998
+        }
+      ]
+    },
+    {
+      "year": 2021,
+      "checked": 37,
+      "issues": [],
+      "trimIssues": [
+        {
+          "door": "1829 estate · aerial reconstruction -45.2,19.59",
+          "trim": "",
+          "instance": 171,
+          "y": 0.5299999713897705
+        }
+      ]
+    }
+  ]
+}

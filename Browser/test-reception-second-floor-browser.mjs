@@ -16,8 +16,8 @@ window.upperCheck={get ready(){return ready;},get floors(){return floors;},get n
  await page.goto(`http://127.0.0.1:${port}`);await page.waitForFunction(()=>window.upperCheck?.ready,null,{timeout:120000});
  await page.evaluate(()=>window.upperCheck.start());
  const walked=await page.evaluate(()=>{
-  const t=window.upperCheck;t.pose(0,14,0,0,0);const results=[];
-  for(const room of t.floors[3].rooms){results.push(t.walk({x:room.label[0],z:room.label[1],floor:3}));results.push(t.walk({x:0,z:14,floor:0}));}
+  const t=window.upperCheck;t.pose(0,17.5,0,0,0);const results=[];
+  for(const room of t.floors[3].rooms){results.push(t.walk({x:room.label[0],z:room.label[1],floor:3}));results.push(t.walk({x:0,z:17.5,floor:0}));}
   return {results,floors:t.floors.map(f=>f.name),views:t.notebook.availableViews().map(v=>v.name)};
  });
  assert(walked.results.every(Boolean),'Actual player reaches and returns from both rooms');assert(walked.views.includes('Second floor'));

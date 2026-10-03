@@ -14,12 +14,12 @@ export function addLarktonRecess(THREE,{model,ranges,openings,scale,brick,roof,m
  const box=(m,x,y,z,w,h,d,name,collision=false)=>{const o=mesh(worldUV(new THREE.BoxGeometry(w,h,d),1.7),m,x,y,z,name);if(collision)o.userData.orientedCollision=true;return o;};
  const wall=(x,z,w,h,d,name)=>box(brick,x*scale,h/2,z*scale,w*scale,h,d*scale,name,true);
  const cap=(x,z,w,d,h,rise,name)=>{const o=hipRoof(x*scale,z*scale,w*scale,d*scale,h,rise);o.name=name;group.add(o);return o;};
- const sash=(x,y,z,w=1.35,h=2.7)=>{
+ const sash=(x,y,z,w=1.35,h=2.7,{sill=true}={})=>{
   x*=scale;z*=scale;
   box(glass,x,y,z+.07,w,h,.08,'Recess sash glazing');
   for(const u of [-w/2,-w/6,w/6,w/2])box(frame,x+u,y,z+.14,.055,h,.09,'Recess sash frame');
   for(const v of [-h/2,-h/3,-h/6,0,h/6,h/3,h/2])box(frame,x,y+v,z+.15,w+.08,.055,.09,'Recess sash bar');
-  box(stone,x,y-h/2-.08,z+.11,w+.26,.14,.28,'Recess sash sill');
+  if(sill)box(stone,x,y-h/2-.08,z+.11,w+.26,.14,.28,'Recess sash sill');
   box(trim,x,y+h/2+.12,z+.07,w+.3,.24,.17,'Recess sash lintel');
  };
  box(paving,-63.5*scale,.02,.3*scale,7*scale,.04,6.6*scale,'Recess paved entrance apron');
@@ -31,7 +31,14 @@ export function addLarktonRecess(THREE,{model,ranges,openings,scale,brick,roof,m
  wall(-61.4,0,2.8,4.1,6,'Recess low entrance room brick walls');
  cap(-61.4,0,3.05,6.3,4.1,1.5,'Recess low entrance room slate roof');
  for(const [x,z,w,h] of [[-63.5,-3,7,8.4],[-66.3,1,1.4,8.4],[-61.4,3,2.8,4.1]]){
-  for(const y of [.25,4.25,h-.22])if(y<h)box(trim,x*scale,y,z*scale+.08,w*scale,.28,.19,'Recess terracotta band');
+  for(const y of [.25,4.25,h-.22])if(y<h){
+   if(y===.25&&z!==1){
+    // Stop the base course at the arch piers or the low room's door jambs.
+    const centre=(z===-3?-64.6:-61.4)*scale,half=z===-3?1.14:.88;
+    for(const [a,b] of [[(x-w/2)*scale,centre-half],[centre+half,(x+w/2)*scale]])
+     if(b>a)box(trim,(a+b)/2,y,z*scale+.08,b-a,.28,.19,'Recess terracotta band');
+   }else box(trim,x*scale,y,z*scale+.08,w*scale,.28,.19,'Recess terracotta band');
+  }
   box(iron,x*scale,h,z*scale+.18,w*scale+.25,.14,.18,'Recess blue gutter');
  }
  sash(-66.3,6.4,1);sash(-64.7,6.4,-3);sash(-60.8,6.4,-3);
@@ -43,7 +50,7 @@ export function addLarktonRecess(THREE,{model,ranges,openings,scale,brick,roof,m
  // The low room's pale door has glazed upper lights, as in the street photo.
  const lowX=-61.4*scale,lowZ=3*scale;
  box(frame,lowX,1.65,lowZ+.09,1.6,3.3,.13,'Recess pale room door');
- sash(-61.4,2.4,3.04,1.32,1.45);
+ sash(-61.4,2.4,3.04,1.32,1.45,{sill:false});
  for(const u of [-.39,.39])box(stone,lowX+u,.63,lowZ+.17,.62,.7,.04,'Recess door lower panel');
  box(stone,doorX,.09,doorZ+1.0,2.8,.18,1.9,'Recess entrance landing');
  for(const u of [-1.3,1.3]){

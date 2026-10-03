@@ -1,0 +1,14 @@
+{
+  "sources": {
+    "furniture-finishes.mjs": "639c19822831d7ffdb2dcd862b12d110c541b59b5ac678e0af45be16285d3e40",
+    "furniture-models.mjs": "f6563051dfa2fbdee072ba58a6a0a9b15dd40afebfd9ccd4905047aca01b8259",
+    "medical-furniture-models.mjs": "b3a4e38d6c0c0612a44ece18b8cf27e6ab293368d85641f3e5fc73a758c509ac"
+  },
+  "captures": 48,
+  "renderErrors": [],
+  "medicalCheck": "passed",
+  "fullSuite": "failed: existing small-library east-bay shelf count",
+  "gameBrowser": "failed: existing storage-back wall gap 2:B3:fixed:2",
+  "aerialRebuildRequired": false,
+  "nativeExportsRegenerated": false
+}

@@ -4,6 +4,7 @@ import * as THREE from './dist/vendor/three.module.js';
 import {buildAsylumLayout,moveAsylumActor,stairRoute} from './dist/asylum-layout.mjs';
 import {buildAsylumArchitecture} from './dist/asylum-architecture.mjs';
 import {routeBetweenFloors} from './dist/floors.mjs';
+import {stairShape,STAIR_WIDTH,STAIR_SLAB_THICKNESS} from './dist/asylum-stairs.mjs';
 
 const plan=JSON.parse(await readFile(new URL('./dist/asylum-plan.json',import.meta.url))),floors=buildAsylumLayout(plan).floors;
 assert.deepEqual(plan.stairs.find(s=>s.id==='S1').connections,[[2,0],[0,1],[1,3]],'Reception connects basement through second floor');
@@ -13,12 +14,42 @@ scene.updateMatrixWorld(true);
 const ray=new THREE.Raycaster(),solids=[],rails=[];
 scene.traverse(m=>{if(['Asylum floor','Asylum ceiling','Asylum Stone','Asylum Carpet'].includes(m.name))solids.push(m);if(m.name==='Asylum Handrails')rails.push(m);});
 function cast(meshes,x,y,z,dy){ray.set(new THREE.Vector3(x,y,z),new THREE.Vector3(0,dy,0));ray.far=20;return ray.intersectObjects(meshes,false);}
-let supports=0,guards=0;
+const concrete=solids.filter(m=>m.name==='Asylum Stone');
+for(const mesh of concrete){
+ assert.equal(mesh.material.side,THREE.FrontSide,'Concrete flights are closed solids with outward faces');
+ assert(!mesh.material.transparent&&mesh.material.depthWrite,'Concrete flights remain opaque');
+}
+let supports=0,guards=0,soffits=0,sides=0;
 for(const stair of plan.stairs){
  const [[x0,z0],[x1],,[,z1]]=stair.points;
  assert(Math.abs(x1-x0-(z1-z0))<1e-6,stair.id+' has a square footprint');
  for(const [lower,upper] of stair.connections){
   const route=stairRoute(stair,floors[lower].elevation,floors[upper].elevation);
+  const shape=stairShape(stair),lo=floors[lower].elevation,hi=floors[upper].elevation,mid=(lo+hi)/2;
+  for(const [x,z0,z1,y0,y1] of [[shape.left,shape.front,shape.back,lo,mid],[shape.right,shape.back,shape.front,mid,hi]]){
+   const normal=new THREE.Vector3(0,-1,(y1-y0)/(z1-z0)).normalize();
+   for(let i=1;i<40;i++){
+    // Sample across every tread boundary and the full width from below. Thin
+    // independent tread boxes cannot match this continuous sloping surface.
+    const t=i/40,z=z0+(z1-z0)*t,y=y0+(y1-y0)*t-STAIR_SLAB_THICKNESS;
+    for(const offset of [-STAIR_WIDTH/2+.015,0,STAIR_WIDTH/2-.015]){
+     const hit=cast(concrete,x+offset,y-.3,z,1)[0];
+     assert(hit&&Math.abs(hit.point.y-y)<1e-5,`${stair.id}/${lower}-${upper}: planar concrete underside at ${[x+offset,y,z]}`);
+     assert(hit.face.normal.dot(normal)>.99999,'The underside normal follows the flight slope');soffits++;
+    }
+    // The concrete side faces fill the space between the soffit and treads.
+    for(const side of [-1,1]){
+     ray.set(new THREE.Vector3(x+side*(STAIR_WIDTH/2+.1),y+.09,z),new THREE.Vector3(-side,0,0));ray.far=.2;
+     const hit=ray.intersectObjects(concrete,false)[0];
+     assert(hit&&Math.abs(hit.distance-.1)<1e-5,'Concrete closes both sides of each flight');sides++;
+    }
+   }
+   for(const z of [shape.back-.001,shape.back+.001]){
+    const expected=(z<shape.back?y0+(z-z0)/(z1-z0)*(y1-y0):mid)-STAIR_SLAB_THICKNESS;
+    const hit=cast(concrete,x,expected-.1,z,1)[0];
+    assert(hit&&Math.abs(hit.point.y-expected)<1e-5,'The sloping soffit meets the flat return-landing underside');soffits++;
+   }
+  }
   for(let j=1;j<route.length;j++)for(let i=0;i<=20;i++){
    const a=route[j-1],b=route[j],t=i/20,x=a[0]+(b[0]-a[0])*t,y=a[1]+(b[1]-a[1])*t,z=a[2]+(b[2]-a[2])*t;
    const floorHit=cast(solids,x,y+.22,z,-1)[0];
@@ -64,4 +95,4 @@ for(const floor of floors)for(const exit of floor.exits){
  }
  assert.equal(actor.floor,floor.id);
 }
-console.log(`PASS: square guarded wells, Reception basement connection, ${supports} visible support/headroom samples, ${guards} fall barriers, all 23 door routes physically walked.`);
+console.log(`PASS: square guarded wells, Reception basement connection, ${soffits} planar soffit/landing samples, ${sides} closed flight sides, ${supports} visible support/headroom samples, ${guards} fall barriers, all 23 door routes physically walked.`);

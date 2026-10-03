@@ -6,7 +6,7 @@ import {mergeGeometries} from './vendor/BufferGeometryUtils.js';
 import {mergeAsylumMasonry} from './asylum-wall-joins.mjs';
 import {segmentDistance,insidePolygon,asylumExitCenter} from './asylum-layout.mjs';
 import {asylumWindowCenters,ASYLUM_WINDOW_WIDTH} from './asylum-windows.mjs';
-import {stairShape,stairOpening,handrailGeometry,STAIR_WIDTH,RAIL_HEIGHT} from './asylum-stairs.mjs';
+import {stairShape,stairOpening,stairFlightGeometry,handrailGeometry,STAIR_WIDTH,STAIR_SLAB_THICKNESS,RAIL_HEIGHT} from './asylum-stairs.mjs';
 const cache=new WeakMap();
 export function asylumWallSurfaces(floor){
  const surfaces=[];
@@ -152,20 +152,23 @@ export function buildAsylumArchitecture(THREE,scene,floor){
    part('Sash',0,head+.18,face*(depth/2+.06),width+.29,.03,.018);
   }
  }
- const stairSurfaces=[];
- function deck(x,z,w,d,y,nosing=0){
-  box('Stone',x,y-.09,z,w,.18,d+nosing);box('Carpet',x,y+.008,z,w-.08,.012,d-.04);
+ const stairSurfaces=[],stairSolids=[];
+ function deck(x,z,w,d,y,landing=false){
+  if(landing)box('Stone',x,y-STAIR_SLAB_THICKNESS/2,z,w,STAIR_SLAB_THICKNESS,d);
+  box('Carpet',x,y+.008,z,w-.08,.012,d-.04);
   stairSurfaces.push({minX:x-w/2,maxX:x+w/2,minZ:z-d/2,maxZ:z+d/2,y});
  }
  for(const stair of floor.stairs)for(const [lower,upper] of stair.connections)if(lower===floor.id){
   const s=stairShape(stair),rise=floor.levelElevations[upper]-floor.elevation,mid=rise/2,steps=Math.ceil(mid/.18),run=s.back-s.front;
+  stairSolids.push(stairFlightGeometry(THREE,s.left,STAIR_WIDTH,s.front,s.back,0,mid,steps),
+   stairFlightGeometry(THREE,s.right,STAIR_WIDTH,s.back,s.front,mid,rise,steps));
   for(let i=0;i<steps;i++){
    const d=run/steps,z=s.front+(i+.5)*d;
-   deck(s.left,z,STAIR_WIDTH,d,(i+1)/steps*mid,.002);
-   deck(s.right,z,STAIR_WIDTH,d,rise-i/steps*mid,.002);
+   deck(s.left,z,STAIR_WIDTH,d,(i+1)/steps*mid);
+   deck(s.right,z,STAIR_WIDTH,d,rise-i/steps*mid);
   }
   // Full square corners meet the flights exactly, without crossing slabs.
-  deck((s.minX+s.maxX)/2,s.rear,s.maxX-s.minX,STAIR_WIDTH,mid);
+  deck((s.minX+s.maxX)/2,s.rear,s.maxX-s.minX,STAIR_WIDTH,mid,true);
  }
  const rails=floor.stairRails,posts=new Set();
  for(const rail of rails)for(let j=1;j<rail.length;j++){
@@ -183,9 +186,10 @@ export function buildAsylumArchitecture(THREE,scene,floor){
  const transform=new THREE.Object3D(),geometry=new THREE.BoxGeometry(1,1,1);
  // Keep each finish in one draw call, including the retained window masonry
  // and doorway headers. All vertices remain in building texture coordinates.
- for(const [kind,bottom,top] of [['Brick',0,1.1],['Plaster',1.1,height]]){
+ for(const [kind,bottom,top] of [['Brick',0,1.1],['Plaster',1.1,height],['Stone']]){
   const parts=[];
-  if(kind==='Brick')parts.push(extrudeAsylumWalls(THREE,wallShapes,bottom,top));
+  if(kind==='Stone')parts.push(...stairSolids);
+  else if(kind==='Brick')parts.push(extrudeAsylumWalls(THREE,wallShapes,bottom,top));
   else{
    // Unite headers with the adjoining walls at each head height. Separate
    // solids leave hidden caps and overlapping faces at angled jamb returns.

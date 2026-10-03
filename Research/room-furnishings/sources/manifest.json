@@ -1,0 +1,88 @@
+[
+  {
+    "repository": "ShopPrentice/shopprentice",
+    "commit": "d670906ae258a80eefe9ec65d5cccffe67d2f1fb",
+    "license": "MIT",
+    "files": [
+      {
+        "path": "LICENSE",
+        "local": "shopprentice/LICENSE",
+        "bytes": 1066,
+        "sha256": "4e2b658ca1b1c2d75b216cc5261a96f03f4707e8f9590d578c36e4b73426faa3"
+      },
+      {
+        "path": "examples/windsor-chair/README.md",
+        "local": "shopprentice/examples/windsor-chair/README.md",
+        "bytes": 6735,
+        "sha256": "961b2a8e49eae7e581e57b658494f63d5e334e4f16ccf850b58b79bc5a1793a4"
+      },
+      {
+        "path": "examples/windsor-chair/model.json",
+        "local": "shopprentice/examples/windsor-chair/model.json",
+        "bytes": 1214,
+        "sha256": "52badd00853424a14682305577ef3d9b0c04171b958e947a40938b3953d2f2bf"
+      },
+      {
+        "path": "examples/windsor-chair/windsor_chair.py",
+        "local": "shopprentice/examples/windsor-chair/windsor_chair.py",
+        "bytes": 86177,
+        "sha256": "d8e12268fb2947c5028c2fc4522189c5c049a8ba1957a5f8cf65d28b6c79478c"
+      },
+      {
+        "path": "examples/windsor-chair/iso.png",
+        "local": "shopprentice/examples/windsor-chair/iso.png",
+        "bytes": 1112857,
+        "sha256": "5518f232f6ca5c0d491f7e761fb3163707729adb9ad427f654fa2e2d67074bca"
+      },
+      {
+        "path": "examples/shaker-nightstand/README.md",
+        "local": "shopprentice/examples/shaker-nightstand/README.md",
+        "bytes": 3813,
+        "sha256": "2daf099e9c82669994f009acc7b4825062d5f3530e430e70754912ee16d6bdd9"
+      },
+      {
+        "path": "examples/shaker-nightstand/model.json",
+        "local": "shopprentice/examples/shaker-nightstand/model.json",
+        "bytes": 1472,
+        "sha256": "a106deebfd941893c3b98a2dddd226e4e29124942b1390c950914996402cd665"
+      },
+      {
+        "path": "examples/shaker-nightstand/shaker_nightstand.py",
+        "local": "shopprentice/examples/shaker-nightstand/shaker_nightstand.py",
+        "bytes": 34330,
+        "sha256": "74c37009bd9b57b9462767f372c491f774480dda6a5225a652f33677a16f28a7"
+      },
+      {
+        "path": "examples/shaker-nightstand/screenshots/iso-top-right.png",
+        "local": "shopprentice/examples/shaker-nightstand/screenshots/iso-top-right.png",
+        "bytes": 2012541,
+        "sha256": "2edb94687906f707ff5bf8bed245aa5a99c40ab7f9364849b27431c57f000365"
+      }
+    ]
+  },
+  {
+    "repository": "Compagnia-d-Arme-del-Santo-Luca/medieval_furniture",
+    "commit": "081fd0bc28486aff01fa4dde2d64227809a7ac01",
+    "license": "GPL-3.0",
+    "files": [
+      {
+        "path": "LICENSE",
+        "local": "medieval_furniture/LICENSE",
+        "bytes": 35149,
+        "sha256": "3972dc9744f6499f0f9b2dbf76696f2ae7ad8af9b23dde66d6af86c9dfb36986"
+      },
+      {
+        "path": "README.md",
+        "local": "medieval_furniture/README.md",
+        "bytes": 234,
+        "sha256": "5ddd191c971249e8009e92394ad9ccfcdd802e46590782c23171e8e44ad34162"
+      },
+      {
+        "path": "stp_files/Panca_50.stp",
+        "local": "medieval_furniture/stp_files/Panca_50.stp",
+        "bytes": 129898,
+        "sha256": "be36e650d11e16dc76d6aebccaf521114b53416b778b3f381a7bf8cf090fe459"
+      }
+    ]
+  }
+]

@@ -1,0 +1,104 @@
+{
+  "wardrobeBefore": 2.15,
+  "wardrobeAfter": 2.8499999999999996,
+  "placementsUnchanged": true,
+  "supportedDecorationsFollowCase": true,
+  "results": [
+    {
+      "seed": 1829,
+      "items": 441,
+      "bayCheeksBefore": [
+        2,
+        2
+      ],
+      "bayCheeksAfter": [
+        2,
+        2
+      ]
+    },
+    {
+      "seed": 1,
+      "items": 441,
+      "bayCheeksBefore": [
+        2,
+        2
+      ],
+      "bayCheeksAfter": [
+        2,
+        2
+      ]
+    },
+    {
+      "seed": 2,
+      "items": 441,
+      "bayCheeksBefore": [
+        2,
+        2
+      ],
+      "bayCheeksAfter": [
+        2,
+        2
+      ]
+    },
+    {
+      "seed": 3,
+      "items": 441,
+      "bayCheeksBefore": [
+        2,
+        2
+      ],
+      "bayCheeksAfter": [
+        2,
+        2
+      ]
+    },
+    {
+      "seed": 42,
+      "items": 441,
+      "bayCheeksBefore": [
+        2,
+        2
+      ],
+      "bayCheeksAfter": [
+        2,
+        2
+      ]
+    },
+    {
+      "seed": 65535,
+      "items": 441,
+      "bayCheeksBefore": [
+        2,
+        2
+      ],
+      "bayCheeksAfter": [
+        2,
+        2
+      ]
+    },
+    {
+      "seed": 2147483648,
+      "items": 441,
+      "bayCheeksBefore": [
+        2,
+        2
+      ],
+      "bayCheeksAfter": [
+        2,
+        2
+      ]
+    },
+    {
+      "seed": 4294967295,
+      "items": 441,
+      "bayCheeksBefore": [
+        2,
+        2
+      ],
+      "bayCheeksAfter": [
+        2,
+        2
+      ]
+    }
+  ]
+}

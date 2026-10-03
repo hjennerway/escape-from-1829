@@ -2,15 +2,21 @@
 
 Explore The West Cheshire Hospital site including the historic Chester County Asylum.
 
-An explorable aerial perspective and first-person escape game set in Chester's 1829 building. Explore the asylum and grounds from the air or on foot, or play "Asylum Escape" through the ground floor, first floor and west basement while Security and the Chester County Asylum ghost search the rooms and corridors. Walk the stairs between levels and use the exterior doors and fire escapes to find a way out.
+## Aerial View
+Explore an aerial perspective of Chester's 1829 building, including the grounds and previous West Cheshire Hospital site.
 
 Use the timeline slider in aerial or walking view to explore 13 periods from 1829 to 2021, with buildings and roads appearing as the site develops.
 
-The pine and oak trees, car parks and modern road layouts as well as exact positions of 1829, the water tower, church, Upton Lea, Churton house and other surviving buildings are exact according to Google Earth.
+The pine and oak trees, car parks and modern road layouts as well as exact positions of 1829, the water tower, church, Upton Lea, Churton house and other surviving buildings are reasonably precise and were reconstructed from OS maps, Google Earth, aerial photos of the site before most of the buildings were demolished and a few surviving VHS tapes showing ground perspectives.
 
 Click on a building to see the name of the building, historical photos and information about that building.
 
 Inside the estate site, click the cross-hairs to pinpoint your position to see what used to be where you stand.
+
+## Asylum Escape
+Escape the building while being chased by security and find a fire exit.
+
+The internal layout of the building is largely fictional due to the fact that it was built over a 70 year period and has an extremely non-standard, irregular layout. There are around 8 distinct floor heights, spread out across three floors and a basement in the original asylum and a further three floors in the extension wings - which aren't the same floor heights. In addition, there are numerous landings and twisting staircases inside.
 
 ## Play
 

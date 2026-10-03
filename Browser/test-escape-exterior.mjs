@@ -434,6 +434,23 @@ assert.equal(exterior.model.children.filter(o=>o.name==='Rear court blue gabled 
 assert.equal(exterior.model.children.filter(o=>o.name==='Rear court tall chimney').length,2,'the east wing has two tall chimney stacks');
 const rightGround=rearOpenings.filter(o=>o.face==='rear-court-wing-ground');
 assert(!rightGround.some(o=>o.z===-4.8),'right porch must replace the ground-floor sash');
+const cornerGlazing=rearOpenings.filter(o=>o.face==='rear-corner-glazing');
+assert.equal(cornerGlazing.length,1,'Only the upper sash remains beside the Redesmere stair enclosure');
+assert.equal(cornerGlazing[0].y,rearUpper[0].y,'The corner sash aligns with the adjacent upper row');
+for(const y of [1.55,4.25]){
+  ray.set(new THREE.Vector3(80,y,-29.8),new THREE.Vector3(1,0,0));
+  const hit=ray.intersectObject(exterior.model,true)[0];
+  assert(hit.point.x>84.1,'Removed corner windows leave the underlying wall exposed');
+}
+for(const dx of [-.55,-.3,.3,.55])for(const y of [4.90,4.95,5]){
+  ray.set(new THREE.Vector3(66.4+dx,y,-32),new THREE.Vector3(0,0,-1));
+  const hit=ray.intersectObject(exterior.model,true)[0];
+  assert.equal(hit.object.material.color.getHex(),0x172e50,'The floor band must not cover the fire-exit door leaf');
+}
+for(const x of [65.48,67.32]){
+  ray.set(new THREE.Vector3(x,4.95,-32),new THREE.Vector3(0,0,-1));
+  assert(ray.intersectObject(exterior.model,true)[0].point.z<-32.84,'The trim stops with a gap beside each door jamb');
+}
 for(const x of [42,49,55]){
   ray.set(new THREE.Vector3(x,80,-38),new THREE.Vector3(0,-1,0));
   assert(ray.intersectObject(exterior.model,true)[0].point.y<1,'wider return must leave the rear approach open');

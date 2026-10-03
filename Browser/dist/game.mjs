@@ -14,12 +14,17 @@ import {createSecurityGuard,updateSecurityGuard,resetSecurityGuard} from './secu
 import {FLOOR_HEIGHT,makeFloors,nearStair,changeFloor,routeBetweenFloors} from './floors.mjs';
 import {selectEscapeRoutes,exitDirection} from './escape-routes.mjs';
 import {buildAsylumLayout,moveAsylumActor,stairRoute} from './asylum-layout.mjs';
+import {furnishAsylum} from './asylum-furniture.mjs';
+import {loadFurnitureModels,createFurnitureFloor} from './furniture-models.mjs';
+import {furnitureContains} from './furniture-collision.mjs';
+import {createReceptionClockAudio} from './reception-clock-audio.mjs';
 import {createAsylumOutside} from './asylum-outside.mjs';
 import {createAsylumJump} from './asylum-jump.mjs';
 import {createNotebook,notebookView} from './notebook.mjs';
 import {drawNotebookMap} from './notebook-map.mjs';
 import {createLoadingProgress} from './loading-progress.mjs';
 const $=id=>document.getElementById(id),canvas=$('game');
+const furnitureFloors=[];
 const loading=createLoadingProgress(document);
 const keys=new Set(),touch=matchMedia('(pointer:coarse)').matches;
 const INTERACTION_HOLD_SECONDS=.5;
@@ -28,6 +33,7 @@ const SPOTTED_CLEAR_DISTANCE=26;
 let spotted=false;
 let layout,renderer,scene,camera,torch,torchTarget,clock,ready=false,state='menu',elapsed=0,stamina=1,yaw=0,pitch=0,hold=0,sprint=false,crouch=false,exhausted=false;
 let enemies=[],lights=[],audioCtx,audioOn=true,lastStep=0,lastPulse=0,footPhase=0,dragging=false,previousPointer=null,modelLoaded=false;
+const receptionClock=createReceptionClockAudio({getFloors:()=>floors,getContext:()=>audioCtx,enabled:()=>audioOn});
 const player={x:50,z:27.5,floor:0},mapCanvas=$('map'),mapContext=mapCanvas.getContext('2d'),miniMapCanvas=$('miniMap'),miniMapContext=miniMapCanvas.getContext('2d');
 let mapRefresh=0,floors=[],floorGroups=[],stairHold=0,stairLatch=false,artPanels=[],artViewing=null,placedWallPanels=[];
 let exterior,arrivalCutscene,escapeExterior,interiorLights,landingTime=0;
@@ -140,7 +146,7 @@ function heritageWallSurfaces(){
   // Narrow passage walls carry projecting arch piers that would cover the image.
   const arch=z<layout.galleryZ-2&&!open(x-1,z)&&!open(x+1,z)&&open(x,z-1)&&open(x,z+1);
   return !window&&!arch;
- }).map(({x,z,dx,dz,rotation})=>({x:x-dx*.115,z:z-dz*.115,rotation}));
+ }).map(({x,z,dx,dz,rotation})=>({x:x-dx*.115,z:z-dz*.115,rotation})).filter(s=>!(layout.furnitureObstacles??[]).some(item=>item.height>1.2&&furnitureContains(item,s.x,s.z,.9)));
 }
 function addHeritagePanel(surface,texture,name,width=1.48,height=1.02,item){
  const group=new THREE.Group();group.position.set(surface.x,1.88,surface.z);group.rotation.y=surface.rotation;scene.add(group);const panel=mesh(new THREE.PlaneGeometry(width,height),new THREE.MeshBasicMaterial({map:texture,side:THREE.DoubleSide}),[0,0,.02],group);panel.name=name;placedWallPanels.push({x:surface.x,z:surface.z,floor:0});
@@ -221,6 +227,8 @@ async function init(){
   if(layout.floors?.[0]?.outline)layout=buildAsylumLayout(layout);
   const outsideStairs=layout.plan?.outsideStairs??[];
   floors=layout.geometrySource==='asylum-plan'?makeFloors(layout):selectEscapeRoutes(makeFloors(layout));layout=floors[0];
+  let furnitureModels;
+  if(modern()){furnishAsylum(floors);furnitureModels=await loadFurnitureModels(THREE);}
   notebook=createNotebook(floors,{outsideStairs});
   renderer=new THREE.WebGLRenderer({canvas,antialias:true,powerPreference:'high-performance'});renderer.setPixelRatio(Math.min(devicePixelRatio,1.5));renderer.setSize(innerWidth,innerHeight);renderer.outputColorSpace=THREE.SRGBColorSpace;renderer.toneMapping=THREE.ACESFilmicToneMapping;renderer.toneMappingExposure=1.25;
   scene=new THREE.Scene();scene.background=new THREE.Color(0x343731);scene.fog=new THREE.FogExp2(0x343731,.018);
@@ -234,6 +242,7 @@ async function init(){
    const gltf=await new GLTFLoader().loadAsync('./level.glb');scene.add(gltf.scene);modelLoaded=true;
    gltf.scene.traverse(o=>{if(o.isMesh){o.frustumCulled=false;if(o.material){o.material.roughness=.88;if(o.material.name==='Glass'){o.material.emissive=new THREE.Color(0x3a5743);o.material.emissiveIntensity=.2;}}}});
   }catch(error){console.warn('Blender level unavailable; using the browser-safe layout fallback.',error);buildProcedural();}
+  if(furnitureModels)furnitureFloors.push(createFurnitureFloor(THREE,scene,layout,furnitureModels));
   if(floorIndex===0)placeHeritagePanels();placeLocalArtPanels(floorIndex);
   for(const stair of layout.stairs||[]){lamp(stair.x*layout.cellSize,(stair.z+1)*layout.cellSize);label(stair.id?stair.id+' · '+stair.name+'|WALK THE STAIRS':stair.name+'|HOLD E TO GO '+(floorIndex?'DOWN':'UP'),stair.x*layout.cellSize,2.6,stair.z*layout.cellSize);}
   lightFloor();
@@ -283,7 +292,20 @@ function randomizeEnemySpawns(){
 function resetPositions(){outsideWalker?.resetJump();indoorJump?.reset();spotted=false;Object.assign(player,{floor:0,y:0,stair:null,outside:false});lastDoor=null;if(torch)scene.add(torch,torchTarget);showFloor();stairHold=0;stairLatch=false;mapRefresh=0;lastStep=0;lastPulse=0;camera.position.y=1.65;player.x=layout.spawn.x*layout.cellSize;player.z=layout.spawn.z*layout.cellSize;yaw=layout.spawn.yaw??0;pitch=0;enemies.forEach(e=>{Object.assign(e,{...e.spawn,y:0,stair:null,path:[],memory:0,rethink:0,route:0,target:null});e.mesh.position.set(e.x,0,e.z);e.mesh.visible=true;if(e.type===1)resetSecurityGuard(e.mesh);});}
 function uiPlaying(value){document.body.classList.toggle('playing',value);$('menu').hidden=value;$('location').hidden=value;$('hud').hidden=!value;$('pause').hidden=!value;$('touch').hidden=!value||!touch;}
 function lock(){if(!touch&&canvas.requestPointerLock){try{const result=canvas.requestPointerLock();result?.catch(()=>{});}catch{}}}
-function start(){if(!ready||state==='arrival')return;escapeCutscene.reset();closeArtViewer();closeNotebook(false);randomizeEnemySpawns();resetPositions();notebook.reset();notebookReadRevision=0;observeNotebook();elapsed=0;stamina=1;hold=0;exhausted=false;crouch=false;sprint=false;footPhase=0;dragging=false;previousPointer=null;keys.clear();state='arrival';torch.visible=true;uiPlaying(true);$('hud').hidden=true;$('pause').hidden=true;$('touch').hidden=true;$('instructions').hidden=true;$('result').hidden=true;$('floorMap').hidden=true;$('timer').textContent='00:00';$('warning').textContent='';$('interact').hidden=true;arrivalCutscene.start();audioCtx??=new (window.AudioContext||window.webkitAudioContext)();audioCtx.resume().catch(()=>{});lock();}
+function start(){
+ if(!ready||state==='arrival')return;
+ escapeCutscene.reset();closeArtViewer();closeNotebook(false);
+ if(furnitureFloors.length){furnishAsylum(floors,{seed:Math.floor(Math.random()*4294967296)});furnitureFloors.forEach(f=>f.update());}
+ randomizeEnemySpawns();resetPositions();notebook.reset();notebookReadRevision=0;observeNotebook();
+ elapsed=0;stamina=1;hold=0;exhausted=false;crouch=false;sprint=false;footPhase=0;dragging=false;previousPointer=null;keys.clear();
+ state='arrival';torch.visible=true;uiPlaying(true);
+ $('hud').hidden=true;$('pause').hidden=true;$('touch').hidden=true;$('instructions').hidden=true;$('result').hidden=true;$('floorMap').hidden=true;
+ $('timer').textContent='00:00';$('warning').textContent='';$('interact').hidden=true;
+ arrivalCutscene.start();audioCtx??=new (window.AudioContext||window.webkitAudioContext)();audioCtx.resume().catch(()=>{});lock();
+ // Preparing a run can block for longer than the entire arrival. Its next
+ // frame must count only time since the camera sequence actually started.
+ clock.reset();
+}
 function pause(){if(state!=='play')return;closeArtViewer();state='paused';keys.clear();document.exitPointerLock?.();$('resultTag').textContent='TAKE A MOMENT';$('resultTitle').textContent='Hold your breath.';$('resultBody').textContent='The building will wait. Resume when you’re ready.';$('resume').hidden=false;$('resultExplore').hidden=true;$('resultIntro').hidden=false;$('result').classList.toggle('pause-menu',true);$('retry').textContent='RESTART';$('result').hidden=false;}
 function finish(won,who){const outcome=won?null:captureOutcome(previousDiagnosis);if(outcome)previousDiagnosis=outcome.diagnosis;closeArtViewer();closeNotebook(false);state=won?'cutscene':'lost';keys.clear();document.exitPointerLock?.();$('resultTag').textContent=won?'OUTSIDE. AT LAST.':'THE BUILDING KEPT YOU';$('resultTitle').textContent=won?'You made it out.':"You've been captured";$('resultBody').textContent=won?`You escaped through ${who.toLowerCase()} in ${elapsed.toFixed(1)} seconds. ${floors.reduce((count,floor)=>count+floor.exits.length,0)-1} other routes are waiting.`:outcome.text;$('resume').hidden=true;$('resultExplore').hidden=!won;$('resultIntro').hidden=true;$('result').classList.toggle('pause-menu',false);$('retry').textContent='TRY ANOTHER ROUTE ↗';$('result').hidden=won;$('interact').hidden=true;
  if(won){$('hud').hidden=true;$('touch').hidden=true;$('pause').hidden=true;escapeCutscene.start();}
@@ -305,7 +327,7 @@ function beep(hz,length,volume){if(!audioCtx||!audioOn)return;const t=audioCtx.c
 function update(dt,interactionDt=dt){
  if(state!=='play')return;
  if(artViewing){if(!keys.has('KeyE'))closeArtViewer();return;}
- elapsed+=dt;const sx=(keys.has('KeyD')?1:0)-(keys.has('KeyA')?1:0),sz=(keys.has('KeyW')?1:0)-(keys.has('KeyS')?1:0),moving=!!(sx||sz);
+ elapsed+=dt;receptionClock.update(player,dt);const sx=(keys.has('KeyD')?1:0)-(keys.has('KeyA')?1:0),sz=(keys.has('KeyW')?1:0)-(keys.has('KeyS')?1:0),moving=!!(sx||sz);
  crouch=keys.has('ControlLeft')||keys.has('KeyC');if(stamina<.02)exhausted=true;if(stamina>.25)exhausted=false;
  sprint=keys.has('ShiftLeft')&&moving&&!crouch&&!exhausted;stamina=THREE.MathUtils.clamp(stamina+dt*(sprint?-.19:.115),0,1);
  const speed=crouch?1.6:sprint?5.8:3.1,n=Math.hypot(sx,sz)||1;
@@ -441,7 +463,8 @@ function animate(){requestAnimationFrame(animate);clock.update();const frameDt=c
   renderAerialBackdrop(escapeExterior);return;
  }
  if(state==='arrival'){
-  if(!document.hidden)arrivalCutscene.update(frameDt);
+  // Keep the approach visible even when a render or shader compile stalls.
+  if(!document.hidden)arrivalCutscene.update(Math.min(frameDt,.25));
   if(!arrivalCutscene.inside){renderer.render(exterior.scene,exterior.camera);return;}
  }else if(state==='play')update(dt,frameDt);else if(state==='menu'){
   if(!document.hidden)landingTime+=Math.min(frameDt,.1);

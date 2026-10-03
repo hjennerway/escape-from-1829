@@ -1,0 +1,235 @@
+{
+  "changes": [
+    {
+      "room": "R5",
+      "solidEdgesByFloor": {
+        "0": [
+          2
+        ],
+        "1": [
+          2
+        ]
+      }
+    },
+    {
+      "room": "R16",
+      "solidEdgesByFloor": {
+        "0": [
+          2
+        ],
+        "1": [
+          2
+        ]
+      }
+    }
+  ],
+  "sharedPlansEqual": true,
+  "compiled": {
+    "sourceHash": "5489442e7da6da8d2b32480767f428299e8b66b0589e074d6dc471a21ed9af8d",
+    "compiledHash": "5489442e7da6da8d2b32480767f428299e8b66b0589e074d6dc471a21ed9af8d",
+    "match": true
+  },
+  "geometry": {
+    "wallClosures": 4,
+    "masonrySkirtingRays": 768,
+    "collisionApproachStairWalks": 44,
+    "originalGapRejected": true
+  },
+  "exploration": {
+    "views": [
+      "west-ground-landing",
+      "west-ground-room",
+      "east-ground-landing",
+      "east-ground-room",
+      "west-first-landing",
+      "west-first-room",
+      "east-first-landing",
+      "east-first-room",
+      "mobile"
+    ],
+    "movements": [
+      {
+        "stairId": "S3",
+        "reverse": false,
+        "passes": [
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true
+        ],
+        "floor": 1,
+        "stair": null,
+        "outside": false,
+        "end": [
+          -29.570391279489748,
+          -31.74917618986432
+        ]
+      },
+      {
+        "stairId": "S3",
+        "reverse": true,
+        "passes": [
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true
+        ],
+        "floor": 0,
+        "stair": null,
+        "outside": false,
+        "end": [
+          -33.470391204422185,
+          -31.749176192694076
+        ]
+      },
+      {
+        "stairId": "S4",
+        "reverse": false,
+        "passes": [
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true
+        ],
+        "floor": 1,
+        "stair": null,
+        "outside": false,
+        "end": [
+          34.32960872051025,
+          -31.74917618986432
+        ]
+      },
+      {
+        "stairId": "S4",
+        "reverse": true,
+        "passes": [
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true
+        ],
+        "floor": 0,
+        "stair": null,
+        "outside": false,
+        "end": [
+          30.42960879557777,
+          -31.749176192694076
+        ]
+      }
+    ],
+    "errors": []
+  },
+  "game": {
+    "doors": 23,
+    "staircase": {
+      "down": [
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true
+      ],
+      "up": [
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true
+      ],
+      "toFirst": [
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true
+      ],
+      "bottom": 2,
+      "middle": 0,
+      "top": 1,
+      "continuous": true
+    },
+    "landing": {
+      "start": 5.1,
+      "y": 5.169999904930592,
+      "x": 8.9,
+      "z": -36.45
+    },
+    "renders": [
+      {
+        "name": "reception",
+        "calls": 168,
+        "triangles": 130064
+      },
+      {
+        "name": "rear-corridor",
+        "calls": 80,
+        "triangles": 117536
+      },
+      {
+        "name": "ground-room",
+        "calls": 162,
+        "triangles": 130302
+      },
+      {
+        "name": "first-floor",
+        "calls": 125,
+        "triangles": 121334
+      },
+      {
+        "name": "basement-corridor",
+        "calls": 128,
+        "triangles": 124186
+      },
+      {
+        "name": "basement-room",
+        "calls": 48,
+        "triangles": 113554
+      },
+      {
+        "name": "new-stair",
+        "calls": 72,
+        "triangles": 117768
+      }
+    ],
+    "errors": []
+  },
+  "fullSuite": {
+    "command": "npm test",
+    "commands": 114,
+    "exitCode": 0,
+    "log": "npm-test.log"
+  }
+}

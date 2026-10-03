@@ -1,0 +1,59 @@
+{
+  "launch": {
+    "duration": 17937.300000000745,
+    "state": "arrival",
+    "reduced": false
+  },
+  "frames": [
+    {
+      "frameDt": 0.000800000000745058,
+      "state": "arrival",
+      "inside": false,
+      "position": [
+        23.629557279642377,
+        118.4125,
+        195.96688641797337
+      ],
+      "opacity": "0",
+      "time": 36502.89999999851
+    },
+    {
+      "frameDt": 0.1825,
+      "state": "arrival",
+      "inside": false,
+      "position": [
+        23.629557279642377,
+        118.4125,
+        195.96688641797337
+      ],
+      "opacity": "0",
+      "time": 36685.300000000745
+    },
+    {
+      "frameDt": 2.334699999999255,
+      "state": "arrival",
+      "inside": true,
+      "position": [
+        0,
+        3.5,
+        25
+      ],
+      "opacity": "1",
+      "time": 39020.300000000745
+    },
+    {
+      "frameDt": 3.1075,
+      "state": "play",
+      "inside": true,
+      "position": [
+        0,
+        3.5,
+        25
+      ],
+      "opacity": "0",
+      "time": 42130.300000000745
+    }
+  ],
+  "elapsed": 0,
+  "errors": []
+}

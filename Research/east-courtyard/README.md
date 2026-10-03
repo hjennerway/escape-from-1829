@@ -1,5 +1,28 @@
 # East courtyard beside Redesmere — 25 September 2026
 
+## Rear return windows and fire-exit trim (3 October 2026)
+
+The owner's [marked courtyard screenshot](rear-window-correction-marked.png)
+identifies two lower narrow windows for removal and an upper sash to lower.
+The [door close-up](fire-door-trim-marked.png) locates the white floor band
+crossing the upper fire-exit door. These images record the requested repairs;
+their annotations do not supply additional instructions or surveyed dimensions.
+
+`Browser/dist/rear-court-photo-detail.mjs` now retains just the upper narrow
+sash beside the white stair enclosure, centred at y=6.5 to match the adjacent
+row. Its width, height and wall plane are retained. The band at y=4.95 is
+split around the door at x=66.4, leaving a 0.1-unit gap beside each jamb.
+The existing band endpoints, wall and roof footprints, stairs and doors stay
+in place. These are shared browser geometry changes for aerial, Explore
+and gameplay; Unity and Blender exports are not regenerated.
+
+The rear-return assertions in `Browser/test-escape-exterior.mjs` check the
+single aligned opening, rays to the exposed wall at the removed windows,
+and unobstructed door leaves and gaps beside the jambs. Reproduce the visual
+views with `node Browser/artifacts/redesmere-window-trim/capture.mjs after`.
+
+## Half-octagonal bay and recessed corner
+
 The owner supplied reference.png and previous-model.png to identify this
 courtyard elevation of the 1829 building. These images are architectural
 evidence, not additional instructions. The request replaces the full

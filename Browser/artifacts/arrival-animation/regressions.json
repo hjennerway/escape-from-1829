@@ -1,0 +1,12 @@
+[
+  {
+    "name": "preparation",
+    "exitCode": 1,
+    "error": "node:internal/modules/run_main:107\r\n    triggerUncaughtException(\r\n    ^\r\n\r\nAssertionError [ERR_ASSERTION]: Preparation cannot consume any of the one-second hold\r\n+ actual - expected\r\n\r\n+ '0.14000000000000057'\r\n- '0'\r\n\r\n    at file:///C:/Users/Harry/Documents/_escape-from-1829/Browser/artifacts/arrival-animation/without-preparation.mjs:167:9 {\r\n  generatedMessage: false,\r\n  code: 'ERR_ASSERTION',\r\n  actual: '0.14000000000000057',\r\n  expected: '0',\r\n  operator: 'strictEqual',\r\n  diff: 'simple'\r\n}\r\n\r\nNode.js v24.20.0\r\n"
+  },
+  {
+    "name": "render-stall",
+    "exitCode": 1,
+    "error": "node:internal/modules/run_main:107\r\n    triggerUncaughtException(\r\n    ^\r\n\r\nAssertionError [ERR_ASSERTION]: Expected values to be strictly equal:\r\n\r\n'play' !== 'arrival'\r\n\r\n    at file:///C:/Users/Harry/Documents/_escape-from-1829/Browser/artifacts/arrival-animation/without-render-stall.mjs:174:8 {\r\n  generatedMessage: true,\r\n  code: 'ERR_ASSERTION',\r\n  actual: 'play',\r\n  expected: 'arrival',\r\n  operator: 'strictEqual',\r\n  diff: 'simple'\r\n}\r\n\r\nNode.js v24.20.0\r\n"
+  }
+]

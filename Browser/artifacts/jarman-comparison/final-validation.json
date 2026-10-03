@@ -1,0 +1,40 @@
+{
+  "date": "2026-10-03",
+  "browserSuite": {
+    "commands": 114,
+    "exitCode": 0,
+    "log": "npm-test-final.log"
+  },
+  "roomSurvey": {
+    "closures": 18,
+    "masonryAndSkirtingRays": 2880,
+    "collisionAttempts": 36,
+    "wallEnds": 710,
+    "floors": 4
+  },
+  "visualChecks": {
+    "beforeViews": 18,
+    "afterViews": 18,
+    "walkingPasses": 8,
+    "pageOrShaderErrors": []
+  },
+  "exteriorComparison": {
+    "historicalRef": "16abbbb",
+    "jarman": {
+      "primitives": 818930,
+      "sha256": "7cfb26f1ff8383b299619084b1a9e7e01fcb8bb64565b72953a3b6433035e69b"
+    },
+    "leighton": {
+      "count": 882977,
+      "sha256": "f20c539f2eb9060f9c2c0dccf0716e1fb8e51a451f07aa0dd62b459ae8604e74"
+    },
+    "unchangedSourceHash": "5489442e7da6da8d2b32480767f428299e8b66b0589e074d6dc471a21ed9af8d",
+    "compiledMatches": true
+  },
+  "exports": {
+    "browserInteriorAndReviewDrawingsUpdated": true,
+    "aerialRebuilt": false,
+    "unityRegenerated": false,
+    "blenderRegenerated": false
+  }
+}

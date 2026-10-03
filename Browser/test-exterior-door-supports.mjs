@@ -10,6 +10,7 @@ globalThis.recordExteriorDoor=(model,x,z,r,bottom)=>shared.push({model,x,z,r,bot
 registerHooks({load(url,context,next){
  const result=next(url,context);
  const name=url.split('/').at(-1),saved=new URL('./artifacts/door-supports/before-'+name,import.meta.url);
+ if(process.env.DOOR_TRIM_BASELINE&&['west-front-photo-detail.mjs','annexe-larkton-recess.mjs'].includes(name))return {...result,source:readFileSync(new URL('./artifacts/door-trim/before-'+name,import.meta.url),'utf8')};
  if(process.env.DOOR_BASELINE&&existsSync(saved))return {...result,source:readFileSync(saved,'utf8')};
  if(url.endsWith('/photo-detail-primitives.mjs'))return {...result,source:readFileSync(new URL(url),'utf8').replace('function door(x,z,rotation=0,bottom=0){','function door(x,z,rotation=0,bottom=0){ globalThis.recordExteriorDoor(model,x,z,rotation,bottom);')};
  if(url.endsWith('/tower-buildings.mjs'))return {...result,source:readFileSync(new URL(url),'utf8').replace('openings.push({x,y,z,r,label,placement});\n }','openings.push({x,y,z,r,label,placement,w,h,door:true});\n }')};
@@ -54,7 +55,8 @@ for(const s of schedules){
  const part=parts.find(p=>{const c=p.bounds.getCenter(new THREE.Vector3());return Math.hypot(c.x-centre.x,c.z-centre.z)<.025&&Math.abs(p.bounds.max.y-top)<.015;});
  assert(part,'Find actual door leaf: '+JSON.stringify({group:s.model.name,x:s.x,z:s.z}));
  const scale=new THREE.Vector3().setFromMatrixScale(s.model.matrixWorld).x;
- doors.push({...part,label:s.model.name+' '+s.x+','+s.z,normal,right,width:s.w*scale,centre});
+ doors.push({...part,label:s.model.name+' '+s.x+','+s.z,normal,right,width:s.w*scale,centre,
+  glazingRails:s.model===exterior.churtonWard?[s.model.localToWorld(new THREE.Vector3(s.x,s.y+s.h*.24,s.z)).y]:[]});
 }
 const named=new Map([
  ['West side basement end door',[-1,0,0]],['West courtyard lean-to side door',[0,0,1]],
@@ -69,7 +71,8 @@ for(const part of parts.filter(p=>!p.object.isInstancedMesh&&named.has(p.object.
  const right=new THREE.Vector3(normal.z,0,-normal.x),centre=part.bounds.getCenter(new THREE.Vector3());
  const local=part.object.geometry.boundingBox,size=local.getSize(new THREE.Vector3()),scale=new THREE.Vector3().setFromMatrixScale(part.world);
  const width=size.x<size.z?size.z*scale.z:size.x*scale.x;
- doors.push({...part,label:part.object.name+' / '+part.object.parent.name,normal,right,width,centre});
+ doors.push({...part,label:part.object.name+' / '+part.object.parent.name,normal,right,width,centre,
+  glazingRails:part.object.name==='Glazed entrance'&&part.object.parent===exterior.churtonWard?[1.4,2.7].map(y=>exterior.churtonWard.localToWorld(new THREE.Vector3(11.1,y,-17.15)).y):[]});
 }
 // Reception's red double door and the two single inside-corner doors use
 // separate decorative builders, so identify their complete coloured leaves.
@@ -78,10 +81,59 @@ for(const p of parts){
  if((colour===0x172e50&&Math.abs(h-2.55)<.01&&Math.abs(c.x)<36&&c.z>15&&c.z<21)||(Math.abs(c.x)<.01&&Math.abs(c.z-19.9)<.01&&Math.abs(h-3.2)<.01))doors.push({...p,label:'1829 bespoke door '+c.x+','+c.z,centre:c,width:Math.abs(c.x)<.01?1.9:.87,normal:new THREE.Vector3(0,0,1),right:new THREE.Vector3(1,0,0)});
 }
 assert.equal(doors.length,109,'The survey retains every audited door leaf');
+// Survey horizontal trim against the rendered leaves in each door's axes,
+// including reflected/rotated wings and individual instances. Broad paving
+// and platforms are support surfaces; Churton's authored transom/glazing
+// rails are part of its doors. Neither is an unwanted projecting sill.
+const horizontalParts=[];
+for(const object of meshes){
+ if(!object.geometry.boundingBox)object.geometry.computeBoundingBox();
+ for(let i=0;i<(object.isInstancedMesh?object.count:1);i++){
+  if(object.isInstancedMesh)object.getMatrixAt(i,instance);else instance.identity();
+  const world=new THREE.Matrix4().multiplyMatrices(object.matrixWorld,instance),bounds=object.geometry.boundingBox.clone().applyMatrix4(world);
+  const height=bounds.max.y-bounds.min.y;
+  if(height>.01&&height<.4)horizontalParts.push({object,index:object.isInstancedMesh?i:null,bounds,world});
+ }
+}
+function authoredDoorRail(door,part,y){
+ const colour=part.object.material.color?.getHex();
+ // Ribs and rails are deliberately modelled on these garage/service leaves.
+ if([exterior.garagesMortuary.userData.garages,exterior.garagesMortuary.userData.mortuary].includes(part.object.parent)&&[0x477286,0x93bacb].includes(colour))return true;
+ if(part.object.parent===services&&colour===0x28778d&&[2.77,3.21].some(h=>Math.abs(h-y)<.01))return true;
+ if(part.object.parent===exterior.churtonWard&&door.glazingRails?.some(h=>Math.abs(h-y)<.01))return true;
+ if(door.label.endsWith(' -39,43.09')&&colour===0xd3dcd8&&[5.45,6.85].some(h=>Math.abs(h-y)<.01))return true;
+ if(door.object.name==='Redesmere roof-access door'&&colour===0xd3dcd8&&[1.28,1.67,2.06,2.45].some(h=>Math.abs(9.645+h-y)<.01))return true;
+ return door.object.name==='Recess pale room door'&&part.object.name==='Recess sash bar';
+}
+const crossingTrim=[];
+for(const door of doors){
+ const inverse=new THREE.Matrix4().makeBasis(door.right,new THREE.Vector3(0,1,0),door.normal).setPosition(door.centre).invert();
+ const leaf=door.object.geometry.boundingBox.clone().applyMatrix4(inverse.clone().multiply(door.world));
+ for(const part of horizontalParts){
+  if(part.object===door.object&&part.index===door.index||!part.bounds.intersectsBox(door.bounds.clone().expandByScalar(.3)))continue;
+  const b=part.object.geometry.boundingBox.clone().applyMatrix4(inverse.clone().multiply(part.world));
+  if(b.max.z-b.min.z>.65||b.min.x>leaf.min.x+.12||b.max.x<leaf.max.x-.12)continue;
+  if(b.min.y<=leaf.min.y+.04||b.max.y>=leaf.max.y-.04||b.max.z<leaf.max.z+.005||b.min.z>leaf.max.z+.35)continue;
+  const y=part.bounds.getCenter(new THREE.Vector3()).y;
+  if(authoredDoorRail(door,part,y))continue;
+  crossingTrim.push({door,part,y});
+ }
+}
 const ray=new THREE.Raycaster(),down=new THREE.Vector3(0,-1,0),states=[];
 for(const year of [1829,1849,1870,1916,1938,2021]){
  timeline.setPeriod(year);exterior.scene.updateMatrixWorld(true);
- const active=meshes.filter(visible),issues=[];let checked=0;
+ const active=meshes.filter(visible),issues=[],trimIssues=[];let checked=0;
+ for(const {door,part,y} of crossingTrim){
+  if(!visible(door.object)||!visible(part.object))continue;
+  // Confirm the actual surface spans the leaf: bounding boxes alone can
+  // include empty fragments of a clipped or angled facade course.
+  const blocked=[-.35,0,.35].every(u=>{
+   const point=door.centre.clone().addScaledVector(door.normal,.6).addScaledVector(door.right,door.width*u);point.y=y;
+   ray.set(point,door.normal.clone().negate());ray.far=.9;
+   return ray.intersectObject(part.object,false).some(h=>(h.instanceId??null)===part.index&&h.distance<.58);
+  });
+  if(blocked)trimIssues.push({door:door.label,trim:part.object.name,instance:part.index,y});
+ }
  for(const d of doors){
   if(!visible(d.object))continue;checked++;
   const y=d.bounds.min.y;
@@ -93,12 +145,13 @@ for(const year of [1829,1849,1870,1916,1938,2021]){
    if(gap>.025)issues.push({door:d.label,point:point.toArray(),bottom:y,support:hit?.object.name,supportY:hit?.point.y,gap});
   }
  }
- states.push({year,checked,issues});
+ states.push({year,checked,issues,trimIssues});
 }
 mkdirSync(new URL('./artifacts/door-supports/',import.meta.url),{recursive:true});
-writeFileSync(new URL('./artifacts/door-supports/'+(process.env.DOOR_BASELINE?'baseline-':'')+'threshold-survey.json',import.meta.url),JSON.stringify({doors:doors.length,states},null,2)+'\n');
+writeFileSync(new URL(process.env.DOOR_TRIM_BASELINE?'./artifacts/door-trim/baseline-survey.json':'./artifacts/door-supports/'+(process.env.DOOR_BASELINE?'baseline-':'')+'threshold-survey.json',import.meta.url),JSON.stringify({doors:doors.length,states},null,2)+'\n');
 for(const s of states)console.log(JSON.stringify({...s,issues:[...new Map(s.issues.map(i=>[i.door,i])).values()]}));
 assert(states.every(s=>s.issues.length===0),'Every exterior door sill must meet visible ground, a threshold or a platform; see threshold-survey.json');
+assert(states.every(s=>s.trimIssues.length===0),'No unintended horizontal sill or facade strip crosses an exterior door; see threshold-survey.json');
 timeline.setPeriod(1916);
 for(const label of ['West','East']){
  const group=exterior.annexe.getObjectByName(label+' mirrored side details'),deck=group.getObjectByName('Fire stair landing'),door=group.getObjectByName('Tower fire exit door');
@@ -121,4 +174,4 @@ for(const label of ['West','East']){
  const topTread=group.children.filter(o=>o.name==='Blue external stair tread').sort((a,b)=>b.position.y-a.position.y)[0];
  assert(5.125-(topTread.position.y+topTread.geometry.parameters.height/2)<.3,'Top stair rise remains consistent with the flight');
 }
-console.log(`PASS: ${doors.length} exterior door leaves meet visible support across six estate periods.`);
+console.log(`PASS: ${doors.length} exterior door leaves meet visible support and have no unintended crossing sill strips across six estate periods.`);

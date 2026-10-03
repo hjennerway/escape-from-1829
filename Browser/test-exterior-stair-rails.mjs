@@ -22,6 +22,31 @@ function follow(actor,points){
   assert(Math.hypot(actor.x-x,actor.z-z)<.04,'Guarded route remains open '+JSON.stringify({target:[x,z],actor}));
  }
 }
+// The middle Redesmere landing used to leave two holes inside its guards and
+// an unguarded wall-side edge beyond the end of the pavilion. Check actual
+// visible support, movement and fall prevention at those former openings.
+const middleDeck=4.315,down=new THREE.Vector3(0,-1,0),deckRay=new THREE.Raycaster();
+const visibleMeshes=[];exterior.model.traverseVisible(o=>{if(o.isMesh)visibleMeshes.push(o);});
+for(const [minX,maxX,minZ,maxZ] of [[69.77,69.88,2.32,2.82],[72.28,72.75,4.28,4.88]]){
+ for(let i=0;i<=4;i++)for(let j=0;j<=4;j++){
+  const x=minX+(maxX-minX)*i/4,z=minZ+(maxZ-minZ)*j/4;
+  deckRay.set(new THREE.Vector3(x,middleDeck+.15,z),down);deckRay.far=.2;
+  const hit=deckRay.intersectObjects(visibleMeshes,false).find(h=>Math.abs(h.point.y-middleDeck)<1e-5);
+  assert(hit,'Redesmere middle landing has continuous floor inside its guard at '+x+','+z);
+ }
+}
+const middleActor={x:68.4,y:middleDeck,z:4.5};
+follow(middleActor,[[71,4.5],[72.35,4.5],[72.35,3.9],[71,3.9],[68.4,3.9]]);
+assert(Math.abs(middleActor.y-middleDeck)<.01,'The completed landing remains level and accessible from its door');
+for(const x of [70.1,70.6,71.1,71.6,72.1,72.4]){
+ const actor={x,y:middleDeck,z:4.5};
+ for(let i=0;i<35;i++)walker.update(actor,0,.04,.016);
+ assert(actor.z<4.7&&Math.abs(actor.y-middleDeck)<.01,'Redesmere wall-side guard prevents falling at '+x);
+}
+for(const [x,y] of [[68.3,4.25],[67.5,8.5]]){
+ deckRay.set(new THREE.Vector3(x,y+.75,4.5),new THREE.Vector3(0,0,1));deckRay.far=.6;
+ assert.equal(deckRay.intersectObjects(visibleGuards).length,0,'Redesmere door remains open to its landing');
+}
 // Include the upper flights and the remote rear return, beyond the seven
 // first-floor exit routes covered by test-asylum-outside.
 for(const [name,start,points,top] of [

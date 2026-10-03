@@ -18,6 +18,7 @@ import {createSecurityGuard,updateSecurityGuard,resetSecurityGuard} from './dist
 import {createNotebook,notebookView} from './dist/notebook.mjs';
 import {drawNotebookMap} from './dist/notebook-map.mjs';
 import {createLoadingProgress} from './dist/loading-progress.mjs';
+import {createReceptionClockAudio} from './dist/reception-clock-audio.mjs';
 class Vector {
   constructor(){this.set(0,0,0);}
   set(x,y,z){Object.assign(this,{x,y,z});return this;}
@@ -31,10 +32,15 @@ class Object3D {
   getWorldDirection(v){return v.set(0,0,-1);} updateProjectionMatrix(){} lookAt(){}
 }
 class Geometry {clone(){return new Geometry();}}
+let timerTime=0;
 const THREE={Vector3:Vector,Object3D,Group:Object3D,Scene:Object3D,Mesh:Object3D,InstancedMesh:Object3D,
   WebGLRenderer:Object3D,PerspectiveCamera:Object3D,HemisphereLight:Object3D,PointLight:Object3D,SpotLight:Object3D,
   BoxGeometry,Shape,ExtrudeGeometry,BufferGeometry,Float32BufferAttribute,PlaneGeometry:Geometry,CylinderGeometry:Geometry,SphereGeometry:Geometry,
-  MeshStandardMaterial:class {constructor(args){Object.assign(this,args);}},MeshBasicMaterial:class {},CanvasTexture:class {},Color:class {},FogExp2:class {},Timer:class {connect(){}update(){}getDelta(){return .016;}},
+  MeshStandardMaterial:class {constructor(args){Object.assign(this,args);}},MeshBasicMaterial:class {},CanvasTexture:class {},Color:class {},FogExp2:class {},Timer:class {
+   constructor(){this.time=timerTime;this.delta=0;}connect(){}
+   update(){timerTime+=16;this.delta=(timerTime-this.time)/1000;this.time=timerTime;}
+   reset(){this.time=timerTime;}getDelta(){return this.delta;}
+  },
   MathUtils:{clamp:(v,a,b)=>Math.min(b,Math.max(a,v)),lerp:(a,b,t)=>a+(b-a)*t,mapLinear:(v,a,b,c,d)=>c+(v-a)/(b-a)*(d-c)}};
 const elements=new Map();
 function element(id){
@@ -47,7 +53,7 @@ const layout=JSON.parse(await readFile(new URL('./dist/layout.json',import.meta.
 const source=(await readFile(new URL('./dist/game.mjs',import.meta.url),'utf8')).replace(/^import .*;\r?\n/gm,'');
 const listeners=new Map();
 function keydown(code,repeat=false){const event={code,repeat,defaultPrevented:false,preventDefault(){this.defaultPrevented=true;}};listeners.get('keydown')(event);return event;}
-const sandbox={createNotebook,notebookView,drawNotebookMap:(...args)=>drawNotebookMap(...args,{createCanvas:()=>sandbox.document.createElement('canvas')}),captureOutcome:(previous)=>captureOutcome(previous,sandbox.Math.random),Math:Object.create(Math),selectEscapeRoutes,exitDirection,createSecurityGuard:()=>createSecurityGuard(GuardTHREE),updateSecurityGuard,resetSecurityGuard,bindTreeToggle,sampleLanding,...core,...floors,buildArchitecture,interiorWallSurfaces,createInteriorLights,createEscapeCutscene,createArrivalCutscene,
+const sandbox={createReceptionClockAudio,createNotebook,notebookView,drawNotebookMap:(...args)=>drawNotebookMap(...args,{createCanvas:()=>sandbox.document.createElement('canvas')}),captureOutcome:(previous)=>captureOutcome(previous,sandbox.Math.random),Math:Object.create(Math),selectEscapeRoutes,exitDirection,createSecurityGuard:()=>createSecurityGuard(GuardTHREE),updateSecurityGuard,resetSecurityGuard,bindTreeToggle,sampleLanding,...core,...floors,buildArchitecture,interiorWallSurfaces,createInteriorLights,createEscapeCutscene,createArrivalCutscene,
  createLoadingProgress:document=>createLoadingProgress(document,{paint:()=>Promise.resolve()}),
  createLandingExterior:async()=>({scene:new Object3D(),camera:new Object3D()}),
  loadEscapeFrontage:async()=>{},THREE,GLTFLoader:class {},
@@ -148,6 +154,29 @@ try{
 }finally{delete sandbox.Math.random;}
 assert(spawnHistory.every(positions=>positions.size>8),'Both pursuers vary across the building');
 console.log('PASS: randomized launch/retry spawns, wall clearance, reachable routes, reception/exit/stair clearance, separate pursuers, arrival stability and head start.');
+
+// A launch/retry must not spend its animation budget on synchronous preparation.
+for(const launch of [element('start'),element('retry')]){
+ timerTime+=12700;launch.onclick();t.animate();
+ assert.equal(t.state,'arrival','Lengthy run preparation must not skip arrival');
+ assert.equal(t.arrival.inside,false,'The first visible frame stays outside');
+ assert.equal(element('arrivalFade').hidden,false);assert.equal(element('arrivalFade').style.opacity,'0');
+ assert(t.escapeExterior.camera.position.y>100,'The estate establishing view is rendered');
+ assert.equal(t.lastRender.scene,t.escapeExterior.scene);assert.equal(t.elapsed,0);
+ for(let i=0;i<60;i++)t.animate();
+ assert.equal(element('arrivalFade').style.opacity,'0','Preparation cannot consume any of the one-second hold');
+ t.arrival.update(3);
+}
+
+// Rendering stalls must also leave visible approach frames before the handoff.
+t.start();t.setFrameDt(5);
+for(let i=0;i<7;i++)t.animate();
+assert.equal(t.state,'arrival');assert.equal(t.arrival.inside,false);
+assert.equal(element('arrivalFade').style.opacity,'0.5');
+assert(t.escapeExterior.camera.position.y>3.5&&t.escapeExterior.camera.position.y<100,'Slow rendering still shows the camera approaching');
+assert.equal(t.elapsed,0);
+for(let i=0;i<5;i++)t.animate();
+assert.equal(t.state,'play');assert.equal(t.elapsed,0);
 
 // Exercise the actual arrival state and animation loop with deliberately slow frames.
 t.start();assert.equal(t.state,'arrival');assert.equal(elements.get('hud').hidden,true);

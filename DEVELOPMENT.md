@@ -1,3 +1,636 @@
+## Reception furnished and enlarged (3 October 2026)
+
+Reception now has a central clerk's desk facing the main entrance, a Windsor
+chair behind it, two waiting benches, a longcase clock, a wall-mounted hinged
+key cupboard, a framed rules notice, and supported ledger/papers/ink/quill,
+brass candlesticks and handbell. All Reception objects are 20% larger than
+their initial versions. The shared catalog sizes the six new procedural
+designs; only the Reception Windsor instance receives the extra scale.
+The eight records are fixed across games and identical in Escape and Explore.
+
+The open hall is a separate furnishing area, leaving the R24 stair hall empty.
+The desk is x=0/z=14.5, facing +Z toward D1. Arrival moves from the occupied
+old position to x=0/z=17.5 with yaw=0. Both sides remain walkable; the enlarged
+benches/clock retain wall contact and both front windows remain accessible.
+Movement, navigation, spawn filtering and sight consume the same dimensions
+as the rendered instanced meshes. Desktop accessories rise with the desktop.
+
+`reception-furniture-models.mjs` supplies six original models (4,924 triangles
+before print planes), using the existing furniture finishes. Printed labels
+use local canvas textures and unlit paper materials for legibility under the
+torch. `reception-clock-audio.mjs` gives nearby ground-floor players alternating
+ticks and an hourly bell strike. It follows active gameplay time, respects
+Escape's sound toggle, and needs a gesture to unlock Explore audio.
+
+The focused model/placement/audio check and actual Escape/Explore browser
+check pass. Review captures cover the central desk, both side walls, close
+clock/cupboard/rules views, desktop and portrait views. Keyboard input walks
+both sides of the desk and stops outside its enlarged footprint. The shared
+furniture check passes eight seeds, 912 room/exit routes, all framed door
+crossings, 2,537 collision approaches, NPC paths/spawns and existing shelf
+access. Evidence and full-suite logs are under
+`Browser/artifacts/reception-furniture/` and the adjacent reception logs.
+
+Historical references and fictional details are recorded in
+`Research/room-furnishings/README.md`. Browser sources and furnished plans are
+updated; the aerial model import graph excludes these interior sources.
+Unity, Blender and packaged desktop/Android exports are not regenerated.
+
+## Wardrobes and bookshelves touch their walls (3 October 2026)
+
+`Browser/dist/asylum-furniture.mjs` fits wardrobes and standard/stocked
+bookshelves to actual wall segments with their backs on the rendered .09
+wall face. Rear-only probes permit contact; side/front architectural checks,
+full corridor widths, windows, entrances, stairs and room centres retain
+their clearance checks. R31's two canted cheeks take priority over its flat
+end wall, and the other libraries fill long walls first. Basement window
+avoidance now uses the explicit schedule, matching its architecture renderer
+and preventing a wardrobe from backing onto a window opening.
+
+The furniture regression passes eight seeds, 1,288 complete storage-back
+contacts, 584 clear one-metre shelf/cabinet fronts, 912 room/exit routes, all
+doorway crossings and 2,505 walked furniture collisions. Navigation, pursuer
+routes/spawns, supported decorations, fixed items and sight checks pass.
+The browser check measures three points on each actual instanced storage
+back against the rendered plaster, independently of placement/collision
+records. All eight small-library checks pass: 32 stocked cases match their
+rendered/collision dimensions, all eight book rows retain shelf contact,
+each entrance can be walked to its room centre, and Escape/Explore agree.
+Ten desktop/mobile/Escape captures have no runtime or shader errors. The
+wardrobe, reading room, canted library, first-floor end library and portrait
+library views were visually reviewed. All seven medical model/placement
+checks also pass. The library check confirms the compiler's 171-module
+import graph excludes the edited interior furniture sources.
+
+The final general furniture browser run passes actual Escape/Explore
+instances, all fourteen model previews, desktop/mobile views, keyboard
+collision, fixed-item parity and new-game variation without runtime/shader
+errors. All 161 wardrobes/bookcases pass 483 rendered wall-contact rays;
+the largest residual is .00000672, within instanced Float32 precision.
+`Browser/artifacts/storage-wall-contact/validation.json` confirms current
+storage IDs and complete stocked-library placements match the rendered
+review. The preview page now uses the same 120-second navigation/interaction
+timeouts as the game page; its earlier default 30-second navigation timed
+out during concurrent browser validation.
+
+The required `npm test` run passes the preceding furniture, medical,
+interior, walking and estate checks, then stops at `test-jarman.mjs:11` on
+the existing protected exterior comparison: 818,899 actual primitives versus
+818,930 expected, with the same mismatch recorded in the earlier shelf and
+wardrobe notes. Its exterior import graph excludes these furniture sources.
+The protected baseline is retained; the full suite is not reported as
+passing. Full output is `Browser/artifacts/storage-wall-contact/npm-test.log`.
+
+Evidence is in `Browser/artifacts/storage-wall-contact/`. Use
+`FURNITURE_ARTIFACT_DIR=./artifacts/storage-wall-contact/game/` with
+`test-asylum-furniture-browser.mjs` and
+`BOOKROOM_ARTIFACT_DIR=./artifacts/storage-wall-contact/libraries/` with
+`test-asylum-bookrooms-browser.mjs` to retain separate review captures.
+The four furnished SVG plans are refreshed from current placements. Only
+browser sources, checks, drawings and notes change for this request; Unity,
+Blender and packaged exports are not regenerated. The aerial import graph
+excludes these interior modules, so no aerial binary rebuild is required.
+
+## Irregular furniture finishes (3 October 2026)
+
+Both furniture material families now use `furniture-finishes.mjs`. A shared
+256 × 256 seeded data texture packs smoothly warped timber fibres, broad
+isotropic stain and fine wear. Repeat wrapping, linear/mipmap filtering and
+anisotropic filtering replace the former unfiltered sine bands and stepped
+fragment hashes. Object-space triplanar projection follows upright timber and
+horizontal boards, with restrained colour and roughness variation. Paint/enamel
+and iron/brass sample isotropic channels only. Books and mixed-material beds
+use matte wear; dark timber joins the same subdued wood finish. Original muted
+palettes, the licensed atlas, meshes, dimensions and collision records are retained.
+
+`Browser/artifacts/furniture-finishes/capture.mjs` passes 48 paired views of all
+fourteen models, actual rooms, close surfaces, wood/paint/enamel/metal swatches
+and a portrait wardrobe, without page or shader errors. Review PNGs and
+`comparison.json` are retained alongside the original shader snapshots; the
+snapshot substitution happens over HTTP without replacing shared source files.
+The flat swatches' former periodic-band amplitude falls by 98.5% for wood,
+98.4% for paint, 98.6% for enamel, 88.4% for iron and 67.7% for brass. These
+measure one former frequency range under fixed lighting, not overall realism
+or performance. The seven-medical-model geometry/material/placement check passes.
+
+The required `npm test` stops at the small-library east-bay shelf count
+(`test-asylum-furniture.mjs:56`, one shelf versus two). A separate run using
+the saved original medical materials also stops on small-library circulation
+at first-floor R34. The focused game browser check reaches its geometry phase,
+then stops at the existing storage-back wall gap for `2:B3:fixed:2`; that same
+failure is recorded in the earlier wardrobe-height validation below. The
+complete suites are not reported as passing. Logs and reproducible checks are
+in the surface-review directory. Concurrent wardrobe-height, surgical-table,
+library and architectural edits are retained.
+
+The compiler's 171-module aerial import graph excludes all three edited/new
+material modules, so no aerial rebuild is required. Only browser surface sources,
+notes and evidence are updated; Unity, Blender and packaged exports are not
+regenerated.
+
+## Wardrobes match bookshelf height (3 October 2026)
+
+The shared Escape/Explore wardrobe catalog height is now 1.90 × 1.5 = 2.850,
+matching standard and fitted bookcases. Its 1.50 × .65 footprint is retained.
+The existing procedural normalization scales the complete case vertically
+from its floor origin; collision/sight dimensions and supported decorations
+follow the same catalog. Existing wardrobe bounds, front-ray and instance
+checks now expect bookshelf height and probe the full taller door surface.
+
+`Browser/artifacts/wardrobe-height/comparison.png` was visually reviewed with
+the actual models side by side: both tops measure 2.8499999046, the wardrobe
+base is grounded and its width/depth are retained. Desktop/mobile game views
+were reviewed without rendering errors. An eight-seed old/new height comparison
+retains furniture placement, with decorations rising to their supporting case.
+The initial furniture regression passes 912 room/exit routes and 2,375 walked
+collisions. Other furniture-source and test changes landed in the shared
+checkout during validation. The required `npm test` attempt stops at the
+small-library east-bay assertion; the focused rerun stops at first-floor R34
+shelf count. A current-source comparison finds the same one shelf there at
+both 2.15 and 2.85 wardrobe heights. The browser rerun stops at the storage-back
+wall-gap assertion for `2:B3:fixed:2`. These runs are not reported as passing.
+Logs and size/placement evidence are retained in that artifact directory and
+`Browser/artifacts/wardrobe-height-npm-test.log`.
+
+Only browser catalog/checks and notes are updated for this height request.
+Unity, Blender and packaged exports are not regenerated. The aerial compiler's
+171-module import graph excludes these furniture modules, so no aerial rebuild
+is needed.
+
+## Surgical table size, label and cushion (3 October 2026)
+
+The owner clarified the requested size as 130% of the previous model, or 30%
+larger. The shared Escape/Explore catalog now gives `operatingTable` a
+1.066 × 2.704 footprint and 1.326 height. The full assembly is normalized to
+these dimensions, and placement, rotated walking collision, navigation and
+sight consume the same catalog. Ground R6 retains its fixed surgical table.
+
+The front label increases from .40 × .07 to .56 × .13 before normalization
+and hangs on a .60 × .17 timber plaque at the extending footplate's front
+edge. Two brass hangers attach the plaque to the footplate; the label clears
+the overhang. The green head cushion now follows the headboard's -.42-radian
+angle and its top surface, using the sum of the board/cushion half-thicknesses
+along the board normal. It no longer floats above the sloping timber.
+The seven medical models total 28,460 triangles without runtime label planes.
+
+`test-medical-furniture.mjs` passes catalog/geometry bounds, exact 130% size,
+base contact, nine actual cushion-underside/headboard ray contacts, all seven
+fixed medical placements across four seeds, reachability and supported
+decorations. Front, elevated and head-end close renders were visually checked;
+all 18 rays to the label's centre and edges reach the text unobstructed.
+Desktop and phone-sized R6 captures were reviewed with no page or WebGL
+errors. The table-specific Explore check confirms the identical fixed R6
+table, all eight rendered assembly parts and their transforms/bounds against
+the collision record, and a walked approach stopping outside the enlarged
+footprint. `scope.json` confirms that resizing the table leaves every other
+room's furniture records unchanged. Reproduce the rendering checks with
+`node Browser/artifacts/surgical-table/capture.mjs`; review evidence is in
+`Browser/artifacts/surgical-table/`.
+
+The current general furniture check passes eight seeds, 1,288 flush storage
+backs, 584 clear shelf/cabinet fronts, 912 room/exit routes, every doorway
+crossing and 2,505 walked furniture collisions. The initial check also passed
+before concurrent storage-placement changes. During that work the first full
+suite attempt stopped at first-floor R34's stocked shelf count; the furniture
+browser recheck stopped at the separate storage-back wall gap for
+`2:B3:fixed:2`. The later full-suite rerun passes those placement checks and
+the surgical model check. The initial logs are retained as `npm-test.log` and
+`furniture-browser.log` in the surgical review folder; `scope.json` now reports
+three R34 cases at both the original and enlarged surgical-table sizes.
+
+The final furniture browser run passes all fourteen model previews,
+desktop/mobile room views, actual rendered/collision transforms, keyboard
+collision, stable fixed items, new-game variation and shared Escape/Explore
+placements, with no page/shader errors. The preview navigation timeout was
+raised in the shared test to the same 120 seconds already used by its main
+page after an earlier 30-second startup timeout. Final visual evidence is in
+`rooms-verified/` and `furniture-browser-verified.log`.
+
+The final complete `npm test` attempt passes the furniture, medical, interior,
+game, walking and preceding estate checks, then stops at
+`test-jarman.mjs:11`: 818,899 actual exterior primitives versus 818,930 in its
+protected comparison. This is the existing exterior discrepancy recorded in
+earlier notes; that geometry path excludes the surgical-table model. The
+comparison baseline is retained, and the full suite is not reported as
+passing. The final output is `Browser/artifacts/surgical-table/npm-test-final.log`.
+
+The furnished SVG plans and relevant research notes are updated. The aerial
+manifest's source hash still matches the current import graph, which excludes
+these interior furniture modules; no aerial rebuild is required. Only browser
+sources and review artifacts are changed for this request. Unity, Blender and
+packaged desktop/Android exports are not regenerated. Other shared edits are
+preserved.
+
+## Bookshelf and dispensary front access (3 October 2026)
+
+Every shared Escape/Explore `bookcase` and `apothecary` placement now reserves
+one metre in front of its visible face, across the complete width plus .10
+at each side. The reservation rotates with the model's local +Z front. A
+separating-axis check rejects other furniture entering it in either placement
+order, including varied chairs and supported decorations. Architectural checks
+retain the actual frame-width strip and a player-sized standing position.
+Access strips remain placement constraints rather than invisible walking
+obstacles; collision and navigation are regenerated from the resulting real
+furniture records before actors are reset.
+
+Fixed shelves and dispensary cabinets are allocated first, retaining their
+original fixed ID indices, before other furnishings use the remaining space.
+Items without a safe placement follow the existing general-furniture omission
+rule. Concurrent storage-wall fitting, taller wardrobes and surgical-table
+updates are preserved; compact-room shelf counts supersede the earlier counts
+below where the combined constraints cannot accommodate all of them.
+
+The independent polygon audit in `test-asylum-furniture.mjs` checks every
+target against every other furniture footprint across all floors and eight
+seeds. The final source check passes 584 full one-metre access strips, 912
+room/exit routes, all doorway crossings, 2,523 walked furniture collisions,
+NPC navigation/spawns, supported decorations and eye-height sight. It also
+passes the concurrent 1,288 flush-storage-back checks. Original placements,
+current comparisons, browser review images and logs are retained under
+`Browser/artifacts/furniture-front-clearance/`. The owner's screenshot and
+regenerated furnished plans are recorded in `Research/room-furnishings/`.
+
+Browser source, regression checks, research notes and furnished drawings are
+updated. The separate aerial compiler excludes these interior sources, so no
+aerial rebuild is needed. Unity, Blender and packaged desktop/Android exports
+are not regenerated.
+
+The final small-library browser check passes all eight rooms and 32 stocked
+cases, their rendered/collision dimensions, supported book rows, actual
+doorway-to-centre walks, Escape/Explore parity and ten desktop/mobile views.
+The focused `capture-clear-fronts.mjs` in the evidence directory independently
+checks all 73 rendered shelves/cabinets and all 248 assembly parts against
+their placement, rotation and scale, verifies clear player standing space,
+and compares every protected item between Escape and Explore. Its seven fresh
+desktop/mobile captures pass without page or shader errors; the dispensary,
+angled library and upstairs library views were visually reviewed. Reproduce
+it with `node Browser/artifacts/furniture-front-clearance/capture-clear-fronts.mjs`.
+
+The complete `npm test` rerun passes furniture, medical, interior, gameplay,
+walking and preceding estate checks, then stops at `test-jarman.mjs:11`:
+818,899 actual exterior primitives versus 818,930 in the protected comparison,
+with differing digests. This exterior graph excludes the changed interior
+furniture source. The full suite is not reported as passing; its output is
+`npm-test-final.log`. The general furniture browser check also stops on its
+separate newly added storage-back contact ray for `2:B3:fixed:2`, which misses
+the plaster wall. Its `browser-final.log` is retained without weakening that
+assertion. The focused front-access and library browser checks above pass
+against the stable combined layout despite that additional wall-contact issue.
+
+## Book-filled small libraries (3 October 2026)
+
+The owner's half-octagonal east-wing screenshot requests stocked shelves in
+the matching small rooms. Ground/first R18, R21 and R31, ground R37 and first
+R34 now form eight Small libraries in the shared Escape/Explore interior.
+They contain 36 fixed bookcases; R31 fits one on each angled cheek. Actual
+masonry boundaries provide shelf positions, rather than the rectangular
+room envelopes. Entrances, centres, windows, stairs and exits remain clear.
+The separate 150% size revision below is retained: fitted cases are currently
+1.575 × .420 × 2.850, with matching rotated walking/navigation/sight footprints.
+
+Each of four shelf levels has two groups of books resting on its measured
+board surface. The stocked geometry is a separate rendering variant used by
+these rooms. Standard cases retain their earlier book arrangement. Instanced
+transforms follow each placed item's dimensions in all three axes. Room-use
+names, reference image and regenerated furnished plans are in
+`Research/room-furnishings/`; source assets and licences are retained.
+
+The eight-seed furniture checks pass every room/exit route (912 total), all
+doorway crossings, physical furniture collision, NPC paths/spawns, supported
+decorations and eye-height sight. `test-asylum-bookrooms-browser.mjs` checks
+all 36 actual rendered cases against their collision dimensions, all eight
+book rows against shelf-board rays, and physically walks every library's
+doorway to its centre. Ten desktop/mobile/Escape captures pass without page
+or shader errors, and Escape/Explore placements match exactly. Evidence is in
+`Browser/artifacts/small-libraries/`; `npm run test:furniture` includes this
+browser check. Help cards are hidden only in the review captures so shelves
+can be inspected; game UI is retained.
+
+The general furniture browser check also passes all fourteen model previews,
+rendered/collision transforms, actual keyboard collision, stable fixed items
+and new-game variation, with desktop/mobile Escape and Explore views and no
+page/shader errors. `check-current.mjs` in the library evidence directory
+confirms the current shared checkout still matches all 36 reviewed cases.
+
+The aerial compiler's import graph excludes the edited interior modules,
+so these additions require no aerial rebuild. Browser sources, checks,
+furnished drawings and notes are updated; Unity, Blender and packaged
+desktop/Android exports are not regenerated for this addition.
+
+The complete `npm test` rerun passes the preceding furniture, medical,
+interior, game and exploration checks, then stops at `test-jarman.mjs` on
+its protected exterior comparison: 818,899 actual primitives versus 818,930
+expected. Its exterior imports exclude these interior shelf modules. The
+protected reference is retained; the full suite is not reported as passing.
+The complete output is `Browser/artifacts/small-libraries/npm-test-final.log`.
+The first attempt's temporary file-open failure while saving window-clearance
+evidence is retained in `npm-test.log`; that check passes both its focused
+recheck and the final full-suite attempt.
+
+## Bookshelves at 150% (3 October 2026)
+
+The shared Escape/Explore bookcase is 150% of its previous width, depth and
+height: 1.875 × .570 × 2.850. The complete shelf/frame/book assembly scales
+together from its floor-level origin. Shelf contact metadata follows the same
+scale, retaining a .003 gap beneath the books. Fitted stocked shelves in the
+concurrent small-room additions also follow this scale: 1.575 × .420 × 2.850.
+Placement, rotated collision, navigation and sight consume these dimensions.
+Additional checked wall positions accommodate the enlarged cases. The narrow
+east bay retains its two angled shelves and a clear entrance/room centre.
+
+Independent before/after browser captures and geometry measurements are in
+`Browser/artifacts/bookshelf-scale/`: all three dimensions measure exactly
+1.5 times the original, the base remains grounded and all four book groups
+retain their supporting shelf contact. The furniture checks pass eight seeds,
+912 room/exit routes, all doorway crossings and 2,401 walked collisions.
+The original 40 standard case IDs are all retained at 150%; the enlarged cases
+use the fitted doorway-approach and room-centre clearance checks where needed.
+The complete furniture browser check passes actual Escape/Explore instances,
+desktop/mobile views, keyboard collision and shelf contact without runtime or
+shader errors. The final room capture checks all 76 rendered cases and all 228
+assembly parts against their enlarged collision sizes. Six restored linen/store
+and fitted-bay desktop/mobile views pass without runtime/shader errors and were
+visually reviewed. Regenerate them with
+`node Browser/artifacts/bookshelf-scale/capture-rooms.mjs`.
+The full `npm test` run reaches `test-jarman.mjs` and fails the separate exterior
+snapshot hash (818,930 primitives in both actual and expected). Its log is
+`Browser/artifacts/bookshelf-scale-npm-test.log`; no exterior snapshot is changed.
+
+Browser sources and furnished drawings are updated; the imported furniture
+files, Unity, Blender and packaged exports are not regenerated. The compiled
+aerial scene excludes the interior furniture sources and requires no rebuild.
+
+## Redesmere courtyard windows and fire-exit trim (3 October 2026)
+
+The two lower narrow windows beside the white rear-court stair enclosure are
+removed. The remaining upper sash moves from y=6.95 to y=6.5, matching the
+neighbouring upper row while retaining its dimensions and wall plane.
+`Browser/dist/rear-court-photo-detail.mjs` splits the white band at y=4.95
+around the upper fire-exit door, leaving a 0.1-unit gap beside each jamb.
+Walls, building footprints, doors, stairs and the band's outer endpoints
+retain their positions. Geometry is constructed before instancing and
+collision extraction; no runtime transform or shadow-cache change is needed.
+The owner's marked screenshots and dimensions are recorded in
+`Research/east-courtyard/README.md`.
+
+The extended `test-escape-exterior.mjs` detects the original three-window
+stack and passes after the repair. It checks the aligned opening, exposed
+wall at the removed windows, twelve unobstructed door-leaf rays and the gaps
+beside both jambs. Three before/after Explore views were visually reviewed
+without page or shader errors. Captures and reproducible scripts are in
+`Browser/artifacts/redesmere-window-trim/`.
+
+The aerial model was regenerated and its source fingerprint verified current.
+The source/compiled comparison passes exact geometry/draw counts, rendering,
+full-detail loading and missing/incompatible/corrupt-model fallbacks; 0.017%
+of pixels exceed its difference threshold. The full timeline check reached
+its final screenshot but could not open an existing output image. Its rerun
+with a fresh output directory passes all original assertions, including every
+period, mobile controls and walking collision refresh.
+
+Of all 118 browser-suite commands, 116 pass. `npm test` stops at the Jarman
+whole-estate comparison; continuing the remaining checks also reports the
+Leighton/Newton comparison. Both saved fingerprints
+already disagree with the pre-edit courtyard model. The scope audit retains
+818,881 Jarman and 882,928 Leighton/Newton primitives exactly, with all 49
+removed and 18 added records confined to the requested windows and trim.
+Neither comparison baseline nor its exclusions is refreshed for this repair.
+Detailed results are in `audit.json`, `suite.log` and `remaining.json`.
+
+Browser modelling sources, checks, notes and local generated aerial assets are
+updated. Unity, Blender and packaged desktop/Android exports are unchanged.
+Existing work in the shared checkout is preserved.
+
+## Rectangular wardrobes and 130% chairs/tables (3 October 2026)
+
+Windsor chairs and ordinary work tables now use 1.3 times their former width,
+depth and height in the shared Escape/Explore catalog and renderer. Their
+dimensions are .624 × .611 × 1.17 and 1.95 × 1.066 × .988 respectively.
+Table seat spacing derives from the enlarged chair width. The original glTF
+meshes remain intact and are fitted to the new catalog dimensions at runtime.
+
+The pale glazed cupboard shown in the owner's screenshot, including its
+Shaker base, is replaced across all `cupboard` instances by a plain rectangular
+double-door wardrobe: 1.50 × .65 × 2.15, with a closed plinth, solid timber
+doors, shallow framing and brass fittings. `wardrobe-model.mjs` shares the
+medical material factory with the dispensary cabinet, preserving its timber
+palette, grain/wear and brass finish. The retired Shaker mesh and its source
+licence are retained as archived assets; runtime loading no longer requests
+them, and the old frosted-glass upper case is removed from the model library.
+
+Wardrobe placement searches additional safe wall positions and no longer uses
+the nightstand's bedside rule. It retains the existing general-furniture
+fallback when no position preserves architectural, window, door, corridor,
+room-centre or stair clearance. Only the seven medical equipment placements
+are mandatory. This resolves the temporary `0 R5 cupboard` readiness failure
+recorded during the concurrent electrical-label check below. Collision,
+navigation, safe spawns and eye-height sight derive from the rendered sizes.
+
+Focused validation passes eight reproducible layouts, 912 room/exit routes,
+all doorway walks, over 2,300 walked furniture collisions, NPC routes/spawns,
+supported decorations and eye-height occlusion. Wardrobe rays verify its
+closed front and absence of glass, with actual bounds matching the catalog;
+material checks compare against the dispensary finish. All seven medical
+equipment checks also pass, including the concurrent electrical-label change.
+The four furnished SVG plans are regenerated. Review evidence and full-suite
+output are under `Browser/artifacts/furniture-resize/`. The actual game browser
+check passes desktop/mobile and neutral-model views, rendered bounds/transforms,
+keyboard collision, new-game variation and fixed Escape/Explore parity without
+page or shader errors. It also verifies that the retired Shaker model is never
+requested. The wardrobe, enlarged chair/table grouping and portrait wardrobe
+views were visually reviewed.
+
+The complete `npm test` attempt passes the furniture, medical, interior,
+walking, stair and preceding estate checks, then stops at `test-jarman.mjs:11`:
+the protected exterior geometry digest differs (818,899 actual primitives,
+818,930 expected). That assertion hashes `createEscapeExterior` geometry and
+does not include these interior furniture meshes. The exterior source and
+expected snapshot are retained. The remaining suite commands are not reached
+by this run; the full output is saved as `npm-test.log`. The current furniture
+regression was rerun after the concurrent small-library updates and passes;
+its final output is `furniture-final.log`.
+
+Only browser sources, validation, drawings and notes change for this request.
+Unity, Blender and packaged exports are not regenerated. The compiled aerial
+model excludes these interior sources; its source hash matches the existing
+manifest, so no aerial rebuild is required. Concurrent bookcase, electrical
+label, interior architecture and exterior work is preserved.
+
+## Electrical apparatus label clearance (3 October 2026)
+
+The browser electrical apparatus now carries a wider label on a dark timber
+plaque, lowered below the tabletop and brought just forward of its overhang.
+The brass drawer knob is offset to the left so it no longer covers the text.
+The plaque remains inside the existing model bounds and collision footprint.
+Only `Browser/dist/medical-furniture-models.mjs` is changed for this adjustment;
+Unity, Blender and packaged exports are not regenerated. The compiled aerial
+model excludes these interior furnishings and requires no rebuild.
+
+Front and elevated close renders were visually checked. All 18 rays to the
+label's centre and edges reach the label without intervening geometry, with
+no page or WebGL errors. Reproduce these captures with
+`node Browser/artifacts/machine-label/capture.mjs`; evidence is in that folder.
+The focused medical check passes its geometry/material/bounds checks before
+the current room-placement phase fails at `0 R5 cupboard`. `npm test` stops
+on the same independent placement error in `test-asylum-furniture.mjs`, which
+does not import the medical model source. The existing full furniture browser
+check times out waiting for game readiness, so in-game validation remains
+blocked by the current furnishing/layout state.
+
+## Historic medical furniture (3 October 2026)
+
+Seven original medical models are now placed in the shared Escape/Explore
+interior: immersion bath in ground R1, cold-water apparatus in R12, wooden
+surgical table in R6, early electrical apparatus in R29, stocked apothecary
+cabinet and supported leech/cupping set in R7, and a 1940s ECT trolley in R8.
+The room names describe those uses in the notebook; R8 explicitly identifies
+the later hospital era. Historical references and the limits of the Chester
+room reconstruction are in `Research/room-furnishings/README.md`.
+
+`medical-furniture-models.mjs` creates hollow bath geometry, pipes/taps, the
+shower reservoir and chain, surgical case/instruments, glass electrical
+cylinder/Leyden jars, labelled bottles/pill pots/scales, leech jar/cupping
+instruments and the ECT box/meter/leads/trolley. Timber, enamel, glass, cloth
+and metal use separate materials with restrained wear. The seven meshes total
+28,340 triangles before runtime label planes. All are fixed across seeds;
+six have walking/navigation footprints and the seventh rests on the existing
+dispensing table. Aggregate mesh bounds match the shared placement catalog.
+
+The default layout has 438 furnishings: 185 ground, 198 first, 45 basement and
+10 second. Placement preserves doorways, room centres, window approaches,
+stairs and exit routes. Supported decorations now include their supporting
+item's local Y offset, retaining an eight-millimetre gap above the visible top.
+The furnished plans have been refreshed. The aerial compiled scene excludes
+these interior sources and requires no rebuild; Unity, Blender and packaged
+desktop/Android exports are not regenerated.
+
+`test-medical-furniture.mjs` passes all seven source bounds/material/finite
+geometry checks, actual ray intersections with the open bath basin and rim,
+fixed appropriate placement across four seeds, room reachability and table
+support. The general furniture test passes eight seeds, 912 room/exit routes,
+all doorway crossings, 2,252 physically walked furniture collisions, NPC
+paths/spawns, supported decorations and eye-height sight. The extended browser
+check passes 29 desktop/mobile/neutral-model captures, all actual rendered
+transforms and model bounds, keyboard collision, new-game variation and
+matching fixed Escape/Explore furnishings without page/shader errors. The
+seven close model views and six distinct medical rooms were visually reviewed,
+including glass, controls, labels and clear circulation. Evidence is in
+`Browser/artifacts/room-furniture/validation.json`; `medical-gallery.png` is a
+review sheet regenerated with `node Browser/capture-medical-gallery.mjs` after
+the browser test captures.
+The complete `npm test` browser suite passes all 118 commands after these
+medical furniture additions. Existing pinned furniture source/licence and
+generated asset verification also passes.
+
+## Furnished room uses and furniture replacements (3 October 2026)
+
+The playable browser interior now assigns every room a fictional use and places
+seven furniture types around that use in both Escape and Explore. The seed-1829
+layout contains 439 items across all four floors: 186 ground, 198 first, 45
+basement and 10 second. Main furnishings remain stable; 342 items (78%) are
+fixed. Starting another escape game varies smaller items within checked room
+positions. Pauses, revisits and stair travel preserve the current arrangement.
+
+The owner's revisions replace all KayKit chairs and stools with visible-surface
+adaptations of ShopPrentice's MIT Windsor chair, and replace the KayKit drawer
+unit with its MIT Shaker nightstand. Bedrooms and dormitories prefer bedside
+nightstands and GPL-3.0 Panca seats. The requested Panca_50 is a small bench,
+40 x 30 x 45 cm, rather than a sideboard; its complete six-solid STEP assembly
+is converted with FreeCAD. Medical rooms add a painted, closed upper case to
+the nightstand. Beds are exactly 130% of their previous width, depth and height,
+including their walking footprints. Bookcase books now sit on the horizontal
+shelf boards; the renderer probes the board surface instead of the bounds of
+the source's higher upright brackets.
+
+`asylum-furniture.mjs` provides shared placement records. Rotated footprints,
+the spatial collision index, NPC navigation cells/spawns and eye-height sight
+all follow those records. Door approaches, windows, room centres, corridors,
+stairs and exit access are checked before placement. Furniture is instanced
+from the shared model library. Regeneration updates both the meshes and the
+navigation overlay before actors reset. Modelling references, original source
+licences, exact repository revisions and furnished plans are in
+`Research/room-furnishings/`. The Panca editable source, converter and original
+licence are also distributed beside its mesh in `panca-source.zip`.
+
+The focused checks pass across eight seeds, covering 912 room/exit routes,
+every door crossing, 2,188 physically walked furniture collisions, NPC paths
+and spawns, supported books and standing eye-height sight. Actual Escape and
+Explore rendering passes fourteen desktop/portrait/model-preview captures,
+with keyboard collision, stable main items, new-game variation, matching
+rendered/collision dimensions and book vertices seated on all four boards.
+There are no page or shader errors. Evidence is under
+`Browser/artifacts/room-furniture/`. `npm run test:furniture` includes pinned
+source/licence and generated-mesh hash verification.
+The complete `npm test` browser suite passes all 117 commands after the final
+furniture replacements and bedside placement changes.
+
+Only browser furniture assets, sources, room-use metadata, navigation/sight
+integration, checks and documentation are updated. Unity, Blender project and
+packaged desktop/Android exports are not regenerated. The compiled aerial
+model excludes these interior sources; its source hash remains current and
+needs no regeneration for these changes.
+
+## Smooth internal concrete stair soffits (3 October 2026)
+
+`asylum-stairs.mjs` now builds closed stepped concrete profiles with a single
+planar sloping underside. `asylum-architecture.mjs` uses these for both flights
+at every connection of S1/S3/S4/S5: fourteen flights across seven connections
+from basement through Reception's second floor. The 0.18-unit vertical slab
+depth matches the flat return-landing undersides. Solid flight sides close
+the space below the treads; the former individual 0.18-thick tread blocks and
+their small depth overlaps are removed. Existing carpet heights, footprints,
+rail supports and navigation are preserved. Concrete geometry and retained
+Stone boxes are merged into one draw per floor, retaining the shared opaque
+material and outward-facing surfaces.
+
+`test-asylum-stairs.mjs` checks 1,666 planar underside/landing samples and
+1,092 closed-side samples, alongside the retained 1,029 support/headroom
+samples, 70 fall barriers and all 23 physically walked outside-door routes.
+Focused slab, second-floor room/route and skirting checks pass.
+`test-asylum-stair-soffits-browser.mjs` captures both flight undersides at
+every connection plus a portrait view in the actual Explore renderer.
+All fifteen repaired desktop/portrait views pass without page or shader
+errors. Visually reviewed comparisons show continuous soffits and closed
+side faces across all four stairs, including basement and second-floor
+flights. The saved original renderer fails the new regression on its first
+planar-underside sample. The complete `npm test` suite passes (114 commands).
+Evidence is under `Browser/artifacts/stair-soffits/`; the supplied reference
+and modelling assumptions are recorded in `Research/1829-interior-proposal/`.
+
+Only browser model sources, regression checks and documentation are changed.
+The plan, navigation and drawings are retained. Unity, Blender and packaged
+exports are not regenerated. The compiled aerial model excludes these
+interior sources; its current manifest still matches the model source hash,
+so no aerial regeneration is needed for this change.
+
+## Jarman exterior comparison reconciliation (3 October 2026)
+
+The owner's follow-up requests repair of the previously failing Jarman estate
+comparison. The saved count/hash describes `16abbbb`, before the separately
+documented stair-guard/clearance, continuous facade-course, courtyard sash and
+roof-soffit corrections. An isolated historical dependency graph reproduces
+that reference exactly. An independent primitive collector also reproduces
+the unchanged production scope rules and confirms 818,185 unchanged Jarman
+estate primitives. Its 1,897 removed and 745 added pieces are confined to 70
+reviewed repair groups; anonymous differences remain in the affected main
+estate facade/stair areas. Exterior compiler source hashes remain stable.
+
+The evidence-gated refresh changes Jarman's saved count/hash to 818,930 and
+reconciles the identical stale-reference issue in Leighton/Newton to 882,977,
+with 882,232 unchanged primitives. The original L ranges, frontage and ward
+assertions, walking checks and existing exclusion rules remain untouched.
+Both photographic regressions pass normally. Audit sources, primitive
+positions/reasons and focused final logs are retained in
+Browser/artifacts/jarman-comparison/. No exterior source, compiled aerial
+asset, Unity or Blender export was changed by this comparison repair.
+
+Final validation: all 114 commands in a complete `npm test` run pass with
+exit code 0, including both estate comparisons and the room-closure survey.
+The final log is Browser/artifacts/jarman-comparison/npm-test-final.log;
+final-validation.json records the suite, interior visual/walking evidence
+and the unchanged current compiled source fingerprint. `git diff --check`
+also passes. Earlier failure and continuation logs are retained as history.
+
 ## Room enclosure and pillar audit across all floors (3 October 2026)
 
 The owner's marked screenshot and later all-floor request extend the existing
@@ -38,7 +671,9 @@ on both lower levels (eight passes), without page or shader errors. The
 marked join, mirrored upper join, adjoining forward rooms, west cross-range,
 pavilion lobbies, central room and basement were visually reviewed. Evidence,
 repeatable runners and the original-model rejection are retained in
-Browser/artifacts/wing-room-closure/. Full-suite results are recorded below.
+Browser/artifacts/wing-room-closure/. The final full suite passes all 114
+commands after the audited Jarman/Leighton comparison reconciliation;
+its successful final log is under Browser/artifacts/jarman-comparison/.
 
 A dependency audit confirms all 171 aerial compiler inputs exclude the edited
 interior plan/layout. The existing compiled manifest matches the source hash,
@@ -7227,3 +7862,121 @@ stair and annexe movement failures during concurrent modelling are resolved
 in the final run. Full output and continuation results are saved under
 Browser/artifacts/east-first-wall/r27/. The reviewed R27 images are kept in
 that subdirectory to distinguish this room from nearby-corner comparisons.
+
+
+## Rear staircase room wall connections (3 October 2026)
+
+The owner's purple-line screenshot and request for every matching gap extend
+the earlier R16 ground-floor repair to R5 and R16 beside stairs S3 and S4 on
+both ground and first floors. Each floor-specific room variant marks southern
+edge 2 solid, so general stair/corridor clipping retains the complete boundary
+at z=-32.4. The west wall runs from x=-34.6 to -24.5 and the east from x=24.5
+to 34.6. The doorway-side corners join the existing wall runs with matching
+cream upper brick, red lower brick and dark skirting on both faces.
+
+Rendering, collision, navigation and notebook mapping use those shared walls.
+The established stairDeparture helper chooses sideways clear landing exits
+for both rear stairs at both levels; room doorways and fire-exit lobbies remain
+accessible. Reception's deliberately open stair hall and basement stair
+access remain circulation spaces. This supersedes the earlier instruction
+to retain R16's first-floor opening.
+
+Both shared plan JSON files and the ground/first-floor SVG/PNG review drawings
+are updated. The expanded test-asylum-east-rear-wall.mjs checks all four wall
+closures with 768 independent masonry/skirting rays, 44 collision, approach
+and complete stair walks, regularly fitted frames, joined corner endpoints
+and an audit rejecting loose rear-stair wall ends. Its --baseline mode rejects
+the original R5 ground-floor gap at the first fixed collision probe.
+
+The new test-asylum-stair-room-walls-browser.mjs captures nine before and nine
+after desktop/mobile exploration views of both wings and floors. Four actual
+walker ascent/descent runs turn onto the clear landings and release their
+flights. Doorway-side joins, matching room faces and phone rendering were
+visually reviewed. The browser reports no page or shader errors. This check
+is included in test:asylum. The actual game browser check also passes all 23 E
+door round trips, release latches, basement/ground/first stair movement and
+raised outside-landing movement.
+
+Evidence is in Browser/artifacts/stair-room-walls/, including the original
+shared plan, reference views, repeatable browser check, baseline rejection
+and full-suite log. Only the shared interior plans, regression checks, review
+drawings and notes were changed for this repair. Concurrent staircase-soffit
+and unrelated exterior comparison work in the shared checkout was preserved.
+The separate aerial compiler excludes the interior plan; its source hash
+matches the existing compiled manifest, so no aerial model rebuild was needed.
+Unity, Blender and packaged application exports were not regenerated.
+
+The complete 114-command npm test run passes after this repair, including
+all interior, exploration, stair, estate and protected comparison checks.
+Its full output is saved in Browser/artifacts/stair-room-walls/npm-test.log.
+
+## Redesmere courtyard fire-escape landing (3 October 2026)
+
+The owner's walking screenshot identifies the middle landing on the east
+courtyard's two-flight escape. Its wall-side edge beyond the pavilion was
+unguarded, and two small patches inside the rail outline lacked floor. The
+middle plate now reaches the inner guard bend without covering the lower
+flight mouth. The outer turning plate fills its wall-side corner, and the
+existing short rail continues from the pavilion's end to the outer guard.
+The doors, flights and upper landing keep their existing geometry.
+
+`Browser/dist/courtyard-photo-detail.mjs` supplies the repair to browser
+exploration, gameplay and aerial construction. `test-exterior-stair-rails.mjs`
+adds 50 ray-tested support points over the former holes, a level deck walk,
+six attempted falls through the repaired edge, and both doorway approaches.
+The original source fails at the first missing-floor sample. The repaired
+scene passes 107 guards / 299 supported fall-prevention probes, the existing
+upper-stair round trips, timeline removal and batched collision parity.
+The clearance audit passes all 20 exterior flights / 2,340 tread and headroom
+samples, 503 source landing-edge samples and 490 compiled landing-edge samples.
+
+Five matching before/after browser views render without page or shader errors.
+Visual review confirms a solid landing, joined wall-side railing and open
+stair mouths. The aerial model was regenerated, and `npm run test:compiled`
+passes source/compiled image and draw-count comparisons, full-detail and
+fallback loading, all timeline stops and live walking-obstacle refresh.
+Browser sources and local generated aerial assets are updated. Unity, Blender
+and packaged app exports were not regenerated.
+
+The full `npm test` run stops at the independent furniture assertion
+"Compact book-filled shelves remain fixed". All 108 subsequent suite commands
+were run separately: 106 pass; only the two whole-estate fingerprint checks
+fail. Whole-estate Jarman and
+Leighton/Newton fingerprints also differ when this repair's original courtyard
+source is restored: both original counts are 31 primitives below their saved
+references. Those reference files are left unchanged. Before/after fingerprint
+reports, browser captures, build results and suite logs are retained in
+`Browser/artifacts/redesmere-fire-escape/`; the original screenshot and modelling
+notes are in `Research/exterior-stair-rails/`.
+
+## Exterior door sill and course clearance (3 October 2026)
+
+The reported west garden door is the blue double leaf at (-45.2, 19.59).
+Its continuous lower window-sill strip ran across the leaf at y=0.53.
+`west-front-photo-detail.mjs` now splits just that strip outside the frame,
+retaining both sidelight ledges and every other window band.
+
+The wider audit finds two more affected doors in the Larkton annexe recess.
+`annexe-larkton-recess.mjs` stops their terracotta base course at the door
+surrounds and omits the projecting window sill beneath the pale door's upper
+lights. Authored glazing rails, panel details, thresholds, walls, roofs,
+walking routes and ward placement remain intact.
+
+`test-exterior-door-supports.mjs` now surveys projecting horizontal trim in
+each leaf's axes, using individual instances, bounds and confirming rays.
+All 109 exterior leaves pass across 1829, 1849, 1870, 1916, 1938 and 2021
+(325 visible door/period checks), along with the existing ground-support
+and annexe stair checks. Explicit authored glazing/panel rails are retained.
+`DOOR_TRIM_BASELINE=1` restores only the two original builders in memory:
+the new survey then detects four crossing strips across three doors and
+fails at its clearance assertion. Expected protected snapshots are unchanged.
+
+The west and Larkton regressions probe the full reported strip heights and
+retain neighbouring ledges, lower door panels, ward preservation and walking
+checks. `test-exterior-door-trim-browser.mjs` captures the three doors and a
+phone view, and probes their retained named sources in both procedural and
+compiled aerial scenes before restoring batched render visibility.
+Evidence, baseline sources, surveys and validation logs are in
+`Browser/artifacts/door-trim/`. The local aerial model was regenerated.
+Only browser sources, tests, modelling notes and local generated aerial assets
+are updated; Unity, Blender and packaged exports were not regenerated.

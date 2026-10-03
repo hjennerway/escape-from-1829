@@ -1,0 +1,12 @@
+import assert from 'node:assert/strict';
+import {readFile,writeFile} from 'node:fs/promises';
+import {createHash} from 'node:crypto';
+import {buildAsylumLayout} from '../../dist/asylum-layout.mjs';
+import {furnishAsylum} from '../../dist/asylum-furniture.mjs';
+const validation=JSON.parse(await readFile(new URL('validation.json',import.meta.url))),floors=buildAsylumLayout(JSON.parse(await readFile(new URL('../../dist/asylum-plan.json',import.meta.url)))).floors;
+furnishAsylum(floors);
+const current=floors.flatMap(f=>f.furniture.filter(i=>i.stocked)),captured=validation.rooms.flatMap(r=>r.shelves);
+assert.deepEqual(current,captured,'The current shared checkout retains the visually checked library placements');
+const sources={};for(const file of ['asylum-furniture.mjs','asylum-room-uses.mjs','furniture-models.mjs'])sources[file]=createHash('sha256').update(await readFile(new URL('../../dist/'+file,import.meta.url))).digest('hex');
+await writeFile(new URL('current-source-check.json',import.meta.url),JSON.stringify({capturedPlacementsMatch:true,rooms:validation.rooms.length,cases:current.length,sources,compilerScope:validation.compiledInputs},null,2)+'\n');
+console.log(`PASS: current shared sources match all ${current.length} visually checked library cases.`);

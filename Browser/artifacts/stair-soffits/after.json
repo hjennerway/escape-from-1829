@@ -1,0 +1,90 @@
+{
+  "views": [
+    {
+      "stair": "S1",
+      "lower": 2,
+      "upper": 0,
+      "name": "upper-flight"
+    },
+    {
+      "stair": "S1",
+      "lower": 2,
+      "upper": 0,
+      "name": "lower-flight"
+    },
+    {
+      "stair": "S1",
+      "lower": 0,
+      "upper": 1,
+      "name": "upper-flight"
+    },
+    {
+      "stair": "S1",
+      "lower": 0,
+      "upper": 1,
+      "name": "lower-flight"
+    },
+    {
+      "stair": "S1",
+      "lower": 1,
+      "upper": 3,
+      "name": "upper-flight"
+    },
+    {
+      "stair": "S1",
+      "lower": 1,
+      "upper": 3,
+      "name": "lower-flight"
+    },
+    {
+      "stair": "S3",
+      "lower": 0,
+      "upper": 1,
+      "name": "upper-flight"
+    },
+    {
+      "stair": "S3",
+      "lower": 0,
+      "upper": 1,
+      "name": "lower-flight"
+    },
+    {
+      "stair": "S4",
+      "lower": 0,
+      "upper": 1,
+      "name": "upper-flight"
+    },
+    {
+      "stair": "S4",
+      "lower": 0,
+      "upper": 1,
+      "name": "lower-flight"
+    },
+    {
+      "stair": "S5",
+      "lower": 2,
+      "upper": 0,
+      "name": "upper-flight"
+    },
+    {
+      "stair": "S5",
+      "lower": 2,
+      "upper": 0,
+      "name": "lower-flight"
+    },
+    {
+      "stair": "S5",
+      "lower": 0,
+      "upper": 1,
+      "name": "upper-flight"
+    },
+    {
+      "stair": "S5",
+      "lower": 0,
+      "upper": 1,
+      "name": "lower-flight"
+    }
+  ],
+  "mobile": true,
+  "errors": []
+}

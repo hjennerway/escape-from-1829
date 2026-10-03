@@ -344,3 +344,19 @@ and compiled comparison views are in Browser/artifacts/gallery-brick/.
 Reference: [owner's yellow-circled view](gallery-lower-return-marked.png).
 The full browser suite, rebuilt compiled/source comparison, timeline checks
 and focused wall/walking checks pass; see the development notes for evidence.
+
+## Garden door sill clearance (3 October 2026)
+
+The owner's [door screenshot](garden-door-sill-reference.png) identifies the
+blue garden entrance at (-45.2, 19.59). The lower continuous sill beneath its
+flanking lights crossed the door at y=0.53. That strip now ends outside the
+doorframe: two 0.94-unit side pieces retain the ledges under the sidelights,
+with a 1.9-unit clear centre. The other window bands, door, handles and glazing
+retain their positions. Dimensions fit existing browser geometry.
+
+The exterior-door survey also found two affected Larkton annexe doors; see
+the corresponding Larkton/Jodrell notes. All 109 audited exterior leaves have
+clear projecting sill/course spans across six periods after those repairs.
+Matching before/source/compiled close views and phone captures use
+`Browser/artifacts/door-trim/`. Browser sources and the local compiled aerial
+model are updated; Unity, Blender and packaged exports are not regenerated.

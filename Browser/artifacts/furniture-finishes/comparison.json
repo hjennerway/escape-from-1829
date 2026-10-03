@@ -1,0 +1,181 @@
+{
+  "captures": [
+    "before-dispensary",
+    "before-table-chairs",
+    "before-shelves",
+    "before-bath",
+    "before-electricity",
+    "before-model-table",
+    "before-model-chair",
+    "before-model-cupboard",
+    "before-model-apothecary",
+    "before-model-bench",
+    "before-model-bookcase",
+    "before-model-bed",
+    "before-model-hydroBath",
+    "before-model-hydroShower",
+    "before-model-operatingTable",
+    "before-model-electrotherapy",
+    "before-model-bloodletting",
+    "before-model-ectMachine",
+    "before-model-books",
+    "before-close-table",
+    "before-close-chair",
+    "before-close-cupboard",
+    "before-swatches",
+    "before-mobile-wardrobe",
+    "after-dispensary",
+    "after-table-chairs",
+    "after-shelves",
+    "after-bath",
+    "after-electricity",
+    "after-model-table",
+    "after-model-chair",
+    "after-model-cupboard",
+    "after-model-apothecary",
+    "after-model-bench",
+    "after-model-bookcase",
+    "after-model-bed",
+    "after-model-hydroBath",
+    "after-model-hydroShower",
+    "after-model-operatingTable",
+    "after-model-electrotherapy",
+    "after-model-bloodletting",
+    "after-model-ectMachine",
+    "after-model-books",
+    "after-close-table",
+    "after-close-chair",
+    "after-close-cupboard",
+    "after-swatches",
+    "after-mobile-wardrobe"
+  ],
+  "swatches": [
+    {
+      "finishes": {
+        "wood": null,
+        "lightWood": null,
+        "darkWood": null,
+        "paint": null,
+        "ivory": null,
+        "iron": null,
+        "brass": null,
+        "steel": null,
+        "glass": null,
+        "amber": null,
+        "ceramic": null,
+        "cloth": null,
+        "rubber": null,
+        "paper": null,
+        "red": null,
+        "water": null
+      },
+      "bands": {
+        "wood": {
+          "mean": 88.02005391304345,
+          "periodicBandAmplitude": 1.1397155906146657
+        },
+        "paint": {
+          "mean": 164.55612894409944,
+          "periodicBandAmplitude": 2.0835643882126846
+        },
+        "ivory": {
+          "mean": 204.80902683229803,
+          "periodicBandAmplitude": 2.4650892229622223
+        },
+        "iron": {
+          "mean": 64.73822347826089,
+          "periodicBandAmplitude": 0.7541726058314366
+        },
+        "brass": {
+          "mean": 116.88030770186344,
+          "periodicBandAmplitude": 1.534340706039132
+        }
+      }
+    },
+    {
+      "finishes": {
+        "wood": "wood",
+        "lightWood": "wood",
+        "darkWood": "wood",
+        "paint": "coating",
+        "ivory": "coating",
+        "iron": "metal",
+        "brass": "metal",
+        "steel": null,
+        "glass": null,
+        "amber": null,
+        "ceramic": null,
+        "cloth": null,
+        "rubber": null,
+        "paper": null,
+        "red": null,
+        "water": null
+      },
+      "bands": {
+        "wood": {
+          "mean": 88.25711875776403,
+          "periodicBandAmplitude": 0.01679223537038843
+        },
+        "paint": {
+          "mean": 166.26921105590068,
+          "periodicBandAmplitude": 0.03312905437185621
+        },
+        "ivory": {
+          "mean": 206.88173701863317,
+          "periodicBandAmplitude": 0.03475271456620366
+        },
+        "iron": {
+          "mean": 65.58922372670814,
+          "periodicBandAmplitude": 0.08732199751210959
+        },
+        "brass": {
+          "mean": 118.72268211180118,
+          "periodicBandAmplitude": 0.4960643283372729
+        }
+      }
+    }
+  ],
+  "errors": [],
+  "blockedRemoteResources": [
+    {
+      "mode": "before",
+      "url": "https://www.whateversleft.co.uk/wp-content/uploads/2008/11/031.jpg"
+    },
+    {
+      "mode": "before",
+      "url": "https://www.whateversleft.co.uk/wp-content/uploads/2008/11/007-1.jpg"
+    },
+    {
+      "mode": "before",
+      "url": "https://basedinchurton.co.uk/wp-content/uploads/2025/05/cheshire-lunatic-asylum-report-1855-diagnosis.jpg?w=450"
+    },
+    {
+      "mode": "before",
+      "url": "https://basedinchurton.co.uk/wp-content/uploads/2025/05/total-forms-mental-disorder-asylum-1854-1867.jpg"
+    },
+    {
+      "mode": "before",
+      "url": "https://basedinchurton.co.uk/wp-content/uploads/2025/05/1855-occupations-of-patients-admitted.jpg"
+    },
+    {
+      "mode": "after",
+      "url": "https://www.whateversleft.co.uk/wp-content/uploads/2008/11/031.jpg"
+    },
+    {
+      "mode": "after",
+      "url": "https://www.whateversleft.co.uk/wp-content/uploads/2008/11/007-1.jpg"
+    },
+    {
+      "mode": "after",
+      "url": "https://basedinchurton.co.uk/wp-content/uploads/2025/05/cheshire-lunatic-asylum-report-1855-diagnosis.jpg?w=450"
+    },
+    {
+      "mode": "after",
+      "url": "https://basedinchurton.co.uk/wp-content/uploads/2025/05/total-forms-mental-disorder-asylum-1854-1867.jpg"
+    },
+    {
+      "mode": "after",
+      "url": "https://basedinchurton.co.uk/wp-content/uploads/2025/05/1855-occupations-of-patients-admitted.jpg"
+    }
+  ]
+}

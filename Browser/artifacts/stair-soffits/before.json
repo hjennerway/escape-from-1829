@@ -1,0 +1,18 @@
+{
+  "views": [
+    {
+      "stair": "S1",
+      "lower": 0,
+      "upper": 1,
+      "name": "upper-flight"
+    },
+    {
+      "stair": "S1",
+      "lower": 0,
+      "upper": 1,
+      "name": "lower-flight"
+    }
+  ],
+  "mobile": true,
+  "errors": []
+}

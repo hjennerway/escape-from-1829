@@ -1,0 +1,106 @@
+# Windsor Chair
+
+A parametric Windsor chair with splayed/raked legs, turned stretchers, curved spindle back, scooped seat, and through-tenon wedges.
+
+| | |
+|---|---|
+| ![Iso](iso.png) | ![Front](front.png) |
+| ![Right](right.png) | ![Transparent](iso-transparent.png) |
+
+## Features
+
+- **Shaped seat** with trapezoidal outline (front/back arcs, angled sides), dual comfort scoops, and filleted edges
+- **4 splayed/raked legs** with turned profiles (tenon, shoulder, taper) via revolve, positioned from seat corner geometry
+- **H-stretcher system** — side stretchers connect front-to-back legs, cross stretcher connects side stretchers, all body-referenced via `intersectWithSketchPlane`
+- **7 curved back spindles** arranged on a comfort arc, raked backward
+- **Swept crest rail** following the spindle top arc
+- **Tenon extensions** on all leg and stretcher ends
+- **Through-tenon wedges** at all 10 joints (4 leg-to-seat, 4 stretcher-to-leg, 2 cross-stretcher-to-side-stretcher) using `tenon_wedge` template with `end_face=` for compound angles
+- **Multi-species appearance** — white oak body, rosewood wedges, grain-aligned via principal axes of inertia
+
+## Key Parameters
+
+| Parameter | Default | Description |
+|-----------|---------|-------------|
+| `seat_w` | 18 in | Seat width (front) |
+| `seat_d` | 15 in | Seat depth |
+| `seat_t` | 1.75 in | Seat thickness |
+| `seat_h` | 17.5 in | Floor to seat top |
+| `leg_splay` | 10 deg | Leg outward splay angle |
+| `leg_rake` | 10 deg | Leg fore-aft rake angle |
+| `leg_to_edge` | 2.2 in | Leg center distance from seat corner |
+| `back_rake` | 12 deg | Back spindle rake angle |
+| `n_spindles` | 7 | Number of back spindles |
+| `scoop_depth` | 0.5 in | Seat scoop depth |
+| `tw_sw` | 0.08 in | Wedge slot width |
+| `tw_dr` | 1/2 | Wedge depth ratio |
+
+## Parametric Behavior
+
+Each leg is positioned from its own seat corner: `leg_to_edge` along the near side edge, then `leg_to_edge` perpendicular inward. All four legs are built **independently** by `build_leg` (its `front_y`/`side_x` args select the corner) rather than mirrored — see Build Status below for why. Stretchers are built with the `turned_stretcher` template from the leg axes (`_leg_axis` through each leg's end circles): the two side stretchers connect front-to-back legs at `str_z` height, the cross stretcher connects the side stretchers. Wedges are added per joint. Positions derive from shared parameters so geometry follows parameter changes.
+
+## Wedge Notes
+
+- Leg-to-seat wedges pass `grain_dir=(0, 1, 0)` because the seat is nearly square (18" x 15") — auto-detection is ambiguous
+- Stretcher wedges use auto-detected grain via principal axes of inertia — works correctly for splayed legs and angled stretchers
+- FL and BL legs are wedged independently (not mirrored from FL) to ensure correct slot orientation on each side of the angled mirror plane
+
+## Build Status (2026-07-05)
+
+`validate_design` status: **interference PASS (0), featureImpact PASS, deps
+dependency-tree PASS**; still failing: **connectivity** (round turned joints, see
+below — an accepted limitation) and **deps sketch-traceability** (sketches not yet
+fully-constrained/anchored — in progress). Progress this round:
+
+- **featureImpact → PASS.** Legs are now built FLUSH (`build_leg(proud=False)`), so
+  the trim needs no split/rejoin on them — that stops their foot chamfer and wedge
+  slot cut from being orphaned (a split+rejoined body loses its features' face
+  associations → they read as zero-impact). Redundant wedge→mortise cuts (the wedge
+  sits in the socket void) were removed. Stretcher wedge slot cuts are DEFERRED
+  (`tenon_wedge.round_tenon(defer_cut=True)`) until after the stretcher's flush-trim,
+  so they stay the last feature and aren't orphaned.
+- **Connectivity 8 → 4 clusters.** Flush leg tenons + cutting the seat with each leg
+  wedge give the legs planar contact with the seat, so all four legs, the wedges, the
+  spindles and the crest now form one 17-body cluster. The three stretcher
+  sub-assemblies remain separate (round tenons — see below).
+- **Clean body names + deps tree PASS.** No split/rejoin means legs keep their names
+  (`Leg_FL`…`Leg_BR`), so `model.json`'s `Leg_* → Seat` rows resolve.
+
+### Earlier (2026-07-04)
+
+The example was committed **unvalidated** (`3273fc7 WIP: fan-out anchor drafts …`)
+and did not build. Fixed:
+
+- **Line-770 anchoring over-constraint** (`VCS_SKETCH_SOLVING_FAILED`). The
+  side-edge mirror-plane sketch drew a construction line between the seat's
+  front-left (0,0) and back-left corners, then projected the whole seat outline —
+  whose left edge is the *same* line — and pinned the drawn line's endpoints onto
+  the fixed projected duplicate (one endpoint on the origin), over-constraining the
+  projected-geometry solve. Now the projected left edge is reused directly for the
+  path (no drawn duplicate, no coincidence).
+- **Mirror-recompute corruption.** Legs and the right stretcher were mirrored, then
+  the trim phase split/combined them — Fusion regenerated the mirrors and scrambled
+  body identities (`Leg_FL → "Leg_FR (1) (1)"`), making the per-leg seat mortise and
+  wedge cuts miss. Now all four legs and both side stretchers are built
+  **independently** (`build_leg` takes `front_y`/`side_x` to anchor to any corner),
+  so body references stay stable through the trim.
+- **Interference 18 → 0.** Added spindle→seat and spindle→crest **socket cuts**
+  (spindles were full cylinders interpenetrating both). The crest+spindles+seat are
+  now one connected cluster.
+
+### Remaining (NOT yet green)
+
+1. **Connectivity: 4 clusters, need 1** — the three stretcher sub-assemblies
+   (`Str_Left`, `Str_Right`, `Str_Cross`, each with its wedges) remain separate.
+   `check_connectivity` counts only **planar** face contact, and the round stretcher
+   tenons into the round legs / round cross-into-side have only cylindrical contact.
+   The legs reached the seat cluster because their FLUSH tenons + wedge-cut sockets
+   give a little planar contact (though weak, <1 cm² on the front legs). Fully closing
+   this needs the stretcher joints reworked to blind flat-bottomed mortises — the
+   joinery tradeoff the maintainer chose to defer (keep the wedges).
+2. **deps: sketch traceability** — ~7 sketch-creation sites produce non-anchored or
+   under-constrained sketches: `build_leg`'s `Leg_*_Prof`, the seat outline
+   `Seat_Sk`, `ScoopPath_Sk`, the spindle `Spin_*_Prof`, the crest sketches, plus the
+   shared `turned_stretcher` (windsor-only, safe to edit) and `tenon_wedge` (used by
+   8+ examples → any anchoring must be opt-in). Each fix anchors/​fully-constrains one
+   site (fixes all its instances).

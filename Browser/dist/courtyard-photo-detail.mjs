@@ -63,7 +63,9 @@ export function addCourtyardPhotoDetails(THREE,{model,box,mesh,worldUV,white,bri
   const guard=(a,b)=>addExteriorStairRail(THREE,stair,iron,[a[0]-2,a[1]+.07,a[2]+4.5],[b[0]-2,b[1]+.07,b[2]+4.5]);
   function stairRod(a,b,r=.027){courtRod(a,b,r);const m=model.children[model.children.length-1];stair.attach(m);}
   function landing(x,y){
-    courtBox(iron,x,y,y===8.5?-.82:-.6,2.5,.13,y===8.5?2.54:2.1);
+    // The middle plate reaches the inner rail corner beside the lower flight.
+    // Stop at its mouth so the descending treads retain their headroom.
+    courtBox(iron,x,y,y===8.5?-.82:-.88,2.5,.13,y===8.5?2.54:2.66);
   }
   landing(69.5,8.5);landing(73,4.25);
   // Connect the middle door to its return landing with a deck along the wall.
@@ -80,7 +82,9 @@ export function addCourtyardPhotoDetails(THREE,{model,box,mesh,worldUV,white,bri
     }
   }
   flight(70.75,8.5,74,4.25,-1.5);flight(71.9,4.25,68.9,.3,-2.8);
-  courtBox(iron,73.35,4.25,-1.8,2.9,.13,3.1);
+  // Complete the outer turn up to the wall-side edge, including the corner
+  // beyond the narrower door deck. Both plates finish at the same guard line.
+  courtBox(iron,73.35,4.25,-1.47,2.9,.13,3.84);
   for(const [a,b] of [
     [[68.25,8.5,.45],[68.25,8.5,-2.09]],
     [[68.25,8.5,-2.09],[70.75,8.5,-2.09]],
@@ -90,7 +94,7 @@ export function addCourtyardPhotoDetails(THREE,{model,box,mesh,worldUV,white,bri
     [[71.9,4.25,-1.65],[71.9,4.25,-2.21]],
     [[71.9,4.25,-3.39],[74.8,4.25,-3.39]],
     [[74.8,4.25,-3.39],[74.8,4.25,.45]],
-    [[74.25,4.25,.45],[74.8,4.25,.45]]
+    [[71.75,4.25,.45],[74.8,4.25,.45]]
   ])guard(a,b);
   for(const [x,z,h] of [[68,-1.6,8.5],[70,-1.6,8.5],[74,-2.9,4.25]])stairRod([x,.2,z],[x,h,z],.07);
 

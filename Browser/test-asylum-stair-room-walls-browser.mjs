@@ -18,7 +18,7 @@ try{
  if(mode==='before')await page.route('**/asylum-plan.json',async route=>route.fulfill({contentType:'application/json',body:await readFile(new URL('plan-before.json',destination),'utf8')}));
  await page.route('**/explore.mjs',async route=>{
   const response=await route.fetch();
-  await route.fulfill({response,body:(await response.text()).replace('const clock=new THREE.Timer();','window.stairWallCheck={walker,interior,renderer,floors};const clock=new THREE.Timer();')});
+  await route.fulfill({response,body:(await response.text()).replace('const clock=new THREE.Timer();','window.stairWallCheck={walker,interior,renderer,floors,camera:exterior.camera};const clock=new THREE.Timer();')});
  });
  await page.goto(base+'/explore.html');await page.waitForFunction(()=>window.stairWallCheck?.renderer.info.render.frame>2);
  await page.addStyleTag({content:'#layoutControls,#walkTouch,#exploreDoor,#lookHint,#look,.vignette{display:none!important}'});
@@ -35,7 +35,7 @@ try{
  const views=[];
  for(const floor of [0,1])for(const side of [-1,1])for(const face of ['landing','room']){
   const name=`${side<0?'west':'east'}-${floor===0?'ground':'first'}-${face}`;
-  const x=side*33.5,z=face==='landing'?-31.7:-34.7,tx=side*31.4,tz=face==='landing'?-33.8:-31.7;
+  const x=side*(face==='landing'?35.6:33.5),z=face==='landing'?-31.55:-34.7,tx=side*31.4,tz=face==='landing'?-33.5:-31.7;
   await pose(x,z,tx,tz,floor);
   await page.screenshot({path:fileURLToPath(new URL(`${mode}-${name}.png`,destination))});views.push(name);
  }
@@ -51,7 +51,7 @@ try{
     const actor=walker.actor;
     for(let n=0;n<4000&&Math.hypot(actor.x-x,actor.z-z)>.045;n++){
      const dx=x-actor.x,dz=z-actor.z;
-     walker.camera.rotation.set(0,Math.atan2(-dx,-dz),0);
+     walker.look((t.camera.rotation.y-Math.atan2(-dx,-dz))/.002,0);
      walker.keys.add('KeyW');walker.update(.008);
     }
     walker.keys.clear();return Math.hypot(actor.x-x,actor.z-z)<.05;
@@ -62,7 +62,7 @@ try{
   assert(result.passes.every(Boolean)&&result.floor===(reverse?0:1)&&result.stair===null&&!result.outside,`${stairId} actual exploration walks and releases both flights: ${JSON.stringify(result)}`);
   movements.push({stairId,reverse,...result});
  }
- await page.setViewportSize({width:390,height:844});await pose(-33.5,-31.7,-31.4,-33.8,1);
+ await page.setViewportSize({width:390,height:844});await pose(-35.6,-31.55,-31.4,-33.5,1);
  await page.screenshot({path:fileURLToPath(new URL(`${mode}-mobile.png`,destination))});
  assert.deepEqual(errors,[]);
  await writeFile(new URL(`${mode}.json`,destination),JSON.stringify({views:[...views,'mobile'],movements,errors},null,2)+'\n');

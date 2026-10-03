@@ -1,0 +1,161 @@
+{
+  "dimensions": {
+    "width": 1.065999984741211,
+    "depth": 2.7039999961853027,
+    "height": 1.3259999752044678
+  },
+  "base": 0,
+  "labelBounds": {
+    "min": [
+      -0.39273685216903687,
+      0.7329738736152649,
+      1.3506300449371338
+    ],
+    "max": [
+      0.39273685216903687,
+      0.9198103547096252,
+      1.3506300449371338
+    ]
+  },
+  "visibleSamples": [
+    {
+      "view": "front",
+      "u": -0.9,
+      "v": -0.9,
+      "visible": true
+    },
+    {
+      "view": "front",
+      "u": -0.9,
+      "v": 0,
+      "visible": true
+    },
+    {
+      "view": "front",
+      "u": -0.9,
+      "v": 0.9,
+      "visible": true
+    },
+    {
+      "view": "front",
+      "u": 0,
+      "v": -0.9,
+      "visible": true
+    },
+    {
+      "view": "front",
+      "u": 0,
+      "v": 0,
+      "visible": true
+    },
+    {
+      "view": "front",
+      "u": 0,
+      "v": 0.9,
+      "visible": true
+    },
+    {
+      "view": "front",
+      "u": 0.9,
+      "v": -0.9,
+      "visible": true
+    },
+    {
+      "view": "front",
+      "u": 0.9,
+      "v": 0,
+      "visible": true
+    },
+    {
+      "view": "front",
+      "u": 0.9,
+      "v": 0.9,
+      "visible": true
+    },
+    {
+      "view": "elevated",
+      "u": -0.9,
+      "v": -0.9,
+      "visible": true
+    },
+    {
+      "view": "elevated",
+      "u": -0.9,
+      "v": 0,
+      "visible": true
+    },
+    {
+      "view": "elevated",
+      "u": -0.9,
+      "v": 0.9,
+      "visible": true
+    },
+    {
+      "view": "elevated",
+      "u": 0,
+      "v": -0.9,
+      "visible": true
+    },
+    {
+      "view": "elevated",
+      "u": 0,
+      "v": 0,
+      "visible": true
+    },
+    {
+      "view": "elevated",
+      "u": 0,
+      "v": 0.9,
+      "visible": true
+    },
+    {
+      "view": "elevated",
+      "u": 0.9,
+      "v": -0.9,
+      "visible": true
+    },
+    {
+      "view": "elevated",
+      "u": 0.9,
+      "v": 0,
+      "visible": true
+    },
+    {
+      "view": "elevated",
+      "u": 0.9,
+      "v": 0.9,
+      "visible": true
+    }
+  ],
+  "roomChecks": {
+    "table": {
+      "procedural": true,
+      "width": 1.066,
+      "depth": 2.704,
+      "height": 1.326,
+      "era": "Circa 1830 surgical table",
+      "x": -4.747999999999999,
+      "z": -34.5,
+      "rotation": 1.5707963267948966,
+      "edge": 3,
+      "id": "0:R6:fixed:0",
+      "kind": "operatingTable",
+      "roomId": "R6",
+      "variable": false,
+      "y": 0.008
+    },
+    "roomCentreClear": true
+  },
+  "exploreChecks": {
+    "sameFixedTable": true,
+    "renderedParts": 8,
+    "renderedDimensions": [
+      1.065999984741211,
+      1.3259999752044678,
+      2.7039999961853027
+    ],
+    "walkingStop": 1.7036666666666673,
+    "minimumStop": 1.6520000000000001
+  },
+  "errors": []
+}

@@ -1,0 +1,230 @@
+{
+  "report": [
+    {
+      "mode": "source",
+      "build": {
+        "mode": "procedural",
+        "milliseconds": 4426.800000000745
+      },
+      "hits": [
+        {
+          "door": "west-garden",
+          "dx": -0.6,
+          "y": 0.46,
+          "colour": 14803932
+        },
+        {
+          "door": "west-garden",
+          "dx": -0.6,
+          "y": 0.53,
+          "colour": 14803932
+        },
+        {
+          "door": "west-garden",
+          "dx": -0.6,
+          "y": 0.61,
+          "colour": 14803932
+        },
+        {
+          "door": "west-garden",
+          "dx": -0.3,
+          "y": 0.46,
+          "colour": 14803932
+        },
+        {
+          "door": "west-garden",
+          "dx": -0.3,
+          "y": 0.53,
+          "colour": 14803932
+        },
+        {
+          "door": "west-garden",
+          "dx": -0.3,
+          "y": 0.61,
+          "colour": 14803932
+        },
+        {
+          "door": "west-garden",
+          "dx": 0.3,
+          "y": 0.46,
+          "colour": 14803932
+        },
+        {
+          "door": "west-garden",
+          "dx": 0.3,
+          "y": 0.53,
+          "colour": 14803932
+        },
+        {
+          "door": "west-garden",
+          "dx": 0.3,
+          "y": 0.61,
+          "colour": 14803932
+        },
+        {
+          "door": "west-garden",
+          "dx": 0.6,
+          "y": 0.46,
+          "colour": 14803932
+        },
+        {
+          "door": "west-garden",
+          "dx": 0.6,
+          "y": 0.53,
+          "colour": 14803932
+        },
+        {
+          "door": "west-garden",
+          "dx": 0.6,
+          "y": 0.61,
+          "colour": 14803932
+        },
+        {
+          "door": "Recess shadowed entrance door",
+          "dx": -0.55,
+          "y": 0.12,
+          "hit": "Recess terracotta band"
+        },
+        {
+          "door": "Recess shadowed entrance door",
+          "dx": -0.55,
+          "y": 0.25,
+          "hit": "Recess terracotta band"
+        },
+        {
+          "door": "Recess shadowed entrance door",
+          "dx": -0.55,
+          "y": 0.38,
+          "hit": "Recess terracotta band"
+        },
+        {
+          "door": "Recess shadowed entrance door",
+          "dx": -0.55,
+          "y": 1.515,
+          "hit": "Recess shadowed entrance door"
+        },
+        {
+          "door": "Recess shadowed entrance door",
+          "dx": 0,
+          "y": 0.12,
+          "hit": "Recess terracotta band"
+        },
+        {
+          "door": "Recess shadowed entrance door",
+          "dx": 0,
+          "y": 0.25,
+          "hit": "Recess terracotta band"
+        },
+        {
+          "door": "Recess shadowed entrance door",
+          "dx": 0,
+          "y": 0.38,
+          "hit": "Recess terracotta band"
+        },
+        {
+          "door": "Recess shadowed entrance door",
+          "dx": 0,
+          "y": 1.515,
+          "hit": "Recess shadowed entrance door"
+        },
+        {
+          "door": "Recess shadowed entrance door",
+          "dx": 0.55,
+          "y": 0.12,
+          "hit": "Recess terracotta band"
+        },
+        {
+          "door": "Recess shadowed entrance door",
+          "dx": 0.55,
+          "y": 0.25,
+          "hit": "Recess terracotta band"
+        },
+        {
+          "door": "Recess shadowed entrance door",
+          "dx": 0.55,
+          "y": 0.38,
+          "hit": "Recess terracotta band"
+        },
+        {
+          "door": "Recess shadowed entrance door",
+          "dx": 0.55,
+          "y": 1.515,
+          "hit": "Recess shadowed entrance door"
+        },
+        {
+          "door": "Recess pale room door",
+          "dx": -0.55,
+          "y": 0.12,
+          "hit": "Recess terracotta band"
+        },
+        {
+          "door": "Recess pale room door",
+          "dx": -0.55,
+          "y": 0.25,
+          "hit": "Recess terracotta band"
+        },
+        {
+          "door": "Recess pale room door",
+          "dx": -0.55,
+          "y": 0.38,
+          "hit": "Recess door lower panel"
+        },
+        {
+          "door": "Recess pale room door",
+          "dx": -0.55,
+          "y": 1.515,
+          "hit": "Recess pale room door"
+        },
+        {
+          "door": "Recess pale room door",
+          "dx": 0,
+          "y": 0.12,
+          "hit": "Recess terracotta band"
+        },
+        {
+          "door": "Recess pale room door",
+          "dx": 0,
+          "y": 0.25,
+          "hit": "Recess terracotta band"
+        },
+        {
+          "door": "Recess pale room door",
+          "dx": 0,
+          "y": 0.38,
+          "hit": "Recess terracotta band"
+        },
+        {
+          "door": "Recess pale room door",
+          "dx": 0,
+          "y": 1.515,
+          "hit": "Recess pale room door"
+        },
+        {
+          "door": "Recess pale room door",
+          "dx": 0.55,
+          "y": 0.12,
+          "hit": "Recess terracotta band"
+        },
+        {
+          "door": "Recess pale room door",
+          "dx": 0.55,
+          "y": 0.25,
+          "hit": "Recess terracotta band"
+        },
+        {
+          "door": "Recess pale room door",
+          "dx": 0.55,
+          "y": 0.38,
+          "hit": "Recess door lower panel"
+        },
+        {
+          "door": "Recess pale room door",
+          "dx": 0.55,
+          "y": 1.515,
+          "hit": "Recess pale room door"
+        }
+      ]
+    }
+  ],
+  "errors": []
+}

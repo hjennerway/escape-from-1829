@@ -1,5 +1,53 @@
 # 1829 revised interior plans — 2 October 2026
 
+## Smooth concrete stair undersides (3 October 2026)
+
+The owner's [purple-line underside view](smooth-stair-underside-reference.png)
+requests a continuous sloping concrete surface below the internal flights.
+All four stairs (S1, S3, S4 and S5) now use closed, extruded stepped profiles
+with one planar soffit per flight, replacing the independent thin tread
+blocks. This covers all fourteen flights across the seven floor connections,
+including the basement and Reception's second floor. Solid side faces fill
+the space below the treads; each slope meets the existing flat return landing
+at its underside. The vertical slab thickness is 0.18 scene units below the
+route's slope, an owner-directed modelling estimate rather than a surveyed
+construction dimension.
+
+Tread heights, carpet pads, rail supports, square wells and walking routes
+retain their existing positions. Concrete flights, landings and window trim
+share one merged Stone draw per floor. The plan and drawings do not need
+changes. Only browser model sources are updated; Unity, Blender and packaged
+exports are not regenerated. The aerial compiler excludes this interior and
+its existing manifest still matches its sources. Validation and reviewed
+views are in `../../Browser/artifacts/stair-soffits/` and
+`../../DEVELOPMENT.md`.
+
+## Rear staircase room walls on both floors (3 October 2026)
+
+The owner's [purple-line doorway view](stair-room-walls-reference.png) requests
+the same wall connection wherever this arrangement occurs beside a staircase.
+R5 beside west stair S3 and R16 beside east stair S4 now have complete southern
+room boundaries on both ground and first floors. The walls follow z=-32.4,
+from x=-34.6 to -24.5 in the west and x=24.5 to 34.6 in the east, closing the
+stair-clipped spans beside their existing green framed doorways. All four room
+variants retain edge 2 as solid. Cream upper masonry, red lower masonry and
+dark skirting continue around the joined corners on both faces.
+
+Stair landings, room entrances and fire-exit lobbies remain accessible. Both
+rear flights now use clear sideways landing departures at either level.
+The four-floor wall-end audit distinguishes these room gaps from Reception's
+intentional stair hall and basement stair access. Shared rendering, walking
+collision, navigation and notebook mapping consume the repaired boundaries.
+
+Both JSON copies and the ground/first-floor SVG/PNG drawings are updated.
+These are owner-directed gameplay dimensions. This supersedes the earlier
+ground-only R16 repair and its retained first-floor opening. Browser interiors
+and review drawings change; Unity, Blender and packaged exports are not
+regenerated. The separate aerial model excludes these inputs and its compiled
+manifest still matches its source hash. Checks and reviewed before/after
+views are in `../../Browser/artifacts/stair-room-walls/`; validation is recorded
+in `../../DEVELOPMENT.md`.
+
 ## Enclosed room joins across all floors (3 October 2026)
 
 The owner's [marked pillar-and-gap view](room-closures-reference.png) and

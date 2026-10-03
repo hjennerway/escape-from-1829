@@ -1,0 +1,12 @@
+import * as THREE from '../../dist/vendor/three.module.js';
+import {createEscapeExterior} from '../../dist/escape-exterior.mjs';
+import {jarmanProtected} from '../jarman-scope.mjs';
+import {leightonProtected} from '../leighton-scope.mjs';
+import {readFile,writeFile} from 'node:fs/promises';
+globalThis.document={createElement:()=>({getContext:()=>({fillRect(){},clearRect(){},fillText(){},strokeText(){},measureText:t=>({width:t.length*16})})})};
+const exterior=createEscapeExterior(THREE,1.5);
+const expected={jarman:JSON.parse(await readFile(new URL('../../../Research/jarman/protected-geometry.json',import.meta.url),'utf8')),leighton:JSON.parse(await readFile(new URL('../../../Research/leighton-newton/protected-before.json',import.meta.url),'utf8')).geometry};
+const actual={jarman:jarmanProtected(THREE,exterior.model),leighton:leightonProtected(THREE,exterior.model)};
+const label=process.argv[2]??'current',matches=JSON.stringify(actual)===JSON.stringify(expected);
+await writeFile(new URL(label+'-fingerprints.json',import.meta.url),JSON.stringify({expected,actual,matches},null,2)+'\n');
+console.log(JSON.stringify({label,matches,actual}));

@@ -1,6 +1,7 @@
 // The reviewed plan is shared by the drawings, visible walls and navigation.
 import {stairRoute,stairOpening,floorStairRails,STAIR_WIDTH,RAIL_HEIGHT} from './asylum-stairs.mjs';
 import {joinAsylumWalls} from './asylum-wall-joins.mjs';
+import {furnitureBlocks} from './furniture-collision.mjs';
 export {stairRoute} from './asylum-stairs.mjs';
 export function insidePolygon(x,z,points){
  let inside=false;
@@ -37,12 +38,12 @@ function outsideDoorOpening(exit,outsideEdges,floorId){
  const offset=host&&!entrance?Math.max(Math.min(host[0][along],host[1][along])+margin,Math.min(Math.max(host[0][along],host[1][along])-margin,position[along]))-position[along]:0;
  return {width:entrance?1.9:1.58,height:entrance?3.6:2.465,inset,offset,...exit.wallOpening};
 }
-export function flatWalkable(floor,x,z,radius=.34){
+export function flatWalkable(floor,x,z,radius=.34,{furniture=true}={}){
  const contains=(x,z)=>floor.outline.loops.some(p=>insidePolygon(x,z,p));
  if(![[0,0],[-radius,-radius],[radius,-radius],[-radius,radius],[radius,radius]].every(([dx,dz])=>contains(x+dx,z+dz)))return false;
  for(const shaft of floor.shafts){if(x>shaft.minX-radius&&x<shaft.maxX+radius&&z>shaft.minZ-radius&&z<shaft.maxZ+radius)return false;}
  const nearby=floor.wallIndex?.get(Math.floor(x/4)+','+Math.floor(z/4))??floor.walls;
- return !nearby.some(w=>segmentDistance(x,z,w.a,w.b)<radius+.09);
+ return !nearby.some(w=>segmentDistance(x,z,w.a,w.b)<radius+.09)&&(!furniture||!furnitureBlocks(floor,x,z,radius));
 }
 export function stairDeparture(floor,portal){
  const [x,,z]=portal;

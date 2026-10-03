@@ -1,0 +1,64 @@
+{
+  "author": "Kay Lousberg",
+  "license": "CC0-1.0",
+  "repository": "https://github.com/KayKit-Game-Assets/KayKit-Furniture-Bits-1.0",
+  "commit": "96d5930a8dbdb363409bbc2d3341718b00e17c9c",
+  "models": [
+    "bed_single_A",
+    "shelf_B_large",
+    "table_medium",
+    "book_set"
+  ],
+  "files": [
+    {
+      "path": "LICENSE.txt",
+      "bytes": 827,
+      "sha256": "cd675f2adc31eb5fedaedc1072d8ddc27b917f523682f0561837c03dc56393cb"
+    },
+    {
+      "path": "furniturebits_texture.png",
+      "bytes": 15605,
+      "sha256": "de62db37a80d1801c3d9eb674890ae04b04469e0c149481a51fa250562c628dc"
+    },
+    {
+      "path": "bed_single_A.gltf",
+      "bytes": 3009,
+      "sha256": "7b2852bb66bf82cad3e0d03a499b1480879790fa66b645347e3e73761c4fe3f5"
+    },
+    {
+      "path": "bed_single_A.bin",
+      "bytes": 22044,
+      "sha256": "fc7631db4540d31cbe76dac3c672bc8836ee302796d14bba428bda84b9237f5b"
+    },
+    {
+      "path": "shelf_B_large.gltf",
+      "bytes": 3047,
+      "sha256": "438921fdd044014a02f4e77e4b02205222d83cec3632db2eb8dad50173b24d5c"
+    },
+    {
+      "path": "shelf_B_large.bin",
+      "bytes": 10104,
+      "sha256": "30bbd1a44054d02245bd7388d7143c5f676928d4e293a93f9fd442479afd4840"
+    },
+    {
+      "path": "table_medium.gltf",
+      "bytes": 2973,
+      "sha256": "fd5e5fe8bbf1d3729b6bd725165d58490e9cbd8dd46ce42314b01f20951a302b"
+    },
+    {
+      "path": "table_medium.bin",
+      "bytes": 9328,
+      "sha256": "0e6ba8fd006f673d946979e45487067f4e274be9bbd07816fd371578d2a37518"
+    },
+    {
+      "path": "book_set.gltf",
+      "bytes": 3051,
+      "sha256": "437bfaba3f3413a0b825627a1cb905765a191f4708be51838c9b60c8132cbe61"
+    },
+    {
+      "path": "book_set.bin",
+      "bytes": 11576,
+      "sha256": "3aa3fcc774b46c7ffe2b1a3109bf006749163bbb392cfca930b34bfba4b67853"
+    }
+  ]
+}

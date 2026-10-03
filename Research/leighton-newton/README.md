@@ -1,5 +1,25 @@
 # Leighton / Newton photographic refinement — 24 September 2026
 
+## Snapshot reconciliation — 3 October 2026
+
+The protected estate comparison has the same stale reference as Jarman after
+the documented exterior stair, facade-course, inner-court sash and roof-soffit
+repairs. Historical model modules at `16abbbb` reproduce the saved 884,129
+primitives and SHA-256 exactly. The audited current reference contains 882,977
+primitives, retaining 882,232 exactly; the same 1,897 removed and 745 added
+pieces in 70 reviewed feature groups account for the change. Evidence and the
+source-stability checks are in `Browser/artifacts/jarman-comparison/`.
+
+Only the saved estate count/hash changes. Original L dimensions, both photo
+camera starts, glazing, canopy normals, collisions, visibility and scope rules
+remain exact, and the photographic regression passes normally. No model source
+or compiled asset changes as part of this reference repair. This supersedes
+the earlier snapshot totals below.
+
+The complete final browser suite passes all 114 commands with exit code 0,
+including Jarman and Leighton/Newton. The log is
+`Browser/artifacts/jarman-comparison/npm-test-final.log`.
+
 ## Snapshot reconciliation — 29 September 2026
 
 The protected-estate baseline is refreshed to 884,063 primitives after an

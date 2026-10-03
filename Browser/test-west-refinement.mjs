@@ -67,6 +67,15 @@ assert.equal(outerBounds.min.z,15.5,'the outer arm retains its rear connection')
 assert.equal(outerBounds.min.x,-72,'the established outside wall stays fixed');
 assert.equal(outerBounds.max.x,-64,'the yellow face narrows to eight units');
 const {bayX,bayWidth,outerRight,innerX}=WEST_FRONT_E_PLAN;
+const gardenDoorX=(bayX+bayWidth/2+innerX)/2;
+for(const dx of [-.6,-.3,.3,.6])for(const y of [.46,.53,.61]){
+  const leaf=hit([gardenDoorX+dx,y,20.2],[0,0,-1]);
+  assert.equal(leaf?.object.material.color.getHex(),0x172e50,'The lower sidelight sill never crosses the garden door');
+}
+for(const side of [-1,1]){
+  const sill=hit([gardenDoorX+side*1.42,.53,20.2],[0,0,-1]);
+  assert.equal(sill?.object.material.color.getHex(),0xe1e3dc,'Both adjacent sidelight ledges are retained');
+}
 const bayOutline=model.getObjectByName('West curved bay').userData.collisionFootprint;
 assert.equal(bayOutline[3][0]-bayOutline[2][0],2.3,'the blue central face has the narrower photographic proportion');
 const branchRoof=model.getObjectByName('West curved bay slate roof'),roofPoints=branchRoof.geometry.attributes.position;

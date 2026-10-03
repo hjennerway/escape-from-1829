@@ -1,0 +1,14 @@
+{
+  "capturedPlacementsMatch": true,
+  "rooms": 8,
+  "cases": 36,
+  "sources": {
+    "asylum-furniture.mjs": "0063ca30a46be78b536930852b882c8f5f2c652eef0fe809b56e372840306366",
+    "asylum-room-uses.mjs": "61313b74480880b00437277c766a2068bba99485f674220e6d8f368d0e9ace24",
+    "furniture-models.mjs": "2ceca491bf0136c769d458655ce5cf4b85085280c0d6fcca9dabfde81b30bccd"
+  },
+  "compilerScope": {
+    "count": 171,
+    "interiorSourcesExcluded": true
+  }
+}

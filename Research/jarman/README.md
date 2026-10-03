@@ -1,5 +1,31 @@
 # Jarman lawn frontage — 24 September 2026
 
+## Snapshot reconciliation — 3 October 2026
+
+The owner's request to repair the exterior comparison updates the protected
+estate reference from 820,082 to 818,930 primitives. An isolated import of all
+132 historical model modules at `16abbbb` reproduces the previous count and
+SHA-256 exactly. The current model retains 818,185 primitive records exactly;
+1,897 old pieces and 745 replacement pieces belong to 70 reviewed groups from
+the documented exterior stair guards/clearance, continuous facade courses,
+inner-court window spacing and roof-soffit repairs. The anonymous changes are
+confined to those main-estate facade/stair areas. The corresponding
+Leighton/Newton estate reference had the same stale comparison and is reconciled
+using the same evidence, retaining its original L ranges.
+
+`Browser/artifacts/jarman-comparison/audit.mjs` reproduces the historical and
+current production fingerprints independently, including the original scope
+exclusions. `refresh.mjs` checks every changed feature group, the primitive
+delta, stable exterior source inputs and both current production fingerprints
+before updating only the two saved count/hash pairs. `reviewed-audit.json`
+records the evidence. Jarman's frontage, sash arrangement, veranda, walking
+collision assertions and scope rules are unchanged. Both photographic tests
+pass normally after the reference update. No exterior model sources or exports
+change as part of this reconciliation; it supersedes the older totals below.
+
+Final validation: all 114 commands in the complete browser suite pass with
+exit code 0; see `Browser/artifacts/jarman-comparison/npm-test-final.log`.
+
 ## Snapshot reconciliation — 29 September 2026
 
 The protected-estate baseline is refreshed to 820,016 primitives after an

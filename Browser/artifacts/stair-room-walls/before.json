@@ -1,0 +1,15 @@
+{
+  "views": [
+    "west-ground-landing",
+    "west-ground-room",
+    "east-ground-landing",
+    "east-ground-room",
+    "west-first-landing",
+    "west-first-room",
+    "east-first-landing",
+    "east-first-room",
+    "mobile"
+  ],
+  "movements": [],
+  "errors": []
+}

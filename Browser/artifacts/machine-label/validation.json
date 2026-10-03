@@ -1,0 +1,125 @@
+{
+  "labelBounds": {
+    "min": [
+      -0.2750000059604645,
+      0.5350796580314636,
+      0.3399999737739563
+    ],
+    "max": [
+      0.2750000059604645,
+      0.6888382434844971,
+      0.3399999737739563
+    ]
+  },
+  "visibleSamples": [
+    {
+      "view": "front",
+      "u": -0.9,
+      "v": -0.9,
+      "visible": true
+    },
+    {
+      "view": "front",
+      "u": -0.9,
+      "v": 0,
+      "visible": true
+    },
+    {
+      "view": "front",
+      "u": -0.9,
+      "v": 0.9,
+      "visible": true
+    },
+    {
+      "view": "front",
+      "u": 0,
+      "v": -0.9,
+      "visible": true
+    },
+    {
+      "view": "front",
+      "u": 0,
+      "v": 0,
+      "visible": true
+    },
+    {
+      "view": "front",
+      "u": 0,
+      "v": 0.9,
+      "visible": true
+    },
+    {
+      "view": "front",
+      "u": 0.9,
+      "v": -0.9,
+      "visible": true
+    },
+    {
+      "view": "front",
+      "u": 0.9,
+      "v": 0,
+      "visible": true
+    },
+    {
+      "view": "front",
+      "u": 0.9,
+      "v": 0.9,
+      "visible": true
+    },
+    {
+      "view": "elevated",
+      "u": -0.9,
+      "v": -0.9,
+      "visible": true
+    },
+    {
+      "view": "elevated",
+      "u": -0.9,
+      "v": 0,
+      "visible": true
+    },
+    {
+      "view": "elevated",
+      "u": -0.9,
+      "v": 0.9,
+      "visible": true
+    },
+    {
+      "view": "elevated",
+      "u": 0,
+      "v": -0.9,
+      "visible": true
+    },
+    {
+      "view": "elevated",
+      "u": 0,
+      "v": 0,
+      "visible": true
+    },
+    {
+      "view": "elevated",
+      "u": 0,
+      "v": 0.9,
+      "visible": true
+    },
+    {
+      "view": "elevated",
+      "u": 0.9,
+      "v": -0.9,
+      "visible": true
+    },
+    {
+      "view": "elevated",
+      "u": 0.9,
+      "v": 0,
+      "visible": true
+    },
+    {
+      "view": "elevated",
+      "u": 0.9,
+      "v": 0.9,
+      "visible": true
+    }
+  ],
+  "errors": []
+}
