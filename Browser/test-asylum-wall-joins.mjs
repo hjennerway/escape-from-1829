@@ -46,7 +46,8 @@ for(const fixture of fixtures){
     ray.set(new THREE.Vector3(x-dz*side*.45,y,z+dx*side*.45),new THREE.Vector3(dz*side,0,-dx*side));ray.far=.65;
     // A joined T/corner has no internal end cap to hit from inside another
     // wall. Verify the solid at the target vertically for those buried probes.
-    if(floor.walls.some(w=>segmentDistance(ray.ray.origin.x,ray.ray.origin.z,w.a,w.b)<.09)){
+    const solids=[...floor.walls,...(floor.exitHeaders??[]).filter(w=>y>w.height)];
+    if(solids.some(w=>segmentDistance(ray.ray.origin.x,ray.ray.origin.z,w.a,w.b)<.09)){
      ray.set(new THREE.Vector3(x,1.2,z),new THREE.Vector3(0,-1,0));ray.far=.2;
      assert(ray.intersectObject(scene.getObjectByName('Asylum Brick'),false).length,'Buried join has a continuous solid footprint');continue;
     }

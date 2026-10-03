@@ -25,7 +25,7 @@ function exportSVG(floor){
   svg+=`<path d="${path(r.points)}" fill="#eee9db" stroke="${r.openEdges?'none':'#8b9295'}" stroke-width="1.1"/>`;
   if(r.openEdges)for(let i=0;i<r.points.length;i++)if(!r.openEdges.includes(i))svg+=`<path d="${line([r.points[i],r.points[(i+1)%r.points.length]])}" fill="none" stroke="#8b9295" stroke-width="1.1"/>`;
  }
- for(const c of corridors.filter(c=>!c.floors||c.floors.includes(floor.id)))svg+=`<path d="${line(c.points)}" fill="none" stroke="#b6d4df" stroke-width="${c.width*scale}" stroke-linejoin="round" stroke-linecap="square"/>`;
+ for(const base of corridors.filter(c=>!c.floors||c.floors.includes(floor.id))){const c={...base,...base.variants?.[floor.id]};svg+=`<path d="${line(c.points)}" fill="none" stroke="#b6d4df" stroke-width="${c.width*scale}" stroke-linejoin="round" stroke-linecap="square"/>`;}
  // Open room-door symbols along their corridor-facing side.
  for(const p of (data.partitions??[]).filter(p=>p.floors.includes(floor.id))){
   const [a,b]=p.points,length=Math.hypot(b[0]-a[0],b[1]-a[1]),dx=(b[0]-a[0])/length,dz=(b[1]-a[1])/length,x=(a[0]+b[0])/2,z=(a[1]+b[1])/2;
@@ -38,6 +38,8 @@ function exportSVG(floor){
   svg+=`<path d="${path([[b.innerLeft,b.front],[b.innerRight,b.front],[b.innerRight,b.back],[b.innerLeft,b.back]])}" fill="#faf9f5" stroke="#665579" stroke-width="2"/>`;
   for(let i=0;i<=12;i++)for(const x of [b.minX,b.innerRight]){const z=b.front+(b.back-b.front)*i/12;svg+=`<path d="${line([[x,z],[x+STAIR_WIDTH,z]])}" stroke="#927ea6" stroke-width="1"/>`;}
  }
+ // Reviewed solid room edges remain visible over the adjoining stair fill.
+ for(const r of floorRooms)for(const i of r.solidEdges??[])svg+=`<path d="${line([r.points[i],r.points[(i+1)%r.points.length]])}" fill="none" stroke="#394d58" stroke-width="2.2"/>`;
  svg+='</g>';
  svg+=`<path d="${outlinePath}" fill="none" stroke="#394d58" stroke-width="2.2" fill-rule="evenodd"/>`;
  for(const room of floorRooms)for(const w of room.windows??[]){const diagonal=w.axis==='diagonal',dx=diagonal?w.width/2/Math.SQRT2:w.axis==='x'?0:w.width/2,dz=diagonal?Math.sign(w.x)*dx:w.axis==='x'?w.width/2:0;svg+=`<path d="${line([[w.x-dx,w.z-dz],[w.x+dx,w.z+dz]])}" stroke="#faf9f5" stroke-width="6"/><path d="${line([[w.x-dx,w.z-dz],[w.x+dx,w.z+dz]])}" stroke="#448296" stroke-width="3"/>`;}

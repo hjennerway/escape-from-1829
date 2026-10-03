@@ -1,7 +1,7 @@
 import assert from 'node:assert/strict';
 import {readFile} from 'node:fs/promises';
 import * as THREE from './dist/vendor/three.module.js';
-import {buildAsylumLayout,moveAsylumActor,stairRoute,flatWalkable,segmentDistance} from './dist/asylum-layout.mjs';
+import {buildAsylumLayout,moveAsylumActor,stairRoute,stairDeparture,flatWalkable,segmentDistance} from './dist/asylum-layout.mjs';
 import {makeFloors,routeBetweenFloors} from './dist/floors.mjs';
 import {path,nearExit} from './dist/core.mjs';
 import {buildArchitecture} from './dist/architecture.mjs';
@@ -74,8 +74,8 @@ assert.deepEqual(failures,[],'All proposed rooms and physical doors must connect
 for(const stair of plan.stairs)for(const [lower,upper] of stair.connections){
  const route=stairRoute(stair,floors[lower].elevation,floors[upper].elevation);
  for(const reverse of [false,true]){
-  const points=reverse?[...route].reverse():route,first=points[0],actor={x:first[0],z:first[2]-.7,y:first[1],floor:reverse?upper:lower};
-  const samples=[first,...points.slice(1),[points.at(-1)[0],points.at(-1)[1],points.at(-1)[2]-.9]];
+  const points=reverse?[...route].reverse():route,first=points[0],startFloor=reverse?upper:lower,endFloor=reverse?lower:upper,arrival=stairDeparture(floors[startFloor],first),departure=stairDeparture(floors[endFloor],points.at(-1)),actor={...arrival,y:first[1],floor:startFloor};
+  const samples=[first,...points.slice(1),[departure.x,points.at(-1)[1],departure.z]];
   let previous=actor.y;
   for(const p of samples){for(let n=0;n<1000&&Math.hypot(actor.x-p[0],actor.z-p[2])>.025;n++){const d=Math.hypot(p[0]-actor.x,p[2]-actor.z),step=Math.min(.055,d);moveAsylumActor(floors,actor,(p[0]-actor.x)/d*step,(p[2]-actor.z)/d*step);assert(Math.abs(actor.y-previous)<.1,'Stairs rise continuously');previous=actor.y;}assert(Math.hypot(actor.x-p[0],actor.z-p[2])<.04,stair.id+' traversable '+reverse);}
   assert.equal(actor.floor,reverse?lower:upper,stair.id+' changes floor by walking');assert.equal(actor.stair,null);

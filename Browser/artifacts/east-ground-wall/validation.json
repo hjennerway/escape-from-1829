@@ -1,0 +1,20 @@
+{
+  "wallProbes": 192,
+  "formerPillarLocations": 3,
+  "walkRoutes": 4,
+  "desktopMobileViews": 6,
+  "pageShaderErrors": 0,
+  "planCopiesMatch": true,
+  "skirtingRecheck": "PASS: 1609 window skirting samples, 4263 single-surface top samples, 69 clear door samples",
+  "baselinePillarCheck": "Rejected original ground-floor pillar",
+  "initialSuiteFailure": "Wall-join probe during concurrent doorway edits; resumed wall-join check passes",
+  "remainingSuite": {
+    "commands": 97,
+    "passedInitially": 94,
+    "passedAfterSkirtingRecheck": 95,
+    "remainingFailures": [
+      "test-jarman.mjs",
+      "test-leighton-newton.mjs"
+    ]
+  }
+}

@@ -1,0 +1,13 @@
+[
+  {
+    "actual": {
+      "primitives": 20558,
+      "sha256": "60dd06c11464b844d7e65a85d3d97099a16493e1d454b194989c780f3c59dc4c"
+    },
+    "expected": {
+      "primitives": 20558,
+      "sha256": "0304b347628c4f21aa4a8765cc002f16b8bac40961ecb50ae62ff52af8fcb8ff"
+    },
+    "message": "Every protected annexe primitive, including the front and both Oakmere elevations, stays unchanged"
+  }
+]

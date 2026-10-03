@@ -49,7 +49,9 @@ export function addRearCourtPhotoDetails(THREE,{model,box,mesh,worldUV,white,bri
   const stairGroup=new THREE.Group();stairGroup.name='Rear return external stair';model.add(stairGroup);
   const guard=(a,b)=>addExteriorStairRail(THREE,stairGroup,iron,[a[0],a[1]+.07,a[2]],[b[0],b[1]+.07,b[2]]);
   function stairRod(a,b,r=.027){rod(a,b,r);stairGroup.attach(model.children[model.children.length-1]);}
-  box(iron,66.4,4.25,-31.85,2,.13,1.8);box(iron,63.7,2.2,-30.925,1.5,.13,2.73);
+  // Each flight meets a deck edge. The former decks covered the sloping
+  // treads, leaving only a few centimetres of clearance beneath the ends.
+  box(iron,66.4,4.25,-31.85,2,.13,1.8);box(iron,62.1,2.2,-30.925,1.5,.13,2.73);
   function flight(x0,y0,x1,y1,z){
     for(let i=0;i<10;i++){
       const t=(i+.5)/10,x=x0+(x1-x0)*t,y=y0+(y1-y0)*t;
@@ -60,17 +62,17 @@ export function addRearCourtPhotoDetails(THREE,{model,box,mesh,worldUV,white,bri
       stairRod([x0,y0-.08,z+side*.5],[x1,y1-.08,z+side*.5],.06);
     }
   }
-  flight(66.3,4.25,63.6,2.2,-31.75);flight(63.6,2.2,66.7,.25,-30.1);
+  flight(65.4,4.25,62.85,2.2,-31.75);flight(62.85,2.2,66.7,.25,-30.1);
   for(const x of [65.5,67.3])stairRod([x,.2,-31],[x,5.25,-31],.055);
   for(const [a,b] of [
     [[65.4,4.25,-30.95],[67.4,4.25,-30.95]],
     [[67.4,4.25,-30.95],[67.4,4.25,-32.75]],
     [[65.4,4.25,-30.95],[65.4,4.25,-31.21]],
     [[65.4,4.25,-32.75],[65.4,4.25,-32.29]],
-    [[62.95,2.2,-32.29],[62.95,2.2,-29.56]],
-    [[62.95,2.2,-32.29],[63.6,2.2,-32.29]],
-    [[62.95,2.2,-29.56],[63.6,2.2,-29.56]],
-    [[64.45,2.2,-31.21],[64.45,2.2,-30.64]]
+    [[61.35,2.2,-32.29],[61.35,2.2,-29.56]],
+    [[61.35,2.2,-32.29],[62.85,2.2,-32.29]],
+    [[61.35,2.2,-29.56],[62.85,2.2,-29.56]],
+    [[62.85,2.2,-31.21],[62.85,2.2,-30.64]]
   ])guard(a,b);
 
   // East wing: the shallow chimney projection interrupts the otherwise flat

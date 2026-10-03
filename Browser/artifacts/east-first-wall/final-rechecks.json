@@ -1,0 +1,42 @@
+{
+  "layoutRecheck": {
+    "status": "passed",
+    "details": "All room/exit routes and continuous physical stairs pass after the shared-project stair update."
+  },
+  "explorationRecheck": {
+    "status": "passed",
+    "details": "23 door round trips, 7 interior connections in both directions, exterior entrance branches and free roaming pass after the shared-project stair update."
+  },
+  "browserRuntime": {
+    "status": "passed",
+    "details": "23 E door round trips with release latch, basement/ground/first stairs, raised landing and desktop/mobile rendering; no runtime errors."
+  },
+  "wallVisualReview": {
+    "status": "passed",
+    "views": [
+      "review-after-from-corridor.png",
+      "review-after-door-join.png",
+      "review-after-room-face.png",
+      "review-after-mobile.png"
+    ]
+  },
+  "exports": {
+    "browserPlan": true,
+    "firstFloorDrawing": true,
+    "unity": false,
+    "blender": false,
+    "packagedApplications": false,
+    "aerialRebuildRequired": false
+  },
+  "fullSuite": {
+    "status": "failed",
+    "test": "test-explore-interior.mjs",
+    "location": "Outdoor annexe fire stair, x=378.5, z=-19.2",
+    "wallControlReproducesFailure": true,
+    "evidence": [
+      "npm-test-final.log",
+      "explore-control.log"
+    ],
+    "interiorWallChecks": "passed"
+  }
+}

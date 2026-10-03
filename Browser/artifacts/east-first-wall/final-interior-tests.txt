@@ -1,0 +1,104 @@
+node test-notebook.mjs
+PASS: notebook discovery, radius/wall fog, independent three-floor/grounds maps, remembered routes, updated doors/stairs, archive deduplication, labelled deductions, hidden NPCs, cached drawing, retry and legacy layout.
+
+node test-asylum-layout.mjs
+PASS: revised four-floor footprint, all rooms/doors reachable, S1 relocation, S2 removal, S5 basement connection, continuous stairs up/down, batched architecture (3253 ms).
+
+node test-reception-second-floor.mjs
+PASS: two second-floor rooms, five exterior-aligned sashes (90 clear panes), 45-degree corners, closed partitions, 12 physically walked cross-floor routes and notebook discovery.
+
+node test-asylum-wall-joins.mjs
+PASS: 131 surveyed wall joins, 1552 exposed masonry rays, 341 mitred corners / 2046 brick and plaster probes across all floors, collision and preserved doorways.
+
+node test-asylum-wall-ceilings.mjs
+PASS: 691 wall runs and 89 doorway headers meet ceilings and adjoining floors, 13944 rendered masonry samples from both sides; room ceiling heights retained.
+
+node test-asylum-basement-end.mjs
+PASS: open basement end, 294 rendered 45-degree wall/skirting samples, 200 walking checks, clear full-height entrance and retained outside exit.
+
+node test-asylum-windows.mjs
+PASS: 12 basement sashes, 2/2/1/1 per side from rear to front, 216 visible panes, all eight room doors, solid surrounds/skirting and collision.
+
+node test-asylum-window-clearance.mjs
+PASS: 274 windows and the Reception transom across four floors, 1334 unobstructed panes, 6710832 sill-to-wall clearance samples, retained window counts and collision.
+
+node test-asylum-doorways.mjs
+node:internal/modules/run_main:107
+    triggerUncaughtException(
+    ^
+
+AssertionError [ERR_ASSERTION]: floor 1 R27 retains its room front beside the doorway
++ actual - expected
+
++ undefined
+- 'Asylum Plaster'
+
+    at file:///C:/Users/Harry/Documents/_escape-from-1829/Browser/test-asylum-doorways.mjs:47:12 {
+  generatedMessage: false,
+  code: 'ERR_ASSERTION',
+  actual: undefined,
+  expected: 'Asylum Plaster',
+  operator: 'strictEqual',
+  diff: 'simple'
+}
+
+Node.js v24.20.0
+
+node test-asylum-door-frames.mjs
+PASS: 23 outside frames and 89 room frames on four floors, 2724 masonry support/face-clearance rays, closed leaves and unchanged exterior anchors.
+
+node test-asylum-exit-surrounds.mjs
+PASS: 23 fitted exterior doors, 6536 matching masonry probes, 207 closed-leaf probes, aligned frames, solid side collision and clear approaches.
+
+node test-asylum-east-corner.mjs
+PASS: D10 fitted wall/header, 210 masonry rays, angled return, skirting and collision, closed leaf and two approach walks.
+
+node test-asylum-east-ground-wall.mjs
+PASS: 192 masonry/skirting rays, removed ground-floor pillar, continuous diagonal wall, room/corridor walks and retained upper-floor R35 fragment.
+
+node test-asylum-east-corridor.mjs
+PASS: 320 wall/corner masonry and skirting rays, solid joins, widened corner, four routes walked both ways and ground-floor scope.
+
+node test-asylum-east-rear-wall.mjs
+PASS: 192 rear ground-floor masonry/skirting rays, joined doorway wall, collision, room/stair/fire-exit approaches, full stair walks and retained upper-floor opening.
+
+node test-asylum-east-first-wall.mjs
+PASS: 384 first-floor masonry/skirting rays, removed projecting section, joined L-shaped enclosure, solid collision, room/corridor walks and preserved other floors.
+
+node test-asylum-stairs.mjs
+PASS: square guarded wells, Reception basement connection, 1029 visible support/headroom samples, 70 fall barriers, all 23 door routes physically walked.
+
+node test-asylum-slabs.mjs
+PASS: 8652 floor/ceiling cap views from both sides, 1454 oblique shaft/perimeter edge views, 128 clear shaft samples across all four floors.
+
+node test-asylum-skirting.mjs
+PASS: 1609 window skirting samples, 4287 single-surface top samples, convex/concave/angled mitres, intersecting/duplicate partitions, 69 clear door samples, unchanged navigation.
+
+node test-asylum-outside.mjs
+PASS: every outside arrival clears walls and has support; all seven fire escapes descend/climb using the rendered treads.
+PASS: west rear and both frontage basement walks, embedded-pose recovery, idle settling, and 1251960 movement probes across the asylum/grounds.
+PASS: game exterior batching preserves original collision/support and render visibility.
+
+node test-explore-interior.mjs
+node:internal/modules/run_main:107
+    triggerUncaughtException(
+    ^
+
+AssertionError [ERR_ASSERTION]: Walk reaches {"target":[378.50065620370634,-19.197299165373607],"actor":{"x":378.5417588258181,"y":4.612500002682209,"z":-19.288382062413138,"floor":0,"outside":true,"stair":null,"verticalTrend":1,"d":0}}
+    at follow (file:///C:/Users/Harry/Documents/_escape-from-1829/Browser/test-explore-interior.mjs:27:3)
+    at file:///C:/Users/Harry/Documents/_escape-from-1829/Browser/test-explore-interior.mjs:61:2
+    at Group.traverse (file:///C:/Users/Harry/Documents/_escape-from-1829/Browser/dist/vendor/three.core.js:12974:3)
+    at Group.traverse (file:///C:/Users/Harry/Documents/_escape-from-1829/Browser/dist/vendor/three.core.js:12980:18)
+    at Group.traverse (file:///C:/Users/Harry/Documents/_escape-from-1829/Browser/dist/vendor/three.core.js:12980:18)
+    at Group.traverse (file:///C:/Users/Harry/Documents/_escape-from-1829/Browser/dist/vendor/three.core.js:12980:18)
+    at file:///C:/Users/Harry/Documents/_escape-from-1829/Browser/test-explore-interior.mjs:52:16 {
+  generatedMessage: false,
+  code: 'ERR_ASSERTION',
+  actual: false,
+  expected: true,
+  operator: '==',
+  diff: 'simple'
+}
+
+Node.js v24.20.0
+

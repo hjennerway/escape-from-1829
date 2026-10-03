@@ -1,5 +1,5 @@
 import {path,walkable} from './core.mjs';
-import {stairRoute} from './asylum-layout.mjs';
+import {stairRoute,stairDeparture} from './asylum-layout.mjs';
 
 export const FLOOR_HEIGHT=4.2;
 export function makeFloors(ground){
@@ -46,8 +46,8 @@ function planRoute(floors,from,to){
   const points=[];
   for(let i=1;i<route.length;i++){const start=route[i-1],end=route[i],n=Math.ceil(Math.hypot(end[0]-start[0],end[2]-start[2])/.3);for(let k=1;k<=n;k++){const v=k/n;points.push({x:start[0]+(end[0]-start[0])*v,z:start[2]+(end[2]-start[2])*v,y:start[1]+(end[1]-start[1])*v,floor:k===n&&i===route.length-1?upper:lower});}}
   // Finish beyond the upper/lower portals, so navigation leaves the flight.
-  points.push({x:route.at(-1)[0],z:route.at(-1)[2]-.8,y:route.at(-1)[1],floor:upper});
-  const reverse=points.slice(0,-1).reverse().map(p=>({...p,floor:upper}));reverse.push({x:route[0][0],z:route[0][2]-.8,y:route[0][1],floor:lower});
+  points.push({...stairDeparture(floors[upper],route.at(-1)),y:route.at(-1)[1],floor:upper});
+  const reverse=points.slice(0,-1).reverse().map(p=>({...p,floor:upper}));reverse.push({...stairDeparture(floors[lower],route[0]),y:route[0][1],floor:lower});
   links.push({a,b,route:points},{a:b,b:a,route:reverse});
  }
  for(let a=0;a<nodes.length;a++)for(let b=0;b<nodes.length;b++)if(a!==b&&nodes[a].floor===nodes[b].floor){

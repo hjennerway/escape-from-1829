@@ -332,15 +332,16 @@ export function createAnnexe(THREE,{brick,roof,material,worldUV,hipRoof}){
  // An L-shaped deck meets the top tread and turns alongside the flight to
  // the door. Keep the stairwell open instead of covering the rising treads.
  const innerEdge=tx-7+.825;
- solid(blue,-30.65,5.05,-3.875,3.1,.15,1.45,'Fire stair landing');
- solid(blue,(innerEdge-29.1)/2,5.05,-1.175,-29.1-innerEdge,.15,3.95,'Fire stair door walkway');
+ const landingEdge=tz+6-17*.36-.21,landingBack=landingEdge-1.6;
+ solid(blue,-30.65,5.05,(landingBack+landingEdge)/2,3.1,.15,landingEdge-landingBack,'Fire stair landing');
+ solid(blue,(innerEdge-29.1)/2,5.05,(landingEdge+.8)/2,-29.1-innerEdge,.15,.8-landingEdge,'Fire stair door walkway');
  for(let i=0;i<18;i++)solid(blue,tx-7,.2+i*.27,tz+6-i*.36,1.65,.10,.42,'Blue external stair tread');
  const guard=(a,b)=>addExteriorStairRail(THREE,model,blue,a,b,{name:'Blue external stair guard'});
- for(const side of [-1,1])guard([tx-7+side*.87,.25,tz+6],[tx-7+side*.87,4.84,tz+6-17*.36]);
+ for(const side of [-1,1])guard([tx-7+side*.87,.25,tz+6],[tx-7+side*.87,5.125,landingEdge]);
  // The wall/door side stays open; all exposed edges surround the stairwell.
- guard([-32.2,5.125,-4.6],[-29.1,5.125,-4.6]);
- guard([-32.2,5.125,-4.6],[-32.2,5.125,-3.15]);
- guard([innerEdge,5.125,-3.15],[innerEdge,5.125,.8]);
+ guard([-32.2,5.125,landingBack],[-29.1,5.125,landingBack]);
+ guard([-32.2,5.125,landingBack],[-32.2,5.125,landingEdge]);
+ guard([innerEdge,5.125,landingEdge],[innerEdge,5.125,.8]);
  guard([innerEdge,5.125,.8],[-29.1,5.125,.8]);
  const westSide=new THREE.Group();westSide.name='West mirrored side details';
  for(const child of model.children.slice(sideMeshStart))westSide.add(child);model.add(westSide);

@@ -4,7 +4,7 @@ import {asylumSkirtingGeometry} from './asylum-skirting.mjs';
 import {asylumWallShapes,extrudeAsylumWalls} from './asylum-wall-geometry.mjs';
 import {mergeGeometries} from './vendor/BufferGeometryUtils.js';
 import {mergeAsylumMasonry} from './asylum-wall-joins.mjs';
-import {segmentDistance,insidePolygon} from './asylum-layout.mjs';
+import {segmentDistance,insidePolygon,asylumExitCenter} from './asylum-layout.mjs';
 import {asylumWindowCenters,ASYLUM_WINDOW_WIDTH} from './asylum-windows.mjs';
 import {stairShape,stairOpening,handrailGeometry,STAIR_WIDTH,RAIL_HEIGHT} from './asylum-stairs.mjs';
 const cache=new WeakMap();
@@ -103,8 +103,7 @@ export function buildAsylumArchitecture(THREE,scene,floor){
  // Union also removes caps and overlapping faces at T/duplicate partitions.
  const wallShapes=asylumWallShapes(THREE,mergeAsylumMasonry(masonry));
  for(const exit of floor.exits){
-  const inset=exit.wallOpening?.inset??0;
-  const x=exit.worldX-(exit.axis==='x'?exit.facing*inset:0),z=exit.worldZ-(exit.axis==='z'?exit.facing*inset:0),angle=exit.axis==='x'?Math.PI/2:0;
+  const {x,z}=asylumExitCenter(exit),angle=exit.axis==='x'?Math.PI/2:0;
   if(floor.id===0&&exit.id==='D1'){
    // Interior face of the existing front entrance: the same red double door,
    // six dark panels and cream surround, fitted below the reception ceiling.
@@ -128,7 +127,9 @@ export function buildAsylumArchitecture(THREE,scene,floor){
   }
   const panelHeight=exit.wallOpening?.height??2.36;
   box('Panel',x,panelHeight/2,z,1.55,panelHeight,.09,angle);
-  for(const side of [-1,1])box('Stone',x+(exit.axis==='z'?side*.84:0),1.25,z+(exit.axis==='x'?side*.84:0),.1,2.5,.22,angle);
+  // Cover the masonry returns with .015 lateral clearance and meet the
+  // lintel's underside without overlapping jamb/head faces.
+  for(const side of [-1,1])box('Stone',x+(exit.axis==='z'?side*.835:0),panelHeight/2,z+(exit.axis==='x'?side*.835:0),.12,panelHeight,.22,angle);
   box('Stone',x,2.53,z,1.82,.13,.22,angle);
   box('Brass',x,1.12,z,1.0,.07,.17,angle);
  }
@@ -183,10 +184,17 @@ export function buildAsylumArchitecture(THREE,scene,floor){
  // Keep each finish in one draw call, including the retained window masonry
  // and doorway headers. All vertices remain in building texture coordinates.
  for(const [kind,bottom,top] of [['Brick',0,1.1],['Plaster',1.1,height]]){
-  const parts=[extrudeAsylumWalls(THREE,wallShapes,bottom,top)];
-  if(kind==='Plaster')for(const head of new Set((floor.exitHeaders??[]).map(w=>w.height))){
-   const headers=mergeAsylumMasonry(floor.exitHeaders.filter(w=>w.height===head));
-   parts.push(extrudeAsylumWalls(THREE,asylumWallShapes(THREE,headers),head,top));
+  const parts=[];
+  if(kind==='Brick')parts.push(extrudeAsylumWalls(THREE,wallShapes,bottom,top));
+  else{
+   // Unite headers with the adjoining walls at each head height. Separate
+   // solids leave hidden caps and overlapping faces at angled jamb returns.
+   const headers=floor.exitHeaders??[],levels=[bottom,...new Set(headers.map(w=>w.height)),top].sort((a,b)=>a-b);
+   for(let i=1;i<levels.length;i++){
+    const lo=levels[i-1],hi=levels[i];
+    const runs=mergeAsylumMasonry([...masonry,...headers.filter(w=>w.height<=lo)]);
+    parts.push(extrudeAsylumWalls(THREE,asylumWallShapes(THREE,runs),lo,hi));
+   }
   }
   for(const [x,y,z,w,h,d,ry,rz] of batches.get(kind)??[]){
    transform.position.set(x,y,z);transform.scale.set(w,h,d);transform.rotation.set(0,ry,rz);transform.updateMatrix();

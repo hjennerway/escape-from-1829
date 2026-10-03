@@ -1,5 +1,107 @@
 # 1829 revised interior plans — 2 October 2026
 
+## East rear ground-floor wall closure (3 October 2026)
+
+The owner's [purple-line reference](east-rear-wall-reference.png) closes the
+gap between R16's south wall and the masonry beside its framed entrance,
+across the front of stair S4. The complete ground-floor wall runs along
+z=-32.4 from x=24.5 to x=34.6; the formerly missing span starts at x=29.11.
+The wall retains the room doorway at (34.6, -34), matching cream/red masonry
+and dark skirting on both faces, and the existing first-floor opening.
+
+R16's ground-floor variant marks this edge as solid, preventing general
+stair-clearance clipping from removing it. Shared game/review plans and the
+ground-floor SVG/PNG are updated. Collision, navigation and notebook mapping
+use the same boundary. Stair S4 remains accessible from the corridor-side
+landing; descent turns sideways onto that landing instead of continuing
+through the enclosed room wall. F3's fire-exit lobby remains open.
+
+These are owner-directed gameplay dimensions. Browser interior sources and
+the ground-floor drawing are updated; Unity, Blender and packaged exports
+were not regenerated. Validation and before/after game views are recorded
+in `../../Browser/artifacts/east-rear-wall/` and `../../DEVELOPMENT.md`.
+
+## East ground-floor corridor join and opposite corner (3 October 2026)
+
+The owner's [purple/blue marked view](east-corridor-reference.png) joins R36's
+existing north wall end at (33.8375, 27) to its west wall end at (31.45, 29.42).
+The opposite outside corner is cut back 1.75 units on each side, making a
+continuous 45-degree face from (32, 25.25) to (30.25, 27). Cream/red masonry and
+dark skirting follow both new faces. This gives the diagonal passage about
+2.35 units of clear width, rather than leaving the old corner projecting
+into it. The ground-floor floor/ceiling outline fills the cut-back triangle.
+
+R36's explicit ground-floor boundary retains its doorway piers without
+corridor-width clipping. C6 follows the open northwest side of the new wall
+and reaches the existing forward corridor and R36 west doorway. Both green
+room doorways remain fitted and walkable. R35 and the other floor boundaries
+are unaffected by this particular correction.
+
+Both shared plan JSON copies and the ground-floor SVG/PNG drawing are updated.
+Visible walls, collision, navigation and notebook mapping consume the same
+boundaries. These are owner-directed gameplay dimensions. Browser sources
+and drawings are updated; Unity, Blender and packaged exports were not
+regenerated. The separate aerial compiler excludes these interior inputs.
+Validation and before/after views are in `../../Browser/artifacts/east-corridor/`
+and `../../DEVELOPMENT.md`.
+
+## East first-floor wall and room enclosure (3 October 2026)
+
+The owner's [marked first-floor view](east-first-wall-reference.png) removes
+R27's projecting north-wall section beside its green doorway and encloses
+the room along the purple L-shaped floor line. The new return runs from
+(45.1, 8.5351) to (48.62, 8.5351), then to (48.62, 7), meeting the existing
+western wall and a short fitted doorway pier. Cream/red masonry and dark
+skirting continue around both corners. The doorway stays at (49.75, 7),
+and the existing C1 cross-corridor approach remains accessible.
+
+Both shared plan JSON copies and the first-floor SVG/PNG drawing are updated.
+Visible walls, walking collision, navigation and notebook mapping use these
+boundaries. Ground-floor R27 and the separate R35 ground-floor correction
+retain their existing boundaries.
+These are owner-directed gameplay dimensions. The aerial compiler excludes
+the interior, so no compiled aerial rebuild is needed. Unity, Blender and
+packaged exports were not regenerated. Validation and before/after views are
+in `../../Browser/artifacts/east-first-wall/` and `../../DEVELOPMENT.md`.
+
+## Matching masonry around all outside doors (3 October 2026)
+
+The owner's rear east-wing screenshot identifies F3's oversized, full-height
+opening. All 23 outside door/level connections now use fitted apertures, with
+the existing red lower brick and cream upper brick continuing to the frames.
+Upper masonry closes each opening through the ceiling and adjoining floor.
+Headers share the joined wall footprint so angled returns have continuous
+faces. The red Reception entrance retains its larger opening and transom;
+room entrances retain their existing framed, walk-through openings.
+
+Fitting follows each floor's actual facade plane and the existing frame
+dimensions. These are browser construction corrections, not historical
+measurements. Maps, collision and skirting consume the restored side walls;
+the exterior door destinations and E interaction remain fixed. Validation and
+desktop/mobile views are in `../../Browser/artifacts/door-surrounds/` and
+`../../DEVELOPMENT.md`. The aerial compiler excludes these interiors; Unity,
+Blender and packaged exports were not regenerated for this repair.
+
+## East ground-floor wall and pillar (3 October 2026)
+
+The owner's [marked view](east-ground-wall-reference.png) removes the isolated
+R35 pillar and joins the wall beside its room door along the purple line.
+This supersedes the earlier instruction to retain that fragment in the D10
+repair below. R35's ground-floor boundary now runs diagonally from (36.9, 19.1)
+to (34.5, 22.85), meeting both existing wall runs. Cream/red masonry and dark
+skirting continue along both faces. The green room doorway stays in place.
+
+C6's ground-floor approach follows the open side of that wall, keeping the
+room, forward corridor and courtyard door accessible. Floor-specific corridor
+variants are used by the game and drawing exporter. Both plan JSON copies and
+the ground-floor SVG/PNG are updated; visible walls, collision, navigation and
+notebook mapping derive from those boundaries. The other floor variants and
+exterior outline are unchanged by this correction. These are owner-directed
+gameplay dimensions. The aerial compiler excludes this interior, and Unity,
+Blender and packaged exports were not regenerated for this change. Validation
+and comparison views are in `../../Browser/artifacts/east-ground-wall/` and
+`../../DEVELOPMENT.md`.
+
 ## Window and partition clearance (2 October 2026)
 
 The owner's first-floor screenshot identifies a partition meeting a window.

@@ -1,5 +1,23 @@
 # Asylum escape interior finishes
 
+## Door-frame corner clearance (3 October 2026)
+
+The owner's ground-floor east-wing view identifies D10's cream surround
+extending past the angled wall corner. Its complete interior fitting and
+masonry opening now sit at x=31.82, z=15.5, clearing the adjoining wall.
+D9 inherits the matching west position at x=-31.82; the basement D11 fitting
+moves along its wall to z=-34.48. The exterior door coordinates, destinations
+and E interactions retain their established positions.
+
+Outside frames reserve space for their lintel, the adjoining wall thickness
+and a small clearance. Jambs cover the masonry returns without sharing a
+visible face, and signs follow the fitted door. These are browser construction
+corrections to the existing gameplay plan, not new historic measurements.
+All 23 outside surrounds and 89 room surrounds pass the rendered support
+survey. Validation and captures are in `../../DEVELOPMENT.md` and
+`../../Browser/artifacts/door-frame-fit/`. Unity, Blender and packaged exports
+were not regenerated; the compiled aerial model excludes this interior.
+
 ## Grindley basement mural (2 October 2026)
 
 The owner's [marked view](basement-mural-placement.png) places the supplied

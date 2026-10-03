@@ -1,0 +1,24 @@
+{
+  "planSha256": "1c627a028d50ed41c12b83380a652d64df7cfe6c8f0b1a4d0e4a3303e30afce5",
+  "wallAndSkirtingRays": 320,
+  "walkRoutes": 4,
+  "directionsPerRoute": 2,
+  "clearCorridorWidth": 2.35,
+  "gameViews": 7,
+  "gameWalkTargets": 8,
+  "pageAndShaderErrors": [],
+  "windowCounts": [
+    128,
+    130,
+    12,
+    5
+  ],
+  "sharedPlansMatch": true,
+  "aerialCompilerInputs": 171,
+  "changedInteriorInputsInAerialCompiler": 0,
+  "fullSuite": "Fails at unrelated exterior annexe stair waypoint; identical with original corridor and corner",
+  "suiteLog": "suite-final.txt",
+  "baselineLog": "explore-baseline.txt",
+  "earlierContinuation": "suite-tail.json",
+  "exports": "Browser interior plan/layout, checks and ground-floor SVG/PNG updated; Unity, Blender and packaged exports not regenerated"
+}

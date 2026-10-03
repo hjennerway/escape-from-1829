@@ -1,0 +1,17 @@
+{
+  "views": 5,
+  "movement": {
+    "walks": [
+      {
+        "reverse": false,
+        "floor": 1
+      },
+      {
+        "reverse": true,
+        "floor": 0
+      }
+    ],
+    "flatWalkable": true
+  },
+  "errors": []
+}

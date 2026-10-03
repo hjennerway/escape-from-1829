@@ -1,0 +1,192 @@
+FAIL test-asylum-layout.mjs
+PASS test-reception-second-floor.mjs
+PASS test-asylum-wall-joins.mjs
+PASS test-asylum-wall-ceilings.mjs
+PASS test-asylum-basement-end.mjs
+PASS test-asylum-windows.mjs
+PASS test-asylum-window-clearance.mjs
+PASS test-asylum-doorways.mjs
+PASS test-asylum-door-frames.mjs
+PASS test-asylum-exit-surrounds.mjs
+PASS test-asylum-east-corner.mjs
+PASS test-asylum-east-ground-wall.mjs
+PASS test-asylum-east-corridor.mjs
+PASS test-asylum-east-rear-wall.mjs
+PASS test-asylum-east-first-wall.mjs
+PASS test-asylum-stairs.mjs
+PASS test-asylum-slabs.mjs
+PASS test-asylum-skirting.mjs
+PASS test-asylum-outside.mjs
+PASS test-exterior-stair-rails.mjs
+PASS test-security-guard.mjs
+PASS test-interior-architecture.mjs
+PASS test-interior-lights.mjs
+PASS test-east-forward-end.mjs
+PASS test-front-inside-corners.mjs
+PASS test-redesmere-garden.mjs
+PASS test-laundry.mjs
+PASS test-escape-exterior.mjs
+PASS test-inner-courtyard.mjs
+PASS test-roof-contacts.mjs
+PASS test-west-refinement.mjs
+PASS test-west-side-basement.mjs
+PASS test-water-tower.mjs
+PASS test-church-front.mjs
+PASS test-tower-buildings.mjs
+PASS test-pharmacy.mjs
+PASS test-irby-ashley.mjs
+PASS test-irby-roads.mjs
+PASS test-grafton-edge.mjs
+PASS test-hale-ward.mjs
+PASS test-estates.mjs
+PASS test-farndon.mjs
+PASS test-ward-placement.mjs
+PASS test-ward-corridors.mjs
+PASS test-ground-contact.mjs
+PASS test-building-grounding.mjs
+PASS test-day-night.mjs
+PASS test-exterior-shadows.mjs
+PASS test-tree-rendering.mjs
+PASS test-front-lawn-eztree.mjs
+PASS test-explore.mjs
+FAIL test-explore-interior.mjs
+PASS test-front-basement.mjs
+FAIL test-exterior-door-supports.mjs
+PASS test-explore-input.mjs
+PASS test-jump.mjs
+PASS test-annexe.mjs
+FAIL test-larkton.mjs
+FAIL test-larkton-recess.mjs
+FAIL test-annexe-carden.mjs
+FAIL test-annexe-front-link.mjs
+PASS test-annexe-east-outer.mjs
+FAIL test-annexe-kitchen.mjs
+FAIL test-annexe-rear-stretch.mjs
+FAIL test-annexe-rear-side-alignment.mjs
+FAIL test-annexe-os-refinement.mjs
+PASS test-annexe-photo-placement.mjs
+PASS test-annexe-outer-front.mjs
+FAIL test-jarman.mjs
+FAIL test-oakmere-court.mjs
+PASS test-oakmere.mjs
+FAIL test-oakmere-west.mjs
+FAIL test-oakmere-windows.mjs
+PASS test-annexe-wards.mjs
+FAIL test-leighton-newton.mjs
+PASS test-churton.mjs
+PASS test-upton.mjs
+PASS test-garages-mortuary.mjs
+PASS test-greenhouses.mjs
+PASS test-main-admin.mjs
+PASS test-main-kitchen.mjs
+PASS test-main-admin-refine2.mjs
+PASS test-aerial-controls.mjs
+PASS test-device-location.mjs
+PASS test-aerial-layouts.mjs
+PASS test-kml-imports.mjs
+PASS test-kml-11.mjs
+PASS test-modern-entrance.mjs
+PASS test-modern-car-park.mjs
+PASS test-parsons-retrace.mjs
+PASS test-historic-roads.mjs
+PASS test-road-continuity.mjs
+PASS test-west-parsons-junctions.mjs
+PASS test-admin-teardrop.mjs
+FAIL test-annexe-access.mjs
+PASS test-annexe-rear-roads.mjs
+PASS test-performance.mjs
+PASS test-aerial-performance.mjs
+PASS test-building-detail.mjs
+PASS test-outhouse.mjs
+PASS test-willows.mjs
+PASS test-building-photos.mjs
+{
+  "commands": 102,
+  "failures": [
+    {
+      "command": "node test-asylum-layout.mjs",
+      "exit": 1,
+      "ms": 7089
+    },
+    {
+      "command": "node test-explore-interior.mjs",
+      "exit": 1,
+      "ms": 6637
+    },
+    {
+      "command": "node test-exterior-door-supports.mjs",
+      "exit": 1,
+      "ms": 10824
+    },
+    {
+      "command": "node test-larkton.mjs",
+      "exit": 1,
+      "ms": 5893
+    },
+    {
+      "command": "node test-larkton-recess.mjs",
+      "exit": 1,
+      "ms": 2085
+    },
+    {
+      "command": "node test-annexe-carden.mjs",
+      "exit": 1,
+      "ms": 2034
+    },
+    {
+      "command": "node test-annexe-front-link.mjs",
+      "exit": 1,
+      "ms": 2127
+    },
+    {
+      "command": "node test-annexe-kitchen.mjs",
+      "exit": 1,
+      "ms": 1871
+    },
+    {
+      "command": "node test-annexe-rear-stretch.mjs",
+      "exit": 1,
+      "ms": 1780
+    },
+    {
+      "command": "node test-annexe-rear-side-alignment.mjs",
+      "exit": 1,
+      "ms": 3460
+    },
+    {
+      "command": "node test-annexe-os-refinement.mjs",
+      "exit": 1,
+      "ms": 1994
+    },
+    {
+      "command": "node test-jarman.mjs",
+      "exit": 1,
+      "ms": 6304
+    },
+    {
+      "command": "node test-oakmere-court.mjs",
+      "exit": 1,
+      "ms": 2072
+    },
+    {
+      "command": "node test-oakmere-west.mjs",
+      "exit": 1,
+      "ms": 2264
+    },
+    {
+      "command": "node test-oakmere-windows.mjs",
+      "exit": 1,
+      "ms": 1759
+    },
+    {
+      "command": "node test-leighton-newton.mjs",
+      "exit": 1,
+      "ms": 9695
+    },
+    {
+      "command": "node test-annexe-access.mjs",
+      "exit": 1,
+      "ms": 9517
+    }
+  ]
+}

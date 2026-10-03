@@ -71,8 +71,8 @@ function markExits(){
   lamp(e.x*layout.cellSize,e.z*layout.cellSize,0x77db97);
   // Fitted openings mount the sign on the interior header, alongside the
   // door hardware, rather than beyond the restored masonry.
-  const signOffset=e.wallOpening?-(e.wallOpening.inset??0):.7;
-  group.name='Emergency exit signage';group.position.set(e.x*layout.cellSize+dx*signOffset,0,e.z*layout.cellSize+dz*signOffset);group.rotation.y=Math.atan2(-dx,-dz);scene.add(group);
+  const signOffset=e.wallOpening?-(e.wallOpening.inset??0):.7,along=e.wallOpening?.offset??0;
+  group.name='Emergency exit signage';group.position.set(e.x*layout.cellSize+dx*signOffset+(e.axis==='z'?along:0),0,e.z*layout.cellSize+dz*signOffset+(e.axis==='x'?along:0));group.rotation.y=Math.atan2(-dx,-dz);scene.add(group);
   function plate(width,height,y,inset,paint){
    const c=document.createElement('canvas');c.width=1024;c.height=256;paint(c.getContext('2d'));
    const texture=new THREE.CanvasTexture(c);texture.colorSpace=THREE.SRGBColorSpace;texture.anisotropy=4;

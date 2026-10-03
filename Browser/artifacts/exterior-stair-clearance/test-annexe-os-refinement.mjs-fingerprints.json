@@ -1,0 +1,24 @@
+[
+  {
+    "actual": {
+      "count": 21633,
+      "digest": "c7e0fc9843010abd961d11a6aa25caf9f8665a0f6a5b9ffdbdff68e080a6207b"
+    },
+    "expected": {
+      "count": 21633,
+      "digest": "c3fe8689f382f655beea183a97fb8bda868174b08f08eba5ceaa707f53c4e935"
+    },
+    "message": "Approved annexe local geometry remains unchanged"
+  },
+  {
+    "actual": {
+      "count": 1747,
+      "digest": "d88fddabc47b6e04e76470281f7de00e604f92fdd5670c542d1a18cc5dc23b03"
+    },
+    "expected": {
+      "count": 1747,
+      "digest": "41d35ad5cab7a14553c79e789b487cc63f3ccdb4b4adf40d57f008b25c88a9ae"
+    },
+    "message": "Blue-circled front retains its local geometry within the uniform site fit"
+  }
+]

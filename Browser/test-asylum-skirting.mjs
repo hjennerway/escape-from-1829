@@ -1,7 +1,7 @@
 import assert from 'node:assert/strict';
 import {readFile} from 'node:fs/promises';
 import * as THREE from './dist/vendor/three.module.js';
-import {buildAsylumLayout,segmentDistance} from './dist/asylum-layout.mjs';
+import {buildAsylumLayout,segmentDistance,asylumExitCenter} from './dist/asylum-layout.mjs';
 import {buildAsylumArchitecture} from './dist/asylum-architecture.mjs';
 import {asylumSkirtingGeometry} from './dist/asylum-skirting.mjs';
 import {asylumWallShapes,extrudeAsylumWalls} from './dist/asylum-wall-geometry.mjs';
@@ -71,9 +71,9 @@ for(const floor of floors){
   }
  }
  for(const exit of floor.exits){
-  const d=exit.axis==='x'?[1,0]:[0,1];
+  const d=exit.axis==='x'?[1,0]:[0,1],centre=asylumExitCenter(exit);
   for(const offset of [-.55,.017,.55]){
-   assert.equal(cast(mesh,[exit.worldX-d[0]+d[1]*offset,.13,exit.worldZ-d[1]+d[0]*offset],[d[0],0,d[1]]).length,0,'Door thresholds stay clear');clearances++;
+   assert.equal(cast(mesh,[centre.x-d[0]+d[1]*offset,.13,centre.z-d[1]+d[0]*offset],[d[0],0,d[1]]).length,0,'Door thresholds stay clear');clearances++;
   }
  }
  assert.equal(JSON.stringify(floor.walls),snapshot,'Skirting leaves navigation walls unchanged');

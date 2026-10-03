@@ -1,0 +1,13 @@
+[
+  {
+    "actual": {
+      "primitives": 20340,
+      "sha256": "0f9cb990bf1feaae603fec05df107430e2ddd35dcf4021face6302075b2a1a98"
+    },
+    "expected": {
+      "primitives": 20340,
+      "sha256": "46dee6b97be001e6a07df23c2388bb1f0c059e6f7651f59cd1de2d5760b40c38"
+    },
+    "message": "Annexe primitives outside the red-circled low connector must remain unchanged"
+  }
+]

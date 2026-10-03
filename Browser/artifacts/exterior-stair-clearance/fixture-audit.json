@@ -1,0 +1,96 @@
+[
+  {
+    "test": "test-annexe-access.mjs",
+    "before": 0,
+    "current": 1,
+    "capture": "test-annexe-access.mjs-fingerprints.json",
+    "after": 0
+  },
+  {
+    "test": "test-annexe-front-link.mjs",
+    "before": 0,
+    "current": 1,
+    "capture": "test-annexe-front-link.mjs-fingerprints.json",
+    "after": 0
+  },
+  {
+    "test": "test-annexe-kitchen.mjs",
+    "before": 0,
+    "current": 1,
+    "capture": "test-annexe-kitchen.mjs-fingerprints.json",
+    "after": 0
+  },
+  {
+    "test": "test-annexe-rear-stretch.mjs",
+    "before": 0,
+    "current": 1,
+    "capture": "test-annexe-rear-stretch.mjs-fingerprints.json",
+    "after": 0
+  },
+  {
+    "test": "test-annexe-rear-side-alignment.mjs",
+    "before": 0,
+    "current": 1,
+    "capture": "test-annexe-rear-side-alignment.mjs-fingerprints.json",
+    "after": 0
+  },
+  {
+    "test": "test-annexe-os-refinement.mjs",
+    "before": 0,
+    "current": 1,
+    "capture": "test-annexe-os-refinement.mjs-fingerprints.json",
+    "after": 0
+  },
+  {
+    "test": "test-annexe-carden.mjs",
+    "before": 0,
+    "current": 1,
+    "capture": "test-annexe-carden.mjs-fingerprints.json",
+    "after": 0
+  },
+  {
+    "test": "test-larkton.mjs",
+    "before": 0,
+    "current": 1,
+    "capture": "test-larkton.mjs-fingerprints.json",
+    "after": 0
+  },
+  {
+    "test": "test-larkton-recess.mjs",
+    "before": 0,
+    "current": 1,
+    "capture": "test-larkton-recess.mjs-fingerprints.json",
+    "after": 0
+  },
+  {
+    "test": "test-oakmere-court.mjs",
+    "before": 0,
+    "current": 1,
+    "capture": "test-oakmere-court.mjs-fingerprints.json",
+    "after": 0
+  },
+  {
+    "test": "test-oakmere-west.mjs",
+    "before": 0,
+    "current": 1,
+    "capture": "test-oakmere-west.mjs-fingerprints.json",
+    "after": 0
+  },
+  {
+    "test": "test-oakmere-windows.mjs",
+    "before": 0,
+    "current": 1,
+    "capture": "test-oakmere-windows.mjs-fingerprints.json",
+    "after": 0
+  },
+  {
+    "test": "test-jarman.mjs",
+    "before": 1,
+    "current": 1
+  },
+  {
+    "test": "test-leighton-newton.mjs",
+    "before": 1,
+    "current": 1
+  }
+]

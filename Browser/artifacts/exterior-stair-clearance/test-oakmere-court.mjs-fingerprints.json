@@ -1,0 +1,13 @@
+[
+  {
+    "actual": {
+      "count": 20928,
+      "sha256": "beab1d4e11367633ec6a0e706099a199c5f41ab2cb36674a13d010b0dc28c805"
+    },
+    "expected": {
+      "count": 20928,
+      "sha256": "1337ea2ce69b272a44f812055ff026bb649101ca3f1a456c68e17115a610251a"
+    },
+    "message": "Every pre-existing annexe primitive remains unchanged"
+  }
+]

@@ -4,7 +4,7 @@ import * as THREE from './dist/vendor/three.module.js';
 import {createEscapeExterior} from './dist/escape-exterior.mjs';
 import {createExploreWalker} from './dist/explore-walker.mjs';
 import {createAerialLayouts} from './dist/aerial-layouts.mjs';
-import {buildAsylumLayout,stairRoute} from './dist/asylum-layout.mjs';
+import {buildAsylumLayout,stairRoute,stairDeparture} from './dist/asylum-layout.mjs';
 
 globalThis.document={createElement:()=>({getContext:()=>({fillRect(){},measureText:t=>({width:t.length*16}),strokeText(){},fillText(){}})})};
 const plan=JSON.parse(await readFile(new URL('./dist/asylum-plan.json',import.meta.url)));
@@ -32,8 +32,9 @@ let stairCount=0;
 for(const stair of plan.stairs)for(const [lower,upper] of stair.connections){
  const route=stairRoute(stair,floors[lower].elevation,floors[upper].elevation),start=route[0],end=route.at(-1);
  Object.assign(actor,{x:start[0],y:start[1],z:start[2]-.1,floor:lower,outside:false,stair:null});
- follow(route.map(p=>[p[0],p[2]]).concat([[end[0],end[2]-.9]]));assert.equal(actor.floor,upper);
- follow([...route].reverse().map(p=>[p[0],p[2]]).concat([[start[0],start[2]-.9]]));assert.equal(actor.floor,lower);stairCount++;
+ const upperDeparture=stairDeparture(floors[upper],end),lowerDeparture=stairDeparture(floors[lower],start);
+ follow(route.map(p=>[p[0],p[2]]).concat([[upperDeparture.x,upperDeparture.z]]));assert.equal(actor.floor,upper);
+ follow([...route].reverse().map(p=>[p[0],p[2]]).concat([[lowerDeparture.x,lowerDeparture.z]]));assert.equal(actor.floor,lower);stairCount++;
 }
 // Split front entrance: both branches reach Reception and return to the lawn.
 for(const side of [-1,1]){

@@ -1,0 +1,33 @@
+[
+  {
+    "actual": {
+      "fixed": {
+        "count": 18733,
+        "hash": "4876d627a3aa5988420e0b2c447fc8315c67e00121a7a305a90b42fceeafb8a0"
+      },
+      "head": {
+        "count": 1218,
+        "hash": "31f5914aefeb108337163a0b4123602b5b79d13d3a5dca697e57a67b87486e1b"
+      },
+      "west": {
+        "count": 1482,
+        "hash": "e538767ded7a507dc4239bcc2a170ed4f1f86a3e5089a15b59157833d5268aca"
+      }
+    },
+    "expected": {
+      "fixed": {
+        "count": 18733,
+        "hash": "e08e799aa6db6f50020572ab5a49ebbd82234c59107418ac878e06cd27563622"
+      },
+      "head": {
+        "count": 1218,
+        "hash": "31f5914aefeb108337163a0b4123602b5b79d13d3a5dca697e57a67b87486e1b"
+      },
+      "west": {
+        "count": 1482,
+        "hash": "e538767ded7a507dc4239bcc2a170ed4f1f86a3e5089a15b59157833d5268aca"
+      }
+    },
+    "message": "Every retained primitive preserves its shape, material and height; only the marked assemblies move"
+  }
+]

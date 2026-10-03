@@ -51,12 +51,7 @@ export function createAsylumOutside(THREE,exterior){
   // it. Keep reachable support above that path instead of pulling feet into
   // the retaining wall. The declared path still supplies its exact floor.
   if(surface&&surface.height<=height+.48)candidates.push(surface);
-  // Two photographed rear flights share a half-landing and overlap in plan.
-  // Carry the approach's descent through the return onto the lower flight.
-  const rearReturn=Math.abs(Math.abs(x)-21.9)<.75&&z>-30.8&&z<-24.8&&height>2.5;
-  if(trend<0&&rearReturn){const down=candidates.filter(s=>s.height<=height+.025&&s.height>=height-.5);if(down.length)candidates=down;}
-  if(trend>0&&rearReturn){const up=candidates.filter(s=>s.height>=height-.025);if(up.length)candidates=up;}
-  const hit=candidates.sort(rearReturn&&trend>0?(a,b)=>Math.abs(a.height-height)-Math.abs(b.height-height):(a,b)=>b.height-a.height)[0];
+  const hit=candidates.sort((a,b)=>b.height-a.height)[0];
   if(hit)return hit.height;
   return surface?.height??0;
  }

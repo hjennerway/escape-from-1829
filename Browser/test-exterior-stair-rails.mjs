@@ -27,7 +27,7 @@ function follow(actor,points){
 for(const [name,start,points,top] of [
  ['West garden',{x:-61.3,y:.3,z:20.5},[[-61.3,26.05],[-62.55,26.05],[-62.55,22.1],[-62.55,21],[-63.4,21]],8.5],
  ['East court',{x:66.6,y:.3,z:1.7},[[72.4,1.7],[72.4,3],[68.75,3],[67.5,3],[67.5,4]],8.5],
- ['Rear return',{x:67,y:.25,z:-30.1},[[63.3,-30.1],[63.3,-31.75],[66.4,-31.75]],4.25]
+ ['Rear return',{x:67,y:.25,z:-30.1},[[62.1,-30.1],[62.1,-31.75],[66.4,-31.75]],4.25]
 ]){
  const actor={...start};follow(actor,points);assert(actor.y>top-.15,name+' reaches its highest landing');
  follow(actor,[...points].reverse().slice(1).concat([[start.x,start.z]]));assert(actor.y<.7,name+' returns to the ground');

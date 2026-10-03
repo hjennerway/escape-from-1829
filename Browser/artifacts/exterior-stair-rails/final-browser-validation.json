@@ -1,9 +1,7 @@
 {
   "views": [
-    "west-forward",
-    "central",
-    "pharmacy-0",
-    "pharmacy-1"
+    "annexe-0",
+    "annexe-1"
   ],
   "collision": {
     "x": -62.1,

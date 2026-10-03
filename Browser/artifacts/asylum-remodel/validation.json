@@ -49,38 +49,38 @@
   "renders": [
     {
       "name": "reception",
-      "calls": 158,
-      "triangles": 113618
+      "calls": 95,
+      "triangles": 119810
     },
     {
       "name": "rear-corridor",
-      "calls": 86,
-      "triangles": 101122
+      "calls": 98,
+      "triangles": 118326
     },
     {
       "name": "ground-room",
-      "calls": 92,
-      "triangles": 103264
+      "calls": 95,
+      "triangles": 120060
     },
     {
       "name": "first-floor",
-      "calls": 191,
-      "triangles": 115086
+      "calls": 186,
+      "triangles": 132292
     },
     {
       "name": "basement-corridor",
-      "calls": 63,
-      "triangles": 97158
+      "calls": 65,
+      "triangles": 113952
     },
     {
       "name": "basement-room",
       "calls": 46,
-      "triangles": 97124
+      "triangles": 113914
     },
     {
       "name": "new-stair",
-      "calls": 72,
-      "triangles": 101342
+      "calls": 61,
+      "triangles": 117720
     }
   ],
   "errors": []

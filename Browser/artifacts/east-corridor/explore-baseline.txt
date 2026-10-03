@@ -1,0 +1,1 @@
+AssertionError: Walk reaches {"target":[378.50065620370634,-19.197299165373607],"actor":{"x":378.5417588258181,"y":4.612500002682209,"z":-19.288382062413138,"floor":0,"outside":true,"stair":null,"verticalTrend":1,"d":0}}

@@ -1,0 +1,11 @@
+[
+  {
+    "actual": {
+      "sha256": "2a53e83afd1b630af0255b3cf08b8a764419948e47ee705e0ac18a316f73a88b"
+    },
+    "expected": {
+      "sha256": "56b624eee3913f23d3788c71c652512197a0fd3f218978f7f4b2b462fb974109"
+    },
+    "message": "Every original primitive is unchanged apart from the two rigid translations"
+  }
+]

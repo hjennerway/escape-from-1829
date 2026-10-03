@@ -1,0 +1,91 @@
+{
+  "related": [
+    {
+      "test": "test-annexe-access.mjs",
+      "status": 0
+    },
+    {
+      "test": "test-annexe-front-link.mjs",
+      "status": 0
+    },
+    {
+      "test": "test-annexe-kitchen.mjs",
+      "status": 0
+    },
+    {
+      "test": "test-annexe-rear-stretch.mjs",
+      "status": 0
+    },
+    {
+      "test": "test-annexe-rear-side-alignment.mjs",
+      "status": 0
+    },
+    {
+      "test": "test-annexe-os-refinement.mjs",
+      "status": 0
+    },
+    {
+      "test": "test-annexe-carden.mjs",
+      "status": 0
+    },
+    {
+      "test": "test-larkton.mjs",
+      "status": 0
+    },
+    {
+      "test": "test-larkton-recess.mjs",
+      "status": 0
+    },
+    {
+      "test": "test-oakmere-court.mjs",
+      "status": 0
+    },
+    {
+      "test": "test-oakmere-west.mjs",
+      "status": 0
+    },
+    {
+      "test": "test-oakmere-windows.mjs",
+      "status": 0
+    },
+    {
+      "test": "test-explore-interior.mjs",
+      "status": 0
+    },
+    {
+      "test": "test-exterior-door-supports.mjs",
+      "status": 0
+    },
+    {
+      "test": "test-exterior-stair-clearance.mjs",
+      "status": 0
+    }
+  ],
+  "remainingSuite": {
+    "total": 91,
+    "passed": 88,
+    "failures": [
+      {
+        "command": "node test-asylum-east-first-wall.mjs",
+        "status": 1,
+        "before": 1
+      },
+      {
+        "command": "node test-jarman.mjs",
+        "status": 1,
+        "before": 1
+      },
+      {
+        "command": "node test-leighton-newton.mjs",
+        "status": 1,
+        "before": 1
+      }
+    ]
+  },
+  "npmStoppedAt": "test-asylum-east-ground-wall.mjs",
+  "compiled": {
+    "file": "aerial-a1e678d802561c901d65.bin.gz",
+    "current": true
+  },
+  "browser": []
+}

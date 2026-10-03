@@ -1,0 +1,73 @@
+[
+  {
+    "test": "test-asylum-east-first-wall.mjs",
+    "status": 0,
+    "summary": "PASS: 192 first-floor masonry/skirting rays, removed stub, joined enclosure, solid collision, room/corridor walks and preserved other floors."
+  },
+  {
+    "test": "test-asylum-east-ground-wall.mjs",
+    "status": 0,
+    "summary": "PASS: 192 masonry/skirting rays, removed ground-floor pillar, continuous diagonal wall, room/corridor walks and matching upper-floor clearance."
+  },
+  {
+    "test": "test-asylum-wall-ceilings.mjs",
+    "status": 0,
+    "summary": "PASS: 687 wall runs and 89 doorway headers meet ceilings and adjoining floors, 13872 rendered masonry samples from both sides; room ceiling heights retained."
+  },
+  {
+    "test": "test-asylum-windows.mjs",
+    "status": 0,
+    "summary": "PASS: 12 basement sashes, 2/2/1/1 per side from rear to front, 216 visible panes, all eight room doors, solid surrounds/skirting and collision."
+  },
+  {
+    "test": "test-asylum-window-clearance.mjs",
+    "status": 0,
+    "summary": "PASS: 274 windows and the Reception transom across four floors, 1334 unobstructed panes, 6665940 sill-to-wall clearance samples, retained window counts and collision."
+  },
+  {
+    "test": "test-asylum-doorways.mjs",
+    "status": 0,
+    "summary": "PASS: 89 framed room doorways, 534 bidirectional walking passes, solid frontage/header raycasts, clear thresholds and one frame batch per floor."
+  },
+  {
+    "test": "test-asylum-door-frames.mjs",
+    "status": 0,
+    "summary": "PASS: 23 outside frames and 89 room frames on four floors, 2724 masonry support/face-clearance rays, closed leaves and unchanged exterior anchors."
+  },
+  {
+    "test": "test-asylum-exit-surrounds.mjs",
+    "status": 0,
+    "summary": "PASS: 23 fitted exterior doors, 6536 matching masonry probes, 207 closed-leaf probes, aligned frames, solid side collision and clear approaches."
+  },
+  {
+    "test": "test-asylum-east-corner.mjs",
+    "status": 0,
+    "summary": "PASS: D10 fitted wall/header, 210 masonry rays, angled return, skirting and collision, closed leaf and two approach walks."
+  },
+  {
+    "test": "test-asylum-stairs.mjs",
+    "status": 0,
+    "summary": "PASS: square guarded wells, Reception basement connection, 1029 visible support/headroom samples, 70 fall barriers, all 23 door routes physically walked."
+  },
+  {
+    "test": "test-asylum-slabs.mjs",
+    "status": 0,
+    "summary": "PASS: 8648 floor/ceiling cap views from both sides, 1452 oblique shaft/perimeter edge views, 128 clear shaft samples across all four floors."
+  },
+  {
+    "test": "test-asylum-skirting.mjs",
+    "status": 0,
+    "summary": "PASS: 1609 window skirting samples, 4263 single-surface top samples, convex/concave/angled mitres, intersecting/duplicate partitions, 69 clear door samples, unchanged navigation."
+  },
+  {
+    "test": "test-explore-interior.mjs",
+    "status": 1,
+    "summary": "",
+    "error": "node:internal/modules/run_main:107\r\n    triggerUncaughtException(\r\n    ^\r\n\r\nAssertionError [ERR_ASSERTION]: Walk reaches {\"target\":[29.95,-32.65],\"actor\":{\"x\":29.95,\"y\":0,\"z\":-32,\"floor\":1,\"outside\":false,\"stair\":{\"id\":\"S4\",\"lower\":0,\"upper\":1,\"route\":[[29.95,0,-31.75],[29.95,0,-31.099999999999998],[29.95,2.1,-28.5],[29.95,2.1,-27.849999999999998],[33.85,2.1,-27.849999999999998],[33.85,2.1,-28.5],[33.85,4.2,-31.099999999999998],[33.85,4.2,-31.75]]},\"verticalTrend\":0,\"d\":0}}\r\n    at follow (file:///C:/Users/Harry/Documents/_escape-from-1829/Browser/test-explore-interior.mjs:27:3)\r\n    at file:///C:/Users/Harry/Documents/_escape-from-1829/Browser/test-explore-interior.mjs:36:2 {\r\n  generatedMessage: false,\r\n  code: 'ERR_ASSERTION',\r\n  actual: false,\r\n  expected: true,\r\n  operator: '==',\r\n  diff: 'simple'\r\n}\r\n\r\nNode.js v24.20.0\r\n"
+  },
+  {
+    "test": "test-jump.mjs",
+    "status": 0,
+    "summary": "PASS: jump arc/frame rates, idle landing, wall-top support, tall walls, headroom, resets, actual estate walls/hedges in both modes, and interior floors/doorways."
+  }
+]

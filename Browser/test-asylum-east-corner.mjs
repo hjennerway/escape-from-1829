@@ -5,7 +5,8 @@ import {buildAsylumLayout,moveAsylumActor,segmentDistance} from './dist/asylum-l
 import {buildAsylumArchitecture} from './dist/asylum-architecture.mjs';
 
 const plan=JSON.parse(await readFile(new URL('./dist/asylum-plan.json',import.meta.url)));
-if(process.argv.includes('--baseline'))delete plan.exits.find(e=>e.id==='D10').wallOpening;
+// Recreate the original corner placement independently of automatic fitting.
+if(process.argv.includes('--baseline'))plan.exits.find(e=>e.id==='D10').wallOpening.offset=0;
 const floors=buildAsylumLayout(plan).floors,floor=floors[0],scene=new THREE.Scene();
 buildAsylumArchitecture(THREE,scene,floor);scene.updateMatrixWorld(true);
 const ray=new THREE.Raycaster();let samples=0;
@@ -26,7 +27,9 @@ for(let i=1;i<=5;i++){
  const x=30.8-i*.07,z=15.5+i*.07;
  for(const y of [2.61,3.2,3.79])across(x,z,Math.SQRT1_2,-Math.SQRT1_2,y,'Plaster');
 }
-for(const [x,z,dx,dz] of [[32.49,15.5,1,0],[30.59,15.71,Math.SQRT1_2,-Math.SQRT1_2]]){
+// The complete frame now centres at x=31.82 to clear the angled corner;
+// inspect its restored narrow left pier and the new right jamb as well.
+for(const [x,z,dx,dz] of [[30.85,15.5,1,0],[32.69,15.5,1,0],[30.59,15.71,Math.SQRT1_2,-Math.SQRT1_2]]){
  for(const [kind,y] of [['Brick',.55],['Plaster',1.65],['Skirting',.13]]){
   if(kind==='Skirting'){
    ray.set(new THREE.Vector3(x-dz*.4,y,z+dx*.4),new THREE.Vector3(dz,0,-dx));ray.far=.6;

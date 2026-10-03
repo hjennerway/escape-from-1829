@@ -18,6 +18,25 @@ const bounds=points=>({minX:Math.min(...points.map(p=>p[0])),maxX:Math.max(...po
 const edges=points=>points.map((p,i)=>[p,points[(i+1)%points.length]]);
 export const ROOM_DOOR_WIDTH=1.9;
 export const ROOM_DOOR_HEIGHT=2.5;
+export function asylumExitCenter(exit){
+ const {inset=0,offset=0}=exit.wallOpening??{};
+ return {x:exit.worldX+(exit.axis==='z'?offset:-exit.facing*inset),z:exit.worldZ+(exit.axis==='x'?offset:-exit.facing*inset)};
+}
+function outsideDoorOpening(exit,outsideEdges,floorId){
+ // The frame's inner jambs/head define the masonry aperture. Fit its depth
+ // to the hosting facade, since exterior door coordinates include setbacks.
+ const normal=exit.axis==='x'?0:1,along=1-normal,position=[exit.x,exit.z];
+ const hosts=outsideEdges.filter(([a,b])=>Math.abs(a[normal]-b[normal])<1e-7&&position[along]>=Math.min(a[along],b[along])-1e-7&&position[along]<=Math.max(a[along],b[along])+1e-7);
+ hosts.sort((a,b)=>Math.abs(a[0][normal]-position[normal])-Math.abs(b[0][normal]-position[normal]));
+ const inset=hosts.length?(position[normal]-hosts[0][0][normal])*exit.facing:0;
+ const entrance=floorId===0&&exit.id==='D1';
+ // Include the lintel ends (.91), adjoining masonry's half-thickness (.09)
+ // and a .02 clearance. Shift the complete fitting along its own wall,
+ // leaving the exterior destination and interaction coordinates intact.
+ const margin=1.02,host=hosts[0];
+ const offset=host&&!entrance?Math.max(Math.min(host[0][along],host[1][along])+margin,Math.min(Math.max(host[0][along],host[1][along])-margin,position[along]))-position[along]:0;
+ return {width:entrance?1.9:1.58,height:entrance?3.6:2.465,inset,offset,...exit.wallOpening};
+}
 export function flatWalkable(floor,x,z,radius=.34){
  const contains=(x,z)=>floor.outline.loops.some(p=>insidePolygon(x,z,p));
  if(![[0,0],[-radius,-radius],[radius,-radius],[-radius,radius],[radius,radius]].every(([dx,dz])=>contains(x+dx,z+dz)))return false;
@@ -25,12 +44,21 @@ export function flatWalkable(floor,x,z,radius=.34){
  const nearby=floor.wallIndex?.get(Math.floor(x/4)+','+Math.floor(z/4))??floor.walls;
  return !nearby.some(w=>segmentDistance(x,z,w.a,w.b)<radius+.09);
 }
+export function stairDeparture(floor,portal){
+ const [x,,z]=portal;
+ // Leave the flight's narrow endpoint radius. An enclosed landing may need
+ // a sideways turn instead of the usual straight step toward the room.
+ const departure=[{x,z:z-.8},{x:x+.5,z},{x:x-.5,z}].find(p=>flatWalkable(floor,p.x,p.z));
+ if(!departure)throw new Error(`No clear stair landing on floor ${floor.id} at ${x},${z}`);
+ return departure;
+}
 export function buildAsylumLayout(plan){
  const floors=plan.floors.map(f=>{
   const rooms=plan.rooms.filter(r=>r.floors.includes(f.id)).map(r=>({...r,...r.variants?.[f.id],x:r.label[0]/.5,z:r.label[1]/.5}));
-  const corridors=plan.corridors.filter(c=>c.floors.includes(f.id));
+  const corridors=plan.corridors.filter(c=>c.floors.includes(f.id)).map(c=>({...c,...c.variants?.[f.id]}));
   const stairs=plan.stairs.filter(s=>s.floors.includes(f.id)).map(s=>({...s,physical:true,x:s.label[0]/.5,z:s.label[1]/.5}));
-  const exits=plan.exits.flatMap(e=>e.levels.filter(l=>l.floor===f.id).map(l=>({...e,worldX:e.x,worldZ:e.z,x:e.x/.5,z:e.z/.5,destination:l.destination,threshold:l.height})));
+  const outsideEdges=f.outline.loops.flatMap(edges);
+  const exits=plan.exits.flatMap(e=>e.levels.filter(l=>l.floor===f.id).map(l=>({...e,wallOpening:outsideDoorOpening(e,outsideEdges,f.id),worldX:e.x,worldZ:e.z,x:e.x/.5,z:e.z/.5,destination:l.destination,threshold:l.height})));
   // The lowest level has a solid floor beneath the stairs, never a false pit.
   // Keep the flight footprint out of flat navigation on every level.
   const shafts=stairs.map(stairOpening);
@@ -38,19 +66,19 @@ export function buildAsylumLayout(plan){
   floor.stairRails=floorStairRails(floor);
   floor.windows=rooms.flatMap(r=>(r.windows??[]).map(w=>({...w,roomId:r.id})));
   const roomDoors=rooms.filter(r=>r.doorSide).map(r=>{const b=bounds(r.points),vertical=['west','east'].includes(r.doorSide);return {roomId:r.id,x:vertical?(r.doorSide==='west'?b.minX:b.maxX):r.door,z:vertical?r.door:(r.doorSide==='north'?b.minZ:b.maxZ),dx:vertical?0:1,dz:vertical?1:0};});
-  const outsideEdges=f.outline.loops.flatMap(edges),pieces=new Map();
+  const pieces=new Map();
   floor.exitHeaders=[];
-  function addWall(a,b,exterior=false){
+  function addWall(a,b,exterior=false,corridorClipping=true,solid=false){
    const length=Math.hypot(b[0]-a[0],b[1]-a[1]),count=Math.ceil(length/.22),dx=(b[0]-a[0])/length,dz=(b[1]-a[1])/length;let start=null;
    // Exact jamb cuts also align the overlapping wall planes in the bay rooms.
    // Corridor/stair clipping retains its existing fine samples.
    const doors=exterior?[]:roomDoors.filter(d=>Math.abs(dx*d.dz-dz*d.dx)<1e-6&&Math.abs((d.x-a[0])*dz-(d.z-a[1])*dx)<.95);
    const cuts=Array.from({length:count+1},(_,i)=>length*i/count);
    for(const d of doors)for(const side of [-1,1]){const t=(d.x-a[0])*dx+(d.z-a[1])*dz+side*ROOM_DOOR_WIDTH/2;if(t>0&&t<length)cuts.push(t);}
-   // Reviewed outside openings use exact jambs rather than a circular,
-   // sampled clearance. The cut follows adjoining angled wall returns too.
-   const fittedExits=exits.filter(e=>e.wallOpening&&segmentDistance(e.worldX,e.worldZ,a,b)<1.05);
-   for(const e of fittedExits)for(const [axis,centre,half] of [[0,e.worldX,e.axis==='z'?e.wallOpening.width/2:1.05],[1,e.worldZ,e.axis==='x'?e.wallOpening.width/2:1.05]]){
+   // Every outside opening has exact jambs. The cut follows adjoining angled
+   // returns too; their headers retain the same wall footprint and finish.
+   const fittedExits=exits.filter(e=>segmentDistance(asylumExitCenter(e).x,asylumExitCenter(e).z,a,b)<1.05);
+   for(const e of fittedExits)for(const [axis,centre,half] of [[0,asylumExitCenter(e).x,e.axis==='z'?e.wallOpening.width/2:1.05],[1,asylumExitCenter(e).z,e.axis==='x'?e.wallOpening.width/2:1.05]]){
     const direction=axis===0?dx:dz;if(Math.abs(direction)<1e-8)continue;
     for(const side of [-1,1]){const t=(centre+side*half-a[axis])/direction;if(t>0&&t<length)cuts.push(t);}
    }
@@ -59,26 +87,28 @@ export function buildAsylumLayout(plan){
    for(let i=0;i<cuts.length;i++){
     const t=(cuts[i]+(cuts[i+1]??cuts[i]))/2,x=a[0]+dx*t,z=a[1]+dz*t;
     const at=[a[0]+dx*cuts[i],a[1]+dz*cuts[i]];
-    const nearDoor=exits.find(e=>e.wallOpening
-     ?Math.abs(x-e.worldX)<(e.axis==='z'?e.wallOpening.width/2:1.05)&&Math.abs(z-e.worldZ)<(e.axis==='x'?e.wallOpening.width/2:1.05)
-     :Math.hypot(e.worldX-x,e.worldZ-z)<1.05);
-    if(exterior&&nearDoor?.wallOpening&&i<cuts.length-1)floor.exitHeaders.push({a:at,b:[a[0]+dx*cuts[i+1],a[1]+dz*cuts[i+1]],height:nearDoor.wallOpening.height,exitId:nearDoor.id});
-    let keep=i<cuts.length-1&&cuts[i+1]-cuts[i]>1e-7&&!nearDoor;
+    const nearDoor=exits.find(e=>Math.abs(x-asylumExitCenter(e).x)<(e.axis==='z'?e.wallOpening.width/2:1.05)&&Math.abs(z-asylumExitCenter(e).z)<(e.axis==='x'?e.wallOpening.width/2:1.05));
+    let keep=i<cuts.length-1&&cuts[i+1]-cuts[i]>1e-7;
     if(!exterior){
      keep=keep&&f.outline.loops.some(p=>insidePolygon(x,z,p))&&!outsideEdges.some(([c,d])=>segmentDistance(x,z,c,d)<.18);
      if(doors.some(d=>Math.abs((x-d.x)*d.dx+(z-d.z)*d.dz)<ROOM_DOOR_WIDTH/2))keep=false;
      // Keep partitions at the corridor edge; the previous extra clearance
      // erased entire room fronts that sit exactly half a corridor-width away.
-     if(corridors.some(c=>c.points.slice(1).some((p,j)=>segmentDistance(x,z,c.points[j],p)<c.width/2-.1)))keep=false;
-     if(stairs.some(s=>{const b=bounds(s.points);return x>b.minX-.2&&x<b.maxX+.2&&z>b.minZ-.25&&z<b.maxZ+.2;}))keep=false;
+     if(!solid&&corridorClipping&&corridors.some(c=>c.points.slice(1).some((p,j)=>segmentDistance(x,z,c.points[j],p)<c.width/2-.1)))keep=false;
+     if(!solid&&stairs.some(s=>{const b=bounds(s.points);return x>b.minX-.2&&x<b.maxX+.2&&z>b.minZ-.25&&z<b.maxZ+.2;}))keep=false;
     }
+    if(keep&&nearDoor){floor.exitHeaders.push({a:at,b:[a[0]+dx*cuts[i+1],a[1]+dz*cuts[i+1]],height:nearDoor.wallOpening.height,exitId:nearDoor.id});keep=false;}
     if(keep&&!start)start=at;
     if(!keep&&start){const key=[...start,...at].map(n=>n.toFixed(2)).join(',');const reverse=[...at,...start].map(n=>n.toFixed(2)).join(',');if(!pieces.has(reverse))pieces.set(key,{a:start,b:at,exterior});start=null;}
    }
   }
   for(const [a,b] of outsideEdges)addWall(a,b,true);
   // Open room edges describe continuous spaces, without a partition or frame.
-  for(const r of rooms)for(const [i,[a,b]] of edges(r.points).entries())if(!r.openEdges?.includes(i))addWall(a,b);
+  // Reviewed corridor boundaries already describe their turns exactly; retain
+  // their free ends and doorway piers instead of resampling them by width.
+  // Explicit solid edges enclose rooms beside stair landings without general
+  // stair/corridor clearance erasing the reviewed boundary.
+  for(const r of rooms)for(const [i,[a,b]] of edges(r.points).entries())if(!r.openEdges?.includes(i))addWall(a,b,false,r.corridorClipping!==false,r.solidEdges?.includes(i));
   // Deliberate corridor partitions bypass the room-edge corridor clipping.
   // Their centered openings feed the same rendering, map and collision data.
   const partitionWalls=[],partitionDoors=[];

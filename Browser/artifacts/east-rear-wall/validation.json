@@ -1,0 +1,50 @@
+{
+  "focusedWallCheck": "pass",
+  "browser": {
+    "views": 5,
+    "movement": {
+      "walks": [
+        {
+          "reverse": false,
+          "floor": 1
+        },
+        {
+          "reverse": true,
+          "floor": 0
+        }
+      ],
+      "flatWalkable": true
+    },
+    "errors": []
+  },
+  "aerialInputAudit": {
+    "inputs": 171,
+    "affectedIncluded": []
+  },
+  "standardSuite": {
+    "status": "failed",
+    "firstFailure": "test-explore-interior.mjs exterior stair",
+    "sameFailureWithWallReopened": true,
+    "continuation": {
+      "total": 50,
+      "passed": 35,
+      "failed": [
+        "node test-exterior-door-supports.mjs",
+        "node test-larkton.mjs",
+        "node test-larkton-recess.mjs",
+        "node test-annexe-carden.mjs",
+        "node test-annexe-front-link.mjs",
+        "node test-annexe-kitchen.mjs",
+        "node test-annexe-rear-stretch.mjs",
+        "node test-annexe-rear-side-alignment.mjs",
+        "node test-annexe-os-refinement.mjs",
+        "node test-jarman.mjs",
+        "node test-oakmere-court.mjs",
+        "node test-oakmere-west.mjs",
+        "node test-oakmere-windows.mjs",
+        "node test-leighton-newton.mjs",
+        "node test-annexe-access.mjs"
+      ]
+    }
+  }
+}

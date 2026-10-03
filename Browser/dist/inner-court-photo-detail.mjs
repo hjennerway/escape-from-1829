@@ -71,10 +71,7 @@ export function addInnerCourtPhotoDetails(THREE,{model,box,mesh,worldUV,white,br
     }
     for(const side of [-1,1]){
       const px=x+side*width/2;
-      // The lowest flight begins beneath the full-width turning deck. Its
-      // rail starts at the deck edge so the return remains open across it.
-      const t=y0===2.4?.9/Math.abs(z1-z0):0;
-      guard([px,y0+(y1-y0)*t+.07,z0+(z1-z0)*t],[px,y1+.07,z1]);
+      guard([px,y0+.07,z0],[px,y1+.07,z1]);
       rail([px,y0-.1,z0],[px,y1-.1,z1],.065);
     }
   }
@@ -82,23 +79,22 @@ export function addInnerCourtPhotoDetails(THREE,{model,box,mesh,worldUV,white,br
   const stairRail=(a,b,r)=>rail([a[0],a[1],a[2]+profile.stairShift],[b[0],b[1],b[2]+profile.stairShift],r);
   const stairFlight=(x,z0,y0,z1,y1)=>flight(x,z0+profile.stairShift,y0,z1+profile.stairShift,y1);
   const stairGuard=(a,b)=>guard([a[0],a[1]+.07,a[2]+profile.stairShift],[b[0],b[1]+.07,b[2]+profile.stairShift]);
-  // img14 resolves three flights and stacked doors. The middle flight turns
-  // at a half-landing, rather than meeting a displaced doorway.
+  // Three alternating flights form a U in plan. The two upper flights use
+  // separate lanes; putting both at x=21.9 made them cross at mid-height.
+  // Decks end at the flight mouths, so no platform covers a rising tread.
   for(const y of [2.4,5.9]){
-    stairBox(iron,22.8,y,-29.8,3.2,.14,1.8);
-    stairGuard([y===2.4?19.575:21.2,y,-28.9],[24.4,y,-28.9]);
-    stairGuard([22.625,y,-30.7],[24.4,y,-30.7]);
-    if(y===5.9)stairGuard([21.2,y,-28.9],[21.2,y,-30.7]);
-    else stairGuard([19.575,y,-28.9],[19.575,y,-30.7]);
+    stairBox(iron,21.9875,y,-29.8,4.825,.14,1.8);
+    stairGuard([19.575,y,-28.9],[24.4,y,-28.9]);
+    stairGuard([y===5.9?21.175:22.625,y,-30.7],[24.4,y,-30.7]);
+    stairGuard([19.575,y,-28.9],[19.575,y,-30.7]);
   }
-  stairBox(iron,21.9,4.15,-34.1,2.1,.14,1.6);
-  stairFlight(21.9,-30.7,5.9,-34.1,4.15);
+  stairBox(iron,21.1,4.15,-34.9,3.05,.14,1.6);
+  stairFlight(20.3,-30.7,5.9,-34.1,4.15);
   stairFlight(21.9,-34.1,4.15,-30.7,2.4);
-  stairFlight(20.3,-29.8,2.4,-34.1,.3);
-  stairBox(iron,20.5375,2.4,-29.8,1.925,.14,1.8);
-  for(const [x,z,h] of [[21.2,-28.9,5.9],[24.2,-28.9,5.9],[21,-34.8,4.15],[22.8,-34.8,4.15]])stairRail([x,.2,z],[x,h+1.06,z],.075);
-  stairGuard([20.85,4.15,-34.9],[22.95,4.15,-34.9]);
-  for(const x of [20.85,22.95])stairGuard([x,4.15,-34.9],[x,4.15,-33.3]);
+  stairFlight(20.3,-30.7,2.4,-34.1,.1);
+  for(const [x,z,h] of [[19.575,-28.9,5.9],[24.2,-28.9,5.9],[19.575,-35.7,4.15],[22.625,-35.7,4.15]])stairRail([x,.2,z],[x,h+1.06,z],.075);
+  stairGuard([19.575,4.15,-35.7],[22.625,4.15,-35.7]);
+  for(const x of [19.575,22.625])stairGuard([x,4.15,-35.7],[x,4.15,-34.1]);
   // The opposite central-arm stair is positioned by the img11 module.
 
   // Raised grass, rough stone edging and low white gate walls. The gravel

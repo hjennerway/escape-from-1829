@@ -1,0 +1,466 @@
+{
+  "results": [
+    {
+      "floor": 0,
+      "id": "F1",
+      "sign": "Illuminated exit route sign",
+      "trip": {
+        "outside": true,
+        "latched": true,
+        "returned": true,
+        "position": [
+          -22.8,
+          2.4,
+          -25.8
+        ],
+        "expected": [
+          -22.8,
+          2.4,
+          -25.8
+        ]
+      }
+    },
+    {
+      "floor": 0,
+      "id": "F3",
+      "sign": "Illuminated exit route sign",
+      "trip": {
+        "outside": true,
+        "latched": true,
+        "returned": true,
+        "position": [
+          22.8,
+          2.4,
+          -25.8
+        ],
+        "expected": [
+          22.8,
+          2.4,
+          -25.8
+        ]
+      }
+    },
+    {
+      "floor": 0,
+      "id": "F6",
+      "sign": "Illuminated exit route sign",
+      "trip": {
+        "outside": true,
+        "latched": true,
+        "returned": true,
+        "position": [
+          42,
+          0.3,
+          38.1
+        ],
+        "expected": [
+          42,
+          0.3,
+          38.1
+        ]
+      }
+    },
+    {
+      "floor": 0,
+      "id": "D1",
+      "sign": "Asylum EntranceInset",
+      "trip": {
+        "outside": true,
+        "latched": true,
+        "returned": true,
+        "position": [
+          0,
+          1.8,
+          21.7
+        ],
+        "expected": [
+          0,
+          1.8,
+          21.7
+        ]
+      }
+    },
+    {
+      "floor": 0,
+      "id": "D2",
+      "sign": "Illuminated exit route sign",
+      "trip": {
+        "outside": true,
+        "latched": true,
+        "returned": true,
+        "position": [
+          -73.4,
+          0.25,
+          11.5
+        ],
+        "expected": [
+          -73.4,
+          0.25,
+          11.5
+        ]
+      }
+    },
+    {
+      "floor": 0,
+      "id": "D3",
+      "sign": "Illuminated exit route sign",
+      "trip": {
+        "outside": true,
+        "latched": true,
+        "returned": true,
+        "position": [
+          -45.2,
+          0.25,
+          20.4
+        ],
+        "expected": [
+          -45.2,
+          0.25,
+          20.4
+        ]
+      }
+    },
+    {
+      "floor": 0,
+      "id": "D4",
+      "sign": "Illuminated exit route sign",
+      "trip": {
+        "outside": true,
+        "latched": true,
+        "returned": true,
+        "position": [
+          -46.1,
+          0.45,
+          38.15
+        ],
+        "expected": [
+          -46.1,
+          0.45,
+          38.15
+        ]
+      }
+    },
+    {
+      "floor": 0,
+      "id": "D5",
+      "sign": "Illuminated exit route sign",
+      "trip": {
+        "outside": true,
+        "latched": true,
+        "returned": true,
+        "position": [
+          -45.2,
+          -0.145,
+          -2
+        ],
+        "expected": [
+          -45.2,
+          -0.145,
+          -2
+        ]
+      }
+    },
+    {
+      "floor": 0,
+      "id": "D6",
+      "sign": "Illuminated exit route sign",
+      "trip": {
+        "outside": true,
+        "latched": true,
+        "returned": true,
+        "position": [
+          -44.8,
+          -0.145,
+          -2.75
+        ],
+        "expected": [
+          -44.8,
+          -0.145,
+          -2.75
+        ]
+      }
+    },
+    {
+      "floor": 0,
+      "id": "D7",
+      "sign": "Illuminated exit route sign",
+      "trip": {
+        "outside": true,
+        "latched": true,
+        "returned": true,
+        "position": [
+          57.2,
+          0.3,
+          20.5
+        ],
+        "expected": [
+          57.2,
+          0.3,
+          20.5
+        ]
+      }
+    },
+    {
+      "floor": 0,
+      "id": "D8",
+      "sign": "Illuminated exit route sign",
+      "trip": {
+        "outside": true,
+        "latched": true,
+        "returned": true,
+        "position": [
+          70.9,
+          0.3,
+          18.95
+        ],
+        "expected": [
+          70.9,
+          0.3,
+          18.95
+        ]
+      }
+    },
+    {
+      "floor": 0,
+      "id": "D9",
+      "sign": "Illuminated exit route sign",
+      "trip": {
+        "outside": true,
+        "latched": true,
+        "returned": true,
+        "position": [
+          -31.54,
+          0.205,
+          16.5
+        ],
+        "expected": [
+          -31.54,
+          0.205,
+          16.5
+        ]
+      }
+    },
+    {
+      "floor": 0,
+      "id": "D10",
+      "sign": "Illuminated exit route sign",
+      "trip": {
+        "outside": true,
+        "latched": true,
+        "returned": true,
+        "position": [
+          31.54,
+          0.205,
+          16.5
+        ],
+        "expected": [
+          31.54,
+          0.205,
+          16.5
+        ]
+      }
+    },
+    {
+      "floor": 1,
+      "id": "F1",
+      "sign": "Illuminated exit route sign",
+      "trip": {
+        "outside": true,
+        "latched": true,
+        "returned": true,
+        "position": [
+          -22.8,
+          5.9,
+          -25.8
+        ],
+        "expected": [
+          -22.8,
+          5.9,
+          -25.8
+        ]
+      }
+    },
+    {
+      "floor": 1,
+      "id": "F2",
+      "sign": "Illuminated exit route sign",
+      "trip": {
+        "outside": true,
+        "latched": true,
+        "returned": true,
+        "position": [
+          8.9,
+          5.1,
+          -36.3
+        ],
+        "expected": [
+          8.9,
+          5.1,
+          -36.3
+        ]
+      }
+    },
+    {
+      "floor": 1,
+      "id": "F3",
+      "sign": "Illuminated exit route sign",
+      "trip": {
+        "outside": true,
+        "latched": true,
+        "returned": true,
+        "position": [
+          22.8,
+          5.9,
+          -25.8
+        ],
+        "expected": [
+          22.8,
+          5.9,
+          -25.8
+        ]
+      }
+    },
+    {
+      "floor": 1,
+      "id": "F4",
+      "sign": "Illuminated exit route sign",
+      "trip": {
+        "outside": true,
+        "latched": true,
+        "returned": true,
+        "position": [
+          -63.55,
+          4.25,
+          21.6
+        ],
+        "expected": [
+          -63.55,
+          4.25,
+          21.6
+        ]
+      }
+    },
+    {
+      "floor": 1,
+      "id": "F5",
+      "sign": "Illuminated exit route sign",
+      "trip": {
+        "outside": true,
+        "latched": true,
+        "returned": true,
+        "position": [
+          -39,
+          4.28,
+          43.8
+        ],
+        "expected": [
+          -39,
+          4.28,
+          43.8
+        ]
+      }
+    },
+    {
+      "floor": 1,
+      "id": "F6",
+      "sign": "Illuminated exit route sign",
+      "trip": {
+        "outside": true,
+        "latched": true,
+        "returned": true,
+        "position": [
+          42,
+          4.25,
+          38.1
+        ],
+        "expected": [
+          42,
+          4.25,
+          38.1
+        ]
+      }
+    },
+    {
+      "floor": 1,
+      "id": "F7",
+      "sign": "Illuminated exit route sign",
+      "trip": {
+        "outside": true,
+        "latched": true,
+        "returned": true,
+        "position": [
+          69.25,
+          4.25,
+          3.9
+        ],
+        "expected": [
+          69.25,
+          4.25,
+          3.9
+        ]
+      }
+    },
+    {
+      "floor": 2,
+      "id": "D11",
+      "sign": "Illuminated exit route sign",
+      "trip": {
+        "outside": true,
+        "latched": true,
+        "returned": true,
+        "position": [
+          -38.8,
+          -1.02,
+          -34.7
+        ],
+        "expected": [
+          -38.8,
+          -1.02,
+          -34.7
+        ]
+      }
+    },
+    {
+      "floor": 2,
+      "id": "D12",
+      "sign": "Illuminated exit route sign",
+      "trip": {
+        "outside": true,
+        "latched": true,
+        "returned": true,
+        "position": [
+          -26.15,
+          -1.02,
+          20.7
+        ],
+        "expected": [
+          -26.15,
+          -1.02,
+          20.7
+        ]
+      }
+    },
+    {
+      "floor": 2,
+      "id": "D13",
+      "sign": "Illuminated exit route sign",
+      "trip": {
+        "outside": true,
+        "latched": true,
+        "returned": true,
+        "position": [
+          -11.55,
+          -1.02,
+          18.35
+        ],
+        "expected": [
+          -11.55,
+          -1.02,
+          18.35
+        ]
+      }
+    }
+  ],
+  "views": 27,
+  "errors": []
+}

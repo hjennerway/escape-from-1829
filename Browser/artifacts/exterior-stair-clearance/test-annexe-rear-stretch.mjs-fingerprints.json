@@ -1,0 +1,36 @@
+[
+  {
+    "actual": {
+      "primitives": 15833,
+      "sha256": "8f51e6018f6c2a0e57d95ed175069e749145d92422cb8ab04a472ac53b1e0569"
+    },
+    "expected": {
+      "primitives": 15833,
+      "sha256": "98d08fd15dec5ea1c70d72d3a2af22343934735a0907ff2aab26877dde253b6f"
+    },
+    "message": "All front geometry and unaffected wards remain unchanged"
+  },
+  {
+    "actual": {
+      "oakmere": {
+        "primitives": 1218,
+        "sha256": "125b802fa65604a8605d8f0e53c4ec8af318358e46d6e5172e3041fda7e279a3"
+      },
+      "leighton-newton": {
+        "primitives": 1479,
+        "sha256": "ddcad4e414248195bf10d1b7c1500201e81b065c0838c447f4bd51866fdb9ff1"
+      }
+    },
+    "expected": {
+      "oakmere": {
+        "primitives": 1218,
+        "sha256": "125b802fa65604a8605d8f0e53c4ec8af318358e46d6e5172e3041fda7e279a3"
+      },
+      "leighton-newton": {
+        "primitives": 1479,
+        "sha256": "ddcad4e414248195bf10d1b7c1500201e81b065c0838c447f4bd51866fdb9ff1"
+      }
+    },
+    "message": "The two rear blocks translate without changing their geometry"
+  }
+]

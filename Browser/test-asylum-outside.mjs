@@ -11,8 +11,8 @@ assert(walker.clear(0,21.2,1.8),'The top of the same doorstep remains walkable')
 for(const exit of plan.exits)for(const level of exit.levels){const [x,y,z]=level.destination;assert(walker.clear(x,z,y),exit.id+' arrival clears exterior walls');assert(Math.abs(walker.heightAt(x,z,y)-y)<.36,exit.id+' arrival is supported by the existing landing/path');}
 function follow(actor,points){const trace=[];for(const [x,z] of points){for(let i=0;i<5000&&Math.hypot(actor.x-x,actor.z-z)>.025;i++){const dx=x-actor.x,dz=z-actor.z,d=Math.hypot(dx,dz),step=Math.min(.05,d);walker.update(actor,dx/d*step,dz/d*step,.025);assert(walker.clear(actor.x,actor.z,actor.y),'Every stair step stays clear at the resulting height');}assert(Math.hypot(actor.x-x,actor.z-z)<.04,'Outside stair route clears its surroundings '+JSON.stringify({target:[x,z],actor,trace}));trace.push({...actor});}return trace;}
 for(const [exit,points] of [
- ['F1',[[-21.9,-25.8],[-21.9,-30.1],[-21.9,-25.8],[-20.3,-25.8],[-20.3,-30.1],[-20.3,-30.5]]],
- ['F3',[[21.9,-25.8],[21.9,-30.1],[21.9,-25.8],[20.3,-25.8],[20.3,-30.1],[20.3,-30.5]]],
+ ['F1',[[-20.3,-25.8],[-20.3,-30.9],[-21.9,-30.9],[-21.9,-25.8],[-20.3,-25.8],[-20.3,-30.1],[-20.3,-30.5]]],
+ ['F3',[[20.3,-25.8],[20.3,-30.9],[21.9,-30.9],[21.9,-25.8],[20.3,-25.8],[20.3,-30.1],[20.3,-30.5]]],
  ['F2',[[8.9,-37.3],[8.9,-43.2],[8.9,-43.5]]],
  ['F4',[[-63.55,26.05],[-61.3,26.05],[-61.3,20.8],[-61.3,20.5]]],
  ['F5',[[-39.35,44.5],[-45.75,44.5],[-45.75,46.05],[-39.35,46.05],[-38.9,46.05]]],
