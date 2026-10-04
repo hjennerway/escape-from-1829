@@ -15,13 +15,26 @@ for(const [kind,parts] of Object.entries(models)){
  const c=FURNITURE_CATALOG[kind];bounds.getSize(new THREE.Vector3()).toArray().forEach((v,i)=>assert(Math.abs(v-[c.width,c.height,c.depth][i])<1e-5,kind+' agrees with collision dimensions'));
 }
 assert(triangles<15000,'Reception props have a restrained mesh budget');assert.equal(RECEPTION_RULES.length,5);
+// Probe the final normalized meshes: each key bow must touch its supporting
+// peg, with a raised hook tip in front of it and timber behind the hook base.
+const cupboard=new THREE.Group();for(const part of models.keyCupboard)cupboard.add(new THREE.Mesh(part.geometry,part.material));cupboard.updateMatrixWorld(true);
+const timber=cupboard.children.find(m=>m.material.name==='Medical darkWood').geometry.boundingBox,backSize=timber.getSize(new THREE.Vector3()),backCentre=timber.getCenter(new THREE.Vector3());
+const scale=new THREE.Vector3(backSize.x/.46,backSize.y/.66,backSize.z/.022);
+const point=(x,y,z)=>new THREE.Vector3(x,y-.36,z+.060).multiply(scale).add(backCentre);
+const surface=(origin,direction,name)=>new THREE.Raycaster(origin,direction).intersectObjects(cupboard.children).find(h=>h.object.material.name===name);
+for(const x of [-.14,0,.14])for(const y of [.24,.52]){
+ const origin=point(x,y-.018,.017),up=new THREE.Vector3(0,1,0),bow=surface(origin,up,'Medical iron'),peg=surface(origin,up,'Medical brass');
+ assert(bow&&peg&&bow.point.distanceTo(peg.point)<1e-6,'Key bow rests on its brass hook');
+ const tip=surface(point(x,y+.009,.08),new THREE.Vector3(0,0,-1),'Medical brass');assert(tip&&tip.point.z>origin.z,'Hook turns up in front of the key');
+ const base=point(x,y,-.050);assert(timber.containsPoint(base),'Hook base embeds in the backboard');
+}
 for(const [kind,dimensions] of Object.entries({receptionDesk:[1.85,.92,.88],waitingBench:[2.45,.94,.52],longcaseClock:[.62,2.34,.36],keyCupboard:[.70,.72,.16],rulesNotice:[.76,.92,.045],clerkSet:[1.52,.35,.64]}))for(const [i,key] of ['width','height','depth'].entries())assert(Math.abs(FURNITURE_CATALOG[kind][key]/dimensions[i]-1.2)<1e-12,kind+' is 20% bigger in every dimension');
 const floors=buildAsylumLayout(JSON.parse(await readFile(new URL('./dist/asylum-plan.json',import.meta.url)))).floors;
 let baseline,walks=0;
 for(const seed of [1829,1,42,4294967295]){
  furnishAsylum(floors,{seed});const floor=floors[0],items=floor.furniture.filter(i=>i.roomId==='Reception'),hall=floor.furnishingAreas[0];
  assert.equal(items.length,8);assert.equal(items.filter(i=>i.kind==='waitingBench').length,2);assert(items.every(i=>!i.variable));
- const desk=items.find(i=>i.kind==='receptionDesk'),chair=items.find(i=>i.kind==='chair');assert.equal(desk.x,0);assert.equal(desk.z,14.5);assert.equal(desk.rotation,0,'Desk faces the south entrance');assert(chair.z<desk.z&&chair.rotation===0,'Clerk faces the entrance from behind the desk');
+ const desk=items.find(i=>i.kind==='receptionDesk'),chair=items.find(i=>i.kind==='chair');assert.equal(desk.x,0);assert(Math.abs((desk.z-9.4)/(14.5-9.4)-.7)<1e-12,'Desk is 30% closer to the back wall');assert.equal(desk.rotation,0,'Desk faces the south entrance');assert(Math.abs(desk.z-chair.z-1.4)<1e-12&&chair.rotation===0,'Clerk follows the desk, facing the entrance');
  for(const key of ['width','height','depth'])assert(Math.abs(chair[key]/FURNITURE_CATALOG.chair[key]-RECEPTION_FURNITURE_SCALE)<1e-12,'Only Reception chair is 20% larger');
  assert(flatWalkable(floor,floor.spawn.x*floor.cellSize,floor.spawn.z*floor.cellSize,.5),'Player arrival clears the central desk');
  if(baseline)assert.deepEqual(items,baseline);else baseline=structuredClone(items);
@@ -29,7 +42,7 @@ for(const seed of [1829,1,42,4294967295]){
  for(const item of items){
   assert(furnitureCorners(item).every(([x,z])=>insidePolygon(x,z,hall.points)));
   if(item.mounted){const rear=[item.x-Math.sin(item.rotation)*item.depth/2,item.z-Math.cos(item.rotation)*item.depth/2];assert(floor.walls.some(w=>Math.abs(segmentDistance(...rear,w.a,w.b)-.10)<.012),'Wall props attach to a real partition');}
-  else if(item.decorative){const support=items.find(i=>i.id===item.supportId);assert.equal(support.kind,'receptionDesk');assert(Math.abs(item.y-support.y-support.height-.008)<1e-6);assert(item.width<support.width&&item.depth<support.depth);}
+  else if(item.decorative){const support=items.find(i=>i.id===item.supportId);assert.equal(support.kind,'receptionDesk');assert.equal(item.x,support.x);assert.equal(item.z,support.z);assert(Math.abs(item.y-support.y-support.height-.008)<1e-6);assert(item.width<support.width&&item.depth<support.depth);}
   else {
    assert(!flatWalkable(floor,item.x,item.z));const s=Math.sin(item.rotation),c=Math.cos(item.rotation),actor={x:item.x+s*(item.depth/2+.8),z:item.z+c*(item.depth/2+.8),y:floor.elevation,floor:0};
    if(flatWalkable(floor,actor.x,actor.z)){moveAsylumActor(floors,actor,item.x-actor.x,item.z-actor.z);assert(Math.hypot(actor.x-item.x,actor.z-item.z)>=item.depth/2+.31);walks++;}

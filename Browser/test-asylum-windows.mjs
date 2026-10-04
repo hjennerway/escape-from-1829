@@ -19,7 +19,9 @@ for(const [pair,zs] of [[1,[-22,-18.1]],[3,[-14.2,-10.3]],[5,[-6.4]],[7,[-2.5]]]
   assert.equal(w.x,wallX,'Sashes remain on the outer room wall');
   for(const dz of [-.65,0,.65])assert(insidePolygon(w.x-direction*.2,w.z+dz,room.points),'Whole sash lies inside its assigned room span');
   for(const zOffset of [-.46,0,.46])for(let row=0;row<6;row++){
-   ray.set(new THREE.Vector3(actor.x,w.sill+w.height*(row+.5)/6,w.z+zOffset),new THREE.Vector3(direction,0,0));ray.far=8;
+   // Inspect the aperture from its room-side reveal. An open room leaf may
+   // legitimately stand between the doorway actor and this outer window.
+   ray.set(new THREE.Vector3(w.x-direction*.5,w.sill+w.height*(row+.5)/6,w.z+zOffset),new THREE.Vector3(direction,0,0));ray.far=.7;
    assert.equal(ray.intersectObjects(scene.children,false)[0]?.object.name,'Asylum Glass',`${id} has an unobstructed pane from inside`);panes++;
   }
   for(const [y,kind] of [[.13,'Skirting'],[.4,'Brick'],[2.75,'Plaster']]){

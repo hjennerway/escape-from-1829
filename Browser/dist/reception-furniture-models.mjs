@@ -79,8 +79,11 @@ export function createReceptionFurnitureModels(THREE,{labels=typeof document!=='
    }
    box('brass',.027,.065,.006,.297,.36,.002);box('iron',.006,.022,.007,.297,.36,.006);
    for(const [i,x] of [-.14,0,.14].entries())for(const [row,y] of [.24,.52].entries()){
-    rod('brass',.004,[x,y,-.035],[x,y,.005]);ring('iron',.017,.003,x,y-.021,.017);
-    rod('iron',.0035,[x,y-.038,.017],[x,y-.124,.017]);box('iron',.025,.011,.007,x+.009,y-.117,.017);
+    // Hooks start in the backboard, pass through each bow, and turn up in
+    // front. The bow's inner upper edge rests on the underside of the peg.
+    rod('brass',.004,[x,y,-.050],[x,y,.030]);rod('brass',.004,[x,y,.030],[x,y+.014,.030]);
+    ring('iron',.017,.003,x,y-.018,.017);
+    rod('iron',.0035,[x,y-.035,.017],[x,y-.124,.017]);box('iron',.025,.011,.007,x+.009,y-.117,.017);
     print(`key label ${row}-${i}`,.095,.036,x,y+.054,.007,(ctx,w,h)=>centered(ctx,['WEST','EAST','STORE','WARD','OFFICE','GATE'][row*3+i],w/2,h/2,28));
    }
   },

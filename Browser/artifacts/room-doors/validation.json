@@ -1,0 +1,1117 @@
+{
+  "gamePoses": [
+    {
+      "floor": 0,
+      "doors": [
+        {
+          "id": "R1",
+          "angle": 115.0456596701406,
+          "hinge": -1,
+          "limited": false
+        },
+        {
+          "id": "R2",
+          "angle": 106.32128775585443,
+          "hinge": -1,
+          "limited": false
+        },
+        {
+          "id": "R3",
+          "angle": 124.63695500278845,
+          "hinge": -1,
+          "limited": false
+        },
+        {
+          "id": "R4",
+          "angle": 128.52364657679573,
+          "hinge": -1,
+          "limited": false
+        },
+        {
+          "id": "R5",
+          "angle": 106.48442245880142,
+          "hinge": -1,
+          "limited": true
+        },
+        {
+          "id": "R6",
+          "angle": 104.95453507872298,
+          "hinge": -1,
+          "limited": false
+        },
+        {
+          "id": "R7",
+          "angle": 104.32241598144174,
+          "hinge": -1,
+          "limited": false
+        },
+        {
+          "id": "R8",
+          "angle": 101.09727476956323,
+          "hinge": -1,
+          "limited": false
+        },
+        {
+          "id": "R9",
+          "angle": 107.1257084957324,
+          "hinge": -1,
+          "limited": false
+        },
+        {
+          "id": "R10",
+          "angle": 115.39148843148723,
+          "hinge": -1,
+          "limited": false
+        },
+        {
+          "id": "R11",
+          "angle": 121.02402088278905,
+          "hinge": 1,
+          "limited": true
+        },
+        {
+          "id": "R12",
+          "angle": 129.23568353056908,
+          "hinge": -1,
+          "limited": false
+        },
+        {
+          "id": "R13",
+          "angle": 119.08916213084012,
+          "hinge": -1,
+          "limited": false
+        },
+        {
+          "id": "R14",
+          "angle": 117.49769550515339,
+          "hinge": -1,
+          "limited": false
+        },
+        {
+          "id": "R15",
+          "angle": 122.08245455753058,
+          "hinge": 1,
+          "limited": false
+        },
+        {
+          "id": "R16",
+          "angle": 106.48442245880142,
+          "hinge": -1,
+          "limited": true
+        },
+        {
+          "id": "R17",
+          "angle": 113.94188539125025,
+          "hinge": -1,
+          "limited": false
+        },
+        {
+          "id": "R18",
+          "angle": 113.19624485680833,
+          "hinge": 1,
+          "limited": false
+        },
+        {
+          "id": "R19",
+          "angle": 122.51402662601322,
+          "hinge": 1,
+          "limited": false
+        },
+        {
+          "id": "R20",
+          "angle": 113.54842369211838,
+          "hinge": -1,
+          "limited": false
+        },
+        {
+          "id": "R21",
+          "angle": 120.31009371392429,
+          "hinge": -1,
+          "limited": false
+        },
+        {
+          "id": "R22",
+          "angle": 129.03329803608358,
+          "hinge": -1,
+          "limited": false
+        },
+        {
+          "id": "R23",
+          "angle": 121.19457894470543,
+          "hinge": -1,
+          "limited": false
+        },
+        {
+          "id": "R25",
+          "angle": 119.46720167296007,
+          "hinge": -1,
+          "limited": false
+        },
+        {
+          "id": "R26",
+          "angle": 120.59634070144966,
+          "hinge": -1,
+          "limited": false
+        },
+        {
+          "id": "R27",
+          "angle": 100.70950854569674,
+          "hinge": 1,
+          "limited": false
+        },
+        {
+          "id": "R28",
+          "angle": 106.0853420291096,
+          "hinge": -1,
+          "limited": false
+        },
+        {
+          "id": "R29",
+          "angle": 111.4595219376497,
+          "hinge": -1,
+          "limited": false
+        },
+        {
+          "id": "R30",
+          "angle": 119.95703398250043,
+          "hinge": 1,
+          "limited": false
+        },
+        {
+          "id": "R31",
+          "angle": 118.23672185186297,
+          "hinge": 1,
+          "limited": false
+        },
+        {
+          "id": "R32",
+          "angle": 116.28689581993967,
+          "hinge": 1,
+          "limited": false
+        },
+        {
+          "id": "R33",
+          "angle": 100.34180136863142,
+          "hinge": 1,
+          "limited": false
+        },
+        {
+          "id": "R34",
+          "angle": 100.97078796708956,
+          "hinge": -1,
+          "limited": false
+        },
+        {
+          "id": "R35",
+          "angle": 121.14413012750447,
+          "hinge": 1,
+          "limited": false
+        },
+        {
+          "id": "R36",
+          "angle": 113.76797022530809,
+          "hinge": 1,
+          "limited": false
+        },
+        {
+          "id": "R37",
+          "angle": 113.61332825385034,
+          "hinge": 1,
+          "limited": false
+        },
+        {
+          "id": "R38",
+          "angle": 128.37297816528007,
+          "hinge": -1,
+          "limited": false
+        },
+        {
+          "id": "R39",
+          "angle": 120.21937378449365,
+          "hinge": -1,
+          "limited": false
+        }
+      ],
+      "instances": 190
+    },
+    {
+      "floor": 1,
+      "doors": [
+        {
+          "id": "R1",
+          "angle": 117.12846275186166,
+          "hinge": -1,
+          "limited": false
+        },
+        {
+          "id": "R2",
+          "angle": 123.50611547473818,
+          "hinge": -1,
+          "limited": false
+        },
+        {
+          "id": "R3",
+          "angle": 111.3156690611504,
+          "hinge": -1,
+          "limited": false
+        },
+        {
+          "id": "R4",
+          "angle": 101.89922452438623,
+          "hinge": 1,
+          "limited": false
+        },
+        {
+          "id": "R5",
+          "angle": 106.48442245880142,
+          "hinge": -1,
+          "limited": true
+        },
+        {
+          "id": "R6",
+          "angle": 100.81977985799313,
+          "hinge": -1,
+          "limited": false
+        },
+        {
+          "id": "R7",
+          "angle": 112.30510669993237,
+          "hinge": -1,
+          "limited": false
+        },
+        {
+          "id": "R8",
+          "angle": 123.4171117679216,
+          "hinge": -1,
+          "limited": false
+        },
+        {
+          "id": "R9",
+          "angle": 106.49078177521005,
+          "hinge": -1,
+          "limited": false
+        },
+        {
+          "id": "R10",
+          "angle": 119.46407236624509,
+          "hinge": -1,
+          "limited": false
+        },
+        {
+          "id": "R11",
+          "angle": 121.02402088278905,
+          "hinge": 1,
+          "limited": true
+        },
+        {
+          "id": "R12",
+          "angle": 104.96088170213625,
+          "hinge": -1,
+          "limited": false
+        },
+        {
+          "id": "R13",
+          "angle": 121.88633171375841,
+          "hinge": -1,
+          "limited": false
+        },
+        {
+          "id": "R14",
+          "angle": 101.09315840993077,
+          "hinge": -1,
+          "limited": false
+        },
+        {
+          "id": "R15",
+          "angle": 115.65421900479123,
+          "hinge": 1,
+          "limited": false
+        },
+        {
+          "id": "R16",
+          "angle": 104.75005258573219,
+          "hinge": -1,
+          "limited": false
+        },
+        {
+          "id": "R17",
+          "angle": 116.15576547803357,
+          "hinge": -1,
+          "limited": false
+        },
+        {
+          "id": "R18",
+          "angle": 104.86850167391822,
+          "hinge": 1,
+          "limited": false
+        },
+        {
+          "id": "R19",
+          "angle": 103.63674248103052,
+          "hinge": 1,
+          "limited": false
+        },
+        {
+          "id": "R20",
+          "angle": 125.41344527853653,
+          "hinge": -1,
+          "limited": false
+        },
+        {
+          "id": "R21",
+          "angle": 108.8930367748253,
+          "hinge": -1,
+          "limited": false
+        },
+        {
+          "id": "R22",
+          "angle": 104.21405493281782,
+          "hinge": -1,
+          "limited": false
+        },
+        {
+          "id": "R23",
+          "angle": 123.19891643943265,
+          "hinge": -1,
+          "limited": false
+        },
+        {
+          "id": "R25",
+          "angle": 104.36614347621799,
+          "hinge": -1,
+          "limited": false
+        },
+        {
+          "id": "R26",
+          "angle": 122.5829663965851,
+          "hinge": -1,
+          "limited": false
+        },
+        {
+          "id": "R27",
+          "angle": 94.48705045576207,
+          "hinge": -1,
+          "limited": true
+        },
+        {
+          "id": "R28",
+          "angle": 117.86386695690453,
+          "hinge": -1,
+          "limited": false
+        },
+        {
+          "id": "R29",
+          "angle": 129.76231131935492,
+          "hinge": -1,
+          "limited": false
+        },
+        {
+          "id": "R30",
+          "angle": 111.6624537226744,
+          "hinge": -1,
+          "limited": false
+        },
+        {
+          "id": "R31",
+          "angle": 126.31264684884809,
+          "hinge": 1,
+          "limited": true
+        },
+        {
+          "id": "R32",
+          "angle": 125.75751075986773,
+          "hinge": 1,
+          "limited": false
+        },
+        {
+          "id": "R33",
+          "angle": 116.44201238872483,
+          "hinge": 1,
+          "limited": false
+        },
+        {
+          "id": "R34",
+          "angle": 126.84914925135672,
+          "hinge": -1,
+          "limited": false
+        },
+        {
+          "id": "R35",
+          "angle": 101.741567987483,
+          "hinge": 1,
+          "limited": false
+        },
+        {
+          "id": "R36",
+          "angle": 120.46618007589132,
+          "hinge": 1,
+          "limited": false
+        },
+        {
+          "id": "R37",
+          "angle": 122.15572830289602,
+          "hinge": 1,
+          "limited": false
+        }
+      ],
+      "instances": 180
+    },
+    {
+      "floor": 2,
+      "doors": [
+        {
+          "id": "B1",
+          "angle": 109.49789535952732,
+          "hinge": 1,
+          "limited": false
+        },
+        {
+          "id": "B2",
+          "angle": 113.93740387400612,
+          "hinge": 1,
+          "limited": false
+        },
+        {
+          "id": "B3",
+          "angle": 123.64048489136621,
+          "hinge": -1,
+          "limited": false
+        },
+        {
+          "id": "B4",
+          "angle": 119.07508466858417,
+          "hinge": -1,
+          "limited": false
+        },
+        {
+          "id": "B5",
+          "angle": 115.18668870441616,
+          "hinge": -1,
+          "limited": false
+        },
+        {
+          "id": "B6",
+          "angle": 122.92568505275995,
+          "hinge": -1,
+          "limited": false
+        },
+        {
+          "id": "B7",
+          "angle": 119.85547200543806,
+          "hinge": -1,
+          "limited": false
+        },
+        {
+          "id": "B8",
+          "angle": 104.27604818716645,
+          "hinge": -1,
+          "limited": false
+        },
+        {
+          "id": "B10",
+          "angle": 115.38006308721378,
+          "hinge": -1,
+          "limited": false
+        },
+        {
+          "id": "B11",
+          "angle": 106.48442246438935,
+          "hinge": 1,
+          "limited": true
+        },
+        {
+          "id": "B12",
+          "angle": 103.69047892512754,
+          "hinge": -1,
+          "limited": false
+        }
+      ],
+      "instances": 55
+    },
+    {
+      "floor": 3,
+      "doors": [
+        {
+          "id": "R41",
+          "angle": 124.69885537168011,
+          "hinge": -1,
+          "limited": false
+        },
+        {
+          "id": "R42",
+          "angle": 120.46475184848532,
+          "hinge": -1,
+          "limited": false
+        }
+      ],
+      "instances": 10
+    }
+  ],
+  "explorePoses": [
+    {
+      "floor": 0,
+      "doors": [
+        {
+          "id": "R1",
+          "angle": 115.0456596701406,
+          "hinge": -1,
+          "limited": false
+        },
+        {
+          "id": "R2",
+          "angle": 106.32128775585443,
+          "hinge": -1,
+          "limited": false
+        },
+        {
+          "id": "R3",
+          "angle": 124.63695500278845,
+          "hinge": -1,
+          "limited": false
+        },
+        {
+          "id": "R4",
+          "angle": 128.52364657679573,
+          "hinge": -1,
+          "limited": false
+        },
+        {
+          "id": "R5",
+          "angle": 106.48442245880142,
+          "hinge": -1,
+          "limited": true
+        },
+        {
+          "id": "R6",
+          "angle": 104.95453507872298,
+          "hinge": -1,
+          "limited": false
+        },
+        {
+          "id": "R7",
+          "angle": 104.32241598144174,
+          "hinge": -1,
+          "limited": false
+        },
+        {
+          "id": "R8",
+          "angle": 101.09727476956323,
+          "hinge": -1,
+          "limited": false
+        },
+        {
+          "id": "R9",
+          "angle": 107.1257084957324,
+          "hinge": -1,
+          "limited": false
+        },
+        {
+          "id": "R10",
+          "angle": 115.39148843148723,
+          "hinge": -1,
+          "limited": false
+        },
+        {
+          "id": "R11",
+          "angle": 121.02402088278905,
+          "hinge": 1,
+          "limited": true
+        },
+        {
+          "id": "R12",
+          "angle": 129.23568353056908,
+          "hinge": -1,
+          "limited": false
+        },
+        {
+          "id": "R13",
+          "angle": 119.08916213084012,
+          "hinge": -1,
+          "limited": false
+        },
+        {
+          "id": "R14",
+          "angle": 117.49769550515339,
+          "hinge": -1,
+          "limited": false
+        },
+        {
+          "id": "R15",
+          "angle": 122.08245455753058,
+          "hinge": 1,
+          "limited": false
+        },
+        {
+          "id": "R16",
+          "angle": 106.48442245880142,
+          "hinge": -1,
+          "limited": true
+        },
+        {
+          "id": "R17",
+          "angle": 113.94188539125025,
+          "hinge": -1,
+          "limited": false
+        },
+        {
+          "id": "R18",
+          "angle": 113.19624485680833,
+          "hinge": 1,
+          "limited": false
+        },
+        {
+          "id": "R19",
+          "angle": 122.51402662601322,
+          "hinge": 1,
+          "limited": false
+        },
+        {
+          "id": "R20",
+          "angle": 113.54842369211838,
+          "hinge": -1,
+          "limited": false
+        },
+        {
+          "id": "R21",
+          "angle": 120.31009371392429,
+          "hinge": -1,
+          "limited": false
+        },
+        {
+          "id": "R22",
+          "angle": 129.03329803608358,
+          "hinge": -1,
+          "limited": false
+        },
+        {
+          "id": "R23",
+          "angle": 121.19457894470543,
+          "hinge": -1,
+          "limited": false
+        },
+        {
+          "id": "R25",
+          "angle": 119.46720167296007,
+          "hinge": -1,
+          "limited": false
+        },
+        {
+          "id": "R26",
+          "angle": 120.59634070144966,
+          "hinge": -1,
+          "limited": false
+        },
+        {
+          "id": "R27",
+          "angle": 100.70950854569674,
+          "hinge": 1,
+          "limited": false
+        },
+        {
+          "id": "R28",
+          "angle": 106.0853420291096,
+          "hinge": -1,
+          "limited": false
+        },
+        {
+          "id": "R29",
+          "angle": 111.4595219376497,
+          "hinge": -1,
+          "limited": false
+        },
+        {
+          "id": "R30",
+          "angle": 119.95703398250043,
+          "hinge": 1,
+          "limited": false
+        },
+        {
+          "id": "R31",
+          "angle": 118.23672185186297,
+          "hinge": 1,
+          "limited": false
+        },
+        {
+          "id": "R32",
+          "angle": 116.28689581993967,
+          "hinge": 1,
+          "limited": false
+        },
+        {
+          "id": "R33",
+          "angle": 100.34180136863142,
+          "hinge": 1,
+          "limited": false
+        },
+        {
+          "id": "R34",
+          "angle": 100.97078796708956,
+          "hinge": -1,
+          "limited": false
+        },
+        {
+          "id": "R35",
+          "angle": 121.14413012750447,
+          "hinge": 1,
+          "limited": false
+        },
+        {
+          "id": "R36",
+          "angle": 113.76797022530809,
+          "hinge": 1,
+          "limited": false
+        },
+        {
+          "id": "R37",
+          "angle": 113.61332825385034,
+          "hinge": 1,
+          "limited": false
+        },
+        {
+          "id": "R38",
+          "angle": 128.37297816528007,
+          "hinge": -1,
+          "limited": false
+        },
+        {
+          "id": "R39",
+          "angle": 120.21937378449365,
+          "hinge": -1,
+          "limited": false
+        }
+      ],
+      "instances": 190
+    },
+    {
+      "floor": 1,
+      "doors": [
+        {
+          "id": "R1",
+          "angle": 117.12846275186166,
+          "hinge": -1,
+          "limited": false
+        },
+        {
+          "id": "R2",
+          "angle": 123.50611547473818,
+          "hinge": -1,
+          "limited": false
+        },
+        {
+          "id": "R3",
+          "angle": 111.3156690611504,
+          "hinge": -1,
+          "limited": false
+        },
+        {
+          "id": "R4",
+          "angle": 101.89922452438623,
+          "hinge": 1,
+          "limited": false
+        },
+        {
+          "id": "R5",
+          "angle": 106.48442245880142,
+          "hinge": -1,
+          "limited": true
+        },
+        {
+          "id": "R6",
+          "angle": 100.81977985799313,
+          "hinge": -1,
+          "limited": false
+        },
+        {
+          "id": "R7",
+          "angle": 112.30510669993237,
+          "hinge": -1,
+          "limited": false
+        },
+        {
+          "id": "R8",
+          "angle": 123.4171117679216,
+          "hinge": -1,
+          "limited": false
+        },
+        {
+          "id": "R9",
+          "angle": 106.49078177521005,
+          "hinge": -1,
+          "limited": false
+        },
+        {
+          "id": "R10",
+          "angle": 119.46407236624509,
+          "hinge": -1,
+          "limited": false
+        },
+        {
+          "id": "R11",
+          "angle": 121.02402088278905,
+          "hinge": 1,
+          "limited": true
+        },
+        {
+          "id": "R12",
+          "angle": 104.96088170213625,
+          "hinge": -1,
+          "limited": false
+        },
+        {
+          "id": "R13",
+          "angle": 121.88633171375841,
+          "hinge": -1,
+          "limited": false
+        },
+        {
+          "id": "R14",
+          "angle": 101.09315840993077,
+          "hinge": -1,
+          "limited": false
+        },
+        {
+          "id": "R15",
+          "angle": 115.65421900479123,
+          "hinge": 1,
+          "limited": false
+        },
+        {
+          "id": "R16",
+          "angle": 104.75005258573219,
+          "hinge": -1,
+          "limited": false
+        },
+        {
+          "id": "R17",
+          "angle": 116.15576547803357,
+          "hinge": -1,
+          "limited": false
+        },
+        {
+          "id": "R18",
+          "angle": 104.86850167391822,
+          "hinge": 1,
+          "limited": false
+        },
+        {
+          "id": "R19",
+          "angle": 103.63674248103052,
+          "hinge": 1,
+          "limited": false
+        },
+        {
+          "id": "R20",
+          "angle": 125.41344527853653,
+          "hinge": -1,
+          "limited": false
+        },
+        {
+          "id": "R21",
+          "angle": 108.8930367748253,
+          "hinge": -1,
+          "limited": false
+        },
+        {
+          "id": "R22",
+          "angle": 104.21405493281782,
+          "hinge": -1,
+          "limited": false
+        },
+        {
+          "id": "R23",
+          "angle": 123.19891643943265,
+          "hinge": -1,
+          "limited": false
+        },
+        {
+          "id": "R25",
+          "angle": 104.36614347621799,
+          "hinge": -1,
+          "limited": false
+        },
+        {
+          "id": "R26",
+          "angle": 122.5829663965851,
+          "hinge": -1,
+          "limited": false
+        },
+        {
+          "id": "R27",
+          "angle": 94.48705045576207,
+          "hinge": -1,
+          "limited": true
+        },
+        {
+          "id": "R28",
+          "angle": 117.86386695690453,
+          "hinge": -1,
+          "limited": false
+        },
+        {
+          "id": "R29",
+          "angle": 129.76231131935492,
+          "hinge": -1,
+          "limited": false
+        },
+        {
+          "id": "R30",
+          "angle": 111.6624537226744,
+          "hinge": -1,
+          "limited": false
+        },
+        {
+          "id": "R31",
+          "angle": 126.31264684884809,
+          "hinge": 1,
+          "limited": true
+        },
+        {
+          "id": "R32",
+          "angle": 125.75751075986773,
+          "hinge": 1,
+          "limited": false
+        },
+        {
+          "id": "R33",
+          "angle": 116.44201238872483,
+          "hinge": 1,
+          "limited": false
+        },
+        {
+          "id": "R34",
+          "angle": 126.84914925135672,
+          "hinge": -1,
+          "limited": false
+        },
+        {
+          "id": "R35",
+          "angle": 101.741567987483,
+          "hinge": 1,
+          "limited": false
+        },
+        {
+          "id": "R36",
+          "angle": 120.46618007589132,
+          "hinge": 1,
+          "limited": false
+        },
+        {
+          "id": "R37",
+          "angle": 122.15572830289602,
+          "hinge": 1,
+          "limited": false
+        }
+      ],
+      "instances": 180
+    },
+    {
+      "floor": 2,
+      "doors": [
+        {
+          "id": "B1",
+          "angle": 109.49789535952732,
+          "hinge": 1,
+          "limited": false
+        },
+        {
+          "id": "B2",
+          "angle": 113.93740387400612,
+          "hinge": 1,
+          "limited": false
+        },
+        {
+          "id": "B3",
+          "angle": 123.64048489136621,
+          "hinge": -1,
+          "limited": false
+        },
+        {
+          "id": "B4",
+          "angle": 119.07508466858417,
+          "hinge": -1,
+          "limited": false
+        },
+        {
+          "id": "B5",
+          "angle": 115.18668870441616,
+          "hinge": -1,
+          "limited": false
+        },
+        {
+          "id": "B6",
+          "angle": 122.92568505275995,
+          "hinge": -1,
+          "limited": false
+        },
+        {
+          "id": "B7",
+          "angle": 119.85547200543806,
+          "hinge": -1,
+          "limited": false
+        },
+        {
+          "id": "B8",
+          "angle": 104.27604818716645,
+          "hinge": -1,
+          "limited": false
+        },
+        {
+          "id": "B10",
+          "angle": 115.38006308721378,
+          "hinge": -1,
+          "limited": false
+        },
+        {
+          "id": "B11",
+          "angle": 106.48442246438935,
+          "hinge": 1,
+          "limited": true
+        },
+        {
+          "id": "B12",
+          "angle": 103.69047892512754,
+          "hinge": -1,
+          "limited": false
+        }
+      ],
+      "instances": 55
+    },
+    {
+      "floor": 3,
+      "doors": [
+        {
+          "id": "R41",
+          "angle": 124.69885537168011,
+          "hinge": -1,
+          "limited": false
+        },
+        {
+          "id": "R42",
+          "angle": 120.46475184848532,
+          "hinge": -1,
+          "limited": false
+        }
+      ],
+      "instances": 10
+    }
+  ],
+  "captures": [
+    "north-corridor",
+    "north-room",
+    "west-door",
+    "east-door",
+    "south-door",
+    "bay-library",
+    "wall-contact-return",
+    "wall-contact-central",
+    "basement-door",
+    "basement-wall-contact",
+    "upper-door",
+    "corridor-link",
+    "mobile-door",
+    "mobile-wall-contact",
+    "exploration-door"
+  ],
+  "walks": 178,
+  "errors": []
+}

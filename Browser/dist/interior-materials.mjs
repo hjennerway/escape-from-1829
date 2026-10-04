@@ -1,3 +1,4 @@
+import {paintRoomWallpaper,paintRoomDado} from './room-finish-textures.mjs';
 // Deterministic, local finishes: no network images or per-brick draw calls.
 export function createInteriorMaterials(THREE, document) {
   let seed=1829;
@@ -145,6 +146,9 @@ export function createInteriorMaterials(THREE, document) {
     return m;
   }
   return {
+    RoomWallpaper:material(0xffffff,canvasTexture(paintRoomWallpaper,512),1,{bumpScale:.001}),
+    RoomPaint:material(0xffffff,canvasTexture(paintRoomDado,512),1.4,{bumpScale:.002}),
+    Dado:material(0xe3ddcb,null,1,{roughness:.82}),
     Floor:material(0xffffff,floor,2.5),Stone:material(0xada596),
     Plaster:material(0xffffff,plasterMap,2),Brick:material(0xffffff,brickMap,2),
     Ceiling:material(0xffffff,ceiling,5,{bumpScale:.009},true),Skirting:material(0x414745),

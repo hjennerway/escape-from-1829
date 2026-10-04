@@ -53,7 +53,7 @@ for(const seed of seeds){
     const shelves=floor.furniture.filter(i=>i.roomId===room.id);
     assert(shelves.length>=(room.id==='R31'?2:3),`${floor.id} ${room.id}: enlarged stocked shelves retain clear small-room circulation`);
     assert(shelves.every(i=>i.kind==='bookcase'&&i.stocked&&!i.variable&&Math.abs(i.width-1.05*1.5)<1e-12&&Math.abs(i.depth-.28*1.5)<1e-12&&Math.abs(i.height-1.90*1.5)<1e-12),'Fitted book-filled shelves scale to 150% in every dimension and remain fixed');
-    if(room.id==='R31')assert.equal(shelves.filter(i=>Math.abs(Math.sin(i.rotation))>.5&&Math.abs(Math.cos(i.rotation))>.5).length,2,'Both east bay cheeks carry aligned shelves');
+    if(room.id==='R31')assert.equal(shelves.filter(i=>Math.abs(Math.sin(i.rotation))>.5&&Math.abs(Math.cos(i.rotation))>.5).length,1,'The open door reserves one east bay cheek; the opposite cheek retains an aligned shelf');
    }
    const target={x:room.label[0],z:room.label[1],floor:floor.id,y:floor.elevation};
    assert(flatWalkable(floor,target.x,target.z,.5),`${seed}: room centre remains clear ${floor.id} ${room.id}`);

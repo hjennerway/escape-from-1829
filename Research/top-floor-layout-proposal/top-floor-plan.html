@@ -1,0 +1,160 @@
+<div id="top-floor-layout-proposal">
+  <h3>Reception · top floor</h3>
+  <div class="viz-row" aria-label="Floor plan comparison">
+    <button class="btn" type="button" data-layout="proposed" aria-pressed="true">Proposed layout</button>
+    <button class="btn" type="button" data-layout="current" aria-pressed="false">Current layout</button>
+  </div>
+  <svg class="floor-plan" role="img" aria-label="Top-floor plan with the existing five windows and Reception staircase retained"></svg>
+  <div class="viz-row text-small plan-key">
+    <span><span class="key-window" aria-hidden="true"></span>Existing windows</span>
+    <span><span class="key-wall" aria-hidden="true"></span>Partitions</span>
+    <span><span class="key-passage" aria-hidden="true"></span>Passage / landing</span>
+  </div>
+  <div class="mobile-room-key text-small" aria-label="Room labels"></div>
+  <div class="text-small text-muted plan-status" aria-live="polite">Concept only · game model unchanged</div>
+  <script type="application/json" class="plan-data">
+  {
+    "outline": [[-16,7],[-8.6,7],[-8.6,6.8],[-6.2,4.4],[6.2,4.4],[8.6,6.8],[8.6,16],[-16,16]],
+    "stair": [[-15.5,9.6],[-10.3,9.6],[-10.3,14.799999999999999],[-15.5,14.799999999999999]],
+    "windows": [
+      {"x":-4,"z":4.4,"axis":"z","width":1.15,"height":2.5,"sill":0.9},
+      {"x":0,"z":4.4,"axis":"z","width":1.15,"height":2.5,"sill":0.9},
+      {"x":-7.4,"z":5.6,"axis":"diagonal","width":1.23,"height":2.5,"sill":0.9},
+      {"x":4,"z":4.4,"axis":"z","width":1.15,"height":2.5,"sill":0.9},
+      {"x":7.4,"z":5.6,"axis":"diagonal","width":1.23,"height":2.5,"sill":0.9}
+    ],
+    "currentRooms": [
+      {"id":"R41","name":"Records room","lines":["Records room","3 windows"],"label":[-3.3,8.1],"points":[[-8.6,6.8],[-6.2,4.4],[2,4.4],[2,11.6],[-8.6,11.6]]},
+      {"id":"R42","name":"Staff office","lines":["Staff office","2 windows"],"label":[5.3,8.1],"points":[[2,4.4],[6.2,4.4],[8.6,6.8],[8.6,11.6],[2,11.6]]}
+    ],
+    "proposedRooms": [
+      {"id":"1","name":"Staff sitting room","lines":["Staff sitting","room"],"label":[-5.3,8.3],"windowCount":2,"points":[[-8.6,6.8],[-6.2,4.4],[-2,4.4],[-2,11.2],[-8.6,11.2]]},
+      {"id":"2","name":"Records office","lines":["Records","office"],"label":[0,8.3],"windowCount":1,"points":[[-2,4.4],[2,4.4],[2,11.2],[-2,11.2]]},
+      {"id":"3","name":"Staff office","lines":["Staff","office"],"label":[5.3,8.3],"windowCount":2,"points":[[2,4.4],[6.2,4.4],[8.6,6.8],[8.6,11.2],[2,11.2]]},
+      {"id":"4","name":"Archive / stores","lines":["Archive / stores","no windows"],"label":[3.8,14.45],"windowCount":0,"points":[[-8.6,13.2],[8.6,13.2],[8.6,16],[-8.6,16]]},
+      {"id":"5","name":"Linen store","lines":["Linen store"],"label":[-12.3,8.15],"windowCount":0,"points":[[-16,7],[-8.6,7],[-8.6,9.6],[-16,9.6]]}
+    ]
+  }
+  </script>
+  <style>
+    #top-floor-layout-proposal .floor-plan { display: block; width: 100%; overflow: visible; }
+    #top-floor-layout-proposal .floor-plan text { fill: var(--foreground); font-family: inherit; font-weight: 400; }
+    #top-floor-layout-proposal .floor-plan .secondary { fill: var(--muted-foreground); }
+    #top-floor-layout-proposal .plan-key { margin-top: 8px; gap: 16px; }
+    #top-floor-layout-proposal .plan-key > span { display: inline-flex; align-items: center; gap: 7px; }
+    #top-floor-layout-proposal .key-window { width: 18px; border-top: 4px solid var(--viz-series-1); }
+    #top-floor-layout-proposal .key-wall { width: 18px; border-top: 2px solid var(--foreground); }
+    #top-floor-layout-proposal .key-passage { width: 18px; height: 12px; background: var(--viz-series-1); opacity: .16; }
+    #top-floor-layout-proposal .mobile-room-key { display: grid; gap: 6px; margin-top: 12px; }
+    #top-floor-layout-proposal .mobile-room-key[hidden] { display: none; }
+    #top-floor-layout-proposal .plan-status { margin-top: 12px; }
+  </style>
+  <script>
+  (() => {
+    const root = document.getElementById('top-floor-layout-proposal');
+    const svg = root.querySelector('.floor-plan');
+    const data = JSON.parse(root.querySelector('.plan-data').textContent);
+    const ns = 'http://www.w3.org/2000/svg';
+    const saved = window.openai?.widgetState?.modelContent?.layout;
+    let layout = saved === 'current' ? 'current' : 'proposed';
+    function draw() {
+      const width = Math.max(280, root.getBoundingClientRect().width);
+      const compact = width < 520;
+      const pad = 14, scale = (width - pad * 2) / 24.6;
+      const top = 44, height = top + 11.6 * scale + 36;
+      const px = x => pad + (x + 16) * scale;
+      const py = z => top + (z - 4.4) * scale;
+      const path = points => points.map((p,i) => `${i ? 'L' : 'M'}${px(p[0])},${py(p[1])}`).join(' ');
+      const add = (tag, attrs = {}, text) => {
+        const item = document.createElementNS(ns, tag);
+        for (const [key,value] of Object.entries(attrs)) item.setAttribute(key,value);
+        if (text !== undefined) item.textContent = text;
+        svg.appendChild(item); return item;
+      };
+      const line = (a,b,attrs={}) => add('path',{d:path([a,b]),fill:'none',stroke:'var(--foreground)','stroke-width':2,...attrs});
+      const box = (x,z,w,h,attrs={}) => add('rect',{x:px(x),y:py(z),width:w*scale,height:h*scale,...attrs});
+      const label = (x,z,text,attrs={}) => add('text',{x:px(x),y:py(z),'text-anchor':'middle','dominant-baseline':'middle',...attrs},text);
+      const doorway = (x,z,size=1.3,inward=-1) => {
+        const hinge=[x-size/2,z], leaf=[x-size/2,z+inward*size];
+        line(hinge,leaf,{'stroke-width':1});
+        add('path',{d:`M${px(x+size/2)},${py(z)} A${size*scale},${size*scale} 0 0 ${inward<0?0:1} ${px(leaf[0])},${py(leaf[1])}`,fill:'none',stroke:'var(--foreground)','stroke-width':.8,opacity:.65});
+      };
+      const wallWithDoors = (x1,x2,z,centres,size=1.3,inward=-1) => {
+        let from=x1;
+        for (const x of centres) { line([from,z],[x-size/2,z]); doorway(x,z,size,inward); from=x+size/2; }
+        line([from,z],[x2,z]);
+      };
+      svg.replaceChildren();
+      svg.setAttribute('viewBox',`0 0 ${width} ${height}`);
+      svg.style.height = `${height}px`;
+      add('title',{},`Reception top floor · ${layout === 'proposed' ? 'proposed' : 'current'} layout`);
+      add('desc',{},layout === 'proposed' ? 'Three windowed rooms, a two-metre passage, a windowless archive and linen store. All five exterior windows, the exterior footprint and stair S1 keep their positions. Door arcs show access from the passage or stair landing.' : 'Two windowed rooms and a large open landing around the existing stair. The west records room has three windows and the east staff office has two.');
+      add('path',{d:path(data.outline)+'Z',fill:'var(--muted)',opacity:.35});
+      const passage={fill:'var(--viz-series-1)',opacity:.13};
+      if(layout==='proposed') {
+        box(-16,9.6,7.4,6.4,passage);
+        box(-8.6,11.2,17.2,2,passage);
+      } else {
+        box(-16,7,7.4,9,passage);
+        box(-8.6,11.6,17.2,4.4,passage);
+      }
+      const rooms=layout==='proposed'?data.proposedRooms:data.currentRooms;
+      for(const room of rooms) add('path',{d:path(room.points)+'Z',fill:'var(--foreground)',opacity:.045,'data-room':room.id});
+      if(layout==='proposed') {
+        for(const x of [-2,2]) line([x,4.4],[x,11.2]);
+        line([-8.6,7],[-8.6,11.2]);
+        wallWithDoors(-8.6,8.6,11.2,[-5.3,0,5.3]);
+        wallWithDoors(-8.6,8.6,13.2,[0],1.3,1);
+        line([-8.6,13.2],[-8.6,16]);
+        wallWithDoors(-16,-8.6,9.6,[-12.9],1.2,-1);
+        for(const x of [-7.8,.7]) box(x,15.1,7.1,.5,{fill:'none',stroke:'var(--border)','stroke-width':1});
+        for(const x of [-15.4,-11.8]) box(x,7.4,2.6,.5,{fill:'none',stroke:'var(--border)','stroke-width':1});
+      } else {
+        line([2,4.4],[2,11.6]);
+        line([-8.6,7],[-8.6,11.6]);
+        wallWithDoors(-8.6,8.6,11.6,[-3.3,5.3],1.9);
+      }
+      // The same footprint and stair opening are drawn in both layouts.
+      box(-15.5,9.6,5.2,5.2,{fill:'var(--muted)',stroke:'var(--border)','stroke-width':1});
+      box(-14.2,10.9,2.6,2.6,{fill:'var(--background)',stroke:'var(--foreground)','stroke-width':1});
+      for(let i=0;i<=10;i++) for(const x of [-15.5,-11.6]) line([x,10.9+i*.26],[x+1.3,10.9+i*.26],{stroke:'var(--muted-foreground)','stroke-width':.7});
+      label(-12.9,12.2,'S1 ↓');
+      add('path',{d:path(data.outline)+'Z',fill:'none',stroke:'var(--foreground)','stroke-width':2,'data-outline':'retained'});
+      for(const w of data.windows) {
+        const dx=w.axis==='diagonal'?w.width/2/Math.SQRT2:w.width/2;
+        const dz=w.axis==='diagonal'?Math.sign(w.x)*dx:0;
+        line([w.x-dx,w.z-dz],[w.x+dx,w.z+dz],{stroke:'var(--background)','stroke-width':7});
+        line([w.x-dx,w.z-dz],[w.x+dx,w.z+dz],{stroke:'var(--viz-series-1)','stroke-width':4,'data-window':`${w.x},${w.z}`});
+      }
+      label(-3.7,4.4,'Existing windowed bay ↑',{y:22,class:'secondary text-small'});
+      for(const room of rooms) {
+        if(compact) label(...room.label,room.id,{'data-label':room.id});
+        else room.lines.forEach((text,i)=>label(...room.label,text,{y:py(room.label[1])+(i-(room.lines.length-1)/2)*24,class:i===1&&room.lines[1].includes('window')?'secondary text-small':''}));
+      }
+      label(-12.8,15.45,compact?'Landing':'Stair landing',{class:'text-small'});
+      label(0,layout==='proposed'?12.2:13.7,layout==='proposed'?(compact?'≈2 m passage':'Passage · ≈2 m wide'):(compact?'Large landing':'Large open landing'),{class:'text-small'});
+      label(-3.7,16,'Unwindowed side',{y:height-12,class:'secondary text-small'});
+      const key=root.querySelector('.mobile-room-key');
+      key.hidden=!compact;
+      key.replaceChildren();
+      for(const room of rooms) {
+        const item=document.createElement('div');
+        item.textContent=`${room.id} · ${room.name}${room.windowCount===undefined?'':room.windowCount?` · ${room.windowCount} ${room.windowCount===1?'window':'windows'}`:' · no windows'}`;
+        key.appendChild(item);
+      }
+      root.querySelectorAll('[data-layout]').forEach(button=>button.setAttribute('aria-pressed',String(button.dataset.layout===layout)));
+      root.dataset.layout=layout;
+    }
+    root.querySelectorAll('[data-layout]').forEach(button=>button.addEventListener('click',()=>{
+      layout=button.dataset.layout; draw();
+      if(window.openai?.setWidgetState) window.openai.setWidgetState({modelContent:{layout},privateContent:null}).catch(()=>{});
+    }));
+    window.addEventListener('openai:set_globals',event=>{
+      const next=event.detail?.globals?.widgetState?.modelContent?.layout;
+      if(next==='current'||next==='proposed'){layout=next;draw();}
+    });
+    new ResizeObserver(draw).observe(root);
+    draw();
+  })();
+  </script>
+</div>

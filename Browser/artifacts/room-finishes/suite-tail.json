@@ -1,0 +1,138 @@
+[
+  {
+    "command": "node test-jarman.mjs",
+    "exit": 1
+  },
+  {
+    "command": "node test-oakmere-court.mjs",
+    "exit": 0
+  },
+  {
+    "command": "node test-oakmere.mjs",
+    "exit": 0
+  },
+  {
+    "command": "node test-oakmere-west.mjs",
+    "exit": 0
+  },
+  {
+    "command": "node test-oakmere-windows.mjs",
+    "exit": 0
+  },
+  {
+    "command": "node test-annexe-wards.mjs",
+    "exit": 0
+  },
+  {
+    "command": "node test-leighton-newton.mjs",
+    "exit": 1
+  },
+  {
+    "command": "node test-churton.mjs",
+    "exit": 0
+  },
+  {
+    "command": "node test-upton.mjs",
+    "exit": 0
+  },
+  {
+    "command": "node test-garages-mortuary.mjs",
+    "exit": 0
+  },
+  {
+    "command": "node test-greenhouses.mjs",
+    "exit": 0
+  },
+  {
+    "command": "node test-main-admin.mjs",
+    "exit": 0
+  },
+  {
+    "command": "node test-main-kitchen.mjs",
+    "exit": 0
+  },
+  {
+    "command": "node test-main-admin-refine2.mjs",
+    "exit": 0
+  },
+  {
+    "command": "node test-aerial-controls.mjs",
+    "exit": 0
+  },
+  {
+    "command": "node test-device-location.mjs",
+    "exit": 0
+  },
+  {
+    "command": "node test-aerial-layouts.mjs",
+    "exit": 0
+  },
+  {
+    "command": "node test-kml-imports.mjs",
+    "exit": 0
+  },
+  {
+    "command": "node test-kml-11.mjs",
+    "exit": 0
+  },
+  {
+    "command": "node test-modern-entrance.mjs",
+    "exit": 0
+  },
+  {
+    "command": "node test-modern-car-park.mjs",
+    "exit": 0
+  },
+  {
+    "command": "node test-parsons-retrace.mjs",
+    "exit": 0
+  },
+  {
+    "command": "node test-historic-roads.mjs",
+    "exit": 0
+  },
+  {
+    "command": "node test-road-continuity.mjs",
+    "exit": 0
+  },
+  {
+    "command": "node test-west-parsons-junctions.mjs",
+    "exit": 0
+  },
+  {
+    "command": "node test-admin-teardrop.mjs",
+    "exit": 0
+  },
+  {
+    "command": "node test-annexe-access.mjs",
+    "exit": 0
+  },
+  {
+    "command": "node test-annexe-rear-roads.mjs",
+    "exit": 0
+  },
+  {
+    "command": "node test-performance.mjs",
+    "exit": 0
+  },
+  {
+    "command": "node test-aerial-performance.mjs",
+    "exit": 0
+  },
+  {
+    "command": "node test-building-detail.mjs",
+    "exit": 0
+  },
+  {
+    "command": "node test-outhouse.mjs",
+    "exit": 0
+  },
+  {
+    "command": "node test-willows.mjs",
+    "exit": 0
+  },
+  {
+    "command": "node test-building-photos.mjs",
+    "exit": 0
+  }
+]

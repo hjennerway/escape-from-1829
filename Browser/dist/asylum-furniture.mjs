@@ -2,6 +2,7 @@ import {insidePolygon,flatWalkable} from './asylum-layout.mjs';
 import {asylumWindowCenters} from './asylum-windows.mjs';
 import {furnitureContains,furnitureBlocks,indexFurniture} from './furniture-collision.mjs';
 import {ROOM_USES,ROOM_PURPOSES} from './asylum-room-uses.mjs';
+import {doorRectangle,doorPolygonsOverlap,roomDoorHandle,roomDoorPanels,roomDoorHandlePlate} from './asylum-doors.mjs';
 
 export const RECEPTION_FURNITURE_SCALE=1.2;
 export const FURNITURE_CATALOG={
@@ -73,6 +74,13 @@ function clearPlacement(floor,room,item,placed,windows){
  if(furnitureContains(item,...room.label,fitted?.55:1.15))return false;
  if(placed.some(p=>!FURNITURE_CATALOG[p.kind].decorative&&overlaps(item,p)))return false;
  if(placed.some(p=>blocksFurnitureFront(item,p)))return false;
+ // Reserve complete open leaves and handles, including their ends between
+ // the usual furniture probes. Shelves also need their access strip clear.
+ const footprint=doorRectangle(item),doorFront=furnitureFrontClearance(item);
+ for(const door of floor.roomDoors??[])for(const obstacle of [door,roomDoorPanels(door),roomDoorHandle(door),roomDoorHandlePlate(door)]){
+  const polygon=doorRectangle(obstacle);
+  if(doorPolygonsOverlap(footprint,polygon)||(doorFront&&doorPolygonsOverlap(doorRectangle(doorFront),polygon)))return false;
+ }
  const front=furnitureFrontClearance(item);
  // The extra side allowance separates furniture; masonry must leave the
  // actual frame width clear. Check its centre with a player's radius too.
@@ -216,15 +224,18 @@ export function furnishAsylum(floors,{seed=1829}={}){
   if(floor.id===0){
    const hall={id:'Reception',name:'Reception entrance hall',purpose:'reception',label:[0,17.5],points:[[-7.1,9.4],[7.1,9.4],[7.1,19.6],[-7.1,19.6]]};
    floor.furnishingAreas.push(hall);
+   // Reduce the desk's distance to the back wall by 30%, keeping its clerk
+   // chair and supported accessories together.
+   const deskZ=14.50-(14.50-hall.points[0][1])*.30;
    const fixed=[
-    ['receptionDesk',0,14.50,0],
-    ['chair',0,13.10,0],
+    ['receptionDesk',0,deskZ,0],
+    ['chair',0,deskZ-1.40,0],
     ['waitingBench',-7.01+FURNITURE_CATALOG.waitingBench.depth/2,11.65,Math.PI/2],
     ['waitingBench',7.01-FURNITURE_CATALOG.waitingBench.depth/2,17.00,-Math.PI/2],
     ['longcaseClock',-7.01+FURNITURE_CATALOG.longcaseClock.depth/2,17.25,Math.PI/2],
     ['keyCupboard',7.00-FURNITURE_CATALOG.keyCupboard.depth/2,11.15,-Math.PI/2,1.30],
     ['rulesNotice',-7.00+FURNITURE_CATALOG.rulesNotice.depth/2,14.15,Math.PI/2,1.28],
-    ['clerkSet',0,14.50,0,FURNITURE_CATALOG.receptionDesk.height+.016]
+    ['clerkSet',0,deskZ,0,FURNITURE_CATALOG.receptionDesk.height+.016]
    ];
    for(const [index,[kind,x,z,rotation,y=.008]] of fixed.entries()){
     const item={...FURNITURE_CATALOG[kind],id:`0:Reception:fixed:${index}`,kind,roomId:hall.id,variable:false,x,z,rotation,y};

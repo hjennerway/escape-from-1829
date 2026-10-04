@@ -1,5 +1,30 @@
 # Asylum escape interior finishes
 
+## Open room doors (4 October 2026)
+
+The owner's request adds green timber leaves to all 87 enclosed room entrances
+on the four browser interior floors. The framed P1 corridor connection and
+R40 court porch remain open circulation, without leaves; the Reception stair
+hall and open basement end also remain clear. The existing outside doors
+retain their fittings and E interactions.
+
+Each leaf swings into its room, hinged toward the closest visible wall at
+90 degrees to its doorway. Actual facade returns are used rather than the
+slightly offset proposed room envelopes. Equal distances use a stable side.
+Seeded room/floor angles vary from 100 to 130 degrees: 0 spans the closed
+opening and 180 reverses the leaf along the hinge-side wall. If the desired
+swing intersects masonry or skirting, it stops at first contact, including
+the timber panels and handle. Eight current leaves have wall-limited angles;
+the first-floor R27 return limits its door to about 94.49 degrees.
+
+Walking, navigation, NPC sight and furniture placement share the same poses.
+R31 retains two stocked cases, with one on a canted cheek and the other on the
+end wall to keep the door and shelf access clear. These are owner-directed
+gameplay fittings, not surveyed historic construction. Validation and desktop/
+mobile views are in `../../Browser/artifacts/room-doors/` and DEVELOPMENT.md.
+Only browser sources and checks change. The aerial compiler excludes these
+interiors; Unity, Blender and packaged exports are not regenerated.
+
 ## Door-frame corner clearance (3 October 2026)
 
 The owner's ground-floor east-wing view identifies D10's cream surround

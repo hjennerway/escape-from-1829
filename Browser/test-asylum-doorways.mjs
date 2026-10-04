@@ -49,7 +49,7 @@ for(const floor of floors){
      // broad-front probe starts inside that return from the room side;
      // inspect both exposed faces of the new frontage instead.
      ray.set(new THREE.Vector3(48.62+side*.4,1.65,7.65),new THREE.Vector3(-side,0,0));ray.far=.8;
-     assert.equal(ray.intersectObjects(scene.children,false)[0]?.object.name,'Asylum Plaster',`${label} retains solid frontage along its new return`);
+     assert(ray.intersectObject(scene.getObjectByName('Asylum Plaster'),false).length,`${label} retains solid frontage behind its open leaf along the new return`);
      assert(!flatWalkable(floor,48.62,7.65),`${label} return blocks movement`);
      continue;
     }

@@ -1,0 +1,18 @@
+{
+  "tailChecks": 34,
+  "tailPasses": 32,
+  "failures": [
+    {
+      "command": "node test-jarman.mjs",
+      "exit": 1
+    },
+    {
+      "command": "node test-leighton-newton.mjs",
+      "exit": 1
+    }
+  ],
+  "leightonImports": 164,
+  "interiorImports": [],
+  "sourceHash": "91c7f4c5285adce8498a766942c0f61221af80f0809558d0defa6d506f438f91",
+  "compiledMatches": true
+}

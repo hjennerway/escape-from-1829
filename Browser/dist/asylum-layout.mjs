@@ -2,6 +2,7 @@
 import {stairRoute,stairOpening,floorStairRails,STAIR_WIDTH,RAIL_HEIGHT} from './asylum-stairs.mjs';
 import {joinAsylumWalls} from './asylum-wall-joins.mjs';
 import {furnitureBlocks} from './furniture-collision.mjs';
+import {buildRoomDoors,roomDoorsBlock} from './asylum-doors.mjs';
 export {stairRoute} from './asylum-stairs.mjs';
 export function insidePolygon(x,z,points){
  let inside=false;
@@ -43,7 +44,7 @@ export function flatWalkable(floor,x,z,radius=.34,{furniture=true}={}){
  if(![[0,0],[-radius,-radius],[radius,-radius],[-radius,radius],[radius,radius]].every(([dx,dz])=>contains(x+dx,z+dz)))return false;
  for(const shaft of floor.shafts){if(x>shaft.minX-radius&&x<shaft.maxX+radius&&z>shaft.minZ-radius&&z<shaft.maxZ+radius)return false;}
  const nearby=floor.wallIndex?.get(Math.floor(x/4)+','+Math.floor(z/4))??floor.walls;
- return !nearby.some(w=>segmentDistance(x,z,w.a,w.b)<radius+.09)&&(!furniture||!furnitureBlocks(floor,x,z,radius));
+ return !nearby.some(w=>segmentDistance(x,z,w.a,w.b)<radius+.09)&&!roomDoorsBlock(floor,x,z,radius)&&(!furniture||!furnitureBlocks(floor,x,z,radius));
 }
 export function stairDeparture(floor,portal){
  const [x,,z]=portal;
@@ -129,6 +130,7 @@ export function buildAsylumLayout(plan){
    return [{...d,x:d.x-d.dz*offset,z:d.z+d.dx*offset,width:ROOM_DOOR_WIDTH,height:ROOM_DOOR_HEIGHT,depth:high-low+.18}];
   });
   floor.doorways.push(...partitionDoors);
+  buildRoomDoors(floor);
   floor.wallIndex=new Map();
   for(const wall of floor.walls){const b=bounds([wall.a,wall.b]);for(let x=Math.floor((b.minX-.7)/4);x<=Math.floor((b.maxX+.7)/4);x++)for(let z=Math.floor((b.minZ-.7)/4);z<=Math.floor((b.maxZ+.7)/4);z++){const key=x+','+z;if(!floor.wallIndex.has(key))floor.wallIndex.set(key,[]);floor.wallIndex.get(key).push(wall);}}
   floor.cells=new Uint8Array(floor.width*floor.height);

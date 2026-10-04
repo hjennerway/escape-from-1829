@@ -92,8 +92,11 @@ function outlineUnion(polygons){
  return loops;
 }
 
-export function asylumWallShapes(THREE,walls,{width=.18,endExtension=0}={}){
- const loops=outlineUnion(footprints(walls,width/2,endExtension)),path=new THREE.ShapePath();
+export function asylumWallFootprints(walls,{width=.18,endExtension=0}={}){
+ return footprints(walls,width/2,endExtension);
+}
+export function asylumWallShapes(THREE,walls,options={}){
+ const loops=outlineUnion(asylumWallFootprints(walls,options)),path=new THREE.ShapePath();
  // X/-Z makes exterior boundaries clockwise in the extrusion's XY plane.
  for(const loop of loops){path.moveTo(loop[0][0],-loop[0][1]);for(const p of loop.slice(1))path.lineTo(p[0],-p[1]);path.currentPath.closePath();}
  return path.toShapes();

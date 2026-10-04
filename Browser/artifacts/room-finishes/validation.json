@@ -1,0 +1,167 @@
+{
+  "resources": {
+    "maps": 2,
+    "colours": [
+      1,
+      2,
+      3
+    ],
+    "floors": [
+      {
+        "floor": 0,
+        "rail": {
+          "runs": 448,
+          "height": 1.52,
+          "projection": 0.035
+        },
+        "walls": 26616,
+        "brick": 10132
+      },
+      {
+        "floor": 1,
+        "rail": {
+          "runs": 496,
+          "height": 1.52,
+          "projection": 0.035
+        },
+        "walls": 18276,
+        "brick": 9836
+      },
+      {
+        "floor": 2,
+        "rail": {
+          "runs": 125,
+          "height": 1.16,
+          "projection": 0.035
+        },
+        "walls": 3416,
+        "brick": 1692
+      },
+      {
+        "floor": 3,
+        "rail": {
+          "runs": 31,
+          "height": 1.52,
+          "projection": 0.035
+        },
+        "walls": 510,
+        "brick": 454
+      }
+    ],
+    "textureSizes": [
+      [
+        512,
+        512
+      ],
+      [
+        512,
+        512
+      ]
+    ]
+  },
+  "captures": [
+    {
+      "name": "rose-nursing",
+      "calls": 135,
+      "triangles": 1082368
+    },
+    {
+      "name": "sage-dayroom",
+      "calls": 123,
+      "triangles": 1076932
+    },
+    {
+      "name": "blue-dormitory",
+      "calls": 116,
+      "triangles": 1077736
+    },
+    {
+      "name": "upstairs-bedroom",
+      "calls": 91,
+      "triangles": 1042960
+    },
+    {
+      "name": "corridor-retained",
+      "calls": 119,
+      "triangles": 1075368
+    },
+    {
+      "name": "treatment-retained",
+      "calls": 92,
+      "triangles": 1042962
+    },
+    {
+      "name": "bay-library",
+      "calls": 63,
+      "triangles": 974756
+    },
+    {
+      "name": "basement-workshop",
+      "calls": 136,
+      "triangles": 1077878
+    },
+    {
+      "name": "basement-mural",
+      "calls": 171,
+      "triangles": 1086850
+    },
+    {
+      "name": "upper-office",
+      "calls": 209,
+      "triangles": 1122954
+    },
+    {
+      "name": "rail-close",
+      "calls": 128,
+      "triangles": 1079684
+    },
+    {
+      "name": "bedroom-mobile",
+      "calls": 88,
+      "triangles": 1042954
+    }
+  ],
+  "explore": [
+    {
+      "floor": 0,
+      "rail": {
+        "runs": 448,
+        "height": 1.52,
+        "projection": 0.035
+      },
+      "walls": 26616,
+      "brick": 10132
+    },
+    {
+      "floor": 1,
+      "rail": {
+        "runs": 496,
+        "height": 1.52,
+        "projection": 0.035
+      },
+      "walls": 18276,
+      "brick": 9836
+    },
+    {
+      "floor": 2,
+      "rail": {
+        "runs": 125,
+        "height": 1.16,
+        "projection": 0.035
+      },
+      "walls": 3416,
+      "brick": 1692
+    },
+    {
+      "floor": 3,
+      "rail": {
+        "runs": 31,
+        "height": 1.52,
+        "projection": 0.035
+      },
+      "walls": 510,
+      "brick": 454
+    }
+  ],
+  "errors": []
+}

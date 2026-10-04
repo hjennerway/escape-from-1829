@@ -1,0 +1,66 @@
+{
+  "retained": {
+    "outline": true,
+    "stair": true,
+    "windows": 5,
+    "currentRooms": true
+  },
+  "proposedWindowDistribution": [
+    2,
+    1,
+    2,
+    0,
+    0
+  ],
+  "captures": [
+    {
+      "name": "proposed-800-light",
+      "rootWidth": 768,
+      "scrollWidth": 768,
+      "svgWidth": 768,
+      "collisions": [],
+      "clippedLabels": []
+    },
+    {
+      "name": "current-800-light",
+      "rootWidth": 768,
+      "scrollWidth": 768,
+      "svgWidth": 768,
+      "collisions": [],
+      "clippedLabels": []
+    },
+    {
+      "name": "proposed-390-light",
+      "rootWidth": 358,
+      "scrollWidth": 358,
+      "svgWidth": 358,
+      "collisions": [],
+      "clippedLabels": []
+    },
+    {
+      "name": "proposed-320-light",
+      "rootWidth": 288,
+      "scrollWidth": 288,
+      "svgWidth": 288,
+      "collisions": [],
+      "clippedLabels": []
+    },
+    {
+      "name": "proposed-800-dark",
+      "rootWidth": 768,
+      "scrollWidth": 768,
+      "svgWidth": 768,
+      "collisions": [],
+      "clippedLabels": []
+    },
+    {
+      "name": "proposed-320-dark",
+      "rootWidth": 288,
+      "scrollWidth": 288,
+      "svgWidth": 288,
+      "collisions": [],
+      "clippedLabels": []
+    }
+  ],
+  "errors": []
+}

@@ -138,7 +138,7 @@
     },
     {
       "x": 0,
-      "z": 15.37599999999996
+      "z": 13.887999999999975
     }
   ],
   "captures": [
@@ -147,6 +147,8 @@
     "west",
     "clock",
     "keys",
+    "keys-close",
+    "keys-side",
     "rules",
     "hall-mobile",
     "explore-hall"

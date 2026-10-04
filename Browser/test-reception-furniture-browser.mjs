@@ -15,7 +15,8 @@ try{
  window.receptionTest={get ready(){return ready;},get floors(){return floors;},get scene(){return scene;},get renderer(){return renderer;},get camera(){return camera;},player,keys,update,start,showFloor,get arrival(){return arrivalCutscene;},pose(x,z,tx,tz,ty=1.25){Object.assign(player,{x,z,floor:0,y:floors[0].elevation,outside:false,stair:null});yaw=Math.atan2(-(tx-x),-(tz-z));pitch=Math.atan2(ty-1.65,Math.hypot(tx-x,tz-z));camera.position.set(x,player.y+1.65,z);camera.rotation.set(pitch,yaw,0);state='paused';showFloor();for(const e of enemies)e.mesh.visible=false;$('arrivalFade').hidden=true;$('hud').hidden=false;},walk(){state='play';},pause(){state='paused';}};` }));
  await page.goto(base);await page.waitForFunction(()=>window.receptionTest?.ready);await page.evaluate(()=>{const t=window.receptionTest;t.start();t.arrival.update(3);t.pause();});
  const initial=await page.evaluate(()=>window.receptionTest.floors[0].furniture.filter(i=>i.roomId==='Reception'));assert.equal(initial.length,8);
- for(const [name,...pose] of [['hall',0,18.6,0,14.5,1.25],['desk',0,16.9,0,14.5,1.1],['west',-3.8,14.8,-6.8,14.5,1.3],['clock',-4.8,17.1,-6.8,17.25,1.55],['keys',4.7,11.15,6.9,11.15,1.7],['rules',-4.6,14.15,-6.98,14.15,1.82]]){
+ const desk=initial.find(i=>i.kind==='receptionDesk');
+ for(const [name,...pose] of [['hall',0,18.6,0,desk.z,1.25],['desk',0,desk.z+2.4,0,desk.z,1.1],['west',-3.8,14.8,-6.8,14.5,1.3],['clock',-4.8,17.1,-6.8,17.25,1.55],['keys',4.7,11.15,6.9,11.15,1.7],['keys-close',6.15,11.15,6.9,11.15,1.7],['keys-side',6.25,11.75,6.9,11.15,1.7],['rules',-4.6,14.15,-6.98,14.15,1.82]]){
   await page.evaluate(p=>window.receptionTest.pose(...p),pose);await page.waitForTimeout(250);await page.screenshot({path:fileURLToPath(new URL(name+'.png',destination))});captures.push(name);
  }
  const geometry=await page.evaluate(async()=>{
@@ -30,11 +31,11 @@ try{
  });
  // Walk both sides of the central desk, then approach it from the entrance.
  const walks=[];
- for(const [x,z,tx,tz,seconds] of [[-2,18.6,-2,10,1.8],[2,18.6,2,10,1.8],[0,18.6,0,14.5,1.5]]){
+ for(const [x,z,tx,tz,seconds] of [[-2,18.6,-2,10,1.8],[2,18.6,2,10,1.8],[0,18.6,0,desk.z,2]]){
   await page.evaluate(p=>{const t=window.receptionTest;t.pose(...p);t.walk();t.keys.add('KeyW');for(let i=0;i<p[4]/.02;i++)t.update(.02);t.keys.clear();t.pause();},[x,z,tx,tz,seconds]);
   walks.push(await page.evaluate(()=>({x:window.receptionTest.player.x,z:window.receptionTest.player.z})));
  }
- assert(Math.abs(walks[0].x+2)<.01&&walks[0].z<13.2&&Math.abs(walks[1].x-2)<.01&&walks[1].z<13.2,'Both sides remain walkable');assert(walks[2].z>=15.35&&walks[2].z<15.8,'Desk stops actual player outside its larger footprint');
+ assert(Math.abs(walks[0].x+2)<.01&&walks[0].z<13.2&&Math.abs(walks[1].x-2)<.01&&walks[1].z<13.2,'Both sides remain walkable');assert(walks[2].z>=desk.z+desk.depth/2+.31&&walks[2].z<desk.z+desk.depth/2+.5,'Desk stops actual player outside its moved footprint');
  await page.setViewportSize({width:390,height:844});await page.evaluate(()=>window.receptionTest.pose(0,18.6,0,12.5));await page.waitForTimeout(250);await page.screenshot({path:fileURLToPath(new URL('hall-mobile.png',destination))});captures.push('hall-mobile');
  await page.route('**/explore.mjs',async r=>{const response=await r.fetch();await r.fulfill({response,body:(await response.text()).replace('const clock=new THREE.Timer();','window.receptionExplore={floors,interior,walker,renderer,exterior};const clock=new THREE.Timer();')});});
  await page.setViewportSize({width:1200,height:800});await page.goto(base+'/explore.html');await page.waitForFunction(()=>window.receptionExplore?.renderer.info.render.frame>2);

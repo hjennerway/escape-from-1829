@@ -1,5 +1,18 @@
 # Room furnishings — 3 October 2026
 
+## Reception desk and key-hook correction — 4 October 2026
+
+The owner's follow-up moves the desk 30% closer to the back wall. Its centre
+moves from z=14.5 to z=12.97, reducing the distance to the z=9.4 wall from
+5.1 to 3.57 metres. The clerk's chair moves with it to z=11.57; the ledger,
+papers, ink/quill, candlesticks and bell remain supported on the desktop.
+
+The six cupboard hooks now embed in the backboard, pass through the key bows
+and turn upward in front. Each bow rests on its hook's underside, replacing
+the earlier gap. `../../Browser/test-reception-furniture.mjs` checks contact
+on the final meshes. Front and oblique close views are in
+`../../Browser/artifacts/reception-furniture/`.
+
 ## Reception entrance hall — 3 October 2026
 
 The owner requested all six proposed additions, then a 20% size increase for

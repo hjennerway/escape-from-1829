@@ -1,3 +1,95 @@
+## Victorian room wallpaper and cream dado (4 October 2026)
+
+The browser's 82 non-treatment rooms now use cream painted lower walls,
+a stepped Victorian dado rail at 40% of ceiling height, and botanical damask
+wallpaper above. Dusty rose, sage and faded blue are assigned deterministically
+by room number and floor. Bedrooms, dormitory wards, offices, libraries,
+stores and workshops use this finish. Treatment rooms, corridors, stair halls,
+the basement stair lobby and the entrance porch retain the existing red lower
+and cream upper brickwork. Shared partitions have independent finishes on
+their two faces. The basement Grindley mural remains visible.
+
+`Browser/dist/room-finish-textures.mjs` draws an original repeating ornament
+inspired by the owner's supplied wallpaper reference, plus slightly worn
+cream paint. All three colours and four floors share two 512 × 512 maps.
+`asylum-room-finishes.mjs` classifies exposed wall faces, splits long faces
+at room/circulation boundaries, and supplies attributes to the existing
+Brick/Plaster batches. A shader replaces the masonry texture and relief on
+decorated faces; wallpaper colour is a tint over the shared neutral pattern.
+No wallpaper overlay planes or per-room textures are used. Wallpaper stops
+at the ceiling; the original masonry continues through the existing slab join.
+
+The 104mm moulded rail centres at 1.52m on the main floors and 1.16m in the
+basement. It projects 35mm, follows actual wall surfaces at that height,
+stops at window/door apertures and has mitred corners. Each floor's rails
+share one mesh and material. `compare-geometry.mjs` removes only these finish
+changes from an in-memory comparison, retaining the checkout's preceding
+door/stair work. It measures one additional architectural draw per floor
+and 47,872 additional triangles across all four floors. These are resource
+counts; frame rates were not benchmarked. Walking walls, cells, door poses,
+furniture and the shared plan remain unchanged.
+
+`npm run test:room-finishes` passes: 82 rooms, 5,198 lower/upper wall rays,
+independent corridor-edge and two-sided ward/treatment fixtures, 40% rails,
+89 clear doorway apertures and 274 clear window apertures. Browser checks
+confirm two shared 512px maps, three colours, matching Escape/Explore geometry,
+and no page or shader errors. Desktop and phone views of all three palettes,
+a bedroom, angled library, basement workshop/mural, second-floor office,
+corridor, treatment room and close moulding were visually reviewed. The
+wall/ceiling, skirting, door-frame and room-door focused regressions pass.
+Review images, geometry accounting and logs are in
+`Browser/artifacts/room-finishes/`.
+
+The required `npm test` reaches the unrelated Jarman protected-exterior
+snapshot mismatch: 818,901 primitives versus the fixture's 818,930. The
+remaining suite checks were then run individually, with the Jarman check
+included once to confirm its result. Leighton/Newton's protected-exterior
+snapshot also fails, at 882,948 primitives versus 882,977. The suites are
+not reported as fully passing. Neither failing test's import graph contains
+any changed room-finish/interior material module, and the aerial source hash
+still matches its compiled manifest. Protected fixtures are retained.
+
+The owner reference and modelling scope are documented in
+`Research/room-wall-finishes/`. Only browser interior sources, tests, notes
+and review artifacts change. The aerial import graph excludes these inputs,
+so its generated model requires no rebuild. Unity, Blender and packaged
+desktop/Android exports are not regenerated.
+
+## Reception desk moved and keys hung on hooks (4 October 2026)
+
+`Browser/dist/asylum-furniture.mjs` moves the desk 1.53 metres toward the
+back wall: z=14.5 becomes z=12.97, reducing its centre-to-wall distance by
+30%. The chair keeps its 1.4-metre offset behind the desk, and `clerkSet`
+shares the new desk position. Navigation and collision records rebuild
+from the same placement. Both side passages, arrival, windows, stairs and
+all room/exit routes remain accessible.
+
+`reception-furniture-models.mjs` extends all six brass hooks from inside
+the backboard through the key bows and adds raised ends. The bows rest
+on the pegs; their shafts remain joined to the bows. The normalized final
+meshes pass six raycast contact checks, raised-end checks and backboard
+attachment checks. Reception geometry totals 5,164 triangles before print
+planes and retains its existing catalog dimensions.
+
+The focused model/placement check and actual Escape/Explore browser check
+pass, including keyboard collision at the new desk position, matching
+rendered transforms, desktop/mobile views and no runtime/shader errors.
+Front and oblique cupboard closeups and hall/desktop captures were visually
+reviewed in `Browser/artifacts/reception-furniture/`. The ground-floor
+furnished SVG and PNG are regenerated.
+
+The required `npm test` run passes the furniture, game, interior and preceding
+estate checks, then stops at `test-jarman.mjs:11`: its protected exterior
+snapshot expects 818,930 primitives and finds 818,901 with a different hash.
+That exterior import graph excludes the edited interior modules; the existing
+snapshot is retained. The full suite is not reported as passing. Logs are
+`Browser/artifacts/reception-desk-keys-suite.log` and
+`Browser/artifacts/reception-desk-keys-browser.log`.
+
+These are browser interior source changes. Reception models build at
+runtime; the aerial compiler excludes these sources. Unity, Blender and
+packaged desktop/Android exports are not regenerated.
+
 ## Reception furnished and enlarged (3 October 2026)
 
 Reception now has a central clerk's desk facing the main entrance, a Windsor
@@ -30,6 +122,22 @@ furniture check passes eight seeds, 912 room/exit routes, all framed door
 crossings, 2,537 collision approaches, NPC paths/spawns and existing shelf
 access. Evidence and full-suite logs are under
 `Browser/artifacts/reception-furniture/` and the adjacent reception logs.
+
+The complete rendered-furniture regression also passes, including twenty model
+bounds, instance/collision transforms, storage-back contact, keyboard walking,
+fixed landmarks/new-game variation and desktop/mobile Escape/Explore views,
+with no runtime or shader errors. All four furnished-plan PNGs are regenerated
+from their SVGs. The aerial compiler's 171-module import graph contains none
+of the reception/furniture modules, so this work needs no aerial rebuild.
+
+The final `npm test` attempt passes the reception, shared furniture/medical,
+game/notebook, interior geometry, stair, outside-walking and preceding estate
+checks, then stops at `test-annexe-carden-correction.mjs:13`. That independent
+exterior snapshot expects 19,567 protected primitives and finds 19,568, with
+a changed hash but the same root transform. Reception has no import into the
+Annexe/aerial model graph. The full suite is not reported as passing, and the
+unrelated Annexe geometry/snapshot is not changed by this request. The complete
+log is `Browser/artifacts/reception-furniture-suite.log`.
 
 Historical references and fictional details are recorded in
 `Research/room-furnishings/README.md`. Browser sources and furnished plans are
@@ -7969,7 +8077,9 @@ All 109 exterior leaves pass across 1829, 1849, 1870, 1916, 1938 and 2021
 and annexe stair checks. Explicit authored glazing/panel rails are retained.
 `DOOR_TRIM_BASELINE=1` restores only the two original builders in memory:
 the new survey then detects four crossing strips across three doors and
-fails at its clearance assertion. Expected protected snapshots are unchanged.
+fails at its clearance assertion. Historical annexe fingerprints are advanced
+only after each preservation test passes with the two original builders restored.
+Unrelated whole-estate reference fingerprints are retained.
 
 The west and Larkton regressions probe the full reported strip heights and
 retain neighbouring ledges, lower door panels, ward preservation and walking
@@ -7980,3 +8090,110 @@ Evidence, baseline sources, surveys and validation logs are in
 `Browser/artifacts/door-trim/`. The local aerial model was regenerated.
 Only browser sources, tests, modelling notes and local generated aerial assets
 are updated; Unity, Blender and packaged exports were not regenerated.
+
+## Restored asylum arrival animation (3 October 2026)
+
+Starting Asylum Escape was counting synchronous run preparation toward the
+three-second camera sequence. Chrome reproduction with the furnished asylum
+spent 12.7 seconds preparing a run, then completed the entire arrival in its
+first frame without showing the approach. `game.mjs` now resets the Three.js
+timer after preparing the run. Arrival also limits each animation step to
+0.25 seconds so a slow render or shader compilation cannot skip the flight.
+The usual one-second exterior hold, 1.5-second approach/fade and half-second
+Reception reveal remain; very slow rendering extends the visible sequence.
+Player movement, pursuers and the gameplay timer remain frozen throughout.
+
+`test-game.mjs` checks launch and retry after 12.7 seconds of accumulated
+preparation time, the full exterior hold, five-second rendering stalls,
+camera movement and the Reception handoff. `npm run test:arrival` also runs
+the furnished game in Chrome, captures exterior/approach/blackout/reveal/inside
+checkpoints, and checks desktop restart and mobile reduced motion. Captures
+and validation are under `Browser/artifacts/arrival-animation/`.
+The game-loop checks and all three Chrome launch/retry scenarios pass, with
+zero gameplay time consumed and no page or shader errors. Removing either
+timing protection is rejected by the regression checks.
+The full `npm test` run passes the game, asylum, stairs and exterior checks
+before stopping at `test-annexe-carden-correction.mjs:13`: the independent
+protected-geometry snapshot has 19,568 primitives versus 19,567 expected,
+with a different hash. That model check does not import the game loop.
+This changes browser timing only; generated models, Unity and Blender
+exports do not require regeneration.
+
+Final validation: all 109 exterior doors pass the clearance/support survey
+across six periods. The new negative regression detects the original four
+strips on three doors. All three corrected doors and the phone view were
+visually reviewed in source and compiled rendering, with no page/shader errors.
+The regenerated aerial model matches the current source fingerprint; compiled
+image/draw-count comparison, full detail and fallback checks pass. The timeline
+check initially reached its final screenshot but failed to write that existing
+image. The unchanged check passes when rerun with an isolated output directory.
+
+The full npm test invocation reached Carden's historical annexe fingerprint.
+Every remaining command was run separately. Eleven annexe fingerprint records
+were advanced after all ten original preservation tests passed with only the
+two pre-repair door builders restored; the west/Larkton/109-door repair checks
+also passed first. Each record changes only its count and digest, and all ten
+preservation tests pass again with the corrected model. Original reference
+copies, before/after proof logs and the update list remain in the evidence folder.
+Only Jarman and Leighton/Newton's independent whole-estate snapshots still fail.
+Both also fail with the original door builders (31 primitives below their
+reference counts); those unrelated reference files were left unchanged.
+
+## Open room doors (4 October 2026)
+
+The four browser interior floors now contain 87 open green timber room doors:
+38 ground, 36 first, 11 basement and two second-floor leaves. P1 remains a
+clear corridor connection, and R40's court porch stays open circulation.
+Stair mouths and the open basement end remain unframed/open as before.
+Existing room frames, outside doors and outside E interactions are retained.
+
+`asylum-doors.mjs` derives hinges from the nearest visible perpendicular wall
+belonging to each room, including facade returns slightly offset from the
+proposed room envelope. Stable room/floor seeds vary target angles between
+100 and 130 degrees. Zero degrees spans the aperture; 180 reverses the leaf
+along the hinge-side wall. The complete swing is checked against the renderer's
+mitred masonry and skirting footprints. Body, raised panels, knob and plates
+use their actual dimensions; bisection stops the first obstructed swing at
+wall contact. Eight current leaves are constrained, with first-floor R27's
+L-shaped return limiting it to about 94.49 degrees. Long walls are included
+even when their endpoints lie outside the local doorway bounds.
+
+Painted leaves/panels share one new instanced draw per floor, reusing the
+existing green paint; hinges and brass hardware reuse existing batches.
+Door footprints enter walking collision and the navigation grid before
+cells/spawns are calculated. The same geometry also blocks sampled NPC sight.
+Furniture checks reserve leaves/hardware and complete shelf access strips.
+R31 retains two stocked cases, moving the case on the door side from its
+canted cheek to the end wall. The usual fixed/variable furniture rules remain.
+
+`test-asylum-room-doors.mjs` checks every room/circulation classification,
+hinge choice, repeatable angle, the 0/180 convention, actual instance centres,
+2,088 rendered wall-edge rays, all eight wall contacts, 79 walked leaf
+collisions and furniture clearance. Analytic and mirrored tight-room fixtures
+verify handle contact below 100 degrees; a long-wall fixture rejects endpoint-
+only collision filtering. Existing doorway checks pass 89 frames and 534
+crossings. The window test now probes basement panes from the room-side
+reveal, because an open leaf can legitimately stand between a doorway and
+the outer window. The R27 masonry probe checks its return behind the leaf.
+The furnishing survey passes eight seeds, 912 room/exit routes, all framed
+door crossings, storage contacts/front clearance and NPC routes/spawns.
+
+`npm run test:room-doors` also captures all hinge orientations, constrained
+swings, the clear P1 opening and desktop/mobile views in Chrome. It checks
+178 actual player doorway crossings and identical game/exploration poses,
+with no page or shader errors. Evidence is in `Browser/artifacts/room-doors/`.
+The new unit check is included in `npm test` and `test:asylum`; its browser
+check is included in `test:asylum`.
+
+Only browser interior sources, tests and modelling notes change. The compiled
+aerial manifest still matches its current source hash and needs no rebuild.
+Unity, Blender and packaged application exports were not regenerated.
+
+The full `npm test` run passes the interior, furniture, game, exploration,
+walking/stair and preceding exterior checks, then stops at
+`test-jarman.mjs:11` on its existing protected whole-estate snapshot mismatch
+(818,901 primitives versus 818,930 expected). That check imports only the
+exterior model, whose compiled source fingerprint remains unchanged by the
+room-door work. Its historical expected snapshot was retained. Full output is
+in `Browser/artifacts/room-doors-suite.txt`; the final focused geometry and
+Chrome checks pass in `Browser/artifacts/room-doors-browser.txt`.

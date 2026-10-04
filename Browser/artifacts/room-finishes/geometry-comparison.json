@@ -1,0 +1,54 @@
+[
+  {
+    "floor": 0,
+    "baseline": {
+      "draws": 18,
+      "triangles": 63368
+    },
+    "current": {
+      "draws": 19,
+      "triangles": 85340
+    },
+    "addedDraws": 1,
+    "addedTriangles": 21972
+  },
+  {
+    "floor": 1,
+    "baseline": {
+      "draws": 15,
+      "triangles": 51442
+    },
+    "current": {
+      "draws": 16,
+      "triangles": 71858
+    },
+    "addedDraws": 1,
+    "addedTriangles": 20416
+  },
+  {
+    "floor": 2,
+    "baseline": {
+      "draws": 15,
+      "triangles": 14600
+    },
+    "current": {
+      "draws": 16,
+      "triangles": 19036
+    },
+    "addedDraws": 1,
+    "addedTriangles": 4436
+  },
+  {
+    "floor": 3,
+    "baseline": {
+      "draws": 13,
+      "triangles": 3412
+    },
+    "current": {
+      "draws": 14,
+      "triangles": 4460
+    },
+    "addedDraws": 1,
+    "addedTriangles": 1048
+  }
+]

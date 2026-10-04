@@ -1,0 +1,4 @@
+npm notice run test:room-doors
+npm notice run node test-asylum-room-doors.mjs && node test-asylum-room-doors-browser.mjs
+PASS: 87 open room doors, nearest-wall hinges, 0/180 angle convention, stable 100–130 degree variation, 8 rendered wall contacts, analytic/mirrored tight-wall fixtures, 2088 wall edge rays, 79 walked door collisions, clear circulation and furniture.
+PASS: 87 open room doors in game and exploration, 178 actual player doorway crossings, 15 desktop/mobile views, all hinge orientations, wall contacts and clear corridor link, no page/shader errors.

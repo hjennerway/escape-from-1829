@@ -1,4 +1,5 @@
 import {createInteriorMaterials} from './interior-materials.mjs';
+import {createAsylumRoomFinisher,asylumRoomWallMaterials} from './asylum-room-finishes.mjs';
 import {basementMuralMaterials} from './basement-mural.mjs';
 import {asylumSkirtingGeometry} from './asylum-skirting.mjs';
 import {asylumWallShapes,extrudeAsylumWalls} from './asylum-wall-geometry.mjs';
@@ -6,6 +7,7 @@ import {mergeGeometries} from './vendor/BufferGeometryUtils.js';
 import {mergeAsylumMasonry} from './asylum-wall-joins.mjs';
 import {segmentDistance,insidePolygon,asylumExitCenter} from './asylum-layout.mjs';
 import {asylumWindowCenters,ASYLUM_WINDOW_WIDTH} from './asylum-windows.mjs';
+import {roomDoorHandle} from './asylum-doors.mjs';
 import {stairShape,stairOpening,stairFlightGeometry,handrailGeometry,STAIR_WIDTH,STAIR_SLAB_THICKNESS,RAIL_HEIGHT} from './asylum-stairs.mjs';
 const cache=new WeakMap();
 export function asylumWallSurfaces(floor){
@@ -23,7 +25,9 @@ export function asylumWallSurfaces(floor){
 export function buildAsylumArchitecture(THREE,scene,floor){
  if(!cache.has(THREE))cache.set(THREE,createInteriorMaterials(THREE,globalThis.document));
  const batches=new Map(),ceilingHeight=floor.id===2?2.9:3.8;
- const materials=floor.id===2?basementMuralMaterials(THREE,cache.get(THREE),ceilingHeight):cache.get(THREE);
+ const roomMaterials=asylumRoomWallMaterials(THREE,cache.get(THREE));
+ const materials=floor.id===2?basementMuralMaterials(THREE,roomMaterials,ceilingHeight):roomMaterials;
+ const roomFinisher=createAsylumRoomFinisher(THREE,floor,ceilingHeight);
  // Continue masonry through the ceiling and the floor above. Stair openings
  // expose the space between those surfaces; stopping at the room ceiling
  // leaves a band below the next storey. The overlap also seals float seams,
@@ -152,6 +156,21 @@ export function buildAsylumArchitecture(THREE,scene,floor){
    part('Sash',0,head+.18,face*(depth/2+.06),width+.29,.03,.018);
   }
  }
+ // Room leaves share the existing green paint and hardware batches. The
+ // transforms come from the same fixed poses used by walking/navigation.
+ for(const door of floor.roomDoors??[]){
+  const {x,z,width,height:h,y,depth,rotation:angle,tx,tz}=door;
+  const part=(kind,u,py,v,w,ph,d)=>box(kind,x+tx*u+Math.sin(angle)*v,py,z+tz*u+Math.cos(angle)*v,w,ph,d,angle);
+  part('RoomDoor',0,y+h/2,0,width,h,depth);
+  // Raised timber panels on both faces, with no competing coplanar faces.
+  for(const face of [-1,1])for(const py of [.60,1.75])part('RoomDoor',0,py,face*(depth/2+.004),width-.28,.76,.008);
+  const handle=roomDoorHandle(door);
+  for(const face of [-1,1]){
+   part('Brass',width/2-.18,1.10,face*(depth/2+.012),.07,.18,.024);
+  }
+  box('Brass',handle.x,1.10,handle.z,.065,.065,handle.depth,angle);
+  for(const py of [.30,1.20,2.12])box('Iron',door.hingeX,py,door.hingeZ,.035,.13,.035);
+ }
  const stairSurfaces=[],stairSolids=[];
  function deck(x,z,w,d,y,landing=false){
   if(landing)box('Stone',x,y-STAIR_SLAB_THICKNESS/2,z,w,STAIR_SLAB_THICKNESS,d);
@@ -204,11 +223,14 @@ export function buildAsylumArchitecture(THREE,scene,floor){
    transform.position.set(x,y,z);transform.scale.set(w,h,d);transform.rotation.set(0,ry,rz);transform.updateMatrix();
    parts.push(geometry.toNonIndexed().applyMatrix4(transform.matrix));
   }
-  const mesh=new THREE.Mesh(mergeGeometries(parts),materials[kind]);mesh.name='Asylum '+kind;scene.add(mesh);
+  const merged=mergeGeometries(parts),finished=kind==='Stone'?merged:roomFinisher.geometry(merged);
+  if(finished!==merged)merged.dispose();
+  const mesh=new THREE.Mesh(finished,materials[kind]);mesh.name='Asylum '+kind;scene.add(mesh);
   for(const part of parts)part.dispose();
   batches.delete(kind);
  }
- for(const [kind,items] of batches){const mesh=new THREE.InstancedMesh(geometry,materials[kind==='DoorFrame'?'Panel':kind],items.length);mesh.name='Asylum '+kind;
+ const dado=new THREE.Mesh(roomFinisher.rail(),materials.Dado);dado.name='Asylum Dado';scene.add(dado);
+ for(const [kind,items] of batches){const mesh=new THREE.InstancedMesh(geometry,materials[['DoorFrame','RoomDoor'].includes(kind)?'Panel':kind],items.length);mesh.name='Asylum '+kind;
   for(let i=0;i<items.length;i++){const [x,y,z,w,h,d,ry,rz]=items[i];transform.position.set(x,y,z);transform.scale.set(w,h,d);transform.rotation.set(0,ry,rz);transform.updateMatrix();mesh.setMatrixAt(i,transform.matrix);}
   mesh.instanceMatrix.needsUpdate=true;mesh.computeBoundingSphere();scene.add(mesh);
  }
