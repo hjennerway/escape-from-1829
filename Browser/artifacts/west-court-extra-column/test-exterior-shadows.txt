@@ -1,0 +1,1 @@
+PASS: 6493 opaque exterior shadow casters, bounded contact offsets, unchanged visible culling, preserved foliage/custom shadows and cached-map invalidation.

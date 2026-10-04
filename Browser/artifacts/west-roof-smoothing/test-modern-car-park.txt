@@ -1,0 +1,1 @@
+PASS: 62 exact KML vertices, 13607.4 square units, Modern-only car park, concave boundary, 15 complete trees and collisions cleared only in Modern, bowling lawn tree removed, all oaks retained.

@@ -1,0 +1,28 @@
+{
+  "sourceHash": "2787ca029134fc25f8fee97191f20f20cd83ff7e893f02cd55cb39326030f98f",
+  "compiledFile": "aerial-e502e8e2dd0e6cf23170.bin.gz",
+  "pages": {
+    "checks": [
+      {
+        "mode": "compiled",
+        "panes": 72,
+        "courtZ": 5,
+        "gardenZ": 13.5,
+        "endDepth": 11.5
+      },
+      {
+        "mode": "explore",
+        "panes": 72,
+        "courtZ": 5,
+        "gardenZ": 13.5,
+        "endDepth": 11.5
+      }
+    ],
+    "errors": []
+  },
+  "sharedPlansMatch": true,
+  "remainingHistoricalFailures": [
+    "test-jarman.mjs",
+    "test-leighton-newton.mjs"
+  ]
+}

@@ -1,0 +1,26 @@
+
+> test:compiled
+> node test-precompiled-models.mjs && node test-timeline-browser.mjs
+
+Checking aerial?models=source
+Checking aerial?models=compiled
+Checking aerial?models=compiled&buildingDetail=full&view=front
+Checking aerial
+Browser: Failed to load resource: the server responded with a status of 404 (Not Found)
+Checking aerial
+Checking aerial
+node:internal/fs/promises:1345
+  return new FileHandle(await PromisePrototypeThen(
+                        ^
+
+Error: UNKNOWN: unknown error, open 'C:\Users\Harry\Documents\_escape-from-1829\Browser\artifacts\precompiled-source.png'
+    at async open (node:internal/fs/promises:1345:25)
+    at async writeFile (node:internal/fs/promises:1965:14)
+    at async file:///C:/Users/Harry/Documents/_escape-from-1829/Browser/test-precompiled-models.mjs:110:34 {
+  errno: -4094,
+  code: 'UNKNOWN',
+  syscall: 'open',
+  path: 'C:\\Users\\Harry\\Documents\\_escape-from-1829\\Browser\\artifacts\\precompiled-source.png'
+}
+
+Node.js v24.20.0

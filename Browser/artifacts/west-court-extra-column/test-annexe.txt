@@ -1,0 +1,4 @@
+PASS: fixed church/Churton/Grafton, retained frontage orientation, aerial plan scale and fixed gameplay roads.
+PASS: annexe OS registration and scale, independent Redesmere alignment, open courts, roofs, arched glazing, bell tower and walking collisions.
+PASS: L-shaped courts, removed galleries, connected angled rear wing and retained west bay and paired stairs.
+PASS: orange, purple and brown OS courtyard picks are free of masonry and roofs.

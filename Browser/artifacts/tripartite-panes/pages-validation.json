@@ -1,0 +1,29 @@
+{
+  "checks": [
+    {
+      "mode": "before",
+      "originalRejected": true
+    },
+    {
+      "mode": "source",
+      "modelMode": "procedural",
+      "sideCount": 22,
+      "centreCount": 9,
+      "probes": 665
+    },
+    {
+      "mode": "compiled",
+      "modelMode": "compiled",
+      "sideCount": 22,
+      "centreCount": 9,
+      "probes": 665
+    },
+    {
+      "mode": "explore",
+      "sideCount": 22,
+      "centreCount": 9,
+      "probes": 665
+    }
+  ],
+  "errors": []
+}

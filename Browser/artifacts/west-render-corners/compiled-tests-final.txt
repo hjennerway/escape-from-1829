@@ -1,0 +1,130 @@
+npm notice run test:compiled
+npm notice run node test-precompiled-models.mjs && node test-timeline-browser.mjs
+Checking aerial?models=source
+Checking aerial?models=compiled
+Checking aerial?models=compiled&buildingDetail=full&view=front
+Checking aerial
+Browser: Failed to load resource: the server responded with a status of 404 (Not Found)
+Checking aerial
+Checking aerial
+PASS: compiled estate, shadows, grass shaders, exact draw counts, tree/layout controls, orbit, portrait, full detail and missing/incompatible/damaged model fallback.
+{
+  "source": {
+    "mode": "procedural",
+    "milliseconds": 3338.89999999851,
+    "triangles": 1018409,
+    "calls": 3084,
+    "levels": [
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      1,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      1,
+      2,
+      2,
+      1,
+      2,
+      2,
+      1,
+      2,
+      2,
+      1
+    ],
+    "readyMilliseconds": 18661.8928
+  },
+  "compiled": {
+    "mode": "compiled",
+    "milliseconds": 2058.39999999851,
+    "triangles": 1018409,
+    "calls": 3084,
+    "levels": [
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      1,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      1,
+      2,
+      2,
+      1,
+      2,
+      2,
+      1,
+      2,
+      2,
+      1
+    ],
+    "readyMilliseconds": 28992.4006
+  },
+  "identicalScreenshot": false,
+  "pixels": {
+    "significantFraction": 0.00017,
+    "meanChannelError": 0.0057695238095238095
+  },
+  "fullDetail": {
+    "mode": "compiled",
+    "milliseconds": 2091.5999999940395,
+    "triangles": 626671,
+    "calls": 548,
+    "readyMilliseconds": 13783.256599999993
+  }
+}
+node:internal/fs/promises:1345
+  return new FileHandle(await PromisePrototypeThen(
+                        ^
+
+Error: UNKNOWN: unknown error, open 'C:\Users\Harry\Documents\_escape-from-1829\Browser\artifacts\timeline-1849.png'
+    at async open (node:internal/fs/promises:1345:25)
+    at async Object.writeFile (node:internal/fs/promises:1965:14)
+    at async _Page.screenshot (C:\Users\Harry\Documents\_escape-from-1829\Browser\node_modules\playwright-core\lib\coreBundle.js:61797:11)
+    at async file:///C:/Users/Harry/Documents/_escape-from-1829/Browser/test-timeline-browser.mjs:106:75 {
+  errno: -4094,
+  code: 'UNKNOWN',
+  syscall: 'open',
+  path: 'C:\\Users\\Harry\\Documents\\_escape-from-1829\\Browser\\artifacts\\timeline-1849.png'
+}
+
+Node.js v24.20.0

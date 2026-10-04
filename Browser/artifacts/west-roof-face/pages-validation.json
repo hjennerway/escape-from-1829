@@ -1,0 +1,19 @@
+{
+  "checks": [
+    {
+      "mode": "compiled",
+      "clearance": 6,
+      "alignment": 6,
+      "panes": 16,
+      "stoppedZ": null
+    },
+    {
+      "mode": "explore",
+      "clearance": 6,
+      "alignment": 6,
+      "panes": 16,
+      "stoppedZ": 15.8125
+    }
+  ],
+  "errors": []
+}

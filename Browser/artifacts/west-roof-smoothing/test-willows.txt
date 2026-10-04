@@ -1,0 +1,1 @@
+PASS: The Willows exact KML Point, 960 roof samples, hollow bays, walking, distant aerial pan, layout fitting, selection and all four visibility states.

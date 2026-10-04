@@ -1,0 +1,19 @@
+{
+  "checks": [
+    {
+      "mode": "compiled",
+      "panes": 72,
+      "courtZ": 5,
+      "gardenZ": 13.5,
+      "endDepth": 11.5
+    },
+    {
+      "mode": "explore",
+      "panes": 72,
+      "courtZ": 5,
+      "gardenZ": 13.5,
+      "endDepth": 11.5
+    }
+  ],
+  "errors": []
+}

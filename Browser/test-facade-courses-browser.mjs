@@ -3,7 +3,9 @@ import {mkdir,writeFile} from 'node:fs/promises';
 import {fileURLToPath} from 'node:url';
 import {spawn} from 'node:child_process';
 import {chromium} from 'playwright';
-const out=new URL('./artifacts/facade-trim/',import.meta.url);await mkdir(out,{recursive:true});
+import {WEST_RANGE_PLAN} from './dist/west-range-plan.mjs';
+import {WEST_END_PROPORTIONS} from './dist/west-refinement.mjs';
+const out=new URL(process.env.FACADE_ARTIFACT_DIR??'./artifacts/facade-trim/',import.meta.url);await mkdir(out,{recursive:true});
 const server=spawn(process.execPath,['serve.mjs'],{cwd:new URL('.',import.meta.url),windowsHide:true,env:{...process.env,PORT:'0'},stdio:'pipe'});
 const base=await new Promise((resolve,reject)=>{server.stdout.once('data',d=>resolve(String(d).match(/http:\/\/127\.0\.0\.1:\d+/)[0]));server.once('error',reject);});
 let browser;
@@ -27,10 +29,14 @@ try{
    {name:'reception-west',position:[-5.6,1.8,21.5],target:[-7.1,4,19.6]},
    {name:'west-step',position:[-20,2.1,22],target:[-22.6,3.15,19.7]},
    {name:'west-lawn-bay',position:[-23,5.8,31],target:[-27.43,4.05,33.07]},
-   {name:'west-court',position:[-61,3.4,0],target:[-63.57,4.05,4.86]},
+   {name:'west-court',position:[-61,3.4,0],target:[-63.57,4.05,WEST_RANGE_PLAN.recessRearZ-.14]},
    {name:'east-court',position:[64.2,3,5.3],target:[66.17,4.06,7.22]},
-   {name:'west-middle-bay',position:[-57,3.1,23],target:[-55.6,4.05,19.62]},
-   {name:'west-roof-corner',position:[-76,16.5,-1],target:[-72.3,15.42,2.85]}
+   {name:'west-middle-bay',position:[-57,3.1,23],target:[-55.6,4.05,WEST_RANGE_PLAN.bayRootZ+.784]},
+   {name:'west-roof-corner',position:[-76,16.5,-1],target:[-72.3,15.42,WEST_RANGE_PLAN.outerRearZ-.15]},
+   {name:'west-front-corner',position:[-78,10,26],target:[-72.25,8.6,WEST_RANGE_PLAN.outerFrontZ+.08]},
+   {name:'west-end-steps',position:[-84,11,15],target:[-72.5,8,WEST_END_PROPORTIONS.doorZ]},
+   {name:'west-garden-single-band',position:[-50,14,23],target:[WEST_RANGE_PLAN.innerLeft,8.6,17.5]},
+   {name:'west-front-cornice',position:[-77,18,26],target:[-72.3,15.2,WEST_RANGE_PLAN.outerFrontZ+.08]}
   ];
   const wards=await page.evaluate(()=>{
    const {THREE,exterior}=window.trimCheck,views=[];

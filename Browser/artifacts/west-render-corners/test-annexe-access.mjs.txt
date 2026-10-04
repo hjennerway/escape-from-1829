@@ -1,0 +1,7 @@
+PASS: both curved entrance kerbs are clean, and only the marked roadside tree is removed.
+PASS: red-line avenue, clear central sweep, yellow gravel link, removed rear and side roads, protected lane junctions and teardrop, and Historic visibility.
+PASS: protected local entrance geometry retained after the whole-annexe loop fit. {
+  primitives: 20708,
+  sha256: 'f84b915f4fb34907f1bd7e6c57aa467b626ea3c43a3c2a3e98b46d2b307e94e9'
+}
+PASS: compact quarter-circle entrance edges.

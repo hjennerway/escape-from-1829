@@ -1,0 +1,8 @@
+PASS: retraced Parsons Lane and fork have continuous asphalt, full-width building clearance, an open saved-lane junction, and grass at removed blue sections.
+PASS: straight outer road, continuous blue triangular junction and visible grass island.
+PASS: annexe and parallel frontage translate together, retaining tree-gap access, the triangle and shortened diagonal gravel.
+PASS: smooth continuous bend edging, three rounded island corners and clear carriageways.
+PASS: lamp clearance, full bend width and kerbs, removed junction nub, and period-specific saved endpoint.
+PASS: enlarged grass area and a close road sweep clear of the marked beech roots.
+PASS: straight frontage to the outer lane and full-width curved fork.
+PASS: fixed lamp-base tangency and distinct road, junction, island and kerb drawing depths.

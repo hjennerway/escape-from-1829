@@ -1,0 +1,1 @@
+PASS: current-source fingerprint, binary checksum, five level-roof probes, stepped collision footprint and four moved window records in the final compiled asset.

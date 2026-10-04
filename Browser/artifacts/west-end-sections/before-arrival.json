@@ -1,0 +1,24 @@
+{
+  "id": "D2",
+  "name": "West outer entrance",
+  "x": -72.48,
+  "z": 11.5,
+  "axis": "x",
+  "levels": [
+    {
+      "floor": 0,
+      "height": 0,
+      "destination": [
+        -73.4,
+        0.25,
+        14.3
+      ]
+    }
+  ],
+  "label": [
+    -79,
+    11.5
+  ],
+  "description": "E ↔ west entrance path towards Parsons Lane.",
+  "facing": -1
+}

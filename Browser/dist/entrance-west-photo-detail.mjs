@@ -81,7 +81,7 @@ export function addEntranceWestPhotoDetails(THREE,{model,box,mesh,worldUV,white,
   // Broad central glazing with narrow sidelights and pale upright mullions.
   for(const y of [5.7,10]){
     opening('entrance-west-central-glazing',-26.15,y,p.projectionZ+.07,.98,2.9);
-    for(const dx of [-.8,.8])opening('entrance-west-sidelight',-26.15+dx,y,p.projectionZ+.07,.3,2.9);
+    for(const dx of [-.8,.8])sash('entrance-west-sidelight',-26.15+dx,y,p.projectionZ+.07,0,.3,2.9,{columns:2});
     for(const dx of [-.61,.61])box(trim,-26.15+dx,y,p.projectionZ+.22,.12,3.1,.2);
   }
   box(panel,-26.15,3.85,p.projectionZ+.17,1.88,.65,.13);

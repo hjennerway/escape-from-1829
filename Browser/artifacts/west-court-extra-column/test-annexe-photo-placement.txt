@@ -1,0 +1,1 @@
+PASS: reduced annexe fits the new straight loop, centres the narrower paving on the doorway with equal side grass, and clears surrounding roads; minimum gaps {"grass":[14.728254665110867,14.728254665110846],"loop":6.617658163208542,"teardrop":28.07659728226678,"admin":46.56260534508793,"frontLine":54.35816811793941}

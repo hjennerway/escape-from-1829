@@ -1,5 +1,5 @@
 {
-  "items": 32,
+  "items": 45,
   "geometry": {
     "instances": [
       {
@@ -25,6 +25,36 @@
       {
         "id": "0:WardService:fixed:4",
         "kind": "dutyBoard",
+        "parts": 3
+      },
+      {
+        "id": "0:WardService:fixed:5",
+        "kind": "table",
+        "parts": 1
+      },
+      {
+        "id": "0:WardService:fixed:6",
+        "kind": "chair",
+        "parts": 1
+      },
+      {
+        "id": "0:WardService:fixed:7",
+        "kind": "chair",
+        "parts": 1
+      },
+      {
+        "id": "0:WardService:fixed:8",
+        "kind": "foldedLinen",
+        "parts": 2
+      },
+      {
+        "id": "0:WardService:fixed:9",
+        "kind": "sewingBasket",
+        "parts": 5
+      },
+      {
+        "id": "0:WardService:fixed:10",
+        "kind": "waitingBench",
         "parts": 3
       },
       {
@@ -161,6 +191,41 @@
         "id": "1:Recreation:fixed:10",
         "kind": "waitingBench",
         "parts": 3
+      },
+      {
+        "id": "1:Recreation:fixed:11",
+        "kind": "table",
+        "parts": 1
+      },
+      {
+        "id": "1:Recreation:fixed:12",
+        "kind": "chair",
+        "parts": 1
+      },
+      {
+        "id": "1:Recreation:fixed:13",
+        "kind": "chair",
+        "parts": 1
+      },
+      {
+        "id": "1:Recreation:fixed:14",
+        "kind": "chair",
+        "parts": 1
+      },
+      {
+        "id": "1:Recreation:fixed:15",
+        "kind": "chair",
+        "parts": 1
+      },
+      {
+        "id": "1:Recreation:fixed:16",
+        "kind": "draughtsSet",
+        "parts": 4
+      },
+      {
+        "id": "1:Recreation:fixed:17",
+        "kind": "waitingBench",
+        "parts": 3
       }
     ],
     "wallContacts": [
@@ -264,6 +329,16 @@
       "minimum": 0.6
     },
     {
+      "id": "0:WardService:fixed:5",
+      "along": 1.3170000000000055,
+      "minimum": 1.2750000000000001
+    },
+    {
+      "id": "0:WardService:fixed:10",
+      "along": 0.5759999999999899,
+      "minimum": 0.534
+    },
+    {
       "id": "1:Visitors:fixed:0",
       "along": 0.7684000000000051,
       "minimum": 0.7263999999999999
@@ -277,6 +352,16 @@
       "id": "1:Recreation:fixed:9",
       "along": 0.5720000000000063,
       "minimum": 0.53
+    },
+    {
+      "id": "1:Recreation:fixed:11",
+      "along": 1.3170000000000055,
+      "minimum": 1.2750000000000001
+    },
+    {
+      "id": "1:Recreation:fixed:17",
+      "along": 0.5759999999999899,
+      "minimum": 0.534
     }
   ],
   "corridor": {
@@ -286,19 +371,27 @@
   "captures": [
     "after-visitors",
     "after-service",
+    "after-service-open-area",
     "after-recreation",
+    "after-recreation-open-area",
     "after-visiting-notice",
     "after-linen-close",
     "after-duties-close",
+    "after-linen-worktable-close",
+    "after-service-bench",
     "after-draughts-close",
     "after-newspaper-close",
     "after-sewing-close",
     "mobile-visitors",
     "mobile-service",
+    "mobile-service-open-area",
     "mobile-recreation",
+    "mobile-recreation-open-area",
     "explore-visitors",
     "explore-service",
+    "explore-service-open-area",
     "explore-recreation",
+    "explore-recreation-open-area",
     "model-sideboard",
     "model-landscape",
     "model-visitingNotice",
@@ -307,7 +400,8 @@
     "model-dutyBoard",
     "model-draughtsSet",
     "model-newspaperStand",
-    "model-sewingBasket"
+    "model-sewingBasket",
+    "model-foldedLinen"
   ],
   "escapeExploreParity": true,
   "errors": []

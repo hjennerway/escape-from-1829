@@ -1,0 +1,26 @@
+PASS test-building-grounding.mjs
+PASS test-ground-contact.mjs
+PASS test-day-night.mjs
+PASS test-tree-rendering.mjs
+PASS test-exterior-shadows.mjs
+PASS test-front-lawn-eztree.mjs
+PASS test-explore.mjs
+PASS test-explore-interior.mjs
+PASS test-exterior-door-supports.mjs
+PASS test-explore-input.mjs
+PASS test-front-basement.mjs
+PASS test-annexe.mjs
+PASS test-jump.mjs
+PASS test-larkton-recess.mjs
+PASS test-larkton.mjs
+PASS test-annexe-front-link.mjs
+PASS test-annexe-carden.mjs
+PASS test-annexe-east-outer.mjs
+PASS test-annexe-rear-stretch.mjs
+PASS test-annexe-kitchen.mjs
+PASS test-annexe-os-refinement.mjs
+PASS test-annexe-photo-placement.mjs
+PASS test-annexe-rear-side-alignment.mjs
+PASS test-annexe-outer-front.mjs
+FAIL test-jarman.mjs
+{"checks":25,"failures":[{"file":"test-jarman.mjs","code":1}]}

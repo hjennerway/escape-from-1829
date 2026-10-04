@@ -1,0 +1,19 @@
+{
+  "nonintersecting": {
+    "primitives": 1444714,
+    "sha256": "666ef2655ad3e74038afd2f0989b0b271cfb256db7f4b65874bef487032e2c60"
+  },
+  "intersecting": 1048,
+  "scope": {
+    "min": [
+      -41.5,
+      -1,
+      6.5
+    ],
+    "max": [
+      -28,
+      17,
+      30.5
+    ]
+  }
+}

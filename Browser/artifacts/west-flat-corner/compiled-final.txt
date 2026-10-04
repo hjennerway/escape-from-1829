@@ -1,0 +1,20 @@
+node:internal/modules/run_main:107
+    triggerUncaughtException(
+    ^
+
+AssertionError [ERR_ASSERTION]: Rebuild models after editing source
++ actual - expected
+
++ 'd135a63537d12e733f8d351246280110cc503e2ecf1ebf2e4e00ffee25819f17'
+- 'fb84146c6bee615e2e693e317a3ad042626f91dbd967f0cf29bb2d680cb2a196'
+
+    at file:///C:/Users/Harry/Documents/_escape-from-1829/Browser/test-precompiled-models.mjs:15:8 {
+  generatedMessage: false,
+  code: 'ERR_ASSERTION',
+  actual: 'd135a63537d12e733f8d351246280110cc503e2ecf1ebf2e4e00ffee25819f17',
+  expected: 'fb84146c6bee615e2e693e317a3ad042626f91dbd967f0cf29bb2d680cb2a196',
+  operator: 'strictEqual',
+  diff: 'simple'
+}
+
+Node.js v24.20.0

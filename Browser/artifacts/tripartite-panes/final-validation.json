@@ -1,0 +1,40 @@
+{
+  "compiledCurrent": true,
+  "compiled": "aerial-b670e0da128b9502c376.bin.gz",
+  "preservation": {
+    "otherPrimitives": 1445709,
+    "exactOtherSurfaces": true,
+    "exactOpenings": true,
+    "oldBars": 44,
+    "newBars": 22
+  },
+  "pages": {
+    "checks": [
+      {
+        "mode": "before",
+        "originalRejected": true
+      },
+      {
+        "mode": "source",
+        "modelMode": "procedural",
+        "sideCount": 22,
+        "centreCount": 9,
+        "probes": 665
+      },
+      {
+        "mode": "compiled",
+        "modelMode": "compiled",
+        "sideCount": 22,
+        "centreCount": 9,
+        "probes": 665
+      },
+      {
+        "mode": "explore",
+        "sideCount": 22,
+        "centreCount": 9,
+        "probes": 665
+      }
+    ],
+    "errors": []
+  }
+}

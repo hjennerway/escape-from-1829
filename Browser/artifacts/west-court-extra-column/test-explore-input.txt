@@ -1,0 +1,2 @@
+PASS: touch movement, simultaneous look, normalized diagonals, pointer identity/cancellation/capture loss, keyboard coexistence and pause cleanup.
+PASS: Space jumps once per press, prevents scrolling only during play, and stays inactive after blur.

@@ -1,0 +1,1 @@
+PASS: shared tree buffers, colours and placement; distance detail and hysteresis; 13027 static meshes compiled into 1529 batches; all layout surfaces retained; cached transforms and dynamic labels; 782676 default-view tree triangles.

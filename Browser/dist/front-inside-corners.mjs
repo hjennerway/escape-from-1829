@@ -1,4 +1,5 @@
 import {FRONT_BASEMENT_OUTER_FLIGHT} from './front-basement.mjs';
+import {WEST_RANGE_PLAN} from './west-range-plan.mjs';
 // The yellow polyline in Research/front-inside-corners/shape.png, registered
 // to the existing east wing's inner wall (x=32) and frontage (z=19.7).
 // Dimensions are photo estimates; the west corner reflects the same plan.
@@ -6,6 +7,13 @@ export const FRONT_CORNER_OUTLINE=Object.freeze([
   [29.075,19.7],[29.075,17.3],[30.875,15.5],
   [33.65,15.5],[33.725,19.325],[32,21.05]
 ].map(Object.freeze));
+// Owner's yellow west-corner guide, 4 October 2026. The new lower section
+// follows the landing-wall end, steps out at z=18.5 and meets the low wing.
+export const WEST_CORNER_INFILL=Object.freeze({
+  wallX:-FRONT_CORNER_OUTLINE[3][0],stepZ:18.5,wingX:-32,
+  rearZ:FRONT_CORNER_OUTLINE[2][1],frontZ:WEST_RANGE_PLAN.innerFrontZ,
+  left:WEST_RANGE_PLAN.innerRight,height:8.6,roofTop:8.83
+});
 export const FRONT_CORNER_VIEWS=Object.freeze({
   'front-corner-1':{position:[30.15,1.8,25.9],target:[31.15,4.4,17.2],fov:80},
   'front-corner-2':{position:[26.7,1.8,29.5],target:[31.4,4.3,17.4],fov:66},
@@ -76,7 +84,13 @@ export function refineFrontInsideCorners(THREE,{model,batches,box,mesh,worldUV,b
   const cuts=[-1,1].map(side=>({side,outline:reflectedOutline(side),
     roofOutline:side===1?roofOutline:roofOutline.map(([x,z])=>[-x,z]).reverse(),
     minX:side<0?-33.725:29.075,maxX:side<0?-29.075:33.725}));
-  const overlaps=(b,c)=>b.max.y>.5&&b.max.x>c.minX&&b.min.x<c.maxX&&b.max.z>15.5&&b.min.z<21.05;
+  // Owner's later purple/yellow west view: extend the flat back wall to the
+  // pavilion, removing the short z=17 face and its cornice/roof overhang.
+  const westBackZ=FRONT_CORNER_OUTLINE[2][1],westBackX=-FRONT_CORNER_OUTLINE[3][0];
+  const westRootZ=WEST_RANGE_PLAN.innerFrontZ;
+  const westJoin=[[-38.45,westBackZ],[westBackX,westBackZ],[westBackX,westRootZ],[-38.45,westRootZ]];
+  cuts.push({side:-1,outline:westJoin,roofOutline:westJoin,minX:-38.45,maxX:westBackX,maxZ:westRootZ});
+  const overlaps=(b,c)=>b.max.y>.5&&b.max.x>c.minX&&b.min.x<c.maxX&&b.max.z>15.5&&b.min.z<(c.maxZ??21.05);
   function clip(object,cut){
     const oldGeometry=object.geometry,transform=object.matrixWorld.clone();
     oldGeometry.computeBoundingBox();
@@ -124,13 +138,18 @@ export function refineFrontInsideCorners(THREE,{model,batches,box,mesh,worldUV,b
   for(const side of [-1,1]){
     const label=side<0?'West':'East';
     const points=FRONT_CORNER_OUTLINE.map(([x,z])=>[side*x,z]);
+    const {wallX,stepZ,wingX,rearZ,frontZ,left,height,roofTop}=WEST_CORNER_INFILL;
+    const westRoot=[[wallX,rearZ],[wallX,stepZ],[wingX,stepZ],[wingX,frontZ]];
     function wallPoint(i,t=.5,offset=0){
-      const a=points[i],b=points[i+1],dx=b[0]-a[0],dz=b[1]-a[1],length=Math.hypot(dx,dz);
+      const root=side<0&&(i===3||i===4);
+      const segment=i===3?0:2;
+      const a=i===5?[westBackX,westBackZ]:root?westRoot[segment]:points[i],b=i===5?[-38,westBackZ]:root?westRoot[segment+1]:points[i+1],dx=b[0]-a[0],dz=b[1]-a[1],length=Math.hypot(dx,dz);
       const nx=-side*dz/length,nz=side*dx/length;
       return {x:a[0]+t*dx+nx*offset,z:a[1]+t*dz+nz*offset,nx,nz,length,rotation:Math.atan2(nx,nz)};
     }
     // Shared offsets put both ends of each coping on the same mitre line.
     function copingPoint(i,t,offset){
+      if(i===5||(side<0&&(i===3||i===4||(i===2&&t===1))))return wallPoint(i,t,offset);
       const p=wallPoint(i,t);
       const vertex=t===0?i:t===1?i+1:null;
       if(vertex===null||vertex===0||vertex===points.length-1)return wallPoint(i,t,offset);
@@ -144,19 +163,51 @@ export function refineFrontInsideCorners(THREE,{model,batches,box,mesh,worldUV,b
       body.rotation.y=p.rotation;body.userData.orientedCollision=true;body.name=label+' inside corner brick facet '+i;
       // The continuous entrance course already follows the first two facets.
     }
-    wall(0,13.35);wall(1,13.35);wall(2,12.8);wall(3,8.6);wall(4,8.6);
+    wall(0,13.35);wall(1,13.35);wall(2,12.8);
+    if(side<0){
+      // One solid footprint joins the pavilion and low wing, so its visible
+      // stepped walls and ground-level walking collisions remain identical.
+      const footprint=[[left,rearZ],...westRoot,[left,frontZ]];
+      const prism=(bottom,top)=>{
+        const shape=new THREE.Shape(footprint.map(([x,z])=>new THREE.Vector2(x,-z)));
+        const g=new THREE.ExtrudeGeometry(shape,{depth:top-bottom,bevelEnabled:false});
+        g.rotateX(-Math.PI/2);g.translate(0,bottom,0);return g;
+      };
+      const body=mesh(worldUV(prism(0,height),1.7),brick,0,0,0,true);
+      body.name='West inside corner stepped infill masonry';body.userData.collisionFootprint=footprint;
+      const cap=mesh(worldUV(prism(height,roofTop),3),material(0x444b4d),0,0,0,true);
+      cap.name='West inside corner flat roof';
+      // A single joined coping follows all three exposed sides of the roof.
+      const positions=[];
+      const normals=westRoot.slice(0,-1).map((a,i)=>{const b=westRoot[i+1],length=Math.hypot(b[0]-a[0],b[1]-a[1]);return [(b[1]-a[1])/length,(a[0]-b[0])/length];});
+      const edgePoint=(i,offset)=>{
+        const a=normals[Math.max(0,i-1)],b=normals[Math.min(i,normals.length-1)],scale=offset/(1+a[0]*b[0]+a[1]*b[1]);
+        return [westRoot[i][0]+(a[0]+b[0])*scale,westRoot[i][1]+(a[1]+b[1])*scale];
+      };
+      for(let i=0;i<westRoot.length-1;i++){
+        const q=[edgePoint(i,.045),edgePoint(i+1,.045)],r=[edgePoint(i,-.095),edgePoint(i+1,-.095)];
+        for(const corners of [
+          [[q[0][0],roofTop-.12,q[0][1]],[q[1][0],roofTop-.12,q[1][1]],[q[1][0],roofTop+.02,q[1][1]],[q[0][0],roofTop+.02,q[0][1]]],
+          [[q[0][0],roofTop+.02,q[0][1]],[q[1][0],roofTop+.02,q[1][1]],[r[1][0],roofTop+.02,r[1][1]],[r[0][0],roofTop+.02,r[0][1]]]
+        ])for(const triangle of [[0,2,1],[0,3,2]])for(const n of triangle)positions.push(...corners[n]);
+      }
+      const copingGeometry=new THREE.BufferGeometry();copingGeometry.setAttribute('position',new THREE.Float32BufferAttribute(positions,3));copingGeometry.computeVertexNormals();
+      mesh(copingGeometry,coping).name='West inside corner flat roof coping';
+    }
+    if(side>0){wall(3,8.6);wall(4,8.6);}
+    if(side<0)wall(5,12.8);
     // Close the cut roof edges down to their supporting wall tops, using the
     // actual roof triangles so the old hips cannot bridge the open recess.
     const slate=model.children.filter(o=>o.isMesh&&o.material===roof);
     model.updateMatrixWorld(true);
     const ray=new THREE.Raycaster();
-    for(const [i,height] of [[0,13.35],[1,13.35],[2,12.8],[3,8.6],[4,8.6]]){
+    for(const [i,height] of [[0,13.35],[1,13.35],[2,12.8],...(side>0?[[3,8.6],[4,8.6]]:[[5,12.8]])]){
       const vertices=[],uv=[],capVertices=[],orientation=wallPoint(i).rotation;
       const triangles=side===1?[[0,1,2],[0,2,3]]:[[0,2,1],[0,3,2]];
       const samples=Array.from({length:25},(_,k)=>k/24);
       // Carry the low coping over the slate overhang to the wing's eaves,
       // while keeping its masonry closure on the original wall footprint.
-      if(i===4)for(let k=1;k<=4;k++)samples.push(1+.4/(33.725-32)*k/4);
+      if(i===4)for(let k=1;k<=4;k++)samples.push(1+.4/(side<0?wallPoint(i).length:33.725-32)*k/4);
       for(let k=0;k<samples.length-1;k++){
         const a=copingPoint(i,samples[k],-.015),b=copingPoint(i,samples[k+1],-.015);
         const top=p=>{ray.set(new THREE.Vector3(p.x,25,p.z),new THREE.Vector3(0,-1,0));return Math.max(height,ray.intersectObjects(slate,false)[0]?.point.y??height);};
@@ -187,7 +238,7 @@ export function refineFrontInsideCorners(THREE,{model,batches,box,mesh,worldUV,b
     for(const [y,h] of [[1.45,2.15],[5.45,2.85],[9.85,2.9]])window(0,y,.88,h);
     for(const [y,h] of [[1.45,2.15],[5.45,2.85],[9.85,3.15]])window(1,y,1.32,h);
     window(2,5.6,.93,1.75,.66);window(2,10.25,.95,1.85,.42);window(2,2.05,.78,1.8,.79);
-    for(const y of [1.9,6.3])window(3,y,.88,2.35,.66);
+    for(const y of [1.9,6.3])window(3,y,.88,2.35,side<0?.5:.66);
     for(const y of [1.9,6.3])window(4,y,.82,2.35);
     // Single blue door with an upper dark glazed panel, as in both photos.
     const d=wallPoint(2,.24,.075),dw=.87,dh=2.55;

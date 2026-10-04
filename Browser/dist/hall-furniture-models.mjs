@@ -1,4 +1,4 @@
-// Original interpretive hall props, sharing the existing timber/metal finishes.
+// Interpretive hall props and the owner-supplied print, sharing timber/metal finishes.
 import {mergeGeometries} from './vendor/BufferGeometryUtils.js';
 import {createMedicalFurnitureMaterials} from './medical-furniture-models.mjs';
 import {HALL_PROP_CATALOG} from './hall-furnishings.mjs';
@@ -9,12 +9,12 @@ export function createHallFurnitureModels(THREE,{labels=typeof document!=='undef
  const box=(key,w,h,d,x,y,z,rx=0)=>add(new THREE.BoxGeometry(w,h,d).rotateX(rx).translate(x,y,z),key);
  const rod=(key,r,a,b)=>{const av=new THREE.Vector3(...a),bv=new THREE.Vector3(...b),v=bv.clone().sub(av);add(new THREE.CylinderGeometry(r,r,v.length(),10).applyQuaternion(new THREE.Quaternion().setFromUnitVectors(new THREE.Vector3(0,1,0),v.normalize())).translate(...av.add(bv).multiplyScalar(.5).toArray()),key);};
  const text=(ctx,t,x,y,size=35)=>{ctx.font=`${size}px Georgia, serif`;ctx.textAlign='center';ctx.textBaseline='middle';ctx.fillText(t,x,y);};
- function print(name,w,h,x,y,z,draw,rx=0){
+ function print(name,w,h,x,y,z,draw,rx=0,resolution=768){
   const g=new THREE.PlaneGeometry(w,h).rotateX(rx).translate(x,y,z).toNonIndexed();
   if(!labels){add(g,'paper');return;}
-  const canvas=document.createElement('canvas');canvas.width=768;canvas.height=Math.round(768*h/w);const ctx=canvas.getContext('2d');
-  ctx.fillStyle='#cfc6ab';ctx.fillRect(0,0,canvas.width,canvas.height);ctx.fillStyle='#3d392b';ctx.strokeStyle='#6d624c';draw(ctx,canvas.width,canvas.height);
+  const canvas=document.createElement('canvas');canvas.width=resolution;canvas.height=Math.round(resolution*h/w);const ctx=canvas.getContext('2d');
   const map=new THREE.CanvasTexture(canvas);map.colorSpace=THREE.SRGBColorSpace;
+  ctx.fillStyle='#cfc6ab';ctx.fillRect(0,0,canvas.width,canvas.height);ctx.fillStyle='#3d392b';ctx.strokeStyle='#6d624c';draw(ctx,canvas.width,canvas.height,map);
   materials[name]=new THREE.MeshBasicMaterial({map,side:THREE.DoubleSide});materials[name].name='Hall '+name;(pieces[name]??=[]).push(g);
  }
  function frame(w,h){box('darkWood',w,h,.045,0,h/2,0);for(const x of [-w/2+.025,w/2-.025])box('wood',.05,h,.065,x,h/2,0);for(const y of [.025,h-.025])box('wood',w,.05,.065,0,y,0);}
@@ -26,13 +26,17 @@ export function createHallFurnitureModels(THREE,{labels=typeof document!=='undef
    for(const x of [-.67,0,.67]){box('lightWood',.62,.54,.03,x,.48,.266);box('wood',.50,.40,.02,x,.48,.286);rod('brass',.015,[x+.22,.51,.29],[x+.22,.51,.32]);box('lightWood',.62,.13,.035,x,.84,.266);rod('brass',.01,[x-.055,.84,.29],[x+.055,.84,.29]);}
   },
   landscape(){
-   frame(1.32,.86);print('landscape',1.20,.74,0,.43,.034,(ctx,w,h)=>{
-    ctx.fillStyle='#afb6ad';ctx.fillRect(0,0,w,h);ctx.fillStyle='#969e82';ctx.beginPath();ctx.moveTo(0,h*.48);ctx.bezierCurveTo(w*.18,h*.16,w*.36,h*.67,w*.62,h*.32);ctx.bezierCurveTo(w*.82,h*.15,w*.93,h*.48,w,h*.35);ctx.lineTo(w,h);ctx.lineTo(0,h);ctx.fill();
-    ctx.fillStyle='#5e7566';ctx.beginPath();ctx.moveTo(0,h*.76);ctx.bezierCurveTo(w*.25,h*.36,w*.45,h*.85,w,h*.52);ctx.lineTo(w,h);ctx.lineTo(0,h);ctx.fill();
-    ctx.fillStyle='#8ba2a0';ctx.beginPath();ctx.moveTo(w*.60,h*.55);ctx.bezierCurveTo(w*.44,h*.75,w*.82,h*.80,w*.56,h);ctx.lineTo(w*.33,h);ctx.bezierCurveTo(w*.68,h*.77,w*.34,h*.68,w*.56,h*.55);ctx.fill();
-    for(const [x,y,s] of [[.12,.65,.12],[.19,.60,.09],[.86,.58,.10]]){ctx.fillStyle='#5d5341';ctx.fillRect(w*x,h*y,w*.013,h*.27);ctx.fillStyle='#405549';for(let i=0;i<5;i++){ctx.beginPath();ctx.ellipse(w*(x+.006)+Math.sin(i*2)*w*s*.28,h*(y-.04)+Math.cos(i*2)*h*s*.33,w*s*.33,h*s*.48,0,0,Math.PI*2);ctx.fill();}}
-    ctx.globalAlpha=.10;for(let i=0;i<220;i++){ctx.strokeStyle=i%2?'#302e24':'#e9ddbc';ctx.beginPath();ctx.moveTo(0,i*h/220);ctx.lineTo(w,i*h/220+Math.sin(i)*2);ctx.stroke();}ctx.globalAlpha=1;
-   });
+   frame(1.32,.86);print('landscape',1.20,.74,0,.43,.034,(ctx,w,h,map)=>{
+    ctx.fillStyle='#eeece7';ctx.fillRect(0,0,w,h);
+    const image=new Image(),url=new URL('./art/cheshire-lunatic-asylum.png',import.meta.url).href;
+    image.onload=()=>{
+     // Retain the complete engraving and caption at their original proportions.
+     const scale=Math.min(w/image.naturalWidth,h/image.naturalHeight),width=image.naturalWidth*scale,height=image.naturalHeight*scale;
+     ctx.drawImage(image,(w-width)/2,(h-height)/2,width,height);
+     map.userData.artwork={url,width:image.naturalWidth,height:image.naturalHeight};map.needsUpdate=true;
+    };
+    image.src=url;
+   },0,1897);
   },
   visitingNotice(){frame(.70,.90);print('visiting hours',.59,.79,0,.45,.034,(ctx,w,h)=>{ctx.lineWidth=3;ctx.strokeRect(20,20,w-40,h-40);for(const [t,y,size] of [['VISITING HOURS',.17,46],['2 TO 4',.37,73],['PLEASE WAIT HERE',.59,37],['The attendant will',.76,32],['show visitors through',.83,32]])text(ctx,t,w/2,h*y,size);});},
   linenCupboard(){
@@ -59,6 +63,9 @@ export function createHallFurnitureModels(THREE,{labels=typeof document!=='undef
    for(let row=0;row<7;row++){const y=.035+row*.017;for(const z of [-.174,.174])rod('lightWood',.004,[-.235,y,z],[.235,y,z]);for(const x of [-.244,.244])rod('lightWood',.004,[x,y,-.16],[x,y,.16]);}for(let i=0;i<13;i++)for(const z of [-.173,.173])rod('darkWood',.003,[-.22+i*.037,.026,z],[-.22+i*.037,.16,z]);
    box('linen',.29,.055,.23,-.05,.065,0);for(const x of [.08,.15]){add(new THREE.CylinderGeometry(.022,.022,.072,12).translate(x,.097,.05),'red');for(const y of [.06,.134])add(new THREE.CylinderGeometry(.03,.03,.01,12).translate(x,y,.05),'lightWood');}
    for(let i=0;i<12;i++){const a=i*Math.PI/12,b=(i+1)*Math.PI/12;rod('wicker',.012,[-.20*Math.cos(a),.15+.14*Math.sin(a),0],[-.20*Math.cos(b),.15+.14*Math.sin(b),0]);}
+  },
+  foldedLinen(){
+   fold(-.23,0,0,.42,.48,4);fold(.23,0,0,.42,.48,3);
   }
  };
  for(const [kind,build] of Object.entries(builders)){

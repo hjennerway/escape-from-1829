@@ -1,0 +1,3 @@
+{
+  "west-range-plan.mjs": "// Owner's marked plan and live Google Earth view, 4 October 2026.\n// Latest red/yellow and purple/green end view pulls both long faces another\n// two units inward, retaining the canted window projections at full depth.\n// These are visual estimates from the owner's guides.\nexport const WEST_RANGE_PLAN=Object.freeze({\n  gardenZ:13.5,courtZ:5,outerRearZ:9,outerFrontZ:20.5,\n  recessRearZ:11,bayRootZ:15,bayFrontZ:17.8,\n  // Later green/yellow photograph: the west return is one unit behind the\n  // lower wing's x=-41 face; its two lower floors have paired sashes.\n  innerLeft:-40,innerRight:-35,innerFrontZ:21.2,innerHeight:14.3\n});\n"
+}

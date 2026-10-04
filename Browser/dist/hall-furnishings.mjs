@@ -8,9 +8,12 @@ export const HALL_PROP_CATALOG={
  dutyBoard:{procedural:true,width:1.05,depth:.06,height:.76,decorative:true,mounted:true},
  draughtsSet:{procedural:true,width:.66,depth:.66,height:.045,decorative:true},
  newspaperStand:{procedural:true,width:.72,depth:.46,height:1.16},
- sewingBasket:{procedural:true,width:.48,depth:.34,height:.29,decorative:true}
+ sewingBasket:{procedural:true,width:.48,depth:.34,height:.29,decorative:true},
+ foldedLinen:{procedural:true,width:.90,depth:.50,height:.20,decorative:true}
 };
-const eastPoints=[[25,9.4],[34.3,9.4],[34.3,15.5],[30.8,15.5],[29.1,17.2],[29.1,19.7],[25,19.7]];
+// Both sides of the junction share their floor's furnishing area. Furniture
+// stays outside the forward corridor crossing this wider open hall.
+const openHallPoints=[[25,9.4],[45.1,9.4],[45.1,19.1],[36.9,19.1],[36.9,15.5],[30.8,15.5],[29.1,17.2],[29.1,19.7],[25,19.7]];
 export function hallFurnishings(floor,catalog){
  const areas=[],items=[];
  function area(id,name,purpose,label,points){const a={id,name,purpose,label,points};areas.push(a);return a;}
@@ -32,14 +35,19 @@ export function hallFurnishings(floor,catalog){
   put(a,'visitingNotice',-7.01+catalog.visitingNotice.depth/2,16.0,Math.PI/2,{y:1.40});
  }
  if(floor.id===0){
-  const a=area('WardService','Ward service lobby','wardService',[29.0,10.2],eastPoints);
+  const a=area('WardService','Ward service lobby','wardService',[29.0,10.2],openHallPoints);
   for(const z of [11.2,13.4])put(a,'linenCupboard',25.09+catalog.linenCupboard.depth/2,z,Math.PI/2);
   put(a,'linenTrolley',28.1,12.5,0);
   put(a,'waitingBench',25.09+catalog.waitingBench.depth*.75/2,16.0,Math.PI/2,{width:catalog.waitingBench.width*.75,depth:catalog.waitingBench.depth*.75,height:catalog.waitingBench.height*.75});
   put(a,'dutyBoard',25.09+catalog.dutyBoard.depth/2,16.0,Math.PI/2,{y:1.45});
+  const worktable=put(a,'table',41.0,12.8,Math.PI/2);
+  for(const [dx,r] of [[-1.18,Math.PI/2],[1.18,-Math.PI/2]])put(a,'chair',worktable.x+dx,worktable.z,r);
+  on(a,'foldedLinen',worktable,-.42,0);
+  on(a,'sewingBasket',worktable,.55,0);
+  put(a,'waitingBench',41.0,17.8,Math.PI,{width:catalog.waitingBench.width*.75,depth:catalog.waitingBench.depth*.75,height:catalog.waitingBench.height*.75});
  }
  if(floor.id===1){
-  const a=area('Recreation','Communal recreation area','recreation',[30.0,10.2],eastPoints);
+  const a=area('Recreation','Communal recreation area','recreation',[30.0,10.2],openHallPoints);
   const table=put(a,'table',28.0,12.8,Math.PI/2);
   for(const [dx,dz,r] of [[-1.18,-.48,Math.PI/2],[-1.18,.48,Math.PI/2],[1.18,-.48,-Math.PI/2],[1.18,.48,-Math.PI/2]])put(a,'chair',table.x+dx,table.z+dz,r);
   on(a,'draughtsSet',table,0,0);
@@ -48,6 +56,10 @@ export function hallFurnishings(floor,catalog){
   on(a,'books',side,.40,0);
   put(a,'newspaperStand',32.7,11.2,0);
   put(a,'waitingBench',26.5,18.0,0,{width:catalog.waitingBench.width*.75,depth:catalog.waitingBench.depth*.75,height:catalog.waitingBench.height*.75});
+  const secondTable=put(a,'table',41.0,12.8,Math.PI/2);
+  for(const [dx,dz,r] of [[-1.18,-.48,Math.PI/2],[-1.18,.48,Math.PI/2],[1.18,-.48,-Math.PI/2],[1.18,.48,-Math.PI/2]])put(a,'chair',secondTable.x+dx,secondTable.z+dz,r);
+  on(a,'draughtsSet',secondTable,0,0);
+  put(a,'waitingBench',41.0,17.8,Math.PI,{width:catalog.waitingBench.width*.75,depth:catalog.waitingBench.depth*.75,height:catalog.waitingBench.height*.75});
  }
  return {areas,items};
 }

@@ -1,0 +1,3 @@
+PASS: source actual page trim and pane probes, seven desktop views and phone view.
+PASS: compiled actual page trim and pane probes, seven desktop views and phone view.
+PASS: explore actual page trim and pane probes, seven desktop views and phone view.

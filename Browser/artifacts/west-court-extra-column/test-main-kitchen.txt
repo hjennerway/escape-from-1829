@@ -1,0 +1,1 @@
+PASS: three white four-sided hips, continuous roof coverage, /\/\/\ profile, clear eave trim, T-shaped ridge caps, flush gallery joins, no connector/stores overlap, preserved L-shaped stores, and layout-aware walking collisions.

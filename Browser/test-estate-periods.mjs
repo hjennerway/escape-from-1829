@@ -30,6 +30,15 @@ for(const part of parts)assert.equal(part.attributes.uv.count,part.attributes.po
 
 const exterior=createEscapeExterior(THREE,16/9),layouts=createAerialLayouts(THREE,exterior);
 const timeline=prepareEstateTimeline(THREE,exterior,layouts),selection=createBuildingSelection(THREE,exterior);
+// The recessed green pavilion crosses x=-38, but the complete existing arm
+// still belongs to the 1849 wings. Do not leave an early wall/roof fragment.
+const gardenReturn=[];
+exterior.model.traverse(o=>{if(/^West garden inner (projecting pavilion|pavilion slate roof|pavilion cornice)/.test(o.name))gardenReturn.push(o);});
+assert.equal(gardenReturn.length,4,'Keep the full inner pavilion and its two joined cornices');
+for(const year of [1829,1849]){
+ timeline.setPeriod(year);
+ for(const o of gardenReturn){let visible=true;for(let p=o;p;p=p.parent)visible&&=p.visible;assert.equal(visible,year>=1849,'The complete recessed pavilion appears in its retained construction period');}
+}
 // Raycast the visible ground, including instanced gravel and paths crossing
 // period boundaries, so an undeveloped wing cannot leave a paved footprint.
 const groundSamples=[

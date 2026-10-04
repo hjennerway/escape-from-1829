@@ -1,0 +1,56 @@
+{
+  "checks": [
+    {
+      "mode": "escape",
+      "frames": [
+        "1:Visitors:fixed:13",
+        "1:Visitors:fixed:14"
+      ],
+      "sharedTextures": 1,
+      "source": [
+        1897,
+        1056
+      ],
+      "canvas": [
+        1897,
+        1170
+      ],
+      "completeImage": true,
+      "pixelMatch": true
+    },
+    {
+      "mode": "explore",
+      "frames": [
+        "1:Visitors:fixed:13",
+        "1:Visitors:fixed:14"
+      ],
+      "sharedTextures": 1,
+      "source": [
+        1897,
+        1056
+      ],
+      "canvas": [
+        1897,
+        1170
+      ],
+      "completeImage": true,
+      "pixelMatch": true
+    }
+  ],
+  "captures": [
+    "escape-west-frame.png",
+    "escape-east-frame.png",
+    "escape-hall.png",
+    "escape-mobile-west-frame.png",
+    "explore-west-frame.png",
+    "explore-east-frame.png",
+    "explore-hall.png",
+    "explore-mobile-west-frame.png"
+  ],
+  "errors": [],
+  "aerial": {
+    "sourceHash": "41f5b898a1b07db938127d7d3e7c03590975ce5bea8d629d73d6898580b1221c",
+    "manifestHash": "41f5b898a1b07db938127d7d3e7c03590975ce5bea8d629d73d6898580b1221c",
+    "matches": true
+  }
+}

@@ -1,0 +1,14 @@
+import assert from 'node:assert/strict';
+import {readFile,writeFile} from 'node:fs/promises';
+import {modelSourceHash} from '../../model-build-inputs.mjs';
+const folder=new URL('./',import.meta.url);
+const manifest=JSON.parse(await readFile(new URL('../../dist/compiled/manifest.json',import.meta.url),'utf8'));
+const sourceHash=await modelSourceHash();assert.equal(sourceHash,manifest.sourceHash);
+const pages=JSON.parse(await readFile(new URL('pages-validation.json',folder),'utf8'));
+assert.deepEqual(pages.errors,[]);
+const suite=await readFile(new URL('npm-test.log',folder),'utf8'),baseline=await readFile(new URL('baseline-jarman.log',folder),'utf8');
+assert(suite.includes('test-jarman.mjs:11:8')&&baseline.includes('test-jarman.mjs:11:8'));
+const comparison=text=>({actual:Number(text.match(/\+   primitives: (\d+)/)[1]),expected:Number(text.match(/-   primitives: (\d+)/)[1])});
+const report={sourceHash,compiledFile:manifest.file,current:true,modelSuite:'passed',focusedBasement:'passed, including new early-year lawn samples',originalRegression:'fails the new extension check as expected',sourceCompiledRendering:'passed before final simultaneous window revision',finalTimeline:'passed',livePages:pages,browserSuite:{passed:false,stoppedAt:'test-jarman.mjs:11',baseline:comparison(baseline),final:comparison(suite)},exportsUpdated:['Browser source','local compiled aerial'],exportsNotRegenerated:['Unity','Blender','packaged applications']};
+await writeFile(new URL('final-validation.json',folder),JSON.stringify(report,null,2)+'\n');
+console.log('PASS: final model fingerprint matches; live pages and timeline pass; browser suite retains the previously failing historical snapshot.');

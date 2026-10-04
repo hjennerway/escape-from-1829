@@ -1,0 +1,96 @@
+{
+  "views": {
+    "garden": {
+      "position": [
+        -90,
+        31,
+        47
+      ],
+      "target": [
+        -52,
+        7,
+        20
+      ],
+      "fov": 48
+    },
+    "yellow": {
+      "position": [
+        -50,
+        14,
+        23
+      ],
+      "target": [
+        -40,
+        8.6,
+        17.5
+      ],
+      "fov": 38
+    },
+    "frontCorner": {
+      "position": [
+        -78,
+        10,
+        26
+      ],
+      "target": [
+        -72.25,
+        8.6,
+        20.58
+      ],
+      "fov": 42
+    },
+    "endSteps": {
+      "position": [
+        -84,
+        11,
+        15
+      ],
+      "target": [
+        -72.5,
+        8,
+        12.75
+      ],
+      "fov": 46
+    },
+    "frontCornice": {
+      "position": [
+        -77,
+        18,
+        26
+      ],
+      "target": [
+        -72.3,
+        15.2,
+        20.65
+      ],
+      "fov": 40
+    },
+    "courtCorner": {
+      "position": [
+        -78,
+        10,
+        -1
+      ],
+      "target": [
+        -72.25,
+        8.6,
+        4.82
+      ],
+      "fov": 42
+    },
+    "middleCornice": {
+      "position": [
+        -60,
+        17,
+        23
+      ],
+      "target": [
+        -55.6,
+        14.9,
+        15.8
+      ],
+      "fov": 40
+    }
+  },
+  "errors": []
+}

@@ -1,0 +1,16 @@
+
+> test:models
+> node vendor-three.mjs --check && node test-opening-wall.mjs && node test-wall-mitres.mjs && node test-facade-courses.mjs && node test-estate-periods.mjs && node test-model-binary.mjs && node test-kml-imports.mjs && node test-kml-11.mjs && node test-building-detail.mjs && node test-aerial-layouts.mjs && node test-aerial-performance.mjs && node test-aerial-controls.mjs
+
+Verified Three.js 0.186.1: three.module.js, GLTFLoader.js, BufferGeometryUtils.js, SkeletonUtils.js, THREE-LICENSE.txt, three.core.js
+PASS: 1829 east end is closed at every storey and up to the roof; wall and collision disappear with the 1849 wing.
+PASS: 76 exterior right-angle wall/coping joins, 1672 coverage/overlap/normal probes, 90 filled-corner collision probes; rotated unequal-width and original-defect regressions.
+PASS: 22 facade courses, 78 explicit and 282 shared corner joins, 2376 top/underside probes, plus Reception overlap and sill-lip regressions.
+PASS: all 13 periods, all 22 date rows, original 1829 ranges and tower, later wings, selection, collisions, tree preference, camera and batch visibility.
+PASS: binary round-trip, exact modified vertices, shared geometry/instance buffers, textures, lights, LOD, bounds, deterministic builds and malformed data.
+PASS: 72 exact KML trees in all periods, duplicate Oak8/Oak16/Oak21/Oak22 points, preserved front beeches, shared visibility and collisions; eight-vertex Countess roundabout (336.1 square units), upward roads, walkable centre and continuous Modern-only approach.
+PASS: exact lamp Points, shared low-poly prefabs, 1915–current visibility/collisions, all-period willow planting and distant navigation.
+PASS: 2587 textured windows; close geometry and all layouts preserved; atlas pixels and rotated placement; viewport/zoom detail with hysteresis; static shadows, structural walls and independent trees.
+PASS: independent Historic/Modern controls, shared buildings, preserved transforms, hidden collisions, fifteen exact custom paths, camera-facing road names, upward road surfaces and full landscape/portrait framing.
+PASS: shared tree buffers, colours and placement; distance detail and hysteresis; 13030 static meshes compiled into 1529 batches; all layout surfaces retained; cached transforms and dynamic labels; 782676 default-view tree triangles.
+PASS: pinch in/out, two-finger pan, finger handoff, cancellation, capture loss, blur cleanup, coincident/extra fingers, desktop pan.

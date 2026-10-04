@@ -1,0 +1,2051 @@
+node:internal/modules/run_main:107
+    triggerUncaughtException(
+    ^
+
+AssertionError [ERR_ASSERTION]: All mapped solids and every sash opening retain their geometry, position and dimensions
++ actual - expected
+... Skipped lines
+
+  {
++   instances: 1372121,
+-   instances: 1372135,
+    mappedSolids: [
+      '0018f30077709644ae8f677f3b58d026ff62625d9fabbae8fdaf70daf6507924',
+      '003d6059bd8282979566fbefb199c7d5cb08991df62e0b83af624d17a91f4e1c',
+      '0052ab0e35fc1d32947273f4259125a3cfe25aa1be3ed0cacb3cf7664300954f',
+      '008b324f5885f6b3eb0ebf0fc02c4bdf41119b5fa1b0e1e0f94f37f8d9caf0bc',
+...
+      '06beefec8f0918178e4aceceb79de97b074f84cc4a043ec0ea3569ae70a6c130',
++     '06ce5f0e1e09ea4f9bf2953d77f8c436fa625414672a1b75a942886cc6e8ae09',
+      '06d3c026014c1194f70286e65a77f91cea96d07fa505ed3035c33f6551783f44',
+      '06d4464dc677f873888942f21dc92d7815af97dfb03285efd164daee9298f7bc',
+      '06f0ff3d7bc9bf59f799582c716abae653766aa8c690efa98f22a8de87b05941',
+      '070d3af6eb8579d2bf1ff873a396a8f3c94d307210916d054033c3f5d7a499ae',
+      '072cfa2d0e6a3d49782233426db33bfb38a2d1c83847636cbf0c21c5cd481d9d',
+...
+      '0aaa33923d0a0f420b43e2a0f2bdfc4fea12d1e0ca2f65422c09698c2e0322da',
++     '0adcd43280a19cd24238f67a02513359a293fa913923a139286b1daeb48a1d7d',
+      '0af6821f300028da16e320627a917ada21f86c9e7c336936402dc1bf16e59905',
+      '0b05f029afa6b58cb1ec66fb95325f6211beb6c43aa9bca900cbd8d6248b41a6',
+      '0b0740a6592f4f28382bfbf098fd2ae95a2599e7e1e195ee42187573b5b37ba4',
+      '0b1dbd35e9c5904b955dba57a99f89436eb32815793bb80c6feda73e889bb017',
+      '0b21e9150a1cdffc3d1dbb3ce753084ef976f982531fa46a5e0e2f79a24288f3',
+-     '0b22f786c3fafd4523fadcd69da7049fc34319e7f1bf49e8fd4583cf428d7301',
+      '0b2b787654ceecd8e7ee1c9e5d94b2dbb9c948cf3ea34ab7d23c6c6213692035',
+      '0b35276e9d56c0ada73b1e4901adb7e706844273ef533b63c44b191e8d185bca',
+      '0b504ec3051aca984af5c50769f5be4fdbed5618d8ac4d9b0e9aafb1d47549fb',
+      '0b53a76b7ef0e78f26a38f8e750cc621430ac279bdb5b382560e462c6efde692',
+      '0b564df4afa2f43fd251d65cc3a39b84644d253665ddcbcd11d9e5b95d0e6d36',
+...
+      '21c331e0fd799903b27f9fe85d22ee9fec08ccd41b6ca45fcf8bd4ea765e8b2f',
+-     '21c8d296fee97fcf09cde7fa51c4a5513075ad6d7eea5c897a5cf7946141510c',
+      '21d526754ffd7f4cf10ab366e4ad83c3f36e138293cfb946efc98dcdbf515285',
+      '21e7138c5d867f0c81ec0855be882de06738ce7dcc2c77dad7fe426bf85afe38',
+      '2225f4cd19a982a556a7ae391f92fb1d6bb00bb63666416408ebdd08fe7477d9',
+      '222af21eb2b381eb5713f83abb7e5e55eeeaaffb6e58b9d6ef3e7516fbb50f09',
+      '2242dcd4cbfe79eadcda242249c8ce8b5a19ff406b0177155d9f4204ec7eef98',
+...
+      '2d719040bf85357074c4bac96d9b2504ec107ad5ae512ae8dd6d644dc7904bb6',
++     '2d73cd0300560803cd77acf66bc16406f3d8a76b0927492fba21dc156fc9743a',
+      '2d7719226c888e83c7ec9b17b6022711de2fab26242969485ac6abb048b46296',
+      '2d7932c0571b6acf6c18fcc3e8420f069d6b2ef1e8bcdb69bb34b028e2745072',
+      '2d8d66db1b52f8e1bd52e78e415367c532e07cd7aadc2c63cefdf6514b596c76',
+      '2d91a70690bef56549753dc0cb4c1b208da01a24a0fd598ceb1713eedad13084',
+      '2da7bfcbee58620521c84e51fc12ed3f64264c71e87e0639690cd886d5a9dfe4',
+...
+      '369e840ab5f13b18ea9de1ac4a2b9024f988d6fe6e214321a9e8726264f6ffae',
+-     '36bd0385a56667052c2c11085ca7f5ac08ac73d89fd0b53d887d1c0a7c5f5953',
+      '36bda59e7615964d91d6ecb4bc074f15492e25ca104d2fd34944ae465173e26a',
+      '36befea00a6d2a00cbbaec49c00c54561b6e4ee91726281d77ed51344e0bbcc8',
+      '36c2d3d83b11f030be0e202c75a3ab7369bc50c123d4c1e9e74b0b1359fb277a',
+      '36c68296b83bae39ccd8e346cbdf2be81a79964f77c5cfcb682d2e61626bfbf7',
+      '36d6a44f8baca1d87fd03352c5b6ab4e409dac898bfab47b90191ca1f5acf145',
+...
+      '38e2a9fe07732969836f19c5d5e541aaa05458d9b3325291539177efaf58b934',
+-     '38e88f7c251ae9c37b67f7d5cd7280cce7db8f27034c91ce60d1ca977393574c',
+      '38e971657fd0e57781d2365646729afd03d49d0cfc8974162ec9e55ff789c1b9',
+      '38f7126e31033317a0eb3da6253bf6c0fa5716164841fc09656408b66e162ad3',
+      '391c6393638ad062043fae5e4fb0d7188ddb5a066242ffe0e32d05adeeaf08ac',
+      '392eaa74593d5efc7e827cc39223de55b06e010aac871d31aa7306d386dc02fd',
+      '3949ce87c26c2dc7ca377d8e1fb83e37a4a0fabb669a4840ae56fe7b94dc65b6',
+...
+      '460cd3f851247b6e8426063d96a7a2df354efbd9e5e0429aa6ca0bd0676ff7fb',
++     '4612a2f35ef907015e13b49ca696e0bffa4483ac4c19372940a0af8aac2370e5',
+      '461ecafa2459a17e0ae8c6f8fab5a908a4f56da9dd3fd20d7ced8086c873adfa',
+      '46360a08764c8227afffe0dc6c22f179de6b2542c1315e5fce1e853f6bbd43f5',
+      '466f7ab3feedf1aafcb38bae546f889368ba39aec3f9a6f880ff80c0cde07138',
+      '468e97578b72e34b0b6ac01e37cec4dab1aa9982dec58539249c89d6ad4e4e39',
+      '46be8e6862c9dc674a281097d0bc07b54e61241b4fd61cc7fce4478e5b8671e2',
+...
+      '5f4ac78f49af74005afdc0610d8bd7cfcaf2cd7087f41eb9169b37c8e66460fa',
++     '5f8796f1a20765e422f6caed07e3fc30a9e0e04373c7cd5b1a1c01537c5f8a8e',
+      '5f87a7ad14b8e438b0ec906bb9ae58a9a96364ccada6e4cc5825848c0d7218f4',
+      '5f8bc186585edfcc4b320bc58e52c2dc8f1ef09f8f0097971db64d515f4403c6',
+      '5fa060ceaf0fec311c6d6e1881379401b9a480a468b81270199fcac99ab3349e',
+      '5fbbf3e941e5a26629458c6a4d81823aad724b5d1c8d59fdfc9ad30fca64b5aa',
+      '5fc05d987ba33fae250a6ff1991e6795d2a5e05d804cec0cf43a9541640761c6',
+...
+      '63de73e83646249cf2676571eac3d1155793b8db9da847d0d541d15dcd71ee95',
+-     '63e5b442617f404cfd095f4396f04d785f06905ff85db8a7defd8fc30da4fbf5',
+      '63f1ab6e3944b666644cba8a46ff145ac3d2335cdb46d0c4adb9644b8f7064b4',
+      '6406eb023bb3206fe48a9aa538d0cffca5fffa23e222beaed60bded87a14ba31',
+      '6414af417f650be4a99caa9c8ca0571b6144f234b6f9ca522028ca7907bdd214',
+      '6436680692537593cc8e7f4603c9a262af6398408ea82f694a6bfb0e25e14ee5',
+      '6437ab68ce4d9cc3b90e571b7bc7c25cf173450804792b30f36c3b88a424af6d',
+...
+      '74d3e5381ca2bcaa0d4e88231d460d5c9210f0de3bb12ce56d38d2bc20a4ab84',
+-     '74e9115d515d07a4ca2dfcc542ff49256915208f67246d0ca90f9aebe44289b2',
+      '74fb47a5c1aaef37ba8f4323060919e3265b65b36a0d5f23ff0af78273b8756f',
+      '750e994333d6635e1c7949e230a78a39812feea2f155021678be061d6b80d3b3',
+      '75118ef27ea1d74451339a347f790a3b873e064faf5ee2d897480329519a7ac5',
+      '752b5da758934ab244fc9b037d8fdf2578b4bc82978fdd65d1e7a09119e4e8ab',
+      '75574dc474c6533b4bb1fb55864f702de7238b890a75d4f35814f6d25e9128f4',
+...
+      '79791cfb0f57c1afd411941a4e09af7b917c7f0cd5cadaab01e7f587f626ee47',
++     '797ad03709a63b6f8544fde7cfa90bac2686402113e58c402b4090931ab77275',
+      '7982eac0042feaf81cb1261c24631226126cd873786a4264789aa32cf1f5d272',
+      '798c7fbc575a89eeb09acbdb311f8f7f6ca7931bb243d4dfc291f3ca734a1788',
+      '798e7874b92aeb8a23fc68866e4661866499ac7c2ee1d931666c3d1bb88f0088',
+      '79b316b826631cd91adbea7e073a6d8edcb8f58a45264ffead6ee88a637ccd97',
+      '79c309d404f74dbd6a08be5ebf9833bb1facf88588932353494c3432a5969f47',
+...
+      '7c7ba6485dda43321247c377023b30e4026ed69c7ce04e4340b3305549a9c952',
+-     '7c7f34e33c85dc3caa16179ceb8f4585407410e4ce803244f9900eafc51fdce1',
+      '7c7f5dba975bab965a1e4da7903aa2bf723a4223de660884098aa314efa7148c',
+      '7c8d2c64bc49a5e14a5a14860039136b057bd7e4602f80bacd3fbbe3618d9e69',
+      '7cb4a7cd86a5b9f379c4993437701e2996b788b729f993edb1d5597b04265327',
+      '7cb9a659681efc484b664e0b3a9bdcb2ec6fac410211968185121f7565a02bd8',
+      '7cc095c7f9e11ff2bbbeb2affbceec604e883696a5178ca083414fb4c88fe424',
+...
+      '805ae991317e6a1390d2d1b48df05919f97a8df81a5e6f809b2d1861abcb4bd7',
+-     '805cdb42dcdcec4230fd21e7938f8369ad80284ea9fe4941f838d2ea2ea9f668',
+      '806361950139e79b2fb9f55533d105b03f9f7d31c6bd18f77bdf3d7ccc12b1b6',
+-     '808f8a81b73b9cb671ca9de902d4889781d600b2a0b38e046170a0b8fa2cdc63',
+      '80b1cef8cd9c4c28ef8249ec92d0204d129c0875d46e280f1c8877553839a0b6',
+      '80d59367dfbfd62ba129c2cda55ea32b4f4769aa408534da58df49bc6505e311',
+      '80de2f0ec888828a6f278a3dc334817bae820209c8dac753c95d3724b2fbfb8d',
+      '80f20b332b72a53914d0e01c74c7af4136cab1e03f84a4747d2f1e4b6cf4de95',
+      '80f7546a88e583b2981e34d4784691696bc59a566df5a2e095b2768c755c3b22',
+...
+      '95be7ad5a0c8108d56386146524b2a904cf24f9efd1eaa6fcb2f1314148361e8',
+-     '95f3636310ecdbc182160d29facf5e750bccf8ee32a6883a208a74b8aadf8a95',
+      '95fc70374fe02f3a0693f6e4703196aa4ecd0c54525ffe15e972d79045be27b5',
+      '961482ace891662c26f847390f1ac00b3ee125d10bae44e5550e66330c74e19e',
+      '964c024cfe6b54c48678429f3a9d57561e8527b67c70b4538361e792e5546c4a',
+      '964fa3fff7720a40eb044170c0e1c264139c596cd16255f4c198aef0706139f9',
+      '96565b5a422188dd2e99911505ee0fd5f80a7d0c9ac52f911e791e1f2d25449b',
+...
+      'a8426896fd49c2d47e3c2f6a01aa012b71e5b917a839997114c07a47eb4b1573',
++     'a852c304d563076a36cd8444a78f15cbfa4ebb1e1c70cccc558ffe54a77a5318',
+      'a87e6d28e82256df92e465c5596a4b60ec93aa49bb8ec1d84c808edec4776654',
+      'a881ca29738f1052efda18f3b91aff4b96abea972bc0cb4733d69b6d0a87c1a3',
+      'a88665e541ea8d4dda2ff2b611deffadd2c407b4ba48f25bcec5d019b0474329',
+      'a897f4d1c757c7ca4a8f3a9a6e38cb8cc66cc0367d1fb71584fa82ad570a0c28',
+      'a8e95f45e048523d8b76ccbe8f9a8854e07c3d59a279051986ab7eb6fd4e7bcc',
+...
+      'ad25f337c64f2a60c3da322d12a58ece47c57a8dccba9eec713c3cbff248adb0',
++     'ad274d8625e8d152bf1999a3922ff3fe8e8db9e056932e0e83dc84a34092ce8f',
+      'ad38b1793fdc507db3f018e87812fc10f59f86d13b31b8742c29bcd793b83df6',
+      'ad517c460e421f850da5df27501f84bd675e67f2bac7529b0dec01893b9131c4',
+      'ad9926a86ec8b4f070aeb18dd09e60368d2a99ddf2c1de0ac22c3283af304ac5',
+      'adb9f511281e67e63d07732974cf66466d62191188e951322dd06524564ef843',
+      'addb6606e9b13ab79cdb3c6a61e0b68947aa81a231fbc96a1dac0ef28deeffc5',
+...
+      'b8a293655f66357c4fd0265f89f68b0879ad72534aac4897d119a93834bb8ec7',
++     'b8a6de832ef0a7dbdc28b851940c6e6d595e3a15b2cf07966641e8fe85cb5ef7',
+      'b8bed04ad0d3583d75f46b0c2b8a87c9b2ed40ca084e4cef5ceb2cffe9ce209b',
+      'b8e44571ae3c4f67d0e47d7ed241f68916cd02a3611e38eca3b6952c7a4d2e4b',
+      'b8ec54678f46ef4e4fca1ee3954ecb65b80aa4988a4176115f3ae56da655949d',
+      'b8ff9c968fc25fdd60287c2daf9b86877f7d23ca566838f7c74366c155574456',
+      'b91b73abba2494de37cd60d55ee678023fad1fe08dabe19ca46616e75fe4035e',
+...
+      'c0818ac53bc51e637bc5afce7df2b2b9ad3b85248651340d19c94cffd92d46c7',
+-     'c08ce247c19f762943b1825c56de6e3088f018a0f3520aeab0e41eef8a89f671',
+      'c09d802ec7e035279a9e9ee83f45a629bb3d8cdc9f0b290ab7e7b6b83afc5ece',
+      'c0cf52410f55d7b9a94f56cc06d524081b42f1addc383b2a06e2e74ca0c431b3',
+      'c0dc9e5defeacdd491ce1852f373d2b23a89f84459d8882f68c4a45c11b06813',
+      'c0e2331cc5b2cfe6f5e4abb2ebfefd771723baca30c8a5ba238ac1ca30404827',
+      'c0e50fecd499bd2502f2ac4046b787212e8fba0588ef60e747e43e5e20ecddad',
+...
+      'c11ed69b0f6bbed63f27b8d029095e5ddfe4eb0e44589334281d40bdcd8f2765',
+-     'c130f6ca51d7ed64902df1628938752c5dbbe17a1c3c8665f6d9c752cb990438',
+      'c1674ca60f3fb4de6bdac6f9fceae4a46b2bc24df78ca603ed0d14f6fb29bfe5',
+      'c16d9f18baa3869355b9aa39d9b6a2ceb1d207409ffa0fdbdb2165cf3542125d',
+      'c18d096fcff5ebbe3fa4885ed230b2aff1e036ea14a9e2efee9528ef969b096f',
+      'c191e14ef8b146f9fe4a50137f821acf39b1498f21f130587021327d617902f4',
+      'c1954d26cb242fe849d4c84553dc31522ef85c1e6a5fd7b30cac4dffe486179a',
+...
+      'c2310f0d4e02b0e01636215c7217b5057f59d684044aa450debc335cce39d9d7',
+-     'c2576ec7f2ad8db4148680f24db1d6acc8303e8c9b4c7fe614e6a02bf5fb599b',
+      'c292f320b782519ed3c02199bda8b2ae7622a7f6c58c9d5ed074fdb0f923ebf0',
+      'c2b356dd2f2ace0934474eee2f09e96beb542671cf67d30cb5fa1a41e91e8c16',
+      'c2b6cc3e29948f862c7af3caed7e21757f960c687b353a46fb03a34ff1a00311',
+      'c2bbe9bf54d02d5d95a85b582e3578b0b697e8ff053e02971a2eadc780890239',
+      'c2bc671e8c88dd472d9659c630baf93775ec9c2d1c1ad4c85d7a92861182101b',
+...
+      'c81352138d327f4aac3f42934646f0a964c1ba0bb04c6ee729116825c4db0ab6',
+-     'c8154f764d054eb1e444bcd5eb9aa4c092a09e2f7bf0be426fda713d2400a066',
+      'c833c9f73c21c00db3c49cb0f9424e1d5145ad56c1c0526d410a0b5fbbc3fc92',
+      'c84b43b78ac9fcd8b9bde049d11ff611c75744b31cf72dffea4109bc2ad7ad6c',
+      'c868b893b5f25360b7ffde24b431d6d7ba54618f2873bb37970e785f41b4e265',
+      'c882a95f4bfe3fbbcddd3fd84e2b5d20708b2be40f2c4c892d397b0f6c50881c',
+      'c8d0e7e8a8ae849d2e60567666bdff4d67fe89cf43b1ed7f9e2cb6c1bc2dd5cb',
+...
+      'cf0da666de20d2b1f97ad2526d15da3102d59f78f6931670b05faaacc7d8f949',
++     'cf1e8de61eced5b4c13568af6f1ed2f8312ff5b7bfd28859341402b702446ce4',
+      'cf2b3d818a7a319841c9c0169edad146e99ad7ee6029e5b054ea1b5d3b37e0c0',
+      'cf2c88b567148e237d1d32127e09aace73987b24dce33869ab163cf0a574d05c',
+      'cf2e0604b8f0ce046749765105441d4b00f320056a008076d2d2040aab14f86f',
+      'cf5451de5a70e2cfb43920b4fdd4e09f47631e9bad9ed14d3665f9513d11b057',
+      'cf5f0da602e274e90d5e04391e615b3f59b7cf21a95688aa3f0060d20b934465',
+...
+      'dec90a6ea909431387b19a48f727610d5be00132f15a867d7c69d951f074a812',
+-     'defacf8b96f7e77695ae1702811d42a700be4d097f8875c0126ffe4751e9fe28',
+      'df374ed6531afa85441e9d67bede888df7115ef42365a5b082838bb34c465d8a',
+      'df4344df295a4ec46caf21df94b60cc9a10e6bc5b10551bb25a1a1c1aa8dacc3',
+      'df61094ebf24532576a8234b4e9c29000e9eb6fcc41f497c1200cef242564567',
+      'df7d99c1f5f36afa83767fc202ec74c5486d16c7448a0fbe34609e4dbbd989b6',
+      'df9852deca16301b7cc4ab620d2c058764cc086f541133e133953654a266c1f4',
+...
+      'e2249ee50397fae696f6da4550e441084153fb7a450792bb1e6e2214c85d6f71',
++     'e2280dea103ad8788be89a24c4a6674edc3f67078d5bab58b9c4259cb001bfd7',
+      'e22dd37936143d65a515aadba50cafb2f5564ca4d66ecae33fa5a33131570de1',
+      'e26266c70f4d5795a2087ab127f5974caf59c68dd16a2a114bd8a6815498696b',
+      'e265dd2f42686dc0f46f830e9a76edb7820551139538e93f6086960424949506',
+      'e277eef86ddd8b13c255638578097f869b8e65c8eb4c8819d0546edd68c88b7f',
+      'e283be4b92f2db71c8335b8502ce5bfe98c4a86d8841b58a11020807b5059a5b',
+...
+      'e9b9ca69321b0ab79d7c6071a5a222f0f99b7d3c566478ea5d71f05fd46a6616',
+-     'e9dca4408e5be518bf086a6c277ca492b2482ea8d127e362af6483068a323bd7',
+      'e9e2a48852fde838e1fa72a6d69df093949a2690b96130b1970908839f09f21f',
+      'e9f4916477bd96ace1cec30e8d779966455201cec9a083a5188e7106813d9b20',
+      'ea21490ddc9b21b826a593e33ff980fde42c43abb12d2827ba650717d6387c62',
+      'ea2b7d831c470c417786a7866c61b22609f010ebc6070ce1bbec0cee4a7c4e22',
+      'ea68f329f395f2e298a07d64e357bf9885f02fe7470cb5a0132c0eea40675985',
+
+    at file:///C:/Users/Harry/Documents/_escape-from-1829/Browser/artifacts/west-render-corners/preservation.mjs:29:9 {
+  generatedMessage: false,
+  code: 'ERR_ASSERTION',
+  actual: {
+    mappedSolids: [
+      '0018f30077709644ae8f677f3b58d026ff62625d9fabbae8fdaf70daf6507924',
+      '003d6059bd8282979566fbefb199c7d5cb08991df62e0b83af624d17a91f4e1c',
+      '0052ab0e35fc1d32947273f4259125a3cfe25aa1be3ed0cacb3cf7664300954f',
+      '008b324f5885f6b3eb0ebf0fc02c4bdf41119b5fa1b0e1e0f94f37f8d9caf0bc',
+      '009f7b65d70d09f74bb753a65b8043aa1ceaa8bbe149ceb4f3dfd4ee8bc30f60',
+      '00bbea0c0cde224948558492c0844d05aa5e9485b9f5dd77eefa495fe8f1034d',
+      '00c6ddc8b5962017a4d31db54e02da9150fb019d51b3651c16c3f98d1a8902e6',
+      '00fe73125c868e049dc886f9a7951701bdf2fbb35e2d758e19e4bfc5c10cc49a',
+      '019564b7094fa4fdf449b13fae2024e0083d60c028f0f64ace163bd30c3290fd',
+      '02049644316c2727061be0f5dfd0fddd77f17028bcb58a2fd50252e66cbbbd62',
+      '021a19af3ccbe6f01c1f6b44d4c7949f19e92996d1db59739d8d21659d71c670',
+      '021a76c162df831cf8e3d8b7532b9e928cc06f6aa873806de3281d97030837f6',
+      '0228a38db6478f7675882b548f6740dc20eb6cc59eedcc4ddbb0b8096189ef77',
+      '022d06177d3b7071b127415402b31a0db4a658d8ff20f42cf39963579269361c',
+      '022ec3f4b0adb56d4e2b13e6c3f1324dce1cc0852251e6977f3785d899003f76',
+      '02347d51e9d250fe98ad36c662e6c1dfca4a13cc0a612f734b2862c97152b158',
+      '0234ad4a0db7589f8bc16f1d2f585b2f3e2d0942724c117f1c2bd0af7c7fbdf5',
+      '024ff24a6ef86bc8a7e6de9750e5173315ae0ff899806d640996147dbcaf98dd',
+      '0256c8bee16659100b85fa84c50ecb3b6b0889df06b9954833a9e4ad702fe168',
+      '02642a31156d6ff814349f1007fb3e592f60b1b88615741906e6acd3617a11c1',
+      '028043437793a27594390b3e3c18d74e2adf7bba79c84eb3e6a35c7a7f35533f',
+      '0284a4baf9270b7bdadfe93279226dbc5fe57e92c4430d451c1881b907de2774',
+      '0296c2f69ab2a020cc2138c7c6429201170a0f788e2b95b95a0abdf7ce3dab72',
+      '02a3ec6b76fc54a5b35c11ee3c8aa737462dacd1df8edbd6d379fc3db0ec80de',
+      '02bfd8ca5f7f91cbc3798f35c468d251bc262e8e0ed792eb37a359c35274e4ce',
+      '02c8b5a53d1017c705dec436b9dd95e397f01c1103f5dbb1678667d700b51a04',
+      '02dbc85f7a02be97c0b6c0a0a82794b4804842d3ff5499d677ea7d45ef21418a',
+      '031180dc2b768f5200791233b33a2a688d6b026899d6219cc6b18d342adeb1ee',
+      '03158ff9c0f5f1b696724d3acce069bd12ef0ca331c6b3036b455e34b2feac19',
+      '031b954332f391b7bea728ce1e4550a5834a5bdbf3eee766ec73e47e6888ca42',
+      '03417430eea5bd955975911ec0700275e5e6d4df4e3c1476ec67ffe095dd961e',
+      '03749520d3025dc886ae7b757f6af1b9c82cff652008e2f84579a76b72a4bb2e',
+      '038a41dc17c8268b1a459df7b16458d121b902489c52f4be3675aa9ae11c3ddf',
+      '03a386cc5dd18d086885208a63c60ce0741be348f58da8f6649f291f00346a3f',
+      '03de68915a5eed17e823bdb9bc97204fa0a80291644216437c7dc8fde53e7725',
+      '03f8267fdb9fbf681c829f18be1efa7e86aaba8addfa0d42fd61578aa0619e82',
+      '04015740e2360f3867c0ff43030a030402e54e95499596af6304ebbce7563dc4',
+      '04065f392ee063cefe55bc5d982cee82a4efda866fc56b4be42050d8380d1b8c',
+      '041cc3dd2bbee1dff71d0d11dd2127a9687a0a87cc5ce01d91792b9c226b41b3',
+      '044925b73b3127178bf19f64e26c3efb13ba1a7ac01bf4b4c0fb50e7335df44a',
+      '04bd5593cda9d207f131e622ed782a5b057bf3a40536e80f19ddf4a5fccaac81',
+      '04df55832dccc4af0a0e90216505cc3cbeafbc46ac04f9164255e0e7ba36cb4e',
+      '04f4e12709e25ca2f588ba09cf6934b02e7fd2df4f766bcd275ed6a8111fd20d',
+      '04f8b263d4826ff181df89f58a4a701de3dca97111a9229213ffa81d09a902cc',
+      '0502c66429381ad65372bd0ae20f23692fe87dd90b5a5494aca21cc25b548a3f',
+      '0513393167288f94a7102de7cde744f523b7c10bb6ac89b91ea5886d99a56b74',
+      '0558bd54fea32175ee555919865671872a6a5e4604a32a563831f9432a5492f7',
+      '056c77b180ff89ccdabcf68781c52b412e62b46468039a90dc2abd4d49764bdd',
+      '0597d38f80d382feabb6f8ae58247e07565750ff12751c723006c3655ea2336d',
+      '05c44edfa8f016444abb90afb8181e646b8eb7128d9ee5b09ee6a358a064824d',
+      '05cc13704298d33f7769ee0352d0728f15a565294fff8827a9329f501aef714f',
+      '05f622463e3289e847d1e6cf6e41a9f23ade3c4f0ee18fef5ae29abd9c228610',
+      '05fb409f5f888d76e34295af51b3d5d957a56f4b67af18cf2f923358944826a1',
+      '060da274892e2757c1fc91574fcfb255f9b2031dc3ffa6bad4950a43c09335d9',
+      '0614dd523d1d0f19cbadb6b60c16fbc8be726174bb62a39cc1381dea55b52f0c',
+      '061890ac6541444c427e7733f59a0703bd8aef2c6da507442c0132f01cfe5201',
+      '061b770d8374e3deb4e7558666537177b924f00bcd75768e84cae4486c6a9e91',
+      '0626a96680c98e129d58de0a5378ff23f34f8c980f63bf17b0ad695da3831ab0',
+      '0653e7a3b6dbfc0c47927d36cefb348af57772e39891ea196b5bd28ee8d882ed',
+      '0655ad9d56c3e039955d116b131aa36d8ad0ef6445a22e953c8a5a0419485d5b',
+      '0659c341818dce944a8a49118157d30d6af2fb5d26197772a9393c9b25200146',
+      '06616ec9fafcf571d18ab570c4ecc4b5d3eca953059ad42c11fe4b281c5e010c',
+      '066c3fa1d0824ab8279c110302c410e6a15d2bdf049ba94fb1ec2490f4547751',
+      '067bc65abb9f35f9200c317dd05c52848a670b2187944f7c12a4b83d9121797d',
+      '068d0c3d5b44e85c9c65e527f051ada494e63b4547568bfa2bb67d6fad11fbf6',
+      '06921012619ebf53b34d6628c295cbf92d913755d1704049ac4cf6ebc3ff8159',
+      '06bdd3a6166069e1b44d947151a16ae08b1948ffdf0be5ecee55fca32b5d9d0c',
+      '06beefec8f0918178e4aceceb79de97b074f84cc4a043ec0ea3569ae70a6c130',
+      '06ce5f0e1e09ea4f9bf2953d77f8c436fa625414672a1b75a942886cc6e8ae09',
+      '06d3c026014c1194f70286e65a77f91cea96d07fa505ed3035c33f6551783f44',
+      '06d4464dc677f873888942f21dc92d7815af97dfb03285efd164daee9298f7bc',
+      '06f0ff3d7bc9bf59f799582c716abae653766aa8c690efa98f22a8de87b05941',
+      '070d3af6eb8579d2bf1ff873a396a8f3c94d307210916d054033c3f5d7a499ae',
+      '072cfa2d0e6a3d49782233426db33bfb38a2d1c83847636cbf0c21c5cd481d9d',
+      '072e527899a3bbf38436fa13b6374b4e4b9c003580cf9389ae4c7e3e631ef3ce',
+      '073269579b4d995529f449f54b63905801d1f3c4f1b81a31c19f7018cafff691',
+      '078150db4d1805d55bcd0bf247b606c982e71e830049f1c396a26d25fc0db1ea',
+      '078b276a136b66780866d177628b71a1119891c3eda29c5dab2bb9511bffa0fb',
+      '079dbe03047a30fd04d0123e4a86ae6deac5014bfbca46b9ca98c42927636280',
+      '07ddeef7b6173ab78cf993be85c73f1ba308cb82730482af9cf840c70e900823',
+      '07f1ab1210c0ee7699f79cb94ba6e99911559f734cf390fbf43d6575a91011ac',
+      '07fe24779641dab345e00f365c7b1a931796ec41468ef7dbd6b4e9fa0f509ffa',
+      '08323398819acfd8976eacd389747baf83d7bd3cf470c92484d2793c2638714f',
+      '08372c24fdfe2468fb8e9ae4d517f315375141eea287878a708e44bee7f16534',
+      '0844bdbc7fde4f840303c5dc73b30ff4ef46f50588177e902fe5462bdd801545',
+      '0849d996175131cba528d13990ab5bfff590034a86046fedea56b6252572ad7c',
+      '085da4ed816bae41099982b6f06f1091a204ee5ccfad9fab06d5805ba042ead1',
+      '0863758700e21ac15eea2cf88721bc2be2a94042e50ad21eabdcebf321b5e252',
+      '086c48c9fc47f70dd7ebf360edabbaa7bc400abc95edc77db0e2df71a66eeb9b',
+      '086fd6997e11b8cdd32447987af2e5cdc4edda4c52020062ab8bebb0547eaf66',
+      '087b7e1de000653afea13c36fe018f617897ff31002bae177e7a6c9d1746f088',
+      '0887477cebeb639e29aeb83182d956e34f9875b320eecb5601b2b6e1c76258e4',
+      '088ccaa5f99fbba42b019c6cc4f0fec190e155bd1317bce40ad3cd3b81b65747',
+      '08c590c4de088fabea523ee7bced2640747c159f2af3ca1c1bba0a8ce7db453c',
+      '08dcc38d70cf5890afc9ee7b0c06557db44481068f09a92165c5ff29b33214be',
+      '08e039159f5b6c4bbed1b257a72fc9033949eb60fb60d16a5c5c1aff6827d7ea',
+      '08e8ee621a26efb73a756de4488513f5a68e858c8e01dc07c4b433fea78cefdf',
+      '08fd835c06dc3f45c972acf6aeead349d87df02bd1ee99cc64e0c8c45578466b',
+      '09142a3833798cbf7f6c9ef0ec49271c53aff423b96a341d0da63088ab1143b7',
+      '09167bb97458db6299e6de8657beeec5fc402a7e70c2e9a3eb826326900a07d0',
+      ... 2902 more items
+    ],
+    instances: 1372121,
+    openings: [
+      {
+        face: '1829-range-sash',
+        x: -35.6,
+        y: 3.8,
+        z: 6.96,
+        w: 1.12,
+        h: 2.45
+      },
+      {
+        face: '1829-range-sash',
+        x: -35.6,
+        y: 7.199999999999999,
+        z: 6.96,
+        w: 1.12,
+        h: 2.45
+      },
+      {
+        face: '1829-range-sash',
+        x: -35.6,
+        y: 10.6,
+        z: 6.96,
+        w: 1.12,
+        h: 2.45
+      },
+      {
+        face: '1829-range-sash',
+        x: -32.050000000000004,
+        y: 3.8,
+        z: 6.96,
+        w: 1.12,
+        h: 2.45
+      },
+      {
+        face: '1829-range-sash',
+        x: -32.050000000000004,
+        y: 7.199999999999999,
+        z: 6.96,
+        w: 1.12,
+        h: 2.45
+      },
+      {
+        face: '1829-range-sash',
+        x: -32.050000000000004,
+        y: 10.6,
+        z: 6.96,
+        w: 1.12,
+        h: 2.45
+      },
+      {
+        face: '1829-range-sash',
+        x: -28.500000000000004,
+        y: 3.8,
+        z: 6.96,
+        w: 1.12,
+        h: 2.45
+      },
+      {
+        face: '1829-range-sash',
+        x: -28.500000000000004,
+        y: 7.199999999999999,
+        z: 6.96,
+        w: 1.12,
+        h: 2.45
+      },
+      {
+        face: '1829-range-sash',
+        x: -28.500000000000004,
+        y: 10.6,
+        z: 6.96,
+        w: 1.12,
+        h: 2.45
+      },
+      {
+        face: '1829-range-sash',
+        x: -24.950000000000003,
+        y: 3.8,
+        z: 6.96,
+        w: 1.12,
+        h: 2.45
+      },
+      {
+        face: '1829-range-sash',
+        x: -24.950000000000003,
+        y: 7.199999999999999,
+        z: 6.96,
+        w: 1.12,
+        h: 2.45
+      },
+      {
+        face: '1829-range-sash',
+        x: -24.950000000000003,
+        y: 10.6,
+        z: 6.96,
+        w: 1.12,
+        h: 2.45
+      },
+      {
+        face: '1829-range-sash',
+        x: -21.400000000000002,
+        y: 3.8,
+        z: 6.96,
+        w: 1.12,
+        h: 2.45
+      },
+      {
+        face: '1829-range-sash',
+        x: -21.400000000000002,
+        y: 7.199999999999999,
+        z: 6.96,
+        w: 1.12,
+        h: 2.45
+      },
+      {
+        face: '1829-range-sash',
+        x: -21.400000000000002,
+        y: 10.6,
+        z: 6.96,
+        w: 1.12,
+        h: 2.45
+      },
+      {
+        face: '1829-range-sash',
+        x: -17.85,
+        y: 3.8,
+        z: 6.96,
+        w: 1.12,
+        h: 2.45
+      },
+      {
+        face: '1829-range-sash',
+        x: -17.85,
+        y: 7.199999999999999,
+        z: 6.96,
+        w: 1.12,
+        h: 2.45
+      },
+      {
+        face: '1829-range-sash',
+        x: -17.85,
+        y: 10.6,
+        z: 6.96,
+        w: 1.12,
+        h: 2.45
+      },
+      {
+        face: '1829-range-sash',
+        x: -14.3,
+        y: 3.8,
+        z: 6.96,
+        w: 1.12,
+        h: 2.45
+      },
+      {
+        face: '1829-range-sash',
+        x: -14.3,
+        y: 7.199999999999999,
+        z: 6.96,
+        w: 1.12,
+        h: 2.45
+      },
+      {
+        face: '1829-range-sash',
+        x: -14.3,
+        y: 10.6,
+        z: 6.96,
+        w: 1.12,
+        h: 2.45
+      },
+      {
+        face: '1829-range-sash',
+        x: -10.75,
+        y: 3.8,
+        z: 6.96,
+        w: 1.12,
+        h: 2.45
+      },
+      {
+        face: '1829-range-sash',
+        x: -10.75,
+        y: 7.199999999999999,
+        z: 6.96,
+        w: 1.12,
+        h: 2.45
+      },
+      {
+        face: '1829-range-sash',
+        x: -10.75,
+        y: 10.6,
+        z: 6.96,
+        w: 1.12,
+        h: 2.45
+      },
+      {
+        face: '1829-range-sash',
+        x: -7.2,
+        y: 3.8,
+        z: 6.96,
+        w: 1.12,
+        h: 2.45
+      },
+      {
+        face: '1829-range-sash',
+        x: -7.2,
+        y: 7.199999999999999,
+        z: 6.96,
+        w: 1.12,
+        h: 2.45
+      },
+      {
+        face: '1829-range-sash',
+        x: -7.2,
+        y: 10.6,
+        z: 6.96,
+        w: 1.12,
+        h: 2.45
+      },
+      {
+        face: '1829-range-sash',
+        x: -3.6500000000000004,
+        y: 3.8,
+        z: 6.96,
+        w: 1.12,
+        h: 2.45
+      },
+      {
+        face: '1829-range-sash',
+        x: -3.6500000000000004,
+        y: 7.199999999999999,
+        z: 6.96,
+        w: 1.12,
+        h: 2.45
+      },
+      {
+        face: '1829-range-sash',
+        x: -3.6500000000000004,
+        y: 10.6,
+        z: 6.96,
+        w: 1.12,
+        h: 2.45
+      },
+      {
+        face: '1829-range-sash',
+        x: -0.10000000000000053,
+        y: 3.8,
+        z: 6.96,
+        w: 1.12,
+        h: 2.45
+      },
+      {
+        face: '1829-range-sash',
+        x: -0.10000000000000053,
+        y: 7.199999999999999,
+        z: 6.96,
+        w: 1.12,
+        h: 2.45
+      },
+      {
+        face: '1829-range-sash',
+        x: -0.10000000000000053,
+        y: 10.6,
+        z: 6.96,
+        w: 1.12,
+        h: 2.45
+      },
+      {
+        face: '1829-range-sash',
+        x: 3.4499999999999993,
+        y: 3.8,
+        z: 6.96,
+        w: 1.12,
+        h: 2.45
+      },
+      {
+        face: '1829-range-sash',
+        x: 3.4499999999999993,
+        y: 7.199999999999999,
+        z: 6.96,
+        w: 1.12,
+        h: 2.45
+      },
+      {
+        face: '1829-range-sash',
+        x: 3.4499999999999993,
+        y: 10.6,
+        z: 6.96,
+        w: 1.12,
+        h: 2.45
+      },
+      {
+        face: '1829-range-sash',
+        x: 6.999999999999999,
+        y: 3.8,
+        z: 6.96,
+        w: 1.12,
+        h: 2.45
+      },
+      {
+        face: '1829-range-sash',
+        x: 6.999999999999999,
+        y: 7.199999999999999,
+        z: 6.96,
+        w: 1.12,
+        h: 2.45
+      },
+      {
+        face: '1829-range-sash',
+        x: 6.999999999999999,
+        y: 10.6,
+        z: 6.96,
+        w: 1.12,
+        h: 2.45
+      },
+      {
+        face: '1829-range-sash',
+        x: 10.549999999999999,
+        y: 3.8,
+        z: 6.96,
+        w: 1.12,
+        h: 2.45
+      },
+      {
+        face: '1829-range-sash',
+        x: 10.549999999999999,
+        y: 7.199999999999999,
+        z: 6.96,
+        w: 1.12,
+        h: 2.45
+      },
+      {
+        face: '1829-range-sash',
+        x: 10.549999999999999,
+        y: 10.6,
+        z: 6.96,
+        w: 1.12,
+        h: 2.45
+      },
+      {
+        face: '1829-range-sash',
+        x: 14.099999999999998,
+        y: 3.8,
+        z: 6.96,
+        w: 1.12,
+        h: 2.45
+      },
+      {
+        face: '1829-range-sash',
+        x: 14.099999999999998,
+        y: 7.199999999999999,
+        z: 6.96,
+        w: 1.12,
+        h: 2.45
+      },
+      {
+        face: '1829-range-sash',
+        x: 14.099999999999998,
+        y: 10.6,
+        z: 6.96,
+        w: 1.12,
+        h: 2.45
+      },
+      {
+        face: '1829-range-sash',
+        x: 17.65,
+        y: 3.8,
+        z: 6.96,
+        w: 1.12,
+        h: 2.45
+      },
+      {
+        face: '1829-range-sash',
+        x: 17.65,
+        y: 7.199999999999999,
+        z: 6.96,
+        w: 1.12,
+        h: 2.45
+      },
+      {
+        face: '1829-range-sash',
+        x: 17.65,
+        y: 10.6,
+        z: 6.96,
+        w: 1.12,
+        h: 2.45
+      },
+      {
+        face: '1829-range-sash',
+        x: 21.2,
+        y: 3.8,
+        z: 6.96,
+        w: 1.12,
+        h: 2.45
+      },
+      {
+        face: '1829-range-sash',
+        x: 21.2,
+        y: 7.199999999999999,
+        z: 6.96,
+        w: 1.12,
+        h: 2.45
+      },
+      {
+        face: '1829-range-sash',
+        x: 21.2,
+        y: 10.6,
+        z: 6.96,
+        w: 1.12,
+        h: 2.45
+      },
+      {
+        face: '1829-range-sash',
+        x: 24.75,
+        y: 3.8,
+        z: 6.96,
+        w: 1.12,
+        h: 2.45
+      },
+      {
+        face: '1829-range-sash',
+        x: 24.75,
+        y: 7.199999999999999,
+        z: 6.96,
+        w: 1.12,
+        h: 2.45
+      },
+      {
+        face: '1829-range-sash',
+        x: 24.75,
+        y: 10.6,
+        z: 6.96,
+        w: 1.12,
+        h: 2.45
+      },
+      {
+        face: '1829-range-sash',
+        x: 28.3,
+        y: 3.8,
+        z: 6.96,
+        w: 1.12,
+        h: 2.45
+      },
+      {
+        face: '1829-range-sash',
+        x: 28.3,
+        y: 7.199999999999999,
+        z: 6.96,
+        w: 1.12,
+        h: 2.45
+      },
+      {
+        face: '1829-range-sash',
+        x: 28.3,
+        y: 10.6,
+        z: 6.96,
+        w: 1.12,
+        h: 2.45
+      },
+      {
+        face: '1829-range-sash',
+        x: 31.85,
+        y: 3.8,
+        z: 6.96,
+        w: 1.12,
+        h: 2.45
+      },
+      {
+        face: '1829-range-sash',
+        x: 31.85,
+        y: 7.199999999999999,
+        z: 6.96,
+        w: 1.12,
+        h: 2.45
+      },
+      {
+        face: '1829-range-sash',
+        x: 31.85,
+        y: 10.6,
+        z: 6.96,
+        w: 1.12,
+        h: 2.45
+      },
+      {
+        face: '1829-range-sash',
+        x: 35.4,
+        y: 3.8,
+        z: 6.96,
+        w: 1.12,
+        h: 2.45
+      },
+      {
+        face: '1829-range-sash',
+        x: 35.4,
+        y: 7.199999999999999,
+        z: 6.96,
+        w: 1.12,
+        h: 2.45
+      },
+      {
+        face: '1829-range-sash',
+        x: 35.4,
+        y: 10.6,
+        z: 6.96,
+        w: 1.12,
+        h: 2.45
+      },
+      {
+        face: '1829-range-sash',
+        x: -38.04,
+        y: 3.8,
+        z: 9.5,
+        w: 1.12,
+        h: 2.45
+      },
+      {
+        face: '1829-range-sash',
+        x: -38.04,
+        y: 7.199999999999999,
+        z: 9.5,
+        w: 1.12,
+        h: 2.45
+      },
+      {
+        face: '1829-range-sash',
+        x: -38.04,
+        y: 10.6,
+        z: 9.5,
+        w: 1.12,
+        h: 2.45
+      },
+      {
+        face: '1829-range-sash',
+        x: -38.04,
+        y: 3.8,
+        z: 13.05,
+        w: 1.12,
+        h: 2.45
+      },
+      {
+        face: '1829-range-sash',
+        x: -38.04,
+        y: 7.199999999999999,
+        z: 13.05,
+        w: 1.12,
+        h: 2.45
+      },
+      {
+        face: '1829-range-sash',
+        x: -38.04,
+        y: 10.6,
+        z: 13.05,
+        w: 1.12,
+        h: 2.45
+      },
+      {
+        face: '1829-range-sash',
+        x: -3.6500000000000004,
+        y: 3.8,
+        z: 17.04,
+        w: 1.12,
+        h: 2.45
+      },
+      {
+        face: '1829-range-sash',
+        x: -3.6500000000000004,
+        y: 7.199999999999999,
+        z: 17.04,
+        w: 1.12,
+        h: 2.45
+      },
+      {
+        face: '1829-range-sash',
+        x: -3.6500000000000004,
+        y: 10.6,
+        z: 17.04,
+        w: 1.12,
+        h: 2.45
+      },
+      {
+        face: '1829-range-sash',
+        x: -0.10000000000000053,
+        y: 3.8,
+        z: 17.04,
+        w: 1.12,
+        h: 2.45
+      },
+      {
+        face: '1829-range-sash',
+        x: -0.10000000000000053,
+        y: 7.199999999999999,
+        z: 17.04,
+        w: 1.12,
+        h: 2.45
+      },
+      {
+        face: '1829-range-sash',
+        x: -0.10000000000000053,
+        y: 10.6,
+        z: 17.04,
+        w: 1.12,
+        h: 2.45
+      },
+      {
+        face: '1829-range-sash',
+        x: 3.4499999999999993,
+        y: 3.8,
+        z: 17.04,
+        w: 1.12,
+        h: 2.45
+      },
+      {
+        face: '1829-range-sash',
+        x: 3.4499999999999993,
+        y: 7.199999999999999,
+        z: 17.04,
+        w: 1.12,
+        h: 2.45
+      },
+      {
+        face: '1829-range-sash',
+        x: 3.4499999999999993,
+        y: 10.6,
+        z: 17.04,
+        w: 1.12,
+        h: 2.45
+      },
+      {
+        face: '1829-range-sash',
+        x: 6.999999999999999,
+        y: 3.8,
+        z: 17.04,
+        w: 1.12,
+        h: 2.45
+      },
+      {
+        face: '1829-range-sash',
+        x: 6.999999999999999,
+        y: 7.199999999999999,
+        z: 17.04,
+        w: 1.12,
+        h: 2.45
+      },
+      {
+        face: '1829-range-sash',
+        x: 6.999999999999999,
+        y: 10.6,
+        z: 17.04,
+        w: 1.12,
+        h: 2.45
+      },
+      {
+        face: '1829-range-sash',
+        x: 35.4,
+        y: 3.8,
+        z: 17.04,
+        w: 1.12,
+        h: 2.45
+      },
+      {
+        face: '1829-range-sash',
+        x: 35.4,
+        y: 7.199999999999999,
+        z: 17.04,
+        w: 1.12,
+        h: 2.45
+      },
+      {
+        face: '1829-range-sash',
+        x: 35.4,
+        y: 10.6,
+        z: 17.04,
+        w: 1.12,
+        h: 2.45
+      },
+      {
+        face: '1829-range-sash',
+        x: 38.949999999999996,
+        y: 3.8,
+        z: 17.04,
+        w: 1.12,
+        h: 2.45
+      },
+      {
+        face: '1829-range-sash',
+        x: 38.949999999999996,
+        y: 7.199999999999999,
+        z: 17.04,
+        w: 1.12,
+        h: 2.45
+      },
+      {
+        face: '1829-range-sash',
+        x: 38.949999999999996,
+        y: 10.6,
+        z: 17.04,
+        w: 1.12,
+        h: 2.45
+      },
+      {
+        face: '1829-range-sash',
+        x: 45.13999999999999,
+        y: 3.8,
+        z: 9.5,
+        w: 1.12,
+        h: 2.45
+      },
+      {
+        face: '1829-range-sash',
+        x: 45.13999999999999,
+        y: 7.199999999999999,
+        z: 9.5,
+        w: 1.12,
+        h: 2.45
+      },
+      {
+        face: '1829-range-sash',
+        x: 45.13999999999999,
+        y: 10.6,
+        z: 9.5,
+        w: 1.12,
+        h: 2.45
+      },
+      {
+        face: '1829-range-sash',
+        x: 45.13999999999999,
+        y: 3.8,
+        z: 13.05,
+        w: 1.12,
+        h: 2.45
+      },
+      {
+        face: '1829-range-sash',
+        x: 45.13999999999999,
+        y: 7.199999999999999,
+        z: 13.05,
+        w: 1.12,
+        h: 2.45
+      },
+      {
+        face: '1829-range-sash',
+        x: 45.13999999999999,
+        y: 10.6,
+        z: 13.05,
+        w: 1.12,
+        h: 2.45
+      },
+      {
+        face: '1829-range-sash',
+        x: -23.1,
+        y: 3.8,
+        z: -0.040000000000000036,
+        w: 1.12,
+        h: 2.45
+      },
+      {
+        face: '1829-range-sash',
+        x: -25.54,
+        y: 3.8,
+        z: 2.5,
+        w: 1.12,
+        h: 2.45
+      },
+      {
+        face: '1829-range-sash',
+        x: -23.1,
+        y: 3.8,
+        z: 6.04,
+        w: 1.12,
+        h: 2.45
+      },
+      {
+        face: '1829-range-sash',
+        x: -19.46,
+        y: 3.8,
+        z: 2.5,
+        w: 1.12,
+        h: 2.45
+      },
+      {
+        face: '1829-range-sash',
+        x: 21.9,
+        y: 3.8,
+        z: -0.040000000000000036,
+        w: 1.12,
+        h: 2.45
+      },
+      {
+        face: '1829-range-sash',
+        x: 19.46,
+        y: 3.8,
+        z: 2.5,
+        w: 1.12,
+        h: 2.45
+      },
+      {
+        face: '1829-range-sash',
+        x: 21.9,
+        y: 3.8,
+        z: 6.04,
+        w: 1.12,
+        h: 2.45
+      },
+      ... 601 more items
+    ]
+  },
+  expected: {
+    mappedSolids: [
+      '0018f30077709644ae8f677f3b58d026ff62625d9fabbae8fdaf70daf6507924',
+      '003d6059bd8282979566fbefb199c7d5cb08991df62e0b83af624d17a91f4e1c',
+      '0052ab0e35fc1d32947273f4259125a3cfe25aa1be3ed0cacb3cf7664300954f',
+      '008b324f5885f6b3eb0ebf0fc02c4bdf41119b5fa1b0e1e0f94f37f8d9caf0bc',
+      '009f7b65d70d09f74bb753a65b8043aa1ceaa8bbe149ceb4f3dfd4ee8bc30f60',
+      '00bbea0c0cde224948558492c0844d05aa5e9485b9f5dd77eefa495fe8f1034d',
+      '00c6ddc8b5962017a4d31db54e02da9150fb019d51b3651c16c3f98d1a8902e6',
+      '00fe73125c868e049dc886f9a7951701bdf2fbb35e2d758e19e4bfc5c10cc49a',
+      '019564b7094fa4fdf449b13fae2024e0083d60c028f0f64ace163bd30c3290fd',
+      '02049644316c2727061be0f5dfd0fddd77f17028bcb58a2fd50252e66cbbbd62',
+      '021a19af3ccbe6f01c1f6b44d4c7949f19e92996d1db59739d8d21659d71c670',
+      '021a76c162df831cf8e3d8b7532b9e928cc06f6aa873806de3281d97030837f6',
+      '0228a38db6478f7675882b548f6740dc20eb6cc59eedcc4ddbb0b8096189ef77',
+      '022d06177d3b7071b127415402b31a0db4a658d8ff20f42cf39963579269361c',
+      '022ec3f4b0adb56d4e2b13e6c3f1324dce1cc0852251e6977f3785d899003f76',
+      '02347d51e9d250fe98ad36c662e6c1dfca4a13cc0a612f734b2862c97152b158',
+      '0234ad4a0db7589f8bc16f1d2f585b2f3e2d0942724c117f1c2bd0af7c7fbdf5',
+      '024ff24a6ef86bc8a7e6de9750e5173315ae0ff899806d640996147dbcaf98dd',
+      '0256c8bee16659100b85fa84c50ecb3b6b0889df06b9954833a9e4ad702fe168',
+      '02642a31156d6ff814349f1007fb3e592f60b1b88615741906e6acd3617a11c1',
+      '028043437793a27594390b3e3c18d74e2adf7bba79c84eb3e6a35c7a7f35533f',
+      '0284a4baf9270b7bdadfe93279226dbc5fe57e92c4430d451c1881b907de2774',
+      '0296c2f69ab2a020cc2138c7c6429201170a0f788e2b95b95a0abdf7ce3dab72',
+      '02a3ec6b76fc54a5b35c11ee3c8aa737462dacd1df8edbd6d379fc3db0ec80de',
+      '02bfd8ca5f7f91cbc3798f35c468d251bc262e8e0ed792eb37a359c35274e4ce',
+      '02c8b5a53d1017c705dec436b9dd95e397f01c1103f5dbb1678667d700b51a04',
+      '02dbc85f7a02be97c0b6c0a0a82794b4804842d3ff5499d677ea7d45ef21418a',
+      '031180dc2b768f5200791233b33a2a688d6b026899d6219cc6b18d342adeb1ee',
+      '03158ff9c0f5f1b696724d3acce069bd12ef0ca331c6b3036b455e34b2feac19',
+      '031b954332f391b7bea728ce1e4550a5834a5bdbf3eee766ec73e47e6888ca42',
+      '03417430eea5bd955975911ec0700275e5e6d4df4e3c1476ec67ffe095dd961e',
+      '03749520d3025dc886ae7b757f6af1b9c82cff652008e2f84579a76b72a4bb2e',
+      '038a41dc17c8268b1a459df7b16458d121b902489c52f4be3675aa9ae11c3ddf',
+      '03a386cc5dd18d086885208a63c60ce0741be348f58da8f6649f291f00346a3f',
+      '03de68915a5eed17e823bdb9bc97204fa0a80291644216437c7dc8fde53e7725',
+      '03f8267fdb9fbf681c829f18be1efa7e86aaba8addfa0d42fd61578aa0619e82',
+      '04015740e2360f3867c0ff43030a030402e54e95499596af6304ebbce7563dc4',
+      '04065f392ee063cefe55bc5d982cee82a4efda866fc56b4be42050d8380d1b8c',
+      '041cc3dd2bbee1dff71d0d11dd2127a9687a0a87cc5ce01d91792b9c226b41b3',
+      '044925b73b3127178bf19f64e26c3efb13ba1a7ac01bf4b4c0fb50e7335df44a',
+      '04bd5593cda9d207f131e622ed782a5b057bf3a40536e80f19ddf4a5fccaac81',
+      '04df55832dccc4af0a0e90216505cc3cbeafbc46ac04f9164255e0e7ba36cb4e',
+      '04f4e12709e25ca2f588ba09cf6934b02e7fd2df4f766bcd275ed6a8111fd20d',
+      '04f8b263d4826ff181df89f58a4a701de3dca97111a9229213ffa81d09a902cc',
+      '0502c66429381ad65372bd0ae20f23692fe87dd90b5a5494aca21cc25b548a3f',
+      '0513393167288f94a7102de7cde744f523b7c10bb6ac89b91ea5886d99a56b74',
+      '0558bd54fea32175ee555919865671872a6a5e4604a32a563831f9432a5492f7',
+      '056c77b180ff89ccdabcf68781c52b412e62b46468039a90dc2abd4d49764bdd',
+      '0597d38f80d382feabb6f8ae58247e07565750ff12751c723006c3655ea2336d',
+      '05c44edfa8f016444abb90afb8181e646b8eb7128d9ee5b09ee6a358a064824d',
+      '05cc13704298d33f7769ee0352d0728f15a565294fff8827a9329f501aef714f',
+      '05f622463e3289e847d1e6cf6e41a9f23ade3c4f0ee18fef5ae29abd9c228610',
+      '05fb409f5f888d76e34295af51b3d5d957a56f4b67af18cf2f923358944826a1',
+      '060da274892e2757c1fc91574fcfb255f9b2031dc3ffa6bad4950a43c09335d9',
+      '0614dd523d1d0f19cbadb6b60c16fbc8be726174bb62a39cc1381dea55b52f0c',
+      '061890ac6541444c427e7733f59a0703bd8aef2c6da507442c0132f01cfe5201',
+      '061b770d8374e3deb4e7558666537177b924f00bcd75768e84cae4486c6a9e91',
+      '0626a96680c98e129d58de0a5378ff23f34f8c980f63bf17b0ad695da3831ab0',
+      '0653e7a3b6dbfc0c47927d36cefb348af57772e39891ea196b5bd28ee8d882ed',
+      '0655ad9d56c3e039955d116b131aa36d8ad0ef6445a22e953c8a5a0419485d5b',
+      '0659c341818dce944a8a49118157d30d6af2fb5d26197772a9393c9b25200146',
+      '06616ec9fafcf571d18ab570c4ecc4b5d3eca953059ad42c11fe4b281c5e010c',
+      '066c3fa1d0824ab8279c110302c410e6a15d2bdf049ba94fb1ec2490f4547751',
+      '067bc65abb9f35f9200c317dd05c52848a670b2187944f7c12a4b83d9121797d',
+      '068d0c3d5b44e85c9c65e527f051ada494e63b4547568bfa2bb67d6fad11fbf6',
+      '06921012619ebf53b34d6628c295cbf92d913755d1704049ac4cf6ebc3ff8159',
+      '06bdd3a6166069e1b44d947151a16ae08b1948ffdf0be5ecee55fca32b5d9d0c',
+      '06beefec8f0918178e4aceceb79de97b074f84cc4a043ec0ea3569ae70a6c130',
+      '06d3c026014c1194f70286e65a77f91cea96d07fa505ed3035c33f6551783f44',
+      '06d4464dc677f873888942f21dc92d7815af97dfb03285efd164daee9298f7bc',
+      '06f0ff3d7bc9bf59f799582c716abae653766aa8c690efa98f22a8de87b05941',
+      '070d3af6eb8579d2bf1ff873a396a8f3c94d307210916d054033c3f5d7a499ae',
+      '072cfa2d0e6a3d49782233426db33bfb38a2d1c83847636cbf0c21c5cd481d9d',
+      '072e527899a3bbf38436fa13b6374b4e4b9c003580cf9389ae4c7e3e631ef3ce',
+      '073269579b4d995529f449f54b63905801d1f3c4f1b81a31c19f7018cafff691',
+      '078150db4d1805d55bcd0bf247b606c982e71e830049f1c396a26d25fc0db1ea',
+      '078b276a136b66780866d177628b71a1119891c3eda29c5dab2bb9511bffa0fb',
+      '079dbe03047a30fd04d0123e4a86ae6deac5014bfbca46b9ca98c42927636280',
+      '07ddeef7b6173ab78cf993be85c73f1ba308cb82730482af9cf840c70e900823',
+      '07f1ab1210c0ee7699f79cb94ba6e99911559f734cf390fbf43d6575a91011ac',
+      '07fe24779641dab345e00f365c7b1a931796ec41468ef7dbd6b4e9fa0f509ffa',
+      '08323398819acfd8976eacd389747baf83d7bd3cf470c92484d2793c2638714f',
+      '08372c24fdfe2468fb8e9ae4d517f315375141eea287878a708e44bee7f16534',
+      '0844bdbc7fde4f840303c5dc73b30ff4ef46f50588177e902fe5462bdd801545',
+      '0849d996175131cba528d13990ab5bfff590034a86046fedea56b6252572ad7c',
+      '085da4ed816bae41099982b6f06f1091a204ee5ccfad9fab06d5805ba042ead1',
+      '0863758700e21ac15eea2cf88721bc2be2a94042e50ad21eabdcebf321b5e252',
+      '086c48c9fc47f70dd7ebf360edabbaa7bc400abc95edc77db0e2df71a66eeb9b',
+      '086fd6997e11b8cdd32447987af2e5cdc4edda4c52020062ab8bebb0547eaf66',
+      '087b7e1de000653afea13c36fe018f617897ff31002bae177e7a6c9d1746f088',
+      '0887477cebeb639e29aeb83182d956e34f9875b320eecb5601b2b6e1c76258e4',
+      '088ccaa5f99fbba42b019c6cc4f0fec190e155bd1317bce40ad3cd3b81b65747',
+      '08c590c4de088fabea523ee7bced2640747c159f2af3ca1c1bba0a8ce7db453c',
+      '08dcc38d70cf5890afc9ee7b0c06557db44481068f09a92165c5ff29b33214be',
+      '08e039159f5b6c4bbed1b257a72fc9033949eb60fb60d16a5c5c1aff6827d7ea',
+      '08e8ee621a26efb73a756de4488513f5a68e858c8e01dc07c4b433fea78cefdf',
+      '08fd835c06dc3f45c972acf6aeead349d87df02bd1ee99cc64e0c8c45578466b',
+      '09142a3833798cbf7f6c9ef0ec49271c53aff423b96a341d0da63088ab1143b7',
+      '09167bb97458db6299e6de8657beeec5fc402a7e70c2e9a3eb826326900a07d0',
+      '0925f0846d1ab6c9cf80af644c591fedf0008f4c933eab9496ab1dfd9547dded',
+      ... 2907 more items
+    ],
+    instances: 1372135,
+    openings: [
+      {
+        face: '1829-range-sash',
+        x: -35.6,
+        y: 3.8,
+        z: 6.96,
+        w: 1.12,
+        h: 2.45
+      },
+      {
+        face: '1829-range-sash',
+        x: -35.6,
+        y: 7.199999999999999,
+        z: 6.96,
+        w: 1.12,
+        h: 2.45
+      },
+      {
+        face: '1829-range-sash',
+        x: -35.6,
+        y: 10.6,
+        z: 6.96,
+        w: 1.12,
+        h: 2.45
+      },
+      {
+        face: '1829-range-sash',
+        x: -32.050000000000004,
+        y: 3.8,
+        z: 6.96,
+        w: 1.12,
+        h: 2.45
+      },
+      {
+        face: '1829-range-sash',
+        x: -32.050000000000004,
+        y: 7.199999999999999,
+        z: 6.96,
+        w: 1.12,
+        h: 2.45
+      },
+      {
+        face: '1829-range-sash',
+        x: -32.050000000000004,
+        y: 10.6,
+        z: 6.96,
+        w: 1.12,
+        h: 2.45
+      },
+      {
+        face: '1829-range-sash',
+        x: -28.500000000000004,
+        y: 3.8,
+        z: 6.96,
+        w: 1.12,
+        h: 2.45
+      },
+      {
+        face: '1829-range-sash',
+        x: -28.500000000000004,
+        y: 7.199999999999999,
+        z: 6.96,
+        w: 1.12,
+        h: 2.45
+      },
+      {
+        face: '1829-range-sash',
+        x: -28.500000000000004,
+        y: 10.6,
+        z: 6.96,
+        w: 1.12,
+        h: 2.45
+      },
+      {
+        face: '1829-range-sash',
+        x: -24.950000000000003,
+        y: 3.8,
+        z: 6.96,
+        w: 1.12,
+        h: 2.45
+      },
+      {
+        face: '1829-range-sash',
+        x: -24.950000000000003,
+        y: 7.199999999999999,
+        z: 6.96,
+        w: 1.12,
+        h: 2.45
+      },
+      {
+        face: '1829-range-sash',
+        x: -24.950000000000003,
+        y: 10.6,
+        z: 6.96,
+        w: 1.12,
+        h: 2.45
+      },
+      {
+        face: '1829-range-sash',
+        x: -21.400000000000002,
+        y: 3.8,
+        z: 6.96,
+        w: 1.12,
+        h: 2.45
+      },
+      {
+        face: '1829-range-sash',
+        x: -21.400000000000002,
+        y: 7.199999999999999,
+        z: 6.96,
+        w: 1.12,
+        h: 2.45
+      },
+      {
+        face: '1829-range-sash',
+        x: -21.400000000000002,
+        y: 10.6,
+        z: 6.96,
+        w: 1.12,
+        h: 2.45
+      },
+      {
+        face: '1829-range-sash',
+        x: -17.85,
+        y: 3.8,
+        z: 6.96,
+        w: 1.12,
+        h: 2.45
+      },
+      {
+        face: '1829-range-sash',
+        x: -17.85,
+        y: 7.199999999999999,
+        z: 6.96,
+        w: 1.12,
+        h: 2.45
+      },
+      {
+        face: '1829-range-sash',
+        x: -17.85,
+        y: 10.6,
+        z: 6.96,
+        w: 1.12,
+        h: 2.45
+      },
+      {
+        face: '1829-range-sash',
+        x: -14.3,
+        y: 3.8,
+        z: 6.96,
+        w: 1.12,
+        h: 2.45
+      },
+      {
+        face: '1829-range-sash',
+        x: -14.3,
+        y: 7.199999999999999,
+        z: 6.96,
+        w: 1.12,
+        h: 2.45
+      },
+      {
+        face: '1829-range-sash',
+        x: -14.3,
+        y: 10.6,
+        z: 6.96,
+        w: 1.12,
+        h: 2.45
+      },
+      {
+        face: '1829-range-sash',
+        x: -10.75,
+        y: 3.8,
+        z: 6.96,
+        w: 1.12,
+        h: 2.45
+      },
+      {
+        face: '1829-range-sash',
+        x: -10.75,
+        y: 7.199999999999999,
+        z: 6.96,
+        w: 1.12,
+        h: 2.45
+      },
+      {
+        face: '1829-range-sash',
+        x: -10.75,
+        y: 10.6,
+        z: 6.96,
+        w: 1.12,
+        h: 2.45
+      },
+      {
+        face: '1829-range-sash',
+        x: -7.2,
+        y: 3.8,
+        z: 6.96,
+        w: 1.12,
+        h: 2.45
+      },
+      {
+        face: '1829-range-sash',
+        x: -7.2,
+        y: 7.199999999999999,
+        z: 6.96,
+        w: 1.12,
+        h: 2.45
+      },
+      {
+        face: '1829-range-sash',
+        x: -7.2,
+        y: 10.6,
+        z: 6.96,
+        w: 1.12,
+        h: 2.45
+      },
+      {
+        face: '1829-range-sash',
+        x: -3.6500000000000004,
+        y: 3.8,
+        z: 6.96,
+        w: 1.12,
+        h: 2.45
+      },
+      {
+        face: '1829-range-sash',
+        x: -3.6500000000000004,
+        y: 7.199999999999999,
+        z: 6.96,
+        w: 1.12,
+        h: 2.45
+      },
+      {
+        face: '1829-range-sash',
+        x: -3.6500000000000004,
+        y: 10.6,
+        z: 6.96,
+        w: 1.12,
+        h: 2.45
+      },
+      {
+        face: '1829-range-sash',
+        x: -0.10000000000000053,
+        y: 3.8,
+        z: 6.96,
+        w: 1.12,
+        h: 2.45
+      },
+      {
+        face: '1829-range-sash',
+        x: -0.10000000000000053,
+        y: 7.199999999999999,
+        z: 6.96,
+        w: 1.12,
+        h: 2.45
+      },
+      {
+        face: '1829-range-sash',
+        x: -0.10000000000000053,
+        y: 10.6,
+        z: 6.96,
+        w: 1.12,
+        h: 2.45
+      },
+      {
+        face: '1829-range-sash',
+        x: 3.4499999999999993,
+        y: 3.8,
+        z: 6.96,
+        w: 1.12,
+        h: 2.45
+      },
+      {
+        face: '1829-range-sash',
+        x: 3.4499999999999993,
+        y: 7.199999999999999,
+        z: 6.96,
+        w: 1.12,
+        h: 2.45
+      },
+      {
+        face: '1829-range-sash',
+        x: 3.4499999999999993,
+        y: 10.6,
+        z: 6.96,
+        w: 1.12,
+        h: 2.45
+      },
+      {
+        face: '1829-range-sash',
+        x: 6.999999999999999,
+        y: 3.8,
+        z: 6.96,
+        w: 1.12,
+        h: 2.45
+      },
+      {
+        face: '1829-range-sash',
+        x: 6.999999999999999,
+        y: 7.199999999999999,
+        z: 6.96,
+        w: 1.12,
+        h: 2.45
+      },
+      {
+        face: '1829-range-sash',
+        x: 6.999999999999999,
+        y: 10.6,
+        z: 6.96,
+        w: 1.12,
+        h: 2.45
+      },
+      {
+        face: '1829-range-sash',
+        x: 10.549999999999999,
+        y: 3.8,
+        z: 6.96,
+        w: 1.12,
+        h: 2.45
+      },
+      {
+        face: '1829-range-sash',
+        x: 10.549999999999999,
+        y: 7.199999999999999,
+        z: 6.96,
+        w: 1.12,
+        h: 2.45
+      },
+      {
+        face: '1829-range-sash',
+        x: 10.549999999999999,
+        y: 10.6,
+        z: 6.96,
+        w: 1.12,
+        h: 2.45
+      },
+      {
+        face: '1829-range-sash',
+        x: 14.099999999999998,
+        y: 3.8,
+        z: 6.96,
+        w: 1.12,
+        h: 2.45
+      },
+      {
+        face: '1829-range-sash',
+        x: 14.099999999999998,
+        y: 7.199999999999999,
+        z: 6.96,
+        w: 1.12,
+        h: 2.45
+      },
+      {
+        face: '1829-range-sash',
+        x: 14.099999999999998,
+        y: 10.6,
+        z: 6.96,
+        w: 1.12,
+        h: 2.45
+      },
+      {
+        face: '1829-range-sash',
+        x: 17.65,
+        y: 3.8,
+        z: 6.96,
+        w: 1.12,
+        h: 2.45
+      },
+      {
+        face: '1829-range-sash',
+        x: 17.65,
+        y: 7.199999999999999,
+        z: 6.96,
+        w: 1.12,
+        h: 2.45
+      },
+      {
+        face: '1829-range-sash',
+        x: 17.65,
+        y: 10.6,
+        z: 6.96,
+        w: 1.12,
+        h: 2.45
+      },
+      {
+        face: '1829-range-sash',
+        x: 21.2,
+        y: 3.8,
+        z: 6.96,
+        w: 1.12,
+        h: 2.45
+      },
+      {
+        face: '1829-range-sash',
+        x: 21.2,
+        y: 7.199999999999999,
+        z: 6.96,
+        w: 1.12,
+        h: 2.45
+      },
+      {
+        face: '1829-range-sash',
+        x: 21.2,
+        y: 10.6,
+        z: 6.96,
+        w: 1.12,
+        h: 2.45
+      },
+      {
+        face: '1829-range-sash',
+        x: 24.75,
+        y: 3.8,
+        z: 6.96,
+        w: 1.12,
+        h: 2.45
+      },
+      {
+        face: '1829-range-sash',
+        x: 24.75,
+        y: 7.199999999999999,
+        z: 6.96,
+        w: 1.12,
+        h: 2.45
+      },
+      {
+        face: '1829-range-sash',
+        x: 24.75,
+        y: 10.6,
+        z: 6.96,
+        w: 1.12,
+        h: 2.45
+      },
+      {
+        face: '1829-range-sash',
+        x: 28.3,
+        y: 3.8,
+        z: 6.96,
+        w: 1.12,
+        h: 2.45
+      },
+      {
+        face: '1829-range-sash',
+        x: 28.3,
+        y: 7.199999999999999,
+        z: 6.96,
+        w: 1.12,
+        h: 2.45
+      },
+      {
+        face: '1829-range-sash',
+        x: 28.3,
+        y: 10.6,
+        z: 6.96,
+        w: 1.12,
+        h: 2.45
+      },
+      {
+        face: '1829-range-sash',
+        x: 31.85,
+        y: 3.8,
+        z: 6.96,
+        w: 1.12,
+        h: 2.45
+      },
+      {
+        face: '1829-range-sash',
+        x: 31.85,
+        y: 7.199999999999999,
+        z: 6.96,
+        w: 1.12,
+        h: 2.45
+      },
+      {
+        face: '1829-range-sash',
+        x: 31.85,
+        y: 10.6,
+        z: 6.96,
+        w: 1.12,
+        h: 2.45
+      },
+      {
+        face: '1829-range-sash',
+        x: 35.4,
+        y: 3.8,
+        z: 6.96,
+        w: 1.12,
+        h: 2.45
+      },
+      {
+        face: '1829-range-sash',
+        x: 35.4,
+        y: 7.199999999999999,
+        z: 6.96,
+        w: 1.12,
+        h: 2.45
+      },
+      {
+        face: '1829-range-sash',
+        x: 35.4,
+        y: 10.6,
+        z: 6.96,
+        w: 1.12,
+        h: 2.45
+      },
+      {
+        face: '1829-range-sash',
+        x: -38.04,
+        y: 3.8,
+        z: 9.5,
+        w: 1.12,
+        h: 2.45
+      },
+      {
+        face: '1829-range-sash',
+        x: -38.04,
+        y: 7.199999999999999,
+        z: 9.5,
+        w: 1.12,
+        h: 2.45
+      },
+      {
+        face: '1829-range-sash',
+        x: -38.04,
+        y: 10.6,
+        z: 9.5,
+        w: 1.12,
+        h: 2.45
+      },
+      {
+        face: '1829-range-sash',
+        x: -38.04,
+        y: 3.8,
+        z: 13.05,
+        w: 1.12,
+        h: 2.45
+      },
+      {
+        face: '1829-range-sash',
+        x: -38.04,
+        y: 7.199999999999999,
+        z: 13.05,
+        w: 1.12,
+        h: 2.45
+      },
+      {
+        face: '1829-range-sash',
+        x: -38.04,
+        y: 10.6,
+        z: 13.05,
+        w: 1.12,
+        h: 2.45
+      },
+      {
+        face: '1829-range-sash',
+        x: -3.6500000000000004,
+        y: 3.8,
+        z: 17.04,
+        w: 1.12,
+        h: 2.45
+      },
+      {
+        face: '1829-range-sash',
+        x: -3.6500000000000004,
+        y: 7.199999999999999,
+        z: 17.04,
+        w: 1.12,
+        h: 2.45
+      },
+      {
+        face: '1829-range-sash',
+        x: -3.6500000000000004,
+        y: 10.6,
+        z: 17.04,
+        w: 1.12,
+        h: 2.45
+      },
+      {
+        face: '1829-range-sash',
+        x: -0.10000000000000053,
+        y: 3.8,
+        z: 17.04,
+        w: 1.12,
+        h: 2.45
+      },
+      {
+        face: '1829-range-sash',
+        x: -0.10000000000000053,
+        y: 7.199999999999999,
+        z: 17.04,
+        w: 1.12,
+        h: 2.45
+      },
+      {
+        face: '1829-range-sash',
+        x: -0.10000000000000053,
+        y: 10.6,
+        z: 17.04,
+        w: 1.12,
+        h: 2.45
+      },
+      {
+        face: '1829-range-sash',
+        x: 3.4499999999999993,
+        y: 3.8,
+        z: 17.04,
+        w: 1.12,
+        h: 2.45
+      },
+      {
+        face: '1829-range-sash',
+        x: 3.4499999999999993,
+        y: 7.199999999999999,
+        z: 17.04,
+        w: 1.12,
+        h: 2.45
+      },
+      {
+        face: '1829-range-sash',
+        x: 3.4499999999999993,
+        y: 10.6,
+        z: 17.04,
+        w: 1.12,
+        h: 2.45
+      },
+      {
+        face: '1829-range-sash',
+        x: 6.999999999999999,
+        y: 3.8,
+        z: 17.04,
+        w: 1.12,
+        h: 2.45
+      },
+      {
+        face: '1829-range-sash',
+        x: 6.999999999999999,
+        y: 7.199999999999999,
+        z: 17.04,
+        w: 1.12,
+        h: 2.45
+      },
+      {
+        face: '1829-range-sash',
+        x: 6.999999999999999,
+        y: 10.6,
+        z: 17.04,
+        w: 1.12,
+        h: 2.45
+      },
+      {
+        face: '1829-range-sash',
+        x: 35.4,
+        y: 3.8,
+        z: 17.04,
+        w: 1.12,
+        h: 2.45
+      },
+      {
+        face: '1829-range-sash',
+        x: 35.4,
+        y: 7.199999999999999,
+        z: 17.04,
+        w: 1.12,
+        h: 2.45
+      },
+      {
+        face: '1829-range-sash',
+        x: 35.4,
+        y: 10.6,
+        z: 17.04,
+        w: 1.12,
+        h: 2.45
+      },
+      {
+        face: '1829-range-sash',
+        x: 38.949999999999996,
+        y: 3.8,
+        z: 17.04,
+        w: 1.12,
+        h: 2.45
+      },
+      {
+        face: '1829-range-sash',
+        x: 38.949999999999996,
+        y: 7.199999999999999,
+        z: 17.04,
+        w: 1.12,
+        h: 2.45
+      },
+      {
+        face: '1829-range-sash',
+        x: 38.949999999999996,
+        y: 10.6,
+        z: 17.04,
+        w: 1.12,
+        h: 2.45
+      },
+      {
+        face: '1829-range-sash',
+        x: 45.13999999999999,
+        y: 3.8,
+        z: 9.5,
+        w: 1.12,
+        h: 2.45
+      },
+      {
+        face: '1829-range-sash',
+        x: 45.13999999999999,
+        y: 7.199999999999999,
+        z: 9.5,
+        w: 1.12,
+        h: 2.45
+      },
+      {
+        face: '1829-range-sash',
+        x: 45.13999999999999,
+        y: 10.6,
+        z: 9.5,
+        w: 1.12,
+        h: 2.45
+      },
+      {
+        face: '1829-range-sash',
+        x: 45.13999999999999,
+        y: 3.8,
+        z: 13.05,
+        w: 1.12,
+        h: 2.45
+      },
+      {
+        face: '1829-range-sash',
+        x: 45.13999999999999,
+        y: 7.199999999999999,
+        z: 13.05,
+        w: 1.12,
+        h: 2.45
+      },
+      {
+        face: '1829-range-sash',
+        x: 45.13999999999999,
+        y: 10.6,
+        z: 13.05,
+        w: 1.12,
+        h: 2.45
+      },
+      {
+        face: '1829-range-sash',
+        x: -23.1,
+        y: 3.8,
+        z: -0.040000000000000036,
+        w: 1.12,
+        h: 2.45
+      },
+      {
+        face: '1829-range-sash',
+        x: -25.54,
+        y: 3.8,
+        z: 2.5,
+        w: 1.12,
+        h: 2.45
+      },
+      {
+        face: '1829-range-sash',
+        x: -23.1,
+        y: 3.8,
+        z: 6.04,
+        w: 1.12,
+        h: 2.45
+      },
+      {
+        face: '1829-range-sash',
+        x: -19.46,
+        y: 3.8,
+        z: 2.5,
+        w: 1.12,
+        h: 2.45
+      },
+      {
+        face: '1829-range-sash',
+        x: 21.9,
+        y: 3.8,
+        z: -0.040000000000000036,
+        w: 1.12,
+        h: 2.45
+      },
+      {
+        face: '1829-range-sash',
+        x: 19.46,
+        y: 3.8,
+        z: 2.5,
+        w: 1.12,
+        h: 2.45
+      },
+      {
+        face: '1829-range-sash',
+        x: 21.9,
+        y: 3.8,
+        z: 6.04,
+        w: 1.12,
+        h: 2.45
+      },
+      ... 601 more items
+    ]
+  },
+  operator: 'deepStrictEqual',
+  diff: 'simple'
+}
+
+Node.js v24.20.0

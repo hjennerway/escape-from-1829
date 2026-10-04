@@ -1,0 +1,1 @@
+PASS: pages compiled/explore: sash placement/width, exposed panes, flat deck/rim, removed downpipes, desktop/mobile captures, no page or shader errors.

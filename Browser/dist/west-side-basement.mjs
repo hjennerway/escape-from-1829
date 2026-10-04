@@ -1,17 +1,21 @@
 import {FRONT_BASEMENT,frontBasementShape} from './front-basement.mjs';
 import {mitreRightAngleWalls} from './wall-mitres.mjs';
+import {WEST_COURT_ALIGNMENT} from './west-court-photo-detail.mjs';
 
 // Owner's marked west-side view, 27 September 2026. Enter beside the glazed
 // rear end. The follow-up arrow turns the descent towards the wing (+X),
 // with the door on the gallery side at the blue X, not beside the lean-to.
+// The 4 October extension follows the lean-to's current front and court wall.
 export const WEST_SIDE_BASEMENT=Object.freeze({
   grade:-.145,level:FRONT_BASEMENT.grade-FRONT_BASEMENT.depth,
-  entry:-35.7,stairX:-42,steps:6,tread:.4,outer:-39.8,end:-1
+  entry:-35.7,stairX:-42,steps:6,tread:.4,outer:-39.8,
+  end:WEST_COURT_ALIGNMENT.wallZ,leanToFront:WEST_COURT_ALIGNMENT.leanToFrontZ
 });
+const {end:passageEnd,leanToFront}=WEST_SIDE_BASEMENT;
 const outline=startX=>[
   [startX,-35.7],[-37.84,-35.7],[-37.84,-30.5],[-37.5,-30.5],
-  [-37.5,-24.5],[-37,-24.5],[-37,-1],[-39,-1],[-39,-4.5],
-  [-39.8,-4.5],[-39.8,-33.7],[startX,-33.7]
+  [-37.5,-24.5],[-37,-24.5],[-37,passageEnd],[-39,passageEnd],[-39,leanToFront],
+  [-39.8,leanToFront],[-39.8,-33.7],[startX,-33.7]
 ];
 export const westSideBasementExcavation=()=>outline(WEST_SIDE_BASEMENT.stairX);
 // One terrain cut follows the lowered court, road link, southern transition,
@@ -21,24 +25,24 @@ export const westSideBasementExcavation=()=>outline(WEST_SIDE_BASEMENT.stairX);
 export const westCourtTerrainExcavation=()=>[
   [-73.5,-38],[-71.5,-38],[-71.5,-26],[-39.8,-26],[-39.8,-33.7],
   [-43,-33.7],[-43,-35.7],[-37.84,-35.7],[-37.84,-30.5],
-  [-37.5,-30.5],[-37.5,-24.5],[-37,-24.5],[-37,0],
-  [-55.5,0],[-55.5,4],[-73.5,4]
+  [-37.5,-30.5],[-37.5,-24.5],[-37,-24.5],[-37,passageEnd],
+  [-55.5,passageEnd],[-55.5,4],[-73.5,4]
 ];
 // The part covered by later west-wing paving returns to lawn before 1849.
-// Stop at the timeline's x=-38 wing boundary; the original basement stays cut.
+// Follow the passage's outer edge so the original basement stays cut.
 export const westCourtUnbuiltTerrain=()=>[
-  [-73.5,-38],[-71.5,-38],[-71.5,-26],[-39.8,-26],[-39.8,-4.5],
-  [-39,-4.5],[-39,-1],[-38,-1],[-38,0],[-55.5,0],[-55.5,4],[-73.5,4]
+  [-73.5,-38],[-71.5,-38],[-71.5,-26],[-39.8,-26],[-39.8,leanToFront],
+  [-39,leanToFront],[-39,passageEnd],[-55.5,passageEnd],[-55.5,4],[-73.5,4]
 ];
 // Remove the obsolete underlying access slab beneath the lowered courtyard,
 // its gentle southern transition and the stair's ground-level approach.
 export const westCourtAccessExcavation=()=>[
   [-73.5,-38],[-37.84,-38],[-37.84,-30.5],[-37.5,-30.5],
-  [-37.5,-24.5],[-37,-24.5],[-37,0],[-55.5,0],[-55.5,4],[-73.5,4]
+  [-37.5,-24.5],[-37,-24.5],[-37,passageEnd],[-55.5,passageEnd],[-55.5,4],[-73.5,4]
 ];
 
 export function addWestSideBasement(THREE,{model,material,brick,worldUV}){
-  const {grade,level,entry,stairX,steps,tread,outer}=WEST_SIDE_BASEMENT;
+  const {grade,level,entry,stairX,steps,tread,outer,end:passageEnd,leanToFront}=WEST_SIDE_BASEMENT;
   const group=new THREE.Group();group.name='West side semi-basement';
   group.userData.estateSection='1829';group.userData.walkSurfaces=[];model.add(group);
   const stone=material(0xb8b8aa),white=material(0xe1e3dc),blue=material(0x172e50),nosing=material(0x8e9188);
@@ -71,16 +75,16 @@ export function addWestSideBasement(THREE,{model,material,brick,worldUV}){
   }
   // Extend the exposed foundations down to the new floor without moving any
   // of the existing windows or upper walls. The lean-to closes the outer end.
-  for(const [x,z0,z1] of [[-37.79,entry,-30.62],[-37.45,-30.5,-24.5],[-36.95,-24.5,-1],[-39.05,-4.5,-1]])
+  for(const [x,z0,z1] of [[-37.79,entry,-30.62],[-37.45,-30.5,-24.5],[-36.95,-24.5,passageEnd],[-39.05,leanToFront,passageEnd]])
     block('exposed foundation '+z0+' '+x,x===-37.79?galleryBrick:mainBrick,x,(z0+z1)/2,.12,z1-z0,level-.12,x===-37.79?.3:.02,true);
   // Close the gallery's stepped end against the main foundation. Replace the
   // final 0.12 of its side wall so no exposed faces overlap at this corner.
   block('gallery foundation return',galleryBrick,-37.62,-30.56,.46,.12,level-.12,.3,true);
   block('foundation return',brick,-37.23,-24.46,.58,.1,level-.12,.02,true);
-  block('end foundation',brick,-38,-.96,2,.12,level-.12,.02,true);
+  block('end foundation',brick,-38,passageEnd+.04,2,.12,level-.12,.02,true);
   // The right-hand edge rises only 32 cm above the courtyard. The stair mouth
   // stays open, and the wall meets the lean-to flank at the far end.
-  const retaining=[],start=entry+2.1,end=-4.48,wallX=outer-.1;
+  const retaining=[],start=entry+2.1,end=leanToFront+.02,wallX=outer-.1;
   retaining.push(block('retaining wall',brick,wallX,(start+end)/2,.2,end-start,level-.12,grade+.24,true));
   retaining.push(block('retaining coping',stone,wallX,(start+end)/2,.28,end-start,grade+.24,grade+.32));
   for(const [name,z,left,right] of [['rear stair cheek',entry-.1,stairX,-37.84],['front stair cheek',start,stairX,wallX]]){

@@ -1,0 +1,15 @@
+import assert from 'node:assert/strict';
+import {readFileSync,appendFileSync,writeFileSync} from 'node:fs';
+import {modelSourceHash} from '../../model-build-inputs.mjs';
+const root=new URL('../../../',import.meta.url),folder=new URL('./',import.meta.url);
+const manifest=JSON.parse(readFileSync(new URL('Browser/dist/compiled/manifest.json',root)));
+assert.equal(manifest.sourceHash,await modelSourceHash(),'Final model fingerprint is current');
+const results=JSON.parse(readFileSync(new URL('suite-remainder.json',folder)));
+assert.equal(results.length,117);
+assert.equal(results.filter(r=>r.code===0).length,112);
+const report={suite:{total:124,passed:122,remainingFailures:['test-jarman.mjs','test-leighton-newton.mjs'],directTimeoutRerunsPassed:['test-medical-furniture.mjs','test-reception-furniture.mjs','test-hall-furnishings.mjs'],additionalCurrentCheck:'test-west-roof-join.mjs'},pages:JSON.parse(readFileSync(new URL('pages-validation.json',folder))),compiledAsset:JSON.parse(readFileSync(new URL('delivery-validation.json',folder)))};
+writeFileSync(new URL('final-validation.json',folder),JSON.stringify(report,null,2)+'\n');
+const note='\nFinal west inside-corner validation: the npm test run, continued commands and\ndirect reruns complete 124 checks, with 122 passing. The two failures are the\nhistorical Jarman and Leighton/Newton whole-estate records; both also fail\nwith the saved original inside-corner source. Three furniture checks timed\nout in the continuation runner and pass when invoked directly. The initial\nshared facade-count failure also passes after the concurrent facade update.\nThe new adjacent west-roof-join check passes. Expected estate snapshots are\nnot rebased.\n\nThe full compiled rendering comparison passes once, including image similarity,\nexact draw counts, full detail, controls and fallback assets. Final complete\ncompiled/timeline reruns were interrupted by concurrent west-roof source edits\nand a shared screenshot file lock. The delivery model was rebuilt afterward\nand matches the current source fingerprint. Its checksum, five flat-roof\nprobes, period-split collision footprints and four moved sash records pass\nthe scoped compiled-asset check. This verifies the delivered corner without\nclaiming a successful final complete compiled/timeline run. Evidence is in\nBrowser/artifacts/west-flat-corner/.\n';
+appendFileSync(new URL('DEVELOPMENT.md',root),note);
+appendFileSync(new URL('Research/west/flat-corner-2026-10-04/README.md',root),'\nValidation passes the focused wall/roof, pane, physical walking and current\ncompiled-asset checks. The broader combined browser run passes 122 of 124\nchecks, retaining the two historical estate snapshot failures that also\nreproduce with the original corner. Final complete compiled/timeline reruns\nwere interrupted by concurrent model edits and a shared screenshot lock;\nthe final rebuilt asset passes its scoped geometry, collision and checksum\nchecks and matches the current source. See DEVELOPMENT.md for the details.\n');
+console.log(JSON.stringify({suite:report.suite,currentModel:true,asset:manifest.file}));

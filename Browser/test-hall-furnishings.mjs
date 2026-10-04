@@ -19,7 +19,7 @@ const ids=['Visitors','WardService','Recreation'],origin={x:0,z:17.5,floor:0,y:0
 for(const seed of [1829,1,42,4294967295]){
  furnishAsylum(floors,{seed});const items=floors.flatMap(f=>f.furniture.filter(i=>ids.includes(i.roomId)));
  if(!baseline)baseline=structuredClone(items);else assert.deepEqual(items,baseline,'Hall furniture stays fixed between games');
- assert.equal(items.length,32);assert.deepEqual(floors.slice(2).flatMap(f=>f.furnishingAreas),[],'Only the requested ground/first-floor halls change');
+ assert.equal(items.length,45);assert.deepEqual(floors.slice(2).flatMap(f=>f.furnishingAreas),[],'Only the requested ground/first-floor halls change');
  for(const f of floors)for(const a of f.furnishingAreas.filter(a=>ids.includes(a.id))){
   assert(flatWalkable(f,...a.label,.5));assert(routeBetweenFloors(floors,origin,{x:a.label[0],z:a.label[1],floor:f.id}).length,'Every hall is reachable');
   const local=f.furniture.filter(i=>i.roomId===a.id);
@@ -39,5 +39,7 @@ for(const seed of [1829,1,42,4294967295]){
 const visitors=baseline.filter(i=>i.roomId==='Visitors'),service=baseline.filter(i=>i.roomId==='WardService'),recreation=baseline.filter(i=>i.roomId==='Recreation');
 assert.equal(visitors.filter(i=>i.kind==='chair').length,8);assert.equal(visitors.filter(i=>i.kind==='table').length,2);assert(visitors.some(i=>i.kind==='visitingNotice'));
 assert.equal(service.filter(i=>i.kind==='linenCupboard').length,2);assert(service.some(i=>i.kind==='linenTrolley')&&service.some(i=>i.kind==='dutyBoard'));
+assert.equal(service.filter(i=>i.kind==='table').length,1);assert.equal(service.filter(i=>i.kind==='chair').length,2);assert.equal(service.filter(i=>i.kind==='waitingBench').length,2);assert(service.some(i=>i.kind==='foldedLinen')&&service.some(i=>i.kind==='sewingBasket'));
 for(const kind of ['draughtsSet','newspaperStand','sewingBasket','waitingBench'])assert(recreation.some(i=>i.kind===kind));
-console.log(`PASS: nine hall models / ${triangles} triangles, 32 fixed furnishings, four seeds, physical support/wall mounts, chair directions, corridor lanes, accessible cabinets, ${walks} walked collisions and notebook names.`);
+assert.equal(recreation.filter(i=>i.kind==='table').length,2);assert.equal(recreation.filter(i=>i.kind==='draughtsSet').length,2);assert.equal(recreation.filter(i=>i.kind==='chair').length,8);assert.equal(recreation.filter(i=>i.kind==='waitingBench').length,2);
+console.log(`PASS: ten hall models / ${triangles} triangles, 45 fixed furnishings, linen worktable and two seated draughts tables with benches, four seeds, physical support/wall mounts, chair directions, corridor lanes, accessible cabinets, ${walks} walked collisions and notebook names.`);

@@ -1,0 +1,59 @@
+{
+  "sourceHash": "a42e6ddf3ae1e10070e5d877e165c6b7992b38aae976c9639696adf2da56129c",
+  "compiledFile": "aerial-b670e0da128b9502c376.bin.gz",
+  "current": true,
+  "modelSuite": "passed",
+  "focusedBasement": "passed, including new early-year lawn samples",
+  "originalRegression": "fails the new extension check as expected",
+  "sourceCompiledRendering": "passed before final simultaneous window revision",
+  "finalTimeline": "passed",
+  "livePages": {
+    "checks": [
+      {
+        "mode": "compiled",
+        "lowered": 18,
+        "wall": 4,
+        "gravel": 9,
+        "walking": null
+      },
+      {
+        "mode": "explore",
+        "lowered": 18,
+        "wall": 4,
+        "gravel": 9,
+        "walking": [
+          -38.1,
+          0.78,
+          4.6875
+        ],
+        "keyboard": [
+          -38.1,
+          0.78,
+          4.642857142857145
+        ]
+      }
+    ],
+    "errors": []
+  },
+  "browserSuite": {
+    "passed": false,
+    "stoppedAt": "test-jarman.mjs:11",
+    "baseline": {
+      "actual": 818973,
+      "expected": 818930
+    },
+    "final": {
+      "actual": 818951,
+      "expected": 818930
+    }
+  },
+  "exportsUpdated": [
+    "Browser source",
+    "local compiled aerial"
+  ],
+  "exportsNotRegenerated": [
+    "Unity",
+    "Blender",
+    "packaged applications"
+  ]
+}

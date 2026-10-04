@@ -1,0 +1,2 @@
+PASS: dusk window density, shader composition, day/night restoration, reduced motion, fixed light budget and untouched model hierarchy.
+PASS: day default and restoration, night lighting, fixed light budget, per-period fixtures/pools, hidden-road light removal, narrow post collisions. {"1829":53,"1849":53,"1856":53,"1860":53,"1870":53,"1896":105,"1912":105,"1915":121,"1916":121,"1938":121,"2010":93,"2016":104,"2021":113}

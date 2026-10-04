@@ -1,0 +1,135 @@
+{
+  "views": {
+    "court": {
+      "position": [
+        -16,
+        27,
+        -22
+      ],
+      "target": [
+        -49,
+        9,
+        7
+      ],
+      "fov": 48
+    },
+    "courtClose": {
+      "position": [
+        -18,
+        21,
+        -15
+      ],
+      "target": [
+        -38,
+        13,
+        5
+      ],
+      "fov": 34
+    },
+    "garden": {
+      "position": [
+        -25,
+        24,
+        47
+      ],
+      "target": [
+        -40,
+        11,
+        17
+      ],
+      "fov": 42
+    }
+  },
+  "picks": {
+    "court": [],
+    "courtClose": [
+      {
+        "pixel": [
+          740,
+          290
+        ],
+        "name": "West courtyard upper link joined cornice 0.22",
+        "point": [
+          -37.125,
+          14.508930719291465,
+          6.167664402658499
+        ],
+        "normal": [
+          1,
+          0,
+          0
+        ]
+      },
+      {
+        "pixel": [
+          740,
+          325
+        ],
+        "name": "West courtyard upper link brick return",
+        "point": [
+          -37.400000007152556,
+          13.474484596846407,
+          6.4908614265211995
+        ],
+        "normal": [
+          1,
+          0,
+          0
+        ]
+      },
+      {
+        "pixel": [
+          795,
+          325
+        ],
+        "name": "West courtyard upper link infill",
+        "point": [
+          -37.945773367641934,
+          13.648417709255773,
+          5
+        ],
+        "normal": [
+          0,
+          0,
+          -1
+        ]
+      }
+    ],
+    "garden": [
+      {
+        "pixel": [
+          1015,
+          325
+        ],
+        "name": "West inside corner roof junction 2",
+        "point": [
+          -31.843802737795805,
+          12.82773095468527,
+          15.48499965667725
+        ],
+        "normal": [
+          0,
+          0,
+          1
+        ]
+      },
+      {
+        "pixel": [
+          1070,
+          325
+        ],
+        "name": "West inside corner roof junction 1",
+        "point": [
+          -29.73194069803431,
+          13.528946428673992,
+          16.621845770471545
+        ],
+        "normal": [
+          -0.7071067811865476,
+          0,
+          0.7071067811865476
+        ]
+      }
+    ]
+  }
+}

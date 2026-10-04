@@ -4,6 +4,7 @@ import {createEscapeExterior} from './dist/escape-exterior.mjs';
 import {createAerialLayouts} from './dist/aerial-layouts.mjs';
 import {exteriorObstacles,obstacleContains,createWalker} from './dist/explore-controls.mjs';
 import {WEST_SIDE_BASEMENT as basement} from './dist/west-side-basement.mjs';
+import {WEST_RANGE_PLAN} from './dist/west-range-plan.mjs';
 import {prepareEstateTimeline} from './dist/estate-timeline.mjs';
 
 globalThis.document={createElement:()=>({getContext:()=>({fillRect(){},fillText(){},strokeText(){},measureText(t){return {width:t.length*16}}})})};
@@ -23,7 +24,7 @@ for(const modern of [false,true]){
     const height=basement.grade-(basement.grade-basement.level)*(i+1)/basement.steps+.001;
     assert(Math.abs(hit.point.y-height)<1e-5,'each visible stair descends by one equal riser');
   }
-  for(let z=-33.5;z<-1.4;z+=.25)for(const x of [-38.65,-38.3,-37.95]){
+  for(let z=-33.5;z<basement.end-.4;z+=.25)for(const x of [-38.65,-38.3,-37.95]){
     const hit=surface(x,z);
     assert.equal(hit.object.name,'West side basement lower passage','no terrain or courtyard paving may cover the excavated passage');
     assert(Math.abs(hit.point.y-basement.level)<1e-5);
@@ -32,6 +33,24 @@ for(const modern of [false,true]){
   assert.equal(coping.object.name,'West side basement retaining coping');
   assert(coping.point.y>court.point.y&&coping.point.y-court.point.y<.4,'coping is only slightly above the courtyard');
   assert.equal(surface(-40.5,-35.8).object.name,'West side basement rear stair cheek coping','stair cheek closes the former lengthwise stair mouth');
+  // Probe the yellow wall extension and the purple lowered gap.
+  for(const z of [-4.3,-2.5,-.5,1.2]){
+    assert.equal(surface(-39.5,z).object.name,'West side basement lower passage','the widened extension stays at the lower level');
+    const wall=surface(-39.9,z);
+    assert.equal(wall.object.name,'West side basement retaining coping','the wall continues to the lean-to without its old return');
+    assert(Math.abs(wall.point.y-(basement.grade+.32))<1e-5);
+  }
+  for(const x of [-45,-50,-55])for(const z of [.2,2.5,4.8]){
+    const hit=surface(x,z);
+    assert.equal(hit.object.name,'West courtyard and outer return path','gravel replaces the entire marked lawn strip');
+    assert(Math.abs(hit.point.y-basement.grade)<1e-5);
+    ray.set(new THREE.Vector3(x,.9,z),new THREE.Vector3(0,-1,0));
+    assert.equal(ray.intersectObject(e.terrain,false).length,0,'terrain is cut beneath the new gravel to prevent flicker');
+  }
+  const leanToBounds=new THREE.Box3().setFromObject(e.model.getObjectByName('West courtyard glazed lean-to'));
+  const retainingBounds=new THREE.Box3().setFromObject(group.getObjectByName('West side basement retaining wall'));
+  assert(Math.abs(basement.end-WEST_RANGE_PLAN.courtZ)<1e-6,'the lowered gap reaches the current court wall');
+  assert(retainingBounds.max.z>=leanToBounds.min.z&&retainingBounds.max.z<leanToBounds.min.z+.15,'the retaining wall meets the current lean-to');
   const obstacles=exteriorObstacles(THREE,e.model),walk=createWalker(e.camera,obstacles);
   function leg(from,to){
     walk.setView({position:[from[0],1.8,from[1]],target:[to[0],1.8,to[1]]});walk.keys.add('KeyW');
@@ -43,11 +62,13 @@ for(const modern of [false,true]){
   assert(Math.abs(e.camera.position.y-(1.8+basement.level-basement.grade))<1e-5,'eye level follows the descended stairs');
   walk.keys.add('KeyW');for(let i=0;i<10;i++)walk.update(.1);
   assert(e.camera.position.x<-38.35,'the relocated closed door stops walking towards the gallery');
-  leg([-38.7,-34.7],[-38.7,-25]);leg([-38.7,-25],[-38.1,-25]);leg([-38.1,-25],[-38.1,-1.8]);
+  leg([-38.7,-34.7],[-38.7,-25]);leg([-38.7,-25],[-38.1,-25]);leg([-38.1,-25],[-38.1,basement.end-.8]);
+  assert(Math.abs(e.camera.position.y-(1.8+basement.level-basement.grade))<1e-5,'the purple gap shares the existing lowered walking level');
   walk.keys.add('KeyW');for(let i=0;i<10;i++)walk.update(.1);
-  assert(e.camera.position.z<-1.4,'the blank far-end wall stops walking');
+  assert(e.camera.position.z<basement.end-.4&&e.camera.position.z>basement.end-1,'the current blank far-end wall stops walking');
   assert(obstacles.some(o=>obstacleContains(o,-39.9,-18,0)),'retaining wall blocks crossing from the sunken path');
-  leg([-38.1,-1.8],[-38.1,-25]);leg([-38.1,-25],[-38.7,-25]);leg([-38.7,-25],[-38.7,-34.7]);leg([-38.7,-34.7],[-42.6,-34.7]);
+  assert(obstacles.some(o=>obstacleContains(o,-39.9,0,0)),'the extended retaining wall also blocks crossing');
+  leg([-38.1,basement.end-.8],[-38.1,-25]);leg([-38.1,-25],[-38.7,-25]);leg([-38.7,-25],[-38.7,-34.7]);leg([-38.7,-34.7],[-42.6,-34.7]);
   assert.equal(e.camera.position.y,1.8,'climbing the stairs restores ground eye level');
   ray.set(new THREE.Vector3(-39,.1,-34.7),new THREE.Vector3(1,0,0));
   const visible=[];e.model.traverseVisible(o=>{if(o.isMesh)visible.push(o)});
@@ -58,7 +79,7 @@ for(const modern of [false,true]){
     ray.set(new THREE.Vector3(x,y,-1.5),new THREE.Vector3(0,0,1));
     const hit=ray.intersectObjects(visible,false)[0];
     assert.equal(hit?.object.name,'West courtyard upper link infill','the marked upper corner is closed by masonry');
-    assert(Math.abs(hit.point.z+1)<1e-5);
+    assert(Math.abs(hit.point.z-WEST_RANGE_PLAN.courtZ)<1e-5,'the upper corner follows the narrowed courtyard face');
   }
   const door=new THREE.Box3().setFromObject(group.getObjectByName('West side basement end door'));
   assert(Math.abs(door.min.y-basement.level)<1e-6,'door threshold meets the basement level');
@@ -87,7 +108,7 @@ for(const modern of [false,true]){
 }
 layouts.setVisible('historic',false);layouts.setVisible('modern',false);
 assert.equal(surface(-38.3,-18).object.parent.name,'Unexcavated frontage terrain','hiding the estate fills the excavation with terrain');
-for(const [x,z] of [[-60,-15],[-72.5,-37],[-72.5,2],[-42.5,-34.7]]){
+for(const [x,z] of [[-60,-15],[-72.5,-37],[-72.5,2],[-42.5,-34.7],[-45,2.5],[-50,4.8],[-38.3,3]]){
   const hit=surface(x,z);
   assert.equal(hit.object.parent.name,'Unexcavated frontage terrain','hiding the estate restores lawn across the courtyard and approach');
   assert(Math.abs(hit.point.y+.15)<1e-5);
@@ -125,7 +146,7 @@ for(const year of [1829,1849,2021,1829]){
     assert.equal(new Set(hits.map(h=>h.object.uuid+':'+h.instanceId)).size,1,'Only one exposed surface below each sash');
   }
   ray.far=Infinity;
-  for(const [x,z] of [[-60,-15],[-72.5,-37],[-72.5,2]]){
+  for(const [x,z] of [[-60,-15],[-72.5,-37],[-72.5,2],[-45,2.5],[-50,4.8]]){
     const hit=surface(x,z);
     assert(hit,'removing later paving never leaves a hole in the early landscape');
     const lawns=[];e.terrain.traverseVisible(o=>{if(o.isMesh)lawns.push(o)});

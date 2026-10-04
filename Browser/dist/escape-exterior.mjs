@@ -19,6 +19,9 @@ import {addBeechTrees} from './front-lawn-trees.mjs';
 import {addAdminPineTrees} from './admin-pine-trees.mjs';
 import {addOakTrees} from './oak-trees.mjs';
 import {westFrontPhotoProfile} from './west-front-photo-detail.mjs';
+import {WEST_RANGE_PLAN} from './west-range-plan.mjs';
+import {joinWestCrossRangeRoof} from './west-cross-range-roof.mjs';
+import {westForwardRootGeometry,westForwardRootFootprint,trimWestForwardRootRoof} from './west-front-setback.mjs';
 import {westCourtPhotoProfile,WEST_COURT_ALIGNMENT} from './west-court-photo-detail.mjs';
 import {createChapel} from './chapel.mjs';
 import {createChurchGrounds} from './church-grounds.mjs';
@@ -175,9 +178,9 @@ export function createEscapeExterior(THREE,aspect){
   westBlocks[0]=[-48.6,(WEST_COURT_ALIGNMENT.wallZ+WEST_COURT_ALIGNMENT.gardenZ)/2,21.2,WEST_COURT_ALIGNMENT.gardenZ-WEST_COURT_ALIGNMENT.wallZ,14.3];
   // The fire-exit doors belong to the existing pavilion wall, not an extra
   // projecting stair tower. Its former block is omitted below.
-  westBlocks[7]=[-39.6,3,7.2,8,11.3]; // Recessed link at the img6 courtyard corner.
-  westBlocks[5]=[-62.5,10.25,7,10.5,14.3];
-  westBlocks.push([-69,9.25,6,12.5,15.2]); // img3: the outer end has one level cornice.
+  westBlocks[7]=[-39.6,(WEST_RANGE_PLAN.courtZ+7)/2,7.2,7-WEST_RANGE_PLAN.courtZ,11.3];
+  westBlocks[5]=[-62.5,(WEST_RANGE_PLAN.recessRearZ+WEST_RANGE_PLAN.gardenZ)/2,7,WEST_RANGE_PLAN.gardenZ-WEST_RANGE_PLAN.recessRearZ,14.3];
+  westBlocks.push([-69,(WEST_RANGE_PLAN.outerRearZ+WEST_RANGE_PLAN.gardenZ)/2,6,WEST_RANGE_PLAN.gardenZ-WEST_RANGE_PLAN.outerRearZ,15.2]);
   westBlocks.splice(6,1);
   eastBlocks[1][4]=14.3; // The courtyard return has three occupied storeys.
   // Approximate the red outline: a slightly longer front foot, a shallow
@@ -228,6 +231,7 @@ export function createEscapeExterior(THREE,aspect){
     details.sash('1829-range-sash',x,y,z,rotation,1.12,2.45);
   }
   function block(x,z,w,d,h,passage=null){
+    const westForwardRoot=x===-36.5&&z===23;
     const eastInner=(x===36.5&&z===23)||(x===35&&z===35);
     const westDetail=westCourtPhotoProfile(x,z)||westFrontPhotoProfile(x,z)||eastInner;
     const detail=westDetail||eastPhotoProfile(x,z)||courtyardPhotoProfile(x,z)||rearCourtPhotoProfile(x,z)||redesmerePhotoProfile(x,z),foundation=detail&&!westDetail?4:2;
@@ -238,7 +242,8 @@ export function createEscapeExterior(THREE,aspect){
     // end range's west-facing wall over z=10..11.5.
     const serviceJoin=Math.abs(x-81.875)<.01&&z===8;
     const bodyBase=serviceJoin?4.55:base;
-    const body=mesh(worldUV(rearArm?wingWallGeometry(THREE,base):new THREE.BoxGeometry(w,h-bodyBase,d),detail?1.7:3),detail?photoBrick:brick,x,(h+bodyBase)/2,z,true);
+    const body=mesh(worldUV(westForwardRoot?westForwardRootGeometry(THREE,bodyBase,h):rearArm?wingWallGeometry(THREE,base):new THREE.BoxGeometry(w,h-bodyBase,d),detail?1.7:3),detail?photoBrick:brick,westForwardRoot?0:x,westForwardRoot?0:(h+bodyBase)/2,westForwardRoot?0:z,true);
+    if(westForwardRoot){body.name='West forward stepped root masonry';body.userData.collisionFootprint=westForwardRootFootprint();}
     const lowerDepth=serviceJoin?5.5:d,lowerZ=serviceJoin?7.25:z;
     if(serviceJoin)mesh(worldUV(new THREE.BoxGeometry(w,bodyBase-base,lowerDepth),1.7),photoBrick,x,(bodyBase+base)/2,lowerZ,true).name='Redesmere service wall above white base';
     const lowerRanges=passage?[[x-w/2,Math.max(x-w/2,passage.x-passage.width/2)],[Math.min(x+w/2,passage.x+passage.width/2),x+w/2]]:[[x-w/2,x+w/2]];
@@ -246,14 +251,16 @@ export function createEscapeExterior(THREE,aspect){
       if(right<=left)continue;
       const middle=(left+right)/2,width=right-left;
       const lowerHeight=passage?Math.min(foundation,passage.height):foundation;
-      if(westDetail)mesh(worldUV(new THREE.BoxGeometry(width,lowerHeight,d),1.7),photoBrick,middle,lowerHeight/2,z,true);
+      if(westForwardRoot){const lower=mesh(worldUV(westForwardRootGeometry(THREE,0,lowerHeight),1.7),photoBrick,0,0,0,true);lower.name='West forward stepped root foundation';lower.userData.collisionFootprint=westForwardRootFootprint();}
+      else if(westDetail)mesh(worldUV(new THREE.BoxGeometry(width,lowerHeight,d),1.7),photoBrick,middle,lowerHeight/2,z,true);
       else box(detail?white:cream,middle,lowerHeight/2,lowerZ,width,lowerHeight,lowerDepth);
       if(!westDetail)box(detail?white:cream,middle,foundation+(detail?.04:.1),serviceJoin?lowerZ-.0325:z,width+(detail?.13:.23),detail?.16:.22,serviceJoin?lowerDepth+.065:d+(detail?.13:.23));
       if(passage&&base>lowerHeight)mesh(worldUV(new THREE.BoxGeometry(width,base-lowerHeight,d)),detail?photoBrick:brick,middle,(base+lowerHeight)/2,z,true);
     }
     // Outer east white base is retained beyond the mirrored brick inner wing.
     if(eastInner)box(white,41.02,2,z,.12,4,d);
-    if(!rearArm&&x!==-69&&x!==-39.6)box(cream,x,h-.12,z,w+.23,.22,d+.23);
+    if(westForwardRoot)mesh(westForwardRootGeometry(THREE,h-.23,h-.01,.115,true),cream).name='West forward stepped root cornice';
+    else if(!rearArm&&x!==-69&&x!==-39.6)box(cream,x,h-.12,z,w+.23,.22,d+.23);
     if(passage){
       const left=Math.max(x-w/2,passage.x-passage.width/2),right=Math.min(x+w/2,passage.x+passage.width/2);
       // Visible lintel/soffit above the opening, with no foundation across it.
@@ -262,7 +269,8 @@ export function createEscapeExterior(THREE,aspect){
     }
     const innerCornerRoom=Math.abs(x)===22.5&&z===3;
     // These two courtyard hips need a solid underside out to the slate edge.
-    if(!rearArm&&x!==-69&&x!==-39.6)box(stone,x,h+.12,z,w+(innerCornerRoom?.8:.48),.22,d+(innerCornerRoom?.8:.48));
+    if(westForwardRoot)mesh(westForwardRootGeometry(THREE,h+.01,h+.23,.24,true),stone).name='West forward stepped root roof support';
+    else if(!rearArm&&x!==-69&&x!==-39.6)box(stone,x,h+.12,z,w+(innerCornerRoom?.8:.48),.22,d+(innerCornerRoom?.8:.48));
     const principal=x===EAST_SHIFT/2&&z===12;
     if(principal){
       // Pitched slate clears the solid cornice slab (top h+.23).
@@ -270,6 +278,13 @@ export function createEscapeExterior(THREE,aspect){
       hipRoof(26.1,12,38,d,h+.26,2.6).name='Entrance east recessed slate roof';
     }else if(rearArm){
       addWingRoofJunction(THREE,{mesh,worldUV,box,brick:photoBrick,white,roof},1);
+    }else if(westForwardRoot){
+      // The inside corner is open: no separate east shoulder hip remains.
+      // Put the garden-end eaves below the pavilion's upper sashes, rather
+      // than continuing the old ridge through their lower panes.
+      const frontDepth=30-WEST_RANGE_PLAN.innerFrontZ,frontCentre=(30+WEST_RANGE_PLAN.innerFrontZ)/2;
+      const cap=hipRoof(x,frontCentre,w,frontDepth,h+.23,Math.min(w,frontDepth)*.3);
+      cap.geometry=trimWestForwardRootRoof(THREE,cap.geometry,{centreZ:frontCentre});cap.name='West forward stepped root slate roof';
     }else if(eastInner){
       // Both pitches now meet the photo-corrected narrow footprint.
       const roofWidth=z===35?12:9,roofX=z===35?35:36.5;
@@ -285,6 +300,9 @@ export function createEscapeExterior(THREE,aspect){
         if(passage&&y<base&&Math.abs(x+px-passage.x)<passage.width/2+.9)continue;
         // Leave the whole sash clear of the projecting west frontage.
         const wx=principal&&side>0&&x+px< -32&&x+px> -32.9?-32.9:x+px;
+        // The recessed west pavilion now occupies this former front sash
+        // position. Its exposed upper end receives the photographed pair.
+        if(principal&&side>0&&wx>WEST_RANGE_PLAN.innerLeft&&wx<WEST_RANGE_PLAN.innerRight)continue;
         // The filled Redesmere strip uses its adjoining frontage's floor heights.
         if(principal&&side>0&&wx>41&&wx<45.1)continue;
         window(wx,y,z+side*(d/2+.04),side<0?Math.PI:0);
@@ -295,7 +313,7 @@ export function createEscapeExterior(THREE,aspect){
       }
     }
     if(!detail&&w>13)for(const side of [-1,1]){if(principal)continue;mesh(worldUV(new THREE.BoxGeometry(.85,2.1,1.3)),brick,x+side*(w*.32),h+2.6,z,true);box(stone,x+side*w*.32,h+3.69,z,1.1,.15,1.5);}
-    if(westDetail&&z===3)body.name='West courtyard widened link';
+    if(westDetail&&x===-39.6)body.name='West courtyard widened link';
     if(westDetail&&x===-48.6)body.name='West courtyard aligned range';
     if(westDetail&&x===-62.5)body.name='West courtyard recessed end';
     if(westDetail&&x===-69)body.name='West courtyard projecting corner';
@@ -354,6 +372,7 @@ export function createEscapeExterior(THREE,aspect){
   block(squareX,squareZ,squareWidth,squareDepth,14.3).name='East garden pavilion';
   for(const y of [4.08,8.8])box(white,squareX,y,squareZ,squareWidth+.14,.16,squareDepth+.14);
   addEastPhotoDetails(THREE,{model,box,mesh,worldUV,white,brick:photoBrick,roof,steel,material,hipRoof,details});
+  joinWestCrossRangeRoof(THREE,{model,mesh,roof});
   refineFrontInsideCorners(THREE,{model,batches,box,mesh,worldUV,white,brick:photoBrick,roof,material,details});
   // Open rear approaches connect the gaps between the arms to the back road.
   for(const x of [-23,23]){
@@ -363,8 +382,8 @@ export function createEscapeExterior(THREE,aspect){
       // covered its side stairs. Keep the paving edge inside the masonry:
       // the generated vertical ground-contact face must not coincide with
       // the exposed brick below the basement sills.
-      const shape=frontBasementShape(THREE,[[-39,-42.5],[-7,-42.5],[-7,2.5],[-39,2.5],
-        [-39,-1],[-36.8,-1],[-36.8,-24.5],[-37.3,-24.5],[-37.3,-30.7],
+      const shape=frontBasementShape(THREE,[[-39,-42.5],[-7,-42.5],[-7,2.5],
+        [-36.8,2.5],[-36.8,-24.5],[-37.3,-24.5],[-37.3,-30.7],
         [-37.64,-30.7],[-37.64,-36],[-39,-36]]);
       const approach=mesh(new THREE.ShapeGeometry(shape),gravel,0,.23,0);
       approach.rotation.x=-Math.PI/2;approach.name='West rear approach beside basement';

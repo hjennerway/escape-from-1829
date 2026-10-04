@@ -1,0 +1,96 @@
+{
+  "checks": [
+    {
+      "mode": "compiled",
+      "modelMode": "compiled",
+      "newWindows": 3,
+      "probes": 12,
+      "column": [
+        {
+          "face": "west-wing-outer",
+          "x": -37.07,
+          "y": 1.35,
+          "z": 1.4,
+          "w": 1.4,
+          "h": 1.85
+        },
+        {
+          "face": "west-wing-outer",
+          "x": -37.07,
+          "y": 6.55,
+          "z": 1.4,
+          "w": 1.4,
+          "h": 2.9
+        },
+        {
+          "face": "west-wing-outer",
+          "x": -37.07,
+          "y": 11.15,
+          "z": 1.4,
+          "w": 1.4,
+          "h": 2.9
+        }
+      ]
+    },
+    {
+      "mode": "explore",
+      "newWindows": 3,
+      "probes": 12,
+      "column": [
+        {
+          "face": "west-wing-outer",
+          "x": -37.07,
+          "y": 1.35,
+          "z": 1.4,
+          "w": 1.4,
+          "h": 1.85
+        },
+        {
+          "face": "west-wing-outer",
+          "x": -37.07,
+          "y": 6.55,
+          "z": 1.4,
+          "w": 1.4,
+          "h": 2.9
+        },
+        {
+          "face": "west-wing-outer",
+          "x": -37.07,
+          "y": 11.15,
+          "z": 1.4,
+          "w": 1.4,
+          "h": 2.9
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "views": {
+    "marked": {
+      "position": [
+        -69,
+        34,
+        -21
+      ],
+      "target": [
+        -38,
+        6,
+        -12
+      ],
+      "fov": 48
+    },
+    "close": {
+      "position": [
+        -49,
+        11,
+        -1
+      ],
+      "target": [
+        -37,
+        8.8,
+        1.4
+      ],
+      "fov": 50
+    }
+  }
+}

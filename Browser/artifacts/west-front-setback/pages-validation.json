@@ -1,0 +1,29 @@
+{
+  "checks": [
+    {
+      "mode": "compiled",
+      "greenWall": -40,
+      "yellowWall": -41,
+      "panes": 16,
+      "pierCentre": [
+        -72.24,
+        7.585000085830689,
+        14.3
+      ],
+      "pierWidth": 5.800000190734863
+    },
+    {
+      "mode": "explore",
+      "greenWall": -40,
+      "yellowWall": -41,
+      "panes": 16,
+      "pierCentre": [
+        -72.24,
+        7.585000085830689,
+        14.3
+      ],
+      "pierWidth": 5.800000190734863
+    }
+  ],
+  "errors": []
+}

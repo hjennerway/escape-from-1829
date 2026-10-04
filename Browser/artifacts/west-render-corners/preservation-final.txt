@@ -1,0 +1,1 @@
+PASS: 1459 mapped masonry/roof/ground meshes, 1366356 mapped instances and 701 photo openings remain exact.

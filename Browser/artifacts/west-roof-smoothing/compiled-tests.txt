@@ -1,0 +1,25 @@
+npm notice run test:compiled
+npm notice run node test-precompiled-models.mjs && node test-timeline-browser.mjs
+Checking aerial?models=source
+Checking aerial?models=compiled
+Browser: Failed to load resource: the server responded with a status of 404 (Not Found)
+node:internal/modules/run_main:107
+    triggerUncaughtException(
+    ^
+
+AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
++ actual - expected
+
++ 'procedural'
+- 'compiled'
+
+    at file:///C:/Users/Harry/Documents/_escape-from-1829/Browser/test-precompiled-models.mjs:66:54 {
+  generatedMessage: true,
+  code: 'ERR_ASSERTION',
+  actual: 'procedural',
+  expected: 'compiled',
+  operator: 'strictEqual',
+  diff: 'simple'
+}
+
+Node.js v24.20.0

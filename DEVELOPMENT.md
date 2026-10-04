@@ -1,3 +1,399 @@
+## Hampton / Ince garden window alignment (4 October 2026)
+
+The owner's yellow/blue, pink and green annotation corrects the garden
+facade in `west-front-photo-detail.mjs`. Six canted sashes now use the
+central sash's 1.10-unit glazing width. The complete right recessed window
+bank, ledges and blue door share x=-44.70, the horizontal centre between the
+bay root edge x=-49.40 and the pavilion wall x=-40. D3's outside arrival moves
+with that door in both shared plans, preserving its interior anchor.
+
+The two sashes on each lower floor of the green return now have centres at
+z=15.838333 and 18.861667. Their complete sills leave equal 1.653333-unit
+clear gaps at both ends and between the windows across the 7.70-unit wall.
+The latest bay footprint, wall planes, roof and sash heights are retained.
+Reference and dimensions are in
+`Research/west/window-alignment-2026-10-04/README.md`.
+
+The existing west regression verifies all three adjustments, widened pane
+exposure, the former doorway's solid brick and the relocated door leaves.
+Its corner clearance probe moves 0.06 units beyond the wider sash's existing
+walking collision margin. Source, compiled aerial and Explore captures pass
+80 pane probes apiece, twelve unobstructed door-leaf probes and desktop/phone
+views without page/shader errors; Explore also checks the clear new arrival.
+Evidence, saved pre-change sources and logs use
+`Browser/artifacts/west-window-alignment/`.
+
+Focused west, roof-contact, basement and outside-arrival checks pass, along
+with the model suite, source/compiled image and draw comparisons, full-detail
+loading, missing/incompatible/corrupt asset fallbacks and every timeline year.
+The required npm test was continued after its Jarman snapshot failure; only
+Jarman and Leighton/Newton's historical whole-estate expectations fail. Both
+fail again with this correction removed in memory, using the saved validation
+loader. Their old expectations are retained. Remaining-suite results and
+baseline failure logs are saved alongside the matched browser evidence.
+
+Browser sources and the local compiled aerial model are updated. Unity,
+Blender and packaged applications are not regenerated. Independent concurrent
+west-end and sash-column edits were preserved; the compiled model was refreshed
+after those shared inputs changed during validation.
+
+## West basement extension and court gravel (4 October 2026)
+
+The owner's red/yellow/purple annotation extends the side-basement retaining
+wall to the current lean-to, lowers the gap beside it and replaces the adjacent
+court lawn with the existing gravel. `west-side-basement.mjs` derives its end
+coordinates from `WEST_COURT_ALIGNMENT`: retaining wall to z=1.5, passage to
+the court wall at z=5. Floor, courtyard grade, coping, stair entry and gallery
+door retain their levels and dimensions. Foundations follow the extended floor.
+
+`entrance-walks.mjs` extends the same gravel material to the court wall. Terrain,
+older access paving and the rear-approach notch clear the new surfaces, with
+early-year and hidden-layout lawn restoration retained. The reference and
+superseding coordinates are in
+`Research/west/basement-extension-2026-10-04/README.md`.
+
+The focused basement check passes extended floor/coping and gravel rays,
+walking in both directions, end-wall collision and hidden-layout restoration.
+Its new extension probes reject the saved pre-change source. Source overhead
+and close views and compiled views are visually inspected. The model suite
+passes. Validation evidence uses `Browser/artifacts/west-basement-extension/`.
+
+Actual compiled aerial and Explore pages each pass 18 lowered-floor probes,
+four coping probes and nine matching-gravel probes. Explore's keyboard walk
+reaches the new end wall at the lower level. Desktop and phone captures are
+visually inspected with no page or shader errors. Source/compiled rendering
+comparison passes; after simultaneous source revisions, the final timeline
+check is rerun and passes every stop and live collision refresh. The current
+compiled manifest matches the final shared modelling source fingerprint.
+
+The required `npm test` passes all preceding checks and stops at the existing
+historical whole-estate comparison in `test-jarman.mjs:11`: 818,951 primitives
+against 818,930 stored. The saved pre-change source already failed that same
+check with 818,973 primitives. The historical expectation is retained and the
+complete suite is not reported as passing. Its log is `npm-test.log` in the
+same evidence folder. Simultaneous west-window source changes are preserved.
+
+Browser sources, checks, notes, the supplied reference and local compiled
+aerial are updated. Unity, Blender and packaged exports are not regenerated.
+
+## West-end face proportions (4 October 2026)
+
+The owner's green/blue annotation requests 35% / 30% / 35% across the
+outer western end while retaining the total width. `west-refinement.mjs`
+derives the shallow pier from the existing z=5..20.5 limits. Its centre is
+z=12.75 and its width is 4.65; both flanks measure 5.425. The door, central
+glazing, render, courses, cornice, pipe and entrance path follow the pier.
+The left flank's two narrow upper sashes retain their dimensions. Both plan
+copies move only D2's outside arrival to the new door axis; its interior
+anchor stays fixed. Reference and superseding dimensions are in
+`Research/west/end-sections-2026-10-04/README.md`.
+
+`test-west-refinement.mjs` checks the fixed overall width and exact section
+ratios against physical masonry bounds, rays across both facade steps, the
+matching white base and cornice, exposed windows and the door/path alignment.
+Ground-render probes avoid the relocated door glazing. The saved original
+facade fails the ratio regression. Facade courses, all 109 exterior-door
+support/trim checks, walking and outside arrivals pass. Actual source and
+compiled aerial pages measure the same ratios and pass 40 pane probes each,
+with no page/shader errors. Desktop and phone captures were visually reviewed.
+Rebuilt source/compiled image and draw-count comparisons, full-detail loading,
+fallbacks and all timeline stops pass. Basement walking and 108 roof attachments
+also pass; the final generated-model fingerprint matches the current source.
+Evidence and baseline source use
+`Browser/artifacts/west-end-sections/`.
+
+The required `npm test` passes the preceding interior, furniture, game,
+walking, exterior and west-facade checks, then stops at `test-jarman.mjs:11`:
+818,951 primitives versus 818,930 in its protected whole-estate reference.
+The saved pre-change west-end source also fails that check with 818,951
+primitives. The reference is retained, and the complete suite is not reported
+as passing. Full output and the baseline proof are in the evidence folder.
+
+Browser sources and the local compiled aerial model are updated. Unity,
+Blender and packaged application exports are not regenerated.
+
+## West inside-corner roof and face alignment (4 October 2026)
+
+The owner's purple-circled roof is the low forward root's east shoulder hip.
+It is removed with the shoulder foundation, masonry and cornice. The remaining
+root steps beneath the tall pavilion and begins its exposed lower-wing rear
+face at z=21.2. The old two return sections, four sashes and coping follow that
+rear face; their former detached coping strips are removed. The tall pavilion
+and its attached floor bands remain in place.
+
+The purple-marked short main-range face moves back 1.5 units from z=17 to the
+yellow inside-corner wall's z=15.5 plane. The clipping retains exact collision
+polygons, and a new solid brick facet and sampled roof closure/coping continue
+the yellow wall to the pavilion. The existing east corner retains its geometry.
+The latest visual reference and superseding model description are in
+`Research/west/roof-face-2026-10-04/README.md`.
+
+`test-front-inside-corners.mjs` checks the removed roof by name, six open-sky
+and collision samples, six exact wall-plane rays, retained masonry and all
+26 sashes' pane exposure, including the four moved return sashes. The saved
+pre-change source fails this regression. Matching before/after overhead,
+close and opposite views and validation scripts use
+`Browser/artifacts/west-roof-face/`.
+
+Focused corner, west-wing, facade-course, roof-attachment, basement walking
+and period checks pass. The model suite passes. Actual compiled aerial and
+Explore pages each pass six clearance samples, six alignment rays and sixteen
+relocated pane probes, with no page/shader errors. Explore stops at z=15.8125
+against the recessed wall. Desktop/phone captures were visually inspected.
+The final compiled manifest matches the current source fingerprint.
+Final source/compiled image and draw-count comparisons, full-detail loading,
+missing/incompatible/corrupt asset fallbacks and every timeline stop pass.
+
+The saved-baseline comparison preserves all 1,444,714 primitives whose bounds
+do not intersect the correction area, including the opposite corner; nine
+primitives are removed locally. The required `npm test` passes preceding
+checks and stops at the historical Jarman whole-estate snapshot: 818,973
+primitives versus 818,930 stored. The saved pre-change model also fails, with
+818,982 primitives. The historical expectation is retained, and the full
+suite is not reported as passing. Logs are in the same evidence folder.
+
+Only browser sources, tests, references and the local compiled aerial are
+updated. Unity, Blender and packaged application exports are not regenerated.
+
+## Front west garden return: windows and setback (4 October 2026)
+
+The owner's green/yellow photograph and matching overhead traces supersede
+the earlier blank inner west return. The green wall now sits at x=-40,
+one unit behind the retained yellow lower-wing face at x=-41. It has two
+sashes on each lower floor; the upper west wall remains blank and the two
+upper garden-end windows stay exposed. The upper pavilion is x=-40 to -35,
+with its retained z=21.2 end. These dimensions are visual estimates.
+
+`west-front-setback.mjs` supplies a stepped low-root footprint shared by
+masonry, foundation, cornices and walking collision. The lower roof meets
+the upper pavilion beneath its windows. The first yellow sash clears the
+corner at z=22.1. Three generic sashes now inside the pavilion are omitted.
+The garden door and flank glazing keep their existing x=-47.1 axis. The
+complete pavilion and its upper cornices retain their 1849 construction
+period in one group, including after aerial material batching.
+
+The rear west section, opposite wing, court wall, broad cross-range depth,
+outer end and fire escape retain their geometry. An exact comparison with
+the saved pre-change source preserves all 1,444,316 primitives outside the
+front correction bounds; the local scope has 16 net added primitives.
+Original references and superseding dimensions are in
+`Research/west/front-setback-2026-10-04/README.md`.
+
+Focused west, nearby-corner, facade-course, roof-contact, basement, general
+exterior and period checks pass. Fixed photograph-derived pane probes pass
+and reject the saved original model. The required `npm test` was continued
+from the updated general exterior survey; all preceding checks pass before
+`test-jarman.mjs:11` reaches its already-divergent whole-estate snapshot.
+The saved pre-change model had 818,966 primitives against 818,930 stored;
+this local repair has 818,982. The historical expectation is retained,
+and the complete suite is not reported as passing.
+
+The local aerial model is regenerated and its fingerprint matches the final
+sources. The model suite, source/compiled image and draw-count comparisons,
+full-detail loading, fallback assets and timeline/walking-obstacle checks
+pass. Actual compiled aerial and Explore pages pass 16 visible green-pane
+probes each and walking collision against the new wall, with no page or
+shader errors. Matching garden, overhead and aerial views and phone captures
+are recorded under `Browser/artifacts/west-front-setback/`, together with
+baseline sources, preservation proof and validation logs.
+
+Only browser sources, checks, references, notes and the local compiled aerial
+are updated. Unity, Blender and packaged exports are not regenerated.
+
+## West wing marked outline correction (4 October 2026)
+
+The owner's follow-up identifies the missing inner square garden projection
+and asks for both sides of the broad west cross-range to move inward. The live
+Google Earth link was opened and checked against the supplied overhead image.
+`west-range-plan.mjs` now shares the corrected outline with the base estate,
+front, court and end detail modules. Court and garden planes move inward by
+four units each: the main body depth becomes 12.5 rather than 20.5, and the
+outer end becomes 15.5 rather than 23.5. These are visual modelling estimates.
+
+The restored full-height inner return has a blank west wall and paired upper
+garden-end sashes. Roofs, floor bands, cornices, rainpipes, openings, entrance
+recess and fire escape follow the physical wall changes. The attached court
+lean-to moves intact, retaining its 3.5-unit depth. The long lower forward wing,
+west-end entrance/path axis and sunken basement geometry remain intact.
+References and superseding dimensions are in
+`Research/west/outline-2026-10-04/README.md`.
+
+Focused west, roof-contact, facade-course and basement/walking checks pass.
+The facade survey now covers 22 courses, including both new inner-pavilion
+cornices, with 78 explicit and 278 shared joins and 2,360 surface probes.
+New west checks reject roof or collision remnants at the vacated wall strips,
+require solid projecting masonry and exposed end windows, and retain the
+blank west return and accessible entrance. Matched camera evidence and all
+validation logs use `Browser/artifacts/west-outline/`.
+
+The five affected outside arrivals (D2, D3, D5, D6 and F4) are synchronized in
+the canonical and browser plan data. Their interior anchors and room geometry
+are retained; rays from the new exterior arrivals verify the rendered door
+leaves. The outside route/guard checks and general exterior probes now follow
+the revised wall planes. Final outside walking passes all arrivals, seven stair
+round trips and 1,264,760 movement probes. Source and compiled headroom checks
+pass 20 flights / 2,340 tread samples; 107 guards pass 299 prevention probes.
+Actual Explore keyboard movement also stops at the shifted landing rail, with
+three desktop, dusk and phone views reviewed without runtime/shader errors.
+
+The exact scope comparison preserves 1,443,014 outside primitives, adding 35
+inside the correction bounds. The aerial asset was rebuilt and its fingerprint
+matches the final model sources. The complete model suite passes. Compiled/
+source rendering checks pass; a timeline screenshot write collided with a
+concurrent run, so that same timeline check was rerun unchanged with its output
+directory isolated under `west-outline/timeline/`, where all assertions pass.
+Actual compiled aerial and Explore geometry, desktop/phone rendering and tree
+obstacle refresh checks also pass. Browser sources, plan arrivals, checks,
+references and the local compiled aerial are updated. Unity, Blender and
+packaged exports are not regenerated.
+
+The required browser suite was continued from the corrected outside/stair and
+general-exterior probes after its already-passing interior checks. All preceding
+checks pass; the historical whole-estate snapshot in `test-jarman.mjs` still
+fails at line 11. The pre-correction baseline already had 818,931 primitives
+against 818,930 stored, and this authorized local projection adds 35, producing
+818,966 with the revised digest. The outside-scope geometry remains exact;
+the protected snapshot is not rebased and the full suite is not reported as
+passing. Evidence is in `suite.log`, `suite-resumed.log`, `suite-rest.log` and
+`suite-exterior-final.log` under `Browser/artifacts/west-outline/`.
+
+## Supplied engraving in the visitors’ hall (4 October 2026)
+
+`hall-furniture-models.mjs` replaces the simple landscape with the exact
+owner-supplied “Cheshire Lunatic Asylum” PNG, bundled locally under `dist/art/`.
+Both existing framed copies share one 1897 × 1170 canvas texture. The complete
+1897 × 1056 engraving, including its caption, fits without stretching or
+cropping, with small neutral paper margins. Timber, frame geometry, wall
+positions and the other hall print textures retain their existing definitions.
+
+The focused hall and general furniture checks pass. Chrome checks both actual
+frame instances in Escape and Explore against the uploaded image pixel for
+pixel; desktop and phone views are visually reviewed with no page or shader
+errors. Captures, the repeatable review script, byte-identical asset proof and
+validation records are in `Browser/artifacts/hall-artwork/`.
+
+The required `npm test` passes the preceding furniture, gameplay and interior
+checks, then stops at `test-asylum-outside.mjs:12` on the F4 exterior stair walk
+toward (-63.55, 26.05). That check’s 143-source dependency graph excludes the
+edited artwork builder. The full suite is not reported as passing; its output
+is `Browser/artifacts/hall-artwork/npm-test.log`.
+
+The 172-source aerial compiler graph also excludes this interior builder, so
+the engraving needs no aerial rebuild. Its current manifest differs from the
+current exterior source fingerprint independently of this change; no aerial
+assets are regenerated here. Only browser interior source, the supplied local
+artwork, notes and review evidence change. Unity, Blender and packaged
+desktop/Android exports are not regenerated.
+
+## Ground-floor east linen work area (4 October 2026)
+
+The owner clarified that the matching empty space is below the checkers area,
+across the corridor from the ground-floor linen lobby. `hall-furnishings.mjs`
+extends the ward service area to that side and adds six fixed records: a table
+at (41.0, 12.8), two inward-facing Windsor chairs, supported folded linen and
+a sewing basket, plus a matching bench at (41.0, 17.8). Existing linen cupboards,
+trolley, bench and duty board retain their IDs and poses. First-floor furnishings
+also retain their poses, including the new checkers group.
+
+`hall-furniture-models.mjs` adds one original folded-linen prop, reusing the
+existing cloth stack helper and materials. Its 168 triangles bring the ten hall
+models to 8,360 triangles. The shared catalogue now has 30 kinds. Ground-floor
+furnished SVG/PNG and the drawing palette are refreshed; the first-floor drawing
+still records the checkers addition. These are fictional game furnishings.
+
+The focused hall check passes all 45 records across four seeds, supported props,
+chair directions, complete corridor lanes, cabinet access and 40 walked
+collisions. Actual Chrome Escape/Explore checks pass all 45 rendered records,
+nine keyboard collision approaches, wall contacts, corridor walking and matching
+fixed furnishings. Wide desktop, phone and Explore views, the linen worktable,
+bench, folded-linen model and updated plan are visually reviewed without runtime
+or shader errors. Captures and validation are in
+`Browser/artifacts/hall-furnishings/`; the run log is
+`Browser/artifacts/linen-worktable-browser.log`.
+The shared furniture browser regression also passes all 30 models, rendered
+transforms, storage wall contact, keyboard collision and new-game fixed/variable
+behaviour without runtime/shader errors. Its log is
+`Browser/artifacts/linen-worktable-regression.log`, with validation in
+`Browser/artifacts/room-furniture/validation.json`. All 32 original hall
+furnishing records are independently compared with the original source and
+remain unchanged.
+
+The required `npm test` passes the furniture, game and interior checks and
+preceding exterior checks, then stops at `test-jarman.mjs:11` on the existing
+protected exterior snapshot mismatch: 818,931 primitives versus 818,930 expected,
+with a changed hash. That test's dependency graph excludes both edited interior
+modules; the historical snapshot is retained. The complete suite is not reported
+as passing. Full-suite output is `Browser/artifacts/linen-worktable-suite.log`.
+
+The aerial compiler excludes both edited interior modules, so these changes
+require no aerial rebuild. Browser sources, checks, notes and furnished drawings
+are updated. Unity, Blender and packaged desktop/Android exports are not
+regenerated. Modelling scope is in `Research/room-furnishings/README.md`.
+
+## West wing paired-photo proportions (4 October 2026)
+
+The four owner-supplied photo/game pairs refine `west-front-photo-detail.mjs`
+and `west-refinement.mjs`: lower outer and bay roof crowns, shorter pavilion
+and bay sashes, narrower bay glazing, lower west chimney caps, and a wider,
+better-centred west-end pier. White render now covers the complete west-end
+ground storey. The entrance path, cornice and rainpipe follow the new entrance
+axis. Established footprints, floor heights, basement and stairs remain intact.
+The estimates and original references are in
+`Research/west/proportions-2026-10-04/README.md`.
+
+Focused west, facade-course, roof-contact, basement and modern-entrance checks
+pass. New probes verify white render across the entire end, blank brick margins,
+the shallow bay roof and the accessible entrance axis. All four matched camera
+comparisons and the aerial overview were visually reviewed without page or
+shader errors. An exact before/after comparison finds 1,443,480 primitives
+outside the west-wing and entrance-path scope unchanged, with no net increase
+in primitives inside that scope.
+
+The local aerial binary was rebuilt and its fingerprint matches the current
+modelling source. `npm run test:models` passes the geometry, binary, layout,
+detail, performance and control checks. `npm run test:compiled` passes source/
+compiled image and draw-count comparisons, full detail, shadows, controls,
+portrait framing, fallback assets and timeline/walking-obstacle checks. Actual
+compiled aerial and procedural Explore pages also pass revised-pier geometry,
+desktop/phone captures and runtime checks. Logs, comparisons and validation
+records are in `Browser/artifacts/west-proportions/`.
+
+The required `npm test` passes the preceding checks and stops at the existing
+`test-jarman.mjs:11` protected-estate snapshot mismatch. The original west-source
+baseline already contains 818,931 primitives against the stored 818,930.
+This refinement also legitimately changes that whole-estate digest; the stored
+historical snapshot has not been rebased and the full suite is not reported as
+passing. Browser sources, checks, reference notes and the local compiled aerial
+are updated. Unity, Blender and packaged exports are unchanged.
+
+## Second east first-floor checkers table and bench (4 October 2026)
+
+`hall-furnishings.mjs` extends the first-floor recreation area across the
+open junction and adds a matching table at (41.0, 12.8), four inward-facing
+Windsor chairs, a supported draughts board and a bench at (41.0, 17.8) facing
+the table. The original 32 hall furnishing records retain their IDs and poses;
+the new seven records remain fixed between games and share the Escape/Explore
+rendering, navigation, collision and sight system. The corridor between the
+two table groups stays clear. The first-floor furnished plan is refreshed.
+
+The focused hall check passes 39 records across four seeds, supported props,
+chair directions, corridor lanes, cabinet access and 36 walked collisions.
+Actual Chrome Escape/Explore checks pass all 39 rendered records, seven keyboard
+collision approaches (including the new table and bench), wall contacts, corridor
+walking and identical fixed furnishings. Desktop, phone, Explore and the revised
+first-floor plan are visually reviewed without runtime/shader errors. The new
+wide views and validation report are in `Browser/artifacts/hall-furnishings/`.
+The required `npm test` passes the furniture, game and interior checks, then
+stops at `test-jarman.mjs:11` on an unrelated protected exterior snapshot:
+818,935 primitives versus 818,930 expected, with a changed hash. That check
+does not load the edited interior source; its historical snapshot is retained.
+The complete suite is not reported as passing. Output is in
+`Browser/artifacts/checkers-extension-suite.log`.
+The aerial compiler's 171-input graph excludes this interior source, so this
+furniture change needs no aerial rebuild.
+Only browser interiors and their checks/review notes change; Unity, Blender and
+packaged desktop/Android exports are not regenerated.
+
 ## Room doors connected to their frames at the hinges (4 October 2026)
 
 `asylum-doors.mjs` replaces the detached centre-line pivot with the room-facing
@@ -8486,3 +8882,364 @@ manifest remain unchanged. The separate aerial compiler excludes these
 interiors, so no compiled model rebuild is needed. Only browser sources,
 shared plans, tests, notes and review drawings change; Unity, Blender and
 packaged desktop/Android exports were not regenerated.
+
+## Shallower Hampton / Ince end (4 October 2026)
+
+The owner's red/yellow and purple/green screenshot guides pull both sides of
+this west cross range inward by another two model units. The main body is
+8.5 units deep, and the outer end is 11.5. Both octagonal bay profiles and all
+18 windows retain their dimensions and follow their respective moved walls.
+The host hip and attached garden bay roof meet at the new lower ridge; end
+masonry, white base, bands, recess infill, stair and lean-to follow the outline.
+D3, D5, D6 and F4's outside destinations follow the physical doors in both plan
+copies. Interior outlines and door anchors retain their existing definitions.
+See Research/west/end-depth-2026-10-04/README.md for the saved annotation and
+superseding coordinates.
+
+West geometry, walking, basement, stair clearance, roof joins, facade courses,
+model checks, compiled/source images, full detail, fallbacks and all timeline
+years pass. Actual compiled aerial and Explore pages pass 72 exposed octagonal
+pane probes each, the moved-wall collision check and desktop/phone captures,
+with no page/shader errors. The depth-only comparison preserves 1,443,585
+primitives outside the marked range and both bay meshes/profiles exactly.
+Matching before/after views, baseline sources and logs are in
+Browser/artifacts/west-end-depth/.
+
+The required npm test run was continued following the separate concurrent
+inside-corner correction. The shifted court bay's old walking sample now uses
+its actual face and passes. The only remaining failures are Jarman and
+Leighton/Newton's historical whole-estate snapshots; both also fail with the
+saved pre-change model. Their expected records are retained. The final local
+compiled aerial matches the current source, including that independent corner
+revision. Browser sources and local generated aerial assets are updated;
+Unity, Blender and packaged desktop/Android exports are not regenerated.
+
+## Tripartite windows: 2-3-2 pane columns (4 October 2026)
+
+Matching flat sash groups now have two columns in each narrow sidelight and
+three in their centre. `photo-detail-primitives.mjs` accepts `columns`, with
+three as the default; the garden flanks, outer-end middle window and door
+sidelights, rear-wing end window, and mirrored entrance elevations explicitly
+select two for their side sections. All opening widths, heights, positions,
+materials, outer frames, six rows, meeting rails, heads and sills are retained.
+
+The pane audit checks 22 side sections and nine centres with 665 actual
+pane/frame/rail rays, including the reflected rear group and east entrance.
+The original 3-3-3 geometry is rejected. The scene comparison excludes only
+the affected vertical bars and retains 1,445,709 other primitives and every
+opening dimension exactly. The comparison incorporates the separate concurrent
+west-end proportion edit, preserving that work. Forty-four third-position
+bars become 22 centred bars, with only Float32 instance rounding allowed.
+
+Evidence, reference, baselines, captures and validation logs are in
+`Browser/artifacts/tripartite-panes/`. Browser sources and local compiled aerial
+assets are updated; Unity, Blender and packaged desktop/Android exports are
+not regenerated. See `Research/west/README.md` for modelling scope.
+
+Final pane validation: source, compiled aerial and Explore each pass all 665
+pane/rail probes. Before geometry is rejected; five corresponding desktop
+views and both phone captures were visually reviewed, with no page or shader
+errors. The rebuilt aerial manifest matches current source. Existing west
+refinement, shared exterior, building-detail, binary-format, source/compiled
+image comparison, full-detail, fallback and complete timeline checks pass.
+
+The required `npm test` run passes all preceding checks and stops at
+`test-jarman.mjs:11` on its saved whole-estate fingerprint. The same assertion
+also fails with the original 3-3-3 pane builders restored (818,973 primitives
+versus 818,930 expected); the updated panes account for exactly 22 fewer
+primitives (818,951). The historical reference is retained. Output is in
+`suite.txt` and `jarman-before.txt`; all focused pane/model/browser checks pass.
+
+
+## Stepped west rear-court corner moved forward (4 October 2026)
+
+The owner's yellow/purple/blue/red screenshot advances the outer stepped
+rear corner four units towards the court: outerRearZ=9 becomes 5 and
+recessRearZ=11 becomes 7. The recessed red return and its upper sash follow
+equally. The low bay, masonry, windows, pipes, base, floor bands, cornices
+and roofs derive their positions from the shared west-range plan. The main
+court and garden faces retain z=5 and z=13.5; the outer garden end stays
+z=20.5. See Research/west/rear-forward-2026-10-04/README.md.
+
+The latest concurrent west-end proportion rule centres its 30% entrance
+section on the full end. That pier, entrance and straight path follow the
+extended end's new centre, moving two units towards the court. The path's
+shape, rotation, scale and material remain exact. An isolated comparison
+using frozen current model sources preserves all 1,443,573 other primitives
+outside the marked cross range, both canted bay geometries/collision profiles
+and all eighteen bay window dimensions. Earlier comparison records are kept
+alongside the current proof in Browser/artifacts/west-rear-forward/.
+
+The rear-corner regression checks actual brick planes, equal four-unit
+movement, full roof coverage, exposed red-return panes and collision in the
+newly occupied strips. The original rear limits fail its outer-depth check.
+West refinement, shared exterior, basement passage, walking, roof contacts,
+facade courses, periods and model/binary/layout/control checks pass.
+Actual compiled aerial and Explore pages each pass 132 exposed pane samples,
+both moved-wall collision checks, desktop/phone views and no page/shader
+errors. The rendered roof joins and complete windows were visually reviewed.
+
+The local aerial asset is rebuilt and its final source fingerprint matches.
+Source/compiled image and draw-count comparison, full detail, missing/bad
+asset fallbacks and every timeline stop pass. Independent workspace rebuilds
+initially replaced the manifest during comparison. Its isolated rerun keeps
+the already hash-checked manifest/binary chosen at test startup; original
+fallback routes and assertions are retained. Actual page checks use the
+ordinary server and current manifest.
+
+The required npm test run reaches Jarman's historical whole-estate snapshot;
+all remaining commands are then run. Only Jarman and Leighton/Newton's
+protected whole-estate references fail. Both also fail with this correction's
+original rear limits restored: 818,951 versus 818,930 primitives for Jarman,
+and 882,998 versus 882,977 for Leighton/Newton. Their expected records are
+retained. The remaining 32 commands pass. Logs, original sources, preservation
+proof, matching images and final manifest metadata are in the evidence folder.
+
+Browser sources, tests, modelling notes and local generated aerial assets are
+updated. Unity, Blender and packaged desktop/Android exports are not regenerated.
+
+## Additional west courtyard window column (4 October 2026)
+
+The circled blank portion of the rearward west wing now has a complete sash
+column at z=1.4 on its three existing floor levels. The lower 1.4 x 1.85 sash
+matches the basement row; both upper 1.4 x 2.9 sashes match the taller rows.
+The column follows the 3.9-unit bay spacing with matching divisions, heads,
+sills and stone marker. The shared browser builder supplies aerial, Explore
+and game geometry. The existing exterior regression now expects 27 outer
+windows instead of 24 and retains its exposure checks. The lean-to retains
+its arrangement. See Research/west/README.md for the modelling reference.
+
+The west refinement, courtyard clearance/roof coverage, facade-course and
+shared exterior checks pass. The local aerial model is rebuilt. Before/after
+source, compiled and Explore desktop/phone views, twelve new-pane probes,
+page/shader checks and broader validation logs are saved in
+Browser/artifacts/west-court-extra-column/. Unity, Blender and packaged
+desktop/Android exports are not regenerated.
+
+Final validation: the required npm test invocation passed its first 65 checks
+before an existing ground-contact report could not be overwritten. That
+check passes with a separate report path. All remaining suite commands were
+then run: only Jarman and Leighton/Newton's historical whole-estate snapshots
+fail. Both failures also reproduce with the saved pre-change wing builder;
+their reference records are retained. The completed column passes source,
+compiled and Explore pane probes and desktop/phone visual review. The final
+rebuilt model matches the current source fingerprint; source/compiled image,
+full-detail and fallback comparisons pass. The timeline browser check passes.
+Validation logs, baseline sources and all report outputs are kept in the
+same evidence folder.
+
+## West court roof-step masonry (4 October 2026)
+
+The owner's purple-circled tiled face was the almost vertical slate closure
+between the tall cross range and lower rear arm. west-court-photo-detail.mjs
+replaces it with a solid vertical return using the adjacent photo-brick
+material. Three joined white-render cornice profiles continue around its top;
+the two existing pitched roofs retain their geometry. See
+Research/west/roof-masonry-2026-10-04/README.md and the original builder,
+matching views and validation in Browser/artifacts/west-roof-masonry/.
+
+The updated west regression rejects the original tiled face. West geometry,
+shared exterior, roof contacts, inside corners and all 25 joined facade-course
+checks pass. The rebuilt compiled aerial and Explore pages each pass 12 brick,
+12 trim and eight retained-roof probes with no page or shader errors. Desktop
+and phone views were visually reviewed. Browser sources and local generated
+aerial assets are updated; Unity, Blender and packaged exports are not
+regenerated.
+
+
+## Hampton / Ince courtyard windows and flat roof (4 October 2026)
+
+The owner's green/red/purple/yellow game annotation identifies the lower
+recessed pairs beside the polygonal court bay, its canted sashes and the low
+stair-projection roof. Each green lower pair becomes one sash at x=-62.65,
+the horizontal centre of the exposed wall between x=-61.65 and -63.65.
+The upper pair and the four broader projection windows retain their exact
+dimensions and positions. All six red canted sashes now share the central
+purple sash's 1.30-unit glazing width, retaining centres, heights and divisions.
+
+The yellow hip becomes a level slate deck at y=8.81, seated on the existing
+masonry. A pale rim rises only 0.20 above it. The short roof pipe and its
+adjacent overlapping run are removed so neither crosses the sash bank.
+The far end downpipe remains. See Research/west/court-window-roof-2026-10-04.
+
+West refinement, roof contacts, facade courses, shared exterior, basement
+walking and the model suite pass. The added geometry checks reject the saved
+original narrow sashes. Actual compiled aerial and Explore pages each pass
+60 affected-pane probes, sash placement/width, flat deck and rim checks,
+and removal of both local pipes, with no page or shader errors. Matching
+desktop and phone views were visually reviewed. The opening comparison
+preserves all 40 unmarked court windows and all 70 garden openings exactly.
+
+The rebuilt source/compiled image and draw-count comparison, full-detail
+loading and asset fallbacks pass. Concurrent shared-model edits required
+rebuilds during validation; a separate screenshot-write failure was resolved
+by redirecting only test output paths into this task's evidence directory.
+Assertions and browser scenarios are retained. Final timeline evidence is
+in Browser/artifacts/west-court-window-roof/timeline-final.txt.
+
+The required npm test run passes preceding checks and stops at Jarman's
+historical whole-estate snapshot (818966 primitives versus 818930 expected).
+Of the 33 remaining commands, 32 pass; Leighton/Newton's historical snapshot fails.
+Both failures also reproduce with the saved original courtyard source; their
+expected records are retained. Before/after images, original sources, pane
+checks, preservation proof and logs are in Browser/artifacts/west-court-window-roof.
+
+Browser sources, regression checks, modelling notes and local generated aerial
+assets are updated. Unity, Blender and packaged desktop/Android exports are
+not regenerated.
+
+Final courtyard validation: the complete timeline browser check passes every
+source/compiled year, selection, navigation, phone and live walking collision
+check. The final local aerial asset is rebuilt after the latest independent
+shared-model edit, and its source fingerprint matches. Saved manifest metadata
+is in Browser/artifacts/west-court-window-roof/final-model.json.
+
+## West inside-corner wall extension and flat roof (4 October 2026)
+
+The owner's yellow guide extends the lower wall into the open corner between
+the garden pavilion and west forward wing. The new perimeter follows
+x=-33.65 from z=15.5 to 18.5, steps across to x=-32, then meets the low wing
+at z=21.2. Matching brickwork supports a flat dark roof at y=8.83, level with
+the existing lower eaves, and continuous pale coping with joined corners.
+The four former lower-return sashes move onto the two longitudinal walls;
+the landing windows and doorway remain exposed. A single solid footprint
+supplies walking collisions throughout the new section. The upper back wall
+retains its earlier z=15.5 alignment. See Research/west/flat-corner-2026-10-04/.
+
+The focused corner check passes five level-roof samples, three exact wall
+planes, occupied and clear footprint samples, all 104 corner pane probes,
+physical doorway access and collision with the new outer wall. Source,
+compiled aerial and Explore each pass the five roof, three wall and 52 west
+pane probes; Explore reaches the doorway at z=15.8125. Desktop and phone
+views were visually inspected, with no page or shader errors. West refinement,
+roof contacts, exterior geometry and binary-format checks also pass.
+
+Browser sources and local aerial models are updated. Unity, Blender and
+packaged desktop/Android applications are not regenerated. The marked image,
+saved original source, repeatable captures, page probes and validation logs
+are in Browser/artifacts/west-flat-corner/.
+
+Final roof-step validation: the complete suite was continued after updating
+the facade-course count for the three new joined cornices. Only the existing
+Jarman and Leighton/Newton whole-estate snapshots fail; both also fail with
+the original tiled-face builder. Their expected records are retained.
+Concurrent west-roof edits repeatedly invalidated the live manifest during
+checks, so source/compiled image and draw-count comparison, full detail,
+missing/incompatible/corrupt asset fallbacks and every timeline stop were
+verified against a consistent local source snapshot. Actual compiled and
+Explore corner probes and desktop/phone views also pass for that snapshot.
+Evidence and fingerprints are in Browser/artifacts/west-roof-masonry/.
+
+## Raised and joined west cross-range roof (4 October 2026)
+
+The purple-marked small hip now continues the main ridge at y=17.08, roughly
+0.6 above its former crown. The garden shoulder covers the outer pavilion
+brick strip; the court pitch meets the polygonal bay above its rear brick
+and cornice. Sampled shared edges match the retained slate, including the
+middle garden branch valley. Overlapping old roof faces are cut away.
+The wall outlines, windows and walking routes retain their definitions.
+See Research/west/roof-join-2026-10-04/README.md.
+
+The new roof regression checks both marked contacts, ridge continuity,
+upward faces and shared-edge heights. Disabling the new helper reproduces
+the uncovered-pavilion failure. Existing west refinement, exterior geometry,
+inside-corner, courtyard and roof-contact checks pass. Source and compiled
+views were visually reviewed from the marked, opposite and courtyard angles;
+21 visible compiled-scene roof probes cover the marked masonry, with no
+page or shader errors. Source/compiled rendering, full detail and asset
+fallback comparisons pass. Evidence is in Browser/artifacts/west-roof-smoothing/.
+
+Browser modelling sources, the roof regression, modelling notes and the
+local compiled aerial model are updated. The saved final manifest matches
+current source. Unity, Blender and packaged application exports are not
+regenerated.
+
+After the concurrent facade-course consolidation, the final live workspace
+passes all 22 explicit courses, 3,000 surface probes, 36 complete-scene west
+probes, west refinement and all 3,888 roof-contact probes. This supersedes the
+intermediate count of 25 courses above. The final live aerial asset was rebuilt
+and its source fingerprint matched at completion.
+
+Final west inside-corner validation: the npm test run, continued commands and
+direct reruns complete 124 checks, with 122 passing. The two failures are the
+historical Jarman and Leighton/Newton whole-estate records; both also fail
+with the saved original inside-corner source. Three furniture checks timed
+out in the continuation runner and pass when invoked directly. The initial
+shared facade-count failure also passes after the concurrent facade update.
+The new adjacent west-roof-join check passes. Expected estate snapshots are
+not rebased.
+
+The full compiled rendering comparison passes once, including image similarity,
+exact draw counts, full detail, controls and fallback assets. Final complete
+compiled/timeline reruns were interrupted by concurrent west-roof source edits
+and a shared screenshot file lock. The delivery model was rebuilt afterward
+and matches the current source fingerprint. Its checksum, five flat-roof
+probes, period-split collision footprints and four moved sash records pass
+the scoped compiled-asset check. This verifies the delivered corner without
+claiming a successful final complete compiled/timeline run. Evidence is in
+Browser/artifacts/west-flat-corner/.
+
+Final roof validation: the independent low stair-bay deck is retained in full.
+The new join remains above y=14.5; the final source and compiled side views
+have no hanging slate strips. The required npm test invocation passed its
+preceding checks and stopped at Jarman's historical whole-estate snapshot.
+All 33 following commands ran separately: 32 pass and Leighton/Newton's
+historical whole-estate snapshot fails. Both protected snapshot assertions
+also fail with the roof helper disabled; their expectations are retained.
+The final source/compiled geometry and rendering, full detail and fallback
+comparisons pass. The final manifest again matches current source.
+
+The final timeline rerun passes all source/compiled periods, reloads, camera
+navigation, selections, keyboard controls, mobile views and live walking
+collision refresh. Its screenshots use this change's own compiled-tests
+directory after an existing timeline screenshot could not be overwritten.
+Only output paths are redirected; assertions and scenarios are retained.
+The successful result is in Browser/artifacts/west-roof-smoothing/timeline.txt.
+
+## West render bands and cornice corners (4 October 2026)
+
+The owner's yellow strip was doubled by the low forward root's cornice and
+roof support projecting through the taller garden pavilion. Their trim-only
+footprints now exclude that pavilion and its existing band projection. The
+masonry/foundation footprints and slate roof geometry retain their definitions.
+
+The outer end's former 4.08 / 8.8 bars now share the adjoining 4.05 / 8.6
+levels. Two 0.18-high courses follow the court steps, both entrance-pier
+returns, the outer front and garden bays continuously. Three level cornice
+profiles wrap the outer end and front corner, with the centre gutter aligned
+to them. Both middle garden-bay cornices also join their straight stems and
+canted corners. See Research/west/render-corners-2026-10-04/README.md.
+
+Validation: all 22 swept courses, 117 explicit corners, 282 shared ward/court/
+shop corners, 3,000 top/underside samples and 36 complete-scene west samples
+pass. The original trim builders fail the new corner regression. A separate
+comparison preserves all 1,459 originally textured masonry/roof/ground meshes,
+1,366,356 mapped instances and 701 photo openings exactly; render/stone trim
+is excluded from that preservation comparison. West geometry, roof contacts,
+inside corners, basement walking, stairs, collisions and period checks pass.
+
+Actual source aerial, compiled aerial and Explore pages each pass 36 trim
+and 16 exposed-pane probes, seven desktop views and a phone view with no page
+or shader errors. The broader facade browser survey passes 18 source and 18
+compiled views, including Upton, Irby/Ashley, Hale, Farndon and Laundry.
+Before/after, actual-page and wider corner captures were visually reviewed.
+Compiled/source image and exact draw-count comparison, full-detail and all
+missing/incompatible/corrupt-asset fallback assertions pass. The full timeline
+browser check passes every period, navigation, phone and walking checks.
+An existing timeline screenshot could not be overwritten; its isolated rerun
+changes only the output directory and retains every original assertion.
+
+The required npm test passes its first 90 commands and stops at Jarman's
+historical whole-estate snapshot. All remaining 33 commands are then run:
+32 pass and only Leighton/Newton's historical snapshot fails. Both failures
+also reproduce with the saved original trim builders restored in the current
+model: Jarman 818,966 versus 818,930 expected; Leighton/Newton 883,013 versus
+882,977 expected. Current counts are 818,947 and 882,994. Their protected
+reference records are retained, and the complete suite is not called passing.
+
+The final local aerial asset is rebuilt after the independent concurrent
+roof update and matches the current source fingerprint. Browser sources,
+tests, research/development notes and local generated aerial assets are
+updated; Unity, Blender and packaged desktop/Android exports are not
+regenerated. Baselines, scripts, logs, captures and final reports are in
+Browser/artifacts/west-render-corners/.

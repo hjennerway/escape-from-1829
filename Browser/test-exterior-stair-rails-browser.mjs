@@ -3,6 +3,7 @@ import {spawn} from 'node:child_process';
 import {mkdir,writeFile} from 'node:fs/promises';
 import {fileURLToPath} from 'node:url';
 import {chromium} from 'playwright';
+import {WEST_FRONT_E_PLAN} from './dist/west-front-photo-detail.mjs';
 const server=spawn(process.execPath,['Browser/serve.mjs'],{cwd:new URL('../',import.meta.url),windowsHide:true,env:{...process.env,PORT:'0'},stdio:'pipe'});
 const base=await new Promise((resolve,reject)=>{server.stdout.once('data',d=>resolve(String(d).match(/http:\/\/127\.0\.0\.1:\d+/)[0]));server.once('error',reject);});
 const out=new URL('./artifacts/exterior-stair-rails/',import.meta.url);await mkdir(out,{recursive:true});
@@ -26,7 +27,7 @@ try{
   {name:'inner-east',position:[15,7,-36],target:[22,3.5,-28],fov:60},
   {name:'inner-west',position:[-15,7,-36],target:[-22,3.5,-28],fov:60},
   {name:'front-steps',position:[7,5,31],target:[0,2,24],fov:58}
- ];
+ ].map(view=>view.name.startsWith('west-garden')?{...view,position:view.position.map((n,i)=>i===2?n+WEST_FRONT_E_PLAN.bayRoot-21:n),target:view.target.map((n,i)=>i===2?n+WEST_FRONT_E_PLAN.bayRoot-21:n)}:view);
  // Optional selection keeps follow-up visual checks focused on changed views.
  const selected=process.argv.find(arg=>arg.startsWith('--views='))?.slice(8).split(',');
  const annexe=await page.evaluate(()=>{
@@ -50,10 +51,10 @@ try{
  await page.screenshot({path:fileURLToPath(new URL('west-dusk.png',out))});
  await page.setViewportSize({width:390,height:844});await page.evaluate(v=>window.railTest.walker.setView({...v,fov:85}),views[0]);
  await page.screenshot({path:fileURLToPath(new URL('west-mobile.png',out))});
- const collision=await page.evaluate(()=>{
-  const {walker}=window.railTest;walker.setView({position:[-62.1,6.12,26.05],target:[-62.1,6.12,30]});
+ const collision=await page.evaluate(shift=>{
+  const {walker}=window.railTest;walker.setView({position:[-62.1,6.12,26.05+shift],target:[-62.1,6.12,30+shift]});
   walker.keys.add('KeyW');for(let i=0;i<60;i++)walker.update(.02);walker.keys.clear();return {...walker.actor};
- });assert(collision.z<26.45&&collision.y>4.2,'Actual exploration movement stops at the west landing railing');
+ },WEST_FRONT_E_PLAN.bayRoot-21);assert(collision.z<26.45+WEST_FRONT_E_PLAN.bayRoot-21&&collision.y>4.2,'Actual exploration movement stops at the west landing railing');
  assert.deepEqual(errors,[]);await writeFile(new URL(selected?'final-browser-validation.json':'browser-validation.json',out),JSON.stringify({views:captures.map(v=>v.name),collision,errors},null,2));
  console.log(`PASS: real exploration railing collision, ${captures.length} desktop views, dusk/mobile views, no browser or shader errors.`);
 }finally{await browser.close();server.kill();}

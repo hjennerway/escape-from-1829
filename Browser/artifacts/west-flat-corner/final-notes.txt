@@ -1,0 +1,1 @@
+{"suite":{"total":124,"passed":122,"remainingFailures":["test-jarman.mjs","test-leighton-newton.mjs"],"directTimeoutRerunsPassed":["test-medical-furniture.mjs","test-reception-furniture.mjs","test-hall-furnishings.mjs"],"additionalCurrentCheck":"test-west-roof-join.mjs"},"currentModel":true,"asset":"aerial-cc28a38a7fd0f03af9c4.bin.gz"}

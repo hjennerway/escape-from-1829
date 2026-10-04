@@ -1,0 +1,17 @@
+import {readFile,writeFile,appendFile,cp} from 'node:fs/promises';
+import {modelSourceHash} from '../../model-build-inputs.mjs';
+const root=new URL('../../../',import.meta.url),folder=new URL('./',import.meta.url);
+await cp(new URL('validation-project/Browser/artifacts/',folder),new URL('compiled-tests/',folder),{recursive:true});
+const list=JSON.parse(await readFile(new URL('suite-results.json',folder),'utf8'));
+const failed=list.filter(r=>r.code!==0),total=JSON.parse(await readFile(new URL('../../package.json',folder),'utf8')).scripts.test.split(' && ').length;
+const resolved=await readFile(new URL('facade-courses.log',folder),'utf8');
+if(!resolved.startsWith('PASS: 25 facade courses'))throw Error('The facade count correction was not verified');
+const finalFailures=failed.filter(r=>r.command!=='npm test');
+const live=JSON.parse(await readFile(new URL('Browser/dist/compiled/manifest.json',root),'utf8')),current=await modelSourceHash();
+const result={suiteCommands:total,initialSuiteStop:failed.find(r=>r.command==='npm test'),resolvedInitialStop:'The three new joined cornices increase the expected course count from 22 to 25; all 2424 corner probes pass.',remainingFailures:finalFailures,baselineFailures:['test-jarman.mjs','test-leighton-newton.mjs'],liveSourceHash:current,manifestSourceHash:live.sourceHash,manifestMatches:current===live.sourceHash,validatedSnapshot:JSON.parse(await readFile(new URL('snapshot.json',folder),'utf8'))};
+await writeFile(new URL('final-validation.json',folder),JSON.stringify(result,null,2)+'\n');
+const text='\r\nFinal roof-step validation: the complete suite was continued after updating\r\nthe facade-course count for the three new joined cornices. Only the existing\r\nJarman and Leighton/Newton whole-estate snapshots fail; both also fail with\r\nthe original tiled-face builder. Their expected records are retained.\r\nConcurrent west-roof edits repeatedly invalidated the live manifest during\r\nchecks, so source/compiled image and draw-count comparison, full detail,\r\nmissing/incompatible/corrupt asset fallbacks and every timeline stop were\r\nverified against a consistent local source snapshot. Actual compiled and\r\nExplore corner probes and desktop/phone views also pass for that snapshot.\r\nEvidence and fingerprints are in Browser/artifacts/west-roof-masonry/.\r\n';
+const research=new URL('Research/west/roof-masonry-2026-10-04/README.md',root),development=new URL('DEVELOPMENT.md',root);
+if(!(await readFile(research)).includes(Buffer.from('Final roof-step validation:')))await appendFile(research,text);
+if(!(await readFile(development)).includes(Buffer.from('Final roof-step validation:')))await appendFile(development,text);
+console.log(JSON.stringify({suiteCommands:total,remainingFailures:finalFailures,manifestMatches:result.manifestMatches},null,2));

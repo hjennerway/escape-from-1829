@@ -1,0 +1,24 @@
+
+> test:compiled
+> node test-precompiled-models.mjs && node test-timeline-browser.mjs
+
+node:internal/modules/run_main:107
+    triggerUncaughtException(
+    ^
+
+AssertionError [ERR_ASSERTION]: Rebuild models after editing source
++ actual - expected
+
++ '8de0f918a0a10bbeabcd2d708c94e81a0f1923350c40890877457d38174fa3b9'
+- '98286b9828a0d82b2911be7a8fcc1e665a0c40ed0e5d7059dc8f7d3b0a0b6455'
+
+    at file:///C:/Users/Harry/Documents/_escape-from-1829/Browser/test-precompiled-models.mjs:15:8 {
+  generatedMessage: false,
+  code: 'ERR_ASSERTION',
+  actual: '8de0f918a0a10bbeabcd2d708c94e81a0f1923350c40890877457d38174fa3b9',
+  expected: '98286b9828a0d82b2911be7a8fcc1e665a0c40ed0e5d7059dc8f7d3b0a0b6455',
+  operator: 'strictEqual',
+  diff: 'simple'
+}
+
+Node.js v24.20.0

@@ -4,6 +4,7 @@ import * as THREE from './dist/vendor/three.module.js';
 import {createEscapeExterior} from './dist/escape-exterior.mjs';
 import {createAsylumOutside} from './dist/asylum-outside.mjs';
 import {batchAerialMeshes} from './dist/aerial-performance.mjs';
+import {WEST_FRONT_E_PLAN} from './dist/west-front-photo-detail.mjs';
 globalThis.document={createElement:()=>({width:0,height:0,getContext:()=>({fillRect(){}})})};
 const exterior=createEscapeExterior(THREE,16/9),walker=createAsylumOutside(THREE,exterior),plan=JSON.parse(await readFile(new URL('./dist/asylum-plan.json',import.meta.url)));
 assert(!walker.clear(0,21.2,0),'The solid doorstep blocks ground-level movement even though its thin deck shares the same footprint');
@@ -14,7 +15,7 @@ for(const [exit,points] of [
  ['F1',[[-20.3,-25.8],[-20.3,-30.9],[-21.9,-30.9],[-21.9,-25.8],[-20.3,-25.8],[-20.3,-30.1],[-20.3,-30.5]]],
  ['F3',[[20.3,-25.8],[20.3,-30.9],[21.9,-30.9],[21.9,-25.8],[20.3,-25.8],[20.3,-30.1],[20.3,-30.5]]],
  ['F2',[[8.9,-37.3],[8.9,-43.2],[8.9,-43.5]]],
- ['F4',[[-63.55,26.05],[-61.3,26.05],[-61.3,20.8],[-61.3,20.5]]],
+ ['F4',[[-63.55,26.05],[-61.3,26.05],[-61.3,20.8],[-61.3,20.5]].map(([x,z])=>[x,z+WEST_FRONT_E_PLAN.bayRoot-21])],
  ['F5',[[-39.35,44.5],[-45.75,44.5],[-45.75,46.05],[-39.35,46.05],[-38.9,46.05]]],
  ['F6',[[42,32.15],[42,31.8]]],
  ['F7',[[72.4,3.9],[72.4,1.7],[71,1.7],[66.9,1.7],[66.6,1.7]]]

@@ -1,0 +1,29 @@
+{
+  "checks": [
+    {
+      "mode": "source",
+      "build": {
+        "mode": "procedural",
+        "milliseconds": 4641.39999999851
+      },
+      "trimProbes": 36,
+      "panes": 16
+    },
+    {
+      "mode": "compiled",
+      "build": {
+        "mode": "compiled",
+        "milliseconds": 2285.2999999970198
+      },
+      "trimProbes": 36,
+      "panes": 16
+    },
+    {
+      "mode": "explore",
+      "build": null,
+      "trimProbes": 36,
+      "panes": 16
+    }
+  ],
+  "errors": []
+}

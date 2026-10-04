@@ -6,6 +6,7 @@ import assert from 'node:assert/strict';
 import * as THREE from './dist/vendor/three.module.js';
 import {createEscapeExterior,ESCAPE_MAST,MAP_REAR_PROPORTIONS} from './dist/escape-exterior.mjs';
 import {WEST_FRONT_E_PLAN} from './dist/west-front-photo-detail.mjs';
+import {WEST_RANGE_PLAN} from './dist/west-range-plan.mjs';
 import {INNER_COURT_SIDE_PROFILE} from './dist/inner-court-photo-detail.mjs';
 import {sampleEscape} from './dist/escape-cutscene.mjs';
 import {sampleArrival} from './dist/arrival-cutscene.mjs';
@@ -157,7 +158,7 @@ for(const side of [-1,1]){
 }
 // Previously generic windows on both marked front sections now expose the
 // same three-light sash glazing and fine frame material as the photo windows.
-for(const [x,y,face] of [[-35.6,10.6,'1829-range-sash'],[46.3,11.6,'pavilion-left-pair']]){
+for(const [x,y,face] of [[-36.4,11.3,'west-front-inner-upper'],[46.3,11.6,'pavilion-left-pair']]){
   const o=exterior.model.userData.eastPhotoOpenings.find(o=>o.face===face&&Math.abs(o.x-x)<.01&&Math.abs(o.y-y)<.01&&o.z>17);
   assert(o,'remaining front opening uses the shared sash schedule');
   for(const [offset,color] of [[0,0x78989f],[-o.w/6,0xd3dcd8],[o.w/6,0xd3dcd8]]){
@@ -167,6 +168,7 @@ for(const [x,y,face] of [[-35.6,10.6,'1829-range-sash'],[46.3,11.6,'pavilion-lef
     assert.equal(hit.object.material.color.getHex(),color,'three-light panes and frame finish match the shared style');
   }
 }
+assert(!exterior.model.userData.eastPhotoOpenings.some(o=>o.face==='1829-range-sash'&&Math.abs(o.x+35.6)<.01&&o.z>17),'The covered old west sashes are replaced by the exposed pavilion-end pair');
 
 // img18: windows must remain exposed in front of the actual whole model,
 // and the bay's separate roof must face upward beside the original roof.
@@ -207,7 +209,7 @@ for(const [westName,eastName] of [['West lawn three-window bay','East lawn three
   assert(Math.abs(west.min.x+east.max.x)<1e-5&&Math.abs(west.max.x+east.min.x)<1e-5);
   assert(Math.abs(west.max.y-east.max.y)<1e-5&&Math.abs(west.max.z-east.max.z)<1e-5);
 }
-for(const [x,z] of [[27.5,35.5],[30,35],[33,24],[16,12]]){
+for(const [x,z] of [[27.5,35.5],[30,35],[16,12]]){
   const heights=[];
   for(const side of [-1,1]){
     ray.set(new THREE.Vector3(side*x,30,z),new THREE.Vector3(0,-1,0));
@@ -217,6 +219,13 @@ for(const [x,z] of [[27.5,35.5],[30,35],[33,24],[16,12]]){
   }
   assert(Math.abs(heights[0]-heights[1])<1e-5,'inner roof pitches must match across the entrance');
 }
+// The owner's green/yellow correction applies only to the west forward
+// root. Its lower hip meets the recessed pavilion below the upper sashes;
+// the opposite wing retains its established pitch.
+ray.set(new THREE.Vector3(-33,30,24),new THREE.Vector3(0,-1,0));
+const steppedRootRoof=ray.intersectObject(exterior.model,true)[0];
+assert.equal(steppedRootRoof.object.name,'West forward stepped root slate roof');
+assert(steppedRootRoof.point.y>8.83&&steppedRootRoof.face.normal.y>0,'The asymmetric west root retains upward-facing pitched slate');
 assert.equal(exterior.model.children.filter(o=>o.name==='East front chimney').length,2);
 // img19: a real stepped frontage, exposed windows, a low roof behind the
 // parapet and two lower doors replacing the old generic ground-floor grid.
@@ -572,7 +581,7 @@ assert(Math.abs(westProjection.min.x+innerProjection.max.x)<.001&&Math.abs(westP
 assert.equal(westProjection.min.z,innerProjection.min.z);
 assert.equal(westProjection.max.y,innerProjection.max.y);
 const westOpenings=exterior.model.userData.westWingPhotoOpenings;
-assert.equal(westOpenings.filter(o=>o.face==='west-wing-outer').length,24,'eight aligned bays across basement and two upper floors');
+assert.equal(westOpenings.filter(o=>o.face==='west-wing-outer').length,27,'nine aligned bays across the basement and two upper floors');
 assert(!photoOpenings.some(o=>o.face==='west-long-wing'),'superseded west windows must not overlap the replacement');
 for(const o of westOpenings.filter(o=>o.face==='west-wing-outer'&&(o.y>2||o.z<-3))){
   ray.set(new THREE.Vector3(-45,o.y,o.z),new THREE.Vector3(1,0,0));
@@ -615,13 +624,13 @@ for(const bottom of [2.4,5.9]){
 // img6: the west courtyard bay projects into the court and the paired
 // openings remain visible rather than buried behind the corner link or bay.
 const westBay=exterior.model.getObjectByName('West courtyard polygonal bay');
-assert(westBay&&new THREE.Box3().setFromObject(westBay).min.z<1.2);
+assert(westBay&&Math.abs(new THREE.Box3().setFromObject(westBay).min.z-(WEST_RANGE_PLAN.courtZ-.1-3.35))<1e-5,'The retained court bay projects its full depth beyond the shortened range');
 const westSashes=exterior.model.userData.westCourtPhotoOpenings.filter(o=>o.face==='west-court-paired');
 assert.equal(westSashes.length,14,'five sashes per upper floor and four beside the ground door');
 for(const o of westSashes){
   ray.set(new THREE.Vector3(o.x,o.y,-2),new THREE.Vector3(0,0,1));
   const hit=ray.intersectObject(exterior.model,true)[0];
-  assert(hit.point.z>-1.4&&hit.point.z<-1,'west paired windows must remain exposed on the aligned red-wall plane');
+  assert(hit.point.z>WEST_RANGE_PLAN.courtZ-.4&&hit.point.z<WEST_RANGE_PLAN.courtZ,'west paired windows remain exposed on the narrowed courtyard plane');
 }
 assert(exterior.model.getObjectByName('West courtyard glazed lean-to'));
 // The annotated corner link is doubled in width and the outside end has
@@ -656,12 +665,12 @@ assert.equal(flanking.length,3,'broad lower glazing flanks the bay, with the fou
 for(const o of flanking){
   ray.set(new THREE.Vector3(o.x,o.y,24),new THREE.Vector3(0,0,-1));
   const hit=ray.intersectObject(exterior.model,true)[0];
-  assert(hit.object.isInstancedMesh&&hit.point.z>19.5&&hit.point.z<20,'bay flanking glazing must remain exposed beside the bay and forward range');
+  assert(hit.object.isInstancedMesh&&hit.point.z>WEST_RANGE_PLAN.gardenZ&&hit.point.z<WEST_RANGE_PLAN.gardenZ+.5,'bay flanking glazing remains exposed beside the bay and restored inner pavilion');
 }
-ray.set(new THREE.Vector3(WEST_FRONT_E_PLAN.outerRight+2,13.2,24),new THREE.Vector3(-1,0,0));
+ray.set(new THREE.Vector3(WEST_FRONT_E_PLAN.outerRight+2,13.2,WEST_FRONT_E_PLAN.outerFront-2.5),new THREE.Vector3(-1,0,0));
 assert(Math.abs(ray.intersectObject(exterior.model,true)[0].point.x-WEST_FRONT_E_PLAN.outerRight)<.01,'stair wall is the inner return of the outer E arm');
 const returnStairBounds=new THREE.Box3().setFromObject(exterior.model.getObjectByName('West front iron return stair'));
-assert(returnStairBounds.min.x>WEST_FRONT_E_PLAN.outerRight&&returnStairBounds.max.x<WEST_FRONT_E_PLAN.outerRight+5&&returnStairBounds.min.z>19.5&&returnStairBounds.max.z<WEST_FRONT_E_PLAN.outerFront+.25,'guarded stair turn stays beside its doors, within a quarter unit of the pavilion front');
+assert(returnStairBounds.min.x>WEST_FRONT_E_PLAN.outerRight&&returnStairBounds.max.x<WEST_FRONT_E_PLAN.outerRight+5&&returnStairBounds.min.z>WEST_RANGE_PLAN.gardenZ&&returnStairBounds.max.z<WEST_FRONT_E_PLAN.outerFront+.25,'guarded stair turn stays beside its doors, within a quarter unit of the pavilion front');
 // Check actual roof edges against the relative lengths in the yellow marks.
 const {wingRear,centralRear,courtyardRear}=MAP_REAR_PROPORTIONS;
 assert(centralRear<wingRear&&centralRear>courtyardRear,'centre must end between the two wing ends and east courtyard return');

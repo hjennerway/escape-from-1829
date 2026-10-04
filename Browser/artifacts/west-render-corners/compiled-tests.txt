@@ -1,0 +1,135 @@
+npm notice run test:compiled
+npm notice run node test-precompiled-models.mjs && node test-timeline-browser.mjs
+Checking aerial?models=source
+Checking aerial?models=compiled
+Checking aerial?models=compiled&buildingDetail=full&view=front
+Checking aerial
+Browser: Failed to load resource: the server responded with a status of 404 (Not Found)
+Checking aerial
+Checking aerial
+Browser: Failed to load resource: the server responded with a status of 404 (Not Found)
+PASS: compiled estate, shadows, grass shaders, exact draw counts, tree/layout controls, orbit, portrait, full detail and missing/incompatible/damaged model fallback.
+{
+  "source": {
+    "mode": "procedural",
+    "milliseconds": 5012.29999999702,
+    "triangles": 1018440,
+    "calls": 3083,
+    "levels": [
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      1,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      1,
+      2,
+      2,
+      1,
+      2,
+      2,
+      1,
+      2,
+      2,
+      1
+    ],
+    "readyMilliseconds": 31688.900800000003
+  },
+  "compiled": {
+    "mode": "compiled",
+    "milliseconds": 5395.5,
+    "triangles": 1018440,
+    "calls": 3083,
+    "levels": [
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      1,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      1,
+      2,
+      2,
+      1,
+      2,
+      2,
+      1,
+      2,
+      2,
+      1
+    ],
+    "readyMilliseconds": 30197.968399999998
+  },
+  "identicalScreenshot": false,
+  "pixels": {
+    "significantFraction": 0.00017,
+    "meanChannelError": 0.0057695238095238095
+  },
+  "fullDetail": {
+    "mode": "compiled",
+    "milliseconds": 3801.60000000149,
+    "triangles": 626671,
+    "calls": 548,
+    "readyMilliseconds": 16335.469299999997
+  }
+}
+node:internal/modules/run_main:107
+    triggerUncaughtException(
+    ^
+
+AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
++ actual - expected
+
++ 'procedural'
+- 'compiled'
+
+    at file:///C:/Users/Harry/Documents/_escape-from-1829/Browser/test-timeline-browser.mjs:81:10 {
+  generatedMessage: true,
+  code: 'ERR_ASSERTION',
+  actual: 'procedural',
+  expected: 'compiled',
+  operator: 'strictEqual',
+  diff: 'simple'
+}
+
+Node.js v24.20.0

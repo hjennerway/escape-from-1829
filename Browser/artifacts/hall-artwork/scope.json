@@ -1,0 +1,17 @@
+{
+  "aerial": {
+    "entry": "dist/aerial-scene.mjs",
+    "inputs": 172,
+    "importsArtworkBuilder": false
+  },
+  "outsideTest": {
+    "entry": "test-asylum-outside.mjs",
+    "inputs": 143,
+    "importsArtworkBuilder": false
+  },
+  "artwork": {
+    "exactUpload": true,
+    "bytes": 2992451,
+    "sha256": "af7a04251eedd63365d80fb2fe49119cd0da93759692c71269d6f093cfe0a2dc"
+  }
+}

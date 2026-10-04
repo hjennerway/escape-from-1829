@@ -1,0 +1,102 @@
+[
+  {
+    "file": "test-building-grounding.mjs",
+    "code": 0
+  },
+  {
+    "file": "test-ground-contact.mjs",
+    "code": 0
+  },
+  {
+    "file": "test-day-night.mjs",
+    "code": 0
+  },
+  {
+    "file": "test-tree-rendering.mjs",
+    "code": 0
+  },
+  {
+    "file": "test-exterior-shadows.mjs",
+    "code": 0
+  },
+  {
+    "file": "test-front-lawn-eztree.mjs",
+    "code": 0
+  },
+  {
+    "file": "test-explore.mjs",
+    "code": 0
+  },
+  {
+    "file": "test-explore-interior.mjs",
+    "code": 0
+  },
+  {
+    "file": "test-exterior-door-supports.mjs",
+    "code": 0
+  },
+  {
+    "file": "test-explore-input.mjs",
+    "code": 0
+  },
+  {
+    "file": "test-front-basement.mjs",
+    "code": 0
+  },
+  {
+    "file": "test-annexe.mjs",
+    "code": 0
+  },
+  {
+    "file": "test-jump.mjs",
+    "code": 0
+  },
+  {
+    "file": "test-larkton-recess.mjs",
+    "code": 0
+  },
+  {
+    "file": "test-larkton.mjs",
+    "code": 0
+  },
+  {
+    "file": "test-annexe-front-link.mjs",
+    "code": 0
+  },
+  {
+    "file": "test-annexe-carden.mjs",
+    "code": 0
+  },
+  {
+    "file": "test-annexe-east-outer.mjs",
+    "code": 0
+  },
+  {
+    "file": "test-annexe-rear-stretch.mjs",
+    "code": 0
+  },
+  {
+    "file": "test-annexe-kitchen.mjs",
+    "code": 0
+  },
+  {
+    "file": "test-annexe-os-refinement.mjs",
+    "code": 0
+  },
+  {
+    "file": "test-annexe-photo-placement.mjs",
+    "code": 0
+  },
+  {
+    "file": "test-annexe-rear-side-alignment.mjs",
+    "code": 0
+  },
+  {
+    "file": "test-annexe-outer-front.mjs",
+    "code": 0
+  },
+  {
+    "file": "test-jarman.mjs",
+    "code": 1
+  }
+]

@@ -3,15 +3,15 @@ export function photoDetailPrimitives(THREE,{model,box,mesh,white,steel,material
   const frame=material(0xd3dcd8),glass=material(0x78989f,{roughness:.48,metalness:.15});
   const recess=material(0x303d3d),blue=material(0x172e50),iron=material(0x454b49),stone=material(0xb2b6af);
   const openings=[];model.userData.eastPhotoOpenings=openings;
-  function sash(face,x,y,z,rotation=0,w=1.12,h=2.45,{sill=true}={}){
+  function sash(face,x,y,z,rotation=0,w=1.12,h=2.45,{sill=true,columns=3}={}){
     openings.push({face,x,y,z,w,h});
     const dx=Math.cos(rotation),dz=-Math.sin(rotation),nx=Math.sin(rotation),nz=Math.cos(rotation);
     const part=(mat,u,v,n,pw,ph,pd)=>box(mat,x+dx*u+nx*n,y+v,z+dz*u+nz*n,pw,ph,pd,rotation);
     part(recess,0,0,0,w+.14,h+.12,.1);part(glass,0,0,.055,w,h,.06);
     for(const s of [-1,1])part(frame,s*w/2,0,.1,.065,h+.12,.09);
     for(const s of [-1,1])part(frame,0,s*h/2,.1,w+.12,.07,.09);
-    // Three lights across, six high, with a slightly heavier sash meeting rail.
-    for(const s of [-1,1])part(frame,s*w/6,0,.115,.025,h,.05);
+    // Narrow sidelights have two columns; retain six rows and the meeting rail.
+    for(let i=1;i<columns;i++)part(frame,-w/2+i*w/columns,0,.115,.025,h,.05);
     for(let i=1;i<6;i++)part(frame,0,-h/2+i*h/6,.12,w,i===3?.055:.025,.06);
     if(sill)part(white,0,-h/2-.09,.14,w+.32,.12,.24);
     part(stone,0,h/2+.08,.04,w+.22,.12,.13);

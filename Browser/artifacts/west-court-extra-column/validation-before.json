@@ -1,0 +1,37 @@
+{
+  "checks": [
+    {
+      "mode": "before",
+      "newWindows": 0
+    }
+  ],
+  "errors": [],
+  "views": {
+    "marked": {
+      "position": [
+        -69,
+        34,
+        -21
+      ],
+      "target": [
+        -38,
+        6,
+        -12
+      ],
+      "fov": 48
+    },
+    "close": {
+      "position": [
+        -49,
+        11,
+        -1
+      ],
+      "target": [
+        -37,
+        8.8,
+        1.4
+      ],
+      "fov": 50
+    }
+  }
+}

@@ -1,0 +1,25 @@
+
+## West inside-corner wall extension and flat roof (4 October 2026)
+
+The owner's yellow guide extends the lower wall into the open corner between
+the garden pavilion and west forward wing. The new perimeter follows
+x=-33.65 from z=15.5 to 18.5, steps across to x=-32, then meets the low wing
+at z=21.2. Matching brickwork supports a flat dark roof at y=8.83, level with
+the existing lower eaves, and continuous pale coping with joined corners.
+The four former lower-return sashes move onto the two longitudinal walls;
+the landing windows and doorway remain exposed. A single solid footprint
+supplies walking collisions throughout the new section. The upper back wall
+retains its earlier z=15.5 alignment. See Research/west/flat-corner-2026-10-04/.
+
+The focused corner check passes five level-roof samples, three exact wall
+planes, occupied and clear footprint samples, all 104 corner pane probes,
+physical doorway access and collision with the new outer wall. Source,
+compiled aerial and Explore each pass the five roof, three wall and 52 west
+pane probes; Explore reaches the doorway at z=15.8125. Desktop and phone
+views were visually inspected, with no page or shader errors. West refinement,
+roof contacts, exterior geometry and binary-format checks also pass.
+
+Browser sources and local aerial models are updated. Unity, Blender and
+packaged desktop/Android applications are not regenerated. The marked image,
+saved original source, repeatable captures, page probes and validation logs
+are in Browser/artifacts/west-flat-corner/.

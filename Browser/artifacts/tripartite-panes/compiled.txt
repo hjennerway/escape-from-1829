@@ -1,0 +1,112 @@
+Checking aerial?models=source
+Checking aerial?models=compiled
+Checking aerial?models=compiled&buildingDetail=full&view=front
+Checking aerial
+Browser: Failed to load resource: the server responded with a status of 404 (Not Found)
+Checking aerial
+Checking aerial
+PASS: compiled estate, shadows, grass shaders, exact draw counts, tree/layout controls, orbit, portrait, full detail and missing/incompatible/damaged model fallback.
+{
+  "source": {
+    "mode": "procedural",
+    "milliseconds": 15939.10000000149,
+    "triangles": 1014342,
+    "calls": 3077,
+    "levels": [
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      1,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      1,
+      2,
+      2,
+      1,
+      2,
+      2,
+      1,
+      2,
+      2,
+      1
+    ],
+    "readyMilliseconds": 36511.251
+  },
+  "compiled": {
+    "mode": "compiled",
+    "milliseconds": 11162.60000000149,
+    "triangles": 1014342,
+    "calls": 3077,
+    "levels": [
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      1,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      1,
+      2,
+      2,
+      1,
+      2,
+      2,
+      1,
+      2,
+      2,
+      1
+    ],
+    "readyMilliseconds": 34627.1253
+  },
+  "identicalScreenshot": false,
+  "pixels": {
+    "significantFraction": 0.00016285714285714287,
+    "meanChannelError": 0.005484761904761905
+  },
+  "fullDetail": {
+    "mode": "compiled",
+    "milliseconds": 17481.60000000149,
+    "triangles": 627070,
+    "calls": 548,
+    "readyMilliseconds": 49103.2757
+  }
+}

@@ -770,3 +770,13 @@ Blender and packaged exports were not regenerated. The aerial binary excludes
 these interiors and its source fingerprint remains current. Validation and
 before/after game views are in `../../Browser/artifacts/asylum-masonry-corners/`
 and `../../DEVELOPMENT.md`.
+
+
+## West exterior arrivals (4 October 2026)
+
+The later [west outline correction](../west/outline-2026-10-04/README.md)
+moves both exterior wall lines inward and restores the inner garden return.
+D2, D3, D5, D6 and F4 outside transfer destinations follow the rendered doors
+in both plan-data.json and Browser/dist/asylum-plan.json. Interior outlines,
+rooms, internal door anchors and drawing positions retain this proposal.
+Outside support, all door round trips and moved stair routes are checked.

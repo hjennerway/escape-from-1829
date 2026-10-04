@@ -1,5 +1,75 @@
 # West wing refinement
 
+## Inside-corner wall extension and flat roof (4 October 2026)
+
+The latest [yellow-line correction](flat-corner-2026-10-04/README.md) adds a
+lower stepped brick section between the garden pavilion and forward wing,
+with a level roof. It supersedes the open lower strip from the previous
+roof/face alignment; the aligned upper back wall remains.
+
+## Courtyard windows and low flat roof (4 October 2026)
+
+The latest [green/red/purple/yellow courtyard correction](court-window-roof-2026-10-04/README.md)
+replaces each lower recessed pair with one centred sash, widens all six canted
+court bay sashes to match their central neighbours, and replaces the small
+stair-projection hip with a flat slate deck and low pale rim. Both local pipe
+segments are removed to clear the sash bank. This supersedes those court-side
+pairs, narrow canted widths, low roof and pipes in the earlier photo refinement.
+
+## Roof-step tiled-face correction (4 October 2026)
+
+The latest [purple-circled roof-step correction](roof-masonry-2026-10-04/README.md)
+replaces the steep slate closure at the tall cross-range/lower rear-arm join
+with a vertical matching brick return and continuous white-render cornice.
+
+## Garden window widths and placement (4 October 2026)
+
+The later [yellow/blue, pink and green window correction](window-alignment-2026-10-04/README.md)
+widens the six canted garden sashes to match their central neighbours, centres
+the complete garden entrance bank on its recessed wall, and equally spaces
+the two lower sashes on each floor of the inner return. It supersedes the
+earlier narrow garden side sashes and fixed return window columns.
+
+## Stepped rear-court corner moved forward (4 October 2026)
+
+The latest [purple/blue edge and red-face correction](rear-forward-2026-10-04/README.md)
+extends the outer rear corner and its adjoining recessed face four units
+towards the court. It supersedes those two rear limits in the earlier
+end-depth correction; the garden-side limits retain their positions.
+
+## Inside-corner roof and face alignment (4 October 2026)
+
+The later [purple roof/face and yellow wall correction](roof-face-2026-10-04/README.md)
+removes the low roof shoulder and recesses the short exposed face from z=17
+to the yellow wall's z=15.5 plane. It supersedes the low east shoulder and
+its former west inside-corner returns.
+
+## Shallower western end (4 October 2026)
+
+The latest [red/yellow and purple/green correction](end-depth-2026-10-04/README.md)
+pulls both cross-range sides inward another two units, retaining the full
+octagonal bay profiles. It supersedes the earlier outline's depth dimensions.
+The recessed front garden return and long forward and rearward arms remain.
+
+## Front garden return windows and setback (4 October 2026)
+
+The later [green/yellow face correction](front-setback-2026-10-04/README.md)
+recesses the front inner return behind the lower wing and adds the four
+photographed lower windows. It supersedes the earlier blank west return.
+The rear west section and opposite wing remain unchanged.
+
+
+## Latest marked outline correction (4 October 2026)
+
+The [missing projection and slimmer range](outline-2026-10-04/README.md)
+supersede the retained footprint in the earlier four-pair refinement.
+
+## Paired-photo proportion correction (4 October 2026)
+
+The later [four-pair refinement notes](proportions-2026-10-04/README.md)
+supersede the earlier west-end entrance axis and partial white ground-storey
+finish below, and record the revised roof, window and chimney proportions.
+
 The five photographs and `locations.png` were supplied on 17 September 2026.
 They are architectural evidence; the user's request and colour mapping define
 the task. In the locator, red = img1, yellow = img2, blue = img3, purple = img4,
@@ -360,3 +430,59 @@ clear projecting sill/course spans across six periods after those repairs.
 Matching before/source/compiled close views and phone captures use
 `Browser/artifacts/door-trim/`. Browser sources and the local compiled aerial
 model are updated; Unity, Blender and packaged exports are not regenerated.
+
+## Basement extension to the current lean-to (4 October 2026)
+
+The [owner's latest wall, floor and gravel correction](basement-extension-2026-10-04/README.md)
+supersedes the earlier rearward basement end coordinates. The retaining wall
+reaches the lean-to at z=1.5, the lowered gap continues to the court wall at
+z=5, and matching gravel replaces the rectangular lawn strip against that wall.
+
+## Tripartite sash pane counts (4 October 2026)
+
+The owner's close-up requests a 2-3-2 horizontal pane arrangement while
+retaining each section's width and style. The narrow sidelights now have two
+columns and their central sashes retain three. All six rows, the heavier
+meeting rail, frame profiles, glazing, heads, sills and positions are retained.
+
+The shared sash builder accepts a column count. The matching garden bay
+flanks, outer-end middle window and door sidelights, rear-wing end window,
+and both mirrored entrance elevations use this treatment. Independent single
+sashes and windows on separate canted bay facets retain their divisions.
+
+The supplied screenshot is visual task evidence, not a separate instruction
+source. It is saved with before/after views and checks in
+`Browser/artifacts/tripartite-panes/`. The comparison baseline incorporates
+the concurrent outer-end proportion correction, isolating the pane changes.
+Only browser sources and local aerial models change; Unity, Blender and
+packaged application exports are not regenerated.
+
+## Additional courtyard window column (4 October 2026)
+
+The owner's [blue-circled model view](../../Browser/artifacts/west-court-extra-column/marked-reference.png)
+identifies the blank end of the rearward wing's outer courtyard wall. A full
+column of three matching sashes now occupies x=-37.07, z=1.4 at y=1.35, 6.55
+and 11.15, continuing the neighbouring 3.9-unit bay spacing. The lower sash
+matches the smaller basement windows; the upper pair matches the tall rows.
+Their pane divisions, heads, sills and intervening stone marker match the
+existing windows. The follow-up request explicitly includes the lower row.
+Coordinates fit the current model and are not survey measurements. The
+browser source and local compiled aerial model are updated; Unity, Blender
+and packaged exports are not regenerated. Before/after, walking and phone
+views are in Browser/artifacts/west-court-extra-column/.
+
+## Raised cross-range roof join (4 October 2026)
+
+The owner's purple/yellow guide joins the small recessed hip into the main
+roof, covering the brick at the outer pavilion and court bay. The ridge
+rises by about 0.6 model units and both shoulders follow the adjoining slate.
+See [reference and modelling notes](roof-join-2026-10-04/README.md).
+
+## West render-band and cornice joins (4 October 2026)
+
+The yellow-marked garden strip is a single band after removing the low
+root's cornice and roof-support projection through the taller pavilion.
+The outer-end bands now join the court, entrance-pier returns, outer front
+and garden bays at the common 4.05 / 8.6 levels. All three outer cornice
+profiles and both middle-bay cornices follow their corners continuously.
+See render-corners-2026-10-04/README.md for the marked view and model scope.

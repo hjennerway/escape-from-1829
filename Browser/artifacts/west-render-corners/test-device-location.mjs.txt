@@ -1,0 +1,1 @@
+Device location: perimeter, exact 100 m cutoff, corners, coordinate alignment, fresh fixes, retries and errors passed.

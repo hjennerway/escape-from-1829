@@ -1,0 +1,1 @@
+PASS: jump arc/frame rates, idle landing, wall-top support, tall walls, headroom, resets, actual estate walls/hedges in both modes, and interior floors/doorways.

@@ -1,0 +1,1 @@
+PASS: 72 exact KML trees in all periods, duplicate Oak8/Oak16/Oak21/Oak22 points, preserved front beeches, shared visibility and collisions; eight-vertex Countess roundabout (336.1 square units), upward roads, walkable centre and continuous Modern-only approach.

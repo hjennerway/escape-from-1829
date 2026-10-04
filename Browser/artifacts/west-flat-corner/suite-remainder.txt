@@ -1,0 +1,189 @@
+PASS node test-estate-periods.mjs
+PASS node vendor-furniture.mjs --check
+PASS node vendor-furniture-designs.mjs --check
+PASS node test-asylum-furniture.mjs
+FAIL node test-medical-furniture.mjs
+
+FAIL node test-reception-furniture.mjs
+
+FAIL node test-hall-furnishings.mjs
+
+PASS node test-game.mjs
+PASS node test-notebook.mjs
+PASS node test-asylum-layout.mjs
+PASS node test-asylum-room-closures.mjs
+PASS node test-reception-second-floor.mjs
+PASS node test-asylum-wall-joins.mjs
+PASS node test-asylum-wall-ceilings.mjs
+PASS node test-asylum-basement-end.mjs
+PASS node test-asylum-windows.mjs
+PASS node test-asylum-window-clearance.mjs
+PASS node test-asylum-window-frames.mjs
+PASS node test-asylum-doorways.mjs
+PASS node test-asylum-room-doors.mjs
+PASS node test-asylum-door-frames.mjs
+PASS node test-asylum-exit-surrounds.mjs
+PASS node test-asylum-east-corner.mjs
+PASS node test-asylum-east-ground-wall.mjs
+PASS node test-asylum-east-corridor.mjs
+PASS node test-asylum-cross-range-bends.mjs
+PASS node test-asylum-east-rear-wall.mjs
+PASS node test-asylum-east-first-wall.mjs
+PASS node test-asylum-stairs.mjs
+PASS node test-asylum-slabs.mjs
+PASS node test-asylum-skirting.mjs
+PASS node test-asylum-room-finishes.mjs
+PASS node test-asylum-outside.mjs
+PASS node test-exterior-stair-rails.mjs
+PASS node test-exterior-stair-clearance.mjs
+PASS node test-security-guard.mjs
+PASS node test-interior-architecture.mjs
+PASS node test-interior-lights.mjs
+PASS node test-east-forward-end.mjs
+PASS node test-front-inside-corners.mjs
+PASS node test-redesmere-garden.mjs
+PASS node test-laundry.mjs
+PASS node test-escape-exterior.mjs
+PASS node test-inner-courtyard.mjs
+PASS node test-roof-contacts.mjs
+PASS node test-west-refinement.mjs
+PASS node test-west-side-basement.mjs
+PASS node test-water-tower.mjs
+PASS node test-church-front.mjs
+PASS node test-tower-buildings.mjs
+PASS node test-pharmacy.mjs
+PASS node test-irby-ashley.mjs
+PASS node test-irby-roads.mjs
+PASS node test-grafton-edge.mjs
+PASS node test-hale-ward.mjs
+PASS node test-estates.mjs
+PASS node test-farndon.mjs
+PASS node test-ward-placement.mjs
+PASS node test-ward-corridors.mjs
+PASS node test-ground-contact.mjs
+PASS node test-building-grounding.mjs
+PASS node test-day-night.mjs
+PASS node test-exterior-shadows.mjs
+PASS node test-tree-rendering.mjs
+PASS node test-front-lawn-eztree.mjs
+PASS node test-explore.mjs
+PASS node test-explore-interior.mjs
+PASS node test-front-basement.mjs
+PASS node test-exterior-door-supports.mjs
+PASS node test-explore-input.mjs
+PASS node test-jump.mjs
+PASS node test-annexe.mjs
+PASS node test-larkton.mjs
+PASS node test-larkton-recess.mjs
+PASS node test-annexe-carden.mjs
+PASS node test-annexe-front-link.mjs
+PASS node test-annexe-east-outer.mjs
+PASS node test-annexe-kitchen.mjs
+PASS node test-annexe-rear-stretch.mjs
+PASS node test-annexe-rear-side-alignment.mjs
+PASS node test-annexe-os-refinement.mjs
+PASS node test-annexe-photo-placement.mjs
+PASS node test-annexe-outer-front.mjs
+FAIL node test-jarman.mjs
+node:internal/modules/run_main:107
+    triggerUncaughtException(
+    ^
+
+AssertionError [ERR_ASSERTION]: All geometry outside the marked frontage stays exact
++ actual - expected
+
+  {
++   primitives: 818966,
++   sha256: '2d11b28ff1c5851a9795279aae163445f0fff122b150b89b0ef40e67058c1dbc'
+-   primitives: 818930,
+-   sha256: '7cfb26f1ff8383b299619084b1a9e7e01fcb8bb64565b72953a3b6433035e69b'
+  }
+
+    at file:///C:/Users/Harry/Documents/_escape-from-1829/Browser/test-jarman.mjs:11:8
+    at ModuleJob.run (node:internal/modules/esm/module_job:561:25)
+    at async node:internal/modules/esm/loader:647:26
+    at async asyncRunEntryPointWithESMLoader (node:internal/modules/run_main:101:5) {
+  generatedMessage: false,
+  code: 'ERR_ASSERTION',
+  actual: {
+    primitives: 818966,
+    sha256: '2d11b28ff1c5851a9795279aae163445f0fff122b150b89b0ef40e67058c1dbc'
+  },
+  expected: {
+    primitives: 818930,
+    sha256: '7cfb26f1ff8383b299619084b1a9e7e01fcb8bb64565b72953a3b6433035e69b'
+  },
+  operator: 'deepStrictEqual',
+  diff: 'simple'
+}
+
+Node.js v24.20.0
+
+PASS node test-oakmere-court.mjs
+PASS node test-oakmere.mjs
+PASS node test-oakmere-west.mjs
+PASS node test-oakmere-windows.mjs
+PASS node test-annexe-wards.mjs
+FAIL node test-leighton-newton.mjs
+node:internal/modules/run_main:107
+    triggerUncaughtException(
+    ^
+
+AssertionError [ERR_ASSERTION]: Every primitive outside Leighton/Newton remains unchanged
++ actual - expected
+
+  {
++   count: 883013,
++   sha256: '8238bad84b8a29efeb1137c44197d28e8aa5123234b2d8cdab56709892cb7319'
+-   count: 882977,
+-   sha256: 'f20c539f2eb9060f9c2c0dccf0716e1fb8e51a451f07aa0dd62b459ae8604e74'
+  }
+
+    at file:///C:/Users/Harry/Documents/_escape-from-1829/Browser/test-leighton-newton.mjs:21:8
+    at ModuleJob.run (node:internal/modules/esm/module_job:561:25)
+    at async node:internal/modules/esm/loader:647:26
+    at async asyncRunEntryPointWithESMLoader (node:internal/modules/run_main:101:5) {
+  generatedMessage: false,
+  code: 'ERR_ASSERTION',
+  actual: {
+    count: 883013,
+    sha256: '8238bad84b8a29efeb1137c44197d28e8aa5123234b2d8cdab56709892cb7319'
+  },
+  expected: {
+    count: 882977,
+    sha256: 'f20c539f2eb9060f9c2c0dccf0716e1fb8e51a451f07aa0dd62b459ae8604e74'
+  },
+  operator: 'deepStrictEqual',
+  diff: 'simple'
+}
+
+Node.js v24.20.0
+
+PASS node test-churton.mjs
+PASS node test-upton.mjs
+PASS node test-garages-mortuary.mjs
+PASS node test-greenhouses.mjs
+PASS node test-main-admin.mjs
+PASS node test-main-kitchen.mjs
+PASS node test-main-admin-refine2.mjs
+PASS node test-aerial-controls.mjs
+PASS node test-device-location.mjs
+PASS node test-aerial-layouts.mjs
+PASS node test-kml-imports.mjs
+PASS node test-kml-11.mjs
+PASS node test-modern-entrance.mjs
+PASS node test-modern-car-park.mjs
+PASS node test-parsons-retrace.mjs
+PASS node test-historic-roads.mjs
+PASS node test-road-continuity.mjs
+PASS node test-west-parsons-junctions.mjs
+PASS node test-admin-teardrop.mjs
+PASS node test-annexe-access.mjs
+PASS node test-annexe-rear-roads.mjs
+PASS node test-performance.mjs
+PASS node test-aerial-performance.mjs
+PASS node test-building-detail.mjs
+PASS node test-outhouse.mjs
+PASS node test-willows.mjs
+PASS node test-building-photos.mjs
+{"total":117,"passed":112,"failed":["node test-medical-furniture.mjs","node test-reception-furniture.mjs","node test-hall-furnishings.mjs","node test-jarman.mjs","node test-leighton-newton.mjs"]}

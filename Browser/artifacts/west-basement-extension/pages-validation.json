@@ -1,0 +1,28 @@
+{
+  "checks": [
+    {
+      "mode": "compiled",
+      "lowered": 18,
+      "wall": 4,
+      "gravel": 9,
+      "walking": null
+    },
+    {
+      "mode": "explore",
+      "lowered": 18,
+      "wall": 4,
+      "gravel": 9,
+      "walking": [
+        -38.1,
+        0.78,
+        4.6875
+      ],
+      "keyboard": [
+        -38.1,
+        0.78,
+        4.642857142857145
+      ]
+    }
+  ],
+  "errors": []
+}

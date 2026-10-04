@@ -1,0 +1,1 @@
+PASS: exact island outline and position; both smooth verges; asphalt to stepped walls; no rear grass wedge.

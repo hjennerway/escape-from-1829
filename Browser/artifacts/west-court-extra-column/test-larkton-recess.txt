@@ -1,0 +1,1 @@
+PASS: complete wing translation, unchanged neighbouring wards, recessed doors, low room and walking clearance.

@@ -1,0 +1,1 @@
+PASS: software renderer detection, restricted information, GPU defaults, shadow refresh and tree collision overrides.

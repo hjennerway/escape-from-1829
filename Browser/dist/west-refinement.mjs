@@ -1,13 +1,20 @@
 import {addFacadeCourse} from './facade-courses.mjs';
+import {WEST_RANGE_PLAN} from './west-range-plan.mjs';
 // September 2026 west/locations.png: red/yellow/blue/purple/pink = img1..5.
 // Camera registration and dimensions are visual estimates, not a survey.
 export const WEST_REFINEMENT_VIEWS=Object.freeze({
   'west-1':{position:[-66,1.8,36],target:[-42,5.2,31],fov:61},
   'west-2':{position:[-56,1.8,41],target:[-53,7.6,18],fov:75},
-  'west-3':{position:[-94,1.8,10.8],target:[-72,7.7,11.2],fov:61},
+  'west-3':{position:[-99,1.8,28],target:[-72,7.7,14.3],fov:52},
   'west-4':{position:[-57,1.8,-24],target:[-55,7,5],fov:68},
   'west-5':{position:[-46,1.8,-25],target:[-54,7,5],fov:70},
   'west-refinement':{position:[-110,65,-29],target:[-50,5,15],fov:49}
+});
+// Owner's marked outer end: equal 35% flanks and a centred 30% door face,
+// measured along the retained z=5..20.5 masonry rather than in perspective.
+export const WEST_END_PROPORTIONS=Object.freeze({
+  doorZ:(WEST_RANGE_PLAN.outerRearZ+WEST_RANGE_PLAN.outerFrontZ)/2,
+  pierWidth:(WEST_RANGE_PLAN.outerFrontZ-WEST_RANGE_PLAN.outerRearZ)*.30
 });
 
 // Three exposed facets, with one broad flat window face and two canted returns.
@@ -63,38 +70,40 @@ export function addWestCantedBay(THREE,{model,mesh,worldUV,brick,white,roof,sash
 }
 
 // img3: broad outer end with sparse openings and a shallow central projection.
-export function addWestEndDetails(THREE,{model,box,mesh,worldUV,brick,white,material,sash,door,iron,hipRoof}){
+export function addWestEndDetails(THREE,{model,box,mesh,worldUV,brick,white,material,sash,door,iron,hipRoof},{front=WEST_RANGE_PLAN.outerFrontZ,back=WEST_RANGE_PLAN.outerRearZ}={}){
   const start=model.userData.eastPhotoOpenings.length,trim=material(0xd8ddd5);
-  mesh(worldUV(new THREE.BoxGeometry(.22,15.2,16.5),1.7),brick,-72.05,7.6,11.25,true).name='West end continuous wall';
-  mesh(worldUV(new THREE.BoxGeometry(.34,15.35,5.05),1.7),brick,-72.24,7.675,11.5,true).name='West end shallow centre';
-  box(white,-72.2,2,11.25,.17,4,16.5);
-  box(white,-72.45,2,11.5,.17,4,5.1);
-  for(const z of [6.4,7.6])sash('west-end-upper-narrow',-72.23,12,z,-Math.PI/2,.68,2.1);
-  for(const z of [10.65,12.1])sash('west-end-upper-pair',-72.47,12.05,z,-Math.PI/2,1.25,2.25);
-  for(const [z,w] of [[10.05,.65],[11.5,1.6],[12.95,.65]])sash('west-end-middle',-72.47,6.65,z,-Math.PI/2,w,2.7);
-  for(const y of [5.15,8.14,10.78,13.34])box(trim,-72.59,y,11.5,.25,.2,3.95);
-  door(-72.48,11.5,-Math.PI/2);
-  for(const z of [10.07,12.93])sash('west-end-door-sidelight',-72.49,1.9,z,-Math.PI/2,.56,2.9);
-  sash('west-end-door-transom',-72.5,3.36,11.5,-Math.PI/2,1.42,.49);
-  box(trim,-72.61,3.85,11.5,.3,.23,4.05);
-  for(const y of [4.08,8.8]){
-    box(trim,-72.25,y,11.25,.24,.22,16.5);
-    box(trim,-72.51,y,11.5,.27,.22,5.13);
+  const depth=front-back,centreZ=(front+back)/2,{doorZ,pierWidth}=WEST_END_PROPORTIONS;
+  mesh(worldUV(new THREE.BoxGeometry(.22,15.2,depth),1.7),brick,-72.05,7.6,centreZ,true).name='West end continuous wall';
+  mesh(worldUV(new THREE.BoxGeometry(.34,15.35,pierWidth),1.7),brick,-72.24,7.675,doorZ,true).name='West end shallow centre';
+  box(white,-72.2,2,centreZ,.17,4,depth);
+  box(white,-72.45,2,doorZ,.17,4,pierWidth);
+  // Keep both narrow sashes in the shortened flat wall before the centre pier.
+  const narrowSpan=doorZ-pierWidth/2-back;
+  for(const fraction of [.29,.70])sash('west-end-upper-narrow',-72.23,12,back+narrowSpan*fraction,-Math.PI/2,.68,2.1);
+  for(const dz of [-.8,.8])sash('west-end-upper-pair',-72.47,12.05,doorZ+dz,-Math.PI/2,1.35,2.25);
+  for(const [dz,w] of [[-1.45,.70],[0,1.85],[1.45,.70]])sash('west-end-middle',-72.47,6.65,doorZ+dz,-Math.PI/2,w,2.7,{columns:dz===0?3:2});
+  for(const y of [5.15,8.14,10.78,13.34])box(trim,-72.59,y,doorZ,.25,.2,4.35);
+  door(-72.48,doorZ,-Math.PI/2);
+  for(const dz of [-1.43,1.43])sash('west-end-door-sidelight',-72.49,1.9,doorZ+dz,-Math.PI/2,.56,2.9,{columns:2});
+  sash('west-end-door-transom',-72.5,3.36,doorZ,-Math.PI/2,1.42,.49);
+  box(trim,-72.61,3.85,doorZ,.3,.23,4.45);
+  // The shared floor courses follow both pier returns at the neighbouring
+  // pavilion's 4.05 / 8.6 levels, instead of overlapping offset end bars.
+  const pierLeft=doorZ-pierWidth/2,pierRight=doorZ+pierWidth/2;
+  for(const [dy,t,w] of [[-.18,.16,.23],[.04,.22,.4],[.22,.1,.55]])
+    addFacadeCourse(THREE,{mesh,worldUV},'West outer corner joined cornice '+dy,white,
+      [[-65.925,back-.15],[-72.3,back-.15],[-72.3,pierLeft],[-72.56,pierLeft],
+        [-72.56,pierRight],[-72.3,pierRight],[-72.3,front+.08],[-63.92,front+.08],
+        [-63.92,WEST_RANGE_PLAN.gardenZ-.075]],15.2+dy,t,w);
+  for(const [z,d] of [[(back+pierLeft)/2,pierLeft-back],[doorZ,pierWidth],[(pierRight+front)/2,front-pierRight]]){
+    box(iron,-72.52,15.5,z,.12,.09,d+.2);
   }
-  for(const [z,d,h] of [[6,6,15.2],[11.5,5.1,15.37],[16.8,5.4,15.2]]){
-    if(z===6){
-      for(const [dy,t,w] of [[-.18,.16,.23],[.04,.22,.4],[.22,.1,.55]])
-        addFacadeCourse(THREE,{mesh,worldUV},'West outer corner joined cornice '+dy,white,
-          [[-72.3,9.065],[-72.3,2.85],[-65.925,2.85]],h+dy,t,w);
-    }else for(const [dy,w,t] of [[-.22,.24,.15],[0,.44,.24],[.2,.6,.1]])box(trim,-72.3,h+dy,z,w,t,d+.13);
-    box(iron,-72.52,h+.3,z,.12,.09,d+.2);
-  }
-  box(iron,-72.54,7.55,8.83,.07,15.1,.07);
+  box(iron,-72.54,7.55,pierLeft-.12,.07,15.1,.07);
   // A single low hip covers the full end rather than a detached tall front nib.
-  hipRoof(-69,11.25,6,16.5,15.47,1.15).name='West end continuous slate roof';
+  hipRoof(-69,(back+WEST_RANGE_PLAN.gardenZ)/2,6,WEST_RANGE_PLAN.gardenZ-back,15.47,1.15).name='West end continuous slate roof';
   const gravel=material(0xa39e88);
   // Continue the doorway axis west to Parsons Lane. The far end tucks
   // beneath its higher road surface, leaving a clean join at the angled edge.
-  mesh(new THREE.BoxGeometry(25.3,.1,2.65),gravel,-84.85,.2,11.5).name='West end entrance path';
+  mesh(new THREE.BoxGeometry(25.3,.1,2.65),gravel,-84.85,.2,doorZ).name='West end entrance path';
   model.userData.westEndPhotoOpenings=model.userData.eastPhotoOpenings.slice(start);
 }

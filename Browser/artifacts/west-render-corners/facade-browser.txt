@@ -1,0 +1,21 @@
+Captured source facade and ward joins
+node:internal/modules/run_main:107
+    triggerUncaughtException(
+    ^
+
+AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
++ actual - expected
+
++ 'procedural'
+- 'compiled'
+
+    at file:///C:/Users/Harry/Documents/_escape-from-1829/Browser/test-facade-courses-browser.mjs:24:84 {
+  generatedMessage: true,
+  code: 'ERR_ASSERTION',
+  actual: 'procedural',
+  expected: 'compiled',
+  operator: 'strictEqual',
+  diff: 'simple'
+}
+
+Node.js v24.20.0

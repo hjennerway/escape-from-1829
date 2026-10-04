@@ -1,0 +1,1 @@
+PASS: independent Historic/Modern controls, shared buildings, preserved transforms, hidden collisions, fifteen exact custom paths, camera-facing road names, upward road surfaces and full landscape/portrait framing.

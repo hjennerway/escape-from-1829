@@ -1,0 +1,17 @@
+{
+  "checks": [
+    {
+      "mode": "compiled",
+      "faceProbes": 12,
+      "trimProbes": 12,
+      "roofProbes": 8
+    },
+    {
+      "mode": "explore",
+      "faceProbes": 12,
+      "trimProbes": 12,
+      "roofProbes": 8
+    }
+  ],
+  "errors": []
+}

@@ -1,0 +1,39 @@
+{
+  "suiteCommands": 124,
+  "initialSuiteStop": {
+    "command": "npm test",
+    "code": 1,
+    "stopped": "test-facade-courses.mjs"
+  },
+  "resolvedInitialStop": "The three new joined cornices increase the expected course count from 22 to 25; all 2424 corner probes pass.",
+  "remainingFailures": [
+    {
+      "command": "node test-jarman.mjs",
+      "code": 1
+    },
+    {
+      "command": "node test-leighton-newton.mjs",
+      "code": 1
+    }
+  ],
+  "baselineFailures": [
+    "test-jarman.mjs",
+    "test-leighton-newton.mjs"
+  ],
+  "liveSourceHash": "6da5dcd7bdd55f5440a0561df5418b12c5d7725b4d54e81b6b00f81e97b32266",
+  "manifestSourceHash": "6da5dcd7bdd55f5440a0561df5418b12c5d7725b4d54e81b6b00f81e97b32266",
+  "manifestMatches": true,
+  "validatedSnapshot": {
+    "sourceHash": "1d3e0c6f015f6173bfb07717f631c49ca8fc2a31ffe5b34dc0004d3cf75371ed",
+    "capturedAt": "2026-10-04T19:14:40.995Z",
+    "attempt": 0
+  },
+  "finalLiveChecks": {
+    "westRefinement": "pass",
+    "facadeCourses": 22,
+    "facadeSurfaceProbes": 3000,
+    "wholeSceneWestProbes": 36,
+    "roofAttachments": 108,
+    "roofContactProbes": 3888
+  }
+}

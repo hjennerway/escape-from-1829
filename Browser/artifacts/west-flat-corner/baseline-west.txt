@@ -1,0 +1,1 @@
+PASS: narrowed west footprint, square garden projection, exposed glazing, continuous roof, blank end walls and walking access.

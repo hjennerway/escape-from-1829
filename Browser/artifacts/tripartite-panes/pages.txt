@@ -1,0 +1,5 @@
+Checking before
+Checking source
+Checking compiled
+Checking explore
+PASS: original rejected; source, compiled aerial and Explore pass pane/rail probes and desktop/phone captures without page or shader errors.

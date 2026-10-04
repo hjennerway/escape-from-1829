@@ -20,14 +20,14 @@ for(let i=0;i<pixels.length;i++){
 for(const side of [-1,1]){
   // Rays through previously solid main-range and wing-root footprints must
   // reach the new asphalt, with no old roof, cornice or white plinth bridging it.
-  for(const [x,z] of [[31.5,16.5],[30,18],[33,19.1],[32.3,19.8],[31.3,21.7],[30.3,23.7]]){
+  for(const [x,z] of [[31.5,16.5],[30,18],...(side>0?[[33,19.1],[32.3,19.8]]:[]),[31.3,21.7],[30.3,23.7]]){
     const hit=down(side*x,z);
     assert(hit.point.y<.3,'the corner and removed bollard footprint must be open to the sky');
     assert(!obstacles.some(o=>obstacleContains(o,side*x,z,.05)),'clipped building collision must leave the actual recess clear');
   }
   // Remaining masonry on both sides of the diagonal is solid, while the
   // approach and both camera positions remain outside the wing foundations.
-  for(const [x,z] of [[28.5,18.5],[30.3,15.7],[34.1,18],[33.2,21.3]])
+  for(const [x,z] of [[28.5,18.5],[30.3,15.7],[34.1,side<0?15.3:18],[33.2,21.3]])
     assert(obstacles.some(o=>obstacleContains(o,side*x,z,0)),'the surviving masonry must still block walking');
   for(const [x,z] of [[30.8,25.7],[30.8,23],[31.5,21],[31.5,19],[31.5,17],[31.5,16.2]])
     assert(!obstacles.some(o=>obstacleContains(o,side*x,z)),'a player-width route must reach the rear door');
@@ -48,18 +48,51 @@ for(const side of [-1,1]){
   }
 }
 const openings=model.userData.frontInsideCornerOpenings;
+// The later yellow guide adds a lower stepped section with a level roof.
+// Above that roof, the short upper face still joins the back-wall plane.
+assert(!model.getObjectByName('West forward inset root east slate roof'),'Remove the circled west roof wedge');
+for(const [x,z] of [[-34.4,16.5],[-34,17.5],[-34.4,20.5],[-33,19.1],[-32.3,20.5]]){
+  const top=down(x,z);
+  assert.equal(top.object.name,'West inside corner flat roof');
+  assert(Math.abs(top.point.y-8.83)<1e-5,'The new roof is level across both steps');
+  assert(obstacles.some(o=>obstacleContains(o,x,z,0)),'New masonry supplies the actual walking footprint');
+}
+for(const [x,z] of [[-33.3,17],[-32.5,18],[-31.5,20],[-31.5,22]]){
+  assert(down(x,z).point.y<.3,'The remaining court is open to the sky');
+  assert(!obstacles.some(o=>obstacleContains(o,x,z,.05)),'The stepped outline leaves the doorway route clear');
+}
+for(const [origin,direction,axis,value] of [
+  [[-32.5,4.6,16],[-1,0,0],'x',-33.65],
+  [[-32.5,4.6,17.5],[0,0,1],'z',18.5],
+  [[-31,4.6,20],[-1,0,0],'x',-32]
+]){
+  ray.set(new THREE.Vector3(...origin),new THREE.Vector3(...direction));
+  const hit=ray.intersectObject(model,true)[0];
+  assert.equal(hit.object.name,'West inside corner stepped infill masonry');
+  assert(Math.abs(hit.point[axis]-value)<1e-5,'All three new wall planes follow the yellow step');
+}
+for(const x of [-34.8,-34.2])for(const y of [11.7]){
+  ray.set(new THREE.Vector3(x,y,20.5),new THREE.Vector3(0,0,-1));
+  const hit=ray.intersectObject(model,true)[0];
+  assert.equal(hit.object.name,'West inside corner brick facet 5','The formerly projecting face is solid at every storey');
+  assert(Math.abs(hit.point.z-FRONT_CORNER_OUTLINE[2][1])<1e-5,'Purple face aligns exactly with the yellow wall');
+}
 assert.equal(openings.length,26);
 for(const o of openings)for(const u of [-.26,.26])for(const v of [-.27,.27]){
   const dx=Math.cos(o.rotation)*o.w*u,dz=-Math.sin(o.rotation)*o.w*u;
   ray.set(new THREE.Vector3(o.x+dx+o.nx*.35,o.y+o.h*v,o.z+dz+o.nz*.35),new THREE.Vector3(-o.nx,0,-o.nz));
   const hit=ray.intersectObject(model,true)[0];
-  assert.equal(hit?.object.material.color.getHex(),0x78989f,'each sash must expose all its panes ahead of the wall');
+  assert.equal(hit?.object.material.color.getHex(),0x78989f,'each sash must expose all its panes ahead of the wall '+JSON.stringify({o,u,v,hit:hit&&{name:hit.object.name,point:hit.point.toArray()}}));
   assert(hit.distance<.35,'glazing must be on the court side of the wall');
 }
 const west=openings.filter(o=>o.x<0),east=openings.filter(o=>o.x>0);
 for(let i=0;i<west.length;i++){
-  assert(Math.abs(west[i].x+east[i].x)<1e-6);
-  assert.equal(west[i].z,east[i].z);assert.equal(west[i].y,east[i].y);
+  assert.equal(west[i].y,east[i].y);
+  if(i<9){assert(Math.abs(west[i].x+east[i].x)<1e-6);assert.equal(west[i].z,east[i].z);}
+  else{
+    assert(Math.abs(west[i].rotation-Math.PI/2)<1e-6,'The retained lower sashes face the stepped outer walls');
+    assert(Math.abs(west[i].x-(i<11?-33.585:-31.935))<1e-6,'The two sash columns follow their new wall planes');
+  }
 }
 for(const [name,view] of Object.entries(FRONT_CORNER_VIEWS))if(name!=='front-corners'){
   assert(!obstacles.some(o=>obstacleContains(o,view.position[0],view.position[2])),name+' must start in open space');
@@ -69,5 +102,11 @@ const walker=createWalker(camera,obstacles);
 walker.setView({position:[31.5,1.8,23],target:[31.5,1.8,15]});walker.keys.add('KeyW');
 for(let i=0;i<20;i++)walker.update(.05);
 assert(camera.position.z<18.1,'the clipped courtyard must be accessible in Explore');
+walker.setView({position:[-31.45,1.8,23],target:[-31.45,1.8,14]});walker.keys.add('KeyW');
+for(let i=0;i<35;i++)walker.update(.05);walker.keys.clear();
+assert(camera.position.z>15.7&&camera.position.z<16.2,'The new stepped section retains walking access to the landing doorway');
+walker.setView({position:[-31,1.8,20],target:[-34,1.8,20]});walker.keys.add('KeyW');
+for(let i=0;i<15;i++)walker.update(.05);walker.keys.clear();
+assert(camera.position.x>-31.61&&camera.position.x<-31.4,'The walker stops at the new outer wall');
 assert(!model.children.some(o=>/inside corner bollard/i.test(o.name)),'the recent bollard is excluded');
-console.log('PASS: marked footprint, open roofs and foundations, diagonal collisions, clear door route, mirrored sash exposure, photo cameras and no bollards.');
+console.log('PASS: marked stepped walls, level flat roof, exact masonry collisions, physically walked clear doorway route, all 104 corner pane probes, retained east corner and photo cameras.');

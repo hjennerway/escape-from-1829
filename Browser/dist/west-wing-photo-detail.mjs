@@ -40,7 +40,8 @@ export function addWestWingPhotoDetails(THREE,{model,worldUV,white,brick,roof,st
     mesh:(geometry,mat,x,y,z,...rest)=>mesh(geometry,mat,-x,y,z,...rest),
     box:(mat,x,y,z,...rest)=>box(mat,-x,y,z,...rest)
   },-1);
-  const outerColumns=[-29,-25.8,-22,-18.1,-14.2,-10.3,-6.4,-2.5];
+  // Continue all three rows into the owner's circled courtyard gap.
+  const outerColumns=[-29,-25.8,-22,-18.1,-14.2,-10.3,-6.4,-2.5,1.4];
   for(const z of outerColumns){
     const x=z<-24.5?37.57:37.07;
     for(const y of [1.35,6.55,11.15])sash('west-wing-outer',x,y,z,Math.PI/2,1.4,y===1.35?1.85:2.9);
@@ -52,7 +53,7 @@ export function addWestWingPhotoDetails(THREE,{model,worldUV,white,brick,roof,st
   }
   // Three upper end openings: the central sash is wider with narrow sidelights.
   for(const x of [27,31,35])sash('west-wing-upper-end',x,11.55,-30.58,Math.PI,x===31?1.45:1.4,2.7);
-  for(const x of [29.92,32.08])sash('west-wing-end-sidelight',x,11.55,-30.6,Math.PI,.48,2.7);
+  for(const x of [29.92,32.08])sash('west-wing-end-sidelight',x,11.55,-30.6,Math.PI,.48,2.7,{columns:2});
 
   // Cream-framed glazed gallery above three brick infill panels. The shared
   // sloping roof rises back towards the taller block, as on the east annex.

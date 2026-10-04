@@ -50,9 +50,12 @@ export function addEntranceWalks(THREE,{model,material}){
     'West wing path to fire exit stairs',.28);
   // The court is flush with the lawn beside the basement retaining wall.
   // A gentle transition beyond the court joins the existing higher apron.
+  // Follow the current lean-to and carry the same gravel to the court wall;
+  // the former lawn strip and raised passage end are now fully surfaced.
+  const {leanToFront,end:passageEnd}=WEST_SIDE_BASEMENT;
   paving(polygon([[-73.5,-38],[-71.5,-38],[-71.5,-26],[-39.8,-26],
-    [-39.8,-4.5],[-39,-4.5],[-39,-1],[-37,-1],[-37,0],
-    [-55.5,0],[-73.5,0]]),'West courtyard and outer return path',WEST_SIDE_BASEMENT.grade);
+    [-39.8,leanToFront],[-39,leanToFront],[-39,passageEnd],
+    [-55.5,passageEnd],[-55.5,0],[-73.5,0]]),'West courtyard and outer return path',WEST_SIDE_BASEMENT.grade);
   const transition=paving(polygon([[-73.5,0],[-55.5,0],[-55.5,4],[-73.5,4]]),
     'West courtyard gradual apron transition',WEST_SIDE_BASEMENT.grade);
   const tp=transition.geometry.attributes.position;

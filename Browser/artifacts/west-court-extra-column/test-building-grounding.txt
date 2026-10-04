@@ -1,0 +1,1 @@
+PASS: 23 wall/plinth joins, 3840 exposed face samples, Carden join and 106 foundations; 996 extensions preserve upper geometry, textures and footprints; early timeline bases and repeat construction stay correct.

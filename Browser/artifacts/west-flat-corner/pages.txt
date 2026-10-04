@@ -1,0 +1,1 @@
+{"checks":[{"mode":"source","roof":5,"walls":3,"panes":52,"stoppedZ":null},{"mode":"compiled","roof":5,"walls":3,"panes":52,"stoppedZ":null},{"mode":"explore","roof":5,"walls":3,"panes":52,"stoppedZ":15.8125}],"errors":[]}

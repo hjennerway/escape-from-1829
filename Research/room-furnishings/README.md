@@ -1,5 +1,61 @@
 # Room furnishings — 3 October 2026
 
+## Supplied Cheshire Lunatic Asylum engraving — 4 October 2026
+
+The owner supplied the engraving captioned “Cheshire Lunatic Asylum” to replace
+the simple rural illustration shown in the visitors’ sitting hall. The exact
+uploaded PNG is bundled at `../../Browser/dist/art/cheshire-lunatic-asylum.png`.
+Both existing copies share one print texture in Escape and Explore. Their timber
+frames, dimensions and wall positions are retained. The full image and its
+caption fit at the original aspect ratio, with a narrow neutral paper margin
+above and below rather than cropping or stretching the engraving.
+
+This supersedes the rural-illustration description below. The supplied image
+is an owner-selected game decoration; its placement does not establish a
+historical room inventory. Browser sources and the local artwork asset change;
+Unity, Blender and packaged application exports are not regenerated.
+Desktop and phone review images in Escape and Explore, with exact image-pixel
+checks, are in `../../Browser/artifacts/hall-artwork/`.
+
+## Ground-floor linen folding and mending area — 4 October 2026
+
+The owner clarified that the second blank space is the ground-floor east-wing
+area below the checkers addition, across the corridor from the existing linen
+lobby. A matching wooden worktable now holds two stacks of folded linen and
+a sewing basket, with two inward-facing Windsor chairs and a timber bench.
+The six fixed records extend the ward service area without moving its linen
+cupboards, trolley, original bench or duty board. They keep corridor and door
+approaches clear and use the same placement, walking and sight data in Escape
+and Explore.
+
+`hall-furniture-models.mjs` reuses its folded-cloth construction for one new
+decorative model (168 triangles), using the existing muted linen materials.
+This is a fictional linen folding and mending use chosen to suit the nearby
+storage, with no claim about the asylum's historical room inventory. The
+ground-floor furnished SVG/PNG is refreshed. The hall checks cover ten models
+and 45 fixed records; new wide views are named `service-open-area`, with linen
+worktable and bench close views in `../../Browser/artifacts/hall-furnishings/`.
+Only browser sources and review drawings change. The aerial binary excludes
+these interior models; Unity, Blender and packaged exports are not regenerated.
+
+## Second east first-floor checkers group — 4 October 2026
+
+The owner requested another checkers table and bench in the open area shown
+in their east-wing first-floor screenshot, in addition to the existing table.
+The recreation area now spans both sides of the junction. The added table,
+four matching inward-facing Windsor chairs and draughts board occupy its east
+side; a matching bench faces the new table. The forward corridor stays open
+between the two groups. All original hall furniture retains its IDs and poses,
+and the seven additions stay fixed in both Escape and Explore. This extends
+the existing fictional recreation use without adding a historical claim.
+
+The first-floor furnished SVG/PNG is refreshed. Run `npm run test:halls` from
+`Browser` for placement and actual browser checks; the added wide desktop,
+phone and Explore views are named `recreation-open-area` in
+`../../Browser/artifacts/hall-furnishings/`. The aerial binary excludes this
+source and needs no rebuild for this change. Unity, Blender and packaged exports
+are unchanged.
+
 ## Three open halls — 4 October 2026
 
 The owner approved the visitors’ sitting hall directly above Reception, the

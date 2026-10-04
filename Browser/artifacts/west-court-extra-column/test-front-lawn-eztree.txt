@@ -1,0 +1,1 @@
+PASS: EZ-Tree lawn locations, envelope, LOD budgets, walkable crowns, solid trunks, visibility, wind/shadow time, reduced motion and binary restoration.

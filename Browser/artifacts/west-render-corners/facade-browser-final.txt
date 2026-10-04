@@ -1,0 +1,3 @@
+Captured source facade and ward joins
+Captured compiled facade and ward joins
+PASS: source and compiled facade courses, ward joins and mobile Reception without page or shader errors.

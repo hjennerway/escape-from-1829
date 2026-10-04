@@ -1,0 +1,23 @@
+
+> build:models
+> node vendor-three.mjs --check && node build-models.mjs
+
+Verified Three.js 0.186.1: three.module.js, GLTFLoader.js, BufferGeometryUtils.js, SkeletonUtils.js, THREE-LICENSE.txt, three.core.js
+{
+  "format": 1,
+  "revision": "186",
+  "sourceHash": "a42e6ddf3ae1e10070e5d877e165c6b7992b38aae976c9639696adf2da56129c",
+  "file": "aerial-b670e0da128b9502c376.bin.gz",
+  "bytes": 20843482,
+  "uncompressedBytes": 170337112,
+  "sha256": "b670e0da128b9502c376222b89164a4a57becc5ab1e98395a3a518d54420cb86",
+  "stats": {
+    "revision": "186",
+    "buildMilliseconds": 26077.39999999851,
+    "windows": 2583,
+    "geometries": 15673,
+    "materials": 646,
+    "textures": 63
+  },
+  "totalSeconds": 89.4
+}

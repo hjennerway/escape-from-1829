@@ -1,9 +1,35 @@
 import assert from 'node:assert/strict';
 import * as THREE from './dist/vendor/three.module.js';
 import {createEscapeExterior} from './dist/escape-exterior.mjs';
+import {WEST_RANGE_PLAN} from './dist/west-range-plan.mjs';
+import {WEST_END_PROPORTIONS} from './dist/west-refinement.mjs';
 globalThis.document={createElement:()=>({getContext:()=>({fillRect(){}})})};
 const {model}=createEscapeExterior(THREE,1.6);model.updateMatrixWorld(true);
 const ray=new THREE.Raycaster();
+// Probe the complete scene rather than just each sweep. The old end bars
+// were individually solid but met at different heights, and the low roof
+// support doubled the otherwise continuous garden band.
+let westProbes=0;
+function surface(x,z,y,side,reach=.04){
+ ray.set(new THREE.Vector3(x,y+side*reach/2,z),new THREE.Vector3(0,-side,0));ray.far=reach/2+.02;
+ const hits=ray.intersectObject(model,true);
+ assert.equal(hits.length,1,`One west trim surface at ${x}, ${y}, ${z}, side ${side}: ${JSON.stringify(hits.map(h=>({name:h.object.name,point:h.point.toArray(),face:h.faceIndex})))}`);
+ assert(Math.abs(hits[0].point.y-y)<1e-5,'West courses join at the same level without doubled surfaces');
+ assert.equal(hits[0].object.material.color.getHex(),0xe1e3dc,'The complete join uses matching white render');
+ westProbes++;
+}
+const {outerRearZ,outerFrontZ,innerLeft,innerFrontZ,gardenZ}=WEST_RANGE_PLAN;
+const {doorZ,pierWidth}=WEST_END_PROPORTIONS;
+for(const y of [4.05,8.6]){
+ for(const [x,z] of [[-72.27,outerRearZ-.20],[-72.27,outerFrontZ+.10],
+   [-72.51,doorZ-pierWidth/2+.13],[-72.51,doorZ+pierWidth/2-.13],
+   [-72.25,doorZ-pierWidth/2-.13],[-72.25,doorZ+pierWidth/2+.13]])
+  for(const side of [-1,1])surface(x,z,y+side*.09,side);
+}
+for(const z of [gardenZ+.4,15.8,17.6,19.6,innerFrontZ-.8]){
+ // A long downward/upward probe also rejects a second higher/lower strip.
+ for(const side of [-1,1])surface(innerLeft-.16,z,8.6+side*.09,side,.8);
+}
 // Test the complete model first, independently of the repair's metadata.
 for(const x of [-7.17,7.17])for(const y of [3.15,7.1,10.7]){
  ray.set(new THREE.Vector3(x,y+.135,19.64),new THREE.Vector3(0,-1,0));ray.far=.04;
@@ -14,8 +40,9 @@ for(const x of [-4,4]){
  const hit=ray.intersectObject(model,true)[0];
  assert(hit&&hit.point.z<19.601,'No sill fragment hangs below the Reception band');
 }
+for(const side of [-1,1])surface(innerLeft-.16,innerFrontZ-.3,8.6+side*.09,side);
 const courses=[];model.traverse(o=>{if(o.userData.facadeCourse)courses.push(o);});
-assert.equal(courses.length,20,'Survey every repaired course, including reflected lawn bays');
+assert.equal(courses.length,22,'Survey all repaired courses, including continuous west end/garden bands and middle-arm cornices');
 let corners=0,probes=0;
 for(const course of courses){
  const {line,y,height,width}=course.userData.facadeCourse;
@@ -55,4 +82,4 @@ model.traverse(course=>{
  }
 });
 assert(batchCorners>90,'Survey remaining ward, courtyard and shop courses');
-console.log(`PASS: ${courses.length} facade courses, ${corners} explicit and ${batchCorners} shared corner joins, ${probes} top/underside probes, plus Reception overlap and sill-lip regressions.`);
+console.log(`PASS: ${courses.length} facade courses, ${corners} explicit and ${batchCorners} shared corner joins, ${probes} top/underside and ${westProbes} complete-scene west probes, plus Reception overlap and sill-lip regressions.`);

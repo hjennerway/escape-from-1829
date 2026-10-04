@@ -1,0 +1,7 @@
+{"year":1829,"checked":11,"issues":[],"trimIssues":[]}
+{"year":1849,"checked":26,"issues":[],"trimIssues":[]}
+{"year":1870,"checked":33,"issues":[],"trimIssues":[]}
+{"year":1916,"checked":109,"issues":[],"trimIssues":[]}
+{"year":1938,"checked":109,"issues":[],"trimIssues":[]}
+{"year":2021,"checked":37,"issues":[],"trimIssues":[]}
+PASS: 109 exterior door leaves meet visible support and have no unintended crossing sill strips across six estate periods.
