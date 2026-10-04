@@ -86,5 +86,5 @@ for(const floor of floors){
  }
 }
 assert.equal(JSON.stringify(plan),snapshot,'Frame fitting does not mutate the shared plan');
-assert.equal(exits,22);assert.equal(entrances,1);assert.equal(rooms,89);
+assert.equal(exits,22);assert.equal(entrances,1);assert.equal(rooms,92);
 console.log(`PASS: ${exits+entrances} outside frames and ${rooms} regular-depth room frames on four floors, ${samples} masonry support/face-clearance rays and ${depthSamples} casing-depth rays, closed leaves and unchanged exterior anchors.`);

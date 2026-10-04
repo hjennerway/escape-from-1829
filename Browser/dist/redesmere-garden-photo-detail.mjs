@@ -10,7 +10,7 @@ export function addRedesmereGardenDetails(THREE,{model,box,mesh,worldUV,white,br
   // rear tower. All side openings share the same wall plane.
   // The courtyard end steps back beside the bay; its projecting fire-exit
   // corner has a short hip supplied by the courtyard detail module.
-  hipRoof(65.5,16.15,8.5,17.7,14.53,2.55).name='Garden pavilion slate roof';
+  hipRoof(66,16.15,7.5,17.7,14.53,1.15).name='Garden pavilion slate roof';
   mesh(worldUV(new THREE.BoxGeometry(.16,10.3,20),1.7),brick,69.8,9.15,15,true).name='Garden pavilion east wall';
   for(const z of [14.25,16.05])sash('garden-pavilion-upper-pair',69.96,11.45,z,Math.PI/2,1.5,2.1);
   for(const [z,w] of [[13.65,.75],[15.15,1.9],[16.65,.75]])sash('garden-pavilion-middle-glazing',69.96,6.35,z,Math.PI/2,w,2.55);

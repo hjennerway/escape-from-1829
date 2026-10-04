@@ -37,3 +37,8 @@ elsewhere. The two snapshot geometry hashes were refreshed for the 26 net
 added primitives only after that check; Leighton/Newton ranges are retained.
 The local compiled model passes source/rendering equivalence, full detail,
 fallback, timeline and walking-collision checks.
+
+## Proportion refinement (4 October 2026)
+
+See [PROPORTIONS.md](PROPORTIONS.md) for the owner's latest photo comparison.
+Its revised dimensions supersede the earlier frontage proportions above.

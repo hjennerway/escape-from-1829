@@ -73,8 +73,8 @@ const originalBay=exterior.model.getObjectByName('East curved bay');
 const squareBay=exterior.model.getObjectByName('East garden pavilion');
 assert(originalBay&&squareBay,'right frontage must retain the original curved bay and add a square projection');
 assert.equal(exterior.model.getObjectByName('East curved bay duplicate'),undefined,'the added round bay must be removed');
-// The east frontage retains its established half-octagonal plan. The west
-// garden bay is now proportioned independently from the front photograph.
+// The October reference retains the east half-octagonal shape, but with a
+// shallow projection and 45-degree cheeks. Other bays remain independent.
 {
   const base=exterior.model.getObjectByName('East curved bay white base');
   const normalize=points=>{
@@ -82,22 +82,22 @@ assert.equal(exterior.model.getObjectByName('East curved bay duplicate'),undefin
     const d=Math.max(...points.map(p=>p[1]));
     return points.map(([x,z])=>[x/w,z/d]);
   };
-  const expected=[[-.5,0],[-.5,.28],[-.25,1],[.25,1],[.5,.28],[.5,0]];
-  normalize(base.userData.collisionFootprint).forEach((p,i)=>p.forEach((v,j)=>assert(Math.abs(v-expected[i][j])<1e-9,'east bay retains its existing half-octagonal proportions')));
+  const expected=[[-.5,0],[-.5,.275/1.55],[-2.25/9.6,1],[2.25/9.6,1],[.5,.275/1.55],[.5,0]];
+  normalize(base.userData.collisionFootprint).forEach((p,i)=>p.forEach((v,j)=>assert(Math.abs(v-expected[i][j])<1e-9,'east bay has the shallow photographed half-octagonal proportions')));
   const r=new THREE.Raycaster(),hit=(x,y,z,dx=0,dz=-1)=>{
     r.set(new THREE.Vector3(x,y,z),new THREE.Vector3(dx,0,dz).normalize());
     return r.intersectObject(exterior.model,true)[0];
   };
-  const eastLow=hit(53.1,12.7,25),eastHigh=hit(53.1,13.1,25);
-  const wallLow=hit(48,12.7,25),wallHigh=hit(48,13.1,25);
-  assert.equal(eastLow.object,originalBay);
+  const eastLow=hit(53.1,13,25),eastHigh=hit(53.1,13.4,25);
+  const wallLow=hit(48,13,25),wallHigh=hit(48,13.4,25);
+  assert(eastLow.object===originalBay,'Brick probe above the raised sash reaches the bay wall');
   assert.equal(eastLow.object.material,wallLow.object.material,'bay reuses the adjoining masonry material');
   assert(Math.abs((eastHigh.uv.y-eastLow.uv.y)-(wallHigh.uv.y-wallLow.uv.y))<1e-6,'bay brick courses match the adjoining wall scale');
-  assert(Math.abs((hit(53.5,12.7,25).uv.x-eastLow.uv.x)-(hit(48.4,12.7,25).uv.x-wallLow.uv.x))<1e-6,'front brick lengths match the adjoining wall scale');
+  assert(Math.abs((hit(53.5,13,25).uv.x-eastLow.uv.x)-(hit(48.4,13,25).uv.x-wallLow.uv.x))<1e-6,'front brick lengths match the adjoining wall scale');
   assert.equal(hit(53.1,3.5,25).object,base,'white ground floor follows the bay');
   assert.equal(hit(52.3,13,25).point.z,hit(53.9,13,25).point.z,'the bay has one broad flat front');
   for(const o of exterior.model.userData.eastPhotoOpenings.filter(o=>o.face==='polygonal-bay')){
-    const normal=new THREE.Vector3(Math.sign(o.x-53.1)*2.016,0,Math.abs(o.x-53.1)<.1?1:1.275).normalize();
+    const normal=new THREE.Vector3(Math.sign(o.x-53.1),0,1).normalize();
     const tangent=new THREE.Vector3(normal.z,0,-normal.x);
     for(const offset of [-.3,0,.3]){
       const p=new THREE.Vector3(o.x,o.y+o.h/12,o.z).addScaledVector(tangent,offset*o.w).addScaledVector(normal,.5);
@@ -105,19 +105,19 @@ assert.equal(exterior.model.getObjectByName('East curved bay duplicate'),undefin
       assert.equal(r.intersectObject(exterior.model,true)[0].object.material.color.getHex(),0x78989f,'all three window faces remain exposed on all floors');
     }
   }
-  for(const [x,z] of [[51.1,20.8],[53.1,22],[55.1,20.8]]){
+  for(const [x,z] of [[51.5,20],[53.1,20.8],[54.7,20]]){
     r.set(new THREE.Vector3(x,30,z),new THREE.Vector3(0,-1,0));
     const roof=r.intersectObject(exterior.model,true)[0];
     assert.equal(roof.object.name,'East curved bay slate roof');
     assert(roof.face.normal.y>0,'half-octagonal roof covers every face');
   }
   const obstacles=exteriorObstacles(THREE,exterior.model),blocked=(x,z)=>obstacles.some(o=>obstacleContains(o,x,z,.05));
-  assert(blocked(53.1,22.1)&&blocked(51.3,21.1),'front and cheek masonry block walking');
-  assert(!blocked(50.6,22.1)&&!blocked(55.6,22.1),'canted corners leave their actual outside space clear');
+  assert(blocked(53.1,20.9)&&blocked(51.3,20),'front and cheek masonry block walking');
+  assert(!blocked(50.6,21.2)&&!blocked(55.6,21.2)&&!blocked(53.1,22.1),'the shallower bay reopens its former projection and leaves the canted corners clear');
 }
 const bayBounds=new THREE.Box3().setFromObject(squareBay),baySize=bayBounds.getSize(new THREE.Vector3());
 assert.equal(squareBay.geometry.type,'BoxGeometry','replacement has flat walls and square corners');
-assert.equal(baySize.x,8.5,'south frontage retains its width');
+assert.equal(baySize.x,7.5,'square frontage has the narrower October photo proportions');
 assert(Math.abs(baySize.z-17.7)<1e-5,'pavilion retains its square front and steps back at the courtyard recess');
 assert(bayBounds.max.z>24&&bayBounds.max.y>=14.3,'square bay projects outward at full three-storey height');
 assert(bayBounds.min.x>originalBay.position.x+3.15&&bayBounds.max.x<72.65,'projection occupies the blue-marked section left of the removed round bay');
@@ -157,7 +157,7 @@ for(const side of [-1,1]){
 }
 // Previously generic windows on both marked front sections now expose the
 // same three-light sash glazing and fine frame material as the photo windows.
-for(const [x,y,face] of [[-35.6,10.6,'1829-range-sash'],[43.05,11,'pavilion-flush']]){
+for(const [x,y,face] of [[-35.6,10.6,'1829-range-sash'],[46.3,11.6,'pavilion-left-pair']]){
   const o=exterior.model.userData.eastPhotoOpenings.find(o=>o.face===face&&Math.abs(o.x-x)<.01&&Math.abs(o.y-y)<.01&&o.z>17);
   assert(o,'remaining front opening uses the shared sash schedule');
   for(const [offset,color] of [[0,0x78989f],[-o.w/6,0xd3dcd8],[o.w/6,0xd3dcd8]]){
@@ -347,12 +347,12 @@ ray.near=0;ray.far=Infinity;
 const photoOpenings=exterior.model.userData.eastPhotoOpenings;
 const frontWindows=photoOpenings.filter(o=>o.face==='square-front');
 assert.equal(frontWindows.length,6,'square front has exactly two windows on each of three storeys');
-for(const y of [2,6.5,11])assert.equal(frontWindows.filter(o=>o.y===y).length,2);
+for(const y of [2,6.5,11.6])assert.equal(frontWindows.filter(o=>o.y===y).length,2);
 const wingWindows=photoOpenings.filter(o=>o.face==='forward-wing-east');
 assert.equal(wingWindows.length,16,'nine wing positions on each floor include one door instead of a sash');
 assert(!wingWindows.some(o=>o.z===38.1),'upper stair and ground door must not have superimposed windows');
 assert.equal(photoOpenings.filter(o=>o.face==='polygonal-bay').length,9,'three visible facets carry windows on all three floors');
-ray.set(new THREE.Vector3(63.65,2,30),new THREE.Vector3(0,0,-1));
+ray.set(new THREE.Vector3(64.05,2,30),new THREE.Vector3(0,0,-1));
 assert(ray.intersectObject(exterior.model,true)[0].object.isInstancedMesh,'ground-floor sash must be visible in front of the white wall');
 // img2.jpg observes the opposite side: a real projecting polygonal bay and
 // two close pairs plus one sash on every floor of the courtyard wall.

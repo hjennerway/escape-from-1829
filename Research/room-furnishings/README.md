@@ -1,5 +1,71 @@
 # Room furnishings — 3 October 2026
 
+## Three open halls — 4 October 2026
+
+The owner approved the visitors’ sitting hall directly above Reception, the
+ward service lobby east along the ground-floor corridor, and the communal
+recreation area directly above that lobby. Separate furnishing areas retain
+the existing open architecture and corridor routes. The sitting hall has two
+four-chair reading/visiting groups; the service lobby displays folded linen
+in two open cupboards and on a wooden trolley; the recreation area has a
+draughts table, newspaper stand, sewing basket and seating near the windows.
+
+The nine new designs are original procedural interpretations using the
+existing muted furniture palette. The rural landscape is an original canvas
+illustration, and the newspaper masthead, duty schedule, visiting text and
+placements are fictional. The visiting hours match the existing Reception
+notice. None establishes Chester’s original inventory or room functions.
+Existing furniture references and licences below remain applicable to the
+reused Windsor chairs, tables and books.
+
+The 32 records stay fixed between games and match in Escape and Explore.
+Cabinet fronts, corridors, windows, stair approaches and the ground-floor
+outside door stay accessible. Notebook discovery includes the three area
+names. Ground and first furnished plans are refreshed; other floors are
+preserved. Reproduce the focused checks with `npm run test:halls` from
+`Browser`; reviewed images, original records and scope proof are in
+`../../Browser/artifacts/hall-furnishings/`. These are browser sources;
+the aerial compiler excludes them. Unity, Blender and packaged exports are
+not regenerated.
+
+
+## Cold-water apparatus size and pole — 4 October 2026
+
+The owner's follow-up enlarges the complete cold-water apparatus to 130% of
+its previous width, depth and height: 1.586 × 1.430 × 2.964 metres. The shared
+Escape/Explore catalog applies those dimensions to the model, placement,
+walking, navigation and sight. The device remains fixed in ground R12; the
+ground-floor furnished SVG/PNG reflects its larger footprint.
+
+The left pole's brass control section replaces the matching portion of the
+iron shaft. The previous equal-radius cylinders overlapped along that section,
+causing a depth conflict. Separate iron sections now join the brass at each
+end, retaining the pole silhouette and control fittings. This is an adjustment
+to the existing interpretive cold-bathing model and historical reference.
+
+Close front, elevated and pole views plus desktop/mobile room checks are in
+`../../Browser/artifacts/cold-water-bath/`; reproduce them with that folder's
+`capture.mjs`. Only browser sources and the affected furnished plan are updated.
+The aerial binary excludes interior furniture; Unity, Blender and packaged
+desktop/Android exports are not regenerated.
+
+## Approved top-floor offices and storage — 4 October 2026
+
+The reviewed five-room layout replaces the earlier two-room top floor.
+R43 is a staff sitting room, R41 a smaller records office, R42 a staff office,
+R44 archive/storage and R45 a linen store. The records office has one bookcase,
+a desk and chair; its reduced footprint no longer needs the two cases of the
+former large room, and the new archive provides bulk storage. Archive shelves
+and linen cupboards retain their normal wall contact and front access. Existing
+placement/collision/navigation rules furnish all five rooms and reserve their
+door swings, room centres and circulation.
+
+The second-floor furnished SVG/PNG is regenerated; the drawing command accepts
+`second-floor` to update this level alone. The three lower-floor drawings and
+their current furniture sources are preserved. Top-floor doors have nameplates
+on both leaf faces in Escape and Explore. Current browser review and regression
+evidence is in `../../Browser/artifacts/top-floor-layout-proposal/implemented/`.
+
 ## Reception desk and key-hook correction — 4 October 2026
 
 The owner's follow-up moves the desk 30% closer to the back wall. Its centre
@@ -364,7 +430,7 @@ groupings explain the intended circulation and organisation.
 | First, cross range | R19/R28/R29 bedrooms; R20/R22/R27 wards; R23/R25 nursing; R26 staff sitting; R30 staff bedroom; R17 store; R18/R21/R31 quiet areas |
 | First, forward wings | R32/R36 wards; R33/R35 day rooms; R34 quiet sitting; R37 reading |
 | Basement | B1/B5/B8/B11 stores; B2 linen; B3/B7/B10 maintenance; B4/B12 records; B6 medicines |
-| Second | R41 records; R42 staff office |
+| Second | R43 staff sitting; R41 records office; R42 staff office; R44 archive/stores; R45 linen |
 | Kept clear | R24 stair hall on both levels; B9 stair lobby; ground R40 entrance porch |
 
 The eight small libraries listed above replace their earlier quiet sitting

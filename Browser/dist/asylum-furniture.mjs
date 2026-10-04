@@ -2,10 +2,12 @@ import {insidePolygon,flatWalkable} from './asylum-layout.mjs';
 import {asylumWindowCenters} from './asylum-windows.mjs';
 import {furnitureContains,furnitureBlocks,indexFurniture} from './furniture-collision.mjs';
 import {ROOM_USES,ROOM_PURPOSES} from './asylum-room-uses.mjs';
+import {HALL_PROP_CATALOG,hallFurnishings} from './hall-furnishings.mjs';
 import {doorRectangle,doorPolygonsOverlap,roomDoorHandle,roomDoorPanels,roomDoorHandlePlate} from './asylum-doors.mjs';
 
 export const RECEPTION_FURNITURE_SCALE=1.2;
 export const FURNITURE_CATALOG={
+ ...HALL_PROP_CATALOG,
  bed:{source:'bed_single_A',width:1.02*1.3,depth:2.10*1.3,height:.92*1.3},
  chair:{source:'windsor_chair',width:.48*1.3,depth:.47*1.3,height:.90*1.3},
  bookcase:{source:'shelf_B_large',width:1.25*1.5,depth:.38*1.5,height:1.90*1.5},
@@ -20,7 +22,7 @@ export const FURNITURE_CATALOG={
  rulesNotice:{procedural:true,width:.76*RECEPTION_FURNITURE_SCALE,depth:.045*RECEPTION_FURNITURE_SCALE,height:.92*RECEPTION_FURNITURE_SCALE,decorative:true,mounted:true,era:'Interpretive asylum rules'},
  clerkSet:{procedural:true,width:1.52*RECEPTION_FURNITURE_SCALE,depth:.64*RECEPTION_FURNITURE_SCALE,height:.35*RECEPTION_FURNITURE_SCALE,decorative:true,era:'Ledger, papers, ink, quill, candles and handbell'},
  hydroBath:{procedural:true,width:1.08,depth:2.30,height:1.33,era:'Victorian hydrotherapy'},
- hydroShower:{procedural:true,width:1.22,depth:1.10,height:2.28,era:'Early nineteenth-century cold bathing'},
+ hydroShower:{procedural:true,width:1.22*1.3,depth:1.10*1.3,height:2.28*1.3,era:'Early nineteenth-century cold bathing'},
  operatingTable:{procedural:true,width:.82*1.3,depth:2.08*1.3,height:1.02*1.3,era:'Circa 1830 surgical table'},
  electrotherapy:{procedural:true,width:1.10,depth:.68,height:1.35,era:'Late eighteenth / early nineteenth-century electrotherapy'},
  apothecary:{procedural:true,width:1.36,depth:.50,height:2.02,era:'Nineteenth-century dispensary'},
@@ -35,7 +37,7 @@ export function furnitureCorners(item,padding=0){
 }
 export const FURNITURE_FRONT_CLEARANCE=1;
 export function furnitureFrontClearance(item){
- if(!['bookcase','apothecary'].includes(item.kind))return null;
+ if(!['bookcase','apothecary','linenCupboard','sideboard'].includes(item.kind))return null;
  // Both models open towards local +Z. Reserve the whole front, with a
  // small allowance beside the frame, even when fitted to a diagonal wall.
  const distance=item.depth/2+FURNITURE_FRONT_CLEARANCE/2;
@@ -62,7 +64,7 @@ function windowPoints(floor){
 }
 function clearPlacement(floor,room,item,placed,windows){
  const fitted=room.purpose==='bookroom'||item.kind==='bookcase';
- const wallStorage=['cupboard','bookcase','waitingBench','longcaseClock'].includes(item.kind);
+ const wallStorage=['cupboard','bookcase','waitingBench','longcaseClock','linenCupboard','sideboard'].includes(item.kind);
  const c=Math.cos(item.rotation),s=Math.sin(item.rotation);
  // Storage backs touch masonry. Keep side/front clearance, but probe the
  // rear face just inside the case instead of padding it into its host wall.
@@ -246,6 +248,13 @@ export function furnishAsylum(floors,{seed=1829}={}){
    }
    // The old arrival position is now inside the requested central desk.
    floor.spawn={...floor.spawn,x:0,z:17.5/floor.cellSize,yaw:0};
+  }
+  const halls=hallFurnishings(floor,FURNITURE_CATALOG);
+  floor.furnishingAreas.push(...halls.areas);
+  for(const item of halls.items){
+   const area=halls.areas.find(a=>a.id===item.roomId);
+   if(!item.decorative&&!clearPlacement(floor,area,item,floor.furniture,windows))throw Error(`Hall furnishing has no clear placement: ${item.id} ${item.kind}`);
+   floor.furniture.push(item);
   }
   floor.furnitureObstacles=floor.furniture.filter(item=>!FURNITURE_CATALOG[item.kind].decorative);indexFurniture(floor);
   floor.cells=floor.architectureCells.slice();

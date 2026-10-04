@@ -1,0 +1,2768 @@
+{
+  "windows": 274,
+  "frameRays": 7672,
+  "railTriangles": 100,
+  "retainedRails": 280,
+  "floors": [
+    {
+      "floor": 0,
+      "windows": [
+        {
+          "window": 0,
+          "centre": [
+            -4.099999904632568,
+            1.9199999570846558,
+            -39.5
+          ],
+          "timberPieces": 5,
+          "nearbyRailTriangles": 0
+        },
+        {
+          "window": 1,
+          "centre": [
+            0.699999988079071,
+            1.9199999570846558,
+            -39.5
+          ],
+          "timberPieces": 5,
+          "nearbyRailTriangles": 0
+        },
+        {
+          "window": 2,
+          "centre": [
+            4.610000133514404,
+            1.9199999570846558,
+            -39.5
+          ],
+          "timberPieces": 5,
+          "nearbyRailTriangles": 0
+        },
+        {
+          "window": 3,
+          "centre": [
+            7.900000095367432,
+            1.9199999570846558,
+            -37
+          ],
+          "timberPieces": 5,
+          "nearbyRailTriangles": 0
+        },
+        {
+          "window": 4,
+          "centre": [
+            7.900000095367432,
+            1.9199999570846558,
+            -32
+          ],
+          "timberPieces": 5,
+          "nearbyRailTriangles": 0
+        },
+        {
+          "window": 5,
+          "centre": [
+            7.900000095367432,
+            1.9199999570846558,
+            -27
+          ],
+          "timberPieces": 5,
+          "nearbyRailTriangles": 0
+        },
+        {
+          "window": 6,
+          "centre": [
+            6.5,
+            1.9199999570846558,
+            -22.049999237060547
+          ],
+          "timberPieces": 5,
+          "nearbyRailTriangles": 0
+        },
+        {
+          "window": 7,
+          "centre": [
+            6.5,
+            1.9199999570846558,
+            -17.149999618530273
+          ],
+          "timberPieces": 5,
+          "nearbyRailTriangles": 0
+        },
+        {
+          "window": 8,
+          "centre": [
+            6.5,
+            1.9199999570846558,
+            -12.25
+          ],
+          "timberPieces": 5,
+          "nearbyRailTriangles": 0
+        },
+        {
+          "window": 9,
+          "centre": [
+            6.5,
+            1.9199999570846558,
+            -7.349999904632568
+          ],
+          "timberPieces": 5,
+          "nearbyRailTriangles": 0
+        },
+        {
+          "window": 10,
+          "centre": [
+            6.5,
+            1.9199999570846558,
+            -2.450000047683716
+          ],
+          "timberPieces": 5,
+          "nearbyRailTriangles": 0
+        },
+        {
+          "window": 11,
+          "centre": [
+            6.5,
+            1.9199999570846558,
+            2.450000047683716
+          ],
+          "timberPieces": 5,
+          "nearbyRailTriangles": 0
+        },
+        {
+          "window": 12,
+          "centre": [
+            11.333333015441895,
+            1.9199999570846558,
+            7
+          ],
+          "timberPieces": 5,
+          "nearbyRailTriangles": 0
+        },
+        {
+          "window": 13,
+          "centre": [
+            16.799999237060547,
+            1.9199999570846558,
+            7
+          ],
+          "timberPieces": 5,
+          "nearbyRailTriangles": 0
+        },
+        {
+          "window": 14,
+          "centre": [
+            22.266666412353516,
+            1.9199999570846558,
+            7
+          ],
+          "timberPieces": 5,
+          "nearbyRailTriangles": 0
+        },
+        {
+          "window": 15,
+          "centre": [
+            22.25,
+            1.9199999570846558,
+            6
+          ],
+          "timberPieces": 5,
+          "nearbyRailTriangles": 0
+        },
+        {
+          "window": 16,
+          "centre": [
+            19.5,
+            1.9199999570846558,
+            3
+          ],
+          "timberPieces": 5,
+          "nearbyRailTriangles": 0
+        },
+        {
+          "window": 17,
+          "centre": [
+            22.100000381469727,
+            1.9199999570846558,
+            0
+          ],
+          "timberPieces": 5,
+          "nearbyRailTriangles": 0
+        },
+        {
+          "window": 18,
+          "centre": [
+            23,
+            1.9199999570846558,
+            -5.5
+          ],
+          "timberPieces": 5,
+          "nearbyRailTriangles": 0
+        },
+        {
+          "window": 19,
+          "centre": [
+            21.75,
+            1.9199999570846558,
+            -10.800000190734863
+          ],
+          "timberPieces": 5,
+          "nearbyRailTriangles": 0
+        },
+        {
+          "window": 20,
+          "centre": [
+            18.799999237060547,
+            1.9199999570846558,
+            -14.5
+          ],
+          "timberPieces": 5,
+          "nearbyRailTriangles": 0
+        },
+        {
+          "window": 21,
+          "centre": [
+            21.75,
+            1.9199999570846558,
+            -18.200000762939453
+          ],
+          "timberPieces": 5,
+          "nearbyRailTriangles": 0
+        },
+        {
+          "window": 22,
+          "centre": [
+            24.700000762939453,
+            1.9199999570846558,
+            -21.350000381469727
+          ],
+          "timberPieces": 5,
+          "nearbyRailTriangles": 0
+        },
+        {
+          "window": 23,
+          "centre": [
+            24.5,
+            1.9199999570846558,
+            -28.8174991607666
+          ],
+          "timberPieces": 5,
+          "nearbyRailTriangles": 0
+        },
+        {
+          "window": 24,
+          "centre": [
+            24.5,
+            1.9199999570846558,
+            -33.290000915527344
+          ],
+          "timberPieces": 5,
+          "nearbyRailTriangles": 0
+        },
+        {
+          "window": 25,
+          "centre": [
+            26.66666603088379,
+            1.9199999570846558,
+            -35.5
+          ],
+          "timberPieces": 5,
+          "nearbyRailTriangles": 0
+        },
+        {
+          "window": 26,
+          "centre": [
+            31,
+            1.9199999570846558,
+            -35.5
+          ],
+          "timberPieces": 5,
+          "nearbyRailTriangles": 0
+        },
+        {
+          "window": 27,
+          "centre": [
+            35.4900016784668,
+            1.9199999570846558,
+            -35.5
+          ],
+          "timberPieces": 5,
+          "nearbyRailTriangles": 0
+        },
+        {
+          "window": 28,
+          "centre": [
+            37.5,
+            1.9199999570846558,
+            -32.75
+          ],
+          "timberPieces": 5,
+          "nearbyRailTriangles": 0
+        },
+        {
+          "window": 29,
+          "centre": [
+            37.5,
+            1.9199999570846558,
+            -27.25
+          ],
+          "timberPieces": 5,
+          "nearbyRailTriangles": 0
+        },
+        {
+          "window": 30,
+          "centre": [
+            37,
+            1.9199999570846558,
+            -22.25
+          ],
+          "timberPieces": 5,
+          "nearbyRailTriangles": 0
+        },
+        {
+          "window": 31,
+          "centre": [
+            37,
+            1.9199999570846558,
+            -17.75
+          ],
+          "timberPieces": 5,
+          "nearbyRailTriangles": 0
+        },
+        {
+          "window": 32,
+          "centre": [
+            37,
+            1.9199999570846558,
+            -13.25
+          ],
+          "timberPieces": 5,
+          "nearbyRailTriangles": 0
+        },
+        {
+          "window": 33,
+          "centre": [
+            37,
+            1.9199999570846558,
+            -8.75
+          ],
+          "timberPieces": 5,
+          "nearbyRailTriangles": 0
+        },
+        {
+          "window": 34,
+          "centre": [
+            37,
+            1.9199999570846558,
+            -4.25
+          ],
+          "timberPieces": 5,
+          "nearbyRailTriangles": 0
+        },
+        {
+          "window": 35,
+          "centre": [
+            37,
+            1.9199999570846558,
+            0.25
+          ],
+          "timberPieces": 5,
+          "nearbyRailTriangles": 0
+        },
+        {
+          "window": 36,
+          "centre": [
+            37,
+            1.9199999570846558,
+            4.75
+          ],
+          "timberPieces": 5,
+          "nearbyRailTriangles": 0
+        },
+        {
+          "window": 37,
+          "centre": [
+            40.17499923706055,
+            1.9199999570846558,
+            7
+          ],
+          "timberPieces": 5,
+          "nearbyRailTriangles": 0
+        },
+        {
+          "window": 38,
+          "centre": [
+            47.92499923706055,
+            1.9199999570846558,
+            4.5
+          ],
+          "timberPieces": 5,
+          "nearbyRailTriangles": 0
+        },
+        {
+          "window": 39,
+          "centre": [
+            53.57500076293945,
+            1.9199999570846558,
+            4.5
+          ],
+          "timberPieces": 5,
+          "nearbyRailTriangles": 0
+        },
+        {
+          "window": 40,
+          "centre": [
+            63.20000076293945,
+            1.9199999570846558,
+            5.150000095367432
+          ],
+          "timberPieces": 5,
+          "nearbyRailTriangles": 0
+        },
+        {
+          "window": 41,
+          "centre": [
+            69.69999694824219,
+            1.9199999570846558,
+            7.193333148956299
+          ],
+          "timberPieces": 5,
+          "nearbyRailTriangles": 0
+        },
+        {
+          "window": 42,
+          "centre": [
+            69.69999694824219,
+            1.9199999570846558,
+            11.579999923706055
+          ],
+          "timberPieces": 5,
+          "nearbyRailTriangles": 0
+        },
+        {
+          "window": 43,
+          "centre": [
+            69.69999694824219,
+            1.9199999570846558,
+            15.966666221618652
+          ],
+          "timberPieces": 5,
+          "nearbyRailTriangles": 0
+        },
+        {
+          "window": 44,
+          "centre": [
+            69.69999694824219,
+            1.9199999570846558,
+            22.3700008392334
+          ],
+          "timberPieces": 5,
+          "nearbyRailTriangles": 0
+        },
+        {
+          "window": 45,
+          "centre": [
+            67.07499694824219,
+            1.9199999570846558,
+            25
+          ],
+          "timberPieces": 5,
+          "nearbyRailTriangles": 0
+        },
+        {
+          "window": 46,
+          "centre": [
+            62.13999938964844,
+            1.9199999570846558,
+            25
+          ],
+          "timberPieces": 5,
+          "nearbyRailTriangles": 0
+        },
+        {
+          "window": 47,
+          "centre": [
+            59.20000076293945,
+            1.9199999570846558,
+            22.25
+          ],
+          "timberPieces": 5,
+          "nearbyRailTriangles": 0
+        },
+        {
+          "window": 48,
+          "centre": [
+            48.125,
+            1.9199999570846558,
+            19.5
+          ],
+          "timberPieces": 5,
+          "nearbyRailTriangles": 0
+        },
+        {
+          "window": 49,
+          "centre": [
+            43.375,
+            1.9199999570846558,
+            19.5
+          ],
+          "timberPieces": 5,
+          "nearbyRailTriangles": 0
+        },
+        {
+          "window": 50,
+          "centre": [
+            41,
+            1.9199999570846558,
+            21.72624969482422
+          ],
+          "timberPieces": 5,
+          "nearbyRailTriangles": 0
+        },
+        {
+          "window": 51,
+          "centre": [
+            41,
+            1.9199999570846558,
+            26.110000610351562
+          ],
+          "timberPieces": 5,
+          "nearbyRailTriangles": 0
+        },
+        {
+          "window": 52,
+          "centre": [
+            41,
+            1.9199999570846558,
+            30.631250381469727
+          ],
+          "timberPieces": 5,
+          "nearbyRailTriangles": 0
+        },
+        {
+          "window": 53,
+          "centre": [
+            41,
+            1.9199999570846558,
+            35.0837516784668
+          ],
+          "timberPieces": 5,
+          "nearbyRailTriangles": 0
+        },
+        {
+          "window": 54,
+          "centre": [
+            38,
+            1.9199999570846558,
+            43
+          ],
+          "timberPieces": 5,
+          "nearbyRailTriangles": 0
+        },
+        {
+          "window": 55,
+          "centre": [
+            32,
+            1.9199999570846558,
+            43
+          ],
+          "timberPieces": 5,
+          "nearbyRailTriangles": 0
+        },
+        {
+          "window": 56,
+          "centre": [
+            29,
+            1.9199999570846558,
+            40.400001525878906
+          ],
+          "timberPieces": 5,
+          "nearbyRailTriangles": 0
+        },
+        {
+          "window": 57,
+          "centre": [
+            27.5,
+            1.9199999570846558,
+            35.45000076293945
+          ],
+          "timberPieces": 5,
+          "nearbyRailTriangles": 0
+        },
+        {
+          "window": 58,
+          "centre": [
+            29,
+            1.9199999570846558,
+            30.049999237060547
+          ],
+          "timberPieces": 5,
+          "nearbyRailTriangles": 0
+        },
+        {
+          "window": 59,
+          "centre": [
+            32,
+            1.9199999570846558,
+            23.125
+          ],
+          "timberPieces": 5,
+          "nearbyRailTriangles": 0
+        },
+        {
+          "window": 60,
+          "centre": [
+            25.850000381469727,
+            1.9199999570846558,
+            19.700000762939453
+          ],
+          "timberPieces": 5,
+          "nearbyRailTriangles": 0
+        },
+        {
+          "window": 61,
+          "centre": [
+            20.016666412353516,
+            1.9199999570846558,
+            17.299999237060547
+          ],
+          "timberPieces": 5,
+          "nearbyRailTriangles": 0
+        },
+        {
+          "window": 62,
+          "centre": [
+            14.850000381469727,
+            1.9199999570846558,
+            17.299999237060547
+          ],
+          "timberPieces": 5,
+          "nearbyRailTriangles": 0
+        },
+        {
+          "window": 63,
+          "centre": [
+            9.683333396911621,
+            1.9199999570846558,
+            17.299999237060547
+          ],
+          "timberPieces": 5,
+          "nearbyRailTriangles": 0
+        },
+        {
+          "window": 64,
+          "centre": [
+            4.025000095367432,
+            1.9199999570846558,
+            19.600000381469727
+          ],
+          "timberPieces": 5,
+          "nearbyRailTriangles": 0
+        },
+        {
+          "window": 65,
+          "centre": [
+            -4.025000095367432,
+            1.9199999570846558,
+            19.600000381469727
+          ],
+          "timberPieces": 5,
+          "nearbyRailTriangles": 0
+        },
+        {
+          "window": 66,
+          "centre": [
+            -11.016666412353516,
+            1.9199999570846558,
+            17.299999237060547
+          ],
+          "timberPieces": 5,
+          "nearbyRailTriangles": 0
+        },
+        {
+          "window": 67,
+          "centre": [
+            -15.109999656677246,
+            1.9199999570846558,
+            17.299999237060547
+          ],
+          "timberPieces": 5,
+          "nearbyRailTriangles": 0
+        },
+        {
+          "window": 68,
+          "centre": [
+            -20.28333282470703,
+            1.9199999570846558,
+            17.299999237060547
+          ],
+          "timberPieces": 5,
+          "nearbyRailTriangles": 0
+        },
+        {
+          "window": 69,
+          "centre": [
+            -25.850000381469727,
+            1.9199999570846558,
+            19.700000762939453
+          ],
+          "timberPieces": 5,
+          "nearbyRailTriangles": 0
+        },
+        {
+          "window": 70,
+          "centre": [
+            -32,
+            1.9199999570846558,
+            23.125
+          ],
+          "timberPieces": 5,
+          "nearbyRailTriangles": 0
+        },
+        {
+          "window": 71,
+          "centre": [
+            -29,
+            1.9199999570846558,
+            30.049999237060547
+          ],
+          "timberPieces": 5,
+          "nearbyRailTriangles": 0
+        },
+        {
+          "window": 72,
+          "centre": [
+            -27.5,
+            1.9199999570846558,
+            35.45000076293945
+          ],
+          "timberPieces": 5,
+          "nearbyRailTriangles": 0
+        },
+        {
+          "window": 73,
+          "centre": [
+            -29,
+            1.9199999570846558,
+            40.400001525878906
+          ],
+          "timberPieces": 5,
+          "nearbyRailTriangles": 0
+        },
+        {
+          "window": 74,
+          "centre": [
+            -31.733333587646484,
+            1.9199999570846558,
+            43
+          ],
+          "timberPieces": 5,
+          "nearbyRailTriangles": 0
+        },
+        {
+          "window": 75,
+          "centre": [
+            -37.20000076293945,
+            1.9199999570846558,
+            43
+          ],
+          "timberPieces": 5,
+          "nearbyRailTriangles": 0
+        },
+        {
+          "window": 76,
+          "centre": [
+            -42.66666793823242,
+            1.9199999570846558,
+            43
+          ],
+          "timberPieces": 5,
+          "nearbyRailTriangles": 0
+        },
+        {
+          "window": 77,
+          "centre": [
+            -45.400001525878906,
+            1.9199999570846558,
+            34.77000045776367
+          ],
+          "timberPieces": 5,
+          "nearbyRailTriangles": 0
+        },
+        {
+          "window": 78,
+          "centre": [
+            -45.400001525878906,
+            1.9199999570846558,
+            29.59000015258789
+          ],
+          "timberPieces": 5,
+          "nearbyRailTriangles": 0
+        },
+        {
+          "window": 79,
+          "centre": [
+            -43.20000076293945,
+            1.9199999570846558,
+            27
+          ],
+          "timberPieces": 5,
+          "nearbyRailTriangles": 0
+        },
+        {
+          "window": 80,
+          "centre": [
+            -41,
+            1.9199999570846558,
+            23.25
+          ],
+          "timberPieces": 5,
+          "nearbyRailTriangles": 0
+        },
+        {
+          "window": 81,
+          "centre": [
+            -59.79999923706055,
+            1.9199999570846558,
+            19.5
+          ],
+          "timberPieces": 5,
+          "nearbyRailTriangles": 0
+        },
+        {
+          "window": 82,
+          "centre": [
+            -64,
+            1.9199999570846558,
+            23.690000534057617
+          ],
+          "timberPieces": 5,
+          "nearbyRailTriangles": 0
+        },
+        {
+          "window": 83,
+          "centre": [
+            -68,
+            1.9199999570846558,
+            26.5
+          ],
+          "timberPieces": 5,
+          "nearbyRailTriangles": 0
+        },
+        {
+          "window": 84,
+          "centre": [
+            -72,
+            1.9199999570846558,
+            23.690000534057617
+          ],
+          "timberPieces": 5,
+          "nearbyRailTriangles": 0
+        },
+        {
+          "window": 85,
+          "centre": [
+            -72.30000305175781,
+            1.9199999570846558,
+            15.895000457763672
+          ],
+          "timberPieces": 5,
+          "nearbyRailTriangles": 0
+        },
+        {
+          "window": 86,
+          "centre": [
+            -72.30000305175781,
+            1.9199999570846558,
+            6.855000019073486
+          ],
+          "timberPieces": 5,
+          "nearbyRailTriangles": 0
+        },
+        {
+          "window": 87,
+          "centre": [
+            -70.1500015258789,
+            1.9199999570846558,
+            2.9749999046325684
+          ],
+          "timberPieces": 5,
+          "nearbyRailTriangles": 0
+        },
+        {
+          "window": 88,
+          "centre": [
+            -65.8499984741211,
+            1.9199999570846558,
+            2.924999952316284
+          ],
+          "timberPieces": 5,
+          "nearbyRailTriangles": 0
+        },
+        {
+          "window": 89,
+          "centre": [
+            -62.599998474121094,
+            1.9199999570846558,
+            5
+          ],
+          "timberPieces": 5,
+          "nearbyRailTriangles": 0
+        },
+        {
+          "window": 90,
+          "centre": [
+            -61.70000076293945,
+            1.9199999570846558,
+            1.2999999523162842
+          ],
+          "timberPieces": 5,
+          "nearbyRailTriangles": 0
+        },
+        {
+          "window": 91,
+          "centre": [
+            -54.310001373291016,
+            1.9199999570846558,
+            -1
+          ],
+          "timberPieces": 5,
+          "nearbyRailTriangles": 0
+        },
+        {
+          "window": 92,
+          "centre": [
+            -49.092498779296875,
+            1.9199999570846558,
+            -1
+          ],
+          "timberPieces": 5,
+          "nearbyRailTriangles": 0
+        },
+        {
+          "window": 93,
+          "centre": [
+            -41.400001525878906,
+            1.9199999570846558,
+            -4.5
+          ],
+          "timberPieces": 5,
+          "nearbyRailTriangles": 0
+        },
+        {
+          "window": 94,
+          "centre": [
+            -37,
+            1.9199999570846558,
+            -3.3499999046325684
+          ],
+          "timberPieces": 5,
+          "nearbyRailTriangles": 0
+        },
+        {
+          "window": 95,
+          "centre": [
+            -37,
+            1.9199999570846558,
+            -8.050000190734863
+          ],
+          "timberPieces": 5,
+          "nearbyRailTriangles": 0
+        },
+        {
+          "window": 96,
+          "centre": [
+            -37,
+            1.9199999570846558,
+            -12.75
+          ],
+          "timberPieces": 5,
+          "nearbyRailTriangles": 0
+        },
+        {
+          "window": 97,
+          "centre": [
+            -37,
+            1.9199999570846558,
+            -17.450000762939453
+          ],
+          "timberPieces": 5,
+          "nearbyRailTriangles": 0
+        },
+        {
+          "window": 98,
+          "centre": [
+            -37,
+            1.9199999570846558,
+            -22.149999618530273
+          ],
+          "timberPieces": 5,
+          "nearbyRailTriangles": 0
+        },
+        {
+          "window": 99,
+          "centre": [
+            -37.5,
+            1.9199999570846558,
+            -27.25
+          ],
+          "timberPieces": 5,
+          "nearbyRailTriangles": 0
+        },
+        {
+          "window": 100,
+          "centre": [
+            -37.5,
+            1.9199999570846558,
+            -32.75
+          ],
+          "timberPieces": 5,
+          "nearbyRailTriangles": 0
+        },
+        {
+          "window": 101,
+          "centre": [
+            -35.4900016784668,
+            1.9199999570846558,
+            -35.5
+          ],
+          "timberPieces": 5,
+          "nearbyRailTriangles": 0
+        },
+        {
+          "window": 102,
+          "centre": [
+            -31,
+            1.9199999570846558,
+            -35.5
+          ],
+          "timberPieces": 5,
+          "nearbyRailTriangles": 0
+        },
+        {
+          "window": 103,
+          "centre": [
+            -26.66666603088379,
+            1.9199999570846558,
+            -35.5
+          ],
+          "timberPieces": 5,
+          "nearbyRailTriangles": 0
+        },
+        {
+          "window": 104,
+          "centre": [
+            -24.5,
+            1.9199999570846558,
+            -33.290000915527344
+          ],
+          "timberPieces": 5,
+          "nearbyRailTriangles": 0
+        },
+        {
+          "window": 105,
+          "centre": [
+            -24.5,
+            1.9199999570846558,
+            -28.8174991607666
+          ],
+          "timberPieces": 5,
+          "nearbyRailTriangles": 0
+        },
+        {
+          "window": 106,
+          "centre": [
+            -24.700000762939453,
+            1.9199999570846558,
+            -21.350000381469727
+          ],
+          "timberPieces": 5,
+          "nearbyRailTriangles": 0
+        },
+        {
+          "window": 107,
+          "centre": [
+            -21.75,
+            1.9199999570846558,
+            -18.200000762939453
+          ],
+          "timberPieces": 5,
+          "nearbyRailTriangles": 0
+        },
+        {
+          "window": 108,
+          "centre": [
+            -18.799999237060547,
+            1.9199999570846558,
+            -14.5
+          ],
+          "timberPieces": 5,
+          "nearbyRailTriangles": 0
+        },
+        {
+          "window": 109,
+          "centre": [
+            -21.75,
+            1.9199999570846558,
+            -10.800000190734863
+          ],
+          "timberPieces": 5,
+          "nearbyRailTriangles": 0
+        },
+        {
+          "window": 110,
+          "centre": [
+            -23,
+            1.9199999570846558,
+            -5.5
+          ],
+          "timberPieces": 5,
+          "nearbyRailTriangles": 0
+        },
+        {
+          "window": 111,
+          "centre": [
+            -22.100000381469727,
+            1.9199999570846558,
+            0
+          ],
+          "timberPieces": 5,
+          "nearbyRailTriangles": 0
+        },
+        {
+          "window": 112,
+          "centre": [
+            -19.5,
+            1.9199999570846558,
+            3
+          ],
+          "timberPieces": 5,
+          "nearbyRailTriangles": 0
+        },
+        {
+          "window": 113,
+          "centre": [
+            -22.25,
+            1.9199999570846558,
+            6
+          ],
+          "timberPieces": 5,
+          "nearbyRailTriangles": 0
+        },
+        {
+          "window": 114,
+          "centre": [
+            -22.266666412353516,
+            1.9199999570846558,
+            7
+          ],
+          "timberPieces": 5,
+          "nearbyRailTriangles": 0
+        },
+        {
+          "window": 115,
+          "centre": [
+            -16.799999237060547,
+            1.9199999570846558,
+            7
+          ],
+          "timberPieces": 5,
+          "nearbyRailTriangles": 0
+        },
+        {
+          "window": 116,
+          "centre": [
+            -11.333333015441895,
+            1.9199999570846558,
+            7
+          ],
+          "timberPieces": 5,
+          "nearbyRailTriangles": 0
+        },
+        {
+          "window": 117,
+          "centre": [
+            -6.5,
+            1.9199999570846558,
+            2.680000066757202
+          ],
+          "timberPieces": 5,
+          "nearbyRailTriangles": 0
+        },
+        {
+          "window": 118,
+          "centre": [
+            -6.5,
+            1.9199999570846558,
+            -1.8899999856948853
+          ],
+          "timberPieces": 5,
+          "nearbyRailTriangles": 0
+        },
+        {
+          "window": 119,
+          "centre": [
+            -6.5,
+            1.9199999570846558,
+            -6.199999809265137
+          ],
+          "timberPieces": 5,
+          "nearbyRailTriangles": 0
+        },
+        {
+          "window": 120,
+          "centre": [
+            -6.5,
+            1.9199999570846558,
+            -10.640000343322754
+          ],
+          "timberPieces": 5,
+          "nearbyRailTriangles": 0
+        },
+        {
+          "window": 121,
+          "centre": [
+            -6.5,
+            1.9199999570846558,
+            -15.079999923706055
+          ],
+          "timberPieces": 5,
+          "nearbyRailTriangles": 0
+        },
+        {
+          "window": 122,
+          "centre": [
+            -6.5,
+            1.9199999570846558,
+            -19.520000457763672
+          ],
+          "timberPieces": 5,
+          "nearbyRailTriangles": 0
+        },
+        {
+          "window": 123,
+          "centre": [
+            -6.5,
+            1.9199999570846558,
+            -23.610000610351562
+          ],
+          "timberPieces": 5,
+          "nearbyRailTriangles": 0
+        },
+        {
+          "window": 124,
+          "centre": [
+            -6.5,
+            1.9199999570846558,
+            -28.399999618530273
+          ],
+          "timberPieces": 5,
+          "nearbyRailTriangles": 0
+        },
+        {
+          "window": 125,
+          "centre": [
+            -6.5,
+            1.9199999570846558,
+            -32.84000015258789
+          ],
+          "timberPieces": 5,
+          "nearbyRailTriangles": 0
+        },
+        {
+          "window": 126,
+          "centre": [
+            -6.5,
+            1.9199999570846558,
+            -37.279998779296875
+          ],
+          "timberPieces": 5,
+          "nearbyRailTriangles": 0
+        }
+      ]
+    },
+    {
+      "floor": 1,
+      "windows": [
+        {
+          "window": 0,
+          "centre": [
+            -4.099999904632568,
+            1.9199999570846558,
+            -39.5
+          ],
+          "timberPieces": 5,
+          "nearbyRailTriangles": 0
+        },
+        {
+          "window": 1,
+          "centre": [
+            0.699999988079071,
+            1.9199999570846558,
+            -39.5
+          ],
+          "timberPieces": 5,
+          "nearbyRailTriangles": 0
+        },
+        {
+          "window": 2,
+          "centre": [
+            4.610000133514404,
+            1.9199999570846558,
+            -39.5
+          ],
+          "timberPieces": 5,
+          "nearbyRailTriangles": 0
+        },
+        {
+          "window": 3,
+          "centre": [
+            7.900000095367432,
+            1.9199999570846558,
+            -32.75749969482422
+          ],
+          "timberPieces": 5,
+          "nearbyRailTriangles": 0
+        },
+        {
+          "window": 4,
+          "centre": [
+            7.900000095367432,
+            1.9199999570846558,
+            -27.252500534057617
+          ],
+          "timberPieces": 5,
+          "nearbyRailTriangles": 0
+        },
+        {
+          "window": 5,
+          "centre": [
+            6.5,
+            1.9199999570846558,
+            -22.049999237060547
+          ],
+          "timberPieces": 5,
+          "nearbyRailTriangles": 0
+        },
+        {
+          "window": 6,
+          "centre": [
+            6.5,
+            1.9199999570846558,
+            -17.149999618530273
+          ],
+          "timberPieces": 5,
+          "nearbyRailTriangles": 0
+        },
+        {
+          "window": 7,
+          "centre": [
+            6.5,
+            1.9199999570846558,
+            -12.25
+          ],
+          "timberPieces": 5,
+          "nearbyRailTriangles": 0
+        },
+        {
+          "window": 8,
+          "centre": [
+            6.5,
+            1.9199999570846558,
+            -7.349999904632568
+          ],
+          "timberPieces": 5,
+          "nearbyRailTriangles": 0
+        },
+        {
+          "window": 9,
+          "centre": [
+            6.5,
+            1.9199999570846558,
+            -2.450000047683716
+          ],
+          "timberPieces": 5,
+          "nearbyRailTriangles": 0
+        },
+        {
+          "window": 10,
+          "centre": [
+            6.5,
+            1.9199999570846558,
+            2.450000047683716
+          ],
+          "timberPieces": 5,
+          "nearbyRailTriangles": 0
+        },
+        {
+          "window": 11,
+          "centre": [
+            11.333333015441895,
+            1.9199999570846558,
+            7
+          ],
+          "timberPieces": 5,
+          "nearbyRailTriangles": 0
+        },
+        {
+          "window": 12,
+          "centre": [
+            16.799999237060547,
+            1.9199999570846558,
+            7
+          ],
+          "timberPieces": 5,
+          "nearbyRailTriangles": 0
+        },
+        {
+          "window": 13,
+          "centre": [
+            22.266666412353516,
+            1.9199999570846558,
+            7
+          ],
+          "timberPieces": 5,
+          "nearbyRailTriangles": 0
+        },
+        {
+          "window": 14,
+          "centre": [
+            22.25,
+            1.9199999570846558,
+            6
+          ],
+          "timberPieces": 5,
+          "nearbyRailTriangles": 0
+        },
+        {
+          "window": 15,
+          "centre": [
+            19.5,
+            1.9199999570846558,
+            3
+          ],
+          "timberPieces": 5,
+          "nearbyRailTriangles": 0
+        },
+        {
+          "window": 16,
+          "centre": [
+            22.25,
+            1.9199999570846558,
+            0
+          ],
+          "timberPieces": 5,
+          "nearbyRailTriangles": 0
+        },
+        {
+          "window": 17,
+          "centre": [
+            23,
+            1.9199999570846558,
+            -5.5
+          ],
+          "timberPieces": 5,
+          "nearbyRailTriangles": 0
+        },
+        {
+          "window": 18,
+          "centre": [
+            21.899999618530273,
+            1.9199999570846558,
+            -10.800000190734863
+          ],
+          "timberPieces": 5,
+          "nearbyRailTriangles": 0
+        },
+        {
+          "window": 19,
+          "centre": [
+            18.799999237060547,
+            1.9199999570846558,
+            -14.5
+          ],
+          "timberPieces": 5,
+          "nearbyRailTriangles": 0
+        },
+        {
+          "window": 20,
+          "centre": [
+            21.899999618530273,
+            1.9199999570846558,
+            -18.200000762939453
+          ],
+          "timberPieces": 5,
+          "nearbyRailTriangles": 0
+        },
+        {
+          "window": 21,
+          "centre": [
+            25,
+            1.9199999570846558,
+            -21.350000381469727
+          ],
+          "timberPieces": 5,
+          "nearbyRailTriangles": 0
+        },
+        {
+          "window": 22,
+          "centre": [
+            24.5,
+            1.9199999570846558,
+            -28.8174991607666
+          ],
+          "timberPieces": 5,
+          "nearbyRailTriangles": 0
+        },
+        {
+          "window": 23,
+          "centre": [
+            24.5,
+            1.9199999570846558,
+            -33.290000915527344
+          ],
+          "timberPieces": 5,
+          "nearbyRailTriangles": 0
+        },
+        {
+          "window": 24,
+          "centre": [
+            26.66666603088379,
+            1.9199999570846558,
+            -35.5
+          ],
+          "timberPieces": 5,
+          "nearbyRailTriangles": 0
+        },
+        {
+          "window": 25,
+          "centre": [
+            31,
+            1.9199999570846558,
+            -35.5
+          ],
+          "timberPieces": 5,
+          "nearbyRailTriangles": 0
+        },
+        {
+          "window": 26,
+          "centre": [
+            35.4900016784668,
+            1.9199999570846558,
+            -35.5
+          ],
+          "timberPieces": 5,
+          "nearbyRailTriangles": 0
+        },
+        {
+          "window": 27,
+          "centre": [
+            37.5,
+            1.9199999570846558,
+            -32.75
+          ],
+          "timberPieces": 5,
+          "nearbyRailTriangles": 0
+        },
+        {
+          "window": 28,
+          "centre": [
+            37.5,
+            1.9199999570846558,
+            -27.25
+          ],
+          "timberPieces": 5,
+          "nearbyRailTriangles": 0
+        },
+        {
+          "window": 29,
+          "centre": [
+            37,
+            1.9199999570846558,
+            -22.25
+          ],
+          "timberPieces": 5,
+          "nearbyRailTriangles": 0
+        },
+        {
+          "window": 30,
+          "centre": [
+            37,
+            1.9199999570846558,
+            -17.75
+          ],
+          "timberPieces": 5,
+          "nearbyRailTriangles": 0
+        },
+        {
+          "window": 31,
+          "centre": [
+            37,
+            1.9199999570846558,
+            -13.25
+          ],
+          "timberPieces": 5,
+          "nearbyRailTriangles": 0
+        },
+        {
+          "window": 32,
+          "centre": [
+            37,
+            1.9199999570846558,
+            -8.75
+          ],
+          "timberPieces": 5,
+          "nearbyRailTriangles": 0
+        },
+        {
+          "window": 33,
+          "centre": [
+            37,
+            1.9199999570846558,
+            -4.25
+          ],
+          "timberPieces": 5,
+          "nearbyRailTriangles": 0
+        },
+        {
+          "window": 34,
+          "centre": [
+            37,
+            1.9199999570846558,
+            0.25
+          ],
+          "timberPieces": 5,
+          "nearbyRailTriangles": 0
+        },
+        {
+          "window": 35,
+          "centre": [
+            37,
+            1.9199999570846558,
+            4.75
+          ],
+          "timberPieces": 5,
+          "nearbyRailTriangles": 0
+        },
+        {
+          "window": 36,
+          "centre": [
+            41.04999923706055,
+            1.9199999570846558,
+            7
+          ],
+          "timberPieces": 5,
+          "nearbyRailTriangles": 0
+        },
+        {
+          "window": 37,
+          "centre": [
+            47.92499923706055,
+            1.9199999570846558,
+            4.5
+          ],
+          "timberPieces": 5,
+          "nearbyRailTriangles": 0
+        },
+        {
+          "window": 38,
+          "centre": [
+            53.57500076293945,
+            1.9199999570846558,
+            4.5
+          ],
+          "timberPieces": 5,
+          "nearbyRailTriangles": 0
+        },
+        {
+          "window": 39,
+          "centre": [
+            63.20000076293945,
+            1.9199999570846558,
+            5.150000095367432
+          ],
+          "timberPieces": 5,
+          "nearbyRailTriangles": 0
+        },
+        {
+          "window": 40,
+          "centre": [
+            69.9000015258789,
+            1.9199999570846558,
+            7.5
+          ],
+          "timberPieces": 5,
+          "nearbyRailTriangles": 0
+        },
+        {
+          "window": 41,
+          "centre": [
+            69.9000015258789,
+            1.9199999570846558,
+            12.5
+          ],
+          "timberPieces": 5,
+          "nearbyRailTriangles": 0
+        },
+        {
+          "window": 42,
+          "centre": [
+            69.9000015258789,
+            1.9199999570846558,
+            17.5
+          ],
+          "timberPieces": 5,
+          "nearbyRailTriangles": 0
+        },
+        {
+          "window": 43,
+          "centre": [
+            69.9000015258789,
+            1.9199999570846558,
+            22.5
+          ],
+          "timberPieces": 5,
+          "nearbyRailTriangles": 0
+        },
+        {
+          "window": 44,
+          "centre": [
+            67.2249984741211,
+            1.9199999570846558,
+            25
+          ],
+          "timberPieces": 5,
+          "nearbyRailTriangles": 0
+        },
+        {
+          "window": 45,
+          "centre": [
+            62.13999938964844,
+            1.9199999570846558,
+            25
+          ],
+          "timberPieces": 5,
+          "nearbyRailTriangles": 0
+        },
+        {
+          "window": 46,
+          "centre": [
+            59.20000076293945,
+            1.9199999570846558,
+            22.25
+          ],
+          "timberPieces": 5,
+          "nearbyRailTriangles": 0
+        },
+        {
+          "window": 47,
+          "centre": [
+            48.125,
+            1.9199999570846558,
+            19.5
+          ],
+          "timberPieces": 5,
+          "nearbyRailTriangles": 0
+        },
+        {
+          "window": 48,
+          "centre": [
+            43.375,
+            1.9199999570846558,
+            19.5
+          ],
+          "timberPieces": 5,
+          "nearbyRailTriangles": 0
+        },
+        {
+          "window": 49,
+          "centre": [
+            41,
+            1.9199999570846558,
+            21.72624969482422
+          ],
+          "timberPieces": 5,
+          "nearbyRailTriangles": 0
+        },
+        {
+          "window": 50,
+          "centre": [
+            41,
+            1.9199999570846558,
+            26.110000610351562
+          ],
+          "timberPieces": 5,
+          "nearbyRailTriangles": 0
+        },
+        {
+          "window": 51,
+          "centre": [
+            41,
+            1.9199999570846558,
+            30.631250381469727
+          ],
+          "timberPieces": 5,
+          "nearbyRailTriangles": 0
+        },
+        {
+          "window": 52,
+          "centre": [
+            41,
+            1.9199999570846558,
+            35.0837516784668
+          ],
+          "timberPieces": 5,
+          "nearbyRailTriangles": 0
+        },
+        {
+          "window": 53,
+          "centre": [
+            38,
+            1.9199999570846558,
+            43
+          ],
+          "timberPieces": 5,
+          "nearbyRailTriangles": 0
+        },
+        {
+          "window": 54,
+          "centre": [
+            32,
+            1.9199999570846558,
+            43
+          ],
+          "timberPieces": 5,
+          "nearbyRailTriangles": 0
+        },
+        {
+          "window": 55,
+          "centre": [
+            29,
+            1.9199999570846558,
+            40.400001525878906
+          ],
+          "timberPieces": 5,
+          "nearbyRailTriangles": 0
+        },
+        {
+          "window": 56,
+          "centre": [
+            27.5,
+            1.9199999570846558,
+            35.45000076293945
+          ],
+          "timberPieces": 5,
+          "nearbyRailTriangles": 0
+        },
+        {
+          "window": 57,
+          "centre": [
+            29,
+            1.9199999570846558,
+            30.049999237060547
+          ],
+          "timberPieces": 5,
+          "nearbyRailTriangles": 0
+        },
+        {
+          "window": 58,
+          "centre": [
+            32,
+            1.9199999570846558,
+            23.125
+          ],
+          "timberPieces": 5,
+          "nearbyRailTriangles": 0
+        },
+        {
+          "window": 59,
+          "centre": [
+            25.850000381469727,
+            1.9199999570846558,
+            19.700000762939453
+          ],
+          "timberPieces": 5,
+          "nearbyRailTriangles": 0
+        },
+        {
+          "window": 60,
+          "centre": [
+            20.016666412353516,
+            1.9199999570846558,
+            17.299999237060547
+          ],
+          "timberPieces": 5,
+          "nearbyRailTriangles": 0
+        },
+        {
+          "window": 61,
+          "centre": [
+            14.850000381469727,
+            1.9199999570846558,
+            17.299999237060547
+          ],
+          "timberPieces": 5,
+          "nearbyRailTriangles": 0
+        },
+        {
+          "window": 62,
+          "centre": [
+            9.683333396911621,
+            1.9199999570846558,
+            17.299999237060547
+          ],
+          "timberPieces": 5,
+          "nearbyRailTriangles": 0
+        },
+        {
+          "window": 63,
+          "centre": [
+            4.625,
+            1.9199999570846558,
+            19.600000381469727
+          ],
+          "timberPieces": 5,
+          "nearbyRailTriangles": 0
+        },
+        {
+          "window": 64,
+          "centre": [
+            -0.32499998807907104,
+            1.9199999570846558,
+            19.600000381469727
+          ],
+          "timberPieces": 5,
+          "nearbyRailTriangles": 0
+        },
+        {
+          "window": 65,
+          "centre": [
+            -4.949999809265137,
+            1.9199999570846558,
+            19.600000381469727
+          ],
+          "timberPieces": 5,
+          "nearbyRailTriangles": 0
+        },
+        {
+          "window": 66,
+          "centre": [
+            -9.683333396911621,
+            1.9199999570846558,
+            17.299999237060547
+          ],
+          "timberPieces": 5,
+          "nearbyRailTriangles": 0
+        },
+        {
+          "window": 67,
+          "centre": [
+            -14.850000381469727,
+            1.9199999570846558,
+            17.299999237060547
+          ],
+          "timberPieces": 5,
+          "nearbyRailTriangles": 0
+        },
+        {
+          "window": 68,
+          "centre": [
+            -20.016666412353516,
+            1.9199999570846558,
+            17.299999237060547
+          ],
+          "timberPieces": 5,
+          "nearbyRailTriangles": 0
+        },
+        {
+          "window": 69,
+          "centre": [
+            -25.850000381469727,
+            1.9199999570846558,
+            19.700000762939453
+          ],
+          "timberPieces": 5,
+          "nearbyRailTriangles": 0
+        },
+        {
+          "window": 70,
+          "centre": [
+            -32,
+            1.9199999570846558,
+            23.125
+          ],
+          "timberPieces": 5,
+          "nearbyRailTriangles": 0
+        },
+        {
+          "window": 71,
+          "centre": [
+            -29,
+            1.9199999570846558,
+            30.049999237060547
+          ],
+          "timberPieces": 5,
+          "nearbyRailTriangles": 0
+        },
+        {
+          "window": 72,
+          "centre": [
+            -27.5,
+            1.9199999570846558,
+            35.45000076293945
+          ],
+          "timberPieces": 5,
+          "nearbyRailTriangles": 0
+        },
+        {
+          "window": 73,
+          "centre": [
+            -29,
+            1.9199999570846558,
+            40.400001525878906
+          ],
+          "timberPieces": 5,
+          "nearbyRailTriangles": 0
+        },
+        {
+          "window": 74,
+          "centre": [
+            -31.302499771118164,
+            1.9199999570846558,
+            43
+          ],
+          "timberPieces": 5,
+          "nearbyRailTriangles": 0
+        },
+        {
+          "window": 75,
+          "centre": [
+            -35.907501220703125,
+            1.9199999570846558,
+            43
+          ],
+          "timberPieces": 5,
+          "nearbyRailTriangles": 0
+        },
+        {
+          "window": 76,
+          "centre": [
+            -41,
+            1.9199999570846558,
+            40.650001525878906
+          ],
+          "timberPieces": 5,
+          "nearbyRailTriangles": 0
+        },
+        {
+          "window": 77,
+          "centre": [
+            -41,
+            1.9199999570846558,
+            35.95000076293945
+          ],
+          "timberPieces": 5,
+          "nearbyRailTriangles": 0
+        },
+        {
+          "window": 78,
+          "centre": [
+            -41,
+            1.9199999570846558,
+            31.25
+          ],
+          "timberPieces": 5,
+          "nearbyRailTriangles": 0
+        },
+        {
+          "window": 79,
+          "centre": [
+            -41,
+            1.9199999570846558,
+            26.110000610351562
+          ],
+          "timberPieces": 5,
+          "nearbyRailTriangles": 0
+        },
+        {
+          "window": 80,
+          "centre": [
+            -41,
+            1.9199999570846558,
+            21.850000381469727
+          ],
+          "timberPieces": 5,
+          "nearbyRailTriangles": 0
+        },
+        {
+          "window": 81,
+          "centre": [
+            -45.20000076293945,
+            1.9199999570846558,
+            19.5
+          ],
+          "timberPieces": 5,
+          "nearbyRailTriangles": 0
+        },
+        {
+          "window": 82,
+          "centre": [
+            -59.79999923706055,
+            1.9199999570846558,
+            19.5
+          ],
+          "timberPieces": 5,
+          "nearbyRailTriangles": 0
+        },
+        {
+          "window": 83,
+          "centre": [
+            -68,
+            1.9199999570846558,
+            26.5
+          ],
+          "timberPieces": 5,
+          "nearbyRailTriangles": 0
+        },
+        {
+          "window": 84,
+          "centre": [
+            -72,
+            1.9199999570846558,
+            23.690000534057617
+          ],
+          "timberPieces": 5,
+          "nearbyRailTriangles": 0
+        },
+        {
+          "window": 85,
+          "centre": [
+            -72.19999694824219,
+            1.9199999570846558,
+            16.75
+          ],
+          "timberPieces": 5,
+          "nearbyRailTriangles": 0
+        },
+        {
+          "window": 86,
+          "centre": [
+            -72.19999694824219,
+            1.9199999570846558,
+            11.25
+          ],
+          "timberPieces": 5,
+          "nearbyRailTriangles": 0
+        },
+        {
+          "window": 87,
+          "centre": [
+            -72.19999694824219,
+            1.9199999570846558,
+            5.75
+          ],
+          "timberPieces": 5,
+          "nearbyRailTriangles": 0
+        },
+        {
+          "window": 88,
+          "centre": [
+            -70.07499694824219,
+            1.9199999570846558,
+            2.9749999046325684
+          ],
+          "timberPieces": 5,
+          "nearbyRailTriangles": 0
+        },
+        {
+          "window": 89,
+          "centre": [
+            -65.82499694824219,
+            1.9199999570846558,
+            2.924999952316284
+          ],
+          "timberPieces": 5,
+          "nearbyRailTriangles": 0
+        },
+        {
+          "window": 90,
+          "centre": [
+            -62.599998474121094,
+            1.9199999570846558,
+            5
+          ],
+          "timberPieces": 5,
+          "nearbyRailTriangles": 0
+        },
+        {
+          "window": 91,
+          "centre": [
+            -61.70000076293945,
+            1.9199999570846558,
+            1.2999999523162842
+          ],
+          "timberPieces": 5,
+          "nearbyRailTriangles": 0
+        },
+        {
+          "window": 92,
+          "centre": [
+            -54.310001373291016,
+            1.9199999570846558,
+            -1
+          ],
+          "timberPieces": 5,
+          "nearbyRailTriangles": 0
+        },
+        {
+          "window": 93,
+          "centre": [
+            -51.97999954223633,
+            1.9199999570846558,
+            -1
+          ],
+          "timberPieces": 5,
+          "nearbyRailTriangles": 0
+        },
+        {
+          "window": 94,
+          "centre": [
+            -47.70000076293945,
+            1.9199999570846558,
+            -1
+          ],
+          "timberPieces": 5,
+          "nearbyRailTriangles": 0
+        },
+        {
+          "window": 95,
+          "centre": [
+            -43.41999816894531,
+            1.9199999570846558,
+            -1
+          ],
+          "timberPieces": 5,
+          "nearbyRailTriangles": 0
+        },
+        {
+          "window": 96,
+          "centre": [
+            -39.13999938964844,
+            1.9199999570846558,
+            -1
+          ],
+          "timberPieces": 5,
+          "nearbyRailTriangles": 0
+        },
+        {
+          "window": 97,
+          "centre": [
+            -37,
+            1.9199999570846558,
+            -3.3499999046325684
+          ],
+          "timberPieces": 5,
+          "nearbyRailTriangles": 0
+        },
+        {
+          "window": 98,
+          "centre": [
+            -37,
+            1.9199999570846558,
+            -8.050000190734863
+          ],
+          "timberPieces": 5,
+          "nearbyRailTriangles": 0
+        },
+        {
+          "window": 99,
+          "centre": [
+            -37,
+            1.9199999570846558,
+            -12.75
+          ],
+          "timberPieces": 5,
+          "nearbyRailTriangles": 0
+        },
+        {
+          "window": 100,
+          "centre": [
+            -37,
+            1.9199999570846558,
+            -17.450000762939453
+          ],
+          "timberPieces": 5,
+          "nearbyRailTriangles": 0
+        },
+        {
+          "window": 101,
+          "centre": [
+            -37,
+            1.9199999570846558,
+            -22.149999618530273
+          ],
+          "timberPieces": 5,
+          "nearbyRailTriangles": 0
+        },
+        {
+          "window": 102,
+          "centre": [
+            -37.5,
+            1.9199999570846558,
+            -27.25
+          ],
+          "timberPieces": 5,
+          "nearbyRailTriangles": 0
+        },
+        {
+          "window": 103,
+          "centre": [
+            -37.5,
+            1.9199999570846558,
+            -32.75
+          ],
+          "timberPieces": 5,
+          "nearbyRailTriangles": 0
+        },
+        {
+          "window": 104,
+          "centre": [
+            -35.4900016784668,
+            1.9199999570846558,
+            -35.5
+          ],
+          "timberPieces": 5,
+          "nearbyRailTriangles": 0
+        },
+        {
+          "window": 105,
+          "centre": [
+            -31,
+            1.9199999570846558,
+            -35.5
+          ],
+          "timberPieces": 5,
+          "nearbyRailTriangles": 0
+        },
+        {
+          "window": 106,
+          "centre": [
+            -26.66666603088379,
+            1.9199999570846558,
+            -35.5
+          ],
+          "timberPieces": 5,
+          "nearbyRailTriangles": 0
+        },
+        {
+          "window": 107,
+          "centre": [
+            -24.5,
+            1.9199999570846558,
+            -33.290000915527344
+          ],
+          "timberPieces": 5,
+          "nearbyRailTriangles": 0
+        },
+        {
+          "window": 108,
+          "centre": [
+            -24.5,
+            1.9199999570846558,
+            -28.8174991607666
+          ],
+          "timberPieces": 5,
+          "nearbyRailTriangles": 0
+        },
+        {
+          "window": 109,
+          "centre": [
+            -25,
+            1.9199999570846558,
+            -21.350000381469727
+          ],
+          "timberPieces": 5,
+          "nearbyRailTriangles": 0
+        },
+        {
+          "window": 110,
+          "centre": [
+            -21.899999618530273,
+            1.9199999570846558,
+            -18.200000762939453
+          ],
+          "timberPieces": 5,
+          "nearbyRailTriangles": 0
+        },
+        {
+          "window": 111,
+          "centre": [
+            -18.799999237060547,
+            1.9199999570846558,
+            -14.5
+          ],
+          "timberPieces": 5,
+          "nearbyRailTriangles": 0
+        },
+        {
+          "window": 112,
+          "centre": [
+            -21.899999618530273,
+            1.9199999570846558,
+            -10.800000190734863
+          ],
+          "timberPieces": 5,
+          "nearbyRailTriangles": 0
+        },
+        {
+          "window": 113,
+          "centre": [
+            -23,
+            1.9199999570846558,
+            -5.5
+          ],
+          "timberPieces": 5,
+          "nearbyRailTriangles": 0
+        },
+        {
+          "window": 114,
+          "centre": [
+            -22.25,
+            1.9199999570846558,
+            0
+          ],
+          "timberPieces": 5,
+          "nearbyRailTriangles": 0
+        },
+        {
+          "window": 115,
+          "centre": [
+            -19.5,
+            1.9199999570846558,
+            3
+          ],
+          "timberPieces": 5,
+          "nearbyRailTriangles": 0
+        },
+        {
+          "window": 116,
+          "centre": [
+            -22.25,
+            1.9199999570846558,
+            6
+          ],
+          "timberPieces": 5,
+          "nearbyRailTriangles": 0
+        },
+        {
+          "window": 117,
+          "centre": [
+            -22.266666412353516,
+            1.9199999570846558,
+            7
+          ],
+          "timberPieces": 5,
+          "nearbyRailTriangles": 0
+        },
+        {
+          "window": 118,
+          "centre": [
+            -16.799999237060547,
+            1.9199999570846558,
+            7
+          ],
+          "timberPieces": 5,
+          "nearbyRailTriangles": 0
+        },
+        {
+          "window": 119,
+          "centre": [
+            -11.333333015441895,
+            1.9199999570846558,
+            7
+          ],
+          "timberPieces": 5,
+          "nearbyRailTriangles": 0
+        },
+        {
+          "window": 120,
+          "centre": [
+            -6.5,
+            1.9199999570846558,
+            2.680000066757202
+          ],
+          "timberPieces": 5,
+          "nearbyRailTriangles": 0
+        },
+        {
+          "window": 121,
+          "centre": [
+            -6.5,
+            1.9199999570846558,
+            -1.8899999856948853
+          ],
+          "timberPieces": 5,
+          "nearbyRailTriangles": 0
+        },
+        {
+          "window": 122,
+          "centre": [
+            -6.5,
+            1.9199999570846558,
+            -6.199999809265137
+          ],
+          "timberPieces": 5,
+          "nearbyRailTriangles": 0
+        },
+        {
+          "window": 123,
+          "centre": [
+            -6.5,
+            1.9199999570846558,
+            -10.640000343322754
+          ],
+          "timberPieces": 5,
+          "nearbyRailTriangles": 0
+        },
+        {
+          "window": 124,
+          "centre": [
+            -6.5,
+            1.9199999570846558,
+            -15.079999923706055
+          ],
+          "timberPieces": 5,
+          "nearbyRailTriangles": 0
+        },
+        {
+          "window": 125,
+          "centre": [
+            -6.5,
+            1.9199999570846558,
+            -19.520000457763672
+          ],
+          "timberPieces": 5,
+          "nearbyRailTriangles": 0
+        },
+        {
+          "window": 126,
+          "centre": [
+            -6.5,
+            1.9199999570846558,
+            -23.610000610351562
+          ],
+          "timberPieces": 5,
+          "nearbyRailTriangles": 0
+        },
+        {
+          "window": 127,
+          "centre": [
+            -6.5,
+            1.9199999570846558,
+            -28.399999618530273
+          ],
+          "timberPieces": 5,
+          "nearbyRailTriangles": 0
+        },
+        {
+          "window": 128,
+          "centre": [
+            -6.5,
+            1.9199999570846558,
+            -32.84000015258789
+          ],
+          "timberPieces": 5,
+          "nearbyRailTriangles": 0
+        },
+        {
+          "window": 129,
+          "centre": [
+            -6.5,
+            1.9199999570846558,
+            -37.279998779296875
+          ],
+          "timberPieces": 5,
+          "nearbyRailTriangles": 0
+        }
+      ]
+    },
+    {
+      "floor": 2,
+      "windows": [
+        {
+          "window": 0,
+          "centre": [
+            -24.700000762939453,
+            1.524999976158142,
+            -22
+          ],
+          "timberPieces": 11,
+          "nearbyRailTriangles": 0
+        },
+        {
+          "window": 1,
+          "centre": [
+            -24.700000762939453,
+            1.524999976158142,
+            -18.100000381469727
+          ],
+          "timberPieces": 11,
+          "nearbyRailTriangles": 0
+        },
+        {
+          "window": 2,
+          "centre": [
+            -24.700000762939453,
+            1.524999976158142,
+            -14.199999809265137
+          ],
+          "timberPieces": 11,
+          "nearbyRailTriangles": 0
+        },
+        {
+          "window": 3,
+          "centre": [
+            -24.700000762939453,
+            1.524999976158142,
+            -10.300000190734863
+          ],
+          "timberPieces": 11,
+          "nearbyRailTriangles": 0
+        },
+        {
+          "window": 4,
+          "centre": [
+            -24.700000762939453,
+            1.524999976158142,
+            -6.400000095367432
+          ],
+          "timberPieces": 11,
+          "nearbyRailTriangles": 0
+        },
+        {
+          "window": 5,
+          "centre": [
+            -24.700000762939453,
+            1.524999976158142,
+            -2.5
+          ],
+          "timberPieces": 11,
+          "nearbyRailTriangles": 0
+        },
+        {
+          "window": 6,
+          "centre": [
+            -37,
+            1.524999976158142,
+            -22
+          ],
+          "timberPieces": 11,
+          "nearbyRailTriangles": 0
+        },
+        {
+          "window": 7,
+          "centre": [
+            -37,
+            1.524999976158142,
+            -18.100000381469727
+          ],
+          "timberPieces": 11,
+          "nearbyRailTriangles": 0
+        },
+        {
+          "window": 8,
+          "centre": [
+            -37,
+            1.524999976158142,
+            -14.199999809265137
+          ],
+          "timberPieces": 11,
+          "nearbyRailTriangles": 0
+        },
+        {
+          "window": 9,
+          "centre": [
+            -37,
+            1.524999976158142,
+            -10.300000190734863
+          ],
+          "timberPieces": 11,
+          "nearbyRailTriangles": 0
+        },
+        {
+          "window": 10,
+          "centre": [
+            -37,
+            1.524999976158142,
+            -6.400000095367432
+          ],
+          "timberPieces": 11,
+          "nearbyRailTriangles": 0
+        },
+        {
+          "window": 11,
+          "centre": [
+            -37,
+            1.524999976158142,
+            -2.5
+          ],
+          "timberPieces": 11,
+          "nearbyRailTriangles": 0
+        }
+      ]
+    },
+    {
+      "floor": 3,
+      "windows": [
+        {
+          "window": 0,
+          "centre": [
+            -7.400000095367432,
+            2.1500000953674316,
+            5.599999904632568
+          ],
+          "timberPieces": 11,
+          "nearbyRailTriangles": 50
+        },
+        {
+          "window": 1,
+          "centre": [
+            -4,
+            2.1500000953674316,
+            4.400000095367432
+          ],
+          "timberPieces": 11,
+          "nearbyRailTriangles": 0
+        },
+        {
+          "window": 2,
+          "centre": [
+            0,
+            2.1500000953674316,
+            4.400000095367432
+          ],
+          "timberPieces": 11,
+          "nearbyRailTriangles": 0
+        },
+        {
+          "window": 3,
+          "centre": [
+            4,
+            2.1500000953674316,
+            4.400000095367432
+          ],
+          "timberPieces": 11,
+          "nearbyRailTriangles": 0
+        },
+        {
+          "window": 4,
+          "centre": [
+            7.400000095367432,
+            2.1500000953674316,
+            5.599999904632568
+          ],
+          "timberPieces": 11,
+          "nearbyRailTriangles": 50
+        }
+      ]
+    }
+  ]
+}

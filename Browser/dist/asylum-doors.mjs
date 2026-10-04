@@ -4,6 +4,8 @@ import {ROOM_USES} from './asylum-room-uses.mjs';
 const radians=Math.PI/180;
 export const ROOM_DOOR_THICKNESS=.06;
 export const ROOM_DOOR_HANDLE_DEPTH=.16;
+export const ROOM_DOOR_FRAME_CASING_DEPTH=.054;
+export const ROOM_DOOR_HINGE_RADIUS=.0175;
 const dot=(a,b)=>a[0]*b[0]+a[1]*b[1];
 function distance(p,a,b){
  const v=[b[0]-a[0],b[1]-a[1]],t=Math.max(0,Math.min(1,dot([p[0]-a[0],p[1]-a[1]],v)/(dot(v,v)||1)));
@@ -38,10 +40,13 @@ export function roomDoorPose(door,angle=door.openAngle){
  // Closed points from the hinge across the aperture. Positive opening always
  // swings into this room; 180 reverses that tangent along the hinge-side wall.
  const c=Math.cos(angle*radians),s=Math.sin(angle*radians),tx=-door.hingeSide*door.dx*c-door.dz*door.roomSide*s,tz=-door.hingeSide*door.dz*c+door.dx*door.roomSide*s;
- return {...door,x:door.hingeX+tx*door.width/2,z:door.hingeZ+tz*door.width/2,rotation:-Math.atan2(tz,tx),tx,tz};
+ // The pin sits on the room-facing corner of the leaf, so the timber clears
+ // the casing throughout its swing while the fixed hinge plate stays put.
+ const hingeFace=-door.hingeSide*door.roomSide,offset=hingeFace*door.depth/2;
+ return {...door,x:door.hingeX+tx*door.width/2+tz*offset,z:door.hingeZ+tz*door.width/2-tx*offset,rotation:-Math.atan2(tz,tx),tx,tz};
 }
 export function roomDoorHandle(door){
- return {...door,x:door.hingeX+door.tx*(door.width-.18),z:door.hingeZ+door.tz*(door.width-.18),width:.065,depth:ROOM_DOOR_HANDLE_DEPTH};
+ return {...door,x:door.x+door.tx*(door.width/2-.18),z:door.z+door.tz*(door.width/2-.18),width:.065,depth:ROOM_DOOR_HANDLE_DEPTH};
 }
 export function roomDoorPanels(door){
  return {...door,width:door.width-.28,depth:door.depth+.016};
@@ -84,7 +89,7 @@ export function buildRoomDoors(floor){
    return Math.min(...perpendicular.filter(w=>dot([w.a[0]-centre[0],w.a[1]-centre[1]],tangent)*side>0).map(w=>distance(p,w.a,w.b)));
   });
   const hingeSide=hingeDistances[0]<=hingeDistances[1]+1e-7?-1:1;
-  const hingeOffset=opening.depth/2+.095;
+  const hingeOffset=opening.depth/2+ROOM_DOOR_FRAME_CASING_DEPTH+ROOM_DOOR_HINGE_RADIUS;
   const door={roomId:room.id,openingX:opening.x,openingZ:opening.z,dx:opening.dx,dz:opening.dz,roomSide,hingeSide,hingeDistances,
    hingeX:opening.x+opening.dx*hingeSide*width/2+normal[0]*roomSide*hingeOffset,
    hingeZ:opening.z+opening.dz*hingeSide*width/2+normal[1]*roomSide*hingeOffset,

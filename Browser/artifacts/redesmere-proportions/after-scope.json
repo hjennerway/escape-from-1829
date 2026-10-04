@@ -1,0 +1,15 @@
+{
+  "outside": {
+    "primitives": 1444515,
+    "sha256": "6b0679d5ff867e3ee1f1d0b81c6ee2a7354c5e50a426b3b99b64e48a4046f11e"
+  },
+  "inside": 1196,
+  "jarman": {
+    "primitives": 818931,
+    "sha256": "78645a1b2d617726694a0a10904132794478dfdd3c7445d37f76872de8217114"
+  },
+  "leighton": {
+    "count": 882978,
+    "sha256": "e06a38fbe8e0124d3b0487724d472facc10a138c8e16bb2bfd862a1d68de0208"
+  }
+}

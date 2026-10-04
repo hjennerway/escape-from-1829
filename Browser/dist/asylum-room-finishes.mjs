@@ -2,9 +2,9 @@ import {insidePolygon,segmentDistance} from './asylum-layout.mjs';
 import {ROOM_USES} from './asylum-room-uses.mjs';
 
 export const ROOM_WALL_COLOURS=[
- {name:'dusty rose',colour:0xc79996},
- {name:'sage',colour:0xa5b19c},
- {name:'faded blue',colour:0x8a9fbd}
+ {name:'dusty rose',colour:0xb29993},
+ {name:'sage',colour:0x969f8f},
+ {name:'faded blue',colour:0x8593a4}
 ];
 export const ROOM_DADO_FRACTION=.4;
 const plainUses=new Set(['hydrotherapy','showerTreatment','surgery','ect','electricalTreatment','treatment','stairs','porch','circulation']);
@@ -109,11 +109,11 @@ export function createAsylumRoomFinisher(THREE,floor,ceilingHeight){
    result.setAttribute('roomFinish',new THREE.Float32BufferAttribute(finishes,2));
    if(input!==source)input.dispose();return result;
   },
-  rail(){return dadoGeometry(THREE,railPieces,railHeight);}
+  rail(windowFrames=[]){return dadoGeometry(THREE,railPieces,railHeight,windowFrames);}
  };
 }
 
-function dadoGeometry(THREE,pieces,y){
+function dadoGeometry(THREE,pieces,y,windowFrames){
  // Merge triangulation cuts into continuous runs, with one stepped moulding
  // profile and mitred joints. All rooms share one rail mesh per floor.
  const groups=new Map();
@@ -126,7 +126,27 @@ function dadoGeometry(THREE,pieces,y){
  for(const g of groups.values()){
   g.spans.sort((a,b)=>a[0]-b[0]);const merged=[];
   for(const span of g.spans){const previous=merged.at(-1);if(previous&&span[0]<=previous[1]+eps*4)previous[1]=Math.max(previous[1],span[1]);else merged.push([...span]);}
-  for(const [lo,hi] of merged)runs.push({n:g.n,t:g.t,a:g.n.map((v,i)=>v*g.line+g.t[i]*lo),b:g.n.map((v,i)=>v*g.line+g.t[i]*hi)});
+  for(const [lo,hi] of merged){
+   let spans=[[lo,hi]];
+   for(const w of windowFrames){
+    if(y+.052<=w.bottom||y-.052>=w.top)continue;
+    // Clip the complete moulding against the outer timber frame, including
+    // rails on the perpendicular masonry reveals. Account for its 35mm
+    // projection so a reveal's raised profile cannot reach back into a jamb.
+    const offset=difference(g.n.map(v=>v*g.line),[w.x,w.z]);
+    let start=-Infinity,end=Infinity;
+    for(const [axis,half] of [[[w.dx,w.dz],w.width/2],[[-w.dz,w.dx],w.depth/2]]){
+     const origin=dot(offset,axis),direction=dot(g.t,axis),reach=.035*dot(g.n,axis);
+     // A 20-micrometre gap keeps rounded Float32 endpoints outside the timber.
+     const lower=-half-Math.max(0,reach)-.00002,upper=half-Math.min(0,reach)+.00002;
+     if(Math.abs(direction)<eps){if(origin<lower||origin>upper){end=-Infinity;break;}}
+     else{const limits=[(lower-origin)/direction,(upper-origin)/direction].sort((a,b)=>a-b);start=Math.max(start,limits[0]);end=Math.min(end,limits[1]);}
+    }
+    if(start>=end)continue;
+    spans=spans.flatMap(([a,b])=>end<=a||start>=b?[[a,b]]:[...(start>a?[[a,start]]:[]),...(end<b?[[end,b]]:[])]);
+   }
+   for(const [a,b] of spans)if(b-a>eps)runs.push({n:g.n,t:g.t,a:g.n.map((v,i)=>v*g.line+g.t[i]*a),b:g.n.map((v,i)=>v*g.line+g.t[i]*b)});
+  }
  }
  const nodes=new Map(),key=p=>p.map(v=>v.toFixed(5)).join(',');
  for(const r of runs)for(const end of ['a','b']){const k=key(r[end]);if(!nodes.has(k))nodes.set(k,[]);nodes.get(k).push(r);}
@@ -141,7 +161,7 @@ function dadoGeometry(THREE,pieces,y){
   const a=section('a'),b=section('b');
   const face=(v0,v1,v2)=>positions.push(...v0,...v1,...v2);
   for(let i=0;i<profile.length;i++){const j=(i+1)%profile.length;face(a[i],b[i],b[j]);face(a[i],b[j],a[j]);}
-  // Free ends sit behind doorway casings. Joints have no internal caps.
+  // Free ends cap at window/door casings. Joints have no internal caps.
   if(nodes.get(key(r.a)).length===1)for(let i=1;i<a.length-1;i++)face(a[0],a[i],a[i+1]);
   if(nodes.get(key(r.b)).length===1)for(let i=1;i<b.length-1;i++)face(b[0],b[i+1],b[i]);
  }

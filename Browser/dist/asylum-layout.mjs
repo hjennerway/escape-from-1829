@@ -67,7 +67,7 @@ export function buildAsylumLayout(plan){
   const floor={...f,levelElevations:plan.floors.map(f=>f.elevation),geometrySource:'asylum-plan',cellSize:.5,origin:{x:-74,z:-41},width:290,height:172,rooms,corridors,stairs,exits,shafts,walls:[],galleryZ:8.2/.5};
   floor.stairRails=floorStairRails(floor);
   floor.windows=rooms.flatMap(r=>(r.windows??[]).map(w=>({...w,roomId:r.id})));
-  const roomDoors=rooms.filter(r=>r.doorSide).map(r=>{const b=bounds(r.points),vertical=['west','east'].includes(r.doorSide);return {roomId:r.id,x:vertical?(r.doorSide==='west'?b.minX:b.maxX):r.door,z:vertical?r.door:(r.doorSide==='north'?b.minZ:b.maxZ),dx:vertical?0:1,dz:vertical?1:0};});
+  const roomDoors=rooms.filter(r=>r.doorSide).map(r=>{const b=bounds(r.points),vertical=['west','east'].includes(r.doorSide);return {roomId:r.id,x:vertical?(r.doorSide==='west'?b.minX:b.maxX):r.door,z:vertical?r.door:(r.doorSide==='north'?b.minZ:b.maxZ),dx:vertical?0:1,dz:vertical?1:0,width:r.doorWidth??ROOM_DOOR_WIDTH};});
   const pieces=new Map();
   floor.exitHeaders=[];
   function addWall(a,b,exterior=false,corridorClipping=true,solid=false){
@@ -76,7 +76,7 @@ export function buildAsylumLayout(plan){
    // Corridor/stair clipping retains its existing fine samples.
    const doors=exterior?[]:roomDoors.filter(d=>Math.abs(dx*d.dz-dz*d.dx)<1e-6&&Math.abs((d.x-a[0])*dz-(d.z-a[1])*dx)<.95);
    const cuts=Array.from({length:count+1},(_,i)=>length*i/count);
-   for(const d of doors)for(const side of [-1,1]){const t=(d.x-a[0])*dx+(d.z-a[1])*dz+side*ROOM_DOOR_WIDTH/2;if(t>0&&t<length)cuts.push(t);}
+   for(const d of doors)for(const side of [-1,1]){const t=(d.x-a[0])*dx+(d.z-a[1])*dz+side*d.width/2;if(t>0&&t<length)cuts.push(t);}
    // Every outside opening has exact jambs. The cut follows adjoining angled
    // returns too; their headers retain the same wall footprint and finish.
    const fittedExits=exits.filter(e=>segmentDistance(asylumExitCenter(e).x,asylumExitCenter(e).z,a,b)<1.05);
@@ -93,7 +93,7 @@ export function buildAsylumLayout(plan){
     let keep=i<cuts.length-1&&cuts[i+1]-cuts[i]>1e-7;
     if(!exterior){
      keep=keep&&f.outline.loops.some(p=>insidePolygon(x,z,p))&&!outsideEdges.some(([c,d])=>segmentDistance(x,z,c,d)<.18);
-     if(doors.some(d=>Math.abs((x-d.x)*d.dx+(z-d.z)*d.dz)<ROOM_DOOR_WIDTH/2))keep=false;
+     if(doors.some(d=>Math.abs((x-d.x)*d.dx+(z-d.z)*d.dz)<d.width/2))keep=false;
      // Keep partitions at the corridor edge; the previous extra clearance
      // erased entire room fronts that sit exactly half a corridor-width away.
      if(!solid&&corridorClipping&&corridors.some(c=>c.points.slice(1).some((p,j)=>segmentDistance(x,z,c.points[j],p)<c.width/2-.1)))keep=false;
@@ -123,11 +123,11 @@ export function buildAsylumLayout(plan){
   floor.walls=joinAsylumWalls([...pieces.values(),...partitionWalls]);
   floor.doorways=roomDoors.flatMap(d=>{
    const sideWalls=floor.walls.filter(w=>!w.exterior&&Math.abs((w.b[0]-w.a[0])*d.dz-(w.b[1]-w.a[1])*d.dx)<1e-6&&Math.abs((w.a[0]-d.x)*d.dz-(w.a[1]-d.z)*d.dx)<.95);
-   const jambs=[-1,1].map(side=>sideWalls.filter(w=>[w.a,w.b].some(p=>Math.abs((p[0]-d.x)*d.dx+(p[1]-d.z)*d.dz-side*ROOM_DOOR_WIDTH/2)<1e-6)));
+   const jambs=[-1,1].map(side=>sideWalls.filter(w=>[w.a,w.b].some(p=>Math.abs((p[0]-d.x)*d.dx+(p[1]-d.z)*d.dz-side*d.width/2)<1e-6)));
    // Stair mouths remain full height; do not float a frame across a stair hall.
    if(jambs.some(walls=>!walls.length))return [];
    const offsets=jambs.flat().map(w=>(w.a[0]-d.x)*-d.dz+(w.a[1]-d.z)*d.dx),low=Math.min(...offsets),high=Math.max(...offsets),offset=(low+high)/2;
-   return [{...d,x:d.x-d.dz*offset,z:d.z+d.dx*offset,width:ROOM_DOOR_WIDTH,height:ROOM_DOOR_HEIGHT,depth:high-low+.18}];
+   return [{...d,x:d.x-d.dz*offset,z:d.z+d.dx*offset,height:ROOM_DOOR_HEIGHT,depth:high-low+.18}];
   });
   floor.doorways.push(...partitionDoors);
   buildRoomDoors(floor);

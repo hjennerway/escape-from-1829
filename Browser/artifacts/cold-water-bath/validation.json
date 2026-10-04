@@ -1,0 +1,107 @@
+{
+  "dimensions": {
+    "width": 1.5859999656677246,
+    "depth": 1.4299999475479126,
+    "height": 2.9639999866485596
+  },
+  "base": 0,
+  "labelBounds": {
+    "min": [
+      -0.27950000762939453,
+      1.6618432998657227,
+      -0.46149998903274536
+    ],
+    "max": [
+      0.27950000762939453,
+      1.8699803352355957,
+      -0.46149998903274536
+    ]
+  },
+  "visibleSamples": [
+    {
+      "view": "front",
+      "u": -0.9,
+      "v": -0.9,
+      "visible": true
+    },
+    {
+      "view": "front",
+      "u": -0.9,
+      "v": 0,
+      "visible": true
+    },
+    {
+      "view": "front",
+      "u": -0.9,
+      "v": 0.9,
+      "visible": true
+    },
+    {
+      "view": "front",
+      "u": 0,
+      "v": -0.9,
+      "visible": true
+    },
+    {
+      "view": "front",
+      "u": 0,
+      "v": 0,
+      "visible": true
+    },
+    {
+      "view": "front",
+      "u": 0,
+      "v": 0.9,
+      "visible": true
+    },
+    {
+      "view": "front",
+      "u": 0.9,
+      "v": -0.9,
+      "visible": true
+    },
+    {
+      "view": "front",
+      "u": 0.9,
+      "v": 0,
+      "visible": true
+    },
+    {
+      "view": "front",
+      "u": 0.9,
+      "v": 0.9,
+      "visible": true
+    }
+  ],
+  "roomChecks": {
+    "table": {
+      "procedural": true,
+      "width": 1.586,
+      "depth": 1.4300000000000002,
+      "height": 2.964,
+      "era": "Early nineteenth-century cold bathing",
+      "x": 25.814999999999998,
+      "z": -19.8,
+      "rotation": 1.5707963267948966,
+      "edge": 3,
+      "id": "0:R12:fixed:0",
+      "kind": "hydroShower",
+      "roomId": "R12",
+      "variable": false,
+      "y": 0.008
+    },
+    "roomCentreClear": true
+  },
+  "exploreChecks": {
+    "sameFixedTable": true,
+    "renderedParts": 6,
+    "renderedDimensions": [
+      1.5859999656677246,
+      2.9639999866485596,
+      1.4299999475479126
+    ],
+    "walkingStop": 1.0694117647058796,
+    "minimumStop": 1.0150000000000001
+  },
+  "errors": []
+}

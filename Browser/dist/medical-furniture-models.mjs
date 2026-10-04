@@ -86,7 +86,12 @@ export function createMedicalFurnitureModels(THREE,{labels=typeof document!=='un
    box('iron',1.22,.075,1.10,0,.05,0);box('ivory',1.12,.027,1.0,0,.10,0);
    for(const x of [-.55,.55])box('ivory',.06,.12,1.06,x,.15,0);
    for(const z of [-.50,.50])box('ivory',1.10,.12,.06,0,.15,z);
-   for(const x of [-.48,.48]){rod('iron',.030,[x,.11,-.38],[x,2.25,-.38]);ball('brass',.041,x,2.25,-.38);}
+   for(const x of [-.48,.48]){
+    // The left control section replaces the iron shaft; coincident cylinders flicker.
+    if(x<0){rod('iron',.030,[x,.11,-.38],[x,.3,-.38]);rod('iron',.030,[x,1.81,-.38],[x,2.25,-.38]);}
+    else rod('iron',.030,[x,.11,-.38],[x,2.25,-.38]);
+    ball('brass',.041,x,2.25,-.38);
+   }
    rod('iron',.025,[-.48,2.01,-.38],[.48,2.01,-.38]);
    add(new THREE.CylinderGeometry(.31,.27,.36,24).translate(0,2.01,-.21),'brass');
    add(new THREE.CylinderGeometry(.28,.28,.017,24).translate(0,2.20,-.21),'iron');torus('brass',.30,.021,0,2.19,-.21,Math.PI/2);

@@ -85,7 +85,7 @@ export function createNotebook(floors,{outsideStairs=[]}={}){
   }
   add({id:`arrival:${player.floor}`,title:name,view:key,text:'I have reached this level. The sketch fills in nearby as I explore; blank areas are still unknown.',source:'Personal observation'});
   if(!areas.has(key))areas.set(key,new Map());const visited=areas.get(key);
-  for(const room of floor.rooms??[]){
+  for(const room of [...(floor.rooms??[]),...(floor.furnishingAreas??[])]){
    const inside=room.points?insidePolygon(player.x,player.z,room.points):Math.hypot(player.x-room.x*floor.cellSize,player.z-room.z*floor.cellSize)<2;
    if(inside)visited.set(room.id??room.name,room.id?`${room.id} · ${room.name}`:room.name);
   }

@@ -1,0 +1,19 @@
+{
+  "originalInputs": [
+    "Browser/dist/asylum-furniture.mjs",
+    "Browser/dist/medical-furniture-models.mjs"
+  ],
+  "changedInputsLoaded": [],
+  "loadedModules": 143,
+  "failure": {
+    "message": "All geometry outside the marked frontage stays exact\n+ actual - expected\n\n  {\n+   primitives: 818931,\n+   sha256: '78645a1b2d617726694a0a10904132794478dfdd3c7445d37f76872de8217114'\n-   primitives: 818930,\n-   sha256: '7cfb26f1ff8383b299619084b1a9e7e01fcb8bb64565b72953a3b6433035e69b'\n  }\n",
+    "actual": {
+      "primitives": 818931,
+      "sha256": "78645a1b2d617726694a0a10904132794478dfdd3c7445d37f76872de8217114"
+    },
+    "expected": {
+      "primitives": 818930,
+      "sha256": "7cfb26f1ff8383b299619084b1a9e7e01fcb8bb64565b72953a3b6433035e69b"
+    }
+  }
+}

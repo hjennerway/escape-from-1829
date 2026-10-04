@@ -1,0 +1,48 @@
+{
+  "views": [],
+  "resources": [
+    {
+      "floor": 0,
+      "sashes": 875,
+      "railVertices": 25368
+    },
+    {
+      "floor": 1,
+      "sashes": 866,
+      "railVertices": 28032
+    },
+    {
+      "floor": 2,
+      "sashes": 198,
+      "railVertices": 6984
+    },
+    {
+      "floor": 3,
+      "sashes": 85,
+      "railVertices": 3108
+    }
+  ],
+  "explore": [
+    {
+      "floor": 0,
+      "sashes": 875,
+      "railVertices": 25368
+    },
+    {
+      "floor": 1,
+      "sashes": 866,
+      "railVertices": 28032
+    },
+    {
+      "floor": 2,
+      "sashes": 198,
+      "railVertices": 6984
+    },
+    {
+      "floor": 3,
+      "sashes": 85,
+      "railVertices": 3108
+    }
+  ],
+  "errors": []
+}

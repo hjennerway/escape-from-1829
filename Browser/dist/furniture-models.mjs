@@ -4,6 +4,7 @@ import {FURNITURE_CATALOG} from './asylum-furniture.mjs';
 import {createMedicalFurnitureModels} from './medical-furniture-models.mjs';
 import {createWardrobeModel} from './wardrobe-model.mjs';
 import {createReceptionFurnitureModels} from './reception-furniture-models.mjs';
+import {createHallFurnitureModels} from './hall-furniture-models.mjs';
 import {applyFurnitureFinish} from './furniture-finishes.mjs';
 
 const libraries=new WeakMap();
@@ -61,6 +62,7 @@ export function loadFurnitureModels(THREE){
   models.bookcase[1].geometry.userData={shelfSurfaces:shelfSurfaces.map(y=>y*sy),bookBottoms:bookBottoms.map(y=>y*sy)};probe.material.dispose();
   Object.assign(models,createMedicalFurnitureModels(THREE));
   Object.assign(models,createReceptionFurnitureModels(THREE));
+  Object.assign(models,createHallFurnitureModels(THREE));
   for(const g of Object.values(raw))if(g?.isBufferGeometry)g.dispose();
   return models;
  })());

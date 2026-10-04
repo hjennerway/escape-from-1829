@@ -1,0 +1,125 @@
+{
+  "walked": {
+    "results": [
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true
+    ],
+    "floors": [
+      "Ground floor",
+      "First floor",
+      "Basement",
+      "Second floor"
+    ],
+    "views": [
+      "Ground floor",
+      "First floor",
+      "Second floor"
+    ]
+  },
+  "labels": {
+    "names": [
+      "Records office",
+      "Records office",
+      "Staff office",
+      "Staff office",
+      "Staff sitting room",
+      "Staff sitting room",
+      "Archive & stores",
+      "Archive & stores",
+      "Linen store",
+      "Linen store"
+    ],
+    "atlas": [
+      768,
+      1280
+    ],
+    "lowerLabelCounts": [
+      0,
+      0,
+      0
+    ],
+    "views": [
+      {
+        "id": "R41",
+        "text": "Records office",
+        "pose": [
+          0.1677448280805255,
+          9.810883490421114,
+          3,
+          -0.8599494390033272,
+          10.522462364055642,
+          0.08
+        ]
+      },
+      {
+        "id": "R42",
+        "text": "Staff office",
+        "pose": [
+          5.554633401507691,
+          9.868638908058262,
+          3,
+          4.47720686013827,
+          10.502399152908573,
+          0.08
+        ]
+      },
+      {
+        "id": "R43",
+        "text": "Staff sitting room",
+        "pose": [
+          -7.441773033312222,
+          10.679734813800497,
+          3,
+          -6.211036797994373,
+          10.461129417994153,
+          0.08
+        ]
+      },
+      {
+        "id": "R44",
+        "text": "Archive & stores",
+        "pose": [
+          0.13846691042957537,
+          14.606572198777613,
+          3,
+          -0.8717530373644945,
+          13.87039582243907,
+          0.08
+        ]
+      },
+      {
+        "id": "R45",
+        "text": "Linen store",
+        "pose": [
+          -12.507011241719098,
+          8.363279729560801,
+          3,
+          -13.61962405528327,
+          8.933010128164227,
+          0.08
+        ]
+      }
+    ]
+  },
+  "exploreLabels": [
+    "Records office",
+    "Records office",
+    "Staff office",
+    "Staff office",
+    "Staff sitting room",
+    "Staff sitting room",
+    "Archive & stores",
+    "Archive & stores",
+    "Linen store",
+    "Linen store"
+  ],
+  "errors": []
+}

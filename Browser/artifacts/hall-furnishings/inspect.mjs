@@ -1,0 +1,10 @@
+import {readFile,writeFile,mkdir} from 'node:fs/promises';
+import {buildAsylumLayout} from '../../dist/asylum-layout.mjs';
+import {furnishAsylum} from '../../dist/asylum-furniture.mjs';
+const root=new URL('../../',import.meta.url),out=new URL('./',import.meta.url);
+await mkdir(out,{recursive:true});
+const plan=JSON.parse(await readFile(new URL('dist/asylum-plan.json',root))),floors=buildAsylumLayout(plan).floors;
+furnishAsylum(floors);
+await writeFile(new URL('before-records.json',out),JSON.stringify(floors.map(f=>({id:f.id,furniture:f.furniture,areas:f.furnishingAreas})),null,2));
+for(const file of ['asylum-furniture.mjs','furniture-models.mjs','notebook.mjs'])await writeFile(new URL('before-'+file,out),await readFile(new URL('dist/'+file,root)));
+console.log(JSON.stringify(floors.slice(0,2).map(f=>({floor:f.id,walls:f.walls.filter(w=>[w.a,w.b].some(([x,z])=>x>=-8&&x<38&&z>=9&&z<=20)),doors:f.roomDoors.filter(d=>d.x>=-8&&d.x<38&&d.z>=9),exits:f.exits.filter(e=>e.worldX>20&&e.worldX<36),windows:f.windows})),null,2));

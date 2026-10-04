@@ -139,16 +139,38 @@ function frontHit(x,y){
   return ray.intersectObject(model,true)[0];
 }
 for(const y of [1,5,9.5,13.5]){
-  const strip=frontHit(44.3,y),adjoining=frontHit(47,y);
+  const strip=frontHit(44.3,y),adjoining=frontHit(49.9,y);
   assert(Math.abs(strip.point.z-adjoining.point.z)<1e-5,'The marked strip is flush with the adjoining wall');
 }
 assert(!model.userData.eastPhotoOpenings.some(o=>o.face==='1829-range-sash'&&o.x>41&&o.x<45.1&&o.z>17),'No old sash remains buried behind the new wall');
-const frontageOpenings=model.userData.eastPhotoOpenings.filter(o=>['pavilion-flush','pavilion-right'].includes(o.face));
-assert.equal(frontageOpenings.length,5);
+const frontageOpenings=model.userData.eastPhotoOpenings.filter(o=>['pavilion-left-pair','pavilion-left-triple','pavilion-right'].includes(o.face));
+assert.equal(frontageOpenings.length,10);
 for(const o of frontageOpenings){
   const hit=frontHit(o.x+o.w/12,o.y+o.h/12);
   assert.equal(hit.object.material.color.getHex(),0x78989f,'The corrected front windows expose their glazing');
 }
+// Photo-derived proportions are checked on the actual assembled meshes.
+// This also protects the roof-access threshold and the retained east return.
+const shallowBay=new THREE.Box3().setFromObject(model.getObjectByName('East curved bay'));
+const baySize=shallowBay.getSize(new THREE.Vector3());
+assert(baySize.z/baySize.x>.28&&baySize.z/baySize.x<.36,'The canted bay is a shallow projection');
+const pavilionSize=pavilion.getSize(new THREE.Vector3());
+assert(pavilionSize.x/baySize.x>1.5&&pavilionSize.x/baySize.x<1.65,'Square pavilion is proportioned against the neighbouring bay');
+const blank=new THREE.Box3().setFromObject(model.getObjectByName('Redesmere flat-roof projection brick'));
+assert(Math.abs(blank.max.x-pavilion.min.x)<1e-5,'The widened blank projection meets the narrowed pavilion without a gap');
+for(const roofName of ['Garden pavilion slate roof','Redesmere aligned frontage slate roof']){
+  const size=new THREE.Box3().setFromObject(model.getObjectByName(roofName)).getSize(new THREE.Vector3());
+  assert(size.y>1&&size.y<1.8,'Photo roof pitches remain shallow: '+roofName);
+}
+const leftPair=frontageOpenings.filter(o=>o.face==='pavilion-left-pair');
+for(const y of [6.5,11.6]){
+  const pair=leftPair.filter(o=>o.y===y).sort((a,b)=>a.x-b.x);
+  assert.equal(pair.length,2,'One paired window bank per brick storey');
+  const span=pair[1].x+pair[1].w/2-(pair[0].x-pair[0].w/2);
+  assert(span/pair[0].h>1.1&&span/pair[0].h<1.3,'Paired bank is broader than it is tall');
+}
+assert.equal(frontageOpenings.filter(o=>o.face==='pavilion-left-triple').length,3,'Ground-floor bank retains three distinct sashes');
+assert(!model.userData.eastPhotoOpenings.some(o=>['pavilion-flush','pavilion-left'].includes(o.face)),'Former isolated windows are removed rather than hidden behind the new banks');
 const slate=model.getObjectByName('Redesmere aligned frontage slate roof');
 assert(slate,'The aligned wall has a joined roof');
 for(let i=0;i<slate.geometry.attributes.normal.count;i++)

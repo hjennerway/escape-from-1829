@@ -1,5 +1,32 @@
 # 1829 revised interior plans — 2 October 2026
 
+## Approved Reception top-floor layout and door names (4 October 2026)
+
+The owner approved the rough plan in `../top-floor-layout-proposal/` and
+requested labels on just its five room doors. This supersedes the earlier
+two-room second-floor arrangement below. R43 occupies the west two-window
+bay as a staff sitting room; R41 becomes the central one-window records
+office; R42 retains the east two-window staff office. The side sashes remain
+on their 45-degree faces. All five complete sash records, the outside outline,
+floor height and S1's flights/well/rails remain fixed.
+
+C24 runs between z=11.2 and z=13.2, approximately 2 metres wide before wall
+thickness. C25 retains the eastward stair departure and turns into that
+passage. R44 provides windowless archive/storage behind the passage; R45
+provides linen storage beside the front stair landing. Its solid south edge
+retains the room wall around its framed opening instead of allowing stair
+clearance to erase it. Each room has its own inward-open green door.
+
+Both sides of these five doors carry their room names on mounted nameplates.
+The plaques follow the open leaves and share one atlas and text draw; other
+floors remain unlabelled. Shared plans and second-floor architectural/furnished
+drawings are updated. Furnishings, walking, NPC routes, wall finishes and
+notebook discovery consume the new rooms. These are approved gameplay
+dimensions and uses, not measured historical interiors. Validation and views
+are in `../../Browser/artifacts/top-floor-layout-proposal/implemented/` and
+`../../DEVELOPMENT.md`. The separate aerial model's source hash is unchanged;
+Unity, Blender and packaged exports are not regenerated.
+
 ## Smooth concrete stair undersides (3 October 2026)
 
 The owner's [purple-line underside view](smooth-stair-underside-reference.png)

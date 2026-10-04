@@ -1,6 +1,7 @@
 # Reception top-floor layout concept — 4 October 2026
 
-Requested rough plan for review before changing the game model. The interactive
+The approved layout is now implemented in the browser game. The original
+rough plan was requested for review before changing the game model. The interactive
 `top-floor-plan.html` compares the concept with the current two-room layout.
 This is a proposed arrangement within the model's existing envelope, not a
 surveyed or historically verified floor plan.
@@ -35,18 +36,42 @@ sills and diagonal orientations also remain as in the shared plan.
 - `../room-furnishings/README.md`, current second-floor records/staff-office uses.
 - `../../DEVELOPMENT.md`, Reception second-floor and later stair/door entries.
 
-Only this review concept is authored. Neither shared plan copy nor game code
-has been changed. Browser compiled scenes, Unity, Blender and packaged exports
-are not regenerated. Room numbers 1–5 in the small-screen drawing are diagram
-labels, not assignments of game room IDs. Furniture marks indicate possible
-shelving only; furniture placement is not implemented.
+The original interactive concept remains frozen for comparison. Its diagram
+numbers map to game rooms as follows: 1=R43 staff sitting room, 2=R41 records
+office, 3=R42 staff office, 4=R44 archive/stores, 5=R45 linen store. Both shared
+plan copies now carry these rooms, their labelled doors and C24/C25 circulation.
+The architectural and furnished second-floor SVG/PNG drawings are regenerated.
+Existing furniture fills each room according to its use; the smaller records
+office has a desk, chair and one bookcase, with bulk storage in the archive.
+
+The west sitting-room doorway is centred at x=-5.5, 0.2 west of the rough
+sketch, so the existing navigation grid has a clear doorway column. The four
+passage doors have 1.3-unit openings; the linen door has a 1.2-unit opening.
+Lower-floor doors keep the existing 1.9-unit width. Both faces of each upper
+door carry its room name at height 1.75. Labels follow the open leaf and use
+one shared atlas; other floors have no new labels, as the owner requested.
+
+The current browser sources, shared plans, tests and review drawings change.
+The aerial compiler excludes these interiors; its existing compiled manifest
+still matches the unchanged source hash. Unity, Blender and packaged exports
+are not regenerated.
 
 ## Review checks
 
-`../../Browser/artifacts/top-floor-layout-proposal/validation.json` records an
+Before implementation, `../../Browser/artifacts/top-floor-layout-proposal/validation.json` recorded an
 exact comparison of the concept's retained outline, stair footprint and all
 five complete window records with the live shared plan. Its proposed window
 distribution is 2–1–2–0–0. Desktop and phone captures in light/dark appearance
 were reviewed, including current/proposed switching and checks for clipped or
-overlapping labels. No game suite or compiled-scene rebuild is needed for a
-review drawing; gameplay has not been changed or newly validated here.
+overlapping labels. The original concept can still be reviewed against the
+saved `implemented/before-plan.json`.
+
+Current checks and screenshots are in
+`../../Browser/artifacts/top-floor-layout-proposal/implemented/`. The focused
+second-floor check walks 40 furnished/unfurnished cross-floor routes, verifies
+all five sashes against the exterior generator, checks the compact passage
+and storage boundaries, and raycasts both faces of all five nameplates.
+Chrome walks all five furnished rooms from Reception and back, verifies the
+same labels in Escape/Explore, and captures rooms, plaques, stairs, notebook
+and phone views. Preservation checks compare all lower-floor walls, doors,
+navigation and stair rails with the saved plan and verify the aerial hash.

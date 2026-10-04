@@ -542,9 +542,27 @@
           "angle": 120.46475184848532,
           "hinge": -1,
           "limited": false
+        },
+        {
+          "id": "R43",
+          "angle": 100.07192612392828,
+          "hinge": -1,
+          "limited": false
+        },
+        {
+          "id": "R44",
+          "angle": 126.08190147671849,
+          "hinge": -1,
+          "limited": false
+        },
+        {
+          "id": "R45",
+          "angle": 117.11541004711762,
+          "hinge": -1,
+          "limited": false
         }
       ],
-      "instances": 10
+      "instances": 25
     }
   ],
   "explorePoses": [
@@ -1090,9 +1108,27 @@
           "angle": 120.46475184848532,
           "hinge": -1,
           "limited": false
+        },
+        {
+          "id": "R43",
+          "angle": 100.07192612392828,
+          "hinge": -1,
+          "limited": false
+        },
+        {
+          "id": "R44",
+          "angle": 126.08190147671849,
+          "hinge": -1,
+          "limited": false
+        },
+        {
+          "id": "R45",
+          "angle": 117.11541004711762,
+          "hinge": -1,
+          "limited": false
         }
       ],
-      "instances": 10
+      "instances": 25
     }
   ],
   "captures": [
@@ -1112,6 +1148,6 @@
     "mobile-wall-contact",
     "exploration-door"
   ],
-  "walks": 178,
+  "walks": 184,
   "errors": []
 }

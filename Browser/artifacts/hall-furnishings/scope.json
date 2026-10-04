@@ -1,0 +1,19 @@
+{
+  "existingFurniturePreserved": true,
+  "added": 32,
+  "areas": 3,
+  "aerialInputs": 171,
+  "interiorSourcesExcluded": true,
+  "currentAerialHash": "4c7716c7d30180e2d49f60447aeadd26ec854fc5118cadbecb4a8678d0596b34",
+  "compiledAerialHash": "4c7716c7d30180e2d49f60447aeadd26ec854fc5118cadbecb4a8678d0596b34",
+  "compiledModelCurrent": true,
+  "exportsChanged": [
+    "Browser interiors",
+    "Ground and first furnished plans"
+  ],
+  "exportsNotRegenerated": [
+    "Unity",
+    "Blender",
+    "packaged desktop/Android"
+  ]
+}

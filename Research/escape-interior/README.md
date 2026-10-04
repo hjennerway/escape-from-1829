@@ -1,5 +1,29 @@
 # Asylum escape interior finishes
 
+## Room doors attached at their hinges (4 October 2026)
+
+The owner's follow-up corrects the room leaves floating in front of their
+surrounds. All 90 current leaves now pivot on the room-facing corner of the
+hinge edge. Each pin sits 17.5 mm beyond the existing casing face, with a fixed
+iron plate touching the casing and a moving plate touching the leaf. Both
+plates join the same pin. The closed timber centre moves 53.5 mm closer to the
+frame; the original surround dimensions and seeded target angles are retained.
+Handles, panels, walking, navigation, sight and furnishing clearance follow
+the revised leaf centres. Actual masonry still limits each complete swing.
+
+The geometry regression checks 1,080 rendered hinge contacts across three
+hinges on every door, fixed hinge corners and clearance from every part of
+the surround throughout each swing. The original offset fails the attachment
+check. Seven current leaves stop at walls; first-floor R27 opens about 95.57
+degrees. Browser checks pass all 184 doorway crossings and identical Escape/
+Explore poses. Matched close views, phone captures and validation logs are in
+`../../Browser/artifacts/door-hinges/`.
+
+These remain owner-directed game fittings. Only browser interior sources,
+checks and notes change; the aerial compiler excludes these inputs and its
+existing manifest still matches its source hash. Unity, Blender and packaged
+desktop/Android exports are not regenerated.
+
 ## Open room doors (4 October 2026)
 
 The owner's request adds green timber leaves to all 87 enclosed room entrances

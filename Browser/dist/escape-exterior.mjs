@@ -275,7 +275,7 @@ export function createEscapeExterior(THREE,aspect){
       const roofWidth=z===35?12:9,roofX=z===35?35:36.5;
       const cap=hipRoof(roofX,z,roofWidth,d,h+.23,roofWidth*.3);
       cap.name='East entrance wing slate roof';
-    }else if((Math.abs(x-54.175)<.01&&z===12)||(x===65.5&&z===16.15)||x===-69||x===-39.6){
+    }else if((Math.abs(x-54.175)<.01&&z===12)||(x===66&&z===16.15)||x===-69||x===-39.6){
       // Detailed end roofs and the aligned court range cover these walls.
     }else hipRoof(x,z,w,d,h+.23,Math.min(3.8,Math.min(w,d)*.3));
     if(!detail)for(const side of [-1,1]){
@@ -350,7 +350,7 @@ export function createEscapeExterior(THREE,aspect){
   // Both photographed front bays are built by the facade detail modules.
   // Replace the added round bay with a square projection on the blue-marked
   // window section, to its left. Its face stands 5.5 units beyond the facade.
-  const squareX=65.5,squareZ=16.15,squareWidth=8.5,squareDepth=17.7;
+  const squareX=66,squareZ=16.15,squareWidth=7.5,squareDepth=17.7;
   block(squareX,squareZ,squareWidth,squareDepth,14.3).name='East garden pavilion';
   for(const y of [4.08,8.8])box(white,squareX,y,squareZ,squareWidth+.14,.16,squareDepth+.14);
   addEastPhotoDetails(THREE,{model,box,mesh,worldUV,white,brick:photoBrick,roof,steel,material,hipRoof,details});

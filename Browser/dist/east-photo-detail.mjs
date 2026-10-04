@@ -22,7 +22,7 @@ export const EAST_PHOTO_VIEW=Object.freeze({position:[76,1.8,48],target:[53,5.4,
 export function eastPhotoProfile(x,z){
   return (Math.abs(x-54.175)<.01&&z===12)||
     (x===36.5&&z===23)||(x===35&&z===35)||
-    (x===65.5&&z===16.15)||
+    (x===66&&z===16.15)||
     (Math.abs(x-81.875)<.01&&z===8);
 }
 
@@ -35,13 +35,12 @@ export function addEastPhotoDetails(THREE,{model,box,mesh,worldUV,white,brick,ro
   for(const y of [4.06,8.8])box(white,51.125,y,19.52,20.25,.18,.2);
   for(const [y,h,d] of [[14.18,.22,.23],[14.42,.22,.48]])
     box(white,43.05,y,18.25,4.1+d,h,2.5+d);
-  for(const y of [2,6.5,11])sash('pavilion-flush',43.05,y,19.55,0,1.12,2.35);
   // One stepped hip covers the original range and the filled strip. The
   // courtyard eaves and ridge stay in place, with no small detached hip.
   const roofPoints=[
     [44.7,14.55,4.1],[63.65,14.55,4.1],[63.65,14.55,19.9],
     [40.6,14.55,19.9],[40.6,14.55,16.6],[44.7,14.55,16.6],
-    [51.257,18.33,12],[57.093,18.33,12]
+    [51.257,16.2,12],[57.093,16.2,12]
   ];
   const roofFaces=[[0,1,7],[0,7,6],[1,2,7],[2,3,6],[2,6,7],[3,4,5],[3,5,6],[5,0,6]];
   const positions=[],uv=[];
@@ -75,17 +74,23 @@ export function addEastPhotoDetails(THREE,{model,box,mesh,worldUV,white,brick,ro
   // Three-storey wall flanking the shallow polygonal bay. The right-hand
   // entrance has broad middle glazing and a roof-access door above the
   // adjoining two-storey, blank-fronted projection (owner's September photo).
-  for(const y of [2,6.5,11])sash('pavilion-left',49.6,y,19.55,0,1.02,2.35);
-  sash('pavilion-right',57.35,11,19.55,0,2.25,2.4);
+  // October owner's photo: one close pair on each brick storey, and a
+  // three-light bank below. The former widely spaced singles overstated
+  // the amount of blank wall between the forward wing and the canted bay.
+  for(const y of [6.5,11.6])for(const x of [46.3,47.8])
+    sash('pavilion-left-pair',x,y,19.55,0,1.3,2.35);
+  for(const x of [45.6,47.1,48.6])sash('pavilion-left-triple',x,2,19.55,0,1.22,2.55);
+  for(const x of [56.75,57.95])sash('pavilion-right',x,11.6,19.55,0,1.03,2.2);
   sash('pavilion-right',57.2,6.5,19.55,0,1.7,2.55);
   door(57.2,19.6);
   box(white,57.35,3.55,20.05,3.55,.2,1.15);
-  const projectionLeft=59.2,projectionRight=61.25,projectionX=(projectionLeft+projectionRight)/2;
-  mesh(worldUV(new THREE.BoxGeometry(2.05,5.35,5.5),1.7),brick,projectionX,6.675,22.25,true).name='Redesmere flat-roof projection brick';
-  mesh(new THREE.BoxGeometry(2.05,4,5.5),white,projectionX,2,22.25,true).name='Redesmere flat-roof projection white base';
-  mesh(new THREE.BoxGeometry(2.23,.23,5.68),white,projectionX,9.465,22.25,true).name='Redesmere flat roof coping';
+  const projectionLeft=59.2,projectionRight=62.25,projectionX=(projectionLeft+projectionRight)/2;
+  const projectionWidth=projectionRight-projectionLeft;
+  mesh(worldUV(new THREE.BoxGeometry(projectionWidth,5.35,5.5),1.7),brick,projectionX,6.675,22.25,true).name='Redesmere flat-roof projection brick';
+  mesh(new THREE.BoxGeometry(projectionWidth,4,5.5),white,projectionX,2,22.25,true).name='Redesmere flat-roof projection white base';
+  mesh(new THREE.BoxGeometry(projectionWidth+.18,.23,5.68),white,projectionX,9.465,22.25,true).name='Redesmere flat roof coping';
   const flatRoof=material(0x606868,{roughness:.94});
-  mesh(new THREE.BoxGeometry(2.05,.065,5.5),flatRoof,projectionX,9.6125,22.25,true).name='Redesmere flat roof';
+  mesh(new THREE.BoxGeometry(projectionWidth,.065,5.5),flatRoof,projectionX,9.6125,22.25,true).name='Redesmere flat roof';
   // Narrow pale door: lower solid panel and six glazed lights above. Its
   // threshold sits directly on the flat roof, not at a generic floor level.
   const doorX=60.22,doorBottom=9.645,doorZ=19.62,doorWidth=1.03,doorHeight=2.55;
@@ -105,14 +110,14 @@ export function addEastPhotoDetails(THREE,{model,box,mesh,worldUV,white,brick,ro
   // matching bands/hip and world-scale brickwork instead of cylinder UVs.
   addWestCantedBay(THREE,{model,mesh,worldUV,brick,white,roof,sash},{
     x:53.1,z:19.45,side:1,name:'East curved bay',face:'polygonal-bay',
-    width:5.1,depth:2.8,height:14.3,baseHeight:4,
+    width:4.8,depth:1.55,frontWidth:2.25,returnDepth:.275,height:14.3,baseHeight:4,roofRise:.5,
     bandHeights:[4.06,8.8,14.28,14.45],
-    windowRows:[2,6.5,11].map(y=>({y,width:y===2?1.45:1.05,sideWidth:y===2?1.45:1.05,height:2.35}))
+    windowRows:[2,6.5,11.6].map(y=>({y,width:y===2?1.45:1.2,sideWidth:y===2?.85:.65,height:2.35}))
   });
   // Square projecting pavilion: exactly two aligned openings on each storey
   // of its front face, and two on its exposed east return.
-  for(const y of [2,6.5,11]){
-    for(const x of [63.65,67.35])sash('square-front',x,y,25.05,0,1.15,2.45);
+  for(const y of [2,6.5,11.6]){
+    for(const x of [64.05,67.45])sash('square-front',x,y,25.05,0,1.18,2.25);
     // The east return is scheduled separately from redesmere-edge/img3.jpg.
   }
   addRedesmereGardenDetails(THREE,{model,box,mesh,worldUV,white,brick,roof,material,hipRoof,sash,door,rod,iron});
@@ -126,7 +131,7 @@ export function addEastPhotoDetails(THREE,{model,box,mesh,worldUV,white,brick,ro
   sash('service-background',92.4,7.5,10.05,0,1.15,2.2);
   // Dark rainwater pipes break up the long white ground storey.
   for(const z of [17,29,42.7])box(iron,41.2,4.1,z,.085,8.2,.085);
-  for(const x of [61.4,69.6])box(iron,x,7,25.2,.085,14,.085);
+  for(const x of [62.4,69.6])box(iron,x,7,25.2,.085,14,.085);
   // The garden cross-walk shares the continuous entrance/passage gravel in
   // entrance-walks.mjs; no differently coloured slab overlaps it here.
   // The marked east lawn column is removed in every period; retain the

@@ -3,7 +3,7 @@ export const ROOM_USES={
  0:{R1:'hydrotherapy',R2:'ward',R3:'nursing',R4:'dayroom',R5:'linen',R6:'surgery',R7:'dispensary',R8:'ect',R9:'consultation',R10:'records',R11:'nursing',R12:'showerTreatment',R13:'ward',R14:'nursing',R15:'dayroom',R16:'linen',R17:'store',R18:'bookroom',R19:'reading',R20:'dining',R21:'bookroom',R22:'activity',R23:'admissions',R24:'stairs',R25:'consultation',R26:'office',R27:'dayroom',R28:'dining',R29:'electricalTreatment',R30:'staff',R31:'bookroom',R32:'ward',R33:'nursing',R34:'reading',R35:'nursing',R36:'ward',R37:'bookroom',R38:'reading',R39:'store',R40:'porch'},
  1:{R1:'bedroom',R2:'ward',R3:'bedroom',R4:'dayroom',R5:'linen',R6:'bedroom',R7:'ward',R8:'bedroom',R9:'ward',R10:'nursing',R11:'linen',R12:'bedroom',R13:'ward',R14:'bedroom',R15:'dayroom',R16:'linen',R17:'store',R18:'bookroom',R19:'bedroom',R20:'ward',R21:'bookroom',R22:'ward',R23:'nursing',R24:'stairs',R25:'nursing',R26:'staff',R27:'ward',R28:'bedroom',R29:'bedroom',R30:'staffBedroom',R31:'bookroom',R32:'ward',R33:'dayroom',R34:'bookroom',R35:'dayroom',R36:'ward',R37:'reading'},
  2:{B1:'store',B2:'linen',B3:'workshop',B4:'records',B5:'store',B6:'medicine',B7:'workshop',B8:'store',B9:'circulation',B10:'workshop',B11:'store',B12:'records'},
- 3:{R41:'records',R42:'office'}
+ 3:{R41:'recordsOffice',R42:'office',R43:'staff',R44:'archive',R45:'linen'}
 };
 export const ROOM_PURPOSES={
  hydrotherapy:{name:'Hydrotherapy room',fixed:['hydroBath','cupboard','chair'],variable:['chair']},
@@ -30,6 +30,8 @@ export const ROOM_PURPOSES={
  staff:{name:'Staff sitting room',fixed:['table','chair','chair','cupboard'],variable:['books','chair']},
  linen:{name:'Linen store',fixed:['cupboard','cupboard','bookcase'],variable:['chair','books']},
  records:{name:'Records room',fixed:['bookcase','bookcase','table','chair'],variable:['books','chair']},
+ recordsOffice:{name:'Records office',fixed:['bookcase','table','chair'],variable:['books']},
+ archive:{name:'Archive and stores',fixed:['bookcase','bookcase','bookcase','cupboard'],variable:[]},
  store:{name:'General store',fixed:['bookcase','cupboard','cupboard'],variable:['bench','chair']},
  workshop:{name:'Maintenance workshop',fixed:['table','table','cupboard','bench'],variable:['bench','books']},
  stairs:{name:'Reception stair hall',fixed:[],variable:[]},

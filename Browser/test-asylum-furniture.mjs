@@ -21,7 +21,7 @@ function polygonsOverlap(a,b){
 }
 function footprint(item){return [-1,1].flatMap(u=>(u===-1?[-1,1]:[1,-1]).map(v=>{const c=Math.cos(item.rotation),s=Math.sin(item.rotation);return [item.x+c*u*item.width/2+s*v*item.depth/2,item.z-s*u*item.width/2+c*v*item.depth/2];}));}
 function frontStrip(item){const c=Math.cos(item.rotation),s=Math.sin(item.rotation);return [[-item.width/2-.10,0],[item.width/2+.10,0],[item.width/2+.10,1],[-item.width/2-.10,1]].map(([u,v])=>[item.x+c*u+s*(item.depth/2+v),item.z-s*u+c*(item.depth/2+v)]);}
-assert.equal(Object.keys(FURNITURE_CATALOG).length,20);
+assert.equal(Object.keys(FURNITURE_CATALOG).length,29);
 assert.equal(FURNITURE_CATALOG.chair.source,'windsor_chair');assert.equal(FURNITURE_CATALOG.cupboard.procedural,true);assert.equal(FURNITURE_CATALOG.bench.source,'panca_50');
 for(const [key,value] of Object.entries({width:1.02,depth:2.10,height:.92}))assert(Math.abs(FURNITURE_CATALOG.bed[key]/value-1.3)<1e-12,'Beds are 130% in every dimension, including collisions');
 for(const [kind,previous] of Object.entries({chair:{width:.48,depth:.47,height:.90},table:{width:1.50,depth:.82,height:.76}}))for(const [key,value] of Object.entries(previous))assert(Math.abs(FURNITURE_CATALOG[kind][key]/value-1.3)<1e-12,`${kind}: 130% in every dimension, including collisions`);
@@ -102,4 +102,4 @@ for(const target of [{x:-36.225,z:31.95,floor:0},{x:29.8,z:-21.4,floor:1},{x:-34
 }
 assert(floors[0].furniture.some(i=>i.kind==='bed')&&floors[0].furniture.some(i=>i.kind==='bookcase'));
 const ratio=fixed().length/(fixed().length+variation().length);assert(ratio>=.70&&ratio<=.85,'Most furnishings remain fixed');
-console.log(`PASS: twenty furniture models, all room uses, ${seeds.length} reproducible layouts, ${wallContacts} flush storage backs, ${frontChecks} unobstructed one-metre shelf/cabinet fronts, ${routes} room/exit routes, all door crossings, ${collisionProbes} walked furniture collisions, NPC paths/spawns, supported decorations and eye-height sight (${Math.round(ratio*100)}% fixed).`);
+console.log(`PASS: twenty-nine furniture models, all room uses, ${seeds.length} reproducible layouts, ${wallContacts} flush storage backs, ${frontChecks} unobstructed one-metre shelf/cabinet fronts, ${routes} room/exit routes, all door crossings, ${collisionProbes} walked furniture collisions, NPC paths/spawns, supported decorations and eye-height sight (${Math.round(ratio*100)}% fixed).`);

@@ -1,0 +1,12 @@
+import assert from 'node:assert/strict';
+import {readFile,writeFile} from 'node:fs/promises';
+import {buildAsylumLayout} from '../../dist/asylum-layout.mjs';
+import {furnishAsylum} from '../../dist/asylum-furniture.mjs';
+import {modelSourceHash,dist} from '../../model-build-inputs.mjs';
+const before=JSON.parse(await readFile(new URL('./before-records.json',import.meta.url))),floors=buildAsylumLayout(JSON.parse(await readFile(new URL('asylum-plan.json',dist)))).floors;
+furnishAsylum(floors);const ids=['Visitors','WardService','Recreation'];
+assert.deepEqual(floors.map(f=>f.furniture.filter(i=>!ids.includes(i.roomId))),before.map(f=>f.furniture),'Existing room and Reception furnishing records remain identical');
+const sources=new Set();async function visit(url){if(sources.has(url.href))return;sources.add(url.href);for(const m of (await readFile(url,'utf8')).matchAll(/\b(?:from\s*|import\s*(?:\(\s*)?)['"](\.[^'"]+)['"]/g))await visit(new URL(m[1],url));}await visit(new URL('aerial-scene.mjs',dist));
+const changed=['hall-furnishings.mjs','hall-furniture-models.mjs','asylum-furniture.mjs','furniture-models.mjs','notebook.mjs'];for(const f of changed)assert(!sources.has(new URL(f,dist).href),'Aerial compiler excludes '+f);
+const hash=await modelSourceHash(),manifest=JSON.parse(await readFile(new URL('compiled/manifest.json',dist)));
+const report={existingFurniturePreserved:true,added:32,areas:3,aerialInputs:sources.size,interiorSourcesExcluded:true,currentAerialHash:hash,compiledAerialHash:manifest.sourceHash,compiledModelCurrent:hash===manifest.sourceHash,exportsChanged:['Browser interiors','Ground and first furnished plans'],exportsNotRegenerated:['Unity','Blender','packaged desktop/Android']};await writeFile(new URL('./scope.json',import.meta.url),JSON.stringify(report,null,2)+'\n');console.log(report);

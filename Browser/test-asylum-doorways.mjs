@@ -38,12 +38,12 @@ for(const floor of floors){
   for(const side of [-1,1]){
    for(const u of [-.45,0,.45])for(const y of [.13,1.65,2.3])assert.equal(across(u,y,side).length,0,`${label} open from threshold to head height`);
    assert.equal(across(0,d.height+.3,side)[0]?.object.name,'Asylum Plaster',`${label} masonry closes the space above the door`);
-   for(const u of [-1.005,1.005]){
+   for(const u of [-d.width/2-.055,d.width/2+.055]){
     const hits=across(u,d.height-.013,side),front=hits[0];
     assert.equal(front?.object.name,'Asylum DoorFrame');
     assert.equal(hits.filter(h=>Math.abs(h.distance-front.distance)<1e-6).length,1,`${label} frame/head joint has no competing faces`);
    }
-   for(const u of [-1.2,1.2]){
+   for(const u of [-d.width/2-.25,d.width/2+.25]){
     if(d.roomId==='R27'&&floor.id===1&&u<0){
      // The first-floor L-shaped enclosure turns beside this jamb. The old
      // broad-front probe starts inside that return from the room side;
@@ -56,7 +56,8 @@ for(const floor of floors){
     assert.equal(across(u,1.65,side)[0]?.object.name,'Asylum Plaster',`${label} retains its room front beside the doorway`);
     assert(!flatWalkable(floor,point(u,0,0).x,point(u,0,0).z),`${label} visible frontage blocks movement`);
    }
-   for(const u of [-.45,0,.45]){
+   const clearance=Math.min(.45,(d.width-1)/2);
+   for(const u of [-clearance,0,clearance]){
     const start=point(u,side*(d.depth/2+.5),floor.elevation),end=point(u,-side*(d.depth/2+.5),floor.elevation),actor={x:start.x,z:start.z,y:floor.elevation,floor:floor.id};
     assert(flatWalkable(floor,actor.x,actor.z),`${label} approachable`);
     moveAsylumActor(floors,actor,end.x-start.x,end.z-start.z);

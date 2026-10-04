@@ -17,6 +17,13 @@ the basement stair lobby and entrance porch retain their masonry. Other
 enclosed rooms, including stores, offices and basement workshops, use the
 new finish. Room uses come from `../../Browser/dist/asylum-room-uses.mjs`.
 
+The owner's follow-up asks for less bright, more muted and distressed paper.
+The three tints now use rose `#b29993`, sage `#969f8f` and blue `#8593a4`.
+The same floral ornament and repeat scale are retained, with a duller warm
+paper ground and softer ink contrast. Deterministic, softly blended stains,
+rubbed ink patches and small scuffs age the shared tile; the marks wrap over
+its edges so repeated walls remain seamless. The cream lower paint is unchanged.
+
 The moulded rail centres at 1.52m on the 3.8m storeys and 1.16m in the 2.9m
 basement, projects 35mm and has a 104mm stepped profile. Those dimensions
 are modelling choices. The existing dark skirting is retained. Room-facing
@@ -36,3 +43,25 @@ these interiors; Unity, Blender and packaged exports are not regenerated.
 Run `npm run test:room-finishes` from `../../Browser`. Review images and
 validation are in `../../Browser/artifacts/room-finishes/`; complete-suite
 results are recorded in `../../DEVELOPMENT.md`.
+
+## Window frame clearance correction — 4 October 2026
+
+The owner's [marked window screenshot](window-frame-reference.png) shows a missing timber head and dado
+moulding entering both side jambs. Stopping at the glass aperture left the
+standard sash's 40mm outer jamb projection unprotected, and rail segments on
+the masonry reveals could also reach the frame. Generated windows now have
+an 80mm timber head joining their existing jambs and sill. Scheduled basement
+and upper-floor sashes retain their complete frames.
+
+Rail runs are clipped against every window's full timber footprint before
+corner joints are formed. The exclusion accounts for the rail's 35mm projection,
+including perpendicular reveals and 45-degree windows. A 20-micrometre end
+clearance covers Float32 mesh rounding. Rails continue beside the casings.
+The wall openings, panes, window positions and walking plan are retained.
+
+`npm run test:window-frames` checks every interior sash and captures matching
+desktop, phone and exploration views. The geometry check independently probes
+heads, jambs and sills from both faces, compares actual timber bounds against
+rail triangles, and checks the neighbouring decorated rails. Its two baseline
+modes separately reject the original missing head and crossing moulding.
+Evidence is in `../../Browser/artifacts/window-frames/`.

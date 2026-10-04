@@ -1,0 +1,70 @@
+{
+  "mode": "source",
+  "errors": [],
+  "checks": [
+    {
+      "name": "walking",
+      "position": [
+        64,
+        1.8,
+        51
+      ],
+      "target": [
+        57,
+        7,
+        20
+      ],
+      "fov": 62,
+      "width": 1223,
+      "height": 780
+    },
+    {
+      "name": "reference",
+      "position": [
+        49,
+        1.8,
+        63
+      ],
+      "target": [
+        58,
+        6.1,
+        20
+      ],
+      "fov": 53,
+      "width": 688,
+      "height": 917
+    },
+    {
+      "name": "detail",
+      "position": [
+        64,
+        16,
+        45
+      ],
+      "target": [
+        57.5,
+        8,
+        21
+      ],
+      "fov": 48,
+      "width": 1223,
+      "height": 780
+    },
+    {
+      "name": "plan",
+      "position": [
+        56,
+        60,
+        23.1
+      ],
+      "target": [
+        56,
+        0,
+        23
+      ],
+      "fov": 38,
+      "width": 1223,
+      "height": 780
+    }
+  ]
+}

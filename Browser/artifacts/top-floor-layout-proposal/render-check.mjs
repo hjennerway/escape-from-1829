@@ -10,7 +10,7 @@ const source=new URL('../../../Research/top-floor-layout-proposal/top-floor-plan
 const fragment=await readFile(source,'utf8');
 assert(!fragment.includes('\\n')&&!fragment.includes('\\"'),'Literal HTML markup');
 const data=JSON.parse(fragment.match(/<script type="application\/json" class="plan-data">([\s\S]*?)<\/script>/)[1]);
-const game=JSON.parse(await readFile(new URL('../../dist/asylum-plan.json',import.meta.url),'utf8'));
+const game=JSON.parse(await readFile(new URL('./implemented/before-plan.json',import.meta.url),'utf8').catch(()=>readFile(new URL('../../dist/asylum-plan.json',import.meta.url),'utf8')));
 assert.deepEqual(data.outline,game.floors.find(f=>f.id===3).outline.loops[0]);
 assert.deepEqual(data.stair,game.stairs.find(s=>s.id==='S1').points);
 assert.deepEqual(data.windows,game.rooms.filter(r=>r.floors.includes(3)).flatMap(r=>r.windows));

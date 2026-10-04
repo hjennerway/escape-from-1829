@@ -6,14 +6,20 @@ import {buildAsylumArchitecture} from './dist/asylum-architecture.mjs';
 import {routeBetweenFloors} from './dist/floors.mjs';
 import {addCentralBack} from './dist/central-back.mjs';
 import {createNotebook} from './dist/notebook.mjs';
+import {furnishAsylum} from './dist/asylum-furniture.mjs';
 
 const plan=JSON.parse(await readFile(new URL('./dist/asylum-plan.json',import.meta.url)));
 const floors=buildAsylumLayout(plan).floors,upper=floors[3],scene=new THREE.Scene();
 assert.equal(upper.name,'Second floor');assert.equal(upper.elevation,8.4);
-assert.deepEqual(upper.rooms.map(r=>r.id),['R41','R42']);
+assert.deepEqual(upper.rooms.map(r=>r.id),['R41','R42','R43','R44','R45']);
 assert.deepEqual(upper.stairs.map(s=>s.id),['S1']);assert.equal(upper.exits.length,0);
-assert.deepEqual(upper.rooms.map(r=>[r.windows.filter(w=>w.axis==='z').length,r.windows.filter(w=>w.axis==='diagonal').length]),[[2,1],[1,1]]);
-assert.deepEqual(upper.doorways.map(d=>d.roomId),['R41','R42']);
+assert.deepEqual(upper.rooms.map(r=>[r.windows.filter(w=>w.axis==='z').length,r.windows.filter(w=>w.axis==='diagonal').length]),[[1,0],[1,1],[1,1],[0,0],[0,0]]);
+assert.deepEqual(upper.doorways.map(d=>d.roomId),['R41','R42','R43','R44','R45']);
+assert.deepEqual(upper.doorways.map(d=>d.width),[1.3,1.3,1.3,1.3,1.2]);
+assert.deepEqual(upper.rooms.find(r=>r.id==='R41').points,[[-2,4.4],[2,4.4],[2,11.2],[-2,11.2]]);
+assert.deepEqual(upper.rooms.find(r=>r.id==='R44').points,[[-8.6,13.2],[8.6,13.2],[8.6,16],[-8.6,16]]);
+assert.deepEqual(upper.rooms.find(r=>r.id==='R45').points,[[-16,7],[-8.6,7],[-8.6,9.6],[-16,9.6]]);
+assert.equal(upper.corridors.find(c=>c.id==='C24').width,2);
 buildAsylumArchitecture(THREE,scene,upper);scene.updateMatrixWorld(true);
 assert.equal(scene.getObjectByName('Asylum Glass').count,5,'Exactly the five specified windows, without inferred extra sashes');
 // Read the actual exterior sash schedule, without constructing the estate.
@@ -34,9 +40,24 @@ for(const w of upper.windows){
  }
  assert(!flatWalkable(upper,w.x,w.z),'Windows remain solid to movement');
 }
-// The semi-open landing connects to rooms only through their framed doors.
-for(const x of [-8,-6,0,2.5,7.5])assert(!flatWalkable(upper,x,11.6,.05),'Room fronts stay closed beside the two doors');
+// Passage and stair landing reach every room through its own framed door.
+for(const x of [-8,-7,-3,-2,2,7.5])assert(!flatWalkable(upper,x,11.2,.05),'Windowed room fronts remain closed beside the three doors');
 for(const z of [7.5,9,10.5])assert(!flatWalkable(upper,-8.6,z,.05),'Landing cannot erase the west room wall');
+for(const x of [-7,-3,3,7])assert(!flatWalkable(upper,x,13.2,.05),'Archive retains its corridor boundary');
+for(const x of [-15,-11])assert(!flatWalkable(upper,x,9.6,.05),'Stair clearance cannot erase the linen-store wall');
+for(const [x,z] of [[-9.45,10.25],[-9.45,12.2],[-7,12.2],[0,12.2],[7,12.2]])assert(flatWalkable(upper,x,z),'Stair departure and passage remain unobstructed');
+const labels=scene.getObjectByName('Asylum RoomDoorLabels');assert(labels);
+assert.deepEqual([...new Set(labels.userData.labels.map(l=>l.text))],['Records office','Staff office','Staff sitting room','Archive & stores','Linen store']);
+assert.equal(labels.userData.labels.length,10,'All five door names are readable from both leaf faces');
+for(const label of labels.userData.labels){
+ const door=upper.roomDoors.find(d=>d.roomId===label.roomId),nx=Math.sin(door.rotation)*label.face,nz=Math.cos(door.rotation)*label.face;
+ ray.set(new THREE.Vector3(label.x+nx*.12,label.y,label.z+nz*.12),new THREE.Vector3(-nx,0,-nz));ray.far=.14;
+ assert.equal(ray.intersectObjects(scene.children,false)[0]?.object.name,'Asylum RoomDoorLabels','Nameplate is visible on the actual open door');
+}
+for(const floor of floors.slice(0,3)){
+ const lower=new THREE.Scene();buildAsylumArchitecture(THREE,lower,floor);
+ assert(!lower.getObjectByName('Asylum RoomDoorLabels'),'Labels stay limited to the approved top-floor doors');
+}
 function walk(from,to){
  const actor={...from,y:floors[from.floor].elevation},route=routeBetweenFloors(floors,actor,to);assert(route.length,'A continuous route exists');
  for(const target of route){
@@ -53,4 +74,12 @@ for(const room of upper.rooms)for(const start of starts){const end=walk(start,{x
 const journal=createNotebook(floors);assert(!journal.availableViews().some(v=>v.index===3));
 for(const room of upper.rooms)journal.explore({x:room.label[0],z:room.label[1],floor:3,y:8.4});
 assert(journal.availableViews().some(v=>v.name==='Second floor'));assert(journal.entries.find(e=>e.id==='places:3').text.includes('R42'));
-console.log(`PASS: two second-floor rooms, five exterior-aligned sashes (${panes} clear panes), 45-degree corners, closed partitions, 12 physically walked cross-floor routes and notebook discovery.`);
+furnishAsylum(floors);
+for(const room of upper.rooms){
+ assert(flatWalkable(upper,...room.label),'Furnished room centre remains accessible');
+ const items=upper.furniture.filter(i=>i.roomId===room.id);
+ assert(items.length,'Every room has appropriate furnishings');
+ if(['R41','R42'].includes(room.id))assert(items.some(i=>i.kind==='table')&&items.some(i=>i.kind==='chair'),'Working offices retain desks and seating');
+ const end=walk({x:0,z:17.5,floor:0},{x:room.label[0],z:room.label[1],floor:3});walk(end,{x:0,z:17.5,floor:0});
+}
+console.log(`PASS: five second-floor rooms, five exterior-aligned sashes (${panes} clear panes), retained stairs/45-degree corners, compact passage, closed stores, five two-sided door names, 40 physically walked furnished/unfurnished cross-floor routes and notebook discovery.`);

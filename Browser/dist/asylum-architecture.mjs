@@ -7,7 +7,8 @@ import {mergeGeometries} from './vendor/BufferGeometryUtils.js';
 import {mergeAsylumMasonry} from './asylum-wall-joins.mjs';
 import {segmentDistance,insidePolygon,asylumExitCenter} from './asylum-layout.mjs';
 import {asylumWindowCenters,ASYLUM_WINDOW_WIDTH} from './asylum-windows.mjs';
-import {roomDoorHandle} from './asylum-doors.mjs';
+import {roomDoorHandle,ROOM_DOOR_FRAME_CASING_DEPTH,ROOM_DOOR_HINGE_RADIUS} from './asylum-doors.mjs';
+import {addAsylumDoorLabels} from './asylum-door-labels.mjs';
 import {stairShape,stairOpening,stairFlightGeometry,handrailGeometry,STAIR_WIDTH,STAIR_SLAB_THICKNESS,RAIL_HEIGHT} from './asylum-stairs.mjs';
 const cache=new WeakMap();
 export function asylumWallSurfaces(floor){
@@ -24,7 +25,7 @@ export function asylumWallSurfaces(floor){
 }
 export function buildAsylumArchitecture(THREE,scene,floor){
  if(!cache.has(THREE))cache.set(THREE,createInteriorMaterials(THREE,globalThis.document));
- const batches=new Map(),ceilingHeight=floor.id===2?2.9:3.8;
+ const batches=new Map(),windowFrames=[],ceilingHeight=floor.id===2?2.9:3.8;
  const roomMaterials=asylumRoomWallMaterials(THREE,cache.get(THREE));
  const materials=floor.id===2?basementMuralMaterials(THREE,roomMaterials,ceilingHeight):roomMaterials;
  const roomFinisher=createAsylumRoomFinisher(THREE,floor,ceilingHeight);
@@ -74,6 +75,7 @@ export function buildAsylumArchitecture(THREE,scene,floor){
    let previous=a;
    for(const p of windows){
     const {x,z,width,height:wh,sill,t}=p,head=sill+wh;
+    windowFrames.push({x,z,dx,dz,width,depth:.24,bottom:sill-.035,top:head+.035});
     if(t-width/2<0||t+width/2>length)throw new Error('Scheduled window extends past its wall: '+p.roomId);
     wall(previous,[x-dx*width/2,z-dz*width/2]);
     box('Brick',x,sill/2,z,width,sill,.18,angle);
@@ -97,7 +99,9 @@ export function buildAsylumArchitecture(THREE,scene,floor){
    const x=a[0]+dx*t,z=a[1]+dz*t,left=[x-dx*width/2,z-dz*width/2],right=[x+dx*width/2,z+dz*width/2];
    wall(previous,left);box('Brick',x,.45,z,width,.9,.18,angle);box('Plaster',x,(height+2.9)/2,z,width,height-2.9,.18,angle);
    box('Glass',x,1.92,z,width,1.92,.05,angle);
+   windowFrames.push({x,z,dx,dz,width:width+.08,depth:.24,bottom:.92,top:2.94});
    for(const side of [-1,1])box('Sash',x+dx*side*width/2,1.93,z+dz*side*width/2,.08,2.02,.24,angle);
+   box('Sash',x,2.90,z,width-.08,.08,.24,angle);
    box('Sash',x,1.92,z,width,.075,.24,angle);box('Sash',x,1.92,z,.06,1.92,.24,angle);box('Stone',x,.95,z,width+.2,.10,.32,angle);previous=right;
   }
   wall(previous,b);
@@ -146,13 +150,13 @@ export function buildAsylumArchitecture(THREE,scene,floor){
   for(const side of [-1,1]){
    part('DoorFrame',side*(width/2-.025),(head-.07)/2,0,.09,head-.07,depth+.035);
    for(const face of [-1,1]){
-    part('DoorFrame',side*(width/2+.03),(head-.035)/2,face*(depth/2+.027),.20,head-.035,.054);
+    part('DoorFrame',side*(width/2+.03),(head-.035)/2,face*(depth/2+ROOM_DOOR_FRAME_CASING_DEPTH/2),.20,head-.035,ROOM_DOOR_FRAME_CASING_DEPTH);
     part('Sash',side*(width/2+.115),(head+.165)/2,face*(depth/2+.06),.03,head+.165,.018);
    }
   }
   part('DoorFrame',0,head-.035,0,width,.07,depth+.035);
   for(const face of [-1,1]){
-   part('DoorFrame',0,head+.065,face*(depth/2+.027),width+.26,.20,.054);
+   part('DoorFrame',0,head+.065,face*(depth/2+ROOM_DOOR_FRAME_CASING_DEPTH/2),width+.26,.20,ROOM_DOOR_FRAME_CASING_DEPTH);
    part('Sash',0,head+.18,face*(depth/2+.06),width+.29,.03,.018);
   }
  }
@@ -169,8 +173,17 @@ export function buildAsylumArchitecture(THREE,scene,floor){
    part('Brass',width/2-.18,1.10,face*(depth/2+.012),.07,.18,.024);
   }
   box('Brass',handle.x,1.10,handle.z,.065,.065,handle.depth,angle);
-  for(const py of [.30,1.20,2.12])box('Iron',door.hingeX,py,door.hingeZ,.035,.13,.035);
+  const hingeFace=-door.hingeSide*door.roomSide,frameAngle=-Math.atan2(door.dz,door.dx);
+  for(const py of [.30,1.20,2.12]){
+   // One plate is fixed to the casing; the other follows the leaf. Both meet
+   // the pin, rather than leaving isolated hinge blocks in front of the frame.
+   box('Iron',door.hingeX+door.dx*door.hingeSide*.04+door.dz*door.roomSide*(ROOM_DOOR_HINGE_RADIUS-.002),py,
+    door.hingeZ+door.dz*door.hingeSide*.04-door.dx*door.roomSide*(ROOM_DOOR_HINGE_RADIUS-.002),.10,.13,.004,frameAngle);
+   part('Iron',-width/2+.04,py,hingeFace*(depth/2+.002),.10,.13,.004);
+   box('Iron',door.hingeX,py,door.hingeZ,ROOM_DOOR_HINGE_RADIUS*2,.13,ROOM_DOOR_HINGE_RADIUS*2,frameAngle);
+  }
  }
+ addAsylumDoorLabels(THREE,scene,floor,box);
  const stairSurfaces=[],stairSolids=[];
  function deck(x,z,w,d,y,landing=false){
   if(landing)box('Stone',x,y-STAIR_SLAB_THICKNESS/2,z,w,STAIR_SLAB_THICKNESS,d);
@@ -229,7 +242,7 @@ export function buildAsylumArchitecture(THREE,scene,floor){
   for(const part of parts)part.dispose();
   batches.delete(kind);
  }
- const dado=new THREE.Mesh(roomFinisher.rail(),materials.Dado);dado.name='Asylum Dado';scene.add(dado);
+ const dado=new THREE.Mesh(roomFinisher.rail(windowFrames),materials.Dado);dado.name='Asylum Dado';scene.add(dado);
  for(const [kind,items] of batches){const mesh=new THREE.InstancedMesh(geometry,materials[['DoorFrame','RoomDoor'].includes(kind)?'Panel':kind],items.length);mesh.name='Asylum '+kind;
   for(let i=0;i<items.length;i++){const [x,y,z,w,h,d,ry,rz]=items[i];transform.position.set(x,y,z);transform.scale.set(w,h,d);transform.rotation.set(0,ry,rz);transform.updateMatrix();mesh.setMatrixAt(i,transform.matrix);}
   mesh.instanceMatrix.needsUpdate=true;mesh.computeBoundingSphere();scene.add(mesh);

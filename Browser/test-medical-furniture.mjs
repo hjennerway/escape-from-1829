@@ -21,6 +21,17 @@ for(const [kind,parts] of Object.entries(models)){
  for(const [i,size] of bounds.getSize(new THREE.Vector3()).toArray().entries())assert(Math.abs(size-[c.width,c.height,c.depth][i])<1e-5,`${kind}: actual geometry agrees with collision box`);
 }
 assert(triangles<35000,'Seven detailed additions remain below 35k triangles combined');
+const showerSize=FURNITURE_CATALOG.hydroShower;
+for(const [key,previous] of Object.entries({width:1.22,depth:1.10,height:2.28}))assert(Math.abs(showerSize[key]/previous-1.3)<1e-12,'Cold-water apparatus is 130% in every dimension, including its collision footprint');
+// Probe the visible shaft from several directions: two coincident metal surfaces
+// at the first hit reproduce the original iron/brass depth conflict.
+const showerMetals=models.hydroShower.filter(p=>['Medical iron','Medical brass'].includes(p.material.name)).map(p=>new THREE.Mesh(p.geometry,p.material));
+for(const [height,material] of [[.10,'Medical iron'],[.22,'Medical brass'],[.35,'Medical brass'],[.50,'Medical brass'],[.65,'Medical brass'],[.86,'Medical iron']])for(const angle of [-.9,-.4,.2,.7,1.2]){
+ const center=new THREE.Vector3(-.48*showerSize.width/1.22,height*showerSize.height,-.38*showerSize.depth/1.10),direction=new THREE.Vector3(Math.sin(angle),0,Math.cos(angle));
+ const ray=new THREE.Raycaster(center.clone().addScaledVector(direction,.25),direction.negate(),0,.25),hits=ray.intersectObjects(showerMetals,false);
+ assert(hits.length,'Left pole retains a continuous metal shaft');
+ assert.deepEqual([...new Set(hits.filter(h=>Math.abs(h.distance-hits[0].distance)<1e-5).map(h=>h.object.material.name))],[material],'Left pole has one visible metal surface with no coincident iron/brass geometry');
+}
 const surgicalSize=FURNITURE_CATALOG.operatingTable;
 for(const [key,previous] of Object.entries({width:.82,depth:2.08,height:1.02}))assert(Math.abs(surgicalSize[key]/previous-1.3)<1e-12,'Surgical table is 130% in every dimension, including its collision footprint');
 // Isolate the head cushion from the merged cloth mesh using its head-end vertices.
@@ -57,4 +68,4 @@ for(const seed of [1829,1,42,4294967295]){
  }
  assert.match(floors[0].rooms.find(r=>r.id==='R8').name,/later hospital era/,'ECT is identified as a later-period room');
 }
-console.log(`PASS: seven original medical models (${triangles} triangles), matching collision dimensions, 130% surgical table and supported head cushion, open bath basin/rim, fixed appropriate rooms, reachable routes and supported cupping/leech set.`);
+console.log(`PASS: seven original medical models (${triangles} triangles), matching collision dimensions, 130% cold-water apparatus with no left-pole depth conflict, 130% surgical table and supported head cushion, open bath basin/rim, fixed appropriate rooms, reachable routes and supported cupping/leech set.`);
