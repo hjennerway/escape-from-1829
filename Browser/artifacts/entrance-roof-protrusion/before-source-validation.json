@@ -1,0 +1,622 @@
+{
+  "build": {
+    "mode": "procedural",
+    "milliseconds": 2235
+  },
+  "errors": [],
+  "views": {
+    "west": {
+      "position": [
+        -37,
+        30,
+        45
+      ],
+      "target": [
+        -16,
+        12.8,
+        16.5
+      ],
+      "fov": 45
+    },
+    "westClose": {
+      "position": [
+        -31,
+        21,
+        29
+      ],
+      "target": [
+        -22,
+        13.5,
+        17.5
+      ],
+      "fov": 38
+    },
+    "eastClose": {
+      "position": [
+        31,
+        21,
+        29
+      ],
+      "target": [
+        22,
+        13.5,
+        17.5
+      ],
+      "fov": 38
+    },
+    "westLow": {
+      "position": [
+        -31,
+        14.5,
+        28
+      ],
+      "target": [
+        -22,
+        13.5,
+        17.5
+      ],
+      "fov": 38
+    },
+    "junction": {
+      "position": [
+        -16,
+        20,
+        24
+      ],
+      "target": [
+        -7.5,
+        14.4,
+        16.7
+      ],
+      "fov": 35
+    }
+  },
+  "survey": [
+    {
+      "side": -1,
+      "probes": [
+        {
+          "x": -7.2,
+          "z": 16.7,
+          "hits": [
+            {
+              "name": "Reception longitudinal ridge and rear hips",
+              "point": [
+                -7.2,
+                14.76599959647442,
+                16.7
+              ]
+            },
+            {
+              "name": "Aerial batch · Period · 1829 · 253",
+              "point": [
+                -7.2,
+                14.76599959647442,
+                16.7
+              ]
+            },
+            {
+              "name": "Entrance west recessed slate roof",
+              "point": [
+                -7.2,
+                13.350049494269697,
+                16.7
+              ]
+            },
+            {
+              "name": "Aerial batch · Period · 1829 · 252",
+              "point": [
+                -7.2,
+                13.350049494269697,
+                16.7
+              ]
+            }
+          ]
+        },
+        {
+          "x": -7.4,
+          "z": 16.7,
+          "hits": [
+            {
+              "name": "Reception longitudinal ridge and rear hips",
+              "point": [
+                -7.4,
+                14.688666277845012,
+                16.7
+              ]
+            },
+            {
+              "name": "Aerial batch · Period · 1829 · 253",
+              "point": [
+                -7.4,
+                14.688666277845012,
+                16.7
+              ]
+            },
+            {
+              "name": "Entrance west recessed slate roof",
+              "point": [
+                -7.4,
+                13.39703787344395,
+                16.7
+              ]
+            },
+            {
+              "name": "Aerial batch · Period · 1829 · 252",
+              "point": [
+                -7.4,
+                13.39703787344395,
+                16.7
+              ]
+            }
+          ]
+        },
+        {
+          "x": -7.6,
+          "z": 16.7,
+          "hits": [
+            {
+              "name": "Entrance west recessed slate roof",
+              "point": [
+                -7.6,
+                13.39703787344395,
+                16.7
+              ]
+            },
+            {
+              "name": "Aerial batch · Period · 1829 · 252",
+              "point": [
+                -7.6,
+                13.39703787344395,
+                16.7
+              ]
+            }
+          ]
+        },
+        {
+          "x": -7.8,
+          "z": 16.7,
+          "hits": [
+            {
+              "name": "Entrance west recessed slate roof",
+              "point": [
+                -7.8,
+                13.39703787344395,
+                16.7
+              ]
+            },
+            {
+              "name": "Aerial batch · Period · 1829 · 252",
+              "point": [
+                -7.8,
+                13.39703787344395,
+                16.7
+              ]
+            }
+          ]
+        },
+        {
+          "x": -7.4,
+          "z": 17,
+          "hits": [
+            {
+              "name": "Entrance west slate pitches to render edge",
+              "point": [
+                -7.4,
+                13.787144457240068,
+                17
+              ]
+            },
+            {
+              "name": "Aerial batch · Period · 1829 · 252",
+              "point": [
+                -7.4,
+                13.787144457240068,
+                17
+              ]
+            }
+          ]
+        },
+        {
+          "x": -7.6,
+          "z": 17,
+          "hits": [
+            {
+              "name": "Entrance west slate pitches to render edge",
+              "point": [
+                -7.6,
+                13.741219122708,
+                17
+              ]
+            },
+            {
+              "name": "Aerial batch · Period · 1829 · 252",
+              "point": [
+                -7.6,
+                13.741219122708,
+                17
+              ]
+            }
+          ]
+        },
+        {
+          "x": -7.8,
+          "z": 17,
+          "hits": [
+            {
+              "name": "Entrance west slate pitches to render edge",
+              "point": [
+                -7.8,
+                13.649368453643856,
+                17
+              ]
+            },
+            {
+              "name": "Aerial batch · Period · 1829 · 252",
+              "point": [
+                -7.8,
+                13.649368453643856,
+                17
+              ]
+            }
+          ]
+        },
+        {
+          "x": -7.4,
+          "z": 17.2,
+          "hits": [
+            {
+              "name": "Entrance west slate pitches to render edge",
+              "point": [
+                -7.4,
+                13.211906220140115,
+                17.2
+              ]
+            },
+            {
+              "name": "Aerial batch · Period · 1829 · 252",
+              "point": [
+                -7.4,
+                13.211906220140115,
+                17.2
+              ]
+            }
+          ]
+        },
+        {
+          "x": -7.6,
+          "z": 17.2,
+          "hits": [
+            {
+              "name": "Entrance west slate pitches to render edge",
+              "point": [
+                -7.6,
+                13.165980885608043,
+                17.2
+              ]
+            },
+            {
+              "name": "Aerial batch · Period · 1829 · 252",
+              "point": [
+                -7.6,
+                13.165980885608043,
+                17.2
+              ]
+            }
+          ]
+        },
+        {
+          "x": -7.8,
+          "z": 17.2,
+          "hits": [
+            {
+              "name": "Entrance west slate pitches to render edge",
+              "point": [
+                -7.8,
+                13.15224040387633,
+                17.2
+              ]
+            },
+            {
+              "name": "Aerial batch · Period · 1829 · 252",
+              "point": [
+                -7.8,
+                13.15224040387633,
+                17.2
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "side": 1,
+      "probes": [
+        {
+          "x": 7.2,
+          "z": 16.7,
+          "hits": [
+            {
+              "name": "Reception longitudinal ridge and rear hips",
+              "point": [
+                7.2,
+                14.773999633789062,
+                16.7
+              ]
+            },
+            {
+              "name": "Aerial batch · Period · 1829 · 253",
+              "point": [
+                7.2,
+                14.773999633789062,
+                16.7
+              ]
+            },
+            {
+              "name": "Entrance east recessed slate roof",
+              "point": [
+                7.2,
+                13.35004928319205,
+                16.7
+              ]
+            },
+            {
+              "name": "Aerial batch · Period · 1829 · 253",
+              "point": [
+                7.2,
+                13.35004928319205,
+                16.7
+              ]
+            }
+          ]
+        },
+        {
+          "x": 7.4,
+          "z": 16.7,
+          "hits": [
+            {
+              "name": "Reception longitudinal ridge and rear hips",
+              "point": [
+                7.4,
+                14.691332956949868,
+                16.7
+              ]
+            },
+            {
+              "name": "Aerial batch · Period · 1829 · 253",
+              "point": [
+                7.4,
+                14.691332956949868,
+                16.7
+              ]
+            },
+            {
+              "name": "Entrance east recessed slate roof",
+              "point": [
+                7.4,
+                13.397037072384993,
+                16.7
+              ]
+            },
+            {
+              "name": "Aerial batch · Period · 1829 · 253",
+              "point": [
+                7.4,
+                13.397037072384993,
+                16.7
+              ]
+            }
+          ]
+        },
+        {
+          "x": 7.6,
+          "z": 16.7,
+          "hits": [
+            {
+              "name": "Entrance east recessed slate roof",
+              "point": [
+                7.6,
+                13.39703707238499,
+                16.7
+              ]
+            },
+            {
+              "name": "Aerial batch · Period · 1829 · 253",
+              "point": [
+                7.6,
+                13.39703707238499,
+                16.7
+              ]
+            }
+          ]
+        },
+        {
+          "x": 7.8,
+          "z": 16.7,
+          "hits": [
+            {
+              "name": "Entrance east recessed slate roof",
+              "point": [
+                7.8,
+                13.397037072384993,
+                16.7
+              ]
+            },
+            {
+              "name": "Aerial batch · Period · 1829 · 253",
+              "point": [
+                7.8,
+                13.397037072384993,
+                16.7
+              ]
+            }
+          ]
+        },
+        {
+          "x": 7.4,
+          "z": 17,
+          "hits": [
+            {
+              "name": "Reception longitudinal ridge and rear hips",
+              "point": [
+                7.4,
+                14.691332956949868,
+                17
+              ]
+            },
+            {
+              "name": "Aerial batch · Period · 1829 · 253",
+              "point": [
+                7.4,
+                14.691332956949868,
+                17
+              ]
+            },
+            {
+              "name": "Entrance east recessed slate roof",
+              "point": [
+                7.4,
+                13.252592639936452,
+                17
+              ]
+            },
+            {
+              "name": "Aerial batch · Period · 1829 · 253",
+              "point": [
+                7.4,
+                13.252592639936452,
+                17
+              ]
+            }
+          ]
+        },
+        {
+          "x": 7.6,
+          "z": 17,
+          "hits": [
+            {
+              "name": "Entrance east recessed slate roof",
+              "point": [
+                7.6,
+                13.252592639936452,
+                17
+              ]
+            },
+            {
+              "name": "Aerial batch · Period · 1829 · 253",
+              "point": [
+                7.6,
+                13.252592639936452,
+                17
+              ]
+            }
+          ]
+        },
+        {
+          "x": 7.8,
+          "z": 17,
+          "hits": [
+            {
+              "name": "Entrance east recessed slate roof",
+              "point": [
+                7.8,
+                13.252592639936452,
+                17
+              ]
+            },
+            {
+              "name": "Aerial batch · Period · 1829 · 253",
+              "point": [
+                7.8,
+                13.252592639936452,
+                17
+              ]
+            }
+          ]
+        },
+        {
+          "x": 7.4,
+          "z": 17.2,
+          "hits": [
+            {
+              "name": "Reception longitudinal ridge and rear hips",
+              "point": [
+                7.4,
+                14.691332956949868,
+                17.2
+              ]
+            },
+            {
+              "name": "Aerial batch · Period · 1829 · 253",
+              "point": [
+                7.4,
+                14.691332956949868,
+                17.2
+              ]
+            },
+            {
+              "name": "Entrance east recessed slate roof",
+              "point": [
+                7.4,
+                13.156296351637426,
+                17.2
+              ]
+            },
+            {
+              "name": "Aerial batch · Period · 1829 · 253",
+              "point": [
+                7.4,
+                13.156296351637426,
+                17.2
+              ]
+            }
+          ]
+        },
+        {
+          "x": 7.6,
+          "z": 17.2,
+          "hits": [
+            {
+              "name": "Entrance east recessed slate roof",
+              "point": [
+                7.6,
+                13.156296351637426,
+                17.2
+              ]
+            },
+            {
+              "name": "Aerial batch · Period · 1829 · 253",
+              "point": [
+                7.6,
+                13.156296351637426,
+                17.2
+              ]
+            }
+          ]
+        },
+        {
+          "x": 7.8,
+          "z": 17.2,
+          "hits": [
+            {
+              "name": "Entrance east recessed slate roof",
+              "point": [
+                7.8,
+                13.156296351637426,
+                17.2
+              ]
+            },
+            {
+              "name": "Aerial batch · Period · 1829 · 253",
+              "point": [
+                7.8,
+                13.156296351637426,
+                17.2
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

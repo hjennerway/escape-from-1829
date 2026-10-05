@@ -2,11 +2,11 @@ import assert from 'node:assert/strict';
 import {spawn} from 'node:child_process';
 import {mkdir,writeFile} from 'node:fs/promises';
 import {fileURLToPath} from 'node:url';
-import {chromium} from 'playwright';
+import {launchHardwareBrowser} from './test-support/hardware-browser.mjs';
 const server=spawn(process.execPath,['Browser/serve.mjs'],{cwd:new URL('../',import.meta.url),windowsHide:true,env:{...process.env,PORT:'0'},stdio:'pipe'});
 const base=await new Promise((resolve,reject)=>{server.stdout.once('data',d=>resolve(String(d).match(/http:\/\/127\.0\.0\.1:\d+/)[0]));server.once('error',reject);});
 const destination=new URL('./artifacts/explore-interior/',import.meta.url);await mkdir(destination,{recursive:true});
-const browser=await chromium.launch({headless:true,...(process.env.MODEL_CHROME_PATH?{executablePath:process.env.MODEL_CHROME_PATH}:{}),args:['--use-angle=swiftshader','--enable-unsafe-swiftshader']});
+const browser=await launchHardwareBrowser({headless:true,...(process.env.MODEL_CHROME_PATH?{executablePath:process.env.MODEL_CHROME_PATH}:{})});
 try{
  const page=await browser.newPage({viewport:{width:1200,height:800},reducedMotion:'reduce'}),errors=[],requests=[];
  page.setDefaultTimeout(120000);page.setDefaultNavigationTimeout(120000);

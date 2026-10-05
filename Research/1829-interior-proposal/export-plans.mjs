@@ -1,6 +1,6 @@
 import fs from 'node:fs/promises';
 import {createRequire} from 'node:module';
-import {stairShape,STAIR_WIDTH} from '../../Browser/dist/asylum-stairs.mjs';
+import {stairShape,stairConnection,stairFlights,stairLandingPolygons,STAIR_WIDTH} from '../../Browser/dist/asylum-stairs.mjs';
 const require=createRequire(import.meta.url);
 const sharp=require('sharp');
 const destination=new URL('./',import.meta.url).pathname.replace(/^\/(\w:)/,'$1').replace(/\/$/,'');
@@ -8,6 +8,11 @@ const data=JSON.parse(await fs.readFile(destination+'/plan-data.json','utf8'));
 const {rooms,corridors,stairs,exits,outsideStairs}=data;
 const xml=s=>s.replaceAll('&','&amp;').replaceAll('<','&lt;').replaceAll('"','&quot;');
 function exportSVG(floor){
+ // Keep the Reception detail at its established readable scale. The newly
+ // modelled west storey has its own complete west-library/plan.svg drawing.
+ if(floor.id===3)floor={...floor,name:'Second floor · Reception',outline:{...floor.outline,loops:floor.outline.loops.filter(loop=>loop.every(p=>p[0]>-18))}};
+ const inRegion=item=>floor.id!==3||(item.label?.[0]??item.points?.[0]?.[0]??item.x)>-18;
+ const rooms=data.rooms.filter(inRegion),corridors=data.corridors.filter(inRegion),stairs=data.stairs.filter(inRegion),exits=data.exits.filter(inRegion),outsideStairs=data.outsideStairs.filter(inRegion);
  const upper=floor.id===3;
  const width=1600,height=1050,scale=upper?48:floor.id===2?11.5:8.3,px=x=>upper?210+(x+16)*scale:floor.id===2?750+(x+17)*scale:150+(x+74)*scale,py=z=>upper?220+(z-4.4)*scale:142+(z+41)*scale;
  const path=p=>p.map((q,i)=>(i?'L':'M')+px(q[0]).toFixed(2)+','+py(q[1]).toFixed(2)).join(' ')+'Z';
@@ -35,7 +40,15 @@ function exportSVG(floor){
   const b=stairShape(s);
   svg+=`<path d="${path(s.points)}" fill="#d5c5df" stroke="#665579" stroke-width="1.5"/>`;
   svg+=`<path d="${path([[b.innerLeft,b.front],[b.innerRight,b.front],[b.innerRight,b.back],[b.innerLeft,b.back]])}" fill="#faf9f5" stroke="#665579" stroke-width="2"/>`;
-  for(let i=0;i<=12;i++)for(const x of [b.minX,b.innerRight]){const z=b.front+(b.back-b.front)*i/12;svg+=`<path d="${line([[x,z],[x+STAIR_WIDTH,z]])}" stroke="#927ea6" stroke-width="1"/>`;}
+  const pair=s.connections.find(([a])=>a===floor.id)??s.connections.find(([,a])=>a===floor.id),connection=stairConnection(s,...pair);
+  if(connection.upperReturn||connection.straightFlight){
+   for(const polygon of stairLandingPolygons(connection))svg+=`<path d="${path(polygon)}" fill="#d5c5df" stroke="#665579" stroke-width="1"/>`;
+   for(const [a,c] of stairFlights(connection,0,1)){
+    const run=Math.hypot(c[0]-a[0],c[2]-a[2]),nx=(c[2]-a[2])/run*STAIR_WIDTH/2,nz=-(c[0]-a[0])/run*STAIR_WIDTH/2;
+    svg+=`<path d="${path([[a[0]+nx,a[2]+nz],[a[0]-nx,a[2]-nz],[c[0]-nx,c[2]-nz],[c[0]+nx,c[2]+nz]])}" fill="#d5c5df" stroke="#665579" stroke-width="1"/>`;
+    for(let i=0;i<=12;i++){const t=i/12,x=a[0]+(c[0]-a[0])*t,z=a[2]+(c[2]-a[2])*t;svg+=`<path d="${line([[x+nx,z+nz],[x-nx,z-nz]])}" stroke="#927ea6" stroke-width="1"/>`;}
+   }
+  }else for(let i=0;i<=12;i++)for(const x of [b.minX,b.innerRight]){const z=b.front+(b.back-b.front)*i/12;svg+=`<path d="${line([[x,z],[x+STAIR_WIDTH,z]])}" stroke="#927ea6" stroke-width="1"/>`;}
  }
  // Reviewed solid room edges remain visible over the adjoining stair fill.
  for(const r of floorRooms)for(const i of r.solidEdges??[])svg+=`<path d="${line([r.points[i],r.points[(i+1)%r.points.length]])}" fill="none" stroke="#394d58" stroke-width="2.2"/>`;

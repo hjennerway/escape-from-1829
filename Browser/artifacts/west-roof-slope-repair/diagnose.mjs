@@ -1,0 +1,3 @@
+import * as T from '../../dist/vendor/three.module.js';import {createEscapeExterior} from '../../dist/escape-exterior.mjs';
+globalThis.document={createElement:()=>({getContext:()=>({fillRect(){}})})};const {model}=createEscapeExterior(T,1.5);model.updateMatrixWorld(true);
+for(const [name,tri] of [['West cross-range continuous roof join',115],['Entrance west slate pitches to render edge',56]]){const o=model.getObjectByName(name),g=o.geometry,p=g.attributes.position;const v=[0,1,2].map(i=>new T.Vector3().fromBufferAttribute(p,tri*3+i).applyMatrix4(o.matrixWorld));console.log(name,JSON.stringify(v));const e=v[1].clone().sub(v[0]),f=v[2].clone().sub(v[0]);console.log('area',e.clone().cross(f).length()/2,'edges',e.length(),f.length(),v[1].distanceTo(v[2]));}

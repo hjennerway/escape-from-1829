@@ -250,6 +250,18 @@ Use the asylum layout and historical material as puzzle mechanics rather than re
 - [ ] Prefer clues that make sense in-world over generic keypad-code puzzles.
 - [ ] Ensure historical content remains respectful and clearly framed as period material.
 
+## 7. Incremental interior loading after the interior is finished
+
+**Prerequisite: finish the asylum interior before implementing this loading change.**
+
+- [ ] Split the finished interior into approximately 10 sections, following wings, floors and doorway boundaries; balance sections by loading cost.
+- [ ] Share the section-loading system between Explore and Asylum Escape. Load the chosen entrance or starting section first, including its furniture, lights and visible adjoining corridors/stairs, then let the player enter once it is ready.
+- [ ] Once the player is situated, load the remaining sections in the background, prioritising neighbouring sections and any area the player approaches.
+- [ ] Keep background construction and graphics preparation in small scheduled steps so loading does not interrupt walking. Evaluate separately prebuilt section assets and load shared furniture/material resources once.
+- [ ] Preserve consistent navigation, collisions, doors, stair connections, NPC behaviour and interaction state across section boundaries.
+- [ ] Cache loaded sections for immediate return visits. If the player reaches an unfinished section, briefly hold entry at its doorway or landing until it is ready.
+- [ ] Validate every entrance and stair connection, background-loading failures and desktop/mobile behaviour. Measure time until entry is playable, frame pacing and memory using the required hardware GPU browser launcher.
+
 ## Design goals
 
 - Make escaping feel like learning and exploiting the asylum rather than simply searching for an exit.

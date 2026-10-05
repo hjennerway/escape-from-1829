@@ -1,0 +1,6553 @@
+{
+  "sourceHash": "d9ae4d8977c39a468c704d78a90089d73626d643feaeec1203b8927838598e11",
+  "build": {
+    "mode": "procedural",
+    "milliseconds": 1989.300000000745
+  },
+  "errors": [],
+  "views": {
+    "marked": {
+      "position": [
+        -38,
+        32,
+        44
+      ],
+      "target": [
+        -26,
+        12,
+        12
+      ],
+      "up": [
+        0,
+        1,
+        0
+      ],
+      "fov": 40
+    },
+    "reference": {
+      "position": [
+        -17,
+        27,
+        40
+      ],
+      "target": [
+        -29,
+        14,
+        15
+      ],
+      "up": [
+        0,
+        1,
+        0
+      ],
+      "fov": 40
+    },
+    "blue": {
+      "position": [
+        -29,
+        21,
+        24
+      ],
+      "target": [
+        -34,
+        14.8,
+        15
+      ],
+      "up": [
+        0,
+        1,
+        0
+      ],
+      "fov": 34
+    },
+    "red": {
+      "position": [
+        -28,
+        21,
+        28
+      ],
+      "target": [
+        -22.6,
+        14,
+        17.4
+      ],
+      "up": [
+        0,
+        1,
+        0
+      ],
+      "fov": 32
+    },
+    "low": {
+      "position": [
+        -17,
+        16,
+        30
+      ],
+      "target": [
+        -28,
+        14,
+        16
+      ],
+      "up": [
+        0,
+        1,
+        0
+      ],
+      "fov": 45
+    },
+    "plan": {
+      "position": [
+        -29,
+        50,
+        16
+      ],
+      "target": [
+        -29,
+        0,
+        16
+      ],
+      "up": [
+        0,
+        0,
+        -1
+      ],
+      "fov": 34
+    }
+  },
+  "survey": {
+    "blue": [
+      {
+        "x": -35,
+        "rows": [
+          {
+            "z": 14.6,
+            "hits": [
+              {
+                "name": "Aerial batch · Period · 1829 · 252",
+                "y": 14.8959142046635,
+                "normal": [
+                  0.06826014680463505,
+                  0.9344200236679869,
+                  0.34957083935381184
+                ]
+              },
+              {
+                "name": "Aerial batch · West garden inner pavilion period · 41",
+                "y": 14.529999732971191,
+                "normal": [
+                  0,
+                  1,
+                  0
+                ]
+              },
+              {
+                "name": "Aerial batch · West garden inner pavilion period · 41",
+                "y": 14.319999694824219,
+                "normal": [
+                  0,
+                  1,
+                  0
+                ]
+              },
+              {
+                "name": "West garden inner projecting pavilion",
+                "y": 14.300000095367434,
+                "normal": [
+                  0,
+                  1,
+                  0
+                ]
+              }
+            ]
+          },
+          {
+            "z": 14.8,
+            "hits": [
+              {
+                "name": "West garden inner pavilion slate roof",
+                "y": 14.88172505781234,
+                "normal": [
+                  0.6603358017868095,
+                  0.7509704580598168,
+                  0
+                ]
+              },
+              {
+                "name": "Aerial batch · West garden inner pavilion period · 41",
+                "y": 14.529999732971191,
+                "normal": [
+                  0,
+                  1,
+                  0
+                ]
+              },
+              {
+                "name": "Aerial batch · West garden inner pavilion period · 41",
+                "y": 14.31999969482422,
+                "normal": [
+                  0,
+                  1,
+                  0
+                ]
+              },
+              {
+                "name": "West garden inner projecting pavilion",
+                "y": 14.300000095367434,
+                "normal": [
+                  0,
+                  1,
+                  0
+                ]
+              }
+            ]
+          },
+          {
+            "z": 15,
+            "hits": [
+              {
+                "name": "West garden inner pavilion slate roof",
+                "y": 14.88172505781234,
+                "normal": [
+                  0.6603358017868095,
+                  0.7509704580598168,
+                  0
+                ]
+              },
+              {
+                "name": "Aerial batch · West garden inner pavilion period · 41",
+                "y": 14.529999732971191,
+                "normal": [
+                  0,
+                  1,
+                  0
+                ]
+              },
+              {
+                "name": "Aerial batch · West garden inner pavilion period · 41",
+                "y": 14.319999694824219,
+                "normal": [
+                  0,
+                  1,
+                  0
+                ]
+              },
+              {
+                "name": "West garden inner projecting pavilion",
+                "y": 14.30000009536743,
+                "normal": [
+                  0,
+                  1,
+                  0
+                ]
+              }
+            ]
+          },
+          {
+            "z": 15.3,
+            "hits": [
+              {
+                "name": "West garden inner pavilion slate roof",
+                "y": 14.88172505781234,
+                "normal": [
+                  0.6603358017868095,
+                  0.7509704580598168,
+                  0
+                ]
+              },
+              {
+                "name": "Aerial batch · West garden inner pavilion period · 41",
+                "y": 14.529999732971191,
+                "normal": [
+                  0,
+                  1,
+                  0
+                ]
+              },
+              {
+                "name": "Aerial batch · West garden inner pavilion period · 41",
+                "y": 14.31999969482422,
+                "normal": [
+                  0,
+                  1,
+                  0
+                ]
+              },
+              {
+                "name": "West garden inner projecting pavilion",
+                "y": 14.300000095367434,
+                "normal": [
+                  0,
+                  1,
+                  0
+                ]
+              }
+            ]
+          },
+          {
+            "z": 15.3849,
+            "hits": [
+              {
+                "name": "West garden inner pavilion slate roof",
+                "y": 14.881725057812341,
+                "normal": [
+                  0.6603358017868095,
+                  0.7509704580598168,
+                  0
+                ]
+              },
+              {
+                "name": "Aerial batch · West garden inner pavilion period · 41",
+                "y": 14.529999732971191,
+                "normal": [
+                  0,
+                  1,
+                  0
+                ]
+              },
+              {
+                "name": "Aerial batch · West garden inner pavilion period · 41",
+                "y": 14.319999694824219,
+                "normal": [
+                  0,
+                  1,
+                  0
+                ]
+              },
+              {
+                "name": "West garden inner projecting pavilion",
+                "y": 14.300000095367434,
+                "normal": [
+                  0,
+                  1,
+                  0
+                ]
+              }
+            ]
+          },
+          {
+            "z": 15.5,
+            "hits": [
+              {
+                "name": "West garden inner pavilion slate roof",
+                "y": 14.881725057812341,
+                "normal": [
+                  0.6603358017868095,
+                  0.7509704580598168,
+                  0
+                ]
+              },
+              {
+                "name": "Aerial batch · West garden inner pavilion period · 41",
+                "y": 14.529999732971191,
+                "normal": [
+                  0,
+                  1,
+                  0
+                ]
+              },
+              {
+                "name": "Aerial batch · West garden inner pavilion period · 41",
+                "y": 14.319999694824219,
+                "normal": [
+                  0,
+                  1,
+                  0
+                ]
+              },
+              {
+                "name": "West garden inner projecting pavilion",
+                "y": 14.300000095367434,
+                "normal": [
+                  0,
+                  1,
+                  0
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "x": -34.7,
+        "rows": [
+          {
+            "z": 14.6,
+            "hits": [
+              {
+                "name": "Aerial batch · Period · 1829 · 252",
+                "y": 14.87399895935336,
+                "normal": [
+                  0.06826014680463505,
+                  0.9344200236679869,
+                  0.34957083935381184
+                ]
+              },
+              {
+                "name": "",
+                "y": 12.800000190734863,
+                "normal": [
+                  0,
+                  1,
+                  0
+                ]
+              },
+              {
+                "name": "Aerial batch · Period · 1829 · 276",
+                "y": 2.2100000381469727,
+                "normal": [
+                  0,
+                  1,
+                  0
+                ]
+              },
+              {
+                "name": "Aerial batch · Period · 1829 · 276",
+                "y": 2,
+                "normal": [
+                  0,
+                  1,
+                  0
+                ]
+              }
+            ]
+          },
+          {
+            "z": 14.8,
+            "hits": [
+              {
+                "name": "Aerial batch · Period · 1829 · 252",
+                "y": 14.799178037177143,
+                "normal": [
+                  0.06826014680463505,
+                  0.9344200236679869,
+                  0.34957083935381184
+                ]
+              },
+              {
+                "name": "",
+                "y": 12.80000019073486,
+                "normal": [
+                  0,
+                  1,
+                  0
+                ]
+              },
+              {
+                "name": "Aerial batch · Period · 1829 · 276",
+                "y": 2.2100000381469727,
+                "normal": [
+                  0,
+                  1,
+                  0
+                ]
+              },
+              {
+                "name": "Aerial batch · Period · 1829 · 276",
+                "y": 2,
+                "normal": [
+                  0,
+                  1,
+                  0
+                ]
+              }
+            ]
+          },
+          {
+            "z": 15,
+            "hits": [
+              {
+                "name": "Aerial batch · Period · 1829 · 252",
+                "y": 14.724357115000924,
+                "normal": [
+                  0.06826014680463505,
+                  0.9344200236679869,
+                  0.34957083935381184
+                ]
+              },
+              {
+                "name": "",
+                "y": 12.80000019073486,
+                "normal": [
+                  0,
+                  1,
+                  0
+                ]
+              },
+              {
+                "name": "Aerial batch · Period · 1829 · 276",
+                "y": 2.2100000381469727,
+                "normal": [
+                  0,
+                  1,
+                  0
+                ]
+              },
+              {
+                "name": "Aerial batch · Period · 1829 · 276",
+                "y": 2,
+                "normal": [
+                  0,
+                  1,
+                  0
+                ]
+              }
+            ]
+          },
+          {
+            "z": 15.3,
+            "hits": [
+              {
+                "name": "West garden inner pavilion slate roof",
+                "y": 14.617932070471868,
+                "normal": [
+                  0.6603358017868095,
+                  0.7509704580598168,
+                  0
+                ]
+              },
+              {
+                "name": "",
+                "y": 12.80000019073486,
+                "normal": [
+                  0,
+                  1,
+                  0
+                ]
+              },
+              {
+                "name": "Aerial batch · Period · 1829 · 276",
+                "y": 2.2100000381469727,
+                "normal": [
+                  0,
+                  1,
+                  0
+                ]
+              },
+              {
+                "name": "Aerial batch · Period · 1829 · 276",
+                "y": 2,
+                "normal": [
+                  0,
+                  1,
+                  0
+                ]
+              }
+            ]
+          },
+          {
+            "z": 15.3849,
+            "hits": [
+              {
+                "name": "West garden inner pavilion slate roof",
+                "y": 14.61793207047187,
+                "normal": [
+                  0.6603358017868095,
+                  0.7509704580598168,
+                  0
+                ]
+              },
+              {
+                "name": "",
+                "y": 12.800000190734863,
+                "normal": [
+                  0,
+                  1,
+                  0
+                ]
+              },
+              {
+                "name": "Aerial batch · Period · 1829 · 254",
+                "y": 12.800000190734863,
+                "normal": [
+                  0,
+                  1,
+                  0
+                ]
+              },
+              {
+                "name": "Aerial batch · Period · 1829 · 276",
+                "y": 2.2100000381469727,
+                "normal": [
+                  0,
+                  1,
+                  0
+                ]
+              }
+            ]
+          },
+          {
+            "z": 15.5,
+            "hits": [
+              {
+                "name": "West garden inner pavilion slate roof",
+                "y": 14.61793207047187,
+                "normal": [
+                  0.6603358017868095,
+                  0.7509704580598168,
+                  0
+                ]
+              },
+              {
+                "name": "Aerial batch · Period · 1829 · 254",
+                "y": 12.800000190734863,
+                "normal": [
+                  0,
+                  1,
+                  0
+                ]
+              },
+              {
+                "name": "Aerial batch · Period · 1829 · 283",
+                "y": 8.829999923706051,
+                "normal": [
+                  0,
+                  1,
+                  0
+                ]
+              },
+              {
+                "name": "Aerial batch · Period · 1829 · 254",
+                "y": 8.600000381469727,
+                "normal": [
+                  0,
+                  1,
+                  0
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "x": -34.6,
+        "rows": [
+          {
+            "z": 14.6,
+            "hits": [
+              {
+                "name": "Aerial batch · Period · 1829 · 252",
+                "y": 14.866693877583312,
+                "normal": [
+                  0.06826014680463505,
+                  0.9344200236679869,
+                  0.34957083935381184
+                ]
+              },
+              {
+                "name": "",
+                "y": 12.80000019073486,
+                "normal": [
+                  0,
+                  1,
+                  0
+                ]
+              },
+              {
+                "name": "Aerial batch · Period · 1829 · 276",
+                "y": 2.2100000381469727,
+                "normal": [
+                  0,
+                  1,
+                  0
+                ]
+              },
+              {
+                "name": "Aerial batch · Period · 1829 · 276",
+                "y": 1.999999999999993,
+                "normal": [
+                  0,
+                  1,
+                  0
+                ]
+              }
+            ]
+          },
+          {
+            "z": 14.8,
+            "hits": [
+              {
+                "name": "Aerial batch · Period · 1829 · 252",
+                "y": 14.791872955407095,
+                "normal": [
+                  0.06826014680463505,
+                  0.9344200236679869,
+                  0.34957083935381184
+                ]
+              },
+              {
+                "name": "",
+                "y": 12.800000190734863,
+                "normal": [
+                  0,
+                  1,
+                  0
+                ]
+              },
+              {
+                "name": "Aerial batch · Period · 1829 · 276",
+                "y": 2.2100000381469727,
+                "normal": [
+                  0,
+                  1,
+                  0
+                ]
+              },
+              {
+                "name": "Aerial batch · Period · 1829 · 276",
+                "y": 2,
+                "normal": [
+                  0,
+                  1,
+                  0
+                ]
+              }
+            ]
+          },
+          {
+            "z": 15,
+            "hits": [
+              {
+                "name": "Aerial batch · Period · 1829 · 252",
+                "y": 14.717052033230882,
+                "normal": [
+                  0.06826014680463505,
+                  0.9344200236679869,
+                  0.34957083935381184
+                ]
+              },
+              {
+                "name": "",
+                "y": 12.80000019073486,
+                "normal": [
+                  0,
+                  1,
+                  0
+                ]
+              },
+              {
+                "name": "Aerial batch · Period · 1829 · 276",
+                "y": 2.2100000381469727,
+                "normal": [
+                  0,
+                  1,
+                  0
+                ]
+              },
+              {
+                "name": "Aerial batch · Period · 1829 · 276",
+                "y": 2,
+                "normal": [
+                  0,
+                  1,
+                  0
+                ]
+              }
+            ]
+          },
+          {
+            "z": 15.3,
+            "hits": [
+              {
+                "name": "Aerial batch · Period · 1829 · 252",
+                "y": 14.60482064996655,
+                "normal": [
+                  0.06826014680463505,
+                  0.9344200236679869,
+                  0.34957083935381184
+                ]
+              },
+              {
+                "name": "",
+                "y": 12.800000190734863,
+                "normal": [
+                  0,
+                  1,
+                  0
+                ]
+              },
+              {
+                "name": "Aerial batch · Period · 1829 · 276",
+                "y": 2.2100000381469727,
+                "normal": [
+                  0,
+                  1,
+                  0
+                ]
+              },
+              {
+                "name": "Aerial batch · Period · 1829 · 276",
+                "y": 2,
+                "normal": [
+                  0,
+                  1,
+                  0
+                ]
+              }
+            ]
+          },
+          {
+            "z": 15.3849,
+            "hits": [
+              {
+                "name": "Aerial batch · Period · 1829 · 252",
+                "y": 14.573059168502747,
+                "normal": [
+                  0.06826014680463505,
+                  0.9344200236679869,
+                  0.34957083935381184
+                ]
+              },
+              {
+                "name": "Aerial batch · Period · 1829 · 254",
+                "y": 12.800000190734863,
+                "normal": [
+                  0,
+                  1,
+                  0
+                ]
+              },
+              {
+                "name": "",
+                "y": 12.80000019073486,
+                "normal": [
+                  0,
+                  1,
+                  0
+                ]
+              },
+              {
+                "name": "Aerial batch · Period · 1829 · 276",
+                "y": 2.2100000381469727,
+                "normal": [
+                  0,
+                  1,
+                  0
+                ]
+              }
+            ]
+          },
+          {
+            "z": 15.5,
+            "hits": [
+              {
+                "name": "West garden inner pavilion slate roof",
+                "y": 14.53000107469171,
+                "normal": [
+                  0.6603358017868095,
+                  0.7509704580598168,
+                  0
+                ]
+              },
+              {
+                "name": "Aerial batch · Period · 1829 · 254",
+                "y": 12.800000190734863,
+                "normal": [
+                  0,
+                  1,
+                  0
+                ]
+              },
+              {
+                "name": "Aerial batch · Period · 1829 · 283",
+                "y": 8.829999923706055,
+                "normal": [
+                  0,
+                  1,
+                  0
+                ]
+              },
+              {
+                "name": "Aerial batch · Period · 1829 · 254",
+                "y": 8.600000381469727,
+                "normal": [
+                  0,
+                  1,
+                  0
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "x": -34.5,
+        "rows": [
+          {
+            "z": 14.6,
+            "hits": [
+              {
+                "name": "Aerial batch · Period · 1829 · 252",
+                "y": 14.859388919061981,
+                "normal": [
+                  0.06826040136589609,
+                  0.9344200927175729,
+                  0.3495706050729224
+                ]
+              },
+              {
+                "name": "Aerial batch · Period · 1829 · 277",
+                "y": 13.029999732971191,
+                "normal": [
+                  0,
+                  0.9999999999999999,
+                  0
+                ]
+              },
+              {
+                "name": "",
+                "y": 12.80000019073486,
+                "normal": [
+                  0,
+                  1,
+                  0
+                ]
+              },
+              {
+                "name": "Aerial batch · Period · 1829 · 277",
+                "y": 12.789999961853027,
+                "normal": [
+                  0,
+                  1,
+                  0
+                ]
+              }
+            ]
+          },
+          {
+            "z": 14.8,
+            "hits": [
+              {
+                "name": "Aerial batch · Period · 1829 · 252",
+                "y": 14.784568052559363,
+                "normal": [
+                  0.06826040136589609,
+                  0.9344200927175729,
+                  0.3495706050729224
+                ]
+              },
+              {
+                "name": "Aerial batch · Period · 1829 · 277",
+                "y": 13.029999732971188,
+                "normal": [
+                  0,
+                  0.9999999999999999,
+                  0
+                ]
+              },
+              {
+                "name": "",
+                "y": 12.800000190734863,
+                "normal": [
+                  0,
+                  1,
+                  0
+                ]
+              },
+              {
+                "name": "Aerial batch · Period · 1829 · 277",
+                "y": 12.789999961853027,
+                "normal": [
+                  0,
+                  1,
+                  0
+                ]
+              }
+            ]
+          },
+          {
+            "z": 15,
+            "hits": [
+              {
+                "name": "West entrance corner slate to yellow boundary",
+                "y": 14.70234375481861,
+                "normal": [
+                  0,
+                  0.9127236015257781,
+                  0.4085775657299513
+                ]
+              },
+              {
+                "name": "Aerial batch · Period · 1829 · 277",
+                "y": 13.029999732971191,
+                "normal": [
+                  0,
+                  1,
+                  0
+                ]
+              },
+              {
+                "name": "",
+                "y": 12.800000190734863,
+                "normal": [
+                  0,
+                  1,
+                  0
+                ]
+              },
+              {
+                "name": "Aerial batch · Period · 1829 · 277",
+                "y": 12.789999961853027,
+                "normal": [
+                  0,
+                  0.9999999999999999,
+                  0
+                ]
+              }
+            ]
+          },
+          {
+            "z": 15.3,
+            "hits": [
+              {
+                "name": "West entrance corner slate to yellow boundary",
+                "y": 14.568049791658153,
+                "normal": [
+                  0,
+                  0.9127236015257781,
+                  0.4085775657299513
+                ]
+              },
+              {
+                "name": "Aerial batch · Period · 1829 · 277",
+                "y": 13.029999732971191,
+                "normal": [
+                  0,
+                  1,
+                  0
+                ]
+              },
+              {
+                "name": "",
+                "y": 12.800000190734863,
+                "normal": [
+                  0,
+                  1,
+                  0
+                ]
+              },
+              {
+                "name": "Aerial batch · Period · 1829 · 277",
+                "y": 12.789999961853027,
+                "normal": [
+                  0,
+                  0.9999999999999999,
+                  0
+                ]
+              }
+            ]
+          },
+          {
+            "z": 15.3849,
+            "hits": [
+              {
+                "name": "West entrance corner slate to yellow boundary",
+                "y": 14.530044600083741,
+                "normal": [
+                  0,
+                  0.9127236015257781,
+                  0.4085775657299513
+                ]
+              },
+              {
+                "name": "Aerial batch · Period · 1829 · 277",
+                "y": 13.029999732971191,
+                "normal": [
+                  0,
+                  1,
+                  0
+                ]
+              },
+              {
+                "name": "Aerial batch · Period · 1829 · 254",
+                "y": 12.800000190734863,
+                "normal": [
+                  0,
+                  1,
+                  0
+                ]
+              },
+              {
+                "name": "",
+                "y": 12.80000019073486,
+                "normal": [
+                  0,
+                  1,
+                  0
+                ]
+              }
+            ]
+          },
+          {
+            "z": 15.5,
+            "hits": [
+              {
+                "name": "Aerial batch · Period · 1829 · 278",
+                "y": 14.529999732971193,
+                "normal": [
+                  0,
+                  1,
+                  0
+                ]
+              },
+              {
+                "name": "Aerial batch · Period · 1829 · 254",
+                "y": 12.800000190734863,
+                "normal": [
+                  0,
+                  1,
+                  0
+                ]
+              },
+              {
+                "name": "Aerial batch · Period · 1829 · 283",
+                "y": 8.829999923706055,
+                "normal": [
+                  0,
+                  1,
+                  0
+                ]
+              },
+              {
+                "name": "Aerial batch · Period · 1829 · 254",
+                "y": 8.600000381469727,
+                "normal": [
+                  0,
+                  1,
+                  0
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "x": -34.2,
+        "rows": [
+          {
+            "z": 14.6,
+            "hits": [
+              {
+                "name": "Aerial batch · Period · 1829 · 252",
+                "y": 14.83747363017517,
+                "normal": [
+                  0.06825962213763698,
+                  0.9344199756445204,
+                  0.3495710701733207
+                ]
+              },
+              {
+                "name": "Aerial batch · Period · 1829 · 277",
+                "y": 13.029999732971191,
+                "normal": [
+                  0,
+                  0.9999999999999999,
+                  0
+                ]
+              },
+              {
+                "name": "",
+                "y": 12.800000190734863,
+                "normal": [
+                  0,
+                  1,
+                  0
+                ]
+              },
+              {
+                "name": "Aerial batch · Period · 1829 · 277",
+                "y": 12.789999961853027,
+                "normal": [
+                  0,
+                  1,
+                  0
+                ]
+              }
+            ]
+          },
+          {
+            "z": 14.8,
+            "hits": [
+              {
+                "name": "Aerial batch · Period · 1829 · 252",
+                "y": 14.762652727140566,
+                "normal": [
+                  0.06826040136589609,
+                  0.9344200927175729,
+                  0.3495706050729224
+                ]
+              },
+              {
+                "name": "Aerial batch · Period · 1829 · 277",
+                "y": 13.029999732971188,
+                "normal": [
+                  0,
+                  0.9999999999999999,
+                  0
+                ]
+              },
+              {
+                "name": "",
+                "y": 12.800000190734863,
+                "normal": [
+                  0,
+                  1,
+                  0
+                ]
+              },
+              {
+                "name": "Aerial batch · Period · 1829 · 277",
+                "y": 12.789999961853024,
+                "normal": [
+                  0,
+                  1,
+                  0
+                ]
+              }
+            ]
+          },
+          {
+            "z": 15,
+            "hits": [
+              {
+                "name": "West entrance corner slate to yellow boundary",
+                "y": 14.696849355516862,
+                "normal": [
+                  0.06922481729283043,
+                  0.9476272368364177,
+                  0.3117860559366793
+                ]
+              },
+              {
+                "name": "Aerial batch · Period · 1829 · 277",
+                "y": 13.029999732971191,
+                "normal": [
+                  0,
+                  0.9999999999999999,
+                  0
+                ]
+              },
+              {
+                "name": "",
+                "y": 12.800000190734863,
+                "normal": [
+                  0,
+                  1,
+                  0
+                ]
+              },
+              {
+                "name": "Aerial batch · Period · 1829 · 277",
+                "y": 12.789999961853027,
+                "normal": [
+                  0,
+                  1,
+                  0
+                ]
+              }
+            ]
+          },
+          {
+            "z": 15.3,
+            "hits": [
+              {
+                "name": "West entrance corner slate to yellow boundary",
+                "y": 14.568049791658149,
+                "normal": [
+                  0,
+                  0.9127236015257781,
+                  0.4085775657299513
+                ]
+              },
+              {
+                "name": "Aerial batch · Period · 1829 · 277",
+                "y": 13.029999732971191,
+                "normal": [
+                  0,
+                  1,
+                  0
+                ]
+              },
+              {
+                "name": "",
+                "y": 12.80000019073486,
+                "normal": [
+                  0,
+                  1,
+                  0
+                ]
+              },
+              {
+                "name": "Aerial batch · Period · 1829 · 277",
+                "y": 12.789999961853027,
+                "normal": [
+                  0,
+                  1,
+                  0
+                ]
+              }
+            ]
+          },
+          {
+            "z": 15.3849,
+            "hits": [
+              {
+                "name": "West entrance corner slate to yellow boundary",
+                "y": 14.530044600083741,
+                "normal": [
+                  0,
+                  0.9127236015257781,
+                  0.4085775657299513
+                ]
+              },
+              {
+                "name": "Aerial batch · Period · 1829 · 277",
+                "y": 13.029999732971191,
+                "normal": [
+                  0,
+                  1,
+                  0
+                ]
+              },
+              {
+                "name": "Aerial batch · Period · 1829 · 254",
+                "y": 12.800000190734863,
+                "normal": [
+                  0,
+                  1,
+                  0
+                ]
+              },
+              {
+                "name": "",
+                "y": 12.80000019073486,
+                "normal": [
+                  0,
+                  1,
+                  0
+                ]
+              }
+            ]
+          },
+          {
+            "z": 15.5,
+            "hits": [
+              {
+                "name": "Aerial batch · Period · 1829 · 278",
+                "y": 14.52999973297119,
+                "normal": [
+                  0,
+                  1,
+                  0
+                ]
+              },
+              {
+                "name": "Aerial batch · Period · 1829 · 254",
+                "y": 12.800000190734863,
+                "normal": [
+                  0,
+                  1,
+                  0
+                ]
+              },
+              {
+                "name": "Aerial batch · Period · 1829 · 283",
+                "y": 8.829999923706055,
+                "normal": [
+                  0,
+                  1,
+                  0
+                ]
+              },
+              {
+                "name": "Aerial batch · Period · 1829 · 254",
+                "y": 8.600000381469727,
+                "normal": [
+                  0,
+                  1,
+                  0
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "x": -33.9,
+        "rows": [
+          {
+            "z": 14.6,
+            "hits": [
+              {
+                "name": "Aerial batch · Period · 1829 · 252",
+                "y": 14.815558549744436,
+                "normal": [
+                  0.06825994644967655,
+                  0.9344200882679695,
+                  0.3495707057977928
+                ]
+              },
+              {
+                "name": "Aerial batch · Period · 1829 · 277",
+                "y": 13.029999732971191,
+                "normal": [
+                  0,
+                  1,
+                  0
+                ]
+              },
+              {
+                "name": "",
+                "y": 12.800000190734863,
+                "normal": [
+                  0,
+                  1,
+                  0
+                ]
+              },
+              {
+                "name": "Aerial batch · Period · 1829 · 277",
+                "y": 12.789999961853024,
+                "normal": [
+                  0,
+                  1,
+                  0
+                ]
+              }
+            ]
+          },
+          {
+            "z": 14.8,
+            "hits": [
+              {
+                "name": "Aerial batch · Period · 1829 · 252",
+                "y": 14.740737576760209,
+                "normal": [
+                  0.06825962213763698,
+                  0.9344199756445204,
+                  0.3495710701733207
+                ]
+              },
+              {
+                "name": "Aerial batch · Period · 1829 · 277",
+                "y": 13.029999732971191,
+                "normal": [
+                  0,
+                  1,
+                  0
+                ]
+              },
+              {
+                "name": "",
+                "y": 12.800000190734863,
+                "normal": [
+                  0,
+                  1,
+                  0
+                ]
+              },
+              {
+                "name": "Aerial batch · Period · 1829 · 277",
+                "y": 12.789999961853027,
+                "normal": [
+                  0,
+                  1,
+                  0
+                ]
+              }
+            ]
+          },
+          {
+            "z": 15,
+            "hits": [
+              {
+                "name": "West entrance corner slate to yellow boundary",
+                "y": 14.674934150486264,
+                "normal": [
+                  0.06922481729283043,
+                  0.9476272368364177,
+                  0.3117860559366793
+                ]
+              },
+              {
+                "name": "Aerial batch · Period · 1829 · 277",
+                "y": 13.029999732971188,
+                "normal": [
+                  0,
+                  1,
+                  0
+                ]
+              },
+              {
+                "name": "",
+                "y": 12.80000019073486,
+                "normal": [
+                  0,
+                  1,
+                  0
+                ]
+              },
+              {
+                "name": "Aerial batch · Period · 1829 · 277",
+                "y": 12.789999961853024,
+                "normal": [
+                  0,
+                  1,
+                  0
+                ]
+              }
+            ]
+          },
+          {
+            "z": 15.3,
+            "hits": [
+              {
+                "name": "West entrance corner slate to yellow boundary",
+                "y": 14.568049791658149,
+                "normal": [
+                  0,
+                  0.9127236015257781,
+                  0.4085775657299513
+                ]
+              },
+              {
+                "name": "Aerial batch · Period · 1829 · 277",
+                "y": 13.029999732971191,
+                "normal": [
+                  0,
+                  1,
+                  0
+                ]
+              },
+              {
+                "name": "",
+                "y": 12.800000190734863,
+                "normal": [
+                  0,
+                  1,
+                  0
+                ]
+              },
+              {
+                "name": "Aerial batch · Period · 1829 · 277",
+                "y": 12.789999961853027,
+                "normal": [
+                  0,
+                  1,
+                  0
+                ]
+              }
+            ]
+          },
+          {
+            "z": 15.3849,
+            "hits": [
+              {
+                "name": "West entrance corner slate to yellow boundary",
+                "y": 14.530044600083741,
+                "normal": [
+                  0,
+                  0.9127236015257781,
+                  0.4085775657299513
+                ]
+              },
+              {
+                "name": "Aerial batch · Period · 1829 · 277",
+                "y": 13.029999732971191,
+                "normal": [
+                  0,
+                  1,
+                  0
+                ]
+              },
+              {
+                "name": "",
+                "y": 12.800000190734863,
+                "normal": [
+                  0,
+                  1,
+                  0
+                ]
+              },
+              {
+                "name": "Aerial batch · Period · 1829 · 254",
+                "y": 12.800000190734863,
+                "normal": [
+                  0,
+                  1,
+                  0
+                ]
+              }
+            ]
+          },
+          {
+            "z": 15.5,
+            "hits": [
+              {
+                "name": "Aerial batch · Period · 1829 · 278",
+                "y": 14.52999973297119,
+                "normal": [
+                  0,
+                  1,
+                  0
+                ]
+              },
+              {
+                "name": "Aerial batch · Period · 1829 · 254",
+                "y": 12.800000190734863,
+                "normal": [
+                  0,
+                  1,
+                  0
+                ]
+              },
+              {
+                "name": "Aerial batch · Period · 1829 · 283",
+                "y": 8.829999923706051,
+                "normal": [
+                  0,
+                  1,
+                  0
+                ]
+              },
+              {
+                "name": "Aerial batch · Period · 1829 · 254",
+                "y": 8.600000381469727,
+                "normal": [
+                  0,
+                  1,
+                  0
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "x": -33.65,
+        "rows": [
+          {
+            "z": 14.6,
+            "hits": [
+              {
+                "name": "Aerial batch · Period · 1829 · 252",
+                "y": 14.797295900184789,
+                "normal": [
+                  0.06826067085015369,
+                  0.9344200418466544,
+                  0.3495706884313726
+                ]
+              },
+              {
+                "name": "Aerial batch · Period · 1829 · 277",
+                "y": 13.029999732971191,
+                "normal": [
+                  0,
+                  1,
+                  0
+                ]
+              },
+              {
+                "name": "",
+                "y": 12.800000190734863,
+                "normal": [
+                  0,
+                  1,
+                  0
+                ]
+              },
+              {
+                "name": "Aerial batch · Period · 1829 · 277",
+                "y": 12.789999961853027,
+                "normal": [
+                  0,
+                  1,
+                  0
+                ]
+              }
+            ]
+          },
+          {
+            "z": 14.8,
+            "hits": [
+              {
+                "name": "Aerial batch · Period · 1829 · 252",
+                "y": 14.722475011767088,
+                "normal": [
+                  0.06826067085015369,
+                  0.9344200418466544,
+                  0.3495706884313726
+                ]
+              },
+              {
+                "name": "Aerial batch · Period · 1829 · 277",
+                "y": 13.029999732971191,
+                "normal": [
+                  0,
+                  1,
+                  0
+                ]
+              },
+              {
+                "name": "",
+                "y": 12.800000190734863,
+                "normal": [
+                  0,
+                  1,
+                  0
+                ]
+              },
+              {
+                "name": "Aerial batch · Period · 1829 · 277",
+                "y": 12.789999961853027,
+                "normal": [
+                  0,
+                  1,
+                  0
+                ]
+              }
+            ]
+          },
+          {
+            "z": 15,
+            "hits": [
+              {
+                "name": "West entrance corner slate to yellow boundary",
+                "y": 14.656668140885154,
+                "normal": [
+                  0.9065603823687174,
+                  0.4009326554635173,
+                  0.13191390716091075
+                ]
+              },
+              {
+                "name": "Aerial batch · Period · 1829 · 277",
+                "y": 13.029999732971191,
+                "normal": [
+                  0,
+                  1,
+                  0
+                ]
+              },
+              {
+                "name": "",
+                "y": 12.800000190734863,
+                "normal": [
+                  0,
+                  1,
+                  0
+                ]
+              },
+              {
+                "name": "Aerial batch · Period · 1829 · 277",
+                "y": 12.789999961853027,
+                "normal": [
+                  0,
+                  1,
+                  0
+                ]
+              }
+            ]
+          },
+          {
+            "z": 15.3,
+            "hits": [
+              {
+                "name": "West entrance corner slate to yellow boundary",
+                "y": 14.557962855573534,
+                "normal": [
+                  0.9065603823687174,
+                  0.4009326554635173,
+                  0.13191390716091075
+                ]
+              },
+              {
+                "name": "Aerial batch · Period · 1829 · 277",
+                "y": 13.029999732971191,
+                "normal": [
+                  0,
+                  1,
+                  0
+                ]
+              },
+              {
+                "name": "",
+                "y": 12.800000190734863,
+                "normal": [
+                  0,
+                  1,
+                  0
+                ]
+              },
+              {
+                "name": "Aerial batch · Period · 1829 · 277",
+                "y": 12.789999961853027,
+                "normal": [
+                  0,
+                  1,
+                  0
+                ]
+              }
+            ]
+          },
+          {
+            "z": 15.3849,
+            "hits": [
+              {
+                "name": "West entrance corner slate to yellow boundary",
+                "y": 14.530029259830343,
+                "normal": [
+                  0.9065603823687174,
+                  0.4009326554635173,
+                  0.13191390716091075
+                ]
+              },
+              {
+                "name": "Aerial batch · Period · 1829 · 277",
+                "y": 13.029999732971191,
+                "normal": [
+                  0,
+                  1,
+                  0
+                ]
+              },
+              {
+                "name": "",
+                "y": 12.800000190734863,
+                "normal": [
+                  0,
+                  1,
+                  0
+                ]
+              },
+              {
+                "name": "Aerial batch · Period · 1829 · 254",
+                "y": 12.800000190734863,
+                "normal": [
+                  0,
+                  1,
+                  0
+                ]
+              }
+            ]
+          },
+          {
+            "z": 15.5,
+            "hits": [
+              {
+                "name": "Aerial batch · Period · 1829 · 284",
+                "y": 14.529996183732466,
+                "normal": [
+                  0.9186967779374321,
+                  0.39496358086205985,
+                  0
+                ]
+              },
+              {
+                "name": "Aerial batch · Period · 1829 · 254",
+                "y": 12.800000190734863,
+                "normal": [
+                  0,
+                  1,
+                  0
+                ]
+              },
+              {
+                "name": "Aerial batch · Period · 1829 · 261",
+                "y": 12.80000019073486,
+                "normal": [
+                  0,
+                  1,
+                  0
+                ]
+              },
+              {
+                "name": "Aerial batch · Period · 1829 · 284",
+                "y": 8.850000381469727,
+                "normal": [
+                  0,
+                  1,
+                  0
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "x": -33.5,
+        "rows": [
+          {
+            "z": 14.6,
+            "hits": [
+              {
+                "name": "Aerial batch · Period · 1829 · 252",
+                "y": 14.786338193619244,
+                "normal": [
+                  0.06826067085015369,
+                  0.9344200418466544,
+                  0.3495706884313726
+                ]
+              },
+              {
+                "name": "Aerial batch · Period · 1829 · 277",
+                "y": 13.029999732971191,
+                "normal": [
+                  0,
+                  1,
+                  0
+                ]
+              },
+              {
+                "name": "",
+                "y": 12.800000190734867,
+                "normal": [
+                  0,
+                  1,
+                  0
+                ]
+              },
+              {
+                "name": "Aerial batch · Period · 1829 · 277",
+                "y": 12.789999961853027,
+                "normal": [
+                  0,
+                  1,
+                  0
+                ]
+              }
+            ]
+          },
+          {
+            "z": 14.8,
+            "hits": [
+              {
+                "name": "Aerial batch · Period · 1829 · 252",
+                "y": 14.711517305201538,
+                "normal": [
+                  0.06826067085015369,
+                  0.9344200418466544,
+                  0.3495706884313726
+                ]
+              },
+              {
+                "name": "Aerial batch · Period · 1829 · 277",
+                "y": 13.029999732971191,
+                "normal": [
+                  0,
+                  1,
+                  0
+                ]
+              },
+              {
+                "name": "",
+                "y": 12.800000190734863,
+                "normal": [
+                  0,
+                  1,
+                  0
+                ]
+              },
+              {
+                "name": "Aerial batch · Period · 1829 · 277",
+                "y": 12.789999961853027,
+                "normal": [
+                  0,
+                  1,
+                  0
+                ]
+              }
+            ]
+          },
+          {
+            "z": 15,
+            "hits": [
+              {
+                "name": "West entrance corner slate to yellow boundary",
+                "y": 14.57272895348092,
+                "normal": [
+                  0,
+                  0.8160042191227499,
+                  0.5780459448641353
+                ]
+              },
+              {
+                "name": "Aerial batch · Period · 1829 · 277",
+                "y": 13.029999732971191,
+                "normal": [
+                  0,
+                  1,
+                  0
+                ]
+              },
+              {
+                "name": "",
+                "y": 12.800000190734863,
+                "normal": [
+                  0,
+                  1,
+                  0
+                ]
+              },
+              {
+                "name": "Aerial batch · Period · 1829 · 277",
+                "y": 12.789999961853027,
+                "normal": [
+                  0,
+                  1,
+                  0
+                ]
+              }
+            ]
+          },
+          {
+            "z": 15.3,
+            "hits": [
+              {
+                "name": "West entrance corner slate to yellow boundary",
+                "y": 14.36021316079829,
+                "normal": [
+                  0,
+                  0.8160042191227499,
+                  0.5780459448641353
+                ]
+              },
+              {
+                "name": "Aerial batch · Period · 1829 · 277",
+                "y": 13.029999732971191,
+                "normal": [
+                  0,
+                  1,
+                  0
+                ]
+              },
+              {
+                "name": "",
+                "y": 12.800000190734863,
+                "normal": [
+                  0,
+                  1,
+                  0
+                ]
+              },
+              {
+                "name": "Aerial batch · Period · 1829 · 277",
+                "y": 12.789999961853027,
+                "normal": [
+                  0,
+                  1,
+                  0
+                ]
+              }
+            ]
+          },
+          {
+            "z": 15.3849,
+            "hits": [
+              {
+                "name": "West entrance corner slate to yellow boundary",
+                "y": 14.300071191469108,
+                "normal": [
+                  0,
+                  0.8160042191227499,
+                  0.5780459448641353
+                ]
+              },
+              {
+                "name": "Aerial batch · Period · 1829 · 277",
+                "y": 13.029999732971191,
+                "normal": [
+                  0,
+                  1,
+                  0
+                ]
+              },
+              {
+                "name": "",
+                "y": 12.800000190734863,
+                "normal": [
+                  0,
+                  1,
+                  0
+                ]
+              },
+              {
+                "name": "Aerial batch · Period · 1829 · 261",
+                "y": 12.800000190734863,
+                "normal": [
+                  0,
+                  1,
+                  0
+                ]
+              }
+            ]
+          },
+          {
+            "z": 15.5,
+            "hits": [
+              {
+                "name": "Aerial batch · Period · 1829 · 284",
+                "y": 14.300000190734865,
+                "normal": [
+                  0,
+                  1,
+                  0
+                ]
+              },
+              {
+                "name": "Aerial batch · Period · 1829 · 261",
+                "y": 12.800000190734863,
+                "normal": [
+                  0,
+                  1,
+                  0
+                ]
+              },
+              {
+                "name": "Aerial batch · Period · 1829 · 285",
+                "y": 0.20499999821186066,
+                "normal": [
+                  0,
+                  1,
+                  0
+                ]
+              },
+              {
+                "name": "Estate terrain",
+                "y": -0.14999999999999988,
+                "normal": [
+                  0,
+                  0,
+                  1
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "red": [
+      {
+        "x": -23.5,
+        "rows": [
+          {
+            "z": 16.5,
+            "hits": [
+              {
+                "name": "Aerial batch · Period · 1829 · 252",
+                "y": 14.216111044001138,
+                "normal": [
+                  0.5316908204496832,
+                  0.8469385287312633,
+                  -2.566780124918513e-7
+                ]
+              },
+              {
+                "name": "Aerial batch · Period · 1829 · 277",
+                "y": 13.029999732971195,
+                "normal": [
+                  0,
+                  1,
+                  0
+                ]
+              },
+              {
+                "name": "",
+                "y": 12.800000190734863,
+                "normal": [
+                  0,
+                  1,
+                  0
+                ]
+              },
+              {
+                "name": "Aerial batch · Period · 1829 · 277",
+                "y": 12.789999961853027,
+                "normal": [
+                  0,
+                  1,
+                  0
+                ]
+              }
+            ]
+          },
+          {
+            "z": 16.8,
+            "hits": [
+              {
+                "name": "Aerial batch · Period · 1829 · 252",
+                "y": 14.216111214526853,
+                "normal": [
+                  0.5316908204494702,
+                  0.8469385287309243,
+                  -9.3089709513734e-7
+                ]
+              },
+              {
+                "name": "Aerial batch · Period · 1829 · 277",
+                "y": 13.029999732971191,
+                "normal": [
+                  0,
+                  1,
+                  0
+                ]
+              },
+              {
+                "name": "",
+                "y": 12.800000190734863,
+                "normal": [
+                  0,
+                  1,
+                  0
+                ]
+              },
+              {
+                "name": "Aerial batch · Period · 1829 · 277",
+                "y": 12.789999961853027,
+                "normal": [
+                  0,
+                  1,
+                  0
+                ]
+              }
+            ]
+          },
+          {
+            "z": 17,
+            "hits": [
+              {
+                "name": "Aerial batch · Period · 1829 · 252",
+                "y": 14.21611143435322,
+                "normal": [
+                  0.5316908204494702,
+                  0.8469385287309243,
+                  -9.3089709513734e-7
+                ]
+              },
+              {
+                "name": "Aerial batch · Period · 1829 · 254",
+                "y": 13.350000381469727,
+                "normal": [
+                  0,
+                  1,
+                  0
+                ]
+              },
+              {
+                "name": "Aerial batch · Period · 1829 · 277",
+                "y": 13.029999732971191,
+                "normal": [
+                  0,
+                  1,
+                  0
+                ]
+              },
+              {
+                "name": "",
+                "y": 12.800000190734863,
+                "normal": [
+                  0,
+                  1,
+                  0
+                ]
+              }
+            ]
+          },
+          {
+            "z": 17.1,
+            "hits": [
+              {
+                "name": "Aerial batch · Period · 1829 · 252",
+                "y": 14.216111544266402,
+                "normal": [
+                  0.5316908204494702,
+                  0.8469385287309243,
+                  -9.3089709513734e-7
+                ]
+              },
+              {
+                "name": "Aerial batch · Period · 1829 · 254",
+                "y": 13.350000381469727,
+                "normal": [
+                  0,
+                  1,
+                  0
+                ]
+              },
+              {
+                "name": "Aerial batch · Period · 1829 · 277",
+                "y": 13.029999732971191,
+                "normal": [
+                  0,
+                  1,
+                  0
+                ]
+              },
+              {
+                "name": "Aerial batch · Period · 1829 · 277",
+                "y": 12.789999961853027,
+                "normal": [
+                  0,
+                  1,
+                  0
+                ]
+              }
+            ]
+          },
+          {
+            "z": 17.2249,
+            "hits": [
+              {
+                "name": "Aerial batch · Period · 1829 · 252",
+                "y": 14.216111729008496,
+                "normal": [
+                  0.5316888334235655,
+                  0.8469397761422665,
+                  8.80697754295992e-7
+                ]
+              },
+              {
+                "name": "Aerial batch · Period · 1829 · 254",
+                "y": 13.350000381469727,
+                "normal": [
+                  0,
+                  1,
+                  0
+                ]
+              },
+              {
+                "name": "Aerial batch · Period · 1829 · 277",
+                "y": 13.029999732971191,
+                "normal": [
+                  0,
+                  1,
+                  0
+                ]
+              },
+              {
+                "name": "Aerial batch · Period · 1829 · 266",
+                "y": 3.099999904632565,
+                "normal": [
+                  0,
+                  1,
+                  0
+                ]
+              }
+            ]
+          },
+          {
+            "z": 17.3,
+            "hits": [
+              {
+                "name": "Aerial batch · Period · 1829 · 252",
+                "y": 14.2161116509151,
+                "normal": [
+                  0.5316888334235655,
+                  0.8469397761422665,
+                  8.80697754295992e-7
+                ]
+              },
+              {
+                "name": "Aerial batch · Period · 1829 · 254",
+                "y": 13.350000381469727,
+                "normal": [
+                  0,
+                  1,
+                  0
+                ]
+              },
+              {
+                "name": "Aerial batch · Period · 1829 · 266",
+                "y": 3.0999999046325684,
+                "normal": [
+                  0,
+                  1,
+                  0
+                ]
+              },
+              {
+                "name": "Estate terrain",
+                "y": -0.15000000000000382,
+                "normal": [
+                  0,
+                  0,
+                  1
+                ]
+              }
+            ]
+          },
+          {
+            "z": 17.4,
+            "hits": [
+              {
+                "name": "Aerial batch · Period · 1829 · 252",
+                "y": 14.216111676957597,
+                "normal": [
+                  0.5316896233620737,
+                  0.8469392802372316,
+                  5.79646287298109e-7
+                ]
+              },
+              {
+                "name": "Aerial batch · Period · 1829 · 254",
+                "y": 13.350000381469727,
+                "normal": [
+                  0,
+                  1,
+                  0
+                ]
+              },
+              {
+                "name": "Aerial batch · Period · 1829 · 266",
+                "y": 3.0999999046325684,
+                "normal": [
+                  0,
+                  1,
+                  0
+                ]
+              },
+              {
+                "name": "Estate terrain",
+                "y": -0.15000000000000385,
+                "normal": [
+                  0,
+                  0,
+                  1
+                ]
+              }
+            ]
+          },
+          {
+            "z": 17.5,
+            "hits": [
+              {
+                "name": "Aerial batch · Period · 1829 · 252",
+                "y": 14.21611160851747,
+                "normal": [
+                  0.5316896233620737,
+                  0.8469392802372316,
+                  5.79646287298109e-7
+                ]
+              },
+              {
+                "name": "Aerial batch · Period · 1829 · 254",
+                "y": 13.350000381469727,
+                "normal": [
+                  0,
+                  1,
+                  0
+                ]
+              },
+              {
+                "name": "Aerial batch · Period · 1829 · 266",
+                "y": 3.0999999046325684,
+                "normal": [
+                  0,
+                  1,
+                  0
+                ]
+              },
+              {
+                "name": "Estate terrain",
+                "y": -0.15000000000000743,
+                "normal": [
+                  0,
+                  0,
+                  1
+                ]
+              }
+            ]
+          },
+          {
+            "z": 17.6,
+            "hits": [
+              {
+                "name": "Aerial batch · Period · 1829 · 252",
+                "y": 14.21611154007735,
+                "normal": [
+                  0.5316896233620737,
+                  0.8469392802372316,
+                  5.79646287298109e-7
+                ]
+              },
+              {
+                "name": "Aerial batch · Period · 1829 · 254",
+                "y": 13.350000381469723,
+                "normal": [
+                  0,
+                  1,
+                  0
+                ]
+              },
+              {
+                "name": "Aerial batch · Period · 1829 · 266",
+                "y": 3.0999999046325684,
+                "normal": [
+                  0,
+                  1,
+                  0
+                ]
+              },
+              {
+                "name": "Estate terrain",
+                "y": -0.15000000000000746,
+                "normal": [
+                  0,
+                  0,
+                  1
+                ]
+              }
+            ]
+          },
+          {
+            "z": 18,
+            "hits": [
+              {
+                "name": "Aerial batch · Period · 1829 · 252",
+                "y": 14.216111266316855,
+                "normal": [
+                  0.5316896233620737,
+                  0.8469392802372316,
+                  5.79646287298109e-7
+                ]
+              },
+              {
+                "name": "Aerial batch · Period · 1829 · 254",
+                "y": 13.350000381469727,
+                "normal": [
+                  0,
+                  1,
+                  0
+                ]
+              },
+              {
+                "name": "Aerial batch · Period · 1829 · 266",
+                "y": 3.0999999046325684,
+                "normal": [
+                  0,
+                  1,
+                  0
+                ]
+              },
+              {
+                "name": "Estate terrain",
+                "y": -0.15000000000000044,
+                "normal": [
+                  0,
+                  0,
+                  1
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "x": -23,
+        "rows": [
+          {
+            "z": 16.5,
+            "hits": [
+              {
+                "name": "Aerial batch · Period · 1829 · 252",
+                "y": 13.902221540926284,
+                "normal": [
+                  0.5316899418590363,
+                  0.8469390802920447,
+                  0
+                ]
+              },
+              {
+                "name": "Aerial batch · Period · 1829 · 277",
+                "y": 13.029999732971195,
+                "normal": [
+                  0,
+                  1,
+                  0
+                ]
+              },
+              {
+                "name": "",
+                "y": 12.800000190734863,
+                "normal": [
+                  0,
+                  1,
+                  0
+                ]
+              },
+              {
+                "name": "Aerial batch · Period · 1829 · 277",
+                "y": 12.789999961853027,
+                "normal": [
+                  0,
+                  1,
+                  0
+                ]
+              }
+            ]
+          },
+          {
+            "z": 16.8,
+            "hits": [
+              {
+                "name": "Aerial batch · Period · 1829 · 252",
+                "y": 13.885591794822904,
+                "normal": [
+                  0.3252722470079271,
+                  0.8056909063859654,
+                  0.49503548225695426
+                ]
+              },
+              {
+                "name": "Aerial batch · Period · 1829 · 277",
+                "y": 13.029999732971191,
+                "normal": [
+                  0,
+                  1,
+                  0
+                ]
+              },
+              {
+                "name": "",
+                "y": 12.800000190734863,
+                "normal": [
+                  0,
+                  1,
+                  0
+                ]
+              },
+              {
+                "name": "Aerial batch · Period · 1829 · 277",
+                "y": 12.789999961853027,
+                "normal": [
+                  0,
+                  1,
+                  0
+                ]
+              }
+            ]
+          },
+          {
+            "z": 17,
+            "hits": [
+              {
+                "name": "Aerial batch · Period · 1829 · 252",
+                "y": 13.824148946827524,
+                "normal": [
+                  0.7134336838546382,
+                  0.7007227545481878,
+                  0
+                ]
+              },
+              {
+                "name": "Aerial batch · Period · 1829 · 254",
+                "y": 13.350000381469727,
+                "normal": [
+                  0,
+                  1,
+                  0
+                ]
+              },
+              {
+                "name": "Aerial batch · Period · 1829 · 277",
+                "y": 13.029999732971191,
+                "normal": [
+                  0,
+                  1,
+                  0
+                ]
+              },
+              {
+                "name": "",
+                "y": 12.800000190734863,
+                "normal": [
+                  0,
+                  1,
+                  0
+                ]
+              }
+            ]
+          },
+          {
+            "z": 17.1,
+            "hits": [
+              {
+                "name": "Aerial batch · Period · 1829 · 252",
+                "y": 13.824148946827524,
+                "normal": [
+                  0.7134336838546382,
+                  0.7007227545481878,
+                  0
+                ]
+              },
+              {
+                "name": "Aerial batch · Period · 1829 · 254",
+                "y": 13.35000038146973,
+                "normal": [
+                  0,
+                  1,
+                  0
+                ]
+              },
+              {
+                "name": "Aerial batch · Period · 1829 · 277",
+                "y": 13.029999732971191,
+                "normal": [
+                  0,
+                  1,
+                  0
+                ]
+              },
+              {
+                "name": "Aerial batch · Period · 1829 · 277",
+                "y": 12.789999961853027,
+                "normal": [
+                  0,
+                  1,
+                  0
+                ]
+              }
+            ]
+          },
+          {
+            "z": 17.2249,
+            "hits": [
+              {
+                "name": "Aerial batch · Period · 1829 · 252",
+                "y": 13.824148946827528,
+                "normal": [
+                  0.7134336838546382,
+                  0.7007227545481878,
+                  0
+                ]
+              },
+              {
+                "name": "Aerial batch · Period · 1829 · 254",
+                "y": 13.350000381469727,
+                "normal": [
+                  0,
+                  1,
+                  0
+                ]
+              },
+              {
+                "name": "Aerial batch · Period · 1829 · 277",
+                "y": 13.029999732971191,
+                "normal": [
+                  0,
+                  1,
+                  0
+                ]
+              },
+              {
+                "name": "Aerial batch · Period · 1829 · 266",
+                "y": 3.0999999046325684,
+                "normal": [
+                  0,
+                  1,
+                  0
+                ]
+              }
+            ]
+          },
+          {
+            "z": 17.3,
+            "hits": [
+              {
+                "name": "Aerial batch · Period · 1829 · 252",
+                "y": 13.827389053422728,
+                "normal": [
+                  0.7091546206314905,
+                  0.7026957776851852,
+                  -0.05760527806043286
+                ]
+              },
+              {
+                "name": "Aerial batch · Period · 1829 · 254",
+                "y": 13.350000381469727,
+                "normal": [
+                  0,
+                  1,
+                  0
+                ]
+              },
+              {
+                "name": "Aerial batch · Period · 1829 · 266",
+                "y": 3.0999999046325684,
+                "normal": [
+                  0,
+                  1,
+                  0
+                ]
+              },
+              {
+                "name": "Estate terrain",
+                "y": -0.15000000000000382,
+                "normal": [
+                  0,
+                  0,
+                  1
+                ]
+              }
+            ]
+          },
+          {
+            "z": 17.4,
+            "hits": [
+              {
+                "name": "Aerial batch · Period · 1829 · 252",
+                "y": 13.835586808395753,
+                "normal": [
+                  0.7091546206314905,
+                  0.7026957776851852,
+                  -0.05760527806043286
+                ]
+              },
+              {
+                "name": "Aerial batch · Period · 1829 · 254",
+                "y": 13.350000381469727,
+                "normal": [
+                  0,
+                  1,
+                  0
+                ]
+              },
+              {
+                "name": "Aerial batch · Period · 1829 · 266",
+                "y": 3.0999999046325684,
+                "normal": [
+                  0,
+                  1,
+                  0
+                ]
+              },
+              {
+                "name": "Estate terrain",
+                "y": -0.15000000000000385,
+                "normal": [
+                  0,
+                  0,
+                  1
+                ]
+              }
+            ]
+          },
+          {
+            "z": 17.5,
+            "hits": [
+              {
+                "name": "Aerial batch · Period · 1829 · 252",
+                "y": 13.842334170166385,
+                "normal": [
+                  0.6799163971181702,
+                  0.7332896378170407,
+                  0
+                ]
+              },
+              {
+                "name": "Aerial batch · Period · 1829 · 254",
+                "y": 13.350000381469727,
+                "normal": [
+                  0,
+                  1,
+                  0
+                ]
+              },
+              {
+                "name": "Aerial batch · Period · 1829 · 266",
+                "y": 3.0999999046325684,
+                "normal": [
+                  0,
+                  1,
+                  0
+                ]
+              },
+              {
+                "name": "Estate terrain",
+                "y": -0.15000000000000743,
+                "normal": [
+                  0,
+                  0,
+                  1
+                ]
+              }
+            ]
+          },
+          {
+            "z": 17.6,
+            "hits": [
+              {
+                "name": "Aerial batch · Period · 1829 · 252",
+                "y": 13.846009725146292,
+                "normal": [
+                  0.6725696121193965,
+                  0.7400338619641432,
+                  0
+                ]
+              },
+              {
+                "name": "Aerial batch · Period · 1829 · 254",
+                "y": 13.350000381469723,
+                "normal": [
+                  0,
+                  1,
+                  0
+                ]
+              },
+              {
+                "name": "Aerial batch · Period · 1829 · 266",
+                "y": 3.0999999046325684,
+                "normal": [
+                  0,
+                  1,
+                  0
+                ]
+              },
+              {
+                "name": "Estate terrain",
+                "y": -0.15000000000000036,
+                "normal": [
+                  0,
+                  0,
+                  1
+                ]
+              }
+            ]
+          },
+          {
+            "z": 18,
+            "hits": [
+              {
+                "name": "Aerial batch · Period · 1829 · 252",
+                "y": 13.855964259918373,
+                "normal": [
+                  0.6760461273138687,
+                  0.7343957399085224,
+                  -0.06020407750422045
+                ]
+              },
+              {
+                "name": "Aerial batch · Period · 1829 · 254",
+                "y": 13.350000381469727,
+                "normal": [
+                  0,
+                  1,
+                  0
+                ]
+              },
+              {
+                "name": "Aerial batch · Period · 1829 · 266",
+                "y": 3.0999999046325684,
+                "normal": [
+                  0,
+                  1,
+                  0
+                ]
+              },
+              {
+                "name": "Estate terrain",
+                "y": -0.15000000000000044,
+                "normal": [
+                  0,
+                  0,
+                  1
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "x": -22.9,
+        "rows": [
+          {
+            "z": 16.5,
+            "hits": [
+              {
+                "name": "Aerial batch · Period · 1829 · 252",
+                "y": 13.839443714960844,
+                "normal": [
+                  0.5316899418590363,
+                  0.8469390802920447,
+                  0
+                ]
+              },
+              {
+                "name": "Aerial batch · Period · 1829 · 277",
+                "y": 13.029999732971191,
+                "normal": [
+                  0,
+                  1,
+                  0
+                ]
+              },
+              {
+                "name": "",
+                "y": 12.800000190734863,
+                "normal": [
+                  0,
+                  1,
+                  0
+                ]
+              },
+              {
+                "name": "Aerial batch · Period · 1829 · 277",
+                "y": 12.789999961853027,
+                "normal": [
+                  0,
+                  1,
+                  0
+                ]
+              }
+            ]
+          },
+          {
+            "z": 16.8,
+            "hits": [
+              {
+                "name": "Aerial batch · Period · 1829 · 252",
+                "y": 13.826802287045108,
+                "normal": [
+                  0.5286684781567313,
+                  0.8421261329561998,
+                  0.1064575802640786
+                ]
+              },
+              {
+                "name": "Aerial batch · Period · 1829 · 277",
+                "y": 13.029999732971191,
+                "normal": [
+                  0,
+                  1,
+                  0
+                ]
+              },
+              {
+                "name": "",
+                "y": 12.800000190734863,
+                "normal": [
+                  0,
+                  1,
+                  0
+                ]
+              },
+              {
+                "name": "Aerial batch · Period · 1829 · 277",
+                "y": 12.789999961853027,
+                "normal": [
+                  0,
+                  1,
+                  0
+                ]
+              }
+            ]
+          },
+          {
+            "z": 17,
+            "hits": [
+              {
+                "name": "Aerial batch · Period · 1829 · 252",
+                "y": 13.722335240591459,
+                "normal": [
+                  0.3252722470079271,
+                  0.8056909063859654,
+                  0.49503548225695426
+                ]
+              },
+              {
+                "name": "Aerial batch · Period · 1829 · 254",
+                "y": 13.350000381469723,
+                "normal": [
+                  0,
+                  1,
+                  0
+                ]
+              },
+              {
+                "name": "Aerial batch · Period · 1829 · 277",
+                "y": 13.029999732971191,
+                "normal": [
+                  0,
+                  1,
+                  0
+                ]
+              },
+              {
+                "name": "",
+                "y": 12.800000190734863,
+                "normal": [
+                  0,
+                  1,
+                  0
+                ]
+              }
+            ]
+          },
+          {
+            "z": 17.1,
+            "hits": [
+              {
+                "name": "Aerial batch · Period · 1829 · 252",
+                "y": 13.722334972723797,
+                "normal": [
+                  0.7134336838546382,
+                  0.7007227545481878,
+                  0
+                ]
+              },
+              {
+                "name": "Aerial batch · Period · 1829 · 254",
+                "y": 13.350000381469727,
+                "normal": [
+                  0,
+                  1,
+                  0
+                ]
+              },
+              {
+                "name": "Aerial batch · Period · 1829 · 277",
+                "y": 13.029999732971191,
+                "normal": [
+                  0,
+                  1,
+                  0
+                ]
+              },
+              {
+                "name": "Aerial batch · Period · 1829 · 277",
+                "y": 12.789999961853027,
+                "normal": [
+                  0,
+                  1,
+                  0
+                ]
+              }
+            ]
+          },
+          {
+            "z": 17.2249,
+            "hits": [
+              {
+                "name": "Aerial batch · Period · 1829 · 252",
+                "y": 13.722334972723797,
+                "normal": [
+                  0.7134336838546382,
+                  0.7007227545481878,
+                  0
+                ]
+              },
+              {
+                "name": "Aerial batch · Period · 1829 · 254",
+                "y": 13.35000038146973,
+                "normal": [
+                  0,
+                  1,
+                  0
+                ]
+              },
+              {
+                "name": "Aerial batch · Period · 1829 · 277",
+                "y": 13.029999732971191,
+                "normal": [
+                  0,
+                  1,
+                  0
+                ]
+              },
+              {
+                "name": "Aerial batch · Period · 1829 · 266",
+                "y": 3.0999999046325684,
+                "normal": [
+                  0,
+                  1,
+                  0
+                ]
+              }
+            ]
+          },
+          {
+            "z": 17.3,
+            "hits": [
+              {
+                "name": "Aerial batch · Period · 1829 · 252",
+                "y": 13.72646990132997,
+                "normal": [
+                  0.7091546206314905,
+                  0.7026957776851852,
+                  -0.05760527806043286
+                ]
+              },
+              {
+                "name": "Aerial batch · Period · 1829 · 254",
+                "y": 13.350000381469727,
+                "normal": [
+                  0,
+                  1,
+                  0
+                ]
+              },
+              {
+                "name": "Aerial batch · Period · 1829 · 266",
+                "y": 3.0999999046325684,
+                "normal": [
+                  0,
+                  1,
+                  0
+                ]
+              },
+              {
+                "name": "Estate terrain",
+                "y": -0.15000000000000382,
+                "normal": [
+                  0,
+                  0,
+                  1
+                ]
+              }
+            ]
+          },
+          {
+            "z": 17.4,
+            "hits": [
+              {
+                "name": "Aerial batch · Period · 1829 · 252",
+                "y": 13.734667656302996,
+                "normal": [
+                  0.7091546206314905,
+                  0.7026957776851852,
+                  -0.05760527806043286
+                ]
+              },
+              {
+                "name": "Aerial batch · Period · 1829 · 254",
+                "y": 13.350000381469727,
+                "normal": [
+                  0,
+                  1,
+                  0
+                ]
+              },
+              {
+                "name": "Aerial batch · Period · 1829 · 266",
+                "y": 3.0999999046325684,
+                "normal": [
+                  0,
+                  1,
+                  0
+                ]
+              },
+              {
+                "name": "Estate terrain",
+                "y": -0.1500000000000074,
+                "normal": [
+                  0,
+                  0,
+                  1
+                ]
+              }
+            ]
+          },
+          {
+            "z": 17.5,
+            "hits": [
+              {
+                "name": "Aerial batch · Period · 1829 · 252",
+                "y": 13.742865411276025,
+                "normal": [
+                  0.7091546206314905,
+                  0.7026957776851852,
+                  -0.05760527806043286
+                ]
+              },
+              {
+                "name": "Aerial batch · Period · 1829 · 254",
+                "y": 13.350000381469727,
+                "normal": [
+                  0,
+                  1,
+                  0
+                ]
+              },
+              {
+                "name": "Aerial batch · Period · 1829 · 266",
+                "y": 3.0999999046325684,
+                "normal": [
+                  0,
+                  1,
+                  0
+                ]
+              },
+              {
+                "name": "Estate terrain",
+                "y": -0.15000000000000743,
+                "normal": [
+                  0,
+                  0,
+                  1
+                ]
+              }
+            ]
+          },
+          {
+            "z": 17.6,
+            "hits": [
+              {
+                "name": "Aerial batch · Period · 1829 · 252",
+                "y": 13.749612773046653,
+                "normal": [
+                  0.6799163971181702,
+                  0.7332896378170407,
+                  0
+                ]
+              },
+              {
+                "name": "Aerial batch · Period · 1829 · 254",
+                "y": 13.350000381469723,
+                "normal": [
+                  0,
+                  1,
+                  0
+                ]
+              },
+              {
+                "name": "Aerial batch · Period · 1829 · 266",
+                "y": 3.0999999046325684,
+                "normal": [
+                  0,
+                  1,
+                  0
+                ]
+              },
+              {
+                "name": "Estate terrain",
+                "y": -0.15000000000000036,
+                "normal": [
+                  0,
+                  0,
+                  1
+                ]
+              }
+            ]
+          },
+          {
+            "z": 18,
+            "hits": [
+              {
+                "name": "Aerial batch · Period · 1829 · 252",
+                "y": 13.763909514693665,
+                "normal": [
+                  0.6760461273138687,
+                  0.7343957399085224,
+                  -0.06020407750422045
+                ]
+              },
+              {
+                "name": "Aerial batch · Period · 1829 · 254",
+                "y": 13.350000381469727,
+                "normal": [
+                  0,
+                  1,
+                  0
+                ]
+              },
+              {
+                "name": "Aerial batch · Period · 1829 · 266",
+                "y": 3.0999999046325684,
+                "normal": [
+                  0,
+                  1,
+                  0
+                ]
+              },
+              {
+                "name": "Estate terrain",
+                "y": -0.15000000000000754,
+                "normal": [
+                  0,
+                  0,
+                  1
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "x": -22.8,
+        "rows": [
+          {
+            "z": 16.5,
+            "hits": [
+              {
+                "name": "Aerial batch · Period · 1829 · 252",
+                "y": 13.776665888995407,
+                "normal": [
+                  0.5316899418590363,
+                  0.8469390802920447,
+                  0
+                ]
+              },
+              {
+                "name": "Aerial batch · Period · 1829 · 277",
+                "y": 13.029999732971195,
+                "normal": [
+                  0,
+                  1,
+                  0
+                ]
+              },
+              {
+                "name": "",
+                "y": 12.800000190734863,
+                "normal": [
+                  0,
+                  1,
+                  0
+                ]
+              },
+              {
+                "name": "Aerial batch · Period · 1829 · 277",
+                "y": 12.789999961853027,
+                "normal": [
+                  0,
+                  1,
+                  0
+                ]
+              }
+            ]
+          },
+          {
+            "z": 16.8,
+            "hits": [
+              {
+                "name": "Aerial batch · Period · 1829 · 252",
+                "y": 13.764024461079671,
+                "normal": [
+                  0.5286684781567313,
+                  0.8421261329561998,
+                  0.1064575802640786
+                ]
+              },
+              {
+                "name": "Aerial batch · Period · 1829 · 277",
+                "y": 13.029999732971191,
+                "normal": [
+                  0,
+                  1,
+                  0
+                ]
+              },
+              {
+                "name": "",
+                "y": 12.800000190734863,
+                "normal": [
+                  0,
+                  1,
+                  0
+                ]
+              },
+              {
+                "name": "Aerial batch · Period · 1829 · 277",
+                "y": 12.789999961853027,
+                "normal": [
+                  0,
+                  1,
+                  0
+                ]
+              }
+            ]
+          },
+          {
+            "z": 17,
+            "hits": [
+              {
+                "name": "Aerial batch · Period · 1829 · 252",
+                "y": 13.681963400171046,
+                "normal": [
+                  0.3252722470079271,
+                  0.8056909063859654,
+                  0.49503548225695426
+                ]
+              },
+              {
+                "name": "Aerial batch · Period · 1829 · 254",
+                "y": 13.350000381469727,
+                "normal": [
+                  0,
+                  1,
+                  0
+                ]
+              },
+              {
+                "name": "Aerial batch · Period · 1829 · 277",
+                "y": 13.029999732971191,
+                "normal": [
+                  0,
+                  1,
+                  0
+                ]
+              },
+              {
+                "name": "",
+                "y": 12.800000190734863,
+                "normal": [
+                  0,
+                  1,
+                  0
+                ]
+              }
+            ]
+          },
+          {
+            "z": 17.1,
+            "hits": [
+              {
+                "name": "Aerial batch · Period · 1829 · 252",
+                "y": 13.620521043265526,
+                "normal": [
+                  0.3252722470079271,
+                  0.8056909063859654,
+                  0.49503548225695426
+                ]
+              },
+              {
+                "name": "Aerial batch · Period · 1829 · 254",
+                "y": 13.350000381469727,
+                "normal": [
+                  0,
+                  1,
+                  0
+                ]
+              },
+              {
+                "name": "Aerial batch · Period · 1829 · 277",
+                "y": 13.029999732971191,
+                "normal": [
+                  0,
+                  1,
+                  0
+                ]
+              },
+              {
+                "name": "Aerial batch · Period · 1829 · 277",
+                "y": 12.789999961853027,
+                "normal": [
+                  0,
+                  1,
+                  0
+                ]
+              }
+            ]
+          },
+          {
+            "z": 17.2249,
+            "hits": [
+              {
+                "name": "Aerial batch · Period · 1829 · 252",
+                "y": 13.620520998620066,
+                "normal": [
+                  0.7134336838546382,
+                  0.7007227545481878,
+                  0
+                ]
+              },
+              {
+                "name": "Aerial batch · Period · 1829 · 254",
+                "y": 13.35000038146973,
+                "normal": [
+                  0,
+                  1,
+                  0
+                ]
+              },
+              {
+                "name": "Aerial batch · Period · 1829 · 277",
+                "y": 13.029999732971191,
+                "normal": [
+                  0,
+                  1,
+                  0
+                ]
+              },
+              {
+                "name": "Aerial batch · Period · 1829 · 266",
+                "y": 3.0999999046325684,
+                "normal": [
+                  0,
+                  1,
+                  0
+                ]
+              }
+            ]
+          },
+          {
+            "z": 17.3,
+            "hits": [
+              {
+                "name": "Aerial batch · Period · 1829 · 252",
+                "y": 13.625550749237217,
+                "normal": [
+                  0.7091546206314905,
+                  0.7026957776851852,
+                  -0.05760527806043286
+                ]
+              },
+              {
+                "name": "Aerial batch · Period · 1829 · 254",
+                "y": 13.35000038146973,
+                "normal": [
+                  0,
+                  1,
+                  0
+                ]
+              },
+              {
+                "name": "Aerial batch · Period · 1829 · 266",
+                "y": 3.0999999046325684,
+                "normal": [
+                  0,
+                  1,
+                  0
+                ]
+              },
+              {
+                "name": "Estate terrain",
+                "y": -0.15000000000000382,
+                "normal": [
+                  0,
+                  0,
+                  1
+                ]
+              }
+            ]
+          },
+          {
+            "z": 17.4,
+            "hits": [
+              {
+                "name": "Aerial batch · Period · 1829 · 252",
+                "y": 13.633748504210242,
+                "normal": [
+                  0.7091546206314905,
+                  0.7026957776851852,
+                  -0.05760527806043286
+                ]
+              },
+              {
+                "name": "Aerial batch · Period · 1829 · 254",
+                "y": 13.350000381469727,
+                "normal": [
+                  0,
+                  1,
+                  0
+                ]
+              },
+              {
+                "name": "Aerial batch · Period · 1829 · 266",
+                "y": 3.0999999046325684,
+                "normal": [
+                  0,
+                  1,
+                  0
+                ]
+              },
+              {
+                "name": "Estate terrain",
+                "y": -0.1500000000000074,
+                "normal": [
+                  0,
+                  0,
+                  1
+                ]
+              }
+            ]
+          },
+          {
+            "z": 17.5,
+            "hits": [
+              {
+                "name": "Aerial batch · Period · 1829 · 252",
+                "y": 13.641946259183268,
+                "normal": [
+                  0.7091546206314905,
+                  0.7026957776851852,
+                  -0.05760527806043286
+                ]
+              },
+              {
+                "name": "Aerial batch · Period · 1829 · 254",
+                "y": 13.350000381469727,
+                "normal": [
+                  0,
+                  1,
+                  0
+                ]
+              },
+              {
+                "name": "Aerial batch · Period · 1829 · 266",
+                "y": 3.0999999046325684,
+                "normal": [
+                  0,
+                  1,
+                  0
+                ]
+              },
+              {
+                "name": "Estate terrain",
+                "y": -0.15000000000000743,
+                "normal": [
+                  0,
+                  0,
+                  1
+                ]
+              }
+            ]
+          },
+          {
+            "z": 17.6,
+            "hits": [
+              {
+                "name": "Aerial batch · Period · 1829 · 252",
+                "y": 13.650144014156293,
+                "normal": [
+                  0.7091546206314905,
+                  0.7026957776851852,
+                  -0.05760527806043286
+                ]
+              },
+              {
+                "name": "Aerial batch · Period · 1829 · 254",
+                "y": 13.350000381469727,
+                "normal": [
+                  0,
+                  1,
+                  0
+                ]
+              },
+              {
+                "name": "Aerial batch · Period · 1829 · 266",
+                "y": 3.0999999046325684,
+                "normal": [
+                  0,
+                  1,
+                  0
+                ]
+              },
+              {
+                "name": "Estate terrain",
+                "y": -0.15000000000000036,
+                "normal": [
+                  0,
+                  0,
+                  1
+                ]
+              }
+            ]
+          },
+          {
+            "z": 18,
+            "hits": [
+              {
+                "name": "Aerial batch · Period · 1829 · 252",
+                "y": 13.671854769468968,
+                "normal": [
+                  0.6760461273138687,
+                  0.7343957399085224,
+                  -0.06020407750422045
+                ]
+              },
+              {
+                "name": "Aerial batch · Period · 1829 · 254",
+                "y": 13.350000381469727,
+                "normal": [
+                  0,
+                  1,
+                  0
+                ]
+              },
+              {
+                "name": "Aerial batch · Period · 1829 · 266",
+                "y": 3.0999999046325684,
+                "normal": [
+                  0,
+                  1,
+                  0
+                ]
+              },
+              {
+                "name": "Estate terrain",
+                "y": -0.15000000000000754,
+                "normal": [
+                  0,
+                  0,
+                  1
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "x": -22.7,
+        "rows": [
+          {
+            "z": 16.5,
+            "hits": [
+              {
+                "name": "Aerial batch · Period · 1829 · 252",
+                "y": 13.713888063011261,
+                "normal": [
+                  0.5316899440315657,
+                  0.8469390789281781,
+                  -7.492622884696103e-9
+                ]
+              },
+              {
+                "name": "Aerial batch · Period · 1829 · 277",
+                "y": 13.029999732971191,
+                "normal": [
+                  0,
+                  1,
+                  0
+                ]
+              },
+              {
+                "name": "",
+                "y": 12.800000190734863,
+                "normal": [
+                  0,
+                  1,
+                  0
+                ]
+              },
+              {
+                "name": "Aerial batch · Period · 1829 · 277",
+                "y": 12.789999961853024,
+                "normal": [
+                  0,
+                  1,
+                  0
+                ]
+              }
+            ]
+          },
+          {
+            "z": 16.8,
+            "hits": [
+              {
+                "name": "Aerial batch · Period · 1829 · 252",
+                "y": 13.70124663511423,
+                "normal": [
+                  0.5286684781567313,
+                  0.8421261329561998,
+                  0.1064575802640786
+                ]
+              },
+              {
+                "name": "Aerial batch · Period · 1829 · 277",
+                "y": 13.029999732971195,
+                "normal": [
+                  0,
+                  1,
+                  0
+                ]
+              },
+              {
+                "name": "",
+                "y": 12.800000190734863,
+                "normal": [
+                  0,
+                  1,
+                  0
+                ]
+              },
+              {
+                "name": "Aerial batch · Period · 1829 · 277",
+                "y": 12.789999961853027,
+                "normal": [
+                  0,
+                  1,
+                  0
+                ]
+              }
+            ]
+          },
+          {
+            "z": 17,
+            "hits": [
+              {
+                "name": "Aerial batch · Period · 1829 · 252",
+                "y": 13.641591559750626,
+                "normal": [
+                  0.3252722470079271,
+                  0.8056909063859654,
+                  0.49503548225695426
+                ]
+              },
+              {
+                "name": "Aerial batch · Period · 1829 · 254",
+                "y": 13.350000381469727,
+                "normal": [
+                  0,
+                  1,
+                  0
+                ]
+              },
+              {
+                "name": "Aerial batch · Period · 1829 · 277",
+                "y": 13.029999732971191,
+                "normal": [
+                  0,
+                  1,
+                  0
+                ]
+              },
+              {
+                "name": "",
+                "y": 12.80000019073486,
+                "normal": [
+                  0,
+                  1,
+                  0
+                ]
+              }
+            ]
+          },
+          {
+            "z": 17.1,
+            "hits": [
+              {
+                "name": "Aerial batch · Period · 1829 · 252",
+                "y": 13.580149202845114,
+                "normal": [
+                  0.3252722470079271,
+                  0.8056909063859654,
+                  0.49503548225695426
+                ]
+              },
+              {
+                "name": "Aerial batch · Period · 1829 · 254",
+                "y": 13.350000381469727,
+                "normal": [
+                  0,
+                  1,
+                  0
+                ]
+              },
+              {
+                "name": "Aerial batch · Period · 1829 · 277",
+                "y": 13.029999732971191,
+                "normal": [
+                  0,
+                  1,
+                  0
+                ]
+              },
+              {
+                "name": "Aerial batch · Period · 1829 · 277",
+                "y": 12.789999961853027,
+                "normal": [
+                  0,
+                  1,
+                  0
+                ]
+              }
+            ]
+          },
+          {
+            "z": 17.2249,
+            "hits": [
+              {
+                "name": "Aerial batch · Period · 1829 · 252",
+                "y": 13.518707024516335,
+                "normal": [
+                  0.7134336838546382,
+                  0.7007227545481878,
+                  0
+                ]
+              },
+              {
+                "name": "Aerial batch · Period · 1829 · 254",
+                "y": 13.35000038146973,
+                "normal": [
+                  0,
+                  1,
+                  0
+                ]
+              },
+              {
+                "name": "Aerial batch · Period · 1829 · 277",
+                "y": 13.029999732971191,
+                "normal": [
+                  0,
+                  1,
+                  0
+                ]
+              },
+              {
+                "name": "Aerial batch · Period · 1829 · 259",
+                "y": 3.2699999809265137,
+                "normal": [
+                  0,
+                  1,
+                  0
+                ]
+              }
+            ]
+          },
+          {
+            "z": 17.3,
+            "hits": [
+              {
+                "name": "Aerial batch · Period · 1829 · 252",
+                "y": 13.52463159714446,
+                "normal": [
+                  0.7091546206314905,
+                  0.7026957776851852,
+                  -0.05760527806043286
+                ]
+              },
+              {
+                "name": "Aerial batch · Period · 1829 · 254",
+                "y": 13.350000381469727,
+                "normal": [
+                  0,
+                  1,
+                  0
+                ]
+              },
+              {
+                "name": "Aerial batch · Period · 1829 · 259",
+                "y": 3.2699999809265137,
+                "normal": [
+                  0,
+                  1,
+                  0
+                ]
+              },
+              {
+                "name": "Aerial batch · Period · 1829 · 266",
+                "y": 3.0999999046325684,
+                "normal": [
+                  0,
+                  1,
+                  0
+                ]
+              }
+            ]
+          },
+          {
+            "z": 17.4,
+            "hits": [
+              {
+                "name": "Aerial batch · Period · 1829 · 252",
+                "y": 13.532829352117485,
+                "normal": [
+                  0.7091546206314905,
+                  0.7026957776851852,
+                  -0.05760527806043286
+                ]
+              },
+              {
+                "name": "Aerial batch · Period · 1829 · 254",
+                "y": 13.35000038146973,
+                "normal": [
+                  0,
+                  1,
+                  0
+                ]
+              },
+              {
+                "name": "Aerial batch · Period · 1829 · 259",
+                "y": 3.2699999809265172,
+                "normal": [
+                  0,
+                  1,
+                  0
+                ]
+              },
+              {
+                "name": "Aerial batch · Period · 1829 · 266",
+                "y": 3.0999999046325684,
+                "normal": [
+                  0,
+                  1,
+                  0
+                ]
+              }
+            ]
+          },
+          {
+            "z": 17.5,
+            "hits": [
+              {
+                "name": "Aerial batch · Period · 1829 · 252",
+                "y": 13.54102710709051,
+                "normal": [
+                  0.7091546206314905,
+                  0.7026957776851852,
+                  -0.05760527806043286
+                ]
+              },
+              {
+                "name": "Aerial batch · Period · 1829 · 254",
+                "y": 13.350000381469727,
+                "normal": [
+                  0,
+                  1,
+                  0
+                ]
+              },
+              {
+                "name": "Aerial batch · Period · 1829 · 259",
+                "y": 3.2699999809265172,
+                "normal": [
+                  0,
+                  1,
+                  0
+                ]
+              },
+              {
+                "name": "Aerial batch · Period · 1829 · 266",
+                "y": 3.0999999046325684,
+                "normal": [
+                  0,
+                  1,
+                  0
+                ]
+              }
+            ]
+          },
+          {
+            "z": 17.6,
+            "hits": [
+              {
+                "name": "Aerial batch · Period · 1829 · 252",
+                "y": 13.549224862063536,
+                "normal": [
+                  0.7091546206314905,
+                  0.7026957776851852,
+                  -0.05760527806043286
+                ]
+              },
+              {
+                "name": "Aerial batch · Period · 1829 · 254",
+                "y": 13.350000381469727,
+                "normal": [
+                  0,
+                  1,
+                  0
+                ]
+              },
+              {
+                "name": "Aerial batch · Period · 1829 · 259",
+                "y": 3.26999998092651,
+                "normal": [
+                  0,
+                  1,
+                  0
+                ]
+              },
+              {
+                "name": "Aerial batch · Period · 1829 · 266",
+                "y": 3.0999999046325684,
+                "normal": [
+                  0,
+                  1,
+                  0
+                ]
+              }
+            ]
+          },
+          {
+            "z": 18,
+            "hits": [
+              {
+                "name": "Aerial batch · Period · 1829 · 252",
+                "y": 13.57980002424426,
+                "normal": [
+                  0.6760461273138687,
+                  0.7343957399085224,
+                  -0.06020407750422045
+                ]
+              },
+              {
+                "name": "Aerial batch · Period · 1829 · 254",
+                "y": 13.350000381469727,
+                "normal": [
+                  0,
+                  1,
+                  0
+                ]
+              },
+              {
+                "name": "Aerial batch · Period · 1829 · 259",
+                "y": 3.26999998092651,
+                "normal": [
+                  0,
+                  1,
+                  0
+                ]
+              },
+              {
+                "name": "Aerial batch · Period · 1829 · 266",
+                "y": 3.0999999046325684,
+                "normal": [
+                  0,
+                  1,
+                  0
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "x": -22.6,
+        "rows": [
+          {
+            "z": 16.5,
+            "hits": [
+              {
+                "name": "Aerial batch · Period · 1829 · 252",
+                "y": 13.651110236688215,
+                "normal": [
+                  0.5316899440315657,
+                  0.8469390789281781,
+                  -7.492622884696103e-9
+                ]
+              },
+              {
+                "name": "Aerial batch · Period · 1829 · 277",
+                "y": 13.029999732971191,
+                "normal": [
+                  0,
+                  1,
+                  0
+                ]
+              },
+              {
+                "name": "",
+                "y": 12.800000190734863,
+                "normal": [
+                  0,
+                  1,
+                  0
+                ]
+              },
+              {
+                "name": "Aerial batch · Period · 1829 · 277",
+                "y": 12.789999961853027,
+                "normal": [
+                  0,
+                  1,
+                  0
+                ]
+              }
+            ]
+          },
+          {
+            "z": 16.8,
+            "hits": [
+              {
+                "name": "Aerial batch · Period · 1829 · 252",
+                "y": 13.638468809148794,
+                "normal": [
+                  0.5286684781567313,
+                  0.8421261329561998,
+                  0.1064575802640786
+                ]
+              },
+              {
+                "name": "Aerial batch · Period · 1829 · 277",
+                "y": 13.029999732971188,
+                "normal": [
+                  0,
+                  1,
+                  0
+                ]
+              },
+              {
+                "name": "",
+                "y": 12.800000190734863,
+                "normal": [
+                  0,
+                  1,
+                  0
+                ]
+              },
+              {
+                "name": "Aerial batch · Period · 1829 · 277",
+                "y": 12.789999961853027,
+                "normal": [
+                  0,
+                  1,
+                  0
+                ]
+              }
+            ]
+          },
+          {
+            "z": 17,
+            "hits": [
+              {
+                "name": "Aerial batch · Period · 1829 · 252",
+                "y": 13.601219719330217,
+                "normal": [
+                  0.3252722470079271,
+                  0.8056909063859654,
+                  0.49503548225695426
+                ]
+              },
+              {
+                "name": "Aerial batch · Period · 1829 · 277",
+                "y": 13.029999732971191,
+                "normal": [
+                  0,
+                  1,
+                  0
+                ]
+              },
+              {
+                "name": "",
+                "y": 12.800000190734863,
+                "normal": [
+                  0,
+                  1,
+                  0
+                ]
+              },
+              {
+                "name": "Aerial batch · Period · 1829 · 261",
+                "y": 12.80000019073486,
+                "normal": [
+                  0,
+                  1,
+                  0
+                ]
+              }
+            ]
+          },
+          {
+            "z": 17.1,
+            "hits": [
+              {
+                "name": "Aerial batch · Period · 1829 · 252",
+                "y": 13.5397773624247,
+                "normal": [
+                  0.3252722470079271,
+                  0.8056909063859654,
+                  0.49503548225695426
+                ]
+              },
+              {
+                "name": "Aerial batch · Period · 1829 · 277",
+                "y": 13.029999732971191,
+                "normal": [
+                  0,
+                  1,
+                  0
+                ]
+              },
+              {
+                "name": "Aerial batch · Period · 1829 · 261",
+                "y": 12.80000019073486,
+                "normal": [
+                  0,
+                  1,
+                  0
+                ]
+              },
+              {
+                "name": "Aerial batch · Period · 1829 · 277",
+                "y": 12.789999961853024,
+                "normal": [
+                  0,
+                  1,
+                  0
+                ]
+              }
+            ]
+          },
+          {
+            "z": 17.2249,
+            "hits": [
+              {
+                "name": "Aerial batch · Period · 1829 · 252",
+                "y": 13.463035858649707,
+                "normal": [
+                  0.3252722470079271,
+                  0.8056909063859654,
+                  0.49503548225695426
+                ]
+              },
+              {
+                "name": "Aerial batch · Period · 1829 · 277",
+                "y": 13.029999732971191,
+                "normal": [
+                  0,
+                  1,
+                  0
+                ]
+              },
+              {
+                "name": "Aerial batch · Period · 1829 · 261",
+                "y": 12.80000019073486,
+                "normal": [
+                  0,
+                  1,
+                  0
+                ]
+              },
+              {
+                "name": "Aerial batch · Period · 1829 · 273",
+                "y": 12.767530763562444,
+                "normal": [
+                  0.3689161180709538,
+                  0.9294626930799634,
+                  0
+                ]
+              }
+            ]
+          },
+          {
+            "z": 17.3,
+            "hits": [
+              {
+                "name": "Aerial batch · Period · 1829 · 273",
+                "y": 13.493252735879157,
+                "normal": [
+                  0.4874419128133125,
+                  0.724433125199453,
+                  -0.4874392564685906
+                ]
+              },
+              {
+                "name": "Aerial batch · Period · 1829 · 273",
+                "y": 13.393252493871731,
+                "normal": [
+                  0.4614724037265169,
+                  0.7576826884152842,
+                  -0.46147607118317413
+                ]
+              },
+              {
+                "name": "Aerial batch · Period · 1829 · 273",
+                "y": 12.80325320510017,
+                "normal": [
+                  0.08143236406500166,
+                  0.9933466364595847,
+                  -0.08143236406500166
+                ]
+              },
+              {
+                "name": "Aerial batch · Period · 1829 · 273",
+                "y": 12.663252060815196,
+                "normal": [
+                  0.47780409094748694,
+                  0.7371592039948062,
+                  -0.4778070307557116
+                ]
+              }
+            ]
+          },
+          {
+            "z": 17.4,
+            "hits": [
+              {
+                "name": "Aerial batch · Period · 1829 · 273",
+                "y": 13.50145053770473,
+                "normal": [
+                  0.08143286875399446,
+                  0.9933465900924411,
+                  -0.08143242498056132
+                ]
+              },
+              {
+                "name": "Aerial batch · Period · 1829 · 273",
+                "y": 13.40145100008505,
+                "normal": [
+                  0.0814317850525093,
+                  0.9933466783388074,
+                  -0.08143243221480935
+                ]
+              },
+              {
+                "name": "Aerial batch · Period · 1829 · 273",
+                "y": 12.811450984311993,
+                "normal": [
+                  0.08143236406500166,
+                  0.9933466364595847,
+                  -0.08143236406500166
+                ]
+              },
+              {
+                "name": "Aerial batch · Period · 1829 · 273",
+                "y": 12.671450518885496,
+                "normal": [
+                  0.08143193021562284,
+                  0.9933466665181696,
+                  -0.08143243124577879
+                ]
+              }
+            ]
+          },
+          {
+            "z": 17.5,
+            "hits": [
+              {
+                "name": "Aerial batch · Period · 1829 · 273",
+                "y": 13.509648323431563,
+                "normal": [
+                  0.08143286875399446,
+                  0.9933465900924411,
+                  -0.08143242498056132
+                ]
+              },
+              {
+                "name": "Aerial batch · Period · 1829 · 273",
+                "y": 13.409648785811878,
+                "normal": [
+                  0.0814317850525093,
+                  0.9933466783388074,
+                  -0.08143243221480935
+                ]
+              },
+              {
+                "name": "Aerial batch · Period · 1829 · 273",
+                "y": 12.819648763523809,
+                "normal": [
+                  0.08143236406500166,
+                  0.9933466364595847,
+                  -0.08143236406500166
+                ]
+              },
+              {
+                "name": "Aerial batch · Period · 1829 · 273",
+                "y": 12.679648304612329,
+                "normal": [
+                  0.08143193021562284,
+                  0.9933466665181696,
+                  -0.08143243124577879
+                ]
+              }
+            ]
+          },
+          {
+            "z": 17.6,
+            "hits": [
+              {
+                "name": "Aerial batch · Period · 1829 · 273",
+                "y": 13.517846109158395,
+                "normal": [
+                  0.08143286875399446,
+                  0.9933465900924411,
+                  -0.08143242498056132
+                ]
+              },
+              {
+                "name": "Aerial batch · Period · 1829 · 273",
+                "y": 13.41784657153871,
+                "normal": [
+                  0.0814317850525093,
+                  0.9933466783388074,
+                  -0.08143243221480935
+                ]
+              },
+              {
+                "name": "Aerial batch · Period · 1829 · 273",
+                "y": 12.827846542735635,
+                "normal": [
+                  0.08143236406500166,
+                  0.9933466364595847,
+                  -0.08143236406500166
+                ]
+              },
+              {
+                "name": "Aerial batch · Period · 1829 · 273",
+                "y": 12.68784609033916,
+                "normal": [
+                  0.08143193021562284,
+                  0.9933466665181696,
+                  -0.08143243124577879
+                ]
+              }
+            ]
+          },
+          {
+            "z": 18,
+            "hits": [
+              {
+                "name": "Aerial batch · Period · 1829 · 273",
+                "y": 13.55063725206572,
+                "normal": [
+                  0.08143286875399446,
+                  0.9933465900924411,
+                  -0.08143242498056132
+                ]
+              },
+              {
+                "name": "Aerial batch · Period · 1829 · 273",
+                "y": 13.450637714446035,
+                "normal": [
+                  0.0814317850525093,
+                  0.9933466783388074,
+                  -0.08143243221480935
+                ]
+              },
+              {
+                "name": "Aerial batch · Period · 1829 · 273",
+                "y": 12.860637659582913,
+                "normal": [
+                  0.08143236406500166,
+                  0.9933466364595847,
+                  -0.08143236406500166
+                ]
+              },
+              {
+                "name": "Aerial batch · Period · 1829 · 273",
+                "y": 12.720637233246485,
+                "normal": [
+                  0.08143193021562284,
+                  0.9933466665181696,
+                  -0.08143243124577879
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "x": -22.5,
+        "rows": [
+          {
+            "z": 16.5,
+            "hits": [
+              {
+                "name": "Aerial batch · Period · 1829 · 252",
+                "y": 13.588332410365165,
+                "normal": [
+                  0.5316899440315657,
+                  0.8469390789281781,
+                  -7.492622884696103e-9
+                ]
+              },
+              {
+                "name": "Aerial batch · Period · 1829 · 277",
+                "y": 13.029999732971195,
+                "normal": [
+                  0,
+                  1,
+                  0
+                ]
+              },
+              {
+                "name": "",
+                "y": 12.800000190734863,
+                "normal": [
+                  0,
+                  1,
+                  0
+                ]
+              },
+              {
+                "name": "Aerial batch · Period · 1829 · 277",
+                "y": 12.789999961853027,
+                "normal": [
+                  0,
+                  1,
+                  0
+                ]
+              }
+            ]
+          },
+          {
+            "z": 16.8,
+            "hits": [
+              {
+                "name": "Aerial batch · Period · 1829 · 252",
+                "y": 13.575690983183353,
+                "normal": [
+                  0.5286684781567313,
+                  0.8421261329561998,
+                  0.1064575802640786
+                ]
+              },
+              {
+                "name": "Aerial batch · Period · 1829 · 277",
+                "y": 13.029999732971191,
+                "normal": [
+                  0,
+                  1,
+                  0
+                ]
+              },
+              {
+                "name": "",
+                "y": 12.800000190734867,
+                "normal": [
+                  0,
+                  1,
+                  0
+                ]
+              },
+              {
+                "name": "Aerial batch · Period · 1829 · 277",
+                "y": 12.789999961853027,
+                "normal": [
+                  0,
+                  1,
+                  0
+                ]
+              }
+            ]
+          },
+          {
+            "z": 17,
+            "hits": [
+              {
+                "name": "Aerial batch · Period · 1829 · 252",
+                "y": 13.550407934457539,
+                "normal": [
+                  0.5286684781567313,
+                  0.8421261329561998,
+                  0.1064575802640786
+                ]
+              },
+              {
+                "name": "Aerial batch · Period · 1829 · 277",
+                "y": 13.029999732971191,
+                "normal": [
+                  0,
+                  1,
+                  0
+                ]
+              },
+              {
+                "name": "",
+                "y": 12.800000190734863,
+                "normal": [
+                  0,
+                  1,
+                  0
+                ]
+              },
+              {
+                "name": "Aerial batch · Period · 1829 · 261",
+                "y": 12.800000190734863,
+                "normal": [
+                  0,
+                  1,
+                  0
+                ]
+              }
+            ]
+          },
+          {
+            "z": 17.1,
+            "hits": [
+              {
+                "name": "Aerial batch · Period · 1829 · 252",
+                "y": 13.499405522004285,
+                "normal": [
+                  0.3252722470079271,
+                  0.8056909063859654,
+                  0.49503548225695426
+                ]
+              },
+              {
+                "name": "Aerial batch · Period · 1829 · 277",
+                "y": 13.029999732971191,
+                "normal": [
+                  0,
+                  1,
+                  0
+                ]
+              },
+              {
+                "name": "Aerial batch · Period · 1829 · 261",
+                "y": 12.800000190734863,
+                "normal": [
+                  0,
+                  1,
+                  0
+                ]
+              },
+              {
+                "name": "Aerial batch · Period · 1829 · 277",
+                "y": 12.789999961853027,
+                "normal": [
+                  0,
+                  1,
+                  0
+                ]
+              }
+            ]
+          },
+          {
+            "z": 17.2249,
+            "hits": [
+              {
+                "name": "Aerial batch · Period · 1829 · 252",
+                "y": 13.422664018229298,
+                "normal": [
+                  0.3252722470079271,
+                  0.8056909063859654,
+                  0.49503548225695426
+                ]
+              },
+              {
+                "name": "Aerial batch · Period · 1829 · 277",
+                "y": 13.029999732971191,
+                "normal": [
+                  0,
+                  1,
+                  0
+                ]
+              },
+              {
+                "name": "Aerial batch · Period · 1829 · 261",
+                "y": 12.800000190734867,
+                "normal": [
+                  0,
+                  1,
+                  0
+                ]
+              },
+              {
+                "name": "Aerial batch · Period · 1829 · 273",
+                "y": 12.727839432127883,
+                "normal": [
+                  0.3689161180709538,
+                  0.9294626930799634,
+                  0
+                ]
+              }
+            ]
+          },
+          {
+            "z": 17.3,
+            "hits": [
+              {
+                "name": "Aerial batch · Period · 1829 · 273",
+                "y": 13.425966757938937,
+                "normal": [
+                  0.4874419128133125,
+                  0.724433125199453,
+                  -0.4874392564685906
+                ]
+              },
+              {
+                "name": "Aerial batch · Period · 1829 · 273",
+                "y": 13.341557451557659,
+                "normal": [
+                  0.395644589783946,
+                  0.918403701307161,
+                  0
+                ]
+              },
+              {
+                "name": "Aerial batch · Period · 1829 · 273",
+                "y": 12.733988103539268,
+                "normal": [
+                  0.4948107965334043,
+                  0.7143700380530779,
+                  -0.4948107965334043
+                ]
+              },
+              {
+                "name": "Aerial batch · Period · 1829 · 273",
+                "y": 12.59921274463943,
+                "normal": [
+                  0.38185216057177324,
+                  0.9242234185880969,
+                  0
+                ]
+              }
+            ]
+          },
+          {
+            "z": 17.4,
+            "hits": [
+              {
+                "name": "Aerial batch · Period · 1829 · 273",
+                "y": 13.493252369200068,
+                "normal": [
+                  0.4874419128133125,
+                  0.724433125199453,
+                  -0.4874392564685906
+                ]
+              },
+              {
+                "name": "Aerial batch · Period · 1829 · 273",
+                "y": 13.393252977907686,
+                "normal": [
+                  0.4614724037265169,
+                  0.7576826884152842,
+                  -0.46147607118317413
+                ]
+              },
+              {
+                "name": "Aerial batch · Period · 1829 · 273",
+                "y": 12.80325320510017,
+                "normal": [
+                  0.08143236406500166,
+                  0.9933466364595847,
+                  -0.08143236406500166
+                ]
+              },
+              {
+                "name": "Aerial batch · Period · 1829 · 273",
+                "y": 12.663252459617542,
+                "normal": [
+                  0.47780409094748694,
+                  0.7371592039948062,
+                  -0.4778070307557116
+                ]
+              }
+            ]
+          },
+          {
+            "z": 17.5,
+            "hits": [
+              {
+                "name": "Aerial batch · Period · 1829 · 273",
+                "y": 13.501450493030148,
+                "normal": [
+                  0.08143286875399446,
+                  0.9933465900924411,
+                  -0.08143242498056132
+                ]
+              },
+              {
+                "name": "Aerial batch · Period · 1829 · 273",
+                "y": 13.401451065234742,
+                "normal": [
+                  0.0814317850525093,
+                  0.9933466783388074,
+                  -0.08143243221480935
+                ]
+              },
+              {
+                "name": "Aerial batch · Period · 1829 · 273",
+                "y": 12.811450984311993,
+                "normal": [
+                  0.08143236406500166,
+                  0.9933466364595847,
+                  -0.08143236406500166
+                ]
+              },
+              {
+                "name": "Aerial batch · Period · 1829 · 273",
+                "y": 12.671450569324097,
+                "normal": [
+                  0.08143193021562284,
+                  0.9933466665181696,
+                  -0.08143243124577879
+                ]
+              }
+            ]
+          },
+          {
+            "z": 17.6,
+            "hits": [
+              {
+                "name": "Aerial batch · Period · 1829 · 273",
+                "y": 13.509648278756984,
+                "normal": [
+                  0.08143286875399446,
+                  0.9933465900924411,
+                  -0.08143242498056132
+                ]
+              },
+              {
+                "name": "Aerial batch · Period · 1829 · 273",
+                "y": 13.40964885096157,
+                "normal": [
+                  0.0814317850525093,
+                  0.9933466783388074,
+                  -0.08143243221480935
+                ]
+              },
+              {
+                "name": "Aerial batch · Period · 1829 · 273",
+                "y": 12.819648763523812,
+                "normal": [
+                  0.08143236406500166,
+                  0.9933466364595847,
+                  -0.08143236406500166
+                ]
+              },
+              {
+                "name": "Aerial batch · Period · 1829 · 273",
+                "y": 12.679648355050926,
+                "normal": [
+                  0.08143193021562284,
+                  0.9933466665181696,
+                  -0.08143243124577879
+                ]
+              }
+            ]
+          },
+          {
+            "z": 18,
+            "hits": [
+              {
+                "name": "Aerial batch · Period · 1829 · 273",
+                "y": 13.542439421664305,
+                "normal": [
+                  0.08143286875399446,
+                  0.9933465900924411,
+                  -0.08143242498056132
+                ]
+              },
+              {
+                "name": "Aerial batch · Period · 1829 · 273",
+                "y": 13.442439993868895,
+                "normal": [
+                  0.0814317850525093,
+                  0.9933466783388074,
+                  -0.08143243221480935
+                ]
+              },
+              {
+                "name": "Aerial batch · Period · 1829 · 273",
+                "y": 12.852439880371094,
+                "normal": [
+                  0.08143236406500166,
+                  0.9933466364595847,
+                  -0.08143236406500166
+                ]
+              },
+              {
+                "name": "Aerial batch · Period · 1829 · 273",
+                "y": 12.712439497958254,
+                "normal": [
+                  0.08143193021562284,
+                  0.9933466665181696,
+                  -0.08143243124577879
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "x": -22.4,
+        "rows": [
+          {
+            "z": 16.5,
+            "hits": [
+              {
+                "name": "Aerial batch · Period · 1829 · 252",
+                "y": 13.525554584042116,
+                "normal": [
+                  0.5316899440315657,
+                  0.8469390789281781,
+                  -7.492622884696103e-9
+                ]
+              },
+              {
+                "name": "Aerial batch · Period · 1829 · 277",
+                "y": 13.029999732971191,
+                "normal": [
+                  0,
+                  1,
+                  0
+                ]
+              },
+              {
+                "name": "",
+                "y": 12.800000190734863,
+                "normal": [
+                  0,
+                  1,
+                  0
+                ]
+              },
+              {
+                "name": "Aerial batch · Period · 1829 · 277",
+                "y": 12.789999961853027,
+                "normal": [
+                  0,
+                  1,
+                  0
+                ]
+              }
+            ]
+          },
+          {
+            "z": 16.8,
+            "hits": [
+              {
+                "name": "Aerial batch · Period · 1829 · 252",
+                "y": 13.512913157217909,
+                "normal": [
+                  0.5286684781567313,
+                  0.8421261329561998,
+                  0.1064575802640786
+                ]
+              },
+              {
+                "name": "Aerial batch · Period · 1829 · 277",
+                "y": 13.029999732971191,
+                "normal": [
+                  0,
+                  1,
+                  0
+                ]
+              },
+              {
+                "name": "",
+                "y": 12.800000190734863,
+                "normal": [
+                  0,
+                  1,
+                  0
+                ]
+              },
+              {
+                "name": "Aerial batch · Period · 1829 · 277",
+                "y": 12.789999961853027,
+                "normal": [
+                  0,
+                  1,
+                  0
+                ]
+              }
+            ]
+          },
+          {
+            "z": 17,
+            "hits": [
+              {
+                "name": "Aerial batch · Period · 1829 · 252",
+                "y": 13.487630108492095,
+                "normal": [
+                  0.5286684781567313,
+                  0.8421261329561998,
+                  0.1064575802640786
+                ]
+              },
+              {
+                "name": "Aerial batch · Period · 1829 · 277",
+                "y": 13.029999732971191,
+                "normal": [
+                  0,
+                  1,
+                  0
+                ]
+              },
+              {
+                "name": "",
+                "y": 12.800000190734863,
+                "normal": [
+                  0,
+                  1,
+                  0
+                ]
+              },
+              {
+                "name": "Aerial batch · Period · 1829 · 261",
+                "y": 12.800000190734863,
+                "normal": [
+                  0,
+                  1,
+                  0
+                ]
+              }
+            ]
+          },
+          {
+            "z": 17.1,
+            "hits": [
+              {
+                "name": "Aerial batch · Period · 1829 · 252",
+                "y": 13.459033681583872,
+                "normal": [
+                  0.3252722470079271,
+                  0.8056909063859654,
+                  0.49503548225695426
+                ]
+              },
+              {
+                "name": "Aerial batch · Period · 1829 · 277",
+                "y": 13.029999732971191,
+                "normal": [
+                  0,
+                  1,
+                  0
+                ]
+              },
+              {
+                "name": "Aerial batch · Period · 1829 · 261",
+                "y": 12.800000190734867,
+                "normal": [
+                  0,
+                  1,
+                  0
+                ]
+              },
+              {
+                "name": "Aerial batch · Period · 1829 · 277",
+                "y": 12.789999961853027,
+                "normal": [
+                  0,
+                  1,
+                  0
+                ]
+              }
+            ]
+          },
+          {
+            "z": 17.2249,
+            "hits": [
+              {
+                "name": "Aerial batch · Period · 1829 · 252",
+                "y": 13.382292177808882,
+                "normal": [
+                  0.3252722470079271,
+                  0.8056909063859654,
+                  0.49503548225695426
+                ]
+              },
+              {
+                "name": "Aerial batch · Period · 1829 · 277",
+                "y": 13.029999732971191,
+                "normal": [
+                  0,
+                  1,
+                  0
+                ]
+              },
+              {
+                "name": "Aerial batch · Period · 1829 · 261",
+                "y": 12.800000190734867,
+                "normal": [
+                  0,
+                  1,
+                  0
+                ]
+              },
+              {
+                "name": "Aerial batch · Period · 1829 · 273",
+                "y": 12.688148100693322,
+                "normal": [
+                  0.3689161180709538,
+                  0.9294626930799634,
+                  0
+                ]
+              }
+            ]
+          },
+          {
+            "z": 17.3,
+            "hits": [
+              {
+                "name": "Aerial batch · Period · 1829 · 273",
+                "y": 13.382230875943787,
+                "normal": [
+                  0.37436011114267875,
+                  0.9272834017630431,
+                  0
+                ]
+              },
+              {
+                "name": "Aerial batch · Period · 1829 · 273",
+                "y": 13.298477857124311,
+                "normal": [
+                  0.395644589783946,
+                  0.918403701307161,
+                  0
+                ]
+              },
+              {
+                "name": "Aerial batch · Period · 1829 · 273",
+                "y": 12.688148100693322,
+                "normal": [
+                  0.3689161180709538,
+                  0.9294626930799634,
+                  0
+                ]
+              },
+              {
+                "name": "Aerial batch · Period · 1829 · 273",
+                "y": 12.55789674323848,
+                "normal": [
+                  0.38185216057177324,
+                  0.9242234185880969,
+                  0
+                ]
+              }
+            ]
+          },
+          {
+            "z": 17.4,
+            "hits": [
+              {
+                "name": "Aerial batch · Period · 1829 · 273",
+                "y": 13.425966391259855,
+                "normal": [
+                  0.4874419128133125,
+                  0.724433125199453,
+                  -0.4874392564685906
+                ]
+              },
+              {
+                "name": "Aerial batch · Period · 1829 · 273",
+                "y": 13.332347217385205,
+                "normal": [
+                  0.4614724037265169,
+                  0.7576826884152842,
+                  -0.46147607118317413
+                ]
+              },
+              {
+                "name": "Aerial batch · Period · 1829 · 273",
+                "y": 12.73398810353926,
+                "normal": [
+                  0.4948107965334043,
+                  0.7143700380530779,
+                  -0.4948107965334043
+                ]
+              },
+              {
+                "name": "Aerial batch · Period · 1829 · 273",
+                "y": 12.598435512564834,
+                "normal": [
+                  0.47780409094748694,
+                  0.7371592039948062,
+                  -0.4778070307557116
+                ]
+              }
+            ]
+          },
+          {
+            "z": 17.5,
+            "hits": [
+              {
+                "name": "Aerial batch · Period · 1829 · 273",
+                "y": 13.493252002520986,
+                "normal": [
+                  0.4874419128133125,
+                  0.724433125199453,
+                  -0.4874392564685906
+                ]
+              },
+              {
+                "name": "Aerial batch · Period · 1829 · 273",
+                "y": 13.393253344657598,
+                "normal": [
+                  0.0814317850525093,
+                  0.9933466783388074,
+                  -0.08143243221480935
+                ]
+              },
+              {
+                "name": "Aerial batch · Period · 1829 · 273",
+                "y": 12.80325320510017,
+                "normal": [
+                  0.08143236406500166,
+                  0.9933466364595847,
+                  -0.08143236406500166
+                ]
+              },
+              {
+                "name": "Aerial batch · Period · 1829 · 273",
+                "y": 12.663252834035863,
+                "normal": [
+                  0.08143193021562284,
+                  0.9933466665181696,
+                  -0.08143243124577879
+                ]
+              }
+            ]
+          },
+          {
+            "z": 17.6,
+            "hits": [
+              {
+                "name": "Aerial batch · Period · 1829 · 273",
+                "y": 13.50145044835557,
+                "normal": [
+                  0.08143286875399446,
+                  0.9933465900924411,
+                  -0.08143242498056132
+                ]
+              },
+              {
+                "name": "Aerial batch · Period · 1829 · 273",
+                "y": 13.401451130384434,
+                "normal": [
+                  0.0814317850525093,
+                  0.9933466783388074,
+                  -0.08143243221480935
+                ]
+              },
+              {
+                "name": "Aerial batch · Period · 1829 · 273",
+                "y": 12.811450984311993,
+                "normal": [
+                  0.08143236406500166,
+                  0.9933466364595847,
+                  -0.08143236406500166
+                ]
+              },
+              {
+                "name": "Aerial batch · Period · 1829 · 273",
+                "y": 12.671450619762698,
+                "normal": [
+                  0.08143193021562284,
+                  0.9933466665181696,
+                  -0.08143243124577879
+                ]
+              }
+            ]
+          },
+          {
+            "z": 18,
+            "hits": [
+              {
+                "name": "Aerial batch · Period · 1829 · 273",
+                "y": 13.534241591262894,
+                "normal": [
+                  0.08143286875399446,
+                  0.9933465900924411,
+                  -0.08143242498056132
+                ]
+              },
+              {
+                "name": "Aerial batch · Period · 1829 · 273",
+                "y": 13.434242273291755,
+                "normal": [
+                  0.0814317850525093,
+                  0.9933466783388074,
+                  -0.08143243221480935
+                ]
+              },
+              {
+                "name": "Aerial batch · Period · 1829 · 273",
+                "y": 12.84424210115927,
+                "normal": [
+                  0.08143236406500166,
+                  0.9933466364595847,
+                  -0.08143236406500166
+                ]
+              },
+              {
+                "name": "Aerial batch · Period · 1829 · 273",
+                "y": 12.704241762670023,
+                "normal": [
+                  0.08143193021562284,
+                  0.9933466665181696,
+                  -0.08143243124577879
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "x": -22.3,
+        "rows": [
+          {
+            "z": 16.5,
+            "hits": [
+              {
+                "name": "Aerial batch · Period · 1829 · 252",
+                "y": 13.493332635197739,
+                "normal": [
+                  0,
+                  0.9010018908463059,
+                  0.4338151595914802
+                ]
+              },
+              {
+                "name": "Aerial batch · Period · 1829 · 277",
+                "y": 13.029999732971195,
+                "normal": [
+                  0,
+                  1,
+                  0
+                ]
+              },
+              {
+                "name": "",
+                "y": 12.800000190734863,
+                "normal": [
+                  0,
+                  1,
+                  0
+                ]
+              },
+              {
+                "name": "Aerial batch · Period · 1829 · 277",
+                "y": 12.789999961853027,
+                "normal": [
+                  0,
+                  1,
+                  0
+                ]
+              }
+            ]
+          },
+          {
+            "z": 16.8,
+            "hits": [
+              {
+                "name": "Aerial batch · Period · 1829 · 252",
+                "y": 13.450135331252472,
+                "normal": [
+                  0.5286684781567313,
+                  0.8421261329561998,
+                  0.1064575802640786
+                ]
+              },
+              {
+                "name": "Aerial batch · Period · 1829 · 277",
+                "y": 13.029999732971191,
+                "normal": [
+                  0,
+                  1,
+                  0
+                ]
+              },
+              {
+                "name": "",
+                "y": 12.800000190734867,
+                "normal": [
+                  0,
+                  1,
+                  0
+                ]
+              },
+              {
+                "name": "Aerial batch · Period · 1829 · 277",
+                "y": 12.789999961853027,
+                "normal": [
+                  0,
+                  1,
+                  0
+                ]
+              }
+            ]
+          },
+          {
+            "z": 17,
+            "hits": [
+              {
+                "name": "Aerial batch · Period · 1829 · 252",
+                "y": 13.424852282526658,
+                "normal": [
+                  0.5286684781567313,
+                  0.8421261329561998,
+                  0.1064575802640786
+                ]
+              },
+              {
+                "name": "Aerial batch · Period · 1829 · 277",
+                "y": 13.029999732971191,
+                "normal": [
+                  0,
+                  1,
+                  0
+                ]
+              },
+              {
+                "name": "",
+                "y": 12.800000190734863,
+                "normal": [
+                  0,
+                  1,
+                  0
+                ]
+              },
+              {
+                "name": "Aerial batch · Period · 1829 · 261",
+                "y": 12.800000190734863,
+                "normal": [
+                  0,
+                  1,
+                  0
+                ]
+              }
+            ]
+          },
+          {
+            "z": 17.1,
+            "hits": [
+              {
+                "name": "Aerial batch · Period · 1829 · 252",
+                "y": 13.412210758163745,
+                "normal": [
+                  0.5286684781567313,
+                  0.8421261329561998,
+                  0.1064575802640786
+                ]
+              },
+              {
+                "name": "Aerial batch · Period · 1829 · 277",
+                "y": 13.029999732971188,
+                "normal": [
+                  0,
+                  1,
+                  0
+                ]
+              },
+              {
+                "name": "Aerial batch · Period · 1829 · 261",
+                "y": 12.800000190734863,
+                "normal": [
+                  0,
+                  1,
+                  0
+                ]
+              },
+              {
+                "name": "Aerial batch · Period · 1829 · 277",
+                "y": 12.789999961853024,
+                "normal": [
+                  0,
+                  1,
+                  0
+                ]
+              }
+            ]
+          },
+          {
+            "z": 17.2249,
+            "hits": [
+              {
+                "name": "Aerial batch · Period · 1829 · 252",
+                "y": 13.34192033738847,
+                "normal": [
+                  0.3252722470079271,
+                  0.8056909063859654,
+                  0.49503548225695426
+                ]
+              },
+              {
+                "name": "Aerial batch · Period · 1829 · 277",
+                "y": 13.029999732971188,
+                "normal": [
+                  0,
+                  1,
+                  0
+                ]
+              },
+              {
+                "name": "Aerial batch · Period · 1829 · 261",
+                "y": 12.800000190734863,
+                "normal": [
+                  0,
+                  1,
+                  0
+                ]
+              },
+              {
+                "name": "Aerial batch · Period · 1829 · 273",
+                "y": 12.648456769258761,
+                "normal": [
+                  0.3689161180709538,
+                  0.9294626930799634,
+                  0
+                ]
+              }
+            ]
+          },
+          {
+            "z": 17.3,
+            "hits": [
+              {
+                "name": "Aerial batch · Period · 1829 · 273",
+                "y": 13.341859171842223,
+                "normal": [
+                  0.37436011114267875,
+                  0.9272834017630431,
+                  0
+                ]
+              },
+              {
+                "name": "Aerial batch · Period · 1829 · 273",
+                "y": 13.25539826269097,
+                "normal": [
+                  0.395644589783946,
+                  0.918403701307161,
+                  0
+                ]
+              },
+              {
+                "name": "Aerial batch · Period · 1829 · 273",
+                "y": 12.648456769258761,
+                "normal": [
+                  0.3689161180709538,
+                  0.9294626930799634,
+                  0
+                ]
+              },
+              {
+                "name": "Aerial batch · Period · 1829 · 273",
+                "y": 12.516580741837526,
+                "normal": [
+                  0.38185216057177324,
+                  0.9242234185880969,
+                  0
+                ]
+              }
+            ]
+          },
+          {
+            "z": 17.4,
+            "hits": [
+              {
+                "name": "Aerial batch · Period · 1829 · 273",
+                "y": 13.35868041331964,
+                "normal": [
+                  0.4874419128133125,
+                  0.724433125199453,
+                  -0.4874392564685906
+                ]
+              },
+              {
+                "name": "Aerial batch · Period · 1829 · 273",
+                "y": 13.271441456862725,
+                "normal": [
+                  0.4614724037265169,
+                  0.7576826884152842,
+                  -0.46147607118317413
+                ]
+              },
+              {
+                "name": "Aerial batch · Period · 1829 · 273",
+                "y": 12.664722769024124,
+                "normal": [
+                  0.4948107965334043,
+                  0.7143700380530779,
+                  -0.4948107965334043
+                ]
+              },
+              {
+                "name": "Aerial batch · Period · 1829 · 273",
+                "y": 12.533618565512125,
+                "normal": [
+                  0.47780409094748694,
+                  0.7371592039948062,
+                  -0.4778070307557116
+                ]
+              }
+            ]
+          },
+          {
+            "z": 17.5,
+            "hits": [
+              {
+                "name": "Aerial batch · Period · 1829 · 273",
+                "y": 13.425966024580774,
+                "normal": [
+                  0.4874419128133125,
+                  0.724433125199453,
+                  -0.4874392564685906
+                ]
+              },
+              {
+                "name": "Aerial batch · Period · 1829 · 273",
+                "y": 13.332347701421163,
+                "normal": [
+                  0.4614724037265169,
+                  0.7576826884152842,
+                  -0.46147607118317413
+                ]
+              },
+              {
+                "name": "Aerial batch · Period · 1829 · 273",
+                "y": 12.733988103539268,
+                "normal": [
+                  0.4948107965334043,
+                  0.7143700380530779,
+                  -0.4948107965334043
+                ]
+              },
+              {
+                "name": "Aerial batch · Period · 1829 · 273",
+                "y": 12.598435911367186,
+                "normal": [
+                  0.47780409094748694,
+                  0.7371592039948062,
+                  -0.4778070307557116
+                ]
+              }
+            ]
+          },
+          {
+            "z": 17.6,
+            "hits": [
+              {
+                "name": "West semi-basement lower paving",
+                "y": -1.020000000000004,
+                "normal": [
+                  0,
+                  0,
+                  1
+                ]
+              }
+            ]
+          },
+          {
+            "z": 18,
+            "hits": [
+              {
+                "name": "",
+                "y": 4.020000036805868,
+                "normal": [
+                  0,
+                  1,
+                  0
+                ]
+              },
+              {
+                "name": "",
+                "y": 0.39500000700354576,
+                "normal": [
+                  0,
+                  1,
+                  0
+                ]
+              },
+              {
+                "name": "West semi-basement lower paving",
+                "y": -1.020000000000004,
+                "normal": [
+                  0,
+                  0,
+                  1
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "x": -22.2,
+        "rows": [
+          {
+            "z": 16.5,
+            "hits": [
+              {
+                "name": "Aerial batch · Period · 1829 · 252",
+                "y": 13.493332635199444,
+                "normal": [
+                  -0.000002014903442176583,
+                  0.9010018908444769,
+                  0.4338151595905996
+                ]
+              },
+              {
+                "name": "Aerial batch · Period · 1829 · 277",
+                "y": 13.029999732971191,
+                "normal": [
+                  0,
+                  1,
+                  0
+                ]
+              },
+              {
+                "name": "",
+                "y": 12.800000190734863,
+                "normal": [
+                  0,
+                  1,
+                  0
+                ]
+              },
+              {
+                "name": "Aerial batch · Period · 1829 · 277",
+                "y": 12.789999961853024,
+                "normal": [
+                  0,
+                  1,
+                  0
+                ]
+              }
+            ]
+          },
+          {
+            "z": 16.8,
+            "hits": [
+              {
+                "name": "Aerial batch · Period · 1829 · 252",
+                "y": 13.387357505287032,
+                "normal": [
+                  0.5286684781567313,
+                  0.8421261329561998,
+                  0.1064575802640786
+                ]
+              },
+              {
+                "name": "Aerial batch · Period · 1829 · 277",
+                "y": 13.029999732971195,
+                "normal": [
+                  0,
+                  1,
+                  0
+                ]
+              },
+              {
+                "name": "",
+                "y": 12.800000190734863,
+                "normal": [
+                  0,
+                  1,
+                  0
+                ]
+              },
+              {
+                "name": "Aerial batch · Period · 1829 · 277",
+                "y": 12.789999961853027,
+                "normal": [
+                  0,
+                  1,
+                  0
+                ]
+              }
+            ]
+          },
+          {
+            "z": 17,
+            "hits": [
+              {
+                "name": "Aerial batch · Period · 1829 · 252",
+                "y": 13.362074456561214,
+                "normal": [
+                  0.5286684781567313,
+                  0.8421261329561998,
+                  0.1064575802640786
+                ]
+              },
+              {
+                "name": "Aerial batch · Period · 1829 · 277",
+                "y": 13.029999732971191,
+                "normal": [
+                  0,
+                  1,
+                  0
+                ]
+              },
+              {
+                "name": "",
+                "y": 12.80000019073486,
+                "normal": [
+                  0,
+                  1,
+                  0
+                ]
+              },
+              {
+                "name": "Aerial batch · Period · 1829 · 261",
+                "y": 12.80000019073486,
+                "normal": [
+                  0,
+                  1,
+                  0
+                ]
+              }
+            ]
+          },
+          {
+            "z": 17.1,
+            "hits": [
+              {
+                "name": "Aerial batch · Period · 1829 · 252",
+                "y": 13.349432932198308,
+                "normal": [
+                  0.5286684781567313,
+                  0.8421261329561998,
+                  0.1064575802640786
+                ]
+              },
+              {
+                "name": "Aerial batch · Period · 1829 · 277",
+                "y": 13.029999732971191,
+                "normal": [
+                  0,
+                  1,
+                  0
+                ]
+              },
+              {
+                "name": "Aerial batch · Period · 1829 · 261",
+                "y": 12.800000190734863,
+                "normal": [
+                  0,
+                  1,
+                  0
+                ]
+              },
+              {
+                "name": "Aerial batch · Period · 1829 · 277",
+                "y": 12.789999961853027,
+                "normal": [
+                  0,
+                  1,
+                  0
+                ]
+              }
+            ]
+          },
+          {
+            "z": 17.2249,
+            "hits": [
+              {
+                "name": "Aerial batch · Period · 1829 · 252",
+                "y": 13.301548496968053,
+                "normal": [
+                  0.3252722470079271,
+                  0.8056909063859654,
+                  0.49503548225695426
+                ]
+              },
+              {
+                "name": "Aerial batch · Period · 1829 · 277",
+                "y": 13.029999732971191,
+                "normal": [
+                  0,
+                  1,
+                  0
+                ]
+              },
+              {
+                "name": "Aerial batch · Period · 1829 · 261",
+                "y": 12.800000190734863,
+                "normal": [
+                  0,
+                  1,
+                  0
+                ]
+              },
+              {
+                "name": "Aerial batch · Period · 1829 · 273",
+                "y": 12.608765437824204,
+                "normal": [
+                  0.3689161180709538,
+                  0.9294626930799634,
+                  0
+                ]
+              }
+            ]
+          },
+          {
+            "z": 17.3,
+            "hits": [
+              {
+                "name": "Aerial batch · Period · 1829 · 273",
+                "y": 13.301487467740664,
+                "normal": [
+                  0.37436011114267875,
+                  0.9272834017630431,
+                  0
+                ]
+              },
+              {
+                "name": "Aerial batch · Period · 1829 · 273",
+                "y": 13.212318668257627,
+                "normal": [
+                  0.395644589783946,
+                  0.918403701307161,
+                  0
+                ]
+              },
+              {
+                "name": "Aerial batch · Period · 1829 · 273",
+                "y": 12.608765437824204,
+                "normal": [
+                  0.3689161180709538,
+                  0.9294626930799634,
+                  0
+                ]
+              },
+              {
+                "name": "Aerial batch · Period · 1829 · 273",
+                "y": 12.475264740436579,
+                "normal": [
+                  0.38185216057177324,
+                  0.9242234185880969,
+                  0
+                ]
+              }
+            ]
+          },
+          {
+            "z": 17.4,
+            "hits": [
+              {
+                "name": "Aerial batch · Period · 1829 · 273",
+                "y": 13.30148746774066,
+                "normal": [
+                  0.37436011114267875,
+                  0.9272834017630431,
+                  0
+                ]
+              },
+              {
+                "name": "Aerial batch · Period · 1829 · 273",
+                "y": 13.212318668257627,
+                "normal": [
+                  0.395644589783946,
+                  0.918403701307161,
+                  0
+                ]
+              },
+              {
+                "name": "Aerial batch · Period · 1829 · 273",
+                "y": 12.608765437824204,
+                "normal": [
+                  0.3689161180709538,
+                  0.9294626930799634,
+                  0
+                ]
+              },
+              {
+                "name": "Aerial batch · Period · 1829 · 273",
+                "y": 12.475264740436579,
+                "normal": [
+                  0.38185216057177324,
+                  0.9242234185880969,
+                  0
+                ]
+              }
+            ]
+          },
+          {
+            "z": 17.5,
+            "hits": [
+              {
+                "name": "Aerial batch · Period · 1829 · 273",
+                "y": 13.358680046640561,
+                "normal": [
+                  0.4874419128133125,
+                  0.724433125199453,
+                  -0.4874392564685906
+                ]
+              },
+              {
+                "name": "Aerial batch · Period · 1829 · 273",
+                "y": 13.271441940898683,
+                "normal": [
+                  0.4614724037265169,
+                  0.7576826884152842,
+                  -0.46147607118317413
+                ]
+              },
+              {
+                "name": "Aerial batch · Period · 1829 · 273",
+                "y": 12.664722769024127,
+                "normal": [
+                  0.4948107965334043,
+                  0.7143700380530779,
+                  -0.4948107965334043
+                ]
+              },
+              {
+                "name": "Aerial batch · Period · 1829 · 273",
+                "y": 12.533618964314474,
+                "normal": [
+                  0.47780409094748694,
+                  0.7371592039948062,
+                  -0.4778070307557116
+                ]
+              }
+            ]
+          },
+          {
+            "z": 17.6,
+            "hits": [
+              {
+                "name": "West semi-basement lower paving",
+                "y": -1.020000000000004,
+                "normal": [
+                  0,
+                  0,
+                  1
+                ]
+              }
+            ]
+          },
+          {
+            "z": 18,
+            "hits": [
+              {
+                "name": "West semi-basement lower paving",
+                "y": -1.020000000000004,
+                "normal": [
+                  0,
+                  0,
+                  1
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "x": -22.1,
+        "rows": [
+          {
+            "z": 16.5,
+            "hits": [
+              {
+                "name": "Aerial batch · Period · 1829 · 252",
+                "y": 13.493332858828659,
+                "normal": [
+                  -0.000002014903442176583,
+                  0.9010018908444769,
+                  0.4338151595905996
+                ]
+              },
+              {
+                "name": "Aerial batch · Period · 1829 · 277",
+                "y": 13.029999732971191,
+                "normal": [
+                  0,
+                  1,
+                  0
+                ]
+              },
+              {
+                "name": "",
+                "y": 12.800000190734863,
+                "normal": [
+                  0,
+                  1,
+                  0
+                ]
+              },
+              {
+                "name": "Aerial batch · Period · 1829 · 277",
+                "y": 12.789999961853027,
+                "normal": [
+                  0,
+                  1,
+                  0
+                ]
+              }
+            ]
+          },
+          {
+            "z": 16.8,
+            "hits": [
+              {
+                "name": "Aerial batch · Period · 1829 · 252",
+                "y": 13.34807838448312,
+                "normal": [
+                  0,
+                  0.898133996930833,
+                  0.43972187068310176
+                ]
+              },
+              {
+                "name": "Aerial batch · Period · 1829 · 277",
+                "y": 13.029999732971191,
+                "normal": [
+                  0,
+                  1,
+                  0
+                ]
+              },
+              {
+                "name": "",
+                "y": 12.800000190734863,
+                "normal": [
+                  0,
+                  1,
+                  0
+                ]
+              },
+              {
+                "name": "Aerial batch · Period · 1829 · 277",
+                "y": 12.789999961853027,
+                "normal": [
+                  0,
+                  1,
+                  0
+                ]
+              }
+            ]
+          },
+          {
+            "z": 17,
+            "hits": [
+              {
+                "name": "Aerial batch · Period · 1829 · 252",
+                "y": 13.303089582894309,
+                "normal": [
+                  0.36888034747958187,
+                  0.9137135002988672,
+                  0.1704550633302947
+                ]
+              },
+              {
+                "name": "Aerial batch · Period · 1829 · 277",
+                "y": 13.029999732971191,
+                "normal": [
+                  0,
+                  1,
+                  0
+                ]
+              },
+              {
+                "name": "",
+                "y": 12.800000190734863,
+                "normal": [
+                  0,
+                  1,
+                  0
+                ]
+              },
+              {
+                "name": "Aerial batch · Period · 1829 · 261",
+                "y": 12.80000019073486,
+                "normal": [
+                  0,
+                  1,
+                  0
+                ]
+              }
+            ]
+          },
+          {
+            "z": 17.1,
+            "hits": [
+              {
+                "name": "Aerial batch · Period · 1829 · 252",
+                "y": 13.286655106232871,
+                "normal": [
+                  0.5286684781567313,
+                  0.8421261329561998,
+                  0.1064575802640786
+                ]
+              },
+              {
+                "name": "Aerial batch · Period · 1829 · 277",
+                "y": 13.029999732971191,
+                "normal": [
+                  0,
+                  1,
+                  0
+                ]
+              },
+              {
+                "name": "Aerial batch · Period · 1829 · 261",
+                "y": 12.80000019073486,
+                "normal": [
+                  0,
+                  1,
+                  0
+                ]
+              },
+              {
+                "name": "Aerial batch · Period · 1829 · 277",
+                "y": 12.789999961853024,
+                "normal": [
+                  0,
+                  1,
+                  0
+                ]
+              }
+            ]
+          },
+          {
+            "z": 17.2249,
+            "hits": [
+              {
+                "name": "Aerial batch · Period · 1829 · 252",
+                "y": 13.26117665654764,
+                "normal": [
+                  0.3252722470079271,
+                  0.8056909063859654,
+                  0.49503548225695426
+                ]
+              },
+              {
+                "name": "Aerial batch · Period · 1829 · 277",
+                "y": 13.029999732971191,
+                "normal": [
+                  0,
+                  1,
+                  0
+                ]
+              },
+              {
+                "name": "Aerial batch · Period · 1829 · 261",
+                "y": 12.80000019073486,
+                "normal": [
+                  0,
+                  1,
+                  0
+                ]
+              },
+              {
+                "name": "Aerial batch · Period · 1829 · 273",
+                "y": 12.569074106389646,
+                "normal": [
+                  0.3689161180709538,
+                  0.9294626930799634,
+                  0
+                ]
+              }
+            ]
+          },
+          {
+            "z": 17.3,
+            "hits": [
+              {
+                "name": "Aerial batch · Period · 1829 · 273",
+                "y": 13.2611157636391,
+                "normal": [
+                  0.37436011114267875,
+                  0.9272834017630431,
+                  0
+                ]
+              },
+              {
+                "name": "Aerial batch · Period · 1829 · 273",
+                "y": 13.169239073824283,
+                "normal": [
+                  0.395644589783946,
+                  0.918403701307161,
+                  0
+                ]
+              },
+              {
+                "name": "Aerial batch · Period · 1829 · 273",
+                "y": 12.569074106389646,
+                "normal": [
+                  0.3689161180709538,
+                  0.9294626930799634,
+                  0
+                ]
+              },
+              {
+                "name": "Aerial batch · Period · 1829 · 273",
+                "y": 12.433948739035625,
+                "normal": [
+                  0.38185216057177324,
+                  0.9242234185880969,
+                  0
+                ]
+              }
+            ]
+          },
+          {
+            "z": 17.4,
+            "hits": [
+              {
+                "name": "Aerial batch · Period · 1829 · 273",
+                "y": 13.2611157636391,
+                "normal": [
+                  0.37436011114267875,
+                  0.9272834017630431,
+                  0
+                ]
+              },
+              {
+                "name": "Aerial batch · Period · 1829 · 273",
+                "y": 13.169239073824283,
+                "normal": [
+                  0.395644589783946,
+                  0.918403701307161,
+                  0
+                ]
+              },
+              {
+                "name": "Aerial batch · Period · 1829 · 273",
+                "y": 12.569074106389646,
+                "normal": [
+                  0.3689161180709538,
+                  0.9294626930799634,
+                  0
+                ]
+              },
+              {
+                "name": "Aerial batch · Period · 1829 · 273",
+                "y": 12.433948739035625,
+                "normal": [
+                  0.38185216057177324,
+                  0.9242234185880969,
+                  0
+                ]
+              }
+            ]
+          },
+          {
+            "z": 17.5,
+            "hits": [
+              {
+                "name": "Aerial batch · Period · 1829 · 273",
+                "y": 13.291394068700349,
+                "normal": [
+                  0.4874419128133125,
+                  0.724433125199453,
+                  -0.4874392564685906
+                ]
+              },
+              {
+                "name": "Aerial batch · Period · 1829 · 273",
+                "y": 13.210536180376202,
+                "normal": [
+                  0.4614724037265169,
+                  0.7576826884152842,
+                  -0.46147607118317413
+                ]
+              },
+              {
+                "name": "Aerial batch · Period · 1829 · 273",
+                "y": 12.595457434508983,
+                "normal": [
+                  0.4948107965334043,
+                  0.7143700380530779,
+                  -0.4948107965334043
+                ]
+              },
+              {
+                "name": "Aerial batch · Period · 1829 · 273",
+                "y": 12.468802017261766,
+                "normal": [
+                  0.47780409094748694,
+                  0.7371592039948062,
+                  -0.4778070307557116
+                ]
+              }
+            ]
+          },
+          {
+            "z": 17.6,
+            "hits": [
+              {
+                "name": "West semi-basement lower paving",
+                "y": -1.020000000000004,
+                "normal": [
+                  0,
+                  0,
+                  1
+                ]
+              }
+            ]
+          },
+          {
+            "z": 18,
+            "hits": [
+              {
+                "name": "West semi-basement lower paving",
+                "y": -1.020000000000004,
+                "normal": [
+                  0,
+                  0,
+                  1
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}

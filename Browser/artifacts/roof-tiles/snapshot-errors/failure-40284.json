@@ -1,0 +1,12 @@
+{
+  "actual": {
+    "count": 21634,
+    "digest": "207094ad7ef83c4cc5558f0f1bf081f0a686f08c650333c73393eba78f3501b5"
+  },
+  "expected": {
+    "count": 21634,
+    "digest": "cc0689f27f95b1e11582174f9f322f241d10e2e25ad91c57b9d52601d8d3245f"
+  },
+  "message": "Approved annexe local geometry remains unchanged\n+ actual - expected\n\n  {\n    count: 21634,\n+   digest: '207094ad7ef83c4cc5558f0f1bf081f0a686f08c650333c73393eba78f3501b5'\n-   digest: 'cc0689f27f95b1e11582174f9f322f241d10e2e25ad91c57b9d52601d8d3245f'\n  }\n",
+  "stack": "AssertionError [ERR_ASSERTION]: Approved annexe local geometry remains unchanged\n+ actual - expected\n\n  {\n    count: 21634,\n+   digest: '207094ad7ef83c4cc5558f0f1bf081f0a686f08c650333c73393eba78f3501b5'\n-   digest: 'cc0689f27f95b1e11582174f9f322f241d10e2e25ad91c57b9d52601d8d3245f'\n  }\n\n    at file:///C:/Users/Harry/Documents/_escape-from-1829/Browser/artifacts/snapshot-annexe-shape.mjs:20:105\n    at ModuleJob.run (node:internal/modules/esm/module_job:561:25)\n    at async node:internal/modules/esm/loader:647:26\n    at async asyncRunEntryPointWithESMLoader (node:internal/modules/run_main:101:5)"
+}

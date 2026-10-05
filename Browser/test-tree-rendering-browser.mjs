@@ -2,14 +2,14 @@ import assert from 'node:assert/strict';
 import {spawn} from 'node:child_process';
 import {mkdir,writeFile} from 'node:fs/promises';
 import {fileURLToPath} from 'node:url';
-import {chromium} from 'playwright';
+import {launchHardwareBrowser} from './test-support/hardware-browser.mjs';
 
 const server=spawn(process.execPath,['serve.mjs'],{cwd:new URL('.',import.meta.url),windowsHide:true,env:{...process.env,PORT:'0'},stdio:'pipe'});
 const base=await new Promise((resolve,reject)=>{server.stdout.once('data',data=>resolve(String(data).match(/http:\/\/127\.0\.0\.1:\d+/)[0]));server.once('error',reject);});
 const artifacts=new URL('./artifacts/',import.meta.url);await mkdir(artifacts,{recursive:true});
 let browser;const errors=[],report=[];
 try{
-  browser=await chromium.launch({headless:true,...(process.env.MODEL_CHROME_PATH?{executablePath:process.env.MODEL_CHROME_PATH}:{}),args:['--use-angle=swiftshader','--enable-unsafe-swiftshader']});
+  browser=await launchHardwareBrowser({headless:true,...(process.env.MODEL_CHROME_PATH?{executablePath:process.env.MODEL_CHROME_PATH}:{})});
   for(const [profile,path,expectedMode] of [
     ['software','aerial.html?models=source','procedural'],
     ['software','aerial.html?models=compiled','compiled'],
@@ -23,14 +23,14 @@ try{
     const page=await browser.newPage({viewport:{width:1000,height:700}});
     page.setDefaultTimeout(120000);page.setDefaultNavigationTimeout(120000);
     page.on('pageerror',error=>errors.push(error.stack));
-    // Keep actual SwiftShader rendering; vary only what WebGL reports to the
-    // application for GPU and privacy-restricted startup scenarios.
-    if(profile!=='software')await page.addInitScript(profile=>{
+    // Render on the verified GPU in every profile. Mock only the application's
+    // renderer information to exercise software and privacy-restricted defaults.
+    if(profile!=='hardware')await page.addInitScript(profile=>{
       for(const type of [window.WebGLRenderingContext,window.WebGL2RenderingContext]){
         if(!type)continue;
         const proto=type.prototype,getParameter=proto.getParameter,getExtension=proto.getExtension;
         proto.getParameter=function(key){
-          if(key===0x9246)return 'ANGLE (Intel, Intel(R) UHD Graphics 620 Direct3D11)';
+          if(key===0x9246)return profile==='software'?'ANGLE (Google, SwiftShader driver)':'WebKit WebGL';
           if(key===this.RENDERER)return 'WebKit WebGL';
           return getParameter.call(this,key);
         };
@@ -47,7 +47,7 @@ try{
     });
     const visible=profile!=='software';assert.equal(initial.visible,visible);
     if(expectedMode)assert.equal(initial.mode,expectedMode);
-    if(profile==='software')assert.match(initial.renderer,/swiftshader/i,'Use a real software renderer');
+    if(profile==='software')assert.match(initial.renderer,/swiftshader/i,'Simulate software renderer information on the GPU');
     if(path.startsWith('explore'))assert(initial.refreshCount>0,'Initial timeline and tree visibility refresh walking obstacles');
     for(const period of ['0','12','8']){
       await page.locator('#periodSlider').fill(period);
@@ -75,5 +75,5 @@ try{
   }
   assert.deepEqual(errors,[]);
   await writeFile(new URL('tree-rendering-browser.json',artifacts),JSON.stringify(report,null,2)+'\n');
-  console.log('PASS: actual software rendering in source/compiled aerial and walking pages; simulated GPU/restricted defaults, timeline, manual override, shadows and walking refresh.');
+  console.log('PASS: hardware rendering in source/compiled aerial and walking pages; simulated software/restricted defaults, timeline, manual override, shadows and walking refresh.');
 }finally{await browser?.close();server.kill();}

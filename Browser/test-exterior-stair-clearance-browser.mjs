@@ -2,12 +2,12 @@ import assert from 'node:assert/strict';
 import {spawn} from 'node:child_process';
 import {mkdir,writeFile} from 'node:fs/promises';
 import {fileURLToPath} from 'node:url';
-import {chromium} from 'playwright';
+import {launchHardwareBrowser} from './test-support/hardware-browser.mjs';
 
 const out=new URL('./artifacts/exterior-stair-clearance/',import.meta.url);await mkdir(out,{recursive:true});
 const server=spawn(process.execPath,['Browser/serve.mjs'],{cwd:new URL('../',import.meta.url),windowsHide:true,env:{...process.env,PORT:'0'},stdio:'pipe'});
 const base=await new Promise((resolve,reject)=>{server.stdout.once('data',d=>resolve(String(d).match(/http:\/\/127\.0\.0\.1:\d+/)[0]));server.once('error',reject);});
-const browser=await chromium.launch({headless:true,executablePath:process.env.MODEL_CHROME_PATH??'C:/Program Files/Google/Chrome/Application/chrome.exe',args:['--use-angle=swiftshader','--enable-unsafe-swiftshader']});
+const browser=await launchHardwareBrowser({headless:true,executablePath:process.env.MODEL_CHROME_PATH??'C:/Program Files/Google/Chrome/Application/chrome.exe'});
 const views=[
  {name:'east-u',position:[15,7,-34],target:[21.5,3.4,-27.5],fov:62},
  {name:'west-u',position:[-15,7,-34],target:[-21.5,3.4,-27.5],fov:62},

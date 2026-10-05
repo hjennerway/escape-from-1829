@@ -1,0 +1,15 @@
+import assert from 'node:assert/strict';
+import {readFile,writeFile} from 'node:fs/promises';
+import {createHash} from 'node:crypto';
+import {modelSourceHash} from '../../model-build-inputs.mjs';
+const manifest=JSON.parse(await readFile(new URL('../../dist/compiled/manifest.json',import.meta.url),'utf8'));
+assert.equal(manifest.sourceHash,await modelSourceHash(),'The rebuilt model matches the final source');
+const binary=await readFile(new URL('../../dist/compiled/'+manifest.file,import.meta.url));
+assert.equal(createHash('sha256').update(binary).digest('hex'),manifest.sha256,'The compiled binary checksum matches');
+const source=JSON.parse(await readFile(new URL('final-source-validation.json',import.meta.url),'utf8'));
+const compiled=JSON.parse(await readFile(new URL('final-compiled-validation.json',import.meta.url),'utf8'));
+assert.equal(source.modelBuild.mode,'procedural');assert.equal(compiled.modelBuild.mode,'compiled');
+assert.deepEqual(source.errors,[]);assert.deepEqual(compiled.errors,[]);
+assert.deepEqual(source.probes,compiled.probes,'All marked visible roof rays match exactly');
+await writeFile(new URL('final-model.json',import.meta.url),JSON.stringify({sourceHash:manifest.sourceHash,file:manifest.file,sha256:manifest.sha256,bytes:manifest.bytes,matchedVisibleProbes:compiled.probes.length,errors:[]},null,2)+'\n');
+console.log('PASS: current source fingerprint, binary checksum and '+compiled.probes.length+' matching visible source/compiled roof probes.');

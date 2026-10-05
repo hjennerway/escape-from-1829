@@ -29,7 +29,7 @@
         },
         {
           "id": "R5",
-          "angle": 106.48442245880142,
+          "angle": 107.47486322489567,
           "hinge": -1,
           "limited": true
         },
@@ -65,7 +65,7 @@
         },
         {
           "id": "R11",
-          "angle": 121.02402088278905,
+          "angle": 122.01710487622768,
           "hinge": 1,
           "limited": true
         },
@@ -95,7 +95,7 @@
         },
         {
           "id": "R16",
-          "angle": 106.48442245880142,
+          "angle": 107.47486322489567,
           "hinge": -1,
           "limited": true
         },
@@ -263,7 +263,7 @@
         },
         {
           "id": "R5",
-          "angle": 106.48442245880142,
+          "angle": 107.47486322489567,
           "hinge": -1,
           "limited": true
         },
@@ -299,7 +299,7 @@
         },
         {
           "id": "R11",
-          "angle": 121.02402088278905,
+          "angle": 122.01710487614913,
           "hinge": 1,
           "limited": true
         },
@@ -389,7 +389,7 @@
         },
         {
           "id": "R27",
-          "angle": 94.48705045576207,
+          "angle": 95.5708823997993,
           "hinge": -1,
           "limited": true
         },
@@ -413,9 +413,9 @@
         },
         {
           "id": "R31",
-          "angle": 126.31264684884809,
+          "angle": 127.61101533425972,
           "hinge": 1,
-          "limited": true
+          "limited": false
         },
         {
           "id": "R32",
@@ -515,7 +515,7 @@
         },
         {
           "id": "B11",
-          "angle": 106.48442246438935,
+          "angle": 107.4748632304836,
           "hinge": 1,
           "limited": true
         },
@@ -595,7 +595,7 @@
         },
         {
           "id": "R5",
-          "angle": 106.48442245880142,
+          "angle": 107.47486322489567,
           "hinge": -1,
           "limited": true
         },
@@ -631,7 +631,7 @@
         },
         {
           "id": "R11",
-          "angle": 121.02402088278905,
+          "angle": 122.01710487622768,
           "hinge": 1,
           "limited": true
         },
@@ -661,7 +661,7 @@
         },
         {
           "id": "R16",
-          "angle": 106.48442245880142,
+          "angle": 107.47486322489567,
           "hinge": -1,
           "limited": true
         },
@@ -829,7 +829,7 @@
         },
         {
           "id": "R5",
-          "angle": 106.48442245880142,
+          "angle": 107.47486322489567,
           "hinge": -1,
           "limited": true
         },
@@ -865,7 +865,7 @@
         },
         {
           "id": "R11",
-          "angle": 121.02402088278905,
+          "angle": 122.01710487614913,
           "hinge": 1,
           "limited": true
         },
@@ -955,7 +955,7 @@
         },
         {
           "id": "R27",
-          "angle": 94.48705045576207,
+          "angle": 95.5708823997993,
           "hinge": -1,
           "limited": true
         },
@@ -979,9 +979,9 @@
         },
         {
           "id": "R31",
-          "angle": 126.31264684884809,
+          "angle": 127.61101533425972,
           "hinge": 1,
-          "limited": true
+          "limited": false
         },
         {
           "id": "R32",
@@ -1081,7 +1081,7 @@
         },
         {
           "id": "B11",
-          "angle": 106.48442246438935,
+          "angle": 107.4748632304836,
           "hinge": 1,
           "limited": true
         },
@@ -1144,8 +1144,15 @@
     "basement-wall-contact",
     "upper-door",
     "corridor-link",
+    "hinge-west",
+    "hinge-east",
+    "hinge-north",
+    "hinge-south",
+    "hinge-return",
+    "hinge-basement",
     "mobile-door",
     "mobile-wall-contact",
+    "mobile-hinge",
     "exploration-door"
   ],
   "walks": 184,

@@ -65,6 +65,12 @@ const target=canvas(),viewer={x:4,z:5,floor:0},enemies=[{x:3,z:5,floor:0,type:1}
 drawNotebookMap(target.getContext('2d'),wallJournal,'floor:0',viewer,enemies,0,{createCanvas:canvas});
 const arcs=target.getContext('2d').calls.filter(c=>c.op==='arc');assert.equal(arcs.length,2);assert.equal(arcs[0].color,'#e1c278');assert.equal(arcs[1].color,'#fff8db');
 const canvasCount=canvases.length;drawNotebookMap(target.getContext('2d'),wallJournal,'floor:0',viewer,[],0,{createCanvas:canvas});assert.equal(canvases.length,canvasCount,'Stationary map redraws reuse their cached canvases');
+const beforeFull=[...wallJournal.fog].map(([key,f])=>[key,f.revision,[...f.cells]]),beforeNotes=wallJournal.entries;
+const masked=target.getContext('2d').calls.filter(c=>c.op==='blit').at(-1).image;
+drawNotebookMap(target.getContext('2d'),wallJournal,'floor:0',viewer,[],0,{createCanvas:canvas,revealAll:true});
+assert.notEqual(target.getContext('2d').calls.filter(c=>c.op==='blit').at(-1).image,masked,'Developer drawing uses the complete geometry instead of the fog composite');
+assert.deepEqual([...wallJournal.fog].map(([key,f])=>[key,f.revision,[...f.cells]]),beforeFull,'Developer reveal does not discover cells on any level');assert.deepEqual(wallJournal.entries,beforeNotes);
+drawNotebookMap(target.getContext('2d'),wallJournal,'floor:0',viewer,[],0,{createCanvas:canvas});assert.equal(target.getContext('2d').calls.filter(c=>c.op==='blit').at(-1).image,masked,'Closing developer mapping restores the original explored map');
 const generation=journal.generation;journal.reset();assert.equal(journal.generation,generation+1);assert.equal(journal.entries.length,0);assert.equal(journal.availableViews().length,0);for(const view of journal.views)assert.equal(count(view.key),0);
 // The previous two-floor fallback still reveals correctly using its own cell scale.
 const legacy=JSON.parse(await readFile(new URL('./dist/layout.json',import.meta.url))),oldFloors=makeFloors(legacy),oldJournal=createNotebook(oldFloors);

@@ -1,0 +1,44 @@
+{
+  "mode": "source",
+  "views": {
+    "court": {
+      "position": [
+        -53,
+        25,
+        -22
+      ],
+      "target": [
+        -60,
+        7,
+        5
+      ],
+      "fov": 45
+    },
+    "pipe": {
+      "position": [
+        -62,
+        12,
+        -10
+      ],
+      "target": [
+        -67,
+        4.7,
+        5
+      ],
+      "fov": 43
+    }
+  },
+  "metrics": {
+    "court": {
+      "triangles": 535092,
+      "calls": 308
+    },
+    "pipe": {
+      "triangles": 359177,
+      "calls": 224
+    }
+  },
+  "probes": [],
+  "comparison": {},
+  "errors": []
+}

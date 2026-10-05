@@ -2,14 +2,14 @@ import assert from 'node:assert/strict';
 import {spawn} from 'node:child_process';
 import {writeFile,mkdir} from 'node:fs/promises';
 import {fileURLToPath} from 'node:url';
-import {chromium} from 'playwright';
+import {launchHardwareBrowser} from './test-support/hardware-browser.mjs';
 
 const server=spawn(process.execPath,['serve.mjs'],{cwd:new URL('.',import.meta.url),windowsHide:true,env:{...process.env,PORT:'0'},stdio:'pipe'});
 const base=await new Promise((resolve,reject)=>{server.stdout.once('data',data=>resolve(String(data).match(/http:\/\/127\.0\.0\.1:\d+/)[0]));server.once('error',reject);});
 const output=new URL('artifacts/',import.meta.url);await mkdir(output,{recursive:true});
 let browser;const report=[];
 try{
-  browser=await chromium.launch({headless:true,...(process.env.MODEL_CHROME_PATH?{executablePath:process.env.MODEL_CHROME_PATH}:{}),args:['--use-angle=swiftshader','--enable-unsafe-swiftshader']});
+  browser=await launchHardwareBrowser({headless:true,...(process.env.MODEL_CHROME_PATH?{executablePath:process.env.MODEL_CHROME_PATH}:{})});
   for(const mode of process.argv.length>2?process.argv.slice(2):['source','compiled','walking']){
     const page=await browser.newPage({viewport:{width:1280,height:800},reducedMotion:'no-preference'}),errors=[];
     page.setDefaultTimeout(120000);page.setDefaultNavigationTimeout(120000);
@@ -19,7 +19,7 @@ try{
     await page.goto(base+'/'+(mode==='walking'?'explore.html?':'aerial.html?models='+mode+'&')+'view=front-lawn-trees&period=1916');
     await page.waitForFunction(()=>window.__lawn?.renderer.info.render.frame>2);
     if(mode!=='walking')assert.equal(await page.evaluate(()=>window.__lawn.exterior.modelBuild.mode),mode==='source'?'procedural':'compiled');
-    await page.keyboard.press('t'); // Actual software renderer defaults to hidden.
+    assert.equal(await page.evaluate(()=>window.__lawn.exterior.trees.visible),true,'Hardware rendering starts with trees');
     const stats=await page.evaluate(async()=>{
       const {THREE,exterior,renderer,lighting}=window.__lawn;
       if(!exterior.trees.visible)throw new Error('Trees remain hidden');

@@ -3,7 +3,7 @@ import {readFile,writeFile,mkdir} from 'node:fs/promises';
 import {createHash} from 'node:crypto';
 import {gunzipSync} from 'node:zlib';
 import {spawn} from 'node:child_process';
-import {chromium} from 'playwright';
+import {launchHardwareBrowser,browserUsesHardware} from './test-support/hardware-browser.mjs';
 import * as THREE from './dist/vendor/three.module.js';
 import {decodeModel} from './dist/model-binary.mjs';
 import {restoreAerialScene} from './dist/aerial-scene.mjs';
@@ -36,11 +36,9 @@ const server=spawn(process.execPath,['serve.mjs'],{cwd:new URL('.',import.meta.u
 const baseURL=await new Promise((resolve,reject)=>{server.stdout.once('data',data=>resolve(String(data).match(/http:\/\/127\.0\.0\.1:\d+/)[0]));server.once('error',reject);server.once('exit',code=>reject(new Error('Preview server exited: '+code)));});
 let browser;const errors=[],metrics={},shots=new Map();
 try{
-  browser=await chromium.launch({headless:true,...(process.env.MODEL_CHROME_PATH?{executablePath:process.env.MODEL_CHROME_PATH}:{}),args:['--use-angle=swiftshader','--enable-unsafe-swiftshader']});
+  browser=await launchHardwareBrowser({headless:true,...(process.env.MODEL_CHROME_PATH?{executablePath:process.env.MODEL_CHROME_PATH}:{})});
   const page=await browser.newPage({viewport:{width:1000,height:700},reducedMotion:'reduce'});
-  // CI's software WebGL can take more than 30s to start or capture a frame.
-  // Navigation has a separate timeout; screenshots and controls need the same
-  // bounded allowance as the rendered-frame check below.
+  // Navigation, screenshots and controls share the bounded readiness allowance.
   page.setDefaultTimeout(120000);
   page.setDefaultNavigationTimeout(120000);
   page.on('pageerror',error=>{errors.push(error.message);console.error(error.stack);});
@@ -54,8 +52,8 @@ try{
     const start=performance.now();await page.goto(baseURL+'/aerial.html'+query);
     try{await page.waitForFunction(()=>window.__models?.renderer.info.render.frame>3,null,{timeout:120000});}
     catch(error){console.error(await page.evaluate(()=>({ready:document.readyState,debug:!!window.__models,frame:window.__models?.renderer.info.render.frame,build:window.__models?.exterior.modelBuild})));throw error;}
-    assert.equal(await page.evaluate(()=>window.__models.exterior.trees.visible),false,'Software rendering starts without trees');
-    await page.keyboard.press('t');
+    assert.equal(await page.evaluate(()=>window.__models.exterior.trees.visible),browserUsesHardware,'Tree startup visibility follows the active renderer');
+    if(!browserUsesHardware)await page.keyboard.press('t');
     await page.evaluate(()=>new Promise(resolve=>requestAnimationFrame(()=>requestAnimationFrame(resolve))));
     return {...await page.evaluate(()=>({
       ...window.__models.exterior.modelBuild,triangles:window.__models.renderer.info.render.triangles,calls:window.__models.renderer.info.render.calls,

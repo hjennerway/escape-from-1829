@@ -1,0 +1,48 @@
+{
+  "actual": {
+    "count": 17951,
+    "sha256": "3d225db70a147a1ac6f500cba67c40029ad6736e889b714faa55c528833f9377",
+    "root": [
+      -0.3967056614036031,
+      0,
+      0.38210634411159655,
+      0,
+      0,
+      0.9,
+      0,
+      0,
+      -0.38210634411159655,
+      0,
+      -0.3967056614036031,
+      0,
+      364.7804974623198,
+      0,
+      -9.106516776244462,
+      1
+    ]
+  },
+  "expected": {
+    "count": 17951,
+    "sha256": "4a8c6fe6e1a1111dbe08205c555a8d77be6c07b327d7f57826172b88cbc9ecb2",
+    "root": [
+      -0.3967056614036031,
+      0,
+      0.38210634411159655,
+      0,
+      0,
+      0.9,
+      0,
+      0,
+      -0.38210634411159655,
+      0,
+      -0.3967056614036031,
+      0,
+      364.7804974623198,
+      0,
+      -9.106516776244462,
+      1
+    ]
+  },
+  "message": "Expected values to be strictly deep-equal:\n+ actual - expected\n... Skipped lines\n\n  {\n    count: 17951,\n    root: [\n      -0.3967056614036031,\n      0,\n...\n    ],\n+   sha256: '3d225db70a147a1ac6f500cba67c40029ad6736e889b714faa55c528833f9377'\n-   sha256: '4a8c6fe6e1a1111dbe08205c555a8d77be6c07b327d7f57826172b88cbc9ecb2'\n  }\n",
+  "stack": "AssertionError [ERR_ASSERTION]: Expected values to be strictly deep-equal:\n+ actual - expected\n... Skipped lines\n\n  {\n    count: 17951,\n    root: [\n      -0.3967056614036031,\n      0,\n...\n    ],\n+   sha256: '3d225db70a147a1ac6f500cba67c40029ad6736e889b714faa55c528833f9377'\n-   sha256: '4a8c6fe6e1a1111dbe08205c555a8d77be6c07b327d7f57826172b88cbc9ecb2'\n  }\n\n    at file:///C:/Users/Harry/Documents/_escape-from-1829/Browser/artifacts/check-larkton-original.mjs:7:8\n    at ModuleJob.run (node:internal/modules/esm/module_job:561:25)\n    at async node:internal/modules/esm/loader:647:26\n    at async asyncRunEntryPointWithESMLoader (node:internal/modules/run_main:101:5)"
+}

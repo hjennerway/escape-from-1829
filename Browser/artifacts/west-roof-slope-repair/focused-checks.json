@@ -1,0 +1,40 @@
+{
+  "scope": "Repaired west entrance roofs and immediate supporting geometry",
+  "checks": [
+    {
+      "command": "test-hardware-browser.mjs",
+      "status": "passed"
+    },
+    {
+      "command": "test-west-entrance-roof-boundary.mjs",
+      "status": "passed"
+    },
+    {
+      "command": "test-front-inside-corners.mjs",
+      "status": "passed"
+    },
+    {
+      "command": "test-west-refinement.mjs",
+      "status": "passed"
+    },
+    {
+      "command": "test-west-roof-join.mjs",
+      "status": "passed"
+    },
+    {
+      "command": "test-roof-contacts.mjs",
+      "status": "passed"
+    },
+    {
+      "command": "test-roof-tiles.mjs",
+      "status": "passed"
+    },
+    {
+      "command": "test-roof-tiles.mjs --compiled",
+      "status": "passed"
+    }
+  ],
+  "sourceCompiledVisibleProbes": 78,
+  "sourceCompiledMaximumHeightDifference": 0,
+  "broaderSuite": "Stopped at the owner request; not a completed estate-wide result"
+}

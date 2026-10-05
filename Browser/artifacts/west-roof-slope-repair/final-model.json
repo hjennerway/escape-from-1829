@@ -1,0 +1,37 @@
+{
+  "currentHash": "1d7def5007ea49715ec517172fc5cdab77d8b41ff5e18f6d0899986f73ef42a7",
+  "manifest": {
+    "format": 1,
+    "revision": "186",
+    "sourceHash": "1d7def5007ea49715ec517172fc5cdab77d8b41ff5e18f6d0899986f73ef42a7",
+    "file": "aerial-9423055e3245ea96ebb4.bin.gz",
+    "bytes": 21009166,
+    "uncompressedBytes": 171947728,
+    "sha256": "9423055e3245ea96ebb4cc8d0a8107d5d2fcbd81e398a057dc2c169824748382",
+    "stats": {
+      "revision": "186",
+      "buildMilliseconds": 3426.7999999988824,
+      "windows": 2580,
+      "geometries": 15938,
+      "materials": 650,
+      "textures": 63
+    }
+  },
+  "sha256": "9423055e3245ea96ebb4cc8d0a8107d5d2fcbd81e398a057dc2c169824748382",
+  "checked": 78,
+  "maximumDifference": 0,
+  "gpu": "NVIDIA GeForce RTX 3090 Ti / Direct3D11",
+  "errors": [],
+  "sources": [
+    "Browser/dist/front-inside-corners.mjs",
+    "Browser/dist/entrance-west-photo-detail.mjs",
+    "Browser/dist/west-cross-range-roof.mjs"
+  ],
+  "exports": {
+    "browserSource": true,
+    "localCompiledAerial": true,
+    "Unity": false,
+    "Blender": false,
+    "packages": false
+  }
+}

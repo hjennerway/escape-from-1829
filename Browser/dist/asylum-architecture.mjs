@@ -9,7 +9,7 @@ import {segmentDistance,insidePolygon,asylumExitCenter} from './asylum-layout.mj
 import {asylumWindowCenters,ASYLUM_WINDOW_WIDTH} from './asylum-windows.mjs';
 import {roomDoorHandle,ROOM_DOOR_FRAME_CASING_DEPTH,ROOM_DOOR_HINGE_RADIUS} from './asylum-doors.mjs';
 import {addAsylumDoorLabels} from './asylum-door-labels.mjs';
-import {stairShape,stairOpening,stairFlightGeometry,handrailGeometry,STAIR_WIDTH,STAIR_SLAB_THICKNESS,RAIL_HEIGHT} from './asylum-stairs.mjs';
+import {stairShape,stairOpenings,stairConnection,stairFlights,stairLandingPolygons,stairFlightGeometry,handrailGeometry,stairWellWalls,stairWellHeight,STAIR_WIDTH,STAIR_SLAB_THICKNESS,RAIL_HEIGHT} from './asylum-stairs.mjs';
 const cache=new WeakMap();
 export function asylumWallSurfaces(floor){
  const surfaces=[];
@@ -17,7 +17,7 @@ export function asylumWallSurfaces(floor){
   if(length<2)continue;
   const nx=-(b[1]-a[1])/length,nz=(b[0]-a[0])/length;
   for(let i=0;i<Math.floor(length/2.5);i++){const t=(i+.5)/Math.floor(length/2.5),x=a[0]+(b[0]-a[0])*t,z=a[1]+(b[1]-a[1])*t;
-   const normal=insidePolygon(x+nx*.3,z+nz*.3,floor.outline.loops[0])?1:-1;
+   const normal=floor.outline.loops.some(loop=>insidePolygon(x+nx*.3,z+nz*.3,loop))?1:-1;
    surfaces.push({x:x+nx*.115*normal,z:z+nz*.115*normal,rotation:Math.atan2(nx*normal,nz*normal),dx:-nx*normal,dz:-nz*normal,window:w.exterior||floor.windows?.some(p=>segmentDistance(p.x,p.z,a,b)<.1)});
   }
  }
@@ -28,13 +28,13 @@ export function buildAsylumArchitecture(THREE,scene,floor){
  const batches=new Map(),windowFrames=[],ceilingHeight=floor.id===2?2.9:3.8;
  const roomMaterials=asylumRoomWallMaterials(THREE,cache.get(THREE));
  const materials=floor.id===2?basementMuralMaterials(THREE,roomMaterials,ceilingHeight):roomMaterials;
- const roomFinisher=createAsylumRoomFinisher(THREE,floor,ceilingHeight);
+ const roomFinisher=createAsylumRoomFinisher(THREE,floor,ceilingHeight,windowFrames);
  // Continue masonry through the ceiling and the floor above. Stair openings
  // expose the space between those surfaces; stopping at the room ceiling
  // leaves a band below the next storey. The overlap also seals float seams,
  // but stays below the upper floor's .002 surface to avoid raised thresholds.
  const nextElevation=Math.min(...floor.levelElevations.filter(y=>y>floor.elevation));
- const height=Math.max(ceilingHeight+.02,Number.isFinite(nextElevation)?nextElevation-floor.elevation+.001:0);
+ const height=stairWellHeight(floor);
  const box=(kind,x,y,z,w,h,d,ry=0,rz=0)=>{if(!batches.has(kind))batches.set(kind,[]);batches.get(kind).push([x,y,z,w,h,d,ry,rz]);};
  // Closed slabs retain the walking/ceiling heights and seal the exposed
  // shaft rims. The floor underside is .2 below its storey; the ceiling below
@@ -45,9 +45,7 @@ export function buildAsylumArchitecture(THREE,scene,floor){
  function slab(name,y,kind,bottom,top,ceiling=false){
   for(const loop of floor.outline.loops){
    const shape=new THREE.Shape(loop.map(([x,z])=>new THREE.Vector2(x,-z)));
-   for(const stair of floor.stairs){
-    if(!stair.connections.some(([lower,upper])=>(ceiling?lower:upper)===floor.id))continue;
-    const {minX:x0,maxX:x1,minZ:z0,maxZ:z1}=stairOpening(stair);
+   for(const stair of floor.stairs)for(const {minX:x0,maxX:x1,minZ:z0,maxZ:z1} of stairOpenings(stair,floor.id,ceiling)){
     if(!insidePolygon((x0+x1)/2,(z0+z1)/2,loop))continue;
     shape.holes.push(new THREE.Path([[x0,z0],[x0,z1],[x1,z1],[x1,z0]].map(([x,z])=>new THREE.Vector2(x,-z))));
    }
@@ -109,6 +107,7 @@ export function buildAsylumArchitecture(THREE,scene,floor){
  // Use the same continuous mitred footprint as the skirting. Square-ended
  // boxes leave a notch on the convex side of every angled wall junction.
  // Union also removes caps and overlapping faces at T/duplicate partitions.
+ for(const well of floor.stairWells)for(const {a,b} of stairWellWalls(well))wall(a,b);
  const wallShapes=asylumWallShapes(THREE,mergeAsylumMasonry(masonry));
  for(const exit of floor.exits){
   const {x,z}=asylumExitCenter(exit),angle=exit.axis==='x'?Math.PI/2:0;
@@ -185,22 +184,35 @@ export function buildAsylumArchitecture(THREE,scene,floor){
  }
  addAsylumDoorLabels(THREE,scene,floor,box);
  const stairSurfaces=[],stairSolids=[];
- function deck(x,z,w,d,y,landing=false){
+ function deck(x,z,w,d,y,landing=false,ry=0){
   if(landing)box('Stone',x,y-STAIR_SLAB_THICKNESS/2,z,w,STAIR_SLAB_THICKNESS,d);
-  box('Carpet',x,y+.008,z,w-.08,.012,d-.04);
-  stairSurfaces.push({minX:x-w/2,maxX:x+w/2,minZ:z-d/2,maxZ:z+d/2,y});
+  box('Carpet',x,y+.008,z,w-.08,.012,d-.04,ry);
+  stairSurfaces.push({x,z,w,d,ry,y});
  }
- for(const stair of floor.stairs)for(const [lower,upper] of stair.connections)if(lower===floor.id){
-  const s=stairShape(stair),rise=floor.levelElevations[upper]-floor.elevation,mid=rise/2,steps=Math.ceil(mid/.18),run=s.back-s.front;
-  stairSolids.push(stairFlightGeometry(THREE,s.left,STAIR_WIDTH,s.front,s.back,0,mid,steps),
-   stairFlightGeometry(THREE,s.right,STAIR_WIDTH,s.back,s.front,mid,rise,steps));
-  for(let i=0;i<steps;i++){
-   const d=run/steps,z=s.front+(i+.5)*d;
-   deck(s.left,z,STAIR_WIDTH,d,(i+1)/steps*mid);
-   deck(s.right,z,STAIR_WIDTH,d,rise-i/steps*mid);
+ function polygonDeck(points,y){
+  const shape=new THREE.Shape(points.map(([x,z])=>new THREE.Vector2(x,-z)));
+  const geometry=new THREE.ExtrudeGeometry(shape,{depth:STAIR_SLAB_THICKNESS,bevelEnabled:false,steps:1});
+  geometry.rotateX(-Math.PI/2);geometry.translate(0,y-STAIR_SLAB_THICKNESS,0);stairSolids.push(geometry);
+  const carpet=new THREE.ShapeGeometry(shape);carpet.rotateX(-Math.PI/2);carpet.translate(0,y+.008,0);
+  const mesh=new THREE.Mesh(carpet,materials.Carpet);mesh.name='Asylum Carpet';scene.add(mesh);
+  stairSurfaces.push({points,y});
+ }
+ for(const source of floor.stairs)for(const [lower,upper] of source.connections)if(lower===floor.id){
+  const stair=stairConnection(source,lower,upper);
+  const s=stairShape(stair),rise=floor.levelElevations[upper]-floor.elevation,mid=rise/2;
+  for(const [a,b] of stairFlights(stair,0,rise)){
+   const steps=Math.ceil((b[1]-a[1])/.18);
+   stairSolids.push(stairFlightGeometry(THREE,a[0],STAIR_WIDTH,a[2],b[2],a[1],b[1],steps,b[0]));
+   const run=Math.hypot(b[0]-a[0],b[2]-a[2]),angle=Math.atan2(b[0]-a[0],b[2]-a[2]);
+   for(let i=0;i<steps;i++){
+    const t=(i+.5)/steps;
+    deck(a[0]+(b[0]-a[0])*t,a[2]+(b[2]-a[2])*t,STAIR_WIDTH,run/steps,a[1]+(i+1)/steps*(b[1]-a[1]),false,angle);
+   }
   }
-  // Full square corners meet the flights exactly, without crossing slabs.
-  deck((s.minX+s.maxX)/2,s.rear,s.maxX-s.minX,STAIR_WIDTH,mid,true);
+  // Fit the return and arrival edges to the flights, including angled runs.
+  const polygons=stairLandingPolygons(stair);
+  if(polygons.length){polygonDeck(polygons[0],mid);polygonDeck(polygons[1],rise);}
+  else if(!stair.straightFlight)deck((s.minX+s.maxX)/2,s.rear,s.maxX-s.minX,STAIR_WIDTH,mid,true);
  }
  const rails=floor.stairRails,posts=new Set();
  for(const rail of rails)for(let j=1;j<rail.length;j++){
@@ -208,7 +220,12 @@ export function buildAsylumArchitecture(THREE,scene,floor){
   for(let i=0;i<=count;i++){
    const t=i/count,x=a[0]+(b[0]-a[0])*t,z=a[2]+(b[2]-a[2])*t,base=a[1]+(b[1]-a[1])*t,top=base+RAIL_HEIGHT-.035,key=[x,top,z].map(v=>v.toFixed(5)).join(',');
    if(posts.has(key))continue;posts.add(key);
-   const support=stairSurfaces.filter(s=>x>=s.minX-.001&&x<=s.maxX+.001&&z>=s.minZ-.001&&z<=s.maxZ+.001&&Math.abs(s.y-base)<.2);
+   const support=stairSurfaces.filter(s=>{
+    if(Math.abs(s.y-base)>=.2)return false;
+    if(s.points)return insidePolygon(x,z,s.points)||s.points.some((p,j)=>segmentDistance(x,z,p,s.points[(j+1)%s.points.length])<.001);
+    const dx=x-s.x,dz=z-s.z;
+    return Math.abs(dx*Math.cos(s.ry)-dz*Math.sin(s.ry))<=s.w/2+.001&&Math.abs(dx*Math.sin(s.ry)+dz*Math.cos(s.ry))<=s.d/2+.001;
+   });
    const bottom=support.length?Math.max(...support.map(s=>s.y)):base;
    const postWidth=i===0||i===count ? .07 : .03;
    box('Iron',x,(bottom+top)/2,z,postWidth,top-bottom,.04);
@@ -243,6 +260,7 @@ export function buildAsylumArchitecture(THREE,scene,floor){
   batches.delete(kind);
  }
  const dado=new THREE.Mesh(roomFinisher.rail(windowFrames),materials.Dado);dado.name='Asylum Dado';scene.add(dado);
+ if(floor.id===2)scene.add(roomFinisher.padding());
  for(const [kind,items] of batches){const mesh=new THREE.InstancedMesh(geometry,materials[['DoorFrame','RoomDoor'].includes(kind)?'Panel':kind],items.length);mesh.name='Asylum '+kind;
   for(let i=0;i<items.length;i++){const [x,y,z,w,h,d,ry,rz]=items[i];transform.position.set(x,y,z);transform.scale.set(w,h,d);transform.rotation.set(0,ry,rz);transform.updateMatrix();mesh.setMatrixAt(i,transform.matrix);}
   mesh.instanceMatrix.needsUpdate=true;mesh.computeBoundingSphere();scene.add(mesh);

@@ -1,5 +1,6 @@
 import {addRedesmereGardenDetails} from './redesmere-garden-photo-detail.mjs';
 import {addExteriorStairRail} from './exterior-stair-rail.mjs';
+import {joinEastEntranceRoof} from './east-entrance-roof-join.mjs';
 import {addEastForwardEndPhotoDetails} from './east-forward-end-photo-detail.mjs';
 import {addWestForwardEndPhotoDetails} from './west-forward-end-photo-detail.mjs';
 import {addEastEntranceMirror} from './entrance-symmetry.mjs';
@@ -51,12 +52,13 @@ export function addEastPhotoDetails(THREE,{model,box,mesh,worldUV,white,brick,ro
   rangeRoof.setAttribute('position',new THREE.Float32BufferAttribute(positions,3));
   rangeRoof.setAttribute('uv',new THREE.Float32BufferAttribute(uv,2));rangeRoof.computeVertexNormals();
   mesh(rangeRoof,roof,0,0,0,true).name='Redesmere aligned frontage slate roof';
+  joinEastEntranceRoof(THREE,{model,mesh,roof,white,brick,worldUV});
 
   // The two-storey forward wing: nine positions on its east wall. The eighth
   // position is the blue entrance and upper escape door, not another window.
   const sideZ=[17.3,20,22.3,25.1,27.4,31.2,33.5,38.1,42];
   for(const z of sideZ)if(z!==38.1)for(const y of [2,6.25])sash('forward-wing-east',41.05,y,z,Math.PI/2,1.02,2.45);
-  addEastForwardEndPhotoDetails(THREE,{model,box,mesh,worldUV,brick,material,sash,rod,iron});
+  addEastForwardEndPhotoDetails(THREE,{model,box,mesh,worldUV,white,brick,material,sash,rod,iron});
   // The inner wall is the reflected img18 elevation, supplied below.
   door(41.08,38.1,Math.PI/2);door(41.08,38.1,Math.PI/2,4.25);
   // External metal stair descends along the wall from the upper blue door.

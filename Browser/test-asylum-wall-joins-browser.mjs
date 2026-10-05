@@ -1,13 +1,13 @@
 import assert from 'node:assert/strict';
 import {readFile,writeFile,mkdir} from 'node:fs/promises';
 import {fileURLToPath} from 'node:url';
-import {spawn} from 'node:child_process';
-import {chromium} from 'playwright';
+import {startTestServer} from './test-support/server.mjs';
+import {launchHardwareBrowser} from './test-support/hardware-browser.mjs';
 
-const mode=process.argv[2]??'after',port=1866,destination=new URL('./artifacts/asylum-wall-joins/',import.meta.url);
+const mode=process.argv[2]??'after',destination=new URL('./artifacts/asylum-wall-joins/',import.meta.url);
 await mkdir(destination,{recursive:true});
-const server=spawn(process.execPath,['Browser/serve.mjs'],{cwd:new URL('../',import.meta.url),windowsHide:true,stdio:'ignore',env:{...process.env,PORT:String(port)}});
-const browser=await chromium.launch({headless:true,executablePath:process.env.MODEL_CHROME_PATH??'C:/Program Files/Google/Chrome/Application/chrome.exe',args:['--use-angle=swiftshader','--enable-unsafe-swiftshader']});
+const {server,base}=await startTestServer();
+const browser=await launchHardwareBrowser({headless:true,executablePath:process.env.MODEL_CHROME_PATH??'C:/Program Files/Google/Chrome/Application/chrome.exe'});
 try{
  const page=await browser.newPage({viewport:{width:1100,height:800}}),errors=[];page.setDefaultTimeout(60000);
  page.on('pageerror',e=>errors.push(e.message));
@@ -16,7 +16,7 @@ try{
  if(mode==='before')await page.route('**/asylum-layout.mjs',async route=>route.fulfill({contentType:'text/javascript',body:(await readFile(new URL('./dist/asylum-layout.mjs',import.meta.url),'utf8')).replace('floor.walls=joinAsylumWalls([...pieces.values()]);','floor.walls=[...pieces.values()];')}));
  await page.route('**/game.mjs',async route=>route.fulfill({contentType:'text/javascript',body:(await readFile(new URL('./dist/game.mjs',import.meta.url),'utf8'))+`
 window.wallJoinCheck={get ready(){return ready;},get renderer(){return renderer;},start(){start();arrivalCutscene.update(3);},pose(x,z,floor,tx,tz){Object.assign(player,{x,z,floor,y:floors[floor].elevation,stair:null,outside:false});scene.add(torch,torchTarget);showFloor();yaw=Math.atan2(x-tx,z-tz);pitch=-.12;camera.position.set(x,player.y+1.65,z);camera.rotation.set(pitch,yaw,0);state='paused';$('arrivalFade').hidden=true;$('result').hidden=true;$('hud').hidden=false;$('interact').hidden=true;}};`}));
- await page.goto(`http://127.0.0.1:${port}`);await page.waitForFunction(()=>window.wallJoinCheck?.ready,null,{timeout:120000});
+ await page.goto(`${base}`);await page.waitForFunction(()=>window.wallJoinCheck?.ready,null,{timeout:120000});
  await page.evaluate(()=>window.wallJoinCheck.start());await page.addStyleTag({content:'#hud,header,.vignette{display:none!important}'});
  const views=[
   ['reception-left',-5.4,17.2,0,-7.1,17.2],

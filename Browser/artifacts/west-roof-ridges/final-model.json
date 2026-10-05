@@ -1,0 +1,42 @@
+{
+  "manifest": {
+    "format": 1,
+    "revision": "186",
+    "sourceHash": "3a1c4ba1bbf97c216bce2b73a9366b566179a2b26723bfe9072b2ecb30131c99",
+    "file": "aerial-49159a9b1a94827892e6.bin.gz",
+    "bytes": 20885925,
+    "uncompressedBytes": 170842040,
+    "sha256": "49159a9b1a94827892e6603cc3b8e1dde71b9b3ac59d804cac272d26167dce9a",
+    "stats": {
+      "revision": "186",
+      "buildMilliseconds": 2275.5,
+      "windows": 2580,
+      "geometries": 15768,
+      "materials": 647,
+      "textures": 63
+    }
+  },
+  "currentSourceHash": true,
+  "verifiedChecksum": true,
+  "visibleCompiledProbes": 32,
+  "errors": [],
+  "suite": {
+    "initialCommandsPassed": 63,
+    "remainingChecks": 61,
+    "total": 124,
+    "passed": 122,
+    "failures": [
+      {
+        "file": "test-jarman.mjs",
+        "code": 1
+      },
+      {
+        "file": "test-leighton-newton.mjs",
+        "code": 1
+      }
+    ]
+  },
+  "compiledRenderingAndFallbacks": "passed",
+  "timelineAndWalking": "passed",
+  "binaryRoundTrip": "passed"
+}

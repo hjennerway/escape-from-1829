@@ -64,5 +64,5 @@ for(const floor of floors){
 }
 for(const floor of floors.slice(0,2))for(const x of [-34.5,34.5])assert(flatWalkable(floor,x,19.4,.34),'Old forward-room pillar footprints are clear on both wings and both floors');
 assert(flatWalkable(floors[2],-10.2,17.05,.01),'The isolated basement room pier is removed beside the retained outside wall');
-assert.deepEqual(plan.rooms.filter(r=>r.floors.includes(3)).map(r=>r.id),['R41','R42','R43','R44','R45'],'The approved second-floor rooms all remain enclosed');
+assert.deepEqual(plan.rooms.filter(r=>r.floors.includes(3)&&r.label[0]>-18).map(r=>r.id),['R41','R42','R43','R44','R45'],'The approved Reception second-floor rooms all remain enclosed');
 console.log(`PASS: ${closures.length} room closures, ${probes} masonry/skirting rays, ${walks} collision attempts, ${ends} wall ends audited across all four floors, removed pillars and retained second-floor rooms.`);

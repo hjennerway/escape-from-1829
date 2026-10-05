@@ -33,3 +33,10 @@ The shared browser exterior supplies aerial, Explore and game geometry.
 Local compiled aerial assets are regenerated. Unity, Blender and packaged
 desktop/Android exports are not regenerated. See DEVELOPMENT.md for final
 validation results and limitations.
+
+## Outer-end eave flicker (5 October 2026)
+
+The owner's blue circle identifies coplanar gutter and upper-cornice surfaces.
+The three overlapping gutter boxes are replaced by one closed strip following
+the cornice's outer edge and central-pier returns, keeping its dimensions and
+height. See [modelling and focused validation notes](../eave-flicker-2026-10-05/README.md).

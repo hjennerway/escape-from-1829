@@ -1,0 +1,12 @@
+import assert from 'node:assert/strict';
+import {readFile,writeFile} from 'node:fs/promises';
+const read=async name=>JSON.parse(await readFile(new URL(name,import.meta.url),'utf8'));
+const source=await read('final-source-validation.json'),compiled=await read('final-compiled-validation.json');
+assert.equal(source.mode,'source');assert.equal(compiled.modelBuild.mode,'compiled');
+assert.deepEqual(source.errors,[]);assert.deepEqual(compiled.errors,[]);
+assert.deepEqual(compiled.probes,source.probes,'Compiled and source roof contacts/seams agree exactly');
+const suite=await read('remaining-suite.json');
+const resolved=['node test-roof-tiles.mjs','node test-front-inside-corners.mjs','node vendor-furniture.mjs --check','node vendor-furniture-designs.mjs --check'];
+const failures=[suite.initialFailure,...suite.results.filter(r=>r.code!==0&&!resolved.includes(r.command)).map(r=>r.command)];
+await writeFile(new URL('final-validation.json',import.meta.url),JSON.stringify({renderer:'ANGLE NVIDIA GeForce RTX 3090 Ti Direct3D11',visibleProbes:source.probes.length,sourceCompiledProbesExact:true,pageOrShaderErrors:[],focusedPitchBendContacts:88,physicalTrimSamples:432,suite:{total:suite.total,passed:suite.total-failures.length,failures,resolvedByRetest:resolved,vendorContinuation:'The first continuation passed --check as part of the filename; both vendor checks were rerun with separate arguments and passed. The saved runner is corrected.'},exports:{browserSource:true,localCompiled:true,unity:false,blender:false,packaged:false}},null,2)+'\n');
+console.log('PASS: source/compiled roof probes agree exactly; '+(suite.total-failures.length)+'/'+suite.total+' suite commands pass after reruns.');

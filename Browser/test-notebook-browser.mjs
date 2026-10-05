@@ -1,12 +1,12 @@
 import assert from 'node:assert/strict';
 import {readFile,writeFile,mkdir} from 'node:fs/promises';
 import {fileURLToPath} from 'node:url';
-import {spawn} from 'node:child_process';
-import {chromium} from 'playwright';
+import {startTestServer} from './test-support/server.mjs';
+import {launchHardwareBrowser} from './test-support/hardware-browser.mjs';
 
-const root=new URL('../',import.meta.url),port=1858,destination=new URL('./artifacts/notebook/',import.meta.url);
+const root=new URL('../',import.meta.url),destination=new URL('./artifacts/notebook/',import.meta.url);
 await mkdir(destination,{recursive:true});
-const server=spawn(process.execPath,['Browser/serve.mjs'],{cwd:root,windowsHide:true,stdio:'ignore',env:{...process.env,PORT:String(port)}});
+const {server,base}=await startTestServer();
 let browser;
 const errors=[],screens=[];
 const instrument=`
@@ -14,7 +14,7 @@ window.notebookTest={get ready(){return ready;},get state(){return state;},get j
 pose(x,z,floor,outside=false){keys.clear();state='play';elapsed=1;Object.assign(player,{x,z,floor,y:floors[floor].elevation,stair:null,outside});showFloor();camera.position.set(x,player.y+1.65,z);observeNotebook();drawMap();},
 prepareArt(){const art=artPanels.find(a=>a.url.endsWith('daily-account-patients-1854.png'));this.pose(art.x+art.normalX*1.1,art.z+art.normalZ*1.1,art.floor);yaw=art.rotation;camera.rotation.set(0,yaw,0);},
 snapshot(){return {player:{...player},time:elapsed,enemies:enemies.map(e=>({x:e.x,z:e.z,floor:e.floor,y:e.y,phase:e.mesh.userData?.guardRig?.phase})),revision:notebook.revision,fog:[...notebook.fog].map(([key,f])=>[key,f.revision,f.cells.reduce((a,b)=>a+b,0)])};},
-mapPixel(key,x,z){const fog=notebook.fog.get(key),[a,b,d,e]=fog.bounds,c=$('map'),s=Math.min((c.width-16)/(b-a),(c.height-16)/(e-d)),ox=(c.width-(b-a)*s)/2,oz=(c.height-(e-d)*s)/2;return [...c.getContext('2d').getImageData(Math.round(ox+(x-a)*s),Math.round(oz+(z-d)*s),1,1).data];},
+mapPixel(key,x,z,mini=false){const fog=notebook.fog.get(key),[a,b,d,e]=fog.bounds,c=$(mini?'miniMap':'map'),s=Math.min((c.width-16)/(b-a),(c.height-16)/(e-d)),ox=(c.width-(b-a)*s)/2,oz=(c.height-(e-d)*s)/2;return [...c.getContext('2d').getImageData(Math.round(ox+(x-a)*s),Math.round(oz+(z-d)*s),1,1).data];},
 get camera(){return camera;},get torch(){return torch;}};`;
 async function load(page){
  page.setDefaultTimeout(60000);page.setDefaultNavigationTimeout(120000);
@@ -22,7 +22,7 @@ async function load(page){
  page.on('console',m=>{if(m.type()==='error'&&/THREE|WebGL|shader/i.test(m.text()))errors.push(m.text());});
  await page.route('https://**/*',r=>r.abort());
  await page.route('**/game.mjs',async r=>r.fulfill({contentType:'text/javascript',body:(await readFile(new URL('./dist/game.mjs',import.meta.url),'utf8'))+instrument}));
- await page.goto(`http://127.0.0.1:${port}`);
+ await page.goto(`${base}`);
  await page.waitForFunction(()=>window.notebookTest?.ready,null,{timeout:120000});
  await page.locator('#start').click();
  await page.evaluate(()=>window.notebookTest.arrival.update(3));
@@ -30,7 +30,7 @@ async function load(page){
 }
 async function capture(page,name){await page.evaluate(()=>new Promise(resolve=>requestAnimationFrame(()=>requestAnimationFrame(resolve))));await page.screenshot({path:fileURLToPath(new URL(name+'.png',destination))});screens.push(name);}
 try{
- browser=await chromium.launch({headless:true,executablePath:process.env.MODEL_CHROME_PATH??'C:/Program Files/Google/Chrome/Application/chrome.exe',args:['--use-angle=swiftshader','--enable-unsafe-swiftshader']});
+ browser=await launchHardwareBrowser({headless:true,executablePath:process.env.MODEL_CHROME_PATH??'C:/Program Files/Google/Chrome/Application/chrome.exe'});
  const page=await browser.newPage({viewport:{width:1280,height:820}});await load(page);
  await page.keyboard.press('n');await page.waitForFunction(()=>window.notebookTest.state==='notebook');
  assert.equal(await page.locator('#notebookFloors button').count(),1,'Future floors stay out of the notebook');
@@ -59,7 +59,20 @@ try{
  await page.locator('#notebookFloors button').filter({hasText:'Basement'}).click();await capture(page,'desktop-basement');
  await page.locator('#notebookFloors button').filter({hasText:'Grounds'}).click();await capture(page,'desktop-grounds');
  await page.locator('#closeNotebook').click();await page.evaluate(()=>{const t=window.notebookTest;t.start();t.arrival.update(3);t.openNotebook();});
- assert.equal(await page.locator('#notebookFloors button').count(),1);assert(!await page.locator('#notebookFacts').innerText().then(t=>t.includes('Daily account')));await page.close();
+ assert.equal(await page.locator('#notebookFloors button').count(),1);assert(!await page.locator('#notebookFacts').innerText().then(t=>t.includes('Daily account')));
+ await page.keyboard.press('Escape');await page.keyboard.press('-');
+ const developerFrozen=await page.evaluate(()=>window.notebookTest.snapshot());
+ await page.keyboard.press('m');await page.waitForFunction(()=>window.notebookTest.state==='developer-map'&&document.getElementById('developerMap')&&!document.getElementById('developerMap').hidden);
+ assert.deepEqual(await page.locator('#developerMapLevels button').allTextContents(),['Ground floor','First floor','Basement','Second floor','Grounds']);
+ const fullMini=await page.evaluate(()=>window.notebookTest.mapPixel('floor:0',-31.1,-7,true));assert(fullMini.slice(0,3).some(v=>v>35),'Developer shortcut fully reveals the actual minimap');
+ await page.keyboard.press('w');await page.keyboard.press('e');await page.evaluate(()=>window.notebookTest.update(5));
+ assert.deepEqual(await page.evaluate(()=>window.notebookTest.snapshot()),developerFrozen,'Developer map freezes gameplay without changing notebook knowledge');
+ await capture(page,'developer-full-map');await page.locator('#developerMapLevels button').filter({hasText:'Second floor'}).click();await capture(page,'developer-second-floor');
+ await page.keyboard.press('m');assert.equal(await page.evaluate(()=>window.notebookTest.state),'play');
+ await page.keyboard.press('n');assert.equal(await page.locator('#notebookFloors button').count(),5,'Developer mapping makes every level available in the notebook too');
+ await page.keyboard.press('-');assert.equal(await page.locator('#notebookFloors button').count(),1);
+ const restoredMini=await page.evaluate(()=>window.notebookTest.mapPixel('floor:0',-31.1,-7,true));assert(restoredMini.slice(0,3).every(v=>v<30),'Disabling developer mode restores the original minimap fog');
+ await page.keyboard.press('Escape');await page.close();
 
  const mobile=await browser.newPage({viewport:{width:390,height:844},isMobile:true,hasTouch:true,deviceScaleFactor:1});await load(mobile);
  assert(await mobile.locator('#touchMap').isVisible());

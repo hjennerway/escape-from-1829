@@ -1,12 +1,12 @@
 import assert from 'node:assert/strict';
 import {readFile,writeFile,mkdir} from 'node:fs/promises';
 import {fileURLToPath} from 'node:url';
-import {spawn} from 'node:child_process';
-import {chromium} from 'playwright';
-const baseline=process.argv.includes('--before'),port=1865,destination=new URL('./artifacts/basement-end/',import.meta.url);
+import {startTestServer} from './test-support/server.mjs';
+import {launchHardwareBrowser} from './test-support/hardware-browser.mjs';
+const baseline=process.argv.includes('--before'),destination=new URL('./artifacts/basement-end/',import.meta.url);
 await mkdir(destination,{recursive:true});
-const server=spawn(process.execPath,['Browser/serve.mjs'],{cwd:new URL('../',import.meta.url),windowsHide:true,stdio:'ignore',env:{...process.env,PORT:String(port)}});
-const browser=await chromium.launch({headless:true,executablePath:process.env.MODEL_CHROME_PATH??'C:/Program Files/Google/Chrome/Application/chrome.exe',args:['--use-angle=swiftshader','--enable-unsafe-swiftshader']});
+const {server,base}=await startTestServer();
+const browser=await launchHardwareBrowser({headless:true,executablePath:process.env.MODEL_CHROME_PATH??'C:/Program Files/Google/Chrome/Application/chrome.exe'});
 try{
  const page=await browser.newPage({viewport:{width:1600,height:900}}),errors=[];page.setDefaultTimeout(60000);
  page.on('pageerror',e=>errors.push(e.message));page.on('console',m=>{if(m.type()==='error'&&/THREE|WebGL|shader/i.test(m.text()))errors.push(m.text());});
@@ -14,7 +14,7 @@ try{
  if(baseline)await page.route('**/asylum-plan.json',async route=>route.fulfill({contentType:'application/json',body:await readFile(new URL('before-plan.json',destination),'utf8')}));
  await page.route('**/game.mjs',async route=>route.fulfill({contentType:'text/javascript',body:(await readFile(new URL('./dist/game.mjs',import.meta.url),'utf8'))+`
 window.basementCheck={get ready(){return ready;},start(){start();arrivalCutscene.update(3);},pose(x,z,tx,tz){Object.assign(player,{x,z,floor:2,y:floors[2].elevation,stair:null,outside:false});scene.add(torch,torchTarget);showFloor();yaw=Math.atan2(x-tx,z-tz);pitch=-.03;camera.position.set(x,player.y+1.65,z);camera.rotation.set(pitch,yaw,0);state='paused';$('arrivalFade').hidden=true;$('result').hidden=true;$('hud').hidden=false;$('interact').hidden=true;},walk(points){const first=points[0];this.pose(first[0],first[1],first[0],first[1]-1);for(const [x,z] of points.slice(1)){moveAsylumActor(floors,player,x-player.x,z-player.z);if(Math.hypot(player.x-x,player.z-z)>.001)return false;}return true;}};`}));
- await page.goto(`http://127.0.0.1:${port}`);await page.waitForFunction(()=>window.basementCheck?.ready,null,{timeout:120000});
+ await page.goto(`${base}`);await page.waitForFunction(()=>window.basementCheck?.ready,null,{timeout:120000});
  await page.evaluate(()=>window.basementCheck.start());await page.addStyleTag({content:'#hud,header,.vignette{display:none!important}'});
  const views=[
   ['approach',-31.1,-22.7,-31.1,-34],['entrance',-31.1,-26.2,-31.1,-34],

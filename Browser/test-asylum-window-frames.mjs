@@ -74,7 +74,7 @@ for(const floor of floors){
  }
  report.push({floor:floor.id,windows:samples});
 }
-assert.equal(windows,274,'Audit every scheduled and generated sash');
+assert.equal(windows,300,'Audit every scheduled and generated sash, including the Library storey');
 await mkdir(destination,{recursive:true});
 await writeFile(new URL('geometry.json',destination),JSON.stringify({windows,frameRays,railTriangles,retainedRails,floors:report},null,2)+'\n');
 console.log(`PASS: all ${windows} interior windows have complete heads/jambs/sills (${frameRays} rays on both faces), with no dado/timber intersections (${railTriangles} nearby triangles checked) and ${retainedRails} retained neighbouring rails.`);

@@ -2,7 +2,7 @@ import assert from 'node:assert/strict';
 import {mkdir,writeFile} from 'node:fs/promises';
 import {fileURLToPath} from 'node:url';
 import {spawn} from 'node:child_process';
-import {chromium} from 'playwright';
+import {launchHardwareBrowser} from './test-support/hardware-browser.mjs';
 import {WEST_RANGE_PLAN} from './dist/west-range-plan.mjs';
 import {WEST_END_PROPORTIONS} from './dist/west-refinement.mjs';
 const out=new URL(process.env.FACADE_ARTIFACT_DIR??'./artifacts/facade-trim/',import.meta.url);await mkdir(out,{recursive:true});
@@ -10,7 +10,7 @@ const server=spawn(process.execPath,['serve.mjs'],{cwd:new URL('.',import.meta.u
 const base=await new Promise((resolve,reject)=>{server.stdout.once('data',d=>resolve(String(d).match(/http:\/\/127\.0\.0\.1:\d+/)[0]));server.once('error',reject);});
 let browser;
 try{
- browser=await chromium.launch({headless:true,...(process.env.MODEL_CHROME_PATH?{executablePath:process.env.MODEL_CHROME_PATH}:{}),args:process.argv.includes('--hardware')?[]:['--use-angle=swiftshader','--enable-unsafe-swiftshader']});
+ browser=await launchHardwareBrowser({headless:true,...(process.env.MODEL_CHROME_PATH?{executablePath:process.env.MODEL_CHROME_PATH}:{})});
  const page=await browser.newPage({viewport:{width:1100,height:760},reducedMotion:'reduce'}),errors=[],report=[];
  page.setDefaultTimeout(120000);page.setDefaultNavigationTimeout(120000);
  page.on('pageerror',e=>errors.push(e.message));page.on('console',m=>{if(m.type()==='error'&&/THREE|WebGL|shader/i.test(m.text()))errors.push(m.text());});

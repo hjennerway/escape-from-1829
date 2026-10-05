@@ -1,0 +1,12 @@
+{
+  "actual": {
+    "primitives": 20559,
+    "sha256": "a33b7717de17f44f289472478ec266dfc232eed1e34af607c92ecab4a5a7e06c"
+  },
+  "expected": {
+    "primitives": 20559,
+    "sha256": "78ee7835760f9ded24fd39dbe66bfd2bbc7dae0382519945f75806cf7b91956d"
+  },
+  "message": "Every protected annexe primitive, including the front and both Oakmere elevations, stays unchanged\n+ actual - expected\n\n  {\n    primitives: 20559,\n+   sha256: 'a33b7717de17f44f289472478ec266dfc232eed1e34af607c92ecab4a5a7e06c'\n-   sha256: '78ee7835760f9ded24fd39dbe66bfd2bbc7dae0382519945f75806cf7b91956d'\n  }\n",
+  "stack": "AssertionError [ERR_ASSERTION]: Every protected annexe primitive, including the front and both Oakmere elevations, stays unchanged\n+ actual - expected\n\n  {\n    primitives: 20559,\n+   sha256: 'a33b7717de17f44f289472478ec266dfc232eed1e34af607c92ecab4a5a7e06c'\n-   sha256: '78ee7835760f9ded24fd39dbe66bfd2bbc7dae0382519945f75806cf7b91956d'\n  }\n\n    at file:///C:/Users/Harry/Documents/_escape-from-1829/Browser/test-annexe-kitchen.mjs:13:8\n    at ModuleJob.run (node:internal/modules/esm/module_job:561:25)\n    at async node:internal/modules/esm/loader:647:26\n    at async asyncRunEntryPointWithESMLoader (node:internal/modules/run_main:101:5)"
+}

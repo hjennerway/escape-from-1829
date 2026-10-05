@@ -1,12 +1,12 @@
 // Regenerate the landing stills using the same scene, camera and haze as the menu.
 import {spawn} from 'node:child_process';
 import {writeFile} from 'node:fs/promises';
-import {chromium} from 'playwright';
+import {launchHardwareBrowser} from './test-support/hardware-browser.mjs';
 const server=spawn(process.execPath,['serve.mjs'],{cwd:new URL('.',import.meta.url),windowsHide:true,env:{...process.env,PORT:'0'},stdio:'pipe'});
 const base=await new Promise((resolve,reject)=>{server.stdout.once('data',d=>resolve(String(d).match(/http:\/\/127\.0\.0\.1:\d+/)[0]));server.once('error',reject);});
 let browser;
 try{
- browser=await chromium.launch({headless:true,...(process.env.MODEL_CHROME_PATH?{executablePath:process.env.MODEL_CHROME_PATH}:{}),args:['--use-angle=swiftshader','--enable-unsafe-swiftshader']});
+ browser=await launchHardwareBrowser({headless:true,...(process.env.MODEL_CHROME_PATH?{executablePath:process.env.MODEL_CHROME_PATH}:{})});
  const page=await browser.newPage();
  await page.route('**/landing-capture.html',route=>route.fulfill({contentType:'text/html',body:`<!doctype html><html><head><script type="importmap">{"imports":{"three":"./vendor/three.module.js"}}</script></head><body><script type="module">
  import * as THREE from './vendor/three.module.js';

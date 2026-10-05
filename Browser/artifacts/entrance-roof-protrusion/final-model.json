@@ -1,0 +1,21 @@
+{
+  "sourceHash": "28a9c90825b03ee44bae1b883a30e897d4c51579f01a7a7781d6f008ee5612bf",
+  "manifest": {
+    "format": 1,
+    "revision": "186",
+    "sourceHash": "28a9c90825b03ee44bae1b883a30e897d4c51579f01a7a7781d6f008ee5612bf",
+    "file": "aerial-2ee1f8b8e40b2de7844a.bin.gz",
+    "bytes": 21009382,
+    "uncompressedBytes": 171967976,
+    "sha256": "2ee1f8b8e40b2de7844a17b77dbdd4f06764c747f621865c8d347e445bad1602",
+    "stats": {
+      "revision": "186",
+      "buildMilliseconds": 2280.9000000003725,
+      "windows": 2580,
+      "geometries": 15937,
+      "materials": 650,
+      "textures": 63
+    }
+  },
+  "checksumVerified": true
+}

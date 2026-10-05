@@ -1,11 +1,11 @@
 import assert from 'node:assert/strict';
 import {readFile,writeFile,mkdir} from 'node:fs/promises';
-import {spawn} from 'node:child_process';
-import {chromium} from 'playwright';
-const root=new URL('../',import.meta.url),port=1856,destination=new URL('./artifacts/asylum-remodel/',import.meta.url);
+import {startTestServer} from './test-support/server.mjs';
+import {launchHardwareBrowser} from './test-support/hardware-browser.mjs';
+const root=new URL('../',import.meta.url),destination=new URL('./artifacts/asylum-remodel/',import.meta.url);
 await mkdir(destination,{recursive:true});
-const server=spawn(process.execPath,['Browser/serve.mjs'],{cwd:root,windowsHide:true,stdio:'ignore',env:{...process.env,PORT:String(port)}});
-const browser=await chromium.launch({headless:true,executablePath:process.env.MODEL_CHROME_PATH??'C:/Program Files/Google/Chrome/Application/chrome.exe',args:['--use-angle=swiftshader','--enable-unsafe-swiftshader']});
+const {server,base}=await startTestServer();
+const browser=await launchHardwareBrowser({headless:true,executablePath:process.env.MODEL_CHROME_PATH??'C:/Program Files/Google/Chrome/Application/chrome.exe'});
 try{
  const page=await browser.newPage({viewport:{width:1100,height:750}}),errors=[];page.setDefaultTimeout(60000);
  page.on('pageerror',e=>errors.push(e.message));
@@ -13,7 +13,7 @@ try{
  await page.route('https://**/*',route=>route.abort());
  await page.route('**/game.mjs',async route=>route.fulfill({contentType:'text/javascript',body:(await readFile(new URL('./dist/game.mjs',import.meta.url),'utf8'))+`
 window.asylumTest={get ready(){return ready;},get state(){return state;},get floors(){return floors;},get scene(){return scene;},get renderer(){return renderer;},get camera(){return camera;},get outsideWalker(){return outsideWalker;},get enemies(){return enemies;},player,keys,start,showFloor,update,drawMap,outsideDoor,useDoor,get arrival(){return arrivalCutscene;},pose(x,z,floor,angle=0,tilt=0){Object.assign(player,{x,z,floor,y:floors[floor].elevation,stair:null,outside:false});scene.add(torch,torchTarget);showFloor();yaw=angle;pitch=tilt;camera.position.set(x,player.y+1.65,z);camera.rotation.set(pitch,yaw,0);state='paused';$('arrivalFade').hidden=true;$('result').hidden=true;$('hud').hidden=false;$('interact').hidden=true;drawMap();},play(){state='play';elapsed=0;keys.clear();},pause(){state='paused';},move(dx,dz){moveAsylumActor(floors,player,dx,dz);showFloor();camera.position.set(player.x,player.y+1.65,player.z);drawMap();},get routes(){return routeBetweenFloors;},setTime(v){elapsed=v;}};` }));
- await page.goto(`http://127.0.0.1:${port}`);
+ await page.goto(`${base}`);
  await page.waitForFunction(()=>window.asylumTest?.ready,null,{timeout:120000});
  assert.equal(await page.evaluate(()=>window.asylumTest.floors.length),4);
  await page.evaluate(()=>{const t=window.asylumTest;t.start();t.arrival.update(3);t.pause();});

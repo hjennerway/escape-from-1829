@@ -1,5 +1,129 @@
 # Room furnishings — 3 October 2026
 
+## Shared ward privies — 5 October 2026
+
+R5, R16, R33 and R35 on the ground and first floors now serve as shared
+privies and washrooms. This supersedes their earlier linen-store, nursing
+station and day-room assignments. The rear rooms have three seats each;
+the forward rooms have two, allowing their existing window bays and open
+entrance leaves to remain clear. The eight rooms contain twenty seats,
+twenty-eight boarded privacy partitions and eight basin washstands.
+
+The rear fittings stand against the long south partition, away from the
+north and end windows. Their room markers move into the common aisle at
+z=-34.65. The forward fittings use the south partition; their washstands
+occupy the wider northern space. Each stall has a separate seat footprint
+and narrow screen footprints, so players can walk between the boards to
+reach the seat. The washstands have open earthenware basins, matching ewers,
+soap, folded cloth and a pail on the lower shelf. Seat openings expose a
+recessed pan within a plain timber surround, with a small hand-operated
+valve fitting. The rooms use the existing plain masonry finish.
+
+Historical basis: the [1829 Wakefield account](https://upload.wikimedia.org/wikipedia/commons/6/64/Midland_medical_and_surgical_reporter_and_topographical_and_statistical_journal._Volume_2%2C_1830-1831._%28IA_s1id13414000%29.pdf)
+describes internal privies intended as water closets, troubled by insufficient
+water. [The National Archives' Bramah patent account](https://www.nationalarchives.gov.uk/explore-the-collection/explore-by-topic/business-finance-and-innovation/toilet-design/)
+dates the handle-operated valve closet to 1778. The
+[Te Papa English washstand](https://collections.tepapa.govt.nz/object/57076)
+is dated 1800–1830 and establishes a suitable timber washstand type. These
+sources support plausible period fittings; the model, dimensions, partition
+layout and selected room functions are original gameplay interpretations,
+not a reconstruction of Chester's recorded sanitary inventory. All fittings
+are static. No source images are imported.
+
+The three procedural designs total 4,300 triangles before instancing. Fixed
+records drive Escape/Explore rendering, player collision, NPC navigation
+and sight. Both shared plans and their ground/first architectural and
+furnished SVG/PNG drawings are refreshed. Other furnishings are unchanged
+for two independently compared seeds; room outlines, doors, windows, stairs
+and exterior geometry retain the previous plan.
+
+Run `npm run test:privies` in Browser for the dedicated logic and hardware
+browser checks. Logic checks follow 112 routes to seat/washstand standing
+positions over four seeds and check genuine seat openings. The browser check
+verifies all 56 rendered fixtures, 28 actual keyboard collision approaches,
+eight rooms in both modes, model closeups and phone views. Hardware rendering
+is verified on the NVIDIA RTX 3090 Ti / Direct3D11. Evidence is in
+`../../Browser/artifacts/ward-privies/`; validation details are in
+`../../DEVELOPMENT.md`. Only browser sources and review drawings change.
+The aerial compiled source hash still matches; Unity, Blender and packaged
+application exports are not regenerated.
+
+## Mirrored R2/R13 ward additions — 5 October 2026
+
+The owner requested six additional beds in R13 and its mirrored R2 layout,
+and confirmed both the ground and first floors. Each room now contains ten
+beds, five in each existing row. The original four bed positions, orientation,
+full model size, head inset and 1.975-unit spacing remain; three positions
+extend each row towards the entrance. R2 reflects R13's x coordinates.
+Existing fixed wardrobes and small benches remain in place. The middle
+aisle, entrance and every bed foot retain walking access.
+
+Both shared plans define the exact rows; the ground/first furnished SVG/PNG
+drawings are refreshed. Browser Escape and Explore are updated. The aerial
+model excludes these interior furnishings; Unity, Blender and packaged
+exports are not regenerated. Reviewed GPU views and placement comparisons
+are in `../../Browser/artifacts/outer-ward-beds/`, with validation notes in
+`../../DEVELOPMENT.md`.
+
+## Central dormitory wall-bed correction — 5 October 2026
+
+The owner's marked removals apply to R6, R8 and R10. Each now retains fourteen
+beds: eight on the window side and six on the entrance side. Original
+entrance-side slots 1 and 2 (zero based) are left empty; the other slots keep
+their spacing. All headboards meet the visible .09-unit wall face. This
+supersedes the sixteen-bed counts and rear circulation strips below.
+
+Fixed and variable Windsor chairs are removed from all three rooms. Existing
+small Panca seats remain, and wardrobes move to clear short-wall positions.
+The entrances open to at most 105 degrees to clear the retained wall beds.
+Row ends and all bed feet retain walking access. Both shared plans and the
+first-floor furnished SVG/PNG are refreshed. Browser interiors are changed;
+the aerial compiler excludes them, and Unity/Blender/package exports remain
+unchanged. The checks and reviewed views are recorded in
+`../../Browser/artifacts/central-dormitory-wall-beds/` and `../../DEVELOPMENT.md`.
+
+## Three central first-floor dormitories — 5 October 2026
+
+The owner's later same-day “Adjust beds and chairs” follow-up supersedes this
+initial sixteen-bed arrangement, removing the entrance-side pair and Windsor
+chairs and pushing the remaining headboards to the walls. The validation below
+records the earlier layout; the three merged dormitories remain in place.
+
+R6, R8 and R10 now each combine two former rooms and contain sixteen fixed
+beds, arranged eight per long wall with feet facing the middle aisle. Beds
+retain their existing 130% dimensions and shared rendering/collision model.
+Explicit row records in the shared plan fix every bed position across new
+games. Placement rejects any missing or obstructed planned bed instead of
+silently reducing the requested count.
+
+The window-side row leaves .95 units behind its heads; the entrance-side
+row leaves 2.15 units for the open leaf and circulation. Storage and small
+seats are refitted after the beds; clear strips around both row ends prevent
+them from closing the route from the door to the central aisle. R10 has a
+larger southern end allowance so the navigation grid includes the turn.
+Its nursing work table and the former R11 linen shelves are removed.
+All three dormitories retain wardrobe storage, with checked small-seat and
+supported-book variation. The first-floor drawing reflects the arrangement.
+
+`test-central-dormitories.mjs` checks all 48 beds and physically follows a
+route to each bed foot. The browser companion verifies the actual instances,
+shared Escape/Explore furnishings, keyboard movement across a removed
+divider and desktop/portrait views using verified hardware rendering.
+Browser interior sources and review drawings change; Unity, Blender and
+packaged exports are not regenerated, and the aerial model excludes them.
+
+## West-wing Library — 5 October 2026
+
+The new third-storey Library R46 uses stocked bookcases with the same timber,
+books and collision checks as the small libraries. Its larger plan reserves
+central reading-table candidates, which still pass the shared furniture,
+door and circulation checks. The final layout has eight bookcases, one table,
+chairs and supported books. The four adjoining rooms use the existing sitting,
+reading, office and archive furniture; R51 remains clear stair circulation.
+These are gameplay fittings for the owner's marked room layout. See
+[the Library plan and scope](../west-library/README.md) and
+`../../Browser/artifacts/west-library/` for the reviewed GPU captures.
+
 ## Supplied Cheshire Lunatic Asylum engraving — 4 October 2026
 
 The owner supplied the engraving captioned “Cheshire Lunatic Asylum” to replace
@@ -482,7 +606,8 @@ groupings explain the intended circulation and organisation.
 | Ground, west cross range | R19 reading; R20 dining; R22 activities; R17/R39 stores; R18/R21 quiet sitting |
 | Ground, east cross range | R27 day room; R28 dining; R29 treatment; R30 staff sitting; R31 quiet window bay |
 | Ground, forward wings | R32/R36 dormitories; R33/R35 nursing; R34/R38 reading; R37 quiet sitting |
-| First, rear arms | R1/R3/R6/R8/R12/R14 bedrooms; R2/R7/R9/R13 wards; R4/R15 day rooms; R5/R11/R16 linen; R10 nursing |
+| First, central rear arm | R6/R8/R10 dormitories, sixteen beds each; paired former R7/R9/R11 rooms are absorbed |
+| First, outer rear arms | R1/R3/R12/R14 bedrooms; R2/R13 wards; R4/R15 day rooms; R5/R16 linen |
 | First, cross range | R19/R28/R29 bedrooms; R20/R22/R27 wards; R23/R25 nursing; R26 staff sitting; R30 staff bedroom; R17 store; R18/R21/R31 quiet areas |
 | First, forward wings | R32/R36 wards; R33/R35 day rooms; R34 quiet sitting; R37 reading |
 | Basement | B1/B5/B8/B11 stores; B2 linen; B3/B7/B10 maintenance; B4/B12 records; B6 medicines |

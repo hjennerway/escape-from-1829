@@ -1,0 +1,187 @@
+{
+  "views": [
+    {
+      "stair": "S1",
+      "lower": 2,
+      "upper": 0,
+      "name": "approach"
+    },
+    {
+      "stair": "S1",
+      "lower": 2,
+      "upper": 0,
+      "name": "lower-flight"
+    },
+    {
+      "stair": "S1",
+      "lower": 2,
+      "upper": 0,
+      "name": "return"
+    },
+    {
+      "stair": "S1",
+      "lower": 2,
+      "upper": 0,
+      "name": "arrival"
+    },
+    {
+      "stair": "S1",
+      "lower": 0,
+      "upper": 1,
+      "name": "approach"
+    },
+    {
+      "stair": "S1",
+      "lower": 0,
+      "upper": 1,
+      "name": "lower-flight"
+    },
+    {
+      "stair": "S1",
+      "lower": 0,
+      "upper": 1,
+      "name": "return"
+    },
+    {
+      "stair": "S1",
+      "lower": 0,
+      "upper": 1,
+      "name": "arrival"
+    },
+    {
+      "stair": "S1",
+      "lower": 1,
+      "upper": 3,
+      "name": "approach"
+    },
+    {
+      "stair": "S1",
+      "lower": 1,
+      "upper": 3,
+      "name": "lower-flight"
+    },
+    {
+      "stair": "S1",
+      "lower": 1,
+      "upper": 3,
+      "name": "return"
+    },
+    {
+      "stair": "S1",
+      "lower": 1,
+      "upper": 3,
+      "name": "arrival"
+    },
+    {
+      "stair": "S3",
+      "lower": 0,
+      "upper": 1,
+      "name": "approach"
+    },
+    {
+      "stair": "S3",
+      "lower": 0,
+      "upper": 1,
+      "name": "lower-flight"
+    },
+    {
+      "stair": "S3",
+      "lower": 0,
+      "upper": 1,
+      "name": "return"
+    },
+    {
+      "stair": "S3",
+      "lower": 0,
+      "upper": 1,
+      "name": "arrival"
+    },
+    {
+      "stair": "S4",
+      "lower": 0,
+      "upper": 1,
+      "name": "approach"
+    },
+    {
+      "stair": "S4",
+      "lower": 0,
+      "upper": 1,
+      "name": "lower-flight"
+    },
+    {
+      "stair": "S4",
+      "lower": 0,
+      "upper": 1,
+      "name": "return"
+    },
+    {
+      "stair": "S4",
+      "lower": 0,
+      "upper": 1,
+      "name": "arrival"
+    },
+    {
+      "stair": "S5",
+      "lower": 2,
+      "upper": 0,
+      "name": "approach"
+    },
+    {
+      "stair": "S5",
+      "lower": 2,
+      "upper": 0,
+      "name": "lower-flight"
+    },
+    {
+      "stair": "S5",
+      "lower": 2,
+      "upper": 0,
+      "name": "return"
+    },
+    {
+      "stair": "S5",
+      "lower": 2,
+      "upper": 0,
+      "name": "arrival"
+    },
+    {
+      "stair": "S5",
+      "lower": 0,
+      "upper": 1,
+      "name": "approach"
+    },
+    {
+      "stair": "S5",
+      "lower": 0,
+      "upper": 1,
+      "name": "lower-flight"
+    },
+    {
+      "stair": "S5",
+      "lower": 0,
+      "upper": 1,
+      "name": "return"
+    },
+    {
+      "stair": "S5",
+      "lower": 0,
+      "upper": 1,
+      "name": "arrival"
+    },
+    {
+      "stair": "S5",
+      "lower": 1,
+      "upper": 3,
+      "name": "straight-bottom"
+    },
+    {
+      "stair": "S5",
+      "lower": 1,
+      "upper": 3,
+      "name": "straight-top"
+    }
+  ],
+  "mobile": true,
+  "movements": [],
+  "errors": []
+}

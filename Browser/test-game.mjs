@@ -17,6 +17,7 @@ import * as GuardTHREE from './dist/vendor/three.module.js';
 import {createSecurityGuard,updateSecurityGuard,resetSecurityGuard} from './dist/security-guard.mjs';
 import {createNotebook,notebookView} from './dist/notebook.mjs';
 import {drawNotebookMap} from './dist/notebook-map.mjs';
+import {bindDeveloperOptions} from './dist/developer-options.mjs';
 import {createLoadingProgress} from './dist/loading-progress.mjs';
 import {createReceptionClockAudio} from './dist/reception-clock-audio.mjs';
 class Vector {
@@ -53,11 +54,11 @@ const layout=JSON.parse(await readFile(new URL('./dist/layout.json',import.meta.
 const source=(await readFile(new URL('./dist/game.mjs',import.meta.url),'utf8')).replace(/^import .*;\r?\n/gm,'');
 const listeners=new Map();
 function keydown(code,repeat=false){const event={code,repeat,defaultPrevented:false,preventDefault(){this.defaultPrevented=true;}};listeners.get('keydown')(event);return event;}
-const sandbox={createReceptionClockAudio,createNotebook,notebookView,drawNotebookMap:(...args)=>drawNotebookMap(...args,{createCanvas:()=>sandbox.document.createElement('canvas')}),captureOutcome:(previous)=>captureOutcome(previous,sandbox.Math.random),Math:Object.create(Math),selectEscapeRoutes,exitDirection,createSecurityGuard:()=>createSecurityGuard(GuardTHREE),updateSecurityGuard,resetSecurityGuard,bindTreeToggle,sampleLanding,...core,...floors,buildArchitecture,interiorWallSurfaces,createInteriorLights,createEscapeCutscene,createArrivalCutscene,
+const sandbox={createReceptionClockAudio,createNotebook,notebookView,drawNotebookMap:(context,journal,key,player,enemies,yaw,options={})=>drawNotebookMap(context,journal,key,player,enemies,yaw,{...options,createCanvas:()=>sandbox.document.createElement('canvas')}),bindDeveloperOptions:options=>bindDeveloperOptions({...options,root:sandbox.document,target:sandbox.document,storage:{getItem:()=>null,setItem(){}}}),captureOutcome:(previous)=>captureOutcome(previous,sandbox.Math.random),Math:Object.create(Math),selectEscapeRoutes,exitDirection,createSecurityGuard:()=>createSecurityGuard(GuardTHREE),updateSecurityGuard,resetSecurityGuard,bindTreeToggle,sampleLanding,...core,...floors,buildArchitecture,interiorWallSurfaces,createInteriorLights,createEscapeCutscene,createArrivalCutscene,
  createLoadingProgress:document=>createLoadingProgress(document,{paint:()=>Promise.resolve()}),
  createLandingExterior:async()=>({scene:new Object3D(),camera:new Object3D()}),
  loadEscapeFrontage:async()=>{},THREE,GLTFLoader:class {},
- document:{getElementById:element,createElement:()=>element('canvas'+elements.size),querySelectorAll:()=>[],body:element('body'),addEventListener(){},exitPointerLock(){}},
+ document:{getElementById:element,createElement:()=>element('canvas'+elements.size),querySelector:s=>element(s),querySelectorAll:()=>[],body:element('body'),addEventListener(){},exitPointerLock(){}},
  window:{AudioContext:class {resume(){return Promise.resolve();}}},Image:class {},
  fetch:async()=>({ok:true,json:async()=>layout}),matchMedia:()=>({matches:false}),
  innerWidth:1280,innerHeight:800,devicePixelRatio:1,addEventListener(type,listener){listeners.set(type,listener);},requestAnimationFrame(){},performance:{now:()=>0},console};

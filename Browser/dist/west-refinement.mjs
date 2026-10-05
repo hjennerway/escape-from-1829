@@ -73,8 +73,9 @@ export function addWestCantedBay(THREE,{model,mesh,worldUV,brick,white,roof,sash
 export function addWestEndDetails(THREE,{model,box,mesh,worldUV,brick,white,material,sash,door,iron,hipRoof},{front=WEST_RANGE_PLAN.outerFrontZ,back=WEST_RANGE_PLAN.outerRearZ}={}){
   const start=model.userData.eastPhotoOpenings.length,trim=material(0xd8ddd5);
   const depth=front-back,centreZ=(front+back)/2,{doorZ,pierWidth}=WEST_END_PROPORTIONS;
-  mesh(worldUV(new THREE.BoxGeometry(.22,15.2,depth),1.7),brick,-72.05,7.6,centreZ,true).name='West end continuous wall';
-  mesh(worldUV(new THREE.BoxGeometry(.34,15.35,pierWidth),1.7),brick,-72.24,7.675,doorZ,true).name='West end shallow centre';
+  const {wallHeight,roofEaveHeight}=WEST_RANGE_PLAN;
+  mesh(worldUV(new THREE.BoxGeometry(.22,wallHeight,depth),1.7),brick,-72.05,wallHeight/2,centreZ,true).name='West end continuous wall';
+  mesh(worldUV(new THREE.BoxGeometry(.34,wallHeight+.15,pierWidth),1.7),brick,-72.24,(wallHeight+.15)/2,doorZ,true).name='West end shallow centre';
   box(white,-72.2,2,centreZ,.17,4,depth);
   box(white,-72.45,2,doorZ,.17,4,pierWidth);
   // Keep both narrow sashes in the shortened flat wall before the centre pier.
@@ -90,17 +91,22 @@ export function addWestEndDetails(THREE,{model,box,mesh,worldUV,brick,white,mate
   // The shared floor courses follow both pier returns at the neighbouring
   // pavilion's 4.05 / 8.6 levels, instead of overlapping offset end bars.
   const pierLeft=doorZ-pierWidth/2,pierRight=doorZ+pierWidth/2;
-  for(const [dy,t,w] of [[-.18,.16,.23],[.04,.22,.4],[.22,.1,.55]])
+  for(const [dy,t,w] of [[-.18,.16,.23],[.04,.22,.4],[.18,.1,.55]])
     addFacadeCourse(THREE,{mesh,worldUV},'West outer corner joined cornice '+dy,white,
-      [[-65.925,back-.15],[-72.3,back-.15],[-72.3,pierLeft],[-72.56,pierLeft],
+      [[-65.925,WEST_RANGE_PLAN.recessRearZ-.4],[-65.925,back-.15],[-72.3,back-.15],[-72.3,pierLeft],[-72.56,pierLeft],
         [-72.56,pierRight],[-72.3,pierRight],[-72.3,front+.08],[-63.92,front+.08],
-        [-63.92,WEST_RANGE_PLAN.gardenZ-.075]],15.2+dy,t,w);
-  for(const [z,d] of [[(back+pierLeft)/2,pierLeft-back],[doorZ,pierWidth],[(pierRight+front)/2,front-pierRight]]){
-    box(iron,-72.52,15.5,z,.12,.09,d+.2);
-  }
-  box(iron,-72.54,7.55,pierLeft-.12,.07,15.1,.07);
+        [-63.92,WEST_RANGE_PLAN.gardenZ-.075]],wallHeight+dy,t,w);
+  // One gutter follows the cornice's exposed outer edge, including the pier
+  // returns. The former three boxes overlapped its cap at the same height,
+  // causing the iron and white surfaces to flicker along both flanks.
+  const corniceHalfWidth=.55/2,gutterHalfWidth=.12/2,offset=corniceHalfWidth+gutterHalfWidth;
+  addFacadeCourse(THREE,{mesh,worldUV},'West outer end continuous gutter',iron,
+    [[-72.3-offset,back-.15],[-72.3-offset,pierLeft-offset],
+      [-72.56-offset,pierLeft-offset],[-72.56-offset,pierRight+offset],
+      [-72.3-offset,pierRight+offset],[-72.3-offset,front+.08]],roofEaveHeight-.045,.09,.12);
+  box(iron,-72.54,(wallHeight-.1)/2,pierLeft-.12,.07,wallHeight-.1,.07);
   // A single low hip covers the full end rather than a detached tall front nib.
-  hipRoof(-69,(back+WEST_RANGE_PLAN.gardenZ)/2,6,WEST_RANGE_PLAN.gardenZ-back,15.47,1.15).name='West end continuous slate roof';
+  hipRoof(-69,(back+WEST_RANGE_PLAN.gardenZ)/2,6,WEST_RANGE_PLAN.gardenZ-back,roofEaveHeight,1.15).name='West end continuous slate roof';
   const gravel=material(0xa39e88);
   // Continue the doorway axis west to Parsons Lane. The far end tucks
   // beneath its higher road surface, leaving a clean join at the angled edge.

@@ -25,7 +25,7 @@ export function addRedesmereGardenDetails(THREE,{model,box,mesh,worldUV,white,br
   for(const y of [4.08,8.8])box(trim,69.94,y,15,.22,.21,20);
   // Only the shallow cornice step from the photo interrupts the eaves line.
   for(const [z,d,top] of [[21.55,6.95,14.3],[15.15,5.9,14.52],[8.55,7.25,14.3]]){
-    for(const [offset,h,w] of [[-.19,.16,.24],[0,.21,.42],[.18,.12,.55]])box(trim,69.94,top+offset,z,w,h,d+.12);
+    for(const [offset,h,w] of [[-.19,.16,.24],[0,.21,.42],[.18,.12,.55]])box(white,69.94,top+offset,z,w,h,d+.12);
     box(iron,70.07,top+.31,z,.16,.1,d+.25);
   }
   for(const z of [24.85,5.1])box(iron,70.02,7,z,.075,14,.075);

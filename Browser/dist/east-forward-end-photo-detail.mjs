@@ -3,7 +3,7 @@
 // Proportions and camera placement are visual estimates, not a measured survey.
 export const EAST_FORWARD_END_PHOTO_VIEW=Object.freeze({position:[40,1.8,78],target:[40,5.1,26],fov:62});
 
-export function addEastForwardEndPhotoDetails(THREE,{model,box,mesh,worldUV,brick,material,sash,rod,iron}){
+export function addEastForwardEndPhotoDetails(THREE,{model,box,mesh,worldUV,white,brick,material,sash,rod,iron}){
   const start=model.userData.eastPhotoOpenings.length;
   const trim=material(0xd2d9d2),archBrick=material(0x80675b);
   const front=43.06,centre=35,width=12;
@@ -18,7 +18,7 @@ export function addEastForwardEndPhotoDetails(THREE,{model,box,mesh,worldUV,bric
     mesh(new THREE.ShapeGeometry(arch),archBrick,x,y+h/2+.045,front+.21).name='East forward end segmental window head';
   }
   box(trim,centre,4.15,front+.09,width+.1,.27,.27);
-  for(const [y,h,d] of [[8.36,.18,.26],[8.59,.25,.44],[8.8,.12,.58]])box(trim,centre,y,front+.03,width+.3,h,d);
+  for(const [y,h,d] of [[8.36,.18,.26],[8.59,.25,.44],[8.8,.12,.58]])box(white,centre,y,front+.03,width+.3,h,d);
   box(iron,centre,8.91,front+.33,width+.6,.1,.11);
   for(const x of [29.15,40.85])box(iron,x,4.43,front+.21,.07,8.8,.07);
   box(brick,centre,.23,front+.035,width,.26,.17);

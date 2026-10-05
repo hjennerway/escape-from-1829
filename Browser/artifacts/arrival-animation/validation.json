@@ -4,10 +4,10 @@
     "height": 750,
     "reducedMotion": "no-preference",
     "launch": "start",
-    "preparationMs": 32584.09999999404,
+    "preparationMs": 6113.100000000093,
     "snapshots": {
       "start": {
-        "frameDt": 0.0010999999940395355,
+        "frameDt": 0.0008999999999068678,
         "state": "arrival",
         "inside": false,
         "opacity": 0,
@@ -19,19 +19,19 @@
         "elapsed": 0
       },
       "approach": {
-        "frameDt": 2.1826999999955294,
+        "frameDt": 1.411399999999907,
         "state": "arrival",
         "inside": false,
-        "opacity": 0.514533,
+        "opacity": 0.5006,
         "position": [
-          11.471362407521369,
-          59.28618833413241,
-          107.99872446090102
+          11.800600905454871,
+          60.88730250000714,
+          110.38086307714653
         ],
         "elapsed": 0
       },
       "blackout": {
-        "frameDt": 3.93160000000149,
+        "frameDt": 2.9578999999999067,
         "state": "arrival",
         "inside": true,
         "opacity": 1,
@@ -43,10 +43,10 @@
         "elapsed": 0
       },
       "reveal": {
-        "frameDt": 1.3948999999985099,
+        "frameDt": 0.9903999999999069,
         "state": "arrival",
         "inside": true,
-        "opacity": 0.4564,
+        "opacity": 0.4284,
         "position": [
           0,
           3.5,
@@ -57,7 +57,7 @@
     },
     "frames": [
       {
-        "frameDt": 0.0010999999940395355,
+        "frameDt": 0.0008999999999068678,
         "state": "arrival",
         "inside": false,
         "opacity": 0,
@@ -69,7 +69,7 @@
         "elapsed": 0
       },
       {
-        "frameDt": 2.4752000000029803,
+        "frameDt": 1.4201999999997206,
         "state": "arrival",
         "inside": false,
         "opacity": 0,
@@ -81,7 +81,7 @@
         "elapsed": 0
       },
       {
-        "frameDt": 2.29660000000149,
+        "frameDt": 1.433,
         "state": "arrival",
         "inside": false,
         "opacity": 0,
@@ -93,7 +93,7 @@
         "elapsed": 0
       },
       {
-        "frameDt": 2.29389999999851,
+        "frameDt": 1.4239000000003725,
         "state": "arrival",
         "inside": false,
         "opacity": 0,
@@ -105,91 +105,91 @@
         "elapsed": 0
       },
       {
-        "frameDt": 2.6732000000029803,
+        "frameDt": 1.401,
         "state": "arrival",
         "inside": false,
-        "opacity": 0.000733333,
+        "opacity": 0.0006,
         "position": [
-          23.612228937731203,
-          118.32823083378995,
-          195.84151070194622
+          23.61537954527606,
+          118.34355250000714,
+          195.8643062861332
         ],
         "elapsed": 0
       },
       {
-        "frameDt": 0.020699999995529652,
+        "frameDt": 1.4086999999997205,
         "state": "arrival",
         "inside": false,
-        "opacity": 0.0145333,
+        "opacity": 0.167267,
         "position": [
-          23.286141047342557,
-          116.7424383341324,
-          193.4821676698877
+          19.677119998668996,
+          99.1914691666738,
+          167.36982521647099
         ],
         "elapsed": 0
       },
       {
-        "frameDt": 2.91239999999851,
+        "frameDt": 1.4145,
         "state": "arrival",
         "inside": false,
-        "opacity": 0.1812,
+        "opacity": 0.333933,
         "position": [
-          19.347881500735493,
-          97.59035500079908,
-          164.98768660022546
+          15.738860452061932,
+          80.03938583334048,
+          138.87534414680874
         ],
         "elapsed": 0
       },
       {
-        "frameDt": 3.1293000000044704,
+        "frameDt": 1.411399999999907,
         "state": "arrival",
         "inside": false,
-        "opacity": 0.347867,
+        "opacity": 0.5006,
         "position": [
-          15.409621954128431,
-          78.43827166746576,
-          136.49320553056324
+          11.800600905454871,
+          60.88730250000714,
+          110.38086307714653
         ],
         "elapsed": 0
       },
       {
-        "frameDt": 2.1826999999955294,
+        "frameDt": 2.3712999999998137,
         "state": "arrival",
         "inside": false,
-        "opacity": 0.514533,
+        "opacity": 0.667267,
         "position": [
-          11.471362407521369,
-          59.28618833413241,
-          107.99872446090102
+          7.862341358847807,
+          41.7352191666738,
+          81.88638200748429
         ],
         "elapsed": 0
       },
       {
-        "frameDt": 2.7146000000014903,
+        "frameDt": 0.03489999999990687,
         "state": "arrival",
         "inside": false,
-        "opacity": 0.6812,
+        "opacity": 0.690533,
         "position": [
-          7.533102860914308,
-          40.134105000799096,
-          79.5042433912388
+          7.312560326142933,
+          39.061588333347615,
+          77.90855245017009
         ],
         "elapsed": 0
       },
       {
-        "frameDt": 2.77810000000149,
+        "frameDt": 2.325600000000093,
         "state": "arrival",
         "inside": false,
-        "opacity": 0.847867,
+        "opacity": 0.8572,
         "position": [
-          3.594843314307248,
-          20.982021667465773,
-          51.009762321576574
+          3.3743007795358686,
+          19.909505000014278,
+          49.414071380507835
         ],
         "elapsed": 0
       },
       {
-        "frameDt": 3.93160000000149,
+        "frameDt": 2.9578999999999067,
         "state": "arrival",
         "inside": true,
         "opacity": 1,
@@ -201,10 +201,10 @@
         "elapsed": 0
       },
       {
-        "frameDt": 1.3948999999985099,
+        "frameDt": 0.9903999999999069,
         "state": "arrival",
         "inside": true,
-        "opacity": 0.4564,
+        "opacity": 0.4284,
         "position": [
           0,
           3.5,
@@ -213,7 +213,7 @@
         "elapsed": 0
       },
       {
-        "frameDt": 1.2597000000029803,
+        "frameDt": 0.998,
         "state": "play",
         "inside": true,
         "opacity": 0,
@@ -232,10 +232,10 @@
     "height": 750,
     "reducedMotion": "no-preference",
     "launch": "retry",
-    "preparationMs": 9419,
+    "preparationMs": 5908,
     "snapshots": {
       "start": {
-        "frameDt": 0.0007999999970197678,
+        "frameDt": 0.000400000000372529,
         "state": "arrival",
         "inside": false,
         "opacity": 0,
@@ -247,19 +247,19 @@
         "elapsed": 0
       },
       "approach": {
-        "frameDt": 1.8663000000044703,
+        "frameDt": 1.403100000000093,
         "state": "arrival",
         "inside": false,
-        "opacity": 0.5206,
+        "opacity": 0.500267,
         "position": [
-          11.328009760001402,
-          58.58905250068494,
-          106.96152534979551
+          11.80847742454075,
+          60.925606666638124,
+          110.43785203923277
         ],
         "elapsed": 0
       },
       "blackout": {
-        "frameDt": 3.0007999999970196,
+        "frameDt": 2.8901999999997208,
         "state": "arrival",
         "inside": true,
         "opacity": 1,
@@ -271,10 +271,10 @@
         "elapsed": 0
       },
       "reveal": {
-        "frameDt": 1.0882999999970198,
+        "frameDt": 0.9695999999996274,
         "state": "arrival",
         "inside": true,
-        "opacity": 0.4382,
+        "opacity": 0.4992,
         "position": [
           0,
           3.5,
@@ -285,7 +285,7 @@
     },
     "frames": [
       {
-        "frameDt": 0.0007999999970197678,
+        "frameDt": 0.000400000000372529,
         "state": "arrival",
         "inside": false,
         "opacity": 0,
@@ -297,7 +297,7 @@
         "elapsed": 0
       },
       {
-        "frameDt": 1.8294000000059605,
+        "frameDt": 1.3934000000003726,
         "state": "arrival",
         "inside": false,
         "opacity": 0,
@@ -309,7 +309,7 @@
         "elapsed": 0
       },
       {
-        "frameDt": 1.8390999999940396,
+        "frameDt": 1.4141999999997206,
         "state": "arrival",
         "inside": false,
         "opacity": 0,
@@ -321,7 +321,7 @@
         "elapsed": 0
       },
       {
-        "frameDt": 1.7919000000059604,
+        "frameDt": 1.395100000000093,
         "state": "arrival",
         "inside": false,
         "opacity": 0,
@@ -333,91 +333,79 @@
         "elapsed": 0
       },
       {
-        "frameDt": 1.7215,
+        "frameDt": 1.3976000000000932,
         "state": "arrival",
         "inside": false,
-        "opacity": 0.000533333,
+        "opacity": 0.000266667,
         "position": [
-          23.616954849140186,
-          118.35121333356165,
-          195.87570407889015
+          23.623256064361936,
+          118.38185666663811,
+          195.92129524821945
         ],
         "elapsed": 0
       },
       {
-        "frameDt": 0.030099999994039537,
+        "frameDt": 1.4151999999997207,
         "state": "arrival",
         "inside": false,
-        "opacity": 0.0206,
+        "opacity": 0.166933,
         "position": [
-          23.142788399822592,
-          116.04530250068494,
-          192.4449685587822
+          19.684996517754875,
+          99.22977333330479,
+          167.4268141785572
         ],
         "elapsed": 0
       },
       {
-        "frameDt": 1.8248000000044704,
+        "frameDt": 1.4278000000002793,
         "state": "arrival",
         "inside": false,
-        "opacity": 0.187267,
+        "opacity": 0.3336,
         "position": [
-          19.20452885321553,
-          96.89321916735162,
-          163.95048748911995
+          15.746736971147811,
+          80.07768999997145,
+          138.932333108895
         ],
         "elapsed": 0
       },
       {
-        "frameDt": 1.9526999999955297,
+        "frameDt": 1.403100000000093,
         "state": "arrival",
         "inside": false,
-        "opacity": 0.353933,
+        "opacity": 0.500267,
         "position": [
-          15.266269306608466,
-          77.74113583401828,
-          135.45600641945774
+          11.80847742454075,
+          60.925606666638124,
+          110.43785203923277
         ],
         "elapsed": 0
       },
       {
-        "frameDt": 1.8663000000044703,
+        "frameDt": 2.367700000000186,
         "state": "arrival",
         "inside": false,
-        "opacity": 0.5206,
+        "opacity": 0.666933,
         "position": [
-          11.328009760001402,
-          58.58905250068494,
-          106.96152534979551
+          7.870217877933685,
+          41.77352333330478,
+          81.94337096957052
         ],
         "elapsed": 0
       },
       {
-        "frameDt": 3.2153000000044702,
+        "frameDt": 2.361399999999907,
         "state": "arrival",
         "inside": false,
-        "opacity": 0.687267,
+        "opacity": 0.8336,
         "position": [
-          7.38975021339434,
-          39.43696916735162,
-          78.46704428013328
+          3.931958331326623,
+          22.621439999971457,
+          53.448889899908295
         ],
         "elapsed": 0
       },
       {
-        "frameDt": 4.252,
-        "state": "arrival",
-        "inside": false,
-        "opacity": 0.853933,
-        "position": [
-          3.451490666787276,
-          20.284885834018283,
-          49.97256321047104
-        ],
-        "elapsed": 0
-      },
-      {
-        "frameDt": 3.0007999999970196,
+        "frameDt": 2.8901999999997208,
         "state": "arrival",
         "inside": true,
         "opacity": 1,
@@ -429,10 +417,10 @@
         "elapsed": 0
       },
       {
-        "frameDt": 1.0882999999970198,
+        "frameDt": 0.9695999999996274,
         "state": "arrival",
         "inside": true,
-        "opacity": 0.4382,
+        "opacity": 0.4992,
         "position": [
           0,
           3.5,
@@ -441,7 +429,7 @@
         "elapsed": 0
       },
       {
-        "frameDt": 1.0512000000029802,
+        "frameDt": 0.9678999999999068,
         "state": "play",
         "inside": true,
         "opacity": 0,
@@ -460,10 +448,10 @@
     "height": 844,
     "reducedMotion": "reduce",
     "launch": "start",
-    "preparationMs": 4803.29999999702,
+    "preparationMs": 5297.200000000186,
     "snapshots": {
       "start": {
-        "frameDt": 0.0012000000029802323,
+        "frameDt": 0.0008999999999068678,
         "state": "arrival",
         "inside": false,
         "opacity": 0,
@@ -475,10 +463,10 @@
         "elapsed": 0
       },
       "approach": {
-        "frameDt": 0.7220999999940395,
+        "frameDt": 0.7135,
         "state": "arrival",
         "inside": false,
-        "opacity": 0.5008,
+        "opacity": 0.5006,
         "position": [
           64.69247681893202,
           307.07,
@@ -487,7 +475,7 @@
         "elapsed": 0
       },
       "blackout": {
-        "frameDt": 0.7137000000029803,
+        "frameDt": 0.7377999999998137,
         "state": "arrival",
         "inside": true,
         "opacity": 1,
@@ -499,10 +487,10 @@
         "elapsed": 0
       },
       "reveal": {
-        "frameDt": 0.44210000000149013,
+        "frameDt": 0.5203999999999068,
         "state": "arrival",
         "inside": true,
-        "opacity": 0.4976,
+        "opacity": 0.4982,
         "position": [
           64.69247681893202,
           307.07,
@@ -513,7 +501,7 @@
     },
     "frames": [
       {
-        "frameDt": 0.0012000000029802323,
+        "frameDt": 0.0008999999999068678,
         "state": "arrival",
         "inside": false,
         "opacity": 0,
@@ -525,7 +513,7 @@
         "elapsed": 0
       },
       {
-        "frameDt": 0.7436999999955296,
+        "frameDt": 0.7268999999999068,
         "state": "arrival",
         "inside": false,
         "opacity": 0,
@@ -537,7 +525,7 @@
         "elapsed": 0
       },
       {
-        "frameDt": 0.7367000000029802,
+        "frameDt": 0.7592000000001863,
         "state": "arrival",
         "inside": false,
         "opacity": 0,
@@ -549,7 +537,7 @@
         "elapsed": 0
       },
       {
-        "frameDt": 0.7215,
+        "frameDt": 0.7188999999999068,
         "state": "arrival",
         "inside": false,
         "opacity": 0,
@@ -561,10 +549,10 @@
         "elapsed": 0
       },
       {
-        "frameDt": 0.7292000000029802,
+        "frameDt": 0.724,
         "state": "arrival",
         "inside": false,
-        "opacity": 0.0008,
+        "opacity": 0.0006,
         "position": [
           64.69247681893202,
           307.07,
@@ -573,10 +561,10 @@
         "elapsed": 0
       },
       {
-        "frameDt": 0.7307999999970197,
+        "frameDt": 0.7092000000001862,
         "state": "arrival",
         "inside": false,
-        "opacity": 0.167467,
+        "opacity": 0.167267,
         "position": [
           64.69247681893202,
           307.07,
@@ -585,10 +573,10 @@
         "elapsed": 0
       },
       {
-        "frameDt": 0.7317000000029802,
+        "frameDt": 0.7128999999999068,
         "state": "arrival",
         "inside": false,
-        "opacity": 0.334133,
+        "opacity": 0.333933,
         "position": [
           64.69247681893202,
           307.07,
@@ -597,10 +585,10 @@
         "elapsed": 0
       },
       {
-        "frameDt": 0.7220999999940395,
+        "frameDt": 0.7135,
         "state": "arrival",
         "inside": false,
-        "opacity": 0.5008,
+        "opacity": 0.5006,
         "position": [
           64.69247681893202,
           307.07,
@@ -609,10 +597,10 @@
         "elapsed": 0
       },
       {
-        "frameDt": 0.7481000000014901,
+        "frameDt": 0.7193999999999069,
         "state": "arrival",
         "inside": false,
-        "opacity": 0.667467,
+        "opacity": 0.667267,
         "position": [
           64.69247681893202,
           307.07,
@@ -621,10 +609,10 @@
         "elapsed": 0
       },
       {
-        "frameDt": 0.715,
+        "frameDt": 0.7293000000002794,
         "state": "arrival",
         "inside": false,
-        "opacity": 0.834133,
+        "opacity": 0.833933,
         "position": [
           64.69247681893202,
           307.07,
@@ -633,7 +621,7 @@
         "elapsed": 0
       },
       {
-        "frameDt": 0.7137000000029803,
+        "frameDt": 0.7377999999998137,
         "state": "arrival",
         "inside": true,
         "opacity": 1,
@@ -645,10 +633,10 @@
         "elapsed": 0
       },
       {
-        "frameDt": 0.44210000000149013,
+        "frameDt": 0.5203999999999068,
         "state": "arrival",
         "inside": true,
-        "opacity": 0.4976,
+        "opacity": 0.4982,
         "position": [
           64.69247681893202,
           307.07,
@@ -657,7 +645,7 @@
         "elapsed": 0
       },
       {
-        "frameDt": 0.4461999999955297,
+        "frameDt": 0.506,
         "state": "play",
         "inside": true,
         "opacity": 0,

@@ -2,14 +2,14 @@ import assert from 'node:assert/strict';
 import {readFile,writeFile,mkdir} from 'node:fs/promises';
 import {fileURLToPath} from 'node:url';
 import {spawn} from 'node:child_process';
-import {chromium} from 'playwright';
-import {stairShape} from './dist/asylum-stairs.mjs';
+import {launchHardwareBrowser} from './test-support/hardware-browser.mjs';
+import {stairShape,stairConnection,stairFlights} from './dist/asylum-stairs.mjs';
 
 const mode=process.argv[2]??'after',destination=new URL('./artifacts/stair-soffits/',import.meta.url);
 await mkdir(destination,{recursive:true});
 const server=spawn(process.execPath,['Browser/serve.mjs'],{cwd:new URL('../',import.meta.url),windowsHide:true,env:{...process.env,PORT:'0'},stdio:'pipe'});
 const base=await new Promise((resolve,reject)=>{server.stdout.once('data',d=>resolve(String(d).match(/http:\/\/127\.0\.0\.1:\d+/)[0]));server.once('error',reject);});
-const browser=await chromium.launch({headless:true,executablePath:process.env.MODEL_CHROME_PATH??'C:/Program Files/Google/Chrome/Application/chrome.exe',args:['--use-angle=swiftshader','--enable-unsafe-swiftshader']});
+const browser=await launchHardwareBrowser({headless:true,executablePath:process.env.MODEL_CHROME_PATH??'C:/Program Files/Google/Chrome/Application/chrome.exe'});
 try{
  const page=await browser.newPage({viewport:{width:1440,height:850}}),errors=[];
  page.setDefaultTimeout(120000);page.setDefaultNavigationTimeout(120000);
@@ -44,7 +44,11 @@ try{
    ['upper-flight',[(s.innerLeft+s.innerRight)/2,lo+1.65,s.back-.3],[s.right,mid+.8,s.front+.5]],
    ['lower-flight',[(s.innerLeft+s.innerRight)/2,lo+.65,s.front+.2],[s.left,lo+.9,s.back-.3]],
   ]){
-   await pose(position,target,lower);
+   const connection=stairConnection(stair,lower,upper);
+   if(name==='upper-flight'&&connection.upperReturn){
+    const [, [a,b]]=stairFlights(connection,lo,hi),dx=b[0]-a[0],dz=b[2]-a[2],run=Math.hypot(dx,dz),x=(a[0]+b[0])/2,z=(a[2]+b[2])/2;
+    await pose([x-dz/run*.9,lo+1.65,z+dx/run*.9],[x,(a[1]+b[1])/2-.18,z],lower);
+   }else await pose(position,target,lower);
    await page.screenshot({path:fileURLToPath(new URL(`${mode}-${stair.id}-${lower}-${upper}-${name}.png`,destination))});
    views.push({stair:stair.id,lower,upper,name});
   }

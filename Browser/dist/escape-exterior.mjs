@@ -4,6 +4,7 @@ import {addSurvivingLampPosts} from './surviving-lamp-posts.mjs';
 import {matchEstateGrass} from './estate-grass.mjs';
 import {applyGroundSurface} from './ground-materials.mjs';
 import {finishEstateMinerals} from './mineral-materials.mjs';
+import {finishRoofTiles} from './roof-tile-uv.mjs';
 import {createBowlingGreen} from './bowling-green.mjs';
 import {photoDetailPrimitives} from './photo-detail-primitives.mjs';
 import {refineFrontInsideCorners} from './front-inside-corners.mjs';
@@ -111,6 +112,7 @@ export function createEscapeExterior(THREE,aspect){
   const bricks=texture(g=>{g.fillStyle='#897a69';g.fillRect(0,0,512,512);for(let r=0;r<16;r++)for(let c=-1;c<9;c++){const n=random()*25;g.fillStyle=`rgb(${108+n},${57+n*.6},${44+n*.5})`;g.fillRect(c*64+(r%2)*32+1,r*32+1,62,30);}for(let i=0;i<9000;i++){g.fillStyle=i%2?'#fff2':'#0002';g.fillRect(random()*512,random()*512,2,1);}});
   const slates=texture(g=>{g.fillStyle='#3e4c54';g.fillRect(0,0,512,512);for(let r=0;r<16;r++)for(let c=-1;c<10;c++){const n=Math.floor(random()*20);g.fillStyle=`rgb(${66+n},${76+n},${80+n})`;g.fillRect(c*60+(r%2)*30+1,r*32+1,58,30);}});
   const brick=material(0xffffff,{map:bricks}),roof=material(0xc4c9c6,{map:slates});
+  roof.userData.roofTilePixels=[60,32];
   applyGroundSurface(THREE,grass,'grass');
   // Preserve the former grass painter's random draws: planting uses this stream.
   for(let i=0;i<38000;i++)random();
@@ -137,7 +139,11 @@ export function createEscapeExterior(THREE,aspect){
   const legacyAccess=new THREE.Group();legacyAccess.name='Earlier estate access tracks';model.add(legacyAccess);
   function legacyRoad(mat,x,y,z,w,h,d){const road=mesh(new THREE.BoxGeometry(w,h,d),mat,x,y,z);legacyAccess.add(road);}
   // Grounds and surrounding access roads. No red annotation or sale graphics.
-  const accessExcavations=[...frontBasementExcavations(),westCourtAccessExcavation()];
+  // Clear the inferred access slab beneath the complete west garden, including
+  // its narrow return beside the pavilion, so gameplay also exposes one lawn.
+  const westGardenLawn=[[-68.95,25.5],[-55.5,25.5],[-55.5,WEST_RANGE_PLAN.gardenZ],
+    [-46.45,WEST_RANGE_PLAN.gardenZ],[-46.45,42.5],[-68.95,42.5]];
+  const accessExcavations=[...frontBasementExcavations(),westCourtAccessExcavation(),westGardenLawn];
   const access=mesh(excavatedGroundGeometry(THREE,[[-75.5,-49.5],[75.5+OUTER_SHIFT,-49.5],[75.5+OUTER_SHIFT,53.5],[-75.5,53.5]],accessExcavations),path,0,.06,0);
   access.rotation.x=-Math.PI/2;legacyAccess.add(access);
   // Use the continuous terrain for the broad lawns. Raised duplicate slabs
@@ -180,7 +186,7 @@ export function createEscapeExterior(THREE,aspect){
   // projecting stair tower. Its former block is omitted below.
   westBlocks[7]=[-39.6,(WEST_RANGE_PLAN.courtZ+7)/2,7.2,7-WEST_RANGE_PLAN.courtZ,11.3];
   westBlocks[5]=[-62.5,(WEST_RANGE_PLAN.recessRearZ+WEST_RANGE_PLAN.gardenZ)/2,7,WEST_RANGE_PLAN.gardenZ-WEST_RANGE_PLAN.recessRearZ,14.3];
-  westBlocks.push([-69,(WEST_RANGE_PLAN.outerRearZ+WEST_RANGE_PLAN.gardenZ)/2,6,WEST_RANGE_PLAN.gardenZ-WEST_RANGE_PLAN.outerRearZ,15.2]);
+  westBlocks.push([-69,(WEST_RANGE_PLAN.outerRearZ+WEST_RANGE_PLAN.gardenZ)/2,6,WEST_RANGE_PLAN.gardenZ-WEST_RANGE_PLAN.outerRearZ,WEST_RANGE_PLAN.wallHeight]);
   westBlocks.splice(6,1);
   eastBlocks[1][4]=14.3; // The courtyard return has three occupied storeys.
   // Approximate the red outline: a slightly longer front foot, a shallow
@@ -259,8 +265,8 @@ export function createEscapeExterior(THREE,aspect){
     }
     // Outer east white base is retained beyond the mirrored brick inner wing.
     if(eastInner)box(white,41.02,2,z,.12,4,d);
-    if(westForwardRoot)mesh(westForwardRootGeometry(THREE,h-.23,h-.01,.115,true),cream).name='West forward stepped root cornice';
-    else if(!rearArm&&x!==-69&&x!==-39.6)box(cream,x,h-.12,z,w+.23,.22,d+.23);
+    if(westForwardRoot)mesh(westForwardRootGeometry(THREE,h-.23,h-.01,.115,true),white).name='West forward stepped root cornice';
+    else if(!rearArm&&x!==-69&&x!==-39.6)box(white,x,h-.12,z,w+.23,.22,d+.23);
     if(passage){
       const left=Math.max(x-w/2,passage.x-passage.width/2),right=Math.min(x+w/2,passage.x+passage.width/2);
       // Visible lintel/soffit above the opening, with no foundation across it.
@@ -269,8 +275,10 @@ export function createEscapeExterior(THREE,aspect){
     }
     const innerCornerRoom=Math.abs(x)===22.5&&z===3;
     // These two courtyard hips need a solid underside out to the slate edge.
-    if(westForwardRoot)mesh(westForwardRootGeometry(THREE,h+.01,h+.23,.24,true),stone).name='West forward stepped root roof support';
-    else if(!rearArm&&x!==-69&&x!==-39.6)box(stone,x,h+.12,z,w+(innerCornerRoom?.8:.48),.22,d+(innerCornerRoom?.8:.48));
+    // All existing roof-edge render shares the photo-detail white. The
+    // dragon pediment and portico retain their separate cream material.
+    if(westForwardRoot)mesh(westForwardRootGeometry(THREE,h+.01,h+.23,.24,true),white).name='West forward stepped root roof support';
+    else if(!rearArm&&x!==-69&&x!==-39.6)box(white,x,h+.12,z,w+(innerCornerRoom?.8:.48),.22,d+(innerCornerRoom?.8:.48));
     const principal=x===EAST_SHIFT/2&&z===12;
     if(principal){
       // Pitched slate clears the solid cornice slab (top h+.23).
@@ -372,7 +380,7 @@ export function createEscapeExterior(THREE,aspect){
   block(squareX,squareZ,squareWidth,squareDepth,14.3).name='East garden pavilion';
   for(const y of [4.08,8.8])box(white,squareX,y,squareZ,squareWidth+.14,.16,squareDepth+.14);
   addEastPhotoDetails(THREE,{model,box,mesh,worldUV,white,brick:photoBrick,roof,steel,material,hipRoof,details});
-  joinWestCrossRangeRoof(THREE,{model,mesh,roof});
+  joinWestCrossRangeRoof(THREE,{model,mesh,roof,brick:photoBrick,white,worldUV});
   refineFrontInsideCorners(THREE,{model,batches,box,mesh,worldUV,white,brick:photoBrick,roof,material,details});
   // Open rear approaches connect the gaps between the arms to the back road.
   for(const x of [-23,23]){
@@ -531,6 +539,10 @@ export function createEscapeExterior(THREE,aspect){
   model.traverse(object=>{for(const mat of (Array.isArray(object.material)?object.material:[object.material]))if(mat?.userData.estateGrass)lawnMaterials.add(mat);});
   for(const mat of lawnMaterials)matchEstateGrass(mat,grass);
   joinInstancedFacadeCourses(THREE,model);
+  for(const name of ['Entrance west projection slate roof','Entrance west slate pitches to render edge']){
+    const roofMesh=model.getObjectByName(name);if(roofMesh)roofMesh.userData.preciseRoofUV=true;
+  }
+  finishRoofTiles(THREE,model);
   finishEstateMinerals(THREE,model);
   prepareExteriorShadows(THREE,model,{exclude:[trees]});
   return {scene,camera,model,terrain,legacyAccess,mast,chapel,churchGrounds,waterTower,estateChimney,annexe,newHospital:annexe,churtonWard,uptonFrithOscroft,irbyAshley,graftonEdge,haleWard,bowlingGreen,estatesDepartment,farndonWard,witbyWard,mainAdmin,adminCorridor,laundry,garagesMortuary,greenhouses,outhouse,willows,trees,invalidateShadows};

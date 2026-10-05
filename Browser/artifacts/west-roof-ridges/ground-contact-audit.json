@@ -1,0 +1,109 @@
+{
+  "skirts": 3762,
+  "distantTrees": 1327,
+  "unsupported": [],
+  "states": [
+    {
+      "year": 1829,
+      "trees": 112,
+      "lamps": 53,
+      "issues": []
+    },
+    {
+      "year": 1849,
+      "trees": 112,
+      "lamps": 53,
+      "issues": []
+    },
+    {
+      "year": 1856,
+      "trees": 112,
+      "lamps": 53,
+      "issues": []
+    },
+    {
+      "year": 1860,
+      "trees": 112,
+      "lamps": 53,
+      "issues": []
+    },
+    {
+      "year": 1870,
+      "trees": 112,
+      "lamps": 53,
+      "issues": []
+    },
+    {
+      "year": 1896,
+      "trees": 112,
+      "lamps": 105,
+      "issues": []
+    },
+    {
+      "year": 1912,
+      "trees": 112,
+      "lamps": 105,
+      "issues": []
+    },
+    {
+      "year": 1915,
+      "trees": 115,
+      "lamps": 121,
+      "issues": []
+    },
+    {
+      "year": 1916,
+      "trees": 115,
+      "lamps": 121,
+      "issues": []
+    },
+    {
+      "year": 1938,
+      "trees": 115,
+      "lamps": 121,
+      "issues": []
+    },
+    {
+      "year": 2010,
+      "trees": 97,
+      "lamps": 93,
+      "issues": []
+    },
+    {
+      "year": 2016,
+      "trees": 97,
+      "lamps": 104,
+      "issues": []
+    },
+    {
+      "year": 2021,
+      "trees": 97,
+      "lamps": 113,
+      "issues": []
+    },
+    {
+      "year": "historic",
+      "trees": 112,
+      "lamps": 52,
+      "issues": []
+    },
+    {
+      "year": "modern",
+      "trees": 97,
+      "lamps": 113,
+      "issues": []
+    },
+    {
+      "year": "both",
+      "trees": 97,
+      "lamps": 113,
+      "issues": []
+    },
+    {
+      "year": "hidden",
+      "trees": 0,
+      "lamps": 0,
+      "issues": []
+    }
+  ]
+}

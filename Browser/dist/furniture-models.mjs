@@ -5,7 +5,9 @@ import {createMedicalFurnitureModels} from './medical-furniture-models.mjs';
 import {createWardrobeModel} from './wardrobe-model.mjs';
 import {createReceptionFurnitureModels} from './reception-furniture-models.mjs';
 import {createHallFurnitureModels} from './hall-furniture-models.mjs';
+import {createSanitaryFurnitureModels} from './sanitary-furniture-models.mjs';
 import {applyFurnitureFinish} from './furniture-finishes.mjs';
+import {createCellMattressModel} from './padded-cell-models.mjs';
 
 const libraries=new WeakMap();
 function normalize(THREE,geometry,width,height,depth){
@@ -37,6 +39,7 @@ export function loadFurnitureModels(THREE){
    models[kind]=[{geometry:normalize(THREE,raw[kind],model.width,model.height,model.depth),material,paint:material}];
   }
   models.cupboard=createWardrobeModel(THREE);
+  models.cellMattress=createCellMattressModel(THREE);
   // Four KayKit shelves, matching timber sides and the same pack's books form
   // a freestanding bookcase. The source shelf is a wall shelf, not a tall case.
   const shelves=[],books=[],stockedBooks=[],frames=[],shelf=normalize(THREE,raw.bookcase,1.13,.23,.34),book=normalize(THREE,raw.books,.42,.27,.20);
@@ -63,6 +66,7 @@ export function loadFurnitureModels(THREE){
   Object.assign(models,createMedicalFurnitureModels(THREE));
   Object.assign(models,createReceptionFurnitureModels(THREE));
   Object.assign(models,createHallFurnitureModels(THREE));
+  Object.assign(models,createSanitaryFurnitureModels(THREE));
   for(const g of Object.values(raw))if(g?.isBufferGeometry)g.dispose();
   return models;
  })());

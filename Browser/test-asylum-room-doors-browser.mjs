@@ -2,12 +2,12 @@ import assert from 'node:assert/strict';
 import {readFile,writeFile,mkdir} from 'node:fs/promises';
 import {fileURLToPath} from 'node:url';
 import {spawn} from 'node:child_process';
-import {chromium} from 'playwright';
+import {launchHardwareBrowser} from './test-support/hardware-browser.mjs';
 
 const destination=new URL(process.env.ROOM_DOOR_ARTIFACT_DIR??'./artifacts/room-doors/',import.meta.url);await mkdir(destination,{recursive:true});
 const server=spawn(process.execPath,['Browser/serve.mjs'],{cwd:new URL('../',import.meta.url),windowsHide:true,stdio:'pipe',env:{...process.env,PORT:'0'}});
 const base=await new Promise((resolve,reject)=>{server.stdout.once('data',d=>resolve(String(d).match(/http:\/\/127\.0\.0\.1:\d+/)[0]));server.once('error',reject);});
-const browser=await chromium.launch({headless:true,executablePath:process.env.MODEL_CHROME_PATH??'C:/Program Files/Google/Chrome/Application/chrome.exe',args:['--use-angle=swiftshader','--enable-unsafe-swiftshader']});
+const browser=await launchHardwareBrowser({headless:true,executablePath:process.env.MODEL_CHROME_PATH??'C:/Program Files/Google/Chrome/Application/chrome.exe'});
 try{
  const page=await browser.newPage({viewport:{width:1280,height:800},reducedMotion:'reduce'}),errors=[],captures=[];
  page.setDefaultTimeout(120000);page.setDefaultNavigationTimeout(120000);
@@ -21,7 +21,7 @@ window.roomDoorTest={get ready(){return ready;},get floors(){return floors;},get
   const leaf=window.roomDoorTest.groups[i].getObjectByName('Asylum RoomDoor');
   return {floor:f.id,doors:f.roomDoors.map(d=>({id:d.roomId,angle:d.openAngle,hinge:d.hingeSide,limited:d.wallLimited})),instances:leaf.count};
  }));
- assert.equal(gamePoses.reduce((n,f)=>n+f.doors.length,0),90);assert(gamePoses.every(f=>f.instances===f.doors.length*5));
+ assert.equal(gamePoses.reduce((n,f)=>n+f.doors.length,0),95);assert(gamePoses.every(f=>f.instances===f.doors.length*5));
  async function shot(name,pose){
   if(pose)await page.evaluate(p=>window.roomDoorTest.pose(...p),pose);
   await page.evaluate(()=>new Promise(resolve=>requestAnimationFrame(()=>requestAnimationFrame(resolve))));
@@ -61,5 +61,5 @@ window.roomDoorTest={get ready(){return ready;},get floors(){return floors;},get
  await page.evaluate(()=>{const {walker,floors}=window.roomDoorExploreTest;walker.setView({position:[-20.5,1.8,7.2],target:[-20.5,1.8,12]});Object.assign(walker.actor,{x:-20.5,z:7.2,floor:0,y:floors[0].elevation,outside:false,stair:null});walker.update(.01);document.getElementById('layoutControls').open=false;});
  await shot('exploration-door');assert.deepEqual(errors,[]);
  await writeFile(new URL('validation.json',destination),JSON.stringify({gamePoses,explorePoses,captures,walks:crossings.length*2,errors},null,2)+'\n');
- console.log(`PASS: 90 open room doors in game and exploration, ${crossings.length*2} actual player doorway crossings, ${captures.length} desktop/mobile views, all hinge orientations, wall contacts and clear corridor link, no page/shader errors.`);
+ console.log(`PASS: 95 open room doors in game and exploration, ${crossings.length*2} actual player doorway crossings, ${captures.length} desktop/mobile views, all hinge orientations, wall contacts and clear corridor link, no page/shader errors.`);
 }finally{await browser.close();server.kill();}

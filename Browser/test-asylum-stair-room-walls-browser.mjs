@@ -2,13 +2,13 @@ import assert from 'node:assert/strict';
 import {readFile,writeFile,mkdir} from 'node:fs/promises';
 import {fileURLToPath} from 'node:url';
 import {spawn} from 'node:child_process';
-import {chromium} from 'playwright';
+import {launchHardwareBrowser} from './test-support/hardware-browser.mjs';
 
 const mode=process.argv[2]??'after',destination=new URL('./artifacts/stair-room-walls/',import.meta.url);
 await mkdir(destination,{recursive:true});
 const server=spawn(process.execPath,['Browser/serve.mjs'],{cwd:new URL('../',import.meta.url),windowsHide:true,env:{...process.env,PORT:'0'},stdio:'pipe'});
 const base=await new Promise((resolve,reject)=>{server.stdout.once('data',d=>resolve(String(d).match(/http:\/\/127\.0\.0\.1:\d+/)[0]));server.once('error',reject);});
-const browser=await chromium.launch({headless:true,executablePath:process.env.MODEL_CHROME_PATH??'C:/Program Files/Google/Chrome/Application/chrome.exe',args:['--use-angle=swiftshader','--enable-unsafe-swiftshader']});
+const browser=await launchHardwareBrowser({headless:true,executablePath:process.env.MODEL_CHROME_PATH??'C:/Program Files/Google/Chrome/Application/chrome.exe'});
 try{
  const page=await browser.newPage({viewport:{width:1500,height:800}}),errors=[];
  page.setDefaultTimeout(120000);page.setDefaultNavigationTimeout(120000);
@@ -29,13 +29,15 @@ try{
    Object.assign(t.walker.actor,{floor,outside:false,y});t.interior.update(t.walker.actor);
    return flatWalkable(t.floors[floor],x,z);
   },{x,z,tx,tz,floor});
-  assert(result,`The ${floor} camera stands on a clear landing or room floor`);
+  assert(result,`The ${floor} camera at (${x}, ${z}) stands on a clear landing or room floor`);
   await page.evaluate(()=>new Promise(r=>requestAnimationFrame(()=>requestAnimationFrame(r))));
  }
  const views=[];
  for(const floor of [0,1])for(const side of [-1,1])for(const face of ['landing','room']){
   const name=`${side<0?'west':'east'}-${floor===0?'ground':'first'}-${face}`;
-  const x=side*(face==='landing'?35.6:33.5),z=face==='landing'?-31.55:-34.7,tx=side*31.4,tz=face==='landing'?-33.5:-31.7;
+  // The east first-floor room's door panels project into the former camera spot.
+  const roomX=floor===1&&side===1?33.3:33.5;
+  const x=side*(face==='landing'?35.6:roomX),z=face==='landing'?-31.55:-34.7,tx=side*31.4,tz=face==='landing'?-33.5:-31.7;
   await pose(x,z,tx,tz,floor);
   await page.screenshot({path:fileURLToPath(new URL(`${mode}-${name}.png`,destination))});views.push(name);
  }

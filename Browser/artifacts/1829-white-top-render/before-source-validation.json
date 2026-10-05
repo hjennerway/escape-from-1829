@@ -1,0 +1,197 @@
+{
+  "build": {
+    "mode": "procedural",
+    "milliseconds": 2000.0999999996275
+  },
+  "errors": [],
+  "views": {
+    "east": {
+      "position": [
+        75,
+        37,
+        56
+      ],
+      "target": [
+        48,
+        11,
+        17
+      ],
+      "fov": 50
+    },
+    "west": {
+      "position": [
+        -75,
+        38,
+        57
+      ],
+      "target": [
+        -48,
+        11,
+        17
+      ],
+      "fov": 50
+    },
+    "frontage": {
+      "position": [
+        0,
+        27,
+        60
+      ],
+      "target": [
+        0,
+        11,
+        13
+      ],
+      "fov": 48
+    },
+    "rear": {
+      "position": [
+        5,
+        42,
+        -60
+      ],
+      "target": [
+        0,
+        11,
+        3
+      ],
+      "fov": 54
+    }
+  },
+  "survey": {
+    "named": [
+      {
+        "name": "Entrance east mitred cornice layer 0",
+        "color": 13358289,
+        "finish": "render"
+      },
+      {
+        "name": "Entrance east mitred cornice layer 1",
+        "color": 13358289,
+        "finish": "render"
+      },
+      {
+        "name": "Entrance east mitred cornice layer 2",
+        "color": 13358289,
+        "finish": "render"
+      },
+      {
+        "name": "Entrance east mitred cornice layer 3",
+        "color": 13358289,
+        "finish": "render"
+      }
+    ],
+    "probes": [
+      {
+        "name": "east main cornice",
+        "hit": "",
+        "color": 14078138,
+        "point": [
+          47.99999999999999,
+          14.180000000000001,
+          19.614999771118164
+        ],
+        "finish": "render"
+      },
+      {
+        "name": "east main roof support",
+        "hit": "",
+        "color": 10723210,
+        "point": [
+          48,
+          14.419999999999995,
+          19.739999771118164
+        ],
+        "finish": "stone"
+      },
+      {
+        "name": "west forward cornice",
+        "hit": "",
+        "color": 13818322,
+        "point": [
+          -35.00000000000001,
+          8.82,
+          43.38999846577644
+        ],
+        "finish": "render"
+      },
+      {
+        "name": "east forward cornice",
+        "hit": "",
+        "color": 13818322,
+        "point": [
+          35.00000000000001,
+          8.8,
+          43.38000014424324
+        ],
+        "finish": "render"
+      },
+      {
+        "name": "east pavilion side cornice",
+        "hit": "",
+        "color": 14212565,
+        "point": [
+          70.15000243484974,
+          14.52,
+          15.15
+        ],
+        "finish": "render"
+      },
+      {
+        "name": "west lawn bay cornice",
+        "hit": "",
+        "color": 13818322,
+        "point": [
+          -27.290000304579735,
+          8.83,
+          35.50000000000001
+        ],
+        "finish": "render"
+      },
+      {
+        "name": "east lawn bay cornice",
+        "hit": "",
+        "color": 13818322,
+        "point": [
+          27.290000304579735,
+          8.83,
+          35.50000000000001
+        ],
+        "finish": "render"
+      },
+      {
+        "name": "west wing inner roof band",
+        "hit": "Aerial batch · Period · 1829 Wings · 231",
+        "color": 13818322,
+        "point": [
+          -28.764999389648438,
+          8.48,
+          40
+        ],
+        "finish": "render"
+      },
+      {
+        "name": "east wing inner roof band",
+        "hit": "East lawn continuous upper floor band",
+        "color": 13818322,
+        "point": [
+          28.764999389648438,
+          8.48,
+          40
+        ],
+        "finish": "render"
+      },
+      {
+        "name": "dragon pediment border",
+        "hit": "",
+        "color": 14078138,
+        "point": [
+          0,
+          14.649999999999999,
+          20.049999237060547
+        ],
+        "finish": "render"
+      }
+    ]
+  }
+}

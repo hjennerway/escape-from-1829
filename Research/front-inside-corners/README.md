@@ -99,3 +99,83 @@ Exact strip footprints keep elevated walking support out of the open courts.
 Browser sources are shared by Explore, the escape game and aerial views.
 This change does not regenerate Unity, Blender or packaged application exports.
 Validation and visual evidence are in `Browser/artifacts/facade-trim/`.
+
+## East render overhangs and ghost lines (5 October 2026)
+
+The owner's [marked aerial view](../../Browser/artifacts/render-cleanup/marked-reference.png)
+identifies two render courses projecting into the east entrance recess in
+yellow, and faint lines across the brickwork in blue. The annotations locate
+the reported defects; they do not supply additional instructions or dimensions.
+
+The reflected east lawn courses still began at z=19.8 after the corner wall
+was cut back. Both now end with an oblique cap on the diagonal wall plane
+x+z=53.05. Their heights, thicknesses, remaining bay returns and supported
+walking footprints follow the existing courses. The differently shaped west
+infill retains its established course endpoints.
+
+The ghost lines were exposed triangle edges of old cornice/support slabs
+ending on the replacement facade plane. Existing geometry is now cut 0.04
+units behind the new wall skin. The roof closures meet the actual wall plane
+and continue its brick UV coordinates; their slate-height samples remain
+inside the roof edge so the closures stay complete. This shared correction
+covers both entrance recesses, including their tall and low returns. The
+wall/collision outlines, openings and slate cut outlines retain their definitions.
+
+The browser checks survey both band solids and collision caps, concealed old
+trim edges, all nine roof closures, and the existing openings and walked
+routes. Restoring the saved original builders independently fails the new
+band and ghost-edge regressions. Before/after views, wider facade checks and
+validation logs are in `Browser/artifacts/render-cleanup/`. Browser sources
+serve aerial, Explore and gameplay; Unity, Blender and packaged exports are
+not regenerated. Final compiled-model results are recorded in DEVELOPMENT.md.
+
+## West entrance yellow roof boundary (5 October 2026)
+
+The owner's later yellow guide replaces the sampled coping on the three
+west upper returns beside the entrance. The roof and trim now share level
+back edges, a small step, and a straight descending side meeting the actual
+entrance cornice. Raised trim tips are removed. See the
+[fitted model and focused validation notes](../west/entrance-yellow-boundary-2026-10-05/README.md).
+
+## East entrance cornice and roof joins (5 October 2026)
+
+The owner's [red/blue-circled view](../../Browser/artifacts/entrance-cornice-joins/reference.png)
+identifies slate cutting through the eastern three-bay projection's cornice
+and a disconnected upper return at the adjoining main-range eave. The image
+locates defects; the written request authorizes the repair and subsequently
+limits validation to local geometry.
+
+The eastern entrance now uses the same roof-to-render boundary treatment as
+the west entrance, transforming the mirrored cornice's stored coordinates
+into the actual scene. Slate stops at the upper moulding's inner edge and a
+narrow pitch joins that edge to the retained roof. This supersedes the old
+sampled eastern slate fringe. The front contact remains y=13.69.
+
+The thin coping joins the entrance cornice, canted wall and back wall with
+shared endpoints. Its high side return ends on the existing main cornice's
+z=17.24 plane and y=13.03 cap, sampled from the retained geometry. All widths
+share this terminal plane; the former discrete sample ended short of it.
+Slate retracts from the white trim and meets its edge through a narrow pitch.
+These fitted coordinates close the existing model rather than establish
+surveyed measurements. The lower wing roof and coping retain their geometry.
+
+Run `npm run test:entrance-cornice` from Browser for the local east/west roof
+boundaries, immediate courtyard closures, glazing and walking clearance.
+The eastern check includes 15 boundary/return contacts and 3,318 physical
+slate/render samples, with reflected outward faces handled explicitly.
+Both reported defects independently fail with saved original sources.
+Actual hardware-rendered source views pass 15 visible surface probes and
+cover close, opposite, low and phone views. Evidence and receipts are in
+`Browser/artifacts/entrance-cornice-joins/`.
+
+Shared browser sources serve aerial, Explore and gameplay. Validation stays
+local as requested; compiled aerial, Unity, Blender and packaged exports are
+not regenerated for this repair.
+
+## Eastern canted roof seam (5 October 2026)
+
+The later [blue/red/yellow roof correction](../east-roof-brick-joins/README.md)
+closes a small brick-revealing opening between the canted slate ribbon and
+the retained entrance pitches. Its samples now include where overlapping
+roof planes exchange which is uppermost, closing the seam from the owner's
+oblique direction. The established wall outline and white coping remain.

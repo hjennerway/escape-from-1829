@@ -1,15 +1,15 @@
 import assert from 'node:assert/strict';
 import {readFile,writeFile,mkdir} from 'node:fs/promises';
 import {fileURLToPath} from 'node:url';
-import {spawn} from 'node:child_process';
-import {chromium} from 'playwright';
+import {startTestServer} from './test-support/server.mjs';
+import {launchHardwareBrowser} from './test-support/hardware-browser.mjs';
 
-const mode=process.argv[2]??'after',port=1877,destination=new URL('./artifacts/ceiling-entrance/',import.meta.url);
+const mode=process.argv[2]??'after',destination=new URL('./artifacts/ceiling-entrance/',import.meta.url);
 await mkdir(destination,{recursive:true});
 const source=async name=>readFile(new URL(mode==='before'?`./artifacts/ceiling-entrance/${name}-before.mjs`:`./dist/${name}.mjs`,import.meta.url),'utf8');
 const game=await source('game'),materials=await source('interior-materials'),architecture=await source('asylum-architecture');
-const server=spawn(process.execPath,['Browser/serve.mjs'],{cwd:new URL('../',import.meta.url),windowsHide:true,stdio:'ignore',env:{...process.env,PORT:String(port)}});
-const browser=await chromium.launch({headless:true,executablePath:process.env.MODEL_CHROME_PATH??'C:/Program Files/Google/Chrome/Application/chrome.exe',args:['--use-angle=swiftshader','--enable-unsafe-swiftshader']});
+const {server,base}=await startTestServer();
+const browser=await launchHardwareBrowser({headless:true,executablePath:process.env.MODEL_CHROME_PATH??'C:/Program Files/Google/Chrome/Application/chrome.exe'});
 try{
  const page=await browser.newPage({viewport:{width:1200,height:800}}),errors=[];page.setDefaultTimeout(60000);
  page.on('pageerror',e=>errors.push(e.message));page.on('console',m=>{if(m.type()==='error'&&/THREE|WebGL|shader/i.test(m.text()))errors.push(m.text());});
@@ -22,7 +22,7 @@ window.finishCheck={get ready(){return ready;},start(){start();arrivalCutscene.u
  door(){scene.updateMatrixWorld(true);const door=floors[0].exits.find(e=>e.id==='D1'),ray=new THREE.Raycaster(new THREE.Vector3(door.worldX-.46,2.55,door.worldZ-1),new THREE.Vector3(0,0,1));ray.far=2;const hit=ray.intersectObjects(floorGroups[0].children,true)[0];return {name:hit?.object.name,color:hit?.object.material.color.getHex(),signs:floorGroups[0].children.filter(o=>o.name==='Emergency exit signage').length,exits:floors[0].exits.length};},
  roundTrip(){const door=floors[0].exits.find(e=>e.id==='D1');this.pose(door.inside.x,door.inside.z,0,0,21);state='play';keys.clear();update(.01);keys.add('KeyE');update(.04);const outside=player.outside,position=[player.x,player.y,player.z];update(.04);const latched=player.outside;keys.delete('KeyE');update(.04);keys.add('KeyE');update(.04);const returned=!player.outside&&player.floor===0;keys.clear();state='paused';return {outside,latched,returned,position,expected:door.destination};}
 };`}));
- await page.goto(`http://127.0.0.1:${port}`);await page.waitForFunction(()=>window.finishCheck?.ready,null,{timeout:120000});
+ await page.goto(`${base}`);await page.waitForFunction(()=>window.finishCheck?.ready,null,{timeout:120000});
  await page.evaluate(()=>window.finishCheck.start());await page.addStyleTag({content:'#hud,header,.vignette{display:none!important}'});
  const views=[
   ['reception-ceiling',0,14,0,0,5,.52],

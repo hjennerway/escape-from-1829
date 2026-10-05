@@ -1,0 +1,15 @@
+{
+  "laneZ": -93.55000000000001,
+  "facingMasonry": [
+    -82.64999995231629,
+    -104.38500000834465
+  ],
+  "masonryClearance": [
+    10.900000047683719,
+    10.835000008344636
+  ],
+  "clearanceSamples": 2400,
+  "closedLoop": true,
+  "joinedSeam": true,
+  "oldRoadRemoved": true
+}

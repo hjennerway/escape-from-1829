@@ -36,18 +36,18 @@ export function addCentralBack(THREE,{model,mesh,worldUV,brick,white,roof,materi
       return [x+nx*scale,z+nz*scale];
     });
   }
-  function course(name,y,h,out,inside=.08,points=outline){
-    prism(name,[...offsetLine(out,points),...offsetLine(-inside,points).reverse()],y-h/2,h,trim);
+  function course(name,y,h,out,inside=.08,points=outline,finish=trim){
+    prism(name,[...offsetLine(out,points),...offsetLine(-inside,points).reverse()],y-h/2,h,finish);
   }
   for(const y of [3.15,7.1,10.7])course('Central back continuous floor band',y,.24,.17);
   // Continue the same profile around the shoulders and along both roof edges
   // to the front pediment. One mitred strip per layer avoids overlapping ends.
   // Its inside edge sits on Reception's wall; the coping meets the pediment.
   const roofOutline=[[-7.35,19.7],[-7.35,10.4],...outline,[7.35,10.4],[7.35,19.7]];
-  course('Central back lower cornice',14.32,.12,.23,.25,roofOutline);
-  course('Central back parapet',14.61,.44,.14,.25,roofOutline);
-  course('Central back parapet moulding',14.55,.065,.2,.25,roofOutline);
-  course('Central back projecting coping',14.89,.13,.26,.25,roofOutline);
+  course('Central back lower cornice',14.32,.12,.23,.25,roofOutline,white);
+  course('Central back parapet',14.61,.44,.14,.25,roofOutline,white);
+  course('Central back parapet moulding',14.55,.065,.2,.25,roofOutline,white);
+  course('Central back projecting coping',14.89,.13,.26,.25,roofOutline,white);
 
   function window(i,t,y,w,h){
     const p=face(i,t,.065),name='central-back-'+(i===2?'rear':i===1?'west-cant':'east-cant');

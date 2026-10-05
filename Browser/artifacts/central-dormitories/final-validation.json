@@ -1,0 +1,151 @@
+{
+  "conversion": {
+    "rooms": [
+      "R6",
+      "R8",
+      "R10"
+    ],
+    "mergedPairs": [
+      [
+        "R6",
+        "R7"
+      ],
+      [
+        "R8",
+        "R9"
+      ],
+      [
+        "R10",
+        "R11"
+      ]
+    ],
+    "groundFloorRetained": true
+  },
+  "initialBedLayout": {
+    "bedsPerRoom": 16,
+    "totalBeds": 48,
+    "bedAccessRoutesWalked": 48,
+    "visual": {
+      "counts": [
+        {
+          "id": "R6",
+          "beds": 16
+        },
+        {
+          "id": "R8",
+          "beds": 16
+        },
+        {
+          "id": "R10",
+          "beds": 16
+        }
+      ],
+      "geometry": {
+        "renderedBeds": 48
+      },
+      "walking": {
+        "x": -1.8,
+        "z": -30.639999999999993,
+        "floor": 1
+      },
+      "renders": [
+        {
+          "name": "R6-north",
+          "calls": 88,
+          "triangles": 1201480
+        },
+        {
+          "name": "R6-south",
+          "calls": 450,
+          "triangles": 1431248
+        },
+        {
+          "name": "R8-north",
+          "calls": 170,
+          "triangles": 1348986
+        },
+        {
+          "name": "R8-south",
+          "calls": 289,
+          "triangles": 1385448
+        },
+        {
+          "name": "R10-north",
+          "calls": 217,
+          "triangles": 1364964
+        },
+        {
+          "name": "R10-south",
+          "calls": 235,
+          "triangles": 1372718
+        }
+      ],
+      "explore": true,
+      "mobile": true,
+      "errors": []
+    },
+    "hardwareRenderer": "ANGLE NVIDIA GeForce RTX 3090 Ti Direct3D11"
+  },
+  "furniture": {
+    "seeds": 8,
+    "roomExitRoutes": 976,
+    "walkedCollisionProbes": 3049,
+    "storageWallContacts": 1392,
+    "clearStorageFrontChecks": 696,
+    "fixedPercent": 81
+  },
+  "suite": {
+    "remainingChecks": 126,
+    "initialPasses": 120,
+    "resolved": [
+      {
+        "command": "node test-asylum-wall-joins.mjs",
+        "result": "passed",
+        "log": "wall-joins-final.log"
+      },
+      {
+        "command": "node test-asylum-room-doors.mjs",
+        "result": "passed",
+        "log": "room-doors-final.log"
+      },
+      {
+        "command": "node test-asylum-door-frames.mjs",
+        "result": "passed",
+        "log": "door-frames-final.log"
+      }
+    ],
+    "unresolved": [
+      {
+        "command": "node test-facade-courses.mjs",
+        "reason": "Current exterior has 23 surveyed courses; expectation is 22."
+      },
+      {
+        "command": "node test-jarman.mjs",
+        "code": 1
+      },
+      {
+        "command": "node test-leighton-newton.mjs",
+        "code": 1
+      },
+      {
+        "command": "node test-aerial-layouts.mjs",
+        "code": 1
+      }
+    ]
+  },
+  "laterOwnerRevision": {
+    "threadId": "01a10d3b-8246-7981-a8f6-c2f384898726",
+    "title": "Adjust beds and chairs",
+    "instruction": "Remove two entrance-side beds and Windsor chairs in all three rooms; push remaining headboards against the walls.",
+    "preserved": true,
+    "initialBedValidationIsHistorical": true
+  },
+  "exports": {
+    "browserInterior": true,
+    "firstFloorReviewDrawings": true,
+    "unityRegenerated": false,
+    "blenderRegenerated": false,
+    "packagedExportsRegenerated": false,
+    "aerialInteriorExcluded": true
+  }
+}

@@ -1,0 +1,31 @@
+{
+  "renderer": "ANGLE NVIDIA GeForce RTX 3090 Ti Direct3D11",
+  "visibleProbes": 23,
+  "sourceCompiledProbesExact": true,
+  "pageOrShaderErrors": [],
+  "focusedPitchBendContacts": 88,
+  "physicalTrimSamples": 432,
+  "suite": {
+    "total": 127,
+    "passed": 124,
+    "failures": [
+      "node test-facade-courses.mjs",
+      "node test-jarman.mjs",
+      "node test-leighton-newton.mjs"
+    ],
+    "resolvedByRetest": [
+      "node test-roof-tiles.mjs",
+      "node test-front-inside-corners.mjs",
+      "node vendor-furniture.mjs --check",
+      "node vendor-furniture-designs.mjs --check"
+    ],
+    "vendorContinuation": "The first continuation passed --check as part of the filename; both vendor checks were rerun with separate arguments and passed. The saved runner is corrected."
+  },
+  "exports": {
+    "browserSource": true,
+    "localCompiled": true,
+    "unity": false,
+    "blender": false,
+    "packaged": false
+  }
+}

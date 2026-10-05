@@ -2,13 +2,13 @@ import assert from 'node:assert/strict';
 import {readFile,writeFile,mkdir} from 'node:fs/promises';
 import {fileURLToPath} from 'node:url';
 import {spawn} from 'node:child_process';
-import {chromium} from 'playwright';
+import {launchHardwareBrowser} from './test-support/hardware-browser.mjs';
 
 const destination=new URL('./artifacts/door-surrounds/',import.meta.url);
 await mkdir(destination,{recursive:true});
 const server=spawn(process.execPath,['Browser/serve.mjs'],{cwd:new URL('../',import.meta.url),windowsHide:true,stdio:'pipe',env:{...process.env,PORT:'0'}});
 const base=await new Promise((resolve,reject)=>{server.stdout.once('data',d=>resolve(String(d).match(/http:\/\/127\.0\.0\.1:\d+/)[0]));server.once('error',reject);});
-const browser=await chromium.launch({headless:true,executablePath:process.env.MODEL_CHROME_PATH??'C:/Program Files/Google/Chrome/Application/chrome.exe',args:['--use-angle=swiftshader','--enable-unsafe-swiftshader']});
+const browser=await launchHardwareBrowser({headless:true,executablePath:process.env.MODEL_CHROME_PATH??'C:/Program Files/Google/Chrome/Application/chrome.exe'});
 try{
  const page=await browser.newPage({viewport:{width:1383,height:816}}),errors=[];
  page.setDefaultTimeout(120000);page.setDefaultNavigationTimeout(120000);
@@ -48,7 +48,7 @@ window.surroundCheck={get ready(){return ready;},get doors(){return floors.flatM
  }
  await page.setViewportSize({width:390,height:844});await page.evaluate(()=>window.surroundCheck.pose(0,'F3'));
  await page.screenshot({path:fileURLToPath(new URL('mobile.png',destination))});
- assert.deepEqual(errors,[]);assert.equal(results.length,23);
+ assert.deepEqual(errors,[]);assert.equal(results.length,24);
  await writeFile(new URL('validation.json',destination),JSON.stringify({results,views:27,errors},null,2)+'\n');
- console.log('PASS: all 23 exit surrounds rendered, 22 visible signs, 23 E round trips with release latch, desktop/oblique/mobile captures, no page or shader errors.');
+ console.log('PASS: all 24 exit surrounds rendered, 23 visible signs, 24 E round trips with release latch, desktop/oblique/mobile captures, no page or shader errors.');
 }finally{await browser.close();server.kill();}

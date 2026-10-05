@@ -1,5 +1,67 @@
 # West wing refinement
 
+## Courtyard bay roof protrusion: clarified location (5 October 2026)
+
+The owner's [wider locator](courtyard-roof-tip-2026-10-05/README.md) identifies
+the courtyard polygonal bay, correcting the earlier garden-pavilion
+interpretation. Its leftover slate return-hip sliver and separate projecting
+white trim strip are removed; the joined bay roof and cornice retain their
+profiles.
+
+## Blue roof slope and red entrance return (5 October 2026)
+
+The latest [blue/yellow and red correction](roof-slope-repair-2026-10-05/README.md)
+retains the main roof plane through the back coping, removing the raised
+protrusion and the steeper ribbon patches. The red entrance return shares
+the projection's level eave. This supersedes the stepped/blended entrance
+boundary profiles; the ridges and building outlines remain.
+
+## Removed pavilion roof-edge protrusion (5 October 2026)
+
+The latest [blue-circled stub removal](pavilion-roof-tip-2026-10-05/README.md)
+removes the entrance-side back return's raised short block and abrupt step.
+The final join follows the main roof pitch, incorporating concurrent roof
+work. This supersedes that step in the earlier yellow-boundary repair.
+
+## Level roof-to-wall edges (5 October 2026)
+
+The [blue-circled/red-wall correction](level-eaves-2026-10-05/README.md)
+lowers every west cross-range perimeter to the main wall's eave height.
+It supersedes the raised roof edges and their stepped render returns.
+The original ridges remain, with straight pitches meeting level cornices.
+
+## Entrance ridge moved to the blue guide (5 October 2026)
+
+The latest [yellow/orange/blue correction](entrance-ridge-shift-2026-10-05/README.md)
+moves the entrance-side perpendicular ridge east to x=-25.8, retaining its
+crown and length and every yellow ridge. Slate now ends at the actual inner
+edge of the entrance cornice, with joined returns along the front and sides.
+This supersedes the entrance branch location in the earlier eave repair.
+
+## Descending roof edges and render returns (5 October 2026)
+
+The latest [blue/purple corner corrections](roof-render-joins-2026-10-05/README.md)
+align both outer-pavilion descending roof edges with the tall cornices and
+join them to the lower eaves with solid white render. They supersede the
+short slate wedges and projecting white end caps in the earlier eave repair.
+Slate meets the render boundary and must never cut through its middle.
+
+## Garden staircase door wall and uniform approaches (5 October 2026)
+
+The latest [ground-photo staircase correction](stair-2026-10-05/README.md)
+places both landing doors on the recessed garden-facing wall and uses
+1.2-wide approaches matching the treads. It supersedes the earlier doors on
+the pavilion inner side wall. The first-floor outside arrival follows the
+new platform, retaining the established interior doorway anchor.
+
+## Ridge-based roof reconstruction (5 October 2026)
+
+The latest [yellow overhead ridge plan](roof-ridges-2026-10-05/README.md)
+replaces the separate upper hips and sampled roof join with one continuous
+main ridge and four pitched branches. Shared valleys and matching masonry
+close the circled roof openings. This supersedes the earlier roof-join
+geometry; the low flat roofs and established wall/window outlines remain.
+
 ## Inside-corner wall extension and flat roof (4 October 2026)
 
 The latest [yellow-line correction](flat-corner-2026-10-04/README.md) adds a
@@ -182,7 +244,7 @@ revision use the `west-lean-to-` prefix in `Browser/artifacts/`.
 The local compiled model is rebuilt and current; compiled/source rendering,
 controls and model-fallback checks also pass.
 
-## West entrance landscape cleanup — 24 September 2026
+## West entrance landscape cleanup ï¿½ 24 September 2026
 
 The latest user annotation removes the two low hedges beside the outer west
 entrance and the pair of short garden entrance railings beside the canted bay.
@@ -486,3 +548,24 @@ The outer-end bands now join the court, entrance-pier returns, outer front
 and garden bays at the common 4.05 / 8.6 levels. All three outer cornice
 profiles and both middle-bay cornices follow their corners continuously.
 See render-corners-2026-10-04/README.md for the marked view and model scope.
+## Continuous garden grass (5 October 2026)
+
+The latest [marked grass correction](grass-level-2026-10-05/README.md) removes
+the raised garden panel and exposes continuous estate terrain across its
+former internal edge. The doorway approach retains its height with solid
+sides down to the lawn. This supersedes the retained raised grass panel in
+the earlier photo refinement.
+
+## West forward-wing photo fire exit (5 October 2026)
+
+The circled F5 return stair now follows the two close ground photographs, with
+dark yellow-edged treads, brick supports and curved black iron frames. See
+[the fitted reference notes](forward-fire-exit-2026-10-05/README.md). This
+supersedes the earlier plain-tread interpretation for this exit only.
+
+## Courtyard downpipe relocation (5 October 2026)
+
+The latest [orange/blue pipe guide](drainpipe-2026-10-05/README.md) moves the
+far-end courtyard downpipe beside the low flat-roofed projection. Its top
+now meets the low rim and its shaft stands between the window banks. This
+supersedes retention of the far-end pipe in the earlier courtyard correction.

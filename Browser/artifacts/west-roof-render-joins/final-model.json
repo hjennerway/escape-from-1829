@@ -1,0 +1,112 @@
+{
+  "manifest": {
+    "format": 1,
+    "revision": "186",
+    "sourceHash": "bcad9006c09c998e00ac9624d073fc784ea7d65905d0d5fca23a48d818aa9154",
+    "file": "aerial-b79d2a5ec1c46d4d3a35.bin.gz",
+    "bytes": 21012484,
+    "uncompressedBytes": 172009456,
+    "sha256": "b79d2a5ec1c46d4d3a35ba063ea69689695c6d1aecdd1da47fa83d75d83776f4",
+    "stats": {
+      "revision": "186",
+      "buildMilliseconds": 2257.7999999998137,
+      "windows": 2580,
+      "geometries": 15944,
+      "materials": 650,
+      "textures": 63
+    }
+  },
+  "sourceHash": "80f791b5ddc705618f0f03d70d4e3762eaa3ee7ea22bda96786d86803ebd6ab9",
+  "binaryVerified": true,
+  "currentCompiledMatchesSource": false,
+  "visibleProbes": {
+    "source": 25,
+    "compiled": 25
+  },
+  "westRoofRenderIntersectionProbes": 244,
+  "outwardRenderProbes": 10,
+  "gutterProbe": 1,
+  "capturedSources": {
+    "source": [
+      "bcad9006c09c998e00ac9624d073fc784ea7d65905d0d5fca23a48d818aa9154",
+      "bcad9006c09c998e00ac9624d073fc784ea7d65905d0d5fca23a48d818aa9154"
+    ],
+    "compiled": [
+      "bcad9006c09c998e00ac9624d073fc784ea7d65905d0d5fca23a48d818aa9154",
+      "bcad9006c09c998e00ac9624d073fc784ea7d65905d0d5fca23a48d818aa9154"
+    ],
+    "compiledManifest": {
+      "format": 1,
+      "revision": "186",
+      "sourceHash": "bcad9006c09c998e00ac9624d073fc784ea7d65905d0d5fca23a48d818aa9154",
+      "file": "aerial-b79d2a5ec1c46d4d3a35.bin.gz",
+      "bytes": 21012484,
+      "uncompressedBytes": 172009456,
+      "sha256": "b79d2a5ec1c46d4d3a35ba063ea69689695c6d1aecdd1da47fa83d75d83776f4",
+      "stats": {
+        "revision": "186",
+        "buildMilliseconds": 2257.7999999998137,
+        "windows": 2580,
+        "geometries": 15944,
+        "materials": 650,
+        "textures": 63
+      }
+    }
+  },
+  "earlierSuite": {
+    "total": 126,
+    "passes": 124,
+    "failures": [
+      "test-jarman.mjs",
+      "test-leighton-newton.mjs"
+    ],
+    "baselineFailuresReproduced": true
+  },
+  "latestChecks": [
+    {
+      "name": "final-corner-baseline",
+      "code": 1,
+      "expected": 1
+    },
+    {
+      "name": "final-corner-regression",
+      "code": 0,
+      "expected": 0
+    },
+    {
+      "name": "source-capture",
+      "code": 0,
+      "expected": 0
+    },
+    {
+      "name": "compiled-capture",
+      "code": 0,
+      "expected": 0
+    },
+    {
+      "name": "latest-test-west-roof-join",
+      "code": 1,
+      "expected": null
+    },
+    {
+      "name": "latest-test-west-refinement",
+      "code": 0,
+      "expected": null
+    },
+    {
+      "name": "latest-test-roof-contacts",
+      "code": 0,
+      "expected": null
+    },
+    {
+      "name": "latest-test-roof-tiles",
+      "code": 1,
+      "expected": null
+    },
+    {
+      "name": "latest-compiled-tile-check",
+      "code": 1,
+      "expected": null
+    }
+  ]
+}

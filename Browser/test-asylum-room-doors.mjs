@@ -98,7 +98,7 @@ for(const floor of floors){
   }
  }
 }
-assert.equal(doors,90);assert(limited>=4,'The real floor layouts exercise wall contact, including the oblique bay and first-floor return');
+assert.equal(doors,92,'The three absorbed first-floor central rooms no longer have separate doors');assert(limited>=4,'The real floor layouts exercise wall contact, including the oblique bay and first-floor return');
 assert(new Set(floors.flatMap(f=>f.roomDoors.map(d=>d.targetAngle.toFixed(1)))).size>60,'Angles visibly vary between rooms and floors');
 
 // Tight perpendicular wall fixture: the handle meets x=4-.09 first. Solve

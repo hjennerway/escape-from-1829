@@ -1,0 +1,335 @@
+{
+  "errors": [],
+  "views": {
+    "marked": {
+      "position": [
+        -38,
+        32,
+        44
+      ],
+      "target": [
+        -26,
+        12,
+        12
+      ],
+      "up": [
+        0,
+        1,
+        0
+      ],
+      "fov": 40
+    },
+    "close": {
+      "position": [
+        -30,
+        25,
+        35
+      ],
+      "target": [
+        -26,
+        14,
+        16
+      ],
+      "up": [
+        0,
+        1,
+        0
+      ],
+      "fov": 40
+    },
+    "low": {
+      "position": [
+        -30,
+        16,
+        32
+      ],
+      "target": [
+        -26,
+        13.5,
+        17
+      ],
+      "up": [
+        0,
+        1,
+        0
+      ],
+      "fov": 45
+    },
+    "plan": {
+      "position": [
+        -28,
+        52,
+        16
+      ],
+      "target": [
+        -28,
+        0,
+        16
+      ],
+      "up": [
+        0,
+        0,
+        -1
+      ],
+      "fov": 32
+    }
+  },
+  "intersections": [
+    {
+      "cornice": "Entrance west mitred cornice layer 0",
+      "point": [
+        -22.073333104451496,
+        13.157751083374023,
+        17.360000610351562
+      ],
+      "slate": [
+        -22.073333104451496,
+        13.079259155315826,
+        17.360000610351562
+      ],
+      "roof": "Entrance west recessed slate roof"
+    },
+    {
+      "cornice": "Entrance west mitred cornice layer 0",
+      "point": [
+        -22.45999972025553,
+        13.524417877197266,
+        19.040000279744465
+      ],
+      "slate": [
+        -22.45999972025553,
+        13.515215029219048,
+        19.040000279744465
+      ],
+      "roof": "Entrance west projection slate roof"
+    },
+    {
+      "cornice": "Entrance west mitred cornice layer 0",
+      "point": [
+        -22.42799949645996,
+        13.570325469970703,
+        19.632000160217284
+      ],
+      "slate": [
+        -22.42799949645996,
+        13.501034514940073,
+        19.632000160217284
+      ],
+      "roof": "Entrance west projection slate roof"
+    },
+    {
+      "cornice": "Entrance west mitred cornice layer 3",
+      "point": [
+        -18.85999937057495,
+        13.140000343322754,
+        17.330000495910642
+      ],
+      "slate": [
+        -18.85999937057495,
+        13.093703677454712,
+        17.330000495910642
+      ],
+      "roof": "Entrance west recessed slate roof"
+    },
+    {
+      "cornice": "Entrance west mitred cornice layer 3",
+      "point": [
+        -11.99999968210856,
+        13.140000343322754,
+        17.34166717529297
+      ],
+      "slate": [
+        -11.99999968210856,
+        13.088086391285675,
+        17.34166717529297
+      ],
+      "roof": "Entrance west recessed slate roof"
+    },
+    {
+      "cornice": "Entrance west mitred cornice layer 3",
+      "point": [
+        -17.389999437332154,
+        13.140000343322754,
+        17.2600004196167
+      ],
+      "slate": [
+        -17.389999437332154,
+        13.127407394468927,
+        17.2600004196167
+      ],
+      "roof": "Entrance west recessed slate roof"
+    },
+    {
+      "cornice": "Entrance west mitred cornice layer 3",
+      "point": [
+        -8.569999837875367,
+        13.140000343322754,
+        17.29500045776367
+      ],
+      "slate": [
+        -8.569999837875367,
+        13.11055553596182,
+        17.29500045776367
+      ],
+      "roof": "Entrance west recessed slate roof"
+    },
+    {
+      "cornice": "Entrance west mitred cornice layer 3",
+      "point": [
+        -21.887499237060545,
+        13.17532558441162,
+        17.29500045776367
+      ],
+      "slate": [
+        -21.887499237060545,
+        13.110555450301447,
+        17.29500045776367
+      ],
+      "roof": "Entrance west recessed slate roof"
+    },
+    {
+      "cornice": "Entrance west mitred cornice layer 3",
+      "point": [
+        -22.56999969482422,
+        13.650650215148925,
+        19.250000190734863
+      ],
+      "slate": [
+        -22.56999969482422,
+        13.563960194878613,
+        19.250000190734863
+      ],
+      "roof": "Entrance west projection slate roof"
+    },
+    {
+      "cornice": "Entrance west mitred cornice layer 3",
+      "point": [
+        -22.360000610351562,
+        13.552276802062988,
+        18.26000061035156
+      ],
+      "slate": [
+        -22.360000610351562,
+        13.470901626446086,
+        18.26000061035156
+      ],
+      "roof": "Entrance west projection slate roof"
+    },
+    {
+      "cornice": "Entrance west mitred cornice layer 3",
+      "point": [
+        -22.639999389648438,
+        13.630975532531739,
+        18.940000152587892
+      ],
+      "slate": [
+        -22.639999389648438,
+        13.594979717689455,
+        18.940000152587892
+      ],
+      "roof": "Entrance west projection slate roof"
+    },
+    {
+      "cornice": "Entrance west mitred cornice layer 3",
+      "point": [
+        -22.43000030517578,
+        13.5326021194458,
+        17.95000057220459
+      ],
+      "slate": [
+        -22.43000030517578,
+        13.501921149256928,
+        17.95000057220459
+      ],
+      "roof": "Entrance west projection slate roof"
+    },
+    {
+      "cornice": "Entrance west mitred cornice layer 3",
+      "point": [
+        -28.397499656677248,
+        13.6899995803833,
+        19.905000305175783
+      ],
+      "slate": [
+        -28.397499656677248,
+        13.644832988168078,
+        19.905000305175783
+      ],
+      "roof": "Entrance west projection slate roof"
+    },
+    {
+      "cornice": "Entrance west mitred cornice layer 3",
+      "point": [
+        -24.337500381469724,
+        13.6899995803833,
+        19.940000343322755
+      ],
+      "slate": [
+        -24.337500381469724,
+        13.600888447938184,
+        19.940000343322755
+      ],
+      "roof": "Entrance west projection slate roof"
+    },
+    {
+      "cornice": "Entrance west mitred cornice layer 3",
+      "point": [
+        -23.655000305175783,
+        13.6899995803833,
+        19.870000267028807
+      ],
+      "slate": [
+        -23.655000305175783,
+        13.68877738564105,
+        19.870000267028807
+      ],
+      "roof": "Entrance west projection slate roof"
+    }
+  ],
+  "ridge": [
+    {
+      "z": 12.05,
+      "y": 15.635925773338034,
+      "name": "Aerial batch · Period · 1829 · 256"
+    },
+    {
+      "z": 13,
+      "y": 15.178518619694703,
+      "name": "Aerial batch · Period · 1829 · 256"
+    },
+    {
+      "z": 14,
+      "y": 14.995293825744803,
+      "name": "Aerial batch · Period · 1829 · 256"
+    },
+    {
+      "z": 15,
+      "y": 14.995293803410254,
+      "name": "Aerial batch · Period · 1829 · 256"
+    },
+    {
+      "z": 16,
+      "y": 14.995293941125322,
+      "name": "Aerial batch · Period · 1829 · 256"
+    },
+    {
+      "z": 17,
+      "y": 14.995294225692472,
+      "name": "Aerial batch · Period · 1829 · 256"
+    },
+    {
+      "z": 18,
+      "y": 14.995294060011672,
+      "name": "Aerial batch · Period · 1829 · 256"
+    },
+    {
+      "z": 18.3,
+      "y": 14.995293894172791,
+      "name": "Aerial batch · Period · 1829 · 256"
+    }
+  ],
+  "modelMode": {
+    "mode": "procedural",
+    "milliseconds": 2204
+  }
+}

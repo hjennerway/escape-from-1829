@@ -72,7 +72,7 @@ for(const floor of floors){
 }
 assert.deepEqual(failures,[],'All proposed rooms and physical doors must connect to Reception');
 for(const stair of plan.stairs)for(const [lower,upper] of stair.connections){
- const route=stairRoute(stair,floors[lower].elevation,floors[upper].elevation);
+ const route=stairRoute(stair,floors[lower].elevation,floors[upper].elevation,lower,upper);
  for(const reverse of [false,true]){
   const points=reverse?[...route].reverse():route,first=points[0],startFloor=reverse?upper:lower,endFloor=reverse?lower:upper,arrival=stairDeparture(floors[startFloor],first),departure=stairDeparture(floors[endFloor],points.at(-1)),actor={...arrival,y:first[1],floor:startFloor};
   const samples=[first,...points.slice(1),[departure.x,points.at(-1)[1],departure.z]];

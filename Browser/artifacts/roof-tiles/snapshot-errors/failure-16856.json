@@ -1,0 +1,12 @@
+{
+  "actual": {
+    "primitives": 20837,
+    "sha256": "e6446e4f068b444fd4703dd706116118e39e89faa7ca37fe989e57039d19aa07"
+  },
+  "expected": {
+    "primitives": 20837,
+    "sha256": "d7288f0740a82dd570c24701ff3094bb43fe31f38ae3147f66c787539b964852"
+  },
+  "message": "Everything except the three marked sets of sash parts stays unchanged\n+ actual - expected\n\n  {\n    primitives: 20837,\n+   sha256: 'e6446e4f068b444fd4703dd706116118e39e89faa7ca37fe989e57039d19aa07'\n-   sha256: 'd7288f0740a82dd570c24701ff3094bb43fe31f38ae3147f66c787539b964852'\n  }\n",
+  "stack": "AssertionError [ERR_ASSERTION]: Everything except the three marked sets of sash parts stays unchanged\n+ actual - expected\n\n  {\n    primitives: 20837,\n+   sha256: 'e6446e4f068b444fd4703dd706116118e39e89faa7ca37fe989e57039d19aa07'\n-   sha256: 'd7288f0740a82dd570c24701ff3094bb43fe31f38ae3147f66c787539b964852'\n  }\n\n    at file:///C:/Users/Harry/Documents/_escape-from-1829/Browser/test-oakmere-windows.mjs:18:9\n    at ModuleJob.run (node:internal/modules/esm/module_job:561:25)\n    at async node:internal/modules/esm/loader:647:26\n    at async asyncRunEntryPointWithESMLoader (node:internal/modules/run_main:101:5)"
+}

@@ -16,7 +16,7 @@ export function createAsylumOutside(THREE,exterior){
   // The masonry return stair's solid bases are walkable treads, not walls.
   const masonry=exterior.model.getObjectByName('West forward end masonry return stair');
   const boxes=[];
-  masonry?.traverse(o=>{if(o.isMesh){const b=new THREE.Box3().setFromObject(o);boxes.push(b);}});
+  masonry?.traverse(o=>{if(o.isMesh&&/\b(?:tread|landing)\b/i.test(o.name)&&!/rail|cheek|pier/i.test(o.name)){const b=new THREE.Box3().setFromObject(o);boxes.push(b);}});
   obstacles=obstacles.filter(b=>!boxes.some(c=>Math.abs(c.min.x-b.minX)<.02&&Math.abs(c.max.x-b.maxX)<.02&&Math.abs(c.min.z-b.minZ)<.02&&Math.abs(c.max.z-b.maxZ)<.02));
   const matrix=new THREE.Matrix4(),world=new THREE.Matrix4();
   function remember(geometry,transform,name){

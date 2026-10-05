@@ -1,0 +1,62 @@
+{
+  "scope": "1829 and directly adjoining courtyard/corner/stair geometry",
+  "results": [
+    {
+      "name": "test-west-roof-join",
+      "code": 0,
+      "expected": 0
+    },
+    {
+      "name": "test-west-refinement",
+      "code": 0,
+      "expected": 0
+    },
+    {
+      "name": "test-front-inside-corners",
+      "code": 0,
+      "expected": 0
+    },
+    {
+      "name": "test-west-side-basement",
+      "code": 0,
+      "expected": 0
+    },
+    {
+      "name": "test-west-garden-stair",
+      "code": 0,
+      "expected": 0
+    },
+    {
+      "name": "test-inner-courtyard",
+      "code": 0,
+      "expected": 0
+    },
+    {
+      "name": "test-east-forward-end",
+      "code": 0,
+      "expected": 0
+    },
+    {
+      "name": "baseline-regression",
+      "code": 1,
+      "expected": 1
+    }
+  ],
+  "manifest": {
+    "format": 1,
+    "revision": "186",
+    "sourceHash": "5da3cfe4619d0f6920e41700f4cbb9ad171c3188bbfefa31ef2c2287fe41156e",
+    "file": "aerial-246b03c2a5e0f464d915.bin.gz",
+    "bytes": 21009455,
+    "uncompressedBytes": 171967984,
+    "sha256": "246b03c2a5e0f464d91530b227cfc451c27fbffb6609810ef625a33535a1d231",
+    "stats": {
+      "revision": "186",
+      "buildMilliseconds": 2412.300000000745,
+      "windows": 2580,
+      "geometries": 15937,
+      "materials": 650,
+      "textures": 63
+    }
+  }
+}

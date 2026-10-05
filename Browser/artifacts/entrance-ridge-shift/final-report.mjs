@@ -1,0 +1,11 @@
+import assert from 'node:assert/strict';
+import {readFile,writeFile} from 'node:fs/promises';
+import {createHash} from 'node:crypto';
+import {modelSourceHash} from '../../model-build-inputs.mjs';
+const out=new URL('./',import.meta.url),manifest=JSON.parse(await readFile(new URL('../../dist/compiled/manifest.json',import.meta.url),'utf8'));
+const sourceHash=await modelSourceHash();assert.equal(manifest.sourceHash,sourceHash);
+const binary=await readFile(new URL('../../dist/compiled/'+manifest.file,import.meta.url));assert.equal(createHash('sha256').update(binary).digest('hex'),manifest.sha256);
+const source=JSON.parse(await readFile(new URL('final-source-validation.json',out),'utf8')),compiled=JSON.parse(await readFile(new URL('final-compiled-validation.json',out),'utf8'));
+assert.deepEqual(source.ridge,compiled.ridge);assert.equal(compiled.modelMode.mode,'compiled');assert.equal(compiled.intersections.length,0);
+const report={sourceHash,file:manifest.file,sha256:manifest.sha256,sourceCompiledRidgeMatch:true,compiledRetainedRidgeProbes:compiled.retained.length,compiledRenderEdgeProbes:compiled.contacts.length,compiledMovedRidgeProbes:compiled.ridge.length,renderIntersections:compiled.intersections.length,pageErrors:compiled.errors,renderer:'ANGLE NVIDIA GeForce RTX 3090 Ti Direct3D11',scope:'1829 roof and directly adjoining render junctions; full estate suite not rerun',exports:'Shared browser source and local compiled aerial updated; Unity, Blender and packaged exports not regenerated'};
+await writeFile(new URL('final-model.json',out),JSON.stringify(report,null,2)+'\n');console.log(JSON.stringify(report));

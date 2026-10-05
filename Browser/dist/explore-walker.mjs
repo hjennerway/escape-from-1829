@@ -25,7 +25,7 @@ export function createExploreWalker(THREE,exterior,floors){
  }
  function useDoor(){
   const exit=nearbyDoor();if(!exit)return false;
-  resetJumps();const {dx,dz}=exitDirection(exit);
+  resetJumps();const {dx,dz}=exitDirection(exit,{outside:!actor.outside});
   if(actor.outside){Object.assign(actor,{...exit.inside,floor:exit.floor,y:floors[exit.floor].elevation,stair:null,outside:false,verticalTrend:0});yaw=Math.atan2(dx,dz);}
   else{const [x,y,z]=exit.destination;Object.assign(actor,{x,y,z,stair:null,outside:true,verticalTrend:0});yaw=Math.atan2(-dx,-dz);}
   pitch=0;sync();return true;

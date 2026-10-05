@@ -1638,88 +1638,88 @@
   "renders": [
     {
       "name": "visitors",
-      "calls": 295,
-      "triangles": 1230626
+      "calls": 305,
+      "triangles": 1241198
     },
     {
       "name": "ward-service",
-      "calls": 301,
-      "triangles": 1227646
+      "calls": 303,
+      "triangles": 1238202
     },
     {
       "name": "recreation",
-      "calls": 237,
-      "triangles": 1226474
+      "calls": 207,
+      "triangles": 1232936
     },
     {
       "name": "ward",
-      "calls": 114,
-      "triangles": 1152928
+      "calls": 102,
+      "triangles": 1167172
     },
     {
       "name": "wardrobe",
       "calls": 305,
-      "triangles": 1228266
+      "triangles": 1238818
     },
     {
       "name": "medicine",
-      "calls": 244,
-      "triangles": 1179026
+      "calls": 232,
+      "triangles": 1194246
     },
     {
       "name": "reading",
-      "calls": 57,
-      "triangles": 1056802
+      "calls": 54,
+      "triangles": 1030142
     },
     {
       "name": "staff",
       "calls": 509,
-      "triangles": 1268988
+      "triangles": 1279540
     },
     {
       "name": "upstairs-ward",
-      "calls": 232,
-      "triangles": 1189450
+      "calls": 297,
+      "triangles": 1215296
     },
     {
       "name": "workshop",
-      "calls": 185,
-      "triangles": 1209882
+      "calls": 174,
+      "triangles": 1219826
     },
     {
       "name": "upper-records",
-      "calls": 211,
-      "triangles": 1230486
+      "calls": 212,
+      "triangles": 1215002
     },
     {
       "name": "hydrotherapy",
-      "calls": 414,
-      "triangles": 1265046
+      "calls": 420,
+      "triangles": 1275610
     },
     {
       "name": "cold-shower",
-      "calls": 366,
-      "triangles": 1241658
+      "calls": 370,
+      "triangles": 1252218
     },
     {
       "name": "surgery",
-      "calls": 207,
-      "triangles": 1166332
+      "calls": 203,
+      "triangles": 1181568
     },
     {
       "name": "early-electricity",
-      "calls": 155,
-      "triangles": 1076478
+      "calls": 92,
+      "triangles": 1077600
     },
     {
       "name": "bloodletting",
-      "calls": 140,
-      "triangles": 1164992
+      "calls": 144,
+      "triangles": 1180048
     },
     {
       "name": "ect",
-      "calls": 240,
-      "triangles": 1218308
+      "calls": 230,
+      "triangles": 1228644
     }
   ],
   "newGameVariation": true,

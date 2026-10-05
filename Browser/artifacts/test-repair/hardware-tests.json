@@ -1,0 +1,47 @@
+[
+  {
+    "name": "test-asylum-room-finishes-browser.mjs",
+    "code": 0,
+    "seconds": 71.157
+  },
+  {
+    "name": "test-asylum-stair-room-walls-browser.mjs",
+    "code": 0,
+    "seconds": 33.239
+  },
+  {
+    "name": "test-atmosphere-browser.mjs",
+    "code": 0,
+    "seconds": 70.858
+  },
+  {
+    "name": "test-atmosphere.mjs",
+    "code": 0,
+    "seconds": 0.681
+  },
+  {
+    "name": "test-ceiling-entrance-browser.mjs",
+    "code": 0,
+    "seconds": 44.957
+  },
+  {
+    "name": "test-countryside-browser.mjs",
+    "code": 0,
+    "seconds": 12.196
+  },
+  {
+    "name": "test-day-night-browser.mjs",
+    "code": 0,
+    "seconds": 101.129
+  },
+  {
+    "name": "test-explore-interior-browser.mjs",
+    "code": 0,
+    "seconds": 32.814
+  },
+  {
+    "name": "test-explore-mobile.mjs",
+    "code": 0,
+    "seconds": 56.895
+  }
+]

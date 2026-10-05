@@ -3,12 +3,12 @@ import {readFile,writeFile,mkdir} from 'node:fs/promises';
 import {fileURLToPath} from 'node:url';
 import {resolve} from 'node:path';
 import {spawn} from 'node:child_process';
-import {chromium} from 'playwright';
+import {launchHardwareBrowser} from './test-support/hardware-browser.mjs';
 
 // Same application, viewport and driver at each revision. Timings are diagnostic,
 // not hardware FPS claims. Run separately from other browser/GPU checks.
 const label=process.argv[2]??'current',samples=Number(process.env.THREE_SAMPLES??30);
-const hardware=process.env.THREE_HARDWARE==='1';
+const hardware=true;
 const baseline=process.env.THREE_BASELINE?resolve(process.env.THREE_BASELINE):null;
 const modes=new Set((process.env.THREE_MODES??'aerial,walking,game').split(','));
 assert.match(label,/^[a-z0-9-]+$/);
@@ -20,7 +20,7 @@ const base=await new Promise((resolve,reject)=>{server.stdout.once('data',d=>res
 let browser;
 const errors=[],warnings=[],results=[];
 try{
- browser=await chromium.launch({headless:true,...(process.env.MODEL_CHROME_PATH?{executablePath:process.env.MODEL_CHROME_PATH}:{}),args:hardware?[]:['--use-angle=swiftshader','--enable-unsafe-swiftshader']});
+ browser=await launchHardwareBrowser({headless:true,...(process.env.MODEL_CHROME_PATH?{executablePath:process.env.MODEL_CHROME_PATH}:{})});
  const page=await browser.newPage({viewport:{width:1000,height:700}});
  page.setDefaultTimeout(120000);page.setDefaultNavigationTimeout(120000);
  page.on('pageerror',e=>errors.push(e.message));

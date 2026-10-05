@@ -1,0 +1,11 @@
+import assert from 'node:assert/strict';
+import {readFile,writeFile} from 'node:fs/promises';
+import {createHash} from 'node:crypto';
+import {modelSourceHash} from '../../model-build-inputs.mjs';
+const manifest=JSON.parse(await readFile(new URL('../../dist/compiled/manifest.json',import.meta.url),'utf8'));
+const sourceHash=await modelSourceHash();
+const bytes=await readFile(new URL('../../dist/compiled/'+manifest.file,import.meta.url));
+assert.equal(createHash('sha256').update(bytes).digest('hex'),manifest.sha256);
+assert.equal(sourceHash,manifest.sourceHash,'Concurrent model edits require another build');
+await writeFile(new URL('final-model.json',import.meta.url),JSON.stringify({sourceHash,manifest,checksumVerified:true},null,2)+'\n');
+console.log('PASS: current compiled source fingerprint and binary checksum verified.');

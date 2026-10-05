@@ -1,0 +1,12 @@
+{
+  "actual": {
+    "primitives": 19571,
+    "sha256": "7abf80d0a76f67605561a9cc569246c1f630e8d181d753f98d6f6f88ad2436ba"
+  },
+  "expected": {
+    "primitives": 19571,
+    "sha256": "124d84ad69bade211b182a48d07a4f75fc253aa0f936af411757773b5eb1dfe2"
+  },
+  "message": "Every primitive outside the marked Carden/tower work and concurrent Jarman frontage stays exact\n+ actual - expected\n\n  {\n    primitives: 19571,\n+   sha256: '7abf80d0a76f67605561a9cc569246c1f630e8d181d753f98d6f6f88ad2436ba'\n-   sha256: '124d84ad69bade211b182a48d07a4f75fc253aa0f936af411757773b5eb1dfe2'\n  }\n",
+  "stack": "AssertionError [ERR_ASSERTION]: Every primitive outside the marked Carden/tower work and concurrent Jarman frontage stays exact\n+ actual - expected\n\n  {\n    primitives: 19571,\n+   sha256: '7abf80d0a76f67605561a9cc569246c1f630e8d181d753f98d6f6f88ad2436ba'\n-   sha256: '124d84ad69bade211b182a48d07a4f75fc253aa0f936af411757773b5eb1dfe2'\n  }\n\n    at file:///C:/Users/Harry/Documents/_escape-from-1829/Browser/test-annexe-carden-height.mjs:10:8\n    at ModuleJob.run (node:internal/modules/esm/module_job:561:25)\n    at async node:internal/modules/esm/loader:647:26\n    at async asyncRunEntryPointWithESMLoader (node:internal/modules/run_main:101:5)"
+}

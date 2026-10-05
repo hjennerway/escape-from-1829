@@ -1,0 +1,107 @@
+[
+  {
+    "name": "baseline-regression",
+    "code": 1,
+    "expected": 1
+  },
+  {
+    "name": "source-capture",
+    "code": 0,
+    "expected": 0
+  },
+  {
+    "name": "compiled-capture",
+    "code": 0,
+    "expected": 0
+  },
+  {
+    "name": "vendor-three --check",
+    "code": 0,
+    "expected": 0
+  },
+  {
+    "name": "test-opening-wall",
+    "code": 0,
+    "expected": 0
+  },
+  {
+    "name": "test-wall-mitres",
+    "code": 0,
+    "expected": 0
+  },
+  {
+    "name": "test-facade-courses",
+    "code": 0,
+    "expected": 0
+  },
+  {
+    "name": "test-roof-tiles",
+    "code": 0,
+    "expected": 0
+  },
+  {
+    "name": "test-estate-periods",
+    "code": 0,
+    "expected": 0
+  },
+  {
+    "name": "test-model-binary",
+    "code": 0,
+    "expected": 0
+  },
+  {
+    "name": "test-kml-imports",
+    "code": 0,
+    "expected": 0
+  },
+  {
+    "name": "test-kml-11",
+    "code": 0,
+    "expected": 0
+  },
+  {
+    "name": "test-building-detail",
+    "code": 0,
+    "expected": 0
+  },
+  {
+    "name": "test-aerial-layouts",
+    "code": 0,
+    "expected": 0
+  },
+  {
+    "name": "test-aerial-performance",
+    "code": 0,
+    "expected": 0
+  },
+  {
+    "name": "test-aerial-controls",
+    "code": 0,
+    "expected": 0
+  },
+  {
+    "name": "compiled-test-roof-tiles---compiled",
+    "code": 0,
+    "expected": 0
+  },
+  {
+    "name": "compiled-test-precompiled-models",
+    "code": 0,
+    "expected": 0
+  },
+  {
+    "name": "compiled-test-timeline-browser",
+    "code": 0,
+    "expected": 0
+  },
+  {
+    "name": "baseline-test-jarman",
+    "code": 1,
+    "expected": 1
+  },
+  {
+    "name": "baseline-test-leighton-newton",
+    "code": 1,
+    "expected": 1
+  }
+]

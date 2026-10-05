@@ -1,0 +1,14 @@
+import {readFile,writeFile} from 'node:fs/promises';
+import {createHash} from 'node:crypto';
+import assert from 'node:assert/strict';
+import {modelSourceHash} from '../../model-build-inputs.mjs';
+const manifest=JSON.parse(await readFile(new URL('../../dist/compiled/manifest.json',import.meta.url),'utf8'));
+assert.equal(manifest.sourceHash,await modelSourceHash());
+const binary=await readFile(new URL('../../dist/compiled/'+manifest.file,import.meta.url));
+assert.equal(createHash('sha256').update(binary).digest('hex'),manifest.sha256);
+const capture=JSON.parse(await readFile(new URL('./completed-compiled-validation.json',import.meta.url),'utf8'));
+assert.equal(capture.modelMode.mode,'compiled');assert.equal(capture.probes.length,32);assert.equal(capture.errors.length,0);
+const suite=JSON.parse(await readFile(new URL('./remaining-suite.json',import.meta.url),'utf8'));
+const report={manifest,currentSourceHash:true,verifiedChecksum:true,visibleCompiledProbes:capture.probes.length,errors:capture.errors,suite:{initialCommandsPassed:63,remainingChecks:suite.checks,total:124,passed:122,failures:suite.failures},compiledRenderingAndFallbacks:'passed',timelineAndWalking:'passed',binaryRoundTrip:'passed'};
+await writeFile(new URL('./final-model.json',import.meta.url),JSON.stringify(report,null,2)+'\n');
+console.log(JSON.stringify({current:true,file:manifest.file,roofProbes:32,suitePassed:122,suiteTotal:124,failures:suite.failures}));

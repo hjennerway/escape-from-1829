@@ -1,0 +1,506 @@
+{
+  "errors": [],
+  "views": {
+    "plan": {
+      "position": [
+        -51,
+        65,
+        11
+      ],
+      "target": [
+        -51,
+        0,
+        11
+      ],
+      "up": [
+        0,
+        0,
+        -1
+      ],
+      "fov": 35
+    },
+    "garden": {
+      "position": [
+        -40,
+        31,
+        34
+      ],
+      "target": [
+        -53,
+        13,
+        13
+      ],
+      "up": [
+        0,
+        1,
+        0
+      ],
+      "fov": 43
+    },
+    "court": {
+      "position": [
+        -44,
+        31,
+        -18
+      ],
+      "target": [
+        -58.4,
+        13,
+        5
+      ],
+      "up": [
+        0,
+        1,
+        0
+      ],
+      "fov": 43
+    },
+    "garden-close": {
+      "position": [
+        -44,
+        24,
+        23
+      ],
+      "target": [
+        -52.5,
+        14.8,
+        14
+      ],
+      "up": [
+        0,
+        1,
+        0
+      ],
+      "fov": 45
+    },
+    "court-close": {
+      "position": [
+        -50,
+        25,
+        -5
+      ],
+      "target": [
+        -58.4,
+        15,
+        4.7
+      ],
+      "up": [
+        0,
+        1,
+        0
+      ],
+      "fov": 45
+    }
+  },
+  "intersections": [
+    {
+      "cornice": "West middle arm joined cornice 14.72",
+      "point": [
+        -55.7300006866455,
+        14.819999694824219,
+        13.6793643951416
+      ],
+      "slate": [
+        -55.7300006866455,
+        14.650993261547386,
+        13.6793643951416
+      ],
+      "roof": "West cross-range continuous roof join"
+    },
+    {
+      "cornice": "West middle arm joined cornice 14.72",
+      "point": [
+        -49.349999618530276,
+        14.819999694824219,
+        13.687435245513914
+      ],
+      "slate": [
+        -49.349999618530276,
+        14.699327651476583,
+        13.687435245513914
+      ],
+      "roof": "West cross-range continuous roof join"
+    },
+    {
+      "cornice": "West middle arm joined cornice 14.72",
+      "point": [
+        -49.229999160766596,
+        14.819999694824217,
+        13.924870681762695
+      ],
+      "slate": [
+        -49.229999160766596,
+        14.738575458023345,
+        13.924870681762695
+      ],
+      "roof": "West cross-range continuous roof join"
+    }
+  ],
+  "samples": 176,
+  "bounds": [
+    {
+      "name": "West middle arm joined cornice 14.72",
+      "box": {
+        "isBox3": true,
+        "min": {
+          "x": -55.790000915527344,
+          "y": 14.619999885559082,
+          "z": 13.449999809265137
+        },
+        "max": {
+          "x": -49.209999084472656,
+          "y": 14.819999694824219,
+          "z": 18
+        }
+      }
+    },
+    {
+      "name": "West middle arm joined cornice 14.95",
+      "box": {
+        "isBox3": true,
+        "min": {
+          "x": -55.790000915527344,
+          "y": 14.850000381469727,
+          "z": 13.449999809265137
+        },
+        "max": {
+          "x": -49.209999084472656,
+          "y": 15.050000190734863,
+          "z": 18
+        }
+      }
+    },
+    {
+      "name": "West courtyard polygonal bay stone band",
+      "box": {
+        "isBox3": true,
+        "min": {
+          "x": -61.74999990463257,
+          "y": 3.950000047683716,
+          "z": 1.4499999523162845
+        },
+        "max": {
+          "x": -55.05000009536743,
+          "y": 4.150000095367432,
+          "z": 4.799999998509884
+        }
+      }
+    },
+    {
+      "name": "West courtyard polygonal bay stone band",
+      "box": {
+        "isBox3": true,
+        "min": {
+          "x": -61.74999990463257,
+          "y": 8.5,
+          "z": 1.4499999523162845
+        },
+        "max": {
+          "x": -55.05000009536743,
+          "y": 8.699999809265137,
+          "z": 4.799999998509884
+        }
+      }
+    },
+    {
+      "name": "West courtyard polygonal bay stone band",
+      "box": {
+        "isBox3": true,
+        "min": {
+          "x": -61.74999990463257,
+          "y": 15.020000457763672,
+          "z": 1.4499999523162845
+        },
+        "max": {
+          "x": -55.05000009536743,
+          "y": 15.220000267028809,
+          "z": 4.799999998509884
+        }
+      }
+    },
+    {
+      "name": "West courtyard polygonal bay stone band",
+      "box": {
+        "isBox3": true,
+        "min": {
+          "x": -61.74999990463257,
+          "y": 15.25,
+          "z": 1.4499999523162845
+        },
+        "max": {
+          "x": -55.05000009536743,
+          "y": 15.449999809265137,
+          "z": 4.799999998509884
+        }
+      }
+    }
+  ],
+  "retained": [
+    {
+      "x": -67,
+      "z": 9.25,
+      "y": 17.079999923706055,
+      "name": "Aerial batch · Period · 1829 Wings · 198"
+    },
+    {
+      "x": -64,
+      "z": 9.25,
+      "y": 17.079999923706055,
+      "name": "Aerial batch · Period · 1829 Wings · 198"
+    },
+    {
+      "x": -60,
+      "z": 9.25,
+      "y": 17.079999923706055,
+      "name": "Aerial batch · Period · 1829 Wings · 198"
+    },
+    {
+      "x": -56,
+      "z": 9.25,
+      "y": 17.079999923706055,
+      "name": "Aerial batch · Period · 1829 Wings · 198"
+    },
+    {
+      "x": -53,
+      "z": 9.25,
+      "y": 17.079999923706055,
+      "name": "Aerial batch · Period · 1829 Wings · 198"
+    },
+    {
+      "x": -49,
+      "z": 9.25,
+      "y": 17.079999923706055,
+      "name": "Aerial batch · Period · 1829 Wings · 198"
+    },
+    {
+      "x": -45,
+      "z": 9.25,
+      "y": 17.079999923706055,
+      "name": "Aerial batch · Period · 1829 Wings · 198"
+    },
+    {
+      "x": -40,
+      "z": 9.25,
+      "y": 17.079999923706055,
+      "name": "Aerial batch · Period · 1829 Wings · 198"
+    },
+    {
+      "x": -36,
+      "z": 9.25,
+      "y": 17.079999923706055,
+      "name": "Aerial batch · Period · 1829 · 252"
+    },
+    {
+      "x": -32,
+      "z": 9.25,
+      "y": 17.079999923706055,
+      "name": "Aerial batch · Period · 1829 · 252"
+    },
+    {
+      "x": -68,
+      "z": 10.8,
+      "y": 17.079999923706055,
+      "name": "Aerial batch · Period · 1829 Wings · 212"
+    },
+    {
+      "x": -68,
+      "z": 13.125,
+      "y": 17.079999923706055,
+      "name": "Aerial batch · Period · 1829 Wings · 212"
+    },
+    {
+      "x": -68,
+      "z": 15.45,
+      "y": 17.079999923706055,
+      "name": "Aerial batch · Period · 1829 Wings · 212"
+    },
+    {
+      "x": -58.4,
+      "z": 8.14,
+      "y": 17.07999923042412,
+      "name": "Aerial batch · Period · 1829 Wings · 198"
+    },
+    {
+      "x": -58.4,
+      "z": 6.475,
+      "y": 17.07999923042412,
+      "name": "Aerial batch · Period · 1829 Wings · 198"
+    },
+    {
+      "x": -58.4,
+      "z": 4.81,
+      "y": 17.07999923042412,
+      "name": "Aerial batch · Period · 1829 Wings · 198"
+    },
+    {
+      "x": -52.5,
+      "z": 10.3,
+      "y": 17.079999923706055,
+      "name": "Aerial batch · Period · 1829 Wings · 198"
+    },
+    {
+      "x": -52.5,
+      "z": 11.875,
+      "y": 17.079999923706055,
+      "name": "Aerial batch · Period · 1829 Wings · 198"
+    },
+    {
+      "x": -52.5,
+      "z": 13.45,
+      "y": 17.079999923706055,
+      "name": "Aerial batch · Period · 1829 Wings · 198"
+    },
+    {
+      "x": -37.5,
+      "z": 11.1,
+      "y": 17.079999952316285,
+      "name": "West garden inner pavilion slate roof"
+    },
+    {
+      "x": -37.5,
+      "z": 13.875,
+      "y": 17.079999952316285,
+      "name": "West garden inner pavilion slate roof"
+    },
+    {
+      "x": -37.5,
+      "z": 16.65,
+      "y": 17.079999952316285,
+      "name": "West garden inner pavilion slate roof"
+    }
+  ],
+  "joins": [
+    {
+      "root": -58.4,
+      "x": -59.089999999999996,
+      "z": 8.32,
+      "y": 16.59781702625637,
+      "expected": 16.753999999999998,
+      "name": "Aerial batch · Period · 1829 Wings · 198"
+    },
+    {
+      "root": -58.4,
+      "x": -60.125,
+      "z": 6.925,
+      "y": 15.87453110597746,
+      "expected": 16.265,
+      "name": "Aerial batch · Period · 1829 Wings · 198"
+    },
+    {
+      "root": -58.4,
+      "x": -61.160000000000004,
+      "z": 5.529999999999999,
+      "y": 15.151245185698553,
+      "expected": 15.776,
+      "name": "Aerial batch · Period · 1829 Wings · 198"
+    },
+    {
+      "root": -58.4,
+      "x": -61.781,
+      "z": 4.693,
+      "y": 14.717273633531239,
+      "expected": 15.4826,
+      "name": "Aerial batch · Period · 1829 Wings · 198"
+    },
+    {
+      "root": -58.4,
+      "x": -57.71,
+      "z": 8.32,
+      "y": 16.59780542165021,
+      "expected": 16.753999999999998,
+      "name": "Aerial batch · Period · 1829 Wings · 198"
+    },
+    {
+      "root": -58.4,
+      "x": -56.675,
+      "z": 6.925,
+      "y": 15.874525242658068,
+      "expected": 16.265,
+      "name": "Aerial batch · Period · 1829 Wings · 198"
+    },
+    {
+      "root": -58.4,
+      "x": -55.64,
+      "z": 5.529999999999999,
+      "y": 15.15124506366596,
+      "expected": 15.776,
+      "name": "Aerial batch · Period · 1829 Wings · 198"
+    },
+    {
+      "root": -58.4,
+      "x": -55.019000000000005,
+      "z": 4.693,
+      "y": 14.717276956270707,
+      "expected": 15.4826,
+      "name": "Aerial batch · Period · 1829 Wings · 198"
+    },
+    {
+      "root": -52.5,
+      "x": -53.158,
+      "z": 10.09,
+      "y": 16.61935469017068,
+      "expected": 16.674,
+      "name": "Aerial batch · Period · 1829 Wings · 198"
+    },
+    {
+      "root": -52.5,
+      "x": -54.144999999999996,
+      "z": 11.35,
+      "y": 15.928386839867615,
+      "expected": 16.064999999999998,
+      "name": "Aerial batch · Period · 1829 Wings · 198"
+    },
+    {
+      "root": -52.5,
+      "x": -55.132,
+      "z": 12.61,
+      "y": 15.237418989564553,
+      "expected": 15.456,
+      "name": "Aerial batch · Period · 1829 Wings · 198"
+    },
+    {
+      "root": -52.5,
+      "x": -55.724199999999996,
+      "z": 13.366,
+      "y": 14.822838279382715,
+      "expected": 15.0906,
+      "name": "Aerial batch · Period · 1829 Wings · 198"
+    },
+    {
+      "root": -52.5,
+      "x": -51.842,
+      "z": 10.09,
+      "y": 16.61935469017068,
+      "expected": 16.674,
+      "name": "Aerial batch · Period · 1829 Wings · 198"
+    },
+    {
+      "root": -52.5,
+      "x": -50.855000000000004,
+      "z": 11.35,
+      "y": 15.928386839867615,
+      "expected": 16.064999999999998,
+      "name": "Aerial batch · Period · 1829 Wings · 198"
+    },
+    {
+      "root": -52.5,
+      "x": -49.868,
+      "z": 12.61,
+      "y": 15.237418989564553,
+      "expected": 15.456,
+      "name": "Aerial batch · Period · 1829 Wings · 198"
+    },
+    {
+      "root": -52.5,
+      "x": -49.275800000000004,
+      "z": 13.366,
+      "y": 14.822838279382715,
+      "expected": 15.0906,
+      "name": "Aerial batch · Period · 1829 Wings · 198"
+    }
+  ],
+  "modelMode": {
+    "mode": "procedural",
+    "milliseconds": 2491.5
+  }
+}

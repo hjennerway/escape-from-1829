@@ -1,5 +1,24 @@
 # Leighton / Newton photographic refinement — 24 September 2026
 
+## Snapshot reconciliation — 5 October 2026
+
+The owner's test-repair request advances the protected estate reference to
+882,995 primitives. The 134 historical model modules at `db70a03` reproduce
+the saved 882,977 count and hash exactly. The audit retains 880,576 records
+exactly and verifies 271 additional records as roof UV changes with identical
+expanded non-UV attributes, materials, transforms and flags. The same 2,130
+removed and 2,148 added structural records as the Jarman comparison belong to
+the documented 1829 building/court, basement/access and Larkton door repairs.
+
+The original L range records remain exact. Window exposure, both camera starts,
+roof normals, walking collisions, visibility and scope exclusions remain
+enabled. Only the saved geometry count/hash changes; no model sources change
+as part of this reference repair. The independent historical reconstruction,
+reviewed regions, precise entrance-path translation, source-stability checks
+and current production fingerprints are recorded in
+`Browser/artifacts/test-repair/reviewed-snapshot-audit.json`. This supersedes
+the older reference totals below.
+
 ## Snapshot reconciliation — 3 October 2026
 
 The protected estate comparison has the same stale reference as Jarman after

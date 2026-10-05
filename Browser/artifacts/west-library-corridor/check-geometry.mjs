@@ -1,0 +1,24 @@
+import assert from 'node:assert/strict';
+import {readFile,writeFile} from 'node:fs/promises';
+import {buildAsylumLayout,flatWalkable,moveAsylumActor,segmentDistance} from '../../dist/asylum-layout.mjs';
+import {furnishAsylum} from '../../dist/asylum-furniture.mjs';
+const plan=JSON.parse(await readFile(new URL('../../dist/asylum-plan.json',import.meta.url))),before=JSON.parse(await readFile(new URL('./before-plan.json',import.meta.url)));
+const roomIds=['R48','R49','R50'];
+const changes=Object.keys(plan).filter(k=>JSON.stringify(plan[k])!==JSON.stringify(before[k]));
+assert.deepEqual(changes,['rooms','corridors'],'Only shared room and corridor definitions change');
+for(const r of plan.rooms){const old=before.rooms.find(b=>b.id===r.id);if(roomIds.includes(r.id)){const expected=structuredClone(old);expected.points[0][1]=expected.points[1][1]=9.6;assert.deepEqual(r,expected);}else assert.deepEqual(r,old);}
+for(const c of plan.corridors)if(c.id!=='C26')assert.deepEqual(c,before.corridors.find(b=>b.id===c.id));
+assert.deepEqual(plan,JSON.parse(await readFile(new URL('../../../Research/1829-interior-proposal/plan-data.json',import.meta.url))));
+const floors=buildAsylumLayout(plan).floors,old=buildAsylumLayout(before).floors[3],floor=floors[3];
+assert(!flatWalkable(old,-46,8.2,.34,{furniture:false}),'Former wall blocks the new lane');
+furnishAsylum(floors);
+for(const z of [7.5,8.3,9.1])for(let x=-37.2;x<=-35.6;x+=.2)assert(flatWalkable(floor,x,z,.34),'Widened throat supports an actor at '+[x,z]);
+const actor={x:-54,z:8.2,floor:3,y:8.4};
+for(let n=0;n<470;n++)moveAsylumActor(floors,actor,.04,0);
+assert(Math.abs(actor.x+35.2)<.05,'Furnished walk crosses the former wall position');
+for(let n=0;n<470;n++)moveAsylumActor(floors,actor,-.04,0);
+assert(Math.abs(actor.x+54)<.05,'Return walk crosses the former wall position');
+assert(floor.walls.some(w=>segmentDistance(-46,9.6,w.a,w.b)<1e-6),'Visible wall occupies the new boundary');
+const receipt={changes,rooms:roomIds,wallShift:1.4,nominalThroatWidth:2.6,clearMasonryWidth:2.42,walkDistanceEachWay:18.8,sharedPlanParity:true,otherDefinitionsPreserved:true};
+await writeFile(new URL('./geometry-validation.json',import.meta.url),JSON.stringify(receipt,null,2)+'\n');
+console.log('PASS: matching shared plans, only three room boundaries/C26 changed, 2.42 clear masonry width, and two furnished 18.8-unit walks across the former wall.');

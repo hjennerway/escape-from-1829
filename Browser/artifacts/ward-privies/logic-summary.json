@@ -1,0 +1,13 @@
+{
+  "rooms": 8,
+  "seats": 20,
+  "washstands": 8,
+  "fixtures": 56,
+  "seeds": 4,
+  "walkedAccessRoutes": 112,
+  "modelTriangles": 4300,
+  "generalFurnitureSeeds": 8,
+  "generalFurnitureRoomExitRoutes": 976,
+  "generalFurnitureCollisionProbes": 3397,
+  "compiledAerialUnaffected": true
+}

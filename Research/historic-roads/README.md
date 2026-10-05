@@ -433,3 +433,19 @@ correction. The building, road centrelines, semicircular lawn, outer road edge
 and teardrop keep their geometry. The apron follows The Main's existing
 Historic/timeline visibility. Browser modelling source and local compiled
 aerial assets are updated; Unity and Blender exports are unchanged.
+
+## Church-front Parsons Lane midpoint — 5 October 2026
+
+The owner's blue-circle road correction in
+`Research/church/road-loop-marked-2026-10-05.png` centres the last Parsons Lane
+stretch between Churton and the church at z=-93.55. The Upton Lea branch begins
+at the moved T-junction. `road-centerlines.mjs` supplies the common fitted trace
+to surfaces, labels, lighting and clearance; original geographic data is retained.
+This supersedes the earlier statement that all shared lane centrelines stay fixed.
+
+`west-parsons-input.json` was refreshed from the fitted lanes and clipped historic
+road endpoints, including the nearest northern connection point. The existing
+Shapely generator rebuilds the local merged junction and border, removing the
+old road fragment exposed by the move. The church notes describe the completed
+footpath loop and shortened Churton access paving. Validation is limited to
+these local surfaces and adjacent buildings.

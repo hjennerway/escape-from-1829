@@ -30,7 +30,7 @@ function follow(points){
 }
 let stairCount=0;
 for(const stair of plan.stairs)for(const [lower,upper] of stair.connections){
- const route=stairRoute(stair,floors[lower].elevation,floors[upper].elevation),start=route[0],end=route.at(-1);
+ const route=stairRoute(stair,floors[lower].elevation,floors[upper].elevation,lower,upper),start=route[0],end=route.at(-1);
  Object.assign(actor,{x:start[0],y:start[1],z:start[2]-.1,floor:lower,outside:false,stair:null});
  const upperDeparture=stairDeparture(floors[upper],end),lowerDeparture=stairDeparture(floors[lower],start);
  follow(route.map(p=>[p[0],p[2]]).concat([[upperDeparture.x,upperDeparture.z]]));assert.equal(actor.floor,upper);

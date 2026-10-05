@@ -2,7 +2,7 @@ import assert from 'node:assert/strict';
 import {spawn} from 'node:child_process';
 import {mkdir,writeFile} from 'node:fs/promises';
 import {fileURLToPath} from 'node:url';
-import {chromium} from 'playwright';
+import {launchHardwareBrowser,browserUsesHardware} from './test-support/hardware-browser.mjs';
 import {PERIODS,BUILDING_SECTIONS,existsInYear,roadSection} from './dist/estate-periods.mjs';
 
 const server=spawn(process.execPath,['serve.mjs'],{cwd:new URL('.',import.meta.url),windowsHide:true,env:{...process.env,PORT:'0'},stdio:'pipe'});
@@ -17,7 +17,7 @@ async function groundState(){
  exterior.model.updateMatrixWorld(true);
  exterior.model.traverseVisible(object=>{if(object.isMesh)meshes.push(object);});
  return [[-64,-10,1849],[60,-10,1849],[17,29,1849],[35,46,1849],[60,-30.5,1870],[100,15,1870],[76,20,1870],[0,32,1829],[-23,-25,1829],
-  [90,32,1870,true],[68,36,1849,true],[-64,37,1849,true],[80,46,1870,true,true],[55,-34,1870,true,true],[-55,49,1849,true,true],[-55,7.5,1849,true,true]].map(([x,z,built,lawn=false,terrainOnly=false])=>{
+  [90,32,1870,true],[68,36,1849,true],[-64,37,1849,true,true],[-50,25.4,1849,true,true],[-50,25.6,1849,true,true],[-47,25.4,1849,true,true],[-47,25.6,1849,true,true],[80,46,1870,true,true],[55,-34,1870,true,true],[-55,49,1849,true,true],[-55,7.5,1849,true,true]].map(([x,z,built,lawn=false,terrainOnly=false])=>{
   ray.set(new THREE.Vector3(x,.49,z),new THREE.Vector3(0,-1,0));
   const hit=ray.intersectObjects(meshes,false)[0],material=hit?.object.material,grass=exterior.terrain.material;
   return {x,z,built,lawn,terrainOnly,onTerrain:hit?.object===exterior.terrain,present:Boolean(material),grass:Boolean(material?.userData.estateGrass),matchesGrass:material?.map===grass.map&&material.color.equals(grass.color)&&material.customProgramCacheKey()===grass.customProgramCacheKey()};
@@ -61,19 +61,17 @@ async function frontageState(){
  })));
 }
 try{
- browser=await chromium.launch({headless:true,...(process.env.MODEL_CHROME_PATH?{executablePath:process.env.MODEL_CHROME_PATH}:{}),args:['--use-angle=swiftshader','--enable-unsafe-swiftshader']});
+ browser=await launchHardwareBrowser({headless:true,...(process.env.MODEL_CHROME_PATH?{executablePath:process.env.MODEL_CHROME_PATH}:{})});
  const page=await browser.newPage({viewport:{width:1280,height:900}});
- // Software WebGL can also exceed 30s when capturing screenshots or handling
- // controls. Apply the readiness allowance to those operations and separately
- // to all navigations, including reload and the walking page.
+ // Apply the readiness allowance to screenshots, controls and all navigations.
  page.setDefaultTimeout(120000);
  page.setDefaultNavigationTimeout(120000);
  page.on('pageerror',error=>errors.push(error.stack));
  await page.route('**/aerial.html*',async route=>{const response=await route.fetch();await route.fulfill({response,body:(await response.text()).replace('function frame(){','window.__timeline={exterior,layouts,buildingSelection,renderer,controls};\nfunction frame(){')});});
  async function load(query){
   await page.goto(base+'/aerial.html'+query);await page.waitForFunction(()=>window.__timeline?.renderer.info.render.frame>3,null,{timeout:120000});
-  assert.equal(await page.evaluate(()=>window.__timeline.exterior.trees.visible),false,'Software rendering starts without trees');
-  await page.keyboard.press('t');
+  assert.equal(await page.evaluate(()=>window.__timeline.exterior.trees.visible),browserUsesHardware,'Tree startup visibility follows the active renderer');
+  if(!browserUsesHardware)await page.keyboard.press('t');
 }
  for(const mode of ['source','compiled']){
   await load('?models='+mode+'&view=plan');

@@ -1,0 +1,306 @@
+{
+  "source": {
+    "frame": 8,
+    "calls": 2854,
+    "triangles": 1894881,
+    "points": 0,
+    "lines": 0
+  },
+  "compiled": {
+    "frame": 8,
+    "calls": 2854,
+    "triangles": 1894881,
+    "points": 0,
+    "lines": 0
+  },
+  "diff": [
+    {
+      "entry": {
+        "name": "Aerial batch · Main kitchen window · 1040",
+        "count": 72,
+        "group": null
+      },
+      "source": 1,
+      "compiled": 0
+    },
+    {
+      "entry": {
+        "name": "Aerial batch · Main kitchen window · 1038",
+        "count": 72,
+        "group": null
+      },
+      "source": 1,
+      "compiled": 0
+    },
+    {
+      "entry": {
+        "name": "Aerial batch · Main kitchen window · 1036",
+        "count": 72,
+        "group": null
+      },
+      "source": 1,
+      "compiled": 0
+    },
+    {
+      "entry": {
+        "name": "Aerial batch · Main kitchen window · 1034",
+        "count": 72,
+        "group": null
+      },
+      "source": 1,
+      "compiled": 0
+    },
+    {
+      "entry": {
+        "name": "Aerial batch · Main kitchen window · 1042",
+        "count": 72,
+        "group": null
+      },
+      "source": 1,
+      "compiled": 0
+    },
+    {
+      "entry": {
+        "name": "Aerial batch · Main kitchen window · 1044",
+        "count": 72,
+        "group": null
+      },
+      "source": 1,
+      "compiled": 0
+    },
+    {
+      "entry": {
+        "name": "Aerial batch · Main kitchen window · 1046",
+        "count": 72,
+        "group": null
+      },
+      "source": 1,
+      "compiled": 0
+    },
+    {
+      "entry": {
+        "name": "Aerial batch · Main kitchen window · 1048",
+        "count": 72,
+        "group": null
+      },
+      "source": 1,
+      "compiled": 0
+    },
+    {
+      "entry": {
+        "name": "Aerial batch · Main kitchen window · 1039",
+        "count": 180,
+        "group": null
+      },
+      "source": 1,
+      "compiled": 0
+    },
+    {
+      "entry": {
+        "name": "Aerial batch · Main kitchen window · 1037",
+        "count": 180,
+        "group": null
+      },
+      "source": 1,
+      "compiled": 0
+    },
+    {
+      "entry": {
+        "name": "Aerial batch · Main kitchen window · 1035",
+        "count": 180,
+        "group": null
+      },
+      "source": 1,
+      "compiled": 0
+    },
+    {
+      "entry": {
+        "name": "Aerial batch · Main kitchen window · 1033",
+        "count": 180,
+        "group": null
+      },
+      "source": 1,
+      "compiled": 0
+    },
+    {
+      "entry": {
+        "name": "Aerial batch · Main kitchen window · 1041",
+        "count": 180,
+        "group": null
+      },
+      "source": 1,
+      "compiled": 0
+    },
+    {
+      "entry": {
+        "name": "Aerial batch · Main kitchen window · 1043",
+        "count": 180,
+        "group": null
+      },
+      "source": 1,
+      "compiled": 0
+    },
+    {
+      "entry": {
+        "name": "Aerial batch · Main kitchen window · 1045",
+        "count": 180,
+        "group": null
+      },
+      "source": 1,
+      "compiled": 0
+    },
+    {
+      "entry": {
+        "name": "Aerial batch · Main kitchen window · 1047",
+        "count": 180,
+        "group": null
+      },
+      "source": 1,
+      "compiled": 0
+    },
+    {
+      "entry": {
+        "name": "Aerial batch · Main kitchen window · building detail 0 · 1040",
+        "count": 72,
+        "group": null
+      },
+      "source": 0,
+      "compiled": 1
+    },
+    {
+      "entry": {
+        "name": "Aerial batch · Main kitchen window · building detail 0 · 1038",
+        "count": 72,
+        "group": null
+      },
+      "source": 0,
+      "compiled": 1
+    },
+    {
+      "entry": {
+        "name": "Aerial batch · Main kitchen window · building detail 0 · 1036",
+        "count": 72,
+        "group": null
+      },
+      "source": 0,
+      "compiled": 1
+    },
+    {
+      "entry": {
+        "name": "Aerial batch · Main kitchen window · building detail 0 · 1034",
+        "count": 72,
+        "group": null
+      },
+      "source": 0,
+      "compiled": 1
+    },
+    {
+      "entry": {
+        "name": "Aerial batch · Main kitchen window · building detail 0 · 1042",
+        "count": 72,
+        "group": null
+      },
+      "source": 0,
+      "compiled": 1
+    },
+    {
+      "entry": {
+        "name": "Aerial batch · Main kitchen window · building detail 0 · 1044",
+        "count": 72,
+        "group": null
+      },
+      "source": 0,
+      "compiled": 1
+    },
+    {
+      "entry": {
+        "name": "Aerial batch · Main kitchen window · building detail 0 · 1046",
+        "count": 72,
+        "group": null
+      },
+      "source": 0,
+      "compiled": 1
+    },
+    {
+      "entry": {
+        "name": "Aerial batch · Main kitchen window · building detail 0 · 1048",
+        "count": 72,
+        "group": null
+      },
+      "source": 0,
+      "compiled": 1
+    },
+    {
+      "entry": {
+        "name": "Aerial batch · Main kitchen window · building detail 0 · 1039",
+        "count": 180,
+        "group": null
+      },
+      "source": 0,
+      "compiled": 1
+    },
+    {
+      "entry": {
+        "name": "Aerial batch · Main kitchen window · building detail 0 · 1037",
+        "count": 180,
+        "group": null
+      },
+      "source": 0,
+      "compiled": 1
+    },
+    {
+      "entry": {
+        "name": "Aerial batch · Main kitchen window · building detail 0 · 1035",
+        "count": 180,
+        "group": null
+      },
+      "source": 0,
+      "compiled": 1
+    },
+    {
+      "entry": {
+        "name": "Aerial batch · Main kitchen window · building detail 0 · 1033",
+        "count": 180,
+        "group": null
+      },
+      "source": 0,
+      "compiled": 1
+    },
+    {
+      "entry": {
+        "name": "Aerial batch · Main kitchen window · building detail 0 · 1041",
+        "count": 180,
+        "group": null
+      },
+      "source": 0,
+      "compiled": 1
+    },
+    {
+      "entry": {
+        "name": "Aerial batch · Main kitchen window · building detail 0 · 1043",
+        "count": 180,
+        "group": null
+      },
+      "source": 0,
+      "compiled": 1
+    },
+    {
+      "entry": {
+        "name": "Aerial batch · Main kitchen window · building detail 0 · 1045",
+        "count": 180,
+        "group": null
+      },
+      "source": 0,
+      "compiled": 1
+    },
+    {
+      "entry": {
+        "name": "Aerial batch · Main kitchen window · building detail 0 · 1047",
+        "count": 180,
+        "group": null
+      },
+      "source": 0,
+      "compiled": 1
+    }
+  ]
+}

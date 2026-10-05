@@ -1,0 +1,413 @@
+{
+  "items": 45,
+  "geometry": {
+    "instances": [
+      {
+        "id": "0:WardService:fixed:0",
+        "kind": "linenCupboard",
+        "parts": 6
+      },
+      {
+        "id": "0:WardService:fixed:1",
+        "kind": "linenCupboard",
+        "parts": 6
+      },
+      {
+        "id": "0:WardService:fixed:2",
+        "kind": "linenTrolley",
+        "parts": 4
+      },
+      {
+        "id": "0:WardService:fixed:3",
+        "kind": "waitingBench",
+        "parts": 3
+      },
+      {
+        "id": "0:WardService:fixed:4",
+        "kind": "dutyBoard",
+        "parts": 3
+      },
+      {
+        "id": "0:WardService:fixed:5",
+        "kind": "table",
+        "parts": 1
+      },
+      {
+        "id": "0:WardService:fixed:6",
+        "kind": "chair",
+        "parts": 1
+      },
+      {
+        "id": "0:WardService:fixed:7",
+        "kind": "chair",
+        "parts": 1
+      },
+      {
+        "id": "0:WardService:fixed:8",
+        "kind": "foldedLinen",
+        "parts": 2
+      },
+      {
+        "id": "0:WardService:fixed:9",
+        "kind": "sewingBasket",
+        "parts": 5
+      },
+      {
+        "id": "0:WardService:fixed:10",
+        "kind": "waitingBench",
+        "parts": 3
+      },
+      {
+        "id": "1:Visitors:fixed:0",
+        "kind": "table",
+        "parts": 1
+      },
+      {
+        "id": "1:Visitors:fixed:1",
+        "kind": "chair",
+        "parts": 1
+      },
+      {
+        "id": "1:Visitors:fixed:2",
+        "kind": "chair",
+        "parts": 1
+      },
+      {
+        "id": "1:Visitors:fixed:3",
+        "kind": "chair",
+        "parts": 1
+      },
+      {
+        "id": "1:Visitors:fixed:4",
+        "kind": "chair",
+        "parts": 1
+      },
+      {
+        "id": "1:Visitors:fixed:5",
+        "kind": "books",
+        "parts": 1
+      },
+      {
+        "id": "1:Visitors:fixed:6",
+        "kind": "table",
+        "parts": 1
+      },
+      {
+        "id": "1:Visitors:fixed:7",
+        "kind": "chair",
+        "parts": 1
+      },
+      {
+        "id": "1:Visitors:fixed:8",
+        "kind": "chair",
+        "parts": 1
+      },
+      {
+        "id": "1:Visitors:fixed:9",
+        "kind": "chair",
+        "parts": 1
+      },
+      {
+        "id": "1:Visitors:fixed:10",
+        "kind": "chair",
+        "parts": 1
+      },
+      {
+        "id": "1:Visitors:fixed:11",
+        "kind": "books",
+        "parts": 1
+      },
+      {
+        "id": "1:Visitors:fixed:12",
+        "kind": "sideboard",
+        "parts": 4
+      },
+      {
+        "id": "1:Visitors:fixed:13",
+        "kind": "landscape",
+        "parts": 3
+      },
+      {
+        "id": "1:Visitors:fixed:14",
+        "kind": "landscape",
+        "parts": 3
+      },
+      {
+        "id": "1:Visitors:fixed:15",
+        "kind": "visitingNotice",
+        "parts": 3
+      },
+      {
+        "id": "1:Recreation:fixed:0",
+        "kind": "table",
+        "parts": 1
+      },
+      {
+        "id": "1:Recreation:fixed:1",
+        "kind": "chair",
+        "parts": 1
+      },
+      {
+        "id": "1:Recreation:fixed:2",
+        "kind": "chair",
+        "parts": 1
+      },
+      {
+        "id": "1:Recreation:fixed:3",
+        "kind": "chair",
+        "parts": 1
+      },
+      {
+        "id": "1:Recreation:fixed:4",
+        "kind": "chair",
+        "parts": 1
+      },
+      {
+        "id": "1:Recreation:fixed:5",
+        "kind": "draughtsSet",
+        "parts": 4
+      },
+      {
+        "id": "1:Recreation:fixed:6",
+        "kind": "sideboard",
+        "parts": 4
+      },
+      {
+        "id": "1:Recreation:fixed:7",
+        "kind": "sewingBasket",
+        "parts": 5
+      },
+      {
+        "id": "1:Recreation:fixed:8",
+        "kind": "books",
+        "parts": 1
+      },
+      {
+        "id": "1:Recreation:fixed:9",
+        "kind": "newspaperStand",
+        "parts": 3
+      },
+      {
+        "id": "1:Recreation:fixed:10",
+        "kind": "waitingBench",
+        "parts": 3
+      },
+      {
+        "id": "1:Recreation:fixed:11",
+        "kind": "table",
+        "parts": 1
+      },
+      {
+        "id": "1:Recreation:fixed:12",
+        "kind": "chair",
+        "parts": 1
+      },
+      {
+        "id": "1:Recreation:fixed:13",
+        "kind": "chair",
+        "parts": 1
+      },
+      {
+        "id": "1:Recreation:fixed:14",
+        "kind": "chair",
+        "parts": 1
+      },
+      {
+        "id": "1:Recreation:fixed:15",
+        "kind": "chair",
+        "parts": 1
+      },
+      {
+        "id": "1:Recreation:fixed:16",
+        "kind": "draughtsSet",
+        "parts": 4
+      },
+      {
+        "id": "1:Recreation:fixed:17",
+        "kind": "waitingBench",
+        "parts": 3
+      }
+    ],
+    "wallContacts": [
+      {
+        "id": "0:WardService:fixed:0",
+        "gaps": [
+          -7.450580585544042e-7,
+          -7.450580585544042e-7,
+          -7.450580585544042e-7
+        ]
+      },
+      {
+        "id": "0:WardService:fixed:1",
+        "gaps": [
+          -7.450580585544042e-7,
+          -7.450580585544042e-7,
+          -7.450580585544042e-7
+        ]
+      },
+      {
+        "id": "0:WardService:fixed:4",
+        "gaps": [
+          6.873160612042017e-7,
+          6.873160612042017e-7,
+          6.873160612042017e-7
+        ]
+      },
+      {
+        "id": "1:Visitors:fixed:12",
+        "gaps": [
+          8.940696741288612e-8,
+          8.940696741288612e-8,
+          8.940696741288612e-8
+        ]
+      },
+      {
+        "id": "1:Visitors:fixed:13",
+        "gaps": [
+          2.68220901739058e-7,
+          2.68220901739058e-7,
+          2.68220901739058e-7
+        ]
+      },
+      {
+        "id": "1:Visitors:fixed:14",
+        "gaps": [
+          2.68220901739058e-7,
+          2.68220901739058e-7,
+          2.68220901739058e-7
+        ]
+      },
+      {
+        "id": "1:Visitors:fixed:15",
+        "gaps": [
+          1.5273690248673866e-7,
+          1.5273690248673866e-7,
+          1.5273690248673866e-7
+        ]
+      },
+      {
+        "id": "1:Recreation:fixed:6",
+        "gaps": [
+          -3.8743018990206046e-7,
+          -3.8743018990206046e-7,
+          -3.8743018990206046e-7
+        ]
+      }
+    ],
+    "labels": [
+      {
+        "name": "Hall landscape",
+        "width": 1897,
+        "height": 1170
+      },
+      {
+        "name": "Hall visiting hours",
+        "width": 768,
+        "height": 1028
+      },
+      {
+        "name": "Hall staff duty board",
+        "width": 768,
+        "height": 531
+      },
+      {
+        "name": "Hall newspaper",
+        "width": 768,
+        "height": 490
+      }
+    ]
+  },
+  "walks": [
+    {
+      "id": "0:WardService:fixed:2",
+      "along": 0.7020000000000053,
+      "minimum": 0.6599999999999999
+    },
+    {
+      "id": "0:WardService:fixed:0",
+      "along": 0.6419999999999888,
+      "minimum": 0.6
+    },
+    {
+      "id": "0:WardService:fixed:5",
+      "along": 1.3170000000000055,
+      "minimum": 1.2750000000000001
+    },
+    {
+      "id": "0:WardService:fixed:10",
+      "along": 0.5759999999999899,
+      "minimum": 0.534
+    },
+    {
+      "id": "1:Visitors:fixed:0",
+      "along": 0.7684000000000051,
+      "minimum": 0.7263999999999999
+    },
+    {
+      "id": "1:Recreation:fixed:0",
+      "along": 1.3170000000000055,
+      "minimum": 1.2750000000000001
+    },
+    {
+      "id": "1:Recreation:fixed:9",
+      "along": 0.5720000000000063,
+      "minimum": 0.53
+    },
+    {
+      "id": "1:Recreation:fixed:11",
+      "along": 1.3170000000000055,
+      "minimum": 1.2750000000000001
+    },
+    {
+      "id": "1:Recreation:fixed:17",
+      "along": 0.5759999999999899,
+      "minimum": 0.534
+    }
+  ],
+  "corridor": {
+    "x": 30.200000000000117,
+    "z": 8.2
+  },
+  "captures": [
+    "before-visitors",
+    "before-service",
+    "before-service-open-area",
+    "before-recreation",
+    "before-recreation-open-area",
+    "after-visitors",
+    "after-service",
+    "after-service-open-area",
+    "after-recreation",
+    "after-recreation-open-area",
+    "after-visiting-notice",
+    "after-linen-close",
+    "after-duties-close",
+    "after-linen-worktable-close",
+    "after-service-bench",
+    "after-draughts-close",
+    "after-newspaper-close",
+    "after-sewing-close",
+    "mobile-visitors",
+    "mobile-service",
+    "mobile-service-open-area",
+    "mobile-recreation",
+    "mobile-recreation-open-area",
+    "explore-visitors",
+    "explore-service",
+    "explore-service-open-area",
+    "explore-recreation",
+    "explore-recreation-open-area",
+    "model-sideboard",
+    "model-landscape",
+    "model-visitingNotice",
+    "model-linenCupboard",
+    "model-linenTrolley",
+    "model-dutyBoard",
+    "model-draughtsSet",
+    "model-newspaperStand",
+    "model-sewingBasket",
+    "model-foldedLinen"
+  ],
+  "escapeExploreParity": true,
+  "errors": []
+}

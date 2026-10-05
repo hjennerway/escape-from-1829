@@ -1,0 +1,12 @@
+{
+  "actual": {
+    "primitives": 20341,
+    "sha256": "69039948f7187a878331eb241387b4b813cdb36c5528a8a5fc97b0eac805ca56"
+  },
+  "expected": {
+    "primitives": 20341,
+    "sha256": "b2bc99c05656e72a4ad6cc8979cd38ef93e821f9e0b11ee3f13dc6a512e0a5e0"
+  },
+  "message": "Annexe primitives outside the red-circled low connector must remain unchanged\n+ actual - expected\n\n  {\n    primitives: 20341,\n+   sha256: '69039948f7187a878331eb241387b4b813cdb36c5528a8a5fc97b0eac805ca56'\n-   sha256: 'b2bc99c05656e72a4ad6cc8979cd38ef93e821f9e0b11ee3f13dc6a512e0a5e0'\n  }\n",
+  "stack": "AssertionError [ERR_ASSERTION]: Annexe primitives outside the red-circled low connector must remain unchanged\n+ actual - expected\n\n  {\n    primitives: 20341,\n+   sha256: '69039948f7187a878331eb241387b4b813cdb36c5528a8a5fc97b0eac805ca56'\n-   sha256: 'b2bc99c05656e72a4ad6cc8979cd38ef93e821f9e0b11ee3f13dc6a512e0a5e0'\n  }\n\n    at file:///C:/Users/Harry/Documents/_escape-from-1829/Browser/test-oakmere-west.mjs:53:9\n    at ModuleJob.run (node:internal/modules/esm/module_job:561:25)\n    at async node:internal/modules/esm/loader:647:26\n    at async asyncRunEntryPointWithESMLoader (node:internal/modules/run_main:101:5)"
+}

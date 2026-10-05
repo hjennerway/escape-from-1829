@@ -1,0 +1,24 @@
+{
+  "actual": "compiled",
+  "errors": [],
+  "reports": [
+    {
+      "name": "service",
+      "roof": "Tower east dormered range slate roof",
+      "position": [
+        182.94485986741483,
+        24.88309658082426,
+        -41.35513746229708
+      ],
+      "target": [
+        169.0999984741211,
+        11.038235187530518,
+        -55.19999885559082
+      ],
+      "pixels": {
+        "min": 40,
+        "max": 198
+      }
+    }
+  ]
+}

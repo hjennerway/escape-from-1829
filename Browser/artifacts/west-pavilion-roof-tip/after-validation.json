@@ -1,0 +1,849 @@
+{
+  "views": {
+    "marked": {
+      "position": [
+        -22,
+        24,
+        34
+      ],
+      "target": [
+        -37.5,
+        13.5,
+        17
+      ],
+      "fov": 32
+    },
+    "close": {
+      "position": [
+        -28,
+        21,
+        27
+      ],
+      "target": [
+        -34.8,
+        14.4,
+        15.6
+      ],
+      "fov": 27
+    },
+    "opposite": {
+      "position": [
+        -42,
+        23,
+        27
+      ],
+      "target": [
+        -34.8,
+        14.4,
+        15.6
+      ],
+      "fov": 34
+    }
+  },
+  "picks": {
+    "marked": [
+      {
+        "x": -34.9,
+        "z": 15.35,
+        "name": "West garden inner pavilion slate roof",
+        "point": [
+          -34.9,
+          14.793794062032177,
+          15.35
+        ],
+        "color": "c4c9c6"
+      },
+      {
+        "x": -34.9,
+        "z": 15.45,
+        "name": "West garden inner pavilion slate roof",
+        "point": [
+          -34.9,
+          14.793794062032182,
+          15.45
+        ],
+        "color": "c4c9c6"
+      },
+      {
+        "x": -34.9,
+        "z": 15.55,
+        "name": "West garden inner pavilion slate roof",
+        "point": [
+          -34.9,
+          14.793794062032179,
+          15.55
+        ],
+        "color": "c4c9c6"
+      },
+      {
+        "x": -34.9,
+        "z": 15.65,
+        "name": "West garden inner pavilion slate roof",
+        "point": [
+          -34.9,
+          14.793794062032179,
+          15.65
+        ],
+        "color": "c4c9c6"
+      },
+      {
+        "x": -34.7,
+        "z": 15.35,
+        "name": "West garden inner pavilion slate roof",
+        "point": [
+          -34.7,
+          14.61793207047187,
+          15.35
+        ],
+        "color": "c4c9c6"
+      },
+      {
+        "x": -34.7,
+        "z": 15.45,
+        "name": "West garden inner pavilion slate roof",
+        "point": [
+          -34.7,
+          14.61793207047187,
+          15.45
+        ],
+        "color": "c4c9c6"
+      },
+      {
+        "x": -34.7,
+        "z": 15.55,
+        "name": "West garden inner pavilion slate roof",
+        "point": [
+          -34.7,
+          14.617932070471868,
+          15.55
+        ],
+        "color": "c4c9c6"
+      },
+      {
+        "x": -34.7,
+        "z": 15.65,
+        "name": "West garden inner pavilion slate roof",
+        "point": [
+          -34.7,
+          14.61793207047187,
+          15.65
+        ],
+        "color": "c4c9c6"
+      },
+      {
+        "x": -34.6,
+        "z": 15.35,
+        "name": "Aerial batch · Period · 1829 · 252",
+        "point": [
+          -34.6,
+          14.586115419422496,
+          15.35
+        ],
+        "color": "c4c9c6"
+      },
+      {
+        "x": -34.6,
+        "z": 15.45,
+        "name": "Aerial batch · Period · 1829 · 252",
+        "point": [
+          -34.6,
+          14.548704958334385,
+          15.45
+        ],
+        "color": "c4c9c6"
+      },
+      {
+        "x": -34.6,
+        "z": 15.55,
+        "name": "West garden inner pavilion slate roof",
+        "point": [
+          -34.6,
+          14.530001074691711,
+          15.55
+        ],
+        "color": "c4c9c6"
+      },
+      {
+        "x": -34.6,
+        "z": 15.65,
+        "name": "West garden inner pavilion slate roof",
+        "point": [
+          -34.6,
+          14.530001074691711,
+          15.65
+        ],
+        "color": "c4c9c6"
+      },
+      {
+        "x": -34.5,
+        "z": 15.35,
+        "name": "West entrance corner slate to yellow boundary",
+        "point": [
+          -34.5,
+          14.521457277984942,
+          15.35
+        ],
+        "color": "c4c9c6"
+      },
+      {
+        "x": -34.5,
+        "z": 15.45,
+        "name": "Aerial batch · Period · 1829 · 278",
+        "point": [
+          -34.5,
+          14.505789304685829,
+          15.45
+        ],
+        "color": "e1e3dc"
+      },
+      {
+        "x": -34.5,
+        "z": 15.55,
+        "name": "Aerial batch · Period · 1829 · 278",
+        "point": [
+          -34.5,
+          14.505789304685829,
+          15.55
+        ],
+        "color": "e1e3dc"
+      },
+      {
+        "x": -34.5,
+        "z": 15.65,
+        "name": "Aerial batch · Period · 1829 · 283",
+        "point": [
+          -34.5,
+          8.829999923706058,
+          15.65
+        ],
+        "color": "444b4d"
+      },
+      {
+        "x": -34.3,
+        "z": 15.35,
+        "name": "West entrance corner slate to yellow boundary",
+        "point": [
+          -34.3,
+          14.473036166177815,
+          15.35
+        ],
+        "color": "c4c9c6"
+      },
+      {
+        "x": -34.3,
+        "z": 15.45,
+        "name": "Aerial batch · Period · 1829 · 278",
+        "point": [
+          -34.3,
+          14.457368181437941,
+          15.45
+        ],
+        "color": "e1e3dc"
+      },
+      {
+        "x": -34.3,
+        "z": 15.55,
+        "name": "Aerial batch · Period · 1829 · 278",
+        "point": [
+          -34.3,
+          14.457368181437941,
+          15.55
+        ],
+        "color": "e1e3dc"
+      },
+      {
+        "x": -34.3,
+        "z": 15.65,
+        "name": "Aerial batch · Period · 1829 · 283",
+        "point": [
+          -34.3,
+          8.829999923706058,
+          15.65
+        ],
+        "color": "444b4d"
+      },
+      {
+        "x": -34,
+        "z": 15.35,
+        "name": "West entrance corner slate to yellow boundary",
+        "point": [
+          -34,
+          14.40040449846712,
+          15.35
+        ],
+        "color": "c4c9c6"
+      },
+      {
+        "x": -34,
+        "z": 15.45,
+        "name": "Aerial batch · Period · 1829 · 278",
+        "point": [
+          -34,
+          14.384736559570362,
+          15.45
+        ],
+        "color": "e1e3dc"
+      },
+      {
+        "x": -34,
+        "z": 15.55,
+        "name": "Aerial batch · Period · 1829 · 278",
+        "point": [
+          -34,
+          14.384736559570362,
+          15.55
+        ],
+        "color": "e1e3dc"
+      },
+      {
+        "x": -34,
+        "z": 15.65,
+        "name": "Aerial batch · Period · 1829 · 283",
+        "point": [
+          -34,
+          8.829999923706055,
+          15.65
+        ],
+        "color": "444b4d"
+      }
+    ],
+    "close": [
+      {
+        "x": -34.9,
+        "z": 15.35,
+        "name": "West garden inner pavilion slate roof",
+        "point": [
+          -34.9,
+          14.793794062032177,
+          15.35
+        ],
+        "color": "c4c9c6"
+      },
+      {
+        "x": -34.9,
+        "z": 15.45,
+        "name": "West garden inner pavilion slate roof",
+        "point": [
+          -34.9,
+          14.793794062032182,
+          15.45
+        ],
+        "color": "c4c9c6"
+      },
+      {
+        "x": -34.9,
+        "z": 15.55,
+        "name": "West garden inner pavilion slate roof",
+        "point": [
+          -34.9,
+          14.793794062032179,
+          15.55
+        ],
+        "color": "c4c9c6"
+      },
+      {
+        "x": -34.9,
+        "z": 15.65,
+        "name": "West garden inner pavilion slate roof",
+        "point": [
+          -34.9,
+          14.793794062032179,
+          15.65
+        ],
+        "color": "c4c9c6"
+      },
+      {
+        "x": -34.7,
+        "z": 15.35,
+        "name": "West garden inner pavilion slate roof",
+        "point": [
+          -34.7,
+          14.61793207047187,
+          15.35
+        ],
+        "color": "c4c9c6"
+      },
+      {
+        "x": -34.7,
+        "z": 15.45,
+        "name": "West garden inner pavilion slate roof",
+        "point": [
+          -34.7,
+          14.61793207047187,
+          15.45
+        ],
+        "color": "c4c9c6"
+      },
+      {
+        "x": -34.7,
+        "z": 15.55,
+        "name": "West garden inner pavilion slate roof",
+        "point": [
+          -34.7,
+          14.617932070471868,
+          15.55
+        ],
+        "color": "c4c9c6"
+      },
+      {
+        "x": -34.7,
+        "z": 15.65,
+        "name": "West garden inner pavilion slate roof",
+        "point": [
+          -34.7,
+          14.61793207047187,
+          15.65
+        ],
+        "color": "c4c9c6"
+      },
+      {
+        "x": -34.6,
+        "z": 15.35,
+        "name": "Aerial batch · Period · 1829 · 252",
+        "point": [
+          -34.6,
+          14.586115419422496,
+          15.35
+        ],
+        "color": "c4c9c6"
+      },
+      {
+        "x": -34.6,
+        "z": 15.45,
+        "name": "Aerial batch · Period · 1829 · 252",
+        "point": [
+          -34.6,
+          14.548704958334385,
+          15.45
+        ],
+        "color": "c4c9c6"
+      },
+      {
+        "x": -34.6,
+        "z": 15.55,
+        "name": "West garden inner pavilion slate roof",
+        "point": [
+          -34.6,
+          14.530001074691711,
+          15.55
+        ],
+        "color": "c4c9c6"
+      },
+      {
+        "x": -34.6,
+        "z": 15.65,
+        "name": "West garden inner pavilion slate roof",
+        "point": [
+          -34.6,
+          14.530001074691711,
+          15.65
+        ],
+        "color": "c4c9c6"
+      },
+      {
+        "x": -34.5,
+        "z": 15.35,
+        "name": "West entrance corner slate to yellow boundary",
+        "point": [
+          -34.5,
+          14.521457277984942,
+          15.35
+        ],
+        "color": "c4c9c6"
+      },
+      {
+        "x": -34.5,
+        "z": 15.45,
+        "name": "Aerial batch · Period · 1829 · 278",
+        "point": [
+          -34.5,
+          14.505789304685829,
+          15.45
+        ],
+        "color": "e1e3dc"
+      },
+      {
+        "x": -34.5,
+        "z": 15.55,
+        "name": "Aerial batch · Period · 1829 · 278",
+        "point": [
+          -34.5,
+          14.505789304685829,
+          15.55
+        ],
+        "color": "e1e3dc"
+      },
+      {
+        "x": -34.5,
+        "z": 15.65,
+        "name": "Aerial batch · Period · 1829 · 283",
+        "point": [
+          -34.5,
+          8.829999923706058,
+          15.65
+        ],
+        "color": "444b4d"
+      },
+      {
+        "x": -34.3,
+        "z": 15.35,
+        "name": "West entrance corner slate to yellow boundary",
+        "point": [
+          -34.3,
+          14.473036166177815,
+          15.35
+        ],
+        "color": "c4c9c6"
+      },
+      {
+        "x": -34.3,
+        "z": 15.45,
+        "name": "Aerial batch · Period · 1829 · 278",
+        "point": [
+          -34.3,
+          14.457368181437941,
+          15.45
+        ],
+        "color": "e1e3dc"
+      },
+      {
+        "x": -34.3,
+        "z": 15.55,
+        "name": "Aerial batch · Period · 1829 · 278",
+        "point": [
+          -34.3,
+          14.457368181437941,
+          15.55
+        ],
+        "color": "e1e3dc"
+      },
+      {
+        "x": -34.3,
+        "z": 15.65,
+        "name": "Aerial batch · Period · 1829 · 283",
+        "point": [
+          -34.3,
+          8.829999923706058,
+          15.65
+        ],
+        "color": "444b4d"
+      },
+      {
+        "x": -34,
+        "z": 15.35,
+        "name": "West entrance corner slate to yellow boundary",
+        "point": [
+          -34,
+          14.40040449846712,
+          15.35
+        ],
+        "color": "c4c9c6"
+      },
+      {
+        "x": -34,
+        "z": 15.45,
+        "name": "Aerial batch · Period · 1829 · 278",
+        "point": [
+          -34,
+          14.384736559570362,
+          15.45
+        ],
+        "color": "e1e3dc"
+      },
+      {
+        "x": -34,
+        "z": 15.55,
+        "name": "Aerial batch · Period · 1829 · 278",
+        "point": [
+          -34,
+          14.384736559570362,
+          15.55
+        ],
+        "color": "e1e3dc"
+      },
+      {
+        "x": -34,
+        "z": 15.65,
+        "name": "Aerial batch · Period · 1829 · 283",
+        "point": [
+          -34,
+          8.829999923706055,
+          15.65
+        ],
+        "color": "444b4d"
+      }
+    ],
+    "opposite": [
+      {
+        "x": -34.9,
+        "z": 15.35,
+        "name": "West garden inner pavilion slate roof",
+        "point": [
+          -34.9,
+          14.793794062032177,
+          15.35
+        ],
+        "color": "c4c9c6"
+      },
+      {
+        "x": -34.9,
+        "z": 15.45,
+        "name": "West garden inner pavilion slate roof",
+        "point": [
+          -34.9,
+          14.793794062032182,
+          15.45
+        ],
+        "color": "c4c9c6"
+      },
+      {
+        "x": -34.9,
+        "z": 15.55,
+        "name": "West garden inner pavilion slate roof",
+        "point": [
+          -34.9,
+          14.793794062032179,
+          15.55
+        ],
+        "color": "c4c9c6"
+      },
+      {
+        "x": -34.9,
+        "z": 15.65,
+        "name": "West garden inner pavilion slate roof",
+        "point": [
+          -34.9,
+          14.793794062032179,
+          15.65
+        ],
+        "color": "c4c9c6"
+      },
+      {
+        "x": -34.7,
+        "z": 15.35,
+        "name": "West garden inner pavilion slate roof",
+        "point": [
+          -34.7,
+          14.61793207047187,
+          15.35
+        ],
+        "color": "c4c9c6"
+      },
+      {
+        "x": -34.7,
+        "z": 15.45,
+        "name": "West garden inner pavilion slate roof",
+        "point": [
+          -34.7,
+          14.61793207047187,
+          15.45
+        ],
+        "color": "c4c9c6"
+      },
+      {
+        "x": -34.7,
+        "z": 15.55,
+        "name": "West garden inner pavilion slate roof",
+        "point": [
+          -34.7,
+          14.617932070471868,
+          15.55
+        ],
+        "color": "c4c9c6"
+      },
+      {
+        "x": -34.7,
+        "z": 15.65,
+        "name": "West garden inner pavilion slate roof",
+        "point": [
+          -34.7,
+          14.61793207047187,
+          15.65
+        ],
+        "color": "c4c9c6"
+      },
+      {
+        "x": -34.6,
+        "z": 15.35,
+        "name": "Aerial batch · Period · 1829 · 252",
+        "point": [
+          -34.6,
+          14.586115419422496,
+          15.35
+        ],
+        "color": "c4c9c6"
+      },
+      {
+        "x": -34.6,
+        "z": 15.45,
+        "name": "Aerial batch · Period · 1829 · 252",
+        "point": [
+          -34.6,
+          14.548704958334385,
+          15.45
+        ],
+        "color": "c4c9c6"
+      },
+      {
+        "x": -34.6,
+        "z": 15.55,
+        "name": "West garden inner pavilion slate roof",
+        "point": [
+          -34.6,
+          14.530001074691711,
+          15.55
+        ],
+        "color": "c4c9c6"
+      },
+      {
+        "x": -34.6,
+        "z": 15.65,
+        "name": "West garden inner pavilion slate roof",
+        "point": [
+          -34.6,
+          14.530001074691711,
+          15.65
+        ],
+        "color": "c4c9c6"
+      },
+      {
+        "x": -34.5,
+        "z": 15.35,
+        "name": "West entrance corner slate to yellow boundary",
+        "point": [
+          -34.5,
+          14.521457277984942,
+          15.35
+        ],
+        "color": "c4c9c6"
+      },
+      {
+        "x": -34.5,
+        "z": 15.45,
+        "name": "Aerial batch · Period · 1829 · 278",
+        "point": [
+          -34.5,
+          14.505789304685829,
+          15.45
+        ],
+        "color": "e1e3dc"
+      },
+      {
+        "x": -34.5,
+        "z": 15.55,
+        "name": "Aerial batch · Period · 1829 · 278",
+        "point": [
+          -34.5,
+          14.505789304685829,
+          15.55
+        ],
+        "color": "e1e3dc"
+      },
+      {
+        "x": -34.5,
+        "z": 15.65,
+        "name": "Aerial batch · Period · 1829 · 283",
+        "point": [
+          -34.5,
+          8.829999923706058,
+          15.65
+        ],
+        "color": "444b4d"
+      },
+      {
+        "x": -34.3,
+        "z": 15.35,
+        "name": "West entrance corner slate to yellow boundary",
+        "point": [
+          -34.3,
+          14.473036166177815,
+          15.35
+        ],
+        "color": "c4c9c6"
+      },
+      {
+        "x": -34.3,
+        "z": 15.45,
+        "name": "Aerial batch · Period · 1829 · 278",
+        "point": [
+          -34.3,
+          14.457368181437941,
+          15.45
+        ],
+        "color": "e1e3dc"
+      },
+      {
+        "x": -34.3,
+        "z": 15.55,
+        "name": "Aerial batch · Period · 1829 · 278",
+        "point": [
+          -34.3,
+          14.457368181437941,
+          15.55
+        ],
+        "color": "e1e3dc"
+      },
+      {
+        "x": -34.3,
+        "z": 15.65,
+        "name": "Aerial batch · Period · 1829 · 283",
+        "point": [
+          -34.3,
+          8.829999923706058,
+          15.65
+        ],
+        "color": "444b4d"
+      },
+      {
+        "x": -34,
+        "z": 15.35,
+        "name": "West entrance corner slate to yellow boundary",
+        "point": [
+          -34,
+          14.40040449846712,
+          15.35
+        ],
+        "color": "c4c9c6"
+      },
+      {
+        "x": -34,
+        "z": 15.45,
+        "name": "Aerial batch · Period · 1829 · 278",
+        "point": [
+          -34,
+          14.384736559570362,
+          15.45
+        ],
+        "color": "e1e3dc"
+      },
+      {
+        "x": -34,
+        "z": 15.55,
+        "name": "Aerial batch · Period · 1829 · 278",
+        "point": [
+          -34,
+          14.384736559570362,
+          15.55
+        ],
+        "color": "e1e3dc"
+      },
+      {
+        "x": -34,
+        "z": 15.65,
+        "name": "Aerial batch · Period · 1829 · 283",
+        "point": [
+          -34,
+          8.829999923706055,
+          15.65
+        ],
+        "color": "444b4d"
+      }
+    ]
+  },
+  "errors": [],
+  "mode": "source",
+  "modelBuild": {
+    "mode": "procedural",
+    "milliseconds": 1976.4000000003725
+  }
+}

@@ -17,9 +17,23 @@ VIVIENNE_LANE[10]=[195,94];
 export const GARAGE_LANE_SHIFT=9.5;
 for(const index of [9,10,11])VIVIENNE_LANE[index]=[VIVIENNE_LANE[index][0],VIVIENNE_LANE[index][1]+GARAGE_LANE_SHIFT];
 
+// Screenshot revision, 5 October 2026: centre the church-front stretch between
+// Churton's projecting lawn bay (z=-82.65) and the clock-end feet (z=-104.45).
+// Keep the saved geographic vertices intact; roads, lamps and labels use this fit.
+export const CHURTON_CHURCH_LANE_Z=(-82.65-104.45)/2;
+
 export function roadCenterline(path){
   if(path.name==='Vivienne Smith Lane')return VIVIENNE_LANE;
   const points=path.coordinates.map(p=>earthToScene(...p));
+  if(path.name==='Parsons Lane'){
+    // Ease the existing western bend into the relocated, straight dead end.
+    points[6]=[points[6][0],points[6][1]+(CHURTON_CHURCH_LANE_Z-points[7][1])*.5];
+    for(const i of [7,8])points[i]=[points[i][0],CHURTON_CHURCH_LANE_Z];
+  }
+  if(path.name==='Parsons Lane (Upton Lea)'){
+    // Move the shared T-junction with the main lane, retaining the side road.
+    points[0]=[points[0][0],CHURTON_CHURCH_LANE_Z];
+  }
   if(path.name==='Valley drive'){
     // The user-centred junction replaces the fork and near-side bypass with
     // one smooth approach to the roundabout. Retain the saved outer road.

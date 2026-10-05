@@ -1,0 +1,158 @@
+{
+  "geometry": {
+    "records": [
+      {
+        "kind": "receptionDesk",
+        "parts": 4,
+        "size": [
+          2.2200000286102295,
+          1.1039999723434448,
+          1.055999994277954
+        ]
+      },
+      {
+        "kind": "chair",
+        "parts": 1,
+        "size": [
+          0.7488000452041632,
+          1.4040001473426855,
+          0.7332000308513642
+        ]
+      },
+      {
+        "kind": "waitingBench",
+        "parts": 3,
+        "size": [
+          2.940000057220459,
+          1.128000020980835,
+          0.6239999532699585
+        ]
+      },
+      {
+        "kind": "waitingBench",
+        "parts": 3,
+        "size": [
+          2.940000057220459,
+          1.128000020980835,
+          0.6239999532699585
+        ]
+      },
+      {
+        "kind": "longcaseClock",
+        "parts": 6,
+        "size": [
+          0.7440000176429749,
+          2.808000087738037,
+          0.4320000112056732
+        ]
+      },
+      {
+        "kind": "keyCupboard",
+        "parts": 10,
+        "size": [
+          0.8399999737739563,
+          0.8639999628067017,
+          0.19200000166893005
+        ]
+      },
+      {
+        "kind": "rulesNotice",
+        "parts": 3,
+        "size": [
+          0.9120000004768372,
+          1.1039999723434448,
+          0.05400000140070915
+        ]
+      },
+      {
+        "kind": "clerkSet",
+        "parts": 10,
+        "size": [
+          1.8240000009536743,
+          0.41999998688697815,
+          0.7680000066757202
+        ]
+      }
+    ],
+    "labels": [
+      {
+        "name": "Reception clock dial",
+        "width": 768,
+        "height": 768
+      },
+      {
+        "name": "Reception key label 0-0",
+        "width": 768,
+        "height": 291
+      },
+      {
+        "name": "Reception key label 1-0",
+        "width": 768,
+        "height": 291
+      },
+      {
+        "name": "Reception key label 0-1",
+        "width": 768,
+        "height": 291
+      },
+      {
+        "name": "Reception key label 1-1",
+        "width": 768,
+        "height": 291
+      },
+      {
+        "name": "Reception key label 0-2",
+        "width": 768,
+        "height": 291
+      },
+      {
+        "name": "Reception key label 1-2",
+        "width": 768,
+        "height": 291
+      },
+      {
+        "name": "Reception hall rules",
+        "width": 768,
+        "height": 953
+      },
+      {
+        "name": "Reception admissions ledger",
+        "width": 768,
+        "height": 470
+      },
+      {
+        "name": "Reception loose paper",
+        "width": 768,
+        "height": 983
+      }
+    ]
+  },
+  "walks": [
+    {
+      "x": -2,
+      "z": 13.019999999999984
+    },
+    {
+      "x": 2,
+      "z": 13.019999999999984
+    },
+    {
+      "x": 0,
+      "z": 13.887999999999975
+    }
+  ],
+  "captures": [
+    "hall",
+    "desk",
+    "west",
+    "clock",
+    "keys",
+    "keys-close",
+    "keys-side",
+    "rules",
+    "hall-mobile",
+    "explore-hall"
+  ],
+  "escapeExploreParity": true,
+  "errors": []
+}

@@ -1,0 +1,19 @@
+{
+  "dusk": {
+    "mode": "dusk",
+    "lit": 1277,
+    "visible": 3064,
+    "lights": 8
+  },
+  "front1280": {
+    "visible": 4304,
+    "colors": 105,
+    "calls": 1639
+  },
+  "front390": {
+    "visible": 5895,
+    "colors": 112,
+    "calls": 622
+  },
+  "cloudMotion": 1422
+}

@@ -39,6 +39,8 @@ jobs:
       - name: Precompile estate geometry and textures
         run: npm run build:models
       - name: Verify compiled scene and browser fallback
+        env:
+          BROWSER_CI_SOFTWARE: '1'
         run: npm run test:compiled
       - name: Upload browser build
         uses: actions/upload-pages-artifact@v3

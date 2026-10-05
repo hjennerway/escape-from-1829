@@ -58,6 +58,8 @@ jobs:
       - name: Build shared web assets
         run: npm run build:models --prefix Browser
       - name: Check compiled scene and timeline
+        env:
+          BROWSER_CI_SOFTWARE: '1'
         run: npm run test:compiled --prefix Browser
       - name: Set up Microsoft packaging tools
         run: ./Desktop/scripts/setup-sdk.ps1

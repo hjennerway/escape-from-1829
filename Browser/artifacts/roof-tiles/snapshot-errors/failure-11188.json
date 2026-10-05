@@ -1,0 +1,12 @@
+{
+  "actual": {
+    "count": 1747,
+    "digest": "5cae94c59e96084d87497e02f64d218a9a00995a0be883597e7134536f6f0279"
+  },
+  "expected": {
+    "count": 1747,
+    "digest": "d88fddabc47b6e04e76470281f7de00e604f92fdd5670c542d1a18cc5dc23b03"
+  },
+  "message": "Blue-circled front retains its local geometry within the uniform site fit\n+ actual - expected\n\n  {\n    count: 1747,\n+   digest: '5cae94c59e96084d87497e02f64d218a9a00995a0be883597e7134536f6f0279'\n-   digest: 'd88fddabc47b6e04e76470281f7de00e604f92fdd5670c542d1a18cc5dc23b03'\n  }\n",
+  "stack": "AssertionError [ERR_ASSERTION]: Blue-circled front retains its local geometry within the uniform site fit\n+ actual - expected\n\n  {\n    count: 1747,\n+   digest: '5cae94c59e96084d87497e02f64d218a9a00995a0be883597e7134536f6f0279'\n-   digest: 'd88fddabc47b6e04e76470281f7de00e604f92fdd5670c542d1a18cc5dc23b03'\n  }\n\n    at file:///C:/Users/Harry/Documents/_escape-from-1829/Browser/artifacts/snapshot-annexe-front.mjs:25:105"
+}

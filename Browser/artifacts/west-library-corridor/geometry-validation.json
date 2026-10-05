@@ -1,0 +1,17 @@
+{
+  "changes": [
+    "rooms",
+    "corridors"
+  ],
+  "rooms": [
+    "R48",
+    "R49",
+    "R50"
+  ],
+  "wallShift": 1.4,
+  "nominalThroatWidth": 2.6,
+  "clearMasonryWidth": 2.42,
+  "walkDistanceEachWay": 18.8,
+  "sharedPlanParity": true,
+  "otherDefinitionsPreserved": true
+}

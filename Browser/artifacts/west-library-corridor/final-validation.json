@@ -1,0 +1,30 @@
+{
+  "walked": {
+    "start": {
+      "x": -54,
+      "z": 8.2,
+      "floor": 3,
+      "y": 8.4,
+      "stair": null,
+      "outside": false
+    },
+    "forward": {
+      "x": -35.2000000000004,
+      "z": 8.2,
+      "floor": 3,
+      "y": 8.4,
+      "stair": null,
+      "outside": false
+    },
+    "returned": {
+      "x": -54,
+      "z": 8.2,
+      "floor": 3,
+      "y": 8.4,
+      "stair": null,
+      "outside": false
+    },
+    "passed": true
+  },
+  "errors": []
+}

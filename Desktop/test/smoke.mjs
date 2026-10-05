@@ -5,6 +5,7 @@ import { join } from 'node:path';
 import { createRequire } from 'node:module';
 import { chromium } from '../../Browser/node_modules/playwright/index.mjs';
 import { desktop, prepareWeb } from '../scripts/prepare-web.mjs';
+import { isSoftwareRenderer } from '../../Browser/dist/tree-rendering.mjs';
 
 const packaged = process.argv.includes('--packaged');
 const artifacts = join(desktop, 'artifacts');
@@ -19,7 +20,7 @@ delete environment.ELECTRON_RUN_AS_NODE;
 delete environment.NODE_OPTIONS;
 const child = spawn(executable, [
   ...(packaged ? [] : [desktop]), '--remote-debugging-port=0', '--user-data-dir=' + profile,
-  '--use-angle=swiftshader', '--enable-unsafe-swiftshader', '--force-device-scale-factor=1',
+  '--enable-gpu', '--disable-software-rasterizer', '--force-device-scale-factor=1',
   // Match Playwright's browser defaults when launching Electron ourselves.
   '--disable-background-timer-throttling', '--disable-backgrounding-occluded-windows',
   '--disable-renderer-backgrounding',
@@ -30,7 +31,7 @@ const navigation = [];
 const label = packaged ? 'packaged' : 'development';
 
 async function clickToNavigate(selector, destination) {
-  // A software-rendered frame can delay each click actionability check. Give
+  // A rendered frame can delay each click actionability check. Give
   // input and navigation their own limits instead of starting both clocks at
   // once. waitForURL also handles a destination reached before the click ends.
   stage = 'clicking ' + selector;
@@ -78,12 +79,23 @@ try {
     if ((message.type() === 'error' && !message.text().includes('net::ERR_BLOCKED_BY_CLIENT')) ||
       message.text().startsWith('Precompiled estate unavailable')) errors.push(message.text());
   });
-  // Keep software-rendering work independent of the runner's display/DPI.
+  // Keep screenshot coordinates independent of the runner's display/DPI.
   await page.setViewportSize({ width: 960, height: 640 });
   await page.bringToFront();
   stage = 'loading the landing page';
   // Let the initial navigation finish before exercising reloads/navigation.
   await page.waitForFunction(() => document.querySelector('#start')?.disabled === false);
+  const gpuRenderer = await page.evaluate(() => {
+    const canvas = document.createElement('canvas');canvas.width = canvas.height = 16;
+    const gl = canvas.getContext('webgl2') ?? canvas.getContext('webgl');
+    const info = gl?.getExtension('WEBGL_debug_renderer_info');
+    const name = info ? gl.getParameter(info.UNMASKED_RENDERER_WEBGL) : null;
+    gl?.getExtension('WEBGL_lose_context')?.loseContext();
+    return name;
+  });
+  assert(gpuRenderer && !isSoftwareRenderer({ getExtension: () => null, getParameter: () => gpuRenderer }),
+    'Desktop smoke test requires verified GPU rendering: ' + gpuRenderer);
+  console.log('Desktop hardware GPU: ' + gpuRenderer);
   viewport = await page.evaluate(() => ({ width: innerWidth, height: innerHeight, pixelRatio: devicePixelRatio }));
   assert.deepEqual(viewport, { width: 960, height: 640, pixelRatio: 1 });
   await page.goto('escape1829://game/', { waitUntil: 'domcontentloaded' });
@@ -114,7 +126,7 @@ try {
 
   await page.goto('escape1829://game/', { waitUntil: 'domcontentloaded' });
   stage = 'waiting for the title frame';
-  // The title-frame capture must not race the first software-rendered frame.
+  // The title-frame capture must not race the first complete rendered frame.
   await page.waitForFunction(() => document.querySelector('#game')?.classList.contains('scene-ready'));
   console.log('Title scene ready; opening aerial view.');
   // Match both the temporary ?intro=1 handoff and the final aerial URL.

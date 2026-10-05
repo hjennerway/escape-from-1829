@@ -22,13 +22,15 @@ export function addWestCourtPhotoDetails(THREE,{model,box,mesh,worldUV,white,bri
   door(-45.2,wallZ-.09,Math.PI);
   // Pale bands sit between floors, rather than covering the brick ground floor.
   for(const y of [4.05,8.6])box(white,-51.2,y,wallZ-.12,16,.18,.2);
-  addWestCantedBay(THREE,{model,mesh,worldUV,brick,white,roof,sash},{x:-58.4,z:wallZ-.1,side:-1,name:'West courtyard polygonal bay',face:'west-court-bay',height:15.2,depth:3.35,width:6.5,
+  addWestCantedBay(THREE,{model,mesh,worldUV,brick,white,roof,sash},{x:-58.4,z:wallZ-.1,side:-1,name:'West courtyard polygonal bay',face:'west-court-bay',height:WEST_RANGE_PLAN.wallHeight,depth:3.35,width:6.5,
+    bandHeights:[4.05,8.6,WEST_RANGE_PLAN.wallHeight-.08,WEST_RANGE_PLAN.roofEaveHeight-.1],
     windowRows:[2,6.45,11.35].map(y=>({y,width:1.3,sideWidth:1.3,height:2.5}))});
   // Keep the existing outer recess fixed. Solid side masonry and a roof close
   // the bay's deeper connection into that retained part of the cross range.
   mesh(worldUV(new THREE.BoxGeometry(3.3,14.3,-shift+.2),1.7),brick,-60,7.15,(wallZ+oldWallZ)/2,true).name='West courtyard bay extended return';
   hipRoof(-60,(wallZ+oldWallZ)/2,3.3,-shift+.2,14.53,1).name='West courtyard bay return roof';
-  box(white,-61.72,14.3,(wallZ+oldWallZ)/2,.2,.18,-shift+.2);
+  // The joined bay roof and its own cornice replace the old separate white
+  // return strip, whose wider end poked out beside the courtyard shoulder.
   // Yellow annotation: a broad recessed wall followed by a projecting corner.
   // Retain the upper pair. Each lower floor has one sash centred on the
   // exposed wall between the polygonal bay and the low stair projection.
@@ -51,9 +53,10 @@ export function addWestCourtPhotoDetails(THREE,{model,box,mesh,worldUV,white,bri
     box(white,lowBayX+side*1.44,8.91,lowBayZ,.12,.2,1.96);
   }
   for(const y of [2,6.4])for(const x of [-64.16,-65.54])sash('west-court-low-bay',x,y,lowBayZ-1.06,Math.PI,1.04,2.25);
-  // Remove both local downpipe segments: one drained this roof, while the
-  // taller overlapping run crossed its sash bank. Retain the far end pipe.
-  box(iron,-71.7,6.3,lowBayZ-1.16,.085,12.6,.085);
+  // Owner's later blue guide moves the far-end pipe beside this low roof.
+  // Finish at its rim, in the clear pier between the two window banks.
+  const pipeHeight=8.91;
+  box(iron,lowBayX-lowBayWidth/2-.1,pipeHeight/2,lowBayZ-1.16,.085,pipeHeight,.085);
   // Retain the photographed front curved bay; only its flanking front sashes
   // are added here, while the new polygonal bay faces the rear court.
   for(const y of [2,6.5,11])for(const z of [8,12,16])sash('west-pavilion-east',-37.95,y,z,Math.PI/2,1.1,2.4);
@@ -124,9 +127,12 @@ export function addWestCourtPhotoDetails(THREE,{model,box,mesh,worldUV,white,bri
   box(white,doorX-.08,2.5,centreZ,1.9,.15,.23,-Math.PI/2);
   box(glazing,doorX-.09,2.1,centreZ,1.42,.6,.08,-Math.PI/2);
   box(frame,doorX-.15,2.1,centreZ,.04,.6,.04,-Math.PI/2);
-  for(const [x,z,w,top] of [[-48.6,wallZ-.15,21.3,14.3],[-62.5,WEST_RANGE_PLAN.recessRearZ-.15,7.1,14.3],[-69,WEST_RANGE_PLAN.outerRearZ-.15,6.15,15.2]]){
-    if(x!==-69)for(const [dy,h,d] of [[-.18,.16,.23],[.04,.22,.4],[.22,.1,.55]])box(white,x,top+dy,z,w,h,d);
-    box(iron,x,top+.32,z-.2,w+.13,.08,.12);
+  for(const [x,z,w,top] of [[-48.6,wallZ-.15,21.3,14.3],[-62.5,WEST_RANGE_PLAN.recessRearZ-.15,7.1,14.3],[-69,WEST_RANGE_PLAN.outerRearZ-.15,6.15,WEST_RANGE_PLAN.wallHeight]]){
+    if(x!==-69)for(const [dy,h,d] of [[-.18,.16,.23],[.04,.22,.4],[.18,.1,.55]])box(white,x,top+dy,z,w,h,d);
+    // The gutter sits beneath the shared slate edge. Its former raised rim
+    // became visible through the bay valleys when their eaves were lowered.
+    const gutterLeft=x===-62.5?-65.2:x-(w+.13)/2,gutterRight=x+(w+.13)/2;
+    box(iron,(gutterLeft+gutterRight)/2,WEST_RANGE_PLAN.roofEaveHeight-.04,z-.2,gutterRight-gutterLeft,.08,.12);
   }
   for(const x of [-46.4,-50.8,-55.2])box(iron,x,7,wallZ-.32,.085,14,.085);
   for(const y of [4.3,8.9])rod([-50.8,y,wallZ-.32],[-48.3,y,wallZ-.32],.035);

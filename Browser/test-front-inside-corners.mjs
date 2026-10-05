@@ -34,14 +34,21 @@ for(const side of [-1,1]){
   assert(down(side*28,18).point.y>13,'the retained projecting frontage must still have its slate roof');
   ray.set(new THREE.Vector3(side*22.5,30,17.42),new THREE.Vector3(0,-1,0));
   const joinRoof=ray.intersectObjects(roofs,false)[0],joinTrim=ray.intersectObjects(cornices,false)[0];
-  assert(joinTrim&&joinRoof&&Math.abs(joinTrim.point.y-joinRoof.point.y)<.08,'The trim transition follows the roof instead of ending in a raised blade');
+  {
+    assert(joinTrim&&!joinRoof,'Slate stops before each exposed render return');
+    ray.set(new THREE.Vector3(side*22.6751,30,17.42),new THREE.Vector3(0,-1,0));
+    const edgeRoof=ray.intersectObjects(roofs,false)[0];
+    ray.set(new THREE.Vector3(side*22.6749,30,17.42),new THREE.Vector3(0,-1,0));
+    const edgeTrim=ray.intersectObjects(cornices,false)[0];
+    assert(edgeRoof&&edgeTrim&&Math.abs(edgeTrim.point.y-edgeRoof.point.y)<.001,'Slate meets the inner render edge without an open seam');
+  }
   // The open ends of the cut extend through the roof overhangs. These two
   // probes catch the slate tongues missed by the broader courtyard checks.
   for(const [x,z] of [[29.25,20],[31.7,21.15]]){
     ray.set(new THREE.Vector3(side*x,30,z),new THREE.Vector3(0,-1,0));
     assert.equal(ray.intersectObjects(roofs,false).length,0,'No slate tip projects across the courtyard wall edge');
   }
-  for(const [x,z] of [[28.95,19.95],[31.8,21.3],[32.2,21.05]]){
+  for(const [x,z] of [[28.6,19.55],[31.8,21.3],[32.2,21.05]]){
     ray.set(new THREE.Vector3(side*x,30,z),new THREE.Vector3(0,-1,0));
     const hit=ray.intersectObjects(roofs,false)[0];
     assert(hit&&hit.face.normal.y>0,'Trimming the tips retains the adjoining upward-facing slate');
@@ -109,4 +116,31 @@ walker.setView({position:[-31,1.8,20],target:[-34,1.8,20]});walker.keys.add('Key
 for(let i=0;i<15;i++)walker.update(.05);walker.keys.clear();
 assert(camera.position.x>-31.61&&camera.position.x<-31.4,'The walker stops at the new outer wall');
 assert(!model.children.some(o=>/inside corner bollard/i.test(o.name)),'the recent bollard is excluded');
-console.log('PASS: marked stepped walls, level flat roof, exact masonry collisions, physically walked clear doorway route, all 104 corner pane probes, retained east corner and photo cameras.');
+// Old cornice/slab triangles must end behind the wall skin. Open triangle
+// edges on that plane rasterized as the reported horizontal ghost lines.
+let hiddenEdges=0,junctionSamples=0;
+for(const side of [-1,1])for(let i=0;i<5;i++){
+ const a=FRONT_CORNER_OUTLINE[i],b=FRONT_CORNER_OUTLINE[i+1];
+ const dx=side*(b[0]-a[0]),dz=b[1]-a[1],length=Math.hypot(dx,dz),nx=-side*dz/length,nz=side*dx/length;
+ for(const object of model.children){
+  if(object.name!=='Front inside corner trimmed existing detail'||Math.min(object.material.color.r,object.material.color.g,object.material.color.b)<.3)continue;
+  const positions=object.geometry.attributes.position;
+  for(let j=0;j<positions.count;j++){
+   const v=new THREE.Vector3().fromBufferAttribute(positions,j).applyMatrix4(object.matrixWorld),ux=v.x-side*a[0],uz=v.z-a[1];
+   const t=(ux*dx+uz*dz)/(length*length),distance=ux*nx+uz*nz;
+   if(t<=.1||t>=.9||v.y<=3||distance<-.08||distance>.02)continue;
+   assert(distance<-.025,'Existing render/slab edges cannot compete with the brick facade '+JSON.stringify({side,i,v:v.toArray(),distance}));hiddenEdges++;
+  }
+ }
+}
+assert(hiddenEdges>40,'Audit existing cornice edges on the canted and straight returns');
+for(const side of ['West','East'])for(const i of side==='West'?[0,1,2,5]:[0,1,2,3,4]){
+ const wall=model.getObjectByName(side+' inside corner brick facet '+i),junction=model.getObjectByName(side+' inside corner roof junction '+i);
+ const positions=junction.geometry.attributes.position,uv=junction.geometry.attributes.uv;
+ for(let j=0;j<positions.count;j++){
+  const p=wall.worldToLocal(new THREE.Vector3().fromBufferAttribute(positions,j).applyMatrix4(junction.matrixWorld));
+  assert(Math.abs(p.z-.085)<3e-6,'Roof closure shares the exterior wall plane; no exposed slate edges');
+  assert(Math.abs(uv.getX(j)-p.x/1.7)<2e-6&&Math.abs(uv.getY(j)-p.y/1.7)<2e-6,'Brick courses align through the former wall/roof seam');junctionSamples++;
+ }
+}
+console.log(`PASS: marked stepped walls, level flat roof, exact masonry collisions, walked doorway route, 104 pane probes, ${hiddenEdges} concealed trim edges and ${junctionSamples} flush/textured roof-closure samples.`);

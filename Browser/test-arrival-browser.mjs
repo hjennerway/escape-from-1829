@@ -2,7 +2,7 @@ import assert from 'node:assert/strict';
 import {spawn} from 'node:child_process';
 import {mkdir,readFile,writeFile} from 'node:fs/promises';
 import {fileURLToPath} from 'node:url';
-import {chromium} from 'playwright';
+import {launchHardwareBrowser} from './test-support/hardware-browser.mjs';
 
 const root=new URL('../',import.meta.url),artifacts=new URL('./artifacts/arrival-animation/',import.meta.url);
 await mkdir(artifacts,{recursive:true});
@@ -12,7 +12,7 @@ const source=await readFile(new URL('./dist/game.mjs',import.meta.url),'utf8');
 const results=[];
 let browser;
 try{
- browser=await chromium.launch({headless:true,executablePath:process.env.MODEL_CHROME_PATH??'C:/Program Files/Google/Chrome/Application/chrome.exe',args:['--use-angle=swiftshader','--enable-unsafe-swiftshader']});
+ browser=await launchHardwareBrowser({headless:true,executablePath:process.env.MODEL_CHROME_PATH??'C:/Program Files/Google/Chrome/Application/chrome.exe'});
  for(const [width,height,reducedMotion] of [[1100,750,'no-preference'],[390,844,'reduce']]){
   const page=await browser.newPage({viewport:{width,height},reducedMotion,isMobile:width<500,hasTouch:width<500});
   page.setDefaultTimeout(120000);page.setDefaultNavigationTimeout(120000);

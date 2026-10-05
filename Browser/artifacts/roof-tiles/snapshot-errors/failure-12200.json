@@ -1,0 +1,30 @@
+{
+  "actual": [
+    "East square tower slate roof",
+    "b6f81915f3fa146d8f83cff16646896ed877da279dad0098803f635892abcd60",
+    [
+      [
+        "MeshStandardMaterial",
+        12896710,
+        0.9,
+        0,
+        0
+      ]
+    ]
+  ],
+  "expected": [
+    "East square tower slate roof",
+    "9bc74e09b7cb2cd199093e35b56f3511eab79a491b29ba1ac89d7101bbf18d58",
+    [
+      [
+        "MeshStandardMaterial",
+        12896710,
+        0.9,
+        0,
+        0
+      ]
+    ]
+  ],
+  "message": "Expected values to be strictly deep-equal:\n+ actual - expected\n\n  [\n    'East square tower slate roof',\n+   'b6f81915f3fa146d8f83cff16646896ed877da279dad0098803f635892abcd60',\n-   '9bc74e09b7cb2cd199093e35b56f3511eab79a491b29ba1ac89d7101bbf18d58',\n    [\n      [\n        'MeshStandardMaterial',\n        12896710,\n        0.9,\n",
+  "stack": "AssertionError [ERR_ASSERTION]: Expected values to be strictly deep-equal:\n+ actual - expected\n\n  [\n    'East square tower slate roof',\n+   'b6f81915f3fa146d8f83cff16646896ed877da279dad0098803f635892abcd60',\n-   '9bc74e09b7cb2cd199093e35b56f3511eab79a491b29ba1ac89d7101bbf18d58',\n    [\n      [\n        'MeshStandardMaterial',\n        12896710,\n        0.9,\n\n    at file:///C:/Users/Harry/Documents/_escape-from-1829/Browser/test-annexe-carden-height.mjs:17:9\n    at ModuleJob.run (node:internal/modules/esm/module_job:561:25)\n    at async node:internal/modules/esm/loader:647:26\n    at async asyncRunEntryPointWithESMLoader (node:internal/modules/run_main:101:5)"
+}

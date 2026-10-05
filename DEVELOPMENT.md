@@ -1,3 +1,414 @@
+## Shared indoor ward privies (5 October 2026)
+
+Converted ground/first R5, R16, R33 and R35 to eight shared washrooms: three
+seats in each rear room and two in each forward room, twenty seats overall.
+Each room has boarded privacy screens and a timber basin-and-jug washstand.
+The original procedural seat has a real opening with a recessed pan and
+small valve fitting. Plain masonry replaces the rooms' decorative finish.
+These are interpretive 1829 fittings, grounded in the references recorded in
+Research/room-furnishings/README.md; their locations are gameplay choices.
+
+The separate seat/screen footprints preserve entry into the stalls. Fixed
+placement records share rendering, walking, navigation and sight between
+Escape and Explore. The rear room labels move into their clear common aisles.
+Both shared plan JSON files and ground/first architectural/furnished SVG/PNG
+drawings are refreshed. The static drawings use the existing SVG exporter
+and the hardware browser for PNG rendering, since the exporter's optional
+sharp dependency is unavailable here. Independent before/after comparisons
+prove all other furnishings unchanged for seeds 1829 and 42, and all room
+outlines, masonry, doors, windows, stairs and exterior geometry preserved.
+
+Validation: test-sanitary-furniture.mjs passes four seeds, all twenty seats,
+eight washstands, 112 physically followed access routes, genuine seat holes,
+matching footprint dimensions and the three models' 4,300-triangle budget.
+The shared furniture check passes eight seeds, 976 room/exit routes, 3,397
+walked collision probes, 1,296 storage wall contacts and 648 shelf-front checks.
+Focused layout, central dormitory, medical/hall furniture, room finish,
+door, window-clearance, notebook and Explore interior checks all pass.
+
+npm run test:gpu and the sanitary browser companion verify NVIDIA GeForce
+RTX 3090 Ti / Direct3D11 through the required launcher. All 56 fixtures match
+their rendered transforms and footprints; 28 actual keyboard approaches stop
+at the visible seats/washstands. Eight rooms are captured in Escape/Explore,
+plus phone and neutral model views, without runtime or shader errors.
+Representative images are visually reviewed. The existing complete furniture
+browser regression also passes all thirty-three models, actual transforms,
+new-game variation and keyboard collision in both modes. Dedicated browser
+checks save evidence separately from the review-plan PNGs to avoid concurrent
+test writers competing for those images. npm test still stops at the
+pre-existing test-facade-courses.mjs:68 assertion (23 courses versus 22).
+Logs, screenshots, original-source snapshots and preservation evidence are
+in Browser/artifacts/ward-privies/. One later preview run timed out at startup;
+the instrumented rerun passed with no scene changes or runtime errors.
+final-validation.json records the completed checks and the separate suite failure.
+npm run test:privies reproduces the focused
+checks; both checks are included in test:furniture and logic in npm test.
+
+Browser interiors and review drawings are updated. The compiled aerial model
+excludes these inputs and its manifest still matches the source hash; no
+aerial rebuild is needed. Unity, Blender and packaged exports are not regenerated.
+
+## Six extra beds in mirrored R2/R13 wards (5 October 2026)
+
+R2 and R13 each gain six beds on both the ground and first floors, as confirmed
+by the owner. Each room now has ten beds: five along each existing row. The
+original four bed footprints, 1.975-unit spacing, inward orientation and
+.40-unit head inset are retained. Three positions extend each row towards
+the entrance end; the mirrored room uses the opposite x coordinates. Both
+shared plan JSON files carry the rows. Planned bed totals add fixed beds to
+the room's usual furniture list, and bed slots are fitted before wardrobes
+and seats. Every planned bed still passes footprint, door and circulation
+checks rather than being silently omitted.
+
+The independent before/after audit retains all sixteen original bed poses
+and the existing fixed wardrobes/benches across these four rooms; 438 fixed
+items elsewhere are unchanged. Ground/first furnished SVG and PNG plans are
+refreshed. Browser Escape and Explore share the new rows. The compiled aerial
+model excludes these interior inputs and needs no rebuild; Unity, Blender
+and packaged exports are not regenerated.
+
+Validation: the shared furniture test checks the exact mirrored row spacing
+and physically follows forty individual bed-foot routes, then passes all
+eight seeds, 976 room/exit routes, doorway crossings, 3,075 walked furniture
+collisions, NPC spawns/routes and storage clearances. Central dormitory,
+room-door and exploration checks pass. Hardware browser validation verifies
+the NVIDIA GeForce RTX 3090 Ti through the required launcher, all forty bed
+instances' positions/dimensions/orientation, accessible bed feet, identical
+Escape/Explore fixed furnishings, both floors from both ends and a portrait
+view, with no runtime/shader errors. Evidence and the capture script are in
+Browser/artifacts/outer-ward-beds/. The required npm test run stops at the
+previously recorded test-facade-courses.mjs:68 assertion (23 exterior courses
+versus 22 expected); its output is saved there as npm-test.log.
+
+## Central dormitory beds against the walls (5 October 2026)
+
+This correction supersedes the bed counts and rear circulation strips in the
+three-dormitory revision below. All three first-floor central dormitories
+(R6, R8 and R10) now have fourteen beds: eight along the window wall and six
+along the entrance wall. Entrance-side slots 1 and 2 (zero based) are omitted
+from the original eight-slot spacing, preserving the requested empty area
+beside each doorway. Both rows' headboard backs meet the .09-unit masonry
+face instead of leaving .95/2.15-unit strips behind them. Fixed and variable
+Windsor chairs are removed from this room use; small Panca seats remain.
+
+The shared row records distinguish the remaining count from the original
+slots. Wall-fitted beds use rear-face probes and actual doorway/player
+clearance, while retaining full bed footprints, furniture overlap checks,
+door leaf/handle checks and collision/navigation updates. The three entrances
+cap their opening at 105 degrees so the leaves clear the retained first beds.
+Row-end walking strips are reserved across each bed's depth and foot access;
+wardrobes refit against short walls in the wider middle aisle.
+
+Both plan JSON sources and the first-floor furnished SVG/PNG are updated.
+Browser Escape and Explore interiors share these records. The compiled aerial
+model excludes the interior inputs; Unity, Blender and packaged exports are
+not regenerated.
+
+Validation: the dormitory logic check follows all 42 bed-access routes,
+checks all headboard backs against their host masonry, verifies the six
+removed slots, absence of chairs, clear row ends and retained wardrobes.
+The shared furniture and door geometry checks pass. Hardware browser
+validation uses the NVIDIA GeForce RTX 3090 Ti through the required launcher,
+checks matching bed instances and 126 rendered wall contacts, and captures
+all three rooms in Escape and Explore plus a portrait view. Evidence is in
+Browser/artifacts/central-dormitory-wall-beds/. The npm test attempt still
+stops at the pre-existing test-facade-courses.mjs:68 assertion (23 repaired
+exterior courses versus 22 expected); the log is saved with that evidence.
+
+## Three central first-floor dormitories (5 October 2026)
+
+This section records the initial sixteen-bed arrangement and its validation.
+The owner's later same-day request in “Adjust beds and chairs” removes two
+entrance-side beds and the Windsor chairs from each dormitory and moves the
+remaining headboards against the walls. That concurrent follow-up supersedes
+the bed count and offsets below; the three-room conversion is retained.
+
+Combined the six central rear rooms in adjacent pairs on floor 1: R6/R7 →
+R6, R8/R9 → R8, and R10/R11 → R10. The three old dividing walls and absorbed
+rooms' doorways are removed only on that floor. Merged room variants retain
+the exterior outline, corridor corner and southern enclosure. Variant labels
+now also supply the room's navigation/map coordinates instead of retaining
+the old smaller room centre.
+
+Each new dormitory has sixteen existing full-size beds, arranged eight per
+long wall with feet facing a clear central aisle. Plan-defined rows are fixed
+across game seeds. The placement engine checks the requested count and rejects
+an obstructed planned bed instead of silently omitting it. Window-side heads
+have .95 units of clearance; entrance-side heads have 2.15 units for the open
+leaf and approach. Cross aisles stay clear at the row ends; R10's southern
+allowance is 1.3 units so the .5-unit navigation grid includes the turn.
+Wardrobes and seats are refitted after the beds; the old nursing work table
+and linen shelving are removed. The room-use metadata, visible architecture,
+wall finishes, notebook and walking/NPC geometry share the new room records.
+
+Both shared plan JSON files and first-floor architectural/furnished SVG/PNG
+drawings are updated. Notes are in Research/1829-interior-proposal/ and
+Research/room-furnishings/. Browser interiors are updated; the aerial compiler
+excludes these inputs, and Unity, Blender and packaged exports are not
+regenerated.
+
+Validation: test-central-dormitories.mjs checks the three merged rooms, all
+48 beds, eight per long wall, retained ground-floor dividers, removed upper
+doors, clear end aisles and 48 physically followed routes to individual bed
+feet. The shared furniture check passes eight seeds, 976 room/exit routes,
+3,049 walked furniture collision probes, 1,392 flush storage contacts and
+696 unobstructed storage-front checks, with 81% fixed furnishings. Hardware
+rendering is verified on the NVIDIA GeForce RTX 3090 Ti through the required
+launcher. The browser companion passes Escape/Explore instance/collision
+agreement for all 48 beds, keyboard movement through a removed divider,
+six desktop room views, portrait and Explore views, with no page/shader errors.
+These views were visually reviewed. npm run test:central-dormitories runs
+the focused logic and visual checks; npm test and test:furniture include
+the new relevant regressions. Evidence is in Browser/artifacts/central-dormitories/.
+
+Retired only the three wall-join fixtures on the removed first-floor dividers;
+ground-floor fixtures and the two retained dormitory boundaries remain in
+the survey. The expected door/frame totals drop by three to 92 open room
+doors and 94 interior frames. Final wall-join, door and frame reruns pass
+126 surveyed joins, 391 mitred corners, 1,104 hinge contacts and 2,864 frame
+support/clearance rays. Their full logs are saved with the room evidence.
+
+The complete npm test attempt stops at the separate exterior assertion in
+test-facade-courses.mjs:68: its survey expects 22 repaired courses and the
+current exterior has 23. This task does not modify exterior courses. The
+remaining suite is run independently, with results in remaining-suite.log
+and remaining-suite.json alongside the visual evidence.
+
+The remaining 126 commands finish with 120 initial passes. Three failures
+referenced the deliberately removed dividers and old door/frame totals;
+their corrected final reruns all pass. The other failures are the separate
+Jarman and Leighton/Newton exterior primitive snapshots and the aerial
+layout's saved lane vertices. These sources were not changed for the room
+conversion. final-validation.json distinguishes the initial layout evidence,
+resolved checks, unrelated failures and concurrent later bed revision.
+
+## Walled central stair wells (5 October 2026)
+
+All four internal return stair wells (S1/S3/S4 and the lower S5 connections)
+now have continuous full-height masonry enclosures. Four joined 0.18-unit
+walls fit inside each central void, preserving the full flight and landing
+widths, tread geometry, smooth soffits, floor openings and navigation routes.
+The existing red/cream material batches render the walls through the storey
+bands and up to the top landing ceiling. Inner banisters meeting the masonry
+are removed; exposed outer edges and unused flight mouths remain guarded.
+Full-height walking collision shares the enclosure bounds. S5's newer single
+straight Library flight and the capped old Library well retain their geometry.
+This supersedes earlier open-well descriptions. Modelling notes are in
+`Research/1829-interior-proposal/README.md`.
+
+`test-asylum-stairs.mjs` passes 2,464 outward/inward wall-face samples, including
+corner ends, material joins and ceiling/storey bands, alongside 1,783 planar
+soffit/landing samples, 1,170 closed flight-side samples, 1,092 support/headroom
+samples, 75 fall barriers and all 24 physically walked exit routes. The saved
+original renderer fails the new full-height wall regression. Focused layout,
+slab, Library, room-closure, masonry-join, wall-height, skirting, room-finish,
+interior-architecture, jump, notebook and developer checks pass. Explore
+walks all eight interior connections in both directions.
+
+The hardware launcher verifies NVIDIA RTX 3090 Ti / Direct3D11.
+`test-asylum-stair-wells-browser.mjs` captures 31 matched desktop/phone views
+before and after, and walks all eight connections up/down in the actual
+Explore loop without page or shader errors. The views are visually reviewed.
+The furnished game browser check also passes all 24 E door round trips with
+release latching, continuous basement/ground/first-floor stair travel, the
+raised outside landing and desktop/phone renders without runtime errors.
+It runs through `artifacts/stair-well-walls/check-game.mjs` into a fresh output
+folder because an older screenshot was locked on the first direct attempt;
+a later readiness timeout passes on rerun.
+Saved sources, the original-renderer regression and validation evidence are
+under `Browser/artifacts/stair-well-walls/`.
+
+The required `npm test` attempt stops at the pre-existing exterior course-count
+assertion (23 versus 22) in `test-facade-courses.mjs:68`. The legacy CPU game
+harness also stops on its missing `bindDeveloperOptions` mock, before game
+initialization. Focused checks run independently of these unrelated failures.
+Both shared plan descriptions are updated. The aerial manifest's source hash
+still matches; these interior sources require no aerial rebuild. Unity,
+Blender and packaged exports are not regenerated.
+
+## Single straight Library access staircase (5 October 2026)
+
+The owner's green-circled stair view supersedes the earlier diagonal-return
+correction. Both upper flights and their broad return landing are removed.
+One north-rising flight beside the lower well follows the blue arrow, from
+(-34.85,4.2,13.5) to (-34.85,8.4,8.35), with 24 risers. The former Library
+well is filled with floor; only the new narrow opening remains. Flight solids,
+treads, opening guards, collision, navigation, notebook marker and developer
+overlay share the connection-specific geometry. R50's adjacent east boundary
+has a local 0.8-unit setback, and C26 meets the new landing. See
+`Research/west/single-library-stair-2026-10-05/README.md` and its saved reference.
+
+Focused stair and slab checks pass 1,783 soffit/landing samples, 1,170 flight-side
+samples, 1,092 visible support/headroom samples and 75 fall barriers, plus all
+24 physically walked exit routes. Library checks pass 80 furnished/unfurnished
+room trips, including disconnected upper wings. Layout, room closures, joins,
+doors, frames, furniture, interior architecture and Explore checks pass;
+furniture validation includes 1,000 room/exit routes. Notebook and developer
+overlay checks pass. Independent preservation checks confirm seven unchanged
+connections, 14 identical flight vertex buffers, matching shared plans and
+16 clear probes through the former upper flights and landing.
+
+The hardware launcher verifies NVIDIA RTX 3090 Ti / Direct3D11. Matched before
+and after Explore views, the new approach, top landing, cutaway and phone views
+are visually inspected. Furnished game Library routes, upper-wing navigation,
+game/Explore F4 round trips and desktop/mobile/notebook/cutaway views pass
+without page or shader errors. Evidence is under
+`Browser/artifacts/west-single-stair/`.
+
+The required `npm test` attempt stops at the existing exterior facade-course
+count assertion (23 versus 22) in `test-facade-courses.mjs:68`, as documented
+for the earlier Library passage edit. Focused interior checks run separately.
+Both shared plans and first-floor/Library SVG/PNG drawings are updated. The
+aerial manifest still matches its source fingerprint: these interior changes
+need no aerial rebuild. Unity, Blender and packaged exports are not regenerated.
+
+## Wider Library rear passage (5 October 2026)
+
+The owner's blue-line screenshot moves the second-floor Library passage's
+room-side wall back 1.4 scene units, from z=8.2 to 9.6, across the joined
+R48/R49/R50 boundaries. The stepped court-wall throat increases from 1.2 to
+2.6 units between wall centrelines, with 2.42 clear of the masonry; the main
+straight section increases from 3.2 to 4.6. Green doorways follow their hosting
+walls. C26's reserved route is widened and redirected through the bend to the
+existing west S5 landing. Both plan JSON copies agree and the Library SVG/PNG
+drawing is regenerated. See `Research/west-library/README.md` and the saved
+`corridor-reference.png`.
+
+The focused geometry check proves that only the three room boundaries and C26
+change, preserving all other rooms/corridors, floor outlines, windows, stairs
+and exit anchors. Furnished actors walk 18.8 units each way through the former
+wall position, and three actor-width lanes pass through the widened throat.
+`test-west-library.mjs` passes its 80 furnished/unfurnished cross-floor routes.
+Room-door, door-frame, wall-join and furniture checks pass, including 1,000
+furnished room/exit routes and complete doorway support. The existing Library
+browser check passes furnished room returns, upper-wing navigation, game/Explore
+F4 round trips and desktop/mobile/notebook/cutaway views without page/shader
+errors. The hardware launcher verifies NVIDIA RTX 3090 Ti / Direct3D11; before
+and after corridor views are visually reviewed. Evidence is retained under
+`Browser/artifacts/west-library-corridor/`.
+
+The final game-browser check also physically walks the player 18.8 units in
+both directions along z=8.2 through the former partition, reaching both ends
+without obstruction or page errors. Final desktop, reverse and phone views
+are captured and visually reviewed in that same evidence directory.
+
+The required `npm test` attempt stops at the pre-existing exterior facade-course
+count mismatch in `test-facade-courses.mjs:68` (23 versus 22), before reaching
+the interior tests; the focused interior checks above run independently and
+pass. This browser interior change does not enter the aerial compiler's input
+graph. No aerial binary rebuild is needed; Unity, Blender and packaged exports
+are not regenerated.
+
+## Level west-wing eaves from the red wall (5 October 2026)
+
+The owner's blue-circled/red-wall correction identifies the differing eave
+heights as the cause of the west roof connection problems. The outer pavilion,
+west end and both canted bays now use the main range's y=14.53 slate edge,
+with supporting walls at y=14.3. Upper cornice caps and gutters follow the
+same level. The main ridge and four branches retain their coordinates and
+y=17.08 crowns. Raised shoulders, slate wedges, rendered risers/returns and
+the unfinished four-bay repair's additional clipping are removed. Reference
+and superseding dimensions are in Research/west/level-eaves-2026-10-05/README.md.
+
+The focused roof regression passes 95 perimeter samples, retained ridges,
+closed valleys, matching wall tops and 552 physical roof/render samples.
+The saved former model fails the revised regression. West refinement, inside
+corners, basement access, garden stairs, inner courtyard and east forward-end
+checks pass. Validation is restricted to 1829 and its immediate surroundings;
+the whole-estate suites are not run, following the owner's instruction.
+
+The hardware launcher verifies NVIDIA GeForce RTX 3090 Ti via Direct3D11.
+Source and actual compiled aerial views each pass 22 retained-ridge and
+16 bay-valley probes, with matching heights and zero intersections in
+440 browser render samples. Overhead, front/back and close captures are
+visually inspected; both paths have no page or shader errors. Logs, saved
+sources, references and views are in Browser/artifacts/west-level-eaves/.
+
+Shared browser modelling sources and the local compiled aerial are updated.
+The final manifest matches the current source fingerprint and its binary
+checksum is verified. Independent entrance-roof corrections are preserved.
+Unity, Blender and packaged exports are not regenerated.
+
+## Reception entrance roof tip removed (5 October 2026)
+
+The owner's blue circle identifies a slate triangle projecting through the
+west Reception parapet. The lower entrance roof return was sampling the
+higher Reception roof at its attached end. `west-cross-range-roof.mjs` now
+samples and trims the adjoining lower roof surfaces, retaining Reception's
+separate roof. The existing lower pitch continues smoothly to its cornice.
+Reference and scope are in `Research/1829-entrance-roof-tip/README.md`.
+
+Validation is limited to this building and its immediate roof joins, following
+the owner's instruction. `test-entrance-roof-tip.mjs` passes 24 height probes
+and six lower-roof seam contacts. Reverting only this repair fails that
+regression. After concurrent courtyard-roof revisions, the older
+`test-west-roof-join.mjs` fails its bay rear masonry/cornice height assertion
+at line 23. The same assertion fails with only this repair reverted; its
+expectation is retained and the courtyard bay is outside this repair.
+
+The hardware launcher verifies NVIDIA GeForce RTX 3090 Ti via Direct3D11.
+Source and actual compiled entrance, close, low and neighbouring east-side
+views are inspected without page/shader errors. The compiled scene passes
+the same tip-height and seam-contact assertions. The local aerial asset is
+rebuilt; concurrent modelling changes are preserved. Browser geometry is
+shared by aerial, Explore and gameplay. Unity, Blender and packaged exports
+are not regenerated. Reference, saved former roof, captures and focused
+validation metadata are under `Browser/artifacts/entrance-roof-protrusion/`.
+
+## West inside-corner protruding render (5 October 2026)
+
+The owner's blue circle identifies two buried trim ends emerging through the
+inner garden pavilion's brick side. `front-inside-corners.mjs` clips the old
+main cornice and back-wall coping against the pavilion roof's actual footprint.
+Only overlapping white trim changes. Reference and scope are in
+`Research/west/render-protrusion-2026-10-05/README.md`.
+
+Validation is restricted to this building and its immediate surroundings.
+Corner, west-refinement and facade-course checks pass. Hardware rendering is
+verified on the NVIDIA RTX 3090 Ti. Matched source and actual compiled browser
+views have no white tips or page/shader errors; nine physical wall probes each
+reach the brick pavilion. Captures and saved originals are under
+`Browser/artifacts/west-render-protrusion/`.
+
+The nearby roof-join check fails its valley continuity assertion at line 51;
+the identical failure also occurs with only this render fix removed. Its
+expectation is retained. Concurrent roof edits in the shared checkout are
+preserved. The local compiled aerial is refreshed and checked for source
+freshness. Unity, Blender and packaged exports are not regenerated.
+
+## Matching white top render on 1829 (5 October 2026)
+
+The owner's yellow/purple aerial annotation makes the existing roof-edge
+render uniformly match the shared bright white (`0xe1e3dc`). Cream and
+grey cornices, exposed roof-support slabs, parapets and coping on 1829
+now use the same white mineral finish. The direct dragon pediment and
+portico retain cream. No render is added to untrimmed sections; authored
+geometry and lower facade finishes are retained. Reference and scope are
+in `Research/1829-top-render/README.md`.
+
+The shared browser sources and local compiled aerial are updated. The
+final compiled manifest matches the current source fingerprint. Independent
+shared-source revisions during validation are preserved. Unity, Blender
+and packaged exports are not regenerated.
+
+At the owner's request, validation is limited to 1829 and its immediate
+surroundings; the whole-estate suites are not run. Existing east-forward-end,
+west-refinement, west-roof-join and inner-courtyard checks pass. The existing
+`test-front-inside-corners.mjs` fails its roof/trim transition assertion at
+line 37, and the same assertion also fails using the saved pre-change
+material sources. Its expectation is retained and this is not reported
+as a clean five-check result.
+
+The hardware launcher and GPU smoke check verify NVIDIA GeForce RTX 3090 Ti
+through Direct3D11. Source and actual compiled aerial views each verify
+32 named trim materials and ten visible contact probes: nine white roof
+finishes and the retained cream dragon border. East, west, front and rear
+captures are visually inspected; both paths have no page or shader errors.
+The first compiled capture fell back during a concurrent source/model refresh;
+the subsequent actual compiled capture passes. Evidence, saved originals,
+focused logs and final-model metadata are under
+`Browser/artifacts/1829-white-top-render/`.
+
 ## Hampton / Ince garden window alignment (4 October 2026)
 
 The owner's yellow/blue, pink and green annotation corrects the garden
@@ -3734,9 +4145,10 @@ were not changed. Generated estate binaries remain ignored and are rebuilt by CI
 Run `npm run benchmark:three -- label` for repeatable day/night aerial and
 walking captures plus a fixed-layout game comparison. Use `MODEL_CHROME_PATH`
 when using an installed Chrome; `THREE_SAMPLES` defaults to 30. The benchmark
-uses a 1000 × 700 viewport and SwiftShader by default, with remote photos excluded
-equally. Set `THREE_HARDWARE=1` to use and verify a real GPU; hardware runs also
-measure synchronous rendering cost separately from the display frame interval.
+uses a 1000 × 700 viewport and verified GPU acceleration, with remote photos
+excluded equally. GPU acceleration is required; `THREE_HARDWARE=1` is no longer
+needed. Runs also measure synchronous rendering cost separately from the
+display frame interval.
 Its fixed exit/artwork/NPC choices are injected only by the test. Migration
 screenshots and JSON reports are under `Browser/artifacts/three-upgrade/`.
 The `three-validation-output.mjs` hook redirects browser-test output there,
@@ -9243,3 +9655,1027 @@ tests, research/development notes and local generated aerial assets are
 updated; Unity, Blender and packaged desktop/Android exports are not
 regenerated. Baselines, scripts, logs, captures and final reports are in
 Browser/artifacts/west-render-corners/.
+## West roof rebuilt from marked ridges (5 October 2026)
+
+The owner's blue-circled roof view and yellow overhead guide replace the
+earlier sampled roof patch with a continuous main ridge and four joined
+branches. All crowns are at y=17.08; the main ridge runs along z=9.25 from
+x=-68 to -30.6. Straight slate pitches, shared inside-corner valleys and
+hipped branch ends follow the marked plan. Intersecting old faces are cut
+away, and the eastern end follows the retained lower roofs' actual creases.
+Matching brick closes raised perimeter edges. The mirrored rear wing keeps
+its transform and unmarked rear ridge, and the independent low flat roofs,
+wall footprints, glazing and walking routes retain their definitions.
+See Research/west/roof-ridges-2026-10-05/README.md.
+
+The ridge regression checks the whole main line, all four branches,
+descending pitches, shared valleys, eastern contact, solid masonry below
+raised edges and the retained low deck. The saved original builder fails
+the new main-ridge assertion. West refinement, exterior geometry, inside
+corners, roof contacts (108 attachments / 3,888 probes), facade courses
+(22 courses / 3,000 surface probes) and binary-format checks pass.
+
+Actual compiled aerial views pass 32 visible roof probes and have no page
+or shader errors. Overhead, court, garden and end views were reviewed.
+Compiled/source rendering, exact draw counts, full detail, controls and
+missing/incompatible/damaged-asset fallbacks pass. The image comparison
+finds a 0.000166 significant-pixel fraction and 0.00560 mean channel error.
+Every source/compiled timeline stop, mobile view, navigation/selection and
+live walking collision refresh passes.
+
+The required npm test invocation passed its first 63 commands before the
+turn interruption. All 61 remaining commands completed separately: 59 pass,
+and only Jarman and Leighton/Newton's historical whole-estate snapshots fail.
+Both failures also reproduce before this roof edit; their expected records
+are retained. This accounts for all 124 suite commands, with 122 passing,
+and does not claim a clean full-suite result.
+
+Browser sources, regressions, modelling notes and the local compiled aerial
+model are updated. The final manifest matches the current source hash and
+its binary checksum is verified. Unity, Blender and packaged desktop/Android
+exports are not regenerated. Baseline sources, references, captures, probes,
+suite logs and final-model.json are in Browser/artifacts/west-roof-ridges/.
+
+## Consistent horizontal roof tiles (5 October 2026)
+
+All sloping tiled roofs now use level horizontal tile rows and one physical
+tile scale, matching the existing shared slate map. The long tile edge follows
+each face's horizontal contour; courses follow the slope at right angles.
+The mapping measures final world-space geometry, including mirrored, rotated
+and scaled buildings, and runs again after layout assembly adds the service
+roofs. It is baked into ordinary UVs before aerial batching and compilation.
+The outhouse's independent weathered tile map is compensated to the same tile
+dimensions. Roof shapes, normals, colours, texture pixels, flat decks and
+walking geometry are preserved. See Research/roof-tiles/README.md.
+
+The full source survey covers 316 tiled meshes and 1,923 sloping triangles.
+Source and compiled surveys also exercise an indexed transformed hip and
+check horizontal long edges, perpendicular courses and uniform tile size;
+the compiled survey includes render batches. Before/after preservation checks
+retain every roof triangle and all other geometry, transforms and colours.
+Seven compiled desktop views, the source service roofs and a framed phone
+view pass visual checks with no page or shader errors. Final source/compiled
+rendering, exact draw counts, full detail and fallback loading also pass.
+
+The required npm test invocation and continuations account for 125 checks,
+with 123 passing. Only Jarman and Leighton/Newton's existing whole-estate
+snapshots fail, also with the saved original roof sources. Their records are
+retained. Fifteen annexe reference files have their affected texture hashes
+refreshed after original-source checks and an independent geometry audit;
+numeric counts, roots, dimensions and the Carden height correction remain
+exact. Ward and mirrored-link checks retain triangle-shape comparisons while
+allowing independent UV storage. Browser source and the local compiled aerial
+asset are updated and its fingerprint/checksum verified; Unity, Blender and
+packaged desktop/Android exports are not regenerated. Evidence and repeatable
+checks are in Browser/artifacts/roof-tiles/.
+
+## Test repairs after the roof work (5 October 2026)
+
+The completed roof tasks left two stale whole-estate references. Reconstructing
+134 historical modules at db70a03 reproduces both original count/hash pairs
+exactly. An independent primitive audit separates unchanged records, roof UV
+updates and the documented building, basement, access and recessed-door
+repairs. The reviewed snapshot refresh checks every changed structural region,
+the exact west entrance-path translation, unchanged Leighton/Newton dimensions
+and stable modelling inputs before advancing the two references. Jarman now
+protects 818,948 primitives and Leighton/Newton 882,995. Their scope rules and
+all geometry, glazing, walking and visibility assertions remain enabled.
+Research/jarman/README.md and Research/leighton-newton/README.md record the
+superseding evidence; scripts and reports are in Browser/artifacts/test-repair/.
+
+Twelve browser checks previously started fixed-port servers and navigated
+before those servers were listening. The shared test-support/server.mjs helper
+waits for the actual listening address, allocates an independent port and
+reports startup errors. Both concurrent servers return successful responses.
+The four reproduced connection failures pass their reruns. The rear-stair wall
+check moves only its east first-floor room camera from x=33.5 to x=33.3, clear
+of R16's projecting door panels. Its nine views, clearance assertions and all
+four actual stair walks pass; the corrected view is inspected. The room-finish
+check also passes with the verified hardware launcher after its earlier
+software-rendered startup timeout. Later browser checks use the shared GPU
+launcher introduced by the independent hardware-acceleration task, which
+verifies the NVIDIA GeForce RTX 3090 Ti before rendering. Captures are isolated
+under Browser/artifacts/test-repair/hardware-media/.
+
+The separate exterior-door trim check still aimed at the superseded D3 garden
+position. Its twelve garden-leaf probes and desktop/mobile cameras now target
+x=-44.70, z=13.59, matching the reviewed centred window bank and current
+outside arrival. All seventy-two garden and annexe leaf probes pass across
+source and compiled scenes; the corrected compiled view is inspected. The
+shadow negative control explicitly starts with the daylight sun and refreshed
+scene transforms. Both original-defect controls still fail as intended; the
+corrected settings pass 98,304 sunlit receiver pixels and 288 courtyard contact
+samples across day, dusk and night. The independent GPU testing update records
+the driver-dependent negative-control count; repaired-core thresholds remain
+unchanged.
+
+NativeAndroid/tools/test-assets.mjs now delegates its historical command to
+the current schema-three test-port.mjs validation. The old command checked the
+retired schema-one prototype and seven exits. The current validation checks
+asset hashes and finite indexed geometry, source freshness, all thirteen
+periods, all four floors, twenty-three reachable doors, exact navigation,
+collision data, guard rig and seventy-three local pictures. The authoritative
+NativeAndroid/tools/build.ps1 -Target Prepare completes the asset export,
+presentation checks and Unity scene preparation. Both current native checks
+and the original test-assets command pass.
+
+The complete Browser npm test passes all 125 commands, including both repaired
+references. All 53 additional top-level browser checks pass after the recorded
+reruns, covering all 175 browser test files plus the three vendor checks. The
+compiled roof-tile mode also passes. Final test receipts, including initial
+failures and their successful reruns, are indexed by final-validation.json.
+Desktop npm test passes all eight tests. Its development smoke check also
+passes offline assets, renderer isolation, persistent storage, the game and
+notebook, compiled aerial timeline, mouse capture, walking and return navigation.
+The desktop smoke launcher enables hardware rendering and refuses unverified
+or software WebGL; its own renderer is the same NVIDIA GPU. Current web assets
+are staged for this development test. The modelling source hash remains
+f4e7771bb635db6d408703342f156c3aa1552c973206c21d441cc0a1a4d54a30 throughout
+these repairs. Browser compiled assets remain current; local Unity model and
+presentation assets and the prepared scene are refreshed. Android APK,
+packaged Windows application and Blender exports are not regenerated.
+
+## Local tests use hardware acceleration (5 October 2026)
+
+Local browser tests, visual captures and the Three.js benchmark now use the
+shared `Browser/test-support/hardware-browser.mjs` launcher. It enables GPU
+rendering, disables software rasterizer fallback and checks the unmasked WebGL
+renderer in a fresh context before any test mocks. Software rendering or missing
+renderer information stops local validation. `npm run test:gpu` verifies launcher
+usage, rejection of software flags and an actual rendered pixel. Ordinary model,
+geometry and game-logic assertions continue to run on the CPU.
+
+The existing GitHub Pages and Windows packaging workflows explicitly opt into
+SwiftShader for their compiled-scene checks because their hosted runners have no
+GPU. The exception requires both `CI=true` and `BROWSER_CI_SOFTWARE=1`; the local
+GPU smoke test refuses this mode. Local source/compiled timeline and foliage
+checks expect the normal visible-tree default. Software/restricted renderer
+information is simulated on the GPU when testing automatic tree visibility.
+Historical capture scripts should use the shared launcher when rerun locally.
+
+The original courtyard-shadow settings expose one leaking contact on the RTX
+3090 Ti rather than the ten formerly required by the software-rendered negative
+control. The regression now requires at least one original leak, preserving its
+ability to reject the old settings. The repaired settings still have to satisfy
+every core contact and all sunlit receiver pixels; their thresholds and sample
+coverage are unchanged.
+
+Validation uses the NVIDIA GeForce RTX 3090 Ti through Direct3D11. The GPU smoke
+check, tree renderer profiles, compiled/source comparison and fallback loading,
+all timeline stops, intro navigation, real mobile touch controls, source/compiled/
+walking lawn wind and collisions, and courtyard shadows all pass. The shadow
+survey checks 98,304 receiver pixels and 288 contacts. Desktop and portrait
+captures were visually checked. All 125 commands in `npm test` pass. A separate
+mocked-launch policy check verifies that only the explicit hosted-CI configuration
+permits software rendering, without performing local software rendering.
+
+Logs, captures, diagnostics and the output-only redirection hook are under
+`Browser/artifacts/hardware-acceleration/`. Modelling sources, generated scene
+assets, Unity and Blender exports are not changed by this testing update.
+
+## Continuous west garden lawn (5 October 2026)
+
+Removed the raised west garden grass box. Its top was y=0.37, while the
+adjoining terrain was y=-0.15, leaving a 0.52-unit step across the open lawn
+at z=25.5. The garden now uses the single continuous estate terrain. The older
+access slab clears the garden and its narrow return to the pavilion, keeping
+gameplay grass exposed too. The lean-to approach retains its original top,
+with textured gravel contact faces extending below the lawn.
+
+The existing exterior and timeline checks now require terrain on both sides
+of the former seam, throughout all thirteen periods, before/after batching,
+and in the source/compiled aerial and walking pages. Ground-contact checks
+cover all periods and all four layout states. GPU-verified source and compiled
+views show continuous grass and solid path sides. The renderer was NVIDIA
+GeForce RTX 3090 Ti through Direct3D11. A saved copy of the current scene passed
+the complete source/compiled geometry and image comparison, full detail,
+controls, missing/incompatible/corrupt-model fallbacks and timeline/walking
+browser checks; the saved copy avoids concurrent roof edits invalidating the
+manifest during validation. Source and compiled captures probe 25 garden
+points each, including the former internal edge.
+
+The required npm test run and continuation cover all 125 configured commands:
+122 pass. test-west-roof-join.mjs fails during the concurrent roof work, and
+the Jarman and Leighton/Newton whole-estate fingerprints differ after these
+modelling edits. Their stored protected baselines are retained. The initial
+compiled-suite roof-tile assertion also failed during that roof work; the
+source/compiled and timeline checks were then run independently against the
+saved scene. Current model rebuilds and the early interrupted/fallback checks
+are recorded under Browser/artifacts/west-garden-level/.
+
+See Research/west/grass-level-2026-10-05/README.md for the owner's marked view
+and source scope. Shared browser sources and local generated aerial models
+are updated; Unity, Blender and packaged exports are not regenerated.
+Final working-scene rebuild and source/compiled garden capture pass with
+matching source fingerprint a0edbbca072bbcde7b38c4a32c7e56cfd689edc53b320d55860d495a841b2edf.
+The final captured approach uses the shared contact-face helper, preserving
+normal gravel detail on its vertical sides. The saved-scene timeline browser
+check passes every stop in both aerial loading paths and the walking page.
+## West roof wall-top eaves and added entrance ridge (5 October 2026)
+
+The owner's three follow-up views identify the remaining two corner gaps,
+require the long slate pitches to finish on the blue wall-top lines, and add
+a perpendicular ridge on the red line over the entrance-side bay. The earlier
+yellow main ridge and four branches keep every coordinate and crown height.
+The long eaves now meet the main cornice at y=14.53. Short shared pitched
+returns join the higher bay cornices; a small stepped hip covers the taller
+outer corner masonry that previously protruded through the slate. The new
+entrance-bay ridge follows x=-27.3, z=12..18.3 at y=15.66, joining the retained
+roof envelope at its root and ending in a hip. Its pitches are clipped at
+exact roof-plane intersections, preserving the existing yellow entrance
+ridge and removing the replaced underlying triangles. See
+Research/west/roof-eaves-2026-10-05/README.md.
+
+The roof regression retains the whole original main line and all four branch
+checks, descending pitches, continuous valleys and lower-roof contacts. It
+adds level wall-top eaves, complete-scene ray checks through both circled
+corners, taller-wall coverage, the new ridge and its shared valley. The saved
+former builder fails the new wall-top-eave assertion. The older raised-edge
+masonry checks now probe below the lowered cornice; their former high-edge
+expectations are superseded by the owner's latest blue-line request.
+
+Hardware acceleration is verified as NVIDIA GeForce RTX 3090 Ti through the
+required hardware-browser launcher. Matching source and actual compiled views
+pass all 56 visible probes, including the seven circled-corner rays, nine
+wall-top contacts, original ridge lines and new ridge. There are no page or
+shader errors. Court, garden, overhead, end and entrance-junction views were
+reviewed. Compiled/source rendering and draw-count comparisons, full detail,
+asset fallbacks and every timeline stop including mobile views, selection,
+controls and walking collision refresh pass. The significant-pixel fraction
+is 0.000122857 and mean channel error is 0.00316810.
+
+The required npm test invocation passes its first 91 commands and stops at
+Jarman's historical whole-estate snapshot. All 33 remaining commands were
+then run: 32 pass, and only Leighton/Newton's historical snapshot fails. Both
+snapshot failures also reproduce with the saved former roof. Thus all 125
+suite commands are accounted for: 123 pass and two pre-existing snapshots
+fail. Their expected records are retained; this is not a clean full-suite
+result.
+
+Browser roof source, its regression and modelling/validation notes are
+updated. The local compiled aerial model is regenerated. A formatting-only
+refresh preserves the exact tested binary checksum, and the final manifest
+matches the current source fingerprint. Unity, Blender and packaged
+application exports are not regenerated. References, saved former source,
+matching captures, 56-probe results, complete-suite accounting and
+final-model.json are in Browser/artifacts/west-roof-eaves/.
+
+
+## West garden staircase door wall and walkway width (5 October 2026)
+
+The ground photograph moves both exterior landing doors off the outer
+pavilion side return onto the recessed garden-facing wall.
+Browser/dist/west-garden-stair.mjs now supplies 1.2-wide treads and door
+walkways, a constant-width upper L and a 1.2-deep middle turning deck.
+Parallel flights leave the middle wall-side approach unobstructed. Both
+existing door heights and the ground-floor side sash are retained.
+Reference and fitted coordinates are in Research/west/stair-2026-10-05/.
+
+Both shared JSON plans move the F4 outside arrival and exterior stair
+polyline onto the new approach, retaining the established interior anchor.
+Separate outsideAxis/outsideFacing metadata lets Escape and Explore face
+along the new garden approach on leaving, while keeping the interior door
+orientation. The upper exterior door remains outside the playable wing
+proposal. Browser sources and the local compiled aerial model are updated;
+Unity, Blender and packaged exports are not regenerated.
+
+The new regression checks actual relocated blue leaves, removal of the old
+side-wall leaves, full-width visible floor, arrivals, facing, stopped and
+restarted climbs/descents, guards, batching and period removal. The saved
+original source fails the new wall assertion. Existing outside, west, rail,
+door-support, route, game and exploration checks pass. The general facade
+check now starts beside the window: its former distant ray crosses the
+relocated stair tread, a natural occlusion rather than buried glazing.
+The old staircase passes that former ray; the corrected facade check passes
+the new source without excluding any rendered objects.
+
+Hardware rendering is verified on the NVIDIA RTX 3090 Ti through the shared
+launcher. Actual Explore reaches both doors, walks both directions, enters
+and leaves F4 and checks the new outward camera facing. Ground, landing,
+overhead and phone images are inspected. The rebuilt aerial passes all 20
+flight headroom checks, source/compiled image and draw comparisons, full
+detail, missing/incompatible/corrupt asset fallbacks and every timeline stop.
+The final manifest matches the current source fingerprint.
+
+The required npm test and remaining-suite continuation cover all 126 checks.
+After the facade-probe rerun, 124 pass. The historical Jarman and
+Leighton/Newton whole-estate snapshots still fail and also fail with this
+staircase source restored to its saved former version. Their expectations
+are retained. The final camera metadata and interaction changes pass fresh
+focused route/game/exploration and hardware-browser checks. Evidence, the
+initial and final suite reports, original source and build/validation logs
+are in Browser/artifacts/west-garden-stair/.
+
+## West forward-wing photo fire exit (5 October 2026)
+
+The owner's purple-circled model view identifies the F5 masonry return stair
+at the south end of the west forward wing. The two supplied ground photos
+replace its earlier plain-tread interpretation. The shared browser builder
+Browser/dist/west-forward-fire-exit.mjs adds dark stone treads with narrow
+yellow nosings, closer black pickets, three curved frames on each flight and
+two on the upper balcony, brick cheeks and a brick balcony pier with dark
+fascia. The existing facade, blue F5 door, transom, parallel flight lanes,
+intermediate turn and doorway landing keep their fitted positions. The lower
+frames start around the middle of the flight, avoiding burial in the high
+central brick support visible beside its foot. Dimensions remain estimates.
+See Research/west/forward-fire-exit-2026-10-05/README.md and the unedited photos.
+
+The shared guard helper accepts an optional picket spacing; its default is
+unchanged for other stairs. Walking treats the masonry treads and landings
+as floor support while retaining the new cheeks and balcony pier as solid
+obstacles. Curved crowns have real tested standing headroom; their side posts
+coincide with guarded edges. Yellow paint does not add walking obstacles.
+
+At the owner's request, final validation is restricted to this exit, the
+adjacent west-wing facade and immediate approach; no full-suite retest is
+performed. test-west-forward-fire-exit.mjs passes 24 steps, eight arches,
+24 actual crown headroom rays, stopped/restarted F5 ascent/descent, fall
+prevention, solid pier, clear front path, eight exposed facade openings and
+batched walking. The actual hardware browser walks up, uses F5 both ways and
+walks down, and captures the two photo angles, balcony, overview and phone
+view without page or shader errors. Hardware acceleration is verified as
+NVIDIA GeForce RTX 3090 Ti through the required launcher. Initial pre-steering
+checks also passed the existing exterior headroom, guard and facade checks.
+
+Browser sources and local generated aerial models are updated. Unity,
+Blender and packaged application exports are not regenerated. Saved former
+source, original captures, final captures and browser comparison results are
+in Browser/artifacts/west-forward-fire-exit/. npm run test:west-fire-exit
+runs only the focused logic and hardware-browser checks (after build:models).
+
+The final source/compiled comparison passes all five local camera views, with
+matching scene triangle and draw counts and image differences below the
+existing visual tolerance. The comparison fixes cloud/foliage motion through
+reduced-motion settings and counts the scene separately from the selection
+glow overlay. The last compiled manifest matches the final source fingerprint
+and its binary checksum; final-model.json records both checks. No further
+estate-wide checks were run after the focused validation completed.
+
+## Entrance ridge relocation and slate/render contacts (5 October 2026)
+
+The owner's yellow/orange/blue view moves the entrance-side branch from
+x=-27.3 to x=-25.8, retaining y=15.66 and z=12..18.3. The yellow entrance
+ridge, higher west cross-range ridge and four original branches retain their
+coordinates and heights. See Research/west/entrance-ridge-shift-2026-10-05/README.md.
+
+The entrance cornice exposes its inner upper-cap boundary to the shared roof
+builder. Narrow joined slate pitches meet that boundary and sample every
+existing roof crease along their inboard seams. The former roof fringe is
+removed through the full overhang. The front hip meets the cornice at
+z=19.625, y=13.69, and the side returns use the actual sloping render edges.
+Walls, doors, windows, stairs and walking outlines are retained.
+
+The west roof regression passes retained and relocated ridges, removal of
+the former orange branch, valleys, hip, exposed cornice and 404 physical
+roof/render samples. The saved previous roof fails the moved-ridge assertion.
+The adjoining inside-corner regression passes, including its seam across
+the actual render edge, 104 pane probes and existing roof closures. West
+refinement and the shared exterior's roof checks pass. Assertions that used
+the old slate overhang now check the new exposed render or the inward slate
+edge, retaining the unaffected east-side checks.
+
+Hardware rendering is verified on NVIDIA GeForce RTX 3090 Ti via Direct3D11
+with the shared launcher. Matching source and compiled entrance, close,
+low, overhead and portrait views were inspected without page/shader errors.
+The compiled visible scene passes 29 retained-ridge probes, eight relocated
+ridge probes and thirteen render-edge contacts. Source and compiled ridge
+heights match exactly; the cornice intersection survey finds zero crossings.
+Validation is kept to 1829 and its directly adjoining roof/render junctions;
+no complete estate suite was rerun, following the owner's scope instruction.
+
+The local compiled aerial model is regenerated using the hardware launcher.
+Its final manifest matches the current modelling fingerprint, and the saved
+binary checksum is verified. Shared browser geometry applies to aerial,
+Explore and gameplay. Unity, Blender and packaged exports are not regenerated.
+References, saved former roof, captures, build log and final-model.json are
+under Browser/artifacts/entrance-ridge-shift/. Concurrent source changes are
+preserved, including the white cornice material correction.
+
+## West courtyard downpipe relocation (5 October 2026)
+
+The owner's orange/blue annotation moves the far-end courtyard pipe beside
+its low flat-roofed projection, between the paired projection sashes and the
+next outer sash. Browser/dist/west-court-photo-detail.mjs moves x=-71.70 to
+x=-66.55, retains z=4.74 and brings the top from y=12.60 to the blue guide's
+low roof rim at y=8.91. Its iron material and 0.085-square section are retained.
+See Research/west/drainpipe-2026-10-05/README.md for the reference and coordinates.
+
+Validation is restricted to this west building and its immediate courtyard
+surroundings at the owner's request. The existing west-building regression
+passes the relocation, old-position clearance, height and adjacent glazing.
+Hardware-rendered source and rebuilt compiled courtyard/close views each
+pass 20 local visible probes without page or shader errors. Both views have
+matching draw/triangle counts and pass the existing image comparison tolerance.
+The required hardware launcher verifies the NVIDIA GeForce RTX 3090 Ti through
+Direct3D11. The regenerated manifest matches the current modelling source.
+Before/after captures and receipts are under Browser/artifacts/west-court-drainpipe/.
+Shared browser sources and the locally generated aerial model are updated;
+Unity, Blender and packaged application exports are unchanged. No full-suite
+retest is performed for this edit.
+
+
+## West descending roof edges and white render joins (5 October 2026)
+
+The owner's blue/purple court guide and blue garden follow-up correct both
+outer-pavilion junctions. Their descending ridges end on the tall cornices,
+with continuous slate pitches and solid white returns down to the lower
+eaves. The court cornice continues around its side, its riser is capped
+under the adjacent roof plane, and the recessed gutter clears the white
+face. Main ridge and branch coordinates are retained by this correction.
+See Research/west/roof-render-joins-2026-10-05/README.md. AGENTS.md records
+the requirement that slate cannot cross the middle of rendered trim.
+
+The dedicated test-west-roof-render-joins.mjs passes both descending
+ridges and pitch continuity, 244 physical roof/render probes, ten outward
+white-face probes and gutter clearance. It fails with the saved original
+west roof sources. The shared roof test also retains these assertions;
+its old circled pixels now require their intended render where appropriate.
+Assertion failures name surfaces and coordinates rather than expanding
+complete material/texture objects.
+
+Two tiny clipped entrance-west roof meshes opt into local UVs to avoid
+Float32 loss. Subtracting whole texture repeats preserves the pattern
+phase and triangle positions/normals. An indexed hip test independently
+checks that preservation. Source and compiled tile surveys passed this
+precision correction before further concurrent roof revisions.
+
+Hardware rendering is verified as NVIDIA GeForce RTX 3090 Ti, including
+each local model rebuild through hardware-browser.mjs. Actual source and
+compiled scenes each pass 25 visible-surface probes, with desktop, low
+angle, complete garden elevation and phone captures; no page/shader
+errors occur. The compiled binary checksum is verified. Its fingerprint
+was superseded by further concurrent model edits before report time. Capture start/end fingerprints are saved.
+
+The required npm test run and continuation previously accounted for all
+126 commands: 124 passed; Jarman and Leighton/Newton's
+historical whole-estate snapshots also failed with the saved pre-change
+west roof sources. Model checks, compiled/source image and draw comparisons,
+full-detail loading, fallback paths and timeline checks passed during that
+validation. Several other active chats subsequently changed nearby roofs
+and render in this same checkout. Their edits are preserved. Latest
+broader check failures: latest-test-west-roof-join, latest-test-roof-tiles, latest-compiled-tile-check.
+This is not a clean final full-suite result. See latest-checks.json and
+its logs for the precise current results; final-model.json records the
+validated corner views and asset provenance.
+
+Browser modelling sources and the local compiled aerial are updated.
+Unity, Blender and packaged application exports are not regenerated for
+this correction. References, saved original sources and evidence are under
+Browser/artifacts/west-roof-render-joins/.
+
+## West entrance yellow roof boundary (5 October 2026)
+
+The owner's yellow guide replaces the sampled slate/coping boundary on the
+small west inside-corner return beside the entrance. The back eave is level
+at y=14.53, drops by 0.23 over a short 0.10-unit run to y=14.30, and descends
+along the canted side to the existing entrance cornice's terminal upper edge.
+Slate and white trim use shared straight mitres. Narrow slate returns match
+every crease at their inboard seams, and the old fringe is removed across
+the render overhang. The back ribbon stops at the adjoining pavilion's valley
+endpoint, preserving its independent pitches and crown. Roof closure brick
+finishes beneath the same profile. See
+Research/west/entrance-yellow-boundary-2026-10-05/README.md.
+
+Validation was limited to this building and its immediate surroundings, as
+requested. Browser/test-west-entrance-roof-boundary.mjs passes 17 boundary
+contacts, 444 physical slate/render samples and retained adjoining crowns.
+The saved original corner fails its new level-eave assertion. The existing
+inside-corner check passes 104 pane probes, 70 concealed trim-edge samples,
+1,302 flush/textured closure samples and its walking/collision checks. West
+refinement and the shared west roof check also pass; the latter retains all
+ridge/valley checks and 552 physical roof/render probes. No estate-wide suite
+was rerun. Changes elsewhere in the shared west roof were preserved.
+
+Hardware rendering was verified as NVIDIA GeForce RTX 3090 Ti via Direct3D11
+using the shared hardware launcher. Marked, close, low, overhead and phone
+views were inspected in both source and compiled modes, with no page/shader
+errors. All 32 visible boundary, adjoining-crown and seam probes match between
+both modes. The local compiled model was rebuilt with the hardware launcher;
+its current source fingerprint and binary checksum were verified.
+
+Shared browser geometry applies to aerial, Explore and gameplay. Unity,
+Blender and packaged application exports were not regenerated. The supplied
+reference, saved original source, focused test receipts, captures, build log
+and final-model.json are in Browser/artifacts/west-roof-yellow-boundary/.
+
+## Switch between aerial and walking at the current location (5 October 2026)
+
+Both views now place a mode-switch button beside Back to intro, including on
+320 px phones. The shared view-navigation module reads the live camera X/Z
+and horizontal heading at activation, rather than the original location
+preset. The destination URL carries that pose plus the current estate period
+and day/dusk/night setting; reloads retain the transferred location.
+
+Explore drops to the destination's ground/support height and uses its current
+walking collision cache to find nearby clearance when the exact point is
+blocked. Aerial rises vertically over the current walking location, including
+indoor positions, and retains the heading. Its downward angle keeps the original
+ground point in view. The aerial controls inherit the new target without a
+first-input jump, and resizing does not reset a transferred position.
+
+Run npm run test:views from Browser for the location/heading/support regression
+and hardware-browser desktop/phone round trips. The browser check pans and walks
+before switching, checks period and lighting, resize/reload, nearby placement
+for a blocked drop, and rising from an indoor position. Captures and receipts
+are saved in Browser/artifacts/view-navigation/. The logic check is also part
+of npm test. The dedicated browser check passes at 1200 and 320 px with no page
+errors; both views' screenshots are visually inspected. Hardware acceleration
+is verified as NVIDIA GeForce RTX 3090 Ti through Direct3D11. Existing input,
+aerial-control, intro-flight and interior-walking checks pass, including all
+23 doors and seven internal stair connections. The existing intro browser
+check also passes desktop walking, phone aerial and reduced-motion arrival,
+including loading holds and unavailable session storage.
+
+The required npm test run stops at the existing test-facade-courses.mjs:68
+course-count assertion (23 actual versus 22 expected). This navigation work
+changes no model geometry. Browser navigation/UI sources and checks are updated;
+compiled estate models, Unity, Blender and packaged exports are not regenerated.
+
+## Removed west pavilion roof-edge protrusion (5 October 2026)
+
+The owner's blue-circled screenshot identifies the raised short slate/render
+stub where the inner garden pavilion meets the entrance-side roof. The
+short raised block and abrupt 0.23-unit step are removed in
+Browser/dist/front-inside-corners.mjs. An initial sloping return was
+integrated with concurrent work retaining the main roof plane; the final
+coping and masonry closure follow that plane at the inner render edge.
+The pavilion valley endpoint remains fixed. See
+Research/west/pavilion-roof-tip-2026-10-05/README.md. Shared edits in the same
+files are preserved.
+
+The final boundary check passes 88 pitch/bend contacts, 432 physical
+slate/render samples and retained crowns. The saved former corner fails
+the regression. The inside-corner, west refinement, roof-join, roof-contact
+and entrance-tip checks pass. Source and actual compiled GPU views cover
+the marked angle, close and opposite angles, and phone. Both paths pass
+23 visible edge/seam probes with no page or shader errors. The hardware
+launcher verifies NVIDIA GeForce RTX 3090 Ti through Direct3D11.
+
+The required npm test stopped at the existing facade-course count mismatch
+(23 versus 22). Continuation and focused reruns account for all 127 suite
+commands: 124 pass; facade-course counting and Jarman/Leighton-Newton's
+historical estate snapshots fail. Those failures also reproduce with the
+saved former corner. Roof tiles and the inside-corner check initially
+failed during concurrent modelling edits and passed fresh final reruns.
+Both vendor checks passed with their correct arguments; the first
+continuation runner incorrectly passed the argument as part of the filename
+and was corrected. The full suite is not clean.
+
+Browser sources and the local compiled aerial are updated; Unity, Blender
+and packaged application exports are not regenerated. Original sources,
+reference, GPU captures, baseline receipts, complete continuation logs,
+final validation and model fingerprint/checksum evidence are under
+Browser/artifacts/west-pavilion-roof-tip/.
+
+## West outer-end gutter/cornice flicker (5 October 2026)
+
+The owner's blue circle identifies competing dark and white surfaces along
+the outer-end eave. Three gutter boxes overlapped the upper cornice, with
+both top faces at the shared y=14.53 eave. One closed gutter now follows the
+cornice's exposed outer edge and both returns of the central pier. Its width,
+height and top level are retained; the solid footprints meet at their edges
+without sharing any top area. Slate and cornice geometry are retained. See
+Research/west/eave-flicker-2026-10-05/README.md.
+
+Browser/test-west-end-gutter.mjs passes 65 cornice samples without coplanar
+metal overlap and 19 gutter/return continuity samples. The saved original
+builder fails with 33 overlaps, independently reproducing the reported cause.
+The focused west refinement, west roof and yellow entrance boundary checks
+also pass. Validation remains limited to this building and its immediate
+surroundings; no complete estate suite is run.
+
+The shared hardware launcher verifies NVIDIA GeForce RTX 3090 Ti via
+Direct3D11. Source and rebuilt compiled views cover the marked end, close,
+small camera shift, low and phone views. Visible-scene checks repeat the 65
+clear cornice and 19 gutter-contact probes, plus 32 adjacent entrance-roof
+contacts, retained crowns and seams. There are no page or shader errors.
+
+The local compiled aerial model is regenerated for both requested repairs.
+Shared browser sources apply to aerial, Explore and gameplay; Unity, Blender
+and packaged application exports are not regenerated. Evidence is retained
+in Browser/artifacts/west-end-eave-flicker/. The original yellow-boundary
+captures and model receipt are refreshed against the same final model.
+
+
+## Blue roof plane and red entrance join (5 October 2026)
+
+The owner's blue/yellow and red reference removes the small entrance-side
+roof tongue and requires its angle to match the main pitch. The original
+main roof plane now continues through both back coping runs; their steeper
+slate ribbons and short height step are removed. The white coping and brick
+closures meet that plane at its inner edge. The red projection return's
+cornice top is level at y=13.69, closing its formerly dipped roof join.
+Clipped slate corners repeated within 0.00001 model units are welded to
+remove numerical slivers; other masonry and ground cuts retain their geometry.
+See Research/west/roof-slope-repair-2026-10-05/README.md. This supersedes the
+previous level/stepped and blended entrance boundary profiles.
+
+Final validation is local, following the owner's later instruction. The
+boundary regression passes 88 slope/bend contacts and 432 physical trim
+samples; the saved former blue and red geometry independently fail it.
+Inside-corner, west-refinement, west-roof-join, roof-contact and source/compiled
+roof-tile checks pass. The inside-corner check retains its pane, masonry,
+collision and walking probes, and the shared roof test retains 552 render
+probes and all adjoining ridge/valley checks.
+
+The NVIDIA GeForce RTX 3090 Ti / Direct3D11 renderer is verified through the
+required hardware launcher. Source and compiled desktop, close, low, overhead
+and phone views were inspected with no page/shader errors. Their 78 visible
+surface checks match exactly. The locally rebuilt aerial manifest matches
+the final source fingerprint, and its binary checksum is verified. Shared
+browser sources and the local compiled aerial are updated; Unity, Blender
+and packaged application exports are not regenerated. Evidence is under
+Browser/artifacts/west-roof-slope-repair/.
+
+The earlier broader npm test attempt stopped at the existing 23-versus-22
+facade-course count assertion, which also fails with the saved former roof
+sources. Its continuation was stopped when the owner requested local geometry
+validation; it is not a completed estate-wide result.
+
+## Church-front road midpoint and complete path loop (5 October 2026)
+
+Moved the final Parsons Lane stretch to z=-93.55, midway between Churton's
+projecting lawn bay and the church clock-end feet. The western bend eases into
+it, the Upton Lea T-junction moves with it, and the existing local merged
+junction/border polygons are regenerated from refreshed road inputs. Vacated
+asphalt returns to terrain. Churton's entrance walk and mast-side gravel now
+end at the moved lane, without pale paving stubs across it. Road labels and
+lamps inherit the common fitted centreline; geographic source coordinates stay
+intact. The registered buildings retain their position and geometry.
+
+Closed the two-metre church perimeter walk with a clock-end arc at local z=19.
+Periodic tangents join both edges of the paving and edging exactly at the seam.
+A short clock-front link meets the moved lane; both existing side links extend
+to asphalt. Modelling reference and revision notes are in
+Research/church/README.md and Research/historic-roads/README.md.
+
+At the owner's request validation was limited to local geometry. The focused
+Browser/test-church-grounds.mjs passes the physical midpoint, road/junction
+surface contact, vacated-road removal, full-width seam, path links and 2,400
+walking-clearance samples. The adjacent Churton, church-front and western
+Parsons-junction checks pass. No estate-wide suite was run. Hardware rendering
+was verified as NVIDIA GeForce RTX 3090 Ti via Direct3D11. Local overview,
+plan and close church views were inspected in source and actual compiled
+modes without page or shader errors. The local road and church loop match
+between both modes; the rebuilt model's current source hash and binary checksum
+were verified. A first compile was rejected because other model source changed
+during the build; a fresh retry completed successfully.
+
+Browser sources and the local compiled aerial model are updated. Unity,
+Blender and packaged application exports were not regenerated. Captures,
+focused geometry receipts, build log and compiled validation are in
+Browser/artifacts/church-road-loop/.
+
+## Courtyard bay roof protrusion: corrected location (5 October 2026)
+
+The owner's wider follow-up identifies the courtyard polygonal bay beside
+the low flat-roofed projection. The earlier pavilion-roof-tip entry targeted
+the garden side and did not remove the originally reported defect. See
+Research/west/courtyard-roof-tip-2026-10-05/README.md and both original images.
+
+Browser/dist/west-cross-range-roof.mjs removes the superseded return hip
+after sampling its original surfaces for joined-roof construction. Its
+remaining 0.1725-wide sliver was the protruding slate at the clarified
+shoulder. Browser/dist/west-court-photo-detail.mjs omits the obsolete white
+return strip. Existing joined slate, bay cornice, masonry, glazing and
+walking footprints retain their profiles; concurrent source edits remain.
+
+The west roof check passes nine new roof-clearance and four trim-clearance
+rays plus its existing ridge, valley and 552 physical render probes. Saved
+former sources fail the new regression. West refinement, roof contacts
+(108 attachments / 3888 perimeter contacts) and roof tiles pass. The required
+npm test again stops at the existing facade-course count mismatch, 23 versus
+22; this is not a clean complete-suite result. The preceding broader suite
+accounting remains historical.
+
+Source and actual rebuilt compiled views cover the correct court, full bay,
+close and opposite angles and phone, each with 13 visible clearance probes.
+The required hardware launcher verifies NVIDIA GeForce RTX 3090 Ti through
+Direct3D11. Reference images, original sources, GPU captures, baseline
+regression, test log and final model fingerprint/checksum evidence are under
+Browser/artifacts/west-courtyard-roof-tip/. Shared browser sources and the
+local compiled aerial are updated. Unity, Blender and packaged application
+exports are not regenerated.
+
+## Eastern entrance slate and cornice joins (5 October 2026)
+
+The owner's red/blue-circled screenshot identifies slate protruding through
+the entrance projection's cornice and an upper return stopping before the
+main-range cornice. `west-cross-range-roof.mjs` now finishes both entrance
+roof boundaries, applying the mirrored cornice's actual world transform.
+`front-inside-corners.mjs` fits the eastern coping and narrow slate returns
+to shared corners and the adjoining fascia's terminal plane and cap.
+See Research/front-inside-corners/README.md for the reference and scope.
+
+The user restricted validation to local geometry. The final focused checks
+pass 15 eastern boundary/return contacts, 3,318 physical slate/render samples,
+the retained western boundary's 88 contacts and 432 physical samples, and
+the immediate courtyard's walls, walking route, 104 pane probes, 70 concealed
+trim edges and 1,308 textured closure samples. Reflection is accounted for
+when classifying the eastern cornice's outward top faces. Both saved original
+defects independently fail the new regression. Use
+`npm run test:entrance-cornice` from Browser for the local checks.
+
+Actual procedural browser views pass 15 visible slate/render probes with
+no page or shader errors. Close, opposite, low and phone views were inspected.
+The required hardware launcher verifies NVIDIA GeForce RTX 3090 Ti through
+Direct3D11. Final receipts, the supplied image, original sources and captures
+are in Browser/artifacts/entrance-cornice-joins/; validation.json and
+verified-validation.json record the final checks. No full-suite run or
+compiled-model rebuild was performed for this request. Shared browser model
+sources are updated; compiled aerial, Unity, Blender and packaged exports
+are not regenerated.
+
+## Developer options and staircase overlay (5 October 2026)
+
+Aerial and Explore on foot now show a Developer option button in their shortcut
+guides. Press minus (including numpad minus), or activate the button, to reveal
+the extra shortcuts. M toggles the staircase overlay while developer mode is
+enabled. Disabling developer mode hides both the shortcuts and overlay. Buttons
+also support touch, and session storage retains the settings across view
+switches/reloads when available. Repeated keys, browser modifier shortcuts and
+typing into text fields leave these settings alone.
+
+developer-options.mjs loads stair-overlay.mjs only when needed; ordinary aerial
+viewing does not fetch the interior plan. A separate transparent render pass
+highlights exterior stairs in cyan and interior stairs in amber, through walls
+and roofs. Exterior tread/landing top faces use the existing mesh transforms,
+including instanced meshes and hidden originals retained by material batching.
+Unnamed iron treads are identified beside the existing guards with matching
+materials. Interior flights and landings use the shared plan, stair footprint,
+floor elevations and architectural tread count. The seven connections at four
+interior staircase locations are deduplicated. Exterior highlights follow their
+source ancestors' period visibility, including demolition of the annexe stairs.
+The overlay never enters the building model, collisions or shadow pass.
+
+Run npm run test:developer for the coverage/input regression and actual desktop
+and 320 px phone checks. The logic regression is included in npm test;
+node test-developer-options.mjs --compiled additionally checks the locally
+available compiled binary. All focused checks pass: 418 exterior surfaces,
+seven interior connections, source/batch and deserialized compiled coverage,
+timeline removal, keyboard/touch controls, typing guards, mode-switch/session
+state and indoor/outdoor rendering. Final captures and browser receipts are in
+Browser/artifacts/developer-options/. Hardware acceleration is verified as
+NVIDIA GeForce RTX 3090 Ti via Direct3D11; final screenshots were reviewed.
+Existing explore-input, explore-interior, aerial-controls and view-navigation
+logic checks also pass. The required npm test run stops at the already documented
+test-facade-courses.mjs:68 failure (23 courses versus 22 expected).
+
+Only browser UI/runtime sources, checks and this note were changed. No modelling
+inputs or generated models were changed or rebuilt. The existing compiled asset
+was checked directly for overlay compatibility; its source hash already differs
+from the current unrelated modelling edits, so the development server still
+uses its normal procedural fallback. Unity, Blender and packaged exports were
+not regenerated.
+
+## Eastern roof brick gaps and extended back join (5 October 2026)
+
+The owner's blue/red/yellow screenshot identifies a small exposed brick sliver
+at the canted entrance roof seam and the longer brick strip beneath the taller
+Redesmere roof. The lower roof's final pitches now extend back from x=38 to
+meet the taller roof's actual plane at its retained 15.66 crown. Its stepped
+boundary follows the existing 14.55 eave. The taller roof is clipped beneath
+that extension, removing competing slate; short rising eave closures finish
+at the roof edge. The rest of the entrance pitches and the taller 16.2 crown
+retain their geometry. See Research/east-roof-brick-joins/README.md.
+
+The canted ribbon's seam sampling now includes the crossing of overlapping
+roof planes, restricted to the marked eastern facet. Sampling only triangle
+edges bridged above the retained roof and left the brick visible obliquely.
+The added crossing closes that opening. Small clipped high-roof faces use
+local UVs to retain the slate pattern's phase and physical tile dimensions.
+Existing wall/window outlines and courtyard walking routes retain their
+modelling inputs; the new eave faces add no ground-level walking obstacles.
+
+Nine focused checks pass. The new regression covers 12 formerly exposed
+viewing rays, 83 shared roof contacts, both retained crowns and the cornice;
+each saved original defect independently fails it. Existing eastern and
+western entrance checks pass 3,318 and 432 physical trim probes, while the
+west shared roof retains 552 render probes. Courtyard masonry, 104 pane
+probes, the walked doorway route, 108 roof attachments / 3,888 perimeter
+contacts, Redesmere glazing and exterior stair checks pass. Source and
+compiled tile surveys pass. The exterior check's outdated eastern mesh-name
+assertion also fails with the original roof; it now recognizes the existing
+slate-to-render return, matching the west check, while retaining material
+and height assertions.
+
+The required npm test run stops at the previously documented facade-course
+count mismatch, 23 versus 22 expected. This is not a completed full-suite
+result. Local source and actual rebuilt compiled views cover the marked
+angle, close blue and yellow joins, opposite direction and phone. The required
+hardware launcher verifies NVIDIA GeForce RTX 3090 Ti via Direct3D11; there
+are no page or shader errors. All 12 visible source/compiled defect rays
+match exactly. The final source fingerprint and binary checksum are verified.
+Evidence, saved original sources and receipts are retained in
+Browser/artifacts/east-roof-brick-joins/.
+
+Shared browser model sources and the local compiled aerial model are updated.
+Unity, Blender and packaged application exports are not regenerated.
+
+## West-wing Library and adjoining third-storey rooms (5 October 2026)
+
+The owner's yellow divisions now define the Library (R46), outer sitting room
+(R47), canted bay reading room (R48), office (R49) and inner book store (R50).
+Their second-floor envelope, plan ID 3 at Y=8.4, follows the current west-wing
+exterior, including its stepped court return, end pier, canted bays and inner
+square projection. This is the third occupied storey. The existing Reception
+upper rooms remain in their own outline loop; wall surfaces now choose the
+normal of their hosting loop. C26 serves the new rooms, and R51 reserves the
+west-junction stair hall. See Research/west-library/README.md and plan.png.
+
+S5 gains the first-to-second-floor connection. The owner's later request in
+"Update west wing staircase" supersedes this task's initial side-wall enclosure:
+R51 is now open and the upper return joins the west corridor landing. That
+revision is documented in Research/west/upper-access-stair-2026-10-05/README.md.
+F4's existing upper exterior landing at (-63,8.5,14.3) now enters the Library.
+Per-level exit anchors put its interior opening on the actual garden wall while
+preserving the earlier first-floor connection. Same-floor navigation can use
+stairs through a lower floor between disconnected upper wings.
+
+The 26 new sashes use the existing exterior detail builders' sizes and horizontal
+orientations, projected onto the new walls, with sills fitted to the established
+3.8-unit interior ceiling. This gives 31 scheduled upper windows including the
+five Reception windows. The Library has eight stocked bookcases, a reading table,
+chairs and books. Central table candidates pass the shared furnishing clearance
+checks; adjoining rooms use the existing sitting, reading, office and archive
+purposes. The stair hall gets no furniture. Original furnishings compared by
+stable IDs retain their placement across all four levels. Both shared plan JSON
+copies agree; these room divisions and uses are gameplay estimates rather than
+a surveyed historical interior.
+
+The new test-west-library.mjs passes 80 physically walked furnished/unfurnished
+routes between all five rooms and ground floor, first floor, Reception's upper
+floor and F4, plus stocking, slabs, windows and notebook discovery. Final focused
+rechecks also pass 95 room doors, 24 outside / 97 interior door frames with 2,918
+masonry support rays, the retained Reception layout's 40 cross-floor routes, and
+the developer overlay's eight interior connections. The window-clearance check
+passes 300 sashes plus the Reception transom, 1,802 pane rays and 6,770,601
+clearance samples. Its final receipt is in Browser/artifacts/west-library/
+window-clearance-final/. Door totals and Reception-specific assertions are updated
+for the added wing without removing their geometry and walking checks.
+
+The hardware browser check passes all five furnished room return trips, travel
+between upper wings, game and Explore F4 round trips, notebook mapping and phone
+layout. NVIDIA GeForce RTX 3090 Ti / Direct3D11 acceleration was verified through
+the required hardware launcher; there are no page or shader errors. Desktop,
+phone, room, passage, stair and cutaway captures are retained in
+Browser/artifacts/west-library/ alongside the former plan and final rechecks.
+
+The required npm test attempt stopped at the existing facade-course count mismatch
+(23 versus 22). A separate run executed all 130 commands and recorded 123 passes
+and seven failures in Browser/artifacts/west-library/suite-results.json. The two
+Library-related door-count / per-level-anchor failures are corrected and pass the
+final rechecks. The other failures concerned facade courses, an exterior roof
+name, protected Jarman / Leighton–Newton geometry and saved aerial road vertices;
+these overlap separate exterior work and are not a Library validation success.
+Later exterior revisions may supersede that historical suite receipt.
+
+Browser interior sources, both shared plans, checks and review drawings are
+updated. The aerial compiler's dependency graph excludes these interior modules,
+so this task does not require an aerial model rebuild. Unity, Blender and packaged
+application exports are not regenerated. The saved build-plan.mjs is a historical
+creation script based on before-plan.json and must not overwrite the later stair
+revision; current shared plan JSON files are the modelling inputs.
+
+## Open west-wing upper access staircase (5 October 2026)
+
+The owner's marked interior view supersedes the enclosed S5 continuation in the
+Library-storey entry above. R51's internal west, east and rear walls are removed
+on the first and second floors. The wall-side upper flight is replaced by a
+return rising diagonally across the well to the west side of the north landing,
+approximately along the supplied blue line. C26's recorded approach now meets
+that arrival at (-33.35,8.55). The existing upper perimeter remains the actual
+outside envelope.
+
+S5 uses a connection-specific definition for first-to-second floor (1:3).
+Its initial flight remains fixed; the replacement upper centre runs from
+(-31.15,6.3,12.3) to (-33.35,8.4,9.7). An angled return-deck edge meets the
+closed concrete flight, and a fitted upper arrival deck joins the existing
+floor slab. Carpet pads, post support, continuous handrails, physical barriers,
+walking, cross-floor pursuer paths and the developer overlay use the same
+flight endpoints. The square shaft and its floor/ceiling cuts remain fixed.
+Both shared plans and the first-floor / Library SVG and PNG drawings are updated.
+The reference and modelling estimates are in
+Research/west/upper-access-stair-2026-10-05/.
+
+Validation passes 80 furnished/unfurnished Library routes; all room and exit
+routes, all eight stair connections in both directions, 1,902 underside/landing
+rays, 1,248 closed-side samples, 1,176 support/headroom points, 80 fall barriers,
+9,076 slab-cap views and 1,644 shaft/perimeter reveals. Saved-before comparison
+confirms seven identical walking connections and fifteen identical flight
+vertex buffers, including the retained initial flight of the changed connection.
+The overlay also raycasts the replacement flight and rejects its removed former
+position.
+
+Hardware browser validation verifies NVIDIA GeForce RTX 3090 Ti / Direct3D11,
+all five furnished Library return trips, cross-wing travel, game/Explore F4
+round trips, notebook/mobile views, and seventeen stair-underside captures.
+There are no page or shader errors. Matching before/after Explore views and
+clean previews are in Browser/artifacts/west-upper-stair/; Library browser
+validation is in Browser/artifacts/west-library/. An existing soffit image was
+locked, so the final successful underside run uses the fresh west-upper prefix.
+
+The required npm test run stops at the independent facade-course count assertion
+(23 versus 22); that test constructs only the exterior model. Every subsequent
+suite command is run separately, with receipts in
+Browser/artifacts/west-upper-stair/remaining-suite.json and remaining-suite.log.
+Those results distinguish the staircase checks from concurrent exterior work.
+
+Only browser interior sources, shared plans, checks, notes and review drawings
+change. The aerial dependency fingerprint still matches the existing compiled
+binary, so no aerial regeneration is required. Unity, Blender and packaged
+application exports are not regenerated.
+
+Final suite receipt: all 131 npm-test commands were attempted. After recovering
+the road check's locked report file by saving the same completed assertions to
+west-upper-stair/road-continuity-retry.json, 127 checks pass. Four independent
+exterior assertions remain: facade-course count, protected Jarman geometry,
+protected Leighton/Newton geometry and saved aerial-road vertices. All interior,
+stair, exploration, corridor, furniture, developer-overlay and performance
+checks pass. The successful road retry verifies 1,606 road surfaces and their
+supporting edges; its original failure was only the locked report-file write.
+
+## Developer shortcut visibility (5 October 2026)
+
+This supersedes the initial shortcut visibility in the developer-options note
+above. Aerial and Explore on foot now hide the Developer option button in the
+HTML and on a fresh session. The first minus press reveals the button and enables
+developer mode. Once revealed, it remains available for clicking, including
+after developer mode is disabled. Session storage retains that discovery across
+view switches and reloads alongside the existing developer settings. Modified
+and repeated key presses cannot reveal it.
+
+Developer logic and browser checks pass, including fresh sessions in both views,
+minus activation, mode switching, touch controls and typing guards at 1200 px
+and 320 px. The GPU launcher check passes with NVIDIA GeForce RTX 3090 Ti via
+Direct3D11. Hidden and revealed screenshots were reviewed in
+Browser/artifacts/developer-options/. Explore input, aerial controls and view
+navigation checks also pass. The required npm test attempt stops at the existing
+test-facade-courses.mjs:68 count mismatch (23 versus 22).
+
+Only browser UI/runtime, related checks and this note change for this request.
+No models or exports were regenerated.
+
+## Developer full map across modes (5 October 2026)
+
+Press minus to enable developer options, then M to reveal and open the full map
+in Aerial, Explore on foot or Asylum Escape. Every level is immediately available:
+ground, first, basement, second floor and grounds. M, Escape or Close dismisses
+the map. The earlier staircase-overlay M binding is superseded by Shift+M in
+Aerial and Explore. Shortcut buttons remain hidden until minus is first pressed.
+
+The shared developer-map.mjs dialog uses the playable floor plans and the existing
+notebook map renderer. Its revealAll drawing option bypasses the fog composite
+and discovery checks for room, door and stair symbols without changing any
+explored cells or notebook facts. Activating M also reveals the escape minimap
+and makes every level available in the notebook. That reveal survives closing
+the dialog and view switches; disabling developer mode restores ordinary fog
+and discovered-level tabs. Normal escape-mode M still opens the notebook when
+developer mode is off.
+
+Walking input stops when the map opens. Escape mode suspends movement, NPCs,
+interaction timers and the elapsed time until the dialog closes. Background UI
+is inert while the map is open, keyboard focus stays within its controls, and
+the map canvas fits the viewport. The map module and aerial floor plan load only
+when needed, sharing the plan request with the staircase overlay.
+
+Developer, notebook, game, Explore input/walking/interior, aerial controls and
+view-navigation logic checks pass. Final hardware browser checks pass at 1200 px
+and 320 px for all five map tabs, M/Shift+M separation, close-button keyboard
+activation, focus containment, walking pause, touch controls, view switches and
+unchanged exploration memory. The notebook browser check also passes the escape
+minimap reveal, all-level notebook tabs, frozen player/NPCs/timer and restored
+fog after disabling developer mode, alongside its normal desktop/phone checks.
+NVIDIA GeForce RTX 3090 Ti / Direct3D11 acceleration is verified by test:gpu and
+the browser launchers. Final map screenshots were reviewed; receipts and captures
+are in Browser/artifacts/developer-options/ and Browser/artifacts/notebook/.
+
+The required npm test attempt still stops at test-facade-courses.mjs:68 (23
+courses versus 22). Concurrent furniture/plan changes briefly prevented Explore
+initialization with a dormitory-bed placement error; the final UI run loads
+successfully. A separate furniture check during those changes reported an
+unreachable first-floor R10. These modelling checks are independent of the map
+change. This request changes only browser UI/runtime, related checks and notes;
+no modelling inputs or compiled, Unity, Blender or packaged exports were changed
+or regenerated by this task.
+
+## Developer shortcut requires a press on each page (5 October 2026)
+
+This supersedes the session restoration described in the earlier developer
+shortcut notes. The shared developer controls now start hidden and disabled on
+every page visit, including Explore on foot, reloads and switches from aerial
+view. Old session-storage settings are ignored. Pressing minus reveals the
+button and enables developer mode; the button remains clickable for the rest
+of that page visit. Map and staircase settings no longer carry between pages.
+
+Developer, Explore input, aerial controls, view navigation, game and notebook
+logic checks pass. Hardware browser checks pass at 1200 px and 320 px with old
+enabled/revealed settings deliberately present, after switching views, after
+reloading and after starting the walk. Minus then reveals the controls in both
+layouts. Hidden and revealed captures were visually reviewed in
+Browser/artifacts/developer-options/walking-started-*.png. The required GPU
+check verifies NVIDIA GeForce RTX 3090 Ti / Direct3D11 acceleration. The required
+npm test run still stops at test-facade-courses.mjs:68 (23 courses versus 22).
+
+Only browser developer controls, related checks and this note change. Models,
+Unity, Blender and packaged exports were not regenerated.

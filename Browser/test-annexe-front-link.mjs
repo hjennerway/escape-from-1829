@@ -22,7 +22,12 @@ const {west,east}=annexe.userData.frontLinks;
 assert.equal(east.scale.x,-1);assert.equal(east.children.length,west.children.length);
 for(let i=0;i<west.children.length;i++){
  const a=west.children[i],b=east.children[i];
- assert.equal(a.geometry,b.geometry);assert.equal(a.material,b.material);
+ if(a.material.userData.roofTilePixels){
+  // Mirrored slopes need independent UVs while sharing the same roof shape.
+  for(const name of ['position','normal'])assert.deepEqual(a.geometry.attributes[name].array,b.geometry.attributes[name].array);
+  assert.deepEqual(a.geometry.index?.array,b.geometry.index?.array);
+ }else assert.equal(a.geometry,b.geometry);
+ assert.equal(a.material,b.material);
  assert.deepEqual(a.matrix.elements,b.matrix.elements);
  if(a.isInstancedMesh)assert.deepEqual(a.instanceMatrix.array,b.instanceMatrix.array);
 }

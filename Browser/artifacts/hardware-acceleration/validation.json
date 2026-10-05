@@ -1,0 +1,23 @@
+{
+  "date": "2026-10-05",
+  "scope": "Local browser rendering and performance tests",
+  "gpu": "NVIDIA GeForce RTX 3090 Ti / Direct3D11",
+  "npmTest": {
+    "exitCode": 0,
+    "commands": 125
+  },
+  "gpuChecks": [
+    "hardware browser smoke/policy",
+    "tree renderer profiles",
+    "source/compiled models and loading fallback",
+    "timeline",
+    "intro navigation",
+    "mobile touch controls",
+    "front lawn foliage/wind",
+    "courtyard shadows"
+  ],
+  "ci": "Explicit software mode preserved in GitHub Pages and Windows packaging workflows",
+  "shadowReceiverPixels": 98304,
+  "shadowContacts": 288,
+  "exportsRegenerated": false
+}

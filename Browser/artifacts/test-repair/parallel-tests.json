@@ -1,0 +1,122 @@
+[
+  {
+    "name": "test-exterior-door-trim-browser.mjs",
+    "code": 1,
+    "seconds": 8.622
+  },
+  {
+    "name": "test-exterior-shadows-browser.mjs",
+    "code": 1,
+    "seconds": 41.76
+  },
+  {
+    "name": "test-exterior-door-supports-browser.mjs",
+    "code": 0,
+    "seconds": 77.778
+  },
+  {
+    "name": "test-exterior-stair-clearance-browser.mjs",
+    "code": 0,
+    "seconds": 69.033
+  },
+  {
+    "name": "test-exterior-stair-rails-browser.mjs",
+    "code": 0,
+    "seconds": 48.528
+  },
+  {
+    "name": "test-facade-courses-browser.mjs",
+    "code": 0,
+    "seconds": 31.319
+  },
+  {
+    "name": "test-front-lawn-eztree-browser.mjs",
+    "code": 0,
+    "seconds": 36.161
+  },
+  {
+    "name": "test-hardware-browser.mjs",
+    "code": 0,
+    "seconds": 1.34
+  },
+  {
+    "name": "test-hall-furnishings-browser.mjs",
+    "code": 0,
+    "seconds": 117.299
+  },
+  {
+    "name": "test-intro-navigation.mjs",
+    "code": 0,
+    "seconds": 0.138
+  },
+  {
+    "name": "test-intro-navigation-browser.mjs",
+    "code": 0,
+    "seconds": 121.713
+  },
+  {
+    "name": "test-landing-mobile.mjs",
+    "code": 0,
+    "seconds": 30.563
+  },
+  {
+    "name": "test-model-binary.mjs",
+    "code": 0,
+    "seconds": 0.13
+  },
+  {
+    "name": "test-new-hospital.mjs",
+    "code": 0,
+    "seconds": 2.287
+  },
+  {
+    "name": "test-night-selection-browser.mjs",
+    "code": 0,
+    "seconds": 7.45
+  },
+  {
+    "name": "test-jump-browser.mjs",
+    "code": 0,
+    "seconds": 82.767
+  },
+  {
+    "name": "test-photo-lightbox.mjs",
+    "code": 0,
+    "seconds": 8.082
+  },
+  {
+    "name": "test-notebook-browser.mjs",
+    "code": 0,
+    "seconds": 68.998
+  },
+  {
+    "name": "test-precompiled-models.mjs",
+    "code": 0,
+    "seconds": 36.835
+  },
+  {
+    "name": "test-reception-furniture-browser.mjs",
+    "code": 0,
+    "seconds": 72.765
+  },
+  {
+    "name": "test-reception-second-floor-browser.mjs",
+    "code": 0,
+    "seconds": 110.978
+  },
+  {
+    "name": "test-timeline-browser.mjs",
+    "code": 0,
+    "seconds": 63.66
+  },
+  {
+    "name": "test-wall-mitres-browser.mjs",
+    "code": 0,
+    "seconds": 18.496
+  },
+  {
+    "name": "test-tree-rendering-browser.mjs",
+    "code": 0,
+    "seconds": 82.448
+  }
+]

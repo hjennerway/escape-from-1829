@@ -13,7 +13,8 @@ export function selectEscapeRoutes(floors,random=Math.random){
   return floors.map((floor,floorIndex)=>({...floor,exits:floor.exits.filter(exit=>selected.some(c=>c.floorIndex===floorIndex&&c.exit===exit))}));
 }
 
-export function exitDirection(exit){
-  const facing=exit.facing??1;
-  return exit.axis==='x'?{dx:facing,dz:0}:{dx:0,dz:facing};
+export function exitDirection(exit,{outside=false}={}){
+  const axis=outside?(exit.outsideAxis??exit.axis):exit.axis;
+  const facing=(outside?(exit.outsideFacing??exit.facing):exit.facing)??1;
+  return axis==='x'?{dx:facing,dz:0}:{dx:0,dz:facing};
 }

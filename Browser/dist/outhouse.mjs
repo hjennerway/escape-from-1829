@@ -24,6 +24,7 @@ export function createOuthouse(THREE,{worldUV,material}){
  // Fine vertical streaks and worn pale paint keep the plywood distinct from brick.
  const woodMap=texture(g=>{g.fillStyle='#80817e';g.fillRect(0,0,512,512);for(let i=0;i<1700;i++){const x=random()*512,y=random()*512;g.fillStyle=['#c9c9c588','#343837cc','#9a9e9b99','#e0e0db5c'][i%4];g.fillRect(x+Math.sin(y*.025)*2,y,.6+random()*2.5,8+random()*100);}for(let i=0;i<170;i++){g.fillStyle='#30353244';g.fillRect(random()*512,random()*512,2+random()*5,2+random()*8);}});
  const brick=material(0xffffff,{map:bricks}),base=material(0xb0aaa0,{map:bricks}),slate=material(0xe3e2d6,{map:slates,side:THREE.DoubleSide});
+ slate.userData.roofTilePixels=[64,32];
  const blue=material(0x548fac),blueWorn=material(0x799fae),blueShade=material(0x365b6b),iron=material(0x343b38);
  const boards=material(0xc4c6bd,{map:woodMap}),boardDark=material(0x363b39),recess=material(0x202b29),sill=material(0x999e94);
  const concrete=material(0x878a7d),light=material(0xd5c990,{roughness:.65}),moss=material(0x536446);

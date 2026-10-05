@@ -2,13 +2,13 @@ import assert from 'node:assert/strict';
 import {spawn} from 'node:child_process';
 import {mkdir,readFile} from 'node:fs/promises';
 import {fileURLToPath} from 'node:url';
-import {chromium} from 'playwright';
+import {launchHardwareBrowser} from './test-support/hardware-browser.mjs';
 const server=spawn(process.execPath,['serve.mjs'],{cwd:new URL('.',import.meta.url),windowsHide:true,env:{...process.env,PORT:'0'},stdio:'pipe'});
 const base=await new Promise((resolve,reject)=>{server.stdout.once('data',d=>resolve(String(d).match(/http:\/\/127\.0\.0\.1:\d+/)[0]));server.once('error',reject);});
 await mkdir(new URL('./artifacts/',import.meta.url),{recursive:true});
 let browser;
 try{
- browser=await chromium.launch({headless:true,...(process.env.MODEL_CHROME_PATH?{executablePath:process.env.MODEL_CHROME_PATH}:{}),args:['--use-angle=swiftshader','--enable-unsafe-swiftshader']});
+ browser=await launchHardwareBrowser({headless:true,...(process.env.MODEL_CHROME_PATH?{executablePath:process.env.MODEL_CHROME_PATH}:{})});
  const page=await browser.newPage({viewport:{width:390,height:704},isMobile:true,hasTouch:true,deviceScaleFactor:1,reducedMotion:'reduce'});
  page.setDefaultTimeout(120000);
  await page.addInitScript(()=>{

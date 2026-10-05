@@ -1,0 +1,415 @@
+{
+  "results": [
+    {
+      "mode": "source",
+      "samples": [
+        {
+          "x": -68.8,
+          "z": 25.4,
+          "y": 0.2800000011920929,
+          "name": "Aerial batch · Period · 1829 Wings · 191",
+          "terrain": false,
+          "grass": false
+        },
+        {
+          "x": -68.8,
+          "z": 25.6,
+          "y": -0.1500000000000058,
+          "name": "Estate terrain",
+          "terrain": true,
+          "grass": true
+        },
+        {
+          "x": -68.8,
+          "z": 28,
+          "y": -0.1500000000000062,
+          "name": "Estate terrain",
+          "terrain": true,
+          "grass": true
+        },
+        {
+          "x": -68.8,
+          "z": 34,
+          "y": -0.15000000000000754,
+          "name": "Estate terrain",
+          "terrain": true,
+          "grass": true
+        },
+        {
+          "x": -68.8,
+          "z": 42.4,
+          "y": -0.15000000000000951,
+          "name": "Estate terrain",
+          "terrain": true,
+          "grass": true
+        },
+        {
+          "x": -65,
+          "z": 25.4,
+          "y": 0.2800000011920929,
+          "name": "Aerial batch · Period · 1829 Wings · 191",
+          "terrain": false,
+          "grass": false
+        },
+        {
+          "x": -65,
+          "z": 25.6,
+          "y": -0.15000000000000557,
+          "name": "Estate terrain",
+          "terrain": true,
+          "grass": true
+        },
+        {
+          "x": -65,
+          "z": 28,
+          "y": -0.1500000000000062,
+          "name": "Estate terrain",
+          "terrain": true,
+          "grass": true
+        },
+        {
+          "x": -65,
+          "z": 34,
+          "y": -0.15000000000000754,
+          "name": "Estate terrain",
+          "terrain": true,
+          "grass": true
+        },
+        {
+          "x": -65,
+          "z": 42.4,
+          "y": -0.15000000000000951,
+          "name": "Estate terrain",
+          "terrain": true,
+          "grass": true
+        },
+        {
+          "x": -60,
+          "z": 25.4,
+          "y": 0.2800000011920929,
+          "name": "Aerial batch · Period · 1829 Wings · 191",
+          "terrain": false,
+          "grass": false
+        },
+        {
+          "x": -60,
+          "z": 25.6,
+          "y": -0.15000000000000557,
+          "name": "Estate terrain",
+          "terrain": true,
+          "grass": true
+        },
+        {
+          "x": -60,
+          "z": 28,
+          "y": -0.1500000000000062,
+          "name": "Estate terrain",
+          "terrain": true,
+          "grass": true
+        },
+        {
+          "x": -60,
+          "z": 34,
+          "y": -0.15000000000000754,
+          "name": "Estate terrain",
+          "terrain": true,
+          "grass": true
+        },
+        {
+          "x": -60,
+          "z": 42.4,
+          "y": -0.15000000000000951,
+          "name": "Estate terrain",
+          "terrain": true,
+          "grass": true
+        },
+        {
+          "x": -50,
+          "z": 25.4,
+          "y": -0.15000000000000574,
+          "name": "Estate terrain",
+          "terrain": true,
+          "grass": true
+        },
+        {
+          "x": -50,
+          "z": 25.6,
+          "y": -0.15000000000000557,
+          "name": "Estate terrain",
+          "terrain": true,
+          "grass": true
+        },
+        {
+          "x": -50,
+          "z": 28,
+          "y": -0.1500000000000062,
+          "name": "Estate terrain",
+          "terrain": true,
+          "grass": true
+        },
+        {
+          "x": -50,
+          "z": 34,
+          "y": -0.15000000000000754,
+          "name": "Estate terrain",
+          "terrain": true,
+          "grass": true
+        },
+        {
+          "x": -50,
+          "z": 42.4,
+          "y": -0.1500000000000094,
+          "name": "Estate terrain",
+          "terrain": true,
+          "grass": true
+        },
+        {
+          "x": -47,
+          "z": 25.4,
+          "y": -0.15000000000000552,
+          "name": "Estate terrain",
+          "terrain": true,
+          "grass": true
+        },
+        {
+          "x": -47,
+          "z": 25.6,
+          "y": -0.1500000000000058,
+          "name": "Estate terrain",
+          "terrain": true,
+          "grass": true
+        },
+        {
+          "x": -47,
+          "z": 28,
+          "y": -0.1500000000000062,
+          "name": "Estate terrain",
+          "terrain": true,
+          "grass": true
+        },
+        {
+          "x": -47,
+          "z": 34,
+          "y": -0.15000000000000754,
+          "name": "Estate terrain",
+          "terrain": true,
+          "grass": true
+        },
+        {
+          "x": -47,
+          "z": 42.4,
+          "y": -0.1500000000000094,
+          "name": "Estate terrain",
+          "terrain": true,
+          "grass": true
+        }
+      ]
+    },
+    {
+      "mode": "compiled",
+      "samples": [
+        {
+          "x": -68.8,
+          "z": 25.4,
+          "y": 0.2800000011920929,
+          "name": "Aerial batch · Period · 1829 Wings · 191",
+          "terrain": false,
+          "grass": false
+        },
+        {
+          "x": -68.8,
+          "z": 25.6,
+          "y": -0.1500000000000058,
+          "name": "Estate terrain",
+          "terrain": true,
+          "grass": true
+        },
+        {
+          "x": -68.8,
+          "z": 28,
+          "y": -0.1500000000000062,
+          "name": "Estate terrain",
+          "terrain": true,
+          "grass": true
+        },
+        {
+          "x": -68.8,
+          "z": 34,
+          "y": -0.15000000000000754,
+          "name": "Estate terrain",
+          "terrain": true,
+          "grass": true
+        },
+        {
+          "x": -68.8,
+          "z": 42.4,
+          "y": -0.15000000000000951,
+          "name": "Estate terrain",
+          "terrain": true,
+          "grass": true
+        },
+        {
+          "x": -65,
+          "z": 25.4,
+          "y": 0.2800000011920929,
+          "name": "Aerial batch · Period · 1829 Wings · 191",
+          "terrain": false,
+          "grass": false
+        },
+        {
+          "x": -65,
+          "z": 25.6,
+          "y": -0.15000000000000557,
+          "name": "Estate terrain",
+          "terrain": true,
+          "grass": true
+        },
+        {
+          "x": -65,
+          "z": 28,
+          "y": -0.1500000000000062,
+          "name": "Estate terrain",
+          "terrain": true,
+          "grass": true
+        },
+        {
+          "x": -65,
+          "z": 34,
+          "y": -0.15000000000000754,
+          "name": "Estate terrain",
+          "terrain": true,
+          "grass": true
+        },
+        {
+          "x": -65,
+          "z": 42.4,
+          "y": -0.15000000000000951,
+          "name": "Estate terrain",
+          "terrain": true,
+          "grass": true
+        },
+        {
+          "x": -60,
+          "z": 25.4,
+          "y": 0.2800000011920929,
+          "name": "Aerial batch · Period · 1829 Wings · 191",
+          "terrain": false,
+          "grass": false
+        },
+        {
+          "x": -60,
+          "z": 25.6,
+          "y": -0.15000000000000557,
+          "name": "Estate terrain",
+          "terrain": true,
+          "grass": true
+        },
+        {
+          "x": -60,
+          "z": 28,
+          "y": -0.1500000000000062,
+          "name": "Estate terrain",
+          "terrain": true,
+          "grass": true
+        },
+        {
+          "x": -60,
+          "z": 34,
+          "y": -0.15000000000000754,
+          "name": "Estate terrain",
+          "terrain": true,
+          "grass": true
+        },
+        {
+          "x": -60,
+          "z": 42.4,
+          "y": -0.15000000000000951,
+          "name": "Estate terrain",
+          "terrain": true,
+          "grass": true
+        },
+        {
+          "x": -50,
+          "z": 25.4,
+          "y": -0.15000000000000574,
+          "name": "Estate terrain",
+          "terrain": true,
+          "grass": true
+        },
+        {
+          "x": -50,
+          "z": 25.6,
+          "y": -0.15000000000000557,
+          "name": "Estate terrain",
+          "terrain": true,
+          "grass": true
+        },
+        {
+          "x": -50,
+          "z": 28,
+          "y": -0.1500000000000062,
+          "name": "Estate terrain",
+          "terrain": true,
+          "grass": true
+        },
+        {
+          "x": -50,
+          "z": 34,
+          "y": -0.15000000000000754,
+          "name": "Estate terrain",
+          "terrain": true,
+          "grass": true
+        },
+        {
+          "x": -50,
+          "z": 42.4,
+          "y": -0.1500000000000094,
+          "name": "Estate terrain",
+          "terrain": true,
+          "grass": true
+        },
+        {
+          "x": -47,
+          "z": 25.4,
+          "y": -0.15000000000000552,
+          "name": "Estate terrain",
+          "terrain": true,
+          "grass": true
+        },
+        {
+          "x": -47,
+          "z": 25.6,
+          "y": -0.1500000000000058,
+          "name": "Estate terrain",
+          "terrain": true,
+          "grass": true
+        },
+        {
+          "x": -47,
+          "z": 28,
+          "y": -0.1500000000000062,
+          "name": "Estate terrain",
+          "terrain": true,
+          "grass": true
+        },
+        {
+          "x": -47,
+          "z": 34,
+          "y": -0.15000000000000754,
+          "name": "Estate terrain",
+          "terrain": true,
+          "grass": true
+        },
+        {
+          "x": -47,
+          "z": 42.4,
+          "y": -0.1500000000000094,
+          "name": "Estate terrain",
+          "terrain": true,
+          "grass": true
+        }
+      ]
+    }
+  ],
+  "errors": []
+}

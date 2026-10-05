@@ -1,0 +1,104 @@
+{
+  "views": [
+    "west-ground-landing",
+    "west-ground-room",
+    "east-ground-landing",
+    "east-ground-room",
+    "west-first-landing",
+    "west-first-room",
+    "east-first-landing",
+    "east-first-room",
+    "mobile"
+  ],
+  "movements": [
+    {
+      "stairId": "S3",
+      "reverse": false,
+      "passes": [
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true
+      ],
+      "floor": 1,
+      "stair": null,
+      "outside": false,
+      "end": [
+        -29.570391279489748,
+        -31.74917618986432
+      ]
+    },
+    {
+      "stairId": "S3",
+      "reverse": true,
+      "passes": [
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true
+      ],
+      "floor": 0,
+      "stair": null,
+      "outside": false,
+      "end": [
+        -33.470391204422185,
+        -31.749176192694076
+      ]
+    },
+    {
+      "stairId": "S4",
+      "reverse": false,
+      "passes": [
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true
+      ],
+      "floor": 1,
+      "stair": null,
+      "outside": false,
+      "end": [
+        34.32960872051025,
+        -31.74917618986432
+      ]
+    },
+    {
+      "stairId": "S4",
+      "reverse": true,
+      "passes": [
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true
+      ],
+      "floor": 0,
+      "stair": null,
+      "outside": false,
+      "end": [
+        30.42960879557777,
+        -31.749176192694076
+      ]
+    }
+  ],
+  "errors": []
+}

@@ -46,7 +46,9 @@ export function addEntranceWestPhotoDetails(THREE,{model,box,mesh,worldUV,white,
     return ray.intersectObjects(slate,false)[0].point.y+.03;
   }
   const sample=endOffset(-.015),endTop=roofTop(sample.x,sample.z);
-  const heights=[12.75,12.75,roofTop(...line[2])-.39,13.3,13.3,endTop-.39];
+  // The west branch now shares the projection's level side/front eave.
+  // Its mirrored east frontage retains the existing sampled roof return.
+  const heights=[12.75,12.75,includeReception?13.3:roofTop(...line[2])-.39,13.3,13.3,endTop-.39];
   for(const [layer,[dy,h,depth]] of [[0,.58,.24],[-.35,.1,.38],[-.49,.1,.31],[.34,.1,.35]].entries()){
     const outer=offset(depth/2),inner=offset(-depth/2);
     const a=endOffset(.075),b=endOffset(-.115);
@@ -59,8 +61,16 @@ export function addEntranceWestPhotoDetails(THREE,{model,box,mesh,worldUV,white,
       for(const [a,b,c,d] of faces)for(const index of [a,c,b,a,d,c])vertices.push(...points[index]);
     }
     const geometry=new THREE.BufferGeometry();geometry.setAttribute('position',new THREE.Float32BufferAttribute(vertices,3));geometry.computeVertexNormals();
-    const part=mesh(geometry,trim,0,0,0,true);part.name='Entrance west mitred cornice layer '+layer;
+    const part=mesh(geometry,white,0,0,0,true);part.name='Entrance west mitred cornice layer '+layer;
     part.userData.frontCornerTrim=true;
+    if(layer===3){
+      // Keep all three boundaries on the diagonal terminal cornice plane.
+      const inboard=offset(-.7),outside=offset(1),a=endOffset(-.7),b=endOffset(1);
+      inboard[5]=[a.x,a.z];outside[5]=[b.x,b.z];
+      part.userData.roofRenderBoundary={
+        inner:inner.map(([x,z],i)=>[x,heights[i]+dy+h/2,z]),inboard,outside
+      };
+    }
   }
   // The shared facade course supplies the joined floor bands on both sides.
   box(white,-7.16,1.55,18.35,.15,3.1,2.7);

@@ -1,5 +1,27 @@
 # Jarman lawn frontage — 24 September 2026
 
+## Snapshot reconciliation — 5 October 2026
+
+The owner's request to fix the tests advances the protected estate reference
+to 818,948 primitives. Importing all 134 historical model modules at `db70a03`
+reproduces the saved 818,930 count and hash exactly. The comparison retains
+816,532 primitive records exactly and identifies 268 further records whose
+expanded vertex attributes, materials, transforms and flags differ only in UVs.
+The 2,130 removed and 2,148 added structural records are confined to the
+documented 1829 building/court repairs, west basement/terrain/access changes
+and the two Larkton recessed-door strips. The west entrance path retains its
+size and height and shifts exactly 1.25 units onto the corrected door axis.
+
+`Browser/artifacts/test-repair/audit-snapshots.mjs` independently reproduces
+both production scope rules. `refresh-snapshots.mjs` checks the reviewed source
+set, each structural region, the precise path translation, stable model inputs,
+fresh production fingerprints and Leighton/Newton's original L dimensions
+before advancing only the two saved count/hash pairs. The complete evidence is
+in `reviewed-snapshot-audit.json` beside those scripts. All frontage, window,
+roof and collision assertions and the original exclusions remain enabled.
+This supersedes the earlier reference totals; no model sources change as part
+of this snapshot reconciliation.
+
 ## Snapshot reconciliation — 3 October 2026
 
 The owner's request to repair the exterior comparison updates the protected

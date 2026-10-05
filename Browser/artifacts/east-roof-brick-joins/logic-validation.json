@@ -1,0 +1,52 @@
+{
+  "checks": [
+    {
+      "name": "test-east-roof-brick-joins.mjs",
+      "output": "PASS: 12 formerly exposed viewing rays, 83 shared roof contacts, retained crowns and clear upper cornice.\n"
+    },
+    {
+      "name": "test-east-entrance-roof-boundary.mjs",
+      "output": "PASS: 15 eastern entrance boundary/return contacts and 3318 physical slate/render samples.\n"
+    },
+    {
+      "name": "test-west-entrance-roof-boundary.mjs",
+      "output": "PASS: 88 continuous-pitch/bend contacts, 432 physical trim samples and retained adjoining roof crowns.\n"
+    },
+    {
+      "name": "test-front-inside-corners.mjs",
+      "output": "PASS: marked stepped walls, level flat roof, exact masonry collisions, walked doorway route, 104 pane probes, 70 concealed trim edges and 1308 flush/textured roof-closure samples.\n"
+    },
+    {
+      "name": "test-west-roof-join.mjs",
+      "output": "PASS: retained yellow ridges, relocated blue entrance ridge, descending pitches, closed valleys, uniform 14.53 eaves, 552 physical roof/render probes, circled contacts and retained low deck.\n"
+    },
+    {
+      "name": "test-roof-contacts.mjs",
+      "output": "PASS: 108 roof attachments, 3888 perimeter contacts; no floating edges.\n"
+    },
+    {
+      "name": "test-roof-tiles.mjs",
+      "output": "PASS: 319 tiled meshes, 2728 sloping triangles, two tile families; horizontal rows and uniform physical scale.\n"
+    },
+    {
+      "name": "test-redesmere-garden.mjs",
+      "output": "PASS: one widened coplanar pavilion face, no separate rear tower, exposed glazing, attached courtyard details and clear passage.\nPASS: clean Redesmere brick join, square level gravel corner, matching cross-walk and gravel-filled recess.\nPASS: flush Redesmere frontage, exposed windows, joined slate, level flat roof, upper door threshold and walking clearances.\n"
+    },
+    {
+      "name": "test-escape-exterior.mjs",
+      "output": "PASS: real estate geometry, upward-facing roofs, W-shaped openings to the rear, rear-left lattice mast, building/mast framing throughout landscape and portrait pans.\nPASS: front staircase retains both four-tread branches and forward returns, with solid stone surfaces and collisions up to the doorway wall.\n"
+    }
+  ],
+  "baseline": [
+    {
+      "mode": "yellow",
+      "status": 1,
+      "assertion": "AssertionError [ERR_ASSERTION]: The marked roof pixel has slate ahead of brick: 780,385,\r"
+    },
+    {
+      "mode": "blue",
+      "status": 1,
+      "assertion": "AssertionError [ERR_ASSERTION]: The marked roof pixel has slate ahead of brick: 980,692,East inside corner brick facet 1\r"
+    }
+  ]
+}

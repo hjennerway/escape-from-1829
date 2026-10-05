@@ -1,0 +1,12 @@
+import {readFile,mkdir} from 'node:fs/promises';
+import {fileURLToPath} from 'node:url';
+const source=new URL('../../../Research/1829-interior-proposal/export-plans.mjs',import.meta.url);
+const output=new URL('./shared-drawings/',import.meta.url);
+await mkdir(output,{recursive:true});
+let code=await readFile(source,'utf8');
+code=code.replaceAll('import.meta.url',JSON.stringify(source.href));
+code=code.replace("'../../Browser/dist/asylum-stairs.mjs'",JSON.stringify(new URL('../../Browser/dist/asylum-stairs.mjs',source).href));
+code=code.replace(/const destination=.*?;/,`const destination=${JSON.stringify(fileURLToPath(output).replace(/\\/g,'/').replace(/\/$/,''))};`);
+code=code.replace("destination+'/plan-data.json'",JSON.stringify(fileURLToPath(new URL('plan-data.json',source))));
+code=code.replace('for(const floor of data.floors)','for(const floor of data.floors.filter(f=>[1,3].includes(f.id)))');
+await import('data:text/javascript;base64,'+Buffer.from(code).toString('base64'));

@@ -1,0 +1,260 @@
+{
+  "start": 63,
+  "checks": 61,
+  "results": [
+    {
+      "file": "test-farndon.mjs",
+      "code": 0
+    },
+    {
+      "file": "test-ward-placement.mjs",
+      "code": 0
+    },
+    {
+      "file": "test-ward-corridors.mjs",
+      "code": 0
+    },
+    {
+      "file": "test-ground-contact.mjs",
+      "code": 0
+    },
+    {
+      "file": "test-building-grounding.mjs",
+      "code": 0
+    },
+    {
+      "file": "test-day-night.mjs",
+      "code": 0
+    },
+    {
+      "file": "test-tree-rendering.mjs",
+      "code": 0
+    },
+    {
+      "file": "test-exterior-shadows.mjs",
+      "code": 0
+    },
+    {
+      "file": "test-front-lawn-eztree.mjs",
+      "code": 0
+    },
+    {
+      "file": "test-explore.mjs",
+      "code": 0
+    },
+    {
+      "file": "test-explore-interior.mjs",
+      "code": 0
+    },
+    {
+      "file": "test-exterior-door-supports.mjs",
+      "code": 0
+    },
+    {
+      "file": "test-explore-input.mjs",
+      "code": 0
+    },
+    {
+      "file": "test-front-basement.mjs",
+      "code": 0
+    },
+    {
+      "file": "test-annexe.mjs",
+      "code": 0
+    },
+    {
+      "file": "test-jump.mjs",
+      "code": 0
+    },
+    {
+      "file": "test-larkton-recess.mjs",
+      "code": 0
+    },
+    {
+      "file": "test-larkton.mjs",
+      "code": 0
+    },
+    {
+      "file": "test-annexe-carden.mjs",
+      "code": 0
+    },
+    {
+      "file": "test-annexe-front-link.mjs",
+      "code": 0
+    },
+    {
+      "file": "test-annexe-east-outer.mjs",
+      "code": 0
+    },
+    {
+      "file": "test-annexe-kitchen.mjs",
+      "code": 0
+    },
+    {
+      "file": "test-annexe-rear-stretch.mjs",
+      "code": 0
+    },
+    {
+      "file": "test-annexe-os-refinement.mjs",
+      "code": 0
+    },
+    {
+      "file": "test-annexe-rear-side-alignment.mjs",
+      "code": 0
+    },
+    {
+      "file": "test-annexe-photo-placement.mjs",
+      "code": 0
+    },
+    {
+      "file": "test-annexe-outer-front.mjs",
+      "code": 0
+    },
+    {
+      "file": "test-jarman.mjs",
+      "code": 1
+    },
+    {
+      "file": "test-oakmere-court.mjs",
+      "code": 0
+    },
+    {
+      "file": "test-oakmere.mjs",
+      "code": 0
+    },
+    {
+      "file": "test-oakmere-west.mjs",
+      "code": 0
+    },
+    {
+      "file": "test-oakmere-windows.mjs",
+      "code": 0
+    },
+    {
+      "file": "test-annexe-wards.mjs",
+      "code": 0
+    },
+    {
+      "file": "test-churton.mjs",
+      "code": 0
+    },
+    {
+      "file": "test-leighton-newton.mjs",
+      "code": 1
+    },
+    {
+      "file": "test-upton.mjs",
+      "code": 0
+    },
+    {
+      "file": "test-garages-mortuary.mjs",
+      "code": 0
+    },
+    {
+      "file": "test-greenhouses.mjs",
+      "code": 0
+    },
+    {
+      "file": "test-main-admin.mjs",
+      "code": 0
+    },
+    {
+      "file": "test-main-kitchen.mjs",
+      "code": 0
+    },
+    {
+      "file": "test-main-admin-refine2.mjs",
+      "code": 0
+    },
+    {
+      "file": "test-device-location.mjs",
+      "code": 0
+    },
+    {
+      "file": "test-aerial-controls.mjs",
+      "code": 0
+    },
+    {
+      "file": "test-kml-imports.mjs",
+      "code": 0
+    },
+    {
+      "file": "test-kml-11.mjs",
+      "code": 0
+    },
+    {
+      "file": "test-aerial-layouts.mjs",
+      "code": 0
+    },
+    {
+      "file": "test-modern-car-park.mjs",
+      "code": 0
+    },
+    {
+      "file": "test-modern-entrance.mjs",
+      "code": 0
+    },
+    {
+      "file": "test-parsons-retrace.mjs",
+      "code": 0
+    },
+    {
+      "file": "test-historic-roads.mjs",
+      "code": 0
+    },
+    {
+      "file": "test-road-continuity.mjs",
+      "code": 0
+    },
+    {
+      "file": "test-west-parsons-junctions.mjs",
+      "code": 0
+    },
+    {
+      "file": "test-admin-teardrop.mjs",
+      "code": 0
+    },
+    {
+      "file": "test-annexe-rear-roads.mjs",
+      "code": 0
+    },
+    {
+      "file": "test-annexe-access.mjs",
+      "code": 0
+    },
+    {
+      "file": "test-aerial-performance.mjs",
+      "code": 0
+    },
+    {
+      "file": "test-building-detail.mjs",
+      "code": 0
+    },
+    {
+      "file": "test-performance.mjs",
+      "code": 0
+    },
+    {
+      "file": "test-outhouse.mjs",
+      "code": 0
+    },
+    {
+      "file": "test-willows.mjs",
+      "code": 0
+    },
+    {
+      "file": "test-building-photos.mjs",
+      "code": 0
+    }
+  ],
+  "failures": [
+    {
+      "file": "test-jarman.mjs",
+      "code": 1
+    },
+    {
+      "file": "test-leighton-newton.mjs",
+      "code": 1
+    }
+  ]
+}

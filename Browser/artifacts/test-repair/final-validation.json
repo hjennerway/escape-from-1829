@@ -1,0 +1,353 @@
+{
+  "sourceHash": "f4e7771bb635db6d408703342f156c3aa1552c973206c21d441cc0a1a4d54a30",
+  "browser": {
+    "suiteCommands": 125,
+    "suiteExitCode": 0,
+    "suiteLog": "npm-test-final.log",
+    "testFiles": 175,
+    "additionalTests": 53,
+    "additionalResults": [
+      {
+        "name": "test-aerial-location-photos.mjs",
+        "code": 0,
+        "seconds": 29.811,
+        "resultFile": "extra-tests.json"
+      },
+      {
+        "name": "test-annexe-carden-correction.mjs",
+        "code": 0,
+        "seconds": 3.144,
+        "resultFile": "extra-tests.json"
+      },
+      {
+        "name": "test-annexe-carden-height.mjs",
+        "code": 0,
+        "seconds": 2.601,
+        "resultFile": "extra-tests.json"
+      },
+      {
+        "name": "test-arrival-browser.mjs",
+        "code": 0,
+        "seconds": 172.726,
+        "resultFile": "extra-tests.json"
+      },
+      {
+        "name": "test-asylum-basement-end-browser.mjs",
+        "code": 0,
+        "seconds": 185.175,
+        "resultFile": "rerun-tests.json"
+      },
+      {
+        "name": "test-asylum-bookrooms-browser.mjs",
+        "code": 0,
+        "seconds": 83.296,
+        "resultFile": "extra-tests.json"
+      },
+      {
+        "name": "test-asylum-browser.mjs",
+        "code": 0,
+        "seconds": 410.112,
+        "resultFile": "rerun-tests.json"
+      },
+      {
+        "name": "test-asylum-cross-range-bends-browser.mjs",
+        "code": 0,
+        "seconds": 90.52,
+        "resultFile": "extra-tests.json"
+      },
+      {
+        "name": "test-asylum-doorways-browser.mjs",
+        "code": 0,
+        "seconds": 345.527,
+        "resultFile": "rerun-tests.json"
+      },
+      {
+        "name": "test-asylum-east-corner-browser.mjs",
+        "code": 0,
+        "seconds": 222.301,
+        "resultFile": "rerun-tests.json"
+      },
+      {
+        "name": "test-asylum-exit-surrounds-browser.mjs",
+        "code": 0,
+        "seconds": 154.223,
+        "resultFile": "extra-tests.json"
+      },
+      {
+        "name": "test-asylum-furniture-browser.mjs",
+        "code": 0,
+        "seconds": 300.094,
+        "resultFile": "extra-tests.json"
+      },
+      {
+        "name": "test-asylum-masonry-corners-browser.mjs",
+        "code": 0,
+        "seconds": 92.052,
+        "resultFile": "extra-tests.json"
+      },
+      {
+        "name": "test-asylum-outside-browser.mjs",
+        "code": 0,
+        "seconds": 165.721,
+        "resultFile": "extra-tests.json"
+      },
+      {
+        "name": "test-asylum-room-doors-browser.mjs",
+        "code": 0,
+        "seconds": 544.173,
+        "resultFile": "extra-tests.json"
+      },
+      {
+        "name": "test-asylum-room-finishes-browser.mjs",
+        "code": 0,
+        "seconds": 71.157,
+        "resultFile": "hardware-tests.json"
+      },
+      {
+        "name": "test-asylum-stair-room-walls-browser.mjs",
+        "code": 0,
+        "seconds": 33.239,
+        "resultFile": "hardware-tests.json"
+      },
+      {
+        "name": "test-asylum-stair-soffits-browser.mjs",
+        "code": 0,
+        "seconds": 191.586,
+        "resultFile": "extra-tests.json"
+      },
+      {
+        "name": "test-asylum-wall-joins-browser.mjs",
+        "code": 0,
+        "seconds": 107.285,
+        "resultFile": "extra-tests.json"
+      },
+      {
+        "name": "test-asylum-window-clearance-browser.mjs",
+        "code": 0,
+        "seconds": 376.692,
+        "resultFile": "extra-tests.json"
+      },
+      {
+        "name": "test-asylum-window-frames-browser.mjs",
+        "code": 0,
+        "seconds": 75.04,
+        "resultFile": "extra-tests.json"
+      },
+      {
+        "name": "test-asylum-windows-browser.mjs",
+        "code": 0,
+        "seconds": 53.9,
+        "resultFile": "extra-tests.json"
+      },
+      {
+        "name": "test-atmosphere-browser.mjs",
+        "code": 0,
+        "seconds": 70.858,
+        "resultFile": "hardware-tests.json"
+      },
+      {
+        "name": "test-atmosphere.mjs",
+        "code": 0,
+        "seconds": 0.681,
+        "resultFile": "hardware-tests.json"
+      },
+      {
+        "name": "test-ceiling-entrance-browser.mjs",
+        "code": 0,
+        "seconds": 44.957,
+        "resultFile": "hardware-tests.json"
+      },
+      {
+        "name": "test-countryside-browser.mjs",
+        "code": 0,
+        "seconds": 12.196,
+        "resultFile": "hardware-tests.json"
+      },
+      {
+        "name": "test-day-night-browser.mjs",
+        "code": 0,
+        "seconds": 101.129,
+        "resultFile": "hardware-tests.json"
+      },
+      {
+        "name": "test-explore-interior-browser.mjs",
+        "code": 0,
+        "seconds": 32.814,
+        "resultFile": "hardware-tests.json"
+      },
+      {
+        "name": "test-explore-mobile.mjs",
+        "code": 0,
+        "seconds": 56.895,
+        "resultFile": "hardware-tests.json"
+      },
+      {
+        "name": "test-exterior-door-supports-browser.mjs",
+        "code": 0,
+        "seconds": 77.778,
+        "resultFile": "parallel-tests.json"
+      },
+      {
+        "name": "test-exterior-door-trim-browser.mjs",
+        "code": 0,
+        "log": "door-trim-rerun.log"
+      },
+      {
+        "name": "test-exterior-shadows-browser.mjs",
+        "code": 0,
+        "log": "shadows-daylight-rerun.log"
+      },
+      {
+        "name": "test-exterior-stair-clearance-browser.mjs",
+        "code": 0,
+        "seconds": 69.033,
+        "resultFile": "parallel-tests.json"
+      },
+      {
+        "name": "test-exterior-stair-rails-browser.mjs",
+        "code": 0,
+        "seconds": 48.528,
+        "resultFile": "parallel-tests.json"
+      },
+      {
+        "name": "test-facade-courses-browser.mjs",
+        "code": 0,
+        "seconds": 31.319,
+        "resultFile": "parallel-tests.json"
+      },
+      {
+        "name": "test-front-lawn-eztree-browser.mjs",
+        "code": 0,
+        "seconds": 36.161,
+        "resultFile": "parallel-tests.json"
+      },
+      {
+        "name": "test-hall-furnishings-browser.mjs",
+        "code": 0,
+        "seconds": 117.299,
+        "resultFile": "parallel-tests.json"
+      },
+      {
+        "name": "test-hardware-browser.mjs",
+        "code": 0,
+        "seconds": 1.34,
+        "resultFile": "parallel-tests.json"
+      },
+      {
+        "name": "test-intro-navigation-browser.mjs",
+        "code": 0,
+        "seconds": 121.713,
+        "resultFile": "parallel-tests.json"
+      },
+      {
+        "name": "test-intro-navigation.mjs",
+        "code": 0,
+        "seconds": 0.138,
+        "resultFile": "parallel-tests.json"
+      },
+      {
+        "name": "test-jump-browser.mjs",
+        "code": 0,
+        "seconds": 82.767,
+        "resultFile": "parallel-tests.json"
+      },
+      {
+        "name": "test-landing-mobile.mjs",
+        "code": 0,
+        "seconds": 30.563,
+        "resultFile": "parallel-tests.json"
+      },
+      {
+        "name": "test-model-binary.mjs",
+        "code": 0,
+        "seconds": 0.13,
+        "resultFile": "parallel-tests.json"
+      },
+      {
+        "name": "test-new-hospital.mjs",
+        "code": 0,
+        "seconds": 2.287,
+        "resultFile": "parallel-tests.json"
+      },
+      {
+        "name": "test-night-selection-browser.mjs",
+        "code": 0,
+        "seconds": 7.45,
+        "resultFile": "parallel-tests.json"
+      },
+      {
+        "name": "test-notebook-browser.mjs",
+        "code": 0,
+        "seconds": 68.998,
+        "resultFile": "parallel-tests.json"
+      },
+      {
+        "name": "test-photo-lightbox.mjs",
+        "code": 0,
+        "seconds": 8.082,
+        "resultFile": "parallel-tests.json"
+      },
+      {
+        "name": "test-precompiled-models.mjs",
+        "code": 0,
+        "seconds": 36.835,
+        "resultFile": "parallel-tests.json"
+      },
+      {
+        "name": "test-reception-furniture-browser.mjs",
+        "code": 0,
+        "seconds": 72.765,
+        "resultFile": "parallel-tests.json"
+      },
+      {
+        "name": "test-reception-second-floor-browser.mjs",
+        "code": 0,
+        "seconds": 110.978,
+        "resultFile": "parallel-tests.json"
+      },
+      {
+        "name": "test-timeline-browser.mjs",
+        "code": 0,
+        "seconds": 63.66,
+        "resultFile": "parallel-tests.json"
+      },
+      {
+        "name": "test-tree-rendering-browser.mjs",
+        "code": 0,
+        "seconds": 82.448,
+        "resultFile": "parallel-tests.json"
+      },
+      {
+        "name": "test-wall-mitres-browser.mjs",
+        "code": 0,
+        "seconds": 18.496,
+        "resultFile": "parallel-tests.json"
+      }
+    ],
+    "failures": []
+  },
+  "desktop": {
+    "unitTests": 8,
+    "unitExitCode": 0,
+    "smokeExitCode": 0,
+    "renderer": "NVIDIA GeForce RTX 3090 Ti / ANGLE Direct3D11",
+    "logs": [
+      "desktop-npm-test.log",
+      "desktop-smoke.log"
+    ]
+  },
+  "native": {
+    "prepareExitCode": 0,
+    "portAndPresentationPassed": true,
+    "legacyAssetsEntrypointPassed": true,
+    "log": "NativeAndroid/artifacts/test-repair-prepare.log"
+  },
+  "exports": {
+    "browserCompiled": "current and checksum verified",
+    "unity": "generated assets, presentation and prepared scene refreshed",
+    "desktop": "current web assets staged and development app smoke-tested",
+    "androidApk": "not rebuilt",
+    "packagedWindows": "not rebuilt",
+    "blender": "not regenerated"
+  }
+}

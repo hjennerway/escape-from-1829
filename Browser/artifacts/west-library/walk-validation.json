@@ -1,0 +1,40 @@
+{
+  "results": [
+    {
+      "room": "R46",
+      "entered": true,
+      "returned": true,
+      "entryFailure": null,
+      "returnFailure": null
+    },
+    {
+      "room": "R47",
+      "entered": true,
+      "returned": true,
+      "entryFailure": null,
+      "returnFailure": null
+    },
+    {
+      "room": "R48",
+      "entered": true,
+      "returned": true,
+      "entryFailure": null,
+      "returnFailure": null
+    },
+    {
+      "room": "R49",
+      "entered": true,
+      "returned": true,
+      "entryFailure": null,
+      "returnFailure": null
+    },
+    {
+      "room": "R50",
+      "entered": true,
+      "returned": true,
+      "entryFailure": null,
+      "returnFailure": null
+    }
+  ],
+  "acrossUpper": true
+}

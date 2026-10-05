@@ -2,7 +2,7 @@ import {visible} from './core.mjs';
 import {REVEAL_RADIUS,notebookView} from './notebook.mjs';
 
 const caches=new WeakMap();
-export function drawNotebookMap(context,notebook,key,player,enemies,yaw,{createCanvas=()=>document.createElement('canvas')}={}){
+export function drawNotebookMap(context,notebook,key,player,enemies,yaw,{createCanvas=()=>document.createElement('canvas'),revealAll=false}={}){
  const view=notebook.views.find(v=>v.key===key);if(!view)return;
  const floor=view.floor,fog=notebook.fog.get(key),[minX,maxX,minZ,maxZ]=fog.bounds;
  const width=context.canvas.width,height=context.canvas.height,scale=Math.min((width-16)/(maxX-minX),(height-16)/(maxZ-minZ));
@@ -38,7 +38,7 @@ export function drawNotebookMap(context,notebook,key,player,enemies,yaw,{createC
   cached={base,mask,explored,stamp:''};backgrounds.set(cacheKey,cached);
  }
  const stamp=`${notebook.generation}:${fog.revision}`;
- if(cached.stamp!==stamp){
+ if(!revealAll&&cached.stamp!==stamp){
   const m=cached.mask.getContext('2d');m.clearRect(0,0,width,height);m.fillStyle='#fff';
   for(let row=0;row<fog.rows;row++)for(let col=0;col<fog.cols;col++)if(fog.cells[row*fog.cols+col])m.fillRect(px(minX+col),pz(minZ+row),scale+.15,scale+.15);
   const c=cached.explored.getContext('2d');c.clearRect(0,0,width,height);c.drawImage(cached.base,0,0);c.globalCompositeOperation='destination-in';c.drawImage(cached.mask,0,0);c.globalCompositeOperation='source-over';cached.stamp=stamp;
@@ -48,20 +48,20 @@ export function drawNotebookMap(context,notebook,key,player,enemies,yaw,{createC
  context.strokeStyle='#17221a';context.lineWidth=.5;
  for(let x=minX;x<maxX;x+=10){context.beginPath();context.moveTo(px(x),oz);context.lineTo(px(x),height-oz);context.stroke();}
  for(let z=minZ;z<maxZ;z+=10){context.beginPath();context.moveTo(ox,pz(z));context.lineTo(width-ox,pz(z));context.stroke();}
- context.drawImage(cached.explored,0,0);
+ context.drawImage(revealAll?cached.base:cached.explored,0,0);
  const current=key===notebookView(player),large=width>300;
- // Symbols are added only when their position has been discovered, never from a future floor.
+ // Ordinary maps gate symbols by exploration; the developer view reveals every level.
  for(const stair of view.outside?[]:floor.stairs??[]){
   const x=stair.label?.[0]??stair.x*floor.cellSize,z=stair.label?.[1]??stair.z*floor.cellSize;
-  if(!notebook.known(key,x,z))continue;
+  if(!revealAll&&!notebook.known(key,x,z))continue;
   context.fillStyle='#c6aedb';context.fillRect(px(x)-2,pz(z)-2,4,4);
   if(large){context.font='12px Arial';context.textAlign='center';context.fillText(stair.id??'S',px(x),pz(z)-6);}
  }
  const exits=view.outside?notebook.views.filter(v=>!v.outside).flatMap(v=>v.floor.exits):floor.exits;
  for(const e of exits){const x=view.outside?e.destination[0]:e.worldX??e.x*floor.cellSize,z=view.outside?e.destination[2]:e.worldZ??e.z*floor.cellSize;
-  if(!notebook.known(key,x,z))continue;context.fillStyle='#c7e19b';context.fillRect(px(x)-2,pz(z)-2,4,4);
+  if(!revealAll&&!notebook.known(key,x,z))continue;context.fillStyle='#c7e19b';context.fillRect(px(x)-2,pz(z)-2,4,4);
  }
- if(large&&!view.outside)for(const room of floor.rooms??[]){const x=room.label?.[0]??room.x*floor.cellSize,z=room.label?.[1]??room.z*floor.cellSize;if(!room.id||!notebook.known(key,x,z))continue;context.fillStyle='#bdc7b1';context.font='11px Arial';context.textAlign='center';context.fillText(room.id,px(x),pz(z)+4);}
+ if(large&&!view.outside)for(const room of floor.rooms??[]){const x=room.label?.[0]??room.x*floor.cellSize,z=room.label?.[1]??room.z*floor.cellSize;if(!room.id||!revealAll&&!notebook.known(key,x,z))continue;context.fillStyle='#bdc7b1';context.font='11px Arial';context.textAlign='center';context.fillText(room.id,px(x),pz(z)+4);}
  if(current){
   for(const enemy of view.outside?[]:enemies){
    if(enemy.floor!==player.floor||Math.abs((enemy.y??floor.elevation??0)-(player.y??floor.elevation??0))>.6||Math.hypot(enemy.x-player.x,enemy.z-player.z)>REVEAL_RADIUS||!notebook.known(key,enemy.x,enemy.z)||!visible(floor,player,enemy))continue;

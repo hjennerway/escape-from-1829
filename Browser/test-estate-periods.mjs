@@ -63,10 +63,11 @@ function checkGround(year){
    assert.equal(material.customProgramCacheKey(),exterior.terrain.material.customProgramCacheKey(),'The grass keeps the same world projection');
   }
  }
- for(const [x,z,built,terrainOnly=false] of [[90,32,1870],[68,36,1849],[-64,37,1849],[80,46,1870,true],[55,-34,1870,true],[-55,49,1849,true],[-55,7.5,1849,true]]){
+ for(const [x,z,built,terrainOnly=false] of [[90,32,1870],[68,36,1849],[-64,37,1849,true],[-50,25.4,1849,true],[-50,25.6,1849,true],[-47,25.4,1849,true],[-47,25.6,1849,true],[80,46,1870,true],[55,-34,1870,true],[-55,49,1849,true],[-55,7.5,1849,true]]){
   const hit=groundHitAt(x,z);
   assert(hit?.object.material.userData.estateGrass,'Lawn remains grass in every period');
   assert.equal(hit.object===exterior.terrain,terrainOnly||year<built,`No raised lawn outline at ${x}, ${z} before ${built}`);
+  if(terrainOnly)assert(Math.abs(hit.point.y-exterior.terrain.position.y)<1e-6,'Continuous lawn stays at the terrain height');
  }
  for(const [x,z] of [[0,32],[0,60],[-23,-25],[23,-25]])assert(!groundAt(x,z)?.userData.estateGrass,'Original Reception approach and inner courts remain paved');
 }

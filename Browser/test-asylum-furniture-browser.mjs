@@ -2,12 +2,12 @@ import assert from 'node:assert/strict';
 import {spawn} from 'node:child_process';
 import {readFile,mkdir,writeFile} from 'node:fs/promises';
 import {fileURLToPath} from 'node:url';
-import {chromium} from 'playwright';
+import {launchHardwareBrowser} from './test-support/hardware-browser.mjs';
 
 const destination=new URL(process.env.FURNITURE_ARTIFACT_DIR??'./artifacts/room-furniture/',import.meta.url);await mkdir(destination,{recursive:true});
 const server=spawn(process.execPath,['Browser/serve.mjs'],{cwd:new URL('../',import.meta.url),windowsHide:true,env:{...process.env,PORT:'0'},stdio:'pipe'});
 const base=await new Promise((resolve,reject)=>{server.stdout.once('data',d=>resolve(String(d).match(/http:\/\/127\.0\.0\.1:\d+/)[0]));server.once('error',reject);});
-const browser=await chromium.launch({headless:true,executablePath:process.env.MODEL_CHROME_PATH??'C:/Program Files/Google/Chrome/Application/chrome.exe',args:['--use-angle=swiftshader','--enable-unsafe-swiftshader']});
+const browser=await launchHardwareBrowser({headless:true,executablePath:process.env.MODEL_CHROME_PATH??'C:/Program Files/Google/Chrome/Application/chrome.exe'});
 const errors=[],renders=[],retiredModelRequests=[];
 try{
  const page=await browser.newPage({viewport:{width:1100,height:750},reducedMotion:'reduce'});page.setDefaultTimeout(120000);page.setDefaultNavigationTimeout(120000);
@@ -19,7 +19,7 @@ try{
  await page.goto(base);await page.waitForFunction(()=>window.furnitureTest?.ready);
  await page.evaluate(()=>{const t=window.furnitureTest;t.start();t.arrival.update(3);t.pause();});
  const initial=await page.evaluate(()=>window.furnitureTest.floors.map(f=>f.furniture));
- assert.equal(new Set(initial.flat().map(i=>i.kind)).size,30);
+ assert.equal(new Set(initial.flat().map(i=>i.kind)).size,34);
  for(const [name,id,floor,kind] of [['visitors','Visitors',1,'table'],['ward-service','WardService',0,'linenCupboard'],['recreation','Recreation',1,'table'],['ward','R32',0,'bed'],['wardrobe','R7',0,'cupboard'],['medicine','R7',0,'apothecary'],['reading','R19',0,'bookcase'],['staff','R30',0,'table'],['upstairs-ward','R2',1,'bed'],['workshop','B3',2,'table'],['upper-records','R41',3,'bookcase'],['hydrotherapy','R1',0,'hydroBath'],['cold-shower','R12',0,'hydroShower'],['surgery','R6',0,'operatingTable'],['early-electricity','R29',0,'electrotherapy'],['bloodletting','R7',0,'bloodletting'],['ect','R8',0,'ectMachine']]){
   await page.evaluate(args=>window.furnitureTest.pose(...args),[id,floor,kind]);await page.waitForTimeout(180);await page.screenshot({path:fileURLToPath(new URL(name+'.png',destination))});
   renders.push(await page.evaluate(name=>({name,calls:window.furnitureTest.renderer.info.render.calls,triangles:window.furnitureTest.renderer.info.render.triangles}),name));
@@ -97,6 +97,6 @@ try{
  });
  for(const kind of ['chair','table','cupboard','bench','bookcase','bed','hydroBath','hydroShower','operatingTable','electrotherapy','apothecary','bloodletting','ectMachine']){await preview.evaluate(k=>window.furniturePreview.show(k),kind);await preview.screenshot({path:fileURLToPath(new URL('model-'+kind+'.png',destination))});}
  await preview.close();
- assert.deepEqual(retiredModelRequests,[],'The retired Shaker cupboard is never loaded');assert.deepEqual(errors,[]);await writeFile(new URL('validation.json',destination),JSON.stringify({models:30,items:initial.flat().length,geometryChecks,rendering,walking,renders,newGameVariation:true,desktopMobile:true,explore:true,retiredModelRequests,errors},null,2)+'\n');
- console.log('PASS: actual Escape/Explore furnishings, thirty models, desktop/mobile views, matching rendered/collision transforms, keyboard collision, fixed landmarks and new-game variation, no runtime/shader errors.');
+ assert.deepEqual(retiredModelRequests,[],'The retired Shaker cupboard is never loaded');assert.deepEqual(errors,[]);await writeFile(new URL('validation.json',destination),JSON.stringify({models:34,items:initial.flat().length,geometryChecks,rendering,walking,renders,newGameVariation:true,desktopMobile:true,explore:true,retiredModelRequests,errors},null,2)+'\n');
+ console.log('PASS: actual Escape/Explore furnishings, thirty-four models, desktop/mobile views, matching rendered/collision transforms, keyboard collision, fixed landmarks and new-game variation, no runtime/shader errors.');
 }finally{await browser.close();server.kill();}

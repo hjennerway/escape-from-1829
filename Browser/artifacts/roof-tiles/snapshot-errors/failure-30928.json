@@ -1,0 +1,12 @@
+{
+  "actual": {
+    "count": 20834,
+    "sha256": "1a3ed787fa5a6fcc69f4e1fbb3e1f9a440e0b4ee93f9833c0b100aad8d1efc61"
+  },
+  "expected": {
+    "count": 20834,
+    "sha256": "4a7ff424ec7eef7cd5074e140e39b8f0d00f8bbcb372d1d3878546fd9ba1c938"
+  },
+  "message": "Retained wing geometry only translates\n+ actual - expected\n\n  {\n    count: 20834,\n+   sha256: '1a3ed787fa5a6fcc69f4e1fbb3e1f9a440e0b4ee93f9833c0b100aad8d1efc61'\n-   sha256: '4a7ff424ec7eef7cd5074e140e39b8f0d00f8bbcb372d1d3878546fd9ba1c938'\n  }\n",
+  "stack": "AssertionError [ERR_ASSERTION]: Retained wing geometry only translates\n+ actual - expected\n\n  {\n    count: 20834,\n+   sha256: '1a3ed787fa5a6fcc69f4e1fbb3e1f9a440e0b4ee93f9833c0b100aad8d1efc61'\n-   sha256: '4a7ff424ec7eef7cd5074e140e39b8f0d00f8bbcb372d1d3878546fd9ba1c938'\n  }\n\n    at file:///C:/Users/Harry/Documents/_escape-from-1829/Browser/test-larkton-recess.mjs:17:8\n    at ModuleJob.run (node:internal/modules/esm/module_job:561:25)\n    at async node:internal/modules/esm/loader:647:26\n    at async asyncRunEntryPointWithESMLoader (node:internal/modules/run_main:101:5)"
+}

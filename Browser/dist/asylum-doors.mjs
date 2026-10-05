@@ -93,7 +93,7 @@ export function buildRoomDoors(floor){
   const door={roomId:room.id,openingX:opening.x,openingZ:opening.z,dx:opening.dx,dz:opening.dz,roomSide,hingeSide,hingeDistances,
    hingeX:opening.x+opening.dx*hingeSide*width/2+normal[0]*roomSide*hingeOffset,
    hingeZ:opening.z+opening.dz*hingeSide*width/2+normal[1]*roomSide*hingeOffset,
-   width,depth:ROOM_DOOR_THICKNESS,y:.04,height:opening.height-.125,targetAngle:randomAngle(floor.id,room.id)};
+   width,depth:ROOM_DOOR_THICKNESS,y:.04,height:opening.height-.125,targetAngle:Math.min(randomAngle(floor.id,room.id),room.doorMaxOpenAngle??Infinity)};
   const nearby=polygons=>polygons.filter(p=>Math.min(...p.map(v=>v[0]))<door.hingeX+width+.5&&Math.max(...p.map(v=>v[0]))>door.hingeX-width-.5&&Math.min(...p.map(v=>v[1]))<door.hingeZ+width+.5&&Math.max(...p.map(v=>v[1]))>door.hingeZ-width-.5);
   const walls=nearby(masonry),skirts=nearby(skirting);
   const blocked=angle=>{

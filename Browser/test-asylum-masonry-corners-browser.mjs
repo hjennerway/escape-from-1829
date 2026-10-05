@@ -1,13 +1,13 @@
 import assert from 'node:assert/strict';
 import {readFile,writeFile,mkdir} from 'node:fs/promises';
 import {fileURLToPath} from 'node:url';
-import {spawn} from 'node:child_process';
-import {chromium} from 'playwright';
+import {startTestServer} from './test-support/server.mjs';
+import {launchHardwareBrowser} from './test-support/hardware-browser.mjs';
 
-const mode=process.argv[2]??'after',port=1874,destination=new URL('./artifacts/asylum-masonry-corners/',import.meta.url);
+const mode=process.argv[2]??'after',destination=new URL('./artifacts/asylum-masonry-corners/',import.meta.url);
 await mkdir(destination,{recursive:true});
-const server=spawn(process.execPath,['Browser/serve.mjs'],{cwd:new URL('../',import.meta.url),windowsHide:true,stdio:'ignore',env:{...process.env,PORT:String(port)}});
-const browser=await chromium.launch({headless:true,executablePath:process.env.MODEL_CHROME_PATH??'C:/Program Files/Google/Chrome/Application/chrome.exe',args:['--use-angle=swiftshader','--enable-unsafe-swiftshader']});
+const {server,base}=await startTestServer();
+const browser=await launchHardwareBrowser({headless:true,executablePath:process.env.MODEL_CHROME_PATH??'C:/Program Files/Google/Chrome/Application/chrome.exe'});
 try{
  const page=await browser.newPage({viewport:{width:1440,height:900}}),errors=[];page.setDefaultTimeout(60000);
  page.on('pageerror',e=>errors.push(e.message));
@@ -16,7 +16,7 @@ try{
  if(mode==='before')for(const module of ['architecture','skirting'])await page.route(`**/asylum-${module}.mjs`,async route=>route.fulfill({contentType:'text/javascript',body:await readFile(new URL(`before-${module}.mjs.txt`,destination),'utf8')}));
  await page.route('**/game.mjs',async route=>route.fulfill({contentType:'text/javascript',body:(await readFile(new URL('./dist/game.mjs',import.meta.url),'utf8'))+`
 window.masonryCheck={get ready(){return ready;},get renderer(){return renderer;},start(){start();arrivalCutscene.update(3);},pose(x,z,floor,tx,tz){Object.assign(player,{x,z,floor,y:floors[floor].elevation,stair:null,outside:false});scene.add(torch,torchTarget);showFloor();yaw=Math.atan2(x-tx,z-tz);pitch=-.22;camera.position.set(x,player.y+1.65,z);camera.rotation.set(pitch,yaw,0);state='paused';$('arrivalFade').hidden=true;$('result').hidden=true;$('hud').hidden=false;$('interact').hidden=true;},walk(points,floor){this.pose(...points[0],floor,...points[1]);for(const [x,z] of points.slice(1)){moveAsylumActor(floors,player,x-player.x,z-player.z);if(Math.hypot(player.x-x,player.z-z)>.001)return false;}return true;}};`}));
- await page.goto(`http://127.0.0.1:${port}`);await page.waitForFunction(()=>window.masonryCheck?.ready,null,{timeout:120000});
+ await page.goto(`${base}`);await page.waitForFunction(()=>window.masonryCheck?.ready,null,{timeout:120000});
  await page.evaluate(()=>window.masonryCheck.start());await page.addStyleTag({content:'#hud,header,.vignette{display:none!important}'});
  const views=[
   ['reception-west',-7.6,8.65,0,-8.6,7],

@@ -1,0 +1,27 @@
+[
+  {
+    "name": "test-west-library.mjs",
+    "code": 0,
+    "output": "PASS: five exterior-shaped Library rooms, 26 upper sashes, open redirected S5 continuation, both F4 levels, stocked shelves/tables, notebook discovery and 80 furnished/unfurnished physical routes including disconnected upper wings.\n"
+  },
+  {
+    "name": "test-asylum-room-doors.mjs",
+    "code": 0,
+    "output": "PASS: 95 open room doors, 1140 rendered hinge attachments, fixed hinge corners and casing clearance through every swing, nearest-wall hinges, 0/180 angle convention, stable 100–130 degree variation, 7 rendered wall contacts, analytic/mirrored tight-wall fixtures, 2280 wall edge rays, 86 walked door collisions, clear circulation and furniture.\n"
+  },
+  {
+    "name": "test-asylum-door-frames.mjs",
+    "code": 0,
+    "output": "PASS: 24 outside frames and 97 regular-depth room frames on four floors, 2918 masonry support/face-clearance rays and 388 casing-depth rays, closed leaves and unchanged exterior anchors.\n"
+  },
+  {
+    "name": "test-reception-second-floor.mjs",
+    "code": 0,
+    "output": "PASS: five second-floor rooms, five exterior-aligned sashes (90 clear panes), retained stairs/45-degree corners, compact passage, closed stores, five two-sided door names, 40 physically walked furnished/unfurnished cross-floor routes and notebook discovery.\n"
+  },
+  {
+    "name": "test-developer-options.mjs",
+    "code": 0,
+    "output": "PASS: gated/repeat-safe shortcuts, session state, eight internal connections, 418 exterior surfaces, actual flight positions, timeline and batch parity without model mutation.\n"
+  }
+]

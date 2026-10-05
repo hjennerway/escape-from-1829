@@ -1,4 +1,5 @@
 import {ESCAPE_CHAPEL} from './chapel.mjs';
+import {CHURTON_CHURCH_LANE_Z} from './road-centerlines.mjs';
 
 // Fit the four approaches and rounded churchyard in Research/church/googleearth.png
 // to the existing church and saved Parsons Lane edges. Coordinates are church-local.
@@ -18,15 +19,17 @@ function curve(start,segments,steps=20){
  return points;
 }
 
-// An open horseshoe: the clock end meets the existing lane, while the far end
-// sweeps well clear of the vestry. The side walks divide the inner lawn into bays.
+// A closed loop: the clock-end arc clears the front feet now that the lane is
+// centred between the buildings. The far end remains clear of the vestry.
 export const CHURCH_PERIMETER=curve([12.4,15.8],[
  [[14.2,15.4],[14.8,13.2],[14.8,10]],
  [[14.8,3],[14.8,-6],[14.5,-11.5]],
  [[14.2,-19.8],[8.7,-27.3],[1,-28]],
  [[-6.7,-28.7],[-13.5,-23],[-14.7,-16]],
  [[-15.2,-10],[-15,-1],[-14.8,6]],
- [[-14.7,11],[-14.8,14],[-11.7,15]]
+ [[-14.7,11],[-14.8,14],[-11.7,15]],
+ [[-9.8,18.8],[-7,19],[0,19]],
+ [[5,19],[10.4,18.8],[12.4,15.8]]
 ]);
 export const CHURCH_APPROACHES=Object.freeze([
  {name:'Church garden rear approach',points:[[5.15,-11.5],[14.5,-11.5]],width:1.7},
@@ -35,8 +38,9 @@ export const CHURCH_APPROACHES=Object.freeze([
  {name:'Church porch approach',points:[[-9.3,5.5],[-14.8,5.5]],width:2.1}
 ]);
 export const CHURCH_LANE_LINKS=Object.freeze([
- {name:'Church front lane link',points:curve([-14.8,6],[[[-15.1,9],[-17.2,10],[-18.97,10.5]]]),width:1.8},
- {name:'Church rear lane link',points:curve([-14.7,-16],[[[-16.3,-16.3],[-17.1,-18],[-15.98,-21]]]),width:1.8}
+ {name:'Church clock-front lane link',points:[[0,19],[0,CHURTON_CHURCH_LANE_Z-ESCAPE_CHAPEL.z-2.7]],width:1.8},
+ {name:'Church front lane link',points:curve([-14.8,6],[[[-15.1,9],[-17.2,10],[-20.1,10.5]]]),width:1.8},
+ {name:'Church rear lane link',points:curve([-14.7,-16],[[[-16.3,-16.3],[-17.1,-18],[-17.15,-21]]]),width:1.8}
 ]);
 
 export function createChurchGrounds(THREE){
@@ -55,10 +59,14 @@ export function createChurchGrounds(THREE){
  const texture=new THREE.DataTexture(data,size,size);texture.wrapS=texture.wrapT=THREE.RepeatWrapping;texture.needsUpdate=true;paving.map=texture;
  function ribbon(name,points,width,mat,y){
   const positions=[],indices=[],uvs=[];
+  const closed=Math.hypot(points[0][0]-points.at(-1)[0],points[0][1]-points.at(-1)[1])<1e-8;
   // Averaged segment normals make one continuous strip, with no overlapping
   // coplanar triangles or chains of circular patches around the curves.
   for(let i=0;i<points.length;i++){
-   const a=points[Math.max(0,i-1)],b=points[i],c=points[Math.min(points.length-1,i+1)];
+   // Both seam vertices use the same periodic tangent, keeping paving and
+   // edging joined across their full widths, rather than just the centreline.
+   const seam=closed&&(i===0||i===points.length-1);
+   const a=points[seam?points.length-2:Math.max(0,i-1)],b=points[i],c=points[seam?1:Math.min(points.length-1,i+1)];
    const dx=c[0]-a[0],dz=c[1]-a[1],length=Math.hypot(dx,dz);
    const ox=-dz/length*width/2,oz=dx/length*width/2;
    for(const side of [-1,1]){const x=b[0]+side*ox,z=b[1]+side*oz;positions.push(x,y,z);uvs.push(x/2,z/2);}

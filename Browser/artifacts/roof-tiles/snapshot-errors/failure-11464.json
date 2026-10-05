@@ -1,0 +1,12 @@
+{
+  "actual": {
+    "primitives": 818948,
+    "sha256": "521e98bfb7c17f825724268a5dab15eb7cc47173112571bc3334ed949b7a9f18"
+  },
+  "expected": {
+    "primitives": 818930,
+    "sha256": "7cfb26f1ff8383b299619084b1a9e7e01fcb8bb64565b72953a3b6433035e69b"
+  },
+  "message": "All geometry outside the marked frontage stays exact\n+ actual - expected\n\n  {\n+   primitives: 818948,\n+   sha256: '521e98bfb7c17f825724268a5dab15eb7cc47173112571bc3334ed949b7a9f18'\n-   primitives: 818930,\n-   sha256: '7cfb26f1ff8383b299619084b1a9e7e01fcb8bb64565b72953a3b6433035e69b'\n  }\n",
+  "stack": "AssertionError [ERR_ASSERTION]: All geometry outside the marked frontage stays exact\n+ actual - expected\n\n  {\n+   primitives: 818948,\n+   sha256: '521e98bfb7c17f825724268a5dab15eb7cc47173112571bc3334ed949b7a9f18'\n-   primitives: 818930,\n-   sha256: '7cfb26f1ff8383b299619084b1a9e7e01fcb8bb64565b72953a3b6433035e69b'\n  }\n\n    at file:///C:/Users/Harry/Documents/_escape-from-1829/Browser/test-jarman.mjs:11:8\n    at ModuleJob.run (node:internal/modules/esm/module_job:561:25)\n    at async node:internal/modules/esm/loader:647:26\n    at async asyncRunEntryPointWithESMLoader (node:internal/modules/run_main:101:5)"
+}

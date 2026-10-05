@@ -9,26 +9,26 @@ import {createNotebook} from './dist/notebook.mjs';
 import {furnishAsylum} from './dist/asylum-furniture.mjs';
 
 const plan=JSON.parse(await readFile(new URL('./dist/asylum-plan.json',import.meta.url)));
-const floors=buildAsylumLayout(plan).floors,upper=floors[3],scene=new THREE.Scene();
+const floors=buildAsylumLayout(plan).floors,upper=floors[3],receptionRooms=upper.rooms.filter(r=>r.label[0]>-18),receptionWindows=upper.windows.filter(w=>w.x>-18),scene=new THREE.Scene();
 assert.equal(upper.name,'Second floor');assert.equal(upper.elevation,8.4);
-assert.deepEqual(upper.rooms.map(r=>r.id),['R41','R42','R43','R44','R45']);
-assert.deepEqual(upper.stairs.map(s=>s.id),['S1']);assert.equal(upper.exits.length,0);
-assert.deepEqual(upper.rooms.map(r=>[r.windows.filter(w=>w.axis==='z').length,r.windows.filter(w=>w.axis==='diagonal').length]),[[1,0],[1,1],[1,1],[0,0],[0,0]]);
-assert.deepEqual(upper.doorways.map(d=>d.roomId),['R41','R42','R43','R44','R45']);
-assert.deepEqual(upper.doorways.map(d=>d.width),[1.3,1.3,1.3,1.3,1.2]);
+assert.deepEqual(receptionRooms.map(r=>r.id),['R41','R42','R43','R44','R45']);
+assert.deepEqual(upper.stairs.map(s=>s.id),['S1','S5']);assert.equal(upper.exits.length,1);
+assert.deepEqual(receptionRooms.map(r=>[r.windows.filter(w=>w.axis==='z').length,r.windows.filter(w=>w.axis==='diagonal').length]),[[1,0],[1,1],[1,1],[0,0],[0,0]]);
+assert.deepEqual(upper.doorways.filter(d=>d.x>-18).map(d=>d.roomId),['R41','R42','R43','R44','R45']);
+assert.deepEqual(upper.doorways.filter(d=>d.x>-18).map(d=>d.width),[1.3,1.3,1.3,1.3,1.2]);
 assert.deepEqual(upper.rooms.find(r=>r.id==='R41').points,[[-2,4.4],[2,4.4],[2,11.2],[-2,11.2]]);
 assert.deepEqual(upper.rooms.find(r=>r.id==='R44').points,[[-8.6,13.2],[8.6,13.2],[8.6,16],[-8.6,16]]);
 assert.deepEqual(upper.rooms.find(r=>r.id==='R45').points,[[-16,7],[-8.6,7],[-8.6,9.6],[-16,9.6]]);
 assert.equal(upper.corridors.find(c=>c.id==='C24').width,2);
 buildAsylumArchitecture(THREE,scene,upper);scene.updateMatrixWorld(true);
-assert.equal(scene.getObjectByName('Asylum Glass').count,5,'Exactly the five specified windows, without inferred extra sashes');
+assert.equal(receptionWindows.length,5,'Exactly the five specified Reception windows');
 // Read the actual exterior sash schedule, without constructing the estate.
 const model=new THREE.Group(),mesh=()=>new THREE.Object3D();
 addCentralBack(THREE,{model,mesh,box:mesh,worldUV:g=>g,material:()=>null,details:{sash(){}}});
 const exterior=model.userData.centralBackOpenings.filter(w=>w.y===12.5);
 assert.equal(exterior.length,5);
 const ray=new THREE.Raycaster();let panes=0;
-for(const w of upper.windows){
+for(const w of receptionWindows){
  const outside=exterior.find(p=>Math.hypot(w.x-(p.x-p.nx*.065),w.z-(p.z-p.nz*.065))<1e-6);
  assert(outside,'Interior sash aligns with a circled exterior sash');assert.equal(w.width,outside.w);assert.equal(w.height,outside.h);
  const wall=upper.walls.find(p=>segmentDistance(w.x,w.z,p.a,p.b)<1e-6);assert(wall);
@@ -70,12 +70,12 @@ function walk(from,to){
  assert.equal(actor.floor,to.floor);assert.equal(actor.y,floors[to.floor].elevation);return actor;
 }
 const starts=[{x:0,z:14,floor:0},{x:0,z:14,floor:1},{x:-31.1,z:-7,floor:2}];
-for(const room of upper.rooms)for(const start of starts){const end=walk(start,{x:room.label[0],z:room.label[1],floor:3});walk(end,start);}
+for(const room of receptionRooms)for(const start of starts){const end=walk(start,{x:room.label[0],z:room.label[1],floor:3});walk(end,start);}
 const journal=createNotebook(floors);assert(!journal.availableViews().some(v=>v.index===3));
-for(const room of upper.rooms)journal.explore({x:room.label[0],z:room.label[1],floor:3,y:8.4});
+for(const room of receptionRooms)journal.explore({x:room.label[0],z:room.label[1],floor:3,y:8.4});
 assert(journal.availableViews().some(v=>v.name==='Second floor'));assert(journal.entries.find(e=>e.id==='places:3').text.includes('R42'));
 furnishAsylum(floors);
-for(const room of upper.rooms){
+for(const room of receptionRooms){
  assert(flatWalkable(upper,...room.label),'Furnished room centre remains accessible');
  const items=upper.furniture.filter(i=>i.roomId===room.id);
  assert(items.length,'Every room has appropriate furnishings');

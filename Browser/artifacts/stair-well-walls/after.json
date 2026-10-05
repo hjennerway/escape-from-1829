@@ -1,0 +1,484 @@
+{
+  "views": [
+    {
+      "stair": "S1",
+      "lower": 2,
+      "upper": 0,
+      "name": "approach"
+    },
+    {
+      "stair": "S1",
+      "lower": 2,
+      "upper": 0,
+      "name": "lower-flight"
+    },
+    {
+      "stair": "S1",
+      "lower": 2,
+      "upper": 0,
+      "name": "return"
+    },
+    {
+      "stair": "S1",
+      "lower": 2,
+      "upper": 0,
+      "name": "arrival"
+    },
+    {
+      "stair": "S1",
+      "lower": 0,
+      "upper": 1,
+      "name": "approach"
+    },
+    {
+      "stair": "S1",
+      "lower": 0,
+      "upper": 1,
+      "name": "lower-flight"
+    },
+    {
+      "stair": "S1",
+      "lower": 0,
+      "upper": 1,
+      "name": "return"
+    },
+    {
+      "stair": "S1",
+      "lower": 0,
+      "upper": 1,
+      "name": "arrival"
+    },
+    {
+      "stair": "S1",
+      "lower": 1,
+      "upper": 3,
+      "name": "approach"
+    },
+    {
+      "stair": "S1",
+      "lower": 1,
+      "upper": 3,
+      "name": "lower-flight"
+    },
+    {
+      "stair": "S1",
+      "lower": 1,
+      "upper": 3,
+      "name": "return"
+    },
+    {
+      "stair": "S1",
+      "lower": 1,
+      "upper": 3,
+      "name": "arrival"
+    },
+    {
+      "stair": "S3",
+      "lower": 0,
+      "upper": 1,
+      "name": "approach"
+    },
+    {
+      "stair": "S3",
+      "lower": 0,
+      "upper": 1,
+      "name": "lower-flight"
+    },
+    {
+      "stair": "S3",
+      "lower": 0,
+      "upper": 1,
+      "name": "return"
+    },
+    {
+      "stair": "S3",
+      "lower": 0,
+      "upper": 1,
+      "name": "arrival"
+    },
+    {
+      "stair": "S4",
+      "lower": 0,
+      "upper": 1,
+      "name": "approach"
+    },
+    {
+      "stair": "S4",
+      "lower": 0,
+      "upper": 1,
+      "name": "lower-flight"
+    },
+    {
+      "stair": "S4",
+      "lower": 0,
+      "upper": 1,
+      "name": "return"
+    },
+    {
+      "stair": "S4",
+      "lower": 0,
+      "upper": 1,
+      "name": "arrival"
+    },
+    {
+      "stair": "S5",
+      "lower": 2,
+      "upper": 0,
+      "name": "approach"
+    },
+    {
+      "stair": "S5",
+      "lower": 2,
+      "upper": 0,
+      "name": "lower-flight"
+    },
+    {
+      "stair": "S5",
+      "lower": 2,
+      "upper": 0,
+      "name": "return"
+    },
+    {
+      "stair": "S5",
+      "lower": 2,
+      "upper": 0,
+      "name": "arrival"
+    },
+    {
+      "stair": "S5",
+      "lower": 0,
+      "upper": 1,
+      "name": "approach"
+    },
+    {
+      "stair": "S5",
+      "lower": 0,
+      "upper": 1,
+      "name": "lower-flight"
+    },
+    {
+      "stair": "S5",
+      "lower": 0,
+      "upper": 1,
+      "name": "return"
+    },
+    {
+      "stair": "S5",
+      "lower": 0,
+      "upper": 1,
+      "name": "arrival"
+    },
+    {
+      "stair": "S5",
+      "lower": 1,
+      "upper": 3,
+      "name": "straight-bottom"
+    },
+    {
+      "stair": "S5",
+      "lower": 1,
+      "upper": 3,
+      "name": "straight-top"
+    }
+  ],
+  "mobile": true,
+  "movements": [
+    {
+      "stair": null,
+      "lower": 2,
+      "upper": 0,
+      "reverse": false,
+      "passes": [
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true
+      ],
+      "floor": 0,
+      "outside": false
+    },
+    {
+      "stair": null,
+      "lower": 2,
+      "upper": 0,
+      "reverse": true,
+      "passes": [
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true
+      ],
+      "floor": 2,
+      "outside": false
+    },
+    {
+      "stair": null,
+      "lower": 0,
+      "upper": 1,
+      "reverse": false,
+      "passes": [
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true
+      ],
+      "floor": 1,
+      "outside": false
+    },
+    {
+      "stair": null,
+      "lower": 0,
+      "upper": 1,
+      "reverse": true,
+      "passes": [
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true
+      ],
+      "floor": 0,
+      "outside": false
+    },
+    {
+      "stair": null,
+      "lower": 1,
+      "upper": 3,
+      "reverse": false,
+      "passes": [
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true
+      ],
+      "floor": 3,
+      "outside": false
+    },
+    {
+      "stair": null,
+      "lower": 1,
+      "upper": 3,
+      "reverse": true,
+      "passes": [
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true
+      ],
+      "floor": 1,
+      "outside": false
+    },
+    {
+      "stair": null,
+      "lower": 0,
+      "upper": 1,
+      "reverse": false,
+      "passes": [
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true
+      ],
+      "floor": 1,
+      "outside": false
+    },
+    {
+      "stair": null,
+      "lower": 0,
+      "upper": 1,
+      "reverse": true,
+      "passes": [
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true
+      ],
+      "floor": 0,
+      "outside": false
+    },
+    {
+      "stair": null,
+      "lower": 0,
+      "upper": 1,
+      "reverse": false,
+      "passes": [
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true
+      ],
+      "floor": 1,
+      "outside": false
+    },
+    {
+      "stair": null,
+      "lower": 0,
+      "upper": 1,
+      "reverse": true,
+      "passes": [
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true
+      ],
+      "floor": 0,
+      "outside": false
+    },
+    {
+      "stair": null,
+      "lower": 2,
+      "upper": 0,
+      "reverse": false,
+      "passes": [
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true
+      ],
+      "floor": 0,
+      "outside": false
+    },
+    {
+      "stair": null,
+      "lower": 2,
+      "upper": 0,
+      "reverse": true,
+      "passes": [
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true
+      ],
+      "floor": 2,
+      "outside": false
+    },
+    {
+      "stair": null,
+      "lower": 0,
+      "upper": 1,
+      "reverse": false,
+      "passes": [
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true
+      ],
+      "floor": 1,
+      "outside": false
+    },
+    {
+      "stair": null,
+      "lower": 0,
+      "upper": 1,
+      "reverse": true,
+      "passes": [
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true
+      ],
+      "floor": 0,
+      "outside": false
+    },
+    {
+      "stair": null,
+      "lower": 1,
+      "upper": 3,
+      "reverse": false,
+      "passes": [
+        true,
+        true,
+        true,
+        true,
+        true
+      ],
+      "floor": 3,
+      "outside": false
+    },
+    {
+      "stair": null,
+      "lower": 1,
+      "upper": 3,
+      "reverse": true,
+      "passes": [
+        true,
+        true,
+        true,
+        true,
+        true
+      ],
+      "floor": 1,
+      "outside": false
+    }
+  ],
+  "errors": []
+}

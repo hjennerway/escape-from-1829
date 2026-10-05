@@ -1,0 +1,18 @@
+{
+  "seeds": [
+    1829,
+    42
+  ],
+  "retainedFurnishingsIdentical": true,
+  "geometryDoorsWindowsStairsPreserved": true,
+  "changedRooms": [
+    "R5",
+    "R16",
+    "R33",
+    "R35"
+  ],
+  "floors": [
+    0,
+    1
+  ]
+}

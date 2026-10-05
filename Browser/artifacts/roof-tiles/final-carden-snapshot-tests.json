@@ -1,0 +1,7 @@
+[
+  {
+    "command": "node test-annexe-carden.mjs",
+    "code": 0,
+    "output": "PASS: 19568 untouched primitives; two high tower sashes, removed bay, exact canted conservatory shape, stepped footprint, three reflected hall dormers, exposed glazing, roof normals, collisions and Historic visibility.\nPASS: 294 tower primitives shortened exactly 15%; new roof shortened 15%; 130 conservatory primitives exact; extended low roof/wall, visible windows and collision coverage.\n"
+  }
+]

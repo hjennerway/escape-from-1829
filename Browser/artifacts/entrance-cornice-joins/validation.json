@@ -1,0 +1,33 @@
+{
+  "scope": "Local entrance/courtyard geometry only; no full suite or compiled-model rebuild",
+  "results": [
+    {
+      "name": "original-roof",
+      "exitCode": 1,
+      "expectedFailure": true
+    },
+    {
+      "name": "original-return",
+      "exitCode": 1,
+      "expectedFailure": true
+    },
+    {
+      "name": "east-boundary",
+      "exitCode": 0,
+      "expectedFailure": false
+    },
+    {
+      "name": "west-boundary",
+      "exitCode": 0,
+      "expectedFailure": false
+    },
+    {
+      "name": "inside-corners",
+      "exitCode": 0,
+      "expectedFailure": false
+    }
+  ],
+  "renderedProbes": 15,
+  "hardware": "NVIDIA GeForce RTX 3090 Ti / Direct3D11",
+  "exports": "Browser modelling sources only; compiled aerial, Unity, Blender and packaged exports not regenerated"
+}

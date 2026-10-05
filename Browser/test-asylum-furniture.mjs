@@ -21,7 +21,7 @@ function polygonsOverlap(a,b){
 }
 function footprint(item){return [-1,1].flatMap(u=>(u===-1?[-1,1]:[1,-1]).map(v=>{const c=Math.cos(item.rotation),s=Math.sin(item.rotation);return [item.x+c*u*item.width/2+s*v*item.depth/2,item.z-s*u*item.width/2+c*v*item.depth/2];}));}
 function frontStrip(item){const c=Math.cos(item.rotation),s=Math.sin(item.rotation);return [[-item.width/2-.10,0],[item.width/2+.10,0],[item.width/2+.10,1],[-item.width/2-.10,1]].map(([u,v])=>[item.x+c*u+s*(item.depth/2+v),item.z-s*u+c*(item.depth/2+v)]);}
-assert.equal(Object.keys(FURNITURE_CATALOG).length,30);
+assert.equal(Object.keys(FURNITURE_CATALOG).length,34);
 assert.equal(FURNITURE_CATALOG.chair.source,'windsor_chair');assert.equal(FURNITURE_CATALOG.cupboard.procedural,true);assert.equal(FURNITURE_CATALOG.bench.source,'panca_50');
 for(const [key,value] of Object.entries({width:1.02,depth:2.10,height:.92}))assert(Math.abs(FURNITURE_CATALOG.bed[key]/value-1.3)<1e-12,'Beds are 130% in every dimension, including collisions');
 for(const [kind,previous] of Object.entries({chair:{width:.48,depth:.47,height:.90},table:{width:1.50,depth:.82,height:.76}}))for(const [key,value] of Object.entries(previous))assert(Math.abs(FURNITURE_CATALOG[kind][key]/value-1.3)<1e-12,`${kind}: 130% in every dimension, including collisions`);
@@ -40,6 +40,33 @@ for(const x of [-.5,0,.5])for(const originalY of [.24,.5,1.15,1.8,2.02]){
  assert(hit&&hit.point.z>.20,'Doors close the full front, including the old open-shelf and drawer areas');
 }
 furnishAsylum(floors,{seed:seeds[0]});const baseline=structuredClone(fixed()),firstVariation=structuredClone(variation());
+// Extend the existing mirrored outer-ward rows without moving their four
+// original bed footprints. Every new bed must retain usable foot access.
+for(const floor of floors.filter(f=>f.id===0||f.id===1))for(const roomId of ['R2','R13']){
+ const beds=floor.furniture.filter(i=>i.roomId===roomId&&i.kind==='bed'),side=roomId==='R13'?1:-1;
+ assert.equal(beds.length,10,`${floor.id} ${roomId}: six additional fixed beds`);
+ for(const z of [-16.435,-12.565]){
+  const row=beds.filter(i=>Math.abs(i.z-z)<1e-8).sort((a,b)=>Math.abs(a.x)-Math.abs(b.x));
+  assert.equal(row.length,5,'Five beds align in each existing row');
+  for(const [slot,bed] of row.entries()){
+   assert(Math.abs(bed.x-side*(23.7375+1.975*slot))<1e-8,'Original positions and row spacing remain');
+   assert(!bed.variable&&Math.abs(Math.sin(bed.rotation))<1e-8&&Math.abs(Math.cos(bed.rotation)-(z<-14.5?1:-1))<1e-8,'Both rows face the middle aisle');
+   const target={x:bed.x,z:bed.z+Math.cos(bed.rotation)*(bed.depth/2+.50),floor:floor.id,y:floor.elevation};
+   assert(flatWalkable(floor,target.x,target.z,.34),'Every bed foot has standing space');
+   const route=routeBetweenFloors(floors,origin,target);assert(route.length,'Every bed has a navigation route');
+   const actor={...origin};
+   for(const point of route){
+    let attempts=0;
+    while(Math.hypot(actor.x-point.x,actor.z-point.z)>.025&&attempts++<100){
+     const distance=Math.hypot(point.x-actor.x,point.z-actor.z),step=Math.min(.055,distance);
+     moveAsylumActor(floors,actor,(point.x-actor.x)*step/distance,(point.z-actor.z)*step/distance);
+    }
+    assert(attempts<100,'A player/pursuer physically follows each bed-access route');
+   }
+   assert.equal(actor.floor,floor.id);
+  }
+ }
+}
 const changedCells=floors.map(f=>Array.from(f.cells));
 furnishAsylum(floors,{seed:seeds[0]});assert.deepEqual(fixed(),baseline);assert.deepEqual(variation(),firstVariation,'Same seed restores the complete layout');
 assert.deepEqual(floors.map(f=>Array.from(f.cells)),changedCells,'Regeneration preserves matching navigation');
@@ -78,7 +105,7 @@ for(const seed of seeds){
    }
    if(item.kind==='cupboard')assert(!item.source&&!item.medical&&item.width===1.5&&item.depth===.65&&item.height===FURNITURE_CATALOG.bookcase.height,'Every former cupboard uses the solid wardrobe at bookshelf height');
    const room=[...floor.rooms,...floor.furnishingAreas].find(r=>r.id===item.roomId);assert(furnitureCorners(item).every(([x,z])=>insidePolygon(x,z,room.points)),'Visible furniture stays within its room or furnishing area');
-   if(item.kind==='bench')assert(['ward','bedroom','staffBedroom','store','workshop'].includes(room.purpose),'Panca seats have appropriate room uses');
+   if(item.kind==='bench')assert(['ward','centralDormitory','bedroom','staffBedroom','store','workshop'].includes(room.purpose),'Panca seats have appropriate room uses');
    if(FURNITURE_CATALOG[item.kind].decorative){if(!item.mounted){const support=floor.furniture.find(i=>i.id===item.supportId);assert(support&&Math.abs(item.y-support.y-support.height-.008)<1e-6,'Decorations rest on the furniture');}continue;}
    assert(!flatWalkable(floor,item.x,item.z),'Solid furniture blocks player and pursuer movement');
    assert(floor.cells[Math.round((item.z-floor.origin.z)/.5)*floor.width+Math.round((item.x-floor.origin.x)/.5)]===0,'Pursuer navigation contains the furniture');
@@ -102,4 +129,4 @@ for(const target of [{x:-36.225,z:31.95,floor:0},{x:29.8,z:-21.4,floor:1},{x:-34
 }
 assert(floors[0].furniture.some(i=>i.kind==='bed')&&floors[0].furniture.some(i=>i.kind==='bookcase'));
 const ratio=fixed().length/(fixed().length+variation().length);assert(ratio>=.70&&ratio<=.85,'Most furnishings remain fixed');
-console.log(`PASS: thirty furniture models, all room uses, ${seeds.length} reproducible layouts, ${wallContacts} flush storage backs, ${frontChecks} unobstructed one-metre shelf/cabinet fronts, ${routes} room/exit routes, all door crossings, ${collisionProbes} walked furniture collisions, NPC paths/spawns, supported decorations and eye-height sight (${Math.round(ratio*100)}% fixed).`);
+console.log(`PASS: thirty-four furniture models, all room uses, ${seeds.length} reproducible layouts, ${wallContacts} flush storage backs, ${frontChecks} unobstructed one-metre shelf/cabinet fronts, ${routes} room/exit routes, all door crossings, ${collisionProbes} walked furniture collisions, NPC paths/spawns, supported decorations and eye-height sight (${Math.round(ratio*100)}% fixed).`);

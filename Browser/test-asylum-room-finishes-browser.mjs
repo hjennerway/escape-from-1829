@@ -2,12 +2,12 @@ import assert from 'node:assert/strict';
 import {readFile,mkdir,writeFile} from 'node:fs/promises';
 import {fileURLToPath} from 'node:url';
 import {spawn} from 'node:child_process';
-import {chromium} from 'playwright';
+import {launchHardwareBrowser} from './test-support/hardware-browser.mjs';
 
 const destination=new URL('./artifacts/room-finishes/',import.meta.url);await mkdir(destination,{recursive:true});
 const server=spawn(process.execPath,['Browser/serve.mjs'],{cwd:new URL('../',import.meta.url),windowsHide:true,stdio:'pipe',env:{...process.env,PORT:'0'}});
 const base=await new Promise((resolve,reject)=>{server.stdout.once('data',d=>resolve(String(d).match(/http:\/\/127\.0\.0\.1:\d+/)[0]));server.once('error',reject);});
-const browser=await chromium.launch({headless:true,executablePath:process.env.MODEL_CHROME_PATH??'C:/Program Files/Google/Chrome/Application/chrome.exe',args:['--use-angle=swiftshader','--enable-unsafe-swiftshader']});
+const browser=await launchHardwareBrowser({headless:true,executablePath:process.env.MODEL_CHROME_PATH??'C:/Program Files/Google/Chrome/Application/chrome.exe'});
 const errors=[],captures=[];
 try{
  const page=await browser.newPage({viewport:{width:1280,height:800},reducedMotion:'reduce'});page.setDefaultTimeout(120000);page.setDefaultNavigationTimeout(120000);
@@ -38,7 +38,7 @@ try{
   ['rose-nursing',-29.5,-7,0,-29.5,-10.8],['sage-dayroom',-28,2,0,-30,-3.1],
   ['blue-dormitory',-28,-14,0,-28,-18.2],['upstairs-bedroom',-29,-21,1,-30,-24.6],
   ['corridor-retained',-20.5,7.2,0,-20.5,12],['treatment-retained',-29,-21,0,-30,-24.6],
-  ['bay-library',53.1,17.35,1,53.1,21],['basement-workshop',-34.7,-2,2,-34.7,1.3],
+  ['bay-library',53.1,17.35,1,53.1,21],['basement-padded-cell',-34.7,-2,2,-34.7,1.3],
   ['basement-mural',-34.65,3,2,-34.65,1.39],
   ['upper-office',5.3,8.1,3,5.3,4.4],['rail-close',-29,-9.6,0,-29,-10.8,-.2]
  ])await shot(name,pose);

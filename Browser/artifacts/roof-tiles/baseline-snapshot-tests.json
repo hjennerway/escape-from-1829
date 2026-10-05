@@ -1,0 +1,77 @@
+[
+  {
+    "command": "node test-larkton.mjs",
+    "code": 0,
+    "output": "PASS: Larkton removal, paving contact, green courtyard, open full-width Parsons connection, walking clearance, timeline and 18,942 protected primitives.\n"
+  },
+  {
+    "command": "node test-larkton-recess.mjs",
+    "code": 0,
+    "output": "PASS: complete wing translation, unchanged neighbouring wards, recessed doors, low room and walking clearance.\n"
+  },
+  {
+    "command": "node test-annexe-carden.mjs",
+    "code": 0,
+    "output": "PASS: 19568 untouched primitives; two high tower sashes, removed bay, exact canted conservatory shape, stepped footprint, three reflected hall dormers, exposed glazing, roof normals, collisions and Historic visibility.\nPASS: 294 tower primitives shortened exactly 15%; new roof shortened 15%; 130 conservatory primitives exact; extended low roof/wall, visible windows and collision coverage.\n"
+  },
+  {
+    "command": "node test-annexe-front-link.mjs",
+    "code": 0,
+    "output": "PASS: reflected entrance corridor, joined symmetric inner faces, rigid movement of all 13 right-hand ranges, 20386 preserved primitives, fixed root, exposed glazing, collisions and Historic visibility.\n"
+  },
+  {
+    "command": "node test-annexe-east-outer.mjs",
+    "code": 0,
+    "output": "PASS: removed red wing, lowered continuous yellow link, veranda roof and walking access, retained east geometry and historic visibility.\n"
+  },
+  {
+    "command": "node test-annexe-kitchen.mjs",
+    "code": 0,
+    "output": "PASS: protected annexe geometry, kitchen openings, full courtyard paving, clear access road, actual walking route and Historic visibility.\n"
+  },
+  {
+    "command": "node test-annexe-rear-stretch.mjs",
+    "code": 0,
+    "output": "PASS: rear wall aligned with the yellow guide, fixed widths/heights/front/centring, unchanged rear block shapes, later connector removal; rear shift 9.239 m.\n"
+  },
+  {
+    "command": "node test-annexe-rear-side-alignment.mjs",
+    "code": 0,
+    "output": "PASS: marked rear translations, removed connector, all retained primitives preserved, fixed root, paving and walking collisions.\n"
+  },
+  {
+    "command": "node test-annexe-os-refinement.mjs",
+    "code": 0,
+    "output": "{\n  count: 21634,\n  digest: 'cc0689f27f95b1e11582174f9f322f241d10e2e25ad91c57b9d52601d8d3245f'\n}\n{\n  count: 1747,\n  digest: 'd88fddabc47b6e04e76470281f7de00e604f92fdd5670c542d1a18cc5dc23b03'\n}\n"
+  },
+  {
+    "command": "node test-jarman.mjs",
+    "code": 1,
+    "output": "node:internal/modules/run_main:107\r\n    triggerUncaughtException(\r\n    ^\r\n\r\nAssertionError [ERR_ASSERTION]: All geometry outside the marked frontage stays exact\r\n+ actual - expected\r\n\r\n  {\r\n+   primitives: 818948,\r\n+   sha256: '2ca0c77c19050e045cb43131817c477833146bbb7366afe94feae0846ef07c89'\r\n-   primitives: 818930,\r\n-   sha256: '7cfb26f1ff8383b299619084b1a9e7e01fcb8bb64565b72953a3b6433035e69b'\r\n  }\r\n\r\n    at file:///C:/Users/Harry/Documents/_escape-from-1829/Browser/test-jarman.mjs:11:8\r\n    at ModuleJob.run (node:internal/modules/esm/module_job:561:25)\r\n    at async node:internal/modules/esm/loader:647:26\r\n    at async asyncRunEntryPointWithESMLoader (node:internal/modules/run_main:101:5) {\r\n  generatedMessage: false,\r\n  code: 'ERR_ASSERTION',\r\n  actual: {\r\n    primitives: 818948,\r\n    sha256: '2ca0c77c19050e045cb43131817c477833146bbb7366afe94feae0846ef07c89'\r\n  },\r\n  expected: {\r\n    primitives: 818930,\r\n    sha256: '7cfb26f1ff8383b299619084b1a9e7e01fcb8bb64565b72953a3b6433035e69b'\r\n  },\r\n  operator: 'deepStrictEqual',\r\n  diff: 'simple'\r\n}\r\n\r\nNode.js v24.20.0\r\n"
+  },
+  {
+    "command": "node test-oakmere-court.mjs",
+    "code": 0,
+    "output": "PASS: full-width Oakmere wall/roof join, square attached annex, collision, Historic visibility, gallery ownership and all original annexe primitives unchanged.\n"
+  },
+  {
+    "command": "node test-oakmere-west.mjs",
+    "code": 0,
+    "output": "PASS: Oakmere west photo face, glazing, roofs, open court, walking and visibility; 20341 original primitives unchanged.\n"
+  },
+  {
+    "command": "node test-oakmere-windows.mjs",
+    "code": 0,
+    "output": "PASS: three low-spine windows, three red-link windows, matching blue sashes; 20837 protected primitives unchanged.\n"
+  },
+  {
+    "command": "node test-leighton-newton.mjs",
+    "code": 1,
+    "output": "node:internal/modules/run_main:107\r\n    triggerUncaughtException(\r\n    ^\r\n\r\nAssertionError [ERR_ASSERTION]: Every primitive outside Leighton/Newton remains unchanged\r\n+ actual - expected\r\n\r\n  {\r\n+   count: 882995,\r\n+   sha256: '4d79b26337034344fe577b1ff7d4c7f7f8388b628269aadde31c6294eb340830'\r\n-   count: 882977,\r\n-   sha256: 'f20c539f2eb9060f9c2c0dccf0716e1fb8e51a451f07aa0dd62b459ae8604e74'\r\n  }\r\n\r\n    at file:///C:/Users/Harry/Documents/_escape-from-1829/Browser/test-leighton-newton.mjs:21:8\r\n    at ModuleJob.run (node:internal/modules/esm/module_job:561:25)\r\n    at async node:internal/modules/esm/loader:647:26\r\n    at async asyncRunEntryPointWithESMLoader (node:internal/modules/run_main:101:5) {\r\n  generatedMessage: false,\r\n  code: 'ERR_ASSERTION',\r\n  actual: {\r\n    count: 882995,\r\n    sha256: '4d79b26337034344fe577b1ff7d4c7f7f8388b628269aadde31c6294eb340830'\r\n  },\r\n  expected: {\r\n    count: 882977,\r\n    sha256: 'f20c539f2eb9060f9c2c0dccf0716e1fb8e51a451f07aa0dd62b459ae8604e74'\r\n  },\r\n  operator: 'deepStrictEqual',\r\n  diff: 'simple'\r\n}\r\n\r\nNode.js v24.20.0\r\n"
+  },
+  {
+    "command": "node test-annexe-access.mjs",
+    "code": 0,
+    "output": "PASS: both curved entrance kerbs are clean, and only the marked roadside tree is removed.\nPASS: red-line avenue, clear central sweep, yellow gravel link, removed rear and side roads, protected lane junctions and teardrop, and Historic visibility.\nPASS: protected local entrance geometry retained after the whole-annexe loop fit. {\n  primitives: 20708,\n  sha256: 'f84b915f4fb34907f1bd7e6c57aa467b626ea3c43a3c2a3e98b46d2b307e94e9'\n}\nPASS: compact quarter-circle entrance edges.\n"
+  }
+]

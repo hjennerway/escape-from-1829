@@ -1,0 +1,50 @@
+{
+  "views": {
+    "marked": {
+      "position": [
+        -15,
+        27,
+        41
+      ],
+      "target": [
+        -38,
+        10,
+        17
+      ],
+      "fov": 44
+    },
+    "close": {
+      "position": [
+        -22,
+        22,
+        31
+      ],
+      "target": [
+        -34,
+        13,
+        16
+      ],
+      "fov": 32
+    },
+    "opposite": {
+      "position": [
+        -24,
+        21,
+        24
+      ],
+      "target": [
+        -34,
+        12,
+        16
+      ],
+      "fov": 40
+    }
+  },
+  "picks": {
+    "marked": [],
+    "close": [],
+    "opposite": []
+  },
+  "errors": [],
+  "mode": "source"
+}

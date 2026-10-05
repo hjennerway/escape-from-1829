@@ -15,6 +15,19 @@ import {ESCAPE_WATER_TOWER} from './dist/water-tower.mjs';
 globalThis.document={createElement:()=>({width:0,height:0,getContext:()=>({fillRect(){}})})};
 const exterior=createEscapeExterior(THREE,16/9);
 exterior.scene.updateMatrixWorld(true);
+// Gameplay retains the older access tracks. They must not cover the continuous
+// west garden or leave a height step across the former grass-box boundary.
+{
+ const ray=new THREE.Raycaster();
+ for(const [x,z] of [[-64,37],[-50,25.4],[-50,25.6],[-47,25.4],[-47,25.6]]){
+  ray.set(new THREE.Vector3(x,.49,z),new THREE.Vector3(0,-1,0));
+  const hit=ray.intersectObject(exterior.model,true)[0];
+  assert.equal(hit?.object,exterior.terrain,'The west garden uses terrain in gameplay');
+  assert(Math.abs(hit.point.y-exterior.terrain.position.y)<1e-6,'Grass has no mid-surface step');
+ }
+ ray.set(new THREE.Vector3(-47.2,-.1,34),new THREE.Vector3(1,0,0));
+ assert.equal(ray.intersectObject(exterior.model,true)[0]?.object.name,'West garden lean-to approach ground contact','The doorway path has solid sides down to the lawn');
+}
 const towerBounds=new THREE.Box3().setFromObject(exterior.waterTower);
 assert(Math.abs(towerBounds.max.y-17.75*2.2)<.01,'tower including finial must be 2.2 times the main pediment height');
 assert(towerBounds.min.x>136&&towerBounds.max.z<-45,'tower must stand outside the right campus block at the map-corrected rear depth');
@@ -147,7 +160,11 @@ for(const side of [-1,1]){
     assert(hit.object.material.map&&hit.face.normal.clone().transformDirection(hit.object.matrixWorld).y>0,'junction exposes upward-facing slate');
     ridgeHeights.push(hit.point.y);
   }
-  assert(Math.max(...ridgeHeights)-Math.min(...ridgeHeights)<.02,'entire rear wing ridge stays level into the connecting roof');
+  // The owner's later yellow west ridge crosses this arm at z=9.25 and
+  // rises above the original connecting roof. Its unmarked rear section
+  // remains level; test-west-roof-join verifies the replacement junction.
+  const levelHeights=side<0?ridgeHeights.slice(0,7):ridgeHeights;
+  assert(Math.max(...levelHeights)-Math.min(...levelHeights)<.02,'unmarked rear wing ridge stays level into the connecting roof');
   assert(Math.abs(ridgeHeights[0]-15.66)<1e-5,'rear ridges are lowered to the connecting roof height');
   ray.set(new THREE.Vector3(side*22,30,12),new THREE.Vector3(0,-1,0));
   assert(Math.abs(ray.intersectObject(exterior.model,true)[0].point.y-ridgeHeights[0])<1e-5,'connecting and main ridges have the same height');
@@ -267,7 +284,9 @@ for(const side of [-1,1]){
   for(const x of [24,27,28.7])for(const z of [17.6,18.4,19.2]){
     ray.set(new THREE.Vector3(side*x,30,z),new THREE.Vector3(0,-1,0));
     const hit=ray.intersectObject(exterior.model,true)[0];
-    assert.equal(hit.object.name,side<0?'Entrance west projection slate roof':'Entrance east projection slate roof');
+    const label=side<0?'west':'east';
+    assert(['Entrance '+label+' projection slate roof','Entrance '+label+' slate pitches to render edge'].includes(hit.object.name));
+    assert.equal(hit.object.material,mainCap.material,'The repaired render contact remains slate');
     assert(hit.point.y>13.35,'projecting bay roofs must cover the wall tops all the way to the front');
   }
 }
@@ -663,7 +682,9 @@ assert.equal(westSquareBounds.max.z,WEST_FRONT_E_PLAN.outerFront);
 const flanking=westFront.filter(o=>o.face==='west-front-bay-flank');
 assert.equal(flanking.length,3,'broad lower glazing flanks the bay, with the fourth position occupied by the garden door');
 for(const o of flanking){
-  ray.set(new THREE.Vector3(o.x,o.y,24),new THREE.Vector3(0,0,-1));
+  // The wider stair approach crosses the distant garden ray. Inspect the
+  // facade behind its ironwork to reject glazing buried in masonry.
+  ray.set(new THREE.Vector3(o.x,o.y,o.z+.6),new THREE.Vector3(0,0,-1));
   const hit=ray.intersectObject(exterior.model,true)[0];
   assert(hit.object.isInstancedMesh&&hit.point.z>WEST_RANGE_PLAN.gardenZ&&hit.point.z<WEST_RANGE_PLAN.gardenZ+.5,'bay flanking glazing remains exposed beside the bay and restored inner pavilion');
 }

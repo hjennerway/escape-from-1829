@@ -1,0 +1,22 @@
+[
+  {
+    "name": "test-asylum-basement-end-browser.mjs",
+    "code": 0,
+    "seconds": 185.175
+  },
+  {
+    "name": "test-asylum-browser.mjs",
+    "code": 0,
+    "seconds": 410.112
+  },
+  {
+    "name": "test-asylum-doorways-browser.mjs",
+    "code": 0,
+    "seconds": 345.527
+  },
+  {
+    "name": "test-asylum-east-corner-browser.mjs",
+    "code": 0,
+    "seconds": 222.301
+  }
+]

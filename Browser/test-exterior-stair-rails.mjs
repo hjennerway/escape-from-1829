@@ -5,7 +5,7 @@ import {createAerialLayouts} from './dist/aerial-layouts.mjs';
 import {prepareEstateTimeline} from './dist/estate-timeline.mjs';
 import {createAsylumOutside} from './dist/asylum-outside.mjs';
 import {batchAerialMeshes} from './dist/aerial-performance.mjs';
-import {WEST_FRONT_E_PLAN} from './dist/west-front-photo-detail.mjs';
+import {WEST_GARDEN_STAIR as s} from './dist/west-garden-stair.mjs';
 
 globalThis.document={createElement:()=>({getContext:()=>({fillRect(){},measureText:t=>({width:t.length*16}),strokeText(){},fillText(){}})})};
 const exterior=createEscapeExterior(THREE,1.5),layouts=createAerialLayouts(THREE,exterior);
@@ -51,7 +51,7 @@ for(const [x,y] of [[68.3,4.25],[67.5,8.5]]){
 // Include the upper flights and the remote rear return, beyond the seven
 // first-floor exit routes covered by test-asylum-outside.
 for(const [name,start,points,top] of [
- ['West garden',{x:-61.3,y:.3,z:20.5+WEST_FRONT_E_PLAN.bayRoot-21},[[-61.3,26.05],[-62.55,26.05],[-62.55,22.1],[-62.55,21],[-63.4,21]].map(([x,z])=>[x,z+WEST_FRONT_E_PLAN.bayRoot-21]),8.5],
+ ['West garden',{x:s.lowerX,y:.3,z:s.groundZ},[[s.lowerX,s.turnZ+s.width/2],[s.upperX,s.turnZ+s.width/2],[s.upperX,s.upperZ],[s.upperX,s.upperZ-s.width],[s.walkwayX,s.upperZ-s.width],[s.doorX,s.doorZ+.73]],s.upperY],
  ['East court',{x:66.6,y:.3,z:1.7},[[72.4,1.7],[72.4,3],[68.75,3],[67.5,3],[67.5,4]],8.5],
  ['Rear return',{x:67,y:.25,z:-30.1},[[62.1,-30.1],[62.1,-31.75],[66.4,-31.75]],4.25]
 ]){
@@ -86,12 +86,12 @@ function probeGuards(){
 }
 const source=probeGuards();
 // Removing a period/layout must also remove the corresponding collisions.
-timeline.setPeriod(1829);walker.refresh();assert(walker.clear(-62.1,26.65,4.3),'Absent west wing cannot leave invisible landing rails');
+timeline.setPeriod(1829);walker.refresh();assert(walker.clear(s.walkwayX,s.turnEndZ+.3,4.3),'Absent west wing cannot leave invisible landing rails');
 timeline.setPeriod(2021);walker.refresh();
 batchAerialMeshes(THREE,exterior.model,{exclude:[exterior.trees,exterior.terrain]});
 const visibility=[];exterior.model.traverse(o=>visibility.push([o,o.visible]));walker.refresh();
 for(const [o,visible] of visibility)assert.equal(o.visible,visible,'Guard collision refresh preserves render batching');
 // Hidden originals are retained for walking; check a formerly open edge.
-const actor={x:-62.1,y:4.32,z:26.05+WEST_FRONT_E_PLAN.bayRoot-21};for(let i=0;i<40;i++)walker.update(actor,0,.05,.016);
-assert(actor.z<26.45+WEST_FRONT_E_PLAN.bayRoot-21&&actor.y>4.2,'Batched west landing retains its end guard');
+const actor={x:-62.1,y:4.32,z:s.turnZ+s.width/2};for(let i=0;i<40;i++)walker.update(actor,0,.05,.016);
+assert(actor.z<s.turnEndZ-.2&&actor.y>4.2,'Batched west landing retains its end guard');
 console.log('PASS: upper and remote stair round trips, '+source.guards+' guards / '+source.probes+' fall-prevention probes, timeline removal and batched collision parity.');

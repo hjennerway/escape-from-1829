@@ -1,0 +1,35 @@
+{
+  "views": 9,
+  "door": {
+    "name": "Asylum EntranceInset",
+    "color": 5774371,
+    "signs": 12,
+    "exits": 13
+  },
+  "trip": {
+    "outside": true,
+    "latched": true,
+    "returned": true,
+    "position": [
+      0,
+      1.8,
+      21.7
+    ],
+    "expected": [
+      0,
+      1.8,
+      21.7
+    ]
+  },
+  "texture": {
+    "seam": [
+      3.171223958333331,
+      3.1123046875000013
+    ],
+    "adjacent": [
+      3.0821852598544135,
+      3.177638596140216
+    ]
+  },
+  "errors": []
+}

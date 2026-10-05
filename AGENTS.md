@@ -11,6 +11,18 @@
 
 ## Development and validation
 
+- Use hardware GPU acceleration for local browser rendering, visual and
+  performance tests. Do not force CPU/software rendering (for example SwiftShader or
+  `--disable-gpu`). Verify the active renderer before relying on visual or
+  performance results; report unavailable GPU acceleration instead of silently
+  falling back to software rendering. Non-rendering logic checks still run on
+  the CPU.
+- Use `Browser/test-support/hardware-browser.mjs` for browser test launches;
+  `npm run test:gpu` in `Browser` verifies the GPU and launcher policy. Adapt
+  historical scripts under `Browser/artifacts/` to this launcher before reruns.
+- Hosted GitHub checks retain explicitly configured software rendering because
+  their runners have no GPU. The `CI=true` plus `BROWSER_CI_SOFTWARE=1` exception
+  is for those checks only; do not use it for local validation.
 - The browser game is served from `Browser/dist`. Start it from the repository
   root with `node Browser/serve.mjs`.
 - Run the relevant `Browser/test-*.mjs` checks for the code changed. Run the browser
@@ -25,6 +37,8 @@
 
 ## Rendering and walking invariants
 
+- Roof faces must meet white render at its edge; no slate may cross through
+  the middle of a rendered cornice or roof-to-wall return.
 - After moving exterior geometry or sunlight at runtime, call
   `exterior.invalidateShadows()`.
 - Changes to batched buildings also require rebuilding affected batches and

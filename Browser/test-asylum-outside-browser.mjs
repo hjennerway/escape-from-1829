@@ -1,12 +1,12 @@
 import assert from 'node:assert/strict';
 import {readFile,writeFile,mkdir} from 'node:fs/promises';
 import {fileURLToPath} from 'node:url';
-import {spawn} from 'node:child_process';
-import {chromium} from 'playwright';
-const destination=new URL('./artifacts/outside-traps/',import.meta.url),port=1871;
+import {startTestServer} from './test-support/server.mjs';
+import {launchHardwareBrowser} from './test-support/hardware-browser.mjs';
+const destination=new URL('./artifacts/outside-traps/',import.meta.url);
 await mkdir(destination,{recursive:true});
-const server=spawn(process.execPath,['Browser/serve.mjs'],{cwd:new URL('../',import.meta.url),windowsHide:true,stdio:'ignore',env:{...process.env,PORT:String(port)}});
-const browser=await chromium.launch({headless:true,executablePath:process.env.MODEL_CHROME_PATH??'C:/Program Files/Google/Chrome/Application/chrome.exe',args:['--use-angle=swiftshader','--enable-unsafe-swiftshader']});
+const {server,base}=await startTestServer();
+const browser=await launchHardwareBrowser({headless:true,executablePath:process.env.MODEL_CHROME_PATH??'C:/Program Files/Google/Chrome/Application/chrome.exe'});
 try{
  const page=await browser.newPage({viewport:{width:1400,height:850}}),errors=[];page.setDefaultTimeout(60000);
  page.on('pageerror',e=>errors.push(e.message));
@@ -14,7 +14,7 @@ try{
  await page.route('https://**/*',route=>route.abort());
  await page.route('**/game.mjs',async route=>route.fulfill({contentType:'text/javascript',body:(await readFile(new URL('./dist/game.mjs',import.meta.url),'utf8'))+`
 window.outsideTest={get ready(){return ready;},get walker(){return outsideWalker;},get player(){return player;},boot(){start();arrivalCutscene.update(3);state='paused';},pose(x,y,z){Object.assign(player,{x,y,z,floor:2,outside:true,stair:null,verticalTrend:0});yaw=-Math.PI/2;pitch=-.2;state='paused';keys.clear();exterior.scene.add(torch,torchTarget);showFloor();camera.position.set(x,y+1.65,z);camera.rotation.set(pitch,yaw,0);$('arrivalFade').hidden=true;$('result').hidden=true;$('hud').hidden=false;$('interact').hidden=true;drawMap();},step(dx,dz,dt=.025){keys.clear();if(dx||dz){yaw=Math.atan2(-dx,-dz);keys.add('KeyW');}state='play';update(dt);state='paused';keys.clear();},look(angle,tilt=0){yaw=angle;pitch=tilt;camera.rotation.set(pitch,yaw,0);}};` }));
- await page.goto(`http://127.0.0.1:${port}`);
+ await page.goto(`${base}`);
  await page.waitForFunction(()=>window.outsideTest?.ready,null,{timeout:120000});
  await page.evaluate(()=>window.outsideTest.boot());
  const result=await page.evaluate(()=>{

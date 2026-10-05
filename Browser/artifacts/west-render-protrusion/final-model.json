@@ -1,0 +1,21 @@
+{
+  "currentSourceHash": "bcad9006c09c998e00ac9624d073fc784ea7d65905d0d5fca23a48d818aa9154",
+  "manifest": {
+    "format": 1,
+    "revision": "186",
+    "sourceHash": "bcad9006c09c998e00ac9624d073fc784ea7d65905d0d5fca23a48d818aa9154",
+    "file": "aerial-b79d2a5ec1c46d4d3a35.bin.gz",
+    "bytes": 21012484,
+    "uncompressedBytes": 172009456,
+    "sha256": "b79d2a5ec1c46d4d3a35ba063ea69689695c6d1aecdd1da47fa83d75d83776f4",
+    "stats": {
+      "revision": "186",
+      "buildMilliseconds": 2257.7999999998137,
+      "windows": 2580,
+      "geometries": 15944,
+      "materials": 650,
+      "textures": 63
+    }
+  },
+  "checked": "source fingerprint and actual compiled corner capture"
+}

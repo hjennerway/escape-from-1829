@@ -1,7 +1,7 @@
 {
   "front": {
     "primitives": 15834,
-    "sha256": "9e7768b7c3a581a208afc8aee36d56f19eb30f36c7155a8e5a488a86f4dd85ed"
+    "sha256": "f3a810a88eae2776280329060c40265999892f547d80b51217f4ad9a7675ee1d"
   },
   "root": [
     -0.3967056614036031,
@@ -24,11 +24,11 @@
   "wings": {
     "oakmere": {
       "primitives": 1218,
-      "sha256": "125b802fa65604a8605d8f0e53c4ec8af318358e46d6e5172e3041fda7e279a3"
+      "sha256": "1b4b5e8b04c26aa4d5a5e2397a512646b54b82c2a4d30c6890facdf8c072af4d"
     },
     "leighton-newton": {
       "primitives": 1479,
-      "sha256": "ddcad4e414248195bf10d1b7c1500201e81b065c0838c447f4bd51866fdb9ff1"
+      "sha256": "2c7ffc44886607824356070fab2131824e695d95346e235ac2ba7591fcaf3a3f"
     }
   },
   "ranges": [

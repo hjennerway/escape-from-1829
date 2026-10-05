@@ -1,0 +1,114 @@
+{
+  "actual": "procedural",
+  "errors": [],
+  "reports": [
+    {
+      "name": "redesmere",
+      "roof": "Redesmere aligned frontage slate roof",
+      "position": [
+        63.09689767126134,
+        29.08987256591383,
+        30.286495880350316
+      ],
+      "target": [
+        52.125,
+        15.375000476837158,
+        11.999999761581421
+      ],
+      "pixels": {
+        "min": 52,
+        "max": 81
+      }
+    },
+    {
+      "name": "west-join",
+      "roof": "West cross-range continuous roof join",
+      "position": [
+        -64,
+        37.80499982833862,
+        31.24999976158142
+      ],
+      "target": [
+        -53,
+        15.804999828338623,
+        9.249999761581421
+      ],
+      "pixels": {
+        "min": 41,
+        "max": 78
+      }
+    },
+    {
+      "name": "lean-to",
+      "roof": "West garden lean-to slate roof",
+      "position": [
+        -57.63104223816428,
+        16.11638590243963,
+        40.77241689526571
+      ],
+      "target": [
+        -43.2,
+        3.85,
+        35
+      ],
+      "pixels": {
+        "min": 51,
+        "max": 80
+      }
+    },
+    {
+      "name": "oblique",
+      "roof": "Rear oblique wing slate roof",
+      "position": [
+        -30.737480695006756,
+        19.927359446463914,
+        -49.93861427202695
+      ],
+      "target": [
+        -42.34361356706002,
+        6,
+        -61.54474714408022
+      ],
+      "pixels": {
+        "min": 56,
+        "max": 86
+      }
+    },
+    {
+      "name": "annexe",
+      "roof": "Central hall slate roof",
+      "position": [
+        379.21250064132374,
+        25.930479341266043,
+        5.278167359958768
+      ],
+      "target": [
+        363.5420213000577,
+        10.26,
+        -10.392311981307273
+      ],
+      "pixels": {
+        "min": 42,
+        "max": 68
+      }
+    },
+    {
+      "name": "outhouse",
+      "roof": "Outhouse continuous slate roof",
+      "position": [
+        74.44657540990937,
+        11.888191571948434,
+        102.8788662060832
+      ],
+      "target": [
+        81.72976696278432,
+        4.605000019073486,
+        95.59567465320825
+      ],
+      "pixels": {
+        "min": 21,
+        "max": 65
+      }
+    }
+  ]
+}

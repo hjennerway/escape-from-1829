@@ -1,0 +1,350 @@
+{
+  "views": {
+    "marked": {
+      "position": [
+        -15,
+        27,
+        41
+      ],
+      "target": [
+        -38,
+        10,
+        17
+      ],
+      "fov": 44
+    },
+    "close": {
+      "position": [
+        -22,
+        22,
+        31
+      ],
+      "target": [
+        -34,
+        13,
+        16
+      ],
+      "fov": 32
+    },
+    "opposite": {
+      "position": [
+        -24,
+        21,
+        24
+      ],
+      "target": [
+        -34,
+        12,
+        16
+      ],
+      "fov": 40
+    }
+  },
+  "picks": {
+    "marked": [
+      {
+        "y": 12.72,
+        "z": 15.28,
+        "name": "West garden inner projecting pavilion",
+        "point": [
+          -35,
+          12.72,
+          15.28
+        ],
+        "color": "b3a5a0"
+      },
+      {
+        "y": 12.72,
+        "z": 15.42,
+        "name": "West garden inner projecting pavilion",
+        "point": [
+          -35,
+          12.72,
+          15.42
+        ],
+        "color": "b3a5a0"
+      },
+      {
+        "y": 12.72,
+        "z": 15.56,
+        "name": "West garden inner projecting pavilion",
+        "point": [
+          -35,
+          12.72,
+          15.56
+        ],
+        "color": "b3a5a0"
+      },
+      {
+        "y": 12.9,
+        "z": 15.28,
+        "name": "West garden inner projecting pavilion",
+        "point": [
+          -35,
+          12.9,
+          15.28
+        ],
+        "color": "b3a5a0"
+      },
+      {
+        "y": 12.9,
+        "z": 15.42,
+        "name": "West garden inner projecting pavilion",
+        "point": [
+          -35,
+          12.9,
+          15.42
+        ],
+        "color": "b3a5a0"
+      },
+      {
+        "y": 12.9,
+        "z": 15.56,
+        "name": "West garden inner projecting pavilion",
+        "point": [
+          -35,
+          12.9,
+          15.56
+        ],
+        "color": "b3a5a0"
+      },
+      {
+        "y": 13.025,
+        "z": 15.28,
+        "name": "West garden inner projecting pavilion",
+        "point": [
+          -35,
+          13.025,
+          15.28
+        ],
+        "color": "b3a5a0"
+      },
+      {
+        "y": 13.025,
+        "z": 15.42,
+        "name": "West garden inner projecting pavilion",
+        "point": [
+          -35,
+          13.025,
+          15.42
+        ],
+        "color": "b3a5a0"
+      },
+      {
+        "y": 13.025,
+        "z": 15.56,
+        "name": "West garden inner projecting pavilion",
+        "point": [
+          -35,
+          13.025,
+          15.56
+        ],
+        "color": "b3a5a0"
+      }
+    ],
+    "close": [
+      {
+        "y": 12.72,
+        "z": 15.28,
+        "name": "West garden inner projecting pavilion",
+        "point": [
+          -35,
+          12.72,
+          15.28
+        ],
+        "color": "b3a5a0"
+      },
+      {
+        "y": 12.72,
+        "z": 15.42,
+        "name": "West garden inner projecting pavilion",
+        "point": [
+          -35,
+          12.72,
+          15.42
+        ],
+        "color": "b3a5a0"
+      },
+      {
+        "y": 12.72,
+        "z": 15.56,
+        "name": "West garden inner projecting pavilion",
+        "point": [
+          -35,
+          12.72,
+          15.56
+        ],
+        "color": "b3a5a0"
+      },
+      {
+        "y": 12.9,
+        "z": 15.28,
+        "name": "West garden inner projecting pavilion",
+        "point": [
+          -35,
+          12.9,
+          15.28
+        ],
+        "color": "b3a5a0"
+      },
+      {
+        "y": 12.9,
+        "z": 15.42,
+        "name": "West garden inner projecting pavilion",
+        "point": [
+          -35,
+          12.9,
+          15.42
+        ],
+        "color": "b3a5a0"
+      },
+      {
+        "y": 12.9,
+        "z": 15.56,
+        "name": "West garden inner projecting pavilion",
+        "point": [
+          -35,
+          12.9,
+          15.56
+        ],
+        "color": "b3a5a0"
+      },
+      {
+        "y": 13.025,
+        "z": 15.28,
+        "name": "West garden inner projecting pavilion",
+        "point": [
+          -35,
+          13.025,
+          15.28
+        ],
+        "color": "b3a5a0"
+      },
+      {
+        "y": 13.025,
+        "z": 15.42,
+        "name": "West garden inner projecting pavilion",
+        "point": [
+          -35,
+          13.025,
+          15.42
+        ],
+        "color": "b3a5a0"
+      },
+      {
+        "y": 13.025,
+        "z": 15.56,
+        "name": "West garden inner projecting pavilion",
+        "point": [
+          -35,
+          13.025,
+          15.56
+        ],
+        "color": "b3a5a0"
+      }
+    ],
+    "opposite": [
+      {
+        "y": 12.72,
+        "z": 15.28,
+        "name": "West garden inner projecting pavilion",
+        "point": [
+          -35,
+          12.72,
+          15.28
+        ],
+        "color": "b3a5a0"
+      },
+      {
+        "y": 12.72,
+        "z": 15.42,
+        "name": "West garden inner projecting pavilion",
+        "point": [
+          -35,
+          12.72,
+          15.42
+        ],
+        "color": "b3a5a0"
+      },
+      {
+        "y": 12.72,
+        "z": 15.56,
+        "name": "West garden inner projecting pavilion",
+        "point": [
+          -35,
+          12.72,
+          15.56
+        ],
+        "color": "b3a5a0"
+      },
+      {
+        "y": 12.9,
+        "z": 15.28,
+        "name": "West garden inner projecting pavilion",
+        "point": [
+          -35,
+          12.9,
+          15.28
+        ],
+        "color": "b3a5a0"
+      },
+      {
+        "y": 12.9,
+        "z": 15.42,
+        "name": "West garden inner projecting pavilion",
+        "point": [
+          -35,
+          12.9,
+          15.42
+        ],
+        "color": "b3a5a0"
+      },
+      {
+        "y": 12.9,
+        "z": 15.56,
+        "name": "West garden inner projecting pavilion",
+        "point": [
+          -35,
+          12.9,
+          15.56
+        ],
+        "color": "b3a5a0"
+      },
+      {
+        "y": 13.025,
+        "z": 15.28,
+        "name": "West garden inner projecting pavilion",
+        "point": [
+          -35,
+          13.025,
+          15.28
+        ],
+        "color": "b3a5a0"
+      },
+      {
+        "y": 13.025,
+        "z": 15.42,
+        "name": "West garden inner projecting pavilion",
+        "point": [
+          -35,
+          13.025,
+          15.42
+        ],
+        "color": "b3a5a0"
+      },
+      {
+        "y": 13.025,
+        "z": 15.56,
+        "name": "West garden inner projecting pavilion",
+        "point": [
+          -35,
+          13.025,
+          15.56
+        ],
+        "color": "b3a5a0"
+      }
+    ]
+  },
+  "errors": [],
+  "mode": "source"
+}

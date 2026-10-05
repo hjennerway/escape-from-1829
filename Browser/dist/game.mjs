@@ -22,6 +22,7 @@ import {createAsylumOutside} from './asylum-outside.mjs';
 import {createAsylumJump} from './asylum-jump.mjs';
 import {createNotebook,notebookView} from './notebook.mjs';
 import {drawNotebookMap} from './notebook-map.mjs';
+import {bindDeveloperOptions} from './developer-options.mjs';
 import {createLoadingProgress} from './loading-progress.mjs';
 const $=id=>document.getElementById(id),canvas=$('game');
 const furnitureFloors=[];
@@ -41,6 +42,7 @@ let outsideWalker,indoorJump,lastDoor=null;
 const modern=()=>floors[0]?.geometrySource==='asylum-plan';
 const floorHeight=actor=>floors[actor.floor]?.elevation??actor.floor*FLOOR_HEIGHT;
 let notebook,notebookFloor,notebookReadRevision=0;
+let developer,mapPreviousState;
 const landingReducedMotion=matchMedia('(prefers-reduced-motion: reduce)').matches;
 document.addEventListener('capture-intro',({detail})=>{
  if(!ready||state!=='menu')return;
@@ -269,6 +271,13 @@ async function init(){
     onComplete(){if(state!=='arrival')return;keys.clear();state='play';uiPlaying(true);drawMap();}
   });
   resetPositions();clock=new THREE.Timer();clock.connect(document);
+  developer=bindDeveloperOptions({THREE,exterior,plan:async()=>({floors,outsideStairs}),getMapState:()=>({player,enemies,yaw}),onChange:()=>{if(state==='notebook')renderNotebook();drawMap();},onMapChange:show=>{
+   if(show){
+    mapPreviousState=state==='notebook'?'play':state;closeArtViewer();closeNotebook(false);keys.clear();hold=0;stairHold=0;dragging=false;previousPointer=null;state='developer-map';document.exitPointerLock?.();
+   }else if(state==='developer-map'){
+    state=mapPreviousState;keys.clear();if(state==='play'){canvas.focus();lock();}
+   }
+  }});
   await loading.step(97,'Drawing the first view…');
   animate();
  }catch(e){loading.fail();console.error(e);$('start').textContent='RELOAD TO TRY AGAIN';$('start').disabled=false;$('start').onclick=()=>location.reload();$('intro').textContent='The building could not load. Check your connection and reload. '+e.message;}
@@ -320,7 +329,7 @@ function useDoor(exit){
  outsideWalker?.resetJump();indoorJump?.reset();
  const doorFloor=exit.floor??player.floor;notebook.recordDoor(exit,doorFloor,{used:true});
  if(player.outside){Object.assign(player,{...exit.inside,floor:exit.floor,y:floors[exit.floor].elevation,stair:null,outside:false});const {dx,dz}=exitDirection(exit);yaw=Math.atan2(dx,dz);scene.add(torch,torchTarget);}
- else {lastDoor=exit;const [x,y,z]=exit.destination;Object.assign(player,{x,y,z,stair:null,outside:true});const {dx,dz}=exitDirection(exit);yaw=Math.atan2(-dx,-dz);exterior.scene.add(torch,torchTarget);}
+ else {lastDoor=exit;const [x,y,z]=exit.destination;Object.assign(player,{x,y,z,stair:null,outside:true});const {dx,dz}=exitDirection(exit,{outside:true});yaw=Math.atan2(-dx,-dz);exterior.scene.add(torch,torchTarget);}
  pitch=0;hold=0;spotted=false;camera.position.set(player.x,player.y+(crouch?1.1:1.65),player.z);camera.rotation.set(pitch,yaw,0);showFloor();observeNotebook();drawMap();enemies.forEach(e=>e.mesh.visible=!player.outside&&e.floor===player.floor);$('interact').hidden=true;
 }
 function beep(hz,length,volume){if(!audioCtx||!audioOn)return;const t=audioCtx.currentTime,o=audioCtx.createOscillator(),g=audioCtx.createGain();o.type='sine';o.frequency.setValueAtTime(hz,t);o.frequency.exponentialRampToValueAtTime(hz*.5,t+length);g.gain.setValueAtTime(volume,t);g.gain.exponentialRampToValueAtTime(.001,t+length);o.connect(g);g.connect(audioCtx.destination);o.start(t);o.stop(t+length);}
@@ -397,8 +406,12 @@ function updateNotebookBadge(){
 }
 function renderNotebook(){
  const view=notebook.views.find(v=>v.key===notebookFloor);
- $('mapFloorName').textContent=(view?.name??'Sketch').toUpperCase()+' · EXPLORED AREAS';
- const buttons=notebook.availableViews().map(view=>{
+ const full=!!developer?.mapRevealed;
+ $('mapFloorName').textContent=(view?.name??'Sketch').toUpperCase()+(full?' · FULL MAP':' · EXPLORED AREAS');
+ mapCanvas.setAttribute('aria-label',full?'Fully revealed floor map':'Sketch map; blank areas have not been explored');
+ $('notebookFloors').setAttribute('aria-label',full?'All floors':'Discovered floors');
+ document.querySelector('.notebook-map-note').textContent=full?'All levels are revealed while developer mapping is enabled.':'Only nearby areas are revealed as you walk. Each level keeps its own sketch.';
+ const buttons=(full?notebook.views:notebook.availableViews()).map(view=>{
   const button=document.createElement('button');button.type='button';button.textContent=view.name;
   button.setAttribute('aria-pressed',String(view.key===notebookFloor));
   button.onclick=()=>{notebookFloor=view.key;renderNotebook();drawMap();$('notebookFloors').querySelector('[aria-pressed="true"]').focus();};return button;
@@ -439,10 +452,10 @@ function notebookKeydown(event){
  }
 }
 function drawMapCanvas(context){
- drawNotebookMap(context,notebook,notebookView(player),player,enemies,yaw);
+ drawNotebookMap(context,notebook,notebookView(player),player,enemies,yaw,{revealAll:!!developer?.mapRevealed});
 }
 function drawMap(){
- if(!$('floorMap').hidden)drawNotebookMap(mapContext,notebook,notebookFloor??notebookView(player),player,enemies,yaw);
+ if(!$('floorMap').hidden)drawNotebookMap(mapContext,notebook,notebookFloor??notebookView(player),player,enemies,yaw,{revealAll:!!developer?.mapRevealed});
  drawMapCanvas(miniMapContext);
 }
 function renderAerialBackdrop(exterior){
@@ -483,6 +496,7 @@ $('start').onclick=start;$('closeHelp').onclick=resume;$('helpPlay').onclick=res
 function toggleMap(){if(state==='notebook')closeNotebook();else openNotebook();}
 $('notebookButton').onclick=toggleMap;$('closeNotebook').onclick=()=>closeNotebook();
 addEventListener('keydown',e=>{
+ if(e.defaultPrevented)return;
  if(state==='notebook'){notebookKeydown(e);return;}
  if(state==='cutscene'){if(['Escape','Space','Enter'].includes(e.code)){e.preventDefault();escapeCutscene.skip();}return;}
  if(!$('instructions').hidden){

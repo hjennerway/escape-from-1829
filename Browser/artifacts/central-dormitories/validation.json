@@ -1,0 +1,59 @@
+{
+  "counts": [
+    {
+      "id": "R6",
+      "beds": 16
+    },
+    {
+      "id": "R8",
+      "beds": 16
+    },
+    {
+      "id": "R10",
+      "beds": 16
+    }
+  ],
+  "geometry": {
+    "renderedBeds": 48
+  },
+  "walking": {
+    "x": -1.8,
+    "z": -30.639999999999993,
+    "floor": 1
+  },
+  "renders": [
+    {
+      "name": "R6-north",
+      "calls": 88,
+      "triangles": 1201480
+    },
+    {
+      "name": "R6-south",
+      "calls": 450,
+      "triangles": 1431248
+    },
+    {
+      "name": "R8-north",
+      "calls": 170,
+      "triangles": 1348986
+    },
+    {
+      "name": "R8-south",
+      "calls": 289,
+      "triangles": 1385448
+    },
+    {
+      "name": "R10-north",
+      "calls": 217,
+      "triangles": 1364964
+    },
+    {
+      "name": "R10-south",
+      "calls": 235,
+      "triangles": 1372718
+    }
+  ],
+  "explore": true,
+  "mobile": true,
+  "errors": []
+}

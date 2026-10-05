@@ -1,9 +1,12 @@
 <!doctype html>
-<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>1829 · Aerial view</title><link rel="stylesheet" href="./style.css"><style>#previewNav{position:fixed;left:24px;top:24px;z-index:31;font:10px Arial;letter-spacing:2px;color:#e4e8db;text-shadow:0 2px 6px #000}#previewNav a{color:inherit}#aerialHelp{position:fixed;bottom:18px;left:24px;right:24px;z-index:31;font:11px/1.8 Arial;color:#e4e8db;text-shadow:0 2px 6px #000}#previewNav{right:24px;line-height:1.8}@media(max-width:650px){#previewNav{right:20px;top:24px}#aerialHelp{font-size:10px}}</style><link rel="stylesheet" href="./aerial-layouts.css"><link rel="stylesheet" href="./aerial-locations.css"><link rel="stylesheet" href="./device-location.css"><link rel="stylesheet" href="./building-photos.css"><link rel="stylesheet" href="./day-night.css"><link rel="stylesheet" href="./view-ui.css"></head>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>1829 · Aerial view</title><link rel="stylesheet" href="./style.css"><style>#previewNav{position:fixed;left:24px;top:24px;z-index:31;font:10px Arial;letter-spacing:2px;color:#e4e8db;text-shadow:0 2px 6px #000}#previewNav a{color:inherit}#aerialHelp{position:fixed;bottom:18px;left:24px;right:24px;z-index:31;font:11px/1.8 Arial;color:#e4e8db;text-shadow:0 2px 6px #000}#previewNav{right:24px;line-height:1.8}@media(max-width:650px){#previewNav{right:20px;top:24px}#aerialHelp{font-size:10px}}</style><link rel="stylesheet" href="./aerial-layouts.css"><link rel="stylesheet" href="./aerial-locations.css"><link rel="stylesheet" href="./device-location.css"><link rel="stylesheet" href="./building-photos.css"><link rel="stylesheet" href="./day-night.css"><link rel="stylesheet" href="./view-ui.css"><link rel="stylesheet" href="./developer-map.css"></head>
 <body><script src="./intro-loading.js"></script><canvas id="game" aria-label="Aerial 3D view of the 1829 estate"></canvas>
 
 <nav id="previewNav" aria-label="Aerial navigation">
-  <a id="backToIntro" href="./">← Back to intro</a>
+  <div class="view-navigation">
+    <a id="backToIntro" href="./">← Back to intro</a>
+    <button id="switchView" type="button" title="Drop to ground level at this location" disabled>Explore on foot ↓</button>
+  </div>
   <div class="view-actions">
     <button id="deviceLocationButton" type="button" aria-label="Show my location" title="Show my location" aria-describedby="deviceLocationStatus" disabled>
       <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="7"/><circle cx="12" cy="12" r="2"/><path d="M12 2v4m0 12v4M2 12h4m12 0h4"/></svg>
@@ -70,7 +73,12 @@
   <div id="periodTicks" aria-hidden="true"></div><div class="period-endpoints" aria-hidden="true"><span>1829</span><span>2021</span></div>
   <p id="periodDescription"></p><p id="periodNote" hidden></p>
 </details>
-<div id="aerialHelp"><span class="desktop-aerial-help">Hover a building for photos · Drag to orbit · Right-drag to pan · WASD to move · Scroll to zoom · T to show/hide trees</span><span class="touch-aerial-help">Tap a building for photos · One finger to orbit · Pinch to zoom · Two fingers to pan</span></div>
+<div id="aerialHelp"><span class="desktop-aerial-help">Hover a building for photos · Drag to orbit · Right-drag to pan · WASD to move · Scroll to zoom · T to show/hide trees</span><span class="touch-aerial-help">Tap a building for photos · One finger to orbit · Pinch to zoom · Two fingers to pan</span>
+  <div class="developer-options">
+    <button id="developerToggle" type="button" aria-pressed="false" aria-controls="developerShortcuts" aria-keyshortcuts="-" hidden>Developer option · −</button>
+    <div id="developerShortcuts" hidden><button id="developerMapToggle" type="button" aria-pressed="false" aria-keyshortcuts="M">M · Full map</button><button id="stairOverlayToggle" type="button" aria-pressed="false" aria-keyshortcuts="Shift+M">Shift+M · Staircase overlay</button><span class="stair-overlay-legend"><span>Exterior</span><span>Interior</span></span><span id="developerStatus" role="status"></span></div>
+  </div>
+</div>
 <script type="module" src="./aerial-locations.mjs"></script>
 <script type="module">
 import {resolveLocationView,LOCATION_VIEWS} from './location-views.mjs';
@@ -110,6 +118,8 @@ import {REDESMERE_CHIMNEY_VIEWS} from './redesmere-edge-chimney.mjs';
 import {ESCAPE_WATER_TOWER,WATER_TOWER_VIEWS} from './water-tower.mjs';
 import {createAerialControls,bindAerialGestures,sampleLanding} from './aerial-controls.mjs';
 import {beginIntroFlight} from './intro-navigation.mjs';
+import {readViewLocation,aerialLocationView,bindViewSwitch,viewLighting} from './view-navigation.mjs';
+import {bindDeveloperOptions} from './developer-options.mjs';
 import {EAST_PHOTO_VIEW} from './east-photo-detail.mjs';
 import {COURTYARD_PHOTO_VIEW} from './courtyard-photo-detail.mjs';
 import {REAR_COURT_PHOTO_VIEW} from './rear-court-photo-detail.mjs';
@@ -131,6 +141,7 @@ import {FRONT_CORNER_VIEWS} from './front-inside-corners.mjs';
 import {FRONT_LAWN_TREE_VIEW} from './front-lawn-trees.mjs';
 const renderer=new THREE.WebGLRenderer({canvas:document.getElementById('game'),antialias:true});renderer.setPixelRatio(Math.min(devicePixelRatio,1.5));renderer.setSize(innerWidth,innerHeight);renderer.outputColorSpace=THREE.SRGBColorSpace;renderer.toneMapping=THREE.ACESFilmicToneMapping;renderer.toneMappingExposure=1.25;renderer.shadowMap.enabled=true;renderer.shadowMap.type=THREE.PCFShadowMap;
 const {exterior,layouts,buildingDetail}=await loadAerialScene(THREE,innerWidth/innerHeight),clock=new THREE.Timer();clock.connect(document);
+const developer=bindDeveloperOptions({THREE,exterior,plan:async()=>{const response=await fetch('./asylum-plan.json');if(!response.ok)throw Error('Floor plans could not load');return response.json();},onMapChange:show=>{if(show){stop();document.exitPointerLock?.();}}});
 applyTreeRenderingDefault(renderer,exterior);
 const buildingSelection=createBuildingSelection(THREE,exterior);
 renderer.domElement.addEventListener('webglcontextrestored',exterior.invalidateShadows);
@@ -186,13 +197,16 @@ function frameTower(){const {x,z}=ESCAPE_WATER_TOWER;exterior.camera.position.se
 function frameMap(){if(view==='historic-footprints'){exterior.scene.fog.density=0;navigationTarget=[110,0,-80];exterior.camera.position.set(110,470*Math.max(1,1.35/exterior.camera.aspect),-79.99);exterior.camera.lookAt(...navigationTarget);return;}if(view==='historic-admin-grounds'){exterior.scene.fog.density=0;navigationTarget=[250,0,10];exterior.camera.position.set(250,285*Math.max(1,1.35/exterior.camera.aspect),85);exterior.camera.lookAt(...navigationTarget);return;}if(view==='historic-roads'){exterior.scene.fog.density=0;navigationTarget=[220,0,-35];exterior.camera.position.set(220,800*Math.max(1,1.5/exterior.camera.aspect),-34.99);exterior.camera.lookAt(...navigationTarget);return;}const plan=view==='plan';navigationTarget=plan?[10,0,-10]:[-51,6,18];exterior.camera.position.set(...(plan?[10,245*Math.max(1,1.4/exterior.camera.aspect),-9.99]:[-89,38,80]));exterior.camera.lookAt(...navigationTarget);}
 function frameRight(){exterior.camera.position.set(72,28,108*Math.max(1,1/exterior.camera.aspect));navigationTarget=[72,9,0];exterior.camera.lookAt(...navigationTarget);}
 if(mapDetail)frameMap();else if(photoDetail)framePhoto();else if(rightDetail)frameRight();else if(towerDetail)frameTower();else if(frontDetail)frameFront();else resetAerial();
+const currentLocation=readViewLocation(location.search);
+if(currentLocation){const shot=aerialLocationView(currentLocation,{aspect:exterior.camera.aspect});moved=true;navigationTarget=shot.target;exterior.camera.position.set(...shot.position);exterior.camera.lookAt(...shot.target);exterior.camera.fov=shot.fov;exterior.camera.updateProjectionMatrix();}
 controls.sync(navigationTarget);
 bindTimelineControls(exterior.timeline,document.getElementById('layoutControls'),()=>{buildingPhotos.close();buildingSelection.refresh();});
-const lighting=createDayNight(THREE,exterior,renderer);bindDayNight(lighting);
+const lighting=createDayNight(THREE,exterior,renderer);lighting.setMode(viewLighting(location.search,'day'));bindDayNight(lighting);
+bindViewSwitch(document.getElementById('switchView'),{camera:exterior.camera,destination:'./explore.html',period:()=>exterior.timeline.period.year,lighting:()=>lighting.mode});
 // Location links pin the same outline and gallery as clicking a building.
 buildingPhotos.select(buildingSelection.entries.find(entry=>entry.locations.includes(selectedLocation)),true);
 const introFlight=beginIntroFlight(exterior.camera,{fallback:sampleLanding(0,{aspect:exterior.camera.aspect,cinematic:true}),target:navigationTarget,onComplete:()=>controls.sync(navigationTarget)});
-function frame(){requestAnimationFrame(frame);clock.update();const dt=clock.getDelta();if(document.hidden)return;if(introFlight?.active)introFlight.update(dt);else if(buildingPhotos.lightboxOpen)stop();else controls.update(dt);buildingPhotos.update();buildingDetail?.update(exterior.camera,innerHeight);updateRoadLabels(THREE,layouts.roads,exterior.camera,innerWidth,innerHeight);deviceLocationMarker.update(exterior.camera,innerHeight);lighting.update(dt);renderer.render(exterior.scene,exterior.camera);buildingGlow.render(exterior.camera,lighting.mode==='night' ? .3 : lighting.mode==='dusk' ? .6 : 1);introFlight?.afterRender();}
+function frame(){requestAnimationFrame(frame);clock.update();const dt=clock.getDelta();if(document.hidden)return;if(introFlight?.active)introFlight.update(dt);else if(buildingPhotos.lightboxOpen)stop();else controls.update(dt);buildingPhotos.update();buildingDetail?.update(exterior.camera,innerHeight);updateRoadLabels(THREE,layouts.roads,exterior.camera,innerWidth,innerHeight);deviceLocationMarker.update(exterior.camera,innerHeight);lighting.update(dt);renderer.render(exterior.scene,exterior.camera);buildingGlow.render(exterior.camera,lighting.mode==='night' ? .3 : lighting.mode==='dusk' ? .6 : 1);developer.render(renderer,exterior.camera);introFlight?.afterRender();}
 function resetAerial(){buildingPhotos.close();exterior.scene.fog.density=0;moved=false;controls.keys.clear();const shot=sampleLanding(0,{aspect:exterior.camera.aspect});navigationTarget=shot.target;exterior.camera.fov=46;exterior.camera.updateProjectionMatrix();exterior.camera.position.set(...shot.position);exterior.camera.lookAt(...shot.target);controls.sync(navigationTarget);}
 document.getElementById('resetAerial').onclick=resetAerial;
 const canvas=document.getElementById('game');

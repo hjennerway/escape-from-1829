@@ -1,0 +1,12 @@
+{
+  "actual": {
+    "primitives": 15834,
+    "sha256": "f3a810a88eae2776280329060c40265999892f547d80b51217f4ad9a7675ee1d"
+  },
+  "expected": {
+    "primitives": 15834,
+    "sha256": "9e7768b7c3a581a208afc8aee36d56f19eb30f36c7155a8e5a488a86f4dd85ed"
+  },
+  "message": "All front geometry and unaffected wards remain unchanged\n+ actual - expected\n\n  {\n    primitives: 15834,\n+   sha256: 'f3a810a88eae2776280329060c40265999892f547d80b51217f4ad9a7675ee1d'\n-   sha256: '9e7768b7c3a581a208afc8aee36d56f19eb30f36c7155a8e5a488a86f4dd85ed'\n  }\n",
+  "stack": "AssertionError [ERR_ASSERTION]: All front geometry and unaffected wards remain unchanged\n+ actual - expected\n\n  {\n    primitives: 15834,\n+   sha256: 'f3a810a88eae2776280329060c40265999892f547d80b51217f4ad9a7675ee1d'\n-   sha256: '9e7768b7c3a581a208afc8aee36d56f19eb30f36c7155a8e5a488a86f4dd85ed'\n  }\n\n    at file:///C:/Users/Harry/Documents/_escape-from-1829/Browser/test-annexe-rear-stretch.mjs:12:8\n    at ModuleJob.run (node:internal/modules/esm/module_job:561:25)\n    at async node:internal/modules/esm/loader:647:26\n    at async asyncRunEntryPointWithESMLoader (node:internal/modules/run_main:101:5)"
+}

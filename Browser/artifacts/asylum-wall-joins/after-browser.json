@@ -3,43 +3,43 @@
   "renders": [
     {
       "name": "reception-left",
-      "calls": 104,
-      "triangles": 90656
+      "calls": 258,
+      "triangles": 1202362
     },
     {
       "name": "reception-left-oblique",
-      "calls": 86,
-      "triangles": 90620
+      "calls": 244,
+      "triangles": 1202154
     },
     {
       "name": "reception-left-upper",
-      "calls": 103,
-      "triangles": 90654
+      "calls": 256,
+      "triangles": 1201396
     },
     {
       "name": "reception-right",
-      "calls": 131,
-      "triangles": 94658
+      "calls": 160,
+      "triangles": 1098962
     },
     {
       "name": "stair-room-rear",
-      "calls": 65,
-      "triangles": 90578
+      "calls": 204,
+      "triangles": 1190814
     },
     {
       "name": "east-bay",
-      "calls": 28,
-      "triangles": 67516
+      "calls": 68,
+      "triangles": 1042388
     },
     {
       "name": "upper-west-rear",
-      "calls": 52,
-      "triangles": 86634
+      "calls": 146,
+      "triangles": 1126392
     },
     {
       "name": "basement-front",
-      "calls": 132,
-      "triangles": 96636
+      "calls": 156,
+      "triangles": 1134114
     }
   ],
   "errors": []

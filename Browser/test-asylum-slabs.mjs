@@ -3,7 +3,7 @@ import {readFile} from 'node:fs/promises';
 import * as THREE from './dist/vendor/three.module.js';
 import {buildAsylumLayout,insidePolygon} from './dist/asylum-layout.mjs';
 import {buildAsylumArchitecture} from './dist/asylum-architecture.mjs';
-import {stairOpening} from './dist/asylum-stairs.mjs';
+import {stairOpenings} from './dist/asylum-stairs.mjs';
 
 const plan=JSON.parse(await readFile(new URL('./dist/asylum-plan.json',import.meta.url))),floors=buildAsylumLayout(plan).floors;
 const ray=new THREE.Raycaster();let faces=0,rims=0,openings=0;
@@ -20,7 +20,7 @@ for(const floor of floors){
   ['Asylum ceiling',ceilingHeight,above?above.elevation-floor.elevation-.2:ceilingHeight+.2,0],
  ]){
   const meshes=scene.children.filter(m=>m.name===name);
-  const holes=floor.stairs.filter(s=>s.connections.some(c=>c[connection]===floor.id)).map(stairOpening);
+  const holes=floor.stairs.flatMap(s=>stairOpenings(s,floor.id,connection===0));
   for(const mesh of meshes)for(const material of [mesh.material].flat()){
    assert.equal(material.side,THREE.FrontSide,'Closed solids have outward-facing surfaces without disabling back-face culling');
    assert(!material.transparent&&material.opacity===1&&material.depthWrite,`${name} is opaque and writes depth`);

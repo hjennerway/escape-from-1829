@@ -13,6 +13,8 @@ npm start
 
 On Linux CI, install Chromium and its system libraries with `npx playwright install --with-deps chromium`. To use an existing Chrome installation locally, set `MODEL_CHROME_PATH` to its executable before running the build and compiled-scene tests. Playwright is a build/test dependency; visitors do not download it.
 
+Local browser validation requires hardware GPU acceleration. Run `npm run test:gpu` to verify the active renderer; tests stop if the GPU cannot be verified. The hosted GitHub workflows explicitly set `BROWSER_CI_SOFTWARE=1` for compiled-scene checks on their GPU-less runners. This exception also requires `CI=true` and must not be used for local validation.
+
 Open `http://127.0.0.1:1829/aerial.html` for automatic loading or append `?models=source` to force procedural construction. Add `&view=front` for a close comparison, or `&buildingDetail=full` to retain full window geometry. `?models=compiled` uses the normal compiled-first path and still permits fallback. `exterior.modelBuild` records the selected mode and model setup time for browser instrumentation.
 
 ## What is built

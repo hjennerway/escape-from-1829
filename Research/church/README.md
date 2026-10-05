@@ -49,3 +49,30 @@ The same unedited `clock-front-reference.png` is included in the Church's
 **Building photos** gallery as **Church · clock-facing front**, alongside the
 existing aerial photograph. `Browser/build-building-photos.mjs` generates the
 689 × 918 WebP asset and records its source in the photo manifest.
+
+## Centred road and completed perimeter — 5 October 2026
+
+The owner's [blue-road/red-path annotation](road-loop-marked-2026-10-05.png)
+asks for the church-front road to sit halfway between Churton and the church,
+and for the perimeter walk to form a complete loop. This supersedes the open
+horseshoe and clock-end termination described above. The image is placement
+reference for the request, not a separate source of instructions.
+
+The shared Parsons Lane frontage now lies at z=-93.55, halfway between the
+projecting Churton lawn bay at z=-82.65 and the church's clock-end feet near
+z=-104.45. Its western bend eases into that straight section, and the Upton
+Lea T-junction moves with it. The registered buildings and saved geographic
+road vertices retain their positions. Churton's entrance and mast-side gravel
+approaches end at the moved lane, without exposed paving on the church side.
+
+The clock-end arc closes the two-metre perimeter walk at local z=19. Periodic
+ribbon tangents join both paving edges and edging exactly at the closing seam.
+A short front link meets the relocated lane; both existing side links reach
+asphalt. The local merged western junction is regenerated from the updated
+road outlines, so the vacated road returns to terrain.
+
+Run `node Browser/test-church-grounds.mjs` for midpoint, full-width loop/seam,
+walking clearance, road/junction continuity, lane-link contact and removed-road
+checks. Local review captures and receipts are in
+`Browser/artifacts/church-road-loop/`. Browser sources and the local compiled
+aerial model are updated; Unity, Blender and packaged exports are unchanged.

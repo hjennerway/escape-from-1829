@@ -3,11 +3,14 @@ import {asylumWindowCenters} from './asylum-windows.mjs';
 import {furnitureContains,furnitureBlocks,indexFurniture} from './furniture-collision.mjs';
 import {ROOM_USES,ROOM_PURPOSES} from './asylum-room-uses.mjs';
 import {HALL_PROP_CATALOG,hallFurnishings} from './hall-furnishings.mjs';
+import {SANITARY_CATALOG,sanitaryFurnishings} from './sanitary-furnishings.mjs';
 import {doorRectangle,doorPolygonsOverlap,roomDoorHandle,roomDoorPanels,roomDoorHandlePlate} from './asylum-doors.mjs';
 
 export const RECEPTION_FURNITURE_SCALE=1.2;
 export const FURNITURE_CATALOG={
+ cellMattress:{procedural:true,width:.92,depth:1.90,height:.18,era:'Interpretive padded confinement cell'},
  ...HALL_PROP_CATALOG,
+ ...SANITARY_CATALOG,
  bed:{source:'bed_single_A',width:1.02*1.3,depth:2.10*1.3,height:.92*1.3},
  chair:{source:'windsor_chair',width:.48*1.3,depth:.47*1.3,height:.90*1.3},
  bookcase:{source:'shelf_B_large',width:1.25*1.5,depth:.38*1.5,height:1.90*1.5},
@@ -63,19 +66,35 @@ function windowPoints(floor){
  return floor.walls.flatMap(w=>asylumWindowCenters(w,floor.walls).map(t=>{const d=Math.hypot(w.b[0]-w.a[0],w.b[1]-w.a[1]);return [w.a[0]+(w.b[0]-w.a[0])*t/d,w.a[1]+(w.b[1]-w.a[1])*t/d];}));
 }
 function clearPlacement(floor,room,item,placed,windows){
- const fitted=room.purpose==='bookroom'||item.kind==='bookcase';
- const wallStorage=['cupboard','bookcase','waitingBench','longcaseClock','linenCupboard','sideboard'].includes(item.kind);
+ const fitted=['bookroom','library','privy','paddedCell'].includes(room.purpose)||item.kind==='bookcase';
+ const wallStorage=['cupboard','bookcase','waitingBench','longcaseClock','linenCupboard','sideboard','privySeat','privyScreen','washstand'].includes(item.kind);
+ const wallBed=item.kind==='bed'&&!!room.bedRows;
  const c=Math.cos(item.rotation),s=Math.sin(item.rotation);
- // Storage backs touch masonry. Keep side/front clearance, but probe the
- // rear face just inside the case instead of padding it into its host wall.
- const probes=wallStorage?[-1,0,1].flatMap(u=>[-1,0,1].map(v=>{
+ // Storage backs and planned bed heads may touch masonry. Keep side/front
+ // clearance, but probe the rear face just inside its host wall contact.
+ const probes=wallStorage||wallBed?[-1,0,1].flatMap(u=>[-1,0,1].map(v=>{
   const a=u*(item.width/2+.10),b=v===-1?-item.depth/2+1e-6:v*(item.depth/2+.10);
   return {x:item.x+c*a+s*b,z:item.z-s*a+c*b,radius:v===-1?0:.14};
  })):furnitureCorners(item,.10).map(([x,z])=>({x,z,radius:.14}));
  if(!probes.every(({x,z,radius})=>insidePolygon(x,z,room.points)&&flatWalkable(floor,x,z,radius,{furniture:false})))return false;
- if(furnitureContains(item,...room.label,fitted?.55:1.15))return false;
+ if(furnitureContains(item,...room.label,(fitted||room.bedRows||room.purpose==='privy')?.55:1.15))return false;
  if(placed.some(p=>!FURNITURE_CATALOG[p.kind].decorative&&overlaps(item,p)))return false;
  if(placed.some(p=>blocksFurnitureFront(item,p)))return false;
+ if(room.bedRows&&item.kind!=='bed'){
+  // Keep the routes around each row end open. Short-wall storage may use
+  // the wider middle aisle, beyond the full bed depth and foot clearance.
+  for(const row of room.bedRows){
+   const [a,b]=row.wall,length=Math.hypot(b[0]-a[0],b[1]-a[1]),dx=(b[0]-a[0])/length,dz=(b[1]-a[1])/length;
+   let nx=-dz,nz=dx;
+   if(!insidePolygon((a[0]+b[0])/2+nx*.2,(a[1]+b[1])/2+nz*.2,room.points)){nx=-nx;nz=-nz;}
+   for(const [index,p] of row.wall.entries()){
+    const end=Array.isArray(row.endClearance)?row.endClearance[index]:row.endClearance;
+    const along=Math.max(.45,end/2),x=p[0]+dx*(index===0?1:-1)*along,z=p[1]+dz*(index===0?1:-1)*along;
+    const reach=FURNITURE_CATALOG.bed.depth+row.clearance+.40;
+    if(nearSegment(item,[x+nx*.09,z+nz*.09],[x+nx*reach,z+nz*reach],.40))return false;
+   }
+  }
+ }
  // Reserve complete open leaves and handles, including their ends between
  // the usual furniture probes. Shelves also need their access strip clear.
  const footprint=doorRectangle(item),doorFront=furnitureFrontClearance(item);
@@ -87,26 +106,31 @@ function clearPlacement(floor,room,item,placed,windows){
  // The extra side allowance separates furniture; masonry must leave the
  // actual frame width clear. Check its centre with a player's radius too.
  if(front&&(!furnitureCorners({...front,width:item.width}).every(([x,z])=>insidePolygon(x,z,room.points)&&flatWalkable(floor,x,z,.02,{furniture:false}))||!flatWalkable(floor,front.x,front.z,.36,{furniture:false})))return false;
- // Flush storage can meet a corridor's enclosing wall. Reserve its full
- // walking width without extending the extra buffer through that masonry.
- for(const c of floor.corridors)for(let i=1;i<c.points.length;i++)if(nearSegment(item,c.points[i-1],c.points[i],c.width/2+(wallStorage?0:.20)))return false;
+ // Wall-fitted furniture can meet a corridor's enclosing wall. Reserve the
+ // full walking width without extending the extra buffer through masonry.
+ for(const c of floor.corridors)for(let i=1;i<c.points.length;i++)if(nearSegment(item,c.points[i-1],c.points[i],c.width/2+(wallStorage||wallBed?0:.20)))return false;
  for(const door of floor.doorways){
   if(fitted){
    // Reserve the full opening and a player-width approach, even beside a
    // canted wall. The compact shelves keep the same collision checks.
    const approach={x:door.x,z:door.z,width:door.width+.30,depth:1.20,rotation:Math.atan2(-door.dz,door.dx)};
    if(overlaps(item,approach,.18))return false;
-  }else if(furnitureContains(item,door.x,door.z,1.35))return false;
-  if(door.roomId===room.id&&nearSegment(item,[door.x,door.z],room.label,fitted?.45:.75))return false;
+  }else if(furnitureContains(item,door.x,door.z,wallBed?door.width/2+.34:1.35))return false;
+  // Dormitory entrance gaps and end aisles connect to the middle aisle.
+  if(!room.bedRows&&door.roomId===room.id&&nearSegment(item,[door.x,door.z],room.label,fitted?.45:.75))return false;
  }
  for(const exit of floor.exits)if(furnitureContains(item,exit.inside.x,exit.inside.z,1.8))return false;
  for(const shaft of floor.shafts){const b={x:(shaft.minX+shaft.maxX)/2,z:(shaft.minZ+shaft.maxZ)/2,width:shaft.maxX-shaft.minX,depth:shaft.maxZ-shaft.minZ,rotation:0};if(overlaps(item,b,.85))return false;}
  // Leave the complete window sill, reveal and viewing space free.
- if(windows.some(([x,z])=>furnitureContains(item,x,z,.85)))return false;
+ // Owner-directed dormitory rows put their headboards against the wall,
+ // including beneath windows, rather than reserving a route behind them.
+ // A low cell mattress stays below the sill; retain 30cm beside the window
+ // wall instead of the standing/viewing strip used by tall furnishings.
+ if(!wallBed&&windows.some(([x,z])=>furnitureContains(item,x,z,item.kind==='cellMattress'?.30:.85)))return false;
  return true;
 }
 function wallCandidates(room,kind,floor,model=FURNITURE_CATALOG[kind]){
- const fitted=room.purpose==='bookroom',wallStorage=['cupboard','bookcase'].includes(kind),out=[];
+ const fitted=['bookroom','library','paddedCell'].includes(room.purpose),wallStorage=['cupboard','bookcase'].includes(kind),out=[];
  let walls=room.points.map((a,i)=>({a,b:room.points[(i+1)%room.points.length]}));
  if(fitted||wallStorage){
   // Room envelopes are rectangular at the window bays. Fit to the actual
@@ -134,20 +158,41 @@ function wallCandidates(room,kind,floor,model=FURNITURE_CATALOG[kind]){
    out.push({x:a[0]+(b[0]-a[0])*t+nx*inset,z:a[1]+(b[1]-a[1])*t+nz*inset,rotation:Math.atan2(nx,nz),edge});
   }
   // Enlarged storage needs positions between the grid's window/door cuts.
-  if(kind==='cupboard'||kind==='bookcase')for(let along=model.width/2+(fitted?.18:.30);along<=length-model.width/2-(fitted?.18:.30);along+=.10){
-   const t=along/length,inset=model.depth/2+.09;
+  if(kind==='cupboard'||kind==='bookcase'||kind==='cellMattress')for(let along=model.width/2+(fitted?.18:.30);along<=length-model.width/2-(fitted?.18:.30);along+=.10){
+   const t=along/length,inset=model.depth/2+(kind==='cellMattress'?.35:.09);
    out.push({x:a[0]+(b[0]-a[0])*t+nx*inset,z:a[1]+(b[1]-a[1])*t+nz*inset,rotation:Math.atan2(nx,nz),edge});
   }
  }
  return out;
 }
 function placeRoom(floor,room,purpose,seed,windows){
- const placed=[],random=furnishingRandom(roomSeed(seed,floor.id,room.id)),fixed=purpose.fixed;
+ const placed=[],random=furnishingRandom(roomSeed(seed,floor.id,room.id)),fixed=[...purpose.fixed];
+ if(room.bedRows){
+  const additional=room.bedRows.reduce((count,row)=>count+row.count,0)-fixed.filter(kind=>kind==='bed').length;
+  if(additional<0)throw Error(`Dormitory plan has fewer beds than its room use: ${floor.id} ${room.id}`);
+  fixed.push(...Array(additional).fill('bed'));
+ }
  const door=floor.doorways.find(d=>d.roomId===room.id);
+ const bedPositions=(room.bedRows??[]).flatMap((row,rowIndex)=>{
+  const [a,b]=row.wall,length=Math.hypot(b[0]-a[0],b[1]-a[1]);
+  let nx=-(b[1]-a[1])/length,nz=(b[0]-a[0])/length;
+  if(!insidePolygon((a[0]+b[0])/2+nx*.2,(a[1]+b[1])/2+nz*.2,room.points)){nx=-nx;nz=-nz;}
+  const model=FURNITURE_CATALOG.bed,inset=model.depth/2+row.clearance,ends=Array.isArray(row.endClearance)?row.endClearance:[row.endClearance,row.endClearance];
+  const start=model.width/2+ends[0],end=length-model.width/2-ends[1];
+  const slots=row.slots??row.count;
+  const positions=Array.from({length:slots},(_,index)=>{
+   const along=slots===1?(start+end)/2:start+(end-start)*index/(slots-1),t=along/length;
+   return {x:a[0]+(b[0]-a[0])*t+nx*inset,z:a[1]+(b[1]-a[1])*t+nz*inset,rotation:Math.atan2(nx,nz),bedRow:rowIndex,bedSlot:index};
+  }).filter(p=>!(row.omittedSlots??[]).includes(p.bedSlot));
+  if(positions.length!==row.count)throw Error(`Dormitory row count differs from its plan: ${floor.id} ${room.id} ${rowIndex}`);
+  return positions;
+ });
+ if(room.bedRows&&bedPositions.length!==fixed.filter(kind=>kind==='bed').length)throw Error(`Dormitory bed count differs from its plan: ${floor.id} ${room.id}`);
+ let bedIndex=0;
  function place(kind,variable,index){
   // Fitted bay cases keep their smaller proportions and follow the shared
   // bookcase scale on every axis, including walking footprints.
-  const model=room.purpose==='bookroom'&&kind==='bookcase'?{...FURNITURE_CATALOG[kind],width:FURNITURE_CATALOG[kind].width*1.05/1.25,depth:FURNITURE_CATALOG[kind].depth*.28/.38,stocked:true}:FURNITURE_CATALOG[kind],id=`${floor.id}:${room.id}:${variable?'variable':'fixed'}:${index}`;
+  const model=['bookroom','library'].includes(room.purpose)&&kind==='bookcase'?{...FURNITURE_CATALOG[kind],width:FURNITURE_CATALOG[kind].width*1.05/1.25,depth:FURNITURE_CATALOG[kind].depth*.28/.38,stocked:true}:FURNITURE_CATALOG[kind],id=`${floor.id}:${room.id}:${variable?'variable':'fixed'}:${index}`;
   if(model.decorative){
    const supports=placed.filter(p=>['table','cupboard'].includes(p.kind)&&p.width>=model.width+.12&&p.depth>=model.depth+.12);
    if(!supports.length)return false;
@@ -156,7 +201,12 @@ function placeRoom(floor,room,purpose,seed,windows){
    if(placed.some(p=>blocksFurnitureFront(item,p)))return false;
    placed.push(item);return true;
   }
-  let candidates=wallCandidates(room,kind,floor,model);
+  const plannedBed=kind==='bed'&&bedPositions.length>0;
+  let candidates=plannedBed?[bedPositions[bedIndex++]]:wallCandidates(room,kind,floor,model);
+  if(plannedBed&&!candidates[0])throw Error(`Dormitory bed position missing: ${floor.id} ${room.id} ${index}`);
+  // Large reading rooms can reserve central table positions in their plan.
+  // They still pass the same full footprint, door and circulation checks.
+  const centralTables=kind==='table'?(room.tablePositions??[]).map(([x,z])=>({x,z,rotation:0})):[];
   candidates.sort((a,b)=>{
    // Fit both cheeks of the narrow library bay before its flat end wall
    // consumes their front access now that the cases sit against masonry.
@@ -174,7 +224,8 @@ function placeRoom(floor,room,purpose,seed,windows){
    const score=p=>door?Math.hypot(p.x-door.x,p.z-door.z):Math.hypot(p.x-room.label[0],p.z-room.label[1]);
    return score(b)-score(a)||a.edge-b.edge;
   });
-  if(['ward','bedroom','staffBedroom'].includes(room.purpose)&&kind==='bench'){
+  candidates=[...centralTables,...candidates];
+  if(['ward','centralDormitory','bedroom','staffBedroom'].includes(room.purpose)&&kind==='bench'){
    const bedside=placed.filter(p=>p.kind==='bed').flatMap(bed=>[-1,1].map(side=>{
     const c=Math.cos(bed.rotation),s=Math.sin(bed.rotation),u=side*((bed.width+model.width)/2+.22),v=.20;
     return {x:bed.x+c*u+s*v,z:bed.z-s*u+c*v,rotation:bed.rotation};
@@ -191,14 +242,17 @@ function placeRoom(floor,room,purpose,seed,windows){
   }
   if(variable){for(let i=candidates.length-1;i>0;i--){const j=Math.floor(random()*(i+1));[candidates[i],candidates[j]]=[candidates[j],candidates[i]];}}
   for(const point of candidates){
-   const item={...model,...point,id,kind,roomId:room.id,variable,y:.008,rotation:point.rotation+(variable?(random()-.5)*.24:0)};
+   const item={...model,...point,id,kind,roomId:room.id,variable,y:kind==='cellMattress'?.018:.008,rotation:point.rotation+(variable?(random()-.5)*.24:0)};
    if(clearPlacement(floor,room,item,placed,windows)){placed.push(item);return true;}
   }
+  if(plannedBed)throw Error(`Dormitory bed has no clear placement: ${floor.id} ${room.id} ${index}`);
   return false;
  }
  // Allocate access to shelves/cabinets before fitting the other furniture.
+ // Fit every planned bed before seats/storage can consume its row slots.
  // Keep original indices so their stable placement IDs remain unchanged.
- const order=fixed.map((kind,i)=>i).sort((a,b)=>Number(['bookcase','apothecary'].includes(fixed[b]))-Number(['bookcase','apothecary'].includes(fixed[a])));
+ const priority=kind=>['bookcase','apothecary'].includes(kind)?2:room.bedRows&&kind==='bed'?1:0;
+ const order=fixed.map((kind,i)=>i).sort((a,b)=>priority(fixed[b])-priority(fixed[a]));
  for(const i of order){
   const kind=fixed[i],success=place(kind,false,i);
   if(!success&&FURNITURE_CATALOG[kind].procedural&&kind!=='cupboard')throw Error(`Medical furnishing has no clear placement: ${floor.id} ${room.id} ${kind}`);
@@ -218,7 +272,14 @@ export function furnishAsylum(floors,{seed=1829}={}){
   for(const room of floor.rooms){
    const use=ROOM_USES[floor.id]?.[room.id];if(!use)throw Error(`Room use missing: ${floor.id} ${room.id}`);
    const purpose=ROOM_PURPOSES[use];room.purpose=use;room.name=purpose.name;
-   floor.furniture.push(...placeRoom(floor,room,purpose,seed,windows));
+   if(use==='privy'){
+    const fixtures=sanitaryFurnishings(floor,room),placed=[];
+    for(const item of fixtures){
+     if(!clearPlacement(floor,room,item,placed,windows))throw Error(`Sanitary furnishing has no clear placement: ${item.id}`);
+     placed.push(item);
+    }
+    floor.furniture.push(...placed);
+   }else floor.furniture.push(...placeRoom(floor,room,purpose,seed,windows));
   }
   // Reception is open circulation rather than an enclosed numbered room.
   // A central desk faces the entrance; side passages leave R24 accessible.

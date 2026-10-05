@@ -105,10 +105,16 @@ for(const [x,z] of [[-65.05,lowRoofZ-1.04],[-65.05,lowRoofZ+1.04],[-65.05-1.44,l
   const rim=hit([x,9.5,z],[0,-1,0]);assert.equal(rim.object.material.color.getHex(),0xe1e3dc);
   assert(Math.abs(rim.point.y-9.01)<1e-5,'A continuous low rim rises only 0.20 above the deck');
 }
-for(const x of [-65.9,-66.55])for(const y of [1.7,6.1]){
+for(const x of [-65.9,-71.7])for(const y of [1.7,6.1]){
   const clear=hit([x,y,lowRoofZ-2],[0,0,1]);
-  assert.notEqual(clear.object.material.color.getHex(),0x454b49,'Neither removed downpipe remains in front of the window wall');
+  assert.notEqual(clear.object.material.color.getHex(),0x454b49,'The overlapping and former far-end downpipes are removed');
 }
+for(const y of [.2,1.7,6.1,8.85]){
+  const pipe=hit([-66.55,y,lowRoofZ-2],[0,0,1]);
+  assert.equal(pipe.object.material.color.getHex(),0x454b49,'The relocated pipe follows the blue guide beside the low bay');
+  assert(Math.abs(pipe.point.z-(lowRoofZ-1.2025))<1e-5,'The pipe retains its facade clearance');
+}
+assert.notEqual(hit([-66.55,9.1,lowRoofZ-2],[0,0,1]).object.material.color.getHex(),0x454b49,'The relocated pipe stops at the low roof rim');
 const obstacles=exteriorObstacles(THREE,model),blocked=(x,z)=>obstacles.some(o=>obstacleContains(o,x,z));
 for(const [key,view] of Object.entries(WEST_REFINEMENT_VIEWS)){
   assert.deepEqual(LOCATION_VIEWS[key],view);
@@ -142,7 +148,7 @@ for(const edge of [pierBounds.min.z,pierBounds.max.z])for(const dz of [-.3,.3]){
   const base=hit([-74,1,edge+dz],[1,0,0]);
   assert.equal(base.object.material.color.getHex(),0xe1e3dc,'The complete white base stays exposed');
   assert(Math.abs(base.point.x-(centre?-72.535:-72.285))<1e-5,'The white base follows the same step');
-  assert([0xe1e3dc,0xd8ddd5].includes(hit([-74,15.2,edge+dz],[1,0,0])?.object.material.color.getHex()),'The pale cornice closes both sides of the section boundary');
+  assert([0xe1e3dc,0xd8ddd5].includes(hit([-74,14.3,edge+dz],[1,0,0])?.object.material.color.getHex()),'The pale cornice closes both sides of the section boundary');
 }
 assert(Math.abs(pierBounds.getCenter(new THREE.Vector3()).z-WEST_END_PROPORTIONS.doorZ)<1e-6,'The pier remains aligned with the entrance');
 const approach=new THREE.Box3().setFromObject(model.getObjectByName('West end entrance path'));
@@ -315,7 +321,7 @@ for(const o of [...returnWindows,...model.userData.westFrontPhotoOpenings.filter
   }
 }
 const plan=JSON.parse(await readFile(new URL('./dist/asylum-plan.json',import.meta.url),'utf8'));
-for(const [id,direction] of [['D2',[1,0,0]],['D3',[0,0,-1]],['D5',[0,0,1]],['D6',[1,0,0]],['F4',[-1,0,0]]]){
+for(const [id,direction] of [['D2',[1,0,0]],['D3',[0,0,-1]],['D5',[0,0,1]],['D6',[1,0,0]],['F4',[0,0,-1]]]){
   const [x,y,z]=plan.exits.find(e=>e.id===id).levels[0].destination;
   // Sample a leaf beside the centre mullion, rather than the white divider.
   assert.equal(hit([x+(direction[2]?.25:0),y+1.36,z+(direction[0]?.25:0)],direction).object.material.color.getHex(),0x172e50,id+' exterior arrival faces its actual blue door after the outline change');

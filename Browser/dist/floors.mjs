@@ -38,10 +38,16 @@ export function routeBetweenFloors(floors,from,to){
 }
 function planRoute(floors,from,to){
  const f=from.floor??0,t=to.floor??0;
- if(f===t)return path(floors[f],from,to).map(p=>({...p,floor:f,y:floors[f].elevation}));
+ if(f===t){
+  const direct=path(floors[f],from,to);
+  if(direct.length)return direct.map(p=>({...p,floor:f,y:floors[f].elevation}));
+  // Separate upper wings can connect through the lower storey. Continue
+  // through the stair graph when there is no direct route on this level.
+ }
  const nodes=[{...from,floor:f},{...to,floor:t}],links=[];
- for(const stair of floors[0].stairs)for(const [lower,upper] of stair.connections){
-  const route=stairRoute(stair,floors[lower].elevation,floors[upper].elevation),a=nodes.length,b=a+1;
+ const stairs=[...new Map(floors.flatMap(f=>f.stairs).map(s=>[s.id,s])).values()];
+ for(const stair of stairs)for(const [lower,upper] of stair.connections){
+  const route=stairRoute(stair,floors[lower].elevation,floors[upper].elevation,lower,upper),a=nodes.length,b=a+1;
   nodes.push({x:route[0][0],z:route[0][2],floor:lower},{x:route.at(-1)[0],z:route.at(-1)[2],floor:upper});
   const points=[];
   for(let i=1;i<route.length;i++){const start=route[i-1],end=route[i],n=Math.ceil(Math.hypot(end[0]-start[0],end[2]-start[2])/.3);for(let k=1;k<=n;k++){const v=k/n;points.push({x:start[0]+(end[0]-start[0])*v,z:start[2]+(end[2]-start[2])*v,y:start[1]+(end[1]-start[1])*v,floor:k===n&&i===route.length-1?upper:lower});}}

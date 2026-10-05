@@ -1,0 +1,87 @@
+{
+  "doors": 24,
+  "staircase": {
+    "down": [
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true
+    ],
+    "up": [
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true
+    ],
+    "toFirst": [
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true
+    ],
+    "bottom": 2,
+    "middle": 0,
+    "top": 1,
+    "continuous": true
+  },
+  "landing": {
+    "start": 5.1,
+    "y": 5.169999904930592,
+    "x": 8.9,
+    "z": -36.45
+  },
+  "renders": [
+    {
+      "name": "reception",
+      "calls": 259,
+      "triangles": 1355814
+    },
+    {
+      "name": "rear-corridor",
+      "calls": 155,
+      "triangles": 1347478
+    },
+    {
+      "name": "ground-room",
+      "calls": 297,
+      "triangles": 1357940
+    },
+    {
+      "name": "first-floor",
+      "calls": 293,
+      "triangles": 1357626
+    },
+    {
+      "name": "basement-corridor",
+      "calls": 153,
+      "triangles": 1332146
+    },
+    {
+      "name": "basement-room",
+      "calls": 104,
+      "triangles": 1275246
+    },
+    {
+      "name": "new-stair",
+      "calls": 127,
+      "triangles": 1327028
+    }
+  ],
+  "errors": []
+}

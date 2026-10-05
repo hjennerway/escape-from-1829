@@ -1,5 +1,6 @@
 import {insidePolygon,segmentDistance} from './asylum-layout.mjs';
 import {ROOM_USES} from './asylum-room-uses.mjs';
+import {createCellPadding} from './padded-cell-models.mjs';
 
 export const ROOM_WALL_COLOURS=[
  {name:'dusty rose',colour:0xb29993},
@@ -7,7 +8,7 @@ export const ROOM_WALL_COLOURS=[
  {name:'faded blue',colour:0x8593a4}
 ];
 export const ROOM_DADO_FRACTION=.4;
-const plainUses=new Set(['hydrotherapy','showerTreatment','surgery','ect','electricalTreatment','treatment','stairs','porch','circulation']);
+const plainUses=new Set(['paddedCell','hydrotherapy','showerTreatment','surgery','ect','electricalTreatment','treatment','privy','stairs','junctionStairs','porch','circulation']);
 export function roomWallColour(floor,room){
  const use=ROOM_USES[floor.id]?.[room.id];
  return use&&!plainUses.has(use)?(Number(room.id.replace(/\D/g,''))+floor.id)%ROOM_WALL_COLOURS.length:-1;
@@ -20,7 +21,7 @@ const difference=(a,b)=>[a[0]-b[0],a[1]-b[1]];
 // Classify the exposed face, never the centre of a two-sided partition.
 // Corridor/stair priority covers room envelopes that include circulation.
 function finishRegions(floor){
- const rooms=floor.rooms.map(room=>({room,colour:roomWallColour(floor,room)})).filter(r=>r.colour>=0);
+ const rooms=floor.rooms.map(room=>({room,colour:roomWallColour(floor,room),padded:ROOM_USES[floor.id]?.[room.id]==='paddedCell'})).filter(r=>r.colour>=0||r.padded);
  const corridors=floor.corridors.flatMap(c=>c.points.slice(1).map((b,i)=>({a:c.points[i],b,r:c.width/2-.05})));
  const shafts=floor.shafts??[];
  const polygons=rooms.map(r=>r.room.points);
@@ -64,8 +65,8 @@ function clip(vertices,axis,limit,above){
  return result;
 }
 
-export function createAsylumRoomFinisher(THREE,floor,ceilingHeight){
- const regions=finishRegions(floor),railHeight=ceilingHeight*ROOM_DADO_FRACTION,railPieces=[];
+export function createAsylumRoomFinisher(THREE,floor,ceilingHeight,windowFrames=[]){
+ const regions=finishRegions(floor),railHeight=ceilingHeight*ROOM_DADO_FRACTION,railPieces=[],padding=createCellPadding(THREE,floor,ceilingHeight,windowFrames);
  return {
   geometry(source){
    const input=source.index?source.toNonIndexed():source,p=input.attributes.position,n=input.attributes.normal,uv=input.attributes.uv;
@@ -89,6 +90,7 @@ export function createAsylumRoomFinisher(THREE,floor,ceilingHeight){
      if(right-left<eps)continue;
      const u=(left+right)/2,finish=regions.at(origin[0]+tangent[0]*u,origin[1]+tangent[1]*u);
      const polygon=clip(clip(tri,tangent,left,true),tangent,right,false);emit(polygon,finish);
+     if(finish?.padded){padding.wall(polygon,normal,finish.room.id);continue;}
      if(!finish)continue;
      // Rails only come from surfaces present at this height. Window apertures,
      // door openings and stair mouths therefore stay physically clear.
@@ -109,7 +111,8 @@ export function createAsylumRoomFinisher(THREE,floor,ceilingHeight){
    result.setAttribute('roomFinish',new THREE.Float32BufferAttribute(finishes,2));
    if(input!==source)input.dispose();return result;
   },
-  rail(windowFrames=[]){return dadoGeometry(THREE,railPieces,railHeight,windowFrames);}
+  rail(windowFrames=[]){return dadoGeometry(THREE,railPieces,railHeight,windowFrames);},
+  padding(){return padding.mesh();}
  };
 }
 

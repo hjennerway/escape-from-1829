@@ -1,12 +1,12 @@
 // Arrange the verified render captures into a review sheet; no model pixels are edited.
 import {readFile,writeFile} from 'node:fs/promises';
 import {fileURLToPath} from 'node:url';
-import {chromium} from 'playwright';
+import {launchHardwareBrowser} from './test-support/hardware-browser.mjs';
 const root=new URL('./artifacts/room-furniture/',import.meta.url);
 const items=[['hydroBath','Immersion bath','R1 · Hydrotherapy'],['hydroShower','Cold-water apparatus','R12 · Cold-water treatment'],['operatingTable','Wooden surgical table','R6 · Surgical treatment'],['electrotherapy','Early electrical apparatus','R29 · Early electrical treatment'],['apothecary','Apothecary cabinet','R7 · Medicines and dispensing'],['bloodletting','Leech and cupping set','R7 · On the dispensing table'],['ectMachine','1940s ECT trolley','R8 · Later hospital era']];
 const cards=[];for(const [kind,title,room] of items){const png=await readFile(new URL(`model-${kind}.png`,root));cards.push(`<figure><img src="data:image/png;base64,${png.toString('base64')}" alt="${title}"><figcaption><b>${title}</b><span>${room}</span></figcaption></figure>`);}
 const html=`<!doctype html><html lang="en"><meta charset="utf-8"><title>Historic medical furniture</title><style>*{box-sizing:border-box}body{margin:0;padding:30px;background:#eee9dd;color:#354134;font:16px Arial,sans-serif}h1{margin:0 0 8px;font-size:30px}p{margin:0 0 24px;color:#626855}.grid{display:grid;grid-template-columns:repeat(4,1fr);gap:18px}figure{margin:0;background:#d0c7b4;border:1px solid #c0b69e;border-radius:5px;overflow:hidden}img{display:block;width:100%;height:225px;object-fit:cover}figcaption{padding:14px 15px;background:#f7f3e9}b{display:block;font-size:17px}span{display:block;margin-top:7px;font-size:13px;color:#646b5e}</style><h1>Historic medical furniture</h1><p>Seven original models placed in the playable browser interior.</p><div class="grid">${cards.join('')}</div></html>`;
 await writeFile(new URL('medical-gallery.html',root),html);
-const browser=await chromium.launch({headless:true,executablePath:process.env.MODEL_CHROME_PATH??'C:/Program Files/Google/Chrome/Application/chrome.exe'});
+const browser=await launchHardwareBrowser({headless:true,executablePath:process.env.MODEL_CHROME_PATH??'C:/Program Files/Google/Chrome/Application/chrome.exe'});
 try{const page=await browser.newPage({viewport:{width:1440,height:775},deviceScaleFactor:1});await page.setContent(html);await page.evaluate(()=>Promise.all(Array.from(document.images,image=>image.decode())));await page.screenshot({path:fileURLToPath(new URL('medical-gallery.png',root)),fullPage:true});}finally{await browser.close();}
 console.log('Wrote the seven-model medical furniture review sheet.');

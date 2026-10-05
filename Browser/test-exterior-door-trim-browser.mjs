@@ -2,7 +2,7 @@ import assert from 'node:assert/strict';
 import {mkdir,readFile,writeFile} from 'node:fs/promises';
 import {fileURLToPath} from 'node:url';
 import {spawn} from 'node:child_process';
-import {chromium} from 'playwright';
+import {launchHardwareBrowser} from './test-support/hardware-browser.mjs';
 
 const out=new URL('./artifacts/door-trim/',import.meta.url);await mkdir(out,{recursive:true});
 const baseline=process.argv.includes('--baseline');
@@ -10,7 +10,7 @@ const server=spawn(process.execPath,['serve.mjs'],{cwd:new URL('.',import.meta.u
 const base=await new Promise((resolve,reject)=>{server.stdout.once('data',d=>resolve(String(d).match(/http:\/\/127\.0\.0\.1:\d+/)[0]));server.once('error',reject);});
 let browser;
 try{
- browser=await chromium.launch({headless:true,executablePath:process.env.MODEL_CHROME_PATH??'C:/Program Files/Google/Chrome/Application/chrome.exe',args:['--use-angle=swiftshader','--enable-unsafe-swiftshader']});
+ browser=await launchHardwareBrowser({headless:true,executablePath:process.env.MODEL_CHROME_PATH??'C:/Program Files/Google/Chrome/Application/chrome.exe'});
  const page=await browser.newPage({viewport:{width:1200,height:780}}),errors=[],report=[];
  page.setDefaultTimeout(120000);page.setDefaultNavigationTimeout(120000);
  page.on('pageerror',e=>errors.push(e.message));page.on('console',m=>{if(m.type()==='error'&&/THREE|WebGL|shader/i.test(m.text()))errors.push(m.text());});
@@ -32,10 +32,11 @@ try{
    exterior.model.traverse(o=>{if(o.userData.aerialBatch||o.userData.aerialBatchSource){visibility.push([o,o.visible]);o.visible=!!o.userData.aerialBatchSource;}});
    const active=[];exterior.model.traverseVisible(o=>{if(o.isMesh)active.push(o);});
    for(const dx of [-.6,-.3,.3,.6])for(const y of [.46,.53,.61]){
-    ray.set(new THREE.Vector3(-45.2+dx,y,20.2),new THREE.Vector3(0,0,-1));ray.far=1;
+    // Match the relocated D3 garden leaf on the centred window bank.
+    ray.set(new THREE.Vector3(-44.7+dx,y,14.2),new THREE.Vector3(0,0,-1));ray.far=1;
     hits.push({door:'west-garden',dx,y,colour:ray.intersectObjects(active,false)[0]?.object.material.color.getHex()});
    }
-   views.push({name:'west-garden',position:[-43.7,1.65,23.3],target:[-45.2,1.5,19.69]});
+   views.push({name:'west-garden',position:[-43.2,1.65,17.2],target:[-44.7,1.5,13.59]});
    const group=exterior.annexe.userData.larktonRecess.group;
    for(const name of ['Recess shadowed entrance door','Recess pale room door']){
     const door=group.getObjectByName(name),normal=new THREE.Vector3(0,0,1).transformDirection(group.matrixWorld);
@@ -60,7 +61,7 @@ try{
    await page.evaluate(()=>new Promise(r=>requestAnimationFrame(()=>requestAnimationFrame(r))));
    await page.screenshot({path:fileURLToPath(new URL((baseline?'before':mode)+'-'+v.name+'.png',out))});
   }
-  await page.setViewportSize({width:390,height:844});await page.evaluate(()=>window.trimCheck.pose([-43.7,1.65,23.3],[-45.2,1.5,19.69]));
+  await page.setViewportSize({width:390,height:844});await page.evaluate(()=>window.trimCheck.pose([-43.2,1.65,17.2],[-44.7,1.5,13.59]));
   await page.screenshot({path:fileURLToPath(new URL((baseline?'before':mode)+'-mobile.png',out))});await page.setViewportSize({width:1200,height:780});
   report.push({mode,build,hits:checks.hits});console.log('Checked '+mode+' door trim and captured three doors plus mobile');
  }

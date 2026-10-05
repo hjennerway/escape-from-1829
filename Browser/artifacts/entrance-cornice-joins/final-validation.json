@@ -1,0 +1,266 @@
+{
+  "errors": [],
+  "views": {
+    "marked": {
+      "position": [
+        29,
+        30,
+        41
+      ],
+      "target": [
+        29,
+        13,
+        17
+      ],
+      "fov": 47
+    },
+    "bay": {
+      "position": [
+        23,
+        20,
+        28
+      ],
+      "target": [
+        26.4,
+        13.5,
+        19
+      ],
+      "fov": 43
+    },
+    "return": {
+      "position": [
+        34,
+        19,
+        23
+      ],
+      "target": [
+        33.65,
+        13.4,
+        15.5
+      ],
+      "fov": 40
+    },
+    "reverse": {
+      "position": [
+        40,
+        24,
+        30
+      ],
+      "target": [
+        27,
+        13,
+        17
+      ],
+      "fov": 43
+    },
+    "low": {
+      "position": [
+        26,
+        13.6,
+        27
+      ],
+      "target": [
+        26,
+        13.5,
+        19.7
+      ],
+      "fov": 40
+    }
+  },
+  "probes": [
+    {
+      "x": -58.4,
+      "z": 1.45,
+      "hits": [
+        {
+          "name": "Aerial batch · Period · 1829 Wings · 199",
+          "y": 14.596233518173086,
+          "slate": true
+        },
+        {
+          "name": "Aerial batch · Period · 1829 Wings · 200",
+          "y": 14.529999732971191,
+          "slate": false
+        },
+        {
+          "name": "Aerial batch · Period · 1829 Wings · 200",
+          "y": 14.319999694824219,
+          "slate": false
+        },
+        {
+          "name": "",
+          "y": 12.740000303834677,
+          "slate": false
+        },
+        {
+          "name": "",
+          "y": 12.660000324249268,
+          "slate": false
+        }
+      ]
+    },
+    {
+      "x": -56.75,
+      "z": 1.45,
+      "hits": [
+        {
+          "name": "Aerial batch · Period · 1829 Wings · 199",
+          "y": 14.596233518173086,
+          "slate": true
+        },
+        {
+          "name": "Aerial batch · Period · 1829 Wings · 200",
+          "y": 14.52999973297119,
+          "slate": false
+        },
+        {
+          "name": "Aerial batch · Period · 1829 Wings · 200",
+          "y": 14.319999694824219,
+          "slate": false
+        },
+        {
+          "name": "Aerial batch · Period · 1829 Wings · 200",
+          "y": 8.699999809265137,
+          "slate": false
+        },
+        {
+          "name": "Aerial batch · Period · 1829 Wings · 200",
+          "y": 4.150000095367428,
+          "slate": false
+        }
+      ]
+    },
+    {
+      "x": -60,
+      "z": 1.45,
+      "hits": [
+        {
+          "name": "Aerial batch · Period · 1829 Wings · 199",
+          "y": 14.596233518173088,
+          "slate": true
+        },
+        {
+          "name": "Aerial batch · Period · 1829 Wings · 200",
+          "y": 14.52999973297119,
+          "slate": false
+        },
+        {
+          "name": "Aerial batch · Period · 1829 Wings · 200",
+          "y": 14.319999694824219,
+          "slate": false
+        },
+        {
+          "name": "Aerial batch · Period · 1829 Wings · 200",
+          "y": 8.699999809265137,
+          "slate": false
+        },
+        {
+          "name": "Aerial batch · Period · 1829 Wings · 200",
+          "y": 4.150000095367428,
+          "slate": false
+        }
+      ]
+    },
+    {
+      "x": -38,
+      "z": 4.85,
+      "hits": [
+        {
+          "name": "Aerial batch · Period · 1829 Wings · 199",
+          "y": 14.667096641737077,
+          "slate": true
+        },
+        {
+          "name": "Aerial batch · Period · 1829 · 253",
+          "y": 14.667096641737075,
+          "slate": true
+        },
+        {
+          "name": "Aerial batch · Period · 1829 Wings · 215",
+          "y": 14.569999694824219,
+          "slate": false
+        },
+        {
+          "name": "Aerial batch · Period · 1829 · 267",
+          "y": 14.569999694824219,
+          "slate": false
+        },
+        {
+          "name": "Aerial batch · Period · 1829 Wings · 200",
+          "y": 14.529999732971191,
+          "slate": false
+        }
+      ]
+    },
+    {
+      "x": -37.5,
+      "z": 4.85,
+      "hits": [
+        {
+          "name": "Aerial batch · Period · 1829 · 253",
+          "y": 14.667096565251873,
+          "slate": true
+        },
+        {
+          "name": "Aerial batch · Period · 1829 · 267",
+          "y": 14.569999694824219,
+          "slate": false
+        },
+        {
+          "name": "Aerial batch · Period · 1829 · 267",
+          "y": 14.449999809265135,
+          "slate": false
+        },
+        {
+          "name": "Aerial batch · Period · 1829 · 267",
+          "y": 14.199999809265135,
+          "slate": false
+        },
+        {
+          "name": "Aerial batch · West side semi-basement · 15",
+          "y": -1.0199999809265137,
+          "slate": false
+        }
+      ]
+    },
+    {
+      "x": -37.4,
+      "z": 7,
+      "hits": [
+        {
+          "name": "Aerial batch · Period · 1829 · 253",
+          "y": 15.846127585179854,
+          "slate": true
+        },
+        {
+          "name": "Aerial batch · Period · 1829 · 267",
+          "y": 14.569999694824219,
+          "slate": false
+        },
+        {
+          "name": "Aerial batch · Period · 1829 · 267",
+          "y": 14.449999809265135,
+          "slate": false
+        },
+        {
+          "name": "Aerial batch · Period · 1829 · 267",
+          "y": 14.199999809265135,
+          "slate": false
+        },
+        {
+          "name": "West wing continuous eaves",
+          "y": 13.060000001192094,
+          "slate": false
+        }
+      ]
+    }
+  ],
+  "modelMode": {
+    "mode": "procedural",
+    "milliseconds": 2034.300000000745
+  },
+  "render": {
+    "calls": 1303,
+    "triangles": 662004
+  }
+}

@@ -1,0 +1,13 @@
+[
+  "Browser/dist/asylum-furniture.mjs",
+  "Browser/dist/asylum-room-uses.mjs",
+  "Browser/dist/asylum-room-finishes.mjs",
+  "Browser/dist/furniture-models.mjs",
+  "Browser/dist/sanitary-furnishings.mjs",
+  "Browser/dist/sanitary-furniture-models.mjs",
+  "Browser/dist/asylum-plan.json",
+  "Research/1829-interior-proposal/plan-data.json",
+  "Browser/test-sanitary-furniture.mjs",
+  "Browser/test-sanitary-furniture-browser.mjs",
+  "Browser/package.json"
+]

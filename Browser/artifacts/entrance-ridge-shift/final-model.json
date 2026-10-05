@@ -1,0 +1,14 @@
+{
+  "sourceHash": "f6b7809610df951c911b3338e09f5b14048c4e915bfa5ba1b57da4f6898d8552",
+  "file": "aerial-4a1c2aecd4c404b56a33.bin.gz",
+  "sha256": "4a1c2aecd4c404b56a33e04cc2b18a43eb61a0015af34abfe5cbb22a80a0f2d6",
+  "sourceCompiledRidgeMatch": true,
+  "compiledRetainedRidgeProbes": 29,
+  "compiledRenderEdgeProbes": 13,
+  "compiledMovedRidgeProbes": 8,
+  "renderIntersections": 0,
+  "pageErrors": [],
+  "renderer": "ANGLE NVIDIA GeForce RTX 3090 Ti Direct3D11",
+  "scope": "1829 roof and directly adjoining render junctions; full estate suite not rerun",
+  "exports": "Shared browser source and local compiled aerial updated; Unity, Blender and packaged exports not regenerated"
+}

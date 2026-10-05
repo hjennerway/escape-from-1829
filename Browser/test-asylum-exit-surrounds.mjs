@@ -58,5 +58,5 @@ for(const floor of floors){
   doors++;
  }
 }
-assert.equal(doors,23);
+assert.equal(doors,24);
 console.log(`PASS: ${doors} fitted exterior doors, ${masonry} matching masonry probes, ${leaves} closed-leaf probes, aligned frames, solid side collision and clear approaches.`);

@@ -1,0 +1,30 @@
+{
+  "geometry": {
+    "counts": [
+      {
+        "floor": 0,
+        "roomId": "R2",
+        "beds": 10
+      },
+      {
+        "floor": 0,
+        "roomId": "R13",
+        "beds": 10
+      },
+      {
+        "floor": 1,
+        "roomId": "R2",
+        "beds": 10
+      },
+      {
+        "floor": 1,
+        "roomId": "R13",
+        "beds": 10
+      }
+    ],
+    "renderedBeds": 40
+  },
+  "explore": true,
+  "mobile": true,
+  "errors": []
+}

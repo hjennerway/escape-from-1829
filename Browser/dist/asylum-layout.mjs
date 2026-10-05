@@ -1,5 +1,5 @@
 // The reviewed plan is shared by the drawings, visible walls and navigation.
-import {stairRoute,stairOpening,floorStairRails,STAIR_WIDTH,RAIL_HEIGHT} from './asylum-stairs.mjs';
+import {stairRoute,stairConnection,stairOpenings,floorStairRails,floorStairWells,stairWellHeight,STAIR_WIDTH,RAIL_HEIGHT} from './asylum-stairs.mjs';
 import {joinAsylumWalls} from './asylum-wall-joins.mjs';
 import {furnitureBlocks} from './furniture-collision.mjs';
 import {buildRoomDoors,roomDoorsBlock} from './asylum-doors.mjs';
@@ -50,22 +50,33 @@ export function stairDeparture(floor,portal){
  const [x,,z]=portal;
  // Leave the flight's narrow endpoint radius. An enclosed landing may need
  // a sideways turn instead of the usual straight step toward the room.
- const departure=[{x,z:z-.8},{x:x+.5,z},{x:x-.5,z}].find(p=>flatWalkable(floor,p.x,p.z));
+ const departure=[{x,z:z-.8},{x:x+.5,z},{x:x-.5,z},{x,z:z+.8},{x:x+.8,z},{x:x-.8,z}].find(p=>flatWalkable(floor,p.x,p.z));
  if(!departure)throw new Error(`No clear stair landing on floor ${floor.id} at ${x},${z}`);
  return departure;
 }
 export function buildAsylumLayout(plan){
  const floors=plan.floors.map(f=>{
-  const rooms=plan.rooms.filter(r=>r.floors.includes(f.id)).map(r=>({...r,...r.variants?.[f.id],x:r.label[0]/.5,z:r.label[1]/.5}));
+  const rooms=plan.rooms.filter(r=>r.floors.includes(f.id)).map(r=>{const room={...r,...r.variants?.[f.id]};return {...room,x:room.label[0]/.5,z:room.label[1]/.5};});
   const corridors=plan.corridors.filter(c=>c.floors.includes(f.id)).map(c=>({...c,...c.variants?.[f.id]}));
-  const stairs=plan.stairs.filter(s=>s.floors.includes(f.id)).map(s=>({...s,physical:true,x:s.label[0]/.5,z:s.label[1]/.5}));
+  const stairs=plan.stairs.filter(s=>s.floors.includes(f.id)).map(s=>{
+   const incoming=s.connections.find(([,b])=>b===f.id),flight=incoming&&stairConnection(s,...incoming).straightFlight;
+   const label=flight?flight.start.map((v,i)=>(v+flight.end[i])/2):s.label;
+   return {...s,label,physical:true,x:label[0]/.5,z:label[1]/.5};
+  });
   const outsideEdges=f.outline.loops.flatMap(edges);
-  const exits=plan.exits.flatMap(e=>e.levels.filter(l=>l.floor===f.id).map(l=>({...e,wallOpening:outsideDoorOpening(e,outsideEdges,f.id),worldX:e.x,worldZ:e.z,x:e.x/.5,z:e.z/.5,destination:l.destination,threshold:l.height})));
+  const exits=plan.exits.flatMap(e=>e.levels.filter(l=>l.floor===f.id).map(l=>{
+   // A newly modelled storey can use its actual facade while older levels
+   // retain their reviewed interior anchors and outside landing positions.
+   const opening={...e,...l.interior};
+   return {...opening,wallOpening:outsideDoorOpening(opening,outsideEdges,f.id),worldX:opening.x,worldZ:opening.z,x:opening.x/.5,z:opening.z/.5,destination:l.destination,threshold:l.height};
+  }));
   // The lowest level has a solid floor beneath the stairs, never a false pit.
   // Keep the flight footprint out of flat navigation on every level.
-  const shafts=stairs.map(stairOpening);
+ const shafts=stairs.flatMap(s=>stairOpenings(s,f.id));
   const floor={...f,levelElevations:plan.floors.map(f=>f.elevation),geometrySource:'asylum-plan',cellSize:.5,origin:{x:-74,z:-41},width:290,height:172,rooms,corridors,stairs,exits,shafts,walls:[],galleryZ:8.2/.5};
   floor.stairRails=floorStairRails(floor);
+  const wellTop=floor.elevation+stairWellHeight(floor);
+  floor.stairWells=floorStairWells(floor).map(well=>({...well,bottom:floor.elevation,top:wellTop}));
   floor.windows=rooms.flatMap(r=>(r.windows??[]).map(w=>({...w,roomId:r.id})));
   const roomDoors=rooms.filter(r=>r.doorSide).map(r=>{const b=bounds(r.points),vertical=['west','east'].includes(r.doorSide);return {roomId:r.id,x:vertical?(r.doorSide==='west'?b.minX:b.maxX):r.door,z:vertical?r.door:(r.doorSide==='north'?b.minZ:b.maxZ),dx:vertical?0:1,dz:vertical?1:0,width:r.doorWidth??ROOM_DOOR_WIDTH};});
   const pieces=new Map();
@@ -169,12 +180,15 @@ export function moveAsylumActor(floors,actor,dx,dz){
  actor.y??=floors[actor.floor].elevation;
  const count=Math.max(1,Math.ceil(Math.hypot(dx,dz)/.09));
  function attempt(x,z){
+  // Solid well walls block movement at every flight height, including above
+  // the former inner banisters. Their thickness is contained in the void.
+  for(const floor of floors)if(floor.stairWells.some(w=>actor.y+1.8>w.bottom&&actor.y<w.top&&x>w.minX-.34&&x<w.maxX+.34&&z>w.minZ-.34&&z<w.maxZ+.34))return false;
   // Banisters are physical barriers, including the flat landing's well edge.
   for(const floor of floors)for(const rail of floor.stairRails)for(let i=1;i<rail.length;i++){
    const a=rail[i-1],b=rail[i],vx=b[0]-a[0],vz=b[2]-a[2],t=Math.max(0,Math.min(1,((x-a[0])*vx+(z-a[2])*vz)/(vx*vx+vz*vz))),base=floor.elevation+a[1]+(b[1]-a[1])*t;
    if(actor.y+.65>base-.16&&actor.y+.65<base+RAIL_HEIGHT+.035&&Math.hypot(x-a[0]-vx*t,z-a[2]-vz*t)<.38)return false;
   }
-  const current=floors[actor.floor],candidates=actor.stair?[actor.stair]:current.stairs.flatMap(s=>s.connections.filter(([a,b])=>a===actor.floor||b===actor.floor).map(([a,b])=>({id:s.id,lower:a,upper:b,route:stairRoute(s,floors[a].elevation,floors[b].elevation)})));
+  const current=floors[actor.floor],candidates=actor.stair?[actor.stair]:current.stairs.flatMap(s=>s.connections.filter(([a,b])=>a===actor.floor||b===actor.floor).map(([a,b])=>({id:s.id,lower:a,upper:b,route:stairRoute(s,floors[a].elevation,floors[b].elevation,a,b)})));
   for(const flight of candidates){
    const hit=onFlight(flight.route,x,z,actor.y);
    if(hit){actor.x=x;actor.z=z;actor.y=hit.y;actor.stair=flight;return true;}

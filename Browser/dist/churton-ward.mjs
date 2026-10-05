@@ -2,6 +2,7 @@
 // Single-storey masonry with two long returns and a shorter oblique rear wing.
 // Seren Lodge marker registered to the fixed 1829 entrance; units
 // and concealed details are visual estimates, not a measured building survey.
+import {CHURTON_CHURCH_LANE_Z} from './road-centerlines.mjs';
 export const CHURTON_WARD=Object.freeze({x:-44.3,z:-65.9,rotation:0});
 
 export function churtonPoint(x,y,z){
@@ -134,7 +135,8 @@ export function createChurtonWard(THREE,{brick,roof,worldUV,material}){
   // One level surface joins the perimeter and both access paths. Separate
   // raised slabs left a fine side/shadow line down the mast-side path.
   // Recess the lawn corner to z=-18 so no paving tab projects past its edge.
-  const pavingOutline=[[-28,-37.5],[-22,-37.5],[-22,-18],[23,-18],
+  const laneLocalZ=CHURTON_CHURCH_LANE_Z-CHURTON_WARD.z;
+  const pavingOutline=[[-28,laneLocalZ],[-22,laneLocalZ],[-22,-18],[23,-18],
     [23,-22],[24.5,-22],[24.5,22],[28,22],[28,28],[-28,28]];
   const paving=mesh(new THREE.ShapeGeometry(new THREE.Shape(pavingOutline.map(([x,z])=>new THREE.Vector2(x,-z)))),
     gravel,0,.065,0,'Ward perimeter gravel');
@@ -143,7 +145,10 @@ export function createChurtonWard(THREE,{brick,roof,worldUV,material}){
   // front face that looks like a remaining hedge along the road.
   const lawn=mesh(new THREE.PlaneGeometry(45,14),grass,.5,.135,-25,'Church-facing lawn');
   lawn.rotation.x=-Math.PI/2; lawn.castShadow=false;
-  solid(gravel,11.1,.16,-24.7,2.7,.08,15,'Lawn entrance walk');
+  // Meet the relocated lane's building-side asphalt edge without leaving a
+  // pale stub across the road on the church side.
+  const walkStart=-17.2,walkEnd=laneLocalZ+3;
+  solid(gravel,11.1,.16,(walkStart+walkEnd)/2,2.7,.08,walkStart-walkEnd,'Lawn entrance walk');
   const dummy=new THREE.Object3D();
   for(const [m,items] of batches){const batch=new THREE.InstancedMesh(new THREE.BoxGeometry(1,1,1),m,items.length);batch.name='Churton window and masonry details';batch.castShadow=true;batch.receiveShadow=true;items.forEach((b,i)=>{dummy.position.set(b.x,b.y,b.z);dummy.scale.set(b.w,b.h,b.d);dummy.rotation.set(0,b.r,0);dummy.updateMatrix();batch.setMatrixAt(i,dummy.matrix);});ward.add(batch);}
   ward.userData.openings=openings;ward.userData.ranges=ranges;

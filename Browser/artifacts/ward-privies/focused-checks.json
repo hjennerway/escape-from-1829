@@ -1,0 +1,38 @@
+[
+  {
+    "file": "test-asylum-layout.mjs",
+    "exitCode": 0
+  },
+  {
+    "file": "test-central-dormitories.mjs",
+    "exitCode": 0
+  },
+  {
+    "file": "test-medical-furniture.mjs",
+    "exitCode": 0
+  },
+  {
+    "file": "test-hall-furnishings.mjs",
+    "exitCode": 0
+  },
+  {
+    "file": "test-asylum-room-finishes.mjs",
+    "exitCode": 0
+  },
+  {
+    "file": "test-asylum-room-doors.mjs",
+    "exitCode": 0
+  },
+  {
+    "file": "test-asylum-window-clearance.mjs",
+    "exitCode": 0
+  },
+  {
+    "file": "test-notebook.mjs",
+    "exitCode": 0
+  },
+  {
+    "file": "test-explore-interior.mjs",
+    "exitCode": 0
+  }
+]

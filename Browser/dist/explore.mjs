@@ -38,6 +38,8 @@ import {loadFurnitureModels} from './furniture-models.mjs';
 import {bindExploreInput} from './explore-input.mjs';
 import {sampleLanding} from './aerial-controls.mjs';
 import {beginIntroFlight} from './intro-navigation.mjs';
+import {readViewLocation,groundLocationView,bindViewSwitch,viewLighting} from './view-navigation.mjs';
+import {bindDeveloperOptions} from './developer-options.mjs';
 import {EAST_PHOTO_VIEW} from './east-photo-detail.mjs';
 import {COURTYARD_PHOTO_VIEW} from './courtyard-photo-detail.mjs';
 import {REAR_COURT_PHOTO_VIEW} from './rear-court-photo-detail.mjs';
@@ -72,7 +74,7 @@ try{
   layouts.roads.traverse(object=>{if(object.isSprite)object.visible=false;});
   hint.textContent='Preparing the rooms and stairs…';
   const response=await fetch('./asylum-plan.json');if(!response.ok)throw Error('Floor plans could not load');
-  const floors=buildAsylumLayout(await response.json()).floors;
+  const floorPlan=await response.json(),floors=buildAsylumLayout(floorPlan).floors;
   furnishAsylum(floors);
   const interior=createExploreInterior(THREE,floors,await loadFurnitureModels(THREE));
   const walker=createExploreWalker(THREE,exterior,floors);
@@ -134,9 +136,13 @@ try{
     walker.setView(churtonView.startsWith('irby-corridor')?IRBY_CORRIDOR_WALK:churtonView.startsWith('ward-corridors')?WARD_CORRIDOR_WALK:churtonView.startsWith('farndon-corridor')?FARNDON_CORRIDOR_WALK:churtonView==='main-admin-corridor'?{...shot,position:[136,1.8,28],target:[128,2.1,13]}:shot);
   }
   if(CHURTON_VIEWS[churtonView])walker.setView(CHURTON_VIEWS[churtonView==='churton'||churtonView==='churton-plan'?'churton-4':churtonView]);
+  const currentLocation=readViewLocation(location.search);
+  if(currentLocation){const shot=groundLocationView(currentLocation,walker.outside);if(shot)walker.setView(shot);}
   const input=bindExploreInput(walker,{canvas,hint,look,touchControls:document.getElementById('walkTouch')});
+  const developer=bindDeveloperOptions({THREE,exterior,plan:async()=>({floors,outsideStairs:floorPlan.outsideStairs}),getMapState:()=>({player:walker.actor,yaw:exterior.camera.rotation.y}),onMapChange:show=>{if(show){input.stop();document.exitPointerLock?.();}}});
   window.addEventListener('resize',()=>{renderer.setSize(innerWidth,innerHeight);exterior.camera.aspect=innerWidth/innerHeight;if(view==='inner-east-photo')exterior.camera.fov=innerEastPhotoView(exterior.camera.aspect).fov;if(view==='central-court-photo')exterior.camera.fov=centralCourtPhotoView(exterior.camera.aspect).fov;exterior.camera.updateProjectionMatrix();});
-  const lighting=createDayNight(THREE,exterior,renderer,{walking:true});lighting.setMode('dusk');bindDayNight(lighting);
+  const lighting=createDayNight(THREE,exterior,renderer,{walking:true});lighting.setMode(viewLighting(location.search,'dusk'));bindDayNight(lighting);
+  bindViewSwitch(document.getElementById('switchView'),{camera:exterior.camera,destination:'./aerial.html',period:()=>timeline.period.year,lighting:()=>lighting.mode});
   const doorButton=document.getElementById('exploreDoor');
   doorButton.addEventListener('click',()=>{walker.useDoor();canvas.focus({preventScroll:true});});
   const introFlight=beginIntroFlight(exterior.camera,{fallback:sampleLanding(0,{aspect:exterior.camera.aspect,cinematic:true})});
@@ -144,6 +150,6 @@ try{
   renderer.setAnimationLoop(()=>{clock.update();const dt=clock.getDelta();if(document.hidden)return;if(introFlight?.active)introFlight.update(dt);else if(input.active)walker.update(dt);lighting.update(dt);interior.update(walker.actor,input.active?dt:0);
     const door=walker.nearbyDoor();doorButton.hidden=!door||!!introFlight?.active;
     if(door)doorButton.textContent=(walker.actor.outside?'Enter building':'Go outside')+' · E';
-    renderer.render(walker.actor.outside?exterior.scene:interior.scene,exterior.camera);introFlight?.afterRender();});
+    renderer.render(walker.actor.outside?exterior.scene:interior.scene,exterior.camera);developer.render(renderer,exterior.camera);introFlight?.afterRender();});
   loadEscapeFrontage(THREE,exterior).catch(error=>console.warn('Frontage photo unavailable',error));
 }catch(error){console.error(error);window.introHandoff?.fail();hint.textContent='The grounds could not load. Reload the page to try again.';look.disabled=false;look.textContent='RELOAD ↗';look.onclick=()=>location.reload();}

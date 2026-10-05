@@ -1,0 +1,2214 @@
+[
+  {
+    "name": "Redesmere low end slate roof",
+    "vertices": 18,
+    "indexed": false,
+    "instances": 0,
+    "sloping": 6
+  },
+  {
+    "name": "Redesmere low end slate roof",
+    "vertices": 18,
+    "indexed": false,
+    "instances": 0,
+    "sloping": 6
+  },
+  {
+    "name": "Entrance west recessed slate roof",
+    "vertices": 72,
+    "indexed": false,
+    "instances": 0,
+    "sloping": 24
+  },
+  {
+    "name": "Entrance east recessed slate roof",
+    "vertices": 81,
+    "indexed": false,
+    "instances": 0,
+    "sloping": 27
+  },
+  {
+    "name": "",
+    "vertices": 42,
+    "indexed": false,
+    "instances": 0,
+    "sloping": 2
+  },
+  {
+    "name": "West forward stepped root slate roof",
+    "vertices": 105,
+    "indexed": false,
+    "instances": 0,
+    "sloping": 33
+  },
+  {
+    "name": "",
+    "vertices": 18,
+    "indexed": false,
+    "instances": 0,
+    "sloping": 6
+  },
+  {
+    "name": "",
+    "vertices": 12,
+    "indexed": false,
+    "instances": 0,
+    "sloping": 0
+  },
+  {
+    "name": "",
+    "vertices": 18,
+    "indexed": false,
+    "instances": 0,
+    "sloping": 6
+  },
+  {
+    "name": "East wing joined slate roof",
+    "vertices": 48,
+    "indexed": false,
+    "instances": 0,
+    "sloping": 16
+  },
+  {
+    "name": "East entrance wing slate roof",
+    "vertices": 39,
+    "indexed": false,
+    "instances": 0,
+    "sloping": 13
+  },
+  {
+    "name": "East entrance wing slate roof",
+    "vertices": 18,
+    "indexed": false,
+    "instances": 0,
+    "sloping": 6
+  },
+  {
+    "name": "",
+    "vertices": 18,
+    "indexed": false,
+    "instances": 0,
+    "sloping": 6
+  },
+  {
+    "name": "",
+    "vertices": 18,
+    "indexed": false,
+    "instances": 0,
+    "sloping": 6
+  },
+  {
+    "name": "",
+    "vertices": 18,
+    "indexed": false,
+    "instances": 0,
+    "sloping": 6
+  },
+  {
+    "name": "",
+    "vertices": 18,
+    "indexed": false,
+    "instances": 0,
+    "sloping": 6
+  },
+  {
+    "name": "",
+    "vertices": 18,
+    "indexed": false,
+    "instances": 0,
+    "sloping": 6
+  },
+  {
+    "name": "Central back shallow roof",
+    "vertices": 84,
+    "indexed": false,
+    "instances": 0,
+    "sloping": 0
+  },
+  {
+    "name": "Reception longitudinal ridge and rear hips",
+    "vertices": 15,
+    "indexed": false,
+    "instances": 0,
+    "sloping": 5
+  },
+  {
+    "name": "Redesmere aligned frontage slate roof",
+    "vertices": 24,
+    "indexed": false,
+    "instances": 0,
+    "sloping": 7
+  },
+  {
+    "name": "East curved bay slate roof",
+    "vertices": 18,
+    "indexed": false,
+    "instances": 0,
+    "sloping": 6
+  },
+  {
+    "name": "Garden pavilion slate roof",
+    "vertices": 18,
+    "indexed": false,
+    "instances": 0,
+    "sloping": 6
+  },
+  {
+    "name": "West front outer arm slate roof",
+    "vertices": 9,
+    "indexed": false,
+    "instances": 0,
+    "sloping": 3
+  },
+  {
+    "name": "West end continuous slate roof",
+    "vertices": 9,
+    "indexed": false,
+    "instances": 0,
+    "sloping": 3
+  },
+  {
+    "name": "West front widened recess slate roof",
+    "vertices": 6,
+    "indexed": false,
+    "instances": 0,
+    "sloping": 0
+  },
+  {
+    "name": "West curved bay slate roof",
+    "vertices": 21,
+    "indexed": false,
+    "instances": 0,
+    "sloping": 7
+  },
+  {
+    "name": "West garden inner pavilion slate roof",
+    "vertices": 15,
+    "indexed": false,
+    "instances": 0,
+    "sloping": 5
+  },
+  {
+    "name": "West garden lean-to slate roof",
+    "vertices": 24,
+    "indexed": true,
+    "instances": 0,
+    "sloping": 8
+  },
+  {
+    "name": "West courtyard polygonal bay slate roof",
+    "vertices": 21,
+    "indexed": false,
+    "instances": 0,
+    "sloping": 7
+  },
+  {
+    "name": "West courtyard bay return roof",
+    "vertices": 18,
+    "indexed": false,
+    "instances": 0,
+    "sloping": 6
+  },
+  {
+    "name": "West court low bay flat roof",
+    "vertices": 24,
+    "indexed": true,
+    "instances": 0,
+    "sloping": 0
+  },
+  {
+    "name": "East courtyard polygonal bay slate roof",
+    "vertices": 18,
+    "indexed": false,
+    "instances": 0,
+    "sloping": 6
+  },
+  {
+    "name": "East courtyard fire-exit corner slate roof",
+    "vertices": 18,
+    "indexed": false,
+    "instances": 0,
+    "sloping": 6
+  },
+  {
+    "name": "Inner court rear annex sloped roof",
+    "vertices": 24,
+    "indexed": true,
+    "instances": 0,
+    "sloping": 8
+  },
+  {
+    "name": "West mirrored Inner court rear annex sloped roof",
+    "vertices": 24,
+    "indexed": true,
+    "instances": 0,
+    "sloping": 8
+  },
+  {
+    "name": "West wing joined slate roof",
+    "vertices": 105,
+    "indexed": false,
+    "instances": 0,
+    "sloping": 35
+  },
+  {
+    "name": "",
+    "vertices": 24,
+    "indexed": true,
+    "instances": 2,
+    "sloping": 0
+  },
+  {
+    "name": "",
+    "vertices": 18,
+    "indexed": false,
+    "instances": 0,
+    "sloping": 6
+  },
+  {
+    "name": "",
+    "vertices": 18,
+    "indexed": false,
+    "instances": 0,
+    "sloping": 6
+  },
+  {
+    "name": "",
+    "vertices": 24,
+    "indexed": true,
+    "instances": 0,
+    "sloping": 8
+  },
+  {
+    "name": "Redesmere bay slate roof",
+    "vertices": 24,
+    "indexed": false,
+    "instances": 0,
+    "sloping": 8
+  },
+  {
+    "name": "Redesmere bay slate roof",
+    "vertices": 24,
+    "indexed": false,
+    "instances": 0,
+    "sloping": 8
+  },
+  {
+    "name": "Redesmere entrance hipped roof",
+    "vertices": 18,
+    "indexed": false,
+    "instances": 0,
+    "sloping": 6
+  },
+  {
+    "name": "",
+    "vertices": 18,
+    "indexed": false,
+    "instances": 0,
+    "sloping": 6
+  },
+  {
+    "name": "",
+    "vertices": 18,
+    "indexed": false,
+    "instances": 0,
+    "sloping": 6
+  },
+  {
+    "name": "West lawn bay slate roof",
+    "vertices": 18,
+    "indexed": false,
+    "instances": 0,
+    "sloping": 6
+  },
+  {
+    "name": "Entrance west projection slate roof",
+    "vertices": 48,
+    "indexed": false,
+    "instances": 0,
+    "sloping": 16
+  },
+  {
+    "name": "East lawn bay slate roof",
+    "vertices": 18,
+    "indexed": false,
+    "instances": 0,
+    "sloping": 6
+  },
+  {
+    "name": "Entrance east projection slate roof",
+    "vertices": 48,
+    "indexed": false,
+    "instances": 0,
+    "sloping": 16
+  },
+  {
+    "name": "West cross-range continuous roof join",
+    "vertices": 84,
+    "indexed": false,
+    "instances": 0,
+    "sloping": 28
+  },
+  {
+    "name": "Lawn connecting range slate roof",
+    "vertices": 18,
+    "indexed": false,
+    "instances": 0,
+    "sloping": 6
+  },
+  {
+    "name": "Mast-side long ward slate roof",
+    "vertices": 24,
+    "indexed": true,
+    "instances": 0,
+    "sloping": 8
+  },
+  {
+    "name": "Mast-side long ward slate roof",
+    "vertices": 24,
+    "indexed": true,
+    "instances": 0,
+    "sloping": 8
+  },
+  {
+    "name": "Church-side return slate roof",
+    "vertices": 18,
+    "indexed": false,
+    "instances": 0,
+    "sloping": 6
+  },
+  {
+    "name": "Church-side lawn bay slate roof",
+    "vertices": 18,
+    "indexed": false,
+    "instances": 0,
+    "sloping": 6
+  },
+  {
+    "name": "Rear oblique wing slate roof",
+    "vertices": 24,
+    "indexed": true,
+    "instances": 0,
+    "sloping": 8
+  },
+  {
+    "name": "Rear oblique wing slate roof",
+    "vertices": 24,
+    "indexed": true,
+    "instances": 0,
+    "sloping": 8
+  },
+  {
+    "name": "Low side room slate roof",
+    "vertices": 24,
+    "indexed": true,
+    "instances": 0,
+    "sloping": 8
+  },
+  {
+    "name": "Long elevation cross gable slate roof",
+    "vertices": 24,
+    "indexed": true,
+    "instances": 0,
+    "sloping": 8
+  },
+  {
+    "name": "Long elevation cross gable slate roof",
+    "vertices": 24,
+    "indexed": true,
+    "instances": 0,
+    "sloping": 8
+  },
+  {
+    "name": "Garden bay slate hip roof",
+    "vertices": 12,
+    "indexed": false,
+    "instances": 0,
+    "sloping": 4
+  },
+  {
+    "name": "Garden bay slate hip roof",
+    "vertices": 12,
+    "indexed": false,
+    "instances": 0,
+    "sloping": 4
+  },
+  {
+    "name": "Garden bay slate hip roof",
+    "vertices": 12,
+    "indexed": false,
+    "instances": 0,
+    "sloping": 4
+  },
+  {
+    "name": "Garden bay slate hip roof",
+    "vertices": 12,
+    "indexed": false,
+    "instances": 0,
+    "sloping": 4
+  },
+  {
+    "name": "Continuous central spine slate hip roof",
+    "vertices": 18,
+    "indexed": false,
+    "instances": 0,
+    "sloping": 6
+  },
+  {
+    "name": "West Transverse pavilion slate hip roof",
+    "vertices": 18,
+    "indexed": false,
+    "instances": 0,
+    "sloping": 6
+  },
+  {
+    "name": "East Transverse pavilion slate hip roof",
+    "vertices": 18,
+    "indexed": false,
+    "instances": 0,
+    "sloping": 6
+  },
+  {
+    "name": "West Hooked end pavilion slate hip roof",
+    "vertices": 18,
+    "indexed": false,
+    "instances": 0,
+    "sloping": 6
+  },
+  {
+    "name": "East Hooked end pavilion slate hip roof",
+    "vertices": 18,
+    "indexed": false,
+    "instances": 0,
+    "sloping": 6
+  },
+  {
+    "name": "Central church-facing projection slate hip roof",
+    "vertices": 18,
+    "indexed": false,
+    "instances": 0,
+    "sloping": 6
+  },
+  {
+    "name": "Central rear projection slate hip roof",
+    "vertices": 18,
+    "indexed": false,
+    "instances": 0,
+    "sloping": 6
+  },
+  {
+    "name": "Outhouse continuous slate roof",
+    "vertices": 12,
+    "indexed": false,
+    "instances": 0,
+    "sloping": 4
+  },
+  {
+    "name": "",
+    "vertices": 24,
+    "indexed": true,
+    "instances": 0,
+    "sloping": 8
+  },
+  {
+    "name": "",
+    "vertices": 24,
+    "indexed": true,
+    "instances": 0,
+    "sloping": 8
+  },
+  {
+    "name": "Church clock pediment slate pitch",
+    "vertices": 24,
+    "indexed": true,
+    "instances": 0,
+    "sloping": 8
+  },
+  {
+    "name": "Church clock pediment slate pitch",
+    "vertices": 24,
+    "indexed": true,
+    "instances": 0,
+    "sloping": 8
+  },
+  {
+    "name": "",
+    "vertices": 24,
+    "indexed": true,
+    "instances": 0,
+    "sloping": 8
+  },
+  {
+    "name": "",
+    "vertices": 24,
+    "indexed": true,
+    "instances": 0,
+    "sloping": 8
+  },
+  {
+    "name": "",
+    "vertices": 24,
+    "indexed": true,
+    "instances": 0,
+    "sloping": 8
+  },
+  {
+    "name": "",
+    "vertices": 24,
+    "indexed": true,
+    "instances": 0,
+    "sloping": 8
+  },
+  {
+    "name": "Pyramidal slate roof",
+    "vertices": 12,
+    "indexed": false,
+    "instances": 0,
+    "sloping": 4
+  },
+  {
+    "name": "",
+    "vertices": 24,
+    "indexed": true,
+    "instances": 2,
+    "sloping": 0
+  },
+  {
+    "name": "Continuous garden range slate roof",
+    "vertices": 18,
+    "indexed": false,
+    "instances": 0,
+    "sloping": 6
+  },
+  {
+    "name": "Roadside north wing slate roof",
+    "vertices": 12,
+    "indexed": false,
+    "instances": 0,
+    "sloping": 4
+  },
+  {
+    "name": "Narrow north wing slate roof",
+    "vertices": 12,
+    "indexed": false,
+    "instances": 0,
+    "sloping": 4
+  },
+  {
+    "name": "Tower-side return slate roof",
+    "vertices": 18,
+    "indexed": false,
+    "instances": 0,
+    "sloping": 6
+  },
+  {
+    "name": "West garden gable slate roof",
+    "vertices": 15,
+    "indexed": false,
+    "instances": 0,
+    "sloping": 5
+  },
+  {
+    "name": "Corner to west ridge junction slate roof",
+    "vertices": 6,
+    "indexed": false,
+    "instances": 0,
+    "sloping": 2
+  },
+  {
+    "name": "East garden gable slate roof",
+    "vertices": 12,
+    "indexed": false,
+    "instances": 0,
+    "sloping": 4
+  },
+  {
+    "name": "Small east service projection slate roof",
+    "vertices": 18,
+    "indexed": false,
+    "instances": 0,
+    "sloping": 6
+  },
+  {
+    "name": "Quarter-octagonal corner slate roof",
+    "vertices": 12,
+    "indexed": false,
+    "instances": 0,
+    "sloping": 4
+  },
+  {
+    "name": "Canted garden bay slate roof",
+    "vertices": 12,
+    "indexed": false,
+    "instances": 0,
+    "sloping": 4
+  },
+  {
+    "name": "Canted garden bay slate roof",
+    "vertices": 12,
+    "indexed": false,
+    "instances": 0,
+    "sloping": 4
+  },
+  {
+    "name": "Continuous garden range slate roof",
+    "vertices": 18,
+    "indexed": false,
+    "instances": 0,
+    "sloping": 6
+  },
+  {
+    "name": "Roadside north wing slate roof",
+    "vertices": 12,
+    "indexed": false,
+    "instances": 0,
+    "sloping": 4
+  },
+  {
+    "name": "Narrow north wing slate roof",
+    "vertices": 12,
+    "indexed": false,
+    "instances": 0,
+    "sloping": 4
+  },
+  {
+    "name": "Tower-side return slate roof",
+    "vertices": 18,
+    "indexed": false,
+    "instances": 0,
+    "sloping": 6
+  },
+  {
+    "name": "Tower-facing cross wing slate roof",
+    "vertices": 18,
+    "indexed": false,
+    "instances": 0,
+    "sloping": 6
+  },
+  {
+    "name": "Grafton south square projection slate roof",
+    "vertices": 18,
+    "indexed": false,
+    "instances": 0,
+    "sloping": 6
+  },
+  {
+    "name": "Grafton north square projection slate roof",
+    "vertices": 18,
+    "indexed": false,
+    "instances": 0,
+    "sloping": 6
+  },
+  {
+    "name": "Grafton central half-octagonal slate hip",
+    "vertices": 18,
+    "indexed": false,
+    "instances": 0,
+    "sloping": 6
+  },
+  {
+    "name": "Grafton veranda pitched slate canopy",
+    "vertices": 3,
+    "indexed": false,
+    "instances": 0,
+    "sloping": 1
+  },
+  {
+    "name": "Grafton veranda pitched slate canopy",
+    "vertices": 6,
+    "indexed": false,
+    "instances": 0,
+    "sloping": 2
+  },
+  {
+    "name": "Grafton veranda pitched slate canopy",
+    "vertices": 6,
+    "indexed": false,
+    "instances": 0,
+    "sloping": 2
+  },
+  {
+    "name": "Grafton veranda pitched slate canopy",
+    "vertices": 3,
+    "indexed": false,
+    "instances": 0,
+    "sloping": 1
+  },
+  {
+    "name": "Grafton veranda pitched slate canopy",
+    "vertices": 3,
+    "indexed": false,
+    "instances": 0,
+    "sloping": 1
+  },
+  {
+    "name": "Grafton veranda pitched slate canopy",
+    "vertices": 3,
+    "indexed": false,
+    "instances": 0,
+    "sloping": 1
+  },
+  {
+    "name": "Grafton veranda pitched slate canopy",
+    "vertices": 3,
+    "indexed": false,
+    "instances": 0,
+    "sloping": 1
+  },
+  {
+    "name": "Grafton veranda pitched slate canopy",
+    "vertices": 6,
+    "indexed": false,
+    "instances": 0,
+    "sloping": 2
+  },
+  {
+    "name": "Grafton veranda pitched slate canopy",
+    "vertices": 3,
+    "indexed": false,
+    "instances": 0,
+    "sloping": 1
+  },
+  {
+    "name": "Grafton veranda pitched slate canopy",
+    "vertices": 6,
+    "indexed": false,
+    "instances": 0,
+    "sloping": 2
+  },
+  {
+    "name": "Grafton veranda pitched slate canopy",
+    "vertices": 3,
+    "indexed": false,
+    "instances": 0,
+    "sloping": 1
+  },
+  {
+    "name": "Grafton veranda pitched slate canopy",
+    "vertices": 3,
+    "indexed": false,
+    "instances": 0,
+    "sloping": 1
+  },
+  {
+    "name": "Grafton veranda pitched slate canopy",
+    "vertices": 6,
+    "indexed": false,
+    "instances": 0,
+    "sloping": 2
+  },
+  {
+    "name": "Grafton veranda pitched slate canopy",
+    "vertices": 3,
+    "indexed": false,
+    "instances": 0,
+    "sloping": 1
+  },
+  {
+    "name": "Grafton veranda pitched slate canopy",
+    "vertices": 6,
+    "indexed": false,
+    "instances": 0,
+    "sloping": 2
+  },
+  {
+    "name": "Grafton veranda pitched slate canopy",
+    "vertices": 3,
+    "indexed": false,
+    "instances": 0,
+    "sloping": 1
+  },
+  {
+    "name": "Grafton veranda pitched slate canopy",
+    "vertices": 6,
+    "indexed": false,
+    "instances": 0,
+    "sloping": 2
+  },
+  {
+    "name": "Grafton veranda pitched slate canopy",
+    "vertices": 3,
+    "indexed": false,
+    "instances": 0,
+    "sloping": 1
+  },
+  {
+    "name": "Grafton veranda pitched slate canopy",
+    "vertices": 6,
+    "indexed": false,
+    "instances": 0,
+    "sloping": 2
+  },
+  {
+    "name": "Grafton veranda pitched slate canopy",
+    "vertices": 6,
+    "indexed": false,
+    "instances": 0,
+    "sloping": 2
+  },
+  {
+    "name": "Grafton veranda pitched slate canopy",
+    "vertices": 3,
+    "indexed": false,
+    "instances": 0,
+    "sloping": 1
+  },
+  {
+    "name": "Grafton veranda pitched slate canopy",
+    "vertices": 6,
+    "indexed": false,
+    "instances": 0,
+    "sloping": 2
+  },
+  {
+    "name": "Grafton veranda pitched slate canopy",
+    "vertices": 3,
+    "indexed": false,
+    "instances": 0,
+    "sloping": 1
+  },
+  {
+    "name": "Grafton veranda pitched slate canopy",
+    "vertices": 3,
+    "indexed": false,
+    "instances": 0,
+    "sloping": 1
+  },
+  {
+    "name": "Grafton louvred roof ventilator",
+    "vertices": 22,
+    "indexed": true,
+    "instances": 0,
+    "sloping": 4
+  },
+  {
+    "name": "Hale inside corner 2 bay slate roof",
+    "vertices": 18,
+    "indexed": false,
+    "instances": 0,
+    "sloping": 6
+  },
+  {
+    "name": "Hale inside corner 2 entrance slate roof",
+    "vertices": 6,
+    "indexed": false,
+    "instances": 0,
+    "sloping": 2
+  },
+  {
+    "name": "Hale inside corner 5 bay slate roof",
+    "vertices": 18,
+    "indexed": false,
+    "instances": 0,
+    "sloping": 6
+  },
+  {
+    "name": "Hale inside corner 5 entrance slate roof",
+    "vertices": 6,
+    "indexed": false,
+    "instances": 0,
+    "sloping": 2
+  },
+  {
+    "name": "Hale inside corner 6 bay slate roof",
+    "vertices": 18,
+    "indexed": false,
+    "instances": 0,
+    "sloping": 6
+  },
+  {
+    "name": "Hale inside corner 6 entrance slate roof",
+    "vertices": 6,
+    "indexed": false,
+    "instances": 0,
+    "sloping": 2
+  },
+  {
+    "name": "Hale inside corner 9 bay slate roof",
+    "vertices": 18,
+    "indexed": false,
+    "instances": 0,
+    "sloping": 6
+  },
+  {
+    "name": "Hale inside corner 9 entrance slate roof",
+    "vertices": 6,
+    "indexed": false,
+    "instances": 0,
+    "sloping": 2
+  },
+  {
+    "name": "Hale inside corner 10 bay slate roof",
+    "vertices": 18,
+    "indexed": false,
+    "instances": 0,
+    "sloping": 6
+  },
+  {
+    "name": "Hale inside corner 10 entrance slate roof",
+    "vertices": 6,
+    "indexed": false,
+    "instances": 0,
+    "sloping": 2
+  },
+  {
+    "name": "Hale inside corner 15 bay slate roof",
+    "vertices": 18,
+    "indexed": false,
+    "instances": 0,
+    "sloping": 6
+  },
+  {
+    "name": "Hale inside corner 15 entrance slate roof",
+    "vertices": 6,
+    "indexed": false,
+    "instances": 0,
+    "sloping": 2
+  },
+  {
+    "name": "Hale inside corner 16 bay slate roof",
+    "vertices": 18,
+    "indexed": false,
+    "instances": 0,
+    "sloping": 6
+  },
+  {
+    "name": "Hale inside corner 16 entrance slate roof",
+    "vertices": 6,
+    "indexed": false,
+    "instances": 0,
+    "sloping": 2
+  },
+  {
+    "name": "Tower-side cross range slate roof",
+    "vertices": 18,
+    "indexed": false,
+    "instances": 0,
+    "sloping": 6
+  },
+  {
+    "name": "Connecting spine slate roof",
+    "vertices": 18,
+    "indexed": false,
+    "instances": 0,
+    "sloping": 6
+  },
+  {
+    "name": "Middle courtyard wing slate roof",
+    "vertices": 18,
+    "indexed": false,
+    "instances": 0,
+    "sloping": 6
+  },
+  {
+    "name": "Grafton-side courtyard wing slate roof",
+    "vertices": 18,
+    "indexed": false,
+    "instances": 0,
+    "sloping": 6
+  },
+  {
+    "name": "Opposite end return slate roof",
+    "vertices": 18,
+    "indexed": false,
+    "instances": 0,
+    "sloping": 6
+  },
+  {
+    "name": "Joined rear office and right return slate roof",
+    "vertices": 24,
+    "indexed": false,
+    "instances": 0,
+    "sloping": 8
+  },
+  {
+    "name": "Right low hipped entrance room slate roof",
+    "vertices": 15,
+    "indexed": false,
+    "instances": 0,
+    "sloping": 5
+  },
+  {
+    "name": "Left workshop slate roof",
+    "vertices": 12,
+    "indexed": false,
+    "instances": 0,
+    "sloping": 4
+  },
+  {
+    "name": "West continuous wing slate roof",
+    "vertices": 24,
+    "indexed": false,
+    "instances": 0,
+    "sloping": 8
+  },
+  {
+    "name": "East continuous wing slate roof",
+    "vertices": 24,
+    "indexed": false,
+    "instances": 0,
+    "sloping": 8
+  },
+  {
+    "name": "Transverse ward range slate roof",
+    "vertices": 12,
+    "indexed": false,
+    "instances": 0,
+    "sloping": 4
+  },
+  {
+    "name": "Rear room link slate roof",
+    "vertices": 18,
+    "indexed": false,
+    "instances": 0,
+    "sloping": 6
+  },
+  {
+    "name": "Small rear room slate roof",
+    "vertices": 18,
+    "indexed": false,
+    "instances": 0,
+    "sloping": 6
+  },
+  {
+    "name": "Central garden gable slate roof",
+    "vertices": 12,
+    "indexed": false,
+    "instances": 0,
+    "sloping": 4
+  },
+  {
+    "name": "West side-room lean-to slate roof",
+    "vertices": 6,
+    "indexed": false,
+    "instances": 0,
+    "sloping": 2
+  },
+  {
+    "name": "West continuous wing slate roof",
+    "vertices": 24,
+    "indexed": false,
+    "instances": 0,
+    "sloping": 8
+  },
+  {
+    "name": "East continuous wing slate roof",
+    "vertices": 24,
+    "indexed": false,
+    "instances": 0,
+    "sloping": 8
+  },
+  {
+    "name": "Transverse ward range slate roof",
+    "vertices": 12,
+    "indexed": false,
+    "instances": 0,
+    "sloping": 4
+  },
+  {
+    "name": "Rear room link slate roof",
+    "vertices": 18,
+    "indexed": false,
+    "instances": 0,
+    "sloping": 6
+  },
+  {
+    "name": "Small rear room slate roof",
+    "vertices": 18,
+    "indexed": false,
+    "instances": 0,
+    "sloping": 6
+  },
+  {
+    "name": "Central garden gable slate roof",
+    "vertices": 12,
+    "indexed": false,
+    "instances": 0,
+    "sloping": 4
+  },
+  {
+    "name": "West side-room lean-to slate roof",
+    "vertices": 6,
+    "indexed": false,
+    "instances": 0,
+    "sloping": 2
+  },
+  {
+    "name": "Central administration range slate roof",
+    "vertices": 18,
+    "indexed": false,
+    "instances": 0,
+    "sloping": 6
+  },
+  {
+    "name": "West projecting pavilion slate roof",
+    "vertices": 18,
+    "indexed": false,
+    "instances": 0,
+    "sloping": 6
+  },
+  {
+    "name": "East projecting pavilion slate roof",
+    "vertices": 18,
+    "indexed": false,
+    "instances": 0,
+    "sloping": 6
+  },
+  {
+    "name": "Low west side rooms slate roof",
+    "vertices": 18,
+    "indexed": false,
+    "instances": 0,
+    "sloping": 6
+  },
+  {
+    "name": "East upper return slate roof",
+    "vertices": 18,
+    "indexed": false,
+    "instances": 0,
+    "sloping": 6
+  },
+  {
+    "name": "Rear projecting window range slate roof",
+    "vertices": 18,
+    "indexed": false,
+    "instances": 0,
+    "sloping": 6
+  },
+  {
+    "name": "Rear canted stair bay slate roof",
+    "vertices": 18,
+    "indexed": false,
+    "instances": 0,
+    "sloping": 6
+  },
+  {
+    "name": "East rear shoulder slate roof",
+    "vertices": 18,
+    "indexed": false,
+    "instances": 0,
+    "sloping": 6
+  },
+  {
+    "name": "East pointed side wing slate roof",
+    "vertices": 15,
+    "indexed": false,
+    "instances": 0,
+    "sloping": 5
+  },
+  {
+    "name": "Redesmere concealed connector slate roof",
+    "vertices": 18,
+    "indexed": false,
+    "instances": 0,
+    "sloping": 6
+  },
+  {
+    "name": "Redesmere connector building slate roof",
+    "vertices": 18,
+    "indexed": false,
+    "instances": 0,
+    "sloping": 6
+  },
+  {
+    "name": "Connecting corridor slate roof",
+    "vertices": 18,
+    "indexed": false,
+    "instances": 0,
+    "sloping": 6
+  },
+  {
+    "name": "Straight corridor to Farndon slate roof",
+    "vertices": 12,
+    "indexed": false,
+    "instances": 0,
+    "sloping": 4
+  },
+  {
+    "name": "Diagonal ward corridor slate roof",
+    "vertices": 12,
+    "indexed": false,
+    "instances": 0,
+    "sloping": 4
+  },
+  {
+    "name": "Upton Frith Oscroft corridor slate roof",
+    "vertices": 12,
+    "indexed": false,
+    "instances": 0,
+    "sloping": 4
+  },
+  {
+    "name": "Grafton corridor slate roof",
+    "vertices": 12,
+    "indexed": false,
+    "instances": 0,
+    "sloping": 4
+  },
+  {
+    "name": "Witby corridor slate roof",
+    "vertices": 12,
+    "indexed": false,
+    "instances": 0,
+    "sloping": 4
+  },
+  {
+    "name": "Ward corridor elbow slate roof",
+    "vertices": 18,
+    "indexed": false,
+    "instances": 0,
+    "sloping": 6
+  },
+  {
+    "name": "Hale tower-side corridor slate roof",
+    "vertices": 12,
+    "indexed": false,
+    "instances": 0,
+    "sloping": 4
+  },
+  {
+    "name": "Hale middle-wing corridor slate roof",
+    "vertices": 12,
+    "indexed": false,
+    "instances": 0,
+    "sloping": 4
+  },
+  {
+    "name": "Water tower to Irby corridor slate roof",
+    "vertices": 12,
+    "indexed": false,
+    "instances": 0,
+    "sloping": 4
+  },
+  {
+    "name": "Main/admin front corridor slate roof",
+    "vertices": 12,
+    "indexed": false,
+    "instances": 0,
+    "sloping": 4
+  },
+  {
+    "name": "Corridor pavilion side connection slate roof",
+    "vertices": 6,
+    "indexed": false,
+    "instances": 0,
+    "sloping": 2
+  },
+  {
+    "name": "Laundry hipped slate roof",
+    "vertices": 18,
+    "indexed": false,
+    "instances": 0,
+    "sloping": 6
+  },
+  {
+    "name": "Western garages and offices slate roof",
+    "vertices": 12,
+    "indexed": false,
+    "instances": 0,
+    "sloping": 4
+  },
+  {
+    "name": "Tall workshop bay slate roof",
+    "vertices": 12,
+    "indexed": false,
+    "instances": 0,
+    "sloping": 4
+  },
+  {
+    "name": "Long eastern garage range slate roof",
+    "vertices": 12,
+    "indexed": false,
+    "instances": 0,
+    "sloping": 4
+  },
+  {
+    "name": "Mortuary crossbar slate roof",
+    "vertices": 18,
+    "indexed": false,
+    "instances": 0,
+    "sloping": 6
+  },
+  {
+    "name": "Mortuary entrance slate roof",
+    "vertices": 12,
+    "indexed": false,
+    "instances": 0,
+    "sloping": 4
+  },
+  {
+    "name": "Mortuary ridge vent slate roof",
+    "vertices": 12,
+    "indexed": false,
+    "instances": 0,
+    "sloping": 4
+  },
+  {
+    "name": "Gardeners workshop hipped tile roof",
+    "vertices": 18,
+    "indexed": false,
+    "instances": 0,
+    "sloping": 6
+  },
+  {
+    "name": "Garden stores hipped tile roof",
+    "vertices": 18,
+    "indexed": false,
+    "instances": 0,
+    "sloping": 6
+  },
+  {
+    "name": "West front connecting ward slate roof",
+    "vertices": 18,
+    "indexed": false,
+    "instances": 0,
+    "sloping": 6
+  },
+  {
+    "name": "West end ward slate roof",
+    "vertices": 18,
+    "indexed": false,
+    "instances": 0,
+    "sloping": 6
+  },
+  {
+    "name": "West rear pavilion slate roof",
+    "vertices": 18,
+    "indexed": false,
+    "instances": 0,
+    "sloping": 6
+  },
+  {
+    "name": "West end projecting rooms slate roof",
+    "vertices": 18,
+    "indexed": false,
+    "instances": 0,
+    "sloping": 6
+  },
+  {
+    "name": "West end middle rooms slate roof",
+    "vertices": 18,
+    "indexed": false,
+    "instances": 0,
+    "sloping": 6
+  },
+  {
+    "name": "Outer cross-gable slate roof",
+    "vertices": 24,
+    "indexed": true,
+    "instances": 0,
+    "sloping": 8
+  },
+  {
+    "name": "Outer cross-gable slate roof",
+    "vertices": 24,
+    "indexed": true,
+    "instances": 0,
+    "sloping": 8
+  },
+  {
+    "name": "Outer cross-gable slate roof",
+    "vertices": 24,
+    "indexed": true,
+    "instances": 0,
+    "sloping": 8
+  },
+  {
+    "name": "Outer cross-gable slate roof",
+    "vertices": 24,
+    "indexed": true,
+    "instances": 0,
+    "sloping": 8
+  },
+  {
+    "name": "Outer low entrance room slate roof",
+    "vertices": 18,
+    "indexed": false,
+    "instances": 0,
+    "sloping": 6
+  },
+  {
+    "name": "West court outer link slate roof",
+    "vertices": 18,
+    "indexed": false,
+    "instances": 0,
+    "sloping": 6
+  },
+  {
+    "name": "Recess cheek slate roof",
+    "vertices": 18,
+    "indexed": false,
+    "instances": 0,
+    "sloping": 6
+  },
+  {
+    "name": "Recess low entrance room slate roof",
+    "vertices": 18,
+    "indexed": false,
+    "instances": 0,
+    "sloping": 6
+  },
+  {
+    "name": "West court inner return slate roof",
+    "vertices": 18,
+    "indexed": false,
+    "instances": 0,
+    "sloping": 6
+  },
+  {
+    "name": "West court front range slate roof",
+    "vertices": 18,
+    "indexed": false,
+    "instances": 0,
+    "sloping": 6
+  },
+  {
+    "name": "West court outer return slate roof",
+    "vertices": 18,
+    "indexed": false,
+    "instances": 0,
+    "sloping": 6
+  },
+  {
+    "name": "West court corner infill slate roof",
+    "vertices": 18,
+    "indexed": false,
+    "instances": 0,
+    "sloping": 6
+  },
+  {
+    "name": "West court back range slate roof",
+    "vertices": 18,
+    "indexed": false,
+    "instances": 0,
+    "sloping": 6
+  },
+  {
+    "name": "Jarman cross-gable slate roof",
+    "vertices": 24,
+    "indexed": true,
+    "instances": 0,
+    "sloping": 8
+  },
+  {
+    "name": "Jarman cross-gable slate roof",
+    "vertices": 24,
+    "indexed": true,
+    "instances": 0,
+    "sloping": 8
+  },
+  {
+    "name": "Jarman cross-gable slate roof",
+    "vertices": 24,
+    "indexed": true,
+    "instances": 0,
+    "sloping": 8
+  },
+  {
+    "name": "Jarman cross-gable slate roof",
+    "vertices": 24,
+    "indexed": true,
+    "instances": 0,
+    "sloping": 8
+  },
+  {
+    "name": "Rear east connecting range slate roof",
+    "vertices": 18,
+    "indexed": false,
+    "instances": 0,
+    "sloping": 6
+  },
+  {
+    "name": "Rear east end pavilion slate roof",
+    "vertices": 18,
+    "indexed": false,
+    "instances": 0,
+    "sloping": 6
+  },
+  {
+    "name": "Leighton Newton cross gable slate roof",
+    "vertices": 15,
+    "indexed": false,
+    "instances": 0,
+    "sloping": 5
+  },
+  {
+    "name": "Leighton Newton cross gable slate roof",
+    "vertices": 15,
+    "indexed": false,
+    "instances": 0,
+    "sloping": 5
+  },
+  {
+    "name": "Leighton Newton projecting hip slate roof",
+    "vertices": 18,
+    "indexed": false,
+    "instances": 0,
+    "sloping": 6
+  },
+  {
+    "name": "Leighton Newton projecting hip slate roof",
+    "vertices": 18,
+    "indexed": false,
+    "instances": 0,
+    "sloping": 6
+  },
+  {
+    "name": "Rear west angled service range slate roof",
+    "vertices": 18,
+    "indexed": false,
+    "instances": 0,
+    "sloping": 6
+  },
+  {
+    "name": "Rear service head slate roof",
+    "vertices": 18,
+    "indexed": false,
+    "instances": 0,
+    "sloping": 6
+  },
+  {
+    "name": "Oakmere continuous extension slate roof",
+    "vertices": 12,
+    "indexed": false,
+    "instances": 0,
+    "sloping": 4
+  },
+  {
+    "name": "Oakmere court projecting bay slate roof",
+    "vertices": 18,
+    "indexed": false,
+    "instances": 0,
+    "sloping": 6
+  },
+  {
+    "name": "Oakmere widened head slate roof",
+    "vertices": 15,
+    "indexed": false,
+    "instances": 0,
+    "sloping": 5
+  },
+  {
+    "name": "Oakmere blue-face projecting bay slate roof",
+    "vertices": 18,
+    "indexed": false,
+    "instances": 0,
+    "sloping": 6
+  },
+  {
+    "name": "Oakmere square annex slate roof",
+    "vertices": 18,
+    "indexed": false,
+    "instances": 0,
+    "sloping": 6
+  },
+  {
+    "name": "East court inner return slate roof",
+    "vertices": 18,
+    "indexed": false,
+    "instances": 0,
+    "sloping": 6
+  },
+  {
+    "name": "East court front range slate roof",
+    "vertices": 18,
+    "indexed": false,
+    "instances": 0,
+    "sloping": 6
+  },
+  {
+    "name": "East court outer return slate roof",
+    "vertices": 18,
+    "indexed": false,
+    "instances": 0,
+    "sloping": 6
+  },
+  {
+    "name": "East court corner infill slate roof",
+    "vertices": 18,
+    "indexed": false,
+    "instances": 0,
+    "sloping": 6
+  },
+  {
+    "name": "East court back range slate roof",
+    "vertices": 18,
+    "indexed": false,
+    "instances": 0,
+    "sloping": 6
+  },
+  {
+    "name": "Court cross-gable slate roof",
+    "vertices": 24,
+    "indexed": true,
+    "instances": 0,
+    "sloping": 8
+  },
+  {
+    "name": "Court cross-gable slate roof",
+    "vertices": 24,
+    "indexed": true,
+    "instances": 0,
+    "sloping": 8
+  },
+  {
+    "name": "Court cross-gable slate roof",
+    "vertices": 24,
+    "indexed": true,
+    "instances": 0,
+    "sloping": 8
+  },
+  {
+    "name": "Court cross-gable slate roof",
+    "vertices": 24,
+    "indexed": true,
+    "instances": 0,
+    "sloping": 8
+  },
+  {
+    "name": "West court entrance link slate roof",
+    "vertices": 18,
+    "indexed": false,
+    "instances": 0,
+    "sloping": 6
+  },
+  {
+    "name": "East front connecting ward slate roof",
+    "vertices": 18,
+    "indexed": false,
+    "instances": 0,
+    "sloping": 6
+  },
+  {
+    "name": "East end ward slate roof",
+    "vertices": 18,
+    "indexed": false,
+    "instances": 0,
+    "sloping": 6
+  },
+  {
+    "name": "East rear pavilion slate roof",
+    "vertices": 18,
+    "indexed": false,
+    "instances": 0,
+    "sloping": 6
+  },
+  {
+    "name": "East rear link slate roof",
+    "vertices": 18,
+    "indexed": false,
+    "instances": 0,
+    "sloping": 6
+  },
+  {
+    "name": "East end projecting rooms slate roof",
+    "vertices": 18,
+    "indexed": false,
+    "instances": 0,
+    "sloping": 6
+  },
+  {
+    "name": "East end front rooms slate roof",
+    "vertices": 18,
+    "indexed": false,
+    "instances": 0,
+    "sloping": 6
+  },
+  {
+    "name": "East veranda slate canopy",
+    "vertices": 24,
+    "indexed": true,
+    "instances": 0,
+    "sloping": 8
+  },
+  {
+    "name": "Outer cross-gable slate roof",
+    "vertices": 24,
+    "indexed": true,
+    "instances": 0,
+    "sloping": 8
+  },
+  {
+    "name": "Outer cross-gable slate roof",
+    "vertices": 24,
+    "indexed": true,
+    "instances": 0,
+    "sloping": 8
+  },
+  {
+    "name": "Outer cross-gable slate roof",
+    "vertices": 24,
+    "indexed": true,
+    "instances": 0,
+    "sloping": 8
+  },
+  {
+    "name": "Outer cross-gable slate roof",
+    "vertices": 24,
+    "indexed": true,
+    "instances": 0,
+    "sloping": 8
+  },
+  {
+    "name": "Outer low entrance room slate roof",
+    "vertices": 18,
+    "indexed": false,
+    "instances": 0,
+    "sloping": 6
+  },
+  {
+    "name": "Rear court west range slate roof",
+    "vertices": 18,
+    "indexed": false,
+    "instances": 0,
+    "sloping": 6
+  },
+  {
+    "name": "Central hall slate roof",
+    "vertices": 18,
+    "indexed": false,
+    "instances": 0,
+    "sloping": 6
+  },
+  {
+    "name": "Entrance range slate roof",
+    "vertices": 18,
+    "indexed": false,
+    "instances": 0,
+    "sloping": 6
+  },
+  {
+    "name": "West front pavilion slate roof",
+    "vertices": 18,
+    "indexed": false,
+    "instances": 0,
+    "sloping": 6
+  },
+  {
+    "name": "West square tower slate roof",
+    "vertices": 18,
+    "indexed": false,
+    "instances": 0,
+    "sloping": 6
+  },
+  {
+    "name": "East front pavilion slate roof",
+    "vertices": 18,
+    "indexed": false,
+    "instances": 0,
+    "sloping": 6
+  },
+  {
+    "name": "East square tower slate roof",
+    "vertices": 18,
+    "indexed": false,
+    "instances": 0,
+    "sloping": 6
+  },
+  {
+    "name": "Central rear spine slate roof",
+    "vertices": 18,
+    "indexed": false,
+    "instances": 0,
+    "sloping": 6
+  },
+  {
+    "name": "Central rear low hall link slate roof",
+    "vertices": 18,
+    "indexed": false,
+    "instances": 0,
+    "sloping": 6
+  },
+  {
+    "name": "Rear court east range slate roof",
+    "vertices": 18,
+    "indexed": false,
+    "instances": 0,
+    "sloping": 6
+  },
+  {
+    "name": "Rear court back range slate roof",
+    "vertices": 18,
+    "indexed": false,
+    "instances": 0,
+    "sloping": 6
+  },
+  {
+    "name": "Rear court back east range slate roof",
+    "vertices": 18,
+    "indexed": false,
+    "instances": 0,
+    "sloping": 6
+  },
+  {
+    "name": "Rear court front west service link slate roof",
+    "vertices": 18,
+    "indexed": false,
+    "instances": 0,
+    "sloping": 6
+  },
+  {
+    "name": "Rear court front east service link slate roof",
+    "vertices": 18,
+    "indexed": false,
+    "instances": 0,
+    "sloping": 6
+  },
+  {
+    "name": "Hall dormer slate roof",
+    "vertices": 24,
+    "indexed": true,
+    "instances": 0,
+    "sloping": 8
+  },
+  {
+    "name": "Hall dormer slate roof",
+    "vertices": 24,
+    "indexed": true,
+    "instances": 0,
+    "sloping": 8
+  },
+  {
+    "name": "Hall dormer slate roof",
+    "vertices": 24,
+    "indexed": true,
+    "instances": 0,
+    "sloping": 8
+  },
+  {
+    "name": "Hall dormer slate roof",
+    "vertices": 24,
+    "indexed": true,
+    "instances": 0,
+    "sloping": 8
+  },
+  {
+    "name": "Hall dormer slate roof",
+    "vertices": 24,
+    "indexed": true,
+    "instances": 0,
+    "sloping": 8
+  },
+  {
+    "name": "Hall dormer slate roof",
+    "vertices": 24,
+    "indexed": true,
+    "instances": 0,
+    "sloping": 8
+  },
+  {
+    "name": "Entrance pediment slate roof",
+    "vertices": 24,
+    "indexed": true,
+    "instances": 0,
+    "sloping": 8
+  },
+  {
+    "name": "Entrance pediment slate roof",
+    "vertices": 24,
+    "indexed": true,
+    "instances": 0,
+    "sloping": 8
+  },
+  {
+    "name": "West front pavilion slate roof",
+    "vertices": 24,
+    "indexed": true,
+    "instances": 0,
+    "sloping": 8
+  },
+  {
+    "name": "West front pavilion slate roof",
+    "vertices": 24,
+    "indexed": true,
+    "instances": 0,
+    "sloping": 8
+  },
+  {
+    "name": "East front pavilion slate roof",
+    "vertices": 24,
+    "indexed": true,
+    "instances": 0,
+    "sloping": 8
+  },
+  {
+    "name": "East front pavilion slate roof",
+    "vertices": 24,
+    "indexed": true,
+    "instances": 0,
+    "sloping": 8
+  },
+  {
+    "name": "West canted bay slate roof",
+    "vertices": 18,
+    "indexed": false,
+    "instances": 0,
+    "sloping": 6
+  },
+  {
+    "name": "Oakmere raised spine slate roof",
+    "vertices": 18,
+    "indexed": false,
+    "instances": 0,
+    "sloping": 6
+  },
+  {
+    "name": "Oakmere low rear end room slate roof",
+    "vertices": 18,
+    "indexed": false,
+    "instances": 0,
+    "sloping": 6
+  },
+  {
+    "name": "Oakmere low hall link slate roof",
+    "vertices": 18,
+    "indexed": false,
+    "instances": 0,
+    "sloping": 6
+  },
+  {
+    "name": "Oakmere west raised range slate roof",
+    "vertices": 18,
+    "indexed": false,
+    "instances": 0,
+    "sloping": 6
+  },
+  {
+    "name": "Oakmere west cross-gable slate roof",
+    "vertices": 12,
+    "indexed": false,
+    "instances": 0,
+    "sloping": 4
+  },
+  {
+    "name": "Oakmere west low hall link slate roof",
+    "vertices": 18,
+    "indexed": false,
+    "instances": 0,
+    "sloping": 6
+  },
+  {
+    "name": "Rear court front range slate roof",
+    "vertices": 18,
+    "indexed": false,
+    "instances": 0,
+    "sloping": 6
+  },
+  {
+    "name": "Annexe kitchen ventilator slate roof",
+    "vertices": 18,
+    "indexed": false,
+    "instances": 0,
+    "sloping": 6
+  },
+  {
+    "name": "Rear hall dormer slate roof",
+    "vertices": 24,
+    "indexed": true,
+    "instances": 0,
+    "sloping": 8
+  },
+  {
+    "name": "Rear hall dormer slate roof",
+    "vertices": 24,
+    "indexed": true,
+    "instances": 0,
+    "sloping": 8
+  },
+  {
+    "name": "Rear hall dormer slate roof",
+    "vertices": 24,
+    "indexed": true,
+    "instances": 0,
+    "sloping": 8
+  },
+  {
+    "name": "Rear hall dormer slate roof",
+    "vertices": 24,
+    "indexed": true,
+    "instances": 0,
+    "sloping": 8
+  },
+  {
+    "name": "Rear hall dormer slate roof",
+    "vertices": 24,
+    "indexed": true,
+    "instances": 0,
+    "sloping": 8
+  },
+  {
+    "name": "Rear hall dormer slate roof",
+    "vertices": 24,
+    "indexed": true,
+    "instances": 0,
+    "sloping": 8
+  },
+  {
+    "name": "Carden conservatory low rear link slate roof",
+    "vertices": 18,
+    "indexed": false,
+    "instances": 0,
+    "sloping": 6
+  },
+  {
+    "name": "Carden tower side link slate roof",
+    "vertices": 18,
+    "indexed": false,
+    "instances": 0,
+    "sloping": 6
+  },
+  {
+    "name": "Carden low side range slate roof",
+    "vertices": 18,
+    "indexed": false,
+    "instances": 0,
+    "sloping": 6
+  },
+  {
+    "name": "Carden tower gabled range slate roof",
+    "vertices": 12,
+    "indexed": false,
+    "instances": 0,
+    "sloping": 4
+  },
+  {
+    "name": "East court entrance link slate roof",
+    "vertices": 18,
+    "indexed": false,
+    "instances": 0,
+    "sloping": 6
+  },
+  {
+    "name": "Dormered central service hall slate roof",
+    "vertices": 12,
+    "indexed": false,
+    "instances": 0,
+    "sloping": 4
+  },
+  {
+    "name": "Rear east gabled workshop slate roof",
+    "vertices": 12,
+    "indexed": false,
+    "instances": 0,
+    "sloping": 4
+  },
+  {
+    "name": "Rear west gabled workshop slate roof",
+    "vertices": 12,
+    "indexed": false,
+    "instances": 0,
+    "sloping": 4
+  },
+  {
+    "name": "Chimney service hall slate roof",
+    "vertices": 15,
+    "indexed": false,
+    "instances": 0,
+    "sloping": 5
+  },
+  {
+    "name": "South cross-gabled stores slate roof",
+    "vertices": 12,
+    "indexed": false,
+    "instances": 0,
+    "sloping": 4
+  },
+  {
+    "name": "Long east service range slate roof",
+    "vertices": 18,
+    "indexed": false,
+    "instances": 0,
+    "sloping": 6
+  },
+  {
+    "name": "North east stepped link slate roof",
+    "vertices": 12,
+    "indexed": false,
+    "instances": 0,
+    "sloping": 4
+  },
+  {
+    "name": "North tower range slate roof",
+    "vertices": 33,
+    "indexed": false,
+    "instances": 0,
+    "sloping": 11
+  },
+  {
+    "name": "Tower east north contact slate roof",
+    "vertices": 12,
+    "indexed": false,
+    "instances": 0,
+    "sloping": 4
+  },
+  {
+    "name": "Tower east south contact slate roof",
+    "vertices": 12,
+    "indexed": false,
+    "instances": 0,
+    "sloping": 4
+  },
+  {
+    "name": "Tower east dormered range slate roof",
+    "vertices": 192,
+    "indexed": false,
+    "instances": 0,
+    "sloping": 62
+  },
+  {
+    "name": "Tower south continuous slate roof",
+    "vertices": 12,
+    "indexed": false,
+    "instances": 0,
+    "sloping": 4
+  },
+  {
+    "name": "East range blue dormer 1 slate roof",
+    "vertices": 12,
+    "indexed": false,
+    "instances": 0,
+    "sloping": 4
+  },
+  {
+    "name": "East range blue dormer 2 slate roof",
+    "vertices": 12,
+    "indexed": false,
+    "instances": 0,
+    "sloping": 4
+  },
+  {
+    "name": "Central hall blue dormer slate roof",
+    "vertices": 12,
+    "indexed": false,
+    "instances": 0,
+    "sloping": 4
+  },
+  {
+    "name": "Rear building blue dormer 1 slate roof",
+    "vertices": 12,
+    "indexed": false,
+    "instances": 0,
+    "sloping": 4
+  },
+  {
+    "name": "Rear building blue dormer 2 slate roof",
+    "vertices": 12,
+    "indexed": false,
+    "instances": 0,
+    "sloping": 4
+  },
+  {
+    "name": "Enlarged west workshop slate roof",
+    "vertices": 12,
+    "indexed": false,
+    "instances": 0,
+    "sloping": 4
+  },
+  {
+    "name": "Enlarged workshop blue dormer slate roof",
+    "vertices": 12,
+    "indexed": false,
+    "instances": 0,
+    "sloping": 4
+  }
+]

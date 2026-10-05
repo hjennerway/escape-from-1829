@@ -1,0 +1,12 @@
+{
+  "actual": {
+    "count": 20929,
+    "sha256": "413ad148102162b2f6c2e51bf14b841e9198a347a1243d82d634f49479b81104"
+  },
+  "expected": {
+    "count": 20929,
+    "sha256": "349494e6bf6cc85b4bb7cc191229ceb899adad9934d4323d5bdc912707646486"
+  },
+  "message": "Every pre-existing annexe primitive remains unchanged\n+ actual - expected\n\n  {\n    count: 20929,\n+   sha256: '413ad148102162b2f6c2e51bf14b841e9198a347a1243d82d634f49479b81104'\n-   sha256: '349494e6bf6cc85b4bb7cc191229ceb899adad9934d4323d5bdc912707646486'\n  }\n",
+  "stack": "AssertionError [ERR_ASSERTION]: Every pre-existing annexe primitive remains unchanged\n+ actual - expected\n\n  {\n    count: 20929,\n+   sha256: '413ad148102162b2f6c2e51bf14b841e9198a347a1243d82d634f49479b81104'\n-   sha256: '349494e6bf6cc85b4bb7cc191229ceb899adad9934d4323d5bdc912707646486'\n  }\n\n    at file:///C:/Users/Harry/Documents/_escape-from-1829/Browser/test-oakmere-court.mjs:13:8\n    at ModuleJob.run (node:internal/modules/esm/module_job:561:25)\n    at async node:internal/modules/esm/loader:647:26\n    at async asyncRunEntryPointWithESMLoader (node:internal/modules/run_main:101:5)"
+}

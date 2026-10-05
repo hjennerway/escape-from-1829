@@ -1,0 +1,388 @@
+[
+  {
+    "index": 48,
+    "command": "node test-escape-exterior.mjs",
+    "code": 1,
+    "baselineCode": 1,
+    "message": "AssertionError [ERR_ASSERTION]: entire rear wing ridge stays level into the connecting roof\r"
+  },
+  {
+    "index": 49,
+    "command": "node test-inner-courtyard.mjs",
+    "code": 0
+  },
+  {
+    "index": 50,
+    "command": "node test-roof-contacts.mjs",
+    "code": 0
+  },
+  {
+    "index": 51,
+    "command": "node test-west-refinement.mjs",
+    "code": 0
+  },
+  {
+    "index": 52,
+    "command": "node test-west-roof-join.mjs",
+    "code": 0
+  },
+  {
+    "index": 53,
+    "command": "node test-west-side-basement.mjs",
+    "code": 0
+  },
+  {
+    "index": 54,
+    "command": "node test-water-tower.mjs",
+    "code": 0
+  },
+  {
+    "index": 55,
+    "command": "node test-church-front.mjs",
+    "code": 0
+  },
+  {
+    "index": 56,
+    "command": "node test-tower-buildings.mjs",
+    "code": 0
+  },
+  {
+    "index": 57,
+    "command": "node test-pharmacy.mjs",
+    "code": 0
+  },
+  {
+    "index": 58,
+    "command": "node test-irby-ashley.mjs",
+    "code": 0
+  },
+  {
+    "index": 59,
+    "command": "node test-irby-roads.mjs",
+    "code": 0
+  },
+  {
+    "index": 60,
+    "command": "node test-grafton-edge.mjs",
+    "code": 0
+  },
+  {
+    "index": 61,
+    "command": "node test-hale-ward.mjs",
+    "code": 0
+  },
+  {
+    "index": 62,
+    "command": "node test-estates.mjs",
+    "code": 0
+  },
+  {
+    "index": 63,
+    "command": "node test-farndon.mjs",
+    "code": 0
+  },
+  {
+    "index": 64,
+    "command": "node test-ward-placement.mjs",
+    "code": 0
+  },
+  {
+    "index": 65,
+    "command": "node test-ward-corridors.mjs",
+    "code": 0
+  },
+  {
+    "index": 66,
+    "command": "node test-ground-contact.mjs",
+    "code": 0
+  },
+  {
+    "index": 67,
+    "command": "node test-building-grounding.mjs",
+    "code": 0
+  },
+  {
+    "index": 68,
+    "command": "node test-day-night.mjs",
+    "code": 0
+  },
+  {
+    "index": 69,
+    "command": "node test-exterior-shadows.mjs",
+    "code": 0
+  },
+  {
+    "index": 70,
+    "command": "node test-tree-rendering.mjs",
+    "code": 0
+  },
+  {
+    "index": 71,
+    "command": "node test-front-lawn-eztree.mjs",
+    "code": 0
+  },
+  {
+    "index": 72,
+    "command": "node test-explore.mjs",
+    "code": 0
+  },
+  {
+    "index": 73,
+    "command": "node test-explore-interior.mjs",
+    "code": 0
+  },
+  {
+    "index": 74,
+    "command": "node test-front-basement.mjs",
+    "code": 0
+  },
+  {
+    "index": 75,
+    "command": "node test-exterior-door-supports.mjs",
+    "code": 0
+  },
+  {
+    "index": 76,
+    "command": "node test-explore-input.mjs",
+    "code": 0
+  },
+  {
+    "index": 77,
+    "command": "node test-jump.mjs",
+    "code": 0
+  },
+  {
+    "index": 78,
+    "command": "node test-annexe.mjs",
+    "code": 0
+  },
+  {
+    "index": 79,
+    "command": "node test-larkton.mjs",
+    "code": 0
+  },
+  {
+    "index": 80,
+    "command": "node test-larkton-recess.mjs",
+    "code": 0
+  },
+  {
+    "index": 81,
+    "command": "node test-annexe-carden.mjs",
+    "code": 0
+  },
+  {
+    "index": 82,
+    "command": "node test-annexe-front-link.mjs",
+    "code": 0
+  },
+  {
+    "index": 83,
+    "command": "node test-annexe-east-outer.mjs",
+    "code": 0
+  },
+  {
+    "index": 84,
+    "command": "node test-annexe-kitchen.mjs",
+    "code": 0
+  },
+  {
+    "index": 85,
+    "command": "node test-annexe-rear-stretch.mjs",
+    "code": 0
+  },
+  {
+    "index": 86,
+    "command": "node test-annexe-rear-side-alignment.mjs",
+    "code": 0
+  },
+  {
+    "index": 87,
+    "command": "node test-annexe-os-refinement.mjs",
+    "code": 0
+  },
+  {
+    "index": 88,
+    "command": "node test-annexe-photo-placement.mjs",
+    "code": 0
+  },
+  {
+    "index": 89,
+    "command": "node test-annexe-outer-front.mjs",
+    "code": 0
+  },
+  {
+    "index": 90,
+    "command": "node test-jarman.mjs",
+    "code": 1,
+    "baselineCode": 1,
+    "message": "AssertionError [ERR_ASSERTION]: All geometry outside the marked frontage stays exact\r"
+  },
+  {
+    "index": 91,
+    "command": "node test-oakmere-court.mjs",
+    "code": 0
+  },
+  {
+    "index": 92,
+    "command": "node test-oakmere.mjs",
+    "code": 0
+  },
+  {
+    "index": 93,
+    "command": "node test-oakmere-west.mjs",
+    "code": 0
+  },
+  {
+    "index": 94,
+    "command": "node test-oakmere-windows.mjs",
+    "code": 0
+  },
+  {
+    "index": 95,
+    "command": "node test-annexe-wards.mjs",
+    "code": 0
+  },
+  {
+    "index": 96,
+    "command": "node test-leighton-newton.mjs",
+    "code": 1,
+    "baselineCode": 1,
+    "message": "AssertionError [ERR_ASSERTION]: Every primitive outside Leighton/Newton remains unchanged\r"
+  },
+  {
+    "index": 97,
+    "command": "node test-churton.mjs",
+    "code": 0
+  },
+  {
+    "index": 98,
+    "command": "node test-upton.mjs",
+    "code": 0
+  },
+  {
+    "index": 99,
+    "command": "node test-garages-mortuary.mjs",
+    "code": 0
+  },
+  {
+    "index": 100,
+    "command": "node test-greenhouses.mjs",
+    "code": 0
+  },
+  {
+    "index": 101,
+    "command": "node test-main-admin.mjs",
+    "code": 0
+  },
+  {
+    "index": 102,
+    "command": "node test-main-kitchen.mjs",
+    "code": 0
+  },
+  {
+    "index": 103,
+    "command": "node test-main-admin-refine2.mjs",
+    "code": 0
+  },
+  {
+    "index": 104,
+    "command": "node test-aerial-controls.mjs",
+    "code": 0
+  },
+  {
+    "index": 105,
+    "command": "node test-device-location.mjs",
+    "code": 0
+  },
+  {
+    "index": 106,
+    "command": "node test-aerial-layouts.mjs",
+    "code": 0
+  },
+  {
+    "index": 107,
+    "command": "node test-kml-imports.mjs",
+    "code": 0
+  },
+  {
+    "index": 108,
+    "command": "node test-kml-11.mjs",
+    "code": 0
+  },
+  {
+    "index": 109,
+    "command": "node test-modern-entrance.mjs",
+    "code": 0
+  },
+  {
+    "index": 110,
+    "command": "node test-modern-car-park.mjs",
+    "code": 0
+  },
+  {
+    "index": 111,
+    "command": "node test-parsons-retrace.mjs",
+    "code": 0
+  },
+  {
+    "index": 112,
+    "command": "node test-historic-roads.mjs",
+    "code": 0
+  },
+  {
+    "index": 113,
+    "command": "node test-road-continuity.mjs",
+    "code": 0
+  },
+  {
+    "index": 114,
+    "command": "node test-west-parsons-junctions.mjs",
+    "code": 0
+  },
+  {
+    "index": 115,
+    "command": "node test-admin-teardrop.mjs",
+    "code": 0
+  },
+  {
+    "index": 116,
+    "command": "node test-annexe-access.mjs",
+    "code": 0
+  },
+  {
+    "index": 117,
+    "command": "node test-annexe-rear-roads.mjs",
+    "code": 0
+  },
+  {
+    "index": 118,
+    "command": "node test-performance.mjs",
+    "code": 0
+  },
+  {
+    "index": 119,
+    "command": "node test-aerial-performance.mjs",
+    "code": 0
+  },
+  {
+    "index": 120,
+    "command": "node test-building-detail.mjs",
+    "code": 0
+  },
+  {
+    "index": 121,
+    "command": "node test-outhouse.mjs",
+    "code": 0
+  },
+  {
+    "index": 122,
+    "command": "node test-willows.mjs",
+    "code": 0
+  },
+  {
+    "index": 123,
+    "command": "node test-building-photos.mjs",
+    "code": 0
+  }
+]

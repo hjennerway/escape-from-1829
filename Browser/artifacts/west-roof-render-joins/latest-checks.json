@@ -1,0 +1,47 @@
+[
+  {
+    "name": "final-corner-baseline",
+    "code": 1,
+    "expected": 1
+  },
+  {
+    "name": "final-corner-regression",
+    "code": 0,
+    "expected": 0
+  },
+  {
+    "name": "source-capture",
+    "code": 0,
+    "expected": 0
+  },
+  {
+    "name": "compiled-capture",
+    "code": 0,
+    "expected": 0
+  },
+  {
+    "name": "latest-test-west-roof-join",
+    "code": 1,
+    "expected": null
+  },
+  {
+    "name": "latest-test-west-refinement",
+    "code": 0,
+    "expected": null
+  },
+  {
+    "name": "latest-test-roof-contacts",
+    "code": 0,
+    "expected": null
+  },
+  {
+    "name": "latest-test-roof-tiles",
+    "code": 1,
+    "expected": null
+  },
+  {
+    "name": "latest-compiled-tile-check",
+    "code": 1,
+    "expected": null
+  }
+]

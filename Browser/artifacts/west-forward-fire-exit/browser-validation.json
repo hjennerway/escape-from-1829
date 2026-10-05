@@ -1,0 +1,154 @@
+{
+  "walking": [
+    {
+      "x": -39.33999999999999,
+      "y": 0.42750000044703484,
+      "z": 46.05,
+      "floor": 0,
+      "outside": true,
+      "stair": null,
+      "verticalTrend": 1
+    },
+    {
+      "x": -45.73999999999985,
+      "y": 2.3099999991059303,
+      "z": 46.05,
+      "floor": 0,
+      "outside": true,
+      "stair": null,
+      "verticalTrend": 1
+    },
+    {
+      "x": -45.73999999999985,
+      "y": 2.3099999991059303,
+      "z": 44.53000000000003,
+      "floor": 0,
+      "outside": true,
+      "stair": null,
+      "verticalTrend": 1
+    },
+    {
+      "x": -39.37999999999999,
+      "y": 4.337500000447035,
+      "z": 44.49000000000003,
+      "floor": 0,
+      "outside": true,
+      "stair": null,
+      "verticalTrend": 1
+    },
+    {
+      "x": -39.019999999999996,
+      "y": 4.320000000298023,
+      "z": 44.49000000000003,
+      "floor": 0,
+      "outside": true,
+      "stair": null,
+      "verticalTrend": 1
+    },
+    {
+      "x": -39.019999999999996,
+      "y": 4.320000000298023,
+      "z": 43.810000000000045,
+      "floor": 0,
+      "outside": true,
+      "stair": null,
+      "verticalTrend": 1
+    },
+    {
+      "x": -39,
+      "y": 4.320000000298023,
+      "z": 44.47999999999998,
+      "floor": 0,
+      "outside": true,
+      "stair": null,
+      "verticalTrend": 0,
+      "d": 0
+    },
+    {
+      "x": -39.35999999999999,
+      "y": 4.337500000447035,
+      "z": 44.47999999999998,
+      "floor": 0,
+      "outside": true,
+      "stair": null,
+      "verticalTrend": 0,
+      "d": 0
+    },
+    {
+      "x": -45.759999999999856,
+      "y": 2.3099999991059303,
+      "z": 44.47999999999998,
+      "floor": 0,
+      "outside": true,
+      "stair": null,
+      "verticalTrend": -1,
+      "d": 0
+    },
+    {
+      "x": -45.759999999999856,
+      "y": 2.3099999991059303,
+      "z": 46.03999999999995,
+      "floor": 0,
+      "outside": true,
+      "stair": null,
+      "verticalTrend": -1,
+      "d": 0
+    },
+    {
+      "x": -38.92,
+      "y": 0,
+      "z": 46.03999999999995,
+      "floor": 0,
+      "outside": true,
+      "stair": null,
+      "verticalTrend": -1,
+      "d": 0
+    }
+  ],
+  "source": {
+    "mode": "procedural",
+    "milliseconds": 1870.6000000005588
+  },
+  "compiled": {
+    "mode": "compiled",
+    "milliseconds": 1069.2999999998137
+  },
+  "comparison": {
+    "angle": {
+      "significantFraction": 0.00005828779599271402,
+      "meanChannelError": 0.0016681845780206436,
+      "triangles": 1894881,
+      "sourceCalls": 2854,
+      "compiledCalls": 2854
+    },
+    "photo-angle": {
+      "significantFraction": 0.00005919854280510018,
+      "meanChannelError": 0.0014265330904675167,
+      "triangles": 576233,
+      "sourceCalls": 346,
+      "compiledCalls": 346
+    },
+    "front": {
+      "significantFraction": 0,
+      "meanChannelError": 0.00001912568306010929,
+      "triangles": 428139,
+      "sourceCalls": 219,
+      "compiledCalls": 219
+    },
+    "overview": {
+      "significantFraction": 0.00003096539162112932,
+      "meanChannelError": 0.0006238615664845174,
+      "triangles": 1330526,
+      "sourceCalls": 2292,
+      "compiledCalls": 2292
+    },
+    "door": {
+      "significantFraction": 0.0003360655737704918,
+      "meanChannelError": 0.011400425015179114,
+      "triangles": 1204469,
+      "sourceCalls": 2133,
+      "compiledCalls": 2133
+    }
+  },
+  "errors": []
+}

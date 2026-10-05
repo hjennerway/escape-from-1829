@@ -1,0 +1,30 @@
+[
+  {
+    "width": 1200,
+    "surfaces": 360,
+    "connections": 8,
+    "autoClear": true,
+    "fullMap": true,
+    "mapLevels": 5,
+    "walkingPaused": true,
+    "modeSwitch": true,
+    "indoor": true,
+    "touch": true,
+    "typing": true,
+    "errors": []
+  },
+  {
+    "width": 320,
+    "surfaces": 360,
+    "connections": 8,
+    "autoClear": true,
+    "fullMap": true,
+    "mapLevels": 5,
+    "walkingPaused": true,
+    "modeSwitch": true,
+    "indoor": true,
+    "touch": true,
+    "typing": true,
+    "errors": []
+  }
+]

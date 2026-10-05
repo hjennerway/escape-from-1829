@@ -1,5 +1,122 @@
 # 1829 revised interior plans — 2 October 2026
 
+## Shared indoor ward privies (5 October 2026)
+
+Ground/first R5, R16, R33 and R35 now contain shared privies and basin
+washstands: three seats in each rear room, two in each forward room.
+Original room boundaries, window openings and entrance doors remain.
+The rear room markers move to z=-34.65 inside the clear common aisles.
+Both shared plan JSON files and ground/first architectural/furnished review
+drawings are updated. Furniture, collision, navigation, room finishes and
+notebook uses agree between Escape and Explore. This supersedes earlier
+linen-store, nursing and day-room use assignments for these eight rooms.
+
+See [the fittings, historical basis and validation](../room-furnishings/README.md)
+and `../../Browser/artifacts/ward-privies/`. The interpretation is a gameplay
+choice, not a surveyed original sanitary plan. Browser sources and drawings
+change; the aerial compiler excludes them, and Unity/Blender/package exports
+are not regenerated.
+
+## R2/R13 mirrored ward bed rows (5 October 2026)
+
+The owner requested six more aligned beds in each mirrored ward and confirmed
+both the ground and first floors. Each R2/R13 room now has ten beds, five per
+row, retaining the original four positions and 1.975-unit spacing. Shared
+plan row records extend towards the entrance end without changing room walls
+or doors. Existing fixed storage/seats and access to all bed feet remain.
+The ground/first furnished drawings are refreshed in `../room-furnishings/`.
+GPU views and validation are recorded in `../../Browser/artifacts/outer-ward-beds/`
+and `../../DEVELOPMENT.md`. Browser interiors change; Unity, Blender and
+packaged exports are not regenerated, and the aerial model excludes them.
+
+## Central dormitory furniture correction (5 October 2026)
+
+The owner's later marked-bed/chair request applies to all three merged
+first-floor dormitories. R6, R8 and R10 each now contain fourteen beds:
+eight on the window side and six on the entrance side, with the two original
+slots beside the door omitted. Every remaining headboard is pushed to the
+wall face, and all Windsor chairs are removed from these rooms. Short-wall
+wardrobes and small Panca seats are retained; entrance leaves open to at most
+105 degrees to clear the first retained beds. This supersedes the sixteen-bed
+counts and rear circulation strips described below. Room boundaries and the
+ground-floor uses are unchanged. Shared JSON and furnished review drawings
+are updated; validation is recorded in `../../DEVELOPMENT.md` and
+`../../Browser/artifacts/central-dormitory-wall-beds/`.
+
+## First-floor central dormitories (5 October 2026)
+
+This records the initial sixteen-bed arrangement. The owner's later same-day
+“Adjust beds and chairs” follow-up supersedes those bed counts and offsets
+while retaining the three merged rooms.
+
+The owner's six central rear rooms are combined in adjacent pairs on the first
+floor: R6/R7 become R6, R8/R9 become R8, and R10/R11 become R10. Three transverse
+dividers and the redundant R7/R9/R11 doorways are removed on this level. The
+three retained entrances serve the same central corridor. The ground-floor
+rooms retain their separate boundaries and medical/office uses.
+
+Each dormitory contains sixteen full-size beds: eight in each row along the
+two long walls, with feet facing the central aisle. The rows reserve window
+clearance and a wider strip beside the inward-open entrance doors. Clear
+cross aisles at the row ends connect the entrance strip to every bed foot;
+the southern room's end allowance also fits the half-unit navigation grid.
+Wardrobes and small seats use checked wall positions; the former nursing
+work table and linen shelving are removed to make room for the beds.
+
+Both shared plans and first-floor architectural/furnished review drawings
+are updated. Visible walls, openings, room finishes, notebook maps, walking
+collision and NPC routes consume these same merged room records. These are
+owner-directed gameplay dimensions. Only browser interiors are changed;
+the aerial compiler excludes these inputs, and Unity, Blender and packaged
+exports are not regenerated. Validation and views are recorded under
+`../../Browser/artifacts/central-dormitories/` and in `../../DEVELOPMENT.md`.
+
+## Walled central stair wells (5 October 2026)
+
+The owner's request encloses the central void in every internal return stair
+with full-height masonry. S1, S3, S4 and the lower S5 connections now have a
+four-sided enclosure from their lowest floor through the top landing ceiling.
+This supersedes the earlier open-well/inner-banister descriptions. The newer
+single straight Library flight has no central void; its route and guards are
+retained, and the former S5 Library well remains capped.
+
+Each enclosure has 0.18-unit walls contained inside the existing central
+rectangle. The outer faces meet the inner flight and landing edges, retaining
+their full 1.3-unit widths. Joined red lower masonry and cream upper masonry
+continue through the inter-storey bands, using the existing material batches.
+Inner banisters are removed where they meet walls; exposed outer edges and
+unused flight mouths retain guards. Walking collision uses the same enclosure
+bounds and full vertical extent. Flight solids, floor openings and routes keep
+their positions. These are owner-directed game fittings, not surveyed historic
+construction dimensions.
+
+Both shared plan descriptions are updated. Geometry, walking and hardware
+browser evidence are under `../../Browser/artifacts/stair-well-walls/`, with
+validation in `../../DEVELOPMENT.md`. Only browser interiors change; the
+aerial manifest still matches its source hash. Unity, Blender and packaged
+exports are not regenerated.
+
+## West-wing Library third storey (5 October 2026)
+
+The marked Library and adjoining rooms are now modelled on the browser's
+second-floor level (ID 3, Y=8.4), alongside the retained Reception rooms.
+This is the third occupied storey. R46–R50 follow the current west exterior
+outline; C26 serves their rear passage. S5 continues from first floor through
+R51, and the existing 8.5-high F4 door now reaches the Library. The owner's
+later same-day stair revision removes the initial R51 enclosure and redirects
+the upper flight onto the west corridor landing; see the correction in the
+Library modelling notes.
+The new upper-level door has its own interior wall anchor; F4's earlier
+first-floor connection is preserved. This supersedes statements below that
+the upper F4 door lies outside the modelled interior scope.
+
+Both plan JSON copies agree. The new Library storey has 26 exterior-scheduled
+sashes, stocked shelves and reading furnishings. Existing rooms and Reception
+retain their definitions. See [the reference, complete plan and modelling
+notes](../west-library/README.md). Browser sources and drawings are updated;
+Unity, Blender and packaged exports are not regenerated. The aerial compiler
+excludes these interiors.
+
 ## Approved Reception top-floor layout and door names (4 October 2026)
 
 The owner approved the rough plan in `../top-floor-layout-proposal/` and

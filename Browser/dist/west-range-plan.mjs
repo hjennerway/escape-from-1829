@@ -5,6 +5,9 @@
 export const WEST_RANGE_PLAN=Object.freeze({
   gardenZ:13.5,courtZ:5,outerRearZ:5,outerFrontZ:20.5,
   recessRearZ:7,bayRootZ:15,bayFrontZ:17.8,
+  // The later blue-circled height correction matches every west cross-range
+  // roof-to-wall edge to the retained main wall, eliminating raised returns.
+  wallHeight:14.3,roofEaveHeight:14.53,
   // Later green/yellow photograph: the west return is one unit behind the
   // lower wing's x=-41 face; its two lower floors have paired sashes.
   innerLeft:-40,innerRight:-35,innerFrontZ:21.2,innerHeight:14.3

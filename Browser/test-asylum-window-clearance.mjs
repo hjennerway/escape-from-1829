@@ -15,7 +15,7 @@ const floors=buildAsylumLayout(plan).floors,ray=new THREE.Raycaster(),matrix=new
 let panes=0,clearanceSamples=0;
 for(const floor of floors){
  const scene=new THREE.Scene(),snapshot=JSON.stringify(floor.walls);buildAsylumArchitecture(THREE,scene,floor);scene.updateMatrixWorld(true);
- const glass=scene.getObjectByName('Asylum Glass');assert.equal(glass.count,[128,130,12,5][floor.id],'Retain every window and the Reception transom');
+ const glass=scene.getObjectByName('Asylum Glass');assert.equal(glass.count,[128,130,12,31][floor.id],'Retain lower windows and the Reception transom; include the Library upper sashes');
  const windows=[];
  for(let i=0;i<glass.count;i++){
   glass.getMatrixAt(i,matrix);
@@ -49,4 +49,4 @@ for(const floor of floors){
 }
 await mkdir(destination,{recursive:true});
 await writeFile(new URL('clearance.json',destination),JSON.stringify({panes,clearanceSamples,floors:report},null,2)+'\n');
-console.log(`PASS: 274 windows and the Reception transom across four floors, ${panes} unobstructed panes, ${clearanceSamples} sill-to-wall clearance samples, retained window counts and collision.`);
+console.log(`PASS: 300 windows and the Reception transom across four floors, ${panes} unobstructed panes, ${clearanceSamples} sill-to-wall clearance samples, retained lower window counts and collision.`);

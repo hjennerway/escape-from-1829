@@ -71,5 +71,5 @@ export function bindExploreInput(walker,{canvas,hint,look,touchControls}){
   document.addEventListener('keyup',e=>{keyboard.delete(e.code);sync();});
   window.addEventListener('blur',stop);
   document.addEventListener('visibilitychange',()=>{if(document.hidden)stop();});
-  return {get active(){return active;}};
+  return {get active(){return active;},stop};
 }

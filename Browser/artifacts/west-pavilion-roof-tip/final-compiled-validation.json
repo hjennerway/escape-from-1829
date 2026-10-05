@@ -1,0 +1,1027 @@
+{
+  "views": {
+    "marked": {
+      "position": [
+        -22,
+        24,
+        34
+      ],
+      "target": [
+        -37.5,
+        13.5,
+        17
+      ],
+      "fov": 32
+    },
+    "close": {
+      "position": [
+        -28,
+        21,
+        27
+      ],
+      "target": [
+        -34.8,
+        14.4,
+        15.6
+      ],
+      "fov": 27
+    },
+    "opposite": {
+      "position": [
+        -42,
+        23,
+        27
+      ],
+      "target": [
+        -34.8,
+        14.4,
+        15.6
+      ],
+      "fov": 34
+    }
+  },
+  "picks": {
+    "marked": [
+      {
+        "x": -34.9,
+        "z": 15.35,
+        "name": "West garden inner pavilion slate roof",
+        "point": [
+          -34.9,
+          14.793794062032177,
+          15.35
+        ],
+        "color": "c4c9c6"
+      },
+      {
+        "x": -34.9,
+        "z": 15.45,
+        "name": "West garden inner pavilion slate roof",
+        "point": [
+          -34.9,
+          14.793794062032182,
+          15.45
+        ],
+        "color": "c4c9c6"
+      },
+      {
+        "x": -34.9,
+        "z": 15.55,
+        "name": "West garden inner pavilion slate roof",
+        "point": [
+          -34.9,
+          14.793794062032179,
+          15.55
+        ],
+        "color": "c4c9c6"
+      },
+      {
+        "x": -34.9,
+        "z": 15.65,
+        "name": "West garden inner pavilion slate roof",
+        "point": [
+          -34.9,
+          14.793794062032179,
+          15.65
+        ],
+        "color": "c4c9c6"
+      },
+      {
+        "x": -34.7,
+        "z": 15.35,
+        "name": "West garden inner pavilion slate roof",
+        "point": [
+          -34.7,
+          14.61793207047187,
+          15.35
+        ],
+        "color": "c4c9c6"
+      },
+      {
+        "x": -34.7,
+        "z": 15.45,
+        "name": "West garden inner pavilion slate roof",
+        "point": [
+          -34.7,
+          14.61793207047187,
+          15.45
+        ],
+        "color": "c4c9c6"
+      },
+      {
+        "x": -34.7,
+        "z": 15.55,
+        "name": "West garden inner pavilion slate roof",
+        "point": [
+          -34.7,
+          14.617932070471868,
+          15.55
+        ],
+        "color": "c4c9c6"
+      },
+      {
+        "x": -34.7,
+        "z": 15.65,
+        "name": "West garden inner pavilion slate roof",
+        "point": [
+          -34.7,
+          14.61793207047187,
+          15.65
+        ],
+        "color": "c4c9c6"
+      },
+      {
+        "x": -34.6,
+        "z": 15.35,
+        "name": "Aerial batch · Period · 1829 · 252",
+        "point": [
+          -34.6,
+          14.586115419422496,
+          15.35
+        ],
+        "color": "c4c9c6"
+      },
+      {
+        "x": -34.6,
+        "z": 15.45,
+        "name": "Aerial batch · Period · 1829 · 252",
+        "point": [
+          -34.6,
+          14.548704958334385,
+          15.45
+        ],
+        "color": "c4c9c6"
+      },
+      {
+        "x": -34.6,
+        "z": 15.55,
+        "name": "West garden inner pavilion slate roof",
+        "point": [
+          -34.6,
+          14.530001074691711,
+          15.55
+        ],
+        "color": "c4c9c6"
+      },
+      {
+        "x": -34.6,
+        "z": 15.65,
+        "name": "West garden inner pavilion slate roof",
+        "point": [
+          -34.6,
+          14.530001074691711,
+          15.65
+        ],
+        "color": "c4c9c6"
+      },
+      {
+        "x": -34.5,
+        "z": 15.35,
+        "name": "Aerial batch · Period · 1829 · 252",
+        "point": [
+          -34.5,
+          14.57881068330777,
+          15.35
+        ],
+        "color": "c4c9c6"
+      },
+      {
+        "x": -34.5,
+        "z": 15.45,
+        "name": "Aerial batch · Period · 1829 · 278",
+        "point": [
+          -34.5,
+          14.56571683102085,
+          15.45
+        ],
+        "color": "e1e3dc"
+      },
+      {
+        "x": -34.5,
+        "z": 15.55,
+        "name": "Aerial batch · Period · 1829 · 278",
+        "point": [
+          -34.5,
+          14.565716831020854,
+          15.55
+        ],
+        "color": "e1e3dc"
+      },
+      {
+        "x": -34.5,
+        "z": 15.65,
+        "name": "Aerial batch · Period · 1829 · 283",
+        "point": [
+          -34.5,
+          8.829999923706058,
+          15.65
+        ],
+        "color": "444b4d"
+      },
+      {
+        "x": -34.3,
+        "z": 15.35,
+        "name": "Aerial batch · Period · 1829 · 252",
+        "point": [
+          -34.3,
+          14.564200572845976,
+          15.35
+        ],
+        "color": "c4c9c6"
+      },
+      {
+        "x": -34.3,
+        "z": 15.45,
+        "name": "Aerial batch · Period · 1829 · 278",
+        "point": [
+          -34.3,
+          14.551106795031457,
+          15.45
+        ],
+        "color": "e1e3dc"
+      },
+      {
+        "x": -34.3,
+        "z": 15.55,
+        "name": "Aerial batch · Period · 1829 · 278",
+        "point": [
+          -34.3,
+          14.551106795031457,
+          15.55
+        ],
+        "color": "e1e3dc"
+      },
+      {
+        "x": -34.3,
+        "z": 15.65,
+        "name": "Aerial batch · Period · 1829 · 283",
+        "point": [
+          -34.3,
+          8.829999923706058,
+          15.65
+        ],
+        "color": "444b4d"
+      },
+      {
+        "x": -34,
+        "z": 15.35,
+        "name": "Aerial batch · Period · 1829 · 252",
+        "point": [
+          -34,
+          14.542285407153289,
+          15.35
+        ],
+        "color": "c4c9c6"
+      },
+      {
+        "x": -34,
+        "z": 15.45,
+        "name": "Aerial batch · Period · 1829 · 278",
+        "point": [
+          -34,
+          14.529191429498503,
+          15.45
+        ],
+        "color": "e1e3dc"
+      },
+      {
+        "x": -34,
+        "z": 15.55,
+        "name": "Aerial batch · Period · 1829 · 278",
+        "point": [
+          -34,
+          14.529191429498507,
+          15.55
+        ],
+        "color": "e1e3dc"
+      },
+      {
+        "x": -34,
+        "z": 15.65,
+        "name": "Aerial batch · Period · 1829 · 283",
+        "point": [
+          -34,
+          8.829999923706055,
+          15.65
+        ],
+        "color": "444b4d"
+      }
+    ],
+    "close": [
+      {
+        "x": -34.9,
+        "z": 15.35,
+        "name": "West garden inner pavilion slate roof",
+        "point": [
+          -34.9,
+          14.793794062032177,
+          15.35
+        ],
+        "color": "c4c9c6"
+      },
+      {
+        "x": -34.9,
+        "z": 15.45,
+        "name": "West garden inner pavilion slate roof",
+        "point": [
+          -34.9,
+          14.793794062032182,
+          15.45
+        ],
+        "color": "c4c9c6"
+      },
+      {
+        "x": -34.9,
+        "z": 15.55,
+        "name": "West garden inner pavilion slate roof",
+        "point": [
+          -34.9,
+          14.793794062032179,
+          15.55
+        ],
+        "color": "c4c9c6"
+      },
+      {
+        "x": -34.9,
+        "z": 15.65,
+        "name": "West garden inner pavilion slate roof",
+        "point": [
+          -34.9,
+          14.793794062032179,
+          15.65
+        ],
+        "color": "c4c9c6"
+      },
+      {
+        "x": -34.7,
+        "z": 15.35,
+        "name": "West garden inner pavilion slate roof",
+        "point": [
+          -34.7,
+          14.61793207047187,
+          15.35
+        ],
+        "color": "c4c9c6"
+      },
+      {
+        "x": -34.7,
+        "z": 15.45,
+        "name": "West garden inner pavilion slate roof",
+        "point": [
+          -34.7,
+          14.61793207047187,
+          15.45
+        ],
+        "color": "c4c9c6"
+      },
+      {
+        "x": -34.7,
+        "z": 15.55,
+        "name": "West garden inner pavilion slate roof",
+        "point": [
+          -34.7,
+          14.617932070471868,
+          15.55
+        ],
+        "color": "c4c9c6"
+      },
+      {
+        "x": -34.7,
+        "z": 15.65,
+        "name": "West garden inner pavilion slate roof",
+        "point": [
+          -34.7,
+          14.61793207047187,
+          15.65
+        ],
+        "color": "c4c9c6"
+      },
+      {
+        "x": -34.6,
+        "z": 15.35,
+        "name": "Aerial batch · Period · 1829 · 252",
+        "point": [
+          -34.6,
+          14.586115419422496,
+          15.35
+        ],
+        "color": "c4c9c6"
+      },
+      {
+        "x": -34.6,
+        "z": 15.45,
+        "name": "Aerial batch · Period · 1829 · 252",
+        "point": [
+          -34.6,
+          14.548704958334385,
+          15.45
+        ],
+        "color": "c4c9c6"
+      },
+      {
+        "x": -34.6,
+        "z": 15.55,
+        "name": "West garden inner pavilion slate roof",
+        "point": [
+          -34.6,
+          14.530001074691711,
+          15.55
+        ],
+        "color": "c4c9c6"
+      },
+      {
+        "x": -34.6,
+        "z": 15.65,
+        "name": "West garden inner pavilion slate roof",
+        "point": [
+          -34.6,
+          14.530001074691711,
+          15.65
+        ],
+        "color": "c4c9c6"
+      },
+      {
+        "x": -34.5,
+        "z": 15.35,
+        "name": "Aerial batch · Period · 1829 · 252",
+        "point": [
+          -34.5,
+          14.57881068330777,
+          15.35
+        ],
+        "color": "c4c9c6"
+      },
+      {
+        "x": -34.5,
+        "z": 15.45,
+        "name": "Aerial batch · Period · 1829 · 278",
+        "point": [
+          -34.5,
+          14.56571683102085,
+          15.45
+        ],
+        "color": "e1e3dc"
+      },
+      {
+        "x": -34.5,
+        "z": 15.55,
+        "name": "Aerial batch · Period · 1829 · 278",
+        "point": [
+          -34.5,
+          14.565716831020854,
+          15.55
+        ],
+        "color": "e1e3dc"
+      },
+      {
+        "x": -34.5,
+        "z": 15.65,
+        "name": "Aerial batch · Period · 1829 · 283",
+        "point": [
+          -34.5,
+          8.829999923706058,
+          15.65
+        ],
+        "color": "444b4d"
+      },
+      {
+        "x": -34.3,
+        "z": 15.35,
+        "name": "Aerial batch · Period · 1829 · 252",
+        "point": [
+          -34.3,
+          14.564200572845976,
+          15.35
+        ],
+        "color": "c4c9c6"
+      },
+      {
+        "x": -34.3,
+        "z": 15.45,
+        "name": "Aerial batch · Period · 1829 · 278",
+        "point": [
+          -34.3,
+          14.551106795031457,
+          15.45
+        ],
+        "color": "e1e3dc"
+      },
+      {
+        "x": -34.3,
+        "z": 15.55,
+        "name": "Aerial batch · Period · 1829 · 278",
+        "point": [
+          -34.3,
+          14.551106795031457,
+          15.55
+        ],
+        "color": "e1e3dc"
+      },
+      {
+        "x": -34.3,
+        "z": 15.65,
+        "name": "Aerial batch · Period · 1829 · 283",
+        "point": [
+          -34.3,
+          8.829999923706058,
+          15.65
+        ],
+        "color": "444b4d"
+      },
+      {
+        "x": -34,
+        "z": 15.35,
+        "name": "Aerial batch · Period · 1829 · 252",
+        "point": [
+          -34,
+          14.542285407153289,
+          15.35
+        ],
+        "color": "c4c9c6"
+      },
+      {
+        "x": -34,
+        "z": 15.45,
+        "name": "Aerial batch · Period · 1829 · 278",
+        "point": [
+          -34,
+          14.529191429498503,
+          15.45
+        ],
+        "color": "e1e3dc"
+      },
+      {
+        "x": -34,
+        "z": 15.55,
+        "name": "Aerial batch · Period · 1829 · 278",
+        "point": [
+          -34,
+          14.529191429498507,
+          15.55
+        ],
+        "color": "e1e3dc"
+      },
+      {
+        "x": -34,
+        "z": 15.65,
+        "name": "Aerial batch · Period · 1829 · 283",
+        "point": [
+          -34,
+          8.829999923706055,
+          15.65
+        ],
+        "color": "444b4d"
+      }
+    ],
+    "opposite": [
+      {
+        "x": -34.9,
+        "z": 15.35,
+        "name": "West garden inner pavilion slate roof",
+        "point": [
+          -34.9,
+          14.793794062032177,
+          15.35
+        ],
+        "color": "c4c9c6"
+      },
+      {
+        "x": -34.9,
+        "z": 15.45,
+        "name": "West garden inner pavilion slate roof",
+        "point": [
+          -34.9,
+          14.793794062032182,
+          15.45
+        ],
+        "color": "c4c9c6"
+      },
+      {
+        "x": -34.9,
+        "z": 15.55,
+        "name": "West garden inner pavilion slate roof",
+        "point": [
+          -34.9,
+          14.793794062032179,
+          15.55
+        ],
+        "color": "c4c9c6"
+      },
+      {
+        "x": -34.9,
+        "z": 15.65,
+        "name": "West garden inner pavilion slate roof",
+        "point": [
+          -34.9,
+          14.793794062032179,
+          15.65
+        ],
+        "color": "c4c9c6"
+      },
+      {
+        "x": -34.7,
+        "z": 15.35,
+        "name": "West garden inner pavilion slate roof",
+        "point": [
+          -34.7,
+          14.61793207047187,
+          15.35
+        ],
+        "color": "c4c9c6"
+      },
+      {
+        "x": -34.7,
+        "z": 15.45,
+        "name": "West garden inner pavilion slate roof",
+        "point": [
+          -34.7,
+          14.61793207047187,
+          15.45
+        ],
+        "color": "c4c9c6"
+      },
+      {
+        "x": -34.7,
+        "z": 15.55,
+        "name": "West garden inner pavilion slate roof",
+        "point": [
+          -34.7,
+          14.617932070471868,
+          15.55
+        ],
+        "color": "c4c9c6"
+      },
+      {
+        "x": -34.7,
+        "z": 15.65,
+        "name": "West garden inner pavilion slate roof",
+        "point": [
+          -34.7,
+          14.61793207047187,
+          15.65
+        ],
+        "color": "c4c9c6"
+      },
+      {
+        "x": -34.6,
+        "z": 15.35,
+        "name": "Aerial batch · Period · 1829 · 252",
+        "point": [
+          -34.6,
+          14.586115419422496,
+          15.35
+        ],
+        "color": "c4c9c6"
+      },
+      {
+        "x": -34.6,
+        "z": 15.45,
+        "name": "Aerial batch · Period · 1829 · 252",
+        "point": [
+          -34.6,
+          14.548704958334385,
+          15.45
+        ],
+        "color": "c4c9c6"
+      },
+      {
+        "x": -34.6,
+        "z": 15.55,
+        "name": "West garden inner pavilion slate roof",
+        "point": [
+          -34.6,
+          14.530001074691711,
+          15.55
+        ],
+        "color": "c4c9c6"
+      },
+      {
+        "x": -34.6,
+        "z": 15.65,
+        "name": "West garden inner pavilion slate roof",
+        "point": [
+          -34.6,
+          14.530001074691711,
+          15.65
+        ],
+        "color": "c4c9c6"
+      },
+      {
+        "x": -34.5,
+        "z": 15.35,
+        "name": "Aerial batch · Period · 1829 · 252",
+        "point": [
+          -34.5,
+          14.57881068330777,
+          15.35
+        ],
+        "color": "c4c9c6"
+      },
+      {
+        "x": -34.5,
+        "z": 15.45,
+        "name": "Aerial batch · Period · 1829 · 278",
+        "point": [
+          -34.5,
+          14.56571683102085,
+          15.45
+        ],
+        "color": "e1e3dc"
+      },
+      {
+        "x": -34.5,
+        "z": 15.55,
+        "name": "Aerial batch · Period · 1829 · 278",
+        "point": [
+          -34.5,
+          14.565716831020854,
+          15.55
+        ],
+        "color": "e1e3dc"
+      },
+      {
+        "x": -34.5,
+        "z": 15.65,
+        "name": "Aerial batch · Period · 1829 · 283",
+        "point": [
+          -34.5,
+          8.829999923706058,
+          15.65
+        ],
+        "color": "444b4d"
+      },
+      {
+        "x": -34.3,
+        "z": 15.35,
+        "name": "Aerial batch · Period · 1829 · 252",
+        "point": [
+          -34.3,
+          14.564200572845976,
+          15.35
+        ],
+        "color": "c4c9c6"
+      },
+      {
+        "x": -34.3,
+        "z": 15.45,
+        "name": "Aerial batch · Period · 1829 · 278",
+        "point": [
+          -34.3,
+          14.551106795031457,
+          15.45
+        ],
+        "color": "e1e3dc"
+      },
+      {
+        "x": -34.3,
+        "z": 15.55,
+        "name": "Aerial batch · Period · 1829 · 278",
+        "point": [
+          -34.3,
+          14.551106795031457,
+          15.55
+        ],
+        "color": "e1e3dc"
+      },
+      {
+        "x": -34.3,
+        "z": 15.65,
+        "name": "Aerial batch · Period · 1829 · 283",
+        "point": [
+          -34.3,
+          8.829999923706058,
+          15.65
+        ],
+        "color": "444b4d"
+      },
+      {
+        "x": -34,
+        "z": 15.35,
+        "name": "Aerial batch · Period · 1829 · 252",
+        "point": [
+          -34,
+          14.542285407153289,
+          15.35
+        ],
+        "color": "c4c9c6"
+      },
+      {
+        "x": -34,
+        "z": 15.45,
+        "name": "Aerial batch · Period · 1829 · 278",
+        "point": [
+          -34,
+          14.529191429498503,
+          15.45
+        ],
+        "color": "e1e3dc"
+      },
+      {
+        "x": -34,
+        "z": 15.55,
+        "name": "Aerial batch · Period · 1829 · 278",
+        "point": [
+          -34,
+          14.529191429498507,
+          15.55
+        ],
+        "color": "e1e3dc"
+      },
+      {
+        "x": -34,
+        "z": 15.65,
+        "name": "Aerial batch · Period · 1829 · 283",
+        "point": [
+          -34,
+          8.829999923706055,
+          15.65
+        ],
+        "color": "444b4d"
+      }
+    ]
+  },
+  "probes": [
+    {
+      "point": [
+        -34.599,
+        14.572986445708915,
+        15.3849
+      ],
+      "expected": 14.572986445708892
+    },
+    {
+      "point": [
+        -34.5,
+        14.56575444103033,
+        15.3849
+      ],
+      "expected": 14.565754441030332
+    },
+    {
+      "point": [
+        -34.2,
+        14.543839275337644,
+        15.3849
+      ],
+      "expected": 14.543839626452527
+    },
+    {
+      "point": [
+        -33.9,
+        14.521924109644953,
+        15.3849
+      ],
+      "expected": 14.521923995736682
+    },
+    {
+      "point": [
+        -33.7,
+        14.507313956521797,
+        15.3849
+      ],
+      "expected": 14.507313876750825
+    },
+    {
+      "point": [
+        -33.65,
+        14.503661347004014,
+        15.3849
+      ],
+      "expected": 14.503661347003998
+    },
+    {
+      "point": [
+        -33.6,
+        14.5000088057097,
+        15.3849
+      ],
+      "expected": 14.500008805709722
+    },
+    {
+      "point": [
+        -33.55,
+        14.496356264415379,
+        15.3849
+      ],
+      "expected": 14.496356264415367
+    },
+    {
+      "point": [
+        -33.5,
+        14.492703723121066,
+        15.3849
+      ],
+      "expected": 14.492703723121075
+    },
+    {
+      "point": [
+        -33.2,
+        14.470788475355162,
+        15.3849
+      ],
+      "expected": 14.470788475355173
+    },
+    {
+      "point": [
+        -32.8,
+        14.441568145000625,
+        15.3849
+      ],
+      "expected": 14.44156817060354
+    },
+    {
+      "point": [
+        -32.4,
+        14.41234781464609,
+        15.3849
+      ],
+      "expected": 14.412347825155782
+    },
+    {
+      "point": [
+        -32,
+        14.38312747392718,
+        15.3849
+      ],
+      "expected": 14.383127479708023
+    },
+    {
+      "point": [
+        -31.5,
+        14.346602071227084,
+        15.3849
+      ],
+      "expected": 14.346602047898326
+    },
+    {
+      "point": [
+        -31,
+        14.310076683754904,
+        15.3849
+      ],
+      "expected": 14.310076683754895
+    },
+    {
+      "seam": -34.5,
+      "heights": [
+        14.784530672659193,
+        14.784605493531846
+      ]
+    },
+    {
+      "seam": -34.2,
+      "heights": [
+        14.762615506966506,
+        14.762690327839156
+      ]
+    },
+    {
+      "seam": -33.9,
+      "heights": [
+        14.740700264512201,
+        14.740775085397557
+      ]
+    },
+    {
+      "seam": -33.7,
+      "heights": [
+        14.726090145526358,
+        14.726164966411714
+      ]
+    },
+    {
+      "seam": -33.5,
+      "heights": [
+        14.711479991896597,
+        14.711554812781952
+      ]
+    },
+    {
+      "seam": -33.1,
+      "heights": [
+        14.68225966154206,
+        14.682334482427414
+      ]
+    },
+    {
+      "seam": -32.5,
+      "heights": [
+        14.638429158226968,
+        14.638503979104774
+      ]
+    },
+    {
+      "seam": -31.5,
+      "heights": [
+        14.565378294607573,
+        14.56545311548538
+      ]
+    }
+  ],
+  "errors": [],
+  "mode": "compiled",
+  "modelBuild": {
+    "mode": "compiled",
+    "milliseconds": 1222.7999999988824
+  }
+}

@@ -1,0 +1,15 @@
+import assert from 'node:assert/strict';
+import {readFile,writeFile} from 'node:fs/promises';
+import {createHash} from 'node:crypto';
+import {modelSourceHash} from '../../model-build-inputs.mjs';
+const manifest=JSON.parse(await readFile(new URL('../../dist/compiled/manifest.json',import.meta.url)));
+const currentSourceHash=await modelSourceHash();
+assert.equal(manifest.sourceHash,currentSourceHash,'Final compiled model must match the live source');
+const bytes=await readFile(new URL('../../dist/compiled/'+manifest.file,import.meta.url));
+const actualSha256=createHash('sha256').update(bytes).digest('hex');assert.equal(actualSha256,manifest.sha256);
+assert.equal(manifest.sha256,'96abe1fafa915f72c3e8728e2d8af513abd87aae0e6a34a718a365686f9b8921','Formatting-only rebuild preserves the exact tested binary');
+const source=JSON.parse(await readFile(new URL('final-source-validation.json',import.meta.url))),compiled=JSON.parse(await readFile(new URL('final-compiled-validation.json',import.meta.url)));
+assert.equal(compiled.modelMode.mode,'compiled');assert.deepEqual(source.errors,[]);assert.deepEqual(compiled.errors,[]);
+const pixels=JSON.parse(await readFile(new URL('compiled-tests/precompiled-models.json',import.meta.url))).pixels;
+const result={currentSourceHash,manifest,actualSha256,exactTestedBinary:true,sourceProbes:source.probes.length,compiledProbes:compiled.probes.length,errors:compiled.errors,pixels};
+await writeFile(new URL('final-model.json',import.meta.url),JSON.stringify(result,null,2)+'\n');console.log(JSON.stringify({sourceHash:currentSourceHash,binaryVerified:true,exactTestedBinary:true,sourceProbes:result.sourceProbes,compiledProbes:result.compiledProbes,pixels}));

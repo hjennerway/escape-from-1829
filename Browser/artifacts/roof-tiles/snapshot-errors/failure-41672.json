@@ -1,0 +1,24 @@
+{
+  "actual": {
+    "oakmere": {
+      "primitives": 1218,
+      "sha256": "1b4b5e8b04c26aa4d5a5e2397a512646b54b82c2a4d30c6890facdf8c072af4d"
+    },
+    "leighton-newton": {
+      "primitives": 1479,
+      "sha256": "2c7ffc44886607824356070fab2131824e695d95346e235ac2ba7591fcaf3a3f"
+    }
+  },
+  "expected": {
+    "oakmere": {
+      "primitives": 1218,
+      "sha256": "125b802fa65604a8605d8f0e53c4ec8af318358e46d6e5172e3041fda7e279a3"
+    },
+    "leighton-newton": {
+      "primitives": 1479,
+      "sha256": "ddcad4e414248195bf10d1b7c1500201e81b065c0838c447f4bd51866fdb9ff1"
+    }
+  },
+  "message": "The two rear blocks translate without changing their geometry\n+ actual - expected\n\n  {\n    'leighton-newton': {\n      primitives: 1479,\n+     sha256: '2c7ffc44886607824356070fab2131824e695d95346e235ac2ba7591fcaf3a3f'\n-     sha256: 'ddcad4e414248195bf10d1b7c1500201e81b065c0838c447f4bd51866fdb9ff1'\n    },\n    oakmere: {\n      primitives: 1218,\n+     sha256: '1b4b5e8b04c26aa4d5a5e2397a512646b54b82c2a4d30c6890facdf8c072af4d'\n-     sha256: '125b802fa65604a8605d8f0e53c4ec8af318358e46d6e5172e3041fda7e279a3'\n    }\n  }\n",
+  "stack": "AssertionError [ERR_ASSERTION]: The two rear blocks translate without changing their geometry\n+ actual - expected\n\n  {\n    'leighton-newton': {\n      primitives: 1479,\n+     sha256: '2c7ffc44886607824356070fab2131824e695d95346e235ac2ba7591fcaf3a3f'\n-     sha256: 'ddcad4e414248195bf10d1b7c1500201e81b065c0838c447f4bd51866fdb9ff1'\n    },\n    oakmere: {\n      primitives: 1218,\n+     sha256: '1b4b5e8b04c26aa4d5a5e2397a512646b54b82c2a4d30c6890facdf8c072af4d'\n-     sha256: '125b802fa65604a8605d8f0e53c4ec8af318358e46d6e5172e3041fda7e279a3'\n    }\n  }\n\n    at file:///C:/Users/Harry/Documents/_escape-from-1829/Browser/test-annexe-rear-stretch.mjs:14:8\n    at ModuleJob.run (node:internal/modules/esm/module_job:561:25)\n    at async node:internal/modules/esm/loader:647:26\n    at async asyncRunEntryPointWithESMLoader (node:internal/modules/run_main:101:5)"
+}

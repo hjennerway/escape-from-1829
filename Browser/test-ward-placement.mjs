@@ -27,6 +27,13 @@ for(const [pixel,expected] of [[[208,318],[-4.9,-119.2]],[[252,322],[-44.3,-65.9
  assert(wardMapPoint(pixel).every((value,i)=>Math.abs(value-expected[i])<1e-10),'Both fixed map anchors match exactly');
 }
 function compareGeometry(moved,source,ignoreRootPosition=false){
+ function trianglePositions(geometry){
+  const p=geometry.attributes.position,index=geometry.index,result=[];
+  for(let i=0;i<(index?.count??p.count);i++){
+   const vertex=index?index.getX(i):i;result.push(p.getX(vertex),p.getY(vertex),p.getZ(vertex));
+  }
+  return result;
+ }
  const actual=[],original=[];moved.traverse(o=>actual.push(o));source.traverse(o=>original.push(o));
  assert.equal(actual.length,original.length);
  for(let i=0;i<actual.length;i++){
@@ -34,7 +41,8 @@ function compareGeometry(moved,source,ignoreRootPosition=false){
   if(i!==0||!ignoreRootPosition)assert.deepEqual(a.position.toArray(),b.position.toArray(),a.name+' position');
   assert.deepEqual(a.quaternion.toArray(),b.quaternion.toArray(),a.name+' orientation');
   assert.deepEqual(a.scale.toArray(),b.scale.toArray(),a.name+' size');
-  if(a.geometry)assert.deepEqual(a.geometry.attributes.position.array,b.geometry.attributes.position.array,a.name+' vertices');
+  // Roof texture seams can split a vertex without changing any triangle.
+  if(a.geometry)assert.deepEqual(trianglePositions(a.geometry),trianglePositions(b.geometry),a.name+' triangle vertices');
   if(a.instanceMatrix)assert.deepEqual(a.instanceMatrix.array,b.instanceMatrix.array,a.name+' instance transforms');
  }
 }

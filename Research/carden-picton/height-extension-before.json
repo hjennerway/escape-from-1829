@@ -1,7 +1,7 @@
 {
   "protected": {
     "primitives": 19571,
-    "sha256": "124d84ad69bade211b182a48d07a4f75fc253aa0f936af411757773b5eb1dfe2"
+    "sha256": "7abf80d0a76f67605561a9cc569246c1f630e8d181d753f98d6f6f88ad2436ba"
   },
   "conservatory": {
     "primitives": 130,
@@ -44,7 +44,7 @@
     ],
     [
       "West square tower slate roof",
-      "9bc74e09b7cb2cd199093e35b56f3511eab79a491b29ba1ac89d7101bbf18d58",
+      "d925f24f3c810aaf53d55be87a212c0186ef22505e55862f254a0040896de5bc",
       [
         [
           "MeshStandardMaterial",
@@ -112,7 +112,7 @@
     ],
     [
       "East square tower slate roof",
-      "9bc74e09b7cb2cd199093e35b56f3511eab79a491b29ba1ac89d7101bbf18d58",
+      "b6f81915f3fa146d8f83cff16646896ed877da279dad0098803f635892abcd60",
       [
         [
           "MeshStandardMaterial",

@@ -1,0 +1,134 @@
+[
+  {
+    "command": "node test-oakmere-court.mjs",
+    "exitCode": 0
+  },
+  {
+    "command": "node test-oakmere.mjs",
+    "exitCode": 0
+  },
+  {
+    "command": "node test-oakmere-west.mjs",
+    "exitCode": 0
+  },
+  {
+    "command": "node test-oakmere-windows.mjs",
+    "exitCode": 0
+  },
+  {
+    "command": "node test-annexe-wards.mjs",
+    "exitCode": 0
+  },
+  {
+    "command": "node test-leighton-newton.mjs",
+    "exitCode": 0
+  },
+  {
+    "command": "node test-churton.mjs",
+    "exitCode": 0
+  },
+  {
+    "command": "node test-upton.mjs",
+    "exitCode": 0
+  },
+  {
+    "command": "node test-garages-mortuary.mjs",
+    "exitCode": 0
+  },
+  {
+    "command": "node test-greenhouses.mjs",
+    "exitCode": 0
+  },
+  {
+    "command": "node test-main-admin.mjs",
+    "exitCode": 0
+  },
+  {
+    "command": "node test-main-kitchen.mjs",
+    "exitCode": 0
+  },
+  {
+    "command": "node test-main-admin-refine2.mjs",
+    "exitCode": 0
+  },
+  {
+    "command": "node test-aerial-controls.mjs",
+    "exitCode": 0
+  },
+  {
+    "command": "node test-device-location.mjs",
+    "exitCode": 0
+  },
+  {
+    "command": "node test-aerial-layouts.mjs",
+    "exitCode": 0
+  },
+  {
+    "command": "node test-kml-imports.mjs",
+    "exitCode": 0
+  },
+  {
+    "command": "node test-kml-11.mjs",
+    "exitCode": 0
+  },
+  {
+    "command": "node test-modern-entrance.mjs",
+    "exitCode": 0
+  },
+  {
+    "command": "node test-modern-car-park.mjs",
+    "exitCode": 0
+  },
+  {
+    "command": "node test-parsons-retrace.mjs",
+    "exitCode": 0
+  },
+  {
+    "command": "node test-historic-roads.mjs",
+    "exitCode": 0
+  },
+  {
+    "command": "node test-road-continuity.mjs",
+    "exitCode": 0
+  },
+  {
+    "command": "node test-west-parsons-junctions.mjs",
+    "exitCode": 0
+  },
+  {
+    "command": "node test-admin-teardrop.mjs",
+    "exitCode": 0
+  },
+  {
+    "command": "node test-annexe-access.mjs",
+    "exitCode": 0
+  },
+  {
+    "command": "node test-annexe-rear-roads.mjs",
+    "exitCode": 0
+  },
+  {
+    "command": "node test-performance.mjs",
+    "exitCode": 0
+  },
+  {
+    "command": "node test-aerial-performance.mjs",
+    "exitCode": 0
+  },
+  {
+    "command": "node test-building-detail.mjs",
+    "exitCode": 0
+  },
+  {
+    "command": "node test-outhouse.mjs",
+    "exitCode": 0
+  },
+  {
+    "command": "node test-willows.mjs",
+    "exitCode": 0
+  },
+  {
+    "command": "node test-building-photos.mjs",
+    "exitCode": 0
+  }
+]

@@ -1,0 +1,99 @@
+{
+  "errors": [],
+  "views": {
+    "court": {
+      "position": [
+        -57,
+        25,
+        -6
+      ],
+      "target": [
+        -65,
+        15,
+        8
+      ],
+      "up": [
+        0,
+        1,
+        0
+      ],
+      "fov": 42
+    },
+    "garden": {
+      "position": [
+        -56,
+        25,
+        27
+      ],
+      "target": [
+        -65,
+        15,
+        13
+      ],
+      "up": [
+        0,
+        1,
+        0
+      ],
+      "fov": 42
+    },
+    "courtLow": {
+      "position": [
+        -59,
+        16,
+        0
+      ],
+      "target": [
+        -66,
+        15,
+        7
+      ],
+      "up": [
+        0,
+        1,
+        0
+      ],
+      "fov": 45
+    },
+    "gardenLow": {
+      "position": [
+        -57,
+        16,
+        22
+      ],
+      "target": [
+        -64,
+        15,
+        14
+      ],
+      "up": [
+        0,
+        1,
+        0
+      ],
+      "fov": 45
+    },
+    "whole": {
+      "position": [
+        -47,
+        30,
+        43
+      ],
+      "target": [
+        -54,
+        12,
+        12
+      ],
+      "up": [
+        0,
+        1,
+        0
+      ],
+      "fov": 55
+    }
+  },
+  "modelMode": {
+    "mode": "procedural",
+    "milliseconds": 2005.5
+  }
+}

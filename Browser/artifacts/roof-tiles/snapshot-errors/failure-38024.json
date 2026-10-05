@@ -1,0 +1,48 @@
+{
+  "actual": {
+    "count": 18047,
+    "sha256": "35cce4ddfbc39f95bf07daef48d39c51029f2a79e84f0a819076cbce29d52047",
+    "root": [
+      -0.3967056614036031,
+      0,
+      0.38210634411159655,
+      0,
+      0,
+      0.9,
+      0,
+      0,
+      -0.38210634411159655,
+      0,
+      -0.3967056614036031,
+      0,
+      364.7804974623198,
+      0,
+      -9.106516776244462,
+      1
+    ]
+  },
+  "expected": {
+    "count": 18047,
+    "sha256": "ac24fbe4c479ae30da6e2b4104a5ff373dda1f611e51c2b7466cb84f5dad81b6",
+    "root": [
+      -0.3967056614036031,
+      0,
+      0.38210634411159655,
+      0,
+      0,
+      0.9,
+      0,
+      0,
+      -0.38210634411159655,
+      0,
+      -0.3967056614036031,
+      0,
+      364.7804974623198,
+      0,
+      -9.106516776244462,
+      1
+    ]
+  },
+  "message": "All non-Larkton geometry stays exact\n+ actual - expected\n... Skipped lines\n\n  {\n    count: 18047,\n    root: [\n      -0.3967056614036031,\n      0,\n...\n    ],\n+   sha256: '35cce4ddfbc39f95bf07daef48d39c51029f2a79e84f0a819076cbce29d52047'\n-   sha256: 'ac24fbe4c479ae30da6e2b4104a5ff373dda1f611e51c2b7466cb84f5dad81b6'\n  }\n",
+  "stack": "AssertionError [ERR_ASSERTION]: All non-Larkton geometry stays exact\n+ actual - expected\n... Skipped lines\n\n  {\n    count: 18047,\n    root: [\n      -0.3967056614036031,\n      0,\n...\n    ],\n+   sha256: '35cce4ddfbc39f95bf07daef48d39c51029f2a79e84f0a819076cbce29d52047'\n-   sha256: 'ac24fbe4c479ae30da6e2b4104a5ff373dda1f611e51c2b7466cb84f5dad81b6'\n  }\n\n    at file:///C:/Users/Harry/Documents/_escape-from-1829/Browser/test-larkton-recess.mjs:16:8\n    at ModuleJob.run (node:internal/modules/esm/module_job:561:25)\n    at async node:internal/modules/esm/loader:647:26\n    at async asyncRunEntryPointWithESMLoader (node:internal/modules/run_main:101:5)"
+}

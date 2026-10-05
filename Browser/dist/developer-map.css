@@ -1,0 +1,17 @@
+.developer-map{position:fixed;inset:0;z-index:100;display:grid;place-items:center;padding:24px;background:#050b08dc;touch-action:pan-y}
+.developer-map-card{width:min(1080px,100%);max-height:calc(100dvh - 48px);display:flex;flex-direction:column;padding:24px;background:#152019;border:1px solid #87957080;box-shadow:0 25px 110px #000c;overflow:hidden}
+.developer-map-header{display:flex;justify-content:space-between;align-items:center;gap:16px;flex-shrink:0}
+.developer-map-header h2{font:normal clamp(28px,4vw,42px)/1.1 Georgia;margin:10px 0 18px}
+.developer-map button{min-height:44px;padding:10px 14px;background:#253326;border:1px solid #84957160;letter-spacing:.5px}
+.developer-map button[aria-pressed=true]{background:#bdcc98;color:#182016}
+#developerMapLevels{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 12px;flex-shrink:0}
+.developer-map-scroll{min-height:0;overflow:auto;overscroll-behavior:contain}
+#developerMapLevel{font:12px Arial;color:#c7cfb7;margin:8px 0}
+#developerMapCanvas{display:block;width:auto;max-width:100%;height:auto;max-height:calc(100dvh - 295px);margin:0 auto;background:#0b120d;border:1px solid #75846745}
+.developer-map-legend{font:12px/1.5 Arial;color:#b6c0aa;margin:10px 0 0}
+.developer-map-legend em{color:#c7e19b;font-style:normal}.developer-map-legend i{color:#c6aedb;font-style:normal}
+.game-developer-options{position:fixed;bottom:12px;left:20px;right:20px;z-index:20;display:flex;align-items:center;flex-wrap:wrap;gap:8px;pointer-events:auto}
+.game-developer-options button{min-height:44px;padding:8px 12px;background:#122017ed;border:1px solid #708461;letter-spacing:0}
+.game-developer-options button[aria-pressed=true]{background:#bdcc98;color:#182016}
+.game-developer-options #developerShortcuts{display:flex;gap:8px}.game-developer-options #developerStatus{font:11px Arial}
+@media(max-width:650px){.developer-map{padding:12px}.developer-map-card{max-height:calc(100dvh - 24px);padding:16px}.developer-map-header{align-items:flex-start}.developer-map-header .eyebrow{font-size:8px;letter-spacing:1px}.developer-map button{padding:8px 10px;font-size:10px}.game-developer-options{bottom:auto;top:190px;left:20px;right:20px}}

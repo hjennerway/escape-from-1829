@@ -1,6 +1,6 @@
 // One authored edge supplies both visible ironwork and its continuous guard.
 // Endpoints are at deck/tread height; openings are left to each stair builder.
-export function addExteriorStairRail(THREE,parent,material,a,b,{height=1.1,name='Exterior stair guard',createMesh}={}){
+export function addExteriorStairRail(THREE,parent,material,a,b,{height=1.1,picketSpacing=.2,name='Exterior stair guard',createMesh}={}){
  const start=new THREE.Vector3(...a),end=new THREE.Vector3(...b),delta=end.clone().sub(start);
  const positions=[],normals=[],uvs=[];
  function bar(p,q,width){
@@ -10,7 +10,7 @@ export function addExteriorStairRail(THREE,parent,material,a,b,{height=1.1,name=
   positions.push(...g.attributes.position.array);normals.push(...g.attributes.normal.array);uvs.push(...g.attributes.uv.array);g.dispose();
  }
  for(const rise of [.12,height])bar(start.clone().add(new THREE.Vector3(0,rise,0)),end.clone().add(new THREE.Vector3(0,rise,0)),.045);
- const count=Math.max(1,Math.ceil(Math.hypot(delta.x,delta.z)/.2));
+ const count=Math.max(1,Math.ceil(Math.hypot(delta.x,delta.z)/picketSpacing));
  for(let i=0;i<=count;i++){
   const p=start.clone().lerp(end,i/count);bar(p,p.clone().add(new THREE.Vector3(0,height,0)),i===0||i===count?.045:.028);
  }

@@ -23,7 +23,7 @@ for(const floor of floors){
  const panel=scene.getObjectByName('Asylum Panel'),stone=scene.getObjectByName('Asylum Stone');
  let instance=0;
  for(const exit of floor.exits){
-  const original=plan.exits.find(e=>e.id===exit.id);
+  const base=plan.exits.find(e=>e.id===exit.id),original={...base,...base.levels.find(l=>l.floor===floor.id).interior};
   assert.equal(exit.worldX,original.x);assert.equal(exit.worldZ,original.z);
   assert.deepEqual(exit.destination,original.levels.find(l=>l.floor===floor.id).destination,'Outside arrivals remain fixed');
   if(exit.id==='D1'){
@@ -86,5 +86,5 @@ for(const floor of floors){
  }
 }
 assert.equal(JSON.stringify(plan),snapshot,'Frame fitting does not mutate the shared plan');
-assert.equal(exits,22);assert.equal(entrances,1);assert.equal(rooms,92);
+assert.equal(exits,23);assert.equal(entrances,1);assert.equal(rooms,94,'Three redundant first-floor central frames are removed with the room merge');
 console.log(`PASS: ${exits+entrances} outside frames and ${rooms} regular-depth room frames on four floors, ${samples} masonry support/face-clearance rays and ${depthSamples} casing-depth rays, closed leaves and unchanged exterior anchors.`);

@@ -1,6 +1,6 @@
 // Sweep one closed solid along a facade: shared corner offsets keep both the
 // top and underside continuous, without overlapping bars or internal caps.
-export function addFacadeCourse(THREE,{mesh,worldUV},name,material,line,y,height,width){
+export function addFacadeCourse(THREE,{mesh,worldUV},name,material,line,y,height,width,{startPlane}={}){
   const normals=line.slice(1).map((b,i)=>{
     const a=line[i],dx=b[0]-a[0],dz=b[1]-a[1],length=Math.hypot(dx,dz);
     return [-dz/length,dx/length];
@@ -10,7 +10,17 @@ export function addFacadeCourse(THREE,{mesh,worldUV},name,material,line,y,height
     const nx=a[0]+b[0],nz=a[1]+b[1],scale=distance/(nx*b[0]+nz*b[1]);
     return [x+nx*scale,z+nz*scale];
   });
-  const left=offset(width/2),right=offset(-width/2),outline=[...left,...right.toReversed()];
+  const left=offset(width/2),right=offset(-width/2);
+  if(startPlane){
+    // A course meeting a diagonal wall needs an oblique terminal cap. Move
+    // both edge endpoints onto that plane, including the collision outline.
+    const {normal,constant}=startPlane,dx=line[1][0]-line[0][0],dz=line[1][1]-line[0][1];
+    for(const edge of [left,right]){
+      const point=edge[0],along=(constant-normal[0]*point[0]-normal[1]*point[1])/(normal[0]*dx+normal[1]*dz);
+      point[0]+=dx*along;point[1]+=dz*along;
+    }
+  }
+  const outline=[...left,...right.toReversed()];
   const shape=new THREE.Shape(outline.map(([x,z])=>new THREE.Vector2(x,-z)));
   const geometry=new THREE.ExtrudeGeometry(shape,{depth:height,bevelEnabled:false,steps:1,curveSegments:1});
   geometry.rotateX(-Math.PI/2);geometry.translate(0,y-height/2,0);

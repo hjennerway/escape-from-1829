@@ -3,53 +3,53 @@
   "renders": [
     {
       "name": "reception-west",
-      "calls": 98,
-      "triangles": 103474
+      "calls": 215,
+      "triangles": 1208074
     },
     {
       "name": "reception-west-oblique",
-      "calls": 80,
-      "triangles": 103188
+      "calls": 200,
+      "triangles": 1235946
     },
     {
       "name": "reception-east",
-      "calls": 63,
-      "triangles": 98656
+      "calls": 143,
+      "triangles": 1162986
     },
     {
       "name": "reception-partition",
-      "calls": 72,
-      "triangles": 99064
+      "calls": 172,
+      "triangles": 1169806
     },
     {
       "name": "reception-first-floor",
-      "calls": 99,
-      "triangles": 103476
+      "calls": 220,
+      "triangles": 1208670
     },
     {
       "name": "reception-second-floor",
-      "calls": 103,
-      "triangles": 103484
+      "calls": 224,
+      "triangles": 1208678
     },
     {
       "name": "corridor-bend",
-      "calls": 63,
-      "triangles": 96966
+      "calls": 165,
+      "triangles": 1181834
     },
     {
       "name": "corridor-bend-reverse",
-      "calls": 177,
-      "triangles": 105352
+      "calls": 408,
+      "triangles": 1247910
     },
     {
       "name": "basement-west",
-      "calls": 42,
-      "triangles": 96924
+      "calls": 81,
+      "triangles": 1109878
     },
     {
       "name": "basement-east",
-      "calls": 54,
-      "triangles": 96948
+      "calls": 145,
+      "triangles": 1148074
     }
   ],
   "walks": 8,
