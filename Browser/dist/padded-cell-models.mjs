@@ -3,10 +3,24 @@ import {ROOM_USES} from './asylum-room-uses.mjs';
 import {doorRectangle,roomDoorHandle} from './asylum-doors.mjs';
 
 export const CELL_PAD_WIDTH=.62,CELL_PAD_HEIGHT=.58,CELL_PAD_DEPTH=.045;
+const wallBacking=.026;
 const materials=new WeakMap();
 export function cellPaddingMaterial(THREE){
  if(!materials.has(THREE)){
   const material=applyFurnitureFinish(THREE,new THREE.MeshStandardMaterial({color:0xb9af98,roughness:1}),{kind:'matte',cacheKey:'cell-canvas'});
+  const clothFinish=material.onBeforeCompile;
+  material.onBeforeCompile=shader=>{
+   clothFinish(shader);
+   shader.vertexShader='varying vec2 vCellQuiltUv;\n'+shader.vertexShader;
+   shader.vertexShader=shader.vertexShader.replace('#include <begin_vertex>','#include <begin_vertex>\nvCellQuiltUv=uv;');
+   shader.fragmentShader='varying vec2 vCellQuiltUv;\n'+shader.fragmentShader;
+   shader.fragmentShader=shader.fragmentShader.replace('#include <color_fragment>',`#include <color_fragment>
+    vec2 quiltEdge=min(fract(vCellQuiltUv),1.0-fract(vCellQuiltUv));
+    float quiltSeam=1.0-smoothstep(.004,.022,min(quiltEdge.x,quiltEdge.y));
+    diffuseColor.rgb*=mix(.94,.62,quiltSeam);
+   `);
+  };
+  material.customProgramCacheKey=()=> 'cell-canvas-quilt-v1';
   material.name='Worn padded-cell canvas';materials.set(THREE,material);
  }
  return materials.get(THREE);
@@ -41,7 +55,7 @@ export function createCellPadding(THREE,floor,ceilingHeight,windowFrames=[]){
    polygons=[clip(clip(polygon,v,.008,true),v,ceilingHeight,false)];
    const line=dot(polygon[0],normal),exclusions=[];
    for(const w of windowFrames){
-    if(Math.abs(w.x*normal[0]+w.z*normal[2]-line)>w.depth/2+depth+.02)continue;
+    if(Math.abs(w.x*normal[0]+w.z*normal[2]-line)>w.depth/2+wallBacking+depth+.02)continue;
     const centre=w.x*u[0]+w.z*u[2],span=(Math.abs(w.dx*u[0]+w.dz*u[2])*w.width+Math.abs(-w.dz*u[0]+w.dx*u[2])*w.depth)/2+.015;
     exclusions.push([centre-span,centre+span,w.bottom-.015,w.top+.015]);
    }
@@ -54,7 +68,7 @@ export function createCellPadding(THREE,floor,ceilingHeight,windowFrames=[]){
    for(const door of floor.roomDoors??[]){
     if(door.roomId!==roomId)continue;
     const points=[...doorRectangle(door),...doorRectangle(roomDoorHandle(door))];
-    if(Math.min(...points.map(p=>Math.abs(p[0]*normal[0]+p[1]*normal[2]-line)))>depth+.02)continue;
+    if(Math.min(...points.map(p=>Math.abs(p[0]*normal[0]+p[1]*normal[2]-line)))>wallBacking+depth+.02)continue;
     const values=points.map(p=>p[0]*u[0]+p[1]*u[2]);exclusions.push([Math.min(...values)-.02,Math.max(...values)+.02,0,door.y+door.height+.025]);
    }
    for(const box of exclusions)polygons=polygons.flatMap(p=>exclude(p,u,v,box));
@@ -66,7 +80,7 @@ export function createCellPadding(THREE,floor,ceilingHeight,windowFrames=[]){
     const patch=rectangle(poly,u,v,x*stepU,(x+1)*stepU,y*stepV,(y+1)*stepV);if(patch.length<3)continue;
     const vertices=patch.map(p=>{
      const a=dot(p,u)/width,b=dot(p,v)/height,s=Math.sin(Math.PI*a),t=Math.sin(Math.PI*b);
-     const lift=.004+depth*s*s*t*t,du=depth*Math.PI/width*Math.sin(2*Math.PI*a)*t*t,dv=depth*Math.PI/height*Math.sin(2*Math.PI*b)*s*s;
+     const lift=(horizontal?.004:wallBacking)+depth*s*s*t*t,du=depth*Math.PI/width*Math.sin(2*Math.PI*a)*t*t,dv=depth*Math.PI/height*Math.sin(2*Math.PI*b)*s*s;
      const n=normal.map((value,i)=>value-du*u[i]-dv*v[i]),length=Math.hypot(...n);
      return {p:p.map((value,i)=>value+normal[i]*lift),n:n.map(value=>value/length),uv:[a,b]};
     });

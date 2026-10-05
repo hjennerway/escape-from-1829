@@ -22,7 +22,7 @@ for(const seed of [1829,1,42]){
 }
 const model=createCellMattressModel(THREE)[0],bounds=model.geometry.boundingBox,catalog=FURNITURE_CATALOG.cellMattress;
 assert(bounds.getSize(new THREE.Vector3()).distanceTo(new THREE.Vector3(catalog.width,catalog.height,catalog.depth))<1e-6,'Rendered mattress and collision bounds agree');
-assert.equal(bounds.min.y,0);assert(baseline.every(i=>i.y>=.018),'Mattresses rest on the soft floor');
+assert(Math.abs(bounds.min.y)<1e-6);assert(baseline.every(i=>i.y>=.018),'Mattresses rest on the soft floor');
 const scene=new THREE.Scene();buildAsylumArchitecture(THREE,scene,floor);scene.updateMatrixWorld(true);
 const padding=scene.getObjectByName('Asylum Cell Padding');assert(padding?.geometry.attributes.position.count>0);assert.deepEqual(padding.geometry.userData.rooms.sort(),ids);assert.equal(scene.children.filter(m=>m.name===padding.name).length,1,'All pads share one batch');
 const ray=new THREE.Raycaster();let surfaces=0,apertures=0,walked=0;

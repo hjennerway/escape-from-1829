@@ -1,0 +1,264 @@
+{
+  "hardwareRenderer": "NVIDIA GeForce RTX 3090 Ti / ANGLE Direct3D11",
+  "logic": {
+    "rooms": 8,
+    "seats": 20,
+    "washstands": 8,
+    "fixtures": 56,
+    "seeds": 4,
+    "walkedAccessRoutes": 112,
+    "modelTriangles": 4300,
+    "generalFurnitureSeeds": 8,
+    "generalFurnitureRoomExitRoutes": 976,
+    "generalFurnitureCollisionProbes": 3397,
+    "compiledAerialUnaffected": true
+  },
+  "focusedChecks": [
+    {
+      "file": "test-asylum-layout.mjs",
+      "exitCode": 0
+    },
+    {
+      "file": "test-central-dormitories.mjs",
+      "exitCode": 0
+    },
+    {
+      "file": "test-medical-furniture.mjs",
+      "exitCode": 0
+    },
+    {
+      "file": "test-hall-furnishings.mjs",
+      "exitCode": 0
+    },
+    {
+      "file": "test-asylum-room-finishes.mjs",
+      "exitCode": 0
+    },
+    {
+      "file": "test-asylum-room-doors.mjs",
+      "exitCode": 0
+    },
+    {
+      "file": "test-asylum-window-clearance.mjs",
+      "exitCode": 0
+    },
+    {
+      "file": "test-notebook.mjs",
+      "exitCode": 0
+    },
+    {
+      "file": "test-explore-interior.mjs",
+      "exitCode": 0
+    }
+  ],
+  "sanitaryBrowser": {
+    "geometry": {
+      "fixtures": 56
+    },
+    "walks": [
+      {
+        "id": "0:R5:sanitary:privySeat:0",
+        "along": 0.7400000000000233,
+        "minimum": 0.6599999999999999
+      },
+      {
+        "id": "0:R5:sanitary:privySeat:1",
+        "along": 0.7400000000000233,
+        "minimum": 0.6599999999999999
+      },
+      {
+        "id": "0:R5:sanitary:privySeat:2",
+        "along": 0.7400000000000233,
+        "minimum": 0.6599999999999999
+      },
+      {
+        "id": "0:R5:sanitary:washstand:0",
+        "along": 0.6900000000000261,
+        "minimum": 0.61
+      },
+      {
+        "id": "0:R16:sanitary:privySeat:0",
+        "along": 0.7400000000000233,
+        "minimum": 0.6599999999999999
+      },
+      {
+        "id": "0:R16:sanitary:privySeat:1",
+        "along": 0.7400000000000233,
+        "minimum": 0.6599999999999999
+      },
+      {
+        "id": "0:R16:sanitary:privySeat:2",
+        "along": 0.7400000000000233,
+        "minimum": 0.6599999999999999
+      },
+      {
+        "id": "0:R16:sanitary:washstand:0",
+        "along": 0.6900000000000261,
+        "minimum": 0.61
+      },
+      {
+        "id": "0:R33:sanitary:privySeat:0",
+        "along": 0.7399999999999878,
+        "minimum": 0.6599999999999999
+      },
+      {
+        "id": "0:R33:sanitary:privySeat:1",
+        "along": 0.7399999999999878,
+        "minimum": 0.6599999999999999
+      },
+      {
+        "id": "0:R33:sanitary:washstand:0",
+        "along": 0.6899999999999871,
+        "minimum": 0.61
+      },
+      {
+        "id": "0:R35:sanitary:privySeat:0",
+        "along": 0.7399999999999878,
+        "minimum": 0.6599999999999999
+      },
+      {
+        "id": "0:R35:sanitary:privySeat:1",
+        "along": 0.7399999999999878,
+        "minimum": 0.6599999999999999
+      },
+      {
+        "id": "0:R35:sanitary:washstand:0",
+        "along": 0.6899999999999871,
+        "minimum": 0.61
+      },
+      {
+        "id": "1:R5:sanitary:privySeat:0",
+        "along": 0.7400000000000233,
+        "minimum": 0.6599999999999999
+      },
+      {
+        "id": "1:R5:sanitary:privySeat:1",
+        "along": 0.7400000000000233,
+        "minimum": 0.6599999999999999
+      },
+      {
+        "id": "1:R5:sanitary:privySeat:2",
+        "along": 0.7400000000000233,
+        "minimum": 0.6599999999999999
+      },
+      {
+        "id": "1:R5:sanitary:washstand:0",
+        "along": 0.6900000000000261,
+        "minimum": 0.61
+      },
+      {
+        "id": "1:R16:sanitary:privySeat:0",
+        "along": 0.7400000000000233,
+        "minimum": 0.6599999999999999
+      },
+      {
+        "id": "1:R16:sanitary:privySeat:1",
+        "along": 0.7400000000000233,
+        "minimum": 0.6599999999999999
+      },
+      {
+        "id": "1:R16:sanitary:privySeat:2",
+        "along": 0.7400000000000233,
+        "minimum": 0.6599999999999999
+      },
+      {
+        "id": "1:R16:sanitary:washstand:0",
+        "along": 0.6900000000000261,
+        "minimum": 0.61
+      },
+      {
+        "id": "1:R33:sanitary:privySeat:0",
+        "along": 0.7399999999999878,
+        "minimum": 0.6599999999999999
+      },
+      {
+        "id": "1:R33:sanitary:privySeat:1",
+        "along": 0.7399999999999878,
+        "minimum": 0.6599999999999999
+      },
+      {
+        "id": "1:R33:sanitary:washstand:0",
+        "along": 0.6899999999999871,
+        "minimum": 0.61
+      },
+      {
+        "id": "1:R35:sanitary:privySeat:0",
+        "along": 0.7399999999999878,
+        "minimum": 0.6599999999999999
+      },
+      {
+        "id": "1:R35:sanitary:privySeat:1",
+        "along": 0.7399999999999878,
+        "minimum": 0.6599999999999999
+      },
+      {
+        "id": "1:R35:sanitary:washstand:0",
+        "along": 0.6899999999999871,
+        "minimum": 0.61
+      }
+    ],
+    "captures": [
+      "escape-0-R5",
+      "escape-0-R16",
+      "escape-0-R33",
+      "escape-0-R35",
+      "escape-1-R5",
+      "escape-1-R16",
+      "escape-1-R33",
+      "escape-1-R35",
+      "seat-close",
+      "washstand-close",
+      "rear-privies",
+      "forward-privies",
+      "mobile-rear",
+      "mobile-forward",
+      "explore-0-R5",
+      "explore-0-R16",
+      "explore-0-R33",
+      "explore-0-R35",
+      "explore-1-R5",
+      "explore-1-R16",
+      "explore-1-R33",
+      "explore-1-R35",
+      "model-privySeat",
+      "model-privyScreen",
+      "model-washstand"
+    ],
+    "escapeExploreParity": true,
+    "errors": []
+  },
+  "generalFurnitureBrowser": {
+    "models": 33,
+    "passed": true,
+    "errors": []
+  },
+  "preservation": {
+    "seeds": [
+      1829,
+      42
+    ],
+    "retainedFurnishingsIdentical": true,
+    "geometryDoorsWindowsStairsPreserved": true,
+    "changedRooms": [
+      "R5",
+      "R16",
+      "R33",
+      "R35"
+    ],
+    "floors": [
+      0,
+      1
+    ]
+  },
+  "requiredSuite": {
+    "passed": false,
+    "existingFailure": "test-facade-courses.mjs:68 expects 22 repaired exterior courses, current scene has 23"
+  },
+  "exports": {
+    "browserInterior": true,
+    "compiledAerialHashMatches": true,
+    "Unity": false,
+    "Blender": false,
+    "packaged": false
+  }
+}
