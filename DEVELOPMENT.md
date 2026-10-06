@@ -10679,3 +10679,40 @@ npm test run still stops at test-facade-courses.mjs:68 (23 courses versus 22).
 
 Only browser developer controls, related checks and this note change. Models,
 Unity, Blender and packaged exports were not regenerated.
+
+## Basement padded confinement cells (5 October 2026)
+
+The owner confirms B5, B6, B7 and B8 as padded cells for patient confinement.
+Their former stores and workshop uses are superseded. Both browser modes now
+show quilted canvas lining on the walls and floor, plus one fixed low rounded
+mattress per cell. Rigid storage, tables, seats and variable loose items are
+removed from these rooms. Furnished room names and notebook discoveries read
+“Padded cell · patient confinement”. These are fictional gameplay uses.
+
+The finisher classifies exposed cell faces separately from corridor faces and
+omits wallpaper/dado rails there. padded-cell-models.mjs tessellates the actual
+masonry surfaces into soft panels, continuing across the lower/upper batch
+seam. All four rooms' wall and floor lining shares one mesh and canvas material.
+The backing covers the former skirting; quilt seams remain visible under the
+game's lighting. Exclusions account for complete window frames, perpendicular
+reveals, door-surround outer trim, parked leaves and floor-level jambs. Room
+boundaries, windows, doors and stair inputs retain their existing definitions.
+Mattress placement uses the shared furniture records and collision/navigation
+updates. The source mattress is .92 × 1.90 × .18m; model and walking bounds agree.
+
+Dedicated validation passes all twenty lined surfaces, eight clear apertures,
+eight physically walked cell return routes, reproducible mattresses, and the
+actual padding triangles against all 68 nearby window/door timber bounds.
+The furnishing survey passes eight seeds and 976 room/exit routes. Window-frame
+and room-finish checks pass all 300 windows, 94 openings and 5,462 wall rays.
+Game, notebook and Explore-interior checks pass. Hardware browser checks verify
+NVIDIA GeForce RTX 3090 Ti / Direct3D11, matching padding and mattress geometry
+in Escape and Explore, desktop/phone views and no page/shader errors. Final
+captures and the browser receipt are in Browser/artifacts/padded-cells/; the
+basement furnished SVG/PNG are refreshed. Run npm run test:cells in Browser.
+
+The required npm test attempt stops at the existing independent façade-course
+count assertion in test-facade-courses.mjs:68 (23 versus 22). Browser interior
+sources, checks and review drawings are updated. The current aerial source
+fingerprint still matches its compiled asset, so no aerial rebuild is needed.
+Unity, Blender and packaged exports are not regenerated.

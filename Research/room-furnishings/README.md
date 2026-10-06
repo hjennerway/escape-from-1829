@@ -1,5 +1,30 @@
 # Room furnishings — 3 October 2026
 
+## Basement padded cells — 5 October 2026
+
+The owner confirms B5, B6, B7 and B8 as padded cells for patient confinement.
+This supersedes their former store, medicine-store and workshop assignments.
+Each has a single fixed, rounded canvas mattress (.92 × 1.90 × .18m) and no
+storage, work tables, chairs or loose objects. Escape and Explore share the
+same room-use names, furnishings and padding. Notebook discoveries use
+“Padded cell · patient confinement”. These are owner-directed fictional room
+uses, not evidence of the hospital's historical room functions.
+
+Original procedural quilted canvas covers the room-facing walls and floors.
+Wall panels repeat at .62 × .58m, with a 26mm backing and up to 45mm of soft
+relief. The thin floor pads rise 4–16mm above the original floor. The lining
+stops outside window frames, door surrounds and parked door leaves. Wallpaper
+and dado rails are omitted in these cells; the reviewed room boundaries,
+window schedules and playable door poses remain the shared plan inputs.
+
+The [basement furnished plan](basement.svg) is refreshed. Run
+`npm run test:cells` in `../../Browser` for the dedicated geometry, return-route
+and hardware browser checks. Desktop, phone and Explore views are in
+`../../Browser/artifacts/padded-cells/`. Full validation results are recorded
+in `../../DEVELOPMENT.md`. Browser sources are updated; the aerial asset's
+source fingerprint remains current. Unity, Blender and packaged exports are
+not regenerated.
+
 ## Shared ward privies — 5 October 2026
 
 R5, R16, R33 and R35 on the ground and first floors now serve as shared
@@ -610,7 +635,7 @@ groupings explain the intended circulation and organisation.
 | First, outer rear arms | R1/R3/R12/R14 bedrooms; R2/R13 wards; R4/R15 day rooms; R5/R16 linen |
 | First, cross range | R19/R28/R29 bedrooms; R20/R22/R27 wards; R23/R25 nursing; R26 staff sitting; R30 staff bedroom; R17 store; R18/R21/R31 quiet areas |
 | First, forward wings | R32/R36 wards; R33/R35 day rooms; R34 quiet sitting; R37 reading |
-| Basement | B1/B5/B8/B11 stores; B2 linen; B3/B7/B10 maintenance; B4/B12 records; B6 medicines |
+| Basement | B1/B11 stores; B2 linen; B3/B10 maintenance; B4/B12 records; B5–B8 padded confinement cells |
 | Second | R43 staff sitting; R41 records office; R42 staff office; R44 archive/stores; R45 linen |
 | Kept clear | R24 stair hall on both levels; B9 stair lobby; ground R40 entrance porch |
 

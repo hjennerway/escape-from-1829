@@ -1,7 +1,7 @@
 import assert from 'node:assert/strict';
 import {readFile} from 'node:fs/promises';
 import * as THREE from './dist/vendor/three.module.js';
-import {buildAsylumLayout,flatWalkable,moveAsylumActor,insidePolygon} from './dist/asylum-layout.mjs';
+import {buildAsylumLayout,flatWalkable,moveAsylumActor,insidePolygon,segmentDistance} from './dist/asylum-layout.mjs';
 import {buildAsylumArchitecture} from './dist/asylum-architecture.mjs';
 import {furnishAsylum,FURNITURE_CATALOG} from './dist/asylum-furniture.mjs';
 import {routeBetweenFloors} from './dist/floors.mjs';
@@ -47,13 +47,14 @@ for(const id of ids){
 const sash=scene.getObjectByName('Asylum Sash'),matrix=new THREE.Matrix4(),boxes=[];
 for(let i=0;i<sash.count;i++){
  sash.getMatrixAt(i,matrix);const centre=new THREE.Vector3().setFromMatrixPosition(matrix);
- if(!floor.rooms.some(r=>ids.includes(r.id)&&insidePolygon(centre.x,centre.z,r.points)))continue;
+ if(!floor.rooms.some(r=>ids.includes(r.id)&&(insidePolygon(centre.x,centre.z,r.points)||r.points.some((a,j)=>segmentDistance(centre.x,centre.z,a,r.points[(j+1)%r.points.length])<.18))))continue;
  boxes.push(new THREE.Box3().setFromPoints(Array.from({length:8},(_,j)=>new THREE.Vector3(j&1?.5:-.5,j&2?.5:-.5,j&4?.5:-.5).applyMatrix4(matrix))));
 }
 const p=padding.geometry.attributes.position;let clearanceChecks=0;
+assert(boxes.length>16,'Audit the boundary window frames as well as the door-surround trim');
 for(let i=0;i<p.count;i+=3){
  const tri=new THREE.Triangle(...[0,1,2].map(j=>new THREE.Vector3().fromBufferAttribute(p,i+j))),box=new THREE.Box3().setFromPoints([tri.a,tri.b,tri.c]);
- for(const timber of boxes)if(box.intersectsBox(timber)){assert(!timber.intersectsTriangle(tri),'Soft padding stays outside the complete window frame');clearanceChecks++;}
+ for(const timber of boxes)if(box.intersectsBox(timber)){assert(!timber.intersectsTriangle(tri),`Soft padding stays outside the complete window frame: ${JSON.stringify({triangle:[tri.a.toArray(),tri.b.toArray(),tri.c.toArray()],timber:[timber.min.toArray(),timber.max.toArray()]})}`);clearanceChecks++;}
 }
 assert.equal(JSON.stringify({walls:floor.walls,doors:floor.roomDoors,windows:floor.windows}),geometryBefore,'Cells retain their walls, windows and playable door poses');assert.equal(JSON.stringify(plan),snapshot);
-console.log(`PASS: four padded confinement cells, fixed soft mattresses, ${surfaces} lined surfaces, ${apertures} clear apertures, ${walked} physically walked return routes, ${clearanceChecks} nearby timber checks, one padding batch (${CELL_PAD_DEPTH}m relief), unchanged architectural plan.`);
+console.log(`PASS: four padded confinement cells, fixed soft mattresses, ${surfaces} lined surfaces, ${apertures} clear apertures, ${walked} physically walked return routes, ${boxes.length} timber boxes clear of ${p.count/3} padding triangles (${clearanceChecks} nearby checks), one padding batch (${CELL_PAD_DEPTH}m relief), unchanged architectural plan.`);

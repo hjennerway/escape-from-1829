@@ -6,7 +6,7 @@
       "B7",
       "B8"
     ],
-    "vertices": 203340,
+    "vertices": 197178,
     "names": [
       [
         "B5",
@@ -93,7 +93,7 @@
     ]
   },
   "explore": {
-    "vertices": 203340,
+    "vertices": 197178,
     "mattresses": [
       {
         "procedural": true,

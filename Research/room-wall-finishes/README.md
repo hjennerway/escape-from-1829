@@ -1,5 +1,15 @@
 # Victorian room wall finishes — 4 October 2026
 
+## Padded-cell exception — 5 October 2026
+
+The owner's confirmed B5–B8 confinement cells supersede the basement-store
+and workshop finishes below. These four rooms use quilted canvas wall and
+floor padding instead of wallpaper, lower paint and dado rails. A single
+padding batch follows the actual exposed masonry faces, leaving full window
+frames, door surrounds and open leaves clear. The corridor side of every
+partition retains its original masonry. Panel dimensions, mattress choices
+and review evidence are recorded in [the furnishing notes](../room-furnishings/README.md).
+
 The owner requests the existing two-tone corridor brickwork be retained,
 with a Victorian dado rail, slightly distressed white/cream paint over the
 bottom 40% of bedroom, dormitory and other non-treatment room walls, and

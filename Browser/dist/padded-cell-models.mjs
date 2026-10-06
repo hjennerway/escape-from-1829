@@ -55,14 +55,15 @@ export function createCellPadding(THREE,floor,ceilingHeight,windowFrames=[]){
    polygons=[clip(clip(polygon,v,.008,true),v,ceilingHeight,false)];
    const line=dot(polygon[0],normal),exclusions=[];
    for(const w of windowFrames){
-    if(Math.abs(w.x*normal[0]+w.z*normal[2]-line)>w.depth/2+wallBacking+depth+.02)continue;
+    const reach=(Math.abs(w.dx*normal[0]+w.dz*normal[2])*w.width+Math.abs(-w.dz*normal[0]+w.dx*normal[2])*w.depth)/2;
+    if(Math.abs(w.x*normal[0]+w.z*normal[2]-line)>reach+wallBacking+depth+.02)continue;
     const centre=w.x*u[0]+w.z*u[2],span=(Math.abs(w.dx*u[0]+w.dz*u[2])*w.width+Math.abs(-w.dz*u[0]+w.dx*u[2])*w.depth)/2+.015;
     exclusions.push([centre-span,centre+span,w.bottom-.015,w.top+.015]);
    }
    for(const d of floor.doorways){
     if(Math.abs(d.x*normal[0]+d.z*normal[2]-line)>d.depth/2+.12)continue;
     if(Math.abs(d.dx*u[0]+d.dz*u[2])<.99)continue;
-    const centre=d.x*u[0]+d.z*u[2];exclusions.push([centre-d.width/2-.11,centre+d.width/2+.11,0,d.height+.10]);
+    const centre=d.x*u[0]+d.z*u[2];exclusions.push([centre-d.width/2-.16,centre+d.width/2+.16,0,d.height+.22]);
    }
    // A door resting against its wall must also clear the soft lining.
    for(const door of floor.roomDoors??[]){
@@ -72,6 +73,15 @@ export function createCellPadding(THREE,floor,ceilingHeight,windowFrames=[]){
     const values=points.map(p=>p[0]*u[0]+p[1]*u[2]);exclusions.push([Math.min(...values)-.02,Math.max(...values)+.02,0,door.y+door.height+.025]);
    }
    for(const box of exclusions)polygons=polygons.flatMap(p=>exclude(p,u,v,box));
+  }else{
+   // Floor pads stop around the two jambs, whose timber starts at floor
+   // level and projects farther into the room than the masonry face.
+   for(const d of floor.doorways.filter(d=>d.roomId===roomId))for(const side of [-1,1]){
+    const centre=[d.x+d.dx*side*(d.width/2+.04),d.z+d.dz*side*(d.width/2+.04)],nx=-d.dz,nz=d.dx;
+    const corners=[-1,1].flatMap(a=>[-1,1].map(b=>[centre[0]+d.dx*a*.115+nx*b*.17,centre[1]+d.dz*a*.115+nz*b*.17]));
+    const box=[Math.min(...corners.map(p=>p[0])),Math.max(...corners.map(p=>p[0])),Math.min(...corners.map(p=>p[1])),Math.max(...corners.map(p=>p[1]))];
+    polygons=polygons.flatMap(p=>exclude(p,u,v,box));
+   }
   }
   for(const poly of polygons){
    if(poly.length<3)continue;
