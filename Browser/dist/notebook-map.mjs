@@ -1,8 +1,9 @@
 import {visible} from './core.mjs';
 import {REVEAL_RADIUS,notebookView} from './notebook.mjs';
+import {asylumRoomNumbers} from './asylum-room-numbers.mjs';
 
 const caches=new WeakMap();
-export function drawNotebookMap(context,notebook,key,player,enemies,yaw,{createCanvas=()=>document.createElement('canvas'),revealAll=false}={}){
+export function drawNotebookMap(context,notebook,key,player,enemies,yaw,{createCanvas=()=>document.createElement('canvas'),revealAll=false,outsideVisible=()=>false}={}){
  const view=notebook.views.find(v=>v.key===key);if(!view)return;
  const floor=view.floor,fog=notebook.fog.get(key),[minX,maxX,minZ,maxZ]=fog.bounds;
  const width=context.canvas.width,height=context.canvas.height,scale=Math.min((width-16)/(maxX-minX),(height-16)/(maxZ-minZ));
@@ -34,8 +35,9 @@ export function drawNotebookMap(context,notebook,key,player,enemies,yaw,{createC
    c.strokeStyle='#788774';c.lineWidth=Math.max(1,scale*.8);
    for(const stair of view.routes){c.beginPath();stair.points.forEach(([x,z],i)=>i?c.lineTo(px(x),pz(z)):c.moveTo(px(x),pz(z)));c.stroke();}
    c.strokeStyle='#a19c7d';c.lineWidth=scale*2.5;c.beginPath();c.moveTo(px(0),pz(22));c.lineTo(px(0),pz(82));c.stroke();
+   c.lineWidth=Math.max(1,scale);c.beginPath();c.moveTo(px(-80),pz(12));c.lineTo(px(-80),pz(-60));c.lineTo(px(-74),pz(-89));c.stroke();
   }
-  cached={base,mask,explored,stamp:''};backgrounds.set(cacheKey,cached);
+  cached={base,mask,explored,roomNumbers:asylumRoomNumbers(floor),stamp:''};backgrounds.set(cacheKey,cached);
  }
  const stamp=`${notebook.generation}:${fog.revision}`;
  if(!revealAll&&cached.stamp!==stamp){
@@ -59,12 +61,20 @@ export function drawNotebookMap(context,notebook,key,player,enemies,yaw,{createC
  }
  const exits=view.outside?notebook.views.filter(v=>!v.outside).flatMap(v=>v.floor.exits):floor.exits;
  for(const e of exits){const x=view.outside?e.destination[0]:e.worldX??e.x*floor.cellSize,z=view.outside?e.destination[2]:e.worldZ??e.z*floor.cellSize;
-  if(!revealAll&&!notebook.known(key,x,z))continue;context.fillStyle='#c7e19b';context.fillRect(px(x)-2,pz(z)-2,4,4);
+  if(!revealAll&&!notebook.known(key,x,z))continue;
+  const note=notebook.entries.find(n=>n.id===`door:${view.index}:${e.id}`);
+  context.fillStyle=note?.locked?'#cfb894':'#c7e19b';context.fillRect(px(x)-2,pz(z)-2,4,4);
+  if(large&&note?.locked){context.font='10px Arial';context.textAlign='center';context.fillText('Locked',px(x),pz(z)-6);}
  }
- if(large&&!view.outside)for(const room of floor.rooms??[]){const x=room.label?.[0]??room.x*floor.cellSize,z=room.label?.[1]??room.z*floor.cellSize;if(!room.id||!revealAll&&!notebook.known(key,x,z))continue;context.fillStyle='#bdc7b1';context.font='11px Arial';context.textAlign='center';context.fillText(room.id,px(x),pz(z)+4);}
+ if(large)for(const note of notebook.entries.filter(n=>n.mapPoint&&n.view===key)){
+  const {x,z}=note.mapPoint;if(!revealAll&&!notebook.known(key,x,z))continue;
+  context.fillStyle='#cfb894';context.font='10px Arial';context.textAlign='center';context.fillText(note.mapLabel??note.title,px(x),pz(z)-7);
+ }
+ if(large&&!view.outside)for(const room of floor.rooms??[]){const x=room.label?.[0]??room.x*floor.cellSize,z=room.label?.[1]??room.z*floor.cellSize,number=cached.roomNumbers.get(room.id);if(!number||!revealAll&&!notebook.known(key,x,z))continue;context.fillStyle='#bdc7b1';context.font='11px Arial';context.textAlign='center';context.fillText(number,px(x),pz(z)+4);}
  if(current){
-  for(const enemy of view.outside?[]:enemies){
-   if(enemy.floor!==player.floor||Math.abs((enemy.y??floor.elevation??0)-(player.y??floor.elevation??0))>.6||Math.hypot(enemy.x-player.x,enemy.z-player.z)>REVEAL_RADIUS||!notebook.known(key,enemy.x,enemy.z)||!visible(floor,player,enemy))continue;
+  for(const enemy of enemies){
+   if(view.outside?!enemy.outside:enemy.outside||enemy.floor!==player.floor)continue;
+   if(Math.abs((enemy.y??floor.elevation??0)-(player.y??floor.elevation??0))>.6||Math.hypot(enemy.x-player.x,enemy.z-player.z)>REVEAL_RADIUS||!notebook.known(key,enemy.x,enemy.z)||!(view.outside?outsideVisible(player,enemy):visible(floor,player,enemy)))continue;
    context.fillStyle=enemy.type===2?'#8fe0c4':'#e1c278';context.beginPath();context.arc(px(enemy.x),pz(enemy.z),large?4:2.5,0,7);context.fill();
   }
   context.fillStyle='#fff8db';context.beginPath();context.arc(px(player.x),pz(player.z),large?4:3,0,7);context.fill();

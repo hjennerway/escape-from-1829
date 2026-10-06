@@ -47,8 +47,8 @@ for(const x of [-7,-3,3,7])assert(!flatWalkable(upper,x,13.2,.05),'Archive retai
 for(const x of [-15,-11])assert(!flatWalkable(upper,x,9.6,.05),'Stair clearance cannot erase the linen-store wall');
 for(const [x,z] of [[-9.45,10.25],[-9.45,12.2],[-7,12.2],[0,12.2],[7,12.2]])assert(flatWalkable(upper,x,z),'Stair departure and passage remain unobstructed');
 const labels=scene.getObjectByName('Asylum RoomDoorLabels');assert(labels);
-assert.deepEqual([...new Set(labels.userData.labels.map(l=>l.text))],['Records office','Staff office','Staff sitting room','Archive & stores','Linen store']);
-assert.equal(labels.userData.labels.length,10,'All five door names are readable from both leaf faces');
+assert.deepEqual([...new Set(labels.userData.labels.filter(l=>l.x>-18).map(l=>l.text))],['201 Records office','202 Staff office','203 Staff sitting room','204 Archive & stores','205 Linen store']);
+assert.equal(labels.userData.labels.length,upper.roomDoors.length*2,'All second-floor numbers and retained Reception names appear on both leaf faces');
 for(const label of labels.userData.labels){
  const door=upper.roomDoors.find(d=>d.roomId===label.roomId),nx=Math.sin(door.rotation)*label.face,nz=Math.cos(door.rotation)*label.face;
  ray.set(new THREE.Vector3(label.x+nx*.12,label.y,label.z+nz*.12),new THREE.Vector3(-nx,0,-nz));ray.far=.14;
@@ -56,7 +56,7 @@ for(const label of labels.userData.labels){
 }
 for(const floor of floors.slice(0,3)){
  const lower=new THREE.Scene();buildAsylumArchitecture(THREE,lower,floor);
- assert(!lower.getObjectByName('Asylum RoomDoorLabels'),'Labels stay limited to the approved top-floor doors');
+ assert.equal(lower.getObjectByName('Asylum RoomDoorLabels').userData.labels.length,floor.roomDoors.length*2,'Every lower-floor room door has a two-sided number');
 }
 function walk(from,to){
  const actor={...from,y:floors[from.floor].elevation},route=routeBetweenFloors(floors,actor,to);assert(route.length,'A continuous route exists');

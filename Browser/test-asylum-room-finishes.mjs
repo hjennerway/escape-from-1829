@@ -31,13 +31,42 @@ assert.equal(cast([rail],-1,1.52,3,1,0,1.5),undefined,'Rail does not cross a cor
 assert(!cast([rail],1,1.52,6,-1,0,1),'No rail on treatment side');
 
 const plan=JSON.parse(await readFile(new URL('./dist/asylum-plan.json',import.meta.url))),snapshot=JSON.stringify(plan),floors=buildAsylumLayout(plan).floors,scenes=[];
-let roomSamples=0,doors=0,windows=0,decoratedRooms=0;
+let roomSamples=0,doors=0,windows=0,decoratedRooms=0,brickBoundaries=0;
 for(const floor of floors){
  const before=JSON.stringify({walls:floor.walls,doorways:floor.doorways,roomDoors:floor.roomDoors,cells:Array.from(floor.cells)});
  const scene=new THREE.Scene();buildAsylumArchitecture(THREE,scene,floor);scene.updateMatrixWorld(true);scenes.push(scene);
  const walls=['Asylum Brick','Asylum Plaster'].map(name=>scene.getObjectByName(name)),dado=scene.getObjectByName('Asylum Dado'),height=floor.id===2?1.16:1.52;
  assert.equal(dado.geometry.userData.height,height,'Dado remains at 40% of each floor ceiling height');
  assert.equal(scene.children.filter(m=>m.name==='Asylum Dado').length,1,'All room rails share one draw per floor');
+ // Inspect the actual corridor faces either side of the ninth mortar joint.
+ // A split at the former 1.1m height leaves no red samples here and fails.
+ let floorBoundaries=0;
+ for(const c of floor.corridors)for(let j=1;j<c.points.length;j++){
+  const a=c.points[j-1],b=c.points[j],length=Math.hypot(b[0]-a[0],b[1]-a[1]);
+  if(length<.1)continue;
+  const nx=-(b[1]-a[1])/length,nz=(b[0]-a[0])/length;
+  for(const t of [.2,.5,.8])for(const side of [-1,1]){
+   const x=a[0]+(b[0]-a[0])*t,z=a[1]+(b[1]-a[1])*t;
+   const lower=cast(walls,x,1.124,z,nx*side,nz*side,c.width/2+.3);
+   if(lower?.object.name!=='Asylum Brick'||colour(lower)!==0)continue;
+   const upper=cast(walls,x,1.126,z,nx*side,nz*side,c.width/2+.3);
+   assert.equal(upper?.object.name,'Asylum Plaster','Cream starts immediately above the complete red course');
+   assert.equal(colour(upper),0,'Corridor face retains brickwork above the joint');
+   assert(Math.abs(lower.distance-upper.distance)<1e-5,'Both colours meet on the same wall face');
+   floorBoundaries++;brickBoundaries++;
+  }
+ }
+ assert(floorBoundaries>5,'Every floor has exposed corridor boundaries at the mortar joint');
+ const glass=scene.getObjectByName('Asylum Glass'),matrix=new THREE.Matrix4();
+ if(floor.id===2||floor.windowMode==='scheduled')for(let i=0;i<glass.count;i++){
+  glass.getMatrixAt(i,matrix);
+  const p=new THREE.Vector3().setFromMatrixPosition(matrix),size=new THREE.Vector3().setFromMatrixScale(matrix),n=new THREE.Vector3(0,0,1).transformDirection(matrix),sill=p.y-size.y/2;
+  if(sill<=1.225)continue;
+  for(const side of [-1,1]){
+   const hit=cast(walls,p.x+n.x*.4*side,(1.125+sill-.1)/2,p.z+n.z*.4*side,-n.x*side,-n.z*side,.5);
+   assert.equal(hit?.object.name,'Asylum Plaster','Raised window bases follow the same brick colour boundary');
+  }
+ }
  for(const room of floor.rooms){
   const expected=roomWallColour(floor,room)+1;let samples=0;
   for(let i=0;i<32;i++)for(const y of [.65,2.15]){
@@ -53,7 +82,6 @@ for(const floor of floors){
  for(const d of floor.doorways){
   assert(!cast([dado],d.x-d.dz*.4,height,d.z+d.dx*.4,d.dz,-d.dx,.8),'Dado never crosses a door aperture');doors++;
  }
- const glass=scene.getObjectByName('Asylum Glass'),matrix=new THREE.Matrix4();
  for(let i=0;i<glass.count;i++){
   glass.getMatrixAt(i,matrix);const p=new THREE.Vector3().setFromMatrixPosition(matrix),size=new THREE.Vector3().setFromMatrixScale(matrix),n=new THREE.Vector3(0,0,1).transformDirection(matrix);
   if(height<=p.y-size.y/2||height>=p.y+size.y/2)continue;
@@ -64,4 +92,4 @@ for(const floor of floors){
 assert.equal(scenes[0].getObjectByName('Asylum Plaster').material,scenes[1].getObjectByName('Asylum Plaster').material,'Floors share wallpaper materials');
 assert.equal(scenes[0].getObjectByName('Asylum Dado').material,scenes[2].getObjectByName('Asylum Dado').material,'Basement shares cream rail material');
 assert.equal(JSON.stringify(plan),snapshot);
-console.log(`PASS: ${decoratedRooms} decorated rooms, ${roomSamples} lower/upper wall rays, two-sided treatment/ward partition and corridor-edge fixture, 40% raised rails, ${doors} clear doors, ${windows} clear windows, shared batches and unchanged navigation.`);
+console.log(`PASS: ${decoratedRooms} decorated rooms, ${roomSamples} lower/upper wall rays, ${brickBoundaries} corridor colour boundaries at mortar joints, two-sided treatment/ward partition and corridor-edge fixture, 40% raised rails, ${doors} clear doors, ${windows} clear windows, shared batches and unchanged navigation.`);

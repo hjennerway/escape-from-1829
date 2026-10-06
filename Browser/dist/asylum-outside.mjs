@@ -4,7 +4,9 @@ import {createObstacleJump} from './jump.mjs';
 export function createAsylumOutside(THREE,exterior){
  let obstacles,indices,supports,walkSurfaces,jumper,jumpObstacles;
  const safePositions=new WeakMap();
+ let revision=0;
  function refresh(){
+  revision++;
   // Aerial batching retains its hidden originals for inspection. Use those
   // sources for collision/support, then restore the exact render visibility.
   const visibility=[];
@@ -78,8 +80,8 @@ export function createAsylumOutside(THREE,exterior){
    Object.assign(actor,{x,y:y<actor.y-.5?actor.y:y,z,verticalTrend:0});remember(actor);return;
   }
  }
- function update(actor,dx,dz,dt){
-  if(jumper?.update(actor,dx,dz,dt)){actor.verticalTrend=0;return;}
+ function update(actor,dx,dz,dt,{jump=true}={}){
+  if(jump&&jumper?.update(actor,dx,dz,dt)){actor.verticalTrend=0;return;}
   recover(actor);
   const steps=Math.max(1,Math.ceil(Math.hypot(dx,dz)/.08));
   for(let i=0;i<steps;i++)for(const [mx,mz] of [[dx/steps,0],[0,dz/steps]]){
@@ -95,7 +97,7 @@ export function createAsylumOutside(THREE,exterior){
   if(!dx&&!dz){const y=heightAt(actor.x,actor.z,actor.y,actor.verticalTrend??0);if(y<actor.y&&clearHeightChange(actor.x,actor.z,actor.y,y))actor.y=Math.max(y,actor.y-5*dt);}
   if(!indexAt(actor.y).contains(actor.x,actor.z))remember(actor);
  }
- return {refresh,heightAt,update,
+ return {refresh,heightAt,update,get revision(){return revision;},
   jump(actor){
    if(jumper?.airborne)return false;
    // Door destinations use the nominal landing height; the rendered tread

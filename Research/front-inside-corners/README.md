@@ -1,5 +1,28 @@
 # Front inside corners
 
+## Reception entrance sill flicker (6 October 2026)
+
+The owner's [red-circled screenshot](entrance-sill-flicker.png) locates pale
+flickering lines beside the first eastern recessed sash, where the main
+frontage meets Reception. The annotation identifies the defect.
+
+The generic main-range sash at x=7 was retained behind Reception after the
+photographed entrance windows replaced the frontage. Its sill extended beyond
+Reception's x=7.1 edge and ended at z=17.3, coincident with the newer recessed
+wall. All obsolete generic front sashes behind Reception are now omitted
+along with those behind the two stepped entrance facades. The photographed
+windows, masonry, facade bands and rear/exposed outer-range windows retain
+their definitions. These coordinates describe the existing model.
+
+`Browser/test-front-entrance-flicker.mjs` checks the complete assembled wall
+at the former sill positions and preserves the current window schedule.
+Before/after views, the saved original builder and GPU validation receipts
+are in `Browser/artifacts/front-entrance-flicker/`. Its `check-browser.mjs`
+supports `--before` to reproduce the original competing surfaces and
+`--compiled` to verify both the source and locally rebuilt aerial scenes.
+Shared browser sources serve aerial, Explore and gameplay. Unity, Blender
+and packaged application exports are not regenerated.
+
 The four references were supplied on 17 September 2026. `img1.jpg` looks along
 the yellow arrow in `locations.png`; `img2.jpg` follows the blue arrow. The red
 mark identifies the east inside corner beside Reception. In `shape.png`, red

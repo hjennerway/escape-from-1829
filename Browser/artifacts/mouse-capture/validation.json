@@ -1,0 +1,79 @@
+{
+  "results": [
+    {
+      "action": "click",
+      "captured": true,
+      "mouseLook": true,
+      "freshClick": false
+    },
+    {
+      "action": "Escape",
+      "captured": true,
+      "mouseLook": true,
+      "freshClick": false
+    },
+    {
+      "action": "p",
+      "captured": true,
+      "mouseLook": true,
+      "freshClick": false
+    },
+    {
+      "action": "click",
+      "captured": true,
+      "mouseLook": true,
+      "freshClick": false
+    },
+    {
+      "action": "Escape",
+      "captured": true,
+      "mouseLook": true,
+      "freshClick": false
+    },
+    {
+      "action": "p",
+      "captured": true,
+      "mouseLook": true,
+      "freshClick": false
+    },
+    {
+      "cooldown": true,
+      "frozen": true,
+      "staleUnlock": true
+    },
+    {
+      "persistentDenial": true,
+      "paused": true,
+      "freshClick": true
+    },
+    {
+      "cancel": "Escape",
+      "stopped": true
+    },
+    {
+      "cancel": "blur",
+      "stopped": true
+    },
+    {
+      "cancel": "hidden",
+      "stopped": true
+    },
+    {
+      "dialog": "help",
+      "confirmedResume": true,
+      "frozen": true
+    },
+    {
+      "dialog": "notebook",
+      "confirmedResume": true,
+      "frozen": true
+    },
+    {
+      "dialog": "captured",
+      "confirmedResume": true,
+      "frozen": true
+    }
+  ],
+  "mobile": true,
+  "errors": []
+}

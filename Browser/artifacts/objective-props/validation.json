@@ -1,0 +1,89 @@
+{
+  "fittings": [
+    {
+      "id": "memo",
+      "kind": "desk",
+      "support": "0:R26:fixed:0",
+      "position": [
+        23.04,
+        1.004,
+        16.047
+      ]
+    },
+    {
+      "id": "staff-key",
+      "kind": "wall",
+      "position": [
+        -19.23,
+        1.4,
+        9.530000000000001
+      ]
+    },
+    {
+      "id": "reclaim",
+      "kind": "desk",
+      "support": "0:Reception:fixed:0",
+      "position": [
+        -0.76,
+        1.12,
+        13.26
+      ]
+    },
+    {
+      "id": "release-note",
+      "kind": "desk",
+      "support": "2:B3:fixed:0",
+      "position": [
+        -35.11,
+        1.004,
+        -9.603
+      ]
+    },
+    {
+      "id": "release",
+      "kind": "wall",
+      "position": [
+        -24.83,
+        1.4,
+        -11.499999999999998
+      ]
+    },
+    {
+      "id": "plan",
+      "kind": "desk",
+      "support": "3:R41:fixed:1",
+      "position": [
+        -0.7469999999999999,
+        1.004,
+        6.56
+      ]
+    },
+    {
+      "id": "office-index",
+      "kind": "desk",
+      "support": "1:R26:fixed:0",
+      "position": [
+        23.04,
+        1.004,
+        16.047
+      ]
+    }
+  ],
+  "captures": [
+    "desktop-memo",
+    "desktop-staff-key",
+    "desktop-reclaim",
+    "desktop-release-note",
+    "desktop-release",
+    "desktop-plan",
+    "desktop-office-index",
+    "desktop-property-keys",
+    "phone-staff-key",
+    "phone-memo",
+    "phone-plan",
+    "phone-reclaim",
+    "phone-release"
+  ],
+  "torch": false,
+  "errors": []
+}

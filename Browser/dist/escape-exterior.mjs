@@ -5,6 +5,7 @@ import {matchEstateGrass} from './estate-grass.mjs';
 import {applyGroundSurface} from './ground-materials.mjs';
 import {finishEstateMinerals} from './mineral-materials.mjs';
 import {finishRoofTiles} from './roof-tile-uv.mjs';
+import {closeRoofWallGaps} from './roof-wall-joins.mjs';
 import {createBowlingGreen} from './bowling-green.mjs';
 import {photoDetailPrimitives} from './photo-detail-primitives.mjs';
 import {refineFrontInsideCorners} from './front-inside-corners.mjs';
@@ -304,7 +305,10 @@ export function createEscapeExterior(THREE,aspect){
     if(!detail)for(const side of [-1,1]){
       for(let px=-w/2+2.4;px<w/2-1.5;px+=3.55)for(let y=3.8;y<h-1;y+=3.4){
         if(side<0&&x===EAST_SHIFT/2&&z===12&&x+px>37)continue;
-        if(side>0&&principal&&Math.abs(x+px)>=7.1&&Math.abs(x+px)<=32)continue;
+        // Reception and both stepped entrance facades supply their own sashes.
+        // Even the buried central sashes must be omitted: the old x=7 sill
+        // extends past Reception and ends on the recessed wall's brick plane.
+        if(side>0&&principal&&Math.abs(x+px)<=32)continue;
         if(passage&&y<base&&Math.abs(x+px-passage.x)<passage.width/2+.9)continue;
         // Leave the whole sash clear of the projecting west frontage.
         const wx=principal&&side>0&&x+px< -32&&x+px> -32.9?-32.9:x+px;
@@ -539,6 +543,7 @@ export function createEscapeExterior(THREE,aspect){
   model.traverse(object=>{for(const mat of (Array.isArray(object.material)?object.material:[object.material]))if(mat?.userData.estateGrass)lawnMaterials.add(mat);});
   for(const mat of lawnMaterials)matchEstateGrass(mat,grass);
   joinInstancedFacadeCourses(THREE,model);
+  closeRoofWallGaps(THREE,model,{exclude:[trees,terrain]});
   for(const name of ['Entrance west projection slate roof','Entrance west slate pitches to render edge']){
     const roofMesh=model.getObjectByName(name);if(roofMesh)roofMesh.userData.preciseRoofUV=true;
   }

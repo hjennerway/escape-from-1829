@@ -1,0 +1,50 @@
+{
+  "existingHallRecordsUnchanged": 45,
+  "added": [
+    {
+      "procedural": true,
+      "width": 2.205,
+      "depth": 0.46799999999999997,
+      "height": 0.8459999999999999,
+      "era": "Plain timber waiting bench",
+      "id": "1:WestBay:fixed:0",
+      "kind": "waitingBench",
+      "roomId": "WestBay",
+      "variable": false,
+      "x": -58.4,
+      "z": -4.176,
+      "rotation": 0,
+      "y": 0.008
+    },
+    {
+      "procedural": true,
+      "width": 2.205,
+      "depth": 0.46799999999999997,
+      "height": 0.8459999999999999,
+      "era": "Plain timber waiting bench",
+      "id": "1:WestBay:fixed:1",
+      "kind": "waitingBench",
+      "roomId": "WestBay",
+      "variable": false,
+      "x": -61.376,
+      "z": -0.7,
+      "rotation": 1.5707963267948966,
+      "y": 0.008
+    },
+    {
+      "procedural": true,
+      "width": 0.72,
+      "depth": 0.46,
+      "height": 1.16,
+      "id": "1:WestBay:fixed:2",
+      "kind": "newspaperStand",
+      "roomId": "WestBay",
+      "variable": false,
+      "x": -56.5,
+      "z": -2.65,
+      "rotation": -1.0471975511965976,
+      "y": 0.008
+    }
+  ],
+  "source": "dist/hall-furnishings.mjs"
+}

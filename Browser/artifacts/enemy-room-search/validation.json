@@ -1,0 +1,121 @@
+{
+  "results": [
+    {
+      "name": "guard",
+      "headStart": {
+        "before": [
+          35.8,
+          -6
+        ],
+        "after": [
+          35.8,
+          -6
+        ],
+        "search": null
+      },
+      "close": {
+        "before": [
+          35.8,
+          -6
+        ],
+        "after": [
+          35.85719416415853,
+          -6.14298541039633
+        ],
+        "search": null,
+        "memory": 5
+      },
+      "entered": {
+        "phase": "wait",
+        "room": "R14",
+        "position": [
+          32.31061236662424,
+          0,
+          -6.968435394437371
+        ],
+        "state": "paused"
+      },
+      "passing": {
+        "before": [
+          32.31061236662424,
+          -6.968435394437371
+        ],
+        "after": [
+          32.31061236662424,
+          -6.968435394437371
+        ],
+        "player": [
+          35.8,
+          3.1919999999999558
+        ],
+        "phase": "wait",
+        "remaining": 1.7199999999999962,
+        "state": "paused"
+      },
+      "expired": {
+        "search": null,
+        "cooldown": 8,
+        "memory": 0
+      }
+    },
+    {
+      "name": "ghost",
+      "headStart": {
+        "before": [
+          35.8,
+          -6
+        ],
+        "after": [
+          35.8,
+          -6
+        ],
+        "search": null
+      },
+      "close": {
+        "before": [
+          35.8,
+          -6
+        ],
+        "after": [
+          35.832682379519156,
+          -6.081705948797903
+        ],
+        "search": null,
+        "memory": 5
+      },
+      "entered": {
+        "phase": "wait",
+        "room": "R14",
+        "position": [
+          32.326394669405545,
+          0,
+          -6.971065778234257
+        ],
+        "state": "paused"
+      },
+      "passing": {
+        "before": [
+          32.326394669405545,
+          -6.971065778234257
+        ],
+        "after": [
+          32.326394669405545,
+          -6.971065778234257
+        ],
+        "player": [
+          35.8,
+          3.1919999999999558
+        ],
+        "phase": "wait",
+        "remaining": 1.7199999999999962,
+        "state": "paused"
+      },
+      "expired": {
+        "search": null,
+        "cooldown": 8,
+        "memory": 5
+      }
+    }
+  ],
+  "errors": []
+}

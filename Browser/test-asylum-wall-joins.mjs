@@ -85,7 +85,7 @@ for(const floor of floors){
    const reach=mitreReach>.36?.09*cosine:mitreReach;
    for(const fraction of [.80,.93,.99]){
     const x=p[0]+n[0]*reach*fraction,z=p[1]+n[1]*reach*fraction;
-    for(const [kind,bottom,top] of [['Brick',0,1.1],['Plaster',1.1,wallTop]]){
+    for(const [kind,bottom,top] of [['Brick',0,1.125],['Plaster',1.125,wallTop]]){
      ray.set(new THREE.Vector3(x,top+.3,z),new THREE.Vector3(0,-1,0));ray.far=.4;
      const hit=ray.intersectObject(scene.getObjectByName('Asylum '+kind),false)[0];
      assert(hit&&Math.abs(hit.point.y-top)<1e-5,`No recessed ${kind} corner at floor ${floor.id}: ${p}, sample ${fraction}`);

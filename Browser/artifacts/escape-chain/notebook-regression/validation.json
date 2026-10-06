@@ -1,0 +1,51 @@
+{
+  "screens": [
+    "desktop-first-page",
+    "desktop-discoveries",
+    "desktop-basement",
+    "desktop-grounds",
+    "developer-full-map",
+    "developer-second-floor",
+    "mobile-sketch",
+    "mobile-notes"
+  ],
+  "mobile": {
+    "width": 390,
+    "card": {
+      "x": 12,
+      "y": 12,
+      "width": 366,
+      "height": 820,
+      "top": 12,
+      "right": 378,
+      "bottom": 832,
+      "left": 12
+    },
+    "map": {
+      "x": 31,
+      "y": 275.390625,
+      "width": 328,
+      "height": 212.078125,
+      "top": 275.390625,
+      "right": 359,
+      "bottom": 487.46875,
+      "left": 31
+    },
+    "overflow": false
+  },
+  "scrolled": {
+    "close": {
+      "x": 272.5625,
+      "y": 33,
+      "width": 86.4375,
+      "height": 44,
+      "top": 33,
+      "right": 359,
+      "bottom": 77,
+      "left": 272.5625
+    },
+    "hit": true,
+    "headerPosition": "relative"
+  },
+  "errors": []
+}

@@ -4,6 +4,7 @@ import {buildAsylumLayout} from './dist/asylum-layout.mjs';
 import {makeFloors} from './dist/floors.mjs';
 import {createNotebook,REVEAL_RADIUS} from './dist/notebook.mjs';
 import {drawNotebookMap} from './dist/notebook-map.mjs';
+import {asylumDoorLabels} from './dist/asylum-door-labels.mjs';
 
 const plan=JSON.parse(await readFile(new URL('./dist/asylum-plan.json',import.meta.url)));
 const floors=buildAsylumLayout(plan).floors,journal=createNotebook(floors,{outsideStairs:plan.outsideStairs});
@@ -58,7 +59,7 @@ journal.explore({x:31,z:5,floor:0,outside:false});assert(journal.entries.some(e=
 const canvases=[];
 function canvas(){
  const c={width:205,height:165},calls=[];
- const context=new Proxy({canvas:c,calls,drawImage(image){calls.push({op:'blit',image});},arc(x,z,r){calls.push({op:'arc',color:this.fillStyle,x,z,r});}},{get:(obj,key)=>key in obj?obj[key]:()=>{}});
+ const context=new Proxy({canvas:c,calls,drawImage(image){calls.push({op:'blit',image});},fillText(text){calls.push({op:'text',text});},arc(x,z,r){calls.push({op:'arc',color:this.fillStyle,x,z,r});}},{get:(obj,key)=>key in obj?obj[key]:()=>{}});
  c.getContext=()=>context;canvases.push(c);return c;
 }
 const target=canvas(),viewer={x:4,z:5,floor:0},enemies=[{x:3,z:5,floor:0,type:1},{x:8,z:5,floor:0,type:2},{x:3,z:5,floor:1,type:2}];
@@ -71,6 +72,22 @@ drawNotebookMap(target.getContext('2d'),wallJournal,'floor:0',viewer,[],0,{creat
 assert.notEqual(target.getContext('2d').calls.filter(c=>c.op==='blit').at(-1).image,masked,'Developer drawing uses the complete geometry instead of the fog composite');
 assert.deepEqual([...wallJournal.fog].map(([key,f])=>[key,f.revision,[...f.cells]]),beforeFull,'Developer reveal does not discover cells on any level');assert.deepEqual(wallJournal.entries,beforeNotes);
 drawNotebookMap(target.getContext('2d'),wallJournal,'floor:0',viewer,[],0,{createCanvas:canvas});assert.equal(target.getContext('2d').calls.filter(c=>c.op==='blit').at(-1).image,masked,'Closing developer mapping restores the original explored map');
+// Maps and remembered places use the actual door numbers on every floor.
+const numberedJournal=createNotebook(floors),largeMap=canvas();largeMap.width=900;largeMap.height=580;
+for(const floor of floors){
+ const context=largeMap.getContext('2d');context.calls.length=0;
+ drawNotebookMap(context,numberedJournal,`floor:${floor.id}`,player,[],0,{createCanvas:canvas,revealAll:true});
+ const printed=context.calls.filter(c=>c.op==='text').map(c=>c.text),plaques=asylumDoorLabels(floor);
+ for(const plaque of plaques){
+  assert(printed.includes(plaque.number),'Map label matches plaque '+plaque.number);
+  const room=floor.rooms.find(r=>r.id===plaque.door.roomId);
+  numberedJournal.explore({x:room.label[0],z:room.label[1],floor:floor.id,outside:false});
+  assert(numberedJournal.entries.find(e=>e.id===`places:${floor.id}`).text.includes(plaque.number+' · '),'Remembered room matches its door plaque');
+ }
+ assert(!printed.some(text=>/\bR\d+\b/.test(text)),'Map never prints internal R room IDs');
+}
+assert(numberedJournal.entries.every(e=>!(/\bR\d+\b/.test(e.title+' '+e.text))),'Explored places and stair names do not expose old plan references');
+assert.equal(journal.availableViews().length,4,'Full-map numbering checks do not reveal new player knowledge');
 const generation=journal.generation;journal.reset();assert.equal(journal.generation,generation+1);assert.equal(journal.entries.length,0);assert.equal(journal.availableViews().length,0);for(const view of journal.views)assert.equal(count(view.key),0);
 // The previous two-floor fallback still reveals correctly using its own cell scale.
 const legacy=JSON.parse(await readFile(new URL('./dist/layout.json',import.meta.url))),oldFloors=makeFloors(legacy),oldJournal=createNotebook(oldFloors);

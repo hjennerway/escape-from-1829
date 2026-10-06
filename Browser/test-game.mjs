@@ -15,10 +15,13 @@ import {sampleLanding} from './dist/aerial-controls.mjs';
 import {createArrivalCutscene,sampleArrival} from './dist/arrival-cutscene.mjs';
 import * as GuardTHREE from './dist/vendor/three.module.js';
 import {createSecurityGuard,updateSecurityGuard,resetSecurityGuard} from './dist/security-guard.mjs';
+import {resetEnemyRoomSearch,updateEnemyRoomSearch} from './dist/enemy-room-search.mjs';
 import {createNotebook,notebookView} from './dist/notebook.mjs';
+import {asylumDisplayName} from './dist/asylum-room-numbers.mjs';
 import {drawNotebookMap} from './dist/notebook-map.mjs';
 import {bindDeveloperOptions} from './dist/developer-options.mjs';
 import {createLoadingProgress} from './dist/loading-progress.mjs';
+import {createMouseCapture} from './dist/mouse-capture.mjs';
 import {createReceptionClockAudio} from './dist/reception-clock-audio.mjs';
 class Vector {
   constructor(){this.set(0,0,0);}
@@ -56,12 +59,14 @@ const listeners=new Map();
 function keydown(code,repeat=false){const event={code,repeat,defaultPrevented:false,preventDefault(){this.defaultPrevented=true;}};listeners.get('keydown')(event);return event;}
 const sandbox={createReceptionClockAudio,createNotebook,notebookView,drawNotebookMap:(context,journal,key,player,enemies,yaw,options={})=>drawNotebookMap(context,journal,key,player,enemies,yaw,{...options,createCanvas:()=>sandbox.document.createElement('canvas')}),bindDeveloperOptions:options=>bindDeveloperOptions({...options,root:sandbox.document,target:sandbox.document,storage:{getItem:()=>null,setItem(){}}}),captureOutcome:(previous)=>captureOutcome(previous,sandbox.Math.random),Math:Object.create(Math),selectEscapeRoutes,exitDirection,createSecurityGuard:()=>createSecurityGuard(GuardTHREE),updateSecurityGuard,resetSecurityGuard,bindTreeToggle,sampleLanding,...core,...floors,buildArchitecture,interiorWallSurfaces,createInteriorLights,createEscapeCutscene,createArrivalCutscene,
  createLoadingProgress:document=>createLoadingProgress(document,{paint:()=>Promise.resolve()}),
+ createMouseCapture:(canvas,options)=>createMouseCapture(canvas,{...options,document:sandbox.document}),
  createLandingExterior:async()=>({scene:new Object3D(),camera:new Object3D()}),
  loadEscapeFrontage:async()=>{},THREE,GLTFLoader:class {},
  document:{getElementById:element,createElement:()=>element('canvas'+elements.size),querySelector:s=>element(s),querySelectorAll:()=>[],body:element('body'),addEventListener(){},exitPointerLock(){}},
  window:{AudioContext:class {resume(){return Promise.resolve();}}},Image:class {},
  fetch:async()=>({ok:true,json:async()=>layout}),matchMedia:()=>({matches:false}),
  innerWidth:1280,innerHeight:800,devicePixelRatio:1,addEventListener(type,listener){listeners.set(type,listener);},requestAnimationFrame(){},performance:{now:()=>0},console};
+Object.assign(sandbox,{resetEnemyRoomSearch,updateEnemyRoomSearch,asylumDisplayName});
 vm.createContext(sandbox);
 vm.runInContext(source+`\nglobalThis.test={finish,escapeCutscene,start,update,animate,resetPositions,showFloor,player,keys,openNotebook,closeNotebook,get notebook(){return notebook;},get escapeExterior(){return escapeExterior;},get lastRender(){return renderer.lastRender;},get arrival(){return arrivalCutscene;},get elapsed(){return elapsed;},get enemies(){return enemies;},get floors(){return floors;},get groups(){return floorGroups;},get artPanels(){return artPanels;},get artViewing(){return artViewing;},openArtViewer,closeArtViewer,get ready(){return ready;},get state(){return state;},get camera(){return camera;},setElapsed(v){elapsed=v;},setAudio(){audioOn=false;},setFrameDt(v){clock.getDelta=()=>v;}};`,sandbox);
 await new Promise(r=>setImmediate(r));

@@ -2492,7 +2492,12 @@
         -60,
         13.4
       ],
-      "description": "Proposed room division; purpose and dimensions are open for review."
+      "description": "Proposed room division; purpose and dimensions are open for review.",
+      "variants": {
+        "1": {
+          "description": "First-floor hand-sewing room with two worktables, four chairs, baskets, folded cloth and wardrobe storage."
+        }
+      }
     },
     {
       "id": "R20",
@@ -2525,7 +2530,84 @@
         -51.3,
         10.85
       ],
-      "description": "Proposed room division; purpose and dimensions are open for review."
+      "description": "Proposed room division; purpose and dimensions are open for review.",
+      "variants": {
+        "1": {
+          "bedPositions": [
+            {
+              "x": -48.765,
+              "z": 18.41875,
+              "rotation": -1.5707963267948966
+            },
+            {
+              "x": -54.525,
+              "z": 17.735,
+              "rotation": -3.141592653589793
+            },
+            {
+              "x": -48.765,
+              "z": 16.25625,
+              "rotation": -1.5707963267948966
+            },
+            {
+              "x": -48.765,
+              "z": 14.09375,
+              "rotation": -1.5707963267948966
+            },
+            {
+              "x": -48.765,
+              "z": 12.14375,
+              "rotation": -1.5707963267948966
+            },
+            {
+              "x": -48.765,
+              "z": 10.19375,
+              "rotation": -1.5707963267948966
+            },
+            {
+              "x": -48.765,
+              "z": 8.24375,
+              "rotation": -1.5707963267948966
+            },
+            {
+              "x": -48.765,
+              "z": 6.29375,
+              "rotation": -1.5707963267948966
+            },
+            {
+              "x": -48.765,
+              "z": 4.34375,
+              "rotation": -1.5707963267948966
+            },
+            {
+              "x": -53.835,
+              "z": 14.09375,
+              "rotation": 1.5707963267948966
+            },
+            {
+              "x": -53.835,
+              "z": 11.93125,
+              "rotation": 1.5707963267948966
+            },
+            {
+              "x": -53.835,
+              "z": 9.76875,
+              "rotation": 1.5707963267948966
+            },
+            {
+              "x": -53.835,
+              "z": 7.60625,
+              "rotation": 1.5707963267948966
+            },
+            {
+              "x": -53.835,
+              "z": 5.44375,
+              "rotation": 1.5707963267948966
+            }
+          ],
+          "description": "First-floor ward with fourteen fixed beds: original four retained and ten added along the walls in matching orientations, with clear entrance and central aisle."
+        }
+      }
     },
     {
       "id": "R21",
@@ -2641,7 +2723,80 @@
               19.5
             ]
           ],
-          "corridorClipping": false
+          "corridorClipping": false,
+          "bedPositions": [
+            {
+              "x": -43.625,
+              "z": 17.735,
+              "rotation": -3.141592653589793
+            },
+            {
+              "x": -39.765,
+              "z": 16.449819168173597,
+              "rotation": -1.5707963267948966
+            },
+            {
+              "x": -39.765,
+              "z": 14.416365280289334,
+              "rotation": -1.5707963267948966
+            },
+            {
+              "x": -45.235,
+              "z": 14.09375,
+              "rotation": 1.5707963267948966
+            },
+            {
+              "x": -39.765,
+              "z": 12.38291139240507,
+              "rotation": -1.5707963267948966
+            },
+            {
+              "x": -39.765,
+              "z": 10.34945750452081,
+              "rotation": -1.5707963267948966
+            },
+            {
+              "x": -39.765,
+              "z": 8.31600361663655,
+              "rotation": -1.5707963267948966
+            },
+            {
+              "x": -39.765,
+              "z": 6.282549728752288,
+              "rotation": -1.5707963267948966
+            },
+            {
+              "x": -45.235,
+              "z": 12.6,
+              "rotation": 1.5707963267948966
+            },
+            {
+              "x": -45.235,
+              "z": 11.1,
+              "rotation": 1.5707963267948966
+            },
+            {
+              "x": -45.235,
+              "z": 9.6,
+              "rotation": 1.5707963267948966
+            },
+            {
+              "x": -45.235,
+              "z": 8.1,
+              "rotation": 1.5707963267948966
+            },
+            {
+              "x": -45.235,
+              "z": 6.6,
+              "rotation": 1.5707963267948966
+            },
+            {
+              "x": -45.235,
+              "z": 5.1,
+              "rotation": 1.5707963267948966
+            }
+          ],
+          "description": "First-floor ward with fourteen fixed beds: original four retained and ten added along the walls in matching orientations, with clear entrance and central aisle."
         }
       }
     },

@@ -1,4 +1,7 @@
 import {paintRoomWallpaper,paintRoomDado} from './room-finish-textures.mjs';
+export const INTERIOR_BRICK_TILE_SIZE=2;
+export const INTERIOR_BRICK_ROWS=16;
+export const INTERIOR_BRICK_COURSE_HEIGHT=INTERIOR_BRICK_TILE_SIZE/INTERIOR_BRICK_ROWS;
 // Deterministic, local finishes: no network images or per-brick draw calls.
 export function createInteriorMaterials(THREE, document) {
   let seed=1829;
@@ -36,8 +39,8 @@ export function createInteriorMaterials(THREE, document) {
   }
   const brick=painted=>canvasTexture((g,n)=>{
     g.fillStyle=painted?'#b9b3a3':'#a39b8e';g.fillRect(0,0,n,n);
-    const row=n/16,col=n/8;
-    for(let y=0;y<16;y++)for(let x=-1;x<8;x++){
+    const row=n/INTERIOR_BRICK_ROWS,col=n/8;
+    for(let y=0;y<INTERIOR_BRICK_ROWS;y++)for(let x=-1;x<8;x++){
       const px=x*col+(y%2)*col/2,py=y*row;
       const v=Math.floor(random()*15);
       g.fillStyle=painted?`rgb(${204+v},${198+v},${180+v})`:`rgb(${128+v},${65+v},${53+v})`;
@@ -150,7 +153,7 @@ export function createInteriorMaterials(THREE, document) {
     RoomPaint:material(0xffffff,canvasTexture(paintRoomDado,512),1.4,{bumpScale:.002}),
     Dado:material(0xe3ddcb,null,1,{roughness:.82}),
     Floor:material(0xffffff,floor,2.5),Stone:material(0xada596),
-    Plaster:material(0xffffff,plasterMap,2),Brick:material(0xffffff,brickMap,2),
+    Plaster:material(0xffffff,plasterMap,INTERIOR_BRICK_TILE_SIZE),Brick:material(0xffffff,brickMap,INTERIOR_BRICK_TILE_SIZE),
     Ceiling:material(0xffffff,ceiling,5,{bumpScale:.009},true),Skirting:material(0x414745),
     EntrancePaint:material(0x762c30,null,1,{roughness:.72}),EntranceInset:material(0x581c23,null,1,{roughness:.76}),EntranceFrame:material(0xd6d0ba),
     RedArch:material(0x894e40),BuffArch:material(0xc5b388),

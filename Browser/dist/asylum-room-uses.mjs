@@ -6,6 +6,7 @@ export const ROOM_USES={
  3:{R41:'recordsOffice',R42:'office',R43:'staff',R44:'archive',R45:'linen',R46:'library',R47:'staff',R48:'reading',R49:'office',R50:'archive',R51:'junctionStairs'}
 };
 ROOM_USES[1].R51='junctionStairs';
+ROOM_USES[1].R19='sewing';
 export const ROOM_PURPOSES={
  paddedCell:{name:'Padded cell · patient confinement',fixed:['cellMattress'],variable:[]},
  privy:{name:'Shared privies and washroom',fixed:[],variable:[]},
@@ -39,6 +40,7 @@ export const ROOM_PURPOSES={
  archive:{name:'Archive and stores',fixed:['bookcase','bookcase','bookcase','cupboard'],variable:[]},
  store:{name:'General store',fixed:['bookcase','cupboard','cupboard'],variable:['bench','chair']},
  workshop:{name:'Maintenance workshop',fixed:['table','table','cupboard','bench'],variable:['bench','books']},
+ sewing:{name:'Sewing room',fixed:[],variable:[]},
  stairs:{name:'Reception stair hall',fixed:[],variable:[]},
  junctionStairs:{name:'West junction stair hall',fixed:[],variable:[]},
  porch:{name:'Court entrance porch',fixed:[],variable:[]},

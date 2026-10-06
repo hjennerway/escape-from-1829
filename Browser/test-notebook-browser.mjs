@@ -4,7 +4,7 @@ import {fileURLToPath} from 'node:url';
 import {startTestServer} from './test-support/server.mjs';
 import {launchHardwareBrowser} from './test-support/hardware-browser.mjs';
 
-const root=new URL('../',import.meta.url),destination=new URL('./artifacts/notebook/',import.meta.url);
+const root=new URL('../',import.meta.url),destination=new URL(process.env.NOTEBOOK_ARTIFACT_DIR??'./artifacts/notebook/',import.meta.url);
 await mkdir(destination,{recursive:true});
 const {server,base}=await startTestServer();
 let browser;
@@ -29,6 +29,12 @@ async function load(page){
  await page.waitForFunction(()=>window.notebookTest.state==='play');
 }
 async function capture(page,name){await page.evaluate(()=>new Promise(resolve=>requestAnimationFrame(()=>requestAnimationFrame(resolve))));await page.screenshot({path:fileURLToPath(new URL(name+'.png',destination))});screens.push(name);}
+async function resumeCaptured(page,key){
+ await page.keyboard.press(key);
+ await page.waitForFunction(()=>window.notebookTest.state==='play'&&document.pointerLockElement||window.notebookTest.state==='paused'&&document.getElementById('resultBody').textContent.includes('capture the mouse'));
+ if(await page.evaluate(()=>window.notebookTest.state==='paused'))await page.locator('#resume').click();
+ await page.waitForFunction(()=>window.notebookTest.state==='play'&&document.pointerLockElement);
+}
 try{
  browser=await launchHardwareBrowser({headless:true,executablePath:process.env.MODEL_CHROME_PATH??'C:/Program Files/Google/Chrome/Application/chrome.exe'});
  const page=await browser.newPage({viewport:{width:1280,height:820}});await load(page);
@@ -41,7 +47,7 @@ try{
  assert.deepEqual(await page.evaluate(()=>window.notebookTest.snapshot()),frozen,'Actual keyboard reading freezes player, NPCs, timer, journal and fog');
  await page.keyboard.press('Tab');assert(await page.evaluate(()=>document.getElementById('floorMap').contains(document.activeElement)));
  await page.keyboard.press('Shift+Tab');assert.equal(await page.evaluate(()=>document.activeElement.id),'closeNotebook');
- await capture(page,'desktop-first-page');await page.keyboard.press('Escape');
+ await capture(page,'desktop-first-page');await resumeCaptured(page,'Escape');
  await page.evaluate(()=>{const t=window.notebookTest;t.pose(-31.1,-7,0);t.pose(31,5,0);t.pose(-20.5,8.2,1);t.pose(-31.1,-7,2);t.pose(-38.8,-34.7,2,true);t.prepareArt();});
  await page.keyboard.down('e');await page.waitForFunction(()=>!document.getElementById('artViewer').hidden);await page.keyboard.up('e');
  assert(await page.evaluate(()=>window.notebookTest.journal.entries.some(e=>e.title.includes('December 1854'))),'Real held-E artwork inspection records the document');
@@ -58,17 +64,20 @@ try{
  await capture(page,'desktop-discoveries');
  await page.locator('#notebookFloors button').filter({hasText:'Basement'}).click();await capture(page,'desktop-basement');
  await page.locator('#notebookFloors button').filter({hasText:'Grounds'}).click();await capture(page,'desktop-grounds');
- await page.locator('#closeNotebook').click();await page.evaluate(()=>{const t=window.notebookTest;t.start();t.arrival.update(3);t.openNotebook();});
+ await page.locator('#closeNotebook').click();await page.waitForFunction(()=>window.notebookTest.state==='play');
+ await page.keyboard.press('p');await page.waitForFunction(()=>window.notebookTest.state==='paused');
+ await page.locator('#retry').click();await page.evaluate(()=>window.notebookTest.arrival.update(3));await page.waitForFunction(()=>window.notebookTest.state==='play');
+ await page.keyboard.press('n');await page.waitForFunction(()=>window.notebookTest.state==='notebook');
  assert.equal(await page.locator('#notebookFloors button').count(),1);assert(!await page.locator('#notebookFacts').innerText().then(t=>t.includes('Daily account')));
- await page.keyboard.press('Escape');await page.keyboard.press('-');
- const developerFrozen=await page.evaluate(()=>window.notebookTest.snapshot());
+ await resumeCaptured(page,'Escape');await page.keyboard.press('-');
  await page.keyboard.press('m');await page.waitForFunction(()=>window.notebookTest.state==='developer-map'&&document.getElementById('developerMap')&&!document.getElementById('developerMap').hidden);
+ const developerFrozen=await page.evaluate(()=>window.notebookTest.snapshot());
  assert.deepEqual(await page.locator('#developerMapLevels button').allTextContents(),['Ground floor','First floor','Basement','Second floor','Grounds']);
  const fullMini=await page.evaluate(()=>window.notebookTest.mapPixel('floor:0',-31.1,-7,true));assert(fullMini.slice(0,3).some(v=>v>35),'Developer shortcut fully reveals the actual minimap');
  await page.keyboard.press('w');await page.keyboard.press('e');await page.evaluate(()=>window.notebookTest.update(5));
  assert.deepEqual(await page.evaluate(()=>window.notebookTest.snapshot()),developerFrozen,'Developer map freezes gameplay without changing notebook knowledge');
  await capture(page,'developer-full-map');await page.locator('#developerMapLevels button').filter({hasText:'Second floor'}).click();await capture(page,'developer-second-floor');
- await page.keyboard.press('m');assert.equal(await page.evaluate(()=>window.notebookTest.state),'play');
+ await resumeCaptured(page,'m');
  await page.keyboard.press('n');assert.equal(await page.locator('#notebookFloors button').count(),5,'Developer mapping makes every level available in the notebook too');
  await page.keyboard.press('-');assert.equal(await page.locator('#notebookFloors button').count(),1);
  const restoredMini=await page.evaluate(()=>window.notebookTest.mapPixel('floor:0',-31.1,-7,true));assert(restoredMini.slice(0,3).every(v=>v<30),'Disabling developer mode restores the original minimap fog');

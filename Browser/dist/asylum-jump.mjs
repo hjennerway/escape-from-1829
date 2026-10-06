@@ -28,19 +28,19 @@ export function asylumJumpCeiling(floors,actor){
  return ceiling;
 }
 
-export function createAsylumJump(floors){
+export function createAsylumJump(floors,{allowMove=()=>true}={}){
  let offset=0,velocity=0,airborne=false;
  return {
   get airborne(){return airborne;},
   reset(){offset=0;velocity=0;airborne=false;},
   start(){if(airborne)return false;airborne=true;velocity=JUMP_SPEED;return true;},
   update(actor,dx,dz,dt){
-   if(!airborne){moveAsylumActor(floors,actor,dx,dz);return;}
+   if(!airborne){const next={...actor};moveAsylumActor(floors,next,dx,dz);if(allowMove(actor,next))Object.assign(actor,next);return;}
    const count=Math.max(1,Math.ceil(Math.min(dt,.1)*120),Math.ceil(Math.hypot(dx,dz)/.08)),step=Math.min(dt,.1)/count;
    for(let i=0;i<count;i++){
     actor.y-=offset;
     const next={...actor};moveAsylumActor(floors,next,dx/count,dz/count);
-    if(next.y+offset+1.8<=asylumJumpCeiling(floors,next)+.001)Object.assign(actor,next);
+    if(next.y+offset+1.8<=asylumJumpCeiling(floors,next)+.001&&allowMove(actor,next))Object.assign(actor,next);
     offset+=velocity*step-GRAVITY*step*step/2;velocity-=GRAVITY*step;
     const limit=Math.max(0,asylumJumpCeiling(floors,actor)-actor.y-1.8);
     if(offset>limit){offset=limit;velocity=Math.min(velocity,0);}

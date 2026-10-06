@@ -11,6 +11,7 @@ import {bindTreeToggle} from './tree-layer.mjs';
 import {sampleLanding} from './aerial-controls.mjs';
 import {createArrivalCutscene} from './arrival-cutscene.mjs';
 import {createSecurityGuard,updateSecurityGuard,resetSecurityGuard} from './security-guard.mjs';
+import {resetEnemyRoomSearch,updateEnemyRoomSearch} from './enemy-room-search.mjs';
 import {FLOOR_HEIGHT,makeFloors,nearStair,changeFloor,routeBetweenFloors} from './floors.mjs';
 import {selectEscapeRoutes,exitDirection} from './escape-routes.mjs';
 import {buildAsylumLayout,moveAsylumActor,stairRoute} from './asylum-layout.mjs';
@@ -24,10 +25,15 @@ import {createNotebook,notebookView} from './notebook.mjs';
 import {drawNotebookMap} from './notebook-map.mjs';
 import {bindDeveloperOptions} from './developer-options.mjs';
 import {createLoadingProgress} from './loading-progress.mjs';
+import {createMouseCapture} from './mouse-capture.mjs';
+import {createEscapeProgress,MAST,CAPTURE_LIMIT} from './escape-progress.mjs';
+import {createEscapeWorld,createEscapeLandmark,outdoorPath} from './escape-world.mjs';
+import {asylumDisplayName} from './asylum-room-numbers.mjs';
 const $=id=>document.getElementById(id),canvas=$('game');
 const furnitureFloors=[];
 const loading=createLoadingProgress(document);
 const keys=new Set(),touch=matchMedia('(pointer:coarse)').matches;
+const mouseCapture=createMouseCapture(canvas,{enabled:!touch,onLost:()=>pause()});
 const INTERACTION_HOLD_SECONDS=.5;
 let previousDiagnosis;
 const SPOTTED_CLEAR_DISTANCE=26;
@@ -43,6 +49,8 @@ const modern=()=>floors[0]?.geometrySource==='asylum-plan';
 const floorHeight=actor=>floors[actor.floor]?.elevation??actor.floor*FLOOR_HEIGHT;
 let notebook,notebookFloor,notebookReadRevision=0;
 let developer,mapPreviousState;
+let escapeProgress,escapeWorld,recoveryRemaining=0,enemyReleaseAt=5,messageUntil=0,interactionMessage='';
+let outdoorGuardActive=false,outdoorRethink=0,outdoorRoute=[];
 const landingReducedMotion=matchMedia('(prefers-reduced-motion: reduce)').matches;
 document.addEventListener('capture-intro',({detail})=>{
  if(!ready||state!=='menu')return;
@@ -59,7 +67,13 @@ const escapeCutscene=createEscapeCutscene($('escapeCutscene'),()=>{
  state='won';$('result').hidden=false;$('retry').focus();
 },{reducedMotion:matchMedia('(prefers-reduced-motion: reduce)').matches,getCamera:()=>escapeExterior?.camera});
 function groupSince(snapshot,height){const group=new THREE.Group();for(const o of [...scene.children])if(!snapshot.has(o))group.add(o);group.position.y=height;scene.add(group);return group;}
-function showFloor(){layout=floors[player.floor];floorGroups.forEach((g,i)=>g.visible=!player.outside&&(modern()||i===player.floor));interiorLights?.update(player);const name=player.outside?'OUTSIDE':modern()?layout.name.toUpperCase():player.floor?'UPPER FLOOR':'GROUND FLOOR';$('floorName').textContent=name;$('floorExits').textContent=player.outside?'E TO RETURN INSIDE':layout.exits.length+' EXITS THIS FLOOR';$('miniFloorName').textContent=name;if(modern())$('hud').querySelector('.objective strong').textContent=player.outside?'Reach the front path to escape':'Find a way outside';}
+function showFloor(){layout=floors[player.floor];floorGroups.forEach((g,i)=>g.visible=!player.outside&&(modern()||i===player.floor));interiorLights?.update(player);const name=player.outside?'GROUNDS':modern()?layout.name.toUpperCase():player.floor?'UPPER FLOOR':'GROUND FLOOR';$('floorName').textContent=name;$('floorExits').textContent=modern()?'NOTEBOOK · N':layout.exits.length+' EXITS THIS FLOOR';$('miniFloorName').textContent=name;updateObjective();}
+function updateObjective(){
+ const next=escapeProgress?.objective(player)??{title:'Find a way outside.',detail:''};
+ if($('objectiveTitle').textContent!==next.title)$('objectiveTitle').textContent=next.title;
+ if($('objectiveDetail').textContent!==next.detail)$('objectiveDetail').textContent=next.detail;
+ $('objectiveDetail').hidden=!next.detail;
+}
 const material=(color,extra={})=>new THREE.MeshStandardMaterial({color,roughness:.88,...extra});
 const tmp=new THREE.Vector3();
 function mesh(geometry,mat,p,parent=scene){const m=new THREE.Mesh(geometry,mat);m.position.set(...p);parent.add(m);return m;}
@@ -246,7 +260,7 @@ async function init(){
   }catch(error){console.warn('Blender level unavailable; using the browser-safe layout fallback.',error);buildProcedural();}
   if(furnitureModels)furnitureFloors.push(createFurnitureFloor(THREE,scene,layout,furnitureModels));
   if(floorIndex===0)placeHeritagePanels();placeLocalArtPanels(floorIndex);
-  for(const stair of layout.stairs||[]){lamp(stair.x*layout.cellSize,(stair.z+1)*layout.cellSize);label(stair.id?stair.id+' · '+stair.name+'|WALK THE STAIRS':stair.name+'|HOLD E TO GO '+(floorIndex?'DOWN':'UP'),stair.x*layout.cellSize,2.6,stair.z*layout.cellSize);}
+  for(const stair of layout.stairs||[]){const name=asylumDisplayName(stair.name);lamp(stair.x*layout.cellSize,(stair.z+1)*layout.cellSize);label(stair.id?stair.id+' · '+name+'|WALK THE STAIRS':name+'|HOLD E TO GO '+(floorIndex?'DOWN':'UP'),stair.x*layout.cellSize,2.6,stair.z*layout.cellSize);}
   lightFloor();
   markExits();
   floorGroups.push(groupSince(groundSnapshot,layout.elevation??floorIndex*FLOOR_HEIGHT));
@@ -262,20 +276,20 @@ async function init(){
   await loading.step(85,'Loading the exterior details…');
   await loadEscapeFrontage(THREE,escapeExterior);
   await loading.step(90,'Connecting the outside doors and stairs…');
-  if(modern()){outsideWalker=createAsylumOutside(THREE,escapeExterior);indoorJump=createAsylumJump(floors);}
+  if(modern()){createEscapeLandmark(THREE,escapeExterior);outsideWalker=createAsylumOutside(THREE,escapeExterior);indoorJump=createAsylumJump(floors,{allowMove:(a,b)=>escapeWorld?.allowMove(a,b)??true});}
   exterior=escapeExterior;
   if(renderer.shadowMap){renderer.shadowMap.enabled=true;renderer.shadowMap.type=THREE.PCFShadowMap;}
   arrivalCutscene=createArrivalCutscene({camera:exterior.camera,overlay:$('arrivalFade'),
     reducedMotion:matchMedia('(prefers-reduced-motion: reduce)').matches,
     onEnter(){resetPositions();camera.position.set(player.x,1.65,player.z);camera.rotation.set(pitch,yaw,0);},
-    onComplete(){if(state!=='arrival')return;keys.clear();state='play';uiPlaying(true);drawMap();}
+    onComplete(){if(state!=='arrival')return;keys.clear();state='play';uiPlaying(true);drawMap();if(!touch&&canvas.requestPointerLock&&!mouseCapture.pending&&document.pointerLockElement!==canvas)pause();}
   });
   resetPositions();clock=new THREE.Timer();clock.connect(document);
   developer=bindDeveloperOptions({THREE,exterior,plan:async()=>({floors,outsideStairs}),getMapState:()=>({player,enemies,yaw}),onChange:()=>{if(state==='notebook')renderNotebook();drawMap();},onMapChange:show=>{
    if(show){
-    mapPreviousState=state==='notebook'?'play':state;closeArtViewer();closeNotebook(false);keys.clear();hold=0;stairHold=0;dragging=false;previousPointer=null;state='developer-map';document.exitPointerLock?.();
+    mapPreviousState=state==='notebook'?'play':state;closeArtViewer();closeNotebook(false);keys.clear();hold=0;stairHold=0;dragging=false;previousPointer=null;state='developer-map';mouseCapture.release();
    }else if(state==='developer-map'){
-    state=mapPreviousState;keys.clear();if(state==='play'){canvas.focus();lock();}
+    keys.clear();if(mapPreviousState==='play')resumeWithMouse(()=>{state='play';});else state=mapPreviousState;
    }
   }});
   await loading.step(97,'Drawing the first view…');
@@ -298,14 +312,38 @@ function randomizeEnemySpawns(){
   e.spawn=choices[Math.floor(Math.random()*choices.length)]||e.spawn;placed.push(e.spawn);
  }
 }
-function resetPositions(){outsideWalker?.resetJump();indoorJump?.reset();spotted=false;Object.assign(player,{floor:0,y:0,stair:null,outside:false});lastDoor=null;if(torch)scene.add(torch,torchTarget);showFloor();stairHold=0;stairLatch=false;mapRefresh=0;lastStep=0;lastPulse=0;camera.position.y=1.65;player.x=layout.spawn.x*layout.cellSize;player.z=layout.spawn.z*layout.cellSize;yaw=layout.spawn.yaw??0;pitch=0;enemies.forEach(e=>{Object.assign(e,{...e.spawn,y:0,stair:null,path:[],memory:0,rethink:0,route:0,target:null});e.mesh.position.set(e.x,0,e.z);e.mesh.visible=true;if(e.type===1)resetSecurityGuard(e.mesh);});}
+function resetPositions(){outsideWalker?.resetJump();indoorJump?.reset();spotted=false;Object.assign(player,{floor:0,y:0,stair:null,outside:false});lastDoor=null;if(torch)scene.add(torch,torchTarget);showFloor();stairHold=0;stairLatch=false;mapRefresh=0;lastStep=0;lastPulse=0;camera.position.y=1.65;player.x=layout.spawn.x*layout.cellSize;player.z=layout.spawn.z*layout.cellSize;yaw=layout.spawn.yaw??0;pitch=0;enemies.forEach(e=>{Object.assign(e,{...e.spawn,y:0,stair:null,outside:false,path:[],memory:0,rethink:0,route:0,target:null});resetEnemyRoomSearch(e);e.mesh.position.set(e.x,0,e.z);e.mesh.visible=true;if(e.type===1)resetSecurityGuard(e.mesh);});}
 function uiPlaying(value){document.body.classList.toggle('playing',value);$('menu').hidden=value;$('location').hidden=value;$('hud').hidden=!value;$('pause').hidden=!value;$('touch').hidden=!value||!touch;}
-function lock(){if(!touch&&canvas.requestPointerLock){try{const result=canvas.requestPointerLock();result?.catch(()=>{});}catch{}}}
+function lock(){mouseCapture.request(()=>{},()=>pause());}
+function resumeWithMouse(continuePlay){
+ const suspended=state;
+ mouseCapture.request(()=>{
+  if(state!==suspended)return;
+  keys.clear();dragging=false;previousPointer=null;continuePlay();canvas.focus();clock.reset();
+ },()=>{
+  if(state!==suspended)return;
+  if(state!=='captured'){closeNotebook(false);$('instructions').hidden=true;state='play';uiPlaying(true);pause();}
+  const message='Click the resume button to capture the mouse and continue.';
+  if(!$('resultBody').textContent.includes(message))$('resultBody').textContent+='\n\n'+message;
+  $('resume').focus();
+ });
+}
 function start(){
  if(!ready||state==='arrival')return;
+ mouseCapture.release();
  escapeCutscene.reset();closeArtViewer();closeNotebook(false);
  if(furnitureFloors.length){furnishAsylum(floors,{seed:Math.floor(Math.random()*4294967296)});furnitureFloors.forEach(f=>f.update());}
- randomizeEnemySpawns();resetPositions();notebook.reset();notebookReadRevision=0;observeNotebook();
+ escapeWorld?.dispose();escapeWorld=null;
+ notebook.reset();
+ if(modern()){
+  const configured=new URLSearchParams(location.search).get('seed');
+  escapeProgress=createEscapeProgress({seed:configured!==null&&/^\d+$/.test(configured)?Number(configured)>>>0:Math.floor(Math.random()*4294967296),journal:notebook,floors});
+  escapeWorld=createEscapeWorld(THREE,floors,floorGroups,escapeProgress,{reducedMotion:landingReducedMotion});
+ }
+ recoveryRemaining=0;enemyReleaseAt=5;messageUntil=0;interactionMessage='';outdoorGuardActive=false;outdoorRoute=[];
+ $('resume').disabled=false;$('resume').textContent='RESUME ↗';
+ for(const e of enemies)scene.add(e.mesh);
+ randomizeEnemySpawns();resetPositions();notebookReadRevision=0;observeNotebook();
  elapsed=0;stamina=1;hold=0;exhausted=false;crouch=false;sprint=false;footPhase=0;dragging=false;previousPointer=null;keys.clear();
  state='arrival';torch.visible=true;uiPlaying(true);
  $('hud').hidden=true;$('pause').hidden=true;$('touch').hidden=true;$('instructions').hidden=true;$('result').hidden=true;$('floorMap').hidden=true;
@@ -315,22 +353,69 @@ function start(){
  // frame must count only time since the camera sequence actually started.
  clock.reset();
 }
-function pause(){if(state!=='play')return;closeArtViewer();state='paused';keys.clear();document.exitPointerLock?.();$('resultTag').textContent='TAKE A MOMENT';$('resultTitle').textContent='Hold your breath.';$('resultBody').textContent='The building will wait. Resume when you’re ready.';$('resume').hidden=false;$('resultExplore').hidden=true;$('resultIntro').hidden=false;$('result').classList.toggle('pause-menu',true);$('retry').textContent='RESTART';$('result').hidden=false;}
-function finish(won,who){const outcome=won?null:captureOutcome(previousDiagnosis);if(outcome)previousDiagnosis=outcome.diagnosis;closeArtViewer();closeNotebook(false);state=won?'cutscene':'lost';keys.clear();document.exitPointerLock?.();$('resultTag').textContent=won?'OUTSIDE. AT LAST.':'THE BUILDING KEPT YOU';$('resultTitle').textContent=won?'You made it out.':"You've been captured";$('resultBody').textContent=won?`You escaped through ${who.toLowerCase()} in ${elapsed.toFixed(1)} seconds. ${floors.reduce((count,floor)=>count+floor.exits.length,0)-1} other routes are waiting.`:outcome.text;$('resume').hidden=true;$('resultExplore').hidden=!won;$('resultIntro').hidden=true;$('result').classList.toggle('pause-menu',false);$('retry').textContent='TRY ANOTHER ROUTE ↗';$('result').hidden=won;$('interact').hidden=true;
+function pause(){if(state!=='play')return;closeArtViewer();state='paused';keys.clear();dragging=false;previousPointer=null;mouseCapture.release();$('resultTag').textContent='TAKE A MOMENT';$('resultTitle').textContent='Hold your breath.';$('resultBody').textContent='The building will wait. Resume when you’re ready.';$('resume').hidden=false;$('resultExplore').hidden=true;$('resultIntro').hidden=false;$('result').classList.toggle('pause-menu',true);$('retry').textContent='RESTART';$('result').hidden=false;}
+function finish(won,who){const outcome=won?null:captureOutcome(previousDiagnosis);if(outcome)previousDiagnosis=outcome.diagnosis;closeArtViewer();closeNotebook(false);state=won?'cutscene':'lost';keys.clear();mouseCapture.release();$('resultTag').textContent=won?'OUTSIDE. AT LAST.':'THE BUILDING KEPT YOU';$('resultTitle').textContent=won?'You made it out.':"You've been captured";$('resultBody').textContent=won?(modern()?`You reached the radio mast beyond the asylum grounds in ${elapsed.toFixed(1)} seconds, after ${escapeProgress.run.captures} captures.`:`You escaped through ${who.toLowerCase()} in ${elapsed.toFixed(1)} seconds. ${floors.reduce((count,floor)=>count+floor.exits.length,0)-1} other routes are waiting.`):(modern()?`After ${CAPTURE_LIMIT} captures, your escape attempt ends.\n\n`:'')+outcome.text;$('resume').hidden=true;$('resultExplore').hidden=!won;$('resultIntro').hidden=true;$('result').classList.toggle('pause-menu',false);$('retry').textContent='TRY ANOTHER ROUTE ↗';$('result').hidden=won;$('interact').hidden=true;
  if(won){$('hud').hidden=true;$('touch').hidden=true;$('pause').hidden=true;escapeCutscene.start();}
 }
-function resume(){state='play';$('result').hidden=true;$('instructions').hidden=true;lock();}
+function resume(){if(state==='captured'){resumeCapture();return;}resumeWithMouse(()=>{state='play';$('result').hidden=true;$('instructions').hidden=true;});}
+function caught(who){
+ if(!escapeProgress){finish(false,who);return;}
+ const consequence=escapeProgress.capture();
+ if(consequence.terminal){finish(false,who);return;}
+ closeArtViewer();closeNotebook(false);keys.clear();hold=0;stairHold=0;stairLatch=false;dragging=false;previousPointer=null;
+ messageUntil=0;interactionMessage='';
+ outdoorGuardActive=false;outdoorRoute=[];for(const e of enemies)scene.add(e.mesh);
+ randomizeEnemySpawns();resetPositions();
+ const position=escapeWorld.anchor(consequence.floor,consequence.room);
+ Object.assign(player,{x:position.x,z:position.z,floor:consequence.floor,y:floors[consequence.floor].elevation,stair:null,outside:false});
+ // Relocation may put the player near a patrol's old pose. Keep recovery safe.
+ const safe=floors[0].safeSpawns.filter(p=>player.floor!==0||Math.hypot(p.x-player.x,p.z-player.z)>18);
+ enemies.forEach((e,i)=>{const spawn=safe[(i*17+consequence.count*7)%safe.length]??e.spawn;Object.assign(e,{...spawn,y:0,floor:0,path:[],target:null,memory:0,route:consequence.count*3,rethink:0});e.mesh.position.set(e.x,0,e.z);});
+ recoveryRemaining=consequence.delay;enemyReleaseAt=elapsed+10;escapeWorld.sync();showFloor();observeNotebook();drawMap();camera.position.set(player.x,player.y+1.65,player.z);yaw=0;pitch=0;
+ state='captured';mouseCapture.release();$('interact').hidden=true;
+ $('hud').hidden=true;$('touch').hidden=true;$('pause').hidden=true;
+ $('resultTag').textContent=`CAPTURE ${consequence.count} OF ${CAPTURE_LIMIT}`;$('resultTitle').textContent=consequence.count===1?'Returned to Reception.':'Under observation.';
+ $('resultBody').textContent=`${consequence.count===1?'You are brought back to the admissions room beside Reception. Security changes its patrol.':'You are moved to a padded cell in the basement for a brief observation period.'}\n\n${escapeProgress.run.confiscated.size?'Your keys are in the property tray beside Reception.':'The attendant checks your belongings.'} Your notebook and discoveries remain. Opened stair grilles stay released.\n\nA third capture ends this attempt.`;
+ $('result').classList.toggle('pause-menu',true);$('result').hidden=false;$('resultExplore').hidden=true;$('resultIntro').hidden=true;$('retry').textContent='RESTART';$('resume').hidden=false;$('resume').disabled=recoveryRemaining>0;$('resume').textContent=recoveryRemaining>0?`OBSERVATION · ${Math.ceil(recoveryRemaining)}s`:'CONTINUE ESCAPE ↗';$('result').tabIndex=-1;(recoveryRemaining>0?$('result'):$('resume')).focus();
+}
+function resumeCapture(){if(recoveryRemaining>0)return;resumeWithMouse(()=>{state='play';$('result').hidden=true;uiPlaying(true);});}
+function announce(text){interactionMessage=text;messageUntil=elapsed+5;updateNotebookBadge();}
+function syncEscapeWorld(){
+ escapeWorld.sync();
+ for(const gate of escapeWorld.gates){const id='escape:gate-map:'+gate.id,prior=notebook.entries.find(e=>e.id===id);if(prior&&escapeProgress.run.opened.has(gate.id))notebook.recordEvidence({...prior,text:'This upper stair grille has been released.',mapLabel:'Released'});}
+}
+function updateOutdoorGuard(dt){
+ const guard=enemies.find(e=>e.type===1);if(!guard)return;
+ if(!outdoorGuardActive){
+  // A patrol emerges onto a clear stretch of the grounds, away from the door.
+  const candidates=[{x:-80,z:12},{x:80,z:24},{x:-80,z:-32},{x:75,z:0}].filter(p=>outsideWalker.clear(p.x,p.z,0)&&Math.hypot(p.x-player.x,p.z-player.z)>12);
+  const spawn=candidates.sort((a,b)=>Math.hypot(a.x-player.x,a.z-player.z)-Math.hypot(b.x-player.x,b.z-player.z))[0];
+  if(!spawn)return;
+  Object.assign(guard,{...spawn,y:0,outside:true,path:[],memory:0});resetEnemyRoomSearch(guard);exterior.scene.add(guard.mesh);outdoorGuardActive=true;outdoorRethink=0;outdoorRoute=[];
+ }
+ guard.mesh.visible=true;if(elapsed<enemyReleaseAt)return;
+ const distance=Math.hypot(guard.x-player.x,guard.z-player.z),line=outdoorSight(guard,player),seen=distance<(crouch?10:27)&&line;
+ if(seen){spotted=true;guard.memory=6;guard.target={...player};}else guard.memory=Math.max(0,guard.memory-dt);
+ outdoorRethink-=dt;
+ if(outdoorRethink<=0){outdoorRethink=1.4;const target=guard.memory?guard.target:outdoorRoute.length?null:[{x:-80,z:12},{x:-80,z:-42},{x:-74,z:-82}][guard.route++%3];if(target)outdoorRoute=outdoorPath(outsideWalker,guard,target);}
+ const target=outdoorRoute[0];if(target){const dx=target.x-guard.x,dz=target.z-guard.z,d=Math.hypot(dx,dz),step=Math.min(d,dt*(guard.memory?3.6:2.2));const x=guard.x,z=guard.z;outsideWalker.update(guard,dx/(d||1)*step,dz/(d||1)*step,dt,{jump:false});guard.mesh.rotation.y=Math.atan2(dx,dz);updateSecurityGuard(guard.mesh,Math.hypot(guard.x-x,guard.z-z),dt);if(d<.2)outdoorRoute.shift();}
+ guard.mesh.position.set(guard.x,guard.y,guard.z);
+ if(distance<.85&&Math.abs(guard.y-player.y)<1&&line)caught(guard.name);
+}
+function outdoorSight(a,b){const distance=Math.hypot(b.x-a.x,b.z-a.z),count=Math.ceil(distance/.5);for(let i=1;i<count;i++)if(!outsideWalker.clear(a.x+(b.x-a.x)*i/count,a.z+(b.z-a.z)*i/count,Math.max(a.y??0,b.y??0)))return false;return true;}
 function showHelp(){if(state!=='play'&&state!=='paused')return;pause();dragging=false;previousPointer=null;$('result').hidden=true;$('instructions').hidden=false;$('closeHelp').focus();}
 function outsideDoor(){
  const candidates=floors.flatMap((f,floor)=>f.exits.map(exit=>({exit,floor,d:Math.hypot(player.x-exit.destination[0],player.z-exit.destination[2],player.y-exit.destination[1])})));
  candidates.sort((a,b)=>a.d-b.d);return candidates[0]?.d<1.6?{...candidates[0].exit,floor:candidates[0].floor}:null;
 }
 function useDoor(exit){
+ if(escapeProgress){const attempt=escapeProgress.door(exit,{returning:player.outside});if(!attempt.allowed){notebook.recordEvidence({id:`door:${player.floor}:${exit.id}`,title:exit.name,view:`floor:${player.floor}`,text:attempt.text,source:'Tested outside door',locked:true});announce(attempt.text);return false;}}
  outsideWalker?.resetJump();indoorJump?.reset();
  const doorFloor=exit.floor??player.floor;notebook.recordDoor(exit,doorFloor,{used:true});
  if(player.outside){Object.assign(player,{...exit.inside,floor:exit.floor,y:floors[exit.floor].elevation,stair:null,outside:false});const {dx,dz}=exitDirection(exit);yaw=Math.atan2(dx,dz);scene.add(torch,torchTarget);}
  else {lastDoor=exit;const [x,y,z]=exit.destination;Object.assign(player,{x,y,z,stair:null,outside:true});const {dx,dz}=exitDirection(exit,{outside:true});yaw=Math.atan2(-dx,-dz);exterior.scene.add(torch,torchTarget);}
- pitch=0;hold=0;spotted=false;camera.position.set(player.x,player.y+(crouch?1.1:1.65),player.z);camera.rotation.set(pitch,yaw,0);showFloor();observeNotebook();drawMap();enemies.forEach(e=>e.mesh.visible=!player.outside&&e.floor===player.floor);$('interact').hidden=true;
+ if(escapeProgress&&player.outside){enemyReleaseAt=Math.max(enemyReleaseAt,elapsed+5);}else if(outdoorGuardActive){const guard=enemies.find(e=>e.type===1);scene.add(guard.mesh);Object.assign(guard,{...guard.spawn,outside:false,y:0,path:[],memory:0,target:null});guard.mesh.position.set(guard.x,0,guard.z);resetSecurityGuard(guard.mesh);outdoorGuardActive=false;}
+ pitch=0;hold=0;spotted=false;camera.position.set(player.x,player.y+(crouch?1.1:1.65),player.z);camera.rotation.set(pitch,yaw,0);showFloor();observeNotebook();drawMap();enemies.forEach(e=>e.mesh.visible=!player.outside&&e.floor===player.floor);$('interact').hidden=true;return true;
 }
 function beep(hz,length,volume){if(!audioCtx||!audioOn)return;const t=audioCtx.currentTime,o=audioCtx.createOscillator(),g=audioCtx.createGain();o.type='sine';o.frequency.setValueAtTime(hz,t);o.frequency.exponentialRampToValueAtTime(hz*.5,t+length);g.gain.setValueAtTime(volume,t);g.gain.exponentialRampToValueAtTime(.001,t+length);o.connect(g);g.connect(audioCtx.destination);o.start(t);o.stop(t+length);}
 function update(dt,interactionDt=dt){
@@ -347,36 +432,45 @@ function update(dt,interactionDt=dt){
  footPhase+=dt*(moving?(sprint?14:9):0);camera.position.set(player.x,THREE.MathUtils.lerp(camera.position.y,(modern()?player.y:floorHeight(player))+(crouch?1.1:1.65),Math.min(1,dt*12))+(moving?Math.sin(footPhase)*.018:0),player.z);camera.rotation.set(pitch,yaw,0);
  if(moving&&!crouch&&elapsed-lastStep>(sprint?.30:.48)){beep(95,.11,sprint?.08:.035);lastStep=elapsed;}
  let nearest=99;
- if(keys.has('KeyE')||player.outside){enemies.forEach(e=>e.mesh.visible=!player.outside&&e.floor===player.floor);}
+ if(player.outside){enemies.forEach(e=>e.mesh.visible=false);updateOutdoorGuard(dt);}
+ else if(keys.has('KeyE')&&!modern()){enemies.forEach(e=>e.mesh.visible=e.floor===player.floor);}
  else for(const e of enemies){
-  const sameFloor=e.floor===player.floor,enemyLayout=floors[e.floor];let distance=Math.hypot(e.x-player.x,e.z-player.z);e.mesh.visible=sameFloor;if(sameFloor)nearest=Math.min(nearest,distance);if(elapsed<5)continue;
+  const sameFloor=e.floor===player.floor,enemyLayout=floors[e.floor];let distance=Math.hypot(e.x-player.x,e.z-player.z);e.mesh.visible=sameFloor;if(sameFloor)nearest=Math.min(nearest,distance);if(elapsed<enemyReleaseAt)continue;
   const seen=sameFloor&&distance<(crouch?8:e.type===1?22:16)&&visible(enemyLayout,e,player);
   if(seen)spotted=true;
-  if(seen||e.type===2){e.target={...player};e.memory=5;}else e.memory=Math.max(0,e.memory-dt);
-  e.rethink-=dt;if(e.rethink<=0&&!e.stair){e.rethink=.45;if(e.memory<=0&&(!e.path.length||Math.hypot(e.x-e.target?.x,e.z-e.target?.z)<1)){const routes=enemyLayout.patrol,r=routes[e.route++%routes.length];e.target={x:r.x*enemyLayout.cellSize,z:r.z*enemyLayout.cellSize,floor:e.floor};}if(e.target)e.path=routeBetweenFloors(floors,e,e.target);}
-  let speed=e.type===1?(e.memory?3.85:2.4):2.2;
+  e.rethink-=dt;const searching=updateEnemyRoomSearch(floors,e,player,dt);
+  if(!searching){
+   if(seen||e.type===2){e.target={...player};e.memory=5;}else e.memory=Math.max(0,e.memory-dt);
+   if(e.rethink<=0&&!e.stair){e.rethink=.45;if(e.memory<=0&&(!e.path.length||Math.hypot(e.x-e.target?.x,e.z-e.target?.z)<1)){const routes=enemyLayout.patrol,r=routes[e.route++%routes.length];e.target={x:r.x*enemyLayout.cellSize,z:r.z*enemyLayout.cellSize,floor:e.floor};}if(e.target)e.path=routeBetweenFloors(floors,e,e.target);}
+  }else e.rethink=.45;
+  let speed=searching&&e.roomSearch.phase==='wait'?0:e.type===1?(e.memory?3.85:2.4):2.2;
   if(sameFloor&&e.type===2&&torch.visible&&distance<23&&visible(layout,player,e)){camera.getWorldDirection(tmp);const dot=(tmp.x*(e.x-player.x)+tmp.z*(e.z-player.z))/(distance||1);if(dot>.88)speed=.55;}
   const oldX=e.x,oldZ=e.z,oldFloor=e.floor;
   const target=e.path[0];if(modern()&&target){const vx=target.x-e.x,vz=target.z-e.z,d=Math.hypot(vx,vz),step=Math.min(speed*dt,d);if(d>.001){moveAsylumActor(floors,e,vx/d*step,vz/d*step);e.mesh.rotation.y=Math.atan2(vx,vz);}if(d<.1&&Math.abs(e.y-target.y)<.4)e.path.shift();}
   else if(target&&target.floor!==e.floor){const stair=nearStair(floors,e);if(changeFloor(floors,e,stair))e.path.shift();else e.path=[];}else if(target){const vx=target.x-e.x,vz=target.z-e.z,d=Math.hypot(vx,vz),step=Math.min(speed*dt,d);if(d>.001){e.x+=vx/d*step;e.z+=vz/d*step;e.mesh.rotation.y=Math.atan2(vx,vz);}if(d<.08&&e.path.length)e.path.shift();}
   if(e.type===1)updateSecurityGuard(e.mesh,e.floor===oldFloor?Math.hypot(e.x-oldX,e.z-oldZ):0,dt);
   e.mesh.position.set(e.x,(modern()?e.y:floorHeight(e))+(e.type===2?Math.sin(elapsed*2)*.11:0),e.z);e.mesh.visible=e.floor===player.floor;
-  if(e.floor===player.floor&&(!modern()||Math.abs(e.y-player.y)<1)&&Math.hypot(e.x-player.x,e.z-player.z)<.8){finish(false,e.name);break;}
+  if(e.floor===player.floor&&(!modern()||Math.abs(e.y-player.y)<1)&&Math.hypot(e.x-player.x,e.z-player.z)<.8&&visible(floors[e.floor],e,player)){caught(e.name);break;}
  }
  if(state!=='play')return;
  if(nearest<15&&elapsed-lastPulse>THREE.MathUtils.mapLinear(Math.min(nearest,15),0,15,.35,1.2)){beep(52,.18,.1*(1-nearest/18));lastPulse=elapsed;}
  if(spotted&&enemies.every(e=>Math.hypot(e.x-player.x,e.z-player.z,(e.floor-player.floor)*FLOOR_HEIGHT)>=SPOTTED_CLEAR_DISTANCE))spotted=false;
- $('warning').textContent=elapsed<5?'YOU HAVE A FIVE-SECOND HEAD START':spotted?"You've been spotted":nearest<4?'SOMEONE IS VERY CLOSE':nearest<10?'YOU ARE NOT ALONE':'';
+ $('warning').textContent=elapsed<messageUntil?interactionMessage:elapsed<enemyReleaseAt?(escapeProgress?.run.captures?'A BRIEF CHANCE TO RECOVER':'YOU HAVE A FIVE-SECOND HEAD START'):spotted?"You've been spotted":nearest<4?'SOMEONE IS VERY CLOSE':nearest<10?'YOU ARE NOT ALONE':'';
 
-  const stair=modern()?null:nearStair(floors,player),exit=player.outside?outsideDoor():nearExit(layout,player),art=player.outside?null:nearbyArt();
+  const stair=modern()?null:nearStair(floors,player),exit=player.outside?outsideDoor():nearExit(layout,player),art=player.outside?null:nearbyArt(),clue=escapeWorld?.near(player),mast=escapeProgress?.canFinish(player);
  if(!keys.has('KeyE'))stairLatch=false;
-  $('interact').hidden=!stair&&!exit&&!art;
- if(modern()&&exit){
-  $('interact').querySelector('b').textContent=player.outside?'PRESS E TO GO INSIDE':'PRESS E TO GO OUTSIDE';$('exitName').textContent=exit.id+' · '+exit.name;$('exitFill').style.width='0%';
+  $('interact').hidden=!stair&&!exit&&!art&&!clue&&!mast;
+ if(mast){
+  $('interact').querySelector('b').textContent='PRESS E · REACH THE MAST';$('exitName').textContent='Beyond the asylum grounds';$('exitFill').style.width='0%';if(keys.has('KeyE')&&!stairLatch)finish(true,'the radio mast');
+ }else if(clue){
+  $('interact').querySelector('b').textContent=clue.id==='staff-key'?'PRESS E TO TAKE':clue.id==='reclaim'?'PRESS E TO RECLAIM':clue.gate||clue.id==='release'?'PRESS E TO USE':clue.id==='plan'&&clue.key.visible?'PRESS E TO TAKE BRASS KEY':'PRESS E TO INSPECT';$('exitName').textContent=clue.title;$('exitFill').style.width='0%';
+  if(keys.has('KeyE')&&!stairLatch){announce(clue.gate?(escapeProgress.openStair(clue.gate.id)?`Gate open. Find the brass key in second-floor room ${escapeProgress.roomNumber(3,escapeProgress.run.office)}.`:'Locked. Its plate reads “Staff stair key”.'):escapeProgress.interact(clue.id,{view:`floor:${player.floor}`}));syncEscapeWorld();stairLatch=true;}
+ }else if(modern()&&exit){
+  $('interact').querySelector('b').textContent=player.outside?'PRESS E TO GO INSIDE':'PRESS E TO USE DOOR';$('exitName').textContent=exit.id+' · '+exit.name;$('exitFill').style.width='0%';
   if(keys.has('KeyE')&&!stairLatch){useDoor(exit);stairLatch=true;}
  }else if(stair){
   hold=0;$('interact').querySelector('b').textContent=player.floor?'HOLD E TO GO DOWN':'HOLD E TO GO UP';
-  $('exitName').textContent=stair.name;stairHold=keys.has('KeyE')&&!stairLatch?stairHold+interactionDt:0;
+  $('exitName').textContent=asylumDisplayName(stair.name);stairHold=keys.has('KeyE')&&!stairLatch?stairHold+interactionDt:0;
   $('exitFill').style.width=Math.min(100,stairHold/INTERACTION_HOLD_SECONDS*100)+'%';
   if(stairHold>=INTERACTION_HOLD_SECONDS&&changeFloor(floors,player,stair)){
    stairHold=0;stairLatch=true;showFloor();camera.position.y=player.floor*FLOOR_HEIGHT+(crouch?1.1:1.65);
@@ -391,12 +485,15 @@ function update(dt,interactionDt=dt){
   if(exit){$('interact').querySelector('b').textContent='HOLD E TO ESCAPE';$('exitName').textContent=exit.name;hold=keys.has('KeyE')&&!stairLatch?hold+interactionDt:0;$('exitFill').style.width=Math.min(100,hold/INTERACTION_HOLD_SECONDS*100)+'%';if(hold>=INTERACTION_HOLD_SECONDS)finish(true,exit.name);}else hold=0;
  }
  $('timer').textContent=`${String(Math.floor(elapsed/60)).padStart(2,'0')}:${String(Math.floor(elapsed%60)).padStart(2,'0')}`;$('staminaFill').style.width=stamina*100+'%';$('stance').textContent=sprint?'SPRINTING · LOUD':crouch?'CROUCHING · QUIET':'STAMINA';
- if(modern()&&player.outside&&player.z>70&&Math.abs(player.x)<90){finish(true,lastDoor?.name??'the main entrance');return;}
+ if(escapeProgress&&player.outside){escapeProgress.observeBoundary(player);if(Math.hypot(player.x-MAST.x,player.z-MAST.z)<18)escapeProgress.discover('mast',{view:'outside'});}
  mapRefresh-=dt;if(mapRefresh<=0){mapRefresh=.12;observeNotebook();drawMap();}
+ escapeWorld?.update(elapsed);updateObjective();
 }
 function observeNotebook(){
  notebook.explore(player);
- if(!player.outside){const exit=nearExit(layout,player);if(exit)notebook.recordDoor(exit,player.floor);}
+ if(!player.outside){const exit=nearExit(layout,player);if(exit&&!escapeProgress)notebook.recordDoor(exit,player.floor);
+  if(escapeProgress){const clue=escapeWorld.near(player);if(clue?.gate){escapeProgress.discover('gate',{view:`floor:${player.floor}`});notebook.recordEvidence({id:'escape:gate-map:'+clue.gate.id,title:clue.gate.id+' · Staff stair grille',text:'I observed a locked grille on this upper stair.',view:`floor:${player.floor}`,mapPoint:{x:clue.gate.x,z:clue.gate.z},mapLabel:escapeProgress.run.opened.has(clue.gate.id)?'Released':'Staff only · locked',source:'Personal observation'});}if(exit){const key=`door:${player.floor}:${exit.id}`;if(!notebook.entries.some(n=>n.id===key))notebook.recordEvidence({id:key,title:exit.name,view:`floor:${player.floor}`,text:'I found this outside door. I have not tested its lock.',source:'Personal observation'});}for(const id of ['S3','S4']){const s=layout.stairs.find(s=>s.id===id);if(s&&Math.hypot(player.x-s.label[0],player.z-s.label[1])<3)escapeProgress.discover(id==='S3'?'west-stair':'east-stair');}}
+ }
  updateNotebookBadge();
 }
 function updateNotebookBadge(){
@@ -432,15 +529,15 @@ function renderNotebook(){
 function openNotebook(){
  if(state!=='play')return;
  observeNotebook();closeArtViewer();keys.clear();hold=0;stairHold=0;dragging=false;previousPointer=null;
- notebookFloor=notebookView(player);state='notebook';document.exitPointerLock?.();
+ notebookFloor=notebookView(player);state='notebook';mouseCapture.release();
  $('floorMap').hidden=false;$('touch').hidden=true;$('pause').hidden=true;$('hud').hidden=true;
  notebookReadRevision=notebook.revision;updateNotebookBadge();renderNotebook();drawMap();$('closeNotebook').focus();
 }
 function closeNotebook(resumePlay=true){
+ if(state==='notebook'&&resumePlay){resumeWithMouse(()=>{closeNotebook(false);state='play';uiPlaying(true);});return;}
  $('floorMap').hidden=true;
  if(state!=='notebook')return;
  keys.clear();dragging=false;previousPointer=null;
- if(resumePlay){state='play';uiPlaying(true);canvas.focus();lock();}
 }
 function notebookKeydown(event){
  if(!event.repeat&&['Escape','KeyP','KeyN','KeyJ','KeyM'].includes(event.code)){event.preventDefault();closeNotebook();return;}
@@ -452,10 +549,10 @@ function notebookKeydown(event){
  }
 }
 function drawMapCanvas(context){
- drawNotebookMap(context,notebook,notebookView(player),player,enemies,yaw,{revealAll:!!developer?.mapRevealed});
+ drawNotebookMap(context,notebook,notebookView(player),player,enemies,yaw,{revealAll:!!developer?.mapRevealed,outsideVisible:outdoorSight});
 }
 function drawMap(){
- if(!$('floorMap').hidden)drawNotebookMap(mapContext,notebook,notebookFloor??notebookView(player),player,enemies,yaw,{revealAll:!!developer?.mapRevealed});
+ if(!$('floorMap').hidden)drawNotebookMap(mapContext,notebook,notebookFloor??notebookView(player),player,enemies,yaw,{revealAll:!!developer?.mapRevealed,outsideVisible:outdoorSight});
  drawMapCanvas(miniMapContext);
 }
 function renderAerialBackdrop(exterior){
@@ -468,6 +565,7 @@ function renderAerialBackdrop(exterior){
  if(fog)fog.density=fogDensity;
 }
 function animate(){requestAnimationFrame(animate);clock.update();const frameDt=clock.getDelta(),dt=Math.min(frameDt,.04);
+ if(state==='captured'&&!document.hidden&&recoveryRemaining>0){recoveryRemaining=Math.max(0,recoveryRemaining-Math.min(frameDt,.25));$('resume').disabled=recoveryRemaining>0;$('resume').textContent=recoveryRemaining>0?`OBSERVATION · ${Math.ceil(recoveryRemaining)}s`:'CONTINUE ESCAPE ↗';}
  if(document.hidden)return;
  if(['menu','arrival','cutscene','won'].includes(state)||player.outside)exterior.lighting?.update(frameDt);
  renderer.toneMappingExposure=['menu','cutscene','won'].includes(state)||(state==='arrival'&&!arrivalCutscene.inside)?1.15:1.25;
@@ -497,8 +595,14 @@ function toggleMap(){if(state==='notebook')closeNotebook();else openNotebook();}
 $('notebookButton').onclick=toggleMap;$('closeNotebook').onclick=()=>closeNotebook();
 addEventListener('keydown',e=>{
  if(e.defaultPrevented)return;
+ if(!e.repeat&&e.code==='Escape'&&mouseCapture.pending){e.preventDefault();mouseCapture.release();return;}
  if(state==='notebook'){notebookKeydown(e);return;}
  if(state==='cutscene'){if(['Escape','Space','Enter'].includes(e.code)){e.preventDefault();escapeCutscene.skip();}return;}
+ if(state==='captured'){
+  if(e.code==='Tab'){e.preventDefault();const buttons=[$('retry'),$('resume')].filter(b=>!b.disabled),index=buttons.indexOf(document.activeElement);buttons[(index+(e.shiftKey?-1:1)+buttons.length)%buttons.length]?.focus();}
+  if(!e.repeat&&['Escape','KeyP'].includes(e.code)){e.preventDefault();resumeCapture();}
+  return;
+ }
  if(!$('instructions').hidden){
   if(!e.repeat&&['KeyH','Escape','KeyP'].includes(e.code)){e.preventDefault();resume();}
   return;
@@ -512,7 +616,7 @@ addEventListener('keydown',e=>{
  if(['Tab','KeyM','KeyN','KeyJ'].includes(e.code)){e.preventDefault();openNotebook();return;}
  keys.add(e.code);if(e.code==='KeyF')torch.visible=!torch.visible;
 });
- addEventListener('keyup',e=>{keys.delete(e.code);if(e.code==='KeyE'){stairLatch=false;closeArtViewer();}});addEventListener('blur',()=>{keys.clear();closeArtViewer();pause();});document.addEventListener('visibilitychange',()=>{clock?.getDelta();if(document.hidden)pause();});document.addEventListener('pointerlockchange',()=>{if(!document.pointerLockElement&&state==='play'&&!touch)pause();});
+ addEventListener('keyup',e=>{keys.delete(e.code);if(e.code==='KeyE'){stairLatch=false;closeArtViewer();}});addEventListener('blur',()=>{keys.clear();closeArtViewer();mouseCapture.release();pause();});document.addEventListener('visibilitychange',()=>{clock?.getDelta();if(document.hidden){mouseCapture.release();pause();}});
 function look(dx,dy){const s=Number($('sensitivity').value)*.0018;yaw-=dx*s;pitch=THREE.MathUtils.clamp(pitch-dy*s,-1.3,1.3);}
 addEventListener('mousemove',e=>{if(state==='play'&&document.pointerLockElement===canvas)look(e.movementX,e.movementY);});
 canvas.addEventListener('pointerdown',e=>{if(state!=='play')return;dragging=true;previousPointer=[e.clientX,e.clientY];canvas.setPointerCapture(e.pointerId);});canvas.addEventListener('pointermove',e=>{if(dragging&&state==='play'&&document.pointerLockElement!==canvas){look(e.clientX-previousPointer[0],e.clientY-previousPointer[1]);previousPointer=[e.clientX,e.clientY];}});canvas.addEventListener('pointerup',()=>dragging=false);canvas.addEventListener('pointercancel',()=>dragging=false);

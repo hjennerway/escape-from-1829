@@ -1,4 +1,4 @@
-import {createInteriorMaterials} from './interior-materials.mjs';
+import {createInteriorMaterials,INTERIOR_BRICK_COURSE_HEIGHT} from './interior-materials.mjs';
 import {exitDirection} from './escape-routes.mjs';
 import {buildAsylumArchitecture,asylumWallSurfaces} from './asylum-architecture.mjs';
 
@@ -81,9 +81,10 @@ export function buildArchitecture(THREE,scene,layout){
         2*(radius+thickness/2)*Math.tan(step/2)-.008,thickness,depth,a-Math.PI/2,true);
     }
   }
+  const brickHeight=12*INTERIOR_BRICK_COURSE_HEIGHT;
   const finishWall=(place,u,bottom,top,width)=>{
-    if(bottom<1.52){const end=Math.min(top,1.52);if(end>bottom)place('Brick',u,(bottom+end)/2,0,width,end-bottom,.18);}
-    if(top>1.52){const start=Math.max(bottom,1.52);place('Plaster',u,(start+top)/2,0,width,top-start,.18);}
+    if(bottom<brickHeight){const end=Math.min(top,brickHeight);if(end>bottom)place('Brick',u,(bottom+end)/2,0,width,end-bottom,.18);}
+    if(top>brickHeight){const start=Math.max(bottom,brickHeight);place('Plaster',u,(start+top)/2,0,width,top-start,.18);}
   };
   for(let z=0;z<layout.height;z++)for(let x=0;x<layout.width;x++)if(open(x,z)){
     const px=x*s,pz=z*s;

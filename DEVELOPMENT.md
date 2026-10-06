@@ -1,3 +1,184 @@
+## Front entrance buried-sill flicker (6 October 2026)
+
+The older generic main-range sash at x=7 extended beyond Reception's side.
+Its sill ended on the replacement recessed facade at z=17.3, producing the
+pale flickering lines in the owner's red-circled screenshot. Generic front
+sashes behind Reception are now omitted, as they already were behind the
+stepped entrance ranges. The photographed Reception/entrance windows and
+existing masonry, courses, rear windows and exposed outer-range sashes retain
+their definitions. The source repair is in escape-exterior.mjs.
+
+test-front-entrance-flicker.mjs surveys 72 assembled-wall points at the former
+sill edges/centres and verifies the retained window schedule. It rejects the
+original competing surfaces and passes the repair. It is included in the
+standard and model suites. Entrance, exterior, front-corner, front-basement,
+modern-entrance, building-detail and interior walking checks pass.
+
+Hardware checks verify NVIDIA GeForce RTX 3090 Ti / Direct3D11. The focused
+browser check surveys 72 actual visible/batched wall points in each source
+and compiled scene, captures fourteen desktop/phone views without runtime or
+shader errors, and reproduces the original defect from the saved builder.
+Close and phone views are visually reviewed. Evidence, logs and the repeatable
+check-browser.mjs are in Browser/artifacts/front-entrance-flicker/. The owner's
+reference and modelling note are in Research/front-inside-corners/.
+
+The required npm test attempt stops at the previously documented facade-course
+count assertion, 23 versus 22. The compiled image comparison, exact draw counts,
+full detail and fallback checks pass. Two broader timeline attempts fall back
+to source after concurrent roof-model edits change the source fingerprint;
+the complete compiled suite is not reported as passing. The final local build,
+focused source/compiled recheck and manifest receipt are recorded separately
+in the evidence directory. Shared browser sources and local compiled aerial
+assets are updated; Unity, Blender and packaged exports are not regenerated.
+
+## West first-floor half-octagonal seating nook (6 October 2026)
+
+The empty bay beside doors 116/117 now contains two plain timber waiting
+benches and a newspaper stand, reusing the existing hall models. The benches
+use the communal hall's 75% dimensions and meet the north/west masonry faces.
+The stand faces into the bay from its eastern cheek. A separate WestBay
+furnishing area supplies the notebook name and fixed records to both Escape
+and Explore. Corridor, window and doorway clearances use the normal shared
+placement checks; collision and navigation are regenerated with furnishing.
+All 45 previous hall records retain their IDs, sizes and poses.
+
+test-hall-furnishings.mjs passes all 48 hall records across four seeds,
+52 walked furniture collisions, wall contacts, physical supports, corridor
+lanes, reachable area markers and notebook names. Its notebook expectation
+now checks visible area names, following the existing room-number correction.
+test-asylum-furniture.mjs, test-notebook.mjs and test-game.mjs also pass.
+npm run test:gpu verifies NVIDIA GeForce RTX 3090 Ti / Direct3D11.
+test-hall-furnishings-browser.mjs passes rendered sizes/transforms, twelve
+actual keyboard collision approaches, the east-corridor walk, identical
+Escape/Explore records and desktop/phone views without runtime/shader errors.
+Its geometry fixture now holds pursuers during movement checks, preventing
+random capture from replacing a collision result. HALL_ARTIFACT_DIR allows
+isolated capture output during concurrent work.
+
+Desktop bay approaches, close seating, phone and Explore views are visually
+reviewed. Evidence and the 45-record scope comparison are in
+Browser/artifacts/west-bay-nook/; the full hall receipt and images are in its
+halls/ subdirectory. Reproduce the dedicated views with
+node Browser/artifacts/west-bay-nook/check-browser.mjs. The first-floor
+furnished SVG/PNG is refreshed from the current shared layout, including
+the separate neighbouring-room work in progress.
+
+The required npm test attempt stops at the previously documented
+test-facade-courses.mjs:68 count assertion (23 courses versus 22); its log is
+Browser/artifacts/west-bay-nook/suite.log. This is not a complete suite pass.
+Only browser hall furnishings, checks, notes and review drawings change.
+The aerial compiler excludes these interior props and its source hash still
+matches the existing compiled manifest. Unity, Blender and packaged exports
+are not regenerated.
+
+## Rooms 116, 117 and 119 refurnished (6 October 2026)
+
+Player room 116 is first-floor R19; rooms 117/119 are R20/R22. Each ward
+now has fourteen fixed beds: the original four keep their IDs, positions,
+orientation and full model size, and ten additions extend the long-wall
+arrangements with feet towards the central aisle. Explicit first-floor
+`bedPositions` in both shared plans preserve the mixed original poses.
+New beds are fitted before storage and spare seating. Chairs and small seats
+cannot enter the full-width foot approaches, and adding beds does not increase
+the number of loose seats. Both wardrobes remain in each ward.
+
+Room 116 becomes a hand-sewing room with two timber worktables, four inward
+facing Windsor chairs, two sewing baskets, two folded-cloth stacks and one
+wardrobe. All eleven records remain fixed; cloth and baskets rest fully on
+their tables. The existing hall models and materials are reused. Escape,
+Explore and the notebook share the new purpose and furnishings. Ground-floor
+uses, room numbering, architecture, doors, windows and stairs are retained.
+
+Validation: test-rooms-116-119.mjs passes four seeds and 144 physically followed
+bed/workstation/room routes. The eight-seed furniture survey passes 976 room
+and exit routes, all door crossings, 3,504 furniture collision approaches,
+storage access and NPC navigation/spawn checks. Central dormitory, layout,
+room-door, door-label, notebook and room-finish regressions pass. Hardware
+checks verify NVIDIA GeForce RTX 3090 Ti / Direct3D11, all 28 rendered bed
+transforms/orientations, sewing furniture, actual keyboard movement through
+both aisles, Escape/Explore parity and desktop/portrait views without page
+or shader errors. The reviewed views are in Browser/artifacts/rooms-116-119/.
+Independent comparisons retain 602 previous furniture records elsewhere for
+each of seeds 1829 and 42, with identical walls, windows and door poses.
+
+The required npm test run stops at the previously recorded exterior course
+count in test-facade-courses.mjs:68 (23 versus 22). The focused room checks
+are available through npm run test:rooms-116-119 and included in npm test.
+The first-floor furnished SVG/PNG is refreshed. Only browser interior sources
+and review drawings are updated; these inputs are excluded from the aerial
+compiler and its source fingerprint remains current. Unity, Blender and
+packaged application exports are not regenerated.
+
+## Reception property tray bottom edge (6 October 2026)
+
+The brass rims overlapped the timber base by 0.0135 units, leaving coplanar
+outer faces that flickered along the bottom edge. Each rim now begins at the
+base's top surface. Its upper edge, tray footprint, desk placement and key
+positions retain their previous dimensions.
+
+The geometry regression in test-escape-progress.mjs fails against the original
+overlap and passes the corrected join across eight furnished seeds.
+test-escape-progress-browser.mjs passes both escape branches, key confiscation
+and reclaim, recovery/restart and desktop/touch interactions. Hardware
+validation uses NVIDIA GeForce RTX 3090 Ti / Direct3D11. Empty and populated
+trays are visually reviewed from the player position and three close angles,
+plus a populated phone view; the lower edges are clean, with no runtime or
+shader errors. Rerun node artifacts/property-tray-edge/check-browser.mjs from
+Browser; before/after captures and receipts are in that directory.
+
+The required npm test attempt stops at the previously documented
+test-facade-courses.mjs:68 assertion (23 courses versus 22); its log is
+Browser/artifacts/property-tray-edge/suite.log. Only the browser Escape runtime
+model, regression check and development notes change. These runtime props are
+outside the aerial compiler; Unity, Blender and packaged exports are not
+regenerated.
+
+## Supported Escape notices, keys and property tray (6 October 2026)
+
+Escape's seven freestanding interaction stands are replaced by supported
+fittings. Notices use clear interior wall runs or the existing table surfaces;
+desk papers reserve the front strip beyond loose books. The staff stair key
+hangs from a hook on a small timber rack, and the porter record has a separate
+brass key on its desk (or a hook if a wall fallback is needed). Both keys have
+open bows, stems and teeth. The basement release lever sits below its wall
+notice. Placement chooses reachable standing positions connected to each
+room's existing circulation, without adding aisle obstacles.
+
+The open property tray rests on the front-left of the reception desk, clear
+of its ledger, candles and bell. Its base and four raised rims contain only
+the actual confiscated keys. Taking/reclaiming keys removes their geometry
+and recovery glow; an empty rack no longer offers another take interaction.
+Names such as “Staff stair key” and “Property tray” appear in the existing HUD
+with the relevant take, inspect, use or reclaim action, without name-only
+world boards. All notices and available items have feathered warm additive
+halos, with no new lights or bloom pass. Restart disposes owned geometries,
+textures and materials once each.
+
+Validation: test-escape-progress.mjs passes all eight scenario combinations,
+56 furnished approaches across eight furniture seeds, physical key/tray
+structure and supported placements, collection/confiscation/reclaim visibility,
+existing grilles, recovery and route rules. Game, Notebook and Reception
+furniture checks pass. npm run test:gpu verifies NVIDIA GeForce RTX 3090 Ti /
+Direct3D11. test-escape-progress-browser.mjs passes both physically walked
+branches, both record offices/outside routes, capture/recovery/restart and
+desktop/touch HUD interactions without runtime or shader errors. Its fixture
+uses the actual doorway opening centres through their mouths, then walks to
+the exact fitting approaches, avoiding grid segments clipping parked leaves.
+
+All seven changed fittings and five phone views are captured with the torch
+off and visually reviewed. Rerun this focused review with
+node artifacts/objective-props/check-browser.mjs from Browser. Its captures
+and receipt are in Browser/artifacts/objective-props/; the full escape receipt
+is in Browser/artifacts/escape-chain/validation.json. The required npm test
+attempt stops at the existing test-facade-courses.mjs:68 count assertion,
+23 courses versus 22. This is not a complete suite pass.
+
+The supplied reference and modelling scope are in
+Research/escape-interior/README.md. Only browser Escape runtime props, HUD,
+relevant checks and notes change. Shared plans, Explore furniture, Unity,
+Blender and packaged exports are not regenerated. The compiled aerial
+manifest still matches its dependency fingerprint; it excludes these props.
+
 ## Shared indoor ward privies (5 October 2026)
 
 Converted ground/first R5, R16, R33 and R35 to eight shared washrooms: three
@@ -10716,3 +10897,353 @@ count assertion in test-facade-courses.mjs:68 (23 versus 22). Browser interior
 sources, checks and review drawings are updated. The current aerial source
 fingerprint still matches its compiled asset, so no aerial rebuild is needed.
 Unity, Blender and packaged exports are not regenerated.
+
+## Connected escape and capture recovery (6 October 2026)
+
+TODO items 1 and 2 are implemented in the current browser Asylum Escape. The
+dependency diagram, branches, discovery triggers and recovery rules are in
+`Browser/ESCAPE-DESIGN.md`. The old grid fixture retains its legacy loop for
+regression checks; the four-floor asylum uses the new scenario.
+
+The player can inspect a staff memorandum beside Reception, explore paired rear
+stairs, obtain a labelled stair key or operate the basement safety release,
+and physically walk into the restricted second-floor offices. S1 and S5 have
+visible iron grilles with matching movement/jump barriers; their release is
+permanent for that run. The basement release opens both, so either upstairs
+record wing remains reachable through the first floor. No clue reading is a
+mandatory invisible gate: the same information is legible on the actual notices
+and key tags. Notice boards have outward-facing print on each side so their
+lettering remains readable from either approach, including on the grilles.
+E operates the fittings, and ordinary held E no longer freezes
+pursuit. Artwork and Notebook reading retain their pause behavior.
+
+The upstairs porter record and attached brass key identify either D2 or D8 as
+the service entrance. Other outside doors can be found and tested, but are bolted
+for this Escape scenario. Stepping outside is progress; security patrols the
+grounds, uses the active collision model for routes and sight, and can capture
+the player there. Ground navigation caches are invalidated when the outside
+collision revision changes, including tree visibility changes. Guard movement
+cannot consume the player's jump state. Crossing the rear perimeter and using
+E at the mast starts the existing ten-second estate ending. The former front-path
+threshold cannot complete the game.
+
+The night backdrop uses 1916, which normally hides the modern mast. Escape adds
+a visible copy of its existing lattice model and a walkable footing. Its separate
+batches and cached transforms are prepared before invalidating exterior shadows
+and constructing outside collisions. This is a fictional escape landmark, not
+a historical claim about 1916. Aerial/Explore timeline inputs are unchanged.
+
+Per-run choices vary the staff-key room (R23/R25), upstairs record (R41/R49) and
+outside route (D2/D8), with all eight combinations solvable. `?seed=1829` fixes
+these scenario choices for debugging; an ordinary restart picks a fresh seed.
+Furniture retains its existing independent randomisation. Run reset clears
+keys, grilles, capture count, evidence and fog together.
+
+`escape-progress.mjs` separates observed knowledge from possessions. Facts and
+deductions appear only after their actual inspection, approach, use or traversal
+triggers. Deductions work in either discovery order. Tested doors evolve from
+untried to locked to used; observed upper grilles acquire natural map annotations.
+The grounds sketch now covers the mast/perimeter area, with fog preserved and
+nearby outdoor security shown only when visible. No objective arrow, separate
+quest log, stage checklist or undiscovered key marker is added.
+
+The first capture relocates the player to the admissions room beside Reception;
+the second relocates them to basement padded cell B5, with four seconds of
+observation before continuing. Both confiscate carried keys, change patrols,
+preserve elapsed gameplay time and all Notebook/fog knowledge, and provide ten
+seconds to recover after resuming. Opened grilles remain open. The property tray
+beside Reception and the original key sources prevent confiscation soft locks.
+The third capture ends the attempt with the existing random historical
+diagnosis/treatment screen, as requested. Recovery dialogs support keyboard
+focus, responsive scrolling and touch; suspended states require fresh movement
+input on return.
+
+Validation: `npm run test:gpu` verifies NVIDIA GeForce RTX 3090 Ti / Direct3D11.
+`test-escape-progress.mjs` passes 128 spread seeds, all eight combinations, both
+access methods, out-of-order evidence, capture at each dependency, retained
+knowledge, lost-key recovery, 56 furnished clue approaches across eight furnishing
+seeds, gate/jump barriers, interaction reach and navigation-cache invalidation.
+`test-escape-progress-browser.mjs` physically walks both access branches, both
+upper record wings and both outside routes to the visible mast. It verifies
+automatic outdoor capture, the three consequences, frozen Notebook/player/NPCs/
+timer, player/guard jump isolation, clean retry and actual touch clue/Notebook
+controls, with no page or shader errors. Final desktop/phone screenshots are
+visually reviewed in `Browser/artifacts/escape-chain/`.
+
+Existing game, Notebook, jump, outside movement, Explore interior, guard and
+developer checks pass. Hardware regressions also pass all 24 outside door
+round trips with explicit scenario access in the geometry fixture, continuous
+basement/ground/first stairs, furnished Library and F4 trips in Escape/Explore,
+real jump input, and desktop/touch Notebook reading. The geometry fixtures set
+their tested door access explicitly; they retain all physical assertions, while
+the new scenario test validates locks and branching. Run `npm run test:escape`
+for gameplay checks plus the new hardware browser scenario test.
+
+The required final `npm test` attempt stops at the existing independent
+`test-facade-courses.mjs:68` assertion, 23 courses versus 22. Its receipt is in
+`Browser/artifacts/escape-chain/full-suite.log`; this is not a complete-suite
+pass. The current aerial dependency fingerprint still matches the compiled
+manifest, so no aerial rebuild is required. Browser gameplay/runtime fittings,
+related checks, player instructions and these notes change. Shared modelling
+inputs, Unity, Blender and packaged desktop/Android exports are not regenerated.
+
+## Staff stair gates fitted to the stairs (6 October 2026)
+
+The owner's floating-grille reference is retained in
+`Research/escape-interior/stair-gate-floating-reference.png`. Escape's S1 and S5
+upper grilles now sit 0.08 units before their actual first risers, rather than
+halfway along the landing approach. Frames use the shared 1.3-unit stair width,
+with posts bedded into the landing on anchor plates and short rail returns
+meeting the existing handrails. Narrower barred leaves have three attached
+hinges, a latch, handle and smaller riveted notice plate. The frame height is
+2.35 units; the movement barrier follows the new location and height. Release
+clears the leaf while retaining the fixed posts and head. Key and basement
+release methods keep their existing gameplay behavior.
+
+`npm run test:gpu` verifies NVIDIA GeForce RTX 3090 Ti / Direct3D11 hardware
+rendering. `test-escape-progress.mjs` and `test-asylum-stairs.mjs` pass, including
+all eight scenarios, both access methods, locked movement/jump barriers and
+continuous stairs. `test-escape-progress-browser.mjs` passes both physically
+walked upper stair branches and the complete desktop/touch escape and recovery
+checks, with no page or shader errors. The gate capture harness also confirms
+all four posts meet the rendered landing slab at Y=4.202 and the fixed frames
+remain after release. Front, angled, released and phone views were reviewed in
+`Browser/artifacts/stair-gate/`, alongside its validation receipt.
+
+The required `npm test` attempt again stops at the pre-existing
+`test-facade-courses.mjs:68` assertion (23 courses versus 22). This is not a
+complete-suite pass. Only browser Escape fittings and their reference/validation
+notes change for this repair. Shared stair inputs and Explore geometry are
+unchanged; aerial compiled models, Unity, Blender and packaged exports were not
+regenerated.
+
+## Side-room searches for pursuers — 6 October 2026
+
+Security and the Deva ghost now step into a nearby side room when the walkable
+route to the player exceeds one local room's frontage. The threshold follows
+the actual room width along its corridor. Close encounters and sharing the same
+room retain pursuit; enemies on another floor continue their staircase routes.
+
+`Browser/dist/enemy-room-search.mjs` chooses a reachable, furnished destination
+inside a room with a physical doorway and beyond the corridor edge. Both NPCs
+walk there, then wait for six gameplay seconds. Moving past the doorway does
+not recall a committed search; entering the occupied room restores pursuit and
+can still cause capture. An eight-second cooldown allows normal pursuit between
+searches, and a timeout releases an obstructed entry. Notebook/pause states freeze
+the search timer. Retry, capture relocation and transfer to outdoor patrol clear
+room-search state. The existing head start, guard stride and ghost torch response
+remain active.
+
+`test-enemy-room-search.mjs` passes 32 guard/ghost cases across four floors and
+four furnishing seeds, including physical doorway traversal, corridor clearance,
+the six-second passing window, the one-room boundary, close/shared-room pursuit,
+cooldown, stairs, timeout and reset. `test-enemy-room-search-browser.mjs` passes
+the actual game loop with verified NVIDIA GeForce RTX 3090 Ti / Direct3D11:
+both NPCs enter R14, the player sprints past with ordinary game input without
+capture, and room expiry, occupied-room capture, Notebook freeze and retry reset
+work. Corridor and passing screenshots were visually checked, with no page or
+shader errors. Results are in `Browser/artifacts/enemy-room-search/`.
+
+The existing game, escape-progress, Notebook and guard checks also pass. The
+hardware `test-escape-progress-browser.mjs` regression passes both indoor
+branches, outdoor escape, all capture/recovery consequences and desktop/touch
+controls; its receipt is `Browser/artifacts/enemy-room-search/escape-regression.log`.
+`npm run test:pursuit` runs the focused logic and hardware browser checks; the
+new logic check is included in `npm test`. The required full-suite attempt still
+stops at the previously recorded `test-facade-courses.mjs:68` assertion (23
+courses versus 22); its log is `Browser/artifacts/enemy-room-search/full-suite.log`.
+This change updates browser gameplay and its tests only. It does not regenerate
+compiled models, Unity, Blender or packaged exports.
+
+## Corridor brick colour boundary at mortar joints (6 October 2026)
+
+The red/cream corridor split now follows a complete brick course in the shared
+Escape/Explore interior. The 2-unit masonry texture contains 16 courses, so the
+four-floor asylum boundary moves from 1.1 to 1.125 units (nine courses). Raised
+scheduled window bases use the same boundary instead of extending red brick to
+their sills. The legacy grid corridor boundary moves from 1.52 to 1.5 units
+(twelve courses). Texture generation and material projection share the course
+dimensions; room dado rails retain their separate, ceiling-relative heights.
+
+The room-finish regression passes 297 corridor boundary pairs across all four
+floors, raised window-base probes, 5,462 room wall rays and unchanged navigation.
+Wall joins, legacy architecture, window frames/clearance, padded cells and layout
+checks pass. Hardware verification uses NVIDIA GeForce RTX 3090 Ti / Direct3D11.
+The close-up harness verifies actual red-wall heights and generated mortar pixels
+on every floor, desktop/phone views and no page or shader errors. Before/after
+captures and receipts are in `Browser/artifacts/corridor-brick-boundary/`; rerun
+with `node artifacts/corridor-brick-boundary/check-browser.mjs after` from Browser.
+
+The required `npm test` attempt stops at the existing independent
+`test-facade-courses.mjs:68` count assertion (23 versus 22); it is not a complete
+suite pass. Only browser interior sources, focused checks and these notes change.
+The aerial compiled scene does not contain this interior. Unity, Blender and
+packaged exports were not regenerated.
+
+## Unique door room numbers and treatment names (6 October 2026)
+
+All 92 enclosed browser room doors now have consecutive numbers in natural
+numeric plan-ID order: ground G1–G38, first 101–133, basement B1–B11 and second
+201–210. Sorting copies of the door records keeps existing door batches and
+poses intact. Open circulation gets no room plaque, and removed/merged rooms
+leave no gaps in the player sequence. Internal modelling IDs are retained.
+
+Each parked leaf has the same number on both faces. The six ground-floor
+treatment rooms also name Hydrotherapy (G1), Surgery (G6), Bloodletting (G7),
+ECT (G8), Cold-water shower (G12) or Electrical therapy (G28), according to
+the current room-use and furnishing definitions. Reception's five previous
+room names remain beneath 201–205. This supersedes the earlier restriction
+to five named upper doors. Treatment naming follows the existing fictional
+room uses; the historical modelling references are unchanged.
+
+The text uses one merged draw per floor with compact padded grid atlases,
+all below 4096 pixels in either dimension. This avoids a tall single-column
+texture being resized on phones. Brass backings reuse the existing hardware
+batches. One-line plaques are .22 high; named plaques are .32 high. Both
+remain centred at 1.75 and follow the actual open leaf. Escape and Explore
+share the same label records and geometry.
+
+Validation: test-asylum-door-labels.mjs passes all 92 unique consecutive
+numbers, reversed-input numeric sorting, six treatment names, retained upper
+names, 184 actual text planes and preservation of shared plan inputs. It is
+included in npm test, test:asylum and test:room-doors. The Reception unit check
+passes retained windows, stairs and 40 furnished/unfurnished room round trips;
+the hardware browser check covers numbers on all four floors, ten actual
+Reception room trips, all-floor Escape/Explore plaque parity, desktop/mobile
+captures and no page or shader errors. The required GPU smoke check verifies
+NVIDIA GeForce RTX 3090 Ti / Direct3D11 acceleration. Open-door geometry,
+door frames and the eight-seed furniture survey pass, including all 976
+room/exit routes, all door crossings and furniture clearance.
+
+The required npm test run stops at the previously recorded exterior
+wall-course count in test-facade-courses.mjs:68 (23 versus 22). The separate
+doorway check stops at test-asylum-doorways.mjs:40 because basement B5's
+existing cell padding is encountered instead of plaster above the doorway;
+a run using the previous HEAD door-label module reproduces the same failure.
+Those unrelated expectations are retained. Logs and reviewed captures are
+in Browser/artifacts/room-numbers/.
+
+Only browser room plaques, related validation and notes are changed by this
+work. Shared plan JSON, review drawings, Unity, Blender and packaged exports
+are not regenerated. Aerial compilation excludes the interior plaques; its
+existing manifest still matches the current aerial source fingerprint.
+
+## Story clues follow the door room numbers (6 October 2026)
+
+Escape's staff memorandum and office filing notices now use G23/G24 for the
+ground-floor stair-key rack and 201/209 for the second-floor service record.
+The in-world notice textures and copied notebook evidence agree with the door
+plaques; the office clues also specify the second floor. The basement notice
+uses the same numbering lookup for its B4 release control. Scenario room IDs,
+seed choices, placement, locks and capture relocation retain their model IDs.
+
+`Browser/dist/asylum-room-numbers.mjs` is the shared numbering source for door
+plaques, story clues, remembered places and notebook/developer maps. It numbers
+only enclosed door rooms in natural numeric plan order, retaining all 92
+existing plaque numbers. Open circulation has no room number. Player-facing
+stair names omit the former R24 modelling reference while shared plan inputs
+retain it. Neither notebook fog nor discovery rules change.
+
+Validation: `test-escape-progress.mjs` checks all eight scenario combinations
+against the actual door plaques and the text drawn into the notice canvases.
+`test-notebook.mjs` checks all 92 map numbers and remembered rooms across the
+four floors, as well as existing fog/discovery behavior. Gameplay and two-sided
+door-plaque checks pass. `npm run test:gpu` and both
+`test-escape-progress-browser.mjs` and `test-notebook-browser.mjs` pass on NVIDIA
+GeForce RTX 3090 Ti / Direct3D11, with desktop/touch escape, recovery, restart,
+notebook and map checks and no page or shader errors. The notebook browser
+restart check uses the actual Restart control and waits for mouse capture to
+finish. Readable notices and desktop/mobile maps were reviewed in
+`Browser/artifacts/escape-chain/` and `Browser/artifacts/notebook/`.
+
+The required `npm test` attempt stops at the previously documented independent
+`test-facade-courses.mjs:68` assertion, 23 courses versus 22. It is not a full
+suite pass. This change updates browser narrative, display labels, tests and
+notes; shared plan JSON, Unity, Blender and packaged exports are not regenerated.
+The existing compiled aerial manifest still matches its source fingerprint.
+
+## Reliable mouse capture after Escape (6 October 2026)
+
+Browser resume actions now wait for confirmed capture of the game canvas before
+continuing the run. The ordinary pause menu, help, notebook, capture recovery and
+developer map share this behavior. Successful resumes clear movement/drag input,
+focus the game canvas and reset the frame clock. Touch controls and browsers
+without the pointer-lock API retain their existing controls.
+
+`Browser/dist/mouse-capture.mjs` handles both Promise and legacy event APIs.
+Transient `NotAllowedError` failures retry at 1.4-second intervals with a
+3.5-second deadline, keeping gameplay frozen. This spacing covers Chrome's
+1.25-second native Escape cooldown and avoids flooding its request rate limit;
+see the Chromium [browser controller](https://raw.githubusercontent.com/chromium/chromium/main/chrome/browser/ui/exclusive_access/pointer_lock_controller.cc)
+and [renderer limits](https://raw.githubusercontent.com/chromium/chromium/main/third_party/blink/renderer/core/page/pointer_lock_controller.h).
+Persistent failure retains a pause screen with a focused Resume control and a
+fresh-click instruction. Escape during a pending request, blur, hidden tabs and
+restart cancel retries; late successful requests are released rather than
+resuming a cancelled action. Pending unlock events cannot dismiss a resume.
+
+Validation: `npm run test:gpu`, `npm run test:mouse`, `test-game.mjs`,
+`test-explore-input.mjs`, `test-notebook.mjs`, `test-developer-options.mjs` and
+`test-notebook-browser.mjs` pass. Browser rendering used the verified NVIDIA
+GeForce RTX 3090 Ti through ANGLE/Direct3D11. The actual-game checks cover
+repeated Escape/click/key resume, mouse movement after capture, frozen progress,
+help/notebook/capture recovery, cancellation, legacy API and mobile controls,
+without page/shader errors. Automation sends Escape to the page rather than
+Chrome's native unlock UI, so the 1.25-second cooldown and persistent denial
+are injected before allowing real capture. The browser's rapid-request limit
+was also observed during stress testing. Evidence and reviewed pause/resume
+screenshots are in `Browser/artifacts/mouse-capture/`; notebook evidence remains
+in `Browser/artifacts/notebook/`.
+
+The required full `npm test` attempt stops at the existing independent
+`test-facade-courses.mjs:68` mismatch (23 courses versus 22), recorded in
+`Browser/artifacts/mouse-capture/npm-test.log`. This is not a full suite pass.
+This fix updates browser input code, tests and development notes; no models,
+Unity/Blender exports or packaged builds were regenerated for this change.
+
+## Clear current objectives and visible clue glows (6 October 2026)
+
+The owner reported unlocking the old Library stair gate without understanding
+the next action. Escape now shows a current objective with an action, location
+and use key. After stair access, it names the porter record in second-floor
+room 209, Librarian office beside the old Library, or room 201, Records office
+above Reception. When the player is in the other upper section, the objective
+explains descending to the first floor and crossing to the other staff stair.
+Gate plates and the basement control notice supply the room and attached brass
+key clue; opened-gate/release notebook entries retain it for later reading.
+Taking the brass key changes the objective to the selected ground-floor outer
+entrance, going outside points to the mast, and capture/reclaim supplies the
+key-recovery action. Optional notices remain optional, and asking for an
+objective does not create notebook evidence or reveal map areas.
+
+Available fittings have a wider, brighter gold halo and a soft camera-facing
+beacon above the prop, making horizontal desk papers visible from their doorway.
+The rim and beacon pulse every 2.8 gameplay seconds; pause freezes animation and
+reduced motion keeps it steady. Depth testing preserves wall/furniture
+occlusion. Used notices, released controls and collected keys clear their glow;
+lost keys make their source available again, and confiscated property lights
+the Reception tray. The compact HUD groups its notebook control with the
+objective. On phones the minimap follows its height; landscape guidance leaves
+the central crosshair clear. The service record prompt says “PRESS E TO TAKE
+BRASS KEY”.
+
+Validation: `npm run test:gpu` confirms NVIDIA GeForce RTX 3090 Ti through
+ANGLE/Direct3D11. `test-escape-progress.mjs`, `test-game.mjs` and
+`test-notebook.mjs` pass, covering all eight scenarios, optional/out-of-order
+clues, both access methods, current objectives, disconnected-upper-section
+directions, capture/recovery, glow cleanup and reduced motion. The full hardware
+`test-escape-progress-browser.mjs` passes both physically walked upstairs
+branches, gated movement/jump rejection, outside traversal and ending,
+capture/reclaim/retry, preserved notebook/fog/time and desktop/touch controls,
+including the updated objective and brass-key prompts. No page/shader errors
+were reported. Reviewed near/doorway views with the torch off, both actual
+record offices, portrait/landscape guidance and reduced motion are in
+`Browser/artifacts/objective-guidance/`; rerun its `check-browser.mjs after`
+from Browser. Its validation JSON records scenario rooms and phone bounds.
+
+The required `npm test` attempt stops at the previously recorded independent
+`test-facade-courses.mjs:68` assertion (23 courses versus 22); its log is
+`Browser/artifacts/objective-guidance/full-suite.log`. This is not a full-suite
+pass. Only browser Escape runtime guidance, fittings, tests and these notes
+change. Shared plans, Explore and Unity/Blender/package exports are not
+regenerated. The existing aerial compiled manifest still matches its source
+fingerprint; these runtime fittings are excluded from aerial compilation.

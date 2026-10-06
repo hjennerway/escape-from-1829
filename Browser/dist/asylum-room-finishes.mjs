@@ -202,7 +202,7 @@ export function asylumRoomWallMaterials(THREE,base){
     }
    `);
    // Paper and painted plaster cover the mortar relief, including the former
-   // brick seam at 1.1m. Corridor faces retain their existing bump mapping.
+   // brick colour seam. Corridor faces retain their existing bump mapping.
    shader.fragmentShader=shader.fragmentShader.replace('#include <normal_fragment_maps>',`if(vRoomFinish.x<.5){\n${THREE.ShaderChunk.normal_fragment_maps}\n}`);
   };
   material.customProgramCacheKey=()=>original.customProgramCacheKey()+'-room-damask-v1';result[kind]=material;

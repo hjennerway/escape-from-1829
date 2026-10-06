@@ -4,7 +4,7 @@ import {fileURLToPath} from 'node:url';
 import {spawn} from 'node:child_process';
 import {launchHardwareBrowser} from './test-support/hardware-browser.mjs';
 
-const destination=new URL('./artifacts/jump/',import.meta.url);await mkdir(destination,{recursive:true});
+const destination=new URL(process.env.JUMP_ARTIFACT_DIR??'./artifacts/jump/',import.meta.url);await mkdir(destination,{recursive:true});
 const server=spawn(process.execPath,['serve.mjs'],{cwd:new URL('.',import.meta.url),windowsHide:true,env:{...process.env,PORT:'0'},stdio:'pipe'});
 const base=await new Promise((resolve,reject)=>{server.stdout.once('data',data=>resolve(String(data).match(/http:\/\/127\.0\.0\.1:\d+/)[0]));server.once('error',reject);});
 const browser=await launchHardwareBrowser({headless:true,executablePath:process.env.MODEL_CHROME_PATH??'C:/Program Files/Google/Chrome/Application/chrome.exe'});
@@ -37,7 +37,7 @@ try{
   const source=(await readFile(new URL('./dist/game.mjs',import.meta.url),'utf8')).replace("if(state!=='play')return;\n if(artViewing)","if(window.__manualJump&&!window.__jumpStep)return;\n if(state!=='play')return;\n if(artViewing)");
   await route.fulfill({contentType:'text/javascript',body:source+`
 window.__manualJump=true;
-window.jumpGame={get ready(){return ready;},player,keys,get camera(){return camera;},get state(){return state;},get floors(){return floors;},boot(){start();arrivalCutscene.update(3);},pose(x,y,z,floor=0,outside=false){outsideWalker.resetJump();indoorJump.reset();Object.assign(player,{x,y,z,floor,stair:null,outside,verticalTrend:0});yaw=0;pitch=0;keys.clear();state='play';elapsed=0;camera.position.set(x,y+1.65,z);camera.rotation.set(0,0,0);(outside?exterior.scene:scene).add(torch,torchTarget);showFloor();$('arrivalFade').hidden=true;$('result').hidden=true;},step(n){window.__jumpStep=true;for(let i=0;i<n;i++)update(1/120);window.__jumpStep=false;},transfer(){useDoor(floors[0].exits[0]);},resetPositions};`});
+window.jumpGame={get ready(){return ready;},player,keys,get camera(){return camera;},get state(){return state;},get floors(){return floors;},boot(){start();arrivalCutscene.update(3);},pose(x,y,z,floor=0,outside=false){outsideWalker.resetJump();indoorJump.reset();Object.assign(player,{x,y,z,floor,stair:null,outside,verticalTrend:0});yaw=0;pitch=0;keys.clear();state='play';elapsed=0;camera.position.set(x,y+1.65,z);camera.rotation.set(0,0,0);(outside?exterior.scene:scene).add(torch,torchTarget);showFloor();$('arrivalFade').hidden=true;$('result').hidden=true;},step(n){window.__jumpStep=true;for(let i=0;i<n;i++)update(1/120);window.__jumpStep=false;},transfer(){const exit=floors[0].exits[0];escapeProgress.run.exitId=exit.id;escapeProgress.run.serviceKey=true;useDoor(exit);},resetPositions};`});
  });
  await page.goto(base);await page.waitForFunction(()=>window.jumpGame?.ready);await page.evaluate(()=>{window.jumpGame.boot();window.jumpGame.pose(0,0,14);});
  assert((await page.locator('#hud .controls').textContent()).includes('SPACE JUMP'));

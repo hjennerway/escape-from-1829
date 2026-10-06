@@ -1,8 +1,9 @@
 import {visible} from './core.mjs';
 import {insidePolygon,segmentDistance} from './asylum-layout.mjs';
+import {asylumRoomNumbers,asylumDisplayName} from './asylum-room-numbers.mjs';
 
 export const REVEAL_RADIUS=11;
-export const OUTSIDE_BOUNDS=[-96,96,-52,82];
+export const OUTSIDE_BOUNDS=[-130,110,-125,90];
 export const notebookView=player=>player.outside?'outside':`floor:${player.floor}`;
 export const floorTitle=(floor,index)=>floor.name||(index?'Upper floor':'Ground floor');
 
@@ -29,6 +30,7 @@ const archiveNotes={
 
 // A journal belongs to one escape attempt. It never reads future objectives or NPC routes.
 export function createNotebook(floors,{outsideStairs=[]}={}){
+ const roomNumbers=floors.map(asylumRoomNumbers);
  const notes=new Map(),areas=new Map(),wings=new Map(),fog=new Map(),lastReveal=new Map();
  let revision=0,generation=0;
  const views=floors.map((floor,index)=>({key:`floor:${index}`,name:floorTitle(floor,index),floor,index}));
@@ -68,6 +70,7 @@ export function createNotebook(floors,{outsideStairs=[]}={}){
  function recordDoor(exit,floor,{used=false}={}){
   const key=`door:${floor}:${exit.id??exit.name}`,prior=notes.get(key),traversed=used||prior?.used;
   const name=floorTitle(floors[floor],floor);
+  if(prior?.locked&&!used)return;
   add({id:key,title:exit.name,view:`floor:${floor}`,used:traversed,
    text:traversed?'I used this door and reached the outside. I can return through the same door.':floors[floor].geometrySource==='asylum-plan'?'I found a marked outside door here. Its landing or path is still untested.':'I found a marked escape door here.',
    source:`${name} · ${exit.id??'exit'} · ${traversed?'tested route':'observed sign'}`});
@@ -87,7 +90,7 @@ export function createNotebook(floors,{outsideStairs=[]}={}){
   if(!areas.has(key))areas.set(key,new Map());const visited=areas.get(key);
   for(const room of [...(floor.rooms??[]),...(floor.furnishingAreas??[])]){
    const inside=room.points?insidePolygon(player.x,player.z,room.points):Math.hypot(player.x-room.x*floor.cellSize,player.z-room.z*floor.cellSize)<2;
-   if(inside)visited.set(room.id??room.name,room.id?`${room.id} · ${room.name}`:room.name);
+   if(inside){const number=roomNumbers[player.floor].get(room.id),roomName=asylumDisplayName(room.name);visited.set(room.id??room.name,number?`${number} · ${roomName}`:roomName);}
   }
   for(const corridor of floor.corridors??[]){
    if(corridor.points.slice(1).some((p,i)=>segmentDistance(player.x,player.z,corridor.points[i],p)<=corridor.width/2))visited.set(corridor.id,`${corridor.id} · ${corridor.name}`);
@@ -98,14 +101,14 @@ export function createNotebook(floors,{outsideStairs=[]}={}){
    if(!near)continue;
    const id=`stair:${stair.id??stair.name}`,previous=notes.get(id),levels=new Set(previous?.levels??[]);levels.add(player.floor);
    const multipleLevels=levels.size>1;
-   add({id,title:stair.name,view:key,levels:[...levels],text:multipleLevels?`I have found this stair on ${[...levels].map(i=>floorTitle(floors[i],i)).join(' and ')}.`:'I found a stair here. I have only recorded it on this level so far.',source:multipleLevels?'Personal observations on these levels':'Personal observation'});
+   add({id,title:asylumDisplayName(stair.name),view:key,levels:[...levels],text:multipleLevels?`I have found this stair on ${[...levels].map(i=>floorTitle(floors[i],i)).join(' and ')}.`:'I found a stair here. I have only recorded it on this level so far.',source:multipleLevels?'Personal observations on these levels':'Personal observation'});
   }
   const b=fog.get(key).bounds,centre=(b[0]+b[1])/2;
   if(!wings.has(key))wings.set(key,new Set());const sides=wings.get(key);
   if(player.x<centre-(b[1]-b[0])*.16)sides.add('west');if(player.x>centre+(b[1]-b[0])*.16)sides.add('east');
   if(sides.size===2)add({id:'wing-pattern',title:'A repeated pattern?',kind:'deduction',text:'The east and west wings repeat several room and corridor patterns. A passage on one side may help me recognise the other, though the two sides are not identical.',source:'My deduction after exploring both wings'});
  }
- return {views,fog,explore,recordDoor,recordArt,known,
+ return {views,fog,explore,recordDoor,recordArt,known,recordEvidence:add,
   get entries(){return [...notes.values()].sort((a,b)=>b.order-a.order);},get revision(){return revision;},get generation(){return generation;},
   availableViews(){return views.filter(v=>notes.has(v.outside?'grounds':`arrival:${v.index}`));},
   reset(){notes.clear();areas.clear();wings.clear();lastReveal.clear();revision=0;generation++;for(const f of fog.values()){f.cells.fill(0);f.revision=0;}}

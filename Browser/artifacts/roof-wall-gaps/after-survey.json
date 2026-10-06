@@ -1,0 +1,483 @@
+{
+  "roofs": 570,
+  "solid": 285,
+  "closed": 11910,
+  "unsupported": 1738,
+  "triangles": 18070,
+  "open": [
+    {
+      "name": "Entrance west recessed slate roof",
+      "parent": "Shared estate",
+      "closed": 36,
+      "unsupported": 240
+    },
+    {
+      "name": "Entrance east recessed slate roof",
+      "parent": "Shared estate",
+      "closed": 68,
+      "unsupported": 182
+    },
+    {
+      "name": "East entrance wing slate roof",
+      "parent": "Shared estate",
+      "closed": 32,
+      "unsupported": 32
+    },
+    {
+      "name": "Reception longitudinal ridge and rear hips",
+      "parent": "Shared estate",
+      "closed": 48,
+      "unsupported": 20
+    },
+    {
+      "name": "West garden inner pavilion slate roof",
+      "parent": "West garden inner pavilion period",
+      "closed": 44,
+      "unsupported": 4
+    },
+    {
+      "name": "West wing joined slate roof",
+      "parent": "West wing mirrored from east",
+      "closed": 8,
+      "unsupported": 18
+    },
+    {
+      "name": "",
+      "parent": "Shared estate",
+      "closed": 119,
+      "unsupported": 7
+    },
+    {
+      "name": "Redesmere entrance hipped roof",
+      "parent": "Shared estate",
+      "closed": 33,
+      "unsupported": 4
+    },
+    {
+      "name": "",
+      "parent": "Shared estate",
+      "closed": 14,
+      "unsupported": 8
+    },
+    {
+      "name": "",
+      "parent": "Shared estate",
+      "closed": 14,
+      "unsupported": 8
+    },
+    {
+      "name": "West lawn bay slate roof",
+      "parent": "Shared estate",
+      "closed": 16,
+      "unsupported": 4
+    },
+    {
+      "name": "Entrance west projection slate roof",
+      "parent": "Shared estate",
+      "closed": 5,
+      "unsupported": 60
+    },
+    {
+      "name": "East lawn bay slate roof",
+      "parent": "Shared estate",
+      "closed": 16,
+      "unsupported": 4
+    },
+    {
+      "name": "Entrance east projection slate roof",
+      "parent": "Shared estate",
+      "closed": 31,
+      "unsupported": 12
+    },
+    {
+      "name": "West cross-range continuous roof join",
+      "parent": "Shared estate",
+      "closed": 52,
+      "unsupported": 87
+    },
+    {
+      "name": "Entrance west slate pitches to render edge",
+      "parent": "Shared estate",
+      "closed": 2,
+      "unsupported": 1
+    },
+    {
+      "name": "West entrance corner slate to yellow boundary",
+      "parent": "Shared estate",
+      "closed": 13,
+      "unsupported": 3
+    },
+    {
+      "name": "East entrance corner slate to render boundary",
+      "parent": "Shared estate",
+      "closed": 27,
+      "unsupported": 2
+    },
+    {
+      "name": "Church-side lawn bay slate roof",
+      "parent": "Churton Ward",
+      "closed": 27,
+      "unsupported": 1
+    },
+    {
+      "name": "Outhouse continuous slate roof",
+      "parent": "Outhouse in front of 1829",
+      "closed": 44,
+      "unsupported": 16
+    },
+    {
+      "name": "Willows red pitched roof",
+      "parent": "The Willows",
+      "closed": 29,
+      "unsupported": 97
+    },
+    {
+      "name": "Pyramidal slate roof",
+      "parent": "Water tower · rear-right clearing",
+      "closed": 92,
+      "unsupported": 8
+    },
+    {
+      "name": "Roadside north wing slate roof",
+      "parent": "Irby/Ashley",
+      "closed": 26,
+      "unsupported": 14
+    },
+    {
+      "name": "Narrow north wing slate roof",
+      "parent": "Irby/Ashley",
+      "closed": 22,
+      "unsupported": 8
+    },
+    {
+      "name": "West garden gable slate roof",
+      "parent": "Irby/Ashley",
+      "closed": 76,
+      "unsupported": 23
+    },
+    {
+      "name": "East garden gable slate roof",
+      "parent": "Irby/Ashley",
+      "closed": 47,
+      "unsupported": 14
+    },
+    {
+      "name": "Canted garden bay slate roof",
+      "parent": "Irby/Ashley",
+      "closed": 19,
+      "unsupported": 18
+    },
+    {
+      "name": "Canted garden bay slate roof",
+      "parent": "Irby/Ashley",
+      "closed": 19,
+      "unsupported": 18
+    },
+    {
+      "name": "Glazed courtyard lean-to roof",
+      "parent": "Irby/Ashley",
+      "closed": 0,
+      "unsupported": 71
+    },
+    {
+      "name": "Roadside north wing slate roof",
+      "parent": "Grafton/Edge",
+      "closed": 51,
+      "unsupported": 20
+    },
+    {
+      "name": "Narrow north wing slate roof",
+      "parent": "Grafton/Edge",
+      "closed": 46,
+      "unsupported": 8
+    },
+    {
+      "name": "Grafton central half-octagonal slate hip",
+      "parent": "Grafton/Edge",
+      "closed": 28,
+      "unsupported": 16
+    },
+    {
+      "name": "Grafton veranda pitched slate canopy",
+      "parent": "Grafton/Edge",
+      "closed": 4,
+      "unsupported": 2
+    },
+    {
+      "name": "Grafton veranda pitched slate canopy",
+      "parent": "Grafton/Edge",
+      "closed": 1,
+      "unsupported": 1
+    },
+    {
+      "name": "Grafton veranda pitched slate canopy",
+      "parent": "Grafton/Edge",
+      "closed": 82,
+      "unsupported": 2
+    },
+    {
+      "name": "Grafton veranda pitched slate canopy",
+      "parent": "Grafton/Edge",
+      "closed": 0,
+      "unsupported": 2
+    },
+    {
+      "name": "Hale inside corner 2 entrance slate roof",
+      "parent": "Hale/Daresbury/Huxley/Dunham",
+      "closed": 5,
+      "unsupported": 4
+    },
+    {
+      "name": "Hale inside corner 5 entrance slate roof",
+      "parent": "Hale/Daresbury/Huxley/Dunham",
+      "closed": 5,
+      "unsupported": 4
+    },
+    {
+      "name": "Hale inside corner 6 entrance slate roof",
+      "parent": "Hale/Daresbury/Huxley/Dunham",
+      "closed": 5,
+      "unsupported": 4
+    },
+    {
+      "name": "Hale inside corner 9 entrance slate roof",
+      "parent": "Hale/Daresbury/Huxley/Dunham",
+      "closed": 5,
+      "unsupported": 4
+    },
+    {
+      "name": "Hale inside corner 10 entrance slate roof",
+      "parent": "Hale/Daresbury/Huxley/Dunham",
+      "closed": 5,
+      "unsupported": 4
+    },
+    {
+      "name": "Hale inside corner 15 entrance slate roof",
+      "parent": "Hale/Daresbury/Huxley/Dunham",
+      "closed": 5,
+      "unsupported": 4
+    },
+    {
+      "name": "Hale inside corner 16 entrance slate roof",
+      "parent": "Hale/Daresbury/Huxley/Dunham",
+      "closed": 5,
+      "unsupported": 4
+    },
+    {
+      "name": "Joined rear office and right return slate roof",
+      "parent": "Estates department",
+      "closed": 149,
+      "unsupported": 10
+    },
+    {
+      "name": "Left workshop slate roof",
+      "parent": "Estates department",
+      "closed": 72,
+      "unsupported": 4
+    },
+    {
+      "name": "West continuous wing slate roof",
+      "parent": "Farndon ward",
+      "closed": 172,
+      "unsupported": 12
+    },
+    {
+      "name": "Central garden gable slate roof",
+      "parent": "Farndon ward",
+      "closed": 12,
+      "unsupported": 8
+    },
+    {
+      "name": "West continuous wing slate roof",
+      "parent": "Witby Ward",
+      "closed": 172,
+      "unsupported": 12
+    },
+    {
+      "name": "Central garden gable slate roof",
+      "parent": "Witby Ward",
+      "closed": 12,
+      "unsupported": 8
+    },
+    {
+      "name": "Western garages and offices slate roof",
+      "parent": "Garage row",
+      "closed": 64,
+      "unsupported": 6
+    },
+    {
+      "name": "Tall workshop bay slate roof",
+      "parent": "Garage row",
+      "closed": 48,
+      "unsupported": 8
+    },
+    {
+      "name": "Long eastern garage range slate roof",
+      "parent": "Garage row",
+      "closed": 150,
+      "unsupported": 6
+    },
+    {
+      "name": "Mortuary crossbar slate roof",
+      "parent": "T-shaped mortuary",
+      "closed": 72,
+      "unsupported": 68
+    },
+    {
+      "name": "Mortuary entrance slate roof",
+      "parent": "T-shaped mortuary",
+      "closed": 24,
+      "unsupported": 6
+    },
+    {
+      "name": "Outer low entrance room slate roof",
+      "parent": "West outer front elevation",
+      "closed": 20,
+      "unsupported": 6
+    },
+    {
+      "name": "Recess cheek slate roof",
+      "parent": "Larkton recessed ward entrance",
+      "closed": 13,
+      "unsupported": 1
+    },
+    {
+      "name": "Recess low entrance room slate roof",
+      "parent": "Larkton recessed ward entrance",
+      "closed": 16,
+      "unsupported": 2
+    },
+    {
+      "name": "Leighton Newton veranda roof",
+      "parent": "Leighton Newton photographed elevations",
+      "closed": 0,
+      "unsupported": 24
+    },
+    {
+      "name": "Oakmere continuous extension slate roof",
+      "parent": "Oakmere rear court additions",
+      "closed": 32,
+      "unsupported": 9
+    },
+    {
+      "name": "Oakmere court projecting bay slate roof",
+      "parent": "Oakmere rear court additions",
+      "closed": 18,
+      "unsupported": 2
+    },
+    {
+      "name": "Oakmere blue-face projecting bay slate roof",
+      "parent": "Oakmere rear court additions",
+      "closed": 33,
+      "unsupported": 4
+    },
+    {
+      "name": "Outer low entrance room slate roof",
+      "parent": "East outer front elevation",
+      "closed": 12,
+      "unsupported": 3
+    },
+    {
+      "name": "Oakmere west raised range slate roof",
+      "parent": "Oakmere west lawn elevation",
+      "closed": 143,
+      "unsupported": 4
+    },
+    {
+      "name": "Oakmere west low hall link slate roof",
+      "parent": "Oakmere west lawn elevation",
+      "closed": 36,
+      "unsupported": 2
+    },
+    {
+      "name": "Annexe kitchen ventilator slate roof",
+      "parent": "Annexe rear kitchen and paving",
+      "closed": 4,
+      "unsupported": 8
+    },
+    {
+      "name": "Dormered central service hall slate roof",
+      "parent": "Tower service buildings",
+      "closed": 83,
+      "unsupported": 64
+    },
+    {
+      "name": "Rear east gabled workshop slate roof",
+      "parent": "Tower service buildings",
+      "closed": 48,
+      "unsupported": 44
+    },
+    {
+      "name": "Rear west gabled workshop slate roof",
+      "parent": "Tower service buildings",
+      "closed": 16,
+      "unsupported": 44
+    },
+    {
+      "name": "Chimney service hall slate roof",
+      "parent": "Tower service buildings",
+      "closed": 122,
+      "unsupported": 26
+    },
+    {
+      "name": "South cross-gabled stores slate roof",
+      "parent": "Tower service buildings",
+      "closed": 63,
+      "unsupported": 38
+    },
+    {
+      "name": "North tower range slate roof",
+      "parent": "Tower service buildings",
+      "closed": 29,
+      "unsupported": 38
+    },
+    {
+      "name": "Tower east dormered range slate roof",
+      "parent": "Tower service buildings",
+      "closed": 59,
+      "unsupported": 8
+    },
+    {
+      "name": "East range blue dormer 1 slate roof",
+      "parent": "Tower service buildings",
+      "closed": 14,
+      "unsupported": 24
+    },
+    {
+      "name": "East range blue dormer 2 slate roof",
+      "parent": "Tower service buildings",
+      "closed": 14,
+      "unsupported": 24
+    },
+    {
+      "name": "Central hall blue dormer slate roof",
+      "parent": "Tower service buildings",
+      "closed": 18,
+      "unsupported": 20
+    },
+    {
+      "name": "Rear building blue dormer 1 slate roof",
+      "parent": "Tower service buildings",
+      "closed": 18,
+      "unsupported": 20
+    },
+    {
+      "name": "Rear building blue dormer 2 slate roof",
+      "parent": "Tower service buildings",
+      "closed": 18,
+      "unsupported": 20
+    },
+    {
+      "name": "Enlarged west workshop slate roof",
+      "parent": "Enlarged west workshop",
+      "closed": 54,
+      "unsupported": 64
+    },
+    {
+      "name": "Enlarged workshop blue dormer slate roof",
+      "parent": "Enlarged west workshop",
+      "closed": 18,
+      "unsupported": 28
+    }
+  ]
+}

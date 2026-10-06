@@ -6,6 +6,7 @@ import {createTowerBuildings} from './tower-buildings.mjs';
 import {createCountessRoundabout} from './countess-roundabout.mjs';
 import {finishEstateMinerals} from './mineral-materials.mjs';
 import {finishRoofTiles} from './roof-tile-uv.mjs';
+import {closeRoofWallGaps} from './roof-wall-joins.mjs';
 import {closeGroundEdges} from './ground-contact.mjs';
 import {groundBuildingBases} from './building-grounding.mjs';
 import {prepareExteriorShadows} from './exterior-shadows.mjs';
@@ -36,6 +37,7 @@ export function createAerialLayouts(THREE,exterior){
   exterior.annexe.traverse(o=>{if(o.name==='Annexe drive')superseded.push(o);});
   exterior.mainAdmin.traverse(o=>{if(['Admin carriage approach','Admin forecourt lawn','Curved lawn stone edging','West side access','East curved carriage drive','East wing side access'].some(name=>o.name===name||o.name===name+' stone kerb'))superseded.push(o);});
   finishRoofTiles(THREE,exterior.model);
+  closeRoofWallGaps(THREE,exterior.model,{exclude:[exterior.trees,exterior.terrain]});
   finishEstateMinerals(THREE,exterior.model);
   for(const surfaces of [roads,entrance,countessRoundabout,carPark,historicRoads,exterior.legacyAccess])closeGroundEdges(THREE,surfaces,exterior.terrain.position.y);
   prepareExteriorShadows(THREE,exterior.model,{exclude:[exterior.trees]});

@@ -1,0 +1,125 @@
+{
+  "views": [
+    {
+      "id": "S1",
+      "x": -14.85,
+      "z": 10.82,
+      "y": 4.2,
+      "height": 2.35,
+      "open": false,
+      "frameVisible": true,
+      "leafVisible": true,
+      "support": [
+        {
+          "side": -1,
+          "height": 4.202000007033348
+        },
+        {
+          "side": 1,
+          "height": 4.202000007033348
+        }
+      ]
+    },
+    {
+      "id": "S1",
+      "x": -14.85,
+      "z": 10.82,
+      "y": 4.2,
+      "height": 2.35,
+      "open": false,
+      "frameVisible": true,
+      "leafVisible": true,
+      "support": [
+        {
+          "side": -1,
+          "height": 4.202000007033348
+        },
+        {
+          "side": 1,
+          "height": 4.202000007033348
+        }
+      ]
+    },
+    {
+      "id": "S1",
+      "x": -14.85,
+      "z": 10.82,
+      "y": 4.2,
+      "height": 2.35,
+      "open": true,
+      "frameVisible": true,
+      "leafVisible": false,
+      "support": [
+        {
+          "side": -1,
+          "height": 4.202000007033348
+        },
+        {
+          "side": 1,
+          "height": 4.202000007033348
+        }
+      ]
+    },
+    {
+      "id": "S5",
+      "x": -34.85,
+      "z": 13.58,
+      "y": 4.2,
+      "height": 2.35,
+      "open": false,
+      "frameVisible": true,
+      "leafVisible": true,
+      "support": [
+        {
+          "side": -1,
+          "height": 4.202000007033348
+        },
+        {
+          "side": 1,
+          "height": 4.202000007033348
+        }
+      ]
+    },
+    {
+      "id": "S5",
+      "x": -34.85,
+      "z": 13.58,
+      "y": 4.2,
+      "height": 2.35,
+      "open": false,
+      "frameVisible": true,
+      "leafVisible": true,
+      "support": [
+        {
+          "side": -1,
+          "height": 4.202000007033348
+        },
+        {
+          "side": 1,
+          "height": 4.202000007033348
+        }
+      ]
+    },
+    {
+      "id": "S5",
+      "x": -34.85,
+      "z": 13.58,
+      "y": 4.2,
+      "height": 2.35,
+      "open": true,
+      "frameVisible": true,
+      "leafVisible": false,
+      "support": [
+        {
+          "side": -1,
+          "height": 4.202000007033348
+        },
+        {
+          "side": 1,
+          "height": 4.202000007033348
+        }
+      ]
+    }
+  ],
+  "errors": []
+}

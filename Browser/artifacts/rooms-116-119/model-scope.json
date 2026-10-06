@@ -1,0 +1,11 @@
+{
+  "inputs": 178,
+  "changedInteriorSources": [
+    "asylum-plan.json",
+    "asylum-furniture.mjs",
+    "asylum-room-uses.mjs",
+    "sewing-furnishings.mjs"
+  ],
+  "includedInAerial": [],
+  "compiledFingerprintCurrent": true
+}

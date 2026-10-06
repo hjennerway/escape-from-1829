@@ -1,0 +1,70 @@
+{
+  "receipts": [
+    {
+      "name": "initial",
+      "program": 46,
+      "uniforms": 0.018,
+      "programs": 1,
+      "renderer": "ANGLE (NVIDIA, NVIDIA GeForce RTX 3090 Ti (0x00002203) Direct3D11 vs_5_0 ps_5_0, D3D11)"
+    },
+    {
+      "name": "torch-off",
+      "program": 66,
+      "uniforms": 0.018,
+      "programs": 2,
+      "renderer": "ANGLE (NVIDIA, NVIDIA GeForce RTX 3090 Ti (0x00002203) Direct3D11 vs_5_0 ps_5_0, D3D11)"
+    },
+    {
+      "name": "torch-return",
+      "program": 46,
+      "uniforms": 0.018,
+      "programs": 2,
+      "renderer": "ANGLE (NVIDIA, NVIDIA GeForce RTX 3090 Ti (0x00002203) Direct3D11 vs_5_0 ps_5_0, D3D11)"
+    },
+    {
+      "name": "ghost-off",
+      "program": 84,
+      "uniforms": 0.018,
+      "programs": 3,
+      "renderer": "ANGLE (NVIDIA, NVIDIA GeForce RTX 3090 Ti (0x00002203) Direct3D11 vs_5_0 ps_5_0, D3D11)"
+    },
+    {
+      "name": "ghost-return",
+      "program": 46,
+      "uniforms": 0.018,
+      "programs": 3,
+      "renderer": "ANGLE (NVIDIA, NVIDIA GeForce RTX 3090 Ti (0x00002203) Direct3D11 vs_5_0 ps_5_0, D3D11)"
+    },
+    {
+      "name": "upper",
+      "program": 84,
+      "uniforms": 0.018,
+      "programs": 3,
+      "renderer": "ANGLE (NVIDIA, NVIDIA GeForce RTX 3090 Ti (0x00002203) Direct3D11 vs_5_0 ps_5_0, D3D11)"
+    },
+    {
+      "name": "ground-return",
+      "program": 46,
+      "uniforms": 0.018,
+      "programs": 3,
+      "renderer": "ANGLE (NVIDIA, NVIDIA GeForce RTX 3090 Ti (0x00002203) Direct3D11 vs_5_0 ps_5_0, D3D11)"
+    },
+    {
+      "name": "s1-first-landing",
+      "firstAndSettledFramesIdentical": true
+    },
+    {
+      "name": "s1-side",
+      "firstAndSettledFramesIdentical": true
+    },
+    {
+      "name": "s5-landing",
+      "firstAndSettledFramesIdentical": true
+    },
+    {
+      "name": "s5-side",
+      "firstAndSettledFramesIdentical": true
+    }
+  ],
+  "errors": []
+}

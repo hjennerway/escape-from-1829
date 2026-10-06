@@ -4,6 +4,7 @@ import {furnitureContains,furnitureBlocks,indexFurniture} from './furniture-coll
 import {ROOM_USES,ROOM_PURPOSES} from './asylum-room-uses.mjs';
 import {HALL_PROP_CATALOG,hallFurnishings} from './hall-furnishings.mjs';
 import {SANITARY_CATALOG,sanitaryFurnishings} from './sanitary-furnishings.mjs';
+import {sewingFurnishings} from './sewing-furnishings.mjs';
 import {doorRectangle,doorPolygonsOverlap,roomDoorHandle,roomDoorPanels,roomDoorHandlePlate} from './asylum-doors.mjs';
 
 export const RECEPTION_FURNITURE_SCALE=1.2;
@@ -68,7 +69,7 @@ function windowPoints(floor){
 function clearPlacement(floor,room,item,placed,windows){
  const fitted=['bookroom','library','privy','paddedCell'].includes(room.purpose)||item.kind==='bookcase';
  const wallStorage=['cupboard','bookcase','waitingBench','longcaseClock','linenCupboard','sideboard','privySeat','privyScreen','washstand'].includes(item.kind);
- const wallBed=item.kind==='bed'&&!!room.bedRows;
+ const wallBed=item.kind==='bed'&&!!(room.bedRows||room.bedPositions);
  const c=Math.cos(item.rotation),s=Math.sin(item.rotation);
  // Storage backs and planned bed heads may touch masonry. Keep side/front
  // clearance, but probe the rear face just inside its host wall contact.
@@ -77,9 +78,19 @@ function clearPlacement(floor,room,item,placed,windows){
   return {x:item.x+c*a+s*b,z:item.z-s*a+c*b,radius:v===-1?0:.14};
  })):furnitureCorners(item,.10).map(([x,z])=>({x,z,radius:.14}));
  if(!probes.every(({x,z,radius})=>insidePolygon(x,z,room.points)&&flatWalkable(floor,x,z,radius,{furniture:false})))return false;
- if(furnitureContains(item,...room.label,(fitted||room.bedRows||room.purpose==='privy')?.55:1.15))return false;
+ if(furnitureContains(item,...room.label,(fitted||room.bedRows||room.bedPositions||room.purpose==='privy')?.55:1.15))return false;
  if(placed.some(p=>!FURNITURE_CATALOG[p.kind].decorative&&overlaps(item,p)))return false;
  if(placed.some(p=>blocksFurnitureFront(item,p)))return false;
+ if(room.bedPositions&&item.kind!=='bed'){
+  // Chairs and small seats may move between games, but every planned bed
+  // keeps its full-width foot approach connected to the central aisle.
+  const bed=FURNITURE_CATALOG.bed;
+  for(const position of room.bedPositions){
+   const reach=bed.depth/2+.50;
+   const foot={x:position.x+Math.sin(position.rotation)*reach,z:position.z+Math.cos(position.rotation)*reach,width:bed.width,depth:.80,rotation:position.rotation};
+   if(overlaps(item,foot,.10))return false;
+  }
+ }
  if(room.bedRows&&item.kind!=='bed'){
   // Keep the routes around each row end open. Short-wall storage may use
   // the wider middle aisle, beyond the full bed depth and foot clearance.
@@ -117,7 +128,7 @@ function clearPlacement(floor,room,item,placed,windows){
    if(overlaps(item,approach,.18))return false;
   }else if(furnitureContains(item,door.x,door.z,wallBed?door.width/2+.34:1.35))return false;
   // Dormitory entrance gaps and end aisles connect to the middle aisle.
-  if(!room.bedRows&&door.roomId===room.id&&nearSegment(item,[door.x,door.z],room.label,fitted?.45:.75))return false;
+  if(!room.bedRows&&!room.bedPositions&&door.roomId===room.id&&nearSegment(item,[door.x,door.z],room.label,fitted?.45:.75))return false;
  }
  for(const exit of floor.exits)if(furnitureContains(item,exit.inside.x,exit.inside.z,1.8))return false;
  for(const shaft of floor.shafts){const b={x:(shaft.minX+shaft.maxX)/2,z:(shaft.minZ+shaft.maxZ)/2,width:shaft.maxX-shaft.minX,depth:shaft.maxZ-shaft.minZ,rotation:0};if(overlaps(item,b,.85))return false;}
@@ -167,13 +178,13 @@ function wallCandidates(room,kind,floor,model=FURNITURE_CATALOG[kind]){
 }
 function placeRoom(floor,room,purpose,seed,windows){
  const placed=[],random=furnishingRandom(roomSeed(seed,floor.id,room.id)),fixed=[...purpose.fixed];
- if(room.bedRows){
-  const additional=room.bedRows.reduce((count,row)=>count+row.count,0)-fixed.filter(kind=>kind==='bed').length;
+ if(room.bedRows||room.bedPositions){
+  const additional=(room.bedPositions?.length??room.bedRows.reduce((count,row)=>count+row.count,0))-fixed.filter(kind=>kind==='bed').length;
   if(additional<0)throw Error(`Dormitory plan has fewer beds than its room use: ${floor.id} ${room.id}`);
   fixed.push(...Array(additional).fill('bed'));
  }
  const door=floor.doorways.find(d=>d.roomId===room.id);
- const bedPositions=(room.bedRows??[]).flatMap((row,rowIndex)=>{
+ const bedPositions=room.bedPositions??(room.bedRows??[]).flatMap((row,rowIndex)=>{
   const [a,b]=row.wall,length=Math.hypot(b[0]-a[0],b[1]-a[1]);
   let nx=-(b[1]-a[1])/length,nz=(b[0]-a[0])/length;
   if(!insidePolygon((a[0]+b[0])/2+nx*.2,(a[1]+b[1])/2+nz*.2,room.points)){nx=-nx;nz=-nz;}
@@ -187,7 +198,7 @@ function placeRoom(floor,room,purpose,seed,windows){
   if(positions.length!==row.count)throw Error(`Dormitory row count differs from its plan: ${floor.id} ${room.id} ${rowIndex}`);
   return positions;
  });
- if(room.bedRows&&bedPositions.length!==fixed.filter(kind=>kind==='bed').length)throw Error(`Dormitory bed count differs from its plan: ${floor.id} ${room.id}`);
+ if((room.bedRows||room.bedPositions)&&bedPositions.length!==fixed.filter(kind=>kind==='bed').length)throw Error(`Dormitory bed count differs from its plan: ${floor.id} ${room.id}`);
  let bedIndex=0;
  function place(kind,variable,index){
   // Fitted bay cases keep their smaller proportions and follow the shared
@@ -251,13 +262,15 @@ function placeRoom(floor,room,purpose,seed,windows){
  // Allocate access to shelves/cabinets before fitting the other furniture.
  // Fit every planned bed before seats/storage can consume its row slots.
  // Keep original indices so their stable placement IDs remain unchanged.
- const priority=kind=>['bookcase','apothecary'].includes(kind)?2:room.bedRows&&kind==='bed'?1:0;
+ const priority=kind=>['bookcase','apothecary'].includes(kind)?2:(room.bedRows||room.bedPositions)&&kind==='bed'?1:0;
  const order=fixed.map((kind,i)=>i).sort((a,b)=>priority(fixed[b])-priority(fixed[a]));
  for(const i of order){
   const kind=fixed[i],success=place(kind,false,i);
   if(!success&&FURNITURE_CATALOG[kind].procedural&&kind!=='cupboard')throw Error(`Medical furnishing has no clear placement: ${floor.id} ${room.id} ${kind}`);
  }
- const count=Math.max(0,Math.round(placed.length/3));
+ // Extra ward beds do not request extra loose chairs or seats.
+ const looseBase=placed.length-(room.bedPositions?bedPositions.length-purpose.fixed.filter(kind=>kind==='bed').length:0);
+ const count=Math.max(0,Math.round(looseBase/3));
  for(let i=0;i<count;i++){
   const options=[...purpose.variable];const first=Math.floor(random()*options.length);
   for(let j=0;j<options.length;j++)if(place(options[(first+j)%options.length],true,i))break;
@@ -272,10 +285,10 @@ export function furnishAsylum(floors,{seed=1829}={}){
   for(const room of floor.rooms){
    const use=ROOM_USES[floor.id]?.[room.id];if(!use)throw Error(`Room use missing: ${floor.id} ${room.id}`);
    const purpose=ROOM_PURPOSES[use];room.purpose=use;room.name=purpose.name;
-   if(use==='privy'){
-    const fixtures=sanitaryFurnishings(floor,room),placed=[];
+   if(use==='privy'||use==='sewing'){
+    const fixtures=use==='privy'?sanitaryFurnishings(floor,room):sewingFurnishings(floor,room,FURNITURE_CATALOG),placed=[];
     for(const item of fixtures){
-     if(!clearPlacement(floor,room,item,placed,windows))throw Error(`Sanitary furnishing has no clear placement: ${item.id}`);
+     if(!item.decorative&&!clearPlacement(floor,room,item,placed,windows))throw Error(`Room furnishing has no clear placement: ${item.id}`);
      placed.push(item);
     }
     floor.furniture.push(...placed);

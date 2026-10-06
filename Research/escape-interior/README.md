@@ -1,5 +1,79 @@
 # Asylum escape interior finishes
 
+## Clearer objectives and stronger prop glows (6 October 2026)
+
+The owner's follow-up reports reaching the old Library after releasing its gate
+without knowing the next action. The porter record is in second-floor 209,
+the Librarian office beside the Library, or 201, the Records office above
+Reception. Runtime objectives now name the selected room and the attached brass
+outside-door key. Gate and release notices provide that destination, and the
+notebook retains it. If the player reaches the other upper section, the HUD
+explains returning to the first floor and crossing to its staff stair.
+
+This supersedes the subtle static glows described below. Available fittings use
+a wider gold halo with a brighter rim and a camera-facing soft beacon above the
+prop. A 2.8-second pulse stops while gameplay is paused; reduced motion keeps
+the glow steady. Depth testing retains wall/furniture occlusion. Used notices,
+released controls and collected keys clear their glow; a lost key's original
+source and the populated Reception tray remain visible recovery options.
+
+Only browser Escape runtime fittings and guidance change. Review views and
+validation are in `../../Browser/artifacts/objective-guidance/`. The shared
+interior plan, Explore, compiled aerial model and Unity/Blender/package exports
+are not regenerated.
+
+## Supported objective props (6 October 2026)
+
+The owner's [objective-sign screenshot](objective-props-reference.png) requests
+natural placement beside a room or on a desk, with a glow drawing the player's
+attention. Escape's freestanding notice poles are removed. Staff memoranda,
+filing and maintenance notices use clear interior wall faces or existing
+tabletops; the porter record and its brass key share an office desk. Wall
+fittings avoid door leaves and furniture, and desk papers avoid loose books.
+The basement safety control is mounted beneath its notice on the wall.
+
+The staff stair key has an open bow, stem and two teeth, resting on a hook on
+a small timber rack. Its name appears in the normal interaction HUD. The
+reception desk carries a shallow property tray with an open base and raised
+brass rims; it displays whichever keys were confiscated. Warm feathered glows
+surround notices and available keys, and the tray glows when property is held.
+Taking or reclaiming keys clears the corresponding models and glow.
+
+These are owner-directed fictional gameplay fittings, not surveyed historical
+fixtures. Only browser Escape props and their HUD/checks change. Shared plans,
+Explore furnishings, Unity, Blender and packaged exports are not regenerated.
+The aerial compiler excludes these runtime props.
+
+## Complete brick courses at the colour change (6 October 2026)
+
+The owner's corridor correction places the red/cream change in a mortar joint,
+instead of partway through a brick. The shared browser Escape/Explore finish
+uses 16 courses per 2-unit texture, with nine complete red courses below the
+1.125-unit boundary. Raised window bases follow that same line. The older grid
+corridor uses twelve courses and a 1.5-unit boundary. Room wallpaper/dado rails
+retain their existing ceiling-relative heights. This supersedes the previous
+1.1-unit asylum and 1.52-unit grid colour splits. Validation and before/after
+views are in `../../Browser/artifacts/corridor-brick-boundary/`; implementation
+and scope are recorded in `../../DEVELOPMENT.md`.
+
+## Staff stair gate attachment (6 October 2026)
+
+The owner's [floating-gate screenshot](stair-gate-floating-reference.png)
+requests a natural fitting connected to the stairs. Escape's S1 and S5 upper
+staff grilles now share the 1.3-unit flight width. Their frames stand on the
+level first-floor landing, 0.08 units before the first riser, with bedded foot
+plates, anchor heads and short returns connecting the posts to the stair rails.
+The 2.35-unit frame carries a narrower barred leaf, three attached hinge
+knuckles, a latch and a smaller riveted notice plate. The fixed frame remains
+when the scenario releases the leaf.
+
+These are owner-directed gameplay fittings, not surveyed historic dimensions.
+The shared stairs and Explore scene retain their existing models. Hardware
+captures of both fitted entrances, released frames and a phone view are in
+`../../Browser/artifacts/stair-gate/`; validation is recorded in DEVELOPMENT.md.
+Only the browser Escape fittings are changed. Aerial compiled models, Unity,
+Blender and packaged exports are not regenerated.
+
 ## Room doors attached at their hinges (4 October 2026)
 
 The owner's follow-up corrects the room leaves floating in front of their

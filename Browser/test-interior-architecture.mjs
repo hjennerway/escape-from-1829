@@ -12,6 +12,14 @@ for(const floor of makeFloors(layout)){
  const scene=new THREE.Scene();buildArchitecture(THREE,scene,floor);scene.updateMatrixWorld(true);scenes.push(scene);
  assert(scene.children.length<=22,'Architectural details stay batched');
  const surfaces=interiorWallSurfaces(floor),windows=surfaces.filter(w=>w.window);
+ // The legacy corridor's twelve red courses also end at a mortar joint.
+ const red=scene.getObjectByName('Layout Brick'),matrix=new THREE.Matrix4();
+ let redTop=0;
+ for(let i=0;i<red.count;i++){
+  red.getMatrixAt(i,matrix);
+  redTop=Math.max(redTop,new THREE.Vector3(0,.5,0).applyMatrix4(matrix).y);
+ }
+ assert(Math.abs(redTop-1.5)<1e-6,'Legacy red/cream boundary follows a complete brick course');
  assert(windows.length>10,'Arched windows appear throughout both floors');
  const ray=new THREE.Raycaster();ray.far=3;
  for(const exit of floor.exits){

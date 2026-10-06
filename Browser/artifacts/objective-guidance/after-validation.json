@@ -1,0 +1,114 @@
+{
+  "captures": [
+    "1829-staff-key",
+    "1829-record-near",
+    "1829-record-door",
+    "1829-phone-record",
+    "10000019-staff-key",
+    "10000019-record-near",
+    "10000019-record-door",
+    "10000019-phone-record",
+    "library-other-office",
+    "phone-library-other-office",
+    "landscape-library-other-office"
+  ],
+  "checks": [
+    {
+      "title": "Find the brass outside-door key",
+      "detail": "Second floor · room 201, Records office above Reception. Look for the glowing porter’s record. Press E to inspect and take the key.",
+      "office": "R41",
+      "glow": true
+    },
+    {
+      "objective": {
+        "x": 20,
+        "y": 20,
+        "width": 298,
+        "height": 186,
+        "top": 20,
+        "right": 318,
+        "bottom": 206,
+        "left": 20
+      },
+      "notebook": {
+        "x": 34,
+        "y": 152,
+        "right": 176.875,
+        "bottom": 196
+      },
+      "map": {
+        "x": 194.82000732421875,
+        "y": 222,
+        "right": 375,
+        "bottom": 395.94000244140625
+      }
+    },
+    {
+      "title": "Find the brass outside-door key",
+      "detail": "Second floor · room 209, Librarian office beside the old Library. Look for the glowing porter’s record. Press E to inspect and take the key.",
+      "office": "R49",
+      "glow": true
+    },
+    {
+      "objective": {
+        "x": 20,
+        "y": 20,
+        "width": 298,
+        "height": 186,
+        "top": 20,
+        "right": 318,
+        "bottom": 206,
+        "left": 20
+      },
+      "notebook": {
+        "x": 34,
+        "y": 152,
+        "right": 176.875,
+        "bottom": 196
+      },
+      "map": {
+        "x": 194.82000732421875,
+        "y": 222,
+        "right": 375,
+        "bottom": 395.94000244140625
+      }
+    },
+    {
+      "objective": {
+        "x": 20,
+        "y": 20,
+        "width": 298,
+        "height": 204,
+        "top": 20,
+        "right": 318,
+        "bottom": 224,
+        "left": 20
+      },
+      "map": {
+        "x": 194.82000732421875,
+        "y": 240,
+        "width": 180.17999267578125,
+        "height": 173.94000244140625,
+        "top": 240,
+        "right": 375,
+        "bottom": 413.94000244140625,
+        "left": 194.82000732421875
+      }
+    },
+    {
+      "reduced": {
+        "before": [
+          0.48,
+          0.7,
+          1
+        ],
+        "after": [
+          0.48,
+          0.7,
+          1
+        ]
+      }
+    }
+  ],
+  "errors": []
+}

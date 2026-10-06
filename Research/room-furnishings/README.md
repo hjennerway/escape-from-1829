@@ -1,5 +1,52 @@
 # Room furnishings — 3 October 2026
 
+## Rooms 116, 117 and 119 — 6 October 2026
+
+The owner requested ten more beds in each of player rooms 117 and 119
+(first-floor R20/R22) and a sewing use for room 116 (first-floor R19).
+Both wards now contain fourteen beds. The original four beds keep their
+poses and size; additions extend their long-wall orientations towards the
+entrance, facing the centre aisle. Room 119's longer west row uses 1.50-unit
+spacing while its east additions continue the original spacing. All bed feet
+and entrances remain reachable. Wardrobes and loose chairs/seats fit around
+the beds, with protected full-width foot approaches for every new game.
+
+Room 116 contains two shared timber tables, four Windsor chairs, two sewing
+baskets, two stacks of folded cloth and one wardrobe. This is an owner-directed
+fictional hand-sewing use, not a claim about the hospital's historical room
+inventory. Existing original basket/cloth models and licensed timber furniture
+are reused; no new source images or model assets are imported.
+
+Both shared plans hold the first-floor bed poses, and the first-floor furnished
+SVG/PNG is refreshed. Escape, Explore and notebook discoveries share the new
+room use. Ground-floor counterparts retain their previous uses. Run
+`npm run test:rooms-116-119` in Browser for four-seed walking checks and verified
+hardware desktop/phone/Explore views. Review evidence is in
+`../../Browser/artifacts/rooms-116-119/`; full validation is recorded in
+`../../DEVELOPMENT.md`. The aerial compiler excludes these interior sources.
+Unity, Blender and packaged exports are not regenerated.
+
+## West first-floor bay seating — 6 October 2026
+
+The owner's empty half-octagonal alcove beside rooms 116/117 now has two plain
+timber benches and the existing newspaper stand. The benches use the same
+75% size as the communal hall seats, with their backs against the flat north
+and west wall faces. The stand faces into the bay from its eastern cheek.
+The west window, bay entrance and cross-range corridor remain accessible.
+
+`hall-furnishings.mjs` defines the separate `WestBay` seating area and three
+fixed records shared by Escape and Explore. All 45 existing hall furnishings
+retain their IDs, dimensions and poses. The notebook discovers “West bay
+seating nook”. This is a fictional game use chosen to suit the space;
+the existing newspaper design and benches do not establish a historical
+inventory. No new models, textures or historical references are introduced.
+
+The first-floor furnished drawing is refreshed. Dedicated captures and scope
+evidence are in `../../Browser/artifacts/west-bay-nook/`; run the hall checks
+with `npm run test:halls` in Browser. Only browser furnishings, checks, notes
+and the review drawing change. The compiled aerial source hash still matches;
+Unity, Blender and packaged exports are not regenerated.
+
 ## Basement padded cells — 5 October 2026
 
 The owner confirms B5, B6, B7 and B8 as padded cells for patient confinement.

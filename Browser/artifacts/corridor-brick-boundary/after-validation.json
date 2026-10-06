@@ -1,0 +1,89 @@
+{
+  "captures": [
+    "ground-close",
+    "first-close",
+    "basement-close",
+    "second-close",
+    "angled-corner",
+    "phone"
+  ],
+  "resources": [
+    {
+      "floor": 0,
+      "top": 1.125,
+      "row": 448,
+      "mortar": [
+        148,
+        141,
+        127
+      ],
+      "brick": [
+        137,
+        78,
+        65
+      ],
+      "textures": [
+        1024,
+        1024
+      ]
+    },
+    {
+      "floor": 1,
+      "top": 1.125,
+      "row": 448,
+      "mortar": [
+        148,
+        141,
+        127
+      ],
+      "brick": [
+        137,
+        78,
+        65
+      ],
+      "textures": [
+        1024,
+        1024
+      ]
+    },
+    {
+      "floor": 2,
+      "top": 1.125,
+      "row": 448,
+      "mortar": [
+        148,
+        141,
+        127
+      ],
+      "brick": [
+        137,
+        78,
+        65
+      ],
+      "textures": [
+        1024,
+        1024
+      ]
+    },
+    {
+      "floor": 3,
+      "top": 1.125,
+      "row": 448,
+      "mortar": [
+        148,
+        141,
+        127
+      ],
+      "brick": [
+        137,
+        78,
+        65
+      ],
+      "textures": [
+        1024,
+        1024
+      ]
+    }
+  ],
+  "errors": []
+}

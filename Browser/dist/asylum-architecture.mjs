@@ -1,4 +1,4 @@
-import {createInteriorMaterials} from './interior-materials.mjs';
+import {createInteriorMaterials,INTERIOR_BRICK_COURSE_HEIGHT} from './interior-materials.mjs';
 import {createAsylumRoomFinisher,asylumRoomWallMaterials} from './asylum-room-finishes.mjs';
 import {basementMuralMaterials} from './basement-mural.mjs';
 import {asylumSkirtingGeometry} from './asylum-skirting.mjs';
@@ -26,6 +26,8 @@ export function asylumWallSurfaces(floor){
 export function buildAsylumArchitecture(THREE,scene,floor){
  if(!cache.has(THREE))cache.set(THREE,createInteriorMaterials(THREE,globalThis.document));
  const batches=new Map(),windowFrames=[],ceilingHeight=floor.id===2?2.9:3.8;
+ // Nine complete courses put the red/cream change in the shared mortar joint.
+ const brickHeight=9*INTERIOR_BRICK_COURSE_HEIGHT;
  const roomMaterials=asylumRoomWallMaterials(THREE,cache.get(THREE));
  const materials=floor.id===2?basementMuralMaterials(THREE,roomMaterials,ceilingHeight):roomMaterials;
  const roomFinisher=createAsylumRoomFinisher(THREE,floor,ceilingHeight,windowFrames);
@@ -76,7 +78,9 @@ export function buildAsylumArchitecture(THREE,scene,floor){
     windowFrames.push({x,z,dx,dz,width,depth:.24,bottom:sill-.035,top:head+.035});
     if(t-width/2<0||t+width/2>length)throw new Error('Scheduled window extends past its wall: '+p.roomId);
     wall(previous,[x-dx*width/2,z-dz*width/2]);
-    box('Brick',x,sill/2,z,width,sill,.18,angle);
+    const redTop=Math.min(sill,brickHeight);
+    box('Brick',x,redTop/2,z,width,redTop,.18,angle);
+    if(sill>brickHeight)box('Plaster',x,(brickHeight+sill)/2,z,width,sill-brickHeight,.18,angle);
     box('Plaster',x,(height+head)/2,z,width,height-head,.18,angle);
     box('Glass',x,sill+wh/2,z,width,wh,.04,angle);
     for(const side of [-1,1]){
@@ -235,7 +239,7 @@ export function buildAsylumArchitecture(THREE,scene,floor){
  const transform=new THREE.Object3D(),geometry=new THREE.BoxGeometry(1,1,1);
  // Keep each finish in one draw call, including the retained window masonry
  // and doorway headers. All vertices remain in building texture coordinates.
- for(const [kind,bottom,top] of [['Brick',0,1.1],['Plaster',1.1,height],['Stone']]){
+ for(const [kind,bottom,top] of [['Brick',0,brickHeight],['Plaster',brickHeight,height],['Stone']]){
   const parts=[];
   if(kind==='Stone')parts.push(...stairSolids);
   else if(kind==='Brick')parts.push(extrudeAsylumWalls(THREE,wallShapes,bottom,top));

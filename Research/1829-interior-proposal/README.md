@@ -1,5 +1,29 @@
 # 1829 revised interior plans — 2 October 2026
 
+## Door room numbers and treatment names (6 October 2026)
+
+The owner requests unique, consecutive room numbers on all enclosed room
+doors. This supersedes the earlier restriction to five named Reception
+doors. Ground floor uses G1–G38, first floor 101–133, basement B1–B11 and
+second floor 201–210. Each floor follows the natural numeric order of its
+remaining plan room IDs, omitting open circulation and closing gaps left by
+merged rooms. Internal plan IDs remain the modelling references: for example,
+ground R29 is labelled G28, basement B12 is labelled B11, and upper R41 is 201.
+
+Both faces of each open door carry the same number. The six ground-floor
+treatment rooms also name their existing treatment: G1 Hydrotherapy, G6
+Surgery, G7 Bloodletting, G8 ECT, G12 Cold-water shower and G28 Electrical
+therapy. These names follow the existing fictional furnishings and room uses
+in [the room-furnishing notes](../room-furnishings/README.md). The five
+Reception doors retain their existing names below the new numbers.
+
+Escape and Explore share the labels. Plaques use compact padded texture
+atlases, with one text draw per floor and the existing brass hardware batches.
+Browser labels and validation change; shared plans, architectural drawings,
+Unity, Blender and packaged exports are not regenerated. Aerial compilation
+does not include these interior plaques. Review captures and validation are
+in `../../Browser/artifacts/room-numbers/`.
+
 ## Shared indoor ward privies (5 October 2026)
 
 Ground/first R5, R16, R33 and R35 now contain shared privies and basin

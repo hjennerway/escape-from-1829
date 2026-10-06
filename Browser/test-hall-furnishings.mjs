@@ -15,11 +15,11 @@ for(const [kind,parts] of Object.entries(models)){
  const c=HALL_PROP_CATALOG[kind];assert(box.getSize(new THREE.Vector3()).distanceTo(new THREE.Vector3(c.width,c.height,c.depth))<1e-5,kind+' matches its collision dimensions');assert(Math.abs(box.min.y)<1e-6,kind+' is grounded');
 }
 assert(triangles<16000,'Hall props keep a modest shared geometry budget');
-const ids=['Visitors','WardService','Recreation'],origin={x:0,z:17.5,floor:0,y:0};let baseline;
+const ids=['Visitors','WardService','Recreation','WestBay'],origin={x:0,z:17.5,floor:0,y:0};let baseline;
 for(const seed of [1829,1,42,4294967295]){
  furnishAsylum(floors,{seed});const items=floors.flatMap(f=>f.furniture.filter(i=>ids.includes(i.roomId)));
  if(!baseline)baseline=structuredClone(items);else assert.deepEqual(items,baseline,'Hall furniture stays fixed between games');
- assert.equal(items.length,45);assert.deepEqual(floors.slice(2).flatMap(f=>f.furnishingAreas),[],'Only the requested ground/first-floor halls change');
+ assert.equal(items.length,48);assert.deepEqual(floors.slice(2).flatMap(f=>f.furnishingAreas),[],'Only the ground/first-floor halls are furnished');
  for(const f of floors)for(const a of f.furnishingAreas.filter(a=>ids.includes(a.id))){
   assert(flatWalkable(f,...a.label,.5));assert(routeBetweenFloors(floors,origin,{x:a.label[0],z:a.label[1],floor:f.id}).length,'Every hall is reachable');
   const local=f.furniture.filter(i=>i.roomId===a.id);
@@ -34,7 +34,7 @@ for(const seed of [1829,1,42,4294967295]){
  }
  // The entire original corridor centreline remains open, including the east junction.
  for(const f of floors.slice(0,2))for(const c of f.corridors)for(let i=1;i<c.points.length;i++)for(let t=0;t<=1;t+=.05){const a=c.points[i-1],b=c.points[i],x=a[0]+(b[0]-a[0])*t,z=a[1]+(b[1]-a[1])*t;if(flatWalkable(f,x,z,.36,{furniture:false}))assert(flatWalkable(f,x,z,.36),'Furniture preserves corridor walking lanes');}
- const notes=createNotebook(floors);for(const f of floors)for(const a of f.furnishingAreas.filter(a=>ids.includes(a.id)))notes.explore({x:a.label[0],z:a.label[1],floor:f.id,outside:false});for(const id of ids)assert(notes.entries.some(n=>n.text.includes(id)),'Notebook discovers '+id);
+ const notes=createNotebook(floors);for(const f of floors)for(const a of f.furnishingAreas.filter(a=>ids.includes(a.id))){notes.explore({x:a.label[0],z:a.label[1],floor:f.id,outside:false});assert(notes.entries.some(n=>n.text.includes(a.name)),'Notebook discovers '+a.name);}
 }
 const visitors=baseline.filter(i=>i.roomId==='Visitors'),service=baseline.filter(i=>i.roomId==='WardService'),recreation=baseline.filter(i=>i.roomId==='Recreation');
 assert.equal(visitors.filter(i=>i.kind==='chair').length,8);assert.equal(visitors.filter(i=>i.kind==='table').length,2);assert(visitors.some(i=>i.kind==='visitingNotice'));
@@ -42,4 +42,6 @@ assert.equal(service.filter(i=>i.kind==='linenCupboard').length,2);assert(servic
 assert.equal(service.filter(i=>i.kind==='table').length,1);assert.equal(service.filter(i=>i.kind==='chair').length,2);assert.equal(service.filter(i=>i.kind==='waitingBench').length,2);assert(service.some(i=>i.kind==='foldedLinen')&&service.some(i=>i.kind==='sewingBasket'));
 for(const kind of ['draughtsSet','newspaperStand','sewingBasket','waitingBench'])assert(recreation.some(i=>i.kind===kind));
 assert.equal(recreation.filter(i=>i.kind==='table').length,2);assert.equal(recreation.filter(i=>i.kind==='draughtsSet').length,2);assert.equal(recreation.filter(i=>i.kind==='chair').length,8);assert.equal(recreation.filter(i=>i.kind==='waitingBench').length,2);
-console.log(`PASS: ten hall models / ${triangles} triangles, 45 fixed furnishings, linen worktable and two seated draughts tables with benches, four seeds, physical support/wall mounts, chair directions, corridor lanes, accessible cabinets, ${walks} walked collisions and notebook names.`);
+const bay=baseline.filter(i=>i.roomId==='WestBay');assert.equal(bay.length,3);assert.equal(bay.filter(i=>i.kind==='waitingBench').length,2);assert(bay.some(i=>i.kind==='newspaperStand'));assert(bay.every(i=>i.id.startsWith('1:')),'Only the first-floor bay is furnished');
+for(const item of bay.filter(i=>i.kind==='waitingBench')){const x=item.x-Math.sin(item.rotation)*item.depth/2,z=item.z-Math.cos(item.rotation)*item.depth/2;assert(floors[1].walls.some(w=>Math.abs(segmentDistance(x,z,w.a,w.b)-.09)<1e-6),'Bay bench backs touch masonry');}
+console.log(`PASS: ten hall models / ${triangles} triangles, 48 fixed furnishings including the west seating nook, four seeds, physical support/wall mounts, chair directions, corridor lanes, accessible cabinets, ${walks} walked collisions and notebook names.`);

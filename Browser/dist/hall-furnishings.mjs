@@ -1,4 +1,4 @@
-// Owner-approved fictional uses for three open halls. Architecture is retained.
+// Fictional furnishings for open halls and the west first-floor seating bay.
 export const HALL_PROP_CATALOG={
  sideboard:{procedural:true,width:2.10,depth:.55,height:1.05},
  landscape:{procedural:true,width:1.32,depth:.065,height:.86,decorative:true,mounted:true},
@@ -60,6 +60,14 @@ export function hallFurnishings(floor,catalog){
   for(const [dx,dz,r] of [[-1.18,-.48,Math.PI/2],[-1.18,.48,Math.PI/2],[1.18,-.48,-Math.PI/2],[1.18,.48,-Math.PI/2]])put(a,'chair',secondTable.x+dx,secondTable.z+dz,r);
   on(a,'draughtsSet',secondTable,0,0);
   put(a,'waitingBench',41.0,17.8,Math.PI,{width:catalog.waitingBench.width*.75,depth:catalog.waitingBench.depth*.75,height:catalog.waitingBench.height*.75});
+ }
+ if(floor.id===1){
+  const a=area('WestBay','West bay seating nook','sitting',[-59.0,-1.7],[[-61.7,-2],[-60,-4.5],[-56.8,-4.5],[-55.2,-2.2],[-55.2,-1.1],[-58.4,-1],[-58.4,1],[-61.7,1]]);
+  const bench={width:catalog.waitingBench.width*.75,depth:catalog.waitingBench.depth*.75,height:catalog.waitingBench.height*.75};
+  // Bench backs meet the masonry; the west window and corridor bend stay clear.
+  put(a,'waitingBench',-58.4,-4.41+bench.depth/2,0,bench);
+  put(a,'waitingBench',-61.61+bench.depth/2,-.70,Math.PI/2,bench);
+  put(a,'newspaperStand',-56.5,-2.65,-Math.PI/3);
  }
  return {areas,items};
 }

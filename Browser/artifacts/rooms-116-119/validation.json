@@ -1,0 +1,65 @@
+{
+  "counts": [
+    {
+      "id": "R19",
+      "name": "Sewing room",
+      "beds": 0
+    },
+    {
+      "id": "R20",
+      "name": "Dormitory ward",
+      "beds": 14
+    },
+    {
+      "id": "R22",
+      "name": "Dormitory ward",
+      "beds": 14
+    }
+  ],
+  "geometry": {
+    "renderedItems": 49,
+    "renderedBeds": 28
+  },
+  "walking": [
+    {
+      "x": -51.3,
+      "z": 9.34,
+      "floor": 1
+    },
+    {
+      "x": -42.5,
+      "z": 9.34,
+      "floor": 1
+    }
+  ],
+  "renders": [
+    {
+      "name": "117-north",
+      "calls": 165,
+      "triangles": 1332832
+    },
+    {
+      "name": "117-south",
+      "calls": 341,
+      "triangles": 1427136
+    },
+    {
+      "name": "119-north",
+      "calls": 214,
+      "triangles": 1334114
+    },
+    {
+      "name": "119-south",
+      "calls": 369,
+      "triangles": 1432778
+    },
+    {
+      "name": "116-sewing",
+      "calls": 126,
+      "triangles": 1209706
+    }
+  ],
+  "explore": true,
+  "mobile": true,
+  "errors": []
+}
