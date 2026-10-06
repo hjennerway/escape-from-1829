@@ -1,6 +1,6 @@
 {
   "models": 34,
-  "items": 625,
+  "items": 654,
   "geometryChecks": {
     "bounds": {
       "cellMattress": [
@@ -198,7 +198,7 @@
     ]
   },
   "rendering": {
-    "instances": 1288,
+    "instances": 1333,
     "wallContacts": [
       {
         "id": "0:R1:fixed:1",
@@ -939,7 +939,7 @@
         ]
       },
       {
-        "id": "1:R19:fixed:1",
+        "id": "1:R19:fixed:10",
         "kind": "cupboard",
         "gaps": [
           7.748603832180567e-7,
@@ -960,9 +960,9 @@
         "id": "1:R20:fixed:5",
         "kind": "cupboard",
         "gaps": [
-          -0.0000030398368824069433,
-          -0.0000030398368824069433,
-          -0.0000030398368824069433
+          5.9604644581101596e-8,
+          5.9604644581101596e-8,
+          5.9604644581101596e-8
         ]
       },
       {
@@ -1586,88 +1586,88 @@
   "renders": [
     {
       "name": "visitors",
-      "calls": 359,
-      "triangles": 1404028
+      "calls": 676,
+      "triangles": 645620
     },
     {
       "name": "ward-service",
-      "calls": 340,
-      "triangles": 1400608
+      "calls": 708,
+      "triangles": 701510
     },
     {
       "name": "recreation",
-      "calls": 231,
-      "triangles": 1324726
+      "calls": 371,
+      "triangles": 501820
     },
     {
       "name": "ward",
-      "calls": 175,
-      "triangles": 1379274
+      "calls": 240,
+      "triangles": 432484
     },
     {
       "name": "wardrobe",
-      "calls": 357,
-      "triangles": 1401644
+      "calls": 662,
+      "triangles": 670186
     },
     {
       "name": "medicine",
-      "calls": 300,
-      "triangles": 1397584
+      "calls": 593,
+      "triangles": 636226
     },
     {
       "name": "reading",
-      "calls": 84,
-      "triangles": 1112292
+      "calls": 93,
+      "triangles": 289986
     },
     {
       "name": "staff",
-      "calls": 552,
-      "triangles": 1442348
+      "calls": 1107,
+      "triangles": 937540
     },
     {
       "name": "upstairs-ward",
-      "calls": 349,
-      "triangles": 1332844
+      "calls": 441,
+      "triangles": 470430
     },
     {
       "name": "workshop",
-      "calls": 231,
-      "triangles": 1383670
+      "calls": 450,
+      "triangles": 526610
     },
     {
       "name": "upper-records",
-      "calls": 310,
-      "triangles": 1311980
+      "calls": 352,
+      "triangles": 399698
     },
     {
       "name": "hydrotherapy",
-      "calls": 458,
-      "triangles": 1418736
+      "calls": 781,
+      "triangles": 686186
     },
     {
       "name": "cold-shower",
-      "calls": 416,
-      "triangles": 1415032
+      "calls": 885,
+      "triangles": 778680
     },
     {
       "name": "surgery",
-      "calls": 266,
-      "triangles": 1394362
+      "calls": 482,
+      "triangles": 580774
     },
     {
       "name": "early-electricity",
-      "calls": 140,
-      "triangles": 1221874
+      "calls": 156,
+      "triangles": 317466
     },
     {
       "name": "bloodletting",
-      "calls": 183,
-      "triangles": 1301026
+      "calls": 177,
+      "triangles": 309372
     },
     {
       "name": "ect",
-      "calls": 283,
-      "triangles": 1391974
+      "calls": 555,
+      "triangles": 609288
     }
   ],
   "newGameVariation": true,

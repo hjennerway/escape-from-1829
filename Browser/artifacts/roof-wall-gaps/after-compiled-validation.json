@@ -1,0 +1,139 @@
+{
+  "build": {
+    "mode": "compiled",
+    "milliseconds": 1113.800000000745
+  },
+  "errors": [],
+  "views": {
+    "west-court": {
+      "position": [
+        -46,
+        1.8,
+        -13
+      ],
+      "target": [
+        -53,
+        12,
+        7
+      ],
+      "fov": 64
+    },
+    "west-garden": {
+      "position": [
+        -56,
+        1.8,
+        35
+      ],
+      "target": [
+        -53,
+        12,
+        18
+      ],
+      "fov": 66
+    },
+    "east-court": {
+      "position": [
+        15,
+        1.8,
+        -17
+      ],
+      "target": [
+        31,
+        12,
+        0
+      ],
+      "fov": 65
+    },
+    "east-garden": {
+      "position": [
+        53,
+        1.8,
+        35
+      ],
+      "target": [
+        54,
+        12,
+        15
+      ],
+      "fov": 65
+    },
+    "east-rear": {
+      "position": [
+        64,
+        1.8,
+        -20
+      ],
+      "target": [
+        79,
+        9,
+        -34
+      ],
+      "fov": 65
+    },
+    "reception": {
+      "position": [
+        -15,
+        1.8,
+        35
+      ],
+      "target": [
+        0,
+        13,
+        16
+      ],
+      "fov": 65
+    },
+    "churton": {
+      "position": [
+        -39,
+        1.8,
+        -50
+      ],
+      "target": [
+        -32,
+        10,
+        -71
+      ],
+      "fov": 65
+    },
+    "annexe": {
+      "position": [
+        -171,
+        1.8,
+        -84
+      ],
+      "target": [
+        -171,
+        10,
+        -104
+      ],
+      "fov": 65
+    },
+    "admin": {
+      "position": [
+        204,
+        1.8,
+        66
+      ],
+      "target": [
+        211,
+        10,
+        42
+      ],
+      "fov": 65
+    },
+    "tower": {
+      "position": [
+        172,
+        1.8,
+        -12
+      ],
+      "target": [
+        174,
+        10,
+        -32
+      ],
+      "fov": 65
+    }
+  }
+}

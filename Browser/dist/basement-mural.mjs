@@ -10,12 +10,12 @@ const outline=[[25,0],[72,10],[125,26],[194,45],[280,68],[359,92],[453,119],
  [219,528],[182,532],[141,520],[110,506],[76,491],[41,469],[43,416],
  [51,364],[31,310],[19,278],[10,242],[16,183],[21,98]];
 
-export function basementMuralMaterials(THREE,base,ceilingHeight){
+export function basementMuralMaterials(THREE,base,ceilingHeight,document=globalThis.document){
  if(cache.has(base))return cache.get(base);
  const p=BASEMENT_MURAL,[left,top,right,bottom]=p.crop;
  const height=ceilingHeight*p.heightFraction,width=height*(right-left)/(bottom-top),y=(ceilingHeight-height)/2;
  const ready={value:0};
- const texture=globalThis.document?new THREE.TextureLoader().load(new URL('./art/grindley-basement-mural.png',import.meta.url).href,()=>{ready.value=1;}):new THREE.Texture();
+ const texture=document?new THREE.TextureLoader().load(new URL('./art/grindley-basement-mural.png',import.meta.url).href,()=>{ready.value=1;}):new THREE.Texture();
  texture.colorSpace=THREE.SRGBColorSpace;texture.anisotropy=4;
  const points=outline.map(([x,y])=>new THREE.Vector2((x-left)/(right-left),(bottom-y)/(bottom-top)));
  const result={...base};

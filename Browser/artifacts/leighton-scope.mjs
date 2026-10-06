@@ -4,7 +4,8 @@ import {createHash} from 'node:crypto';
 export function leightonProtected(THREE,model){
  model.updateMatrixWorld(true);const rows=[],instance=new THREE.Matrix4();
  model.traverse(o=>{
-  if(!o.isMesh)return;
+  // Added roof closures are verified separately; retain every original primitive.
+  if(!o.isMesh||o.userData.roofWallClosure)return;
   // Later mapped trees are additive; preserve the original surroundings exactly.
   for(let p=o;p;p=p.parent){
    const tree=p.userData.oakTree??p.userData.adminPineTree;

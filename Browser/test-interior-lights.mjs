@@ -36,4 +36,36 @@ const boundary=createInteriorLights(THREE,new THREE.Scene(),[a,b],{limit:1});
 for(const x of [-.0001,0,.0001]){boundary.update({x,z:0,floor:0});assert(boundary.pool[0].intensity<1e-6);}
 boundary.update({x:0,z:0,floor:1});assert.equal(boundary.pool[0].intensity,0);
 const empty=createInteriorLights(THREE,new THREE.Scene(),[]);empty.update({x:0,z:0,floor:0});assert(empty.pool.every(l=>l.intensity===0));
-console.log('PASS: fixed interior light budget across every floor cell, nearby brightness, floor height/colour, smooth selection boundary and empty floors.');
+// An actor can stand at the top while still belonging to the departure
+// floor. Lighting must match the landing before that identity changes.
+// Use the real route elevations, including basement and Library variants.
+const {buildAsylumLayout,stairRoute}=await import('./dist/asylum-layout.mjs');
+const asylum=buildAsylumLayout(JSON.parse(await readFile(new URL('./dist/asylum-plan.json',import.meta.url)))).floors;
+const snapshot=pool=>pool.filter(l=>l.intensity>0).map(l=>({position:l.position.toArray(),colour:l.color.getHex(),intensity:l.intensity}));
+let stairCases=0;
+for(const floor of asylum)for(const stair of floor.stairs)for(const [lower,upper] of stair.connections){
+ if(lower!==floor.id)continue;
+ const route=stairRoute(stair,asylum[lower].elevation,asylum[upper].elevation,lower,upper),lo=route[0],hi=route.at(-1);
+ const routeLamps=[lower,upper].flatMap((id,i)=>Array.from({length:18},(_,j)=>({x:hi[0]+(j%6-2)*2,z:hi[2]+Math.floor(j/6)*2,y:asylum[id].elevation+2.9,floor:id,color:i?0xffdbac:0x77db97})));
+ const transition=createInteriorLights(THREE,new THREE.Scene(),routeLamps),slots=[...transition.pool];
+ for(const departure of [lower,upper]){
+  for(const [endpoint,destination] of [[lo,lower],[hi,upper]]){
+   const actor={x:hi[0],z:hi[2],y:endpoint[1],floor:departure,stair:{lower,upper,route}};
+   transition.update(actor);const onStair=snapshot(transition.pool);
+   transition.update({...actor,floor:destination,stair:null});
+   assert.deepEqual(snapshot(transition.pool),onStair,`${stair.id}: reaching a landing and leaving the flight use identical lights`);
+  }
+  transition.update({x:hi[0],z:hi[2],y:(lo[1]+hi[1])/2,floor:departure,stair:{lower,upper,route}});
+  assert(transition.pool.some(l=>l.intensity>0&&l.position.y===asylum[lower].elevation+2.9));
+  assert(transition.pool.some(l=>l.intensity>0&&l.position.y===asylum[upper].elevation+2.9),'Both connected floors light the return landing');
+  let previous=new Map();
+  for(let i=0;i<=1000;i++){
+   transition.update({x:hi[0],z:hi[2],y:lo[1]+(hi[1]-lo[1])*i/1000,floor:departure,stair:{lower,upper,route}});
+   const current=new Map(transition.pool.map(l=>[l.position.toArray().join(','),l.intensity]));
+   if(i)for(const key of new Set([...previous.keys(),...current.keys()]))assert(Math.abs((current.get(key)??0)-(previous.get(key)??0))<.25,'Lamp contribution changes continuously while climbing');
+   assert.deepEqual(transition.pool,slots,'Stair blending retains the fixed shader light budget');previous=current;
+  }
+  stairCases++;
+ }
+}
+console.log(`PASS: fixed interior light budget, nearby brightness/colour, smooth selection, empty floors and ${stairCases} ascending/descending stair lighting cases without a landing pop.`);

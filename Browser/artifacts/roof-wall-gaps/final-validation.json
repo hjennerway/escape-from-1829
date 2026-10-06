@@ -1,0 +1,31 @@
+{
+  "roofMeshesSource": 570,
+  "solidMeshesSource": 285,
+  "roofMeshesCompiled": 582,
+  "formerlyOpenRays": 278,
+  "mirroredFixtureRays": 8,
+  "originalGeometry": {
+    "originalMeshes": 16348,
+    "originalGeometryPreserved": true,
+    "addedMeshes": 658,
+    "addedTriangles": 20967
+  },
+  "hardwareRenderer": "ANGLE NVIDIA GeForce RTX 3090 Ti Direct3D11",
+  "compiledModelCurrent": true,
+  "compiledFile": "aerial-d9a872c20647545ac950.bin.gz",
+  "compiledBytes": 21940214,
+  "sourceGroundViews": 15,
+  "compiledGroundViews": 15,
+  "portraitViews": 2,
+  "pageErrors": [],
+  "timelineChecksPassed": true,
+  "scope": [
+    "Browser exterior",
+    "Local compiled aerial assets"
+  ],
+  "exportsNotRegenerated": [
+    "Unity",
+    "Blender",
+    "Packaged desktop/Android"
+  ]
+}

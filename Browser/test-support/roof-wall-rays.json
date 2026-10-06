@@ -1,0 +1,3894 @@
+[
+  {
+    "roof": "Entrance west recessed slate roof",
+    "origin": [
+      -16.84999990463257,
+      12.5600004196167,
+      6.624999904632569
+    ],
+    "direction": [
+      0,
+      1,
+      0
+    ],
+    "distance": 0.55
+  },
+  {
+    "roof": "Entrance east recessed slate roof",
+    "origin": [
+      17.887500524520874,
+      12.5600004196167,
+      6.624999904632569
+    ],
+    "direction": [
+      0,
+      1,
+      0
+    ],
+    "distance": 0.55
+  },
+  {
+    "roof": "Entrance east recessed slate roof",
+    "origin": [
+      25.592525482177734,
+      12.5600004196167,
+      17.374999618530275
+    ],
+    "direction": [
+      0,
+      1,
+      0
+    ],
+    "distance": 0.55
+  },
+  {
+    "roof": "Entrance east recessed slate roof",
+    "origin": [
+      28.170696258544922,
+      12.5600004196167,
+      17.374999618530275
+    ],
+    "direction": [
+      0,
+      1,
+      0
+    ],
+    "distance": 0.55
+  },
+  {
+    "roof": "Entrance east recessed slate roof",
+    "origin": [
+      36.19105911254883,
+      12.5600004196167,
+      17.374999618530275
+    ],
+    "direction": [
+      0,
+      1,
+      0
+    ],
+    "distance": 0.55
+  },
+  {
+    "roof": "Entrance east recessed slate roof",
+    "origin": [
+      34.03468704223633,
+      12.5600004196167,
+      17.374999618530275
+    ],
+    "direction": [
+      0,
+      1,
+      0
+    ],
+    "distance": 0.55
+  },
+  {
+    "roof": "West forward stepped root slate roof",
+    "origin": [
+      -31.625000381469725,
+      8.329999923706055,
+      25.925000190734863
+    ],
+    "direction": [
+      0,
+      1,
+      0
+    ],
+    "distance": 0.55
+  },
+  {
+    "roof": "West forward stepped root slate roof",
+    "origin": [
+      -41.37500152587891,
+      8.329999923706055,
+      25.800000190734863
+    ],
+    "direction": [
+      0,
+      1,
+      0
+    ],
+    "distance": 0.55
+  },
+  {
+    "roof": "Shared estate",
+    "origin": [
+      -28.624999904632567,
+      8.33,
+      35
+    ],
+    "direction": [
+      0,
+      1,
+      0
+    ],
+    "distance": 0.55
+  },
+  {
+    "roof": "Shared estate",
+    "origin": [
+      -41.37500009536743,
+      8.33,
+      35
+    ],
+    "direction": [
+      0,
+      1,
+      0
+    ],
+    "distance": 0.55
+  },
+  {
+    "roof": "East entrance wing slate roof",
+    "origin": [
+      37.52598190307617,
+      8.329999923706055,
+      15.625000381469727
+    ],
+    "direction": [
+      0,
+      1,
+      0
+    ],
+    "distance": 0.55
+  },
+  {
+    "roof": "East entrance wing slate roof",
+    "origin": [
+      41.37500152587891,
+      8.329999923706055,
+      23
+    ],
+    "direction": [
+      0,
+      1,
+      0
+    ],
+    "distance": 0.55
+  },
+  {
+    "roof": "East entrance wing slate roof",
+    "origin": [
+      31.625000381469725,
+      8.329999923706055,
+      25.925000190734863
+    ],
+    "direction": [
+      0,
+      1,
+      0
+    ],
+    "distance": 0.55
+  },
+  {
+    "roof": "East entrance wing slate roof",
+    "origin": [
+      28.624999904632567,
+      8.33,
+      35
+    ],
+    "direction": [
+      0,
+      1,
+      0
+    ],
+    "distance": 0.55
+  },
+  {
+    "roof": "Shared estate",
+    "origin": [
+      81.875,
+      9.030000000000001,
+      4.124999904632569
+    ],
+    "direction": [
+      0,
+      1,
+      0
+    ],
+    "distance": 0.55
+  },
+  {
+    "roof": "Shared estate",
+    "origin": [
+      81.875,
+      9.030000000000001,
+      11.875000095367431
+    ],
+    "direction": [
+      0,
+      1,
+      0
+    ],
+    "distance": 0.55
+  },
+  {
+    "roof": "Shared estate",
+    "origin": [
+      79.17500009536744,
+      9.030000000000001,
+      8
+    ],
+    "direction": [
+      0,
+      1,
+      0
+    ],
+    "distance": 0.55
+  },
+  {
+    "roof": "Shared estate",
+    "origin": [
+      89.2,
+      9.030000000000001,
+      10.374999618530273
+    ],
+    "direction": [
+      0,
+      1,
+      0
+    ],
+    "distance": 0.55
+  },
+  {
+    "roof": "Shared estate",
+    "origin": [
+      83.82499990463258,
+      9.030000000000001,
+      -14
+    ],
+    "direction": [
+      0,
+      1,
+      0
+    ],
+    "distance": 0.55
+  },
+  {
+    "roof": "Shared estate",
+    "origin": [
+      76.2,
+      9.030000000000001,
+      -32.62499990463257
+    ],
+    "direction": [
+      0,
+      1,
+      0
+    ],
+    "distance": 0.55
+  },
+  {
+    "roof": "Shared estate",
+    "origin": [
+      57.82500038146973,
+      9.030000000000001,
+      -38
+    ],
+    "direction": [
+      0,
+      1,
+      0
+    ],
+    "distance": 0.55
+  },
+  {
+    "roof": "Shared estate",
+    "origin": [
+      76.2,
+      9.030000000000001,
+      -46.37500009536743
+    ],
+    "direction": [
+      0,
+      1,
+      0
+    ],
+    "distance": 0.55
+  },
+  {
+    "roof": "Shared estate",
+    "origin": [
+      59.82500038146973,
+      9.030000000000001,
+      -44
+    ],
+    "direction": [
+      0,
+      1,
+      0
+    ],
+    "distance": 0.55
+  },
+  {
+    "roof": "Redesmere aligned frontage slate roof",
+    "origin": [
+      54.17500114440918,
+      14.050000190734863,
+      4.124999904632569
+    ],
+    "direction": [
+      0,
+      1,
+      0
+    ],
+    "distance": 0.55
+  },
+  {
+    "roof": "Redesmere aligned frontage slate roof",
+    "origin": [
+      63.62500152587891,
+      14.050000190734863,
+      5.349999904632568
+    ],
+    "direction": [
+      0,
+      1,
+      0
+    ],
+    "distance": 0.55
+  },
+  {
+    "roof": "Redesmere aligned frontage slate roof",
+    "origin": [
+      45.521026611328125,
+      14.050000190734863,
+      19.874999618530275
+    ],
+    "direction": [
+      0,
+      1,
+      0
+    ],
+    "distance": 0.55
+  },
+  {
+    "roof": "Redesmere aligned frontage slate roof",
+    "origin": [
+      40.62499847412109,
+      14.050000190734863,
+      18.649998664855957
+    ],
+    "direction": [
+      0,
+      1,
+      0
+    ],
+    "distance": 0.55
+  },
+  {
+    "roof": "Redesmere aligned frontage slate roof",
+    "origin": [
+      42.64999961853027,
+      14.050000190734863,
+      16.625000381469725
+    ],
+    "direction": [
+      0,
+      1,
+      0
+    ],
+    "distance": 0.55
+  },
+  {
+    "roof": "Redesmere aligned frontage slate roof",
+    "origin": [
+      42.64999961853027,
+      14.050000190734863,
+      16.575000381469728
+    ],
+    "direction": [
+      0,
+      1,
+      0
+    ],
+    "distance": 0.55
+  },
+  {
+    "roof": "Redesmere aligned frontage slate roof",
+    "origin": [
+      40.62499847412109,
+      14.050000190734863,
+      17
+    ],
+    "direction": [
+      0,
+      1,
+      0
+    ],
+    "distance": 0.55
+  },
+  {
+    "roof": "Redesmere aligned frontage slate roof",
+    "origin": [
+      40.574998474121095,
+      14.050000190734863,
+      17
+    ],
+    "direction": [
+      0,
+      1,
+      0
+    ],
+    "distance": 0.55
+  },
+  {
+    "roof": "Redesmere aligned frontage slate roof",
+    "origin": [
+      44.72500076293945,
+      14.050000190734863,
+      5.349999904632568
+    ],
+    "direction": [
+      0,
+      1,
+      0
+    ],
+    "distance": 0.55
+  },
+  {
+    "roof": "East curved bay slate roof",
+    "origin": [
+      50.556999921798706,
+      14.100000381469727,
+      19.747499999403953
+    ],
+    "direction": [
+      0,
+      1,
+      0
+    ],
+    "distance": 0.55
+  },
+  {
+    "roof": "East curved bay slate roof",
+    "origin": [
+      50.50699992179871,
+      14.100000381469727,
+      19.747499999403953
+    ],
+    "direction": [
+      0,
+      1,
+      0
+    ],
+    "distance": 0.55
+  },
+  {
+    "roof": "Garden pavilion slate roof",
+    "origin": [
+      66,
+      14.03,
+      25.375
+    ],
+    "direction": [
+      0,
+      1,
+      0
+    ],
+    "distance": 0.55
+  },
+  {
+    "roof": "West front outer arm slate roof",
+    "origin": [
+      -63.62499847412109,
+      14.02999973297119,
+      17.399999618530273
+    ],
+    "direction": [
+      0,
+      1,
+      0
+    ],
+    "distance": 0.55
+  },
+  {
+    "roof": "West front outer arm slate roof",
+    "origin": [
+      -68,
+      14.02999973297119,
+      20.874999618530275
+    ],
+    "direction": [
+      0,
+      1,
+      0
+    ],
+    "distance": 0.55
+  },
+  {
+    "roof": "West curved bay slate roof",
+    "origin": [
+      -55.79200134277344,
+      14.029999732971191,
+      14.92199993133545
+    ],
+    "direction": [
+      0,
+      1,
+      0
+    ],
+    "distance": 0.55
+  },
+  {
+    "roof": "West curved bay slate roof",
+    "origin": [
+      -49.20799865722656,
+      14.029999732971191,
+      14.92199993133545
+    ],
+    "direction": [
+      0,
+      1,
+      0
+    ],
+    "distance": 0.55
+  },
+  {
+    "roof": "West garden inner pavilion slate roof",
+    "origin": [
+      -40.37500152587891,
+      14.029999732971191,
+      17.750000095367433
+    ],
+    "direction": [
+      0,
+      1,
+      0
+    ],
+    "distance": 0.55
+  },
+  {
+    "roof": "West garden inner pavilion slate roof",
+    "origin": [
+      -37.5,
+      14.029999732971191,
+      21.57500047683716
+    ],
+    "direction": [
+      0,
+      1,
+      0
+    ],
+    "distance": 0.55
+  },
+  {
+    "roof": "West garden inner pavilion slate roof",
+    "origin": [
+      -34.62499847412109,
+      14.029999732971191,
+      18.55000022649765
+    ],
+    "direction": [
+      0,
+      1,
+      0
+    ],
+    "distance": 0.55
+  },
+  {
+    "roof": "West courtyard polygonal bay slate roof",
+    "origin": [
+      -61.85249853134155,
+      14.029999732971191,
+      4.200999984145165
+    ],
+    "direction": [
+      0,
+      1,
+      0
+    ],
+    "distance": 0.55
+  },
+  {
+    "roof": "West courtyard polygonal bay slate roof",
+    "origin": [
+      -54.94750051498413,
+      14.029999732971191,
+      4.200999984145165
+    ],
+    "direction": [
+      0,
+      1,
+      0
+    ],
+    "distance": 0.55
+  },
+  {
+    "roof": "East courtyard polygonal bay slate roof",
+    "origin": [
+      56.13350005149841,
+      14.100000381469727,
+      3.625481590628624
+    ],
+    "direction": [
+      0,
+      1,
+      0
+    ],
+    "distance": 0.55
+  },
+  {
+    "roof": "East courtyard polygonal bay slate roof",
+    "origin": [
+      63.466499948501585,
+      14.100000381469727,
+      3.625481590628624
+    ],
+    "direction": [
+      0,
+      1,
+      0
+    ],
+    "distance": 0.55
+  },
+  {
+    "roof": "Shared estate",
+    "origin": [
+      6.875000095367431,
+      8.1,
+      -8.75
+    ],
+    "direction": [
+      0,
+      1,
+      0
+    ],
+    "distance": 0.55
+  },
+  {
+    "roof": "Shared estate",
+    "origin": [
+      -6.875000095367431,
+      8.1,
+      -8.75
+    ],
+    "direction": [
+      0,
+      1,
+      0
+    ],
+    "distance": 0.55
+  },
+  {
+    "roof": "Shared estate",
+    "origin": [
+      0.6999999999999993,
+      8.9,
+      -39.87500009536743
+    ],
+    "direction": [
+      0,
+      1,
+      0
+    ],
+    "distance": 0.55
+  },
+  {
+    "roof": "Shared estate",
+    "origin": [
+      8.274999904632567,
+      8.9,
+      -32
+    ],
+    "direction": [
+      0,
+      1,
+      0
+    ],
+    "distance": 0.55
+  },
+  {
+    "roof": "Shared estate",
+    "origin": [
+      -6.874999904632568,
+      8.9,
+      -32
+    ],
+    "direction": [
+      0,
+      1,
+      0
+    ],
+    "distance": 0.55
+  },
+  {
+    "roof": "Redesmere entrance hipped roof",
+    "origin": [
+      95.55,
+      8.36,
+      -17.825000000000003
+    ],
+    "direction": [
+      0,
+      1,
+      0
+    ],
+    "distance": 0.55
+  },
+  {
+    "roof": "Redesmere entrance hipped roof",
+    "origin": [
+      95.55,
+      8.36,
+      -5.875
+    ],
+    "direction": [
+      0,
+      1,
+      0
+    ],
+    "distance": 0.55
+  },
+  {
+    "roof": "West lawn bay slate roof",
+    "origin": [
+      -28.3,
+      8.52,
+      32.725000047683714
+    ],
+    "direction": [
+      0,
+      1,
+      0
+    ],
+    "distance": 0.55
+  },
+  {
+    "roof": "West lawn bay slate roof",
+    "origin": [
+      -27.025000047683715,
+      8.52,
+      35.5
+    ],
+    "direction": [
+      0,
+      1,
+      0
+    ],
+    "distance": 0.55
+  },
+  {
+    "roof": "West lawn bay slate roof",
+    "origin": [
+      -28.3,
+      8.52,
+      38.274999952316286
+    ],
+    "direction": [
+      0,
+      1,
+      0
+    ],
+    "distance": 0.55
+  },
+  {
+    "roof": "Entrance east projection slate roof",
+    "origin": [
+      28.218917846679688,
+      13.494999885559082,
+      16.72500076293945
+    ],
+    "direction": [
+      0,
+      1,
+      0
+    ],
+    "distance": 0.55
+  },
+  {
+    "roof": "Entrance east projection slate roof",
+    "origin": [
+      28.218917846679688,
+      13.494999885559082,
+      16.675000762939455
+    ],
+    "direction": [
+      0,
+      1,
+      0
+    ],
+    "distance": 0.55
+  },
+  {
+    "roof": "Entrance east projection slate roof",
+    "origin": [
+      28.537442207336426,
+      13.494999885559082,
+      16.72500076293945
+    ],
+    "direction": [
+      0,
+      1,
+      0
+    ],
+    "distance": 0.55
+  },
+  {
+    "roof": "Entrance east projection slate roof",
+    "origin": [
+      28.537442207336426,
+      13.494999885559082,
+      16.675000762939455
+    ],
+    "direction": [
+      0,
+      1,
+      0
+    ],
+    "distance": 0.55
+  },
+  {
+    "roof": "Entrance east projection slate roof",
+    "origin": [
+      25.310999870300293,
+      13.494999885559082,
+      16.72500076293945
+    ],
+    "direction": [
+      0,
+      1,
+      0
+    ],
+    "distance": 0.55
+  },
+  {
+    "roof": "Entrance east projection slate roof",
+    "origin": [
+      25.310999870300293,
+      13.494999885559082,
+      16.675000762939455
+    ],
+    "direction": [
+      0,
+      1,
+      0
+    ],
+    "distance": 0.55
+  },
+  {
+    "roof": "Entrance east projection slate roof",
+    "origin": [
+      26.824000358581543,
+      13.494999885559082,
+      16.72500076293945
+    ],
+    "direction": [
+      0,
+      1,
+      0
+    ],
+    "distance": 0.55
+  },
+  {
+    "roof": "Entrance east projection slate roof",
+    "origin": [
+      26.824000358581543,
+      13.494999885559082,
+      16.675000762939455
+    ],
+    "direction": [
+      0,
+      1,
+      0
+    ],
+    "distance": 0.55
+  },
+  {
+    "roof": "West cross-range continuous roof join",
+    "origin": [
+      -65.6249984741211,
+      14.029999732971191,
+      5.599999904632568
+    ],
+    "direction": [
+      0,
+      1,
+      0
+    ],
+    "distance": 0.55
+  },
+  {
+    "roof": "West cross-range continuous roof join",
+    "origin": [
+      -61.852498626708986,
+      14.029999732971191,
+      5.599999904632568
+    ],
+    "direction": [
+      0,
+      1,
+      0
+    ],
+    "distance": 0.55
+  },
+  {
+    "roof": "West cross-range continuous roof join",
+    "origin": [
+      -35.167999267578125,
+      14.029999732971191,
+      4.624999904632569
+    ],
+    "direction": [
+      0,
+      1,
+      0
+    ],
+    "distance": 0.55
+  },
+  {
+    "roof": "West cross-range continuous roof join",
+    "origin": [
+      -34.19076919555664,
+      14.029999732971191,
+      4.624999904632569
+    ],
+    "direction": [
+      0,
+      1,
+      0
+    ],
+    "distance": 0.55
+  },
+  {
+    "roof": "West cross-range continuous roof join",
+    "origin": [
+      -59.708499908447266,
+      14.029999732971191,
+      13.874999618530273
+    ],
+    "direction": [
+      0,
+      1,
+      0
+    ],
+    "distance": 0.55
+  },
+  {
+    "roof": "West entrance corner slate to yellow boundary",
+    "origin": [
+      -28.82289731979822,
+      14.130940437316895,
+      16.5975078392074
+    ],
+    "direction": [
+      0,
+      1,
+      0
+    ],
+    "distance": 0.55
+  },
+  {
+    "roof": "West entrance corner slate to yellow boundary",
+    "origin": [
+      -28.78754198073889,
+      14.130940437316895,
+      16.56215250014807
+    ],
+    "direction": [
+      0,
+      1,
+      0
+    ],
+    "distance": 0.55
+  },
+  {
+    "roof": "West entrance corner slate to yellow boundary",
+    "origin": [
+      -29.21716535568689,
+      13.995933055877686,
+      16.203239803318727
+    ],
+    "direction": [
+      0,
+      1,
+      0
+    ],
+    "distance": 0.55
+  },
+  {
+    "roof": "West entrance corner slate to yellow boundary",
+    "origin": [
+      -29.181810016627562,
+      13.995933055877686,
+      16.167884464259398
+    ],
+    "direction": [
+      0,
+      1,
+      0
+    ],
+    "distance": 0.55
+  },
+  {
+    "roof": "West entrance corner slate to yellow boundary",
+    "origin": [
+      -29.486565313903146,
+      13.903685092926025,
+      15.933841275043129
+    ],
+    "direction": [
+      0,
+      1,
+      0
+    ],
+    "distance": 0.55
+  },
+  {
+    "roof": "West entrance corner slate to yellow boundary",
+    "origin": [
+      -29.45120362225408,
+      13.903685092926025,
+      15.898492289715172
+    ],
+    "direction": [
+      0,
+      1,
+      0
+    ],
+    "distance": 0.55
+  },
+  {
+    "roof": "East entrance corner slate to render boundary",
+    "origin": [
+      28.66922191285776,
+      13.489136219024658,
+      16.751184199799997
+    ],
+    "direction": [
+      0,
+      1,
+      0
+    ],
+    "distance": 0.55
+  },
+  {
+    "roof": "East entrance corner slate to render boundary",
+    "origin": [
+      28.63386532163931,
+      13.489136219024658,
+      16.715830112944143
+    ],
+    "direction": [
+      0,
+      1,
+      0
+    ],
+    "distance": 0.55
+  },
+  {
+    "roof": "East entrance corner slate to render boundary",
+    "origin": [
+      28.692705516819704,
+      13.493246078491211,
+      16.727699642185915
+    ],
+    "direction": [
+      0,
+      1,
+      0
+    ],
+    "distance": 0.55
+  },
+  {
+    "roof": "East entrance corner slate to render boundary",
+    "origin": [
+      28.657350177760375,
+      13.493246078491211,
+      16.692344303126585
+    ],
+    "direction": [
+      0,
+      1,
+      0
+    ],
+    "distance": 0.55
+  },
+  {
+    "roof": "East entrance corner slate to render boundary",
+    "origin": [
+      29.094311697858256,
+      13.563528060913086,
+      16.32609441332347
+    ],
+    "direction": [
+      0,
+      1,
+      0
+    ],
+    "distance": 0.55
+  },
+  {
+    "roof": "East entrance corner slate to render boundary",
+    "origin": [
+      29.058966652971822,
+      13.563528060913086,
+      16.290728783087662
+    ],
+    "direction": [
+      0,
+      1,
+      0
+    ],
+    "distance": 0.55
+  },
+  {
+    "roof": "Pyramidal slate roof",
+    "origin": [
+      141.97499980926514,
+      33.459999084472656,
+      -55.2
+    ],
+    "direction": [
+      0,
+      1,
+      0
+    ],
+    "distance": 0.55
+  },
+  {
+    "roof": "Pyramidal slate roof",
+    "origin": [
+      148,
+      33.459999084472656,
+      -49.17499980926514
+    ],
+    "direction": [
+      0,
+      1,
+      0
+    ],
+    "distance": 0.55
+  },
+  {
+    "roof": "Pyramidal slate roof",
+    "origin": [
+      154.02500019073486,
+      33.459999084472656,
+      -55.2
+    ],
+    "direction": [
+      0,
+      1,
+      0
+    ],
+    "distance": 0.55
+  },
+  {
+    "roof": "Pyramidal slate roof",
+    "origin": [
+      148,
+      33.459999084472656,
+      -61.22500019073487
+    ],
+    "direction": [
+      0,
+      1,
+      0
+    ],
+    "distance": 0.55
+  },
+  {
+    "roof": "Small east service projection slate roof",
+    "origin": [
+      212.05499992370605,
+      3.5,
+      -90.24999999403954
+    ],
+    "direction": [
+      0,
+      1,
+      0
+    ],
+    "distance": 0.55
+  },
+  {
+    "roof": "Small east service projection slate roof",
+    "origin": [
+      207.94500007629395,
+      3.5,
+      -90.24999999403954
+    ],
+    "direction": [
+      0,
+      1,
+      0
+    ],
+    "distance": 0.55
+  },
+  {
+    "roof": "Small east service projection slate roof",
+    "origin": [
+      210,
+      3.5,
+      -92.55500000715256
+    ],
+    "direction": [
+      0,
+      1,
+      0
+    ],
+    "distance": 0.55
+  },
+  {
+    "roof": "Small east service projection slate roof",
+    "origin": [
+      210,
+      3.5,
+      -87.94499998092653
+    ],
+    "direction": [
+      0,
+      1,
+      0
+    ],
+    "distance": 0.55
+  },
+  {
+    "roof": "Transverse ward range slate roof",
+    "origin": [
+      172.7,
+      4.099999904632568,
+      -137.16499977111818
+    ],
+    "direction": [
+      0,
+      1,
+      0
+    ],
+    "distance": 0.55
+  },
+  {
+    "roof": "Transverse ward range slate roof",
+    "origin": [
+      132,
+      4.099999904632568,
+      -199.26499977111817
+    ],
+    "direction": [
+      0,
+      1,
+      0
+    ],
+    "distance": 0.55
+  },
+  {
+    "roof": "Central administration range slate roof",
+    "origin": [
+      198,
+      13.78,
+      17.604999542236328
+    ],
+    "direction": [
+      0,
+      1,
+      0
+    ],
+    "distance": 0.55
+  },
+  {
+    "roof": "West projecting pavilion slate roof",
+    "origin": [
+      167.25,
+      13.78,
+      6.40500068664551
+    ],
+    "direction": [
+      0,
+      1,
+      0
+    ],
+    "distance": 0.55
+  },
+  {
+    "roof": "West projecting pavilion slate roof",
+    "origin": [
+      167.25,
+      13.78,
+      38.794999313354495
+    ],
+    "direction": [
+      0,
+      1,
+      0
+    ],
+    "distance": 0.55
+  },
+  {
+    "roof": "West projecting pavilion slate roof",
+    "origin": [
+      160.30500020980836,
+      13.78,
+      22.6
+    ],
+    "direction": [
+      0,
+      1,
+      0
+    ],
+    "distance": 0.55
+  },
+  {
+    "roof": "East projecting pavilion slate roof",
+    "origin": [
+      232.69499979019164,
+      13.78,
+      31.400000000000006
+    ],
+    "direction": [
+      0,
+      1,
+      0
+    ],
+    "distance": 0.55
+  },
+  {
+    "roof": "East projecting pavilion slate roof",
+    "origin": [
+      225.75,
+      13.78,
+      40.39500045776368
+    ],
+    "direction": [
+      0,
+      1,
+      0
+    ],
+    "distance": 0.55
+  },
+  {
+    "roof": "Low west side rooms slate roof",
+    "origin": [
+      150.3,
+      4.18,
+      17.604999732971187
+    ],
+    "direction": [
+      0,
+      1,
+      0
+    ],
+    "distance": 0.55
+  },
+  {
+    "roof": "Low west side rooms slate roof",
+    "origin": [
+      153.79499998092652,
+      4.18,
+      25.799999999999997
+    ],
+    "direction": [
+      0,
+      1,
+      0
+    ],
+    "distance": 0.55
+  },
+  {
+    "roof": "East upper return slate roof",
+    "origin": [
+      235.69500002861022,
+      12.68,
+      17.8
+    ],
+    "direction": [
+      0,
+      1,
+      0
+    ],
+    "distance": 0.55
+  },
+  {
+    "roof": "East upper return slate roof",
+    "origin": [
+      234,
+      12.68,
+      22.794999980926516
+    ],
+    "direction": [
+      0,
+      1,
+      0
+    ],
+    "distance": 0.55
+  },
+  {
+    "roof": "Rear projecting window range slate roof",
+    "origin": [
+      213.999999999975,
+      13.78,
+      10.805000114440919
+    ],
+    "direction": [
+      0,
+      1,
+      0
+    ],
+    "distance": 0.55
+  },
+  {
+    "roof": "Rear projecting window range slate roof",
+    "origin": [
+      221.19499979016663,
+      13.78,
+      14.399999999999999
+    ],
+    "direction": [
+      0,
+      1,
+      0
+    ],
+    "distance": 0.55
+  },
+  {
+    "roof": "Rear projecting window range slate roof",
+    "origin": [
+      206.80500020978334,
+      13.78,
+      14.399999999999999
+    ],
+    "direction": [
+      0,
+      1,
+      0
+    ],
+    "distance": 0.55
+  },
+  {
+    "roof": "Rear canted stair bay slate roof",
+    "origin": [
+      223.96467769788802,
+      10.180000305175781,
+      10.709677651636703
+    ],
+    "direction": [
+      0,
+      1,
+      0
+    ],
+    "distance": 0.55
+  },
+  {
+    "roof": "Rear canted stair bay slate roof",
+    "origin": [
+      227.499999999975,
+      10.180000305175781,
+      10.090000009536743
+    ],
+    "direction": [
+      0,
+      1,
+      0
+    ],
+    "distance": 0.55
+  },
+  {
+    "roof": "Rear canted stair bay slate roof",
+    "origin": [
+      231.03532230206196,
+      10.180000305175781,
+      10.709677651636703
+    ],
+    "direction": [
+      0,
+      1,
+      0
+    ],
+    "distance": 0.55
+  },
+  {
+    "roof": "Rear canted stair bay slate roof",
+    "origin": [
+      231.6549998283136,
+      10.180000305175781,
+      13.826999974250793
+    ],
+    "direction": [
+      0,
+      1,
+      0
+    ],
+    "distance": 0.55
+  },
+  {
+    "roof": "Rear canted stair bay slate roof",
+    "origin": [
+      227.499999999975,
+      10.180000305175781,
+      16.309999990463258
+    ],
+    "direction": [
+      0,
+      1,
+      0
+    ],
+    "distance": 0.55
+  },
+  {
+    "roof": "Rear canted stair bay slate roof",
+    "origin": [
+      223.34500017163637,
+      10.180000305175781,
+      13.826999974250793
+    ],
+    "direction": [
+      0,
+      1,
+      0
+    ],
+    "distance": 0.55
+  },
+  {
+    "roof": "East rear shoulder slate roof",
+    "origin": [
+      225.75,
+      12.68,
+      16.004999923706052
+    ],
+    "direction": [
+      0,
+      1,
+      0
+    ],
+    "distance": 0.55
+  },
+  {
+    "roof": "East rear shoulder slate roof",
+    "origin": [
+      225.75,
+      12.68,
+      22.795000076293945
+    ],
+    "direction": [
+      0,
+      1,
+      0
+    ],
+    "distance": 0.55
+  },
+  {
+    "roof": "East rear shoulder slate roof",
+    "origin": [
+      218.80500020980836,
+      12.68,
+      19.4
+    ],
+    "direction": [
+      0,
+      1,
+      0
+    ],
+    "distance": 0.55
+  },
+  {
+    "roof": "East pointed side wing slate roof",
+    "origin": [
+      238.61000061035156,
+      6.880000114440918,
+      12.804999923706058
+    ],
+    "direction": [
+      0,
+      1,
+      0
+    ],
+    "distance": 0.55
+  },
+  {
+    "roof": "East pointed side wing slate roof",
+    "origin": [
+      241.69500122070312,
+      6.880000114440918,
+      16.200000000000003
+    ],
+    "direction": [
+      0,
+      1,
+      0
+    ],
+    "distance": 0.55
+  },
+  {
+    "roof": "East pointed side wing slate roof",
+    "origin": [
+      238.61000061035156,
+      6.880000114440918,
+      19.59500007629395
+    ],
+    "direction": [
+      0,
+      1,
+      0
+    ],
+    "distance": 0.55
+  },
+  {
+    "roof": "Redesmere concealed connector slate roof",
+    "origin": [
+      97.55000000000001,
+      3.16,
+      6.404999923706056
+    ],
+    "direction": [
+      0,
+      1,
+      0
+    ],
+    "distance": 0.55
+  },
+  {
+    "roof": "Redesmere concealed connector slate roof",
+    "origin": [
+      100.64499988555909,
+      3.16,
+      9.8
+    ],
+    "direction": [
+      0,
+      1,
+      0
+    ],
+    "distance": 0.55
+  },
+  {
+    "roof": "Redesmere concealed connector slate roof",
+    "origin": [
+      97.55000000000001,
+      3.16,
+      13.195000076293946
+    ],
+    "direction": [
+      0,
+      1,
+      0
+    ],
+    "distance": 0.55
+  },
+  {
+    "roof": "Redesmere concealed connector slate roof",
+    "origin": [
+      94.45500011444094,
+      3.16,
+      9.8
+    ],
+    "direction": [
+      0,
+      1,
+      0
+    ],
+    "distance": 0.55
+  },
+  {
+    "roof": "Redesmere connector building slate roof",
+    "origin": [
+      120.19499988555907,
+      4.359999999999999,
+      7.1
+    ],
+    "direction": [
+      0,
+      1,
+      0
+    ],
+    "distance": 0.55
+  },
+  {
+    "roof": "Redesmere connector building slate roof",
+    "origin": [
+      100.25500011444092,
+      4.359999999999999,
+      7.1
+    ],
+    "direction": [
+      0,
+      1,
+      0
+    ],
+    "distance": 0.55
+  },
+  {
+    "roof": "Connecting corridor slate roof",
+    "origin": [
+      160.6949993133545,
+      3.16,
+      9.8
+    ],
+    "direction": [
+      0,
+      1,
+      0
+    ],
+    "distance": 0.55
+  },
+  {
+    "roof": "Connecting corridor slate roof",
+    "origin": [
+      119.80500068664551,
+      3.16,
+      9.8
+    ],
+    "direction": [
+      0,
+      1,
+      0
+    ],
+    "distance": 0.55
+  },
+  {
+    "roof": "Straight corridor to Farndon slate roof",
+    "origin": [
+      153.40499992370607,
+      3.1600000858306885,
+      -61.149996948242176
+    ],
+    "direction": [
+      0,
+      1,
+      0
+    ],
+    "distance": 0.55
+  },
+  {
+    "roof": "Straight corridor to Farndon slate roof",
+    "origin": [
+      159.19500007629395,
+      3.1600000858306885,
+      -61.14999694824219
+    ],
+    "direction": [
+      0,
+      1,
+      0
+    ],
+    "distance": 0.55
+  },
+  {
+    "roof": "Ward corridor elbow slate roof",
+    "origin": [
+      76.12280884604498,
+      3.1600000858306885,
+      -200.76927898152664
+    ],
+    "direction": [
+      0,
+      1,
+      0
+    ],
+    "distance": 0.55
+  },
+  {
+    "roof": "Main/admin front corridor slate roof",
+    "origin": [
+      153.40499992370607,
+      3.1600000858306885,
+      20.200000381469728
+    ],
+    "direction": [
+      0,
+      1,
+      0
+    ],
+    "distance": 0.55
+  },
+  {
+    "roof": "Laundry hipped slate roof",
+    "origin": [
+      109.3,
+      3.929999828338623,
+      27.72500019073486
+    ],
+    "direction": [
+      0,
+      1,
+      0
+    ],
+    "distance": 0.55
+  },
+  {
+    "roof": "Laundry hipped slate roof",
+    "origin": [
+      116.87499990463256,
+      3.929999828338623,
+      42.4
+    ],
+    "direction": [
+      0,
+      1,
+      0
+    ],
+    "distance": 0.55
+  },
+  {
+    "roof": "Laundry hipped slate roof",
+    "origin": [
+      109.3,
+      3.929999828338623,
+      57.07499980926514
+    ],
+    "direction": [
+      0,
+      1,
+      0
+    ],
+    "distance": 0.55
+  },
+  {
+    "roof": "Laundry hipped slate roof",
+    "origin": [
+      101.72500009536743,
+      3.929999828338623,
+      42.4
+    ],
+    "direction": [
+      0,
+      1,
+      0
+    ],
+    "distance": 0.55
+  },
+  {
+    "roof": "Mortuary crossbar slate roof",
+    "origin": [
+      164.7768101515392,
+      2.930000066757202,
+      118.68812647218319
+    ],
+    "direction": [
+      0,
+      1,
+      0
+    ],
+    "distance": 0.55
+  },
+  {
+    "roof": "West front connecting ward slate roof",
+    "origin": [
+      430.62372485143607,
+      7.0600000000000005,
+      -62.34065823633642
+    ],
+    "direction": [
+      0,
+      1,
+      0
+    ],
+    "distance": 0.55
+  },
+  {
+    "roof": "West front connecting ward slate roof",
+    "origin": [
+      425.3988216006873,
+      7.0600000000000005,
+      -67.76519182966705
+    ],
+    "direction": [
+      0,
+      1,
+      0
+    ],
+    "distance": 0.55
+  },
+  {
+    "roof": "West front connecting ward slate roof",
+    "origin": [
+      441.3313511417445,
+      7.0600000000000005,
+      -77.88280564936379
+    ],
+    "direction": [
+      0,
+      1,
+      0
+    ],
+    "distance": 0.55
+  },
+  {
+    "roof": "West end ward slate roof",
+    "origin": [
+      460.7257044231872,
+      7.0600000000000005,
+      -51.67574494377836
+    ],
+    "direction": [
+      0,
+      1,
+      0
+    ],
+    "distance": 0.55
+  },
+  {
+    "roof": "West end ward slate roof",
+    "origin": [
+      435.68518390613434,
+      7.0600000000000005,
+      -77.67300043741325
+    ],
+    "direction": [
+      0,
+      1,
+      0
+    ],
+    "distance": 0.55
+  },
+  {
+    "roof": "West rear pavilion slate roof",
+    "origin": [
+      459.8698716944997,
+      7.0600000000000005,
+      -39.697285121595655
+    ],
+    "direction": [
+      0,
+      1,
+      0
+    ],
+    "distance": 0.55
+  },
+  {
+    "roof": "West rear pavilion slate roof",
+    "origin": [
+      451.67577375513264,
+      7.0600000000000005,
+      -38.27266458063558
+    ],
+    "direction": [
+      0,
+      1,
+      0
+    ],
+    "distance": 0.55
+  },
+  {
+    "roof": "West rear pavilion slate roof",
+    "origin": [
+      453.4064924784834,
+      7.0600000000000005,
+      -46.40761371546779
+    ],
+    "direction": [
+      0,
+      1,
+      0
+    ],
+    "distance": 0.55
+  },
+  {
+    "roof": "West rear pavilion slate roof",
+    "origin": [
+      461.60059041785047,
+      7.0600000000000005,
+      -47.83223425642787
+    ],
+    "direction": [
+      0,
+      1,
+      0
+    ],
+    "distance": 0.55
+  },
+  {
+    "roof": "West end projecting rooms slate roof",
+    "origin": [
+      455.31817893631813,
+      7.0600000000000005,
+      -66.296772536014
+    ],
+    "direction": [
+      0,
+      1,
+      0
+    ],
+    "distance": 0.55
+  },
+  {
+    "roof": "West end projecting rooms slate roof",
+    "origin": [
+      445.7586092605258,
+      7.0600000000000005,
+      -76.22158919873195
+    ],
+    "direction": [
+      0,
+      1,
+      0
+    ],
+    "distance": 0.55
+  },
+  {
+    "roof": "West end projecting rooms slate roof",
+    "origin": [
+      453.57210973980466,
+      7.0600000000000005,
+      -74.18125157516545
+    ],
+    "direction": [
+      0,
+      1,
+      0
+    ],
+    "distance": 0.55
+  },
+  {
+    "roof": "West end middle rooms slate roof",
+    "origin": [
+      448.1753267738558,
+      7.0600000000000005,
+      -55.69874656187071
+    ],
+    "direction": [
+      0,
+      1,
+      0
+    ],
+    "distance": 0.55
+  },
+  {
+    "roof": "West end middle rooms slate roof",
+    "origin": [
+      443.4816762789516,
+      7.0600000000000005,
+      -55.78673197086239
+    ],
+    "direction": [
+      0,
+      1,
+      0
+    ],
+    "distance": 0.55
+  },
+  {
+    "roof": "West end middle rooms slate roof",
+    "origin": [
+      443.56966168794327,
+      7.0600000000000005,
+      -60.480382465766574
+    ],
+    "direction": [
+      0,
+      1,
+      0
+    ],
+    "distance": 0.55
+  },
+  {
+    "roof": "West court outer link slate roof",
+    "origin": [
+      415.1941824473271,
+      7.0600000000000005,
+      -47.47894423038259
+    ],
+    "direction": [
+      0,
+      1,
+      0
+    ],
+    "distance": 0.55
+  },
+  {
+    "roof": "West court outer link slate roof",
+    "origin": [
+      411.826993326682,
+      7.0600000000000005,
+      -50.97478513373692
+    ],
+    "direction": [
+      0,
+      1,
+      0
+    ],
+    "distance": 0.55
+  },
+  {
+    "roof": "Recess cheek slate roof",
+    "origin": [
+      411.933425094268,
+      7.0600000000000005,
+      -53.28480455678929
+    ],
+    "direction": [
+      0,
+      1,
+      0
+    ],
+    "distance": 0.55
+  },
+  {
+    "roof": "Recess cheek slate roof",
+    "origin": [
+      411.15015433109835,
+      7.0600000000000005,
+      -55.28024212757778
+    ],
+    "direction": [
+      0,
+      1,
+      0
+    ],
+    "distance": 0.55
+  },
+  {
+    "roof": "Recess low entrance room slate roof",
+    "origin": [
+      410.84079267895174,
+      3.19,
+      -49.296597746045144
+    ],
+    "direction": [
+      0,
+      1,
+      0
+    ],
+    "distance": 0.55
+  },
+  {
+    "roof": "Recess low entrance room slate roof",
+    "origin": [
+      406.66859427198403,
+      3.19,
+      -53.628205305169466
+    ],
+    "direction": [
+      0,
+      1,
+      0
+    ],
+    "distance": 0.55
+  },
+  {
+    "roof": "Recess low entrance room slate roof",
+    "origin": [
+      409.87578865157155,
+      3.19,
+      -52.542238847884136
+    ],
+    "direction": [
+      0,
+      1,
+      0
+    ],
+    "distance": 0.55
+  },
+  {
+    "roof": "West court inner return slate roof",
+    "origin": [
+      372.7094851271625,
+      7.0600000000000005,
+      -35.33390970390329
+    ],
+    "direction": [
+      0,
+      1,
+      0
+    ],
+    "distance": 0.55
+  },
+  {
+    "roof": "West court inner return slate roof",
+    "origin": [
+      378.1340187204931,
+      7.0600000000000005,
+      -40.55881295465201
+    ],
+    "direction": [
+      0,
+      1,
+      0
+    ],
+    "distance": 0.55
+  },
+  {
+    "roof": "West court front range slate roof",
+    "origin": [
+      366.5171050062025,
+      7.0600000000000005,
+      -41.762886394161846
+    ],
+    "direction": [
+      0,
+      1,
+      0
+    ],
+    "distance": 0.55
+  },
+  {
+    "roof": "West court front range slate roof",
+    "origin": [
+      392.5143604998373,
+      7.0600000000000005,
+      -66.80340691121471
+    ],
+    "direction": [
+      0,
+      1,
+      0
+    ],
+    "distance": 0.55
+  },
+  {
+    "roof": "West court outer return slate roof",
+    "origin": [
+      408.81252530462416,
+      7.0600000000000005,
+      -43.81083495270713
+    ],
+    "direction": [
+      0,
+      1,
+      0
+    ],
+    "distance": 0.55
+  },
+  {
+    "roof": "West court outer return slate roof",
+    "origin": [
+      394.4970250055775,
+      7.0600000000000005,
+      -52.601597369518586
+    ],
+    "direction": [
+      0,
+      1,
+      0
+    ],
+    "distance": 0.55
+  },
+  {
+    "roof": "West court outer return slate roof",
+    "origin": [
+      400.56445628834285,
+      7.0600000000000005,
+      -58.44573878510353
+    ],
+    "direction": [
+      0,
+      1,
+      0
+    ],
+    "distance": 0.55
+  },
+  {
+    "roof": "West court corner infill slate roof",
+    "origin": [
+      390.296576998247,
+      7.0600000000000005,
+      -49.52388948487857
+    ],
+    "direction": [
+      0,
+      1,
+      0
+    ],
+    "distance": 0.55
+  },
+  {
+    "roof": "West court corner infill slate roof",
+    "origin": [
+      383.99568246891994,
+      7.0600000000000005,
+      -48.063779663982196
+    ],
+    "direction": [
+      0,
+      1,
+      0
+    ],
+    "distance": 0.55
+  },
+  {
+    "roof": "West court back range slate roof",
+    "origin": [
+      398.84761252707966,
+      7.0600000000000005,
+      -34.2126446311267
+    ],
+    "direction": [
+      0,
+      1,
+      0
+    ],
+    "distance": 0.55
+  },
+  {
+    "roof": "West court back range slate roof",
+    "origin": [
+      383.546152237306,
+      7.0600000000000005,
+      -24.083202324548203
+    ],
+    "direction": [
+      0,
+      1,
+      0
+    ],
+    "distance": 0.55
+  },
+  {
+    "roof": "West court back range slate roof",
+    "origin": [
+      394.24194744116716,
+      7.0600000000000005,
+      -38.99428053502256
+    ],
+    "direction": [
+      0,
+      1,
+      0
+    ],
+    "distance": 0.55
+  },
+  {
+    "roof": "West court back range slate roof",
+    "origin": [
+      409.5434077309408,
+      7.0600000000000005,
+      -49.12372284160106
+    ],
+    "direction": [
+      0,
+      1,
+      0
+    ],
+    "distance": 0.55
+  },
+  {
+    "roof": "Rear east connecting range slate roof",
+    "origin": [
+      377.1314281966777,
+      7.0600000000000005,
+      62.08491386055169
+    ],
+    "direction": [
+      0,
+      1,
+      0
+    ],
+    "distance": 0.55
+  },
+  {
+    "roof": "Leighton Newton cross gable slate roof",
+    "origin": [
+      376.5532784428633,
+      7.059999656677246,
+      61.6830681656133
+    ],
+    "direction": [
+      0,
+      1,
+      0
+    ],
+    "distance": 0.55
+  },
+  {
+    "roof": "Rear west angled service range slate roof",
+    "origin": [
+      428.2786641158162,
+      7.0600000000000005,
+      21.35242195432913
+    ],
+    "direction": [
+      0,
+      1,
+      0
+    ],
+    "distance": 0.55
+  },
+  {
+    "roof": "Rear service head slate roof",
+    "origin": [
+      439.94561703706233,
+      7.0600000000000005,
+      34.07904809007471
+    ],
+    "direction": [
+      0,
+      1,
+      0
+    ],
+    "distance": 0.55
+  },
+  {
+    "roof": "Rear service head slate roof",
+    "origin": [
+      439.26936186088426,
+      7.0600000000000005,
+      23.055122127192952
+    ],
+    "direction": [
+      0,
+      1,
+      0
+    ],
+    "distance": 0.55
+  },
+  {
+    "roof": "Oakmere continuous extension slate roof",
+    "origin": [
+      412.6740841788881,
+      7.059999656677246,
+      15.225509912218
+    ],
+    "direction": [
+      0,
+      1,
+      0
+    ],
+    "distance": 0.55
+  },
+  {
+    "roof": "Oakmere continuous extension slate roof",
+    "origin": [
+      408.6165600590368,
+      7.059999656677246,
+      25.559583429032784
+    ],
+    "direction": [
+      0,
+      1,
+      0
+    ],
+    "distance": 0.55
+  },
+  {
+    "roof": "Oakmere court projecting bay slate roof",
+    "origin": [
+      425.0433486766182,
+      7.0600000000000005,
+      33.25597272652958
+    ],
+    "direction": [
+      0,
+      1,
+      0
+    ],
+    "distance": 0.55
+  },
+  {
+    "roof": "Oakmere widened head slate roof",
+    "origin": [
+      434.70330550230227,
+      7.059999656677246,
+      47.43064655210477
+    ],
+    "direction": [
+      0,
+      1,
+      0
+    ],
+    "distance": 0.55
+  },
+  {
+    "roof": "Oakmere widened head slate roof",
+    "origin": [
+      427.3823272071421,
+      7.059999656677246,
+      53.33010913409632
+    ],
+    "direction": [
+      0,
+      1,
+      0
+    ],
+    "distance": 0.55
+  },
+  {
+    "roof": "Oakmere blue-face projecting bay slate roof",
+    "origin": [
+      424.98629236871267,
+      7.0600000000000005,
+      45.38892796816348
+    ],
+    "direction": [
+      0,
+      1,
+      0
+    ],
+    "distance": 0.55
+  },
+  {
+    "roof": "Oakmere blue-face projecting bay slate roof",
+    "origin": [
+      421.8039303072026,
+      7.0600000000000005,
+      40.38142874811396
+    ],
+    "direction": [
+      0,
+      1,
+      0
+    ],
+    "distance": 0.55
+  },
+  {
+    "roof": "Oakmere blue-face projecting bay slate roof",
+    "origin": [
+      427.5431601621182,
+      7.0600000000000005,
+      38.87686322884242
+    ],
+    "direction": [
+      0,
+      1,
+      0
+    ],
+    "distance": 0.55
+  },
+  {
+    "roof": "Oakmere square annex slate roof",
+    "origin": [
+      434.4031906268514,
+      3.145,
+      56.086750232770754
+    ],
+    "direction": [
+      0,
+      1,
+      0
+    ],
+    "distance": 0.55
+  },
+  {
+    "roof": "Oakmere square annex slate roof",
+    "origin": [
+      432.52652050196303,
+      3.145,
+      51.78370414390986
+    ],
+    "direction": [
+      0,
+      1,
+      0
+    ],
+    "distance": 0.55
+  },
+  {
+    "roof": "Oakmere square annex slate roof",
+    "origin": [
+      436.82956659082396,
+      3.145,
+      49.90703401902147
+    ],
+    "direction": [
+      0,
+      1,
+      0
+    ],
+    "distance": 0.55
+  },
+  {
+    "roof": "East court inner return slate roof",
+    "origin": [
+      347.4631237537859,
+      7.0600000000000005,
+      12.802130893213254
+    ],
+    "direction": [
+      0,
+      1,
+      0
+    ],
+    "distance": 0.55
+  },
+  {
+    "roof": "East court inner return slate roof",
+    "origin": [
+      332.8498337702154,
+      7.0600000000000005,
+      3.05885132622093
+    ],
+    "direction": [
+      0,
+      1,
+      0
+    ],
+    "distance": 0.55
+  },
+  {
+    "roof": "East court inner return slate roof",
+    "origin": [
+      338.274367363546,
+      7.0600000000000005,
+      -2.1660519245277907
+    ],
+    "direction": [
+      0,
+      1,
+      0
+    ],
+    "distance": 0.55
+  },
+  {
+    "roof": "East court front range slate roof",
+    "origin": [
+      300.70290828688445,
+      7.0600000000000005,
+      17.291542784821257
+    ],
+    "direction": [
+      0,
+      1,
+      0
+    ],
+    "distance": 0.55
+  },
+  {
+    "roof": "East court front range slate roof",
+    "origin": [
+      311.76747195215205,
+      7.0600000000000005,
+      -0.45342676322069037
+    ],
+    "direction": [
+      0,
+      1,
+      0
+    ],
+    "distance": 0.55
+  },
+  {
+    "roof": "East court front range slate roof",
+    "origin": [
+      329.91465336267703,
+      7.0600000000000005,
+      -10.845169649627739
+    ],
+    "direction": [
+      0,
+      1,
+      0
+    ],
+    "distance": 0.55
+  },
+  {
+    "roof": "East court outer return slate roof",
+    "origin": [
+      323.99736126138964,
+      7.0600000000000005,
+      35.404320854496056
+    ],
+    "direction": [
+      0,
+      1,
+      0
+    ],
+    "distance": 0.55
+  },
+  {
+    "roof": "East court outer return slate roof",
+    "origin": [
+      309.0626224331017,
+      7.0600000000000005,
+      25.97066036992185
+    ],
+    "direction": [
+      0,
+      1,
+      0
+    ],
+    "distance": 0.55
+  },
+  {
+    "roof": "East court outer return slate roof",
+    "origin": [
+      300.1953148875791,
+      7.0600000000000005,
+      10.692858469762692
+    ],
+    "direction": [
+      0,
+      1,
+      0
+    ],
+    "distance": 0.55
+  },
+  {
+    "roof": "East court corner infill slate roof",
+    "origin": [
+      321.5301931324922,
+      7.0600000000000005,
+      15.472449599383165
+    ],
+    "direction": [
+      0,
+      1,
+      0
+    ],
+    "distance": 0.55
+  },
+  {
+    "roof": "East court corner infill slate roof",
+    "origin": [
+      324.5348771010468,
+      7.0600000000000005,
+      6.730092055052496
+    ],
+    "direction": [
+      0,
+      1,
+      0
+    ],
+    "distance": 0.55
+  },
+  {
+    "roof": "East court back range slate roof",
+    "origin": [
+      335.5695177205371,
+      7.0600000000000005,
+      24.258034992955448
+    ],
+    "direction": [
+      0,
+      1,
+      0
+    ],
+    "distance": 0.55
+  },
+  {
+    "roof": "East court back range slate roof",
+    "origin": [
+      318.6608126396845,
+      7.0600000000000005,
+      35.93557325823201
+    ],
+    "direction": [
+      0,
+      1,
+      0
+    ],
+    "distance": 0.55
+  },
+  {
+    "roof": "East court back range slate roof",
+    "origin": [
+      330.96385263462446,
+      7.0600000000000005,
+      19.47639908905958
+    ],
+    "direction": [
+      0,
+      1,
+      0
+    ],
+    "distance": 0.55
+  },
+  {
+    "roof": "East court back range slate roof",
+    "origin": [
+      347.87255771547706,
+      7.0600000000000005,
+      7.798860823783013
+    ],
+    "direction": [
+      0,
+      1,
+      0
+    ],
+    "distance": 0.55
+  },
+  {
+    "roof": "West court entrance link slate roof",
+    "origin": [
+      377.24934873456334,
+      7.0600000000000005,
+      -27.04204243641001
+    ],
+    "direction": [
+      0,
+      1,
+      0
+    ],
+    "distance": 0.55
+  },
+  {
+    "roof": "West court entrance link slate roof",
+    "origin": [
+      373.2629218134871,
+      7.0600000000000005,
+      -31.180780650871117
+    ],
+    "direction": [
+      0,
+      1,
+      0
+    ],
+    "distance": 0.55
+  },
+  {
+    "roof": "East front connecting ward slate roof",
+    "origin": [
+      302.62590788182484,
+      7.0600000000000005,
+      47.313846429018376
+    ],
+    "direction": [
+      0,
+      1,
+      0
+    ],
+    "distance": 0.55
+  },
+  {
+    "roof": "East end ward slate roof",
+    "origin": [
+      309.03531466656517,
+      7.0600000000000005,
+      75.84202642591195
+    ],
+    "direction": [
+      0,
+      1,
+      0
+    ],
+    "distance": 0.55
+  },
+  {
+    "roof": "East end ward slate roof",
+    "origin": [
+      294.0887468117495,
+      7.0600000000000005,
+      67.03943425376272
+    ],
+    "direction": [
+      0,
+      1,
+      0
+    ],
+    "distance": 0.55
+  },
+  {
+    "roof": "East end ward slate roof",
+    "origin": [
+      285.8525075508059,
+      7.0600000000000005,
+      51.77346286559734
+    ],
+    "direction": [
+      0,
+      1,
+      0
+    ],
+    "distance": 0.55
+  },
+  {
+    "roof": "East rear pavilion slate roof",
+    "origin": [
+      329.08752876250935,
+      7.0600000000000005,
+      83.79339316695757
+    ],
+    "direction": [
+      0,
+      1,
+      0
+    ],
+    "distance": 0.55
+  },
+  {
+    "roof": "East rear pavilion slate roof",
+    "origin": [
+      318.95290837782835,
+      7.0600000000000005,
+      87.7067953937903
+    ],
+    "direction": [
+      0,
+      1,
+      0
+    ],
+    "distance": 0.55
+  },
+  {
+    "roof": "East rear pavilion slate roof",
+    "origin": [
+      333.37800773160546,
+      7.0600000000000005,
+      73.81255965735944
+    ],
+    "direction": [
+      0,
+      1,
+      0
+    ],
+    "distance": 0.55
+  },
+  {
+    "roof": "East rear link slate roof",
+    "origin": [
+      310.51556328551175,
+      3.37,
+      64.23028944387902
+    ],
+    "direction": [
+      0,
+      1,
+      0
+    ],
+    "distance": 0.55
+  },
+  {
+    "roof": "East end projecting rooms slate roof",
+    "origin": [
+      303.24923638917994,
+      7.0600000000000005,
+      81.41516930704401
+    ],
+    "direction": [
+      0,
+      1,
+      0
+    ],
+    "distance": 0.55
+  },
+  {
+    "roof": "East end projecting rooms slate roof",
+    "origin": [
+      296.01948479480103,
+      7.0600000000000005,
+      81.91093278295226
+    ],
+    "direction": [
+      0,
+      1,
+      0
+    ],
+    "distance": 0.55
+  },
+  {
+    "roof": "East end projecting rooms slate roof",
+    "origin": [
+      296.7858571731638,
+      7.0600000000000005,
+      74.70484071317188
+    ],
+    "direction": [
+      0,
+      1,
+      0
+    ],
+    "distance": 0.55
+  },
+  {
+    "roof": "East end front rooms slate roof",
+    "origin": [
+      286.255678440177,
+      7.0600000000000005,
+      61.8422817119367
+    ],
+    "direction": [
+      0,
+      1,
+      0
+    ],
+    "distance": 0.55
+  },
+  {
+    "roof": "East end front rooms slate roof",
+    "origin": [
+      279.99027319078624,
+      7.0600000000000005,
+      61.4091881227931
+    ],
+    "direction": [
+      0,
+      1,
+      0
+    ],
+    "distance": 0.55
+  },
+  {
+    "roof": "East end front rooms slate roof",
+    "origin": [
+      279.79229922416084,
+      7.0600000000000005,
+      55.13195311806456
+    ],
+    "direction": [
+      0,
+      1,
+      0
+    ],
+    "distance": 0.55
+  },
+  {
+    "roof": "Outer low entrance room slate roof",
+    "origin": [
+      281.2318679183393,
+      3.19,
+      53.40977615335929
+    ],
+    "direction": [
+      0,
+      1,
+      0
+    ],
+    "distance": 0.55
+  },
+  {
+    "roof": "Outer low entrance room slate roof",
+    "origin": [
+      284.08369960023214,
+      3.19,
+      52.8459599167427
+    ],
+    "direction": [
+      0,
+      1,
+      0
+    ],
+    "distance": 0.55
+  },
+  {
+    "roof": "Rear court west range slate roof",
+    "origin": [
+      413.0367828033929,
+      7.0600000000000005,
+      12.042787766684272
+    ],
+    "direction": [
+      0,
+      1,
+      0
+    ],
+    "distance": 0.55
+  },
+  {
+    "roof": "Rear court west range slate roof",
+    "origin": [
+      398.5892558545052,
+      7.0600000000000005,
+      4.40165364504092
+    ],
+    "direction": [
+      0,
+      1,
+      0
+    ],
+    "distance": 0.55
+  },
+  {
+    "roof": "Rear court west range slate roof",
+    "origin": [
+      391.49495556725236,
+      7.0600000000000005,
+      -10.32209822185983
+    ],
+    "direction": [
+      0,
+      1,
+      0
+    ],
+    "distance": 0.55
+  },
+  {
+    "roof": "Rear court west range slate roof",
+    "origin": [
+      405.94248251614005,
+      7.0600000000000005,
+      -2.680964100216478
+    ],
+    "direction": [
+      0,
+      1,
+      0
+    ],
+    "distance": 0.55
+  },
+  {
+    "roof": "Central hall slate roof",
+    "origin": [
+      356.32947162316907,
+      6.16,
+      -3.445194113091853
+    ],
+    "direction": [
+      0,
+      1,
+      0
+    ],
+    "distance": 0.55
+  },
+  {
+    "roof": "Central hall slate roof",
+    "origin": [
+      370.7545709769463,
+      6.16,
+      -17.339429849522695
+    ],
+    "direction": [
+      0,
+      1,
+      0
+    ],
+    "distance": 0.55
+  },
+  {
+    "roof": "Entrance range slate roof",
+    "origin": [
+      349.2555525284417,
+      3.7300000000000004,
+      -13.362787712533267
+    ],
+    "direction": [
+      0,
+      1,
+      0
+    ],
+    "distance": 0.55
+  },
+  {
+    "roof": "Entrance range slate roof",
+    "origin": [
+      351.64099833216005,
+      3.7300000000000004,
+      -22.748042946298693
+    ],
+    "direction": [
+      0,
+      1,
+      0
+    ],
+    "distance": 0.55
+  },
+  {
+    "roof": "Entrance range slate roof",
+    "origin": [
+      361.1090618811358,
+      3.7300000000000004,
+      -24.780071518429217
+    ],
+    "direction": [
+      0,
+      1,
+      0
+    ],
+    "distance": 0.55
+  },
+  {
+    "roof": "West front pavilion slate roof",
+    "origin": [
+      372.4039571227406,
+      11.379999999999999,
+      -21.135621218431066
+    ],
+    "direction": [
+      0,
+      1,
+      0
+    ],
+    "distance": 0.55
+  },
+  {
+    "roof": "West front pavilion slate roof",
+    "origin": [
+      365.209694808298,
+      11.379999999999999,
+      -22.5330611525628
+    ],
+    "direction": [
+      0,
+      1,
+      0
+    ],
+    "distance": 0.55
+  },
+  {
+    "roof": "West square tower slate roof",
+    "origin": [
+      377.6556511649437,
+      15.412,
+      -15.039923637464955
+    ],
+    "direction": [
+      0,
+      1,
+      0
+    ],
+    "distance": 0.55
+  },
+  {
+    "roof": "West square tower slate roof",
+    "origin": [
+      373.2834495147569,
+      15.412,
+      -15.437528128874753
+    ],
+    "direction": [
+      0,
+      1,
+      0
+    ],
+    "distance": 0.55
+  },
+  {
+    "roof": "West square tower slate roof",
+    "origin": [
+      373.0499860790311,
+      15.412,
+      -19.821559541360823
+    ],
+    "direction": [
+      0,
+      1,
+      0
+    ],
+    "distance": 0.55
+  },
+  {
+    "roof": "West square tower slate roof",
+    "origin": [
+      377.4221877292179,
+      15.412,
+      -19.423955049951026
+    ],
+    "direction": [
+      0,
+      1,
+      0
+    ],
+    "distance": 0.55
+  },
+  {
+    "roof": "East front pavilion slate roof",
+    "origin": [
+      352.4741314442671,
+      11.379999999999999,
+      -1.9392407033689538
+    ],
+    "direction": [
+      0,
+      1,
+      0
+    ],
+    "distance": 0.55
+  },
+  {
+    "roof": "East front pavilion slate roof",
+    "origin": [
+      351.34730041258973,
+      11.379999999999999,
+      -9.180822053085636
+    ],
+    "direction": [
+      0,
+      1,
+      0
+    ],
+    "distance": 0.55
+  },
+  {
+    "roof": "East square tower slate roof",
+    "origin": [
+      358.3687230890015,
+      15.412,
+      3.537218796466119
+    ],
+    "direction": [
+      0,
+      1,
+      0
+    ],
+    "distance": 0.55
+  },
+  {
+    "roof": "East square tower slate roof",
+    "origin": [
+      353.9965214388147,
+      15.412,
+      3.139614305056321
+    ],
+    "direction": [
+      0,
+      1,
+      0
+    ],
+    "distance": 0.55
+  },
+  {
+    "roof": "East square tower slate roof",
+    "origin": [
+      353.763058003089,
+      15.412,
+      -1.2444171074297488
+    ],
+    "direction": [
+      0,
+      1,
+      0
+    ],
+    "distance": 0.55
+  },
+  {
+    "roof": "East square tower slate roof",
+    "origin": [
+      358.1352596532758,
+      15.412,
+      -0.8468126160199508
+    ],
+    "direction": [
+      0,
+      1,
+      0
+    ],
+    "distance": 0.55
+  },
+  {
+    "roof": "Central rear low hall link slate roof",
+    "origin": [
+      373.3991854488696,
+      3.7300000000000004,
+      -6.873576762735599
+    ],
+    "direction": [
+      0,
+      1,
+      0
+    ],
+    "distance": 0.55
+  },
+  {
+    "roof": "Rear court east range slate roof",
+    "origin": [
+      383.97713728464777,
+      7.0600000000000005,
+      29.118917238136284
+    ],
+    "direction": [
+      0,
+      1,
+      0
+    ],
+    "distance": 0.55
+  },
+  {
+    "roof": "Rear court east range slate roof",
+    "origin": [
+      390.04456856741314,
+      7.0600000000000005,
+      23.27477582255134
+    ],
+    "direction": [
+      0,
+      1,
+      0
+    ],
+    "distance": 0.55
+  },
+  {
+    "roof": "Rear court back range slate roof",
+    "origin": [
+      398.0083921753497,
+      7.0600000000000005,
+      21.812385147355094
+    ],
+    "direction": [
+      0,
+      1,
+      0
+    ],
+    "distance": 0.55
+  },
+  {
+    "roof": "Rear court back range slate roof",
+    "origin": [
+      400.9410389533738,
+      7.0600000000000005,
+      14.281936645878185
+    ],
+    "direction": [
+      0,
+      1,
+      0
+    ],
+    "distance": 0.55
+  },
+  {
+    "roof": "Rear court back east range slate roof",
+    "origin": [
+      393.7498544809752,
+      7.0600000000000005,
+      30.619929944722646
+    ],
+    "direction": [
+      0,
+      1,
+      0
+    ],
+    "distance": 0.55
+  },
+  {
+    "roof": "Rear court back east range slate roof",
+    "origin": [
+      395.7181545356832,
+      7.0600000000000005,
+      24.01833887270258
+    ],
+    "direction": [
+      0,
+      1,
+      0
+    ],
+    "distance": 0.55
+  },
+  {
+    "roof": "Rear court front west service link slate roof",
+    "origin": [
+      390.17251219123244,
+      2.4699999999999998,
+      2.1369473215989174
+    ],
+    "direction": [
+      0,
+      1,
+      0
+    ],
+    "distance": 0.55
+  },
+  {
+    "roof": "Rear court front west service link slate roof",
+    "origin": [
+      384.58380665984936,
+      2.4699999999999998,
+      -3.665288517672529
+    ],
+    "direction": [
+      0,
+      1,
+      0
+    ],
+    "distance": 0.55
+  },
+  {
+    "roof": "Rear court front east service link slate roof",
+    "origin": [
+      373.34172321181774,
+      2.74,
+      18.07715094298176
+    ],
+    "direction": [
+      0,
+      1,
+      0
+    ],
+    "distance": 0.55
+  },
+  {
+    "roof": "Rear court front east service link slate roof",
+    "origin": [
+      370.4400592975552,
+      2.74,
+      9.957949156534038
+    ],
+    "direction": [
+      0,
+      1,
+      0
+    ],
+    "distance": 0.55
+  },
+  {
+    "roof": "Oakmere low hall link slate roof",
+    "origin": [
+      377.1500851662341,
+      4,
+      -6.862490783643528
+    ],
+    "direction": [
+      0,
+      1,
+      0
+    ],
+    "distance": 0.55
+  },
+  {
+    "roof": "Oakmere low hall link slate roof",
+    "origin": [
+      379.6529896667699,
+      4,
+      -9.273284935096903
+    ],
+    "direction": [
+      0,
+      1,
+      0
+    ],
+    "distance": 0.55
+  },
+  {
+    "roof": "Oakmere west raised range slate roof",
+    "origin": [
+      398.58925615716765,
+      8.860000000000001,
+      4.401653353516918
+    ],
+    "direction": [
+      0,
+      1,
+      0
+    ],
+    "distance": 0.55
+  },
+  {
+    "roof": "Oakmere west raised range slate roof",
+    "origin": [
+      391.57236078149606,
+      8.860000000000001,
+      -10.479926287833445
+    ],
+    "direction": [
+      0,
+      1,
+      0
+    ],
+    "distance": 0.55
+  },
+  {
+    "roof": "Oakmere west raised range slate roof",
+    "origin": [
+      413.1974009859914,
+      8.860000000000001,
+      11.971352026190933
+    ],
+    "direction": [
+      0,
+      1,
+      0
+    ],
+    "distance": 0.55
+  },
+  {
+    "roof": "Oakmere west low hall link slate roof",
+    "origin": [
+      386.8839443502297,
+      3.7300000000000004,
+      -7.75088882189005
+    ],
+    "direction": [
+      0,
+      1,
+      0
+    ],
+    "distance": 0.55
+  },
+  {
+    "roof": "Oakmere west low hall link slate roof",
+    "origin": [
+      389.49777633223505,
+      3.7300000000000004,
+      -12.83226764497988
+    ],
+    "direction": [
+      0,
+      1,
+      0
+    ],
+    "distance": 0.55
+  },
+  {
+    "roof": "Oakmere west low hall link slate roof",
+    "origin": [
+      394.6735466340836,
+      3.7300000000000004,
+      -15.253822962622195
+    ],
+    "direction": [
+      0,
+      1,
+      0
+    ],
+    "distance": 0.55
+  },
+  {
+    "roof": "Carden conservatory low rear link slate roof",
+    "origin": [
+      369.0503636358069,
+      3.7300000000000004,
+      14.96531651467767
+    ],
+    "direction": [
+      0,
+      1,
+      0
+    ],
+    "distance": 0.55
+  },
+  {
+    "roof": "Carden conservatory low rear link slate roof",
+    "origin": [
+      363.4803148016631,
+      3.7300000000000004,
+      12.985253863309161
+    ],
+    "direction": [
+      0,
+      1,
+      0
+    ],
+    "distance": 0.55
+  },
+  {
+    "roof": "Carden conservatory low rear link slate roof",
+    "origin": [
+      361.7103979732784,
+      3.7300000000000004,
+      7.344909322530452
+    ],
+    "direction": [
+      0,
+      1,
+      0
+    ],
+    "distance": 0.55
+  },
+  {
+    "roof": "Carden tower side link slate roof",
+    "origin": [
+      360.3474495918141,
+      3.7300000000000004,
+      1.086674462055644
+    ],
+    "direction": [
+      0,
+      1,
+      0
+    ],
+    "distance": 0.55
+  },
+  {
+    "roof": "Dormered central service hall slate roof",
+    "origin": [
+      189.82500305175782,
+      6.940000057220459,
+      -30.299999999999997
+    ],
+    "direction": [
+      0,
+      1,
+      0
+    ],
+    "distance": 0.55
+  },
+  {
+    "roof": "Rear east gabled workshop slate roof",
+    "origin": [
+      230.17499694824218,
+      6.039999961853027,
+      -55.70000076293945
+    ],
+    "direction": [
+      0,
+      1,
+      0
+    ],
+    "distance": 0.55
+  },
+  {
+    "roof": "Chimney service hall slate roof",
+    "origin": [
+      179.9000015258789,
+      6.039999961853027,
+      -13.475000762939453
+    ],
+    "direction": [
+      0,
+      1,
+      0
+    ],
+    "distance": 0.55
+  },
+  {
+    "roof": "Chimney service hall slate roof",
+    "origin": [
+      169.62500610351563,
+      6.039999961853027,
+      -5.600000429153443
+    ],
+    "direction": [
+      0,
+      1,
+      0
+    ],
+    "distance": 0.55
+  },
+  {
+    "roof": "Long east service range slate roof",
+    "origin": [
+      216.12500610351563,
+      8.640000343322754,
+      -23.950000572204587
+    ],
+    "direction": [
+      0,
+      1,
+      0
+    ],
+    "distance": 0.55
+  },
+  {
+    "roof": "North east stepped link slate roof",
+    "origin": [
+      214.20000457763672,
+      5.139999866485596,
+      -30.124999237060546
+    ],
+    "direction": [
+      0,
+      1,
+      0
+    ],
+    "distance": 0.55
+  },
+  {
+    "roof": "North tower range slate roof",
+    "origin": [
+      162.2750030517578,
+      8.5,
+      -62.60000038146973
+    ],
+    "direction": [
+      0,
+      1,
+      0
+    ],
+    "distance": 0.55
+  },
+  {
+    "roof": "Tower east dormered range slate roof",
+    "origin": [
+      179.975,
+      8.5,
+      -58.60000038146973
+    ],
+    "direction": [
+      0,
+      1,
+      0
+    ],
+    "distance": 0.55
+  },
+  {
+    "roof": "Tower east dormered range slate roof",
+    "origin": [
+      179.975,
+      8.5,
+      -56.05000114440918
+    ],
+    "direction": [
+      0,
+      1,
+      0
+    ],
+    "distance": 0.55
+  },
+  {
+    "roof": "Tower east dormered range slate roof",
+    "origin": [
+      179.975,
+      8.5,
+      -54.35000038146973
+    ],
+    "direction": [
+      0,
+      1,
+      0
+    ],
+    "distance": 0.55
+  },
+  {
+    "roof": "Tower east dormered range slate roof",
+    "origin": [
+      179.975,
+      8.5,
+      -51.79999923706055
+    ],
+    "direction": [
+      0,
+      1,
+      0
+    ],
+    "distance": 0.55
+  },
+  {
+    "roof": "Tower south continuous slate roof",
+    "origin": [
+      179.975,
+      8.5,
+      -45.29999923706055
+    ],
+    "direction": [
+      0,
+      1,
+      0
+    ],
+    "distance": 0.55
+  },
+  {
+    "roof": "East range blue dormer 1 slate roof",
+    "origin": [
+      164.5,
+      14.116470336914062,
+      -52.12500152587891
+    ],
+    "direction": [
+      0,
+      1,
+      0
+    ],
+    "distance": 0.55
+  },
+  {
+    "roof": "East range blue dormer 1 slate roof",
+    "origin": [
+      164.5,
+      14.116470336914062,
+      -48.074999237060545
+    ],
+    "direction": [
+      0,
+      1,
+      0
+    ],
+    "distance": 0.55
+  },
+  {
+    "roof": "East range blue dormer 2 slate roof",
+    "origin": [
+      173.29999542236328,
+      14.116470336914062,
+      -52.12500152587891
+    ],
+    "direction": [
+      0,
+      1,
+      0
+    ],
+    "distance": 0.55
+  },
+  {
+    "roof": "East range blue dormer 2 slate roof",
+    "origin": [
+      173.29999542236328,
+      14.116470336914062,
+      -48.074999237060545
+    ],
+    "direction": [
+      0,
+      1,
+      0
+    ],
+    "distance": 0.55
+  },
+  {
+    "roof": "Enlarged west workshop slate roof",
+    "origin": [
+      180.72500457763672,
+      6.039999961853027,
+      -55.70000076293945
+    ],
+    "direction": [
+      0,
+      1,
+      0
+    ],
+    "distance": 0.55
+  }
+]

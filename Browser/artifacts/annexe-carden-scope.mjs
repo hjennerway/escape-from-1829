@@ -9,7 +9,8 @@ export function protectedCardenGeometry(THREE,annexe){
  annexe.traverse(o=>{
   // Later additive Oakmere work is independently checked by test-oakmere-court.
   for(let p=o;p;p=p.parent)if(p.name==='Oakmere rear court additions')return;
-  if(!o.isMesh)return;
+  // Added roof closures are verified separately; retain every original primitive.
+  if(!o.isMesh||o.userData.roofWallClosure)return;
   let frontShift=0;
   // Independently normalize the concurrent, separately tested east-link restoration.
   for(let p=o;p&&p!==annexe;p=p.parent){

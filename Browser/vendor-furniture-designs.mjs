@@ -12,6 +12,11 @@ if(process.argv.includes('--check')){
  for(const source of sources){const saved=manifest.find(s=>s.repository===source.repository);if(saved.commit!==source.commit)throw Error('Furniture design revision changed');for(const f of saved.files)if(hash(await readFile(new URL(f.local,root)))!==f.sha256)throw Error('Furniture source changed: '+f.local);}
  const assets=new URL('./dist/models/furniture/',import.meta.url),designs=JSON.parse(await readFile(new URL('design-manifest.json',assets)));
  for(const f of designs.files)if(hash(await readFile(new URL(f.path,assets)))!==f.sha256)throw Error('Generated furniture changed: '+f.path);
+ const lod=JSON.parse(await readFile(new URL('lod-manifest.json',assets)));
+ for(const record of lod.records){
+  if(hash(Buffer.concat([await readFile(new URL(record.source+'.gltf',assets)),await readFile(new URL(record.source+'.bin',assets))]))!==record.sourceHash)throw Error('Rebuild distant furniture: '+record.source);
+  for(const f of record.files)if(hash(await readFile(new URL(f.path,assets)))!==f.sha256)throw Error('Distant furniture changed: '+f.path);
+ }
  console.log('PASS: pinned Windsor/Shaker MIT sources, Panca GPL-3.0 STEP source, original licences and generated mesh hashes.');
 }else{
  const records=[];

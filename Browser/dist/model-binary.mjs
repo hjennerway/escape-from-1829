@@ -1,5 +1,6 @@
 // Small Three.js scene container: JSON metadata followed by aligned, shared
 // typed buffers. Geometry is stored as final vertices, never primitive recipes.
+import {createBufferPool} from './geometry-sharing.mjs';
 export const MODEL_FORMAT=1;
 const magic='1829BIN1',types={Float32Array,Float64Array,Uint32Array,Uint16Array,Uint8Array,Int32Array,Int16Array,Int8Array,Uint8ClampedArray};
 const align=value=>Math.ceil(value/8)*8;
@@ -45,17 +46,18 @@ const attribute=a=>({array:a.array,itemSize:a.itemSize,normalized:a.normalized,u
 const sphere=b=>b?{center:b.center.toArray(),radius:b.radius}:null;
 const box=b=>b?{min:b.min.toArray(),max:b.max.toArray()}:null;
 
-export function serializeScene(THREE,scene,camera){
+export function serializeScene(THREE,scene,camera,{shareGeometry=true}={}){
   scene.updateMatrixWorld(true);camera.updateMatrix();
   const meta=Object.fromEntries(['geometries','materials','textures','images','shapes','skeletons','animations','nodes'].map(key=>[key,{}]));
-  const geometries=new Map(),sources=new Map(),nodes=new Map(),canvasTextures=new Set();
+  const geometries=new Map(),sources=new Map(),nodes=new Map(),canvasTextures=new Set(),buffers=createBufferPool();
+  const geometryAttribute=a=>({...attribute(a),array:shareGeometry?buffers.share(a.array):a.array});
   scene.traverse(object=>{
     nodes.set(object.uuid,object);
     const g=object.isSprite?null:object.geometry;
     if(g&&!geometries.has(g.uuid)){
       if(Object.values(g.attributes).some(a=>a.isInterleavedBufferAttribute)||Object.keys(g.morphAttributes).length)throw new Error('Unsupported geometry in model build: '+object.name);
       if(!g.boundingBox)g.computeBoundingBox();if(!g.boundingSphere)g.computeBoundingSphere();
-      geometries.set(g.uuid,{uuid:g.uuid,name:g.name,attributes:Object.fromEntries(Object.entries(g.attributes).map(([key,a])=>[key,attribute(a)])),index:g.index?attribute(g.index):null,groups:g.groups,drawRange:{start:g.drawRange.start,count:Number.isFinite(g.drawRange.count)?g.drawRange.count:null},box:box(g.boundingBox),sphere:sphere(g.boundingSphere)});
+      geometries.set(g.uuid,{uuid:g.uuid,name:g.name,attributes:Object.fromEntries(Object.entries(g.attributes).map(([key,a])=>[key,geometryAttribute(a)])),index:g.index?geometryAttribute(g.index):null,groups:g.groups,drawRange:{start:g.drawRange.start,count:Number.isFinite(g.drawRange.count)?g.drawRange.count:null},box:box(g.boundingBox),sphere:sphere(g.boundingSphere)});
       meta.geometries[g.uuid]={uuid:g.uuid};
     }
     for(const material of [object.material].flat())if(material)for(const texture of Object.values(material))if(texture?.isTexture){
@@ -91,15 +93,17 @@ export function serializeScene(THREE,scene,camera){
   }
   extras(object);
   const textures=Object.values(meta.textures);for(const texture of textures)if(canvasTextures.has(texture.uuid))texture.flipY=false;
-  return {revision:THREE.REVISION,object,camera:cameraData,geometries:[...geometries.values()],images:[...sources.values()],textures,materials:Object.values(meta.materials)};
+  return {revision:THREE.REVISION,object,camera:cameraData,geometries:[...geometries.values()],images:[...sources.values()],textures,materials:Object.values(meta.materials),bufferSharing:{geometryBytesSaved:buffers.savedBytes}};
 }
 
-export function deserializeScene(THREE,data){
+export function deserializeScene(THREE,data,{sharedMaterials={}}={}){
   if(data.revision!==THREE.REVISION)throw new Error('Precompiled model uses a different Three.js revision');
   const attributes=new WeakMap();
   function attr(a,instance=false){
-    if(!attributes.has(a.array))attributes.set(a.array,new (instance||a.meshPerAttribute!==undefined?THREE.InstancedBufferAttribute:THREE.BufferAttribute)(a.array,a.itemSize,a.normalized,a.meshPerAttribute??1).setUsage(a.usage));
-    return attributes.get(a.array);
+    if(!attributes.has(a.array))attributes.set(a.array,new Map());
+    const variants=attributes.get(a.array),key=[instance,a.itemSize,a.normalized,a.usage,a.meshPerAttribute].join(':');
+    if(!variants.has(key))variants.set(key,new (instance||a.meshPerAttribute!==undefined?THREE.InstancedBufferAttribute:THREE.BufferAttribute)(a.array,a.itemSize,a.normalized,a.meshPerAttribute??1).setUsage(a.usage));
+    return variants.get(key);
   }
   const readBox=b=>b?new THREE.Box3(new THREE.Vector3(...b.min),new THREE.Vector3(...b.max)):null;
   const readSphere=b=>b?new THREE.Sphere(new THREE.Vector3(...b.center),b.radius):null;
@@ -112,7 +116,7 @@ export function deserializeScene(THREE,data){
   }
   const loader=new THREE.ObjectLoader(),images={};
   for(const image of data.images)images[image.uuid]=new THREE.TextureSource({data:image.data,width:image.width,height:image.height});
-  const textures=loader.parseTextures(data.textures,images),materials=loader.parseMaterials(data.materials,textures);
+  const textures=loader.parseTextures(data.textures,images),materials={...loader.parseMaterials(data.materials.filter(m=>!sharedMaterials[m.uuid]),textures),...sharedMaterials};
   const scene=loader.parseObject(data.object,geometries,materials,textures,{}),camera=loader.parseObject(data.camera,{}, {}, {}, {}),nodes=new Map();
   scene.traverse(object=>{
     nodes.set(object.uuid,object);
@@ -134,5 +138,5 @@ export function deserializeScene(THREE,data){
     for(const child of spec.children??[])restore(child);
   }
   restore(data.object);scene.updateMatrixWorld(true);
-  return {scene,camera,nodes};
+  return {scene,camera,nodes,materials};
 }

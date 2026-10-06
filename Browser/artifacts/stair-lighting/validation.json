@@ -1,0 +1,268 @@
+{
+  "survey": {
+    "results": [
+      {
+        "name": "S1-0-1-up",
+        "endpoint": {
+          "x": -10.950000000000001,
+          "y": 4.2,
+          "z": 10.25,
+          "floor": 0,
+          "stair": true
+        },
+        "departed": {
+          "floor": 1,
+          "stair": false
+        },
+        "firstMatchesSettled": true,
+        "lightCount": 12
+      },
+      {
+        "name": "S1-0-1-down",
+        "endpoint": {
+          "x": -14.85,
+          "y": 0,
+          "z": 10.25,
+          "floor": 1,
+          "stair": true
+        },
+        "departed": {
+          "floor": 0,
+          "stair": false
+        },
+        "firstMatchesSettled": true,
+        "lightCount": 12
+      },
+      {
+        "name": "S3-0-1-up",
+        "endpoint": {
+          "x": -30.05,
+          "y": 4.2,
+          "z": -31.75,
+          "floor": 0,
+          "stair": true
+        },
+        "departed": {
+          "floor": 1,
+          "stair": false
+        },
+        "firstMatchesSettled": true,
+        "lightCount": 12
+      },
+      {
+        "name": "S3-0-1-down",
+        "endpoint": {
+          "x": -33.95,
+          "y": 0,
+          "z": -31.75,
+          "floor": 1,
+          "stair": true
+        },
+        "departed": {
+          "floor": 0,
+          "stair": false
+        },
+        "firstMatchesSettled": true,
+        "lightCount": 12
+      },
+      {
+        "name": "S4-0-1-up",
+        "endpoint": {
+          "x": 33.85,
+          "y": 4.2,
+          "z": -31.75,
+          "floor": 0,
+          "stair": true
+        },
+        "departed": {
+          "floor": 1,
+          "stair": false
+        },
+        "firstMatchesSettled": true,
+        "lightCount": 12
+      },
+      {
+        "name": "S4-0-1-down",
+        "endpoint": {
+          "x": 29.95,
+          "y": 0,
+          "z": -31.75,
+          "floor": 1,
+          "stair": true
+        },
+        "departed": {
+          "floor": 0,
+          "stair": false
+        },
+        "firstMatchesSettled": true,
+        "lightCount": 12
+      },
+      {
+        "name": "S5-0-1-up",
+        "endpoint": {
+          "x": -28.95,
+          "y": 4.2,
+          "z": 8.560000000000015,
+          "floor": 0,
+          "stair": true
+        },
+        "departed": {
+          "floor": 1,
+          "stair": false
+        },
+        "firstMatchesSettled": true,
+        "lightCount": 12
+      },
+      {
+        "name": "S5-0-1-down",
+        "endpoint": {
+          "x": -33.35,
+          "y": 0,
+          "z": 8.560000000000015,
+          "floor": 1,
+          "stair": true
+        },
+        "departed": {
+          "floor": 0,
+          "stair": false
+        },
+        "firstMatchesSettled": true,
+        "lightCount": 12
+      },
+      {
+        "name": "S1-1-3-up",
+        "endpoint": {
+          "x": -10.950000000000001,
+          "y": 8.4,
+          "z": 10.25,
+          "floor": 1,
+          "stair": true
+        },
+        "departed": {
+          "floor": 3,
+          "stair": false
+        },
+        "firstMatchesSettled": true,
+        "lightCount": 12
+      },
+      {
+        "name": "S1-1-3-down",
+        "endpoint": {
+          "x": -14.85,
+          "y": 4.2,
+          "z": 10.25,
+          "floor": 3,
+          "stair": true
+        },
+        "departed": {
+          "floor": 1,
+          "stair": false
+        },
+        "firstMatchesSettled": true,
+        "lightCount": 12
+      },
+      {
+        "name": "S5-1-3-up",
+        "endpoint": {
+          "x": -34.85,
+          "y": 8.4,
+          "z": 7.7100000000001305,
+          "floor": 1,
+          "stair": true
+        },
+        "departed": {
+          "floor": 3,
+          "stair": false
+        },
+        "firstMatchesSettled": true,
+        "lightCount": 12
+      },
+      {
+        "name": "S5-1-3-down",
+        "endpoint": {
+          "x": -34.85,
+          "y": 4.2,
+          "z": 14.13999999999987,
+          "floor": 3,
+          "stair": true
+        },
+        "departed": {
+          "floor": 1,
+          "stair": false
+        },
+        "firstMatchesSettled": true,
+        "lightCount": 12
+      },
+      {
+        "name": "S1-2-0-up",
+        "endpoint": {
+          "x": -10.950000000000001,
+          "y": 0,
+          "z": 10.25,
+          "floor": 2,
+          "stair": true
+        },
+        "departed": {
+          "floor": 0,
+          "stair": false
+        },
+        "firstMatchesSettled": true,
+        "lightCount": 12
+      },
+      {
+        "name": "S1-2-0-down",
+        "endpoint": {
+          "x": -14.85,
+          "y": -3.2,
+          "z": 10.25,
+          "floor": 0,
+          "stair": true
+        },
+        "departed": {
+          "floor": 2,
+          "stair": false
+        },
+        "firstMatchesSettled": true,
+        "lightCount": 12
+      },
+      {
+        "name": "S5-2-0-up",
+        "endpoint": {
+          "x": -28.95,
+          "y": 0,
+          "z": 8.560000000000015,
+          "floor": 2,
+          "stair": true
+        },
+        "departed": {
+          "floor": 0,
+          "stair": false
+        },
+        "firstMatchesSettled": true,
+        "lightCount": 12
+      },
+      {
+        "name": "S5-2-0-down",
+        "endpoint": {
+          "x": -33.35,
+          "y": -3.2,
+          "z": 8.560000000000015,
+          "floor": 0,
+          "stair": true
+        },
+        "departed": {
+          "floor": 2,
+          "stair": false
+        },
+        "firstMatchesSettled": true,
+        "lightCount": 12
+      }
+    ],
+    "programs": [
+      47
+    ]
+  },
+  "phone": true,
+  "explore": true,
+  "errors": []
+}

@@ -9,18 +9,28 @@ export function batchAerialMeshes(THREE,root,{exclude=[],cellSize=64}={}){
   const centre=new THREE.Vector3();
   function visit(parent){
     if(excluded.has(parent))return;
-    const groups=new Map();
-    for(const mesh of [...parent.children]){
+    const groups=new Map(),candidates=[],transforms=new Map(),inverse=parent.matrixWorld.clone().invert();
+    function collect(child){
+      if(excluded.has(child)||child.userData.aerialBatchSource||child.userData.aerialBatch)return;
+      // Explicit window assemblies may cross their internal decorative groups;
+      // period, LOD and other visibility boundaries remain ordinary parents.
+      if(child.children.length){if(child.userData.aerialBatchScope&&child.visible)for(const nested of [...child.children])collect(nested);else visit(child);return;}
+      candidates.push(child);
+    }
+    parent.updateWorldMatrix(true,true);
+    inverse.copy(parent.matrixWorld).invert();
+    for(const child of [...parent.children])collect(child);
+    for(const mesh of candidates){
       if(excluded.has(mesh)||mesh.userData.aerialBatchSource||mesh.userData.aerialBatch)continue;
       if(mesh.children.length){visit(mesh);continue;}
       const g=mesh.geometry,m=mesh.material;
       if(!mesh.isMesh||mesh.isInstancedMesh||mesh.isSkinnedMesh||!mesh.visible||Array.isArray(m)||m.transparent||
         g.drawRange.start!==0||g.drawRange.count!==Infinity||Object.keys(g.morphAttributes).length)continue;
-      mesh.updateMatrix();
+      const transform=new THREE.Matrix4().multiplyMatrices(inverse,mesh.matrixWorld);transforms.set(mesh,transform);
       // Reflections need reversed winding and retain their original mesh.
-      if(mesh.matrix.determinant()<=0)continue;
+      if(transform.determinant()<=0)continue;
       if(!g.boundingBox)g.computeBoundingBox();
-      g.boundingBox.getCenter(centre).applyMatrix4(mesh.matrix);
+      g.boundingBox.getCenter(centre).applyMatrix4(transform);
       const attributes=Object.keys(g.attributes).sort().map(name=>{
         const a=g.attributes[name];return `${name}:${a.itemSize}:${a.normalized}:${a.array.constructor.name}`;
       }).join(',');
@@ -31,7 +41,7 @@ export function batchAerialMeshes(THREE,root,{exclude=[],cellSize=64}={}){
     }
     for(const meshes of groups.values()){
       if(meshes.length<2)continue;
-      const parts=meshes.map(mesh=>mesh.geometry.clone().applyMatrix4(mesh.matrix));
+      const parts=meshes.map(mesh=>mesh.geometry.clone().applyMatrix4(transforms.get(mesh)));
       const geometry=mergeGeometries(parts);
       for(const part of parts)part.dispose();
       if(!geometry)continue;

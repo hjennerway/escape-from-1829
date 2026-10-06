@@ -5,6 +5,17 @@ import {ROAD_STYLE} from './road-style.mjs';
 import {trimAnnexeEntranceBorder} from './annexe-access.mjs';
 import {HISTORIC_ROADS_SOURCE,HISTORIC_ROADS,HISTORIC_GRAVEL,HISTORIC_PAVING,HISTORIC_GRASS,HISTORIC_KERBS} from './historic-road-layout.mjs';
 export * from './historic-road-layout.mjs';
+// Ramer-Douglas-Peucker in the ground plane, with exact junction endpoints.
+// The 5mm bound is much smaller than the 320mm stone edge width.
+export function simplifyKerb(points,tolerance=.005){
+ if(points.length<3)return points;
+ const keep=new Set([0,points.length-1]),stack=[[0,points.length-1]];
+ while(stack.length){const [first,last]=stack.pop(),a=points[first],b=points[last],dx=b[0]-a[0],dz=b[1]-a[1],length=dx*dx+dz*dz;let index=-1,error=tolerance*tolerance;
+  for(let i=first+1;i<last;i++){const p=points[i],t=length?Math.max(0,Math.min(1,((p[0]-a[0])*dx+(p[1]-a[1])*dz)/length)):0,d=(p[0]-a[0]-t*dx)**2+(p[1]-a[1]-t*dz)**2;if(d>error){error=d;index=i;}}
+  if(index>=0){keep.add(index);stack.push([first,index],[index,last]);}
+ }
+ return [...keep].sort((a,b)=>a-b).map(i=>points[i]);
+}
 export function createHistoricRoads(THREE,exterior){
  const group=new THREE.Group();group.name='Historic roads and surfaces';group.userData.source=HISTORIC_ROADS_SOURCE;
  const material=color=>new THREE.MeshStandardMaterial({color,roughness:1});
@@ -28,8 +39,9 @@ export function createHistoricRoads(THREE,exterior){
   const uv=geometry.attributes.uv;for(let i=0;i<uv.count;i++)uv.setXY(i,uv.getX(i)/3,uv.getY(i)/3);
   const mesh=new THREE.Mesh(geometry,mat);mesh.rotation.x=-Math.PI/2;mesh.position.y=y;mesh.name=name;mesh.receiveShadow=true;mesh.renderOrder=mat===asphalt?2:mat===edge?1:0;mesh.userData.surface=(mat===asphalt||mat===paving||mat===junction)?'black road':mat===gravel?'gravel':mat===grass||mat===islandGrass?'grass':'stone kerb';group.add(mesh);return mesh;
  }
- function ribbon(name,points,width,mat,y){
+ function ribbon(name,points,width,mat,y,renderPoints=points){
   const part=new THREE.Group();part.name=name;part.userData.centerline=points;part.userData.width=width;group.add(part);
+  points=renderPoints;
   const trim=name==='Annexe front avenue border';
   const strip=points=>{for(const piece of trim?trimAnnexeEntranceBorder(points):[points])part.add(polygon(name+' surface',piece,mat,y));};
   // Straight strips with small round joints avoid gaps at bends; no spline drift.
@@ -52,7 +64,7 @@ export function createHistoricRoads(THREE,exterior){
  for(const area of HISTORIC_GRASS){const mesh=polygon(area.name,area.points,area.raisedIsland?islandGrass:grass,area.raisedIsland?.37:.31);if(area.raisedIsland)mesh.renderOrder=4;}
  for(const road of HISTORIC_ROADS)ribbon(road.name+' border',road.points,road.width+2*ROAD_STYLE.edgeWidth,edge,.32);
  for(const road of HISTORIC_ROADS)ribbon(road.name,road.points,road.width,asphalt,ROAD_STYLE.asphaltY);
- for(const edge of HISTORIC_KERBS)ribbon(edge.name,edge.points,edge.width??.32,kerb,.38);
+ for(const edge of HISTORIC_KERBS)ribbon(edge.name,edge.points,edge.width??.32,kerb,.38,simplifyKerb(edge.points));
  // Retain OS reference metadata for placement and clearance checks without drawing ground outlines.
  group.userData.missingFootprints=missingHistoricFootprints(THREE,exterior);
  return group;

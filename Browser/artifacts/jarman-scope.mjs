@@ -12,7 +12,8 @@ export function jarmanProtected(THREE,root){
    const tree=p.userData.oakTree??p.userData.adminPineTree;
    if(tree&&[...KML_12_ADDITIONS,...KML_13_ADDITIONS].some(point=>point.name===tree.name&&point.coordinates[0]===tree.longitude&&point.coordinates[1]===tree.latitude))return;
   }
-  if(!o.isMesh)return;
+  // Added roof closures are verified separately; retain every original primitive.
+  if(!o.isMesh||o.userData.roofWallClosure)return;
   for(let p=o;p;p=p.parent)if(p.name==='West court front elevation')return;
   const hash=createHash('sha256');
   for(const [key,a] of Object.entries(o.geometry.attributes).sort()){hash.update(key);hash.update(Buffer.from(a.array.buffer,a.array.byteOffset,a.array.byteLength));}

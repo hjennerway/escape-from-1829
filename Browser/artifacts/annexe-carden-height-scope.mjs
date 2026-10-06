@@ -5,7 +5,8 @@ export function cardenHeightSnapshot(THREE,a){
  a.traverse(o=>{
   // Later additive Oakmere work is independently checked by test-oakmere-court.
   for(let p=o;p;p=p.parent)if(p.name==='Oakmere rear court additions')return;
-  if(!o.isMesh)return;
+  // Added roof closures are verified separately; retain every original primitive.
+  if(!o.isMesh||o.userData.roofWallClosure)return;
   const ancestors=[];for(let p=o;p&&p!==a;p=p.parent)ancestors.push(p.name);
   if(ancestors.includes('West court front elevation'))return;
   const inCarden=ancestors.includes('Carden side elevation');

@@ -7,7 +7,7 @@ import {PERIODS,BUILDING_SECTIONS,existsInYear,roadSection} from './dist/estate-
 
 const server=spawn(process.execPath,['serve.mjs'],{cwd:new URL('.',import.meta.url),windowsHide:true,env:{...process.env,PORT:'0'},stdio:'pipe'});
 const base=await new Promise((resolve,reject)=>{server.stdout.once('data',data=>resolve(String(data).match(/http:\/\/127\.0\.0\.1:\d+/)[0]));server.once('error',reject);});
-const artifacts=new URL('./artifacts/',import.meta.url);await mkdir(artifacts,{recursive:true});
+const artifacts=new URL(process.env.TIMELINE_ARTIFACT_DIR??'./artifacts/',import.meta.url);await mkdir(artifacts,{recursive:true});
 let browser;const errors=[],metrics={};
 // Runs in the page against actual visible meshes, both compiled aerial batches
 // and the unbatched walking scene. Texture identity/projection must match grass.

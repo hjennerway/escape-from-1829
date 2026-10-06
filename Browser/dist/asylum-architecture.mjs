@@ -23,13 +23,16 @@ export function asylumWallSurfaces(floor){
  }
  return surfaces;
 }
+export function asylumArchitectureMaterials(THREE,floor,document=globalThis.document){
+ if(!cache.has(THREE))cache.set(THREE,createInteriorMaterials(THREE,document));
+ const roomMaterials=asylumRoomWallMaterials(THREE,cache.get(THREE));
+ return floor.id===2?basementMuralMaterials(THREE,roomMaterials,2.9,document):roomMaterials;
+}
 export function buildAsylumArchitecture(THREE,scene,floor){
- if(!cache.has(THREE))cache.set(THREE,createInteriorMaterials(THREE,globalThis.document));
  const batches=new Map(),windowFrames=[],ceilingHeight=floor.id===2?2.9:3.8;
  // Nine complete courses put the red/cream change in the shared mortar joint.
  const brickHeight=9*INTERIOR_BRICK_COURSE_HEIGHT;
- const roomMaterials=asylumRoomWallMaterials(THREE,cache.get(THREE));
- const materials=floor.id===2?basementMuralMaterials(THREE,roomMaterials,ceilingHeight):roomMaterials;
+ const materials=asylumArchitectureMaterials(THREE,floor);
  const roomFinisher=createAsylumRoomFinisher(THREE,floor,ceilingHeight,windowFrames);
  // Continue masonry through the ceiling and the floor above. Stair openings
  // expose the space between those surfaces; stopping at the room ceiling

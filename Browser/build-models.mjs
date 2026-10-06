@@ -4,7 +4,7 @@ import {resolve,extname,sep} from 'node:path';
 import {fileURLToPath} from 'node:url';
 import {createHash} from 'node:crypto';
 import {gzipSync} from 'node:zlib';
-import {chromium} from 'playwright';
+import {launchHardwareBrowser} from './test-support/hardware-browser.mjs';
 import {dist,modelSourceHash} from './model-build-inputs.mjs';
 import {decodeModel,MODEL_FORMAT} from './dist/model-binary.mjs';
 
@@ -25,7 +25,7 @@ const server=http.createServer(async(req,res)=>{
 await new Promise(resolve=>server.listen(0,'127.0.0.1',resolve));
 let browser;
 try{
-  browser=await chromium.launch({headless:true,...(process.env.MODEL_CHROME_PATH?{executablePath:process.env.MODEL_CHROME_PATH}:{})});
+  browser=await launchHardwareBrowser();
   const page=await browser.newPage();
   // Bounded IPC avoids DevTools trying to capture one enormous HTTP request body.
   await page.exposeFunction('__modelChunk',chunk=>{chunks.push(Buffer.from(chunk,'base64'));});
@@ -41,7 +41,7 @@ try{
       let text='';for(let part=start;part<Math.min(bytes.length,start+262144);part+=16384)text+=String.fromCharCode(...bytes.subarray(part,Math.min(bytes.length,part+16384)));
       await window.__modelChunk(btoa(text));
     }
-    return {revision:THREE.REVISION,buildMilliseconds:built-start,windows:estate.buildingDetail.stats.windows,geometries:snapshot.scene.geometries.length,materials:snapshot.scene.materials.length,textures:snapshot.scene.textures.length};
+    return {revision:THREE.REVISION,buildMilliseconds:built-start,windows:estate.buildingDetail.stats.windows,geometries:snapshot.scene.geometries.length,geometryBytesSaved:snapshot.scene.bufferSharing.geometryBytesSaved,materials:snapshot.scene.materials.length,textures:snapshot.scene.textures.length};
   });
   compiled=Buffer.concat(chunks);
   if(!compiled||decodeModel(compiled.buffer.slice(compiled.byteOffset,compiled.byteOffset+compiled.byteLength)).format!==MODEL_FORMAT)throw new Error('Compiler produced no valid model');

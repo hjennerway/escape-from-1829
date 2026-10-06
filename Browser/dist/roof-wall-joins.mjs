@@ -1,6 +1,9 @@
 // Close the underside of authored roof overhangs after all roof cuts and building
 // transforms. Slate vertices stay intact; the fascia stops at the slate edge.
-export function closeRoofWallGaps(THREE,root,{exclude=[]}={}){
+const supportCache=new WeakMap();
+const same=(a,b)=>a===b||Boolean(a&&b&&a.length===b.length&&a.every((value,i)=>value===b[i]));
+export function releaseRoofSupportCache(root){root.traverse(object=>supportCache.delete(object));}
+export function closeRoofWallGaps(THREE,root,{exclude=[],cache=true}={}){
  root.updateWorldMatrix(true,true);
  const roofs=[],grid=new Map(),cellSize=8;
  const roofMaterial=o=>o.material?.userData.roofTilePixels||
@@ -12,7 +15,7 @@ export function closeRoofWallGaps(THREE,root,{exclude=[]}={}){
     const k=x+','+z;if(!grid.has(k))grid.set(k,[]);grid.get(k).push(record);
    }
  };
- const instance=new THREE.Matrix4(),matrix=new THREE.Matrix4();
+ const instance=new THREE.Matrix4(),matrix=new THREE.Matrix4();let reusedMeshes=0,scannedMeshes=0;
  root.traverse(o=>{
   if(!o.isMesh||o.userData.roofWallClosure)return;
   for(let p=o;p;p=p.parent)if(exclude.includes(p))return;
@@ -21,6 +24,15 @@ export function closeRoofWallGaps(THREE,root,{exclude=[]}={}){
   const isRoof=Boolean(roofMaterial(o)),g=o.geometry,p=g.attributes.position,index=g.index;
   if(!p)return;
   const count=o.isInstancedMesh?o.count:1;
+  const previous=cache?supportCache.get(o):null,instances=o.isInstancedMesh?o.instanceMatrix.array:null;
+  // Compare the actual input values: builders sometimes edit vertices without
+  // incrementing BufferAttribute.version, or clone them during UV finishing.
+  if(previous&&previous.isRoof===isRoof&&previous.count===count&&previous.itemSize===p.itemSize&&
+   same(previous.positions,p.array)&&same(previous.index,index?.array)&&same(previous.world,o.matrixWorld.elements)&&same(previous.instances,instances)){
+   previous.records.forEach(add);if(isRoof&&!o.userData.roofWallJoinsFinished)roofs.push(...previous.roofs);reusedMeshes++;return;
+  }
+  scannedMeshes++;
+  const cached={isRoof,count,itemSize:p.itemSize,positions:p.array.slice(),index:index?.array.slice(),world:o.matrixWorld.elements.slice(),instances:instances?instances.slice():null,records:[],roofs:[]};
   for(let item=0;item<count;item++){
    if(o.isInstancedMesh){o.getMatrixAt(item,instance);matrix.multiplyMatrices(o.matrixWorld,instance);}else matrix.copy(o.matrixWorld);
    const sign=Math.sign(matrix.determinant()),vertices=Array.from({length:p.count},(_,i)=>new THREE.Vector3().fromBufferAttribute(p,i).applyMatrix4(matrix)),edges=new Map();let solidUnderside=false;
@@ -33,6 +45,7 @@ export function closeRoofWallGaps(THREE,root,{exclude=[]}={}){
     normal.normalize();
     const record={a,b,c,normal,owner:o,isRoof,minX:Math.min(a.x,b.x,c.x),maxX:Math.max(a.x,b.x,c.x),minZ:Math.min(a.z,b.z,c.z),maxZ:Math.max(a.z,b.z,c.z)};
     add(record);
+    cached.records.push(record);
     if(!isRoof||o.userData.roofWallJoinsFinished)continue;
     for(let j=0;j<3;j++){
      const a=ids[j],b=ids[(j+1)%3],ka=vertexKey(a),kb=vertexKey(b);if(ka===kb)continue;
@@ -40,8 +53,9 @@ export function closeRoofWallGaps(THREE,root,{exclude=[]}={}){
      if(edges.has(id))edges.get(id).count++;else edges.set(id,{a,b,c:ids[(j+2)%3],normal,count:1});
     }
    }
-   if(isRoof&&!o.userData.roofWallJoinsFinished)roofs.push({owner:o,vertices,edges,solidUnderside});
+   if(isRoof&&!o.userData.roofWallJoinsFinished){const roof={owner:o,vertices,edges,solidUnderside};roofs.push(roof);cached.roofs.push(roof);}
   }
+  if(cache)supportCache.set(o,cached);
  });
  function height(r,x,z){
   const {a,b,c}=r,den=(b.z-c.z)*(a.x-c.x)+(c.x-b.x)*(a.z-c.z);
@@ -59,14 +73,31 @@ export function closeRoofWallGaps(THREE,root,{exclude=[]}={}){
   }
   return best;
  }
- const report={roofs:roofs.length,boundaries:0,closed:0,unsupported:0};
+ const report={roofs:roofs.length,boundaries:0,closed:0,unsupported:0,reusedMeshes,scannedMeshes},undersideMaterials=new Map();
  for(const {owner,vertices,edges,solidUnderside} of roofs){
   // Box/extruded roofs already have an opaque underside and closed fascia.
   if(solidUnderside){owner.userData.roofWallJoinsFinished=true;owner.userData.roofWallJoinSummary={closed:0,unsupported:0,solid:true};continue;}
-  const parts=new Map(),inverse=owner.parent.matrixWorld.clone().invert();let closed=0,unsupported=0;
+  // A roof skin is also opaque from below, including valleys where another
+  // roof supplies the edge join. Keep this face just inside the slate, rather
+  // than making its outward face double-sided or moving the visible pitches.
+  if(!undersideMaterials.has(owner.material)){
+   const material=owner.material.clone();material.side=THREE.BackSide;
+   undersideMaterials.set(owner.material,material);
+  }
+  const undersideGeometry=owner.geometry.clone(),position=undersideGeometry.attributes.position;
+  const drop=new THREE.Vector3(0,-.003,0).applyMatrix3(new THREE.Matrix3().setFromMatrix4(owner.matrixWorld.clone().invert()));
+  for(let i=0;i<position.count;i++)position.setXYZ(i,position.getX(i)+drop.x,position.getY(i)+drop.y,position.getZ(i)+drop.z);
+  undersideGeometry.computeBoundingBox();undersideGeometry.computeBoundingSphere();
+  const underside=new THREE.Mesh(undersideGeometry,undersideMaterials.get(owner.material));
+  underside.position.copy(owner.position);underside.quaternion.copy(owner.quaternion);underside.scale.copy(owner.scale);
+  underside.name='Roof underside: '+(owner.name||owner.parent.name);underside.userData.roofWallClosure=true;
+  underside.castShadow=underside.receiveShadow=true;owner.parent.add(underside);
+  const parts=new Map(),inverse=owner.parent.matrixWorld.clone().invert(),parentSign=Math.sign(owner.parent.matrixWorld.determinant());let closed=0,unsupported=0;
   function triangle(mat,a,b,c,out){
    if(b.clone().sub(a).cross(c.clone().sub(a)).lengthSq()<1e-14)return;
-   if(b.clone().sub(a).cross(c.clone().sub(a)).dot(out)<0)[b,c]=[c,b];
+   // Three.js reverses front-face winding for mirrored parents. Match that
+   // convention before returning these world-space vertices to the parent.
+   if(b.clone().sub(a).cross(c.clone().sub(a)).dot(out)*parentSign<0)[b,c]=[c,b];
    if(!parts.has(mat))parts.set(mat,[]);
    for(const v of [a,b,c])parts.get(mat).push(...v.clone().applyMatrix4(inverse));
   }
@@ -126,7 +157,8 @@ export function closeRoofWallGaps(THREE,root,{exclude=[]}={}){
    const p=geometry.attributes.position,n=geometry.attributes.normal,uv=[];
    for(let i=0;i<p.count;i++)uv.push((Math.abs(n.getX(i))>.5?p.getZ(i):p.getX(i))/1.7,(Math.abs(n.getY(i))>.5?p.getZ(i):p.getY(i))/1.7);
    geometry.setAttribute('uv',new THREE.Float32BufferAttribute(uv,2));
-   const closure=new THREE.Mesh(geometry,material);closure.name=(owner.name||owner.parent.name)+' roof wall closure';
+   const closure=new THREE.Mesh(geometry,material);
+   closure.name='Eave closure: '+(owner.name||owner.parent.name).replace(/\b(?:slate|roof)\b/gi,'').replace(/\s+/g,' ').trim();
    closure.userData.roofWallClosure=true;closure.castShadow=closure.receiveShadow=true;owner.parent.add(closure);
   }
   owner.userData.roofWallJoinsFinished=true;

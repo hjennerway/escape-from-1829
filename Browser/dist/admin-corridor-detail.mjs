@@ -33,6 +33,7 @@ export function addAdminCorridorDetail(THREE,{corridor,start,end,cz,depth=6.4,he
       const x=(i-(count-1)/2)*spacing;if(omitWindow(mid+side*x,side))continue;
       const window=new THREE.Group();
       window.name='Corridor round-headed window';window.position.set(x,sill,0);face.add(window);
+      window.userData.aerialWindowAssembly=true;window.userData.aerialBatchScope=true;
       mesh(new THREE.ShapeGeometry(arch(width+.10,spring),24),shadow,0,-.03,.016,'Corridor window reveal',window);
       const pane=mesh(new THREE.ShapeGeometry(arch(width,spring),24),glass,0,0,.038,'Corridor arched glazing',window);pane.castShadow=false;
       // Pale narrow masonry follows the full semicircle, with a projecting sill.

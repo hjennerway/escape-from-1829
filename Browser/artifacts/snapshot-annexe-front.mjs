@@ -9,7 +9,8 @@ const records=[],instance=new THREE.Matrix4(),world=new THREE.Matrix4();
 const inverse=annexe.matrixWorld.clone().invert();
 const protectedName=name=>/^(Central hall|Entrance |Hall dormer|West front pavilion|East front pavilion|West square tower|East square tower|West pavilion|East pavilion|West tower|East tower|Tower |Portal |Bell|Belfry |Visible hanging bell|Weather vane)/.test(name);
 annexe.traverse(o=>{
- if(!o.isMesh)return;
+ // This snapshot preserves authored frontage; new roof closures have separate checks.
+ if(!o.isMesh||o.userData.roofWallClosure)return;
  let side=false;for(let p=o.parent;p&&p!==annexe;p=p.parent)if(/mirrored side details/.test(p.name))side=true;
  const rootInstances=o.isInstancedMesh&&o.parent===annexe;
  if(!protectedName(o.name)&&!side&&!rootInstances)return;

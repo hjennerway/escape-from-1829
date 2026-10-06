@@ -12,7 +12,8 @@ const rows=[],instance=new THREE.Matrix4();
 annexe.traverse(o=>{
   // Later additive Oakmere work is independently checked by test-oakmere-court.
   for(let p=o;p;p=p.parent)if(p.name==='Oakmere rear court additions')return;
- if(!o.isMesh)return;
+  // Added roof closures are verified separately; retain every original primitive.
+  if(!o.isMesh||o.userData.roofWallClosure)return;
  const hash=createHash('sha256');
  for(const [name,a] of Object.entries(o.geometry.attributes).sort())hash.update(name).update(Buffer.from(a.array.buffer,a.array.byteOffset,a.array.byteLength));
  if(o.geometry.index)hash.update(Buffer.from(o.geometry.index.array.buffer));

@@ -8,7 +8,8 @@ export function rearStretchSnapshot(THREE,annexe){
   root.traverse(o=>{
   // Later additive Oakmere work is independently checked by test-oakmere-court.
   for(let p=o;p;p=p.parent)if(p.name==='Oakmere rear court additions')return;
-   if(!o.isMesh)return;
+  // Added roof closures are verified separately; retain every original primitive.
+  if(!o.isMesh||o.userData.roofWallClosure)return;
    if(protectedOnly){
     for(let p=o;p&&p!==annexe;p=p.parent)if(['Rear court west assembly','Oakmere west lawn elevation','Annexe rear kitchen and paving','Oakmere','Leighton/Newton'].includes(p.name))return;
     if(/^Rear court |^Rear service court link/.test(o.name))return;

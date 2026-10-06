@@ -7,7 +7,8 @@ globalThis.document={createElement:()=>({getContext:()=>({fillRect(){}})})};
 const {annexe}=createEscapeExterior(THREE,1.5);annexe.updateMatrixWorld(true);
 const rows=[],instance=new THREE.Matrix4(),matrix=new THREE.Matrix4();
 annexe.traverse(o=>{
- if(!o.isMesh||o.name==='Annexe drive')return;
+ // Keep the original shape fingerprint while testing new roof closures separately.
+ if(!o.isMesh||o.userData.roofWallClosure||o.name==='Annexe drive')return;
  const hash=createHash('sha256');for(const [key,a] of Object.entries(o.geometry.attributes).sort()){hash.update(key);hash.update(Buffer.from(a.array.buffer,a.array.byteOffset,a.array.byteLength));}
  if(o.geometry.index)hash.update(Buffer.from(o.geometry.index.array.buffer));
  const geometry=hash.digest('hex'),local=o.matrix.clone();

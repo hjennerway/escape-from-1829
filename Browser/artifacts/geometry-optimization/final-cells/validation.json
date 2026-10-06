@@ -1,0 +1,175 @@
+{
+  "cells": {
+    "rooms": [
+      "B5",
+      "B6",
+      "B7",
+      "B8"
+    ],
+    "vertices": 117972,
+    "names": [
+      [
+        "B5",
+        "Padded cell · patient confinement"
+      ],
+      [
+        "B6",
+        "Padded cell · patient confinement"
+      ],
+      [
+        "B7",
+        "Padded cell · patient confinement"
+      ],
+      [
+        "B8",
+        "Padded cell · patient confinement"
+      ]
+    ],
+    "mattresses": [
+      {
+        "procedural": true,
+        "width": 0.92,
+        "depth": 1.9,
+        "height": 0.18,
+        "era": "Interpretive padded confinement cell",
+        "x": -36.14,
+        "z": -5.75,
+        "rotation": -3.141592653589793,
+        "edge": 5,
+        "id": "2:B5:fixed:0",
+        "kind": "cellMattress",
+        "roomId": "B5",
+        "variable": false,
+        "y": 0.018
+      },
+      {
+        "procedural": true,
+        "width": 0.92,
+        "depth": 1.9,
+        "height": 0.18,
+        "era": "Interpretive padded confinement cell",
+        "x": -25.54,
+        "z": -7.05,
+        "rotation": 0,
+        "edge": 2,
+        "id": "2:B6:fixed:0",
+        "kind": "cellMattress",
+        "roomId": "B6",
+        "variable": false,
+        "y": 0.018
+      },
+      {
+        "procedural": true,
+        "width": 0.92,
+        "depth": 1.9,
+        "height": 0.18,
+        "era": "Interpretive padded confinement cell",
+        "x": -36.14,
+        "z": -3.1500000000000004,
+        "rotation": 0,
+        "edge": 2,
+        "id": "2:B7:fixed:0",
+        "kind": "cellMattress",
+        "roomId": "B7",
+        "variable": false,
+        "y": 0.018
+      },
+      {
+        "procedural": true,
+        "width": 0.92,
+        "depth": 1.9,
+        "height": 0.18,
+        "era": "Interpretive padded confinement cell",
+        "x": -25.54,
+        "z": -3.1500000000000004,
+        "rotation": 0,
+        "edge": 4,
+        "id": "2:B8:fixed:0",
+        "kind": "cellMattress",
+        "roomId": "B8",
+        "variable": false,
+        "y": 0.018
+      }
+    ]
+  },
+  "explore": {
+    "vertices": 117972,
+    "mattresses": [
+      {
+        "procedural": true,
+        "width": 0.92,
+        "depth": 1.9,
+        "height": 0.18,
+        "era": "Interpretive padded confinement cell",
+        "x": -36.14,
+        "z": -5.75,
+        "rotation": -3.141592653589793,
+        "edge": 5,
+        "id": "2:B5:fixed:0",
+        "kind": "cellMattress",
+        "roomId": "B5",
+        "variable": false,
+        "y": 0.018
+      },
+      {
+        "procedural": true,
+        "width": 0.92,
+        "depth": 1.9,
+        "height": 0.18,
+        "era": "Interpretive padded confinement cell",
+        "x": -25.54,
+        "z": -7.05,
+        "rotation": 0,
+        "edge": 2,
+        "id": "2:B6:fixed:0",
+        "kind": "cellMattress",
+        "roomId": "B6",
+        "variable": false,
+        "y": 0.018
+      },
+      {
+        "procedural": true,
+        "width": 0.92,
+        "depth": 1.9,
+        "height": 0.18,
+        "era": "Interpretive padded confinement cell",
+        "x": -36.14,
+        "z": -3.1500000000000004,
+        "rotation": 0,
+        "edge": 2,
+        "id": "2:B7:fixed:0",
+        "kind": "cellMattress",
+        "roomId": "B7",
+        "variable": false,
+        "y": 0.018
+      },
+      {
+        "procedural": true,
+        "width": 0.92,
+        "depth": 1.9,
+        "height": 0.18,
+        "era": "Interpretive padded confinement cell",
+        "x": -25.54,
+        "z": -3.1500000000000004,
+        "rotation": 0,
+        "edge": 4,
+        "id": "2:B8:fixed:0",
+        "kind": "cellMattress",
+        "roomId": "B8",
+        "variable": false,
+        "y": 0.018
+      }
+    ]
+  },
+  "captures": [
+    "escape-B5",
+    "escape-B6",
+    "escape-B7",
+    "escape-B8",
+    "padding-close",
+    "escape-mobile-B8",
+    "explore-B5",
+    "explore-B8"
+  ],
+  "errors": []
+}

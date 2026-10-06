@@ -1,0 +1,18 @@
+[
+  {
+    "test": "test-reception-second-floor.mjs",
+    "exit": 1
+  },
+  {
+    "test": "test-jarman.mjs",
+    "exit": 1
+  },
+  {
+    "test": "test-leighton-newton.mjs",
+    "exit": 1
+  },
+  {
+    "test": "test-aerial-layouts.mjs",
+    "exit": 1
+  }
+]

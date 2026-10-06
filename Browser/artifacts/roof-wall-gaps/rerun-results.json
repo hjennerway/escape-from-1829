@@ -1,0 +1,114 @@
+[
+  {
+    "command": "node test-estate-periods.mjs",
+    "exit": 0
+  },
+  {
+    "command": "node test-reception-second-floor.mjs",
+    "exit": 1
+  },
+  {
+    "command": "node test-asylum-windows.mjs",
+    "exit": 1
+  },
+  {
+    "command": "node test-asylum-doorways.mjs",
+    "exit": 1
+  },
+  {
+    "command": "node test-tower-buildings.mjs",
+    "exit": 0
+  },
+  {
+    "command": "node test-irby-ashley.mjs",
+    "exit": 0
+  },
+  {
+    "command": "node test-hale-ward.mjs",
+    "exit": 0
+  },
+  {
+    "command": "node test-estates.mjs",
+    "exit": 0
+  },
+  {
+    "command": "node test-farndon.mjs",
+    "exit": 0
+  },
+  {
+    "command": "node test-ward-placement.mjs",
+    "exit": 0
+  },
+  {
+    "command": "node test-ward-corridors.mjs",
+    "exit": 0
+  },
+  {
+    "command": "node test-larkton.mjs",
+    "exit": 0
+  },
+  {
+    "command": "node test-larkton-recess.mjs",
+    "exit": 0
+  },
+  {
+    "command": "node test-annexe-carden.mjs",
+    "exit": 0
+  },
+  {
+    "command": "node test-annexe-front-link.mjs",
+    "exit": 0
+  },
+  {
+    "command": "node test-annexe-east-outer.mjs",
+    "exit": 0
+  },
+  {
+    "command": "node test-annexe-kitchen.mjs",
+    "exit": 0
+  },
+  {
+    "command": "node test-annexe-rear-stretch.mjs",
+    "exit": 0
+  },
+  {
+    "command": "node test-annexe-rear-side-alignment.mjs",
+    "exit": 0
+  },
+  {
+    "command": "node test-annexe-os-refinement.mjs",
+    "exit": 0
+  },
+  {
+    "command": "node test-jarman.mjs",
+    "exit": 1
+  },
+  {
+    "command": "node test-oakmere-court.mjs",
+    "exit": 0
+  },
+  {
+    "command": "node test-oakmere-west.mjs",
+    "exit": 0
+  },
+  {
+    "command": "node test-oakmere-windows.mjs",
+    "exit": 0
+  },
+  {
+    "command": "node test-leighton-newton.mjs",
+    "exit": 1
+  },
+  {
+    "command": "node test-main-admin.mjs",
+    "exit": 0
+  },
+  {
+    "command": "node test-aerial-layouts.mjs",
+    "exit": 1
+  },
+  {
+    "command": "node test-annexe-access.mjs",
+    "exit": 0
+  }
+]

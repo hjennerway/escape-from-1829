@@ -36,7 +36,9 @@ jobs:
         run: npx playwright install --with-deps chromium
       - name: Check aerial modelling and binary format
         run: npm run test:models
-      - name: Precompile estate geometry and textures
+      - name: Precompile estate and interior sections
+        env:
+          BROWSER_CI_SOFTWARE: '1'
         run: npm run build:models
       - name: Verify compiled scene and browser fallback
         env:

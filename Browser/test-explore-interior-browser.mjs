@@ -5,14 +5,14 @@ import {fileURLToPath} from 'node:url';
 import {launchHardwareBrowser} from './test-support/hardware-browser.mjs';
 const server=spawn(process.execPath,['Browser/serve.mjs'],{cwd:new URL('../',import.meta.url),windowsHide:true,env:{...process.env,PORT:'0'},stdio:'pipe'});
 const base=await new Promise((resolve,reject)=>{server.stdout.once('data',d=>resolve(String(d).match(/http:\/\/127\.0\.0\.1:\d+/)[0]));server.once('error',reject);});
-const destination=new URL('./artifacts/explore-interior/',import.meta.url);await mkdir(destination,{recursive:true});
+const destination=new URL(process.env.EXPLORE_ARTIFACT_DIR??'./artifacts/explore-interior/',import.meta.url);await mkdir(destination,{recursive:true});
 const browser=await launchHardwareBrowser({headless:true,...(process.env.MODEL_CHROME_PATH?{executablePath:process.env.MODEL_CHROME_PATH}:{})});
 try{
  const page=await browser.newPage({viewport:{width:1200,height:800},reducedMotion:'reduce'}),errors=[],requests=[];
  page.setDefaultTimeout(120000);page.setDefaultNavigationTimeout(120000);
  page.on('pageerror',e=>errors.push(e.message));page.on('console',m=>{if(m.type()==='error'&&/THREE|WebGL|shader/.test(m.text()))errors.push(m.text());});page.on('request',r=>requests.push(r.url()));
  await page.route('**/explore.mjs',async route=>{const response=await route.fetch();await route.fulfill({response,body:(await response.text()).replace('const clock=new THREE.Timer();','window.exploreTest={walker,exterior,interior,renderer,lighting,floors,input};const clock=new THREE.Timer();')});});
- await page.goto(base+'/explore.html');await page.waitForFunction(()=>window.exploreTest?.renderer.info.render.frame>2);
+ await page.goto(base+'/explore.html');await page.waitForFunction(()=>window.exploreTest?.renderer.info.render.frame>2&&window.exploreTest.interior.scene.userData.interiorSectionsComplete);
  assert.equal(await page.locator('[data-lighting="dusk"]').getAttribute('aria-pressed'),'true');
  assert(!requests.some(url=>/\/(?:game|notebook|security-guard)\.mjs/.test(url)),'Exploration does not load game characters or notebook');
  assert.equal(await page.locator('#notebook,#floorMap,#miniMap,#hud').count(),0);

@@ -13,12 +13,12 @@ export function createBuildingDetail(THREE,root,{exclude=[],shadowLight=null}={}
   const matrix=new THREE.Matrix4(),local=new THREE.Matrix4(),size=new THREE.Vector3(),colour=new THREE.Color();
   root.updateWorldMatrix(true,true);
 
-  function atlasTile(parts,bounds){
-    const commands=parts.slice().sort((a,b)=>a.n+a.d/2-b.n-b.d/2).map(p=>[
+  function atlasTile(parts,bounds,triangles=null){
+    const commands=triangles??parts.slice().sort((a,b)=>a.n+a.d/2-b.n-b.d/2).map(p=>[
       (p.u-p.w/2-bounds.minU)/bounds.w*imageW,(p.y-p.h/2-bounds.minY)/bounds.h*imageH,
       p.w/bounds.w*imageW,p.h/bounds.h*imageH,p.box.source.material.color.getHex(),p.box.pane?1:0
     ]);
-    const key=JSON.stringify(commands.map(c=>c.map(v=>Math.round(v*100)/100)));
+    const key=JSON.stringify(commands,(_key,value)=>typeof value==='number'?Math.round(value*100)/100:value);
     if(patterns.has(key))return patterns.get(key);
     const index=patterns.size,pageIndex=Math.floor(index/(columns*rows)),slot=index%(columns*rows);
     if(!pages[pageIndex]){
@@ -33,10 +33,17 @@ export function createBuildingDetail(THREE,root,{exclude=[],shadowLight=null}={}
       pages.push({pixels,texture,material,emission,emissiveMap});
     }
     const page=pages[pageIndex],ox=slot%columns*tileW+padding,oy=Math.floor(slot/columns)*tileH+padding;
-    for(const [x,y,w,h,hex,glass] of commands){
+    for(const [x,y,w,h,hex,glass,triangle] of commands){
       const rgb=[hex>>16&255,hex>>8&255,hex&255];
       for(let py=Math.max(0,Math.floor(y));py<Math.min(imageH,Math.ceil(y+h));py++)for(let px=Math.max(0,Math.floor(x));px<Math.min(imageW,Math.ceil(x+w));px++){
-        const cover=Math.max(0,Math.min(px+1,x+w)-Math.max(px,x))*Math.max(0,Math.min(py+1,y+h)-Math.max(py,y));
+        let cover=Math.max(0,Math.min(px+1,x+w)-Math.max(px,x))*Math.max(0,Math.min(py+1,y+h)-Math.max(py,y));
+        if(triangle){
+          const [ax,ay,bx,by,cx,cy]=triangle,area=(bx-ax)*(cy-ay)-(by-ay)*(cx-ax);cover=0;
+          for(const dx of [.25,.75])for(const dy of [.25,.75]){
+            const tx=px+dx,ty=py+dy,u=((bx-tx)*(cy-ty)-(by-ty)*(cx-tx))/area,v=((cx-tx)*(ay-ty)-(cy-ty)*(ax-tx))/area;
+            if(u>=-1e-6&&v>=-1e-6&&u+v<=1+1e-6)cover+=.25;
+          }
+        }
         const offset=((oy+py)*atlasSize+ox+px)*4,oldAlpha=page.pixels[offset+3]/255,alpha=cover+oldAlpha*(1-cover);
         if(!alpha)continue;
         for(let c=0;c<3;c++)page.pixels[offset+c]=(rgb[c]*cover+page.pixels[offset+c]*oldAlpha*(1-cover))/alpha;
@@ -71,7 +78,7 @@ export function createBuildingDetail(THREE,root,{exclude=[],shadowLight=null}={}
       if(w>6)continue;
       const centre=new THREE.Vector3().setFromMatrixPosition(matrix);
       // Glass materials identify openings without guessing from mesh names.
-      const pane=m.metalness>=.08&&m.roughness<.8&&d<=.18&&w>=.4&&h>=.4;
+      const pane=(m.userData.windowGlass||(m.metalness>=.08&&m.roughness<.8))&&d<=.18&&w>=.4&&h>=.4;
       result.push({source,index,centre,axes,dimensions,axis,w,h,d,pane,used:false});
     }
     return result;
@@ -89,11 +96,58 @@ export function createBuildingDetail(THREE,root,{exclude=[],shadowLight=null}={}
     copy.computeBoundingSphere();return copy;
   }
 
+  function windowAssemblies(parent){
+    const assemblies=parent.children.filter(o=>o.userData.aerialWindowAssembly),windows=[];
+    if(!assemblies.length)return;
+    for(const assembly of assemblies){
+      const faces=[],inverse=assembly.matrixWorld.clone().invert();let id=0;
+      assembly.traverse(source=>{
+        if(!source.isMesh||source.isInstancedMesh||Array.isArray(source.material)||source.material.transparent)return;
+        const g=source.geometry,p=g.attributes.position,index=g.index,transform=new THREE.Matrix4().multiplyMatrices(inverse,source.matrixWorld);
+        if(source.userData.nightWindowIds)id=source.userData.nightWindowIds[0];
+        for(let i=0;i<(index?.count??p.count);i+=3){
+          const points=[0,1,2].map(j=>new THREE.Vector3().fromBufferAttribute(p,index?index.getX(i+j):i+j).applyMatrix4(transform));
+          if(points[1].clone().sub(points[0]).cross(points[2].clone().sub(points[0])).z<1e-10)continue;
+          faces.push({points,depth:points.reduce((sum,v)=>sum+v.z,0)/3,hex:source.material.color.getHex(),glass:source.material.userData.nightWindowGlass?1:0});
+        }
+      });
+      if(!faces.length)continue;
+      const points=faces.flatMap(f=>f.points),minU=Math.min(...points.map(p=>p.x)),minY=Math.min(...points.map(p=>p.y));
+      const bounds={minU,minY,w:Math.max(...points.map(p=>p.x))-minU,h:Math.max(...points.map(p=>p.y))-minY};
+      // Canonicalise coplanar triangles before hashing; inverse world matrices
+      // otherwise give identical windows tiny, order-dependent roundoff errors.
+      const order=f=>JSON.stringify([f.hex,...f.points.flatMap(p=>[p.x,p.y].map(v=>Math.round(v*1e5)))]);
+      const commands=faces.sort((a,b)=>Math.round(a.depth*1e5)-Math.round(b.depth*1e5)||order(a).localeCompare(order(b))).map(f=>{
+        const xy=f.points.flatMap(p=>[(p.x-minU)/bounds.w*imageW,(p.y-minY)/bounds.h*imageH].map(v=>Math.round(v*10)/10)),xs=[xy[0],xy[2],xy[4]],ys=[xy[1],xy[3],xy[5]];
+        return [Math.min(...xs),Math.min(...ys),Math.max(...xs)-Math.min(...xs),Math.max(...ys)-Math.min(...ys),f.hex,f.glass,xy];
+      });
+      windows.push({assembly,bounds,tile:atlasTile([],bounds,commands),depth:Math.max(...points.map(p=>p.z))+.002,id});stats.windows++;stats.parts+=assembly.children.length;
+    }
+    if(!windows.length)return;
+    const levels=[0,1,2].map(level=>{const g=new THREE.Group();g.name=(parent.name||'Estate')+' · assembly detail '+level;g.userData.buildingDetailLevel=level;g.visible=level===0;parent.add(g);return g;});
+    const byPage=new Map(),worldBounds=new THREE.Box3();let windowHeight=0;
+    for(const {assembly,bounds:b,tile,depth,id} of windows){
+      assembly.updateMatrix();const normal=new THREE.Vector3(0,0,1).transformDirection(assembly.matrix);
+      if(!byPage.has(tile.page))byPage.set(tile.page,{positions:[],normals:[],uv:[],ids:[]});const data=byPage.get(tile.page);
+      for(const [u,v] of [[0,0],[1,0],[1,1],[0,0],[1,1],[0,1]]){
+        const p=new THREE.Vector3(b.minU+u*b.w,b.minY+v*b.h,depth).applyMatrix4(assembly.matrix);
+        data.positions.push(...p.toArray());data.normals.push(...normal.toArray());data.uv.push(u?tile.u1:tile.u0,v?tile.v1:tile.v0);data.ids.push(id);worldBounds.expandByPoint(p.applyMatrix4(parent.matrixWorld));
+      }
+      windowHeight=Math.max(windowHeight,b.h*new THREE.Vector3().setFromMatrixColumn(assembly.matrixWorld,1).length());levels[0].add(assembly);
+    }
+    for(const [page,data] of byPage){
+      const geometry=new THREE.BufferGeometry();for(const [name,values,count] of [['position',data.positions,3],['normal',data.normals,3],['uv',data.uv,2],['nightWindowId',data.ids,1]])geometry.setAttribute(name,new THREE.Float32BufferAttribute(values,count));geometry.computeBoundingSphere();
+      for(const level of [1,2]){const mesh=new THREE.Mesh(geometry,pages[page].material);mesh.name=parent.name+' · textured window assemblies';mesh.receiveShadow=true;mesh.userData.buildingWindowProxy=true;levels[level].add(mesh);}
+    }
+    entries.push({parent,levels,sphere:worldBounds.getBoundingSphere(new THREE.Sphere()),windowHeight,level:0});
+  }
+
   function visit(parent){
     if(excluded.has(parent))return;
+    windowAssemblies(parent);
     const children=[...parent.children],boxes=[],bySource=new Map(),grid=new Map();
     for(const child of children){
-      if(excluded.has(child))continue;
+      if(excluded.has(child)||child.userData.buildingDetailLevel!==undefined)continue;
       if(child.children.length){visit(child);continue;}
       const list=boxesFor(child);if(list.length){boxes.push(...list);bySource.set(child,list);}
     }

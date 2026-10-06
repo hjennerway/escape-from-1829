@@ -45,4 +45,18 @@ assert.deepEqual(restored.scene.children[0].target.position.toArray(),[23,0,-10]
 assert.equal(restored.camera.fov,46);assert.equal(restored.scene.fog.density,.0019);
 const second=fixture();assert.deepEqual(encodeModel(serializeScene(THREE,second.scene,second.camera)),encoded,'Random Three UUIDs must not change build output');
 assert.throws(()=>deserializeScene(THREE,{...snapshot,revision:'different'}),/revision/);
+const duplicates=new THREE.Scene(),one=new THREE.BoxGeometry(),two=one.clone(),mat=new THREE.MeshBasicMaterial();
+duplicates.add(new THREE.Mesh(one,mat),new THREE.Mesh(two,mat));
+const packed=serializeScene(THREE,duplicates,new THREE.PerspectiveCamera());
+assert.notEqual(one.attributes.position.array,two.attributes.position.array,'Packing must leave live source arrays independent');
+assert.equal(packed.geometries[0].attributes.position.array,packed.geometries[1].attributes.position.array,'Byte-identical geometry arrays share storage');
+packed.geometries[1].attributes.sameBytesDifferentLayout={...packed.geometries[0].attributes.position,itemSize:1};
+const unpacked=deserializeScene(THREE,decodeModel(encodeModel(packed).buffer)).scene.children;
+assert.notEqual(unpacked[0].geometry,unpacked[1].geometry,'Keep separate named geometry records');
+assert.equal(unpacked[0].geometry.attributes.position,unpacked[1].geometry.attributes.position,'Compatible immutable attributes share GPU buffers');
+assert.equal(unpacked[1].geometry.attributes.sameBytesDifferentLayout.itemSize,1,'Sharing bytes must retain each attribute layout');
+assert.notEqual(unpacked[0].geometry.attributes.position,unpacked[1].geometry.attributes.sameBytesDifferentLayout);
+const independent=new THREE.InstancedMesh(one,mat,1),independentCopy=new THREE.InstancedMesh(two,mat,1);duplicates.add(independent,independentCopy);
+const separate=deserializeScene(THREE,decodeModel(encodeModel(serializeScene(THREE,duplicates,new THREE.PerspectiveCamera())).buffer)).scene.children.slice(2);
+assert.notEqual(separate[0].instanceMatrix.array,separate[1].instanceMatrix.array,'Do not content-share mutable independent instance transforms');
 console.log('PASS: binary round-trip, exact modified vertices, shared geometry/instance buffers, textures, lights, LOD, bounds, deterministic builds and malformed data.');

@@ -5,6 +5,12 @@ export const dist=new URL('./dist/',import.meta.url);
 // Used both when compiling and by the development server, so local edits never
 // silently display a stale binary. Production deploys source and model together.
 export async function modelSourceHash(){
+  return sourceHash('aerial-scene.mjs');
+}
+export async function interiorSourceHash(){
+  return sourceHash('interior-section-build.mjs',['asylum-plan.json']);
+}
+async function sourceHash(entry,extra=[]){
   const hash=createHash('sha256'),sources=new Map();
   async function visit(url){
     if(sources.has(url.href))return;
@@ -13,7 +19,7 @@ export async function modelSourceHash(){
     // edits do not invalidate an otherwise current estate binary.
     for(const match of source.matchAll(/\b(?:from\s*|import\s*(?:\(\s*)?)['"](\.[^'"]+)['"]/g))await visit(new URL(match[1],url));
   }
-  await visit(new URL('aerial-scene.mjs',dist));
+  await visit(new URL(entry,dist));for(const name of extra)await visit(new URL(name,dist));
   for(const [url,source] of [...sources].sort(([a],[b])=>a<b?-1:a>b?1:0)){hash.update(url.slice(dist.href.length));hash.update(source);}
   return hash.digest('hex');
 }

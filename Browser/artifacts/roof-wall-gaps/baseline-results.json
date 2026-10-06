@@ -1,0 +1,30 @@
+[
+  {
+    "test": "facade-courses",
+    "exit": 1
+  },
+  {
+    "test": "reception-second-floor",
+    "exit": 1
+  },
+  {
+    "test": "asylum-windows",
+    "exit": 1
+  },
+  {
+    "test": "asylum-doorways",
+    "exit": 1
+  },
+  {
+    "test": "jarman",
+    "exit": 1
+  },
+  {
+    "test": "leighton-newton",
+    "exit": 1
+  },
+  {
+    "test": "aerial-layouts",
+    "exit": 1
+  }
+]

@@ -1,0 +1,8 @@
+{
+  "errors": [],
+  "defaultLighting": "dusk",
+  "floors": 4,
+  "keyboardDoors": true,
+  "touchDoors": true,
+  "noNPCsOrNotebook": true
+}

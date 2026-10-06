@@ -13,7 +13,8 @@ export function cardenCorrectionSnapshot(THREE,annexe,{excludeConcurrentJarman=f
  annexe.traverse(o=>{
   // Later additive Oakmere work is independently checked by test-oakmere-court.
   for(let p=o;p;p=p.parent)if(p.name==='Oakmere rear court additions')return;
-  if(!o.isMesh)return;
+  // Added roof closures are verified separately; retain every original primitive.
+  if(!o.isMesh||o.userData.roofWallClosure)return;
   if(excludeConcurrentJarman)for(let p=o;p&&p!==annexe;p=p.parent)if(p.name==='West court front elevation')return;
   for(let p=o;p&&p!==annexe;p=p.parent)if(['Carden side elevation','Oakmere lawn elevation'].includes(p.name))return;
   if(/^Central rear (spine|low hall link)/.test(o.name))return;

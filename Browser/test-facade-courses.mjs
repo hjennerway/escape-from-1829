@@ -65,7 +65,11 @@ for(const y of [4.165,8.63]){
  assert.equal(hits.length,1,'Retain one supported strip beyond the corner');
  assert(Math.abs(hits[0].point.y-y)<1e-5);
 }
-assert.equal(courses.length,22,'Survey all repaired courses, including continuous west end/garden bands and middle-arm cornices');
+// The later eave-flicker repair uses the same solid-sweep helper for its iron
+// gutter. Keep surveying the 22 render courses and include that extra sweep.
+const gutter=courses.filter(o=>o.name==='West outer end continuous gutter');
+assert.equal(gutter.length,1,'The repaired outer-end gutter remains one continuous sweep');
+assert.equal(courses.filter(o=>!gutter.includes(o)).length,22,'Survey all repaired render courses, including west end/garden bands and middle-arm cornices');
 let corners=0,probes=0;
 for(const course of courses){
  const {line,y,height,width}=course.userData.facadeCourse;

@@ -8,7 +8,8 @@ export function frontLinkSnapshot(THREE,annexe,{includeCarden=false}={}){
  annexe.traverse(o=>{
   // Later additive Oakmere work is independently checked by test-oakmere-court.
   for(let p=o;p;p=p.parent)if(p.name==='Oakmere rear court additions')return;
-  if(!o.isMesh)return;
+  // Added roof closures are verified separately; retain every original primitive.
+  if(!o.isMesh||o.userData.roofWallClosure)return;
   // Concurrent Carden work owns this new elevation and these two old meshes.
   if(!includeCarden&&['Oakmere raised spine upper masonry','Oakmere raised spine slate roof'].includes(o.name))return;
   let shift=0;

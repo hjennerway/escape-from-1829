@@ -16,7 +16,7 @@ try{
  await page.route('https://**/*',route=>route.abort());
  await page.route('**/game.mjs',async route=>route.fulfill({contentType:'text/javascript',body:(await readFile(new URL('./dist/game.mjs',import.meta.url),'utf8'))+`
  window.furnitureTest={get ready(){return ready;},get floors(){return floors;},get scene(){return scene;},get renderer(){return renderer;},get camera(){return camera;},player,keys,start,update,showFloor,get arrival(){return arrivalCutscene;},pose(roomId,floor,kind){const room=[...floors[floor].rooms,...floors[floor].furnishingAreas].find(r=>r.id===roomId),items=floors[floor].furniture.filter(i=>i.roomId===roomId),target=items.find(i=>i.kind===kind)??items[0];Object.assign(player,{x:room.label[0],z:room.label[1],floor,y:floors[floor].elevation,stair:null,outside:false});yaw=Math.atan2(-(target.x-player.x),-(target.z-player.z));pitch=-.12;camera.position.set(player.x,player.y+1.65,player.z);camera.rotation.set(pitch,yaw,0);state='paused';showFloor();$('arrivalFade').hidden=true;$('hud').hidden=false;},pause(){state='paused';},play(){state='play';},aim(v){yaw=v;},move(dx,dz){moveAsylumActor(floors,player,dx,dz);}};` }));
- await page.goto(base);await page.waitForFunction(()=>window.furnitureTest?.ready);
+ await page.goto(base);await page.waitForFunction(()=>window.furnitureTest?.ready&&window.furnitureTest.scene.userData.interiorSectionsComplete);
  await page.evaluate(()=>{const t=window.furnitureTest;t.start();t.arrival.update(3);t.pause();});
  const initial=await page.evaluate(()=>window.furnitureTest.floors.map(f=>f.furniture));
  assert.equal(new Set(initial.flat().map(i=>i.kind)).size,34);
@@ -79,7 +79,7 @@ try{
  await page.evaluate(()=>window.furnitureTest.pose('R7',0,'cupboard'));await page.waitForTimeout(180);await page.screenshot({path:fileURLToPath(new URL('wardrobe-mobile.png',destination))});
  await page.evaluate(()=>window.furnitureTest.pose('Visitors',1,'table'));await page.waitForTimeout(180);await page.screenshot({path:fileURLToPath(new URL('visitors-mobile.png',destination))});
  await page.route('**/explore.mjs',async route=>{const response=await route.fetch();await route.fulfill({response,body:(await response.text()).replace('const clock=new THREE.Timer();','window.furnitureExplore={floors,interior,walker,renderer};const clock=new THREE.Timer();')});});
- await page.setViewportSize({width:1100,height:750});await page.goto(base+'/explore.html');await page.waitForFunction(()=>window.furnitureExplore?.renderer.info.render.frame>2);
+ await page.setViewportSize({width:1100,height:750});await page.goto(base+'/explore.html');await page.waitForFunction(()=>window.furnitureExplore?.renderer.info.render.frame>2&&window.furnitureExplore.interior.scene.userData.interiorSectionsComplete);
  assert.deepEqual(await page.evaluate(()=>window.furnitureExplore.floors.flatMap(f=>f.furniture.filter(i=>!i.variable))),initial.flat().filter(i=>!i.variable),'Explore uses the same fixed furnishings');
  await page.evaluate(()=>{const {walker,floors}=window.furnitureExplore,r=floors[0].rooms.find(r=>r.id==='R19'),i=floors[0].furniture.find(i=>i.roomId==='R19'&&i.kind==='bookcase');Object.assign(walker.actor,{x:r.label[0],z:r.label[1],floor:0,y:0,outside:false,stair:null});walker.look(-Math.atan2(-(i.x-r.label[0]),-(i.z-r.label[1]))/.002,0);walker.update(.01);});
  await page.waitForTimeout(180);await page.screenshot({path:fileURLToPath(new URL('explore-reading.png',destination))});

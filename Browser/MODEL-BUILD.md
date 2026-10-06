@@ -1,4 +1,4 @@
-# Precompiled aerial models
+# Precompiled browser models
 
 Run these commands from `Browser` with Node.js 24:
 
@@ -27,7 +27,11 @@ The binary is explicitly gzip-compressed and decoded using the browser's `Decomp
 
 The compiler rejects source changes made during a build. The development server compares the manifest's source fingerprint to local source before serving it, so edits cannot silently show old models. Re-run `npm run build:models` after modelling changes. Binary format and Three.js revision checks protect runtime compatibility. GitHub deploys the manifest, binary and page together.
 
-Only the aerial page uses this binary. Walking and the game continue to build their existing models. Original named meshes, including hidden batch sources, stay in the compiled scene for named material updates and inspection.
+The aerial page uses this estate binary. Original named meshes, including hidden batch sources, stay in the compiled scene for named material updates and inspection.
+
+`build-interior-models.mjs` also prepares ten shared interior sections for Explore and Escape. These assets live in `compiled/interior/`, with a separate source fingerprint that includes the asylum plan. Existing doorway planes define the cuts. Geometry is clipped with its UVs and normals intact; exact coplanar cut faces belong to one section. The compiler stores door-nameplate textures once per floor. Live shared materials retain the room-finish and basement-mural shaders, and furniture is instanced from the shared model library using the current run's placement records.
+
+Only the entrance or starting section and nearby corridor/stair sections are required before entry. The rest load in distance order, with approaching areas taking priority. A worker runs the same compiler when prepared assets are missing or corrupt. Geometry restoration, furniture and shader preparation yield between stages; GPU uploads are warmed in scheduled batches. Full navigation, collision, door, interaction and NPC records remain available throughout. Ready sections stay cached, and an unfinished doorway or landing holds movement with a retry prompt on failure. Run `npm run test:interior-loading` after compilation for coverage, source-surface preservation, worker fallback, retry, replay, desktop/mobile, frame-pacing and memory checks.
 
 ## GitHub Actions
 

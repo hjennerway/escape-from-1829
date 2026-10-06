@@ -24,13 +24,13 @@ const model=createCellMattressModel(THREE)[0],bounds=model.geometry.boundingBox,
 assert(bounds.getSize(new THREE.Vector3()).distanceTo(new THREE.Vector3(catalog.width,catalog.height,catalog.depth))<1e-6,'Rendered mattress and collision bounds agree');
 assert(Math.abs(bounds.min.y)<1e-6);assert(baseline.every(i=>i.y>=.018),'Mattresses rest on the soft floor');
 const scene=new THREE.Scene();buildAsylumArchitecture(THREE,scene,floor);scene.updateMatrixWorld(true);
-const padding=scene.getObjectByName('Asylum Cell Padding');assert(padding?.geometry.attributes.position.count>0);assert.deepEqual(padding.geometry.userData.rooms.sort(),ids);assert.equal(scene.children.filter(m=>m.name===padding.name).length,1,'All pads share one batch');
+const padding=scene.getObjectByName('Asylum Cell Padding');assert.deepEqual(padding.userData.rooms.sort(),ids);assert.equal(padding.children.length,4,'Each room can be culled separately');assert(padding.children.every(m=>m.geometry.index&&m.geometry.attributes.position.count>0));
 const ray=new THREE.Raycaster();let surfaces=0,apertures=0,walked=0;
-function cast(x,y,z,direction,objects=scene.children,far=20){ray.set(new THREE.Vector3(x,y,z),new THREE.Vector3(...direction));ray.far=far;return ray.intersectObjects(objects,false)[0];}
+function cast(x,y,z,direction,objects=scene.children,far=20){ray.set(new THREE.Vector3(x,y,z),new THREE.Vector3(...direction));ray.far=far;return ray.intersectObjects(objects,true)[0];}
 for(const id of ids){
  const room=floor.rooms.find(r=>r.id===id),[x,z]=room.label;
- for(const direction of [[1,0,0],[-1,0,0],[0,0,1],[0,0,-1]]){assert.equal(cast(x,2.78,z,direction)?.object,padding,'All four room walls have actual soft lining');surfaces++;}
- const bottom=cast(x,.4,z,[0,-1,0]);assert.equal(bottom?.object,padding,'Cell floor has soft lining');assert(bottom.point.y>=.006-1e-6&&bottom.point.y<=.018+1e-6);surfaces++;
+ for(const direction of [[1,0,0],[-1,0,0],[0,0,1],[0,0,-1]]){assert.equal(cast(x,2.78,z,direction)?.object.parent,padding,'All four room walls have actual soft lining');surfaces++;}
+ const bottom=cast(x,.4,z,[0,-1,0]);assert.equal(bottom?.object.parent,padding,'Cell floor has soft lining');assert(bottom.point.y>=.006-1e-6&&bottom.point.y<=.018+1e-6);surfaces++;
  const door=floor.doorways.find(d=>d.roomId===id),normal=[-door.dz,0,door.dx];
  assert(!cast(door.x-normal[0]*.4,1.6,door.z-normal[2]*.4,normal,[padding],.8),'Padding never crosses the entrance');apertures++;
  const window=floor.windows.find(w=>w.roomId===id),n=window.axis==='x'?[1,0,0]:[0,0,1];
@@ -50,11 +50,12 @@ for(let i=0;i<sash.count;i++){
  if(!floor.rooms.some(r=>ids.includes(r.id)&&(insidePolygon(centre.x,centre.z,r.points)||r.points.some((a,j)=>segmentDistance(centre.x,centre.z,a,r.points[(j+1)%r.points.length])<.18))))continue;
  boxes.push(new THREE.Box3().setFromPoints(Array.from({length:8},(_,j)=>new THREE.Vector3(j&1?.5:-.5,j&2?.5:-.5,j&4?.5:-.5).applyMatrix4(matrix))));
 }
-const p=padding.geometry.attributes.position;let clearanceChecks=0;
+let clearanceChecks=0,triangleCount=0;
 assert(boxes.length>16,'Audit the boundary window frames as well as the door-surround trim');
-for(let i=0;i<p.count;i+=3){
- const tri=new THREE.Triangle(...[0,1,2].map(j=>new THREE.Vector3().fromBufferAttribute(p,i+j))),box=new THREE.Box3().setFromPoints([tri.a,tri.b,tri.c]);
+for(const mesh of padding.children)for(let i=0;i<mesh.geometry.index.count;i+=3){
+ const p=mesh.geometry.attributes.position,index=mesh.geometry.index;triangleCount++;
+ const tri=new THREE.Triangle(...[0,1,2].map(j=>new THREE.Vector3().fromBufferAttribute(p,index.getX(i+j)))),box=new THREE.Box3().setFromPoints([tri.a,tri.b,tri.c]);
  for(const timber of boxes)if(box.intersectsBox(timber)){assert(!timber.intersectsTriangle(tri),`Soft padding stays outside the complete window frame: ${JSON.stringify({triangle:[tri.a.toArray(),tri.b.toArray(),tri.c.toArray()],timber:[timber.min.toArray(),timber.max.toArray()]})}`);clearanceChecks++;}
 }
 assert.equal(JSON.stringify({walls:floor.walls,doors:floor.roomDoors,windows:floor.windows}),geometryBefore,'Cells retain their walls, windows and playable door poses');assert.equal(JSON.stringify(plan),snapshot);
-console.log(`PASS: four padded confinement cells, fixed soft mattresses, ${surfaces} lined surfaces, ${apertures} clear apertures, ${walked} physically walked return routes, ${boxes.length} timber boxes clear of ${p.count/3} padding triangles (${clearanceChecks} nearby checks), one padding batch (${CELL_PAD_DEPTH}m relief), unchanged architectural plan.`);
+console.log(`PASS: four padded confinement cells, fixed soft mattresses, ${surfaces} lined surfaces, ${apertures} clear apertures, ${walked} physically walked return routes, ${boxes.length} timber boxes clear of ${triangleCount} padding triangles (${clearanceChecks} nearby checks), four indexed room batches (${CELL_PAD_DEPTH}m relief), unchanged architectural plan.`);

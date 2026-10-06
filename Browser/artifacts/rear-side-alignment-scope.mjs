@@ -3,7 +3,9 @@ export function rearSideSnapshot(THREE,annexe,{normalise=false}={}){
  annexe.updateMatrixWorld(true);const rows={},instance=new THREE.Matrix4();
  annexe.traverse(o=>{
   // Later additive Oakmere work is independently checked by test-oakmere-court.
-  for(let p=o;p;p=p.parent)if(p.name==='Oakmere rear court additions')return;if(!o.isMesh)return;let key='fixed';
+  for(let p=o;p;p=p.parent)if(p.name==='Oakmere rear court additions')return;
+  // Added roof closures are verified separately; retain every original primitive.
+  if(!o.isMesh||o.userData.roofWallClosure)return;let key='fixed';
  for(let p=o;p&&p!==annexe;p=p.parent){if(p.name==='Rear service court link assembly'||p.name==='Oakmere west low rear end room')return;if(p.name==='Rear court west assembly'||p.name==='Oakmere west lawn elevation')key='west';if(p.name==='Oakmere')key='head';}
  if(o.name==='Annexe rear courtyard paving')return;
  const h=createHash('sha256');for(const [k,a] of Object.entries(o.geometry.attributes).sort()){h.update(k);h.update(Buffer.from(a.array.buffer,a.array.byteOffset,a.array.byteLength));}if(o.geometry.index)h.update(Buffer.from(o.geometry.index.array.buffer));const geometry=h.digest('hex');

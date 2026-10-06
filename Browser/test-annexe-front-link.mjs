@@ -19,9 +19,10 @@ for(const b of before.ranges){
 }
 assert.equal(after.ranges.length,before.ranges.length+1);
 const {west,east}=annexe.userData.frontLinks;
-assert.equal(east.scale.x,-1);assert.equal(east.children.length,west.children.length);
-for(let i=0;i<west.children.length;i++){
- const a=west.children[i],b=east.children[i];
+const originalWest=west.children.filter(o=>!o.userData.roofWallClosure),originalEast=east.children.filter(o=>!o.userData.roofWallClosure);
+assert.equal(east.scale.x,-1);assert.equal(originalEast.length,originalWest.length);
+for(let i=0;i<originalWest.length;i++){
+ const a=originalWest[i],b=originalEast[i];
  if(a.material.userData.roofTilePixels){
   // Mirrored slopes need independent UVs while sharing the same roof shape.
   for(const name of ['position','normal'])assert.deepEqual(a.geometry.attributes[name].array,b.geometry.attributes[name].array);

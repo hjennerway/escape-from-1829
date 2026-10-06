@@ -1,0 +1,45 @@
+{
+  "generator": "Browser/build-furniture-lod.mjs",
+  "records": [
+    {
+      "source": "windsor_chair",
+      "sourceHash": "8450e8d9802031463adc2c53881f2310c320e1ca31de8a10380e8f6f3f0a0ef3",
+      "trianglesBefore": 4888,
+      "trianglesAfter": 1710,
+      "error": 0.0014227470383048058,
+      "license": "MIT",
+      "files": [
+        {
+          "path": "windsor_chair_distant.gltf",
+          "bytes": 1346,
+          "sha256": "6d260899f6716f2ee6cb7d2e3b7cb8eb667678aae83959a69aeea3c62108a865"
+        },
+        {
+          "path": "windsor_chair_distant.bin",
+          "bytes": 64944,
+          "sha256": "34657366a49c94fd221613d3c025ca5f4ffbebe784e41e46834777682d86bab1"
+        }
+      ]
+    },
+    {
+      "source": "panca_50",
+      "sourceHash": "3e0a36da26997478da0a82840a5bc52fd2be389d6a604cbf0dff614ec92aaccf",
+      "trianglesBefore": 3720,
+      "trianglesAfter": 1300,
+      "error": 0.00018234677554573864,
+      "license": "GPL-3.0",
+      "files": [
+        {
+          "path": "panca_50_distant.gltf",
+          "bytes": 1438,
+          "sha256": "f4da28f710c53fd333c6399d15879b313b9dd3d52979c4cb3bb6d00f33b26699"
+        },
+        {
+          "path": "panca_50_distant.bin",
+          "bytes": 81744,
+          "sha256": "7cf3df60fc091481ec6c2be6bab3fe7079c0a0d616779eedd64a2da9446ef308"
+        }
+      ]
+    }
+  ]
+}

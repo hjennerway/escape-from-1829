@@ -113,7 +113,8 @@ for(let z=13.1;z<r.frontZ;z+=.2)for(const x of [159.25,159.9,160.45]){
 }
 assert(extension.userData.openings.every(o=>o.side===-1),'No corridor windows remain on the attached side');
 ray.set(new THREE.Vector3(r.x,4.05,r.frontZ+1),new THREE.Vector3(0,0,-1));
-assert.equal(ray.intersectObject(corridor,true)[0]?.object.name,'Main/admin corridor front brick gable','The roof end above the door is closed');
+// The new eave return can be in front of the original brick gable; retain its original contact check.
+assert.equal(ray.intersectObject(corridor,true).find(h=>!h.object.userData.roofWallClosure)?.object.name,'Main/admin corridor front brick gable','The roof end above the door is closed');
 for(let z=r.frontZ+.8;z<=46;z+=.5)assert(!obs.some(o=>obstacleContains(o,r.x,z)),'Door can be approached directly from the front');
 for(const group of [extension,door])group.traverse(o=>{
  if(!o.isMesh)return;

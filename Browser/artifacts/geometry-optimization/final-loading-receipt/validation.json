@@ -1,0 +1,632 @@
+{
+  "results": [
+    {
+      "name": "assets",
+      "mode": "assets",
+      "initialSections": 1,
+      "totalSections": 10,
+      "stats": {
+        "mode": "assets",
+        "steps": [
+          {
+            "section": "shared-library",
+            "stage": "upload",
+            "milliseconds": 15.699999999254942
+          },
+          {
+            "section": "shared-library",
+            "stage": "upload",
+            "milliseconds": 67.39999999850988
+          },
+          {
+            "section": "0-central",
+            "stage": "restore",
+            "milliseconds": 2.100000001490116
+          },
+          {
+            "section": "0-central",
+            "stage": "graphics",
+            "milliseconds": 297.9000000022352
+          },
+          {
+            "section": "0-central",
+            "stage": "furniture",
+            "milliseconds": 8.5
+          },
+          {
+            "section": "0-central",
+            "stage": "upload",
+            "milliseconds": 21.699999999254942
+          },
+          {
+            "section": "0-central",
+            "stage": "upload",
+            "milliseconds": 28.800000000745058
+          },
+          {
+            "section": "0-central",
+            "stage": "upload",
+            "milliseconds": 23.300000000745058
+          },
+          {
+            "section": "0-central",
+            "stage": "upload",
+            "milliseconds": 38.80000000074506
+          },
+          {
+            "section": "0-central",
+            "stage": "upload",
+            "milliseconds": 7.399999998509884
+          },
+          {
+            "section": "0-central",
+            "stage": "upload",
+            "milliseconds": 6
+          },
+          {
+            "section": "0-central",
+            "stage": "upload",
+            "milliseconds": 6
+          },
+          {
+            "section": "0-central",
+            "stage": "upload",
+            "milliseconds": 6.700000002980232
+          },
+          {
+            "section": "0-central",
+            "stage": "upload",
+            "milliseconds": 201.90000000223517
+          },
+          {
+            "section": "0-central",
+            "stage": "upload",
+            "milliseconds": 6
+          },
+          {
+            "section": "0-central",
+            "stage": "upload",
+            "milliseconds": 1
+          },
+          {
+            "section": "0-west",
+            "stage": "restore",
+            "milliseconds": 0.6999999992549419
+          },
+          {
+            "section": "0-west",
+            "stage": "restore",
+            "milliseconds": 0.5999999977648258
+          },
+          {
+            "section": "0-west",
+            "stage": "graphics",
+            "milliseconds": 0.30000000074505806
+          },
+          {
+            "section": "0-west",
+            "stage": "furniture",
+            "milliseconds": 1.800000000745058
+          },
+          {
+            "section": "0-west",
+            "stage": "upload",
+            "milliseconds": 4.400000002235174
+          },
+          {
+            "section": "1-west",
+            "stage": "restore",
+            "milliseconds": 0.5
+          },
+          {
+            "section": "1-west",
+            "stage": "graphics",
+            "milliseconds": 0.5
+          },
+          {
+            "section": "1-west",
+            "stage": "furniture",
+            "milliseconds": 1.800000000745058
+          },
+          {
+            "section": "1-west",
+            "stage": "upload",
+            "milliseconds": 8.099999997764826
+          },
+          {
+            "section": "1-west",
+            "stage": "upload",
+            "milliseconds": 6
+          },
+          {
+            "section": "1-west",
+            "stage": "upload",
+            "milliseconds": 1.800000000745058
+          },
+          {
+            "section": "2-west",
+            "stage": "restore",
+            "milliseconds": 0.7000000029802322
+          },
+          {
+            "section": "2-west",
+            "stage": "graphics",
+            "milliseconds": 278.79999999701977
+          },
+          {
+            "section": "2-west",
+            "stage": "furniture",
+            "milliseconds": 0.3999999985098839
+          },
+          {
+            "section": "2-west",
+            "stage": "upload",
+            "milliseconds": 11.900000002235174
+          },
+          {
+            "section": "2-west",
+            "stage": "upload",
+            "milliseconds": 0.4000000022351742
+          },
+          {
+            "section": "3-east",
+            "stage": "restore",
+            "milliseconds": 0.5
+          },
+          {
+            "section": "3-east",
+            "stage": "graphics",
+            "milliseconds": 0.3999999985098839
+          },
+          {
+            "section": "3-east",
+            "stage": "furniture",
+            "milliseconds": 0.8999999985098839
+          },
+          {
+            "section": "3-east",
+            "stage": "upload",
+            "milliseconds": 2.300000000745058
+          },
+          {
+            "section": "1-central",
+            "stage": "restore",
+            "milliseconds": 0.4000000022351742
+          },
+          {
+            "section": "1-central",
+            "stage": "graphics",
+            "milliseconds": 0.10000000149011612
+          },
+          {
+            "section": "1-central",
+            "stage": "furniture",
+            "milliseconds": 2.100000001490116
+          },
+          {
+            "section": "1-central",
+            "stage": "upload",
+            "milliseconds": 6
+          },
+          {
+            "section": "1-central",
+            "stage": "upload",
+            "milliseconds": 0.8999999985098839
+          },
+          {
+            "section": "2-east",
+            "stage": "restore",
+            "milliseconds": 0.5
+          },
+          {
+            "section": "2-east",
+            "stage": "graphics",
+            "milliseconds": 0.3999999985098839
+          },
+          {
+            "section": "2-east",
+            "stage": "furniture",
+            "milliseconds": 0.30000000074505806
+          },
+          {
+            "section": "2-east",
+            "stage": "upload",
+            "milliseconds": 2.099999997764826
+          },
+          {
+            "section": "3-west",
+            "stage": "restore",
+            "milliseconds": 0.4000000022351742
+          },
+          {
+            "section": "3-west",
+            "stage": "graphics",
+            "milliseconds": 0.19999999925494194
+          },
+          {
+            "section": "3-west",
+            "stage": "furniture",
+            "milliseconds": 0.30000000074505806
+          },
+          {
+            "section": "3-west",
+            "stage": "upload",
+            "milliseconds": 1.5999999977648258
+          },
+          {
+            "section": "0-east",
+            "stage": "restore",
+            "milliseconds": 0.29999999701976776
+          },
+          {
+            "section": "0-east",
+            "stage": "graphics",
+            "milliseconds": 0.30000000074505806
+          },
+          {
+            "section": "0-east",
+            "stage": "furniture",
+            "milliseconds": 1.3999999985098839
+          },
+          {
+            "section": "0-east",
+            "stage": "upload",
+            "milliseconds": 2.199999999254942
+          },
+          {
+            "section": "1-east",
+            "stage": "restore",
+            "milliseconds": 0.29999999701976776
+          },
+          {
+            "section": "1-east",
+            "stage": "graphics",
+            "milliseconds": 0.4000000022351742
+          },
+          {
+            "section": "1-east",
+            "stage": "furniture",
+            "milliseconds": 1.6000000014901161
+          },
+          {
+            "section": "1-east",
+            "stage": "upload",
+            "milliseconds": 1.3999999985098839
+          }
+        ],
+        "firstReadyMilliseconds": 2650
+      },
+      "frames": {
+        "count": 98,
+        "median": 16.699999999254942,
+        "p99": 50.099999997764826,
+        "maximum": 50.099999997764826
+      },
+      "replayGenerationMilliseconds": [
+        8085.60000000149,
+        8042.199999999255
+      ],
+      "retainedGeometryBufferBytes": 22972620,
+      "heapBytes": 148000000,
+      "calls": 449,
+      "triangles": 709228
+    },
+    {
+      "name": "worker-mobile",
+      "mode": "worker",
+      "initialSections": 1,
+      "totalSections": 10,
+      "stats": {
+        "mode": "worker",
+        "steps": [
+          {
+            "section": "shared-library",
+            "stage": "upload",
+            "milliseconds": 7.900000002235174
+          },
+          {
+            "section": "shared-library",
+            "stage": "upload",
+            "milliseconds": 46.70000000298023
+          },
+          {
+            "section": "0-central",
+            "stage": "restore",
+            "milliseconds": 1.199999999254942
+          },
+          {
+            "section": "0-central",
+            "stage": "graphics",
+            "milliseconds": 37.5
+          },
+          {
+            "section": "0-central",
+            "stage": "furniture",
+            "milliseconds": 4.100000001490116
+          },
+          {
+            "section": "0-central",
+            "stage": "upload",
+            "milliseconds": 23.399999998509884
+          },
+          {
+            "section": "0-central",
+            "stage": "upload",
+            "milliseconds": 18.5
+          },
+          {
+            "section": "0-central",
+            "stage": "upload",
+            "milliseconds": 15.900000002235174
+          },
+          {
+            "section": "0-central",
+            "stage": "upload",
+            "milliseconds": 8.699999999254942
+          },
+          {
+            "section": "0-central",
+            "stage": "upload",
+            "milliseconds": 32.5
+          },
+          {
+            "section": "0-central",
+            "stage": "upload",
+            "milliseconds": 6
+          },
+          {
+            "section": "0-central",
+            "stage": "upload",
+            "milliseconds": 6
+          },
+          {
+            "section": "0-central",
+            "stage": "upload",
+            "milliseconds": 6
+          },
+          {
+            "section": "0-central",
+            "stage": "upload",
+            "milliseconds": 19
+          },
+          {
+            "section": "0-central",
+            "stage": "upload",
+            "milliseconds": 169.60000000149012
+          },
+          {
+            "section": "0-central",
+            "stage": "upload",
+            "milliseconds": 6
+          },
+          {
+            "section": "0-central",
+            "stage": "upload",
+            "milliseconds": 1.800000000745058
+          },
+          {
+            "section": "0-west",
+            "stage": "restore",
+            "milliseconds": 0.9000000022351742
+          },
+          {
+            "section": "0-west",
+            "stage": "restore",
+            "milliseconds": 0.6000000014901161
+          },
+          {
+            "section": "0-west",
+            "stage": "graphics",
+            "milliseconds": 0.5
+          },
+          {
+            "section": "0-west",
+            "stage": "furniture",
+            "milliseconds": 2.300000000745058
+          },
+          {
+            "section": "0-west",
+            "stage": "upload",
+            "milliseconds": 5.5
+          },
+          {
+            "section": "1-west",
+            "stage": "restore",
+            "milliseconds": 3.800000000745058
+          },
+          {
+            "section": "1-west",
+            "stage": "graphics",
+            "milliseconds": 0.30000000074505806
+          },
+          {
+            "section": "1-west",
+            "stage": "furniture",
+            "milliseconds": 0.9000000022351742
+          },
+          {
+            "section": "1-west",
+            "stage": "upload",
+            "milliseconds": 7.300000000745058
+          },
+          {
+            "section": "1-west",
+            "stage": "upload",
+            "milliseconds": 2.100000001490116
+          },
+          {
+            "section": "2-west",
+            "stage": "restore",
+            "milliseconds": 0.3999999985098839
+          },
+          {
+            "section": "2-west",
+            "stage": "graphics",
+            "milliseconds": 14.900000002235174
+          },
+          {
+            "section": "2-west",
+            "stage": "furniture",
+            "milliseconds": 0.5
+          },
+          {
+            "section": "2-west",
+            "stage": "upload",
+            "milliseconds": 10.300000000745058
+          },
+          {
+            "section": "2-west",
+            "stage": "upload",
+            "milliseconds": 0.3999999985098839
+          },
+          {
+            "section": "3-east",
+            "stage": "restore",
+            "milliseconds": 0.8000000007450581
+          },
+          {
+            "section": "3-east",
+            "stage": "graphics",
+            "milliseconds": 0.19999999925494194
+          },
+          {
+            "section": "3-east",
+            "stage": "furniture",
+            "milliseconds": 1
+          },
+          {
+            "section": "3-east",
+            "stage": "upload",
+            "milliseconds": 2.400000002235174
+          },
+          {
+            "section": "1-central",
+            "stage": "restore",
+            "milliseconds": 0.5
+          },
+          {
+            "section": "1-central",
+            "stage": "graphics",
+            "milliseconds": 0.3999999985098839
+          },
+          {
+            "section": "1-central",
+            "stage": "furniture",
+            "milliseconds": 2.900000002235174
+          },
+          {
+            "section": "1-central",
+            "stage": "upload",
+            "milliseconds": 6
+          },
+          {
+            "section": "1-central",
+            "stage": "upload",
+            "milliseconds": 0.6999999992549419
+          },
+          {
+            "section": "2-east",
+            "stage": "restore",
+            "milliseconds": 0.19999999925494194
+          },
+          {
+            "section": "2-east",
+            "stage": "graphics",
+            "milliseconds": 0.3999999985098839
+          },
+          {
+            "section": "2-east",
+            "stage": "furniture",
+            "milliseconds": 0.4000000022351742
+          },
+          {
+            "section": "2-east",
+            "stage": "upload",
+            "milliseconds": 3.199999999254942
+          },
+          {
+            "section": "3-west",
+            "stage": "restore",
+            "milliseconds": 0.19999999925494194
+          },
+          {
+            "section": "3-west",
+            "stage": "graphics",
+            "milliseconds": 0.19999999925494194
+          },
+          {
+            "section": "3-west",
+            "stage": "furniture",
+            "milliseconds": 0.19999999925494194
+          },
+          {
+            "section": "3-west",
+            "stage": "upload",
+            "milliseconds": 0.8000000007450581
+          },
+          {
+            "section": "0-east",
+            "stage": "restore",
+            "milliseconds": 0.30000000074505806
+          },
+          {
+            "section": "0-east",
+            "stage": "graphics",
+            "milliseconds": 0.09999999776482582
+          },
+          {
+            "section": "0-east",
+            "stage": "furniture",
+            "milliseconds": 0.6000000014901161
+          },
+          {
+            "section": "0-east",
+            "stage": "upload",
+            "milliseconds": 6
+          },
+          {
+            "section": "0-east",
+            "stage": "upload",
+            "milliseconds": 0.6999999992549419
+          },
+          {
+            "section": "1-east",
+            "stage": "restore",
+            "milliseconds": 0.30000000074505806
+          },
+          {
+            "section": "1-east",
+            "stage": "graphics",
+            "milliseconds": 0.19999999925494194
+          },
+          {
+            "section": "1-east",
+            "stage": "furniture",
+            "milliseconds": 1.6000000014901161
+          },
+          {
+            "section": "1-east",
+            "stage": "upload",
+            "milliseconds": 1.699999999254942
+          }
+        ],
+        "firstReadyMilliseconds": 3422.39999999851
+      },
+      "frames": {
+        "count": 264,
+        "median": 16.699999999254942,
+        "p99": 23,
+        "maximum": 29.800000000745058
+      },
+      "replayGenerationMilliseconds": [
+        8016.800000000745,
+        8052.199999999255
+      ],
+      "retainedGeometryBufferBytes": 22972620,
+      "heapBytes": 157000000,
+      "calls": 226,
+      "triangles": 345032
+    }
+  ],
+  "errors": []
+}

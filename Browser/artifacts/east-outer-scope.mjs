@@ -8,7 +8,8 @@ export function eastOuterProtected(THREE,annexe){
  group.traverse(o=>{
   // Later additive Oakmere work is independently checked by test-oakmere-court.
   for(let p=o;p;p=p.parent)if(p.name==='Oakmere rear court additions')return;
-  if(!o.isMesh)return;
+  // Added roof closures are verified separately; retain every original primitive.
+  if(!o.isMesh||o.userData.roofWallClosure)return;
   for(let p=o;p&&p!==group;p=p.parent)if(p.name==='East outer veranda')return;
   const local=o.matrix.clone();for(let p=o.parent;p&&p!==group;p=p.parent)local.premultiply(p.matrix);
   const hash=createHash('sha256');for(const [k,a] of Object.entries(o.geometry.attributes).sort()){hash.update(k);hash.update(Buffer.from(a.array.buffer,a.array.byteOffset,a.array.byteLength));}

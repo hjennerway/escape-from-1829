@@ -71,6 +71,7 @@ export function addPharmacyCourt(THREE,{group,brick,stone,blue,dark,mat,box,deta
  const seam=new THREE.MeshStandardMaterial({color:0x777e79,roughness:.65,metalness:.35});
  const cap=new THREE.MeshStandardMaterial({color:0xb3b5a9,roughness:.82,metalness:.20});
  const tanks=[];
+ const bandGeometry=new THREE.TorusGeometry(PHARMACY_TANKS[0].radius+.025,.045,6,96),railGeometry=new THREE.TorusGeometry(PHARMACY_TANKS[0].radius-.08,.035,6,64);
  for(const spec of PHARMACY_TANKS){
   const {name,x,z,radius:r,plinth,height}=spec;
   const tank=new THREE.Group();tank.name=name;tank.userData.pharmacyTank=spec;tank.userData.layout='historic';
@@ -82,13 +83,13 @@ export function addPharmacyCourt(THREE,{group,brick,stone,blue,dark,mat,box,deta
   const base=part(baseGeo,brick,plinth/2,'brick plinth');
   base.userData.collisionFootprint=Array.from({length:48},(_,i)=>[(r+.09)*Math.cos(i*Math.PI/24),(r+.09)*Math.sin(i*Math.PI/24)]);
   part(new THREE.CylinderGeometry(r+.12,r+.12,.16,64),stone,plinth,'plinth coping');
-  part(new THREE.CylinderGeometry(r,r,height-plinth,96),metal,(height+plinth)/2,'ribbed metal shell');
+  const shell=part(new THREE.CylinderGeometry(r,r,height-plinth,96),metal,(height+plinth)/2,'ribbed metal shell');
   part(new THREE.CylinderGeometry(r-.03,r+.01,.16,96),cap,height+.035,'shallow circular roof');
   for(const y of [plinth+.13,plinth+2.2,plinth+4.4,plinth+6.6,height-.10]){
-   const ring=part(new THREE.TorusGeometry(r+.025,.045,6,96),seam,y,'horizontal reinforcing band');ring.rotation.x=Math.PI/2;
+   const ring=part(bandGeometry,seam,y,'horizontal reinforcing band');ring.rotation.x=Math.PI/2;
   }
   for(const y of [height+.5,height+1.02]){
-   const ring=part(new THREE.TorusGeometry(r-.08,.035,6,64),seam,y,'roof guardrail');ring.rotation.x=Math.PI/2;
+   const ring=part(railGeometry,seam,y,'roof guardrail');ring.rotation.x=Math.PI/2;
   }
   const dummy=new THREE.Object3D(),ribs=new THREE.InstancedMesh(new THREE.BoxGeometry(.055,height-plinth-.12,.065),seam,128);
   ribs.name=name+' vertical corrugations';ribs.castShadow=true;ribs.receiveShadow=true;
@@ -97,6 +98,20 @@ export function addPharmacyCourt(THREE,{group,brick,stone,blue,dark,mat,box,deta
   const posts=new THREE.InstancedMesh(new THREE.CylinderGeometry(.034,.034,1.08,6),seam,24);posts.name=name+' roof railing posts';posts.castShadow=true;
   for(let i=0;i<24;i++){const a=i*Math.PI/12;dummy.position.set((r-.08)*Math.sin(a),height+.52,(r-.08)*Math.cos(a));dummy.rotation.set(0,0,0);dummy.updateMatrix();posts.setMatrixAt(i,dummy.matrix);}
   tank.add(posts);tank.position.set(x,0,z);tanks.push(tank);
+  const lod=new THREE.LOD(),full=new THREE.Group(),far=new THREE.Group();lod.name=name+' surface detail';
+  for(const child of [...tank.children])if(child===shell||child===ribs||/horizontal reinforcing band|roof guardrail$/.test(child.name))full.add(child);
+  // Retain the shell silhouette and railing posts. Fine ribs become a repeating
+  // material normal at distances where their 55mm width is below one pixel.
+  const normalPixels=new Uint8Array(16*4);
+  for(let i=0;i<16;i++){const slope=Math.sin(i/16*Math.PI*2)*.4;normalPixels.set([128+slope*127,128,Math.sqrt(1-slope*slope)*127+128,255],i*4);}
+  const normalMap=new THREE.DataTexture(normalPixels,16,1);normalMap.wrapS=normalMap.wrapT=THREE.RepeatWrapping;normalMap.repeat.set(128,1);normalMap.needsUpdate=true;
+  const farMetal=metal.clone();farMetal.normalMap=normalMap;farMetal.normalScale.set(.65,.65);
+  const farShell=new THREE.Mesh(shell.geometry,farMetal);farShell.name=name+' distant corrugated shell';farShell.position.copy(shell.position);farShell.castShadow=farShell.receiveShadow=true;far.add(farShell);
+  for(const child of full.children.filter(o=>o!==shell&&o!==ribs)){
+   const rail=/guardrail$/.test(child.name),geometry=new THREE.TorusGeometry(rail?r-.08:r+.025,rail?.035:.045,4,48),copy=new THREE.Mesh(geometry,seam);
+   copy.name=child.name+' distant';copy.position.copy(child.position);copy.quaternion.copy(child.quaternion);copy.castShadow=copy.receiveShadow=true;far.add(copy);
+  }
+  lod.addLevel(full,0);lod.addLevel(far,95,.12);far.visible=false;tank.add(lod);
  }
  group.userData.pharmacy={reference:'Research/pharmacy/README.md',windows:rear,stairs,tanks:PHARMACY_TANKS};
  return tanks;

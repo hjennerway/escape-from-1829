@@ -1,6 +1,7 @@
 import {applyFurnitureFinish} from './furniture-finishes.mjs';
 import {ROOM_USES} from './asylum-room-uses.mjs';
 import {doorRectangle,roomDoorHandle} from './asylum-doors.mjs';
+import {indexExactGeometry} from './geometry-sharing.mjs';
 
 export const CELL_PAD_WIDTH=.62,CELL_PAD_HEIGHT=.58,CELL_PAD_DEPTH=.045;
 const wallBacking=.026;
@@ -45,9 +46,11 @@ function exclude(poly,u,v,[left,right,bottom,top]){
  return [clip(poly,u,left,false),clip(poly,u,right,true),clip(middle,v,bottom,false),clip(middle,v,top,true)].filter(p=>p.length>=3);
 }
 export function createCellPadding(THREE,floor,ceilingHeight,windowFrames=[]){
- const positions=[],normals=[],uvs=[],rooms=new Set();let surfaces=0;
+ const sections=new Map();
  const dot=(p,a)=>p.reduce((sum,x,i)=>sum+x*a[i],0);
  function surface(polygon,normal,roomId,horizontal=false){
+  if(!sections.has(roomId))sections.set(roomId,{positions:[],normals:[],uvs:[],surfaces:0});
+  const section=sections.get(roomId),{positions,normals,uvs}=section;
   const u=horizontal?[1,0,0]:[normal[2],0,-normal[0]],v=horizontal?[0,0,1]:[0,1,0];
   const width=CELL_PAD_WIDTH,height=CELL_PAD_HEIGHT,depth=horizontal?.012:CELL_PAD_DEPTH;
   let polygons=[polygon];
@@ -102,7 +105,7 @@ export function createCellPadding(THREE,floor,ceilingHeight,windowFrames=[]){
     }
    }
   }
-  rooms.add(roomId);surfaces++;
+  section.surfaces++;
  }
  return {
   wall(poly,normal,roomId){surface(poly.map(p=>p.slice(0,3)),[normal[0],0,normal[1]],roomId);},
@@ -113,9 +116,13 @@ export function createCellPadding(THREE,floor,ceilingHeight,windowFrames=[]){
     const xs=room.points.map(p=>p[0]),zs=room.points.map(p=>p[1]),left=Math.min(...xs)+.09,right=Math.max(...xs)-.09,bottom=Math.min(...zs)+.09,top=Math.max(...zs)-.09;
     surface([[left,.002,bottom],[right,.002,bottom],[right,.002,top],[left,.002,top]],[0,1,0],room.id,true);
    }
-   const geometry=new THREE.BufferGeometry();geometry.setAttribute('position',new THREE.Float32BufferAttribute(positions,3));geometry.setAttribute('normal',new THREE.Float32BufferAttribute(normals,3));geometry.setAttribute('uv',new THREE.Float32BufferAttribute(uvs,2));
-   geometry.computeBoundingBox();geometry.computeBoundingSphere();geometry.userData={rooms:[...rooms],surfaces,wallDepth:CELL_PAD_DEPTH};
-   const mesh=new THREE.Mesh(geometry,cellPaddingMaterial(THREE));mesh.name='Asylum Cell Padding';return mesh;
+   const group=new THREE.Group();group.name='Asylum Cell Padding';group.userData.rooms=[...sections.keys()];
+   for(const [roomId,{positions,normals,uvs,surfaces}] of sections){
+    const geometry=new THREE.BufferGeometry();geometry.setAttribute('position',new THREE.Float32BufferAttribute(positions,3));geometry.setAttribute('normal',new THREE.Float32BufferAttribute(normals,3));geometry.setAttribute('uv',new THREE.Float32BufferAttribute(uvs,2));indexExactGeometry(THREE,geometry);
+    geometry.computeBoundingBox();geometry.computeBoundingSphere();geometry.userData={rooms:[roomId],surfaces,wallDepth:CELL_PAD_DEPTH};
+    const mesh=new THREE.Mesh(geometry,cellPaddingMaterial(THREE));mesh.name='Asylum Cell Padding · '+roomId;mesh.userData.interiorSection=roomId;group.add(mesh);
+   }
+   return group;
   }
  };
 }

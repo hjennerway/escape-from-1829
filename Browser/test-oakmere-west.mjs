@@ -23,7 +23,8 @@ const previousRoot=new THREE.Matrix4().compose(
 );
 e.annexe.traverse(o=>{
  for(let p=o;p;p=p.parent)if(p.name==='Oakmere rear court additions')return;
- if(!o.isMesh||o.name.startsWith('Rear service court link'))return;
+ // Preserve the original primitives; additive roof closures have independent checks.
+ if(!o.isMesh||o.userData.roofWallClosure||o.name.startsWith('Rear service court link'))return;
  for(let p=o;p;p=p.parent)if(p===detail)return;
  const hash=createHash('sha256');
  for(const [key,a] of Object.entries(o.geometry.attributes).sort()){hash.update(key);hash.update(Buffer.from(a.array.buffer,a.array.byteOffset,a.array.byteLength));}

@@ -34,7 +34,10 @@ function compareGeometry(moved,source,ignoreRootPosition=false){
   }
   return result;
  }
- const actual=[],original=[];moved.traverse(o=>actual.push(o));source.traverse(o=>original.push(o));
+ // Compare the authored ward geometry; estate roof closures are separately validated.
+ const actual=[],original=[];
+ moved.traverse(o=>{if(!o.userData.roofWallClosure)actual.push(o);});
+ source.traverse(o=>{if(!o.userData.roofWallClosure)original.push(o);});
  assert.equal(actual.length,original.length);
  for(let i=0;i<actual.length;i++){
   const a=actual[i],b=original[i];assert.equal(a.name,b.name);

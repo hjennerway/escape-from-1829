@@ -16,7 +16,7 @@ import {FLOOR_HEIGHT,makeFloors,nearStair,changeFloor,routeBetweenFloors} from '
 import {selectEscapeRoutes,exitDirection} from './escape-routes.mjs';
 import {buildAsylumLayout,moveAsylumActor,stairRoute} from './asylum-layout.mjs';
 import {furnishAsylum} from './asylum-furniture.mjs';
-import {loadFurnitureModels,createFurnitureFloor} from './furniture-models.mjs';
+import {loadFurnitureModels,createFurnitureFloor,updateFurnitureDetail} from './furniture-models.mjs';
 import {furnitureContains} from './furniture-collision.mjs';
 import {createReceptionClockAudio} from './reception-clock-audio.mjs';
 import {createAsylumOutside} from './asylum-outside.mjs';
@@ -29,6 +29,8 @@ import {createMouseCapture} from './mouse-capture.mjs';
 import {createEscapeProgress,MAST,CAPTURE_LIMIT} from './escape-progress.mjs';
 import {createEscapeWorld,createEscapeLandmark,outdoorPath} from './escape-world.mjs';
 import {asylumDisplayName} from './asylum-room-numbers.mjs';
+import {createInteriorSectionLoader} from './interior-streaming.mjs';
+import {createInteriorLoadingStatus} from './interior-loading-status.mjs';
 const $=id=>document.getElementById(id),canvas=$('game');
 const furnitureFloors=[];
 const loading=createLoadingProgress(document);
@@ -45,6 +47,7 @@ const player={x:50,z:27.5,floor:0},mapCanvas=$('map'),mapContext=mapCanvas.getCo
 let mapRefresh=0,floors=[],floorGroups=[],stairHold=0,stairLatch=false,artPanels=[],artViewing=null,placedWallPanels=[];
 let exterior,arrivalCutscene,escapeExterior,interiorLights,landingTime=0;
 let outsideWalker,indoorJump,lastDoor=null;
+let interiorLoader=null,updateLoadingStatus=()=>{};
 const modern=()=>floors[0]?.geometrySource==='asylum-plan';
 const floorHeight=actor=>floors[actor.floor]?.elevation??actor.floor*FLOOR_HEIGHT;
 let notebook,notebookFloor,notebookReadRevision=0;
@@ -253,12 +256,11 @@ async function init(){
   for(let floorIndex=0;floorIndex<floors.length;floorIndex++){
   await loading.step(20+Math.round(40*floorIndex/floors.length),'Preparing '+(floors[floorIndex].name?.toLowerCase()??(floorIndex?'the first floor':'the ground floor'))+'…');
   layout=floors[floorIndex];const groundSnapshot=new Set(scene.children);
-  if(layout.geometrySource==='layout'||modern())buildArchitecture(THREE,scene,layout);
-  else try{
+  if(layout.geometrySource==='layout')buildArchitecture(THREE,scene,layout);
+  else if(!modern())try{
    const gltf=await new GLTFLoader().loadAsync('./level.glb');scene.add(gltf.scene);modelLoaded=true;
    gltf.scene.traverse(o=>{if(o.isMesh){o.frustumCulled=false;if(o.material){o.material.roughness=.88;if(o.material.name==='Glass'){o.material.emissive=new THREE.Color(0x3a5743);o.material.emissiveIntensity=.2;}}}});
   }catch(error){console.warn('Blender level unavailable; using the browser-safe layout fallback.',error);buildProcedural();}
-  if(furnitureModels)furnitureFloors.push(createFurnitureFloor(THREE,scene,layout,furnitureModels));
   if(floorIndex===0)placeHeritagePanels();placeLocalArtPanels(floorIndex);
   for(const stair of layout.stairs||[]){const name=asylumDisplayName(stair.name);lamp(stair.x*layout.cellSize,(stair.z+1)*layout.cellSize);label(stair.id?stair.id+' · '+name+'|WALK THE STAIRS':name+'|HOLD E TO GO '+(floorIndex?'DOWN':'UP'),stair.x*layout.cellSize,2.6,stair.z*layout.cellSize);}
   lightFloor();
@@ -268,6 +270,11 @@ async function init(){
   await loading.step(60,'Preparing lights and characters…');
   interiorLights=createInteriorLights(THREE,scene,lights);
   torch=new THREE.SpotLight(0xfff3da,20,30,.50,.55,1.2);torchTarget=new THREE.Object3D();scene.add(torch,torchTarget);torch.target=torchTarget;
+  if(modern()){
+   interiorLoader=createInteriorSectionLoader(THREE,{scene,floors,models:furnitureModels,renderer,camera,floorGroups});
+   furnitureFloors.push(...interiorLoader.furniture);updateLoadingStatus=createInteriorLoadingStatus(document,interiorLoader);
+   await interiorLoader.prepare({x:layout.spawn.x*layout.cellSize,z:layout.spawn.z*layout.cellSize,floor:0});
+  }
   enemies=layout.enemies.map(({name,x,z,type})=>({name,type,floor:0,spawn:{x:x*layout.cellSize,z:z*layout.cellSize,floor:0},x:x*layout.cellSize,z:z*layout.cellSize,mesh:enemyModel(type),path:[],memory:0,rethink:0,route:0,target:null}));
   await loading.step(65,'Preparing the surrounding grounds…');
   escapeExterior=await createLandingExterior(THREE,innerWidth/innerHeight,renderer);
@@ -276,7 +283,7 @@ async function init(){
   await loading.step(85,'Loading the exterior details…');
   await loadEscapeFrontage(THREE,escapeExterior);
   await loading.step(90,'Connecting the outside doors and stairs…');
-  if(modern()){createEscapeLandmark(THREE,escapeExterior);outsideWalker=createAsylumOutside(THREE,escapeExterior);indoorJump=createAsylumJump(floors,{allowMove:(a,b)=>escapeWorld?.allowMove(a,b)??true});}
+  if(modern()){createEscapeLandmark(THREE,escapeExterior);outsideWalker=createAsylumOutside(THREE,escapeExterior);indoorJump=createAsylumJump(floors,{allowMove:(a,b)=>(escapeWorld?.allowMove(a,b)??true)&&(interiorLoader?.allowMove(a,b)??true)});}
   exterior=escapeExterior;
   if(renderer.shadowMap){renderer.shadowMap.enabled=true;renderer.shadowMap.type=THREE.PCFShadowMap;}
   arrivalCutscene=createArrivalCutscene({camera:exterior.camera,overlay:$('arrivalFade'),
@@ -294,6 +301,7 @@ async function init(){
   }});
   await loading.step(97,'Drawing the first view…');
   animate();
+  interiorLoader?.startBackground();
  }catch(e){loading.fail();console.error(e);$('start').textContent='RELOAD TO TRY AGAIN';$('start').disabled=false;$('start').onclick=()=>location.reload();$('intro').textContent='The building could not load. Check your connection and reload. '+e.message;}
 }
 // Choose once per run; the arrival handoff reuses these spawns in resetPositions.
@@ -409,6 +417,7 @@ function outsideDoor(){
  candidates.sort((a,b)=>a.d-b.d);return candidates[0]?.d<1.6?{...candidates[0].exit,floor:candidates[0].floor}:null;
 }
 function useDoor(exit){
+ if(player.outside&&interiorLoader&&!interiorLoader.allowMove(player,{...exit.inside,floor:exit.floor,outside:false}))return false;
  if(escapeProgress){const attempt=escapeProgress.door(exit,{returning:player.outside});if(!attempt.allowed){notebook.recordEvidence({id:`door:${player.floor}:${exit.id}`,title:exit.name,view:`floor:${player.floor}`,text:attempt.text,source:'Tested outside door',locked:true});announce(attempt.text);return false;}}
  outsideWalker?.resetJump();indoorJump?.reset();
  const doorFloor=exit.floor??player.floor;notebook.recordDoor(exit,doorFloor,{used:true});
@@ -467,7 +476,7 @@ function update(dt,interactionDt=dt){
   if(keys.has('KeyE')&&!stairLatch){announce(clue.gate?(escapeProgress.openStair(clue.gate.id)?`Gate open. Find the brass key in second-floor room ${escapeProgress.roomNumber(3,escapeProgress.run.office)}.`:'Locked. Its plate reads “Staff stair key”.'):escapeProgress.interact(clue.id,{view:`floor:${player.floor}`}));syncEscapeWorld();stairLatch=true;}
  }else if(modern()&&exit){
   $('interact').querySelector('b').textContent=player.outside?'PRESS E TO GO INSIDE':'PRESS E TO USE DOOR';$('exitName').textContent=exit.id+' · '+exit.name;$('exitFill').style.width='0%';
-  if(keys.has('KeyE')&&!stairLatch){useDoor(exit);stairLatch=true;}
+  if(keys.has('KeyE')&&!stairLatch)stairLatch=useDoor(exit);
  }else if(stair){
   hold=0;$('interact').querySelector('b').textContent=player.floor?'HOLD E TO GO DOWN':'HOLD E TO GO UP';
   $('exitName').textContent=asylumDisplayName(stair.name);stairHold=keys.has('KeyE')&&!stairLatch?stairHold+interactionDt:0;
@@ -567,6 +576,7 @@ function renderAerialBackdrop(exterior){
 function animate(){requestAnimationFrame(animate);clock.update();const frameDt=clock.getDelta(),dt=Math.min(frameDt,.04);
  if(state==='captured'&&!document.hidden&&recoveryRemaining>0){recoveryRemaining=Math.max(0,recoveryRemaining-Math.min(frameDt,.25));$('resume').disabled=recoveryRemaining>0;$('resume').textContent=recoveryRemaining>0?`OBSERVATION · ${Math.ceil(recoveryRemaining)}s`:'CONTINUE ESCAPE ↗';}
  if(document.hidden)return;
+ interiorLoader?.update(player);updateLoadingStatus();
  if(['menu','arrival','cutscene','won'].includes(state)||player.outside)exterior.lighting?.update(frameDt);
  renderer.toneMappingExposure=['menu','cutscene','won'].includes(state)||(state==='arrival'&&!arrivalCutscene.inside)?1.15:1.25;
  if(state==='cutscene'||state==='won'){
@@ -589,7 +599,7 @@ function animate(){requestAnimationFrame(animate);clock.update();const frameDt=c
  }
  if(state==='cutscene'){renderAerialBackdrop(escapeExterior);return;}
  renderer.toneMappingExposure=1.25;
- interiorLights.update(player);camera.getWorldDirection(tmp);torch.position.copy(camera.position);torchTarget.position.copy(camera.position).addScaledVector(tmp,12);renderer.render(player.outside?exterior.scene:scene,camera);}
+ interiorLights.update(player);camera.getWorldDirection(tmp);torch.position.copy(camera.position);torchTarget.position.copy(camera.position).addScaledVector(tmp,12);if(!player.outside)updateFurnitureDetail(THREE,scene,camera,innerHeight);renderer.render(player.outside?exterior.scene:scene,camera);}
 $('start').onclick=start;$('closeHelp').onclick=resume;$('helpPlay').onclick=resume;$('retry').onclick=start;$('resume').onclick=resume;$('pause').onclick=pause;$('audio').onchange=e=>audioOn=e.target.checked;
 function toggleMap(){if(state==='notebook')closeNotebook();else openNotebook();}
 $('notebookButton').onclick=toggleMap;$('closeNotebook').onclick=()=>closeNotebook();

@@ -206,7 +206,7 @@ for(const year of [1829,1849,1912,1915,1938,2021,1870]){
  timeline.setPeriod(year);
  checkGround(year);checkPeriodRoads(year);
  assert.deepEqual(frontageHits(),completeFrontage,'Batched projection facades persist in '+year);
- exterior.model.traverse(object=>{if(!object.userData.aerialBatch)return;let ancestor=object;while(ancestor&&!ancestor.userData.estateSection)ancestor=ancestor.parent;if(ancestor)assert.equal(isBuildingVisible(object),existsInYear(ancestor.userData.estateSection,year));});
+ exterior.model.traverse(object=>{if(!object.userData.aerialBatch)return;let ancestor=object;while(ancestor&&!ancestor.userData.estateSection)ancestor=ancestor.parent;if(ancestor){let detailVisible=true;for(let p=object.parent;p&&p!==ancestor;p=p.parent)if(p.parent?.isLOD)detailVisible&&=p.visible;assert.equal(isBuildingVisible(object),existsInYear(ancestor.userData.estateSection,year)&&detailVisible,'Batch follows both period ownership and its selected tank detail level');}});
 }
 assert(exterior.scene.children.find(o=>o.isDirectionalLight).shadow.needsUpdate);
 console.log('PASS: all 13 periods, all 22 date rows, original 1829 ranges and tower, later wings, selection, collisions, tree preference, camera and batch visibility.');

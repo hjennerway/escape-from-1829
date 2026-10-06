@@ -5,15 +5,15 @@ import {exitDirection} from './escape-routes.mjs';
 
 // Exploration and Escape use the same physical stairs, collisions and jumps.
 // Only this camera/input adapter differs; exploration has no game objectives.
-export function createExploreWalker(THREE,exterior,floors){
+export function createExploreWalker(THREE,exterior,floors,{allowMove=()=>true}={}){
  const camera=exterior.camera,keys=new Set(),defaultFov=camera.fov;
- const outside=createAsylumOutside(THREE,exterior),inside=createAsylumJump(floors);
+ const outside=createAsylumOutside(THREE,exterior),inside=createAsylumJump(floors,{allowMove});
  const actor={x:0,y:0,z:40,floor:0,outside:true,stair:null};
- let yaw=0,pitch=0,doorHeld=false;
+ let yaw=0,pitch=0,doorHeld=false,waitingDoor=null;
  camera.rotation.order='YXZ';
  function sync(){camera.position.set(actor.x,actor.y+1.8,actor.z);camera.rotation.set(pitch,yaw,0);}
  function resetJumps(){outside.resetJump();inside.reset();}
- function reset(){resetJumps();keys.clear();doorHeld=false;yaw=pitch=0;Object.assign(actor,{x:0,y:0,z:40,floor:0,outside:true,stair:null,verticalTrend:0});camera.fov=defaultFov;camera.updateProjectionMatrix();sync();}
+ function reset(){resetJumps();keys.clear();doorHeld=false;waitingDoor=null;yaw=pitch=0;Object.assign(actor,{x:0,y:0,z:40,floor:0,outside:true,stair:null,verticalTrend:0});camera.fov=defaultFov;camera.updateProjectionMatrix();sync();}
  function nearbyDoor(){
   if(!actor.outside)return nearExit(floors[actor.floor],actor);
   let nearest=null,distance=1.6;
@@ -25,6 +25,8 @@ export function createExploreWalker(THREE,exterior,floors){
  }
  function useDoor(){
   const exit=nearbyDoor();if(!exit)return false;
+  if(actor.outside&&!allowMove(actor,{...exit.inside,floor:exit.floor,outside:false})){waitingDoor=exit.id;return false;}
+  waitingDoor=null;
   resetJumps();const {dx,dz}=exitDirection(exit,{outside:!actor.outside});
   if(actor.outside){Object.assign(actor,{...exit.inside,floor:exit.floor,y:floors[exit.floor].elevation,stair:null,outside:false,verticalTrend:0});yaw=Math.atan2(dx,dz);}
   else{const [x,y,z]=exit.destination;Object.assign(actor,{x,y,z,stair:null,outside:true,verticalTrend:0});yaw=Math.atan2(-dx,-dz);}
@@ -32,12 +34,13 @@ export function createExploreWalker(THREE,exterior,floors){
  }
  reset();
  return {keys,actor,outside,reset,nearbyDoor,useDoor,
+  retryDoor(){if(waitingDoor){if(nearbyDoor()?.id===waitingDoor)useDoor();else waitingDoor=null;}},
   get airborne(){return actor.outside?outside.airborne:inside.airborne;},
   jump(){return actor.outside?outside.jump(actor):inside.start();},
   // Layout/tree changes rebuild support and collision together.
   setObstacles(){outside.refresh();},
   setView({position,target,fov}){
-   resetJumps();keys.clear();doorHeld=false;
+   resetJumps();keys.clear();doorHeld=false;waitingDoor=null;
    Object.assign(actor,{x:position[0],y:position[1]-1.8,z:position[2],floor:0,outside:true,stair:null,verticalTrend:0});
    if(position[1]===1.8)actor.y=outside.heightAt(actor.x,actor.z,0);
    camera.position.set(actor.x,actor.y+1.8,actor.z);camera.lookAt(...target);yaw=camera.rotation.y;pitch=camera.rotation.x;
@@ -50,7 +53,8 @@ export function createExploreWalker(THREE,exterior,floors){
    const distance=dt*(keys.has('ShiftLeft')||keys.has('ShiftRight')?12:5),n=Math.hypot(side,forward)||1;
    const dx=(Math.cos(yaw)*side-Math.sin(yaw)*forward)*distance/n,dz=(-Math.sin(yaw)*side-Math.cos(yaw)*forward)*distance/n;
    if(actor.outside)outside.update(actor,dx,dz,dt);else inside.update(actor,dx,dz,dt);
-   if(keys.has('KeyE')&&!doorHeld)useDoor();doorHeld=keys.has('KeyE');sync();
+   if(waitingDoor&&nearbyDoor()?.id!==waitingDoor)waitingDoor=null;
+   if(waitingDoor||(keys.has('KeyE')&&!doorHeld))useDoor();doorHeld=keys.has('KeyE');sync();
   }
  };
 }

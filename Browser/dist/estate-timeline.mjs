@@ -7,7 +7,7 @@ export const ESTATE_TIMELINE_VERSION=6;
 
 // Split triangles at the eastern ward boundary, interpolating every vertex
 // attribute so masonry UVs, normals and the full-period silhouette survive.
-export function clipTimelineGeometry(THREE,geometry,matrix,edge,sign,axis='x'){
+export function clipTimelineGeometry(THREE,geometry,matrix,edge,sign,axis='x',includeCoplanar=true){
  const names=Object.keys(geometry.attributes),source=geometry.attributes,index=geometry.index;
  const output=Object.fromEntries(names.map(name=>[name,[]])),point=new THREE.Vector3();
  function vertex(i){
@@ -19,8 +19,9 @@ export function clipTimelineGeometry(THREE,geometry,matrix,edge,sign,axis='x'){
   const triangle=[0,1,2].map(j=>vertex(index?index.getX(i+j):i+j)),polygon=[];
   for(let j=0;j<3;j++){
    const a=triangle[j],b=triangle[(j+1)%3];
-   if(a.distance>=0)polygon.push(a.values);
-   if((a.distance>=0)!==(b.distance>=0)){
+   const insideA=includeCoplanar?a.distance>=0:a.distance>0,insideB=includeCoplanar?b.distance>=0:b.distance>0;
+   if(insideA)polygon.push(a.values);
+   if(insideA!==insideB){
     const t=a.distance/(a.distance-b.distance);
     polygon.push(Object.fromEntries(names.map(name=>[name,a.values[name].map((value,k)=>value+(b.values[name][k]-value)*t)])));
    }

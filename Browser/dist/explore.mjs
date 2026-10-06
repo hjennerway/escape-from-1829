@@ -33,8 +33,9 @@ import {REDESMERE_CHIMNEY_VIEWS} from './redesmere-edge-chimney.mjs';
 import {createExploreWalker} from './explore-walker.mjs';
 import {buildAsylumLayout} from './asylum-layout.mjs';
 import {createExploreInterior} from './explore-interior.mjs';
+import {createInteriorLoadingStatus} from './interior-loading-status.mjs';
 import {furnishAsylum} from './asylum-furniture.mjs';
-import {loadFurnitureModels} from './furniture-models.mjs';
+import {loadFurnitureModels,updateFurnitureDetail} from './furniture-models.mjs';
 import {bindExploreInput} from './explore-input.mjs';
 import {sampleLanding} from './aerial-controls.mjs';
 import {beginIntroFlight} from './intro-navigation.mjs';
@@ -76,8 +77,9 @@ try{
   const response=await fetch('./asylum-plan.json');if(!response.ok)throw Error('Floor plans could not load');
   const floorPlan=await response.json(),floors=buildAsylumLayout(floorPlan).floors;
   furnishAsylum(floors);
-  const interior=createExploreInterior(THREE,floors,await loadFurnitureModels(THREE));
-  const walker=createExploreWalker(THREE,exterior,floors);
+  const interior=createExploreInterior(THREE,floors,await loadFurnitureModels(THREE),{streaming:true,renderer,camera:exterior.camera});
+  const walker=createExploreWalker(THREE,exterior,floors,{allowMove:interior.loading.allowMove});
+  const loadingStatus=createInteriorLoadingStatus(document,interior.loading);
   function refreshObstacles(){walker.setObstacles();}
   applyTreeRenderingDefault(renderer,exterior,refreshObstacles);
   bindTimelineControls(timeline,document.getElementById('layoutControls'),refreshObstacles);
@@ -146,10 +148,13 @@ try{
   const doorButton=document.getElementById('exploreDoor');
   doorButton.addEventListener('click',()=>{walker.useDoor();canvas.focus({preventScroll:true});});
   const introFlight=beginIntroFlight(exterior.camera,{fallback:sampleLanding(0,{aspect:exterior.camera.aspect,cinematic:true})});
+  const entrances=floors.flatMap(f=>f.exits.map(e=>({...e,floor:f.id}))),entry=entrances.sort((a,b)=>Math.hypot(a.destination[0]-walker.actor.x,a.destination[1]-walker.actor.y,a.destination[2]-walker.actor.z)-Math.hypot(b.destination[0]-walker.actor.x,b.destination[1]-walker.actor.y,b.destination[2]-walker.actor.z))[0];
+  await interior.loading.prepare({...entry.inside,floor:entry.floor});interior.loading.startBackground();
   const clock=new THREE.Timer();clock.connect(document);
   renderer.setAnimationLoop(()=>{clock.update();const dt=clock.getDelta();if(document.hidden)return;if(introFlight?.active)introFlight.update(dt);else if(input.active)walker.update(dt);lighting.update(dt);interior.update(walker.actor,input.active?dt:0);
-    const door=walker.nearbyDoor();doorButton.hidden=!door||!!introFlight?.active;
+    walker.retryDoor();loadingStatus();const door=walker.nearbyDoor();doorButton.hidden=!door||!!introFlight?.active;
     if(door)doorButton.textContent=(walker.actor.outside?'Enter building':'Go outside')+' · E';
+    if(!walker.actor.outside)updateFurnitureDetail(THREE,interior.scene,exterior.camera,innerHeight);
     renderer.render(walker.actor.outside?exterior.scene:interior.scene,exterior.camera);developer.render(renderer,exterior.camera);introFlight?.afterRender();});
   loadEscapeFrontage(THREE,exterior).catch(error=>console.warn('Frontage photo unavailable',error));
 }catch(error){console.error(error);window.introHandoff?.fail();hint.textContent='The grounds could not load. Reload the page to try again.';look.disabled=false;look.textContent='RELOAD ↗';look.onclick=()=>location.reload();}

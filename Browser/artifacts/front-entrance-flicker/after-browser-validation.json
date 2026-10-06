@@ -4,7 +4,19 @@
       "mode": "source",
       "build": {
         "mode": "procedural",
-        "milliseconds": 2878.800000000745
+        "milliseconds": 2635.300000000745
+      },
+      "surfaces": {
+        "probes": 72,
+        "bad": []
+      },
+      "views": 7
+    },
+    {
+      "mode": "compiled",
+      "build": {
+        "mode": "compiled",
+        "milliseconds": 1144.199999999255
       },
       "surfaces": {
         "probes": 72,

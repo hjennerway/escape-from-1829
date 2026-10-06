@@ -13,6 +13,7 @@ export function addOakmereCourt(THREE,{model,scale,brick,roof,material,worldUV,h
  const cap=(x,z,w,d,h,rise,name)=>{const o=hipRoof(x*scale,z*scale,w*scale,d*scale,h,rise);o.name=name;group.add(o);return o;};
  function window(x,y,z,w,h,r=Math.PI/2,blind=false){
   const face=new THREE.Group();face.position.set(x*scale,y,z*scale);face.rotation.y=r;group.add(face);
+  face.userData.aerialWindowAssembly=true;face.userData.aerialBatchScope=true;
   const part=(m,u,v,n,pw,ph,pd,name)=>{const o=new THREE.Mesh(new THREE.BoxGeometry(pw,ph,pd),m);o.position.set(u,v,n);o.name=name;o.castShadow=o.receiveShadow=true;face.add(o);};
   part(blind?frame:glass,0,0,.065,w,h,.07,'Oakmere court window glazing');
   for(const u of [-w/2,-w/6,w/6,w/2])part(frame,u,0,.13,.06,h,.08,'Oakmere court sash frame');

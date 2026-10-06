@@ -29,7 +29,8 @@ export function protectedWindowGeometry(THREE,annexe){
  annexe.traverse(object=>{
   // Later additive Oakmere work is independently checked by test-oakmere-court.
   for(let p=object;p;p=p.parent)if(p.name==='Oakmere rear court additions')return;
-  if(!object.isMesh)return;
+  // Roof closure additions have their own checks; fingerprint the original window surroundings.
+  if(!object.isMesh||object.userData.roofWallClosure)return;
   const hash=createHash('sha256');
   for(const [key,a] of Object.entries(object.geometry.attributes).sort()){
    hash.update(key);hash.update(Buffer.from(a.array.buffer,a.array.byteOffset,a.array.byteLength));

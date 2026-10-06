@@ -60,6 +60,7 @@ function keydown(code,repeat=false){const event={code,repeat,defaultPrevented:fa
 const sandbox={createReceptionClockAudio,createNotebook,notebookView,drawNotebookMap:(context,journal,key,player,enemies,yaw,options={})=>drawNotebookMap(context,journal,key,player,enemies,yaw,{...options,createCanvas:()=>sandbox.document.createElement('canvas')}),bindDeveloperOptions:options=>bindDeveloperOptions({...options,root:sandbox.document,target:sandbox.document,storage:{getItem:()=>null,setItem(){}}}),captureOutcome:(previous)=>captureOutcome(previous,sandbox.Math.random),Math:Object.create(Math),selectEscapeRoutes,exitDirection,createSecurityGuard:()=>createSecurityGuard(GuardTHREE),updateSecurityGuard,resetSecurityGuard,bindTreeToggle,sampleLanding,...core,...floors,buildArchitecture,interiorWallSurfaces,createInteriorLights,createEscapeCutscene,createArrivalCutscene,
  createLoadingProgress:document=>createLoadingProgress(document,{paint:()=>Promise.resolve()}),
  createMouseCapture:(canvas,options)=>createMouseCapture(canvas,{...options,document:sandbox.document}),
+ updateFurnitureDetail:()=>{},
  createLandingExterior:async()=>({scene:new Object3D(),camera:new Object3D()}),
  loadEscapeFrontage:async()=>{},THREE,GLTFLoader:class {},
  document:{getElementById:element,createElement:()=>element('canvas'+elements.size),querySelector:s=>element(s),querySelectorAll:()=>[],body:element('body'),addEventListener(){},exitPointerLock(){}},
