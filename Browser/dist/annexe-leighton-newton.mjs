@@ -1,3 +1,4 @@
+import {markDownpipeInstances} from './downpipe-clearance.mjs';
 // Red img1 faces the inner L; blue img2 faces the outer long elevation.
 export const LEIGHTON_REFERENCE={location:'Research/leighton-newton/locations.png',inner:'Browser/dist/building-photos/leighton-newton-inner.jpg',outer:'Browser/dist/building-photos/leighton-newton-outer.jpg'};
 export function addLeightonNewton(THREE,{ward,scale:S,brick,roof,material,worldUV,hipRoof}){
@@ -11,8 +12,8 @@ export function addLeightonNewton(THREE,{ward,scale:S,brick,roof,material,worldU
  const batches=new Map(),openings=[];
  const mesh=(g,m,x,y,z,name)=>{const o=new THREE.Mesh(g,m);o.position.set(x*S,y,z*S);o.name='Leighton Newton '+name;o.castShadow=o.receiveShadow=true;group.add(o);return o;};
  const box=(m,x,y,z,w,h,d,name,collision=false)=>{const o=mesh(worldUV(new THREE.BoxGeometry(w*S,h,d*S),1.7),m,x,y,z,name);if(collision)o.userData.orientedCollision=true;return o;};
- function part(m,x,y,z,w,h,d,r=0){if(!batches.has(m))batches.set(m,[]);batches.get(m).push({x:x*S,y,z:z*S,w:w*S,h,d:d*S,r});}
- function face(x,z,r=0){const c=Math.cos(r),s=Math.sin(r);return (m,u,y,n,w,h,d)=>part(m,x+c*u+s*n,y,z-s*u+c*n,w,h,d,r);}
+ function part(m,x,y,z,w,h,d,r=0,downpipe=false){if(!batches.has(m))batches.set(m,[]);batches.get(m).push({x:x*S,y,z:z*S,w:w*S,h,d:d*S,r,downpipe});}
+ function face(x,z,r=0){const c=Math.cos(r),s=Math.sin(r);return (m,u,y,n,w,h,d,downpipe=false)=>part(m,x+c*u+s*n,y,z-s*u+c*n,w,h,d,r,downpipe);}
  function sash(x,z,r,{w=.85,h=2.8,y=6.45}={}){
   const p=face(x,z,r);openings.push({x:x*S,y,z:z*S,r,w:w*S,h});p(glass,0,y,.04,w,h,.05);
   for(const u of [-w/2,-w/6,w/6,w/2])p(frame,u,y,.10,.035,h+.06,.05);for(let i=0;i<=8;i++)p(frame,0,y-h/2+i*h/8,.11,w+.07,i===4?.065:.035,.05);
@@ -28,7 +29,7 @@ export function addLeightonNewton(THREE,{ward,scale:S,brick,roof,material,worldU
  }
  function elevation(x,z,width,r,columns,{door=null,short=false}={}){
   const p=face(x,z,r);for(const [y,h] of [[.22,.35],[2.1,.10],[4.25,.42],[5.08,.10],[6.45,.10],[8.12,.38]])p(trim,0,y,.04,width,h,.09);p(blue,0,8.43,.16,width+.3,.12,.13);
-  for(const u of [-width/2+.10,width/2-.10])p(blue,u,4.2,.17,.065,8.4,.065);
+  for(const u of [-width/2+.10,width/2-.10])p(blue,u,4.2,.17,.065,8.4,.065,true);
   for(const u of columns){const px=x+Math.cos(r)*u,pz=z-Math.sin(r)*u;sash(px,pz,r,{h:short?1.6:2.8,y:short?7.02:6.45});if(door===null||Math.abs(u-door)>.7)sash(px,pz,r,{y:2.05,h:3.1});}
   if(door!==null)entrance(x+Math.cos(r)*door,z-Math.sin(r)*door,r);
  }
@@ -66,6 +67,6 @@ export function addLeightonNewton(THREE,{ward,scale:S,brick,roof,material,worldU
  for(const [x,z,height,pots] of [[13,-42,12,2],[21,-42,12.8,3],[26,-42,13.8,3],[30,-42,13.5,2],[37,-42,12.8,3],[43.5,-44,13.5,3],[43.5,-53,13.8,2],[43.5,-62,12.7,2]]){
   box(masonry,x,(9+height)/2,z,1.15,height-9,.85,'chimney stack');for(const y of [height-1.1,height-.12])part(trim,x,y,z,1.35,.16,1.02);for(let i=0;i<pots;i++)mesh(new THREE.CylinderGeometry(.12,.15,.75,8),trim,x+(i-(pots-1)/2)*.34,height+.32,z,'terracotta chimney pot');
  }
- const dummy=new THREE.Object3D();for(const [mat,items] of batches){const o=new THREE.InstancedMesh(new THREE.BoxGeometry(1,1,1),mat,items.length);o.name='Leighton Newton facade details';o.castShadow=o.receiveShadow=true;items.forEach((b,i)=>{dummy.position.set(b.x,b.y,b.z);dummy.scale.set(b.w,b.h,b.d);dummy.rotation.set(0,b.r,0);dummy.updateMatrix();o.setMatrixAt(i,dummy.matrix);});group.add(o);}
+ const dummy=new THREE.Object3D();for(const [mat,items] of batches){const o=new THREE.InstancedMesh(new THREE.BoxGeometry(1,1,1),mat,items.length);markDownpipeInstances(o,items);o.name='Leighton Newton facade details';o.castShadow=o.receiveShadow=true;items.forEach((b,i)=>{dummy.position.set(b.x,b.y,b.z);dummy.scale.set(b.w,b.h,b.d);dummy.rotation.set(0,b.r,0);dummy.updateMatrix();o.setMatrixAt(i,dummy.matrix);});group.add(o);}
  group.userData.openings=openings;return group;
 }

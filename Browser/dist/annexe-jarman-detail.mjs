@@ -7,7 +7,7 @@ export function addJarmanFront(THREE,{model,host,brick,roof,material,worldUV}){
  function mesh(g,m,px,y,pz,name){const o=new THREE.Mesh(g,m);o.name=name;o.position.set(px,y,pz);o.castShadow=true;o.receiveShadow=true;group.add(o);return o;}
  function box(m,px,y,pz,w,h,d){if(!batches.has(m))batches.set(m,[]);batches.get(m).push({x:px,y,z:pz,w,h,d});}
  function wall(px,y,pz,w,h,d,name){const o=mesh(worldUV(new THREE.BoxGeometry(w,h,d),1.7),brick,px,y,pz,name);o.userData.orientedCollision=true;return o;}
- function beam(a,b,r,m,name){const p=new THREE.Vector3(...a),q=new THREE.Vector3(...b),v=q.clone().sub(p);const o=mesh(new THREE.CylinderGeometry(r,r,v.length(),6),m,...p.add(q).multiplyScalar(.5).toArray(),name);o.quaternion.setFromUnitVectors(new THREE.Vector3(0,1,0),v.normalize());}
+ function beam(a,b,r,m,name){const p=new THREE.Vector3(...a),q=new THREE.Vector3(...b),v=q.clone().sub(p);const o=mesh(new THREE.CylinderGeometry(r,r,v.length(),6),m,...p.add(q).multiplyScalar(.5).toArray(),name);o.quaternion.setFromUnitVectors(new THREE.Vector3(0,1,0),v.normalize());return o;}
  function sash(px,y,pz,w=1.9,height=3.0,name='Jarman ward sash'){
   openings.push({name,x:px,y,z:pz,w,h:height});box(glass,px,y,pz+.065,w,height,.08);
   for(const dx of [-w/2,w/2])box(pale,px+dx,y,pz+.13,.065,height,.10);
@@ -42,8 +42,9 @@ export function addJarmanFront(THREE,{model,host,brick,roof,material,worldUV}){
   box(trim,px,h+2.17,front+.12,.33,.42,.24);
   beam([px,h+rise,front],[px,h+rise+.28,front],.045,dark,'Jarman gable finial');
   const pipe=px-w/2-.13;
-  beam([pipe,8.4,z+.29],[pipe,7.95,front+.27],.055,blue,'Jarman rainwater offset');
-  beam([pipe,7.95,front+.27],[pipe,.25,front+.27],.055,blue,'Jarman downpipe');
+  const assembly=new THREE.Group();assembly.name='Jarman downpipe assembly';assembly.userData.downpipeAssembly=true;group.add(assembly);
+  assembly.add(beam([pipe,8.4,z+.29],[pipe,7.95,front+.27],.055,blue,'Jarman rainwater offset'));
+  assembly.add(beam([pipe,7.95,front+.27],[pipe,.25,front+.27],.055,blue,'Jarman downpipe'));
  }
  // The final broad stack encloses the old host stack and pots; host roof stays fixed.
  for(const [f,top,w] of [[.16,12.6,2.8],[.33,12.05,2.9],[.51,11.65,2.45],[.78,13.4,2.8]]){

@@ -1,0 +1,191 @@
+[
+  {
+    "x": 662,
+    "y": 286,
+    "hits": [
+      {
+        "name": "Rear court white stair enclosure",
+        "point": [
+          83.2369655952573,
+          8.715985160726559,
+          -30.399999618530273
+        ],
+        "material": "e1e3dc"
+      },
+      {
+        "name": "Aerial batch · Period · Redesmere · 329",
+        "point": [
+          83.2369655952573,
+          8.715985160726559,
+          -30.399999618530273
+        ],
+        "material": "e1e3dc"
+      },
+      {
+        "name": "",
+        "instance": 7,
+        "point": [
+          83.95999717712402,
+          9.51773332087824,
+          -31.02600439707749
+        ],
+        "material": "e1e3dc"
+      },
+      {
+        "name": " · reduced detail",
+        "instance": 7,
+        "point": [
+          83.95999717712402,
+          9.51773332087824,
+          -31.02600439707749
+        ],
+        "material": "e1e3dc"
+      },
+      {
+        "name": " · reduced detail",
+        "instance": 7,
+        "point": [
+          83.95999717712402,
+          9.51773332087824,
+          -31.02600439707749
+        ],
+        "material": "e1e3dc"
+      },
+      {
+        "name": "Aerial batch · Period · Redesmere · 344",
+        "point": [
+          84.13738801252674,
+          9.714436728417795,
+          -31.179590372320614
+        ],
+        "material": "c4c9c6"
+      }
+    ]
+  },
+  {
+    "x": 655,
+    "y": 294,
+    "hits": [
+      {
+        "name": "Rear court white stair enclosure",
+        "point": [
+          83.05622058101702,
+          8.435808751042716,
+          -30.399999618530273
+        ],
+        "material": "e1e3dc"
+      },
+      {
+        "name": "Aerial batch · Period · Redesmere · 329",
+        "point": [
+          83.05622058101702,
+          8.435808751042716,
+          -30.399999618530273
+        ],
+        "material": "e1e3dc"
+      },
+      {
+        "name": "",
+        "instance": 7,
+        "point": [
+          83.95999717712402,
+          9.426077940416821,
+          -31.205847623722136
+        ],
+        "material": "e1e3dc"
+      },
+      {
+        "name": " · reduced detail",
+        "instance": 7,
+        "point": [
+          83.95999717712402,
+          9.426077940416821,
+          -31.205847623722136
+        ],
+        "material": "e1e3dc"
+      },
+      {
+        "name": " · reduced detail",
+        "instance": 7,
+        "point": [
+          83.95999717712402,
+          9.426077940416821,
+          -31.205847623722136
+        ],
+        "material": "e1e3dc"
+      },
+      {
+        "name": "Aerial batch · Period · Redesmere · 344",
+        "point": [
+          84.31139943446507,
+          9.81110984987352,
+          -31.51917373696514
+        ],
+        "material": "c4c9c6"
+      }
+    ]
+  },
+  {
+    "x": 674,
+    "y": 281,
+    "hits": [
+      {
+        "name": "Rear court white stair enclosure",
+        "point": [
+          83.55898945920737,
+          9.024376502648007,
+          -30.399999618530273
+        ],
+        "material": "e1e3dc"
+      },
+      {
+        "name": "Aerial batch · Period · Redesmere · 329",
+        "point": [
+          83.55898945920737,
+          9.024376502648007,
+          -30.399999618530273
+        ],
+        "material": "e1e3dc"
+      },
+      {
+        "name": "",
+        "instance": 7,
+        "point": [
+          83.95999717712402,
+          9.466065081767576,
+          -30.73014826981951
+        ],
+        "material": "e1e3dc"
+      },
+      {
+        "name": " · reduced detail",
+        "instance": 7,
+        "point": [
+          83.95999717712402,
+          9.466065081767576,
+          -30.73014826981951
+        ],
+        "material": "e1e3dc"
+      },
+      {
+        "name": " · reduced detail",
+        "instance": 7,
+        "point": [
+          83.95999717712402,
+          9.466065081767576,
+          -30.73014826981951
+        ],
+        "material": "e1e3dc"
+      },
+      {
+        "name": "Aerial batch · Period · Redesmere · 344",
+        "point": [
+          84.23444983709706,
+          9.768360025238657,
+          -30.956104458402578
+        ],
+        "material": "c4c9c6"
+      }
+    ]
+  }
+]

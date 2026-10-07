@@ -1,0 +1,72 @@
+[
+  {
+    "width": 1200,
+    "exits": 24,
+    "locked": [
+      {
+        "id": "S1",
+        "visible": true,
+        "blocked": true,
+        "lockedPrompt": true
+      },
+      {
+        "id": "S5",
+        "visible": true,
+        "blocked": true,
+        "lockedPrompt": true
+      }
+    ],
+    "unlocked": [
+      {
+        "id": "S1",
+        "visible": false,
+        "blocked": false,
+        "lockedPrompt": false
+      },
+      {
+        "id": "S5",
+        "visible": false,
+        "blocked": false,
+        "lockedPrompt": false
+      }
+    ],
+    "capture": true,
+    "restart": true,
+    "errors": []
+  },
+  {
+    "width": 320,
+    "exits": 24,
+    "locked": [
+      {
+        "id": "S1",
+        "visible": true,
+        "blocked": true,
+        "lockedPrompt": true
+      },
+      {
+        "id": "S5",
+        "visible": true,
+        "blocked": true,
+        "lockedPrompt": true
+      }
+    ],
+    "unlocked": [
+      {
+        "id": "S1",
+        "visible": false,
+        "blocked": false,
+        "lockedPrompt": false
+      },
+      {
+        "id": "S5",
+        "visible": false,
+        "blocked": false,
+        "lockedPrompt": false
+      }
+    ],
+    "capture": true,
+    "restart": true,
+    "errors": []
+  }
+]

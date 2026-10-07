@@ -1,0 +1,23 @@
+{
+  "result": {
+    "still": {
+      "medianMs": 9.299999997019768,
+      "p95Ms": 12.800000004470348,
+      "draws": 1209
+    },
+    "walking": {
+      "medianMs": 16.5,
+      "p95Ms": 19.900000005960464,
+      "draws": 1286
+    },
+    "door": {
+      "medianMs": 13.900000005960464,
+      "p95Ms": 16.5,
+      "draws": 1703
+    },
+    "lights": 37,
+    "atlasBakes": 1,
+    "renderer": "ANGLE (NVIDIA, NVIDIA GeForce RTX 3090 Ti (0x00002203) Direct3D11 vs_5_0 ps_5_0, D3D11)"
+  },
+  "errors": []
+}

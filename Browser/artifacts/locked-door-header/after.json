@@ -1,0 +1,4409 @@
+{
+  "result": {
+    "renderer": "ANGLE (NVIDIA, NVIDIA GeForce RTX 3090 Ti (0x00002203) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+    "doors": [
+      {
+        "id": "corridor-lock:gallery:0",
+        "title": "Main/admin · locked double doors",
+        "point": [
+          154.773125,
+          24.4
+        ],
+        "toward": [
+          154.773125,
+          -126
+        ],
+        "probes": [
+          {
+            "side": 1,
+            "x": -1.3,
+            "y": 3.82,
+            "hits": [
+              {
+                "name": "Aerial batch · Tower corridor and three workshops · 942",
+                "distance": 0.48000068664551065,
+                "point": [
+                  156.073125,
+                  3.82,
+                  24.280000686645508
+                ],
+                "material": [
+                  "ffffff"
+                ]
+              }
+            ]
+          },
+          {
+            "side": 1,
+            "x": -1.3,
+            "y": 3.9,
+            "hits": [
+              {
+                "name": "Aerial batch · Tower corridor and three workshops · 942",
+                "distance": 0.48000068664551065,
+                "point": [
+                  156.073125,
+                  3.9,
+                  24.280000686645508
+                ],
+                "material": [
+                  "ffffff"
+                ]
+              }
+            ]
+          },
+          {
+            "side": 1,
+            "x": -1.3,
+            "y": 3.98,
+            "hits": [
+              {
+                "name": "Aerial batch · Tower corridor and three workshops · 942",
+                "distance": 0.48000068664551065,
+                "point": [
+                  156.073125,
+                  3.98,
+                  24.280000686645508
+                ],
+                "material": [
+                  "ffffff"
+                ]
+              }
+            ]
+          },
+          {
+            "side": 1,
+            "x": -1.3,
+            "y": 4.15,
+            "hits": [
+              {
+                "name": "Aerial batch · Tower corridor and three workshops · 942",
+                "distance": 0.48000068664551065,
+                "point": [
+                  156.073125,
+                  4.15,
+                  24.280000686645508
+                ],
+                "material": [
+                  "ffffff"
+                ]
+              }
+            ]
+          },
+          {
+            "side": 1,
+            "x": -1.3,
+            "y": 4.7,
+            "hits": [
+              {
+                "name": "Aerial batch · Tower corridor and three workshops · 942",
+                "distance": 0.48000068664551065,
+                "point": [
+                  156.073125,
+                  4.7,
+                  24.280000686645508
+                ],
+                "material": [
+                  "ffffff"
+                ]
+              }
+            ]
+          },
+          {
+            "side": 1,
+            "x": -0.61,
+            "y": 3.82,
+            "hits": [
+              {
+                "name": "Aerial batch · Tower corridor and three workshops · 942",
+                "distance": 0.48000068664551065,
+                "point": [
+                  155.383125,
+                  3.82,
+                  24.280000686645508
+                ],
+                "material": [
+                  "ffffff"
+                ]
+              }
+            ]
+          },
+          {
+            "side": 1,
+            "x": -0.61,
+            "y": 3.9,
+            "hits": [
+              {
+                "name": "Aerial batch · Tower corridor and three workshops · 942",
+                "distance": 0.48000068664551065,
+                "point": [
+                  155.383125,
+                  3.9,
+                  24.280000686645508
+                ],
+                "material": [
+                  "ffffff"
+                ]
+              }
+            ]
+          },
+          {
+            "side": 1,
+            "x": -0.61,
+            "y": 3.98,
+            "hits": [
+              {
+                "name": "Aerial batch · Tower corridor and three workshops · 942",
+                "distance": 0.48000068664551065,
+                "point": [
+                  155.383125,
+                  3.98,
+                  24.280000686645508
+                ],
+                "material": [
+                  "ffffff"
+                ]
+              }
+            ]
+          },
+          {
+            "side": 1,
+            "x": -0.61,
+            "y": 4.15,
+            "hits": [
+              {
+                "name": "Aerial batch · Tower corridor and three workshops · 942",
+                "distance": 0.48000068664551065,
+                "point": [
+                  155.383125,
+                  4.15,
+                  24.280000686645508
+                ],
+                "material": [
+                  "ffffff"
+                ]
+              }
+            ]
+          },
+          {
+            "side": 1,
+            "x": -0.61,
+            "y": 4.7,
+            "hits": [
+              {
+                "name": "Aerial batch · Tower corridor and three workshops · 942",
+                "distance": 0.48000068664551065,
+                "point": [
+                  155.383125,
+                  4.7,
+                  24.280000686645508
+                ],
+                "material": [
+                  "ffffff"
+                ]
+              }
+            ]
+          },
+          {
+            "side": 1,
+            "x": 0.03,
+            "y": 3.82,
+            "hits": [
+              {
+                "name": "Aerial batch · Tower corridor and three workshops · 942",
+                "distance": 0.48000068664551065,
+                "point": [
+                  154.743125,
+                  3.82,
+                  24.280000686645508
+                ],
+                "material": [
+                  "ffffff"
+                ]
+              }
+            ]
+          },
+          {
+            "side": 1,
+            "x": 0.03,
+            "y": 3.9,
+            "hits": [
+              {
+                "name": "Aerial batch · Tower corridor and three workshops · 942",
+                "distance": 0.48000068664551065,
+                "point": [
+                  154.743125,
+                  3.9,
+                  24.280000686645508
+                ],
+                "material": [
+                  "ffffff"
+                ]
+              }
+            ]
+          },
+          {
+            "side": 1,
+            "x": 0.03,
+            "y": 3.98,
+            "hits": [
+              {
+                "name": "Aerial batch · Tower corridor and three workshops · 942",
+                "distance": 0.48000068664551065,
+                "point": [
+                  154.743125,
+                  3.98,
+                  24.280000686645508
+                ],
+                "material": [
+                  "ffffff"
+                ]
+              }
+            ]
+          },
+          {
+            "side": 1,
+            "x": 0.03,
+            "y": 4.15,
+            "hits": [
+              {
+                "name": "Aerial batch · Tower corridor and three workshops · 942",
+                "distance": 0.48000068664551065,
+                "point": [
+                  154.743125,
+                  4.15,
+                  24.280000686645508
+                ],
+                "material": [
+                  "ffffff"
+                ]
+              }
+            ]
+          },
+          {
+            "side": 1,
+            "x": 0.03,
+            "y": 4.7,
+            "hits": [
+              {
+                "name": "Aerial batch · Tower corridor and three workshops · 942",
+                "distance": 0.48000068664551065,
+                "point": [
+                  154.743125,
+                  4.7,
+                  24.280000686645508
+                ],
+                "material": [
+                  "ffffff"
+                ]
+              }
+            ]
+          },
+          {
+            "side": 1,
+            "x": 0.59,
+            "y": 3.82,
+            "hits": [
+              {
+                "name": "Aerial batch · Tower corridor and three workshops · 942",
+                "distance": 0.48000068664551065,
+                "point": [
+                  154.183125,
+                  3.82,
+                  24.280000686645508
+                ],
+                "material": [
+                  "ffffff"
+                ]
+              }
+            ]
+          },
+          {
+            "side": 1,
+            "x": 0.59,
+            "y": 3.9,
+            "hits": [
+              {
+                "name": "Aerial batch · Tower corridor and three workshops · 942",
+                "distance": 0.48000068664551065,
+                "point": [
+                  154.183125,
+                  3.9,
+                  24.280000686645508
+                ],
+                "material": [
+                  "ffffff"
+                ]
+              }
+            ]
+          },
+          {
+            "side": 1,
+            "x": 0.59,
+            "y": 3.98,
+            "hits": [
+              {
+                "name": "Aerial batch · Tower corridor and three workshops · 942",
+                "distance": 0.48000068664551065,
+                "point": [
+                  154.183125,
+                  3.98,
+                  24.280000686645508
+                ],
+                "material": [
+                  "ffffff"
+                ]
+              }
+            ]
+          },
+          {
+            "side": 1,
+            "x": 0.59,
+            "y": 4.15,
+            "hits": [
+              {
+                "name": "Aerial batch · Tower corridor and three workshops · 942",
+                "distance": 0.48000068664551065,
+                "point": [
+                  154.183125,
+                  4.15,
+                  24.280000686645508
+                ],
+                "material": [
+                  "ffffff"
+                ]
+              }
+            ]
+          },
+          {
+            "side": 1,
+            "x": 0.59,
+            "y": 4.7,
+            "hits": [
+              {
+                "name": "Aerial batch · Tower corridor and three workshops · 942",
+                "distance": 0.48000068664551065,
+                "point": [
+                  154.183125,
+                  4.7,
+                  24.280000686645508
+                ],
+                "material": [
+                  "ffffff"
+                ]
+              }
+            ]
+          },
+          {
+            "side": 1,
+            "x": 1.28,
+            "y": 3.82,
+            "hits": [
+              {
+                "name": "Aerial batch · Tower corridor and three workshops · 942",
+                "distance": 0.48000068664551065,
+                "point": [
+                  153.493125,
+                  3.82,
+                  24.280000686645508
+                ],
+                "material": [
+                  "ffffff"
+                ]
+              }
+            ]
+          },
+          {
+            "side": 1,
+            "x": 1.28,
+            "y": 3.9,
+            "hits": [
+              {
+                "name": "Aerial batch · Tower corridor and three workshops · 942",
+                "distance": 0.48000068664551065,
+                "point": [
+                  153.493125,
+                  3.9,
+                  24.280000686645508
+                ],
+                "material": [
+                  "ffffff"
+                ]
+              }
+            ]
+          },
+          {
+            "side": 1,
+            "x": 1.28,
+            "y": 3.98,
+            "hits": [
+              {
+                "name": "Aerial batch · Tower corridor and three workshops · 942",
+                "distance": 0.48000068664551065,
+                "point": [
+                  153.493125,
+                  3.98,
+                  24.280000686645508
+                ],
+                "material": [
+                  "ffffff"
+                ]
+              }
+            ]
+          },
+          {
+            "side": 1,
+            "x": 1.28,
+            "y": 4.15,
+            "hits": [
+              {
+                "name": "Aerial batch · Tower corridor and three workshops · 942",
+                "distance": 0.48000068664551065,
+                "point": [
+                  153.493125,
+                  4.15,
+                  24.280000686645508
+                ],
+                "material": [
+                  "ffffff"
+                ]
+              }
+            ]
+          },
+          {
+            "side": 1,
+            "x": 1.28,
+            "y": 4.7,
+            "hits": [
+              {
+                "name": "Aerial batch · Tower corridor and three workshops · 942",
+                "distance": 0.48000068664551065,
+                "point": [
+                  153.493125,
+                  4.7,
+                  24.280000686645508
+                ],
+                "material": [
+                  "ffffff"
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "corridor-lock:gallery:1",
+        "title": "Farndon · locked double doors",
+        "point": [
+          154.773125,
+          -126
+        ],
+        "toward": [
+          154.773125,
+          24.4
+        ],
+        "probes": [
+          {
+            "side": 1,
+            "x": -1.3,
+            "y": 3.82,
+            "hits": [
+              {
+                "name": "Aerial batch · Tower corridor and three workshops · 936",
+                "distance": 0.47999725341796307,
+                "point": [
+                  153.47312499999998,
+                  3.82,
+                  -125.87999725341797
+                ],
+                "material": [
+                  "ffffff"
+                ]
+              }
+            ]
+          },
+          {
+            "side": 1,
+            "x": -1.3,
+            "y": 3.9,
+            "hits": [
+              {
+                "name": "Aerial batch · Tower corridor and three workshops · 936",
+                "distance": 0.47999725341796307,
+                "point": [
+                  153.47312499999998,
+                  3.9,
+                  -125.87999725341797
+                ],
+                "material": [
+                  "ffffff"
+                ]
+              }
+            ]
+          },
+          {
+            "side": 1,
+            "x": -1.3,
+            "y": 3.98,
+            "hits": [
+              {
+                "name": "Aerial batch · Tower corridor and three workshops · 936",
+                "distance": 0.47999725341796307,
+                "point": [
+                  153.47312499999998,
+                  3.98,
+                  -125.87999725341797
+                ],
+                "material": [
+                  "ffffff"
+                ]
+              }
+            ]
+          },
+          {
+            "side": 1,
+            "x": -1.3,
+            "y": 4.15,
+            "hits": [
+              {
+                "name": "Aerial batch · Tower corridor and three workshops · 936",
+                "distance": 0.47999725341796307,
+                "point": [
+                  153.47312499999998,
+                  4.15,
+                  -125.87999725341797
+                ],
+                "material": [
+                  "ffffff"
+                ]
+              }
+            ]
+          },
+          {
+            "side": 1,
+            "x": -1.3,
+            "y": 4.7,
+            "hits": [
+              {
+                "name": "Aerial batch · Tower corridor and three workshops · 936",
+                "distance": 0.47999725341796307,
+                "point": [
+                  153.47312499999998,
+                  4.7,
+                  -125.87999725341797
+                ],
+                "material": [
+                  "ffffff"
+                ]
+              }
+            ]
+          },
+          {
+            "side": 1,
+            "x": -0.61,
+            "y": 3.82,
+            "hits": [
+              {
+                "name": "Aerial batch · Tower corridor and three workshops · 936",
+                "distance": 0.47999725341796307,
+                "point": [
+                  154.16312499999998,
+                  3.82,
+                  -125.87999725341797
+                ],
+                "material": [
+                  "ffffff"
+                ]
+              }
+            ]
+          },
+          {
+            "side": 1,
+            "x": -0.61,
+            "y": 3.9,
+            "hits": [
+              {
+                "name": "Aerial batch · Tower corridor and three workshops · 936",
+                "distance": 0.47999725341796307,
+                "point": [
+                  154.16312499999998,
+                  3.9,
+                  -125.87999725341797
+                ],
+                "material": [
+                  "ffffff"
+                ]
+              }
+            ]
+          },
+          {
+            "side": 1,
+            "x": -0.61,
+            "y": 3.98,
+            "hits": [
+              {
+                "name": "Aerial batch · Tower corridor and three workshops · 936",
+                "distance": 0.47999725341796307,
+                "point": [
+                  154.16312499999998,
+                  3.98,
+                  -125.87999725341797
+                ],
+                "material": [
+                  "ffffff"
+                ]
+              }
+            ]
+          },
+          {
+            "side": 1,
+            "x": -0.61,
+            "y": 4.15,
+            "hits": [
+              {
+                "name": "Aerial batch · Tower corridor and three workshops · 936",
+                "distance": 0.47999725341796307,
+                "point": [
+                  154.16312499999998,
+                  4.15,
+                  -125.87999725341797
+                ],
+                "material": [
+                  "ffffff"
+                ]
+              }
+            ]
+          },
+          {
+            "side": 1,
+            "x": -0.61,
+            "y": 4.7,
+            "hits": [
+              {
+                "name": "Aerial batch · Tower corridor and three workshops · 936",
+                "distance": 0.47999725341796307,
+                "point": [
+                  154.16312499999998,
+                  4.7,
+                  -125.87999725341797
+                ],
+                "material": [
+                  "ffffff"
+                ]
+              }
+            ]
+          },
+          {
+            "side": 1,
+            "x": 0.03,
+            "y": 3.82,
+            "hits": [
+              {
+                "name": "Aerial batch · Tower corridor and three workshops · 936",
+                "distance": 0.47999725341796307,
+                "point": [
+                  154.803125,
+                  3.82,
+                  -125.87999725341797
+                ],
+                "material": [
+                  "ffffff"
+                ]
+              }
+            ]
+          },
+          {
+            "side": 1,
+            "x": 0.03,
+            "y": 3.9,
+            "hits": [
+              {
+                "name": "Aerial batch · Tower corridor and three workshops · 936",
+                "distance": 0.47999725341796307,
+                "point": [
+                  154.803125,
+                  3.9,
+                  -125.87999725341797
+                ],
+                "material": [
+                  "ffffff"
+                ]
+              }
+            ]
+          },
+          {
+            "side": 1,
+            "x": 0.03,
+            "y": 3.98,
+            "hits": [
+              {
+                "name": "Aerial batch · Tower corridor and three workshops · 936",
+                "distance": 0.47999725341796307,
+                "point": [
+                  154.803125,
+                  3.98,
+                  -125.87999725341797
+                ],
+                "material": [
+                  "ffffff"
+                ]
+              }
+            ]
+          },
+          {
+            "side": 1,
+            "x": 0.03,
+            "y": 4.15,
+            "hits": [
+              {
+                "name": "Aerial batch · Tower corridor and three workshops · 936",
+                "distance": 0.47999725341796307,
+                "point": [
+                  154.803125,
+                  4.15,
+                  -125.87999725341797
+                ],
+                "material": [
+                  "ffffff"
+                ]
+              }
+            ]
+          },
+          {
+            "side": 1,
+            "x": 0.03,
+            "y": 4.7,
+            "hits": [
+              {
+                "name": "Aerial batch · Tower corridor and three workshops · 936",
+                "distance": 0.47999725341796307,
+                "point": [
+                  154.803125,
+                  4.7,
+                  -125.87999725341797
+                ],
+                "material": [
+                  "ffffff"
+                ]
+              }
+            ]
+          },
+          {
+            "side": 1,
+            "x": 0.59,
+            "y": 3.82,
+            "hits": [
+              {
+                "name": "Aerial batch · Tower corridor and three workshops · 936",
+                "distance": 0.47999725341796307,
+                "point": [
+                  155.363125,
+                  3.82,
+                  -125.87999725341797
+                ],
+                "material": [
+                  "ffffff"
+                ]
+              }
+            ]
+          },
+          {
+            "side": 1,
+            "x": 0.59,
+            "y": 3.9,
+            "hits": [
+              {
+                "name": "Aerial batch · Tower corridor and three workshops · 936",
+                "distance": 0.47999725341796307,
+                "point": [
+                  155.363125,
+                  3.9,
+                  -125.87999725341797
+                ],
+                "material": [
+                  "ffffff"
+                ]
+              }
+            ]
+          },
+          {
+            "side": 1,
+            "x": 0.59,
+            "y": 3.98,
+            "hits": [
+              {
+                "name": "Aerial batch · Tower corridor and three workshops · 936",
+                "distance": 0.47999725341796307,
+                "point": [
+                  155.363125,
+                  3.98,
+                  -125.87999725341797
+                ],
+                "material": [
+                  "ffffff"
+                ]
+              }
+            ]
+          },
+          {
+            "side": 1,
+            "x": 0.59,
+            "y": 4.15,
+            "hits": [
+              {
+                "name": "Aerial batch · Tower corridor and three workshops · 936",
+                "distance": 0.47999725341796307,
+                "point": [
+                  155.363125,
+                  4.15,
+                  -125.87999725341797
+                ],
+                "material": [
+                  "ffffff"
+                ]
+              }
+            ]
+          },
+          {
+            "side": 1,
+            "x": 0.59,
+            "y": 4.7,
+            "hits": [
+              {
+                "name": "Aerial batch · Tower corridor and three workshops · 936",
+                "distance": 0.47999725341796307,
+                "point": [
+                  155.363125,
+                  4.7,
+                  -125.87999725341797
+                ],
+                "material": [
+                  "ffffff"
+                ]
+              }
+            ]
+          },
+          {
+            "side": 1,
+            "x": 1.28,
+            "y": 3.82,
+            "hits": [
+              {
+                "name": "Aerial batch · Tower corridor and three workshops · 936",
+                "distance": 0.47999725341796307,
+                "point": [
+                  156.053125,
+                  3.82,
+                  -125.87999725341797
+                ],
+                "material": [
+                  "ffffff"
+                ]
+              }
+            ]
+          },
+          {
+            "side": 1,
+            "x": 1.28,
+            "y": 3.9,
+            "hits": [
+              {
+                "name": "Aerial batch · Tower corridor and three workshops · 936",
+                "distance": 0.47999725341796307,
+                "point": [
+                  156.053125,
+                  3.9,
+                  -125.87999725341797
+                ],
+                "material": [
+                  "ffffff"
+                ]
+              }
+            ]
+          },
+          {
+            "side": 1,
+            "x": 1.28,
+            "y": 3.98,
+            "hits": [
+              {
+                "name": "Aerial batch · Tower corridor and three workshops · 936",
+                "distance": 0.47999725341796307,
+                "point": [
+                  156.053125,
+                  3.98,
+                  -125.87999725341797
+                ],
+                "material": [
+                  "ffffff"
+                ]
+              }
+            ]
+          },
+          {
+            "side": 1,
+            "x": 1.28,
+            "y": 4.15,
+            "hits": [
+              {
+                "name": "Aerial batch · Tower corridor and three workshops · 936",
+                "distance": 0.47999725341796307,
+                "point": [
+                  156.053125,
+                  4.15,
+                  -125.87999725341797
+                ],
+                "material": [
+                  "ffffff"
+                ]
+              }
+            ]
+          },
+          {
+            "side": 1,
+            "x": 1.28,
+            "y": 4.7,
+            "hits": [
+              {
+                "name": "Aerial batch · Tower corridor and three workshops · 936",
+                "distance": 0.47999725341796307,
+                "point": [
+                  156.053125,
+                  4.7,
+                  -125.87999725341797
+                ],
+                "material": [
+                  "ffffff"
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "corridor-lock:admin:0",
+        "title": "Redesmere · locked double doors",
+        "point": [
+          121.5,
+          9.8
+        ],
+        "toward": [
+          154.773125,
+          9.8
+        ],
+        "probes": [
+          {
+            "side": 1,
+            "x": -1.3,
+            "y": 3.82,
+            "hits": [
+              {
+                "name": "Locked door masonry header",
+                "distance": 0.48000000268220333,
+                "point": [
+                  121.61999999731779,
+                  3.82,
+                  11.100000000000001
+                ],
+                "material": [
+                  "ffffff"
+                ]
+              }
+            ]
+          },
+          {
+            "side": 1,
+            "x": -1.3,
+            "y": 3.9,
+            "hits": [
+              {
+                "name": "Locked door masonry header",
+                "distance": 0.48000000268220333,
+                "point": [
+                  121.61999999731779,
+                  3.9,
+                  11.100000000000001
+                ],
+                "material": [
+                  "ffffff"
+                ]
+              }
+            ]
+          },
+          {
+            "side": 1,
+            "x": -1.3,
+            "y": 3.98,
+            "hits": [
+              {
+                "name": "Locked door masonry header",
+                "distance": 0.48000000268220333,
+                "point": [
+                  121.61999999731779,
+                  3.98,
+                  11.100000000000001
+                ],
+                "material": [
+                  "ffffff"
+                ]
+              }
+            ]
+          },
+          {
+            "side": 1,
+            "x": -1.3,
+            "y": 4.15,
+            "hits": [
+              {
+                "name": "Locked door masonry header",
+                "distance": 0.48000000268220333,
+                "point": [
+                  121.61999999731779,
+                  4.15,
+                  11.100000000000001
+                ],
+                "material": [
+                  "ffffff"
+                ]
+              }
+            ]
+          },
+          {
+            "side": 1,
+            "x": -1.3,
+            "y": 4.7,
+            "hits": [
+              {
+                "name": "Locked door masonry header",
+                "distance": 0.48000000268220333,
+                "point": [
+                  121.61999999731779,
+                  4.7,
+                  11.100000000000001
+                ],
+                "material": [
+                  "ffffff"
+                ]
+              }
+            ]
+          },
+          {
+            "side": 1,
+            "x": -0.61,
+            "y": 3.82,
+            "hits": [
+              {
+                "name": "Locked door masonry header",
+                "distance": 0.48000000268220333,
+                "point": [
+                  121.61999999731779,
+                  3.82,
+                  10.41
+                ],
+                "material": [
+                  "ffffff"
+                ]
+              }
+            ]
+          },
+          {
+            "side": 1,
+            "x": -0.61,
+            "y": 3.9,
+            "hits": [
+              {
+                "name": "Locked door masonry header",
+                "distance": 0.48000000268220333,
+                "point": [
+                  121.61999999731779,
+                  3.9,
+                  10.41
+                ],
+                "material": [
+                  "ffffff"
+                ]
+              }
+            ]
+          },
+          {
+            "side": 1,
+            "x": -0.61,
+            "y": 3.98,
+            "hits": [
+              {
+                "name": "Locked door masonry header",
+                "distance": 0.48000000268220333,
+                "point": [
+                  121.61999999731779,
+                  3.98,
+                  10.41
+                ],
+                "material": [
+                  "ffffff"
+                ]
+              }
+            ]
+          },
+          {
+            "side": 1,
+            "x": -0.61,
+            "y": 4.15,
+            "hits": [
+              {
+                "name": "Locked door masonry header",
+                "distance": 0.48000000268220333,
+                "point": [
+                  121.61999999731779,
+                  4.15,
+                  10.41
+                ],
+                "material": [
+                  "ffffff"
+                ]
+              }
+            ]
+          },
+          {
+            "side": 1,
+            "x": -0.61,
+            "y": 4.7,
+            "hits": [
+              {
+                "name": "Locked door masonry header",
+                "distance": 0.48000000268220333,
+                "point": [
+                  121.61999999731779,
+                  4.7,
+                  10.41
+                ],
+                "material": [
+                  "ffffff"
+                ]
+              }
+            ]
+          },
+          {
+            "side": 1,
+            "x": 0.03,
+            "y": 3.82,
+            "hits": [
+              {
+                "name": "Locked door masonry header",
+                "distance": 0.48000000268220333,
+                "point": [
+                  121.61999999731779,
+                  3.82,
+                  9.770000000000001
+                ],
+                "material": [
+                  "ffffff"
+                ]
+              }
+            ]
+          },
+          {
+            "side": 1,
+            "x": 0.03,
+            "y": 3.9,
+            "hits": [
+              {
+                "name": "Locked door masonry header",
+                "distance": 0.48000000268220333,
+                "point": [
+                  121.61999999731779,
+                  3.9,
+                  9.770000000000001
+                ],
+                "material": [
+                  "ffffff"
+                ]
+              }
+            ]
+          },
+          {
+            "side": 1,
+            "x": 0.03,
+            "y": 3.98,
+            "hits": [
+              {
+                "name": "Locked door masonry header",
+                "distance": 0.48000000268220333,
+                "point": [
+                  121.61999999731779,
+                  3.98,
+                  9.770000000000001
+                ],
+                "material": [
+                  "ffffff"
+                ]
+              }
+            ]
+          },
+          {
+            "side": 1,
+            "x": 0.03,
+            "y": 4.15,
+            "hits": [
+              {
+                "name": "Locked door masonry header",
+                "distance": 0.48000000268220333,
+                "point": [
+                  121.61999999731779,
+                  4.15,
+                  9.770000000000001
+                ],
+                "material": [
+                  "ffffff"
+                ]
+              }
+            ]
+          },
+          {
+            "side": 1,
+            "x": 0.03,
+            "y": 4.7,
+            "hits": [
+              {
+                "name": "Locked door masonry header",
+                "distance": 0.48000000268220333,
+                "point": [
+                  121.61999999731779,
+                  4.7,
+                  9.770000000000001
+                ],
+                "material": [
+                  "ffffff"
+                ]
+              }
+            ]
+          },
+          {
+            "side": 1,
+            "x": 0.59,
+            "y": 3.82,
+            "hits": [
+              {
+                "name": "Locked door masonry header",
+                "distance": 0.48000000268220333,
+                "point": [
+                  121.61999999731779,
+                  3.82,
+                  9.21
+                ],
+                "material": [
+                  "ffffff"
+                ]
+              }
+            ]
+          },
+          {
+            "side": 1,
+            "x": 0.59,
+            "y": 3.9,
+            "hits": [
+              {
+                "name": "Locked door masonry header",
+                "distance": 0.48000000268220333,
+                "point": [
+                  121.61999999731779,
+                  3.9,
+                  9.21
+                ],
+                "material": [
+                  "ffffff"
+                ]
+              }
+            ]
+          },
+          {
+            "side": 1,
+            "x": 0.59,
+            "y": 3.98,
+            "hits": [
+              {
+                "name": "Locked door masonry header",
+                "distance": 0.48000000268220333,
+                "point": [
+                  121.61999999731779,
+                  3.98,
+                  9.21
+                ],
+                "material": [
+                  "ffffff"
+                ]
+              }
+            ]
+          },
+          {
+            "side": 1,
+            "x": 0.59,
+            "y": 4.15,
+            "hits": [
+              {
+                "name": "Locked door masonry header",
+                "distance": 0.48000000268220333,
+                "point": [
+                  121.61999999731779,
+                  4.15,
+                  9.21
+                ],
+                "material": [
+                  "ffffff"
+                ]
+              }
+            ]
+          },
+          {
+            "side": 1,
+            "x": 0.59,
+            "y": 4.7,
+            "hits": [
+              {
+                "name": "Locked door masonry header",
+                "distance": 0.48000000268220333,
+                "point": [
+                  121.61999999731779,
+                  4.7,
+                  9.21
+                ],
+                "material": [
+                  "ffffff"
+                ]
+              }
+            ]
+          },
+          {
+            "side": 1,
+            "x": 1.28,
+            "y": 3.82,
+            "hits": [
+              {
+                "name": "Locked door masonry header",
+                "distance": 0.48000000268220333,
+                "point": [
+                  121.61999999731779,
+                  3.82,
+                  8.520000000000001
+                ],
+                "material": [
+                  "ffffff"
+                ]
+              }
+            ]
+          },
+          {
+            "side": 1,
+            "x": 1.28,
+            "y": 3.9,
+            "hits": [
+              {
+                "name": "Locked door masonry header",
+                "distance": 0.48000000268220333,
+                "point": [
+                  121.61999999731779,
+                  3.9,
+                  8.520000000000001
+                ],
+                "material": [
+                  "ffffff"
+                ]
+              }
+            ]
+          },
+          {
+            "side": 1,
+            "x": 1.28,
+            "y": 3.98,
+            "hits": [
+              {
+                "name": "Locked door masonry header",
+                "distance": 0.48000000268220333,
+                "point": [
+                  121.61999999731779,
+                  3.98,
+                  8.520000000000001
+                ],
+                "material": [
+                  "ffffff"
+                ]
+              }
+            ]
+          },
+          {
+            "side": 1,
+            "x": 1.28,
+            "y": 4.15,
+            "hits": [
+              {
+                "name": "Locked door masonry header",
+                "distance": 0.48000000268220333,
+                "point": [
+                  121.61999999731779,
+                  4.15,
+                  8.520000000000001
+                ],
+                "material": [
+                  "ffffff"
+                ]
+              }
+            ]
+          },
+          {
+            "side": 1,
+            "x": 1.28,
+            "y": 4.7,
+            "hits": [
+              {
+                "name": "Locked door masonry header",
+                "distance": 0.48000000268220333,
+                "point": [
+                  121.61999999731779,
+                  4.7,
+                  8.520000000000001
+                ],
+                "material": [
+                  "ffffff"
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "corridor-lock:irby:1",
+        "title": "Irby / Ashley · locked double doors",
+        "point": [
+          210,
+          -66.6
+        ],
+        "toward": [
+          154.773125,
+          -66.6
+        ],
+        "probes": [
+          {
+            "side": 1,
+            "x": -1.3,
+            "y": 3.82,
+            "hits": [
+              {
+                "name": "Locked door masonry header",
+                "distance": 0.48000000268220333,
+                "point": [
+                  209.8800000026822,
+                  3.82,
+                  -67.89999999999999
+                ],
+                "material": [
+                  "ffffff"
+                ]
+              }
+            ]
+          },
+          {
+            "side": 1,
+            "x": -1.3,
+            "y": 3.9,
+            "hits": [
+              {
+                "name": "Locked door masonry header",
+                "distance": 0.48000000268220333,
+                "point": [
+                  209.8800000026822,
+                  3.9,
+                  -67.89999999999999
+                ],
+                "material": [
+                  "ffffff"
+                ]
+              }
+            ]
+          },
+          {
+            "side": 1,
+            "x": -1.3,
+            "y": 3.98,
+            "hits": [
+              {
+                "name": "Locked door masonry header",
+                "distance": 0.48000000268220333,
+                "point": [
+                  209.8800000026822,
+                  3.98,
+                  -67.89999999999999
+                ],
+                "material": [
+                  "ffffff"
+                ]
+              }
+            ]
+          },
+          {
+            "side": 1,
+            "x": -1.3,
+            "y": 4.15,
+            "hits": [
+              {
+                "name": "Locked door masonry header",
+                "distance": 0.48000000268220333,
+                "point": [
+                  209.8800000026822,
+                  4.15,
+                  -67.89999999999999
+                ],
+                "material": [
+                  "ffffff"
+                ]
+              }
+            ]
+          },
+          {
+            "side": 1,
+            "x": -1.3,
+            "y": 4.7,
+            "hits": [
+              {
+                "name": "Locked door masonry header",
+                "distance": 0.48000000268220333,
+                "point": [
+                  209.8800000026822,
+                  4.7,
+                  -67.89999999999999
+                ],
+                "material": [
+                  "ffffff"
+                ]
+              }
+            ]
+          },
+          {
+            "side": 1,
+            "x": -0.61,
+            "y": 3.82,
+            "hits": [
+              {
+                "name": "Locked door masonry header",
+                "distance": 0.48000000268220333,
+                "point": [
+                  209.8800000026822,
+                  3.82,
+                  -67.21
+                ],
+                "material": [
+                  "ffffff"
+                ]
+              }
+            ]
+          },
+          {
+            "side": 1,
+            "x": -0.61,
+            "y": 3.9,
+            "hits": [
+              {
+                "name": "Locked door masonry header",
+                "distance": 0.48000000268220333,
+                "point": [
+                  209.8800000026822,
+                  3.9,
+                  -67.21
+                ],
+                "material": [
+                  "ffffff"
+                ]
+              }
+            ]
+          },
+          {
+            "side": 1,
+            "x": -0.61,
+            "y": 3.98,
+            "hits": [
+              {
+                "name": "Locked door masonry header",
+                "distance": 0.48000000268220333,
+                "point": [
+                  209.8800000026822,
+                  3.98,
+                  -67.21
+                ],
+                "material": [
+                  "ffffff"
+                ]
+              }
+            ]
+          },
+          {
+            "side": 1,
+            "x": -0.61,
+            "y": 4.15,
+            "hits": [
+              {
+                "name": "Locked door masonry header",
+                "distance": 0.48000000268220333,
+                "point": [
+                  209.8800000026822,
+                  4.15,
+                  -67.21
+                ],
+                "material": [
+                  "ffffff"
+                ]
+              }
+            ]
+          },
+          {
+            "side": 1,
+            "x": -0.61,
+            "y": 4.7,
+            "hits": [
+              {
+                "name": "Locked door masonry header",
+                "distance": 0.48000000268220333,
+                "point": [
+                  209.8800000026822,
+                  4.7,
+                  -67.21
+                ],
+                "material": [
+                  "ffffff"
+                ]
+              }
+            ]
+          },
+          {
+            "side": 1,
+            "x": 0.03,
+            "y": 3.82,
+            "hits": [
+              {
+                "name": "Locked door masonry header",
+                "distance": 0.48000000268220333,
+                "point": [
+                  209.8800000026822,
+                  3.82,
+                  -66.57
+                ],
+                "material": [
+                  "ffffff"
+                ]
+              }
+            ]
+          },
+          {
+            "side": 1,
+            "x": 0.03,
+            "y": 3.9,
+            "hits": [
+              {
+                "name": "Locked door masonry header",
+                "distance": 0.48000000268220333,
+                "point": [
+                  209.8800000026822,
+                  3.9,
+                  -66.57
+                ],
+                "material": [
+                  "ffffff"
+                ]
+              }
+            ]
+          },
+          {
+            "side": 1,
+            "x": 0.03,
+            "y": 3.98,
+            "hits": [
+              {
+                "name": "Locked door masonry header",
+                "distance": 0.48000000268220333,
+                "point": [
+                  209.8800000026822,
+                  3.98,
+                  -66.57
+                ],
+                "material": [
+                  "ffffff"
+                ]
+              }
+            ]
+          },
+          {
+            "side": 1,
+            "x": 0.03,
+            "y": 4.15,
+            "hits": [
+              {
+                "name": "Locked door masonry header",
+                "distance": 0.48000000268220333,
+                "point": [
+                  209.8800000026822,
+                  4.15,
+                  -66.57
+                ],
+                "material": [
+                  "ffffff"
+                ]
+              }
+            ]
+          },
+          {
+            "side": 1,
+            "x": 0.03,
+            "y": 4.7,
+            "hits": [
+              {
+                "name": "Locked door masonry header",
+                "distance": 0.48000000268220333,
+                "point": [
+                  209.8800000026822,
+                  4.7,
+                  -66.57
+                ],
+                "material": [
+                  "ffffff"
+                ]
+              }
+            ]
+          },
+          {
+            "side": 1,
+            "x": 0.59,
+            "y": 3.82,
+            "hits": [
+              {
+                "name": "Locked door masonry header",
+                "distance": 0.48000000268220333,
+                "point": [
+                  209.8800000026822,
+                  3.82,
+                  -66.00999999999999
+                ],
+                "material": [
+                  "ffffff"
+                ]
+              }
+            ]
+          },
+          {
+            "side": 1,
+            "x": 0.59,
+            "y": 3.9,
+            "hits": [
+              {
+                "name": "Locked door masonry header",
+                "distance": 0.48000000268220333,
+                "point": [
+                  209.8800000026822,
+                  3.9,
+                  -66.00999999999999
+                ],
+                "material": [
+                  "ffffff"
+                ]
+              }
+            ]
+          },
+          {
+            "side": 1,
+            "x": 0.59,
+            "y": 3.98,
+            "hits": [
+              {
+                "name": "Locked door masonry header",
+                "distance": 0.48000000268220333,
+                "point": [
+                  209.8800000026822,
+                  3.98,
+                  -66.00999999999999
+                ],
+                "material": [
+                  "ffffff"
+                ]
+              }
+            ]
+          },
+          {
+            "side": 1,
+            "x": 0.59,
+            "y": 4.15,
+            "hits": [
+              {
+                "name": "Locked door masonry header",
+                "distance": 0.48000000268220333,
+                "point": [
+                  209.8800000026822,
+                  4.15,
+                  -66.00999999999999
+                ],
+                "material": [
+                  "ffffff"
+                ]
+              }
+            ]
+          },
+          {
+            "side": 1,
+            "x": 0.59,
+            "y": 4.7,
+            "hits": [
+              {
+                "name": "Locked door masonry header",
+                "distance": 0.48000000268220333,
+                "point": [
+                  209.8800000026822,
+                  4.7,
+                  -66.00999999999999
+                ],
+                "material": [
+                  "ffffff"
+                ]
+              }
+            ]
+          },
+          {
+            "side": 1,
+            "x": 1.28,
+            "y": 3.82,
+            "hits": [
+              {
+                "name": "Locked door masonry header",
+                "distance": 0.48000000268220333,
+                "point": [
+                  209.8800000026822,
+                  3.82,
+                  -65.32
+                ],
+                "material": [
+                  "ffffff"
+                ]
+              }
+            ]
+          },
+          {
+            "side": 1,
+            "x": 1.28,
+            "y": 3.9,
+            "hits": [
+              {
+                "name": "Locked door masonry header",
+                "distance": 0.48000000268220333,
+                "point": [
+                  209.8800000026822,
+                  3.9,
+                  -65.32
+                ],
+                "material": [
+                  "ffffff"
+                ]
+              }
+            ]
+          },
+          {
+            "side": 1,
+            "x": 1.28,
+            "y": 3.98,
+            "hits": [
+              {
+                "name": "Locked door masonry header",
+                "distance": 0.48000000268220333,
+                "point": [
+                  209.8800000026822,
+                  3.98,
+                  -65.32
+                ],
+                "material": [
+                  "ffffff"
+                ]
+              }
+            ]
+          },
+          {
+            "side": 1,
+            "x": 1.28,
+            "y": 4.15,
+            "hits": [
+              {
+                "name": "Locked door masonry header",
+                "distance": 0.48000000268220333,
+                "point": [
+                  209.8800000026822,
+                  4.15,
+                  -65.32
+                ],
+                "material": [
+                  "ffffff"
+                ]
+              }
+            ]
+          },
+          {
+            "side": 1,
+            "x": 1.28,
+            "y": 4.7,
+            "hits": [
+              {
+                "name": "Locked door masonry header",
+                "distance": 0.48000000268220333,
+                "point": [
+                  209.8800000026822,
+                  4.7,
+                  -65.32
+                ],
+                "material": [
+                  "ffffff"
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "corridor-lock:diagonal:1",
+        "title": "Upton / Frith / Oscroft · locked double doors",
+        "point": [
+          100,
+          -173.4
+        ],
+        "toward": [
+          156.3,
+          -117.1
+        ],
+        "probes": [
+          {
+            "side": 1,
+            "x": -1.3,
+            "y": 3.82,
+            "hits": [
+              {
+                "name": "Aerial batch · Tower corridor and three workshops · 940",
+                "distance": 0.4799948620626961,
+                "point": [
+                  99.16561763127018,
+                  3.82,
+                  -172.3959047376448
+                ],
+                "material": [
+                  "ffffff"
+                ]
+              }
+            ]
+          },
+          {
+            "side": 1,
+            "x": -1.3,
+            "y": 3.9,
+            "hits": [
+              {
+                "name": "Aerial batch · Tower corridor and three workshops · 940",
+                "distance": 0.4799948620626961,
+                "point": [
+                  99.16561763127018,
+                  3.9,
+                  -172.3959047376448
+                ],
+                "material": [
+                  "ffffff"
+                ]
+              }
+            ]
+          },
+          {
+            "side": 1,
+            "x": -1.3,
+            "y": 3.98,
+            "hits": [
+              {
+                "name": "Aerial batch · Tower corridor and three workshops · 940",
+                "distance": 0.4799948620626961,
+                "point": [
+                  99.16561763127018,
+                  3.98,
+                  -172.3959047376448
+                ],
+                "material": [
+                  "ffffff"
+                ]
+              }
+            ]
+          },
+          {
+            "side": 1,
+            "x": -1.3,
+            "y": 4.15,
+            "hits": [
+              {
+                "name": "Aerial batch · Tower corridor and three workshops · 940",
+                "distance": 0.4799948620626961,
+                "point": [
+                  99.16561763127018,
+                  4.15,
+                  -172.3959047376448
+                ],
+                "material": [
+                  "ffffff"
+                ]
+              }
+            ]
+          },
+          {
+            "side": 1,
+            "x": -1.3,
+            "y": 4.7,
+            "hits": [
+              {
+                "name": "Aerial batch · Tower corridor and three workshops · 940",
+                "distance": 0.4799948620626961,
+                "point": [
+                  99.16561763127018,
+                  4.7,
+                  -172.3959047376448
+                ],
+                "material": [
+                  "ffffff"
+                ]
+              }
+            ]
+          },
+          {
+            "side": 1,
+            "x": -0.61,
+            "y": 3.82,
+            "hits": [
+              {
+                "name": "Aerial batch · Tower corridor and three workshops · 940",
+                "distance": 0.47999717680764303,
+                "point": [
+                  99.65351967351705,
+                  3.82,
+                  -172.88381005343535
+                ],
+                "material": [
+                  "ffffff"
+                ]
+              }
+            ]
+          },
+          {
+            "side": 1,
+            "x": -0.61,
+            "y": 3.9,
+            "hits": [
+              {
+                "name": "Aerial batch · Tower corridor and three workshops · 940",
+                "distance": 0.47999717680764303,
+                "point": [
+                  99.65351967351705,
+                  3.9,
+                  -172.88381005343535
+                ],
+                "material": [
+                  "ffffff"
+                ]
+              }
+            ]
+          },
+          {
+            "side": 1,
+            "x": -0.61,
+            "y": 3.98,
+            "hits": [
+              {
+                "name": "Aerial batch · Tower corridor and three workshops · 940",
+                "distance": 0.47999717680764303,
+                "point": [
+                  99.65351967351705,
+                  3.98,
+                  -172.88381005343535
+                ],
+                "material": [
+                  "ffffff"
+                ]
+              }
+            ]
+          },
+          {
+            "side": 1,
+            "x": -0.61,
+            "y": 4.15,
+            "hits": [
+              {
+                "name": "Aerial batch · Tower corridor and three workshops · 940",
+                "distance": 0.47999717680764303,
+                "point": [
+                  99.65351967351705,
+                  4.15,
+                  -172.88381005343535
+                ],
+                "material": [
+                  "ffffff"
+                ]
+              }
+            ]
+          },
+          {
+            "side": 1,
+            "x": -0.61,
+            "y": 4.7,
+            "hits": [
+              {
+                "name": "Aerial batch · Tower corridor and three workshops · 940",
+                "distance": 0.47999717680764303,
+                "point": [
+                  99.65351967351705,
+                  4.7,
+                  -172.88381005343535
+                ],
+                "material": [
+                  "ffffff"
+                ]
+              }
+            ]
+          },
+          {
+            "side": 1,
+            "x": 0.03,
+            "y": 3.82,
+            "hits": [
+              {
+                "name": "Aerial batch · Tower corridor and three workshops · 940",
+                "distance": 0.479999323817407,
+                "point": [
+                  100.10606649531128,
+                  3.82,
+                  -173.33635991155992
+                ],
+                "material": [
+                  "ffffff"
+                ]
+              }
+            ]
+          },
+          {
+            "side": 1,
+            "x": 0.03,
+            "y": 3.9,
+            "hits": [
+              {
+                "name": "Aerial batch · Tower corridor and three workshops · 940",
+                "distance": 0.479999323817407,
+                "point": [
+                  100.10606649531128,
+                  3.9,
+                  -173.33635991155992
+                ],
+                "material": [
+                  "ffffff"
+                ]
+              }
+            ]
+          },
+          {
+            "side": 1,
+            "x": 0.03,
+            "y": 3.98,
+            "hits": [
+              {
+                "name": "Aerial batch · Tower corridor and three workshops · 940",
+                "distance": 0.479999323817407,
+                "point": [
+                  100.10606649531128,
+                  3.98,
+                  -173.33635991155992
+                ],
+                "material": [
+                  "ffffff"
+                ]
+              }
+            ]
+          },
+          {
+            "side": 1,
+            "x": 0.03,
+            "y": 4.15,
+            "hits": [
+              {
+                "name": "Aerial batch · Tower corridor and three workshops · 940",
+                "distance": 0.479999323817407,
+                "point": [
+                  100.10606649531128,
+                  4.15,
+                  -173.33635991155992
+                ],
+                "material": [
+                  "ffffff"
+                ]
+              }
+            ]
+          },
+          {
+            "side": 1,
+            "x": 0.03,
+            "y": 4.7,
+            "hits": [
+              {
+                "name": "Aerial batch · Tower corridor and three workshops · 940",
+                "distance": 0.479999323817407,
+                "point": [
+                  100.10606649531128,
+                  4.7,
+                  -173.33635991155992
+                ],
+                "material": [
+                  "ffffff"
+                ]
+              }
+            ]
+          },
+          {
+            "side": 1,
+            "x": 0.59,
+            "y": 3.82,
+            "hits": [
+              {
+                "name": "Aerial batch · Tower corridor and three workshops · 940",
+                "distance": 0.48000120245098066,
+                "point": [
+                  100.50204496438121,
+                  3.82,
+                  -173.73234103741893
+                ],
+                "material": [
+                  "ffffff"
+                ]
+              }
+            ]
+          },
+          {
+            "side": 1,
+            "x": 0.59,
+            "y": 3.9,
+            "hits": [
+              {
+                "name": "Aerial batch · Tower corridor and three workshops · 940",
+                "distance": 0.48000120245098066,
+                "point": [
+                  100.50204496438121,
+                  3.9,
+                  -173.73234103741893
+                ],
+                "material": [
+                  "ffffff"
+                ]
+              }
+            ]
+          },
+          {
+            "side": 1,
+            "x": 0.59,
+            "y": 3.98,
+            "hits": [
+              {
+                "name": "Aerial batch · Tower corridor and three workshops · 940",
+                "distance": 0.48000120245098066,
+                "point": [
+                  100.50204496438121,
+                  3.98,
+                  -173.73234103741893
+                ],
+                "material": [
+                  "ffffff"
+                ]
+              }
+            ]
+          },
+          {
+            "side": 1,
+            "x": 0.59,
+            "y": 4.15,
+            "hits": [
+              {
+                "name": "Aerial batch · Tower corridor and three workshops · 940",
+                "distance": 0.48000120245098066,
+                "point": [
+                  100.50204496438121,
+                  4.15,
+                  -173.73234103741893
+                ],
+                "material": [
+                  "ffffff"
+                ]
+              }
+            ]
+          },
+          {
+            "side": 1,
+            "x": 0.59,
+            "y": 4.7,
+            "hits": [
+              {
+                "name": "Aerial batch · Tower corridor and three workshops · 940",
+                "distance": 0.48000120245098066,
+                "point": [
+                  100.50204496438121,
+                  4.7,
+                  -173.73234103741893
+                ],
+                "material": [
+                  "ffffff"
+                ]
+              }
+            ]
+          },
+          {
+            "side": 1,
+            "x": 1.28,
+            "y": 3.82,
+            "hits": [
+              {
+                "name": "Aerial batch · Tower corridor and three workshops · 940",
+                "distance": 0.4800035171958974,
+                "point": [
+                  100.9899470066281,
+                  3.82,
+                  -174.2202463532095
+                ],
+                "material": [
+                  "ffffff"
+                ]
+              }
+            ]
+          },
+          {
+            "side": 1,
+            "x": 1.28,
+            "y": 3.9,
+            "hits": [
+              {
+                "name": "Aerial batch · Tower corridor and three workshops · 940",
+                "distance": 0.4800035171958974,
+                "point": [
+                  100.9899470066281,
+                  3.9,
+                  -174.2202463532095
+                ],
+                "material": [
+                  "ffffff"
+                ]
+              }
+            ]
+          },
+          {
+            "side": 1,
+            "x": 1.28,
+            "y": 3.98,
+            "hits": [
+              {
+                "name": "Aerial batch · Tower corridor and three workshops · 940",
+                "distance": 0.4800035171958974,
+                "point": [
+                  100.9899470066281,
+                  3.98,
+                  -174.2202463532095
+                ],
+                "material": [
+                  "ffffff"
+                ]
+              }
+            ]
+          },
+          {
+            "side": 1,
+            "x": 1.28,
+            "y": 4.15,
+            "hits": [
+              {
+                "name": "Aerial batch · Tower corridor and three workshops · 940",
+                "distance": 0.4800035171958974,
+                "point": [
+                  100.9899470066281,
+                  4.15,
+                  -174.2202463532095
+                ],
+                "material": [
+                  "ffffff"
+                ]
+              }
+            ]
+          },
+          {
+            "side": 1,
+            "x": 1.28,
+            "y": 4.7,
+            "hits": [
+              {
+                "name": "Aerial batch · Tower corridor and three workshops · 940",
+                "distance": 0.4800035171958974,
+                "point": [
+                  100.9899470066281,
+                  4.7,
+                  -174.2202463532095
+                ],
+                "material": [
+                  "ffffff"
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "corridor-lock:grafton:1",
+        "title": "Grafton / Edge · locked double doors",
+        "point": [
+          106,
+          -142.88972881355932
+        ],
+        "toward": [
+          130.51027118644066,
+          -142.88972881355932
+        ],
+        "probes": [
+          {
+            "side": 1,
+            "x": -1.3,
+            "y": 3.82,
+            "hits": [
+              {
+                "name": "Aerial batch · Tower corridor and three workshops · 940",
+                "distance": 0.47999725341796307,
+                "point": [
+                  106.12000274658203,
+                  3.82,
+                  -141.5897288135593
+                ],
+                "material": [
+                  "ffffff"
+                ]
+              }
+            ]
+          },
+          {
+            "side": 1,
+            "x": -1.3,
+            "y": 3.9,
+            "hits": [
+              {
+                "name": "Aerial batch · Tower corridor and three workshops · 940",
+                "distance": 0.47999725341796307,
+                "point": [
+                  106.12000274658203,
+                  3.9,
+                  -141.5897288135593
+                ],
+                "material": [
+                  "ffffff"
+                ]
+              }
+            ]
+          },
+          {
+            "side": 1,
+            "x": -1.3,
+            "y": 3.98,
+            "hits": [
+              {
+                "name": "Aerial batch · Tower corridor and three workshops · 940",
+                "distance": 0.47999725341796307,
+                "point": [
+                  106.12000274658203,
+                  3.98,
+                  -141.5897288135593
+                ],
+                "material": [
+                  "ffffff"
+                ]
+              }
+            ]
+          },
+          {
+            "side": 1,
+            "x": -1.3,
+            "y": 4.15,
+            "hits": [
+              {
+                "name": "Aerial batch · Tower corridor and three workshops · 940",
+                "distance": 0.47999725341796307,
+                "point": [
+                  106.12000274658203,
+                  4.15,
+                  -141.5897288135593
+                ],
+                "material": [
+                  "ffffff"
+                ]
+              }
+            ]
+          },
+          {
+            "side": 1,
+            "x": -1.3,
+            "y": 4.7,
+            "hits": [
+              {
+                "name": "Aerial batch · Tower corridor and three workshops · 940",
+                "distance": 0.47999725341796307,
+                "point": [
+                  106.12000274658203,
+                  4.7,
+                  -141.5897288135593
+                ],
+                "material": [
+                  "ffffff"
+                ]
+              }
+            ]
+          },
+          {
+            "side": 1,
+            "x": -0.61,
+            "y": 3.82,
+            "hits": [
+              {
+                "name": "Aerial batch · Tower corridor and three workshops · 940",
+                "distance": 0.47999725341796307,
+                "point": [
+                  106.12000274658203,
+                  3.82,
+                  -142.2797288135593
+                ],
+                "material": [
+                  "ffffff"
+                ]
+              }
+            ]
+          },
+          {
+            "side": 1,
+            "x": -0.61,
+            "y": 3.9,
+            "hits": [
+              {
+                "name": "Aerial batch · Tower corridor and three workshops · 940",
+                "distance": 0.47999725341796307,
+                "point": [
+                  106.12000274658203,
+                  3.9,
+                  -142.2797288135593
+                ],
+                "material": [
+                  "ffffff"
+                ]
+              }
+            ]
+          },
+          {
+            "side": 1,
+            "x": -0.61,
+            "y": 3.98,
+            "hits": [
+              {
+                "name": "Aerial batch · Tower corridor and three workshops · 940",
+                "distance": 0.47999725341796307,
+                "point": [
+                  106.12000274658203,
+                  3.98,
+                  -142.2797288135593
+                ],
+                "material": [
+                  "ffffff"
+                ]
+              }
+            ]
+          },
+          {
+            "side": 1,
+            "x": -0.61,
+            "y": 4.15,
+            "hits": [
+              {
+                "name": "Aerial batch · Tower corridor and three workshops · 940",
+                "distance": 0.47999725341796307,
+                "point": [
+                  106.12000274658203,
+                  4.15,
+                  -142.2797288135593
+                ],
+                "material": [
+                  "ffffff"
+                ]
+              }
+            ]
+          },
+          {
+            "side": 1,
+            "x": -0.61,
+            "y": 4.7,
+            "hits": [
+              {
+                "name": "Aerial batch · Tower corridor and three workshops · 940",
+                "distance": 0.47999725341796307,
+                "point": [
+                  106.12000274658203,
+                  4.7,
+                  -142.2797288135593
+                ],
+                "material": [
+                  "ffffff"
+                ]
+              }
+            ]
+          },
+          {
+            "side": 1,
+            "x": 0.03,
+            "y": 3.82,
+            "hits": [
+              {
+                "name": "Aerial batch · Tower corridor and three workshops · 940",
+                "distance": 0.47999725341796307,
+                "point": [
+                  106.12000274658203,
+                  3.82,
+                  -142.91972881355932
+                ],
+                "material": [
+                  "ffffff"
+                ]
+              }
+            ]
+          },
+          {
+            "side": 1,
+            "x": 0.03,
+            "y": 3.9,
+            "hits": [
+              {
+                "name": "Aerial batch · Tower corridor and three workshops · 940",
+                "distance": 0.47999725341796307,
+                "point": [
+                  106.12000274658203,
+                  3.9,
+                  -142.91972881355932
+                ],
+                "material": [
+                  "ffffff"
+                ]
+              }
+            ]
+          },
+          {
+            "side": 1,
+            "x": 0.03,
+            "y": 3.98,
+            "hits": [
+              {
+                "name": "Aerial batch · Tower corridor and three workshops · 940",
+                "distance": 0.47999725341796307,
+                "point": [
+                  106.12000274658203,
+                  3.98,
+                  -142.91972881355932
+                ],
+                "material": [
+                  "ffffff"
+                ]
+              }
+            ]
+          },
+          {
+            "side": 1,
+            "x": 0.03,
+            "y": 4.15,
+            "hits": [
+              {
+                "name": "Aerial batch · Tower corridor and three workshops · 940",
+                "distance": 0.47999725341796307,
+                "point": [
+                  106.12000274658203,
+                  4.15,
+                  -142.91972881355932
+                ],
+                "material": [
+                  "ffffff"
+                ]
+              }
+            ]
+          },
+          {
+            "side": 1,
+            "x": 0.03,
+            "y": 4.7,
+            "hits": [
+              {
+                "name": "Aerial batch · Tower corridor and three workshops · 940",
+                "distance": 0.47999725341796307,
+                "point": [
+                  106.12000274658203,
+                  4.7,
+                  -142.91972881355932
+                ],
+                "material": [
+                  "ffffff"
+                ]
+              }
+            ]
+          },
+          {
+            "side": 1,
+            "x": 0.59,
+            "y": 3.82,
+            "hits": [
+              {
+                "name": "Aerial batch · Tower corridor and three workshops · 940",
+                "distance": 0.47999725341796307,
+                "point": [
+                  106.12000274658203,
+                  3.82,
+                  -143.47972881355932
+                ],
+                "material": [
+                  "ffffff"
+                ]
+              }
+            ]
+          },
+          {
+            "side": 1,
+            "x": 0.59,
+            "y": 3.9,
+            "hits": [
+              {
+                "name": "Aerial batch · Tower corridor and three workshops · 940",
+                "distance": 0.47999725341796307,
+                "point": [
+                  106.12000274658203,
+                  3.9,
+                  -143.47972881355932
+                ],
+                "material": [
+                  "ffffff"
+                ]
+              }
+            ]
+          },
+          {
+            "side": 1,
+            "x": 0.59,
+            "y": 3.98,
+            "hits": [
+              {
+                "name": "Aerial batch · Tower corridor and three workshops · 940",
+                "distance": 0.47999725341796307,
+                "point": [
+                  106.12000274658203,
+                  3.98,
+                  -143.47972881355932
+                ],
+                "material": [
+                  "ffffff"
+                ]
+              }
+            ]
+          },
+          {
+            "side": 1,
+            "x": 0.59,
+            "y": 4.15,
+            "hits": [
+              {
+                "name": "Aerial batch · Tower corridor and three workshops · 940",
+                "distance": 0.47999725341796307,
+                "point": [
+                  106.12000274658203,
+                  4.15,
+                  -143.47972881355932
+                ],
+                "material": [
+                  "ffffff"
+                ]
+              }
+            ]
+          },
+          {
+            "side": 1,
+            "x": 0.59,
+            "y": 4.7,
+            "hits": [
+              {
+                "name": "Aerial batch · Tower corridor and three workshops · 940",
+                "distance": 0.47999725341796307,
+                "point": [
+                  106.12000274658203,
+                  4.7,
+                  -143.47972881355932
+                ],
+                "material": [
+                  "ffffff"
+                ]
+              }
+            ]
+          },
+          {
+            "side": 1,
+            "x": 1.28,
+            "y": 3.82,
+            "hits": [
+              {
+                "name": "Aerial batch · Tower corridor and three workshops · 940",
+                "distance": 0.47999725341796307,
+                "point": [
+                  106.12000274658203,
+                  3.82,
+                  -144.16972881355932
+                ],
+                "material": [
+                  "ffffff"
+                ]
+              }
+            ]
+          },
+          {
+            "side": 1,
+            "x": 1.28,
+            "y": 3.9,
+            "hits": [
+              {
+                "name": "Aerial batch · Tower corridor and three workshops · 940",
+                "distance": 0.47999725341796307,
+                "point": [
+                  106.12000274658203,
+                  3.9,
+                  -144.16972881355932
+                ],
+                "material": [
+                  "ffffff"
+                ]
+              }
+            ]
+          },
+          {
+            "side": 1,
+            "x": 1.28,
+            "y": 3.98,
+            "hits": [
+              {
+                "name": "Aerial batch · Tower corridor and three workshops · 940",
+                "distance": 0.47999725341796307,
+                "point": [
+                  106.12000274658203,
+                  3.98,
+                  -144.16972881355932
+                ],
+                "material": [
+                  "ffffff"
+                ]
+              }
+            ]
+          },
+          {
+            "side": 1,
+            "x": 1.28,
+            "y": 4.15,
+            "hits": [
+              {
+                "name": "Aerial batch · Tower corridor and three workshops · 940",
+                "distance": 0.47999725341796307,
+                "point": [
+                  106.12000274658203,
+                  4.15,
+                  -144.16972881355932
+                ],
+                "material": [
+                  "ffffff"
+                ]
+              }
+            ]
+          },
+          {
+            "side": 1,
+            "x": 1.28,
+            "y": 4.7,
+            "hits": [
+              {
+                "name": "Aerial batch · Tower corridor and three workshops · 940",
+                "distance": 0.47999725341796307,
+                "point": [
+                  106.12000274658203,
+                  4.7,
+                  -144.16972881355932
+                ],
+                "material": [
+                  "ffffff"
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "corridor-lock:witby:1",
+        "title": "Witby · locked double doors",
+        "point": [
+          115.60000000000001,
+          -187
+        ],
+        "toward": [
+          115.60000000000001,
+          -157.79999999999995
+        ],
+        "probes": [
+          {
+            "side": 1,
+            "x": -1.3,
+            "y": 3.82,
+            "hits": [
+              {
+                "name": "Aerial batch · Tower corridor and three workshops · 940",
+                "distance": 0.4800048828124943,
+                "point": [
+                  114.30000000000001,
+                  3.82,
+                  -186.8800048828125
+                ],
+                "material": [
+                  "ffffff"
+                ]
+              }
+            ]
+          },
+          {
+            "side": 1,
+            "x": -1.3,
+            "y": 3.9,
+            "hits": [
+              {
+                "name": "Aerial batch · Tower corridor and three workshops · 940",
+                "distance": 0.4800048828124943,
+                "point": [
+                  114.30000000000001,
+                  3.9,
+                  -186.8800048828125
+                ],
+                "material": [
+                  "ffffff"
+                ]
+              }
+            ]
+          },
+          {
+            "side": 1,
+            "x": -1.3,
+            "y": 3.98,
+            "hits": [
+              {
+                "name": "Aerial batch · Tower corridor and three workshops · 940",
+                "distance": 0.4800048828124943,
+                "point": [
+                  114.30000000000001,
+                  3.98,
+                  -186.8800048828125
+                ],
+                "material": [
+                  "ffffff"
+                ]
+              }
+            ]
+          },
+          {
+            "side": 1,
+            "x": -1.3,
+            "y": 4.15,
+            "hits": [
+              {
+                "name": "Aerial batch · Tower corridor and three workshops · 940",
+                "distance": 0.4800048828124943,
+                "point": [
+                  114.30000000000001,
+                  4.15,
+                  -186.8800048828125
+                ],
+                "material": [
+                  "ffffff"
+                ]
+              }
+            ]
+          },
+          {
+            "side": 1,
+            "x": -1.3,
+            "y": 4.7,
+            "hits": [
+              {
+                "name": "Aerial batch · Tower corridor and three workshops · 940",
+                "distance": 0.4800048828124943,
+                "point": [
+                  114.30000000000001,
+                  4.7,
+                  -186.8800048828125
+                ],
+                "material": [
+                  "ffffff"
+                ]
+              }
+            ]
+          },
+          {
+            "side": 1,
+            "x": -0.61,
+            "y": 3.82,
+            "hits": [
+              {
+                "name": "Aerial batch · Tower corridor and three workshops · 940",
+                "distance": 0.4800048828124943,
+                "point": [
+                  114.99000000000001,
+                  3.82,
+                  -186.8800048828125
+                ],
+                "material": [
+                  "ffffff"
+                ]
+              }
+            ]
+          },
+          {
+            "side": 1,
+            "x": -0.61,
+            "y": 3.9,
+            "hits": [
+              {
+                "name": "Aerial batch · Tower corridor and three workshops · 940",
+                "distance": 0.4800048828124943,
+                "point": [
+                  114.99000000000001,
+                  3.9,
+                  -186.8800048828125
+                ],
+                "material": [
+                  "ffffff"
+                ]
+              }
+            ]
+          },
+          {
+            "side": 1,
+            "x": -0.61,
+            "y": 3.98,
+            "hits": [
+              {
+                "name": "Aerial batch · Tower corridor and three workshops · 940",
+                "distance": 0.4800048828124943,
+                "point": [
+                  114.99000000000001,
+                  3.98,
+                  -186.8800048828125
+                ],
+                "material": [
+                  "ffffff"
+                ]
+              }
+            ]
+          },
+          {
+            "side": 1,
+            "x": -0.61,
+            "y": 4.15,
+            "hits": [
+              {
+                "name": "Aerial batch · Tower corridor and three workshops · 940",
+                "distance": 0.4800048828124943,
+                "point": [
+                  114.99000000000001,
+                  4.15,
+                  -186.8800048828125
+                ],
+                "material": [
+                  "ffffff"
+                ]
+              }
+            ]
+          },
+          {
+            "side": 1,
+            "x": -0.61,
+            "y": 4.7,
+            "hits": [
+              {
+                "name": "Aerial batch · Tower corridor and three workshops · 940",
+                "distance": 0.4800048828124943,
+                "point": [
+                  114.99000000000001,
+                  4.7,
+                  -186.8800048828125
+                ],
+                "material": [
+                  "ffffff"
+                ]
+              }
+            ]
+          },
+          {
+            "side": 1,
+            "x": 0.03,
+            "y": 3.82,
+            "hits": [
+              {
+                "name": "Aerial batch · Tower corridor and three workshops · 940",
+                "distance": 0.4800048828124943,
+                "point": [
+                  115.63000000000001,
+                  3.82,
+                  -186.8800048828125
+                ],
+                "material": [
+                  "ffffff"
+                ]
+              }
+            ]
+          },
+          {
+            "side": 1,
+            "x": 0.03,
+            "y": 3.9,
+            "hits": [
+              {
+                "name": "Aerial batch · Tower corridor and three workshops · 940",
+                "distance": 0.4800048828124943,
+                "point": [
+                  115.63000000000001,
+                  3.9,
+                  -186.8800048828125
+                ],
+                "material": [
+                  "ffffff"
+                ]
+              }
+            ]
+          },
+          {
+            "side": 1,
+            "x": 0.03,
+            "y": 3.98,
+            "hits": [
+              {
+                "name": "Aerial batch · Tower corridor and three workshops · 940",
+                "distance": 0.4800048828124943,
+                "point": [
+                  115.63000000000001,
+                  3.98,
+                  -186.8800048828125
+                ],
+                "material": [
+                  "ffffff"
+                ]
+              }
+            ]
+          },
+          {
+            "side": 1,
+            "x": 0.03,
+            "y": 4.15,
+            "hits": [
+              {
+                "name": "Aerial batch · Tower corridor and three workshops · 940",
+                "distance": 0.4800048828124943,
+                "point": [
+                  115.63000000000001,
+                  4.15,
+                  -186.8800048828125
+                ],
+                "material": [
+                  "ffffff"
+                ]
+              }
+            ]
+          },
+          {
+            "side": 1,
+            "x": 0.03,
+            "y": 4.7,
+            "hits": [
+              {
+                "name": "Aerial batch · Tower corridor and three workshops · 940",
+                "distance": 0.4800048828124943,
+                "point": [
+                  115.63000000000001,
+                  4.7,
+                  -186.8800048828125
+                ],
+                "material": [
+                  "ffffff"
+                ]
+              }
+            ]
+          },
+          {
+            "side": 1,
+            "x": 0.59,
+            "y": 3.82,
+            "hits": [
+              {
+                "name": "Aerial batch · Tower corridor and three workshops · 940",
+                "distance": 0.4800048828124943,
+                "point": [
+                  116.19000000000001,
+                  3.82,
+                  -186.8800048828125
+                ],
+                "material": [
+                  "ffffff"
+                ]
+              }
+            ]
+          },
+          {
+            "side": 1,
+            "x": 0.59,
+            "y": 3.9,
+            "hits": [
+              {
+                "name": "Aerial batch · Tower corridor and three workshops · 940",
+                "distance": 0.4800048828124943,
+                "point": [
+                  116.19000000000001,
+                  3.9,
+                  -186.8800048828125
+                ],
+                "material": [
+                  "ffffff"
+                ]
+              }
+            ]
+          },
+          {
+            "side": 1,
+            "x": 0.59,
+            "y": 3.98,
+            "hits": [
+              {
+                "name": "Aerial batch · Tower corridor and three workshops · 940",
+                "distance": 0.4800048828124943,
+                "point": [
+                  116.19000000000001,
+                  3.98,
+                  -186.8800048828125
+                ],
+                "material": [
+                  "ffffff"
+                ]
+              }
+            ]
+          },
+          {
+            "side": 1,
+            "x": 0.59,
+            "y": 4.15,
+            "hits": [
+              {
+                "name": "Aerial batch · Tower corridor and three workshops · 940",
+                "distance": 0.4800048828124943,
+                "point": [
+                  116.19000000000001,
+                  4.15,
+                  -186.8800048828125
+                ],
+                "material": [
+                  "ffffff"
+                ]
+              }
+            ]
+          },
+          {
+            "side": 1,
+            "x": 0.59,
+            "y": 4.7,
+            "hits": [
+              {
+                "name": "Aerial batch · Tower corridor and three workshops · 940",
+                "distance": 0.4800048828124943,
+                "point": [
+                  116.19000000000001,
+                  4.7,
+                  -186.8800048828125
+                ],
+                "material": [
+                  "ffffff"
+                ]
+              }
+            ]
+          },
+          {
+            "side": 1,
+            "x": 1.28,
+            "y": 3.82,
+            "hits": [
+              {
+                "name": "Aerial batch · Tower corridor and three workshops · 940",
+                "distance": 0.4800048828124943,
+                "point": [
+                  116.88000000000001,
+                  3.82,
+                  -186.8800048828125
+                ],
+                "material": [
+                  "ffffff"
+                ]
+              }
+            ]
+          },
+          {
+            "side": 1,
+            "x": 1.28,
+            "y": 3.9,
+            "hits": [
+              {
+                "name": "Aerial batch · Tower corridor and three workshops · 940",
+                "distance": 0.4800048828124943,
+                "point": [
+                  116.88000000000001,
+                  3.9,
+                  -186.8800048828125
+                ],
+                "material": [
+                  "ffffff"
+                ]
+              }
+            ]
+          },
+          {
+            "side": 1,
+            "x": 1.28,
+            "y": 3.98,
+            "hits": [
+              {
+                "name": "Aerial batch · Tower corridor and three workshops · 940",
+                "distance": 0.4800048828124943,
+                "point": [
+                  116.88000000000001,
+                  3.98,
+                  -186.8800048828125
+                ],
+                "material": [
+                  "ffffff"
+                ]
+              }
+            ]
+          },
+          {
+            "side": 1,
+            "x": 1.28,
+            "y": 4.15,
+            "hits": [
+              {
+                "name": "Aerial batch · Tower corridor and three workshops · 940",
+                "distance": 0.4800048828124943,
+                "point": [
+                  116.88000000000001,
+                  4.15,
+                  -186.8800048828125
+                ],
+                "material": [
+                  "ffffff"
+                ]
+              }
+            ]
+          },
+          {
+            "side": 1,
+            "x": 1.28,
+            "y": 4.7,
+            "hits": [
+              {
+                "name": "Aerial batch · Tower corridor and three workshops · 940",
+                "distance": 0.4800048828124943,
+                "point": [
+                  116.88000000000001,
+                  4.7,
+                  -186.8800048828125
+                ],
+                "material": [
+                  "ffffff"
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "corridor-lock:hale-0:1",
+        "title": "Hale / Daresbury / Huxley / Dunham · locked double doors",
+        "point": [
+          147.6,
+          -72.855
+        ],
+        "toward": [
+          154.773125,
+          -72.855
+        ],
+        "probes": [
+          {
+            "side": 1,
+            "x": -1.3,
+            "y": 3.82,
+            "hits": [
+              {
+                "name": "Aerial batch · Tower corridor and three workshops · 936",
+                "distance": 0.47999877929686363,
+                "point": [
+                  147.72000122070312,
+                  3.82,
+                  -71.555
+                ],
+                "material": [
+                  "ffffff"
+                ]
+              }
+            ]
+          },
+          {
+            "side": 1,
+            "x": -1.3,
+            "y": 3.9,
+            "hits": [
+              {
+                "name": "Aerial batch · Tower corridor and three workshops · 936",
+                "distance": 0.47999877929686363,
+                "point": [
+                  147.72000122070312,
+                  3.9,
+                  -71.555
+                ],
+                "material": [
+                  "ffffff"
+                ]
+              }
+            ]
+          },
+          {
+            "side": 1,
+            "x": -1.3,
+            "y": 3.98,
+            "hits": [
+              {
+                "name": "Aerial batch · Tower corridor and three workshops · 936",
+                "distance": 0.47999877929686363,
+                "point": [
+                  147.72000122070312,
+                  3.98,
+                  -71.555
+                ],
+                "material": [
+                  "ffffff"
+                ]
+              }
+            ]
+          },
+          {
+            "side": 1,
+            "x": -1.3,
+            "y": 4.15,
+            "hits": [
+              {
+                "name": "Aerial batch · Tower corridor and three workshops · 936",
+                "distance": 0.47999877929686363,
+                "point": [
+                  147.72000122070312,
+                  4.15,
+                  -71.555
+                ],
+                "material": [
+                  "ffffff"
+                ]
+              }
+            ]
+          },
+          {
+            "side": 1,
+            "x": -1.3,
+            "y": 4.7,
+            "hits": [
+              {
+                "name": "Aerial batch · Tower corridor and three workshops · 936",
+                "distance": 0.47999877929686363,
+                "point": [
+                  147.72000122070312,
+                  4.7,
+                  -71.555
+                ],
+                "material": [
+                  "ffffff"
+                ]
+              }
+            ]
+          },
+          {
+            "side": 1,
+            "x": -0.61,
+            "y": 3.82,
+            "hits": [
+              {
+                "name": "Aerial batch · Tower corridor and three workshops · 936",
+                "distance": 0.47999877929686363,
+                "point": [
+                  147.72000122070312,
+                  3.82,
+                  -72.245
+                ],
+                "material": [
+                  "ffffff"
+                ]
+              }
+            ]
+          },
+          {
+            "side": 1,
+            "x": -0.61,
+            "y": 3.9,
+            "hits": [
+              {
+                "name": "Aerial batch · Tower corridor and three workshops · 936",
+                "distance": 0.47999877929686363,
+                "point": [
+                  147.72000122070312,
+                  3.9,
+                  -72.245
+                ],
+                "material": [
+                  "ffffff"
+                ]
+              }
+            ]
+          },
+          {
+            "side": 1,
+            "x": -0.61,
+            "y": 3.98,
+            "hits": [
+              {
+                "name": "Aerial batch · Tower corridor and three workshops · 936",
+                "distance": 0.47999877929686363,
+                "point": [
+                  147.72000122070312,
+                  3.98,
+                  -72.245
+                ],
+                "material": [
+                  "ffffff"
+                ]
+              }
+            ]
+          },
+          {
+            "side": 1,
+            "x": -0.61,
+            "y": 4.15,
+            "hits": [
+              {
+                "name": "Aerial batch · Tower corridor and three workshops · 936",
+                "distance": 0.47999877929686363,
+                "point": [
+                  147.72000122070312,
+                  4.15,
+                  -72.245
+                ],
+                "material": [
+                  "ffffff"
+                ]
+              }
+            ]
+          },
+          {
+            "side": 1,
+            "x": -0.61,
+            "y": 4.7,
+            "hits": [
+              {
+                "name": "Aerial batch · Tower corridor and three workshops · 936",
+                "distance": 0.47999877929686363,
+                "point": [
+                  147.72000122070312,
+                  4.7,
+                  -72.245
+                ],
+                "material": [
+                  "ffffff"
+                ]
+              }
+            ]
+          },
+          {
+            "side": 1,
+            "x": 0.03,
+            "y": 3.82,
+            "hits": [
+              {
+                "name": "Aerial batch · Tower corridor and three workshops · 936",
+                "distance": 0.47999877929686363,
+                "point": [
+                  147.72000122070312,
+                  3.82,
+                  -72.885
+                ],
+                "material": [
+                  "ffffff"
+                ]
+              }
+            ]
+          },
+          {
+            "side": 1,
+            "x": 0.03,
+            "y": 3.9,
+            "hits": [
+              {
+                "name": "Aerial batch · Tower corridor and three workshops · 936",
+                "distance": 0.47999877929686363,
+                "point": [
+                  147.72000122070312,
+                  3.9,
+                  -72.885
+                ],
+                "material": [
+                  "ffffff"
+                ]
+              }
+            ]
+          },
+          {
+            "side": 1,
+            "x": 0.03,
+            "y": 3.98,
+            "hits": [
+              {
+                "name": "Aerial batch · Tower corridor and three workshops · 936",
+                "distance": 0.47999877929686363,
+                "point": [
+                  147.72000122070312,
+                  3.98,
+                  -72.885
+                ],
+                "material": [
+                  "ffffff"
+                ]
+              }
+            ]
+          },
+          {
+            "side": 1,
+            "x": 0.03,
+            "y": 4.15,
+            "hits": [
+              {
+                "name": "Aerial batch · Tower corridor and three workshops · 936",
+                "distance": 0.47999877929686363,
+                "point": [
+                  147.72000122070312,
+                  4.15,
+                  -72.885
+                ],
+                "material": [
+                  "ffffff"
+                ]
+              }
+            ]
+          },
+          {
+            "side": 1,
+            "x": 0.03,
+            "y": 4.7,
+            "hits": [
+              {
+                "name": "Aerial batch · Tower corridor and three workshops · 936",
+                "distance": 0.47999877929686363,
+                "point": [
+                  147.72000122070312,
+                  4.7,
+                  -72.885
+                ],
+                "material": [
+                  "ffffff"
+                ]
+              }
+            ]
+          },
+          {
+            "side": 1,
+            "x": 0.59,
+            "y": 3.82,
+            "hits": [
+              {
+                "name": "Aerial batch · Tower corridor and three workshops · 936",
+                "distance": 0.47999877929686363,
+                "point": [
+                  147.72000122070312,
+                  3.82,
+                  -73.44500000000001
+                ],
+                "material": [
+                  "ffffff"
+                ]
+              }
+            ]
+          },
+          {
+            "side": 1,
+            "x": 0.59,
+            "y": 3.9,
+            "hits": [
+              {
+                "name": "Aerial batch · Tower corridor and three workshops · 936",
+                "distance": 0.47999877929686363,
+                "point": [
+                  147.72000122070312,
+                  3.9,
+                  -73.44500000000001
+                ],
+                "material": [
+                  "ffffff"
+                ]
+              }
+            ]
+          },
+          {
+            "side": 1,
+            "x": 0.59,
+            "y": 3.98,
+            "hits": [
+              {
+                "name": "Aerial batch · Tower corridor and three workshops · 936",
+                "distance": 0.47999877929686363,
+                "point": [
+                  147.72000122070312,
+                  3.98,
+                  -73.44500000000001
+                ],
+                "material": [
+                  "ffffff"
+                ]
+              }
+            ]
+          },
+          {
+            "side": 1,
+            "x": 0.59,
+            "y": 4.15,
+            "hits": [
+              {
+                "name": "Aerial batch · Tower corridor and three workshops · 936",
+                "distance": 0.47999877929686363,
+                "point": [
+                  147.72000122070312,
+                  4.15,
+                  -73.44500000000001
+                ],
+                "material": [
+                  "ffffff"
+                ]
+              }
+            ]
+          },
+          {
+            "side": 1,
+            "x": 0.59,
+            "y": 4.7,
+            "hits": [
+              {
+                "name": "Aerial batch · Tower corridor and three workshops · 936",
+                "distance": 0.47999877929686363,
+                "point": [
+                  147.72000122070312,
+                  4.7,
+                  -73.44500000000001
+                ],
+                "material": [
+                  "ffffff"
+                ]
+              }
+            ]
+          },
+          {
+            "side": 1,
+            "x": 1.28,
+            "y": 3.82,
+            "hits": [
+              {
+                "name": "Aerial batch · Tower corridor and three workshops · 936",
+                "distance": 0.47999877929686363,
+                "point": [
+                  147.72000122070312,
+                  3.82,
+                  -74.135
+                ],
+                "material": [
+                  "ffffff"
+                ]
+              }
+            ]
+          },
+          {
+            "side": 1,
+            "x": 1.28,
+            "y": 3.9,
+            "hits": [
+              {
+                "name": "Aerial batch · Tower corridor and three workshops · 936",
+                "distance": 0.47999877929686363,
+                "point": [
+                  147.72000122070312,
+                  3.9,
+                  -74.135
+                ],
+                "material": [
+                  "ffffff"
+                ]
+              }
+            ]
+          },
+          {
+            "side": 1,
+            "x": 1.28,
+            "y": 3.98,
+            "hits": [
+              {
+                "name": "Aerial batch · Tower corridor and three workshops · 936",
+                "distance": 0.47999877929686363,
+                "point": [
+                  147.72000122070312,
+                  3.98,
+                  -74.135
+                ],
+                "material": [
+                  "ffffff"
+                ]
+              }
+            ]
+          },
+          {
+            "side": 1,
+            "x": 1.28,
+            "y": 4.15,
+            "hits": [
+              {
+                "name": "Aerial batch · Tower corridor and three workshops · 936",
+                "distance": 0.47999877929686363,
+                "point": [
+                  147.72000122070312,
+                  4.15,
+                  -74.135
+                ],
+                "material": [
+                  "ffffff"
+                ]
+              }
+            ]
+          },
+          {
+            "side": 1,
+            "x": 1.28,
+            "y": 4.7,
+            "hits": [
+              {
+                "name": "Aerial batch · Tower corridor and three workshops · 936",
+                "distance": 0.47999877929686363,
+                "point": [
+                  147.72000122070312,
+                  4.7,
+                  -74.135
+                ],
+                "material": [
+                  "ffffff"
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "corridor-lock:hale-1:1",
+        "title": "Hale / Daresbury / Huxley / Dunham · locked double doors",
+        "point": [
+          139.6,
+          -95.405
+        ],
+        "toward": [
+          154.773125,
+          -95.405
+        ],
+        "probes": [
+          {
+            "side": 1,
+            "x": -1.3,
+            "y": 3.82,
+            "hits": [
+              {
+                "name": "Aerial batch · Tower corridor and three workshops · 936",
+                "distance": 0.47999877929686363,
+                "point": [
+                  139.72000122070312,
+                  3.82,
+                  -94.105
+                ],
+                "material": [
+                  "ffffff"
+                ]
+              }
+            ]
+          },
+          {
+            "side": 1,
+            "x": -1.3,
+            "y": 3.9,
+            "hits": [
+              {
+                "name": "Aerial batch · Tower corridor and three workshops · 936",
+                "distance": 0.47999877929686363,
+                "point": [
+                  139.72000122070312,
+                  3.9,
+                  -94.105
+                ],
+                "material": [
+                  "ffffff"
+                ]
+              }
+            ]
+          },
+          {
+            "side": 1,
+            "x": -1.3,
+            "y": 3.98,
+            "hits": [
+              {
+                "name": "Aerial batch · Tower corridor and three workshops · 936",
+                "distance": 0.47999877929686363,
+                "point": [
+                  139.72000122070312,
+                  3.98,
+                  -94.105
+                ],
+                "material": [
+                  "ffffff"
+                ]
+              }
+            ]
+          },
+          {
+            "side": 1,
+            "x": -1.3,
+            "y": 4.15,
+            "hits": [
+              {
+                "name": "Aerial batch · Tower corridor and three workshops · 936",
+                "distance": 0.47999877929686363,
+                "point": [
+                  139.72000122070312,
+                  4.15,
+                  -94.105
+                ],
+                "material": [
+                  "ffffff"
+                ]
+              }
+            ]
+          },
+          {
+            "side": 1,
+            "x": -1.3,
+            "y": 4.7,
+            "hits": [
+              {
+                "name": "Aerial batch · Tower corridor and three workshops · 936",
+                "distance": 0.47999877929686363,
+                "point": [
+                  139.72000122070312,
+                  4.7,
+                  -94.105
+                ],
+                "material": [
+                  "ffffff"
+                ]
+              }
+            ]
+          },
+          {
+            "side": 1,
+            "x": -0.61,
+            "y": 3.82,
+            "hits": [
+              {
+                "name": "Aerial batch · Tower corridor and three workshops · 936",
+                "distance": 0.47999877929686363,
+                "point": [
+                  139.72000122070312,
+                  3.82,
+                  -94.795
+                ],
+                "material": [
+                  "ffffff"
+                ]
+              }
+            ]
+          },
+          {
+            "side": 1,
+            "x": -0.61,
+            "y": 3.9,
+            "hits": [
+              {
+                "name": "Aerial batch · Tower corridor and three workshops · 936",
+                "distance": 0.47999877929686363,
+                "point": [
+                  139.72000122070312,
+                  3.9,
+                  -94.795
+                ],
+                "material": [
+                  "ffffff"
+                ]
+              }
+            ]
+          },
+          {
+            "side": 1,
+            "x": -0.61,
+            "y": 3.98,
+            "hits": [
+              {
+                "name": "Aerial batch · Tower corridor and three workshops · 936",
+                "distance": 0.47999877929686363,
+                "point": [
+                  139.72000122070312,
+                  3.98,
+                  -94.795
+                ],
+                "material": [
+                  "ffffff"
+                ]
+              }
+            ]
+          },
+          {
+            "side": 1,
+            "x": -0.61,
+            "y": 4.15,
+            "hits": [
+              {
+                "name": "Aerial batch · Tower corridor and three workshops · 936",
+                "distance": 0.47999877929686363,
+                "point": [
+                  139.72000122070312,
+                  4.15,
+                  -94.795
+                ],
+                "material": [
+                  "ffffff"
+                ]
+              }
+            ]
+          },
+          {
+            "side": 1,
+            "x": -0.61,
+            "y": 4.7,
+            "hits": [
+              {
+                "name": "Aerial batch · Tower corridor and three workshops · 936",
+                "distance": 0.47999877929686363,
+                "point": [
+                  139.72000122070312,
+                  4.7,
+                  -94.795
+                ],
+                "material": [
+                  "ffffff"
+                ]
+              }
+            ]
+          },
+          {
+            "side": 1,
+            "x": 0.03,
+            "y": 3.82,
+            "hits": [
+              {
+                "name": "Aerial batch · Tower corridor and three workshops · 936",
+                "distance": 0.47999877929686363,
+                "point": [
+                  139.72000122070312,
+                  3.82,
+                  -95.435
+                ],
+                "material": [
+                  "ffffff"
+                ]
+              }
+            ]
+          },
+          {
+            "side": 1,
+            "x": 0.03,
+            "y": 3.9,
+            "hits": [
+              {
+                "name": "Aerial batch · Tower corridor and three workshops · 936",
+                "distance": 0.47999877929686363,
+                "point": [
+                  139.72000122070312,
+                  3.9,
+                  -95.435
+                ],
+                "material": [
+                  "ffffff"
+                ]
+              }
+            ]
+          },
+          {
+            "side": 1,
+            "x": 0.03,
+            "y": 3.98,
+            "hits": [
+              {
+                "name": "Aerial batch · Tower corridor and three workshops · 936",
+                "distance": 0.47999877929686363,
+                "point": [
+                  139.72000122070312,
+                  3.98,
+                  -95.435
+                ],
+                "material": [
+                  "ffffff"
+                ]
+              }
+            ]
+          },
+          {
+            "side": 1,
+            "x": 0.03,
+            "y": 4.15,
+            "hits": [
+              {
+                "name": "Aerial batch · Tower corridor and three workshops · 936",
+                "distance": 0.47999877929686363,
+                "point": [
+                  139.72000122070312,
+                  4.15,
+                  -95.435
+                ],
+                "material": [
+                  "ffffff"
+                ]
+              }
+            ]
+          },
+          {
+            "side": 1,
+            "x": 0.03,
+            "y": 4.7,
+            "hits": [
+              {
+                "name": "Aerial batch · Tower corridor and three workshops · 936",
+                "distance": 0.47999877929686363,
+                "point": [
+                  139.72000122070312,
+                  4.7,
+                  -95.435
+                ],
+                "material": [
+                  "ffffff"
+                ]
+              }
+            ]
+          },
+          {
+            "side": 1,
+            "x": 0.59,
+            "y": 3.82,
+            "hits": [
+              {
+                "name": "Aerial batch · Tower corridor and three workshops · 936",
+                "distance": 0.47999877929686363,
+                "point": [
+                  139.72000122070312,
+                  3.82,
+                  -95.995
+                ],
+                "material": [
+                  "ffffff"
+                ]
+              }
+            ]
+          },
+          {
+            "side": 1,
+            "x": 0.59,
+            "y": 3.9,
+            "hits": [
+              {
+                "name": "Aerial batch · Tower corridor and three workshops · 936",
+                "distance": 0.47999877929686363,
+                "point": [
+                  139.72000122070312,
+                  3.9,
+                  -95.995
+                ],
+                "material": [
+                  "ffffff"
+                ]
+              }
+            ]
+          },
+          {
+            "side": 1,
+            "x": 0.59,
+            "y": 3.98,
+            "hits": [
+              {
+                "name": "Aerial batch · Tower corridor and three workshops · 936",
+                "distance": 0.47999877929686363,
+                "point": [
+                  139.72000122070312,
+                  3.98,
+                  -95.995
+                ],
+                "material": [
+                  "ffffff"
+                ]
+              }
+            ]
+          },
+          {
+            "side": 1,
+            "x": 0.59,
+            "y": 4.15,
+            "hits": [
+              {
+                "name": "Aerial batch · Tower corridor and three workshops · 936",
+                "distance": 0.47999877929686363,
+                "point": [
+                  139.72000122070312,
+                  4.15,
+                  -95.995
+                ],
+                "material": [
+                  "ffffff"
+                ]
+              }
+            ]
+          },
+          {
+            "side": 1,
+            "x": 0.59,
+            "y": 4.7,
+            "hits": [
+              {
+                "name": "Aerial batch · Tower corridor and three workshops · 936",
+                "distance": 0.47999877929686363,
+                "point": [
+                  139.72000122070312,
+                  4.7,
+                  -95.995
+                ],
+                "material": [
+                  "ffffff"
+                ]
+              }
+            ]
+          },
+          {
+            "side": 1,
+            "x": 1.28,
+            "y": 3.82,
+            "hits": [
+              {
+                "name": "Aerial batch · Tower corridor and three workshops · 936",
+                "distance": 0.47999877929686363,
+                "point": [
+                  139.72000122070312,
+                  3.82,
+                  -96.685
+                ],
+                "material": [
+                  "ffffff"
+                ]
+              }
+            ]
+          },
+          {
+            "side": 1,
+            "x": 1.28,
+            "y": 3.9,
+            "hits": [
+              {
+                "name": "Aerial batch · Tower corridor and three workshops · 936",
+                "distance": 0.47999877929686363,
+                "point": [
+                  139.72000122070312,
+                  3.9,
+                  -96.685
+                ],
+                "material": [
+                  "ffffff"
+                ]
+              }
+            ]
+          },
+          {
+            "side": 1,
+            "x": 1.28,
+            "y": 3.98,
+            "hits": [
+              {
+                "name": "Aerial batch · Tower corridor and three workshops · 936",
+                "distance": 0.47999877929686363,
+                "point": [
+                  139.72000122070312,
+                  3.98,
+                  -96.685
+                ],
+                "material": [
+                  "ffffff"
+                ]
+              }
+            ]
+          },
+          {
+            "side": 1,
+            "x": 1.28,
+            "y": 4.15,
+            "hits": [
+              {
+                "name": "Aerial batch · Tower corridor and three workshops · 936",
+                "distance": 0.47999877929686363,
+                "point": [
+                  139.72000122070312,
+                  4.15,
+                  -96.685
+                ],
+                "material": [
+                  "ffffff"
+                ]
+              }
+            ]
+          },
+          {
+            "side": 1,
+            "x": 1.28,
+            "y": 4.7,
+            "hits": [
+              {
+                "name": "Aerial batch · Tower corridor and three workshops · 936",
+                "distance": 0.47999877929686363,
+                "point": [
+                  139.72000122070312,
+                  4.7,
+                  -96.685
+                ],
+                "material": [
+                  "ffffff"
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "errors": []
+}

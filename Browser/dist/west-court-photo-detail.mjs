@@ -56,7 +56,7 @@ export function addWestCourtPhotoDetails(THREE,{model,box,mesh,worldUV,white,bri
   // Owner's later blue guide moves the far-end pipe beside this low roof.
   // Finish at its rim, in the clear pier between the two window banks.
   const pipeHeight=8.91;
-  box(iron,lowBayX-lowBayWidth/2-.1,pipeHeight/2,lowBayZ-1.16,.085,pipeHeight,.085);
+  box(iron,lowBayX-lowBayWidth/2-.1,pipeHeight/2,lowBayZ-1.16,.085,pipeHeight,.085,0,true);
   // Retain the photographed front curved bay; only its flanking front sashes
   // are added here, while the new polygonal bay faces the rear court.
   for(const y of [2,6.5,11])for(const z of [8,12,16])sash('west-pavilion-east',-37.95,y,z,Math.PI/2,1.1,2.4);
@@ -134,7 +134,7 @@ export function addWestCourtPhotoDetails(THREE,{model,box,mesh,worldUV,white,bri
     const gutterLeft=x===-62.5?-65.2:x-(w+.13)/2,gutterRight=x+(w+.13)/2;
     box(iron,(gutterLeft+gutterRight)/2,WEST_RANGE_PLAN.roofEaveHeight-.04,z-.2,gutterRight-gutterLeft,.08,.12);
   }
-  for(const x of [-46.4,-50.8,-55.2])box(iron,x,7,wallZ-.32,.085,14,.085);
+  for(const x of [-46.4,-50.8,-55.2])box(iron,x,7,wallZ-.32,.085,14,.085,0,true);
   for(const y of [4.3,8.9])rod([-50.8,y,wallZ-.32],[-48.3,y,wallZ-.32],.035);
   for(const x of [-50,-54.7])box(stone,x,8.1,wallZ-.4,.4,.3,.15);
 

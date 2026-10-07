@@ -4,6 +4,7 @@ import * as THREE from './dist/vendor/three.module.js';
 import {createEscapeExterior} from './dist/escape-exterior.mjs';
 import {createAerialLayouts} from './dist/aerial-layouts.mjs';
 import {closeRoofWallGaps} from './dist/roof-wall-joins.mjs';
+import {checkRedesmereRoofProtrusions} from './test-support/redesmere-roof-probes.mjs';
 globalThis.document={createElement:()=>({getContext:()=>({fillRect(){},measureText:t=>({width:t.length*16}),strokeText(){},fillText(){}})})};
 // A reflected parent must preserve outward fascia faces as well as the roof
 // backing. Horizontal rays below the slate cannot be satisfied by its underside.
@@ -34,6 +35,7 @@ if(process.argv.includes('--compiled')){
  ({exterior}=restoreAerialScene(THREE,decodeModel(raw.buffer.slice(raw.byteOffset,raw.byteOffset+raw.byteLength)),1.5));
 }else{exterior=createEscapeExterior(THREE,1.5);createAerialLayouts(THREE,exterior);}
 exterior.model.updateMatrixWorld(true);
+checkRedesmereRoofProtrusions(THREE,exterior.model);
 const objects=[],skins=[];let surveyed=0,solids=0,closures=0;
 exterior.model.traverse(o=>{if(!o.isMesh)return;objects.push(o);if(o.material?.userData.roofTilePixels)skins.push(o);if(o.userData.roofWallJoinsFinished){surveyed++;solids+=Number(!!o.userData.roofWallJoinSummary.solid);}if(o.userData.roofWallClosure)closures++;});
 assert(surveyed>=560&&solids>=280,'Survey the complete estate, including closed slabs, dormers and late tower buildings');
@@ -41,7 +43,10 @@ assert(skins.filter(o=>!o.isInstancedMesh&&!o.userData.roofWallClosure&&!o.userD
 assert(closures>200,'Repair the open roof families across the estate');
 const rays=JSON.parse(await readFile(new URL('./test-support/roof-wall-rays.json',import.meta.url),'utf8')),ray=new THREE.Raycaster(),failures=[];
 for(const probe of rays){
- ray.set(new THREE.Vector3(...probe.origin),new THREE.Vector3(...probe.direction));ray.far=probe.distance;
+ ray.set(new THREE.Vector3(...probe.origin),new THREE.Vector3(...probe.direction));
+ // October 7 raises these old internal eaves into the continuous 15.66 ridge
+ // roof. Keep the frozen ray origins/directions, reaching its new underside.
+ ray.far=probe.roof==='Redesmere aligned frontage slate roof'&&probe.direction[1]===1?1.7:probe.distance;
  if(!ray.intersectObjects(objects,false).length)failures.push(probe);
 }
 assert(rays.length>200,'Retain wide coverage of independently frozen, formerly open eaves');

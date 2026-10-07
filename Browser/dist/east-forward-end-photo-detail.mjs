@@ -20,7 +20,7 @@ export function addEastForwardEndPhotoDetails(THREE,{model,box,mesh,worldUV,whit
   box(trim,centre,4.15,front+.09,width+.1,.27,.27);
   for(const [y,h,d] of [[8.36,.18,.26],[8.59,.25,.44],[8.8,.12,.58]])box(white,centre,y,front+.03,width+.3,h,d);
   box(iron,centre,8.91,front+.33,width+.6,.1,.11);
-  for(const x of [29.15,40.85])box(iron,x,4.43,front+.21,.07,8.8,.07);
+  for(const x of [29.15,40.85])box(iron,x,4.43,front+.21,.07,8.8,.07,0,true);
   box(brick,centre,.23,front+.035,width,.26,.17);
 
   // Open grassy verge, low irregular hedge. Gravel

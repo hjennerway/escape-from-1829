@@ -73,7 +73,10 @@ const starts=[{x:0,z:14,floor:0},{x:0,z:14,floor:1},{x:-31.1,z:-7,floor:2}];
 for(const room of receptionRooms)for(const start of starts){const end=walk(start,{x:room.label[0],z:room.label[1],floor:3});walk(end,start);}
 const journal=createNotebook(floors);assert(!journal.availableViews().some(v=>v.index===3));
 for(const room of receptionRooms)journal.explore({x:room.label[0],z:room.label[1],floor:3,y:8.4});
-assert(journal.availableViews().some(v=>v.name==='Second floor'));assert(journal.entries.find(e=>e.id==='places:3').text.includes('R42'));
+assert(journal.availableViews().some(v=>v.name==='Second floor'));
+assert.equal(journal.entries.find(e=>e.id==='places:3').text,
+ '201 · Records office; 202 · Staff office; 203 · Staff sitting room; 204 · Archive and stores; 205 · Linen store.',
+ 'Notebook discovery uses the five current door numbers and room names');
 furnishAsylum(floors);
 for(const room of receptionRooms){
  assert(flatWalkable(upper,...room.label),'Furnished room centre remains accessible');

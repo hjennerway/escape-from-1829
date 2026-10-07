@@ -1,8 +1,10 @@
 import {visible,walkable,path} from './core.mjs';
-import {insidePolygon,segmentDistance,stairRoute} from './asylum-layout.mjs';
+import {insidePolygon,segmentDistance,stairRoute,asylumExitCenter} from './asylum-layout.mjs';
 import {furnitureContains} from './furniture-collision.mjs';
 import {STAIR_WIDTH,RAIL_HEIGHT} from './asylum-stairs.mjs';
 import {batchAerialMeshes,cacheAerialTransforms} from './aerial-performance.mjs';
+import {GROUNDS_BOUNDS} from './escape-grounds-state.mjs';
+import {createDoorLockFactory} from './door-lock.mjs';
 
 export function createEscapeLandmark(THREE,exterior){
  // The night backdrop is dated 1916, which hides the modern mast. A scenario
@@ -18,7 +20,13 @@ export function createEscapeLandmark(THREE,exterior){
 
 // Scenario fittings belong to Escape only. Explore retains the reviewed building.
 export function createEscapeWorld(THREE,floors,groups,progress,{reducedMotion=false}={}){
- const nodes=[],gates=[];
+ const nodes=[],gates=[],doorLocks=[],lockResources=new Set(),addDoorLock=createDoorLockFactory(THREE,lockResources);
+ for(const [floorIndex,floor] of floors.entries())for(const exit of floor.exits){
+  const {x,z}=asylumExitCenter(exit),entrance=floor.id===0&&exit.id==='D1';
+  const lock=addDoorLock(groups[floorIndex],{id:exit.id,width:entrance?1.9:1.55,depth:entrance?.252:.09,faces:[-exit.facing]});
+  lock.position.set(x,0,z);lock.rotation.y=exit.axis==='x'?Math.PI/2:0;
+  doorLocks.push({floor:floorIndex,exit,group:lock});
+ }
  const metal=new THREE.MeshStandardMaterial({color:0x35443c,roughness:.8});
  const brass=new THREE.MeshStandardMaterial({color:0xb79a57,metalness:.65,roughness:.35,emissive:0x6b4315,emissiveIntensity:.32});
  const wood=new THREE.MeshStandardMaterial({color:0x55412c,roughness:.85});
@@ -192,6 +200,7 @@ export function createEscapeWorld(THREE,floors,groups,progress,{reducedMotion=fa
   box(leaf,[.12,.18,.085],[leafWidth/2-.06,1.3,-.01],metal);
   box(leaf,[.16,.028,.028],[leafWidth/2-.09,1.3,-.064],brass);
   text(leaf,'STAFF OFFICES',`Stair key required. Porter’s record + brass outside key: second-floor room ${progress.roomNumber(3,run.office)}, ${run.office==='R41'?'above Reception':'beside the Library'}.`,.72,.32);
+  addDoorLock(leaf,{id:stair.id,width:leafWidth,height:.94,depth:.055});
   for(const sx of [-.32,.32])for(const sy of [1.23,1.47]){
    const rivet=pin(leaf,.011,.012,[sx,sy,-.043],brass);rivet.rotation.x=Math.PI/2;
   }
@@ -203,12 +212,12 @@ export function createEscapeWorld(THREE,floors,groups,progress,{reducedMotion=fa
   const floor=floors[actor.floor];
   const found=nodes.filter(n=>n.floor===actor.floor&&n.group.visible&&(n.id!=='staff-key'||n.key.visible)&&Math.hypot(actor.x-n.mount.x,actor.z-n.mount.z)<2.1&&visible(floor,actor,{x:n.mount.x,z:n.mount.z,y:floor.elevation+n.mount.y-1.5}));
   found.sort((a,b)=>Math.hypot(actor.x-a.mount.x,actor.z-a.mount.z)-Math.hypot(actor.x-b.mount.x,actor.z-b.mount.z));
-  const gate=gates.find(g=>!progress.run.opened.has(g.id)&&Math.hypot(actor.x-g.x,actor.z-g.z)<1.8&&Math.abs((actor.x-g.x)*-g.dz+(actor.z-g.z)*g.dx)<1.2&&Math.abs(actor.y-g.y)<1);
+  const gate=gates.find(g=>!progress.stairOpen(g.id)&&Math.hypot(actor.x-g.x,actor.z-g.z)<1.8&&Math.abs((actor.x-g.x)*-g.dz+(actor.z-g.z)*g.dx)<1.2&&Math.abs(actor.y-g.y)<1);
   return gate?{id:'gate:'+gate.id,title:'Staff offices · locked upper grille',gate}:found[0];
  }
  function allowMove(actor,next){
   return gates.every(g=>{
-   if(progress.run.opened.has(g.id)||next.y+1.8<g.y||next.y>g.y+g.height)return true;
+   if(progress.stairOpen(g.id)||next.y+1.8<g.y||next.y>g.y+g.height)return true;
    const side=p=>(p.x-g.x)*g.dx+(p.z-g.z)*g.dz;
    const a=side(actor),b=side(next);
    if(a*b>0&&Math.abs(b)>.35)return true;
@@ -216,15 +225,15 @@ export function createEscapeWorld(THREE,floors,groups,progress,{reducedMotion=fa
    return Math.abs((x-g.x)*-g.dz+(z-g.z)*g.dx)>.95;
   });
  }
- function sync(){for(const g of gates)g.leaf.visible=!run.opened.has(g.id);for(const n of nodes){if(n.key)n.key.visible=n.id==='staff-key'?!run.staffKey:n.id==='reclaim'?run.confiscated.size>0:!run.serviceKey;const active=n.key?n.key.visible:n.id==='release'?!(run.opened.has('S1')&&run.opened.has('S5')):!progress.has(n.id);n.halo.visible=n.beacon.visible=active;if(n.id==='reclaim'){n.key.children[0].visible=run.confiscated.has('staffKey');n.key.children[1].visible=run.confiscated.has('serviceKey');}if(n.handle)n.handle.rotation.z=run.opened.has('S5')?Math.PI/2:0;}}
+ function sync(){for(const lock of doorLocks)lock.group.visible=progress.doorLocked(lock.exit);for(const g of gates)g.leaf.visible=!progress.stairOpen(g.id);for(const n of nodes){if(n.key)n.key.visible=n.id==='staff-key'?!run.staffKey:n.id==='reclaim'?run.confiscated.size>0:!run.serviceKey;const active=n.key?n.key.visible:n.id==='release'?!(progress.stairOpen('S1')&&progress.stairOpen('S5')):!progress.has(n.id);n.halo.visible=n.beacon.visible=active;if(n.id==='reclaim'){n.key.children[0].visible=run.confiscated.has('staffKey');n.key.children[1].visible=run.confiscated.has('serviceKey');}if(n.handle)n.handle.rotation.z=progress.stairOpen('S5')?Math.PI/2:0;}}
  function update(time){const pulse=reducedMotion?1:.90+.18*Math.sin(time*Math.PI*2/2.8);glowMaterial.uniforms.strength.value=pulse;beaconMaterial.opacity=.85*pulse;for(const n of nodes)n.beacon.scale.set(.48*pulse,.70*pulse,1);}
- sync();return {nodes,gates,near,allowMove,sync,update,anchor,dispose(){const geometries=new Set(),materials=new Set([metal,brass,wood,glowMaterial,beaconMaterial]),textures=new Set([glowTexture]);for(const o of [...nodes.map(n=>n.group),...gates.map(g=>g.group)]){o.removeFromParent();o.traverse(m=>{if(m.isMesh&&m.geometry)geometries.add(m.geometry);if(m.material){materials.add(m.material);if(m.material.map)textures.add(m.material.map);}});}for(const g of geometries)g.dispose();for(const t of textures)t.dispose();for(const m of materials)m.dispose();}};
+ sync();return {nodes,gates,doorLocks,near,allowMove,sync,update,anchor,dispose(){const geometries=new Set(),materials=new Set([metal,brass,wood,glowMaterial,beaconMaterial]),textures=new Set([glowTexture]);for(const o of [...nodes.map(n=>n.group),...gates.map(g=>g.group),...doorLocks.map(d=>d.group)]){o.removeFromParent();o.traverse(m=>{if(m.isInstancedMesh)m.dispose();if(m.isMesh&&m.geometry)geometries.add(m.geometry);if(m.material){materials.add(m.material);if(m.material.map)textures.add(m.material.map);}});}for(const r of lockResources)if(!geometries.has(r)&&!materials.has(r)&&!textures.has(r))r.dispose();for(const g of geometries)g.dispose();for(const t of textures)t.dispose();for(const m of materials)m.dispose();}};
 }
 
 // Grid routing uses the active outdoor collision model, including visible trees.
 const navigationCaches=new WeakMap();
 export function outdoorPath(walker,from,to){
- const minX=-132,minZ=-127,width=260,height=222;
+ const [minX,maxX,minZ,maxZ]=GROUNDS_BOUNDS,width=maxX-minX,height=maxZ-minZ;
  const cell=p=>[Math.round(p.x-minX),Math.round(p.z-minZ)],start=cell(from),end=cell(to);
  if([...start,...end].some(n=>!Number.isFinite(n)))return [];
  const valid=([x,z])=>x>=0&&z>=0&&x<width&&z<height;
@@ -235,8 +244,11 @@ export function outdoorPath(walker,from,to){
  function push(entry){let i=queue.length;queue.push(entry);while(i){const p=(i-1)>>1;if(queue[p].cost<=entry.cost)break;queue[i]=queue[p];i=p;}queue[i]=entry;}
  function pop(){const first=queue[0],last=queue.pop();if(queue.length){let i=0;while(i*2+1<queue.length){let j=i*2+1;if(j+1<queue.length&&queue[j+1].cost<queue[j].cost)j++;if(queue[j].cost>=last.cost)break;queue[i]=queue[j];i=j;}queue[i]=last;}return first;}
  push({n:begin,cost:0,travel:0});let examined=0;
- while(queue.length&&examined++<40000){
-  const {n,travel}=pop();if(travel!==distance.get(n))continue;if(n===finish)break;
+ // The extended corridor network can require a long detour from the grounds.
+ // Bound valid expansions by this finite grid, rather than the former campus
+ // size; discarded stale queue entries do not consume the search allowance.
+ while(queue.length&&examined<width*height){
+  const {n,travel}=pop();if(travel!==distance.get(n))continue;examined++;if(n===finish)break;
   const x=n%width,z=Math.floor(n/width);
   for(const [dx,dz] of [[1,0],[-1,0],[0,1],[0,-1]]){
    const next=[x+dx,z+dz];if(!valid(next))continue;const j=key(next),cost=distance.get(n)+1;

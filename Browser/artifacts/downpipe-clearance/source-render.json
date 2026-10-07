@@ -1,0 +1,10 @@
+{
+  "metrics": {
+    "pharmacy": {
+      "mode": "procedural",
+      "calls": 729,
+      "triangles": 541293
+    }
+  },
+  "errors": []
+}

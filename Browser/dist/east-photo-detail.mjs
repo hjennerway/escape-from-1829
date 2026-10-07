@@ -52,7 +52,6 @@ export function addEastPhotoDetails(THREE,{model,box,mesh,worldUV,white,brick,ro
   rangeRoof.setAttribute('position',new THREE.Float32BufferAttribute(positions,3));
   rangeRoof.setAttribute('uv',new THREE.Float32BufferAttribute(uv,2));rangeRoof.computeVertexNormals();
   mesh(rangeRoof,roof,0,0,0,true).name='Redesmere aligned frontage slate roof';
-  joinEastEntranceRoof(THREE,{model,mesh,roof,white,brick,worldUV});
 
   // The two-storey forward wing: nine positions on its east wall. The eighth
   // position is the blue entrance and upper escape door, not another window.
@@ -107,7 +106,7 @@ export function addEastPhotoDetails(THREE,{model,box,mesh,worldUV,white,brick,ro
   box(white,doorX,doorBottom+2.68,doorZ,1.35,.15,.24);
   box(iron,doorX+.32,doorBottom+1.15,doorZ+.12,.055,.15,.065);
   box(stone,doorX,doorBottom+.025,19.8,1.3,.05,.35);
-  box(iron,59.13,4.65,25.08,.065,9.3,.065);
+  box(iron,59.13,4.65,25.08,.065,9.3,.065,0,true);
   // Match the west half-octagonal bays: one broad front, two canted cheeks,
   // matching bands/hip and world-scale brickwork instead of cylinder UVs.
   addWestCantedBay(THREE,{model,mesh,worldUV,brick,white,roof,sash},{
@@ -132,8 +131,8 @@ export function addEastPhotoDetails(THREE,{model,box,mesh,worldUV,white,brick,ro
   // Only the taller rear building has front windows above the low roof.
   sash('service-background',92.4,7.5,10.05,0,1.15,2.2);
   // Dark rainwater pipes break up the long white ground storey.
-  for(const z of [17,29,42.7])box(iron,41.2,4.1,z,.085,8.2,.085);
-  for(const x of [62.4,69.6])box(iron,x,7,25.2,.085,14,.085);
+  for(const z of [17,29,42.7])box(iron,41.2,4.1,z,.085,8.2,.085,0,true);
+  for(const x of [62.4,69.6])box(iron,x,7,25.2,.085,14,.085,0,true);
   // The garden cross-walk shares the continuous entrance/passage gravel in
   // entrance-walks.mjs; no differently coloured slab overlaps it here.
   // The marked east lawn column is removed in every period; retain the
@@ -156,4 +155,5 @@ export function addEastPhotoDetails(THREE,{model,box,mesh,worldUV,white,brick,ro
   addWestLawnPhotoDetails(THREE,{model,box,mesh,worldUV,white,brick,roof,material,hipRoof,sash,iron});
   addEntranceWestPhotoDetails(THREE,{model,box,mesh,worldUV,white,brick,roof,material,hipRoof,sash,door,rod,iron,frame,glass});
   addEastEntranceMirror(THREE,{model,box,mesh,worldUV,white,brick,roof,material,hipRoof,sash,door,rod,iron,frame,glass});
+  joinEastEntranceRoof(THREE,{model,mesh,roof,white,brick,worldUV});
 }

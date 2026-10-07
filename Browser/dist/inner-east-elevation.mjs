@@ -41,7 +41,7 @@ export function addInnerEastElevation(THREE,{model,box,mesh,worldUV,white,brick,
   for(const y of [6.5,11])sash('inner-east-stepped-return',23.75,y,-7.96,Math.PI,1.05,2.35);
   for(const z of [-24.65,-8.1]){
     const height=z<-24?WING_ROOF_JOIN.wall:13.8;
-    box(iron,24.54,height/2,z,.085,height,.085);
+    box(iron,24.54,height/2,z,.085,height,.085,0,true);
   }
   model.userData.innerEastPhotoOpenings=model.userData.eastPhotoOpenings.slice(start);
 }

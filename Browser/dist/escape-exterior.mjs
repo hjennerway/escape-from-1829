@@ -1,3 +1,4 @@
+import {markDownpipeInstances,avoidWindowDownpipes} from './downpipe-clearance.mjs';
 import {addWillowTrees} from './willow-trees.mjs';
 import {prepareExteriorShadows} from './exterior-shadows.mjs';
 import {addSurvivingLampPosts} from './surviving-lamp-posts.mjs';
@@ -117,7 +118,7 @@ export function createEscapeExterior(THREE,aspect){
   applyGroundSurface(THREE,grass,'grass');
   // Preserve the former grass painter's random draws: planting uses this stream.
   for(let i=0;i<38000;i++)random();
-  function box(mat,x,y,z,w,h,d,rotation=0){if(!batches.has(mat))batches.set(mat,[]);batches.get(mat).push({x,y,z,w,h,d,rotation});}
+  function box(mat,x,y,z,w,h,d,rotation=0,downpipe=false){if(!batches.has(mat))batches.set(mat,[]);batches.get(mat).push({x,y,z,w,h,d,rotation,downpipe});}
   function mesh(geo,mat,x=0,y=0,z=0,shadow=false){const m=new THREE.Mesh(geo,mat);m.position.set(x,y,z);m.castShadow=shadow;m.receiveShadow=true;model.add(m);return m;}
   function worldUV(geo,scale=3){const p=geo.attributes.position,n=geo.attributes.normal,uv=geo.attributes.uv;for(let i=0;i<p.count;i++)uv.setXY(i,(Math.abs(n.getX(i))>.5?p.getZ(i):p.getX(i))/scale,(Math.abs(n.getY(i))>.5?p.getZ(i):p.getY(i))/scale);return geo;}
   const excavations=[...frontBasementExcavations(),westCourtTerrainExcavation()];
@@ -534,7 +535,7 @@ export function createEscapeExterior(THREE,aspect){
   box(stone,ESCAPE_MAST.x,.1,ESCAPE_MAST.z,8,.3,8);
   box(dark,ESCAPE_MAST.x+7,1.8,ESCAPE_MAST.z,5,3.6,6);
   const dummy=new THREE.Object3D();
-  for(const [mat,items] of batches){const batch=new THREE.InstancedMesh(new THREE.BoxGeometry(1,1,1),mat,items.length);batch.receiveShadow=true;
+  for(const [mat,items] of batches){const batch=new THREE.InstancedMesh(new THREE.BoxGeometry(1,1,1),mat,items.length);markDownpipeInstances(batch,items);batch.receiveShadow=true;
     items.forEach((b,i)=>{dummy.position.set(b.x,b.y,b.z);dummy.scale.set(b.w,b.h,b.d);dummy.rotation.set(0,b.rotation,0);dummy.updateMatrix();batch.setMatrixAt(i,dummy.matrix);});model.add(batch);}
   for(const [parent,canopy] of [[trees,crowns],[model,shrubs]])for(const {mat,items} of canopy){if(!items.length)continue;const batch=new THREE.InstancedMesh(new THREE.IcosahedronGeometry(1,1),mat,items.length);batch.castShadow=true;batch.receiveShadow=true;
     if(parent===trees)batch.userData.treeIds=items.map(item=>item.treeId);
@@ -542,6 +543,7 @@ export function createEscapeExterior(THREE,aspect){
   const lawnMaterials=new Set();
   model.traverse(object=>{for(const mat of (Array.isArray(object.material)?object.material:[object.material]))if(mat?.userData.estateGrass)lawnMaterials.add(mat);});
   for(const mat of lawnMaterials)matchEstateGrass(mat,grass);
+  avoidWindowDownpipes(THREE,model);
   joinInstancedFacadeCourses(THREE,model);
   closeRoofWallGaps(THREE,model,{exclude:[trees,terrain]});
   for(const name of ['Entrance west projection slate roof','Entrance west slate pitches to render edge']){

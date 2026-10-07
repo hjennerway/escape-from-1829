@@ -1,0 +1,30 @@
+[
+  {
+    "label": "previous",
+    "object": "Batched masonry details",
+    "point": [
+      153.17500019073486,
+      0.15,
+      -59.5
+    ],
+    "normal": [
+      1,
+      0,
+      0
+    ]
+  },
+  {
+    "label": "current",
+    "object": "Batched masonry details",
+    "point": [
+      153.17500019073486,
+      0.15,
+      -59.5
+    ],
+    "normal": [
+      1,
+      0,
+      0
+    ]
+  }
+]

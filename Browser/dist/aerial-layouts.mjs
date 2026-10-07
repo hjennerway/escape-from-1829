@@ -10,6 +10,7 @@ import {closeRoofWallGaps,releaseRoofSupportCache} from './roof-wall-joins.mjs';
 import {closeGroundEdges} from './ground-contact.mjs';
 import {groundBuildingBases} from './building-grounding.mjs';
 import {prepareExteriorShadows} from './exterior-shadows.mjs';
+import {avoidWindowDownpipes} from './downpipe-clearance.mjs';
 
 // Shared by the aerial preview and exterior walk; gameplay keeps its existing estate.
 export function createAerialLayouts(THREE,exterior){
@@ -29,6 +30,9 @@ export function createAerialLayouts(THREE,exterior){
   const towerBuildings=createTowerBuildings(THREE,exterior);historic.add(towerBuildings);
   exterior.towerBuildings=towerBuildings;
   const historicRoads=createHistoricRoads(THREE,exterior);historic.add(historicRoads);
+  // The service buildings are added after the gameplay estate. Check these
+  // pipes too while all facade transforms are still unbatched.
+  avoidWindowDownpipes(THREE,exterior.model);
   // Close the complete assembled estate before timeline splitting and batching.
   // Keep the authored building templates available for historical shape checks.
   groundBuildingBases(THREE,exterior.model,{groundY:exterior.terrain.position.y,exclude:[exterior.trees,exterior.terrain]});

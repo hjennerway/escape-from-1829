@@ -91,8 +91,8 @@ export function addWestFrontPhotoDetails(THREE,{model,box,mesh,worldUV,white,bri
       }else box(white,x,y,garden+.22,3.78,.17,.24);
     }
   }
-  for(const x of [bayLeft-.1,bayRight+.25])box(iron,x,7.3,garden+.33,.075,14.6,.075);
-  for(const [x,z,h] of [[outerLeft+.2,outerFront+.2,15],[leftFlank-1.85,garden+.2,14.2],[innerLeft-.15,innerFrontZ+.1,14.2],[-41.18,29,8.5]])box(iron,x,h/2,z,.085,h,.085);
+  for(const x of [bayLeft-.1,bayRight+.25])box(iron,x,7.3,garden+.33,.075,14.6,.075,0,true);
+  for(const [x,z,h] of [[outerLeft+.2,outerFront+.2,15],[leftFlank-1.85,garden+.2,14.2],[innerLeft-.15,innerFrontZ+.1,14.2],[-41.18,29,8.5]])box(iron,x,h/2,z,.085,h,.085,0,true);
 
   addWestGardenStair(THREE,{model,iron,door});
 

@@ -1,3 +1,4 @@
+import {markDownpipeInstances} from './downpipe-clearance.mjs';
 import {photoDetailPrimitives} from './photo-detail-primitives.mjs';
 import {HALE_CORRIDOR_CONTACTS} from './hale-corridors.mjs';
 import {FARNDON_CORRIDOR} from './farndon-corridor.mjs';
@@ -51,8 +52,8 @@ export function createHaleWard(THREE,{brick,roof,worldUV,material}){
   const o=new THREE.Mesh(g,m);o.position.set(x,y,z);o.name=name;
   o.castShadow=true;o.receiveShadow=true;building.add(o);return o;
  }
- function box(m,x,y,z,w,h,d,r=0){
-  if(!batches.has(m))batches.set(m,[]);batches.get(m).push({x,y,z,w,h,d,r});
+ function box(m,x,y,z,w,h,d,r=0,downpipe=false){
+  if(!batches.has(m))batches.set(m,[]);batches.get(m).push({x,y,z,w,h,d,r,downpipe});
  }
  const local=HALE_WARD_FOOTPRINT.map(([x,z])=>[x-cx,z-cz]);
  function mass(height,mat,name){
@@ -136,8 +137,9 @@ export function createHaleWard(THREE,{brick,roof,worldUV,material}){
   box(steel,doorX,3.28,z+c.nz*1.08,2.25,.13,.16);
   box(white,doorX,3.13,z+c.nz*.08,2.1,.19,.28);
   // Thin rainwater pipe beside the entrance, kept clear of the sash.
-  box(steel,x+c.nx*.63,4.08,z+c.nz*.19,.1,8.05,.1);
-  box(steel,x+c.nx*.63,4.4,z+c.nz*.19,.24,.3,.22);
+  const assembly='corner-'+c.index;
+  box(steel,x+c.nx*.63,4.08,z+c.nz*.19,.1,8.05,.1,0,{pipe:true,assembly});
+  box(steel,x+c.nx*.63,4.4,z+c.nz*.19,.24,.3,.22,0,{assembly});
   cornerDetails.push({index:c.index,footprint:outline,door:[doorX,doorZ],normal:[0,c.nz]});
  }
  for(const spec of HALE_WARD_ROOFS){
@@ -156,7 +158,7 @@ export function createHaleWard(THREE,{brick,roof,worldUV,material}){
  }
  const dummy=new THREE.Object3D();
  for(const [mat,items]of batches){
-  const batch=new THREE.InstancedMesh(new THREE.BoxGeometry(1,1,1),mat,items.length);
+  const batch=new THREE.InstancedMesh(new THREE.BoxGeometry(1,1,1),mat,items.length);markDownpipeInstances(batch,items);
   batch.name='Hale ward sashes, masonry bands and rainwater goods';batch.castShadow=true;batch.receiveShadow=true;batch.userData.orientedCollision=true;
   items.forEach((b,i)=>{dummy.position.set(b.x,b.y,b.z);dummy.rotation.set(0,b.r,0);dummy.scale.set(b.w,b.h,b.d);dummy.updateMatrix();batch.setMatrixAt(i,dummy.matrix);});building.add(batch);
  }

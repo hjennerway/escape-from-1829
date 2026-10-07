@@ -2,7 +2,8 @@ import {exteriorObstacles,createObstacleIndex,obstacleContains} from './explore-
 import {createObstacleJump} from './jump.mjs';
 // Sample the existing rendered treads/decks; no duplicate outside stair model.
 export function createAsylumOutside(THREE,exterior){
- let obstacles,indices,supports,walkSurfaces,jumper,jumpObstacles;
+ let obstacles,indices,supports,walkSurfaces,jumper,jumpObstacles,baseObstacles,baseJumpObstacles,scenarioObstacles=[];
+ let sightIndices=new Map(),permanentIndices=new Map();
  const safePositions=new WeakMap();
  let revision=0;
  function refresh(){
@@ -33,10 +34,14 @@ export function createAsylumOutside(THREE,exterior){
   }
   exterior.model.traverseVisible(o=>{if(!o.isMesh||o.userData.noWalkingCollision)return;if(o.isInstancedMesh){for(let i=0;i<o.count;i++){o.getMatrixAt(i,matrix);world.multiplyMatrices(o.matrixWorld,matrix);remember(o.geometry,world,o.name);}}else remember(o.geometry,o.matrixWorld,o.name);});
   for(const b of obstacles)if(b.minY===undefined)Object.assign(b,{minY:-Infinity,maxY:Infinity});
-  indices=new Map();
+  baseObstacles=obstacles;baseJumpObstacles=jumpObstacles;applyScenarioObstacles();
   }finally{for(const [o,visible] of visibility)o.visible=visible;}
  }
  refresh();
+ function applyScenarioObstacles(){
+  obstacles=[...baseObstacles,...scenarioObstacles];jumpObstacles=[...baseJumpObstacles,...scenarioObstacles];
+  indices=new Map();sightIndices=new Map();permanentIndices=new Map();jumper?.setIndex(createObstacleIndex(jumpObstacles,12,.27));
+ }
  function indexAt(height){const bucket=Math.round(height*4)/4;if(!indices.has(bucket))indices.set(bucket,createObstacleIndex(obstacles.filter(b=>b.maxY>bucket+.35&&b.minY<bucket+1.5),12,.27));return indices.get(bucket);}
  function clearHeightChange(x,z,from,to){
   // Check every collision-height bucket, including the eventual landing.
@@ -98,6 +103,11 @@ export function createAsylumOutside(THREE,exterior){
   if(!indexAt(actor.y).contains(actor.x,actor.z))remember(actor);
  }
  return {refresh,heightAt,update,get revision(){return revision;},
+  setObstacles(next){scenarioObstacles=next;revision++;applyScenarioObstacles();},
+  // Tree trunks have unbounded height; they must never substitute for a
+  // permanent boundary because the player can hide the tree layer.
+  clearPermanent(x,z,height=0,padding=.27){const bucket=Math.round(height*4)/4,key=bucket+','+padding;if(!permanentIndices.has(key))permanentIndices.set(key,createObstacleIndex(baseObstacles.filter(b=>Number.isFinite(b.minY)&&b.maxY>bucket+.35&&b.minY<bucket+1.5),12,padding));return !permanentIndices.get(key).contains(x,z);},
+  clearSight(x,z,height=0){const bucket=Math.round(height*4)/4;if(!sightIndices.has(bucket))sightIndices.set(bucket,createObstacleIndex(obstacles.filter(b=>b.blocksSight!==false&&b.maxY>bucket+.35&&b.minY<bucket+1.5),12,0));return !sightIndices.get(bucket).contains(x,z);},
   jump(actor){
    if(jumper?.airborne)return false;
    // Door destinations use the nominal landing height; the rendered tread

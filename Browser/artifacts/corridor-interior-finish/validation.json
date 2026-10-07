@@ -1,0 +1,436 @@
+{
+  "results": {
+    "renderer": "ANGLE (NVIDIA, NVIDIA GeForce RTX 3090 Ti (0x00002203) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+    "barrierFailures": [],
+    "hiddenTreeBarrierFailures": [],
+    "closedPaths": [
+      {
+        "id": "D2",
+        "paths": [
+          {
+            "id": "crowbar",
+            "length": 0
+          },
+          {
+            "id": "oil",
+            "length": 0
+          },
+          {
+            "id": "workshop-door:repair",
+            "length": 0
+          },
+          {
+            "id": "workshop-door:oil-store",
+            "length": 0
+          },
+          {
+            "id": "workshop-door:machine",
+            "length": 0
+          },
+          {
+            "id": "corridor-lock:gallery:0",
+            "length": 0
+          },
+          {
+            "id": "corridor-lock:gallery:1",
+            "length": 0
+          },
+          {
+            "id": "corridor-lock:admin:0",
+            "length": 0
+          },
+          {
+            "id": "corridor-lock:irby:1",
+            "length": 0
+          },
+          {
+            "id": "corridor-lock:diagonal:1",
+            "length": 0
+          },
+          {
+            "id": "corridor-lock:grafton:1",
+            "length": 0
+          },
+          {
+            "id": "corridor-lock:witby:1",
+            "length": 0
+          },
+          {
+            "id": "corridor-lock:hale-0:1",
+            "length": 0
+          },
+          {
+            "id": "corridor-lock:hale-1:1",
+            "length": 0
+          },
+          {
+            "id": "tower-door",
+            "length": 279
+          },
+          {
+            "id": "night-gate",
+            "length": 125
+          },
+          {
+            "id": "pedestrian",
+            "length": 103
+          },
+          {
+            "id": "wicket",
+            "length": 256
+          }
+        ]
+      },
+      {
+        "id": "D8",
+        "paths": [
+          {
+            "id": "crowbar",
+            "length": 0
+          },
+          {
+            "id": "oil",
+            "length": 0
+          },
+          {
+            "id": "workshop-door:repair",
+            "length": 0
+          },
+          {
+            "id": "workshop-door:oil-store",
+            "length": 0
+          },
+          {
+            "id": "workshop-door:machine",
+            "length": 0
+          },
+          {
+            "id": "corridor-lock:gallery:0",
+            "length": 0
+          },
+          {
+            "id": "corridor-lock:gallery:1",
+            "length": 0
+          },
+          {
+            "id": "corridor-lock:admin:0",
+            "length": 0
+          },
+          {
+            "id": "corridor-lock:irby:1",
+            "length": 0
+          },
+          {
+            "id": "corridor-lock:diagonal:1",
+            "length": 0
+          },
+          {
+            "id": "corridor-lock:grafton:1",
+            "length": 0
+          },
+          {
+            "id": "corridor-lock:witby:1",
+            "length": 0
+          },
+          {
+            "id": "corridor-lock:hale-0:1",
+            "length": 0
+          },
+          {
+            "id": "corridor-lock:hale-1:1",
+            "length": 0
+          },
+          {
+            "id": "tower-door",
+            "length": 169
+          },
+          {
+            "id": "night-gate",
+            "length": 117
+          },
+          {
+            "id": "pedestrian",
+            "length": 253
+          },
+          {
+            "id": "wicket",
+            "length": 146
+          }
+        ]
+      }
+    ],
+    "jump": {
+      "x": -80,
+      "z": -84.5999999999999,
+      "floor": 0,
+      "y": 0,
+      "stair": null,
+      "outside": true,
+      "verticalTrend": 0
+    },
+    "mainWalk": 115,
+    "storeWalk": 3295,
+    "paths": [
+      {
+        "id": "D2",
+        "paths": [
+          {
+            "id": "crowbar",
+            "length": 300
+          },
+          {
+            "id": "oil",
+            "length": 309
+          },
+          {
+            "id": "workshop-door:repair",
+            "length": 295
+          },
+          {
+            "id": "workshop-door:oil-store",
+            "length": 304
+          },
+          {
+            "id": "workshop-door:machine",
+            "length": 294
+          },
+          {
+            "id": "corridor-lock:gallery:0",
+            "length": 358
+          },
+          {
+            "id": "corridor-lock:gallery:1",
+            "length": 369
+          },
+          {
+            "id": "corridor-lock:admin:0",
+            "length": 375
+          },
+          {
+            "id": "corridor-lock:irby:1",
+            "length": 365
+          },
+          {
+            "id": "corridor-lock:diagonal:1",
+            "length": 469
+          },
+          {
+            "id": "corridor-lock:grafton:1",
+            "length": 433
+          },
+          {
+            "id": "corridor-lock:witby:1",
+            "length": 467
+          },
+          {
+            "id": "corridor-lock:hale-0:1",
+            "length": 322
+          },
+          {
+            "id": "corridor-lock:hale-1:1",
+            "length": 352
+          },
+          {
+            "id": "tower-door",
+            "length": 279
+          },
+          {
+            "id": "night-gate",
+            "length": 125
+          },
+          {
+            "id": "pedestrian",
+            "length": 103
+          },
+          {
+            "id": "wicket",
+            "length": 256
+          }
+        ]
+      },
+      {
+        "id": "D8",
+        "paths": [
+          {
+            "id": "crowbar",
+            "length": 190
+          },
+          {
+            "id": "oil",
+            "length": 199
+          },
+          {
+            "id": "workshop-door:repair",
+            "length": 185
+          },
+          {
+            "id": "workshop-door:oil-store",
+            "length": 194
+          },
+          {
+            "id": "workshop-door:machine",
+            "length": 184
+          },
+          {
+            "id": "corridor-lock:gallery:0",
+            "length": 248
+          },
+          {
+            "id": "corridor-lock:gallery:1",
+            "length": 259
+          },
+          {
+            "id": "corridor-lock:admin:0",
+            "length": 265
+          },
+          {
+            "id": "corridor-lock:irby:1",
+            "length": 255
+          },
+          {
+            "id": "corridor-lock:diagonal:1",
+            "length": 359
+          },
+          {
+            "id": "corridor-lock:grafton:1",
+            "length": 323
+          },
+          {
+            "id": "corridor-lock:witby:1",
+            "length": 357
+          },
+          {
+            "id": "corridor-lock:hale-0:1",
+            "length": 212
+          },
+          {
+            "id": "corridor-lock:hale-1:1",
+            "length": 242
+          },
+          {
+            "id": "tower-door",
+            "length": 169
+          },
+          {
+            "id": "night-gate",
+            "length": 117
+          },
+          {
+            "id": "pedestrian",
+            "length": 253
+          },
+          {
+            "id": "wicket",
+            "length": 146
+          }
+        ]
+      }
+    ],
+    "roomWalks": [
+      {
+        "point": {
+          "x": 154.773125,
+          "z": -31.5
+        },
+        "samples": 292
+      },
+      {
+        "point": {
+          "x": 149,
+          "z": -31.5
+        },
+        "samples": 100
+      },
+      {
+        "point": {
+          "x": 154.773125,
+          "z": -48.5
+        },
+        "samples": 381
+      },
+      {
+        "point": {
+          "x": 154.773125,
+          "z": -58.5
+        },
+        "samples": 167
+      },
+      {
+        "point": {
+          "x": 161,
+          "z": -48.5
+        },
+        "samples": 265
+      },
+      {
+        "point": {
+          "x": 167,
+          "z": -49
+        },
+        "samples": 115
+      },
+      {
+        "point": {
+          "x": 173,
+          "z": -47
+        },
+        "samples": 132
+      }
+    ],
+    "galleryWalks": [
+      {
+        "z": -125,
+        "samples": 1337
+      },
+      {
+        "z": 23.4,
+        "samples": 2465
+      }
+    ],
+    "wicketWalk": 2063,
+    "serviceWalk": {
+      "samples": 2774,
+      "boundary": true,
+      "route": "wicket"
+    },
+    "guard": {
+      "searched": true,
+      "mode": "return",
+      "position": {
+        "x": 44.56000000000003,
+        "z": -83
+      }
+    },
+    "performance": [
+      {
+        "visible": false,
+        "draws": 219,
+        "triangles": 326368,
+        "medianMs": 28.300000000745058,
+        "p95Ms": 31.5
+      },
+      {
+        "visible": true,
+        "draws": 227,
+        "triangles": 348690,
+        "medianMs": 26.300000000745058,
+        "p95Ms": 28.699999999254942
+      },
+      {
+        "visible": false,
+        "draws": 219,
+        "triangles": 326368,
+        "medianMs": 25.299999997019768,
+        "p95Ms": 31.900000002235174
+      },
+      {
+        "visible": true,
+        "draws": 227,
+        "triangles": 348690,
+        "medianMs": 17.800000000745058,
+        "p95Ms": 28.100000001490116
+      }
+    ]
+  },
+  "errors": []
+}

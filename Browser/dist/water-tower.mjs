@@ -49,8 +49,9 @@ export function createWaterTower(THREE,{brick,roof,dark,worldUV}){
   }
   const repair=brickFinish([...redBricks,'#b8a084','#bea78b','#776053','#ae9176'],'#b9ab95');
   const redDress=brickFinish(redBricks,'#a38a73');
-  // Photos 3 and 4 show alternating red and buff-yellow voussoirs in the
-  // ground-level arch heads. Map bands radially, not as horizontal wall courses.
+  // Alternating red and buff-yellow voussoirs in the ground-level arch heads,
+  // including the entrance arch requested in the latest correction. Map bands
+  // radially, not as horizontal wall courses.
   const archBrickCount=21,archCanvas=document.createElement('canvas');
   archCanvas.width=512;archCanvas.height=128;
   const archCtx=archCanvas.getContext('2d');archCtx.fillStyle='#a79980';archCtx.fillRect(0,0,512,128);
@@ -72,6 +73,14 @@ export function createWaterTower(THREE,{brick,roof,dark,worldUV}){
   const iron=new THREE.MeshStandardMaterial({color:0x292b29,roughness:.88});
   const stone=new THREE.MeshStandardMaterial({color:0x9d998a,roughness:1});
   const paint=new THREE.MeshStandardMaterial({color:0xc2c8bf,roughness:.9});
+  const doorPaint=new THREE.MeshStandardMaterial({color:0x101311,roughness:.92});
+  const doorHardware=new THREE.MeshStandardMaterial({color:0x626760,roughness:.72,metalness:.35});
+  // The pale tiled repair wraps the entrance/annexe corner at one level.
+  const paleRepairBottom=.2,paleRepairTop=3.5;
+  const entranceSideWindows=[
+    {name:'Lower bricked side window',x:-3.44,y:3.45,w:.64,h:1.4},
+    {name:'Upper bricked side window',x:-3.44,y:7.25,w:.76,h:2.2}
+  ];
   const cap=roof.clone();cap.color.set(0x9b8c7b);
   function mesh(g,m,x,y,z,parent=tower,name=''){
     const o=new THREE.Mesh(g,m);o.position.set(x,y,z);o.name=name;o.castShadow=true;o.receiveShadow=true;parent.add(o);return o;
@@ -80,6 +89,36 @@ export function createWaterTower(THREE,{brick,roof,dark,worldUV}){
   function arch(w,spring){const s=new THREE.Shape();s.moveTo(-w/2,0);s.lineTo(w/2,0);s.lineTo(w/2,spring);s.absarc(0,spring,w/2,0,Math.PI,false);s.closePath();return s;}
   function flat(shape,m,x,y,z,parent,name){return mesh(worldUV(new THREE.ShapeGeometry(shape),4.4),m,x,y,z,parent,name);}
   function polygon(points,m,z,parent,name){const s=new THREE.Shape();s.moveTo(...points[0]);for(const p of points.slice(1))s.lineTo(...p);s.closePath();return flat(s,m,0,0,z,parent,name);}
+  function shaftGeometry(){
+    // Cut the two small entrance-side windows through the front skin only;
+    // their shallow returns and bricked backs close each recess below.
+    const shell=new THREE.BoxGeometry(10.2,33.8,10.2).toNonIndexed();
+    const wall=new THREE.Shape();wall.moveTo(-5.1,-16.9);wall.lineTo(5.1,-16.9);wall.lineTo(5.1,16.9);wall.lineTo(-5.1,16.9);wall.closePath();
+    for(const {x,y,w,h} of entranceSideWindows){
+      const hole=new THREE.Path(),left=x-w/2,right=x+w/2,bottom=y-16.9,top=bottom+h;
+      hole.moveTo(left,bottom);hole.lineTo(left,top);hole.lineTo(right,top);hole.lineTo(right,bottom);hole.closePath();wall.holes.push(hole);
+    }
+    const front=new THREE.ShapeGeometry(wall).toNonIndexed();front.translate(0,0,5.1);
+    const retained=[];for(let i=0;i<shell.attributes.position.count;i++)if(shell.attributes.normal.getZ(i)<.5)retained.push(i);
+    const g=new THREE.BufferGeometry();
+    for(const name of ['position','normal','uv']){
+      const a=shell.attributes[name],b=front.attributes[name],size=a.itemSize,data=new Float32Array(retained.length*size+b.array.length);
+      for(let i=0;i<retained.length;i++)for(let j=0;j<size;j++)data[i*size+j]=a.array[retained[i]*size+j];
+      data.set(b.array,retained.length*size);g.setAttribute(name,new THREE.BufferAttribute(data,size));
+    }
+    shell.dispose();front.dispose();return worldUV(g,4.4);
+  }
+  function brickedSideWindow(face,{name,x,y,w,h}){
+    const centre=y+h/2;
+    // Infill sits behind the shaft face (Z=5.1); the exposed returns reveal
+    // physical depth, rather than placing a solid brick block on the wall.
+    box(iron,x,centre,4.955,w,h,.02,face,name+' shadow');
+    box(soot,x,centre,4.975,w-.1,h-.1,.02,face,name);
+    for(const dx of [-w/2+.035,w/2-.035])box(masonry,x+dx,centre,5.03,.07,h,.14,face);
+    for(const dy of [.035,h-.035])box(masonry,x,y+dy,5.03,w,.07,.14,face);
+    box(redDress,x,y+h+.07,5.11,w+.26,.14,.1,face,name+' lintel');
+    box(soot,x,y-.055,5.11,w+.22,.11,.12,face,name+' sill');
+  }
   function repairedWall(face,number,profile){
     // Only the photographed inward-falling contact bounds these repairs.
     // The outer-to-centre rising triangles in the earlier model were spurious.
@@ -129,12 +168,12 @@ export function createWaterTower(THREE,{brick,roof,dark,worldUV}){
     }
     return o;
   }
-  function opening(face,{w,spring,y,fill,name,surround=dress,striped=false}){
+  function opening(face,{w,spring,y,fill,name,surround=dress,striped=false,sill=true}){
     flat(arch(w,spring),recessed,0,y,5.16,face,name+' reveal');
     flat(arch(w-.18,spring-.04),fill,0,y+.04,5.18,face,name);
     for(const x of [-w/2-.13,w/2+.13])box(surround,x,y+spring/2,5.22,.26,spring,.18,face);
     ring(w/2+.28,.3,0,y+spring,5.2,face,surround,name+' arch',striped);
-    box(dress,0,y,5.25,w+.55,.16,.3,face);
+    if(sill)box(dress,0,y,5.25,w+.55,.16,.3,face);
   }
   // Shallow stepped staining bands, not projecting roof geometry.
   function scar(face,points,width,m,name,z=5.135){
@@ -147,7 +186,7 @@ export function createWaterTower(THREE,{brick,roof,dark,worldUV}){
       }
     }
   }
-  box(masonry,0,16.9,0,10.2,33.8,10.2,tower,'Square brick shaft');
+  mesh(shaftGeometry(),masonry,0,16.9,0,tower,'Square brick shaft');
   box(soot,0,.25,0,10.35,.5,10.35);
   box(dress,0,20.15,0,10.48,.25,10.48,tower,'Upper stage string course');
   box(iron,0,20.32,0,10.58,.1,10.58);
@@ -177,19 +216,39 @@ export function createWaterTower(THREE,{brick,roof,dark,worldUV}){
       const falling=TOWER_ROOF_CONTACTS.faces.find(f=>f.side===number).profile;
       repairedWall(face,number,falling);
       scar(face,falling,number===3?.28:.4,soot,'Descending intersecting roof scars');
-      opening(face,{w:3.35,spring:4.85,y:7.15,fill:repair,name:'Large bricked upper opening',surround:redDress});
-      box(repair,0,6.8,5.145,3.8,.4,.04,face,'Former opening sill repair');
-      opening(face,{w:2.95,spring:4.15,y:.3,fill:number===1?iron:repair,name:number===1?'Arched entrance':'Bricked ground doorway',surround:faint,striped:number===3||number===4});
+      // Entrance photograph: approximately 85 wall courses to the blocked
+      // arch crown, rather than the former 101. Other faces retain their
+      // separate photographic interpretation and shared roof contacts.
+      opening(face,{w:3.35,spring:number===1?4.15:4.85,y:number===1?5.6:7.15,fill:repair,name:'Large bricked upper opening',surround:redDress});
+      box(repair,0,number===1?5.25:6.8,5.145,3.8,.4,.04,face,'Former opening sill repair');
+      opening(face,{w:2.95,spring:3.52,y:0,fill:number===1?iron:repair,name:number===1?'Arched entrance':'Bricked ground doorway',surround:faint,striped:number===1||number===3||number===4,sill:number!==1});
       if(number===1){
-        for(const x of [-1.38,1.38])box(paint,x,2.42,5.37,.15,4.22,.12,face);
-        box(paint,0,4.43,5.36,2.82,.15,.1,face);
-        ring(1.43,.1,0,4.43,5.34,face,paint,'Painted entrance fanlight');
-        box(paint,-.91,2.34,5.35,.84,3.95,.08,face);box(paint,.94,2.34,5.35,.8,3.95,.08,face);
-        box(paint,.4,2.4,5.39,.09,4,.08,face);
-        polygon([[2.48,.2],[4.57,.2],[4.57,3.6],[2.48,3.6]],pale,5.15,face,'Pale lower right repair');
-        box(dress,-3.44,5.5,5.23,.78,2.15,.08,face,'Small blocked side opening');
+        for(const x of [-1.38,1.38])box(paint,x,1.8,5.37,.15,3.6,.12,face);
+        box(paint,0,3.5,5.36,2.82,.15,.1,face);
+        ring(1.43,.1,0,3.5,5.34,face,paint,'Painted entrance fanlight');
+        for(const x of [-1.03,1.03])box(paint,x,1.7125,5.35,.62,3.425,.08,face);
+        // A separate recessed leaf, narrow white jambs and small fittings
+        // distinguish the black door from the dark fanlight above it. The
+        // photographed modern parking sign is deliberately omitted.
+        // Approximate rectification of the supplied photograph gives a leaf
+        // 3.37 high by 1.28 wide. This replaces the tall 4.22 by 1.08 leaf.
+        box(iron,0,1.73,5.345,1.4,3.46,.08,face,'Entrance door shadow reveal');
+        box(doorPaint,0,1.735,5.38,1.28,3.35,.08,face,'Black entrance door leaf');
+        for(const x of [-.68,.68])box(paint,x,1.7525,5.43,.08,3.505,.11,face);
+        box(paint,0,3.455,5.43,1.44,.1,.11,face);
+        box(stone,0,.035,5.4,1.4,.07,.11,face,'Entrance door threshold');
+        const latch=new THREE.Group();latch.name='Entrance door handle';face.add(latch);
+        box(doorHardware,-.52,1.8,5.435,.085,.24,.025,latch);
+        box(doorHardware,-.52,1.83,5.47,.035,.14,.045,latch);
+        box(iron,-.52,1.73,5.452,.025,.045,.012,latch);
+        for(const y of [.62,1.85,3.12])box(doorHardware,.625,y,5.435,.045,.12,.025,face);
+        // Small barred vent visible within the otherwise dark arched fanlight.
+        for(const x of [-.23,0,.23])box(iron,x,3.9,5.39,.025,.48,.025,face);
+        for(const y of [3.66,3.9,4.14])box(iron,0,y,5.39,.49,.025,.025,face);
+        polygon([[2.48,paleRepairBottom],[4.57,paleRepairBottom],[4.57,paleRepairTop],[2.48,paleRepairTop]],pale,5.15,face,'Pale lower right repair');
+        for(const window of entranceSideWindows)brickedSideWindow(face,window);
       }
-      if(number===4)polygon([[-4.57,.2],[-1.8,.2],[-1.8,4.1],[-4.57,4.1]],pale,5.15,face,'Pale lower left repair');
+      if(number===4)polygon([[-4.57,paleRepairBottom],[-1.8,paleRepairBottom],[-1.8,paleRepairTop],[-4.57,paleRepairTop]],pale,5.15,face,'Pale lower left repair');
     }else{
       // 1829 side: glazed lower arch, single small blocked opening above.
       opening(face,{w:2.35,spring:4.25,y:1.5,fill:iron,name:'1829-facing arched window'});

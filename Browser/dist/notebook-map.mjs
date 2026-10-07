@@ -32,6 +32,8 @@ export function drawNotebookMap(context,notebook,key,player,enemies,yaw,{createC
    }
   }
   if(view.outside){
+   if(view.groundsPlan){c.fillStyle='#394338';polygon(c,view.groundsPlan.outline);c.fill();c.strokeStyle='#96aaa1';c.lineWidth=Math.max(.7,scale*.15);polygon(c,view.groundsPlan.outline);c.stroke();for(const room of view.groundsPlan.rooms){const [x0,z0,x1,z1]=room.rect;polygon(c,[[x0,z0],[x1,z0],[x1,z1],[x0,z1]]);c.stroke();}}
+   if(view.groundsOutline){c.strokeStyle='#9a9c78';c.lineWidth=Math.max(1,scale*.7);polygon(c,view.groundsOutline);c.stroke();}
    c.strokeStyle='#788774';c.lineWidth=Math.max(1,scale*.8);
    for(const stair of view.routes){c.beginPath();stair.points.forEach(([x,z],i)=>i?c.lineTo(px(x),pz(z)):c.moveTo(px(x),pz(z)));c.stroke();}
    c.strokeStyle='#a19c7d';c.lineWidth=scale*2.5;c.beginPath();c.moveTo(px(0),pz(22));c.lineTo(px(0),pz(82));c.stroke();

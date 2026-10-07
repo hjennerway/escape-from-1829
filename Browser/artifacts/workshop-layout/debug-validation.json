@@ -1,0 +1,1716 @@
+{
+  "receipt": {
+    "renderer": "ANGLE (NVIDIA, NVIDIA GeForce RTX 3090 Ti (0x00002203) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+    "gallery": {
+      "minX": 152.9175,
+      "maxX": 156.62875,
+      "minZ": -126,
+      "maxZ": 24.4,
+      "ceiling": 3.841,
+      "height": 3.8910000000000005
+    },
+    "cx": 154.773125,
+    "floors": [
+      {
+        "z": -125,
+        "y": 0.04000000000000777,
+        "name": "Continuous escape corridor and workshop floor"
+      },
+      {
+        "z": -124.5,
+        "y": 0.04000000000000777,
+        "name": "Continuous escape corridor and workshop floor"
+      },
+      {
+        "z": -124,
+        "y": 0.04000000000000777,
+        "name": "Continuous escape corridor and workshop floor"
+      },
+      {
+        "z": -123.5,
+        "y": 0.04000000000000777,
+        "name": "Continuous escape corridor and workshop floor"
+      },
+      {
+        "z": -123,
+        "y": 0.04000000000000733,
+        "name": "Continuous escape corridor and workshop floor"
+      },
+      {
+        "z": -122.5,
+        "y": 0.04000000000000755,
+        "name": "Continuous escape corridor and workshop floor"
+      },
+      {
+        "z": -122,
+        "y": 0.04000000000000733,
+        "name": "Continuous escape corridor and workshop floor"
+      },
+      {
+        "z": -121.5,
+        "y": 0.04000000000000733,
+        "name": "Continuous escape corridor and workshop floor"
+      },
+      {
+        "z": -121,
+        "y": 0.04000000000000733,
+        "name": "Continuous escape corridor and workshop floor"
+      },
+      {
+        "z": -120.5,
+        "y": 0.040000000000006884,
+        "name": "Continuous escape corridor and workshop floor"
+      },
+      {
+        "z": -120,
+        "y": 0.04000000000000733,
+        "name": "Continuous escape corridor and workshop floor"
+      },
+      {
+        "z": -119.5,
+        "y": 0.040000000000006884,
+        "name": "Continuous escape corridor and workshop floor"
+      },
+      {
+        "z": -119,
+        "y": 0.040000000000006884,
+        "name": "Continuous escape corridor and workshop floor"
+      },
+      {
+        "z": -118.5,
+        "y": 0.040000000000006884,
+        "name": "Continuous escape corridor and workshop floor"
+      },
+      {
+        "z": -118,
+        "y": 0.040000000000006884,
+        "name": "Continuous escape corridor and workshop floor"
+      },
+      {
+        "z": -117.5,
+        "y": 0.040000000000006884,
+        "name": "Continuous escape corridor and workshop floor"
+      },
+      {
+        "z": -117,
+        "y": 0.040000000000006884,
+        "name": "Continuous escape corridor and workshop floor"
+      },
+      {
+        "z": -116.5,
+        "y": 0.040000000000006884,
+        "name": "Continuous escape corridor and workshop floor"
+      },
+      {
+        "z": -116,
+        "y": 0.040000000000006884,
+        "name": "Continuous escape corridor and workshop floor"
+      },
+      {
+        "z": -115.5,
+        "y": 0.040000000000006884,
+        "name": "Continuous escape corridor and workshop floor"
+      },
+      {
+        "z": -115,
+        "y": 0.040000000000006884,
+        "name": "Continuous escape corridor and workshop floor"
+      },
+      {
+        "z": -114.5,
+        "y": 0.040000000000006884,
+        "name": "Continuous escape corridor and workshop floor"
+      },
+      {
+        "z": -114,
+        "y": 0.040000000000006884,
+        "name": "Continuous escape corridor and workshop floor"
+      },
+      {
+        "z": -113.5,
+        "y": 0.040000000000006884,
+        "name": "Continuous escape corridor and workshop floor"
+      },
+      {
+        "z": -113,
+        "y": 0.040000000000006884,
+        "name": "Continuous escape corridor and workshop floor"
+      },
+      {
+        "z": -112.5,
+        "y": 0.040000000000006884,
+        "name": "Continuous escape corridor and workshop floor"
+      },
+      {
+        "z": -112,
+        "y": 0.040000000000006884,
+        "name": "Continuous escape corridor and workshop floor"
+      },
+      {
+        "z": -111.5,
+        "y": 0.040000000000006884,
+        "name": "Continuous escape corridor and workshop floor"
+      },
+      {
+        "z": -111,
+        "y": 0.04000000000000666,
+        "name": "Continuous escape corridor and workshop floor"
+      },
+      {
+        "z": -110.5,
+        "y": 0.04000000000000666,
+        "name": "Continuous escape corridor and workshop floor"
+      },
+      {
+        "z": -110,
+        "y": 0.04000000000000666,
+        "name": "Continuous escape corridor and workshop floor"
+      },
+      {
+        "z": -109.5,
+        "y": 0.04000000000000666,
+        "name": "Continuous escape corridor and workshop floor"
+      },
+      {
+        "z": -109,
+        "y": 0.04000000000000666,
+        "name": "Continuous escape corridor and workshop floor"
+      },
+      {
+        "z": -108.5,
+        "y": 0.04000000000000666,
+        "name": "Continuous escape corridor and workshop floor"
+      },
+      {
+        "z": -108,
+        "y": 0.04000000000000666,
+        "name": "Continuous escape corridor and workshop floor"
+      },
+      {
+        "z": -107.5,
+        "y": 0.04000000000000666,
+        "name": "Continuous escape corridor and workshop floor"
+      },
+      {
+        "z": -107,
+        "y": 0.04000000000000644,
+        "name": "Continuous escape corridor and workshop floor"
+      },
+      {
+        "z": -106.5,
+        "y": 0.04000000000000644,
+        "name": "Continuous escape corridor and workshop floor"
+      },
+      {
+        "z": -106,
+        "y": 0.04000000000000644,
+        "name": "Continuous escape corridor and workshop floor"
+      },
+      {
+        "z": -105.5,
+        "y": 0.04000000000000644,
+        "name": "Continuous escape corridor and workshop floor"
+      },
+      {
+        "z": -105,
+        "y": 0.04000000000000644,
+        "name": "Continuous escape corridor and workshop floor"
+      },
+      {
+        "z": -104.5,
+        "y": 0.04000000000000644,
+        "name": "Continuous escape corridor and workshop floor"
+      },
+      {
+        "z": -104,
+        "y": 0.04000000000000644,
+        "name": "Continuous escape corridor and workshop floor"
+      },
+      {
+        "z": -103.5,
+        "y": 0.04000000000000644,
+        "name": "Continuous escape corridor and workshop floor"
+      },
+      {
+        "z": -103,
+        "y": 0.04000000000000644,
+        "name": "Continuous escape corridor and workshop floor"
+      },
+      {
+        "z": -102.5,
+        "y": 0.04000000000000644,
+        "name": "Continuous escape corridor and workshop floor"
+      },
+      {
+        "z": -102,
+        "y": 0.04000000000000644,
+        "name": "Continuous escape corridor and workshop floor"
+      },
+      {
+        "z": -101.5,
+        "y": 0.04000000000000644,
+        "name": "Continuous escape corridor and workshop floor"
+      },
+      {
+        "z": -101,
+        "y": 0.04000000000000644,
+        "name": "Continuous escape corridor and workshop floor"
+      },
+      {
+        "z": -100.5,
+        "y": 0.04000000000000644,
+        "name": "Continuous escape corridor and workshop floor"
+      },
+      {
+        "z": -100,
+        "y": 0.04000000000000644,
+        "name": "Continuous escape corridor and workshop floor"
+      },
+      {
+        "z": -99.5,
+        "y": 0.04000000000000644,
+        "name": "Continuous escape corridor and workshop floor"
+      },
+      {
+        "z": -99,
+        "y": 0.040000000000005996,
+        "name": "Continuous escape corridor and workshop floor"
+      },
+      {
+        "z": -98.5,
+        "y": 0.04000000000000644,
+        "name": "Continuous escape corridor and workshop floor"
+      },
+      {
+        "z": -98,
+        "y": 0.040000000000005996,
+        "name": "Continuous escape corridor and workshop floor"
+      },
+      {
+        "z": -97.5,
+        "y": 0.040000000000005996,
+        "name": "Continuous escape corridor and workshop floor"
+      },
+      {
+        "z": -97,
+        "y": 0.04000000000000622,
+        "name": "Continuous escape corridor and workshop floor"
+      },
+      {
+        "z": -96.5,
+        "y": 0.04000000000000622,
+        "name": "Continuous escape corridor and workshop floor"
+      },
+      {
+        "z": -96,
+        "y": 0.04000000000000622,
+        "name": "Continuous escape corridor and workshop floor"
+      },
+      {
+        "z": -95.5,
+        "y": 0.040000000000005996,
+        "name": "Continuous escape corridor and workshop floor"
+      },
+      {
+        "z": -95,
+        "y": 0.040000000000005996,
+        "name": "Continuous escape corridor and workshop floor"
+      },
+      {
+        "z": -94.5,
+        "y": 0.040000000000005774,
+        "name": "Continuous escape corridor and workshop floor"
+      },
+      {
+        "z": -94,
+        "y": 0.040000000000005996,
+        "name": "Continuous escape corridor and workshop floor"
+      },
+      {
+        "z": -93.5,
+        "y": 0.040000000000005774,
+        "name": "Continuous escape corridor and workshop floor"
+      },
+      {
+        "z": -93,
+        "y": 0.04000000000000555,
+        "name": "Continuous escape corridor and workshop floor"
+      },
+      {
+        "z": -92.5,
+        "y": 0.040000000000005996,
+        "name": "Continuous escape corridor and workshop floor"
+      },
+      {
+        "z": -92,
+        "y": 0.04000000000000555,
+        "name": "Continuous escape corridor and workshop floor"
+      },
+      {
+        "z": -91.5,
+        "y": 0.04000000000000555,
+        "name": "Continuous escape corridor and workshop floor"
+      },
+      {
+        "z": -91,
+        "y": 0.04000000000000555,
+        "name": "Continuous escape corridor and workshop floor"
+      },
+      {
+        "z": -90.5,
+        "y": 0.04000000000000555,
+        "name": "Continuous escape corridor and workshop floor"
+      },
+      {
+        "z": -90,
+        "y": 0.04000000000000555,
+        "name": "Continuous escape corridor and workshop floor"
+      },
+      {
+        "z": -89.5,
+        "y": 0.04000000000000555,
+        "name": "Continuous escape corridor and workshop floor"
+      },
+      {
+        "z": -89,
+        "y": 0.04000000000000555,
+        "name": "Continuous escape corridor and workshop floor"
+      },
+      {
+        "z": -88.5,
+        "y": 0.04000000000000533,
+        "name": "Continuous escape corridor and workshop floor"
+      },
+      {
+        "z": -88,
+        "y": 0.04000000000000533,
+        "name": "Continuous escape corridor and workshop floor"
+      },
+      {
+        "z": -87.5,
+        "y": 0.04000000000000533,
+        "name": "Continuous escape corridor and workshop floor"
+      },
+      {
+        "z": -87,
+        "y": 0.04000000000000533,
+        "name": "Continuous escape corridor and workshop floor"
+      },
+      {
+        "z": -86.5,
+        "y": 0.04000000000000533,
+        "name": "Continuous escape corridor and workshop floor"
+      },
+      {
+        "z": -86,
+        "y": 0.04000000000000533,
+        "name": "Continuous escape corridor and workshop floor"
+      },
+      {
+        "z": -85.5,
+        "y": 0.04000000000000533,
+        "name": "Continuous escape corridor and workshop floor"
+      },
+      {
+        "z": -85,
+        "y": 0.04000000000000533,
+        "name": "Continuous escape corridor and workshop floor"
+      },
+      {
+        "z": -84.5,
+        "y": 0.04000000000000533,
+        "name": "Continuous escape corridor and workshop floor"
+      },
+      {
+        "z": -84,
+        "y": 0.04000000000000533,
+        "name": "Continuous escape corridor and workshop floor"
+      },
+      {
+        "z": -83.5,
+        "y": 0.04000000000000533,
+        "name": "Continuous escape corridor and workshop floor"
+      },
+      {
+        "z": -83,
+        "y": 0.04000000000000533,
+        "name": "Continuous escape corridor and workshop floor"
+      },
+      {
+        "z": -82.5,
+        "y": 0.04000000000000511,
+        "name": "Continuous escape corridor and workshop floor"
+      },
+      {
+        "z": -82,
+        "y": 0.04000000000000533,
+        "name": "Continuous escape corridor and workshop floor"
+      },
+      {
+        "z": -81.5,
+        "y": 0.04000000000000533,
+        "name": "Continuous escape corridor and workshop floor"
+      },
+      {
+        "z": -81,
+        "y": 0.04000000000000511,
+        "name": "Continuous escape corridor and workshop floor"
+      },
+      {
+        "z": -80.5,
+        "y": 0.04000000000000511,
+        "name": "Continuous escape corridor and workshop floor"
+      },
+      {
+        "z": -80,
+        "y": 0.04000000000000511,
+        "name": "Continuous escape corridor and workshop floor"
+      },
+      {
+        "z": -79.5,
+        "y": 0.040000000000004664,
+        "name": "Continuous escape corridor and workshop floor"
+      },
+      {
+        "z": -79,
+        "y": 0.040000000000004664,
+        "name": "Continuous escape corridor and workshop floor"
+      },
+      {
+        "z": -78.5,
+        "y": 0.040000000000004664,
+        "name": "Continuous escape corridor and workshop floor"
+      },
+      {
+        "z": -78,
+        "y": 0.040000000000004664,
+        "name": "Continuous escape corridor and workshop floor"
+      },
+      {
+        "z": -77.5,
+        "y": 0.040000000000004664,
+        "name": "Continuous escape corridor and workshop floor"
+      },
+      {
+        "z": -77,
+        "y": 0.040000000000004664,
+        "name": "Continuous escape corridor and workshop floor"
+      },
+      {
+        "z": -76.5,
+        "y": 0.040000000000004664,
+        "name": "Continuous escape corridor and workshop floor"
+      },
+      {
+        "z": -76,
+        "y": 0.040000000000004664,
+        "name": "Continuous escape corridor and workshop floor"
+      },
+      {
+        "z": -75.5,
+        "y": 0.040000000000004664,
+        "name": "Continuous escape corridor and workshop floor"
+      },
+      {
+        "z": -75,
+        "y": 0.040000000000004664,
+        "name": "Continuous escape corridor and workshop floor"
+      },
+      {
+        "z": -74.5,
+        "y": 0.040000000000004664,
+        "name": "Continuous escape corridor and workshop floor"
+      },
+      {
+        "z": -74,
+        "y": 0.040000000000004664,
+        "name": "Continuous escape corridor and workshop floor"
+      },
+      {
+        "z": -73.5,
+        "y": 0.040000000000004664,
+        "name": "Continuous escape corridor and workshop floor"
+      },
+      {
+        "z": -73,
+        "y": 0.040000000000004664,
+        "name": "Continuous escape corridor and workshop floor"
+      },
+      {
+        "z": -72.5,
+        "y": 0.040000000000004664,
+        "name": "Continuous escape corridor and workshop floor"
+      },
+      {
+        "z": -72,
+        "y": 0.040000000000004664,
+        "name": "Continuous escape corridor and workshop floor"
+      },
+      {
+        "z": -71.5,
+        "y": 0.040000000000004664,
+        "name": "Continuous escape corridor and workshop floor"
+      },
+      {
+        "z": -71,
+        "y": 0.04000000000000422,
+        "name": "Continuous escape corridor and workshop floor"
+      },
+      {
+        "z": -70.5,
+        "y": 0.04000000000000422,
+        "name": "Continuous escape corridor and workshop floor"
+      },
+      {
+        "z": -70,
+        "y": 0.04000000000000422,
+        "name": "Continuous escape corridor and workshop floor"
+      },
+      {
+        "z": -69.5,
+        "y": 0.04000000000000422,
+        "name": "Continuous escape corridor and workshop floor"
+      },
+      {
+        "z": -69,
+        "y": 0.04000000000000422,
+        "name": "Continuous escape corridor and workshop floor"
+      },
+      {
+        "z": -68.5,
+        "y": 0.04000000000000422,
+        "name": "Continuous escape corridor and workshop floor"
+      },
+      {
+        "z": -68,
+        "y": 0.04000000000000422,
+        "name": "Continuous escape corridor and workshop floor"
+      },
+      {
+        "z": -67.5,
+        "y": 0.04000000000000422,
+        "name": "Continuous escape corridor and workshop floor"
+      },
+      {
+        "z": -67,
+        "y": 0.04000000000000444,
+        "name": "Continuous escape corridor and workshop floor"
+      },
+      {
+        "z": -66.5,
+        "y": 0.04000000000000444,
+        "name": "Continuous escape corridor and workshop floor"
+      },
+      {
+        "z": -66,
+        "y": 0.040000000000004,
+        "name": "Continuous escape corridor and workshop floor"
+      },
+      {
+        "z": -65.5,
+        "y": 0.040000000000004,
+        "name": "Continuous escape corridor and workshop floor"
+      },
+      {
+        "z": -65,
+        "y": 0.04000000000000444,
+        "name": "Continuous escape corridor and workshop floor"
+      },
+      {
+        "z": -64.5,
+        "y": 0.040000000000004,
+        "name": "Continuous escape corridor and workshop floor"
+      },
+      {
+        "z": -64,
+        "y": 0.040000000000004,
+        "name": "Continuous escape corridor and workshop floor"
+      },
+      {
+        "z": -63.5,
+        "y": 0.040000000000004,
+        "name": "Continuous escape corridor and workshop floor"
+      },
+      {
+        "z": -63,
+        "y": 0.040000000000004,
+        "name": "Continuous escape corridor and workshop floor"
+      },
+      {
+        "z": -62.5,
+        "y": 0.040000000000004,
+        "name": "Continuous escape corridor and workshop floor"
+      },
+      {
+        "z": -62,
+        "y": 0.040000000000003554,
+        "name": "Continuous escape corridor and workshop floor"
+      },
+      {
+        "z": -61.5,
+        "y": 0.040000000000004,
+        "name": "Continuous escape corridor and workshop floor"
+      },
+      {
+        "z": -61,
+        "y": 0.040000000000003554,
+        "name": "Continuous escape corridor and workshop floor"
+      },
+      {
+        "z": -60.5,
+        "y": 0.040000000000004,
+        "name": "Continuous escape corridor and workshop floor"
+      },
+      {
+        "z": -60,
+        "y": 0.040000000000003554,
+        "name": "Continuous escape corridor and workshop floor"
+      },
+      {
+        "z": -59.5,
+        "y": 0.040000000000004,
+        "name": "Continuous escape corridor and workshop floor"
+      },
+      {
+        "z": -59,
+        "y": 0.040000000000003554,
+        "name": "Continuous escape corridor and workshop floor"
+      },
+      {
+        "z": -58.5,
+        "y": 0.040000000000003554,
+        "name": "Continuous escape corridor and workshop floor"
+      },
+      {
+        "z": -58,
+        "y": 0.040000000000003554,
+        "name": "Continuous escape corridor and workshop floor"
+      },
+      {
+        "z": -57.5,
+        "y": 0.040000000000003554,
+        "name": "Continuous escape corridor and workshop floor"
+      },
+      {
+        "z": -57,
+        "y": 0.040000000000003554,
+        "name": "Continuous escape corridor and workshop floor"
+      },
+      {
+        "z": -56.5,
+        "y": 0.040000000000003554,
+        "name": "Continuous escape corridor and workshop floor"
+      },
+      {
+        "z": -56,
+        "y": 0.040000000000003554,
+        "name": "Continuous escape corridor and workshop floor"
+      },
+      {
+        "z": -55.5,
+        "y": 0.040000000000003554,
+        "name": "Continuous escape corridor and workshop floor"
+      },
+      {
+        "z": -55,
+        "y": 0.040000000000003554,
+        "name": "Continuous escape corridor and workshop floor"
+      },
+      {
+        "z": -54.5,
+        "y": 0.040000000000003554,
+        "name": "Continuous escape corridor and workshop floor"
+      },
+      {
+        "z": -54,
+        "y": 0.040000000000003554,
+        "name": "Continuous escape corridor and workshop floor"
+      },
+      {
+        "z": -53.5,
+        "y": 0.040000000000003554,
+        "name": "Continuous escape corridor and workshop floor"
+      },
+      {
+        "z": -53,
+        "y": 0.040000000000003554,
+        "name": "Continuous escape corridor and workshop floor"
+      },
+      {
+        "z": -52.5,
+        "y": 0.040000000000003554,
+        "name": "Continuous escape corridor and workshop floor"
+      },
+      {
+        "z": -52,
+        "y": 0.040000000000003554,
+        "name": "Continuous escape corridor and workshop floor"
+      },
+      {
+        "z": -51.5,
+        "y": 0.040000000000003554,
+        "name": "Continuous escape corridor and workshop floor"
+      },
+      {
+        "z": -51,
+        "y": 0.04000000000000311,
+        "name": "Continuous escape corridor and workshop floor"
+      },
+      {
+        "z": -50.5,
+        "y": 0.04000000000000311,
+        "name": "Continuous escape corridor and workshop floor"
+      },
+      {
+        "z": -50,
+        "y": 0.04000000000000311,
+        "name": "Continuous escape corridor and workshop floor"
+      },
+      {
+        "z": -49.5,
+        "y": 0.04000000000000311,
+        "name": "Continuous escape corridor and workshop floor"
+      },
+      {
+        "z": -49,
+        "y": 0.040000000000002665,
+        "name": "Continuous escape corridor and workshop floor"
+      },
+      {
+        "z": -48.5,
+        "y": 0.040000000000002665,
+        "name": "Continuous escape corridor and workshop floor"
+      },
+      {
+        "z": -48,
+        "y": 0.040000000000002665,
+        "name": "Continuous escape corridor and workshop floor"
+      },
+      {
+        "z": -47.5,
+        "y": 0.040000000000002665,
+        "name": "Continuous escape corridor and workshop floor"
+      },
+      {
+        "z": -47,
+        "y": 0.040000000000002665,
+        "name": "Continuous escape corridor and workshop floor"
+      },
+      {
+        "z": -46.5,
+        "y": 0.040000000000002665,
+        "name": "Continuous escape corridor and workshop floor"
+      },
+      {
+        "z": -46,
+        "y": 0.040000000000002665,
+        "name": "Continuous escape corridor and workshop floor"
+      },
+      {
+        "z": -45.5,
+        "y": 0.04000000000000311,
+        "name": "Continuous escape corridor and workshop floor"
+      },
+      {
+        "z": -45,
+        "y": 0.04000000000000289,
+        "name": "Continuous escape corridor and workshop floor"
+      },
+      {
+        "z": -44.5,
+        "y": 0.04000000000000289,
+        "name": "Continuous escape corridor and workshop floor"
+      },
+      {
+        "z": -44,
+        "y": 0.04000000000000289,
+        "name": "Continuous escape corridor and workshop floor"
+      },
+      {
+        "z": -43.5,
+        "y": 0.040000000000002665,
+        "name": "Continuous escape corridor and workshop floor"
+      },
+      {
+        "z": -43,
+        "y": 0.040000000000002665,
+        "name": "Continuous escape corridor and workshop floor"
+      },
+      {
+        "z": -42.5,
+        "y": 0.040000000000002665,
+        "name": "Continuous escape corridor and workshop floor"
+      },
+      {
+        "z": -42,
+        "y": 0.040000000000002665,
+        "name": "Continuous escape corridor and workshop floor"
+      },
+      {
+        "z": -41.5,
+        "y": 0.040000000000002665,
+        "name": "Continuous escape corridor and workshop floor"
+      },
+      {
+        "z": -41,
+        "y": 0.040000000000002665,
+        "name": "Continuous escape corridor and workshop floor"
+      },
+      {
+        "z": -40.5,
+        "y": 0.040000000000002665,
+        "name": "Continuous escape corridor and workshop floor"
+      },
+      {
+        "z": -40,
+        "y": 0.040000000000002665,
+        "name": "Continuous escape corridor and workshop floor"
+      },
+      {
+        "z": -39.5,
+        "y": 0.040000000000002665,
+        "name": "Continuous escape corridor and workshop floor"
+      },
+      {
+        "z": -39,
+        "y": 0.040000000000002665,
+        "name": "Continuous escape corridor and workshop floor"
+      },
+      {
+        "z": -38.5,
+        "y": 0.040000000000002665,
+        "name": "Continuous escape corridor and workshop floor"
+      },
+      {
+        "z": -38,
+        "y": 0.040000000000002665,
+        "name": "Continuous escape corridor and workshop floor"
+      },
+      {
+        "z": -37.5,
+        "y": 0.040000000000002665,
+        "name": "Continuous escape corridor and workshop floor"
+      },
+      {
+        "z": -37,
+        "y": 0.040000000000002665,
+        "name": "Continuous escape corridor and workshop floor"
+      },
+      {
+        "z": -36.5,
+        "y": 0.040000000000002665,
+        "name": "Continuous escape corridor and workshop floor"
+      },
+      {
+        "z": -36,
+        "y": 0.040000000000002665,
+        "name": "Continuous escape corridor and workshop floor"
+      },
+      {
+        "z": -35.5,
+        "y": 0.040000000000002665,
+        "name": "Continuous escape corridor and workshop floor"
+      },
+      {
+        "z": -35,
+        "y": 0.04000000000000222,
+        "name": "Continuous escape corridor and workshop floor"
+      },
+      {
+        "z": -34.5,
+        "y": 0.040000000000002665,
+        "name": "Continuous escape corridor and workshop floor"
+      },
+      {
+        "z": -34,
+        "y": 0.04000000000000222,
+        "name": "Continuous escape corridor and workshop floor"
+      },
+      {
+        "z": -33.5,
+        "y": 0.04000000000000222,
+        "name": "Continuous escape corridor and workshop floor"
+      },
+      {
+        "z": -33,
+        "y": 0.040000000000002,
+        "name": "Continuous escape corridor and workshop floor"
+      },
+      {
+        "z": -32.5,
+        "y": 0.040000000000002,
+        "name": "Continuous escape corridor and workshop floor"
+      },
+      {
+        "z": -32,
+        "y": 0.040000000000002,
+        "name": "Continuous escape corridor and workshop floor"
+      },
+      {
+        "z": -31.5,
+        "y": 0.040000000000002,
+        "name": "Continuous escape corridor and workshop floor"
+      },
+      {
+        "z": -31,
+        "y": 0.04000000000000178,
+        "name": "Continuous escape corridor and workshop floor"
+      },
+      {
+        "z": -30.5,
+        "y": 0.040000000000002,
+        "name": "Continuous escape corridor and workshop floor"
+      },
+      {
+        "z": -30,
+        "y": 0.040000000000002,
+        "name": "Continuous escape corridor and workshop floor"
+      },
+      {
+        "z": -29.5,
+        "y": 0.04000000000000178,
+        "name": "Continuous escape corridor and workshop floor"
+      },
+      {
+        "z": -29,
+        "y": 0.04000000000000178,
+        "name": "Continuous escape corridor and workshop floor"
+      },
+      {
+        "z": -28.5,
+        "y": 0.04000000000000178,
+        "name": "Continuous escape corridor and workshop floor"
+      },
+      {
+        "z": -28,
+        "y": 0.04000000000000178,
+        "name": "Continuous escape corridor and workshop floor"
+      },
+      {
+        "z": -27.5,
+        "y": 0.04000000000000178,
+        "name": "Continuous escape corridor and workshop floor"
+      },
+      {
+        "z": -27,
+        "y": 0.04000000000000178,
+        "name": "Continuous escape corridor and workshop floor"
+      },
+      {
+        "z": -26.5,
+        "y": 0.04000000000000178,
+        "name": "Continuous escape corridor and workshop floor"
+      },
+      {
+        "z": -26,
+        "y": 0.04000000000000178,
+        "name": "Continuous escape corridor and workshop floor"
+      },
+      {
+        "z": -25.5,
+        "y": 0.04000000000000178,
+        "name": "Continuous escape corridor and workshop floor"
+      },
+      {
+        "z": -25,
+        "y": 0.04000000000000178,
+        "name": "Continuous escape corridor and workshop floor"
+      },
+      {
+        "z": -24.5,
+        "y": 0.04000000000000178,
+        "name": "Continuous escape corridor and workshop floor"
+      },
+      {
+        "z": -24,
+        "y": 0.04000000000000133,
+        "name": "Continuous escape corridor and workshop floor"
+      },
+      {
+        "z": -23.5,
+        "y": 0.04000000000000133,
+        "name": "Continuous escape corridor and workshop floor"
+      },
+      {
+        "z": -23,
+        "y": 0.04000000000000111,
+        "name": "Continuous escape corridor and workshop floor"
+      },
+      {
+        "z": -22.5,
+        "y": 0.04000000000000133,
+        "name": "Continuous escape corridor and workshop floor"
+      },
+      {
+        "z": -22,
+        "y": 0.04000000000000133,
+        "name": "Continuous escape corridor and workshop floor"
+      },
+      {
+        "z": -21.5,
+        "y": 0.04000000000000133,
+        "name": "Continuous escape corridor and workshop floor"
+      },
+      {
+        "z": -21,
+        "y": 0.04000000000000133,
+        "name": "Continuous escape corridor and workshop floor"
+      },
+      {
+        "z": -20.5,
+        "y": 0.04000000000000089,
+        "name": "Continuous escape corridor and workshop floor"
+      },
+      {
+        "z": -20,
+        "y": 0.04000000000000089,
+        "name": "Continuous escape corridor and workshop floor"
+      },
+      {
+        "z": -19.5,
+        "y": 0.04000000000000089,
+        "name": "Continuous escape corridor and workshop floor"
+      },
+      {
+        "z": -19,
+        "y": 0.04000000000000089,
+        "name": "Continuous escape corridor and workshop floor"
+      },
+      {
+        "z": -18.5,
+        "y": 0.04000000000000089,
+        "name": "Continuous escape corridor and workshop floor"
+      },
+      {
+        "z": -18,
+        "y": 0.04000000000000089,
+        "name": "Continuous escape corridor and workshop floor"
+      },
+      {
+        "z": -17.5,
+        "y": 0.04000000000000089,
+        "name": "Continuous escape corridor and workshop floor"
+      },
+      {
+        "z": -17,
+        "y": 0.04000000000000089,
+        "name": "Continuous escape corridor and workshop floor"
+      },
+      {
+        "z": -16.5,
+        "y": 0.04000000000000111,
+        "name": "Continuous escape corridor and workshop floor"
+      },
+      {
+        "z": -16,
+        "y": 0.04000000000000111,
+        "name": "Continuous escape corridor and workshop floor"
+      },
+      {
+        "z": -15.5,
+        "y": 0.04000000000000111,
+        "name": "Continuous escape corridor and workshop floor"
+      },
+      {
+        "z": -15,
+        "y": 0.04000000000000111,
+        "name": "Continuous escape corridor and workshop floor"
+      },
+      {
+        "z": -14.5,
+        "y": 0.04000000000000067,
+        "name": "Continuous escape corridor and workshop floor"
+      },
+      {
+        "z": -14,
+        "y": 0.04000000000000067,
+        "name": "Continuous escape corridor and workshop floor"
+      },
+      {
+        "z": -13.5,
+        "y": 0.04000000000000067,
+        "name": "Continuous escape corridor and workshop floor"
+      },
+      {
+        "z": -13,
+        "y": 0.04000000000000067,
+        "name": "Continuous escape corridor and workshop floor"
+      },
+      {
+        "z": -12.5,
+        "y": 0.04000000000000067,
+        "name": "Continuous escape corridor and workshop floor"
+      },
+      {
+        "z": -12,
+        "y": 0.04000000000000067,
+        "name": "Continuous escape corridor and workshop floor"
+      },
+      {
+        "z": -11.5,
+        "y": 0.04000000000000067,
+        "name": "Continuous escape corridor and workshop floor"
+      },
+      {
+        "z": -11,
+        "y": 0.04000000000000067,
+        "name": "Continuous escape corridor and workshop floor"
+      },
+      {
+        "z": -10.5,
+        "y": 0.04000000000000067,
+        "name": "Continuous escape corridor and workshop floor"
+      },
+      {
+        "z": -10,
+        "y": 0.04000000000000067,
+        "name": "Continuous escape corridor and workshop floor"
+      },
+      {
+        "z": -9.5,
+        "y": 0.04000000000000067,
+        "name": "Continuous escape corridor and workshop floor"
+      },
+      {
+        "z": -9,
+        "y": 0.04000000000000067,
+        "name": "Continuous escape corridor and workshop floor"
+      },
+      {
+        "z": -8.5,
+        "y": 0.04000000000000067,
+        "name": "Continuous escape corridor and workshop floor"
+      },
+      {
+        "z": -8,
+        "y": 0.04000000000000067,
+        "name": "Continuous escape corridor and workshop floor"
+      },
+      {
+        "z": -7.5,
+        "y": 0.04000000000000067,
+        "name": "Continuous escape corridor and workshop floor"
+      },
+      {
+        "z": -7,
+        "y": 0.04000000000000067,
+        "name": "Continuous escape corridor and workshop floor"
+      },
+      {
+        "z": -6.5,
+        "y": 0.040000000000000445,
+        "name": "Continuous escape corridor and workshop floor"
+      },
+      {
+        "z": -6,
+        "y": 0.040000000000000445,
+        "name": "Continuous escape corridor and workshop floor"
+      },
+      {
+        "z": -5.5,
+        "y": 0.040000000000000445,
+        "name": "Continuous escape corridor and workshop floor"
+      },
+      {
+        "z": -5,
+        "y": 0.040000000000000445,
+        "name": "Continuous escape corridor and workshop floor"
+      },
+      {
+        "z": -4.5,
+        "y": 0.04000000000000022,
+        "name": "Continuous escape corridor and workshop floor"
+      },
+      {
+        "z": -4,
+        "y": 0.040000000000000445,
+        "name": "Continuous escape corridor and workshop floor"
+      },
+      {
+        "z": -3.5,
+        "y": 0.04000000000000022,
+        "name": "Continuous escape corridor and workshop floor"
+      },
+      {
+        "z": -3,
+        "y": 0.04000000000000022,
+        "name": "Continuous escape corridor and workshop floor"
+      },
+      {
+        "z": -2.5,
+        "y": 0.04000000000000022,
+        "name": "Continuous escape corridor and workshop floor"
+      },
+      {
+        "z": -2,
+        "y": 0.040000000000000445,
+        "name": "Continuous escape corridor and workshop floor"
+      },
+      {
+        "z": -1.5,
+        "y": 0.040000000000000445,
+        "name": "Continuous escape corridor and workshop floor"
+      },
+      {
+        "z": -1,
+        "y": 0.04,
+        "name": "Continuous escape corridor and workshop floor"
+      },
+      {
+        "z": -0.5,
+        "y": 0.04,
+        "name": "Continuous escape corridor and workshop floor"
+      },
+      {
+        "z": 0,
+        "y": 0.04,
+        "name": "Continuous escape corridor and workshop floor"
+      },
+      {
+        "z": 0.5,
+        "y": 0.04,
+        "name": "Continuous escape corridor and workshop floor"
+      },
+      {
+        "z": 1,
+        "y": 0.03999999999999978,
+        "name": "Continuous escape corridor and workshop floor"
+      },
+      {
+        "z": 1.5,
+        "y": 0.03999999999999978,
+        "name": "Continuous escape corridor and workshop floor"
+      },
+      {
+        "z": 2,
+        "y": 0.03999999999999978,
+        "name": "Continuous escape corridor and workshop floor"
+      },
+      {
+        "z": 2.5,
+        "y": 0.03999999999999978,
+        "name": "Continuous escape corridor and workshop floor"
+      },
+      {
+        "z": 3,
+        "y": 0.03999999999999978,
+        "name": "Continuous escape corridor and workshop floor"
+      },
+      {
+        "z": 3.5,
+        "y": 0.03999999999999978,
+        "name": "Continuous escape corridor and workshop floor"
+      },
+      {
+        "z": 4,
+        "y": 0.03999999999999978,
+        "name": "Continuous escape corridor and workshop floor"
+      },
+      {
+        "z": 4.5,
+        "y": 0.03999999999999978,
+        "name": "Continuous escape corridor and workshop floor"
+      },
+      {
+        "z": 5,
+        "y": 0.03999999999999978,
+        "name": "Continuous escape corridor and workshop floor"
+      },
+      {
+        "z": 5.5,
+        "y": 0.03999999999999978,
+        "name": "Continuous escape corridor and workshop floor"
+      },
+      {
+        "z": 6,
+        "y": 0.03999999999999978,
+        "name": "Continuous escape corridor and workshop floor"
+      },
+      {
+        "z": 6.5,
+        "y": 0.03999999999999978,
+        "name": "Continuous escape corridor and workshop floor"
+      },
+      {
+        "z": 7,
+        "y": 0.039999999999999335,
+        "name": "Continuous escape corridor and workshop floor"
+      },
+      {
+        "z": 7.5,
+        "y": 0.03999999999999978,
+        "name": "Continuous escape corridor and workshop floor"
+      },
+      {
+        "z": 8,
+        "y": 0.039999999999999335,
+        "name": "Continuous escape corridor and workshop floor"
+      },
+      {
+        "z": 8.5,
+        "y": 0.039999999999999335,
+        "name": "Continuous escape corridor and workshop floor"
+      },
+      {
+        "z": 9,
+        "y": 0.039999999999999335,
+        "name": "Continuous escape corridor and workshop floor"
+      },
+      {
+        "z": 9.5,
+        "y": 0.039999999999999335,
+        "name": "Continuous escape corridor and workshop floor"
+      },
+      {
+        "z": 10,
+        "y": 0.039999999999999335,
+        "name": "Continuous escape corridor and workshop floor"
+      },
+      {
+        "z": 10.5,
+        "y": 0.039999999999999335,
+        "name": "Continuous escape corridor and workshop floor"
+      },
+      {
+        "z": 11,
+        "y": 0.039999999999999335,
+        "name": "Continuous escape corridor and workshop floor"
+      },
+      {
+        "z": 11.5,
+        "y": 0.039999999999999335,
+        "name": "Continuous escape corridor and workshop floor"
+      },
+      {
+        "z": 12,
+        "y": 0.03999999999999889,
+        "name": "Continuous escape corridor and workshop floor"
+      },
+      {
+        "z": 12.5,
+        "y": 0.03999999999999889,
+        "name": "Continuous escape corridor and workshop floor"
+      },
+      {
+        "z": 13,
+        "y": 0.03999999999999889,
+        "name": "Continuous escape corridor and workshop floor"
+      },
+      {
+        "z": 13.5,
+        "y": 0.039999999999999335,
+        "name": "Continuous escape corridor and workshop floor"
+      },
+      {
+        "z": 14,
+        "y": 0.03999999999999889,
+        "name": "Continuous escape corridor and workshop floor"
+      },
+      {
+        "z": 14.5,
+        "y": 0.03999999999999889,
+        "name": "Continuous escape corridor and workshop floor"
+      },
+      {
+        "z": 15,
+        "y": 0.03999999999999889,
+        "name": "Continuous escape corridor and workshop floor"
+      },
+      {
+        "z": 15.5,
+        "y": 0.03999999999999889,
+        "name": "Continuous escape corridor and workshop floor"
+      },
+      {
+        "z": 16,
+        "y": 0.03999999999999867,
+        "name": "Continuous escape corridor and workshop floor"
+      },
+      {
+        "z": 16.5,
+        "y": 0.03999999999999867,
+        "name": "Continuous escape corridor and workshop floor"
+      },
+      {
+        "z": 17,
+        "y": 0.03999999999999889,
+        "name": "Continuous escape corridor and workshop floor"
+      },
+      {
+        "z": 17.5,
+        "y": 0.03999999999999867,
+        "name": "Continuous escape corridor and workshop floor"
+      },
+      {
+        "z": 18,
+        "y": 0.03999999999999867,
+        "name": "Continuous escape corridor and workshop floor"
+      },
+      {
+        "z": 18.5,
+        "y": 0.03999999999999911,
+        "name": "Continuous escape corridor and workshop floor"
+      },
+      {
+        "z": 19,
+        "y": 0.03999999999999867,
+        "name": "Continuous escape corridor and workshop floor"
+      },
+      {
+        "z": 19.5,
+        "y": 0.03999999999999867,
+        "name": "Continuous escape corridor and workshop floor"
+      },
+      {
+        "z": 20,
+        "y": 0.03999999999999867,
+        "name": "Continuous escape corridor and workshop floor"
+      },
+      {
+        "z": 20.5,
+        "y": 0.03999999999999867,
+        "name": "Continuous escape corridor and workshop floor"
+      },
+      {
+        "z": 21,
+        "y": 0.03999999999999867,
+        "name": "Continuous escape corridor and workshop floor"
+      },
+      {
+        "z": 21.5,
+        "y": 0.03999999999999867,
+        "name": "Continuous escape corridor and workshop floor"
+      },
+      {
+        "z": 22,
+        "y": 0.03999999999999867,
+        "name": "Continuous escape corridor and workshop floor"
+      },
+      {
+        "z": 22.5,
+        "y": 0.03999999999999867,
+        "name": "Continuous escape corridor and workshop floor"
+      },
+      {
+        "z": 23,
+        "y": 0.03999999999999867,
+        "name": "Continuous escape corridor and workshop floor"
+      }
+    ],
+    "shelfIntersections": [],
+    "machineLine": [
+      {
+        "x": 154.773125,
+        "clear": true
+      },
+      {
+        "x": 154.97312499999998,
+        "clear": true
+      },
+      {
+        "x": 155.17312499999997,
+        "clear": true
+      },
+      {
+        "x": 155.37312499999996,
+        "clear": true
+      },
+      {
+        "x": 155.57312499999995,
+        "clear": true
+      },
+      {
+        "x": 155.77312499999994,
+        "clear": true
+      },
+      {
+        "x": 155.97312499999992,
+        "clear": true
+      },
+      {
+        "x": 156.1731249999999,
+        "clear": true
+      },
+      {
+        "x": 156.3731249999999,
+        "clear": true
+      },
+      {
+        "x": 156.5731249999999,
+        "clear": true
+      },
+      {
+        "x": 156.77312499999988,
+        "clear": false
+      },
+      {
+        "x": 156.97312499999987,
+        "clear": false
+      },
+      {
+        "x": 157.17312499999986,
+        "clear": false
+      },
+      {
+        "x": 157.37312499999985,
+        "clear": false
+      },
+      {
+        "x": 157.57312499999983,
+        "clear": false
+      },
+      {
+        "x": 157.77312499999982,
+        "clear": false
+      },
+      {
+        "x": 157.9731249999998,
+        "clear": false
+      },
+      {
+        "x": 158.1731249999998,
+        "clear": false
+      },
+      {
+        "x": 158.3731249999998,
+        "clear": false
+      },
+      {
+        "x": 158.57312499999978,
+        "clear": false
+      },
+      {
+        "x": 158.77312499999977,
+        "clear": false
+      },
+      {
+        "x": 158.97312499999975,
+        "clear": false
+      },
+      {
+        "x": 159.17312499999974,
+        "clear": false
+      },
+      {
+        "x": 159.37312499999973,
+        "clear": true
+      },
+      {
+        "x": 159.57312499999972,
+        "clear": true
+      },
+      {
+        "x": 159.7731249999997,
+        "clear": true
+      },
+      {
+        "x": 159.9731249999997,
+        "clear": true
+      },
+      {
+        "x": 160.1731249999997,
+        "clear": true
+      },
+      {
+        "x": 160.37312499999967,
+        "clear": true
+      },
+      {
+        "x": 160.57312499999966,
+        "clear": true
+      },
+      {
+        "x": 160.77312499999965,
+        "clear": true
+      },
+      {
+        "x": 160.97312499999964,
+        "clear": true
+      },
+      {
+        "x": 161.17312499999963,
+        "clear": true
+      },
+      {
+        "x": 161.37312499999962,
+        "clear": true
+      },
+      {
+        "x": 161.5731249999996,
+        "clear": true
+      },
+      {
+        "x": 161.7731249999996,
+        "clear": true
+      },
+      {
+        "x": 161.97312499999958,
+        "clear": true
+      },
+      {
+        "x": 162.17312499999957,
+        "clear": true
+      },
+      {
+        "x": 162.37312499999956,
+        "clear": true
+      },
+      {
+        "x": 162.57312499999955,
+        "clear": true
+      },
+      {
+        "x": 162.77312499999954,
+        "clear": true
+      },
+      {
+        "x": 162.97312499999953,
+        "clear": true
+      },
+      {
+        "x": 163.17312499999952,
+        "clear": true
+      },
+      {
+        "x": 163.3731249999995,
+        "clear": true
+      },
+      {
+        "x": 163.5731249999995,
+        "clear": true
+      },
+      {
+        "x": 163.77312499999948,
+        "clear": true
+      },
+      {
+        "x": 163.97312499999947,
+        "clear": true
+      },
+      {
+        "x": 164.17312499999946,
+        "clear": true
+      },
+      {
+        "x": 164.37312499999945,
+        "clear": true
+      },
+      {
+        "x": 164.57312499999944,
+        "clear": true
+      },
+      {
+        "x": 164.77312499999942,
+        "clear": true
+      },
+      {
+        "x": 164.9731249999994,
+        "clear": true
+      }
+    ],
+    "doorRay": [],
+    "clearWidth": 3.1362500000000066,
+    "clearHeight": 3.7510000000000003
+  },
+  "errors": []
+}

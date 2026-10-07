@@ -110,8 +110,8 @@ export function addEntranceWestPhotoDetails(THREE,{model,box,mesh,worldUV,white,
   // the new elevation; the red door, columns and heraldry retain their shape.
   if(includeReception)for(const x of [-4,0,4])for(const y of [4.3,8.9,12.4])if(x!==0||y!==4.3)
     opening('reception-front-sash',x,y,19.68,1.23,2.45,0,true);
-  for(const x of [-31.8,-22.85])box(iron,x,6.35,p.projectionZ+.19,.075,12.7,.075);
-  box(iron,-7.35,6.1,p.wallZ+.19,.08,12.2,.08);
+  for(const x of [-31.8,-22.85])box(iron,x,6.35,p.projectionZ+.19,.075,12.7,.075,0,true);
+  box(iron,-7.35,6.1,p.wallZ+.19,.08,12.2,.08,0,true);
   // Door access is along the shared narrow walk against the stepped facade.
   model.userData.entranceWestPhotoOpenings=model.userData.eastPhotoOpenings.slice(start);
 }

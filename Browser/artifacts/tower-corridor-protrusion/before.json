@@ -1,0 +1,86 @@
+{
+  "result": {
+    "cx": 154.773125,
+    "renderer": "ANGLE (NVIDIA, NVIDIA GeForce RTX 3090 Ti (0x00002203) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+    "items": [
+      {
+        "name": "Main kitchen hip flashing",
+        "parent": "Main kitchen",
+        "min": [
+          147.96808862137357,
+          4.756205009351279,
+          -26.633399326031107
+        ],
+        "max": [
+          153.63191137862646,
+          7.493794990648721,
+          -20.9666006739689
+        ],
+        "material": [
+          {
+            "name": "",
+            "color": "dadfd8"
+          }
+        ],
+        "visible": false,
+        "source": true
+      },
+      {
+        "name": "Main kitchen fascia",
+        "parent": "Main kitchen",
+        "min": [
+          120.00000076293946,
+          4.640000001788139,
+          -26.624999998658897
+        ],
+        "max": [
+          153.59999923706056,
+          4.79999999821186,
+          -26.505000001341106
+        ],
+        "material": [
+          {
+            "name": "",
+            "color": "e5e8e0"
+          }
+        ],
+        "visible": true
+      }
+    ],
+    "probes": [
+      {
+        "name": "Aerial batch · Tower corridor and three workshops · 949",
+        "point": [
+          153.79061889648438,
+          4.9999999999999964,
+          -38.499999999999936
+        ]
+      },
+      {
+        "name": "Main kitchen fascia",
+        "point": [
+          153.59999923706056,
+          4.6999999999999975,
+          -26.599999999999767
+        ]
+      },
+      {
+        "name": "Aerial batch · Main kitchen · 265",
+        "point": [
+          153.60000639463675,
+          4.799999999999997,
+          -26.599999999999767
+        ]
+      },
+      {
+        "name": "Aerial batch · Main kitchen · 265",
+        "point": [
+          153.44056061236998,
+          4.899999999999997,
+          -26.399999999999764
+        ]
+      }
+    ]
+  },
+  "errors": []
+}

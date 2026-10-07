@@ -1,0 +1,5858 @@
+[
+  {
+    "width": 1100,
+    "height": 750,
+    "reducedMotion": "no-preference",
+    "launch": "start",
+    "preparationMs": 257.40000000037253,
+    "snapshots": {
+      "start": {
+        "frameDt": 0.0007000000011175871,
+        "state": "arrival",
+        "inside": false,
+        "opacity": 0,
+        "position": [
+          23.629557279642377,
+          118.4125,
+          195.96688641797337
+        ],
+        "elapsed": 0
+      },
+      "approach": {
+        "frameDt": 0.041700000001117586,
+        "state": "arrival",
+        "inside": false,
+        "opacity": 0.515267,
+        "position": [
+          11.45403406531676,
+          59.20191916649538,
+          107.87334874275079
+        ],
+        "elapsed": 0
+      },
+      "blackout": {
+        "frameDt": 0.025,
+        "state": "arrival",
+        "inside": true,
+        "opacity": 1,
+        "position": [
+          0,
+          3.5,
+          25
+        ],
+        "elapsed": 0
+      },
+      "reveal": {
+        "frameDt": 0.01690000000037253,
+        "state": "arrival",
+        "inside": true,
+        "opacity": 0.9442,
+        "position": [
+          0,
+          3.5,
+          25
+        ],
+        "elapsed": 0
+      }
+    },
+    "frames": [
+      {
+        "frameDt": 0.0007000000011175871,
+        "state": "arrival",
+        "inside": false,
+        "opacity": 0,
+        "position": [
+          23.629557279642377,
+          118.4125,
+          195.96688641797337
+        ],
+        "elapsed": 0
+      },
+      {
+        "frameDt": 0.02080000000074506,
+        "state": "arrival",
+        "inside": false,
+        "opacity": 0,
+        "position": [
+          23.629557279642377,
+          118.4125,
+          195.96688641797337
+        ],
+        "elapsed": 0
+      },
+      {
+        "frameDt": 0.017900000000372528,
+        "state": "arrival",
+        "inside": false,
+        "opacity": 0,
+        "position": [
+          23.629557279642377,
+          118.4125,
+          195.96688641797337
+        ],
+        "elapsed": 0
+      },
+      {
+        "frameDt": 0.024699999999254943,
+        "state": "arrival",
+        "inside": false,
+        "opacity": 0,
+        "position": [
+          23.629557279642377,
+          118.4125,
+          195.96688641797337
+        ],
+        "elapsed": 0
+      },
+      {
+        "frameDt": 0.02690000000037253,
+        "state": "arrival",
+        "inside": false,
+        "opacity": 0,
+        "position": [
+          23.629557279642377,
+          118.4125,
+          195.96688641797337
+        ],
+        "elapsed": 0
+      },
+      {
+        "frameDt": 0.03969999999925494,
+        "state": "arrival",
+        "inside": false,
+        "opacity": 0,
+        "position": [
+          23.629557279642377,
+          118.4125,
+          195.96688641797337
+        ],
+        "elapsed": 0
+      },
+      {
+        "frameDt": 0.025900000000372528,
+        "state": "arrival",
+        "inside": false,
+        "opacity": 0,
+        "position": [
+          23.629557279642377,
+          118.4125,
+          195.96688641797337
+        ],
+        "elapsed": 0
+      },
+      {
+        "frameDt": 0.03269999999925494,
+        "state": "arrival",
+        "inside": false,
+        "opacity": 0,
+        "position": [
+          23.629557279642377,
+          118.4125,
+          195.96688641797337
+        ],
+        "elapsed": 0
+      },
+      {
+        "frameDt": 0.02130000000074506,
+        "state": "arrival",
+        "inside": false,
+        "opacity": 0,
+        "position": [
+          23.629557279642377,
+          118.4125,
+          195.96688641797337
+        ],
+        "elapsed": 0
+      },
+      {
+        "frameDt": 0.02290000000037253,
+        "state": "arrival",
+        "inside": false,
+        "opacity": 0,
+        "position": [
+          23.629557279642377,
+          118.4125,
+          195.96688641797337
+        ],
+        "elapsed": 0
+      },
+      {
+        "frameDt": 0.02169999999925494,
+        "state": "arrival",
+        "inside": false,
+        "opacity": 0,
+        "position": [
+          23.629557279642377,
+          118.4125,
+          195.96688641797337
+        ],
+        "elapsed": 0
+      },
+      {
+        "frameDt": 0.0255,
+        "state": "arrival",
+        "inside": false,
+        "opacity": 0,
+        "position": [
+          23.629557279642377,
+          118.4125,
+          195.96688641797337
+        ],
+        "elapsed": 0
+      },
+      {
+        "frameDt": 0.02130000000074506,
+        "state": "arrival",
+        "inside": false,
+        "opacity": 0,
+        "position": [
+          23.629557279642377,
+          118.4125,
+          195.96688641797337
+        ],
+        "elapsed": 0
+      },
+      {
+        "frameDt": 0.02040000000037253,
+        "state": "arrival",
+        "inside": false,
+        "opacity": 0,
+        "position": [
+          23.629557279642377,
+          118.4125,
+          195.96688641797337
+        ],
+        "elapsed": 0
+      },
+      {
+        "frameDt": 0.025399999998509885,
+        "state": "arrival",
+        "inside": false,
+        "opacity": 0,
+        "position": [
+          23.629557279642377,
+          118.4125,
+          195.96688641797337
+        ],
+        "elapsed": 0
+      },
+      {
+        "frameDt": 0.022200000001117586,
+        "state": "arrival",
+        "inside": false,
+        "opacity": 0,
+        "position": [
+          23.629557279642377,
+          118.4125,
+          195.96688641797337
+        ],
+        "elapsed": 0
+      },
+      {
+        "frameDt": 0.02959999999962747,
+        "state": "arrival",
+        "inside": false,
+        "opacity": 0,
+        "position": [
+          23.629557279642377,
+          118.4125,
+          195.96688641797337
+        ],
+        "elapsed": 0
+      },
+      {
+        "frameDt": 0.02309999999962747,
+        "state": "arrival",
+        "inside": false,
+        "opacity": 0,
+        "position": [
+          23.629557279642377,
+          118.4125,
+          195.96688641797337
+        ],
+        "elapsed": 0
+      },
+      {
+        "frameDt": 0.01959999999962747,
+        "state": "arrival",
+        "inside": false,
+        "opacity": 0,
+        "position": [
+          23.629557279642377,
+          118.4125,
+          195.96688641797337
+        ],
+        "elapsed": 0
+      },
+      {
+        "frameDt": 0.021600000001490115,
+        "state": "arrival",
+        "inside": false,
+        "opacity": 0,
+        "position": [
+          23.629557279642377,
+          118.4125,
+          195.96688641797337
+        ],
+        "elapsed": 0
+      },
+      {
+        "frameDt": 0.026,
+        "state": "arrival",
+        "inside": false,
+        "opacity": 0,
+        "position": [
+          23.629557279642377,
+          118.4125,
+          195.96688641797337
+        ],
+        "elapsed": 0
+      },
+      {
+        "frameDt": 0.02809999999962747,
+        "state": "arrival",
+        "inside": false,
+        "opacity": 0,
+        "position": [
+          23.629557279642377,
+          118.4125,
+          195.96688641797337
+        ],
+        "elapsed": 0
+      },
+      {
+        "frameDt": 0.02409999999962747,
+        "state": "arrival",
+        "inside": false,
+        "opacity": 0,
+        "position": [
+          23.629557279642377,
+          118.4125,
+          195.96688641797337
+        ],
+        "elapsed": 0
+      },
+      {
+        "frameDt": 0.02030000000074506,
+        "state": "arrival",
+        "inside": false,
+        "opacity": 0,
+        "position": [
+          23.629557279642377,
+          118.4125,
+          195.96688641797337
+        ],
+        "elapsed": 0
+      },
+      {
+        "frameDt": 0.020299999998882413,
+        "state": "arrival",
+        "inside": false,
+        "opacity": 0,
+        "position": [
+          23.629557279642377,
+          118.4125,
+          195.96688641797337
+        ],
+        "elapsed": 0
+      },
+      {
+        "frameDt": 0.030700000001117587,
+        "state": "arrival",
+        "inside": false,
+        "opacity": 0,
+        "position": [
+          23.629557279642377,
+          118.4125,
+          195.96688641797337
+        ],
+        "elapsed": 0
+      },
+      {
+        "frameDt": 0.020899999998509885,
+        "state": "arrival",
+        "inside": false,
+        "opacity": 0,
+        "position": [
+          23.629557279642377,
+          118.4125,
+          195.96688641797337
+        ],
+        "elapsed": 0
+      },
+      {
+        "frameDt": 0.02070000000111759,
+        "state": "arrival",
+        "inside": false,
+        "opacity": 0,
+        "position": [
+          23.629557279642377,
+          118.4125,
+          195.96688641797337
+        ],
+        "elapsed": 0
+      },
+      {
+        "frameDt": 0.02290000000037253,
+        "state": "arrival",
+        "inside": false,
+        "opacity": 0,
+        "position": [
+          23.629557279642377,
+          118.4125,
+          195.96688641797337
+        ],
+        "elapsed": 0
+      },
+      {
+        "frameDt": 0.019899999998509884,
+        "state": "arrival",
+        "inside": false,
+        "opacity": 0,
+        "position": [
+          23.629557279642377,
+          118.4125,
+          195.96688641797337
+        ],
+        "elapsed": 0
+      },
+      {
+        "frameDt": 0.02080000000074506,
+        "state": "arrival",
+        "inside": false,
+        "opacity": 0,
+        "position": [
+          23.629557279642377,
+          118.4125,
+          195.96688641797337
+        ],
+        "elapsed": 0
+      },
+      {
+        "frameDt": 0.022300000000745057,
+        "state": "arrival",
+        "inside": false,
+        "opacity": 0,
+        "position": [
+          23.629557279642377,
+          118.4125,
+          195.96688641797337
+        ],
+        "elapsed": 0
+      },
+      {
+        "frameDt": 0.01809999999962747,
+        "state": "arrival",
+        "inside": false,
+        "opacity": 0,
+        "position": [
+          23.629557279642377,
+          118.4125,
+          195.96688641797337
+        ],
+        "elapsed": 0
+      },
+      {
+        "frameDt": 0.019699999999254942,
+        "state": "arrival",
+        "inside": false,
+        "opacity": 0,
+        "position": [
+          23.629557279642377,
+          118.4125,
+          195.96688641797337
+        ],
+        "elapsed": 0
+      },
+      {
+        "frameDt": 0.018300000000745057,
+        "state": "arrival",
+        "inside": false,
+        "opacity": 0,
+        "position": [
+          23.629557279642377,
+          118.4125,
+          195.96688641797337
+        ],
+        "elapsed": 0
+      },
+      {
+        "frameDt": 0.02609999999962747,
+        "state": "arrival",
+        "inside": false,
+        "opacity": 0,
+        "position": [
+          23.629557279642377,
+          118.4125,
+          195.96688641797337
+        ],
+        "elapsed": 0
+      },
+      {
+        "frameDt": 0.0185,
+        "state": "arrival",
+        "inside": false,
+        "opacity": 0,
+        "position": [
+          23.629557279642377,
+          118.4125,
+          195.96688641797337
+        ],
+        "elapsed": 0
+      },
+      {
+        "frameDt": 0.017800000000745057,
+        "state": "arrival",
+        "inside": false,
+        "opacity": 0,
+        "position": [
+          23.629557279642377,
+          118.4125,
+          195.96688641797337
+        ],
+        "elapsed": 0
+      },
+      {
+        "frameDt": 0.02259999999962747,
+        "state": "arrival",
+        "inside": false,
+        "opacity": 0,
+        "position": [
+          23.629557279642377,
+          118.4125,
+          195.96688641797337
+        ],
+        "elapsed": 0
+      },
+      {
+        "frameDt": 0.01779999999888241,
+        "state": "arrival",
+        "inside": false,
+        "opacity": 0,
+        "position": [
+          23.629557279642377,
+          118.4125,
+          195.96688641797337
+        ],
+        "elapsed": 0
+      },
+      {
+        "frameDt": 0.019700000001117587,
+        "state": "arrival",
+        "inside": false,
+        "opacity": 0,
+        "position": [
+          23.629557279642377,
+          118.4125,
+          195.96688641797337
+        ],
+        "elapsed": 0
+      },
+      {
+        "frameDt": 0.023299999998882413,
+        "state": "arrival",
+        "inside": false,
+        "opacity": 0,
+        "position": [
+          23.629557279642377,
+          118.4125,
+          195.96688641797337
+        ],
+        "elapsed": 0
+      },
+      {
+        "frameDt": 0.017600000001490115,
+        "state": "arrival",
+        "inside": false,
+        "opacity": 0,
+        "position": [
+          23.629557279642377,
+          118.4125,
+          195.96688641797337
+        ],
+        "elapsed": 0
+      },
+      {
+        "frameDt": 0.02259999999962747,
+        "state": "arrival",
+        "inside": false,
+        "opacity": 0,
+        "position": [
+          23.629557279642377,
+          118.4125,
+          195.96688641797337
+        ],
+        "elapsed": 0
+      },
+      {
+        "frameDt": 0.02709999999962747,
+        "state": "arrival",
+        "inside": false,
+        "opacity": 0.00673333,
+        "position": [
+          23.470451593935977,
+          117.63875583321916,
+          194.81570938258918
+        ],
+        "elapsed": 0
+      },
+      {
+        "frameDt": 0.02669999999925494,
+        "state": "arrival",
+        "inside": false,
+        "opacity": 0.0245333,
+        "position": [
+          23.04984547437008,
+          115.59331333327624,
+          191.77249880443415
+        ],
+        "elapsed": 0
+      },
+      {
+        "frameDt": 0.019700000001117587,
+        "state": "arrival",
+        "inside": false,
+        "opacity": 0.0376667,
+        "position": [
+          22.739510622079838,
+          114.08412916652397,
+          189.5271336960174
+        ],
+        "elapsed": 0
+      },
+      {
+        "frameDt": 0.021,
+        "state": "arrival",
+        "inside": false,
+        "opacity": 0.0516667,
+        "position": [
+          22.408696820164845,
+          112.47535416652397,
+          187.13359728616578
+        ],
+        "elapsed": 0
+      },
+      {
+        "frameDt": 0.02229999999888241,
+        "state": "arrival",
+        "inside": false,
+        "opacity": 0.0665333,
+        "position": [
+          22.0574040686251,
+          110.76698833327625,
+          184.59188957487927
+        ],
+        "elapsed": 0
+      },
+      {
+        "frameDt": 0.02120000000111759,
+        "state": "arrival",
+        "inside": false,
+        "opacity": 0.0806667,
+        "position": [
+          21.723439659055217,
+          109.14289166652397,
+          182.17555758004454
+        ],
+        "elapsed": 0
+      },
+      {
+        "frameDt": 0.021099999999627472,
+        "state": "arrival",
+        "inside": false,
+        "opacity": 0.0947333,
+        "position": [
+          21.391050553327446,
+          107.52645583321916,
+          179.7706233778075
+        ],
+        "elapsed": 0
+      },
+      {
+        "frameDt": 0.02709999999962747,
+        "state": "arrival",
+        "inside": false,
+        "opacity": 0.1128,
+        "position": [
+          20.96414321848111,
+          105.45036999991436,
+          176.68182162989856
+        ],
+        "elapsed": 0
+      },
+      {
+        "frameDt": 0.02480000000074506,
+        "state": "arrival",
+        "inside": false,
+        "opacity": 0.129333,
+        "position": [
+          20.57346787144595,
+          103.55048333319061,
+          173.85516910770315
+        ],
+        "elapsed": 0
+      },
+      {
+        "frameDt": 0.0225,
+        "state": "arrival",
+        "inside": false,
+        "opacity": 0.144333,
+        "position": [
+          20.219024512251316,
+          101.82679583319062,
+          171.29066581143354
+        ],
+        "elapsed": 0
+      },
+      {
+        "frameDt": 0.022,
+        "state": "arrival",
+        "inside": false,
+        "opacity": 0.159,
+        "position": [
+          19.872457672149892,
+          100.14141249985728,
+          168.78315147730328
+        ],
+        "elapsed": 0
+      },
+      {
+        "frameDt": 0.013299999998882412,
+        "state": "arrival",
+        "inside": false,
+        "opacity": 0.167867,
+        "position": [
+          19.662942264288006,
+          99.12252166660957,
+          167.26724508452463
+        ],
+        "elapsed": 0
+      },
+      {
+        "frameDt": 0.013600000001490116,
+        "state": "arrival",
+        "inside": false,
+        "opacity": 0.176933,
+        "position": [
+          19.448700944929104,
+          98.08064833316207,
+          165.71714531416515
+        ],
+        "elapsed": 0
+      },
+      {
+        "frameDt": 0.016399999998509884,
+        "state": "arrival",
+        "inside": false,
+        "opacity": 0.187867,
+        "position": [
+          19.190351118695155,
+          96.82427166660958,
+          163.84790735616517
+        ],
+        "elapsed": 0
+      },
+      {
+        "frameDt": 0.01680000000074506,
+        "state": "arrival",
+        "inside": false,
+        "opacity": 0.199067,
+        "position": [
+          18.925700077151426,
+          95.53725166655249,
+          161.93307822819895
+        ],
+        "elapsed": 0
+      },
+      {
+        "frameDt": 0.01640000000037253,
+        "state": "arrival",
+        "inside": false,
+        "opacity": 0.21,
+        "position": [
+          18.66735025088813,
+          94.28087499985728,
+          160.06384026998663
+        ],
+        "elapsed": 0
+      },
+      {
+        "frameDt": 0.016699999999254943,
+        "state": "arrival",
+        "inside": false,
+        "opacity": 0.221133,
+        "position": [
+          18.404274513186515,
+          93.0015158332477,
+          158.16040893461812
+        ],
+        "elapsed": 0
+      },
+      {
+        "frameDt": 0.0255,
+        "state": "arrival",
+        "inside": false,
+        "opacity": 0.238133,
+        "position": [
+          18.002572039432593,
+          91.04800333324769,
+          155.25397186551257
+        ],
+        "elapsed": 0
+      },
+      {
+        "frameDt": 0.01740000000037253,
+        "state": "arrival",
+        "inside": false,
+        "opacity": 0.249733,
+        "position": [
+          17.728469174982877,
+          89.71501833321915,
+          153.27075598302162
+        ],
+        "elapsed": 0
+      },
+      {
+        "frameDt": 0.019300000000745058,
+        "state": "arrival",
+        "inside": false,
+        "opacity": 0.2626,
+        "position": [
+          17.424435537973075,
+          88.23647749982874,
+          151.07098204435877
+        ],
+        "elapsed": 0
+      },
+      {
+        "frameDt": 0.021099999999627472,
+        "state": "arrival",
+        "inside": false,
+        "opacity": 0.276667,
+        "position": [
+          17.092046432245304,
+          86.62004166652395,
+          148.6660478421217
+        ],
+        "elapsed": 0
+      },
+      {
+        "frameDt": 0.0205,
+        "state": "arrival",
+        "inside": false,
+        "opacity": 0.290333,
+        "position": [
+          16.769109149423528,
+          85.04957083319061,
+          146.32950039440942
+        ],
+        "elapsed": 0
+      },
+      {
+        "frameDt": 0.021900000000372528,
+        "state": "arrival",
+        "inside": false,
+        "opacity": 0.304933,
+        "position": [
+          16.42411761313488,
+          83.37184833316206,
+          143.83338385266455
+        ],
+        "elapsed": 0
+      },
+      {
+        "frameDt": 0.018899999998509883,
+        "state": "arrival",
+        "inside": false,
+        "opacity": 0.317533,
+        "position": [
+          16.12638519143486,
+          81.92395083327622,
+          141.67920108396794
+        ],
+        "elapsed": 0
+      },
+      {
+        "frameDt": 0.022400000000372528,
+        "state": "arrival",
+        "inside": false,
+        "opacity": 0.332467,
+        "position": [
+          15.773517136052998,
+          80.20792416658102,
+          139.12609558008376
+        ],
+        "elapsed": 0
+      },
+      {
+        "frameDt": 0.02080000000074506,
+        "state": "arrival",
+        "inside": false,
+        "opacity": 0.346333,
+        "position": [
+          15.445853941763552,
+          78.61447083319061,
+          136.7553547550029
+        ],
+        "elapsed": 0
+      },
+      {
+        "frameDt": 0.022799999998882412,
+        "state": "arrival",
+        "inside": false,
+        "opacity": 0.361533,
+        "position": [
+          15.086684671130595,
+          76.86780083327622,
+          134.15665808157712
+        ],
+        "elapsed": 0
+      },
+      {
+        "frameDt": 0.03880000000074506,
+        "state": "arrival",
+        "inside": false,
+        "opacity": 0.3874,
+        "position": [
+          14.47546678948544,
+          73.8953974998858,
+          129.73431461948059
+        ],
+        "elapsed": 0
+      },
+      {
+        "frameDt": 0.02619999999925494,
+        "state": "arrival",
+        "inside": false,
+        "opacity": 0.404867,
+        "position": [
+          14.062737189012756,
+          71.88825916660954,
+          126.7480930034649
+        ],
+        "elapsed": 0
+      },
+      {
+        "frameDt": 0.035800000000745055,
+        "state": "arrival",
+        "inside": false,
+        "opacity": 0.428733,
+        "position": [
+          13.498778421926888,
+          69.14568083321913,
+          122.66768331420435
+        ],
+        "elapsed": 0
+      },
+      {
+        "frameDt": 0.028199999999254943,
+        "state": "arrival",
+        "inside": false,
+        "opacity": 0.447533,
+        "position": [
+          13.054542745081346,
+          66.9853258332762,
+          119.45350584963137
+        ],
+        "elapsed": 0
+      },
+      {
+        "frameDt": 0.033200000001117586,
+        "state": "arrival",
+        "inside": false,
+        "opacity": 0.469667,
+        "position": [
+          12.531541877274321,
+          64.44192916652392,
+          115.66943876345285
+        ],
+        "elapsed": 0
+      },
+      {
+        "frameDt": 0.02669999999925494,
+        "state": "arrival",
+        "inside": false,
+        "opacity": 0.487467,
+        "position": [
+          12.110935757708424,
+          62.396486666581,
+          112.62622818529783
+        ],
+        "elapsed": 0
+      },
+      {
+        "frameDt": 0.041700000001117586,
+        "state": "arrival",
+        "inside": false,
+        "opacity": 0.515267,
+        "position": [
+          11.45403406531676,
+          59.20191916649538,
+          107.87334874275079
+        ],
+        "elapsed": 0
+      },
+      {
+        "frameDt": 0.02780000000074506,
+        "state": "arrival",
+        "inside": false,
+        "opacity": 0.5338,
+        "position": [
+          11.016099603722319,
+          57.072207499771636,
+          104.70476244771943
+        ],
+        "elapsed": 0
+      },
+      {
+        "frameDt": 0.02579999999888241,
+        "state": "arrival",
+        "inside": false,
+        "opacity": 0.551,
+        "position": [
+          10.609671218530073,
+          55.09571249985724,
+          101.76413200145765
+        ],
+        "elapsed": 0
+      },
+      {
+        "frameDt": 0.025200000001117585,
+        "state": "arrival",
+        "inside": false,
+        "opacity": 0.5678,
+        "position": [
+          10.212694656214474,
+          53.16518249977162,
+          98.89188830950832
+        ],
+        "elapsed": 0
+      },
+      {
+        "frameDt": 0.01869999999925494,
+        "state": "arrival",
+        "inside": false,
+        "opacity": 0.580267,
+        "position": [
+          9.918112842140001,
+          51.73260666649536,
+          96.7605011255825
+        ],
+        "elapsed": 0
+      },
+      {
+        "frameDt": 0.017900000000372528,
+        "state": "arrival",
+        "inside": false,
+        "opacity": 0.5922,
+        "position": [
+          9.636133458597067,
+          50.36131749980015,
+          94.72029628095221
+        ],
+        "elapsed": 0
+      },
+      {
+        "frameDt": 0.01959999999962747,
+        "state": "arrival",
+        "inside": false,
+        "opacity": 0.605267,
+        "position": [
+          9.32737391014894,
+          48.85979416649536,
+          92.48632896513315
+        ],
+        "elapsed": 0
+      },
+      {
+        "frameDt": 0.022,
+        "state": "arrival",
+        "inside": false,
+        "opacity": 0.619933,
+        "position": [
+          8.980807070047518,
+          47.174410833162014,
+          89.97881463100286
+        ],
+        "elapsed": 0
+      },
+      {
+        "frameDt": 0.02309999999962747,
+        "state": "arrival",
+        "inside": false,
+        "opacity": 0.635333,
+        "position": [
+          8.616911887946896,
+          45.40475833319056,
+          87.34592458020855
+        ],
+        "elapsed": 0
+      },
+      {
+        "frameDt": 0.023300000000745058,
+        "state": "arrival",
+        "inside": false,
+        "opacity": 0.650867,
+        "position": [
+          8.24986609819138,
+          43.619784166466815,
+          84.69023894443109
+        ],
+        "elapsed": 0
+      },
+      {
+        "frameDt": 0.02690000000037253,
+        "state": "arrival",
+        "inside": false,
+        "opacity": 0.6688,
+        "position": [
+          7.826109370970592,
+          41.55901999977161,
+          81.62423278129299
+        ],
+        "elapsed": 0
+      },
+      {
+        "frameDt": 0.02229999999888241,
+        "state": "arrival",
+        "inside": false,
+        "opacity": 0.683667,
+        "position": [
+          7.47481661943085,
+          39.85065416652391,
+          79.08252507000651
+        ],
+        "elapsed": 0
+      },
+      {
+        "frameDt": 0.022400000000372528,
+        "state": "arrival",
+        "inside": false,
+        "opacity": 0.6986,
+        "position": [
+          7.121948564048992,
+          38.13462749982871,
+          76.52941956612233
+        ],
+        "elapsed": 0
+      },
+      {
+        "frameDt": 0.02430000000074506,
+        "state": "arrival",
+        "inside": false,
+        "opacity": 0.7148,
+        "position": [
+          6.7391497361070485,
+          36.27304499977164,
+          73.75975600606627
+        ],
+        "elapsed": 0
+      },
+      {
+        "frameDt": 0.024799999998882414,
+        "state": "arrival",
+        "inside": false,
+        "opacity": 0.731333,
+        "position": [
+          6.348474389101231,
+          34.373158333190574,
+          70.93310348408312
+        ],
+        "elapsed": 0
+      },
+      {
+        "frameDt": 0.025200000001117585,
+        "state": "arrival",
+        "inside": false,
+        "opacity": 0.748133,
+        "position": [
+          5.9514978267856335,
+          32.44262833310495,
+          68.06085979213378
+        ],
+        "elapsed": 0
+      },
+      {
+        "frameDt": 0.02140000000037253,
+        "state": "arrival",
+        "inside": false,
+        "opacity": 0.7624,
+        "position": [
+          5.614382809590204,
+          30.803209999743103,
+          65.62173221252826
+        ],
+        "elapsed": 0
+      },
+      {
+        "frameDt": 0.0375,
+        "state": "arrival",
+        "inside": false,
+        "opacity": 0.7874,
+        "position": [
+          5.023643877599138,
+          27.93039749974308,
+          61.347560052078904
+        ],
+        "elapsed": 0
+      },
+      {
+        "frameDt": 0.028899999998509885,
+        "state": "arrival",
+        "inside": false,
+        "opacity": 0.806667,
+        "position": [
+          4.568381074034839,
+          25.716416666523926,
+          58.0535980405958
+        ],
+        "elapsed": 0
+      },
+      {
+        "frameDt": 0.028600000001490117,
+        "state": "arrival",
+        "inside": false,
+        "opacity": 0.825733,
+        "position": [
+          4.117844181879516,
+          23.525418333076416,
+          54.793829406056574
+        ],
+        "elapsed": 0
+      },
+      {
+        "frameDt": 0.034199999999254944,
+        "state": "arrival",
+        "inside": false,
+        "opacity": 0.848533,
+        "position": [
+          3.5790902759154015,
+          20.90541333313348,
+          50.89578439581169
+        ],
+        "elapsed": 0
+      },
+      {
+        "frameDt": 0.04880000000074506,
+        "state": "arrival",
+        "inside": false,
+        "opacity": 0.881067,
+        "position": [
+          2.810342012405968,
+          17.166926666409736,
+          45.33366169092869
+        ],
+        "elapsed": 0
+      },
+      {
+        "frameDt": 0.03839999999850988,
+        "state": "arrival",
+        "inside": false,
+        "opacity": 0.906667,
+        "position": [
+          2.2054253460705944,
+          14.22516666652389,
+          40.956909398798416
+        ],
+        "elapsed": 0
+      },
+      {
+        "frameDt": 0.039900000000372526,
+        "state": "arrival",
+        "inside": false,
+        "opacity": 0.933267,
+        "position": [
+          1.5768791224262415,
+          11.168494166495364,
+          36.409190220037885
+        ],
+        "elapsed": 0
+      },
+      {
+        "frameDt": 0.038099999999627474,
+        "state": "arrival",
+        "inside": false,
+        "opacity": 0.958667,
+        "position": [
+          0.9766883675291957,
+          8.24971666652391,
+          32.06663130506382
+        ],
+        "elapsed": 0
+      },
+      {
+        "frameDt": 0.024,
+        "state": "arrival",
+        "inside": false,
+        "opacity": 0.974667,
+        "position": [
+          0.5986154510549184,
+          6.41111666652391,
+          29.331161122376244
+        ],
+        "elapsed": 0
+      },
+      {
+        "frameDt": 0.024,
+        "state": "arrival",
+        "inside": false,
+        "opacity": 0.990667,
+        "position": [
+          0.22054253458063755,
+          4.572516666523896,
+          26.595690939688694
+        ],
+        "elapsed": 0
+      },
+      {
+        "frameDt": 0.025,
+        "state": "arrival",
+        "inside": true,
+        "opacity": 1,
+        "position": [
+          0,
+          3.5,
+          25
+        ],
+        "elapsed": 0
+      },
+      {
+        "frameDt": 0.01690000000037253,
+        "state": "arrival",
+        "inside": true,
+        "opacity": 0.9442,
+        "position": [
+          0,
+          3.5,
+          25
+        ],
+        "elapsed": 0
+      },
+      {
+        "frameDt": 0.016799999998882414,
+        "state": "arrival",
+        "inside": true,
+        "opacity": 0.9106,
+        "position": [
+          0,
+          3.5,
+          25
+        ],
+        "elapsed": 0
+      },
+      {
+        "frameDt": 0.016700000001117588,
+        "state": "arrival",
+        "inside": true,
+        "opacity": 0.8772,
+        "position": [
+          0,
+          3.5,
+          25
+        ],
+        "elapsed": 0
+      },
+      {
+        "frameDt": 0.016799999998882414,
+        "state": "arrival",
+        "inside": true,
+        "opacity": 0.8436,
+        "position": [
+          0,
+          3.5,
+          25
+        ],
+        "elapsed": 0
+      },
+      {
+        "frameDt": 0.016599999999627472,
+        "state": "arrival",
+        "inside": true,
+        "opacity": 0.8104,
+        "position": [
+          0,
+          3.5,
+          25
+        ],
+        "elapsed": 0
+      },
+      {
+        "frameDt": 0.016600000001490117,
+        "state": "arrival",
+        "inside": true,
+        "opacity": 0.7772,
+        "position": [
+          0,
+          3.5,
+          25
+        ],
+        "elapsed": 0
+      },
+      {
+        "frameDt": 0.016599999999627472,
+        "state": "arrival",
+        "inside": true,
+        "opacity": 0.744,
+        "position": [
+          0,
+          3.5,
+          25
+        ],
+        "elapsed": 0
+      },
+      {
+        "frameDt": 0.016599999999627472,
+        "state": "arrival",
+        "inside": true,
+        "opacity": 0.7108,
+        "position": [
+          0,
+          3.5,
+          25
+        ],
+        "elapsed": 0
+      },
+      {
+        "frameDt": 0.01690000000037253,
+        "state": "arrival",
+        "inside": true,
+        "opacity": 0.677,
+        "position": [
+          0,
+          3.5,
+          25
+        ],
+        "elapsed": 0
+      },
+      {
+        "frameDt": 0.01640000000037253,
+        "state": "arrival",
+        "inside": true,
+        "opacity": 0.6442,
+        "position": [
+          0,
+          3.5,
+          25
+        ],
+        "elapsed": 0
+      },
+      {
+        "frameDt": 0.016699999999254943,
+        "state": "arrival",
+        "inside": true,
+        "opacity": 0.6108,
+        "position": [
+          0,
+          3.5,
+          25
+        ],
+        "elapsed": 0
+      },
+      {
+        "frameDt": 0.016699999999254943,
+        "state": "arrival",
+        "inside": true,
+        "opacity": 0.5774,
+        "position": [
+          0,
+          3.5,
+          25
+        ],
+        "elapsed": 0
+      },
+      {
+        "frameDt": 0.017,
+        "state": "arrival",
+        "inside": true,
+        "opacity": 0.5434,
+        "position": [
+          0,
+          3.5,
+          25
+        ],
+        "elapsed": 0
+      },
+      {
+        "frameDt": 0.016200000001117588,
+        "state": "arrival",
+        "inside": true,
+        "opacity": 0.511,
+        "position": [
+          0,
+          3.5,
+          25
+        ],
+        "elapsed": 0
+      },
+      {
+        "frameDt": 0.016699999999254943,
+        "state": "arrival",
+        "inside": true,
+        "opacity": 0.4776,
+        "position": [
+          0,
+          3.5,
+          25
+        ],
+        "elapsed": 0
+      },
+      {
+        "frameDt": 0.01680000000074506,
+        "state": "arrival",
+        "inside": true,
+        "opacity": 0.444,
+        "position": [
+          0,
+          3.5,
+          25
+        ],
+        "elapsed": 0
+      },
+      {
+        "frameDt": 0.016599999999627472,
+        "state": "arrival",
+        "inside": true,
+        "opacity": 0.4108,
+        "position": [
+          0,
+          3.5,
+          25
+        ],
+        "elapsed": 0
+      },
+      {
+        "frameDt": 0.016699999999254943,
+        "state": "arrival",
+        "inside": true,
+        "opacity": 0.3774,
+        "position": [
+          0,
+          3.5,
+          25
+        ],
+        "elapsed": 0
+      },
+      {
+        "frameDt": 0.01640000000037253,
+        "state": "arrival",
+        "inside": true,
+        "opacity": 0.3446,
+        "position": [
+          0,
+          3.5,
+          25
+        ],
+        "elapsed": 0
+      },
+      {
+        "frameDt": 0.020599999999627472,
+        "state": "arrival",
+        "inside": true,
+        "opacity": 0.3034,
+        "position": [
+          0,
+          3.5,
+          25
+        ],
+        "elapsed": 0
+      },
+      {
+        "frameDt": 0.012700000001117586,
+        "state": "arrival",
+        "inside": true,
+        "opacity": 0.278,
+        "position": [
+          0,
+          3.5,
+          25
+        ],
+        "elapsed": 0
+      },
+      {
+        "frameDt": 0.0185,
+        "state": "arrival",
+        "inside": true,
+        "opacity": 0.241,
+        "position": [
+          0,
+          3.5,
+          25
+        ],
+        "elapsed": 0
+      },
+      {
+        "frameDt": 0.015,
+        "state": "arrival",
+        "inside": true,
+        "opacity": 0.211,
+        "position": [
+          0,
+          3.5,
+          25
+        ],
+        "elapsed": 0
+      },
+      {
+        "frameDt": 0.01690000000037253,
+        "state": "arrival",
+        "inside": true,
+        "opacity": 0.1772,
+        "position": [
+          0,
+          3.5,
+          25
+        ],
+        "elapsed": 0
+      },
+      {
+        "frameDt": 0.016599999999627472,
+        "state": "arrival",
+        "inside": true,
+        "opacity": 0.144,
+        "position": [
+          0,
+          3.5,
+          25
+        ],
+        "elapsed": 0
+      },
+      {
+        "frameDt": 0.016799999998882414,
+        "state": "arrival",
+        "inside": true,
+        "opacity": 0.1104,
+        "position": [
+          0,
+          3.5,
+          25
+        ],
+        "elapsed": 0
+      },
+      {
+        "frameDt": 0.016600000001490117,
+        "state": "arrival",
+        "inside": true,
+        "opacity": 0.0772,
+        "position": [
+          0,
+          3.5,
+          25
+        ],
+        "elapsed": 0
+      },
+      {
+        "frameDt": 0.016699999999254943,
+        "state": "arrival",
+        "inside": true,
+        "opacity": 0.0438,
+        "position": [
+          0,
+          3.5,
+          25
+        ],
+        "elapsed": 0
+      },
+      {
+        "frameDt": 0.01680000000074506,
+        "state": "arrival",
+        "inside": true,
+        "opacity": 0.0102,
+        "position": [
+          0,
+          3.5,
+          25
+        ],
+        "elapsed": 0
+      },
+      {
+        "frameDt": 0.016699999999254943,
+        "state": "play",
+        "inside": true,
+        "opacity": 0,
+        "position": [
+          0,
+          3.5,
+          25
+        ],
+        "elapsed": 0
+      }
+    ],
+    "errors": []
+  },
+  {
+    "width": 1100,
+    "height": 750,
+    "reducedMotion": "no-preference",
+    "launch": "retry",
+    "preparationMs": 992.5999999996275,
+    "snapshots": {
+      "start": {
+        "frameDt": 0.001,
+        "state": "arrival",
+        "inside": false,
+        "opacity": 0,
+        "position": [
+          23.629557279642377,
+          118.4125,
+          195.96688641797337
+        ],
+        "elapsed": 0
+      },
+      "approach": {
+        "frameDt": 0.02480000000074506,
+        "state": "arrival",
+        "inside": false,
+        "opacity": 0.507933,
+        "position": [
+          11.627317485396826,
+          60.0446108333048,
+          109.12710591002832
+        ],
+        "elapsed": 0
+      },
+      "blackout": {
+        "frameDt": 0.0195,
+        "state": "arrival",
+        "inside": true,
+        "opacity": 1,
+        "position": [
+          0,
+          3.5,
+          25
+        ],
+        "elapsed": 0
+      },
+      "reveal": {
+        "frameDt": 0.016199999999254942,
+        "state": "arrival",
+        "inside": true,
+        "opacity": 0.9308,
+        "position": [
+          0,
+          3.5,
+          25
+        ],
+        "elapsed": 0
+      }
+    },
+    "frames": [
+      {
+        "frameDt": 0.001,
+        "state": "arrival",
+        "inside": false,
+        "opacity": 0,
+        "position": [
+          23.629557279642377,
+          118.4125,
+          195.96688641797337
+        ],
+        "elapsed": 0
+      },
+      {
+        "frameDt": 0.017900000000372528,
+        "state": "arrival",
+        "inside": false,
+        "opacity": 0,
+        "position": [
+          23.629557279642377,
+          118.4125,
+          195.96688641797337
+        ],
+        "elapsed": 0
+      },
+      {
+        "frameDt": 0.01690000000037253,
+        "state": "arrival",
+        "inside": false,
+        "opacity": 0,
+        "position": [
+          23.629557279642377,
+          118.4125,
+          195.96688641797337
+        ],
+        "elapsed": 0
+      },
+      {
+        "frameDt": 0.016699999999254943,
+        "state": "arrival",
+        "inside": false,
+        "opacity": 0,
+        "position": [
+          23.629557279642377,
+          118.4125,
+          195.96688641797337
+        ],
+        "elapsed": 0
+      },
+      {
+        "frameDt": 0.017800000000745057,
+        "state": "arrival",
+        "inside": false,
+        "opacity": 0,
+        "position": [
+          23.629557279642377,
+          118.4125,
+          195.96688641797337
+        ],
+        "elapsed": 0
+      },
+      {
+        "frameDt": 0.016599999999627472,
+        "state": "arrival",
+        "inside": false,
+        "opacity": 0,
+        "position": [
+          23.629557279642377,
+          118.4125,
+          195.96688641797337
+        ],
+        "elapsed": 0
+      },
+      {
+        "frameDt": 0.017900000000372528,
+        "state": "arrival",
+        "inside": false,
+        "opacity": 0,
+        "position": [
+          23.629557279642377,
+          118.4125,
+          195.96688641797337
+        ],
+        "elapsed": 0
+      },
+      {
+        "frameDt": 0.019699999999254942,
+        "state": "arrival",
+        "inside": false,
+        "opacity": 0,
+        "position": [
+          23.629557279642377,
+          118.4125,
+          195.96688641797337
+        ],
+        "elapsed": 0
+      },
+      {
+        "frameDt": 0.02290000000037253,
+        "state": "arrival",
+        "inside": false,
+        "opacity": 0,
+        "position": [
+          23.629557279642377,
+          118.4125,
+          195.96688641797337
+        ],
+        "elapsed": 0
+      },
+      {
+        "frameDt": 0.022400000000372528,
+        "state": "arrival",
+        "inside": false,
+        "opacity": 0,
+        "position": [
+          23.629557279642377,
+          118.4125,
+          195.96688641797337
+        ],
+        "elapsed": 0
+      },
+      {
+        "frameDt": 0.01919999999925494,
+        "state": "arrival",
+        "inside": false,
+        "opacity": 0,
+        "position": [
+          23.629557279642377,
+          118.4125,
+          195.96688641797337
+        ],
+        "elapsed": 0
+      },
+      {
+        "frameDt": 0.018700000001117587,
+        "state": "arrival",
+        "inside": false,
+        "opacity": 0,
+        "position": [
+          23.629557279642377,
+          118.4125,
+          195.96688641797337
+        ],
+        "elapsed": 0
+      },
+      {
+        "frameDt": 0.022,
+        "state": "arrival",
+        "inside": false,
+        "opacity": 0,
+        "position": [
+          23.629557279642377,
+          118.4125,
+          195.96688641797337
+        ],
+        "elapsed": 0
+      },
+      {
+        "frameDt": 0.01919999999925494,
+        "state": "arrival",
+        "inside": false,
+        "opacity": 0,
+        "position": [
+          23.629557279642377,
+          118.4125,
+          195.96688641797337
+        ],
+        "elapsed": 0
+      },
+      {
+        "frameDt": 0.018,
+        "state": "arrival",
+        "inside": false,
+        "opacity": 0,
+        "position": [
+          23.629557279642377,
+          118.4125,
+          195.96688641797337
+        ],
+        "elapsed": 0
+      },
+      {
+        "frameDt": 0.017800000000745057,
+        "state": "arrival",
+        "inside": false,
+        "opacity": 0,
+        "position": [
+          23.629557279642377,
+          118.4125,
+          195.96688641797337
+        ],
+        "elapsed": 0
+      },
+      {
+        "frameDt": 0.017899999998509882,
+        "state": "arrival",
+        "inside": false,
+        "opacity": 0,
+        "position": [
+          23.629557279642377,
+          118.4125,
+          195.96688641797337
+        ],
+        "elapsed": 0
+      },
+      {
+        "frameDt": 0.018200000001117586,
+        "state": "arrival",
+        "inside": false,
+        "opacity": 0,
+        "position": [
+          23.629557279642377,
+          118.4125,
+          195.96688641797337
+        ],
+        "elapsed": 0
+      },
+      {
+        "frameDt": 0.017099999999627472,
+        "state": "arrival",
+        "inside": false,
+        "opacity": 0,
+        "position": [
+          23.629557279642377,
+          118.4125,
+          195.96688641797337
+        ],
+        "elapsed": 0
+      },
+      {
+        "frameDt": 0.01940000000037253,
+        "state": "arrival",
+        "inside": false,
+        "opacity": 0,
+        "position": [
+          23.629557279642377,
+          118.4125,
+          195.96688641797337
+        ],
+        "elapsed": 0
+      },
+      {
+        "frameDt": 0.01919999999925494,
+        "state": "arrival",
+        "inside": false,
+        "opacity": 0,
+        "position": [
+          23.629557279642377,
+          118.4125,
+          195.96688641797337
+        ],
+        "elapsed": 0
+      },
+      {
+        "frameDt": 0.019,
+        "state": "arrival",
+        "inside": false,
+        "opacity": 0,
+        "position": [
+          23.629557279642377,
+          118.4125,
+          195.96688641797337
+        ],
+        "elapsed": 0
+      },
+      {
+        "frameDt": 0.019,
+        "state": "arrival",
+        "inside": false,
+        "opacity": 0,
+        "position": [
+          23.629557279642377,
+          118.4125,
+          195.96688641797337
+        ],
+        "elapsed": 0
+      },
+      {
+        "frameDt": 0.017700000001117586,
+        "state": "arrival",
+        "inside": false,
+        "opacity": 0,
+        "position": [
+          23.629557279642377,
+          118.4125,
+          195.96688641797337
+        ],
+        "elapsed": 0
+      },
+      {
+        "frameDt": 0.01919999999925494,
+        "state": "arrival",
+        "inside": false,
+        "opacity": 0,
+        "position": [
+          23.629557279642377,
+          118.4125,
+          195.96688641797337
+        ],
+        "elapsed": 0
+      },
+      {
+        "frameDt": 0.02040000000037253,
+        "state": "arrival",
+        "inside": false,
+        "opacity": 0,
+        "position": [
+          23.629557279642377,
+          118.4125,
+          195.96688641797337
+        ],
+        "elapsed": 0
+      },
+      {
+        "frameDt": 0.017599999999627473,
+        "state": "arrival",
+        "inside": false,
+        "opacity": 0,
+        "position": [
+          23.629557279642377,
+          118.4125,
+          195.96688641797337
+        ],
+        "elapsed": 0
+      },
+      {
+        "frameDt": 0.017199999999254943,
+        "state": "arrival",
+        "inside": false,
+        "opacity": 0,
+        "position": [
+          23.629557279642377,
+          118.4125,
+          195.96688641797337
+        ],
+        "elapsed": 0
+      },
+      {
+        "frameDt": 0.018100000001490115,
+        "state": "arrival",
+        "inside": false,
+        "opacity": 0,
+        "position": [
+          23.629557279642377,
+          118.4125,
+          195.96688641797337
+        ],
+        "elapsed": 0
+      },
+      {
+        "frameDt": 0.0165,
+        "state": "arrival",
+        "inside": false,
+        "opacity": 0,
+        "position": [
+          23.629557279642377,
+          118.4125,
+          195.96688641797337
+        ],
+        "elapsed": 0
+      },
+      {
+        "frameDt": 0.01859999999962747,
+        "state": "arrival",
+        "inside": false,
+        "opacity": 0,
+        "position": [
+          23.629557279642377,
+          118.4125,
+          195.96688641797337
+        ],
+        "elapsed": 0
+      },
+      {
+        "frameDt": 0.019299999998882413,
+        "state": "arrival",
+        "inside": false,
+        "opacity": 0,
+        "position": [
+          23.629557279642377,
+          118.4125,
+          195.96688641797337
+        ],
+        "elapsed": 0
+      },
+      {
+        "frameDt": 0.018800000000745058,
+        "state": "arrival",
+        "inside": false,
+        "opacity": 0,
+        "position": [
+          23.629557279642377,
+          118.4125,
+          195.96688641797337
+        ],
+        "elapsed": 0
+      },
+      {
+        "frameDt": 0.01919999999925494,
+        "state": "arrival",
+        "inside": false,
+        "opacity": 0,
+        "position": [
+          23.629557279642377,
+          118.4125,
+          195.96688641797337
+        ],
+        "elapsed": 0
+      },
+      {
+        "frameDt": 0.019300000000745058,
+        "state": "arrival",
+        "inside": false,
+        "opacity": 0,
+        "position": [
+          23.629557279642377,
+          118.4125,
+          195.96688641797337
+        ],
+        "elapsed": 0
+      },
+      {
+        "frameDt": 0.017199999999254943,
+        "state": "arrival",
+        "inside": false,
+        "opacity": 0,
+        "position": [
+          23.629557279642377,
+          118.4125,
+          195.96688641797337
+        ],
+        "elapsed": 0
+      },
+      {
+        "frameDt": 0.016600000001490117,
+        "state": "arrival",
+        "inside": false,
+        "opacity": 0,
+        "position": [
+          23.629557279642377,
+          118.4125,
+          195.96688641797337
+        ],
+        "elapsed": 0
+      },
+      {
+        "frameDt": 0.01819999999925494,
+        "state": "arrival",
+        "inside": false,
+        "opacity": 0,
+        "position": [
+          23.629557279642377,
+          118.4125,
+          195.96688641797337
+        ],
+        "elapsed": 0
+      },
+      {
+        "frameDt": 0.01590000000037253,
+        "state": "arrival",
+        "inside": false,
+        "opacity": 0,
+        "position": [
+          23.629557279642377,
+          118.4125,
+          195.96688641797337
+        ],
+        "elapsed": 0
+      },
+      {
+        "frameDt": 0.017699999999254944,
+        "state": "arrival",
+        "inside": false,
+        "opacity": 0,
+        "position": [
+          23.629557279642377,
+          118.4125,
+          195.96688641797337
+        ],
+        "elapsed": 0
+      },
+      {
+        "frameDt": 0.017900000000372528,
+        "state": "arrival",
+        "inside": false,
+        "opacity": 0,
+        "position": [
+          23.629557279642377,
+          118.4125,
+          195.96688641797337
+        ],
+        "elapsed": 0
+      },
+      {
+        "frameDt": 0.01819999999925494,
+        "state": "arrival",
+        "inside": false,
+        "opacity": 0,
+        "position": [
+          23.629557279642377,
+          118.4125,
+          195.96688641797337
+        ],
+        "elapsed": 0
+      },
+      {
+        "frameDt": 0.017600000001490115,
+        "state": "arrival",
+        "inside": false,
+        "opacity": 0,
+        "position": [
+          23.629557279642377,
+          118.4125,
+          195.96688641797337
+        ],
+        "elapsed": 0
+      },
+      {
+        "frameDt": 0.017699999999254944,
+        "state": "arrival",
+        "inside": false,
+        "opacity": 0,
+        "position": [
+          23.629557279642377,
+          118.4125,
+          195.96688641797337
+        ],
+        "elapsed": 0
+      },
+      {
+        "frameDt": 0.0165,
+        "state": "arrival",
+        "inside": false,
+        "opacity": 0,
+        "position": [
+          23.629557279642377,
+          118.4125,
+          195.96688641797337
+        ],
+        "elapsed": 0
+      },
+      {
+        "frameDt": 0.01730000000074506,
+        "state": "arrival",
+        "inside": false,
+        "opacity": 0,
+        "position": [
+          23.629557279642377,
+          118.4125,
+          195.96688641797337
+        ],
+        "elapsed": 0
+      },
+      {
+        "frameDt": 0.015699999999254942,
+        "state": "arrival",
+        "inside": false,
+        "opacity": 0,
+        "position": [
+          23.629557279642377,
+          118.4125,
+          195.96688641797337
+        ],
+        "elapsed": 0
+      },
+      {
+        "frameDt": 0.018800000000745058,
+        "state": "arrival",
+        "inside": false,
+        "opacity": 0,
+        "position": [
+          23.629557279642377,
+          118.4125,
+          195.96688641797337
+        ],
+        "elapsed": 0
+      },
+      {
+        "frameDt": 0.018399999998509883,
+        "state": "arrival",
+        "inside": false,
+        "opacity": 0,
+        "position": [
+          23.629557279642377,
+          118.4125,
+          195.96688641797337
+        ],
+        "elapsed": 0
+      },
+      {
+        "frameDt": 0.01630000000074506,
+        "state": "arrival",
+        "inside": false,
+        "opacity": 0,
+        "position": [
+          23.629557279642377,
+          118.4125,
+          195.96688641797337
+        ],
+        "elapsed": 0
+      },
+      {
+        "frameDt": 0.017199999999254943,
+        "state": "arrival",
+        "inside": false,
+        "opacity": 0,
+        "position": [
+          23.629557279642377,
+          118.4125,
+          195.96688641797337
+        ],
+        "elapsed": 0
+      },
+      {
+        "frameDt": 0.016,
+        "state": "arrival",
+        "inside": false,
+        "opacity": 0,
+        "position": [
+          23.629557279642377,
+          118.4125,
+          195.96688641797337
+        ],
+        "elapsed": 0
+      },
+      {
+        "frameDt": 0.015400000000372529,
+        "state": "arrival",
+        "inside": false,
+        "opacity": 0,
+        "position": [
+          23.629557279642377,
+          118.4125,
+          195.96688641797337
+        ],
+        "elapsed": 0
+      },
+      {
+        "frameDt": 0.015599999999627471,
+        "state": "arrival",
+        "inside": false,
+        "opacity": 0,
+        "position": [
+          23.629557279642377,
+          118.4125,
+          195.96688641797337
+        ],
+        "elapsed": 0
+      },
+      {
+        "frameDt": 0.01730000000074506,
+        "state": "arrival",
+        "inside": false,
+        "opacity": 0,
+        "position": [
+          23.629557279642377,
+          118.4125,
+          195.96688641797337
+        ],
+        "elapsed": 0
+      },
+      {
+        "frameDt": 0.01509999999962747,
+        "state": "arrival",
+        "inside": false,
+        "opacity": 0,
+        "position": [
+          23.629557279642377,
+          118.4125,
+          195.96688641797337
+        ],
+        "elapsed": 0
+      },
+      {
+        "frameDt": 0.016700000001117588,
+        "state": "arrival",
+        "inside": false,
+        "opacity": 0.00646667,
+        "position": [
+          23.476752809216418,
+          117.66939916658104,
+          194.8613005523431
+        ],
+        "elapsed": 0
+      },
+      {
+        "frameDt": 0.01819999999925494,
+        "state": "arrival",
+        "inside": false,
+        "opacity": 0.0186,
+        "position": [
+          23.190047514235157,
+          116.27512749997145,
+          192.7869023305566
+        ],
+        "elapsed": 0
+      },
+      {
+        "frameDt": 0.02030000000074506,
+        "state": "arrival",
+        "inside": false,
+        "opacity": 0.0321333,
+        "position": [
+          22.870260839038927,
+          114.7199783332477,
+          190.47315046761508
+        ],
+        "elapsed": 0
+      },
+      {
+        "frameDt": 0.01919999999925494,
+        "state": "arrival",
+        "inside": false,
+        "opacity": 0.0449333,
+        "position": [
+          22.567802505871242,
+          113.24909833330477,
+          188.28477432154995
+        ],
+        "elapsed": 0
+      },
+      {
+        "frameDt": 0.020699999999254943,
+        "state": "arrival",
+        "inside": false,
+        "opacity": 0.0587333,
+        "position": [
+          22.241714615423913,
+          111.66330583336185,
+          185.92543128906684
+        ],
+        "elapsed": 0
+      },
+      {
+        "frameDt": 0.017,
+        "state": "arrival",
+        "inside": false,
+        "opacity": 0.0700667,
+        "position": [
+          21.973912966254634,
+          110.3609641666952,
+          183.9878065763298
+        ],
+        "elapsed": 0
+      },
+      {
+        "frameDt": 0.0205,
+        "state": "arrival",
+        "inside": false,
+        "opacity": 0.0837333,
+        "position": [
+          21.650975683432854,
+          108.79049333336187,
+          181.6512591286175
+        ],
+        "elapsed": 0
+      },
+      {
+        "frameDt": 0.025900000000372528,
+        "state": "arrival",
+        "inside": false,
+        "opacity": 0.101,
+        "position": [
+          21.242971994398495,
+          106.80633749999998,
+          178.69923088975804
+        ],
+        "elapsed": 0
+      },
+      {
+        "frameDt": 0.022400000000372528,
+        "state": "arrival",
+        "inside": false,
+        "opacity": 0.115933,
+        "position": [
+          20.890103939016633,
+          105.09031083330477,
+          176.14612538587383
+        ],
+        "elapsed": 0
+      },
+      {
+        "frameDt": 0.017699999999254944,
+        "state": "arrival",
+        "inside": false,
+        "opacity": 0.127733,
+        "position": [
+          20.61127516312859,
+          103.73434333336185,
+          174.12871612622666
+        ],
+        "elapsed": 0
+      },
+      {
+        "frameDt": 0.018800000000745058,
+        "state": "arrival",
+        "inside": false,
+        "opacity": 0.140267,
+        "position": [
+          20.315118045212003,
+          102.2941066666381,
+          171.98593114970316
+        ],
+        "elapsed": 0
+      },
+      {
+        "frameDt": 0.01590000000037253,
+        "state": "arrival",
+        "inside": false,
+        "opacity": 0.150867,
+        "position": [
+          20.06464473804192,
+          101.07603416660956,
+          170.17368215363018
+        ],
+        "elapsed": 0
+      },
+      {
+        "frameDt": 0.016699999999254943,
+        "state": "arrival",
+        "inside": false,
+        "opacity": 0.162,
+        "position": [
+          19.801569000340308,
+          99.79667499999996,
+          168.27025081826164
+        ],
+        "elapsed": 0
+      },
+      {
+        "frameDt": 0.01680000000074506,
+        "state": "arrival",
+        "inside": false,
+        "opacity": 0.1732,
+        "position": [
+          19.536917958796575,
+          98.50965499994288,
+          166.35542169029543
+        ],
+        "elapsed": 0
+      },
+      {
+        "frameDt": 0.01959999999962747,
+        "state": "arrival",
+        "inside": false,
+        "opacity": 0.186267,
+        "position": [
+          19.22815841034845,
+          97.00813166663809,
+          164.12145437447637
+        ],
+        "elapsed": 0
+      },
+      {
+        "frameDt": 0.01359999999962747,
+        "state": "arrival",
+        "inside": false,
+        "opacity": 0.195333,
+        "position": [
+          19.013917091018893,
+          95.9662583333333,
+          162.5713546043292
+        ],
+        "elapsed": 0
+      },
+      {
+        "frameDt": 0.016700000001117588,
+        "state": "arrival",
+        "inside": false,
+        "opacity": 0.206467,
+        "position": [
+          18.75084135328794,
+          94.68689916658103,
+          160.66792326874838
+        ],
+        "elapsed": 0
+      },
+      {
+        "frameDt": 0.017299999998882414,
+        "state": "arrival",
+        "inside": false,
+        "opacity": 0.218,
+        "position": [
+          18.478313792680336,
+          93.36157499999999,
+          158.69610517885516
+        ],
+        "elapsed": 0
+      },
+      {
+        "frameDt": 0.019,
+        "state": "arrival",
+        "inside": false,
+        "opacity": 0.230667,
+        "position": [
+          18.1790060671382,
+          91.90601666666666,
+          156.53052461756084
+        ],
+        "elapsed": 0
+      },
+      {
+        "frameDt": 0.014800000000745057,
+        "state": "arrival",
+        "inside": false,
+        "opacity": 0.240533,
+        "position": [
+          17.945861101967324,
+          90.77221333327624,
+          154.84365133815191
+        ],
+        "elapsed": 0
+      },
+      {
+        "frameDt": 0.01740000000037253,
+        "state": "arrival",
+        "inside": false,
+        "opacity": 0.252133,
+        "position": [
+          17.671758237517604,
+          89.43922833324771,
+          152.86043545566096
+        ],
+        "elapsed": 0
+      },
+      {
+        "frameDt": 0.016899999998509885,
+        "state": "arrival",
+        "inside": false,
+        "opacity": 0.2634,
+        "position": [
+          17.40553189219044,
+          88.14454750002852,
+          150.93420853552163
+        ],
+        "elapsed": 0
+      },
+      {
+        "frameDt": 0.02340000000037253,
+        "state": "arrival",
+        "inside": false,
+        "opacity": 0.279,
+        "position": [
+          17.036910798622152,
+          86.35191249999998,
+          148.2671251073588
+        ],
+        "elapsed": 0
+      },
+      {
+        "frameDt": 0.0175,
+        "state": "arrival",
+        "inside": false,
+        "opacity": 0.290667,
+        "position": [
+          16.761232630359657,
+          85.01126666666664,
+          146.27251143248242
+        ],
+        "elapsed": 0
+      },
+      {
+        "frameDt": 0.016200000001117588,
+        "state": "arrival",
+        "inside": false,
+        "opacity": 0.301467,
+        "position": [
+          16.506033411721916,
+          83.77021166658105,
+          144.42606905904094
+        ],
+        "elapsed": 0
+      },
+      {
+        "frameDt": 0.020399999998509884,
+        "state": "arrival",
+        "inside": false,
+        "opacity": 0.315067,
+        "position": [
+          16.184671432742253,
+          82.2074016666952,
+          142.10091940392635
+        ],
+        "elapsed": 0
+      },
+      {
+        "frameDt": 0.01590000000037253,
+        "state": "arrival",
+        "inside": false,
+        "opacity": 0.325667,
+        "position": [
+          15.934198125572173,
+          80.98932916666665,
+          140.28867040785337
+        ],
+        "elapsed": 0
+      },
+      {
+        "frameDt": 0.015400000000372529,
+        "state": "arrival",
+        "inside": false,
+        "opacity": 0.335933,
+        "position": [
+          15.691601337495312,
+          79.80956083330479,
+          138.5334103739197
+        ],
+        "elapsed": 0
+      },
+      {
+        "frameDt": 0.0145,
+        "state": "arrival",
+        "inside": false,
+        "opacity": 0.3456,
+        "position": [
+          15.463182283792102,
+          78.69873999997145,
+          136.8807304718793
+        ],
+        "elapsed": 0
+      },
+      {
+        "frameDt": 0.019699999999254942,
+        "state": "arrival",
+        "inside": false,
+        "opacity": 0.358733,
+        "position": [
+          15.152847431531205,
+          77.18955583336188,
+          134.63536536367485
+        ],
+        "elapsed": 0
+      },
+      {
+        "frameDt": 0.029300000000745056,
+        "state": "arrival",
+        "inside": false,
+        "opacity": 0.378267,
+        "position": [
+          14.69128341265712,
+          74.94493166663813,
+          131.29581218222552
+        ],
+        "elapsed": 0
+      },
+      {
+        "frameDt": 0.03059999999962747,
+        "state": "arrival",
+        "inside": false,
+        "opacity": 0.398667,
+        "position": [
+          14.209240444158285,
+          72.60071666666667,
+          127.80808769934134
+        ],
+        "elapsed": 0
+      },
+      {
+        "frameDt": 0.028599999999627472,
+        "state": "arrival",
+        "inside": false,
+        "opacity": 0.417733,
+        "position": [
+          13.758703552032307,
+          70.4097183333619,
+          124.54831906501445
+        ],
+        "elapsed": 0
+      },
+      {
+        "frameDt": 0.027300000000745058,
+        "state": "arrival",
+        "inside": false,
+        "opacity": 0.435933,
+        "position": [
+          13.328645609531078,
+          68.3183108333048,
+          121.43672173212241
+        ],
+        "elapsed": 0
+      },
+      {
+        "frameDt": 0.03240000000037253,
+        "state": "arrival",
+        "inside": false,
+        "opacity": 0.457533,
+        "position": [
+          12.818247172284934,
+          65.83620083327627,
+          117.74383698545172
+        ],
+        "elapsed": 0
+      },
+      {
+        "frameDt": 0.02159999999962747,
+        "state": "arrival",
+        "inside": false,
+        "opacity": 0.471933,
+        "position": [
+          12.477981547463953,
+          64.18146083330481,
+          115.28191382107536
+        ],
+        "elapsed": 0
+      },
+      {
+        "frameDt": 0.029199999999254943,
+        "state": "arrival",
+        "inside": false,
+        "opacity": 0.4914,
+        "position": [
+          12.017992832431984,
+          61.94449750002855,
+          111.95375843222374
+        ],
+        "elapsed": 0
+      },
+      {
+        "frameDt": 0.02480000000074506,
+        "state": "arrival",
+        "inside": false,
+        "opacity": 0.507933,
+        "position": [
+          11.627317485396826,
+          60.0446108333048,
+          109.12710591002832
+        ],
+        "elapsed": 0
+      },
+      {
+        "frameDt": 0.023,
+        "state": "arrival",
+        "inside": false,
+        "opacity": 0.523267,
+        "position": [
+          11.264997607108977,
+          58.28261916663814,
+          106.5056136516194
+        ],
+        "elapsed": 0
+      },
+      {
+        "frameDt": 0.021899999998509882,
+        "state": "arrival",
+        "inside": false,
+        "opacity": 0.537867,
+        "position": [
+          10.920006070849674,
+          56.6048966667523,
+          104.00949711008684
+        ],
+        "elapsed": 0
+      },
+      {
+        "frameDt": 0.023,
+        "state": "arrival",
+        "inside": false,
+        "opacity": 0.5532,
+        "position": [
+          10.557686192561825,
+          54.842905000085636,
+          101.38800485167792
+        ],
+        "elapsed": 0
+      },
+      {
+        "frameDt": 0.020100000001490117,
+        "state": "arrival",
+        "inside": false,
+        "opacity": 0.5666,
+        "position": [
+          10.241050124991142,
+          53.30307749997148,
+          99.09704857350724
+        ],
+        "elapsed": 0
+      },
+      {
+        "frameDt": 0.01959999999962747,
+        "state": "arrival",
+        "inside": false,
+        "opacity": 0.579667,
+        "position": [
+          9.932290576543018,
+          51.80155416666669,
+          96.86308125768818
+        ],
+        "elapsed": 0
+      },
+      {
+        "frameDt": 0.02040000000037253,
+        "state": "arrival",
+        "inside": false,
+        "opacity": 0.593267,
+        "position": [
+          9.610928597534011,
+          50.23874416663814,
+          94.53793160236127
+        ],
+        "elapsed": 0
+      },
+      {
+        "frameDt": 0.019699999999254942,
+        "state": "arrival",
+        "inside": false,
+        "opacity": 0.6064,
+        "position": [
+          9.300593745273112,
+          48.729560000028556,
+          92.29256649415682
+        ],
+        "elapsed": 0
+      },
+      {
+        "frameDt": 0.017900000000372528,
+        "state": "arrival",
+        "inside": false,
+        "opacity": 0.618333,
+        "position": [
+          9.018614361730178,
+          47.35827083333335,
+          90.25236164952653
+        ],
+        "elapsed": 0
+      },
+      {
+        "frameDt": 0.02209999999962747,
+        "state": "arrival",
+        "inside": false,
+        "opacity": 0.633067,
+        "position": [
+          8.670472217815984,
+          45.66522666669523,
+          87.73344952301086
+        ],
+        "elapsed": 0
+      },
+      {
+        "frameDt": 0.022,
+        "state": "arrival",
+        "inside": false,
+        "opacity": 0.647733,
+        "position": [
+          8.32390537771456,
+          43.979843333361885,
+          85.22593518888057
+        ],
+        "elapsed": 0
+      },
+      {
+        "frameDt": 0.01940000000037253,
+        "state": "arrival",
+        "inside": false,
+        "opacity": 0.660667,
+        "position": [
+          8.018296436891987,
+          42.49364166666669,
+          83.01476345783234
+        ],
+        "elapsed": 0
+      },
+      {
+        "frameDt": 0.019299999998882413,
+        "state": "arrival",
+        "inside": false,
+        "opacity": 0.673533,
+        "position": [
+          7.714262799911523,
+          41.01510083341897,
+          80.81498951938178
+        ],
+        "elapsed": 0
+      },
+      {
+        "frameDt": 0.02480000000074506,
+        "state": "arrival",
+        "inside": false,
+        "opacity": 0.690067,
+        "position": [
+          7.323587452876364,
+          39.11521416669521,
+          77.98833699718635
+        ],
+        "elapsed": 0
+      },
+      {
+        "frameDt": 0.018400000000372528,
+        "state": "arrival",
+        "inside": false,
+        "opacity": 0.702333,
+        "position": [
+          7.033731550240219,
+          37.705620833333356,
+          75.89114319041677
+        ],
+        "elapsed": 0
+      },
+      {
+        "frameDt": 0.01809999999962747,
+        "state": "arrival",
+        "inside": false,
+        "opacity": 0.7144,
+        "position": [
+          6.748601559071737,
+          36.31901000002857,
+          73.82814276101571
+        ],
+        "elapsed": 0
+      },
+      {
+        "frameDt": 0.025800000000745057,
+        "state": "arrival",
+        "inside": false,
+        "opacity": 0.7316,
+        "position": [
+          6.342173173850153,
+          34.3425149999715,
+          70.88751231454164
+        ],
+        "elapsed": 0
+      },
+      {
+        "frameDt": 0.018899999998509883,
+        "state": "arrival",
+        "inside": false,
+        "opacity": 0.7442,
+        "position": [
+          6.04444075215013,
+          32.894617500085644,
+          68.73332954584501
+        ],
+        "elapsed": 0
+      },
+      {
+        "frameDt": 0.019300000000745058,
+        "state": "arrival",
+        "inside": false,
+        "opacity": 0.757067,
+        "position": [
+          5.740407115140329,
+          31.416076666695233,
+          66.53355560718217
+        ],
+        "elapsed": 0
+      },
+      {
+        "frameDt": 0.03059999999962747,
+        "state": "arrival",
+        "inside": false,
+        "opacity": 0.777467,
+        "position": [
+          5.25836414664149,
+          29.071861666723763,
+          63.04583112429796
+        ],
+        "elapsed": 0
+      },
+      {
+        "frameDt": 0.02430000000074506,
+        "state": "arrival",
+        "inside": false,
+        "opacity": 0.793667,
+        "position": [
+          4.87556531869955,
+          27.210279166666695,
+          60.27616756424189
+        ],
+        "elapsed": 0
+      },
+      {
+        "frameDt": 0.027,
+        "state": "arrival",
+        "inside": false,
+        "opacity": 0.811667,
+        "position": [
+          4.450233287665984,
+          25.141854166666675,
+          57.19876360871834
+        ],
+        "elapsed": 0
+      },
+      {
+        "frameDt": 0.0215,
+        "state": "arrival",
+        "inside": false,
+        "opacity": 0.826,
+        "position": [
+          4.111542966657776,
+          23.494775000000004,
+          54.74823823672736
+        ],
+        "elapsed": 0
+      },
+      {
+        "frameDt": 0.02159999999962747,
+        "state": "arrival",
+        "inside": false,
+        "opacity": 0.8404,
+        "position": [
+          3.7712773418367966,
+          21.840035000028564,
+          52.286315072351044
+        ],
+        "elapsed": 0
+      },
+      {
+        "frameDt": 0.026800000000745058,
+        "state": "arrival",
+        "inside": false,
+        "opacity": 0.858267,
+        "position": [
+          3.3490959184287874,
+          19.786931666638168,
+          49.23170670159837
+        ],
+        "elapsed": 0
+      },
+      {
+        "frameDt": 0.020599999999627472,
+        "state": "arrival",
+        "inside": false,
+        "opacity": 0.872,
+        "position": [
+          3.0245833317942363,
+          18.208800000000053,
+          46.883761461500654
+        ],
+        "elapsed": 0
+      },
+      {
+        "frameDt": 0.02209999999962747,
+        "state": "arrival",
+        "inside": false,
+        "opacity": 0.886733,
+        "position": [
+          2.6764411878800374,
+          16.515755833361922,
+          44.36484933498497
+        ],
+        "elapsed": 0
+      },
+      {
+        "frameDt": 0.024199999999254942,
+        "state": "arrival",
+        "inside": false,
+        "opacity": 0.902867,
+        "position": [
+          2.295217663780214,
+          14.661834166752342,
+          41.60658356752663
+        ],
+        "elapsed": 0
+      },
+      {
+        "frameDt": 0.01980000000074506,
+        "state": "arrival",
+        "inside": false,
+        "opacity": 0.916067,
+        "position": [
+          1.9833075076771962,
+          13.144989166695254,
+          39.34982066672444
+        ],
+        "elapsed": 0
+      },
+      {
+        "frameDt": 0.024699999999254943,
+        "state": "arrival",
+        "inside": false,
+        "opacity": 0.932533,
+        "position": [
+          1.5942074644841533,
+          11.252763333418997,
+          36.5345659371267
+        ],
+        "elapsed": 0
+      },
+      {
+        "frameDt": 0.025900000000372528,
+        "state": "arrival",
+        "inside": false,
+        "opacity": 0.9498,
+        "position": [
+          1.186203775449794,
+          9.268607500057115,
+          33.58253769826726
+        ],
+        "elapsed": 0
+      },
+      {
+        "frameDt": 0.02390000000037253,
+        "state": "arrival",
+        "inside": false,
+        "opacity": 0.965733,
+        "position": [
+          0.8097061627882916,
+          7.437668333361927,
+          30.858465307965105
+        ],
+        "elapsed": 0
+      },
+      {
+        "frameDt": 0.02269999999925494,
+        "state": "arrival",
+        "inside": false,
+        "opacity": 0.980867,
+        "position": [
+          0.4521121959681089,
+          5.69865916675235,
+          28.271166426924708
+        ],
+        "elapsed": 0
+      },
+      {
+        "frameDt": 0.027600000001490117,
+        "state": "arrival",
+        "inside": false,
+        "opacity": 0.999267,
+        "position": [
+          0.0173283419992174,
+          3.584269166638194,
+          25.125375716664166
+        ],
+        "elapsed": 0
+      },
+      {
+        "frameDt": 0.0195,
+        "state": "arrival",
+        "inside": true,
+        "opacity": 1,
+        "position": [
+          0,
+          3.5,
+          25
+        ],
+        "elapsed": 0
+      },
+      {
+        "frameDt": 0.016199999999254942,
+        "state": "arrival",
+        "inside": true,
+        "opacity": 0.9308,
+        "position": [
+          0,
+          3.5,
+          25
+        ],
+        "elapsed": 0
+      },
+      {
+        "frameDt": 0.01690000000037253,
+        "state": "arrival",
+        "inside": true,
+        "opacity": 0.897,
+        "position": [
+          0,
+          3.5,
+          25
+        ],
+        "elapsed": 0
+      },
+      {
+        "frameDt": 0.016899999998509885,
+        "state": "arrival",
+        "inside": true,
+        "opacity": 0.8632,
+        "position": [
+          0,
+          3.5,
+          25
+        ],
+        "elapsed": 0
+      },
+      {
+        "frameDt": 0.016600000001490117,
+        "state": "arrival",
+        "inside": true,
+        "opacity": 0.83,
+        "position": [
+          0,
+          3.5,
+          25
+        ],
+        "elapsed": 0
+      },
+      {
+        "frameDt": 0.016699999999254943,
+        "state": "arrival",
+        "inside": true,
+        "opacity": 0.7966,
+        "position": [
+          0,
+          3.5,
+          25
+        ],
+        "elapsed": 0
+      },
+      {
+        "frameDt": 0.0165,
+        "state": "arrival",
+        "inside": true,
+        "opacity": 0.7636,
+        "position": [
+          0,
+          3.5,
+          25
+        ],
+        "elapsed": 0
+      },
+      {
+        "frameDt": 0.01690000000037253,
+        "state": "arrival",
+        "inside": true,
+        "opacity": 0.7298,
+        "position": [
+          0,
+          3.5,
+          25
+        ],
+        "elapsed": 0
+      },
+      {
+        "frameDt": 0.016299999998882413,
+        "state": "arrival",
+        "inside": true,
+        "opacity": 0.6972,
+        "position": [
+          0,
+          3.5,
+          25
+        ],
+        "elapsed": 0
+      },
+      {
+        "frameDt": 0.01680000000074506,
+        "state": "arrival",
+        "inside": true,
+        "opacity": 0.6636,
+        "position": [
+          0,
+          3.5,
+          25
+        ],
+        "elapsed": 0
+      },
+      {
+        "frameDt": 0.016599999999627472,
+        "state": "arrival",
+        "inside": true,
+        "opacity": 0.6304,
+        "position": [
+          0,
+          3.5,
+          25
+        ],
+        "elapsed": 0
+      },
+      {
+        "frameDt": 0.01690000000037253,
+        "state": "arrival",
+        "inside": true,
+        "opacity": 0.5966,
+        "position": [
+          0,
+          3.5,
+          25
+        ],
+        "elapsed": 0
+      },
+      {
+        "frameDt": 0.016199999999254942,
+        "state": "arrival",
+        "inside": true,
+        "opacity": 0.5642,
+        "position": [
+          0,
+          3.5,
+          25
+        ],
+        "elapsed": 0
+      },
+      {
+        "frameDt": 0.01680000000074506,
+        "state": "arrival",
+        "inside": true,
+        "opacity": 0.5306,
+        "position": [
+          0,
+          3.5,
+          25
+        ],
+        "elapsed": 0
+      },
+      {
+        "frameDt": 0.01680000000074506,
+        "state": "arrival",
+        "inside": true,
+        "opacity": 0.497,
+        "position": [
+          0,
+          3.5,
+          25
+        ],
+        "elapsed": 0
+      },
+      {
+        "frameDt": 0.016699999999254943,
+        "state": "arrival",
+        "inside": true,
+        "opacity": 0.4636,
+        "position": [
+          0,
+          3.5,
+          25
+        ],
+        "elapsed": 0
+      },
+      {
+        "frameDt": 0.0165,
+        "state": "arrival",
+        "inside": true,
+        "opacity": 0.4306,
+        "position": [
+          0,
+          3.5,
+          25
+        ],
+        "elapsed": 0
+      },
+      {
+        "frameDt": 0.01680000000074506,
+        "state": "arrival",
+        "inside": true,
+        "opacity": 0.397,
+        "position": [
+          0,
+          3.5,
+          25
+        ],
+        "elapsed": 0
+      },
+      {
+        "frameDt": 0.016599999999627472,
+        "state": "arrival",
+        "inside": true,
+        "opacity": 0.3638,
+        "position": [
+          0,
+          3.5,
+          25
+        ],
+        "elapsed": 0
+      },
+      {
+        "frameDt": 0.016599999999627472,
+        "state": "arrival",
+        "inside": true,
+        "opacity": 0.3306,
+        "position": [
+          0,
+          3.5,
+          25
+        ],
+        "elapsed": 0
+      },
+      {
+        "frameDt": 0.016699999999254943,
+        "state": "arrival",
+        "inside": true,
+        "opacity": 0.2972,
+        "position": [
+          0,
+          3.5,
+          25
+        ],
+        "elapsed": 0
+      },
+      {
+        "frameDt": 0.016600000001490117,
+        "state": "arrival",
+        "inside": true,
+        "opacity": 0.264,
+        "position": [
+          0,
+          3.5,
+          25
+        ],
+        "elapsed": 0
+      },
+      {
+        "frameDt": 0.016799999998882414,
+        "state": "arrival",
+        "inside": true,
+        "opacity": 0.2304,
+        "position": [
+          0,
+          3.5,
+          25
+        ],
+        "elapsed": 0
+      },
+      {
+        "frameDt": 0.016700000001117588,
+        "state": "arrival",
+        "inside": true,
+        "opacity": 0.197,
+        "position": [
+          0,
+          3.5,
+          25
+        ],
+        "elapsed": 0
+      },
+      {
+        "frameDt": 0.016599999999627472,
+        "state": "arrival",
+        "inside": true,
+        "opacity": 0.1638,
+        "position": [
+          0,
+          3.5,
+          25
+        ],
+        "elapsed": 0
+      },
+      {
+        "frameDt": 0.016699999999254943,
+        "state": "arrival",
+        "inside": true,
+        "opacity": 0.1304,
+        "position": [
+          0,
+          3.5,
+          25
+        ],
+        "elapsed": 0
+      },
+      {
+        "frameDt": 0.016599999999627472,
+        "state": "arrival",
+        "inside": true,
+        "opacity": 0.0972,
+        "position": [
+          0,
+          3.5,
+          25
+        ],
+        "elapsed": 0
+      },
+      {
+        "frameDt": 0.016700000001117588,
+        "state": "arrival",
+        "inside": true,
+        "opacity": 0.0638,
+        "position": [
+          0,
+          3.5,
+          25
+        ],
+        "elapsed": 0
+      },
+      {
+        "frameDt": 0.016699999999254943,
+        "state": "arrival",
+        "inside": true,
+        "opacity": 0.0304,
+        "position": [
+          0,
+          3.5,
+          25
+        ],
+        "elapsed": 0
+      },
+      {
+        "frameDt": 0.01680000000074506,
+        "state": "play",
+        "inside": true,
+        "opacity": 0,
+        "position": [
+          0,
+          3.5,
+          25
+        ],
+        "elapsed": 0
+      }
+    ],
+    "errors": []
+  },
+  {
+    "width": 390,
+    "height": 844,
+    "reducedMotion": "reduce",
+    "launch": "start",
+    "preparationMs": 104.30000000074506,
+    "snapshots": {
+      "start": {
+        "frameDt": 0.000599999999627471,
+        "state": "arrival",
+        "inside": false,
+        "opacity": 0,
+        "position": [
+          64.69247681893202,
+          307.07,
+          536.5137868154293
+        ],
+        "elapsed": 0
+      },
+      "approach": {
+        "frameDt": 0.01630000000074506,
+        "state": "arrival",
+        "inside": false,
+        "opacity": 0.5008,
+        "position": [
+          64.69247681893202,
+          307.07,
+          536.5137868154293
+        ],
+        "elapsed": 0
+      },
+      "blackout": {
+        "frameDt": 0.016599999999627472,
+        "state": "arrival",
+        "inside": true,
+        "opacity": 1,
+        "position": [
+          64.69247681893202,
+          307.07,
+          536.5137868154293
+        ],
+        "elapsed": 0
+      },
+      "reveal": {
+        "frameDt": 0.016699999999254943,
+        "state": "arrival",
+        "inside": true,
+        "opacity": 0.9636,
+        "position": [
+          64.69247681893202,
+          307.07,
+          536.5137868154293
+        ],
+        "elapsed": 0
+      }
+    },
+    "frames": [
+      {
+        "frameDt": 0.000599999999627471,
+        "state": "arrival",
+        "inside": false,
+        "opacity": 0,
+        "position": [
+          64.69247681893202,
+          307.07,
+          536.5137868154293
+        ],
+        "elapsed": 0
+      },
+      {
+        "frameDt": 0.01680000000074506,
+        "state": "arrival",
+        "inside": false,
+        "opacity": 0,
+        "position": [
+          64.69247681893202,
+          307.07,
+          536.5137868154293
+        ],
+        "elapsed": 0
+      },
+      {
+        "frameDt": 0.016599999999627472,
+        "state": "arrival",
+        "inside": false,
+        "opacity": 0,
+        "position": [
+          64.69247681893202,
+          307.07,
+          536.5137868154293
+        ],
+        "elapsed": 0
+      },
+      {
+        "frameDt": 0.016700000001117588,
+        "state": "arrival",
+        "inside": false,
+        "opacity": 0,
+        "position": [
+          64.69247681893202,
+          307.07,
+          536.5137868154293
+        ],
+        "elapsed": 0
+      },
+      {
+        "frameDt": 0.016599999999627472,
+        "state": "arrival",
+        "inside": false,
+        "opacity": 0,
+        "position": [
+          64.69247681893202,
+          307.07,
+          536.5137868154293
+        ],
+        "elapsed": 0
+      },
+      {
+        "frameDt": 0.016699999999254943,
+        "state": "arrival",
+        "inside": false,
+        "opacity": 0,
+        "position": [
+          64.69247681893202,
+          307.07,
+          536.5137868154293
+        ],
+        "elapsed": 0
+      },
+      {
+        "frameDt": 0.01680000000074506,
+        "state": "arrival",
+        "inside": false,
+        "opacity": 0,
+        "position": [
+          64.69247681893202,
+          307.07,
+          536.5137868154293
+        ],
+        "elapsed": 0
+      },
+      {
+        "frameDt": 0.016699999999254943,
+        "state": "arrival",
+        "inside": false,
+        "opacity": 0,
+        "position": [
+          64.69247681893202,
+          307.07,
+          536.5137868154293
+        ],
+        "elapsed": 0
+      },
+      {
+        "frameDt": 0.0165,
+        "state": "arrival",
+        "inside": false,
+        "opacity": 0,
+        "position": [
+          64.69247681893202,
+          307.07,
+          536.5137868154293
+        ],
+        "elapsed": 0
+      },
+      {
+        "frameDt": 0.01690000000037253,
+        "state": "arrival",
+        "inside": false,
+        "opacity": 0,
+        "position": [
+          64.69247681893202,
+          307.07,
+          536.5137868154293
+        ],
+        "elapsed": 0
+      },
+      {
+        "frameDt": 0.0165,
+        "state": "arrival",
+        "inside": false,
+        "opacity": 0,
+        "position": [
+          64.69247681893202,
+          307.07,
+          536.5137868154293
+        ],
+        "elapsed": 0
+      },
+      {
+        "frameDt": 0.016699999999254943,
+        "state": "arrival",
+        "inside": false,
+        "opacity": 0,
+        "position": [
+          64.69247681893202,
+          307.07,
+          536.5137868154293
+        ],
+        "elapsed": 0
+      },
+      {
+        "frameDt": 0.016700000001117588,
+        "state": "arrival",
+        "inside": false,
+        "opacity": 0,
+        "position": [
+          64.69247681893202,
+          307.07,
+          536.5137868154293
+        ],
+        "elapsed": 0
+      },
+      {
+        "frameDt": 0.0165,
+        "state": "arrival",
+        "inside": false,
+        "opacity": 0,
+        "position": [
+          64.69247681893202,
+          307.07,
+          536.5137868154293
+        ],
+        "elapsed": 0
+      },
+      {
+        "frameDt": 0.016699999999254943,
+        "state": "arrival",
+        "inside": false,
+        "opacity": 0,
+        "position": [
+          64.69247681893202,
+          307.07,
+          536.5137868154293
+        ],
+        "elapsed": 0
+      },
+      {
+        "frameDt": 0.016700000001117588,
+        "state": "arrival",
+        "inside": false,
+        "opacity": 0,
+        "position": [
+          64.69247681893202,
+          307.07,
+          536.5137868154293
+        ],
+        "elapsed": 0
+      },
+      {
+        "frameDt": 0.016699999999254943,
+        "state": "arrival",
+        "inside": false,
+        "opacity": 0,
+        "position": [
+          64.69247681893202,
+          307.07,
+          536.5137868154293
+        ],
+        "elapsed": 0
+      },
+      {
+        "frameDt": 0.0175,
+        "state": "arrival",
+        "inside": false,
+        "opacity": 0,
+        "position": [
+          64.69247681893202,
+          307.07,
+          536.5137868154293
+        ],
+        "elapsed": 0
+      },
+      {
+        "frameDt": 0.01630000000074506,
+        "state": "arrival",
+        "inside": false,
+        "opacity": 0,
+        "position": [
+          64.69247681893202,
+          307.07,
+          536.5137868154293
+        ],
+        "elapsed": 0
+      },
+      {
+        "frameDt": 0.016199999999254942,
+        "state": "arrival",
+        "inside": false,
+        "opacity": 0,
+        "position": [
+          64.69247681893202,
+          307.07,
+          536.5137868154293
+        ],
+        "elapsed": 0
+      },
+      {
+        "frameDt": 0.016599999999627472,
+        "state": "arrival",
+        "inside": false,
+        "opacity": 0,
+        "position": [
+          64.69247681893202,
+          307.07,
+          536.5137868154293
+        ],
+        "elapsed": 0
+      },
+      {
+        "frameDt": 0.01680000000074506,
+        "state": "arrival",
+        "inside": false,
+        "opacity": 0,
+        "position": [
+          64.69247681893202,
+          307.07,
+          536.5137868154293
+        ],
+        "elapsed": 0
+      },
+      {
+        "frameDt": 0.016699999999254943,
+        "state": "arrival",
+        "inside": false,
+        "opacity": 0,
+        "position": [
+          64.69247681893202,
+          307.07,
+          536.5137868154293
+        ],
+        "elapsed": 0
+      },
+      {
+        "frameDt": 0.016599999999627472,
+        "state": "arrival",
+        "inside": false,
+        "opacity": 0,
+        "position": [
+          64.69247681893202,
+          307.07,
+          536.5137868154293
+        ],
+        "elapsed": 0
+      },
+      {
+        "frameDt": 0.016600000001490117,
+        "state": "arrival",
+        "inside": false,
+        "opacity": 0,
+        "position": [
+          64.69247681893202,
+          307.07,
+          536.5137868154293
+        ],
+        "elapsed": 0
+      },
+      {
+        "frameDt": 0.016899999998509885,
+        "state": "arrival",
+        "inside": false,
+        "opacity": 0,
+        "position": [
+          64.69247681893202,
+          307.07,
+          536.5137868154293
+        ],
+        "elapsed": 0
+      },
+      {
+        "frameDt": 0.016600000001490117,
+        "state": "arrival",
+        "inside": false,
+        "opacity": 0,
+        "position": [
+          64.69247681893202,
+          307.07,
+          536.5137868154293
+        ],
+        "elapsed": 0
+      },
+      {
+        "frameDt": 0.016599999999627472,
+        "state": "arrival",
+        "inside": false,
+        "opacity": 0,
+        "position": [
+          64.69247681893202,
+          307.07,
+          536.5137868154293
+        ],
+        "elapsed": 0
+      },
+      {
+        "frameDt": 0.016699999999254943,
+        "state": "arrival",
+        "inside": false,
+        "opacity": 0,
+        "position": [
+          64.69247681893202,
+          307.07,
+          536.5137868154293
+        ],
+        "elapsed": 0
+      },
+      {
+        "frameDt": 0.01680000000074506,
+        "state": "arrival",
+        "inside": false,
+        "opacity": 0,
+        "position": [
+          64.69247681893202,
+          307.07,
+          536.5137868154293
+        ],
+        "elapsed": 0
+      },
+      {
+        "frameDt": 0.01640000000037253,
+        "state": "arrival",
+        "inside": false,
+        "opacity": 0,
+        "position": [
+          64.69247681893202,
+          307.07,
+          536.5137868154293
+        ],
+        "elapsed": 0
+      },
+      {
+        "frameDt": 0.016799999998882414,
+        "state": "arrival",
+        "inside": false,
+        "opacity": 0,
+        "position": [
+          64.69247681893202,
+          307.07,
+          536.5137868154293
+        ],
+        "elapsed": 0
+      },
+      {
+        "frameDt": 0.01680000000074506,
+        "state": "arrival",
+        "inside": false,
+        "opacity": 0,
+        "position": [
+          64.69247681893202,
+          307.07,
+          536.5137868154293
+        ],
+        "elapsed": 0
+      },
+      {
+        "frameDt": 0.0165,
+        "state": "arrival",
+        "inside": false,
+        "opacity": 0,
+        "position": [
+          64.69247681893202,
+          307.07,
+          536.5137868154293
+        ],
+        "elapsed": 0
+      },
+      {
+        "frameDt": 0.016699999999254943,
+        "state": "arrival",
+        "inside": false,
+        "opacity": 0,
+        "position": [
+          64.69247681893202,
+          307.07,
+          536.5137868154293
+        ],
+        "elapsed": 0
+      },
+      {
+        "frameDt": 0.01680000000074506,
+        "state": "arrival",
+        "inside": false,
+        "opacity": 0,
+        "position": [
+          64.69247681893202,
+          307.07,
+          536.5137868154293
+        ],
+        "elapsed": 0
+      },
+      {
+        "frameDt": 0.0165,
+        "state": "arrival",
+        "inside": false,
+        "opacity": 0,
+        "position": [
+          64.69247681893202,
+          307.07,
+          536.5137868154293
+        ],
+        "elapsed": 0
+      },
+      {
+        "frameDt": 0.016799999998882414,
+        "state": "arrival",
+        "inside": false,
+        "opacity": 0,
+        "position": [
+          64.69247681893202,
+          307.07,
+          536.5137868154293
+        ],
+        "elapsed": 0
+      },
+      {
+        "frameDt": 0.016600000001490117,
+        "state": "arrival",
+        "inside": false,
+        "opacity": 0,
+        "position": [
+          64.69247681893202,
+          307.07,
+          536.5137868154293
+        ],
+        "elapsed": 0
+      },
+      {
+        "frameDt": 0.016799999998882414,
+        "state": "arrival",
+        "inside": false,
+        "opacity": 0,
+        "position": [
+          64.69247681893202,
+          307.07,
+          536.5137868154293
+        ],
+        "elapsed": 0
+      },
+      {
+        "frameDt": 0.016599999999627472,
+        "state": "arrival",
+        "inside": false,
+        "opacity": 0,
+        "position": [
+          64.69247681893202,
+          307.07,
+          536.5137868154293
+        ],
+        "elapsed": 0
+      },
+      {
+        "frameDt": 0.016600000001490117,
+        "state": "arrival",
+        "inside": false,
+        "opacity": 0,
+        "position": [
+          64.69247681893202,
+          307.07,
+          536.5137868154293
+        ],
+        "elapsed": 0
+      },
+      {
+        "frameDt": 0.016699999999254943,
+        "state": "arrival",
+        "inside": false,
+        "opacity": 0,
+        "position": [
+          64.69247681893202,
+          307.07,
+          536.5137868154293
+        ],
+        "elapsed": 0
+      },
+      {
+        "frameDt": 0.016599999999627472,
+        "state": "arrival",
+        "inside": false,
+        "opacity": 0,
+        "position": [
+          64.69247681893202,
+          307.07,
+          536.5137868154293
+        ],
+        "elapsed": 0
+      },
+      {
+        "frameDt": 0.01680000000074506,
+        "state": "arrival",
+        "inside": false,
+        "opacity": 0,
+        "position": [
+          64.69247681893202,
+          307.07,
+          536.5137868154293
+        ],
+        "elapsed": 0
+      },
+      {
+        "frameDt": 0.016599999999627472,
+        "state": "arrival",
+        "inside": false,
+        "opacity": 0,
+        "position": [
+          64.69247681893202,
+          307.07,
+          536.5137868154293
+        ],
+        "elapsed": 0
+      },
+      {
+        "frameDt": 0.016699999999254943,
+        "state": "arrival",
+        "inside": false,
+        "opacity": 0,
+        "position": [
+          64.69247681893202,
+          307.07,
+          536.5137868154293
+        ],
+        "elapsed": 0
+      },
+      {
+        "frameDt": 0.016600000001490117,
+        "state": "arrival",
+        "inside": false,
+        "opacity": 0,
+        "position": [
+          64.69247681893202,
+          307.07,
+          536.5137868154293
+        ],
+        "elapsed": 0
+      },
+      {
+        "frameDt": 0.016899999998509885,
+        "state": "arrival",
+        "inside": false,
+        "opacity": 0,
+        "position": [
+          64.69247681893202,
+          307.07,
+          536.5137868154293
+        ],
+        "elapsed": 0
+      },
+      {
+        "frameDt": 0.01640000000037253,
+        "state": "arrival",
+        "inside": false,
+        "opacity": 0,
+        "position": [
+          64.69247681893202,
+          307.07,
+          536.5137868154293
+        ],
+        "elapsed": 0
+      },
+      {
+        "frameDt": 0.01680000000074506,
+        "state": "arrival",
+        "inside": false,
+        "opacity": 0,
+        "position": [
+          64.69247681893202,
+          307.07,
+          536.5137868154293
+        ],
+        "elapsed": 0
+      },
+      {
+        "frameDt": 0.016599999999627472,
+        "state": "arrival",
+        "inside": false,
+        "opacity": 0,
+        "position": [
+          64.69247681893202,
+          307.07,
+          536.5137868154293
+        ],
+        "elapsed": 0
+      },
+      {
+        "frameDt": 0.016699999999254943,
+        "state": "arrival",
+        "inside": false,
+        "opacity": 0,
+        "position": [
+          64.69247681893202,
+          307.07,
+          536.5137868154293
+        ],
+        "elapsed": 0
+      },
+      {
+        "frameDt": 0.016700000001117588,
+        "state": "arrival",
+        "inside": false,
+        "opacity": 0,
+        "position": [
+          64.69247681893202,
+          307.07,
+          536.5137868154293
+        ],
+        "elapsed": 0
+      },
+      {
+        "frameDt": 0.018400000000372528,
+        "state": "arrival",
+        "inside": false,
+        "opacity": 0,
+        "position": [
+          64.69247681893202,
+          307.07,
+          536.5137868154293
+        ],
+        "elapsed": 0
+      },
+      {
+        "frameDt": 0.014899999998509885,
+        "state": "arrival",
+        "inside": false,
+        "opacity": 0,
+        "position": [
+          64.69247681893202,
+          307.07,
+          536.5137868154293
+        ],
+        "elapsed": 0
+      },
+      {
+        "frameDt": 0.016700000001117588,
+        "state": "arrival",
+        "inside": false,
+        "opacity": 0,
+        "position": [
+          64.69247681893202,
+          307.07,
+          536.5137868154293
+        ],
+        "elapsed": 0
+      },
+      {
+        "frameDt": 0.016599999999627472,
+        "state": "arrival",
+        "inside": false,
+        "opacity": 0,
+        "position": [
+          64.69247681893202,
+          307.07,
+          536.5137868154293
+        ],
+        "elapsed": 0
+      },
+      {
+        "frameDt": 0.016599999999627472,
+        "state": "arrival",
+        "inside": false,
+        "opacity": 0,
+        "position": [
+          64.69247681893202,
+          307.07,
+          536.5137868154293
+        ],
+        "elapsed": 0
+      },
+      {
+        "frameDt": 0.016700000001117588,
+        "state": "arrival",
+        "inside": false,
+        "opacity": 0,
+        "position": [
+          64.69247681893202,
+          307.07,
+          536.5137868154293
+        ],
+        "elapsed": 0
+      },
+      {
+        "frameDt": 0.016699999999254943,
+        "state": "arrival",
+        "inside": false,
+        "opacity": 0.0006,
+        "position": [
+          64.69247681893202,
+          307.07,
+          536.5137868154293
+        ],
+        "elapsed": 0
+      },
+      {
+        "frameDt": 0.016699999999254943,
+        "state": "arrival",
+        "inside": false,
+        "opacity": 0.0117333,
+        "position": [
+          64.69247681893202,
+          307.07,
+          536.5137868154293
+        ],
+        "elapsed": 0
+      },
+      {
+        "frameDt": 0.016600000001490117,
+        "state": "arrival",
+        "inside": false,
+        "opacity": 0.0228,
+        "position": [
+          64.69247681893202,
+          307.07,
+          536.5137868154293
+        ],
+        "elapsed": 0
+      },
+      {
+        "frameDt": 0.016799999998882414,
+        "state": "arrival",
+        "inside": false,
+        "opacity": 0.034,
+        "position": [
+          64.69247681893202,
+          307.07,
+          536.5137868154293
+        ],
+        "elapsed": 0
+      },
+      {
+        "frameDt": 0.01680000000074506,
+        "state": "arrival",
+        "inside": false,
+        "opacity": 0.0452,
+        "position": [
+          64.69247681893202,
+          307.07,
+          536.5137868154293
+        ],
+        "elapsed": 0
+      },
+      {
+        "frameDt": 0.0165,
+        "state": "arrival",
+        "inside": false,
+        "opacity": 0.0562,
+        "position": [
+          64.69247681893202,
+          307.07,
+          536.5137868154293
+        ],
+        "elapsed": 0
+      },
+      {
+        "frameDt": 0.016699999999254943,
+        "state": "arrival",
+        "inside": false,
+        "opacity": 0.0673333,
+        "position": [
+          64.69247681893202,
+          307.07,
+          536.5137868154293
+        ],
+        "elapsed": 0
+      },
+      {
+        "frameDt": 0.016599999999627472,
+        "state": "arrival",
+        "inside": false,
+        "opacity": 0.0784,
+        "position": [
+          64.69247681893202,
+          307.07,
+          536.5137868154293
+        ],
+        "elapsed": 0
+      },
+      {
+        "frameDt": 0.01680000000074506,
+        "state": "arrival",
+        "inside": false,
+        "opacity": 0.0896,
+        "position": [
+          64.69247681893202,
+          307.07,
+          536.5137868154293
+        ],
+        "elapsed": 0
+      },
+      {
+        "frameDt": 0.016599999999627472,
+        "state": "arrival",
+        "inside": false,
+        "opacity": 0.100667,
+        "position": [
+          64.69247681893202,
+          307.07,
+          536.5137868154293
+        ],
+        "elapsed": 0
+      },
+      {
+        "frameDt": 0.016700000001117588,
+        "state": "arrival",
+        "inside": false,
+        "opacity": 0.1118,
+        "position": [
+          64.69247681893202,
+          307.07,
+          536.5137868154293
+        ],
+        "elapsed": 0
+      },
+      {
+        "frameDt": 0.016699999999254943,
+        "state": "arrival",
+        "inside": false,
+        "opacity": 0.122933,
+        "position": [
+          64.69247681893202,
+          307.07,
+          536.5137868154293
+        ],
+        "elapsed": 0
+      },
+      {
+        "frameDt": 0.016599999999627472,
+        "state": "arrival",
+        "inside": false,
+        "opacity": 0.134,
+        "position": [
+          64.69247681893202,
+          307.07,
+          536.5137868154293
+        ],
+        "elapsed": 0
+      },
+      {
+        "frameDt": 0.016700000001117588,
+        "state": "arrival",
+        "inside": false,
+        "opacity": 0.145133,
+        "position": [
+          64.69247681893202,
+          307.07,
+          536.5137868154293
+        ],
+        "elapsed": 0
+      },
+      {
+        "frameDt": 0.016599999999627472,
+        "state": "arrival",
+        "inside": false,
+        "opacity": 0.1562,
+        "position": [
+          64.69247681893202,
+          307.07,
+          536.5137868154293
+        ],
+        "elapsed": 0
+      },
+      {
+        "frameDt": 0.016699999999254943,
+        "state": "arrival",
+        "inside": false,
+        "opacity": 0.167333,
+        "position": [
+          64.69247681893202,
+          307.07,
+          536.5137868154293
+        ],
+        "elapsed": 0
+      },
+      {
+        "frameDt": 0.016700000001117588,
+        "state": "arrival",
+        "inside": false,
+        "opacity": 0.178467,
+        "position": [
+          64.69247681893202,
+          307.07,
+          536.5137868154293
+        ],
+        "elapsed": 0
+      },
+      {
+        "frameDt": 0.016699999999254943,
+        "state": "arrival",
+        "inside": false,
+        "opacity": 0.1896,
+        "position": [
+          64.69247681893202,
+          307.07,
+          536.5137868154293
+        ],
+        "elapsed": 0
+      },
+      {
+        "frameDt": 0.016699999999254943,
+        "state": "arrival",
+        "inside": false,
+        "opacity": 0.200733,
+        "position": [
+          64.69247681893202,
+          307.07,
+          536.5137868154293
+        ],
+        "elapsed": 0
+      },
+      {
+        "frameDt": 0.016600000001490117,
+        "state": "arrival",
+        "inside": false,
+        "opacity": 0.2118,
+        "position": [
+          64.69247681893202,
+          307.07,
+          536.5137868154293
+        ],
+        "elapsed": 0
+      },
+      {
+        "frameDt": 0.016799999998882414,
+        "state": "arrival",
+        "inside": false,
+        "opacity": 0.223,
+        "position": [
+          64.69247681893202,
+          307.07,
+          536.5137868154293
+        ],
+        "elapsed": 0
+      },
+      {
+        "frameDt": 0.01680000000074506,
+        "state": "arrival",
+        "inside": false,
+        "opacity": 0.2342,
+        "position": [
+          64.69247681893202,
+          307.07,
+          536.5137868154293
+        ],
+        "elapsed": 0
+      },
+      {
+        "frameDt": 0.01640000000037253,
+        "state": "arrival",
+        "inside": false,
+        "opacity": 0.245133,
+        "position": [
+          64.69247681893202,
+          307.07,
+          536.5137868154293
+        ],
+        "elapsed": 0
+      },
+      {
+        "frameDt": 0.016799999998882414,
+        "state": "arrival",
+        "inside": false,
+        "opacity": 0.256333,
+        "position": [
+          64.69247681893202,
+          307.07,
+          536.5137868154293
+        ],
+        "elapsed": 0
+      },
+      {
+        "frameDt": 0.016599999999627472,
+        "state": "arrival",
+        "inside": false,
+        "opacity": 0.2674,
+        "position": [
+          64.69247681893202,
+          307.07,
+          536.5137868154293
+        ],
+        "elapsed": 0
+      },
+      {
+        "frameDt": 0.016700000001117588,
+        "state": "arrival",
+        "inside": false,
+        "opacity": 0.278533,
+        "position": [
+          64.69247681893202,
+          307.07,
+          536.5137868154293
+        ],
+        "elapsed": 0
+      },
+      {
+        "frameDt": 0.016599999999627472,
+        "state": "arrival",
+        "inside": false,
+        "opacity": 0.2896,
+        "position": [
+          64.69247681893202,
+          307.07,
+          536.5137868154293
+        ],
+        "elapsed": 0
+      },
+      {
+        "frameDt": 0.016699999999254943,
+        "state": "arrival",
+        "inside": false,
+        "opacity": 0.300733,
+        "position": [
+          64.69247681893202,
+          307.07,
+          536.5137868154293
+        ],
+        "elapsed": 0
+      },
+      {
+        "frameDt": 0.0185,
+        "state": "arrival",
+        "inside": false,
+        "opacity": 0.313067,
+        "position": [
+          64.69247681893202,
+          307.07,
+          536.5137868154293
+        ],
+        "elapsed": 0
+      },
+      {
+        "frameDt": 0.019,
+        "state": "arrival",
+        "inside": false,
+        "opacity": 0.325733,
+        "position": [
+          64.69247681893202,
+          307.07,
+          536.5137868154293
+        ],
+        "elapsed": 0
+      },
+      {
+        "frameDt": 0.02090000000037253,
+        "state": "arrival",
+        "inside": false,
+        "opacity": 0.339667,
+        "position": [
+          64.69247681893202,
+          307.07,
+          536.5137868154293
+        ],
+        "elapsed": 0
+      },
+      {
+        "frameDt": 0.013300000000745058,
+        "state": "arrival",
+        "inside": false,
+        "opacity": 0.348533,
+        "position": [
+          64.69247681893202,
+          307.07,
+          536.5137868154293
+        ],
+        "elapsed": 0
+      },
+      {
+        "frameDt": 0.016,
+        "state": "arrival",
+        "inside": false,
+        "opacity": 0.3592,
+        "position": [
+          64.69247681893202,
+          307.07,
+          536.5137868154293
+        ],
+        "elapsed": 0
+      },
+      {
+        "frameDt": 0.01240000000037253,
+        "state": "arrival",
+        "inside": false,
+        "opacity": 0.367467,
+        "position": [
+          64.69247681893202,
+          307.07,
+          536.5137868154293
+        ],
+        "elapsed": 0
+      },
+      {
+        "frameDt": 0.016699999999254943,
+        "state": "arrival",
+        "inside": false,
+        "opacity": 0.3786,
+        "position": [
+          64.69247681893202,
+          307.07,
+          536.5137868154293
+        ],
+        "elapsed": 0
+      },
+      {
+        "frameDt": 0.016599999999627472,
+        "state": "arrival",
+        "inside": false,
+        "opacity": 0.389667,
+        "position": [
+          64.69247681893202,
+          307.07,
+          536.5137868154293
+        ],
+        "elapsed": 0
+      },
+      {
+        "frameDt": 0.01680000000074506,
+        "state": "arrival",
+        "inside": false,
+        "opacity": 0.400867,
+        "position": [
+          64.69247681893202,
+          307.07,
+          536.5137868154293
+        ],
+        "elapsed": 0
+      },
+      {
+        "frameDt": 0.016599999999627472,
+        "state": "arrival",
+        "inside": false,
+        "opacity": 0.411933,
+        "position": [
+          64.69247681893202,
+          307.07,
+          536.5137868154293
+        ],
+        "elapsed": 0
+      },
+      {
+        "frameDt": 0.016599999999627472,
+        "state": "arrival",
+        "inside": false,
+        "opacity": 0.423,
+        "position": [
+          64.69247681893202,
+          307.07,
+          536.5137868154293
+        ],
+        "elapsed": 0
+      },
+      {
+        "frameDt": 0.01680000000074506,
+        "state": "arrival",
+        "inside": false,
+        "opacity": 0.4342,
+        "position": [
+          64.69247681893202,
+          307.07,
+          536.5137868154293
+        ],
+        "elapsed": 0
+      },
+      {
+        "frameDt": 0.0165,
+        "state": "arrival",
+        "inside": false,
+        "opacity": 0.4452,
+        "position": [
+          64.69247681893202,
+          307.07,
+          536.5137868154293
+        ],
+        "elapsed": 0
+      },
+      {
+        "frameDt": 0.016799999998882414,
+        "state": "arrival",
+        "inside": false,
+        "opacity": 0.4564,
+        "position": [
+          64.69247681893202,
+          307.07,
+          536.5137868154293
+        ],
+        "elapsed": 0
+      },
+      {
+        "frameDt": 0.016600000001490117,
+        "state": "arrival",
+        "inside": false,
+        "opacity": 0.467467,
+        "position": [
+          64.69247681893202,
+          307.07,
+          536.5137868154293
+        ],
+        "elapsed": 0
+      },
+      {
+        "frameDt": 0.016699999999254943,
+        "state": "arrival",
+        "inside": false,
+        "opacity": 0.4786,
+        "position": [
+          64.69247681893202,
+          307.07,
+          536.5137868154293
+        ],
+        "elapsed": 0
+      },
+      {
+        "frameDt": 0.017,
+        "state": "arrival",
+        "inside": false,
+        "opacity": 0.489933,
+        "position": [
+          64.69247681893202,
+          307.07,
+          536.5137868154293
+        ],
+        "elapsed": 0
+      },
+      {
+        "frameDt": 0.01630000000074506,
+        "state": "arrival",
+        "inside": false,
+        "opacity": 0.5008,
+        "position": [
+          64.69247681893202,
+          307.07,
+          536.5137868154293
+        ],
+        "elapsed": 0
+      },
+      {
+        "frameDt": 0.02030000000074506,
+        "state": "arrival",
+        "inside": false,
+        "opacity": 0.514333,
+        "position": [
+          64.69247681893202,
+          307.07,
+          536.5137868154293
+        ],
+        "elapsed": 0
+      },
+      {
+        "frameDt": 0.014699999999254943,
+        "state": "arrival",
+        "inside": false,
+        "opacity": 0.524133,
+        "position": [
+          64.69247681893202,
+          307.07,
+          536.5137868154293
+        ],
+        "elapsed": 0
+      },
+      {
+        "frameDt": 0.020599999999627472,
+        "state": "arrival",
+        "inside": false,
+        "opacity": 0.537867,
+        "position": [
+          64.69247681893202,
+          307.07,
+          536.5137868154293
+        ],
+        "elapsed": 0
+      },
+      {
+        "frameDt": 0.012200000001117588,
+        "state": "arrival",
+        "inside": false,
+        "opacity": 0.546,
+        "position": [
+          64.69247681893202,
+          307.07,
+          536.5137868154293
+        ],
+        "elapsed": 0
+      },
+      {
+        "frameDt": 0.01590000000037253,
+        "state": "arrival",
+        "inside": false,
+        "opacity": 0.5566,
+        "position": [
+          64.69247681893202,
+          307.07,
+          536.5137868154293
+        ],
+        "elapsed": 0
+      },
+      {
+        "frameDt": 0.01779999999888241,
+        "state": "arrival",
+        "inside": false,
+        "opacity": 0.568467,
+        "position": [
+          64.69247681893202,
+          307.07,
+          536.5137868154293
+        ],
+        "elapsed": 0
+      },
+      {
+        "frameDt": 0.015200000001117587,
+        "state": "arrival",
+        "inside": false,
+        "opacity": 0.5786,
+        "position": [
+          64.69247681893202,
+          307.07,
+          536.5137868154293
+        ],
+        "elapsed": 0
+      },
+      {
+        "frameDt": 0.016699999999254943,
+        "state": "arrival",
+        "inside": false,
+        "opacity": 0.589733,
+        "position": [
+          64.69247681893202,
+          307.07,
+          536.5137868154293
+        ],
+        "elapsed": 0
+      },
+      {
+        "frameDt": 0.016699999999254943,
+        "state": "arrival",
+        "inside": false,
+        "opacity": 0.600867,
+        "position": [
+          64.69247681893202,
+          307.07,
+          536.5137868154293
+        ],
+        "elapsed": 0
+      },
+      {
+        "frameDt": 0.016700000001117588,
+        "state": "arrival",
+        "inside": false,
+        "opacity": 0.612,
+        "position": [
+          64.69247681893202,
+          307.07,
+          536.5137868154293
+        ],
+        "elapsed": 0
+      },
+      {
+        "frameDt": 0.016599999999627472,
+        "state": "arrival",
+        "inside": false,
+        "opacity": 0.623067,
+        "position": [
+          64.69247681893202,
+          307.07,
+          536.5137868154293
+        ],
+        "elapsed": 0
+      },
+      {
+        "frameDt": 0.016699999999254943,
+        "state": "arrival",
+        "inside": false,
+        "opacity": 0.6342,
+        "position": [
+          64.69247681893202,
+          307.07,
+          536.5137868154293
+        ],
+        "elapsed": 0
+      },
+      {
+        "frameDt": 0.016600000001490117,
+        "state": "arrival",
+        "inside": false,
+        "opacity": 0.645267,
+        "position": [
+          64.69247681893202,
+          307.07,
+          536.5137868154293
+        ],
+        "elapsed": 0
+      },
+      {
+        "frameDt": 0.016799999998882414,
+        "state": "arrival",
+        "inside": false,
+        "opacity": 0.656467,
+        "position": [
+          64.69247681893202,
+          307.07,
+          536.5137868154293
+        ],
+        "elapsed": 0
+      },
+      {
+        "frameDt": 0.016700000001117588,
+        "state": "arrival",
+        "inside": false,
+        "opacity": 0.6676,
+        "position": [
+          64.69247681893202,
+          307.07,
+          536.5137868154293
+        ],
+        "elapsed": 0
+      },
+      {
+        "frameDt": 0.016599999999627472,
+        "state": "arrival",
+        "inside": false,
+        "opacity": 0.678667,
+        "position": [
+          64.69247681893202,
+          307.07,
+          536.5137868154293
+        ],
+        "elapsed": 0
+      },
+      {
+        "frameDt": 0.016799999998882414,
+        "state": "arrival",
+        "inside": false,
+        "opacity": 0.689867,
+        "position": [
+          64.69247681893202,
+          307.07,
+          536.5137868154293
+        ],
+        "elapsed": 0
+      },
+      {
+        "frameDt": 0.0165,
+        "state": "arrival",
+        "inside": false,
+        "opacity": 0.700867,
+        "position": [
+          64.69247681893202,
+          307.07,
+          536.5137868154293
+        ],
+        "elapsed": 0
+      },
+      {
+        "frameDt": 0.016700000001117588,
+        "state": "arrival",
+        "inside": false,
+        "opacity": 0.712,
+        "position": [
+          64.69247681893202,
+          307.07,
+          536.5137868154293
+        ],
+        "elapsed": 0
+      },
+      {
+        "frameDt": 0.016799999998882414,
+        "state": "arrival",
+        "inside": false,
+        "opacity": 0.7232,
+        "position": [
+          64.69247681893202,
+          307.07,
+          536.5137868154293
+        ],
+        "elapsed": 0
+      },
+      {
+        "frameDt": 0.016600000001490117,
+        "state": "arrival",
+        "inside": false,
+        "opacity": 0.734267,
+        "position": [
+          64.69247681893202,
+          307.07,
+          536.5137868154293
+        ],
+        "elapsed": 0
+      },
+      {
+        "frameDt": 0.016599999999627472,
+        "state": "arrival",
+        "inside": false,
+        "opacity": 0.745333,
+        "position": [
+          64.69247681893202,
+          307.07,
+          536.5137868154293
+        ],
+        "elapsed": 0
+      },
+      {
+        "frameDt": 0.016699999999254943,
+        "state": "arrival",
+        "inside": false,
+        "opacity": 0.756467,
+        "position": [
+          64.69247681893202,
+          307.07,
+          536.5137868154293
+        ],
+        "elapsed": 0
+      },
+      {
+        "frameDt": 0.017,
+        "state": "arrival",
+        "inside": false,
+        "opacity": 0.7678,
+        "position": [
+          64.69247681893202,
+          307.07,
+          536.5137868154293
+        ],
+        "elapsed": 0
+      },
+      {
+        "frameDt": 0.02309999999962747,
+        "state": "arrival",
+        "inside": false,
+        "opacity": 0.7832,
+        "position": [
+          64.69247681893202,
+          307.07,
+          536.5137868154293
+        ],
+        "elapsed": 0
+      },
+      {
+        "frameDt": 0.012200000001117588,
+        "state": "arrival",
+        "inside": false,
+        "opacity": 0.791333,
+        "position": [
+          64.69247681893202,
+          307.07,
+          536.5137868154293
+        ],
+        "elapsed": 0
+      },
+      {
+        "frameDt": 0.01440000000037253,
+        "state": "arrival",
+        "inside": false,
+        "opacity": 0.800933,
+        "position": [
+          64.69247681893202,
+          307.07,
+          536.5137868154293
+        ],
+        "elapsed": 0
+      },
+      {
+        "frameDt": 0.016799999998882414,
+        "state": "arrival",
+        "inside": false,
+        "opacity": 0.812133,
+        "position": [
+          64.69247681893202,
+          307.07,
+          536.5137868154293
+        ],
+        "elapsed": 0
+      },
+      {
+        "frameDt": 0.016599999999627472,
+        "state": "arrival",
+        "inside": false,
+        "opacity": 0.8232,
+        "position": [
+          64.69247681893202,
+          307.07,
+          536.5137868154293
+        ],
+        "elapsed": 0
+      },
+      {
+        "frameDt": 0.016700000001117588,
+        "state": "arrival",
+        "inside": false,
+        "opacity": 0.834333,
+        "position": [
+          64.69247681893202,
+          307.07,
+          536.5137868154293
+        ],
+        "elapsed": 0
+      },
+      {
+        "frameDt": 0.016599999999627472,
+        "state": "arrival",
+        "inside": false,
+        "opacity": 0.8454,
+        "position": [
+          64.69247681893202,
+          307.07,
+          536.5137868154293
+        ],
+        "elapsed": 0
+      },
+      {
+        "frameDt": 0.01680000000074506,
+        "state": "arrival",
+        "inside": false,
+        "opacity": 0.8566,
+        "position": [
+          64.69247681893202,
+          307.07,
+          536.5137868154293
+        ],
+        "elapsed": 0
+      },
+      {
+        "frameDt": 0.016599999999627472,
+        "state": "arrival",
+        "inside": false,
+        "opacity": 0.867667,
+        "position": [
+          64.69247681893202,
+          307.07,
+          536.5137868154293
+        ],
+        "elapsed": 0
+      },
+      {
+        "frameDt": 0.016599999999627472,
+        "state": "arrival",
+        "inside": false,
+        "opacity": 0.878733,
+        "position": [
+          64.69247681893202,
+          307.07,
+          536.5137868154293
+        ],
+        "elapsed": 0
+      },
+      {
+        "frameDt": 0.01680000000074506,
+        "state": "arrival",
+        "inside": false,
+        "opacity": 0.889933,
+        "position": [
+          64.69247681893202,
+          307.07,
+          536.5137868154293
+        ],
+        "elapsed": 0
+      },
+      {
+        "frameDt": 0.016599999999627472,
+        "state": "arrival",
+        "inside": false,
+        "opacity": 0.901,
+        "position": [
+          64.69247681893202,
+          307.07,
+          536.5137868154293
+        ],
+        "elapsed": 0
+      },
+      {
+        "frameDt": 0.016699999999254943,
+        "state": "arrival",
+        "inside": false,
+        "opacity": 0.912133,
+        "position": [
+          64.69247681893202,
+          307.07,
+          536.5137868154293
+        ],
+        "elapsed": 0
+      },
+      {
+        "frameDt": 0.0165,
+        "state": "arrival",
+        "inside": false,
+        "opacity": 0.923133,
+        "position": [
+          64.69247681893202,
+          307.07,
+          536.5137868154293
+        ],
+        "elapsed": 0
+      },
+      {
+        "frameDt": 0.01680000000074506,
+        "state": "arrival",
+        "inside": false,
+        "opacity": 0.934333,
+        "position": [
+          64.69247681893202,
+          307.07,
+          536.5137868154293
+        ],
+        "elapsed": 0
+      },
+      {
+        "frameDt": 0.016699999999254943,
+        "state": "arrival",
+        "inside": false,
+        "opacity": 0.945467,
+        "position": [
+          64.69247681893202,
+          307.07,
+          536.5137868154293
+        ],
+        "elapsed": 0
+      },
+      {
+        "frameDt": 0.016700000001117588,
+        "state": "arrival",
+        "inside": false,
+        "opacity": 0.9566,
+        "position": [
+          64.69247681893202,
+          307.07,
+          536.5137868154293
+        ],
+        "elapsed": 0
+      },
+      {
+        "frameDt": 0.016699999999254943,
+        "state": "arrival",
+        "inside": false,
+        "opacity": 0.967733,
+        "position": [
+          64.69247681893202,
+          307.07,
+          536.5137868154293
+        ],
+        "elapsed": 0
+      },
+      {
+        "frameDt": 0.016599999999627472,
+        "state": "arrival",
+        "inside": false,
+        "opacity": 0.9788,
+        "position": [
+          64.69247681893202,
+          307.07,
+          536.5137868154293
+        ],
+        "elapsed": 0
+      },
+      {
+        "frameDt": 0.016700000001117588,
+        "state": "arrival",
+        "inside": false,
+        "opacity": 0.989933,
+        "position": [
+          64.69247681893202,
+          307.07,
+          536.5137868154293
+        ],
+        "elapsed": 0
+      },
+      {
+        "frameDt": 0.016599999999627472,
+        "state": "arrival",
+        "inside": true,
+        "opacity": 1,
+        "position": [
+          64.69247681893202,
+          307.07,
+          536.5137868154293
+        ],
+        "elapsed": 0
+      },
+      {
+        "frameDt": 0.016699999999254943,
+        "state": "arrival",
+        "inside": true,
+        "opacity": 0.9636,
+        "position": [
+          64.69247681893202,
+          307.07,
+          536.5137868154293
+        ],
+        "elapsed": 0
+      },
+      {
+        "frameDt": 0.01680000000074506,
+        "state": "arrival",
+        "inside": true,
+        "opacity": 0.93,
+        "position": [
+          64.69247681893202,
+          307.07,
+          536.5137868154293
+        ],
+        "elapsed": 0
+      },
+      {
+        "frameDt": 0.016799999998882414,
+        "state": "arrival",
+        "inside": true,
+        "opacity": 0.8964,
+        "position": [
+          64.69247681893202,
+          307.07,
+          536.5137868154293
+        ],
+        "elapsed": 0
+      },
+      {
+        "frameDt": 0.01680000000074506,
+        "state": "arrival",
+        "inside": true,
+        "opacity": 0.8628,
+        "position": [
+          64.69247681893202,
+          307.07,
+          536.5137868154293
+        ],
+        "elapsed": 0
+      },
+      {
+        "frameDt": 0.016599999999627472,
+        "state": "arrival",
+        "inside": true,
+        "opacity": 0.8296,
+        "position": [
+          64.69247681893202,
+          307.07,
+          536.5137868154293
+        ],
+        "elapsed": 0
+      },
+      {
+        "frameDt": 0.02309999999962747,
+        "state": "arrival",
+        "inside": true,
+        "opacity": 0.7834,
+        "position": [
+          64.69247681893202,
+          307.07,
+          536.5137868154293
+        ],
+        "elapsed": 0
+      },
+      {
+        "frameDt": 0.010200000001117588,
+        "state": "arrival",
+        "inside": true,
+        "opacity": 0.763,
+        "position": [
+          64.69247681893202,
+          307.07,
+          536.5137868154293
+        ],
+        "elapsed": 0
+      },
+      {
+        "frameDt": 0.016599999999627472,
+        "state": "arrival",
+        "inside": true,
+        "opacity": 0.7298,
+        "position": [
+          64.69247681893202,
+          307.07,
+          536.5137868154293
+        ],
+        "elapsed": 0
+      },
+      {
+        "frameDt": 0.016699999999254943,
+        "state": "arrival",
+        "inside": true,
+        "opacity": 0.6964,
+        "position": [
+          64.69247681893202,
+          307.07,
+          536.5137868154293
+        ],
+        "elapsed": 0
+      },
+      {
+        "frameDt": 0.016599999999627472,
+        "state": "arrival",
+        "inside": true,
+        "opacity": 0.6632,
+        "position": [
+          64.69247681893202,
+          307.07,
+          536.5137868154293
+        ],
+        "elapsed": 0
+      },
+      {
+        "frameDt": 0.01680000000074506,
+        "state": "arrival",
+        "inside": true,
+        "opacity": 0.6296,
+        "position": [
+          64.69247681893202,
+          307.07,
+          536.5137868154293
+        ],
+        "elapsed": 0
+      },
+      {
+        "frameDt": 0.016699999999254943,
+        "state": "arrival",
+        "inside": true,
+        "opacity": 0.5962,
+        "position": [
+          64.69247681893202,
+          307.07,
+          536.5137868154293
+        ],
+        "elapsed": 0
+      },
+      {
+        "frameDt": 0.016600000001490117,
+        "state": "arrival",
+        "inside": true,
+        "opacity": 0.563,
+        "position": [
+          64.69247681893202,
+          307.07,
+          536.5137868154293
+        ],
+        "elapsed": 0
+      },
+      {
+        "frameDt": 0.0165,
+        "state": "arrival",
+        "inside": true,
+        "opacity": 0.53,
+        "position": [
+          64.69247681893202,
+          307.07,
+          536.5137868154293
+        ],
+        "elapsed": 0
+      },
+      {
+        "frameDt": 0.016699999999254943,
+        "state": "arrival",
+        "inside": true,
+        "opacity": 0.4966,
+        "position": [
+          64.69247681893202,
+          307.07,
+          536.5137868154293
+        ],
+        "elapsed": 0
+      },
+      {
+        "frameDt": 0.016599999999627472,
+        "state": "arrival",
+        "inside": true,
+        "opacity": 0.4634,
+        "position": [
+          64.69247681893202,
+          307.07,
+          536.5137868154293
+        ],
+        "elapsed": 0
+      },
+      {
+        "frameDt": 0.016599999999627472,
+        "state": "arrival",
+        "inside": true,
+        "opacity": 0.4302,
+        "position": [
+          64.69247681893202,
+          307.07,
+          536.5137868154293
+        ],
+        "elapsed": 0
+      },
+      {
+        "frameDt": 0.01680000000074506,
+        "state": "arrival",
+        "inside": true,
+        "opacity": 0.3966,
+        "position": [
+          64.69247681893202,
+          307.07,
+          536.5137868154293
+        ],
+        "elapsed": 0
+      },
+      {
+        "frameDt": 0.016599999999627472,
+        "state": "arrival",
+        "inside": true,
+        "opacity": 0.3634,
+        "position": [
+          64.69247681893202,
+          307.07,
+          536.5137868154293
+        ],
+        "elapsed": 0
+      },
+      {
+        "frameDt": 0.016700000001117588,
+        "state": "arrival",
+        "inside": true,
+        "opacity": 0.33,
+        "position": [
+          64.69247681893202,
+          307.07,
+          536.5137868154293
+        ],
+        "elapsed": 0
+      },
+      {
+        "frameDt": 0.016699999999254943,
+        "state": "arrival",
+        "inside": true,
+        "opacity": 0.2966,
+        "position": [
+          64.69247681893202,
+          307.07,
+          536.5137868154293
+        ],
+        "elapsed": 0
+      },
+      {
+        "frameDt": 0.016699999999254943,
+        "state": "arrival",
+        "inside": true,
+        "opacity": 0.2632,
+        "position": [
+          64.69247681893202,
+          307.07,
+          536.5137868154293
+        ],
+        "elapsed": 0
+      },
+      {
+        "frameDt": 0.0165,
+        "state": "arrival",
+        "inside": true,
+        "opacity": 0.2302,
+        "position": [
+          64.69247681893202,
+          307.07,
+          536.5137868154293
+        ],
+        "elapsed": 0
+      },
+      {
+        "frameDt": 0.01680000000074506,
+        "state": "arrival",
+        "inside": true,
+        "opacity": 0.1966,
+        "position": [
+          64.69247681893202,
+          307.07,
+          536.5137868154293
+        ],
+        "elapsed": 0
+      },
+      {
+        "frameDt": 0.016599999999627472,
+        "state": "arrival",
+        "inside": true,
+        "opacity": 0.1634,
+        "position": [
+          64.69247681893202,
+          307.07,
+          536.5137868154293
+        ],
+        "elapsed": 0
+      },
+      {
+        "frameDt": 0.01680000000074506,
+        "state": "arrival",
+        "inside": true,
+        "opacity": 0.1298,
+        "position": [
+          64.69247681893202,
+          307.07,
+          536.5137868154293
+        ],
+        "elapsed": 0
+      },
+      {
+        "frameDt": 0.016699999999254943,
+        "state": "arrival",
+        "inside": true,
+        "opacity": 0.0964,
+        "position": [
+          64.69247681893202,
+          307.07,
+          536.5137868154293
+        ],
+        "elapsed": 0
+      },
+      {
+        "frameDt": 0.016700000001117588,
+        "state": "arrival",
+        "inside": true,
+        "opacity": 0.063,
+        "position": [
+          64.69247681893202,
+          307.07,
+          536.5137868154293
+        ],
+        "elapsed": 0
+      },
+      {
+        "frameDt": 0.016599999999627472,
+        "state": "arrival",
+        "inside": true,
+        "opacity": 0.0298,
+        "position": [
+          64.69247681893202,
+          307.07,
+          536.5137868154293
+        ],
+        "elapsed": 0
+      },
+      {
+        "frameDt": 0.016699999999254943,
+        "state": "play",
+        "inside": true,
+        "opacity": 0,
+        "position": [
+          64.69247681893202,
+          307.07,
+          536.5137868154293
+        ],
+        "elapsed": 0
+      }
+    ],
+    "errors": []
+  }
+]

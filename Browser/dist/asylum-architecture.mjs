@@ -9,6 +9,8 @@ import {segmentDistance,insidePolygon,asylumExitCenter} from './asylum-layout.mj
 import {asylumWindowCenters,ASYLUM_WINDOW_WIDTH} from './asylum-windows.mjs';
 import {roomDoorHandle,ROOM_DOOR_FRAME_CASING_DEPTH,ROOM_DOOR_HINGE_RADIUS} from './asylum-doors.mjs';
 import {addAsylumDoorLabels} from './asylum-door-labels.mjs';
+import {addAsylumStairSigns} from './asylum-stair-signs.mjs';
+import {addVictorianFireDoorDetails} from './victorian-fire-doors.mjs';
 import {stairShape,stairOpenings,stairConnection,stairFlights,stairLandingPolygons,stairFlightGeometry,handrailGeometry,stairWellWalls,stairWellHeight,STAIR_WIDTH,STAIR_SLAB_THICKNESS,RAIL_HEIGHT} from './asylum-stairs.mjs';
 const cache=new WeakMap();
 export function asylumWallSurfaces(floor){
@@ -141,11 +143,12 @@ export function buildAsylumArchitecture(THREE,scene,floor){
   }
   const panelHeight=exit.wallOpening?.height??2.36;
   box('Panel',x,panelHeight/2,z,1.55,panelHeight,.09,angle);
+  const part=(kind,u,y,v,w,h,d)=>box(kind,x+Math.cos(angle)*u+Math.sin(angle)*v,y,z-Math.sin(angle)*u+Math.cos(angle)*v,w,h,d,angle);
+  addVictorianFireDoorDetails(part,{width:1.55,height:panelHeight,depth:.09});
   // Cover the masonry returns with .015 lateral clearance and meet the
   // lintel's underside without overlapping jamb/head faces.
   for(const side of [-1,1])box('Stone',x+(exit.axis==='z'?side*.835:0),panelHeight/2,z+(exit.axis==='x'?side*.835:0),.12,panelHeight,.22,angle);
   box('Stone',x,2.53,z,1.82,.13,.22,angle);
-  box('Brass',x,1.12,z,1.0,.07,.17,angle);
  }
  // Painted timber surrounds borrow the existing green door paint and sash
  // trim. Returns and stepped casings cover both faces without a raised sill.
@@ -189,7 +192,8 @@ export function buildAsylumArchitecture(THREE,scene,floor){
    box('Iron',door.hingeX,py,door.hingeZ,ROOM_DOOR_HINGE_RADIUS*2,.13,ROOM_DOOR_HINGE_RADIUS*2,frameAngle);
   }
  }
- addAsylumDoorLabels(THREE,scene,floor,box);
+ addAsylumDoorLabels(THREE,scene,floor);
+ addAsylumStairSigns(THREE,scene,floor);
  const stairSurfaces=[],stairSolids=[];
  function deck(x,z,w,d,y,landing=false,ry=0){
   if(landing)box('Stone',x,y-STAIR_SLAB_THICKNESS/2,z,w,STAIR_SLAB_THICKNESS,d);
@@ -268,7 +272,8 @@ export function buildAsylumArchitecture(THREE,scene,floor){
  }
  const dado=new THREE.Mesh(roomFinisher.rail(windowFrames),materials.Dado);dado.name='Asylum Dado';scene.add(dado);
  if(floor.id===2)scene.add(roomFinisher.padding());
- for(const [kind,items] of batches){const mesh=new THREE.InstancedMesh(geometry,materials[['DoorFrame','RoomDoor'].includes(kind)?'Panel':kind],items.length);mesh.name='Asylum '+kind;
+ const knobGeometry=new THREE.SphereGeometry(.5,12,8);
+ for(const [kind,items] of batches){const mesh=new THREE.InstancedMesh(kind==='VictorianKnob'?knobGeometry:geometry,materials[kind==='Panel'?'VictorianTimber':['DoorFrame','RoomDoor'].includes(kind)?'Panel':kind==='VictorianKnob'?'VictorianIron':kind],items.length);mesh.name='Asylum '+kind;
   for(let i=0;i<items.length;i++){const [x,y,z,w,h,d,ry,rz]=items[i];transform.position.set(x,y,z);transform.scale.set(w,h,d);transform.rotation.set(0,ry,rz);transform.updateMatrix();mesh.setMatrixAt(i,transform.matrix);}
   mesh.instanceMatrix.needsUpdate=true;mesh.computeBoundingSphere();scene.add(mesh);
  }

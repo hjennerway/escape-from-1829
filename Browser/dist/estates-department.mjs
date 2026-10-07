@@ -1,3 +1,4 @@
+import {markDownpipeInstances} from './downpipe-clearance.mjs';
 import {OS_FOOTPRINTS} from './historic-footprint-data.mjs';
 import {historicOSPoint} from './historic-footprints.mjs';
 import {photoDetailPrimitives} from './photo-detail-primitives.mjs';
@@ -47,8 +48,8 @@ export function createEstatesDepartment(THREE,{brick,roof,worldUV,material}){
   const o=new THREE.Mesh(g,m);o.name=name;o.position.set(x,y,z);
   o.castShadow=true;o.receiveShadow=true;building.add(o);return o;
  }
- function box(m,x,y,z,w,h,d,r=0){
-  if(!batches.has(m))batches.set(m,[]);batches.get(m).push({x,y,z,w,h,d,r});
+ function box(m,x,y,z,w,h,d,r=0,downpipe=false){
+  if(!batches.has(m))batches.set(m,[]);batches.get(m).push({x,y,z,w,h,d,r,downpipe});
  }
  function mass(points,height,name,mat=brick,bottom=0){
   const polygon=local(points),shape=new THREE.Shape(polygon.map(([x,z])=>new THREE.Vector2(x,-z)));
@@ -136,8 +137,9 @@ export function createEstatesDepartment(THREE,{brick,roof,worldUV,material}){
  }
  // Blue-painted downpipe beside the left-hand door and dark gutters.
  for(const [wx,wz,h,mat] of [[inner-.19,-53.1,eave,blue],[rightFront-.17,rightInner+.12,4,blue],[leftFront-.17,leftEnd+.15,4,steel],[rear+.15,-59,eave,steel]]){
-  box(mat,wx-cx,h/2,wz-cz,.085,h,.085);
-  for(const y of [.6,3.4,6.5].filter(y=>y<h))box(steel,wx-cx,y,wz-cz,.13,.065,.13);
+  const assembly=wx+':'+wz;
+  box(mat,wx-cx,h/2,wz-cz,.085,h,.085,0,{pipe:true,assembly});
+  for(const y of [.6,3.4,6.5].filter(y=>y<h))box(steel,wx-cx,y,wz-cz,.13,.065,.13,0,{assembly});
  }
 
  function surface(v,faces,mat,name,up=false){
@@ -235,7 +237,7 @@ export function createEstatesDepartment(THREE,{brick,roof,worldUV,material}){
  }
  const dummy=new THREE.Object3D();
  for(const [mat,items] of batches){
-  const batch=new THREE.InstancedMesh(new THREE.BoxGeometry(1,1,1),mat,items.length);
+  const batch=new THREE.InstancedMesh(new THREE.BoxGeometry(1,1,1),mat,items.length);markDownpipeInstances(batch,items);
   batch.name='Estates glazing, blue doors, brick bands and rainwater goods';
   batch.castShadow=true;batch.receiveShadow=true;batch.userData.orientedCollision=true;
   items.forEach((b,i)=>{dummy.position.set(b.x,b.y,b.z);dummy.rotation.set(0,b.r,0);dummy.scale.set(b.w,b.h,b.d);dummy.updateMatrix();batch.setMatrixAt(i,dummy.matrix);});building.add(batch);

@@ -30,9 +30,10 @@ export function addWestForwardEndPhotoDetails(THREE,{model,box,mesh,worldUV,whit
   box(trim,-35,4.16,43.16,12.12,.28,.25);
   for(const [y,h,d] of [[8.38,.22,.26],[8.62,.25,.44],[8.82,.12,.58]])box(white,-35,y,43.1,12.3,h,d);
   box(iron,-35,8.92,43.39,12.6,.1,.11);
-  for(const x of [-40.85,-29.12])box(iron,x,4.43,43.27,.065,8.8,.065);
-  rod([-37.42,8.55,43.24],[-37.42,3.42,43.24],.035);
-  rod([-37.42,3.42,43.24],[-37.13,3.22,43.24],.035);
+  for(const x of [-40.85,-29.12])box(iron,x,4.43,43.27,.065,8.8,.065,0,true);
+  const assembly=new THREE.Group();assembly.name='West forward downpipe assembly';assembly.userData.downpipeAssembly=true;model.add(assembly);
+  const downpipe=rod([-37.42,8.55,43.24],[-37.42,3.42,43.24],.035);downpipe.name='West forward downpipe';assembly.add(downpipe);
+  assembly.add(rod([-37.42,3.42,43.24],[-37.13,3.22,43.24],.035));
 
   addWestForwardFireExit(THREE,{model,worldUV,brick,material});
   model.userData.westForwardEndPhotoOpenings=model.userData.eastPhotoOpenings.slice(start);

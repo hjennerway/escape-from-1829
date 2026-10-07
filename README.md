@@ -14,7 +14,7 @@ Click on a building to see the name of the building, historical photos and infor
 Inside the estate site, click the cross-hairs to pinpoint your position to see what used to be where you stand.
 
 ## Asylum Escape
-Discover a staff route through the asylum, investigate the upper offices and cross the grounds while avoiding security. Your notebook remembers clues and explored places. The first two captures change your circumstances; the third ends the attempt.
+Discover a staff route through the asylum, investigate the upper offices and choose a route across the grounds while avoiding security. Watch the patrol at the pedestrian gate, or collect tools beside the water tower to open a maintenance wicket. Your notebook remembers clues and explored places. The first two captures change your circumstances; the third ends the attempt.
 
 The internal layout of the building is largely fictional due to the fact that it was built over a 70 year period and has an extremely non-standard, irregular layout. There are around 8 distinct floor heights, spread out across three floors and a basement in the original asylum and a further three floors in the extension wings - which aren't the same floor heights. In addition, there are numerous landings and twisting staircases inside.
 
@@ -24,7 +24,7 @@ The internal layout of the building is largely fictional due to the fact that it
 
 Use **WASD** to move, the **mouse** to look, **Shift** to sprint, **Space** to jump over small walls and hedges, **C/Ctrl** to
 crouch, **F** for the torch and **Tab/M/N** for the notebook and explored map. Walk up and down the stairs.
-Press **E** to inspect notices, take keys and use doors; hold **E** to view wall artwork.
+Press **E** to inspect notices, take items and use doors; hold **E** to prise boards with the crowbar or view wall artwork.
 Getting outside is part of the escape; follow the clues to the final landmark. **H** shows survival help; **Esc** pauses.
 The notebook records discoveries and reveals nearby map areas as you explore. Reading it pauses the game.
 Touch controls are available on mobile.

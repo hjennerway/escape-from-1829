@@ -1,0 +1,114 @@
+{
+  "build": {
+    "mode": "compiled",
+    "milliseconds": 1174.800000000745
+  },
+  "renderer": "ANGLE (NVIDIA, NVIDIA GeForce RTX 3090 Ti (0x00002203) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+  "errors": [],
+  "views": {
+    "marked": {
+      "position": [
+        51,
+        1.8,
+        -22
+      ],
+      "target": [
+        74,
+        6,
+        -33
+      ],
+      "fov": 64
+    },
+    "rear": {
+      "position": [
+        67,
+        1.8,
+        -19
+      ],
+      "target": [
+        74,
+        6,
+        -33
+      ],
+      "fov": 64
+    },
+    "corner": {
+      "position": [
+        77,
+        1.8,
+        -25
+      ],
+      "target": [
+        84,
+        8.8,
+        -31.7
+      ],
+      "fov": 55
+    },
+    "outer": {
+      "position": [
+        110,
+        1.8,
+        -24
+      ],
+      "target": [
+        90,
+        8,
+        -28
+      ],
+      "fov": 62
+    },
+    "garden": {
+      "position": [
+        64,
+        1.8,
+        51
+      ],
+      "target": [
+        57,
+        7,
+        20
+      ],
+      "fov": 62
+    },
+    "garden-side": {
+      "position": [
+        89,
+        1.8,
+        29
+      ],
+      "target": [
+        69.9,
+        12.5,
+        15.2
+      ],
+      "fov": 60
+    },
+    "courtyard": {
+      "position": [
+        56,
+        1.8,
+        -25
+      ],
+      "target": [
+        58,
+        8.5,
+        3
+      ],
+      "fov": 64
+    },
+    "overview": {
+      "position": [
+        65,
+        38,
+        -15
+      ],
+      "target": [
+        78,
+        5,
+        -29
+      ],
+      "fov": 58
+    }
+  }
+}

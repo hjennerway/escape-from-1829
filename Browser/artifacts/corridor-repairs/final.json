@@ -1,0 +1,205 @@
+{
+  "result": {
+    "cx": 154.773125,
+    "probes": {
+      "machine-floor": [
+        {
+          "name": "Continuous escape corridor and workshop floor",
+          "p": [
+            168,
+            0.040000000000003,
+            -48
+          ],
+          "distance": 0.959999999999997
+        },
+        {
+          "name": "Estate terrain",
+          "p": [
+            168,
+            -0.14999999999998934,
+            -48
+          ],
+          "distance": 1.1499999999999893
+        }
+      ],
+      "machine-roof": [
+        {
+          "name": "Connected escape corridor ceiling",
+          "p": [
+            168,
+            5.0500000000000025,
+            -40.7
+          ],
+          "distance": 1.7500000000000027
+        },
+        {
+          "name": "Aerial batch · Tower service buildings · 43",
+          "p": [
+            168,
+            9.081926220246391,
+            -40.7
+          ],
+          "distance": 5.781926220246391
+        }
+      ],
+      "hale-header": [],
+      "admin-edge": [
+        {
+          "name": "Aerial batch · Main/admin · locked double doors · 751",
+          "p": [
+            153.823125,
+            3.4,
+            24.37000000067055
+          ],
+          "distance": 2.370000000670551
+        }
+      ]
+    },
+    "intrusions": [
+      {
+        "name": "Continuous escape corridor and workshop floor",
+        "min": [
+          98.68787384033203,
+          0.03999999999999851,
+          -187
+        ],
+        "max": [
+          210,
+          0.04000000000001145,
+          24.399999618530273
+        ]
+      }
+    ],
+    "runs": [
+      {
+        "id": "gallery",
+        "name": "Tower corridor",
+        "start": [
+          154.773125,
+          24.4
+        ],
+        "end": [
+          154.773125,
+          -126
+        ],
+        "ends": [
+          "Main/admin",
+          "Farndon"
+        ]
+      },
+      {
+        "id": "admin",
+        "name": "Main/admin corridor",
+        "start": [
+          121.5,
+          9.8
+        ],
+        "end": [
+          154.773125,
+          9.8
+        ],
+        "ends": [
+          "Redesmere",
+          "Main/admin"
+        ]
+      },
+      {
+        "id": "irby",
+        "name": "Irby / Ashley corridor",
+        "start": [
+          154.773125,
+          -66.6
+        ],
+        "end": [
+          210,
+          -66.6
+        ],
+        "ends": [
+          "Tower workshops",
+          "Irby / Ashley"
+        ]
+      },
+      {
+        "id": "diagonal",
+        "name": "Upton / Frith / Oscroft corridor",
+        "start": [
+          156.3,
+          -117.1
+        ],
+        "end": [
+          100,
+          -173.4
+        ],
+        "ends": [
+          "Farndon",
+          "Upton / Frith / Oscroft"
+        ]
+      },
+      {
+        "id": "grafton",
+        "name": "Grafton / Edge corridor",
+        "start": [
+          130.51027118644066,
+          -142.88972881355932
+        ],
+        "end": [
+          106,
+          -142.88972881355932
+        ],
+        "ends": [
+          "Farndon",
+          "Grafton / Edge"
+        ]
+      },
+      {
+        "id": "witby",
+        "name": "Witby corridor",
+        "start": [
+          115.60000000000001,
+          -157.79999999999995
+        ],
+        "end": [
+          115.60000000000001,
+          -187
+        ],
+        "ends": [
+          "Farndon",
+          "Witby"
+        ]
+      },
+      {
+        "id": "hale-0",
+        "name": "Hale tower-side corridor",
+        "start": [
+          154.773125,
+          -72.855
+        ],
+        "end": [
+          147.6,
+          -72.855
+        ],
+        "ends": [
+          "Tower workshops",
+          "Hale / Daresbury / Huxley / Dunham"
+        ]
+      },
+      {
+        "id": "hale-1",
+        "name": "Hale middle corridor",
+        "start": [
+          154.773125,
+          -95.405
+        ],
+        "end": [
+          139.6,
+          -95.405
+        ],
+        "ends": [
+          "Tower workshops",
+          "Hale / Daresbury / Huxley / Dunham"
+        ]
+      }
+    ]
+  },
+  "errors": []
+}

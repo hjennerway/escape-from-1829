@@ -108,6 +108,23 @@ export function createInteriorMaterials(THREE, document) {
     }
     grain(g,n,7);
   },512);
+  const doorTimber=canvasTexture((g,n)=>{
+    g.fillStyle='#715035';g.fillRect(0,0,n,n);
+    // Long irregular grain follows the stiles, with worn varnish and fine checks.
+    for(let i=0;i<420;i++){
+      const x=random()*n;
+      g.strokeStyle=i%3?'rgba(34,20,12,.13)':'rgba(198,157,105,.12)';g.lineWidth=.5+random()*2;
+      g.beginPath();g.moveTo(x,0);
+      for(let y=0;y<=n;y+=32)g.lineTo(x+Math.sin(y/n*6+i)*(.7+random()*3),y);
+      g.stroke();
+    }
+    stains(g,n,30,.10);
+    for(let i=0;i<80;i++){
+      const x=random()*n,y=random()*n;
+      g.fillStyle='rgba(213,172,114,.12)';g.fillRect(x,y,1+random()*3,8+random()*80);
+    }
+    grain(g,n,9);
+  },512);
   function material(color,map,tileSize,extra={},varied=false){
     const m=new THREE.MeshStandardMaterial({color,roughness:.94,...(map?{map,bumpMap:map,bumpScale:.018}:{}),...extra});
     if(!map)return m;
@@ -160,6 +177,9 @@ export function createInteriorMaterials(THREE, document) {
     Mortar:material(0x9c9180),Sash:material(0x9b9b88),Iron:material(0x575e59),
     Recess:material(0x303b35),Glass:material(0x768783,null,1,{emissive:0x7c8c81,emissiveIntensity:.25}),
     Panel:new THREE.MeshStandardMaterial({color:exitPaint?0xffffff:0x476655,roughness:.72,...(exitPaint?{map:exitPaint,bumpMap:exitPaint,bumpScale:.003}:{})}),Brass:material(0x918263),Carpet:material(0x595d56),
+    VictorianTimber:new THREE.MeshStandardMaterial({color:doorTimber?0xffffff:0x715035,roughness:.78,...(doorTimber?{map:doorTimber,bumpMap:doorTimber,bumpScale:.004}:{})}),
+    VictorianInset:new THREE.MeshStandardMaterial({color:doorTimber?0x9a8874:0x4e3525,roughness:.86,...(doorTimber?{map:doorTimber,bumpMap:doorTimber,bumpScale:.004}:{})}),
+    VictorianIron:material(0x39342e,null,1,{metalness:.65,roughness:.72}),
     Fixture:material(0x9c9c8f),Tube:material(0xeee9d5,null,1,{emissive:0xe1e4d6,emissiveIntensity:.75}),
   };
 }

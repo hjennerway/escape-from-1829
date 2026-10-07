@@ -1,0 +1,236 @@
+{
+  "result": {
+    "cx": 154.773125,
+    "renderer": "ANGLE (NVIDIA, NVIDIA GeForce RTX 3090 Ti (0x00002203) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+    "items": [],
+    "probes": [
+      {
+        "name": "Aerial batch · Tower corridor and three workshops · 949",
+        "point": [
+          153.79061889648438,
+          4.9999999999999964,
+          -38.499999999999936
+        ]
+      }
+    ],
+    "wallProbes": [
+      {
+        "z": -26.61,
+        "y": 4.65,
+        "name": "Aerial batch · Tower corridor and three workshops · 930",
+        "x": 153.2050018310547
+      },
+      {
+        "z": -26.61,
+        "y": 4.72,
+        "name": "Aerial batch · Tower corridor and three workshops · 930",
+        "x": 153.2050018310547
+      },
+      {
+        "z": -26.61,
+        "y": 4.78,
+        "name": "Aerial batch · Tower corridor and three workshops · 930",
+        "x": 153.2050018310547
+      },
+      {
+        "z": -26.61,
+        "y": 4.84,
+        "name": "Aerial batch · Tower corridor and three workshops · 930",
+        "x": 153.2050018310547
+      },
+      {
+        "z": -26.61,
+        "y": 4.9,
+        "name": "Aerial batch · Tower corridor and three workshops · 930",
+        "x": 153.2050018310547
+      },
+      {
+        "z": -26.61,
+        "y": 5,
+        "name": "Aerial batch · Tower corridor and three workshops · 930",
+        "x": 153.2050018310547
+      },
+      {
+        "z": -26.59,
+        "y": 4.65,
+        "name": "Workshop arched painted lining",
+        "x": 153.20500000178814
+      },
+      {
+        "z": -26.59,
+        "y": 4.72,
+        "name": "Workshop arched painted lining",
+        "x": 153.20500000178814
+      },
+      {
+        "z": -26.59,
+        "y": 4.78,
+        "name": "Workshop arched painted lining",
+        "x": 153.20500000178814
+      },
+      {
+        "z": -26.59,
+        "y": 4.84,
+        "name": "Workshop arched painted lining",
+        "x": 153.20500000178814
+      },
+      {
+        "z": -26.59,
+        "y": 4.9,
+        "name": "Workshop arched painted lining",
+        "x": 153.20500000178814
+      },
+      {
+        "z": -26.59,
+        "y": 5,
+        "name": "Workshop arched painted lining",
+        "x": 153.20500000178814
+      },
+      {
+        "z": -26.57,
+        "y": 4.65,
+        "name": "Workshop arched painted lining",
+        "x": 153.20500000178814
+      },
+      {
+        "z": -26.57,
+        "y": 4.72,
+        "name": "Workshop arched painted lining",
+        "x": 153.20500000178814
+      },
+      {
+        "z": -26.57,
+        "y": 4.78,
+        "name": "Workshop arched painted lining",
+        "x": 153.20500000178814
+      },
+      {
+        "z": -26.57,
+        "y": 4.84,
+        "name": "Workshop arched painted lining",
+        "x": 153.20500000178814
+      },
+      {
+        "z": -26.57,
+        "y": 4.9,
+        "name": "Workshop arched painted lining",
+        "x": 153.20500000178814
+      },
+      {
+        "z": -26.57,
+        "y": 5,
+        "name": "Workshop arched painted lining",
+        "x": 153.20500000178814
+      },
+      {
+        "z": -26.53,
+        "y": 4.65,
+        "name": "Workshop arched painted lining",
+        "x": 153.20500000178814
+      },
+      {
+        "z": -26.53,
+        "y": 4.72,
+        "name": "Workshop arched painted lining",
+        "x": 153.20500000178814
+      },
+      {
+        "z": -26.53,
+        "y": 4.78,
+        "name": "Workshop arched painted lining",
+        "x": 153.20500000178814
+      },
+      {
+        "z": -26.53,
+        "y": 4.84,
+        "name": "Workshop arched painted lining",
+        "x": 153.20500000178814
+      },
+      {
+        "z": -26.53,
+        "y": 4.9,
+        "name": "Workshop arched painted lining",
+        "x": 153.20500000178814
+      },
+      {
+        "z": -26.53,
+        "y": 5,
+        "name": "Workshop arched painted lining",
+        "x": 153.20500000178814
+      },
+      {
+        "z": -26.45,
+        "y": 4.65,
+        "name": "Workshop arched painted lining",
+        "x": 153.20500000178814
+      },
+      {
+        "z": -26.45,
+        "y": 4.72,
+        "name": "Workshop arched painted lining",
+        "x": 153.20500000178814
+      },
+      {
+        "z": -26.45,
+        "y": 4.78,
+        "name": "Workshop arched painted lining",
+        "x": 153.20500000178814
+      },
+      {
+        "z": -26.45,
+        "y": 4.84,
+        "name": "Workshop arched painted lining",
+        "x": 153.20500000178814
+      },
+      {
+        "z": -26.45,
+        "y": 4.9,
+        "name": "Workshop arched painted lining",
+        "x": 153.20500000178814
+      },
+      {
+        "z": -26.45,
+        "y": 5,
+        "name": "Workshop arched painted lining",
+        "x": 153.20500000178814
+      },
+      {
+        "z": -26.35,
+        "y": 4.65,
+        "name": "Workshop arched painted lining",
+        "x": 153.20500000178814
+      },
+      {
+        "z": -26.35,
+        "y": 4.72,
+        "name": "Workshop arched painted lining",
+        "x": 153.20500000178814
+      },
+      {
+        "z": -26.35,
+        "y": 4.78,
+        "name": "Workshop arched painted lining",
+        "x": 153.20500000178814
+      },
+      {
+        "z": -26.35,
+        "y": 4.84,
+        "name": "Workshop arched painted lining",
+        "x": 153.20500000178814
+      },
+      {
+        "z": -26.35,
+        "y": 4.9,
+        "name": "Workshop arched painted lining",
+        "x": 153.20500000178814
+      },
+      {
+        "z": -26.35,
+        "y": 5,
+        "name": "Workshop arched painted lining",
+        "x": 153.20500000178814
+      }
+    ]
+  },
+  "errors": []
+}

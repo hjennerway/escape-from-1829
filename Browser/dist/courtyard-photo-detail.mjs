@@ -127,7 +127,7 @@ export function addCourtyardPhotoDetails(THREE,{model,box,mesh,worldUV,white,bri
   // Gutters, vertical soil pipes and branching waste pipes are distinctive in
   // the photograph, particularly between the paired window groups.
   for(const [x,z,h] of [[45.4,4.1,13.8],[48.1,4.1,13.8],[52.7,4.1,13.8],[66.08,7.08,13.8],[37.23,-3,WING_ROOF_JOIN.wall]])
-    box(iron,x,h/2,z,.09,h,.09);
+    box(iron,x,h/2,z,.09,h,.09,0,true);
   for(const x of [48.1,52.7])for(const y of [4.3,9.1])rod([x,y,4.09],[x+1.65,y,4.09],.04);
   rod([45.4,3.5,4.1],[43.8,3.5,4.1],.045);
   for(const x of [47.5,54.5,62])box(stone,x,7.75,4.19,.36,.28,.12);

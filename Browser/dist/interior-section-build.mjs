@@ -8,7 +8,7 @@ import {interiorSections,INTERIOR_SECTION_FORMAT} from './interior-sections.mjs'
 export function buildInteriorFloor(THREE,floor){
  const root=new THREE.Group();buildAsylumArchitecture(THREE,root,floor);root.updateMatrixWorld(true);
  const materials={...asylumArchitectureMaterials(THREE,floor),Padding:cellPaddingMaterial(THREE)};
- root.traverse(o=>{if(o.material?.name==='Asylum door nameplates')materials.Labels=o.material;});
+ root.traverse(o=>{if(o.material?.name==='Asylum door nameplates')materials.Labels=o.material;if(o.material?.name==='Asylum floor signs')materials.StairSigns=o.material;});
  const keys=Object.fromEntries(Object.entries(materials).map(([kind,m])=>[m.uuid,kind]));
  const camera=new THREE.PerspectiveCamera(),sections=interiorSections([floor]);
  function cut(node,section){
@@ -34,8 +34,8 @@ export function buildInteriorFloor(THREE,floor){
   const group=cut(root,section);group.name=section.name;group.userData.interiorSection=section.id;
   const scene=serializeScene(THREE,group,camera);
   // Floor shaders/materials are restored from the shared live library. Only
-  // the door-nameplate atlas is an asset resource, downloaded once per floor.
-  for(const m of scene.materials.filter(m=>keys[m.uuid]==='Labels'))if(!resource.materials.some(old=>old.uuid===m.uuid)){
+  // the door-nameplate atlas and floor-sign paint are downloaded once per floor.
+  for(const m of scene.materials.filter(m=>['Labels','StairSigns'].includes(keys[m.uuid])))if(!resource.materials.some(old=>old.uuid===m.uuid)){
    resource.materials.push(m);const texture=scene.textures.find(t=>t.uuid===m.map);if(texture){resource.textures.push(texture);resource.images.push(scene.images.find(i=>i.uuid===texture.image));}
   }
   scene.materials=[];scene.textures=[];scene.images=[];

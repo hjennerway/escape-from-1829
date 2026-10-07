@@ -3,7 +3,7 @@ import {insidePolygon,segmentDistance} from './asylum-layout.mjs';
 import {asylumRoomNumbers,asylumDisplayName} from './asylum-room-numbers.mjs';
 
 export const REVEAL_RADIUS=11;
-export const OUTSIDE_BOUNDS=[-130,110,-125,90];
+export const OUTSIDE_BOUNDS=[-130,185,-125,90];
 export const notebookView=player=>player.outside?'outside':`floor:${player.floor}`;
 export const floorTitle=(floor,index)=>floor.name||(index?'Upper floor':'Ground floor');
 
@@ -29,16 +29,16 @@ const archiveNotes={
 };
 
 // A journal belongs to one escape attempt. It never reads future objectives or NPC routes.
-export function createNotebook(floors,{outsideStairs=[]}={}){
+export function createNotebook(floors,{outsideStairs=[],groundsOutline=null,groundsPlan=null}={}){
  const roomNumbers=floors.map(asylumRoomNumbers);
  const notes=new Map(),areas=new Map(),wings=new Map(),fog=new Map(),lastReveal=new Map();
  let revision=0,generation=0;
  const views=floors.map((floor,index)=>({key:`floor:${index}`,name:floorTitle(floor,index),floor,index}));
- if(floors[0].geometrySource==='asylum-plan')views.push({key:'outside',name:'Grounds',floor:floors[0],outside:true,routes:outsideStairs});
+ if(floors[0].geometrySource==='asylum-plan')views.push({key:'outside',name:'Grounds',floor:floors[0],outside:true,routes:outsideStairs,groundsOutline,groundsPlan});
  for(const view of views){
   const f=view.floor,s=f.cellSize;
   const origin=f.origin??{x:0,z:0};
-  const bounds=view.outside?OUTSIDE_BOUNDS:f.bounds??[origin.x-s/2,origin.x+(f.width-.5)*s,origin.z-s/2,origin.z+(f.height-.5)*s];
+  const bounds=view.outside&&groundsPlan?[Math.min(OUTSIDE_BOUNDS[0],...groundsPlan.outline.map(p=>p[0]-10)),Math.max(OUTSIDE_BOUNDS[1],...groundsPlan.outline.map(p=>p[0]+10)),Math.min(OUTSIDE_BOUNDS[2],...groundsPlan.outline.map(p=>p[1]-10)),Math.max(OUTSIDE_BOUNDS[3],...groundsPlan.outline.map(p=>p[1]+10))]:view.outside?OUTSIDE_BOUNDS:f.bounds??[origin.x-s/2,origin.x+(f.width-.5)*s,origin.z-s/2,origin.z+(f.height-.5)*s];
   const cols=Math.ceil(bounds[1]-bounds[0]),rows=Math.ceil(bounds[3]-bounds[2]);
   fog.set(view.key,{bounds,cols,rows,cells:new Uint8Array(cols*rows),revision:0});
  }

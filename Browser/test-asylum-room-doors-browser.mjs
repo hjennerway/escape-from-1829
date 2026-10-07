@@ -14,14 +14,14 @@ try{
  page.on('pageerror',e=>errors.push(e.message));page.on('console',m=>{if(m.type()==='error'&&/THREE|WebGL|shader/i.test(m.text()))errors.push(m.text());});
  await page.route('https://**/*',route=>route.abort());
  await page.route('**/game.mjs',async route=>route.fulfill({contentType:'text/javascript',body:(await readFile(new URL('./dist/game.mjs',import.meta.url),'utf8'))+`
-window.roomDoorTest={get ready(){return ready;},get floors(){return floors;},get groups(){return floorGroups;},get renderer(){return renderer;},start(){start();arrivalCutscene.update(3);},pose(x,z,floor,tx,tz){Object.assign(player,{x,z,floor,y:floors[floor].elevation,stair:null,outside:false});scene.add(torch,torchTarget);showFloor();yaw=Math.atan2(x-tx,z-tz);pitch=-.03;camera.position.set(x,player.y+1.65,z);camera.rotation.set(pitch,yaw,0);state='paused';$('arrivalFade').hidden=true;$('result').hidden=true;$('hud').hidden=false;$('interact').hidden=true;},walk(floor,id,side){const d=floors[floor].doorways.find(d=>(d.roomId??d.partitionId)===id),nx=-d.dz*side,nz=d.dx*side,run=1.2;this.pose(d.x-nx*run/2,d.z-nz*run/2,floor,d.x,d.z);moveAsylumActor(floors,player,nx*run,nz*run);return Math.hypot(player.x-(d.x+nx*run/2),player.z-(d.z+nz*run/2))<.001;}};`}));
- await page.goto(base);await page.waitForFunction(()=>window.roomDoorTest?.ready);await page.evaluate(()=>window.roomDoorTest.start());
+window.roomDoorTest={get ready(){return ready;},get loader(){return interiorLoader;},get floors(){return floors;},get groups(){return floorGroups;},get renderer(){return renderer;},start(){start();arrivalCutscene.update(3);},pose(x,z,floor,tx,tz){Object.assign(player,{x,z,floor,y:floors[floor].elevation,stair:null,outside:false});scene.add(torch,torchTarget);showFloor();yaw=Math.atan2(x-tx,z-tz);pitch=-.03;camera.position.set(x,player.y+1.65,z);camera.rotation.set(pitch,yaw,0);state='paused';$('arrivalFade').hidden=true;$('result').hidden=true;$('hud').hidden=false;$('interact').hidden=true;},walk(floor,id,side){const d=floors[floor].doorways.find(d=>(d.roomId??d.partitionId)===id),nx=-d.dz*side,nz=d.dx*side,run=1.2;this.pose(d.x-nx*run/2,d.z-nz*run/2,floor,d.x,d.z);moveAsylumActor(floors,player,nx*run,nz*run);return Math.hypot(player.x-(d.x+nx*run/2),player.z-(d.z+nz*run/2))<.001;}};`}));
+ await page.goto(base);await page.waitForFunction(()=>window.roomDoorTest?.ready);await page.evaluate(()=>{window.roomDoorTest.loader.startBackground();window.roomDoorTest.start();});await page.waitForFunction(()=>window.roomDoorTest.loader.complete);
  await page.addStyleTag({content:'#hud,header,.vignette{display:none!important}'});
  const gamePoses=await page.evaluate(()=>window.roomDoorTest.floors.map((f,i)=>{
-  const leaf=window.roomDoorTest.groups[i].getObjectByName('Asylum RoomDoor');
-  return {floor:f.id,doors:f.roomDoors.map(d=>({id:d.roomId,angle:d.openAngle,hinge:d.hingeSide,limited:d.wallLimited})),instances:leaf.count};
+  let instances=0;window.roomDoorTest.groups[i].traverse(o=>{if(o.name==='Asylum RoomDoor')instances+=o.count;});
+  return {floor:f.id,doors:f.roomDoors.map(d=>({id:d.roomId,angle:d.openAngle,hinge:d.hingeSide,limited:d.wallLimited})),instances};
  }));
- assert.equal(gamePoses.reduce((n,f)=>n+f.doors.length,0),95);assert(gamePoses.every(f=>f.instances===f.doors.length*5));
+ assert.equal(gamePoses.reduce((n,f)=>n+f.doors.length,0),92);assert(gamePoses.every(f=>f.instances===f.doors.length*5));
  async function shot(name,pose){
   if(pose)await page.evaluate(p=>window.roomDoorTest.pose(...p),pose);
   await page.evaluate(()=>new Promise(resolve=>requestAnimationFrame(()=>requestAnimationFrame(resolve))));
@@ -51,15 +51,16 @@ window.roomDoorTest={get ready(){return ready;},get floors(){return floors;},get
 
  // Exploration uses the same poses and paint batches, without the game loop.
  await page.route('**/explore.mjs',async route=>{const response=await route.fetch();await route.fulfill({response,body:(await response.text()).replace('const clock=new THREE.Timer();','window.roomDoorExploreTest={walker,interior,renderer,floors};const clock=new THREE.Timer();')});});
- await page.setViewportSize({width:1280,height:800});await page.goto(base+'/explore.html');await page.waitForFunction(()=>window.roomDoorExploreTest?.renderer.info.render.frame>2);
+ await page.setViewportSize({width:1280,height:800});await page.goto(base+'/explore.html');await page.waitForFunction(()=>window.roomDoorExploreTest?.interior.loading.complete);
  const explorePoses=await page.evaluate(()=>window.roomDoorExploreTest.floors.map(f=>{
   const group=window.roomDoorExploreTest.interior.scene.children.find(g=>g.name===f.name);
-  return {floor:f.id,doors:f.roomDoors.map(d=>({id:d.roomId,angle:d.openAngle,hinge:d.hingeSide,limited:d.wallLimited})),instances:group.getObjectByName('Asylum RoomDoor').count};
+  let instances=0;group.traverse(o=>{if(o.name==='Asylum RoomDoor')instances+=o.count;});
+  return {floor:f.id,doors:f.roomDoors.map(d=>({id:d.roomId,angle:d.openAngle,hinge:d.hingeSide,limited:d.wallLimited})),instances};
  }));
  assert.deepEqual(explorePoses,gamePoses,'Game and exploration render the same room doors');
  await page.addStyleTag({content:'.explore-guide{display:none}'});
  await page.evaluate(()=>{const {walker,floors}=window.roomDoorExploreTest;walker.setView({position:[-20.5,1.8,7.2],target:[-20.5,1.8,12]});Object.assign(walker.actor,{x:-20.5,z:7.2,floor:0,y:floors[0].elevation,outside:false,stair:null});walker.update(.01);document.getElementById('layoutControls').open=false;});
  await shot('exploration-door');assert.deepEqual(errors,[]);
  await writeFile(new URL('validation.json',destination),JSON.stringify({gamePoses,explorePoses,captures,walks:crossings.length*2,errors},null,2)+'\n');
- console.log(`PASS: 95 open room doors in game and exploration, ${crossings.length*2} actual player doorway crossings, ${captures.length} desktop/mobile views, all hinge orientations, wall contacts and clear corridor link, no page/shader errors.`);
+ console.log(`PASS: 92 open room doors in game and exploration, ${crossings.length*2} actual player doorway crossings, ${captures.length} desktop/mobile views, all hinge orientations, wall contacts and clear corridor link, no page/shader errors.`);
 }finally{await browser.close();server.kill();}

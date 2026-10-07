@@ -10,7 +10,7 @@ const snapshot=JSON.stringify(layout),scenes=[];
 let openings=0,passages=0,headers=0,trimSamples=0,skirtingSamples=0,stairSamples=0,exitDoors=0;
 for(const floor of makeFloors(layout)){
  const scene=new THREE.Scene();buildArchitecture(THREE,scene,floor);scene.updateMatrixWorld(true);scenes.push(scene);
- assert(scene.children.length<=22,'Architectural details stay batched');
+ assert(scene.children.length<=26,'Architectural details and period door fittings stay batched');
  const surfaces=interiorWallSurfaces(floor),windows=surfaces.filter(w=>w.window);
  // The legacy corridor's twelve red courses also end at a mortar joint.
  const red=scene.getObjectByName('Layout Brick'),matrix=new THREE.Matrix4();

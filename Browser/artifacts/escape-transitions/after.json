@@ -1,0 +1,3982 @@
+[
+  {
+    "complete": false,
+    "launch": {
+      "costs": [
+        {
+          "name": "furniture",
+          "ms": 0.09999999962747097
+        },
+        {
+          "name": "scenario",
+          "ms": 0
+        }
+      ],
+      "draws": [
+        {
+          "ms": 91.5,
+          "state": "arrival",
+          "outside": false,
+          "scene": "outside"
+        },
+        {
+          "ms": 12.099999999627471,
+          "state": "arrival",
+          "outside": false,
+          "scene": "outside"
+        },
+        {
+          "ms": 11.099999999627471,
+          "state": "arrival",
+          "outside": false,
+          "scene": "outside"
+        },
+        {
+          "ms": 12.300000000745058,
+          "state": "arrival",
+          "outside": false,
+          "scene": "outside"
+        },
+        {
+          "ms": 11.599999999627471,
+          "state": "arrival",
+          "outside": false,
+          "scene": "outside"
+        },
+        {
+          "ms": 12.400000000372529,
+          "state": "arrival",
+          "outside": false,
+          "scene": "outside"
+        },
+        {
+          "ms": 11.800000000745058,
+          "state": "arrival",
+          "outside": false,
+          "scene": "outside"
+        },
+        {
+          "ms": 10.199999999254942,
+          "state": "arrival",
+          "outside": false,
+          "scene": "outside"
+        },
+        {
+          "ms": 10.400000000372529,
+          "state": "arrival",
+          "outside": false,
+          "scene": "outside"
+        },
+        {
+          "ms": 42.40000000037253,
+          "state": "arrival",
+          "outside": false,
+          "scene": "outside"
+        },
+        {
+          "ms": 51.19999999925494,
+          "state": "arrival",
+          "outside": false,
+          "scene": "outside"
+        },
+        {
+          "ms": 34.59999999962747,
+          "state": "arrival",
+          "outside": false,
+          "scene": "outside"
+        },
+        {
+          "ms": 35.09999999962747,
+          "state": "arrival",
+          "outside": false,
+          "scene": "outside"
+        },
+        {
+          "ms": 29.800000000745058,
+          "state": "arrival",
+          "outside": false,
+          "scene": "outside"
+        },
+        {
+          "ms": 31.40000000037253,
+          "state": "arrival",
+          "outside": false,
+          "scene": "outside"
+        },
+        {
+          "ms": 32,
+          "state": "arrival",
+          "outside": false,
+          "scene": "outside"
+        },
+        {
+          "ms": 29.40000000037253,
+          "state": "arrival",
+          "outside": false,
+          "scene": "outside"
+        },
+        {
+          "ms": 15.899999998509884,
+          "state": "arrival",
+          "outside": false,
+          "scene": "outside"
+        },
+        {
+          "ms": 9.699999999254942,
+          "state": "arrival",
+          "outside": false,
+          "scene": "outside"
+        },
+        {
+          "ms": 10.200000001117587,
+          "state": "arrival",
+          "outside": false,
+          "scene": "outside"
+        },
+        {
+          "ms": 11.400000000372529,
+          "state": "arrival",
+          "outside": false,
+          "scene": "outside"
+        },
+        {
+          "ms": 11.900000000372529,
+          "state": "arrival",
+          "outside": false,
+          "scene": "outside"
+        },
+        {
+          "ms": 9.599999999627471,
+          "state": "arrival",
+          "outside": false,
+          "scene": "outside"
+        },
+        {
+          "ms": 10.300000000745058,
+          "state": "arrival",
+          "outside": false,
+          "scene": "outside"
+        },
+        {
+          "ms": 9.099999999627471,
+          "state": "arrival",
+          "outside": false,
+          "scene": "outside"
+        },
+        {
+          "ms": 9,
+          "state": "arrival",
+          "outside": false,
+          "scene": "outside"
+        },
+        {
+          "ms": 11.300000000745058,
+          "state": "arrival",
+          "outside": false,
+          "scene": "outside"
+        },
+        {
+          "ms": 12.299999998882413,
+          "state": "arrival",
+          "outside": false,
+          "scene": "outside"
+        },
+        {
+          "ms": 11.100000001490116,
+          "state": "arrival",
+          "outside": false,
+          "scene": "outside"
+        },
+        {
+          "ms": 10.099999999627471,
+          "state": "arrival",
+          "outside": false,
+          "scene": "outside"
+        },
+        {
+          "ms": 10.5,
+          "state": "arrival",
+          "outside": false,
+          "scene": "outside"
+        },
+        {
+          "ms": 10.100000001490116,
+          "state": "arrival",
+          "outside": false,
+          "scene": "outside"
+        },
+        {
+          "ms": 9.800000000745058,
+          "state": "arrival",
+          "outside": false,
+          "scene": "outside"
+        },
+        {
+          "ms": 10.599999999627471,
+          "state": "arrival",
+          "outside": false,
+          "scene": "outside"
+        },
+        {
+          "ms": 9.900000000372529,
+          "state": "arrival",
+          "outside": false,
+          "scene": "outside"
+        },
+        {
+          "ms": 12.199999999254942,
+          "state": "arrival",
+          "outside": false,
+          "scene": "outside"
+        },
+        {
+          "ms": 12.199999999254942,
+          "state": "arrival",
+          "outside": false,
+          "scene": "outside"
+        },
+        {
+          "ms": 11.799999998882413,
+          "state": "arrival",
+          "outside": false,
+          "scene": "outside"
+        },
+        {
+          "ms": 13.199999999254942,
+          "state": "arrival",
+          "outside": false,
+          "scene": "outside"
+        },
+        {
+          "ms": 12.300000000745058,
+          "state": "arrival",
+          "outside": false,
+          "scene": "outside"
+        },
+        {
+          "ms": 11.200000001117587,
+          "state": "arrival",
+          "outside": false,
+          "scene": "outside"
+        },
+        {
+          "ms": 11.199999999254942,
+          "state": "arrival",
+          "outside": false,
+          "scene": "outside"
+        },
+        {
+          "ms": 10.400000000372529,
+          "state": "arrival",
+          "outside": false,
+          "scene": "outside"
+        },
+        {
+          "ms": 9.300000000745058,
+          "state": "arrival",
+          "outside": false,
+          "scene": "outside"
+        },
+        {
+          "ms": 9.099999999627471,
+          "state": "arrival",
+          "outside": false,
+          "scene": "outside"
+        },
+        {
+          "ms": 10,
+          "state": "arrival",
+          "outside": false,
+          "scene": "outside"
+        },
+        {
+          "ms": 10.200000001117587,
+          "state": "arrival",
+          "outside": false,
+          "scene": "outside"
+        },
+        {
+          "ms": 10.5,
+          "state": "arrival",
+          "outside": false,
+          "scene": "outside"
+        },
+        {
+          "ms": 9.200000001117587,
+          "state": "arrival",
+          "outside": false,
+          "scene": "outside"
+        },
+        {
+          "ms": 9.099999999627471,
+          "state": "arrival",
+          "outside": false,
+          "scene": "outside"
+        },
+        {
+          "ms": 11.099999999627471,
+          "state": "arrival",
+          "outside": false,
+          "scene": "outside"
+        },
+        {
+          "ms": 11.699999999254942,
+          "state": "arrival",
+          "outside": false,
+          "scene": "outside"
+        },
+        {
+          "ms": 10.199999999254942,
+          "state": "arrival",
+          "outside": false,
+          "scene": "outside"
+        },
+        {
+          "ms": 8.699999999254942,
+          "state": "arrival",
+          "outside": false,
+          "scene": "outside"
+        },
+        {
+          "ms": 10.700000001117587,
+          "state": "arrival",
+          "outside": false,
+          "scene": "outside"
+        },
+        {
+          "ms": 12.599999999627471,
+          "state": "arrival",
+          "outside": false,
+          "scene": "outside"
+        },
+        {
+          "ms": 12.299999998882413,
+          "state": "arrival",
+          "outside": false,
+          "scene": "outside"
+        },
+        {
+          "ms": 11.799999998882413,
+          "state": "arrival",
+          "outside": false,
+          "scene": "outside"
+        },
+        {
+          "ms": 10.599999999627471,
+          "state": "arrival",
+          "outside": false,
+          "scene": "outside"
+        },
+        {
+          "ms": 11,
+          "state": "arrival",
+          "outside": false,
+          "scene": "outside"
+        },
+        {
+          "ms": 10.099999999627471,
+          "state": "arrival",
+          "outside": false,
+          "scene": "outside"
+        },
+        {
+          "ms": 10,
+          "state": "arrival",
+          "outside": false,
+          "scene": "outside"
+        },
+        {
+          "ms": 10.299999998882413,
+          "state": "arrival",
+          "outside": false,
+          "scene": "outside"
+        },
+        {
+          "ms": 10.799999998882413,
+          "state": "arrival",
+          "outside": false,
+          "scene": "outside"
+        },
+        {
+          "ms": 9.399999998509884,
+          "state": "arrival",
+          "outside": false,
+          "scene": "outside"
+        },
+        {
+          "ms": 9.5,
+          "state": "arrival",
+          "outside": false,
+          "scene": "outside"
+        },
+        {
+          "ms": 8.5,
+          "state": "arrival",
+          "outside": false,
+          "scene": "outside"
+        },
+        {
+          "ms": 8.900000000372529,
+          "state": "arrival",
+          "outside": false,
+          "scene": "outside"
+        },
+        {
+          "ms": 9.099999999627471,
+          "state": "arrival",
+          "outside": false,
+          "scene": "outside"
+        },
+        {
+          "ms": 9,
+          "state": "arrival",
+          "outside": false,
+          "scene": "outside"
+        },
+        {
+          "ms": 8.800000000745058,
+          "state": "arrival",
+          "outside": false,
+          "scene": "outside"
+        },
+        {
+          "ms": 8.699999999254942,
+          "state": "arrival",
+          "outside": false,
+          "scene": "outside"
+        },
+        {
+          "ms": 9.300000000745058,
+          "state": "arrival",
+          "outside": false,
+          "scene": "outside"
+        },
+        {
+          "ms": 9.700000001117587,
+          "state": "arrival",
+          "outside": false,
+          "scene": "outside"
+        },
+        {
+          "ms": 9,
+          "state": "arrival",
+          "outside": false,
+          "scene": "outside"
+        },
+        {
+          "ms": 8.5,
+          "state": "arrival",
+          "outside": false,
+          "scene": "outside"
+        },
+        {
+          "ms": 9.100000001490116,
+          "state": "arrival",
+          "outside": false,
+          "scene": "outside"
+        },
+        {
+          "ms": 18.90000000037253,
+          "state": "arrival",
+          "outside": false,
+          "scene": "outside"
+        },
+        {
+          "ms": 18.799999998882413,
+          "state": "arrival",
+          "outside": false,
+          "scene": "outside"
+        },
+        {
+          "ms": 15.800000000745058,
+          "state": "arrival",
+          "outside": false,
+          "scene": "outside"
+        },
+        {
+          "ms": 15.300000000745058,
+          "state": "arrival",
+          "outside": false,
+          "scene": "outside"
+        },
+        {
+          "ms": 15.5,
+          "state": "arrival",
+          "outside": false,
+          "scene": "outside"
+        },
+        {
+          "ms": 15.700000001117587,
+          "state": "arrival",
+          "outside": false,
+          "scene": "outside"
+        },
+        {
+          "ms": 13.599999999627471,
+          "state": "arrival",
+          "outside": false,
+          "scene": "outside"
+        },
+        {
+          "ms": 14.400000000372529,
+          "state": "arrival",
+          "outside": false,
+          "scene": "outside"
+        },
+        {
+          "ms": 14.199999999254942,
+          "state": "arrival",
+          "outside": false,
+          "scene": "outside"
+        },
+        {
+          "ms": 12.300000000745058,
+          "state": "arrival",
+          "outside": false,
+          "scene": "outside"
+        },
+        {
+          "ms": 14.5,
+          "state": "arrival",
+          "outside": false,
+          "scene": "outside"
+        },
+        {
+          "ms": 12.099999999627471,
+          "state": "arrival",
+          "outside": false,
+          "scene": "outside"
+        },
+        {
+          "ms": 13.900000000372529,
+          "state": "arrival",
+          "outside": false,
+          "scene": "outside"
+        },
+        {
+          "ms": 14.400000000372529,
+          "state": "arrival",
+          "outside": false,
+          "scene": "outside"
+        },
+        {
+          "ms": 13,
+          "state": "arrival",
+          "outside": false,
+          "scene": "outside"
+        },
+        {
+          "ms": 15,
+          "state": "arrival",
+          "outside": false,
+          "scene": "outside"
+        },
+        {
+          "ms": 14.299999998882413,
+          "state": "arrival",
+          "outside": false,
+          "scene": "outside"
+        },
+        {
+          "ms": 14.099999999627471,
+          "state": "arrival",
+          "outside": false,
+          "scene": "outside"
+        },
+        {
+          "ms": 11.599999999627471,
+          "state": "arrival",
+          "outside": false,
+          "scene": "outside"
+        },
+        {
+          "ms": 13.699999999254942,
+          "state": "arrival",
+          "outside": false,
+          "scene": "outside"
+        },
+        {
+          "ms": 11.900000000372529,
+          "state": "arrival",
+          "outside": false,
+          "scene": "outside"
+        },
+        {
+          "ms": 12.899999998509884,
+          "state": "arrival",
+          "outside": false,
+          "scene": "outside"
+        },
+        {
+          "ms": 13.5,
+          "state": "arrival",
+          "outside": false,
+          "scene": "outside"
+        },
+        {
+          "ms": 12.5,
+          "state": "arrival",
+          "outside": false,
+          "scene": "outside"
+        },
+        {
+          "ms": 13.800000000745058,
+          "state": "arrival",
+          "outside": false,
+          "scene": "outside"
+        },
+        {
+          "ms": 12.599999999627471,
+          "state": "arrival",
+          "outside": false,
+          "scene": "outside"
+        },
+        {
+          "ms": 14.599999999627471,
+          "state": "arrival",
+          "outside": false,
+          "scene": "outside"
+        },
+        {
+          "ms": 12.599999999627471,
+          "state": "arrival",
+          "outside": false,
+          "scene": "outside"
+        },
+        {
+          "ms": 11.900000000372529,
+          "state": "arrival",
+          "outside": false,
+          "scene": "outside"
+        },
+        {
+          "ms": 11.300000000745058,
+          "state": "arrival",
+          "outside": false,
+          "scene": "outside"
+        },
+        {
+          "ms": 11.400000000372529,
+          "state": "arrival",
+          "outside": false,
+          "scene": "outside"
+        },
+        {
+          "ms": 15.799999998882413,
+          "state": "arrival",
+          "outside": false,
+          "scene": "outside"
+        },
+        {
+          "ms": 11.5,
+          "state": "arrival",
+          "outside": false,
+          "scene": "outside"
+        },
+        {
+          "ms": 11.299999998882413,
+          "state": "arrival",
+          "outside": false,
+          "scene": "outside"
+        },
+        {
+          "ms": 11.899999998509884,
+          "state": "arrival",
+          "outside": false,
+          "scene": "outside"
+        },
+        {
+          "ms": 12.599999999627471,
+          "state": "arrival",
+          "outside": false,
+          "scene": "outside"
+        },
+        {
+          "ms": 11.099999999627471,
+          "state": "arrival",
+          "outside": false,
+          "scene": "outside"
+        },
+        {
+          "ms": 14.699999999254942,
+          "state": "arrival",
+          "outside": false,
+          "scene": "outside"
+        },
+        {
+          "ms": 12.899999998509884,
+          "state": "arrival",
+          "outside": false,
+          "scene": "outside"
+        },
+        {
+          "ms": 13.200000001117587,
+          "state": "arrival",
+          "outside": false,
+          "scene": "outside"
+        },
+        {
+          "ms": 12.199999999254942,
+          "state": "arrival",
+          "outside": false,
+          "scene": "outside"
+        },
+        {
+          "ms": 10.599999999627471,
+          "state": "arrival",
+          "outside": false,
+          "scene": "outside"
+        },
+        {
+          "ms": 11.400000000372529,
+          "state": "arrival",
+          "outside": false,
+          "scene": "outside"
+        },
+        {
+          "ms": 11.200000001117587,
+          "state": "arrival",
+          "outside": false,
+          "scene": "outside"
+        },
+        {
+          "ms": 10.700000001117587,
+          "state": "arrival",
+          "outside": false,
+          "scene": "outside"
+        },
+        {
+          "ms": 11.5,
+          "state": "arrival",
+          "outside": false,
+          "scene": "outside"
+        },
+        {
+          "ms": 10.800000000745058,
+          "state": "arrival",
+          "outside": false,
+          "scene": "outside"
+        },
+        {
+          "ms": 10.5,
+          "state": "arrival",
+          "outside": false,
+          "scene": "outside"
+        },
+        {
+          "ms": 10.899999998509884,
+          "state": "arrival",
+          "outside": false,
+          "scene": "outside"
+        },
+        {
+          "ms": 10,
+          "state": "arrival",
+          "outside": false,
+          "scene": "outside"
+        },
+        {
+          "ms": 12.200000001117587,
+          "state": "arrival",
+          "outside": false,
+          "scene": "outside"
+        },
+        {
+          "ms": 11.400000000372529,
+          "state": "arrival",
+          "outside": false,
+          "scene": "outside"
+        },
+        {
+          "ms": 10.199999999254942,
+          "state": "arrival",
+          "outside": false,
+          "scene": "outside"
+        },
+        {
+          "ms": 9.800000000745058,
+          "state": "arrival",
+          "outside": false,
+          "scene": "outside"
+        },
+        {
+          "ms": 11.700000001117587,
+          "state": "arrival",
+          "outside": false,
+          "scene": "outside"
+        },
+        {
+          "ms": 12.200000001117587,
+          "state": "arrival",
+          "outside": false,
+          "scene": "outside"
+        },
+        {
+          "ms": 10.699999999254942,
+          "state": "arrival",
+          "outside": false,
+          "scene": "outside"
+        },
+        {
+          "ms": 10.600000001490116,
+          "state": "arrival",
+          "outside": false,
+          "scene": "outside"
+        },
+        {
+          "ms": 10.5,
+          "state": "arrival",
+          "outside": false,
+          "scene": "outside"
+        },
+        {
+          "ms": 125.40000000037253,
+          "state": "arrival",
+          "outside": false,
+          "scene": "inside"
+        },
+        {
+          "ms": 3.200000001117587,
+          "state": "arrival",
+          "outside": false,
+          "scene": "inside"
+        },
+        {
+          "ms": 2.699999999254942,
+          "state": "arrival",
+          "outside": false,
+          "scene": "inside"
+        },
+        {
+          "ms": 2.900000000372529,
+          "state": "arrival",
+          "outside": false,
+          "scene": "inside"
+        },
+        {
+          "ms": 2.400000000372529,
+          "state": "arrival",
+          "outside": false,
+          "scene": "inside"
+        },
+        {
+          "ms": 2.400000000372529,
+          "state": "arrival",
+          "outside": false,
+          "scene": "inside"
+        },
+        {
+          "ms": 2.200000001117587,
+          "state": "arrival",
+          "outside": false,
+          "scene": "inside"
+        },
+        {
+          "ms": 2.300000000745058,
+          "state": "arrival",
+          "outside": false,
+          "scene": "inside"
+        },
+        {
+          "ms": 2,
+          "state": "arrival",
+          "outside": false,
+          "scene": "inside"
+        },
+        {
+          "ms": 2.200000001117587,
+          "state": "arrival",
+          "outside": false,
+          "scene": "inside"
+        },
+        {
+          "ms": 2.100000001490116,
+          "state": "arrival",
+          "outside": false,
+          "scene": "inside"
+        },
+        {
+          "ms": 2.100000001490116,
+          "state": "arrival",
+          "outside": false,
+          "scene": "inside"
+        },
+        {
+          "ms": 2.199999999254942,
+          "state": "arrival",
+          "outside": false,
+          "scene": "inside"
+        },
+        {
+          "ms": 2.399999998509884,
+          "state": "arrival",
+          "outside": false,
+          "scene": "inside"
+        },
+        {
+          "ms": 2.600000001490116,
+          "state": "arrival",
+          "outside": false,
+          "scene": "inside"
+        },
+        {
+          "ms": 2.600000001490116,
+          "state": "arrival",
+          "outside": false,
+          "scene": "inside"
+        },
+        {
+          "ms": 2.900000000372529,
+          "state": "arrival",
+          "outside": false,
+          "scene": "inside"
+        },
+        {
+          "ms": 2.900000000372529,
+          "state": "arrival",
+          "outside": false,
+          "scene": "inside"
+        },
+        {
+          "ms": 2.599999999627471,
+          "state": "arrival",
+          "outside": false,
+          "scene": "inside"
+        },
+        {
+          "ms": 2.5,
+          "state": "arrival",
+          "outside": false,
+          "scene": "inside"
+        },
+        {
+          "ms": 2.400000000372529,
+          "state": "arrival",
+          "outside": false,
+          "scene": "inside"
+        },
+        {
+          "ms": 2.300000000745058,
+          "state": "arrival",
+          "outside": false,
+          "scene": "inside"
+        },
+        {
+          "ms": 2.099999999627471,
+          "state": "arrival",
+          "outside": false,
+          "scene": "inside"
+        },
+        {
+          "ms": 2.099999999627471,
+          "state": "arrival",
+          "outside": false,
+          "scene": "inside"
+        },
+        {
+          "ms": 2.300000000745058,
+          "state": "play",
+          "outside": false,
+          "scene": "inside"
+        }
+      ],
+      "stats": {
+        "mode": "assets",
+        "steps": [
+          {
+            "section": "shared-library",
+            "stage": "upload",
+            "milliseconds": 8.099999999627471
+          },
+          {
+            "section": "shared-library",
+            "stage": "upload",
+            "milliseconds": 29.90000000037253
+          },
+          {
+            "section": "0-central",
+            "stage": "restore",
+            "milliseconds": 1.199999999254942
+          },
+          {
+            "section": "0-central",
+            "stage": "graphics",
+            "milliseconds": 159.69999999925494
+          },
+          {
+            "section": "0-central",
+            "stage": "furniture",
+            "milliseconds": 3.799999998882413
+          },
+          {
+            "section": "0-central",
+            "stage": "upload",
+            "milliseconds": 18.100000001490116
+          },
+          {
+            "section": "0-central",
+            "stage": "upload",
+            "milliseconds": 14.900000000372529
+          },
+          {
+            "section": "0-central",
+            "stage": "upload",
+            "milliseconds": 14.299999998882413
+          },
+          {
+            "section": "0-central",
+            "stage": "upload",
+            "milliseconds": 8.800000000745058
+          },
+          {
+            "section": "0-central",
+            "stage": "upload",
+            "milliseconds": 22.700000001117587
+          },
+          {
+            "section": "0-central",
+            "stage": "upload",
+            "milliseconds": 6
+          },
+          {
+            "section": "0-central",
+            "stage": "upload",
+            "milliseconds": 6
+          },
+          {
+            "section": "0-central",
+            "stage": "upload",
+            "milliseconds": 116.59999999962747
+          },
+          {
+            "section": "0-central",
+            "stage": "upload",
+            "milliseconds": 2.799999998882413
+          },
+          {
+            "section": "0-west",
+            "stage": "restore",
+            "milliseconds": 0.40000000037252903
+          },
+          {
+            "section": "0-west",
+            "stage": "graphics",
+            "milliseconds": 0.599999999627471
+          },
+          {
+            "section": "0-west",
+            "stage": "furniture",
+            "milliseconds": 0.900000000372529
+          },
+          {
+            "section": "0-west",
+            "stage": "upload",
+            "milliseconds": 6.300000000745058
+          },
+          {
+            "section": "0-west",
+            "stage": "upload",
+            "milliseconds": 4.099999999627471
+          },
+          {
+            "section": "0-east",
+            "stage": "restore",
+            "milliseconds": 0.2999999988824129
+          },
+          {
+            "section": "0-east",
+            "stage": "graphics",
+            "milliseconds": 0.19999999925494194
+          },
+          {
+            "section": "0-east",
+            "stage": "furniture",
+            "milliseconds": 0.8999999985098839
+          },
+          {
+            "section": "0-east",
+            "stage": "upload",
+            "milliseconds": 5.699999999254942
+          },
+          {
+            "section": "1-central",
+            "stage": "restore",
+            "milliseconds": 0.3999999985098839
+          },
+          {
+            "section": "1-central",
+            "stage": "graphics",
+            "milliseconds": 0.30000000074505806
+          },
+          {
+            "section": "1-central",
+            "stage": "furniture",
+            "milliseconds": 1.300000000745058
+          },
+          {
+            "section": "1-central",
+            "stage": "upload",
+            "milliseconds": 7.600000001490116
+          },
+          {
+            "section": "1-central",
+            "stage": "upload",
+            "milliseconds": 6
+          },
+          {
+            "section": "1-central",
+            "stage": "upload",
+            "milliseconds": 0.900000000372529
+          },
+          {
+            "section": "2-east",
+            "stage": "restore",
+            "milliseconds": 1
+          },
+          {
+            "section": "2-east",
+            "stage": "graphics",
+            "milliseconds": 197.40000000037253
+          },
+          {
+            "section": "2-east",
+            "stage": "furniture",
+            "milliseconds": 0.2999999988824129
+          },
+          {
+            "section": "2-east",
+            "stage": "upload",
+            "milliseconds": 7.200000001117587
+          },
+          {
+            "section": "2-east",
+            "stage": "upload",
+            "milliseconds": 2.299999998882413
+          },
+          {
+            "section": "3-east",
+            "stage": "restore",
+            "milliseconds": 0.40000000037252903
+          },
+          {
+            "section": "3-east",
+            "stage": "graphics",
+            "milliseconds": 0.3999999985098839
+          },
+          {
+            "section": "3-east",
+            "stage": "furniture",
+            "milliseconds": 0.40000000037252903
+          },
+          {
+            "section": "3-east",
+            "stage": "upload",
+            "milliseconds": 3.099999999627471
+          },
+          {
+            "section": "2-west",
+            "stage": "restore",
+            "milliseconds": 0.40000000037252903
+          },
+          {
+            "section": "2-west",
+            "stage": "graphics",
+            "milliseconds": 0.599999999627471
+          },
+          {
+            "section": "2-west",
+            "stage": "furniture",
+            "milliseconds": 0.2999999988824129
+          },
+          {
+            "section": "2-west",
+            "stage": "upload",
+            "milliseconds": 1.400000000372529
+          },
+          {
+            "section": "1-west",
+            "stage": "restore",
+            "milliseconds": 0.30000000074505806
+          },
+          {
+            "section": "1-west",
+            "stage": "graphics",
+            "milliseconds": 0.40000000037252903
+          },
+          {
+            "section": "1-west",
+            "stage": "furniture",
+            "milliseconds": 1
+          },
+          {
+            "section": "1-west",
+            "stage": "upload",
+            "milliseconds": 1.5
+          },
+          {
+            "section": "1-east",
+            "stage": "restore",
+            "milliseconds": 0.40000000037252903
+          },
+          {
+            "section": "1-east",
+            "stage": "graphics",
+            "milliseconds": 0.40000000037252903
+          },
+          {
+            "section": "1-east",
+            "stage": "furniture",
+            "milliseconds": 0.7000000011175871
+          },
+          {
+            "section": "1-east",
+            "stage": "upload",
+            "milliseconds": 1.5
+          },
+          {
+            "section": "3-west",
+            "stage": "restore",
+            "milliseconds": 0.2000000011175871
+          },
+          {
+            "section": "3-west",
+            "stage": "graphics",
+            "milliseconds": 0.6000000014901161
+          },
+          {
+            "section": "3-west",
+            "stage": "furniture",
+            "milliseconds": 0.40000000037252903
+          },
+          {
+            "section": "3-west",
+            "stage": "upload",
+            "milliseconds": 2.099999999627471
+          }
+        ],
+        "firstReadyMilliseconds": 1353.7000000011176
+      }
+    },
+    "exitCost": 2.100000001490116,
+    "exitDraws": [
+      {
+        "ms": 15.300000000745058,
+        "state": "play",
+        "outside": true,
+        "scene": "outside"
+      },
+      {
+        "ms": 11,
+        "state": "play",
+        "outside": true,
+        "scene": "outside"
+      },
+      {
+        "ms": 11.5,
+        "state": "play",
+        "outside": true,
+        "scene": "outside"
+      },
+      {
+        "ms": 10.400000000372529,
+        "state": "play",
+        "outside": true,
+        "scene": "outside"
+      },
+      {
+        "ms": 13.200000001117587,
+        "state": "play",
+        "outside": true,
+        "scene": "outside"
+      },
+      {
+        "ms": 9.299999998882413,
+        "state": "play",
+        "outside": true,
+        "scene": "outside"
+      },
+      {
+        "ms": 9.900000000372529,
+        "state": "play",
+        "outside": true,
+        "scene": "outside"
+      },
+      {
+        "ms": 11.300000000745058,
+        "state": "play",
+        "outside": true,
+        "scene": "outside"
+      },
+      {
+        "ms": 9.900000000372529,
+        "state": "play",
+        "outside": true,
+        "scene": "outside"
+      },
+      {
+        "ms": 11.299999998882413,
+        "state": "play",
+        "outside": true,
+        "scene": "outside"
+      },
+      {
+        "ms": 9.300000000745058,
+        "state": "play",
+        "outside": true,
+        "scene": "outside"
+      },
+      {
+        "ms": 9,
+        "state": "play",
+        "outside": true,
+        "scene": "outside"
+      },
+      {
+        "ms": 8.600000001490116,
+        "state": "play",
+        "outside": true,
+        "scene": "outside"
+      },
+      {
+        "ms": 10.5,
+        "state": "play",
+        "outside": true,
+        "scene": "outside"
+      },
+      {
+        "ms": 9.800000000745058,
+        "state": "play",
+        "outside": true,
+        "scene": "outside"
+      },
+      {
+        "ms": 9.399999998509884,
+        "state": "play",
+        "outside": true,
+        "scene": "outside"
+      },
+      {
+        "ms": 9.700000001117587,
+        "state": "play",
+        "outside": true,
+        "scene": "outside"
+      },
+      {
+        "ms": 9.799999998882413,
+        "state": "play",
+        "outside": true,
+        "scene": "outside"
+      },
+      {
+        "ms": 9.099999999627471,
+        "state": "play",
+        "outside": true,
+        "scene": "outside"
+      },
+      {
+        "ms": 10.900000000372529,
+        "state": "play",
+        "outside": true,
+        "scene": "outside"
+      },
+      {
+        "ms": 9.599999999627471,
+        "state": "play",
+        "outside": true,
+        "scene": "outside"
+      },
+      {
+        "ms": 9.899999998509884,
+        "state": "play",
+        "outside": true,
+        "scene": "outside"
+      },
+      {
+        "ms": 10.199999999254942,
+        "state": "play",
+        "outside": true,
+        "scene": "outside"
+      },
+      {
+        "ms": 9.700000001117587,
+        "state": "play",
+        "outside": true,
+        "scene": "outside"
+      },
+      {
+        "ms": 9.599999999627471,
+        "state": "play",
+        "outside": true,
+        "scene": "outside"
+      },
+      {
+        "ms": 10.300000000745058,
+        "state": "play",
+        "outside": true,
+        "scene": "outside"
+      },
+      {
+        "ms": 10.699999999254942,
+        "state": "play",
+        "outside": true,
+        "scene": "outside"
+      },
+      {
+        "ms": 9.399999998509884,
+        "state": "play",
+        "outside": true,
+        "scene": "outside"
+      },
+      {
+        "ms": 9.700000001117587,
+        "state": "play",
+        "outside": true,
+        "scene": "outside"
+      },
+      {
+        "ms": 9.5,
+        "state": "play",
+        "outside": true,
+        "scene": "outside"
+      },
+      {
+        "ms": 9.300000000745058,
+        "state": "play",
+        "outside": true,
+        "scene": "outside"
+      },
+      {
+        "ms": 10.399999998509884,
+        "state": "play",
+        "outside": true,
+        "scene": "outside"
+      },
+      {
+        "ms": 9.5,
+        "state": "play",
+        "outside": true,
+        "scene": "outside"
+      },
+      {
+        "ms": 9.5,
+        "state": "play",
+        "outside": true,
+        "scene": "outside"
+      },
+      {
+        "ms": 9.599999999627471,
+        "state": "play",
+        "outside": true,
+        "scene": "outside"
+      },
+      {
+        "ms": 9.300000000745058,
+        "state": "play",
+        "outside": true,
+        "scene": "outside"
+      },
+      {
+        "ms": 9,
+        "state": "play",
+        "outside": true,
+        "scene": "outside"
+      },
+      {
+        "ms": 9.400000000372529,
+        "state": "play",
+        "outside": true,
+        "scene": "outside"
+      },
+      {
+        "ms": 9.099999999627471,
+        "state": "play",
+        "outside": true,
+        "scene": "outside"
+      },
+      {
+        "ms": 9.400000000372529,
+        "state": "play",
+        "outside": true,
+        "scene": "outside"
+      },
+      {
+        "ms": 9.400000000372529,
+        "state": "play",
+        "outside": true,
+        "scene": "outside"
+      },
+      {
+        "ms": 9.300000000745058,
+        "state": "play",
+        "outside": true,
+        "scene": "outside"
+      },
+      {
+        "ms": 9.200000001117587,
+        "state": "play",
+        "outside": true,
+        "scene": "outside"
+      },
+      {
+        "ms": 9.300000000745058,
+        "state": "play",
+        "outside": true,
+        "scene": "outside"
+      },
+      {
+        "ms": 9.5,
+        "state": "play",
+        "outside": true,
+        "scene": "outside"
+      },
+      {
+        "ms": 10.099999999627471,
+        "state": "play",
+        "outside": true,
+        "scene": "outside"
+      },
+      {
+        "ms": 10,
+        "state": "play",
+        "outside": true,
+        "scene": "outside"
+      },
+      {
+        "ms": 10.700000001117587,
+        "state": "play",
+        "outside": true,
+        "scene": "outside"
+      },
+      {
+        "ms": 11.100000001490116,
+        "state": "play",
+        "outside": true,
+        "scene": "outside"
+      },
+      {
+        "ms": 12.5,
+        "state": "play",
+        "outside": true,
+        "scene": "outside"
+      },
+      {
+        "ms": 13.099999999627471,
+        "state": "play",
+        "outside": true,
+        "scene": "outside"
+      },
+      {
+        "ms": 14.099999999627471,
+        "state": "play",
+        "outside": true,
+        "scene": "outside"
+      },
+      {
+        "ms": 12.200000001117587,
+        "state": "play",
+        "outside": true,
+        "scene": "outside"
+      },
+      {
+        "ms": 11,
+        "state": "play",
+        "outside": true,
+        "scene": "outside"
+      },
+      {
+        "ms": 10.800000000745058,
+        "state": "play",
+        "outside": true,
+        "scene": "outside"
+      },
+      {
+        "ms": 13.300000000745058,
+        "state": "play",
+        "outside": true,
+        "scene": "outside"
+      },
+      {
+        "ms": 12.799999998882413,
+        "state": "play",
+        "outside": true,
+        "scene": "outside"
+      },
+      {
+        "ms": 12.700000001117587,
+        "state": "play",
+        "outside": true,
+        "scene": "outside"
+      },
+      {
+        "ms": 13.200000001117587,
+        "state": "play",
+        "outside": true,
+        "scene": "outside"
+      },
+      {
+        "ms": 12.200000001117587,
+        "state": "play",
+        "outside": true,
+        "scene": "outside"
+      },
+      {
+        "ms": 9.900000000372529,
+        "state": "play",
+        "outside": true,
+        "scene": "outside"
+      }
+    ],
+    "enterCost": 20.300000000745058,
+    "enterDraws": [
+      {
+        "ms": 2.699999999254942,
+        "state": "play",
+        "outside": false,
+        "scene": "inside"
+      },
+      {
+        "ms": 1.900000000372529,
+        "state": "play",
+        "outside": false,
+        "scene": "inside"
+      },
+      {
+        "ms": 2.599999999627471,
+        "state": "play",
+        "outside": false,
+        "scene": "inside"
+      },
+      {
+        "ms": 2.400000000372529,
+        "state": "play",
+        "outside": false,
+        "scene": "inside"
+      },
+      {
+        "ms": 2.600000001490116,
+        "state": "play",
+        "outside": false,
+        "scene": "inside"
+      },
+      {
+        "ms": 2.5,
+        "state": "play",
+        "outside": false,
+        "scene": "inside"
+      },
+      {
+        "ms": 2.5,
+        "state": "play",
+        "outside": false,
+        "scene": "inside"
+      },
+      {
+        "ms": 2.800000000745058,
+        "state": "play",
+        "outside": false,
+        "scene": "inside"
+      },
+      {
+        "ms": 2.5,
+        "state": "play",
+        "outside": false,
+        "scene": "inside"
+      },
+      {
+        "ms": 2.900000000372529,
+        "state": "play",
+        "outside": false,
+        "scene": "inside"
+      },
+      {
+        "ms": 2.699999999254942,
+        "state": "play",
+        "outside": false,
+        "scene": "inside"
+      },
+      {
+        "ms": 2.700000001117587,
+        "state": "play",
+        "outside": false,
+        "scene": "inside"
+      },
+      {
+        "ms": 2.900000000372529,
+        "state": "play",
+        "outside": false,
+        "scene": "inside"
+      },
+      {
+        "ms": 2.600000001490116,
+        "state": "play",
+        "outside": false,
+        "scene": "inside"
+      },
+      {
+        "ms": 2.5,
+        "state": "play",
+        "outside": false,
+        "scene": "inside"
+      },
+      {
+        "ms": 2.699999999254942,
+        "state": "play",
+        "outside": false,
+        "scene": "inside"
+      },
+      {
+        "ms": 2.799999998882413,
+        "state": "play",
+        "outside": false,
+        "scene": "inside"
+      },
+      {
+        "ms": 2.700000001117587,
+        "state": "play",
+        "outside": false,
+        "scene": "inside"
+      },
+      {
+        "ms": 2.700000001117587,
+        "state": "play",
+        "outside": false,
+        "scene": "inside"
+      },
+      {
+        "ms": 2.5,
+        "state": "play",
+        "outside": false,
+        "scene": "inside"
+      },
+      {
+        "ms": 3.099999999627471,
+        "state": "play",
+        "outside": false,
+        "scene": "inside"
+      },
+      {
+        "ms": 2.299999998882413,
+        "state": "play",
+        "outside": false,
+        "scene": "inside"
+      },
+      {
+        "ms": 2.300000000745058,
+        "state": "play",
+        "outside": false,
+        "scene": "inside"
+      },
+      {
+        "ms": 2.300000000745058,
+        "state": "play",
+        "outside": false,
+        "scene": "inside"
+      },
+      {
+        "ms": 2.399999998509884,
+        "state": "play",
+        "outside": false,
+        "scene": "inside"
+      },
+      {
+        "ms": 3.399999998509884,
+        "state": "play",
+        "outside": false,
+        "scene": "inside"
+      },
+      {
+        "ms": 2.5,
+        "state": "play",
+        "outside": false,
+        "scene": "inside"
+      },
+      {
+        "ms": 2.400000000372529,
+        "state": "play",
+        "outside": false,
+        "scene": "inside"
+      },
+      {
+        "ms": 2.599999999627471,
+        "state": "play",
+        "outside": false,
+        "scene": "inside"
+      },
+      {
+        "ms": 2.699999999254942,
+        "state": "play",
+        "outside": false,
+        "scene": "inside"
+      },
+      {
+        "ms": 2.5,
+        "state": "play",
+        "outside": false,
+        "scene": "inside"
+      },
+      {
+        "ms": 2.599999999627471,
+        "state": "play",
+        "outside": false,
+        "scene": "inside"
+      },
+      {
+        "ms": 2.700000001117587,
+        "state": "play",
+        "outside": false,
+        "scene": "inside"
+      },
+      {
+        "ms": 2.300000000745058,
+        "state": "play",
+        "outside": false,
+        "scene": "inside"
+      },
+      {
+        "ms": 2.400000000372529,
+        "state": "play",
+        "outside": false,
+        "scene": "inside"
+      },
+      {
+        "ms": 2.200000001117587,
+        "state": "play",
+        "outside": false,
+        "scene": "inside"
+      },
+      {
+        "ms": 2.399999998509884,
+        "state": "play",
+        "outside": false,
+        "scene": "inside"
+      },
+      {
+        "ms": 2.400000000372529,
+        "state": "play",
+        "outside": false,
+        "scene": "inside"
+      },
+      {
+        "ms": 2.299999998882413,
+        "state": "play",
+        "outside": false,
+        "scene": "inside"
+      },
+      {
+        "ms": 2.099999999627471,
+        "state": "play",
+        "outside": false,
+        "scene": "inside"
+      },
+      {
+        "ms": 2.299999998882413,
+        "state": "play",
+        "outside": false,
+        "scene": "inside"
+      },
+      {
+        "ms": 1.900000000372529,
+        "state": "play",
+        "outside": false,
+        "scene": "inside"
+      },
+      {
+        "ms": 2.400000000372529,
+        "state": "play",
+        "outside": false,
+        "scene": "inside"
+      },
+      {
+        "ms": 2.5,
+        "state": "play",
+        "outside": false,
+        "scene": "inside"
+      },
+      {
+        "ms": 2.299999998882413,
+        "state": "play",
+        "outside": false,
+        "scene": "inside"
+      },
+      {
+        "ms": 2.400000000372529,
+        "state": "play",
+        "outside": false,
+        "scene": "inside"
+      },
+      {
+        "ms": 2.200000001117587,
+        "state": "play",
+        "outside": false,
+        "scene": "inside"
+      },
+      {
+        "ms": 2.300000000745058,
+        "state": "play",
+        "outside": false,
+        "scene": "inside"
+      },
+      {
+        "ms": 2.200000001117587,
+        "state": "play",
+        "outside": false,
+        "scene": "inside"
+      },
+      {
+        "ms": 2.400000000372529,
+        "state": "play",
+        "outside": false,
+        "scene": "inside"
+      },
+      {
+        "ms": 2.299999998882413,
+        "state": "play",
+        "outside": false,
+        "scene": "inside"
+      },
+      {
+        "ms": 2.199999999254942,
+        "state": "play",
+        "outside": false,
+        "scene": "inside"
+      },
+      {
+        "ms": 2.299999998882413,
+        "state": "play",
+        "outside": false,
+        "scene": "inside"
+      },
+      {
+        "ms": 2,
+        "state": "play",
+        "outside": false,
+        "scene": "inside"
+      },
+      {
+        "ms": 2.400000000372529,
+        "state": "play",
+        "outside": false,
+        "scene": "inside"
+      },
+      {
+        "ms": 2.300000000745058,
+        "state": "play",
+        "outside": false,
+        "scene": "inside"
+      },
+      {
+        "ms": 2.300000000745058,
+        "state": "play",
+        "outside": false,
+        "scene": "inside"
+      },
+      {
+        "ms": 2.399999998509884,
+        "state": "play",
+        "outside": false,
+        "scene": "inside"
+      },
+      {
+        "ms": 2.199999999254942,
+        "state": "play",
+        "outside": false,
+        "scene": "inside"
+      },
+      {
+        "ms": 2.200000001117587,
+        "state": "play",
+        "outside": false,
+        "scene": "inside"
+      },
+      {
+        "ms": 2.300000000745058,
+        "state": "play",
+        "outside": false,
+        "scene": "inside"
+      },
+      {
+        "ms": 2.200000001117587,
+        "state": "play",
+        "outside": false,
+        "scene": "inside"
+      }
+    ],
+    "errors": []
+  },
+  {
+    "complete": true,
+    "launch": {
+      "costs": [
+        {
+          "name": "furniture",
+          "ms": 0.10000000149011612
+        },
+        {
+          "name": "scenario",
+          "ms": 0
+        }
+      ],
+      "draws": [
+        {
+          "ms": 101.29999999888241,
+          "state": "arrival",
+          "outside": false,
+          "scene": "outside"
+        },
+        {
+          "ms": 12.400000000372529,
+          "state": "arrival",
+          "outside": false,
+          "scene": "outside"
+        },
+        {
+          "ms": 11.5,
+          "state": "arrival",
+          "outside": false,
+          "scene": "outside"
+        },
+        {
+          "ms": 10.099999999627471,
+          "state": "arrival",
+          "outside": false,
+          "scene": "outside"
+        },
+        {
+          "ms": 10.599999999627471,
+          "state": "arrival",
+          "outside": false,
+          "scene": "outside"
+        },
+        {
+          "ms": 13,
+          "state": "arrival",
+          "outside": false,
+          "scene": "outside"
+        },
+        {
+          "ms": 11.700000001117587,
+          "state": "arrival",
+          "outside": false,
+          "scene": "outside"
+        },
+        {
+          "ms": 12.699999999254942,
+          "state": "arrival",
+          "outside": false,
+          "scene": "outside"
+        },
+        {
+          "ms": 10.800000000745058,
+          "state": "arrival",
+          "outside": false,
+          "scene": "outside"
+        },
+        {
+          "ms": 11.200000001117587,
+          "state": "arrival",
+          "outside": false,
+          "scene": "outside"
+        },
+        {
+          "ms": 11.699999999254942,
+          "state": "arrival",
+          "outside": false,
+          "scene": "outside"
+        },
+        {
+          "ms": 15.100000001490116,
+          "state": "arrival",
+          "outside": false,
+          "scene": "outside"
+        },
+        {
+          "ms": 11.599999999627471,
+          "state": "arrival",
+          "outside": false,
+          "scene": "outside"
+        },
+        {
+          "ms": 13.800000000745058,
+          "state": "arrival",
+          "outside": false,
+          "scene": "outside"
+        },
+        {
+          "ms": 10.400000000372529,
+          "state": "arrival",
+          "outside": false,
+          "scene": "outside"
+        },
+        {
+          "ms": 11.5,
+          "state": "arrival",
+          "outside": false,
+          "scene": "outside"
+        },
+        {
+          "ms": 11.099999999627471,
+          "state": "arrival",
+          "outside": false,
+          "scene": "outside"
+        },
+        {
+          "ms": 10.5,
+          "state": "arrival",
+          "outside": false,
+          "scene": "outside"
+        },
+        {
+          "ms": 11.300000000745058,
+          "state": "arrival",
+          "outside": false,
+          "scene": "outside"
+        },
+        {
+          "ms": 9.099999999627471,
+          "state": "arrival",
+          "outside": false,
+          "scene": "outside"
+        },
+        {
+          "ms": 12.299999998882413,
+          "state": "arrival",
+          "outside": false,
+          "scene": "outside"
+        },
+        {
+          "ms": 11.099999999627471,
+          "state": "arrival",
+          "outside": false,
+          "scene": "outside"
+        },
+        {
+          "ms": 11.5,
+          "state": "arrival",
+          "outside": false,
+          "scene": "outside"
+        },
+        {
+          "ms": 11.199999999254942,
+          "state": "arrival",
+          "outside": false,
+          "scene": "outside"
+        },
+        {
+          "ms": 12.200000001117587,
+          "state": "arrival",
+          "outside": false,
+          "scene": "outside"
+        },
+        {
+          "ms": 9.400000000372529,
+          "state": "arrival",
+          "outside": false,
+          "scene": "outside"
+        },
+        {
+          "ms": 11.900000000372529,
+          "state": "arrival",
+          "outside": false,
+          "scene": "outside"
+        },
+        {
+          "ms": 9,
+          "state": "arrival",
+          "outside": false,
+          "scene": "outside"
+        },
+        {
+          "ms": 11.300000000745058,
+          "state": "arrival",
+          "outside": false,
+          "scene": "outside"
+        },
+        {
+          "ms": 10.300000000745058,
+          "state": "arrival",
+          "outside": false,
+          "scene": "outside"
+        },
+        {
+          "ms": 12.200000001117587,
+          "state": "arrival",
+          "outside": false,
+          "scene": "outside"
+        },
+        {
+          "ms": 9.5,
+          "state": "arrival",
+          "outside": false,
+          "scene": "outside"
+        },
+        {
+          "ms": 14.700000001117587,
+          "state": "arrival",
+          "outside": false,
+          "scene": "outside"
+        },
+        {
+          "ms": 9.700000001117587,
+          "state": "arrival",
+          "outside": false,
+          "scene": "outside"
+        },
+        {
+          "ms": 12.900000000372529,
+          "state": "arrival",
+          "outside": false,
+          "scene": "outside"
+        },
+        {
+          "ms": 12.300000000745058,
+          "state": "arrival",
+          "outside": false,
+          "scene": "outside"
+        },
+        {
+          "ms": 12.5,
+          "state": "arrival",
+          "outside": false,
+          "scene": "outside"
+        },
+        {
+          "ms": 10.5,
+          "state": "arrival",
+          "outside": false,
+          "scene": "outside"
+        },
+        {
+          "ms": 12.599999999627471,
+          "state": "arrival",
+          "outside": false,
+          "scene": "outside"
+        },
+        {
+          "ms": 10.199999999254942,
+          "state": "arrival",
+          "outside": false,
+          "scene": "outside"
+        },
+        {
+          "ms": 11.900000000372529,
+          "state": "arrival",
+          "outside": false,
+          "scene": "outside"
+        },
+        {
+          "ms": 11.900000000372529,
+          "state": "arrival",
+          "outside": false,
+          "scene": "outside"
+        },
+        {
+          "ms": 11.599999999627471,
+          "state": "arrival",
+          "outside": false,
+          "scene": "outside"
+        },
+        {
+          "ms": 12.5,
+          "state": "arrival",
+          "outside": false,
+          "scene": "outside"
+        },
+        {
+          "ms": 12.300000000745058,
+          "state": "arrival",
+          "outside": false,
+          "scene": "outside"
+        },
+        {
+          "ms": 10.200000001117587,
+          "state": "arrival",
+          "outside": false,
+          "scene": "outside"
+        },
+        {
+          "ms": 11.5,
+          "state": "arrival",
+          "outside": false,
+          "scene": "outside"
+        },
+        {
+          "ms": 11.5,
+          "state": "arrival",
+          "outside": false,
+          "scene": "outside"
+        },
+        {
+          "ms": 11.900000000372529,
+          "state": "arrival",
+          "outside": false,
+          "scene": "outside"
+        },
+        {
+          "ms": 10,
+          "state": "arrival",
+          "outside": false,
+          "scene": "outside"
+        },
+        {
+          "ms": 11.800000000745058,
+          "state": "arrival",
+          "outside": false,
+          "scene": "outside"
+        },
+        {
+          "ms": 10.700000001117587,
+          "state": "arrival",
+          "outside": false,
+          "scene": "outside"
+        },
+        {
+          "ms": 11.599999999627471,
+          "state": "arrival",
+          "outside": false,
+          "scene": "outside"
+        },
+        {
+          "ms": 12.199999999254942,
+          "state": "arrival",
+          "outside": false,
+          "scene": "outside"
+        },
+        {
+          "ms": 10.900000000372529,
+          "state": "arrival",
+          "outside": false,
+          "scene": "outside"
+        },
+        {
+          "ms": 10.600000001490116,
+          "state": "arrival",
+          "outside": false,
+          "scene": "outside"
+        },
+        {
+          "ms": 11.399999998509884,
+          "state": "arrival",
+          "outside": false,
+          "scene": "outside"
+        },
+        {
+          "ms": 10.299999998882413,
+          "state": "arrival",
+          "outside": false,
+          "scene": "outside"
+        },
+        {
+          "ms": 13.900000000372529,
+          "state": "arrival",
+          "outside": false,
+          "scene": "outside"
+        },
+        {
+          "ms": 11.900000000372529,
+          "state": "arrival",
+          "outside": false,
+          "scene": "outside"
+        },
+        {
+          "ms": 11.700000001117587,
+          "state": "arrival",
+          "outside": false,
+          "scene": "outside"
+        },
+        {
+          "ms": 11.200000001117587,
+          "state": "arrival",
+          "outside": false,
+          "scene": "outside"
+        },
+        {
+          "ms": 12.299999998882413,
+          "state": "arrival",
+          "outside": false,
+          "scene": "outside"
+        },
+        {
+          "ms": 9.800000000745058,
+          "state": "arrival",
+          "outside": false,
+          "scene": "outside"
+        },
+        {
+          "ms": 10.899999998509884,
+          "state": "arrival",
+          "outside": false,
+          "scene": "outside"
+        },
+        {
+          "ms": 10.299999998882413,
+          "state": "arrival",
+          "outside": false,
+          "scene": "outside"
+        },
+        {
+          "ms": 10.800000000745058,
+          "state": "arrival",
+          "outside": false,
+          "scene": "outside"
+        },
+        {
+          "ms": 8.400000000372529,
+          "state": "arrival",
+          "outside": false,
+          "scene": "outside"
+        },
+        {
+          "ms": 9.599999999627471,
+          "state": "arrival",
+          "outside": false,
+          "scene": "outside"
+        },
+        {
+          "ms": 8.899999998509884,
+          "state": "arrival",
+          "outside": false,
+          "scene": "outside"
+        },
+        {
+          "ms": 10.400000000372529,
+          "state": "arrival",
+          "outside": false,
+          "scene": "outside"
+        },
+        {
+          "ms": 9.5,
+          "state": "arrival",
+          "outside": false,
+          "scene": "outside"
+        },
+        {
+          "ms": 10.300000000745058,
+          "state": "arrival",
+          "outside": false,
+          "scene": "outside"
+        },
+        {
+          "ms": 10.199999999254942,
+          "state": "arrival",
+          "outside": false,
+          "scene": "outside"
+        },
+        {
+          "ms": 9.199999999254942,
+          "state": "arrival",
+          "outside": false,
+          "scene": "outside"
+        },
+        {
+          "ms": 8.099999999627471,
+          "state": "arrival",
+          "outside": false,
+          "scene": "outside"
+        },
+        {
+          "ms": 9.5,
+          "state": "arrival",
+          "outside": false,
+          "scene": "outside"
+        },
+        {
+          "ms": 8.199999999254942,
+          "state": "arrival",
+          "outside": false,
+          "scene": "outside"
+        },
+        {
+          "ms": 9.900000000372529,
+          "state": "arrival",
+          "outside": false,
+          "scene": "outside"
+        },
+        {
+          "ms": 8.200000001117587,
+          "state": "arrival",
+          "outside": false,
+          "scene": "outside"
+        },
+        {
+          "ms": 9.300000000745058,
+          "state": "arrival",
+          "outside": false,
+          "scene": "outside"
+        },
+        {
+          "ms": 7.200000001117587,
+          "state": "arrival",
+          "outside": false,
+          "scene": "outside"
+        },
+        {
+          "ms": 7.900000000372529,
+          "state": "arrival",
+          "outside": false,
+          "scene": "outside"
+        },
+        {
+          "ms": 10.5,
+          "state": "arrival",
+          "outside": false,
+          "scene": "outside"
+        },
+        {
+          "ms": 9.899999998509884,
+          "state": "arrival",
+          "outside": false,
+          "scene": "outside"
+        },
+        {
+          "ms": 9.400000000372529,
+          "state": "arrival",
+          "outside": false,
+          "scene": "outside"
+        },
+        {
+          "ms": 9.699999999254942,
+          "state": "arrival",
+          "outside": false,
+          "scene": "outside"
+        },
+        {
+          "ms": 14.5,
+          "state": "arrival",
+          "outside": false,
+          "scene": "outside"
+        },
+        {
+          "ms": 16.5,
+          "state": "arrival",
+          "outside": false,
+          "scene": "outside"
+        },
+        {
+          "ms": 15.5,
+          "state": "arrival",
+          "outside": false,
+          "scene": "outside"
+        },
+        {
+          "ms": 23.09999999962747,
+          "state": "arrival",
+          "outside": false,
+          "scene": "outside"
+        },
+        {
+          "ms": 454.7000000011176,
+          "state": "arrival",
+          "outside": false,
+          "scene": "outside"
+        },
+        {
+          "ms": 33.90000000037253,
+          "state": "arrival",
+          "outside": false,
+          "scene": "outside"
+        },
+        {
+          "ms": 19.399999998509884,
+          "state": "arrival",
+          "outside": false,
+          "scene": "outside"
+        },
+        {
+          "ms": 19,
+          "state": "arrival",
+          "outside": false,
+          "scene": "outside"
+        },
+        {
+          "ms": 21.299999998882413,
+          "state": "arrival",
+          "outside": false,
+          "scene": "outside"
+        },
+        {
+          "ms": 17.699999999254942,
+          "state": "arrival",
+          "outside": false,
+          "scene": "outside"
+        },
+        {
+          "ms": 22.800000000745058,
+          "state": "arrival",
+          "outside": false,
+          "scene": "outside"
+        },
+        {
+          "ms": 13.300000000745058,
+          "state": "arrival",
+          "outside": false,
+          "scene": "outside"
+        },
+        {
+          "ms": 13.5,
+          "state": "arrival",
+          "outside": false,
+          "scene": "outside"
+        },
+        {
+          "ms": 11.800000000745058,
+          "state": "arrival",
+          "outside": false,
+          "scene": "outside"
+        },
+        {
+          "ms": 17.59999999962747,
+          "state": "arrival",
+          "outside": false,
+          "scene": "outside"
+        },
+        {
+          "ms": 15.099999999627471,
+          "state": "arrival",
+          "outside": false,
+          "scene": "outside"
+        },
+        {
+          "ms": 15.5,
+          "state": "arrival",
+          "outside": false,
+          "scene": "outside"
+        },
+        {
+          "ms": 16.800000000745058,
+          "state": "arrival",
+          "outside": false,
+          "scene": "outside"
+        },
+        {
+          "ms": 16.299999998882413,
+          "state": "arrival",
+          "outside": false,
+          "scene": "outside"
+        },
+        {
+          "ms": 11.900000000372529,
+          "state": "arrival",
+          "outside": false,
+          "scene": "outside"
+        },
+        {
+          "ms": 14.299999998882413,
+          "state": "arrival",
+          "outside": false,
+          "scene": "outside"
+        },
+        {
+          "ms": 12.800000000745058,
+          "state": "arrival",
+          "outside": false,
+          "scene": "outside"
+        },
+        {
+          "ms": 14.800000000745058,
+          "state": "arrival",
+          "outside": false,
+          "scene": "outside"
+        },
+        {
+          "ms": 17.59999999962747,
+          "state": "arrival",
+          "outside": false,
+          "scene": "outside"
+        },
+        {
+          "ms": 13.900000000372529,
+          "state": "arrival",
+          "outside": false,
+          "scene": "outside"
+        },
+        {
+          "ms": 16.40000000037253,
+          "state": "arrival",
+          "outside": false,
+          "scene": "outside"
+        },
+        {
+          "ms": 14,
+          "state": "arrival",
+          "outside": false,
+          "scene": "outside"
+        },
+        {
+          "ms": 15.699999999254942,
+          "state": "arrival",
+          "outside": false,
+          "scene": "outside"
+        },
+        {
+          "ms": 14.800000000745058,
+          "state": "arrival",
+          "outside": false,
+          "scene": "outside"
+        },
+        {
+          "ms": 16.799999998882413,
+          "state": "arrival",
+          "outside": false,
+          "scene": "outside"
+        },
+        {
+          "ms": 17,
+          "state": "arrival",
+          "outside": false,
+          "scene": "outside"
+        },
+        {
+          "ms": 17.199999999254942,
+          "state": "arrival",
+          "outside": false,
+          "scene": "outside"
+        },
+        {
+          "ms": 14.700000001117587,
+          "state": "arrival",
+          "outside": false,
+          "scene": "outside"
+        },
+        {
+          "ms": 16.09999999962747,
+          "state": "arrival",
+          "outside": false,
+          "scene": "outside"
+        },
+        {
+          "ms": 13.299999998882413,
+          "state": "arrival",
+          "outside": false,
+          "scene": "outside"
+        },
+        {
+          "ms": 15.799999998882413,
+          "state": "arrival",
+          "outside": false,
+          "scene": "outside"
+        },
+        {
+          "ms": 16.300000000745058,
+          "state": "arrival",
+          "outside": false,
+          "scene": "outside"
+        },
+        {
+          "ms": 23.90000000037253,
+          "state": "arrival",
+          "outside": false,
+          "scene": "outside"
+        },
+        {
+          "ms": 20.700000001117587,
+          "state": "arrival",
+          "outside": false,
+          "scene": "outside"
+        },
+        {
+          "ms": 13.5,
+          "state": "arrival",
+          "outside": false,
+          "scene": "outside"
+        },
+        {
+          "ms": 17.90000000037253,
+          "state": "arrival",
+          "outside": false,
+          "scene": "outside"
+        },
+        {
+          "ms": 137.7000000011176,
+          "state": "arrival",
+          "outside": false,
+          "scene": "inside"
+        },
+        {
+          "ms": 5.599999999627471,
+          "state": "arrival",
+          "outside": false,
+          "scene": "inside"
+        },
+        {
+          "ms": 4,
+          "state": "arrival",
+          "outside": false,
+          "scene": "inside"
+        },
+        {
+          "ms": 3.400000000372529,
+          "state": "arrival",
+          "outside": false,
+          "scene": "inside"
+        },
+        {
+          "ms": 3.800000000745058,
+          "state": "arrival",
+          "outside": false,
+          "scene": "inside"
+        },
+        {
+          "ms": 3.600000001490116,
+          "state": "arrival",
+          "outside": false,
+          "scene": "inside"
+        },
+        {
+          "ms": 4.5,
+          "state": "arrival",
+          "outside": false,
+          "scene": "inside"
+        },
+        {
+          "ms": 3.300000000745058,
+          "state": "arrival",
+          "outside": false,
+          "scene": "inside"
+        },
+        {
+          "ms": 5.5,
+          "state": "arrival",
+          "outside": false,
+          "scene": "inside"
+        },
+        {
+          "ms": 2.799999998882413,
+          "state": "arrival",
+          "outside": false,
+          "scene": "inside"
+        },
+        {
+          "ms": 4,
+          "state": "arrival",
+          "outside": false,
+          "scene": "inside"
+        },
+        {
+          "ms": 4.199999999254942,
+          "state": "arrival",
+          "outside": false,
+          "scene": "inside"
+        },
+        {
+          "ms": 4.400000000372529,
+          "state": "arrival",
+          "outside": false,
+          "scene": "inside"
+        },
+        {
+          "ms": 3.200000001117587,
+          "state": "arrival",
+          "outside": false,
+          "scene": "inside"
+        },
+        {
+          "ms": 4.5,
+          "state": "arrival",
+          "outside": false,
+          "scene": "inside"
+        },
+        {
+          "ms": 3.099999999627471,
+          "state": "arrival",
+          "outside": false,
+          "scene": "inside"
+        },
+        {
+          "ms": 4.5,
+          "state": "arrival",
+          "outside": false,
+          "scene": "inside"
+        },
+        {
+          "ms": 3.400000000372529,
+          "state": "arrival",
+          "outside": false,
+          "scene": "inside"
+        },
+        {
+          "ms": 4.800000000745058,
+          "state": "arrival",
+          "outside": false,
+          "scene": "inside"
+        },
+        {
+          "ms": 3.099999999627471,
+          "state": "arrival",
+          "outside": false,
+          "scene": "inside"
+        },
+        {
+          "ms": 4.5,
+          "state": "arrival",
+          "outside": false,
+          "scene": "inside"
+        },
+        {
+          "ms": 3.299999998882413,
+          "state": "arrival",
+          "outside": false,
+          "scene": "inside"
+        },
+        {
+          "ms": 4.200000001117587,
+          "state": "arrival",
+          "outside": false,
+          "scene": "inside"
+        },
+        {
+          "ms": 2.5,
+          "state": "play",
+          "outside": false,
+          "scene": "inside"
+        }
+      ],
+      "stats": {
+        "mode": "assets",
+        "steps": [
+          {
+            "section": "shared-library",
+            "stage": "upload",
+            "milliseconds": 10.199999999254942
+          },
+          {
+            "section": "shared-library",
+            "stage": "upload",
+            "milliseconds": 31.09999999962747
+          },
+          {
+            "section": "0-central",
+            "stage": "restore",
+            "milliseconds": 1.6000000014901161
+          },
+          {
+            "section": "0-central",
+            "stage": "graphics",
+            "milliseconds": 20.09999999962747
+          },
+          {
+            "section": "0-central",
+            "stage": "furniture",
+            "milliseconds": 4.699999999254942
+          },
+          {
+            "section": "0-central",
+            "stage": "upload",
+            "milliseconds": 17.90000000037253
+          },
+          {
+            "section": "0-central",
+            "stage": "upload",
+            "milliseconds": 15.099999999627471
+          },
+          {
+            "section": "0-central",
+            "stage": "upload",
+            "milliseconds": 16.300000000745058
+          },
+          {
+            "section": "0-central",
+            "stage": "upload",
+            "milliseconds": 6.400000000372529
+          },
+          {
+            "section": "0-central",
+            "stage": "upload",
+            "milliseconds": 20.399999998509884
+          },
+          {
+            "section": "0-central",
+            "stage": "upload",
+            "milliseconds": 8
+          },
+          {
+            "section": "0-central",
+            "stage": "upload",
+            "milliseconds": 7.600000001490116
+          },
+          {
+            "section": "0-central",
+            "stage": "upload",
+            "milliseconds": 6
+          },
+          {
+            "section": "0-central",
+            "stage": "upload",
+            "milliseconds": 79.80000000074506
+          },
+          {
+            "section": "0-central",
+            "stage": "upload",
+            "milliseconds": 3.399999998509884
+          },
+          {
+            "section": "0-west",
+            "stage": "restore",
+            "milliseconds": 0.900000000372529
+          },
+          {
+            "section": "0-west",
+            "stage": "graphics",
+            "milliseconds": 0.7000000011175871
+          },
+          {
+            "section": "0-west",
+            "stage": "furniture",
+            "milliseconds": 1.599999999627471
+          },
+          {
+            "section": "0-west",
+            "stage": "upload",
+            "milliseconds": 7.199999999254942
+          },
+          {
+            "section": "0-west",
+            "stage": "upload",
+            "milliseconds": 6.400000000372529
+          },
+          {
+            "section": "0-west",
+            "stage": "upload",
+            "milliseconds": 3.399999998509884
+          },
+          {
+            "section": "0-east",
+            "stage": "restore",
+            "milliseconds": 0.5
+          },
+          {
+            "section": "0-east",
+            "stage": "graphics",
+            "milliseconds": 0.599999999627471
+          },
+          {
+            "section": "0-east",
+            "stage": "furniture",
+            "milliseconds": 1.799999998882413
+          },
+          {
+            "section": "0-east",
+            "stage": "upload",
+            "milliseconds": 6.400000000372529
+          },
+          {
+            "section": "0-east",
+            "stage": "upload",
+            "milliseconds": 3
+          },
+          {
+            "section": "1-central",
+            "stage": "restore",
+            "milliseconds": 0.2999999988824129
+          },
+          {
+            "section": "1-central",
+            "stage": "graphics",
+            "milliseconds": 0.40000000037252903
+          },
+          {
+            "section": "1-central",
+            "stage": "furniture",
+            "milliseconds": 1.700000001117587
+          },
+          {
+            "section": "1-central",
+            "stage": "upload",
+            "milliseconds": 8.599999999627471
+          },
+          {
+            "section": "1-central",
+            "stage": "upload",
+            "milliseconds": 6.699999999254942
+          },
+          {
+            "section": "1-central",
+            "stage": "upload",
+            "milliseconds": 1.599999999627471
+          },
+          {
+            "section": "2-east",
+            "stage": "restore",
+            "milliseconds": 1.200000001117587
+          },
+          {
+            "section": "2-east",
+            "stage": "graphics",
+            "milliseconds": 48.70000000111759
+          },
+          {
+            "section": "2-east",
+            "stage": "furniture",
+            "milliseconds": 0.40000000037252903
+          },
+          {
+            "section": "2-east",
+            "stage": "upload",
+            "milliseconds": 7.400000000372529
+          },
+          {
+            "section": "2-east",
+            "stage": "upload",
+            "milliseconds": 6.199999999254942
+          },
+          {
+            "section": "2-east",
+            "stage": "upload",
+            "milliseconds": 0.30000000074505806
+          },
+          {
+            "section": "3-east",
+            "stage": "restore",
+            "milliseconds": 0.30000000074505806
+          },
+          {
+            "section": "3-east",
+            "stage": "graphics",
+            "milliseconds": 1
+          },
+          {
+            "section": "3-east",
+            "stage": "furniture",
+            "milliseconds": 1.599999999627471
+          },
+          {
+            "section": "3-east",
+            "stage": "upload",
+            "milliseconds": 3.400000000372529
+          },
+          {
+            "section": "2-west",
+            "stage": "restore",
+            "milliseconds": 0.30000000074505806
+          },
+          {
+            "section": "2-west",
+            "stage": "graphics",
+            "milliseconds": 0.5
+          },
+          {
+            "section": "2-west",
+            "stage": "furniture",
+            "milliseconds": 0.19999999925494194
+          },
+          {
+            "section": "2-west",
+            "stage": "upload",
+            "milliseconds": 1.699999999254942
+          },
+          {
+            "section": "1-west",
+            "stage": "restore",
+            "milliseconds": 0.30000000074505806
+          },
+          {
+            "section": "1-west",
+            "stage": "graphics",
+            "milliseconds": 0.40000000037252903
+          },
+          {
+            "section": "1-west",
+            "stage": "furniture",
+            "milliseconds": 1.5
+          },
+          {
+            "section": "1-west",
+            "stage": "upload",
+            "milliseconds": 1.599999999627471
+          },
+          {
+            "section": "1-east",
+            "stage": "restore",
+            "milliseconds": 0.40000000037252903
+          },
+          {
+            "section": "1-east",
+            "stage": "graphics",
+            "milliseconds": 0.40000000037252903
+          },
+          {
+            "section": "1-east",
+            "stage": "furniture",
+            "milliseconds": 0.8000000007450581
+          },
+          {
+            "section": "1-east",
+            "stage": "upload",
+            "milliseconds": 2.400000000372529
+          },
+          {
+            "section": "3-west",
+            "stage": "restore",
+            "milliseconds": 0.30000000074505806
+          },
+          {
+            "section": "3-west",
+            "stage": "graphics",
+            "milliseconds": 0.30000000074505806
+          },
+          {
+            "section": "3-west",
+            "stage": "furniture",
+            "milliseconds": 0.2999999988824129
+          },
+          {
+            "section": "3-west",
+            "stage": "upload",
+            "milliseconds": 0.6999999992549419
+          }
+        ],
+        "firstReadyMilliseconds": 645.0999999996275
+      }
+    },
+    "exitCost": 2.300000000745058,
+    "exitDraws": [
+      {
+        "ms": 17.799999998882413,
+        "state": "play",
+        "outside": true,
+        "scene": "outside"
+      },
+      {
+        "ms": 16.899999998509884,
+        "state": "play",
+        "outside": true,
+        "scene": "outside"
+      },
+      {
+        "ms": 10.199999999254942,
+        "state": "play",
+        "outside": true,
+        "scene": "outside"
+      },
+      {
+        "ms": 11.599999999627471,
+        "state": "play",
+        "outside": true,
+        "scene": "outside"
+      },
+      {
+        "ms": 10.200000001117587,
+        "state": "play",
+        "outside": true,
+        "scene": "outside"
+      },
+      {
+        "ms": 13.300000000745058,
+        "state": "play",
+        "outside": true,
+        "scene": "outside"
+      },
+      {
+        "ms": 12.799999998882413,
+        "state": "play",
+        "outside": true,
+        "scene": "outside"
+      },
+      {
+        "ms": 14.699999999254942,
+        "state": "play",
+        "outside": true,
+        "scene": "outside"
+      },
+      {
+        "ms": 11.5,
+        "state": "play",
+        "outside": true,
+        "scene": "outside"
+      },
+      {
+        "ms": 14.5,
+        "state": "play",
+        "outside": true,
+        "scene": "outside"
+      },
+      {
+        "ms": 14,
+        "state": "play",
+        "outside": true,
+        "scene": "outside"
+      },
+      {
+        "ms": 14.300000000745058,
+        "state": "play",
+        "outside": true,
+        "scene": "outside"
+      },
+      {
+        "ms": 11.300000000745058,
+        "state": "play",
+        "outside": true,
+        "scene": "outside"
+      },
+      {
+        "ms": 12.900000000372529,
+        "state": "play",
+        "outside": true,
+        "scene": "outside"
+      },
+      {
+        "ms": 12,
+        "state": "play",
+        "outside": true,
+        "scene": "outside"
+      },
+      {
+        "ms": 13.100000001490116,
+        "state": "play",
+        "outside": true,
+        "scene": "outside"
+      },
+      {
+        "ms": 13,
+        "state": "play",
+        "outside": true,
+        "scene": "outside"
+      },
+      {
+        "ms": 12.800000000745058,
+        "state": "play",
+        "outside": true,
+        "scene": "outside"
+      },
+      {
+        "ms": 12.200000001117587,
+        "state": "play",
+        "outside": true,
+        "scene": "outside"
+      },
+      {
+        "ms": 13.899999998509884,
+        "state": "play",
+        "outside": true,
+        "scene": "outside"
+      },
+      {
+        "ms": 10.899999998509884,
+        "state": "play",
+        "outside": true,
+        "scene": "outside"
+      },
+      {
+        "ms": 13,
+        "state": "play",
+        "outside": true,
+        "scene": "outside"
+      },
+      {
+        "ms": 13.600000001490116,
+        "state": "play",
+        "outside": true,
+        "scene": "outside"
+      },
+      {
+        "ms": 11.400000000372529,
+        "state": "play",
+        "outside": true,
+        "scene": "outside"
+      },
+      {
+        "ms": 11.5,
+        "state": "play",
+        "outside": true,
+        "scene": "outside"
+      },
+      {
+        "ms": 12.400000000372529,
+        "state": "play",
+        "outside": true,
+        "scene": "outside"
+      },
+      {
+        "ms": 10.299999998882413,
+        "state": "play",
+        "outside": true,
+        "scene": "outside"
+      },
+      {
+        "ms": 12.700000001117587,
+        "state": "play",
+        "outside": true,
+        "scene": "outside"
+      },
+      {
+        "ms": 12.699999999254942,
+        "state": "play",
+        "outside": true,
+        "scene": "outside"
+      },
+      {
+        "ms": 12.199999999254942,
+        "state": "play",
+        "outside": true,
+        "scene": "outside"
+      },
+      {
+        "ms": 11.299999998882413,
+        "state": "play",
+        "outside": true,
+        "scene": "outside"
+      },
+      {
+        "ms": 13.099999999627471,
+        "state": "play",
+        "outside": true,
+        "scene": "outside"
+      },
+      {
+        "ms": 11.699999999254942,
+        "state": "play",
+        "outside": true,
+        "scene": "outside"
+      },
+      {
+        "ms": 12.799999998882413,
+        "state": "play",
+        "outside": true,
+        "scene": "outside"
+      },
+      {
+        "ms": 12.800000000745058,
+        "state": "play",
+        "outside": true,
+        "scene": "outside"
+      },
+      {
+        "ms": 13.900000000372529,
+        "state": "play",
+        "outside": true,
+        "scene": "outside"
+      },
+      {
+        "ms": 11.899999998509884,
+        "state": "play",
+        "outside": true,
+        "scene": "outside"
+      },
+      {
+        "ms": 13,
+        "state": "play",
+        "outside": true,
+        "scene": "outside"
+      },
+      {
+        "ms": 10.299999998882413,
+        "state": "play",
+        "outside": true,
+        "scene": "outside"
+      },
+      {
+        "ms": 12.200000001117587,
+        "state": "play",
+        "outside": true,
+        "scene": "outside"
+      },
+      {
+        "ms": 11.5,
+        "state": "play",
+        "outside": true,
+        "scene": "outside"
+      },
+      {
+        "ms": 13,
+        "state": "play",
+        "outside": true,
+        "scene": "outside"
+      },
+      {
+        "ms": 11.400000000372529,
+        "state": "play",
+        "outside": true,
+        "scene": "outside"
+      },
+      {
+        "ms": 14.900000000372529,
+        "state": "play",
+        "outside": true,
+        "scene": "outside"
+      },
+      {
+        "ms": 11.900000000372529,
+        "state": "play",
+        "outside": true,
+        "scene": "outside"
+      },
+      {
+        "ms": 13.900000000372529,
+        "state": "play",
+        "outside": true,
+        "scene": "outside"
+      },
+      {
+        "ms": 13.099999999627471,
+        "state": "play",
+        "outside": true,
+        "scene": "outside"
+      },
+      {
+        "ms": 13.100000001490116,
+        "state": "play",
+        "outside": true,
+        "scene": "outside"
+      },
+      {
+        "ms": 11.599999999627471,
+        "state": "play",
+        "outside": true,
+        "scene": "outside"
+      },
+      {
+        "ms": 13.299999998882413,
+        "state": "play",
+        "outside": true,
+        "scene": "outside"
+      },
+      {
+        "ms": 10.5,
+        "state": "play",
+        "outside": true,
+        "scene": "outside"
+      },
+      {
+        "ms": 14.400000000372529,
+        "state": "play",
+        "outside": true,
+        "scene": "outside"
+      },
+      {
+        "ms": 16.5,
+        "state": "play",
+        "outside": true,
+        "scene": "outside"
+      },
+      {
+        "ms": 13.299999998882413,
+        "state": "play",
+        "outside": true,
+        "scene": "outside"
+      },
+      {
+        "ms": 16.5,
+        "state": "play",
+        "outside": true,
+        "scene": "outside"
+      },
+      {
+        "ms": 12.400000000372529,
+        "state": "play",
+        "outside": true,
+        "scene": "outside"
+      },
+      {
+        "ms": 14.200000001117587,
+        "state": "play",
+        "outside": true,
+        "scene": "outside"
+      },
+      {
+        "ms": 13,
+        "state": "play",
+        "outside": true,
+        "scene": "outside"
+      },
+      {
+        "ms": 11.099999999627471,
+        "state": "play",
+        "outside": true,
+        "scene": "outside"
+      },
+      {
+        "ms": 13.200000001117587,
+        "state": "play",
+        "outside": true,
+        "scene": "outside"
+      },
+      {
+        "ms": 13.599999999627471,
+        "state": "play",
+        "outside": true,
+        "scene": "outside"
+      }
+    ],
+    "enterCost": 22.5,
+    "enterDraws": [
+      {
+        "ms": 16.59999999962747,
+        "state": "play",
+        "outside": true,
+        "scene": "outside"
+      },
+      {
+        "ms": 3.400000000372529,
+        "state": "play",
+        "outside": false,
+        "scene": "inside"
+      },
+      {
+        "ms": 3.199999999254942,
+        "state": "play",
+        "outside": false,
+        "scene": "inside"
+      },
+      {
+        "ms": 3.299999998882413,
+        "state": "play",
+        "outside": false,
+        "scene": "inside"
+      },
+      {
+        "ms": 3.600000001490116,
+        "state": "play",
+        "outside": false,
+        "scene": "inside"
+      },
+      {
+        "ms": 4.099999999627471,
+        "state": "play",
+        "outside": false,
+        "scene": "inside"
+      },
+      {
+        "ms": 3.900000000372529,
+        "state": "play",
+        "outside": false,
+        "scene": "inside"
+      },
+      {
+        "ms": 3.099999999627471,
+        "state": "play",
+        "outside": false,
+        "scene": "inside"
+      },
+      {
+        "ms": 3.599999999627471,
+        "state": "play",
+        "outside": false,
+        "scene": "inside"
+      },
+      {
+        "ms": 3.400000000372529,
+        "state": "play",
+        "outside": false,
+        "scene": "inside"
+      },
+      {
+        "ms": 3.599999999627471,
+        "state": "play",
+        "outside": false,
+        "scene": "inside"
+      },
+      {
+        "ms": 3.099999999627471,
+        "state": "play",
+        "outside": false,
+        "scene": "inside"
+      },
+      {
+        "ms": 3.099999999627471,
+        "state": "play",
+        "outside": false,
+        "scene": "inside"
+      },
+      {
+        "ms": 3.299999998882413,
+        "state": "play",
+        "outside": false,
+        "scene": "inside"
+      },
+      {
+        "ms": 4.300000000745058,
+        "state": "play",
+        "outside": false,
+        "scene": "inside"
+      },
+      {
+        "ms": 4.400000000372529,
+        "state": "play",
+        "outside": false,
+        "scene": "inside"
+      },
+      {
+        "ms": 2.800000000745058,
+        "state": "play",
+        "outside": false,
+        "scene": "inside"
+      },
+      {
+        "ms": 3.200000001117587,
+        "state": "play",
+        "outside": false,
+        "scene": "inside"
+      },
+      {
+        "ms": 3.400000000372529,
+        "state": "play",
+        "outside": false,
+        "scene": "inside"
+      },
+      {
+        "ms": 3.5,
+        "state": "play",
+        "outside": false,
+        "scene": "inside"
+      },
+      {
+        "ms": 3.5,
+        "state": "play",
+        "outside": false,
+        "scene": "inside"
+      },
+      {
+        "ms": 2.700000001117587,
+        "state": "play",
+        "outside": false,
+        "scene": "inside"
+      },
+      {
+        "ms": 3,
+        "state": "play",
+        "outside": false,
+        "scene": "inside"
+      },
+      {
+        "ms": 2.5,
+        "state": "play",
+        "outside": false,
+        "scene": "inside"
+      },
+      {
+        "ms": 2.900000000372529,
+        "state": "play",
+        "outside": false,
+        "scene": "inside"
+      },
+      {
+        "ms": 2.900000000372529,
+        "state": "play",
+        "outside": false,
+        "scene": "inside"
+      },
+      {
+        "ms": 3.299999998882413,
+        "state": "play",
+        "outside": false,
+        "scene": "inside"
+      },
+      {
+        "ms": 2.699999999254942,
+        "state": "play",
+        "outside": false,
+        "scene": "inside"
+      },
+      {
+        "ms": 4.399999998509884,
+        "state": "play",
+        "outside": false,
+        "scene": "inside"
+      },
+      {
+        "ms": 3.599999999627471,
+        "state": "play",
+        "outside": false,
+        "scene": "inside"
+      },
+      {
+        "ms": 3.199999999254942,
+        "state": "play",
+        "outside": false,
+        "scene": "inside"
+      },
+      {
+        "ms": 3.400000000372529,
+        "state": "play",
+        "outside": false,
+        "scene": "inside"
+      },
+      {
+        "ms": 3.599999999627471,
+        "state": "play",
+        "outside": false,
+        "scene": "inside"
+      },
+      {
+        "ms": 3.099999999627471,
+        "state": "play",
+        "outside": false,
+        "scene": "inside"
+      },
+      {
+        "ms": 2.900000000372529,
+        "state": "play",
+        "outside": false,
+        "scene": "inside"
+      },
+      {
+        "ms": 2.399999998509884,
+        "state": "play",
+        "outside": false,
+        "scene": "inside"
+      },
+      {
+        "ms": 2.400000000372529,
+        "state": "play",
+        "outside": false,
+        "scene": "inside"
+      },
+      {
+        "ms": 2.900000000372529,
+        "state": "play",
+        "outside": false,
+        "scene": "inside"
+      },
+      {
+        "ms": 2.599999999627471,
+        "state": "play",
+        "outside": false,
+        "scene": "inside"
+      },
+      {
+        "ms": 2.5,
+        "state": "play",
+        "outside": false,
+        "scene": "inside"
+      },
+      {
+        "ms": 2.900000000372529,
+        "state": "play",
+        "outside": false,
+        "scene": "inside"
+      },
+      {
+        "ms": 2.599999999627471,
+        "state": "play",
+        "outside": false,
+        "scene": "inside"
+      },
+      {
+        "ms": 3.199999999254942,
+        "state": "play",
+        "outside": false,
+        "scene": "inside"
+      },
+      {
+        "ms": 3.200000001117587,
+        "state": "play",
+        "outside": false,
+        "scene": "inside"
+      },
+      {
+        "ms": 2.699999999254942,
+        "state": "play",
+        "outside": false,
+        "scene": "inside"
+      },
+      {
+        "ms": 2.599999999627471,
+        "state": "play",
+        "outside": false,
+        "scene": "inside"
+      },
+      {
+        "ms": 4.099999999627471,
+        "state": "play",
+        "outside": false,
+        "scene": "inside"
+      },
+      {
+        "ms": 3.399999998509884,
+        "state": "play",
+        "outside": false,
+        "scene": "inside"
+      },
+      {
+        "ms": 3.099999999627471,
+        "state": "play",
+        "outside": false,
+        "scene": "inside"
+      },
+      {
+        "ms": 3.599999999627471,
+        "state": "play",
+        "outside": false,
+        "scene": "inside"
+      },
+      {
+        "ms": 4,
+        "state": "play",
+        "outside": false,
+        "scene": "inside"
+      },
+      {
+        "ms": 3.599999999627471,
+        "state": "play",
+        "outside": false,
+        "scene": "inside"
+      },
+      {
+        "ms": 3.800000000745058,
+        "state": "play",
+        "outside": false,
+        "scene": "inside"
+      },
+      {
+        "ms": 3.300000000745058,
+        "state": "play",
+        "outside": false,
+        "scene": "inside"
+      },
+      {
+        "ms": 9.100000001490116,
+        "state": "play",
+        "outside": false,
+        "scene": "inside"
+      },
+      {
+        "ms": 4.700000001117587,
+        "state": "play",
+        "outside": false,
+        "scene": "inside"
+      },
+      {
+        "ms": 4.299999998882413,
+        "state": "play",
+        "outside": false,
+        "scene": "inside"
+      },
+      {
+        "ms": 4.199999999254942,
+        "state": "play",
+        "outside": false,
+        "scene": "inside"
+      },
+      {
+        "ms": 4.5,
+        "state": "play",
+        "outside": false,
+        "scene": "inside"
+      },
+      {
+        "ms": 6.700000001117587,
+        "state": "play",
+        "outside": false,
+        "scene": "inside"
+      },
+      {
+        "ms": 4.300000000745058,
+        "state": "play",
+        "outside": false,
+        "scene": "inside"
+      },
+      {
+        "ms": 3.599999999627471,
+        "state": "play",
+        "outside": false,
+        "scene": "inside"
+      },
+      {
+        "ms": 2.599999999627471,
+        "state": "play",
+        "outside": false,
+        "scene": "inside"
+      }
+    ],
+    "errors": []
+  }
+]

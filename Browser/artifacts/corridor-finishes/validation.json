@@ -1,0 +1,1163 @@
+{
+  "result": {
+    "renderer": "ANGLE (NVIDIA, NVIDIA GeForce RTX 3090 Ti (0x00002203) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+    "cx": 154.773125,
+    "ceilings": [
+      {
+        "id": "gallery",
+        "y": 5.0500000000000025
+      },
+      {
+        "id": "admin",
+        "y": 5.049999999999999
+      },
+      {
+        "id": "irby",
+        "y": 5.050000000000004
+      },
+      {
+        "id": "diagonal",
+        "y": 5.050000000000009
+      },
+      {
+        "id": "grafton",
+        "y": 5.050000000000009
+      },
+      {
+        "id": "witby",
+        "y": 5.0500000000000105
+      },
+      {
+        "id": "hale-0",
+        "y": 5.050000000000004
+      },
+      {
+        "id": "hale-1",
+        "y": 5.050000000000006
+      }
+    ],
+    "seams": [
+      {
+        "z": -36.4,
+        "samples": [
+          {
+            "x": 153.2050018310547,
+            "z": -36.425,
+            "u": -18.2125,
+            "name": "Aerial batch · Tower corridor and three workshops · 791"
+          },
+          {
+            "x": 153.2050018310547,
+            "z": -36.375,
+            "u": -18.1875,
+            "name": "Aerial batch · Tower corridor and three workshops · 791"
+          }
+        ]
+      },
+      {
+        "z": -26.9,
+        "samples": [
+          {
+            "x": 153.2050018310547,
+            "z": -26.924999999999997,
+            "u": -13.462499999999999,
+            "name": "Aerial batch · Tower corridor and three workshops · 791"
+          },
+          {
+            "x": 153.2050018310547,
+            "z": -26.875,
+            "u": -13.4375,
+            "name": "Aerial batch · Tower corridor and three workshops · 791"
+          }
+        ]
+      },
+      {
+        "z": -26.6,
+        "samples": [
+          {
+            "x": 153.2050018310547,
+            "z": -26.625,
+            "u": -13.3125,
+            "name": "Aerial batch · Tower corridor and three workshops · 791"
+          },
+          {
+            "x": 153.20500000178814,
+            "z": -26.575000000000003,
+            "u": -13.287500190734868,
+            "name": "Workshop arched painted lining"
+          }
+        ]
+      }
+    ],
+    "fittings": [
+      {
+        "fixture": "Corridor ceiling lamp",
+        "x": 154.773125,
+        "y": 4.609999999999999,
+        "z": 20.4,
+        "intensity": 22,
+        "position": [
+          154.773125,
+          4.609999999999999,
+          20.4
+        ]
+      },
+      {
+        "fixture": "Corridor ceiling lamp",
+        "x": 154.773125,
+        "y": 4.609999999999999,
+        "z": 10.4,
+        "intensity": 22,
+        "position": [
+          154.773125,
+          4.609999999999999,
+          10.4
+        ]
+      },
+      {
+        "fixture": "Corridor ceiling lamp",
+        "x": 154.773125,
+        "y": 4.609999999999999,
+        "z": 0.3999999999999986,
+        "intensity": 22,
+        "position": [
+          154.773125,
+          4.609999999999999,
+          0.3999999999999986
+        ]
+      },
+      {
+        "fixture": "Corridor ceiling lamp",
+        "x": 154.773125,
+        "y": 4.609999999999999,
+        "z": -9.600000000000001,
+        "intensity": 22,
+        "position": [
+          154.773125,
+          4.609999999999999,
+          -9.600000000000001
+        ]
+      },
+      {
+        "fixture": "Corridor ceiling lamp",
+        "x": 154.773125,
+        "y": 4.609999999999999,
+        "z": -19.6,
+        "intensity": 22,
+        "position": [
+          154.773125,
+          4.609999999999999,
+          -19.6
+        ]
+      },
+      {
+        "fixture": "Corridor ceiling lamp",
+        "x": 154.773125,
+        "y": 4.609999999999999,
+        "z": -79.6,
+        "intensity": 22,
+        "position": [
+          154.773125,
+          4.609999999999999,
+          -79.6
+        ]
+      },
+      {
+        "fixture": "Corridor ceiling lamp",
+        "x": 154.773125,
+        "y": 4.609999999999999,
+        "z": -89.60000000000002,
+        "intensity": 22,
+        "position": [
+          154.773125,
+          4.609999999999999,
+          -89.60000000000002
+        ]
+      },
+      {
+        "fixture": "Corridor ceiling lamp",
+        "x": 154.773125,
+        "y": 4.609999999999999,
+        "z": -99.60000000000002,
+        "intensity": 22,
+        "position": [
+          154.773125,
+          4.609999999999999,
+          -99.60000000000002
+        ]
+      },
+      {
+        "fixture": "Corridor ceiling lamp",
+        "x": 154.773125,
+        "y": 4.609999999999999,
+        "z": -109.6,
+        "intensity": 22,
+        "position": [
+          154.773125,
+          4.609999999999999,
+          -109.6
+        ]
+      },
+      {
+        "fixture": "Corridor ceiling lamp",
+        "x": 154.773125,
+        "y": 4.609999999999999,
+        "z": -119.6,
+        "intensity": 22,
+        "position": [
+          154.773125,
+          4.609999999999999,
+          -119.6
+        ]
+      },
+      {
+        "fixture": "Corridor ceiling lamp",
+        "x": 125.5,
+        "y": 4.609999999999999,
+        "z": 9.8,
+        "intensity": 22,
+        "position": [
+          125.5,
+          4.609999999999999,
+          9.8
+        ]
+      },
+      {
+        "fixture": "Corridor ceiling lamp",
+        "x": 135.5,
+        "y": 4.609999999999999,
+        "z": 9.8,
+        "intensity": 22,
+        "position": [
+          135.5,
+          4.609999999999999,
+          9.8
+        ]
+      },
+      {
+        "fixture": "Corridor ceiling lamp",
+        "x": 145.5,
+        "y": 4.609999999999999,
+        "z": 9.8,
+        "intensity": 22,
+        "position": [
+          145.5,
+          4.609999999999999,
+          9.8
+        ]
+      },
+      {
+        "fixture": "Corridor ceiling lamp",
+        "x": 168.773125,
+        "y": 4.609999999999999,
+        "z": -66.6,
+        "intensity": 22,
+        "position": [
+          168.773125,
+          4.609999999999999,
+          -66.6
+        ]
+      },
+      {
+        "fixture": "Corridor ceiling lamp",
+        "x": 178.773125,
+        "y": 4.609999999999999,
+        "z": -66.6,
+        "intensity": 22,
+        "position": [
+          178.773125,
+          4.609999999999999,
+          -66.6
+        ]
+      },
+      {
+        "fixture": "Corridor ceiling lamp",
+        "x": 188.773125,
+        "y": 4.609999999999999,
+        "z": -66.6,
+        "intensity": 22,
+        "position": [
+          188.773125,
+          4.609999999999999,
+          -66.6
+        ]
+      },
+      {
+        "fixture": "Corridor ceiling lamp",
+        "x": 198.773125,
+        "y": 4.609999999999999,
+        "z": -66.6,
+        "intensity": 22,
+        "position": [
+          198.773125,
+          4.609999999999999,
+          -66.6
+        ]
+      },
+      {
+        "fixture": "Corridor ceiling lamp",
+        "x": 153.47157287525383,
+        "y": 4.609999999999999,
+        "z": -119.92842712474618,
+        "intensity": 22,
+        "position": [
+          153.47157287525383,
+          4.609999999999999,
+          -119.92842712474618
+        ]
+      },
+      {
+        "fixture": "Corridor ceiling lamp",
+        "x": 146.40050506338835,
+        "y": 4.609999999999999,
+        "z": -126.99949493661165,
+        "intensity": 22,
+        "position": [
+          146.40050506338835,
+          4.609999999999999,
+          -126.99949493661165
+        ]
+      },
+      {
+        "fixture": "Corridor ceiling lamp",
+        "x": 139.32943725152288,
+        "y": 4.609999999999999,
+        "z": -134.07056274847713,
+        "intensity": 22,
+        "position": [
+          139.32943725152288,
+          4.609999999999999,
+          -134.07056274847713
+        ]
+      },
+      {
+        "fixture": "Corridor ceiling lamp",
+        "x": 125.18730162779192,
+        "y": 4.609999999999999,
+        "z": -148.21269837220808,
+        "intensity": 22,
+        "position": [
+          125.18730162779192,
+          4.609999999999999,
+          -148.21269837220808
+        ]
+      },
+      {
+        "fixture": "Corridor ceiling lamp",
+        "x": 111.04516600406097,
+        "y": 4.609999999999999,
+        "z": -162.35483399593903,
+        "intensity": 22,
+        "position": [
+          111.04516600406097,
+          4.609999999999999,
+          -162.35483399593903
+        ]
+      },
+      {
+        "fixture": "Corridor ceiling lamp",
+        "x": 103.9740981921955,
+        "y": 4.609999999999999,
+        "z": -169.4259018078045,
+        "intensity": 22,
+        "position": [
+          103.9740981921955,
+          4.609999999999999,
+          -169.4259018078045
+        ]
+      },
+      {
+        "fixture": "Corridor ceiling lamp",
+        "x": 116.51027118644066,
+        "y": 4.609999999999999,
+        "z": -142.88972881355932,
+        "intensity": 22,
+        "position": [
+          116.51027118644066,
+          4.609999999999999,
+          -142.88972881355932
+        ]
+      },
+      {
+        "fixture": "Corridor ceiling lamp",
+        "x": 115.60000000000001,
+        "y": 4.609999999999999,
+        "z": -161.79999999999995,
+        "intensity": 22,
+        "position": [
+          115.60000000000001,
+          4.609999999999999,
+          -161.79999999999995
+        ]
+      },
+      {
+        "fixture": "Corridor ceiling lamp",
+        "x": 115.60000000000001,
+        "y": 4.609999999999999,
+        "z": -171.79999999999995,
+        "intensity": 22,
+        "position": [
+          115.60000000000001,
+          4.609999999999999,
+          -171.79999999999995
+        ]
+      },
+      {
+        "fixture": "Corridor ceiling lamp",
+        "x": 115.60000000000001,
+        "y": 4.609999999999999,
+        "z": -181.79999999999995,
+        "intensity": 22,
+        "position": [
+          115.60000000000001,
+          4.609999999999999,
+          -181.79999999999995
+        ]
+      },
+      {
+        "fixture": "Corridor ceiling lamp",
+        "x": 150.773125,
+        "y": 4.609999999999999,
+        "z": -72.855,
+        "intensity": 22,
+        "position": [
+          150.773125,
+          4.609999999999999,
+          -72.855
+        ]
+      },
+      {
+        "fixture": "Corridor ceiling lamp",
+        "x": 150.773125,
+        "y": 4.609999999999999,
+        "z": -95.405,
+        "intensity": 22,
+        "position": [
+          150.773125,
+          4.609999999999999,
+          -95.405
+        ]
+      },
+      {
+        "fixture": "Workshop ceiling lamp",
+        "x": 149.25,
+        "y": 4.609999999999999,
+        "z": -39.5,
+        "intensity": 22,
+        "position": [
+          149.25,
+          4.609999999999999,
+          -39.5
+        ]
+      },
+      {
+        "fixture": "Workshop ceiling lamp",
+        "x": 154.773125,
+        "y": 4.609999999999999,
+        "z": -50.5,
+        "intensity": 22,
+        "position": [
+          154.773125,
+          4.609999999999999,
+          -50.5
+        ]
+      },
+      {
+        "fixture": "Workshop ceiling lamp",
+        "x": 165,
+        "y": 4.609999999999999,
+        "z": -47.5,
+        "intensity": 22,
+        "position": [
+          165,
+          4.609999999999999,
+          -47.5
+        ]
+      },
+      {
+        "fixture": "Workshop ceiling lamp",
+        "x": 173,
+        "y": 4.609999999999999,
+        "z": -54,
+        "intensity": 22,
+        "position": [
+          173,
+          4.609999999999999,
+          -54
+        ]
+      },
+      {
+        "fixture": "Workshop ceiling lamp",
+        "x": 164,
+        "y": 4.609999999999999,
+        "z": -56.5,
+        "intensity": 22,
+        "position": [
+          164,
+          4.609999999999999,
+          -56.5
+        ]
+      },
+      {
+        "fixture": "Workshop ceiling lamp",
+        "x": 149.25,
+        "y": 4.609999999999999,
+        "z": -30.5,
+        "intensity": 22,
+        "position": [
+          149.25,
+          4.609999999999999,
+          -30.5
+        ]
+      }
+    ],
+    "signs": [
+      {
+        "id": "admin",
+        "run": "gallery",
+        "point": [
+          154.773125,
+          7
+        ],
+        "forward": [
+          0,
+          1
+        ],
+        "routes": [
+          [
+            "Main/admin",
+            [
+              0,
+              1
+            ]
+          ],
+          [
+            "Redesmere",
+            [
+              -1,
+              0
+            ]
+          ],
+          [
+            "Hospital kitchen",
+            [
+              -1,
+              0
+            ]
+          ]
+        ],
+        "lines": [
+          "↑  Main/admin",
+          "→  Redesmere",
+          "→  Hospital kitchen"
+        ],
+        "backLines": [
+          "↑  Farndon",
+          "↑  Tower workshops",
+          "↑  Irby / Ashley",
+          "←  Redesmere"
+        ],
+        "backRoutes": [
+          [
+            "Farndon",
+            [
+              0,
+              -1
+            ]
+          ],
+          [
+            "Tower workshops",
+            [
+              0,
+              -1
+            ]
+          ],
+          [
+            "Irby / Ashley",
+            [
+              0,
+              -1
+            ]
+          ],
+          [
+            "Redesmere",
+            [
+              -1,
+              0
+            ]
+          ]
+        ]
+      },
+      {
+        "id": "workshops",
+        "run": "gallery",
+        "point": [
+          154.773125,
+          -38.5
+        ],
+        "forward": [
+          0,
+          -1
+        ],
+        "routes": [
+          [
+            "Farndon",
+            [
+              0,
+              -1
+            ]
+          ],
+          [
+            "Irby / Ashley",
+            [
+              0,
+              -1
+            ]
+          ],
+          [
+            "Repair workshop",
+            [
+              -1,
+              0
+            ]
+          ],
+          [
+            "Machine workshop",
+            [
+              1,
+              0
+            ]
+          ]
+        ],
+        "lines": [
+          "↑  Farndon",
+          "↑  Irby / Ashley",
+          "←  Repair workshop",
+          "→  Machine workshop"
+        ],
+        "backLines": [
+          "↑  Main/admin",
+          "↑  Redesmere",
+          "→  Repair workshop",
+          "←  Machine workshop"
+        ],
+        "backRoutes": [
+          [
+            "Main/admin",
+            [
+              0,
+              1
+            ]
+          ],
+          [
+            "Redesmere",
+            [
+              0,
+              1
+            ]
+          ],
+          [
+            "Repair workshop",
+            [
+              -1,
+              0
+            ]
+          ],
+          [
+            "Machine workshop",
+            [
+              1,
+              0
+            ]
+          ]
+        ]
+      },
+      {
+        "id": "irby-west",
+        "run": "gallery",
+        "point": [
+          154.773125,
+          -69.5
+        ],
+        "forward": [
+          0,
+          1
+        ],
+        "routes": [
+          [
+            "Tower workshops",
+            [
+              0,
+              1
+            ]
+          ],
+          [
+            "Main/admin",
+            [
+              0,
+              1
+            ]
+          ],
+          [
+            "Irby / Ashley",
+            [
+              1,
+              0
+            ]
+          ]
+        ],
+        "lines": [
+          "↑  Tower workshops",
+          "↑  Main/admin",
+          "←  Irby / Ashley"
+        ],
+        "backLines": [
+          "↑  Farndon",
+          "↑  Hale / Daresbury",
+          "→  Irby / Ashley"
+        ],
+        "backRoutes": [
+          [
+            "Farndon",
+            [
+              0,
+              -1
+            ]
+          ],
+          [
+            "Hale / Daresbury",
+            [
+              0,
+              -1
+            ]
+          ],
+          [
+            "Irby / Ashley",
+            [
+              1,
+              0
+            ]
+          ]
+        ]
+      },
+      {
+        "id": "irby-east",
+        "run": "irby",
+        "point": [
+          158.773125,
+          -66.6
+        ],
+        "forward": [
+          -1,
+          0
+        ],
+        "routes": [
+          [
+            "Tower workshops",
+            [
+              0,
+              1
+            ]
+          ],
+          [
+            "Farndon",
+            [
+              0,
+              -1
+            ]
+          ],
+          [
+            "Hale / Daresbury",
+            [
+              0,
+              -1
+            ]
+          ]
+        ],
+        "lines": [
+          "←  Tower workshops",
+          "→  Farndon",
+          "→  Hale / Daresbury"
+        ],
+        "backLines": [
+          "↑  Irby / Ashley",
+          "→  Tower workshops",
+          "←  Farndon"
+        ],
+        "backRoutes": [
+          [
+            "Irby / Ashley",
+            [
+              1,
+              0
+            ]
+          ],
+          [
+            "Tower workshops",
+            [
+              0,
+              1
+            ]
+          ],
+          [
+            "Farndon",
+            [
+              0,
+              -1
+            ]
+          ]
+        ]
+      },
+      {
+        "id": "hale",
+        "run": "hale-1",
+        "point": [
+          142,
+          -95.405
+        ],
+        "forward": [
+          1,
+          0
+        ],
+        "routes": [
+          [
+            "Farndon",
+            [
+              0,
+              -1
+            ]
+          ],
+          [
+            "Tower workshops",
+            [
+              0,
+              1
+            ]
+          ],
+          [
+            "Irby / Ashley",
+            [
+              0,
+              1
+            ]
+          ]
+        ],
+        "lines": [
+          "←  Farndon",
+          "→  Tower workshops",
+          "→  Irby / Ashley"
+        ],
+        "backLines": [
+          "↑  Hale / Daresbury / Huxley / Dunham",
+          "→  Farndon",
+          "←  Tower workshops"
+        ],
+        "backRoutes": [
+          [
+            "Hale / Daresbury / Huxley / Dunham",
+            [
+              -1,
+              0
+            ]
+          ],
+          [
+            "Farndon",
+            [
+              0,
+              -1
+            ]
+          ],
+          [
+            "Tower workshops",
+            [
+              0,
+              1
+            ]
+          ]
+        ]
+      },
+      {
+        "id": "farndon",
+        "run": "gallery",
+        "point": [
+          154.773125,
+          -122
+        ],
+        "forward": [
+          0,
+          1
+        ],
+        "routes": [
+          [
+            "Main/admin",
+            [
+              0,
+              1
+            ]
+          ],
+          [
+            "Tower workshops",
+            [
+              0,
+              1
+            ]
+          ],
+          [
+            "Upton / Frith / Oscroft",
+            [
+              -1,
+              0
+            ]
+          ],
+          [
+            "Grafton / Edge",
+            [
+              -1,
+              0
+            ]
+          ]
+        ],
+        "lines": [
+          "↑  Main/admin",
+          "↑  Tower workshops",
+          "→  Upton / Frith / Oscroft",
+          "→  Grafton / Edge"
+        ],
+        "backLines": [
+          "↑  Farndon",
+          "←  Upton / Frith / Oscroft",
+          "←  Grafton / Edge"
+        ],
+        "backRoutes": [
+          [
+            "Farndon",
+            [
+              0,
+              -1
+            ]
+          ],
+          [
+            "Upton / Frith / Oscroft",
+            [
+              -1,
+              0
+            ]
+          ],
+          [
+            "Grafton / Edge",
+            [
+              -1,
+              0
+            ]
+          ]
+        ]
+      },
+      {
+        "id": "grafton-spine",
+        "run": "diagonal",
+        "point": [
+          133,
+          -140.4
+        ],
+        "forward": [
+          -0.7071067811865476,
+          -0.7071067811865476
+        ],
+        "routes": [
+          [
+            "Grafton / Edge",
+            [
+              -1,
+              0
+            ]
+          ],
+          [
+            "Witby",
+            [
+              -1,
+              -1
+            ]
+          ],
+          [
+            "Upton / Frith / Oscroft",
+            [
+              -1,
+              -1
+            ]
+          ]
+        ],
+        "lines": [
+          "←  Grafton / Edge",
+          "↑  Witby",
+          "↑  Upton / Frith / Oscroft"
+        ],
+        "backLines": [
+          "↑  Farndon",
+          "↑  Tower workshops",
+          "→  Grafton / Edge"
+        ],
+        "backRoutes": [
+          [
+            "Farndon",
+            [
+              1,
+              1
+            ]
+          ],
+          [
+            "Tower workshops",
+            [
+              1,
+              1
+            ]
+          ],
+          [
+            "Grafton / Edge",
+            [
+              -1,
+              0
+            ]
+          ]
+        ]
+      },
+      {
+        "id": "grafton-branch",
+        "run": "grafton",
+        "point": [
+          126,
+          -142.88972881355932
+        ],
+        "forward": [
+          1,
+          0
+        ],
+        "routes": [
+          [
+            "Farndon",
+            [
+              1,
+              1
+            ]
+          ],
+          [
+            "Witby",
+            [
+              -1,
+              -1
+            ]
+          ],
+          [
+            "Upton / Frith / Oscroft",
+            [
+              -1,
+              -1
+            ]
+          ]
+        ],
+        "lines": [
+          "→  Farndon",
+          "←  Witby",
+          "←  Upton / Frith / Oscroft"
+        ],
+        "backLines": [
+          "←  Farndon",
+          "→  Witby",
+          "→  Upton / Frith / Oscroft"
+        ],
+        "backRoutes": [
+          [
+            "Farndon",
+            [
+              1,
+              1
+            ]
+          ],
+          [
+            "Witby",
+            [
+              -1,
+              -1
+            ]
+          ],
+          [
+            "Upton / Frith / Oscroft",
+            [
+              -1,
+              -1
+            ]
+          ]
+        ]
+      },
+      {
+        "id": "witby",
+        "run": "diagonal",
+        "point": [
+          118.5,
+          -154.9
+        ],
+        "forward": [
+          -0.7071067811865476,
+          -0.7071067811865476
+        ],
+        "routes": [
+          [
+            "Witby",
+            [
+              0,
+              -1
+            ]
+          ],
+          [
+            "Upton",
+            [
+              -1,
+              -1
+            ]
+          ],
+          [
+            "Frith / Oscroft",
+            [
+              -1,
+              -1
+            ]
+          ]
+        ],
+        "lines": [
+          "→  Witby",
+          "↑  Upton",
+          "↑  Frith / Oscroft"
+        ],
+        "backLines": [
+          "↑  Farndon",
+          "↑  Grafton / Edge",
+          "←  Witby"
+        ],
+        "backRoutes": [
+          [
+            "Farndon",
+            [
+              1,
+              1
+            ]
+          ],
+          [
+            "Grafton / Edge",
+            [
+              1,
+              1
+            ]
+          ],
+          [
+            "Witby",
+            [
+              0,
+              -1
+            ]
+          ]
+        ]
+      }
+    ],
+    "poolSize": 12
+  },
+  "errors": []
+}

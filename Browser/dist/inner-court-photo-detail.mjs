@@ -50,7 +50,7 @@ export function addInnerCourtPhotoDetails(THREE,{model,box,mesh,worldUV,white,br
     for(const x of [28.8,33.2])sash('inner-block-basement',x,1.1,-35.57,Math.PI,1.2,1.2);
     for(const x of [27,31,35])sash('inner-block-north',x,6.35,-35.57,Math.PI,1.22,2.5);
     for(const x of [27,31,35])sash('inner-stair-north',x,11.55,profile.join-.07,Math.PI,x===31?2.05:1.12,2.7);
-    for(const x of [28.8,36.8])box(iron,x,4.1,-35.8,.09,8.2,.09);
+    for(const x of [28.8,36.8])box(iron,x,4.1,-35.8,.09,8.2,.09,0,true);
   }
   for(const y of [1.1,6.35])sash('inner-annex-west',24.43,y,-33.3,-Math.PI/2,1.35,y===1.1?1.2:2.5);
   for(const y of [1.1,4.15,7.9])sash('inner-block-west',24.43,y,-33.3+profile.stairShift,-Math.PI/2,1.1,y===1.1?1.4:2.2);

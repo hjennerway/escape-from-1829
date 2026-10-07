@@ -1,0 +1,12 @@
+{
+  "report": {
+    "lit": 7,
+    "blocked": 0,
+    "closedDoor": 0,
+    "walkDifference": 0,
+    "openDoor": 3.6533333333333333,
+    "bakes": 1,
+    "unoccludedControl": 3.6533333333333333
+  },
+  "errors": []
+}

@@ -48,6 +48,9 @@ export function furnitureFrontClearance(item){
  return {x:item.x+Math.sin(item.rotation)*distance,z:item.z+Math.cos(item.rotation)*distance,width:item.width+.20,depth:FURNITURE_FRONT_CLEARANCE,rotation:item.rotation};
 }
 function nearSegment(item,a,b,margin){
+ const c=Math.abs(Math.cos(item.rotation)),s=Math.abs(Math.sin(item.rotation));
+ const extentX=c*item.width/2+s*item.depth/2+margin,extentZ=s*item.width/2+c*item.depth/2+margin;
+ if(Math.max(a[0],b[0])<item.x-extentX||Math.min(a[0],b[0])>item.x+extentX||Math.max(a[1],b[1])<item.z-extentZ||Math.min(a[1],b[1])>item.z+extentZ)return false;
  const length=Math.hypot(b[0]-a[0],b[1]-a[1]),steps=Math.max(1,Math.ceil(length/.12));
  for(let i=0;i<=steps;i++)if(furnitureContains(item,a[0]+(b[0]-a[0])*i/steps,a[1]+(b[1]-a[1])*i/steps,margin))return true;
  return false;
@@ -66,7 +69,19 @@ function windowPoints(floor){
  if(floor.id===2||floor.windowMode==='scheduled')return (floor.windows??[]).map(w=>[w.x,w.z]);
  return floor.walls.flatMap(w=>asylumWindowCenters(w,floor.walls).map(t=>{const d=Math.hypot(w.b[0]-w.a[0],w.b[1]-w.a[1]);return [w.a[0]+(w.b[0]-w.a[0])*t/d,w.a[1]+(w.b[1]-w.a[1])*t/d];}));
 }
+const placementDoors=new WeakMap();
+const placementGeometry=new WeakMap();
+function polygonBounds(polygon){return {minX:Math.min(...polygon.map(p=>p[0])),maxX:Math.max(...polygon.map(p=>p[0])),minZ:Math.min(...polygon.map(p=>p[1])),maxZ:Math.max(...polygon.map(p=>p[1]))};}
+function boundsOverlap(a,b){return a.minX<=b.maxX&&a.maxX>=b.minX&&a.minZ<=b.maxZ&&a.maxZ>=b.minZ;}
 function clearPlacement(floor,room,item,placed,windows){
+ if(placed.some(p=>!FURNITURE_CATALOG[p.kind].decorative&&overlaps(item,p))||placed.some(p=>blocksFurnitureFront(item,p)))return false;
+ // Fixed candidates revisit the same walls, windows and circulation on replay.
+ // Cache only those static checks; other furnishings still participate above.
+ const cache=placementGeometry.get(floor).checks,key=!item.variable&&JSON.stringify([room.id,room.purpose,item.kind,item.x,item.z,item.width,item.depth,item.rotation]);
+ if(key&&cache.has(key))return cache.get(key);
+ const clear=clearGeometry(floor,room,item,windows);if(key)cache.set(key,clear);return clear;
+}
+function clearGeometry(floor,room,item,windows){
  const fitted=['bookroom','library','privy','paddedCell'].includes(room.purpose)||item.kind==='bookcase';
  const wallStorage=['cupboard','bookcase','waitingBench','longcaseClock','linenCupboard','sideboard','privySeat','privyScreen','washstand'].includes(item.kind);
  const wallBed=item.kind==='bed'&&!!(room.bedRows||room.bedPositions);
@@ -79,8 +94,6 @@ function clearPlacement(floor,room,item,placed,windows){
  })):furnitureCorners(item,.10).map(([x,z])=>({x,z,radius:.14}));
  if(!probes.every(({x,z,radius})=>insidePolygon(x,z,room.points)&&flatWalkable(floor,x,z,radius,{furniture:false})))return false;
  if(furnitureContains(item,...room.label,(fitted||room.bedRows||room.bedPositions||room.purpose==='privy')?.55:1.15))return false;
- if(placed.some(p=>!FURNITURE_CATALOG[p.kind].decorative&&overlaps(item,p)))return false;
- if(placed.some(p=>blocksFurnitureFront(item,p)))return false;
  if(room.bedPositions&&item.kind!=='bed'){
   // Chairs and small seats may move between games, but every planned bed
   // keeps its full-width foot approach connected to the central aisle.
@@ -108,10 +121,9 @@ function clearPlacement(floor,room,item,placed,windows){
  }
  // Reserve complete open leaves and handles, including their ends between
  // the usual furniture probes. Shelves also need their access strip clear.
- const footprint=doorRectangle(item),doorFront=furnitureFrontClearance(item);
- for(const door of floor.roomDoors??[])for(const obstacle of [door,roomDoorPanels(door),roomDoorHandle(door),roomDoorHandlePlate(door)]){
-  const polygon=doorRectangle(obstacle);
-  if(doorPolygonsOverlap(footprint,polygon)||(doorFront&&doorPolygonsOverlap(doorRectangle(doorFront),polygon)))return false;
+ const footprint=doorRectangle(item),doorFront=furnitureFrontClearance(item),frontPolygon=doorFront&&doorRectangle(doorFront),itemBounds=polygonBounds(footprint),frontBounds=frontPolygon&&polygonBounds(frontPolygon);
+ for(const {polygon,bounds} of placementDoors.get(floor)){
+  if((boundsOverlap(itemBounds,bounds)&&doorPolygonsOverlap(footprint,polygon))||(frontPolygon&&boundsOverlap(frontBounds,bounds)&&doorPolygonsOverlap(frontPolygon,polygon)))return false;
  }
  const front=furnitureFrontClearance(item);
  // The extra side allowance separates furniture; masonry must leave the
@@ -279,6 +291,12 @@ function placeRoom(floor,room,purpose,seed,windows){
 }
 export function furnishAsylum(floors,{seed=1829}={}){
  for(const floor of floors){
+  // Rebuild the cache when a plan, door pose or furnishing dimensions change.
+  const signature=JSON.stringify([FURNITURE_CATALOG,floor.outline,floor.walls,floor.corridors,floor.roomDoors,floor.doorways,floor.exits,floor.shafts,floor.windows,floor.windowMode,floor.rooms.map(({name,purpose,...room})=>room)]);
+  if(placementGeometry.get(floor)?.signature!==signature)placementGeometry.set(floor,{signature,checks:new Map()});
+  // Door leaves, panels and handles stay fixed during a placement pass. Build
+  // their exact polygons once; distant fittings can skip the separating axes.
+  placementDoors.set(floor,(floor.roomDoors??[]).flatMap(door=>[door,roomDoorPanels(door),roomDoorHandle(door),roomDoorHandlePlate(door)].map(obstacle=>{const polygon=doorRectangle(obstacle);return {polygon,bounds:polygonBounds(polygon)};})));
   floor.architectureCells??=floor.cells.slice();floor.architectureSpawns??=floor.safeSpawns.slice();
   floor.furnitureObstacles=[];floor.furnitureIndex=null;floor.furnitureSeed=seed>>>0;
   const windows=windowPoints(floor);floor.furniture=[];

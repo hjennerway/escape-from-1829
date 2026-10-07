@@ -1,3 +1,4 @@
+import {markDownpipeInstances} from './downpipe-clearance.mjs';
 // Churton Ward: six supplied photographs and the yellow satellite outline.
 // Single-storey masonry with two long returns and a shorter oblique rear wing.
 // Seren Lodge marker registered to the fixed 1829 entrance; units
@@ -30,7 +31,7 @@ export function createChurtonWard(THREE,{brick,roof,worldUV,material}){
   const batches=new Map(),openings=[],ranges=[];
   function mesh(g,m,x,y,z,name,parent=ward){const o=new THREE.Mesh(g,m);o.position.set(x,y,z);o.name=name;o.castShadow=true;o.receiveShadow=true;parent.add(o);return o;}
   function solid(m,x,y,z,w,h,d,name,parent=ward){const o=mesh(worldUV(new THREE.BoxGeometry(w,h,d),1.7),m,x,y,z,name,parent);o.userData.orientedCollision=true;return o;}
-  function box(m,x,y,z,w,h,d,r=0){if(!batches.has(m))batches.set(m,[]);batches.get(m).push({x,y,z,w,h,d,r});}
+  function box(m,x,y,z,w,h,d,r=0,downpipe=false){if(!batches.has(m))batches.set(m,[]);batches.get(m).push({x,y,z,w,h,d,r,downpipe});}
   function beam(a,b,width,m=red,parent=ward){const p=new THREE.Vector3(...a),q=new THREE.Vector3(...b),v=q.clone().sub(p);const o=mesh(new THREE.BoxGeometry(width,v.length(),width),m,...p.clone().add(q).multiplyScalar(.5).toArray(),'Brick verge',parent);o.quaternion.setFromUnitVectors(new THREE.Vector3(0,1,0),v.normalize());return o;}
   function gable(name,x,z,w,d,eave=5.4,rise=2.6,rotation=0,roofBackExtension=0){
     const group=new THREE.Group();group.position.set(x,0,z);group.rotation.y=rotation;ward.add(group);
@@ -129,7 +130,7 @@ export function createChurtonWard(THREE,{brick,roof,worldUV,material}){
     for(const [dy,extra] of [[1.6,.2],[1.82,.34],[1.98,.12]])box(red,x,y+dy,z,w+extra,.16,1+extra);
     for(const side of [-1,1]){mesh(new THREE.CylinderGeometry(.16,.19,.48,10),red,x+side*w*.25,y+2.25,z,'Clay chimney pot');mesh(new THREE.CircleGeometry(.12,10),dark,x+side*w*.25,y+2.495,z,'Open chimney pot').rotation.x=-Math.PI/2;}
   }
-  for(const [x,z] of [[-17.9,-13.8],[-17.9,18.8],[21.4,9.2],[21.4,-16.5],[-2.1,18.8]])box(dark,x,2.6,z,.09,5.2,.09);
+  for(const [x,z] of [[-17.9,-13.8],[-17.9,18.8],[21.4,9.2],[21.4,-16.5],[-2.1,18.8]])box(dark,x,2.6,z,.09,5.2,.09,0,true);
   // Keep the church-facing lawn open. The shared road supplies the lane;
   // the old rectangular gravel strip protruded beyond its curved edges.
   // One level surface joins the perimeter and both access paths. Separate
@@ -150,7 +151,7 @@ export function createChurtonWard(THREE,{brick,roof,worldUV,material}){
   const walkStart=-17.2,walkEnd=laneLocalZ+3;
   solid(gravel,11.1,.16,(walkStart+walkEnd)/2,2.7,.08,walkStart-walkEnd,'Lawn entrance walk');
   const dummy=new THREE.Object3D();
-  for(const [m,items] of batches){const batch=new THREE.InstancedMesh(new THREE.BoxGeometry(1,1,1),m,items.length);batch.name='Churton window and masonry details';batch.castShadow=true;batch.receiveShadow=true;items.forEach((b,i)=>{dummy.position.set(b.x,b.y,b.z);dummy.scale.set(b.w,b.h,b.d);dummy.rotation.set(0,b.r,0);dummy.updateMatrix();batch.setMatrixAt(i,dummy.matrix);});ward.add(batch);}
+  for(const [m,items] of batches){const batch=new THREE.InstancedMesh(new THREE.BoxGeometry(1,1,1),m,items.length);markDownpipeInstances(batch,items);batch.name='Churton window and masonry details';batch.castShadow=true;batch.receiveShadow=true;items.forEach((b,i)=>{dummy.position.set(b.x,b.y,b.z);dummy.scale.set(b.w,b.h,b.d);dummy.rotation.set(0,b.r,0);dummy.updateMatrix();batch.setMatrixAt(i,dummy.matrix);});ward.add(batch);}
   ward.userData.openings=openings;ward.userData.ranges=ranges;
   return ward;
 }

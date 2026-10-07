@@ -1,0 +1,1456 @@
+{
+  "removed": [
+    {
+      "name": "",
+      "index": 59,
+      "centre": [
+        -24.540000915527344,
+        6.809999942779541,
+        -8.100000381469727
+      ],
+      "pipe": true,
+      "attachment": false
+    },
+    {
+      "name": "",
+      "index": 30,
+      "centre": [
+        41.20000076293945,
+        4.009999752044678,
+        17
+      ],
+      "pipe": true,
+      "attachment": false
+    },
+    {
+      "name": "",
+      "index": 32,
+      "centre": [
+        41.20000076293945,
+        4.009999752044678,
+        42.70000076293945
+      ],
+      "pipe": true,
+      "attachment": false
+    },
+    {
+      "name": "",
+      "index": 42,
+      "centre": [
+        -41.18000030517578,
+        4.159999847412109,
+        29
+      ],
+      "pipe": true,
+      "attachment": false
+    },
+    {
+      "name": "",
+      "index": 98,
+      "centre": [
+        28.799999237060547,
+        4.009999752044678,
+        -35.79999923706055
+      ],
+      "pipe": true,
+      "attachment": false
+    },
+    {
+      "name": "",
+      "index": 159,
+      "centre": [
+        24.540000915527344,
+        6.809999942779541,
+        -8.100000381469727
+      ],
+      "pipe": true,
+      "attachment": false
+    },
+    {
+      "name": "",
+      "index": 186,
+      "centre": [
+        81.5999984741211,
+        4.460000038146973,
+        -32.650001525878906
+      ],
+      "pipe": true,
+      "attachment": false
+    },
+    {
+      "name": "",
+      "index": 211,
+      "centre": [
+        83.9800033569336,
+        4.460000038146973,
+        -22.100000381469727
+      ],
+      "pipe": true,
+      "attachment": false
+    },
+    {
+      "name": "",
+      "index": 213,
+      "centre": [
+        83.9800033569336,
+        4.460000038146973,
+        -1.7000000476837158
+      ],
+      "pipe": true,
+      "attachment": false
+    },
+    {
+      "name": "",
+      "index": 232,
+      "centre": [
+        94.79000091552734,
+        4.460000038146973,
+        -21.899999618530273
+      ],
+      "pipe": true,
+      "attachment": false
+    },
+    {
+      "name": "",
+      "index": 233,
+      "centre": [
+        94.79000091552734,
+        4.460000038146973,
+        -5.550000190734863
+      ],
+      "pipe": true,
+      "attachment": false
+    },
+    {
+      "name": "",
+      "index": 328,
+      "centre": [
+        -28.719999313354492,
+        4.159999847412109,
+        27.1200008392334
+      ],
+      "pipe": true,
+      "attachment": false
+    },
+    {
+      "name": "Estates glazing, blue doors, brick bands and rainwater goods",
+      "index": 37,
+      "centre": [
+        261.53057588135056,
+        3.7100000381469727,
+        -42.69834042357392
+      ],
+      "pipe": true,
+      "attachment": false
+    },
+    {
+      "name": "Estates glazing, blue doors, brick bands and rainwater goods",
+      "index": 38,
+      "centre": [
+        261.53057588135056,
+        0.6000000238418579,
+        -42.69834042357392
+      ],
+      "pipe": false,
+      "attachment": true
+    },
+    {
+      "name": "Estates glazing, blue doors, brick bands and rainwater goods",
+      "index": 39,
+      "centre": [
+        261.53057588135056,
+        3.4000000953674316,
+        -42.69834042357392
+      ],
+      "pipe": false,
+      "attachment": true
+    },
+    {
+      "name": "Estates glazing, blue doors, brick bands and rainwater goods",
+      "index": 40,
+      "centre": [
+        261.53057588135056,
+        6.5,
+        -42.69834042357392
+      ],
+      "pipe": false,
+      "attachment": true
+    },
+    {
+      "name": "Corridor downpipe",
+      "index": null,
+      "centre": [
+        110.225,
+        2.4,
+        1.0099999999999993
+      ],
+      "pipe": true,
+      "attachment": true
+    },
+    {
+      "name": "Corridor pipe bracket",
+      "index": null,
+      "centre": [
+        110.225,
+        0.55,
+        1.0299999999999994
+      ],
+      "pipe": false,
+      "attachment": true
+    },
+    {
+      "name": "Corridor pipe bracket",
+      "index": null,
+      "centre": [
+        110.225,
+        4.05,
+        1.0299999999999994
+      ],
+      "pipe": false,
+      "attachment": true
+    },
+    {
+      "name": "Corridor downpipe",
+      "index": null,
+      "centre": [
+        110.225,
+        2.4,
+        13.19
+      ],
+      "pipe": true,
+      "attachment": true
+    },
+    {
+      "name": "Corridor pipe bracket",
+      "index": null,
+      "centre": [
+        110.225,
+        0.55,
+        13.17
+      ],
+      "pipe": false,
+      "attachment": true
+    },
+    {
+      "name": "Corridor pipe bracket",
+      "index": null,
+      "centre": [
+        110.225,
+        4.05,
+        13.17
+      ],
+      "pipe": false,
+      "attachment": true
+    },
+    {
+      "name": "Corridor downpipe",
+      "index": null,
+      "centre": [
+        140.25,
+        1.8,
+        13.19
+      ],
+      "pipe": true,
+      "attachment": true
+    },
+    {
+      "name": "Corridor pipe bracket",
+      "index": null,
+      "centre": [
+        140.25,
+        0.55,
+        13.17
+      ],
+      "pipe": false,
+      "attachment": true
+    },
+    {
+      "name": "Corridor pipe bracket",
+      "index": null,
+      "centre": [
+        140.25,
+        2.85,
+        13.17
+      ],
+      "pipe": false,
+      "attachment": true
+    },
+    {
+      "name": "Corridor downpipe",
+      "index": null,
+      "centre": [
+        113.65646140237088,
+        1.8,
+        -155.6564614023709
+      ],
+      "pipe": true,
+      "attachment": true
+    },
+    {
+      "name": "Corridor pipe bracket",
+      "index": null,
+      "centre": [
+        113.67060353799461,
+        0.55,
+        -155.67060353799462
+      ],
+      "pipe": false,
+      "attachment": true
+    },
+    {
+      "name": "Corridor pipe bracket",
+      "index": null,
+      "centre": [
+        113.67060353799461,
+        2.85,
+        -155.67060353799462
+      ],
+      "pipe": false,
+      "attachment": true
+    },
+    {
+      "name": "Corridor downpipe",
+      "index": null,
+      "centre": [
+        117.74353859762911,
+        1.8,
+        -159.74353859762917
+      ],
+      "pipe": true,
+      "attachment": true
+    },
+    {
+      "name": "Corridor pipe bracket",
+      "index": null,
+      "centre": [
+        117.72939646200538,
+        0.55,
+        -159.72939646200544
+      ],
+      "pipe": false,
+      "attachment": true
+    },
+    {
+      "name": "Corridor pipe bracket",
+      "index": null,
+      "centre": [
+        117.72939646200538,
+        2.85,
+        -159.72939646200544
+      ],
+      "pipe": false,
+      "attachment": true
+    },
+    {
+      "name": "Corridor downpipe",
+      "index": null,
+      "centre": [
+        56.628824600480826,
+        1.8,
+        -195.41000000000003
+      ],
+      "pipe": true,
+      "attachment": true
+    },
+    {
+      "name": "Corridor pipe bracket",
+      "index": null,
+      "centre": [
+        56.628824600480826,
+        0.55,
+        -195.43000000000004
+      ],
+      "pipe": false,
+      "attachment": true
+    },
+    {
+      "name": "Corridor pipe bracket",
+      "index": null,
+      "centre": [
+        56.628824600480826,
+        2.85,
+        -195.43000000000004
+      ],
+      "pipe": false,
+      "attachment": true
+    },
+    {
+      "name": "Corridor downpipe",
+      "index": null,
+      "centre": [
+        56.628824600480826,
+        1.8,
+        -201.19
+      ],
+      "pipe": true,
+      "attachment": true
+    },
+    {
+      "name": "Corridor pipe bracket",
+      "index": null,
+      "centre": [
+        56.628824600480826,
+        0.55,
+        -201.17
+      ],
+      "pipe": false,
+      "attachment": true
+    },
+    {
+      "name": "Corridor pipe bracket",
+      "index": null,
+      "centre": [
+        56.628824600480826,
+        2.85,
+        -201.17
+      ],
+      "pipe": false,
+      "attachment": true
+    },
+    {
+      "name": "Corridor downpipe",
+      "index": null,
+      "centre": [
+        129.41027118644064,
+        1.8,
+        -139.99972881355933
+      ],
+      "pipe": true,
+      "attachment": true
+    },
+    {
+      "name": "Corridor pipe bracket",
+      "index": null,
+      "centre": [
+        129.41027118644064,
+        0.55,
+        -140.0197288135593
+      ],
+      "pipe": false,
+      "attachment": true
+    },
+    {
+      "name": "Corridor pipe bracket",
+      "index": null,
+      "centre": [
+        129.41027118644064,
+        2.85,
+        -140.0197288135593
+      ],
+      "pipe": false,
+      "attachment": true
+    },
+    {
+      "name": "Corridor downpipe",
+      "index": null,
+      "centre": [
+        112.71000000000001,
+        1.8,
+        -175.99999999999997
+      ],
+      "pipe": true,
+      "attachment": true
+    },
+    {
+      "name": "Corridor pipe bracket",
+      "index": null,
+      "centre": [
+        112.73,
+        0.55,
+        -175.99999999999997
+      ],
+      "pipe": false,
+      "attachment": true
+    },
+    {
+      "name": "Corridor pipe bracket",
+      "index": null,
+      "centre": [
+        112.73,
+        2.85,
+        -175.99999999999997
+      ],
+      "pipe": false,
+      "attachment": true
+    },
+    {
+      "name": "Corridor downpipe",
+      "index": null,
+      "centre": [
+        118.49000000000001,
+        1.8,
+        -175.99999999999997
+      ],
+      "pipe": true,
+      "attachment": true
+    },
+    {
+      "name": "Corridor pipe bracket",
+      "index": null,
+      "centre": [
+        118.47000000000001,
+        0.55,
+        -175.99999999999997
+      ],
+      "pipe": false,
+      "attachment": true
+    },
+    {
+      "name": "Corridor pipe bracket",
+      "index": null,
+      "centre": [
+        118.47000000000001,
+        2.85,
+        -175.99999999999997
+      ],
+      "pipe": false,
+      "attachment": true
+    },
+    {
+      "name": "Corridor downpipe",
+      "index": null,
+      "centre": [
+        150.60000000000002,
+        1.8,
+        -75.745
+      ],
+      "pipe": true,
+      "attachment": true
+    },
+    {
+      "name": "Corridor pipe bracket",
+      "index": null,
+      "centre": [
+        150.60000000000002,
+        0.55,
+        -75.72500000000001
+      ],
+      "pipe": false,
+      "attachment": true
+    },
+    {
+      "name": "Corridor pipe bracket",
+      "index": null,
+      "centre": [
+        150.60000000000002,
+        2.85,
+        -75.72500000000001
+      ],
+      "pipe": false,
+      "attachment": true
+    },
+    {
+      "name": "Corridor downpipe",
+      "index": null,
+      "centre": [
+        150.60000000000002,
+        1.8,
+        -69.965
+      ],
+      "pipe": true,
+      "attachment": true
+    },
+    {
+      "name": "Corridor pipe bracket",
+      "index": null,
+      "centre": [
+        150.60000000000002,
+        0.55,
+        -69.985
+      ],
+      "pipe": false,
+      "attachment": true
+    },
+    {
+      "name": "Corridor pipe bracket",
+      "index": null,
+      "centre": [
+        150.60000000000002,
+        2.85,
+        -69.985
+      ],
+      "pipe": false,
+      "attachment": true
+    },
+    {
+      "name": "Corridor downpipe",
+      "index": null,
+      "centre": [
+        191.85,
+        1.8,
+        -69.49
+      ],
+      "pipe": true,
+      "attachment": true
+    },
+    {
+      "name": "Corridor pipe bracket",
+      "index": null,
+      "centre": [
+        191.85,
+        0.55,
+        -69.47
+      ],
+      "pipe": false,
+      "attachment": true
+    },
+    {
+      "name": "Corridor pipe bracket",
+      "index": null,
+      "centre": [
+        191.85,
+        2.85,
+        -69.47
+      ],
+      "pipe": false,
+      "attachment": true
+    },
+    {
+      "name": "Corridor downpipe",
+      "index": null,
+      "centre": [
+        153.41000000000003,
+        1.8,
+        15.4
+      ],
+      "pipe": true,
+      "attachment": true
+    },
+    {
+      "name": "Corridor pipe bracket",
+      "index": null,
+      "centre": [
+        153.43000000000004,
+        0.55,
+        15.4
+      ],
+      "pipe": false,
+      "attachment": true
+    },
+    {
+      "name": "Corridor pipe bracket",
+      "index": null,
+      "centre": [
+        153.43000000000004,
+        2.85,
+        15.4
+      ],
+      "pipe": false,
+      "attachment": true
+    },
+    {
+      "name": "Blue gutters and downpipes",
+      "index": 20,
+      "centre": [
+        438.43276667516454,
+        3.6899999141693116,
+        -80.29300054649293
+      ],
+      "pipe": true,
+      "attachment": false
+    },
+    {
+      "name": "Blue gutters and downpipes",
+      "index": 21,
+      "centre": [
+        438.43276667516454,
+        3.6899999141693116,
+        -80.29300054649293
+      ],
+      "pipe": true,
+      "attachment": false
+    },
+    {
+      "name": "Jarman rainwater offset",
+      "index": null,
+      "centre": [
+        367.8006919434963,
+        7.357500000000001,
+        -50.079256090523714
+      ],
+      "pipe": false,
+      "attachment": true
+    },
+    {
+      "name": "Jarman downpipe",
+      "index": null,
+      "centre": [
+        367.50838059025097,
+        3.69,
+        -50.38273592149747
+      ],
+      "pipe": true,
+      "attachment": true
+    },
+    {
+      "name": "Blue gutters and downpipes",
+      "index": 69,
+      "centre": [
+        378.836515103402,
+        3.6899999141693116,
+        23.182746276284767
+      ],
+      "pipe": true,
+      "attachment": false
+    },
+    {
+      "name": "Pharmacy rear downpipe",
+      "index": null,
+      "centre": [
+        191,
+        3.75,
+        -39.05
+      ],
+      "pipe": true,
+      "attachment": true
+    },
+    {
+      "name": "Pharmacy drain shoe",
+      "index": null,
+      "centre": [
+        191,
+        0.22,
+        -39.224999999999994
+      ],
+      "pipe": false,
+      "attachment": true
+    }
+  ],
+  "added": [
+    {
+      "name": "",
+      "index": 59,
+      "centre": [
+        -24.540000915527344,
+        6.809999942779541,
+        -8.082489967346191
+      ],
+      "pipe": true,
+      "attachment": false
+    },
+    {
+      "name": "",
+      "index": 30,
+      "centre": [
+        41.20000076293945,
+        4.009999752044678,
+        16.547489166259766
+      ],
+      "pipe": true,
+      "attachment": false
+    },
+    {
+      "name": "",
+      "index": 32,
+      "centre": [
+        41.20000076293945,
+        4.009999752044678,
+        42.75251007080078
+      ],
+      "pipe": true,
+      "attachment": false
+    },
+    {
+      "name": "",
+      "index": 42,
+      "centre": [
+        -41.18000030517578,
+        4.159999847412109,
+        30.26750946044922
+      ],
+      "pipe": true,
+      "attachment": false
+    },
+    {
+      "name": "",
+      "index": 98,
+      "centre": [
+        29.645009994506836,
+        4.009999752044678,
+        -35.79999923706055
+      ],
+      "pipe": true,
+      "attachment": false
+    },
+    {
+      "name": "",
+      "index": 159,
+      "centre": [
+        24.540000915527344,
+        6.809999942779541,
+        -8.082489967346191
+      ],
+      "pipe": true,
+      "attachment": false
+    },
+    {
+      "name": "",
+      "index": 186,
+      "centre": [
+        81.86251068115234,
+        4.460000038146973,
+        -32.650001525878906
+      ],
+      "pipe": true,
+      "attachment": false
+    },
+    {
+      "name": "",
+      "index": 211,
+      "centre": [
+        83.9800033569336,
+        4.460000038146973,
+        -21.799989700317383
+      ],
+      "pipe": true,
+      "attachment": false
+    },
+    {
+      "name": "",
+      "index": 213,
+      "centre": [
+        83.9800033569336,
+        4.460000038146973,
+        -1.8000099658966064
+      ],
+      "pipe": true,
+      "attachment": false
+    },
+    {
+      "name": "",
+      "index": 232,
+      "centre": [
+        94.79000091552734,
+        4.460000038146973,
+        -22.390010833740234
+      ],
+      "pipe": true,
+      "attachment": false
+    },
+    {
+      "name": "",
+      "index": 233,
+      "centre": [
+        94.79000091552734,
+        4.460000038146973,
+        -5.890009880065918
+      ],
+      "pipe": true,
+      "attachment": false
+    },
+    {
+      "name": "",
+      "index": 328,
+      "centre": [
+        -28.719999313354492,
+        4.159999847412109,
+        27.034988403320312
+      ],
+      "pipe": true,
+      "attachment": false
+    },
+    {
+      "name": "Estates glazing, blue doors, brick bands and rainwater goods",
+      "index": 37,
+      "centre": [
+        261.25628138281064,
+        3.7100000381469727,
+        -41.9017313572276
+      ],
+      "pipe": true,
+      "attachment": false
+    },
+    {
+      "name": "Estates glazing, blue doors, brick bands and rainwater goods",
+      "index": 38,
+      "centre": [
+        261.25628138281064,
+        0.6000000238418579,
+        -41.9017313572276
+      ],
+      "pipe": false,
+      "attachment": true
+    },
+    {
+      "name": "Estates glazing, blue doors, brick bands and rainwater goods",
+      "index": 39,
+      "centre": [
+        261.25628138281064,
+        3.4000000953674316,
+        -41.9017313572276
+      ],
+      "pipe": false,
+      "attachment": true
+    },
+    {
+      "name": "Estates glazing, blue doors, brick bands and rainwater goods",
+      "index": 40,
+      "centre": [
+        261.25628138281064,
+        6.5,
+        -41.9017313572276
+      ],
+      "pipe": false,
+      "attachment": true
+    },
+    {
+      "name": "Corridor downpipe",
+      "index": null,
+      "centre": [
+        111.03001000417233,
+        2.4,
+        1.0099999999999993
+      ],
+      "pipe": true,
+      "attachment": true
+    },
+    {
+      "name": "Corridor pipe bracket",
+      "index": null,
+      "centre": [
+        111.03001000417233,
+        0.55,
+        1.0299999999999994
+      ],
+      "pipe": false,
+      "attachment": true
+    },
+    {
+      "name": "Corridor pipe bracket",
+      "index": null,
+      "centre": [
+        111.03001000417233,
+        4.05,
+        1.0299999999999994
+      ],
+      "pipe": false,
+      "attachment": true
+    },
+    {
+      "name": "Corridor downpipe",
+      "index": null,
+      "centre": [
+        109.41998999582766,
+        2.4,
+        13.19
+      ],
+      "pipe": true,
+      "attachment": true
+    },
+    {
+      "name": "Corridor pipe bracket",
+      "index": null,
+      "centre": [
+        109.41998999582766,
+        0.55,
+        13.17
+      ],
+      "pipe": false,
+      "attachment": true
+    },
+    {
+      "name": "Corridor pipe bracket",
+      "index": null,
+      "centre": [
+        109.41998999582766,
+        4.05,
+        13.17
+      ],
+      "pipe": false,
+      "attachment": true
+    },
+    {
+      "name": "Corridor downpipe",
+      "index": null,
+      "centre": [
+        139.44498999582768,
+        1.8,
+        13.19
+      ],
+      "pipe": true,
+      "attachment": true
+    },
+    {
+      "name": "Corridor pipe bracket",
+      "index": null,
+      "centre": [
+        139.44498999582768,
+        0.55,
+        13.17
+      ],
+      "pipe": false,
+      "attachment": true
+    },
+    {
+      "name": "Corridor pipe bracket",
+      "index": null,
+      "centre": [
+        139.44498999582768,
+        2.85,
+        13.17
+      ],
+      "pipe": false,
+      "attachment": true
+    },
+    {
+      "name": "Corridor downpipe",
+      "index": null,
+      "centre": [
+        114.22568943524413,
+        1.8,
+        -155.08723336949762
+      ],
+      "pipe": true,
+      "attachment": true
+    },
+    {
+      "name": "Corridor pipe bracket",
+      "index": null,
+      "centre": [
+        114.23983157086786,
+        0.55,
+        -155.10137550512135
+      ],
+      "pipe": false,
+      "attachment": true
+    },
+    {
+      "name": "Corridor pipe bracket",
+      "index": null,
+      "centre": [
+        114.23983157086786,
+        2.85,
+        -155.10137550512135
+      ],
+      "pipe": false,
+      "attachment": true
+    },
+    {
+      "name": "Corridor downpipe",
+      "index": null,
+      "centre": [
+        117.17431056475586,
+        1.8,
+        -160.31276663050244
+      ],
+      "pipe": true,
+      "attachment": true
+    },
+    {
+      "name": "Corridor pipe bracket",
+      "index": null,
+      "centre": [
+        117.16016842913213,
+        0.55,
+        -160.2986244948787
+      ],
+      "pipe": false,
+      "attachment": true
+    },
+    {
+      "name": "Corridor pipe bracket",
+      "index": null,
+      "centre": [
+        117.16016842913213,
+        2.85,
+        -160.2986244948787
+      ],
+      "pipe": false,
+      "attachment": true
+    },
+    {
+      "name": "Corridor downpipe",
+      "index": null,
+      "centre": [
+        55.8238145963085,
+        1.8,
+        -195.41000000000003
+      ],
+      "pipe": true,
+      "attachment": true
+    },
+    {
+      "name": "Corridor pipe bracket",
+      "index": null,
+      "centre": [
+        55.8238145963085,
+        0.55,
+        -195.43000000000004
+      ],
+      "pipe": false,
+      "attachment": true
+    },
+    {
+      "name": "Corridor pipe bracket",
+      "index": null,
+      "centre": [
+        55.8238145963085,
+        2.85,
+        -195.43000000000004
+      ],
+      "pipe": false,
+      "attachment": true
+    },
+    {
+      "name": "Corridor downpipe",
+      "index": null,
+      "centre": [
+        57.43383460465315,
+        1.8,
+        -201.19
+      ],
+      "pipe": true,
+      "attachment": true
+    },
+    {
+      "name": "Corridor pipe bracket",
+      "index": null,
+      "centre": [
+        57.43383460465315,
+        0.55,
+        -201.17
+      ],
+      "pipe": false,
+      "attachment": true
+    },
+    {
+      "name": "Corridor pipe bracket",
+      "index": null,
+      "centre": [
+        57.43383460465315,
+        2.85,
+        -201.17
+      ],
+      "pipe": false,
+      "attachment": true
+    },
+    {
+      "name": "Corridor downpipe",
+      "index": null,
+      "centre": [
+        129.56341470135146,
+        1.8,
+        -139.8465852986485
+      ],
+      "pipe": true,
+      "attachment": true
+    },
+    {
+      "name": "Corridor pipe bracket",
+      "index": null,
+      "centre": [
+        129.56341470135146,
+        0.55,
+        -139.8665852986485
+      ],
+      "pipe": false,
+      "attachment": true
+    },
+    {
+      "name": "Corridor pipe bracket",
+      "index": null,
+      "centre": [
+        129.56341470135146,
+        2.85,
+        -139.8665852986485
+      ],
+      "pipe": false,
+      "attachment": true
+    },
+    {
+      "name": "Corridor downpipe",
+      "index": null,
+      "centre": [
+        112.71000000000001,
+        1.8,
+        -175.19498999582765
+      ],
+      "pipe": true,
+      "attachment": true
+    },
+    {
+      "name": "Corridor pipe bracket",
+      "index": null,
+      "centre": [
+        112.73,
+        0.55,
+        -175.19498999582765
+      ],
+      "pipe": false,
+      "attachment": true
+    },
+    {
+      "name": "Corridor pipe bracket",
+      "index": null,
+      "centre": [
+        112.73,
+        2.85,
+        -175.19498999582765
+      ],
+      "pipe": false,
+      "attachment": true
+    },
+    {
+      "name": "Corridor downpipe",
+      "index": null,
+      "centre": [
+        118.49000000000001,
+        1.8,
+        -175.19498999582765
+      ],
+      "pipe": true,
+      "attachment": true
+    },
+    {
+      "name": "Corridor pipe bracket",
+      "index": null,
+      "centre": [
+        118.47000000000001,
+        0.55,
+        -175.19498999582765
+      ],
+      "pipe": false,
+      "attachment": true
+    },
+    {
+      "name": "Corridor pipe bracket",
+      "index": null,
+      "centre": [
+        118.47000000000001,
+        2.85,
+        -175.19498999582765
+      ],
+      "pipe": false,
+      "attachment": true
+    },
+    {
+      "name": "Corridor downpipe",
+      "index": null,
+      "centre": [
+        151.40501000417234,
+        1.8,
+        -75.745
+      ],
+      "pipe": true,
+      "attachment": true
+    },
+    {
+      "name": "Corridor pipe bracket",
+      "index": null,
+      "centre": [
+        151.40501000417234,
+        0.55,
+        -75.72500000000001
+      ],
+      "pipe": false,
+      "attachment": true
+    },
+    {
+      "name": "Corridor pipe bracket",
+      "index": null,
+      "centre": [
+        151.40501000417234,
+        2.85,
+        -75.72500000000001
+      ],
+      "pipe": false,
+      "attachment": true
+    },
+    {
+      "name": "Corridor downpipe",
+      "index": null,
+      "centre": [
+        149.7949899958277,
+        1.8,
+        -69.965
+      ],
+      "pipe": true,
+      "attachment": true
+    },
+    {
+      "name": "Corridor pipe bracket",
+      "index": null,
+      "centre": [
+        149.7949899958277,
+        0.55,
+        -69.985
+      ],
+      "pipe": false,
+      "attachment": true
+    },
+    {
+      "name": "Corridor pipe bracket",
+      "index": null,
+      "centre": [
+        149.7949899958277,
+        2.85,
+        -69.985
+      ],
+      "pipe": false,
+      "attachment": true
+    },
+    {
+      "name": "Corridor downpipe",
+      "index": null,
+      "centre": [
+        192.6550100041723,
+        1.8,
+        -69.49
+      ],
+      "pipe": true,
+      "attachment": true
+    },
+    {
+      "name": "Corridor pipe bracket",
+      "index": null,
+      "centre": [
+        192.6550100041723,
+        0.55,
+        -69.47
+      ],
+      "pipe": false,
+      "attachment": true
+    },
+    {
+      "name": "Corridor pipe bracket",
+      "index": null,
+      "centre": [
+        192.6550100041723,
+        2.85,
+        -69.47
+      ],
+      "pipe": false,
+      "attachment": true
+    },
+    {
+      "name": "Corridor downpipe",
+      "index": null,
+      "centre": [
+        153.41000000000003,
+        1.8,
+        16.205010004172326
+      ],
+      "pipe": true,
+      "attachment": true
+    },
+    {
+      "name": "Corridor pipe bracket",
+      "index": null,
+      "centre": [
+        153.43000000000004,
+        0.55,
+        16.205010004172326
+      ],
+      "pipe": false,
+      "attachment": true
+    },
+    {
+      "name": "Corridor pipe bracket",
+      "index": null,
+      "centre": [
+        153.43000000000004,
+        2.85,
+        16.205010004172326
+      ],
+      "pipe": false,
+      "attachment": true
+    },
+    {
+      "name": "Blue gutters and downpipes",
+      "index": 20,
+      "centre": [
+        438.4376576995544,
+        3.6899999141693116,
+        -80.29771157441716
+      ],
+      "pipe": true,
+      "attachment": false
+    },
+    {
+      "name": "Blue gutters and downpipes",
+      "index": 21,
+      "centre": [
+        438.4376576995544,
+        3.6899999141693116,
+        -80.29771157441716
+      ],
+      "pipe": true,
+      "attachment": false
+    },
+    {
+      "name": "Jarman rainwater offset",
+      "index": null,
+      "centre": [
+        368.02541902474286,
+        7.357500000000001,
+        -49.84594275570198
+      ],
+      "pipe": false,
+      "attachment": true
+    },
+    {
+      "name": "Jarman downpipe",
+      "index": null,
+      "centre": [
+        367.7331076714975,
+        3.69,
+        -50.14942258667573
+      ],
+      "pipe": true,
+      "attachment": true
+    },
+    {
+      "name": "Blue gutters and downpipes",
+      "index": 69,
+      "centre": [
+        378.89962276243034,
+        3.6899999141693116,
+        23.248265119403314
+      ],
+      "pipe": true,
+      "attachment": false
+    },
+    {
+      "name": "Pharmacy rear downpipe",
+      "index": null,
+      "centre": [
+        191.83000390810727,
+        3.75,
+        -39.05
+      ],
+      "pipe": true,
+      "attachment": true
+    },
+    {
+      "name": "Pharmacy drain shoe",
+      "index": null,
+      "centre": [
+        191.83000390810727,
+        0.22,
+        -39.224999999999994
+      ],
+      "pipe": false,
+      "attachment": true
+    }
+  ],
+  "before": {
+    "jarman": {
+      "primitives": 818862,
+      "sha256": "959264da4fe2b3d8729291f2695356db129b12dca36dc30b9f79c7a00165fe86"
+    },
+    "leighton": {
+      "count": 882909,
+      "sha256": "9455f14ddb2572599eb2c00baa0176be7a557a8642eeeef69307bff0ba053a34"
+    }
+  },
+  "after": {
+    "jarman": {
+      "primitives": 818862,
+      "sha256": "48bbe0f5a9b3350bf7e4a0e5082b3c6972781fec8f88ba79f208ceec1b9c65e6"
+    },
+    "leighton": {
+      "count": 882909,
+      "sha256": "0698073ffbbd96bbd869b70084c58e8f677a46d1f0d3102492f2e2b047188ae1"
+    }
+  }
+}

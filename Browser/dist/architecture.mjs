@@ -1,6 +1,7 @@
 import {createInteriorMaterials,INTERIOR_BRICK_COURSE_HEIGHT} from './interior-materials.mjs';
 import {exitDirection} from './escape-routes.mjs';
 import {buildAsylumArchitecture,asylumWallSurfaces} from './asylum-architecture.mjs';
+import {addVictorianFireDoorDetails} from './victorian-fire-doors.mjs';
 
 const materialCache=new WeakMap();
 const directions=[[1,0],[-1,0],[0,1],[0,-1]];
@@ -188,29 +189,7 @@ export function buildArchitecture(THREE,scene,layout){
     detail('Sash',0,2.65,.155,2.02,.065,.045);
     detail('Stone',0,.025,.02,1.88,.05,.46);
     for(const inset of [-.12,0,.12])detail('Iron',0,.053,inset,1.74,.009,.014);
-    // Brushed kick plate, panic-bar case and projecting release rail.
-    detail('Fixture',0,.27,.084,1.53,.36,.025);
-    detail('Iron',0,1.055,.105,1.42,.17,.065);
-    for(const side of [-1,1]){
-      detail('Fixture',side*.65,1.055,.175,.12,.19,.16);
-      for(const y of [.13,.41])detail('Iron',side*.71,y,.103,.023,.023,.012);
-    }
-    detail('Brass',0,1.055,.266,1.22,.065,.075);
-    // Three hinge straps, closer body and its articulated overhead arm.
-    for(const y of [.40,1.30,2.20]){
-      detail('Fixture',-.795,y,.10,.105,.18,.045);
-      detail('Brass',-.85,y,.145,.045,.20,.055);
-      for(const offset of [-.055,.055])detail('Iron',-.775,y+offset,.131,.018,.018,.013);
-    }
-    detail('Fixture',.43,2.32,.14,.40,.14,.13);
-    detail('Iron',.25,2.44,.225,.43,.026,.035,-.27);
-    detail('Brass',-.04,2.49,.205,.20,.026,.035,.15);
-    detail('Iron',-.13,2.51,.17,.065,.07,.07);
-    // Framed emergency light and instruction plaque; artwork is added by game.mjs.
-    detail('Iron',0,2.96,.01,1.98,.51,.22);
-    detail('Fixture',0,2.96,.135,1.89,.43,.035);
-    detail('Recess',0,1.43,.091,.86,.22,.03);
-    detail('Tube',.87,2.80,.163,.035,.018,.015);
+    addVictorianFireDoorDetails(detail,{width:1.7,height:2.5,depth:.14});
   }
   if(!materialCache.has(THREE))materialCache.set(THREE,createInteriorMaterials(THREE,globalThis.document));
   const materials=materialCache.get(THREE),geometry=new THREE.BoxGeometry(1,1,1),wedge=geometry.clone();
@@ -221,13 +200,13 @@ export function buildArchitecture(THREE,scene,layout){
     const header=new THREE.ExtrudeGeometry(shape,{depth:.18,bevelEnabled:false,curveSegments:32});
     header.translate(0,0,-.09);return header;
   }
-  const profiles={PlasterSpandrel:archHeader(windowRevealRadius,2.22),PlasterPassageHeader:archHeader(s/2-.19,2.08,s/2)};
+  const profiles={PlasterSpandrel:archHeader(windowRevealRadius,2.22),PlasterPassageHeader:archHeader(s/2-.19,2.08,s/2),VictorianKnob:new THREE.SphereGeometry(.5,12,8)};
   const positions=wedge.attributes.position;
   for(let i=0;i<positions.count;i++)positions.setX(i,positions.getX(i)*(positions.getY(i)>0?1.145:.855));
   wedge.computeVertexNormals();
   const transform=new THREE.Object3D();transform.rotation.order='YXZ';
   for(const [kind,items] of batches){
-    const mesh=new THREE.InstancedMesh(profiles[kind]||(kind.endsWith('Wedge')?wedge:geometry),materials[kind.replace(/Wedge|Spandrel|PassageHeader/g,'')],items.length);
+    const mesh=new THREE.InstancedMesh(profiles[kind]||(kind.endsWith('Wedge')?wedge:geometry),materials[kind==='Panel'?'VictorianTimber':kind==='VictorianKnob'?'VictorianIron':kind.replace(/Wedge|Spandrel|PassageHeader/g,'')],items.length);
     mesh.name='Layout '+kind;
     items.forEach(([x,y,z,w,h,d,ry,rz],i)=>{
       transform.position.set(x,y,z);transform.scale.set(w,h,d);transform.rotation.set(0,ry,rz);transform.updateMatrix();mesh.setMatrixAt(i,transform.matrix);

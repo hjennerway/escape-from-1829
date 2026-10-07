@@ -3,6 +3,7 @@ import * as THREE from './dist/vendor/three.module.js';
 import {createDayNight,STREET_LIGHT_LIMIT} from './dist/day-night.mjs';
 import {sampleLanding} from './dist/aerial-controls.mjs';
 import {COUNTRYSIDE_BOUNDS,distanceFromEstate,countrysideHeight} from './dist/countryside.mjs';
+import {ESCAPE_SUN_OFFSETS} from './dist/landing-scene.mjs';
 
 function fixture(options){
  const scene=new THREE.Scene(),model=new THREE.Group(),camera=new THREE.PerspectiveCamera();
@@ -47,6 +48,16 @@ assert.equal(lighting.windows.selected.length,0);assert.equal(f.renderer.toneMap
 const reduced=fixture({reducedMotion:true});reduced.lighting.setNight(true);reduced.lighting.update(1);
 assert.equal(reduced.lighting.atmosphere.time,0);assert.equal(reduced.lighting.atmosphere.mode,'night');
 assert.equal(reduced.lighting.windows.selected.length,3,'Night illuminates one window in ten');
+const eastern=fixture({sunOffsets:ESCAPE_SUN_OFFSETS,reducedMotion:true}),easternSun=eastern.exterior.scene.children.find(o=>o.isDirectionalLight);
+easternSun.matrixAutoUpdate=false;
+for(const mode of ['day','dusk','night','day']){
+ easternSun.shadow.needsUpdate=false;eastern.lighting.setMode(mode);
+ const offset=easternSun.getWorldPosition(new THREE.Vector3()).sub(easternSun.target.position);
+ assert.deepEqual(offset.toArray(),ESCAPE_SUN_OFFSETS[mode],'Cached source/compiled light really moves to the eastern sky');
+ assert(offset.x>0&&offset.y>0,'Source is east and above the windows');
+ assert(eastern.lighting.atmosphere.sky.material.uniforms.sunDirection.value.distanceTo(offset.clone().normalize())<1e-8,'Visible sky source and cast light share a direction');
+}
+assert.equal(eastern.invalidations,4,'Every sunlight move invalidates exterior shadows');
 for(const aspect of [16/9,390/844]){
  const options={aspect,cinematic:true,reducedMotion:true},shot=sampleLanding(0,options);
  assert.deepEqual(sampleLanding(90,options),shot,'Reduced motion freezes the frontage camera');

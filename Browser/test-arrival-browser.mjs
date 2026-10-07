@@ -4,7 +4,7 @@ import {mkdir,readFile,writeFile} from 'node:fs/promises';
 import {fileURLToPath} from 'node:url';
 import {launchHardwareBrowser} from './test-support/hardware-browser.mjs';
 
-const root=new URL('../',import.meta.url),artifacts=new URL('./artifacts/arrival-animation/',import.meta.url);
+const root=new URL('../',import.meta.url),artifacts=new URL(process.env.ARRIVAL_ARTIFACT_DIR??'./artifacts/arrival-animation/',import.meta.url);
 await mkdir(artifacts,{recursive:true});
 const server=spawn(process.execPath,['Browser/serve.mjs'],{cwd:root,windowsHide:true,env:{...process.env,PORT:'0'},stdio:'pipe'});
 const base=await new Promise((resolve,reject)=>{server.stdout.once('data',data=>resolve(String(data).match(/http:\/\/127\.0\.0\.1:\d+/)[0]));server.once('error',reject);});

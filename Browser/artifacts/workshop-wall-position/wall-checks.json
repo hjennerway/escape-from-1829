@@ -1,0 +1,18 @@
+[
+  {
+    "attempt": 1,
+    "surfaceProbes": 90,
+    "windowProbes": 16,
+    "steps": 763,
+    "exactTowerPreservation": true,
+    "exactRestoration": true
+  },
+  {
+    "attempt": 2,
+    "surfaceProbes": 90,
+    "windowProbes": 16,
+    "steps": 763,
+    "exactTowerPreservation": true,
+    "exactRestoration": true
+  }
+]

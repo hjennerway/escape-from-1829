@@ -1,0 +1,87 @@
+{
+  "build": {
+    "mode": "procedural",
+    "milliseconds": 3267.89999999851
+  },
+  "errors": [],
+  "views": {
+    "marked": {
+      "position": [
+        35,
+        25,
+        -10
+      ],
+      "target": [
+        43,
+        13.8,
+        8
+      ],
+      "fov": 43
+    },
+    "close": {
+      "position": [
+        36,
+        20,
+        -2
+      ],
+      "target": [
+        43.5,
+        13.8,
+        7
+      ],
+      "fov": 42
+    },
+    "opposite": {
+      "position": [
+        48,
+        24,
+        -8
+      ],
+      "target": [
+        42.5,
+        13.7,
+        7.5
+      ],
+      "fov": 43
+    },
+    "low": {
+      "position": [
+        40,
+        12,
+        -7
+      ],
+      "target": [
+        45,
+        14,
+        7
+      ],
+      "fov": 45
+    },
+    "plan": {
+      "position": [
+        43,
+        39,
+        8
+      ],
+      "target": [
+        43,
+        13,
+        8.001
+      ],
+      "fov": 43
+    },
+    "overview": {
+      "position": [
+        13,
+        41,
+        13
+      ],
+      "target": [
+        53,
+        11,
+        13
+      ],
+      "fov": 47
+    }
+  }
+}

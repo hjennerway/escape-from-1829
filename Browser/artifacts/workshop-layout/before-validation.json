@@ -1,0 +1,1405 @@
+{
+  "receipt": {
+    "renderer": "ANGLE (NVIDIA, NVIDIA GeForce RTX 3090 Ti (0x00002203) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+    "gallery": {
+      "minX": 153.60000000000002,
+      "maxX": 159,
+      "minZ": -132.09999999999997,
+      "maxZ": 9.8,
+      "height": 3.6
+    },
+    "floors": [
+      {
+        "z": -130,
+        "y": 0.04,
+        "name": "Full-length connecting gallery floor"
+      },
+      {
+        "z": -129.5,
+        "y": 0.04,
+        "name": "Full-length connecting gallery floor"
+      },
+      {
+        "z": -129,
+        "y": 0.04,
+        "name": "Full-length connecting gallery floor"
+      },
+      {
+        "z": -128.5,
+        "y": 0.04,
+        "name": "Full-length connecting gallery floor"
+      },
+      {
+        "z": -128,
+        "y": 0.04,
+        "name": "Full-length connecting gallery floor"
+      },
+      {
+        "z": -127.5,
+        "y": 0.04,
+        "name": "Full-length connecting gallery floor"
+      },
+      {
+        "z": -127,
+        "y": 0.04,
+        "name": "Full-length connecting gallery floor"
+      },
+      {
+        "z": -126.5,
+        "y": 0.04349999874830224,
+        "name": "Aerial batch · Tower corridor and three workshops · 316"
+      },
+      {
+        "z": -126,
+        "y": 0.04,
+        "name": "Full-length connecting gallery floor"
+      },
+      {
+        "z": -125.5,
+        "y": 0.04,
+        "name": "Full-length connecting gallery floor"
+      },
+      {
+        "z": -125,
+        "y": 0.04,
+        "name": "Full-length connecting gallery floor"
+      },
+      {
+        "z": -124.5,
+        "y": 0.04,
+        "name": "Full-length connecting gallery floor"
+      },
+      {
+        "z": -124,
+        "y": 0.04,
+        "name": "Full-length connecting gallery floor"
+      },
+      {
+        "z": -123.5,
+        "y": 0.04,
+        "name": "Full-length connecting gallery floor"
+      },
+      {
+        "z": -123,
+        "y": 0.04,
+        "name": "Full-length connecting gallery floor"
+      },
+      {
+        "z": -122.5,
+        "y": 0.04,
+        "name": "Full-length connecting gallery floor"
+      },
+      {
+        "z": -122,
+        "y": 0.04,
+        "name": "Full-length connecting gallery floor"
+      },
+      {
+        "z": -121.5,
+        "y": 0.04,
+        "name": "Full-length connecting gallery floor"
+      },
+      {
+        "z": -121,
+        "y": 0.04,
+        "name": "Full-length connecting gallery floor"
+      },
+      {
+        "z": -120.5,
+        "y": 0.04,
+        "name": "Full-length connecting gallery floor"
+      },
+      {
+        "z": -120,
+        "y": 0.04,
+        "name": "Full-length connecting gallery floor"
+      },
+      {
+        "z": -119.5,
+        "y": 0.04,
+        "name": "Full-length connecting gallery floor"
+      },
+      {
+        "z": -119,
+        "y": 0.04,
+        "name": "Full-length connecting gallery floor"
+      },
+      {
+        "z": -118.5,
+        "y": 0.04349999874830224,
+        "name": "Aerial batch · Tower corridor and three workshops · 316"
+      },
+      {
+        "z": -118,
+        "y": 0.04,
+        "name": "Full-length connecting gallery floor"
+      },
+      {
+        "z": -117.5,
+        "y": 0.04,
+        "name": "Full-length connecting gallery floor"
+      },
+      {
+        "z": -117,
+        "y": 0.04,
+        "name": "Full-length connecting gallery floor"
+      },
+      {
+        "z": -116.5,
+        "y": 0.04,
+        "name": "Full-length connecting gallery floor"
+      },
+      {
+        "z": -116,
+        "y": 0.04,
+        "name": "Full-length connecting gallery floor"
+      },
+      {
+        "z": -115.5,
+        "y": 0.04,
+        "name": "Full-length connecting gallery floor"
+      },
+      {
+        "z": -115,
+        "y": 0.04,
+        "name": "Full-length connecting gallery floor"
+      },
+      {
+        "z": -114.5,
+        "y": 0.04,
+        "name": "Full-length connecting gallery floor"
+      },
+      {
+        "z": -114,
+        "y": 0.04,
+        "name": "Full-length connecting gallery floor"
+      },
+      {
+        "z": -113.5,
+        "y": 0.04,
+        "name": "Full-length connecting gallery floor"
+      },
+      {
+        "z": -113,
+        "y": 0.04,
+        "name": "Full-length connecting gallery floor"
+      },
+      {
+        "z": -112.5,
+        "y": 0.04,
+        "name": "Full-length connecting gallery floor"
+      },
+      {
+        "z": -112,
+        "y": 0.04,
+        "name": "Full-length connecting gallery floor"
+      },
+      {
+        "z": -111.5,
+        "y": 0.04,
+        "name": "Full-length connecting gallery floor"
+      },
+      {
+        "z": -111,
+        "y": 0.04,
+        "name": "Full-length connecting gallery floor"
+      },
+      {
+        "z": -110.5,
+        "y": 0.04349999874830224,
+        "name": "Aerial batch · Tower corridor and three workshops · 316"
+      },
+      {
+        "z": -110,
+        "y": 0.04,
+        "name": "Full-length connecting gallery floor"
+      },
+      {
+        "z": -109.5,
+        "y": 0.04,
+        "name": "Full-length connecting gallery floor"
+      },
+      {
+        "z": -109,
+        "y": 0.04,
+        "name": "Full-length connecting gallery floor"
+      },
+      {
+        "z": -108.5,
+        "y": 0.04,
+        "name": "Full-length connecting gallery floor"
+      },
+      {
+        "z": -108,
+        "y": 0.04,
+        "name": "Full-length connecting gallery floor"
+      },
+      {
+        "z": -107.5,
+        "y": 0.04,
+        "name": "Full-length connecting gallery floor"
+      },
+      {
+        "z": -107,
+        "y": 0.04,
+        "name": "Full-length connecting gallery floor"
+      },
+      {
+        "z": -106.5,
+        "y": 0.04,
+        "name": "Full-length connecting gallery floor"
+      },
+      {
+        "z": -106,
+        "y": 0.04,
+        "name": "Full-length connecting gallery floor"
+      },
+      {
+        "z": -105.5,
+        "y": 0.04,
+        "name": "Full-length connecting gallery floor"
+      },
+      {
+        "z": -105,
+        "y": 0.04,
+        "name": "Full-length connecting gallery floor"
+      },
+      {
+        "z": -104.5,
+        "y": 0.04,
+        "name": "Full-length connecting gallery floor"
+      },
+      {
+        "z": -104,
+        "y": 0.04,
+        "name": "Full-length connecting gallery floor"
+      },
+      {
+        "z": -103.5,
+        "y": 0.04,
+        "name": "Full-length connecting gallery floor"
+      },
+      {
+        "z": -103,
+        "y": 0.04,
+        "name": "Full-length connecting gallery floor"
+      },
+      {
+        "z": -102.5,
+        "y": 0.04349999874830224,
+        "name": "Aerial batch · Tower corridor and three workshops · 316"
+      },
+      {
+        "z": -102,
+        "y": 0.04,
+        "name": "Full-length connecting gallery floor"
+      },
+      {
+        "z": -101.5,
+        "y": 0.04,
+        "name": "Full-length connecting gallery floor"
+      },
+      {
+        "z": -101,
+        "y": 0.04,
+        "name": "Full-length connecting gallery floor"
+      },
+      {
+        "z": -100.5,
+        "y": 0.04,
+        "name": "Full-length connecting gallery floor"
+      },
+      {
+        "z": -100,
+        "y": 0.04,
+        "name": "Full-length connecting gallery floor"
+      },
+      {
+        "z": -99.5,
+        "y": 0.04,
+        "name": "Full-length connecting gallery floor"
+      },
+      {
+        "z": -99,
+        "y": 0.04,
+        "name": "Full-length connecting gallery floor"
+      },
+      {
+        "z": -98.5,
+        "y": 0.04,
+        "name": "Full-length connecting gallery floor"
+      },
+      {
+        "z": -98,
+        "y": 0.04,
+        "name": "Full-length connecting gallery floor"
+      },
+      {
+        "z": -97.5,
+        "y": 0.04,
+        "name": "Full-length connecting gallery floor"
+      },
+      {
+        "z": -97,
+        "y": 0.04,
+        "name": "Full-length connecting gallery floor"
+      },
+      {
+        "z": -96.5,
+        "y": 0.04,
+        "name": "Full-length connecting gallery floor"
+      },
+      {
+        "z": -96,
+        "y": 0.04,
+        "name": "Full-length connecting gallery floor"
+      },
+      {
+        "z": -95.5,
+        "y": 0.04,
+        "name": "Full-length connecting gallery floor"
+      },
+      {
+        "z": -95,
+        "y": 0.04,
+        "name": "Full-length connecting gallery floor"
+      },
+      {
+        "z": -94.5,
+        "y": 0.04349999874830224,
+        "name": "Aerial batch · Tower corridor and three workshops · 316"
+      },
+      {
+        "z": -94,
+        "y": 0.04,
+        "name": "Full-length connecting gallery floor"
+      },
+      {
+        "z": -93.5,
+        "y": 0.04,
+        "name": "Full-length connecting gallery floor"
+      },
+      {
+        "z": -93,
+        "y": 0.04,
+        "name": "Full-length connecting gallery floor"
+      },
+      {
+        "z": -92.5,
+        "y": 0.04,
+        "name": "Full-length connecting gallery floor"
+      },
+      {
+        "z": -92,
+        "y": 0.04,
+        "name": "Full-length connecting gallery floor"
+      },
+      {
+        "z": -91.5,
+        "y": 0.04,
+        "name": "Full-length connecting gallery floor"
+      },
+      {
+        "z": -91,
+        "y": 0.04,
+        "name": "Full-length connecting gallery floor"
+      },
+      {
+        "z": -90.5,
+        "y": 0.04,
+        "name": "Full-length connecting gallery floor"
+      },
+      {
+        "z": -90,
+        "y": 0.04,
+        "name": "Full-length connecting gallery floor"
+      },
+      {
+        "z": -89.5,
+        "y": 0.04,
+        "name": "Full-length connecting gallery floor"
+      },
+      {
+        "z": -89,
+        "y": 0.04,
+        "name": "Full-length connecting gallery floor"
+      },
+      {
+        "z": -88.5,
+        "y": 0.04,
+        "name": "Full-length connecting gallery floor"
+      },
+      {
+        "z": -88,
+        "y": 0.04,
+        "name": "Full-length connecting gallery floor"
+      },
+      {
+        "z": -87.5,
+        "y": 0.04,
+        "name": "Full-length connecting gallery floor"
+      },
+      {
+        "z": -87,
+        "y": 0.04,
+        "name": "Full-length connecting gallery floor"
+      },
+      {
+        "z": -86.5,
+        "y": 0.04349999874830224,
+        "name": "Aerial batch · Tower corridor and three workshops · 316"
+      },
+      {
+        "z": -86,
+        "y": 0.04,
+        "name": "Full-length connecting gallery floor"
+      },
+      {
+        "z": -85.5,
+        "y": 0.04,
+        "name": "Full-length connecting gallery floor"
+      },
+      {
+        "z": -85,
+        "y": 0.04,
+        "name": "Full-length connecting gallery floor"
+      },
+      {
+        "z": -84.5,
+        "y": 0.04,
+        "name": "Full-length connecting gallery floor"
+      },
+      {
+        "z": -84,
+        "y": 0.04,
+        "name": "Full-length connecting gallery floor"
+      },
+      {
+        "z": -83.5,
+        "y": 0.04,
+        "name": "Full-length connecting gallery floor"
+      },
+      {
+        "z": -83,
+        "y": 0.04,
+        "name": "Full-length connecting gallery floor"
+      },
+      {
+        "z": -82.5,
+        "y": 0.04,
+        "name": "Full-length connecting gallery floor"
+      },
+      {
+        "z": -82,
+        "y": 0.04,
+        "name": "Full-length connecting gallery floor"
+      },
+      {
+        "z": -81.5,
+        "y": 0.04,
+        "name": "Full-length connecting gallery floor"
+      },
+      {
+        "z": -81,
+        "y": 0.04,
+        "name": "Full-length connecting gallery floor"
+      },
+      {
+        "z": -80.5,
+        "y": 0.04,
+        "name": "Full-length connecting gallery floor"
+      },
+      {
+        "z": -80,
+        "y": 0.04,
+        "name": "Full-length connecting gallery floor"
+      },
+      {
+        "z": -79.5,
+        "y": 0.04,
+        "name": "Full-length connecting gallery floor"
+      },
+      {
+        "z": -79,
+        "y": 0.04,
+        "name": "Full-length connecting gallery floor"
+      },
+      {
+        "z": -78.5,
+        "y": 0.04349999874830224,
+        "name": "Aerial batch · Tower corridor and three workshops · 316"
+      },
+      {
+        "z": -78,
+        "y": 0.04,
+        "name": "Full-length connecting gallery floor"
+      },
+      {
+        "z": -77.5,
+        "y": 0.04,
+        "name": "Full-length connecting gallery floor"
+      },
+      {
+        "z": -77,
+        "y": 0.04,
+        "name": "Full-length connecting gallery floor"
+      },
+      {
+        "z": -76.5,
+        "y": 0.04,
+        "name": "Full-length connecting gallery floor"
+      },
+      {
+        "z": -76,
+        "y": 0.04,
+        "name": "Full-length connecting gallery floor"
+      },
+      {
+        "z": -75.5,
+        "y": 0.04,
+        "name": "Full-length connecting gallery floor"
+      },
+      {
+        "z": -75,
+        "y": 0.04,
+        "name": "Full-length connecting gallery floor"
+      },
+      {
+        "z": -74.5,
+        "y": 0.04,
+        "name": "Full-length connecting gallery floor"
+      },
+      {
+        "z": -74,
+        "y": 0.04,
+        "name": "Full-length connecting gallery floor"
+      },
+      {
+        "z": -73.5,
+        "y": 0.04,
+        "name": "Full-length connecting gallery floor"
+      },
+      {
+        "z": -73,
+        "y": 0.04,
+        "name": "Full-length connecting gallery floor"
+      },
+      {
+        "z": -72.5,
+        "y": 0.04,
+        "name": "Full-length connecting gallery floor"
+      },
+      {
+        "z": -72,
+        "y": 0.04,
+        "name": "Full-length connecting gallery floor"
+      },
+      {
+        "z": -71.5,
+        "y": 0.04,
+        "name": "Full-length connecting gallery floor"
+      },
+      {
+        "z": -71,
+        "y": 0.04,
+        "name": "Full-length connecting gallery floor"
+      },
+      {
+        "z": -70.5,
+        "y": 0.04349999874830224,
+        "name": "Aerial batch · Tower corridor and three workshops · 316"
+      },
+      {
+        "z": -70,
+        "y": 0.04,
+        "name": "Full-length connecting gallery floor"
+      },
+      {
+        "z": -69.5,
+        "y": 0.04,
+        "name": "Full-length connecting gallery floor"
+      },
+      {
+        "z": -69,
+        "y": 0.04,
+        "name": "Full-length connecting gallery floor"
+      },
+      {
+        "z": -68.5,
+        "y": 0.04,
+        "name": "Full-length connecting gallery floor"
+      },
+      {
+        "z": -68,
+        "y": 0.04,
+        "name": "Full-length connecting gallery floor"
+      },
+      {
+        "z": -67.5,
+        "y": 0.04,
+        "name": "Full-length connecting gallery floor"
+      },
+      {
+        "z": -67,
+        "y": 0.04,
+        "name": "Full-length connecting gallery floor"
+      },
+      {
+        "z": -66.5,
+        "y": 0.04,
+        "name": "Full-length connecting gallery floor"
+      },
+      {
+        "z": -66,
+        "y": 0.04,
+        "name": "Full-length connecting gallery floor"
+      },
+      {
+        "z": -65.5,
+        "y": 0.04,
+        "name": "Full-length connecting gallery floor"
+      },
+      {
+        "z": -65,
+        "y": 0.04,
+        "name": "Full-length connecting gallery floor"
+      },
+      {
+        "z": -64.5,
+        "y": 0.04,
+        "name": "Full-length connecting gallery floor"
+      },
+      {
+        "z": -64,
+        "y": 0.04,
+        "name": "Full-length connecting gallery floor"
+      },
+      {
+        "z": -63.5,
+        "y": 0.04,
+        "name": "Full-length connecting gallery floor"
+      },
+      {
+        "z": -63,
+        "y": 0.04,
+        "name": "Full-length connecting gallery floor"
+      },
+      {
+        "z": -62.5,
+        "y": 0.04349999874830224,
+        "name": "Aerial batch · Tower corridor and three workshops · 312"
+      },
+      {
+        "z": -62,
+        "y": 0.04,
+        "name": "Full-length connecting gallery floor"
+      },
+      {
+        "z": -61.5,
+        "y": 0.04,
+        "name": "Full-length connecting gallery floor"
+      },
+      {
+        "z": -61,
+        "y": 0.04,
+        "name": "Full-length connecting gallery floor"
+      },
+      {
+        "z": -60.5,
+        "y": 0.04,
+        "name": "Full-length connecting gallery floor"
+      },
+      {
+        "z": -60,
+        "y": 0.04,
+        "name": "Full-length connecting gallery floor"
+      },
+      {
+        "z": -59.5,
+        "y": 0.04,
+        "name": "Full-length connecting gallery floor"
+      },
+      {
+        "z": -59,
+        "y": 0.04349999874830224,
+        "name": "Aerial batch · Tower corridor and three workshops · 312"
+      },
+      {
+        "z": -58.5,
+        "y": 0.04,
+        "name": "Full-length connecting gallery floor"
+      },
+      {
+        "z": -58,
+        "y": 0.04,
+        "name": "Full-length connecting gallery floor"
+      },
+      {
+        "z": -57.5,
+        "y": 0.04,
+        "name": "Full-length connecting gallery floor"
+      },
+      {
+        "z": -57,
+        "y": 0.04,
+        "name": "Full-length connecting gallery floor"
+      },
+      {
+        "z": -56.5,
+        "y": 0.04,
+        "name": "Full-length connecting gallery floor"
+      },
+      {
+        "z": -56,
+        "y": 0.04,
+        "name": "Full-length connecting gallery floor"
+      },
+      {
+        "z": -55.5,
+        "y": 0.04,
+        "name": "Full-length connecting gallery floor"
+      },
+      {
+        "z": -55,
+        "y": 0.04,
+        "name": "Full-length connecting gallery floor"
+      },
+      {
+        "z": -54.5,
+        "y": 0.04349999874830224,
+        "name": "Aerial batch · Tower corridor and three workshops · 312"
+      },
+      {
+        "z": -54,
+        "y": 0.04,
+        "name": "Full-length connecting gallery floor"
+      },
+      {
+        "z": -53.5,
+        "y": 0.04,
+        "name": "Full-length connecting gallery floor"
+      },
+      {
+        "z": -53,
+        "y": 0.04,
+        "name": "Full-length connecting gallery floor"
+      },
+      {
+        "z": -52.5,
+        "y": 0.04,
+        "name": "Full-length connecting gallery floor"
+      },
+      {
+        "z": -52,
+        "y": 0.04,
+        "name": "Full-length connecting gallery floor"
+      },
+      {
+        "z": -51.5,
+        "y": 0.04,
+        "name": "Full-length connecting gallery floor"
+      },
+      {
+        "z": -51,
+        "y": 0.04349999874830224,
+        "name": "Aerial batch · Tower corridor and three workshops · 312"
+      },
+      {
+        "z": -50.5,
+        "y": 0.04,
+        "name": "Full-length connecting gallery floor"
+      },
+      {
+        "z": -50,
+        "y": 0.04,
+        "name": "Full-length connecting gallery floor"
+      },
+      {
+        "z": -49.5,
+        "y": 0.04,
+        "name": "Full-length connecting gallery floor"
+      },
+      {
+        "z": -49,
+        "y": 0.04,
+        "name": "Full-length connecting gallery floor"
+      },
+      {
+        "z": -48.5,
+        "y": 0.04,
+        "name": "Full-length connecting gallery floor"
+      },
+      {
+        "z": -48,
+        "y": 0.04,
+        "name": "Full-length connecting gallery floor"
+      },
+      {
+        "z": -47.5,
+        "y": 0.04,
+        "name": "Full-length connecting gallery floor"
+      },
+      {
+        "z": -47,
+        "y": 0.04,
+        "name": "Full-length connecting gallery floor"
+      },
+      {
+        "z": -46.5,
+        "y": 0.04349999874830224,
+        "name": "Aerial batch · Tower corridor and three workshops · 312"
+      },
+      {
+        "z": -46,
+        "y": 0.04,
+        "name": "Full-length connecting gallery floor"
+      },
+      {
+        "z": -45.5,
+        "y": 0.04,
+        "name": "Full-length connecting gallery floor"
+      },
+      {
+        "z": -45,
+        "y": 0.04,
+        "name": "Full-length connecting gallery floor"
+      },
+      {
+        "z": -44.5,
+        "y": 0.04,
+        "name": "Full-length connecting gallery floor"
+      },
+      {
+        "z": -44,
+        "y": 0.04,
+        "name": "Full-length connecting gallery floor"
+      },
+      {
+        "z": -43.5,
+        "y": 0.04,
+        "name": "Full-length connecting gallery floor"
+      },
+      {
+        "z": -43,
+        "y": 0.04349999874830224,
+        "name": "Aerial batch · Tower corridor and three workshops · 312"
+      },
+      {
+        "z": -42.5,
+        "y": 0.04,
+        "name": "Full-length connecting gallery floor"
+      },
+      {
+        "z": -42,
+        "y": 0.04,
+        "name": "Full-length connecting gallery floor"
+      },
+      {
+        "z": -41.5,
+        "y": 0.04,
+        "name": "Full-length connecting gallery floor"
+      },
+      {
+        "z": -41,
+        "y": 0.04,
+        "name": "Full-length connecting gallery floor"
+      },
+      {
+        "z": -40.5,
+        "y": 0.04,
+        "name": "Full-length connecting gallery floor"
+      },
+      {
+        "z": -40,
+        "y": 0.04,
+        "name": "Full-length connecting gallery floor"
+      },
+      {
+        "z": -39.5,
+        "y": 0.04,
+        "name": "Full-length connecting gallery floor"
+      },
+      {
+        "z": -39,
+        "y": 0.04,
+        "name": "Full-length connecting gallery floor"
+      },
+      {
+        "z": -38.5,
+        "y": 0.04349999874830224,
+        "name": "Aerial batch · Tower corridor and three workshops · 312"
+      },
+      {
+        "z": -38,
+        "y": 0.04,
+        "name": "Full-length connecting gallery floor"
+      },
+      {
+        "z": -37.5,
+        "y": 0.04,
+        "name": "Full-length connecting gallery floor"
+      },
+      {
+        "z": -37,
+        "y": 0.04,
+        "name": "Full-length connecting gallery floor"
+      },
+      {
+        "z": -36.5,
+        "y": 0.04,
+        "name": "Full-length connecting gallery floor"
+      },
+      {
+        "z": -36,
+        "y": 0.04,
+        "name": "Full-length connecting gallery floor"
+      },
+      {
+        "z": -35.5,
+        "y": 0.04,
+        "name": "Full-length connecting gallery floor"
+      },
+      {
+        "z": -35,
+        "y": 0.04349999874830224,
+        "name": "Aerial batch · Tower corridor and three workshops · 312"
+      },
+      {
+        "z": -34.5,
+        "y": 0.04,
+        "name": "Full-length connecting gallery floor"
+      },
+      {
+        "z": -34,
+        "y": 0.04,
+        "name": "Full-length connecting gallery floor"
+      },
+      {
+        "z": -33.5,
+        "y": 0.04,
+        "name": "Full-length connecting gallery floor"
+      },
+      {
+        "z": -33,
+        "y": 0.04,
+        "name": "Full-length connecting gallery floor"
+      },
+      {
+        "z": -32.5,
+        "y": 0.04,
+        "name": "Full-length connecting gallery floor"
+      },
+      {
+        "z": -32,
+        "y": 0.04,
+        "name": "Full-length connecting gallery floor"
+      },
+      {
+        "z": -31.5,
+        "y": 0.04,
+        "name": "Full-length connecting gallery floor"
+      },
+      {
+        "z": -31,
+        "y": 0.04,
+        "name": "Full-length connecting gallery floor"
+      },
+      {
+        "z": -30.5,
+        "y": 0.04349999874830246,
+        "name": "Aerial batch · Tower corridor and three workshops · 312"
+      },
+      {
+        "z": -30,
+        "y": 0.04,
+        "name": "Full-length connecting gallery floor"
+      },
+      {
+        "z": -29.5,
+        "y": 0.04,
+        "name": "Full-length connecting gallery floor"
+      },
+      {
+        "z": -29,
+        "y": 0.04,
+        "name": "Full-length connecting gallery floor"
+      },
+      {
+        "z": -28.5,
+        "y": 0.04,
+        "name": "Full-length connecting gallery floor"
+      },
+      {
+        "z": -28,
+        "y": 0.04,
+        "name": "Full-length connecting gallery floor"
+      },
+      {
+        "z": -27.5,
+        "y": 0.04,
+        "name": "Full-length connecting gallery floor"
+      },
+      {
+        "z": -27,
+        "y": 0.04,
+        "name": "Full-length connecting gallery floor"
+      },
+      {
+        "z": -26.5,
+        "y": 0.04,
+        "name": "Full-length connecting gallery floor"
+      },
+      {
+        "z": -26,
+        "y": 0.04,
+        "name": "Full-length connecting gallery floor"
+      },
+      {
+        "z": -25.5,
+        "y": 0.04,
+        "name": "Full-length connecting gallery floor"
+      },
+      {
+        "z": -25,
+        "y": 0.04,
+        "name": "Full-length connecting gallery floor"
+      },
+      {
+        "z": -24.5,
+        "y": 0.04,
+        "name": "Full-length connecting gallery floor"
+      },
+      {
+        "z": -24,
+        "y": 0.04,
+        "name": "Full-length connecting gallery floor"
+      },
+      {
+        "z": -23.5,
+        "y": 0.04,
+        "name": "Full-length connecting gallery floor"
+      },
+      {
+        "z": -23,
+        "y": 0.04,
+        "name": "Full-length connecting gallery floor"
+      },
+      {
+        "z": -22.5,
+        "y": 0.04349999874830246,
+        "name": "Aerial batch · Tower corridor and three workshops · 312"
+      },
+      {
+        "z": -22,
+        "y": 0.04,
+        "name": "Full-length connecting gallery floor"
+      },
+      {
+        "z": -21.5,
+        "y": 0.04,
+        "name": "Full-length connecting gallery floor"
+      },
+      {
+        "z": -21,
+        "y": 0.040000000000000285,
+        "name": "Full-length connecting gallery floor"
+      },
+      {
+        "z": -20.5,
+        "y": 0.04,
+        "name": "Full-length connecting gallery floor"
+      },
+      {
+        "z": -20,
+        "y": 0.04,
+        "name": "Full-length connecting gallery floor"
+      },
+      {
+        "z": -19.5,
+        "y": 0.039999999999999716,
+        "name": "Full-length connecting gallery floor"
+      },
+      {
+        "z": -19,
+        "y": 0.04,
+        "name": "Full-length connecting gallery floor"
+      },
+      {
+        "z": -18.5,
+        "y": 0.04,
+        "name": "Full-length connecting gallery floor"
+      },
+      {
+        "z": -18,
+        "y": 0.04,
+        "name": "Full-length connecting gallery floor"
+      },
+      {
+        "z": -17.5,
+        "y": 0.04,
+        "name": "Full-length connecting gallery floor"
+      },
+      {
+        "z": -17,
+        "y": 0.04,
+        "name": "Full-length connecting gallery floor"
+      },
+      {
+        "z": -16.5,
+        "y": 0.039999999999999716,
+        "name": "Full-length connecting gallery floor"
+      },
+      {
+        "z": -16,
+        "y": 0.34000000000000336,
+        "name": "Tower service court"
+      },
+      {
+        "z": -15.5,
+        "y": 0.34000000000000347,
+        "name": "Tower service court"
+      },
+      {
+        "z": -15,
+        "y": 0.34000000000000313,
+        "name": "Tower service court"
+      },
+      {
+        "z": -14.5,
+        "y": 0.34000000000000324,
+        "name": "Tower service court"
+      },
+      {
+        "z": -14,
+        "y": 0.34000000000000313,
+        "name": "Tower service court"
+      },
+      {
+        "z": -13.5,
+        "y": 0.340000000000003,
+        "name": "Tower service court"
+      },
+      {
+        "z": -13,
+        "y": 0.3400000000000029,
+        "name": "Tower service court"
+      },
+      {
+        "z": -12.5,
+        "y": 0.3400000000000028,
+        "name": "Tower service court"
+      },
+      {
+        "z": -12,
+        "y": 0.3400000000000029,
+        "name": "Tower service court"
+      },
+      {
+        "z": -11.5,
+        "y": 0.3400000000000028,
+        "name": "Tower service court"
+      },
+      {
+        "z": -11,
+        "y": 0.34000000000000247,
+        "name": "Tower service court"
+      },
+      {
+        "z": -10.5,
+        "y": 0.34000000000000236,
+        "name": "Tower service court"
+      },
+      {
+        "z": -10,
+        "y": 0.34000000000000247,
+        "name": "Tower service court"
+      },
+      {
+        "z": -9.5,
+        "y": 0.34000000000000213,
+        "name": "Tower service court"
+      },
+      {
+        "z": -9,
+        "y": 0.340000000000002,
+        "name": "Tower service court"
+      },
+      {
+        "z": -8.5,
+        "y": 0.34000000000000213,
+        "name": "Tower service court"
+      },
+      {
+        "z": -8,
+        "y": 0.340000000000002,
+        "name": "Tower service court"
+      },
+      {
+        "z": -7.5,
+        "y": 0.3400000000000017,
+        "name": "Tower service court"
+      },
+      {
+        "z": -7,
+        "y": 0.34000000000000136,
+        "name": "Tower service court"
+      },
+      {
+        "z": -6.5,
+        "y": 0.34000000000000147,
+        "name": "Tower service court"
+      },
+      {
+        "z": -6,
+        "y": 0.34000000000000136,
+        "name": "Tower service court"
+      },
+      {
+        "z": -5.5,
+        "y": 0.34000000000000125,
+        "name": "Tower service court"
+      },
+      {
+        "z": -5,
+        "y": 0.040000000000000285,
+        "name": "Full-length connecting gallery floor"
+      },
+      {
+        "z": -4.5,
+        "y": 0.04,
+        "name": "Full-length connecting gallery floor"
+      },
+      {
+        "z": -4,
+        "y": 0.04,
+        "name": "Full-length connecting gallery floor"
+      },
+      {
+        "z": -3.5,
+        "y": 0.039999999999999716,
+        "name": "Full-length connecting gallery floor"
+      },
+      {
+        "z": -3,
+        "y": 0.04,
+        "name": "Full-length connecting gallery floor"
+      },
+      {
+        "z": -2.5,
+        "y": 0.04,
+        "name": "Full-length connecting gallery floor"
+      },
+      {
+        "z": -2,
+        "y": 0.04,
+        "name": "Full-length connecting gallery floor"
+      },
+      {
+        "z": -1.5,
+        "y": 0.04,
+        "name": "Full-length connecting gallery floor"
+      },
+      {
+        "z": -1,
+        "y": 0.04,
+        "name": "Full-length connecting gallery floor"
+      },
+      {
+        "z": -0.5,
+        "y": 0.04,
+        "name": "Full-length connecting gallery floor"
+      },
+      {
+        "z": 0,
+        "y": 0.04,
+        "name": "Full-length connecting gallery floor"
+      },
+      {
+        "z": 0.5,
+        "y": 0.039999999999999716,
+        "name": "Full-length connecting gallery floor"
+      },
+      {
+        "z": 1,
+        "y": 0.04,
+        "name": "Full-length connecting gallery floor"
+      },
+      {
+        "z": 1.5,
+        "y": 0.04349999874830246,
+        "name": "Aerial batch · Tower corridor and three workshops · 328"
+      },
+      {
+        "z": 2,
+        "y": 0.04,
+        "name": "Full-length connecting gallery floor"
+      },
+      {
+        "z": 2.5,
+        "y": 0.04,
+        "name": "Full-length connecting gallery floor"
+      },
+      {
+        "z": 3,
+        "y": 0.039999999999999716,
+        "name": "Full-length connecting gallery floor"
+      },
+      {
+        "z": 3.5,
+        "y": 0.04,
+        "name": "Full-length connecting gallery floor"
+      },
+      {
+        "z": 4,
+        "y": 0.04,
+        "name": "Full-length connecting gallery floor"
+      },
+      {
+        "z": 4.5,
+        "y": 0.039999999999999716,
+        "name": "Full-length connecting gallery floor"
+      },
+      {
+        "z": 5,
+        "y": 0.04,
+        "name": "Full-length connecting gallery floor"
+      },
+      {
+        "z": 5.5,
+        "y": 0.039999999999999716,
+        "name": "Full-length connecting gallery floor"
+      },
+      {
+        "z": 6,
+        "y": 0.04,
+        "name": "Full-length connecting gallery floor"
+      },
+      {
+        "z": 6.5,
+        "y": 0.04,
+        "name": "Full-length connecting gallery floor"
+      },
+      {
+        "z": 7,
+        "y": 0.04,
+        "name": "Full-length connecting gallery floor"
+      },
+      {
+        "z": 7.5,
+        "y": 0.04,
+        "name": "Full-length connecting gallery floor"
+      },
+      {
+        "z": 8,
+        "y": 0.04,
+        "name": "Full-length connecting gallery floor"
+      },
+      {
+        "z": 8.5,
+        "y": 0.04,
+        "name": "Full-length connecting gallery floor"
+      }
+    ]
+  },
+  "errors": []
+}

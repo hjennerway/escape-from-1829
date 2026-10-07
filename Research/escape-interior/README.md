@@ -1,5 +1,59 @@
 # Asylum escape interior finishes
 
+## Victorian timber exit leaves (7 October 2026)
+
+The owner's styling request replaces the modern flat green exit leaves with
+heavy six-panel timber doors, worn brown wood grain, stepped panel mouldings,
+three iron hinges and an oval knob on a mortice-lock plate. This is fictional
+period styling, not a reconstruction from a historical door photograph. The
+existing red Reception entrance retains its established design.
+
+The shared interior architecture applies the finish to both faces of all 23
+other asylum exits, including basement and upper floors. The legacy grid doors
+use the same detail factory. Modern illuminated route signs, instruction
+plaques, panic bars and legacy closer/kick-plate fittings are removed. Existing
+door openings, stone surrounds, navigation and outside arrival points remain
+fixed. The outer timber stiles stay flat where the four chain eyes attach.
+Escape continues to add chains according to the existing lock/key state.
+
+Ten compiled browser interior sections are regenerated; the aerial manifest
+still matches its sources. Hardware desktop and phone review views for the
+compiled and worker paths are in
+`../../Browser/artifacts/victorian-fire-doors/`. Unity/Android, Blender and
+packaged exports are unchanged.
+
+## Reference iron padlock and connected chains (7 October 2026)
+
+The owner's [padlock photograph](door-lock-reference.png) supersedes the square
+brass lock and single chain described below. Four oval-link runs converge on
+a rounded, weathered iron case with a bowed shackle, rivets, a case seam and
+a keyhole cover. Upper runs thread the arch; lower runs thread the uprights.
+Alternating closed links, bolted eyes and terminal shackle connections form
+continuous chains. The small chain offset clears the timber faces.
+
+The same runtime factory supplies all 24 asylum exit leaves, both staff stair
+grilles and both faces of the nine grounds corridor pairs. Existing key and
+unlock states retain their established behaviour. These are fictional Escape
+fittings. Review images and checks are in
+`../../Browser/artifacts/door-locks-reference/`; compiled architecture and
+Unity/Android, Blender and packaged exports are unchanged.
+
+## Visible chains on locked entrances (7 October 2026)
+
+The owner's gameplay request adds a prominent iron chain and brass padlock to
+each locked 1829 exit, alongside its existing E refusal. Chains span the inside
+faces of all 24 fitted exit leaves, with bolted eye plates at both ends and a
+large hanging lock. Reception follows its wider red double leaf; the remaining
+fittings follow the inset and offset of their actual green timber leaves.
+The two staff stair grilles carry the same fitting below their notice plates.
+Already-open room doors retain their existing poses.
+
+These are fictional Escape fittings, not evidence of historical hardware.
+Visibility follows existing key, grille-release and developer-unlock states;
+capture, property recovery and restart use those same restrictions. Shared
+architecture, compiled interior/aerial sources and Unity/Blender exports are
+not changed. Hardware review views are in `../../Browser/artifacts/door-locks/`.
+
 ## Clearer objectives and stronger prop glows (6 October 2026)
 
 The owner's follow-up reports reaching the old Library after releasing its gate

@@ -1,0 +1,192 @@
+{
+  "runs": [
+    {
+      "initial": {
+        "notes": [
+          "door:0:D1",
+          "places:0",
+          "arrival:0"
+        ],
+        "run": {
+          "exit": "D8",
+          "office": "R41",
+          "keyRoom": "R23"
+        }
+      },
+      "indoor": {
+        "samples": 6625,
+        "office": "R41",
+        "staff": true,
+        "service": true,
+        "opened": [
+          "S1"
+        ],
+        "notes": [
+          "escape:mast",
+          "escape:service-key",
+          "escape:plan",
+          "places:3",
+          "arrival:3",
+          "escape:gate:S1",
+          "escape:staff-route",
+          "escape:gate",
+          "escape:staff-key",
+          "places:0",
+          "escape:office-index",
+          "places:1",
+          "arrival:1",
+          "escape:memo",
+          "door:0:D1",
+          "arrival:0"
+        ]
+      },
+      "grounds": {
+        "samples": 269,
+        "boundary": true,
+        "pos": {
+          "x": -74.04094458955393,
+          "z": -88.99993141231526,
+          "floor": 0,
+          "y": 0,
+          "stair": null,
+          "outside": true,
+          "verticalTrend": -1
+        }
+      }
+    },
+    {
+      "seed": 0,
+      "exit": "D2",
+      "office": "R41",
+      "outside": true,
+      "boundary": true,
+      "samples": 270,
+      "walkingMs": 97.90000000037253
+    },
+    {
+      "seed": 10000019,
+      "exit": "D8",
+      "office": "R49",
+      "outside": true,
+      "boundary": true,
+      "samples": 269,
+      "walkingMs": 110.90000000037253
+    },
+    {
+      "seed": 20000038,
+      "exit": "D2",
+      "office": "R41",
+      "outside": true,
+      "boundary": true,
+      "samples": 270,
+      "walkingMs": 96.6000000005588
+    },
+    {
+      "seed": 30000057,
+      "exit": "D8",
+      "office": "R41",
+      "outside": true,
+      "boundary": true,
+      "samples": 269,
+      "walkingMs": 107.29999999981374
+    }
+  ],
+  "fittings": [
+    {
+      "id": "memo",
+      "kind": "desk",
+      "support": "0:R26:fixed:0",
+      "position": [
+        23.04,
+        1.004,
+        16.047
+      ],
+      "glow": true
+    },
+    {
+      "id": "staff-key",
+      "kind": "wall",
+      "position": [
+        -19.23,
+        1.4,
+        9.530000000000001
+      ],
+      "glow": true
+    },
+    {
+      "id": "reclaim",
+      "kind": "desk",
+      "support": "0:Reception:fixed:0",
+      "position": [
+        -0.76,
+        1.12,
+        13.26
+      ],
+      "glow": true
+    },
+    {
+      "id": "release-note",
+      "kind": "desk",
+      "support": "2:B3:fixed:0",
+      "position": [
+        -35.11,
+        1.004,
+        -9.603
+      ],
+      "glow": true
+    },
+    {
+      "id": "release",
+      "kind": "wall",
+      "position": [
+        -29.77,
+        1.4,
+        -10.6
+      ],
+      "glow": true
+    },
+    {
+      "id": "plan",
+      "kind": "desk",
+      "support": "3:R41:fixed:1",
+      "position": [
+        -0.7469999999999999,
+        1.004,
+        6.56
+      ],
+      "glow": true
+    },
+    {
+      "id": "office-index",
+      "kind": "desk",
+      "support": "1:R26:fixed:0",
+      "position": [
+        23.04,
+        1.004,
+        16.047
+      ],
+      "glow": true
+    }
+  ],
+  "screens": [
+    "locked-grille",
+    "staff-key-rack",
+    "staff-key-glow",
+    "service-record-with-key",
+    "memo-room-numbers",
+    "office-index-room-numbers",
+    "upstairs-record",
+    "first-capture",
+    "reception-property-tray",
+    "reception-property-tray-empty",
+    "notebook-discoveries",
+    "mast-arrival",
+    "ending",
+    "second-capture-mobile",
+    "notebook-mobile",
+    "third-capture-mobile",
+    "touch-notice-notebook",
+    "touch-staff-key-rack"
+  ],
+  "errors": []
+}

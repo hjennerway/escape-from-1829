@@ -35,8 +35,8 @@ export function addWestLawnPhotoDetails(THREE,{model,box,mesh,worldUV,white,bric
       [-27.43,37.93],[-28.88,37.93],[-28.88,43]],4.05,.23,.28,courseEnd);
   hipRoof(-28.3,35.5,1.8,4.8,9.02,.55).name='West lawn bay slate roof';
   for(const y of [1.95,6.35])for(const z of [34,35.5,37])opening('west-lawn-bay',-27.44,y,z,.7,2.7);
-  for(const z of [33.02,37.98])box(iron,-27.27,4.47,z,.075,8.94,.075);
-  for(const [x,z] of [[-28.72,27.12],[-31.7,20.1]])box(iron,x,4.25,z,.08,8.5,.08);
+  for(const z of [33.02,37.98])box(iron,-27.27,4.47,z,.075,8.94,.075,0,true);
+  for(const [x,z] of [[-28.72,27.12],[-31.7,20.1]])box(iron,x,4.25,z,.08,8.5,.08,0,true);
   // The shared entrance walk follows the wall and bay, leaving the lawn open.
   for(const [x,z] of [[-28.7,29],[-27.5,35.5]]){
     box(trim,x,3.1,z,.12,.32,.7);

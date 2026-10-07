@@ -1,0 +1,162 @@
+{
+  "result": {
+    "renderer": "ANGLE (NVIDIA, NVIDIA GeForce RTX 3090 Ti (0x00002203) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+    "headers": {
+      "doors": 9,
+      "probes": 432,
+      "failures": []
+    },
+    "corners": {
+      "corners": 14,
+      "probes": 560,
+      "failures": []
+    },
+    "doors": [
+      {
+        "id": "corridor-lock:gallery:0",
+        "title": "Main/admin · locked double doors",
+        "point": [
+          154.773125,
+          24.4
+        ],
+        "toward": [
+          154.773125,
+          -126
+        ],
+        "marked": true,
+        "x": 154.773125,
+        "z": 22.599999999999998,
+        "y": 1.35
+      },
+      {
+        "id": "corridor-lock:gallery:1",
+        "title": "Farndon · locked double doors",
+        "point": [
+          154.773125,
+          -126
+        ],
+        "toward": [
+          154.773125,
+          24.4
+        ],
+        "marked": true,
+        "x": 154.773125,
+        "z": -124.2,
+        "y": 1.35
+      },
+      {
+        "id": "corridor-lock:admin:0",
+        "title": "Redesmere · locked double doors",
+        "point": [
+          121.5,
+          9.8
+        ],
+        "toward": [
+          154.773125,
+          9.8
+        ],
+        "marked": true,
+        "x": 123.3,
+        "z": 9.8,
+        "y": 1.35
+      },
+      {
+        "id": "corridor-lock:irby:1",
+        "title": "Irby / Ashley · locked double doors",
+        "point": [
+          210,
+          -66.6
+        ],
+        "toward": [
+          154.773125,
+          -66.6
+        ],
+        "marked": false,
+        "x": 208.2,
+        "z": -66.6,
+        "y": 1.35
+      },
+      {
+        "id": "corridor-lock:diagonal:1",
+        "title": "Upton / Frith / Oscroft · locked double doors",
+        "point": [
+          100,
+          -173.4
+        ],
+        "toward": [
+          154.773125,
+          -118.62687500000001
+        ],
+        "marked": true,
+        "x": 101.27279220613579,
+        "z": -172.12720779386422,
+        "y": 1.35
+      },
+      {
+        "id": "corridor-lock:grafton:1",
+        "title": "Grafton / Edge · locked double doors",
+        "point": [
+          106,
+          -142.88972881355932
+        ],
+        "toward": [
+          130.51027118644066,
+          -142.88972881355932
+        ],
+        "marked": true,
+        "x": 107.8,
+        "z": -142.88972881355932,
+        "y": 1.35
+      },
+      {
+        "id": "corridor-lock:witby:1",
+        "title": "Witby · locked double doors",
+        "point": [
+          115.60000000000001,
+          -187
+        ],
+        "toward": [
+          115.60000000000001,
+          -157.79999999999995
+        ],
+        "marked": true,
+        "x": 115.60000000000001,
+        "z": -185.2,
+        "y": 1.35
+      },
+      {
+        "id": "corridor-lock:hale-0:1",
+        "title": "Hale / Daresbury / Huxley / Dunham · locked double doors",
+        "point": [
+          147.6,
+          -72.855
+        ],
+        "toward": [
+          154.773125,
+          -72.855
+        ],
+        "marked": false,
+        "x": 149.4,
+        "z": -72.855,
+        "y": 1.35
+      },
+      {
+        "id": "corridor-lock:hale-1:1",
+        "title": "Hale / Daresbury / Huxley / Dunham · locked double doors",
+        "point": [
+          139.6,
+          -95.405
+        ],
+        "toward": [
+          154.773125,
+          -95.405
+        ],
+        "marked": false,
+        "x": 141.4,
+        "z": -95.405,
+        "y": 1.35
+      }
+    ]
+  },
+  "errors": []
+}

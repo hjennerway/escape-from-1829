@@ -1,0 +1,841 @@
+{
+  "validation": {
+    "renderer": "ANGLE (NVIDIA, NVIDIA GeForce RTX 3090 Ti (0x00002203) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+    "groundY": -0.15,
+    "westX": 145.4,
+    "hits": [
+      {
+        "z": -49.4,
+        "y": -0.13,
+        "count": 1,
+        "x": 145.39999389648438,
+        "names": [
+          "Aerial batch · Tower corridor and three workshops · 771"
+        ]
+      },
+      {
+        "z": -49.4,
+        "y": -0.02,
+        "count": 1,
+        "x": 145.39999389648438,
+        "names": [
+          "Aerial batch · Tower corridor and three workshops · 771"
+        ]
+      },
+      {
+        "z": -49.4,
+        "y": 0.02,
+        "count": 1,
+        "x": 145.39999389648438,
+        "names": [
+          "Aerial batch · Tower corridor and three workshops · 771"
+        ]
+      },
+      {
+        "z": -49.4,
+        "y": 0.58,
+        "count": 1,
+        "x": 145.39999389648438,
+        "names": [
+          "Aerial batch · Tower corridor and three workshops · 771"
+        ]
+      },
+      {
+        "z": -49.4,
+        "y": 0.62,
+        "count": 1,
+        "x": 145.39999389648438,
+        "names": [
+          "Aerial batch · Tower corridor and three workshops · 772"
+        ]
+      },
+      {
+        "z": -49.4,
+        "y": 1,
+        "count": 1,
+        "x": 145.39999389648438,
+        "names": [
+          "Aerial batch · Tower corridor and three workshops · 772"
+        ]
+      },
+      {
+        "z": -49.4,
+        "y": 5.07,
+        "count": 1,
+        "x": 145.39999389648438,
+        "names": [
+          "Aerial batch · Tower corridor and three workshops · 772"
+        ]
+      },
+      {
+        "z": -49.4,
+        "y": 8,
+        "count": 1,
+        "x": 145.39999389648438,
+        "names": [
+          "Aerial batch · Tower corridor and three workshops · 772"
+        ]
+      },
+      {
+        "z": -43.55,
+        "y": -0.13,
+        "count": 1,
+        "x": 145.39999389648438,
+        "names": [
+          "Aerial batch · Tower corridor and three workshops · 771"
+        ]
+      },
+      {
+        "z": -43.55,
+        "y": -0.02,
+        "count": 1,
+        "x": 145.39999389648438,
+        "names": [
+          "Aerial batch · Tower corridor and three workshops · 771"
+        ]
+      },
+      {
+        "z": -43.55,
+        "y": 0.02,
+        "count": 1,
+        "x": 145.39999389648438,
+        "names": [
+          "Aerial batch · Tower corridor and three workshops · 771"
+        ]
+      },
+      {
+        "z": -43.55,
+        "y": 0.58,
+        "count": 1,
+        "x": 145.39999389648438,
+        "names": [
+          "Aerial batch · Tower corridor and three workshops · 771"
+        ]
+      },
+      {
+        "z": -43.55,
+        "y": 0.62,
+        "count": 1,
+        "x": 145.39999389648438,
+        "names": [
+          "Aerial batch · Tower corridor and three workshops · 772"
+        ]
+      },
+      {
+        "z": -43.55,
+        "y": 1,
+        "count": 1,
+        "x": 145.39999389648438,
+        "names": [
+          "Aerial batch · Tower corridor and three workshops · 772"
+        ]
+      },
+      {
+        "z": -43.55,
+        "y": 5.07,
+        "count": 1,
+        "x": 145.39999389648438,
+        "names": [
+          "Aerial batch · Tower corridor and three workshops · 772"
+        ]
+      },
+      {
+        "z": -43.55,
+        "y": 8,
+        "count": 1,
+        "x": 145.39999389648438,
+        "names": [
+          "Aerial batch · Tower corridor and three workshops · 772"
+        ]
+      },
+      {
+        "z": -43.45,
+        "y": -0.13,
+        "count": 1,
+        "x": 145.39999389648438,
+        "names": [
+          "Aerial batch · Tower corridor and three workshops · 771"
+        ]
+      },
+      {
+        "z": -43.45,
+        "y": -0.02,
+        "count": 1,
+        "x": 145.39999389648438,
+        "names": [
+          "Aerial batch · Tower corridor and three workshops · 771"
+        ]
+      },
+      {
+        "z": -43.45,
+        "y": 0.02,
+        "count": 1,
+        "x": 145.39999389648438,
+        "names": [
+          "Aerial batch · Tower corridor and three workshops · 771"
+        ]
+      },
+      {
+        "z": -43.45,
+        "y": 0.58,
+        "count": 1,
+        "x": 145.39999389648438,
+        "names": [
+          "Aerial batch · Tower corridor and three workshops · 771"
+        ]
+      },
+      {
+        "z": -43.45,
+        "y": 0.62,
+        "count": 1,
+        "x": 145.39999389648438,
+        "names": [
+          "Aerial batch · Tower corridor and three workshops · 772"
+        ]
+      },
+      {
+        "z": -43.45,
+        "y": 1,
+        "count": 1,
+        "x": 145.39999389648438,
+        "names": [
+          "Aerial batch · Tower corridor and three workshops · 772"
+        ]
+      },
+      {
+        "z": -43.45,
+        "y": 5.07,
+        "count": 1,
+        "x": 145.39999389648438,
+        "names": [
+          "Aerial batch · Tower corridor and three workshops · 772"
+        ]
+      },
+      {
+        "z": -43.45,
+        "y": 8,
+        "count": 1,
+        "x": 145.39999389648438,
+        "names": [
+          "Aerial batch · Tower corridor and three workshops · 772"
+        ]
+      },
+      {
+        "z": -40.7,
+        "y": -0.13,
+        "count": 1,
+        "x": 145.39999389648438,
+        "names": [
+          "Aerial batch · Tower corridor and three workshops · 771"
+        ]
+      },
+      {
+        "z": -40.7,
+        "y": -0.02,
+        "count": 1,
+        "x": 145.39999389648438,
+        "names": [
+          "Aerial batch · Tower corridor and three workshops · 771"
+        ]
+      },
+      {
+        "z": -40.7,
+        "y": 0.02,
+        "count": 1,
+        "x": 145.39999389648438,
+        "names": [
+          "Aerial batch · Tower corridor and three workshops · 771"
+        ]
+      },
+      {
+        "z": -40.7,
+        "y": 0.58,
+        "count": 1,
+        "x": 145.39999389648438,
+        "names": [
+          "Aerial batch · Tower corridor and three workshops · 771"
+        ]
+      },
+      {
+        "z": -40.7,
+        "y": 0.62,
+        "count": 1,
+        "x": 145.39999389648438,
+        "names": [
+          "Aerial batch · Tower corridor and three workshops · 772"
+        ]
+      },
+      {
+        "z": -40.7,
+        "y": 1,
+        "count": 1,
+        "x": 145.39999389648438,
+        "names": [
+          "Aerial batch · Tower corridor and three workshops · 772"
+        ]
+      },
+      {
+        "z": -40.7,
+        "y": 5.07,
+        "count": 1,
+        "x": 145.39999389648438,
+        "names": [
+          "Aerial batch · Tower corridor and three workshops · 772"
+        ]
+      },
+      {
+        "z": -40.7,
+        "y": 8,
+        "count": 1,
+        "x": 145.39999389648438,
+        "names": [
+          "Aerial batch · Tower corridor and three workshops · 772"
+        ]
+      },
+      {
+        "z": -36.35,
+        "y": -0.13,
+        "count": 1,
+        "x": 145.39999389648438,
+        "names": [
+          "Aerial batch · Tower corridor and three workshops · 771"
+        ]
+      },
+      {
+        "z": -36.35,
+        "y": -0.02,
+        "count": 1,
+        "x": 145.39999389648438,
+        "names": [
+          "Aerial batch · Tower corridor and three workshops · 771"
+        ]
+      },
+      {
+        "z": -36.35,
+        "y": 0.02,
+        "count": 1,
+        "x": 145.39999389648438,
+        "names": [
+          "Aerial batch · Tower corridor and three workshops · 771"
+        ]
+      },
+      {
+        "z": -36.35,
+        "y": 0.58,
+        "count": 1,
+        "x": 145.39999389648438,
+        "names": [
+          "Aerial batch · Tower corridor and three workshops · 771"
+        ]
+      },
+      {
+        "z": -36.35,
+        "y": 0.62,
+        "count": 1,
+        "x": 145.39999389648438,
+        "names": [
+          "Aerial batch · Tower corridor and three workshops · 772"
+        ]
+      },
+      {
+        "z": -36.35,
+        "y": 1,
+        "count": 1,
+        "x": 145.39999389648438,
+        "names": [
+          "Aerial batch · Tower corridor and three workshops · 772"
+        ]
+      },
+      {
+        "z": -36.35,
+        "y": 5.07,
+        "count": 1,
+        "x": 145.39999389648438,
+        "names": [
+          "Aerial batch · Tower corridor and three workshops · 772"
+        ]
+      },
+      {
+        "z": -36.35,
+        "y": 8,
+        "count": 1,
+        "x": 145.39999389648438,
+        "names": [
+          "Aerial batch · Tower corridor and three workshops · 772"
+        ]
+      },
+      {
+        "z": -33.1,
+        "y": -0.13,
+        "count": 1,
+        "x": 145.39999389648438,
+        "names": [
+          "Aerial batch · Tower corridor and three workshops · 771"
+        ]
+      },
+      {
+        "z": -33.1,
+        "y": -0.02,
+        "count": 1,
+        "x": 145.39999389648438,
+        "names": [
+          "Aerial batch · Tower corridor and three workshops · 771"
+        ]
+      },
+      {
+        "z": -33.1,
+        "y": 0.02,
+        "count": 1,
+        "x": 145.39999389648438,
+        "names": [
+          "Aerial batch · Tower corridor and three workshops · 771"
+        ]
+      },
+      {
+        "z": -33.1,
+        "y": 0.58,
+        "count": 1,
+        "x": 145.39999389648438,
+        "names": [
+          "Aerial batch · Tower corridor and three workshops · 771"
+        ]
+      },
+      {
+        "z": -33.1,
+        "y": 0.62,
+        "count": 1,
+        "x": 145.39999389648438,
+        "names": [
+          "Aerial batch · Tower corridor and three workshops · 772"
+        ]
+      },
+      {
+        "z": -33.1,
+        "y": 1,
+        "count": 1,
+        "x": 145.39999389648438,
+        "names": [
+          "Aerial batch · Tower corridor and three workshops · 772"
+        ]
+      },
+      {
+        "z": -33.1,
+        "y": 5.07,
+        "count": 1,
+        "x": 145.39999389648438,
+        "names": [
+          "Aerial batch · Tower corridor and three workshops · 772"
+        ]
+      },
+      {
+        "z": -33.1,
+        "y": 8,
+        "count": 1,
+        "x": 145.39999389648438,
+        "names": [
+          "Aerial batch · Tower corridor and three workshops · 772"
+        ]
+      },
+      {
+        "z": -26.85,
+        "y": -0.13,
+        "count": 1,
+        "x": 145.39999389648438,
+        "names": [
+          "Aerial batch · Tower corridor and three workshops · 771"
+        ]
+      },
+      {
+        "z": -26.85,
+        "y": -0.02,
+        "count": 1,
+        "x": 145.39999389648438,
+        "names": [
+          "Aerial batch · Tower corridor and three workshops · 771"
+        ]
+      },
+      {
+        "z": -26.85,
+        "y": 0.02,
+        "count": 1,
+        "x": 145.39999389648438,
+        "names": [
+          "Aerial batch · Tower corridor and three workshops · 771"
+        ]
+      },
+      {
+        "z": -26.85,
+        "y": 0.58,
+        "count": 1,
+        "x": 145.39999389648438,
+        "names": [
+          "Aerial batch · Tower corridor and three workshops · 771"
+        ]
+      },
+      {
+        "z": -26.85,
+        "y": 0.62,
+        "count": 1,
+        "x": 145.39999389648438,
+        "names": [
+          "Aerial batch · Tower corridor and three workshops · 772"
+        ]
+      },
+      {
+        "z": -26.85,
+        "y": 1,
+        "count": 1,
+        "x": 145.39999389648438,
+        "names": [
+          "Aerial batch · Tower corridor and three workshops · 772"
+        ]
+      },
+      {
+        "z": -26.85,
+        "y": 5.07,
+        "count": 1,
+        "x": 145.39999389648438,
+        "names": [
+          "Aerial batch · Tower corridor and three workshops · 772"
+        ]
+      },
+      {
+        "z": -26.85,
+        "y": 8,
+        "count": 1,
+        "x": 145.39999389648438,
+        "names": [
+          "Aerial batch · Tower corridor and three workshops · 772"
+        ]
+      }
+    ],
+    "parts": [
+      {
+        "name": "Stores west masonry plinth",
+        "min": [
+          145.40000000268222,
+          -0.17999998569488526,
+          -50.09999995231628
+        ],
+        "max": [
+          145.6399999973178,
+          0.5999999856948852,
+          -47.62500004768371
+        ]
+      },
+      {
+        "name": "Stores west masonry",
+        "min": [
+          145.40000000268222,
+          0.6000001144409177,
+          -50.09999995231628
+        ],
+        "max": [
+          145.6399999973178,
+          8.839999885559081,
+          -47.62500004768371
+        ]
+      },
+      {
+        "name": "Sash base plinth",
+        "min": [
+          145.40000000268222,
+          -0.17999998569488526,
+          -47.625
+        ],
+        "max": [
+          145.6399999973178,
+          0.5999999856948852,
+          -46.375
+        ]
+      },
+      {
+        "name": "Sash base",
+        "min": [
+          145.40000000268222,
+          0.599999988079071,
+          -47.625
+        ],
+        "max": [
+          145.6399999973178,
+          1.9500000119209289,
+          -46.375
+        ]
+      },
+      {
+        "name": "Opening header",
+        "min": [
+          145.40000000268222,
+          4.649999971389771,
+          -47.625
+        ],
+        "max": [
+          145.6399999973178,
+          8.84000002861023,
+          -46.375
+        ]
+      },
+      {
+        "name": "Stores west masonry plinth",
+        "min": [
+          145.40000000268222,
+          -0.17999998569488526,
+          -46.375000005960466
+        ],
+        "max": [
+          145.6399999973178,
+          0.5999999856948852,
+          -45.57499999403954
+        ]
+      },
+      {
+        "name": "Stores west masonry",
+        "min": [
+          145.40000000268222,
+          0.6000001144409177,
+          -46.375000005960466
+        ],
+        "max": [
+          145.6399999973178,
+          8.839999885559081,
+          -45.57499999403954
+        ]
+      },
+      {
+        "name": "Opening header",
+        "min": [
+          145.40000000268222,
+          3.7499999237060546,
+          -45.57499998807907
+        ],
+        "max": [
+          145.6399999973178,
+          8.840000076293945,
+          -43.92500001192093
+        ]
+      },
+      {
+        "name": "Stores west masonry plinth",
+        "min": [
+          145.40000000268222,
+          -0.17999998569488526,
+          -43.92500000596046
+        ],
+        "max": [
+          145.6399999973178,
+          0.5999999856948852,
+          -43.124999994039534
+        ]
+      },
+      {
+        "name": "Stores west masonry",
+        "min": [
+          145.40000000268222,
+          0.6000001144409177,
+          -43.92500000596046
+        ],
+        "max": [
+          145.6399999973178,
+          8.839999885559081,
+          -43.124999994039534
+        ]
+      },
+      {
+        "name": "Sash base plinth",
+        "min": [
+          145.40000000268222,
+          -0.17999998569488526,
+          -43.125
+        ],
+        "max": [
+          145.6399999973178,
+          0.5999999856948852,
+          -41.875
+        ]
+      },
+      {
+        "name": "Sash base",
+        "min": [
+          145.40000000268222,
+          0.599999988079071,
+          -43.125
+        ],
+        "max": [
+          145.6399999973178,
+          1.9500000119209289,
+          -41.875
+        ]
+      },
+      {
+        "name": "Opening header",
+        "min": [
+          145.40000000268222,
+          4.649999971389771,
+          -43.125
+        ],
+        "max": [
+          145.6399999973178,
+          8.84000002861023,
+          -41.875
+        ]
+      },
+      {
+        "name": "Stores west masonry plinth",
+        "min": [
+          145.40000000268222,
+          -0.17999998569488526,
+          -41.875
+        ],
+        "max": [
+          145.6399999973178,
+          0.5999999856948852,
+          -37.625
+        ]
+      },
+      {
+        "name": "Stores west masonry",
+        "min": [
+          145.40000000268222,
+          0.6000001144409177,
+          -41.875
+        ],
+        "max": [
+          145.6399999973178,
+          8.839999885559081,
+          -37.625
+        ]
+      },
+      {
+        "name": "Sash base plinth",
+        "min": [
+          145.40000000268222,
+          -0.17999998569488526,
+          -37.625
+        ],
+        "max": [
+          145.6399999973178,
+          0.5999999856948852,
+          -36.375
+        ]
+      },
+      {
+        "name": "Sash base",
+        "min": [
+          145.40000000268222,
+          0.599999988079071,
+          -37.625
+        ],
+        "max": [
+          145.6399999973178,
+          1.9500000119209289,
+          -36.375
+        ]
+      },
+      {
+        "name": "Opening header",
+        "min": [
+          145.40000000268222,
+          4.649999971389771,
+          -37.625
+        ],
+        "max": [
+          145.6399999973178,
+          8.84000002861023,
+          -36.375
+        ]
+      },
+      {
+        "name": "Stores west masonry plinth",
+        "min": [
+          145.40000000268222,
+          -0.17999998569488526,
+          -36.375
+        ],
+        "max": [
+          145.6399999973178,
+          0.5999999856948852,
+          -32.125
+        ]
+      },
+      {
+        "name": "Stores west masonry",
+        "min": [
+          145.40000000268222,
+          0.6000001144409177,
+          -36.375
+        ],
+        "max": [
+          145.6399999973178,
+          8.839999885559081,
+          -32.125
+        ]
+      },
+      {
+        "name": "Sash base plinth",
+        "min": [
+          145.40000000268222,
+          -0.17999998569488526,
+          -32.125
+        ],
+        "max": [
+          145.6399999973178,
+          0.5999999856948852,
+          -30.875
+        ]
+      },
+      {
+        "name": "Sash base",
+        "min": [
+          145.40000000268222,
+          0.599999988079071,
+          -32.125
+        ],
+        "max": [
+          145.6399999973178,
+          1.9500000119209289,
+          -30.875
+        ]
+      },
+      {
+        "name": "Opening header",
+        "min": [
+          145.40000000268222,
+          4.649999971389771,
+          -32.125
+        ],
+        "max": [
+          145.6399999973178,
+          8.84000002861023,
+          -30.875
+        ]
+      },
+      {
+        "name": "Stores west masonry plinth",
+        "min": [
+          145.40000000268222,
+          -0.17999998569488526,
+          -30.875000047683717
+        ],
+        "max": [
+          145.6399999973178,
+          0.5999999856948852,
+          -26.599999952316285
+        ]
+      },
+      {
+        "name": "Stores west masonry",
+        "min": [
+          145.40000000268222,
+          0.6000001144409177,
+          -30.875000047683717
+        ],
+        "max": [
+          145.6399999973178,
+          8.839999885559081,
+          -26.599999952316285
+        ]
+      }
+    ]
+  },
+  "errors": []
+}

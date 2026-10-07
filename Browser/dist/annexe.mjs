@@ -1,3 +1,4 @@
+import {markDownpipeInstances} from './downpipe-clearance.mjs';
 import {addLeightonNewton} from './annexe-leighton-newton.mjs';
 import {addExteriorStairRail} from './exterior-stair-rail.mjs';
 import {addOakmereCourt} from './annexe-oakmere-court.mjs';
@@ -165,7 +166,7 @@ export function createAnnexe(THREE,{brick,roof,material,worldUV,hipRoof}){
  const batches=new Map(),ranges=[],openings=[];
  function mesh(g,m,x,y,z,name){const o=new THREE.Mesh(g,m);o.position.set(x,y,z);o.name=name;o.castShadow=true;o.receiveShadow=true;parent().add(o);return o;}
  function solid(m,x,y,z,w,h,d,name,r=0){const o=mesh(worldUV(new THREE.BoxGeometry(w,h,d),1.7),m,x,y,z,name);o.rotation.y=r;o.userData.orientedCollision=true;return o;}
- function box(m,x,y,z,w,h,d,r=0){if(!batches.has(m))batches.set(m,[]);batches.get(m).push({x,y,z,w,h,d,r,owner:parent()});}
+ function box(m,x,y,z,w,h,d,r=0,downpipe=false){if(!batches.has(m))batches.set(m,[]);batches.get(m).push({x,y,z,w,h,d,r,owner:parent(),downpipe});}
  function beam(p,q,width,m,name){const a=new THREE.Vector3(...p),b=new THREE.Vector3(...q),v=b.clone().sub(a);const o=mesh(new THREE.CylinderGeometry(width/2,width/2,v.length(),6),m,...a.add(b).multiplyScalar(.5).toArray(),name);o.quaternion.setFromUnitVectors(new THREE.Vector3(0,1,0),v.normalize());return o;}
  function hip(x,z,w,d,y,rise,name,r=0){const o=hipRoof(x,z,w,d,y,rise);parent().add(o);o.rotation.y=r;o.name=name+' slate roof';return o;}
  function position(b,u,n){const c=Math.cos(b.r),s=Math.sin(b.r);return [b.x+c*u+s*n,b.z-s*u+c*n];}
@@ -241,7 +242,7 @@ export function createAnnexe(THREE,{brick,roof,material,worldUV,hipRoof}){
     }
    }
   }
-  for(const side of [-1,1]){const [x,z]=position(b,side*(b.w/2-.4),b.d/2+.32);if(!occupied(x,b.h/2,z,b))box(blue,x,b.h/2,z,.105,b.h,.105);}
+  for(const side of [-1,1]){const [x,z]=position(b,side*(b.w/2-.4),b.d/2+.32);if(!occupied(x,b.h/2,z,b))box(blue,x,b.h/2,z,.105,b.h,.105,0,true);}
  }
  currentWard=null;currentSection=null;
  const hall=ranges[0],entrance=ranges[1],front=hall.z+hall.d/2+.04,entryZ=entrance.z+entrance.d/2+.05;
@@ -363,7 +364,7 @@ export function createAnnexe(THREE,{brick,roof,material,worldUV,hipRoof}){
   const byOwner=new Map();
   for(const item of items){if(!byOwner.has(item.owner))byOwner.set(item.owner,[]);byOwner.get(item.owner).push(item);}
   for(const [owner,details] of byOwner){
-   const m=new THREE.InstancedMesh(new THREE.BoxGeometry(1,1,1),mat,details.length);m.receiveShadow=true;m.castShadow=true;m.name=mat===blue?'Blue gutters and downpipes':'Annexe facade details';
+   const m=new THREE.InstancedMesh(new THREE.BoxGeometry(1,1,1),mat,details.length);markDownpipeInstances(m,details);m.receiveShadow=true;m.castShadow=true;m.name=mat===blue?'Blue gutters and downpipes':'Annexe facade details';
    for(let i=0;i<details.length;i++){const b=details[i];dummy.position.set(b.x,b.y,b.z);dummy.scale.set(b.w,b.h,b.d);dummy.rotation.set(0,b.r,0);dummy.updateMatrix();m.setMatrixAt(i,dummy.matrix);}owner.add(m);
   }
  }

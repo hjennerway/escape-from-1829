@@ -1,0 +1,182 @@
+[
+  {
+    "x": 60.7,
+    "z": -32.87,
+    "hits": [
+      {
+        "name": "",
+        "y": 9.680000050332808,
+        "material": "c4c9c6",
+        "roof": true
+      },
+      {
+        "name": "",
+        "instance": 121,
+        "y": 9.530000075697899,
+        "material": "e1e3dc",
+        "roof": false
+      }
+    ]
+  },
+  {
+    "x": 60.7,
+    "z": -32.72,
+    "hits": [
+      {
+        "name": "",
+        "y": 9.596666718471196,
+        "material": "c4c9c6",
+        "roof": true
+      }
+    ]
+  },
+  {
+    "x": 82.3,
+    "z": -32.8,
+    "hits": [
+      {
+        "name": "",
+        "y": 9.641111162130723,
+        "material": "c4c9c6",
+        "roof": true
+      },
+      {
+        "name": "",
+        "instance": 121,
+        "y": 9.530000075697899,
+        "material": "e1e3dc",
+        "roof": false
+      },
+      {
+        "name": "Rear court stair enclosure slate roof",
+        "y": 7.930000292458926,
+        "material": "c4c9c6",
+        "roof": true
+      },
+      {
+        "name": "Rear court white stair enclosure",
+        "y": 7.789999339846204,
+        "material": "e1e3dc",
+        "roof": false
+      }
+    ]
+  },
+  {
+    "x": 83.1,
+    "z": -32.8,
+    "hits": [
+      {
+        "name": "",
+        "y": 9.641111162130723,
+        "material": "c4c9c6",
+        "roof": true
+      },
+      {
+        "name": "",
+        "instance": 121,
+        "y": 9.530000075697899,
+        "material": "e1e3dc",
+        "roof": false
+      },
+      {
+        "name": "Rear court stair enclosure slate roof",
+        "y": 8.783331591291825,
+        "material": "c4c9c6",
+        "roof": true
+      },
+      {
+        "name": "Rear court white stair enclosure",
+        "y": 8.643331472258357,
+        "material": "e1e3dc",
+        "roof": false
+      }
+    ]
+  },
+  {
+    "x": 83.8,
+    "z": -32.8,
+    "hits": [
+      {
+        "name": "",
+        "y": 9.641111162130723,
+        "material": "c4c9c6",
+        "roof": true
+      },
+      {
+        "name": "",
+        "instance": 121,
+        "y": 9.530000075697899,
+        "material": "e1e3dc",
+        "roof": false
+      },
+      {
+        "name": "",
+        "y": 9.530000052981904,
+        "material": "c4c9c6",
+        "roof": true
+      },
+      {
+        "name": "Rear court stair enclosure slate roof",
+        "y": 9.529996477770617,
+        "material": "c4c9c6",
+        "roof": true
+      },
+      {
+        "name": "Rear court white stair enclosure",
+        "y": 9.389997088119,
+        "material": "e1e3dc",
+        "roof": false
+      }
+    ]
+  },
+  {
+    "x": 83.1,
+    "z": -31.7,
+    "hits": [
+      {
+        "name": "Rear court stair enclosure slate roof",
+        "y": 8.783331591291823,
+        "material": "c4c9c6",
+        "roof": true
+      },
+      {
+        "name": "Rear court white stair enclosure",
+        "y": 8.643331472258359,
+        "material": "e1e3dc",
+        "roof": false
+      }
+    ]
+  },
+  {
+    "x": 84.2,
+    "z": -31.7,
+    "hits": [
+      {
+        "name": "",
+        "y": 9.752222271279544,
+        "material": "c4c9c6",
+        "roof": true
+      },
+      {
+        "name": "",
+        "instance": 117,
+        "y": 9.530000075697897,
+        "material": "e1e3dc",
+        "roof": false
+      },
+      {
+        "name": "",
+        "y": 9.300000095367432,
+        "material": "b3a5a0",
+        "roof": false
+      },
+      {
+        "name": "",
+        "instance": 116,
+        "y": 9.290000304579735,
+        "material": "e1e3dc",
+        "roof": false
+      }
+    ]
+  }
+]

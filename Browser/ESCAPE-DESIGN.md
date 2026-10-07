@@ -13,11 +13,15 @@ flowchart TD
   O[Second floor: porter record and tagged brass outside key]
   D[West or east outer entrance]
   P[Grounds: perimeter paths, cover and security patrol]
-  X[Beyond the asylum boundary]
+  G1[Watch the patrol / open pedestrian gate; optional oil]
+  G2[Tower-side tools / hold crowbar use at maintenance wicket]
+  X[Physically cross an opened boundary gate]
   E[Reach northwest radio mast and press E]
   M --> K --> G --> O
   M --> B --> G
-  O --> D --> P --> X --> E
+  O --> D --> P
+  P --> G1 --> X --> E
+  P --> G2 --> X
   C[First / second capture]
   C --> W[Admissions room / basement cell, notebook retained]
   W --> T[Property tray beside Reception or original key sources]
@@ -45,13 +49,18 @@ Knowledge is evidence-based and order-independent. No clue is a mandatory read:
 physical tags, notices and visible fittings also communicate the puzzle.
 The notebook helps recover context after a break and preserves that knowledge
 when possessions change. Its map does not reveal future areas or add an arrow
-or undiscovered item marker. The HUD shows one current objective with a room,
-action and use key; this supersedes the earlier restriction on explicit objective
-guidance, following the owner's 6 October feedback. Opening a gate or operating
-the release supplies the porter-record room from its physical notice. Upstairs
-guidance distinguishes the Library office from the office above Reception and
-explains the first-floor crossing when the player is in the other upper wing.
-Taking the brass key, entering the grounds and capture/recovery update the action.
+or undiscovered item marker. The HUD starts each objective with a short direction.
+After 60 seconds of active play without progress, it adds a more explicit hint;
+this supersedes the immediately detailed HUD guidance from 6 October. The staff
+key initially prompts “Use the key you found to access the staff stairs”, then
+adds “Find the porter’s records and brass outside-door key.” The upper-office
+hint names the record room and explains the first-floor crossing when needed.
+Changing objectives, taking a tool, opening a gate and capture reset the delay.
+Movement within an objective, repeated interactions and incidental clue reads
+do not restart it. Pause, notebook, artwork, arrival and capture screens do not
+advance it; it uses active frame time rather than the capped movement timestep.
+Gate/release confirmations announce that access opened without giving away the
+next item. Physical notices and discovered notebook evidence retain their details.
 Available fittings have a bright gold halo and a small camera-facing glow above
 them, so desk papers can be recognised from their doorway. The glow pulses during
 play, stays steady with reduced motion, respects occlusion and clears after use.
@@ -73,7 +82,8 @@ play, stays steady with reduced motion, respects occlusion and clears after use.
 | Outer entrance | Physically test the active outside lock; evolves on use |
 | Grounds route deduction | Upstairs record + physically tested active door |
 | Mast landmark | Read its description in the upstairs record or see it outside |
-| Beyond asylum grounds | Physically cross the rear perimeter |
+| Grounds gates and tool store | Approach a gate or take a tool; record only observed positions |
+| Beyond asylum grounds | Cross the plane of an opened north gate from the inside |
 | Confiscated property | Capture with keys; evolves when reclaimed |
 | Returned under supervision | First or second capture |
 
@@ -101,3 +111,56 @@ Validation must cover every scenario combination, both access methods, out-of-or
 discoveries, capture before/after each dependency, lost-key recovery, restart,
 physical gate rejection including jump, real ground routing, ending and desktop/
 touch journal/recovery dialogs. Local rendering uses the hardware browser launcher.
+
+
+## Outdoor choices — 7 October 2026
+
+The continuous Escape-only boundary supersedes the old Z=-50 progress threshold.
+Reaching an arbitrary coordinate outside the site cannot satisfy the ending:
+the player must physically cross one of the two open north gates. Re-entering
+across that boundary or being captured clears this condition. The mast remains
+the final interaction after either route.
+
+The pedestrian gate is unlatched. Using it opens its leaf permanently for that
+attempt, making a sound audible within 48 units unless the player carries oil.
+The maintenance wicket needs a crowbar and three seconds of held use. Its
+hammering/prising sounds reach 65 units. Releasing use, leaving the fitting or
+losing the tool cancels partial work. Security continues moving during work;
+Notebook and pause freeze the entire interaction. The workshop-side crowbar and
+oil can are optional for the pedestrian route, and neither requires a new key.
+After capture both tools return to their interior benches; opened doors and
+gates remain open.
+
+One outdoor guard patrols a small set of destinations using the existing
+collision-aware routing. Facing and unobstructed sight determine detection,
+with close-range awareness. Visible pursuit takes priority over sounds. Hearing
+records only the sound's position. The guard walks there, searches for six
+seconds, then returns to its patrol; it never tracks an unseen player's current
+position. Blocked/unreachable routes have a bounded search/return fallback.
+Opening gates and refreshing tree collisions invalidate cached paths.
+
+The blue stores door beside the water tower opens inward onto the established
+connecting corridor. Three connected rooms supply a repair bench and crowbar,
+an oil and parts store, and a machine workshop. Tools require entry through
+that door. The red/cream brick and tile-band finishes follow the saved corridor
+photographs; the hidden partitions and equipment are fictional gameplay fittings.
+
+The corridor sits directly against the water tower, whose existing masonry
+forms its west wall; the adjoining room partitions and fittings follow the
+shifted passage. The owner's purple route annotations extend exploration
+along the main/admin, Irby/Ashley, Hale, Upton/Frith/Oscroft, Grafton/Edge and
+Witby links. Locked double doors stop passage at all six yellow lines and the
+remaining ward contacts. Nine aged direction boards at the red X junctions
+list destinations with arrows relative to the approaching player.
+
+The tools, wicket and workshops use procedural geometry, shared materials and
+local textures, with workshop and corridor lights and no additional model/texture/audio
+downloads. They are excluded from Explore and the shared compiled estate.
+Affected building batches and collision transforms are refreshed; disposal
+restores the exact original estate before a restart. The outside notebook covers
+the complete workshops; their outline follows the normal exploration fog and
+interaction markers appear only after discovery. The HUD names the current room.
+
+Run `npm run test:grounds` for the focused logic and hardware browser checks.
+The existing `test-escape-progress-browser.mjs` walkthrough now uses the pedestrian
+gate and waits for streamed interior sections before accelerated movement.

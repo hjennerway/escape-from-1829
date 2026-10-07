@@ -63,7 +63,7 @@ window.finishCheck={get ready(){return ready;},start(){start();arrivalCutscene.u
  await writeFile(new URL(mode+'-texture-wrap.png',destination),Buffer.from(texture.image.split(',')[1],'base64'));delete texture.image;
  if(mode!=='before'){
   assert.equal(door.name,'Asylum EntranceInset','Reception sees the red panelled entrance');assert.equal(door.color,0x581c23);
-  assert.equal(door.signs,door.exits-1,'Reception no longer carries fire-exit signage');
+  assert.equal(door.signs,0,'Period doors carry no modern fire-exit signage');
   for(let axis=0;axis<2;axis++)assert(texture.seam[axis]<texture.adjacent[axis]*1.2,`Ceiling edge ${axis} is no more visible than ordinary neighboring pixels: ${JSON.stringify(texture)}`);
  }
  await page.setViewportSize({width:390,height:844});await page.evaluate(()=>window.finishCheck.pose(0,15.5,0,0,20,.12));

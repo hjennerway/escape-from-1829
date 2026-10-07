@@ -1,3 +1,4 @@
+import {markDownpipeInstances} from './downpipe-clearance.mjs';
 // locations.png fixes the roadside footprints and the two camera directions.
 // Photo-derived dimensions and the obscured rear elevations are estimates.
 import {VIVIENNE_LANE,GARAGE_LANE_SHIFT} from './road-centerlines.mjs';
@@ -38,7 +39,7 @@ export function createGaragesMortuary(THREE,{brick,roof,worldUV,material}){
   const group=new THREE.Group();group.name=name;group.position.set(placement.x,0,placement.z);group.rotation.y=placement.rotation;site.add(group);
   const batches=new Map(),openings=[];
   function mesh(g,m,name){const o=new THREE.Mesh(g,m);o.name=name;o.castShadow=true;o.receiveShadow=true;group.add(o);return o;}
-  function box(m,x,y,z,w,h,d,r=0){if(!batches.has(m))batches.set(m,[]);batches.get(m).push({x,y,z,w,h,d,r});}
+  function box(m,x,y,z,w,h,d,r=0,downpipe=false){if(!batches.has(m))batches.set(m,[]);batches.get(m).push({x,y,z,w,h,d,r,downpipe});}
   function solid(points,h,name,mat=brick,bottom=0){
    const shape=new THREE.Shape(points.map(([x,z])=>new THREE.Vector2(x,-z)));
    const g=new THREE.ExtrudeGeometry(shape,{depth:h,bevelEnabled:false});g.rotateX(-Math.PI/2);g.translate(0,bottom,0);
@@ -90,8 +91,8 @@ export function createGaragesMortuary(THREE,{brick,roof,worldUV,material}){
    for(let i=0;i<9;i++)part(stone,-w/2+(i+.5)*w/9,-.05,.13,.035,h*.81,.012);
    openings.push({kind:'window',x,z,y,w,h,r});
   }
-  function drain(x,z,h){box(iron,x,h/2,z,.085,h,.09);box(stone,x,.46,z-.015,.105,.75,.115);for(const y of [.9,2.3])box(iron,x,y,z-.025,.14,.055,.11);}
-  function finish(){const dummy=new THREE.Object3D();for(const [mat,items]of batches){const b=new THREE.InstancedMesh(new THREE.BoxGeometry(1,1,1),mat,items.length);b.name=name+' doors, glazing and trim';b.castShadow=true;b.receiveShadow=true;b.userData.orientedCollision=true;items.forEach((p,i)=>{dummy.position.set(p.x,p.y,p.z);dummy.scale.set(p.w,p.h,p.d);dummy.rotation.set(0,p.r,0);dummy.updateMatrix();b.setMatrixAt(i,dummy.matrix);});group.add(b);}group.userData.openings=openings;return group;}
+  function drain(x,z,h){const assembly=x+':'+z;box(iron,x,h/2,z,.085,h,.09,0,{pipe:true,assembly});box(stone,x,.46,z-.015,.105,.75,.115,0,{assembly});for(const y of [.9,2.3])box(iron,x,y,z-.025,.14,.055,.11,0,{assembly});}
+  function finish(){const dummy=new THREE.Object3D();for(const [mat,items]of batches){const b=new THREE.InstancedMesh(new THREE.BoxGeometry(1,1,1),mat,items.length);markDownpipeInstances(b,items);b.name=name+' doors, glazing and trim';b.castShadow=true;b.receiveShadow=true;b.userData.orientedCollision=true;items.forEach((p,i)=>{dummy.position.set(p.x,p.y,p.z);dummy.scale.set(p.w,p.h,p.d);dummy.rotation.set(0,p.r,0);dummy.updateMatrix();b.setMatrixAt(i,dummy.matrix);});group.add(b);}group.userData.openings=openings;return group;}
   return {group,box,solid,surface,pitched,opening,window,drain,finish};
  }
  const g=builder('Garage row',GARAGES);

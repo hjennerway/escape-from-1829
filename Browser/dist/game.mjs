@@ -6,7 +6,7 @@ import {buildArchitecture,interiorWallSurfaces} from './architecture.mjs';
 import {createInteriorLights} from './interior-lights.mjs';
 import {createEscapeCutscene} from './escape-cutscene.mjs';
 import {loadEscapeFrontage} from './escape-exterior.mjs';
-import {createLandingExterior} from './landing-scene.mjs';
+import {createLandingExterior,ESCAPE_SUN_OFFSETS} from './landing-scene.mjs';
 import {bindTreeToggle} from './tree-layer.mjs';
 import {sampleLanding} from './aerial-controls.mjs';
 import {createArrivalCutscene} from './arrival-cutscene.mjs';
@@ -19,6 +19,7 @@ import {furnishAsylum} from './asylum-furniture.mjs';
 import {loadFurnitureModels,createFurnitureFloor,updateFurnitureDetail} from './furniture-models.mjs';
 import {furnitureContains} from './furniture-collision.mjs';
 import {createReceptionClockAudio} from './reception-clock-audio.mjs';
+import {createDoorCreakAudio} from './door-creak-audio.mjs';
 import {createAsylumOutside} from './asylum-outside.mjs';
 import {createAsylumJump} from './asylum-jump.mjs';
 import {createNotebook,notebookView} from './notebook.mjs';
@@ -28,6 +29,9 @@ import {createLoadingProgress} from './loading-progress.mjs';
 import {createMouseCapture} from './mouse-capture.mjs';
 import {createEscapeProgress,MAST,CAPTURE_LIMIT} from './escape-progress.mjs';
 import {createEscapeWorld,createEscapeLandmark,outdoorPath} from './escape-world.mjs';
+import {createEscapeGrounds} from './escape-grounds.mjs';
+import {TOWER_WORKSHOPS} from './tower-workshops.mjs';
+import {createGroundsGuard,GUARD_PATROL,GROUNDS_OUTLINE} from './escape-grounds-state.mjs';
 import {asylumDisplayName} from './asylum-room-numbers.mjs';
 import {createInteriorSectionLoader} from './interior-streaming.mjs';
 import {createInteriorLoadingStatus} from './interior-loading-status.mjs';
@@ -43,17 +47,19 @@ let spotted=false;
 let layout,renderer,scene,camera,torch,torchTarget,clock,ready=false,state='menu',elapsed=0,stamina=1,yaw=0,pitch=0,hold=0,sprint=false,crouch=false,exhausted=false;
 let enemies=[],lights=[],audioCtx,audioOn=true,lastStep=0,lastPulse=0,footPhase=0,dragging=false,previousPointer=null,modelLoaded=false;
 const receptionClock=createReceptionClockAudio({getFloors:()=>floors,getContext:()=>audioCtx,enabled:()=>audioOn});
+const doorCreak=createDoorCreakAudio({getContext:()=>audioCtx,enabled:()=>audioOn});
 const player={x:50,z:27.5,floor:0},mapCanvas=$('map'),mapContext=mapCanvas.getContext('2d'),miniMapCanvas=$('miniMap'),miniMapContext=miniMapCanvas.getContext('2d');
 let mapRefresh=0,floors=[],floorGroups=[],stairHold=0,stairLatch=false,artPanels=[],artViewing=null,placedWallPanels=[];
 let exterior,arrivalCutscene,escapeExterior,interiorLights,landingTime=0;
-let outsideWalker,indoorJump,lastDoor=null;
+let outsideWalker,indoorJump,lastDoor=null,exteriorTorch,exteriorTorchTarget,firstRunPrepared=false;
+let torchEnabled=true;
 let interiorLoader=null,updateLoadingStatus=()=>{};
 const modern=()=>floors[0]?.geometrySource==='asylum-plan';
 const floorHeight=actor=>floors[actor.floor]?.elevation??actor.floor*FLOOR_HEIGHT;
 let notebook,notebookFloor,notebookReadRevision=0;
 let developer,mapPreviousState;
 let escapeProgress,escapeWorld,recoveryRemaining=0,enemyReleaseAt=5,messageUntil=0,interactionMessage='';
-let outdoorGuardActive=false,outdoorRethink=0,outdoorRoute=[];
+let outdoorGuardActive=false,escapeGrounds=null,groundsGuard=null;
 const landingReducedMotion=matchMedia('(prefers-reduced-motion: reduce)').matches;
 document.addEventListener('capture-intro',({detail})=>{
  if(!ready||state!=='menu')return;
@@ -70,9 +76,10 @@ const escapeCutscene=createEscapeCutscene($('escapeCutscene'),()=>{
  state='won';$('result').hidden=false;$('retry').focus();
 },{reducedMotion:matchMedia('(prefers-reduced-motion: reduce)').matches,getCamera:()=>escapeExterior?.camera});
 function groupSince(snapshot,height){const group=new THREE.Group();for(const o of [...scene.children])if(!snapshot.has(o))group.add(o);group.position.y=height;scene.add(group);return group;}
-function showFloor(){layout=floors[player.floor];floorGroups.forEach((g,i)=>g.visible=!player.outside&&(modern()||i===player.floor));interiorLights?.update(player);const name=player.outside?'GROUNDS':modern()?layout.name.toUpperCase():player.floor?'UPPER FLOOR':'GROUND FLOOR';$('floorName').textContent=name;$('floorExits').textContent=modern()?'NOTEBOOK · N':layout.exits.length+' EXITS THIS FLOOR';$('miniFloorName').textContent=name;updateObjective();}
-function updateObjective(){
- const next=escapeProgress?.objective(player)??{title:'Find a way outside.',detail:''};
+function outsideAreaName(){return escapeGrounds?.workshops.areaAt(player)?.toUpperCase()??'GROUNDS';}
+function showFloor(){layout=floors[player.floor];floorGroups.forEach((g,i)=>g.visible=!player.outside&&(modern()||i===player.floor));interiorLights?.update(player);const name=player.outside?outsideAreaName():modern()?layout.name.toUpperCase():player.floor?'UPPER FLOOR':'GROUND FLOOR';$('floorName').textContent=name;$('floorExits').textContent=modern()?'NOTEBOOK · N':layout.exits.length+' EXITS THIS FLOOR';$('miniFloorName').textContent=name;updateObjective();}
+function updateObjective(dt=0){
+ const next=escapeProgress?.objective(player,dt)??{title:'Find a way outside.',detail:''};
  if($('objectiveTitle').textContent!==next.title)$('objectiveTitle').textContent=next.title;
  if($('objectiveDetail').textContent!==next.detail)$('objectiveDetail').textContent=next.detail;
  $('objectiveDetail').hidden=!next.detail;
@@ -88,38 +95,6 @@ function lightFloor(){
   if(layout.cells[z*layout.width+x]&&((z===layout.galleryZ&&x%4===0)||(z%4===0&&x%4===0)))lamp(x*layout.cellSize,z*layout.cellSize);
  }
  for(const stair of layout.stairs)lamp(stair.x*layout.cellSize,stair.z*layout.cellSize);
-}
-function markExits(){
- layout.exits.forEach((e,i)=>{
-  if(modern()&&e.id==='D1')return; // Reception has the red main entrance, with no panic-bar fittings.
-  const {dx,dz}=exitDirection(e),group=new THREE.Group();
-  lamp(e.x*layout.cellSize,e.z*layout.cellSize,0x77db97);
-  // Fitted openings mount the sign on the interior header, alongside the
-  // door hardware, rather than beyond the restored masonry.
-  const signOffset=e.wallOpening?-(e.wallOpening.inset??0):.7,along=e.wallOpening?.offset??0;
-  group.name='Emergency exit signage';group.position.set(e.x*layout.cellSize+dx*signOffset+(e.axis==='z'?along:0),0,e.z*layout.cellSize+dz*signOffset+(e.axis==='x'?along:0));group.rotation.y=Math.atan2(-dx,-dz);scene.add(group);
-  function plate(width,height,y,inset,paint){
-   const c=document.createElement('canvas');c.width=1024;c.height=256;paint(c.getContext('2d'));
-   const texture=new THREE.CanvasTexture(c);texture.colorSpace=THREE.SRGBColorSpace;texture.anisotropy=4;
-   return mesh(new THREE.PlaneGeometry(width,height),new THREE.MeshBasicMaterial({map:texture}),[0,y,inset],group);
-  }
-  plate(1.80,.35,2.96,.158,g=>{
-   g.fillStyle='#125138';g.fillRect(0,0,1024,256);g.strokeStyle='#c6e9c9';g.lineWidth=4;g.strokeRect(8,8,1008,240);
-   // Running-person pictogram through a doorway, with an upward route arrow.
-   g.fillStyle='#e5f5d9';g.fillRect(40,43,65,159);g.fillStyle='#125138';g.fillRect(40,61,47,141);
-   g.fillStyle='#e5f5d9';g.beginPath();g.arc(154,61,16,0,Math.PI*2);g.fill();
-   g.strokeStyle='#e5f5d9';g.lineWidth=19;g.lineCap='round';g.lineJoin='round';
-   for(const points of [[[149,94],[128,140],[166,160],[182,198]],[[130,140],[100,187],[72,187]],[[142,100],[182,124],[205,105]],[[142,100],[113,95],[95,121]]]){
-    g.beginPath();points.forEach(([x,y],j)=>j?g.lineTo(x,y):g.moveTo(x,y));g.stroke();
-   }
-   g.textAlign='left';g.font='bold 82px Arial';g.fillText(e.id||'EXIT '+(i+1),256,113);
-   g.font='32px Arial';g.fillText(e.name.toUpperCase(),258,182,625);
-   g.lineWidth=15;g.beginPath();g.moveTo(948,184);g.lineTo(948,69);g.moveTo(915,103);g.lineTo(948,67);g.lineTo(981,103);g.stroke();
-  }).name='Illuminated exit route sign';
-  plate(.79,.16,1.43,.109,g=>{
-   g.fillStyle='#dde4cf';g.fillRect(0,0,1024,256);g.fillStyle='#244937';g.textAlign='center';g.font='bold 86px Arial';g.fillText('PUSH BAR TO OPEN',512,158);
-  }).name='Push bar instruction';
- });
 }
 function twoSidedTextPlane(geometry,texture,frontPosition,parent){
  const mat=new THREE.MeshBasicMaterial({map:texture,transparent:true,side:THREE.FrontSide});
@@ -247,8 +222,8 @@ async function init(){
   const outsideStairs=layout.plan?.outsideStairs??[];
   floors=layout.geometrySource==='asylum-plan'?makeFloors(layout):selectEscapeRoutes(makeFloors(layout));layout=floors[0];
   let furnitureModels;
-  if(modern()){furnishAsylum(floors);furnitureModels=await loadFurnitureModels(THREE);}
-  notebook=createNotebook(floors,{outsideStairs});
+  if(modern()){furnishAsylum(floors,{seed:Math.floor(Math.random()*4294967296)});furnitureModels=await loadFurnitureModels(THREE);}
+  notebook=createNotebook(floors,{outsideStairs,groundsOutline:modern()?GROUNDS_OUTLINE:null,groundsPlan:modern()?TOWER_WORKSHOPS:null});
   renderer=new THREE.WebGLRenderer({canvas,antialias:true,powerPreference:'high-performance'});renderer.setPixelRatio(Math.min(devicePixelRatio,1.5));renderer.setSize(innerWidth,innerHeight);renderer.outputColorSpace=THREE.SRGBColorSpace;renderer.toneMapping=THREE.ACESFilmicToneMapping;renderer.toneMappingExposure=1.25;
   scene=new THREE.Scene();scene.background=new THREE.Color(0x343731);scene.fog=new THREE.FogExp2(0x343731,.018);
   camera=new THREE.PerspectiveCamera(74,innerWidth/innerHeight,.05,150);camera.rotation.order='YXZ';
@@ -264,7 +239,6 @@ async function init(){
   if(floorIndex===0)placeHeritagePanels();placeLocalArtPanels(floorIndex);
   for(const stair of layout.stairs||[]){const name=asylumDisplayName(stair.name);lamp(stair.x*layout.cellSize,(stair.z+1)*layout.cellSize);label(stair.id?stair.id+' · '+name+'|WALK THE STAIRS':name+'|HOLD E TO GO '+(floorIndex?'DOWN':'UP'),stair.x*layout.cellSize,2.6,stair.z*layout.cellSize);}
   lightFloor();
-  markExits();
   floorGroups.push(groupSince(groundSnapshot,layout.elevation??floorIndex*FLOOR_HEIGHT));
   }layout=floors[0];floorGroups.forEach((g,i)=>g.visible=modern()||i===0);
   await loading.step(60,'Preparing lights and characters…');
@@ -277,7 +251,7 @@ async function init(){
   }
   enemies=layout.enemies.map(({name,x,z,type})=>({name,type,floor:0,spawn:{x:x*layout.cellSize,z:z*layout.cellSize,floor:0},x:x*layout.cellSize,z:z*layout.cellSize,mesh:enemyModel(type),path:[],memory:0,rethink:0,route:0,target:null}));
   await loading.step(65,'Preparing the surrounding grounds…');
-  escapeExterior=await createLandingExterior(THREE,innerWidth/innerHeight,renderer);
+  escapeExterior=await createLandingExterior(THREE,innerWidth/innerHeight,renderer,{sunOffsets:ESCAPE_SUN_OFFSETS});
   canvas.addEventListener('webglcontextrestored',escapeExterior.invalidateShadows);
   bindTreeToggle(escapeExterior,document,()=>outsideWalker?.refresh());
   await loading.step(85,'Loading the exterior details…');
@@ -285,6 +259,12 @@ async function init(){
   await loading.step(90,'Connecting the outside doors and stairs…');
   if(modern()){createEscapeLandmark(THREE,escapeExterior);outsideWalker=createAsylumOutside(THREE,escapeExterior);indoorJump=createAsylumJump(floors,{allowMove:(a,b)=>(escapeWorld?.allowMove(a,b)??true)&&(interiorLoader?.allowMove(a,b)??true)});}
   exterior=escapeExterior;
+  if(modern()){
+   // Keep the spotlight count fixed in both scenes. Moving one light between
+   // them forces the estate's materials to compile again at the first door.
+   exteriorTorch=torch.clone();exteriorTorch.intensity=0;exteriorTorchTarget=new THREE.Object3D();exteriorTorch.target=exteriorTorchTarget;exterior.scene.add(exteriorTorch,exteriorTorchTarget);
+   prepareEscapeScenario();firstRunPrepared=true;
+  }
   if(renderer.shadowMap){renderer.shadowMap.enabled=true;renderer.shadowMap.type=THREE.PCFShadowMap;}
   arrivalCutscene=createArrivalCutscene({camera:exterior.camera,overlay:$('arrivalFade'),
     reducedMotion:matchMedia('(prefers-reduced-motion: reduce)').matches,
@@ -292,7 +272,7 @@ async function init(){
     onComplete(){if(state!=='arrival')return;keys.clear();state='play';uiPlaying(true);drawMap();if(!touch&&canvas.requestPointerLock&&!mouseCapture.pending&&document.pointerLockElement!==canvas)pause();}
   });
   resetPositions();clock=new THREE.Timer();clock.connect(document);
-  developer=bindDeveloperOptions({THREE,exterior,plan:async()=>({floors,outsideStairs}),getMapState:()=>({player,enemies,yaw}),onChange:()=>{if(state==='notebook')renderNotebook();drawMap();},onMapChange:show=>{
+  developer=bindDeveloperOptions({THREE,exterior,plan:async()=>({floors,outsideStairs}),getMapState:()=>({player,enemies,yaw}),onDoorsChange:modern()?unlocked=>{escapeProgress.setDoorsUnlocked(unlocked);syncEscapeWorld();}:null,onChange:()=>{if(state==='notebook')renderNotebook();drawMap();},onMapChange:show=>{
    if(show){
     mapPreviousState=state==='notebook'?'play':state;closeArtViewer();closeNotebook(false);keys.clear();hold=0;stairHold=0;dragging=false;previousPointer=null;state='developer-map';mouseCapture.release();
    }else if(state==='developer-map'){
@@ -300,6 +280,18 @@ async function init(){
    }
   }});
   await loading.step(97,'Drawing the first view…');
+  // Prepare the canvas shader variants, including scenario fittings, before
+  // the title becomes interactive. Streamed rooms keep their own warmup.
+  if(renderer.compileAsync){await renderer.compileAsync(scene,camera);await renderer.compileAsync(exterior.scene,exterior.camera);}
+  if(modern()){
+   // Issue the actual canvas draws too: the driver can defer work until a
+   // compiled program first draws to this framebuffer. The loading still
+   // covers these frames, and animate draws the title before revealing it.
+   camera.position.set(player.x,1.65,player.z);camera.rotation.set(pitch,yaw,0);interiorLights.update(player);
+   camera.getWorldDirection(tmp);torch.position.copy(camera.position);torchTarget.position.copy(camera.position).addScaledVector(tmp,12);
+   updateFurnitureDetail(THREE,scene,camera,innerHeight);renderer.render(scene,camera);
+   arrivalCutscene.start();renderer.toneMappingExposure=1.15;renderer.render(exterior.scene,exterior.camera);arrivalCutscene.reset();
+  }
   animate();
   interiorLoader?.startBackground();
  }catch(e){loading.fail();console.error(e);$('start').textContent='RELOAD TO TRY AGAIN';$('start').disabled=false;$('start').onclick=()=>location.reload();$('intro').textContent='The building could not load. Check your connection and reload. '+e.message;}
@@ -320,7 +312,7 @@ function randomizeEnemySpawns(){
   e.spawn=choices[Math.floor(Math.random()*choices.length)]||e.spawn;placed.push(e.spawn);
  }
 }
-function resetPositions(){outsideWalker?.resetJump();indoorJump?.reset();spotted=false;Object.assign(player,{floor:0,y:0,stair:null,outside:false});lastDoor=null;if(torch)scene.add(torch,torchTarget);showFloor();stairHold=0;stairLatch=false;mapRefresh=0;lastStep=0;lastPulse=0;camera.position.y=1.65;player.x=layout.spawn.x*layout.cellSize;player.z=layout.spawn.z*layout.cellSize;yaw=layout.spawn.yaw??0;pitch=0;enemies.forEach(e=>{Object.assign(e,{...e.spawn,y:0,stair:null,outside:false,path:[],memory:0,rethink:0,route:0,target:null});resetEnemyRoomSearch(e);e.mesh.position.set(e.x,0,e.z);e.mesh.visible=true;if(e.type===1)resetSecurityGuard(e.mesh);});}
+function resetPositions(){outsideWalker?.resetJump();indoorJump?.reset();spotted=false;Object.assign(player,{floor:0,y:0,stair:null,outside:false});lastDoor=null;if(torch&&!exteriorTorch)scene.add(torch,torchTarget);if(exteriorTorch)exteriorTorch.intensity=0;showFloor();stairHold=0;stairLatch=false;mapRefresh=0;lastStep=0;lastPulse=0;camera.position.y=1.65;player.x=layout.spawn.x*layout.cellSize;player.z=layout.spawn.z*layout.cellSize;yaw=layout.spawn.yaw??0;pitch=0;enemies.forEach(e=>{Object.assign(e,{...e.spawn,y:0,stair:null,outside:false,path:[],memory:0,rethink:0,route:0,target:null});resetEnemyRoomSearch(e);e.mesh.position.set(e.x,0,e.z);e.mesh.visible=true;if(e.type===1)resetSecurityGuard(e.mesh);});}
 function uiPlaying(value){document.body.classList.toggle('playing',value);$('menu').hidden=value;$('location').hidden=value;$('hud').hidden=!value;$('pause').hidden=!value;$('touch').hidden=!value||!touch;}
 function lock(){mouseCapture.request(()=>{},()=>pause());}
 function resumeWithMouse(continuePlay){
@@ -336,24 +328,31 @@ function resumeWithMouse(continuePlay){
   $('resume').focus();
  });
 }
-function start(){
- if(!ready||state==='arrival')return;
- mouseCapture.release();
- escapeCutscene.reset();closeArtViewer();closeNotebook(false);
- if(furnitureFloors.length){furnishAsylum(floors,{seed:Math.floor(Math.random()*4294967296)});furnitureFloors.forEach(f=>f.update());}
+function prepareEscapeScenario(){
+ developer?.setDoorsUnlocked(false);
  escapeWorld?.dispose();escapeWorld=null;
- notebook.reset();
+ escapeGrounds?.dispose();escapeGrounds=null;groundsGuard=null;
  if(modern()){
   const configured=new URLSearchParams(location.search).get('seed');
   escapeProgress=createEscapeProgress({seed:configured!==null&&/^\d+$/.test(configured)?Number(configured)>>>0:Math.floor(Math.random()*4294967296),journal:notebook,floors});
   escapeWorld=createEscapeWorld(THREE,floors,floorGroups,escapeProgress,{reducedMotion:landingReducedMotion});
+  escapeGrounds=createEscapeGrounds(THREE,escapeExterior,outsideWalker,escapeProgress,{noise:groundsNoise,creak:event=>doorCreak.play(event)});
  }
- recoveryRemaining=0;enemyReleaseAt=5;messageUntil=0;interactionMessage='';outdoorGuardActive=false;outdoorRoute=[];
+}
+function start(){
+ if(!ready||state==='arrival')return;
+ mouseCapture.release();
+ doorCreak.stop();escapeCutscene.reset();closeArtViewer();closeNotebook(false);
+ if(furnitureFloors.length&&!firstRunPrepared){furnishAsylum(floors,{seed:Math.floor(Math.random()*4294967296)});furnitureFloors.forEach(f=>f.update());}
+ notebook.reset();
+ const configured=modern()?new URLSearchParams(location.search).get('seed'):null;
+ if(!firstRunPrepared||(configured!==null&&/^\d+$/.test(configured)&&(Number(configured)>>>0)!==escapeProgress?.run.seed))prepareEscapeScenario();firstRunPrepared=false;
+ recoveryRemaining=0;enemyReleaseAt=5;messageUntil=0;interactionMessage='';outdoorGuardActive=false;
  $('resume').disabled=false;$('resume').textContent='RESUME ↗';
  for(const e of enemies)scene.add(e.mesh);
  randomizeEnemySpawns();resetPositions();notebookReadRevision=0;observeNotebook();
  elapsed=0;stamina=1;hold=0;exhausted=false;crouch=false;sprint=false;footPhase=0;dragging=false;previousPointer=null;keys.clear();
- state='arrival';torch.visible=true;uiPlaying(true);
+ state='arrival';torchEnabled=true;torch.visible=true;torch.intensity=20;uiPlaying(true);
  $('hud').hidden=true;$('pause').hidden=true;$('touch').hidden=true;$('instructions').hidden=true;$('result').hidden=true;$('floorMap').hidden=true;
  $('timer').textContent='00:00';$('warning').textContent='';$('interact').hidden=true;
  arrivalCutscene.start();audioCtx??=new (window.AudioContext||window.webkitAudioContext)();audioCtx.resume().catch(()=>{});lock();
@@ -372,7 +371,7 @@ function caught(who){
  if(consequence.terminal){finish(false,who);return;}
  closeArtViewer();closeNotebook(false);keys.clear();hold=0;stairHold=0;stairLatch=false;dragging=false;previousPointer=null;
  messageUntil=0;interactionMessage='';
- outdoorGuardActive=false;outdoorRoute=[];for(const e of enemies)scene.add(e.mesh);
+ outdoorGuardActive=false;groundsGuard=null;escapeGrounds?.sync();for(const e of enemies)scene.add(e.mesh);
  randomizeEnemySpawns();resetPositions();
  const position=escapeWorld.anchor(consequence.floor,consequence.room);
  Object.assign(player,{x:position.x,z:position.z,floor:consequence.floor,y:floors[consequence.floor].elevation,stair:null,outside:false});
@@ -383,7 +382,7 @@ function caught(who){
  state='captured';mouseCapture.release();$('interact').hidden=true;
  $('hud').hidden=true;$('touch').hidden=true;$('pause').hidden=true;
  $('resultTag').textContent=`CAPTURE ${consequence.count} OF ${CAPTURE_LIMIT}`;$('resultTitle').textContent=consequence.count===1?'Returned to Reception.':'Under observation.';
- $('resultBody').textContent=`${consequence.count===1?'You are brought back to the admissions room beside Reception. Security changes its patrol.':'You are moved to a padded cell in the basement for a brief observation period.'}\n\n${escapeProgress.run.confiscated.size?'Your keys are in the property tray beside Reception.':'The attendant checks your belongings.'} Your notebook and discoveries remain. Opened stair grilles stay released.\n\nA third capture ends this attempt.`;
+ $('resultBody').textContent=`${consequence.count===1?'You are brought back to the admissions room beside Reception. Security changes its patrol.':'You are moved to a padded cell in the basement for a brief observation period.'}\n\n${escapeProgress.run.confiscated.size?'Your keys are in the property tray beside Reception.':'The attendant checks your belongings.'} Your notebook and discoveries remain. Opened gates stay open.${consequence.returnedTools?" Your tools have been returned to the store beside the water tower.":""}\n\nA third capture ends this attempt.`;
  $('result').classList.toggle('pause-menu',true);$('result').hidden=false;$('resultExplore').hidden=true;$('resultIntro').hidden=true;$('retry').textContent='RESTART';$('resume').hidden=false;$('resume').disabled=recoveryRemaining>0;$('resume').textContent=recoveryRemaining>0?`OBSERVATION · ${Math.ceil(recoveryRemaining)}s`:'CONTINUE ESCAPE ↗';$('result').tabIndex=-1;(recoveryRemaining>0?$('result'):$('resume')).focus();
 }
 function resumeCapture(){if(recoveryRemaining>0)return;resumeWithMouse(()=>{state='play';$('result').hidden=true;uiPlaying(true);});}
@@ -396,21 +395,24 @@ function updateOutdoorGuard(dt){
  const guard=enemies.find(e=>e.type===1);if(!guard)return;
  if(!outdoorGuardActive){
   // A patrol emerges onto a clear stretch of the grounds, away from the door.
-  const candidates=[{x:-80,z:12},{x:80,z:24},{x:-80,z:-32},{x:75,z:0}].filter(p=>outsideWalker.clear(p.x,p.z,0)&&Math.hypot(p.x-player.x,p.z-player.z)>12);
+  const candidates=GUARD_PATROL.filter(p=>outsideWalker.clear(p.x,p.z,0)&&Math.hypot(p.x-player.x,p.z-player.z)>12);
   const spawn=candidates.sort((a,b)=>Math.hypot(a.x-player.x,a.z-player.z)-Math.hypot(b.x-player.x,b.z-player.z))[0];
   if(!spawn)return;
-  Object.assign(guard,{...spawn,y:0,outside:true,path:[],memory:0});resetEnemyRoomSearch(guard);exterior.scene.add(guard.mesh);outdoorGuardActive=true;outdoorRethink=0;outdoorRoute=[];
+  Object.assign(guard,{...spawn,y:0,outside:true,path:[],memory:0});resetEnemyRoomSearch(guard);exterior.scene.add(guard.mesh);outdoorGuardActive=true;
+  guard.heading=Math.PI;groundsGuard=createGroundsGuard({actor:guard,walker:outsideWalker,route:outdoorPath,sight:outdoorSight});
  }
  guard.mesh.visible=true;if(elapsed<enemyReleaseAt)return;
- const distance=Math.hypot(guard.x-player.x,guard.z-player.z),line=outdoorSight(guard,player),seen=distance<(crouch?10:27)&&line;
- if(seen){spotted=true;guard.memory=6;guard.target={...player};}else guard.memory=Math.max(0,guard.memory-dt);
- outdoorRethink-=dt;
- if(outdoorRethink<=0){outdoorRethink=1.4;const target=guard.memory?guard.target:outdoorRoute.length?null:[{x:-80,z:12},{x:-80,z:-42},{x:-74,z:-82}][guard.route++%3];if(target)outdoorRoute=outdoorPath(outsideWalker,guard,target);}
- const target=outdoorRoute[0];if(target){const dx=target.x-guard.x,dz=target.z-guard.z,d=Math.hypot(dx,dz),step=Math.min(d,dt*(guard.memory?3.6:2.2));const x=guard.x,z=guard.z;outsideWalker.update(guard,dx/(d||1)*step,dz/(d||1)*step,dt,{jump:false});guard.mesh.rotation.y=Math.atan2(dx,dz);updateSecurityGuard(guard.mesh,Math.hypot(guard.x-x,guard.z-z),dt);if(d<.2)outdoorRoute.shift();}
+ const distance=Math.hypot(guard.x-player.x,guard.z-player.z),line=outdoorSight(guard,player);
+ const result=groundsGuard.update(player,dt,{crouch});if(result.seen)spotted=true;else if(groundsGuard.mode==='patrol'||groundsGuard.mode==='return')spotted=false;
+ guard.mesh.rotation.y=guard.heading;updateSecurityGuard(guard.mesh,result.moved,dt);
  guard.mesh.position.set(guard.x,guard.y,guard.z);
  if(distance<.85&&Math.abs(guard.y-player.y)<1&&line)caught(guard.name);
 }
-function outdoorSight(a,b){const distance=Math.hypot(b.x-a.x,b.z-a.z),count=Math.ceil(distance/.5);for(let i=1;i<count;i++)if(!outsideWalker.clear(a.x+(b.x-a.x)*i/count,a.z+(b.z-a.z)*i/count,Math.max(a.y??0,b.y??0)))return false;return true;}
+function outdoorSight(a,b){const distance=Math.hypot(b.x-a.x,b.z-a.z),count=Math.ceil(distance/.5);for(let i=1;i<count;i++)if(!outsideWalker.clearSight(a.x+(b.x-a.x)*i/count,a.z+(b.z-a.z)*i/count,Math.max(a.y??0,b.y??0)))return false;return true;}
+function groundsNoise(point,radius,kind){
+ beep(kind==='pry'?180:420,.25,.08);
+ if(groundsGuard?.hear(point,radius))announce('The guard heard that and is coming to investigate.');
+}
 function showHelp(){if(state!=='play'&&state!=='paused')return;pause();dragging=false;previousPointer=null;$('result').hidden=true;$('instructions').hidden=false;$('closeHelp').focus();}
 function outsideDoor(){
  const candidates=floors.flatMap((f,floor)=>f.exits.map(exit=>({exit,floor,d:Math.hypot(player.x-exit.destination[0],player.z-exit.destination[2],player.y-exit.destination[1])})));
@@ -421,8 +423,8 @@ function useDoor(exit){
  if(escapeProgress){const attempt=escapeProgress.door(exit,{returning:player.outside});if(!attempt.allowed){notebook.recordEvidence({id:`door:${player.floor}:${exit.id}`,title:exit.name,view:`floor:${player.floor}`,text:attempt.text,source:'Tested outside door',locked:true});announce(attempt.text);return false;}}
  outsideWalker?.resetJump();indoorJump?.reset();
  const doorFloor=exit.floor??player.floor;notebook.recordDoor(exit,doorFloor,{used:true});
- if(player.outside){Object.assign(player,{...exit.inside,floor:exit.floor,y:floors[exit.floor].elevation,stair:null,outside:false});const {dx,dz}=exitDirection(exit);yaw=Math.atan2(dx,dz);scene.add(torch,torchTarget);}
- else {lastDoor=exit;const [x,y,z]=exit.destination;Object.assign(player,{x,y,z,stair:null,outside:true});const {dx,dz}=exitDirection(exit,{outside:true});yaw=Math.atan2(-dx,-dz);exterior.scene.add(torch,torchTarget);}
+ if(player.outside){Object.assign(player,{...exit.inside,floor:exit.floor,y:floors[exit.floor].elevation,stair:null,outside:false});const {dx,dz}=exitDirection(exit);yaw=Math.atan2(dx,dz);if(!exteriorTorch)scene.add(torch,torchTarget);}
+ else {lastDoor=exit;const [x,y,z]=exit.destination;Object.assign(player,{x,y,z,stair:null,outside:true});const {dx,dz}=exitDirection(exit,{outside:true});yaw=Math.atan2(-dx,-dz);if(!exteriorTorch)exterior.scene.add(torch,torchTarget);}
  if(escapeProgress&&player.outside){enemyReleaseAt=Math.max(enemyReleaseAt,elapsed+5);}else if(outdoorGuardActive){const guard=enemies.find(e=>e.type===1);scene.add(guard.mesh);Object.assign(guard,{...guard.spawn,outside:false,y:0,path:[],memory:0,target:null});guard.mesh.position.set(guard.x,0,guard.z);resetSecurityGuard(guard.mesh);outdoorGuardActive=false;}
  pitch=0;hold=0;spotted=false;camera.position.set(player.x,player.y+(crouch?1.1:1.65),player.z);camera.rotation.set(pitch,yaw,0);showFloor();observeNotebook();drawMap();enemies.forEach(e=>e.mesh.visible=!player.outside&&e.floor===player.floor);$('interact').hidden=true;return true;
 }
@@ -430,13 +432,14 @@ function beep(hz,length,volume){if(!audioCtx||!audioOn)return;const t=audioCtx.c
 function update(dt,interactionDt=dt){
  if(state!=='play')return;
  if(artViewing){if(!keys.has('KeyE'))closeArtViewer();return;}
- elapsed+=dt;receptionClock.update(player,dt);const sx=(keys.has('KeyD')?1:0)-(keys.has('KeyA')?1:0),sz=(keys.has('KeyW')?1:0)-(keys.has('KeyS')?1:0),moving=!!(sx||sz);
+ elapsed+=dt;receptionClock.update(player,dt);escapeGrounds?.update(dt,player);const sx=(keys.has('KeyD')?1:0)-(keys.has('KeyA')?1:0),sz=(keys.has('KeyW')?1:0)-(keys.has('KeyS')?1:0),moving=!!(sx||sz);
  crouch=keys.has('ControlLeft')||keys.has('KeyC');if(stamina<.02)exhausted=true;if(stamina>.25)exhausted=false;
  sprint=keys.has('ShiftLeft')&&moving&&!crouch&&!exhausted;stamina=THREE.MathUtils.clamp(stamina+dt*(sprint?-.19:.115),0,1);
  const speed=crouch?1.6:sprint?5.8:3.1,n=Math.hypot(sx,sz)||1;
  const dx=(Math.cos(yaw)*sx-Math.sin(yaw)*sz)/n*speed*dt,dz=(-Math.sin(yaw)*sx-Math.cos(yaw)*sz)/n*speed*dt;
- const oldPlayerFloor=player.floor;
+ const oldPlayerFloor=player.floor,previousPlayer={...player};
  if(modern()){if(player.outside)outsideWalker.update(player,dx,dz,dt);else indoorJump.update(player,dx,dz,dt);if(player.floor!==oldPlayerFloor){showFloor();drawMap();}}
+ if(player.outside){const area=outsideAreaName();if($('floorName').textContent!==area){$('floorName').textContent=area;$('miniFloorName').textContent=area;}}
  else {if(walkable(layout,player.x+dx,player.z,.34))player.x+=dx;if(walkable(layout,player.x,player.z+dz,.34))player.z+=dz;}
  footPhase+=dt*(moving?(sprint?14:9):0);camera.position.set(player.x,THREE.MathUtils.lerp(camera.position.y,(modern()?player.y:floorHeight(player))+(crouch?1.1:1.65),Math.min(1,dt*12))+(moving?Math.sin(footPhase)*.018:0),player.z);camera.rotation.set(pitch,yaw,0);
  if(moving&&!crouch&&elapsed-lastStep>(sprint?.30:.48)){beep(95,.11,sprint?.08:.035);lastStep=elapsed;}
@@ -466,14 +469,20 @@ function update(dt,interactionDt=dt){
  if(spotted&&enemies.every(e=>Math.hypot(e.x-player.x,e.z-player.z,(e.floor-player.floor)*FLOOR_HEIGHT)>=SPOTTED_CLEAR_DISTANCE))spotted=false;
  $('warning').textContent=elapsed<messageUntil?interactionMessage:elapsed<enemyReleaseAt?(escapeProgress?.run.captures?'A BRIEF CHANCE TO RECOVER':'YOU HAVE A FIVE-SECOND HEAD START'):spotted?"You've been spotted":nearest<4?'SOMEONE IS VERY CLOSE':nearest<10?'YOU ARE NOT ALONE':'';
 
-  const stair=modern()?null:nearStair(floors,player),exit=player.outside?outsideDoor():nearExit(layout,player),art=player.outside?null:nearbyArt(),clue=escapeWorld?.near(player),mast=escapeProgress?.canFinish(player);
+  const stair=modern()?null:nearStair(floors,player),exit=player.outside?outsideDoor():nearExit(layout,player),art=player.outside?null:nearbyArt(),clue=escapeWorld?.near(player),groundClue=escapeGrounds?.near(player),mast=escapeProgress?.canFinish(player);
  if(!keys.has('KeyE'))stairLatch=false;
-  $('interact').hidden=!stair&&!exit&&!art&&!clue&&!mast;
+  $('interact').hidden=!stair&&!exit&&!art&&!clue&&!groundClue&&!mast;
+ const worked=escapeGrounds?.workOn(groundClue,keys.has('KeyE')&&!stairLatch,dt);if(worked){announce(worked);stairLatch=true;}
  if(mast){
   $('interact').querySelector('b').textContent='PRESS E · REACH THE MAST';$('exitName').textContent='Beyond the asylum grounds';$('exitFill').style.width='0%';if(keys.has('KeyE')&&!stairLatch)finish(true,'the radio mast');
+ }else if(groundClue){
+  escapeGrounds.inspect(groundClue);
+  const prying=groundClue.id==='wicket'&&escapeProgress.run.crowbar;
+  $('interact').querySelector('b').textContent=prying?'HOLD E TO PRISE BOARDS':groundClue.id==='crowbar'||groundClue.id==='oil'?'PRESS E TO TAKE':'PRESS E TO '+escapeGrounds.action(groundClue);$('exitName').textContent=groundClue.title;$('exitFill').style.width=(escapeGrounds.work/3*100)+'%';
+  if(keys.has('KeyE')&&!stairLatch&&!prying){announce(escapeGrounds.use(groundClue));stairLatch=true;}
  }else if(clue){
   $('interact').querySelector('b').textContent=clue.id==='staff-key'?'PRESS E TO TAKE':clue.id==='reclaim'?'PRESS E TO RECLAIM':clue.gate||clue.id==='release'?'PRESS E TO USE':clue.id==='plan'&&clue.key.visible?'PRESS E TO TAKE BRASS KEY':'PRESS E TO INSPECT';$('exitName').textContent=clue.title;$('exitFill').style.width='0%';
-  if(keys.has('KeyE')&&!stairLatch){announce(clue.gate?(escapeProgress.openStair(clue.gate.id)?`Gate open. Find the brass key in second-floor room ${escapeProgress.roomNumber(3,escapeProgress.run.office)}.`:'Locked. Its plate reads “Staff stair key”.'):escapeProgress.interact(clue.id,{view:`floor:${player.floor}`}));syncEscapeWorld();stairLatch=true;}
+  if(keys.has('KeyE')&&!stairLatch){announce(clue.gate?(escapeProgress.openStair(clue.gate.id)?'Gate open.':'Locked. Its plate reads “Staff stair key”.'):escapeProgress.interact(clue.id,{view:`floor:${player.floor}`}));syncEscapeWorld();stairLatch=true;}
  }else if(modern()&&exit){
   $('interact').querySelector('b').textContent=player.outside?'PRESS E TO GO INSIDE':'PRESS E TO USE DOOR';$('exitName').textContent=exit.id+' · '+exit.name;$('exitFill').style.width='0%';
   if(keys.has('KeyE')&&!stairLatch)stairLatch=useDoor(exit);
@@ -494,9 +503,9 @@ function update(dt,interactionDt=dt){
   if(exit){$('interact').querySelector('b').textContent='HOLD E TO ESCAPE';$('exitName').textContent=exit.name;hold=keys.has('KeyE')&&!stairLatch?hold+interactionDt:0;$('exitFill').style.width=Math.min(100,hold/INTERACTION_HOLD_SECONDS*100)+'%';if(hold>=INTERACTION_HOLD_SECONDS)finish(true,exit.name);}else hold=0;
  }
  $('timer').textContent=`${String(Math.floor(elapsed/60)).padStart(2,'0')}:${String(Math.floor(elapsed%60)).padStart(2,'0')}`;$('staminaFill').style.width=stamina*100+'%';$('stance').textContent=sprint?'SPRINTING · LOUD':crouch?'CROUCHING · QUIET':'STAMINA';
- if(escapeProgress&&player.outside){escapeProgress.observeBoundary(player);if(Math.hypot(player.x-MAST.x,player.z-MAST.z)<18)escapeProgress.discover('mast',{view:'outside'});}
+ if(escapeProgress&&player.outside){escapeProgress.observeBoundary(player,previousPlayer);if(Math.hypot(player.x-MAST.x,player.z-MAST.z)<18)escapeProgress.discover('mast',{view:'outside'});}
  mapRefresh-=dt;if(mapRefresh<=0){mapRefresh=.12;observeNotebook();drawMap();}
- escapeWorld?.update(elapsed);updateObjective();
+ escapeWorld?.update(elapsed);updateObjective(interactionDt);
 }
 function observeNotebook(){
  notebook.explore(player);
@@ -537,7 +546,7 @@ function renderNotebook(){
 }
 function openNotebook(){
  if(state!=='play')return;
- observeNotebook();closeArtViewer();keys.clear();hold=0;stairHold=0;dragging=false;previousPointer=null;
+ doorCreak.stop();observeNotebook();closeArtViewer();keys.clear();hold=0;stairHold=0;dragging=false;previousPointer=null;
  notebookFloor=notebookView(player);state='notebook';mouseCapture.release();
  $('floorMap').hidden=false;$('touch').hidden=true;$('pause').hidden=true;$('hud').hidden=true;
  notebookReadRevision=notebook.revision;updateNotebookBadge();renderNotebook();drawMap();$('closeNotebook').focus();
@@ -573,7 +582,8 @@ function renderAerialBackdrop(exterior){
  renderer.render(exterior.scene,exterior.camera);
  if(fog)fog.density=fogDensity;
 }
-function animate(){requestAnimationFrame(animate);clock.update();const frameDt=clock.getDelta(),dt=Math.min(frameDt,.04);
+function animate(){requestAnimationFrame(animate);if(state!=='play'||!audioOn||document.hidden)doorCreak.stop();clock.update();const frameDt=clock.getDelta(),dt=Math.min(frameDt,.04);
+ if(exteriorTorch)exteriorTorch.intensity=player.outside&&!['menu','arrival','cutscene','won'].includes(state)&&torch.visible&&torch.parent!==exterior.scene?torch.intensity:0;
  if(state==='captured'&&!document.hidden&&recoveryRemaining>0){recoveryRemaining=Math.max(0,recoveryRemaining-Math.min(frameDt,.25));$('resume').disabled=recoveryRemaining>0;$('resume').textContent=recoveryRemaining>0?`OBSERVATION · ${Math.ceil(recoveryRemaining)}s`:'CONTINUE ESCAPE ↗';}
  if(document.hidden)return;
  interiorLoader?.update(player);updateLoadingStatus();
@@ -599,9 +609,10 @@ function animate(){requestAnimationFrame(animate);clock.update();const frameDt=c
  }
  if(state==='cutscene'){renderAerialBackdrop(escapeExterior);return;}
  renderer.toneMappingExposure=1.25;
- interiorLights.update(player);camera.getWorldDirection(tmp);torch.position.copy(camera.position);torchTarget.position.copy(camera.position).addScaledVector(tmp,12);if(!player.outside)updateFurnitureDetail(THREE,scene,camera,innerHeight);renderer.render(player.outside?exterior.scene:scene,camera);}
+ interiorLights.update(player);camera.getWorldDirection(tmp);const activeTorch=player.outside&&exteriorTorch&&torch.parent!==exterior.scene?exteriorTorch:torch,activeTorchTarget=activeTorch===exteriorTorch?exteriorTorchTarget:torchTarget;if(exteriorTorch)exteriorTorch.intensity=activeTorch===exteriorTorch&&torch.visible?torch.intensity:0;activeTorch.position.copy(camera.position);activeTorchTarget.position.copy(camera.position).addScaledVector(tmp,12);if(!player.outside)updateFurnitureDetail(THREE,scene,camera,innerHeight);renderer.render(player.outside?exterior.scene:scene,camera);}
 $('start').onclick=start;$('closeHelp').onclick=resume;$('helpPlay').onclick=resume;$('retry').onclick=start;$('resume').onclick=resume;$('pause').onclick=pause;$('audio').onchange=e=>audioOn=e.target.checked;
 function toggleMap(){if(state==='notebook')closeNotebook();else openNotebook();}
+ $('audio').addEventListener('change',()=>{if(!audioOn)doorCreak.stop();});
 $('notebookButton').onclick=toggleMap;$('closeNotebook').onclick=()=>closeNotebook();
 addEventListener('keydown',e=>{
  if(e.defaultPrevented)return;
@@ -624,12 +635,12 @@ addEventListener('keydown',e=>{
  if(state!=='play')return;
  if(e.code==='Space'){if(!artViewing){if(player.outside)outsideWalker?.jump(player);else indoorJump?.start();}return;}
  if(['Tab','KeyM','KeyN','KeyJ'].includes(e.code)){e.preventDefault();openNotebook();return;}
- keys.add(e.code);if(e.code==='KeyF')torch.visible=!torch.visible;
+ keys.add(e.code);if(e.code==='KeyF'){torchEnabled=!torchEnabled;torch.intensity=torchEnabled?20:0;}
 });
  addEventListener('keyup',e=>{keys.delete(e.code);if(e.code==='KeyE'){stairLatch=false;closeArtViewer();}});addEventListener('blur',()=>{keys.clear();closeArtViewer();mouseCapture.release();pause();});document.addEventListener('visibilitychange',()=>{clock?.getDelta();if(document.hidden){mouseCapture.release();pause();}});
 function look(dx,dy){const s=Number($('sensitivity').value)*.0018;yaw-=dx*s;pitch=THREE.MathUtils.clamp(pitch-dy*s,-1.3,1.3);}
 addEventListener('mousemove',e=>{if(state==='play'&&document.pointerLockElement===canvas)look(e.movementX,e.movementY);});
 canvas.addEventListener('pointerdown',e=>{if(state!=='play')return;dragging=true;previousPointer=[e.clientX,e.clientY];canvas.setPointerCapture(e.pointerId);});canvas.addEventListener('pointermove',e=>{if(dragging&&state==='play'&&document.pointerLockElement!==canvas){look(e.clientX-previousPointer[0],e.clientY-previousPointer[1]);previousPointer=[e.clientX,e.clientY];}});canvas.addEventListener('pointerup',()=>dragging=false);canvas.addEventListener('pointercancel',()=>dragging=false);
- document.querySelectorAll('[data-key]').forEach(b=>{b.addEventListener('pointerdown',e=>{e.preventDefault();if(state!=='play')return;keys.add(b.dataset.key);b.setPointerCapture(e.pointerId);});for(const t of ['pointerup','pointercancel','lostpointercapture'])b.addEventListener(t,()=>{keys.delete(b.dataset.key);if(b.dataset.key==='KeyE')closeArtViewer();});});$('touchMap').onclick=toggleMap;$('touchTorch').onclick=()=>{if(state==='play')torch.visible=!torch.visible;};if(touch)document.body.classList.add('touch');
+ document.querySelectorAll('[data-key]').forEach(b=>{b.addEventListener('pointerdown',e=>{e.preventDefault();if(state!=='play')return;keys.add(b.dataset.key);b.setPointerCapture(e.pointerId);});for(const t of ['pointerup','pointercancel','lostpointercapture'])b.addEventListener(t,()=>{keys.delete(b.dataset.key);if(b.dataset.key==='KeyE')closeArtViewer();});});$('touchMap').onclick=toggleMap;$('touchTorch').onclick=()=>{if(state==='play'){torchEnabled=!torchEnabled;torch.intensity=torchEnabled?20:0;}};if(touch)document.body.classList.add('touch');
 addEventListener('resize',()=>{if(renderer){renderer.setSize(innerWidth,innerHeight);camera.aspect=innerWidth/innerHeight;camera.updateProjectionMatrix();if(exterior){exterior.camera.aspect=camera.aspect;exterior.camera.updateProjectionMatrix();}if(escapeExterior){escapeExterior.camera.aspect=camera.aspect;escapeExterior.camera.updateProjectionMatrix();escapeCutscene.resize();}}});
 init();

@@ -33,7 +33,8 @@ export function createInteriorSectionLoader(THREE,{scene,floors,models,renderer,
    const files=await manifest;let data;
    try{if(!files?.resources[floor])throw Error('No prepared rooms');data=await unpack(await download(files.resources[floor].file));}
    catch{const built=await workerFloor(floor);data=decodeModel(built.resource.buffer);}
-   const restored=deserializeScene(THREE,data.scene);const labels=Object.values(restored.materials).find(m=>m.name==='Asylum door nameplates');if(labels)materials.get(floor).Labels=labels;
+   const restored=deserializeScene(THREE,data.scene);
+   for(const [kind,name] of [['Labels','Asylum door nameplates'],['StairSigns','Asylum floor signs']]){const material=Object.values(restored.materials).find(m=>m.name===name);if(material)materials.get(floor)[kind]=material;}
   })().catch(error=>{resources.delete(floor);throw error;});resources.set(floor,task);return task;
  }
  async function load(section){

@@ -1,3 +1,4 @@
+import {markDownpipeInstances} from './downpipe-clearance.mjs';
 // img15 (looking east) and img16 (looking south). Build in the east arm's
 // coordinates, reusing its inner elevation and stairs, then reflect at x=0.
 import {addInnerCourtPhotoDetails,INNER_COURT_SIDE_PROFILE} from './inner-court-photo-detail.mjs';
@@ -11,9 +12,9 @@ export const WEST_WING_PROFILE=INNER_COURT_SIDE_PROFILE;
 export function addWestWingPhotoDetails(THREE,{model,worldUV,white,brick,roof,steel,material,hipRoof}){
   const wing=new THREE.Group();wing.name='West wing mirrored from east';
   const batches=new Map();
-  function box(mat,x,y,z,w,h,d,rotation=0){
+  function box(mat,x,y,z,w,h,d,rotation=0,downpipe=false){
     if(!batches.has(mat))batches.set(mat,[]);
-    batches.get(mat).push({x,y,z,w,h,d,rotation});
+    batches.get(mat).push({x,y,z,w,h,d,rotation,downpipe});
   }
   function mesh(geometry,mat,x=0,y=0,z=0,shadow=false){
     const m=new THREE.Mesh(geometry,mat);m.position.set(x,y,z);
@@ -77,7 +78,7 @@ export function addWestWingPhotoDetails(THREE,{model,worldUV,white,brick,roof,st
     for(const v of [-h/2,-.48,.45,h/2])part(frame,0,v,w+.1,.065);
     wing.userData.eastPhotoOpenings.push({face:'west-wing-gallery',x,y,z,w,h});
   }
-  for(const x of [24.38,37.72])box(iron,x,4.1,-35.85,.09,8.2,.09);
+  for(const x of [24.38,37.72])box(iron,x,4.1,-35.85,.09,8.2,.09,0,true);
   // Standing seams make the shallow slate/metal roof readable from ground level.
   const pitch=-Math.atan((WEST_WING_PROFILE.frontEaves-WEST_WING_PROFILE.rearEaves)/5);
   for(let x=24.4;x<37.7;x+=.7){
@@ -86,12 +87,12 @@ export function addWestWingPhotoDetails(THREE,{model,worldUV,white,brick,roof,st
   }
   for(const z of [-24.45,4.75]){
     const height=z>0?12.7:WEST_WING_PROFILE.eaves;
-    box(iron,37.22,height/2,z,.09,height,.09);
+    box(iron,37.22,height/2,z,.09,height,.09,0,true);
   }
 
   const dummy=new THREE.Object3D();
   for(const [mat,items] of batches){
-    const batch=new THREE.InstancedMesh(new THREE.BoxGeometry(1,1,1),mat,items.length);batch.receiveShadow=true;
+    const batch=new THREE.InstancedMesh(new THREE.BoxGeometry(1,1,1),mat,items.length);markDownpipeInstances(batch,items);batch.receiveShadow=true;
     items.forEach((b,i)=>{dummy.position.set(b.x,b.y,b.z);dummy.scale.set(b.w,b.h,b.d);dummy.rotation.set(0,b.rotation,0);dummy.updateMatrix();batch.setMatrixAt(i,dummy.matrix);});
     wing.add(batch);
   }

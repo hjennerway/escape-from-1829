@@ -1,0 +1,1757 @@
+{
+  "validation": {
+    "renderer": "ANGLE (NVIDIA, NVIDIA GeForce RTX 3090 Ti (0x00002203) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+    "probes": [
+      {
+        "z": -49,
+        "y": 5.09,
+        "hits": [
+          {
+            "name": "Workshop plaster ceiling",
+            "parent": "Tower corridor and three workshops",
+            "x": 146.3000030517578,
+            "material": [
+              "c3bba2"
+            ],
+            "source": false
+          },
+          {
+            "name": "Aerial batch · Tower corridor and three workshops · 334",
+            "parent": "Tower corridor and three workshops",
+            "x": 146.3000030517578,
+            "material": [
+              "bdaea9"
+            ],
+            "source": false
+          }
+        ]
+      },
+      {
+        "z": -48,
+        "y": 5.09,
+        "hits": [
+          {
+            "name": "Workshop plaster ceiling",
+            "parent": "Tower corridor and three workshops",
+            "x": 146.3000030517578,
+            "material": [
+              "c3bba2"
+            ],
+            "source": false
+          },
+          {
+            "name": "Aerial batch · Tower corridor and three workshops · 334",
+            "parent": "Tower corridor and three workshops",
+            "x": 146.3000030517578,
+            "material": [
+              "bdaea9"
+            ],
+            "source": false
+          }
+        ]
+      },
+      {
+        "z": -46,
+        "y": 5.09,
+        "hits": [
+          {
+            "name": "Workshop plaster ceiling",
+            "parent": "Tower corridor and three workshops",
+            "x": 146.3000030517578,
+            "material": [
+              "c3bba2"
+            ],
+            "source": false
+          },
+          {
+            "name": "Aerial batch · Tower corridor and three workshops · 334",
+            "parent": "Tower corridor and three workshops",
+            "x": 146.3000030517578,
+            "material": [
+              "bdaea9"
+            ],
+            "source": false
+          }
+        ]
+      },
+      {
+        "z": -43.8,
+        "y": 5.09,
+        "hits": [
+          {
+            "name": "Workshop plaster ceiling",
+            "parent": "Tower corridor and three workshops",
+            "x": 146.3000030517578,
+            "material": [
+              "c3bba2"
+            ],
+            "source": false
+          },
+          {
+            "name": "Aerial batch · Tower corridor and three workshops · 334",
+            "parent": "Tower corridor and three workshops",
+            "x": 146.3000030517578,
+            "material": [
+              "bdaea9"
+            ],
+            "source": false
+          }
+        ]
+      },
+      {
+        "z": -43.55,
+        "y": 0.3,
+        "hits": [
+          {
+            "name": "Aerial batch · Tower corridor and three workshops · 333",
+            "parent": "Tower corridor and three workshops",
+            "x": 146.3000030517578,
+            "material": [
+              "995f49"
+            ],
+            "source": false
+          },
+          {
+            "name": "Aerial batch · Tower corridor and three workshops · 335",
+            "parent": "Tower corridor and three workshops",
+            "x": 146.3000030517578,
+            "material": [
+              "ffffff"
+            ],
+            "source": false
+          },
+          {
+            "name": "Aerial batch · Tower corridor and three workshops · 335",
+            "parent": "Tower corridor and three workshops",
+            "x": 146.54249572753906,
+            "material": [
+              "ffffff"
+            ],
+            "source": false
+          }
+        ]
+      },
+      {
+        "z": -43.55,
+        "y": 1,
+        "hits": [
+          {
+            "name": "Aerial batch · Tower corridor and three workshops · 334",
+            "parent": "Tower corridor and three workshops",
+            "x": 146.3000030517578,
+            "material": [
+              "bdaea9"
+            ],
+            "source": false
+          },
+          {
+            "name": "Aerial batch · Tower corridor and three workshops · 335",
+            "parent": "Tower corridor and three workshops",
+            "x": 146.3000030517578,
+            "material": [
+              "ffffff"
+            ],
+            "source": false
+          },
+          {
+            "name": "Aerial batch · Tower corridor and three workshops · 335",
+            "parent": "Tower corridor and three workshops",
+            "x": 146.54249572753906,
+            "material": [
+              "ffffff"
+            ],
+            "source": false
+          }
+        ]
+      },
+      {
+        "z": -43.55,
+        "y": 2,
+        "hits": [
+          {
+            "name": "Aerial batch · Tower corridor and three workshops · 334",
+            "parent": "Tower corridor and three workshops",
+            "x": 146.3000030517578,
+            "material": [
+              "bdaea9"
+            ],
+            "source": false
+          },
+          {
+            "name": "Aerial batch · Tower corridor and three workshops · 335",
+            "parent": "Tower corridor and three workshops",
+            "x": 146.3000030517578,
+            "material": [
+              "ffffff"
+            ],
+            "source": false
+          },
+          {
+            "name": "Aerial batch · Tower corridor and three workshops · 335",
+            "parent": "Tower corridor and three workshops",
+            "x": 146.54249572753906,
+            "material": [
+              "ffffff"
+            ],
+            "source": false
+          }
+        ]
+      },
+      {
+        "z": -43.55,
+        "y": 3,
+        "hits": [
+          {
+            "name": "Aerial batch · Tower corridor and three workshops · 334",
+            "parent": "Tower corridor and three workshops",
+            "x": 146.3000030517578,
+            "material": [
+              "bdaea9"
+            ],
+            "source": false
+          },
+          {
+            "name": "Aerial batch · Tower corridor and three workshops · 335",
+            "parent": "Tower corridor and three workshops",
+            "x": 146.3000030517578,
+            "material": [
+              "ffffff"
+            ],
+            "source": false
+          },
+          {
+            "name": "Aerial batch · Tower corridor and three workshops · 335",
+            "parent": "Tower corridor and three workshops",
+            "x": 146.54249572753906,
+            "material": [
+              "ffffff"
+            ],
+            "source": false
+          }
+        ]
+      },
+      {
+        "z": -43.55,
+        "y": 4.5,
+        "hits": [
+          {
+            "name": "Aerial batch · Tower corridor and three workshops · 334",
+            "parent": "Tower corridor and three workshops",
+            "x": 146.3000030517578,
+            "material": [
+              "bdaea9"
+            ],
+            "source": false
+          },
+          {
+            "name": "Aerial batch · Tower corridor and three workshops · 335",
+            "parent": "Tower corridor and three workshops",
+            "x": 146.3000030517578,
+            "material": [
+              "ffffff"
+            ],
+            "source": false
+          },
+          {
+            "name": "Aerial batch · Tower corridor and three workshops · 335",
+            "parent": "Tower corridor and three workshops",
+            "x": 146.54249572753906,
+            "material": [
+              "ffffff"
+            ],
+            "source": false
+          }
+        ]
+      },
+      {
+        "z": -43.55,
+        "y": 5.09,
+        "hits": [
+          {
+            "name": "Workshop plaster ceiling",
+            "parent": "Tower corridor and three workshops",
+            "x": 146.3000030517578,
+            "material": [
+              "c3bba2"
+            ],
+            "source": false
+          },
+          {
+            "name": "Aerial batch · Tower corridor and three workshops · 334",
+            "parent": "Tower corridor and three workshops",
+            "x": 146.3000030517578,
+            "material": [
+              "bdaea9"
+            ],
+            "source": false
+          }
+        ]
+      },
+      {
+        "z": -43.45,
+        "y": 0.3,
+        "hits": [
+          {
+            "name": "Aerial batch · Tower corridor and three workshops · 333",
+            "parent": "Tower corridor and three workshops",
+            "x": 146.3000030517578,
+            "material": [
+              "995f49"
+            ],
+            "source": false
+          },
+          {
+            "name": "Aerial batch · Tower corridor and three workshops · 335",
+            "parent": "Tower corridor and three workshops",
+            "x": 146.3000030517578,
+            "material": [
+              "ffffff"
+            ],
+            "source": false
+          },
+          {
+            "name": "Aerial batch · Tower corridor and three workshops · 335",
+            "parent": "Tower corridor and three workshops",
+            "x": 146.54249572753906,
+            "material": [
+              "ffffff"
+            ],
+            "source": false
+          }
+        ]
+      },
+      {
+        "z": -43.45,
+        "y": 1,
+        "hits": [
+          {
+            "name": "Aerial batch · Tower corridor and three workshops · 334",
+            "parent": "Tower corridor and three workshops",
+            "x": 146.3000030517578,
+            "material": [
+              "bdaea9"
+            ],
+            "source": false
+          },
+          {
+            "name": "Aerial batch · Tower corridor and three workshops · 335",
+            "parent": "Tower corridor and three workshops",
+            "x": 146.3000030517578,
+            "material": [
+              "ffffff"
+            ],
+            "source": false
+          },
+          {
+            "name": "Aerial batch · Tower corridor and three workshops · 335",
+            "parent": "Tower corridor and three workshops",
+            "x": 146.54249572753906,
+            "material": [
+              "ffffff"
+            ],
+            "source": false
+          }
+        ]
+      },
+      {
+        "z": -43.45,
+        "y": 2,
+        "hits": [
+          {
+            "name": "Aerial batch · Tower corridor and three workshops · 334",
+            "parent": "Tower corridor and three workshops",
+            "x": 146.3000030517578,
+            "material": [
+              "bdaea9"
+            ],
+            "source": false
+          },
+          {
+            "name": "Aerial batch · Tower corridor and three workshops · 335",
+            "parent": "Tower corridor and three workshops",
+            "x": 146.3000030517578,
+            "material": [
+              "ffffff"
+            ],
+            "source": false
+          },
+          {
+            "name": "Aerial batch · Tower corridor and three workshops · 335",
+            "parent": "Tower corridor and three workshops",
+            "x": 146.54249572753906,
+            "material": [
+              "ffffff"
+            ],
+            "source": false
+          }
+        ]
+      },
+      {
+        "z": -43.45,
+        "y": 3,
+        "hits": [
+          {
+            "name": "Aerial batch · Tower corridor and three workshops · 334",
+            "parent": "Tower corridor and three workshops",
+            "x": 146.3000030517578,
+            "material": [
+              "bdaea9"
+            ],
+            "source": false
+          },
+          {
+            "name": "Aerial batch · Tower corridor and three workshops · 335",
+            "parent": "Tower corridor and three workshops",
+            "x": 146.3000030517578,
+            "material": [
+              "ffffff"
+            ],
+            "source": false
+          },
+          {
+            "name": "Aerial batch · Tower corridor and three workshops · 335",
+            "parent": "Tower corridor and three workshops",
+            "x": 146.54249572753906,
+            "material": [
+              "ffffff"
+            ],
+            "source": false
+          }
+        ]
+      },
+      {
+        "z": -43.45,
+        "y": 4.5,
+        "hits": [
+          {
+            "name": "Aerial batch · Tower corridor and three workshops · 334",
+            "parent": "Tower corridor and three workshops",
+            "x": 146.3000030517578,
+            "material": [
+              "bdaea9"
+            ],
+            "source": false
+          },
+          {
+            "name": "Aerial batch · Tower corridor and three workshops · 335",
+            "parent": "Tower corridor and three workshops",
+            "x": 146.3000030517578,
+            "material": [
+              "ffffff"
+            ],
+            "source": false
+          },
+          {
+            "name": "Aerial batch · Tower corridor and three workshops · 335",
+            "parent": "Tower corridor and three workshops",
+            "x": 146.54249572753906,
+            "material": [
+              "ffffff"
+            ],
+            "source": false
+          }
+        ]
+      },
+      {
+        "z": -43.45,
+        "y": 5.09,
+        "hits": [
+          {
+            "name": "Workshop plaster ceiling",
+            "parent": "Tower corridor and three workshops",
+            "x": 146.3000030517578,
+            "material": [
+              "c3bba2"
+            ],
+            "source": false
+          },
+          {
+            "name": "Aerial batch · Tower corridor and three workshops · 334",
+            "parent": "Tower corridor and three workshops",
+            "x": 146.3000030517578,
+            "material": [
+              "bdaea9"
+            ],
+            "source": false
+          }
+        ]
+      },
+      {
+        "z": -42,
+        "y": 5.09,
+        "hits": [
+          {
+            "name": "Workshop plaster ceiling",
+            "parent": "Tower corridor and three workshops",
+            "x": 146.3000030517578,
+            "material": [
+              "c3bba2"
+            ],
+            "source": false
+          },
+          {
+            "name": "Aerial batch · Tower corridor and three workshops · 334",
+            "parent": "Tower corridor and three workshops",
+            "x": 146.3000030517578,
+            "material": [
+              "bdaea9"
+            ],
+            "source": false
+          }
+        ]
+      },
+      {
+        "z": -40.5,
+        "y": 2,
+        "hits": [
+          {
+            "name": "Corridor stone jamb",
+            "parent": "Corridor round-headed window",
+            "x": 146.1550000013411,
+            "material": [
+              "c8c6b7"
+            ],
+            "source": false
+          },
+          {
+            "name": "Aerial batch · Corridor south windows · 12",
+            "parent": "Corridor south windows",
+            "x": 146.3000000035763,
+            "material": [
+              "ffffff"
+            ],
+            "source": false
+          },
+          {
+            "name": "Striped window jamb mortar",
+            "parent": "Corridor round-headed window",
+            "x": 146.30000000488758,
+            "material": [
+              "aaa292"
+            ],
+            "source": false
+          },
+          {
+            "name": "Aerial batch · Tower corridor and three workshops · 334",
+            "parent": "Tower corridor and three workshops",
+            "x": 146.3000030517578,
+            "material": [
+              "bdaea9"
+            ],
+            "source": false
+          },
+          {
+            "name": "Aerial batch · Tower corridor and three workshops · 335",
+            "parent": "Tower corridor and three workshops",
+            "x": 146.54249572753906,
+            "material": [
+              "ffffff"
+            ],
+            "source": false
+          }
+        ]
+      },
+      {
+        "z": -40.5,
+        "y": 5.09,
+        "hits": [
+          {
+            "name": "Workshop plaster ceiling",
+            "parent": "Tower corridor and three workshops",
+            "x": 146.3000030517578,
+            "material": [
+              "c3bba2"
+            ],
+            "source": false
+          },
+          {
+            "name": "Aerial batch · Tower corridor and three workshops · 334",
+            "parent": "Tower corridor and three workshops",
+            "x": 146.3000030517578,
+            "material": [
+              "bdaea9"
+            ],
+            "source": false
+          }
+        ]
+      },
+      {
+        "z": -38.5,
+        "y": 5.09,
+        "hits": [
+          {
+            "name": "Workshop plaster ceiling",
+            "parent": "Tower corridor and three workshops",
+            "x": 146.3000030517578,
+            "material": [
+              "c3bba2"
+            ],
+            "source": false
+          },
+          {
+            "name": "Aerial batch · Tower corridor and three workshops · 334",
+            "parent": "Tower corridor and three workshops",
+            "x": 146.3000030517578,
+            "material": [
+              "bdaea9"
+            ],
+            "source": false
+          }
+        ]
+      },
+      {
+        "z": -36.45,
+        "y": 0.3,
+        "hits": [
+          {
+            "name": "Aerial batch · Tower corridor and three workshops · 333",
+            "parent": "Tower corridor and three workshops",
+            "x": 146.3000030517578,
+            "material": [
+              "995f49"
+            ],
+            "source": false
+          },
+          {
+            "name": "Aerial batch · Tower corridor and three workshops · 335",
+            "parent": "Tower corridor and three workshops",
+            "x": 146.3000030517578,
+            "material": [
+              "ffffff"
+            ],
+            "source": false
+          },
+          {
+            "name": "Aerial batch · Tower corridor and three workshops · 335",
+            "parent": "Tower corridor and three workshops",
+            "x": 146.54249572753906,
+            "material": [
+              "ffffff"
+            ],
+            "source": false
+          }
+        ]
+      },
+      {
+        "z": -36.45,
+        "y": 1,
+        "hits": [
+          {
+            "name": "Aerial batch · Tower corridor and three workshops · 334",
+            "parent": "Tower corridor and three workshops",
+            "x": 146.3000030517578,
+            "material": [
+              "bdaea9"
+            ],
+            "source": false
+          },
+          {
+            "name": "Aerial batch · Tower corridor and three workshops · 335",
+            "parent": "Tower corridor and three workshops",
+            "x": 146.3000030517578,
+            "material": [
+              "ffffff"
+            ],
+            "source": false
+          },
+          {
+            "name": "Aerial batch · Tower corridor and three workshops · 335",
+            "parent": "Tower corridor and three workshops",
+            "x": 146.54249572753906,
+            "material": [
+              "ffffff"
+            ],
+            "source": false
+          }
+        ]
+      },
+      {
+        "z": -36.45,
+        "y": 5.09,
+        "hits": [
+          {
+            "name": "Workshop plaster ceiling",
+            "parent": "Tower corridor and three workshops",
+            "x": 146.3000030517578,
+            "material": [
+              "c3bba2"
+            ],
+            "source": false
+          },
+          {
+            "name": "Aerial batch · Tower corridor and three workshops · 334",
+            "parent": "Tower corridor and three workshops",
+            "x": 146.3000030517578,
+            "material": [
+              "bdaea9"
+            ],
+            "source": false
+          }
+        ]
+      },
+      {
+        "z": -36.35,
+        "y": 0.3,
+        "hits": [
+          {
+            "name": "Aerial batch · Tower corridor and three workshops · 333",
+            "parent": "Tower corridor and three workshops",
+            "x": 146.3000030517578,
+            "material": [
+              "995f49"
+            ],
+            "source": false
+          },
+          {
+            "name": "Aerial batch · Tower corridor and three workshops · 335",
+            "parent": "Tower corridor and three workshops",
+            "x": 146.3000030517578,
+            "material": [
+              "ffffff"
+            ],
+            "source": false
+          },
+          {
+            "name": "Aerial batch · Tower corridor and three workshops · 335",
+            "parent": "Tower corridor and three workshops",
+            "x": 146.54249572753906,
+            "material": [
+              "ffffff"
+            ],
+            "source": false
+          }
+        ]
+      },
+      {
+        "z": -36.35,
+        "y": 1,
+        "hits": [
+          {
+            "name": "Aerial batch · Tower corridor and three workshops · 334",
+            "parent": "Tower corridor and three workshops",
+            "x": 146.3000030517578,
+            "material": [
+              "bdaea9"
+            ],
+            "source": false
+          },
+          {
+            "name": "Aerial batch · Tower corridor and three workshops · 335",
+            "parent": "Tower corridor and three workshops",
+            "x": 146.3000030517578,
+            "material": [
+              "ffffff"
+            ],
+            "source": false
+          },
+          {
+            "name": "Aerial batch · Tower corridor and three workshops · 335",
+            "parent": "Tower corridor and three workshops",
+            "x": 146.54249572753906,
+            "material": [
+              "ffffff"
+            ],
+            "source": false
+          }
+        ]
+      },
+      {
+        "z": -36.35,
+        "y": 2,
+        "hits": [
+          {
+            "name": "Service glazing and trim",
+            "parent": "Tower service buildings",
+            "x": 146.07999511808157,
+            "material": [
+              "d5dcd5"
+            ],
+            "source": false
+          },
+          {
+            "name": "Service glazing and trim",
+            "parent": "Tower service buildings",
+            "x": 146.1850006096065,
+            "material": [
+              "343d3b"
+            ],
+            "source": false
+          },
+          {
+            "name": "Aerial batch · Tower corridor and three workshops · 334",
+            "parent": "Tower corridor and three workshops",
+            "x": 146.3000030517578,
+            "material": [
+              "bdaea9"
+            ],
+            "source": false
+          },
+          {
+            "name": "Aerial batch · Tower corridor and three workshops · 335",
+            "parent": "Tower corridor and three workshops",
+            "x": 146.3000030517578,
+            "material": [
+              "ffffff"
+            ],
+            "source": false
+          },
+          {
+            "name": "Aerial batch · Tower corridor and three workshops · 335",
+            "parent": "Tower corridor and three workshops",
+            "x": 146.54249572753906,
+            "material": [
+              "ffffff"
+            ],
+            "source": false
+          }
+        ]
+      },
+      {
+        "z": -36.35,
+        "y": 3,
+        "hits": [
+          {
+            "name": "Service glazing and trim",
+            "parent": "Tower service buildings",
+            "x": 146.07999511808157,
+            "material": [
+              "d5dcd5"
+            ],
+            "source": false
+          },
+          {
+            "name": "Service glazing and trim",
+            "parent": "Tower service buildings",
+            "x": 146.1850006096065,
+            "material": [
+              "343d3b"
+            ],
+            "source": false
+          },
+          {
+            "name": "Aerial batch · Tower corridor and three workshops · 334",
+            "parent": "Tower corridor and three workshops",
+            "x": 146.3000030517578,
+            "material": [
+              "bdaea9"
+            ],
+            "source": false
+          },
+          {
+            "name": "Aerial batch · Tower corridor and three workshops · 335",
+            "parent": "Tower corridor and three workshops",
+            "x": 146.3000030517578,
+            "material": [
+              "ffffff"
+            ],
+            "source": false
+          },
+          {
+            "name": "Aerial batch · Tower corridor and three workshops · 335",
+            "parent": "Tower corridor and three workshops",
+            "x": 146.54249572753906,
+            "material": [
+              "ffffff"
+            ],
+            "source": false
+          }
+        ]
+      },
+      {
+        "z": -36.35,
+        "y": 4.5,
+        "hits": [
+          {
+            "name": "Service glazing and trim",
+            "parent": "Tower service buildings",
+            "x": 146.07999511808157,
+            "material": [
+              "d5dcd5"
+            ],
+            "source": false
+          },
+          {
+            "name": "Service glazing and trim",
+            "parent": "Tower service buildings",
+            "x": 146.1850006096065,
+            "material": [
+              "343d3b"
+            ],
+            "source": false
+          },
+          {
+            "name": "Aerial batch · Tower corridor and three workshops · 334",
+            "parent": "Tower corridor and three workshops",
+            "x": 146.3000030517578,
+            "material": [
+              "bdaea9"
+            ],
+            "source": false
+          },
+          {
+            "name": "Aerial batch · Tower corridor and three workshops · 335",
+            "parent": "Tower corridor and three workshops",
+            "x": 146.3000030517578,
+            "material": [
+              "ffffff"
+            ],
+            "source": false
+          },
+          {
+            "name": "Aerial batch · Tower corridor and three workshops · 335",
+            "parent": "Tower corridor and three workshops",
+            "x": 146.54249572753906,
+            "material": [
+              "ffffff"
+            ],
+            "source": false
+          }
+        ]
+      },
+      {
+        "z": -36.35,
+        "y": 5.09,
+        "hits": [
+          {
+            "name": "Workshop plaster ceiling",
+            "parent": "Tower corridor and three workshops",
+            "x": 146.3000030517578,
+            "material": [
+              "c3bba2"
+            ],
+            "source": false
+          },
+          {
+            "name": "Aerial batch · Tower corridor and three workshops · 334",
+            "parent": "Tower corridor and three workshops",
+            "x": 146.3000030517578,
+            "material": [
+              "bdaea9"
+            ],
+            "source": false
+          }
+        ]
+      },
+      {
+        "z": -35,
+        "y": 2,
+        "hits": [
+          {
+            "name": "Corridor stone jamb",
+            "parent": "Corridor round-headed window",
+            "x": 146.1550000013411,
+            "material": [
+              "c8c6b7"
+            ],
+            "source": false
+          },
+          {
+            "name": "Aerial batch · Corridor south windows · 25",
+            "parent": "Corridor south windows",
+            "x": 146.3000000035763,
+            "material": [
+              "ffffff"
+            ],
+            "source": false
+          },
+          {
+            "name": "Striped window jamb mortar",
+            "parent": "Corridor round-headed window",
+            "x": 146.30000000488758,
+            "material": [
+              "aaa292"
+            ],
+            "source": false
+          },
+          {
+            "name": "Aerial batch · Tower corridor and three workshops · 334",
+            "parent": "Tower corridor and three workshops",
+            "x": 146.3000030517578,
+            "material": [
+              "bdaea9"
+            ],
+            "source": false
+          },
+          {
+            "name": "Aerial batch · Tower corridor and three workshops · 335",
+            "parent": "Tower corridor and three workshops",
+            "x": 146.54249572753906,
+            "material": [
+              "ffffff"
+            ],
+            "source": false
+          }
+        ]
+      },
+      {
+        "z": -35,
+        "y": 5.09,
+        "hits": [
+          {
+            "name": "Workshop plaster ceiling",
+            "parent": "Tower corridor and three workshops",
+            "x": 146.3000030517578,
+            "material": [
+              "c3bba2"
+            ],
+            "source": false
+          },
+          {
+            "name": "Aerial batch · Tower corridor and three workshops · 334",
+            "parent": "Tower corridor and three workshops",
+            "x": 146.3000030517578,
+            "material": [
+              "bdaea9"
+            ],
+            "source": false
+          }
+        ]
+      },
+      {
+        "z": -33,
+        "y": 5.09,
+        "hits": [
+          {
+            "name": "Workshop plaster ceiling",
+            "parent": "Tower corridor and three workshops",
+            "x": 146.3000030517578,
+            "material": [
+              "c3bba2"
+            ],
+            "source": false
+          },
+          {
+            "name": "Aerial batch · Tower corridor and three workshops · 334",
+            "parent": "Tower corridor and three workshops",
+            "x": 146.3000030517578,
+            "material": [
+              "bdaea9"
+            ],
+            "source": false
+          }
+        ]
+      },
+      {
+        "z": -30,
+        "y": 5.09,
+        "hits": [
+          {
+            "name": "Workshop plaster ceiling",
+            "parent": "Tower corridor and three workshops",
+            "x": 146.3000030517578,
+            "material": [
+              "c3bba2"
+            ],
+            "source": false
+          },
+          {
+            "name": "Aerial batch · Tower corridor and three workshops · 334",
+            "parent": "Tower corridor and three workshops",
+            "x": 146.3000030517578,
+            "material": [
+              "bdaea9"
+            ],
+            "source": false
+          }
+        ]
+      },
+      {
+        "z": -28,
+        "y": 5.09,
+        "hits": [
+          {
+            "name": "Workshop plaster ceiling",
+            "parent": "Tower corridor and three workshops",
+            "x": 146.3000030517578,
+            "material": [
+              "c3bba2"
+            ],
+            "source": false
+          },
+          {
+            "name": "Aerial batch · Tower corridor and three workshops · 334",
+            "parent": "Tower corridor and three workshops",
+            "x": 146.3000030517578,
+            "material": [
+              "bdaea9"
+            ],
+            "source": false
+          }
+        ]
+      },
+      {
+        "z": -26.95,
+        "y": 0.3,
+        "hits": [
+          {
+            "name": "Aerial batch · Tower corridor and three workshops · 333",
+            "parent": "Tower corridor and three workshops",
+            "x": 146.3000030517578,
+            "material": [
+              "995f49"
+            ],
+            "source": false
+          },
+          {
+            "name": "Aerial batch · Tower corridor and three workshops · 335",
+            "parent": "Tower corridor and three workshops",
+            "x": 146.3000030517578,
+            "material": [
+              "ffffff"
+            ],
+            "source": false
+          },
+          {
+            "name": "Aerial batch · Tower corridor and three workshops · 335",
+            "parent": "Tower corridor and three workshops",
+            "x": 146.54249572753906,
+            "material": [
+              "ffffff"
+            ],
+            "source": false
+          }
+        ]
+      },
+      {
+        "z": -26.95,
+        "y": 1,
+        "hits": [
+          {
+            "name": "Aerial batch · Tower corridor and three workshops · 334",
+            "parent": "Tower corridor and three workshops",
+            "x": 146.3000030517578,
+            "material": [
+              "bdaea9"
+            ],
+            "source": false
+          },
+          {
+            "name": "Aerial batch · Tower corridor and three workshops · 335",
+            "parent": "Tower corridor and three workshops",
+            "x": 146.3000030517578,
+            "material": [
+              "ffffff"
+            ],
+            "source": false
+          },
+          {
+            "name": "Aerial batch · Tower corridor and three workshops · 335",
+            "parent": "Tower corridor and three workshops",
+            "x": 146.54249572753906,
+            "material": [
+              "ffffff"
+            ],
+            "source": false
+          }
+        ]
+      },
+      {
+        "z": -26.95,
+        "y": 2,
+        "hits": [
+          {
+            "name": "Aerial batch · Tower corridor and three workshops · 334",
+            "parent": "Tower corridor and three workshops",
+            "x": 146.3000030517578,
+            "material": [
+              "bdaea9"
+            ],
+            "source": false
+          },
+          {
+            "name": "Aerial batch · Tower corridor and three workshops · 335",
+            "parent": "Tower corridor and three workshops",
+            "x": 146.3000030517578,
+            "material": [
+              "ffffff"
+            ],
+            "source": false
+          },
+          {
+            "name": "Aerial batch · Tower corridor and three workshops · 335",
+            "parent": "Tower corridor and three workshops",
+            "x": 146.54249572753906,
+            "material": [
+              "ffffff"
+            ],
+            "source": false
+          }
+        ]
+      },
+      {
+        "z": -26.95,
+        "y": 3,
+        "hits": [
+          {
+            "name": "Aerial batch · Tower corridor and three workshops · 334",
+            "parent": "Tower corridor and three workshops",
+            "x": 146.3000030517578,
+            "material": [
+              "bdaea9"
+            ],
+            "source": false
+          },
+          {
+            "name": "Aerial batch · Tower corridor and three workshops · 335",
+            "parent": "Tower corridor and three workshops",
+            "x": 146.3000030517578,
+            "material": [
+              "ffffff"
+            ],
+            "source": false
+          },
+          {
+            "name": "Aerial batch · Tower corridor and three workshops · 335",
+            "parent": "Tower corridor and three workshops",
+            "x": 146.54249572753906,
+            "material": [
+              "ffffff"
+            ],
+            "source": false
+          }
+        ]
+      },
+      {
+        "z": -26.95,
+        "y": 4.5,
+        "hits": [
+          {
+            "name": "Aerial batch · Tower corridor and three workshops · 334",
+            "parent": "Tower corridor and three workshops",
+            "x": 146.3000030517578,
+            "material": [
+              "bdaea9"
+            ],
+            "source": false
+          },
+          {
+            "name": "Aerial batch · Tower corridor and three workshops · 335",
+            "parent": "Tower corridor and three workshops",
+            "x": 146.3000030517578,
+            "material": [
+              "ffffff"
+            ],
+            "source": false
+          },
+          {
+            "name": "Aerial batch · Tower corridor and three workshops · 335",
+            "parent": "Tower corridor and three workshops",
+            "x": 146.54249572753906,
+            "material": [
+              "ffffff"
+            ],
+            "source": false
+          }
+        ]
+      },
+      {
+        "z": -26.95,
+        "y": 5.09,
+        "hits": [
+          {
+            "name": "Workshop plaster ceiling",
+            "parent": "Tower corridor and three workshops",
+            "x": 146.3000030517578,
+            "material": [
+              "c3bba2"
+            ],
+            "source": false
+          },
+          {
+            "name": "Aerial batch · Tower corridor and three workshops · 334",
+            "parent": "Tower corridor and three workshops",
+            "x": 146.3000030517578,
+            "material": [
+              "bdaea9"
+            ],
+            "source": false
+          }
+        ]
+      },
+      {
+        "z": -26.85,
+        "y": 0.3,
+        "hits": [
+          {
+            "name": "Aerial batch · Tower corridor and three workshops · 333",
+            "parent": "Tower corridor and three workshops",
+            "x": 146.3000030517578,
+            "material": [
+              "995f49"
+            ],
+            "source": false
+          },
+          {
+            "name": "Aerial batch · Tower corridor and three workshops · 335",
+            "parent": "Tower corridor and three workshops",
+            "x": 146.3000030517578,
+            "material": [
+              "ffffff"
+            ],
+            "source": false
+          },
+          {
+            "name": "Aerial batch · Tower corridor and three workshops · 335",
+            "parent": "Tower corridor and three workshops",
+            "x": 146.54249572753906,
+            "material": [
+              "ffffff"
+            ],
+            "source": false
+          }
+        ]
+      },
+      {
+        "z": -26.85,
+        "y": 1,
+        "hits": [
+          {
+            "name": "Aerial batch · Tower corridor and three workshops · 334",
+            "parent": "Tower corridor and three workshops",
+            "x": 146.3000030517578,
+            "material": [
+              "bdaea9"
+            ],
+            "source": false
+          },
+          {
+            "name": "Aerial batch · Tower corridor and three workshops · 335",
+            "parent": "Tower corridor and three workshops",
+            "x": 146.3000030517578,
+            "material": [
+              "ffffff"
+            ],
+            "source": false
+          },
+          {
+            "name": "Aerial batch · Tower corridor and three workshops · 335",
+            "parent": "Tower corridor and three workshops",
+            "x": 146.54249572753906,
+            "material": [
+              "ffffff"
+            ],
+            "source": false
+          }
+        ]
+      },
+      {
+        "z": -26.85,
+        "y": 2,
+        "hits": [
+          {
+            "name": "Aerial batch · Tower corridor and three workshops · 334",
+            "parent": "Tower corridor and three workshops",
+            "x": 146.3000030517578,
+            "material": [
+              "bdaea9"
+            ],
+            "source": false
+          },
+          {
+            "name": "Aerial batch · Tower corridor and three workshops · 335",
+            "parent": "Tower corridor and three workshops",
+            "x": 146.3000030517578,
+            "material": [
+              "ffffff"
+            ],
+            "source": false
+          },
+          {
+            "name": "Aerial batch · Tower corridor and three workshops · 335",
+            "parent": "Tower corridor and three workshops",
+            "x": 146.54249572753906,
+            "material": [
+              "ffffff"
+            ],
+            "source": false
+          }
+        ]
+      },
+      {
+        "z": -26.85,
+        "y": 3,
+        "hits": [
+          {
+            "name": "Aerial batch · Tower corridor and three workshops · 334",
+            "parent": "Tower corridor and three workshops",
+            "x": 146.3000030517578,
+            "material": [
+              "bdaea9"
+            ],
+            "source": false
+          },
+          {
+            "name": "Aerial batch · Tower corridor and three workshops · 335",
+            "parent": "Tower corridor and three workshops",
+            "x": 146.3000030517578,
+            "material": [
+              "ffffff"
+            ],
+            "source": false
+          },
+          {
+            "name": "Aerial batch · Tower corridor and three workshops · 335",
+            "parent": "Tower corridor and three workshops",
+            "x": 146.54249572753906,
+            "material": [
+              "ffffff"
+            ],
+            "source": false
+          }
+        ]
+      },
+      {
+        "z": -26.85,
+        "y": 4.5,
+        "hits": [
+          {
+            "name": "Aerial batch · Tower corridor and three workshops · 334",
+            "parent": "Tower corridor and three workshops",
+            "x": 146.3000030517578,
+            "material": [
+              "bdaea9"
+            ],
+            "source": false
+          },
+          {
+            "name": "Aerial batch · Tower corridor and three workshops · 335",
+            "parent": "Tower corridor and three workshops",
+            "x": 146.3000030517578,
+            "material": [
+              "ffffff"
+            ],
+            "source": false
+          },
+          {
+            "name": "Aerial batch · Tower corridor and three workshops · 335",
+            "parent": "Tower corridor and three workshops",
+            "x": 146.54249572753906,
+            "material": [
+              "ffffff"
+            ],
+            "source": false
+          }
+        ]
+      },
+      {
+        "z": -26.85,
+        "y": 5.09,
+        "hits": [
+          {
+            "name": "Workshop plaster ceiling",
+            "parent": "Tower corridor and three workshops",
+            "x": 146.3000030517578,
+            "material": [
+              "c3bba2"
+            ],
+            "source": false
+          },
+          {
+            "name": "Aerial batch · Tower corridor and three workshops · 334",
+            "parent": "Tower corridor and three workshops",
+            "x": 146.3000030517578,
+            "material": [
+              "bdaea9"
+            ],
+            "source": false
+          }
+        ]
+      },
+      {
+        "z": -26.7,
+        "y": 0.3,
+        "hits": [
+          {
+            "name": "Workshop arched exterior masonry",
+            "parent": "Workshop exterior with semicircular windows",
+            "x": 146.29999980926513,
+            "material": [
+              "bdaea9"
+            ],
+            "source": false
+          },
+          {
+            "name": "Aerial batch · Tower corridor and three workshops · 333",
+            "parent": "Tower corridor and three workshops",
+            "x": 146.3000030517578,
+            "material": [
+              "995f49"
+            ],
+            "source": false
+          },
+          {
+            "name": "Aerial batch · Tower corridor and three workshops · 335",
+            "parent": "Tower corridor and three workshops",
+            "x": 146.54249572753906,
+            "material": [
+              "ffffff"
+            ],
+            "source": false
+          }
+        ]
+      },
+      {
+        "z": -26.7,
+        "y": 1,
+        "hits": [
+          {
+            "name": "Workshop arched exterior masonry",
+            "parent": "Workshop exterior with semicircular windows",
+            "x": 146.29999980926513,
+            "material": [
+              "bdaea9"
+            ],
+            "source": false
+          },
+          {
+            "name": "Aerial batch · Tower corridor and three workshops · 334",
+            "parent": "Tower corridor and three workshops",
+            "x": 146.3000030517578,
+            "material": [
+              "bdaea9"
+            ],
+            "source": false
+          },
+          {
+            "name": "Aerial batch · Tower corridor and three workshops · 335",
+            "parent": "Tower corridor and three workshops",
+            "x": 146.54249572753906,
+            "material": [
+              "ffffff"
+            ],
+            "source": false
+          }
+        ]
+      },
+      {
+        "z": -26.7,
+        "y": 2,
+        "hits": [
+          {
+            "name": "Workshop arched exterior masonry",
+            "parent": "Workshop exterior with semicircular windows",
+            "x": 146.29999980926513,
+            "material": [
+              "bdaea9"
+            ],
+            "source": false
+          },
+          {
+            "name": "Aerial batch · Tower corridor and three workshops · 334",
+            "parent": "Tower corridor and three workshops",
+            "x": 146.3000030517578,
+            "material": [
+              "bdaea9"
+            ],
+            "source": false
+          },
+          {
+            "name": "Aerial batch · Tower corridor and three workshops · 335",
+            "parent": "Tower corridor and three workshops",
+            "x": 146.54249572753906,
+            "material": [
+              "ffffff"
+            ],
+            "source": false
+          }
+        ]
+      },
+      {
+        "z": -26.7,
+        "y": 3,
+        "hits": [
+          {
+            "name": "Workshop arched exterior masonry",
+            "parent": "Workshop exterior with semicircular windows",
+            "x": 146.29999980926513,
+            "material": [
+              "bdaea9"
+            ],
+            "source": false
+          },
+          {
+            "name": "Aerial batch · Tower corridor and three workshops · 334",
+            "parent": "Tower corridor and three workshops",
+            "x": 146.3000030517578,
+            "material": [
+              "bdaea9"
+            ],
+            "source": false
+          },
+          {
+            "name": "Aerial batch · Tower corridor and three workshops · 335",
+            "parent": "Tower corridor and three workshops",
+            "x": 146.54249572753906,
+            "material": [
+              "ffffff"
+            ],
+            "source": false
+          }
+        ]
+      },
+      {
+        "z": -26.7,
+        "y": 4.5,
+        "hits": [
+          {
+            "name": "Workshop arched exterior masonry",
+            "parent": "Workshop exterior with semicircular windows",
+            "x": 146.29999980926513,
+            "material": [
+              "bdaea9"
+            ],
+            "source": false
+          },
+          {
+            "name": "Aerial batch · Tower corridor and three workshops · 334",
+            "parent": "Tower corridor and three workshops",
+            "x": 146.3000030517578,
+            "material": [
+              "bdaea9"
+            ],
+            "source": false
+          },
+          {
+            "name": "Aerial batch · Tower corridor and three workshops · 335",
+            "parent": "Tower corridor and three workshops",
+            "x": 146.54249572753906,
+            "material": [
+              "ffffff"
+            ],
+            "source": false
+          }
+        ]
+      },
+      {
+        "z": -26.7,
+        "y": 5.09,
+        "hits": [
+          {
+            "name": "Workshop arched exterior masonry",
+            "parent": "Workshop exterior with semicircular windows",
+            "x": 146.29999980926513,
+            "material": [
+              "bdaea9"
+            ],
+            "source": false
+          },
+          {
+            "name": "Workshop plaster ceiling",
+            "parent": "Tower corridor and three workshops",
+            "x": 146.3000030517578,
+            "material": [
+              "c3bba2"
+            ],
+            "source": false
+          },
+          {
+            "name": "Aerial batch · Tower corridor and three workshops · 334",
+            "parent": "Tower corridor and three workshops",
+            "x": 146.3000030517578,
+            "material": [
+              "bdaea9"
+            ],
+            "source": false
+          }
+        ]
+      },
+      {
+        "z": -26.7,
+        "y": 5.2,
+        "hits": [
+          {
+            "name": "Workshop arched exterior masonry",
+            "parent": "Workshop exterior with semicircular windows",
+            "x": 146.29999980926513,
+            "material": [
+              "bdaea9"
+            ],
+            "source": false
+          },
+          {
+            "name": "Aerial batch · Tower corridor and three workshops · 334",
+            "parent": "Tower corridor and three workshops",
+            "x": 146.3000030517578,
+            "material": [
+              "bdaea9"
+            ],
+            "source": false
+          }
+        ]
+      },
+      {
+        "z": -26.7,
+        "y": 6,
+        "hits": [
+          {
+            "name": "Workshop arched exterior masonry",
+            "parent": "Workshop exterior with semicircular windows",
+            "x": 146.29999980926513,
+            "material": [
+              "bdaea9"
+            ],
+            "source": false
+          },
+          {
+            "name": "Aerial batch · Tower corridor and three workshops · 334",
+            "parent": "Tower corridor and three workshops",
+            "x": 146.3000030517578,
+            "material": [
+              "bdaea9"
+            ],
+            "source": false
+          }
+        ]
+      },
+      {
+        "z": -26.7,
+        "y": 7,
+        "hits": [
+          {
+            "name": "Workshop arched exterior masonry",
+            "parent": "Workshop exterior with semicircular windows",
+            "x": 146.29999980926513,
+            "material": [
+              "bdaea9"
+            ],
+            "source": false
+          },
+          {
+            "name": "Aerial batch · Tower corridor and three workshops · 334",
+            "parent": "Tower corridor and three workshops",
+            "x": 146.3000030517578,
+            "material": [
+              "bdaea9"
+            ],
+            "source": false
+          }
+        ]
+      },
+      {
+        "z": -26.7,
+        "y": 8.5,
+        "hits": [
+          {
+            "name": "Workshop arched exterior masonry",
+            "parent": "Workshop exterior with semicircular windows",
+            "x": 146.29999980926513,
+            "material": [
+              "bdaea9"
+            ],
+            "source": false
+          },
+          {
+            "name": "Aerial batch · Tower corridor and three workshops · 334",
+            "parent": "Tower corridor and three workshops",
+            "x": 146.3000030517578,
+            "material": [
+              "bdaea9"
+            ],
+            "source": false
+          }
+        ]
+      }
+    ]
+  },
+  "errors": []
+}

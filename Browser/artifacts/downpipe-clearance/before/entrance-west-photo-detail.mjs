@@ -1,0 +1,117 @@
+import {FRONT_CORNER_OUTLINE} from './front-inside-corners.mjs';
+import {FRONT_BASEMENT} from './front-basement.mjs';
+// img19.jpg: northward view from the lawn immediately west of Reception.
+// Window positions and the projecting three-bay section are photo estimates.
+export const ENTRANCE_WEST_PHOTO_VIEW=Object.freeze({position:[-10,1.8,43.8],target:[-20.7,7.2,18],fov:44});
+export const ENTRANCE_WEST_PROFILE=Object.freeze({left:-32,right:-7.1,step:-22.6,wallZ:17.3,projectionZ:19.7,base:3.1,eaves:12.8});
+
+export function addEntranceWestPhotoDetails(THREE,{model,box,mesh,worldUV,white,brick,roof,material,hipRoof,sash,door,rod,iron,frame,glass,includeReception=true}){
+  const start=model.userData.eastPhotoOpenings.length;
+  const p=ENTRANCE_WEST_PROFILE,trim=material(0xcbd4d1),headStone=material(0xd8dad1),panel=material(0xaab5af);
+  function range(name,left,right,back,front,height){
+    const x=(left+right)/2,z=(back+front)/2,w=right-left,d=front-back;
+    mesh(worldUV(new THREE.BoxGeometry(w,height-p.base,d),1.7),brick,x,(height+p.base)/2,z,true).name=name;
+    mesh(worldUV(new THREE.BoxGeometry(w,p.base,d),1.7),white,x,p.base/2,z,true).name=name+' white lower storey';
+    return {x,z,w,d};
+  }
+  range('Entrance west recessed wall',p.step,p.right,16.95,p.wallZ,p.eaves);
+  const projection=range('Entrance west three-bay projection',p.left,p.step,16.9,p.projectionZ,13.35);
+  hipRoof(projection.x,16.1,projection.w,7.2,13.4,.7).name='Entrance west projection slate roof';
+  // Offset the connected centreline once per moulding, giving adjacent runs
+  // identical mitres. The high cornice turns down the courtyard's short return
+  // instead of leaving pointed fragments at the old rectangular wall end.
+  const corner=FRONT_CORNER_OUTLINE[0],returnEnd=FRONT_CORNER_OUTLINE[1];
+  const line=[[p.right,p.wallZ+.1],[p.step+.8,p.wallZ+.1],[p.step+.1,p.wallZ+.1],
+    [p.step+.1,p.projectionZ+.1],[-corner[0]+.1,p.projectionZ+.1],[-returnEnd[0]+.1,returnEnd[1]]];
+  function offset(distance){
+    const normals=line.slice(1).map((b,i)=>{
+      const a=line[i],dx=b[0]-a[0],dz=b[1]-a[1],length=Math.hypot(dx,dz);
+      return [dz/length,-dx/length];
+    });
+    return line.map(([x,z],i)=>{
+      const a=normals[Math.max(0,i-1)],b=normals[Math.min(i,normals.length-1)];
+      const nx=a[0]+b[0],nz=a[1]+b[1],scale=distance/(nx*b[0]+nz*b[1]);
+      return [x+nx*scale,z+nz*scale];
+    });
+  }
+  // The return at the recessed wall climbs to the higher projection without
+  // an upright cut end. The courtyard return rises into its sloping coping.
+  const endNormal={x:-1-Math.SQRT1_2,z:Math.SQRT1_2};
+  const endOffset=distance=>({x:-returnEnd[0]+endNormal.x*distance/(1+Math.SQRT1_2),
+    z:returnEnd[1]+endNormal.z*distance/(1+Math.SQRT1_2)});
+  model.updateMatrixWorld(true);
+  const slate=model.children.filter(o=>o.isMesh&&o.material===roof),ray=new THREE.Raycaster();
+  function roofTop(x,z){
+    ray.set(new THREE.Vector3(x,25,z),new THREE.Vector3(0,-1,0));
+    return ray.intersectObjects(slate,false)[0].point.y+.03;
+  }
+  const sample=endOffset(-.015),endTop=roofTop(sample.x,sample.z);
+  // The west branch now shares the projection's level side/front eave.
+  // Its mirrored east frontage retains the existing sampled roof return.
+  const heights=[12.75,12.75,includeReception?13.3:roofTop(...line[2])-.39,13.3,13.3,endTop-.39];
+  for(const [layer,[dy,h,depth]] of [[0,.58,.24],[-.35,.1,.38],[-.49,.1,.31],[.34,.1,.35]].entries()){
+    const outer=offset(depth/2),inner=offset(-depth/2);
+    const a=endOffset(.075),b=endOffset(-.115);
+    outer[5]=[a.x,a.z];inner[5]=[b.x,b.z];
+    const vertices=[],faces=[[0,1,5,4],[1,2,6,5],[2,3,7,6],[3,0,4,7],[4,5,6,7],[3,2,1,0]];
+    for(let i=0;i<line.length-1;i++){
+      const plan=[outer[i],outer[i+1],inner[i+1],inner[i]];
+      const levels=[heights[i],heights[i+1],heights[i+1],heights[i]];
+      const points=[...plan.map(([x,z],j)=>[x,levels[j]+dy-h/2,z]),...plan.map(([x,z],j)=>[x,levels[j]+dy+h/2,z])];
+      for(const [a,b,c,d] of faces)for(const index of [a,c,b,a,d,c])vertices.push(...points[index]);
+    }
+    const geometry=new THREE.BufferGeometry();geometry.setAttribute('position',new THREE.Float32BufferAttribute(vertices,3));geometry.computeVertexNormals();
+    const part=mesh(geometry,white,0,0,0,true);part.name='Entrance west mitred cornice layer '+layer;
+    part.userData.frontCornerTrim=true;
+    if(layer===3){
+      // Keep all three boundaries on the diagonal terminal cornice plane.
+      const inboard=offset(-.7),outside=offset(1),a=endOffset(-.7),b=endOffset(1);
+      inboard[5]=[a.x,a.z];outside[5]=[b.x,b.z];
+      part.userData.roofRenderBoundary={
+        inner:inner.map(([x,z],i)=>[x,heights[i]+dy+h/2,z]),inboard,outside
+      };
+    }
+  }
+  // The shared facade course supplies the joined floor bands on both sides.
+  box(white,-7.16,1.55,18.35,.15,3.1,2.7);
+
+  function opening(face,x,y,z,w=1.25,h=2.85,rotation=0,splayed=false){
+    // Reception's bottom row sits on the continuous course. A separate sill
+    // here left a second, lower lip protruding through its underside.
+    sash(face,x,y,z,rotation,w,h,{sill:face!=='reception-front-sash'||y!==4.3});
+    if(!splayed)return;
+    const a=w/2+.07,b=w/2+.34,g=new THREE.BufferGeometry();
+    g.setAttribute('position',new THREE.Float32BufferAttribute([-a,0,0,a,0,0,b,.34,0,-a,0,0,b,.34,0,-b,.34,0],3));g.computeVertexNormals();
+    const head=mesh(g,headStone,x+Math.sin(rotation)*.14,y+h/2+.06,z+Math.cos(rotation)*.14);head.rotation.y=rotation;
+  }
+  // Five single sashes per upper floor in the recessed stretch.
+  const columns=[-21,-17.85,-14.7,-11.55,-8.4];
+  for(const y of [5.45,9.75])for(const x of columns)opening('entrance-west-recess',x,y,p.wallZ+.07,1.22,2.85,0,x===-8.4);
+  for(const x of [-28.1,-24.25])for(const y of [5.6,10])opening('entrance-west-projection',x,y,p.projectionZ+.07,1.25,2.9,0,y===5.6);
+  // Broad central glazing with narrow sidelights and pale upright mullions.
+  for(const y of [5.7,10]){
+    opening('entrance-west-central-glazing',-26.15,y,p.projectionZ+.07,.98,2.9);
+    for(const dx of [-.8,.8])sash('entrance-west-sidelight',-26.15+dx,y,p.projectionZ+.07,0,.3,2.9,{columns:2});
+    for(const dx of [-.61,.61])box(trim,-26.15+dx,y,p.projectionZ+.22,.12,3.1,.2);
+  }
+  box(panel,-26.15,3.85,p.projectionZ+.17,1.88,.65,.13);
+  box(trim,-26.15,3.5,p.projectionZ+.25,2.1,.14,.3);
+  opening('entrance-west-step-return',p.step+.07,5.45,18.5,1,2.8,Math.PI/2);
+  opening('entrance-west-step-return',p.step+.07,1.45,18.5,.7,2.05,Math.PI/2);
+  // The white lower level contains two doors, not a third generic sash row.
+  for(const x of [-28.1,-24.25])opening('entrance-west-lower',x,1.45,p.projectionZ+.07,1.25,2.1);
+  for(const x of [-21,-17.85,-14.7,-8.4])opening('entrance-west-lower',x,1.45,p.wallZ+.07,1.22,2.1);
+  // Both doors open onto the excavated walk. Share its finished level so
+  // deepening the walk cannot leave the doors suspended above the paving.
+  const doorLevel=FRONT_BASEMENT.grade-FRONT_BASEMENT.depth;
+  door(-26.15,p.projectionZ+.08,0,doorLevel);
+  door(-11.55,p.wallZ+.08,0,doorLevel);
+  // Fine glazing on the Reception front ties the photographed right edge to
+  // the new elevation; the red door, columns and heraldry retain their shape.
+  if(includeReception)for(const x of [-4,0,4])for(const y of [4.3,8.9,12.4])if(x!==0||y!==4.3)
+    opening('reception-front-sash',x,y,19.68,1.23,2.45,0,true);
+  for(const x of [-31.8,-22.85])box(iron,x,6.35,p.projectionZ+.19,.075,12.7,.075);
+  box(iron,-7.35,6.1,p.wallZ+.19,.08,12.2,.08);
+  // Door access is along the shared narrow walk against the stepped facade.
+  model.userData.entranceWestPhotoOpenings=model.userData.eastPhotoOpenings.slice(start);
+}

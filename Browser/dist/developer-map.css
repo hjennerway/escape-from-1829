@@ -13,5 +13,5 @@
 .game-developer-options{position:fixed;bottom:12px;left:20px;right:20px;z-index:20;display:flex;align-items:center;flex-wrap:wrap;gap:8px;pointer-events:auto}
 .game-developer-options button{min-height:44px;padding:8px 12px;background:#122017ed;border:1px solid #708461;letter-spacing:0}
 .game-developer-options button[aria-pressed=true]{background:#bdcc98;color:#182016}
-.game-developer-options #developerShortcuts{display:flex;gap:8px}.game-developer-options #developerStatus{font:11px Arial}
+.game-developer-options #developerShortcuts{display:flex;flex-wrap:wrap;align-items:center;gap:8px}.game-developer-options #developerStatus{font:11px Arial}
 @media(max-width:650px){.developer-map{padding:12px}.developer-map-card{max-height:calc(100dvh - 24px);padding:16px}.developer-map-header{align-items:flex-start}.developer-map-header .eyebrow{font-size:8px;letter-spacing:1px}.developer-map button{padding:8px 10px;font-size:10px}.game-developer-options{bottom:auto;top:190px;left:20px;right:20px}}

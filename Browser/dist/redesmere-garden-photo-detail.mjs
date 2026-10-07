@@ -25,10 +25,18 @@ export function addRedesmereGardenDetails(THREE,{model,box,mesh,worldUV,white,br
   for(const y of [4.08,8.8])box(trim,69.94,y,15,.22,.21,20);
   // Only the shallow cornice step from the photo interrupts the eaves line.
   for(const [z,d,top] of [[21.55,6.95,14.3],[15.15,5.9,14.52],[8.55,7.25,14.3]]){
-    for(const [offset,h,w] of [[-.19,.16,.24],[0,.21,.42],[.18,.12,.55]])box(white,69.94,top+offset,z,w,h,d+.12);
+    // The shallow October roof ends at y=14.53, x=70.15. Keep the
+    // raised central lower course, but cut its crown back to that edge.
+    if(top>14.3){
+      box(white,69.94,top-.19,z,.24,.16,d+.12);
+      box(white,69.94,(top-.105+14.53)/2,z,.42,14.53-(top-.105),d+.12);
+    }else{
+      for(const [offset,h,w] of [[-.19,.16,.24],[0,.21,.42],[.18,.12,.55]])
+        box(white,Math.min(69.94,70.15-w/2),top-.01+offset,z,w,h,d+.12);
+    }
     box(iron,70.07,top+.31,z,.16,.1,d+.25);
   }
-  for(const z of [24.85,5.1])box(iron,70.02,7,z,.075,14,.075);
+  for(const z of [24.85,5.1])box(iron,70.02,7,z,.075,14,.075,0,true);
   rod([70.05,13.4,24.2],[70.05,12.1,24.2],.035,trim);
   model.userData.redesmereGardenOpenings=model.userData.eastPhotoOpenings.slice(start);
 

@@ -7,7 +7,7 @@ export function rearCourtPhotoProfile(x,z){return Math.abs(x-76.2)<.01&&[-38,-44
 import {addExteriorStairRail} from './exterior-stair-rail.mjs';
 export function addRearCourtPhotoDetails(THREE,{model,box,mesh,worldUV,white,brick,roof,material,sash,door,rod,iron,stone,frame,glass}){
   const start=model.userData.eastPhotoOpenings.length;
-  const blue=material(0x182c4c),lintel=material(0xc9c9bb),soil=material(0x625e4a),leaf=material(0x5e6d42),rust=material(0x74594a);
+  const blue=material(0x182c4c),porchTimber=material(0x20282a),lintel=material(0xc9c9bb),soil=material(0x625e4a),leaf=material(0x5e6d42),rust=material(0x74594a);
   function window(face,x,y,z,rotation=0,w=1.12,h=2.35){
     sash(face,x,y,z,rotation,w,h);
     // The photograph has splayed pale stone heads above the sash openings.
@@ -17,7 +17,6 @@ export function addRearCourtPhotoDetails(THREE,{model,box,mesh,worldUV,white,bri
   }
   // Long rear return, seen on the left. The far-left pier stays exposed brick.
   mesh(worldUV(new THREE.BoxGeometry(6,4,.22),1.7),brick,61.2,2,-32.84,true);
-  box(brick,60.7,9.48,-32.87,5,.55,.25);
   for(const x of [62.8,70.4,73.7,77,80.2])window('rear-return-upper',x,6.5,-32.94,0,1.22,x===62.8?1.9:2.35);
   door(66.4,-32.92,0,4.25);
   window('rear-return-ground',62.8,2.8,-32.67,0,1.4,1.65);
@@ -30,9 +29,9 @@ export function addRearCourtPhotoDetails(THREE,{model,box,mesh,worldUV,white,bri
   // Leave a short clearance beside each jamb of the upper fire-exit door.
   for(const [left,right] of [[64,65.43],[67.37,84.2]])
     box(white,(left+right)/2,4.95,-32.82,right-left,.13,.2);
-  for(const x of [64.6,68.6,81.6])box(iron,x,4.55,-32.65,.075,9.1,.075);
+  for(const x of [64.6,68.6,81.6])box(iron,x,4.55,-32.65,.075,9.1,.075,0,true);
 
-  function porch(x,z,rotation){
+  function porch(x,z,rotation,wallOffset){
     door(x,z,rotation);
     const p=(u,y,v)=>[x+Math.cos(rotation)*u+Math.sin(rotation)*v,y,z-Math.sin(rotation)*u+Math.cos(rotation)*v];
     const verts=[[-1.65,3.45,0],[1.65,3.45,0],[0,4.8,0],[-1.65,3.45,1.8],[1.65,3.45,1.8],[0,4.8,1.8]];
@@ -40,12 +39,24 @@ export function addRearCourtPhotoDetails(THREE,{model,box,mesh,worldUV,white,bri
     for(const face of [[0,3,5],[0,5,2],[2,5,4],[2,4,1],[3,4,5]])for(const i of face)positions.push(...p(...verts[i]));
     const g=new THREE.BufferGeometry();g.setAttribute('position',new THREE.Float32BufferAttribute(positions,3));g.computeVertexNormals();
     const cover=mesh(g,blue);cover.material.side=THREE.DoubleSide;cover.name='Rear court blue gabled porch';
-    for(const u of [-1.42,1.42]){
-      rod(p(u,3.48,1.6),p(u,2.4,.1),.065,blue);
-      rod(p(u,3.48,1.6),p(u,2.5,1.6),.055,blue);
+    // Standard timber gallows: the upright is fixed to the actual wall,
+    // with a level projecting arm and a brace rising to its outer end.
+    // The arm's outer top corner meets the underside of the retained roof.
+    const armTop=3.45+(1.65-1.5-.08)*(4.8-3.45)/1.65,armY=armTop-.08;
+    function beam(a,b,name){
+      const start=new THREE.Vector3(...p(...a)),end=new THREE.Vector3(...p(...b)),v=end.clone().sub(start);
+      const timber=mesh(new THREE.BoxGeometry(.16,v.length(),.16),porchTimber,...start.clone().add(end).multiplyScalar(.5).toArray(),true);
+      timber.quaternion.setFromUnitVectors(new THREE.Vector3(0,1,0),v.normalize());
+      timber.name='Rear court gallows '+name;
+    }
+    for(const u of [-1.5,1.5]){
+      const wall=wallOffset+.07;
+      beam([u,2.3,wall],[u,armTop,wall],'wall upright');
+      beam([u,armY,wallOffset],[u,armY,1.72],'horizontal arm');
+      beam([u,2.47,wall],[u,armY,1.58],'diagonal brace');
     }
   }
-  porch(73.9,-32.72,0);
+  porch(73.9,-32.72,0,-.28);
 
   // A return stair reaches the upper door: two short flights and a half landing.
   const stairGroup=new THREE.Group();stairGroup.name='Rear return external stair';model.add(stairGroup);
@@ -89,22 +100,28 @@ export function addRearCourtPhotoDetails(THREE,{model,box,mesh,worldUV,white,bri
     if(z!==-4.8)window('rear-court-wing-ground',x,2,z,-Math.PI/2,1.1,2.35);
   }
   box(white,84.05,4.95,-14,.22,.13,47.7);
-  porch(84.08,-4.8,-Math.PI/2);
+  porch(84.08,-4.8,-Math.PI/2,-.12);
   // Two large stacks with brick caps and four chimney pots apiece.
   for(const z of [-20.7,-16.9]){
     mesh(worldUV(new THREE.BoxGeometry(1.45,3.5,1.3),1.7),brick,85.1,11.15,z,true).name='Rear court tall chimney';
     for(const y of [12.45,12.78])box(brick,85.1,y,z,1.65,.2,1.5);
     for(const dx of [-.4,.4])for(const dz of [-.34,.34])mesh(new THREE.CylinderGeometry(.12,.15,.55,8),brick,85.1+dx,13.12,z+dz,true);
   }
-  for(const z of [-31.9,-22.1,-15.8,-1.7,9])box(iron,83.98,4.55,z,.08,9.1,.08);
+  for(const z of [-31.9,-22.1,-15.8,-1.7,9])box(iron,83.98,4.55,z,.08,9.1,.08,0,true);
   box(iron,84.03,9.3,-14,.18,.16,47.8);
   // White mono-pitch stair enclosure in the corner, with one upper sash.
-  const w=2.2,d=2.6,low=7.4,high=9.1;
-  const v=[[-w/2,0,-d/2],[w/2,0,-d/2],[w/2,0,d/2],[-w/2,0,d/2],[-w/2,low,-d/2],[w/2,high,-d/2],[w/2,high,d/2],[-w/2,low,d/2]],pos=[];
-  for(const face of [[0,4,5],[0,5,1],[1,5,6],[1,6,2],[2,6,7],[2,7,3],[3,7,4],[3,4,0],[4,7,6],[4,6,5]])for(const i of face)pos.push(...v[i]);
-  const shell=new THREE.BufferGeometry();shell.setAttribute('position',new THREE.Float32BufferAttribute(pos,3));shell.computeVertexNormals();
-  mesh(shell,white,83.1,0,-31.7,true).name='Rear court white stair enclosure';
-  const cap=mesh(new THREE.BoxGeometry(Math.hypot(w,high-low)+.3,.14,d+.3),roof,83.1,8.33,-31.7,true);cap.rotation.z=Math.atan2(high-low,w);
+  // Join the lean-to directly to the main slate eave. The former high edge
+  // stopped below it, exposing the main roof's white return above the cap.
+  const left=81.85,join=83.8,low=7.45,eave=9.53,thickness=.14;
+  const top=x=>low+(eave-low)*(x-left)/(join-left);
+  const extrude=(points,depth,z)=>{
+    const shape=new THREE.Shape();points.forEach(([x,y],i)=>i?shape.lineTo(x,y):shape.moveTo(x,y));shape.closePath();
+    return new THREE.ExtrudeGeometry(shape,{depth,bevelEnabled:false}).translate(0,0,z);
+  };
+  const shell=extrude([[82,0],[84.2,0],[84.2,eave-thickness],[join,eave-thickness],[82,top(82)-thickness]],2.6,-33);
+  mesh(shell,white,0,0,0,true).name='Rear court white stair enclosure';
+  const cap=extrude([[left,low-thickness],[join,eave-thickness],[join,eave],[left,low]],2.9,-33.15);
+  mesh(cap,roof,0,0,0,true).name='Rear court stair enclosure slate roof';
   window('rear-corner-glazing',84.02,6.5,-29.8,-Math.PI/2,.65,2.4);
   // Wall-mounted ventilation unit next to the stair enclosure.
   box(stone,83.75,3.35,-25.8,.65,1.5,1.35);

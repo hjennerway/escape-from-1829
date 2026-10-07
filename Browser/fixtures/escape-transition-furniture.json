@@ -1,0 +1,34 @@
+[
+  {
+    "seed": 1829,
+    "sha256": "b0261eedc40ccd02b7bb6604674efee76c62dfa45ac4cab6a3d4ed5dedb5d6c8"
+  },
+  {
+    "seed": 1,
+    "sha256": "805f8bb9180ca0b48e6d8d118c6153c53a300728b2d2155c0821f0758df09395"
+  },
+  {
+    "seed": 2,
+    "sha256": "f53e098bc3bcc884f7977d56462510f3223eef8bc1dafb847bbd9747bb503715"
+  },
+  {
+    "seed": 3,
+    "sha256": "c77c8ef2c8d7b5d68677d3ad6d66394230eeccd3bee7b72af6016c048542dc47"
+  },
+  {
+    "seed": 42,
+    "sha256": "e1b3aa1d24088ad9f81be6964b4fe21a22e2e3dca06441d5bb89f3d56205c6b2"
+  },
+  {
+    "seed": 65535,
+    "sha256": "9c18d1a67428c5f928e8b221a8a65f6d38747ce0f6d44fb2d12a9ff2a15519b1"
+  },
+  {
+    "seed": 2147483648,
+    "sha256": "b0272f9a60bd96199505d348ee350f068ffb31ff1bebd73df6349e983892e828"
+  },
+  {
+    "seed": 4294967295,
+    "sha256": "577c5841a3b3cc28976c3ae710e37dcdec9a91541ffd3c5fbcee3894d2d067af"
+  }
+]

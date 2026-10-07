@@ -1,0 +1,3907 @@
+{
+  "result": {
+    "renderer": "ANGLE (NVIDIA, NVIDIA GeForce RTX 3090 Ti (0x00002203) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+    "headers": {
+      "doors": 9,
+      "probes": 432,
+      "failures": [
+        {
+          "id": "corridor-lock:gallery:0",
+          "side": -1,
+          "depth": 0.125,
+          "y": 3.78,
+          "distance": 0.46250087698931,
+          "name": "Workshop arched exterior masonry",
+          "point": [
+            156.5037508769893,
+            3.78,
+            24.275
+          ]
+        },
+        {
+          "id": "corridor-lock:gallery:0",
+          "side": -1,
+          "depth": 0.125,
+          "y": 3.9,
+          "distance": 0.46250087698931,
+          "name": "Workshop arched exterior masonry",
+          "point": [
+            156.5037508769893,
+            3.9,
+            24.275
+          ]
+        },
+        {
+          "id": "corridor-lock:gallery:0",
+          "side": -1,
+          "depth": 0.125,
+          "y": 4.4,
+          "distance": 0.46250087698931,
+          "name": "Workshop arched exterior masonry",
+          "point": [
+            156.5037508769893,
+            4.4,
+            24.275
+          ]
+        },
+        {
+          "id": "corridor-lock:gallery:0",
+          "side": -1,
+          "depth": 0.125,
+          "y": 5.025,
+          "distance": 0.46250087698931,
+          "name": "Workshop arched exterior masonry",
+          "point": [
+            156.5037508769893,
+            5.025,
+            24.275
+          ]
+        },
+        {
+          "id": "corridor-lock:gallery:0",
+          "side": -1,
+          "depth": 0.15,
+          "y": 3.78,
+          "distance": 0.4375010523871481,
+          "name": "Workshop arched exterior masonry",
+          "point": [
+            156.47875105238714,
+            3.78,
+            24.25
+          ]
+        },
+        {
+          "id": "corridor-lock:gallery:0",
+          "side": -1,
+          "depth": 0.15,
+          "y": 3.9,
+          "distance": 0.4375010523871481,
+          "name": "Workshop arched exterior masonry",
+          "point": [
+            156.47875105238714,
+            3.9,
+            24.25
+          ]
+        },
+        {
+          "id": "corridor-lock:gallery:0",
+          "side": -1,
+          "depth": 0.15,
+          "y": 4.4,
+          "distance": 0.4375010523871481,
+          "name": "Workshop arched exterior masonry",
+          "point": [
+            156.47875105238714,
+            4.4,
+            24.25
+          ]
+        },
+        {
+          "id": "corridor-lock:gallery:0",
+          "side": -1,
+          "depth": 0.15,
+          "y": 5.025,
+          "distance": 0.4375010523871481,
+          "name": "Workshop arched exterior masonry",
+          "point": [
+            156.47875105238714,
+            5.025,
+            24.25
+          ]
+        },
+        {
+          "id": "corridor-lock:gallery:0",
+          "side": -1,
+          "depth": 0.2,
+          "y": 3.78,
+          "distance": 0.3875014031828812,
+          "name": "Workshop arched exterior masonry",
+          "point": [
+            156.42875140318287,
+            3.78,
+            24.200000000000003
+          ]
+        },
+        {
+          "id": "corridor-lock:gallery:0",
+          "side": -1,
+          "depth": 0.2,
+          "y": 3.9,
+          "distance": 0.3875014031828812,
+          "name": "Workshop arched exterior masonry",
+          "point": [
+            156.42875140318287,
+            3.9,
+            24.200000000000003
+          ]
+        },
+        {
+          "id": "corridor-lock:gallery:0",
+          "side": -1,
+          "depth": 0.2,
+          "y": 4.4,
+          "distance": 0.3875014031828812,
+          "name": "Workshop arched exterior masonry",
+          "point": [
+            156.42875140318287,
+            4.4,
+            24.200000000000003
+          ]
+        },
+        {
+          "id": "corridor-lock:gallery:0",
+          "side": -1,
+          "depth": 0.2,
+          "y": 5.025,
+          "distance": 0.3875014031828812,
+          "name": "Workshop arched exterior masonry",
+          "point": [
+            156.42875140318287,
+            5.025,
+            24.200000000000003
+          ]
+        },
+        {
+          "id": "corridor-lock:gallery:0",
+          "side": -1,
+          "depth": 0.26,
+          "y": 3.78,
+          "distance": 0.32749959238699944,
+          "name": "Workshop arched painted lining",
+          "point": [
+            156.368749592387,
+            3.78,
+            24.14
+          ]
+        },
+        {
+          "id": "corridor-lock:gallery:0",
+          "side": -1,
+          "depth": 0.26,
+          "y": 3.9,
+          "distance": 0.32749959238699944,
+          "name": "Workshop arched painted lining",
+          "point": [
+            156.368749592387,
+            3.9,
+            24.14
+          ]
+        },
+        {
+          "id": "corridor-lock:gallery:0",
+          "side": -1,
+          "depth": 0.26,
+          "y": 4.4,
+          "distance": 0.32749959238699944,
+          "name": "Workshop arched painted lining",
+          "point": [
+            156.368749592387,
+            4.4,
+            24.14
+          ]
+        },
+        {
+          "id": "corridor-lock:gallery:0",
+          "side": -1,
+          "depth": 0.26,
+          "y": 5.025,
+          "distance": 0.32749959238699944,
+          "name": "Workshop arched painted lining",
+          "point": [
+            156.368749592387,
+            5.025,
+            24.14
+          ]
+        },
+        {
+          "id": "corridor-lock:gallery:0",
+          "side": 1,
+          "depth": 0.125,
+          "y": 3.78,
+          "distance": 0.4625000000000057,
+          "name": "Workshop arched exterior masonry",
+          "point": [
+            153.0425,
+            3.78,
+            24.275
+          ]
+        },
+        {
+          "id": "corridor-lock:gallery:0",
+          "side": 1,
+          "depth": 0.125,
+          "y": 3.9,
+          "distance": 0.4625000000000057,
+          "name": "Workshop arched exterior masonry",
+          "point": [
+            153.0425,
+            3.9,
+            24.275
+          ]
+        },
+        {
+          "id": "corridor-lock:gallery:0",
+          "side": 1,
+          "depth": 0.125,
+          "y": 4.4,
+          "distance": 0.4625000000000057,
+          "name": "Workshop arched exterior masonry",
+          "point": [
+            153.0425,
+            4.4,
+            24.275
+          ]
+        },
+        {
+          "id": "corridor-lock:gallery:0",
+          "side": 1,
+          "depth": 0.125,
+          "y": 5.025,
+          "distance": 0.4625000000000057,
+          "name": "Workshop arched exterior masonry",
+          "point": [
+            153.0425,
+            5.025,
+            24.275
+          ]
+        },
+        {
+          "id": "corridor-lock:gallery:0",
+          "side": 1,
+          "depth": 0.15,
+          "y": 3.78,
+          "distance": 0.4375,
+          "name": "Workshop arched exterior masonry",
+          "point": [
+            153.0675,
+            3.78,
+            24.25
+          ]
+        },
+        {
+          "id": "corridor-lock:gallery:0",
+          "side": 1,
+          "depth": 0.15,
+          "y": 3.9,
+          "distance": 0.4375,
+          "name": "Workshop arched exterior masonry",
+          "point": [
+            153.0675,
+            3.9,
+            24.25
+          ]
+        },
+        {
+          "id": "corridor-lock:gallery:0",
+          "side": 1,
+          "depth": 0.15,
+          "y": 4.4,
+          "distance": 0.4375,
+          "name": "Workshop arched exterior masonry",
+          "point": [
+            153.0675,
+            4.4,
+            24.25
+          ]
+        },
+        {
+          "id": "corridor-lock:gallery:0",
+          "side": 1,
+          "depth": 0.15,
+          "y": 5.025,
+          "distance": 0.4375,
+          "name": "Workshop arched exterior masonry",
+          "point": [
+            153.0675,
+            5.025,
+            24.25
+          ]
+        },
+        {
+          "id": "corridor-lock:gallery:0",
+          "side": 1,
+          "depth": 0.2,
+          "y": 3.78,
+          "distance": 0.38750000000001705,
+          "name": "Workshop arched exterior masonry",
+          "point": [
+            153.11749999999998,
+            3.78,
+            24.2
+          ]
+        },
+        {
+          "id": "corridor-lock:gallery:0",
+          "side": 1,
+          "depth": 0.2,
+          "y": 3.9,
+          "distance": 0.38750000000001705,
+          "name": "Workshop arched exterior masonry",
+          "point": [
+            153.11749999999998,
+            3.9,
+            24.2
+          ]
+        },
+        {
+          "id": "corridor-lock:gallery:0",
+          "side": 1,
+          "depth": 0.2,
+          "y": 4.4,
+          "distance": 0.38750000000001705,
+          "name": "Workshop arched exterior masonry",
+          "point": [
+            153.11749999999998,
+            4.4,
+            24.2
+          ]
+        },
+        {
+          "id": "corridor-lock:gallery:0",
+          "side": 1,
+          "depth": 0.2,
+          "y": 5.025,
+          "distance": 0.38750000000001705,
+          "name": "Workshop arched exterior masonry",
+          "point": [
+            153.11749999999998,
+            5.025,
+            24.2
+          ]
+        },
+        {
+          "id": "corridor-lock:gallery:0",
+          "side": 1,
+          "depth": 0.26,
+          "y": 3.78,
+          "distance": 0.327500001357663,
+          "name": "Workshop arched painted lining",
+          "point": [
+            153.17749999864233,
+            3.78,
+            24.139999999999997
+          ]
+        },
+        {
+          "id": "corridor-lock:gallery:0",
+          "side": 1,
+          "depth": 0.26,
+          "y": 3.9,
+          "distance": 0.327500001357663,
+          "name": "Workshop arched painted lining",
+          "point": [
+            153.17749999864233,
+            3.9,
+            24.139999999999997
+          ]
+        },
+        {
+          "id": "corridor-lock:gallery:0",
+          "side": 1,
+          "depth": 0.26,
+          "y": 4.4,
+          "distance": 0.327500001357663,
+          "name": "Workshop arched painted lining",
+          "point": [
+            153.17749999864233,
+            4.4,
+            24.139999999999997
+          ]
+        },
+        {
+          "id": "corridor-lock:gallery:0",
+          "side": 1,
+          "depth": 0.26,
+          "y": 5.025,
+          "distance": 0.327500001357663,
+          "name": "Workshop arched painted lining",
+          "point": [
+            153.17749999864233,
+            5.025,
+            24.139999999999997
+          ]
+        },
+        {
+          "id": "corridor-lock:gallery:1",
+          "side": -1,
+          "depth": 0.125,
+          "y": 3.78,
+          "distance": 0.4624999775265337,
+          "name": "Workshop arched exterior masonry",
+          "point": [
+            153.04250002247346,
+            3.78,
+            -125.875
+          ]
+        },
+        {
+          "id": "corridor-lock:gallery:1",
+          "side": -1,
+          "depth": 0.125,
+          "y": 3.9,
+          "distance": 0.4624999775265337,
+          "name": "Workshop arched exterior masonry",
+          "point": [
+            153.04250002247346,
+            3.9,
+            -125.875
+          ]
+        },
+        {
+          "id": "corridor-lock:gallery:1",
+          "side": -1,
+          "depth": 0.125,
+          "y": 4.4,
+          "distance": 0.4624999775265337,
+          "name": "Workshop arched exterior masonry",
+          "point": [
+            153.04250002247346,
+            4.4,
+            -125.875
+          ]
+        },
+        {
+          "id": "corridor-lock:gallery:1",
+          "side": -1,
+          "depth": 0.125,
+          "y": 5.025,
+          "distance": 0.4624999775265337,
+          "name": "Workshop arched exterior masonry",
+          "point": [
+            153.04250002247346,
+            5.025,
+            -125.875
+          ]
+        },
+        {
+          "id": "corridor-lock:gallery:1",
+          "side": -1,
+          "depth": 0.15,
+          "y": 3.78,
+          "distance": 0.43749997907872284,
+          "name": "Workshop arched exterior masonry",
+          "point": [
+            153.06750002092127,
+            3.78,
+            -125.85
+          ]
+        },
+        {
+          "id": "corridor-lock:gallery:1",
+          "side": -1,
+          "depth": 0.15,
+          "y": 3.9,
+          "distance": 0.43749997907872284,
+          "name": "Workshop arched exterior masonry",
+          "point": [
+            153.06750002092127,
+            3.9,
+            -125.85
+          ]
+        },
+        {
+          "id": "corridor-lock:gallery:1",
+          "side": -1,
+          "depth": 0.15,
+          "y": 4.4,
+          "distance": 0.43749997907872284,
+          "name": "Workshop arched exterior masonry",
+          "point": [
+            153.06750002092127,
+            4.4,
+            -125.85
+          ]
+        },
+        {
+          "id": "corridor-lock:gallery:1",
+          "side": -1,
+          "depth": 0.15,
+          "y": 5.025,
+          "distance": 0.43749997907872284,
+          "name": "Workshop arched exterior masonry",
+          "point": [
+            153.06750002092127,
+            5.025,
+            -125.85
+          ]
+        },
+        {
+          "id": "corridor-lock:gallery:1",
+          "side": -1,
+          "depth": 0.2,
+          "y": 3.78,
+          "distance": 0.38749998218312953,
+          "name": "Workshop arched exterior masonry",
+          "point": [
+            153.11750001781687,
+            3.78,
+            -125.8
+          ]
+        },
+        {
+          "id": "corridor-lock:gallery:1",
+          "side": -1,
+          "depth": 0.2,
+          "y": 3.9,
+          "distance": 0.38749998218312953,
+          "name": "Workshop arched exterior masonry",
+          "point": [
+            153.11750001781687,
+            3.9,
+            -125.8
+          ]
+        },
+        {
+          "id": "corridor-lock:gallery:1",
+          "side": -1,
+          "depth": 0.2,
+          "y": 4.4,
+          "distance": 0.38749998218312953,
+          "name": "Workshop arched exterior masonry",
+          "point": [
+            153.11750001781687,
+            4.4,
+            -125.8
+          ]
+        },
+        {
+          "id": "corridor-lock:gallery:1",
+          "side": -1,
+          "depth": 0.2,
+          "y": 5.025,
+          "distance": 0.38749998218312953,
+          "name": "Workshop arched exterior masonry",
+          "point": [
+            153.11750001781687,
+            5.025,
+            -125.8
+          ]
+        },
+        {
+          "id": "corridor-lock:gallery:1",
+          "side": -1,
+          "depth": 0.26,
+          "y": 3.78,
+          "distance": 0.3274999727787531,
+          "name": "Workshop arched painted lining",
+          "point": [
+            153.17750002722124,
+            3.78,
+            -125.74
+          ]
+        },
+        {
+          "id": "corridor-lock:gallery:1",
+          "side": -1,
+          "depth": 0.26,
+          "y": 3.9,
+          "distance": 0.3274999727787531,
+          "name": "Workshop arched painted lining",
+          "point": [
+            153.17750002722124,
+            3.9,
+            -125.74
+          ]
+        },
+        {
+          "id": "corridor-lock:gallery:1",
+          "side": -1,
+          "depth": 0.26,
+          "y": 4.4,
+          "distance": 0.3274999727787531,
+          "name": "Workshop arched painted lining",
+          "point": [
+            153.17750002722124,
+            4.4,
+            -125.74
+          ]
+        },
+        {
+          "id": "corridor-lock:gallery:1",
+          "side": -1,
+          "depth": 0.26,
+          "y": 5.025,
+          "distance": 0.3274999727787531,
+          "name": "Workshop arched painted lining",
+          "point": [
+            153.17750002722124,
+            5.025,
+            -125.74
+          ]
+        },
+        {
+          "id": "corridor-lock:gallery:1",
+          "side": 1,
+          "depth": 0.125,
+          "y": 3.78,
+          "distance": 0.4625000000000057,
+          "name": "Workshop arched exterior masonry",
+          "point": [
+            156.50375,
+            3.78,
+            -125.875
+          ]
+        },
+        {
+          "id": "corridor-lock:gallery:1",
+          "side": 1,
+          "depth": 0.125,
+          "y": 3.9,
+          "distance": 0.4625000000000057,
+          "name": "Workshop arched exterior masonry",
+          "point": [
+            156.50375,
+            3.9,
+            -125.875
+          ]
+        },
+        {
+          "id": "corridor-lock:gallery:1",
+          "side": 1,
+          "depth": 0.125,
+          "y": 4.4,
+          "distance": 0.4625000000000057,
+          "name": "Workshop arched exterior masonry",
+          "point": [
+            156.50375,
+            4.4,
+            -125.875
+          ]
+        },
+        {
+          "id": "corridor-lock:gallery:1",
+          "side": 1,
+          "depth": 0.125,
+          "y": 5.025,
+          "distance": 0.4625000000000057,
+          "name": "Workshop arched exterior masonry",
+          "point": [
+            156.50375,
+            5.025,
+            -125.875
+          ]
+        },
+        {
+          "id": "corridor-lock:gallery:1",
+          "side": 1,
+          "depth": 0.15,
+          "y": 3.78,
+          "distance": 0.4375,
+          "name": "Workshop arched exterior masonry",
+          "point": [
+            156.47875,
+            3.78,
+            -125.85
+          ]
+        },
+        {
+          "id": "corridor-lock:gallery:1",
+          "side": 1,
+          "depth": 0.15,
+          "y": 3.9,
+          "distance": 0.4375,
+          "name": "Workshop arched exterior masonry",
+          "point": [
+            156.47875,
+            3.9,
+            -125.85
+          ]
+        },
+        {
+          "id": "corridor-lock:gallery:1",
+          "side": 1,
+          "depth": 0.15,
+          "y": 4.4,
+          "distance": 0.4375,
+          "name": "Workshop arched exterior masonry",
+          "point": [
+            156.47875,
+            4.4,
+            -125.85
+          ]
+        },
+        {
+          "id": "corridor-lock:gallery:1",
+          "side": 1,
+          "depth": 0.15,
+          "y": 5.025,
+          "distance": 0.4375,
+          "name": "Workshop arched exterior masonry",
+          "point": [
+            156.47875,
+            5.025,
+            -125.85
+          ]
+        },
+        {
+          "id": "corridor-lock:gallery:1",
+          "side": 1,
+          "depth": 0.2,
+          "y": 3.78,
+          "distance": 0.38749999999998863,
+          "name": "Workshop arched exterior masonry",
+          "point": [
+            156.42874999999998,
+            3.78,
+            -125.8
+          ]
+        },
+        {
+          "id": "corridor-lock:gallery:1",
+          "side": 1,
+          "depth": 0.2,
+          "y": 3.9,
+          "distance": 0.38749999999998863,
+          "name": "Workshop arched exterior masonry",
+          "point": [
+            156.42874999999998,
+            3.9,
+            -125.8
+          ]
+        },
+        {
+          "id": "corridor-lock:gallery:1",
+          "side": 1,
+          "depth": 0.2,
+          "y": 4.4,
+          "distance": 0.38749999999998863,
+          "name": "Workshop arched exterior masonry",
+          "point": [
+            156.42874999999998,
+            4.4,
+            -125.8
+          ]
+        },
+        {
+          "id": "corridor-lock:gallery:1",
+          "side": 1,
+          "depth": 0.2,
+          "y": 5.025,
+          "distance": 0.38749999999998863,
+          "name": "Workshop arched exterior masonry",
+          "point": [
+            156.42874999999998,
+            5.025,
+            -125.8
+          ]
+        },
+        {
+          "id": "corridor-lock:gallery:1",
+          "side": 1,
+          "depth": 0.26,
+          "y": 3.78,
+          "distance": 0.327500001357663,
+          "name": "Workshop arched painted lining",
+          "point": [
+            156.36875000135765,
+            3.78,
+            -125.74
+          ]
+        },
+        {
+          "id": "corridor-lock:gallery:1",
+          "side": 1,
+          "depth": 0.26,
+          "y": 3.9,
+          "distance": 0.327500001357663,
+          "name": "Workshop arched painted lining",
+          "point": [
+            156.36875000135765,
+            3.9,
+            -125.74
+          ]
+        },
+        {
+          "id": "corridor-lock:gallery:1",
+          "side": 1,
+          "depth": 0.26,
+          "y": 4.4,
+          "distance": 0.327500001357663,
+          "name": "Workshop arched painted lining",
+          "point": [
+            156.36875000135765,
+            4.4,
+            -125.74
+          ]
+        },
+        {
+          "id": "corridor-lock:gallery:1",
+          "side": 1,
+          "depth": 0.26,
+          "y": 5.025,
+          "distance": 0.327500001357663,
+          "name": "Workshop arched painted lining",
+          "point": [
+            156.36875000135765,
+            5.025,
+            -125.74
+          ]
+        },
+        {
+          "id": "corridor-lock:admin:0",
+          "side": -1,
+          "depth": 0.125,
+          "y": 3.78,
+          "distance": 0.4625003413486546,
+          "name": "Workshop arched exterior masonry",
+          "point": [
+            121.625,
+            3.78,
+            11.530625341348658
+          ]
+        },
+        {
+          "id": "corridor-lock:admin:0",
+          "side": -1,
+          "depth": 0.125,
+          "y": 3.9,
+          "distance": 0.4625003413486546,
+          "name": "Workshop arched exterior masonry",
+          "point": [
+            121.625,
+            3.9,
+            11.530625341348658
+          ]
+        },
+        {
+          "id": "corridor-lock:admin:0",
+          "side": -1,
+          "depth": 0.125,
+          "y": 4.4,
+          "distance": 0.4625003413486546,
+          "name": "Workshop arched exterior masonry",
+          "point": [
+            121.625,
+            4.4,
+            11.530625341348658
+          ]
+        },
+        {
+          "id": "corridor-lock:admin:0",
+          "side": -1,
+          "depth": 0.125,
+          "y": 5.025,
+          "distance": 0.4625003413486546,
+          "name": "Workshop arched exterior masonry",
+          "point": [
+            121.625,
+            5.025,
+            11.530625341348658
+          ]
+        },
+        {
+          "id": "corridor-lock:admin:0",
+          "side": -1,
+          "depth": 0.15,
+          "y": 3.78,
+          "distance": 0.43750031806556144,
+          "name": "Workshop arched exterior masonry",
+          "point": [
+            121.65,
+            3.78,
+            11.505625318065565
+          ]
+        },
+        {
+          "id": "corridor-lock:admin:0",
+          "side": -1,
+          "depth": 0.15,
+          "y": 3.9,
+          "distance": 0.43750031806556144,
+          "name": "Workshop arched exterior masonry",
+          "point": [
+            121.65,
+            3.9,
+            11.505625318065565
+          ]
+        },
+        {
+          "id": "corridor-lock:admin:0",
+          "side": -1,
+          "depth": 0.15,
+          "y": 4.4,
+          "distance": 0.43750031806556144,
+          "name": "Workshop arched exterior masonry",
+          "point": [
+            121.65,
+            4.4,
+            11.505625318065565
+          ]
+        },
+        {
+          "id": "corridor-lock:admin:0",
+          "side": -1,
+          "depth": 0.15,
+          "y": 5.025,
+          "distance": 0.43750031806556144,
+          "name": "Workshop arched exterior masonry",
+          "point": [
+            121.65,
+            5.025,
+            11.505625318065565
+          ]
+        },
+        {
+          "id": "corridor-lock:admin:0",
+          "side": -1,
+          "depth": 0.2,
+          "y": 3.78,
+          "distance": 0.38750027149939115,
+          "name": "Workshop arched exterior masonry",
+          "point": [
+            121.7,
+            3.78,
+            11.455625271499395
+          ]
+        },
+        {
+          "id": "corridor-lock:admin:0",
+          "side": -1,
+          "depth": 0.2,
+          "y": 3.9,
+          "distance": 0.38750027149939115,
+          "name": "Workshop arched exterior masonry",
+          "point": [
+            121.7,
+            3.9,
+            11.455625271499395
+          ]
+        },
+        {
+          "id": "corridor-lock:admin:0",
+          "side": -1,
+          "depth": 0.2,
+          "y": 4.4,
+          "distance": 0.38750027149939115,
+          "name": "Workshop arched exterior masonry",
+          "point": [
+            121.7,
+            4.4,
+            11.455625271499395
+          ]
+        },
+        {
+          "id": "corridor-lock:admin:0",
+          "side": -1,
+          "depth": 0.2,
+          "y": 5.025,
+          "distance": 0.38750027149939115,
+          "name": "Workshop arched exterior masonry",
+          "point": [
+            121.7,
+            5.025,
+            11.455625271499395
+          ]
+        },
+        {
+          "id": "corridor-lock:admin:0",
+          "side": -1,
+          "depth": 0.26,
+          "y": 3.78,
+          "distance": 0.3275007919126054,
+          "name": "Workshop arched painted lining",
+          "point": [
+            121.76,
+            3.78,
+            11.39562579191261
+          ]
+        },
+        {
+          "id": "corridor-lock:admin:0",
+          "side": -1,
+          "depth": 0.26,
+          "y": 3.9,
+          "distance": 0.3275007919126054,
+          "name": "Workshop arched painted lining",
+          "point": [
+            121.76,
+            3.9,
+            11.39562579191261
+          ]
+        },
+        {
+          "id": "corridor-lock:admin:0",
+          "side": -1,
+          "depth": 0.26,
+          "y": 4.4,
+          "distance": 0.3275007919126054,
+          "name": "Workshop arched painted lining",
+          "point": [
+            121.76,
+            4.4,
+            11.39562579191261
+          ]
+        },
+        {
+          "id": "corridor-lock:admin:0",
+          "side": -1,
+          "depth": 0.26,
+          "y": 5.025,
+          "distance": 0.3275007919126054,
+          "name": "Workshop arched painted lining",
+          "point": [
+            121.76,
+            5.025,
+            11.39562579191261
+          ]
+        },
+        {
+          "id": "corridor-lock:admin:0",
+          "side": 1,
+          "depth": 0.125,
+          "y": 3.78,
+          "distance": 0.4624999999999968,
+          "name": "Workshop arched exterior masonry",
+          "point": [
+            121.625,
+            3.78,
+            8.069375
+          ]
+        },
+        {
+          "id": "corridor-lock:admin:0",
+          "side": 1,
+          "depth": 0.125,
+          "y": 3.9,
+          "distance": 0.4624999999999968,
+          "name": "Workshop arched exterior masonry",
+          "point": [
+            121.625,
+            3.9,
+            8.069375
+          ]
+        },
+        {
+          "id": "corridor-lock:admin:0",
+          "side": 1,
+          "depth": 0.125,
+          "y": 4.4,
+          "distance": 0.4624999999999968,
+          "name": "Workshop arched exterior masonry",
+          "point": [
+            121.625,
+            4.4,
+            8.069375
+          ]
+        },
+        {
+          "id": "corridor-lock:admin:0",
+          "side": 1,
+          "depth": 0.125,
+          "y": 5.025,
+          "distance": 0.4624999999999968,
+          "name": "Workshop arched exterior masonry",
+          "point": [
+            121.625,
+            5.025,
+            8.069375
+          ]
+        },
+        {
+          "id": "corridor-lock:admin:0",
+          "side": 1,
+          "depth": 0.15,
+          "y": 3.78,
+          "distance": 0.4374999999999911,
+          "name": "Workshop arched exterior masonry",
+          "point": [
+            121.65,
+            3.78,
+            8.094375000000007
+          ]
+        },
+        {
+          "id": "corridor-lock:admin:0",
+          "side": 1,
+          "depth": 0.15,
+          "y": 3.9,
+          "distance": 0.4374999999999911,
+          "name": "Workshop arched exterior masonry",
+          "point": [
+            121.65,
+            3.9,
+            8.094375000000007
+          ]
+        },
+        {
+          "id": "corridor-lock:admin:0",
+          "side": 1,
+          "depth": 0.15,
+          "y": 4.4,
+          "distance": 0.4374999999999911,
+          "name": "Workshop arched exterior masonry",
+          "point": [
+            121.65,
+            4.4,
+            8.094375000000007
+          ]
+        },
+        {
+          "id": "corridor-lock:admin:0",
+          "side": 1,
+          "depth": 0.15,
+          "y": 5.025,
+          "distance": 0.4374999999999911,
+          "name": "Workshop arched exterior masonry",
+          "point": [
+            121.65,
+            5.025,
+            8.094375000000007
+          ]
+        },
+        {
+          "id": "corridor-lock:admin:0",
+          "side": 1,
+          "depth": 0.2,
+          "y": 3.78,
+          "distance": 0.38749999999999396,
+          "name": "Workshop arched exterior masonry",
+          "point": [
+            121.7,
+            3.78,
+            8.144375000000004
+          ]
+        },
+        {
+          "id": "corridor-lock:admin:0",
+          "side": 1,
+          "depth": 0.2,
+          "y": 3.9,
+          "distance": 0.38749999999999396,
+          "name": "Workshop arched exterior masonry",
+          "point": [
+            121.7,
+            3.9,
+            8.144375000000004
+          ]
+        },
+        {
+          "id": "corridor-lock:admin:0",
+          "side": 1,
+          "depth": 0.2,
+          "y": 4.4,
+          "distance": 0.38749999999999396,
+          "name": "Workshop arched exterior masonry",
+          "point": [
+            121.7,
+            4.4,
+            8.144375000000004
+          ]
+        },
+        {
+          "id": "corridor-lock:admin:0",
+          "side": 1,
+          "depth": 0.2,
+          "y": 5.025,
+          "distance": 0.38749999999999396,
+          "name": "Workshop arched exterior masonry",
+          "point": [
+            121.7,
+            5.025,
+            8.144375000000004
+          ]
+        },
+        {
+          "id": "corridor-lock:admin:0",
+          "side": 1,
+          "depth": 0.26,
+          "y": 3.78,
+          "distance": 0.3275000013576541,
+          "name": "Workshop arched painted lining",
+          "point": [
+            121.76,
+            3.78,
+            8.204374998642344
+          ]
+        },
+        {
+          "id": "corridor-lock:admin:0",
+          "side": 1,
+          "depth": 0.26,
+          "y": 3.9,
+          "distance": 0.3275000013576541,
+          "name": "Workshop arched painted lining",
+          "point": [
+            121.76,
+            3.9,
+            8.204374998642344
+          ]
+        },
+        {
+          "id": "corridor-lock:admin:0",
+          "side": 1,
+          "depth": 0.26,
+          "y": 4.4,
+          "distance": 0.3275000013576541,
+          "name": "Workshop arched painted lining",
+          "point": [
+            121.76,
+            4.4,
+            8.204374998642344
+          ]
+        },
+        {
+          "id": "corridor-lock:admin:0",
+          "side": 1,
+          "depth": 0.26,
+          "y": 5.025,
+          "distance": 0.3275000013576541,
+          "name": "Workshop arched painted lining",
+          "point": [
+            121.76,
+            5.025,
+            8.204374998642344
+          ]
+        },
+        {
+          "id": "corridor-lock:irby:1",
+          "side": -1,
+          "depth": 0.125,
+          "y": 3.78,
+          "distance": 0.46250072440247436,
+          "name": "Workshop arched exterior masonry",
+          "point": [
+            209.875,
+            3.78,
+            -68.33062572440247
+          ]
+        },
+        {
+          "id": "corridor-lock:irby:1",
+          "side": -1,
+          "depth": 0.125,
+          "y": 3.9,
+          "distance": 0.46250072440247436,
+          "name": "Workshop arched exterior masonry",
+          "point": [
+            209.875,
+            3.9,
+            -68.33062572440247
+          ]
+        },
+        {
+          "id": "corridor-lock:irby:1",
+          "side": -1,
+          "depth": 0.125,
+          "y": 4.4,
+          "distance": 0.46250072440247436,
+          "name": "Workshop arched exterior masonry",
+          "point": [
+            209.875,
+            4.4,
+            -68.33062572440247
+          ]
+        },
+        {
+          "id": "corridor-lock:irby:1",
+          "side": -1,
+          "depth": 0.125,
+          "y": 5.025,
+          "distance": 0.46250072440247436,
+          "name": "Workshop arched exterior masonry",
+          "point": [
+            209.875,
+            5.025,
+            -68.33062572440247
+          ]
+        },
+        {
+          "id": "corridor-lock:irby:1",
+          "side": -1,
+          "depth": 0.15,
+          "y": 3.78,
+          "distance": 0.4375008998003267,
+          "name": "Workshop arched exterior masonry",
+          "point": [
+            209.85,
+            3.78,
+            -68.30562589980032
+          ]
+        },
+        {
+          "id": "corridor-lock:irby:1",
+          "side": -1,
+          "depth": 0.15,
+          "y": 3.9,
+          "distance": 0.4375008998003267,
+          "name": "Workshop arched exterior masonry",
+          "point": [
+            209.85,
+            3.9,
+            -68.30562589980032
+          ]
+        },
+        {
+          "id": "corridor-lock:irby:1",
+          "side": -1,
+          "depth": 0.15,
+          "y": 4.4,
+          "distance": 0.4375008998003267,
+          "name": "Workshop arched exterior masonry",
+          "point": [
+            209.85,
+            4.4,
+            -68.30562589980032
+          ]
+        },
+        {
+          "id": "corridor-lock:irby:1",
+          "side": -1,
+          "depth": 0.15,
+          "y": 5.025,
+          "distance": 0.4375008998003267,
+          "name": "Workshop arched exterior masonry",
+          "point": [
+            209.85,
+            5.025,
+            -68.30562589980032
+          ]
+        },
+        {
+          "id": "corridor-lock:irby:1",
+          "side": -1,
+          "depth": 0.2,
+          "y": 3.78,
+          "distance": 0.3875012505960598,
+          "name": "Workshop arched exterior masonry",
+          "point": [
+            209.8,
+            3.78,
+            -68.25562625059605
+          ]
+        },
+        {
+          "id": "corridor-lock:irby:1",
+          "side": -1,
+          "depth": 0.2,
+          "y": 3.9,
+          "distance": 0.3875012505960598,
+          "name": "Workshop arched exterior masonry",
+          "point": [
+            209.8,
+            3.9,
+            -68.25562625059605
+          ]
+        },
+        {
+          "id": "corridor-lock:irby:1",
+          "side": -1,
+          "depth": 0.2,
+          "y": 4.4,
+          "distance": 0.3875012505960598,
+          "name": "Workshop arched exterior masonry",
+          "point": [
+            209.8,
+            4.4,
+            -68.25562625059605
+          ]
+        },
+        {
+          "id": "corridor-lock:irby:1",
+          "side": -1,
+          "depth": 0.2,
+          "y": 5.025,
+          "distance": 0.3875012505960598,
+          "name": "Workshop arched exterior masonry",
+          "point": [
+            209.8,
+            5.025,
+            -68.25562625059605
+          ]
+        },
+        {
+          "id": "corridor-lock:irby:1",
+          "side": -1,
+          "depth": 0.26,
+          "y": 3.78,
+          "distance": 0.3274994397929021,
+          "name": "Workshop arched painted lining",
+          "point": [
+            209.74,
+            3.78,
+            -68.1956244397929
+          ]
+        },
+        {
+          "id": "corridor-lock:irby:1",
+          "side": -1,
+          "depth": 0.26,
+          "y": 3.9,
+          "distance": 0.3274994397929021,
+          "name": "Workshop arched painted lining",
+          "point": [
+            209.74,
+            3.9,
+            -68.1956244397929
+          ]
+        },
+        {
+          "id": "corridor-lock:irby:1",
+          "side": -1,
+          "depth": 0.26,
+          "y": 4.4,
+          "distance": 0.3274994397929021,
+          "name": "Workshop arched painted lining",
+          "point": [
+            209.74,
+            4.4,
+            -68.1956244397929
+          ]
+        },
+        {
+          "id": "corridor-lock:irby:1",
+          "side": -1,
+          "depth": 0.26,
+          "y": 5.025,
+          "distance": 0.3274994397929021,
+          "name": "Workshop arched painted lining",
+          "point": [
+            209.74,
+            5.025,
+            -68.1956244397929
+          ]
+        },
+        {
+          "id": "corridor-lock:irby:1",
+          "side": 1,
+          "depth": 0.125,
+          "y": 3.78,
+          "distance": 0.4625000000000057,
+          "name": "Workshop arched exterior masonry",
+          "point": [
+            209.875,
+            3.78,
+            -64.86937499999999
+          ]
+        },
+        {
+          "id": "corridor-lock:irby:1",
+          "side": 1,
+          "depth": 0.125,
+          "y": 3.9,
+          "distance": 0.4625000000000057,
+          "name": "Workshop arched exterior masonry",
+          "point": [
+            209.875,
+            3.9,
+            -64.86937499999999
+          ]
+        },
+        {
+          "id": "corridor-lock:irby:1",
+          "side": 1,
+          "depth": 0.125,
+          "y": 4.4,
+          "distance": 0.4625000000000057,
+          "name": "Workshop arched exterior masonry",
+          "point": [
+            209.875,
+            4.4,
+            -64.86937499999999
+          ]
+        },
+        {
+          "id": "corridor-lock:irby:1",
+          "side": 1,
+          "depth": 0.125,
+          "y": 5.025,
+          "distance": 0.4625000000000057,
+          "name": "Workshop arched exterior masonry",
+          "point": [
+            209.875,
+            5.025,
+            -64.86937499999999
+          ]
+        },
+        {
+          "id": "corridor-lock:irby:1",
+          "side": 1,
+          "depth": 0.15,
+          "y": 3.78,
+          "distance": 0.4375,
+          "name": "Workshop arched exterior masonry",
+          "point": [
+            209.85,
+            3.78,
+            -64.894375
+          ]
+        },
+        {
+          "id": "corridor-lock:irby:1",
+          "side": 1,
+          "depth": 0.15,
+          "y": 3.9,
+          "distance": 0.4375,
+          "name": "Workshop arched exterior masonry",
+          "point": [
+            209.85,
+            3.9,
+            -64.894375
+          ]
+        },
+        {
+          "id": "corridor-lock:irby:1",
+          "side": 1,
+          "depth": 0.15,
+          "y": 4.4,
+          "distance": 0.4375,
+          "name": "Workshop arched exterior masonry",
+          "point": [
+            209.85,
+            4.4,
+            -64.894375
+          ]
+        },
+        {
+          "id": "corridor-lock:irby:1",
+          "side": 1,
+          "depth": 0.15,
+          "y": 5.025,
+          "distance": 0.4375,
+          "name": "Workshop arched exterior masonry",
+          "point": [
+            209.85,
+            5.025,
+            -64.894375
+          ]
+        },
+        {
+          "id": "corridor-lock:irby:1",
+          "side": 1,
+          "depth": 0.2,
+          "y": 3.78,
+          "distance": 0.38750000000001705,
+          "name": "Workshop arched exterior masonry",
+          "point": [
+            209.8,
+            3.78,
+            -64.94437499999998
+          ]
+        },
+        {
+          "id": "corridor-lock:irby:1",
+          "side": 1,
+          "depth": 0.2,
+          "y": 3.9,
+          "distance": 0.38750000000001705,
+          "name": "Workshop arched exterior masonry",
+          "point": [
+            209.8,
+            3.9,
+            -64.94437499999998
+          ]
+        },
+        {
+          "id": "corridor-lock:irby:1",
+          "side": 1,
+          "depth": 0.2,
+          "y": 4.4,
+          "distance": 0.38750000000001705,
+          "name": "Workshop arched exterior masonry",
+          "point": [
+            209.8,
+            4.4,
+            -64.94437499999998
+          ]
+        },
+        {
+          "id": "corridor-lock:irby:1",
+          "side": 1,
+          "depth": 0.2,
+          "y": 5.025,
+          "distance": 0.38750000000001705,
+          "name": "Workshop arched exterior masonry",
+          "point": [
+            209.8,
+            5.025,
+            -64.94437499999998
+          ]
+        },
+        {
+          "id": "corridor-lock:irby:1",
+          "side": 1,
+          "depth": 0.26,
+          "y": 3.78,
+          "distance": 0.327500001357663,
+          "name": "Workshop arched painted lining",
+          "point": [
+            209.74,
+            3.78,
+            -65.00437499864233
+          ]
+        },
+        {
+          "id": "corridor-lock:irby:1",
+          "side": 1,
+          "depth": 0.26,
+          "y": 3.9,
+          "distance": 0.327500001357663,
+          "name": "Workshop arched painted lining",
+          "point": [
+            209.74,
+            3.9,
+            -65.00437499864233
+          ]
+        },
+        {
+          "id": "corridor-lock:irby:1",
+          "side": 1,
+          "depth": 0.26,
+          "y": 4.4,
+          "distance": 0.327500001357663,
+          "name": "Workshop arched painted lining",
+          "point": [
+            209.74,
+            4.4,
+            -65.00437499864233
+          ]
+        },
+        {
+          "id": "corridor-lock:irby:1",
+          "side": 1,
+          "depth": 0.26,
+          "y": 5.025,
+          "distance": 0.327500001357663,
+          "name": "Workshop arched painted lining",
+          "point": [
+            209.74,
+            5.025,
+            -65.00437499864233
+          ]
+        },
+        {
+          "id": "corridor-lock:diagonal:1",
+          "side": -1,
+          "depth": 0.125,
+          "y": 3.78,
+          "distance": 0.4625018392889153,
+          "name": "Workshop arched exterior masonry",
+          "point": [
+            98.86465037388368,
+            3.78,
+            -172.08787367858707
+          ]
+        },
+        {
+          "id": "corridor-lock:diagonal:1",
+          "side": -1,
+          "depth": 0.125,
+          "y": 3.9,
+          "distance": 0.4625018392889153,
+          "name": "Workshop arched exterior masonry",
+          "point": [
+            98.86465037388368,
+            3.9,
+            -172.08787367858707
+          ]
+        },
+        {
+          "id": "corridor-lock:diagonal:1",
+          "side": -1,
+          "depth": 0.125,
+          "y": 4.4,
+          "distance": 0.4625018392889153,
+          "name": "Workshop arched exterior masonry",
+          "point": [
+            98.86465037388368,
+            4.4,
+            -172.08787367858707
+          ]
+        },
+        {
+          "id": "corridor-lock:diagonal:1",
+          "side": -1,
+          "depth": 0.125,
+          "y": 5.025,
+          "distance": 0.4625018392889153,
+          "name": "Workshop arched exterior masonry",
+          "point": [
+            98.86465037388368,
+            5.025,
+            -172.08787367858707
+          ]
+        },
+        {
+          "id": "corridor-lock:diagonal:1",
+          "side": -1,
+          "depth": 0.15,
+          "y": 3.78,
+          "distance": 0.4375020146867261,
+          "name": "Workshop arched exterior masonry",
+          "point": [
+            98.90000558891802,
+            3.78,
+            -172.08787355456207
+          ]
+        },
+        {
+          "id": "corridor-lock:diagonal:1",
+          "side": -1,
+          "depth": 0.15,
+          "y": 3.9,
+          "distance": 0.4375020146867261,
+          "name": "Workshop arched exterior masonry",
+          "point": [
+            98.90000558891802,
+            3.9,
+            -172.08787355456207
+          ]
+        },
+        {
+          "id": "corridor-lock:diagonal:1",
+          "side": -1,
+          "depth": 0.15,
+          "y": 4.4,
+          "distance": 0.4375020146867261,
+          "name": "Workshop arched exterior masonry",
+          "point": [
+            98.90000558891802,
+            4.4,
+            -172.08787355456207
+          ]
+        },
+        {
+          "id": "corridor-lock:diagonal:1",
+          "side": -1,
+          "depth": 0.15,
+          "y": 5.025,
+          "distance": 0.4375020146867261,
+          "name": "Workshop arched exterior masonry",
+          "point": [
+            98.90000558891802,
+            5.025,
+            -172.08787355456207
+          ]
+        },
+        {
+          "id": "corridor-lock:diagonal:1",
+          "side": -1,
+          "depth": 0.2,
+          "y": 3.78,
+          "distance": 0.38750236548245826,
+          "name": "Workshop arched exterior masonry",
+          "point": [
+            98.97071601898665,
+            3.78,
+            -172.08787330651202
+          ]
+        },
+        {
+          "id": "corridor-lock:diagonal:1",
+          "side": -1,
+          "depth": 0.2,
+          "y": 3.9,
+          "distance": 0.38750236548245826,
+          "name": "Workshop arched exterior masonry",
+          "point": [
+            98.97071601898665,
+            3.9,
+            -172.08787330651202
+          ]
+        },
+        {
+          "id": "corridor-lock:diagonal:1",
+          "side": -1,
+          "depth": 0.2,
+          "y": 4.4,
+          "distance": 0.38750236548245826,
+          "name": "Workshop arched exterior masonry",
+          "point": [
+            98.97071601898665,
+            4.4,
+            -172.08787330651202
+          ]
+        },
+        {
+          "id": "corridor-lock:diagonal:1",
+          "side": -1,
+          "depth": 0.2,
+          "y": 5.025,
+          "distance": 0.38750236548245826,
+          "name": "Workshop arched exterior masonry",
+          "point": [
+            98.97071601898665,
+            5.025,
+            -172.08787330651202
+          ]
+        },
+        {
+          "id": "corridor-lock:diagonal:1",
+          "side": -1,
+          "depth": 0.26,
+          "y": 3.78,
+          "distance": 0.3275005547325673,
+          "name": "Workshop arched painted lining",
+          "point": [
+            99.05557011312254,
+            3.78,
+            -172.08787458690557
+          ]
+        },
+        {
+          "id": "corridor-lock:diagonal:1",
+          "side": -1,
+          "depth": 0.26,
+          "y": 3.9,
+          "distance": 0.3275005547325673,
+          "name": "Workshop arched painted lining",
+          "point": [
+            99.05557011312254,
+            3.9,
+            -172.08787458690557
+          ]
+        },
+        {
+          "id": "corridor-lock:diagonal:1",
+          "side": -1,
+          "depth": 0.26,
+          "y": 4.4,
+          "distance": 0.3275005547325673,
+          "name": "Workshop arched painted lining",
+          "point": [
+            99.05557011312254,
+            4.4,
+            -172.08787458690557
+          ]
+        },
+        {
+          "id": "corridor-lock:diagonal:1",
+          "side": -1,
+          "depth": 0.26,
+          "y": 5.025,
+          "distance": 0.3275005547325673,
+          "name": "Workshop arched painted lining",
+          "point": [
+            99.05557011312254,
+            5.025,
+            -172.08787458690557
+          ]
+        },
+        {
+          "id": "corridor-lock:diagonal:1",
+          "side": 1,
+          "depth": 0.125,
+          "y": 3.78,
+          "distance": 0.46250000000000974,
+          "name": "Workshop arched exterior masonry",
+          "point": [
+            101.31212502083929,
+            3.78,
+            -174.53534832554269
+          ]
+        },
+        {
+          "id": "corridor-lock:diagonal:1",
+          "side": 1,
+          "depth": 0.125,
+          "y": 3.9,
+          "distance": 0.46250000000000974,
+          "name": "Workshop arched exterior masonry",
+          "point": [
+            101.31212502083929,
+            3.9,
+            -174.53534832554269
+          ]
+        },
+        {
+          "id": "corridor-lock:diagonal:1",
+          "side": 1,
+          "depth": 0.125,
+          "y": 4.4,
+          "distance": 0.46250000000000974,
+          "name": "Workshop arched exterior masonry",
+          "point": [
+            101.31212502083929,
+            4.4,
+            -174.53534832554269
+          ]
+        },
+        {
+          "id": "corridor-lock:diagonal:1",
+          "side": 1,
+          "depth": 0.125,
+          "y": 5.025,
+          "distance": 0.46250000000000974,
+          "name": "Workshop arched exterior masonry",
+          "point": [
+            101.31212502083929,
+            5.025,
+            -174.53534832554269
+          ]
+        },
+        {
+          "id": "corridor-lock:diagonal:1",
+          "side": 1,
+          "depth": 0.15,
+          "y": 3.78,
+          "distance": 0.4375000000000136,
+          "name": "Workshop arched exterior masonry",
+          "point": [
+            101.31212502083929,
+            3.78,
+            -174.49999298648333
+          ]
+        },
+        {
+          "id": "corridor-lock:diagonal:1",
+          "side": 1,
+          "depth": 0.15,
+          "y": 3.9,
+          "distance": 0.4375000000000136,
+          "name": "Workshop arched exterior masonry",
+          "point": [
+            101.31212502083929,
+            3.9,
+            -174.49999298648333
+          ]
+        },
+        {
+          "id": "corridor-lock:diagonal:1",
+          "side": 1,
+          "depth": 0.15,
+          "y": 4.4,
+          "distance": 0.4375000000000136,
+          "name": "Workshop arched exterior masonry",
+          "point": [
+            101.31212502083929,
+            4.4,
+            -174.49999298648333
+          ]
+        },
+        {
+          "id": "corridor-lock:diagonal:1",
+          "side": 1,
+          "depth": 0.15,
+          "y": 5.025,
+          "distance": 0.4375000000000136,
+          "name": "Workshop arched exterior masonry",
+          "point": [
+            101.31212502083929,
+            5.025,
+            -174.49999298648333
+          ]
+        },
+        {
+          "id": "corridor-lock:diagonal:1",
+          "side": 1,
+          "depth": 0.2,
+          "y": 3.78,
+          "distance": 0.3874999999999911,
+          "name": "Workshop arched exterior masonry",
+          "point": [
+            101.31212502083929,
+            3.78,
+            -174.42928230836466
+          ]
+        },
+        {
+          "id": "corridor-lock:diagonal:1",
+          "side": 1,
+          "depth": 0.2,
+          "y": 3.9,
+          "distance": 0.3874999999999911,
+          "name": "Workshop arched exterior masonry",
+          "point": [
+            101.31212502083929,
+            3.9,
+            -174.42928230836466
+          ]
+        },
+        {
+          "id": "corridor-lock:diagonal:1",
+          "side": 1,
+          "depth": 0.2,
+          "y": 4.4,
+          "distance": 0.3874999999999911,
+          "name": "Workshop arched exterior masonry",
+          "point": [
+            101.31212502083929,
+            4.4,
+            -174.42928230836466
+          ]
+        },
+        {
+          "id": "corridor-lock:diagonal:1",
+          "side": 1,
+          "depth": 0.2,
+          "y": 5.025,
+          "distance": 0.3874999999999911,
+          "name": "Workshop arched exterior masonry",
+          "point": [
+            101.31212502083929,
+            5.025,
+            -174.42928230836466
+          ]
+        },
+        {
+          "id": "corridor-lock:diagonal:1",
+          "side": 1,
+          "depth": 0.26,
+          "y": 3.78,
+          "distance": 0.3275000013576755,
+          "name": "Workshop arched painted lining",
+          "point": [
+            101.3121250217993,
+            3.78,
+            -174.34442949558232
+          ]
+        },
+        {
+          "id": "corridor-lock:diagonal:1",
+          "side": 1,
+          "depth": 0.26,
+          "y": 3.9,
+          "distance": 0.3275000013576755,
+          "name": "Workshop arched painted lining",
+          "point": [
+            101.3121250217993,
+            3.9,
+            -174.34442949558232
+          ]
+        },
+        {
+          "id": "corridor-lock:diagonal:1",
+          "side": 1,
+          "depth": 0.26,
+          "y": 4.4,
+          "distance": 0.3275000013576755,
+          "name": "Workshop arched painted lining",
+          "point": [
+            101.3121250217993,
+            4.4,
+            -174.34442949558232
+          ]
+        },
+        {
+          "id": "corridor-lock:diagonal:1",
+          "side": 1,
+          "depth": 0.26,
+          "y": 5.025,
+          "distance": 0.3275000013576755,
+          "name": "Workshop arched painted lining",
+          "point": [
+            101.3121250217993,
+            5.025,
+            -174.34442949558232
+          ]
+        },
+        {
+          "id": "corridor-lock:grafton:1",
+          "side": -1,
+          "depth": 0.125,
+          "y": 3.78,
+          "distance": 0.4625002153587445,
+          "name": "Workshop arched exterior masonry",
+          "point": [
+            106.12499999999999,
+            3.78,
+            -141.15910359820057
+          ]
+        },
+        {
+          "id": "corridor-lock:grafton:1",
+          "side": -1,
+          "depth": 0.125,
+          "y": 3.9,
+          "distance": 0.4625002153587445,
+          "name": "Workshop arched exterior masonry",
+          "point": [
+            106.12499999999999,
+            3.9,
+            -141.15910359820057
+          ]
+        },
+        {
+          "id": "corridor-lock:grafton:1",
+          "side": -1,
+          "depth": 0.125,
+          "y": 4.4,
+          "distance": 0.4625002153587445,
+          "name": "Workshop arched exterior masonry",
+          "point": [
+            106.12499999999999,
+            4.4,
+            -141.15910359820057
+          ]
+        },
+        {
+          "id": "corridor-lock:grafton:1",
+          "side": -1,
+          "depth": 0.125,
+          "y": 5.025,
+          "distance": 0.4625002153587445,
+          "name": "Workshop arched exterior masonry",
+          "point": [
+            106.12499999999999,
+            5.025,
+            -141.15910359820057
+          ]
+        },
+        {
+          "id": "corridor-lock:grafton:1",
+          "side": -1,
+          "depth": 0.15,
+          "y": 3.78,
+          "distance": 0.43750019207564605,
+          "name": "Workshop arched exterior masonry",
+          "point": [
+            106.14999999999999,
+            3.78,
+            -141.18410362148367
+          ]
+        },
+        {
+          "id": "corridor-lock:grafton:1",
+          "side": -1,
+          "depth": 0.15,
+          "y": 3.9,
+          "distance": 0.43750019207564605,
+          "name": "Workshop arched exterior masonry",
+          "point": [
+            106.14999999999999,
+            3.9,
+            -141.18410362148367
+          ]
+        },
+        {
+          "id": "corridor-lock:grafton:1",
+          "side": -1,
+          "depth": 0.15,
+          "y": 4.4,
+          "distance": 0.43750019207564605,
+          "name": "Workshop arched exterior masonry",
+          "point": [
+            106.14999999999999,
+            4.4,
+            -141.18410362148367
+          ]
+        },
+        {
+          "id": "corridor-lock:grafton:1",
+          "side": -1,
+          "depth": 0.15,
+          "y": 5.025,
+          "distance": 0.43750019207564605,
+          "name": "Workshop arched exterior masonry",
+          "point": [
+            106.14999999999999,
+            5.025,
+            -141.18410362148367
+          ]
+        },
+        {
+          "id": "corridor-lock:grafton:1",
+          "side": -1,
+          "depth": 0.2,
+          "y": 3.78,
+          "distance": 0.38750014550947753,
+          "name": "Workshop arched exterior masonry",
+          "point": [
+            106.19999999999999,
+            3.78,
+            -141.23410366804984
+          ]
+        },
+        {
+          "id": "corridor-lock:grafton:1",
+          "side": -1,
+          "depth": 0.2,
+          "y": 3.9,
+          "distance": 0.38750014550947753,
+          "name": "Workshop arched exterior masonry",
+          "point": [
+            106.19999999999999,
+            3.9,
+            -141.23410366804984
+          ]
+        },
+        {
+          "id": "corridor-lock:grafton:1",
+          "side": -1,
+          "depth": 0.2,
+          "y": 4.4,
+          "distance": 0.38750014550947753,
+          "name": "Workshop arched exterior masonry",
+          "point": [
+            106.19999999999999,
+            4.4,
+            -141.23410366804984
+          ]
+        },
+        {
+          "id": "corridor-lock:grafton:1",
+          "side": -1,
+          "depth": 0.2,
+          "y": 5.025,
+          "distance": 0.38750014550947753,
+          "name": "Workshop arched exterior masonry",
+          "point": [
+            106.19999999999999,
+            5.025,
+            -141.23410366804984
+          ]
+        },
+        {
+          "id": "corridor-lock:grafton:1",
+          "side": -1,
+          "depth": 0.26,
+          "y": 3.78,
+          "distance": 0.3275006659229973,
+          "name": "Workshop arched painted lining",
+          "point": [
+            106.25999999999999,
+            3.78,
+            -141.29410314763632
+          ]
+        },
+        {
+          "id": "corridor-lock:grafton:1",
+          "side": -1,
+          "depth": 0.26,
+          "y": 3.9,
+          "distance": 0.3275006659229973,
+          "name": "Workshop arched painted lining",
+          "point": [
+            106.25999999999999,
+            3.9,
+            -141.29410314763632
+          ]
+        },
+        {
+          "id": "corridor-lock:grafton:1",
+          "side": -1,
+          "depth": 0.26,
+          "y": 4.4,
+          "distance": 0.3275006659229973,
+          "name": "Workshop arched painted lining",
+          "point": [
+            106.25999999999999,
+            4.4,
+            -141.29410314763632
+          ]
+        },
+        {
+          "id": "corridor-lock:grafton:1",
+          "side": -1,
+          "depth": 0.26,
+          "y": 5.025,
+          "distance": 0.3275006659229973,
+          "name": "Workshop arched painted lining",
+          "point": [
+            106.25999999999999,
+            5.025,
+            -141.29410314763632
+          ]
+        },
+        {
+          "id": "corridor-lock:grafton:1",
+          "side": 1,
+          "depth": 0.125,
+          "y": 3.78,
+          "distance": 0.4625000000000057,
+          "name": "Workshop arched exterior masonry",
+          "point": [
+            106.125,
+            3.78,
+            -144.62035381355932
+          ]
+        },
+        {
+          "id": "corridor-lock:grafton:1",
+          "side": 1,
+          "depth": 0.125,
+          "y": 3.9,
+          "distance": 0.4625000000000057,
+          "name": "Workshop arched exterior masonry",
+          "point": [
+            106.125,
+            3.9,
+            -144.62035381355932
+          ]
+        },
+        {
+          "id": "corridor-lock:grafton:1",
+          "side": 1,
+          "depth": 0.125,
+          "y": 4.4,
+          "distance": 0.4625000000000057,
+          "name": "Workshop arched exterior masonry",
+          "point": [
+            106.125,
+            4.4,
+            -144.62035381355932
+          ]
+        },
+        {
+          "id": "corridor-lock:grafton:1",
+          "side": 1,
+          "depth": 0.125,
+          "y": 5.025,
+          "distance": 0.4625000000000057,
+          "name": "Workshop arched exterior masonry",
+          "point": [
+            106.125,
+            5.025,
+            -144.62035381355932
+          ]
+        },
+        {
+          "id": "corridor-lock:grafton:1",
+          "side": 1,
+          "depth": 0.15,
+          "y": 3.78,
+          "distance": 0.4375,
+          "name": "Workshop arched exterior masonry",
+          "point": [
+            106.15,
+            3.78,
+            -144.5953538135593
+          ]
+        },
+        {
+          "id": "corridor-lock:grafton:1",
+          "side": 1,
+          "depth": 0.15,
+          "y": 3.9,
+          "distance": 0.4375,
+          "name": "Workshop arched exterior masonry",
+          "point": [
+            106.15,
+            3.9,
+            -144.5953538135593
+          ]
+        },
+        {
+          "id": "corridor-lock:grafton:1",
+          "side": 1,
+          "depth": 0.15,
+          "y": 4.4,
+          "distance": 0.4375,
+          "name": "Workshop arched exterior masonry",
+          "point": [
+            106.15,
+            4.4,
+            -144.5953538135593
+          ]
+        },
+        {
+          "id": "corridor-lock:grafton:1",
+          "side": 1,
+          "depth": 0.15,
+          "y": 5.025,
+          "distance": 0.4375,
+          "name": "Workshop arched exterior masonry",
+          "point": [
+            106.15,
+            5.025,
+            -144.5953538135593
+          ]
+        },
+        {
+          "id": "corridor-lock:grafton:1",
+          "side": 1,
+          "depth": 0.2,
+          "y": 3.78,
+          "distance": 0.38749999999998863,
+          "name": "Workshop arched exterior masonry",
+          "point": [
+            106.2,
+            3.78,
+            -144.5453538135593
+          ]
+        },
+        {
+          "id": "corridor-lock:grafton:1",
+          "side": 1,
+          "depth": 0.2,
+          "y": 3.9,
+          "distance": 0.38749999999998863,
+          "name": "Workshop arched exterior masonry",
+          "point": [
+            106.2,
+            3.9,
+            -144.5453538135593
+          ]
+        },
+        {
+          "id": "corridor-lock:grafton:1",
+          "side": 1,
+          "depth": 0.2,
+          "y": 4.4,
+          "distance": 0.38749999999998863,
+          "name": "Workshop arched exterior masonry",
+          "point": [
+            106.2,
+            4.4,
+            -144.5453538135593
+          ]
+        },
+        {
+          "id": "corridor-lock:grafton:1",
+          "side": 1,
+          "depth": 0.2,
+          "y": 5.025,
+          "distance": 0.38749999999998863,
+          "name": "Workshop arched exterior masonry",
+          "point": [
+            106.2,
+            5.025,
+            -144.5453538135593
+          ]
+        },
+        {
+          "id": "corridor-lock:grafton:1",
+          "side": 1,
+          "depth": 0.26,
+          "y": 3.78,
+          "distance": 0.327500001357663,
+          "name": "Workshop arched painted lining",
+          "point": [
+            106.26,
+            3.78,
+            -144.48535381491698
+          ]
+        },
+        {
+          "id": "corridor-lock:grafton:1",
+          "side": 1,
+          "depth": 0.26,
+          "y": 3.9,
+          "distance": 0.327500001357663,
+          "name": "Workshop arched painted lining",
+          "point": [
+            106.26,
+            3.9,
+            -144.48535381491698
+          ]
+        },
+        {
+          "id": "corridor-lock:grafton:1",
+          "side": 1,
+          "depth": 0.26,
+          "y": 4.4,
+          "distance": 0.327500001357663,
+          "name": "Workshop arched painted lining",
+          "point": [
+            106.26,
+            4.4,
+            -144.48535381491698
+          ]
+        },
+        {
+          "id": "corridor-lock:grafton:1",
+          "side": 1,
+          "depth": 0.26,
+          "y": 5.025,
+          "distance": 0.327500001357663,
+          "name": "Workshop arched painted lining",
+          "point": [
+            106.26,
+            5.025,
+            -144.48535381491698
+          ]
+        },
+        {
+          "id": "corridor-lock:witby:1",
+          "side": -1,
+          "depth": 0.125,
+          "y": 3.78,
+          "distance": 0.46249964354151984,
+          "name": "Workshop arched exterior masonry",
+          "point": [
+            113.86937535645849,
+            3.78,
+            -186.875
+          ]
+        },
+        {
+          "id": "corridor-lock:witby:1",
+          "side": -1,
+          "depth": 0.125,
+          "y": 3.9,
+          "distance": 0.46249964354151984,
+          "name": "Workshop arched exterior masonry",
+          "point": [
+            113.86937535645849,
+            3.9,
+            -186.875
+          ]
+        },
+        {
+          "id": "corridor-lock:witby:1",
+          "side": -1,
+          "depth": 0.125,
+          "y": 4.4,
+          "distance": 0.46249964354151984,
+          "name": "Workshop arched exterior masonry",
+          "point": [
+            113.86937535645849,
+            4.4,
+            -186.875
+          ]
+        },
+        {
+          "id": "corridor-lock:witby:1",
+          "side": -1,
+          "depth": 0.125,
+          "y": 5.025,
+          "distance": 0.46249964354151984,
+          "name": "Workshop arched exterior masonry",
+          "point": [
+            113.86937535645849,
+            5.025,
+            -186.875
+          ]
+        },
+        {
+          "id": "corridor-lock:witby:1",
+          "side": -1,
+          "depth": 0.15,
+          "y": 3.78,
+          "distance": 0.4374996202584214,
+          "name": "Workshop arched exterior masonry",
+          "point": [
+            113.89437537974159,
+            3.78,
+            -186.85
+          ]
+        },
+        {
+          "id": "corridor-lock:witby:1",
+          "side": -1,
+          "depth": 0.15,
+          "y": 3.9,
+          "distance": 0.4374996202584356,
+          "name": "Workshop arched exterior masonry",
+          "point": [
+            113.89437537974158,
+            3.9,
+            -186.85
+          ]
+        },
+        {
+          "id": "corridor-lock:witby:1",
+          "side": -1,
+          "depth": 0.15,
+          "y": 4.4,
+          "distance": 0.4374996202584356,
+          "name": "Workshop arched exterior masonry",
+          "point": [
+            113.89437537974158,
+            4.4,
+            -186.85
+          ]
+        },
+        {
+          "id": "corridor-lock:witby:1",
+          "side": -1,
+          "depth": 0.15,
+          "y": 5.025,
+          "distance": 0.4374996202584214,
+          "name": "Workshop arched exterior masonry",
+          "point": [
+            113.89437537974159,
+            5.025,
+            -186.85
+          ]
+        },
+        {
+          "id": "corridor-lock:witby:1",
+          "side": -1,
+          "depth": 0.2,
+          "y": 3.78,
+          "distance": 0.38749957369226706,
+          "name": "Workshop arched exterior masonry",
+          "point": [
+            113.94437542630774,
+            3.78,
+            -186.8
+          ]
+        },
+        {
+          "id": "corridor-lock:witby:1",
+          "side": -1,
+          "depth": 0.2,
+          "y": 3.9,
+          "distance": 0.38749957369226706,
+          "name": "Workshop arched exterior masonry",
+          "point": [
+            113.94437542630774,
+            3.9,
+            -186.8
+          ]
+        },
+        {
+          "id": "corridor-lock:witby:1",
+          "side": -1,
+          "depth": 0.2,
+          "y": 4.4,
+          "distance": 0.38749957369226706,
+          "name": "Workshop arched exterior masonry",
+          "point": [
+            113.94437542630774,
+            4.4,
+            -186.8
+          ]
+        },
+        {
+          "id": "corridor-lock:witby:1",
+          "side": -1,
+          "depth": 0.2,
+          "y": 5.025,
+          "distance": 0.38749957369226706,
+          "name": "Workshop arched exterior masonry",
+          "point": [
+            113.94437542630774,
+            5.025,
+            -186.8
+          ]
+        },
+        {
+          "id": "corridor-lock:witby:1",
+          "side": -1,
+          "depth": 0.26,
+          "y": 3.78,
+          "distance": 0.327500094107279,
+          "name": "Workshop arched painted lining",
+          "point": [
+            114.00437490589273,
+            3.78,
+            -186.74
+          ]
+        },
+        {
+          "id": "corridor-lock:witby:1",
+          "side": -1,
+          "depth": 0.26,
+          "y": 3.9,
+          "distance": 0.327500094107279,
+          "name": "Workshop arched painted lining",
+          "point": [
+            114.00437490589273,
+            3.9,
+            -186.74
+          ]
+        },
+        {
+          "id": "corridor-lock:witby:1",
+          "side": -1,
+          "depth": 0.26,
+          "y": 4.4,
+          "distance": 0.327500094107279,
+          "name": "Workshop arched painted lining",
+          "point": [
+            114.00437490589273,
+            4.4,
+            -186.74
+          ]
+        },
+        {
+          "id": "corridor-lock:witby:1",
+          "side": -1,
+          "depth": 0.26,
+          "y": 5.025,
+          "distance": 0.327500094107279,
+          "name": "Workshop arched painted lining",
+          "point": [
+            114.00437490589273,
+            5.025,
+            -186.74
+          ]
+        },
+        {
+          "id": "corridor-lock:witby:1",
+          "side": 1,
+          "depth": 0.125,
+          "y": 3.78,
+          "distance": 0.4625000000000057,
+          "name": "Workshop arched exterior masonry",
+          "point": [
+            117.33062500000001,
+            3.78,
+            -186.875
+          ]
+        },
+        {
+          "id": "corridor-lock:witby:1",
+          "side": 1,
+          "depth": 0.125,
+          "y": 3.9,
+          "distance": 0.4625000000000057,
+          "name": "Workshop arched exterior masonry",
+          "point": [
+            117.33062500000001,
+            3.9,
+            -186.875
+          ]
+        },
+        {
+          "id": "corridor-lock:witby:1",
+          "side": 1,
+          "depth": 0.125,
+          "y": 4.4,
+          "distance": 0.4625000000000057,
+          "name": "Workshop arched exterior masonry",
+          "point": [
+            117.33062500000001,
+            4.4,
+            -186.875
+          ]
+        },
+        {
+          "id": "corridor-lock:witby:1",
+          "side": 1,
+          "depth": 0.125,
+          "y": 5.025,
+          "distance": 0.4625000000000057,
+          "name": "Workshop arched exterior masonry",
+          "point": [
+            117.33062500000001,
+            5.025,
+            -186.875
+          ]
+        },
+        {
+          "id": "corridor-lock:witby:1",
+          "side": 1,
+          "depth": 0.15,
+          "y": 3.78,
+          "distance": 0.4375,
+          "name": "Workshop arched exterior masonry",
+          "point": [
+            117.305625,
+            3.78,
+            -186.85
+          ]
+        },
+        {
+          "id": "corridor-lock:witby:1",
+          "side": 1,
+          "depth": 0.15,
+          "y": 3.9,
+          "distance": 0.4375,
+          "name": "Workshop arched exterior masonry",
+          "point": [
+            117.305625,
+            3.9,
+            -186.85
+          ]
+        },
+        {
+          "id": "corridor-lock:witby:1",
+          "side": 1,
+          "depth": 0.15,
+          "y": 4.4,
+          "distance": 0.4375,
+          "name": "Workshop arched exterior masonry",
+          "point": [
+            117.305625,
+            4.4,
+            -186.85
+          ]
+        },
+        {
+          "id": "corridor-lock:witby:1",
+          "side": 1,
+          "depth": 0.15,
+          "y": 5.025,
+          "distance": 0.4375,
+          "name": "Workshop arched exterior masonry",
+          "point": [
+            117.305625,
+            5.025,
+            -186.85
+          ]
+        },
+        {
+          "id": "corridor-lock:witby:1",
+          "side": 1,
+          "depth": 0.2,
+          "y": 3.78,
+          "distance": 0.38750000000001705,
+          "name": "Workshop arched exterior masonry",
+          "point": [
+            117.25562500000002,
+            3.78,
+            -186.8
+          ]
+        },
+        {
+          "id": "corridor-lock:witby:1",
+          "side": 1,
+          "depth": 0.2,
+          "y": 3.9,
+          "distance": 0.38750000000001705,
+          "name": "Workshop arched exterior masonry",
+          "point": [
+            117.25562500000002,
+            3.9,
+            -186.8
+          ]
+        },
+        {
+          "id": "corridor-lock:witby:1",
+          "side": 1,
+          "depth": 0.2,
+          "y": 4.4,
+          "distance": 0.38750000000001705,
+          "name": "Workshop arched exterior masonry",
+          "point": [
+            117.25562500000002,
+            4.4,
+            -186.8
+          ]
+        },
+        {
+          "id": "corridor-lock:witby:1",
+          "side": 1,
+          "depth": 0.2,
+          "y": 5.025,
+          "distance": 0.38750000000001705,
+          "name": "Workshop arched exterior masonry",
+          "point": [
+            117.25562500000002,
+            5.025,
+            -186.8
+          ]
+        },
+        {
+          "id": "corridor-lock:witby:1",
+          "side": 1,
+          "depth": 0.26,
+          "y": 3.78,
+          "distance": 0.327500001357663,
+          "name": "Workshop arched painted lining",
+          "point": [
+            117.19562500135767,
+            3.78,
+            -186.74
+          ]
+        },
+        {
+          "id": "corridor-lock:witby:1",
+          "side": 1,
+          "depth": 0.26,
+          "y": 3.9,
+          "distance": 0.327500001357663,
+          "name": "Workshop arched painted lining",
+          "point": [
+            117.19562500135767,
+            3.9,
+            -186.74
+          ]
+        },
+        {
+          "id": "corridor-lock:witby:1",
+          "side": 1,
+          "depth": 0.26,
+          "y": 4.4,
+          "distance": 0.327500001357663,
+          "name": "Workshop arched painted lining",
+          "point": [
+            117.19562500135767,
+            4.4,
+            -186.74
+          ]
+        },
+        {
+          "id": "corridor-lock:witby:1",
+          "side": 1,
+          "depth": 0.26,
+          "y": 5.025,
+          "distance": 0.327500001357663,
+          "name": "Workshop arched painted lining",
+          "point": [
+            117.19562500135767,
+            5.025,
+            -186.74
+          ]
+        },
+        {
+          "id": "corridor-lock:hale-0:1",
+          "side": -1,
+          "depth": 0.125,
+          "y": 3.78,
+          "distance": 0.4624997691435482,
+          "name": "Workshop arched exterior masonry",
+          "point": [
+            147.725,
+            3.78,
+            -71.12437523085646
+          ]
+        },
+        {
+          "id": "corridor-lock:hale-0:1",
+          "side": -1,
+          "depth": 0.125,
+          "y": 3.9,
+          "distance": 0.4624997691435482,
+          "name": "Workshop arched exterior masonry",
+          "point": [
+            147.725,
+            3.9,
+            -71.12437523085646
+          ]
+        },
+        {
+          "id": "corridor-lock:hale-0:1",
+          "side": -1,
+          "depth": 0.125,
+          "y": 4.4,
+          "distance": 0.4624997691435482,
+          "name": "Workshop arched exterior masonry",
+          "point": [
+            147.725,
+            4.4,
+            -71.12437523085646
+          ]
+        },
+        {
+          "id": "corridor-lock:hale-0:1",
+          "side": -1,
+          "depth": 0.125,
+          "y": 5.025,
+          "distance": 0.4624997691435482,
+          "name": "Workshop arched exterior masonry",
+          "point": [
+            147.725,
+            5.025,
+            -71.12437523085646
+          ]
+        },
+        {
+          "id": "corridor-lock:hale-0:1",
+          "side": -1,
+          "depth": 0.15,
+          "y": 3.78,
+          "distance": 0.4374997458604497,
+          "name": "Workshop arched exterior masonry",
+          "point": [
+            147.75,
+            3.78,
+            -71.14937525413956
+          ]
+        },
+        {
+          "id": "corridor-lock:hale-0:1",
+          "side": -1,
+          "depth": 0.15,
+          "y": 3.9,
+          "distance": 0.4374997458604497,
+          "name": "Workshop arched exterior masonry",
+          "point": [
+            147.75,
+            3.9,
+            -71.14937525413956
+          ]
+        },
+        {
+          "id": "corridor-lock:hale-0:1",
+          "side": -1,
+          "depth": 0.15,
+          "y": 4.4,
+          "distance": 0.4374997458604497,
+          "name": "Workshop arched exterior masonry",
+          "point": [
+            147.75,
+            4.4,
+            -71.14937525413956
+          ]
+        },
+        {
+          "id": "corridor-lock:hale-0:1",
+          "side": -1,
+          "depth": 0.15,
+          "y": 5.025,
+          "distance": 0.4374997458604497,
+          "name": "Workshop arched exterior masonry",
+          "point": [
+            147.75,
+            5.025,
+            -71.14937525413956
+          ]
+        },
+        {
+          "id": "corridor-lock:hale-0:1",
+          "side": -1,
+          "depth": 0.2,
+          "y": 3.78,
+          "distance": 0.3874996992942954,
+          "name": "Workshop arched exterior masonry",
+          "point": [
+            147.79999999999998,
+            3.78,
+            -71.19937530070571
+          ]
+        },
+        {
+          "id": "corridor-lock:hale-0:1",
+          "side": -1,
+          "depth": 0.2,
+          "y": 3.9,
+          "distance": 0.3874996992942954,
+          "name": "Workshop arched exterior masonry",
+          "point": [
+            147.79999999999998,
+            3.9,
+            -71.19937530070571
+          ]
+        },
+        {
+          "id": "corridor-lock:hale-0:1",
+          "side": -1,
+          "depth": 0.2,
+          "y": 4.4,
+          "distance": 0.3874996992942954,
+          "name": "Workshop arched exterior masonry",
+          "point": [
+            147.79999999999998,
+            4.4,
+            -71.19937530070571
+          ]
+        },
+        {
+          "id": "corridor-lock:hale-0:1",
+          "side": -1,
+          "depth": 0.2,
+          "y": 5.025,
+          "distance": 0.3874996992942954,
+          "name": "Workshop arched exterior masonry",
+          "point": [
+            147.79999999999998,
+            5.025,
+            -71.19937530070571
+          ]
+        },
+        {
+          "id": "corridor-lock:hale-0:1",
+          "side": -1,
+          "depth": 0.26,
+          "y": 3.78,
+          "distance": 0.32749974287261807,
+          "name": "Workshop arched painted lining",
+          "point": [
+            147.85999999999999,
+            3.78,
+            -71.25937525712739
+          ]
+        },
+        {
+          "id": "corridor-lock:hale-0:1",
+          "side": -1,
+          "depth": 0.26,
+          "y": 3.9,
+          "distance": 0.32749974287261807,
+          "name": "Workshop arched painted lining",
+          "point": [
+            147.85999999999999,
+            3.9,
+            -71.25937525712739
+          ]
+        },
+        {
+          "id": "corridor-lock:hale-0:1",
+          "side": -1,
+          "depth": 0.26,
+          "y": 4.4,
+          "distance": 0.32749974287261807,
+          "name": "Workshop arched painted lining",
+          "point": [
+            147.85999999999999,
+            4.4,
+            -71.25937525712739
+          ]
+        },
+        {
+          "id": "corridor-lock:hale-0:1",
+          "side": -1,
+          "depth": 0.26,
+          "y": 5.025,
+          "distance": 0.32749974287261807,
+          "name": "Workshop arched painted lining",
+          "point": [
+            147.85999999999999,
+            5.025,
+            -71.25937525712739
+          ]
+        },
+        {
+          "id": "corridor-lock:hale-0:1",
+          "side": 1,
+          "depth": 0.125,
+          "y": 3.78,
+          "distance": 0.4625000000000057,
+          "name": "Workshop arched exterior masonry",
+          "point": [
+            147.725,
+            3.78,
+            -74.58562500000001
+          ]
+        },
+        {
+          "id": "corridor-lock:hale-0:1",
+          "side": 1,
+          "depth": 0.125,
+          "y": 3.9,
+          "distance": 0.4625000000000057,
+          "name": "Workshop arched exterior masonry",
+          "point": [
+            147.725,
+            3.9,
+            -74.58562500000001
+          ]
+        },
+        {
+          "id": "corridor-lock:hale-0:1",
+          "side": 1,
+          "depth": 0.125,
+          "y": 4.4,
+          "distance": 0.4625000000000057,
+          "name": "Workshop arched exterior masonry",
+          "point": [
+            147.725,
+            4.4,
+            -74.58562500000001
+          ]
+        },
+        {
+          "id": "corridor-lock:hale-0:1",
+          "side": 1,
+          "depth": 0.125,
+          "y": 5.025,
+          "distance": 0.4625000000000057,
+          "name": "Workshop arched exterior masonry",
+          "point": [
+            147.725,
+            5.025,
+            -74.58562500000001
+          ]
+        },
+        {
+          "id": "corridor-lock:hale-0:1",
+          "side": 1,
+          "depth": 0.15,
+          "y": 3.78,
+          "distance": 0.4375,
+          "name": "Workshop arched exterior masonry",
+          "point": [
+            147.75,
+            3.78,
+            -74.560625
+          ]
+        },
+        {
+          "id": "corridor-lock:hale-0:1",
+          "side": 1,
+          "depth": 0.15,
+          "y": 3.9,
+          "distance": 0.4375,
+          "name": "Workshop arched exterior masonry",
+          "point": [
+            147.75,
+            3.9,
+            -74.560625
+          ]
+        },
+        {
+          "id": "corridor-lock:hale-0:1",
+          "side": 1,
+          "depth": 0.15,
+          "y": 4.4,
+          "distance": 0.4375,
+          "name": "Workshop arched exterior masonry",
+          "point": [
+            147.75,
+            4.4,
+            -74.560625
+          ]
+        },
+        {
+          "id": "corridor-lock:hale-0:1",
+          "side": 1,
+          "depth": 0.15,
+          "y": 5.025,
+          "distance": 0.4375,
+          "name": "Workshop arched exterior masonry",
+          "point": [
+            147.75,
+            5.025,
+            -74.560625
+          ]
+        },
+        {
+          "id": "corridor-lock:hale-0:1",
+          "side": 1,
+          "depth": 0.2,
+          "y": 3.78,
+          "distance": 0.38750000000001705,
+          "name": "Workshop arched exterior masonry",
+          "point": [
+            147.79999999999998,
+            3.78,
+            -74.51062500000002
+          ]
+        },
+        {
+          "id": "corridor-lock:hale-0:1",
+          "side": 1,
+          "depth": 0.2,
+          "y": 3.9,
+          "distance": 0.38750000000001705,
+          "name": "Workshop arched exterior masonry",
+          "point": [
+            147.79999999999998,
+            3.9,
+            -74.51062500000002
+          ]
+        },
+        {
+          "id": "corridor-lock:hale-0:1",
+          "side": 1,
+          "depth": 0.2,
+          "y": 4.4,
+          "distance": 0.38750000000001705,
+          "name": "Workshop arched exterior masonry",
+          "point": [
+            147.79999999999998,
+            4.4,
+            -74.51062500000002
+          ]
+        },
+        {
+          "id": "corridor-lock:hale-0:1",
+          "side": 1,
+          "depth": 0.2,
+          "y": 5.025,
+          "distance": 0.38750000000001705,
+          "name": "Workshop arched exterior masonry",
+          "point": [
+            147.79999999999998,
+            5.025,
+            -74.51062500000002
+          ]
+        },
+        {
+          "id": "corridor-lock:hale-0:1",
+          "side": 1,
+          "depth": 0.26,
+          "y": 3.78,
+          "distance": 0.327500001357663,
+          "name": "Workshop arched painted lining",
+          "point": [
+            147.85999999999999,
+            3.78,
+            -74.45062500135766
+          ]
+        },
+        {
+          "id": "corridor-lock:hale-0:1",
+          "side": 1,
+          "depth": 0.26,
+          "y": 3.9,
+          "distance": 0.327500001357663,
+          "name": "Workshop arched painted lining",
+          "point": [
+            147.85999999999999,
+            3.9,
+            -74.45062500135766
+          ]
+        },
+        {
+          "id": "corridor-lock:hale-0:1",
+          "side": 1,
+          "depth": 0.26,
+          "y": 4.4,
+          "distance": 0.327500001357663,
+          "name": "Workshop arched painted lining",
+          "point": [
+            147.85999999999999,
+            4.4,
+            -74.45062500135766
+          ]
+        },
+        {
+          "id": "corridor-lock:hale-0:1",
+          "side": 1,
+          "depth": 0.26,
+          "y": 5.025,
+          "distance": 0.327500001357663,
+          "name": "Workshop arched painted lining",
+          "point": [
+            147.85999999999999,
+            5.025,
+            -74.45062500135766
+          ]
+        },
+        {
+          "id": "corridor-lock:hale-1:1",
+          "side": -1,
+          "depth": 0.125,
+          "y": 3.78,
+          "distance": 0.4624997691435482,
+          "name": "Workshop arched exterior masonry",
+          "point": [
+            139.725,
+            3.78,
+            -93.67437523085646
+          ]
+        },
+        {
+          "id": "corridor-lock:hale-1:1",
+          "side": -1,
+          "depth": 0.125,
+          "y": 3.9,
+          "distance": 0.4624997691435482,
+          "name": "Workshop arched exterior masonry",
+          "point": [
+            139.725,
+            3.9,
+            -93.67437523085646
+          ]
+        },
+        {
+          "id": "corridor-lock:hale-1:1",
+          "side": -1,
+          "depth": 0.125,
+          "y": 4.4,
+          "distance": 0.4624997691435482,
+          "name": "Workshop arched exterior masonry",
+          "point": [
+            139.725,
+            4.4,
+            -93.67437523085646
+          ]
+        },
+        {
+          "id": "corridor-lock:hale-1:1",
+          "side": -1,
+          "depth": 0.125,
+          "y": 5.025,
+          "distance": 0.4624997691435482,
+          "name": "Workshop arched exterior masonry",
+          "point": [
+            139.725,
+            5.025,
+            -93.67437523085646
+          ]
+        },
+        {
+          "id": "corridor-lock:hale-1:1",
+          "side": -1,
+          "depth": 0.15,
+          "y": 3.78,
+          "distance": 0.4374997458604497,
+          "name": "Workshop arched exterior masonry",
+          "point": [
+            139.75,
+            3.78,
+            -93.69937525413955
+          ]
+        },
+        {
+          "id": "corridor-lock:hale-1:1",
+          "side": -1,
+          "depth": 0.15,
+          "y": 3.9,
+          "distance": 0.4374997458604497,
+          "name": "Workshop arched exterior masonry",
+          "point": [
+            139.75,
+            3.9,
+            -93.69937525413955
+          ]
+        },
+        {
+          "id": "corridor-lock:hale-1:1",
+          "side": -1,
+          "depth": 0.15,
+          "y": 4.4,
+          "distance": 0.4374997458604497,
+          "name": "Workshop arched exterior masonry",
+          "point": [
+            139.75,
+            4.4,
+            -93.69937525413955
+          ]
+        },
+        {
+          "id": "corridor-lock:hale-1:1",
+          "side": -1,
+          "depth": 0.15,
+          "y": 5.025,
+          "distance": 0.4374997458604497,
+          "name": "Workshop arched exterior masonry",
+          "point": [
+            139.75,
+            5.025,
+            -93.69937525413955
+          ]
+        },
+        {
+          "id": "corridor-lock:hale-1:1",
+          "side": -1,
+          "depth": 0.2,
+          "y": 3.78,
+          "distance": 0.3874996992942954,
+          "name": "Workshop arched exterior masonry",
+          "point": [
+            139.79999999999998,
+            3.78,
+            -93.74937530070571
+          ]
+        },
+        {
+          "id": "corridor-lock:hale-1:1",
+          "side": -1,
+          "depth": 0.2,
+          "y": 3.9,
+          "distance": 0.3874996992942954,
+          "name": "Workshop arched exterior masonry",
+          "point": [
+            139.79999999999998,
+            3.9,
+            -93.74937530070571
+          ]
+        },
+        {
+          "id": "corridor-lock:hale-1:1",
+          "side": -1,
+          "depth": 0.2,
+          "y": 4.4,
+          "distance": 0.3874996992942954,
+          "name": "Workshop arched exterior masonry",
+          "point": [
+            139.79999999999998,
+            4.4,
+            -93.74937530070571
+          ]
+        },
+        {
+          "id": "corridor-lock:hale-1:1",
+          "side": -1,
+          "depth": 0.2,
+          "y": 5.025,
+          "distance": 0.3874996992942954,
+          "name": "Workshop arched exterior masonry",
+          "point": [
+            139.79999999999998,
+            5.025,
+            -93.74937530070571
+          ]
+        },
+        {
+          "id": "corridor-lock:hale-1:1",
+          "side": -1,
+          "depth": 0.26,
+          "y": 3.78,
+          "distance": 0.32750021970898047,
+          "name": "Workshop arched painted lining",
+          "point": [
+            139.85999999999999,
+            3.78,
+            -93.80937478029102
+          ]
+        },
+        {
+          "id": "corridor-lock:hale-1:1",
+          "side": -1,
+          "depth": 0.26,
+          "y": 3.9,
+          "distance": 0.32750021970898047,
+          "name": "Workshop arched painted lining",
+          "point": [
+            139.85999999999999,
+            3.9,
+            -93.80937478029102
+          ]
+        },
+        {
+          "id": "corridor-lock:hale-1:1",
+          "side": -1,
+          "depth": 0.26,
+          "y": 4.4,
+          "distance": 0.32750021970898047,
+          "name": "Workshop arched painted lining",
+          "point": [
+            139.85999999999999,
+            4.4,
+            -93.80937478029102
+          ]
+        },
+        {
+          "id": "corridor-lock:hale-1:1",
+          "side": -1,
+          "depth": 0.26,
+          "y": 5.025,
+          "distance": 0.32750021970898047,
+          "name": "Workshop arched painted lining",
+          "point": [
+            139.85999999999999,
+            5.025,
+            -93.80937478029102
+          ]
+        },
+        {
+          "id": "corridor-lock:hale-1:1",
+          "side": 1,
+          "depth": 0.125,
+          "y": 3.78,
+          "distance": 0.4625000000000057,
+          "name": "Workshop arched exterior masonry",
+          "point": [
+            139.725,
+            3.78,
+            -97.135625
+          ]
+        },
+        {
+          "id": "corridor-lock:hale-1:1",
+          "side": 1,
+          "depth": 0.125,
+          "y": 3.9,
+          "distance": 0.4625000000000057,
+          "name": "Workshop arched exterior masonry",
+          "point": [
+            139.725,
+            3.9,
+            -97.135625
+          ]
+        },
+        {
+          "id": "corridor-lock:hale-1:1",
+          "side": 1,
+          "depth": 0.125,
+          "y": 4.4,
+          "distance": 0.4625000000000057,
+          "name": "Workshop arched exterior masonry",
+          "point": [
+            139.725,
+            4.4,
+            -97.135625
+          ]
+        },
+        {
+          "id": "corridor-lock:hale-1:1",
+          "side": 1,
+          "depth": 0.125,
+          "y": 5.025,
+          "distance": 0.4625000000000057,
+          "name": "Workshop arched exterior masonry",
+          "point": [
+            139.725,
+            5.025,
+            -97.135625
+          ]
+        },
+        {
+          "id": "corridor-lock:hale-1:1",
+          "side": 1,
+          "depth": 0.15,
+          "y": 3.78,
+          "distance": 0.4375,
+          "name": "Workshop arched exterior masonry",
+          "point": [
+            139.75,
+            3.78,
+            -97.110625
+          ]
+        },
+        {
+          "id": "corridor-lock:hale-1:1",
+          "side": 1,
+          "depth": 0.15,
+          "y": 3.9,
+          "distance": 0.4375,
+          "name": "Workshop arched exterior masonry",
+          "point": [
+            139.75,
+            3.9,
+            -97.110625
+          ]
+        },
+        {
+          "id": "corridor-lock:hale-1:1",
+          "side": 1,
+          "depth": 0.15,
+          "y": 4.4,
+          "distance": 0.4375,
+          "name": "Workshop arched exterior masonry",
+          "point": [
+            139.75,
+            4.4,
+            -97.110625
+          ]
+        },
+        {
+          "id": "corridor-lock:hale-1:1",
+          "side": 1,
+          "depth": 0.15,
+          "y": 5.025,
+          "distance": 0.4375,
+          "name": "Workshop arched exterior masonry",
+          "point": [
+            139.75,
+            5.025,
+            -97.110625
+          ]
+        },
+        {
+          "id": "corridor-lock:hale-1:1",
+          "side": 1,
+          "depth": 0.2,
+          "y": 3.78,
+          "distance": 0.38750000000001705,
+          "name": "Workshop arched exterior masonry",
+          "point": [
+            139.79999999999998,
+            3.78,
+            -97.06062500000002
+          ]
+        },
+        {
+          "id": "corridor-lock:hale-1:1",
+          "side": 1,
+          "depth": 0.2,
+          "y": 3.9,
+          "distance": 0.38750000000001705,
+          "name": "Workshop arched exterior masonry",
+          "point": [
+            139.79999999999998,
+            3.9,
+            -97.06062500000002
+          ]
+        },
+        {
+          "id": "corridor-lock:hale-1:1",
+          "side": 1,
+          "depth": 0.2,
+          "y": 4.4,
+          "distance": 0.38750000000001705,
+          "name": "Workshop arched exterior masonry",
+          "point": [
+            139.79999999999998,
+            4.4,
+            -97.06062500000002
+          ]
+        },
+        {
+          "id": "corridor-lock:hale-1:1",
+          "side": 1,
+          "depth": 0.2,
+          "y": 5.025,
+          "distance": 0.38750000000001705,
+          "name": "Workshop arched exterior masonry",
+          "point": [
+            139.79999999999998,
+            5.025,
+            -97.06062500000002
+          ]
+        },
+        {
+          "id": "corridor-lock:hale-1:1",
+          "side": 1,
+          "depth": 0.26,
+          "y": 3.78,
+          "distance": 0.327500001357663,
+          "name": "Workshop arched painted lining",
+          "point": [
+            139.85999999999999,
+            3.78,
+            -97.00062500135766
+          ]
+        },
+        {
+          "id": "corridor-lock:hale-1:1",
+          "side": 1,
+          "depth": 0.26,
+          "y": 3.9,
+          "distance": 0.327500001357663,
+          "name": "Workshop arched painted lining",
+          "point": [
+            139.85999999999999,
+            3.9,
+            -97.00062500135766
+          ]
+        },
+        {
+          "id": "corridor-lock:hale-1:1",
+          "side": 1,
+          "depth": 0.26,
+          "y": 4.4,
+          "distance": 0.327500001357663,
+          "name": "Workshop arched painted lining",
+          "point": [
+            139.85999999999999,
+            4.4,
+            -97.00062500135766
+          ]
+        },
+        {
+          "id": "corridor-lock:hale-1:1",
+          "side": 1,
+          "depth": 0.26,
+          "y": 5.025,
+          "distance": 0.327500001357663,
+          "name": "Workshop arched painted lining",
+          "point": [
+            139.85999999999999,
+            5.025,
+            -97.00062500135766
+          ]
+        }
+      ]
+    },
+    "corners": {
+      "corners": 14,
+      "probes": 560,
+      "failures": []
+    },
+    "doors": [
+      {
+        "id": "corridor-lock:gallery:0",
+        "title": "Main/admin · locked double doors",
+        "point": [
+          154.773125,
+          24.4
+        ],
+        "toward": [
+          154.773125,
+          -126
+        ],
+        "marked": true,
+        "x": 154.773125,
+        "z": 22.599999999999998,
+        "y": 1.35
+      },
+      {
+        "id": "corridor-lock:gallery:1",
+        "title": "Farndon · locked double doors",
+        "point": [
+          154.773125,
+          -126
+        ],
+        "toward": [
+          154.773125,
+          24.4
+        ],
+        "marked": true,
+        "x": 154.773125,
+        "z": -124.2,
+        "y": 1.35
+      },
+      {
+        "id": "corridor-lock:admin:0",
+        "title": "Redesmere · locked double doors",
+        "point": [
+          121.5,
+          9.8
+        ],
+        "toward": [
+          154.773125,
+          9.8
+        ],
+        "marked": true,
+        "x": 123.3,
+        "z": 9.8,
+        "y": 1.35
+      },
+      {
+        "id": "corridor-lock:irby:1",
+        "title": "Irby / Ashley · locked double doors",
+        "point": [
+          210,
+          -66.6
+        ],
+        "toward": [
+          154.773125,
+          -66.6
+        ],
+        "marked": false,
+        "x": 208.2,
+        "z": -66.6,
+        "y": 1.35
+      },
+      {
+        "id": "corridor-lock:diagonal:1",
+        "title": "Upton / Frith / Oscroft · locked double doors",
+        "point": [
+          100,
+          -173.4
+        ],
+        "toward": [
+          154.773125,
+          -118.62687500000001
+        ],
+        "marked": true,
+        "x": 101.27279220613579,
+        "z": -172.12720779386422,
+        "y": 1.35
+      },
+      {
+        "id": "corridor-lock:grafton:1",
+        "title": "Grafton / Edge · locked double doors",
+        "point": [
+          106,
+          -142.88972881355932
+        ],
+        "toward": [
+          130.51027118644066,
+          -142.88972881355932
+        ],
+        "marked": true,
+        "x": 107.8,
+        "z": -142.88972881355932,
+        "y": 1.35
+      },
+      {
+        "id": "corridor-lock:witby:1",
+        "title": "Witby · locked double doors",
+        "point": [
+          115.60000000000001,
+          -187
+        ],
+        "toward": [
+          115.60000000000001,
+          -157.79999999999995
+        ],
+        "marked": true,
+        "x": 115.60000000000001,
+        "z": -185.2,
+        "y": 1.35
+      },
+      {
+        "id": "corridor-lock:hale-0:1",
+        "title": "Hale / Daresbury / Huxley / Dunham · locked double doors",
+        "point": [
+          147.6,
+          -72.855
+        ],
+        "toward": [
+          154.773125,
+          -72.855
+        ],
+        "marked": false,
+        "x": 149.4,
+        "z": -72.855,
+        "y": 1.35
+      },
+      {
+        "id": "corridor-lock:hale-1:1",
+        "title": "Hale / Daresbury / Huxley / Dunham · locked double doors",
+        "point": [
+          139.6,
+          -95.405
+        ],
+        "toward": [
+          154.773125,
+          -95.405
+        ],
+        "marked": false,
+        "x": 141.4,
+        "z": -95.405,
+        "y": 1.35
+      }
+    ]
+  },
+  "errors": []
+}

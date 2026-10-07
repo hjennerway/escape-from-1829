@@ -84,3 +84,25 @@ const nextPage=bindDeveloperOptions({THREE,exterior,plan:async()=>plan,root,targ
 assert(!nextPage.enabled&&!nextPage.staircases&&!nextPage.mapRevealed&&!nextPage.fullMap,'A new page starts with developer options disabled');
 assert(elements.developerToggle.hidden&&elements.developerShortcuts.hidden,'A new page waits for its own minus press to reveal shortcuts');
 console.log(`PASS: gated/repeat-safe shortcuts, page-local discovery, eight internal connections, ${overlay.parts.length} exterior surfaces, actual flight positions, timeline and batch parity without model mutation.`);
+
+// Only Escape supplies a door-unlock callback; the bypass follows its own button.
+const escapeElements=Object.fromEntries(['developerToggle','developerShortcuts','developerMapToggle','developerDoorsToggle','developerStatus'].map(id=>[id,new Element()]));
+const escapeRoot={getElementById:id=>escapeElements[id]},escapeTarget=new Element(),doorChanges=[];
+const escapeDeveloper=bindDeveloperOptions({THREE,exterior,plan:async()=>plan,root:escapeRoot,target:escapeTarget,onDoorsChange:unlocked=>doorChanges.push(unlocked)});
+escapeElements.developerDoorsToggle.send('click');assert(!escapeDeveloper.doorsUnlocked,'Hidden controls cannot unlock doors before developer mode is enabled');
+escapeTarget.send('keydown',{code:'Minus'});
+assert(!escapeElements.developerDoorsToggle.hidden&&!escapeDeveloper.doorsUnlocked,'Minus reveals the Escape option without unlocking doors');
+escapeElements.developerDoorsToggle.send('click');assert(escapeDeveloper.doorsUnlocked);assert.equal(escapeElements.developerDoorsToggle.attributes['aria-pressed'],'true');
+escapeElements.developerDoorsToggle.send('click');assert(!escapeDeveloper.doorsUnlocked);
+escapeElements.developerDoorsToggle.send('click');escapeDeveloper.setDoorsUnlocked(false);assert(!escapeDeveloper.doorsUnlocked,'Restart can reset the bypass without hiding developer tools');
+escapeElements.developerDoorsToggle.send('click');escapeTarget.send('keydown',{code:'Minus'});assert(!escapeDeveloper.doorsUnlocked,'Disabling developer mode clears the bypass');
+assert.deepEqual(doorChanges,[true,false,true,false,true,false]);
+assert(!escapeTarget.send('keydown',{code:'KeyU'}).defaultPrevented,'U is inactive without developer mode');
+escapeTarget.send('keydown',{code:'Minus'});
+assert(escapeTarget.send('keydown',{code:'KeyU'}).defaultPrevented&&escapeDeveloper.doorsUnlocked,'U unlocks doors while developer mode is enabled');
+for(const extra of [{repeat:true},{ctrlKey:true},{altKey:true},{metaKey:true},{shiftKey:true}])escapeTarget.send('keydown',{code:'KeyU',...extra});
+assert(escapeDeveloper.doorsUnlocked,'Held and modified shortcuts cannot toggle doors');
+escapeTarget.send('keydown',{key:'u'});assert(!escapeDeveloper.doorsUnlocked,'U toggles the bypass off');
+const unsupported=bindDeveloperOptions({THREE,exterior,plan:async()=>plan,root:escapeRoot,target:new Element()});
+assert(escapeElements.developerDoorsToggle.hidden&&!unsupported.doorsUnlocked,'Other modes do not expose the Escape bypass');
+console.log('PASS: Escape-only door-unlock button, default locks, pressed state, toggle off, restart reset and developer-mode disable.');

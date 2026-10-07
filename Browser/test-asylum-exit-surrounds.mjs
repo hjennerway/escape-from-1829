@@ -53,7 +53,7 @@ for(const floor of floors){
    const direction=new THREE.Vector3(normal===0?exit.facing:0,0,normal===1?exit.facing:0);
    ray.set(new THREE.Vector3(p[0],y,p[1]),direction);ray.far=.6;
    const hit=ray.intersectObjects(scene.children,false)[0]?.object.name;
-   assert(entrance?['Asylum EntrancePaint','Asylum EntranceInset'].includes(hit):hit==='Asylum Panel',`${label} has a closed leaf up to the frame (${hit})`);leaves++;
+   assert(entrance?['Asylum EntrancePaint','Asylum EntranceInset'].includes(hit):['Asylum Panel','Asylum VictorianTimber','Asylum VictorianInset'].includes(hit),`${label} has a closed timber leaf up to the frame (${hit})`);leaves++;
   }
   doors++;
  }

@@ -13,7 +13,9 @@ export function addRedesmerePhotoDetails(THREE,{model,box,mesh,worldUV,white,bri
   mesh(worldUV(new THREE.BoxGeometry(.36,9.3,48),1.7),brick,wallX,4.65,-14,true).name='Redesmere outer brick elevation';
   box(band,frontX,4.36,-14,.2,.22,48);
   box(iron,frontX,9.25,-14,.2,.16,48);
-  box(brick,frontX,8.95,-14,.18,.2,48);
+  // The main range's raised brick trim stops at the lower entrance roof;
+  // its projecting edge otherwise emerges through that hip's end slope.
+  for(const [a,b] of [[-38,-17.86],[-5.84,10]])box(brick,frontX,8.95,(a+b)/2,.18,.2,b-a);
   function window(face,x,y,z,rotation=Math.PI/2,w=1.3,h=2.65){
     sash(face,x,y,z,rotation,w,h);
     // Splayed stone heads are wider at the top, as in the photograph.
@@ -48,7 +50,7 @@ export function addRedesmerePhotoDetails(THREE,{model,box,mesh,worldUV,white,bri
     for(const face of [[0,1,6],[1,2,6],[2,3,7],[2,7,6],[3,4,7],[4,5,7],[5,0,6],[5,6,7]])for(const i of [...face].reverse()){positions.push(...vertices[i]);uv.push(vertices[i][0]/3,vertices[i][2]/3);}
     const cap=new THREE.BufferGeometry();cap.setAttribute('position',new THREE.Float32BufferAttribute(positions,3));cap.setAttribute('uv',new THREE.Float32BufferAttribute(uv,2));cap.computeVertexNormals();
     const cover=mesh(cap,roof,0,0,0,true);cover.name='Redesmere bay slate roof';
-    for(const pz of [z-3.85,z+3.85])box(iron,95.55,4.5,pz,.085,9,.085);
+    for(const pz of [z-3.85,z+3.85])box(iron,95.55,4.5,pz,.085,9,.085,0,true);
   }
   bay(.1);bay(-26.1);
 
@@ -81,7 +83,7 @@ export function addRedesmerePhotoDetails(THREE,{model,box,mesh,worldUV,white,bri
   // Its front elevation is windowless; this east face follows redesmere.jpg.
   for(const z of [12.7,16.9])window('redesmere-low-room',99.86,2.05,z,Math.PI/2,1.25,2.55);
   door(99.89,14.8,Math.PI/2);
-  for(const z of [-37.8,-21.9,-5.55,9.85])box(iron,frontX+.18,4.55,z,.08,9.1,.08);
+  for(const z of [-37.8,-21.9,-5.55,9.85])box(iron,frontX+.18,4.55,z,.08,9.1,.08,0,true);
 
   // Brick stacks and restrained ridge ventilators, omitting modern aerials.
   for(const [z,x,w,h] of [[-3.9,90.2,2.8,2.25],[-20.5,90,1.2,2.6],[-23.8,92,1,3.5],[5.5,89.2,1.4,1.7]]){

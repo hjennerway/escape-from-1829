@@ -40,7 +40,7 @@ for(const [x,z,dx,dz] of [[30.85,15.5,1,0],[32.69,15.5,1,0],[30.59,15.71,Math.SQ
 }
 for(const x of [31.1,31.54,32])for(const y of [.2,1.65,2.42]){
  ray.set(new THREE.Vector3(x,y,14.9),new THREE.Vector3(0,0,1));ray.far=1;
- assert.equal(ray.intersectObjects(scene.children,false)[0]?.object.name,'Asylum Panel','The leaf remains visible and closes the frame up to its head');
+ assert(['Asylum Panel','Asylum VictorianTimber','Asylum VictorianInset'].includes(ray.intersectObjects(scene.children,false)[0]?.object.name),'The timber leaf remains visible and closes the frame up to its head');
 }
 const door=floor.exits.find(e=>e.id==='D10');
 for(const reverse of [false,true]){

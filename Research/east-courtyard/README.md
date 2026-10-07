@@ -56,3 +56,26 @@ Browser/test-escape-exterior.mjs checks the three facade depths, flat front,
 clearance. Browser/test-redesmere-garden.mjs also protects the adjoining
 garden wall, windows and open passage. Before/source/compiled aerial,
 photo-direction, detail and plan captures use Browser/artifacts/courtyard-bay-*.
+
+## Redesmere door gallows brackets (7 October 2026)
+
+The owner's [walking screenshot](gallows-previous-model.png) identifies the
+rear-return door canopy and the matching canopy on the perpendicular wall.
+The [photograph](gallows-reference.png) supplies the standard gallows form:
+an upright fixed to the wall, a horizontal projecting arm and a diagonal
+brace rising from the upright to the outer part of the arm. These images
+are architectural references; the owner's request defines the correction.
+
+Both canopies in `Browser/dist/rear-court-photo-detail.mjs` now have two
+square-section, dark painted timber brackets. The return uprights meet the
+actual wall at z=-33; the wing uprights meet x=84.2. Their arms support the
+undersides of the existing blue gabled covers. This supersedes the original
+round braces and hanging uprights at the outer canopy edges. The roof shapes,
+door leaves, surrounding glazing and stairs retain their dimensions. Timber
+sections and concealed joints are visual estimates from the small photograph.
+
+Before/after source and rebuilt compiled views are saved under
+`Browser/artifacts/redesmere-gallows/`. The exact comparison retains all
+1,446,222 primitives outside the two canopy areas. These are shared browser
+source changes for aerial, Explore and gameplay, with the local compiled
+aerial model rebuilt. Unity, Blender and packaged exports are not regenerated.

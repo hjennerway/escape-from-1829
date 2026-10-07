@@ -1,0 +1,30 @@
+{
+  "samples": [
+    {
+      "label": "unshifted",
+      "westX": 146.3,
+      "hitX": 153.17500019073486,
+      "hitZ": -59.5,
+      "name": "Batched masonry details",
+      "sourceHits": []
+    },
+    {
+      "label": "shifted",
+      "westX": 145.4,
+      "hitX": 153.17500019073486,
+      "hitZ": -59.5,
+      "name": "Batched masonry details",
+      "sourceHits": []
+    }
+  ],
+  "gateSamples": [
+    {
+      "label": "unshifted",
+      "openedGateClear": false
+    },
+    {
+      "label": "shifted",
+      "openedGateClear": false
+    }
+  ]
+}

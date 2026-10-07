@@ -1,0 +1,44 @@
+{
+  "views": {
+    "laundry": {
+      "position": [
+        92,
+        1.65,
+        23
+      ],
+      "target": [
+        106,
+        1.8,
+        45
+      ],
+      "fov": 74
+    },
+    "rear-court": {
+      "position": [
+        67,
+        1.65,
+        -4
+      ],
+      "target": [
+        73,
+        1.8,
+        -32
+      ],
+      "fov": 74
+    },
+    "arched-corridor": {
+      "position": [
+        122,
+        1.65,
+        47
+      ],
+      "target": [
+        148,
+        1.8,
+        10
+      ],
+      "fov": 74
+    }
+  },
+  "errors": []
+}

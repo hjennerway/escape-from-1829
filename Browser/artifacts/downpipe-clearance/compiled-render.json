@@ -1,0 +1,10 @@
+{
+  "metrics": {
+    "pharmacy": {
+      "mode": "compiled",
+      "calls": 732,
+      "triangles": 541293
+    }
+  },
+  "errors": []
+}

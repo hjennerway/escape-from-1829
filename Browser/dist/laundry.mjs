@@ -1,3 +1,4 @@
+import {markDownpipeInstances} from './downpipe-clearance.mjs';
 // laundry/img1.jpg supplies the elevations; img1-loc.png supplies the blue
 // block and green link footprints. Dimensions and concealed faces are estimates.
 import {mitreRightAngleWalls} from './wall-mitres.mjs';
@@ -26,8 +27,8 @@ export function createLaundry(THREE,{brick,roof,worldUV,material,adminCorridor})
     o.castShadow=true;o.receiveShadow=true;group.add(o);return o;
   }
   function solid(m,x,y,z,w,h,d,name){return mesh(worldUV(new THREE.BoxGeometry(w,h,d),1.7),m,x,y,z,name);}
-  function box(m,x,y,z,w,h,d,r=0){
-    if(!batches.has(m))batches.set(m,[]);batches.get(m).push({x:x-cx,y,z:z-cz,w,h,d,r});
+  function box(m,x,y,z,w,h,d,r=0,downpipe=false){
+    if(!batches.has(m))batches.set(m,[]);batches.get(m).push({x:x-cx,y,z:z-cz,w,h,d,r,downpipe});
   }
   solid(white,cx,b.eaves/2,cz,b.maxX-b.minX,b.eaves,b.maxZ-b.minZ,'Laundry white rendered walls');
   solid(plinth,cx,.15,cz,b.maxX-b.minX+.035,.3,b.maxZ-b.minZ+.035,'Laundry weathered base');
@@ -61,7 +62,7 @@ export function createLaundry(THREE,{brick,roof,worldUV,material,adminCorridor})
   for(const x of [b.minX-.13,b.maxX+.13]){
     box(trim,x,b.eaves-.11,cz,.22,.22,b.maxZ-b.minZ+.25);
     box(gutter,x,b.eaves+.015,cz,.19,.12,b.maxZ-b.minZ+.45);
-    for(const z of [b.minZ+.24,b.maxZ-.24])box(gutter,x,.15+(b.eaves-.25)/2,z,.08,b.eaves-.25,.08);
+    for(const z of [b.minZ+.24,b.maxZ-.24])box(gutter,x,.15+(b.eaves-.25)/2,z,.08,b.eaves-.25,.08,0,true);
   }
   for(const z of [b.minZ-.13,b.maxZ+.13]){
     box(trim,cx,b.eaves-.11,z,b.maxX-b.minX+.25,.22,.22);
@@ -96,10 +97,10 @@ export function createLaundry(THREE,{brick,roof,worldUV,material,adminCorridor})
   for(const z of [linkBack,linkFront])linkCoping.push(solid(coping,lx,b.linkHeight+.19,z,lw+.08,.09,.18,'Laundry corridor end coping'));
   mitreRightAngleWalls(THREE,linkCoping);
   for(const z of [linkFront-2.3,linkFront-6.1])window(b.linkMinX-.035,z,-Math.PI/2,1.02,.94,2.39,'Laundry corridor window');
-  box(gutter,b.linkMinX-.14,1.55,linkFront-.4,.07,3.1,.07);
+  box(gutter,b.linkMinX-.14,1.55,linkFront-.4,.07,3.1,.07,0,true);
   const dummy=new THREE.Object3D();
   for(const [m,items] of batches){
-    const batch=new THREE.InstancedMesh(new THREE.BoxGeometry(1,1,1),m,items.length);batch.name='Laundry glazing and trim';batch.castShadow=true;batch.receiveShadow=true;
+    const batch=new THREE.InstancedMesh(new THREE.BoxGeometry(1,1,1),m,items.length);markDownpipeInstances(batch,items);batch.name='Laundry glazing and trim';batch.castShadow=true;batch.receiveShadow=true;
     items.forEach((p,i)=>{dummy.position.set(p.x,p.y,p.z);dummy.scale.set(p.w,p.h,p.d);dummy.rotation.set(0,p.r,0);dummy.updateMatrix();batch.setMatrixAt(i,dummy.matrix);});group.add(batch);
   }
   group.userData.openings=openings;

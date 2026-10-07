@@ -57,8 +57,9 @@ export function addAdminCorridorDetail(THREE,{corridor,start,end,cz,depth=6.4,he
       corridor.userData.openings.push({x:mid+side*x,y:sill,z:cz+side*depth/2,width,spring,radius,side});
     }
     for(const x of [-(end-start)/2+1.1,0,(end-start)/2-1.1]){
-      box(iron,x,height/2,.19,.09,height-.1,.10,'Corridor downpipe',face);
-      for(const y of [.55,height-.75])box(iron,x,y,.17,.16,.075,.17,'Corridor pipe bracket',face);
+      const assembly=new THREE.Group();assembly.name='Corridor downpipe assembly';assembly.userData.downpipeAssembly=true;face.add(assembly);
+      box(iron,x,height/2,.19,.09,height-.1,.10,'Corridor downpipe',assembly);
+      for(const y of [.55,height-.75])box(iron,x,y,.17,.16,.075,.17,'Corridor pipe bracket',assembly);
     }
   }
 }

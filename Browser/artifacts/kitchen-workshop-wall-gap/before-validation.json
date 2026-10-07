@@ -1,0 +1,462 @@
+{
+  "validation": {
+    "renderer": "ANGLE (NVIDIA, NVIDIA GeForce RTX 3090 Ti (0x00002203) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+    "hits": [
+      {
+        "x": 144.7,
+        "y": 0.2,
+        "count": 1,
+        "names": [
+          "Aerial batch · Main kitchen · 274"
+        ],
+        "points": [
+          [
+            144.7,
+            0.2,
+            -26.600000381469727
+          ]
+        ]
+      },
+      {
+        "x": 144.7,
+        "y": 0.7,
+        "count": 1,
+        "names": [
+          "Aerial batch · Main kitchen · 273"
+        ],
+        "points": [
+          [
+            144.7,
+            0.7,
+            -26.600000381469727
+          ]
+        ]
+      },
+      {
+        "x": 144.7,
+        "y": 1.65,
+        "count": 1,
+        "names": [
+          "Aerial batch · Main kitchen · 273"
+        ],
+        "points": [
+          [
+            144.7,
+            1.65,
+            -26.600000381469727
+          ]
+        ]
+      },
+      {
+        "x": 144.7,
+        "y": 3.8,
+        "count": 1,
+        "names": [
+          "Aerial batch · Main kitchen · 273"
+        ],
+        "points": [
+          [
+            144.7,
+            3.8,
+            -26.600000381469727
+          ]
+        ]
+      },
+      {
+        "x": 144.7,
+        "y": 4.5,
+        "count": 1,
+        "names": [
+          "Aerial batch · Main kitchen · 273"
+        ],
+        "points": [
+          [
+            144.7,
+            4.5,
+            -26.600000381469727
+          ]
+        ]
+      },
+      {
+        "x": 144.9,
+        "y": 0.2,
+        "count": 1,
+        "names": [
+          "Aerial batch · Main kitchen · 274"
+        ],
+        "points": [
+          [
+            144.9,
+            0.2,
+            -26.600000381469727
+          ]
+        ]
+      },
+      {
+        "x": 144.9,
+        "y": 0.7,
+        "count": 1,
+        "names": [
+          "Aerial batch · Main kitchen · 273"
+        ],
+        "points": [
+          [
+            144.9,
+            0.7,
+            -26.600000381469727
+          ]
+        ]
+      },
+      {
+        "x": 144.9,
+        "y": 1.65,
+        "count": 1,
+        "names": [
+          "Aerial batch · Main kitchen · 273"
+        ],
+        "points": [
+          [
+            144.9,
+            1.65,
+            -26.600000381469727
+          ]
+        ]
+      },
+      {
+        "x": 144.9,
+        "y": 3.8,
+        "count": 1,
+        "names": [
+          "Aerial batch · Main kitchen · 273"
+        ],
+        "points": [
+          [
+            144.9,
+            3.8,
+            -26.600000381469727
+          ]
+        ]
+      },
+      {
+        "x": 144.9,
+        "y": 4.5,
+        "count": 1,
+        "names": [
+          "Aerial batch · Main kitchen · 273"
+        ],
+        "points": [
+          [
+            144.9,
+            4.5,
+            -26.600000381469727
+          ]
+        ]
+      },
+      {
+        "x": 145.06,
+        "y": 0.2,
+        "count": 1,
+        "names": [
+          "Aerial batch · Main kitchen · 274"
+        ],
+        "points": [
+          [
+            145.06,
+            0.2,
+            -26.600000381469727
+          ]
+        ]
+      },
+      {
+        "x": 145.06,
+        "y": 0.7,
+        "count": 1,
+        "names": [
+          "Aerial batch · Main kitchen · 273"
+        ],
+        "points": [
+          [
+            145.06,
+            0.7,
+            -26.600000381469727
+          ]
+        ]
+      },
+      {
+        "x": 145.06,
+        "y": 1.65,
+        "count": 1,
+        "names": [
+          "Aerial batch · Main kitchen · 273"
+        ],
+        "points": [
+          [
+            145.06,
+            1.65,
+            -26.600000381469727
+          ]
+        ]
+      },
+      {
+        "x": 145.06,
+        "y": 3.8,
+        "count": 1,
+        "names": [
+          "Aerial batch · Main kitchen · 273"
+        ],
+        "points": [
+          [
+            145.06,
+            3.8,
+            -26.600000381469727
+          ]
+        ]
+      },
+      {
+        "x": 145.06,
+        "y": 4.5,
+        "count": 1,
+        "names": [
+          "Aerial batch · Main kitchen · 273"
+        ],
+        "points": [
+          [
+            145.06,
+            4.5,
+            -26.600000381469727
+          ]
+        ]
+      },
+      {
+        "x": 145.1,
+        "y": 0.2,
+        "count": 0,
+        "names": [],
+        "points": []
+      },
+      {
+        "x": 145.1,
+        "y": 0.7,
+        "count": 0,
+        "names": [],
+        "points": []
+      },
+      {
+        "x": 145.1,
+        "y": 1.65,
+        "count": 0,
+        "names": [],
+        "points": []
+      },
+      {
+        "x": 145.1,
+        "y": 3.8,
+        "count": 0,
+        "names": [],
+        "points": []
+      },
+      {
+        "x": 145.1,
+        "y": 4.5,
+        "count": 0,
+        "names": [],
+        "points": []
+      },
+      {
+        "x": 145.2,
+        "y": 0.2,
+        "count": 0,
+        "names": [],
+        "points": []
+      },
+      {
+        "x": 145.2,
+        "y": 0.7,
+        "count": 0,
+        "names": [],
+        "points": []
+      },
+      {
+        "x": 145.2,
+        "y": 1.65,
+        "count": 0,
+        "names": [],
+        "points": []
+      },
+      {
+        "x": 145.2,
+        "y": 3.8,
+        "count": 0,
+        "names": [],
+        "points": []
+      },
+      {
+        "x": 145.2,
+        "y": 4.5,
+        "count": 0,
+        "names": [],
+        "points": []
+      },
+      {
+        "x": 145.3,
+        "y": 0.2,
+        "count": 0,
+        "names": [],
+        "points": []
+      },
+      {
+        "x": 145.3,
+        "y": 0.7,
+        "count": 0,
+        "names": [],
+        "points": []
+      },
+      {
+        "x": 145.3,
+        "y": 1.65,
+        "count": 0,
+        "names": [],
+        "points": []
+      },
+      {
+        "x": 145.3,
+        "y": 3.8,
+        "count": 0,
+        "names": [],
+        "points": []
+      },
+      {
+        "x": 145.3,
+        "y": 4.5,
+        "count": 0,
+        "names": [],
+        "points": []
+      },
+      {
+        "x": 145.39,
+        "y": 0.2,
+        "count": 0,
+        "names": [],
+        "points": []
+      },
+      {
+        "x": 145.39,
+        "y": 0.7,
+        "count": 0,
+        "names": [],
+        "points": []
+      },
+      {
+        "x": 145.39,
+        "y": 1.65,
+        "count": 0,
+        "names": [],
+        "points": []
+      },
+      {
+        "x": 145.39,
+        "y": 3.8,
+        "count": 0,
+        "names": [],
+        "points": []
+      },
+      {
+        "x": 145.39,
+        "y": 4.5,
+        "count": 0,
+        "names": [],
+        "points": []
+      },
+      {
+        "x": 145.5,
+        "y": 0.2,
+        "count": 0,
+        "names": [],
+        "points": []
+      },
+      {
+        "x": 145.5,
+        "y": 0.7,
+        "count": 0,
+        "names": [],
+        "points": []
+      },
+      {
+        "x": 145.5,
+        "y": 1.65,
+        "count": 0,
+        "names": [],
+        "points": []
+      },
+      {
+        "x": 145.5,
+        "y": 3.8,
+        "count": 0,
+        "names": [],
+        "points": []
+      },
+      {
+        "x": 145.5,
+        "y": 4.5,
+        "count": 0,
+        "names": [],
+        "points": []
+      }
+    ],
+    "parts": [
+      {
+        "name": "Main kitchen walls outside accessible gallery",
+        "min": [
+          120.00000076293946,
+          0.43999993324279796,
+          -26.600000381469727
+        ],
+        "max": [
+          145.0799997329712,
+          4.800000066757202,
+          6.600000381469727
+        ]
+      },
+      {
+        "name": "Main kitchen walls outside accessible gallery",
+        "min": [
+          145.0799997329712,
+          0.43999993324279796,
+          -26.600000381469727
+        ],
+        "max": [
+          152.59749965667726,
+          4.800000066757202,
+          6.600000381469727
+        ]
+      },
+      {
+        "name": "Main kitchen plinth outside accessible gallery",
+        "min": [
+          120.00000076293946,
+          -0.18000000596046448,
+          -26.600000381469727
+        ],
+        "max": [
+          145.0799997329712,
+          0.4399999988079071,
+          6.600000381469727
+        ]
+      },
+      {
+        "name": "Main kitchen plinth outside accessible gallery",
+        "min": [
+          145.0799997329712,
+          -0.18000000596046448,
+          -26.600000381469727
+        ],
+        "max": [
+          152.59749965667726,
+          0.4399999988079071,
+          6.600000381469727
+        ]
+      }
+    ]
+  },
+  "errors": []
+}

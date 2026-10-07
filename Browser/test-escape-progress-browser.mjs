@@ -7,8 +7,16 @@ const destination=new URL('./artifacts/escape-chain/',import.meta.url);await mkd
 const {server,base}=await startTestServer();let browser;const errors=[],runs=[],screens=[];
 const instrument=`
 let walkSamples=0;
-window.escapeTest={get ready(){return ready},get state(){return state},get run(){return escapeProgress.run},get world(){return escapeWorld},get journal(){return notebook},get time(){return elapsed},get floors(){return floors},get guard(){return enemies.find(e=>e.type===1)},get renderer(){return renderer},player,keys,start,update,caught,resumeCapture,openNotebook,closeNotebook,get arrival(){return arrivalCutscene},get recovery(){return recoveryRemaining},
+window.escapeTest={get ready(){return ready&&(interiorLoader?.complete??true)},get state(){return state},get run(){return escapeProgress.run},get world(){return escapeWorld},get journal(){return notebook},get time(){return elapsed},get floors(){return floors},get guard(){return enemies.find(e=>e.type===1)},get renderer(){return renderer},player,keys,start,update,caught,resumeCapture,openNotebook,closeNotebook,get arrival(){return arrivalCutscene},get recovery(){return recoveryRemaining},
 hold(){enemyReleaseAt=Infinity;state='play';keys.clear()},get walkSamples(){return walkSamples},
+hintTiming(){
+ const read=()=>({title:document.getElementById('objectiveTitle').textContent,detail:document.getElementById('objectiveDetail').textContent,hidden:document.getElementById('objectiveDetail').hidden});
+ const initial=read();update(0,59);const beforeDeadline=read();
+ pause();update(0,120);const paused=read();this.hold();document.getElementById('result').hidden=true;
+ openNotebook();update(0,120);const notebook=read();closeNotebook(false);this.hold();uiPlaying(true);
+ artViewing=true;update(0,120);const artwork=read();artViewing=false;
+ update(0,1);const delayed=read();return {initial,beforeDeadline,paused,notebook,artwork,delayed};
+},
 outdoorCollision(){this.hold();update(.001);const guard=this.guard;Object.assign(guard,{x:player.x+.4,z:player.z,y:player.y});enemyReleaseAt=0;update(.001);return state},
 outdoorJumpIsolation(){const saved={...player};Object.assign(player,{x:-10,z:60,y:0});outsideWalker.resetJump();const patrol={x:-15,z:60,y:0};outsideWalker.jump(player);let peak=0;for(let i=0;i<120;i++){outsideWalker.update(player,0,0,1/120);outsideWalker.update(patrol,0,0,1/120,{jump:false});peak=Math.max(peak,player.y)}const result={peak,patrolY:patrol.y,playerY:player.y};outsideWalker.resetJump();Object.assign(player,saved);return result},
 visibleMast(){const g=exterior.model.getObjectByName('Escape radio mast landmark');let count=0;g.traverseVisible(o=>{if(o.isMesh)count++});return {count,position:g.position.toArray(),support:outsideWalker.heightAt(-69,-89,0)}},
@@ -26,7 +34,7 @@ async walk(target){
  }
  if(Math.hypot(endpoint.x-route.at(-1).x,endpoint.z-route.at(-1).z)>.001)route.push(endpoint);
  let samples=0;
- for(const point of route){for(let step=0;step<500&&Math.hypot(player.x-point.x,player.z-point.z)>.045;step++){
+ for(const point of route){if(interiorLoader&&!interiorLoader.isReady(point))await interiorLoader.prepare(point);for(let step=0;step<500&&Math.hypot(player.x-point.x,player.z-point.z)>.045;step++){
   const clue=escapeWorld.near(player);if(clue?.gate&&escapeProgress.run.staffKey){this.use()}
   const dx=point.x-player.x,dz=point.z-player.z,d=Math.hypot(dx,dz),distance=Math.min(.04,d);
   const before=[player.x,player.z];indoorJump.update(player,dx/d*distance,dz/d*distance,.013);samples++;if(player.floor!==layout.id)showFloor();
@@ -36,15 +44,15 @@ async walk(target){
  walkSamples+=samples;showFloor();observeNotebook();camera.position.set(player.x,player.y+1.65,player.z);camera.rotation.set(0,0,0);return samples;
 },
 async clue(id){const node=escapeWorld.nodes.find(n=>n.id===id);if(node.roomId!=='Reception')await this.walk({...escapeWorld.anchor(node.floor,node.roomId),floor:node.floor});await this.walk({...node,floor:node.floor});this.use();return node},
-async grounds(){const target={x:-74,z:-89},route=outdoorPath(outsideWalker,player,target);if(!route.length)throw Error('No outside route');let samples=0;
- for(const point of route){for(let i=0;i<200&&Math.hypot(player.x-point.x,player.z-point.z)>.06;i++){const dx=point.x-player.x,dz=point.z-player.z,d=Math.hypot(dx,dz),step=Math.min(.04,d);outsideWalker.update(player,dx/d*step,dz/d*step,.013);samples++;}
+async grounds(){const gate=escapeGrounds.nodes.find(n=>n.id==='pedestrian');const approach=outdoorPath(outsideWalker,player,{x:gate.x,z:gate.z+1});for(const p of approach){for(let i=0;i<200&&Math.hypot(player.x-p.x,player.z-p.z)>.06;i++){const dx=p.x-player.x,dz=p.z-player.z,d=Math.hypot(dx,dz),step=Math.min(.04,d);outsideWalker.update(player,dx/d*step,dz/d*step,.013);}}if(!escapeProgress.run.pedestrianOpen)this.use();const target={x:-74,z:-89},route=outdoorPath(outsideWalker,player,target);if(!route.length)throw Error('No outside route');let samples=0;
+ for(const point of route){for(let i=0;i<200&&Math.hypot(player.x-point.x,player.z-point.z)>.06;i++){const dx=point.x-player.x,dz=point.z-player.z,d=Math.hypot(dx,dz),step=Math.min(.04,d);const previous={...player};outsideWalker.update(player,dx/d*step,dz/d*step,.013);escapeProgress.observeBoundary(player,previous);samples++;}
   if(Math.hypot(player.x-point.x,player.z-point.z)>.07)throw Error('Grounds blocked '+JSON.stringify({point,player}));escapeProgress.observeBoundary(player);}
  camera.position.set(player.x,player.y+1.65,player.z);yaw=-Math.PI/2;camera.rotation.set(0,yaw,0);observeNotebook();return samples;},
 snapshot(){return {time:elapsed,player:{...player},captures:escapeProgress.run.captures,notes:notebook.entries.map(e=>e.id),fog:[...notebook.fog].map(([key,f])=>[key,f.cells.reduce((a,b)=>a+b,0)]),guard:[this.guard.x,this.guard.z]}},
 get airborne(){return indoorJump.airborne},jump(){indoorJump.start()},
 poseGate(){const g=escapeWorld.gates[0];Object.assign(player,{x:g.x-g.dx*.5,z:g.z-g.dz*.5,y:g.y,floor:1,stair:null,outside:false});showFloor();yaw=Math.atan2(-g.dx,-g.dz);pitch=0;camera.position.set(player.x,player.y+1.65,player.z);camera.rotation.set(pitch,yaw,0);return g},
 lookAtNode(id){const n=escapeWorld.nodes.find(n=>n.id===id);this.hold();Object.assign(player,{x:n.x,z:n.z,y:floors[n.floor].elevation,floor:n.floor,stair:null,outside:false});showFloor();yaw=Math.atan2(-(n.mount.x-player.x),-(n.mount.z-player.z));pitch=Math.atan2(n.mount.y-1.65,Math.hypot(n.mount.x-player.x,n.mount.z-player.z));camera.position.set(player.x,player.y+1.65,player.z);camera.rotation.set(pitch,yaw,0);document.getElementById('result').hidden=true;update(.001);},
-setTorch(enabled){torch.visible=enabled},clearRecovery(){recoveryRemaining=0},get exterior(){return exterior},get outsideWalker(){return outsideWalker}};`;
+setTorch(enabled){torch.visible=enabled},clearRecovery(){recoveryRemaining=0},get exterior(){return exterior},get outsideWalker(){return outsideWalker},get groundsWorld(){return escapeGrounds}};`;
 async function shot(page,name){await page.screenshot({path:fileURLToPath(new URL(name+'.png',destination))});screens.push(name);}
 try{
  browser=await launchHardwareBrowser({executablePath:process.env.MODEL_CHROME_PATH??'C:/Program Files/Google/Chrome/Application/chrome.exe'});
@@ -71,8 +79,17 @@ try{
  await page.evaluate(()=>escapeTest.lookAtNode('staff-key'));await shot(page,'staff-key-rack');
  assert.equal(await page.locator('#exitName').innerText(),'STAFF STAIR KEY');assert.equal(await page.locator('#interact b').innerText(),'PRESS E TO TAKE');
  await page.evaluate(()=>escapeTest.setTorch(false));await shot(page,'staff-key-glow');await page.evaluate(()=>escapeTest.setTorch(true));
+ await page.evaluate(()=>escapeTest.use());await shot(page,'staff-stairs-objective');
+ const hints=await page.evaluate(()=>escapeTest.hintTiming());
+ assert.equal(hints.initial.title,'Use the key you found to access the staff stairs');
+ for(const stage of ['initial','beforeDeadline','paused','notebook','artwork'])assert(hints[stage].hidden&&!hints[stage].detail,stage+' does not reveal the detailed hint');
+ assert.equal(hints.delayed.detail,'Find the porter’s records and brass outside-door key.');assert(!hints.delayed.hidden);
+ assert(await page.locator('#objectiveDetail').isVisible());
+ await shot(page,'staff-stairs-delayed-hint');
  await page.evaluate(()=>escapeTest.lookAtNode('plan'));await shot(page,'service-record-with-key');
  assert.equal(await page.locator('#interact b').innerText(),'PRESS E TO TAKE BRASS KEY');
+ assert(await page.locator('#objectiveDetail').isHidden(),'Reaching a new objective hides the previous hint');
+ await page.evaluate(()=>escapeTest.update(0,60));
  assert((await page.locator('#objectiveDetail').innerText()).includes('room '+await page.evaluate(()=>escapeTest.run.office==='R41'?'201':'209')));
  const fittings=await page.evaluate(()=>escapeTest.world.nodes.map(n=>({id:n.id,kind:n.mount.kind,support:n.mount.supportId,position:n.group.position.toArray(),glow:n.halo.material.transparent})));
  assert(fittings.every(n=>n.glow));assert.equal(fittings.find(n=>n.id==='reclaim').kind,'desk');
@@ -99,7 +116,7 @@ try{
  // Leave through the actual selected door and walk past the old endpoint to the mast.
  await page.evaluate(async()=>{const t=escapeTest;t.hold();const e=t.floors[0].exits.find(e=>e.id===t.run.exitId);await t.walk({...e.inside,floor:0});t.use()});
  assert(await page.evaluate(()=>escapeTest.player.outside));assert.equal(await page.evaluate(()=>escapeTest.state),'play');
- assert.equal(await page.locator('#objectiveTitle').innerText(),'Reach the radio mast');
+ assert.equal(await page.locator('#objectiveTitle').innerText(),'Find a way through the grounds boundary');
  const jump=await page.evaluate(()=>escapeTest.outdoorJumpIsolation());assert(jump.peak>1.6&&jump.playerY===0&&jump.patrolY===0,'Guard walking cannot consume the player’s jump arc');
  const grounds=await page.evaluate(async()=>{escapeTest.hold();const samples=await escapeTest.grounds();return {samples,boundary:escapeTest.run.boundary,pos:{...escapeTest.player}}});assert(grounds.boundary);await shot(page,'mast-arrival');
  await page.evaluate(()=>escapeTest.use());assert.equal(await page.evaluate(()=>escapeTest.state),'cutscene');await shot(page,'ending');
@@ -132,6 +149,12 @@ try{
  await mobile.locator('#touchMap').tap();assert.equal(await mobile.evaluate(()=>escapeTest.state),'notebook');const touchFrozen=await mobile.evaluate(()=>escapeTest.snapshot());await mobile.evaluate(()=>escapeTest.update(5));assert.deepEqual(await mobile.evaluate(()=>escapeTest.snapshot()),touchFrozen);await shot(mobile,'touch-notice-notebook');await mobile.locator('#closeNotebook').tap();assert(await mobile.locator('#touch').isVisible());
  await mobile.evaluate(()=>escapeTest.lookAtNode('staff-key'));await shot(mobile,'touch-staff-key-rack');
  assert.equal(await mobile.locator('#exitName').innerText(),'STAFF STAIR KEY');
- assert.deepEqual(errors,[]);await writeFile(new URL('validation.json',destination),JSON.stringify({runs,fittings,screens,errors},null,2));
- console.log('PASS: real hardware scene, both physically walked indoor branches, gated doors and jump barriers, held-use pursuit, capture relocation/confiscation/recovery, preserved notebook/fog/time, grounds-to-mast traversal and ending, desktop/mobile, third-capture loss and clean retry.');
+ await mobile.evaluate(()=>escapeTest.use());await shot(mobile,'touch-staff-stairs-objective');
+ const mobileHints=await mobile.evaluate(()=>escapeTest.hintTiming());
+ assert(mobileHints.beforeDeadline.hidden&&mobileHints.notebook.hidden);
+ assert.equal(mobileHints.delayed.detail,'Find the porter’s records and brass outside-door key.');
+ assert(await mobile.locator('#objectiveDetail').isVisible());
+ await shot(mobile,'touch-staff-stairs-delayed-hint');
+ assert.deepEqual(errors,[]);await writeFile(new URL('validation.json',destination),JSON.stringify({runs,fittings,hints,mobileHints,screens,errors},null,2));
+ console.log('PASS: real hardware scene, both physically walked indoor branches, gated doors and jump barriers, held-use pursuit, capture relocation/confiscation/recovery, preserved notebook/fog/time, grounds-to-mast traversal and ending, desktop/mobile delayed hints with pause/reading exclusions, third-capture loss and clean retry.');
 }finally{await browser?.close();server.kill();}

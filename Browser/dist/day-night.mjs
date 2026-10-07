@@ -18,7 +18,7 @@ function glowTexture(THREE){
 // Eight stable light slots illuminate nearby masonry without hundreds of lights
 // in every building shader. Instanced soft pools keep the whole aerial road
 // network readable, with emissive heads and small halos at every visible lamp.
-export function createDayNight(THREE,exterior,renderer,{walking=false,twilight=false,random=Math.random,reducedMotion}={}){
+export function createDayNight(THREE,exterior,renderer,{walking=false,twilight=false,random=Math.random,reducedMotion,sunOffsets}={}){
  const {scene,camera,model}=exterior,lamps=[],diffusers=new Set();
  const windows=createWindowLights(THREE,model,{random});
  const treeWind=createFrontLawnWind(THREE,exterior,{reducedMotion});
@@ -33,11 +33,14 @@ export function createDayNight(THREE,exterior,renderer,{walking=false,twilight=f
   for(const material of [owner.material].flat())if(material?.userData.streetLampDiffuser)diffusers.add(material);
  });
  const sun=scene.children.find(o=>o.isDirectionalLight),sky=scene.children.find(o=>o.isHemisphereLight);
+ if(sunOffsets?.day){sun.position.copy(sun.target.position).add(new THREE.Vector3(...sunOffsets.day));sun.updateMatrix();sun.updateMatrixWorld(true);}
  const day={background:scene.background.clone(),fog:scene.fog.color.clone(),density:scene.fog.density,exposure:renderer.toneMappingExposure,
   sunColor:sun.color.clone(),sunPosition:sun.position.clone(),sunIntensity:sun.intensity,skyColor:sky.color.clone(),groundColor:sky.groundColor.clone(),skyIntensity:sky.intensity};
  const effects=new THREE.Group();effects.name='Night street-lamp glow';effects.visible=false;scene.add(effects);
  const texture=glowTexture(THREE);
- const poolMaterial=new THREE.MeshBasicMaterial({color:0xffbc69,map:texture,transparent:true,opacity:.42,depthWrite:false,blending:THREE.AdditiveBlending,toneMapped:false,polygonOffset:true,polygonOffsetFactor:-10,polygonOffsetUnits:-20});
+ // Pools already sit above the paved surfaces. Slope-scaled depth bias pulls
+ // these horizontal planes through distant walls at walking camera angles.
+ const poolMaterial=new THREE.MeshBasicMaterial({color:0xffbc69,map:texture,transparent:true,opacity:.42,depthWrite:false,blending:THREE.AdditiveBlending,toneMapped:false});
  const geometry=new THREE.PlaneGeometry(23,23);geometry.rotateX(-Math.PI/2);
  const pools=new THREE.InstancedMesh(geometry,poolMaterial,lamps.length);pools.name='Warm street-lamp pools';pools.frustumCulled=false;pools.renderOrder=5;effects.add(pools);
  const haloGeometry=new THREE.BufferGeometry();haloGeometry.setAttribute('position',new THREE.Float32BufferAttribute(new Float32Array(lamps.length*3),3));
@@ -83,7 +86,11 @@ export function createDayNight(THREE,exterior,renderer,{walking=false,twilight=f
   scene.background.copy(lit?new THREE.Color(dusk?0x667872:0x070e1b):day.background);
   scene.fog.color.copy(lit?new THREE.Color(dusk?0x7b877d:0x111d30):day.fog);scene.fog.density=fogDensity();
   sun.color.copy(lit?new THREE.Color(dusk?0xffcc8d:0x8ba9e5):day.sunColor);sun.intensity=lit?(dusk?1.65:.55):day.sunIntensity;
-  if(dusk)sun.position.copy(sun.target.position).add(new THREE.Vector3(-100,85,-260));else sun.position.copy(day.sunPosition);
+  if(sunOffsets?.[mode])sun.position.copy(sun.target.position).add(new THREE.Vector3(...sunOffsets[mode]));
+  else if(dusk)sun.position.copy(sun.target.position).add(new THREE.Vector3(-100,85,-260));else sun.position.copy(day.sunPosition);
+  // Source/compiled estates cache their transforms. Commit the new light
+  // position too, so the real illumination and shadow camera follow the sky.
+  sun.updateMatrix();sun.updateMatrixWorld(true);
   atmosphere.setSunDirection(sun.position.clone().sub(sun.target.position));
   sky.color.copy(lit?new THREE.Color(dusk?0x96bbbe:0xa4b4cf):day.skyColor);sky.groundColor.copy(lit?new THREE.Color(dusk?0x444c36:0x364152):day.groundColor);sky.intensity=lit?(dusk?1.3:.7):day.skyIntensity;
   renderer.toneMappingExposure=lit?(dusk?1.15:1.05):day.exposure;

@@ -1,0 +1,404 @@
+[
+  {
+    "width": 1100,
+    "height": 750,
+    "startMs": 199.2999999988824,
+    "retryMs": 1172.8999999985099,
+    "transitions": [
+      {
+        "outside": true,
+        "torchOn": true,
+        "frames": [
+          {
+            "ms": 20.300000000745058,
+            "state": "play",
+            "outside": true,
+            "programs": 132
+          },
+          {
+            "ms": 13.5,
+            "state": "play",
+            "outside": true,
+            "programs": 132
+          },
+          {
+            "ms": 14.599999999627471,
+            "state": "play",
+            "outside": true,
+            "programs": 132
+          }
+        ]
+      },
+      {
+        "outside": false,
+        "torchOn": true,
+        "frames": [
+          {
+            "ms": 152.2000000011176,
+            "state": "play",
+            "outside": false,
+            "programs": 132
+          },
+          {
+            "ms": 4.200000001117587,
+            "state": "play",
+            "outside": false,
+            "programs": 132
+          },
+          {
+            "ms": 4.5,
+            "state": "play",
+            "outside": false,
+            "programs": 132
+          }
+        ]
+      },
+      {
+        "outside": true,
+        "torchOn": true,
+        "frames": [
+          {
+            "ms": 17.40000000037253,
+            "state": "play",
+            "outside": true,
+            "programs": 132
+          },
+          {
+            "ms": 13,
+            "state": "play",
+            "outside": true,
+            "programs": 132
+          },
+          {
+            "ms": 19.399999998509884,
+            "state": "play",
+            "outside": true,
+            "programs": 132
+          }
+        ]
+      },
+      {
+        "outside": false,
+        "torchOn": true,
+        "frames": [
+          {
+            "ms": 4.300000000745058,
+            "state": "play",
+            "outside": false,
+            "programs": 132
+          },
+          {
+            "ms": 4.300000000745058,
+            "state": "play",
+            "outside": false,
+            "programs": 132
+          },
+          {
+            "ms": 4.199999999254942,
+            "state": "play",
+            "outside": false,
+            "programs": 132
+          }
+        ]
+      },
+      {
+        "outside": true,
+        "torchOn": false,
+        "frames": [
+          {
+            "ms": 13.900000000372529,
+            "state": "play",
+            "outside": true,
+            "programs": 132
+          },
+          {
+            "ms": 12.800000000745058,
+            "state": "play",
+            "outside": true,
+            "programs": 132
+          },
+          {
+            "ms": 12.5,
+            "state": "play",
+            "outside": true,
+            "programs": 132
+          }
+        ]
+      },
+      {
+        "outside": false,
+        "torchOn": false,
+        "frames": [
+          {
+            "ms": 4.799999998882413,
+            "state": "play",
+            "outside": false,
+            "programs": 132
+          },
+          {
+            "ms": 4.799999998882413,
+            "state": "play",
+            "outside": false,
+            "programs": 132
+          },
+          {
+            "ms": 5.099999999627471,
+            "state": "play",
+            "outside": false,
+            "programs": 132
+          }
+        ]
+      },
+      {
+        "outside": true,
+        "torchOn": false,
+        "frames": [
+          {
+            "ms": 14.700000001117587,
+            "state": "play",
+            "outside": true,
+            "programs": 132
+          },
+          {
+            "ms": 12.800000000745058,
+            "state": "play",
+            "outside": true,
+            "programs": 132
+          },
+          {
+            "ms": 12.400000000372529,
+            "state": "play",
+            "outside": true,
+            "programs": 132
+          }
+        ]
+      },
+      {
+        "outside": false,
+        "torchOn": false,
+        "frames": [
+          {
+            "ms": 4.400000000372529,
+            "state": "play",
+            "outside": false,
+            "programs": 132
+          },
+          {
+            "ms": 4.199999999254942,
+            "state": "play",
+            "outside": false,
+            "programs": 132
+          },
+          {
+            "ms": 4,
+            "state": "play",
+            "outside": false,
+            "programs": 132
+          }
+        ]
+      }
+    ],
+    "errors": []
+  },
+  {
+    "width": 390,
+    "height": 844,
+    "startMs": 98.79999999888241,
+    "retryMs": 1149.0999999996275,
+    "transitions": [
+      {
+        "outside": true,
+        "torchOn": true,
+        "frames": [
+          {
+            "ms": 19,
+            "state": "play",
+            "outside": true,
+            "programs": 132
+          },
+          {
+            "ms": 12.599999999627471,
+            "state": "play",
+            "outside": true,
+            "programs": 132
+          },
+          {
+            "ms": 10,
+            "state": "play",
+            "outside": true,
+            "programs": 132
+          }
+        ]
+      },
+      {
+        "outside": false,
+        "torchOn": true,
+        "frames": [
+          {
+            "ms": 11.399999998509884,
+            "state": "play",
+            "outside": false,
+            "programs": 132
+          },
+          {
+            "ms": 3.300000000745058,
+            "state": "play",
+            "outside": false,
+            "programs": 132
+          },
+          {
+            "ms": 3.5,
+            "state": "play",
+            "outside": false,
+            "programs": 132
+          }
+        ]
+      },
+      {
+        "outside": true,
+        "torchOn": true,
+        "frames": [
+          {
+            "ms": 11.099999999627471,
+            "state": "play",
+            "outside": true,
+            "programs": 132
+          },
+          {
+            "ms": 10.700000001117587,
+            "state": "play",
+            "outside": true,
+            "programs": 132
+          },
+          {
+            "ms": 12.199999999254942,
+            "state": "play",
+            "outside": true,
+            "programs": 132
+          }
+        ]
+      },
+      {
+        "outside": false,
+        "torchOn": true,
+        "frames": [
+          {
+            "ms": 3.5,
+            "state": "play",
+            "outside": false,
+            "programs": 132
+          },
+          {
+            "ms": 3.5,
+            "state": "play",
+            "outside": false,
+            "programs": 132
+          },
+          {
+            "ms": 3.5,
+            "state": "play",
+            "outside": false,
+            "programs": 132
+          }
+        ]
+      },
+      {
+        "outside": true,
+        "torchOn": false,
+        "frames": [
+          {
+            "ms": 12.099999999627471,
+            "state": "play",
+            "outside": true,
+            "programs": 132
+          },
+          {
+            "ms": 10.400000000372529,
+            "state": "play",
+            "outside": true,
+            "programs": 132
+          },
+          {
+            "ms": 11,
+            "state": "play",
+            "outside": true,
+            "programs": 132
+          }
+        ]
+      },
+      {
+        "outside": false,
+        "torchOn": false,
+        "frames": [
+          {
+            "ms": 4.100000001490116,
+            "state": "play",
+            "outside": false,
+            "programs": 132
+          },
+          {
+            "ms": 4.800000000745058,
+            "state": "play",
+            "outside": false,
+            "programs": 132
+          },
+          {
+            "ms": 3.600000001490116,
+            "state": "play",
+            "outside": false,
+            "programs": 132
+          }
+        ]
+      },
+      {
+        "outside": true,
+        "torchOn": false,
+        "frames": [
+          {
+            "ms": 11.300000000745058,
+            "state": "play",
+            "outside": true,
+            "programs": 132
+          },
+          {
+            "ms": 10.400000000372529,
+            "state": "play",
+            "outside": true,
+            "programs": 132
+          },
+          {
+            "ms": 10.699999999254942,
+            "state": "play",
+            "outside": true,
+            "programs": 132
+          }
+        ]
+      },
+      {
+        "outside": false,
+        "torchOn": false,
+        "frames": [
+          {
+            "ms": 4.5,
+            "state": "play",
+            "outside": false,
+            "programs": 132
+          },
+          {
+            "ms": 3.900000000372529,
+            "state": "play",
+            "outside": false,
+            "programs": 132
+          },
+          {
+            "ms": 3.099999999627471,
+            "state": "play",
+            "outside": false,
+            "programs": 132
+          }
+        ]
+      }
+    ],
+    "errors": []
+  }
+]

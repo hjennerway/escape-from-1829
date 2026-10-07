@@ -1,0 +1,413 @@
+{
+  "results": {
+    "initial": [
+      {
+        "floor": 0,
+        "id": "F1",
+        "visible": true,
+        "locked": true
+      },
+      {
+        "floor": 0,
+        "id": "F3",
+        "visible": true,
+        "locked": true
+      },
+      {
+        "floor": 0,
+        "id": "F6",
+        "visible": true,
+        "locked": true
+      },
+      {
+        "floor": 0,
+        "id": "D1",
+        "visible": true,
+        "locked": true
+      },
+      {
+        "floor": 0,
+        "id": "D2",
+        "visible": true,
+        "locked": true
+      },
+      {
+        "floor": 0,
+        "id": "D3",
+        "visible": true,
+        "locked": true
+      },
+      {
+        "floor": 0,
+        "id": "D4",
+        "visible": true,
+        "locked": true
+      },
+      {
+        "floor": 0,
+        "id": "D5",
+        "visible": true,
+        "locked": true
+      },
+      {
+        "floor": 0,
+        "id": "D6",
+        "visible": true,
+        "locked": true
+      },
+      {
+        "floor": 0,
+        "id": "D7",
+        "visible": true,
+        "locked": true
+      },
+      {
+        "floor": 0,
+        "id": "D8",
+        "visible": true,
+        "locked": true
+      },
+      {
+        "floor": 0,
+        "id": "D9",
+        "visible": true,
+        "locked": true
+      },
+      {
+        "floor": 0,
+        "id": "D10",
+        "visible": true,
+        "locked": true
+      },
+      {
+        "floor": 1,
+        "id": "F1",
+        "visible": true,
+        "locked": true
+      },
+      {
+        "floor": 1,
+        "id": "F2",
+        "visible": true,
+        "locked": true
+      },
+      {
+        "floor": 1,
+        "id": "F3",
+        "visible": true,
+        "locked": true
+      },
+      {
+        "floor": 1,
+        "id": "F4",
+        "visible": true,
+        "locked": true
+      },
+      {
+        "floor": 1,
+        "id": "F5",
+        "visible": true,
+        "locked": true
+      },
+      {
+        "floor": 1,
+        "id": "F6",
+        "visible": true,
+        "locked": true
+      },
+      {
+        "floor": 1,
+        "id": "F7",
+        "visible": true,
+        "locked": true
+      },
+      {
+        "floor": 2,
+        "id": "D11",
+        "visible": true,
+        "locked": true
+      },
+      {
+        "floor": 2,
+        "id": "D12",
+        "visible": true,
+        "locked": true
+      },
+      {
+        "floor": 2,
+        "id": "D13",
+        "visible": true,
+        "locked": true
+      },
+      {
+        "floor": 3,
+        "id": "F4",
+        "visible": true,
+        "locked": true
+      }
+    ],
+    "attempt": {
+      "allowed": false,
+      "visible": true,
+      "message": "Bolted for the night. A porter’s notice says service arrangements are filed in the upper offices."
+    },
+    "key": [
+      {
+        "floor": 0,
+        "id": "F1",
+        "visible": true,
+        "locked": true
+      },
+      {
+        "floor": 0,
+        "id": "F3",
+        "visible": true,
+        "locked": true
+      },
+      {
+        "floor": 0,
+        "id": "F6",
+        "visible": true,
+        "locked": true
+      },
+      {
+        "floor": 0,
+        "id": "D1",
+        "visible": true,
+        "locked": true
+      },
+      {
+        "floor": 0,
+        "id": "D2",
+        "visible": true,
+        "locked": true
+      },
+      {
+        "floor": 0,
+        "id": "D3",
+        "visible": true,
+        "locked": true
+      },
+      {
+        "floor": 0,
+        "id": "D4",
+        "visible": true,
+        "locked": true
+      },
+      {
+        "floor": 0,
+        "id": "D5",
+        "visible": true,
+        "locked": true
+      },
+      {
+        "floor": 0,
+        "id": "D6",
+        "visible": true,
+        "locked": true
+      },
+      {
+        "floor": 0,
+        "id": "D7",
+        "visible": true,
+        "locked": true
+      },
+      {
+        "floor": 0,
+        "id": "D8",
+        "visible": false,
+        "locked": false
+      },
+      {
+        "floor": 0,
+        "id": "D9",
+        "visible": true,
+        "locked": true
+      },
+      {
+        "floor": 0,
+        "id": "D10",
+        "visible": true,
+        "locked": true
+      },
+      {
+        "floor": 1,
+        "id": "F1",
+        "visible": true,
+        "locked": true
+      },
+      {
+        "floor": 1,
+        "id": "F2",
+        "visible": true,
+        "locked": true
+      },
+      {
+        "floor": 1,
+        "id": "F3",
+        "visible": true,
+        "locked": true
+      },
+      {
+        "floor": 1,
+        "id": "F4",
+        "visible": true,
+        "locked": true
+      },
+      {
+        "floor": 1,
+        "id": "F5",
+        "visible": true,
+        "locked": true
+      },
+      {
+        "floor": 1,
+        "id": "F6",
+        "visible": true,
+        "locked": true
+      },
+      {
+        "floor": 1,
+        "id": "F7",
+        "visible": true,
+        "locked": true
+      },
+      {
+        "floor": 2,
+        "id": "D11",
+        "visible": true,
+        "locked": true
+      },
+      {
+        "floor": 2,
+        "id": "D12",
+        "visible": true,
+        "locked": true
+      },
+      {
+        "floor": 2,
+        "id": "D13",
+        "visible": true,
+        "locked": true
+      },
+      {
+        "floor": 3,
+        "id": "F4",
+        "visible": true,
+        "locked": true
+      }
+    ],
+    "corridors": [
+      {
+        "id": "corridor-lock:gallery:0",
+        "visible": true,
+        "faces": [
+          1,
+          -1
+        ],
+        "links": 88,
+        "runs": 8,
+        "roundLock": true,
+        "message": "These double doors are locked. This section is closed."
+      },
+      {
+        "id": "corridor-lock:gallery:1",
+        "visible": true,
+        "faces": [
+          1,
+          -1
+        ],
+        "links": 88,
+        "runs": 8,
+        "roundLock": true,
+        "message": "These double doors are locked. This section is closed."
+      },
+      {
+        "id": "corridor-lock:admin:0",
+        "visible": true,
+        "faces": [
+          1,
+          -1
+        ],
+        "links": 88,
+        "runs": 8,
+        "roundLock": true,
+        "message": "These double doors are locked. This section is closed."
+      },
+      {
+        "id": "corridor-lock:irby:1",
+        "visible": true,
+        "faces": [
+          1,
+          -1
+        ],
+        "links": 88,
+        "runs": 8,
+        "roundLock": true,
+        "message": "These double doors are locked. This section is closed."
+      },
+      {
+        "id": "corridor-lock:diagonal:1",
+        "visible": true,
+        "faces": [
+          1,
+          -1
+        ],
+        "links": 88,
+        "runs": 8,
+        "roundLock": true,
+        "message": "These double doors are locked. This section is closed."
+      },
+      {
+        "id": "corridor-lock:grafton:1",
+        "visible": true,
+        "faces": [
+          1,
+          -1
+        ],
+        "links": 88,
+        "runs": 8,
+        "roundLock": true,
+        "message": "These double doors are locked. This section is closed."
+      },
+      {
+        "id": "corridor-lock:witby:1",
+        "visible": true,
+        "faces": [
+          1,
+          -1
+        ],
+        "links": 88,
+        "runs": 8,
+        "roundLock": true,
+        "message": "These double doors are locked. This section is closed."
+      },
+      {
+        "id": "corridor-lock:hale-0:1",
+        "visible": true,
+        "faces": [
+          1,
+          -1
+        ],
+        "links": 88,
+        "runs": 8,
+        "roundLock": true,
+        "message": "These double doors are locked. This section is closed."
+      },
+      {
+        "id": "corridor-lock:hale-1:1",
+        "visible": true,
+        "faces": [
+          1,
+          -1
+        ],
+        "links": 88,
+        "runs": 8,
+        "roundLock": true,
+        "message": "These double doors are locked. This section is closed."
+      }
+    ],
+    "restartLocks": 26
+  },
+  "errors": []
+}

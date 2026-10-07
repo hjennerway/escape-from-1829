@@ -1,0 +1,31 @@
+{
+  "date": "2026-10-07",
+  "defect": "Main kitchen fascia and hip flashing protrude through the west corridor lining above the oil-store doorway",
+  "repair": "Clip fascia and flashing through the existing Escape passage-volume replacement",
+  "baseline": {
+    "render": "baseline-reported.png",
+    "survey": "baseline.json",
+    "regression": "Original fascia is hit at X=153.59999923706056 instead of the finished wall at X=153.205"
+  },
+  "after": {
+    "desktop": "after-reported.png",
+    "portrait": "after-phone.png",
+    "survey": "after.json",
+    "renderedWallProbes": 36,
+    "cpuWallProbesPerAttempt": 36,
+    "workshopAttempts": 2,
+    "errors": [],
+    "renderer": "ANGLE (NVIDIA, NVIDIA GeForce RTX 3090 Ti (0x00002203) Direct3D11 vs_5_0 ps_5_0, D3D11)"
+  },
+  "checks": {
+    "hardwareLauncher": "pass",
+    "towerWorkshopsFinal": "pass; workshops-final.log",
+    "mainKitchen": "pass",
+    "escapeGrounds": "pass",
+    "currentWorkshopBaselineWithoutThisRepair": "pass; header-baseline.log",
+    "fullSuite": "stopped at concurrent Hale header overlap assertion; final focused check passes after its independent repair; full-suite.log is not a full-suite pass",
+    "aerialManifestSourceFingerprint": "current",
+    "interiorManifestSourceFingerprint": "current"
+  },
+  "scope": "Browser Escape runtime only; shared models, Unity/Android, Blender and packaged exports not regenerated"
+}

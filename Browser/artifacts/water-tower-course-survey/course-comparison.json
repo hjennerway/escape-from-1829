@@ -1,0 +1,39 @@
+{
+  "course_height_in_model": 0.1375,
+  "rows": [
+    {
+      "feature": "Black door height",
+      "photo_estimate": 24,
+      "model_before": 30.690907565030184,
+      "model_after": 24.36363567005504
+    },
+    {
+      "feature": "White door head",
+      "photo_estimate": 24.01411189923902,
+      "model_before": 32.21818181818181,
+      "model_after": 25.454545454545453
+    },
+    {
+      "feature": "Entrance arch crown",
+      "photo_estimate": 34.050083621004724,
+      "model_before": 45.12727269259366,
+      "model_after": 38.36363632895729
+    },
+    {
+      "feature": "Blocked arch crown",
+      "photo_estimate": 84.62583569560162,
+      "model_before": 101.49090940302068,
+      "model_after": 85.12727303938432
+    },
+    {
+      "feature": "Main horizontal band",
+      "photo_estimate": 137.53613697225188,
+      "model_before": 146.54545454545453,
+      "model_after": 146.54545454545453
+    }
+  ],
+  "door_before_ratio": 3.9074070578740105,
+  "door_after_ratio": 2.617187483992893,
+  "door_height_reduction_percent": 20.616112057189728,
+  "door_width_increase_percent": 18.518511159920692
+}

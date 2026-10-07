@@ -1,0 +1,234 @@
+{
+  "results": {
+    "creationMs": 1250.4000000003725,
+    "barrierFailures": [],
+    "hiddenTreeBarrierFailures": [],
+    "closedPaths": [
+      {
+        "id": "D2",
+        "paths": [
+          {
+            "id": "crowbar",
+            "length": 0
+          },
+          {
+            "id": "oil",
+            "length": 0
+          },
+          {
+            "id": "tower-door",
+            "length": 280
+          },
+          {
+            "id": "night-gate",
+            "length": 125
+          },
+          {
+            "id": "pedestrian",
+            "length": 103
+          },
+          {
+            "id": "wicket",
+            "length": 256
+          }
+        ]
+      },
+      {
+        "id": "D8",
+        "paths": [
+          {
+            "id": "crowbar",
+            "length": 0
+          },
+          {
+            "id": "oil",
+            "length": 0
+          },
+          {
+            "id": "tower-door",
+            "length": 170
+          },
+          {
+            "id": "night-gate",
+            "length": 117
+          },
+          {
+            "id": "pedestrian",
+            "length": 253
+          },
+          {
+            "id": "wicket",
+            "length": 146
+          }
+        ]
+      }
+    ],
+    "jump": {
+      "x": -80,
+      "z": -84.5999999999999,
+      "floor": 0,
+      "y": 0,
+      "stair": null,
+      "outside": true,
+      "verticalTrend": 0
+    },
+    "mainWalk": 115,
+    "storeWalk": 3398,
+    "paths": [
+      {
+        "id": "D2",
+        "paths": [
+          {
+            "id": "crowbar",
+            "length": 299
+          },
+          {
+            "id": "oil",
+            "length": 308
+          },
+          {
+            "id": "tower-door",
+            "length": 280
+          },
+          {
+            "id": "night-gate",
+            "length": 125
+          },
+          {
+            "id": "pedestrian",
+            "length": 103
+          },
+          {
+            "id": "wicket",
+            "length": 256
+          }
+        ]
+      },
+      {
+        "id": "D8",
+        "paths": [
+          {
+            "id": "crowbar",
+            "length": 189
+          },
+          {
+            "id": "oil",
+            "length": 198
+          },
+          {
+            "id": "tower-door",
+            "length": 170
+          },
+          {
+            "id": "night-gate",
+            "length": 117
+          },
+          {
+            "id": "pedestrian",
+            "length": 253
+          },
+          {
+            "id": "wicket",
+            "length": 146
+          }
+        ]
+      }
+    ],
+    "roomWalks": [
+      {
+        "point": {
+          "x": 156.3,
+          "z": -31.5
+        },
+        "samples": 266
+      },
+      {
+        "point": {
+          "x": 149,
+          "z": -31.5
+        },
+        "samples": 116
+      },
+      {
+        "point": {
+          "x": 156.3,
+          "z": -48.5
+        },
+        "samples": 397
+      },
+      {
+        "point": {
+          "x": 156.3,
+          "z": -58.5
+        },
+        "samples": 167
+      },
+      {
+        "point": {
+          "x": 161,
+          "z": -48.5
+        },
+        "samples": 248
+      },
+      {
+        "point": {
+          "x": 167,
+          "z": -49
+        },
+        "samples": 115
+      },
+      {
+        "point": {
+          "x": 173,
+          "z": -47
+        },
+        "samples": 132
+      }
+    ],
+    "wicketWalk": 2063,
+    "serviceWalk": {
+      "samples": 2774,
+      "boundary": true,
+      "route": "wicket"
+    },
+    "guard": {
+      "searched": true,
+      "mode": "return",
+      "position": {
+        "x": 44.56000000000003,
+        "z": -83
+      }
+    },
+    "performance": [
+      {
+        "visible": false,
+        "draws": 219,
+        "triangles": 326368,
+        "medianMs": 2.900000000372529,
+        "p95Ms": 6
+      },
+      {
+        "visible": true,
+        "draws": 227,
+        "triangles": 347322,
+        "medianMs": 3.299999998882413,
+        "p95Ms": 5.900000000372529
+      },
+      {
+        "visible": false,
+        "draws": 219,
+        "triangles": 326368,
+        "medianMs": 4.199999999254942,
+        "p95Ms": 17
+      },
+      {
+        "visible": true,
+        "draws": 227,
+        "triangles": 347322,
+        "medianMs": 2.200000001117587,
+        "p95Ms": 3.900000000372529
+      }
+    ]
+  },
+  "errors": []
+}

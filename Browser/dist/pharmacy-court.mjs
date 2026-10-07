@@ -64,8 +64,9 @@ export function addPharmacyCourt(THREE,{group,brick,stone,blue,dark,mat,box,deta
  stair('Pharmacy east rear stairs',218.1,-48.82,1.08);
  stair('Pharmacy west rear stairs',198.6,-49.12,1.08);
  for(const [x,z,h] of [[183.5,-49.05,7.3],[201.4,-49.05,7.3],[209.2,-48.75,8.9],[220.4,-48.75,8.9]]){
-  line([x,.2,z-.2],[x,h,z-.2],dark,.055,'Pharmacy rear downpipe');
-  line([x,.22,z-.2],[x,.22,z-.55],dark,.055,'Pharmacy drain shoe');
+  const assembly=new THREE.Group();assembly.name='Pharmacy downpipe assembly';assembly.userData.downpipeAssembly=true;group.add(assembly);
+  assembly.add(line([x,.2,z-.2],[x,h,z-.2],dark,.055,'Pharmacy rear downpipe'));
+  assembly.add(line([x,.22,z-.2],[x,.22,z-.55],dark,.055,'Pharmacy drain shoe'));
  }
  const metal=new THREE.MeshStandardMaterial({color:0xa6aaa4,roughness:.64,metalness:.34});
  const seam=new THREE.MeshStandardMaterial({color:0x777e79,roughness:.65,metalness:.35});

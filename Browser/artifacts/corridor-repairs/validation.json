@@ -1,0 +1,121 @@
+{
+  "renderer": "ANGLE (NVIDIA, NVIDIA GeForce RTX 3090 Ti (0x00002203) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+  "tubeFixtures": 35,
+  "windows": 114,
+  "floorSamples": 147,
+  "ceilingRuns": 8,
+  "daylight": [
+    {
+      "mode": "day",
+      "total": 89.71688132049074,
+      "colours": [
+        15003634,
+        15788763,
+        15788763,
+        15003634
+      ]
+    },
+    {
+      "mode": "dusk",
+      "total": 51.34499203752833,
+      "colours": [
+        9878462,
+        12501169,
+        12501169,
+        9878462
+      ]
+    },
+    {
+      "mode": "night",
+      "total": 27.464219573721433,
+      "colours": [
+        10794191,
+        10334678,
+        10334678,
+        10794191
+      ]
+    }
+  ],
+  "lightOcclusion": {
+    "lit": 32.026666666666664,
+    "blocked": 0,
+    "grid": [
+      {
+        "x": -4,
+        "delta": 19.266666666666666
+      },
+      {
+        "x": -3,
+        "delta": 32.026666666666664
+      },
+      {
+        "x": -2,
+        "delta": 45.16
+      },
+      {
+        "x": -1,
+        "delta": 55.2
+      },
+      {
+        "x": 0,
+        "delta": 59
+      },
+      {
+        "x": 2,
+        "delta": 0
+      },
+      {
+        "x": 3,
+        "delta": 0
+      },
+      {
+        "x": 4,
+        "delta": 0
+      }
+    ],
+    "light": [
+      0,
+      4.6,
+      0
+    ],
+    "target": [
+      0,
+      0.04,
+      0
+    ],
+    "unoccludedControl": 32.026666666666664
+  },
+  "focusedChecks": [
+    "hardware launcher",
+    "tower workshops and exact restoration",
+    "escape grounds logic",
+    "water tower geometry",
+    "workshop light occlusion browser",
+    "corridor finishes browser",
+    "corridor routes and locks browser",
+    "workshop door animation browser",
+    "source/compiled estate comparison"
+  ],
+  "errors": [],
+  "fullSuite": {
+    "log": "full-suite.log",
+    "actualX": -0.8050100041723312,
+    "exitCode": 1,
+    "assertion": "Corridor downpipe assembly position",
+    "preExisting": true,
+    "expectedX": 0,
+    "file": "test-ward-placement.mjs:44"
+  },
+  "compiledEstate": {
+    "file": "aerial-88cfa37aa0cd57e0b067.bin.gz",
+    "sourceHash": "89f50308dca1a1ce40736d043904871282365d8e89fc998cb38ea6547721f26b"
+  },
+  "exports": {
+    "UnityAndroid": "unchanged",
+    "packaged": "unchanged",
+    "Blender": "unchanged",
+    "sharedInterior": "unchanged",
+    "aerialEstate": "rebuilt"
+  },
+  "preview": "final-machine-west.png"
+}

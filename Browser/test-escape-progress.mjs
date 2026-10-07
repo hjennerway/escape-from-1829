@@ -1,7 +1,7 @@
 import assert from 'node:assert/strict';
 import {readFile} from 'node:fs/promises';
 import * as THREE from './dist/vendor/three.module.js';
-import {createEscapeProgress,MAST} from './dist/escape-progress.mjs';
+import {createEscapeProgress,MAST,OBJECTIVE_HINT_DELAY} from './dist/escape-progress.mjs';
 import {createEscapeWorld,outdoorPath} from './dist/escape-world.mjs';
 import {createNotebook} from './dist/notebook.mjs';
 import {buildAsylumLayout,stairRoute,moveAsylumActor} from './dist/asylum-layout.mjs';
@@ -39,34 +39,84 @@ for(let sample=0;sample<128;sample++){
  state.interact('plan');assert(state.door({id:run.exitId}).allowed,'Upstairs source is an alternate recovery');
  assert(state.capture().terminal);
  const bypass=createEscapeProgress({seed,floors});bypass.interact('release');assert(bypass.openStair('S5'));assert(bypass.openStair('S1'));bypass.interact('plan');assert(bypass.door({id:run.exitId}).allowed);
- assert(!bypass.canFinish({outside:true,x:0,z:75}));assert(!bypass.canFinish({outside:true,...MAST}));bypass.observeBoundary({outside:true,x:-80,z:-60});assert(bypass.canFinish({outside:true,...MAST}));assert(!bypass.canFinish({outside:false,...MAST}));
+ assert(!bypass.canFinish({outside:true,x:0,z:75}));assert(!bypass.canFinish({outside:true,...MAST}));bypass.run.pedestrianOpen=true;bypass.observeBoundary({outside:true,x:-80,z:-86},{outside:true,x:-80,z:-84});assert(bypass.canFinish({outside:true,...MAST}));assert(!bypass.canFinish({outside:false,...MAST}));
  const reversed=createEscapeProgress({seed,floors,journal:createNotebook(floors)});reversed.interact('plan');reversed.door({id:run.exitId});assert(reversed.has('outside-door'));
  reversed.interact('memo');assert(!reversed.run.evidence.has('gate'),'A document cannot reveal an unseen door');
 }
 assert.equal(combinations.size,8,'All eight intended combinations occur');
 
-// The next action must work without requiring optional clue reads, and explain
-// how to reach the disconnected upstairs wing rather than strand a Library player.
+// The developer bypass covers every exit and both grilles without inventing keys.
+for(const seed of [0,1829,10000019,20000038]){
+ const journal=createNotebook(floors),p=createEscapeProgress({seed,journal,floors});
+ const exits=floors.flatMap(f=>f.exits);
+ assert(!p.run.doorsUnlocked);assert(exits.every(exit=>!p.door(exit).allowed));
+ journal.reset();p.setDoorsUnlocked(true);
+ assert(p.stairOpen('S1')&&p.stairOpen('S5')&&p.openStair('S1'));
+ assert.equal(p.run.opened.size,0,'Bypass does not permanently release a grille');
+ assert.equal(journal.entries.length,0,'Bypass does not invent discovered clues or key evidence');
+ assert.equal(p.objective({floor:0}).title,'Leave through any outside door');
+ for(const exit of exits){assert(p.door(exit).allowed,exit.id+' bypasses both locked and bolted exits');assert(p.run.outside);}
+ assert(!p.run.staffKey&&!p.run.serviceKey);
+ p.capture();assert(p.run.doorsUnlocked&&p.door(exits[0]).allowed,'Capture cannot restore key requirements while the bypass is active');
+ assert(!p.run.confiscated.size&&!p.run.opened.size);
+ assert(!p.canFinish({outside:true,...MAST}),'Unlocked asylum doors still require crossing a grounds gate');
+ p.setDoorsUnlocked(false);assert(!p.stairOpen('S1')&&!p.stairOpen('S5'));
+ assert(exits.every(exit=>!p.door(exit).allowed),'Disabling bypass restores every normal exit restriction');
+ assert(p.door(exits[0],{returning:true}).allowed,'Return indoors remains allowed after disabling bypass outside');
+ p.interact('staff-key');p.openStair('S1');p.setDoorsUnlocked(true);p.setDoorsUnlocked(false);
+ assert(p.stairOpen('S1')&&!p.stairOpen('S5'),'Disabling bypass preserves a grille opened normally');
+ assert(!createEscapeProgress({seed,floors}).run.doorsUnlocked,'A new run starts locked');
+}
+
+// Each step starts with a broad direction. Only 60 active seconds without
+// progress reveal the practical hint, including the disconnected upstairs wing.
+const delayedHint=(progress,actor)=>{
+ assert.equal(progress.objective(actor).detail,'','A new objective starts without the detailed hint');
+ assert.equal(progress.objective(actor,OBJECTIVE_HINT_DELAY-.001).detail,'','No hint before 60 seconds');
+ const next=progress.objective(actor,.001);
+ assert(next.detail,'The hint appears at 60 seconds');
+ return next;
+};
 for(const seed of [0,1829,10000019,20000038]){
  const journal=createNotebook(floors),p=createEscapeProgress({seed,journal,floors});
  const actor={floor:0,x:0,z:17.5,outside:false};
  assert(p.objective(actor).title.includes('upper offices'));
  assert(!p.objective(actor).detail.includes('201')&&!p.objective(actor).detail.includes('209'),'Undiscovered record location is not announced at the start');
  assert.equal(journal.entries.length,0,'Asking for the objective does not invent notebook evidence');
- p.interact('memo');assert(p.objective(actor).detail.includes(plaqueNumber(0,p.run.keyRoom)));
- p.interact('staff-key');assert(p.objective(actor).title.includes('gate'));
+ assert(delayedHint(p,actor).detail.includes('Reception'));
+ assert.equal(journal.entries.length,0,'Timed hints do not invent notebook evidence');
+ p.interact('memo');assert(delayedHint(p,actor).detail.includes(plaqueNumber(0,p.run.keyRoom)));
+ p.interact('staff-key');assert.equal(p.objective(actor).title,'Use the key you found to access the staff stairs');
+ assert.equal(delayedHint(p,actor).detail,'Find the porter’s records and brass outside-door key.');
  p.openStair('S5');
- const number=plaqueNumber(3,p.run.office),upstairs=p.objective({floor:3,x:p.run.office==='R41'?0:-45});
- assert(upstairs.title.includes('brass'));assert(upstairs.detail.includes('room '+number));assert(upstairs.detail.includes('Press E'));
+ const number=plaqueNumber(3,p.run.office),upstairs=delayedHint(p,{floor:3,x:p.run.office==='R41'?0:-45});
+ assert.equal(upstairs.title,'Explore the upper offices');assert(upstairs.detail.includes('room '+number));assert(upstairs.detail.includes('Press E'));
  const wrongWing=p.objective({floor:3,x:p.run.office==='R41'?-65:0});
  assert(wrongWing.detail.includes('first floor')&&wrongWing.detail.includes('other staff stair'));
  assert(journal.entries.find(e=>e.id==='escape:gate:S5').text.includes('room '+number),'Opened-gate evidence retains the next room for later reading');
- p.interact('plan');assert(p.objective(actor).title.includes(p.run.variant+' outer entrance'));assert(p.objective(actor).detail.includes(p.run.exitId));
- p.capture();assert(p.objective(actor).title.includes('Recover'));
- p.interact('reclaim');assert(p.objective(actor).title.includes('Unlock'));
- assert(p.objective({...actor,outside:true}).detail.includes('perimeter path'));
- p.observeBoundary({outside:true,x:-80,z:-60});assert(p.objective({...actor,outside:true}).detail.includes('Press E'));
- const release=createEscapeProgress({seed,floors});release.interact('release-note');assert(release.objective({floor:2}).detail.includes('room B4'));release.interact('release');assert(release.objective(actor).detail.includes('room '+number));
+ p.interact('plan');assert(p.objective(actor).title.includes(p.run.variant+' outer entrance'));assert(delayedHint(p,actor).detail.includes(p.run.exitId));
+ p.capture();assert(p.objective(actor).title.includes('Recover'));assert(delayedHint(p,actor).detail.includes('property tray'));
+ p.interact('reclaim');assert(p.objective(actor).title.includes('Unlock'));delayedHint(p,actor);
+ assert(delayedHint(p,{...actor,outside:true}).detail.includes('perimeter path'));
+ p.run.pedestrianOpen=true;p.observeBoundary({outside:true,x:-80,z:-86},{outside:true,x:-80,z:-84});assert(delayedHint(p,{...actor,outside:true}).detail.includes('Press E'));
+ const release=createEscapeProgress({seed,floors});release.interact('release-note');assert(delayedHint(release,{floor:2}).detail.includes('room B4'));release.interact('release');assert(delayedHint(release,actor).detail.includes('room '+number));
+}
+
+// Progress resets the delay even when the overall objective stays the same;
+// repeated interactions, HUD reads and movement between floors do not.
+{
+ const p=createEscapeProgress({seed:1829,floors}),actor={floor:0};
+ p.interact('staff-key');p.objective(actor);p.objective(actor,40);
+ p.interact('staff-key');p.discover('gate');p.discover('office-index');
+ assert.equal(p.objective({floor:1},19.875).detail,'');
+ assert(p.objective(actor,.125).detail.includes('porter’s records'));
+ p.openStair('S5');p.objective(actor);p.objective(actor,45);
+ p.openStair('S1');delayedHint(p,actor);
+ p.capture();delayedHint(p,actor);p.capture();delayedHint(p,actor);
+ const outside={outside:true};delayedHint(p,outside);
+ p.run.crowbar=true;delayedHint(p,outside);
+ p.run.wicketOpen=true;delayedHint(p,outside);
+ assert.equal(createEscapeProgress({seed:1829,floors}).objective(actor).detail,'','Restart has no inherited hint');
 }
 
 // Fittings and approaches must work with actual furnished plans and continuous stairs.
@@ -130,6 +180,19 @@ for(let seed=0;seed<8;seed++){
 }
 const still=createEscapeWorld(THREE,floors,floors.map(()=>new THREE.Group()),createEscapeProgress({seed:1829,floors}),{reducedMotion:true});
 still.update(0);const scale=still.nodes[0].beacon.scale.toArray();still.update(.7);assert.deepEqual(still.nodes[0].beacon.scale.toArray(),scale,'Reduced motion keeps a strong steady glow');still.dispose();
+{
+ const progress=createEscapeProgress({seed:1829,floors}),world=createEscapeWorld(THREE,floors,floors.map(()=>new THREE.Group()),progress);
+ for(const unlocked of [true,false,true]){
+  progress.setDoorsUnlocked(unlocked);world.sync();
+  for(const gate of world.gates){
+   const from={x:gate.x-gate.dx*.6,z:gate.z-gate.dz*.6,y:gate.y,floor:1,outside:false},to={...from,x:gate.x+gate.dx*.6,z:gate.z+gate.dz*.6};
+   assert.equal(gate.leaf.visible,!unlocked,'Grille visibility follows developer unlock');
+   assert.equal(world.allowMove(from,to),unlocked,'Grille collision follows developer unlock');
+   assert.equal(world.near(from)?.gate?.id===gate.id,!unlocked,'Unlocked grilles cannot show a locked interaction prompt');
+  }
+ }
+ world.dispose();
+}
 const route=outdoorPath({clear:(x,z)=>!(x===-80&&z>-4&&z<4)},{x:-85,z:0},{x:-75,z:0});assert(route.length>10,'Outdoor routing goes around cover');
 const navigation={revision:0,clear:()=>true},from={x:-85,z:0},to={x:-75,z:0};
 const direct=outdoorPath(navigation,from,to);navigation.clear=(x,z)=>!(x===-80&&z>-4&&z<4);navigation.revision++;assert(outdoorPath(navigation,from,to).length>direct.length,'Changed obstacles invalidate cached navigation');

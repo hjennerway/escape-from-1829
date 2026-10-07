@@ -31,7 +31,7 @@ export function addCentralCourtPhotoDetails(THREE,{model,box,mesh,worldUV,white,
     sash('central-court-west',-6.56,y,z,-Math.PI/2,1.15,2.4);
   for(const x of [-3.5,.7,4.9])for(const y of [2.2,6.8])
     sash('central-court-rear-end',x,y,centralRear-.06,Math.PI,1.2,2.4);
-  for(const [x,z,h] of [[6.74,.1,8.6],[6.74,-23.9,8.6],[8.14,-32,9.4]])box(iron,x,h/2,z,.09,h,.09);
+  for(const [x,z,h] of [[6.74,.1,8.6],[6.74,-23.9,8.6],[8.14,-32,9.4]])box(iron,x,h/2,z,.09,h,.09,0,true);
   rod([8.17,4.6,-29.8],[8.17,4.5,-32],.05);
   // Relocate the existing central-arm stair to the doorway seen in img11.
   const stair=new THREE.Group();stair.name='Central court rear iron stair';model.add(stair);
