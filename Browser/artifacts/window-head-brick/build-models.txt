@@ -1,0 +1,51 @@
+npm notice run build:models
+npm notice run node vendor-three.mjs --check && node build-models.mjs && node build-interior-models.mjs
+Verified Three.js 0.186.1: three.module.js, GLTFLoader.js, BufferGeometryUtils.js, SkeletonUtils.js, THREE-LICENSE.txt, three.core.js
+Hardware GPU: ANGLE (NVIDIA, NVIDIA GeForce RTX 3090 Ti (0x00002203) Direct3D11 vs_5_0 ps_5_0, D3D11)
+{
+  "format": 1,
+  "revision": "186",
+  "sourceHash": "a684e30084b533e567576e0fc7b20a27b5bb7e79b814b0484df4ce3b2e9591c8",
+  "file": "aerial-bc2de7e80a866a806381.bin.gz",
+  "bytes": 19691997,
+  "uncompressedBytes": 136745088,
+  "sha256": "bc2de7e80a866a8063819157a170c00ce5bc685ea777e061b8eba72919ede349",
+  "stats": {
+    "revision": "186",
+    "buildMilliseconds": 6126.9000000003725,
+    "windows": 2999,
+    "geometries": 11192,
+    "geometryBytesSaved": 33965448,
+    "materials": 764,
+    "textures": 65
+  },
+  "totalSeconds": 29.4
+}
+Hardware GPU: ANGLE (NVIDIA, NVIDIA GeForce RTX 3090 Ti (0x00002203) Direct3D11 vs_5_0 ps_5_0, D3D11)
+{
+  "sections": 10,
+  "bytes": 14,
+  "stats": [
+    {
+      "floor": 0,
+      "sections": 3,
+      "buildMilliseconds": 3120.2000000011176
+    },
+    {
+      "floor": 1,
+      "sections": 3,
+      "buildMilliseconds": 3084.2999999988824
+    },
+    {
+      "floor": 2,
+      "sections": 2,
+      "buildMilliseconds": 1208.4000000003725
+    },
+    {
+      "floor": 3,
+      "sections": 2,
+      "buildMilliseconds": 618.4000000003725
+    }
+  ],
+  "compressedBytes": 21027905
+}

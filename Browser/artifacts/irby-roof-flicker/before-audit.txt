@@ -1,0 +1,512 @@
+{
+  "samples": 47727,
+  "closureMeshes": 311,
+  "overlapSamples": 444,
+  "originalMeshes": 8926,
+  "authoredTriangles": 1139114,
+  "originalGeometryHash": "6a285319c9bcd0465388d5155588f70bf49b144caac826a3740eaa81c762bf3c",
+  "pairs": [
+    [
+      "1829 estate · aerial reconstruction/Historic layout/Tower service buildings/Eave closure: Tower east dormered range vs 1829 estate · aerial reconstruction/Historic layout/Tower service buildings/East range eaves infill",
+      42
+    ],
+    [
+      "1829 estate · aerial reconstruction/Shared estate/Upton/Frith/Oscroft/Eave closure: Garden bay hip vs 1829 estate · aerial reconstruction/Shared estate/Upton/Frith/Oscroft/Canted garden bay",
+      28
+    ],
+    [
+      "1829 estate · aerial reconstruction/Historic layout/Tower service buildings/Eave closure: North tower range vs 1829 estate · aerial reconstruction/Historic layout/Tower service buildings/North tower range exposed return walls",
+      24
+    ],
+    [
+      "1829 estate · aerial reconstruction/Historic layout/Irby/Ashley/Eave closure: West garden gable vs 1829 estate · aerial reconstruction/Historic layout/Irby/Ashley/West garden gable brick gables",
+      23
+    ],
+    [
+      "1829 estate · aerial reconstruction/Historic layout/Irby/Ashley/Eave closure: East garden gable vs 1829 estate · aerial reconstruction/Historic layout/Irby/Ashley/East garden gable brick gables",
+      23
+    ],
+    [
+      "1829 estate · aerial reconstruction/Historic layout/Farndon ward/Eave closure: East continuous wing vs 1829 estate · aerial reconstruction/Historic layout/Farndon ward/East continuous wing plain brick gable",
+      23
+    ],
+    [
+      "1829 estate · aerial reconstruction/Historic layout/Witby Ward/Eave closure: East continuous wing vs 1829 estate · aerial reconstruction/Historic layout/Witby Ward/East continuous wing plain brick gable",
+      23
+    ],
+    [
+      "1829 estate · aerial reconstruction/Shared estate/Eave closure: West cross-range continuous join vs 1829 estate · aerial reconstruction/Shared estate/West cross-range raised roof edge masonry",
+      21
+    ],
+    [
+      "1829 estate · aerial reconstruction/Historic layout/Grafton/Edge/Eave closure: Roadside north wing vs 1829 estate · aerial reconstruction/Historic layout/Grafton/Edge/Roadside north wing brick gables",
+      17
+    ],
+    [
+      "1829 estate · aerial reconstruction/Historic layout/Grafton/Edge/Eave closure: Grafton veranda pitched canopy vs 1829 estate · aerial reconstruction/Historic layout/Grafton/Edge/Grafton/Edge sashes, masonry bands and rainwater goods",
+      14
+    ],
+    [
+      "1829 estate · aerial reconstruction/Historic layout/1829 to Main/admin connecting corridor/Water tower to Irby corridor/Eave closure: Water tower to Irby corridor vs 1829 estate · aerial reconstruction/Historic layout/1829 to Main/admin connecting corridor/Water tower to Irby corridor/Irby corridor exposed end gable",
+      14
+    ],
+    [
+      "1829 estate · aerial reconstruction/Shared estate/Eave closure: Garden pavilion vs 1829 estate · aerial reconstruction/Shared estate",
+      13
+    ],
+    [
+      "1829 estate · aerial reconstruction/Historic layout/Irby/Ashley/Eave closure: Canted garden bay vs 1829 estate · aerial reconstruction/Historic layout/Irby/Ashley/Canted garden window bay",
+      12
+    ],
+    [
+      "1829 estate · aerial reconstruction/Historic layout/Farndon ward/Eave closure: West side-room lean-to vs 1829 estate · aerial reconstruction/Historic layout/Farndon ward/Single-storey ward walls",
+      12
+    ],
+    [
+      "1829 estate · aerial reconstruction/Historic layout/Witby Ward/Eave closure: West side-room lean-to vs 1829 estate · aerial reconstruction/Historic layout/Witby Ward/Single-storey ward walls",
+      12
+    ],
+    [
+      "1829 estate · aerial reconstruction/Historic layout/1829 to Main/admin connecting corridor/Main/admin front corridor/Eave closure: Main/admin front corridor vs 1829 estate · aerial reconstruction/Historic layout/1829 to Main/admin connecting corridor/Main/admin corridor front doorway/Main/admin corridor front brick gable",
+      12
+    ],
+    [
+      "1829 estate · aerial reconstruction/Historic layout/Tower service buildings/Eave closure: Tower south continuous vs 1829 estate · aerial reconstruction/Historic layout/Tower service buildings/East range eaves infill",
+      12
+    ],
+    [
+      "1829 estate · aerial reconstruction/Historic layout/Irby/Ashley/Eave closure: Roadside north wing vs 1829 estate · aerial reconstruction/Historic layout/Irby/Ashley/Roadside north wing brick gables",
+      11
+    ],
+    [
+      "1829 estate · aerial reconstruction/Historic layout/Irby/Ashley/Eave closure: Narrow north wing vs 1829 estate · aerial reconstruction/Historic layout/Irby/Ashley/Narrow north wing brick gables",
+      11
+    ],
+    [
+      "1829 estate · aerial reconstruction/Historic layout/Grafton/Edge/Eave closure: Narrow north wing vs 1829 estate · aerial reconstruction/Historic layout/Grafton/Edge/Narrow north wing brick gables",
+      11
+    ],
+    [
+      "1829 estate · aerial reconstruction/Historic layout/Farndon ward/Eave closure: West continuous wing vs 1829 estate · aerial reconstruction/Historic layout/Farndon ward/West continuous wing plain brick gable",
+      11
+    ],
+    [
+      "1829 estate · aerial reconstruction/Historic layout/Witby Ward/Eave closure: West continuous wing vs 1829 estate · aerial reconstruction/Historic layout/Witby Ward/West continuous wing plain brick gable",
+      11
+    ],
+    [
+      "1829 estate · aerial reconstruction/Historic layout/Irby/Ashley/Eave closure: Quarter-octagonal corner vs 1829 estate · aerial reconstruction/Historic layout/Irby/Ashley/Quarter-octagonal garden corner",
+      10
+    ],
+    [
+      "1829 estate · aerial reconstruction/Historic layout/Grafton/Edge/Eave closure: Grafton central half-octagonal hip vs 1829 estate · aerial reconstruction/Historic layout/Grafton/Edge/Yellow-refined Grafton/Edge walls",
+      8
+    ],
+    [
+      "1829 estate · aerial reconstruction/Shared estate/West wing mirrored from east/Eave closure: West wing joined vs 1829 estate · aerial reconstruction/Shared estate/West wing mirrored from east/West wing continuous eaves",
+      6
+    ],
+    [
+      "1829 estate · aerial reconstruction/Historic layout/1829 to Main/admin connecting corridor/Main/admin corridor front doorway/Eave closure: Corridor pavilion side connection vs 1829 estate · aerial reconstruction/Historic layout/1829 to Main/admin connecting corridor/Main/admin corridor front doorway/Corridor pavilion side connection front infill",
+      6
+    ],
+    [
+      "1829 estate · aerial reconstruction/Historic layout/1829 to Main/admin connecting corridor/Main/admin corridor front doorway/Eave closure: Corridor pavilion side connection vs 1829 estate · aerial reconstruction/Historic layout/1829 to Main/admin connecting corridor/Main/admin corridor front doorway/Corridor pavilion side connection walls",
+      5
+    ],
+    [
+      "1829 estate · aerial reconstruction/Historic layout/The annexe/Carden side elevation/Eave closure: Carden tower gabled range vs 1829 estate · aerial reconstruction/Historic layout/The annexe/Carden side elevation/Carden windows and trim",
+      5
+    ],
+    [
+      "1829 estate · aerial reconstruction/Shared estate/Eave closure: Redesmere aligned frontage vs 1829 estate · aerial reconstruction/Shared estate",
+      4
+    ],
+    [
+      "1829 estate · aerial reconstruction/Historic layout/The annexe/Eave closure: West front pavilion vs 1829 estate · aerial reconstruction/Historic layout/The annexe/West front pavilion slate roof",
+      4
+    ],
+    [
+      "1829 estate · aerial reconstruction/Historic layout/The annexe/Eave closure: East front pavilion vs 1829 estate · aerial reconstruction/Historic layout/The annexe/East front pavilion slate roof",
+      4
+    ],
+    [
+      "1829 estate · aerial reconstruction/Shared estate/Eave closure: East entrance wing vs 1829 estate · aerial reconstruction/Shared estate/East lawn continuous upper floor band",
+      3
+    ],
+    [
+      "1829 estate · aerial reconstruction/Shared estate/Eave closure: Reception longitudinal ridge and rear hips vs 1829 estate · aerial reconstruction/Shared estate",
+      2
+    ],
+    [
+      "1829 estate · aerial reconstruction/Shared estate/Eave closure: West cross-range continuous join vs 1829 estate · aerial reconstruction/Shared estate",
+      2
+    ],
+    [
+      "1829 estate · aerial reconstruction/Shared estate/Eave closure: East entrance corner to render boundary vs 1829 estate · aerial reconstruction/Shared estate/Front inside corner trimmed existing detail",
+      2
+    ],
+    [
+      "1829 estate · aerial reconstruction/Historic layout/Tower service buildings/Eave closure: North tower range vs 1829 estate · aerial reconstruction/Historic layout/Tower service buildings/North tower range west walls",
+      2
+    ],
+    [
+      "1829 estate · aerial reconstruction/Shared estate/Eave closure: West cross-range continuous join vs 1829 estate · aerial reconstruction/Shared estate/West outer corner joined cornice 0.18",
+      1
+    ]
+  ],
+  "overlaps": [
+    {
+      "closure": "1829 estate · aerial reconstruction/Shared estate/West wing mirrored from east/Eave closure: West wing joined",
+      "authored": "1829 estate · aerial reconstruction/Shared estate/West wing mirrored from east/West wing continuous eaves",
+      "point": [
+        -24.600000381469727,
+        13.032000541687012,
+        2.0199999809265137
+      ],
+      "normal": [
+        1,
+        0,
+        0
+      ],
+      "distance": 0.01999952316284137,
+      "triangle": 18,
+      "face": 16,
+      "material": {
+        "color": 14803932,
+        "side": 0
+      },
+      "authoredHits": 1,
+      "vertices": [
+        [
+          -24.600000381469727,
+          13.0600004196167,
+          2
+        ],
+        [
+          -24.600000381469727,
+          13.02500057220459,
+          2
+        ],
+        [
+          -24.600000381469727,
+          13.02500057220459,
+          2.0399999618530273
+        ]
+      ],
+      "hitNormal": [
+        -1,
+        0,
+        0
+      ]
+    },
+    {
+      "closure": "1829 estate · aerial reconstruction/Shared estate/West wing mirrored from east/Eave closure: West wing joined",
+      "authored": "1829 estate · aerial reconstruction/Shared estate/West wing mirrored from east/West wing continuous eaves",
+      "point": [
+        -24.600000381469727,
+        13.046000480651855,
+        2.0079999923706056
+      ],
+      "normal": [
+        1,
+        0,
+        0
+      ],
+      "distance": 0.01999952316284137,
+      "triangle": 18,
+      "face": 16,
+      "material": {
+        "color": 14803932,
+        "side": 0
+      },
+      "authoredHits": 1,
+      "vertices": [
+        [
+          -24.600000381469727,
+          13.0600004196167,
+          2
+        ],
+        [
+          -24.600000381469727,
+          13.02500057220459,
+          2
+        ],
+        [
+          -24.600000381469727,
+          13.02500057220459,
+          2.0399999618530273
+        ]
+      ],
+      "hitNormal": [
+        -1,
+        0,
+        0
+      ]
+    },
+    {
+      "closure": "1829 estate · aerial reconstruction/Shared estate/West wing mirrored from east/Eave closure: West wing joined",
+      "authored": "1829 estate · aerial reconstruction/Shared estate/West wing mirrored from east/West wing continuous eaves",
+      "point": [
+        -24.600000381469727,
+        13.032000541687012,
+        2.0079999923706056
+      ],
+      "normal": [
+        1,
+        0,
+        0
+      ],
+      "distance": 0.01999952316284137,
+      "triangle": 18,
+      "face": 16,
+      "material": {
+        "color": 14803932,
+        "side": 0
+      },
+      "authoredHits": 1,
+      "vertices": [
+        [
+          -24.600000381469727,
+          13.0600004196167,
+          2
+        ],
+        [
+          -24.600000381469727,
+          13.02500057220459,
+          2
+        ],
+        [
+          -24.600000381469727,
+          13.02500057220459,
+          2.0399999618530273
+        ]
+      ],
+      "hitNormal": [
+        -1,
+        0,
+        0
+      ]
+    },
+    {
+      "closure": "1829 estate · aerial reconstruction/Shared estate/West wing mirrored from east/Eave closure: West wing joined",
+      "authored": "1829 estate · aerial reconstruction/Shared estate/West wing mirrored from east/West wing continuous eaves",
+      "point": [
+        -24.600000381469727,
+        12.983700466156005,
+        2.031999969482422
+      ],
+      "normal": [
+        1,
+        0,
+        0
+      ],
+      "distance": 0.01999952316284137,
+      "triangle": 19,
+      "face": 16,
+      "material": {
+        "color": 14803932,
+        "side": 0
+      },
+      "authoredHits": 1,
+      "vertices": [
+        [
+          -24.600000381469727,
+          13.0600004196167,
+          2
+        ],
+        [
+          -24.600000381469727,
+          12.86400032043457,
+          2.0399999618530273
+        ],
+        [
+          -24.600000381469727,
+          13.02500057220459,
+          2.0399999618530273
+        ]
+      ],
+      "hitNormal": [
+        -1,
+        0,
+        0
+      ]
+    },
+    {
+      "closure": "1829 estate · aerial reconstruction/Shared estate/West wing mirrored from east/Eave closure: West wing joined",
+      "authored": "1829 estate · aerial reconstruction/Shared estate/West wing mirrored from east/West wing continuous eaves",
+      "point": [
+        -24.600000381469727,
+        13.01380043029785,
+        2.015999984741211
+      ],
+      "normal": [
+        1,
+        0,
+        0
+      ],
+      "distance": 0.01999952316284137,
+      "triangle": 19,
+      "face": 16,
+      "material": {
+        "color": 14803932,
+        "side": 0
+      },
+      "authoredHits": 1,
+      "vertices": [
+        [
+          -24.600000381469727,
+          13.0600004196167,
+          2
+        ],
+        [
+          -24.600000381469727,
+          12.86400032043457,
+          2.0399999618530273
+        ],
+        [
+          -24.600000381469727,
+          13.02500057220459,
+          2.0399999618530273
+        ]
+      ],
+      "hitNormal": [
+        -1,
+        0,
+        0
+      ]
+    },
+    {
+      "closure": "1829 estate · aerial reconstruction/Shared estate/West wing mirrored from east/Eave closure: West wing joined",
+      "authored": "1829 estate · aerial reconstruction/Shared estate/West wing mirrored from east/West wing continuous eaves",
+      "point": [
+        -24.600000381469727,
+        12.935400390624999,
+        2.031999969482422
+      ],
+      "normal": [
+        1,
+        0,
+        0
+      ],
+      "distance": 0.01999952316284137,
+      "triangle": 19,
+      "face": 16,
+      "material": {
+        "color": 14803932,
+        "side": 0
+      },
+      "authoredHits": 1,
+      "vertices": [
+        [
+          -24.600000381469727,
+          13.0600004196167,
+          2
+        ],
+        [
+          -24.600000381469727,
+          12.86400032043457,
+          2.0399999618530273
+        ],
+        [
+          -24.600000381469727,
+          13.02500057220459,
+          2.0399999618530273
+        ]
+      ],
+      "hitNormal": [
+        -1,
+        0,
+        0
+      ]
+    },
+    {
+      "closure": "1829 estate · aerial reconstruction/Shared estate/Upton/Frith/Oscroft/Eave closure: Garden bay hip",
+      "authored": "1829 estate · aerial reconstruction/Shared estate/Upton/Frith/Oscroft/Canted garden bay",
+      "point": [
+        -42.09999885559082,
+        7.798000240325928,
+        -203.89407587051392
+      ],
+      "normal": [
+        -0.7348032792963294,
+        0,
+        -0.6782802818417772
+      ],
+      "distance": 0.020000000000006988,
+      "triangle": 1,
+      "face": 15,
+      "material": {
+        "color": 11773344,
+        "side": 0
+      },
+      "authoredHits": 1,
+      "vertices": [
+        [
+          -41.49999847412109,
+          7.849999904632568,
+          -204.54407596588135
+        ],
+        [
+          -41.49999847412109,
+          7.785000324249268,
+          -204.54407596588135
+        ],
+        [
+          -42.699999237060545,
+          7.785000324249268,
+          -203.24407577514648
+        ]
+      ],
+      "hitNormal": [
+        -0.7348032593727112,
+        4.1532688925450766e-17,
+        -0.6782802939414978
+      ]
+    },
+    {
+      "closure": "1829 estate · aerial reconstruction/Shared estate/Upton/Frith/Oscroft/Eave closure: Garden bay hip",
+      "authored": "1829 estate · aerial reconstruction/Shared estate/Upton/Frith/Oscroft/Canted garden bay",
+      "point": [
+        -41.73999862670899,
+        7.798000240325928,
+        -204.28407592773436
+      ],
+      "normal": [
+        -0.7348032792963294,
+        0,
+        -0.6782802818417772
+      ],
+      "distance": 0.020000000000001766,
+      "triangle": 1,
+      "face": 15,
+      "material": {
+        "color": 11773344,
+        "side": 0
+      },
+      "authoredHits": 1,
+      "vertices": [
+        [
+          -41.49999847412109,
+          7.849999904632568,
+          -204.54407596588135
+        ],
+        [
+          -41.49999847412109,
+          7.785000324249268,
+          -204.54407596588135
+        ],
+        [
+          -42.699999237060545,
+          7.785000324249268,
+          -203.24407577514648
+        ]
+      ],
+      "hitNormal": [
+        -0.7348032593727112,
+        4.1532688925450766e-17,
+        -0.6782802939414978
+      ]
+    }
+  ]
+}

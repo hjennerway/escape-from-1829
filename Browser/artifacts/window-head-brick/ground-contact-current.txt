@@ -1,0 +1,1 @@
+PASS: 244 grounded road/path edges, all tree families/LODs, 1327 hillside trees and every lamppost in all 13 periods and four layout states; walking stays clear.

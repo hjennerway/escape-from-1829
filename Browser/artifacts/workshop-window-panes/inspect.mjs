@@ -23,13 +23,16 @@ try{
  await page.evaluate(()=>{const t=groundsTest;t.begin();t.exterior.lighting.setNight(false);t.grounds.use(t.grounds.nodes.find(n=>n.id==='tower-door'));for(const n of t.grounds.nodes.filter(n=>n.id.startsWith('workshop-door:')))t.grounds.use(n);t.step(1);});
  async function shot(name,pose){await page.evaluate(p=>groundsTest.pose(...p),pose);await page.screenshot({path:fileURLToPath(new URL(label+'-'+name+'.png',import.meta.url))});}
  await shot('repair',[151.2,-39.9,Math.PI/2,.16]);
- await shot('oil-store',[151.2,-33.4,Math.PI/2,.16]);
+ await shot('oil-store',[151.8,-28.5,.85,.16]);
  await shot('vestibule',[151.2,-46,Math.PI/2,.16]);
  await shot('exterior',[139,-39.9,-Math.PI/2,.16]);
  await page.setViewportSize({width:390,height:844});
- await shot('repair-phone',[150,-42.5,Math.PI/2,.28]);
+ await page.evaluate(()=>new Promise(resolve=>requestAnimationFrame(resolve)));
+ await shot('repair-phone',[151.2,-42.5,Math.PI/2,.16]);
+ await page.addStyleTag({content:'#hud,#interact,.vignette{display:none!important}'});
+ await shot('repair-phone-detail',[151.2,-42.5,Math.PI/2,.16]);
  const validation=await page.evaluate(()=>{const t=groundsTest,gl=t.renderer.getContext(),info=gl.getExtension('WEBGL_debug_renderer_info');return {renderer:gl.getParameter(info.UNMASKED_RENDERER_WEBGL),modelMode:t.exterior.modelBuild};});
- assert.deepEqual(errors,[]);
  await writeFile(new URL(label+'-validation.json',import.meta.url),JSON.stringify({validation,errors},null,2));
+ assert.deepEqual(errors,[]);
  console.log(JSON.stringify({validation,errors},null,2));
 }finally{await browser?.close();server.kill();}

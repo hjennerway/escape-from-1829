@@ -1,0 +1,434 @@
+{
+  "label": "before",
+  "scenario": "escape",
+  "mode": "source",
+  "survey": {
+    "renderer": "ANGLE (NVIDIA, NVIDIA GeForce RTX 3090 Ti (0x00002203) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+    "towerPosition": [
+      148,
+      0,
+      -55.2
+    ],
+    "groundY": -0.15,
+    "plinth": null,
+    "samples": [
+      {
+        "side": 1,
+        "x": -4.1,
+        "y": -0.149,
+        "solid": false
+      },
+      {
+        "side": 1,
+        "x": -4.1,
+        "y": -0.12,
+        "solid": false
+      },
+      {
+        "side": 1,
+        "x": -4.1,
+        "y": -0.01,
+        "solid": false
+      },
+      {
+        "side": 1,
+        "x": -4.1,
+        "y": 0.05,
+        "solid": true,
+        "mesh": "Aerial batch · Water tower · rear-right clearing · 64",
+        "distance": 0.3249998092651367
+      },
+      {
+        "side": 1,
+        "x": -3.8,
+        "y": -0.149,
+        "solid": false
+      },
+      {
+        "side": 1,
+        "x": -3.8,
+        "y": -0.12,
+        "solid": false
+      },
+      {
+        "side": 1,
+        "x": -3.8,
+        "y": -0.01,
+        "solid": false
+      },
+      {
+        "side": 1,
+        "x": -3.8,
+        "y": 0.05,
+        "solid": true,
+        "mesh": "Aerial batch · Water tower · rear-right clearing · 64",
+        "distance": 0.3249998092651367
+      },
+      {
+        "side": 1,
+        "x": 3.8,
+        "y": -0.149,
+        "solid": false
+      },
+      {
+        "side": 1,
+        "x": 3.8,
+        "y": -0.12,
+        "solid": false
+      },
+      {
+        "side": 1,
+        "x": 3.8,
+        "y": -0.01,
+        "solid": false
+      },
+      {
+        "side": 1,
+        "x": 3.8,
+        "y": 0.05,
+        "solid": true,
+        "mesh": "Aerial batch · Water tower · rear-right clearing · 65",
+        "distance": 0.3249998092651367
+      },
+      {
+        "side": 1,
+        "x": 4.1,
+        "y": -0.149,
+        "solid": false
+      },
+      {
+        "side": 1,
+        "x": 4.1,
+        "y": -0.12,
+        "solid": false
+      },
+      {
+        "side": 1,
+        "x": 4.1,
+        "y": -0.01,
+        "solid": false
+      },
+      {
+        "side": 1,
+        "x": 4.1,
+        "y": 0.05,
+        "solid": true,
+        "mesh": "Aerial batch · Water tower · rear-right clearing · 65",
+        "distance": 0.3249998092651367
+      },
+      {
+        "side": 2,
+        "x": -4.1,
+        "y": -0.149,
+        "solid": false
+      },
+      {
+        "side": 2,
+        "x": -4.1,
+        "y": -0.12,
+        "solid": false
+      },
+      {
+        "side": 2,
+        "x": -4.1,
+        "y": -0.01,
+        "solid": false
+      },
+      {
+        "side": 2,
+        "x": -4.1,
+        "y": 0.05,
+        "solid": true,
+        "mesh": "Aerial batch · Water tower · rear-right clearing · 64",
+        "distance": 0.3249998092651367
+      },
+      {
+        "side": 2,
+        "x": -3.8,
+        "y": -0.149,
+        "solid": false
+      },
+      {
+        "side": 2,
+        "x": -3.8,
+        "y": -0.12,
+        "solid": false
+      },
+      {
+        "side": 2,
+        "x": -3.8,
+        "y": -0.01,
+        "solid": false
+      },
+      {
+        "side": 2,
+        "x": -3.8,
+        "y": 0.05,
+        "solid": true,
+        "mesh": "Aerial batch · Water tower · rear-right clearing · 64",
+        "distance": 0.3249998092651367
+      },
+      {
+        "side": 2,
+        "x": 3.8,
+        "y": -0.149,
+        "solid": false
+      },
+      {
+        "side": 2,
+        "x": 3.8,
+        "y": -0.12,
+        "solid": false
+      },
+      {
+        "side": 2,
+        "x": 3.8,
+        "y": -0.01,
+        "solid": false
+      },
+      {
+        "side": 2,
+        "x": 3.8,
+        "y": 0.05,
+        "solid": true,
+        "mesh": "Aerial batch · Water tower · rear-right clearing · 64",
+        "distance": 0.3249998092651367
+      },
+      {
+        "side": 2,
+        "x": 4.1,
+        "y": -0.149,
+        "solid": false
+      },
+      {
+        "side": 2,
+        "x": 4.1,
+        "y": -0.12,
+        "solid": false
+      },
+      {
+        "side": 2,
+        "x": 4.1,
+        "y": -0.01,
+        "solid": false
+      },
+      {
+        "side": 2,
+        "x": 4.1,
+        "y": 0.05,
+        "solid": true,
+        "mesh": "Aerial batch · Water tower · rear-right clearing · 64",
+        "distance": 0.3249998092651367
+      },
+      {
+        "side": 3,
+        "x": -4.1,
+        "y": -0.149,
+        "solid": false
+      },
+      {
+        "side": 3,
+        "x": -4.1,
+        "y": -0.12,
+        "solid": false
+      },
+      {
+        "side": 3,
+        "x": -4.1,
+        "y": -0.01,
+        "solid": false
+      },
+      {
+        "side": 3,
+        "x": -4.1,
+        "y": 0.05,
+        "solid": true,
+        "mesh": "Batched masonry details",
+        "distance": 0.3249998092651367
+      },
+      {
+        "side": 3,
+        "x": -3.8,
+        "y": -0.149,
+        "solid": false
+      },
+      {
+        "side": 3,
+        "x": -3.8,
+        "y": -0.12,
+        "solid": false
+      },
+      {
+        "side": 3,
+        "x": -3.8,
+        "y": -0.01,
+        "solid": false
+      },
+      {
+        "side": 3,
+        "x": -3.8,
+        "y": 0.05,
+        "solid": true,
+        "mesh": "Batched masonry details",
+        "distance": 0.3249998092651367
+      },
+      {
+        "side": 3,
+        "x": 3.8,
+        "y": -0.149,
+        "solid": false
+      },
+      {
+        "side": 3,
+        "x": 3.8,
+        "y": -0.12,
+        "solid": false
+      },
+      {
+        "side": 3,
+        "x": 3.8,
+        "y": -0.01,
+        "solid": false
+      },
+      {
+        "side": 3,
+        "x": 3.8,
+        "y": 0.05,
+        "solid": true,
+        "mesh": "Batched masonry details",
+        "distance": 0.3249998092651367
+      },
+      {
+        "side": 3,
+        "x": 4.1,
+        "y": -0.149,
+        "solid": false
+      },
+      {
+        "side": 3,
+        "x": 4.1,
+        "y": -0.12,
+        "solid": false
+      },
+      {
+        "side": 3,
+        "x": 4.1,
+        "y": -0.01,
+        "solid": false
+      },
+      {
+        "side": 3,
+        "x": 4.1,
+        "y": 0.05,
+        "solid": true,
+        "mesh": "Batched masonry details",
+        "distance": 0.3249998092651367
+      },
+      {
+        "side": 4,
+        "x": -4.1,
+        "y": -0.149,
+        "solid": false
+      },
+      {
+        "side": 4,
+        "x": -4.1,
+        "y": -0.12,
+        "solid": false
+      },
+      {
+        "side": 4,
+        "x": -4.1,
+        "y": -0.01,
+        "solid": false
+      },
+      {
+        "side": 4,
+        "x": -4.1,
+        "y": 0.05,
+        "solid": true,
+        "mesh": "Aerial batch · Water tower · rear-right clearing · 65",
+        "distance": 0.3249998092651367
+      },
+      {
+        "side": 4,
+        "x": -3.8,
+        "y": -0.149,
+        "solid": false
+      },
+      {
+        "side": 4,
+        "x": -3.8,
+        "y": -0.12,
+        "solid": false
+      },
+      {
+        "side": 4,
+        "x": -3.8,
+        "y": -0.01,
+        "solid": false
+      },
+      {
+        "side": 4,
+        "x": -3.8,
+        "y": 0.05,
+        "solid": true,
+        "mesh": "Aerial batch · Water tower · rear-right clearing · 65",
+        "distance": 0.3249998092651367
+      },
+      {
+        "side": 4,
+        "x": 3.8,
+        "y": -0.149,
+        "solid": false
+      },
+      {
+        "side": 4,
+        "x": 3.8,
+        "y": -0.12,
+        "solid": false
+      },
+      {
+        "side": 4,
+        "x": 3.8,
+        "y": -0.01,
+        "solid": false
+      },
+      {
+        "side": 4,
+        "x": 3.8,
+        "y": 0.05,
+        "solid": true,
+        "mesh": "Aerial batch · Water tower · rear-right clearing · 65",
+        "distance": 0.3249998092651367
+      },
+      {
+        "side": 4,
+        "x": 4.1,
+        "y": -0.149,
+        "solid": false
+      },
+      {
+        "side": 4,
+        "x": 4.1,
+        "y": -0.12,
+        "solid": false
+      },
+      {
+        "side": 4,
+        "x": 4.1,
+        "y": -0.01,
+        "solid": false
+      },
+      {
+        "side": 4,
+        "x": 4.1,
+        "y": 0.05,
+        "solid": true,
+        "mesh": "Aerial batch · Water tower · rear-right clearing · 65",
+        "distance": 0.3249998092651367
+      }
+    ]
+  },
+  "errors": []
+}

@@ -9,9 +9,10 @@ public sealed partial class NativePrototypeGame
     [Serializable] public class Stair : Point { public string id,name, direction;public Point[] points; }
     [Serializable] public class Polygon { public Point[] points; }
     [Serializable] public class Wall { public Point a,b;public float height; }
-    [Serializable] public class Doorway : Point { public float dx,dz,width,height,depth; }
-    [Serializable] public class Room { public string id,name;public Point[] points;public Point label;public float width; }
-    [Serializable] public class Flight { public string id;public int lower,upper;public Point[] route; }
+    [Serializable] public class Doorway : Point { public string roomId;public float dx,dz,width,height,depth; }
+    [Serializable] public class Room { public string id,number,name;public Point[] points;public Point label;public float width; }
+    [Serializable] public class Flight { public string id;public int lower,upper;public Point[] route;public Point lowerDeparture,upperDeparture;[NonSerialized] public bool blocked; }
+    [Serializable] public class Furnishing : Point {public float width,depth,height,rotation;}
     [Serializable] public class Navigation { public Layout[] floors;public Flight[] flights; }
     [Serializable] public class Spawn : Point { public string name; public int type; }
     [Serializable] public class Layout
@@ -22,6 +23,7 @@ public sealed partial class NativePrototypeGame
         public int id;public string name;public float elevation;public Point origin;
         public Polygon[] loops,rails;public Wall[] walls,exitHeaders;public Bounds[] shafts;
         public Doorway[] doorways;public Room[] rooms,corridors;public Point[] safeSpawns,lamps;
+        public Furnishing[] furniture,roomDoors;
         [NonSerialized] public Flight[] flights;
     }
     [Serializable] public class Lamp : Point { }
@@ -52,7 +54,9 @@ public sealed partial class NativePrototypeGame
         public Period[] periods; public MeshFlag[] meshFlags; public DetailGroup[] detailGroups;
         public Building[] buildings; public Location[] locations; public Artwork[] art; public WallArt[] wallArt;
         public EarthAnchor earthAnchor; public Point[] perimeter; public Diagnosis[] diagnoses; public Cause[] causes;
-        public int jumpBounds;public Obstacle[] supportLibrary;
+        public int jumpBounds,escapeJumpBounds;public Obstacle[] supportLibrary;
+        public EscapeScenario escape;public Stats escapeStats,fittings;
+        public string[] outdoorChunks;
     }
     public struct Waypoint { public Vector2 position; public int floor;public float y; public Waypoint(Vector2 p,int f,float height=0) { position=p;floor=f;y=height; } }
     public static Layout[] MakeFloors(Navigation navigation)
@@ -69,8 +73,11 @@ public sealed partial class NativePrototypeGame
         for(int i=-1;i<=1;i+=2)for(int j=-1;j<=1;j+=2)if(!Inside(x+i*radius,z+j*radius))return false;
         foreach(var shaft in plan.shafts)if(x>shaft.minX-radius&&x<shaft.maxX+radius&&z>shaft.minZ-radius&&z<shaft.maxZ+radius)return false;
         foreach(var wall in plan.walls)if(SegmentDistance(x,z,wall.a,wall.b)<radius+.09f)return false;
+        foreach(var item in plan.furniture??Array.Empty<Furnishing>())if(FurnitureContains(item,x,z,radius))return false;
+        foreach(var item in plan.roomDoors??Array.Empty<Furnishing>())if(FurnitureContains(item,x,z,radius))return false;
         return true;
     }
+    static bool FurnitureContains(Furnishing item,float x,float z,float radius){float c=Mathf.Cos(item.rotation),s=Mathf.Sin(item.rotation),dx=x-item.x,dz=z-item.z,u=c*dx-s*dz,v=s*dx+c*dz;float a=Mathf.Max(0,Mathf.Abs(u)-item.width/2),b=Mathf.Max(0,Mathf.Abs(v)-item.depth/2);return a*a+b*b<=radius*radius;}
     public static bool OutdoorClear(Manifest data,float x,float z,int periodIndex=8,bool trees=true)
     {
         var b=data.playBounds;if(x<=b.minX||x>=b.maxX||z<=b.minZ||z>=b.maxZ)return false;
@@ -115,7 +122,7 @@ public sealed partial class NativePrototypeGame
     bool LineOfSight(Layout plan,Vector2 a,Vector2 b)
     {
         int count=Mathf.CeilToInt(Vector2.Distance(a,b)/.35f);
-        for(int i=1;i<count;i++){var p=Vector2.Lerp(a,b,(float)i/count);if(!IndoorClear(plan,p.x,p.y,.02f))return false;}return true;
+        for(int i=1;i<count;i++){var p=Vector2.Lerp(a,b,(float)i/count);if(!InOutline(plan,p.x,p.y))return false;foreach(var w in plan.walls)if(SegmentDistance(p.x,p.y,w.a,w.b)<.11f)return false;foreach(var item in plan.furniture??Array.Empty<Furnishing>())if(item.y<1.5f&&item.y+item.height>1.5f&&FurnitureContains(item,p.x,p.y,.02f))return false;}return true;
     }
     static Vector3 World(Vector2 p,float y)=>new Vector3(p.x,y,-p.y);
 }

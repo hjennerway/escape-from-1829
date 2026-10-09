@@ -7,11 +7,15 @@ import {exteriorObstacles,obstacleContains} from './dist/explore-controls.mjs';
 import {pointInFootprint} from './dist/historic-footprints.mjs';
 import {HISTORIC_ROAD_TRACES} from './dist/historic-road-layout.mjs';
 import {VIVIENNE_LANE} from './dist/road-centerlines.mjs';
+import {checkGarageRoofJoins} from './test-support/garage-roof-probes.mjs';
+import {checkBlueRoofLanternPanes} from './test-support/blue-roof-lantern-probes.mjs';
 globalThis.document={createElement:()=>({getContext:()=>({fillRect(){},measureText:t=>({width:t.length*16}),strokeText(){},fillText(){}})})};
 const exterior=createEscapeExterior(THREE,1.5),site=exterior.garagesMortuary,layouts=createAerialLayouts(THREE,exterior);
 exterior.scene.updateMatrixWorld(true);
 const ray=new THREE.Raycaster(),m=site.userData.mortuary,g=site.userData.garages;
 assert.equal(site.parent,layouts.historic);
+checkGarageRoofJoins(THREE,site);
+assert.equal(checkBlueRoofLanternPanes(THREE,m,[-1,1].map(side=>({x:0,y:5.34,z:3.5+side*.86,r:side===1?0:Math.PI,w:2.5,h:.4,label:'Mortuary blue ridge vent'}))),16);
 // Every exposed wall segment must have one masonry face at each height.
 // A full-height wall behind the flush plinth makes the bottom courses flicker.
 const masonry=[m.getObjectByName('Mortuary T-shaped brick walls'),m.getObjectByName('Mortuary dark brick plinth')];

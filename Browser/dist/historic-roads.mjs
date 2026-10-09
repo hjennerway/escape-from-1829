@@ -3,6 +3,8 @@ import {applyGroundSurface} from './ground-materials.mjs';
 import {missingHistoricFootprints} from './historic-footprints.mjs';
 import {ROAD_STYLE} from './road-style.mjs';
 import {trimAnnexeEntranceBorder} from './annexe-access.mjs';
+import {prepareRoadEnds,createRoadEndFades} from './road-end-fades.mjs';
+import {createRoadRibbonGeometry,roadRibbonPolygons} from './road-ribbon.mjs';
 import {HISTORIC_ROADS_SOURCE,HISTORIC_ROADS,HISTORIC_GRAVEL,HISTORIC_PAVING,HISTORIC_GRASS,HISTORIC_KERBS} from './historic-road-layout.mjs';
 export * from './historic-road-layout.mjs';
 // Ramer-Douglas-Peucker in the ground plane, with exact junction endpoints.
@@ -26,12 +28,13 @@ export function createHistoricRoads(THREE,exterior){
  const junction=asphalt.clone();
  for(const mat of [asphalt,paving,junction])applyGroundSurface(THREE,mat,'asphalt');
  applyGroundSurface(THREE,gravel,'gravel');
- junction.polygonOffset=true;junction.polygonOffsetFactor=-6;junction.polygonOffsetUnits=-12;
+ junction.polygonOffset=true;junction.polygonOffsetFactor=0;junction.polygonOffsetUnits=-12;
  const islandGrass=grass.clone();
  matchEstateGrass(islandGrass,exterior.terrain.material);
- islandGrass.polygonOffset=true;islandGrass.polygonOffsetFactor=-7;islandGrass.polygonOffsetUnits=-14;
- // Separate close ground layers at the higher OS overview camera as well.
- for(const [mat,order] of [[gravel,1],[paving,2],[grass,3],[edge,ROAD_STYLE.edgeLayer],[asphalt,ROAD_STYLE.asphaltLayer],[kerb,8]]){mat.polygonOffset=true;mat.polygonOffsetFactor=-order;mat.polygonOffsetUnits=-order*2;}
+ islandGrass.polygonOffset=true;islandGrass.polygonOffsetFactor=0;islandGrass.polygonOffsetUnits=-14;
+ // Constant bias orders close overlays without pulling buried borders through
+ // roads or drawing lawn over raised kerbs at shallow walking angles.
+ for(const [mat,order] of [[gravel,1],[paving,2],[grass,3],[edge,ROAD_STYLE.edgeLayer],[asphalt,ROAD_STYLE.asphaltLayer],[kerb,8]]){mat.polygonOffset=true;mat.polygonOffsetFactor=0;mat.polygonOffsetUnits=-order*2;}
  function polygon(name,points,mat,y,holes=[]){
   const shape=new THREE.Shape(points.map(([x,z])=>new THREE.Vector2(x,-z)));
   for(const hole of holes)shape.holes.push(new THREE.Path(hole.map(([x,z])=>new THREE.Vector2(x,-z))));
@@ -39,20 +42,30 @@ export function createHistoricRoads(THREE,exterior){
   const uv=geometry.attributes.uv;for(let i=0;i<uv.count;i++)uv.setXY(i,uv.getX(i)/3,uv.getY(i)/3);
   const mesh=new THREE.Mesh(geometry,mat);mesh.rotation.x=-Math.PI/2;mesh.position.y=y;mesh.name=name;mesh.receiveShadow=true;mesh.renderOrder=mat===asphalt?2:mat===edge?1:0;mesh.userData.surface=(mat===asphalt||mat===paving||mat===junction)?'black road':mat===gravel?'gravel':mat===grass||mat===islandGrass?'grass':'stone kerb';group.add(mesh);return mesh;
  }
- function ribbon(name,points,width,mat,y,renderPoints=points){
+ function ribbon(name,points,width,mat,y,renderPoints=points,ends={}){
   const part=new THREE.Group();part.name=name;part.userData.centerline=points;part.userData.width=width;group.add(part);
-  points=renderPoints;
   const trim=name==='Annexe front avenue border';
-  const strip=points=>{for(const piece of trim?trimAnnexeEntranceBorder(points):[points])part.add(polygon(name+' surface',piece,mat,y));};
-  // Straight strips with small round joints avoid gaps at bends; no spline drift.
-  for(let i=1;i<points.length;i++){
-   const a=points[i-1],b=points[i],dx=b[0]-a[0],dz=b[1]-a[1],length=Math.hypot(dx,dz);if(length<1e-6)continue;
-   const ox=-dz/length*width/2,oz=dx/length*width/2;
-   strip([[a[0]+ox,a[1]+oz],[a[0]-ox,a[1]-oz],[b[0]-ox,b[1]-oz],[b[0]+ox,b[1]+oz]]);
+  if(trim){for(const outline of roadRibbonPolygons(renderPoints,width,ends))for(const piece of trimAnnexeEntranceBorder(outline))part.add(polygon(name+' surface',piece,mat,y));return;}
+  const mesh=new THREE.Mesh(createRoadRibbonGeometry(THREE,renderPoints,width,y,ends),mat);
+  mesh.name=name+' surface';mesh.receiveShadow=true;mesh.renderOrder=mat===asphalt?2:mat===edge?1:0;
+  mesh.userData.surface=mat===asphalt?'black road':'stone kerb';part.add(mesh);
+ }
+ function joinedKerb(spec){
+  const {points,width,joinHeight,blendLength}=spec,distances=[0],positions=[],uv=[],indices=[];
+  for(let i=1;i<points.length;i++)distances.push(distances[i-1]+Math.hypot(...points[i].map((v,k)=>v-points[i-1][k])));
+  for(let i=0;i<points.length;i++){
+   const p=points[i],a=points[Math.max(0,i-1)],b=points[Math.min(points.length-1,i+1)];
+   const dx=b[0]-a[0],dz=b[1]-a[1],length=Math.hypot(dx,dz);
+   // A continuous strip has no overlapping segment caps. Ease its top down
+   // to the existing road-border level at both ends rather than adding a step.
+   const t=Math.min(1,distances[i]/blendLength,(distances.at(-1)-distances[i])/blendLength);
+   const y=joinHeight+(.38-joinHeight)*t*t*(3-2*t);
+   for(const side of [-1,1]){positions.push(p[0]-dz/length*width/2*side,y,p[1]+dx/length*width/2*side);uv.push(distances[i],(side+1)/2);}
+   if(i){const j=i*2;indices.push(j-2,j-1,j,j-1,j+1,j);}
   }
-  const geometry=new THREE.CircleGeometry(width/2,ROAD_STYLE.roundSegments);geometry.rotateX(-Math.PI/2);
-  if(trim){for(const [x,z] of points)strip(Array.from({length:ROAD_STYLE.roundSegments},(_,i)=>{const a=i/ROAD_STYLE.roundSegments*Math.PI*2;return [x+Math.cos(a)*width/2,z+Math.sin(a)*width/2];}));geometry.dispose();return;}
-  for(const [x,z] of points){const cap=new THREE.Mesh(geometry,mat);cap.position.set(x,y,z);cap.receiveShadow=true;cap.renderOrder=mat===asphalt?2:mat===edge?1:0;cap.userData.surface=mat===asphalt?'black road':'stone kerb';part.add(cap);}
+  const geometry=new THREE.BufferGeometry();geometry.setAttribute('position',new THREE.Float32BufferAttribute(positions,3));geometry.setAttribute('uv',new THREE.Float32BufferAttribute(uv,2));geometry.setIndex(indices);geometry.computeVertexNormals();
+  const mesh=new THREE.Mesh(geometry,kerb);mesh.name=spec.name;mesh.receiveShadow=true;
+  mesh.userData={surface:'stone kerb',centerline:points,width};group.add(mesh);
  }
  for(const area of HISTORIC_GRAVEL)polygon(area.name,area.points,gravel,area.height??.265);
  // The service court meets the road without a pale border across its mouth.
@@ -62,9 +75,13 @@ export function createHistoricRoads(THREE,exterior){
   const mesh=polygon(area.name,area.points,mat,y,area.holes);if(type==='junction')mesh.renderOrder=3;
  }
  for(const area of HISTORIC_GRASS){const mesh=polygon(area.name,area.points,area.raisedIsland?islandGrass:grass,area.raisedIsland?.37:.31);if(area.raisedIsland)mesh.renderOrder=4;}
- for(const road of HISTORIC_ROADS)ribbon(road.name+' border',road.points,road.width+2*ROAD_STYLE.edgeWidth,edge,.32);
- for(const road of HISTORIC_ROADS)ribbon(road.name,road.points,road.width,asphalt,ROAD_STYLE.asphaltY);
- for(const edge of HISTORIC_KERBS)ribbon(edge.name,edge.points,edge.width??.32,kerb,.38,simplifyKerb(edge.points));
+ for(const road of HISTORIC_ROADS){
+  const ends=prepareRoadEnds(road.name,road.points);
+  ribbon(road.name+' border',road.points,road.width+2*ROAD_STYLE.edgeWidth,edge,.32,ends.points,ends);
+  ribbon(road.name,road.points,road.width,asphalt,ROAD_STYLE.asphaltY,ends.points,ends);
+  if(ends.fades.length)group.add(createRoadEndFades(THREE,road.name,road.width,ends));
+ }
+ for(const edge of HISTORIC_KERBS){if(edge.joinHeight!==undefined)joinedKerb(edge);else ribbon(edge.name,edge.points,edge.width??.32,kerb,.38,simplifyKerb(edge.points));}
  // Retain OS reference metadata for placement and clearance checks without drawing ground outlines.
  group.userData.missingFootprints=missingHistoricFootprints(THREE,exterior);
  return group;

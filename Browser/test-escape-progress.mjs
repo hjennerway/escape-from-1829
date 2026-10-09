@@ -32,7 +32,9 @@ for(let sample=0;sample<128;sample++){
  const state=createEscapeProgress({seed,floors,journal:createNotebook(floors)});
  assert(!state.openStair('S1'));state.interact('staff-key');assert(state.openStair('S1'));assert(state.openStair('S5'));
  assert(!state.door({id:run.exitId}).allowed,'Stair key cannot unlock outside door');
- state.interact('plan');assert(!state.door({id:run.exitId==='D2'?'D8':'D2'}).allowed);assert(state.door({id:run.exitId}).allowed);
+ state.interact('plan');
+ for(const floor of floors)for(const exit of floor.exits){const allowed=exit.x<0||exit.id===run.exitId;assert.equal(state.door(exit).allowed,allowed,`Brass key coverage ${floor.id}:${exit.id}`);assert.equal(state.doorLocked(exit),!allowed);}
+ assert(state.door({id:run.exitId}).allowed);
  const outcome=state.capture();assert(!outcome.terminal);assert(!state.run.staffKey&&!state.run.serviceKey);assert(state.run.opened.has('S1'));
  state.interact('reclaim');assert(state.run.staffKey&&state.run.serviceKey);
  const second=state.capture();assert.equal(second.floor,2);assert.equal(second.delay,4);
@@ -94,7 +96,7 @@ for(const seed of [0,1829,10000019,20000038]){
  const wrongWing=p.objective({floor:3,x:p.run.office==='R41'?-65:0});
  assert(wrongWing.detail.includes('first floor')&&wrongWing.detail.includes('other staff stair'));
  assert(journal.entries.find(e=>e.id==='escape:gate:S5').text.includes('room '+number),'Opened-gate evidence retains the next room for later reading');
- p.interact('plan');assert(p.objective(actor).title.includes(p.run.variant+' outer entrance'));assert(delayedHint(p,actor).detail.includes(p.run.exitId));
+ p.interact('plan');assert.equal(p.objective(actor).title,'Unlock any west-side exit');assert(delayedHint(p,actor).detail.includes(p.run.exitId));
  p.capture();assert(p.objective(actor).title.includes('Recover'));assert(delayedHint(p,actor).detail.includes('property tray'));
  p.interact('reclaim');assert(p.objective(actor).title.includes('Unlock'));delayedHint(p,actor);
  assert(delayedHint(p,{...actor,outside:true}).detail.includes('perimeter path'));
@@ -173,20 +175,31 @@ for(let seed=0;seed<8;seed++){
   assert(!world.allowMove({...from,y:from.y+.7},{...to,y:to.y+.7}),'Jump cannot bypass gate');
   assert(world.near({...from,x:gate.x-gate.dz*1.05,z:gate.z+gate.dx*1.05})?.gate,'The grille can be operated before its collision padding blocks approach');
   assert(world.allowMove({...from,y:0},{...to,y:0}),'Lower storey stays clear');
-  progress.interact('staff-key');progress.openStair(gate.id);assert(world.allowMove(from,to));
+  progress.interact('staff-key');progress.openStair(gate.id);world.sync();
+  assert(!world.allowMove(from,to),'Released gate still blocks until its leaf swings clear');
+  world.update(0,.55);assert(Math.abs(gate.hinge.rotation.y-Math.PI/4)<1e-8,'Gate swings through a visible intermediate pose');
+  const paused=gate.hinge.rotation.y;world.sync();world.update(10,0);assert.equal(gate.hinge.rotation.y,paused,'Sync and paused time do not advance the swing');
+  world.update(0,.55);assert(world.allowMove(from,to),'Open gate clears the stair route');
+  assert(gate.leaf.visible&&!gate.lock.visible,'Open leaf remains visible with its lock released');
+  gate.group.updateWorldMatrix(true,true);
+  const centre=gate.leaf.getWorldPosition(new THREE.Vector3());
+  const left={...from,x:centre.x+gate.dz*.6,z:centre.z-gate.dx*.6},right={...from,x:centre.x-gate.dz*.6,z:centre.z+gate.dx*.6};
+  assert(!world.allowMove(left,right),'Open leaf still blocks walking through its bars beside the landing');
  }
  const release=world.anchor(2,'B5');assert(walkable(floors[2],release.x,release.z,.5),'Capture cell has a safe pose');
  world.dispose();
 }
-const still=createEscapeWorld(THREE,floors,floors.map(()=>new THREE.Group()),createEscapeProgress({seed:1829,floors}),{reducedMotion:true});
-still.update(0);const scale=still.nodes[0].beacon.scale.toArray();still.update(.7);assert.deepEqual(still.nodes[0].beacon.scale.toArray(),scale,'Reduced motion keeps a strong steady glow');still.dispose();
+const stillProgress=createEscapeProgress({seed:1829,floors}),still=createEscapeWorld(THREE,floors,floors.map(()=>new THREE.Group()),stillProgress,{reducedMotion:true});
+still.update(0);const scale=still.nodes[0].beacon.scale.toArray();still.update(.7);assert.deepEqual(still.nodes[0].beacon.scale.toArray(),scale,'Reduced motion keeps a strong steady glow');
+stillProgress.interact('release');still.sync();assert(still.gates.every(g=>g.leaf.visible&&g.hinge.rotation.y===Math.PI/2),'Reduced motion shows the open leaf immediately');still.dispose();
 {
  const progress=createEscapeProgress({seed:1829,floors}),world=createEscapeWorld(THREE,floors,floors.map(()=>new THREE.Group()),progress);
  for(const unlocked of [true,false,true]){
-  progress.setDoorsUnlocked(unlocked);world.sync();
+  progress.setDoorsUnlocked(unlocked);world.sync();world.update(0,1.1);
   for(const gate of world.gates){
    const from={x:gate.x-gate.dx*.6,z:gate.z-gate.dz*.6,y:gate.y,floor:1,outside:false},to={...from,x:gate.x+gate.dx*.6,z:gate.z+gate.dz*.6};
-   assert.equal(gate.leaf.visible,!unlocked,'Grille visibility follows developer unlock');
+   assert(gate.leaf.visible,'Developer unlock retains the visible grille');
+   assert.equal(gate.lock.visible,!unlocked,'Grille lock follows developer unlock');
    assert.equal(world.allowMove(from,to),unlocked,'Grille collision follows developer unlock');
    assert.equal(world.near(from)?.gate?.id===gate.id,!unlocked,'Unlocked grilles cannot show a locked interaction prompt');
   }

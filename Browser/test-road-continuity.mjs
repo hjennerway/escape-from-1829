@@ -4,17 +4,22 @@ import {writeFileSync} from 'node:fs';
 import * as THREE from './dist/vendor/three.module.js';
 import {createEscapeExterior} from './dist/escape-exterior.mjs';
 import {createAerialLayouts} from './dist/aerial-layouts.mjs';
+import {assertRoadEndSurface,assertRoadEndJoins} from './test-support/road-end-assertions.mjs';
+import {MODERN_ROAD_PATHS} from './dist/modern-road-data.mjs';
+import {HISTORIC_ROADS,HISTORIC_PAVING} from './dist/historic-road-layout.mjs';
 
 // Inspect actual world-space geometry, including hidden batch sources in a
 // compiled scene. A resurfacing patch must never form a ledge across a lane.
 export function assertRoadContinuity(layouts){
  const roots=[layouts.roads,layouts.historicRoads,layouts.entrance,layouts.countessRoundabout,layouts.carPark];
  for(const root of roots)root.updateWorldMatrix(true,true);
+ assertRoadEndJoins(THREE,roots);
  const reference=layouts.roads.getObjectByName('Vivienne Smith Lane').children[1].children[0];
  const level=new THREE.Vector3().fromBufferAttribute(reference.geometry.attributes.position,0).applyMatrix4(reference.matrixWorld).y;
- const point=new THREE.Vector3(),normal=new THREE.Vector3(),surfaces=[],issues=[],sides=[];
+ const point=new THREE.Vector3(),normal=new THREE.Vector3(),surfaces=[],issues=[],sides=[],inspected=new Set();
  for(const root of roots)root.traverse(mesh=>{
   if(!mesh.isMesh||mesh.isInstancedMesh)return;
+  if(mesh.userData.roadEndFade){assertRoadEndSurface(mesh);return;}
   const material=mesh.material;
   if(material.userData?.estateSurface!=='asphalt'&&mesh.name!=='Countess roundabout painted centre')return;
   const p=mesh.geometry.attributes.position,n=mesh.geometry.attributes.normal;
@@ -27,6 +32,7 @@ export function assertRoadContinuity(layouts){
   }
   if(!Number.isFinite(min))return;
   const name=mesh.name||mesh.parent.name;
+  inspected.add(mesh);
   surfaces.push({name,min,max});
   if(Math.max(Math.abs(min-level),Math.abs(max-level))>1e-5)issues.push({name,min,max,step:Math.max(Math.abs(min-level),Math.abs(max-level))});
  });
@@ -40,7 +46,14 @@ export function assertRoadContinuity(layouts){
    if(point.y>level+1e-5){sides.push({name:mesh.name,y:point.y});break;}
   }
  });
- assert(surfaces.length>1000,'Inspect the whole historic and modern road network');
+ // Coverage follows the authored inventory, independent of mesh merging.
+ // Every lane and junction must actually contribute inspected top geometry.
+ const covered=owner=>{let found=false;owner?.traverse(mesh=>{if(inspected.has(mesh))found=true;});return found;};
+ for(const road of MODERN_ROAD_PATHS)assert(covered(layouts.roads.getObjectByName(road.name)),'Inspect shared lane '+road.name);
+ for(const name of ['Vivienne Smith Lane eastern continuation','Parsons Lane northern modern endpoint'])assert(covered(layouts.roads.getObjectByName(name)),'Inspect modern tail '+name);
+ for(const road of HISTORIC_ROADS)assert(covered(layouts.historicRoads.getObjectByName(road.name)),'Inspect historic lane '+road.name);
+ for(const area of HISTORIC_PAVING.filter(a=>a.surface!=='junction edge'))assert(covered(layouts.historicRoads.getObjectByName(area.name)),'Inspect paved court/junction '+area.name);
+ for(const root of roots)assert(covered(root),'Inspect road surface root '+root.name);
  const report={level,surfaceCount:surfaces.length,issues,exposedSides:sides};
  assert.deepEqual(issues,[],'All carriageways, courts, junction patches, parking and paint must meet flush: '+JSON.stringify(report));
  assert.deepEqual(sides,[],'No internal asphalt support may project above the road');

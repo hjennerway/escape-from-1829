@@ -1,5 +1,34 @@
 # East courtyard beside Redesmere — 25 September 2026
 
+## Lean-to roof contact and grit-bin removal (8 October 2026)
+
+The owner's [marked game view](lean-to-box-reference.png) requests removal of
+the orange-circled grit bin and closure of the yellow-circled lean-to roof/wall
+gap. The screenshot identifies the east courtyard corner; its marks supply no
+additional modelling instructions or surveyed dimensions.
+
+`Browser/dist/courtyard-photo-detail.mjs` removes both bin pieces at
+(47.9, 3.3). The lean-to's brick sides now follow the underside of its glazed
+roof, with a 0.003-unit concealed overlap to avoid numerical cracks. The
+existing 0.72-radian pitch, front eave and exposed ground footprint remain.
+The rear masonry and glazing extend to z=7.02 and z=7.04 respectively, joining
+the existing inset wall at z=7. Roof bars follow the extended glazing. The
+surrounding windows, pipes, planting and slate roofs retain their geometry.
+
+The courtyard and roof-wall checks include 123 wall/roof contacts, rear
+attachment probes, and an empty/walkable former bin footprint. They reject
+the saved earlier builder. Source and compiled views, the outside-geometry
+comparison and validation receipts are in
+`Browser/artifacts/east-courtyard-lean-to/`. The comparison retains all
+1,446,227 primitives outside the lean-to/bin areas and all 302 original slate
+roof primitives. The estate-wide Jarman and Leighton/Newton snapshot records
+are refreshed only after this independent comparison; their old records
+match the saved pre-edit builder, and Leighton/Newton's ranges are retained.
+
+These changes update shared Browser geometry and the local compiled aerial
+asset. Unity/Android, Blender, interior assets and packaged exports are not
+regenerated.
+
 ## Rear return windows and fire-exit trim (3 October 2026)
 
 The owner's [marked courtyard screenshot](rear-window-correction-marked.png)

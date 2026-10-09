@@ -1,0 +1,4 @@
+(node:70072) ExperimentalWarning: `--experimental-loader` may be removed in the future; instead use `register()`:
+--import 'data:text/javascript,import { register } from "node:module"; import { pathToFileURL } from "node:url"; register("./artifacts/window-head-brick/without-window-change.mjs", pathToFileURL("./"));'
+(Use `node --trace-warnings ...` to show where the warning was created)
+PASS: 244 grounded road/path edges, all tree families/LODs, 1327 hillside trees and every lamppost in all 13 periods and four layout states; walking stays clear.

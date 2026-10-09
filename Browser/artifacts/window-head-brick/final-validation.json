@@ -1,0 +1,18 @@
+{
+  "remainingChecks": 64,
+  "failures": [
+    {
+      "command": "node test-jarman.mjs",
+      "status": 1,
+      "milliseconds": 29940
+    },
+    {
+      "command": "node test-leighton-newton.mjs",
+      "status": 1,
+      "milliseconds": 23931
+    }
+  ],
+  "sourceHash": "dbc20a385ca020fc3ff87699ed163f3beb9e84355983162594106d70155e527b",
+  "compiledSourceHash": "dbc20a385ca020fc3ff87699ed163f3beb9e84355983162594106d70155e527b",
+  "file": "aerial-082c3b39779e4ea21b08.bin.gz"
+}

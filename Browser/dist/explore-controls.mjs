@@ -18,6 +18,12 @@ export function obstacleContains(b,x,z,padding=.4){
   return inside;
 }
 
+// Authored flat paths and sloping decks share the same footprint lookup.
+export function walkSurfaceHeight(surface,x,z){
+  const p=surface.plane;
+  return p?-(p[0]*x+p[2]*z+p[3])/p[1]:surface.height;
+}
+
 // Index padded bounds once; keep the exact polygon checks for nearby obstacles.
 // Including the padding here also covers collisions across cell boundaries.
 export function createObstacleIndex(obstacles,cellSize=12,padding=.4){
@@ -41,7 +47,7 @@ export function createObstacleIndex(obstacles,cellSize=12,padding=.4){
 export function createWalker(camera,obstacles=[]){
   const keys=new Set(),defaultFov=camera.fov;let yaw=0,pitch=0,index=createObstacleIndex(obstacles),surfaces=obstacles.walkSurfaces??[];
   let jumper=null;
-  function heightAt(x,z){const surface=surfaces.find(s=>obstacleContains(s,x,z,1e-7));return surface?surface.height-surface.grade:0;}
+  function heightAt(x,z){const surface=surfaces.find(s=>obstacleContains(s,x,z,1e-7));return surface?walkSurfaceHeight(surface,x,z)-surface.grade:0;}
   function groundHeight(){
     camera.position.y=1.8+heightAt(camera.position.x,camera.position.z);
   }
@@ -143,17 +149,23 @@ export function exteriorObstacles(THREE,model,{preciseFootprints=false}={}){
       const p=new THREE.Vector3().setFromMatrixPosition(o.matrixWorld),r=o.userData.treeTrunk.radius;
       const trunk={minX:p.x-r,maxX:p.x+r,minZ:p.z-r,maxZ:p.z+r};obstacles.push(trunk);obstacles.jumpObstacles.push(trunk);
     }
+    for(const surface of o.userData.walkSurfaces??[]){
+      if(surface.plane){
+        const plane=new THREE.Plane(new THREE.Vector3(...surface.plane.slice(0,3)),surface.plane[3]).normalize().applyMatrix4(o.matrixWorld);
+        const corners=surface.outline.map(([x,z])=>{const y=walkSurfaceHeight(surface,x,z),p=new THREE.Vector3(x,y,z).applyMatrix4(o.matrixWorld);return [p.x,p.z];});
+        obstacles.walkSurfaces.push({corners,plane:[...plane.normal.toArray(),plane.constant],grade:surface.grade??0,minX:Math.min(...corners.map(p=>p[0])),maxX:Math.max(...corners.map(p=>p[0])),minZ:Math.min(...corners.map(p=>p[1])),maxZ:Math.max(...corners.map(p=>p[1]))});
+      }else{
+        const corners=surface.outline.map(([x,z])=>{const p=new THREE.Vector3(x,surface.height,z).applyMatrix4(o.matrixWorld);return [p.x,p.z];});
+        const height=new THREE.Vector3(0,surface.height,0).applyMatrix4(o.matrixWorld).y;
+        const grade=new THREE.Vector3(0,surface.grade,0).applyMatrix4(o.matrixWorld).y;
+        obstacles.walkSurfaces.push({corners,height,grade,minX:Math.min(...corners.map(p=>p[0])),maxX:Math.max(...corners.map(p=>p[0])),minZ:Math.min(...corners.map(p=>p[1])),maxZ:Math.max(...corners.map(p=>p[1]))});
+      }
+    }
     if(o.userData.noWalkingCollision)return;
     if(o.userData.stairGuard){
       const parts=stairGuardObstacles(THREE,o.userData.stairGuard,o.matrixWorld);
       if(preciseFootprints)obstacles.push(...parts);
       obstacles.jumpObstacles.push(...parts);return;
-    }
-    for(const surface of o.userData.walkSurfaces??[]){
-      const corners=surface.outline.map(([x,z])=>{const p=new THREE.Vector3(x,surface.height,z).applyMatrix4(o.matrixWorld);return [p.x,p.z];});
-      const height=new THREE.Vector3(0,surface.height,0).applyMatrix4(o.matrixWorld).y;
-      const grade=new THREE.Vector3(0,surface.grade,0).applyMatrix4(o.matrixWorld).y;
-      obstacles.walkSurfaces.push({corners,height,grade,minX:Math.min(...corners.map(p=>p[0])),maxX:Math.max(...corners.map(p=>p[0])),minZ:Math.min(...corners.map(p=>p[1])),maxZ:Math.max(...corners.map(p=>p[1]))});
     }
     if(!o.isMesh)return;if(o.isInstancedMesh){for(let i=0;i<o.count;i++){o.getMatrixAt(i,matrix);world.multiplyMatrices(o.matrixWorld,matrix);add(o.geometry,world,o.userData.orientedCollision,o.userData.collisionFootprint,o.userData.walkBarrier);}}else if(o.userData.collisionFootprints){
     for(const footprint of o.userData.collisionFootprints)add(o.geometry,o.matrixWorld,false,footprint);

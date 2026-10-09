@@ -1,0 +1,25 @@
+{
+  "results": [
+    {
+      "name": "desktop",
+      "previewVisibleMilliseconds": 83.1000000005588,
+      "firstOutdoorDrawMilliseconds": 7446.100000000559,
+      "model": "compiled",
+      "walkingDuringDelayedFurniture": true,
+      "doorWaitsAndRetries": true,
+      "failedDownloadRetry": true,
+      "errors": []
+    },
+    {
+      "name": "phone-fallback",
+      "previewVisibleMilliseconds": 70.29999999981374,
+      "firstOutdoorDrawMilliseconds": 7093.100000000559,
+      "model": "procedural",
+      "walkingDuringDelayedFurniture": true,
+      "doorWaitsAndRetries": true,
+      "failedDownloadRetry": false,
+      "errors": []
+    }
+  ],
+  "loadFailureRecovery": true
+}

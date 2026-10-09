@@ -1,0 +1,3891 @@
+{
+  "model": {
+    "mode": "compiled",
+    "milliseconds": 2643
+  },
+  "renderer": "ANGLE (NVIDIA, NVIDIA GeForce RTX 3090 Ti (0x00002203) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+  "rows": [
+    {
+      "name": "Estate terrain",
+      "parents": [
+        "1829 estate · aerial reconstruction",
+        ""
+      ],
+      "visible": true,
+      "source": false,
+      "min": [
+        -2000,
+        -0.15000000000044408,
+        -2000
+      ],
+      "max": [
+        2000,
+        -0.1499999999995559,
+        2000
+      ]
+    },
+    {
+      "name": "",
+      "parents": [
+        "Trees",
+        "Shared estate"
+      ],
+      "visible": true,
+      "source": false,
+      "min": [
+        -94.31000709533691,
+        2.1927536725997925,
+        -81.53482353687286
+      ],
+      "max": [
+        375.1033968925476,
+        9.544672012329102,
+        56.6367027759552
+      ]
+    },
+    {
+      "name": "",
+      "parents": [
+        "Trees",
+        "Shared estate"
+      ],
+      "visible": true,
+      "source": false,
+      "min": [
+        -95.29316830635071,
+        2.4787912368774414,
+        -80.23644006252289
+      ],
+      "max": [
+        375.36482751369476,
+        9.209141731262207,
+        56.542252004146576
+      ]
+    },
+    {
+      "name": "",
+      "parents": [
+        "Trees",
+        "Shared estate"
+      ],
+      "visible": true,
+      "source": false,
+      "min": [
+        -93.90401291847229,
+        2.217662811279297,
+        -80.16055560112
+      ],
+      "max": [
+        371.90072894096375,
+        9.146657466888428,
+        56.16046044230461
+      ]
+    },
+    {
+      "name": "",
+      "parents": [
+        "",
+        "Upton grange"
+      ],
+      "visible": true,
+      "source": false,
+      "min": [
+        38.856544494628906,
+        0.3199999928474426,
+        -23.906049728393555
+      ],
+      "max": [
+        263.0875549316406,
+        0.3199999928474426,
+        243.97476196289062
+      ]
+    },
+    {
+      "name": " ground contact",
+      "parents": [
+        "",
+        "Upton grange"
+      ],
+      "visible": true,
+      "source": false,
+      "min": [
+        38.856544494628906,
+        -0.17000000178813934,
+        -23.906049728393555
+      ],
+      "max": [
+        263.0875549316406,
+        0.3199999928474426,
+        243.97476196289062
+      ]
+    },
+    {
+      "name": "",
+      "parents": [
+        "",
+        "Upton grange"
+      ],
+      "visible": true,
+      "source": false,
+      "min": [
+        39.3332405090332,
+        0.3400000035762787,
+        -23.304826736450195
+      ],
+      "max": [
+        262.487548828125,
+        0.3400000035762787,
+        243.6103973388672
+      ]
+    },
+    {
+      "name": " ground contact",
+      "parents": [
+        "",
+        "Upton grange"
+      ],
+      "visible": true,
+      "source": false,
+      "min": [
+        39.3332405090332,
+        -0.17000000178813934,
+        -23.304826736450195
+      ],
+      "max": [
+        262.487548828125,
+        0.3400000035762787,
+        243.6103973388672
+      ]
+    },
+    {
+      "name": "Pebbledash concrete column and curved arm",
+      "parents": [
+        "Street lamps · Upton grange",
+        "Upton grange"
+      ],
+      "visible": true,
+      "source": false,
+      "min": [
+        48.5937692979066,
+        -0.15000000596046448,
+        -6.36440168314447
+      ],
+      "max": [
+        253.1105973316424,
+        5.90491446852684,
+        237.00288758468943
+      ]
+    },
+    {
+      "name": "",
+      "parents": [
+        "",
+        "Gerrard Crescent"
+      ],
+      "visible": true,
+      "source": false,
+      "min": [
+        156.09219360351562,
+        0.3199999928474426,
+        -119.69700622558594
+      ],
+      "max": [
+        254.77780151367188,
+        0.3199999928474426,
+        36.20296859741211
+      ]
+    },
+    {
+      "name": " ground contact",
+      "parents": [
+        "",
+        "Gerrard Crescent"
+      ],
+      "visible": true,
+      "source": false,
+      "min": [
+        156.09219360351562,
+        -0.17000000178813934,
+        -119.69700622558594
+      ],
+      "max": [
+        254.77780151367188,
+        0.3199999928474426,
+        36.20296859741211
+      ]
+    },
+    {
+      "name": "",
+      "parents": [
+        "",
+        "Gerrard Crescent"
+      ],
+      "visible": true,
+      "source": false,
+      "min": [
+        156.69708251953125,
+        0.3400000035762787,
+        -119.09578704833984
+      ],
+      "max": [
+        254.7437286376953,
+        0.3400000035762787,
+        35.60174560546875
+      ]
+    },
+    {
+      "name": " ground contact",
+      "parents": [
+        "",
+        "Gerrard Crescent"
+      ],
+      "visible": true,
+      "source": false,
+      "min": [
+        156.69708251953125,
+        -0.17000000178813934,
+        -119.09578704833984
+      ],
+      "max": [
+        254.7437286376953,
+        0.3400000035762787,
+        35.60174560546875
+      ]
+    },
+    {
+      "name": "",
+      "parents": [
+        "",
+        "Frost drive"
+      ],
+      "visible": true,
+      "source": false,
+      "min": [
+        125.69136810302734,
+        0.3199999928474426,
+        -46.03566360473633
+      ],
+      "max": [
+        161.72589111328125,
+        0.3199999928474426,
+        60.24199676513672
+      ]
+    },
+    {
+      "name": " ground contact",
+      "parents": [
+        "",
+        "Frost drive"
+      ],
+      "visible": true,
+      "source": false,
+      "min": [
+        125.69136810302734,
+        -0.17000000178813934,
+        -46.03566360473633
+      ],
+      "max": [
+        161.72589111328125,
+        0.3199999928474426,
+        60.24199676513672
+      ]
+    },
+    {
+      "name": "",
+      "parents": [
+        "",
+        "Frost drive"
+      ],
+      "visible": true,
+      "source": false,
+      "min": [
+        126.29219055175781,
+        0.3400000035762787,
+        -45.43444061279297
+      ],
+      "max": [
+        161.12588500976562,
+        0.3400000035762787,
+        59.642127990722656
+      ]
+    },
+    {
+      "name": " ground contact",
+      "parents": [
+        "",
+        "Frost drive"
+      ],
+      "visible": true,
+      "source": false,
+      "min": [
+        126.29219055175781,
+        -0.17000000178813934,
+        -45.43444061279297
+      ],
+      "max": [
+        161.12588500976562,
+        0.3400000035762787,
+        59.642127990722656
+      ]
+    },
+    {
+      "name": "",
+      "parents": [
+        "",
+        "Upton Grange (Part 2)"
+      ],
+      "visible": true,
+      "source": false,
+      "min": [
+        132.4158477783203,
+        0.3199999928474426,
+        -43.97039794921875
+      ],
+      "max": [
+        461.3832702636719,
+        0.3199999928474426,
+        221.7341766357422
+      ]
+    },
+    {
+      "name": " ground contact",
+      "parents": [
+        "",
+        "Upton Grange (Part 2)"
+      ],
+      "visible": true,
+      "source": false,
+      "min": [
+        132.4158477783203,
+        -0.17000000178813934,
+        -43.97039794921875
+      ],
+      "max": [
+        461.3832702636719,
+        0.3199999928474426,
+        221.7341766357422
+      ]
+    },
+    {
+      "name": "",
+      "parents": [
+        "",
+        "Upton Grange (Part 2)"
+      ],
+      "visible": true,
+      "source": false,
+      "min": [
+        133.02073669433594,
+        0.3400000035762787,
+        -43.36917495727539
+      ],
+      "max": [
+        460.78326416015625,
+        0.3400000035762787,
+        221.13296508789062
+      ]
+    },
+    {
+      "name": " ground contact",
+      "parents": [
+        "",
+        "Upton Grange (Part 2)"
+      ],
+      "visible": true,
+      "source": false,
+      "min": [
+        133.02073669433594,
+        -0.17000000178813934,
+        -43.36917495727539
+      ],
+      "max": [
+        460.78326416015625,
+        0.3400000035762787,
+        221.13296508789062
+      ]
+    },
+    {
+      "name": "Pebbledash concrete column and curved arm",
+      "parents": [
+        "Street lamps · Upton Grange (Part 2)",
+        "Upton Grange (Part 2)"
+      ],
+      "visible": true,
+      "source": false,
+      "min": [
+        141.94579103100972,
+        -0.15000000596046448,
+        -38.73178784664732
+      ],
+      "max": [
+        443.55537153701306,
+        5.90491446852684,
+        221.96439955938564
+      ]
+    },
+    {
+      "name": "West projecting pavilion walls",
+      "parents": [
+        "Main/admin building",
+        "Historic layout"
+      ],
+      "visible": false,
+      "source": true,
+      "min": [
+        160.5,
+        -0.1800000190734865,
+        6.600000000000001
+      ],
+      "max": [
+        174,
+        14.100000190734864,
+        38.6
+      ]
+    },
+    {
+      "name": "West projecting pavilion plinth",
+      "parents": [
+        "Main/admin building",
+        "Historic layout"
+      ],
+      "visible": false,
+      "source": true,
+      "min": [
+        160.44000005722046,
+        -0.1799999952316284,
+        6.540000534057619
+      ],
+      "max": [
+        174.05999994277954,
+        0.40000000298023225,
+        38.659999465942384
+      ]
+    },
+    {
+      "name": "West projecting pavilion stone course",
+      "parents": [
+        "Main/admin building",
+        "Historic layout"
+      ],
+      "visible": false,
+      "source": true,
+      "min": [
+        160.42000007629395,
+        4.564999999105931,
+        6.520000076293947
+      ],
+      "max": [
+        174.07999992370605,
+        4.73500000089407,
+        38.679999923706056
+      ]
+    },
+    {
+      "name": "Admin sash and masonry details",
+      "parents": [
+        "Main/admin building · building detail 0",
+        "Main/admin building"
+      ],
+      "visible": true,
+      "source": false,
+      "min": [
+        146.9000007621944,
+        -0.18000030517578125,
+        5.904999160021546
+      ],
+      "max": [
+        241.6624989323318,
+        22.08500000089407,
+        42.29999923780561
+      ]
+    },
+    {
+      "name": "Admin sash and masonry details",
+      "parents": [
+        "Main/admin building · building detail 0",
+        "Main/admin building"
+      ],
+      "visible": true,
+      "source": false,
+      "min": [
+        146.85499832220376,
+        0.5499999821186066,
+        5.860000534728172
+      ],
+      "max": [
+        241.64500167779624,
+        13.024999976158142,
+        42.344999770447615
+      ]
+    },
+    {
+      "name": "Admin sash and masonry details",
+      "parents": [
+        "Main/admin building · building detail 0",
+        "Main/admin building"
+      ],
+      "visible": true,
+      "source": false,
+      "min": [
+        146.77999862655997,
+        -0.18000006675720215,
+        5.78500083908439
+      ],
+      "max": [
+        241.72000137344003,
+        13.075000047683716,
+        42.4199994660914
+      ]
+    },
+    {
+      "name": "Admin sash and masonry details",
+      "parents": [
+        "Main/admin building · building detail 0",
+        "Main/admin building"
+      ],
+      "visible": true,
+      "source": false,
+      "min": [
+        146.6949995458126,
+        0.0700000524520874,
+        5.699999850988391
+      ],
+      "max": [
+        241.8050004541874,
+        13.35499992966652,
+        42.505000454187396
+      ]
+    },
+    {
+      "name": "Admin sash and masonry details · reduced detail",
+      "parents": [
+        "Main/admin building · building detail 1",
+        "Main/admin building"
+      ],
+      "visible": true,
+      "source": false,
+      "min": [
+        160.41000080108643,
+        -0.18000030517578125,
+        5.9200002297759085
+      ],
+      "max": [
+        241.6624989323318,
+        22.08500000089407,
+        40.36500084102154
+      ]
+    },
+    {
+      "name": "Main/admin building · textured windows",
+      "parents": [
+        "Main/admin building · building detail 1",
+        "Main/admin building"
+      ],
+      "visible": true,
+      "source": false,
+      "min": [
+        146.69300079345703,
+        0.36000001430511475,
+        5.6979991912841825
+      ],
+      "max": [
+        241.80699920654297,
+        13.354999542236328,
+        42.507001113891604
+      ]
+    },
+    {
+      "name": "Admin sash and masonry details · reduced detail",
+      "parents": [
+        "Main/admin building · building detail 2",
+        "Main/admin building"
+      ],
+      "visible": true,
+      "source": false,
+      "min": [
+        160.41000080108643,
+        -0.18000030517578125,
+        5.9200002297759085
+      ],
+      "max": [
+        241.6624989323318,
+        22.08500000089407,
+        40.36500084102154
+      ]
+    },
+    {
+      "name": "Main/admin building · textured windows",
+      "parents": [
+        "Main/admin building · building detail 2",
+        "Main/admin building"
+      ],
+      "visible": true,
+      "source": false,
+      "min": [
+        146.69300079345703,
+        0.36000001430511475,
+        5.6979991912841825
+      ],
+      "max": [
+        241.80699920654297,
+        13.354999542236328,
+        42.507001113891604
+      ]
+    },
+    {
+      "name": "Corridor brick eaves course outside accessible gallery",
+      "parents": [
+        "Corridor north windows",
+        "1829 to Main/admin connecting corridor"
+      ],
+      "visible": false,
+      "source": true,
+      "min": [
+        156.94874954223633,
+        3.3300000013411046,
+        6.490000000298026
+      ],
+      "max": [
+        160.5,
+        3.4499999986588956,
+        6.59999999970198
+      ]
+    },
+    {
+      "name": "Corridor projecting brick eaves outside accessible gallery",
+      "parents": [
+        "Corridor north windows",
+        "1829 to Main/admin connecting corridor"
+      ],
+      "visible": false,
+      "source": true,
+      "min": [
+        156.94874954223633,
+        3.439999999254942,
+        6.390000003278257
+      ],
+      "max": [
+        160.5,
+        3.5400000007450583,
+        6.599999996721747
+      ]
+    },
+    {
+      "name": "Corridor brick eaves course outside accessible gallery",
+      "parents": [
+        "Corridor south windows",
+        "1829 to Main/admin connecting corridor"
+      ],
+      "visible": false,
+      "source": true,
+      "min": [
+        156.94874954223633,
+        3.3300000013411046,
+        13.000000000298023
+      ],
+      "max": [
+        160.5,
+        3.4499999986588956,
+        13.109999999701976
+      ]
+    },
+    {
+      "name": "Corridor projecting brick eaves outside accessible gallery",
+      "parents": [
+        "Corridor south windows",
+        "1829 to Main/admin connecting corridor"
+      ],
+      "visible": false,
+      "source": true,
+      "min": [
+        156.94874954223633,
+        3.439999999254942,
+        13.000000003278256
+      ],
+      "max": [
+        160.5,
+        3.5400000007450583,
+        13.209999996721745
+      ]
+    },
+    {
+      "name": "Corridor south windows · textured window assemblies",
+      "parents": [
+        "Corridor south windows · assembly detail 1",
+        "Corridor south windows"
+      ],
+      "visible": true,
+      "source": false,
+      "min": [
+        159.30199998617175,
+        1.2949999570846558,
+        -13.899999618530272
+      ],
+      "max": [
+        159.30199998617175,
+        2.880000114440918,
+        3.899999618530275
+      ]
+    },
+    {
+      "name": "Corridor south windows · textured window assemblies",
+      "parents": [
+        "Corridor south windows · assembly detail 2",
+        "Corridor south windows"
+      ],
+      "visible": true,
+      "source": false,
+      "min": [
+        159.30199998617175,
+        1.2949999570846558,
+        -13.899999618530272
+      ],
+      "max": [
+        159.30199998617175,
+        2.880000114440918,
+        3.899999618530275
+      ]
+    },
+    {
+      "name": "Main/admin front corridor walls outside accessible gallery",
+      "parents": [
+        "Main/admin front corridor",
+        "1829 to Main/admin connecting corridor"
+      ],
+      "visible": true,
+      "source": false,
+      "min": [
+        156.94875000715257,
+        -0.18000001907348628,
+        9.80000038146973
+      ],
+      "max": [
+        159.00000004768373,
+        3.599999952316284,
+        30.599999618530276
+      ]
+    },
+    {
+      "name": "Corridor pavilion side connection walls",
+      "parents": [
+        "Main/admin corridor front doorway",
+        "1829 to Main/admin connecting corridor"
+      ],
+      "visible": true,
+      "source": false,
+      "min": [
+        159,
+        -0.18000004872883824,
+        9.80000038146973
+      ],
+      "max": [
+        160.5,
+        3.3494520367661567,
+        30.599999618530276
+      ]
+    },
+    {
+      "name": "Service glazing and trim",
+      "parents": [
+        "Tower service buildings",
+        "Historic layout"
+      ],
+      "visible": true,
+      "source": false,
+      "min": [
+        0,
+        0,
+        -39.0900009162724
+      ],
+      "max": [
+        228.52999572828412,
+        3.9499999284744263,
+        0
+      ]
+    },
+    {
+      "name": "Service glazing and trim",
+      "parents": [
+        "Tower service buildings · building detail 0",
+        "Tower service buildings"
+      ],
+      "visible": true,
+      "source": false,
+      "min": [
+        0,
+        -0.18000006675720215,
+        -74.16999847441912
+      ],
+      "max": [
+        228.684994507581,
+        11.575000166893005,
+        2.2800000198185444
+      ]
+    },
+    {
+      "name": "Service glazing and trim",
+      "parents": [
+        "Tower service buildings · building detail 0",
+        "Tower service buildings"
+      ],
+      "visible": true,
+      "source": false,
+      "min": [
+        0,
+        -0.18000006675720215,
+        -47.7950000166893
+      ],
+      "max": [
+        228.8950012177229,
+        9.564999543130398,
+        2.4249999970197678
+      ]
+    },
+    {
+      "name": "Service glazing and trim",
+      "parents": [
+        "Tower service buildings · building detail 0",
+        "Tower service buildings"
+      ],
+      "visible": true,
+      "source": false,
+      "min": [
+        0,
+        0,
+        -47.625
+      ],
+      "max": [
+        228.72499694861472,
+        11.500000178813934,
+        2.2550000194460154
+      ]
+    },
+    {
+      "name": "Service glazing and trim",
+      "parents": [
+        "Tower service buildings · building detail 0",
+        "Tower service buildings"
+      ],
+      "visible": true,
+      "source": false,
+      "min": [
+        0,
+        0,
+        -47.66000000014901
+      ],
+      "max": [
+        228.8049987796694,
+        11.535000000149012,
+        2.33499994315207
+      ]
+    },
+    {
+      "name": "Service glazing and trim",
+      "parents": [
+        "Tower service buildings · building detail 0",
+        "Tower service buildings"
+      ],
+      "visible": true,
+      "source": false,
+      "min": [
+        0,
+        0,
+        -47.764999985694885
+      ],
+      "max": [
+        228.78000244498253,
+        11.7799998447299,
+        2.310000032186508
+      ]
+    },
+    {
+      "name": "Service glazing and trim · reduced detail",
+      "parents": [
+        "Tower service buildings · building detail 1",
+        "Tower service buildings"
+      ],
+      "visible": true,
+      "source": false,
+      "min": [
+        146.06000183150172,
+        -0.18000006675720215,
+        -74.16999847441912
+      ],
+      "max": [
+        228.54000549390912,
+        9.115000188350677,
+        2.2800000198185444
+      ]
+    },
+    {
+      "name": "Service glazing and trim · reduced detail",
+      "parents": [
+        "Tower service buildings · building detail 1",
+        "Tower service buildings"
+      ],
+      "visible": true,
+      "source": false,
+      "min": [
+        145.980004273355,
+        -0.18000006675720215,
+        -47.36999832093716
+      ],
+      "max": [
+        228.50999389588833,
+        8.650000274181366,
+        2.2500001043081284
+      ]
+    },
+    {
+      "name": "Tower service buildings · textured windows",
+      "parents": [
+        "Tower service buildings · building detail 1",
+        "Tower service buildings"
+      ],
+      "visible": true,
+      "source": false,
+      "min": [
+        145.97299194335938,
+        0.4699999988079071,
+        -56.25749969482422
+      ],
+      "max": [
+        228.89700317382812,
+        14.526471138000488,
+        2.427000045776367
+      ]
+    },
+    {
+      "name": "Service glazing and trim · reduced detail",
+      "parents": [
+        "Tower service buildings · building detail 2",
+        "Tower service buildings"
+      ],
+      "visible": true,
+      "source": false,
+      "min": [
+        146.06000183150172,
+        -0.18000006675720215,
+        -74.16999847441912
+      ],
+      "max": [
+        228.54000549390912,
+        9.115000188350677,
+        2.2800000198185444
+      ]
+    },
+    {
+      "name": "Service glazing and trim · reduced detail",
+      "parents": [
+        "Tower service buildings · building detail 2",
+        "Tower service buildings"
+      ],
+      "visible": true,
+      "source": false,
+      "min": [
+        146.1300054937601,
+        -0.18000006675720215,
+        -47.36999832093716
+      ],
+      "max": [
+        228.50999389588833,
+        8.650000274181366,
+        2.2500001043081284
+      ]
+    },
+    {
+      "name": "Tower service buildings · textured windows",
+      "parents": [
+        "Tower service buildings · building detail 2",
+        "Tower service buildings"
+      ],
+      "visible": true,
+      "source": false,
+      "min": [
+        145.97299194335938,
+        0.4699999988079071,
+        -56.25749969482422
+      ],
+      "max": [
+        228.89700317382812,
+        14.526471138000488,
+        2.427000045776367
+      ]
+    },
+    {
+      "name": "Tower service court outside accessible gallery",
+      "parents": [
+        "Period · The Main",
+        "Historic roads and surfaces"
+      ],
+      "visible": false,
+      "source": true,
+      "min": [
+        156.57875061035156,
+        0.3399999999999961,
+        -40.5
+      ],
+      "max": [
+        180,
+        0.340000000000009,
+        17.799999237060547
+      ]
+    },
+    {
+      "name": "Tower service court ground contact outside accessible gallery",
+      "parents": [
+        "Period · The Main",
+        "Historic roads and surfaces"
+      ],
+      "visible": false,
+      "source": true,
+      "min": [
+        156.57875061035156,
+        -0.1699999904632608,
+        -40.5
+      ],
+      "max": [
+        180,
+        0.340000000000009,
+        17.799999237060547
+      ]
+    },
+    {
+      "name": "Car park",
+      "parents": [
+        "Modern layout",
+        "1829 estate · aerial reconstruction"
+      ],
+      "visible": false,
+      "source": false,
+      "min": [
+        -9.88503646850586,
+        -0.17000000953674577,
+        -162.44541931152344
+      ],
+      "max": [
+        185.19119262695312,
+        0.34000000000003594,
+        11.816996574401855
+      ]
+    },
+    {
+      "name": "Car park border",
+      "parents": [
+        "Car park",
+        "Modern layout"
+      ],
+      "visible": true,
+      "source": false,
+      "min": [
+        -9.88503646850586,
+        0.31999999999998746,
+        -162.44541931152344
+      ],
+      "max": [
+        185.19119262695312,
+        0.3200000000000368,
+        11.816996574401855
+      ]
+    },
+    {
+      "name": "Car park ground contact",
+      "parents": [
+        "Car park",
+        "Modern layout"
+      ],
+      "visible": true,
+      "source": false,
+      "min": [
+        -9.285725593566895,
+        -0.16999999046325925,
+        -161.8466033935547
+      ],
+      "max": [
+        184.5911865234375,
+        0.34000000000003594,
+        11.217474937438965
+      ]
+    },
+    {
+      "name": "Car park border ground contact",
+      "parents": [
+        "Car park",
+        "Modern layout"
+      ],
+      "visible": true,
+      "source": false,
+      "min": [
+        -9.88503646850586,
+        -0.17000000953674577,
+        -162.44541931152344
+      ],
+      "max": [
+        185.19119262695312,
+        0.3200000000000368,
+        11.816996574401855
+      ]
+    },
+    {
+      "name": "Main/admin solid yard wall plinth",
+      "parents": [
+        "Tower corridor and three workshops",
+        "1829 estate · aerial reconstruction"
+      ],
+      "visible": true,
+      "source": false,
+      "min": [
+        156.62875004291533,
+        -0.17999998569488526,
+        6.600000002682209
+      ],
+      "max": [
+        160.49999995708464,
+        0.5999999856948852,
+        6.839999997317791
+      ]
+    },
+    {
+      "name": "Main/admin solid yard wall",
+      "parents": [
+        "Tower corridor and three workshops",
+        "1829 estate · aerial reconstruction"
+      ],
+      "visible": true,
+      "source": false,
+      "min": [
+        156.62875004291533,
+        0.6000000561753374,
+        6.600000002682209
+      ],
+      "max": [
+        160.49999995708464,
+        4.9044519986191855,
+        6.839999997317791
+      ]
+    },
+    {
+      "name": "Main/admin yard wall roof closure",
+      "parents": [
+        "Tower corridor and three workshops",
+        "1829 estate · aerial reconstruction"
+      ],
+      "visible": false,
+      "source": true,
+      "min": [
+        156.62875366210938,
+        4.904451847076416,
+        6.599999904632568
+      ],
+      "max": [
+        160.5,
+        5.777945041656494,
+        6.599999904632568
+      ]
+    },
+    {
+      "name": "Main/admin yard wall roof closure",
+      "parents": [
+        "Tower corridor and three workshops",
+        "1829 estate · aerial reconstruction"
+      ],
+      "visible": false,
+      "source": true,
+      "min": [
+        156.62875366210938,
+        4.904451847076416,
+        9.800000190734863
+      ],
+      "max": [
+        160.5,
+        5.777945041656494,
+        9.800000190734863
+      ]
+    },
+    {
+      "name": "Main/admin solid yard wall slate roof",
+      "parents": [
+        "Tower corridor and three workshops",
+        "1829 estate · aerial reconstruction"
+      ],
+      "visible": false,
+      "source": true,
+      "min": [
+        156.62875366210938,
+        4.929451942443848,
+        6.599999904632568
+      ],
+      "max": [
+        160.5,
+        5.777945041656494,
+        9.800000190734863
+      ]
+    },
+    {
+      "name": "Main/admin solid yard wall roof underside",
+      "parents": [
+        "Tower corridor and three workshops",
+        "1829 estate · aerial reconstruction"
+      ],
+      "visible": false,
+      "source": true,
+      "min": [
+        156.62875366210938,
+        4.904451847076416,
+        6.599999904632568
+      ],
+      "max": [
+        160.5,
+        5.752945423126221,
+        9.800000190734863
+      ]
+    },
+    {
+      "name": "Corridor stone arch",
+      "parents": [
+        "Corridor round-headed window",
+        "Corridor north windows"
+      ],
+      "visible": false,
+      "source": true,
+      "min": [
+        156.65375,
+        2.13,
+        8.950000000000006
+      ],
+      "max": [
+        156.7737499973178,
+        2.88,
+        10.450000000000006
+      ]
+    },
+    {
+      "name": "Corridor stone jamb",
+      "parents": [
+        "Corridor round-headed window",
+        "Corridor north windows"
+      ],
+      "visible": false,
+      "source": true,
+      "min": [
+        156.6537500013411,
+        1.480000011920929,
+        10.279999999105936
+      ],
+      "max": [
+        156.7737499986589,
+        2.1299999880790708,
+        10.450000000894075
+      ]
+    },
+    {
+      "name": "Corridor window frame",
+      "parents": [
+        "Corridor round-headed window",
+        "Corridor north windows"
+      ],
+      "visible": false,
+      "source": true,
+      "min": [
+        156.70375000067054,
+        1.480000011920929,
+        10.207999999463565
+      ],
+      "max": [
+        156.76374999932943,
+        2.1299999880790708,
+        10.260000000536449
+      ]
+    },
+    {
+      "name": "Corridor stone jamb",
+      "parents": [
+        "Corridor round-headed window",
+        "Corridor north windows"
+      ],
+      "visible": false,
+      "source": true,
+      "min": [
+        156.6537500013411,
+        1.480000011920929,
+        8.949999999105938
+      ],
+      "max": [
+        156.7737499986589,
+        2.1299999880790708,
+        9.120000000894077
+      ]
+    },
+    {
+      "name": "Corridor window frame",
+      "parents": [
+        "Corridor round-headed window",
+        "Corridor north windows"
+      ],
+      "visible": false,
+      "source": true,
+      "min": [
+        156.70375000067054,
+        1.480000011920929,
+        9.139999999463564
+      ],
+      "max": [
+        156.76374999932943,
+        2.1299999880790708,
+        9.192000000536448
+      ]
+    },
+    {
+      "name": "Corridor curved frame",
+      "parents": [
+        "Corridor round-headed window",
+        "Corridor north windows"
+      ],
+      "visible": false,
+      "source": true,
+      "min": [
+        156.70675,
+        2.13,
+        9.13999999761582
+      ],
+      "max": [
+        156.76174999970198,
+        2.6900000023841857,
+        10.260000002384192
+      ]
+    },
+    {
+      "name": "Corridor lower frame",
+      "parents": [
+        "Corridor round-headed window",
+        "Corridor north windows"
+      ],
+      "visible": false,
+      "source": true,
+      "min": [
+        156.70575000067055,
+        1.4799999996274709,
+        9.13999999761582
+      ],
+      "max": [
+        156.76574999932944,
+        1.530000000372529,
+        10.260000002384192
+      ]
+    },
+    {
+      "name": "Corridor fanlight transom",
+      "parents": [
+        "Corridor round-headed window",
+        "Corridor north windows"
+      ],
+      "visible": false,
+      "source": true,
+      "min": [
+        156.70875000067056,
+        2.1069999999552964,
+        9.13999999761582
+      ],
+      "max": [
+        156.76874999932946,
+        2.1530000000447034,
+        10.260000002384192
+      ]
+    },
+    {
+      "name": "Corridor central glazing bar",
+      "parents": [
+        "Corridor round-headed window",
+        "Corridor north windows"
+      ],
+      "visible": false,
+      "source": true,
+      "min": [
+        156.713250000149,
+        1.5075000143051147,
+        9.680000000447041
+      ],
+      "max": [
+        156.76824999985098,
+        2.662499985694885,
+        9.719999999552972
+      ]
+    },
+    {
+      "name": "Corridor sash rail",
+      "parents": [
+        "Corridor round-headed window",
+        "Corridor north windows"
+      ],
+      "visible": false,
+      "source": true,
+      "min": [
+        156.71374999962748,
+        1.7914999996498226,
+        9.13999999761582
+      ],
+      "max": [
+        156.76375000037254,
+        1.8185000003501772,
+        10.260000002384192
+      ]
+    },
+    {
+      "name": "Corridor projecting stone sill",
+      "parents": [
+        "Corridor round-headed window",
+        "Corridor north windows"
+      ],
+      "visible": false,
+      "source": true,
+      "min": [
+        156.5487500023842,
+        1.2950000017881393,
+        8.899999988079077
+      ],
+      "max": [
+        156.92874999761582,
+        1.4549999982118607,
+        10.500000011920935
+      ]
+    },
+    {
+      "name": "Corridor arch joint",
+      "parents": [
+        "Corridor round-headed window",
+        "Corridor north windows"
+      ],
+      "visible": false,
+      "source": true,
+      "min": [
+        156.77374999981,
+        2.380585591531881,
+        9.030679732609785
+      ],
+      "max": [
+        156.78175000019,
+        2.4564797814944708,
+        9.17103167308001
+      ]
+    },
+    {
+      "name": "Corridor arch joint",
+      "parents": [
+        "Corridor round-headed window",
+        "Corridor north windows"
+      ],
+      "visible": false,
+      "source": true,
+      "min": [
+        156.77374999981,
+        2.5875396334824283,
+        9.233926555830815
+      ],
+      "max": [
+        156.78175000019,
+        2.7122962382000515,
+        9.336832007697081
+      ]
+    },
+    {
+      "name": "Corridor arch joint",
+      "parents": [
+        "Corridor round-headed window",
+        "Corridor north windows"
+      ],
+      "visible": false,
+      "source": true,
+      "min": [
+        156.77374999981,
+        2.7038723396664213,
+        9.529484940685231
+      ],
+      "max": [
+        156.78175000019,
+        2.8527817835354043,
+        9.574562217152883
+      ]
+    },
+    {
+      "name": "Corridor arch joint",
+      "parents": [
+        "Corridor round-headed window",
+        "Corridor north windows"
+      ],
+      "visible": false,
+      "source": true,
+      "min": [
+        156.77374999981,
+        2.7038723396664213,
+        9.82543778284713
+      ],
+      "max": [
+        156.78175000019,
+        2.8527817835354043,
+        9.870515059314782
+      ]
+    },
+    {
+      "name": "Corridor arch joint",
+      "parents": [
+        "Corridor round-headed window",
+        "Corridor north windows"
+      ],
+      "visible": false,
+      "source": true,
+      "min": [
+        156.77374999981,
+        2.5875396334824283,
+        10.063167992302931
+      ],
+      "max": [
+        156.78175000019,
+        2.7122962382000515,
+        10.166073444169198
+      ]
+    },
+    {
+      "name": "Corridor arch joint",
+      "parents": [
+        "Corridor round-headed window",
+        "Corridor north windows"
+      ],
+      "visible": false,
+      "source": true,
+      "min": [
+        156.77374999981,
+        2.380585591531881,
+        10.228968326920002
+      ],
+      "max": [
+        156.78175000019,
+        2.4564797814944708,
+        10.369320267390227
+      ]
+    },
+    {
+      "name": "Corridor stone arch",
+      "parents": [
+        "Corridor round-headed window",
+        "Corridor north windows"
+      ],
+      "visible": false,
+      "source": true,
+      "min": [
+        156.65375,
+        2.13,
+        -1.8499999999999943
+      ],
+      "max": [
+        156.7737499973178,
+        2.88,
+        -0.3499999999999943
+      ]
+    },
+    {
+      "name": "Corridor stone jamb",
+      "parents": [
+        "Corridor round-headed window",
+        "Corridor north windows"
+      ],
+      "visible": false,
+      "source": true,
+      "min": [
+        156.6537500013411,
+        1.480000011920929,
+        -0.520000000894064
+      ],
+      "max": [
+        156.7737499986589,
+        2.1299999880790708,
+        -0.3499999991059246
+      ]
+    },
+    {
+      "name": "Corridor window frame",
+      "parents": [
+        "Corridor round-headed window",
+        "Corridor north windows"
+      ],
+      "visible": false,
+      "source": true,
+      "min": [
+        156.70375000067054,
+        1.480000011920929,
+        -0.5920000005364361
+      ],
+      "max": [
+        156.76374999932943,
+        2.1299999880790708,
+        -0.5399999994635525
+      ]
+    },
+    {
+      "name": "Corridor stone jamb",
+      "parents": [
+        "Corridor round-headed window",
+        "Corridor north windows"
+      ],
+      "visible": false,
+      "source": true,
+      "min": [
+        156.6537500013411,
+        1.480000011920929,
+        -1.850000000894064
+      ],
+      "max": [
+        156.7737499986589,
+        2.1299999880790708,
+        -1.6799999991059247
+      ]
+    },
+    {
+      "name": "Corridor window frame",
+      "parents": [
+        "Corridor round-headed window",
+        "Corridor north windows"
+      ],
+      "visible": false,
+      "source": true,
+      "min": [
+        156.70375000067054,
+        1.480000011920929,
+        -1.6600000005364361
+      ],
+      "max": [
+        156.76374999932943,
+        2.1299999880790708,
+        -1.6079999994635525
+      ]
+    },
+    {
+      "name": "Corridor curved frame",
+      "parents": [
+        "Corridor round-headed window",
+        "Corridor north windows"
+      ],
+      "visible": false,
+      "source": true,
+      "min": [
+        156.70675,
+        2.13,
+        -1.66000000238418
+      ],
+      "max": [
+        156.76174999970198,
+        2.6900000023841857,
+        -0.5399999976158085
+      ]
+    },
+    {
+      "name": "Corridor lower frame",
+      "parents": [
+        "Corridor round-headed window",
+        "Corridor north windows"
+      ],
+      "visible": false,
+      "source": true,
+      "min": [
+        156.70575000067055,
+        1.4799999996274709,
+        -1.66000000238418
+      ],
+      "max": [
+        156.76574999932944,
+        1.530000000372529,
+        -0.5399999976158085
+      ]
+    },
+    {
+      "name": "Corridor fanlight transom",
+      "parents": [
+        "Corridor round-headed window",
+        "Corridor north windows"
+      ],
+      "visible": false,
+      "source": true,
+      "min": [
+        156.70875000067056,
+        2.1069999999552964,
+        -1.66000000238418
+      ],
+      "max": [
+        156.76874999932946,
+        2.1530000000447034,
+        -0.5399999976158085
+      ]
+    },
+    {
+      "name": "Corridor central glazing bar",
+      "parents": [
+        "Corridor round-headed window",
+        "Corridor north windows"
+      ],
+      "visible": false,
+      "source": true,
+      "min": [
+        156.713250000149,
+        1.5075000143051147,
+        -1.1199999995529595
+      ],
+      "max": [
+        156.76824999985098,
+        2.662499985694885,
+        -1.0800000004470292
+      ]
+    },
+    {
+      "name": "Corridor sash rail",
+      "parents": [
+        "Corridor round-headed window",
+        "Corridor north windows"
+      ],
+      "visible": false,
+      "source": true,
+      "min": [
+        156.71374999962748,
+        1.7914999996498226,
+        -1.66000000238418
+      ],
+      "max": [
+        156.76375000037254,
+        1.8185000003501772,
+        -0.5399999976158085
+      ]
+    },
+    {
+      "name": "Corridor projecting stone sill",
+      "parents": [
+        "Corridor round-headed window",
+        "Corridor north windows"
+      ],
+      "visible": false,
+      "source": true,
+      "min": [
+        156.5487500023842,
+        1.2950000017881393,
+        -1.9000000119209233
+      ],
+      "max": [
+        156.92874999761582,
+        1.4549999982118607,
+        -0.29999998807906536
+      ]
+    },
+    {
+      "name": "Corridor arch joint",
+      "parents": [
+        "Corridor round-headed window",
+        "Corridor north windows"
+      ],
+      "visible": false,
+      "source": true,
+      "min": [
+        156.77374999981,
+        2.380585591531881,
+        -1.7693202673902153
+      ],
+      "max": [
+        156.78175000019,
+        2.4564797814944708,
+        -1.628968326919991
+      ]
+    },
+    {
+      "name": "Corridor arch joint",
+      "parents": [
+        "Corridor round-headed window",
+        "Corridor north windows"
+      ],
+      "visible": false,
+      "source": true,
+      "min": [
+        156.77374999981,
+        2.5875396334824283,
+        -1.5660734441691855
+      ],
+      "max": [
+        156.78175000019,
+        2.7122962382000515,
+        -1.463167992302919
+      ]
+    },
+    {
+      "name": "Corridor arch joint",
+      "parents": [
+        "Corridor round-headed window",
+        "Corridor north windows"
+      ],
+      "visible": false,
+      "source": true,
+      "min": [
+        156.77374999981,
+        2.7038723396664213,
+        -1.2705150593147685
+      ],
+      "max": [
+        156.78175000019,
+        2.8527817835354043,
+        -1.2254377828471184
+      ]
+    },
+    {
+      "name": "Corridor arch joint",
+      "parents": [
+        "Corridor round-headed window",
+        "Corridor north windows"
+      ],
+      "visible": false,
+      "source": true,
+      "min": [
+        156.77374999981,
+        2.7038723396664213,
+        -0.9745622171528704
+      ],
+      "max": [
+        156.78175000019,
+        2.8527817835354043,
+        -0.9294849406852203
+      ]
+    },
+    {
+      "name": "Corridor arch joint",
+      "parents": [
+        "Corridor round-headed window",
+        "Corridor north windows"
+      ],
+      "visible": false,
+      "source": true,
+      "min": [
+        156.77374999981,
+        2.5875396334824283,
+        -0.7368320076970699
+      ],
+      "max": [
+        156.78175000019,
+        2.7122962382000515,
+        -0.6339265558308033
+      ]
+    },
+    {
+      "name": "Corridor arch joint",
+      "parents": [
+        "Corridor round-headed window",
+        "Corridor north windows"
+      ],
+      "visible": false,
+      "source": true,
+      "min": [
+        156.77374999981,
+        2.380585591531881,
+        -0.5710316730799977
+      ],
+      "max": [
+        156.78175000019,
+        2.4564797814944708,
+        -0.4306797326097736
+      ]
+    },
+    {
+      "name": "Corridor stone arch",
+      "parents": [
+        "Corridor round-headed window",
+        "Corridor north windows"
+      ],
+      "visible": false,
+      "source": true,
+      "min": [
+        156.65375,
+        2.13,
+        -12.649999999999995
+      ],
+      "max": [
+        156.7737499973178,
+        2.88,
+        -11.149999999999995
+      ]
+    },
+    {
+      "name": "Corridor stone jamb",
+      "parents": [
+        "Corridor round-headed window",
+        "Corridor north windows"
+      ],
+      "visible": false,
+      "source": true,
+      "min": [
+        156.6537500013411,
+        1.480000011920929,
+        -11.320000000894066
+      ],
+      "max": [
+        156.7737499986589,
+        2.1299999880790708,
+        -11.149999999105926
+      ]
+    },
+    {
+      "name": "Corridor window frame",
+      "parents": [
+        "Corridor round-headed window",
+        "Corridor north windows"
+      ],
+      "visible": false,
+      "source": true,
+      "min": [
+        156.70375000067054,
+        1.480000011920929,
+        -11.392000000536436
+      ],
+      "max": [
+        156.76374999932943,
+        2.1299999880790708,
+        -11.339999999463553
+      ]
+    },
+    {
+      "name": "Corridor stone jamb",
+      "parents": [
+        "Corridor round-headed window",
+        "Corridor north windows"
+      ],
+      "visible": false,
+      "source": true,
+      "min": [
+        156.6537500013411,
+        1.480000011920929,
+        -12.650000000894064
+      ],
+      "max": [
+        156.7737499986589,
+        2.1299999880790708,
+        -12.479999999105925
+      ]
+    },
+    {
+      "name": "Corridor window frame",
+      "parents": [
+        "Corridor round-headed window",
+        "Corridor north windows"
+      ],
+      "visible": false,
+      "source": true,
+      "min": [
+        156.70375000067054,
+        1.480000011920929,
+        -12.460000000536438
+      ],
+      "max": [
+        156.76374999932943,
+        2.1299999880790708,
+        -12.407999999463554
+      ]
+    },
+    {
+      "name": "Corridor curved frame",
+      "parents": [
+        "Corridor round-headed window",
+        "Corridor north windows"
+      ],
+      "visible": false,
+      "source": true,
+      "min": [
+        156.70675,
+        2.13,
+        -12.46000000238418
+      ],
+      "max": [
+        156.76174999970198,
+        2.6900000023841857,
+        -11.33999999761581
+      ]
+    },
+    {
+      "name": "Corridor lower frame",
+      "parents": [
+        "Corridor round-headed window",
+        "Corridor north windows"
+      ],
+      "visible": false,
+      "source": true,
+      "min": [
+        156.70575000067055,
+        1.4799999996274709,
+        -12.46000000238418
+      ],
+      "max": [
+        156.76574999932944,
+        1.530000000372529,
+        -11.33999999761581
+      ]
+    },
+    {
+      "name": "Corridor fanlight transom",
+      "parents": [
+        "Corridor round-headed window",
+        "Corridor north windows"
+      ],
+      "visible": false,
+      "source": true,
+      "min": [
+        156.70875000067056,
+        2.1069999999552964,
+        -12.46000000238418
+      ],
+      "max": [
+        156.76874999932946,
+        2.1530000000447034,
+        -11.33999999761581
+      ]
+    },
+    {
+      "name": "Corridor central glazing bar",
+      "parents": [
+        "Corridor round-headed window",
+        "Corridor north windows"
+      ],
+      "visible": false,
+      "source": true,
+      "min": [
+        156.713250000149,
+        1.5075000143051147,
+        -11.91999999955296
+      ],
+      "max": [
+        156.76824999985098,
+        2.662499985694885,
+        -11.88000000044703
+      ]
+    },
+    {
+      "name": "Corridor sash rail",
+      "parents": [
+        "Corridor round-headed window",
+        "Corridor north windows"
+      ],
+      "visible": false,
+      "source": true,
+      "min": [
+        156.71374999962748,
+        1.7914999996498226,
+        -12.46000000238418
+      ],
+      "max": [
+        156.76375000037254,
+        1.8185000003501772,
+        -11.33999999761581
+      ]
+    },
+    {
+      "name": "Corridor projecting stone sill",
+      "parents": [
+        "Corridor round-headed window",
+        "Corridor north windows"
+      ],
+      "visible": false,
+      "source": true,
+      "min": [
+        156.5487500023842,
+        1.2950000017881393,
+        -12.700000011920924
+      ],
+      "max": [
+        156.92874999761582,
+        1.4549999982118607,
+        -11.099999988079066
+      ]
+    },
+    {
+      "name": "Corridor arch joint",
+      "parents": [
+        "Corridor round-headed window",
+        "Corridor north windows"
+      ],
+      "visible": false,
+      "source": true,
+      "min": [
+        156.77374999981,
+        2.380585591531881,
+        -12.569320267390216
+      ],
+      "max": [
+        156.78175000019,
+        2.4564797814944708,
+        -12.42896832691999
+      ]
+    },
+    {
+      "name": "Corridor arch joint",
+      "parents": [
+        "Corridor round-headed window",
+        "Corridor north windows"
+      ],
+      "visible": false,
+      "source": true,
+      "min": [
+        156.77374999981,
+        2.5875396334824283,
+        -12.366073444169187
+      ],
+      "max": [
+        156.78175000019,
+        2.7122962382000515,
+        -12.26316799230292
+      ]
+    },
+    {
+      "name": "Corridor arch joint",
+      "parents": [
+        "Corridor round-headed window",
+        "Corridor north windows"
+      ],
+      "visible": false,
+      "source": true,
+      "min": [
+        156.77374999981,
+        2.7038723396664213,
+        -12.07051505931477
+      ],
+      "max": [
+        156.78175000019,
+        2.8527817835354043,
+        -12.025437782847119
+      ]
+    },
+    {
+      "name": "Corridor arch joint",
+      "parents": [
+        "Corridor round-headed window",
+        "Corridor north windows"
+      ],
+      "visible": false,
+      "source": true,
+      "min": [
+        156.77374999981,
+        2.7038723396664213,
+        -11.774562217152871
+      ],
+      "max": [
+        156.78175000019,
+        2.8527817835354043,
+        -11.72948494068522
+      ]
+    },
+    {
+      "name": "Corridor arch joint",
+      "parents": [
+        "Corridor round-headed window",
+        "Corridor north windows"
+      ],
+      "visible": false,
+      "source": true,
+      "min": [
+        156.77374999981,
+        2.5875396334824283,
+        -11.53683200769707
+      ],
+      "max": [
+        156.78175000019,
+        2.7122962382000515,
+        -11.433926555830803
+      ]
+    },
+    {
+      "name": "Corridor arch joint",
+      "parents": [
+        "Corridor round-headed window",
+        "Corridor north windows"
+      ],
+      "visible": false,
+      "source": true,
+      "min": [
+        156.77374999981,
+        2.380585591531881,
+        -11.37103167308
+      ],
+      "max": [
+        156.78175000019,
+        2.4564797814944708,
+        -11.230679732609774
+      ]
+    },
+    {
+      "name": "Continuous escape corridor and workshop floor",
+      "parents": [
+        "Tower corridor and three workshops",
+        "1829 estate · aerial reconstruction"
+      ],
+      "visible": true,
+      "source": false,
+      "min": [
+        38.157649993896484,
+        0.03999999999999813,
+        -200.15562438964844
+      ],
+      "max": [
+        221.6999969482422,
+        0.040000000000012255,
+        30.600000381469727
+      ]
+    },
+    {
+      "name": "Explore admin entrance slate roof",
+      "parents": [
+        "Tower corridor and three workshops",
+        "1829 estate · aerial reconstruction"
+      ],
+      "visible": false,
+      "source": true,
+      "min": [
+        156.3000030517578,
+        4.929451942443848,
+        9.800000190734863
+      ],
+      "max": [
+        160.5,
+        5.849999904632568,
+        30.75
+      ]
+    },
+    {
+      "name": "Admin entrance pavilion roof return",
+      "parents": [
+        "Tower corridor and three workshops",
+        "1829 estate · aerial reconstruction"
+      ],
+      "visible": false,
+      "source": true,
+      "min": [
+        160.5,
+        3.5999999046325684,
+        9.800000190734863
+      ],
+      "max": [
+        160.5,
+        4.929451942443848,
+        30.600000381469727
+      ]
+    },
+    {
+      "name": "",
+      "parents": [
+        "Workshop cached static shadow geometry",
+        "1829 estate · aerial reconstruction"
+      ],
+      "visible": true,
+      "source": false,
+      "min": [
+        146.9000007621944,
+        -0.18000030517578125,
+        5.904999160021546
+      ],
+      "max": [
+        241.6624989323318,
+        22.08500000089407,
+        42.29999923780561
+      ]
+    },
+    {
+      "name": "",
+      "parents": [
+        "Workshop cached static shadow geometry",
+        "1829 estate · aerial reconstruction"
+      ],
+      "visible": true,
+      "source": false,
+      "min": [
+        146.85499832220376,
+        0.5499999821186066,
+        5.860000534728172
+      ],
+      "max": [
+        241.64500167779624,
+        13.024999976158142,
+        42.344999770447615
+      ]
+    },
+    {
+      "name": "",
+      "parents": [
+        "Workshop cached static shadow geometry",
+        "1829 estate · aerial reconstruction"
+      ],
+      "visible": true,
+      "source": false,
+      "min": [
+        146.77999862655997,
+        -0.18000006675720215,
+        5.78500083908439
+      ],
+      "max": [
+        241.72000137344003,
+        13.075000047683716,
+        42.4199994660914
+      ]
+    },
+    {
+      "name": "",
+      "parents": [
+        "Workshop cached static shadow geometry",
+        "1829 estate · aerial reconstruction"
+      ],
+      "visible": true,
+      "source": false,
+      "min": [
+        146.6949995458126,
+        0.0700000524520874,
+        5.699999850988391
+      ],
+      "max": [
+        241.8050004541874,
+        13.35499992966652,
+        42.505000454187396
+      ]
+    },
+    {
+      "name": "",
+      "parents": [
+        "Workshop cached static shadow geometry",
+        "1829 estate · aerial reconstruction"
+      ],
+      "visible": true,
+      "source": false,
+      "min": [
+        0,
+        0,
+        -39.0900009162724
+      ],
+      "max": [
+        228.52999572828412,
+        3.9499999284744263,
+        0
+      ]
+    },
+    {
+      "name": "",
+      "parents": [
+        "Workshop cached static shadow geometry",
+        "1829 estate · aerial reconstruction"
+      ],
+      "visible": true,
+      "source": false,
+      "min": [
+        0,
+        -0.18000006675720215,
+        -74.16999847441912
+      ],
+      "max": [
+        228.684994507581,
+        11.575000166893005,
+        2.2800000198185444
+      ]
+    },
+    {
+      "name": "",
+      "parents": [
+        "Workshop cached static shadow geometry",
+        "1829 estate · aerial reconstruction"
+      ],
+      "visible": true,
+      "source": false,
+      "min": [
+        0,
+        -0.18000006675720215,
+        -47.7950000166893
+      ],
+      "max": [
+        228.8950012177229,
+        9.564999543130398,
+        2.4249999970197678
+      ]
+    },
+    {
+      "name": "",
+      "parents": [
+        "Workshop cached static shadow geometry",
+        "1829 estate · aerial reconstruction"
+      ],
+      "visible": true,
+      "source": false,
+      "min": [
+        0,
+        0,
+        -47.625
+      ],
+      "max": [
+        228.72499694861472,
+        11.500000178813934,
+        2.2550000194460154
+      ]
+    },
+    {
+      "name": "",
+      "parents": [
+        "Workshop cached static shadow geometry",
+        "1829 estate · aerial reconstruction"
+      ],
+      "visible": true,
+      "source": false,
+      "min": [
+        0,
+        0,
+        -47.66000000014901
+      ],
+      "max": [
+        228.8049987796694,
+        11.535000000149012,
+        2.33499994315207
+      ]
+    },
+    {
+      "name": "",
+      "parents": [
+        "Workshop cached static shadow geometry",
+        "1829 estate · aerial reconstruction"
+      ],
+      "visible": true,
+      "source": false,
+      "min": [
+        0,
+        0,
+        -47.764999985694885
+      ],
+      "max": [
+        228.78000244498253,
+        11.7799998447299,
+        2.310000032186508
+      ]
+    }
+  ],
+  "ground": [
+    {
+      "x": 156.8,
+      "z": -15,
+      "hits": [
+        {
+          "name": "Aerial batch · Period · The Main · 16",
+          "y": 0.3400000035762787,
+          "surface": true
+        },
+        {
+          "name": "Estate terrain",
+          "y": -0.14999999999999644,
+          "surface": true
+        }
+      ]
+    },
+    {
+      "x": 156.8,
+      "z": -6,
+      "hits": [
+        {
+          "name": "Aerial batch · Period · The Main · 16",
+          "y": 0.3400000035762786,
+          "surface": true
+        },
+        {
+          "name": "Estate terrain",
+          "y": -0.14999999999999866,
+          "surface": true
+        }
+      ]
+    },
+    {
+      "x": 156.8,
+      "z": 0,
+      "hits": [
+        {
+          "name": "Aerial batch · Period · The Main · 16",
+          "y": 0.3400000035762787,
+          "surface": true
+        },
+        {
+          "name": "Estate terrain",
+          "y": -0.15,
+          "surface": true
+        }
+      ]
+    },
+    {
+      "x": 156.8,
+      "z": 6,
+      "hits": [
+        {
+          "name": "Aerial batch · Period · The Main · 16",
+          "y": 0.3400000035762787,
+          "surface": true
+        },
+        {
+          "name": "Estate terrain",
+          "y": -0.15000000000000155,
+          "surface": true
+        }
+      ]
+    },
+    {
+      "x": 156.8,
+      "z": 7,
+      "hits": [
+        {
+          "name": "Estate terrain",
+          "y": -0.15000000000000155,
+          "surface": true
+        }
+      ]
+    },
+    {
+      "x": 156.8,
+      "z": 9,
+      "hits": [
+        {
+          "name": "Estate terrain",
+          "y": -0.150000000000002,
+          "surface": true
+        }
+      ]
+    },
+    {
+      "x": 156.8,
+      "z": 10,
+      "hits": [
+        {
+          "name": "Estate terrain",
+          "y": -0.15000000000000221,
+          "surface": true
+        }
+      ]
+    },
+    {
+      "x": 156.8,
+      "z": 12,
+      "hits": [
+        {
+          "name": "Estate terrain",
+          "y": -0.15000000000000244,
+          "surface": true
+        }
+      ]
+    },
+    {
+      "x": 156.8,
+      "z": 14,
+      "hits": [
+        {
+          "name": "Estate terrain",
+          "y": -0.15000000000000288,
+          "surface": true
+        }
+      ]
+    },
+    {
+      "x": 156.8,
+      "z": 16,
+      "hits": [
+        {
+          "name": "Estate terrain",
+          "y": -0.15000000000000355,
+          "surface": true
+        }
+      ]
+    },
+    {
+      "x": 156.8,
+      "z": 17,
+      "hits": [
+        {
+          "name": "Estate terrain",
+          "y": -0.15000000000000377,
+          "surface": true
+        }
+      ]
+    },
+    {
+      "x": 157.5,
+      "z": -15,
+      "hits": [
+        {
+          "name": "Aerial batch · Period · The Main · 16",
+          "y": 0.3400000035762787,
+          "surface": true
+        },
+        {
+          "name": "Estate terrain",
+          "y": -0.14999999999999644,
+          "surface": true
+        }
+      ]
+    },
+    {
+      "x": 157.5,
+      "z": -6,
+      "hits": [
+        {
+          "name": "Aerial batch · Period · The Main · 16",
+          "y": 0.3400000035762787,
+          "surface": true
+        },
+        {
+          "name": "Estate terrain",
+          "y": -0.14999999999999844,
+          "surface": true
+        }
+      ]
+    },
+    {
+      "x": 157.5,
+      "z": 0,
+      "hits": [
+        {
+          "name": "Aerial batch · Period · The Main · 16",
+          "y": 0.3400000035762787,
+          "surface": true
+        },
+        {
+          "name": "Estate terrain",
+          "y": -0.15,
+          "surface": true
+        }
+      ]
+    },
+    {
+      "x": 157.5,
+      "z": 6,
+      "hits": [
+        {
+          "name": "Aerial batch · Period · The Main · 16",
+          "y": 0.3400000035762787,
+          "surface": true
+        },
+        {
+          "name": "Estate terrain",
+          "y": -0.15000000000000155,
+          "surface": true
+        }
+      ]
+    },
+    {
+      "x": 157.5,
+      "z": 7,
+      "hits": [
+        {
+          "name": "Estate terrain",
+          "y": -0.15000000000000155,
+          "surface": true
+        }
+      ]
+    },
+    {
+      "x": 157.5,
+      "z": 9,
+      "hits": [
+        {
+          "name": "Estate terrain",
+          "y": -0.15000000000000221,
+          "surface": true
+        }
+      ]
+    },
+    {
+      "x": 157.5,
+      "z": 10,
+      "hits": [
+        {
+          "name": "Estate terrain",
+          "y": -0.150000000000002,
+          "surface": true
+        }
+      ]
+    },
+    {
+      "x": 157.5,
+      "z": 12,
+      "hits": [
+        {
+          "name": "Estate terrain",
+          "y": -0.15000000000000266,
+          "surface": true
+        }
+      ]
+    },
+    {
+      "x": 157.5,
+      "z": 14,
+      "hits": [
+        {
+          "name": "Estate terrain",
+          "y": -0.1500000000000031,
+          "surface": true
+        }
+      ]
+    },
+    {
+      "x": 157.5,
+      "z": 16,
+      "hits": [
+        {
+          "name": "Estate terrain",
+          "y": -0.15000000000000355,
+          "surface": true
+        }
+      ]
+    },
+    {
+      "x": 157.5,
+      "z": 17,
+      "hits": [
+        {
+          "name": "Estate terrain",
+          "y": -0.15000000000000377,
+          "surface": true
+        }
+      ]
+    },
+    {
+      "x": 158.5,
+      "z": -15,
+      "hits": [
+        {
+          "name": "Aerial batch · Period · The Main · 16",
+          "y": 0.3400000035762787,
+          "surface": true
+        },
+        {
+          "name": "Estate terrain",
+          "y": -0.14999999999999644,
+          "surface": true
+        }
+      ]
+    },
+    {
+      "x": 158.5,
+      "z": -6,
+      "hits": [
+        {
+          "name": "Aerial batch · Period · The Main · 16",
+          "y": 0.3400000035762787,
+          "surface": true
+        },
+        {
+          "name": "Estate terrain",
+          "y": -0.14999999999999866,
+          "surface": true
+        }
+      ]
+    },
+    {
+      "x": 158.5,
+      "z": 0,
+      "hits": [
+        {
+          "name": "Aerial batch · Period · The Main · 16",
+          "y": 0.3400000035762787,
+          "surface": true
+        },
+        {
+          "name": "Estate terrain",
+          "y": -0.15,
+          "surface": true
+        }
+      ]
+    },
+    {
+      "x": 158.5,
+      "z": 6,
+      "hits": [
+        {
+          "name": "Aerial batch · Period · The Main · 16",
+          "y": 0.3400000035762787,
+          "surface": true
+        },
+        {
+          "name": "Estate terrain",
+          "y": -0.15000000000000133,
+          "surface": true
+        }
+      ]
+    },
+    {
+      "x": 158.5,
+      "z": 7,
+      "hits": [
+        {
+          "name": "Estate terrain",
+          "y": -0.15000000000000155,
+          "surface": true
+        }
+      ]
+    },
+    {
+      "x": 158.5,
+      "z": 9,
+      "hits": [
+        {
+          "name": "Estate terrain",
+          "y": -0.150000000000002,
+          "surface": true
+        }
+      ]
+    },
+    {
+      "x": 158.5,
+      "z": 10,
+      "hits": [
+        {
+          "name": "Estate terrain",
+          "y": -0.15000000000000221,
+          "surface": true
+        }
+      ]
+    },
+    {
+      "x": 158.5,
+      "z": 12,
+      "hits": [
+        {
+          "name": "Estate terrain",
+          "y": -0.15000000000000266,
+          "surface": true
+        }
+      ]
+    },
+    {
+      "x": 158.5,
+      "z": 14,
+      "hits": [
+        {
+          "name": "Estate terrain",
+          "y": -0.15000000000000288,
+          "surface": true
+        }
+      ]
+    },
+    {
+      "x": 158.5,
+      "z": 16,
+      "hits": [
+        {
+          "name": "Estate terrain",
+          "y": -0.15000000000000355,
+          "surface": true
+        }
+      ]
+    },
+    {
+      "x": 158.5,
+      "z": 17,
+      "hits": [
+        {
+          "name": "Estate terrain",
+          "y": -0.15000000000000377,
+          "surface": true
+        }
+      ]
+    },
+    {
+      "x": 159,
+      "z": -15,
+      "hits": [
+        {
+          "name": "Aerial batch · Period · The Main · 16",
+          "y": 0.3400000035762787,
+          "surface": true
+        },
+        {
+          "name": "Estate terrain",
+          "y": -0.14999999999999644,
+          "surface": true
+        }
+      ]
+    },
+    {
+      "x": 159,
+      "z": -6,
+      "hits": [
+        {
+          "name": "Aerial batch · Period · The Main · 16",
+          "y": 0.3400000035762787,
+          "surface": true
+        },
+        {
+          "name": "Estate terrain",
+          "y": -0.14999999999999866,
+          "surface": true
+        }
+      ]
+    },
+    {
+      "x": 159,
+      "z": 0,
+      "hits": [
+        {
+          "name": "Aerial batch · Period · The Main · 16",
+          "y": 0.3400000035762787,
+          "surface": true
+        },
+        {
+          "name": "Estate terrain",
+          "y": -0.15,
+          "surface": true
+        }
+      ]
+    },
+    {
+      "x": 159,
+      "z": 6,
+      "hits": [
+        {
+          "name": "Aerial batch · Period · The Main · 16",
+          "y": 0.3400000035762788,
+          "surface": true
+        },
+        {
+          "name": "Estate terrain",
+          "y": -0.15000000000000133,
+          "surface": true
+        }
+      ]
+    },
+    {
+      "x": 159,
+      "z": 7,
+      "hits": [
+        {
+          "name": "Estate terrain",
+          "y": -0.15000000000000177,
+          "surface": true
+        }
+      ]
+    },
+    {
+      "x": 159,
+      "z": 9,
+      "hits": [
+        {
+          "name": "Estate terrain",
+          "y": -0.150000000000002,
+          "surface": true
+        }
+      ]
+    },
+    {
+      "x": 159,
+      "z": 10,
+      "hits": [
+        {
+          "name": "Estate terrain",
+          "y": -0.15000000000000221,
+          "surface": true
+        }
+      ]
+    },
+    {
+      "x": 159,
+      "z": 12,
+      "hits": [
+        {
+          "name": "Estate terrain",
+          "y": -0.15000000000000266,
+          "surface": true
+        }
+      ]
+    },
+    {
+      "x": 159,
+      "z": 14,
+      "hits": [
+        {
+          "name": "Estate terrain",
+          "y": -0.1500000000000031,
+          "surface": true
+        }
+      ]
+    },
+    {
+      "x": 159,
+      "z": 16,
+      "hits": [
+        {
+          "name": "Estate terrain",
+          "y": -0.15000000000000333,
+          "surface": true
+        }
+      ]
+    },
+    {
+      "x": 159,
+      "z": 17,
+      "hits": [
+        {
+          "name": "Estate terrain",
+          "y": -0.15000000000000377,
+          "surface": true
+        }
+      ]
+    },
+    {
+      "x": 160,
+      "z": -15,
+      "hits": [
+        {
+          "name": "Aerial batch · Period · The Main · 16",
+          "y": 0.3400000035762787,
+          "surface": true
+        },
+        {
+          "name": "Estate terrain",
+          "y": -0.14999999999999644,
+          "surface": true
+        }
+      ]
+    },
+    {
+      "x": 160,
+      "z": -6,
+      "hits": [
+        {
+          "name": "Aerial batch · Period · The Main · 16",
+          "y": 0.3400000035762787,
+          "surface": true
+        },
+        {
+          "name": "Estate terrain",
+          "y": -0.14999999999999844,
+          "surface": true
+        }
+      ]
+    },
+    {
+      "x": 160,
+      "z": 0,
+      "hits": [
+        {
+          "name": "Aerial batch · Period · The Main · 16",
+          "y": 0.3400000035762787,
+          "surface": true
+        },
+        {
+          "name": "Estate terrain",
+          "y": -0.15,
+          "surface": true
+        }
+      ]
+    },
+    {
+      "x": 160,
+      "z": 6,
+      "hits": [
+        {
+          "name": "Aerial batch · Period · The Main · 16",
+          "y": 0.3400000035762787,
+          "surface": true
+        },
+        {
+          "name": "Estate terrain",
+          "y": -0.15000000000000155,
+          "surface": true
+        }
+      ]
+    },
+    {
+      "x": 160,
+      "z": 7,
+      "hits": [
+        {
+          "name": "Estate terrain",
+          "y": -0.15000000000000155,
+          "surface": true
+        }
+      ]
+    },
+    {
+      "x": 160,
+      "z": 9,
+      "hits": [
+        {
+          "name": "Estate terrain",
+          "y": -0.15000000000000221,
+          "surface": true
+        }
+      ]
+    },
+    {
+      "x": 160,
+      "z": 10,
+      "hits": [
+        {
+          "name": "Estate terrain",
+          "y": -0.150000000000002,
+          "surface": true
+        }
+      ]
+    },
+    {
+      "x": 160,
+      "z": 12,
+      "hits": [
+        {
+          "name": "Estate terrain",
+          "y": -0.15000000000000266,
+          "surface": true
+        }
+      ]
+    },
+    {
+      "x": 160,
+      "z": 14,
+      "hits": [
+        {
+          "name": "Estate terrain",
+          "y": -0.1500000000000031,
+          "surface": true
+        }
+      ]
+    },
+    {
+      "x": 160,
+      "z": 16,
+      "hits": [
+        {
+          "name": "Estate terrain",
+          "y": -0.15000000000000355,
+          "surface": true
+        }
+      ]
+    },
+    {
+      "x": 160,
+      "z": 17,
+      "hits": [
+        {
+          "name": "Estate terrain",
+          "y": -0.15000000000000377,
+          "surface": true
+        }
+      ]
+    },
+    {
+      "x": 161,
+      "z": -15,
+      "hits": [
+        {
+          "name": "Aerial batch · Period · The Main · 16",
+          "y": 0.3400000035762787,
+          "surface": true
+        },
+        {
+          "name": "Estate terrain",
+          "y": -0.14999999999999644,
+          "surface": true
+        }
+      ]
+    },
+    {
+      "x": 161,
+      "z": -6,
+      "hits": [
+        {
+          "name": "Aerial batch · Period · The Main · 16",
+          "y": 0.3400000035762787,
+          "surface": true
+        },
+        {
+          "name": "Estate terrain",
+          "y": -0.14999999999999866,
+          "surface": true
+        }
+      ]
+    },
+    {
+      "x": 161,
+      "z": 0,
+      "hits": [
+        {
+          "name": "Aerial batch · Period · The Main · 16",
+          "y": 0.3400000035762787,
+          "surface": true
+        },
+        {
+          "name": "Estate terrain",
+          "y": -0.15,
+          "surface": true
+        }
+      ]
+    },
+    {
+      "x": 161,
+      "z": 6,
+      "hits": [
+        {
+          "name": "Aerial batch · Period · The Main · 16",
+          "y": 0.3400000035762788,
+          "surface": true
+        },
+        {
+          "name": "Estate terrain",
+          "y": -0.15000000000000133,
+          "surface": true
+        }
+      ]
+    },
+    {
+      "x": 161,
+      "z": 7,
+      "hits": [
+        {
+          "name": "Aerial batch · Main/admin building · 7",
+          "y": 0.4000000059604645,
+          "surface": false
+        },
+        {
+          "name": "Estate terrain",
+          "y": -0.15000000000000155,
+          "surface": true
+        }
+      ]
+    },
+    {
+      "x": 161,
+      "z": 9,
+      "hits": [
+        {
+          "name": "Aerial batch · Main/admin building · 7",
+          "y": 0.4000000059604645,
+          "surface": false
+        },
+        {
+          "name": "Estate terrain",
+          "y": -0.150000000000002,
+          "surface": true
+        }
+      ]
+    },
+    {
+      "x": 161,
+      "z": 10,
+      "hits": [
+        {
+          "name": "Aerial batch · Main/admin building · 7",
+          "y": 0.4000000059604645,
+          "surface": false
+        },
+        {
+          "name": "Estate terrain",
+          "y": -0.15000000000000221,
+          "surface": true
+        }
+      ]
+    },
+    {
+      "x": 161,
+      "z": 12,
+      "hits": [
+        {
+          "name": "Aerial batch · Main/admin building · 7",
+          "y": 0.4000000059604645,
+          "surface": false
+        },
+        {
+          "name": "Estate terrain",
+          "y": -0.15000000000000266,
+          "surface": true
+        }
+      ]
+    },
+    {
+      "x": 161,
+      "z": 14,
+      "hits": [
+        {
+          "name": "Aerial batch · Main/admin building · 7",
+          "y": 0.4000000059604645,
+          "surface": false
+        },
+        {
+          "name": "Estate terrain",
+          "y": -0.15000000000000288,
+          "surface": true
+        }
+      ]
+    },
+    {
+      "x": 161,
+      "z": 16,
+      "hits": [
+        {
+          "name": "Aerial batch · Main/admin building · 7",
+          "y": 0.4000000059604645,
+          "surface": false
+        },
+        {
+          "name": "Estate terrain",
+          "y": -0.15000000000000355,
+          "surface": true
+        }
+      ]
+    },
+    {
+      "x": 161,
+      "z": 17,
+      "hits": [
+        {
+          "name": "Aerial batch · Main/admin building · 7",
+          "y": 0.4000000059604645,
+          "surface": false
+        },
+        {
+          "name": "Estate terrain",
+          "y": -0.15000000000000377,
+          "surface": true
+        }
+      ]
+    },
+    {
+      "x": 162,
+      "z": -15,
+      "hits": [
+        {
+          "name": "Aerial batch · Period · The Main · 16",
+          "y": 0.3400000035762787,
+          "surface": true
+        },
+        {
+          "name": "Estate terrain",
+          "y": -0.14999999999999666,
+          "surface": true
+        }
+      ]
+    },
+    {
+      "x": 162,
+      "z": -6,
+      "hits": [
+        {
+          "name": "Aerial batch · Period · The Main · 16",
+          "y": 0.3400000035762787,
+          "surface": true
+        },
+        {
+          "name": "Estate terrain",
+          "y": -0.14999999999999844,
+          "surface": true
+        }
+      ]
+    },
+    {
+      "x": 162,
+      "z": 0,
+      "hits": [
+        {
+          "name": "Aerial batch · Period · The Main · 16",
+          "y": 0.3400000035762787,
+          "surface": true
+        },
+        {
+          "name": "Estate terrain",
+          "y": -0.15,
+          "surface": true
+        }
+      ]
+    },
+    {
+      "x": 162,
+      "z": 6,
+      "hits": [
+        {
+          "name": "Aerial batch · Period · The Main · 16",
+          "y": 0.3400000035762787,
+          "surface": true
+        },
+        {
+          "name": "Estate terrain",
+          "y": -0.15000000000000133,
+          "surface": true
+        }
+      ]
+    },
+    {
+      "x": 162,
+      "z": 7,
+      "hits": [
+        {
+          "name": "Aerial batch · Main/admin building · 7",
+          "y": 0.4000000059604645,
+          "surface": false
+        },
+        {
+          "name": "Estate terrain",
+          "y": -0.15000000000000177,
+          "surface": true
+        }
+      ]
+    },
+    {
+      "x": 162,
+      "z": 9,
+      "hits": [
+        {
+          "name": "Aerial batch · Main/admin building · 7",
+          "y": 0.4000000059604645,
+          "surface": false
+        },
+        {
+          "name": "Estate terrain",
+          "y": -0.15000000000000221,
+          "surface": true
+        }
+      ]
+    },
+    {
+      "x": 162,
+      "z": 10,
+      "hits": [
+        {
+          "name": "Aerial batch · Main/admin building · 7",
+          "y": 0.4000000059604645,
+          "surface": false
+        },
+        {
+          "name": "Estate terrain",
+          "y": -0.15000000000000221,
+          "surface": true
+        }
+      ]
+    },
+    {
+      "x": 162,
+      "z": 12,
+      "hits": [
+        {
+          "name": "Aerial batch · Main/admin building · 7",
+          "y": 0.4000000059604645,
+          "surface": false
+        },
+        {
+          "name": "Estate terrain",
+          "y": -0.15000000000000266,
+          "surface": true
+        }
+      ]
+    },
+    {
+      "x": 162,
+      "z": 14,
+      "hits": [
+        {
+          "name": "Aerial batch · Main/admin building · 7",
+          "y": 0.4000000059604645,
+          "surface": false
+        },
+        {
+          "name": "Estate terrain",
+          "y": -0.1500000000000031,
+          "surface": true
+        }
+      ]
+    },
+    {
+      "x": 162,
+      "z": 16,
+      "hits": [
+        {
+          "name": "Aerial batch · Main/admin building · 7",
+          "y": 0.4000000059604645,
+          "surface": false
+        },
+        {
+          "name": "Estate terrain",
+          "y": -0.15000000000000355,
+          "surface": true
+        }
+      ]
+    },
+    {
+      "x": 162,
+      "z": 17,
+      "hits": [
+        {
+          "name": "Aerial batch · Main/admin building · 7",
+          "y": 0.4000000059604645,
+          "surface": false
+        },
+        {
+          "name": "Estate terrain",
+          "y": -0.15000000000000377,
+          "surface": true
+        }
+      ]
+    },
+    {
+      "x": 163,
+      "z": -15,
+      "hits": [
+        {
+          "name": "Aerial batch · Period · The Main · 16",
+          "y": 0.3400000035762787,
+          "surface": true
+        },
+        {
+          "name": "Estate terrain",
+          "y": -0.14999999999999666,
+          "surface": true
+        }
+      ]
+    },
+    {
+      "x": 163,
+      "z": -6,
+      "hits": [
+        {
+          "name": "Aerial batch · Period · The Main · 16",
+          "y": 0.3400000035762787,
+          "surface": true
+        },
+        {
+          "name": "Estate terrain",
+          "y": -0.14999999999999866,
+          "surface": true
+        }
+      ]
+    },
+    {
+      "x": 163,
+      "z": 0,
+      "hits": [
+        {
+          "name": "Aerial batch · Period · The Main · 16",
+          "y": 0.3400000035762787,
+          "surface": true
+        },
+        {
+          "name": "Estate terrain",
+          "y": -0.15,
+          "surface": true
+        }
+      ]
+    },
+    {
+      "x": 163,
+      "z": 6,
+      "hits": [
+        {
+          "name": "Aerial batch · Period · The Main · 16",
+          "y": 0.3400000035762788,
+          "surface": true
+        },
+        {
+          "name": "Estate terrain",
+          "y": -0.15000000000000155,
+          "surface": true
+        }
+      ]
+    },
+    {
+      "x": 163,
+      "z": 7,
+      "hits": [
+        {
+          "name": "Aerial batch · Main/admin building · 7",
+          "y": 0.4000000059604645,
+          "surface": false
+        },
+        {
+          "name": "Estate terrain",
+          "y": -0.15000000000000155,
+          "surface": true
+        }
+      ]
+    },
+    {
+      "x": 163,
+      "z": 9,
+      "hits": [
+        {
+          "name": "Aerial batch · Main/admin building · 7",
+          "y": 0.4000000059604645,
+          "surface": false
+        },
+        {
+          "name": "Estate terrain",
+          "y": -0.150000000000002,
+          "surface": true
+        }
+      ]
+    },
+    {
+      "x": 163,
+      "z": 10,
+      "hits": [
+        {
+          "name": "Aerial batch · Main/admin building · 7",
+          "y": 0.4000000059604645,
+          "surface": false
+        },
+        {
+          "name": "Estate terrain",
+          "y": -0.150000000000002,
+          "surface": true
+        }
+      ]
+    },
+    {
+      "x": 163,
+      "z": 12,
+      "hits": [
+        {
+          "name": "Aerial batch · Main/admin building · 7",
+          "y": 0.4000000059604645,
+          "surface": false
+        },
+        {
+          "name": "Estate terrain",
+          "y": -0.15000000000000244,
+          "surface": true
+        }
+      ]
+    },
+    {
+      "x": 163,
+      "z": 14,
+      "hits": [
+        {
+          "name": "Aerial batch · Main/admin building · 7",
+          "y": 0.4000000059604646,
+          "surface": false
+        },
+        {
+          "name": "Estate terrain",
+          "y": -0.1500000000000031,
+          "surface": true
+        }
+      ]
+    },
+    {
+      "x": 163,
+      "z": 16,
+      "hits": [
+        {
+          "name": "Aerial batch · Main/admin building · 7",
+          "y": 0.4000000059604645,
+          "surface": false
+        },
+        {
+          "name": "Estate terrain",
+          "y": -0.15000000000000355,
+          "surface": true
+        }
+      ]
+    },
+    {
+      "x": 163,
+      "z": 17,
+      "hits": [
+        {
+          "name": "Aerial batch · Main/admin building · 7",
+          "y": 0.4000000059604645,
+          "surface": false
+        },
+        {
+          "name": "Estate terrain",
+          "y": -0.1500000000000042,
+          "surface": true
+        }
+      ]
+    },
+    {
+      "x": 170,
+      "z": -15,
+      "hits": [
+        {
+          "name": "Aerial batch · Period · The Main · 16",
+          "y": 0.3400000035762787,
+          "surface": true
+        },
+        {
+          "name": "Estate terrain",
+          "y": -0.14999999999999666,
+          "surface": true
+        }
+      ]
+    },
+    {
+      "x": 170,
+      "z": -6,
+      "hits": [
+        {
+          "name": "Aerial batch · Tower service buildings · 21",
+          "y": 0.6000000238418579,
+          "surface": false
+        },
+        {
+          "name": "Aerial batch · Period · The Main · 16",
+          "y": 0.3400000035762788,
+          "surface": true
+        },
+        {
+          "name": "Estate terrain",
+          "y": -0.14999999999999844,
+          "surface": true
+        }
+      ]
+    },
+    {
+      "x": 170,
+      "z": 0,
+      "hits": [
+        {
+          "name": "Aerial batch · Tower service buildings · 21",
+          "y": 0.6000000238418579,
+          "surface": false
+        },
+        {
+          "name": "Aerial batch · Period · The Main · 16",
+          "y": 0.3400000035762787,
+          "surface": true
+        },
+        {
+          "name": "Estate terrain",
+          "y": -0.15,
+          "surface": true
+        }
+      ]
+    },
+    {
+      "x": 170,
+      "z": 6,
+      "hits": [
+        {
+          "name": "Aerial batch · Period · The Main · 16",
+          "y": 0.3400000035762787,
+          "surface": true
+        },
+        {
+          "name": "Estate terrain",
+          "y": -0.15000000000000155,
+          "surface": true
+        }
+      ]
+    },
+    {
+      "x": 170,
+      "z": 7,
+      "hits": [
+        {
+          "name": "Aerial batch · Main/admin building · 7",
+          "y": 0.40000000596046437,
+          "surface": false
+        },
+        {
+          "name": "Estate terrain",
+          "y": -0.15000000000000155,
+          "surface": true
+        }
+      ]
+    },
+    {
+      "x": 170,
+      "z": 9,
+      "hits": [
+        {
+          "name": "Aerial batch · Main/admin building · 7",
+          "y": 0.4000000059604645,
+          "surface": false
+        },
+        {
+          "name": "Estate terrain",
+          "y": -0.15000000000000221,
+          "surface": true
+        }
+      ]
+    },
+    {
+      "x": 170,
+      "z": 10,
+      "hits": [
+        {
+          "name": "Aerial batch · Main/admin building · 7",
+          "y": 0.4000000059604645,
+          "surface": false
+        },
+        {
+          "name": "Estate terrain",
+          "y": -0.150000000000002,
+          "surface": true
+        }
+      ]
+    },
+    {
+      "x": 170,
+      "z": 12,
+      "hits": [
+        {
+          "name": "Aerial batch · Main/admin building · 7",
+          "y": 0.4000000059604645,
+          "surface": false
+        },
+        {
+          "name": "Estate terrain",
+          "y": -0.15000000000000266,
+          "surface": true
+        }
+      ]
+    },
+    {
+      "x": 170,
+      "z": 14,
+      "hits": [
+        {
+          "name": "Aerial batch · Main/admin building · 7",
+          "y": 0.4000000059604645,
+          "surface": false
+        },
+        {
+          "name": "Estate terrain",
+          "y": -0.1500000000000031,
+          "surface": true
+        }
+      ]
+    },
+    {
+      "x": 170,
+      "z": 16,
+      "hits": [
+        {
+          "name": "Aerial batch · Main/admin building · 7",
+          "y": 0.4000000059604645,
+          "surface": false
+        },
+        {
+          "name": "Estate terrain",
+          "y": -0.15000000000000355,
+          "surface": true
+        }
+      ]
+    },
+    {
+      "x": 170,
+      "z": 17,
+      "hits": [
+        {
+          "name": "Aerial batch · Main/admin building · 7",
+          "y": 0.4000000059604645,
+          "surface": false
+        },
+        {
+          "name": "Estate terrain",
+          "y": -0.15000000000000355,
+          "surface": true
+        }
+      ]
+    }
+  ],
+  "probes": {
+    "groundSamples": 96,
+    "wallSamples": 64,
+    "roofSamples": 16,
+    "ground": [],
+    "wall": [],
+    "roof": [],
+    "debris": []
+  },
+  "errors": []
+}

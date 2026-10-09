@@ -569,3 +569,22 @@ The latest [orange/blue pipe guide](drainpipe-2026-10-05/README.md) moves the
 far-end courtyard downpipe beside the low flat-roofed projection. Its top
 now meets the low rim and its shaft stands between the window banks. This
 supersedes retention of the far-end pipe in the earlier courtyard correction.
+
+## Brick backing beneath lawn window arches (9 October 2026)
+
+The owner's [red-circled game view](window-head-brick-reference.png) identifies
+the pale blocks exposed at either end of the straight lintel behind the
+segmental window heads. The written request asks for the surrounding brick
+colour; the screenshot supplies visual evidence only.
+
+The lawn elevation's shared sash now uses the existing wall brick material
+for that backing. This covers all 20 west lawn sashes and their 20 reflected
+east counterparts. Curved heads, white timber frames, sills, window divisions
+and geometry retain their existing dimensions. Other sash styles retain their
+stone lintels. The shared sash builder accepts an optional lintel material in
+`photo-detail-primitives.mjs`; `west-lawn-photo-detail.mjs` selects brick.
+
+Before/source/compiled review evidence is in
+`Browser/artifacts/window-head-brick/`. Browser sources and the local compiled
+aerial model are updated; Unity/Android, Blender and packaged exports are not
+regenerated.

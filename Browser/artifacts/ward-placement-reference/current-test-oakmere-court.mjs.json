@@ -1,0 +1,24 @@
+{
+  "code": 0,
+  "failures": [
+    {
+      "method": "deepEqual",
+      "actual": {
+        "count": 20929,
+        "sha256": "32151a3fa471ce83071db68474e9f17231219058836224dbd82e49ca3166bfad"
+      },
+      "expected": {
+        "count": 20929,
+        "sha256": "413ad148102162b2f6c2e51bf14b841e9198a347a1243d82d634f49479b81104"
+      },
+      "message": "Every pre-existing annexe primitive remains unchanged",
+      "stack": [
+        "    at assert.<computed> [as deepEqual] (file:///C:/Users/Harry/Documents/_escape-from-1829/Browser/artifacts/ward-placement-reference/capture-snapshot-mismatches.mjs:9:14)",
+        "    at file:///C:/Users/Harry/Documents/_escape-from-1829/Browser/test-oakmere-court.mjs:13:8",
+        "    at ModuleJob.run (node:internal/modules/esm/module_job:561:25)",
+        "    at async node:internal/modules/esm/loader:647:26",
+        "    at async asyncRunEntryPointWithESMLoader (node:internal/modules/run_main:101:5)"
+      ]
+    }
+  ]
+}

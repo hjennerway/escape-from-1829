@@ -92,3 +92,51 @@ and passes with the split wall. Before/after, compiled and walking previews
 from five camera positions are saved as `Browser/artifacts/mortuary-base-*`.
 Only browser sources and the local generated aerial model are updated;
 Unity and Blender exports were not regenerated.
+
+## Gable flicker and ridge-vent strip (8 October 2026)
+
+The yellow circles in `roof-flicker-reference.png` identify the garage end,
+mortuary gables and blue ridge vent. The shared roof-gap filler had generated
+vertical patches in the same planes as the thin authored gables. Differing
+UVs and competing depth values produced the striped, flickering patches.
+The blue-marked red strip across the vent was another generated filler:
+it incorrectly treated the entrance ridge cap as support for the vent roof.
+
+These six slate roof meshes now have explicitly enclosed gables, eave bands
+and undersides, joined down to their walls' existing top heights. The two
+mortuary pitches share one T-shaped outer enclosure, without internal valley
+partitions. The entrance gable follows the existing front slate edge at
+local z=-4.2, replacing its slightly recessed skin at -4.04. Gable brickwork
+uses the same planar masonry projection as the walls. Completed enclosures
+are marked so the automatic filler cannot add duplicate surfaces or extrude
+ridge/window fittings into supports.
+
+The original slate triangles, pitches, red ridge caps, building positions,
+walls, doors, windows, chimneys, paths and walking footprints are retained.
+The source and rebuilt compiled scenes pass 216 single-surface gable probes,
+72 closed-underside probes and 12 exposed vent-pane probes. The saved original
+builder fails on a duplicated garage gable face. Original surfaces are
+checked independently of the compiled scene's inactive window-atlas proxies.
+
+GPU-reviewed source, compiled and walking captures are under
+`Browser/artifacts/mortuary-garage-roofs/`, alongside the before/after geometry
+comparison and validation receipts. Browser sources and the local compiled
+aerial model are updated; Unity/Android, Blender and packaged exports are
+not regenerated. Full-suite status is recorded in `DEVELOPMENT.md`.
+
+## Shared blue lantern detailing (8 October 2026)
+
+The subsequent [water-tower reference](../tower-buildings/blue-roof-lantern-reference.png)
+refines all blue roof protrusions, including the mortuary vent. It now uses
+the shared `blue-roof-lantern.mjs` model: slate-hung end cheeks and recessed
+gables, pale blue bargeboards, four lights with a high transom, blue sills,
+lead ridge cap and fitted base flashing. Its 2.8-unit body width, 5.98-unit
+slate peak, roof extents, placement and low proportions remain unchanged.
+The end gables align with the body at X=+/-1.4 beneath the retained overhang;
+single-face gable probes follow that plane. All eight panes on both faces
+are checked for obstruction, alongside the existing roof-join regressions.
+
+The surrounding mortuary, garages and host slate roofs are retained. Browser
+sources and the local compiled aerial model are updated; Unity/Android,
+Blender, interior models and packaged exports are unchanged. See the tower
+research note and `Browser/artifacts/blue-roof-lanterns/` for the shared work.

@@ -1,4 +1,34 @@
-# Eastern cross-range ridge continuation — 7 October 2026
+# Eastern cross-range roof revisions — 7 October 2026
+
+## Stepped entrance junctions (later correction)
+
+The owner's [follow-up annotation](step-reference.png) asks for a cut along
+the orange line, retaining the upper roof and lowering the blue-circled corner
+to the wall. The yellow patch must share the purple entrance face's slope.
+The subsequent written request applies the same treatment on the opposite side.
+These instructions supersede the two rising entrance eaves described below.
+
+The court cut is at x=44.7, from z=6.6 to its intersection with the existing
+diagonal crease at z=9.74609. The garden cut is at x=40.6, from z=17.4 to the
+retained z=12 ridge. Both lower corners meet the existing 13.06 wall-top eave;
+the lower patches follow the entrance's 2.6/5.4 pitch. The court triangle on the
+far side of the cut and the garden triangle leading to x=46 retain their original
+planes. The continuous 15.66 ridge and its eastern branches remain in place.
+
+Outward brick abutments close the steps down to the lower slate, with tapered
+white render at the upper edge. Each roof mesh has matching crease vertices,
+so the automatic eave finish does not mistake an internal seam for an open edge.
+The garden cap returns sit just inside the upper slate to prevent coplanar white
+flecks. Its short frontage return and soffit still meet the higher wall.
+
+The roof regression checks 1,568 lower-plane samples, 300 retained upper-plane
+samples, 610 closed step contacts and the short return's wall and cap. Existing
+ridge, seam and coverage probes remain. One historic garden underside ray
+keeps its footprint and direction but starts below the newly lowered pitch.
+Source/compiled views and validation are in Browser/artifacts/east-roof-step/;
+see DEVELOPMENT.md for results and scope.
+
+## Level ridge continuation (earlier revision)
 
 The owner's [marked model view](reference.png) locates gaps beside the eastern
 1829 cross-range and supplies the intended roof arrangement. The written request

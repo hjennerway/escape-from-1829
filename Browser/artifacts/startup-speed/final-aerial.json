@@ -1,0 +1,19 @@
+[
+  {
+    "mode": "/aerial.html",
+    "stage": {
+      "modules": 300.8999999994412,
+      "models": 1321.699999999255,
+      "setup": 2107.5,
+      "frontage": 2163.2999999998137,
+      "first": 2834
+    },
+    "models": {
+      "mode": "compiled",
+      "milliseconds": 1007.5
+    },
+    "draws": 1607,
+    "ready": 4028.699999999255,
+    "clickToReady": 4036
+  }
+]

@@ -1,0 +1,24 @@
+{
+  "code": 0,
+  "failures": [
+    {
+      "method": "deepEqual",
+      "actual": {
+        "primitives": 20559,
+        "sha256": "38e7911906ef5569ee7216594afa232cb215b0f709068bd9c8c8d6a2e748f5f4"
+      },
+      "expected": {
+        "primitives": 20559,
+        "sha256": "a33b7717de17f44f289472478ec266dfc232eed1e34af607c92ecab4a5a7e06c"
+      },
+      "message": "Every protected annexe primitive, including the front and both Oakmere elevations, stays unchanged",
+      "stack": [
+        "    at assert.<computed> [as deepEqual] (file:///C:/Users/Harry/Documents/_escape-from-1829/Browser/artifacts/ward-placement-reference/capture-snapshot-mismatches.mjs:9:14)",
+        "    at file:///C:/Users/Harry/Documents/_escape-from-1829/Browser/test-annexe-kitchen.mjs:13:8",
+        "    at ModuleJob.run (node:internal/modules/esm/module_job:561:25)",
+        "    at async node:internal/modules/esm/loader:647:26",
+        "    at async asyncRunEntryPointWithESMLoader (node:internal/modules/run_main:101:5)"
+      ]
+    }
+  ]
+}

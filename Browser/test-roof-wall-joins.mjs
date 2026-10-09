@@ -5,6 +5,12 @@ import {createEscapeExterior} from './dist/escape-exterior.mjs';
 import {createAerialLayouts} from './dist/aerial-layouts.mjs';
 import {closeRoofWallGaps} from './dist/roof-wall-joins.mjs';
 import {checkRedesmereRoofProtrusions} from './test-support/redesmere-roof-probes.mjs';
+import {checkGarageRoofJoins} from './test-support/garage-roof-probes.mjs';
+import {checkBlueRoofLanternPanes} from './test-support/blue-roof-lantern-probes.mjs';
+import {checkCourtyardLeanTo} from './test-support/courtyard-lean-to-probes.mjs';
+import {checkServiceGableJoins} from './test-support/service-gable-probes.mjs';
+import {checkFrontCornerFlicker} from './test-support/front-corner-flicker-probes.mjs';
+import {checkRoofWallFlicker} from './test-support/roof-wall-flicker-probes.mjs';
 globalThis.document={createElement:()=>({getContext:()=>({fillRect(){},measureText:t=>({width:t.length*16}),strokeText(){},fillText(){}})})};
 // A reflected parent must preserve outward fascia faces as well as the roof
 // backing. Horizontal rays below the slate cannot be satisfied by its underside.
@@ -35,7 +41,16 @@ if(process.argv.includes('--compiled')){
  ({exterior}=restoreAerialScene(THREE,decodeModel(raw.buffer.slice(raw.byteOffset,raw.byteOffset+raw.byteLength)),1.5));
 }else{exterior=createEscapeExterior(THREE,1.5);createAerialLayouts(THREE,exterior);}
 exterior.model.updateMatrixWorld(true);
+const flickerProbes=JSON.parse(await readFile(new URL('./test-support/roof-wall-flicker-rays.json',import.meta.url),'utf8'));
+console.log(`PASS: ${checkRoofWallFlicker(THREE,exterior.model,flickerProbes)} formerly competing estate roof/wall surfaces remain covered without duplicate fascias.`);
+console.log(`PASS: ${checkFrontCornerFlicker(THREE,exterior.model)} front-wing brick surfaces without competing roof fillers.`);
 checkRedesmereRoofProtrusions(THREE,exterior.model);
+checkServiceGableJoins(THREE,exterior.towerBuildings);
+checkGarageRoofJoins(THREE,exterior.garagesMortuary);
+const lanternGroup=exterior.model.getObjectByName('Tower service buildings');
+assert.equal(checkBlueRoofLanternPanes(THREE,lanternGroup,lanternGroup.userData.openings.filter(o=>o.label.includes('blue dormer')&&o.label.endsWith('glazing'))),96);
+assert.equal(checkBlueRoofLanternPanes(THREE,exterior.garagesMortuary.userData.mortuary,[-1,1].map(side=>({x:0,y:5.34,z:3.5+side*.86,r:side===1?0:Math.PI,w:2.5,h:.4,label:'Mortuary blue ridge vent'}))),16);
+checkCourtyardLeanTo(THREE,exterior.model,{walking:!process.argv.includes('--compiled')});
 const objects=[],skins=[];let surveyed=0,solids=0,closures=0;
 exterior.model.traverse(o=>{if(!o.isMesh)return;objects.push(o);if(o.material?.userData.roofTilePixels)skins.push(o);if(o.userData.roofWallJoinsFinished){surveyed++;solids+=Number(!!o.userData.roofWallJoinSummary.solid);}if(o.userData.roofWallClosure)closures++;});
 assert(surveyed>=560&&solids>=280,'Survey the complete estate, including closed slabs, dormers and late tower buildings');
@@ -47,6 +62,13 @@ for(const probe of rays){
  // October 7 raises these old internal eaves into the continuous 15.66 ridge
  // roof. Keep the frozen ray origins/directions, reaching its new underside.
  ray.far=probe.roof==='Redesmere aligned frontage slate roof'&&probe.direction[1]===1?1.7:probe.distance;
+ // The subsequent garden-side cut lowers this old eave below the frozen
+ // origin. Keep its footprint and upward direction, starting below the new
+ // entrance pitch so the probe still verifies an opaque roof underside.
+ if(probe.roof==='Redesmere aligned frontage slate roof'&&probe.direction[1]===1&&
+    Math.abs(probe.origin[0]-40.575)<.001&&probe.origin[2]===17){
+  ray.ray.origin.y=13.06+(17.4-probe.origin[2])*2.6/5.4-.3;ray.far=.31;
+ }
  if(!ray.intersectObjects(objects,false).length)failures.push(probe);
 }
 assert(rays.length>200,'Retain wide coverage of independently frozen, formerly open eaves');

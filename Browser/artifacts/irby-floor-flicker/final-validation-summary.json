@@ -1,0 +1,15 @@
+{
+  "model": "compiled",
+  "pixelSamples": 5759,
+  "changedPixels": 0,
+  "errors": [],
+  "suite": {
+    "declared": 155,
+    "passed": 153,
+    "failures": [
+      "test-jarman.mjs:11",
+      "test-leighton-newton.mjs:21"
+    ],
+    "bothReproduceWithOriginalFloor": true
+  }
+}

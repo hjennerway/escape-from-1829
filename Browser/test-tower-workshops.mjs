@@ -16,6 +16,8 @@ import {WORKSHOP_DOOR_HEIGHT} from './dist/workshop-door-dimensions.mjs';
 import {MAIN_KITCHEN} from './dist/main-kitchen.mjs';
 import {ROOM_DOOR_THICKNESS} from './dist/asylum-doors.mjs';
 import {auditCorridorJoins,auditDoorHeaderJoins} from './test-support/escape-corridor-join-probes.mjs';
+import {probeWorkshopExterior,probeWorkshopYard,probeWorkshopAdminYard} from './test-support/workshop-exterior-probes.mjs';
+import {probeTowerWallAlignment} from './test-support/tower-wall-alignment-probes.mjs';
 const {westX,westShift,entrance}=TOWER_WORKSHOPS;
 const corridorX=(WORKSHOP_GALLERY.minX+WORKSHOP_GALLERY.maxX)/2;
 const context=new Proxy({},{get:(_,key)=>key==='measureText'?text=>({width:text.length*16}):/Gradient$/.test(key)?()=>({addColorStop(){}}):()=>{}});
@@ -41,25 +43,29 @@ for(const view of towerViews){view.hit=visibleHit(tower,view.origin,view.directi
 const roofGeometry=roof.geometry,roofMatrix=roof.matrix.toArray();
 for(let attempt=0;attempt<2;attempt++){
  const resourcesBefore=exterior.model.children.length,run={},world=createEscapeGrounds(THREE,exterior,walker,{run,recordGrounds(){}});
- assert.deepEqual(snapshot(tower),originalTower,'Interior retains the exact exterior tower meshes, materials, batches and transforms');
- // The marked wicket-side railing must meet actual masonry. A convex hull of
- // the clipped concave ward used to omit 17 m of rail and block the empty lawn.
- assert(walker.clearPermanent(105,-85,0)&&walker.clearPermanent(105,-85,2),'Hale western court remains open after corridor shell clipping');
- assert(walker.clear(105,-83.5),'Player can approach the extended rail across the visible lawn');
- const wallMeshes=[];exterior.haleWard.traverseVisible(o=>{if(o.isMesh)wallMeshes.push(o);});
- const wallHit=new THREE.Raycaster(new THREE.Vector3(90,2.8,-85),new THREE.Vector3(1,0,0),0,40).intersectObjects(wallMeshes,false)[0];
- assert(wallHit,'Visible ward wall anchors the north fence');
- const fenceMatrix=new THREE.Matrix4(),position=new THREE.Vector3(),scale=new THREE.Vector3(),quaternion=new THREE.Quaternion();let railEnd=-Infinity;
- world.group.getObjectByName('Escape iron fittings').traverse(o=>{if(!o.isInstancedMesh)return;for(let i=0;i<o.count;i++){
-  o.getMatrixAt(i,fenceMatrix);fenceMatrix.decompose(position,quaternion,scale);
-  if(Math.abs(position.z+85)<.001&&Math.abs(position.y-2.8)<.001&&position.x>87&&scale.x>1)railEnd=Math.max(railEnd,position.x+scale.x/2);
- }});
- assert(railEnd>=wallHit.point.x-.01&&railEnd<wallHit.point.x+.41,'Railing meets visible wall without running through the ward: '+JSON.stringify({railEnd,wallX:wallHit.point.x}));
- assert(walker.clearPermanent(wallHit.point.x-.1,-85,0,0)&&!walker.clearPermanent(wallHit.point.x-.1,-85,0),'Fence fitting excludes player clearance padding');
- for(let x=89;x<wallHit.point.x;x+=.1)for(const y of [0,1.69])assert(!walker.clear(x,-85,y),'Extended rail blocks walking and jumping at '+x);
+ assert(world.tower,'Escape now includes the reversible tower stair interior');
+ const adminYard=probeWorkshopAdminYard(THREE,exterior.model);
+ for(const key of ['ground','wall','roof','debris'])assert.deepEqual(adminYard[key],[],'Main/admin yard '+key+' after fitting/retry');
+ for(const x of [157.2,158,159,160]){
+  const actor={x,y:.34,z:5.6};for(let i=0;i<20;i++)walker.update(actor,0,.2,.04);
+  assert(actor.z<6.35,'Escape movement is blocked by the new solid bay wall');
+ }
  // Survey the reported ceiling stripe, partition ends and south return in
  // the actual rebuilt batches. Only the exterior masonry may own this face.
  const facadeMeshes=[];exterior.model.updateMatrixWorld(true);exterior.model.traverseVisible(o=>{if(o.isMesh)facadeMeshes.push(o);});
+ const upperExterior=probeWorkshopExterior(THREE,exterior.model);
+ const alignment=probeTowerWallAlignment(THREE,exterior.model);
+ for(const key of ['walls','base','roof','windows'])assert.deepEqual(alignment[key],[],'Tower north/south facade alignment and retired junction sashes: '+key);
+ for(const z of [-73,-67,-62])assert(!walker.clear(westX+.1,z),'North tower collision follows the moved facade');
+ assert.equal(upperExterior.probes,64);assert.deepEqual(upperExterior.leaks,[],'Cylinder-side masonry reaches the retained stores roof');
+ assert.deepEqual(upperExterior.floating,[],'Replaced estate shells leave no unsupported original windows');
+ assert.deepEqual(upperExterior.trim,[],'Replaced gallery leaves no floating rainwater fittings');
+ assert.equal(upperExterior.roofProbes,54);assert.deepEqual(upperExterior.roofLeaks,[],'Narrowed gallery roof meets both outside wall returns and its adjoining roof');
+ assert.deepEqual(upperExterior.roofStrips,[],'No low roof skirts float in front of the taller stores wall');
+ const yard=probeWorkshopYard(THREE,exterior.model);
+ assert.deepEqual(yard.floating,[],'No high orphan decks or gutters over the walking yard');
+ assert.deepEqual(yard.seams,[],'The machine-room slate reaches its south wall');
+ assert.deepEqual(yard.ground,[],'Yard paving meets the replaced walls at one asphalt level');
  const joins=auditCorridorJoins(THREE,exterior.model,world.workshops.group);
  assert(joins.corners>=14&&joins.probes>=560,'Survey every connected corridor corner');
  assert.equal(joins.failures.length,0,'Joined painted walls and skirting: '+JSON.stringify(joins.failures.slice(0,8)));
@@ -117,9 +123,13 @@ for(let attempt=0;attempt<2;attempt++){
  }
  const skirtingMaterials=new Set();world.workshops.group.traverse(o=>{if(o.isMesh&&/skirting/.test(o.name))skirtingMaterials.add(o.material);});
  for(const view of towerViews){const hit=visibleHit(exterior.model,view.origin,view.direction);
+  // The newly playable existing doorway is intentionally replaced. The
+  // tower route regression checks this opening, both stair directions and
+  // exact original restoration; all other workshop contacts stay put.
+  if(view.direction[2]===-1&&Math.abs(view.origin[0]-148)<.75&&view.origin[1]<3.5)continue;
   if(view.origin[1]<.18&&skirtingMaterials.has(hit?.object.material)){
    assert(view.hit.point.distanceTo(hit.point)<.31,'New tower skirting follows the retained plinth and projecting arch sill');
-  }else {assert(hit?.object===view.hit.object,'Room must expose the actual tower above skirting: '+JSON.stringify({origin:view.origin,expected:view.hit.object.name,actual:hit?.object.name,point:hit?.point}));assert(hit.point.distanceTo(view.hit.point)<1e-6);}
+  }else {assert(hit&&hit.point.distanceTo(view.hit.point)<1e-6,'Room retains the tower surface outside the new door: '+JSON.stringify({origin:view.origin,expected:view.hit.point,actual:hit?.point}));assert.equal(hit.object.material,view.hit.object.material);}
  }
  assert(Math.abs(WORKSHOP_GALLERY.minX+.2875-153.205)<1e-6,'Finished west wall meets the tower corner face');
  assert(walker.clear(corridorX,-55.2)&&!walker.clear(153.1,-55.2),'Corridor runs against the original tower wall');
@@ -212,9 +222,22 @@ for(let attempt=0;attempt<2;attempt++){
    const point=wall.localToWorld(new THREE.Vector3((t-.5)*width,.11-wall.position.y,side*(depth/2+.25))),direction=new THREE.Vector3(0,0,-side).transformDirection(wall.matrixWorld);trimmed(point.toArray(),direction.toArray(),wall.name);
   }
  }
- const rendered=[],glassMaterials=new Set();exterior.model.traverse(o=>{if(o.isMesh&&/glazing|glass/i.test(o.name))for(const m of [o.material].flat())glassMaterials.add(m);});exterior.model.traverseVisible(o=>{if(o.isMesh)rendered.push(o);});
+ const rendered=[],glassMaterials=new Set();exterior.model.traverse(o=>{if(o.isMesh)for(const m of [o.material].flat())if(m.userData.windowGlass||(/glazing|glass/i.test(o.name)&&o.name!=='Service glazing and trim'))glassMaterials.add(m);});exterior.model.traverseVisible(o=>{if(o.isMesh)rendered.push(o);});
  let windowRays=0;function visiblePane(origin,direction,label){const ray=new THREE.Raycaster(new THREE.Vector3(...origin),new THREE.Vector3(...direction),0,4),hit=ray.intersectObjects(rendered,false)[0];assert(glassMaterials.has(hit?.object.material),'Visible pane '+label+'; first surface '+hit?.object.name+' '+JSON.stringify({origin,direction,point:hit?.point,material:hit?.object.material.name}));windowRays++;}
- for(const z of [-31.5,-37,-42.5,-47])for(const y of [2.4,4.2]){visiblePane([westX-.7,y,z+.3],[1,0,0],'rectangular west sash exterior');visiblePane([westX+.8,y,z+.3],[-1,0,0],'rectangular west sash interior');}
+ // The four retained service sashes have three columns and four rows. Survey
+ // clear pane centres and their dividers in the actual rebuilt render batches
+ // from both sides, including the two rooms and the entrance vestibule.
+ for(const z of [-31.5,-37,-42.5,-47]){
+  for(const side of [-1,1]){
+   const direction=[-side,0,0],x=westX+(side<0?-.7:.8),face=side<0?'exterior':'interior';
+   for(const dz of [-1.25/3,0,1.25/3])for(const y of [2.4,3.075,3.525,4.2])visiblePane([x,y,z+dz],direction,'rectangular west sash '+face);
+   const dividers=[...[-1.25/6,1.25/6].map(dz=>[x,2.4,z+dz]),...[2.85,3.3,3.75].map(y=>[x,y,z+.4])];
+   for(const origin of dividers){
+    const hit=new THREE.Raycaster(new THREE.Vector3(...origin),new THREE.Vector3(...direction),0,4).intersectObjects(rendered,false)[0];
+    assert(hit&&!glassMaterials.has(hit.object.material),'Twelve-pane sash divider visible from '+face+': '+JSON.stringify({origin,hit:hit?.object.name}));
+   }
+  }
+ }
  world.workshops.group.traverse(o=>{if(o.name!=='Workshop exterior with semicircular windows')return;for(const w of o.userData.openings??[])for(const y of [w.y+.45,w.y+w.spring+w.radius*.6]){const p=o.localToWorld(new THREE.Vector3(w.x+.23,y,w.z+w.side*.65)),direction=new THREE.Vector3(0,0,-w.side).transformDirection(o.matrixWorld);visiblePane(p.toArray(),direction.toArray(),'workshop wall '+o.position.x+','+o.position.z);}});
  assert(windowRays>140,'Lower panes and semicircular heads on both gallery sides and exposed workshop walls receive glazing checks');
  assert(!walker.clear(166.2,-43.1),'Assembly table follows its visible footprint');

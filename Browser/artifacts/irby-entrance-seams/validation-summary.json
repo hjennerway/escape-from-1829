@@ -1,0 +1,64 @@
+{
+  "fullSuiteExitCode": 0,
+  "gpuLauncher": "passed",
+  "logic": "passed",
+  "escapeWorkshopRegression": "passed",
+  "source": {
+    "model": {
+      "mode": "procedural",
+      "milliseconds": 3862.5
+    },
+    "renderer": "ANGLE (NVIDIA, NVIDIA GeForce RTX 3090 Ti (0x00002203) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+    "frameLeaks": [],
+    "pavingOcclusion": [
+      {
+        "distance": 6.7,
+        "samples": 14150,
+        "changed": 0,
+        "maximum": 0
+      },
+      {
+        "distance": 11.7,
+        "samples": 4669,
+        "changed": 0,
+        "maximum": 0
+      },
+      {
+        "distance": 20,
+        "samples": 1581,
+        "changed": 0,
+        "maximum": 0
+      }
+    ],
+    "errors": []
+  },
+  "compiled": {
+    "model": {
+      "mode": "compiled",
+      "milliseconds": 1509.2000000001863
+    },
+    "renderer": "ANGLE (NVIDIA, NVIDIA GeForce RTX 3090 Ti (0x00002203) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+    "frameLeaks": [],
+    "pavingOcclusion": [
+      {
+        "distance": 6.7,
+        "samples": 14150,
+        "changed": 0,
+        "maximum": 0
+      },
+      {
+        "distance": 11.7,
+        "samples": 4669,
+        "changed": 0,
+        "maximum": 0
+      },
+      {
+        "distance": 20,
+        "samples": 1581,
+        "changed": 0,
+        "maximum": 0
+      }
+    ],
+    "errors": []
+  }
+}

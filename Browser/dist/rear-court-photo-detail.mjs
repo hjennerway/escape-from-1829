@@ -91,9 +91,14 @@ export function addRearCourtPhotoDetails(THREE,{model,box,mesh,worldUV,white,bri
   // East wing: the shallow chimney projection interrupts the otherwise flat
   // elevation; the blue porch replaces a ground sash at z=-4.8.
   const wingZ=[-28,-25.3,-22.6,-18.9,-12.4,-8.6,-4.8,-1,2.8,6.6];
-  mesh(worldUV(new THREE.BoxGeometry(.75,5.3,5.7),1.7),brick,83.85,6.65,-18.9,true).name='Rear court chimney projection';
+  mesh(worldUV(new THREE.BoxGeometry(.75,5.07,5.7),1.7),brick,83.85,6.535,-18.9,true).name='Rear court chimney projection';
   box(white,83.85,2,-18.9,.75,4,5.7);
-  for(const y of [4.04,4.95,9.26])box(y===9.26?iron:white,83.78,y,-18.9,.9,.14,5.84);
+  for(const y of [4.04,4.95])box(white,83.78,y,-18.9,.9,.14,5.84);
+  box(white,83.85,9.19,-18.9,.75,.24,5.7);
+  box(white,83.79,9.42,-18.9,.87,.22,5.94);
+  // The shallow chimney breast has a slate cap up to the main roof edge.
+  const breastCap=new THREE.BoxGeometry(.445,.01,5.94);
+  mesh(worldUV(breastCap,3),roof,83.5775,9.535,-18.9,true).name='Redesmere chimney breast slate cap';
   for(const z of wingZ){
     const x=z===-18.9?83.42:84.15;
     window('rear-court-wing-upper',x,6.5,z,-Math.PI/2,1.12,2.35);

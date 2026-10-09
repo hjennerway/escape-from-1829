@@ -1,3 +1,4 @@
+import {navigateView} from './view-cache.mjs';
 // Carry a live camera location between the two pages, including direct links
 // and reloads. No stored preset or intro flight replaces this position.
 export function readViewLocation(search){
@@ -20,12 +21,25 @@ export function viewLocationURL(destination,location,{base,period,lighting}={}){
   return url;
 }
 
-export function bindViewSwitch(button,{camera,destination,period,lighting}){
+export function bindViewSwitch(button,{camera,destination,period,lighting,capture}){
   button.disabled=false;
   button.addEventListener('click',()=>{
     const url=viewLocationURL(destination,cameraLocation(camera),{base:location.href,period:period(),lighting:lighting()});
+    // Carry one still across the document navigation. Read the WebGL buffer
+    // immediately after a fresh draw, without retaining it on ordinary frames.
+    try{
+      sessionStorage.removeItem('1829-view');
+      const canvas=capture?.();
+      if(canvas){
+        const preview=document.createElement('canvas'),scale=Math.min(1,1280/canvas.width);
+        preview.width=Math.round(canvas.width*scale);preview.height=Math.round(canvas.height*scale);
+        preview.getContext('2d').drawImage(canvas,0,0,preview.width,preview.height);
+        sessionStorage.setItem('1829-view',JSON.stringify({path:url.pathname,created:Date.now(),preview:preview.toDataURL('image/jpeg',.85)}));
+      }
+    }catch{/* The destination has a bundled still when storage is unavailable. */}
+    url.searchParams.set('handoff','1');
     document.exitPointerLock?.();
-    location.href=url.href;
+    navigateView(url);
   });
 }
 

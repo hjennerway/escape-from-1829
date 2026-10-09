@@ -18,6 +18,7 @@ import {addWestLawnPhotoDetails} from './west-lawn-photo-detail.mjs';
 import {addEntranceWestPhotoDetails} from './entrance-west-photo-detail.mjs';
 import {addInnerCourtPhotoDetails} from './inner-court-photo-detail.mjs';
 import {addCentralCourtPhotoDetails} from './central-court-photo-detail.mjs';
+import {addFacadeCourse} from './facade-courses.mjs';
 export const EAST_PHOTO_VIEW=Object.freeze({position:[76,1.8,48],target:[53,5.4,21],fov:76});
 
 export function eastPhotoProfile(x,z){
@@ -33,7 +34,7 @@ export function addEastPhotoDetails(THREE,{model,box,mesh,worldUV,white,brick,ro
   // z=17. Only the garden side is filled; retain the rear courtyard outline.
   mesh(worldUV(new THREE.BoxGeometry(4.1,10.3,2.5),1.7),brick,43.05,9.15,18.25,true).name='Redesmere flush frontage brick';
   mesh(new THREE.BoxGeometry(4.1,4,2.5),white,43.05,2,18.25,true).name='Redesmere flush frontage white base';
-  for(const y of [4.06,8.8])box(white,51.125,y,19.52,20.25,.18,.2);
+  box(white,51.125,8.8,19.52,20.25,.18,.2);
   for(const [y,h,d] of [[14.18,.22,.23],[14.42,.22,.48]])
     box(white,43.05,y,18.25,4.1+d,h,2.5+d);
   // One stepped hip covers the original range and the filled strip. The
@@ -112,9 +113,16 @@ export function addEastPhotoDetails(THREE,{model,box,mesh,worldUV,white,brick,ro
   addWestCantedBay(THREE,{model,mesh,worldUV,brick,white,roof,sash},{
     x:53.1,z:19.45,side:1,name:'East curved bay',face:'polygonal-bay',
     width:4.8,depth:1.55,frontWidth:2.25,returnDepth:.275,height:14.3,baseHeight:4,roofRise:.5,
-    bandHeights:[4.06,8.8,14.28,14.45],
+    bandHeights:[8.8,14.28,14.45],
     windowRows:[2,6.5,11.6].map(y=>({y,width:y===2?1.45:1.2,sideWidth:y===2?.85:.65,height:2.35}))
   });
+  // Match the square pavilion's thin lower course: its underside rests on
+  // the y=4 render. One closed solid turns through the bay, door recess and
+  // both exposed faces of the blank projection, with shared corner mitres.
+  addFacadeCourse(THREE,{mesh,worldUV},'Redesmere continuous lower frontage band',white,
+    [[41,19.5],[50.7,19.5],[50.7,19.725],[51.975,21],[54.225,21],
+      [55.5,19.725],[55.5,19.5],[projectionLeft,19.5],[projectionLeft,25],[69.82,25]],
+    4.08,.16,.14);
   // Square projecting pavilion: exactly two aligned openings on each storey
   // of its front face, and two on its exposed east return.
   for(const y of [2,6.5,11.6]){

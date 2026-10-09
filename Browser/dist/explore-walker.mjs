@@ -5,9 +5,9 @@ import {exitDirection} from './escape-routes.mjs';
 
 // Exploration and Escape use the same physical stairs, collisions and jumps.
 // Only this camera/input adapter differs; exploration has no game objectives.
-export function createExploreWalker(THREE,exterior,floors,{allowMove=()=>true}={}){
+export function createExploreWalker(THREE,exterior,floors,{allowMove=()=>true,doorInteractions=null,deferObstacles=false}={}){
  const camera=exterior.camera,keys=new Set(),defaultFov=camera.fov;
- const outside=createAsylumOutside(THREE,exterior),inside=createAsylumJump(floors,{allowMove});
+ const outside=createAsylumOutside(THREE,exterior,{deferRefresh:deferObstacles}),inside=createAsylumJump(floors,{allowMove});
  const actor={x:0,y:0,z:40,floor:0,outside:true,stair:null};
  let yaw=0,pitch=0,doorHeld=false,waitingDoor=null;
  camera.rotation.order='YXZ';
@@ -15,6 +15,7 @@ export function createExploreWalker(THREE,exterior,floors,{allowMove=()=>true}={
  function resetJumps(){outside.resetJump();inside.reset();}
  function reset(){resetJumps();keys.clear();doorHeld=false;waitingDoor=null;yaw=pitch=0;Object.assign(actor,{x:0,y:0,z:40,floor:0,outside:true,stair:null,verticalTrend:0});camera.fov=defaultFov;camera.updateProjectionMatrix();sync();}
  function nearbyDoor(){
+  const workshopDoor=doorInteractions?.nearbyDoor(actor);if(workshopDoor)return workshopDoor;
   if(!actor.outside)return nearExit(floors[actor.floor],actor);
   let nearest=null,distance=1.6;
   for(const floor of floors)for(const exit of floor.exits){
@@ -25,6 +26,7 @@ export function createExploreWalker(THREE,exterior,floors,{allowMove=()=>true}={
  }
  function useDoor(){
   const exit=nearbyDoor();if(!exit)return false;
+  if(exit.workshop)return doorInteractions.useDoor(exit);
   if(actor.outside&&!allowMove(actor,{...exit.inside,floor:exit.floor,outside:false})){waitingDoor=exit.id;return false;}
   waitingDoor=null;
   resetJumps();const {dx,dz}=exitDirection(exit,{outside:!actor.outside});

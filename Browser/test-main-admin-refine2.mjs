@@ -47,6 +47,35 @@ for(const [face,y,h] of [['rear stair upper',8.85,2.45],['rear court upper',4.65
  for(const o of openings){near(o.y,y,'Accepted window height');near(o.h,h,'Accepted window proportions');}
 }
 assert.equal(roofAt(228,8).object.name,'Rear flat court block flat roof');assert.equal(roofAt(228,12).object.name,'Rear canted stair bay slate roof');
+// The later marked walking view adds every missing return and lowers the
+// entire narrow side band beneath the lowest recessed sill. Probe the actual
+// assembled scene so a leftover old strip cannot pass a metadata-only check.
+const band=admin.getObjectByName('Admin continuous low side band');assert(band);
+const bandBounds=new THREE.Box3().setFromObject(band);
+near(bandBounds.min.y,2.235,'Band underside is level');near(bandBounds.max.y,2.365,'Band top is level');
+assert.equal(band.material.color.getHex(),0xb5ae99,'Retain the light masonry colour');
+const bandLine=[[235.5,19.46],[241.56,19.46],[241.56,12.94],[237.06,12.94],[237.06,10.14],[231.56,10.14],[231.56,6.14],[219,6.14]];
+const lowWindows=admin.userData.openings.filter(o=>['east corner paired sash','east corner south sash','east corner recessed sash','rear court east sash','rear court upper'].includes(o.face));
+for(const o of lowWindows)assert(bandBounds.max.y<o.y-o.h/2-.19,'Band clears the complete sill below '+o.face);
+const recessed=lowWindows.find(o=>o.face==='east corner recessed sash');
+near(recessed.y,3.45,'Retain recessed window height');near(recessed.h,1.7,'Retain recessed window proportions');
+let bandProbes=0;
+for(let i=1;i<bandLine.length;i++){
+ const a=bandLine[i-1],b=bandLine[i],length=Math.hypot(b[0]-a[0],b[1]-a[1]),nx=-(b[1]-a[1])/length,nz=(b[0]-a[0])/length;
+ for(let along=.17;along<length-.1;along+=.23){
+  const x=a[0]+(b[0]-a[0])*along/length+nx*.035,z=a[1]+(b[1]-a[1])*along/length+nz*.035;
+  for(const side of [-1,1]){
+   const y=2.3+side*.065;
+   ray.set(new THREE.Vector3(x,y+side*.035,z),new THREE.Vector3(0,-side,0));ray.far=.05;
+   const hits=ray.intersectObject(admin,true);
+   assert.equal(hits.length,1,'One supported band surface through each marked span');assert.equal(hits[0].object,band);
+   near(hits[0].point.y,y,'Band stays level across all returns');bandProbes++;
+  }
+  ray.set(new THREE.Vector3(x,2.6+.12,z),new THREE.Vector3(0,-1,0));ray.far=.25;
+  assert.equal(ray.intersectObject(admin,true).filter(h=>h.object.material===band.material).length,0,'No old higher band remains outside the wall');
+ }
+}
+ray.far=Infinity;
 // Sample full panes: a roof or wall join must not cover the photograph windows.
 for(const opening of admin.userData.openings.filter(o=>/^(east corner|east upper|rear )/.test(o.face))){
  const n=new THREE.Vector3(Math.sin(opening.rotation),0,Math.cos(opening.rotation)),tangent=new THREE.Vector3(Math.cos(opening.rotation),0,-Math.sin(opening.rotation));
@@ -67,4 +96,4 @@ for(const view of ['main-admin-annexe-end','main-admin-rear-court']){const p=MAI
 for(const p of [[228,8],[228,12],[239,16],[236,11.6]])assert(obs.some(o=>obstacleContains(o,...p)),'Corner masonry blocks walking');
 // Green in main_refine3/img2 is the unrelated foreground structure.
 for(const x of [243,245,249])for(const z of [-42,-38,-34])assert(!roofAt(x,z,service)&&!roofAt(x,z,admin),'Green-marked structure excluded');
-console.log('PASS: shared corner in both photos, three-sided pitched room, recessed link, retained red block/bay, exposed panes, camera starts, collisions and green exclusion.');
+console.log(`PASS: shared corner in both photos, three-sided pitched room, recessed link, retained red block/bay, ${bandProbes} continuous low-band probes, exposed panes, camera starts, collisions and green exclusion.`);

@@ -40,7 +40,7 @@ try{
   await page.keyboard.down('u');await page.keyboard.press('u');assert.equal(await page.locator('#developerDoorsToggle').getAttribute('aria-pressed'),'false');await page.keyboard.up('u');
   await page.keyboard.press('u');assert.equal(await page.locator('#developerDoorsToggle').getAttribute('aria-pressed'),'true');
   assert((await page.evaluate(exits=>exits.map(e=>doorTest.tryExit(e)),exits)).every(r=>r.allowed&&r.outside),'Every ground and upper-floor exit bypasses its key or bolt');
-  const unlocked=await page.evaluate(()=>doorTest.grilles());assert(unlocked.every(g=>!g.visible&&!g.blocked&&!g.lockedPrompt),'Both grilles physically allow passage without a key');
+  const unlocked=await page.evaluate(()=>doorTest.grilles());assert(unlocked.every(g=>g.visible&&!g.blocked&&!g.lockedPrompt),'Both grilles remain visible beside the clear passage without a key');
   await page.evaluate(()=>doorTest.viewGate());
   assert.equal(await page.locator('#objectiveTitle').innerText(),'Leave through any outside door');
   for(const id of ['developerToggle','developerMapToggle','developerDoorsToggle']){

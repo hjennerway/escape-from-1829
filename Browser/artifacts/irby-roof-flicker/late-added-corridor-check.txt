@@ -1,0 +1,1 @@
+PASS: alternate bays retain their exact positions on both faces and opposing walls; 44 clear-pane and 36 solid infill rays across even, odd, reversed, rotated and short walls.

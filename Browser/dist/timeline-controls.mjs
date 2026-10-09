@@ -28,7 +28,7 @@ export function bindTimelineControls(timeline,root=document,onChange=()=>{}){
   note.textContent=periodNote(period.year);note.hidden=!note.textContent;
   previous.disabled=index===0;next.disabled=index===PERIODS.length-1;
   for(const [i,tick] of [...ticks.children].entries())tick.classList.toggle('selected',i===index);
-  if(save){const url=new URL(location.href);url.searchParams.set('period',period.year);history.replaceState(null,'',url);}
+  if(save){const url=new URL(location.href);url.searchParams.set('period',period.year);history.replaceState(history.state,'',url);}
   refreshLinks();onChange(period);
  }
  slider.addEventListener('input',()=>select(slider.value));

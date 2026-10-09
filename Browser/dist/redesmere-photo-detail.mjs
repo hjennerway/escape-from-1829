@@ -4,18 +4,34 @@
 export const REDESMERE_PHOTO_VIEW=Object.freeze({position:[141,1.8,-10],target:[94.5,5.1,-12],fov:54});
 export function redesmerePhotoProfile(x,z){return Math.abs(x-89.2)<.01&&z===-14;}
 
+export function addRedesmereMainCornice(THREE,{mesh,worldUV,white}){
+  for(const [bottom,height,inset] of [[9.07,.24,.12],[9.31,.22,0]]){
+    // A microscopic overlap keeps Float32 cap vertices on the roof boundary
+    // when the shared eave finisher tests support at the exact edge.
+    const seam=height===.22?.00002:0;
+    const left=83.8+inset-seam,right=94.6-inset+seam,back=-38.4+inset-seam,front=10.4-inset+seam;
+    // Return behind the two bay roofs and the lower rendered entrance hip.
+    // A full rectangular slab would emerge through their pitched slate.
+    const points=[[left,back],[right,back]];
+    for(const [a,b,x] of [[-29.9,-22.3,94.29],[-17.85,-5.85,93.64],[-3.7,3.9,94.29]])
+      points.push([right,a],[x,a],[x,b],[right,b]);
+    points.push([right,front],[left,front]);
+    const shape=new THREE.Shape(points.map(([x,z])=>new THREE.Vector2(x,-z)));
+    const g=new THREE.ExtrudeGeometry(shape,{depth:height,bevelEnabled:false,steps:1});
+    g.rotateX(-Math.PI/2);g.translate(0,bottom,0);
+    mesh(worldUV(g,1.7),white,0,0,0,true).name='Redesmere main pale cornice';
+  }
+}
+
 export function addRedesmerePhotoDetails(THREE,{model,box,mesh,worldUV,white,brick,roof,material,hipRoof,sash,door,rod,iron}){
   const start=model.userData.eastPhotoOpenings.length;
   const band=material(0xd1cfbb),sage=material(0x9faea4),slate=material(0x555e61),soil=material(0x665b46),leaves=[material(0x60754c),material(0x516a43)];
   const wallX=94.42,frontX=wallX+.19;
   // Replace the outer white ground storey with continuous brick. The inner
   // courtyard's white walls, detailed openings and fire escape stay intact.
-  mesh(worldUV(new THREE.BoxGeometry(.36,9.3,48),1.7),brick,wallX,4.65,-14,true).name='Redesmere outer brick elevation';
+  // The applied brick skin ends beneath the shared pale roof-edge trim.
+  mesh(worldUV(new THREE.BoxGeometry(.36,9.07,48),1.7),brick,wallX,9.07/2,-14,true).name='Redesmere outer brick elevation';
   box(band,frontX,4.36,-14,.2,.22,48);
-  box(iron,frontX,9.25,-14,.2,.16,48);
-  // The main range's raised brick trim stops at the lower entrance roof;
-  // its projecting edge otherwise emerges through that hip's end slope.
-  for(const [a,b] of [[-38,-17.86],[-5.84,10]])box(brick,frontX,8.95,(a+b)/2,.18,.2,b-a);
   function window(face,x,y,z,rotation=Math.PI/2,w=1.3,h=2.65){
     sash(face,x,y,z,rotation,w,h);
     // Splayed stone heads are wider at the top, as in the photograph.
@@ -26,7 +42,7 @@ export function addRedesmerePhotoDetails(THREE,{model,box,mesh,worldUV,white,bri
   for(const z of [4.8,-5,-18.7,-21.5,-31.2,-35.5])for(const y of [2,6.7])window('redesmere-main',frontX+.03,y,z);
   // Continue the brick finish around the stepped rear corner at the right.
   for(const [x,z,d] of [[94.42,-40.5,5],[92.42,-44.5,3]]){
-    mesh(worldUV(new THREE.BoxGeometry(.36,9.3,d),1.7),brick,x,4.65,z,true);
+    mesh(worldUV(new THREE.BoxGeometry(.36,9.07,d),1.7),brick,x,9.07/2,z,true);
     box(band,x+.19,4.36,z,.2,.22,d);
     for(const y of [2,6.7])window('redesmere-rear-corner',x+.22,y,z);
   }
@@ -36,13 +52,27 @@ export function addRedesmerePhotoDetails(THREE,{model,box,mesh,worldUV,white,bri
   function bay(z){
     const points=[[94.3,z-3.8],[95.5,z-3.8],[97.1,z-2.15],[97.1,z+2.15],[95.5,z+3.8],[94.3,z+3.8]];
     const shape=new THREE.Shape();points.forEach(([x,pz],i)=>i?shape.lineTo(x,-pz):shape.moveTo(x,-pz));shape.closePath();
-    const g=new THREE.ExtrudeGeometry(shape,{depth:9.3,bevelEnabled:false});g.rotateX(-Math.PI/2);
+    const g=new THREE.ExtrudeGeometry(shape,{depth:8.94,bevelEnabled:false});g.rotateX(-Math.PI/2);
     mesh(worldUV(g,1.7),brick,0,0,0,true).name='Redesmere canted bay';
     // Each trim course follows the three outward facets and both returns.
     for(let i=0;i<points.length-1;i++){
       const a=points[i],b=points[i+1],dx=b[0]-a[0],dz=b[1]-a[1],length=Math.hypot(dx,dz),rotation=Math.atan2(-dz,dx)+Math.PI;
-      for(const [y,h,mat] of [[4.36,.22,band],[9.08,.12,brick],[9.3,.17,iron]])box(mat,(a[0]+b[0])/2,y,(a[1]+b[1])/2,length+.1,h,.16,rotation);
+      box(band,(a[0]+b[0])/2,4.36,(a[1]+b[1])/2,length+.1,.22,.16,rotation);
       if(i>=1&&i<=3)for(const y of [2,6.7])window('redesmere-bay',(a[0]+b[0])/2+Math.sin(rotation)*.06,y,(a[1]+b[1])/2+Math.cos(rotation)*.06,rotation,i===2?1.55:1.15);
+    }
+    // Match the shared .24 lower step and .22 upper fascia with joined corners.
+    // The upper edge stops exactly at the retained slate boundary.
+    const inset=distance=>points.map(([x,pz],i)=>{
+      const a=points[(i+points.length-1)%points.length],b=points[(i+1)%points.length];
+      const normal=(u,v)=>{const dx=v[0]-u[0],dz=v[1]-u[1],l=Math.hypot(dx,dz);return [-dz/l,dx/l];};
+      const n=normal(a,[x,pz]),m=normal([x,pz],b),scale=distance/(1+n[0]*m[0]+n[1]*m[1]);
+      return [x+(n[0]+m[0])*scale,pz+(n[1]+m[1])*scale];
+    });
+    for(const [bottom,height,edge] of [[8.94,.24,inset(.12)],[9.18,.22,points]]){
+      const profile=new THREE.Shape(edge.map(([x,pz])=>new THREE.Vector2(x,-pz)));
+      const cornice=new THREE.ExtrudeGeometry(profile,{depth:height,bevelEnabled:false,steps:1});
+      cornice.rotateX(-Math.PI/2);cornice.translate(0,bottom,0);
+      mesh(worldUV(cornice,1.7),white,0,0,0,true).name='Redesmere bay pale cornice';
     }
     // Slate roof pitches from a short ridge back into the main roof slope.
     const vertices=points.map(([x,pz])=>[x,9.4,pz]);vertices.push([94.45,10.75,z-1.6],[94.45,10.75,z+1.6]);

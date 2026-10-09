@@ -10,10 +10,11 @@ import {createHaleWard,HALE_WARD_VIEWS} from './dist/hale-daresbury-huxley-dunha
 import {createMainAdminBuilding} from './dist/main-admin-building.mjs';
 import {wardMapPoint} from './dist/ward-placement.mjs';
 import {joinInstancedFacadeCourses} from './dist/facade-courses.mjs';
+import {avoidWindowDownpipes} from './dist/downpipe-clearance.mjs';
 import {exteriorObstacles,obstacleContains} from './dist/explore-controls.mjs';
 
 globalThis.document={createElement:()=>({getContext:()=>({fillRect(){},measureText:t=>({width:t.length*16}),strokeText(){},fillText(){}})})};
-const material=color=>new THREE.MeshStandardMaterial({color});
+const material=(color,extra={})=>new THREE.MeshStandardMaterial({color,roughness:.9,...extra});
 const materials={brick:material(0xb3a5a0),roof:material(0x334455),worldUV:g=>g,material};
 const sourceFarndon=createFarndon(THREE,materials),sourceWitby=createWitbyWard(sourceFarndon);
 // Existing corridor-contact window omissions are preserved through the move.
@@ -41,7 +42,12 @@ function compareGeometry(moved,source,ignoreRootPosition=false){
  assert.equal(actual.length,original.length);
  for(let i=0;i<actual.length;i++){
   const a=actual[i],b=original[i];assert.equal(a.name,b.name);
-  if(i!==0||!ignoreRootPosition)assert.deepEqual(a.position.toArray(),b.position.toArray(),a.name+' position');
+  if(i!==0||!ignoreRootPosition){
+   // Projecting clearance through parent transforms introduces round-off.
+   // Keep exact authored positions for every object other than pipe assemblies.
+   if(a.userData.downpipeAssembly&&b.userData.downpipeAssembly)assert(a.position.distanceTo(b.position)<1e-10,a.name+' position');
+   else assert.deepEqual(a.position.toArray(),b.position.toArray(),a.name+' position');
+  }
   assert.deepEqual(a.quaternion.toArray(),b.quaternion.toArray(),a.name+' orientation');
   assert.deepEqual(a.scale.toArray(),b.scale.toArray(),a.name+' size');
   // Roof texture seams can split a vertex without changing any triangle.
@@ -49,7 +55,12 @@ function compareGeometry(moved,source,ignoreRootPosition=false){
   if(a.instanceMatrix)assert.deepEqual(a.instanceMatrix.array,b.instanceMatrix.array,a.name+' instance transforms');
  }
 }
-compareGeometry(exterior.adminCorridor,createMainAdminBuilding(THREE,materials).corridor);
+const sourceCorridor=createMainAdminBuilding(THREE,materials).corridor;
+// Compare after the approved facade finishing used by estate construction.
+// Preserve glass properties so clearance can identify the reference windows.
+const corridorClearance=avoidWindowDownpipes(THREE,sourceCorridor);
+assert(corridorClearance.windows>0&&corridorClearance.moved.length>0,'Reference corridor applies window clearance');
+compareGeometry(exterior.adminCorridor,sourceCorridor);
 const cases=[
  ['irbyAshley',createIrbyAshley(THREE,materials),[234,-93.4],IRBY_ASHLEY_VIEWS,'irby-ashley-1'],
  ['farndonWard',sourceFarndon,[173.7,-145.4],FARNDON_VIEWS,'farndon-2'],
@@ -58,7 +69,8 @@ const cases=[
  ['haleWard',createHaleWard(THREE,materials),[121.3,-98.7],HALE_WARD_VIEWS,'hale-daresbury-huxley-dunham-ground']
 ];
 for(const [key,source,[x,z],views,walkingView] of cases){
- // Compare both buildings after the same construction-time course repair.
+ // Compare both buildings after the same construction-time facade repairs.
+ avoidWindowDownpipes(THREE,source);
  joinInstancedFacadeCourses(THREE,source);
  const ward=exterior[key];assert.deepEqual(ward.position.toArray(),[x,0,z]);
  compareGeometry(ward,source,true);

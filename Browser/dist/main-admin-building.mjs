@@ -3,6 +3,7 @@
 // Map pixels, photograph-derived heights and concealed elevations are estimates.
 import {addAdminCorridorDetail} from './admin-corridor-detail.mjs';
 import {mitreRightAngleWalls} from './wall-mitres.mjs';
+import {addFacadeCourse} from './facade-courses.mjs';
 import {addFarndonCorridor,FARNDON_CORRIDOR,FARNDON_CORRIDOR_VIEWS} from './farndon-corridor.mjs';
 import {addWardCorridors,WARD_CORRIDOR_NODES} from './ward-corridors.mjs';
 import {addHaleCorridors,HALE_CORRIDOR_RUNS} from './hale-corridors.mjs';
@@ -204,8 +205,18 @@ export function createMainAdminBuilding(THREE,{brick,roof,worldUV,material}){
   // Img2 sees the low pitched roof beside the retained red court block,
   // with two levels of sash windows on the upper return behind it.
   for(const y of [7.0,11.1])sash('east upper return north',eastUpper.x,y,eastUpper.z-eastUpper.d/2-.025,1.5,2.6,Math.PI);
-  for(const room of [eastStep,eastRearLink,rearCourt])box(stone,room.x+room.w/2+.06,2.6,room.z,.14,.13,room.d);
-  box(stone,eastStep.x,2.6,wingSouth+.06,wingW,.13,.14);
+  // The marked side band follows every exposed return at one level. Lower it
+  // just below the recessed sash's sill, retaining the existing thin profile.
+  // One swept solid also avoids gaps and overlapping caps at the court bends.
+  const stepSide=eastStep.x+eastStep.w/2+.06,linkSide=eastRearLink.x+eastRearLink.w/2+.06;
+  const courtSide=rearCourt.x+rearCourt.w/2+.06,courtFront=rearCourt.z-rearCourt.d/2-.06;
+  addFacadeCourse(THREE,{mesh,worldUV},'Admin continuous low side band',stone,[
+    [wallX,wingSouth+.06],[stepSide,wingSouth+.06],
+    [stepSide,wingNorth-.06],[linkSide,wingNorth-.06],
+    [linkSide,eastRearLink.z-eastRearLink.d/2-.06],
+    [courtSide,eastRearLink.z-eastRearLink.d/2-.06],
+    [courtSide,courtFront],[rearCourt.x-rearCourt.w/2,courtFront]
+  ],2.3,.13,.14);
   for(const z of [wingNorth+.18,wingSouth-.18])box(dark,eastStep.x+wingW/2+.12,3.6,z,.085,7.2,.085);
   // Img2 puts the close upper group on a projecting rear face.
   for(const dx of [-2.1,0,2.1])sash('rear grouped upper',rearProjection.x+dx,11.65,rearProjection.z-rearProjection.d/2-.025,1.45,2.75,Math.PI);

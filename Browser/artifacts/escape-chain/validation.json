@@ -61,7 +61,7 @@
       "outside": true,
       "boundary": true,
       "samples": 270,
-      "walkingMs": 35
+      "walkingMs": 48.5
     },
     {
       "seed": 10000019,
@@ -70,7 +70,7 @@
       "outside": true,
       "boundary": true,
       "samples": 269,
-      "walkingMs": 35.5
+      "walkingMs": 63.100000001490116
     },
     {
       "seed": 20000038,
@@ -79,7 +79,7 @@
       "outside": true,
       "boundary": true,
       "samples": 270,
-      "walkingMs": 27.40000000037253
+      "walkingMs": 37.19999999925494
     },
     {
       "seed": 30000057,
@@ -88,7 +88,7 @@
       "outside": true,
       "boundary": true,
       "samples": 269,
-      "walkingMs": 34.09999999962747
+      "walkingMs": 58.5
     }
   ],
   "fittings": [

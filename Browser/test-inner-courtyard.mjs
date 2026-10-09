@@ -1,8 +1,10 @@
 import assert from 'node:assert/strict';
 import * as THREE from './dist/vendor/three.module.js';
 import {createEscapeExterior} from './dist/escape-exterior.mjs';
+import {checkCourtyardLeanTo} from './test-support/courtyard-lean-to-probes.mjs';
 globalThis.document={createElement:()=>({getContext:()=>({fillRect(){}})})};
 const exterior=createEscapeExterior(THREE,1.5);exterior.scene.updateMatrixWorld(true);
+checkCourtyardLeanTo(THREE,exterior.model);
 const ray=new THREE.Raycaster(),solids=[];
 exterior.model.traverse(o=>{
  if(!o.isMesh||o.isInstancedMesh)return;

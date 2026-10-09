@@ -1,0 +1,34 @@
+npm notice run test:compiled
+npm notice run node test-roof-tiles.mjs --compiled && node test-roof-wall-joins.mjs --compiled && node test-precompiled-models.mjs && node test-timeline-browser.mjs && npm run test:interior-loading
+PASS: 701 tiled meshes, 9114 sloping triangles, two tile families; horizontal rows and uniform physical scale.
+PASS: 444 formerly competing estate roof/wall surfaces remain covered without duplicate fascias.
+PASS: 1044 front-wing brick surfaces without competing roof fillers.
+PASS: Redesmere roof protrusions removed; 244 render-top probes remain beneath slate.
+PASS: 45 Redesmere cornice edges share pale stepped trim and a clear slate boundary.
+PASS: 576 service wall joins, 234 single-face gable rays, 192 closed undersides and four clear sash panes.
+PASS: 216 single-face garage/mortuary gable probes, 72 closed underside probes and 12 unobstructed vent panes.
+PASS: 123 lean-to roof/wall contacts, rear attachment and cleared grit-bin footprint.
+PASS: 586 roof meshes surveyed (312 solid undersides), 278 formerly open ground rays closed; slate sources retained.
+Hardware GPU: ANGLE (NVIDIA, NVIDIA GeForce RTX 3090 Ti (0x00002203) Direct3D11 vs_5_0 ps_5_0, D3D11)
+Checking aerial?models=source
+Checking aerial?models=compiled
+Checking aerial?models=compiled&buildingDetail=full&view=front
+Checking aerial
+Browser: Failed to load resource: the server responded with a status of 404 (Not Found)
+Checking aerial
+Checking aerial
+node:internal/fs/promises:1345
+  return new FileHandle(await PromisePrototypeThen(
+                        ^
+
+Error: UNKNOWN: unknown error, open 'C:\Users\Harry\Documents\_escape-from-1829\Browser\artifacts\precompiled-source.png'
+    at async open (node:internal/fs/promises:1345:25)
+    at async writeFile (node:internal/fs/promises:1965:14)
+    at async file:///C:/Users/Harry/Documents/_escape-from-1829/Browser/test-precompiled-models.mjs:108:34 {
+  errno: -4094,
+  code: 'UNKNOWN',
+  syscall: 'open',
+  path: 'C:\\Users\\Harry\\Documents\\_escape-from-1829\\Browser\\artifacts\\precompiled-source.png'
+}
+
+Node.js v24.20.0

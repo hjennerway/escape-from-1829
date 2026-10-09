@@ -1,0 +1,14 @@
+{
+  "outside": {
+    "count": 16306,
+    "sha256": "b983d48516bebd33cbfaee4d6e36f6ad9f3c7001da82d455e11c3a03e18fb8c0"
+  },
+  "slate": {
+    "count": 19,
+    "sha256": "20b0e268778757af15b299462738df5e87c805f49b3eecf0b4531f70de77b45b"
+  },
+  "wallsAndOtherDetails": {
+    "count": 1540,
+    "sha256": "a0827a5c9bf1fee0b36cdc1d2259519acccc98be6f521dffe17d56fb8760de9e"
+  }
+}

@@ -5,14 +5,14 @@ const same=(a,b)=>a===b||Boolean(a&&b&&a.length===b.length&&a.every((value,i)=>v
 export function releaseRoofSupportCache(root){root.traverse(object=>supportCache.delete(object));}
 export function closeRoofWallGaps(THREE,root,{exclude=[],cache=true}={}){
  root.updateWorldMatrix(true,true);
- const roofs=[],grid=new Map(),cellSize=8;
+ const roofs=[],grid=new Map(),wallGrid=new Map(),cellSize=8;
  const roofMaterial=o=>o.material?.userData.roofTilePixels||
-  (/roof|slate canopy/i.test(o.name)&&!/rooflight|ventilator|finial|gable|coping|support|soffit|eaves|rafter|ridge/i.test(o.name));
+  (/roof|slate canopy/i.test(o.name)&&!/rooflight|ventilator|finial|gable|coping|support|soffit|eaves|rafter|ridge|masonry|infill|wall/i.test(o.name));
  const key=(x,z)=>Math.floor(x/cellSize)+','+Math.floor(z/cellSize);
- const add=record=>{
+ const add=(record,target=grid)=>{
   for(let x=Math.floor(record.minX/cellSize);x<=Math.floor(record.maxX/cellSize);x++)
    for(let z=Math.floor(record.minZ/cellSize);z<=Math.floor(record.maxZ/cellSize);z++){
-    const k=x+','+z;if(!grid.has(k))grid.set(k,[]);grid.get(k).push(record);
+    const k=x+','+z;if(!target.has(k))target.set(k,[]);target.get(k).push(record);
    }
  };
  const instance=new THREE.Matrix4(),matrix=new THREE.Matrix4();let reusedMeshes=0,scannedMeshes=0;
@@ -29,10 +29,10 @@ export function closeRoofWallGaps(THREE,root,{exclude=[],cache=true}={}){
   // incrementing BufferAttribute.version, or clone them during UV finishing.
   if(previous&&previous.isRoof===isRoof&&previous.count===count&&previous.itemSize===p.itemSize&&
    same(previous.positions,p.array)&&same(previous.index,index?.array)&&same(previous.world,o.matrixWorld.elements)&&same(previous.instances,instances)){
-   previous.records.forEach(add);if(isRoof&&!o.userData.roofWallJoinsFinished)roofs.push(...previous.roofs);reusedMeshes++;return;
+   previous.records.forEach(r=>add(r));previous.walls.forEach(r=>add(r,wallGrid));if(isRoof&&!o.userData.roofWallJoinsFinished)roofs.push(...previous.roofs);reusedMeshes++;return;
   }
   scannedMeshes++;
-  const cached={isRoof,count,itemSize:p.itemSize,positions:p.array.slice(),index:index?.array.slice(),world:o.matrixWorld.elements.slice(),instances:instances?instances.slice():null,records:[],roofs:[]};
+  const cached={isRoof,count,itemSize:p.itemSize,positions:p.array.slice(),index:index?.array.slice(),world:o.matrixWorld.elements.slice(),instances:instances?instances.slice():null,records:[],walls:[],roofs:[]};
   for(let item=0;item<count;item++){
    if(o.isInstancedMesh){o.getMatrixAt(item,instance);matrix.multiplyMatrices(o.matrixWorld,instance);}else matrix.copy(o.matrixWorld);
    const sign=Math.sign(matrix.determinant()),vertices=Array.from({length:p.count},(_,i)=>new THREE.Vector3().fromBufferAttribute(p,i).applyMatrix4(matrix)),edges=new Map();let solidUnderside=false;
@@ -41,6 +41,13 @@ export function closeRoofWallGaps(THREE,root,{exclude=[],cache=true}={}){
     const ids=[0,1,2].map(j=>index?index.getX(i+j):i+j),[a,b,c]=ids.map(j=>vertices[j]);
     const normal=b.clone().sub(a).cross(c.clone().sub(a)).multiplyScalar(sign);
     if(normal.y<-.00001)solidUnderside=true;
+    // Authored vertical faces already enclose gables and wall-top returns,
+    // including end faces supplied by otherwise open roof meshes.
+    // Index them separately so generated fascias cannot share their plane.
+    if(normal.lengthSq()>1e-12&&Math.abs(normal.y)<normal.length()*.00001&&Math.max(a.y,b.y,c.y)>=1.2){
+     const record={a,b,c,normal:normal.clone().normalize(),owner:o,minX:Math.min(a.x,b.x,c.x),maxX:Math.max(a.x,b.x,c.x),minZ:Math.min(a.z,b.z,c.z),maxZ:Math.max(a.z,b.z,c.z)};
+     add(record,wallGrid);cached.walls.push(record);
+    }
     if(normal.y<.00001||(!isRoof&&normal.y<.05)||Math.max(a.y,b.y,c.y)<1.2)continue;
     normal.normalize();
     const record={a,b,c,normal,owner:o,isRoof,minX:Math.min(a.x,b.x,c.x),maxX:Math.max(a.x,b.x,c.x),minZ:Math.min(a.z,b.z,c.z),maxZ:Math.max(a.z,b.z,c.z)};
@@ -73,6 +80,43 @@ export function closeRoofWallGaps(THREE,root,{exclude=[],cache=true}={}){
   }
   return best;
  }
+ // Subtract only coplanar authored wall areas. Keep fascia fragments above or
+ // beside the masonry, including undersides and the short caps at hip corners.
+ function uncoveredWallFace(points){
+  const normal=points[1].clone().sub(points[0]).cross(points[2].clone().sub(points[0])).normalize();
+  if(Math.abs(normal.y)>.00001)return [points];
+  const candidates=new Set();
+  for(let x=Math.floor(Math.min(...points.map(p=>p.x))/cellSize);x<=Math.floor(Math.max(...points.map(p=>p.x))/cellSize);x++)
+   for(let z=Math.floor(Math.min(...points.map(p=>p.z))/cellSize);z<=Math.floor(Math.max(...points.map(p=>p.z))/cellSize);z++)
+    for(const r of wallGrid.get(x+','+z)??[])candidates.add(r);
+  let fragments=[points];
+  for(const r of candidates){
+   if(Math.abs(r.normal.dot(normal))<.9995||points.some(p=>Math.abs(r.normal.dot(p.clone().sub(r.a)))>.001))continue;
+   const cut=[r.a,r.b,r.c],remaining=[];
+   for(const polygon of fragments){
+    let inside=polygon;const outsideParts=[];
+    for(let i=0;i<3&&inside.length;i++){
+     const a=cut[i],b=cut[(i+1)%3],inward=normal.clone().cross(b.clone().sub(a)).normalize();
+     if(inward.dot(cut[(i+2)%3].clone().sub(a))<0)inward.negate();
+     const kept=[],outside=[];
+     for(let j=0;j<inside.length;j++){
+      const u=inside[j],v=inside[(j+1)%inside.length];
+      // Micron clearance absorbs Float32 rounding at shared triangle edges.
+      const du=inward.dot(u.clone().sub(a))+.00001,dv=inward.dot(v.clone().sub(a))+.00001;
+      (du>=0?kept:outside).push(u);
+      if((du>=0)!==(dv>=0)){const crossing=u.clone().lerp(v,du/(du-dv));kept.push(crossing);outside.push(crossing);}
+     }
+     if(outside.length>=3)outsideParts.push(outside);
+     inside=kept;
+    }
+    const area=inside.slice(1,-1).reduce((sum,p,i)=>sum+p.clone().sub(inside[0]).cross(inside[i+2].clone().sub(inside[0])).length(),0);
+    // Disjoint coplanar walls must not split a fascia into needless triangles.
+    if(area>1e-12)remaining.push(...outsideParts);else remaining.push(polygon);
+   }
+   fragments=remaining;if(!fragments.length)break;
+  }
+  return fragments;
+ }
  const report={roofs:roofs.length,boundaries:0,closed:0,unsupported:0,reusedMeshes,scannedMeshes},undersideMaterials=new Map();
  for(const {owner,vertices,edges,solidUnderside} of roofs){
   // Box/extruded roofs already have an opaque underside and closed fascia.
@@ -99,7 +143,11 @@ export function closeRoofWallGaps(THREE,root,{exclude=[],cache=true}={}){
    // convention before returning these world-space vertices to the parent.
    if(b.clone().sub(a).cross(c.clone().sub(a)).dot(out)*parentSign<0)[b,c]=[c,b];
    if(!parts.has(mat))parts.set(mat,[]);
-   for(const v of [a,b,c])parts.get(mat).push(...v.clone().applyMatrix4(inverse));
+   for(const polygon of uncoveredWallFace([a,b,c]))for(let i=1;i<polygon.length-1;i++){
+    const face=[polygon[0],polygon[i],polygon[i+1]];
+    if(face[1].clone().sub(face[0]).cross(face[2].clone().sub(face[0])).lengthSq()<1e-12)continue;
+    for(const v of face)parts.get(mat).push(...v.clone().applyMatrix4(inverse));
+   }
   }
   function quad(mat,a,b,c,d,out){triangle(mat,a,b,c,out);triangle(mat,a,c,d,out);}
   for(const edge of edges.values()){
@@ -153,6 +201,7 @@ export function closeRoofWallGaps(THREE,root,{exclude=[],cache=true}={}){
    finishSpan();
   }
   for(const [material,positions] of parts){
+   if(!positions.length)continue;
    const geometry=new THREE.BufferGeometry();geometry.setAttribute('position',new THREE.Float32BufferAttribute(positions,3));geometry.computeVertexNormals();
    const p=geometry.attributes.position,n=geometry.attributes.normal,uv=[];
    for(let i=0;i<p.count;i++)uv.push((Math.abs(n.getX(i))>.5?p.getZ(i):p.getX(i))/1.7,(Math.abs(n.getY(i))>.5?p.getZ(i):p.getY(i))/1.7);

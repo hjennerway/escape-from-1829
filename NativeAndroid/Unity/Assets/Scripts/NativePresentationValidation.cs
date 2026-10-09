@@ -10,8 +10,10 @@ public sealed partial class NativePrototypeGame
         Check(Mathf.Abs(view.transform.position.z+75.8f)<.1f&&view.fieldOfView==46,"Title matches browser front-of-asylum camera");
         Check(trees&&RenderSettings.skybox&&view.clearFlags==CameraClearFlags.Skybox,"Title has trees and cloud sky");
         yield return CaptureInterface(directory,"title-ui.png");
-        bool hasWind=false,hasOffsets=false,hasCountryside=false;foreach(var r in estateMeshes){var m=r.sharedMaterial;if(m.IsKeywordEnabled("_LEAF_WIND"))hasWind=true;if(m.GetFloat("_OffsetFactor")<0&&m.GetFloat("_OffsetUnits")<0)hasOffsets=true;if(r.bounds.size.x>5000)hasCountryside=true;}
-        Check(hasWind&&hasOffsets&&hasCountryside,"Imported wind, road depth offsets and countryside are present");
+        SurfaceRenderingSmoke(directory);
+        VertexAlphaSmoke(directory);
+        bool hasWind=false,hasOffsets=false,hasCountryside=false;foreach(var r in estateMeshes){var m=r.sharedMaterial;if(m.IsKeywordEnabled("_LEAF_WIND"))hasWind=true;if(m.GetFloat("_OffsetFactor")==0&&m.GetFloat("_OffsetUnits")<0)hasOffsets=true;if(r.bounds.size.x>5000)hasCountryside=true;}
+        Check(hasWind&&hasOffsets&&hasCountryside,"Imported wind, constant road depth priorities and countryside are present");
         Shader.SetGlobalFloat("_LeafTime",0);Capture(directory,"wind-0.png");Shader.SetGlobalFloat("_LeafTime",4);Capture(directory,"wind-4.png");
         StartAerial();paused=true;orbitTarget=new Vector3(12,5,12);orbitYaw=200;orbitPitch=55;orbitDistance=300;UpdateOrbit(0);lodClock=0;UpdateEstateLOD();yield return null;Capture(directory,"aerial-roads.png");
         paused=false;SelectBuilding(manifest.periods[periodIndex].buildings[0].index);yield return CaptureInterface(directory,"building-side-panel.png");
@@ -22,9 +24,9 @@ public sealed partial class NativePrototypeGame
         foreach(bool aerial in new[]{false,true}){
             if(aerial)StartAerial();else StartOutside();paused=false;string name=aerial?"aerial":"walk";
             bool torchBefore=torch.enabled;
-            foreach(var rect in new[]{pauseButton,helpButton,mapButton,torchButton,useButton})Check(!HandleTap(rect.center),"Exploration ignores escape-only touch target: "+name+" / "+rect);
+            foreach(var rect in new[]{helpButton,mapButton,torchButton,useButton})Check(!HandleTap(rect.center),"Exploration ignores escape-only touch target: "+name+" / "+rect);
             Check(!help&&!map&&torch.enabled==torchBefore&&!useHeld,"Exploration keeps escape overlays and held use inactive: "+name);
-            Check(!PointerOverControls(pauseButton.center)&&!PointerOverControls(torchButton.center)&&!PointerOverControls(useButton.center),"Hidden escape buttons leave exploration look/orbit area free: "+name);
+            Check(PointerOverControls(quitButton.center)&&!PointerOverControls(torchButton.center)&&!PointerOverControls(useButton.center),"Visible exit accepts taps while hidden escape controls leave look/orbit area free: "+name);
             bool wasAutomation=automationMode;automationMode=false;OnApplicationPause(true);OnApplicationPause(false);OnApplicationFocus(false);OnApplicationFocus(true);automationMode=wasAutomation;Check(!paused,"Background and location permission focus changes cannot open exploration pause: "+name);
             var previousSafe=safeViewport;
             foreach(var viewport in new[]{new Rect(0,0,1280,720),new Rect(-140,0,1560,720),new Rect(-170,-20,1620,760)}){
@@ -65,5 +67,48 @@ public sealed partial class NativePrototypeGame
         foreach(var caption in new[]{"TORCH: ON","TORCH: OFF","RESUME","HOLD USE"}){var rect=caption.StartsWith("TORCH")?torchButton:caption=="RESUME"?pauseButton:useButton;var style=FitButton(rect,caption);Check(TextWidth(caption,style)<=rect.width-24,"Button caption fits: "+caption);}
         paused=false;elapsed=0;yield return CaptureInterface(directory,"phone-controls-16x9.png");
         CaptureUI(directory,"phone-controls-wide.png",1560);yield return null;showTouchPreview=false;paused=true;
+    }
+    void VertexAlphaSmoke(string directory)
+    {
+        var probe=new GameObject("Vertex alpha probe");probe.layer=30;probe.transform.position=new Vector3(0,-1000,0);
+        var mesh=new Mesh();mesh.vertices=new[]{new Vector3(-1,-1,0),new Vector3(1,-1,0),new Vector3(1,1,0),new Vector3(-1,1,0)};mesh.triangles=new[]{0,2,1,0,3,2};mesh.uv=new[]{Vector2.zero,Vector2.right,Vector2.one,Vector2.up};mesh.colors=new[]{new Color(1,1,1,0),Color.white,Color.white,new Color(1,1,1,0)};mesh.RecalculateNormals();
+        probe.AddComponent<MeshFilter>().sharedMesh=mesh;var renderer=probe.AddComponent<MeshRenderer>();renderer.shadowCastingMode=UnityEngine.Rendering.ShadowCastingMode.Off;
+        var cameraObject=new GameObject("Vertex alpha camera");var camera=cameraObject.AddComponent<Camera>();camera.enabled=false;camera.transform.position=new Vector3(0,-1000,-2);camera.orthographic=true;camera.orthographicSize=1;camera.nearClipPlane=.1f;camera.farClipPlane=5;camera.cullingMask=1<<30;camera.clearFlags=CameraClearFlags.SolidColor;camera.backgroundColor=Color.blue;camera.allowHDR=false;camera.allowMSAA=false;camera.renderingPath=RenderingPath.Forward;
+        var target=new RenderTexture(128,128,24,RenderTextureFormat.ARGB32,RenderTextureReadWrite.Linear);camera.targetTexture=target;var image=new Texture2D(128,128,TextureFormat.RGBA32,false,true);var previous=RenderTexture.active;bool fog=RenderSettings.fog;float weather=Shader.GetGlobalFloat("_WeatherEnabled");
+        try{
+            RenderSettings.fog=false;Shader.SetGlobalFloat("_WeatherEnabled",0);
+            foreach(var shader in new[]{Shader.Find("Escape1829/NativeSurface"),Resources.Load<Shader>("NativeWorkshopSurface")}){
+                Check(shader!=null,"Vertex alpha probe shader is available");var material=new Material(shader);renderer.sharedMaterial=material;
+                try{
+                    material.SetColor("_Color",Color.red);material.SetFloat("_Unlit",1);material.SetFloat("_VertexColours",1);material.SetFloat("_Cull",0);material.SetFloat("_ZWrite",0);material.SetFloat("_SrcBlend",(float)UnityEngine.Rendering.BlendMode.SrcAlpha);material.SetFloat("_DstBlend",(float)UnityEngine.Rendering.BlendMode.OneMinusSrcAlpha);material.renderQueue=3000;
+                    camera.Render();RenderTexture.active=target;image.ReadPixels(new Rect(0,0,128,128),0,0);image.Apply();var left=image.GetPixel(32,64);var right=image.GetPixel(96,64);
+                    Check(right.r>left.r+.25f&&left.b>right.b+.25f,"Vertex alpha blends into the underlying surface: "+shader.name);
+                    File.WriteAllBytes(Path.Combine(directory,shader.name.EndsWith("NativeSurface")?"vertex-alpha-surface.png":"vertex-alpha-workshop.png"),image.EncodeToPNG());
+                    material.SetFloat("_VertexColours",0);camera.Render();image.ReadPixels(new Rect(0,0,128,128),0,0);image.Apply();left=image.GetPixel(32,64);right=image.GetPixel(96,64);
+                    Check(left.r>.8f&&Mathf.Abs(left.r-right.r)<.03f,"Vertex alpha negative control becomes uniformly opaque: "+shader.name);
+                }finally{Destroy(material);}
+            }
+        }finally{RenderSettings.fog=fog;Shader.SetGlobalFloat("_WeatherEnabled",weather);RenderTexture.active=previous;camera.targetTexture=null;target.Release();Destroy(target);Destroy(image);Destroy(mesh);Destroy(probe);Destroy(cameraObject);}
+    }
+    void SurfaceRenderingSmoke(string directory)
+    {
+        foreach(float scale in new[]{.625f,1f,1.375f})foreach(var size in new[]{new Vector2Int(210,56),new Vector2Int(52,52),new Vector2Int(285,50)}){
+            int width=Mathf.CeilToInt(size.x*scale)+32,height=Mathf.CeilToInt(size.y*scale)+32;
+            var target=new RenderTexture(width,height,0,RenderTextureFormat.ARGB32,RenderTextureReadWrite.sRGB);var previous=RenderTexture.active;RenderTexture.active=target;GL.Clear(false,true,Color.black);
+            GL.PushMatrix();GL.LoadPixelMatrix(0,width,height,0);GL.MultMatrix(Matrix4x4.TRS(new Vector3(16.25f,16.25f,0),Quaternion.identity,new Vector3(scale,scale,1)));bool oldSrgb=GL.sRGBWrite;GL.sRGBWrite=true;capturingUI=true;
+            try{Surface(new Rect(0,0,size.x,size.y),surfaceTexture);}finally{capturingUI=false;GL.sRGBWrite=oldSrgb;GL.PopMatrix();}
+            var image=new Texture2D(width,height,TextureFormat.RGB24,false);image.ReadPixels(new Rect(0,0,width,height),0,0);image.Apply();var pixels=image.GetPixels32();
+            var middle=pixels[(height-1-Mathf.FloorToInt(16.25f+size.y*scale/2))*width+Mathf.FloorToInt(16.25f+size.x*scale/2)];int samples=0;bool continuous=true;
+            for(int y=0;y<height;y++)for(int x=0;x<width;x++){
+                float localX=(x+.5f-16.25f)/scale,localY=(height-y-.5f-16.25f)/scale;
+                if(localX<3||localX>size.x-3||localY<3||localY>size.y-3)continue;
+                if((localX<9||localX>size.x-9)&&(localY<9||localY>size.y-9))continue;
+                var p=pixels[y*width+x];continuous&=Mathf.Abs(p.r-middle.r)<=3&&Mathf.Abs(p.g-middle.g)<=3&&Mathf.Abs(p.b-middle.b)<=3;samples++;
+            }
+            Check(continuous,"Scaled button interior has no inset seams: "+scale+" / "+size);
+            Check(samples>100,"GPU surface probe covers button interior: "+scale+" / "+size);
+            File.WriteAllBytes(Path.Combine(directory,"button-surface-"+size.x+"x"+size.y+"-"+scale.ToString("0.000",System.Globalization.CultureInfo.InvariantCulture)+".png"),image.EncodeToPNG());
+            RenderTexture.active=previous;target.Release();Destroy(target);Destroy(image);
+        }
     }
 }

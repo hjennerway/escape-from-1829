@@ -1,7 +1,7 @@
 {
   "build": {
     "mode": "procedural",
-    "milliseconds": 3230.39999999851
+    "milliseconds": 3645.8000000044703
   },
   "errors": [],
   "views": {
@@ -41,6 +41,32 @@
         42.5,
         13.7,
         7.5
+      ],
+      "fov": 43
+    },
+    "garden": {
+      "position": [
+        32,
+        24,
+        37
+      ],
+      "target": [
+        41,
+        13.6,
+        16.5
+      ],
+      "fov": 43
+    },
+    "gardenClose": {
+      "position": [
+        32,
+        19,
+        29
+      ],
+      "target": [
+        41,
+        13.6,
+        16.5
       ],
       "fov": 43
     },

@@ -29,3 +29,36 @@ PASS: three first-floor central dormitories, 42 wall-fitted beds, six removed en
 PASS: rooms 117/119 have fourteen beds each, original poses retained, chairs/storage clear, room 116 sewing furniture and notebook name, four seeds and 144 physically walked bed/workstation/room routes.
 PASS: seven original medical models (28508 triangles), matching collision dimensions, 130% cold-water apparatus with no left-pole depth conflict, 130% surgical table and supported head cushion, open bath basin/rim, fixed appropriate rooms, reachable routes and supported cupping/leech set.
 PASS: all six reception designs (5164 triangles), eight stable placements, mounted/supported contact, circulation/windows/stairs/all room and exit routes, 16 collision approaches, distance/floor/mute/pause-aware ticking and hourly strike.
+PASS: ten hall models / 8360 triangles, 48 fixed furnishings including the west seating nook, four seeds, physical support/wall mounts, chair directions, corridor lanes, accessible cabinets, 52 walked collisions and notebook names.
+PASS: notebook shortcuts, focus handling, frozen timer/player/NPCs, repeated-inspection deduplication, resume and fresh retry.
+PASS: randomized launch/retry spawns, wall clearance, reachable routes, reception/exit/stair clearance, separate pursuers, arrival stability and head start.
+PASS: three-second arrival at low FPS, one-second hold, fast approach with 1.5-second fade out and half-second reveal, reception handoff, frozen input/NPCs/timer, clean restart, reduced motion and portrait framing.
+PASS: real game init, both stair interactions, held-key latch, floor groups/HUD, ghost follows, cross-floor capture isolation, restart.
+PASS: unselected routes and old portico cannot escape; active routes persist through retry.
+PASS: hold-E escape through all five active exits, ten-second pan at low FPS, frozen gameplay, retained result background, skip, retry, defeat exclusion, reduced motion.
+PASS: guard patrol/chase stride integration, hold-E/help/artwork freeze, stationary routes, floor visibility and restart.
+PASS: guard/ghost spotted warning, both-NPC clearance, held-E persistence, retrigger and restart.
+PASS: randomized capture diagnoses, matching treatments and causes.
+PASS: confirmed capture, transient/legacy retries, duplicate resume, late/cancelled requests, finite denial, fresh retry and touch/API fallback.
+PASS: 32 guard/ghost searches across four furnished floors and four seeds, physical entry, six-second passing window, local room distance, close/same-room pursuit, cooldown, stairs, timeout and reset.
+PASS: all 8 route/key/office combinations, evidence-only deductions, both branches, out-of-order clues, three captures, confiscation recovery, ending gates, 56 furnished clue approaches, grille/jump barriers and outdoor cover routing.
+PASS: 1808 threaded link/eye/shackle connections; 24 locked exit fittings, timber attachment, both key routes, grille release, capture/reclaim, developer unlock and disposal.
+Escape grounds: continuous physical boundary, both routes, tools, noise, refresh/disposal and guard behaviour pass.
+node:internal/modules/run_main:107
+    triggerUncaughtException(
+    ^
+
+AssertionError [ERR_ASSERTION]: Twelve-pane sash divider visible from exterior: {"origin":[144.70000000000002,2.4,-31.708333333333332],"hit":"Service glazing and trim"}
+    at file:///C:/Users/Harry/Documents/_escape-from-1829/Browser/test-tower-workshops.mjs:227:5
+    at ModuleJob.run (node:internal/modules/esm/module_job:561:25)
+    at async node:internal/modules/esm/loader:647:26
+    at async asyncRunEntryPointWithESMLoader (node:internal/modules/run_main:101:5) {
+  generatedMessage: false,
+  code: 'ERR_ASSERTION',
+  actual: false,
+  expected: true,
+  operator: '==',
+  diff: 'simple'
+}
+
+Node.js v24.20.0

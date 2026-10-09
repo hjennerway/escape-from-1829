@@ -91,15 +91,17 @@ for(const seed of [1829,10000019]){
  }
  for(const gate of world.gates)checkChain(gate.leaf.getObjectByName('Door chain and padlock'));
  progress.interact('staff-key');progress.openStair('S1');world.sync();
- assert(!world.gates.find(g=>g.id==='S1').leaf.visible);assert(world.gates.find(g=>g.id==='S5').leaf.visible);
+ assert(!world.gates.find(g=>g.id==='S1').lock.visible);assert(world.gates.find(g=>g.id==='S5').lock.visible);
+ assert(world.gates.every(g=>g.leaf.visible),'Releasing the lock retains the hinged grille');
  progress.interact('plan');world.sync();
  assert(world.doorLocks.every(d=>d.group.visible===progress.doorLocked(d.exit)));
- assert.equal(world.doorLocks.filter(d=>!d.group.visible).length,1,'Only the service-key entrance loses its chain');
+ const keyExits=world.doorLocks.filter(d=>d.exit.x<0||d.exit.id===progress.run.exitId).length;
+ assert.equal(world.doorLocks.filter(d=>!d.group.visible).length,keyExits,'Every west-side exit and tagged entrance lose their chains');
  assert(progress.door({id:progress.run.exitId}).allowed);
  progress.capture();world.sync();assert(world.doorLocks.every(d=>d.group.visible),'Confiscated service key restores the existing lock requirement');
- progress.interact('reclaim');world.sync();assert.equal(world.doorLocks.filter(d=>!d.group.visible).length,1);
- progress.setDoorsUnlocked(true);world.sync();assert(world.doorLocks.every(d=>!d.group.visible));assert(world.gates.every(g=>!g.leaf.visible));
- progress.setDoorsUnlocked(false);world.sync();assert.equal(world.doorLocks.filter(d=>!d.group.visible).length,1);
+ progress.interact('reclaim');world.sync();assert.equal(world.doorLocks.filter(d=>!d.group.visible).length,keyExits);
+ progress.setDoorsUnlocked(true);world.sync();assert(world.doorLocks.every(d=>!d.group.visible));assert(world.gates.every(g=>!g.lock.visible&&g.leaf.visible));
+ progress.setDoorsUnlocked(false);world.sync();assert.equal(world.doorLocks.filter(d=>!d.group.visible).length,keyExits);
  const locks=world.doorLocks.map(d=>d.group),textureDisposals=new Map();
  for(const lock of locks)lock.traverse(o=>{for(const property of ['map','roughnessMap','bumpMap']){
   const t=o.material?.[property];if(t&&!textureDisposals.has(t)){textureDisposals.set(t,0);t.addEventListener('dispose',()=>textureDisposals.set(t,textureDisposals.get(t)+1));}

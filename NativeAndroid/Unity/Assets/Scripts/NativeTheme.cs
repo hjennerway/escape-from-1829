@@ -5,6 +5,8 @@ public sealed partial class NativePrototypeGame
     public Texture2D lightingIcons,locationIcon;
     readonly Dictionary<Font,Dictionary<char,CharacterInfo>> fontGlyphs=new Dictionary<Font,Dictionary<char,CharacterInfo>>();
     Texture2D surfaceTexture,hoverTexture,selectedTexture,panelShadow,titleShade,daySurface,duskSurface,nightSurface,movementSurface;
+    sealed class SurfacePalette {public Color fill,border;public readonly Dictionary<Vector2Int,Texture2D> sizes=new Dictionary<Vector2Int,Texture2D>();}
+    readonly Dictionary<Texture2D,SurfacePalette> surfacePalettes=new Dictionary<Texture2D,SurfacePalette>();
     GUIStyle serif,eyebrow,primaryButton;bool showTouchPreview;
     Dictionary<char,CharacterInfo> Glyphs(Font font){if(!fontGlyphs.TryGetValue(font,out var glyphs)){glyphs=new Dictionary<char,CharacterInfo>();foreach(var g in font.characterInfo)glyphs[(char)g.index]=g;fontGlyphs[font]=glyphs;}return glyphs;}
     float TextWidth(string value,GUIStyle style){float width=0;var font=style.font?style.font:bodyFont;var glyphs=Glyphs(font);foreach(char c in value)if(glyphs.TryGetValue(c,out var g))width+=g.advance;return width*style.fontSize/font.fontSize;}
@@ -34,22 +36,30 @@ public sealed partial class NativePrototypeGame
     const int surfaceSize=32,cornerRadius=6;
     Texture2D RoundedSurface(Color fill,Color border)
     {
-        var image=new Texture2D(surfaceSize,surfaceSize,TextureFormat.RGBA32,false){wrapMode=TextureWrapMode.Clamp,filterMode=FilterMode.Bilinear};
-        for(int y=0;y<surfaceSize;y++)for(int x=0;x<surfaceSize;x++){
-            float dx=Mathf.Max(Mathf.Abs(x+.5f-surfaceSize/2f)-(surfaceSize/2f-cornerRadius),0);
-            float dy=Mathf.Max(Mathf.Abs(y+.5f-surfaceSize/2f)-(surfaceSize/2f-cornerRadius),0);
-            float distance=Mathf.Sqrt(dx*dx+dy*dy)-cornerRadius;
-            var color=Color.Lerp(fill,border,Mathf.Clamp01(distance+1.5f));color.a*=Mathf.Clamp01(.5f-distance);image.SetPixel(x,y,color);
-        }image.Apply(false,true);return image;
+        var image=RoundedSurfaceImage(surfaceSize,surfaceSize,fill,border);
+        var palette=new SurfacePalette{fill=fill,border=border};palette.sizes[new Vector2Int(surfaceSize,surfaceSize)]=image;surfacePalettes[image]=palette;return image;
+    }
+    Texture2D RoundedSurfaceImage(int width,int height,Color fill,Color border)
+    {
+        var image=new Texture2D(width,height,TextureFormat.RGBA32,false){wrapMode=TextureWrapMode.Clamp,filterMode=FilterMode.Bilinear};
+        float radius=Mathf.Min(cornerRadius,Mathf.Min(width,height)/2f);var pixels=new Color32[width*height];
+        for(int y=0;y<height;y++)for(int x=0;x<width;x++){
+            float dx=Mathf.Abs(x+.5f-width/2f)-(width/2f-radius),dy=Mathf.Abs(y+.5f-height/2f)-(height/2f-radius);
+            float distance=Mathf.Sqrt(Mathf.Max(dx,0)*Mathf.Max(dx,0)+Mathf.Max(dy,0)*Mathf.Max(dy,0))+Mathf.Min(Mathf.Max(dx,dy),0)-radius;
+            var color=Color.Lerp(fill,border,Mathf.Clamp01(distance+1.5f));color.a*=Mathf.Clamp01(.5f-distance);
+            pixels[y*width+x]=color;
+        }image.SetPixels32(pixels);image.Apply(false,true);return image;
     }
     void Surface(Rect rect,Texture2D image)
     {
-        float edge=Mathf.Min(cornerRadius,Mathf.Min(rect.width,rect.height)/2),uvEdge=(float)cornerRadius/surfaceSize;
-        for(int y=0;y<3;y++)for(int x=0;x<3;x++){
-            var area=new Rect(x==0?rect.x:x==1?rect.x+edge:rect.xMax-edge,y==0?rect.y:y==1?rect.y+edge:rect.yMax-edge,x==1?rect.width-2*edge:edge,y==1?rect.height-2*edge:edge);
-            var tex=new Rect(x==0?0:x==1?uvEdge:1-uvEdge,y==0?1-uvEdge:y==1?uvEdge:0,x==1?1-2*uvEdge:uvEdge,y==1?1-2*uvEdge:uvEdge);
-            if(capturingUI)DrawCaptureTexture(area,image,tex,Color.white);else GUI.DrawTextureWithTexCoords(area,image,tex,true);
+        if(rect.width<=0||rect.height<=0)return;
+        // Draw one continuous surface. Separate corner/edge quads can leave
+        // intersecting inset seams when the phone scales the interface.
+        var palette=surfacePalettes[image];var size=new Vector2Int(Mathf.CeilToInt(rect.width),Mathf.CeilToInt(rect.height));
+        if(!palette.sizes.TryGetValue(size,out var sized)){
+            sized=RoundedSurfaceImage(size.x,size.y,palette.fill,palette.border);palette.sizes[size]=sized;
         }
+        if(capturingUI)DrawCaptureTexture(rect,sized,new Rect(0,0,1,1),Color.white);else GUI.DrawTexture(rect,sized,ScaleMode.StretchToFill,true);
     }
     bool ButtonSurface(Rect rect,bool selected=false,string tooltip="")
     {
@@ -90,15 +100,15 @@ public sealed partial class NativePrototypeGame
     void DrawTitle()
     {
         if(!titleShade){titleShade=new Texture2D(256,1){wrapMode=TextureWrapMode.Clamp,filterMode=FilterMode.Bilinear};for(int x=0;x<256;x++)titleShade.SetPixel(x,0,new Color(.025f,.047f,.03f,Mathf.Lerp(.80f,0,Mathf.SmoothStep(0,1,x/255f))));titleShade.Apply(false,true);}
-        DrawImage(new Rect(interfaceViewport.x,interfaceViewport.y,950-interfaceViewport.x,interfaceViewport.height),titleShade);
-        Label(new Rect(62,34,250,36),"1829",new GUIStyle(heading){fontSize=28});
-        Label(new Rect(62,76,500,25),"CHESHIRE COUNTY ASYLUM",new GUIStyle(eyebrow){fontSize=12});
-        Label(new Rect(108,172,620,114),"ESCAPE",new GUIStyle(title){fontSize=94,alignment=TextAnchor.UpperLeft});
-        Label(new Rect(108,272,690,114),"FROM 1829.",new GUIStyle(title){fontSize=94,alignment=TextAnchor.UpperLeft});
-        Label(new Rect(110,398,760,44),"Explore the asylum or find a way out before they find you.",new GUIStyle(serif){fontSize=18});
+        DrawImage(new Rect(interfaceViewport.x,interfaceViewport.y,790-interfaceViewport.x,interfaceViewport.height),titleShade);
+        Label(new Rect(32,34,250,36),"1829",new GUIStyle(heading){fontSize=28});
+        Label(new Rect(32,76,500,25),"CHESHIRE COUNTY ASYLUM",new GUIStyle(eyebrow){fontSize=12});
+        Label(new Rect(32,172,620,114),"ESCAPE",new GUIStyle(title){fontSize=94,alignment=TextAnchor.UpperLeft});
+        Label(new Rect(32,272,690,114),"FROM 1829.",new GUIStyle(title){fontSize=94,alignment=TextAnchor.UpperLeft});
+        Label(new Rect(32,398,760,44),"Explore the asylum or find a way out before they find you.",new GUIStyle(serif){fontSize=18});
         if(Button(insideButton,"ASYLUM ESCAPE   ↗"))StartArrival();
         if(Button(outsideButton,"EXPLORE ON FOOT     →"))BeginIntroFlight(false);
         if(Button(aerialButton,"AERIAL VIEW   ↗",true))BeginIntroFlight(true);
-        Label(new Rect(108,645,740,35),"FOUR LEVELS  ·  TWENTY-THREE OUTSIDE DOORS",new GUIStyle(small){fontSize=13});
+        if(Button(quitButton,"EXIT"))ExitGame();
     }
 }

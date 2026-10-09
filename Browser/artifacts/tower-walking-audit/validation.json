@@ -1,0 +1,21 @@
+{
+  "fullSuiteExitCode": 0,
+  "modes": {
+    "source": {
+      "loading": "procedural",
+      "views": 25,
+      "clearViews": 25,
+      "walkedMetres": 374,
+      "movementSamples": 1870,
+      "errors": []
+    },
+    "compiled": {
+      "loading": "compiled",
+      "views": 25,
+      "clearViews": 25,
+      "walkedMetres": 374,
+      "movementSamples": 1870,
+      "errors": []
+    }
+  }
+}

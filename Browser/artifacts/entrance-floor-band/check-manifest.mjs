@@ -1,0 +1,10 @@
+import assert from 'node:assert/strict';
+import {readFile,writeFile} from 'node:fs/promises';
+import {createHash} from 'node:crypto';
+import {modelSourceHash} from '../../model-build-inputs.mjs';
+const manifest=JSON.parse(await readFile(new URL('../../dist/compiled/manifest.json',import.meta.url),'utf8'));
+const sourceHash=await modelSourceHash();assert.equal(manifest.sourceHash,sourceHash,'Compiled estate matches current modelling source');
+const binary=await readFile(new URL('../../dist/compiled/'+manifest.file,import.meta.url));
+assert.equal(createHash('sha256').update(binary).digest('hex'),manifest.sha256);
+await writeFile(new URL('manifest-validation.json',import.meta.url),JSON.stringify({file:manifest.file,sourceHash,checksum:manifest.sha256,bytes:binary.length},null,2)+'\n');
+console.log('PASS: current compiled source fingerprint and binary checksum.');

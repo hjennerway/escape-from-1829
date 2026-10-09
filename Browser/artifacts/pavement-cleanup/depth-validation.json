@@ -1,0 +1,205 @@
+{
+  "rows": [
+    {
+      "near": 0.05,
+      "distance": 5,
+      "hidden": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "old": 13824,
+      "exposed": 13824,
+      "raised": 13312
+    },
+    {
+      "near": 0.05,
+      "distance": 20,
+      "hidden": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "old": 512,
+      "exposed": 512,
+      "raised": 512
+    },
+    {
+      "near": 0.05,
+      "distance": 60,
+      "hidden": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "old": 201,
+      "exposed": 201,
+      "raised": 201
+    },
+    {
+      "near": 0.05,
+      "distance": 120,
+      "hidden": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "old": 100,
+      "exposed": 100,
+      "raised": 100
+    },
+    {
+      "near": 0.05,
+      "distance": 250,
+      "hidden": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "old": 48,
+      "exposed": 48,
+      "raised": 48
+    },
+    {
+      "near": 0.1,
+      "distance": 5,
+      "hidden": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "old": 13824,
+      "exposed": 13824,
+      "raised": 13312
+    },
+    {
+      "near": 0.1,
+      "distance": 20,
+      "hidden": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "old": 512,
+      "exposed": 512,
+      "raised": 512
+    },
+    {
+      "near": 0.1,
+      "distance": 60,
+      "hidden": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "old": 201,
+      "exposed": 201,
+      "raised": 201
+    },
+    {
+      "near": 0.1,
+      "distance": 120,
+      "hidden": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "old": 100,
+      "exposed": 100,
+      "raised": 100
+    },
+    {
+      "near": 0.1,
+      "distance": 250,
+      "hidden": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "old": 48,
+      "exposed": 48,
+      "raised": 48
+    },
+    {
+      "near": 0.5,
+      "distance": 5,
+      "hidden": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "old": 13824,
+      "exposed": 13824,
+      "raised": 13312
+    },
+    {
+      "near": 0.5,
+      "distance": 20,
+      "hidden": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "old": 512,
+      "exposed": 512,
+      "raised": 512
+    },
+    {
+      "near": 0.5,
+      "distance": 60,
+      "hidden": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "old": 201,
+      "exposed": 201,
+      "raised": 201
+    },
+    {
+      "near": 0.5,
+      "distance": 120,
+      "hidden": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "old": 100,
+      "exposed": 100,
+      "raised": 100
+    },
+    {
+      "near": 0.5,
+      "distance": 250,
+      "hidden": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "old": 48,
+      "exposed": 48,
+      "raised": 48
+    }
+  ],
+  "factors": [
+    0,
+    0,
+    0,
+    0
+  ]
+}

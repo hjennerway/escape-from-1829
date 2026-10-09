@@ -1,0 +1,34 @@
+{
+  "report": [
+    {
+      "mode": "source",
+      "build": {
+        "mode": "procedural",
+        "milliseconds": 3286.600000000093
+      },
+      "surfaces": {
+        "probes": 12,
+        "bad": []
+      }
+    },
+    {
+      "mode": "compiled",
+      "build": {
+        "mode": "compiled",
+        "milliseconds": 1340.1000000000931
+      },
+      "surfaces": {
+        "probes": 12,
+        "bad": []
+      }
+    },
+    {
+      "mode": "explore",
+      "build": {
+        "mode": "compiled",
+        "milliseconds": 877.7000000001863
+      }
+    }
+  ],
+  "errors": []
+}

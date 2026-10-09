@@ -15,6 +15,22 @@ export function createWorkshopLights(THREE,group,lamps,{exterior,doors=[],shadow
  for(const leaf of doors){leaf.geometry.computeBoundingBox();doorMin.push(leaf.geometry.boundingBox.min.clone());doorMax.push(leaf.geometry.boundingBox.max.clone());}
  const uniforms={workshopAtlas:{value:atlas.texture},workshopPositions:{value:positions},workshopColour:{value:new THREE.Color(0xfff1df)},workshopStrength:{value:16},
   workshopDoors:{value:doorMatrices},workshopDoorMin:{value:doorMin},workshopDoorMax:{value:doorMax}};
+ // Resolve the thin ceiling's sun occlusion exactly. Estate-wide PCF texels
+ // extrapolate wall receiver planes past their top and leak at this contact,
+ // especially when the sun grazes a wall. Use the actual joined footprint;
+ // rays that leave through windows before reaching the ceiling remain lit.
+ const ceiling=group.userData.gallery?.ceiling-.05,loops=group.userData.corridorLoops??[],number=n=>n.toFixed(8);
+ const ceilingOcclusion=loops.length?`
+ bool workshopCeilingBlocks(vec3 direction) {
+  if(direction.y<=0.0 || workshopWorldPosition.y>=${number(ceiling)}) return false;
+  vec2 point=workshopWorldPosition.xz+direction.xz*((${number(ceiling)}-workshopWorldPosition.y)/direction.y);
+  bool inside=false;
+  ${loops.flatMap(loop=>loop.flatMap((a,i)=>{
+   const b=loop[(i+1)%loop.length];if(Math.abs(b[1]-a[1])<1e-8)return [];
+   return [`if((point.y>${number(a[1])})!=(point.y>${number(b[1])}) && point.x<${number(a[0])}+(point.y-(${number(a[1])}))*${number((b[0]-a[0])/(b[1]-a[1]))}) inside=!inside;`];
+  })).join('\n  ')}
+  return inside;
+ }`:'';
  const windows=[];group.updateMatrixWorld(true);
  group.traverse(wall=>{
   if(wall.name==='Workshop exterior with semicircular windows')for(const o of wall.userData.openings??[]){
@@ -24,6 +40,7 @@ export function createWorkshopLights(THREE,group,lamps,{exterior,doors=[],shadow
  });
  const declarations=`
  varying vec3 workshopWorldPosition;
+ ${ceilingOcclusion}
  uniform sampler2D workshopAtlas;
  uniform vec3 workshopPositions[${Math.max(1,count)}];
  uniform vec3 workshopColour;
@@ -103,6 +120,9 @@ export function createWorkshopLights(THREE,group,lamps,{exterior,doors=[],shadow
      #endif
      workshopWorldPosition=(modelMatrix*workshopPosition).xyz;`);
     shader.fragmentShader=shader.fragmentShader.replace('#include <lights_pars_begin>','#include <lights_pars_begin>\n'+declarations);
+    if(ceilingOcclusion)shader.fragmentShader=shader.fragmentShader.replace('#include <lights_fragment_begin>',THREE.ShaderChunk.lights_fragment_begin.replace(
+     'getDirectionalLightInfo( directionalLight, directLight );',
+     'getDirectionalLightInfo( directionalLight, directLight );\nif(workshopCeilingBlocks(inverseTransformDirection(directLight.direction,viewMatrix))) directLight.color=vec3(0.0);'));
     shader.fragmentShader=shader.fragmentShader.replace('#include <lights_fragment_end>','#include <lights_fragment_end>\nreflectedLight.directDiffuse += diffuseColor.rgb * RECIPROCAL_PI * workshopIrradiance(normal);');
    };
    material.customProgramCacheKey=()=>key.call(material)+':workshop-atlas:'+count+':'+doors.length+':'+generation;material.needsUpdate=true;

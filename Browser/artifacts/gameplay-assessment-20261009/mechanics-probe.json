@@ -1,0 +1,20 @@
+{
+  "on": {
+    "visible": true,
+    "intensity": 20,
+    "enabled": true,
+    "distance": 0.021999999999998465
+  },
+  "off": {
+    "visible": true,
+    "intensity": 0,
+    "enabled": false,
+    "distance": 0.021999999999998465
+  },
+  "hidden": {
+    "visible": false,
+    "intensity": 0,
+    "enabled": false,
+    "distance": 0.08800000000000097
+  }
+}

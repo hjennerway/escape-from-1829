@@ -1,4 +1,5 @@
 import {markDownpipeInstances} from './downpipe-clearance.mjs';
+import {addBlueRoofLantern,blueRoofLanternMaterials} from './blue-roof-lantern.mjs';
 // locations.png fixes the roadside footprints and the two camera directions.
 // Photo-derived dimensions and the obscured rear elevations are estimates.
 import {VIVIENNE_LANE,GARAGE_LANE_SHIFT} from './road-centerlines.mjs';
@@ -49,14 +50,32 @@ export function createGaragesMortuary(THREE,{brick,roof,worldUV,material}){
    const points=[];for(let tri of triangles){const v=tri.map(p=>new THREE.Vector3(...p));if(up&&v[1].clone().sub(v[0]).cross(v[2].clone().sub(v[0])).y<0)tri=[...tri].reverse();points.push(...tri.flat());}
    const g=new THREE.BufferGeometry();g.setAttribute('position',new THREE.Float32BufferAttribute(points,3));g.setAttribute('uv',new THREE.Float32BufferAttribute(points.flatMap((_,i)=>i%3===0?[points[i]/1.7,(points[i+1]+points[i+2])/1.7]:[]),2));g.computeVertexNormals();return mesh(g,m,name);
   }
+  function encloseRoof(roofs,perimeter,bottom,mat,name){
+   // One continuous gable/eave envelope, with its underside at the wall top.
+   // The automatic gap filler cannot infer these thin gables: it duplicates
+   // their faces and can mistake a ridge or window frame for roof support.
+   const triangles=[],lower=p=>[p[0],bottom,p[2]];
+   for(let i=0;i<perimeter.length;i++){
+    const a=perimeter[i],b=perimeter[(i+1)%perimeter.length];
+    triangles.push([a,b,lower(b)],[a,lower(b),lower(a)]);
+   }
+   for(const roof of roofs){
+    const p=roof.geometry.attributes.position;
+    for(let i=0;i<p.count;i+=3)triangles.push([2,1,0].map(j=>[p.getX(i+j),bottom,p.getZ(i+j)]));
+    roof.userData.roofWallJoinsFinished=true;
+    roof.userData.roofWallJoinSummary={closed:perimeter.length,unsupported:0,solid:true,authored:true};
+   }
+   const envelope=surface(triangles,mat,name);
+   envelope.geometry=worldUV(envelope.geometry,1.7);
+   envelope.userData.roofWallClosure=true;
+  }
   function pitched(x0,z0,x1,z1,eave,rise,name,axis='x',gableMaterial=brick){
    const a=x0-.18,b=x1+.18,c=z0-.2,d=z1+.2,cx=(a+b)/2,cz=(c+d)/2,y=eave+.08,r=y+rise;
    const v=[[a,y,c],[b,y,c],[b,y,d],[a,y,d],...(axis==='x'?[[a,r,cz],[b,r,cz]]:[[cx,r,c],[cx,r,d]])];
    const faces=axis==='x'?[[0,1,5],[0,5,4],[2,3,4],[2,4,5]]:[[0,3,5],[0,5,4],[1,2,5],[1,5,4]];
-   surface(faces.map(f=>f.map(i=>v[i])),slate,name+' slate roof',true);
-   const ends=axis==='x'?[[0,4,3],[1,2,5]]:[[0,1,4],[3,5,2]];
-   // Wall-plane gables avoid slate triangles on the brick ends.
-   const gables=surface(ends.map(f=>f.map(i=>v[i])),gableMaterial,name+' gables');gables.material=gableMaterial.clone();gables.material.side=THREE.DoubleSide;
+   const roof=surface(faces.map(f=>f.map(i=>v[i])),slate,name+' slate roof',true);
+   const perimeter=(axis==='x'?[0,1,5,2,3,4]:[0,4,1,2,5,3]).map(i=>v[i]);
+   encloseRoof([roof],perimeter,eave,gableMaterial,name+' gables');
    box(red,cx,r+.04,cz,axis==='x'?b-a:.13,.12,axis==='x'?.13:d-c);
    if(axis==='x')for(const z of [c,d])box(iron,cx,y-.04,z,b-a,.13,.15);
    else for(const x of [a,b])box(iron,x,y-.04,cz,.15,.13,d-c);
@@ -93,7 +112,7 @@ export function createGaragesMortuary(THREE,{brick,roof,worldUV,material}){
   }
   function drain(x,z,h){const assembly=x+':'+z;box(iron,x,h/2,z,.085,h,.09,0,{pipe:true,assembly});box(stone,x,.46,z-.015,.105,.75,.115,0,{assembly});for(const y of [.9,2.3])box(iron,x,y,z-.025,.14,.055,.11,0,{assembly});}
   function finish(){const dummy=new THREE.Object3D();for(const [mat,items]of batches){const b=new THREE.InstancedMesh(new THREE.BoxGeometry(1,1,1),mat,items.length);markDownpipeInstances(b,items);b.name=name+' doors, glazing and trim';b.castShadow=true;b.receiveShadow=true;b.userData.orientedCollision=true;items.forEach((p,i)=>{dummy.position.set(p.x,p.y,p.z);dummy.scale.set(p.w,p.h,p.d);dummy.rotation.set(0,p.r,0);dummy.updateMatrix();b.setMatrixAt(i,dummy.matrix);});group.add(b);}group.userData.openings=openings;return group;}
-  return {group,box,solid,surface,pitched,opening,window,drain,finish};
+  return {group,box,solid,surface,encloseRoof,pitched,opening,window,drain,finish,mesh};
  }
  const g=builder('Garage row',GARAGES);
  const ranges=[{name:'Western garages and offices',x0:0,x1:13.6,depth:7.2,h:3.2,rise:1.18,axis:'x'},
@@ -129,10 +148,10 @@ export function createGaragesMortuary(THREE,{brick,roof,worldUV,material}){
  const x0=-half-.2,x1=half+.2,z0=.8,z1=6.2,cz=3.5,y=e+.08,rise=1.6,peak=y+rise;
  const stem=2.08;
  const a=[x0,y,z0],b=[x1,y,z0],c=[x0,peak,cz],d=[x1,peak,cz],l=[-stem,y,z0],rr=[stem,y,z0],join=[0,peak,cz];
- m.surface([[a,c,l],[l,c,join],[rr,join,d],[rr,d,b],[[x0,y,z1],d,c],[[x0,y,z1],[x1,y,z1],d]],slate,'Mortuary crossbar slate roof',true);
+ const crossbarRoof=m.surface([[a,c,l],[l,c,join],[rr,join,d],[rr,d,b],[[x0,y,z1],d,c],[[x0,y,z1],[x1,y,z1],d]],slate,'Mortuary crossbar slate roof',true);
  // The unequal slope widths meet on the two visible diagonal valleys.
- m.surface([[[-stem,y,-4.2],l,join],[[-stem,y,-4.2],join,[0,peak,-4.2]],[[stem,y,-4.2],[0,peak,-4.2],join],[[stem,y,-4.2],join,rr]],slate,'Mortuary entrance slate roof',true);
- const gables=m.surface([[[x0,y,z0],[x0,peak,cz],[x0,y,z1]],[[x1,y,z1],[x1,peak,cz],[x1,y,z0]],[[-stem,y,-4.04],[stem,y,-4.04],[0,peak,-4.04]]],brick,'Mortuary brick gables');gables.material=brick.clone();gables.material.side=THREE.DoubleSide;
+ const entranceRoof=m.surface([[[-stem,y,-4.2],l,join],[[-stem,y,-4.2],join,[0,peak,-4.2]],[[stem,y,-4.2],[0,peak,-4.2],join],[[stem,y,-4.2],join,rr]],slate,'Mortuary entrance slate roof',true);
+ m.encloseRoof([crossbarRoof,entranceRoof],[a,l,[-stem,y,-4.2],[0,peak,-4.2],[stem,y,-4.2],rr,b,d,[x1,y,z1],[x0,y,z1],c],e,brick,'Mortuary brick gables');
  m.box(red,0,peak+.035,cz,x1-x0,.14,.15);m.box(red,0,peak+.035,(-4.2+cz)/2,.15,.14,cz+4.2);
  m.opening(0,-4,1.28,2.6,'mortuary');
  for(const x of [-(half+1.9)/2,(half+1.9)/2])m.window(x,1,1.5,1.3,1.99);
@@ -144,16 +163,11 @@ export function createGaragesMortuary(THREE,{brick,roof,worldUV,material}){
  }
  // A broad, low blue ridge vent matches the tower service buildings' blue
  // roof dormers. Its walls emerge from the host slopes.
- const ventBlue=material(0x739eae),ventFrame=material(0xd5dcd5),ventGlass=material(0x526b70);
- ventGlass.userData.windowGlass=true;
- m.solid(rect(-1.4,2.7,1.4,4.3),1.22,'Mortuary blue ridge vent walls',ventBlue,4.4);
- m.pitched(-1.4,2.7,1.4,4.3,5.62,.28,'Mortuary ridge vent','x',ventBlue);
- for(const side of [-1,1]){
-  const vz=3.5+side*.82;
-  m.box(recess,0,5.34,vz,2.6,.48,.065);m.box(ventGlass,0,5.34,vz+side*.04,2.5,.4,.045);
-  for(const x of [-1.26,-.42,.42,1.26])m.box(ventFrame,x,5.34,vz+side*.08,.045,.44,.065);
-  for(const y of [5.12,5.34,5.56])m.box(ventFrame,0,y,vz+side*.08,2.57,.045,.065);
- }
+ addBlueRoofLantern(THREE,{name:'Mortuary blue ridge vent',roofName:'Mortuary ridge vent',x:0,z:3.5,
+  halfLength:1.4,halfWidth:.8,eave:5.7,rise:.28,overhangU:.18,overhangV:.2,roofThickness:.08,
+  windowBottom:5.14,windowTop:5.54,windowWidth:2.5,
+  baseHeight:(_x,z)=>peak-Math.abs(z-cz)*rise/(cz-z0)-.06,
+  materials:blueRoofLanternMaterials(slate,material(0x739eae)),mesh:m.mesh,detail:m.box});
  m.group.userData.ridgeVent={x:0,z:3.5,style:'Tower service blue dormer',top:5.98};
  for(const x of [-half-.17,half+.17]){m.box(iron,x,e,3.5,.12,.13,5.4);m.drain(x,1,e);}
  for(const z of [.8,6.2])for(const side of [-1,1])m.box(iron,side*(half+.2+2.08)/2,e,z,half+.2-2.08,.12,.14);

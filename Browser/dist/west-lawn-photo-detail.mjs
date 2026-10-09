@@ -16,7 +16,8 @@ export function addWestLawnPhotoDetails(THREE,{model,box,mesh,worldUV,white,bric
   addFacadeCourse(THREE,{mesh,worldUV},'West lawn continuous upper floor band',white,
     [[-31.88,rootStart],[-31.88,27],[-28.88,27],[-28.88,43]],8.48,.3,.23,courseEnd);
   function opening(face,x,y,z,w=1.05,h=2.5){
-    sash(face,x,y,z,Math.PI/2,w,h);
+    // The straight backing's exposed ends belong to the brick arch, not stone.
+    sash(face,x,y,z,Math.PI/2,w,h,{lintel:brick});
     const shape=new THREE.Shape(),a=w/2+.1;
     shape.moveTo(-a,0);shape.quadraticCurveTo(0,.19,a,0);
     shape.lineTo(a,.2);shape.quadraticCurveTo(0,.43,-a,.2);shape.closePath();

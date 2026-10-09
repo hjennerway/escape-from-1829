@@ -1,0 +1,15 @@
+{
+  "outside": {
+    "count": 1436926,
+    "hash": "1266de1e3aca0dd6ccb88ab66c12af99cc03de916476100c126f7c62f00fad22"
+  },
+  "entrance": {
+    "count": 226,
+    "hash": "f0d4b96595243212b079dae94333021fd1fca606eea84efcf40fc80eeb28fe86"
+  },
+  "existingRoofs": {
+    "count": 302,
+    "hash": "f8c06b9d233d6209068e4ae812cfe1dd30a8305fa2e1216872478a5ad337b528"
+  },
+  "local": 9314
+}

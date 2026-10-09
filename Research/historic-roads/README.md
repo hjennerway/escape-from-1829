@@ -449,3 +449,102 @@ Shapely generator rebuilds the local merged junction and border, removing the
 old road fragment exposed by the move. The church notes describe the completed
 footpath loop and shortened Churton access paving. Validation is limited to
 these local surfaces and adjacent buildings.
+
+## Grass-facing road ends — 8 October 2026
+
+The owner's general road-finish request replaces exposed rounded dead ends
+with asphalt wearing into gravel and then lawn. This is a visual treatment,
+not new historical survey evidence. `Browser/dist/road-end-fades.mjs` lists
+the 16 verified grass-facing endpoints across the shared, historic and modern
+networks. Joined road mouths, junction patches and forecourts retain their
+surfaces. Original centrelines, lamp paths and geographical coordinates remain
+the placement reference.
+
+The last seven scene metres of each selected road blend into warm grey gravel.
+The gravel continues for twelve metres, narrowing to a roughly two-metre path
+and descending to the lawn while its broken margins and final stones fade out.
+Coverage reveals the actual grass material underneath. The kerb fades along
+the approach instead of wrapping around the end. Modern-only continuations
+own their transitions, preserving the existing layout and timeline rules.
+
+Source and rebuilt compiled views, including walking-height checks, are in
+`Browser/artifacts/road-end-fades/`. Browser source and the local aerial binary
+change; Unity/Android and Blender exports are not regenerated.
+
+The owner's follow-up on 8 October darkens the worn gravel to the carriageway's
+base shade (`ROAD_STYLE.asphalt`) and broadens the grassy neck from 36% to 70%
+of the road width (2.16 to 4.2 metres on these six-metre roads). This supersedes
+the pale gravel and narrow path above: the finish now reads as road fading
+directly into grass. The existing texture, feathered coverage, fade length,
+terrain contact and endpoint selection remain in use. Revised previews use
+the `darker-wide` prefix in the same artifact directory.
+
+## Smooth pavement edges and buried road borders — 9 October 2026
+
+The owner's four marked screenshots identify pale fragments visible through
+asphalt at a distance and jagged edges beside the Estates court and lawn.
+The marks are visual references for this correction, not historical survey
+information: `pavement-road-strip-marked-2026-10-09.png`,
+`pavement-estates-edge-marked-2026-10-09.png`,
+`pavement-buried-fragments-marked-2026-10-09.png` and
+`pavement-lawn-edge-marked-2026-10-09.png`.
+
+Slope-scaled depth bias was drawing buried road borders through the higher
+service-court asphalt at shallow walking angles. The flat ground layers now
+use constant depth priorities, so road mouths and forecourts cover their old
+borders and raised kerbs remain visible above adjoining lawn islands. This
+supersedes the earlier slope-bias descriptions of junction layering.
+
+`Browser/dist/road-ribbon.mjs` joins the sampled offset edges into continuous
+strips. Gentle bends share exact cross-sections; sharp corners and closed ends
+have rounded joins with at most 5 mm chord error and exact strip tangencies.
+This removes the teeth caused by separate rectangles and circular patches at
+every waypoint. It applies to historic and shared roads, standalone historic
+kerbs and the mapped car park boundary. The approved centrelines, widths,
+junction outlines and grass-facing end transitions remain the placement inputs.
+Existing continuous entrance and church paths use the same constant depth rule.
+
+The Estates connections from the earlier purple-line request are retained.
+Browser sources and the local compiled aerial model change; Unity/Android,
+Blender and packaged exports are not regenerated. Walking-height source and
+compiled reviews, including the forecourt, teardrop, annexe, church, entrance
+and parking edges, are in `Browser/artifacts/pavement-cleanup/`.
+
+## Road-end gradient and exposed supports — 9 October 2026
+
+The owner's [walking screenshot](road-end-step-marked-2026-10-09.png) identifies
+a vertical pale step and a competing texture beneath the road-to-grass fade.
+This is a visual correction to the existing 16 endpoints, not survey evidence.
+
+The asphalt, gravel and fading kerb now descend together from the start of the
+seven-metre approach through the twelve-metre gravel finish. A smooth height
+profile has level tangents at the road and lawn, and both road textures share
+identical sampled triangles. This supersedes the earlier gravel-only descent.
+The full-width opaque support face at each open seam is removed. Verge sides
+continue along the same slope with fading coverage; asphalt closes only the
+thin rim above them, avoiding an exposed dark retaining wall.
+
+Walking-height before/after and compiled captures, including the photographed
+central Parsons stretch, are in `Browser/artifacts/road-end-slope/`. Browser
+sources and the local compiled aerial model are updated. Unity/Android,
+Blender and packaged exports are not regenerated.
+
+## Solid road-end kerb tapers — 9 October 2026
+
+The owner's [walking reference](kerb-ghost-reference-2026-10-09.png) shows pale,
+translucent kerbs at the road-to-grass blend. This is a visual correction, not
+historical survey evidence. It supersedes the transparent kerb coverage and
+shared kerb/road height profile described above.
+
+The two stone borders at each of the sixteen selected endpoints now retain
+opaque top and side faces with depth writing. Each kerb lowers from Y=.32 to
+Y=-.17 along the seven-metre approach, with level tangents, narrowing from its
+original .6-metre width to .3 metres at the buried toe. Both solid sides extend
+to Y=-.19. The actual lawn hides the end instead of showing through raised
+stone. Original carriageway/gravel positions, triangles, textures, coverage
+and thin asphalt side supports are retained exactly.
+
+Source/compiled walking-height, oblique, day/dusk/night and portrait captures,
+the saved original builder and the road-buffer comparison are in
+`Browser/artifacts/road-kerb-transition/`. Browser source and the local compiled
+estate change. Unity/Android, Blender and packaged exports are not regenerated.

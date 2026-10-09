@@ -1,0 +1,131 @@
+{
+  "mode": {
+    "mode": "compiled",
+    "milliseconds": 1115.7000000029802
+  },
+  "bounds": [
+    {
+      "name": "Water tower to Irby corridor",
+      "visible": true,
+      "position": [
+        156.3,
+        0,
+        -66.6
+      ]
+    },
+    {
+      "name": "Water tower to Irby corridor walls outside accessible gallery",
+      "visible": false,
+      "position": [
+        32.69999999999999,
+        1.8,
+        0
+      ]
+    },
+    {
+      "name": "Water tower to Irby corridor walls outside accessible gallery",
+      "visible": false,
+      "position": [
+        32.69999999999999,
+        1.8,
+        0
+      ]
+    },
+    {
+      "name": "Eave closure: Water tower to Irby corridor outside accessible gallery",
+      "visible": false,
+      "position": [
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "name": "Eave closure: Water tower to Irby corridor outside accessible gallery",
+      "visible": false,
+      "position": [
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "name": "Aerial batch · Water tower to Irby corridor · 150",
+      "visible": true,
+      "position": [
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "name": "Aerial batch · Water tower to Irby corridor · 151",
+      "visible": true,
+      "position": [
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "name": "Explore Irby corridor entrance",
+      "visible": true,
+      "position": [
+        221.7,
+        0,
+        -66.6
+      ]
+    },
+    {
+      "name": "Aerial batch · Explore Irby corridor entrance · 831",
+      "visible": true,
+      "position": [
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "name": "Aerial batch · Explore Irby corridor entrance · 832",
+      "visible": true,
+      "position": [
+        0,
+        0,
+        0
+      ]
+    }
+  ],
+  "doors": [
+    {
+      "id": "tower-door",
+      "x": 145.26000000000002,
+      "z": -44.75
+    },
+    {
+      "id": "workshop-door:repair",
+      "x": 153.08499999999998,
+      "z": -40
+    },
+    {
+      "id": "workshop-door:oil-store",
+      "x": 153.08499999999998,
+      "z": -31.5
+    },
+    {
+      "id": "workshop-door:machine",
+      "x": 156.46125,
+      "z": -48.5
+    },
+    {
+      "id": "admin-corridor-door",
+      "x": 154.773125,
+      "z": 30.6
+    },
+    {
+      "id": "irby-corridor-door",
+      "x": 221.7,
+      "z": -66.6
+    }
+  ],
+  "locked": 0
+}

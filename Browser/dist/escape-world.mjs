@@ -157,7 +157,7 @@ export function createEscapeWorld(THREE,floors,groups,progress,{reducedMotion=fa
  node('reclaim','PROPERTY TRAY','',0,'Reception');
  node('release-note','MAINTENANCE NOTICE',`Upper staff grilles S1 and S5 share the basement safety release. Control in room ${progress.roomNumber(2,'B4')}. Outside-door locks are separate.`,2,'B3');
  node('release','STAFF SAFETY RELEASE',`Release both upper gates. Porter’s record and brass outside key: second floor, room ${progress.roomNumber(3,run.office)}, ${run.office==='R41'?'above Reception':'beside the Library'}.`,2,'B4');
- node('plan','PORTER’S SERVICE RECORD',`Tonight: ${run.variant} outer entrance. Other outside doors bolted. Brass key attached. Perimeter path continues northwest to the lattice mast.`,3,run.office);
+  node('plan','PORTER’S SERVICE RECORD',`Brass key: all west-side exits on all floors + ${run.variant} outer entrance. Mast beyond northwest path. Tower inspection lamp left on: crowbar and oil in workshops, stiff hatch in vestibule. Upper lookout overlooks the gates. Security checks yard noises.`,3,run.office);
  // An upstairs landing notice makes either record location discoverable in-world.
  node('office-index','OFFICE FILING',`Porter’s route record filed in ${run.office==='R41'?'Records':'Librarian'} office · room ${progress.roomNumber(3,run.office)}, second floor. Stair key does not fit outside doors.`,1,'R26');
  for(const n of nodes){const beacon=new THREE.Sprite(beaconMaterial);beacon.name='Available interaction beacon';beacon.position.set(0,n.mount.kind==='desk'?.48:.60,.14);beacon.scale.set(.48,.70,1);n.group.add(beacon);n.beacon=beacon;}
@@ -185,7 +185,10 @@ export function createEscapeWorld(THREE,floors,groups,progress,{reducedMotion=fa
    for(const offset of [-.057,.057])pin(frame,.012,.018,[edge,.032,offset],brass);
   }
   box(frame,[STAIR_WIDTH+.09,.075,.09],[0,height-.0375,0],metal);
-  const leaf=new THREE.Group();leaf.name='Staff stair grille leaf';group.add(leaf);
+  // Swing back over the level landing: opening into the flight would cut the
+  // bottom rail through its rising treads. Keep the existing hinge pins fixed.
+  const hinge=new THREE.Group();hinge.name='Staff stair gate hinge';hinge.position.set(-half+.045,0,-.055);group.add(hinge);
+  const leaf=new THREE.Group();leaf.name='Staff stair grille leaf';leaf.position.copy(hinge.position).negate();hinge.add(leaf);
   const leafWidth=STAIR_WIDTH-.14,bottom=.07,top=height-.11;
   for(const side of [-1,1])box(leaf,[.055,top-bottom,.055],[side*(leafWidth/2-.0275),(top+bottom)/2,0],metal);
   for(const level of [bottom+.03,RAIL_HEIGHT,top-.03])box(leaf,[leafWidth,.06,.055],[0,level,0],metal);
@@ -200,12 +203,12 @@ export function createEscapeWorld(THREE,floors,groups,progress,{reducedMotion=fa
   box(leaf,[.12,.18,.085],[leafWidth/2-.06,1.3,-.01],metal);
   box(leaf,[.16,.028,.028],[leafWidth/2-.09,1.3,-.064],brass);
   text(leaf,'STAFF OFFICES',`Stair key required. Porter’s record + brass outside key: second-floor room ${progress.roomNumber(3,run.office)}, ${run.office==='R41'?'above Reception':'beside the Library'}.`,.72,.32);
-  addDoorLock(leaf,{id:stair.id,width:leafWidth,height:.94,depth:.055});
+  const lock=addDoorLock(leaf,{id:stair.id,width:leafWidth,height:.94,depth:.055});
   for(const sx of [-.32,.32])for(const sy of [1.23,1.47]){
    const rivet=pin(leaf,.011,.012,[sx,sy,-.043],brass);rivet.rotation.x=Math.PI/2;
   }
   groups[1].add(group);
-  gates.push({id:stair.id,x,z,y,dx,dz,height,group,leaf});
+  gates.push({id:stair.id,x,z,y,dx,dz,height,group,leaf,hinge,lock,leafWidth,opening:0,target:0});
  }
  function near(actor){
   if(actor.outside)return null;
@@ -217,17 +220,38 @@ export function createEscapeWorld(THREE,floors,groups,progress,{reducedMotion=fa
  }
  function allowMove(actor,next){
   return gates.every(g=>{
-   if(progress.stairOpen(g.id)||next.y+1.8<g.y||next.y>g.y+g.height)return true;
-   const side=p=>(p.x-g.x)*g.dx+(p.z-g.z)*g.dz;
-   const a=side(actor),b=side(next);
-   if(a*b>0&&Math.abs(b)>.35)return true;
-   const t=a===b?1:Math.max(0,Math.min(1,a/(a-b))),x=actor.x+(next.x-actor.x)*t,z=actor.z+(next.z-actor.z)*t;
-   return Math.abs((x-g.x)*-g.dz+(z-g.z)*g.dx)>.95;
+   if(next.y+1.8<g.y||next.y>g.y+g.height)return true;
+   // Follow the visible leaf, including its resting position beside the
+   // landing. Unlocking alone must not allow walking through the moving bars.
+   const c=Math.cos(g.hinge.rotation.y),s=Math.sin(g.hinge.rotation.y);
+   const ends=[-g.leafWidth/2,g.leafWidth/2].map(edge=>{
+    const x=g.hinge.position.x+c*(edge-g.hinge.position.x)-s*g.hinge.position.z;
+    const z=g.hinge.position.z-s*(edge-g.hinge.position.x)-c*g.hinge.position.z;
+    return [g.x+g.dz*x+g.dx*z,g.z-g.dx*x+g.dz*z];
+   });
+   const [a,b]=ends,from=[actor.x,actor.z],to=[next.x,next.z],radius=.32;
+   const side=p=>(p[0]-a[0])*(b[1]-a[1])-(p[1]-a[1])*(b[0]-a[0]);
+   const before=segmentDistance(...from,a,b),after=segmentDistance(...to,a,b);
+   // A swinging leaf can approach a stationary player; always let them back
+   // away on their own side instead of trapping them in its collision padding.
+   if(before<radius&&after>before&&side(from)*side(to)>=0)return true;
+   if(Math.min(before,after,...ends.map(p=>segmentDistance(...p,from,to)))<radius)return false;
+   if(side(from)*side(to)>=0)return true;
+   const t=side(from)/(side(from)-side(to)),x=actor.x+(next.x-actor.x)*t,z=actor.z+(next.z-actor.z)*t;
+   return segmentDistance(x,z,a,b)>radius;
   });
  }
- function sync(){for(const lock of doorLocks)lock.group.visible=progress.doorLocked(lock.exit);for(const g of gates)g.leaf.visible=!progress.stairOpen(g.id);for(const n of nodes){if(n.key)n.key.visible=n.id==='staff-key'?!run.staffKey:n.id==='reclaim'?run.confiscated.size>0:!run.serviceKey;const active=n.key?n.key.visible:n.id==='release'?!(progress.stairOpen('S1')&&progress.stairOpen('S5')):!progress.has(n.id);n.halo.visible=n.beacon.visible=active;if(n.id==='reclaim'){n.key.children[0].visible=run.confiscated.has('staffKey');n.key.children[1].visible=run.confiscated.has('serviceKey');}if(n.handle)n.handle.rotation.z=progress.stairOpen('S5')?Math.PI/2:0;}}
- function update(time){const pulse=reducedMotion?1:.90+.18*Math.sin(time*Math.PI*2/2.8);glowMaterial.uniforms.strength.value=pulse;beaconMaterial.opacity=.85*pulse;for(const n of nodes)n.beacon.scale.set(.48*pulse,.70*pulse,1);}
- sync();return {nodes,gates,doorLocks,near,allowMove,sync,update,anchor,dispose(){const geometries=new Set(),materials=new Set([metal,brass,wood,glowMaterial,beaconMaterial]),textures=new Set([glowTexture]);for(const o of [...nodes.map(n=>n.group),...gates.map(g=>g.group),...doorLocks.map(d=>d.group)]){o.removeFromParent();o.traverse(m=>{if(m.isInstancedMesh)m.dispose();if(m.isMesh&&m.geometry)geometries.add(m.geometry);if(m.material){materials.add(m.material);if(m.material.map)textures.add(m.material.map);}});}for(const r of lockResources)if(!geometries.has(r)&&!materials.has(r)&&!textures.has(r))r.dispose();for(const g of geometries)g.dispose();for(const t of textures)t.dispose();for(const m of materials)m.dispose();}};
+ function poseGate(g){const t=g.opening;g.hinge.rotation.y=t*t*(3-2*t)*Math.PI/2;g.lock.visible=!g.target&&t===0;}
+ function sync({snapGates=false}={}){
+  for(const lock of doorLocks)lock.group.visible=progress.doorLocked(lock.exit);
+  for(const g of gates){g.target=progress.stairOpen(g.id)?1:0;if(snapGates||reducedMotion)g.opening=g.target;poseGate(g);}
+  for(const n of nodes){if(n.key)n.key.visible=n.id==='staff-key'?!run.staffKey:n.id==='reclaim'?run.confiscated.size>0:!run.serviceKey;const active=n.key?n.key.visible:n.id==='release'?!(progress.stairOpen('S1')&&progress.stairOpen('S5')):!progress.has(n.id);n.halo.visible=n.beacon.visible=active;if(n.id==='reclaim'){n.key.children[0].visible=run.confiscated.has('staffKey');n.key.children[1].visible=run.confiscated.has('serviceKey');}if(n.handle)n.handle.rotation.z=progress.stairOpen('S5')?Math.PI/2:0;}
+ }
+ function update(time,dt=0){
+  for(const g of gates){const step=Math.max(0,dt)/1.1;g.opening=g.target?Math.min(1,g.opening+step):Math.max(0,g.opening-step);poseGate(g);}
+  const pulse=reducedMotion?1:.90+.18*Math.sin(time*Math.PI*2/2.8);glowMaterial.uniforms.strength.value=pulse;beaconMaterial.opacity=.85*pulse;for(const n of nodes)n.beacon.scale.set(.48*pulse,.70*pulse,1);
+ }
+ sync({snapGates:true});return {nodes,gates,doorLocks,near,allowMove,sync,update,anchor,dispose(){const geometries=new Set(),materials=new Set([metal,brass,wood,glowMaterial,beaconMaterial]),textures=new Set([glowTexture]);for(const o of [...nodes.map(n=>n.group),...gates.map(g=>g.group),...doorLocks.map(d=>d.group)]){o.removeFromParent();o.traverse(m=>{if(m.isInstancedMesh)m.dispose();if(m.isMesh&&m.geometry)geometries.add(m.geometry);if(m.material){materials.add(m.material);if(m.material.map)textures.add(m.material.map);}});}for(const r of lockResources)if(!geometries.has(r)&&!materials.has(r)&&!textures.has(r))r.dispose();for(const g of geometries)g.dispose();for(const t of textures)t.dispose();for(const m of materials)m.dispose();}};
 }
 
 // Grid routing uses the active outdoor collision model, including visible trees.

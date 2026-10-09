@@ -1,0 +1,27 @@
+{
+  "changed": [
+    "West entrance wing walk",
+    "East entrance wing walk"
+  ],
+  "original": {
+    "jarman": {
+      "primitives": 818879,
+      "sha256": "0da0cd6be68295b939c717c78215024323ff45899cda725f7ea8fa272c67aec5"
+    },
+    "leighton": {
+      "count": 882926,
+      "sha256": "70406d6d9d5574872f402e11756ba4b438f82f5803a390d66d88ea252f7b57f4"
+    }
+  },
+  "current": {
+    "jarman": {
+      "primitives": 818879,
+      "sha256": "685dc3ae89a7d3e25b8b09669ad3152bf9b6819849727d1ac9ce6ae62e7c6224"
+    },
+    "leighton": {
+      "count": 882926,
+      "sha256": "28727023ef015a4597e45f5d63159ffeca8ef393930b75a2c2f2af177499d57b"
+    }
+  },
+  "allOtherGeometryExact": true
+}

@@ -1,0 +1,187 @@
+[
+  {
+    "command": "node test-oakmere.mjs",
+    "code": 0,
+    "milliseconds": 7307
+  },
+  {
+    "command": "node test-oakmere-court.mjs",
+    "code": 0,
+    "milliseconds": 7378
+  },
+  {
+    "command": "node test-oakmere-west.mjs",
+    "code": 0,
+    "milliseconds": 7379
+  },
+  {
+    "command": "node test-oakmere-windows.mjs",
+    "code": 0,
+    "milliseconds": 4203
+  },
+  {
+    "command": "node test-annexe-wards.mjs",
+    "code": 0,
+    "milliseconds": 6785
+  },
+  {
+    "command": "node test-churton.mjs",
+    "code": 0,
+    "milliseconds": 4559
+  },
+  {
+    "command": "node test-leighton-newton.mjs",
+    "code": 1,
+    "milliseconds": 10370
+  },
+  {
+    "command": "node test-upton.mjs",
+    "code": 0,
+    "milliseconds": 7352
+  },
+  {
+    "command": "node test-garages-mortuary.mjs",
+    "code": 0,
+    "milliseconds": 10120
+  },
+  {
+    "command": "node test-main-admin.mjs",
+    "code": 0,
+    "milliseconds": 5707
+  },
+  {
+    "command": "node test-greenhouses.mjs",
+    "code": 0,
+    "milliseconds": 9904
+  },
+  {
+    "command": "node test-aerial-controls.mjs",
+    "code": 0,
+    "milliseconds": 198
+  },
+  {
+    "command": "node test-explore-startup.mjs",
+    "code": 0,
+    "milliseconds": 125
+  },
+  {
+    "command": "node test-view-navigation.mjs",
+    "code": 0,
+    "milliseconds": 187
+  },
+  {
+    "command": "node test-main-admin-refine2.mjs",
+    "code": 0,
+    "milliseconds": 6849
+  },
+  {
+    "command": "node test-device-location.mjs",
+    "code": 0,
+    "milliseconds": 106
+  },
+  {
+    "command": "node test-main-kitchen.mjs",
+    "code": 0,
+    "milliseconds": 8876
+  },
+  {
+    "command": "node test-developer-options.mjs",
+    "code": 0,
+    "milliseconds": 7762
+  },
+  {
+    "command": "node test-kml-11.mjs",
+    "code": 0,
+    "milliseconds": 7281
+  },
+  {
+    "command": "node test-kml-imports.mjs",
+    "code": 0,
+    "milliseconds": 8397
+  },
+  {
+    "command": "node test-aerial-layouts.mjs",
+    "code": 0,
+    "milliseconds": 16202
+  },
+  {
+    "command": "node test-modern-car-park.mjs",
+    "code": 0,
+    "milliseconds": 7482
+  },
+  {
+    "command": "node test-modern-entrance.mjs",
+    "code": 0,
+    "milliseconds": 11330
+  },
+  {
+    "command": "node test-historic-roads.mjs",
+    "code": 0,
+    "milliseconds": 4153
+  },
+  {
+    "command": "node test-parsons-retrace.mjs",
+    "code": 0,
+    "milliseconds": 5083
+  },
+  {
+    "command": "node test-road-end-fades.mjs",
+    "code": 0,
+    "milliseconds": 426
+  },
+  {
+    "command": "node test-admin-teardrop.mjs",
+    "code": 0,
+    "milliseconds": 564
+  },
+  {
+    "command": "node test-road-continuity.mjs",
+    "code": 0,
+    "milliseconds": 4463
+  },
+  {
+    "command": "node test-west-parsons-junctions.mjs",
+    "code": 0,
+    "milliseconds": 6058
+  },
+  {
+    "command": "node test-annexe-access.mjs",
+    "code": 0,
+    "milliseconds": 10339
+  },
+  {
+    "command": "node test-annexe-rear-roads.mjs",
+    "code": 0,
+    "milliseconds": 8247
+  },
+  {
+    "command": "node test-performance.mjs",
+    "code": 0,
+    "milliseconds": 8255
+  },
+  {
+    "command": "node test-aerial-performance.mjs",
+    "code": 0,
+    "milliseconds": 4610
+  },
+  {
+    "command": "node test-building-detail.mjs",
+    "code": 0,
+    "milliseconds": 5901
+  },
+  {
+    "command": "node test-outhouse.mjs",
+    "code": 0,
+    "milliseconds": 8515
+  },
+  {
+    "command": "node test-willows.mjs",
+    "code": 0,
+    "milliseconds": 8061
+  },
+  {
+    "command": "node test-building-photos.mjs",
+    "code": 0,
+    "milliseconds": 7376
+  }
+]

@@ -1,0 +1,67 @@
+{
+  "results": {
+    "renderer": "ANGLE (NVIDIA, NVIDIA GeForce RTX 3090 Ti (0x00002203) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+    "doors": [
+      {
+        "id": "tower-door",
+        "firstFrameAngle": 0.03154142535308464,
+        "travel": {
+          "x": 146.95999999999984,
+          "z": -44.75,
+          "outside": true
+        }
+      },
+      {
+        "id": "workshop-door:repair",
+        "firstFrameAngle": -0.03154142535308464,
+        "travel": {
+          "x": 151.38500000000016,
+          "z": -40,
+          "outside": true
+        }
+      },
+      {
+        "id": "workshop-door:oil-store",
+        "firstFrameAngle": -0.03154142535308464,
+        "travel": {
+          "x": 151.38500000000016,
+          "z": -31.5,
+          "outside": true
+        }
+      },
+      {
+        "id": "workshop-door:machine",
+        "firstFrameAngle": 0.03154142535308464,
+        "travel": {
+          "x": 158.16124999999982,
+          "z": -48.5,
+          "outside": true
+        }
+      },
+      {
+        "id": "admin-corridor-door",
+        "firstFrameAngle": 0.03154142535308464,
+        "travel": {
+          "x": 154.773125,
+          "z": 28.90000000000001,
+          "outside": true
+        }
+      }
+    ],
+    "periods": [
+      {
+        "year": 1829,
+        "present": false
+      },
+      {
+        "year": 2010,
+        "present": false
+      },
+      {
+        "year": 1916,
+        "present": true
+      }
+    ]
+  },
+  "errors": []
+}

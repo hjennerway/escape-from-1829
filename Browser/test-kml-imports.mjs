@@ -74,7 +74,7 @@ approach.traverse(o=>{
   const normals=o.geometry.attributes.normal;
   for(let i=0;i<normals.count;i++){
     const y=new THREE.Vector3().fromBufferAttribute(normals,i).transformDirection(o.matrixWorld).y;
-    assert(o.userData.groundContact?Math.abs(y)<.01:y>.99,'Approach tops face upward; supporting edges are vertical');
+    assert(o.userData.groundContact||o.userData.roadEndSide?Math.abs(y)<.01:y>.99,'Approach tops face upward; supporting edges are vertical');
   }
 });
 // Independent probes follow the single centred approach, then both outgoing

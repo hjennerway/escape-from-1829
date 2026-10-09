@@ -1,0 +1,12 @@
+{
+  "renderer": "NVIDIA GeForce RTX 3090 Ti / ANGLE Direct3D11",
+  "originalDoubleFaces": 40,
+  "correctedSingleFaces": 40,
+  "gameErrors": [],
+  "sourceCompiledComparison": "passed",
+  "prefixChecksPassed": 99,
+  "remainingChecksPassed": 56,
+  "unrelatedFailure": "test-explore-workshops.mjs:24; identical four missing tower-return wall probes with the original apron",
+  "compiledFile": "aerial-680a033abd2778cacc32.bin.gz",
+  "compiledSourceHashMatches": true
+}

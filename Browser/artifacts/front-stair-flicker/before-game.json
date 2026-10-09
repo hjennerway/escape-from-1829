@@ -1,0 +1,605 @@
+{
+  "samples": [
+    {
+      "side": -1,
+      "x": 30.12,
+      "y": -0.12,
+      "hits": [
+        {
+          "name": "Aerial batch · West semi-basement walk · 6",
+          "z": 21.700000762939453
+        },
+        {
+          "name": "Aerial batch · Period · 1829 Wings · 265",
+          "z": 21.700000762939453
+        }
+      ]
+    },
+    {
+      "side": -1,
+      "x": 30.12,
+      "y": -0.04,
+      "hits": [
+        {
+          "name": "Aerial batch · West semi-basement walk · 6",
+          "z": 21.700000762939453
+        },
+        {
+          "name": "Aerial batch · Period · 1829 Wings · 265",
+          "z": 21.700000762939453
+        }
+      ]
+    },
+    {
+      "side": -1,
+      "x": 30.12,
+      "y": 0.04,
+      "hits": [
+        {
+          "name": "Aerial batch · West semi-basement walk · 6",
+          "z": 21.700000762939453
+        },
+        {
+          "name": "Aerial batch · Period · 1829 Wings · 265",
+          "z": 21.700000762939453
+        }
+      ]
+    },
+    {
+      "side": -1,
+      "x": 30.12,
+      "y": 0.1,
+      "hits": [
+        {
+          "name": "Aerial batch · West semi-basement walk · 6",
+          "z": 21.700000762939453
+        },
+        {
+          "name": "Aerial batch · Period · 1829 Wings · 265",
+          "z": 21.700000762939453
+        }
+      ]
+    },
+    {
+      "side": -1,
+      "x": 30.12,
+      "y": 0.16,
+      "hits": [
+        {
+          "name": "Aerial batch · West semi-basement walk · 6",
+          "z": 21.700000762939453
+        },
+        {
+          "name": "Aerial batch · Period · 1829 Wings · 265",
+          "z": 21.700000762939453
+        }
+      ]
+    },
+    {
+      "side": -1,
+      "x": 30.3,
+      "y": -0.12,
+      "hits": [
+        {
+          "name": "Aerial batch · West semi-basement walk · 6",
+          "z": 21.700000762939453
+        },
+        {
+          "name": "Aerial batch · Period · 1829 Wings · 265",
+          "z": 21.700000762939453
+        }
+      ]
+    },
+    {
+      "side": -1,
+      "x": 30.3,
+      "y": -0.04,
+      "hits": [
+        {
+          "name": "Aerial batch · West semi-basement walk · 6",
+          "z": 21.700000762939453
+        },
+        {
+          "name": "Aerial batch · Period · 1829 Wings · 265",
+          "z": 21.700000762939453
+        }
+      ]
+    },
+    {
+      "side": -1,
+      "x": 30.3,
+      "y": 0.04,
+      "hits": [
+        {
+          "name": "Aerial batch · West semi-basement walk · 6",
+          "z": 21.700000762939453
+        },
+        {
+          "name": "Aerial batch · Period · 1829 Wings · 265",
+          "z": 21.700000762939453
+        }
+      ]
+    },
+    {
+      "side": -1,
+      "x": 30.3,
+      "y": 0.1,
+      "hits": [
+        {
+          "name": "Aerial batch · West semi-basement walk · 6",
+          "z": 21.700000762939453
+        },
+        {
+          "name": "Aerial batch · Period · 1829 Wings · 265",
+          "z": 21.700000762939453
+        }
+      ]
+    },
+    {
+      "side": -1,
+      "x": 30.3,
+      "y": 0.16,
+      "hits": [
+        {
+          "name": "Aerial batch · West semi-basement walk · 6",
+          "z": 21.700000762939453
+        },
+        {
+          "name": "Aerial batch · Period · 1829 Wings · 265",
+          "z": 21.700000762939453
+        }
+      ]
+    },
+    {
+      "side": -1,
+      "x": 30.5,
+      "y": -0.12,
+      "hits": [
+        {
+          "name": "Aerial batch · West semi-basement walk · 6",
+          "z": 21.700000762939453
+        },
+        {
+          "name": "Aerial batch · Period · 1829 Wings · 265",
+          "z": 21.700000762939453
+        }
+      ]
+    },
+    {
+      "side": -1,
+      "x": 30.5,
+      "y": -0.04,
+      "hits": [
+        {
+          "name": "Aerial batch · West semi-basement walk · 6",
+          "z": 21.700000762939453
+        },
+        {
+          "name": "Aerial batch · Period · 1829 Wings · 265",
+          "z": 21.700000762939453
+        }
+      ]
+    },
+    {
+      "side": -1,
+      "x": 30.5,
+      "y": 0.04,
+      "hits": [
+        {
+          "name": "Aerial batch · West semi-basement walk · 6",
+          "z": 21.700000762939453
+        },
+        {
+          "name": "Aerial batch · Period · 1829 Wings · 265",
+          "z": 21.700000762939453
+        }
+      ]
+    },
+    {
+      "side": -1,
+      "x": 30.5,
+      "y": 0.1,
+      "hits": [
+        {
+          "name": "Aerial batch · West semi-basement walk · 6",
+          "z": 21.700000762939453
+        },
+        {
+          "name": "Aerial batch · Period · 1829 Wings · 265",
+          "z": 21.700000762939453
+        }
+      ]
+    },
+    {
+      "side": -1,
+      "x": 30.5,
+      "y": 0.16,
+      "hits": [
+        {
+          "name": "Aerial batch · West semi-basement walk · 6",
+          "z": 21.700000762939453
+        },
+        {
+          "name": "Aerial batch · Period · 1829 Wings · 265",
+          "z": 21.700000762939453
+        }
+      ]
+    },
+    {
+      "side": -1,
+      "x": 30.7,
+      "y": -0.12,
+      "hits": [
+        {
+          "name": "Aerial batch · West semi-basement walk · 6",
+          "z": 21.700000762939453
+        },
+        {
+          "name": "Aerial batch · Period · 1829 Wings · 265",
+          "z": 21.700000762939453
+        }
+      ]
+    },
+    {
+      "side": -1,
+      "x": 30.7,
+      "y": -0.04,
+      "hits": [
+        {
+          "name": "Aerial batch · West semi-basement walk · 6",
+          "z": 21.700000762939453
+        },
+        {
+          "name": "Aerial batch · Period · 1829 Wings · 265",
+          "z": 21.700000762939453
+        }
+      ]
+    },
+    {
+      "side": -1,
+      "x": 30.7,
+      "y": 0.04,
+      "hits": [
+        {
+          "name": "Aerial batch · West semi-basement walk · 6",
+          "z": 21.700000762939453
+        },
+        {
+          "name": "Aerial batch · Period · 1829 Wings · 265",
+          "z": 21.700000762939453
+        }
+      ]
+    },
+    {
+      "side": -1,
+      "x": 30.7,
+      "y": 0.1,
+      "hits": [
+        {
+          "name": "Aerial batch · West semi-basement walk · 6",
+          "z": 21.700000762939453
+        },
+        {
+          "name": "Aerial batch · Period · 1829 Wings · 265",
+          "z": 21.700000762939453
+        }
+      ]
+    },
+    {
+      "side": -1,
+      "x": 30.7,
+      "y": 0.16,
+      "hits": [
+        {
+          "name": "Aerial batch · West semi-basement walk · 6",
+          "z": 21.700000762939453
+        },
+        {
+          "name": "Aerial batch · Period · 1829 Wings · 265",
+          "z": 21.700000762939453
+        }
+      ]
+    },
+    {
+      "side": 1,
+      "x": 30.12,
+      "y": -0.12,
+      "hits": [
+        {
+          "name": "Aerial batch · East semi-basement walk · 13",
+          "z": 21.700000762939453
+        },
+        {
+          "name": "Aerial batch · Period · 1829 Wings · 266",
+          "z": 21.700000762939453
+        }
+      ]
+    },
+    {
+      "side": 1,
+      "x": 30.12,
+      "y": -0.04,
+      "hits": [
+        {
+          "name": "Aerial batch · East semi-basement walk · 13",
+          "z": 21.700000762939453
+        },
+        {
+          "name": "Aerial batch · Period · 1829 Wings · 266",
+          "z": 21.700000762939453
+        }
+      ]
+    },
+    {
+      "side": 1,
+      "x": 30.12,
+      "y": 0.04,
+      "hits": [
+        {
+          "name": "Aerial batch · East semi-basement walk · 13",
+          "z": 21.700000762939453
+        },
+        {
+          "name": "Aerial batch · Period · 1829 Wings · 266",
+          "z": 21.700000762939453
+        }
+      ]
+    },
+    {
+      "side": 1,
+      "x": 30.12,
+      "y": 0.1,
+      "hits": [
+        {
+          "name": "Aerial batch · East semi-basement walk · 13",
+          "z": 21.700000762939453
+        },
+        {
+          "name": "Aerial batch · Period · 1829 Wings · 266",
+          "z": 21.700000762939453
+        }
+      ]
+    },
+    {
+      "side": 1,
+      "x": 30.12,
+      "y": 0.16,
+      "hits": [
+        {
+          "name": "Aerial batch · East semi-basement walk · 13",
+          "z": 21.700000762939453
+        },
+        {
+          "name": "Aerial batch · Period · 1829 Wings · 266",
+          "z": 21.700000762939453
+        }
+      ]
+    },
+    {
+      "side": 1,
+      "x": 30.3,
+      "y": -0.12,
+      "hits": [
+        {
+          "name": "Aerial batch · East semi-basement walk · 13",
+          "z": 21.700000762939453
+        },
+        {
+          "name": "Aerial batch · Period · 1829 Wings · 266",
+          "z": 21.700000762939453
+        }
+      ]
+    },
+    {
+      "side": 1,
+      "x": 30.3,
+      "y": -0.04,
+      "hits": [
+        {
+          "name": "Aerial batch · East semi-basement walk · 13",
+          "z": 21.700000762939453
+        },
+        {
+          "name": "Aerial batch · Period · 1829 Wings · 266",
+          "z": 21.700000762939453
+        }
+      ]
+    },
+    {
+      "side": 1,
+      "x": 30.3,
+      "y": 0.04,
+      "hits": [
+        {
+          "name": "Aerial batch · East semi-basement walk · 13",
+          "z": 21.700000762939453
+        },
+        {
+          "name": "Aerial batch · Period · 1829 Wings · 266",
+          "z": 21.700000762939453
+        }
+      ]
+    },
+    {
+      "side": 1,
+      "x": 30.3,
+      "y": 0.1,
+      "hits": [
+        {
+          "name": "Aerial batch · East semi-basement walk · 13",
+          "z": 21.700000762939453
+        },
+        {
+          "name": "Aerial batch · Period · 1829 Wings · 266",
+          "z": 21.700000762939453
+        }
+      ]
+    },
+    {
+      "side": 1,
+      "x": 30.3,
+      "y": 0.16,
+      "hits": [
+        {
+          "name": "Aerial batch · East semi-basement walk · 13",
+          "z": 21.700000762939453
+        },
+        {
+          "name": "Aerial batch · Period · 1829 Wings · 266",
+          "z": 21.700000762939453
+        }
+      ]
+    },
+    {
+      "side": 1,
+      "x": 30.5,
+      "y": -0.12,
+      "hits": [
+        {
+          "name": "Aerial batch · East semi-basement walk · 13",
+          "z": 21.700000762939453
+        },
+        {
+          "name": "Aerial batch · Period · 1829 Wings · 266",
+          "z": 21.700000762939453
+        }
+      ]
+    },
+    {
+      "side": 1,
+      "x": 30.5,
+      "y": -0.04,
+      "hits": [
+        {
+          "name": "Aerial batch · East semi-basement walk · 13",
+          "z": 21.700000762939453
+        },
+        {
+          "name": "Aerial batch · Period · 1829 Wings · 266",
+          "z": 21.700000762939453
+        }
+      ]
+    },
+    {
+      "side": 1,
+      "x": 30.5,
+      "y": 0.04,
+      "hits": [
+        {
+          "name": "Aerial batch · East semi-basement walk · 13",
+          "z": 21.700000762939453
+        },
+        {
+          "name": "Aerial batch · Period · 1829 Wings · 266",
+          "z": 21.700000762939453
+        }
+      ]
+    },
+    {
+      "side": 1,
+      "x": 30.5,
+      "y": 0.1,
+      "hits": [
+        {
+          "name": "Aerial batch · East semi-basement walk · 13",
+          "z": 21.700000762939453
+        },
+        {
+          "name": "Aerial batch · Period · 1829 Wings · 266",
+          "z": 21.700000762939453
+        }
+      ]
+    },
+    {
+      "side": 1,
+      "x": 30.5,
+      "y": 0.16,
+      "hits": [
+        {
+          "name": "Aerial batch · East semi-basement walk · 13",
+          "z": 21.700000762939453
+        },
+        {
+          "name": "Aerial batch · Period · 1829 Wings · 266",
+          "z": 21.700000762939453
+        }
+      ]
+    },
+    {
+      "side": 1,
+      "x": 30.7,
+      "y": -0.12,
+      "hits": [
+        {
+          "name": "Aerial batch · East semi-basement walk · 13",
+          "z": 21.700000762939453
+        },
+        {
+          "name": "Aerial batch · Period · 1829 Wings · 266",
+          "z": 21.700000762939453
+        }
+      ]
+    },
+    {
+      "side": 1,
+      "x": 30.7,
+      "y": -0.04,
+      "hits": [
+        {
+          "name": "Aerial batch · East semi-basement walk · 13",
+          "z": 21.700000762939453
+        },
+        {
+          "name": "Aerial batch · Period · 1829 Wings · 266",
+          "z": 21.700000762939453
+        }
+      ]
+    },
+    {
+      "side": 1,
+      "x": 30.7,
+      "y": 0.04,
+      "hits": [
+        {
+          "name": "Aerial batch · East semi-basement walk · 13",
+          "z": 21.700000762939453
+        },
+        {
+          "name": "Aerial batch · Period · 1829 Wings · 266",
+          "z": 21.700000762939453
+        }
+      ]
+    },
+    {
+      "side": 1,
+      "x": 30.7,
+      "y": 0.1,
+      "hits": [
+        {
+          "name": "Aerial batch · East semi-basement walk · 13",
+          "z": 21.700000762939453
+        },
+        {
+          "name": "Aerial batch · Period · 1829 Wings · 266",
+          "z": 21.700000762939453
+        }
+      ]
+    },
+    {
+      "side": 1,
+      "x": 30.7,
+      "y": 0.16,
+      "hits": [
+        {
+          "name": "Aerial batch · East semi-basement walk · 13",
+          "z": 21.700000762939453
+        },
+        {
+          "name": "Aerial batch · Period · 1829 Wings · 266",
+          "z": 21.700000762939453
+        }
+      ]
+    }
+  ],
+  "errors": []
+}

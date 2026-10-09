@@ -1,5 +1,6 @@
 import {readFile,mkdir,writeFile} from 'node:fs/promises';
 import {fileURLToPath} from 'node:url';
+import assert from 'node:assert/strict';
 import {startTestServer} from '../../test-support/server.mjs';
 import {launchHardwareBrowser} from '../../test-support/hardware-browser.mjs';
 const destination=new URL('./',import.meta.url);await mkdir(destination,{recursive:true});
@@ -32,9 +33,16 @@ try{
  });
  for(const mode of ['day','dusk','night']){
   await page.evaluate(mode=>groundsTest.exterior.lighting.setMode(mode),mode);
-  for(const [name,pose] of Object.entries({'gallery':[154.773125,-83,.6,.45],'gallery-north':[154.773125,-108,.65,.42],'hale':[145,-95.405,2.2,.45],'diagonal':[132,-141,1.4,.45]})){
+  for(const [name,pose] of Object.entries({'gallery':[154.773125,-83,.6,.45],'blank-wall':[154.773125,-30,.65,.5],'gallery-north':[154.773125,-108,.65,.42],'hale':[145,-95.405,2.2,.45],'diagonal':[132,-141,1.4,.45]})){
    await page.evaluate(p=>groundsTest.pose(...p),pose);await page.screenshot({path:fileURLToPath(new URL(stage+'-'+mode+'-'+name+'.png',destination))});
   }
  }
- await writeFile(new URL(stage+'.json',destination),JSON.stringify({report,errors},null,2));console.log(JSON.stringify({renderer:report.renderer,peak:Object.fromEntries(['day','dusk','night'].map(m=>[m,Math.max(...report[m].map(r=>r.gain))])),errors},null,2));
+ await page.setViewportSize({width:390,height:844});await page.evaluate(()=>new Promise(resolve=>requestAnimationFrame(()=>requestAnimationFrame(resolve))));await page.evaluate(()=>groundsTest.pose(154.773125,-30,.65,.5));await page.screenshot({path:fileURLToPath(new URL(stage+'-phone.png',destination))});
+ report.performance=await page.evaluate(()=>{
+  const t=groundsTest,w=t.grounds.workshops,gl=t.renderer.getContext(),samples={};
+  const measure=(name,frame)=>{const times=[];for(let i=0;i<30;i++){const begin=performance.now();frame(i);t.render();gl.finish();if(i>=10)times.push(performance.now()-begin);}times.sort((a,b)=>a-b);samples[name]={medianMs:times[10],draws:t.renderer.info.render.calls};};
+  t.pose(corridorX,-83,.6,.45);measure('still',()=>t.step(1/60));measure('walking',i=>t.pose(corridorX,-78-i*.3,.6,.45));
+  t.pose(corridorX,-40,Math.PI/2,-.08);w.setDoorOpen('workshop-door:repair',true);measure('door',()=>t.step(1/60));return {...samples,atlasBakes:w.lighting.bakes};
+ });
+ await writeFile(new URL(stage+'.json',destination),JSON.stringify({report,errors},null,2));assert.deepEqual(errors,[]);console.log(JSON.stringify({renderer:report.renderer,peak:Object.fromEntries(['day','dusk','night'].map(m=>[m,Math.max(...report[m].map(r=>r.gain))])),performance:report.performance,errors},null,2));
 }finally{await browser?.close();server.kill();}

@@ -2,9 +2,10 @@ import {GROUNDS_OUTLINE,GROUNDS_GATES} from './escape-grounds-state.mjs';
 import {createTowerWorkshops,TOWER_WORKSHOPS,WORKSHOP_DOOR_SECONDS} from './tower-workshops.mjs';
 import {createMaintenanceProps} from './maintenance-props.mjs';
 import {asylumSignTexture,asylumSignGeometry} from './asylum-sign-paint.mjs';
+import {createEscapeTower} from './escape-tower.mjs';
 
 // Runtime fittings and an accessible workshop interior for the Escape scenario.
-export function createEscapeGrounds(THREE,exterior,walker,progress,{noise=()=>{},creak=()=>{}}={}){
+export function createEscapeGrounds(THREE,exterior,walker,progress,{noise=()=>{},creak=()=>{},ambience=()=>{}}={}){
  const group=new THREE.Group();group.name='Escape grounds boundary and tool store';
  const run=progress.run,solids=[],buckets=new Map(),gates={},resources=new Set();
  const colors={hedge:0x344b32,leaf:0x40583a,brick:0x665046,stone:0xa09780,iron:0x424d45,wood:0x76604a,slate:0x424746,brass:0xb5a369};
@@ -12,6 +13,7 @@ export function createEscapeGrounds(THREE,exterior,walker,progress,{noise=()=>{}
  const cube=new THREE.BoxGeometry(1,1,1),matrix=new THREE.Matrix4(),q=new THREE.Quaternion(),v=new THREE.Vector3();resources.add(cube);
  const props=createMaintenanceProps(THREE,resources);
  const workshops=createTowerWorkshops(THREE,exterior,walker,resources,sign);solids.push(...workshops.solids);
+ const tower=createEscapeTower(THREE,exterior,walker,progress,{noise,creak,ambience});
  const obstacle=(x,z,w,d,h=3.4,blocksSight=true,minY=0)=>({minX:x-w/2,maxX:x+w/2,minZ:z-d/2,maxZ:z+d/2,minY,maxY:minY+h,blocksSight});
  function box(kind,size,position,{parent=null,angle=0,name=''}={}){
   if(parent){const m=new THREE.Mesh(cube,materials[kind]);m.scale.set(...size);m.position.set(...position);m.rotation.y=angle;m.name=name;m.castShadow=m.receiveShadow=true;m.userData.noWalkingCollision=true;parent.add(m);return m;}
@@ -56,16 +58,11 @@ export function createEscapeGrounds(THREE,exterior,walker,progress,{noise=()=>{}
  for(const x of [-4,4]){box('brick',[.5,3.6,.6],[x,1.8,66]);box('stone',[.6,.16,.7],[x,3.68,66]);solids.push(obstacle(x,66,.5,.6,3.76));}
  box('iron',[.12,3.3,.14],[0,1.7,66]);box('brass',[.4,.12,.14],[.1,1.35,65.88]);
  sign('NIGHT GATE · LOCKED\nPedestrian gate: west path',0,2.35,65.75,Math.PI,2.4);
- function sign(text,x,y,z,angle=0,width=1.5,{fontSize=30,centered=false,aged=false}={}){
-  if(aged){
-   const texture=asylumSignTexture(THREE,text.split('\n'),{name:text+' door sign'});resources.add(texture);
-   const mat=new THREE.MeshStandardMaterial({map:texture,roughness:.94});resources.add(mat);
-   const geometry=asylumSignGeometry(THREE,width,width*320/1024,.008);resources.add(geometry);
-   const m=new THREE.Mesh(geometry,mat);m.position.set(x,y,z);m.rotation.y=angle;m.userData.noWalkingCollision=true;group.add(m);return m;
-  }
-  const canvas=document.createElement('canvas');canvas.width=512;canvas.height=256;const c=canvas.getContext('2d');c.fillStyle='#d8ceb3';c.fillRect(0,0,512,256);c.strokeStyle='#776c56';c.lineWidth=12;c.strokeRect(8,8,496,240);c.fillStyle='#29382c';c.textAlign='center';c.font=`bold ${fontSize}px Georgia`;const lines=text.split('\n');if(centered)c.textBaseline='middle';lines.forEach((line,i)=>c.fillText(line,256,centered?128+(i-(lines.length-1)/2)*fontSize:64+i*48,470));
-  const texture=new THREE.CanvasTexture(canvas);texture.colorSpace=THREE.SRGBColorSpace;resources.add(texture);
-  const mat=new THREE.MeshBasicMaterial({map:texture,side:THREE.DoubleSide});resources.add(mat);const geometry=new THREE.PlaneGeometry(width,width/2);resources.add(geometry);const m=new THREE.Mesh(geometry,mat);m.position.set(x,y,z);m.rotation.y=angle;m.userData.noWalkingCollision=true;group.add(m);return m;
+ function sign(text,x,y,z,angle=0,width=1.5){
+  const texture=asylumSignTexture(THREE,text.split('\n'),{name:text+' sign'});resources.add(texture);
+  const mat=new THREE.MeshStandardMaterial({map:texture,roughness:.94});resources.add(mat);
+  const geometry=asylumSignGeometry(THREE,width,width*320/1024,.008);resources.add(geometry);
+  const m=new THREE.Mesh(geometry,mat);m.name=text.split('\n')[0]+' sign';m.position.set(x,y,z);m.rotation.y=angle;m.userData.noWalkingCollision=true;group.add(m);return m;
  }
  for(const [id,g] of Object.entries(GROUNDS_GATES)){
   for(const x of [g.x-g.width/2-.2,g.x+g.width/2+.2]){box('brick',[.42,3.65,.58],[x,1.825,g.z]);box('stone',[.52,.16,.68],[x,3.73,g.z]);solids.push(obstacle(x,g.z,.42,.58,3.81));}
@@ -77,7 +74,7 @@ export function createEscapeGrounds(THREE,exterior,walker,progress,{noise=()=>{}
   const boards=new THREE.Group();boards.name='Wicket retaining boards';pivot.add(boards);
   if(id==='wicket')props.wicket(pivot,boards,w);
   gates[id]={...g,pivot,boards};
-  const notice=sign(id==='pedestrian'?'PEDESTRIAN GATE\nPlease close quietly':'MAINTENANCE WICKET\nBoards need prising off',w/2,id==='pedestrian'?2.45:2.05,.23,0,id==='pedestrian'?1.5:1.6);pivot.add(notice);
+  const notice=sign(id==='pedestrian'?'PEDESTRIAN GATE\nPlease close quietly':'Maintenance wicket',w/2,id==='pedestrian'?2.45:2.05,.23,0,id==='pedestrian'?1.5:1.6);pivot.add(notice);
  }
  const crowbar=props.crowbar(),oil=props.oilCan();
  oil.rotation.y=Math.PI/2;
@@ -98,7 +95,7 @@ export function createEscapeGrounds(THREE,exterior,walker,progress,{noise=()=>{}
  function sync({snapDoors=true}={}){
   crowbar.visible=!run.crowbar;oil.visible=!run.oil;
   if(snapDoors)workshops.sync(!!run.towerOpen,run.workshopDoors);
-  const blocks=[...solids,workshops.doorObstacle(),...workshops.roomDoorObstacles()];
+  tower?.sync({snapDoor:snapDoors});const blocks=[...solids,workshops.doorObstacle(),...workshops.roomDoorObstacles(),...(tower?.obstacles()??[])];
   for(const [id,g] of Object.entries(gates)){
    const open=run[id+'Open'];g.pivot.rotation.y=open?-Math.PI/2:0;g.boards.visible=id==='wicket'&&!open;
    blocks.push(open?obstacle(g.x-g.width/2,g.z+g.width/2,.15,g.width,3.4,false):obstacle(g.x,g.z,g.width,.24,3.4,id==='wicket'));
@@ -107,17 +104,20 @@ export function createEscapeGrounds(THREE,exterior,walker,progress,{noise=()=>{}
  }
  function near(actor){
   if(!actor.outside)return null;
+  const towerNode=tower?.near(actor);if(towerNode)return towerNode;
   return nodes.filter(n=>(n.id!=='crowbar'||!run.crowbar)&&(n.id!=='oil'||!run.oil)&&(!gates[n.id]||!run[n.id+'Open'])&&Math.hypot(actor.x-(n.id==='tower-door'?TOWER_WORKSHOPS.entrance.x:n.x),actor.z-n.z)<1.85&&Math.abs((actor.y??0))<.7&&(['crowbar','oil'].includes(n.id)?[.2,.4,.6,.8].every(t=>walker.clearSight(actor.x+(n.x-actor.x)*t,actor.z+(n.z-actor.z)*t,.8)):true)).sort((a,b)=>Math.hypot(actor.x-a.x,actor.z-a.z)-Math.hypot(actor.x-b.x,actor.z-b.z))[0];
  }
  const isDoor=n=>n&&(n.id==='tower-door'||n.id.startsWith('workshop-door:'));
  function action(n){return isDoor(n)?workshops.isOpen(n.id)?'CLOSE':'OPEN':'USE';}
  function inspect(n){
+  if(tower?.nodes.includes(n)){tower.inspect(n);return;}
   if(gates[n.id]&&run[n.id+'Open'])return;
   if(n.id==='night-gate')note(n.id,n.title,'The carriage gate is locked for the night. Its notice directs pedestrians along the west perimeter path to the north gate.',n);
   if(n.id==='pedestrian')note(n.id,n.title,'The pedestrian gate is unlatched, but its hinges squeak. I can watch the patrol and slip through; oil would quiet the hinges.',n);
-  if(n.id==='wicket')note(n.id,n.title,'Boards hold this maintenance wicket closed. A crowbar could prise them off. The work would be noisy. Tools are inside the water tower workshops to the east. Use the blue stores door beside the tower.',n);
+  if(n.id==='wicket')note(n.id,n.title,'Boards need prising off to open this maintenance wicket. A crowbar could prise them off. The work would be noisy. Tools are inside the water tower workshops to the east. Use the blue stores door beside the tower.',n);
  }
  function use(n){
+  if(tower?.nodes.includes(n))return tower.use(n);
   inspect(n);
   if(n.id.startsWith('corridor-lock:'))return 'These double doors are locked. This section is closed.';
   if(isDoor(n)){
@@ -129,7 +129,7 @@ export function createEscapeGrounds(THREE,exterior,walker,progress,{noise=()=>{}
   }
   if(n.id==='night-gate')return 'Locked for the night. Follow the west path to the pedestrian gate, or investigate the maintenance wicket.';
   if(n.id==='crowbar'||n.id==='oil'){
-   run[n.id]=true;note(n.id,n.title,n.id==='crowbar'?'I took a crowbar from the repair bench inside the water tower workshops. It can remove the boards from the north maintenance wicket.':'I took an oil can from the oil and parts store inside the water tower workshops. It can quiet the pedestrian gate.',n);sync({snapDoors:false});return n.id==='crowbar'?'Crowbar taken. The boarded wicket is along the north boundary.':'Oil can taken. It will quiet the pedestrian gate.';
+   run[n.id]=true;note(n.id,n.title,n.id==='crowbar'?'I took a crowbar from the repair bench inside the water tower workshops. It can remove the boards from the north maintenance wicket or free the retaining bar on the tower hatch in the entrance vestibule.':'I took an oil can from the oil and parts store inside the water tower workshops. It can quiet the pedestrian gate and the stiff tower hatch.',n);sync({snapDoors:false});return n.id==='crowbar'?'Crowbar taken. It can free the tower hatch or the boarded wicket.':'Oil can taken. It quiets the tower hatch and pedestrian gate.';
   }
   if(n.id==='pedestrian'){
    run.pedestrianOpen=true;if(!run.oil)noise({x:n.x,z:n.z+1},48,'squeak');
@@ -138,6 +138,7 @@ export function createEscapeGrounds(THREE,exterior,walker,progress,{noise=()=>{}
   return run.crowbar?'Hold E to prise off the boards.':'These boards need a crowbar. Enter the blue stores door beside the water tower.';
  }
  function workOn(n,held,dt){
+  const towerWorked=tower?.workOn(n,held,dt);if(towerWorked){sync({snapDoors:false});return towerWorked;}
   if(n?.id!=='wicket'||!held||!run.crowbar||run.wicketOpen){work=0;working=null;knock=0;return null;}
   if(working!==n.id){working=n.id;noise({x:n.x,z:n.z+1},65,'pry');}
   work+=dt;knock+=dt;if(knock>=1){knock=0;noise({x:n.x,z:n.z+1},65,'pry');}
@@ -145,5 +146,5 @@ export function createEscapeGrounds(THREE,exterior,walker,progress,{noise=()=>{}
   run.wicketOpen=true;note(n.id,'Maintenance wicket opened','I prised off the boards and opened the wicket. It remains open, even if I am caught.',n);sync({snapDoors:false});work=0;working=null;return 'The boards come free. The maintenance wicket is open.';
  }
  sync();
- return {group,nodes,gates,solids,workshops,near,inspect,use,action,workOn,sync,update(dt,actor){if(workshops.update(dt,actor))sync({snapDoors:false});},get work(){return work},dispose(){walker.setObstacles([]);group.removeFromParent();workshops.dispose();group.traverse(o=>{if(o.isInstancedMesh)o.dispose();});for(const r of resources)r.dispose();for(const m of Object.values(materials))m.dispose();exterior.invalidateShadows();}};
+ return {group,nodes,gates,solids,workshops,tower,near,inspect,use,action,workOn,sync,update(dt,actor){const towerChanged=tower?.update(dt,actor),workshopsChanged=workshops.update(dt,actor);if(towerChanged||workshopsChanged)sync({snapDoors:false});},get work(){return work||(tower?.work??0)},dispose(){walker.setObstacles([]);group.removeFromParent();tower?.dispose();workshops.dispose();group.traverse(o=>{if(o.isInstancedMesh)o.dispose();});for(const r of resources)r.dispose();for(const m of Object.values(materials))m.dispose();exterior.invalidateShadows();}};
 }

@@ -1,0 +1,934 @@
+{
+  "results": {
+    "renderer": "ANGLE (NVIDIA, NVIDIA GeForce RTX 3090 Ti (0x00002203) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+    "cx": 154.773125,
+    "doors": [
+      {
+        "id": "corridor-lock:gallery:0",
+        "clear": false
+      },
+      {
+        "id": "corridor-lock:gallery:1",
+        "clear": false
+      },
+      {
+        "id": "corridor-lock:admin:0",
+        "clear": false
+      },
+      {
+        "id": "corridor-lock:irby:1",
+        "clear": false
+      },
+      {
+        "id": "corridor-lock:diagonal:1",
+        "clear": false
+      },
+      {
+        "id": "corridor-lock:grafton:1",
+        "clear": false
+      },
+      {
+        "id": "corridor-lock:witby:1",
+        "clear": false
+      },
+      {
+        "id": "corridor-lock:hale-0:1",
+        "clear": false
+      },
+      {
+        "id": "corridor-lock:hale-1:1",
+        "clear": false
+      }
+    ],
+    "signs": [
+      {
+        "id": "admin",
+        "run": "gallery",
+        "point": [
+          154.773125,
+          7
+        ],
+        "forward": [
+          0,
+          1
+        ],
+        "routes": [
+          [
+            "Main/admin",
+            [
+              0,
+              1
+            ]
+          ],
+          [
+            "Redesmere",
+            [
+              -1,
+              0
+            ]
+          ],
+          [
+            "Hospital kitchen",
+            [
+              -1,
+              0
+            ]
+          ]
+        ],
+        "lines": [
+          "↑  Main/admin",
+          "→  Redesmere",
+          "→  Hospital kitchen"
+        ],
+        "backLines": [
+          "↑  Farndon",
+          "↑  Tower workshops",
+          "↑  Irby / Ashley",
+          "←  Redesmere"
+        ],
+        "backRoutes": [
+          [
+            "Farndon",
+            [
+              0,
+              -1
+            ]
+          ],
+          [
+            "Tower workshops",
+            [
+              0,
+              -1
+            ]
+          ],
+          [
+            "Irby / Ashley",
+            [
+              0,
+              -1
+            ]
+          ],
+          [
+            "Redesmere",
+            [
+              -1,
+              0
+            ]
+          ]
+        ]
+      },
+      {
+        "id": "workshops",
+        "run": "gallery",
+        "point": [
+          154.773125,
+          -38.5
+        ],
+        "forward": [
+          0,
+          -1
+        ],
+        "routes": [
+          [
+            "Farndon",
+            [
+              0,
+              -1
+            ]
+          ],
+          [
+            "Irby / Ashley",
+            [
+              0,
+              -1
+            ]
+          ],
+          [
+            "Repair workshop",
+            [
+              -1,
+              0
+            ]
+          ],
+          [
+            "Machine workshop",
+            [
+              1,
+              0
+            ]
+          ]
+        ],
+        "lines": [
+          "↑  Farndon",
+          "↑  Irby / Ashley",
+          "←  Repair workshop",
+          "→  Machine workshop"
+        ],
+        "backLines": [
+          "↑  Main/admin",
+          "↑  Redesmere",
+          "→  Repair workshop",
+          "←  Machine workshop"
+        ],
+        "backRoutes": [
+          [
+            "Main/admin",
+            [
+              0,
+              1
+            ]
+          ],
+          [
+            "Redesmere",
+            [
+              0,
+              1
+            ]
+          ],
+          [
+            "Repair workshop",
+            [
+              -1,
+              0
+            ]
+          ],
+          [
+            "Machine workshop",
+            [
+              1,
+              0
+            ]
+          ]
+        ]
+      },
+      {
+        "id": "irby-west",
+        "run": "gallery",
+        "point": [
+          154.773125,
+          -69.5
+        ],
+        "forward": [
+          0,
+          1
+        ],
+        "routes": [
+          [
+            "Tower workshops",
+            [
+              0,
+              1
+            ]
+          ],
+          [
+            "Main/admin",
+            [
+              0,
+              1
+            ]
+          ],
+          [
+            "Irby / Ashley",
+            [
+              1,
+              0
+            ]
+          ]
+        ],
+        "lines": [
+          "↑  Tower workshops",
+          "↑  Main/admin",
+          "←  Irby / Ashley"
+        ],
+        "backLines": [
+          "↑  Farndon",
+          "↑  Hale / Daresbury",
+          "→  Irby / Ashley"
+        ],
+        "backRoutes": [
+          [
+            "Farndon",
+            [
+              0,
+              -1
+            ]
+          ],
+          [
+            "Hale / Daresbury",
+            [
+              0,
+              -1
+            ]
+          ],
+          [
+            "Irby / Ashley",
+            [
+              1,
+              0
+            ]
+          ]
+        ]
+      },
+      {
+        "id": "irby-east",
+        "run": "irby",
+        "point": [
+          158.773125,
+          -66.6
+        ],
+        "forward": [
+          -1,
+          0
+        ],
+        "routes": [
+          [
+            "Tower workshops",
+            [
+              0,
+              1
+            ]
+          ],
+          [
+            "Farndon",
+            [
+              0,
+              -1
+            ]
+          ],
+          [
+            "Hale / Daresbury",
+            [
+              0,
+              -1
+            ]
+          ]
+        ],
+        "lines": [
+          "←  Tower workshops",
+          "→  Farndon",
+          "→  Hale / Daresbury"
+        ],
+        "backLines": [
+          "↑  Irby / Ashley",
+          "→  Tower workshops",
+          "←  Farndon"
+        ],
+        "backRoutes": [
+          [
+            "Irby / Ashley",
+            [
+              1,
+              0
+            ]
+          ],
+          [
+            "Tower workshops",
+            [
+              0,
+              1
+            ]
+          ],
+          [
+            "Farndon",
+            [
+              0,
+              -1
+            ]
+          ]
+        ]
+      },
+      {
+        "id": "hale",
+        "run": "hale-1",
+        "point": [
+          142,
+          -95.405
+        ],
+        "forward": [
+          1,
+          0
+        ],
+        "routes": [
+          [
+            "Farndon",
+            [
+              0,
+              -1
+            ]
+          ],
+          [
+            "Tower workshops",
+            [
+              0,
+              1
+            ]
+          ],
+          [
+            "Irby / Ashley",
+            [
+              0,
+              1
+            ]
+          ]
+        ],
+        "lines": [
+          "←  Farndon",
+          "→  Tower workshops",
+          "→  Irby / Ashley"
+        ],
+        "backLines": [
+          "↑  Hale / Daresbury / Huxley / Dunham",
+          "→  Farndon",
+          "←  Tower workshops"
+        ],
+        "backRoutes": [
+          [
+            "Hale / Daresbury / Huxley / Dunham",
+            [
+              -1,
+              0
+            ]
+          ],
+          [
+            "Farndon",
+            [
+              0,
+              -1
+            ]
+          ],
+          [
+            "Tower workshops",
+            [
+              0,
+              1
+            ]
+          ]
+        ]
+      },
+      {
+        "id": "farndon",
+        "run": "gallery",
+        "point": [
+          154.773125,
+          -122
+        ],
+        "forward": [
+          0,
+          1
+        ],
+        "routes": [
+          [
+            "Main/admin",
+            [
+              0,
+              1
+            ]
+          ],
+          [
+            "Tower workshops",
+            [
+              0,
+              1
+            ]
+          ],
+          [
+            "Upton / Frith / Oscroft",
+            [
+              -1,
+              0
+            ]
+          ],
+          [
+            "Grafton / Edge",
+            [
+              -1,
+              0
+            ]
+          ]
+        ],
+        "lines": [
+          "↑  Main/admin",
+          "↑  Tower workshops",
+          "→  Upton / Frith / Oscroft",
+          "→  Grafton / Edge"
+        ],
+        "backLines": [
+          "↑  Farndon",
+          "←  Upton / Frith / Oscroft",
+          "←  Grafton / Edge"
+        ],
+        "backRoutes": [
+          [
+            "Farndon",
+            [
+              0,
+              -1
+            ]
+          ],
+          [
+            "Upton / Frith / Oscroft",
+            [
+              -1,
+              0
+            ]
+          ],
+          [
+            "Grafton / Edge",
+            [
+              -1,
+              0
+            ]
+          ]
+        ]
+      },
+      {
+        "id": "grafton-spine",
+        "run": "diagonal",
+        "point": [
+          133,
+          -140.4
+        ],
+        "forward": [
+          -0.7071067811865476,
+          -0.7071067811865476
+        ],
+        "routes": [
+          [
+            "Grafton / Edge",
+            [
+              -1,
+              0
+            ]
+          ],
+          [
+            "Witby",
+            [
+              -1,
+              -1
+            ]
+          ],
+          [
+            "Upton / Frith / Oscroft",
+            [
+              -1,
+              -1
+            ]
+          ]
+        ],
+        "lines": [
+          "←  Grafton / Edge",
+          "↑  Witby",
+          "↑  Upton / Frith / Oscroft"
+        ],
+        "backLines": [
+          "↑  Farndon",
+          "↑  Tower workshops",
+          "→  Grafton / Edge"
+        ],
+        "backRoutes": [
+          [
+            "Farndon",
+            [
+              1,
+              1
+            ]
+          ],
+          [
+            "Tower workshops",
+            [
+              1,
+              1
+            ]
+          ],
+          [
+            "Grafton / Edge",
+            [
+              -1,
+              0
+            ]
+          ]
+        ]
+      },
+      {
+        "id": "grafton-branch",
+        "run": "grafton",
+        "point": [
+          126,
+          -142.88972881355932
+        ],
+        "forward": [
+          1,
+          0
+        ],
+        "routes": [
+          [
+            "Farndon",
+            [
+              1,
+              1
+            ]
+          ],
+          [
+            "Witby",
+            [
+              -1,
+              -1
+            ]
+          ],
+          [
+            "Upton / Frith / Oscroft",
+            [
+              -1,
+              -1
+            ]
+          ]
+        ],
+        "lines": [
+          "→  Farndon",
+          "←  Witby",
+          "←  Upton / Frith / Oscroft"
+        ],
+        "backLines": [
+          "←  Farndon",
+          "→  Witby",
+          "→  Upton / Frith / Oscroft"
+        ],
+        "backRoutes": [
+          [
+            "Farndon",
+            [
+              1,
+              1
+            ]
+          ],
+          [
+            "Witby",
+            [
+              -1,
+              -1
+            ]
+          ],
+          [
+            "Upton / Frith / Oscroft",
+            [
+              -1,
+              -1
+            ]
+          ]
+        ]
+      },
+      {
+        "id": "witby",
+        "run": "diagonal",
+        "point": [
+          118.5,
+          -154.9
+        ],
+        "forward": [
+          -0.7071067811865476,
+          -0.7071067811865476
+        ],
+        "routes": [
+          [
+            "Witby",
+            [
+              0,
+              -1
+            ]
+          ],
+          [
+            "Upton",
+            [
+              -1,
+              -1
+            ]
+          ],
+          [
+            "Frith / Oscroft",
+            [
+              -1,
+              -1
+            ]
+          ]
+        ],
+        "lines": [
+          "→  Witby",
+          "↑  Upton",
+          "↑  Frith / Oscroft"
+        ],
+        "backLines": [
+          "↑  Farndon",
+          "↑  Grafton / Edge",
+          "←  Witby"
+        ],
+        "backRoutes": [
+          [
+            "Farndon",
+            [
+              1,
+              1
+            ]
+          ],
+          [
+            "Grafton / Edge",
+            [
+              1,
+              1
+            ]
+          ],
+          [
+            "Witby",
+            [
+              0,
+              -1
+            ]
+          ]
+        ]
+      }
+    ],
+    "walks": [
+      {
+        "id": "gallery",
+        "samples": 1333
+      },
+      {
+        "id": "admin",
+        "samples": 2281
+      },
+      {
+        "id": "irby",
+        "samples": 2214
+      },
+      {
+        "id": "diagonal",
+        "samples": 3488
+      },
+      {
+        "id": "grafton",
+        "samples": 1220
+      },
+      {
+        "id": "witby",
+        "samples": 1219
+      },
+      {
+        "id": "hale-0",
+        "samples": 2556
+      },
+      {
+        "id": "hale-1",
+        "samples": 665
+      }
+    ],
+    "keyboardDoors": [
+      {
+        "id": "corridor-lock:gallery:0",
+        "position": {
+          "x": 154.773125,
+          "z": 24.091199999999965,
+          "floor": 0,
+          "y": 0,
+          "stair": null,
+          "outside": true,
+          "verticalTrend": 0
+        },
+        "message": "These double doors are locked. This section is closed."
+      },
+      {
+        "id": "corridor-lock:gallery:1",
+        "position": {
+          "x": 154.773125,
+          "z": -125.69119999999995,
+          "floor": 0,
+          "y": 0,
+          "stair": null,
+          "outside": true,
+          "verticalTrend": 0
+        },
+        "message": "These double doors are locked. This section is closed."
+      },
+      {
+        "id": "corridor-lock:admin:0",
+        "position": {
+          "x": 121.80880000000005,
+          "z": 9.8,
+          "floor": 0,
+          "y": 0,
+          "stair": null,
+          "outside": true,
+          "verticalTrend": 0
+        },
+        "message": "These double doors are locked. This section is closed."
+      },
+      {
+        "id": "corridor-lock:irby:1",
+        "position": {
+          "x": 209.69119999999998,
+          "z": -66.6,
+          "floor": 0,
+          "y": 0,
+          "stair": null,
+          "outside": true,
+          "verticalTrend": 0
+        },
+        "message": "These double doors are locked. This section is closed."
+      },
+      {
+        "id": "corridor-lock:diagonal:1",
+        "position": {
+          "x": 100.2008183258569,
+          "z": -173.13780480553612,
+          "floor": 0,
+          "y": 0,
+          "stair": null,
+          "outside": true,
+          "verticalTrend": 0
+        },
+        "message": "These double doors are locked. This section is closed."
+      },
+      {
+        "id": "corridor-lock:grafton:1",
+        "position": {
+          "x": 106.30880000000005,
+          "z": -142.88972881355932,
+          "floor": 0,
+          "y": 0,
+          "stair": null,
+          "outside": true,
+          "verticalTrend": 0
+        },
+        "message": "These double doors are locked. This section is closed."
+      },
+      {
+        "id": "corridor-lock:witby:1",
+        "position": {
+          "x": 115.60000000000001,
+          "z": -186.69119999999998,
+          "floor": 0,
+          "y": 0,
+          "stair": null,
+          "outside": true,
+          "verticalTrend": 0
+        },
+        "message": "These double doors are locked. This section is closed."
+      },
+      {
+        "id": "corridor-lock:hale-0:1",
+        "position": {
+          "x": 147.9088,
+          "z": -72.855,
+          "floor": 0,
+          "y": 0,
+          "stair": null,
+          "outside": true,
+          "verticalTrend": 0
+        },
+        "message": "These double doors are locked. This section is closed."
+      },
+      {
+        "id": "corridor-lock:hale-1:1",
+        "position": {
+          "x": 139.9088,
+          "z": -95.405,
+          "floor": 0,
+          "y": 0,
+          "stair": null,
+          "outside": true,
+          "verticalTrend": 0
+        },
+        "message": "These double doors are locked. This section is closed."
+      }
+    ],
+    "retryWalks": [
+      {
+        "id": "gallery",
+        "samples": 1333
+      },
+      {
+        "id": "admin",
+        "samples": 2281
+      },
+      {
+        "id": "irby",
+        "samples": 2214
+      },
+      {
+        "id": "diagonal",
+        "samples": 3488
+      },
+      {
+        "id": "grafton",
+        "samples": 1220
+      },
+      {
+        "id": "witby",
+        "samples": 1219
+      },
+      {
+        "id": "hale-0",
+        "samples": 2556
+      },
+      {
+        "id": "hale-1",
+        "samples": 665
+      }
+    ],
+    "irbySurfaces": [
+      {
+        "name": "Workshop arched painted lining",
+        "parent": "Workshop exterior with semicircular windows",
+        "point": [
+          153.20500000178814,
+          4.996717401643803,
+          -69.70207811409861
+        ]
+      },
+      {
+        "name": "Connected escape corridor ceiling",
+        "parent": "Tower corridor and three workshops",
+        "point": [
+          153.18003411300083,
+          5.050000000000007,
+          -69.64161195512884
+        ]
+      },
+      {
+        "name": "Workshop arched exterior masonry",
+        "parent": "Workshop exterior with semicircular windows",
+        "point": [
+          153.15749999463557,
+          5.0980926751054,
+          -69.58703542493103
+        ]
+      },
+      {
+        "name": "Roof underside: North tower range slate roof",
+        "parent": "Tower service buildings",
+        "point": [
+          150.9512762455976,
+          9.806650616114576,
+          -64.24366964017428
+        ]
+      }
+    ],
+    "irbyCeiling": [
+      {
+        "name": "Connected escape corridor ceiling",
+        "point": [
+          154.773125,
+          5.050000000000004,
+          -72
+        ]
+      },
+      {
+        "name": "Roof underside: North tower range slate roof",
+        "point": [
+          154.773125,
+          10.643267326309141,
+          -72
+        ]
+      }
+    ]
+  },
+  "errors": []
+}

@@ -7,7 +7,9 @@ export function closeGroundEdges(THREE,root,groundY=-.15,{visibilityObjects=[]}=
  root.updateWorldMatrix(true,true);
  const surfaces=[];
  root.traverse(mesh=>{
-  if(!mesh.isMesh||mesh.isInstancedMesh||mesh.userData.groundContact||mesh.userData.groundContactClosed)return;
+  // Road-end decals fade through to the lawn and gravel slopes into it. An
+  // opaque supporting skirt would put a hard edge back around that transition.
+  if(!mesh.isMesh||mesh.isInstancedMesh||mesh.userData.groundContact||mesh.userData.groundContactClosed||mesh.userData.roadEndFade)return;
   const material=mesh.material;
   if(Array.isArray(material)||!(material.userData.estateSurface||material.userData.estateGrass||material.color?.getHex()===ROAD_STYLE.edge))return;
   const g=mesh.geometry;if(!g.boundingBox)g.computeBoundingBox();
@@ -36,6 +38,7 @@ export function closeGroundEdges(THREE,root,groundY=-.15,{visibilityObjects=[]}=
   for(const {a,b,count} of edges.values()){
    if(count!==1)continue;
    const top=[a,b].map(i=>new THREE.Vector3().fromBufferAttribute(p,i));
+   if(g.userData.openGroundEdges?.some(([x,z,dx,dz])=>top.every(v=>Math.abs((v.x-x)*dx+(v.z-z)*dz)<1e-4)))continue;
    const bottom=top.map(v=>{const q=v.clone().applyMatrix4(mesh.matrixWorld);q.y=groundY-.02;return q.applyMatrix4(inverse);});
    const width=top[0].clone().applyMatrix4(mesh.matrixWorld).distanceTo(top[1].clone().applyMatrix4(mesh.matrixWorld))/12;
    const height=top.map((v,i)=>v.clone().applyMatrix4(mesh.matrixWorld).distanceTo(bottom[i].clone().applyMatrix4(mesh.matrixWorld))/12);

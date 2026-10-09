@@ -10,7 +10,8 @@ const instrument=`
 window.lockTest={get ready(){return ready&&(interiorLoader?.complete??true)},get world(){return escapeWorld},get progress(){return escapeProgress},get grounds(){return escapeGrounds},
 begin(){window.__manual=true;start();arrivalCutscene.update(3);enemyReleaseAt=Infinity;state='play';keys.clear();document.getElementById('result').hidden=true;uiPlaying(true)},
 sync:syncEscapeWorld,
-snapshot(){return escapeWorld.doorLocks.map(d=>({floor:d.floor,id:d.exit.id,visible:d.group.visible,locked:escapeProgress.doorLocked(d.exit)}))},
+snapshot(){return escapeWorld.doorLocks.map(d=>({floor:d.floor,id:d.exit.id,x:d.exit.x,visible:d.group.visible,locked:escapeProgress.doorLocked(d.exit)}))},
+westRoundTrips(){return escapeWorld.doorLocks.filter(d=>d.exit.x<0).map(d=>{const exit={...d.exit,floor:d.floor};Object.assign(player,{...exit.inside,floor:d.floor,y:floors[d.floor].elevation,outside:false,stair:null});showFloor();const allowed=useDoor(exit),outside=player.outside;useDoor(exit);return {floor:d.floor,id:exit.id,allowed,outside,returned:!player.outside&&player.floor===d.floor}})},
 lockCount(){return floorGroups.reduce((n,g)=>{g.traverse(o=>{if(o.userData.doorLock)n++});return n},0)},
 view(floor,id,detail=false){const d=escapeWorld.doorLocks.find(d=>d.floor===floor&&d.exit.id===id),normal=new THREE.Vector3(d.exit.axis==='x'?-d.exit.facing:0,0,d.exit.axis==='z'?-d.exit.facing:0);const target=d.group.position.clone();target.y=floors[floor].elevation+1.48;this.draw(target,normal,detail?1.35:2.5,false,floor)},
 gate(){const g=escapeWorld.gates[0];this.draw(new THREE.Vector3(g.x,g.y+1.1,g.z),new THREE.Vector3(-g.dx,0,-g.dz),2.2,false,1)},
@@ -37,10 +38,11 @@ try{
  await capture('staff-grille',()=>lockTest.gate());
  results.attempt=await page.evaluate(()=>lockTest.tryLocked());assert(!results.attempt.allowed&&results.attempt.visible);assert.match(results.attempt.message,/Bolted|Locked/);
  await page.evaluate(()=>{lockTest.progress.interact('plan');lockTest.sync()});
- results.key=await page.evaluate(()=>lockTest.snapshot());assert.equal(results.key.filter(d=>!d.visible).length,1);assert(results.key.every(d=>d.visible===d.locked));
+ results.key=await page.evaluate(()=>lockTest.snapshot());const keyExit=await page.evaluate(()=>lockTest.progress.run.exitId);const keyCount=results.key.filter(d=>d.x<0||d.id===keyExit).length;assert.equal(results.key.filter(d=>!d.visible).length,keyCount);assert(results.key.every(d=>d.visible===d.locked));
+ results.westTrips=await page.evaluate(()=>lockTest.westRoundTrips());assert(results.westTrips.every(d=>d.allowed&&d.outside&&d.returned),'Actual west-side door transitions work on all floors');assert.deepEqual([...new Set(results.westTrips.map(d=>d.floor))].sort(),[0,1,2,3]);
  await capture('service-door-unlocked',()=>lockTest.view(0,lockTest.progress.run.exitId));
  await page.evaluate(()=>{lockTest.progress.capture();lockTest.sync()});assert((await page.evaluate(()=>lockTest.snapshot())).every(d=>d.visible));
- await page.evaluate(()=>{lockTest.progress.interact('reclaim');lockTest.sync()});assert.equal((await page.evaluate(()=>lockTest.snapshot())).filter(d=>!d.visible).length,1);
+ await page.evaluate(()=>{lockTest.progress.interact('reclaim');lockTest.sync()});assert.equal((await page.evaluate(()=>lockTest.snapshot())).filter(d=>!d.visible).length,keyCount);
  await page.keyboard.press('-');await page.keyboard.press('u');assert((await page.evaluate(()=>lockTest.snapshot())).every(d=>!d.visible));
  await capture('reception-unlocked',()=>lockTest.view(0,'D1'));
  results.corridors=await page.evaluate(()=>{

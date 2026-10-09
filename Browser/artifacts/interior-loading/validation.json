@@ -11,52 +11,47 @@
           {
             "section": "shared-library",
             "stage": "upload",
-            "milliseconds": 9.5
+            "milliseconds": 9.299999999813735
           },
           {
             "section": "shared-library",
             "stage": "upload",
-            "milliseconds": 33.90000000037253
+            "milliseconds": 43.799999999813735
           },
           {
             "section": "0-central",
             "stage": "restore",
-            "milliseconds": 1.5
+            "milliseconds": 1.7000000001862645
           },
           {
             "section": "0-central",
             "stage": "graphics",
-            "milliseconds": 156.7000000011176
+            "milliseconds": 188.10000000009313
           },
           {
             "section": "0-central",
             "stage": "furniture",
-            "milliseconds": 3.900000000372529
+            "milliseconds": 4.300000000279397
           },
           {
             "section": "0-central",
             "stage": "upload",
-            "milliseconds": 17.799999998882413
+            "milliseconds": 23.700000000186265
           },
           {
             "section": "0-central",
             "stage": "upload",
-            "milliseconds": 14.900000000372529
+            "milliseconds": 19.899999999906868
           },
           {
             "section": "0-central",
             "stage": "upload",
-            "milliseconds": 14.599999999627471
+            "milliseconds": 26
           },
           {
             "section": "0-central",
             "stage": "upload",
-            "milliseconds": 6
-          },
-          {
-            "section": "0-central",
-            "stage": "upload",
-            "milliseconds": 23.199999999254942
+            "milliseconds": 14.700000000186265
           },
           {
             "section": "0-central",
@@ -66,32 +61,47 @@
           {
             "section": "0-central",
             "stage": "upload",
-            "milliseconds": 6.099999999627471
+            "milliseconds": 27.200000000186265
           },
           {
             "section": "0-central",
             "stage": "upload",
-            "milliseconds": 150.90000000037253
+            "milliseconds": 6.2000000001862645
           },
           {
             "section": "0-central",
             "stage": "upload",
-            "milliseconds": 3.299999998882413
+            "milliseconds": 6
+          },
+          {
+            "section": "0-central",
+            "stage": "upload",
+            "milliseconds": 6
+          },
+          {
+            "section": "0-central",
+            "stage": "upload",
+            "milliseconds": 110.70000000018626
+          },
+          {
+            "section": "0-central",
+            "stage": "upload",
+            "milliseconds": 3.2000000001862645
           },
           {
             "section": "0-west",
             "stage": "restore",
-            "milliseconds": 0.6999999992549419
+            "milliseconds": 0.7000000001862645
           },
           {
             "section": "0-west",
             "stage": "restore",
-            "milliseconds": 0.19999999925494194
+            "milliseconds": 0.6000000000931323
           },
           {
             "section": "0-west",
             "stage": "graphics",
-            "milliseconds": 0.30000000074505806
+            "milliseconds": 0.2999999998137355
           },
           {
             "section": "0-west",
@@ -101,195 +111,205 @@
           {
             "section": "0-west",
             "stage": "upload",
-            "milliseconds": 2
+            "milliseconds": 3.1999999997206032
           },
           {
             "section": "1-west",
             "stage": "restore",
-            "milliseconds": 0.30000000074505806
+            "milliseconds": 1.2999999998137355
           },
           {
             "section": "1-west",
             "stage": "graphics",
-            "milliseconds": 0.2999999988824129
+            "milliseconds": 0.39999999990686774
           },
           {
             "section": "1-west",
             "stage": "furniture",
-            "milliseconds": 1.099999999627471
+            "milliseconds": 0.8999999999068677
           },
           {
             "section": "1-west",
             "stage": "upload",
-            "milliseconds": 6.099999999627471
+            "milliseconds": 7.899999999906868
           },
           {
             "section": "1-west",
             "stage": "upload",
-            "milliseconds": 2.299999998882413
+            "milliseconds": 4
           },
           {
             "section": "2-west",
             "stage": "restore",
-            "milliseconds": 1.6000000014901161
+            "milliseconds": 0.39999999990686774
           },
           {
             "section": "2-west",
             "stage": "graphics",
-            "milliseconds": 166.59999999962747
+            "milliseconds": 172
           },
           {
             "section": "2-west",
             "stage": "furniture",
-            "milliseconds": 0.40000000037252903
+            "milliseconds": 0.19999999972060323
           },
           {
             "section": "2-west",
             "stage": "upload",
-            "milliseconds": 8.300000000745058
+            "milliseconds": 8.200000000186265
           },
           {
             "section": "2-west",
             "stage": "upload",
-            "milliseconds": 0.19999999925494194
+            "milliseconds": 0.3000000002793968
           },
           {
             "section": "3-east",
-            "stage": "restore",
-            "milliseconds": 0.5
-          },
-          {
-            "section": "3-east",
-            "stage": "graphics",
-            "milliseconds": 0.30000000074505806
-          },
-          {
-            "section": "3-east",
-            "stage": "furniture",
-            "milliseconds": 0.5
-          },
-          {
-            "section": "3-east",
-            "stage": "upload",
-            "milliseconds": 3.700000001117587
-          },
-          {
-            "section": "1-central",
-            "stage": "restore",
-            "milliseconds": 0.5
-          },
-          {
-            "section": "1-central",
-            "stage": "graphics",
-            "milliseconds": 0.19999999925494194
-          },
-          {
-            "section": "1-central",
-            "stage": "furniture",
-            "milliseconds": 2.5
-          },
-          {
-            "section": "1-central",
-            "stage": "upload",
-            "milliseconds": 5.900000000372529
-          },
-          {
-            "section": "2-east",
-            "stage": "restore",
-            "milliseconds": 0.3999999985098839
-          },
-          {
-            "section": "2-east",
-            "stage": "graphics",
-            "milliseconds": 0.2999999988824129
-          },
-          {
-            "section": "2-east",
-            "stage": "furniture",
-            "milliseconds": 0.40000000037252903
-          },
-          {
-            "section": "2-east",
-            "stage": "upload",
-            "milliseconds": 2
-          },
-          {
-            "section": "3-west",
-            "stage": "restore",
-            "milliseconds": 0.2000000011175871
-          },
-          {
-            "section": "3-west",
-            "stage": "graphics",
-            "milliseconds": 0.3999999985098839
-          },
-          {
-            "section": "3-west",
-            "stage": "furniture",
-            "milliseconds": 0.19999999925494194
-          },
-          {
-            "section": "3-west",
-            "stage": "upload",
-            "milliseconds": 1.200000001117587
-          },
-          {
-            "section": "0-east",
-            "stage": "restore",
-            "milliseconds": 0.2999999988824129
-          },
-          {
-            "section": "0-east",
-            "stage": "graphics",
-            "milliseconds": 0.2000000011175871
-          },
-          {
-            "section": "0-east",
-            "stage": "furniture",
-            "milliseconds": 0.900000000372529
-          },
-          {
-            "section": "0-east",
-            "stage": "upload",
-            "milliseconds": 3
-          },
-          {
-            "section": "1-east",
             "stage": "restore",
             "milliseconds": 0.40000000037252903
           },
           {
+            "section": "3-east",
+            "stage": "graphics",
+            "milliseconds": 0.39999999990686774
+          },
+          {
+            "section": "3-east",
+            "stage": "furniture",
+            "milliseconds": 0.5
+          },
+          {
+            "section": "3-east",
+            "stage": "upload",
+            "milliseconds": 6.100000000093132
+          },
+          {
+            "section": "3-east",
+            "stage": "upload",
+            "milliseconds": 0.6000000000931323
+          },
+          {
+            "section": "1-central",
+            "stage": "restore",
+            "milliseconds": 0.8999999999068677
+          },
+          {
+            "section": "1-central",
+            "stage": "graphics",
+            "milliseconds": 0.5
+          },
+          {
+            "section": "1-central",
+            "stage": "furniture",
+            "milliseconds": 1.6000000000931323
+          },
+          {
+            "section": "1-central",
+            "stage": "upload",
+            "milliseconds": 6
+          },
+          {
+            "section": "1-central",
+            "stage": "upload",
+            "milliseconds": 0.6000000000931323
+          },
+          {
+            "section": "2-east",
+            "stage": "restore",
+            "milliseconds": 1.3000000002793968
+          },
+          {
+            "section": "2-east",
+            "stage": "graphics",
+            "milliseconds": 0.40000000037252903
+          },
+          {
+            "section": "2-east",
+            "stage": "furniture",
+            "milliseconds": 0.39999999990686774
+          },
+          {
+            "section": "2-east",
+            "stage": "upload",
+            "milliseconds": 2.3999999999068677
+          },
+          {
+            "section": "3-west",
+            "stage": "restore",
+            "milliseconds": 0.2999999998137355
+          },
+          {
+            "section": "3-west",
+            "stage": "graphics",
+            "milliseconds": 0.19999999972060323
+          },
+          {
+            "section": "3-west",
+            "stage": "furniture",
+            "milliseconds": 0.2999999998137355
+          },
+          {
+            "section": "3-west",
+            "stage": "upload",
+            "milliseconds": 1.1999999997206032
+          },
+          {
+            "section": "0-east",
+            "stage": "restore",
+            "milliseconds": 0.2999999998137355
+          },
+          {
+            "section": "0-east",
+            "stage": "graphics",
+            "milliseconds": 0.2999999998137355
+          },
+          {
+            "section": "0-east",
+            "stage": "furniture",
+            "milliseconds": 0.6999999997206032
+          },
+          {
+            "section": "0-east",
+            "stage": "upload",
+            "milliseconds": 2.3999999999068677
+          },
+          {
+            "section": "1-east",
+            "stage": "restore",
+            "milliseconds": 0.39999999990686774
+          },
+          {
             "section": "1-east",
             "stage": "graphics",
-            "milliseconds": 0.19999999925494194
+            "milliseconds": 0.2999999998137355
           },
           {
             "section": "1-east",
             "stage": "furniture",
-            "milliseconds": 1.199999999254942
+            "milliseconds": 0.8000000002793968
           },
           {
             "section": "1-east",
             "stage": "upload",
-            "milliseconds": 1.599999999627471
+            "milliseconds": 1.8000000002793968
           }
         ],
-        "firstReadyMilliseconds": 1491.5
+        "firstReadyMilliseconds": 1663.9000000003725
       },
       "frames": {
-        "count": 72,
-        "median": 16.59999999962747,
-        "p99": 43.100000001490116,
-        "maximum": 43.100000001490116
+        "count": 83,
+        "median": 16.700000000186265,
+        "p99": 64,
+        "maximum": 64
       },
       "replayGenerationMilliseconds": [
-        531.5,
-        539.1999999992549
+        535,
+        541.6999999997206
       ],
-      "retainedGeometryBufferBytes": 22972620,
-      "heapBytes": 225000000,
-      "calls": 449,
-      "triangles": 709228
+      "retainedGeometryBufferBytes": 23437868,
+      "heapBytes": 231136632,
+      "calls": 465,
+      "triangles": 739740
     },
     {
       "name": "worker-mobile",
@@ -302,42 +322,77 @@
           {
             "section": "shared-library",
             "stage": "upload",
-            "milliseconds": 8.900000000372529
+            "milliseconds": 10.399999999906868
           },
           {
             "section": "shared-library",
             "stage": "upload",
-            "milliseconds": 45.09999999962747
+            "milliseconds": 50
           },
           {
             "section": "0-central",
             "stage": "restore",
-            "milliseconds": 1.699999999254942
+            "milliseconds": 1.7999999998137355
           },
           {
             "section": "0-central",
             "stage": "graphics",
-            "milliseconds": 18
+            "milliseconds": 21.399999999906868
           },
           {
             "section": "0-central",
             "stage": "furniture",
-            "milliseconds": 4
+            "milliseconds": 4.300000000279397
           },
           {
             "section": "0-central",
             "stage": "upload",
-            "milliseconds": 25.59999999962747
+            "milliseconds": 23.299999999813735
           },
           {
             "section": "0-central",
             "stage": "upload",
-            "milliseconds": 19
+            "milliseconds": 26.09999999962747
           },
           {
             "section": "0-central",
             "stage": "upload",
-            "milliseconds": 14.200000001117587
+            "milliseconds": 24.100000000093132
+          },
+          {
+            "section": "0-central",
+            "stage": "upload",
+            "milliseconds": 10
+          },
+          {
+            "section": "0-central",
+            "stage": "upload",
+            "milliseconds": 6.199999999720603
+          },
+          {
+            "section": "0-central",
+            "stage": "upload",
+            "milliseconds": 44
+          },
+          {
+            "section": "0-central",
+            "stage": "upload",
+            "milliseconds": 6.2000000001862645
+          },
+          {
+            "section": "0-central",
+            "stage": "upload",
+            "milliseconds": 6.099999999627471
+          },
+          {
+            "section": "0-central",
+            "stage": "upload",
+            "milliseconds": 6.399999999906868
+          },
+          {
+            "section": "0-central",
+            "stage": "upload",
+            "milliseconds": 6.100000000093132
           },
           {
             "section": "0-central",
@@ -347,245 +402,225 @@
           {
             "section": "0-central",
             "stage": "upload",
-            "milliseconds": 37.30000000074506
+            "milliseconds": 146.89999999990687
           },
           {
             "section": "0-central",
             "stage": "upload",
-            "milliseconds": 6.100000001490116
-          },
-          {
-            "section": "0-central",
-            "stage": "upload",
-            "milliseconds": 6
-          },
-          {
-            "section": "0-central",
-            "stage": "upload",
-            "milliseconds": 156.90000000037253
-          },
-          {
-            "section": "0-central",
-            "stage": "upload",
-            "milliseconds": 2.599999999627471
+            "milliseconds": 3.8999999999068677
           },
           {
             "section": "0-west",
             "stage": "restore",
-            "milliseconds": 0.599999999627471
+            "milliseconds": 0.7000000001862645
           },
           {
             "section": "0-west",
             "stage": "restore",
-            "milliseconds": 0.2000000011175871
-          },
-          {
-            "section": "0-west",
-            "stage": "graphics",
-            "milliseconds": 0.40000000037252903
-          },
-          {
-            "section": "0-west",
-            "stage": "furniture",
-            "milliseconds": 2.5
-          },
-          {
-            "section": "0-west",
-            "stage": "upload",
-            "milliseconds": 6.700000001117587
-          },
-          {
-            "section": "0-west",
-            "stage": "upload",
-            "milliseconds": 4.400000000372529
-          },
-          {
-            "section": "1-west",
-            "stage": "restore",
-            "milliseconds": 2.099999999627471
-          },
-          {
-            "section": "1-west",
-            "stage": "graphics",
-            "milliseconds": 0.30000000074505806
-          },
-          {
-            "section": "1-west",
-            "stage": "furniture",
-            "milliseconds": 1.200000001117587
-          },
-          {
-            "section": "1-west",
-            "stage": "upload",
-            "milliseconds": 11.599999999627471
-          },
-          {
-            "section": "1-west",
-            "stage": "upload",
-            "milliseconds": 2.800000000745058
-          },
-          {
-            "section": "2-west",
-            "stage": "restore",
-            "milliseconds": 2.400000000372529
-          },
-          {
-            "section": "2-west",
-            "stage": "graphics",
-            "milliseconds": 13.099999999627471
-          },
-          {
-            "section": "2-west",
-            "stage": "furniture",
-            "milliseconds": 0.599999999627471
-          },
-          {
-            "section": "2-west",
-            "stage": "upload",
-            "milliseconds": 12.400000000372529
-          },
-          {
-            "section": "2-west",
-            "stage": "upload",
-            "milliseconds": 0.19999999925494194
-          },
-          {
-            "section": "3-east",
-            "stage": "restore",
-            "milliseconds": 0.30000000074505806
-          },
-          {
-            "section": "3-east",
-            "stage": "graphics",
-            "milliseconds": 0.30000000074505806
-          },
-          {
-            "section": "3-east",
-            "stage": "furniture",
             "milliseconds": 0.5
           },
           {
-            "section": "3-east",
-            "stage": "upload",
-            "milliseconds": 3.800000000745058
-          },
-          {
-            "section": "1-central",
-            "stage": "restore",
-            "milliseconds": 0.7000000011175871
-          },
-          {
-            "section": "1-central",
+            "section": "0-west",
             "stage": "graphics",
-            "milliseconds": 0.2000000011175871
+            "milliseconds": 0.6000000000931323
           },
           {
-            "section": "1-central",
+            "section": "0-west",
             "stage": "furniture",
-            "milliseconds": 1.5
-          },
-          {
-            "section": "1-central",
-            "stage": "upload",
-            "milliseconds": 3.800000000745058
-          },
-          {
-            "section": "2-east",
-            "stage": "restore",
-            "milliseconds": 0.30000000074505806
-          },
-          {
-            "section": "2-east",
-            "stage": "graphics",
-            "milliseconds": 0.19999999925494194
-          },
-          {
-            "section": "2-east",
-            "stage": "furniture",
-            "milliseconds": 0.2999999988824129
-          },
-          {
-            "section": "2-east",
-            "stage": "upload",
             "milliseconds": 1.599999999627471
           },
           {
-            "section": "3-west",
+            "section": "0-west",
+            "stage": "upload",
+            "milliseconds": 3.3999999999068677
+          },
+          {
+            "section": "1-west",
+            "stage": "restore",
+            "milliseconds": 0.39999999990686774
+          },
+          {
+            "section": "1-west",
+            "stage": "graphics",
+            "milliseconds": 0.2999999998137355
+          },
+          {
+            "section": "1-west",
+            "stage": "furniture",
+            "milliseconds": 1.2000000001862645
+          },
+          {
+            "section": "1-west",
+            "stage": "upload",
+            "milliseconds": 8.899999999906868
+          },
+          {
+            "section": "1-west",
+            "stage": "upload",
+            "milliseconds": 3.2999999998137355
+          },
+          {
+            "section": "2-west",
+            "stage": "restore",
+            "milliseconds": 0.6000000000931323
+          },
+          {
+            "section": "2-west",
+            "stage": "graphics",
+            "milliseconds": 14.799999999813735
+          },
+          {
+            "section": "2-west",
+            "stage": "furniture",
+            "milliseconds": 0.5
+          },
+          {
+            "section": "2-west",
+            "stage": "upload",
+            "milliseconds": 11.100000000093132
+          },
+          {
+            "section": "2-west",
+            "stage": "upload",
+            "milliseconds": 0.599999999627471
+          },
+          {
+            "section": "3-east",
+            "stage": "restore",
+            "milliseconds": 0.6000000000931323
+          },
+          {
+            "section": "3-east",
+            "stage": "graphics",
+            "milliseconds": 0.39999999990686774
+          },
+          {
+            "section": "3-east",
+            "stage": "furniture",
+            "milliseconds": 0.7000000001862645
+          },
+          {
+            "section": "3-east",
+            "stage": "upload",
+            "milliseconds": 3.599999999627471
+          },
+          {
+            "section": "1-central",
             "stage": "restore",
             "milliseconds": 0.5
           },
           {
+            "section": "1-central",
+            "stage": "graphics",
+            "milliseconds": 0.2999999998137355
+          },
+          {
+            "section": "1-central",
+            "stage": "furniture",
+            "milliseconds": 1.6000000000931323
+          },
+          {
+            "section": "1-central",
+            "stage": "upload",
+            "milliseconds": 4.199999999720603
+          },
+          {
+            "section": "2-east",
+            "stage": "restore",
+            "milliseconds": 0.6000000000931323
+          },
+          {
+            "section": "2-east",
+            "stage": "graphics",
+            "milliseconds": 0.2999999998137355
+          },
+          {
+            "section": "2-east",
+            "stage": "furniture",
+            "milliseconds": 0.3000000002793968
+          },
+          {
+            "section": "2-east",
+            "stage": "upload",
+            "milliseconds": 2.3999999999068677
+          },
+          {
+            "section": "3-west",
+            "stage": "restore",
+            "milliseconds": 0.2999999998137355
+          },
+          {
             "section": "3-west",
             "stage": "graphics",
-            "milliseconds": 0.30000000074505806
+            "milliseconds": 0.19999999972060323
           },
           {
             "section": "3-west",
             "stage": "furniture",
-            "milliseconds": 0.2999999988824129
+            "milliseconds": 0.3000000002793968
           },
           {
             "section": "3-west",
             "stage": "upload",
-            "milliseconds": 0.900000000372529
+            "milliseconds": 0.8999999999068677
           },
           {
             "section": "0-east",
             "stage": "restore",
-            "milliseconds": 0.40000000037252903
+            "milliseconds": 0.2999999998137355
           },
           {
             "section": "0-east",
             "stage": "graphics",
-            "milliseconds": 0.2000000011175871
+            "milliseconds": 0.3000000002793968
           },
           {
             "section": "0-east",
             "stage": "furniture",
-            "milliseconds": 0.900000000372529
+            "milliseconds": 0.6999999997206032
           },
           {
             "section": "0-east",
             "stage": "upload",
-            "milliseconds": 2
+            "milliseconds": 3.2999999998137355
           },
           {
             "section": "1-east",
             "stage": "restore",
-            "milliseconds": 0.40000000037252903
+            "milliseconds": 0.39999999990686774
           },
           {
             "section": "1-east",
             "stage": "graphics",
-            "milliseconds": 0.30000000074505806
+            "milliseconds": 0.3000000002793968
           },
           {
             "section": "1-east",
             "stage": "furniture",
-            "milliseconds": 0.900000000372529
+            "milliseconds": 0.8999999999068677
           },
           {
             "section": "1-east",
             "stage": "upload",
-            "milliseconds": 2.5
+            "milliseconds": 1.8999999999068677
           }
         ],
-        "firstReadyMilliseconds": 2240.2999999988824
+        "firstReadyMilliseconds": 2603.2000000001863
       },
       "frames": {
-        "count": 181,
-        "median": 16.600000001490116,
-        "p99": 18.59999999962747,
-        "maximum": 26.700000001117587
+        "count": 193,
+        "median": 16.699999999720603,
+        "p99": 23.399999999906868,
+        "maximum": 36.39999999990687
       },
       "replayGenerationMilliseconds": [
-        548.6999999992549,
-        554.2999999988824
+        537.0999999996275,
+        530.3999999999069
       ],
-      "retainedGeometryBufferBytes": 22972620,
-      "heapBytes": 139000000,
-      "calls": 226,
-      "triangles": 345032
+      "retainedGeometryBufferBytes": 23437868,
+      "heapBytes": 130619391,
+      "calls": 236,
+      "triangles": 371684
     }
   ],
   "errors": []

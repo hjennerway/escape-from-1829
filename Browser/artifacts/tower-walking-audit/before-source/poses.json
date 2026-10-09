@@ -1,0 +1,383 @@
+{
+  "poses": [
+    {
+      "name": "cylinders-west",
+      "actor": {
+        "x": 174,
+        "y": -8.940696724635266e-10,
+        "z": -17,
+        "floor": 0,
+        "outside": true,
+        "stair": null,
+        "verticalTrend": 0
+      },
+      "camera": [
+        174,
+        1.7999999991059303,
+        -17
+      ],
+      "clear": true
+    },
+    {
+      "name": "cylinders-east",
+      "actor": {
+        "x": 188,
+        "y": 0,
+        "z": -17,
+        "floor": 0,
+        "outside": true,
+        "stair": null,
+        "verticalTrend": 0
+      },
+      "camera": [
+        188,
+        1.8,
+        -17
+      ],
+      "clear": true
+    },
+    {
+      "name": "chimney-south",
+      "actor": {
+        "x": 170,
+        "y": -8.940696724635266e-10,
+        "z": -28,
+        "floor": 0,
+        "outside": true,
+        "stair": null,
+        "verticalTrend": 0
+      },
+      "camera": [
+        170,
+        1.7999999991059303,
+        -28
+      ],
+      "clear": true
+    },
+    {
+      "name": "chimney-north",
+      "actor": {
+        "x": 167,
+        "y": 0,
+        "z": -40,
+        "floor": 0,
+        "outside": true,
+        "stair": null,
+        "verticalTrend": 0
+      },
+      "camera": [
+        167,
+        1.8,
+        -40
+      ],
+      "clear": false
+    },
+    {
+      "name": "tower-south",
+      "actor": {
+        "x": 143,
+        "y": 0,
+        "z": -40,
+        "floor": 0,
+        "outside": true,
+        "stair": null,
+        "verticalTrend": 0
+      },
+      "camera": [
+        143,
+        1.8,
+        -40
+      ],
+      "clear": true
+    },
+    {
+      "name": "tower-west",
+      "actor": {
+        "x": 135,
+        "y": 0,
+        "z": -55,
+        "floor": 0,
+        "outside": true,
+        "stair": null,
+        "verticalTrend": 0
+      },
+      "camera": [
+        135,
+        1.8,
+        -55
+      ],
+      "clear": true
+    },
+    {
+      "name": "tower-north",
+      "actor": {
+        "x": 145,
+        "y": 0,
+        "z": -65,
+        "floor": 0,
+        "outside": true,
+        "stair": null,
+        "verticalTrend": 0
+      },
+      "camera": [
+        145,
+        1.8,
+        -65
+      ],
+      "clear": true
+    },
+    {
+      "name": "tower-east",
+      "actor": {
+        "x": 182,
+        "y": -8.940696724635266e-10,
+        "z": -41,
+        "floor": 0,
+        "outside": true,
+        "stair": null,
+        "verticalTrend": 0
+      },
+      "camera": [
+        182,
+        1.7999999991059303,
+        -41
+      ],
+      "clear": true
+    },
+    {
+      "name": "hall-gap",
+      "actor": {
+        "x": 185,
+        "y": -8.940696724635266e-10,
+        "z": -30,
+        "floor": 0,
+        "outside": true,
+        "stair": null,
+        "verticalTrend": 0
+      },
+      "camera": [
+        185,
+        1.7999999991059303,
+        -30
+      ],
+      "clear": true
+    },
+    {
+      "name": "workshops-front",
+      "actor": {
+        "x": 201,
+        "y": -8.940696724635266e-10,
+        "z": -44,
+        "floor": 0,
+        "outside": true,
+        "stair": null,
+        "verticalTrend": 0
+      },
+      "camera": [
+        201,
+        1.7999999991059303,
+        -44
+      ],
+      "clear": true
+    },
+    {
+      "name": "stores-south",
+      "actor": {
+        "x": 224,
+        "y": 0,
+        "z": 14,
+        "floor": 0,
+        "outside": true,
+        "stair": null,
+        "verticalTrend": 0
+      },
+      "camera": [
+        224,
+        1.8,
+        14
+      ],
+      "clear": false
+    },
+    {
+      "name": "stores-east",
+      "actor": {
+        "x": 232,
+        "y": 0,
+        "z": -5,
+        "floor": 0,
+        "outside": true,
+        "stair": null,
+        "verticalTrend": 0
+      },
+      "camera": [
+        232,
+        1.8,
+        -5
+      ],
+      "clear": true
+    },
+    {
+      "name": "court-south",
+      "actor": {
+        "x": 177,
+        "y": 0,
+        "z": 8,
+        "floor": 0,
+        "outside": true,
+        "stair": null,
+        "verticalTrend": 0
+      },
+      "camera": [
+        177,
+        1.8,
+        8
+      ],
+      "clear": true
+    },
+    {
+      "name": "court-east",
+      "actor": {
+        "x": 230,
+        "y": 0,
+        "z": -24,
+        "floor": 0,
+        "outside": true,
+        "stair": null,
+        "verticalTrend": 0
+      },
+      "camera": [
+        230,
+        1.8,
+        -24
+      ],
+      "clear": true
+    },
+    {
+      "name": "tower-ground",
+      "actor": {
+        "x": 164,
+        "y": 0,
+        "z": -39,
+        "floor": 0,
+        "outside": true,
+        "stair": null,
+        "verticalTrend": 0
+      },
+      "camera": [
+        164,
+        1.8,
+        -39
+      ],
+      "clear": true
+    },
+    {
+      "name": "north-gravel",
+      "actor": {
+        "x": 166,
+        "y": 0,
+        "z": -71,
+        "floor": 0,
+        "outside": true,
+        "stair": null,
+        "verticalTrend": 0
+      },
+      "camera": [
+        166,
+        1.8,
+        -71
+      ],
+      "clear": true
+    },
+    {
+      "name": "reported-roof",
+      "actor": {
+        "x": 158,
+        "y": 0,
+        "z": -32,
+        "floor": 0,
+        "outside": true,
+        "stair": null,
+        "verticalTrend": 0
+      },
+      "camera": [
+        158,
+        1.8,
+        -32
+      ],
+      "clear": true
+    },
+    {
+      "name": "reported-ground",
+      "actor": {
+        "x": 158,
+        "y": 0,
+        "z": -32,
+        "floor": 0,
+        "outside": true,
+        "stair": null,
+        "verticalTrend": 0
+      },
+      "camera": [
+        158,
+        1.8,
+        -32
+      ],
+      "clear": true
+    },
+    {
+      "name": "roof-east-edge",
+      "actor": {
+        "x": 160,
+        "y": 0,
+        "z": -29,
+        "floor": 0,
+        "outside": true,
+        "stair": null,
+        "verticalTrend": 0
+      },
+      "camera": [
+        160,
+        1.8,
+        -29
+      ],
+      "clear": true
+    },
+    {
+      "name": "roof-step",
+      "actor": {
+        "x": 161,
+        "y": 0,
+        "z": -38,
+        "floor": 0,
+        "outside": true,
+        "stair": null,
+        "verticalTrend": 0
+      },
+      "camera": [
+        161,
+        1.8,
+        -38
+      ],
+      "clear": true
+    },
+    {
+      "name": "court-grass-seam",
+      "actor": {
+        "x": 158,
+        "y": 0,
+        "z": -29,
+        "floor": 0,
+        "outside": true,
+        "stair": null,
+        "verticalTrend": 0
+      },
+      "camera": [
+        158,
+        1.8,
+        -29
+      ],
+      "clear": true
+    }
+  ],
+  "errors": []
+}

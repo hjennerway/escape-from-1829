@@ -1,0 +1,36 @@
+(node:54000) ExperimentalWarning: `--experimental-loader` may be removed in the future; instead use `register()`:
+--import 'data:text/javascript,import { register } from "node:module"; import { pathToFileURL } from "node:url"; register("./artifacts/entrance-floor-band/baseline-loader.mjs", pathToFileURL("./"));'
+(Use `node --trace-warnings ...` to show where the warning was created)
+node:internal/modules/run_main:107
+    triggerUncaughtException(
+    ^
+
+AssertionError [ERR_ASSERTION]: Every primitive outside Leighton/Newton remains unchanged
++ actual - expected
+
+  {
+    count: 882926,
++   sha256: '2ba88c95e57ee7286a6d92ccbd656541c844c320a8f9185bbc0df5e3c3766b4a'
+-   sha256: '28727023ef015a4597e45f5d63159ffeca8ef393930b75a2c2f2af177499d57b'
+  }
+
+    at file:///C:/Users/Harry/Documents/_escape-from-1829/Browser/test-leighton-newton.mjs:21:8
+    at ModuleJob.run (node:internal/modules/esm/module_job:561:25)
+    at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
+    at async node:internal/modules/esm/loader:647:26
+    at async asyncRunEntryPointWithESMLoader (node:internal/modules/run_main:101:5) {
+  generatedMessage: false,
+  code: 'ERR_ASSERTION',
+  actual: {
+    count: 882926,
+    sha256: '2ba88c95e57ee7286a6d92ccbd656541c844c320a8f9185bbc0df5e3c3766b4a'
+  },
+  expected: {
+    count: 882926,
+    sha256: '28727023ef015a4597e45f5d63159ffeca8ef393930b75a2c2f2af177499d57b'
+  },
+  operator: 'deepStrictEqual',
+  diff: 'simple'
+}
+
+Node.js v24.20.0

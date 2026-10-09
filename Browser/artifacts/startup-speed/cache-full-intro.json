@@ -1,0 +1,33 @@
+{
+  "results": [
+    {
+      "mode": "aerial",
+      "width": 1200,
+      "firstMilliseconds": 6257,
+      "returnMilliseconds": 172,
+      "revisitMilliseconds": 291
+    },
+    {
+      "mode": "explore",
+      "width": 1200,
+      "firstMilliseconds": 8344,
+      "returnMilliseconds": 364,
+      "revisitMilliseconds": 500
+    },
+    {
+      "mode": "aerial",
+      "width": 390,
+      "firstMilliseconds": 5489,
+      "returnMilliseconds": 118,
+      "revisitMilliseconds": 244
+    },
+    {
+      "mode": "explore",
+      "width": 390,
+      "firstMilliseconds": 8767,
+      "returnMilliseconds": 351,
+      "revisitMilliseconds": 495
+    }
+  ],
+  "errors": []
+}

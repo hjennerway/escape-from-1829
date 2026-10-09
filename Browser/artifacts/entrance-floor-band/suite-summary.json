@@ -1,0 +1,23 @@
+{
+  "declaredChecks": 156,
+  "passed": 154,
+  "serialPrefixPassed": 116,
+  "serialStop": "node test-jarman.mjs",
+  "continuationChecks": 39,
+  "remainingFailures": [
+    "node test-jarman.mjs",
+    "node test-leighton-newton.mjs"
+  ],
+  "baselineFailuresReproduced": true,
+  "retry": {
+    "command": "node test-road-continuity.mjs",
+    "reason": "Windows error opening shared audit output",
+    "status": 0
+  },
+  "outsideBandPrimitivesUnchanged": 1446222,
+  "tiledRoofPrimitivesUnchanged": 540,
+  "sourceAndCompiledBandProbesEach": 92,
+  "sourceAndCompiledViewsEach": 6,
+  "gpu": "NVIDIA GeForce RTX 3090 Ti / ANGLE Direct3D11",
+  "pageAndShaderErrors": []
+}

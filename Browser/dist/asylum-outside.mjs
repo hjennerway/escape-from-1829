@@ -1,7 +1,7 @@
-import {exteriorObstacles,createObstacleIndex,obstacleContains} from './explore-controls.mjs';
+import {exteriorObstacles,createObstacleIndex,obstacleContains,walkSurfaceHeight} from './explore-controls.mjs';
 import {createObstacleJump} from './jump.mjs';
 // Sample the existing rendered treads/decks; no duplicate outside stair model.
-export function createAsylumOutside(THREE,exterior){
+export function createAsylumOutside(THREE,exterior,{deferRefresh=false}={}){
  let obstacles,indices,supports,walkSurfaces,jumper,jumpObstacles,baseObstacles,baseJumpObstacles,scenarioObstacles=[];
  let sightIndices=new Map(),permanentIndices=new Map();
  const safePositions=new WeakMap();
@@ -37,7 +37,7 @@ export function createAsylumOutside(THREE,exterior){
   baseObstacles=obstacles;baseJumpObstacles=jumpObstacles;applyScenarioObstacles();
   }finally{for(const [o,visible] of visibility)o.visible=visible;}
  }
- refresh();
+ if(!deferRefresh)refresh();
  function applyScenarioObstacles(){
   obstacles=[...baseObstacles,...scenarioObstacles];jumpObstacles=[...baseJumpObstacles,...scenarioObstacles];
   indices=new Map();sightIndices=new Map();permanentIndices=new Map();jumper?.setIndex(createObstacleIndex(jumpObstacles,12,.27));
@@ -51,7 +51,8 @@ export function createAsylumOutside(THREE,exterior){
   return true;
  }
  function heightAt(x,z,height,trend=0){
-  const surface=walkSurfaces.find(s=>obstacleContains(s,x,z,1e-7));
+  const found=walkSurfaces.find(s=>obstacleContains(s,x,z,1e-7));
+  const surface=found?{...found,height:walkSurfaceHeight(found,x,z)}:null;
   const nearby=supports.get(Math.floor(x/6)+','+Math.floor(z/6))??[];
   let candidates=nearby.filter(s=>s.height<=height+.48&&s.height>=height-2.1&&obstacleContains(s,x,z,1e-7));
   // A sunken-path outline can overlap the coping or a raised landing above

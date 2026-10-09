@@ -5,6 +5,11 @@ import {ANNEXE} from './dist/annexe.mjs';
 globalThis.document={createElement:()=>({width:0,height:0,getContext:()=>({fillRect(){}})})};
 const material=new THREE.MeshStandardMaterial(),tower=createWaterTower(THREE,{brick:material,roof:material,dark:material,worldUV:g=>g});
 tower.updateMatrixWorld(true);
+const plinth=tower.getObjectByName('Water tower brick plinth');
+assert.equal(plinth?.geometry.type,'BoxGeometry','Keep the solid footing separate until the estate foundation pass');
+const plinthBounds=new THREE.Box3().setFromObject(plinth);
+assert.deepEqual(plinthBounds.min.toArray().map(v=>Math.round(v*1e4)/1e4),[142.825,0,-60.375]);
+assert.deepEqual(plinthBounds.max.toArray().map(v=>Math.round(v*1e4)/1e4),[153.175,.5,-50.025]);
 const faces=[1,2,3,4].map(n=>tower.children.find(o=>o.userData.photoSide===n));
 assert(faces.every(Boolean));
 for(const [i,target] of [[1,new THREE.Vector3(0,0,13)],[3,new THREE.Vector3(ANNEXE.x,0,ANNEXE.z)]]){

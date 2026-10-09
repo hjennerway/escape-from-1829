@@ -6,15 +6,17 @@ public sealed partial class NativePrototypeGame
     GUIStyle text,small,heading,title,button,centered,label;Texture2D pixel;
     readonly Color ink=new Color(.078f,.125f,.094f,.95f),mint=new Color(.741f,.8f,.596f),amber=new Color(.94f,.71f,.38f);
     Rect safe;float uiScale;int stickFinger=-1,lookFinger=-1,listFinger=-1;Vector2 stickOrigin,touchDown,listDown;float lookMovement,listMovement;
-    readonly Rect insideButton=new Rect(567,452,210,56),outsideButton=new Rect(333,452,220,56),aerialButton=new Rect(109,452,210,56);
+    readonly Rect insideButton=new Rect(490,452,210,56),outsideButton=new Rect(256,452,220,56),aerialButton=new Rect(32,452,210,56);
     readonly Rect pauseButton=new Rect(1154,28,100,44),mapButton=new Rect(1036,28,106,44),helpButton=new Rect(924,28,100,44);
-    readonly Rect useButton=new Rect(1080,570,168,90),torchButton=new Rect(950,595,116,66),sprintButton=new Rect(268,594,116,66),crouchButton=new Rect(398,594,120,66);
+    readonly Rect useButton=new Rect(1080,570,168,90),torchButton=new Rect(950,595,116,66),crouchButton=new Rect(268,594,120,66);
+    readonly Rect quitButton=new Rect(1154,28,100,44),quitPauseButton=new Rect(650,331,285,56);
+    const float stickTravel=48;
     readonly Rect jumpButton=new Rect(1094,482,152,66);
-    readonly Rect resumeButton=new Rect(345,262,590,56),homeButton=new Rect(345,331,590,56),fpsButton=new Rect(345,514,285,48),resolutionButton=new Rect(345,447,285,50),saverButton=new Rect(650,447,285,50),soundButton=new Rect(650,514,285,48),detailsButton=new Rect(345,579,285,48);
+    readonly Rect resumeButton=new Rect(345,262,590,56),homeButton=new Rect(345,331,285,56),fpsButton=new Rect(345,514,285,48),resolutionButton=new Rect(345,447,285,50),saverButton=new Rect(650,447,285,50),soundButton=new Rect(650,514,285,48),detailsButton=new Rect(345,579,285,48);
     readonly Rect sensitivitySlider=new Rect(650,621,285,24),yearSlider=new Rect(460,650,350,28),prevYearButton=new Rect(392,636,58,48),nextYearButton=new Rect(820,636,58,48);
-    const float explorationInset=28,explorationSquare=52;
+    const float explorationInset=12,explorationSquare=52;
     Rect safeViewport=new Rect(0,0,1280,720);
-    Rect explorationHeader=>new Rect(safeViewport.x+explorationInset,safeViewport.y+explorationInset,440,104);
+    Rect explorationHeader=>new Rect(safeViewport.x+explorationInset,safeViewport.y+explorationInset,360,104);
     Rect locationsButton=>new Rect(explorationHeader.xMax+28,explorationHeader.y,182,44);
     Rect viewButton=>new Rect(locationsButton.xMax+14,locationsButton.y,122,44);
     Rect locateButton=>new Rect(explorationHeader.x,explorationHeader.yMax+28,explorationSquare,explorationSquare);
@@ -36,40 +38,45 @@ public sealed partial class NativePrototypeGame
         ||Escaping&&p.y<130
         ||UseControl&&useButton.Contains(p)||Indoors&&torchButton.Contains(p)||Escaping&&crouchButton.Contains(p)
         ||(mode==Mode.Inside||mode==Mode.Outside)&&jumpButton.Contains(p)
-        ||(mode==Mode.Inside||mode==Mode.Outside)&&sprintButton.Contains(p)
+        ||Exploring&&quitButton.Contains(p)
         ||Exploring&&(explorationHeader.Contains(p)||locationsButton.Contains(p)||viewButton.Contains(p)
             ||new Rect(382,586,510,110).Contains(p)||locateButton.Contains(p)||treeButton.Contains(p)
             ||dayButton.Contains(p)||duskButton.Contains(p)||nightButton.Contains(p));
     void TouchInput()
     {
         sprintHeld=useHeld=false;
+        if(capturePending){foreach(var touch in Input.touches)if(touch.phase==TouchPhase.Began)HandleTap(UIPosition(touch.position));return;}
         if(introFlightActive){foreach(var touch in Input.touches)if(touch.phase==TouchPhase.Began)HandleTap(UIPosition(touch.position));return;}
         if(photoExpanded&&Input.touchCount==2){var a=Input.GetTouch(0);var b=Input.GetTouch(1);float before=Vector2.Distance(a.position-a.deltaPosition,b.position-b.deltaPosition);if(before>0)photoZoom=Mathf.Clamp(photoZoom*Vector2.Distance(a.position,b.position)/before,1,5);}
         foreach(var touch in Input.touches){
             var p=UIPosition(touch.position);
             if(locationsOpen&&selectedBuilding<0&&LocationTouch(touch.fingerId,p,touch.deltaPosition.y/uiScale,touch.phase))continue;
             if(touch.phase==TouchPhase.Ended||touch.phase==TouchPhase.Canceled){
-                if(touch.fingerId==stickFinger){stickFinger=-1;stickVector=Vector2.zero;}
+                if(touch.fingerId==stickFinger){stickFinger=-1;SetMoveStick(Vector2.zero);}
                 if(touch.fingerId==lookFinger){if(touch.phase==TouchPhase.Ended&&lookMovement<7&&(mode==Mode.Aerial||mode==Mode.Outside))PickBuilding(touch.position);lookFinger=-1;}continue;
             }
             if(touch.phase==TouchPhase.Began){
                 if(HandleTap(p))continue;
-                if(!paused&&!map&&!help&&(mode==Mode.Outside||mode==Mode.Inside)&&p.x<440&&p.y>340&&!sprintButton.Contains(p)&&!(mode==Mode.Inside&&crouchButton.Contains(p))&&stickFinger<0){stickFinger=touch.fingerId;stickOrigin=p;}
+                if(!paused&&!map&&!help&&(mode==Mode.Outside||mode==Mode.Inside)&&p.x<440&&p.y>340&&!(Escaping&&crouchButton.Contains(p))&&stickFinger<0){stickFinger=touch.fingerId;stickOrigin=p;}
                 else if(!paused&&!map&&!help&&lookFinger<0&&!PointerOverControls(p)){lookFinger=touch.fingerId;touchDown=p;lookMovement=0;}
             }
             if(photoExpanded){if(photoArea.Contains(p)&&Input.touchCount==1&&touch.phase==TouchPhase.Moved)photoPan+=new Vector2(touch.deltaPosition.x,-touch.deltaPosition.y)/uiScale;continue;}
             if(selectedBuilding>=0&&buildingPanel.Contains(p))continue;
             if(paused){if(sensitivitySlider.Contains(p))SetSensitivity(p);continue;}if(help||map||locationsOpen)continue;
             if((mode==Mode.Outside||mode==Mode.Aerial)&&selectedBuilding<0&&yearSlider.Contains(p)){SetPeriod(Mathf.RoundToInt((p.x-yearSlider.x)/yearSlider.width*12));continue;}
-            if(touch.fingerId==stickFinger)stickVector=Vector2.ClampMagnitude(new Vector2(p.x-stickOrigin.x,stickOrigin.y-p.y)/70,1);
+            if(touch.fingerId==stickFinger)SetMoveStick(new Vector2(p.x-stickOrigin.x,stickOrigin.y-p.y));
             if(touch.fingerId==lookFinger&&touch.phase==TouchPhase.Moved){lookMovement+=touch.deltaPosition.magnitude/uiScale;if(mode==Mode.Aerial&&Input.touchCount==1){orbitYaw+=touch.deltaPosition.x/uiScale*.22f;orbitPitch=Mathf.Clamp(orbitPitch-touch.deltaPosition.y/uiScale*.18f,8,86);}else if(mode==Mode.Outside||mode==Mode.Inside){yaw-=touch.deltaPosition.x/uiScale*.003f*sensitivity;pitch=Mathf.Clamp(pitch+touch.deltaPosition.y/uiScale*.003f*sensitivity,-1.25f,1.25f);}}
-            if((mode==Mode.Inside||mode==Mode.Outside)&&sprintButton.Contains(p))sprintHeld=true;if(UseControl&&useButton.Contains(p))useHeld=true;
+            if(UseControl&&useButton.Contains(p))useHeld=true;
         }
     }
+    void SetMoveStick(Vector2 displacement){var raw=Vector2.ClampMagnitude(displacement/stickTravel,1);float magnitude=raw.magnitude;stickVector=magnitude<=.08f?Vector2.zero:raw.normalized*((magnitude-.08f)/.92f);sprintHeld=magnitude>=.92f;}
+    void ExitGame(){Application.Quit();}
     void SetSensitivity(Vector2 p){sensitivity=Mathf.Lerp(.4f,3,(p.x-sensitivitySlider.x)/sensitivitySlider.width);PlayerPrefs.SetFloat("sensitivity",sensitivity);}
     bool HandleTap(Vector2 p)
     {
+        if(capturePending){if(resultHomeButton.Contains(p))StartInside();else if(retryButton.Contains(p))ContinueEscape();return true;}
         if(introFlightActive){if(pauseButton.Contains(p))FinishIntroFlight();return true;}
+        if((mode==Mode.Title||Exploring)&&quitButton.Contains(p)){ExitGame();return true;}
         if(mode==Mode.Title){if(insideButton.Contains(p)){StartArrival();return true;}if(outsideButton.Contains(p)){BeginIntroFlight(false);return true;}if(aerialButton.Contains(p)){BeginIntroFlight(true);return true;}return false;}
         if(mode==Mode.Arrival||mode==Mode.Escape){if(pauseButton.Contains(p)){if(mode==Mode.Arrival)StartInside();else mode=Mode.Escaped;return true;}return false;}
         if(mode==Mode.Caught||mode==Mode.Escaped){if(retryButton.Contains(p)){StartArrival();return true;}if(resultHomeButton.Contains(p)){Home();return true;}return false;}
@@ -78,6 +85,7 @@ public sealed partial class NativePrototypeGame
         if(Escaping&&pauseButton.Contains(p)){TogglePause();return true;}
         if(paused){
             if(resumeButton.Contains(p)){TogglePause();return true;}if(homeButton.Contains(p)){Home();return true;}
+            if(quitPauseButton.Contains(p)){ExitGame();return true;}
             if(fpsButton.Contains(p)){ChangeFPS();return true;}if(resolutionButton.Contains(p)){SetGraphics(false);return true;}if(saverButton.Contains(p)){SetGraphics(true);return true;}
             if(soundButton.Contains(p)){audioOn=!audioOn;PlayerPrefs.SetInt("audio",audioOn?1:0);return true;}if(detailsButton.Contains(p)){diagnostics=!diagnostics;return true;}
             if(sensitivitySlider.Contains(p)){SetSensitivity(p);return true;}return false;
@@ -137,19 +145,22 @@ public sealed partial class NativePrototypeGame
     }
     void DrawInterface()
     {
-        if(introFlightActive){Panel(new Rect(345,610,590,62));Label(new Rect(355,622,570,40),mode==Mode.Aerial?"AERIAL VIEW":"EXPLORE ON FOOT",centered);if(Button(pauseButton,"SKIP"))FinishIntroFlight();}
+        if(capturePending)DrawCaptureRecovery();
+        else if(introFlightActive){Panel(new Rect(345,610,590,62));Label(new Rect(355,622,570,40),mode==Mode.Aerial?"AERIAL VIEW":"EXPLORE ON FOOT",centered);if(Button(pauseButton,"SKIP"))FinishIntroFlight();}
         else if(mode==Mode.Title)DrawTitle();
         else if(mode==Mode.Arrival||mode==Mode.Escape){Panel(new Rect(345,600,590,70));Label(new Rect(355,611,570,55),mode==Mode.Arrival?"THE 1829 BUILDING · CHESTER":"OUTSIDE. AT LAST.",centered);if(Button(pauseButton,"SKIP")){if(mode==Mode.Arrival)StartInside();else mode=Mode.Escaped;}}
         else if(mode==Mode.Caught||mode==Mode.Escaped){Panel(new Rect(280,85,720,585));Label(new Rect(320,118,640,77),mode==Mode.Escaped?"You escaped":"Captured",title);Label(new Rect(325,220,630,320),status,new GUIStyle(serif){fontSize=21});if(Button(resultHomeButton,"BACK TO TITLE"))Home();if(Button(retryButton,"TRY AGAIN",true))StartArrival();}
         else{
-            var header=Exploring?explorationHeader:new Rect(22,22,440,104);
-            Panel(header);Label(new Rect(header.x+18,header.y+11,410,34),Indoors?layout.name:escapeOutside?"Reach the front path":mode==Mode.Aerial?"Aerial exploration":"Explore on foot",heading);
-            Label(new Rect(header.x+18,header.y+50,410,40),Escaping?(Indoors?layout.exits.Length+" outside doors":"USE to return inside")+" · "+TimeLabel(elapsed):Indoors?"Explore the rooms and stairs":manifest.periods[periodIndex].year+" · "+manifest.periods[periodIndex].title,small);
+            var header=Exploring?explorationHeader:new Rect(12,12,360,104);
+            Panel(header);var headerTitle=Escaping?objectiveTitle:Indoors?layout.name:mode==Mode.Aerial?"Aerial exploration":"Explore on foot";var headerTitleArea=new Rect(header.x+12,header.y+11,336,34);Label(headerTitleArea,headerTitle,FitHeading(headerTitleArea,headerTitle));
+            Label(new Rect(header.x+12,header.y+50,336,40),Escaping?(Indoors?layout.exits.Length+" outside doors":"USE to return inside")+" · "+TimeLabel(elapsed)+" · "+LivesRemaining+(LivesRemaining==1?" life":" lives"):Indoors?"Explore the rooms and stairs":manifest.periods[periodIndex].year+" · "+manifest.periods[periodIndex].title,small);
             Label(Exploring?new Rect(viewButton.xMax+9,viewButton.y,105,40):new Rect(817,33,105,40),Mathf.RoundToInt(displayedFPS)+" FPS",small);
             if(Escaping){if(Button(helpButton,"HELP")){help=true;UnlockMouse();}if(Button(mapButton,map?"CLOSE":notes.Count>notesRead?"NOTES •":"NOTES"))ToggleNotebook();if(Button(pauseButton,paused?"RESUME":"PAUSE"))TogglePause();}
+            if(Exploring&&Button(quitButton,"EXIT"))ExitGame();
             if(paused)DrawPause();else if(help)DrawHelp();else if(selectedBuilding>=0)DrawBuilding();else if(locationsOpen)DrawLocations();else if(map)DrawNotebook();else{
                 if(Exploring)DrawExplore();
-                if(mode==Mode.Inside){DrawFloorPlan(new Rect(24,142,225,180),floor,false);Fill(new Rect(26,334,220,27),ink);Label(new Rect(34,338,205,24),"YOU · GHOST · SECURITY",new GUIStyle(small){fontSize=13,wordWrap=false});Fill(new Rect(25,372,220,7),new Color(.2f,.25f,.2f));Fill(new Rect(25,372,220*stamina,7),mint);Label(new Rect(25,389,220,30),crouching?"CROUCHING · QUIET":sprinting?"SPRINTING · LOUD":"STAMINA",small);if(elapsed<5||spotted){Panel(new Rect(440,137,405,40));Label(new Rect(450,142,385,30),elapsed<5?"FIVE-SECOND HEAD START":"YOU'VE BEEN SPOTTED",label);}}
+                if(Escaping&&objectiveHint!=""){Panel(new Rect(285,208,710,92));Label(new Rect(300,221,680,68),objectiveHint,text);}
+                if(Escaping){Fill(new Rect(25,372,220,7),new Color(.2f,.25f,.2f));Fill(new Rect(25,372,220*stamina,7),mint);Label(new Rect(25,389,220,30),crouching?"CROUCHING · QUIET":sprinting?"SPRINTING · LOUD":"STAMINA",small);if(elapsed<5||spotted){Panel(new Rect(440,137,405,40));Label(new Rect(450,142,385,30),elapsed<5?"FIVE-SECOND HEAD START":"YOU'VE BEEN SPOTTED",label);}}
                 if(mode!=Mode.Aerial){Fill(new Rect(638,355,4,10),mint);Fill(new Rect(635,358,10,4),mint);if(prompt!=""){Panel(new Rect(320,474,640,62));Label(new Rect(336,486,608,40),prompt,centered);}DrawMovement();}
                 if(diagnostics)DrawDiagnostics();
             }
@@ -157,9 +168,11 @@ public sealed partial class NativePrototypeGame
         }
     }
     string TimeLabel(float t)=>Mathf.FloorToInt(t/60).ToString("00")+":"+(Mathf.FloorToInt(t)%60).ToString("00");
-    void DrawPause(){Panel(new Rect(300,144,680,538));Label(new Rect(345,177,590,65),"Paused",title);if(Button(resumeButton,"RESUME",true))TogglePause();if(Button(homeButton,"BACK TO TITLE"))Home();Label(new Rect(345,407,590,30),"PICTURE QUALITY · selected option is highlighted",eyebrow);if(Choice(resolutionButton,"HIGH DETAIL",!lowGraphics))SetGraphics(false);if(Choice(saverButton,"BATTERY SAVER",lowGraphics))SetGraphics(true);if(Button(fpsButton,"FPS LIMIT: "+fpsCap))ChangeFPS();if(Button(soundButton,"SOUND: "+(audioOn?"ON":"OFF"),audioOn)){audioOn=!audioOn;PlayerPrefs.SetInt("audio",audioOn?1:0);}if(Button(detailsButton,"PERFORMANCE INFO: "+(diagnostics?"ON":"OFF"),diagnostics))diagnostics=!diagnostics;Label(new Rect(650,580,285,30),"Look sensitivity · "+sensitivity.ToString("F1"),small);float previous=sensitivity;sensitivity=Slider(sensitivitySlider,sensitivity,.4f,3);if(previous!=sensitivity)PlayerPrefs.SetFloat("sensitivity",sensitivity);}
-    void DrawHelp(){Panel(new Rect(270,90,740,580));Label(new Rect(310,120,660,64),"Keep moving. Stay quiet.",heading);Label(new Rect(310,208,660,350),"Left stick: move. Drag the right side: look. RUN to sprint, CROUCH to stay quiet, JUMP to clear low obstacles.\n\nWalk the stairs between the basement, ground, first and second floors. USE at a door to go outside or return indoors. Reach the front path to escape.\n\nSecurity pursues on sight. The ghost senses you through walls; aim your torch to slow it. You have a five-second head start. Holding USE pauses pursuers and lets you inspect wall art.\n\nNOTES records explored areas, tested doors and archive observations. Opening it pauses the game.",text);if(Button(helpResumeButton,"RESUME",true)){help=false;LockMouse();}}
-    void DrawMovement(){if(Application.isMobilePlatform||Input.touchCount>0||showTouchPreview){var origin=stickFinger>=0?stickOrigin:new Vector2(138,578);if(!movementSurface)movementSurface=RoundedSurface(new Color(.12f,.19f,.18f,.68f),new Color(.12f,.19f,.18f,.68f));Surface(new Rect(origin.x-68,origin.y-68,136,136),movementSurface);Surface(new Rect(origin.x+stickVector.x*45-20,origin.y-stickVector.y*45-20,40,40),selectedTexture);Label(new Rect(58,663,160,25),"MOVE",label);Button(sprintButton,"RUN");if(Button(jumpButton,"JUMP"))Jump();if(UseControl)Button(useButton,"USE");if(Escaping&&Button(crouchButton,crouchToggle?"STAND":"CROUCH",crouchToggle))crouchToggle=!crouchToggle;}else Label(new Rect(28,685,1180,28),Escaping?"WASD move · mouse look · Shift run · Space jump · C crouch · E use · F torch · Tab notes · Esc pause":"WASD move · mouse look · Shift run · Space jump · E door · Esc title",small);if(Indoors&&Button(torchButton,torch.enabled?"TORCH: ON":"TORCH: OFF",torch.enabled))torch.enabled=!torch.enabled;}
+    void DrawPause(){Panel(new Rect(300,144,680,538));Label(new Rect(345,177,590,65),"Paused",title);if(Button(resumeButton,"RESUME",true))TogglePause();if(Button(homeButton,"BACK TO TITLE"))Home();if(Button(quitPauseButton,"EXIT GAME"))ExitGame();Label(new Rect(345,407,590,30),"PICTURE QUALITY · selected option is highlighted",eyebrow);if(Choice(resolutionButton,"HIGH DETAIL",!lowGraphics))SetGraphics(false);if(Choice(saverButton,"BATTERY SAVER",lowGraphics))SetGraphics(true);if(Button(fpsButton,"FPS LIMIT: "+fpsCap))ChangeFPS();if(Button(soundButton,"SOUND: "+(audioOn?"ON":"OFF"),audioOn)){audioOn=!audioOn;PlayerPrefs.SetInt("audio",audioOn?1:0);}if(Button(detailsButton,"PERFORMANCE INFO: "+(diagnostics?"ON":"OFF"),diagnostics))diagnostics=!diagnostics;Label(new Rect(650,580,285,30),"Look sensitivity · "+sensitivity.ToString("F1"),small);float previous=sensitivity;sensitivity=Slider(sensitivitySlider,sensitivity,.4f,3);if(previous!=sensitivity)PlayerPrefs.SetFloat("sensitivity",sensitivity);}
+    string EscapeHelp=>"Move stick: push a little to walk, to its edge to run. Drag the right side to look. CROUCH stays quiet; JUMP clears low obstacles.\n\nFind staff access near Reception, then the brass key in the upper offices. USE any west-side exit, cross a north gate and USE the radio mast. Stairs link all four floors.\n\nSecurity chases on sight. Aim your torch to slow the ghost. You have a five-second head start and "+captureLimit+" lives. Recover confiscated keys at Reception; the last capture ends the attempt.\n\nHold USE to inspect art and pause pursuers. NOTES records discoveries and maps, and pauses the game.";
+    GUIStyle HelpStyle(){var style=new GUIStyle(text){fontSize=22};while(style.fontSize>18&&TextLines(EscapeHelp,style,660).Count*style.fontSize*1.26f>350)style.fontSize--;return style;}
+    void DrawHelp(){Panel(new Rect(270,90,740,580));Label(new Rect(310,120,660,64),"Keep moving. Stay quiet.",heading);Label(new Rect(310,208,660,350),EscapeHelp,HelpStyle());if(Button(helpResumeButton,"RESUME",true)){help=false;LockMouse();}}
+    void DrawMovement(){if(Application.isMobilePlatform||Input.touchCount>0||showTouchPreview){var origin=stickFinger>=0?stickOrigin:new Vector2(138,578);if(!movementSurface)movementSurface=RoundedSurface(new Color(.12f,.19f,.18f,.68f),new Color(.12f,.19f,.18f,.68f));Surface(new Rect(origin.x-68,origin.y-68,136,136),movementSurface);Surface(new Rect(origin.x+stickVector.x*stickTravel-20,origin.y-stickVector.y*stickTravel-20,40,40),selectedTexture);Label(new Rect(58,663,160,25),"MOVE",label);if(Button(jumpButton,"JUMP"))Jump();if(UseControl)Button(useButton,"USE");if(Escaping&&Button(crouchButton,crouchToggle?"STAND":"CROUCH",crouchToggle))crouchToggle=!crouchToggle;}else Label(new Rect(28,685,1180,28),Escaping?"WASD move · mouse look · Shift run · Space jump · C crouch · E use · F torch · Tab notes · Esc pause":"WASD move · mouse look · Shift run · Space jump · E door · Esc title",small);if(Indoors&&Button(torchButton,torch.enabled?"TORCH: ON":"TORCH: OFF",torch.enabled))torch.enabled=!torch.enabled;}
     void DrawExplore()
     {
         if(Button(locationsButton,"LOCATIONS")){locationsOpen=true;UnlockMouse();}

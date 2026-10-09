@@ -1,3 +1,4 @@
+import {assertRoadEndSurface} from './test-support/road-end-assertions.mjs';
 import {pointInFootprint,historicOSPoint,HISTORIC_OS_REGISTRATION} from './dist/historic-footprints.mjs';
 import {deferredAnnexeOverlap} from './annexe-inward-test-helpers.mjs';
 import assert from 'node:assert/strict';
@@ -14,7 +15,7 @@ const exterior=createEscapeExterior(THREE,1.5),layouts=createAerialLayouts(THREE
 const effective=o=>{for(;o;o=o.parent)if(!o.visible)return false;return true;};
 assert.deepEqual(HISTORIC_ROAD_TRACES.find(r=>r.name==='Historic lane continuation').points[0],VIVIENNE_LANE[8],'The reference trace must start at the saved lane before clipping its overlapping mouth');
 exterior.model.updateMatrixWorld(true);
-layouts.historicRoads.traverse(o=>{if(!o.isMesh)return;const g=o.geometry,p=g.attributes.position;for(let i=0;i<p.count;i++)assert(Number.isFinite(p.getX(i))&&Number.isFinite(p.getY(i))&&Number.isFinite(p.getZ(i)));const n=g.attributes.normal,normal=new THREE.Vector3(),matrix=new THREE.Matrix3().getNormalMatrix(o.matrixWorld);for(let i=0;i<n.count;i++){normal.fromBufferAttribute(n,i).applyMatrix3(matrix);assert(o.userData.groundContact?Math.abs(normal.y)<.01:normal.y>.99,'Road tops face up; ground-contact edges are vertical');}g.computeBoundingBox();const bounds=g.boundingBox.clone().applyMatrix4(o.matrixWorld);assert((o.userData.groundContact?bounds.min.y<exterior.terrain.position.y:bounds.min.y>.25)&&bounds.max.y<.4,'Road edges meet terrain and all surfaces remain below walking collision height');});
+layouts.historicRoads.traverse(o=>{if(!o.isMesh||o.userData.roadEndSide)return;if(o.userData.roadEndFade){assertRoadEndSurface(o);return;}const g=o.geometry,p=g.attributes.position;for(let i=0;i<p.count;i++)assert(Number.isFinite(p.getX(i))&&Number.isFinite(p.getY(i))&&Number.isFinite(p.getZ(i)));const n=g.attributes.normal,normal=new THREE.Vector3(),matrix=new THREE.Matrix3().getNormalMatrix(o.matrixWorld);for(let i=0;i<n.count;i++){normal.fromBufferAttribute(n,i).applyMatrix3(matrix);assert(o.userData.groundContact?Math.abs(normal.y)<.01:normal.y>.99,'Road tops face up; ground-contact edges are vertical');}g.computeBoundingBox();const bounds=g.boundingBox.clone().applyMatrix4(o.matrixWorld);assert((o.userData.groundContact?bounds.min.y<exterior.terrain.position.y:bounds.min.y>.25)&&bounds.max.y<.4,'Road edges meet terrain and all surfaces remain below walking collision height');});
 // Compare rendered road materials and sample the visible pale border.
 const modernRoad=layouts.roads.getObjectByName('Warren Lane');
 for(const road of HISTORIC_ROADS){

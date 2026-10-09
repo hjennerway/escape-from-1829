@@ -9,7 +9,7 @@ import {finishRoofTiles} from './roof-tile-uv.mjs';
 import {closeRoofWallGaps} from './roof-wall-joins.mjs';
 import {createBowlingGreen} from './bowling-green.mjs';
 import {photoDetailPrimitives} from './photo-detail-primitives.mjs';
-import {refineFrontInsideCorners} from './front-inside-corners.mjs';
+import {refineFrontInsideCorners,trimFrontCornerRoofClosures} from './front-inside-corners.mjs';
 import {addCentralBack} from './central-back.mjs';
 import {addFacadeCourse,joinInstancedFacadeCourses} from './facade-courses.mjs';
 import {FRONT_CORNER_OUTLINE} from './front-inside-corners.mjs';
@@ -56,7 +56,7 @@ import {createMainAdminBuilding} from './main-admin-building.mjs';
 import {eastPhotoProfile,addEastPhotoDetails} from './east-photo-detail.mjs';
 import {courtyardPhotoProfile} from './courtyard-photo-detail.mjs';
 import {rearCourtPhotoProfile} from './rear-court-photo-detail.mjs';
-import {redesmerePhotoProfile} from './redesmere-photo-detail.mjs';
+import {redesmerePhotoProfile,addRedesmereMainCornice} from './redesmere-photo-detail.mjs';
 import {innerCourtPhotoProfile,INNER_COURT_SIDE_PROFILE} from './inner-court-photo-detail.mjs';
 export {MAP_REAR_PROPORTIONS} from './central-court-photo-detail.mjs';
 // Red-X correction: Churton side of the north crossroads (road centre z=-99).
@@ -249,6 +249,7 @@ export function createEscapeExterior(THREE,aspect){
     // floor band and lower brickwork stop there instead of overlapping the
     // end range's west-facing wall over z=10..11.5.
     const serviceJoin=Math.abs(x-81.875)<.01&&z===8;
+    const redesmereCornice=serviceJoin||redesmerePhotoProfile(x,z)||rearCourtPhotoProfile(x,z);
     const bodyBase=serviceJoin?4.55:base;
     const body=mesh(worldUV(westForwardRoot?westForwardRootGeometry(THREE,bodyBase,h):rearArm?wingWallGeometry(THREE,base):new THREE.BoxGeometry(w,h-bodyBase,d),detail?1.7:3),detail?photoBrick:brick,westForwardRoot?0:x,westForwardRoot?0:(h+bodyBase)/2,westForwardRoot?0:z,true);
     if(westForwardRoot){body.name='West forward stepped root masonry';body.userData.collisionFootprint=westForwardRootFootprint();}
@@ -262,12 +263,20 @@ export function createEscapeExterior(THREE,aspect){
       if(westForwardRoot){const lower=mesh(worldUV(westForwardRootGeometry(THREE,0,lowerHeight),1.7),photoBrick,0,0,0,true);lower.name='West forward stepped root foundation';lower.userData.collisionFootprint=westForwardRootFootprint();}
       else if(westDetail)mesh(worldUV(new THREE.BoxGeometry(width,lowerHeight,d),1.7),photoBrick,middle,lowerHeight/2,z,true);
       else box(detail?white:cream,middle,lowerHeight/2,lowerZ,width,lowerHeight,lowerDepth);
-      if(!westDetail)box(detail?white:cream,middle,foundation+(detail?.04:.1),serviceJoin?lowerZ-.0325:z,width+(detail?.13:.23),detail?.16:.22,serviceJoin?lowerDepth+.065:d+(detail?.13:.23));
+      if(!westDetail){
+        // The Redesmere frontage now has one closed, wall-seated course.
+        // Retain the old court/side trim, concealed behind its front wall.
+        const frontCourse=(Math.abs(x-54.175)<.01&&z===12)||(x===66&&z===16.15);
+        const retreat=frontCourse ? .135 : 0;
+        box(detail?white:cream,middle,foundation+(detail?.04:.1),serviceJoin?lowerZ-.0325:z-retreat/2,width+(detail?.13:.23),detail?.16:.22,(serviceJoin?lowerDepth+.065:d+(detail?.13:.23))-retreat);
+      }
       if(passage&&base>lowerHeight)mesh(worldUV(new THREE.BoxGeometry(width,base-lowerHeight,d)),detail?photoBrick:brick,middle,(base+lowerHeight)/2,z,true);
     }
     // Outer east white base is retained beyond the mirrored brick inner wing.
     if(eastInner)box(white,41.02,2,z,.12,4,d);
     if(westForwardRoot)mesh(westForwardRootGeometry(THREE,h-.23,h-.01,.115,true),white).name='West forward stepped root cornice';
+    else if(redesmerePhotoProfile(x,z))addRedesmereMainCornice(THREE,{mesh,worldUV,white});
+    else if(redesmereCornice)box(white,x,h-.11,z,w+.56,.24,d+.56);
     else if(!rearArm&&x!==-69&&x!==-39.6)box(white,x,h-.12,z,w+.23,.22,d+.23);
     if(passage){
       const left=Math.max(x-w/2,passage.x-passage.width/2),right=Math.min(x+w/2,passage.x+passage.width/2);
@@ -280,6 +289,8 @@ export function createEscapeExterior(THREE,aspect){
     // All existing roof-edge render shares the photo-detail white. The
     // dragon pediment and portico retain their separate cream material.
     if(westForwardRoot)mesh(westForwardRootGeometry(THREE,h+.01,h+.23,.24,true),white).name='West forward stepped root roof support';
+    else if(redesmerePhotoProfile(x,z)){ /* Both fitted cornice layers are above. */ }
+    else if(redesmereCornice)box(white,x,h+.12,z,w+.8,.22,d+.8);
     else if(!rearArm&&x!==-69&&x!==-39.6)box(white,x,h+.12,z,w+(innerCornerRoom?.8:.48),.22,d+(innerCornerRoom?.8:.48));
     const principal=x===EAST_SHIFT/2&&z===12;
     if(principal){
@@ -335,7 +346,7 @@ export function createEscapeExterior(THREE,aspect){
   const white=material(0xe1e3dc),photoBrick=material(0xb3a5a0,{map:bricks});
   const details=photoDetailPrimitives(THREE,{model,box,mesh,white,steel,material});
   addRedesmerePassage(THREE,{model,mesh,worldUV,white,brick:photoBrick,material});
-  addRedesmereEndRange(THREE,{box,mesh,worldUV,brick:photoBrick,material,hipRoof});
+  addRedesmereEndRange(THREE,{box,mesh,worldUV,white,brick:photoBrick,material,hipRoof});
   addRedesmereEdgeChimney(THREE,{model,material});
   for(const b of blocks){
     // The west arm is rebuilt from the detailed east arm and img15/img16.
@@ -383,7 +394,9 @@ export function createEscapeExterior(THREE,aspect){
   // window section, to its left. Its face stands 5.5 units beyond the facade.
   const squareX=66,squareZ=16.15,squareWidth=7.5,squareDepth=17.7;
   block(squareX,squareZ,squareWidth,squareDepth,14.3).name='East garden pavilion';
-  for(const y of [4.08,8.8])box(white,squareX,y,squareZ,squareWidth+.14,.16,squareDepth+.14);
+  // Keep the lower side/rear trim; the joined frontage supplies its front.
+  box(white,squareX,4.08,squareZ-.07,squareWidth+.14,.16,squareDepth);
+  box(white,squareX,8.8,squareZ,squareWidth+.14,.16,squareDepth+.14);
   addEastPhotoDetails(THREE,{model,box,mesh,worldUV,white,brick:photoBrick,roof,steel,material,hipRoof,details});
   joinWestCrossRangeRoof(THREE,{model,mesh,roof,brick:photoBrick,white,worldUV});
   refineFrontInsideCorners(THREE,{model,batches,box,mesh,worldUV,white,brick:photoBrick,roof,material,details});
@@ -546,6 +559,7 @@ export function createEscapeExterior(THREE,aspect){
   avoidWindowDownpipes(THREE,model);
   joinInstancedFacadeCourses(THREE,model);
   closeRoofWallGaps(THREE,model,{exclude:[trees,terrain]});
+  trimFrontCornerRoofClosures(THREE,model);
   for(const name of ['Entrance west projection slate roof','Entrance west slate pitches to render edge']){
     const roofMesh=model.getObjectByName(name);if(roofMesh)roofMesh.userData.preciseRoofUV=true;
   }

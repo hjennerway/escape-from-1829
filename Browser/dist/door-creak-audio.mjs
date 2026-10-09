@@ -20,9 +20,9 @@ export function createDoorCreakAudio({getContext,enabled=()=>true}){
  function stop(id){
   const source=playing.get(id);if(!source)return;playing.delete(id);source.stop();
  }
- return {play({id,opening,duration=.95}){
+ return {play({id,opening,duration=.95,volume=.16}){
   stop(id);const ctx=getContext();if(!enabled()||ctx?.state!=='running')return;
-  const source=ctx.createBufferSource(),gain=ctx.createGain();source.buffer=buffer(ctx,opening,duration);gain.gain.value=.16;
+  const source=ctx.createBufferSource(),gain=ctx.createGain();source.buffer=buffer(ctx,opening,duration);gain.gain.value=volume;
   source.connect(gain);gain.connect(ctx.destination);playing.set(id,source);
   source.onended=()=>{source.disconnect();gain.disconnect();if(playing.get(id)===source)playing.delete(id);};source.start();
  },stop(){for(const id of [...playing.keys()])stop(id);}};

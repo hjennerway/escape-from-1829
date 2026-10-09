@@ -91,6 +91,30 @@ function cutGeometry(THREE,geometry,transform,outline,weld=false){
 }
 const reflectedOutline=side=>side===1?FRONT_CORNER_OUTLINE:FRONT_CORNER_OUTLINE.map(([x,z])=>[-x,z]).reverse();
 
+// The automatic roof finisher runs after the authored corner walls. Its
+// fascia can recreate faces on those walls, including white patches over the
+// brick roof junction. Apply the same concealed cut to generated fascias;
+// retain the slate, roof undersides and the authored masonry/coping.
+export function trimFrontCornerRoofClosures(THREE,model){
+  const backZ=FRONT_CORNER_OUTLINE[2][1],backX=-FRONT_CORNER_OUTLINE[3][0];
+  const outlines=[...[-1,1].map(reflectedOutline),
+    [[-38.45,backZ],[backX,backZ],[backX,WEST_RANGE_PLAN.innerFrontZ],[-38.45,WEST_RANGE_PLAN.innerFrontZ]]
+  ].map(outline=>clearanceOutline(outline,.04));
+  model.updateMatrixWorld(true);
+  for(const object of [...model.children]){
+    if(!object.isMesh||!object.userData.roofWallClosure||!object.name.startsWith('Eave closure:'))continue;
+    for(const outline of outlines){
+      const bounds=new THREE.Box3().setFromObject(object);
+      if(bounds.max.x<=Math.min(...outline.map(p=>p[0]))||bounds.min.x>=Math.max(...outline.map(p=>p[0]))||
+        bounds.max.z<=Math.min(...outline.map(p=>p[1]))||bounds.min.z>=Math.max(...outline.map(p=>p[1])))continue;
+      const old=object.geometry;
+      object.geometry=cutGeometry(THREE,old,object.matrixWorld,outline,true);
+      object.geometry.applyMatrix4(object.matrixWorld.clone().invert());old.dispose();
+    }
+    if(!object.geometry.attributes.position.count)object.removeFromParent();
+  }
+}
+
 export function refineFrontInsideCorners(THREE,{model,batches,box,mesh,worldUV,brick,white,roof,material,details}){
   // Perform the cut before adding the replacement masonry, openings and yard.
   model.updateMatrixWorld(true);

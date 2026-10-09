@@ -69,6 +69,17 @@ for(const side of [-1,1]){
   }
 }
 const layouts=createAerialLayouts(THREE,e),timeline=prepareEstateTimeline(THREE,e,layouts);
+// Ground-contact skirts are generated only after the complete timeline is
+// assembled. The apron used to place a second outward face on the stair wall.
+const meshes=[];e.model.updateMatrixWorld(true);e.model.traverseVisible(o=>{if(o.isMesh)meshes.push(o);});
+for(const side of [-1,1])for(const x of [30.12,30.3,30.5,30.7])for(const y of [-.12,-.04,.04,.1,.16]){
+  ray.set(new THREE.Vector3(side*x,y,21.68),new THREE.Vector3(0,0,1));ray.far=.04;
+  const hits=ray.intersectObjects(meshes,false);
+  assert.equal(hits.length,1,'one exposed retaining face beside the outer stair: '+JSON.stringify({side,x,y,hits:hits.map(h=>({name:h.object.name,z:h.point.z}))}));
+  assert.equal(hits[0].object.name,(side<0?'West':'East')+' semi-basement retaining wall 6');
+  near(hits[0].point.z,21.7,'retaining wall retains its visible plane');
+}
+ray.far=Infinity;
 for(const year of [1829,1849,1916,2021]){
   timeline.setPeriod(year);
   for(const side of [-1,1])near(hit(side*17,18.3)?.point.y,grade-depth,'sunken frontage belongs to the original building');
@@ -81,4 +92,4 @@ for(const historic of [true,false])for(const modern of [true,false]){
 timeline.setPeriod(1829);walker.setObstacles(exteriorObstacles(THREE,e.model));
 near(hit(17,18.3)?.point.y,grade-depth,'restoring a timeline period reopens the excavation after hiding both layouts');
 assert.equal(e.scene.children.find(o=>o.isDirectionalLight).shadow.needsUpdate,true);
-console.log('PASS: 50% deeper frontage, six risers at all four entrances, outer stairs along the facade, no lawn projection, clear doglegs, walking heights, retaining collisions, original-building timeline and layout visibility.');
+console.log('PASS: 50% deeper frontage, six risers at all four entrances, outer stairs along the facade, 40 single retaining-face probes, clear doglegs, walking heights, retaining collisions, original-building timeline and layout visibility.');

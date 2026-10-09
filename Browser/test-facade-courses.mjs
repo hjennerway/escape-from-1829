@@ -3,8 +3,10 @@ import * as THREE from './dist/vendor/three.module.js';
 import {createEscapeExterior} from './dist/escape-exterior.mjs';
 import {WEST_RANGE_PLAN} from './dist/west-range-plan.mjs';
 import {WEST_END_PROPORTIONS} from './dist/west-refinement.mjs';
+import {checkRedesmereFloorBand} from './test-support/redesmere-floor-band-probes.mjs';
 globalThis.document={createElement:()=>({getContext:()=>({fillRect(){}})})};
 const {model}=createEscapeExterior(THREE,1.6);model.updateMatrixWorld(true);
+console.log(`PASS: ${checkRedesmereFloorBand(THREE,model)} Redesmere wall-contact and closed lower-band surface probes.`);
 const ray=new THREE.Raycaster();
 // Probe the complete scene rather than just each sweep. The old end bars
 // were individually solid but met at different heights, and the low roof
@@ -66,10 +68,10 @@ for(const y of [4.165,8.63]){
  assert(Math.abs(hits[0].point.y-y)<1e-5);
 }
 // The later eave-flicker repair uses the same solid-sweep helper for its iron
-// gutter. Keep surveying the 22 render courses and include that extra sweep.
+// gutter. Include the later continuous Admin side band and that extra sweep.
 const gutter=courses.filter(o=>o.name==='West outer end continuous gutter');
 assert.equal(gutter.length,1,'The repaired outer-end gutter remains one continuous sweep');
-assert.equal(courses.filter(o=>!gutter.includes(o)).length,22,'Survey all repaired render courses, including west end/garden bands and middle-arm cornices');
+assert.equal(courses.filter(o=>!gutter.includes(o)).length,24,'Survey all repaired masonry courses, including west end/garden bands, middle-arm cornices, the Admin side band and Redesmere frontage');
 let corners=0,probes=0;
 for(const course of courses){
  const {line,y,height,width}=course.userData.facadeCourse;

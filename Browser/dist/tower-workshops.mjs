@@ -2,7 +2,8 @@ import {batchAerialMeshes,cacheAerialTransforms} from './aerial-performance.mjs'
 import {insidePolygon,ROOM_DOOR_WIDTH} from './asylum-layout.mjs';
 import {ROOM_DOOR_THICKNESS} from './asylum-doors.mjs';
 import {ESCAPE_WATER_TOWER} from './water-tower.mjs';
-import {WORKSHOP_GALLERY,galleryShellRemainders,addWorkshopArchedWall} from './workshop-gallery.mjs';
+import {WORKSHOP_GALLERY,galleryShellRemainders,addWorkshopArchedWall,addWorkshopGalleryRoof} from './workshop-gallery.mjs';
+import {FARNDON_CORRIDOR} from './farndon-corridor.mjs';
 import {TOWER_RANGES} from './tower-buildings.mjs';
 import {MAIN_KITCHEN} from './main-kitchen.mjs';
 import {ADMIN_OS_RANGES,adminMapPoint} from './main-admin-building.mjs';
@@ -14,6 +15,10 @@ import {createWorkshopLights} from './workshop-interior-lights.mjs';
 import {createWorkshopShadowBatches} from './workshop-shadow-batches.mjs';
 import {WORKSHOP_DOOR_BASE,WORKSHOP_DOOR_HEIGHT,WORKSHOP_DOOR_HEAD} from './workshop-door-dimensions.mjs';
 import {corridorWallJoins,miterCorridorWall} from './corridor-wall-joins.mjs';
+import {EXPLORE_GALLERY,EXPLORE_CORRIDOR_RUNS,EXPLORE_CORRIDOR_POLYGONS,EXPLORE_CORRIDOR_DOORS,EXPLORE_CORRIDOR_ENTRANCE,EXPLORE_IRBY_ENTRANCE} from './explore-corridor-plan.mjs';
+import {restoreGroundProjection} from './ground-materials.mjs';
+import {fitWorkshopYardRoofs,closeWorkshopAdminBay} from './workshop-yard-envelope.mjs';
+import {fitNorthTowerWall,removeTowerJunctionSashes} from './tower-wall-alignment.mjs';
 export const WORKSHOP_DOOR_SECONDS=.95;
 const galleryLeft=WORKSHOP_GALLERY.minX,galleryRight=WORKSHOP_GALLERY.maxX;
 // Partition faces meet the gallery lining without a change in clear width.
@@ -38,10 +43,10 @@ export const TOWER_WORKSHOPS={
 TOWER_WORKSHOPS.outline=unionPolygons([TOWER_WORKSHOPS.workshopOutline,...ESCAPE_CORRIDOR_POLYGONS])[0];
 TOWER_WORKSHOPS.corridors=ESCAPE_CORRIDOR_RUNS;
 
-function meetsPassage(bounds){
+function meetsPassage(bounds,runs){
  if(bounds.min.y>=WORKSHOP_GALLERY.height||bounds.max.y<=0)return false;
  const corners=[[bounds.min.x,bounds.min.z],[bounds.max.x,bounds.min.z],[bounds.max.x,bounds.max.z],[bounds.min.x,bounds.max.z]];
- return ESCAPE_CORRIDOR_RUNS.some(run=>{
+ return runs.some(run=>{
   const dx=run.end[0]-run.start[0],dz=run.end[1]-run.start[1],length=Math.hypot(dx,dz),half=(WORKSHOP_GALLERY.maxX-WORKSHOP_GALLERY.minX)/2+.32;
   const along=corners.map(([x,z])=>((x-run.start[0])*dx+(z-run.start[1])*dz)/length),across=corners.map(([x,z])=>((x-run.start[0])*dz-(z-run.start[1])*dx)/length);
   const polygon=corridorPolygon(run,.32);
@@ -49,9 +54,18 @@ function meetsPassage(bounds){
  });
 }
 
-export function createTowerWorkshops(THREE,exterior,walker,resources,sign){
- const group=new THREE.Group();group.name='Tower corridor and three workshops';group.userData.reference='Research/escape-grounds/README.md';group.userData.plan=TOWER_WORKSHOPS;
+export function createTowerWorkshops(THREE,exterior,walker,resources,sign,{explore=false}={}){
+ const runs=explore?EXPLORE_CORRIDOR_RUNS:ESCAPE_CORRIDOR_RUNS,polygons=explore?EXPLORE_CORRIDOR_POLYGONS:ESCAPE_CORRIDOR_POLYGONS;
+ const gallery=explore?EXPLORE_GALLERY:WORKSHOP_GALLERY;
+ const plan=explore?{...TOWER_WORKSHOPS,outline:unionPolygons([TOWER_WORKSHOPS.workshopOutline,...polygons])[0],corridors:runs}:TOWER_WORKSHOPS;
+ const group=new THREE.Group();group.name='Tower corridor and three workshops';group.userData.reference='Research/escape-grounds/README.md';group.userData.plan=plan;
  const tower=exterior.model.getObjectByName('Tower service buildings');
+ const galleryRoof=exterior.model.getObjectByName('Straight corridor to Farndon slate roof')?.material;
+ const galleryRidge=exterior.model.getObjectByName('Straight corridor to Farndon ridge')?.material;
+ const entranceRoof=explore?exterior.model.getObjectByName('Main/admin front corridor slate roof')?.material:null;
+ const entranceBrick=explore?exterior.model.getObjectByName('Main/admin corridor front brick gable')?.material:null;
+ const irbyRoof=explore?exterior.model.getObjectByName('Water tower to Irby corridor slate roof')?.material:null;
+ const irbyBrick=explore?exterior.model.getObjectByName('Irby corridor exposed end gable')?.material:null;
  const corridor=exterior.model.getObjectByName('Straight corridor to Farndon'),court=exterior.model.getObjectByName('Tower service court'),scopes=[tower,exterior.adminCorridor??corridor,exterior.mainAdmin,court?.parent,exterior.haleWard,exterior.irbyAshley,exterior.farndonWard,exterior.uptonFrithOscroft,exterior.graftonEdge,exterior.witbyWard].filter((s,i,list)=>s&&list.indexOf(s)===i);
  // Clear the same low shell volume from the rooms as from the passages.
  // The kitchen's north wall meets the west workshop facade at this cut.
@@ -63,27 +77,82 @@ export function createTowerWorkshops(THREE,exterior,walker,resources,sign){
  for(const scope of scopes){
   const batches=[];scope.traverse(o=>{if(o.userData.aerialBatch)batches.push(o);else if(o.isMesh){sourceStates.push([o,o.visible,!!o.userData.aerialBatchSource]);if(o.userData.aerialBatchSource){delete o.userData.aerialBatchSource;o.visible=true;}}});
   for(const b of batches){oldBatches.push([b,b.parent]);b.removeFromParent();}
+  // Replace the old decorative front-door fittings along with the cut shell.
+  if(explore){const front=scope.getObjectByName('Main/admin corridor front doorway');if(front)for(const o of [...front.children])if(o.name!=='Corridor pavilion side connection walls'){removed.push([o,front]);o.removeFromParent();}}
+  if(explore)for(const name of ['Irby corridor end doorway','Irby corridor exposed end gable','Water tower to Irby corridor slate roof','Roof underside: Water tower to Irby corridor slate roof','Eave closure: Water tower to Irby corridor','Water tower to Irby corridor ridge']){
+   const o=scope.getObjectByName(name);if(o){removed.push([o,o.parent]);o.removeFromParent();}
+  }
   const names=new Set(['Low west stores walls','Low west stores plinth','West stores flat front walls','West stores flat front plinth','Tower east traced abutment walls','Tower east traced abutment plinth','Tower east dormered range walls','Tower east dormered range plinth','Western tower flat link walls','Western tower flat link plinth']);
+  // These separated, untextured pads predate the continuous asphalt court.
+  // Retaining them exposes sunken patches where the walking shell is cut.
+  if(scope===tower)for(const name of ['Twin workshop paved court','Chimney cylinder hardstanding']){
+   const o=scope.getObjectByName(name);if(o){removed.push([o,o.parent]);o.removeFromParent();}
+  }
   scope.updateWorldMatrix(true,true);
+  // These complete shells are replaced, including the wider estate gallery.
+  // Its old east windows sit beyond the narrowed passage's proximity cutoff.
+  // Remove assemblies with their supporting shell, rather than leaving glass
+  // and stone frames suspended outside the new wall.
+  const replacedBounds=[];scope.traverse(o=>{if(names.has(o.name)||o.name==='Straight corridor to Farndon walls')replacedBounds.push(new THREE.Box3().setFromObject(o).expandByScalar(.4));});
   // The cut walls supply their own glazing. Keep estate windows beyond the
   // accessible routes, and retain removed assemblies for exact restoration.
   {
    const windows=[];scope.traverse(o=>{if(o.userData.aerialWindowAssembly)windows.push(o);});
-   for(const o of windows){const p=o.getWorldPosition(new THREE.Vector3()),b=new THREE.Box3().setFromObject(o);if(b.min.y<WORKSHOP_GALLERY.height&&b.max.y>0&&ESCAPE_CORRIDOR_RUNS.some(r=>{const dx=r.end[0]-r.start[0],dz=r.end[1]-r.start[1],l=Math.hypot(dx,dz),t=((p.x-r.start[0])*dx+(p.z-r.start[1])*dz)/(l*l);return t>=-.5/l&&t<=1+.5/l&&Math.abs((p.x-r.start[0])*dz-(p.z-r.start[1])*dx)/l<3.3;})){removed.push([o,o.parent]);o.removeFromParent();}}
+   for(const o of windows){const p=o.getWorldPosition(new THREE.Vector3()),b=new THREE.Box3().setFromObject(o);if(b.min.y<WORKSHOP_GALLERY.height&&b.max.y>0&&(replacedBounds.some(bounds=>bounds.intersectsBox(b))||runs.some(r=>{const dx=r.end[0]-r.start[0],dz=r.end[1]-r.start[1],l=Math.hypot(dx,dz),t=((p.x-r.start[0])*dx+(p.z-r.start[1])*dz)/(l*l);return t>=-.5/l&&t<=1+.5/l&&Math.abs((p.x-r.start[0])*dz-(p.z-r.start[1])*dx)/l<3.3;}))){removed.push([o,o.parent]);o.removeFromParent();}}
   }
-  const concealedWindows=[];scope.traverse(o=>{if(!o.userData.aerialWindowAssembly)return;const b=new THREE.Box3().setFromObject(o),g=WORKSHOP_GALLERY;if(b.min.y<g.height&&b.min.x<g.maxX-.2&&b.max.x>g.minX+.2&&b.min.z<g.maxZ&&b.max.z>g.minZ)concealedWindows.push(o);});
+  const concealedWindows=[];scope.traverse(o=>{if(!o.userData.aerialWindowAssembly)return;const b=new THREE.Box3().setFromObject(o),g=gallery;if(b.min.y<g.height&&b.min.x<g.maxX-.2&&b.max.x>g.minX+.2&&b.min.z<g.maxZ&&b.max.z>g.minZ)concealedWindows.push(o);});
   for(const o of concealedWindows){removed.push([o,o.parent]);o.removeFromParent();}
   // Low kitchen eaves include separate fascia and hip-flashing meshes. Cut
   // these with the roofs so their ends cannot project through the new lining.
   // Joined masonry courses are ordinary meshes after facade optimization.
   // Clip their low corridor sections too: Hale's exterior band otherwise
   // shares the new door-header plane. Upper and outside sections survive.
-  const shells=[];scope.traverse(o=>{if(!o.isMesh||o.isInstancedMesh)return;const b=new THREE.Box3().setFromObject(o),g=WORKSHOP_GALLERY;const shell=/walls|plinth|floor|ground|court/i.test(o.name)||o===court,fitting=/gutter|eaves?|fascia|flashing|downpipe|pipe bracket|roof|ridge|joined stone courses/i.test(o.name);const intersects=(shell||fitting)&&b.min.y<g.height&&b.max.y>0&&ESCAPE_CORRIDOR_POLYGONS.some(p=>b.min.x<Math.max(...p.map(v=>v[0]))+.32&&b.max.x>Math.min(...p.map(v=>v[0]))-.32&&b.min.z<Math.max(...p.map(v=>v[1]))+.32&&b.max.z>Math.min(...p.map(v=>v[1]))-.32);if(names.has(o.name)||intersects)shells.push(o);});
+  const oldGalleryFitting=o=>{if(!/gutter|eaves?|fascia|flashing|downpipe|pipe bracket|brick plinth/i.test(o.name))return false;for(let p=o.parent;p;p=p.parent)if(p.name==='Straight corridor to Farndon')return true;return false;};
+  const oldAdminFitting=o=>{if(!/^Corridor (?:gutter|downpipe|pipe bracket|brick plinth)/.test(o.name))return false;for(let p=o.parent;p;p=p.parent)if(/^Corridor (?:north|south) windows$/.test(p.name)&&p.parent?.name==='1829 to Main/admin connecting corridor')return true;return false;};
+  const oldConnector=o=>/^(?:Connecting corridor (?:walls|slate roof|ridge)|Roof underside: Connecting corridor slate roof|Eave closure: Connecting corridor)$/.test(o.name);
+  const oldFrontRoof=o=>explore&&/^(?:Main\/admin front corridor (?:slate roof|ridge)|Roof underside: Main\/admin front corridor slate roof|Eave closure: Main\/admin front corridor)$/.test(o.name);
+  const shells=[];scope.traverse(o=>{if(!o.isMesh||o.isInstancedMesh)return;const b=new THREE.Box3().setFromObject(o),g=gallery;const shell=/walls|plinth|floor|ground|court/i.test(o.name)||o===court,fitting=/gutter|eaves?|fascia|flashing|downpipe|pipe bracket|roof|ridge|joined stone courses/i.test(o.name);const intersects=(shell||fitting)&&b.min.y<g.height&&b.max.y>0&&polygons.some(p=>b.min.x<Math.max(...p.map(v=>v[0]))+.32&&b.max.x>Math.min(...p.map(v=>v[0]))-.32&&b.min.z<Math.max(...p.map(v=>v[1]))+.32&&b.max.z>Math.min(...p.map(v=>v[1]))-.32);if(names.has(o.name)||intersects||oldGalleryFitting(o)||oldAdminFitting(o)||oldConnector(o)||oldFrontRoof(o))shells.push(o);});
   for(const o of shells){
+   // Rainwater fittings belonged to the removed wider gallery facades. They
+   // cannot survive as low rails and isolated downpipes beside the new walls.
+   if(oldGalleryFitting(o)){removed.push([o,o.parent]);o.removeFromParent();continue;}
+   // Replace the roof backing and fascia with the slate skin. Leaving its
+   // separately generated underside creates a second floating roof silhouette.
+   if(oldFrontRoof(o)){removed.push([o,o.parent]);o.removeFromParent();continue;}
    // The old gallery is a solid block, including the machine-room doorway.
    // Its replacement owns the whole wall run; retaining the cut block's side
    // creates an invisible collision strip inside the accessible room.
-   if(!names.has(o.name)&&o.name!=='Straight corridor to Farndon walls')for(const part of galleryShellRemainders(THREE,o,resources,roomVolumes)){
+   // Let this paving meet beneath the flat entrance face, rather than cutting
+   // it .08 m beyond the wall and exposing a stepped, triangulated lower edge.
+   const irbyCourt=explore&&/^Irby Estates continuous service court(?: ground contact)?$/.test(o.name);
+   const towerCourt=/^Tower service court(?: ground contact)?$/.test(o.name);
+   const oldGalleryRoof=/^(?:Straight corridor to Farndon (?:slate roof|ridge)|Roof underside: Straight corridor to Farndon slate roof)$/.test(o.name);
+   // Clear the complete old roof across the replaced route, including skirts
+   // outside the narrowed passage. Preserve outer sections for restoration.
+   // The original cross-gallery is wider than the walking passage too. Cut
+   // its complete low envelope through the old Main/admin contact; narrow
+   // cuts otherwise leave two slate triangles suspended above the yard.
+   const shellRuns=oldConnector(o)||oldAdminFitting(o)?[{...runs.find(r=>r.id==='admin'),end:[160.8,9.8],half:oldAdminFitting(o)?3.6:3.45,startPadding:0,endPadding:0}]:oldGalleryRoof?[{...runs.find(r=>r.id==='gallery'),half:FARNDON_CORRIDOR.width,startPadding:0,endPadding:0}]:towerCourt?runs.map(run=>({...run,half:(gallery.maxX-gallery.minX)/2-.05,startPadding:0,endPadding:0})):irbyCourt?runs.map(run=>run.id==='irby'?{...run,endPadding:.20}:run):runs;
+   let surfaceSource=o;
+   if(towerCourt){
+    surfaceSource=o.clone();surfaceSource.geometry=o.geometry.clone();
+    const p=surfaceSource.geometry.attributes.position,v=new THREE.Vector3(),inverse=o.matrixWorld.clone().invert();
+    // Extend the old X=159 court edge beneath the actual gallery face,
+    // including the grass channel all the way to Main/admin's north wall.
+    for(let i=0;i<p.count;i++){v.fromBufferAttribute(p,i).applyMatrix4(o.matrixWorld);if(Math.abs(v.x-159)<.001&&v.z<6.61){v.x=galleryRight-.05;v.applyMatrix4(inverse);p.setXYZ(i,v.x,v.y,v.z);}}
+    surfaceSource.geometry.computeBoundingBox();surfaceSource.geometry.computeBoundingSphere();
+   }
+   let courtMaterial;
+   if(irbyCourt&&o.material.userData.estateSurface){
+    // The aerial overlay's slope bias pulls distant paving through the shut
+    // door. Its clipped runtime surface has no overlapping layer to separate.
+    courtMaterial=o.material.clone();courtMaterial.polygonOffset=false;
+    courtMaterial.polygonOffsetFactor=courtMaterial.polygonOffsetUnits=0;
+    restoreGroundProjection(courtMaterial);resources.add(courtMaterial);
+   }
+   const shellRooms=towerCourt?roomVolumes.map(volume=>({...volume,startPadding:0,endPadding:0})):roomVolumes;
+   if(!names.has(o.name)&&o.name!=='Straight corridor to Farndon walls')for(const part of galleryShellRemainders(THREE,surfaceSource,resources,shellRooms,shellRuns)){
+    if(courtMaterial)part.material=courtMaterial;
     // These low connecting galleries were raised to the workshop ceiling.
     // Their surviving roof skirts must rise with them: leaving the old roof
     // at 3.6 m makes an exterior shutter across the new window's sun rays.
@@ -93,12 +162,16 @@ export function createTowerWorkshops(THREE,exterior,walker,resources,sign){
     }
     o.parent.add(part);remainders.push(part);
    }
+   if(surfaceSource!==o)surfaceSource.geometry.dispose();
    removed.push([o,o.parent]);o.removeFromParent();
   }
   // Clone only the west flat-roof envelope and fixed doorway threshold.
   // Stretch its west edge to the moved wall, leaving slate/tower contacts fixed.
   // Original geometry stays untouched so replay restores the estate exactly.
   if(scope===tower){
+   fitNorthTowerWall(THREE,{tower,resources,removed,remainders,west:westX,sourceWest:sourceWestX,
+    plinth:removed.find(([o])=>o.name==='Low west stores plinth')?.[0].material});
+   fitWorkshopYardRoofs(THREE,{tower,resources,removed,remainders,left:galleryLeft,right:galleryRight,west:westX});
    const fittings=[];scope.traverse(o=>{if(!o.isMesh||o.isInstancedMesh)return;
     if(['Low west stores arch-front flat roof','Low west stores west parapet','Low west stores west coping','West stores flat front flat roof','Tower-side stores threshold'].includes(o.name)||
      /^West stores flat front stepped (parapet|coping)$/.test(o.name)&&new THREE.Box3().setFromObject(o).min.x<sourceWestX+.3)fittings.push(o);
@@ -119,13 +192,13 @@ export function createTowerWorkshops(THREE,exterior,walker,resources,sign){
    }
   }
   const m=new THREE.Matrix4(),p=new THREE.Vector3();
-  const clearPolygons=ESCAPE_CORRIDOR_RUNS.map(r=>corridorPolygon(r,-.32));
+  const clearPolygons=runs.map(r=>corridorPolygon(r,-.32));
   scope.traverse(o=>{if(!o.isInstancedMesh)return;if(!o.geometry.boundingBox)o.geometry.computeBoundingBox();const world=new THREE.Matrix4();let changed=false;
    for(let i=0;i<o.count;i++){o.getMatrixAt(i,m);world.multiplyMatrices(o.matrixWorld,m);const b=o.geometry.boundingBox.clone().applyMatrix4(world),point=[(b.min.x+b.max.x)/2,(b.min.z+b.max.z)/2];
-    if(meetsPassage(b)){
+    if(meetsPassage(b,runs)){
      if(!clearPolygons.some(poly=>containsPoint(point,poly))){
       const source=new THREE.Mesh(o.geometry,o.material);source.name=o.name;source.matrixAutoUpdate=false;source.matrix.copy(m);source.matrixWorld.copy(world);source.castShadow=o.castShadow;source.receiveShadow=o.receiveShadow;source.userData={...o.userData};delete source.userData.aerialBatch;
-      for(const part of galleryShellRemainders(THREE,source,resources)){o.add(part);remainders.push(part);}
+      for(const part of galleryShellRemainders(THREE,source,resources,[],runs)){o.add(part);remainders.push(part);}
      }
      editedInstances.push([o,i,m.clone()]);o.setMatrixAt(i,new THREE.Matrix4().makeScale(0,0,0));changed=true;
     }
@@ -133,16 +206,22 @@ export function createTowerWorkshops(THREE,exterior,walker,resources,sign){
   });
   scope.traverse(o=>{if(!o.isInstancedMesh||o.name!=='Service glazing and trim')return;
    for(let i=0;i<o.count;i++){o.getMatrixAt(i,m);p.setFromMatrixPosition(m);const panel=p.x>145.8&&p.x<146.3&&Math.abs(p.z+44.75)<.08&&p.y<3.9,handle=Math.abs(p.x-146.02)<.02&&Math.abs(p.z+44.19)<.02&&Math.abs(p.y-1.85)<.02;
+    const size=new THREE.Vector3().setFromMatrixScale(m);
+    const obsoleteEave=p.x<163&&size.y<.2&&size.x>5&&(
+     Math.abs(p.y-6.45)<.01&&[-40.5,-36.3].some(z=>Math.abs(p.z-z)<.01)||
+     Math.abs(p.y-8.89)<.01&&[-50.1,-36.3].some(z=>Math.abs(p.z-z)<.01));
     const replacedSouthSash=Math.abs(p.z+16.6)<.55&&p.x>154.8&&p.x<161.4&&p.y<5;
     const westFitting=p.x>145.8&&p.x<146.6&&p.z>-50.1&&p.z<-26.6;
     const westEave=Math.abs(p.x-154.3)<.01&&Math.abs(p.y-8.89)<.01&&[-50.1,-36.3].some(z=>Math.abs(p.z-z)<.01);
-    if(panel||handle||replacedSouthSash||westFitting||westEave){
+    const northEave=Math.abs(p.y-8.89)<.01&&((Math.abs(p.x-151.6)<.01&&Math.abs(p.z+74.1)<.01)||(Math.abs(p.x-154.3)<.01&&Math.abs(p.z+60.3)<.01));
+    if(panel||handle||replacedSouthSash||westFitting||westEave||northEave||obsoleteEave){
      editedInstances.push([o,i,m.clone()]);
-     if(panel||handle||replacedSouthSash)o.setMatrixAt(i,new THREE.Matrix4().makeScale(0,0,0));
-     else {if(westEave){const q=new THREE.Quaternion(),s=new THREE.Vector3();m.decompose(p,q,s);p.x+=westShift/2;s.x-=westShift;m.compose(p,q,s);}else m.elements[12]+=westShift;o.setMatrixAt(i,m);}
+     if(panel||handle||replacedSouthSash||obsoleteEave)o.setMatrixAt(i,new THREE.Matrix4().makeScale(0,0,0));
+     else {if(westEave||northEave){const q=new THREE.Quaternion(),s=new THREE.Vector3();m.decompose(p,q,s);p.x+=westShift/2;s.x-=westShift;m.compose(p,q,s);}else m.elements[12]+=westShift;o.setMatrixAt(i,m);}
     }}
    o.instanceMatrix.needsUpdate=true;o.computeBoundingBox();o.computeBoundingSphere();
   });
+  if(scope===exterior.haleWard)removeTowerJunctionSashes(THREE,{ward:scope,editedInstances});
   batchAerialMeshes(THREE,scope);cacheAerialTransforms(scope);
  }
  // Prune only low canopy instances that enter the new enclosed passages.
@@ -151,7 +230,7 @@ export function createTowerWorkshops(THREE,exterior,walker,resources,sign){
  exterior.trees?.traverse(o=>{if(!o.isInstancedMesh||!o.userData.treeIds)return;
   if(!o.geometry.boundingBox)o.geometry.computeBoundingBox();const m=new THREE.Matrix4(),world=new THREE.Matrix4();let changed=false;
   for(let i=0;i<o.count;i++){o.getMatrixAt(i,m);world.multiplyMatrices(o.matrixWorld,m);const b=o.geometry.boundingBox.clone().applyMatrix4(world);
-   if(meetsPassage(b)){
+   if(meetsPassage(b,runs)){
     editedInstances.push([o,i,m.clone()]);o.setMatrixAt(i,new THREE.Matrix4().makeScale(0,0,0));changed=true;
    }
   }if(changed){o.instanceMatrix.needsUpdate=true;o.computeBoundingBox();o.computeBoundingSphere();}
@@ -160,7 +239,7 @@ export function createTowerWorkshops(THREE,exterior,walker,resources,sign){
  // interfering whole copies rather than changing every tree sharing a buffer.
  for(const tree of [...(exterior.trees?.children??[])]){
   if(tree.isInstancedMesh)continue;const b=new THREE.Box3().setFromObject(tree);
-  if(meetsPassage(b)){
+  if(meetsPassage(b,runs)){
    removed.push([tree,tree.parent]);tree.removeFromParent();
   }
  }
@@ -209,7 +288,20 @@ export function createTowerWorkshops(THREE,exterior,walker,resources,sign){
   masonry([westX,z1],[westX,z],0,8.84,'Stores west masonry');
   // Same cuts in the inner brick lining, including physical reveals.
   z=z0;for(const h of holes){panel([westX+.265,z],[westX+.265,h.z-h.w/2],.04,5.05,finish,'Corridor painted brick',false,.045);if(h.y0)panel([westX+.265,h.z-h.w/2],[westX+.265,h.z+h.w/2],.04,h.y0,finish,'Window lining base',false,.045);panel([westX+.265,h.z-h.w/2],[westX+.265,h.z+h.w/2],h.y1,5.05,finish,'Window lining head',false,.045);
-   if(h.y0){box(glass,[.035,h.y1-h.y0,h.w],[westX+.275,(h.y0+h.y1)/2,h.z],'Inner sash glass');for(const dz of [-h.w/2,0,h.w/2])box(cream,[.065,h.y1-h.y0,.045],[westX+.31,(h.y0+h.y1)/2,h.z+dz],'Inner sash muntin');box(cream,[.3,.13,h.w+.2],[westX+.36,h.y0-.065,h.z],'Stone window sill');}
+   if(h.y0){
+    const height=h.y1-h.y0,cy=(h.y0+h.y1)/2;
+    box(glass,[.035,height,h.w],[westX+.275,cy,h.z],'Inner sash glass');
+    // Match tower-buildings.mjs's retained service sash: three columns,
+    // two thin crossbars and the heavier central meeting rail (twelve panes).
+    for(const side of [-1,1]){
+     box(cream,[.065,height,.07],[westX+.31,cy,h.z+side*h.w/2],'Inner sash side frame');
+     box(cream,[.065,.07,h.w+.06],[westX+.31,cy+side*height/2,h.z],'Inner sash top bottom frame');
+     box(cream,[.065,height,.025],[westX+.31,cy,h.z+side*h.w/6],'Inner sash muntin');
+     box(cream,[.065,.03,h.w],[westX+.31,cy+side*height/6,h.z],'Inner sash crossbar');
+    }
+    box(cream,[.065,.065,h.w],[westX+.31,cy,h.z],'Inner sash meeting rail');
+    box(cream,[.3,.13,h.w+.2],[westX+.36,h.y0-.065,h.z],'Stone window sill');
+   }
    z=h.z+h.w/2;}
   panel([westX+.265,z],[westX+.265,z1],.04,5.05,finish,'Corridor painted brick',false,.045);
  }
@@ -227,11 +319,22 @@ export function createTowerWorkshops(THREE,exterior,walker,resources,sign){
   // inside its masonry instead of leaving a second face at the same depth.
   if(a[0]===westX)a=[westX+.24,a[1]];if(b[0]===westX)b=[westX+.24,b[1]];
   const exposed=!(a[0]===153.6&&b[0]===153.6)||Math.min(a[1],b[1])<-26.6;
-  const joins=corridorWallJoins(a,b,[TOWER_WORKSHOPS.outline]);
+  const joins=corridorWallJoins(a,b,[plan.outline]);
   if(exposed&&addWorkshopArchedWall(THREE,{group,a,b,resources,brick:outsideBrick,finish,reveal,material,dark,isExposed,joins}))return;
   masonry(a,b,0,8.84,'Tower stores outer masonry');const dx=b[0]-a[0],dz=b[1]-a[1],length=Math.hypot(dx,dz),offset=.265;
   const ia=[a[0]-dz/length*offset,a[1]+dx/length*offset],ib=[b[0]-dz/length*offset,b[1]+dx/length*offset];panel(ia,ib,.04,5.05,finish,'Workshop outer-wall lining',false,.045,{...joins,offset});}
   for(let i=0;i<outline.length;i++)outerWall(outline[i],outline[(i+1)%outline.length]);
+ // The gallery owns this exposed face after the wider stores shell is cut.
+ // Its lower arched wall stops at the interior ceiling; close the unused
+ // upper bay to the retained flat roof instead of exposing sky beneath it.
+ masonry([galleryRight,-40.5],[galleryRight,-16.6],gallery.height,8.84,'Stores gallery upper masonry');
+ masonry([galleryRight,-16.6],[galleryLeft,-16.6],gallery.height,8.84,'Stores gallery upper end return');
+ const galleryJoin={ridge:FARNDON_CORRIDOR.x,height:x=>gallery.height+.06+FARNDON_CORRIDOR.rise-FARNDON_CORRIDOR.rise*Math.abs(x-FARNDON_CORRIDOR.x)/(x<FARNDON_CORRIDOR.x?FARNDON_CORRIDOR.x-galleryLeft+.22:FARNDON_CORRIDOR.width/2+.22)};
+ if(galleryRoof)addWorkshopGalleryRoof(THREE,{group,resources,gallery,roof:galleryRoof,brick:outsideBrick,ridge:galleryRidge??red,masonry,segments:[
+  {z0:Math.max(gallery.minZ,FARNDON_CORRIDOR.endZ),z1:-74.1,capStart:true,startJoin:galleryJoin},
+  {z0:-16.6,z1:Math.min(gallery.maxZ,FARNDON_CORRIDOR.startZ),capEnd:true,endJoin:galleryJoin}
+ ]});
+ closeWorkshopAdminBay(THREE,{group,resources,gallery,roof:entranceRoof??galleryRoof,brick:outsideBrick,masonry});
  // The retained tower supplies these internal walls, including its projecting
  // plinth. Add trim to the inward face without modifying the tower source.
  for(let i=0;i<outline.length;i++){
@@ -267,7 +370,7 @@ export function createTowerWorkshops(THREE,exterior,walker,resources,sign){
  // Continue the same finished faces through both corridor/room junctions.
  wall([passageLeft,-26.9],[passageLeft,-26.6]);
  // The network owns one joined ceiling and floor, including the rooms.
- const network=addEscapeCorridors(THREE,{group,workshopOutline:outline,resources,brick:outsideBrick,finish,reveal,paint:cream,dark,floor,timber,metal,box,panel,material,isExposed});
+ const network=addEscapeCorridors(THREE,{group,workshopOutline:outline,resources,brick:outsideBrick,finish,reveal,paint:cream,dark,floor,timber,metal,box,panel,material,isExposed,runs,polygons,gallery,...(explore?{doors:EXPLORE_CORRIDOR_DOORS,entrance:{...EXPLORE_CORRIDOR_ENTRANCE,roofMaterial:entranceRoof,brickMaterial:entranceBrick},irbyEntrance:{...EXPLORE_IRBY_ENTRANCE,roofMaterial:irbyRoof,brickMaterial:irbyBrick}}:{})});
  function bench(x,z,length=3.5){box(timber,[1.1,.13,length],[x,1,z],'Workshop bench top');for(const dx of [-.4,.4])for(const dz of [-length/2+.18,length/2-.18])box(timber,[.12,.95,.12],[x+dx,.5,z+dz],'Bench leg');box(timber,[.85,.08,length-.25],[x,.26,z],'Bench lower shelf');block(x,z,1.1,length,1.07);}
  const leftMachineX=passageRight+1.9;
  const westBox=(m,size,p,name)=>box(m,size,[p[0]+westShift,p[1],p[2]],name);
@@ -319,10 +422,10 @@ export function createTowerWorkshops(THREE,exterior,walker,resources,sign){
  box(blue,[.1,3.65,1.65],[0,1.825,.825],'Existing blue stores door leaf',pivot);
  for(const y of [.95,2.6])box(dark,[.025,1.1,1.02],[-.063,y,.825],'Recessed door panel',pivot);box(metal,[.12,.24,.065],[-.085,1.8,1.43],'Stores door handle',pivot);
  const doorSign=sign('Workshop',-.083,2.6,.825,-Math.PI/2,1,{aged:true});doorSign.name='Workshop door sign';pivot.add(doorSign);
- const moving=[pivot,...roomDoors.map(d=>d.pivot)];
+ const moving=[pivot,...roomDoors.map(d=>d.pivot),...network.openingDoors.map(d=>d.pivot)];
  exterior.model.add(group);group.updateMatrixWorld(true);batchAerialMeshes(THREE,group,{exclude:moving});cacheAerialTransforms(group);for(const leaf of moving)leaf.traverse(o=>o.matrixAutoUpdate=true);walker.refresh();
- const accessDoor={id:'tower-door',pivot,side:1},allDoors=[accessDoor,...roomDoors];
- for(const d of allDoors){d.leaf=d.pivot.getObjectByName(d===accessDoor?'Existing blue stores door leaf':'Workshop room door leaf');d.motion=null;}
+ const accessDoor={id:'tower-door',title:'Tower workshops access door',x:TOWER_WORKSHOPS.entrance.x,z:TOWER_WORKSHOPS.entrance.z,y:1.35,pivot,side:1},allDoors=[accessDoor,...roomDoors,...network.openingDoors];
+ for(const d of allDoors){d.leaf??=d.pivot.getObjectByName(d===accessDoor?'Existing blue stores door leaf':'Workshop room door leaf');d.motion=null;}
  const shadows=createWorkshopShadowBatches(THREE,exterior.model,{exclude:[...moving,exterior.trees].filter(Boolean)});
  const lighting=createWorkshopLights(THREE,group,lamps,{exterior,doors:allDoors.map(d=>d.leaf),shadowGroup:shadows.group});
  function doorObstacle(d){
@@ -331,9 +434,10 @@ export function createTowerWorkshops(THREE,exterior,walker,resources,sign){
   const bounds=new THREE.Box3().setFromObject(leaf);
   return {minX:bounds.min.x,maxX:bounds.max.x,minZ:bounds.min.z,maxZ:bounds.max.z,minY:bounds.min.y,maxY:bounds.max.y,corners};
  }
- return {group,solids,pivot,roomDoors,lighting,lockedDoors:network.locked,plan:TOWER_WORKSHOPS,
-  areaAt({x,z}){if(!insidePolygon(x,z,TOWER_WORKSHOPS.outline))return null;const room=TOWER_WORKSHOPS.rooms.find(r=>x>r.rect[0]&&x<r.rect[2]&&z>r.rect[1]&&z<r.rect[3]);return room?.title??ESCAPE_CORRIDOR_RUNS.find((r,i)=>containsPoint([x,z],ESCAPE_CORRIDOR_POLYGONS[i]))?.name??'Tower corridor';},
+ return {group,solids,pivot,roomDoors,doors:allDoors,lighting,lockedDoors:network.locked,plan,
+  areaAt({x,z}){if(!insidePolygon(x,z,plan.outline))return null;const room=TOWER_WORKSHOPS.rooms.find(r=>x>r.rect[0]&&x<r.rect[2]&&z>r.rect[1]&&z<r.rect[3]);return room?.title??runs.find((r,i)=>containsPoint([x,z],polygons[i]))?.name??'Tower corridor';},
   doorObstacle(){return doorObstacle(accessDoor);},
+  doorObstacles(){return allDoors.map(doorObstacle);},
   roomDoorObstacles(){return roomDoors.map(doorObstacle);},
   isOpen(id){const d=allDoors.find(d=>d.id===id);return d.motion?d.motion.target!==0:Math.abs(d.pivot.rotation.y)>.01;},
   setDoorOpen(id,open){const d=allDoors.find(d=>d.id===id),target=open?d.side*Math.PI/2:0,from=d.pivot.rotation.y;d.motion={from,target,elapsed:0,duration:WORKSHOP_DOOR_SECONDS*Math.abs(target-from)/(Math.PI/2)};},

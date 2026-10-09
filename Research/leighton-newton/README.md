@@ -1,5 +1,22 @@
 # Leighton / Newton photographic refinement — 24 September 2026
 
+## Snapshot reconciliation — 8 October 2026
+
+The owner's request to repair the remaining outdated tests advances the estate
+reference to 882,930 primitives, superseding the 5 October count. The independent
+`db70a03` reconstruction matches the previous audit's ancestor exactly; that
+audit's reviewed result matches the old saved reference. The current comparison
+retains 879,996 records exactly and 265 further records differ only in roof UVs.
+The documented structural regions and the net reduction of 65 primitives since
+the saved reference are reviewed alongside Jarman in
+`Browser/artifacts/ward-placement-reference/reviewed-estate-audit.json`.
+
+The original L range records remain exact. Both camera starts, exposed windows,
+roof normals, walking collisions, visibility and all scope exclusions retain
+their checks. An unrelated 0.01-unit annexe-wall movement still fails the
+refreshed fingerprint. Only the saved count/hash changes; model sources and
+exports are unchanged. See DEVELOPMENT.md for validation.
+
 ## Snapshot reconciliation — 5 October 2026
 
 The owner's test-repair request advances the protected estate reference to

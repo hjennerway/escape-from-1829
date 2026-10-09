@@ -16,6 +16,8 @@ export function joinEastEntranceRoof(THREE,{model,mesh,roof,white,brick,worldUV}
   const split=back.map((v,i)=>v+(root[i]-v)*cutFraction);
   const loweredStep=[backStep[0],back[1],backStep[2]];
   const frontStep=edge(40.6,17.4),frontCorner=edge(40.6,19.9);
+  const frontSplit=ridge(frontStep[0]);
+  const loweredFrontStep=[frontStep[0],front[1],frontStep[2]];
   const courtHalf=3.45*1.07,courtFlat=3.45*(Math.SQRT2-1)*1.07;
   const courtReturn=4.5-3.45*(Math.SQRT2-1)-.16;
   const cl=edge(59.8-courtHalf,4.1,14.6),cr=edge(63.65,4.1,14.6);
@@ -34,14 +36,16 @@ export function joinEastEntranceRoof(THREE,{model,mesh,roof,white,brick,worldUV}
       [[6.7,13.06,6.6],back,start,ridge(11.182)],
       [ridge(11.182),start,front,[6.7,13.06,17.4]],
       [[6.7,13.06,6.6],ridge(11.182),[6.7,13.06,17.4]],
-      [inner,start,back],[root,inner,split],[split,inner,back],
+      [inner,frontSplit,back],[frontSplit,start,back],
+      [root,inner,split],[split,inner,back],
       [back,loweredStep,split],
-      [start,inner,frontStep,front]
+      [start,frontSplit,loweredFrontStep,front]
     ]],
     ['Redesmere aligned frontage slate roof',[
       // Keep the upper side in the higher roof mesh, so the eave finisher
       // recognizes the adjacent roof across the new vertical step.
       [backStep,root,split],
+      [frontSplit,inner,frontStep],
       [backStep,backCorner,root],
       [inner,root,frontCorner],[inner,frontCorner,frontStep],
       [root,backCorner,cl,court],
@@ -84,37 +88,45 @@ export function joinEastEntranceRoof(THREE,{model,mesh,roof,white,brick,worldUV}
     g.applyMatrix4(existing.matrixWorld.clone().invert());existing.geometry.dispose();existing.geometry=g;
     existing.userData.preciseRoofUV=true;
   }
-  // Close the orange cut from the lowered slate to the unchanged upper edge.
+  // Close both cuts from the lowered slate to the unchanged upper edges.
   // The render tapers where the two roof planes meet; no brick crosses it.
-  const bandFraction=1-.1/(backStep[1]-loweredStep[1]);
-  const bandTip=loweredStep.map((v,i)=>v+(split[i]-v)*bandFraction);
-  const bandStart=[backStep[0],backStep[1]-.1,backStep[2]];
-  for(const [mat,points,name] of [
-    [brick,[loweredStep,bandStart,bandTip],'brick'],
-    [white,[bandStart,backStep,split,bandTip],'render']
+  for(const [side,low,high,tip] of [
+    ['court',loweredStep,backStep,split],
+    ['garden',loweredFrontStep,frontStep,frontSplit]
   ]){
-    const positions=[];
-    for(let i=1;i<points.length-1;i++){
-      const triangle=[points[0],points[i],points[i+1]];
-      const [a,b,c]=triangle.map(v=>new THREE.Vector3(...v));
-      if(b.sub(a).cross(c.sub(a)).x>0)triangle.reverse();
-      for(const v of triangle)positions.push(...v);
+    const bandFraction=1-.1/(high[1]-low[1]);
+    const bandTip=low.map((v,i)=>v+(tip[i]-v)*bandFraction);
+    const bandStart=[high[0],high[1]-.1,high[2]];
+    for(const [mat,points,name] of [
+      [brick,[low,bandStart,bandTip],'brick'],
+      [white,[bandStart,high,tip,bandTip],'render']
+    ]){
+      const positions=[];
+      for(let i=1;i<points.length-1;i++){
+        const triangle=[points[0],points[i],points[i+1]];
+        const [a,b,c]=triangle.map(v=>new THREE.Vector3(...v));
+        if(b.sub(a).cross(c.sub(a)).x>0)triangle.reverse();
+        for(const v of triangle)positions.push(...v);
+      }
+      if(mat===white){
+        // The court plane already rises above this cap across its width.
+        // The garden plane is level across x, so recess its inner edge.
+        const insetDrop=side==='garden'?.003:0;
+        const top=geometry([[high,tip,[tip[0]+.12,tip[1]-insetDrop,tip[2]],[high[0]+.12,high[1]-insetDrop,high[2]]]]);
+        positions.push(...top.attributes.position.array);top.dispose();
+      }
+      const g=new THREE.BufferGeometry();g.setAttribute('position',new THREE.Float32BufferAttribute(positions,3));
+      g.setAttribute('uv',new THREE.Float32BufferAttribute(new Float32Array(positions.length/3*2),2));g.computeVertexNormals();
+      mesh(worldUV(g,1.7),mat).name='East '+side+' stepped abutment '+name;
     }
-    if(mat===white){
-      const top=geometry([[backStep,split,[split[0]+.12,split[1],split[2]],[backStep[0]+.12,backStep[1],backStep[2]]]]);
-      positions.push(...top.attributes.position.array);top.dispose();
-    }
-    const g=new THREE.BufferGeometry();g.setAttribute('position',new THREE.Float32BufferAttribute(positions,3));
-    g.setAttribute('uv',new THREE.Float32BufferAttribute(new Float32Array(positions.length/3*2),2));g.computeVertexNormals();
-    mesh(worldUV(g,1.7),mat).name='East court stepped abutment '+name;
   }
-  // The garden-side rising entrance eave retains its previous footprint.
-  // Finish each return with brick and a white cap that ends at the slate edge.
+  // The short garden return beyond the lowered pitch still meets the higher
+  // frontage. Finish its edge with brick and a white cap beneath the slate.
   const roofs=faces.map(([name])=>model.getObjectByName(name));
   model.updateMatrixWorld(true);
   const probe=new THREE.Raycaster(new THREE.Vector3(41.04,30,17.4),new THREE.Vector3(0,-1,0));
   const frontWall=[41.04,probe.intersectObjects(roofs,false)[0].point.y,17.4];
-  for(const [name,a,b] of [['front',front,frontStep],['front return',frontStep,frontWall]]){
+  for(const [name,a,b] of [['front return',frontStep,frontWall]]){
     for(const [material,low,high,suffix] of [[brick,13.03,-.1,'masonry'],[white,null,0,'render']]){
       // Clip the brick at the existing cornice. Its starting top would
       // otherwise fall below its bottom and fold across the white strip.
@@ -123,14 +135,13 @@ export function joinEastEntranceRoof(THREE,{model,mesh,roof,white,brick,worldUV}
       const q=[[left[0],low??left[1]-.1,left[2]],[b[0],low??b[1]-.1,b[2]],[b[0],b[1]+high,b[2]],[left[0],left[1]+high,left[2]]],positions=[];
       for(const tri of [[0,1,2],[0,2,3]]){
         if(tri.some((index,i)=>Math.hypot(...q[index].map((v,k)=>v-q[tri[(i+1)%3]][k]))<1e-7))continue;
-        for(const j of name==='court'?tri.toReversed():tri)positions.push(...q[j]);
+        for(const j of tri)positions.push(...q[j]);
       }
       if(low===null){
         // A real top return supplies the roof finish with its edge support.
         // Without it the automatic finish adds a coplanar white fascia over
         // the brick triangle, which flickers after compiled batching.
-        const inset=name==='court'?.12:-.12;
-        const top=geometry([[a,b,[b[0],b[1],b[2]+inset],[a[0],a[1],a[2]+inset]]]);
+        const top=geometry([[a,b,[b[0],b[1]-.003,b[2]-.12],[a[0],a[1]-.003,a[2]-.12]]]);
         positions.push(...top.attributes.position.array);top.dispose();
       }
       const g=new THREE.BufferGeometry();g.setAttribute('position',new THREE.Float32BufferAttribute(positions,3));

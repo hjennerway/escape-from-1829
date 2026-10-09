@@ -1,0 +1,1511 @@
+{
+  "records": [
+    {
+      "name": "Weathered red brick below roof contact",
+      "parent": "Water tower side 1 · Entrance",
+      "min": [
+        146.10000002384186,
+        0.550000011920929,
+        -50.088
+      ],
+      "max": [
+        152.57000017166138,
+        10.85705852508545,
+        -50.088
+      ],
+      "material": "",
+      "closure": {
+        "closed": 0,
+        "unsupported": 0
+      }
+    },
+    {
+      "name": "Roof underside: Weathered red brick below roof contact",
+      "parent": "Water tower side 1 · Entrance",
+      "min": [
+        146.10000002384186,
+        0.546999990940094,
+        -50.088
+      ],
+      "max": [
+        152.57000017166138,
+        10.854058265686035,
+        -50.088
+      ],
+      "material": ""
+    },
+    {
+      "name": "Weathered red brick below roof contact",
+      "parent": "Water tower side 3 · Bricked doorway",
+      "min": [
+        146.10000002384186,
+        0.550000011920929,
+        -60.312000000000005
+      ],
+      "max": [
+        152.57000017166138,
+        10.85705852508545,
+        -60.312000000000005
+      ],
+      "material": "",
+      "closure": {
+        "closed": 0,
+        "unsupported": 0
+      }
+    },
+    {
+      "name": "Roof underside: Weathered red brick below roof contact",
+      "parent": "Water tower side 3 · Bricked doorway",
+      "min": [
+        146.10000002384186,
+        0.546999990940094,
+        -60.312000000000005
+      ],
+      "max": [
+        152.57000017166138,
+        10.854058265686035,
+        -60.312000000000005
+      ],
+      "material": ""
+    },
+    {
+      "name": "Weathered red brick below roof contact",
+      "parent": "Water tower side 4 · Annexe",
+      "min": [
+        153.112,
+        0.550000011920929,
+        -59.77000017166138
+      ],
+      "max": [
+        153.112,
+        10.85705852508545,
+        -50.629999828338626
+      ],
+      "material": "",
+      "closure": {
+        "closed": 0,
+        "unsupported": 0
+      }
+    },
+    {
+      "name": "Small wall fixture",
+      "parent": "Water tower side 4 · Annexe",
+      "min": [
+        153.18999999821187,
+        18.96999999284744,
+        -55.325
+      ],
+      "max": [
+        153.53000000178815,
+        19.330000007152556,
+        -55.075
+      ],
+      "material": ""
+    },
+    {
+      "name": "Roof underside: Weathered red brick below roof contact",
+      "parent": "Water tower side 4 · Annexe",
+      "min": [
+        153.112,
+        0.546999990940094,
+        -59.77000017166138
+      ],
+      "max": [
+        153.112,
+        10.854058265686035,
+        -50.629999828338626
+      ],
+      "material": ""
+    },
+    {
+      "name": "Pyramidal slate roof",
+      "parent": "Water tower · rear-right clearing",
+      "min": [
+        141.94999980926514,
+        33.959999084472656,
+        -61.250000190734866
+      ],
+      "max": [
+        154.05000019073486,
+        38.25,
+        -49.14999980926514
+      ],
+      "material": "",
+      "closure": {
+        "closed": 92,
+        "unsupported": 8
+      }
+    },
+    {
+      "name": "Water tower roof finial",
+      "parent": "Water tower · rear-right clearing",
+      "min": [
+        147.82999999821186,
+        38.04999999403954,
+        -55.37000000178814
+      ],
+      "max": [
+        148.17000000178814,
+        38.85000000596047,
+        -55.02999999821186
+      ],
+      "material": ""
+    },
+    {
+      "name": "Roof underside: Pyramidal slate roof",
+      "parent": "Water tower · rear-right clearing",
+      "min": [
+        141.94999980926514,
+        33.957000732421875,
+        -61.250000190734866
+      ],
+      "max": [
+        154.05000019073486,
+        38.24700164794922,
+        -49.14999980926514
+      ],
+      "material": ""
+    },
+    {
+      "name": " ground contact",
+      "parent": "",
+      "min": [
+        199.06292724609375,
+        -0.17000000178813934,
+        -72.7685775756836
+      ],
+      "max": [
+        565.5609130859375,
+        0.3199999928474426,
+        249.9986114501953
+      ],
+      "material": ""
+    },
+    {
+      "name": " ground contact",
+      "parent": "",
+      "min": [
+        199.66781616210938,
+        -0.17000000178813934,
+        -72.16735076904297
+      ],
+      "max": [
+        564.9609375,
+        0.3400000035762787,
+        249.3973846435547
+      ],
+      "material": ""
+    },
+    {
+      "name": "Brick chimney stack",
+      "parent": "Irby/Ashley",
+      "min": [
+        224.02500001192092,
+        7.399999904632569,
+        -83.62499997615815
+      ],
+      "max": [
+        225.17499998807907,
+        12.700000095367432,
+        -82.57500002384187
+      ],
+      "material": ""
+    },
+    {
+      "name": "Cobbled entrance courtyard",
+      "parent": "Estates department",
+      "min": [
+        234.7646353640895,
+        0.2199999999999996,
+        -47.353749737100024
+      ],
+      "max": [
+        255.30887981151878,
+        0.29999999821186063,
+        -29.35251723212776
+      ],
+      "material": ""
+    },
+    {
+      "name": "West projecting pavilion slate roof",
+      "parent": "Main/admin building",
+      "min": [
+        160.28000020980835,
+        14.28,
+        6.380000686645509
+      ],
+      "max": [
+        174.21999979019165,
+        18.079999952316285,
+        38.819999313354494
+      ],
+      "material": "",
+      "closure": {
+        "closed": 149,
+        "unsupported": 0
+      }
+    },
+    {
+      "name": "Roof underside: West projecting pavilion slate roof",
+      "parent": "Main/admin building",
+      "min": [
+        160.28000020980835,
+        14.276999999973922,
+        6.380000686645509
+      ],
+      "max": [
+        174.21999979019165,
+        18.07699993133545,
+        38.819999313354494
+      ],
+      "material": ""
+    },
+    {
+      "name": "Hale tower-side corridor walls outside accessible gallery",
+      "parent": "Hale tower-side corridor",
+      "min": [
+        147.3,
+        -0.18000001907348628,
+        -70.67937491416932
+      ],
+      "max": [
+        152.59750001430513,
+        3.599999952316284,
+        -70.15499995231629
+      ],
+      "material": ""
+    },
+    {
+      "name": "Hale tower-side corridor walls outside accessible gallery",
+      "parent": "Hale tower-side corridor",
+      "min": [
+        147.3,
+        -0.18000001907348628,
+        -75.55500004768372
+      ],
+      "max": [
+        152.59750001430513,
+        3.599999952316284,
+        -75.03062508583069
+      ],
+      "material": ""
+    },
+    {
+      "name": "Hale tower-side corridor slate roof outside accessible gallery",
+      "parent": "Hale tower-side corridor",
+      "min": [
+        147.29999999999998,
+        5.210000085830689,
+        -70.67937491416932
+      ],
+      "max": [
+        152.5975001335144,
+        5.373150873184205,
+        -69.93499992370606
+      ],
+      "material": "",
+      "closure": {
+        "closed": 22,
+        "unsupported": 0
+      }
+    },
+    {
+      "name": "Hale tower-side corridor slate roof outside accessible gallery",
+      "parent": "Hale tower-side corridor",
+      "min": [
+        147.29999999999998,
+        5.210000085830689,
+        -75.77500007629395
+      ],
+      "max": [
+        152.5975001335144,
+        5.373150873184205,
+        -75.03062508583069
+      ],
+      "material": "",
+      "closure": {
+        "closed": 22,
+        "unsupported": 0
+      }
+    },
+    {
+      "name": "Roof underside: Hale tower-side corridor slate roof outside accessible gallery",
+      "parent": "Hale tower-side corridor",
+      "min": [
+        147.29999999999998,
+        5.207000064849854,
+        -70.67937491416932
+      ],
+      "max": [
+        152.5975001335144,
+        5.37015085220337,
+        -69.93499992370606
+      ],
+      "material": ""
+    },
+    {
+      "name": "Roof underside: Hale tower-side corridor slate roof outside accessible gallery",
+      "parent": "Hale tower-side corridor",
+      "min": [
+        147.29999999999998,
+        5.207000064849854,
+        -75.77500007629395
+      ],
+      "max": [
+        152.5975001335144,
+        5.37015085220337,
+        -75.03062508583069
+      ],
+      "material": ""
+    },
+    {
+      "name": "Main/admin front corridor walls outside accessible gallery",
+      "parent": "Main/admin front corridor",
+      "min": [
+        156.94875000715257,
+        -0.18000001907348628,
+        9.80000038146973
+      ],
+      "max": [
+        159.00000004768373,
+        3.599999952316284,
+        30.599999618530276
+      ],
+      "material": ""
+    },
+    {
+      "name": "Corridor pavilion side connection walls",
+      "parent": "Main/admin corridor front doorway",
+      "min": [
+        159,
+        -0.18000004872883824,
+        9.80000038146973
+      ],
+      "max": [
+        160.5,
+        3.3494520367661567,
+        30.599999618530276
+      ],
+      "material": ""
+    },
+    {
+      "name": "Dark chimney throat",
+      "parent": "Freestanding brick chimney",
+      "min": [
+        166.00999999046326,
+        49.365000011920934,
+        -37.99000000953674
+      ],
+      "max": [
+        167.99000000953674,
+        50.764999988079076,
+        -36.00999999046326
+      ],
+      "material": ""
+    },
+    {
+      "name": "Open masonry chimney lip",
+      "parent": "Freestanding brick chimney",
+      "min": [
+        165.69000005722046,
+        50.76500000000001,
+        -38.30999994277954
+      ],
+      "max": [
+        168.30999994277954,
+        50.76500000000001,
+        -35.69000005722046
+      ],
+      "material": ""
+    },
+    {
+      "name": "Recessed chimney opening",
+      "parent": "Freestanding brick chimney",
+      "min": [
+        166.00999999046326,
+        49.36500000000001,
+        -37.99000000953674
+      ],
+      "max": [
+        167.99000000953674,
+        49.36500000000001,
+        -36.00999999046326
+      ],
+      "material": ""
+    },
+    {
+      "name": "Aerial batch · Freestanding brick chimney · 864",
+      "parent": "Freestanding brick chimney",
+      "min": [
+        164.20000004768372,
+        -0.17999997735023499,
+        -39.799999952316284
+      ],
+      "max": [
+        169.79999995231628,
+        49.165000915527344,
+        -34.200000047683716
+      ],
+      "material": ""
+    },
+    {
+      "name": "Aerial batch · Freestanding brick chimney · 865",
+      "parent": "Freestanding brick chimney",
+      "min": [
+        165.69000005722046,
+        49.165000915527344,
+        -38.30999994277954
+      ],
+      "max": [
+        168.30999994277954,
+        50.76499938964844,
+        -35.69000005722046
+      ],
+      "material": ""
+    },
+    {
+      "name": "Ramp entrance link flat roof",
+      "parent": "Tower service buildings",
+      "min": [
+        190,
+        6.400000000000001,
+        -30.3
+      ],
+      "max": [
+        216.3000030517578,
+        6.559999996423722,
+        2.0999996185302727
+      ],
+      "material": "",
+      "closure": {
+        "closed": 0,
+        "unsupported": 0,
+        "solid": true
+      }
+    },
+    {
+      "name": "North tower range arch-front flat roof",
+      "parent": "Tower service buildings",
+      "min": [
+        146.29999995231628,
+        8.84000000178814,
+        -74.10000009536742
+      ],
+      "max": [
+        149.70000004768372,
+        8.99999999821186,
+        -60.29999990463256
+      ],
+      "material": "",
+      "closure": {
+        "closed": 0,
+        "unsupported": 0,
+        "solid": true
+      }
+    },
+    {
+      "name": "North tower range slate roof",
+      "parent": "Tower service buildings",
+      "min": [
+        149.6999969482422,
+        9,
+        -74.0999984741211
+      ],
+      "max": [
+        162.3000030517578,
+        13.076470375061035,
+        -60.29999923706055
+      ],
+      "material": "",
+      "closure": {
+        "closed": 29,
+        "unsupported": 38
+      }
+    },
+    {
+      "name": "Chimney hall circular window",
+      "parent": "Tower service buildings",
+      "min": [
+        190.24,
+        9.549999976158142,
+        -6.450000023841859
+      ],
+      "max": [
+        190.24,
+        11.250000023841858,
+        -4.7499999761581435
+      ],
+      "material": ""
+    },
+    {
+      "name": "Enlarged west workshop walls",
+      "parent": "Enlarged west workshop",
+      "min": [
+        181,
+        -0.1800001144409178,
+        -63.899999809265125
+      ],
+      "max": [
+        202,
+        6.400000047683716,
+        -47.50000019073485
+      ],
+      "material": ""
+    },
+    {
+      "name": "Stores rooflight frame",
+      "parent": "Tower service buildings",
+      "min": [
+        213.20189056344697,
+        8.342216046512132,
+        -2.038307326582993
+      ],
+      "max": [
+        214.90189061113068,
+        9.357783953487868,
+        -0.561692673417008
+      ],
+      "material": ""
+    },
+    {
+      "name": "Stores rooflight glass",
+      "parent": "Tower service buildings",
+      "min": [
+        213.35189059920975,
+        8.513263313846196,
+        -1.8605203876750391
+      ],
+      "max": [
+        214.7518905753679,
+        9.326736686153804,
+        -0.659479612324964
+      ],
+      "material": ""
+    },
+    {
+      "name": "East pharmacy gas cylinder brick plinth",
+      "parent": "East pharmacy gas cylinder",
+      "min": [
+        176.30999984741212,
+        -0.17999997138977042,
+        -23.99000015258789
+      ],
+      "max": [
+        186.4900001525879,
+        2.700000023841858,
+        -13.809999847412108
+      ],
+      "material": ""
+    },
+    {
+      "name": "East pharmacy gas cylinder plinth coping",
+      "parent": "East pharmacy gas cylinder",
+      "min": [
+        176.28000011444092,
+        2.6200000017881395,
+        -24.01999988555908
+      ],
+      "max": [
+        186.5199998855591,
+        2.779999998211861,
+        -13.780000114440917
+      ],
+      "material": ""
+    },
+    {
+      "name": "East pharmacy gas cylinder shallow circular roof",
+      "parent": "East pharmacy gas cylinder",
+      "min": [
+        176.38999977111817,
+        11.45500000178814,
+        -23.910000228881835
+      ],
+      "max": [
+        186.41000022888184,
+        11.61499999821186,
+        -13.889999771118163
+      ],
+      "material": "",
+      "closure": {
+        "closed": 0,
+        "unsupported": 0,
+        "solid": true
+      }
+    },
+    {
+      "name": "East pharmacy gas cylinder roof railing posts",
+      "parent": "East pharmacy gas cylinder",
+      "min": [
+        176.4505550596863,
+        11.480000436306,
+        -23.854000078141688
+      ],
+      "max": [
+        186.3494449403137,
+        12.560000479221344,
+        -13.94599992185831
+      ],
+      "material": "",
+      "closure": {
+        "closed": 0,
+        "unsupported": 0,
+        "solid": true
+      }
+    },
+    {
+      "name": "East pharmacy gas cylinder ribbed metal shell",
+      "parent": "",
+      "min": [
+        176.4,
+        2.699999904632568,
+        -23.9
+      ],
+      "max": [
+        186.4,
+        11.500000095367431,
+        -13.899999999999999
+      ],
+      "material": ""
+    },
+    {
+      "name": "East pharmacy gas cylinder vertical corrugations",
+      "parent": "",
+      "min": [
+        176.35350006222725,
+        2.7599997520446777,
+        -23.94649993777275
+      ],
+      "max": [
+        186.44649993777276,
+        11.440000057220459,
+        -13.853500062227248
+      ],
+      "material": ""
+    },
+    {
+      "name": "West pharmacy gas cylinder brick plinth",
+      "parent": "West pharmacy gas cylinder",
+      "min": [
+        163.4099998474121,
+        -0.17999997138977042,
+        -23.99000015258789
+      ],
+      "max": [
+        173.5900001525879,
+        2.700000023841858,
+        -13.809999847412108
+      ],
+      "material": ""
+    },
+    {
+      "name": "West pharmacy gas cylinder plinth coping",
+      "parent": "West pharmacy gas cylinder",
+      "min": [
+        163.38000011444092,
+        2.6200000017881395,
+        -24.01999988555908
+      ],
+      "max": [
+        173.61999988555908,
+        2.779999998211861,
+        -13.780000114440917
+      ],
+      "material": ""
+    },
+    {
+      "name": "West pharmacy gas cylinder shallow circular roof",
+      "parent": "West pharmacy gas cylinder",
+      "min": [
+        163.48999977111816,
+        11.45500000178814,
+        -23.910000228881835
+      ],
+      "max": [
+        173.51000022888184,
+        11.61499999821186,
+        -13.889999771118163
+      ],
+      "material": "",
+      "closure": {
+        "closed": 0,
+        "unsupported": 0,
+        "solid": true
+      }
+    },
+    {
+      "name": "West pharmacy gas cylinder roof railing posts",
+      "parent": "West pharmacy gas cylinder",
+      "min": [
+        163.5505550596863,
+        11.480000436306,
+        -23.854000078141688
+      ],
+      "max": [
+        173.4494449403137,
+        12.560000479221344,
+        -13.94599992185831
+      ],
+      "material": "",
+      "closure": {
+        "closed": 0,
+        "unsupported": 0,
+        "solid": true
+      }
+    },
+    {
+      "name": "West pharmacy gas cylinder ribbed metal shell",
+      "parent": "",
+      "min": [
+        163.5,
+        2.699999904632568,
+        -23.9
+      ],
+      "max": [
+        173.5,
+        11.500000095367431,
+        -13.899999999999999
+      ],
+      "material": ""
+    },
+    {
+      "name": "West pharmacy gas cylinder vertical corrugations",
+      "parent": "",
+      "min": [
+        163.45350006222725,
+        2.7599997520446777,
+        -23.94649993777275
+      ],
+      "max": [
+        173.54649993777275,
+        11.440000057220459,
+        -13.853500062227248
+      ],
+      "material": ""
+    },
+    {
+      "name": "Roof underside: North tower range slate roof",
+      "parent": "Tower service buildings",
+      "min": [
+        149.6999969482422,
+        8.996999740600586,
+        -74.0999984741211
+      ],
+      "max": [
+        162.3000030517578,
+        13.073470115661621,
+        -60.29999923706055
+      ],
+      "material": ""
+    },
+    {
+      "name": "Roof underside: Tower east arch-front flat roof",
+      "parent": "Tower service buildings",
+      "min": [
+        153.10000610351562,
+        8.996999740600586,
+        -56.900001525878906
+      ],
+      "max": [
+        158.1999969482422,
+        8.996999740600586,
+        -53.5
+      ],
+      "material": ""
+    },
+    {
+      "name": "Low west stores arch-front flat roof",
+      "parent": "Tower service buildings",
+      "min": [
+        145.39999985694885,
+        8.84000000178814,
+        -50.100000095367434
+      ],
+      "max": [
+        149.70000004768372,
+        8.99999999821186,
+        -36.29999990463257
+      ],
+      "material": "",
+      "closure": {
+        "closed": 0,
+        "unsupported": 0,
+        "solid": true
+      }
+    },
+    {
+      "name": "Admin north service road border surface ground contact",
+      "parent": "Admin north service road border",
+      "min": [
+        229.07000732421875,
+        -0.17000000178813934,
+        -120.5999984741211
+      ],
+      "max": [
+        273.6000061035156,
+        0.3199999928474426,
+        9.600000381469727
+      ],
+      "material": ""
+    },
+    {
+      "name": "Admin north service road surface ground contact",
+      "parent": "Admin north service road",
+      "min": [
+        229.6699981689453,
+        -0.17000000178813934,
+        -119.998779296875
+      ],
+      "max": [
+        273,
+        0.3400000035762787,
+        8.99877643585205
+      ],
+      "material": ""
+    },
+    {
+      "name": "Tower north court lane border surface",
+      "parent": "Tower north court lane border",
+      "min": [
+        225.89999389648438,
+        0.3199999928474426,
+        -72.69999694824219
+      ],
+      "max": [
+        263.1000061035156,
+        0.3199999928474426,
+        -66.5
+      ],
+      "material": ""
+    },
+    {
+      "name": "Tower north court lane border surface ground contact",
+      "parent": "Tower north court lane border",
+      "min": [
+        225.89999389648438,
+        -0.17000000178813934,
+        -72.69999694824219
+      ],
+      "max": [
+        263.1000061035156,
+        0.3199999928474426,
+        -66.5
+      ],
+      "material": ""
+    },
+    {
+      "name": "Tower north court lane surface",
+      "parent": "Tower north court lane",
+      "min": [
+        226.5,
+        0.3400000035762787,
+        -72.0999984741211
+      ],
+      "max": [
+        262.5,
+        0.3400000035762787,
+        -67.0999984741211
+      ],
+      "material": ""
+    },
+    {
+      "name": "Tower north court lane surface ground contact",
+      "parent": "Tower north court lane",
+      "min": [
+        226.5,
+        -0.17000000178813934,
+        -72.0999984741211
+      ],
+      "max": [
+        262.5,
+        0.3400000035762787,
+        -67.0999984741211
+      ],
+      "material": ""
+    },
+    {
+      "name": "Irby Estates continuous service court outside accessible gallery",
+      "parent": "Period · The Main",
+      "min": [
+        221.6999969482422,
+        0.3400000000000153,
+        -78.0999984741211
+      ],
+      "max": [
+        221.89999389648438,
+        0.34000000000001734,
+        -68.77562713623047
+      ],
+      "material": ""
+    },
+    {
+      "name": "Tower service court outside accessible gallery",
+      "parent": "Period · The Main",
+      "min": [
+        180,
+        0.3399999999999961,
+        -63.900001525878906
+      ],
+      "max": [
+        242,
+        0.34000000000001424,
+        17.799999237060547
+      ],
+      "material": ""
+    },
+    {
+      "name": "Irby Estates continuous service court ground contact outside accessible gallery",
+      "parent": "Period · The Main",
+      "min": [
+        221.6999969482422,
+        -0.1699999904632415,
+        -78.0999984741211
+      ],
+      "max": [
+        221.89999389648438,
+        0.34000000000001734,
+        -68.77562713623047
+      ],
+      "material": ""
+    },
+    {
+      "name": "Tower service court ground contact outside accessible gallery",
+      "parent": "Period · The Main",
+      "min": [
+        180,
+        -0.1699999904632608,
+        -63.900001525878906
+      ],
+      "max": [
+        242,
+        0.34000000000001424,
+        17.799999237060547
+      ],
+      "material": ""
+    },
+    {
+      "name": "Workshop arched-wall skirting",
+      "parent": "Workshop exterior with semicircular windows",
+      "min": [
+        156.29624946594237,
+        0.03999999970197678,
+        -60.012500000894065
+      ],
+      "max": [
+        179.7124996948242,
+        0.1800000002980232,
+        -59.967499999105925
+      ],
+      "material": ""
+    },
+    {
+      "name": "Workshop arched-wall skirting",
+      "parent": "Workshop exterior with semicircular windows",
+      "min": [
+        179.66749999910593,
+        0.03999999970197678,
+        -60.012499237060545
+      ],
+      "max": [
+        179.71250000089407,
+        0.1800000002980232,
+        -40.78750076293945
+      ],
+      "material": ""
+    },
+    {
+      "name": "Workshop arched-wall skirting",
+      "parent": "Workshop exterior with semicircular windows",
+      "min": [
+        156.29624946594237,
+        0.03999999970197678,
+        -40.832500000894065
+      ],
+      "max": [
+        179.7124996948242,
+        0.1800000002980232,
+        -40.787499999105925
+      ],
+      "material": ""
+    },
+    {
+      "name": "Workshop arched-wall skirting",
+      "parent": "Workshop exterior with semicircular windows",
+      "min": [
+        145.63999992370606,
+        0.03999999970197678,
+        -26.93250000089407
+      ],
+      "max": [
+        153.25000005722046,
+        0.1800000002980232,
+        -26.88749999910593
+      ],
+      "material": ""
+    },
+    {
+      "name": "Walking gallery roof ridge",
+      "parent": "Tower corridor and three workshops",
+      "min": [
+        154.68312499642371,
+        5.8250000023841855,
+        -132.09999999999997
+      ],
+      "max": [
+        154.86312500357627,
+        5.954999997615814,
+        -74.09999999999998
+      ],
+      "material": ""
+    },
+    {
+      "name": "Walking gallery roof ridge",
+      "parent": "Tower corridor and three workshops",
+      "min": [
+        154.68312499642371,
+        5.8250000023841855,
+        -16.599999809265135
+      ],
+      "max": [
+        154.86312500357627,
+        5.954999997615814,
+        9.799999809265136
+      ],
+      "material": ""
+    },
+    {
+      "name": "Workshop arched-wall skirting",
+      "parent": "Workshop exterior with semicircular windows",
+      "min": [
+        153.20499999910592,
+        0.03999999970197678,
+        -71.33187505722046
+      ],
+      "max": [
+        153.25000000089406,
+        0.1800000002980232,
+        -60.29999992370605
+      ],
+      "material": ""
+    },
+    {
+      "name": "Workshop arched-wall skirting",
+      "parent": "Workshop exterior with semicircular windows",
+      "min": [
+        147.8874998474121,
+        0.03999999970197678,
+        -71.33187500089406
+      ],
+      "max": [
+        153.25000003814696,
+        0.1800000002980232,
+        -71.2868749991059
+      ],
+      "material": ""
+    },
+    {
+      "name": "Workshop arched-wall skirting",
+      "parent": "Workshop exterior with semicircular windows",
+      "min": [
+        147.8874998474121,
+        0.03999999970197678,
+        -74.42312500089407
+      ],
+      "max": [
+        153.25000003814696,
+        0.1800000002980232,
+        -74.37812499910594
+      ],
+      "material": ""
+    },
+    {
+      "name": "Workshop arched-wall skirting",
+      "parent": "Workshop exterior with semicircular windows",
+      "min": [
+        153.20499999910592,
+        0.03999999970197678,
+        -93.88187587738037
+      ],
+      "max": [
+        153.25000000089406,
+        0.1800000002980232,
+        -74.37812412261962
+      ],
+      "material": ""
+    },
+    {
+      "name": "Workshop arched-wall skirting",
+      "parent": "Workshop exterior with semicircular windows",
+      "min": [
+        156.29624999910592,
+        0.03999999970197678,
+        -131.8124995422363
+      ],
+      "max": [
+        156.34125000089406,
+        0.1800000002980232,
+        -68.12312652587889
+      ],
+      "material": ""
+    },
+    {
+      "name": "Workshop arched-wall skirting",
+      "parent": "Workshop exterior with semicircular windows",
+      "min": [
+        156.29624908447266,
+        0.03999999970197678,
+        -68.16812500089407
+      ],
+      "max": [
+        221.70000045776368,
+        0.1800000002980232,
+        -68.12312499910593
+      ],
+      "material": ""
+    },
+    {
+      "name": "Workshop arched-wall skirting",
+      "parent": "Workshop exterior with semicircular windows",
+      "min": [
+        156.29624908447266,
+        0.03999999970197678,
+        -65.07687500089406
+      ],
+      "max": [
+        221.70000045776368,
+        0.1800000002980232,
+        -65.03187499910592
+      ],
+      "material": ""
+    },
+    {
+      "name": "Workshop arched-wall skirting",
+      "parent": "Workshop exterior with semicircular windows",
+      "min": [
+        156.29624999910592,
+        0.03999999970197678,
+        -65.076875
+      ],
+      "max": [
+        156.34125000089406,
+        0.1800000002980232,
+        -59.967499999999994
+      ],
+      "material": ""
+    },
+    {
+      "name": "Workshop arched-wall skirting",
+      "parent": "Workshop exterior with semicircular windows",
+      "min": [
+        156.29624999910592,
+        0.03999999970197678,
+        -40.8325002670288
+      ],
+      "max": [
+        156.34125000089406,
+        0.1800000002980232,
+        -16.600000190734853
+      ],
+      "material": ""
+    },
+    {
+      "name": "Workshop arched-wall skirting",
+      "parent": "Workshop exterior with semicircular windows",
+      "min": [
+        156.29624999910592,
+        0.03999999970197678,
+        -16.60000038146972
+      ],
+      "max": [
+        156.34125000089406,
+        0.1800000002980232,
+        30.600000381469734
+      ],
+      "material": ""
+    },
+    {
+      "name": "Workshop arched-wall skirting",
+      "parent": "Workshop exterior with semicircular windows",
+      "min": [
+        153.20499999910592,
+        0.03999999970197678,
+        11.323125000000001
+      ],
+      "max": [
+        153.25000000089406,
+        0.1800000002980232,
+        30.59999954223633
+      ],
+      "material": ""
+    },
+    {
+      "name": "Workshop arched-wall skirting",
+      "parent": "Workshop exterior with semicircular windows",
+      "min": [
+        100.73750099182129,
+        0.03999999970197678,
+        11.32312499910593
+      ],
+      "max": [
+        153.2499998474121,
+        0.1800000002980232,
+        11.368125000894077
+      ],
+      "material": ""
+    },
+    {
+      "name": "Workshop arched-wall skirting",
+      "parent": "Workshop exterior with semicircular windows",
+      "min": [
+        100.73750099182129,
+        0.03999999970197678,
+        8.231874999105932
+      ],
+      "max": [
+        153.2499998474121,
+        0.1800000002980232,
+        8.276875000894071
+      ],
+      "material": ""
+    },
+    {
+      "name": "Workshop arched-wall skirting",
+      "parent": "Workshop exterior with semicircular windows",
+      "min": [
+        153.20499999910592,
+        0.03999999970197678,
+        -16.599999732971195
+      ],
+      "max": [
+        153.25000000089406,
+        0.1800000002980232,
+        8.27687519073486
+      ],
+      "material": ""
+    },
+    {
+      "name": "Workshop arched-wall skirting",
+      "parent": "Workshop exterior with semicircular windows",
+      "min": [
+        153.20499999910592,
+        0.03999999970197678,
+        -26.93249998092652
+      ],
+      "max": [
+        153.25000000089406,
+        0.1800000002980232,
+        -16.600000000000005
+      ],
+      "material": ""
+    },
+    {
+      "name": "Explore Irby roof ridge",
+      "parent": "Tower corridor and three workshops",
+      "min": [
+        156.3,
+        5.824999999999999,
+        -66.69
+      ],
+      "max": [
+        222.03999999999996,
+        5.955,
+        -66.50999999999999
+      ],
+      "material": ""
+    },
+    {
+      "name": "Irby roof side masonry return",
+      "parent": "Tower corridor and three workshops",
+      "min": [
+        156.29999923706055,
+        3.5999999799140507,
+        -69.33999999910593
+      ],
+      "max": [
+        221.70000076293945,
+        5.25821919816814,
+        -69.26000000089407
+      ],
+      "material": ""
+    },
+    {
+      "name": "Irby roof side masonry return",
+      "parent": "Tower corridor and three workshops",
+      "min": [
+        156.29999923706055,
+        3.5999999799140507,
+        -63.93999999910592
+      ],
+      "max": [
+        221.70000076293945,
+        5.25821919816814,
+        -63.86000000089406
+      ],
+      "material": ""
+    },
+    {
+      "name": "Irby entrance closed roof gable",
+      "parent": "Tower corridor and three workshops",
+      "min": [
+        221.94000244140625,
+        5.150000095367432,
+        -69.30000305175781
+      ],
+      "max": [
+        221.94000244140625,
+        5.849999904632568,
+        -63.900001525878906
+      ],
+      "material": ""
+    }
+  ],
+  "plan": [
+    {
+      "id": "gallery",
+      "name": "Tower corridor",
+      "start": [
+        154.773125,
+        30.6
+      ],
+      "end": [
+        154.773125,
+        -132.09999999999997
+      ],
+      "ends": [
+        "Main/admin",
+        "Farndon"
+      ]
+    },
+    {
+      "id": "admin",
+      "name": "Main/admin corridor",
+      "start": [
+        100.45,
+        9.8
+      ],
+      "end": [
+        154.773125,
+        9.8
+      ],
+      "ends": [
+        "Redesmere",
+        "Main/admin"
+      ]
+    },
+    {
+      "id": "irby",
+      "name": "Irby / Ashley corridor",
+      "start": [
+        154.773125,
+        -66.6
+      ],
+      "end": [
+        221.7,
+        -66.6
+      ],
+      "ends": [
+        "Tower workshops",
+        "Irby / Ashley"
+      ]
+    },
+    {
+      "id": "diagonal",
+      "name": "Upton / Frith / Oscroft corridor",
+      "start": [
+        154.773125,
+        -118.62687500000001
+      ],
+      "end": [
+        75.09999999999997,
+        -198.3
+      ],
+      "ends": [
+        "Farndon",
+        "Upton / Frith / Oscroft"
+      ]
+    },
+    {
+      "id": "grafton",
+      "name": "Grafton / Edge corridor",
+      "start": [
+        130.51027118644066,
+        -142.88972881355932
+      ],
+      "end": [
+        84.98958525345621,
+        -142.88972881355932
+      ],
+      "ends": [
+        "Farndon",
+        "Grafton / Edge"
+      ]
+    },
+    {
+      "id": "witby",
+      "name": "Witby corridor",
+      "start": [
+        115.60000000000001,
+        -157.79999999999995
+      ],
+      "end": [
+        115.60000000000001,
+        -194.2
+      ],
+      "ends": [
+        "Farndon",
+        "Witby"
+      ]
+    },
+    {
+      "id": "hale-0",
+      "name": "Hale tower-side corridor",
+      "start": [
+        154.773125,
+        -72.855
+      ],
+      "end": [
+        147.6,
+        -72.855
+      ],
+      "ends": [
+        "Tower workshops",
+        "Hale / Daresbury / Huxley / Dunham"
+      ]
+    },
+    {
+      "id": "hale-1",
+      "name": "Hale middle corridor",
+      "start": [
+        154.773125,
+        -95.405
+      ],
+      "end": [
+        139.6,
+        -95.405
+      ],
+      "ends": [
+        "Tower workshops",
+        "Hale / Daresbury / Huxley / Dunham"
+      ]
+    },
+    {
+      "id": "upton",
+      "name": "Upton / Frith / Oscroft corridor",
+      "start": [
+        75.09999999999997,
+        -198.3
+      ],
+      "end": [
+        38.15764920096168,
+        -198.3
+      ],
+      "ends": [
+        "Tower workshops",
+        "Upton / Frith / Oscroft"
+      ]
+    }
+  ],
+  "model": {
+    "mode": "procedural",
+    "milliseconds": 5322.800000000745
+  }
+}

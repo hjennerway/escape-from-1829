@@ -22,11 +22,11 @@ public static class NativePrototypeBuild
     [Serializable] class View { public int buffer; public int byteOffset; public int byteLength; public int byteStride; }
     [Serializable] class MeshDef { public string name; public Primitive[] primitives; }
     [Serializable] class Primitive { public Attributes attributes; public int indices = -1; public int material = -1; public int mode = 4; }
-    [Serializable] class Attributes { public int POSITION = -1; public int NORMAL = -1; public int TEXCOORD_0 = -1; public int TEXCOORD_1=-1; }
+    [Serializable] class Attributes { public int POSITION = -1; public int NORMAL = -1; public int TEXCOORD_0 = -1; public int TEXCOORD_1=-1;public int TEXCOORD_2=-1,COLOR_0=-1; }
     [Serializable] class SceneDef { public int[] nodes; }
     [Serializable] class NodeDef { public string name; public int mesh = -1; public int[] children; public float[] translation; public float[] rotation; public float[] scale; public float[] matrix; public NodeExtras extras; }
     [Serializable] class NodeExtras { public bool preciseSurface; }
-    [Serializable] class SurfaceExtras { public float offsetFactor,offsetUnits;public bool grass,wind,ceiling,mural; }
+    [Serializable] class SurfaceExtras { public float offsetFactor,offsetUnits,floorElevation;public bool grass,wind,ceiling,mural,roomWalls; }
     [Serializable] class MaterialExtras { public SurfaceExtras nativeSurface; }
     [Serializable] class MaterialDef { public string name; public Pbr pbrMetallicRoughness; public float[] emissiveFactor; public TextureInfo emissiveTexture; public MaterialExtensions extensions; public bool doubleSided; public string alphaMode; public float alphaCutoff = .5f; public MaterialExtras extras; }
     [Serializable] class MaterialExtensions { public Bump EXT_materials_bump; public Unlit KHR_materials_unlit; public EmissiveStrength KHR_materials_emissive_strength; }
@@ -42,6 +42,8 @@ public static class NativePrototypeBuild
     [Serializable] class ImportStats { public string name; public int meshes; public long triangles; public int textures; }
     [Serializable] class Report { public string sourceHash, importSignature; public ImportStats[] assets; public string engine; }
 
+    public static void ValidateCompiler(){AssetDatabase.Refresh();var shader=Shader.Find("Escape1829/NativeSurface");if(!shader||ShaderUtil.ShaderHasError(shader))throw new Exception("Native surface shader does not compile.");Debug.Log("NATIVE_SOURCE_COMPILE_PASS");}
+
     [MenuItem("Escape 1829/Native prototype/Prepare scene")]
     public static void Prepare()
     {
@@ -52,7 +54,7 @@ public static class NativePrototypeBuild
         Directory.CreateDirectory(Baked); Directory.CreateDirectory("Assets/Scenes");
         const string notices = "Assets/StreamingAssets/Licenses";
         Directory.CreateDirectory(notices);
-        foreach (string file in new[] { "GPL-3.0.txt", "THREE-LICENSE.txt", "EZ-TREE-LICENSE.txt", "TREE-TEXTURES-LICENSE.txt" })
+        foreach (string file in new[] { "GPL-3.0.txt", "THREE-LICENSE.txt", "EZ-TREE-LICENSE.txt", "TREE-TEXTURES-LICENSE.txt","FURNITURE-LICENSE.txt","ShopPrentice-MIT.txt","Panca-GPL-3.0.txt" })
             File.Copy(Source + "/" + file, notices + "/" + file, true);
         AssetDatabase.Refresh();
         foreach (string path in Directory.GetFiles("Assets/Resources/Archive", "*.png"))
@@ -70,30 +72,35 @@ public static class NativePrototypeBuild
         var indoor = cached ? AssetDatabase.LoadAssetAtPath<GameObject>(Baked + "/indoor/indoor.prefab") : null;
         var guard = cached ? AssetDatabase.LoadAssetAtPath<GameObject>(Baked + "/guard/guard.prefab") : null;
         var selection = cached ? AssetDatabase.LoadAssetAtPath<GameObject>(Baked + "/selection/selection.prefab") : null;
-        if (outdoor && indoor && guard && selection) stats.AddRange(previous.assets);
-        else { outdoor = Import("outdoor", stats); indoor = Import("indoor", stats); guard = Import("guard", stats); selection = Import("selection",stats); }
+        var escape = cached ? AssetDatabase.LoadAssetAtPath<GameObject>(Baked + "/escape/escape.prefab") : null;
+        var fittings = cached ? AssetDatabase.LoadAssetAtPath<GameObject>(Baked + "/fittings/fittings.prefab") : null;
+        if (outdoor && indoor && guard && selection && escape && fittings) stats.AddRange(previous.assets);
+        else { outdoor = ImportOutdoor(stats); indoor = Import("indoor", stats); guard = Import("guard", stats); selection = Import("selection",stats);escape=Import("escape",stats);fittings=Import("fittings",stats); }
         var scene = EditorSceneManager.NewScene(NewSceneSetup.EmptyScene, NewSceneMode.Single);
         var game = new GameObject("Escape from 1829").AddComponent<NativePrototypeGame>();
         game.outdoorPrefab = outdoor; game.indoorPrefab = indoor; game.guardPrefab = guard;
+        game.escapePrefab=escape;game.fittingsPrefab=fittings;
         var filters=selection.GetComponentsInChildren<MeshFilter>(true);game.selectionMeshes=new Mesh[filters.Length];
         foreach(var filter in filters)game.selectionMeshes[int.Parse(filter.transform.parent.name.Substring(10))]=filter.sharedMesh;
         game.selectionShader=Shader.Find("Escape1829/BuildingSelection");
         game.layoutText = AssetDatabase.LoadAssetAtPath<TextAsset>(Source + "/layout.json");
         game.manifestText = AssetDatabase.LoadAssetAtPath<TextAsset>(Source + "/manifest.json");
+        game.escapeCollisionText=AssetDatabase.LoadAssetAtPath<TextAsset>(Source+"/escape-jump-collision.bytes");
         game.collisionText = AssetDatabase.LoadAssetAtPath<TextAsset>(Source + "/jump-collision.bytes");
         game.worldFont=Resources.GetBuiltinResource<Font>("LegacyRuntime.ttf");
         game.bodyFont=NativePresentationBuild.LoadFont("arial");game.buttonFont=NativePresentationBuild.LoadFont("arial-bold");game.displayFont=NativePresentationBuild.LoadFont("georgia");game.italicFont=NativePresentationBuild.LoadFont("georgia-italic");
         game.lightingIcons=NativePresentationBuild.LoadLightingIcons();
         game.locationIcon=NativePresentationBuild.LoadLocationIcon();game.deviceLocationShader=Shader.Find("Escape1829/DeviceLocation");
         game.skyShader=Shader.Find("Escape1829/CloudSky");game.gradeShader=Shader.Find("Escape1829/ColourGrade");
+        game.lampPoolShader=Shader.Find("Escape1829/LampPool");
         game.uiCaptureShader=Shader.Find("Escape1829/UICapture");
-        if (!game.layoutText || !game.manifestText || !game.collisionText) throw new Exception("Exported navigation data could not import.");
+        if (!game.layoutText || !game.manifestText || !game.collisionText||!game.escapeCollisionText) throw new Exception("Exported navigation data could not import.");
         game.outdoorTriangles = stats[0].triangles; game.indoorTriangles = stats[1].triangles;
         game.outdoorBatches = stats[0].meshes; game.indoorBatches = stats[1].meshes;
         EditorSceneManager.SaveScene(scene, ScenePath);
         PlayerSettings.companyName = "Chester Night Games";
         PlayerSettings.productName = "Escape from 1829";
-        PlayerSettings.bundleVersion="0.8.0";PlayerSettings.Android.bundleVersionCode=8;
+        PlayerSettings.bundleVersion="0.14.0";PlayerSettings.Android.bundleVersionCode=14;
         PlayerSettings.SetApplicationIdentifier(NamedBuildTarget.Android, "org.hjennerway.escape1829.prototype");
         PlayerSettings.defaultScreenWidth = 1280; PlayerSettings.defaultScreenHeight = 720;
         PlayerSettings.defaultIsNativeResolution = false;
@@ -126,7 +133,8 @@ public static class NativePrototypeBuild
         var signature = new StringBuilder();
         using (var hash = SHA256.Create())
         {
-            foreach (string file in new[] { Source + "/outdoor.glb", Source + "/indoor.glb", Source + "/guard.glb", Source + "/selection.glb", "Assets/Editor/NativePrototypeBuild.cs", "Assets/Shaders/NativeSurface.shader" })
+            var files=new List<string>{Source+"/manifest.json",Source+"/indoor.glb",Source+"/guard.glb",Source+"/selection.glb",Source+"/escape.glb",Source+"/fittings.glb",Source+"/room-wallpaper.png",Source+"/room-paint.png",Source+"/escape-jump-collision.bytes","Assets/Editor/NativePrototypeBuild.cs","Assets/Shaders/NativeSurface.shader"};foreach(var name in JsonUtility.FromJson<NativePrototypeGame.Manifest>(File.ReadAllText(Source+"/manifest.json")).outdoorChunks)files.Add(Source+"/"+name);
+            foreach (string file in files)
             {
                 using (var stream = File.OpenRead(file)) signature.Append(BitConverter.ToString(hash.ComputeHash(stream)));
             }
@@ -134,6 +142,11 @@ public static class NativePrototypeBuild
         }
     }
 
+    static GameObject ImportOutdoor(List<ImportStats> stats){
+        var manifest=JsonUtility.FromJson<NativePrototypeGame.Manifest>(File.ReadAllText(Source+"/manifest.json"));var root=new GameObject("outdoor");var total=new ImportStats{name="outdoor"};
+        foreach(var file in manifest.outdoorChunks){var partStats=new List<ImportStats>();var prefab=Import(Path.GetFileNameWithoutExtension(file),partStats);var part=(GameObject)PrefabUtility.InstantiatePrefab(prefab);part.transform.SetParent(root.transform,false);total.meshes+=partStats[0].meshes;total.triangles+=partStats[0].triangles;total.textures+=partStats[0].textures;}
+        Directory.CreateDirectory(Baked+"/outdoor");AssetDatabase.Refresh();var combined=PrefabUtility.SaveAsPrefabAsset(root,Baked+"/outdoor/outdoor.prefab");UnityEngine.Object.DestroyImmediate(root);stats.Add(total);return combined;
+    }
     static GameObject Import(string name, List<ImportStats> stats)
     {
         var bytes = File.ReadAllBytes(Source + "/" + name + ".glb");
@@ -157,6 +170,7 @@ public static class NativePrototypeBuild
             }
         }
         var rawNodes=ArrayValues(Property(json,"nodes"));for(int i=0;i<root.nodes.Length;i++)if(Property(rawNodes[i],"mesh")==null)root.nodes[i].mesh=-1;
+        var rawMeshes=ArrayValues(Property(json,"meshes"));for(int i=0;i<root.meshes.Length;i++){var primitives=ArrayValues(Property(rawMeshes[i],"primitives"));for(int j=0;j<primitives.Count;j++){var attributes=Property(primitives[j],"attributes");if(Property(attributes,"COLOR_0")==null)root.meshes[i].primitives[j].attributes.COLOR_0=-1;if(Property(attributes,"TEXCOORD_2")==null)root.meshes[i].primitives[j].attributes.TEXCOORD_2=-1;}}
         int binaryHeader = 20 + jsonLength;
         if (BitConverter.ToUInt32(bytes, binaryHeader + 4) != 0x004E4942) throw new Exception("GLB binary chunk missing.");
         int start = binaryHeader + 8;
@@ -169,15 +183,18 @@ public static class NativePrototypeBuild
             if (image.bufferView < 0 || image.uri != null) throw new Exception("Only embedded textures are supported.");
             var view = root.bufferViews[image.bufferView];
             var pixels = new byte[view.byteLength]; Buffer.BlockCopy(bytes, start + view.byteOffset, pixels, 0, pixels.Length);
-            string texturePath = folder + "/texture-" + i + ".png";
-            File.WriteAllBytes(texturePath, pixels); AssetDatabase.ImportAsset(texturePath);
-            var importer = (TextureImporter)AssetImporter.GetAtPath(texturePath);
-            importer.wrapMode = TextureWrapMode.Repeat; importer.mipmapEnabled = true;
             bool linear=false;foreach(var texture in root.textures)if(texture.source==i&&texture.name!=null&&(texture.name.StartsWith("Estate ")||texture.name.StartsWith("Distant window glass mask")))linear=true;
-            importer.sRGBTexture=!linear;importer.anisoLevel=8;
-            foreach(var m in root.materials)if(m.alphaMode=="MASK"&&m.pbrMetallicRoughness?.baseColorTexture!=null&&root.textures[m.pbrMetallicRoughness.baseColorTexture.index].source==i){importer.alphaIsTransparency=true;importer.mipMapsPreserveCoverage=true;importer.alphaTestReferenceValue=m.alphaCutoff;}
-            importer.maxTextureSize = 1024; importer.textureCompression = TextureImporterCompression.Compressed;
-            importer.SaveAndReimport(); textures[i] = AssetDatabase.LoadAssetAtPath<Texture2D>(texturePath);
+            bool cutout=false;float cutoff=.5f;foreach(var m in root.materials)if(m.alphaMode=="MASK"&&m.pbrMetallicRoughness?.baseColorTexture!=null&&root.textures[m.pbrMetallicRoughness.baseColorTexture.index].source==i){cutout=true;cutoff=m.alphaCutoff;}
+            Directory.CreateDirectory(Baked+"/textures");string digest;using(var hash=SHA256.Create())digest=BitConverter.ToString(hash.ComputeHash(pixels)).Replace("-","").ToLowerInvariant();
+            string texturePath=Baked+"/textures/"+digest+(linear?"-linear":"-srgb")+(cutout?"-mask-"+Mathf.RoundToInt(cutoff*1000):"")+".png";
+            if(!File.Exists(texturePath)){
+                File.WriteAllBytes(texturePath,pixels);AssetDatabase.ImportAsset(texturePath);
+                var importer=(TextureImporter)AssetImporter.GetAtPath(texturePath);
+                importer.wrapMode=TextureWrapMode.Repeat;importer.mipmapEnabled=true;importer.sRGBTexture=!linear;importer.anisoLevel=8;
+                importer.alphaIsTransparency=cutout;importer.mipMapsPreserveCoverage=cutout;importer.alphaTestReferenceValue=cutoff;
+                importer.maxTextureSize=1024;importer.textureCompression=TextureImporterCompression.Compressed;importer.SaveAndReimport();
+            }
+            textures[i]=AssetDatabase.LoadAssetAtPath<Texture2D>(texturePath);
         }
         Texture2D Texture(TextureInfo info) => info == null ? null : textures[root.textures[info.index].source];
         void TransformTexture(Material material,string property,TextureInfo info)
@@ -197,6 +214,7 @@ public static class NativePrototypeBuild
             var definition = root.materials[i]; var pbr = definition.pbrMetallicRoughness;
             var material = new Material(Shader.Find("Escape1829/NativeSurface")); material.name = definition.name ?? name + " material " + i;
             var surface=definition.extras?.nativeSurface;
+            if(surface!=null&&surface.roomWalls){material.SetFloat("_RoomWalls",1);material.SetFloat("_RoomFloor",surface.floorElevation);material.SetTexture("_RoomWallpaper",AssetDatabase.LoadAssetAtPath<Texture2D>(Source+"/room-wallpaper.png"));material.SetTexture("_RoomPaint",AssetDatabase.LoadAssetAtPath<Texture2D>(Source+"/room-paint.png"));}
             if(surface!=null){material.SetFloat("_OffsetFactor",surface.offsetFactor);material.SetFloat("_OffsetUnits",surface.offsetUnits);material.SetFloat("_Grass",surface.grass?1:0);material.SetFloat("_Ceiling",surface.ceiling?1:0);material.SetFloat("_Mural",surface.mural?1:0);if(surface.mural)material.SetTexture("_MuralMap",Resources.Load<Texture2D>("Archive/art_grindley-basement-mural"));if(surface.wind)material.EnableKeyword("_LEAF_WIND");}
             if (pbr != null)
             {
@@ -242,6 +260,9 @@ public static class NativePrototypeBuild
                 var position = Floats(root, bytes, start, primitive.attributes.POSITION, 3);
                 var normal = Floats(root, bytes, start, primitive.attributes.NORMAL, 3);
                 var uv = Floats(root, bytes, start, primitive.attributes.TEXCOORD_0, 2);
+                int colourWidth=primitive.attributes.COLOR_0<0?0:root.accessors[primitive.attributes.COLOR_0].type=="VEC4"?4:3;
+                float[] colours=colourWidth==0?null:Floats(root,bytes,start,primitive.attributes.COLOR_0,colourWidth);
+                float[] roomFinish=primitive.attributes.TEXCOORD_2<0?null:Floats(root,bytes,start,primitive.attributes.TEXCOORD_2,2);
                 float[] wind=name=="guard"||name=="selection"?null:Floats(root,bytes,start,primitive.attributes.TEXCOORD_1,2);
                 var vertices = new Vector3[position.Length / 3]; var normals = new Vector3[vertices.Length]; var uvs = new Vector2[vertices.Length];
                 for (int n = 0; n < vertices.Length; n++)
@@ -258,9 +279,11 @@ public static class NativePrototypeBuild
                 for (int k = 0; k < indices.Length; k += 3) { int t = indices[k + 1]; indices[k + 1] = indices[k + 2]; indices[k + 2] = t; }
                 var mesh = new Mesh { name = root.meshes[i].name ?? name + " mesh " + i, indexFormat = vertices.Length > 65535 ? IndexFormat.UInt32 : IndexFormat.UInt16 };
                 mesh.vertices = vertices; mesh.normals = normals; mesh.uv = uvs; mesh.triangles = indices;
+                if(colours!=null){if(colours.Length!=vertices.Length*colourWidth)throw new Exception("Vertex colour count differs from positions.");var color=new Color[vertices.Length];for(int k=0;k<color.Length;k++)color[k]=new Color(colours[k*colourWidth],colours[k*colourWidth+1],colours[k*colourWidth+2],colourWidth==4?colours[k*colourWidth+3]:1);mesh.colors=color;materials[primitive.material].SetFloat("_VertexColours",1);}
+                if(roomFinish!=null){var finish=new Vector2[vertices.Length];for(int k=0;k<finish.Length;k++)finish[k]=new Vector2(roomFinish[k*2],roomFinish[k*2+1]);mesh.uv3=finish;}
                 if(wind!=null){var weights=new Vector2[vertices.Length];for(int w=0;w<weights.Length;w++)weights[w]=new Vector2(wind[w*2],wind[w*2+1]);mesh.uv2=weights;}
                 mesh.RecalculateBounds();if(materials[primitive.material].IsKeywordEnabled("_BUMP"))mesh.RecalculateTangents();
-                bool precise=name=="indoor";foreach(var node in root.nodes)if(node.mesh==i&&node.extras!=null&&node.extras.preciseSurface)precise=true;
+                bool precise=name=="indoor"||name=="escape"||name=="fittings";foreach(var node in root.nodes)if(node.mesh==i&&node.extras!=null&&node.extras.preciseSurface)precise=true;
                 MeshUtility.SetMeshCompression(mesh,precise?ModelImporterMeshCompression.Off:ModelImporterMeshCompression.Low);
                 string path = folder + "/mesh-" + i + "-" + j + ".asset";
                 meshSets[i][j] = (Mesh)SaveAsset(mesh, path); assetStats.meshes++; assetStats.triangles += indices.Length / 3;
@@ -343,7 +366,7 @@ public static class NativePrototypeBuild
         var floors=NativePrototypeGame.MakeFloors(JsonUtility.FromJson<NativePrototypeGame.Navigation>(game.layoutText.text));var layout=floors[0];
         if (layout.cells.Length != layout.width * layout.height || floors.Length!=4) throw new Exception("Unexpected escape layout.");
         var manifest = JsonUtility.FromJson<NativePrototypeGame.Manifest>(game.manifestText.text);
-        if (manifest.schema!=3||manifest.periods.Length!=13||stats[0].triangles != manifest.outdoor.triangles || stats[1].triangles != manifest.indoor.triangles) throw new Exception("Native geometry or historical periods differ from exported source.");
+        if (manifest.schema!=4||manifest.escape.variants.Length!=8||manifest.periods.Length!=13||stats[0].triangles != manifest.outdoor.triangles || stats[1].triangles != manifest.indoor.triangles||stats[4].triangles!=manifest.escapeStats.triangles||stats[5].triangles!=manifest.fittings.triangles) throw new Exception("Native geometry or historical periods differ from exported source.");
         if (!NativePrototypeGame.IndoorClear(layout, layout.spawn.x * layout.cellSize, layout.spawn.z * layout.cellSize)) throw new Exception("Player spawn blocked.");
         int exits=0;for(int f=0;f<floors.Length;f++)foreach (var exit in floors[f].exits)
         {
@@ -352,8 +375,13 @@ public static class NativePrototypeBuild
         }
         if (!NativePrototypeGame.OutdoorClear(manifest, 0, 40)) throw new Exception("Outdoor spawn blocked.");
         if (NativePrototypeGame.OutdoorClear(manifest, manifest.playBounds.maxX + 1, 40)) throw new Exception("Outdoor boundary must block movement.");
-        if(exits!=23)throw new Exception("Expected all 23 reviewed outside-door connections.");
-        Debug.Log("NATIVE_VALIDATION_PASS geometry counts, 13 periods, four levels, 23 reachable doors and exterior collision bounds");
+        if(exits!=24)throw new Exception("Expected all 24 reviewed outside-door connections.");
+        // Verify saved colour data before the player releases CPU mesh copies.
+        bool transparent=false,partial=false,opaque=false;
+        foreach(var filter in game.outdoorPrefab.GetComponentsInChildren<MeshFilter>(true))foreach(var colour in filter.sharedMesh.colors){transparent|=colour.a==0;partial|=colour.a>0&&colour.a<1;opaque|=colour.a==1;}
+        if(!transparent||!partial||!opaque)throw new Exception("Imported road colours must retain transparent, partial and opaque alpha.");
+        Debug.Log("NATIVE_VERTEX_ALPHA_IMPORT_PASS transparent, partial and opaque road colours");
+        Debug.Log("NATIVE_VALIDATION_PASS geometry counts, 13 periods, four levels, 24 reachable doors and exterior collision bounds");
     }
 
     [MenuItem("Escape 1829/Native prototype/Build Windows preview")]

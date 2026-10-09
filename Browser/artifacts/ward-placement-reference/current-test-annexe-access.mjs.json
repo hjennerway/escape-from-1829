@@ -1,0 +1,24 @@
+{
+  "code": 0,
+  "failures": [
+    {
+      "method": "deepEqual",
+      "actual": {
+        "primitives": 20708,
+        "sha256": "759e219aff286d85cdac2671041a0e59059732573f4b60e1554831a8eded63be"
+      },
+      "expected": {
+        "primitives": 20708,
+        "sha256": "6fe71d9ae22ec6bb79755d9204b1d1dfe1a21c398492dbcb44c4864ab09fe370"
+      },
+      "message": "Every primitive outside the marked low entrance range remains exact",
+      "stack": [
+        "    at assert.<computed> [as deepEqual] (file:///C:/Users/Harry/Documents/_escape-from-1829/Browser/artifacts/ward-placement-reference/capture-snapshot-mismatches.mjs:9:14)",
+        "    at file:///C:/Users/Harry/Documents/_escape-from-1829/Browser/artifacts/annexe-entrance-alignment-scope.mjs:40:8",
+        "    at ModuleJob.run (node:internal/modules/esm/module_job:561:25)",
+        "    at async node:internal/modules/esm/loader:647:26",
+        "    at async file:///C:/Users/Harry/Documents/_escape-from-1829/Browser/test-annexe-access.mjs:149:1"
+      ]
+    }
+  ]
+}

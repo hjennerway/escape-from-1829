@@ -46,3 +46,35 @@ preserved red geometry, exposed panes, open camera starts and walking collision.
 `Browser/artifacts/inspect-admin-refine3.cjs` renders both actual Explore views
 and verifies their service/court context without aerial labels. Final captures
 are `Browser/artifacts/admin-refine3-img1-final.jpg` and `admin-refine3-img2-final.jpg`.
+
+## Continuous low side band — 9 October 2026
+
+`side-band-marked.png` is the owner's later walking screenshot. Purple marks
+the accepted thin light masonry profile, yellow identifies the strip at the
+lower recessed window, and green identifies missing wall-return/frontage spans.
+These colours refer to this screenshot, separately from the older photographic
+annotations above.
+
+The recessed sash's sill extends below the former 2.6-unit band. The owner
+confirmed lowering the whole band slightly to keep one continuous level beneath
+the main sash sills, rather than stepping only the recessed section. Its centre is now
+2.3 units, with the existing 0.13-unit height, 0.14-unit depth and stone colour.
+One swept solid follows the pitched room's south/east/north walls, the recessed
+link's east/north walls, and the court block's east/front walls. Mitred bends
+replace the separate box strips and close all marked green gaps. The window
+positions, sills and building footprints are retained.
+
+`test-main-admin-refine2.mjs` surveys the complete assembled side band with 356
+top/underside rays and rejects leftover strips at the old level. The shared
+facade-course check also covers its corner joins. Hardware walking captures
+for the side, recess, court and phone are in
+`Browser/artifacts/admin-side-band/`. Browser modelling sources and the local
+compiled estate are updated; Unity/Android and Blender exports are unchanged.
+
+The saved pre-edit Admin builder reproduces the existing Jarman and
+Leighton/Newton whole-estate snapshots exactly. Independent comparison retains
+every protected primitive outside Admin and all 1,307 Admin primitives outside
+the band, along with every window/range record. Only those two geometry
+fingerprints advance for the authorized three-to-one band replacement; the
+ward ranges and existing scope exclusions remain protected. Comparison receipts
+are in `Browser/artifacts/admin-side-band/before-audit.json` and `after-audit.json`.

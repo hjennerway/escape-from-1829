@@ -1,0 +1,24 @@
+{
+  "code": 0,
+  "failures": [
+    {
+      "method": "deepEqual",
+      "actual": {
+        "primitives": 818883,
+        "sha256": "64b403c394aadcaff398f2cc7fdb9df706fceedf1e52c283563f7afd34f0a47c"
+      },
+      "expected": {
+        "primitives": 818948,
+        "sha256": "521e98bfb7c17f825724268a5dab15eb7cc47173112571bc3334ed949b7a9f18"
+      },
+      "message": "All geometry outside the marked frontage stays exact",
+      "stack": [
+        "    at assert.<computed> [as deepEqual] (file:///C:/Users/Harry/Documents/_escape-from-1829/Browser/artifacts/ward-placement-reference/capture-snapshot-mismatches.mjs:9:14)",
+        "    at file:///C:/Users/Harry/Documents/_escape-from-1829/Browser/test-jarman.mjs:11:8",
+        "    at ModuleJob.run (node:internal/modules/esm/module_job:561:25)",
+        "    at async node:internal/modules/esm/loader:647:26",
+        "    at async asyncRunEntryPointWithESMLoader (node:internal/modules/run_main:101:5)"
+      ]
+    }
+  ]
+}

@@ -89,3 +89,23 @@ exterior joins, including the formerly missing outside square and overlapping
 inside square. Browser captures and logs are in `Browser/artifacts/wall-mitres/`.
 Browser sources and local compiled aerial assets are updated; Unity, Blender
 and packaged applications are not regenerated.
+
+## Outer stair retaining-wall flicker — 9 October 2026
+
+The owner's [green-circled game view](stair-wall-flicker-reference.png) identifies
+the brown retaining wall beside the top of the eastern outer flight. It is
+defect evidence. The mirrored western approach has the same overlap.
+
+The entrance-wing gravel apron generated an outward vertical contact face at
+z=21.7 over |x|=30–30.75, coincident with the retaining masonry. Its edge now
+ends at z=21.78, inside that wall beneath the existing stone coping. The tread
+geometry, walking heights, approach grade, wall outline and coping are retained.
+This supersedes the apron contact at this joint; the earlier facade setback
+and mitred retaining-wall corners remain in place.
+
+`Browser/test-front-basement.mjs` probes forty points in the complete assembled
+estate after timeline preparation generates the gravel sides. The saved
+original apron fails with two competing faces. Hardware game, source and
+compiled captures and camera sweeps are in
+`Browser/artifacts/front-stair-flicker/`. The browser source and local compiled
+estate are updated; Unity/Android and Blender exports are unchanged.

@@ -1,0 +1,11 @@
+{
+  "outside": {
+    "primitives": 1446222,
+    "sha256": "c4cbe633fab30c4aca010e0ee22df38fc881155e2bc9bbb99c137f279b6eabd5"
+  },
+  "roofs": {
+    "primitives": 540,
+    "sha256": "15d3f68c2a10dc22c0426267c26f11fcd9701ddb22fe349d80d408dc0cd1fe0a"
+  },
+  "local": 8
+}

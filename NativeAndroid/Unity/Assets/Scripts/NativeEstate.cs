@@ -43,8 +43,9 @@ public sealed partial class NativePrototypeGame
     void RefreshEstateVisibility()
     {
         if(estateMeshes==null)return;
+        if(movingFittings.TryGetValue("escape-trees",out var scenarioTrees))scenarioTrees.gameObject.SetActive(trees);
         for(int i=0;i<estateMeshes.Length;i++){
-            var flag=manifest.meshFlags[i];bool visible=periodMeshSet[i]&&(!flag.tree||trees)&&(flag.group<0||flag.level==detailLevels[flag.group]);estateMeshes[i].enabled=visible;
+            var flag=manifest.meshFlags[i];bool visible=(Escaping&&escapeMeshSet!=null?escapeMeshSet[i]:periodMeshSet[i])&&(!flag.tree||trees)&&(flag.group<0||flag.level==detailLevels[flag.group]);estateMeshes[i].enabled=visible;
         }
     }
     void UpdateEstateLOD()

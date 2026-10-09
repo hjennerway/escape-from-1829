@@ -1,0 +1,814 @@
+{
+  "probes": 64,
+  "leaks": [
+    {
+      "z": -40.3,
+      "y": 5.151,
+      "hits": []
+    },
+    {
+      "z": -40.3,
+      "y": 5.3,
+      "hits": []
+    },
+    {
+      "z": -40.3,
+      "y": 6,
+      "hits": []
+    },
+    {
+      "z": -40.3,
+      "y": 7.5,
+      "hits": []
+    },
+    {
+      "z": -40.3,
+      "y": 8.82,
+      "hits": []
+    },
+    {
+      "z": -39,
+      "y": 5.151,
+      "hits": []
+    },
+    {
+      "z": -39,
+      "y": 5.3,
+      "hits": []
+    },
+    {
+      "z": -39,
+      "y": 6,
+      "hits": []
+    },
+    {
+      "z": -39,
+      "y": 7.5,
+      "hits": []
+    },
+    {
+      "z": -39,
+      "y": 8.82,
+      "hits": []
+    },
+    {
+      "z": -37,
+      "y": 5.151,
+      "hits": []
+    },
+    {
+      "z": -37,
+      "y": 5.3,
+      "hits": []
+    },
+    {
+      "z": -37,
+      "y": 6,
+      "hits": []
+    },
+    {
+      "z": -37,
+      "y": 7.5,
+      "hits": []
+    },
+    {
+      "z": -37,
+      "y": 8.82,
+      "hits": []
+    },
+    {
+      "z": -36.31,
+      "y": 5.151,
+      "hits": []
+    },
+    {
+      "z": -36.31,
+      "y": 5.3,
+      "hits": []
+    },
+    {
+      "z": -36.31,
+      "y": 6,
+      "hits": []
+    },
+    {
+      "z": -36.31,
+      "y": 7.5,
+      "hits": []
+    },
+    {
+      "z": -36.31,
+      "y": 8.82,
+      "hits": []
+    },
+    {
+      "z": -36.29,
+      "y": 5.151,
+      "hits": []
+    },
+    {
+      "z": -36.29,
+      "y": 5.3,
+      "hits": []
+    },
+    {
+      "z": -36.29,
+      "y": 6,
+      "hits": []
+    },
+    {
+      "z": -36.29,
+      "y": 7.5,
+      "hits": []
+    },
+    {
+      "z": -36.29,
+      "y": 8.82,
+      "hits": []
+    },
+    {
+      "z": -34,
+      "y": 5.151,
+      "hits": []
+    },
+    {
+      "z": -34,
+      "y": 5.3,
+      "hits": []
+    },
+    {
+      "z": -34,
+      "y": 6,
+      "hits": []
+    },
+    {
+      "z": -34,
+      "y": 7.5,
+      "hits": []
+    },
+    {
+      "z": -34,
+      "y": 8.82,
+      "hits": []
+    },
+    {
+      "z": -30,
+      "y": 5.151,
+      "hits": []
+    },
+    {
+      "z": -30,
+      "y": 5.3,
+      "hits": []
+    },
+    {
+      "z": -30,
+      "y": 6,
+      "hits": []
+    },
+    {
+      "z": -30,
+      "y": 7.5,
+      "hits": []
+    },
+    {
+      "z": -30,
+      "y": 8.82,
+      "hits": []
+    },
+    {
+      "z": -26,
+      "y": 5.151,
+      "hits": []
+    },
+    {
+      "z": -26,
+      "y": 5.3,
+      "hits": []
+    },
+    {
+      "z": -26,
+      "y": 6,
+      "hits": []
+    },
+    {
+      "z": -26,
+      "y": 7.5,
+      "hits": []
+    },
+    {
+      "z": -26,
+      "y": 8.82,
+      "hits": []
+    },
+    {
+      "z": -22,
+      "y": 5.151,
+      "hits": []
+    },
+    {
+      "z": -22,
+      "y": 5.3,
+      "hits": []
+    },
+    {
+      "z": -22,
+      "y": 6,
+      "hits": []
+    },
+    {
+      "z": -22,
+      "y": 7.5,
+      "hits": []
+    },
+    {
+      "z": -22,
+      "y": 8.82,
+      "hits": []
+    },
+    {
+      "z": -18,
+      "y": 5.151,
+      "hits": []
+    },
+    {
+      "z": -18,
+      "y": 5.3,
+      "hits": []
+    },
+    {
+      "z": -18,
+      "y": 6,
+      "hits": []
+    },
+    {
+      "z": -18,
+      "y": 7.5,
+      "hits": []
+    },
+    {
+      "z": -18,
+      "y": 8.82,
+      "hits": []
+    },
+    {
+      "z": -16.8,
+      "y": 5.151,
+      "hits": []
+    },
+    {
+      "z": -16.8,
+      "y": 5.3,
+      "hits": []
+    },
+    {
+      "z": -16.8,
+      "y": 6,
+      "hits": []
+    },
+    {
+      "z": -16.8,
+      "y": 7.5,
+      "hits": []
+    },
+    {
+      "z": -16.8,
+      "y": 8.82,
+      "hits": []
+    },
+    {
+      "x": 153.2175,
+      "y": 5.2,
+      "end": true
+    },
+    {
+      "x": 153.2175,
+      "y": 7,
+      "end": true
+    },
+    {
+      "x": 153.2175,
+      "y": 8.82,
+      "end": true
+    },
+    {
+      "x": 154.773125,
+      "y": 5.2,
+      "end": true
+    },
+    {
+      "x": 154.773125,
+      "y": 7,
+      "end": true
+    },
+    {
+      "x": 154.773125,
+      "y": 8.82,
+      "end": true
+    },
+    {
+      "x": 156.32874999999999,
+      "y": 5.2,
+      "end": true
+    },
+    {
+      "x": 156.32874999999999,
+      "y": 7,
+      "end": true
+    },
+    {
+      "x": 156.32874999999999,
+      "y": 8.82,
+      "end": true
+    }
+  ],
+  "floating": [
+    {
+      "name": "Corridor round-headed window",
+      "position": [
+        159.00000000000003,
+        1.48,
+        3.100000000000003
+      ]
+    },
+    {
+      "name": "Corridor round-headed window",
+      "position": [
+        159.00000000000003,
+        1.48,
+        -2.299999999999998
+      ]
+    },
+    {
+      "name": "Corridor round-headed window",
+      "position": [
+        159.00000000000003,
+        1.48,
+        -7.699999999999998
+      ]
+    },
+    {
+      "name": "Corridor round-headed window",
+      "position": [
+        159.00000000000003,
+        1.48,
+        -13.1
+      ]
+    },
+    {
+      "name": "Corridor round-headed window",
+      "position": [
+        153.60000000000002,
+        1.48,
+        -127.19999999999999
+      ]
+    },
+    {
+      "name": "Corridor round-headed window",
+      "position": [
+        159.00000000000003,
+        1.48,
+        -78.6
+      ]
+    },
+    {
+      "name": "Corridor round-headed window",
+      "position": [
+        159.00000000000003,
+        1.48,
+        -83.99999999999999
+      ]
+    },
+    {
+      "name": "Corridor round-headed window",
+      "position": [
+        159.00000000000003,
+        1.48,
+        -89.39999999999999
+      ]
+    },
+    {
+      "name": "Corridor round-headed window",
+      "position": [
+        159.00000000000003,
+        1.48,
+        -94.79999999999998
+      ]
+    },
+    {
+      "name": "Corridor round-headed window",
+      "position": [
+        159.00000000000003,
+        1.48,
+        -100.19999999999999
+      ]
+    },
+    {
+      "name": "Corridor round-headed window",
+      "position": [
+        159.00000000000003,
+        1.48,
+        -105.6
+      ]
+    },
+    {
+      "name": "Corridor round-headed window",
+      "position": [
+        159.00000000000003,
+        1.48,
+        -111
+      ]
+    },
+    {
+      "name": "Corridor round-headed window",
+      "position": [
+        159.00000000000003,
+        1.48,
+        -116.39999999999999
+      ]
+    },
+    {
+      "name": "Corridor round-headed window",
+      "position": [
+        159.00000000000003,
+        1.48,
+        -121.8
+      ]
+    },
+    {
+      "name": "Corridor round-headed window",
+      "position": [
+        159.00000000000003,
+        1.48,
+        -127.19999999999999
+      ]
+    }
+  ],
+  "trim": [
+    "Corridor brick eaves course",
+    "Corridor projecting brick eaves",
+    "Corridor gutter",
+    "Corridor downpipe",
+    "Corridor pipe bracket",
+    "Corridor pipe bracket",
+    "Corridor downpipe",
+    "Corridor pipe bracket",
+    "Corridor pipe bracket",
+    "Corridor downpipe",
+    "Corridor pipe bracket",
+    "Corridor pipe bracket",
+    "Corridor downpipe outside accessible gallery",
+    "Corridor pipe bracket outside accessible gallery",
+    "Corridor pipe bracket outside accessible gallery",
+    "Corridor brick eaves course outside accessible gallery",
+    "Corridor projecting brick eaves outside accessible gallery",
+    "Corridor gutter outside accessible gallery",
+    "Corridor brick eaves course",
+    "Corridor projecting brick eaves",
+    "Corridor gutter",
+    "Corridor downpipe",
+    "Corridor pipe bracket",
+    "Corridor pipe bracket",
+    "Corridor downpipe",
+    "Corridor pipe bracket",
+    "Corridor pipe bracket",
+    "Corridor downpipe",
+    "Corridor pipe bracket",
+    "Corridor pipe bracket",
+    "Eave closure: Straight corridor to Farndon",
+    "Eave closure: Straight corridor to Farndon outside accessible gallery",
+    "Eave closure: Straight corridor to Farndon outside accessible gallery",
+    "Eave closure: Straight corridor to Farndon outside accessible gallery",
+    "Eave closure: Straight corridor to Farndon outside accessible gallery",
+    "Eave closure: Straight corridor to Farndon outside accessible gallery",
+    "Eave closure: Straight corridor to Farndon outside accessible gallery",
+    "Eave closure: Straight corridor to Farndon outside accessible gallery"
+  ],
+  "roofProbes": 54,
+  "roofLeaks": [
+    {
+      "x": 152.9175,
+      "y": 5.165,
+      "z": -115
+    },
+    {
+      "x": 152.9175,
+      "y": 5.267834989461005,
+      "z": -115
+    },
+    {
+      "x": 152.9175,
+      "z": -115,
+      "roof": "Workshop arched exterior masonry",
+      "y": 5.150000095367432
+    },
+    {
+      "x": 156.62875,
+      "y": 5.165,
+      "z": -115
+    },
+    {
+      "x": 156.62875,
+      "y": 5.267834989461005,
+      "z": -115
+    },
+    {
+      "x": 156.62875,
+      "z": -115,
+      "roof": "Workshop arched exterior masonry",
+      "y": 5.150000095367432
+    },
+    {
+      "x": 152.9175,
+      "y": 5.165,
+      "z": -85
+    },
+    {
+      "x": 152.9175,
+      "y": 5.267834989461005,
+      "z": -85
+    },
+    {
+      "x": 152.9175,
+      "z": -85,
+      "roof": "Workshop arched exterior masonry",
+      "y": 5.150000095367432
+    },
+    {
+      "x": 156.62875,
+      "y": 5.165,
+      "z": -85
+    },
+    {
+      "x": 156.62875,
+      "y": 5.267834989461005,
+      "z": -85
+    },
+    {
+      "x": 156.62875,
+      "z": -85,
+      "roof": "Workshop arched exterior masonry",
+      "y": 5.150000095367432
+    },
+    {
+      "x": 152.9175,
+      "y": 5.165,
+      "z": -76
+    },
+    {
+      "x": 152.9175,
+      "y": 5.267834989461005,
+      "z": -76
+    },
+    {
+      "x": 152.9175,
+      "z": -76,
+      "roof": "Workshop arched exterior masonry",
+      "y": 5.150000095367432
+    },
+    {
+      "x": 156.62875,
+      "y": 5.165,
+      "z": -76
+    },
+    {
+      "x": 156.62875,
+      "y": 5.267834989461005,
+      "z": -76
+    },
+    {
+      "x": 156.62875,
+      "z": -76,
+      "roof": "Workshop arched exterior masonry",
+      "y": 5.150000095367432
+    },
+    {
+      "x": 152.9175,
+      "y": 5.165,
+      "z": -15
+    },
+    {
+      "x": 152.9175,
+      "y": 5.267834989461005,
+      "z": -15
+    },
+    {
+      "x": 152.9175,
+      "z": -15,
+      "roof": "Workshop arched exterior masonry",
+      "y": 5.150000095367432
+    },
+    {
+      "x": 156.62875,
+      "y": 5.165,
+      "z": -15
+    },
+    {
+      "x": 156.62875,
+      "y": 5.267834989461005,
+      "z": -15
+    },
+    {
+      "x": 156.62875,
+      "z": -15,
+      "roof": "Workshop arched exterior masonry",
+      "y": 5.150000095367432
+    },
+    {
+      "x": 152.9175,
+      "y": 5.165,
+      "z": -10
+    },
+    {
+      "x": 152.9175,
+      "y": 5.267834989461005,
+      "z": -10
+    },
+    {
+      "x": 152.9175,
+      "z": -10,
+      "roof": "Workshop arched exterior masonry",
+      "y": 5.150000095367432
+    },
+    {
+      "x": 156.62875,
+      "y": 5.165,
+      "z": -10
+    },
+    {
+      "x": 156.62875,
+      "y": 5.267834989461005,
+      "z": -10
+    },
+    {
+      "x": 156.62875,
+      "z": -10,
+      "roof": "Workshop arched exterior masonry",
+      "y": 5.150000095367432
+    },
+    {
+      "x": 152.9175,
+      "y": 5.165,
+      "z": -5
+    },
+    {
+      "x": 152.9175,
+      "y": 5.267834989461005,
+      "z": -5
+    },
+    {
+      "x": 152.9175,
+      "z": -5,
+      "roof": "Workshop arched exterior masonry",
+      "y": 5.150000095367432
+    },
+    {
+      "x": 156.62875,
+      "y": 5.165,
+      "z": -5
+    },
+    {
+      "x": 156.62875,
+      "y": 5.267834989461005,
+      "z": -5
+    },
+    {
+      "x": 156.62875,
+      "z": -5,
+      "roof": "Workshop arched exterior masonry",
+      "y": 5.150000095367432
+    },
+    {
+      "x": 152.9175,
+      "y": 5.165,
+      "z": 2
+    },
+    {
+      "x": 152.9175,
+      "y": 5.267834989461005,
+      "z": 2
+    },
+    {
+      "x": 152.9175,
+      "z": 2,
+      "roof": "Workshop arched exterior masonry",
+      "y": 5.150000095367432
+    },
+    {
+      "x": 156.62875,
+      "y": 5.165,
+      "z": 2
+    },
+    {
+      "x": 156.62875,
+      "y": 5.267834989461005,
+      "z": 2
+    },
+    {
+      "x": 156.62875,
+      "z": 2,
+      "roof": "Workshop arched exterior masonry",
+      "y": 5.150000095367432
+    },
+    {
+      "x": 152.9175,
+      "y": 5.165,
+      "z": 8
+    },
+    {
+      "x": 152.9175,
+      "y": 5.267834989461005,
+      "z": 8
+    },
+    {
+      "x": 152.9175,
+      "z": 8,
+      "roof": "Workshop arched exterior masonry",
+      "y": 5.150000095367432
+    },
+    {
+      "x": 156.62875,
+      "y": 5.165,
+      "z": 8
+    },
+    {
+      "x": 156.62875,
+      "y": 5.267834989461005,
+      "z": 8
+    },
+    {
+      "x": 156.62875,
+      "z": 8,
+      "roof": "Workshop arched exterior masonry",
+      "y": 5.150000095367432
+    },
+    {
+      "x": 155.073125,
+      "y": 5.4,
+      "join": true
+    },
+    {
+      "x": 155.073125,
+      "y": 5.7,
+      "join": true
+    },
+    {
+      "x": 156.3,
+      "y": 5.4,
+      "join": true
+    },
+    {
+      "x": 156.3,
+      "y": 5.7,
+      "join": true
+    },
+    {
+      "x": 156.57874999999999,
+      "y": 5.4,
+      "join": true
+    },
+    {
+      "x": 156.57874999999999,
+      "y": 5.7,
+      "join": true
+    }
+  ],
+  "roofStrips": [
+    {
+      "z": -38,
+      "hits": [
+        "Roof underside: Straight corridor to Farndon slate roof outside accessible gallery"
+      ]
+    },
+    {
+      "z": -34,
+      "hits": [
+        "Roof underside: Straight corridor to Farndon slate roof outside accessible gallery"
+      ]
+    },
+    {
+      "z": -30,
+      "hits": [
+        "Roof underside: Straight corridor to Farndon slate roof outside accessible gallery"
+      ]
+    },
+    {
+      "z": -26,
+      "hits": [
+        "Roof underside: Straight corridor to Farndon slate roof outside accessible gallery"
+      ]
+    },
+    {
+      "z": -22,
+      "hits": [
+        "Roof underside: Straight corridor to Farndon slate roof outside accessible gallery"
+      ]
+    },
+    {
+      "z": -18,
+      "hits": [
+        "Roof underside: Straight corridor to Farndon slate roof outside accessible gallery"
+      ]
+    }
+  ]
+}

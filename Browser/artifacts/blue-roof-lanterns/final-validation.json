@@ -1,0 +1,15 @@
+{
+  "sourceHash": "c4be4ecdb652fea8fe0b43826ebbc64871dd97ba90c893c07ec410c246324d8b",
+  "compiled": "aerial-e51dc3985fe991801d83.bin.gz",
+  "checksum": "e51dc3985fe991801d837006ccfc2576230d4f3cfece121c0d3ae350923ab1bd",
+  "sourceAndCompiledRendering": "passed",
+  "gpu": "NVIDIA GeForce RTX 3090 Ti / ANGLE Direct3D11",
+  "lanterns": 7,
+  "exposedPaneChecks": 112,
+  "scope": "Browser sources and local aerial model; Unity, Blender and interior exports unchanged",
+  "fullSuite": {
+    "command": "npm test",
+    "exitCode": 0,
+    "log": "full-suite.log"
+  }
+}

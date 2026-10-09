@@ -40,6 +40,19 @@ for(const {o,geometry,matrix,instances} of authored){
 }
 assert(extended>500,'Check the full assembled estate foundation closure');
 const timeline=prepareEstateTimeline(THREE,e,l);e.scene.updateMatrixWorld(true);
+// The tower's solid base used to merge into BufferGeometry before grounding,
+// leaving a 0.15-unit opening over the lawn. Probe every exposed side below
+// authored grade, including the reported entrance/1829 corner.
+const towerRay=new THREE.Raycaster();let towerSamples=0;
+for(const face of e.waterTower.children.filter(o=>o.userData.photoSide)){
+ const inward=new THREE.Vector3(0,0,-1).transformDirection(face.matrixWorld);
+ for(const x of [-4.1,-3.8,3.8,4.1])for(const y of [-.149,-.12,-.01,.05]){
+  towerRay.set(face.localToWorld(new THREE.Vector3(x,y,5.5)),inward);towerRay.far=.4;
+  const hit=towerRay.intersectObject(e.waterTower,true)[0];
+  assert.equal(hit?.object.name,'Water tower brick plinth',`Tower side ${face.userData.photoSide} closes the lawn gap at ${x}, ${y}`);
+  assert(Math.abs(hit.distance-.325)<1e-4,'The tower footing retains its original footprint');towerSamples++;
+ }
+}
 const carden=e.annexe.userData.cardenElevation;
 const cardenWalls=['Carden stepped low side range brick walls','Carden tower gabled range brick walls'].map(name=>carden.getObjectByName(name));
 const cardenRay=new THREE.Raycaster(),cardenNormal=new THREE.Vector3(1,0,0).transformDirection(carden.matrixWorld);
@@ -92,4 +105,4 @@ e.model.traverse(o=>{
 assert(bases>70,'Audit the complete estate, including tower services and modern buildings');
 assert.deepEqual(groundBuildingBases(THREE,e.model,{groundY:e.terrain.position.y,exclude:[e.trees,e.terrain]}),[],'Grounding is idempotent, including the earliest timeline walls');
 for(const year of [1829,1849,1916,2021]){timeline.setPeriod(year);for(const part of e.model.getObjectByName('1829 east end wall').children.filter(o=>o.name.endsWith('plinth')))assert(new THREE.Box3().setFromObject(part).min.y<e.terrain.position.y);}
-console.log(`PASS: ${pairs.length} wall/plinth joins, ${samples} exposed face samples, Carden join and ${bases} foundations; ${extended} extensions preserve upper geometry, textures and footprints; early timeline bases and repeat construction stay correct.`);
+console.log(`PASS: ${pairs.length} wall/plinth joins, ${samples} exposed face samples, ${towerSamples} grounded tower samples, Carden join and ${bases} foundations; ${extended} extensions preserve upper geometry, textures and footprints; early timeline bases and repeat construction stay correct.`);

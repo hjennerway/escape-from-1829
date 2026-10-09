@@ -1,0 +1,23 @@
+{
+  "results": [
+    {
+      "name": "desktop",
+      "previewVisibleMilliseconds": 63.899999998509884,
+      "firstOutdoorDrawMilliseconds": 8670.699999999255,
+      "model": "compiled",
+      "walkingDuringDelayedFurniture": true,
+      "doorWaitsAndRetries": true,
+      "errors": []
+    },
+    {
+      "name": "phone-fallback",
+      "previewVisibleMilliseconds": 89.30000000074506,
+      "firstOutdoorDrawMilliseconds": 11192.699999999255,
+      "model": "procedural",
+      "walkingDuringDelayedFurniture": true,
+      "doorWaitsAndRetries": true,
+      "errors": []
+    }
+  ],
+  "loadFailureRecovery": true
+}

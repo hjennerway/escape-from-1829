@@ -1,0 +1,13 @@
+{
+  "totalCommands": 156,
+  "initialPassingCommands": 99,
+  "initialSuiteExit": 1,
+  "workshopsRerunExit": 0,
+  "remainingCommands": 56,
+  "remainingFailures": [],
+  "focusedPavementsExit": 0,
+  "precompiledExit": 0,
+  "compiledSourceHashMatches": true,
+  "asset": "aerial-680a033abd2778cacc32.bin.gz",
+  "sourceHash": "ba5d76bf90a9b9e1a4dda8e2aa574e4b1872d07c7ec7ddd6c6043d2f5d7ee8c5"
+}

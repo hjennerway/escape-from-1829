@@ -1,3 +1,291 @@
+## Level Main/admin yard and solid bay wall (9 October 2026)
+
+The narrow walking gallery left its original brick plinth beside the road and
+exposed grass between X=156.62875 and the old X=159 court edge. The open bay
+against Main/admin retained unsupported gutters and downpipes. The runtime
+court now extends under the actual wall through Z=6.6 at the adjoining road's
+Y=0.34 level. The old plinth and cross-corridor fittings are retired, and a
+solid masonry face closes the bay to the pavilion, with collision and a slate
+roof joined to the existing entrance pitch. Research/escape-grounds/README.md
+records both owner-supplied screenshots and the fitted coordinates.
+
+The shared regression surveys 96 ground, 64 wall and 16 roof points against
+submitted geometry. The saved original builder reproduces 54 ground failures,
+64 open-wall failures, 16 missing-roof points and six obsolete fittings. The
+repaired source and compiled scenes pass every point. Physical movement checks
+cover four wall approaches in Explore and Escape, with refresh/retry and exact
+estate restoration in the existing workshop tests. Hardware desktop and
+portrait previews use NVIDIA GeForce RTX 3090 Ti / ANGLE Direct3D11. Evidence
+and repeatable checks are in Browser/artifacts/admin-yard-surface/.
+
+The required full `npm test` completes with exit code 0 across all 156 commands;
+its receipt is `Browser/artifacts/admin-yard-surface/full-suite.log`. The
+focused Explore/Escape checks and the compiled keyboard/touch browser test
+also pass. Final source and compiled GPU previews pass all 176 surface probes
+and render desktop/portrait views without page errors. Their receipts are
+`source-preview-final.log`, `compiled-preview-final.log` and `door-access.log`
+in the same folder.
+
+This changes Browser Explore/Escape runtime construction. Shared aerial and
+interior modelling inputs, Unity/Android, Blender and packaged exports retain
+their definitions. The local aerial model was rebuilt during validation to
+include the current shared sources from concurrent work; the runtime yard
+repair is applied after either source or compiled estate loading.
+
+## Service ramp enclosure and lower approach (9 October 2026)
+
+The service ramp's sloped stone top supplied a full-length axis-aligned
+collision box, blocking entry at its lower end. Its one brick retaining face
+floated at Y=.18 and the three other edges remained open. `tower-buildings.mjs`
+now closes all four perimeter faces beneath the terrain, keeping the original
+stone top, landing, rails and placement. Its serialized support-plane metadata
+travels with the source mesh through batching and binary compilation.
+
+`explore-controls.mjs` transforms sloped support planes and footprints into
+world space; both exterior walking controllers sample their height. Sloped
+support is collected independently of solid collision, so the ramp no longer
+blocks its own approach. Existing flat basement path support is retained.
+
+`test-service-ramp.mjs` is included in `npm test`. It checks 64 perimeter rays,
+three complete ascents/descents and jump landing in unbatched, batched, fitted
+Explore and restored estates, plus rotated/scaled/translated support. The
+GPU browser check compares the original and repaired Explore scene, including
+the rebuilt compiled model. The original produces 59 missing faces and blocks
+all three lower-end approaches; the repair closes every probe and supports
+the full walking routes. NVIDIA RTX 3090 Ti / ANGLE Direct3D11 is verified.
+Views and validation receipts are in `Browser/artifacts/service-ramp/`.
+
+The final full `npm test` exits with code 0; its receipt is
+`Browser/artifacts/service-ramp/full-suite.log`. The standard compiled/source
+comparison and the final compiled Explore ramp GPU check also pass. The local
+compiled manifest matches the current model source fingerprint.
+
+This updates shared Browser source and the local compiled aerial asset.
+Unity/Android, Blender, compiled interior assets and packaged exports are
+unchanged. Reference context is in Research/tower-buildings/README.md.
+
+## Exterior gate signs match the door plaques (9 October 2026)
+
+The night/carriage, pedestrian and maintenance wicket signs now use the shared
+`asylum-sign-paint.mjs` finish already used by the room and workshop door signs:
+aged cream-painted timber, serif lettering, double border, chipped edges and
+tarnished fixings. The grounds sign factory uses lit rough boards with timber
+backs and edges for every caller, replacing the plain unlit gate notices.
+
+The wicket sign reads only “Maintenance wicket”. “Boards need prising off” now
+starts its existing personal notebook observation, recorded when the player
+approaches the closed wicket. The crowbar, noise and workshop directions remain
+in that observation. The plaque follows the opening leaf as before.
+
+Hardware review verifies exact shared door-paint pixels for all three exterior
+gate signs, their materials and board geometry, the actual notebook entry,
+desktop/390-pixel portrait views and the opened wicket. No page or shader errors
+occur. Rendering uses NVIDIA GeForce RTX 3090 Ti through ANGLE/Direct3D11;
+`npm run test:gpu` passes using installed Chrome. Captures, the repeatable visual
+check and validation receipts are in `Browser/artifacts/exterior-sign-style/`.
+
+The required full `npm test` completes with exit code 0, including grounds,
+notebook, room-door, stair-sign and workshop checks. Its complete output is
+`Browser/artifacts/exterior-sign-style/full-suite.log`.
+
+Scope: Browser Escape runtime signs and observation text. Existing shared door
+paint, compiled estate/interior assets, Unity/Android, Blender and packaged
+exports are not regenerated by this change.
+
+## Chimney-side walking roof gap and floating gallery windows (9 October 2026)
+
+The narrowed on-foot gallery replaced the old stores/connector walls without
+closing its upper bay to the retained stores roof. Its original decorative
+windows were removed by distance from the new corridor axis, which missed
+assemblies on the wider old facade. Clipped low roof skirts and rainwater
+fittings also survived in the open strip beside the new wall.
+
+`tower-workshops.mjs` now removes window assemblies with their replaced shell,
+clears obsolete gallery trim and the full old low-roof width, and adds brick
+upper side/end returns to the existing stores roof. `workshop-gallery.mjs`
+constructs continuous exposed gallery pitches over the actual new wall width,
+with brick eave returns, opaque overhangs and retained slate/ridge materials.
+The taller tower/store roofs retain their geometry. Changes use the existing
+batch rebuild, transform cache, obstacle refresh and shadow invalidation path;
+disposal restores the original estate, including windows and trim.
+
+`test-tower-workshops.mjs` and `test-explore-workshops.mjs` share 64 upper-wall
+and 54 low-roof/junction probes against actual submitted geometry. Checks also reject
+orphaned source windows/trim and low roof strips in front of the tall wall.
+An in-memory baseline removing only this repair reproduces all 64 wall leaks,
+54 low-roof/junction failures, 15 floating windows, 38 orphaned fittings and six floating
+roof-strip samples. Its loader, receipt and before views are saved alongside
+the after evidence in `Browser/artifacts/chimney-walking-shell/`.
+
+Final focused Explore and Escape checks pass, including physical room/corridor
+walks, doors, both restoration attempts and the six roof-step samples at the
+Main/admin join. Source and compiled GPU surveys pass all 118 facade/roof rays,
+reject floating windows/trim/skirt remnants and render desktop, night and
+390-pixel portrait views without page errors. GPU acceleration is verified by
+`test:gpu` on NVIDIA GeForce RTX 3090 Ti / ANGLE Direct3D11. The existing
+keyboard/touch Explore workshop browser test and Escape corridor finish/light
+test also pass; their receipts use this repair's artifact folder.
+
+The required full `npm test` completes with exit code 0; its complete receipt
+is `Browser/artifacts/chimney-walking-shell/full-suite.log`. Final focused
+Explore/Escape and source/compiled GPU reruns also pass after the last roof-join
+adjustment. The initial full-suite run passes as well, but the frozen baseline
+loader above is the reproducible check of the original rendering defects.
+
+This updates Browser Explore/Escape runtime sources. The aerial source hash
+still matches the current compiled estate; no aerial/interior assets, Unity/
+Android, Blender or packaged exports are regenerated. Modelling context and
+the supplied screenshot are in Research/escape-grounds/README.md.
+
+## Irby gable texture flicker and estate roof/wall audit (9 October 2026)
+
+The yellow-circled Irby/Ashley roof edges had automatically generated fascias
+on the authored brick-gable planes. Their different texture coordinates produced
+view-dependent flicker. `roof-wall-joins.mjs` now subtracts covered vertical
+areas from generated fascias, using the assembled world geometry, including
+scaled, rotated and mirrored parents. It also respects vertical end faces in
+roof meshes and excludes named wall/masonry infill from roof-skin detection.
+Uncovered fascia fragments, backings and horizontal returns retain their role
+in closing actual roof gaps. The original roof/wall definitions stay fixed.
+See Research/irby-ashley/README.md and Research/roof-wall-gaps/README.md.
+
+The independent before/after survey freezes 444 competing-face points across
+37 mesh pairs. These include all four Irby gables and its garden additions,
+Grafton, Farndon/Witby, Upton, the annexe, main-wing returns, Reception,
+connecting corridors and tower ranges. The final survey samples 48,825 fascia
+points without an overlap, while preserving a geometry/transform/material hash
+of 8,926 authored meshes (1,139,114 triangles with instances). The new roof-wall
+regression retains every defect point and checks both authored coverage and no
+generated competitor. It fails against the saved original finisher. All 278
+existing open-eave probes and the adjacent gable, render and cornice checks pass
+in source and compiled geometry.
+
+GPU review uses NVIDIA GeForce RTX 3090 Ti / ANGLE Direct3D11. Source and rebuilt
+compiled scenes pass all 444 actual visible-surface probes, Irby day/dusk and
+moving-camera views, portrait captures and the Explore page at the supplied
+1916 dusk setting, without page/shader errors. Other roof and wall views cover
+both main wings, Reception, Upton, Farndon, Witby, Grafton, Churton, the annexe,
+Main/admin and tower/workshops. Repeatable checks, the original finisher and
+evidence are in Browser/artifacts/irby-roof-flicker/.
+
+Rebuilt compiled roof/tile checks, source/binary rendering comparison, every
+timeline stop and prepared/worker interior-loading checks pass. Windows locks
+on shared screenshot outputs interrupted two aggregate runs; the unchanged
+model assertions were rerun through a capture-path-only wrapper, with separate
+timeline/interior folders. Initial and successful continuation logs are retained
+as compiled-suite-final.txt and compiled-continuation.txt in the evidence folder.
+
+The required full `npm test` completes with exit code 0 across its 154 commands;
+its complete output is Browser/artifacts/irby-roof-flicker/full-suite.txt. The
+concurrently added corridor-window-spacing check is run separately and passes
+(late-added-corridor-check.txt), covering the current 155-command list. Final
+local exterior/interior model fingerprints match the current sources.
+
+This repair updates browser sources and rebuilds local aerial/interior models.
+Unity/Android, Blender and packaged exports are not regenerated by this task.
+
+## Front-wing texture flicker (9 October 2026)
+
+The yellow-circled patch beside the eastern entrance wing was a generated white
+roof fascia sharing the authored brick roof-junction plane. The corner finisher
+now trims automatically generated fascias behind the existing courtyard walls,
+using their established 0.04-unit clearance. This occurs after automatic roof
+closure and before material finishing, batching and shadow preparation. Roofs,
+undersides, windows, walking footprints and the authored masonry retain their
+definitions. See Research/front-inside-corners/README.md and the supplied image.
+
+The new shared front-corner regression is included in the existing inside-corner
+and roof-wall tests, including their compiled path. It passes 1,020 source and
+1,044 compiled face probes and fails against the saved original builders at the
+reported white fascia. Existing corner checks retain 104 pane probes, walking
+routes, roof contacts and 1,308 brick-closure texture samples. The roof-wall
+survey retains all 278 frozen formerly-open-eave probes.
+
+Source and rebuilt compiled GPU views pass twelve actual visible-surface rays
+through the marked patch, with day/dusk, nearby moving-camera and portrait
+captures. Validation uses NVIDIA GeForce RTX 3090 Ti / ANGLE Direct3D11.
+Evidence, baseline builders and repeatable checks are in
+Browser/artifacts/front-wing-flicker/. Local compiled aerial assets are rebuilt;
+Unity/Android, Blender and packaged exports are not regenerated.
+
+The actual Explore page also passes at the reference's 1916 dusk setting with
+compiled geometry and no page/shader errors. The compiled suite passes roof
+geometry, source/binary rendering and all timeline stops, then initially stops
+because stale interior assets select worker fallback instead of prepared assets.
+Rebuilding the local interior assets and rerunning `test:interior-loading` passes
+both logic and GPU asset/fallback, desktop/mobile, retry and replay checks.
+The required full `npm test` run completes with exit code 0 across all 152
+commands; its complete output is `Browser/artifacts/front-wing-flicker/full-suite.txt`.
+
+## North wicket fence restored to the ward wall (7 October 2026)
+
+The Escape railing beside the boarded maintenance wicket now reaches Hale's
+visible west wall. The corridor shell remainder code had replaced a concave
+ward collision outline with a convex hull, creating an invisible obstruction
+across its western lawn and shortening the fence by about 17 scene units.
+Remainder collision footprints now preserve the authored concavity by clipping
+its triangles to each remainder's envelope. The north scenario outline carries
+the rail into the placed ward spine, and iron-panel trimming uses physical wall
+bounds without the player's clearance padding. Thick hedges retain their
+clearance beside corridor walls. Gate locations and opening interactions remain.
+See Research/escape-grounds/README.md and its supplied screenshot.
+
+The new Browser/test-escape-fence.mjs is included in the full, grounds and
+escape suites. It compares the rail with an actual rendered wall intersection,
+checks 2,096 ground/jump-height samples, attempts 16 physical crossings, checks
+the wicket approach, hides/restores trees and repeats after scenario disposal.
+It passes; the saved pre-fix behaviour fails its open-court assertion. Grounds,
+outside movement, game, escape-progress and notebook logic checks also pass.
+
+Hardware browser validation verifies NVIDIA GeForce RTX 3090 Ti / Direct3D11,
+reviews matching desktop and portrait joins, samples the whole closed boundary
+with trees visible/hidden and attempts walking/jumping across the new section.
+No page or shader errors occur. Evidence and repeatable browser/baseline scripts
+are in Browser/artifacts/fence-building-join/. The required full npm test run
+stopped at the workshop twelve-pane sash-divider assertion; its full log is
+suite.txt in that directory. Other workshop source/tests were changing during
+validation. The final focused workshop rerun subsequently passes, recorded in
+workshops-final.txt; the earlier full run is not reported as a clean suite pass.
+
+Only browser Escape runtime sources, regressions and notes change. The compiled
+estate/interior assets exclude these runtime fittings and were not regenerated;
+Unity/Android, Blender and packaged exports were not changed for this repair.
+
+## Eastern entrance roof steps on both sides (7 October 2026)
+
+The later orange-cut annotation lowers the court corner to the 13.06 wall-top
+eave and makes its lower patch coplanar with the adjoining entrance pitch. The
+owner's follow-up applies the same cut on the garden side. Both upper roof
+planes keep their previous heights and slopes, and the 15.66 ridge continuation
+remains. Brick abutments with tapered white render close the steps. Matching
+crease vertices prevent spurious automatic fascia; garden cap returns sit just
+below the slate to remove a white overlap. Research/east-roof-ridges/README.md
+records the supplied annotation and model coordinates.
+
+The source and compiled roof regressions pass 1,568 matched lower-plane probes,
+300 unchanged upper-plane probes, 610 step contacts, 16 short garden-return
+contacts, 178 shared roof seams and 20,139 coverage/overlap probes. One frozen
+garden underside ray previously started above the newly lowered roof; its x/z
+and upward direction are retained with an origin below the new pitch. All 278
+estate-wide underside/viewing rays then pass. Eastern entrance/render,
+inside-corner, garden, exterior, courtyard, roof attachment, slate scale and
+west-roof checks also pass.
+
+Hardware source and compiled captures cover both sides, low joins, the plan,
+overview and portrait framing without page or shader errors. The launcher
+verifies NVIDIA GeForce RTX 3090 Ti through Direct3D11. The compiled/source
+comparison passes exact draw counts, visual similarity, shadows, full detail,
+controls and missing/incompatible/damaged-model fallback.
+
+The full npm test run reaches test-ward-placement.mjs:44 and fails on the
+existing Corridor downpipe assembly offset (-0.8050100041723312 versus zero).
+The saved pre-step roof builder reproduces the same failure; this is not a
+full-suite pass. The final and baseline logs are retained with the captures.
+
+Browser sources and the local compiled aerial model are updated. Unity,
+Blender and packaged desktop/Android exports are not regenerated. Final
+hardware captures, build and test logs are under Browser/artifacts/east-roof-step/.
+
 ## Eastern cross-range ridge continuation (7 October 2026)
 
 The owner's red/yellow/blue roof annotation now defines one connected eastern
@@ -13100,3 +13388,1894 @@ currently differs amid other modelling edits in this shared working tree.
 These changes are Escape runtime additions outside the compiled-model import
 graph, tested in the actual Escape source scene. Shared binaries, Unity/Android,
 Blender and packaged exports were not rebuilt for this correction.
+
+## Matching interior panes beside the tower (7 October 2026)
+
+The four rectangular west service windows in `tower-workshops.mjs` now have
+three columns and four rows on the interior, matching the retained exterior
+service sashes in `tower-buildings.mjs`. Two thin crossbars, a thicker central
+meeting rail and outer frames replace the former single central muntin.
+Openings, glazing, sills, placement and exterior geometry are retained.
+
+`test-tower-workshops.mjs` checks all twelve clear pane centres and five divider
+locations from both sides of every sash in the actual rebuilt batches, on
+both attempts. Its glass-material selection now distinguishes the service
+glass flag from the generic `Service glazing and trim` instance names, which
+also label frame materials. The focused workshop check passes, including
+walking, moving doors, retained roofs and exact restart restoration. A loader
+restoring only the old two-pane interior fails the new clear-pane assertion
+at its old central muntin; the baseline receipt is in the same artifact folder.
+
+`test:gpu` passes on NVIDIA RTX 3090 Ti / ANGLE Direct3D11. Hardware desktop,
+exterior, vestibule, repair-room, oil-store and portrait views plus page/shader
+error receipts are saved in `Browser/artifacts/workshop-window-panes/`.
+The required `npm test` stops at the independent Redesmere frontage viewing-ray
+gap in `test-roof-wall-joins.mjs:56`; `full-suite.log` records that failure,
+so this is not a full-suite pass. This changes Escape browser runtime sources
+outside the shared compiled model graph. Shared binaries, Unity/Android,
+Blender and packaged exports were not regenerated.
+
+## Corridor ceiling sunlight fringe (7 October 2026)
+
+The owner's screenshot in Research/escape-grounds/corridor-ceiling-light-reference.png
+shows a narrow bright fringe along some upper passage walls. The Y=5.05 ceiling
+already casts shadows. The estate PCF receiver-plane comparisons extrapolate
+wall surfaces beyond their upper edge, allowing neighbouring shadow texels to
+light that contact; grazing sun directions make this particularly sensitive.
+
+workshop-interior-lights.mjs now intersects the real directional-light ray with
+the joined corridor/workshop ceiling plane and tests the crossing against its
+actual boundary loops. Sunlight crossing solid ceiling is removed from the
+existing directional-light contribution. A ray leaving through a window before
+reaching the ceiling remains governed by the ordinary aperture, frame and door
+shadows. Sky fill and fixed tube illumination keep their existing behaviour.
+This adds no moving lights, atlas rebakes, geometry, collision changes or shadow
+volume extensions. The accepted visible ceiling, roofs and wall joins remain.
+
+The hardware corridor-finishes regression now isolates sun on/off and checks
+Y=4.85..5.04 on both walls of all eight passages in day/dusk/night (48 views).
+All peak row gains are zero; the existing eastern clear-pane floor gain remains
+11.2 with zero at both wall-blocked neighbouring samples. Shader/page errors
+are checked before interpreting those measurements. The original gallery
+reference survey measured peak upper-wall gains of 37.1 / 19.5 / 4.4 for
+those three modes; the final matching survey measures zero in every mode.
+
+Validation uses the required hardware launcher on NVIDIA RTX 3090 Ti / ANGLE
+Direct3D11. test:gpu, test-tower-workshops.mjs, test-workshop-lighting-browser.mjs,
+test-escape-corridor-finishes-browser.mjs, test-escape-corridors-browser.mjs and
+test-workshop-door-animation-browser.mjs
+pass, covering joins, real window daylight, physical routes/locks, fixed lights,
+moving-leaf occlusion and exact estate/shader-hook restoration on retry.
+Before/final desktop and portrait review views and final shader/error receipts
+are in Browser/artifacts/corridor-ceiling-bleed/. The final synchronized-GPU
+portrait diagnostic records medians of 7.3 ms still, 15.8 ms walking and 11.6 ms
+during door motion, with one tube atlas bake. Walking includes the harness's
+additional pose render; these are desktop diagnostics, not phone FPS promises.
+
+The required npm test stops at the independent Redesmere frontage viewing-ray
+gap in test-roof-wall-joins.mjs:56; full-suite-final.txt records that failure.
+This is not a full-suite pass. This correction changes Escape
+runtime lighting, regression tests, research and development notes only. Shared
+compiled assets, Unity/Android, Blender and packaged exports were not regenerated.
+
+
+## Android refresh from the current browser sources (8 October 2026)
+
+The native Unity project now targets version 0.9.0 / Android version code 9.
+This revision supersedes the earlier native descriptions of an unfurnished
+interior, 23 doors, unrestricted Escape exits and a front-path ending.
+
+The source export includes all four furnished floors and their seeded furniture
+collisions, room wall finishes, current stairs and 24 exterior doors. Connection-
+specific stair routes and departure points come from the current browser model,
+including the changed upper S5 flight. Source geometry includes the latest east
+roof returns, workshop panes, corridor joints, timber doors and fence connections.
+Historical exploration retains its 13 periods, 34 building records and 73 local
+archive pictures. The Escape estate reuses unchanged historical mesh batches and
+adds the scenario replacements to the same library.
+
+Native Escape implements the eight combinations of west/east outer entrance,
+upper office and staff-key room. It includes mounted clues, supported keys and
+Reception property tray, staff grilles and basement release, the tagged brass
+outside key, workshop doors, crowbar and oil, both north gates and the radio-mast
+ending. Door animation updates the physical leaf footprints. Captures preserve
+knowledge and opened gates, confiscate keys and return tools; the first two offer
+a recovery screen, the second has a four-second observation period, and the third
+ends the attempt. Recovery respawns pursuers on the ground floor away from the
+player and grants ten seconds before pursuit resumes. Objective hints require
+sixty active seconds without progress. Committed room searches and the grounds
+patrol's facing, noise investigation and search/return states are implemented in
+native code.
+
+The native workshop shader is generated from the actual joined corridor and
+workshop footprint. It uses the same ceiling ray test as the browser's sunlight-
+fringe correction, with Z reflected once for Unity. It switches on for Escape
+outside and restores the exploration materials on leaving the scenario. Unity
+retains its own light pool and graphics settings; the browser's cached tube-light
+shadow atlas is not imported as a native lighting system.
+
+Exports use the required hardware browser launcher. The expanded estate library
+is split into bounded outdoor GLBs because a single Chromium Blob could exceed
+its reliable serialization size. Unity imports those parts under the existing
+outdoor prefab and shares textures by content hash plus colour/alpha settings.
+Detailed Escape jump bounds use packed binary records and a spatial index instead
+of a million JSON objects. The source receipt now covers browser runtime modules,
+furniture models/textures and artwork as well as the aerial model inputs. Browser
+and Node trigonometry are compared within 1e-10 in the navigation receipt.
+
+The entry point remains NativeAndroid/tools/build.ps1. It regenerates the native
+workshop shader even with -SkipExport, and runs the current port and presentation
+checks before Unity. NativeAndroid/tools/test-apk.ps1 verifies the completed APK,
+its signing identity, Android metadata, ARM64 player and the eight shipped licence
+notices against the current native smoke and import receipts.
+
+The native asset checks passed with 14,393,186 finite triangles across the shared
+library and scenario/furnished assets, four floors, 24 reachable doors and all
+73 archive images. Presentation checks passed for countryside, road precision,
+animated foliage, fonts and browser-derived lighting/location icons. The local
+browser GPU check confirmed NVIDIA RTX 3090 Ti / ANGLE Direct3D11. The required
+Browser npm test stopped at the existing corridor downpipe assembly position
+assertion in test-ward-placement.mjs:44 (actual X=-0.8050100041723312, expected 0);
+NativeAndroid/artifacts/update-browser-suite.log preserves that failure. This is
+not a full browser-suite pass.
+
+This work changes the native exporter, Unity runtime, native rendering and player
+instructions. It regenerates native Unity assets and players. It does not change
+the browser model sources or regenerate Blender/other packaged exports. No Android
+phone was connected for device installation or performance measurements.
+
+The final Windows native smoke passed on NVIDIA RTX 3090 Ti / Direct3D 11 with
+61,847 assertions (2,180 distinct messages). The receipt is
+NativeAndroid/artifacts/update-smoke/smoke.json; the player log is update-smoke.log.
+It exercises peaceful round trips through all 24 doors, continuous physical stairs,
+all eight key/office/entrance arrangements, both access mechanisms, timed hints,
+mounted clues, key confiscation/recovery, workshop tools and doors, animated gate
+footprints, physical crossing of both north gates, observation/terminal capture,
+radio-mast completion, restart and notebook pausing. Reviewed GPU captures include
+roof/courtyard joins, furnished clue positions, corridor scenery, both recovery
+screens and the notebook. The clue glow uses the original radial/ring alpha shape
+and additive blending rather than a flat translucent rectangle. This desktop
+smoke's frame estimate includes validation work and is not a phone benchmark.
+
+The Android build and final APK verification passed. The package is version
+0.9.0 / code 9, ARM64 IL2CPP, minimum API 26 and target API 36. Its v2 signature
+uses the same certificate as the previous installed builds, allowing an in-place
+update. The APK is 349,969,356 bytes; SHA-256 is
+F31FD449D0F45D99829391958CF319B541FEA812DD313E95D274C5D9596AAF4A.
+NativeAndroid/artifacts/update-apk-verification.json records the metadata,
+certificate, all eight licence notices and the matching source/import/smoke
+receipts. NativeAndroid/out/escape-1829-native.apk is the current installable
+package; v0.8 was preserved as escape-1829-native-v0.8.apk.
+
+## Android button borders and nine lives (8 October 2026)
+
+Version 0.10.0 / Android code 10 gives mobile Escape attempts nine lives,
+while the Windows preview retains three. The indoor Security guard, Deva
+ghost and grounds patrol remain active. The HUD, Help and recovery screens
+use the attempt's life budget. The ninth mobile capture ends the attempt;
+captures one through eight alternate Reception and the basement observation
+cell. Observation lasts four seconds, and each recovery retains the existing
+ten-second pursuit grace period. Discoveries, unlocked staff access and opened
+gates persist; confiscated keys remain recoverable at Reception and tools
+return to the workshops. Restart restores the full platform life budget.
+
+Rounded button and panel surfaces now use cached textures sized to each
+control and one continuous draw, preserving the six-unit corners. This
+removes the joins between the previous nine corner/edge/centre draws, which
+could produce inset seams when the interface is scaled. The same images
+are used by the live interface and offscreen visual checks.
+
+Validation: native port and presentation checks pass. The hardware GPU smoke
+passes 61,946 assertions (2,279 distinct messages) on NVIDIA GeForce RTX 3090 Ti
+through Direct3D 11. It covers both platform budgets, every mobile recovery,
+key reclaim after later captures, retained knowledge/access/gates, bounded
+observation and pursuit grace, defeat exactly on the last life, and restart.
+Nine GPU pixel probes cover three button sizes at 0.625, 1 and 1.375 scale,
+including fractional placement, with no inset interior lines. Reviewed captures
+include normal and wide controls, fitted Help showing nine lives, and the eighth
+capture with one life remaining. Help wording is shorter and its measured text
+fits above Resume. Results and captures are in NativeAndroid/artifacts/mobile-smoke/;
+the native player log is mobile-smoke.log.
+
+The browser GPU check also passes on NVIDIA RTX 3090 Ti / ANGLE Direct3D11.
+The required Browser npm test stops at the previously recorded independent
+corridor downpipe assembly position assertion in test-ward-placement.mjs:44
+(actual X=-0.8050100041723312, expected 0). The log is
+NativeAndroid/artifacts/mobile-browser-suite.log; this is not a full suite pass.
+Browser runtime/model sources and Blender exports are unchanged. Native source
+GLBs are reused with source hash
+eeee4b6e1bb47880a1a93ae5b977f274dbddcda4afac4a6d3294d02cef31ad7c;
+the Unity prepared scene, baked native assets and players are rebuilt. No phone
+is connected, so on-device border appearance, touch feel and performance remain
+unverified. Desktop smoke frame timings include validation overhead.
+
+Windows and ARM64 Android builds pass. The installable signed update remains
+NativeAndroid/out/escape-1829-native.apk, version 0.10.0 / code 10, minimum
+API 26 and target API 36. APK v2 verification passes with the previous signing
+certificate, so it can update the installed app. All eight licence notices and
+the ARM64 IL2CPP player are present. It is 349,982,772 bytes, SHA-256
+0504881F5B0C8A7434843E49E56DBEAC6665C8FB4F5B4929436BCF2F17B09BA6.
+NativeAndroid/artifacts/mobile-apk-verification.json records the package checks
+and matching import/source/smoke receipts. The prior v0.9 APK remains preserved
+as NativeAndroid/out/escape-1829-native-v0.9.apk.
+
+## Ward-placement reference after downpipe clearance (8 October 2026)
+
+The formerly recorded Corridor downpipe assembly failure in
+Browser/test-ward-placement.mjs is corrected. The test's reference material
+factory now preserves supplied roughness/metalness settings, so the facade
+finishing can identify its glazing. Standalone corridor and ward references
+receive the same approved downpipe/window-clearance finishing as the assembled
+estate, before their geometry is compared. No game geometry is changed.
+
+The position comparison remains exact for ordinary objects. Only explicitly
+tagged pipe assemblies permit 1e-10 scene units of parent-transform projection
+round-off. Object counts, names, triangle vertices, orientations, sizes,
+instance transforms, registered ward positions, translated footprints, camera
+presets and Historic collision visibility retain their existing checks. A
+controlled extra 0.01-unit pipe movement is still rejected by the comparison.
+
+The placement test, test-downpipe-clearance.mjs (260 pipes / 3,116 windows) and
+test-ward-corridors.mjs (six ward contacts / 2,814 roof samples) pass. The hardware
+browser check confirms NVIDIA GeForce RTX 3090 Ti / ANGLE Direct3D11. The focused
+placement log is Browser/artifacts/ward-placement-reference/ward-placement.log.
+
+## Remaining geometry-test references (8 October 2026)
+
+At the owner's request, the remaining obsolete building snapshots and the old
+Parsons Lane expectation are repaired. Twelve annexe checks contained fourteen
+outdated fingerprints in thirteen reference files. Disabling only the approved
+7 October downpipe-clearance call reproduces each historical reference exactly.
+The independent primitive audit identifies 63 moved pipe/fitting records and no
+changed architectural records. Only affected hashes advance; all annexe counts,
+roots, ranges, translated dimensions, retained geometry, glazing, collisions and
+scope exclusions remain protected.
+
+The two whole-estate references also predate documented roof/cornice, garden and
+access, church/Churton paving and water-tower photographic refinements. The
+independent reconstruction of db70a03 reproduces the ancestor count/hash pairs
+in the previous 5 October audit; that audit's reviewed results match the saved
+references. The new comparison retains 815,956 Jarman and 879,996 Leighton/Newton
+records exactly, with another 262/265 records differing only in roof UVs.
+Every structural difference is checked against its documented repair region;
+the earlier entrance path retains its exact 1.25-unit translation and unchanged
+size/height. The current references protect 818,883 and 882,930 primitives,
+respectively: 65 fewer than the 5 October snapshots. Their original exclusions
+and all photographic, collision and visibility assertions remain active.
+
+The aerial-layout check now expects only the approved church-front Parsons
+Lane adjustment and its Upton Lea T-junction. It checks the midpoint from the
+recorded Churton/church edges, the eased western bend, exact retained vertices
+and unchanged geographic survey. All other lane checks retain their previous
+assertions. Larkton's test output reports the actual protected count instead of
+the long-obsolete hard-coded total.
+
+The thirteen affected annexe/layout suite commands pass their ordinary reruns.
+A negative control passes against the current references, moves an unrelated
+annexe wall by 0.01 units, and confirms that the annexe, Jarman and
+Leighton/Newton fingerprints reject it. Audit scripts, historical comparisons,
+primitive receipts, focused reruns and suite logs are in
+Browser/artifacts/ward-placement-reference/. This repair changes test references
+and documentation only; browser model/runtime sources, generated scenes,
+Unity/Android and Blender exports are unchanged.
+
+## Android usability and west-side outside key (8 October 2026)
+
+Android version 0.11.0 / code 11 removes the separate Run button. The Move
+stick retains proportional walking and a small centre dead zone; pushing it
+to the visible edge requests running in that direction. Keyboard Shift,
+Escape stamina, exhaustion and crouching retain their existing roles.
+
+In both Android and the browser, the upstairs brass outside-door key opens
+every exit west of the building centre on all four floors. It also retains
+access to the entrance named on its tag, preserving the east/west scenario
+arrangements. Interaction permission, chains, notebook evidence, the mounted
+porter's record and objectives agree. Captures confiscate the key and restore
+the lock requirement; reclaiming it restores access to the same doors.
+
+Native navigation now exports the browser's canonical door numbers and
+sanitised display names. Notes, staff-key and office clues, objective hints
+and discovered map labels use G1–G38, 101–133, B1–B11 and 201–210. Internal
+model IDs remain stable for navigation and scenario placement. Open
+circulation has no invented room plaque. Map labels respect existing fog.
+The separate large floating EXIT boards are removed; exported physical
+door fittings remain.
+
+The missing wallpaper came from sharing a material between floors while
+mutating its floor elevation. Ground and first-floor walls inherited the
+second floor's 8.4-unit origin. Exported wallpaper materials now belong to
+their own floor, while their two painted textures remain shared. Established
+plain treatment and circulation finishes are retained. Native ambient fill
+and interior/dusk exposure are reduced for more of the browser's gloomy
+contrast; fog and local torch/fixture illumination retain their roles.
+
+Streetlamp ground glows use a dedicated unlit additive pass with depth
+testing, mipmapped clamped radial paint, and road depth layer 9 above the
+existing layers 1–8. They no longer receive surface-light reflections or
+shadows. Title text and its buttons move towards the left edge, the title
+shade is narrower, and the obsolete four-level/23-door strapline is removed.
+The gameplay heading is also narrower and closer to the left safe edge.
+EXIT on the title/exploration screens and EXIT GAME in Pause close the app.
+
+Native source GLBs and Unity assets are regenerated from the current browser
+sources. Browser changes here concern runtime key rules and mounted notices;
+shared browser architecture and aerial model inputs are unchanged, so no
+compiled browser model rebuild is required. Blender exports are unchanged.
+
+Final validation: the complete Browser npm test passes all 148 configured
+commands, including the original ward-placement failure, all fifteen formerly
+failing later checks and the performance checks. The separate hardware launcher
+validation passes on NVIDIA GeForce RTX 3090 Ti / ANGLE Direct3D11 and rejects
+software-rendering flags. Full output is
+Browser/artifacts/ward-placement-reference/full-suite-repaired.log; GPU output
+is gpu-validation.log. The three unexpected-wall-movement controls pass, and
+the focused test/reference diffs pass the whitespace check.
+
+Validation of the Android usability update: the complete Browser suite passes
+in Browser/artifacts/android-usability-suite.log. Separate hardware browser
+walkthroughs exercise desktop and touch Escape flows, key confiscation and
+recovery, and west-side departures and returns on every floor. Their receipts
+are android-usability-progress-browser.log and android-usability-door-browser.log.
+The browser hardware policy check uses NVIDIA GeForce RTX 3090 Ti / ANGLE
+Direct3D11.
+
+The final native Windows preview passes 63,157 assertions / 3,180 distinct
+messages on NVIDIA GeForce RTX 3090 Ti / Direct3D11, including 192 actual door
+departure checks over all eight arrangements, all 92 room numbers, analog
+walking/running, and wallpaper material heights on every floor. The receipt is
+NativeAndroid/artifacts/usability-smoke/smoke.json. Reviewed captures cover
+wallpaper and map numbers on all four floors, the title, touch controls, pause
+Exit button, and aerial dusk lamp pools. Number labels move clear of the player
+marker when necessary. Validation-mode frame times include test overhead and
+are not performance benchmarks. No Android device was connected; phone touch
+feel and the phone's renderer remain unverified.
+
+Windows and Android builds pass, together with native export and presentation
+validation. The final ARM64 IL2CPP APK is version 0.11.0 / code 11, minimum
+Android API 26 and target API 36, with all eight required attribution files.
+APK v2 signing passes and the certificate matches the preceding installed
+builds, so it can be installed as an update. The package is 350,094,084 bytes;
+SHA-256 is
+38673E3A5DB2717541432B9908A1D148949B7603AA3393E0DD9E0227E6006E8A.
+The verification receipt is NativeAndroid/artifacts/usability-apk-verification.json;
+build output is in usability-windows-build.log and usability-android-build.log.
+
+## Android Escape departures and interior mood (8 October 2026)
+
+The owner reported flickering textures and blocked movement after leaving
+Asylum Escape on a Samsung S25 Ultra, while ordinary outdoor exploration
+remained usable. The supplied image identifies the east outer entrance, D8.
+The preceding native Escape export contained two whole-building render-batch
+bounds across its landing, and similar false solids across other exits.
+
+Native outdoor export now follows the browser walking refresh: temporarily
+hide aerial batches, reveal their retained source meshes, collect precise
+walking/jump footprints, tread supports and walk surfaces, then restore exact
+render visibility. Escape uses its own exported walk surfaces. A regression
+constructs separated walls inside one render batch: the old traversal blocks
+the opening, while source traversal reproduces unbatched collision and support
+data exactly. All 24 exported Escape landings are checked with and without
+trees. Detailed historical and Escape jump indexes are built only when a jump
+queries them, removing their decoding work from ordinary first departures.
+
+Architectural meshes retain uncompressed positions, including tall facade
+batches containing shallow trims and inset finishes. This prevents lossy mesh
+compression from collapsing nearby faces. On-foot exterior cameras use a
+.18–3500 clip range to improve GLES depth precision; the indoor .08–150 and
+aerial 1–7000 ranges remain. The native interior now uses warm, lower ambient
+fill, amber fixtures, a warmer torch, darker brown fog and reduced exposure.
+Outdoor workshop lights reset their own white colour on each update.
+
+The first GPU comparison exposed why earlier ambient reductions were not
+visible: Unity's ambientLight is a NativeProperty alias for AmbientSkyColor
+(confirmed in the installed CoreModule metadata). The following outdoor
+ambientSkyColor assignment overwrote the requested indoor fill. Indoor and
+outdoor assignments now use separate branches; interior transitions also set
+the spherical-harmonic ambient probe explicitly. Rendered comparisons use the
+preceding build's effective sky-colour fill as their control.
+
+The native source exports are regenerated; browser model/runtime geometry and
+Blender exports are unchanged. Version 0.12.0 / Android code 12 is prepared,
+with the preceding APK preserved as escape-1829-native-v0.11.apk. Validation
+uses the hardware browser exporter on NVIDIA GeForce RTX 3090 Ti / ANGLE
+Direct3D11. Native port, presentation and collision-export checks pass. The
+complete Browser npm test passes in Browser/artifacts/android-exit-suite.log;
+the separate hardware-policy check also passes.
+
+The Windows native preview passes 63,445 assertions / 3,454 distinct checks
+on NVIDIA GeForce RTX 3090 Ti / Direct3D11. This includes 116 actual permitted
+Escape departures with walking checks across all eight arrangements, D8 stick
+movement at 30/60 FPS with both quality/tree settings, collision-clear arrivals,
+return interactions and lazy jump-index initialization. Four-floor GPU pixel
+comparisons show lower mean luminance (98.6–115.1 before, 10.7–25.5 after),
+higher red/blue ratios and more shadow. Warm/cold control captures, D8 slight
+turn captures, the existing gameplay/UI regression captures and smoke.json are
+in NativeAndroid/artifacts/exit-fix-smoke/. The reviewed Reception and room
+views retain readable warm torchlight and dark surroundings. These instrumented
+tests are not phone performance measurements. No Android phone is connected;
+the S25 Ultra's driver and touch experience remain unverified on device.
+
+Windows and Android builds pass. The final signed ARM64 IL2CPP APK is version
+0.12.0 / code 12, minimum API 26 and target API 36, with all eight attribution
+files. APK v2 verification passes with the previous signing certificate, so
+the package can update the installed app. It is 372,256,016 bytes; SHA-256 is
+4752E7CED1A7DD04F6241EE1F898D749F101F3528CEC0D3A45DAC880DB533305.
+The installable output is NativeAndroid/out/escape-1829-native.apk. The final
+receipt is NativeAndroid/artifacts/exit-fix-apk-verification.json; build logs
+are exit-fix-windows-build.log and exit-fix-android-build.log.
+
+## Android interior lighting midpoint (8 October 2026)
+
+Version 0.13.0 / Android code 13 responds to the report that v0.12's Asylum
+Escape interior is too dark. Indoor settings now sit halfway between v0.12
+and v0.11. Ambient fill uses the v0.11 effective sky colour for the selected
+time of day, rather than the flat ambient value that Unity previously
+overwrote. The separate indoor/outdoor assignments and explicit ambient
+probe update remain in place.
+
+Exposure is .91 (between .82 and 1), torch intensity 1.025 (between .85 and
+1.2), fixture intensity .315 (between .23 and .4), fixture range 8 (between
+7 and 9), and fog density .021 (between .024 and .018). Torch, fixture and
+fog colours are also at their component-wise midpoints. Exterior atmosphere,
+workshop illumination, collision and camera clipping retain their current
+settings. The previous v0.12 APK is preserved as escape-1829-native-v0.12.apk.
+
+The existing four-floor native GPU comparison now renders v0.11 and v0.12
+controls alongside the new midpoint at identical poses. It checks that
+rendered brightness recovers 35–65% of the difference between the endpoints,
+with warmth and shadow coverage between both versions. This allows for the
+nonlinear colour grading rather than assuming half the setting produces
+exactly half the displayed pixel brightness.
+
+## Water-tower corridors in Explore on foot (8 October 2026)
+
+Explore now fits the existing eight-route corridor network and three workshops
+into the grounds scene. The blue stores door, three room doors and new
+Main/admin-side entrance use the shared .95-second reversible swing, moving
+door collision and swept-player protection. E and the on-screen door prompt
+open and close them without switching to the asylum's separate interior scene.
+Ordinary asylum entrance and loading behavior is retained.
+
+`explore-corridor-plan.mjs` extends the gallery from Escape's locked stopping
+line at Z=24.4 to the existing front endpoint at Z=30.6. Explore omits only the
+`corridor-lock:gallery:0` pair and adds a single entrance on the finished
+gallery centre. The other eight end locks remain. The entrance envelope closes
+the raised roof to its gable and pavilion contact; its exterior uses masonry
+instead of exposing the interior tile band. Escape keeps its existing plan.
+
+`explore-workshops.mjs` owns the runtime fittings, shared animation, obstacle
+updates and resources. Tree/date changes restore the original estate, reapply
+the selected date, rebuild affected batches and cached transforms, refresh
+obstacles and invalidate shadows. Door choices survive a refresh while the
+network remains present. The fittings follow The Main's existing timeline
+dates. Explore initializes estate window lighting before fitting corridor
+signs, matching the existing Escape initialization order.
+
+Validation: `test-explore-workshops.mjs` passes all eight physical routes,
+five door crossings, animated and held-E behavior, obstruction during closing,
+entrance roof/gable rays, refresh/recreation and original asylum entry. The
+existing `test-tower-workshops.mjs` and `test-explore-interior.mjs` pass.
+`test:gpu` and the new `test-explore-workshops-browser.mjs` pass on NVIDIA
+GeForce RTX 3090 Ti through ANGLE/Direct3D11: keyboard, reverse-side closing,
+real touch input, date controls, desktop/portrait and day/dusk/night views,
+with no browser or shader errors. Existing Escape door-animation and physical
+corridor browser checks also pass. Their task-local runner writes separate
+receipts after an existing screenshot could not be overwritten.
+
+The complete `npm test` run passes, including the new Explore regression;
+its output is `Browser/artifacts/explore-workshops/full-suite.log`.
+Receipts, screenshots and logs are in `Browser/artifacts/explore-workshops/`.
+`npm run test:explore-corridors` repeats the focused logic and GPU checks; the
+logic test is also included in `npm test` and `npm run test:explore`.
+These changes are browser runtime fittings. Shared compiled estate/interior
+models, Unity/Android, Blender and packaged exports were not regenerated.
+
+Build validation uses the fixed browser-source snapshot under
+NativeAndroid/artifacts/lighting-midpoint-source/: concurrent tower edits
+changed escape-corridors.mjs during the first export, which correctly refused
+to save mixed-version assets. The snapshot uses copies of browser sources and
+build tools with workspace-local links to the existing Unity project and
+output directories. Its NativeAndroid/tools/build.ps1 is the reproducible
+entry point for this package. Shared native assets are refreshed from that
+snapshot; no browser source or Blender export is edited by this change.
+
+The hardware browser policy check passes on NVIDIA GeForce RTX 3090 Ti /
+ANGLE Direct3D11 (Browser/artifacts/lighting-midpoint-gpu.log). The complete
+Browser npm test was attempted and stopped in test-game.mjs because its VM
+test setup does not define createTowerAudio used by the concurrently edited
+browser game. Browser/artifacts/lighting-midpoint-suite.log records the
+failure; this is not a full suite pass.
+
+## Optional Browser Escape water-tower climb (8 October 2026)
+
+The requested upstairs lead, workshop preparation, climb/lookout and tense
+return are implemented as an optional Browser Escape route. The porter’s
+record mentions the inspection lamp and stiff tower access. The existing
+crowbar frees the entrance bar with three seconds of held use; optional oil
+quiets the hinge. A noisy opening directs the existing outdoor guard to a
+reachable point outside the workshop entrance, followed by its normal search
+and return. No valve puzzle, water diversion, additional key or countdown is
+introduced. Both original boundary gates still lead to the mast.
+
+`escape-tower-plan.mjs` and `escape-tower.mjs` provide twelve physical stair
+flights to a 26.6-unit lookout, guarded openings, return landings, inspection
+lamps, a water riser and overhead tank. The runtime conversion retains the
+source tower's roof silhouette and original geometry/batches for exact retry
+restoration. The owner's subsequent seven-window correction removes the
+initial broad west/north openings: only the existing west top pair's narrow
+arched infill and the small lower rectangular infill are cleared. Their
+surrounds, rounded heads and intervening brickwork remain, as do the other four
+bricked west slits and all north slits. The top lamp sits behind an existing
+slit. Convex outline clipping and matching masonry returns preserve the heads.
+Treads supply walking/jump supports; explicit walls and guard
+rails supply collisions. Updated batches and cached transforms precede shadow
+and obstacle refresh. Source modelling references and the fictional interior
+scope are documented in Research/escape-grounds/README.md.
+
+Lookout inspection records gate/mast directions and starts the descent
+objective. Capture preserves the opened hatch and discoveries. Synthesized
+drops and stair echoes stop on pause/reading/mute; approaching security has
+both footsteps and a text cue. Retry resets the footstep timing. Outdoor sight
+now samples height along the actual sightline, and the outdoor camera uses
+.18–600 clipping so the mast is visible from the lookout. Indoor clipping
+remains .05–150.
+
+Only Browser runtime/gameplay, tests and documentation are changed. Shared
+estate/interior compiled models, Aerial/Explore tower modelling, Unity/Android
+and Blender exports are not regenerated for this feature. `test-game.mjs` now
+imports the new audio factory into its VM fixture, resolving the concurrent
+missing-factory failure recorded in the preceding native validation note.
+The existing escape browser test accepts ESCAPE_ARTIFACT_DIR so its captures
+can be saved separately when Windows prevents overwriting earlier files.
+
+The complete `npm test` suite passes (`full-suite-final.log`). After the
+subsequent window correction, `npm run test:tower`, `test-water-tower.mjs`,
+`test-tower-workshops.mjs` and `test-game.mjs` pass again. The tower checks
+cover physical ascent/descent, both noise branches, held-use cancellation,
+pause, capture/retry, exact original restoration, retained facade surface
+positions/materials and open arched heads. Desktop and real touch-input
+walkthroughs run on NVIDIA GeForce RTX 3090 Ti / ANGLE Direct3D11 with no
+page or shader errors. Both original escape routes also pass the existing
+browser walkthrough; `test:gpu` passes the hardware policy check.
+
+Receipts and reviewed desktop/phone captures are under
+Browser/artifacts/escape-tower/. `window-final.log` records the final focused
+run; `restored-top-pair.png`, `existing-west-windows.png`, `west-lookout.png`
+and `lookout-phone.png` show the retained facade and narrow-window views.
+
+Final native preview validation passes 63,449 assertions / 3,458 distinct
+checks on NVIDIA GeForce RTX 3090 Ti / Direct3D11. The four midpoint renders
+have mean luminance 41.9, 44.8, 52.3 and 62.0, compared with 11.1–28.2 for the
+dark control and 99.0–116.5 for the older control. This is 35.0–38.3% of the
+rendered endpoint difference despite the exact 50% settings interpolation;
+colour grading is nonlinear. Warmth and shadow coverage sit between both
+versions. Reviewed captures show readable walls, furniture and circulation
+while retaining the warm torch pool. Evidence is in
+NativeAndroid/artifacts/lighting-midpoint-smoke/ and lighting-midpoint-smoke.log.
+No Android device was attached for a physical phone check.
+
+The first Unity build through the snapshot's project junction produced a
+missing script reference and an unreadable player scene. The successful
+rebuild uses the canonical NativeAndroid/Unity path with the snapshot's fixed
+browser inputs. The snapshot build script now explicitly selects that path.
+The normal build runner also rejects missing scene-script warnings and waits
+for the Unity process itself rather than lingering background descendants.
+The final Windows build passes in lighting-midpoint-windows-final.log; its
+Unity log is preserved as lighting-midpoint-unity-windows.log. Generated
+native assets, the prepared scene and Windows preview are rebuilt; browser
+sources and Blender exports are not edited.
+
+The final signed ARM64 Android APK passes verification: version 0.13.0 /
+code 13, minimum API 26, target API 36, all eight licence files and the same
+signing certificate as prior releases. APK v2 verification passes and the
+package can update the existing installation. The installable output is
+NativeAndroid/out/escape-1829-native.apk (372,490,152 bytes), SHA-256
+D7F3DE0DDE0E11B1222BC202B2AD5B9570A2B9A1E1E59452E61F02DF6E15060F.
+The receipt is NativeAndroid/artifacts/lighting-midpoint-apk-verification.json;
+the Android build log is lighting-midpoint-android-build.log, with detailed
+Unity output in unity-android.log.
+
+## Gravel-to-grass road ends (8 October 2026)
+
+Replaced the rounded caps at 16 verified grass-facing road endpoints with a
+seven-metre asphalt/gravel blend and a twelve-metre narrowing gravel path.
+World-scaled existing ground textures and deterministic vertex alpha provide
+the worn margins; the gravel descends to the lawn and fades through to the
+real terrain. Kerbs dissolve along the approach instead of closing its end.
+The preserved centrelines still place labels and lamps, and joined roads and
+forecourts retain their original geometry. Each transition inherits its road's
+timeline/layout ownership, including the two modern-only continuations.
+
+`road-end-fades.mjs` supplies both road builders. Its transparent meshes avoid
+static batching and opaque ground-contact skirts. Existing road-height and
+grounding tests now separately validate their upward normals, continuous
+coverage, fully faded termination and lawn contact. The focused regression
+also checks unchanged junction caps, removed dead-end caps and empty walking
+obstacles. The same fade assertions run during compiled road-continuity checks.
+
+Validation: hardware rendering verified on NVIDIA GeForce RTX 3090 Ti / D3D11.
+The road-end, historic-road, road-continuity, ground-contact, aerial-layout,
+western-Parsons-junction and church-ground checks pass. Rebuilt the aerial
+binary and passed `test-precompiled-models.mjs`, including preserved vertex
+alpha, matching draw counts, visual comparison, controls and fallback loading.
+Source and compiled oblique/overview/walking-height previews were inspected
+without browser or shader errors. Evidence is in
+`Browser/artifacts/road-end-fades/`. Browser sources and the local compiled
+aerial model are updated; Unity/Android and Blender exports are unchanged.
+
+The source/compiled timeline browser checks pass all 13 periods, navigation,
+mobile reset, tree selection and live walking collision refresh. Annexe rear
+road, Irby road and aerial batching/performance checks also pass.
+
+The complete `npm test` run passes (`road-end-fades/npm-test.log`), as does
+the new endpoint regression run separately. The compiled manifest matches
+the final browser modelling sources.
+
+### Darker finish and wider grassy neck (8 October 2026 follow-up)
+
+The worn gravel now shares `ROAD_STYLE.asphalt`'s base colour, replacing the
+distinct pale section with a textured road-to-grass transition. The taper
+retains 70% of the carriageway width instead of 36%: its six-metre approaches
+end with a 4.2-metre neck instead of 2.16 metres. The endpoint inventory, fade
+length, terrain contact, alpha coverage and visibility rules are unchanged.
+
+Endpoint and road-continuity regressions pass. The rebuilt aerial model passes
+the compiled/source rendering comparison and restored fade assertions. Source
+and compiled aerial and walking-height views were inspected on the verified
+RTX 3090 Ti / D3D11 renderer. Revised images and logs use `darker-wide` under
+`Browser/artifacts/road-end-fades/`. Browser source and the local compiled
+aerial model are updated; Unity/Android and Blender exports are unchanged.
+
+The follow-up full suite stops at the unrelated `test-jarman.mjs` protected
+geometry snapshot (818,870 primitives versus the stored 818,883). Loading the
+previous road shade and taper reproduces the same count and hash mismatch;
+the snapshot constructs the raw exterior before the road-layout builders.
+See `darker-wide-suite.log` and `darker-wide-baseline-jarman.log`. Historic-road
+and aerial-layout checks were also run directly because they occur later in
+the standard suite.
+
+After other workspace modelling changes, the final aerial rebuild and compiled
+comparison pass again (`darker-wide-build-final.log` and
+`darker-wide-precompiled-final.log`). The final manifest matches the current
+source fingerprint, and the compiled previews are refreshed.
+
+## Water-tower hatch, wall lanterns and safe stair edges (8 October 2026)
+
+Following completion of the tower-sequence and native-lighting chats, the
+Browser Escape maintenance hatch now opens over the workshop doors' shared
+.95-second smooth swing, with the same synthesized creak. Oil still lowers
+its volume and guard-hearing radius; the retaining bar still requires three
+seconds of held use. Ordinary state refreshes preserve the swing. Capture
+restores the chosen open state and retry restores the original estate.
+
+The moving leaf supplies a rotated collision polygon throughout the swing
+and when open. Swept samples prevent it moving through the player, and each
+accepted movement refreshes walking obstacles and exterior shadows. Explicit
+descendant matrix updates keep collision current despite cached stationary
+parent transforms. Full-depth jambs and overlapping rebates close the former
+side gaps without changing the historic outer door or window positions.
+
+The duplicate first landing was coplanar with the ground slab and is removed.
+The entrance slab now meets the ground slab without overlap, and the final
+tread of each flight ends at its landing without a coplanar overlap strip.
+Treads widen only towards the wall, from their existing inner edge to .02
+units inside the masonry. Corner landings extend similarly along both walls;
+the top deck also meets the walls while retaining the stairwell opening.
+
+`tower-wall-lamps.mjs` supplies shared gas-style lantern geometry/materials:
+wall plates, brackets, pipes, dark metal glazing bars, glass, pitched hoods,
+brass burners and warm flame cores. Thirteen landing lanterns and one smaller
+inspection lantern replace the plain lights. The small inspection fitting
+stays inside the restored upper slit. The same single local fill follows the
+nearest landing fixture; no extra shadow-casting lights are introduced. Fine
+lantern metalwork does not use the broad estate shadow map, avoiding visible
+self-shadow speckling. Opaque stationary fittings join the tower's batches.
+
+Focused logic validation passes both oiled/noisy branches, gradual and
+obstructed opening, collision at the open leaf, sealed oblique doorway rays,
+a single ground-landing surface, every wall-side tread support, complete
+centre/wall-edge ascent and descent, capture/retry and exact estate restoration.
+Hardware browser desktop and real touch-input checks pass on NVIDIA GeForce
+RTX 3090 Ti / ANGLE Direct3D11, including pause during opening, .95-second
+finite/unclipped shared audio, all twelve flights, restored windows, and
+reviewed lantern/stair/door captures. There are no browser or shader errors.
+`test:gpu` also passes. Receipts and screenshots are under
+Browser/artifacts/tower-door-lamps-stairs/.
+
+Only Browser runtime sources, tests and documentation were changed here.
+Shared compiled estate/interior models, Unity/Android and Blender exports
+were not regenerated. The complete Browser `npm test` suite passes (exit 0);
+the full receipt is `Browser/artifacts/tower-door-lamps-stairs/full-suite.log`.
+The final GPU run is recorded in `browser-final.log` and `validation.json`
+in the same directory.
+
+## Smooth water-tower landing illumination (8 October 2026)
+
+The Browser Escape tower now crossfades its local illumination between the
+two adjacent landing lanterns across each stair flight. This replaces the
+single fill that jumped to the nearest fixture at half-flight height. Two
+permanent, non-shadow-casting light slots alternate between landings; a slot
+changes fixtures only at the dark end of its fade. Their combined full output
+remains 14. Smoothstep blending holds each source at its lantern, while a
+.12-second exponential height response softens individual tread-height steps.
+A .18-second presence response fades the lights on entry and exit. Zero elapsed
+time freezes both responses, and the timing is independent of frame rate.
+
+The tower logic regression covers all twelve former switch heights, stepped
+ascent/descent, dark-slot reuse, constant combined output, the top landing,
+entry/exit, zero-time updates and equal fade timing at 30/120 fps. It passes
+with both oiled and noisy hatch routes. Desktop and touch browser walkthroughs
+pass on the verified NVIDIA GeForce RTX 3090 Ti / ANGLE Direct3D11 renderer,
+with no page or shader errors. A 181-frame flight sweep has a maximum intensity
+change of .117 out of 14 between samples. Fixed-camera quarter/mid/three-quarter
+flight captures were reviewed, along with the phone lantern view. The receipt
+and captures are in `Browser/artifacts/tower-light-fade/`; the browser run is
+recorded in `Browser/artifacts/tower-light-fade-browser.log`.
+
+The hardware walkthrough was repeated after concurrent window/lining changes
+arrived in the shared tower sources. It also passes, with the final midpoint
+capture reviewed under `Browser/artifacts/tower-light-fade-current/` and its
+run recorded in `Browser/artifacts/tower-light-fade-current-browser.log`.
+
+The full `npm test` attempt stopped at a concurrently edited south-window
+sightline assertion in `test-escape-tower.mjs`, after the lighting assertions
+passed (`Browser/artifacts/tower-light-fade-suite.log`). The subsequent rerun
+of the latest complete tower regression passes both routes, recorded in
+`Browser/artifacts/tower-light-fade-current-logic.log`. This is not a complete
+suite pass; checks after the tower test were not reached in that full run.
+
+Only Browser runtime lighting, its regressions and these development notes
+are changed. Estate/interior compiled models, Unity/Android and Blender
+exports were not regenerated because the shared modelling sources are unchanged.
+
+## Aerial-to-walking startup (8 October 2026)
+
+Switching between Aerial and Explore now carries one captured frame across the
+page navigation. The destination displays that still and preparation messages
+before loading its scene modules, and removes it only after drawing the first
+complete destination frame. Storage-disabled browsers use the bundled still.
+The marker and stored image are consumed once; location, heading, selected
+period and lighting retain the existing URL handoff. A failed module keeps the
+preview and Back to intro action. Title-screen camera flights remain separate.
+
+Explore uses the compiled-first estate loader with full building detail,
+retaining procedural fallback. Its first draw no longer waits for furniture or
+room sections. These prepare after the first outdoor frame (after arrival for
+title-screen flights); the existing door gate, waiting prompt and automatic
+retry prevent entry into unfinished rooms. Furniture-download failures can be
+retried without disabling the grounds. Exterior shaders compile asynchronously
+before reveal, and initialization builds the obstacle cache once after fitting
+the dated workshop corridors instead of repeating the same estate scans.
+
+The verified NVIDIA RTX 3090 Ti/ANGLE Direct3D11 baseline took 33.5 seconds from
+the aerial button click to the first outdoor draw. Updated profiles took
+11.1–14.5 seconds on this machine; these are local startup observations, not
+network or universal performance guarantees. The preview appeared within 100 ms
+in the delayed-module regressions, with desktop and touch walking remaining
+usable while furniture requests were deliberately held. Receipts and reviewed
+desktop/phone loading, walking and interior images are under
+`Browser/artifacts/explore-startup/`. `npm run test:explore-startup` exercises
+deferred initialization, door gating, failure/retry and both model/preview
+fallbacks. Existing desktop/portrait view-navigation, title-flight, four-floor
+interior and workshop-door browser checks also pass. A simulated failed
+furniture request recovers through a normal click on Try again; the room
+status now sits above the timeline so that panel cannot intercept the button.
+
+`npm test` passed through the walking, stair, workshop and annexe checks before
+stopping at `test-jarman.mjs`'s protected-geometry snapshot. All subsequent
+commands were run separately; only `test-leighton-newton.mjs`'s corresponding
+snapshot also failed. Both count 11 fewer outside primitives after concurrent
+estate-model edits; neither failing assertion imports the changed startup code.
+No protected baseline was rewritten. The complete logs and remaining-check
+receipt are `npm-test.log` and `remaining-suite.json` in the artifact directory.
+This is not a full-suite pass.
+
+Only browser runtime code, checks and development notes change. The aerial
+compiled fingerprint remains current. The existing interior manifest was
+already stale relative to its model inputs, so the local server uses its
+worker fallback; this task does not change those inputs or regenerate models.
+Unity/Android, Blender and packaged exports are unchanged.
+
+## Tower slit openings on all four sides (8 October 2026)
+
+The Escape tower now opens its existing three rows of paired upper slits on
+all four sides: 24 arched windows, plus the previously opened lower west
+rectangle. The requested lower rows remain visible even without a walk-up
+landing. Face-local cuts follow the original narrow arches and retain their
+brick piers, rings, sills, facade placement and roof. The west lookout and
+existing stair route are retained.
+
+The flickering jambs and sills came from box-shaped interior wall caps sharing
+planes with the separate masonry returns. The wall lining now supplies only
+the room-facing skin; each return supplies the sole jamb, sill and curved
+head surface. Movement guards remain across every slit, while sight openings
+follow each row. The existing batch rebuild, transform cache and obstacle/
+shadow refresh cover the revised geometry, with exact restoration on retry.
+
+Implementation is in Browser/dist/escape-tower-plan.mjs and escape-tower.mjs.
+The request and modelling scope are recorded in Research/escape-grounds/README.md.
+This is a Browser Escape runtime change. The shared Aerial/Explore tower and
+compiled estate/interior models, Unity/Android and Blender exports were not
+changed or regenerated.
+
+Hardware browser desktop and real-touch phone walkthroughs pass on NVIDIA
+GeForce RTX 3090 Ti / ANGLE Direct3D11, without page or shader errors. Reviewed
+captures cover every pair from inside, all four exterior faces and close-up
+lookout viewpoints. The geometry regression checks the preserved facades,
+all openings and 300 single-surface jamb/sill/head rays per gameplay branch,
+plus movement guards, complete ascent/descent and retry restoration. Receipts
+and screenshots are in Browser/artifacts/tower-window-openings/.
+
+The focused tower regression passes both gameplay branches, and `test:gpu`
+passes. The required full `npm test` run passes the tower, workshop, water-tower,
+roof-contact, exterior-shadow, movement and Explore checks, then stops at
+`test-jarman.mjs:11`: its protected-estate snapshot expects 818,883 primitives
+but the current shared model has 818,872. The saved 151-module dependency audit
+confirms that this failing test imports neither changed tower runtime module.
+Its baseline is not rewritten by this task. This is not a full-suite pass;
+tests after Jarman were not reached. See `full-suite.log`, `geometry.log`,
+`browser.log`, `validation.json` and `jarman-dependencies.json` in that directory.
+
+## Redesmere continuous roof-edge trim (8 October 2026)
+
+Redesmere's brick ranges now use a consistent pale stepped cornice around
+both canted bays, the stepped rear, courtyard and low garden range. The
+blue-grey rendered entrance retains its roof, porch and fittings exactly.
+Applied brick skins end beneath the trim; the former dark/brick top bands
+no longer mask it. The main cornice returns behind the bay and entrance
+hips, and a thin slate cap covers the courtyard chimney breast's new trim.
+The original roof pitches and eave heights remain unchanged. Reference and
+modelling notes: Research/redesmere-continuous-trim/README.md.
+
+The comparison against saved pre-edit builders matches 1,436,926 primitives
+outside Redesmere, all 302 original roof primitives and all 226 primitives
+within the excluded entrance. The roof regression checks both trim courses
+and slate contact at 45 independent perimeter points in source and compiled
+scenes; the earlier 278 eave-gap rays and 94/244 render-top probes also pass.
+Existing Redesmere glazing, courtyard, exterior and walking checks pass.
+
+The local compiled estate was rebuilt. Source/compiled visual equivalence,
+exact draw counts, full detail, controls and fallback checks pass. Reviewed
+source and compiled ground/overhead views use the verified NVIDIA GeForce
+RTX 3090 Ti through ANGLE/Direct3D11 with no page or shader errors. Receipts
+and screenshots are under Browser/artifacts/redesmere-continuous-trim/.
+The required npm test run passed through the annexe checks, then stopped
+at Jarman's whole-estate snapshot because it included Redesmere's old trim.
+The saved pre-edit builders exactly match both prior Jarman and Leighton
+snapshots. After the independent outside/entrance/roof comparison above,
+only those two snapshot geometry records were refreshed (11 fewer original
+primitives); Leighton/Newton's approved ranges are retained. All 38 remaining
+npm test commands, including both snapshot checks, then passed. Receipts are
+full-suite.log and remaining-suite.log/json. The initial full invocation exits
+at the old snapshot; every suite check is covered by the successful prefix
+and the resumed checks. The compiled source fingerprint still matches.
+
+Scope: shared Browser model sources and local compiled aerial assets.
+Unity, Blender, packaged desktop/Android and interior assets were not
+regenerated. Existing unrelated workspace changes are retained.
+
+## East courtyard lean-to and grit bin (8 October 2026)
+
+Removed the two-piece yellow grit bin identified in the owner's game view.
+The east courtyard lean-to now has sloping brick sides meeting the underside
+of its glazed roof. The original pitch and front eave remain; the roof and
+rear masonry continue into the inset building wall. Roof bars follow the
+extended glazing. See Research/east-courtyard/README.md and its marked image.
+
+The courtyard and roof-wall regressions check 123 perimeter contacts, the
+rear attachment, preserved exposed footprint, retained lean-to collision and
+walkable ground beneath the removed bin. The saved pre-edit builder fails
+the first contact probe. Source and compiled roof checks pass, as do the
+existing courtyard window/frame and assembled exterior checks. Collision
+checks use the walking model; the compiled aerial's merged render batches
+are not treated as individual walking obstacles.
+
+The independent comparison retains all 1,446,227 primitives outside the
+lean-to/bin regions and all 302 original slate roof primitives. Both old
+whole-estate Jarman and Leighton/Newton snapshots match the saved pre-edit
+builder. Only their geometry records are then refreshed for these changes
+(two fewer primitives); the approved Leighton/Newton ranges are retained.
+
+The local compiled aerial asset is rebuilt and its source fingerprint and
+binary checksum verified. Source/compiled comparison passes exact draw
+counts, full detail, visual similarity, controls and missing/incompatible/
+damaged-model fallback. Reviewed day, night, low, rear, overhead and portrait
+captures use verified NVIDIA GeForce RTX 3090 Ti / ANGLE Direct3D11 rendering
+without page or shader errors. Repeatable scripts, captures, the negative
+regression, preservation comparison and build/test receipts are under
+Browser/artifacts/east-courtyard-lean-to/.
+
+The complete `npm test` run passes (exit 0); its log is `full-suite.log` in
+that directory. An earlier attempt exposed a test-harness sprite raycast;
+the probe now explicitly surveys meshes and the full run was restarted.
+The compiled roof probe separately checks geometry without interpreting
+aerial batch bounds as walking collisions; source walking checks remain.
+
+Scope: shared Browser sources and local compiled aerial assets. Unity/Android,
+Blender, interior models and packaged exports are not regenerated.
+
+## Mortuary and garage gables (8 October 2026)
+
+Replaced the thin gable skins and automatically inferred roof-gap patches on
+the garage ranges, T-shaped mortuary and blue ridge vent with continuous
+authored gables, eave bands and closed undersides. This removes coplanar
+surfaces and the false red support across the vent window. Gable masonry
+uses proper planar UVs. The slate roof shapes and ridge caps remain exact;
+the mortuary entrance gable now meets its existing front slate edge. See
+Research/garages/README.md and its annotated roof-flicker reference.
+
+The source and compiled roof regressions pass 216 single-surface gable rays,
+72 opaque underside rays and 12 unobstructed vent-pane rays. The original
+builder fails the first gable probe with two coincident faces. Both paths
+also pass the existing estate roof-contact and tile-scale checks. The
+compiled probe excludes inactive window-atlas proxies so it measures the
+original glazing and cannot accidentally hide an obstruction behind a proxy.
+
+An independent before/after comparison preserves all 1,445,408 primitives
+outside this building group, all 303 original estate slate roofs and all
+795 local wall/detail primitives. The pre-edit source exactly matched the
+Jarman and Leighton/Newton whole-estate snapshots. After that comparison,
+their geometry records were refreshed for the five gable meshes now classed
+as complete roof enclosures; approved Leighton/Newton ranges are unchanged.
+
+The local compiled aerial asset is rebuilt. Source/compiled equivalence,
+exact draw counts, full detail, controls and fallback checks pass. Reviewed
+ground, close, shifted, rear and portrait previews, including the actual
+walking page, use NVIDIA GeForce RTX 3090 Ti / ANGLE Direct3D11. No browser
+or shader errors were reported; `test:gpu` also passes. Scripts, captures,
+build receipts and test logs are in Browser/artifacts/mortuary-garage-roofs/.
+
+The complete `npm test` run passes (exit 0), including the new gable checks,
+both refreshed estate snapshots, walking, shadows, batching, window detail
+and roof picking. Its receipt is `full-suite.log` in that directory.
+
+The verified repair build has source fingerprint
+`f42f662410af1080943e99282d3f933b3b4537dfbd85355476aa00c85ffcaa20`.
+During final validation, the separately requested blue-roof-lantern refinement
+began changing the shared vent model and its probes. Those edits retain the
+main gable repair and are preserved. The captures, preservation comparison
+and compiled receipts above describe this repair stage; they do not certify
+the later lantern revision. Its new source invalidates this saved binary
+until that task rebuilds it. The one-time repair heartbeat is removed.
+
+Scope: shared Browser model sources and local compiled aerial assets.
+Unity/Android, Blender, interior models and packaged exports are unchanged.
+
+## Shared blue roof lanterns (8 October 2026)
+
+The owner's water-tower photograph replaces the generic blue boxes and
+masonry sashes with a shared lantern model in `blue-roof-lantern.mjs`.
+All six tower/workshop protrusions and the mortuary vent now have slate-hung
+end cheeks and recessed gables, pale blue bargeboards and corner boards,
+four narrow lights with a high transom, projecting blue sills, lead ridge
+caps and thin flashing fitted to the host roof. The tower windows reach down
+close to the slate. The mortuary retains its earlier low, wide proportions.
+Counts, centres, ridge directions, cap extents and slate peak heights remain.
+See Research/tower-buildings/README.md and Research/garages/README.md.
+
+The shared builder explicitly encloses its gables, eaves and undersides,
+preventing the automatic roof filler from covering glazing or duplicating
+slate faces. A final below-overhang check also verifies the pitched soffits
+face downwards. Pane checks sample all 112 panes across the seven lanterns,
+including the scaled workshop and rotated mortuary. Existing tower contacts,
+roof courses, gable/underside rays, roads and walking checks remain enabled.
+
+Lantern-only geometry comparisons preserve all non-lantern primitives and
+all 238 named host slate roof meshes. The original comparison covered
+1,454,597 other primitives. Separate tower-gable repairs arrived in this
+shared checkout during validation; the additional current-baseline comparison
+preserves those repairs and verifies 1,454,558 other primitives unchanged by
+this lantern replacement. The original sources and both comparison receipts
+are retained under Browser/artifacts/blue-roof-lanterns/. The Jarman and
+Leighton/Newton snapshots matched the saved original builders before only
+their geometry records were refreshed; approved ward dimensions remain exact.
+
+The local aerial model is rebuilt from the final shared sources. Compiled
+roof/tile checks and source/compiled equivalence pass, including identical
+render counts, full detail, controls and missing/incompatible/damaged-model
+fallbacks. Reviewed front, rear, workshop, mortuary, portrait and actual
+walking-page captures use verified NVIDIA GeForce RTX 3090 Ti / ANGLE
+Direct3D11. Capture logs report no page or shader errors; `test:gpu` passes.
+The new pane and soffit checks pass in both source and compiled scenes.
+
+The complete `npm test` run passes (exit 0), including the lantern checks,
+both refreshed whole-estate snapshots, collisions, periods, batching, window
+detail and roof selection. Its receipt is
+Browser/artifacts/blue-roof-lanterns/full-suite.log. Final focused source and
+compiled roof checks also cover the completed pitched soffits and the
+concurrent service-gable repairs. The final source fingerprint and asset
+checksum are verified and recorded in `final-validation.json` in that folder.
+
+Scope: shared Browser modelling sources, regression probes and locally
+compiled aerial assets. Unity/Android, Blender, interior models and packaged
+exports are not regenerated.
+
+## Service gable flicker and horizontal wall gaps (8 October 2026)
+
+The owner's marked facade is the east end of South cross-gabled stores in
+Tower service buildings, with the large blue door, small white door and high
+sash. The raised roof began .14 units above the wall, leaving an open band.
+The automatic roof finisher also duplicated the thin gable face and inferred
+terracotta support beneath its ridge, producing the flickering upper patch.
+
+The standard pitched service ranges in `Browser/dist/tower-buildings.mjs`
+now have one authored masonry enclosure from wall top to roof perimeter,
+including an opaque underside at the overhang. Automatic infill is disabled
+only for these explicitly closed roofs. Both stores ends, the stepped link,
+central and chimney halls, long service range and three rear workshops share
+this closure. Redundant workshop base strips are removed. The high stores
+sash moves .2 units outwards so its glass clears the existing gable plane;
+its dimensions and pane divisions are retained. The original slate surfaces,
+ridges, footprints and ground-level walls are preserved.
+
+An estate survey tests triangular gable bases from both sides, rejecting
+foliage, open porches and caps buried inside solid masonry. It reproduced
+slots at both stores ends and the North east stepped link before repair;
+all 435 remaining survey samples pass afterwards. The permanent shared
+service-gable probes check 576 seam points, 234 single-face gable points,
+192 opaque undersides and four exposed sash panes in source and compiled
+scenes. A negative control against the saved original builder fails as
+expected. Exact geometry/material/transform comparisons retain 16,306 mesh
+records outside the tower group, all 19 local slate meshes and 1,540 local
+wall/door/other-detail records outside the intended repair.
+
+Validation passes: `test-tower-buildings.mjs`, source and compiled
+`test-roof-wall-joins.mjs`, compiled `test-roof-tiles.mjs`, `test:gpu`, and
+`test-precompiled-models.mjs` with source/compiled render equivalence,
+full-detail loading, controls and missing/corrupt model fallbacks. Front,
+close, shifted, oblique, rear, overview and portrait captures, including the
+actual Explore page, were reviewed using the hardware-browser launcher on
+NVIDIA GeForce RTX 3090 Ti / ANGLE Direct3D11. No page or shader errors were
+reported. The complete `npm test` run passed with exit code 0, including
+the earlier roof, wall, walking, window, corridor and rendering regressions.
+
+Receipts, baseline, repeatable survey/capture scripts and screenshots are in
+`Browser/artifacts/service-wall-gaps/`; the full suite log is `full-suite.log`.
+The reference and modelling explanation are in Research/tower-buildings/.
+
+Outputs: shared Browser modelling source and the local compiled aerial
+manifest/binary were rebuilt (`aerial-e51dc3985fe991801d83.bin.gz`). The final
+source fingerprint and binary SHA-256 match the manifest. Tests and research/
+development notes were updated. Unity/Android, Blender, interior models and
+packaged exports were not regenerated. Earlier shared-checkout repairs,
+including the blue roof lanterns, are retained. Nothing was committed or
+published.
+
+## Irby green door, Explore corridor limits and floating roof (8 October 2026)
+
+The pictured single green door is the exposed east end of the Irby corridor
+at (221.7, -66.6), rather than the earlier Main/admin entrance. Explore now
+continues its finished passage straight for the remaining 11.7 units and
+replaces that decorative leaf with a two-sided, gradually opening door.
+Its pale frame and two-pane upper panel follow the supplied reference.
+The shared door controller supplies keyboard/touch use, swept collision,
+creak audio, state retention and refreshed obstacles.
+
+Explore's eight remaining locked pairs, chains, padlocks, plaques and their
+blocking collision are removed. Its corridor plan follows the existing
+estate runs to their actual building contacts, adds the Upton continuation
+and fills the shared angled elbow. A continuous walk caught the inward V
+left by two square-ended runs; a bevel following the existing estate corner
+now joins the floor, ceiling and wall boundaries there. Unmodelled ward
+interiors remain closed by plain masonry at their real boundaries. Escape
+retains its original nine lock pairs and gameplay limits.
+
+`Browser/dist/explore-irby-entrance.mjs` builds the green door, masonry front,
+gable, side returns and full continuous slate roof. The former raised roof
+skirts and low original gable caused the floating appearance. Explore now
+replaces the original named Irby roof, ridge, gable, door and automatic roof
+closure fragments together; the roof perimeter meets its supporting masonry.
+`explore-corridor-plan.mjs`, `escape-corridors.mjs` and `tower-workshops.mjs`
+provide the extended plan and runtime integration. The existing rebuild and
+disposal flow preserves original geometry, rebuilds batches and transform
+caches, and refreshes walking obstacles and shadows. The earlier Main/admin
+entrance-envelope repair and other shared-checkout work are retained.
+
+The expanded `test-explore-workshops.mjs` covers nine corridor runs, crossing
+the former stopping lines, both directions through the Upton elbow, six
+animated doors, the physical Irby-to-tower route, roof/gable contact, period
+changes, refresh state and the original asylum entrance. The browser check
+exercises actual keyboard and touch input, reverse door use and continuous
+walking, with explicit source/compiled mode assertions and reviewed exterior,
+interior, oblique and phone views. Evidence and baseline copies are under
+`Browser/artifacts/corridor-door-access/`; the reference and modelling update
+are in `Research/escape-grounds/`.
+
+Validation passed: `npm run test:gpu`, `test-explore-workshops.mjs`, the
+source and compiled `test-explore-workshops-browser.mjs` runs, the Escape
+`test-tower-workshops.mjs` regression and the complete `npm test` suite
+(exit 0, `full-suite.log`). Local browser rendering used the required hardware
+launcher and NVIDIA GeForce RTX 3090 Ti / ANGLE Direct3D11. Both browser paths
+reported no page or shader errors; the reviewed walking captures show the
+closed roof/gable, open green entrance, continuous interior and ward elbow.
+
+This repair changes the four Browser runtime modules named above, the two
+Explore workshop tests, documentation and verification artifacts. No shared
+aerial/interior model compilation input changed. The existing compiled
+`aerial-e51dc3985fe991801d83.bin.gz` remains current: its manifest source hash
+and binary SHA-256 are verified in `compiled-fingerprint.json`. Compiled
+assets, Unity/Android, Blender and packaged exports were not regenerated.
+Nothing was committed or published.
+
+## Estates frontage kerb joins — 9 October 2026
+
+Joined both gaps marked in the owner's purple annotations. The long kerb
+sweeps from the northern service-road bend along the workshop frontage to
+the cobbled entrance. The short kerb continues past the low entrance room
+to the southern road edging. `estates-service-court.mjs` derives the join
+endpoints and tangents from the existing six-unit road and uses the rotated
+Estates frontage for the long straight section. `historic-road-layout.mjs`
+adds both strips to the Historic kerb inventory.
+
+`historic-roads.mjs` builds each join as one continuous 0.6-unit-wide mesh.
+The top eases from the existing 0.32-unit border level to 0.38 over two units
+at each end. Ground-contact generation closes its sides, and the usual
+period grouping, batching and transform cache include both strips. Building,
+asphalt and courtyard geometry and walking obstacles retain their inputs.
+The saved annotations and placement notes are in `Research/estates/`.
+
+Validation passed: hardware GPU smoke check, `test-estates.mjs`,
+`test-historic-roads.mjs`, `test-road-continuity.mjs`,
+`test-ground-contact.mjs`, `test-building-grounding.mjs` and
+`test-precompiled-models.mjs`. The latter confirms matching geometry and draw
+counts, image similarity, layout/timeline controls and model fallbacks.
+Source, compiled and walking views were visually inspected using NVIDIA
+GeForce RTX 3090 Ti / ANGLE Direct3D11 through the hardware launcher, with
+no page errors. Previews and the full-suite log are saved under
+`Browser/artifacts/estates-kerb/`.
+
+The complete `npm test` suite also passed (exit 0, `full-suite.log`).
+
+The local aerial binary was rebuilt as
+`aerial-638151a60e1d74dbf628.bin.gz`; its manifest matches the browser sources.
+Browser source and compiled aerial assets changed. Interior assets,
+Unity/Android, Blender and packaged exports were not regenerated.
+
+## Irby corridor bar, closed frame and flat outside wall (9 October 2026)
+
+The owner's two screenshots identify the Explore green entrance at
+(221.7, -66.6). The horizontal strip was the outdoor service court drawn
+through the door by its aerial slope-scaled depth bias. The disposable
+Explore replacement now clones only that clipped court material, removes
+its depth offset and restores the existing world ground-texture projection.
+The original material is retained for exact disposal and period restoration.
+
+The court previously stopped .08 units beyond the front masonry face,
+exposing an irregular, triangulated lower edge. `workshop-gallery.mjs` now
+accepts per-run end padding; `tower-workshops.mjs` uses .20 rather than .32
+only for Explore's Irby court and its ground-contact sides. Paving now meets
+beneath the unchanged flat facade. `explore-irby-entrance.mjs` adds two pale
+jamb stops overlapping the closed leaf's clearance and overlaps the head
+rebate/lintel contact. The opening dimensions, inward swing, collision and
+walking route retain their existing definitions.
+
+The Explore logic and browser checks share short rays for both frame faces,
+oblique views, 24 planar wall contacts and six continuous paving contacts.
+The hardware browser regression compares the lower door/wall pixels with
+outdoor paving visible and hidden at 6.7, 11.7 and 20 units: all 20,400
+samples match exactly in both source and compiled mode. Both browser paths
+exercise keyboard/touch opening, reverse use, physical corridor walks and
+period refresh, with no page or shader errors. The standalone Escape workshop
+regression also passes, including exact restoration. Local rendering used
+NVIDIA GeForce RTX 3090 Ti / ANGLE Direct3D11 through the required launcher.
+Reviewed approach, closed frame, open wall and oblique captures, logs and the
+current compiled fingerprint are under `Browser/artifacts/irby-entrance-seams/`;
+full Explore receipts are in `Browser/artifacts/corridor-door-access/`.
+
+The complete `npm test` suite passes (exit 0), recorded in
+`Browser/artifacts/irby-entrance-seams/full-suite.log`. `npm run test:gpu`,
+`test-explore-workshops.mjs`, both source/compiled
+`test-explore-workshops-browser.mjs` runs and `test-tower-workshops.mjs`
+also pass. No compilation or shader failures were reported.
+
+The aerial source fingerprint and binary SHA-256 still match the existing
+`aerial-638151a60e1d74dbf628.bin.gz` manifest. This repair changes Browser
+runtime modules, regression tests and documentation. Shared compiled
+estate/interior models, Unity/Android, Blender and packaged exports were not
+regenerated. Nothing was committed or published.
+
+## Faster intro view navigation (9 October 2026)
+
+Intro departures and the two view pages now track their position in the tab's
+navigation history. Back to intro traverses to the existing title document;
+reopening a retained view traverses forward to its initialized scene. The
+browser's back/forward cache retains its camera, selected period, lighting,
+interior sections and GPU resources. Aerial/walking handoffs also retain their
+return distance to the intro. Timeline URL updates preserve the history marker.
+Direct links, modified/new-tab links, disabled storage and evicted pages keep
+normal document navigation. A small independent entry module installs the
+return handler even while the larger scene imports are still loading.
+
+The production intro movement is now 0.8 seconds with a 0.15-second still blend,
+down from 2.4 and 0.35 seconds. Skip, reduced motion, portrait framing and the
+exact camera/control handoff remain available. `visible-shaders.mjs` prepares
+visible renderables using the real scene's lights and fog, leaving hidden batch
+originals, future periods and inactive detail levels for their first use. It
+changes no scene hierarchy, visibility, transforms or geometry.
+
+Explore now prepares the complete shared asylum layout on a one-shot worker
+alongside the estate download/restoration. Structured cloning retains walls,
+doors, stairs, spatial Maps and navigation cells. The worker terminates after
+its result; an unavailable or failed worker uses the original synchronous
+builder. Furniture/room streaming and door readiness still follow the existing
+outdoor-first path. Both outdoor collisions and interior movement consume the
+same shared layout as before.
+
+On NVIDIA GeForce RTX 3090 Ti / ANGLE Direct3D11 at 1200 x 800, the initial
+baseline measured about 6.0 seconds into aerial and 11.4 seconds into walking.
+The full-intro follow-up measured 4.0 and 8.0 seconds. Back to intro took 0.16 /
+0.32 seconds, and reopening took 0.32 / 0.37 seconds. Separate 390 px and desktop
+cache checks also restore the same document tokens without replaying the
+transition. These local timings include the camera movement; network/device
+speed and browser cache eviction affect other runs. Receipts, reviewed captures
+and logs are in `Browser/artifacts/startup-speed/`.
+
+Focused validation passes the existing intro logic/browser, walking-startup
+logic/browser and view-navigation logic/browser checks, plus the new view-cache
+and view-loading checks. They cover live title capture, early clicks, unavailable
+storage, reduced motion, 320/390 px layouts, worker failure fallback, exact shared
+collision/navigation data, delayed furniture, failed-download retry, outdoor
+movement, gated doors, live-location transfers, period/lighting, resize/reload
+and retained scene restoration.
+
+The speed changes alter Browser navigation and loading sources only. Concurrent
+road-model edits invalidated the local compiled estate during validation, so
+that shared checkout was rebuilt as `aerial-d54070177cf40ddecbe7.bin.gz`; its
+manifest fingerprint matched the modelling sources at that test point. The speed changes
+are outside that compilation input graph. Interior compiled assets,
+Unity/Android, Blender and packaged exports were not regenerated.
+
+The hardware `test-timeline-browser.mjs` regression also passes every stop in
+source/compiled views, selections, URL navigation/reloads, keyboard controls,
+mobile reset and live walking-obstacle refresh. The new logic checks are in
+`npm test`; `npm run test:views` now includes the cache regression. The cache
+browser check removes Playwright's default back/forward-cache disabling flag
+while retaining the required hardware-browser launcher and GPU verification.
+
+The complete `npm test` suite passes (exit 0, `full-suite.log`), along with the
+final `npm run test:gpu` policy/renderer check. Cached reentry additionally skips
+the title-frame GPU readback and JPEG encoding; fresh navigation retains its
+single captured loading image. No changes were committed or published.
+
+Subsequent shared roundabout/road work published
+`aerial-7c323c765d9a5a463acc.bin.gz`. The final source fingerprint matches that
+manifest, and the final aerial profile explicitly verifies compiled loading
+and 4.04-second first entry. The final full-intro cache run verifies all four
+desktop/portrait document restorations without page or shader errors, with
+returns at 0.12–0.36 seconds and reentry at 0.24–0.50 seconds. Its first-entry
+timings varied while shared modelling assets changed; the separate compiled
+profile isolates the final aerial asset. Receipts are `final-aerial.json`,
+`cache-full-intro.json` and `final-compiled-fingerprint.json`.
+## Smooth pavement network and stable border occlusion — 9 October 2026
+
+The owner's follow-up marks pale strips disappearing as the walking camera
+approaches and jagged kerbs beside Estates and the lawn. These are two separate
+rendering defects. Buried borders were pulled through higher asphalt by
+slope-scaled polygon offset. Separate segment rectangles and per-waypoint disks
+also formed teeth along sampled bends.
+
+`road-ribbon.mjs` creates shared cross-sections at offset-line intersections for
+gentle bends. Sharp turns and closed ends use rounded polygons with exact strip
+tangencies and a maximum 5 mm chord error. Historic/shared road surfaces and
+standalone historic kerbs use this builder; the car park strokes its saved
+concave boundary with it. The Annexe entrance border still uses its existing
+clipping. Authored centrelines, widths, dates, junction polygons, layout toggles,
+road-end fades and walking collision inputs remain in use.
+
+Flat road, paving, lawn-island, kerb and paint layers now use zero slope factor
+with their existing constant depth priorities. This covers buried borders at
+road mouths while keeping raised island kerbs visible. The entrance and church
+paths retain their existing continuous geometry with the same depth policy.
+Ground-contact sides retain unbiased materials and extend beneath the terrain.
+Construction still happens before batching, transform caching and collision
+preparation, so no runtime geometry mutation is introduced.
+
+The continuity and ground-contact checks now audit every authored lane, paved
+junction, road-network root and supporting surface rather than relying on mesh
+counts that assumed separate patches. Full-width connected mouths and the 16
+existing grass-facing end transitions are checked directly. The new hardware
+browser regression uses production materials, reproduces the old buried-strip
+failure, checks occlusion from 5 to 250 metres at three camera near planes, and
+verifies exposed and raised inner kerbs remain visible. Run `npm run
+test:pavements` in Browser for these focused checks.
+
+Hardware rendering is verified as NVIDIA GeForce RTX 3090 Ti / ANGLE Direct3D11.
+Source and compiled walking reviews cover Estates near/far, the forecourt,
+teardrop, Annexe fork/entrance, church, entrance drive and parking bend/concave
+return. Captures and validation receipts are in
+`Browser/artifacts/pavement-cleanup/`. The modelling references are recorded in
+`Research/historic-roads/`, with follow-up notes in Estates and car park.
+
+The final local aerial asset is `aerial-7c323c765d9a5a463acc.bin.gz` (19,443,759
+compressed bytes), source fingerprint
+`c491b40367280d358a3477b7d95acc5236630bb80e5f4766c9a37424af4f9e47`.
+Browser modelling sources and the local compiled aerial model change. Interior
+compiled assets, Unity/Android, Blender and packaged exports are not regenerated.
+Nothing is committed or published.
+
+Validation passes the complete `npm test` suite (exit 0), `npm run test:gpu`,
+the focused road/entrance/car-park/church/junction/ground-contact checks,
+`test-pavement-depth-browser.mjs` and `test-precompiled-models.mjs`. The rebuilt
+source and compiled scenes have identical draw and triangle counts and match
+visually (mean channel error 0.0044). Missing, incompatible and corrupt compiled
+asset fallbacks remain covered. The final walking capture loaded the compiled
+model with no page errors. Full-suite and compiled-validation logs, the GPU
+occlusion receipt and reviewed source/compiled images are saved in the pavement
+cleanup artifact directory.
+
+## Alternate arched corridor windows (9 October 2026)
+
+Explore and Escape now keep alternate original arched corridor windows,
+doubling their regular spacing from 5.4 to 10.8 units without recentering
+the retained assemblies. Both wall faces select the same original bays,
+including even window counts. Opposing walls use a common world direction
+to preserve matching pairs despite their reversed local axes. The masonry
+and painted lining are rebuilt with only the retained apertures, so deleted
+lower panes and semicircular
+heads become solid wall with the continuous brick/paint/header-band finish.
+Workshop room windows and rectangular service sashes retain their layout.
+
+`escape-corridors.mjs` requests a window stride of two. The shared
+`workshop-gallery.mjs` and `admin-corridor-detail.mjs` defaults retain a stride
+of one for the aerial estate and workshop rooms. Existing batch, transform,
+collision and shadow refreshes cover the changed fittings. The request and
+source screenshot are recorded in `Research/escape-grounds/README.md`.
+
+The focused geometry check, `test-corridor-window-spacing.mjs`, verifies
+original positions, matching faces and aligned opposing pairs on even, odd,
+short, reversed and rotated walls, with 44 clear-pane and 36 solid-infill
+rays. The local aerial binary is rebuilt because its shared-builder source
+fingerprint changes. Browser
+sources and the local aerial manifest change; interior compiled assets,
+Unity/Android, Blender and packaged exports are not regenerated.
+
+Hardware validation uses the required launcher and NVIDIA GeForce RTX 3090 Ti
+through ANGLE Direct3D11. The final before/after survey verifies alternate
+subsets of the original window positions, preserved workshop room windows,
+and 284 solid-infill rays in Explore plus 184 in Escape against the actual
+rebuilt material batches. Explore's rebuilt compiled path repeats the same
+284 infill rays. Desktop, reverse, branch and portrait views were reviewed.
+The corridor walking/locked-door browser check, finish/lighting check and
+Explore source/compiled keyboard/touch checks pass without page or shader
+errors. The rebuilt estate also passes `test-precompiled-models.mjs`, including
+source/compiled image comparison and missing/incompatible/corrupt fallbacks.
+Evidence and isolated browser-check outputs are in
+`Browser/artifacts/corridor-window-spacing/`.
+
+The complete `npm test` suite passes (exit 0, `full-suite.log`), alongside
+the focused spacing check and `npm run test:gpu`. The final local aerial
+asset is `aerial-3bbc96bf7751fb32d713.bin.gz`, with source fingerprint
+`949bfca06f7f729c576240a420649f1d66cbecba446e150ff78fcd34067298dc`.
+Nothing is committed or published.
+
+## Irby doorway floor flicker (9 October 2026)
+
+The owner's screenshot in `Research/escape-grounds/irby-floor-flicker-reference.png`
+shows the open green Explore entrance at (221.7, -66.6). The continuous concrete
+and stone threshold both occupied Y=.04 across a .21 by 2.04-unit area. Short
+downward rays found both rendered surfaces there. GPU comparisons with the
+concrete hidden exposed 2,270 changed stone samples across the original four
+desktop views; the straight interior view alone concealed the problem.
+
+`explore-irby-entrance.mjs` shares the threshold dimensions with
+`irbyFloorBoundaries`. `escape-corridors.mjs` uses the resulting notch only for
+Explore's floor surface. Concrete ends at X=221.49 against the stone's inner
+edge, retaining the existing level and doorway geometry. Walls, ceiling and
+collision use the original network boundary. The existing workshop rebuild
+refreshes material batches, cached transforms, walking obstacles and shadows.
+Escape retains its complete floor outline.
+
+The shared entrance probe checks eighteen floor points on both sides of the
+joint for exactly one level surface. The regression rejects the saved original
+overlap. The hardware Explore browser check compares stone pixels with concrete
+visible/hidden from the interior, two angled approaches, exterior and portrait
+view: all 5,759 samples match exactly in both source and compiled mode. Both
+paths also pass keyboard/touch door use, physical corridor walks and period
+restoration, without page or shader errors. Reviewed images, original/final
+floor rays, renderer receipts and test logs are in
+`Browser/artifacts/irby-floor-flicker/`.
+
+`npm run test:gpu`, `test-explore-workshops.mjs`, source/compiled
+`test-explore-workshops-browser.mjs` and `test-tower-workshops.mjs` pass. Hardware
+browser runs use NVIDIA GeForce RTX 3090 Ti / ANGLE Direct3D11. The full
+`npm test` run stops at `test-jarman.mjs:11` (check 116 of 155): its protected
+estate fingerprint expects 818,881 primitives but finds 818,879. Loading the
+saved original floor modules reproduces the identical count and SHA-256
+mismatch (`jarman-before.log`), confirming this is independent of the floor
+repair. The earlier full-suite pass above describes its earlier checkout state.
+The separate remaining-check run also finds `test-leighton-newton.mjs:21`
+expects 882,928 protected primitives but finds 882,926. Its count and SHA-256
+mismatch also reproduce with the original floor modules
+(`leighton-newton-before.log`). The task artifact directory retains both
+failures and separate results for the remaining checks.
+The remaining 39 declared checks complete with 38 passes and only that
+Leighton/Newton failure; all other declared suite checks pass.
+
+This changes Browser runtime sources and regressions. Initial compiled receipts
+use `aerial-3bbc96bf7751fb32d713.bin.gz`; these runtime modules do not change the
+compiled estate inputs. The concurrent Admin side-band repair below rebuilds
+the estate to `aerial-19743a2dd683524525be.bin.gz`, whose manifest matches the
+final checkout. The final compiled floor check passes against that refreshed
+asset, with all 5,759 stone samples unchanged and no page or shader errors.
+Compiled estate/interior assets, Unity/Android, Blender and packaged exports
+were not regenerated by this floor repair. Nothing is committed or published.
+
+## Continuous Admin side masonry band — 9 October 2026
+
+The owner's marked walking view identifies accepted purple strip profiles,
+a yellow strip too close to the recessed window sill, and missing green wall
+returns. The owner confirmed lowering the whole band slightly so it remains
+level beneath the main sash sills. `main-admin-building.mjs` now replaces four
+separate box strips with one swept masonry course at y=2.3 (formerly 2.6),
+retaining its 0.13-unit height, 0.14-unit depth and light stone material. The
+course follows the pitched room, both recessed returns and the court corner
+onto its frontage. Mitred corners have one top/underside surface. Window
+positions, sill fittings and building footprints remain in use.
+
+The assembled Admin geometry regression checks 356 top/underside rays through
+all seven spans, clearance beneath the lowest sill and absence of the old
+higher strips. The general facade-course survey now includes this additional
+course and checks 24 sweeps including the separate iron gutter, 130 explicit
+and 277 shared corner joins, and 3,188 top/underside probes. Main/admin placement,
+exposed windows, roof and walking checks pass.
+
+The required hardware launcher verifies NVIDIA GeForce RTX 3090 Ti through
+ANGLE Direct3D11. Reviewed source/compiled walking views cover the side, recess,
+court, close desktop view and 390-by-844 phone view without page or shader
+errors. `test-precompiled-models.mjs` passes source/compiled geometry and draw
+count comparison, visual comparison (mean channel error 0.0044), full detail
+and missing/incompatible/corrupt asset fallbacks.
+
+The required `npm test` invocation initially stops at Jarman's whole-estate
+snapshot, which includes the former Admin band. Substituting the saved pre-edit
+Admin builder reproduces both existing Jarman and Leighton/Newton references
+exactly. Independent comparisons retain 817,571/881,618 protected non-Admin
+primitives and all 1,307 non-band Admin primitives, plus every Admin window and
+range record. Only the old three band records become the new single sweep; a
+1 cm unrelated Admin wall movement is still rejected. Only the two affected
+whole-estate geometry records are refreshed; the approved ward ranges and scope
+exclusions remain protected. Audit receipts are `before-audit.json` and
+`after-audit.json` in the task artifact directory.
+
+All 155 standard suite commands are covered by the successful 115-command
+prefix of the initial `npm test` invocation and the 40 successful resumed
+commands (`remaining-suite.log/json`, exit 0). The initial invocation retains
+its snapshot failure in `initial-suite.log`; it is not reported as exit 0.
+The model-sensitive tests that ran during initial preparation were also
+rerun against the finished sources in `final-model-checks.log` (exit 0).
+
+The rebuilt local aerial asset is `aerial-19743a2dd683524525be.bin.gz`,
+19,460,856 compressed bytes, source fingerprint
+`b0ca5e9e9a8f34bf4cbb41aa6d80df77f66d11a97b18ec7fe06d59ca9223b1e9`.
+Captures, build output and validation receipts are in
+`Browser/artifacts/admin-side-band/`; the screenshot and modelling rationale
+are in `Research/main-refine3/README.md`. This repair updates Browser modelling
+sources and the local compiled estate. Interior compiled assets, Unity/Android,
+Blender and packaged exports are not regenerated by this repair. Nothing is
+committed or published.
+
+## Tower and chimney yard roof/ground audit — 9 October 2026
+
+The on-foot reference and modelling rationale are in
+`Research/escape-grounds/README.md`. The walking replacement had narrowed the
+stores and gallery walls while retaining several wider roof decks, parapets,
+gutters and roof backing meshes. `workshop-yard-envelope.mjs` supplies fitted
+opaque .16-unit decks and perimeter copings using the original materials.
+`tower-workshops.mjs` removes the redundant low link deck and obsolete eave
+instances, clips the whole old cross-gallery envelope, and removes Explore's
+replaced Main/admin front roof backing/fascia with its slate skin. A small brick
+closure joins the south slate eave to the gallery corner at Y=8.84..9.
+
+The runtime tower court extends its west edge from X=159 beneath the new
+X=156.62875 facade, retaining the .34 asphalt level and projected texture.
+Its room and passage cuts meet beneath the masonry without the old .32 end
+clearances. Two separated ground-zero hardstanding pads are retired. Cloned
+geometry and reversible mesh/instance lists preserve the source estate; the
+existing rebuild refreshes material batches, cached transforms, walking
+obstacles and shadows. Escape's two-cycle restoration regression passes.
+
+`probeWorkshopYard` surveys 72 roof/seam rays and 40 ground points in the actual
+submitted render meshes. It rejects orphan decks, low gallery roof skirts,
+south eave openings, grass leakage and changes to the court level/material.
+Explore also rejects the separately generated old entrance roof underside.
+These assertions join the existing workshop wall, roof and trim checks in the
+Escape and Explore regressions.
+
+The full `npm test` suite passes (exit 0), including the Escape restoration,
+Explore workshops, ground contact, road continuity and tower modelling checks.
+`npm run test:gpu` and final source/compiled
+`test-explore-workshops-browser.mjs` also pass. The full-suite and two browser
+logs are retained in the task artifact directory.
+
+Source and compiled hardware browser checks pass physical corridor walks,
+door access and period restoration with no page or shader errors. The yard
+survey uses the actual walker with collision at 5 m/s: 374 metres and 1,870
+movement samples per loading mode, across the chimney/cylinder court, tower
+west/north approach and eastern service lane. All 25 inspection positions are
+clear. Reviewed images include day, dusk and 390-by-844 phone framing; survey
+captures hide the help/timeline overlays only to expose the lower wall and
+ground contacts. `hardware-browser.mjs` verifies NVIDIA GeForce RTX 3090 Ti /
+ANGLE Direct3D11 for all local rendered checks.
+
+Receipts, captures and the repeatable survey are in
+`Browser/artifacts/tower-walking-audit/`. The local aerial asset was regenerated
+for compiled validation as `aerial-19743a2dd683524525be.bin.gz`, using current
+shared source fingerprint
+`b0ca5e9e9a8f34bf4cbb41aa6d80df77f66d11a97b18ec7fe06d59ca9223b1e9`.
+The repair itself changes runtime Browser geometry and tests. Interior compiled
+models, Unity/Android, Blender and packaged exports were not regenerated.
+Nothing is committed or published.
+
+## Continuous road-end gradients — 9 October 2026
+
+The reported pale step was the road body's opaque ground-contact face across
+the start of a transparent end fade. Its asphalt stayed level while only the
+gravel descended, and the adjoining side supports stopped abruptly. The owner's
+reference and modelling correction are in `Research/historic-roads/README.md`.
+
+`road-ribbon.mjs` records the open seam planes; `ground-contact.mjs` leaves those
+cross-sections open while retaining the road's other supporting edges.
+`road-end-fades.mjs` samples asphalt, gravel and kerbs on one smooth descending
+profile from the beginning of the approach to lawn contact. Asphalt and gravel
+share exact vertices and triangles. Transparent verge supports follow the same
+slope and coverage, and the asphalt side closes only its thin rim above the
+verge. No opaque support face crosses the fade.
+
+The endpoint regression checks gradual descent, matching texture geometry,
+continuous fading supports, unobstructed walking and absence of transverse
+support faces, including a positive control that inserts the original defect.
+The same slope/support probes run in road-continuity and compiled-scene checks;
+fading surfaces are exempted from the flat carriageway-level assertion.
+
+Hardware walking captures and small camera sweeps compare the original and
+repaired central Parsons, church and both Ross Avenue endpoints. Evidence and
+validation logs are in `Browser/artifacts/road-end-slope/`. Browser source and
+the local aerial asset are rebuilt; interior compiled assets, Unity/Android,
+Blender and packaged exports are not regenerated. Nothing is published.
+
+Validation: `npm run test:gpu`, `npm run test:pavements`, source/compiled walking
+captures and camera sweeps, `test-precompiled-models.mjs` and the final compiled
+geometry audit all pass on NVIDIA GeForce RTX 3090 Ti / ANGLE Direct3D11.
+The final local asset is `aerial-680a033abd2778cacc32.bin.gz`; the source
+fingerprint still matches the manifest at final verification.
+
+The initial `npm test` invocation passes 99 commands before stopping at the
+workshop facade-alignment probe. That check passes on rerun with both current
+roads and the saved pre-repair road builders. All 56 remaining suite commands
+pass in the resumed run, covering all 156 standard commands. The initial log
+retains its exit 1; it is not reported as an exit-0 invocation. Receipts are
+`npm-test.log`, `workshops-baseline.log`, `workshops-final.log`,
+`remaining-suite.log/json` and `validation.json` in the task artifact directory.
+
+## Front outer stair retaining-wall flicker — 9 October 2026
+
+The owner's green-circled game reference is saved in
+`Research/front-basement/stair-wall-flicker-reference.png`. The entrance-wing
+apron's generated gravel side and the outer stair's brown retaining wall shared
+z=21.7 over |x|=30–30.75. The apron now ends at z=21.78, beneath the coping and
+inside the wall. Both mirrored approaches share the correction. Treads, wall
+geometry, walking levels and collision footprints retain their positions.
+
+`test-front-basement.mjs` adds forty complete-scene rays after timeline
+preparation generates ground-contact faces. The saved original apron fails
+with two outward surfaces. Final game and source/compiled GPU rays all find
+one retaining face. Reviewed oblique and portrait images and camera sweeps
+show the patch removed. The hardware launcher verifies NVIDIA GeForce
+RTX 3090 Ti / ANGLE Direct3D11. Front basement walks, outside walking,
+stair clearance and the 76-join wall survey pass, as does the estate-wide
+ground-contact check.
+
+Browser source and tests are changed and the local compiled aerial asset is
+rebuilt. The standard build also regenerated local interior assets. Unity/Android,
+Blender and packaged applications are not regenerated. Evidence and repeatable
+browser scripts are in `Browser/artifacts/front-stair-flicker/`.
+
+The two estate fingerprints used by Jarman and Leighton/Newton also include
+these shared frontage aprons. They were refreshed only after replacing those
+two geometries with the saved original reproduced both existing fingerprints
+exactly. Primitive counts remain 818,879 and 882,926; no ward geometry changes.
+The independent audit is `artifacts/front-stair-flicker/refresh-snapshots.mjs`
+and its `snapshot-refresh.json` receipt. The full source/compiled comparison
+passes exact draw/triangle counts, image similarity, controls and all fallback
+cases; its outputs are isolated under `compiled-check/` because an older shared
+screenshot file was locked. The final aerial asset is
+`aerial-680a033abd2778cacc32.bin.gz` with source fingerprint
+`ba5d76bf90a9b9e1a4dda8e2aa574e4b1872d07c7ec7ddd6c6043d2f5d7ee8c5`.
+
+The required `npm test` run passes its first 99 checks, then stops at
+`test-explore-workshops.mjs:24`: four tower-return wall probes at X=147.5
+find no wall. Loading the saved original entrance apron reproduces the same
+four failures, independently of this repair (`explore-before.log`). All 56
+remaining declared checks pass in the continuation run, including front
+basement walking and both refreshed estate fingerprints. Thus 155 of 156
+declared checks pass; the separate Explore tower-wall failure remains.
+The full and continuation logs are retained in the task artifact directory.
+
+## Matching tower-side wall alignment and removed Hale sashes — 9 October 2026
+
+The annotated west-side walking screenshot requests matching north/south
+abutment depths at the water tower, the lighter stores base on the north wall,
+and removal of the final stacked Hale sash pair. The reference and fitted
+coordinates are in `Research/escape-grounds/README.md`.
+
+`tower-wall-alignment.mjs` stretches the north range's disposable clipped wall
+pieces from X=146.3 to X=145.4, together with their precise collision footprints.
+Only the original west boundary moves; the existing corridor cut planes remain
+fixed.
+Its flat deck, outer coping and both end eaves meet the new edge. A flush plinth
+uses the existing south stores base material at Y=-0.18..0.6, with the original
+lower shell retaining its end returns and passage cuts. The two selected
+Hale window assemblies are removed reversibly from their existing instance
+buffers. Other sashes, the continuous wall bands and neighbouring downpipe
+retain their geometry. The established workshop rebuild refreshes material
+batches, transform caches, walking obstacles and shadows in Escape and Explore.
+
+The shared submitted-geometry regression samples the full moved facade,
+matching base material, extended flat deck, filled sash positions and adjacent
+retained windows. The existing workshop tests also check collision at the new
+wall, working doors and exact estate restoration on replay/disposal. Hardware
+source/compiled browser checks pass wall/base/roof/window rays and three physical
+wall approaches, with no page or shader errors. Reviewed captures include the
+reported west view, an oblique junction, roof contact, dusk and 390-by-844 phone
+framing. Local rendering uses verified NVIDIA GeForce RTX 3090 Ti / ANGLE
+Direct3D11 through `hardware-browser.mjs`.
+
+The local aerial asset is regenerated for compiled verification as
+`aerial-680a033abd2778cacc32.bin.gz`, with shared source fingerprint
+`ba5d76bf90a9b9e1a4dda8e2aa574e4b1872d07c7ec7ddd6c6043d2f5d7ee8c5`.
+The repair changes Browser runtime construction and regressions; shared aerial
+modelling definitions, interior compiled assets, Unity/Android, Blender and
+packaged exports are unchanged. Evidence, the pre-edit runtime module and
+repeatable inspection scripts are in
+`Browser/artifacts/tower-west-wall-alignment/`. Nothing is committed or published.
+
+Validation: `npm run test:gpu` and the required full `npm test` suite pass
+(exit 0). Both `test-tower-workshops.mjs` and `test-explore-workshops.mjs` are
+rerun successfully against the final plinth/footprint revision. Final source
+and compiled hardware inspections also pass, including filled/retained sash
+rays, exposed end-return closure and physical collision at the moved facade.
+
+## Brick-coloured lawn window lintel ends — 9 October 2026
+
+The pale blocks circled in the owner's screenshot were the ends of each
+straight stone lintel behind a segmental brick head. The shared sash builder
+now accepts a lintel material; the lawn-window builder selects the existing
+wall brick material. All 20 west lawn windows and their 20 reflected east
+counterparts use it. The other sash styles keep their existing stone heads.
+No transforms, geometry, frames, sills or window divisions change.
+
+The reference and modelling scope are recorded in `Research/west/README.md`.
+GPU source inspection checks all 80 exposed lintel ends against the actual
+wall brick material and saves matching close, contextual and mirrored views.
+Rendering uses verified NVIDIA GeForce RTX 3090 Ti / ANGLE Direct3D11 through
+`hardware-browser.mjs`. Evidence and validation logs are in
+`Browser/artifacts/window-head-brick/`.
+
+Browser modelling sources and the local compiled aerial model are updated.
+Unity/Android, Blender and packaged exports are not regenerated.
+
+`npm run test:gpu`, the source and compiled lintel inspections,
+`test-escape-exterior.mjs`, `test-east-forward-end.mjs`,
+`test-west-refinement.mjs` and `test-precompiled-models.mjs` pass. The compiled
+comparison also verifies image/draw parity, full detail and loading fallbacks.
+The final checked aerial asset is `aerial-082c3b39779e4ea21b08.bin.gz`, with
+source fingerprint
+`dbc20a385ca020fc3ff87699ed163f3beb9e84355983162594106d70155e527b`.
+The normal model build also refreshes the ten local interior sections.
+
+The first required `npm test` run stopped on a ground-contact material check
+while the shared model was changing. That check passes on the current files,
+both with this change and with the original window material restored in
+memory. The remaining 64 suite commands were run in their package order;
+62 pass. Jarman and Leighton/Newton whole-estate snapshots fail with this
+window change removed in memory as well; their original expectations are
+retained. The latest source/compiled comparison and all 80 final compiled
+lintel probes pass. The final shared source fingerprint matches the manifest.
+
+## Redesmere continuous lower frontage band (9 October 2026)
+
+The orange/yellow/blue walking reference is recorded in
+`Research/redesmere-floor-band/`. One closed, mitred course now follows the
+flush frontage, canted bay, doorway recess, blank projection and square
+pavilion front. It matches the former orange section at y=4.08, height
+0.16 and width 0.14, with its underside resting on the rendered wall at
+y=4. The bay's former open-bottomed prism and overlapping front bars are
+replaced. Existing lower slabs end behind their front wall planes, retaining
+the court/side trim. Masonry, windows, canopy and roofs retain their definitions.
+
+`test-facade-courses.mjs` passes 92 new complete-scene wall-contact and
+closed-surface rays, plus 25 swept courses, 138 explicit/277 shared corner
+joins, 3,316 top/underside rays and the existing west/Reception regressions.
+`test-redesmere-garden.mjs`, `test-escape-exterior.mjs`,
+`test-building-detail.mjs` and source/compiled `test-roof-wall-joins.mjs`
+pass, including all 278 frozen roof-gap rays. The saved original geometry
+fails the new band check.
+
+`Browser/artifacts/entrance-floor-band/check-browser.mjs --compiled`
+passes the same 92 rays against each actual visible source/compiled scene,
+with six captures per mode covering the marked frontage, wider/opposite
+views, underside, garden and phone. There are no page or shader errors.
+All rendering uses verified NVIDIA GeForce RTX 3090 Ti / ANGLE Direct3D11
+through `hardware-browser.mjs`; `npm run test:gpu` passes.
+The existing `test-precompiled-models.mjs` comparison also passes source/
+compiled image and draw parity, full detail, controls and loading fallbacks.
+
+The local aerial asset is rebuilt for this repair. Following a concurrent
+exterior rebuild, the final validated asset is `aerial-082c3b39779e4ea21b08.bin.gz`,
+with source fingerprint
+`dbc20a385ca020fc3ff87699ed163f3beb9e84355983162594106d70155e527b`.
+Shared browser sources and local compiled aerial assets are updated.
+Interior assets, Unity/Android, Blender and packaged exports are not
+regenerated by this exterior repair.
+
+The independent before/after comparison matches all 1,446,222 primitives
+outside the lower-band area and all 540 tiled-roof primitives. The local
+trim changes from eight primitives to seven. Both wider-estate Jarman and
+Leighton/Newton snapshots also fail with the saved pre-edit builders via
+`baseline-loader.mjs`; their fixtures are left unchanged.
+
+The required `npm test` passes its first 116 commands, then stops at the
+Jarman snapshot (check 117 of 156). The 39 continuation checks cover the
+rest of the declared suite. Source fingerprint and binary checksum checks
+confirm that the rebuilt aerial asset still matches the current sources.
+Receipts are retained in `Browser/artifacts/entrance-floor-band/`.
+
+Final coverage: 154 of 156 declared commands pass. The two failures are the
+pre-existing Jarman and Leighton/Newton wider-estate snapshots, reproduced
+with both saved original builders. The road-continuity check initially hit
+a Windows error opening its shared audit output, then passed on a serial
+retry (61 continuous road surfaces). This is complete suite coverage, not
+an all-green `npm test` invocation.
+
+## Grounded water-tower footing — 9 October 2026
+
+The owner's corner screenshot and modelling rationale are in
+`Research/water-tower/README.md`. The unnamed solid tower base was merged into
+decorative `BufferGeometry` before the estate foundation pass, leaving its
+Y=0 bottom above the Y=-0.15 lawn. Naming it `Water tower brick plinth` retains
+its box geometry until that pass extends only its bottom to Y=-0.18. Its
+10.35-by-10.35 footprint, Y=0.5 top and above-grade brick UVs remain. A separate
+before/after comparison verifies all other 187 tower meshes, transforms,
+materials and texture painting exactly; the tower's height, openings and roof
+contacts retain their geometry.
+
+The original source fails the new ground-contact regression. The repaired
+source passes 64 footing probes across all four sides, upper-vertex/UV
+preservation and repeat grounding. Actual submitted Escape and source/compiled
+Explore meshes also pass all 64 probes, compared with 16 before repair. Reviewed
+hardware captures include the reported corner, close ground contact, surrounding
+buildings, night lighting and phone framing. The GPU policy, focused model
+checks, optional tower-climb browser check and full source/compiled scene
+comparison pass. Rendering uses NVIDIA GeForce RTX 3090 Ti / ANGLE Direct3D11
+through the required hardware launcher.
+
+Evidence, repeatable inspectors, model comparison and validation logs are in
+`Browser/artifacts/water-tower-grounding/`. The local aerial model was rebuilt;
+the latest matching-source compiled asset also retains the full grounded
+footing. This repair updates Browser source and the local aerial estate.
+Interior models, Unity/Android, Blender and packaged exports are not regenerated.
+
+The required `npm test` initially stops at Redesmere lower-band probes; the
+repeated six-command prefix passes after the concurrent facade revision. The
+24 completed serial continuation commands and 126 remaining parallel commands
+cover the rest of the declared suite. The road-continuity check passes on retry
+after its shared audit output was locked. In total, 154 of 156 declared commands
+pass. `test-jarman.mjs` and `test-leighton-newton.mjs` retain their wider-estate
+fingerprint failures; both also fail with the saved original tower source via
+`baseline-loader.mjs`. Their unrelated fixtures are left unchanged. Prefix,
+continuation, baseline and retry logs are retained in the task artifact directory.
+
+## Solid kerbs at road-to-grass transitions — 9 October 2026
+
+The owner's unmarked walking reference and rationale are in
+`Research/historic-roads/README.md`. Raised kerb faces previously lost opacity
+while still above the lawn. `road-end-fades.mjs` now keeps both stone borders
+opaque and depth-writing, lowers them along the seven-metre approach from
+Y=.32 to Y=-.17, and narrows their .6-unit width to .3 at the buried toe. Both
+side faces continue below terrain to Y=-.19. Stone texture preparation precedes
+side-material cloning so the sides retain their ordinary metre-scaled UVs.
+The asphalt/gravel blend and thin asphalt side supports retain every original
+position, normal, texture coordinate, opacity and triangle.
+
+The shared endpoint regression checks all 32 stone tails at 16 open ends,
+solid sides, smooth descent, buried toes, retained junctions and unobstructed
+walking. A positive control rejects the old translucent treatment. The saved
+original builder comparison retains all 63,888 vertices across the 32 road
+texture meshes and their side buffers exactly. Compiled road/ground checks use
+the same assertions. An initial terrain check caught late stone projection on
+the new opaque sides; preparing the stone material before cloning resolves it.
+
+`npm run test:gpu`, final `npm run test:pavements` and
+`test-precompiled-models.mjs` pass. The last two save their receipts through a
+task-local loader because a historical shared audit file was locked; the
+assertions are unchanged. The hardware launcher verifies NVIDIA GeForce
+RTX 3090 Ti / ANGLE Direct3D11. Reviewed source/compiled walking-height views
+cover central Parsons, church and both Ross Avenue endpoints, small camera
+sweeps, day/dusk/night lighting and 390-by-844 portrait framing, with no page or
+shader errors. The compiled comparison preserves exact draw/triangle counts,
+controls and missing/incompatible/corrupt asset fallbacks; mean channel image
+error is 0.0049943.
+
+The required `npm test` invocation stopped at an unrelated facade-course count
+assertion (24 found, 23 expected). That check passes after the concurrent
+Redesmere work updates its survey. The additional suite run reports Jarman and
+Leighton/Newton protected-estate snapshot mismatches; those checks construct
+`createEscapeExterior` before road layouts are added, so these kerb builders
+are outside their inspected geometry. The mouse-capture timing check fails in
+the additional run and passes on isolated rerun. The initial full-suite log
+retains its exit 1; it is not represented as an exit-0 run.
+
+The final local aerial asset is `aerial-082c3b39779e4ea21b08.bin.gz`, source
+fingerprint `dbc20a385ca020fc3ff87699ed163f3beb9e84355983162594106d70155e527b`.
+`final-receipt.mjs` verifies the manifest against current source, final compiled
+captures, unchanged road buffers and successful validation receipts. Evidence,
+saved original source, repeatable captures and logs are in
+`Browser/artifacts/road-kerb-transition/`. This changes Browser source,
+regressions and the local compiled estate. Interior assets, Unity/Android,
+Blender and packaged exports are not regenerated. Nothing is committed or
+published.
+
+Completed standard-suite coverage: all 156 declared commands are covered by the
+successful initial prefix, 150-command continuation and the passing facade and
+mouse-capture reruns. The continuation itself exits 1 with those two protected
+estate snapshot failures and its earlier mouse timing failure. Jarman and
+Leighton/Newton remain the two unresolved checks; they are outside this road
+repair. The final focused pavement and source/compiled checks exit 0.
+
+## Android source and asset refresh — 9 October 2026
+
+`NativeAndroid/Unity` is refreshed from the current shared browser models,
+including the recent facade, roof, water-tower footing, workshop-wall and road
+repairs. The generated source manifest, Unity import receipt and final native
+smoke agree on source fingerprint
+`dbc20a385ca020fc3ff87699ed163f3beb9e84355983162594106d70155e527b`.
+All 336 recorded browser/runtime/artwork inputs also match the current files.
+The export contains 22 outdoor GLB parts and 14,450,402 total triangles across
+the estate, furnished interior, selection, guard and scenario libraries. It
+retains 13 periods, four floors, 24 reachable outside doors and 73 archive images.
+
+The updated road-end meshes exposed an RGB-only assumption in the Unity
+importer. It now accepts float RGB or RGBA colours, preserves supplied alpha
+and gives RGB vertices opaque alpha. Both native surface shaders multiply
+the full vertex colour, preserving the browser's road-to-grass transparency.
+The presentation checks now require the current constant road-depth priorities
+and all eight ordinary layer values instead of the superseded slope bias.
+The modelling rationale remains in `Research/historic-roads/README.md`.
+
+Export validation checks colour counts, formats, finite values and alpha range.
+Unity's preparation check verifies transparent, partial and opaque alpha in the
+saved meshes before the player releases its CPU copies. Two hardware-rendered
+gradient probes verify blending in the ordinary and workshop shaders; each has
+an opaque negative control with vertex colours disabled. The generated workshop
+shader retains the current joined ceiling footprint.
+
+The required export/build entry point was used to regenerate native source
+GLBs, navigation, collision records, archive images, presentation artwork,
+Unity baked assets and the prepared scene. The Windows preview build passes.
+The final native smoke passes 60,235 assertions (3,463 distinct messages) on
+NVIDIA GeForce RTX 3090 Ti / Direct3D 11. Reviewed captures include the title,
+frontage, aerial roads, courtyard roof contact, furnished memo and both alpha
+gradients. These desktop validation timings are not phone performance results.
+
+`npm run test:gpu` passes through `hardware-browser.mjs` on RTX 3090 Ti / ANGLE
+Direct3D11. The required `npm test` passes its first 116 commands, then stops
+at the previously documented Jarman protected-estate snapshot mismatch. A serial
+continuation covers the remaining 39 commands: 38 pass and Leighton/Newton
+retains its previously documented snapshot mismatch. Overall coverage is
+154 passes out of 156 commands; the full suite is not reported as passing.
+
+Evidence is in `NativeAndroid/artifacts/source-refresh-verification.json`,
+`source-refresh-final-smoke/`, `source-refresh-final-smoke.log`,
+`source-refresh-windows.log`, `unity-windows.log`, and the matching
+`source-refresh-browser-suite.log` / `source-refresh-browser-tail.*` files.
+`source-refresh-receipt.mjs` verifies matching current source, import and smoke
+receipts plus the native source hashes and GPU probe results.
+
+This refresh updates native import/shader/validation sources and their local
+generated assets. Existing native gameplay remains the implementation used by
+the refreshed project; browser-only interactions such as the optional tower
+climb still require a separate native gameplay port. Browser modelling inputs,
+browser compiled assets and Blender exports are not regenerated by this task.
+The Android APK is not rebuilt, and no Android-device run is claimed. The
+existing installable package remains the earlier 0.13.0 build; the refreshed
+source and Windows validation preview are local, uncommitted and unpublished.

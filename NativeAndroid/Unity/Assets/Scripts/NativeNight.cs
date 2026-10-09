@@ -3,6 +3,7 @@ using UnityEngine;
 
 public sealed partial class NativePrototypeGame
 {
+    public Shader lampPoolShader;
     GameObject lampPools;Texture2D lampGlow;Material poolMaterial;float nightClock;
     readonly List<Lamp> lampPositions=new List<Lamp>();
     void InitializeNight()
@@ -13,9 +14,9 @@ public sealed partial class NativePrototypeGame
             bool atlas=material.GetTexture("_EmissionMap")!=null;
             if(glass||atlas)material.SetFloat("_Window",1);
         }
-        lampGlow=new Texture2D(64,64,TextureFormat.RGBA32,false);var colors=new Color[4096];for(int y=0;y<64;y++)for(int x=0;x<64;x++){float radius=new Vector2((x+.5f-32)/32,(y+.5f-32)/32).magnitude;colors[y*64+x]=new Color(1,1,1,Mathf.Max(0,(Mathf.Exp(-radius*radius*5)-Mathf.Exp(-5))/(1-Mathf.Exp(-5))));}lampGlow.SetPixels(colors);lampGlow.Apply(false,true);
-        poolMaterial=new Material(Shader.Find("Escape1829/NativeSurface"));poolMaterial.SetFloat("_Unlit",1);poolMaterial.SetInt("_Cull",0);poolMaterial.SetInt("_SrcBlend",5);poolMaterial.SetInt("_DstBlend",1);poolMaterial.SetInt("_ZWrite",0);poolMaterial.color=new Color(1,.68f,.33f,.26f);poolMaterial.mainTexture=lampGlow;poolMaterial.renderQueue=3001;
-        lampPools=new GameObject("Street lamp pools");lampPools.AddComponent<MeshFilter>();lampPools.AddComponent<MeshRenderer>().sharedMaterial=poolMaterial;RefreshNightEstate();
+        lampGlow=new Texture2D(64,64,TextureFormat.RGBA32,true);lampGlow.wrapMode=TextureWrapMode.Clamp;lampGlow.filterMode=FilterMode.Trilinear;var colors=new Color[4096];for(int y=0;y<64;y++)for(int x=0;x<64;x++){float radius=new Vector2((x+.5f-32)/32,(y+.5f-32)/32).magnitude;colors[y*64+x]=new Color(1,1,1,Mathf.Max(0,(Mathf.Exp(-radius*radius*5)-Mathf.Exp(-5))/(1-Mathf.Exp(-5))));}lampGlow.SetPixels(colors);lampGlow.Apply(true,true);
+        poolMaterial=new Material(lampPoolShader);poolMaterial.color=new Color(1,.68f,.33f,.26f);poolMaterial.mainTexture=lampGlow;
+        lampPools=new GameObject("Street lamp pools");lampPools.AddComponent<MeshFilter>();var renderer=lampPools.AddComponent<MeshRenderer>();renderer.sharedMaterial=poolMaterial;renderer.shadowCastingMode=UnityEngine.Rendering.ShadowCastingMode.Off;renderer.receiveShadows=false;RefreshNightEstate();
     }
     void RefreshNightEstate()
     {

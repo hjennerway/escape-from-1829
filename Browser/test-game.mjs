@@ -15,6 +15,7 @@ import {sampleLanding} from './dist/aerial-controls.mjs';
 import {createArrivalCutscene,sampleArrival} from './dist/arrival-cutscene.mjs';
 import * as GuardTHREE from './dist/vendor/three.module.js';
 import {createSecurityGuard,updateSecurityGuard,resetSecurityGuard} from './dist/security-guard.mjs';
+import {createAsylumGhost,updateAsylumGhost,resetAsylumGhost} from './dist/asylum-ghost.mjs';
 import {resetEnemyRoomSearch,updateEnemyRoomSearch} from './dist/enemy-room-search.mjs';
 import {createNotebook,notebookView} from './dist/notebook.mjs';
 import {asylumDisplayName} from './dist/asylum-room-numbers.mjs';
@@ -24,6 +25,7 @@ import {createLoadingProgress} from './dist/loading-progress.mjs';
 import {createMouseCapture} from './dist/mouse-capture.mjs';
 import {createReceptionClockAudio} from './dist/reception-clock-audio.mjs';
 import {createDoorCreakAudio} from './dist/door-creak-audio.mjs';
+import {createTowerAudio} from './dist/tower-audio.mjs';
 import {ESCAPE_SUN_OFFSETS} from './dist/landing-scene.mjs';
 class Vector {
   constructor(){this.set(0,0,0);}
@@ -69,7 +71,8 @@ const sandbox={createReceptionClockAudio,createNotebook,notebookView,drawNoteboo
  window:{AudioContext:class {resume(){return Promise.resolve();}}},Image:class {},
  fetch:async()=>({ok:true,json:async()=>layout}),matchMedia:()=>({matches:false}),
  innerWidth:1280,innerHeight:800,devicePixelRatio:1,addEventListener(type,listener){listeners.set(type,listener);},requestAnimationFrame(){},performance:{now:()=>0},console};
-Object.assign(sandbox,{resetEnemyRoomSearch,updateEnemyRoomSearch,asylumDisplayName,createDoorCreakAudio});
+Object.assign(sandbox,{resetEnemyRoomSearch,updateEnemyRoomSearch,asylumDisplayName,createDoorCreakAudio,createTowerAudio});
+Object.assign(sandbox,{createAsylumGhost:()=>createAsylumGhost(GuardTHREE),updateAsylumGhost,resetAsylumGhost});
 vm.createContext(sandbox);
 vm.runInContext(source+`\nglobalThis.test={finish,escapeCutscene,start,update,animate,resetPositions,showFloor,player,keys,openNotebook,closeNotebook,get notebook(){return notebook;},get escapeExterior(){return escapeExterior;},get lastRender(){return renderer.lastRender;},get arrival(){return arrivalCutscene;},get elapsed(){return elapsed;},get enemies(){return enemies;},get floors(){return floors;},get groups(){return floorGroups;},get artPanels(){return artPanels;},get artViewing(){return artViewing;},openArtViewer,closeArtViewer,get ready(){return ready;},get state(){return state;},get camera(){return camera;},setElapsed(v){elapsed=v;},setAudio(){audioOn=false;},setFrameDt(v){clock.getDelta=()=>v;}};`,sandbox);
 await new Promise(r=>setImmediate(r));

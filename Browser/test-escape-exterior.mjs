@@ -296,7 +296,7 @@ const redesmereBays=exterior.model.children.filter(o=>o.name==='Redesmere canted
 assert.equal(redesmereBays.length,2);
 for(const bay of redesmereBays){
   const bounds=new THREE.Box3().setFromObject(bay);
-  assert(bounds.max.x>97&&Math.abs(bounds.min.y)<1e-6&&bounds.max.y>9,'Redesmere bays project from the brick ground storey to the eaves');
+  assert(bounds.max.x>97&&Math.abs(bounds.min.y)<1e-6&&Math.abs(bounds.max.y-8.94)<1e-5,'Redesmere bay brickwork reaches the continuous pale cornice');
   ray.set(new THREE.Vector3(96.4,30,(bounds.min.z+bounds.max.z)/2),new THREE.Vector3(0,-1,0));
   const hit=ray.intersectObject(exterior.model,true)[0];
   assert.equal(hit.object.name,'Redesmere bay slate roof');

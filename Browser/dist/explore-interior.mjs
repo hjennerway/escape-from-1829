@@ -3,6 +3,7 @@ import {createInteriorLights} from './interior-lights.mjs';
 import {createFurnitureFloor} from './furniture-models.mjs';
 import {createReceptionClockAudio} from './reception-clock-audio.mjs';
 import {createInteriorSectionLoader} from './interior-streaming.mjs';
+import {createCorridorSightings} from './corridor-sightings.mjs';
 
 export function createExploreInterior(THREE,floors,furnitureModels,{streaming=false,renderer=null,camera=null}={}){
  const scene=new THREE.Scene(),lamps=[];
@@ -21,10 +22,11 @@ export function createExploreInterior(THREE,floors,furnitureModels,{streaming=fa
  }
  const lights=createInteriorLights(THREE,scene,lamps);
  const loading=streaming?createInteriorSectionLoader(THREE,{scene,floors,models:furnitureModels,renderer,camera,floorGroups:scene.children.filter(o=>floors.some(f=>f.name===o.name))}):null;
+ const sightings=createCorridorSightings(THREE,scene,floors,{isReady:actor=>!loading||loading.isReady(actor)});
  let audioContext;
  // Browser audio is unlocked by a gesture; no sound is played while loading.
  const unlock=()=>{audioContext??=new (window.AudioContext||window.webkitAudioContext)();audioContext.resume().catch(()=>{});};
  window.addEventListener('pointerdown',unlock,{once:true});window.addEventListener('keydown',unlock,{once:true});
  const receptionClock=createReceptionClockAudio({getFloors:()=>floors,getContext:()=>audioContext});
- return {scene,loading,update:(actor,dt=0)=>{lights.update(actor);receptionClock.update(actor,dt);loading?.update(actor);}};
+ return {scene,loading,update:(actor,dt=0)=>{lights.update(actor);receptionClock.update(actor,dt);loading?.update(actor);sightings.update(actor,camera,dt);}};
 }

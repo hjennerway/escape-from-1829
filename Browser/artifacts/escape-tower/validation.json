@@ -1,0 +1,170 @@
+{
+  "results": {
+    "renderer": "ANGLE (NVIDIA, NVIDIA GeForce RTX 3090 Ti (0x00002203) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+    "ascent": {
+      "samples": 1556,
+      "y": 26.6
+    },
+    "guard": {
+      "search": true,
+      "min": 0.5760000000000076,
+      "mode": "return",
+      "position": {
+        "x": 5.94400000000001,
+        "z": -46
+      }
+    },
+    "descent": {
+      "samples": 1802,
+      "y": 0
+    },
+    "final": {
+      "player": {
+        "x": -20.5,
+        "z": 13.5,
+        "floor": 0,
+        "y": 0,
+        "stair": null,
+        "outside": false,
+        "verticalTrend": -1
+      },
+      "work": 0,
+      "open": true,
+      "surveyed": true,
+      "notes": [
+        {
+          "kind": "fact",
+          "id": "escape:grounds:tower-lookout",
+          "title": "View from the tower",
+          "text": "From the west lookout I can see the north boundary: the pedestrian gate lies far to the west; the boarded maintenance wicket is nearer, northwest of the tower. Beyond them the perimeter path leads west to the lattice mast. I should watch for security before descending. The same stairs lead back to the workshops.",
+          "view": "outside",
+          "mapPoint": {
+            "x": 143.67,
+            "z": -55.95
+          },
+          "mapLabel": "View from the tower",
+          "source": "Personal observation · fictional escape scenario",
+          "order": 8
+        },
+        {
+          "kind": "fact",
+          "id": "escape:grounds:tower-hatch",
+          "title": "Tower access opened",
+          "text": "I freed the retaining bar. The stiff hinge rang across the yard; security may investigate. The entrance stays open.",
+          "view": "outside",
+          "mapPoint": {
+            "x": 148,
+            "z": -49.95
+          },
+          "mapLabel": "Tower access opened",
+          "source": "Personal observation · fictional escape scenario",
+          "order": 7
+        },
+        {
+          "kind": "fact",
+          "id": "escape:grounds:tower-maintenance",
+          "title": "Water tower inspection",
+          "text": "A notice beside the tower entrance says the retaining bar needs a crowbar. Oil quiets the stiff hinge. The lamp above marks an inspection lookout; return by the same stairs. The tools are in the adjoining repair workshop and oil store.",
+          "view": "outside",
+          "mapPoint": {
+            "x": 149.15,
+            "z": -49.6
+          },
+          "mapLabel": "Water tower inspection",
+          "source": "Personal observation · fictional escape scenario",
+          "order": 6
+        },
+        {
+          "kind": "fact",
+          "id": "escape:grounds:tower-door",
+          "title": "Tower workshops",
+          "text": "I opened the blue stores door beside the water tower. The connecting corridor leads to a repair workshop, an oil and parts store, and a machine workshop.",
+          "view": "outside",
+          "mapPoint": {
+            "x": 144.31000000000003,
+            "z": -44.75
+          },
+          "mapLabel": "Tower workshops",
+          "source": "Personal observation · fictional escape scenario",
+          "order": 5
+        }
+      ],
+      "renderer": "ANGLE (NVIDIA, NVIDIA GeForce RTX 3090 Ti (0x00002203) Direct3D11 vs_5_0 ps_5_0, D3D11)"
+    },
+    "phone": {
+      "player": {
+        "x": 143.67,
+        "z": -55.95,
+        "floor": 0,
+        "y": 26.6,
+        "stair": null,
+        "outside": true,
+        "verticalTrend": 1
+      },
+      "near": "tower-lookout",
+      "work": 0,
+      "open": true,
+      "surveyed": true,
+      "notes": [
+        {
+          "kind": "fact",
+          "id": "escape:grounds:tower-lookout",
+          "title": "View from the tower",
+          "text": "From the west lookout I can see the north boundary: the pedestrian gate lies far to the west; the boarded maintenance wicket is nearer, northwest of the tower. Beyond them the perimeter path leads west to the lattice mast. I should watch for security before descending. The same stairs lead back to the workshops.",
+          "view": "outside",
+          "mapPoint": {
+            "x": 143.67,
+            "z": -55.95
+          },
+          "mapLabel": "View from the tower",
+          "source": "Personal observation · fictional escape scenario",
+          "order": 8
+        },
+        {
+          "kind": "fact",
+          "id": "escape:grounds:tower-hatch",
+          "title": "Tower access opened",
+          "text": "I freed the retaining bar and oiled the hinge. The tower entrance opens quietly and stays open.",
+          "view": "outside",
+          "mapPoint": {
+            "x": 148,
+            "z": -49.95
+          },
+          "mapLabel": "Tower access opened",
+          "source": "Personal observation · fictional escape scenario",
+          "order": 7
+        },
+        {
+          "kind": "fact",
+          "id": "escape:grounds:tower-maintenance",
+          "title": "Water tower inspection",
+          "text": "A notice beside the tower entrance says the retaining bar needs a crowbar. Oil quiets the stiff hinge. The lamp above marks an inspection lookout; return by the same stairs. The tools are in the adjoining repair workshop and oil store.",
+          "view": "outside",
+          "mapPoint": {
+            "x": 149.15,
+            "z": -49.6
+          },
+          "mapLabel": "Water tower inspection",
+          "source": "Personal observation · fictional escape scenario",
+          "order": 5
+        },
+        {
+          "kind": "fact",
+          "id": "escape:grounds:tower-door",
+          "title": "Tower workshops",
+          "text": "I opened the blue stores door beside the water tower. The connecting corridor leads to a repair workshop, an oil and parts store, and a machine workshop.",
+          "view": "outside",
+          "mapPoint": {
+            "x": 144.31000000000003,
+            "z": -44.75
+          },
+          "mapLabel": "Tower workshops",
+          "source": "Personal observation · fictional escape scenario",
+          "order": 4
+        }
+      ],
+      "renderer": "ANGLE (NVIDIA, NVIDIA GeForce RTX 3090 Ti (0x00002203) Direct3D11 vs_5_0 ps_5_0, D3D11)"
+    }
+  },
+  "errors": []
+}

@@ -73,7 +73,7 @@ export function loadFurnitureModels(THREE){
   Object.assign(models,createSanitaryFurnitureModels(THREE));
   for(const g of Object.values(raw))if(g?.isBufferGeometry)g.dispose();
   return models;
- })());
+ })().catch(error=>{libraries.delete(THREE);throw error;}));
  return libraries.get(THREE);
 }
 const furnitureDetail=new WeakMap();

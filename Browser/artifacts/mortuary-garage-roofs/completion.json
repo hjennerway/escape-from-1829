@@ -1,0 +1,64 @@
+{
+  "fullSuiteExitCode": 0,
+  "gpuPolicyExitCode": 0,
+  "compiledSceneExitCode": 0,
+  "compiledRoofJoinsExitCode": 0,
+  "compiledRoofTilesExitCode": 0,
+  "gableSamples": 216,
+  "soffitSamples": 72,
+  "ventSamples": 12,
+  "negativeRegression": "Original builder rejected: two coplanar faces at garage gable [-0.18, 3.313748, 0.788].",
+  "verifiedSourceHash": "f42f662410af1080943e99282d3f933b3b4537dfbd85355476aa00c85ffcaa20",
+  "observedCurrentSourceHash": "5651a066520901c28128cde5be35862072110f339a318ccca73bc91acf15a1f5",
+  "compiledFile": "aerial-8948e6a2be3704b01386.bin.gz",
+  "compiledChecksum": "8948e6a2be3704b01386f328a0e560a1fb58b0639d50db5ef5560becd6f56325",
+  "renderer": "ANGLE (NVIDIA, NVIDIA GeForce RTX 3090 Ti (0x00002203) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+  "visualModes": [
+    "procedural",
+    "compiled",
+    "compiled"
+  ],
+  "preservation": {
+    "passed": true,
+    "before": {
+      "outside": {
+        "count": 1445408,
+        "hash": "84dd150b240f537c6a40af37f75573d53c5b34c5e93aafaa0e250d778d998f53"
+      },
+      "existingRoofs": {
+        "count": 303,
+        "hash": "b9ac68c06eded250de5b653b60dde5879cc117380f71f7a75d6c68b08d1888c4"
+      },
+      "wallsAndDetails": {
+        "count": 795,
+        "hash": "57f556182ccb4b6984c7c35ed638b96705ae68c8ebe2e0836b42d3fb4683cf71"
+      }
+    },
+    "after": {
+      "outside": {
+        "count": 1445408,
+        "hash": "84dd150b240f537c6a40af37f75573d53c5b34c5e93aafaa0e250d778d998f53"
+      },
+      "existingRoofs": {
+        "count": 303,
+        "hash": "b9ac68c06eded250de5b653b60dde5879cc117380f71f7a75d6c68b08d1888c4"
+      },
+      "wallsAndDetails": {
+        "count": 795,
+        "hash": "57f556182ccb4b6984c7c35ed638b96705ae68c8ebe2e0836b42d3fb4683cf71"
+      }
+    }
+  },
+  "concurrentWork": "Refine blue roof protrusions (01a11cc0-7503-7690-8856-ba6461cfb59f) is changing the shared vent model. These receipts certify the prior repair stage, not that later revision; its rebuild/verification remains with that task.",
+  "exportsUpdated": [
+    "Browser procedural source",
+    "Local compiled aerial model at verified revision"
+  ],
+  "exportsNotRegenerated": [
+    "Unity/Android",
+    "Blender",
+    "Interior models",
+    "Packaged exports"
+  ],
+  "heartbeatDeleted": true
+}

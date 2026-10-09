@@ -42,3 +42,15 @@ contains 43 scripts: 40 pass. `test-annexe-photo-placement.mjs` (saved road
 snapshot), `test-main-admin.mjs` (missing recessed-link opening), and
 `test-historic-roads.mjs` (admin north road clearance) also fail with the car park
 changes removed through a temporary module loader; these are existing failures.
+
+## Continuous border joins — 9 October 2026
+
+The general pavement review replaces the car park's separate edge rectangles
+and per-vertex disks with the shared continuous road-strip builder. Concave
+vertices and the saved mapped asphalt polygon remain the boundary reference.
+The pale border and asphalt use constant depth priorities, preventing buried
+edging from appearing at a distance. Rounded corners retain exact tangencies
+and a maximum 5 mm chord error. Review captures of the bend and concave return
+are in `Browser/artifacts/pavement-cleanup/`; the historic-road notes record the
+owner's marked references. The Browser source and local compiled aerial asset
+change; Unity/Android and Blender exports are unchanged.

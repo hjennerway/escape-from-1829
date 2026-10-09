@@ -1,0 +1,60 @@
+{
+  "date": "2026-10-09",
+  "scope": "Browser Explore and Escape runtime yard",
+  "runtimeSourceHashes": {
+    "dist/tower-workshops.mjs": "ce253b3191acbd0cc271d073b9d9ed2b86bd20c98f3f102a5d9ca44bf1503ffd",
+    "dist/workshop-yard-envelope.mjs": "1311a920975756e8efd21f1b34934a55a79da12424d8323f66802b63ab28ff2e"
+  },
+  "renderer": "ANGLE (NVIDIA, NVIDIA GeForce RTX 3090 Ti (0x00002203) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+  "baselineFailures": {
+    "ground": 54,
+    "wall": 64,
+    "roof": 16,
+    "debris": 6
+  },
+  "source": {
+    "mode": "procedural",
+    "probes": {
+      "groundSamples": 96,
+      "wallSamples": 64,
+      "roofSamples": 16,
+      "ground": [],
+      "wall": [],
+      "roof": [],
+      "debris": []
+    },
+    "errors": []
+  },
+  "compiled": {
+    "mode": "compiled",
+    "probes": {
+      "groundSamples": 96,
+      "wallSamples": 64,
+      "roofSamples": 16,
+      "ground": [],
+      "wall": [],
+      "roof": [],
+      "debris": []
+    },
+    "errors": []
+  },
+  "keyboardAndTouch": {
+    "mode": "compiled",
+    "errors": []
+  },
+  "focusedExplore": "passed",
+  "focusedEscape": "passed with retry restoration",
+  "fullSuite": {
+    "command": "npm test",
+    "commands": 156,
+    "exitCode": 0,
+    "log": "full-suite.log"
+  },
+  "exports": {
+    "aerialModelRebuiltDuringValidation": true,
+    "interiorModelsRegenerated": false,
+    "unityAndroidRegenerated": false,
+    "blenderRegenerated": false,
+    "packagedExportsRegenerated": false
+  }
+}

@@ -1,0 +1,19 @@
+node:internal/modules/run_main:107
+    triggerUncaughtException(
+    ^
+
+AssertionError [ERR_ASSERTION]: No competing automatic fascia at {"point":[-24.600000381469727,13.032000541687012,2.0199999809265137],"normal":[1,0,0],"authored":"1829 estate · aerial reconstruction/Shared estate/West wing mirrored from east/West wing continuous eaves"}; Eave closure: West wing joined, Eave closure: West wing joined
+
+2 !== 0
+
+    at checkRoofWallFlicker (file:///C:/Users/Harry/Documents/_escape-from-1829/Browser/test-support/roof-wall-flicker-probes.mjs:25:10)
+    at file:///C:/Users/Harry/Documents/_escape-from-1829/Browser/test-roof-wall-joins.mjs:45:22 {
+  generatedMessage: false,
+  code: 'ERR_ASSERTION',
+  actual: 2,
+  expected: 0,
+  operator: 'strictEqual',
+  diff: 'simple'
+}
+
+Node.js v24.20.0

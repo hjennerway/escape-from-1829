@@ -129,3 +129,23 @@ endpoints and seven fixed front/corridor sashes in
 `Browser/artifacts/irby-red-orange-verification.json`. Side details on the
 shortened connections are regenerated to fit. Browser sources and the local
 compiled aerial model are updated; Unity and Blender exports are unchanged.
+
+## Gable and eave texture flicker, 9 October 2026
+
+The yellow-circled front gables in `roof-flicker-reference.png` had generated
+eave fascias on the authored brick-gable planes. Different UV projections on
+those coincident faces made their textures compete as the camera moved.
+The same automatic finish also overlapped Irby's rear gables, canted bays and
+quarter-octagonal corner, and several other buildings across the estate.
+
+The shared roof finisher now subtracts covered vertical areas from each generated
+fascia. Authored gables, wall returns, trim and vertical roof ends own their
+existing surfaces; generated pieces remain where they close an actual opening.
+This happens before timeline splitting, batching and shadow preparation, using
+the placed world geometry, including rotated, scaled and mirrored buildings.
+The building's roof pitches, original masonry, sash schedule and footprint stay
+fixed. Details and the estate audit are in `Research/roof-wall-gaps/README.md`.
+
+Repeatable before/after audits, moving-camera GPU views and source/model checks
+are in `Browser/artifacts/irby-roof-flicker/`. The regression freezes 444 points
+from the original competing faces, alongside the existing 278 roof-gap rays.

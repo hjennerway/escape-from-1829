@@ -52,7 +52,7 @@ export function createChurchGrounds(THREE){
  const paving=new THREE.MeshStandardMaterial({color:0x777b79,roughness:1});
  const edging=new THREE.MeshStandardMaterial({color:0x96998f,roughness:1});
  for(const [mat,layer] of [[edging,1],[paving,2]]){
-  mat.polygonOffset=true;mat.polygonOffsetFactor=-layer;mat.polygonOffsetUnits=-2*layer;
+  mat.polygonOffset=true;mat.polygonOffsetFactor=0;mat.polygonOffsetUnits=-2*layer;
  }
  const size=64,data=new Uint8Array(size*size*4);let seed=1829;
  for(let i=0;i<size*size;i++){seed=(Math.imul(seed,1664525)+1013904223)>>>0;const v=222+seed%29;data.set([v,v,v,255],i*4);}

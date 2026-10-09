@@ -17,7 +17,7 @@ try{
     const errors=[];page.on('pageerror',error=>errors.push(error.message));
     await page.route(/https:\/\/(www\.whateversleft\.co\.uk|basedinchurton\.co\.uk)\//,route=>route.abort());
     await page.route('**/aerial.html*',async route=>{const response=await route.fetch();await route.fulfill({response,body:(await response.text()).replace('function frame(){','window.viewTest={exterior,renderer,controls,lighting};function frame(){')});});
-    await page.route('**/explore.mjs',async route=>{const response=await route.fetch();await route.fulfill({response,body:(await response.text()).replace('const clock=new THREE.Timer();','window.viewTest={exterior,renderer,walker,input,lighting};const clock=new THREE.Timer();')});});
+    await page.route('**/explore.mjs',async route=>{const response=await route.fetch();await route.fulfill({response,body:(await response.text()).replace('const clock=new THREE.Timer();','window.viewTest={exterior,renderer,walker,input,lighting,interior};const clock=new THREE.Timer();')});});
     async function ready(){await page.waitForFunction(()=>window.viewTest?.renderer.info.render.frame>2);assert.equal(await page.locator('#introTransition').count(),0);}
     async function pose(){return page.evaluate(()=>{const {exterior,lighting,walker}=window.viewTest,camera=exterior.camera;return {x:camera.position.x,y:camera.position.y,z:camera.position.z,heading:camera.rotation.clone().reorder('YXZ').y,lighting:lighting.mode,outside:walker?.actor.outside,clear:walker?.outside.clear(walker.actor.x,walker.actor.z,walker.actor.y)};});}
     async function navLayout(mode){
@@ -55,7 +55,7 @@ try{
     assert(blocked);await page.goto(base+`/explore.html?at=${blocked.x},${blocked.z},0&period=${year}`);await ready();
     const landed=await pose();assert(landed.clear);assert(Math.hypot(landed.x-blocked.x,landed.z-blocked.z)<=10,'Blocked ground is resolved locally');
     // An indoor viewpoint can still rise above its actual current X/Z.
-    await page.evaluate(()=>{const {walker}=window.viewTest;Object.assign(walker.actor,{x:0,y:5,z:10,floor:1,outside:false,stair:null});walker.look(0,0);walker.update(.01);});
+    await page.evaluate(async()=>{const {walker,interior}=window.viewTest;await interior.loading.prepare({x:0,z:10,floor:1});Object.assign(walker.actor,{x:0,y:5,z:10,floor:1,outside:false,stair:null});walker.look(0,0);walker.update(.01);});
     const indoor=await pose();await page.locator('#switchView').click();await page.waitForURL('**/aerial.html*');await ready();const above=await pose();
     assert.equal(above.x,indoor.x);assert.equal(above.z,indoor.z);
     assert.deepEqual(errors,[]);results.push({width,errors,livePan:true,walking:true,roundTrip:true,blockedDrop:true,indoorRise:true});

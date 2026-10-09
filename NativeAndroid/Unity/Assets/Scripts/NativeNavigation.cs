@@ -19,12 +19,13 @@ public sealed partial class NativePrototypeGame
         if(f==t){var direct=new List<Waypoint>();foreach(var p in FindPath(plans[f],from,to))direct.Add(new Waypoint(p,f,plans[f].elevation));return direct;}
         var nodes=new List<Waypoint>{new Waypoint(from,f),new Waypoint(to,t)};var edges=new List<RouteEdge>();
         foreach(var flight in plans[0].flights){
+            if(flight.blocked)continue;
             int a=nodes.Count,b=a+1;var route=flight.route;nodes.Add(new Waypoint(XZ(route[0]),flight.lower));nodes.Add(new Waypoint(XZ(route[route.Length-1]),flight.upper));
             var forward=new List<Waypoint>();
             for(int i=1;i<route.Length;i++){var start=route[i-1];var end=route[i];int n=Mathf.CeilToInt(Vector2.Distance(XZ(start),XZ(end))/.3f);for(int k=1;k<=n;k++){float v=(float)k/n;forward.Add(new Waypoint(Vector2.Lerp(XZ(start),XZ(end),v),k==n&&i==route.Length-1?flight.upper:flight.lower,Mathf.Lerp(start.y,end.y,v)));}}
             var reverse=new List<Waypoint>();for(int i=forward.Count-1;i>=0;i--)reverse.Add(new Waypoint(forward[i].position,flight.upper,forward[i].y));
-            forward.Add(new Waypoint(XZ(route[route.Length-1])+Vector2.down*.8f,flight.upper,route[route.Length-1].y));
-            reverse.Add(new Waypoint(XZ(route[0])+Vector2.down*.8f,flight.lower,route[0].y));
+            forward.Add(new Waypoint(XZ(flight.upperDeparture),flight.upper,route[route.Length-1].y));
+            reverse.Add(new Waypoint(XZ(flight.lowerDeparture),flight.lower,route[0].y));
             edges.Add(new RouteEdge{a=a,b=b,route=forward});edges.Add(new RouteEdge{a=b,b=a,route=reverse});
         }
         for(int a=0;a<nodes.Count;a++)for(int b=0;b<nodes.Count;b++)if(a!=b&&nodes[a].floor==nodes[b].floor){
@@ -54,6 +55,7 @@ public sealed partial class NativePrototypeGame
             if(y+.65f>height-.16f&&y+.65f<height+1.085f&&SegmentDistance(x,z,a,b)<.38f)return false;
         }
         foreach(var flight in plans[0].flights){
+            if(flight.blocked)continue;
             if(active!=null?flight!=active:flight.lower!=level&&flight.upper!=level)continue;
             float nearest=float.PositiveInfinity,hit=0;
             for(int i=1;i<flight.route.Length;i++){var a=flight.route[i-1];var b=flight.route[i];var d=XZ(b)-XZ(a);float t=Mathf.Clamp01(Vector2.Dot(new Vector2(x,z)-XZ(a),d)/Mathf.Max(.000001f,d.sqrMagnitude));float distance=SegmentDistance(x,z,a,b),height=Mathf.Lerp(a.y,b.y,t);if(distance<.27f&&Mathf.Abs(height-y)<.38f&&distance<nearest){nearest=distance;hit=height;}}
@@ -87,11 +89,11 @@ public sealed partial class NativePrototypeGame
             for(int i=0;i<count;i++){
                 playerY-=jumpOffset;var next=player;float nextY=playerY;int nextFloor=floor;var flight=playerFlight;
                 MoveInterior(floors,ref next,ref nextY,ref nextFloor,ref flight,step.x/count,step.y/count);
-                if(!jumping||nextY+jumpOffset+1.8f<=JumpCeiling(next,nextY)+.001f){player=next;playerY=nextY;floor=nextFloor;playerFlight=flight;}
+                if(StaffMoveAllowed(player,playerY,next,nextY)&&(!jumping||nextY+jumpOffset+1.8f<=JumpCeiling(next,nextY)+.001f)){player=next;playerY=nextY;floor=nextFloor;playerFlight=flight;}
                 if(jumping){jumpOffset+=jumpVelocity*delta-9*delta*delta;jumpVelocity-=18*delta;float limit=Mathf.Max(0,JumpCeiling(player,playerY)-playerY-1.8f);if(jumpOffset>limit){jumpOffset=limit;jumpVelocity=Mathf.Min(jumpVelocity,0);}if(jumpOffset<=0){jumpOffset=jumpVelocity=0;jumping=false;}}playerY+=jumpOffset;
             }
             if(previousFloor!=floor)ShowFloor();
-        }else MoveOutside(step,dt);
+        }else {var previous=player;MoveOutside(step,dt);ObserveGroundsBoundary(previous);}
     }
     class SpatialObstacles
     {
@@ -101,11 +103,11 @@ public sealed partial class NativePrototypeGame
         public List<Obstacle> At(Vector2 p)=>cells.TryGetValue(new Vector2Int(Mathf.FloorToInt(p.x/12),Mathf.FloorToInt(p.y/12)),out var list)?list:empty;
     }
     SpatialObstacles outsideIndex,supportIndex;CompactJumpIndex jumpIndex;int indexedPeriod=-1;bool indexedTrees;
-    void EnsureOutside(){if(jumpIndex==null)jumpIndex=new CompactJumpIndex(collisionText.bytes,manifest.jumpBounds);if(indexedPeriod==periodIndex&&indexedTrees==trees&&outsideIndex!=null)return;var p=manifest.periods[periodIndex];outsideIndex=new SpatialObstacles(trees?p.obstacles:p.obstaclesNoTrees);var supports=new Obstacle[p.supportIds.Length];for(int i=0;i<supports.Length;i++)supports[i]=manifest.supportLibrary[p.supportIds[i]];supportIndex=new SpatialObstacles(supports);indexedPeriod=periodIndex;indexedTrees=trees;jumpIndex.period=periodIndex;jumpIndex.trees=trees;}
-    bool OutsideClearAt(Vector2 p,float y){EnsureOutside();var b=manifest.playBounds;if(p.x<=b.minX||p.x>=b.maxX||p.y<=b.minZ||p.y>=b.maxZ)return false;float bucket=Mathf.Round(y*4)/4;foreach(var o in outsideIndex.At(p))if(o.maxY>bucket+.35f&&o.minY<bucket+1.5f&&Contains(o,p.x,p.y,.27f))return false;return true;}
+    void EnsureOutside(){if(indexedPeriod==periodIndex&&indexedTrees==trees&&indexedScenario==Escaping&&outsideIndex!=null)return;var p=manifest.periods[periodIndex];outsideIndex=new SpatialObstacles(Escaping?(trees?manifest.escape.obstacles:manifest.escape.obstaclesNoTrees):(trees?p.obstacles:p.obstaclesNoTrees));var supports=Escaping?manifest.escape.supports:new Obstacle[p.supportIds.Length];if(!Escaping)for(int i=0;i<supports.Length;i++)supports[i]=manifest.supportLibrary[p.supportIds[i]];supportIndex=new SpatialObstacles(supports);indexedPeriod=periodIndex;indexedTrees=trees;indexedScenario=Escaping;indexedScenarioRevision=-1;}
+    bool OutsideClearAt(Vector2 p,float y){EnsureOutside();var b=manifest.playBounds;if(p.x<=b.minX||p.x>=b.maxX||p.y<=b.minZ||p.y>=b.maxZ)return false;float bucket=Mathf.Round(y*4)/4;foreach(var o in outsideIndex.At(p))if(o.maxY>bucket+.35f&&o.minY<bucket+1.5f&&Contains(o,p.x,p.y,.27f))return false;return ScenarioClear(p,y);}
     bool HeightClear(Vector2 p,float a,float b){for(int i=Mathf.RoundToInt(Mathf.Min(a,b)*4);i<=Mathf.RoundToInt(Mathf.Max(a,b)*4);i++)if(!OutsideClearAt(p,i/4f))return false;return true;}
     float OutdoorHeight(Vector2 p,float y,float trend=0){
-        EnsureOutside();Obstacle surface=null;foreach(var s in manifest.periods[periodIndex].walkSurfaces)if(Contains(s,p.x,p.y,.0000001f)){surface=s;break;}
+        EnsureOutside();Obstacle surface=null;foreach(var s in Escaping?manifest.escape.walkSurfaces:manifest.periods[periodIndex].walkSurfaces)if(Contains(s,p.x,p.y,.0000001f)){surface=s;break;}
         var candidates=new List<float>();foreach(var s in supportIndex.At(p))if(s.height<=y+.48f&&s.height>=y-2.1f&&Contains(s,p.x,p.y,.0000001f))candidates.Add(s.height);
         if(surface!=null&&surface.height<=y+.48f)candidates.Add(surface.height);
         bool rear=Mathf.Abs(Mathf.Abs(p.x)-21.9f)<.75f&&p.y>-30.8f&&p.y<-24.8f&&y>2.5f;
@@ -113,8 +115,9 @@ public sealed partial class NativePrototypeGame
         if(rear&&trend>0){var up=candidates.FindAll(h=>h>=y-.025f);if(up.Count>0)candidates=up;}
         if(candidates.Count==0)return surface?.height??0;candidates.Sort();if(rear&&trend>0)candidates.Sort((a,b)=>Mathf.Abs(a-y).CompareTo(Mathf.Abs(b-y)));else candidates.Reverse();return candidates[0];
     }
-    float JumpSupport(Vector2 p,float y){float height=OutdoorHeight(p,y-.48f+.000001f);foreach(var b in jumpIndex.At(p))if(b.maxY<=y+.025f&&Contains(b,p.x,p.y,.27f))height=Mathf.Max(height,b.maxY);return height;}
-    bool JumpClear(Vector2 p,float y){if(OutdoorHeight(p,y-.48f+.000001f)>y+.025f)return false;var bounds=manifest.playBounds;if(p.x<=bounds.minX||p.x>=bounds.maxX||p.y<=bounds.minZ||p.y>=bounds.maxZ)return false;foreach(var b in jumpIndex.At(p))if(b.maxY>y+.025f&&b.minY<y+1.79f&&Contains(b,p.x,p.y,.27f))return false;return true;}
+    System.Collections.Generic.IEnumerable<Obstacle> OutdoorJumpBounds(Vector2 p){if(Escaping){EnsureScenarioJumps();return scenarioJumps.At(p);}if(jumpIndex==null)jumpIndex=new CompactJumpIndex(collisionText.bytes,manifest.jumpBounds);jumpIndex.period=periodIndex;jumpIndex.trees=trees;return jumpIndex.At(p);}
+    float JumpSupport(Vector2 p,float y){float height=OutdoorHeight(p,y-.48f+.000001f);foreach(var b in OutdoorJumpBounds(p))if(b.maxY<=y+.025f&&Contains(b,p.x,p.y,.27f))height=Mathf.Max(height,b.maxY);return height;}
+    bool JumpClear(Vector2 p,float y){if(OutdoorHeight(p,y-.48f+.000001f)>y+.025f)return false;var bounds=manifest.playBounds;if(p.x<=bounds.minX||p.x>=bounds.maxX||p.y<=bounds.minZ||p.y>=bounds.maxZ)return false;if(Escaping)return ScenarioClear(p,y,true);foreach(var b in OutdoorJumpBounds(p))if(b.maxY>y+.025f&&b.minY<y+1.79f&&Contains(b,p.x,p.y,.27f))return false;return true;}
     Vector2 safeOutside;float safeOutsideY;bool hasSafeOutside;
     void MoveOutside(Vector2 move,float dt){
         EnsureOutside();int count=Mathf.Max(1,Mathf.CeilToInt(move.magnitude/.08f),jumping||perched?Mathf.CeilToInt(dt*120):1);float delta=dt/count;
@@ -123,7 +126,7 @@ public sealed partial class NativePrototypeGame
             else {var blocking=outsideIndex.At(player).FindAll(b=>b.maxY>playerY+.35f&&b.minY<playerY+1.5f&&Contains(b,player.x,player.y,.27f));bool found=false;for(float radius=.04f;radius<=.64f&&!found;radius+=.04f)for(int angle=0;angle<32&&!found;angle++){var p=player+new Vector2(Mathf.Cos(angle*Mathf.PI/16),Mathf.Sin(angle*Mathf.PI/16))*radius;float y=OutdoorHeight(p,playerY);if(y>playerY+.48f||!HeightClear(p,playerY,y))continue;bool clear=true;for(int i=1;i<=16&&clear;i++){var q=Vector2.Lerp(player,p,i/16f);foreach(var b in outsideIndex.At(q))if(!blocking.Contains(b)&&b.maxY>playerY+.35f&&b.minY<playerY+1.5f&&Contains(b,q.x,q.y,.27f)){clear=false;break;}}if(clear){player=p;playerY=y;found=true;}}}
         }
         for(int i=0;i<count;i++){
-            if(jumping||perched){if(jumping){float old=playerY,y=old+jumpVelocity*delta-9*delta*delta;jumpVelocity-=18*delta;if(y>old){foreach(var b in jumpIndex.At(player))if(Contains(b,player.x,player.y,.27f)&&b.minY>=old+1.79f&&b.minY<y+1.8f){y=Mathf.Max(old,b.minY-1.8f);jumpVelocity=0;}}else{float support=JumpSupport(player,old);if(y<=support){y=support;jumpVelocity=0;jumping=false;}}playerY=y;}
+            if(jumping||perched){if(jumping){float old=playerY,y=old+jumpVelocity*delta-9*delta*delta;jumpVelocity-=18*delta;if(y>old){foreach(var b in OutdoorJumpBounds(player))if(Contains(b,player.x,player.y,.27f)&&b.minY>=old+1.79f&&b.minY<y+1.8f){y=Mathf.Max(old,b.minY-1.8f);jumpVelocity=0;}}else{float support=JumpSupport(player,old);if(y<=support){y=support;jumpVelocity=0;jumping=false;}}playerY=y;}
                 var p=player+new Vector2(move.x/count,0);if(JumpClear(p,playerY))player=p;p=player+new Vector2(0,move.y/count);if(JumpClear(p,playerY))player=p;
                 if(!jumping&&JumpSupport(player,playerY)<playerY-.025f){jumping=true;jumpVelocity=0;}perched=!jumping&&playerY>OutdoorHeight(player,playerY-.48f+.000001f)+.025f;continue;
             }
@@ -134,10 +137,11 @@ public sealed partial class NativePrototypeGame
     }
     Exit NearbyDoor(out int level){level=floor;if(Indoors){if(Mathf.Abs(playerY-layout.elevation)>.5f)return null;foreach(var e in layout.exits)if(Vector2.Distance(player,XZ(e.inside))<1.6f&&LineOfSight(layout,player,XZ(e.inside)))return e;return null;}float nearest=1.6f;Exit result=null;foreach(var plan in floors)foreach(var e in plan.exits){float distance=Vector3.Distance(World(player,playerY),World(XZ(e.destination),e.destination.y));if(distance<nearest){nearest=distance;result=e;level=plan.id;}}return result;}
     void UseDoor(Exit exit,int level){
+        if(!ScenarioDoorAllowed(exit))return;
         bool wasInside=Indoors;ResetJump();hasSafeOutside=false;RecordDoor(exit,level,true);
         if(wasInside){lastDoor=exit;player=XZ(exit.destination);playerY=exit.destination.y;escapeOutside=mode==Mode.Inside;exploreInterior=false;mode=Mode.Outside;}
         else{player=XZ(exit.inside);floor=level;playerY=floors[floor].elevation;if(escapeOutside){mode=Mode.Inside;escapeOutside=false;}else exploreInterior=true;}
         int dx=exit.axis=="x"?exit.facing:0,dz=exit.axis=="z"?exit.facing:0;yaw=Mathf.Atan2(wasInside?-dx:dx,wasInside?-dz:dz);pitch=0;hold=0;spotted=false;stairLatch=true;
-        outside.SetActive(!Indoors);inside.SetActive(Indoors);artRoot.SetActive(Indoors);portal.SetActive(false);ShowFloor();SetLighting(Indoors);PositionView();ObserveNotebook();foreach(var e in enemies)PositionEnemy(e);
+        outside.SetActive(!Indoors);inside.SetActive(Indoors);artRoot.SetActive(Indoors);portal.SetActive(false);ShowFloor();RefreshScenarioVisibility();SetLighting(Indoors);PositionView();ObserveNotebook();foreach(var e in enemies)PositionEnemy(e);
     }
 }

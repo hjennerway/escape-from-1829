@@ -3,7 +3,7 @@ import {readFile,writeFile,mkdir} from 'node:fs/promises';
 import {fileURLToPath} from 'node:url';
 import {startTestServer} from './test-support/server.mjs';
 import {launchHardwareBrowser} from './test-support/hardware-browser.mjs';
-const destination=new URL('./artifacts/escape-chain/',import.meta.url);await mkdir(destination,{recursive:true});
+const destination=new URL(process.env.ESCAPE_ARTIFACT_DIR??'./artifacts/escape-chain/',import.meta.url);await mkdir(destination,{recursive:true});
 const {server,base}=await startTestServer();let browser;const errors=[],runs=[],screens=[];
 const instrument=`
 let walkSamples=0;
@@ -37,8 +37,8 @@ async walk(target){
  for(const point of route){if(interiorLoader&&!interiorLoader.isReady(point))await interiorLoader.prepare(point);for(let step=0;step<500&&Math.hypot(player.x-point.x,player.z-point.z)>.045;step++){
   const clue=escapeWorld.near(player);if(clue?.gate&&escapeProgress.run.staffKey){this.use()}
   const dx=point.x-player.x,dz=point.z-player.z,d=Math.hypot(dx,dz),distance=Math.min(.04,d);
-  const before=[player.x,player.z];indoorJump.update(player,dx/d*distance,dz/d*distance,.013);samples++;if(player.floor!==layout.id)showFloor();
-  if(step>10&&Math.hypot(player.x-before[0],player.z-before[1])<.000001)throw Error('Walking blocked '+JSON.stringify({point,player,clue:clue?.id}));
+  const before=[player.x,player.z];escapeWorld.update(elapsed,.013);indoorJump.update(player,dx/d*distance,dz/d*distance,.013);samples++;if(player.floor!==layout.id)showFloor();
+  if(step>10&&Math.hypot(player.x-before[0],player.z-before[1])<.000001&&!escapeWorld.gates.some(g=>g.opening!==g.target))throw Error('Walking blocked '+JSON.stringify({point,player,clue:clue?.id}));
  }
  if(Math.hypot(player.x-point.x,player.z-point.z)>.05)throw Error('Did not reach route point');}
  walkSamples+=samples;showFloor();observeNotebook();camera.position.set(player.x,player.y+1.65,player.z);camera.rotation.set(0,0,0);return samples;
@@ -96,7 +96,7 @@ try{
  await page.evaluate(()=>{escapeTest.start();escapeTest.arrival.update(3);escapeTest.hold()});
  const indoor=await page.evaluate(async()=>{const t=escapeTest;await t.clue('memo');await t.clue('office-index');await t.clue('staff-key');const node=await t.clue('plan');return {samples:t.walkSamples,office:node.roomId,staff:t.run.staffKey,service:t.run.serviceKey,opened:[...t.run.opened],notes:t.journal.entries.map(e=>e.id)}});
  assert(indoor.staff&&indoor.service&&indoor.opened.length);assert(indoor.notes.includes('escape:plan'));
- assert((await page.locator('#objectiveTitle').innerText()).includes(await page.evaluate(()=>escapeTest.run.variant+' outer entrance')));
+ assert.equal(await page.locator('#objectiveTitle').innerText(),'Unlock any west-side exit');
  const clues=await page.evaluate(()=>{const t=escapeTest,number=(floor,id)=>t.floors[floor].roomDoors.map(d=>d.roomId).sort((a,b)=>a.localeCompare(b,'en',{numeric:true})).indexOf(id)+1;return {key:'G'+number(0,t.run.keyRoom),office:String(200+number(3,t.run.office)),memo:t.journal.entries.find(e=>e.id==='escape:memo').text,filing:t.journal.entries.find(e=>e.id==='escape:office-index').text,oldIds:t.journal.entries.some(e=>/\bR\d+\b/.test(e.title+' '+e.text))}});
  assert(clues.memo.includes('room '+clues.key));assert(clues.filing.includes('room '+clues.office+' on the second floor'));assert(!clues.oldIds);
  for(const id of ['memo','office-index']){await page.evaluate(id=>escapeTest.lookAtNode(id),id);await shot(page,id+'-room-numbers');}

@@ -7,12 +7,45 @@ import {miterCorridorWall} from './corridor-wall-joins.mjs';
 // Escape changes the finished passage; the surveyed estate route stays fixed.
 export const WORKSHOP_GALLERY=ESCAPE_GALLERY;
 
-export function addWorkshopArchedWall(THREE,{group,a,b,resources,brick,finish,reveal,material,dark,isExposed=()=>true,height=8.84,liningTop=5.05,joins}){
+// Fit the exposed walking gallery's roof to its actual wall width. Retained
+// tower roofs cover the intervening service bays; low roof skirts must not
+// project from the middle of those taller replacement walls.
+export function addWorkshopGalleryRoof(THREE,{group,resources,gallery:g,segments,roof,brick,ridge,masonry}){
+ const left=g.minX,right=g.maxX,cx=(left+right)/2,eave=g.height+.06,top=eave+.64,half=(right-left)/2+.22;
+ const roofY=x=>top-.64*Math.abs(x-cx)/half;
+ function face(points,triangles,material,name){
+  const vertices=triangles.flatMap(t=>t.flatMap(i=>points[i])),geometry=new THREE.BufferGeometry();
+  geometry.setAttribute('position',new THREE.Float32BufferAttribute(vertices,3));
+  geometry.setAttribute('uv',new THREE.Float32BufferAttribute(triangles.flatMap(t=>t.flatMap(i=>[points[i][0]/2.8,(points[i][1]+points[i][2])/2.8])),2));
+  geometry.computeVertexNormals();resources.add(geometry);const mesh=new THREE.Mesh(geometry,material);mesh.name=name;
+  mesh.castShadow=mesh.receiveShadow=true;mesh.userData.noWalkingCollision=true;group.add(mesh);
+ }
+ for(const {z0,z1,capStart=false,capEnd=false,startJoin,endJoin} of segments){
+  if(z1<=z0)continue;
+  for(const [a,b] of [[left-.22,cx],[cx,right+.22]])face([[a,roofY(a),z0],[b,roofY(b),z0],[b,roofY(b),z1],[a,roofY(a),z1]],[[0,2,1],[0,3,2]],roof,'Walking gallery continuous slate roof');
+  masonry([left,z1],[left,z0],g.height,roofY(left),'Walking gallery west roof return');
+  masonry([right,z0],[right,z1],g.height,roofY(right),'Walking gallery east roof return');
+  for(const [a,b] of [[left-.22,left],[right,right+.22]])face([[a,roofY(a)-.025,z0],[b,roofY(b)-.025,z0],[b,roofY(b)-.025,z1],[a,roofY(a)-.025,z1]],[[0,1,2],[0,2,3]],brick,'Walking gallery opaque roof overhang');
+  for(const [z,cap,reverse,join] of [[z0,capStart,true,startJoin],[z1,capEnd,false,endJoin]])if(cap){
+   const xs=[...new Set([left,cx,right,...(join&&join.ridge>left&&join.ridge<right?[join.ridge]:[])])].sort((a,b)=>a-b);
+   // An adjoining wider roof keeps its old ridge. Close the step to both
+   // profiles, including their exact crossing, without a floating end slot.
+   if(join){const edges=[...xs];for(let i=1;i<edges.length;i++){const a=edges[i-1],b=edges[i],da=roofY(a)-join.height(a),db=roofY(b)-join.height(b);if(da*db<0)xs.push(a+(b-a)*da/(da-db));}}
+   xs.sort((a,b)=>a-b);const capY=x=>Math.max(roofY(x),join?.height(x)??g.height);
+   for(let i=1;i<xs.length;i++){const a=xs[i-1],b=xs[i],triangles=[[0,1,2],[0,2,3]];
+    face([[a,g.height,z],[b,g.height,z],[b,capY(b),z],[a,capY(a),z]],reverse?triangles.map(t=>[...t].reverse()):triangles,brick,'Walking gallery closed roof end');
+   }
+  }
+  const geometry=new THREE.BoxGeometry(.18,.13,z1-z0);resources.add(geometry);const cap=new THREE.Mesh(geometry,ridge);cap.position.set(cx,top+.04,(z0+z1)/2);cap.name='Walking gallery roof ridge';cap.castShadow=cap.receiveShadow=true;cap.userData.noWalkingCollision=true;group.add(cap);
+ }
+}
+
+export function addWorkshopArchedWall(THREE,{group,a,b,resources,brick,finish,reveal,material,dark,isExposed=()=>true,height=8.84,liningTop=5.05,joins,windowStride=1}){
  const dx=b[0]-a[0],dz=b[1]-a[1],length=Math.hypot(dx,dz);
  if(length<2)return false;
  const wall=new THREE.Group();wall.name='Workshop exterior with semicircular windows';wall.position.set(a[0],0,a[1]);wall.rotation.y=-Math.atan2(dz,dx);group.add(wall);
  const detailLength=Math.max(4,length);
- addAdminCorridorDetail(THREE,{corridor:wall,start:(length-detailLength)/2,end:(length+detailLength)/2,cz:.1425,depth:.285,height,brick,material,worldUV:g=>g,
+ addAdminCorridorDetail(THREE,{corridor:wall,start:(length-detailLength)/2,end:(length+detailLength)/2,cz:.1425,depth:.285,height,brick,material,worldUV:g=>g,windowStride,windowReverse:dx<0||dx===0&&dz<0,
   omitWindow:distance=>[-.75,0,.75].some(offset=>!isExposed(a[0]+dx/length*(distance+offset)+dz/length*.4,a[1]+dz/length*(distance+offset)-dx/length*.4))});
  wall.traverse(o=>{if(o.isMesh){resources.add(o.geometry);if(o.material!==brick&&o.material!==finish)resources.add(o.material);}});
  // Use the established window assemblies on both faces, with the existing
@@ -41,7 +74,7 @@ export function addWorkshopArchedWall(THREE,{group,a,b,resources,brick,finish,re
 
 // Remove passage volumes and any supplied room volumes from adjoining shells.
 // Original vertex attributes survive; the caller retains originals for replay.
-export function galleryShellRemainders(THREE,object,resources,extraVolumes=[]){
+export function galleryShellRemainders(THREE,object,resources,extraVolumes=[],runs=ESCAPE_CORRIDOR_RUNS){
  const g=WORKSHOP_GALLERY,result=[];
  // Keep authored concave courts open after clipping. A hull of an entire ward
  // bridges its inward corners and turns empty lawn into invisible masonry.
@@ -49,14 +82,14 @@ export function galleryShellRemainders(THREE,object,resources,extraVolumes=[]){
  const triangles=footprints.flatMap(points=>THREE.ShapeUtils.triangulateShape(points.map(([x,z])=>new THREE.Vector2(x,z)),[]).map(indices=>indices.map(i=>points[i])));
  let pieces=[object.geometry];
  // Clip in each run's local frame, so diagonal shells retain exact bounds.
- for(const run of [...ESCAPE_CORRIDOR_RUNS,...extraVolumes]){
+ for(const run of [...runs,...extraVolumes]){
  const dx=run.end[0]-run.start[0],dz=run.end[1]-run.start[1],length=Math.hypot(dx,dz),frame=new THREE.Matrix4().makeRotationY(-Math.atan2(dz,dx));frame.setPosition(run.start[0],0,run.start[1]);
- const transform=frame.clone().invert().multiply(object.matrixWorld),nextPieces=[],startPadding=run.startPadding??.32;
+ const transform=frame.clone().invert().multiply(object.matrixWorld),nextPieces=[],startPadding=run.startPadding??.32,endPadding=run.endPadding??.32;
  for(const source of pieces){
  if(!source.boundingBox)source.computeBoundingBox();const bounds=source.boundingBox.clone().applyMatrix4(transform),half=run.half??(g.maxX-g.minX)/2+.32;
- if(bounds.min.y>=g.height||bounds.max.x<-startPadding||bounds.min.x>length+.32||bounds.max.z<-half||bounds.min.z>half){nextPieces.push(source);continue;}
+ if(bounds.min.y>=g.height||bounds.max.x<-startPadding||bounds.min.x>length+endPadding||bounds.max.z<-half||bounds.min.z>half){nextPieces.push(source);continue;}
  let rest=source;
- for(const [axis,edge,sign] of [['y',g.height,1],['x',-startPadding,-1],['x',length+.32,1],['z',-half,-1],['z',half,1]]){
+ for(const [axis,edge,sign] of [['y',g.height,1],['x',-startPadding,-1],['x',length+endPadding,1],['z',-half,-1],['z',half,1]]){
   const part=clipTimelineGeometry(THREE,rest,transform,edge,sign,axis);
   const next=clipTimelineGeometry(THREE,rest,transform,edge,-sign,axis,false);
   if(rest!==object.geometry)rest.dispose();rest=next;

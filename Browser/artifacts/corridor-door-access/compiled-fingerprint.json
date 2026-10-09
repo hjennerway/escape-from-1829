@@ -1,0 +1,7 @@
+{
+  "sourceHash": "c4be4ecdb652fea8fe0b43826ebbc64871dd97ba90c893c07ec410c246324d8b",
+  "binaryHash": "e51dc3985fe991801d837006ccfc2576230d4f3cfece121c0d3ae350923ab1bd",
+  "compiledFile": "aerial-e51dc3985fe991801d83.bin.gz",
+  "rebuilt": false,
+  "reason": "Explore runtime fittings are outside the aerial and interior model compilation inputs"
+}

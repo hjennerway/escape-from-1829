@@ -2,6 +2,11 @@ Shader "Escape1829/NativeSurface"
 {
     Properties
     {
+        _VertexColours ("Vertex colours",Float)=0
+        _RoomWalls ("Room finishes",Float)=0
+        _RoomFloor ("Room floor",Float)=0
+        _RoomWallpaper ("Wallpaper",2D)="white" {}
+        _RoomPaint ("Dado paint",2D)="white" {}
         _Color ("Colour", Color) = (1,1,1,1)
         _MainTex ("Surface", 2D) = "white" {}
         _Metallic ("Metallic", Range(0,1)) = 0
@@ -43,7 +48,8 @@ Shader "Escape1829/NativeSurface"
         fixed4 _Color, _EmissionColor;
         half _Metallic, _Glossiness, _Cutoff, _Unlit, _BumpScale, _Window, _Night, _Grass, _Ceiling, _Mural;
         float _LeafTime;
-        struct Input { float2 uv_MainTex; float2 uv_EmissionMap; float2 uv_BumpMap; float3 worldPos; float3 worldNormal; INTERNAL_DATA };
+        sampler2D _RoomWallpaper,_RoomPaint;float _RoomWalls,_RoomFloor,_VertexColours;
+        struct Input { float2 uv_MainTex; float2 uv_EmissionMap; float2 uv_BumpMap; float3 worldPos; float3 worldNormal;float4 color:COLOR;float2 roomFinish; INTERNAL_DATA };
         fixed4 finishSample(sampler2D source,float2 uv){fixed4 c=tex2D(source,uv);if(_Ceiling>.5){float2 turned=mul(float2x2(.8,.6,-.6,.8),uv)*.731+float2(.37,.61);c=lerp(c,tex2D(source,turned),.45);}return c;}
         float muralMask(float2 uv){
             const float2 outline[28]={float2(25,0),float2(72,10),float2(125,26),float2(194,45),float2(280,68),float2(359,92),float2(453,119),float2(462,177),float2(466,264),float2(458,334),float2(415,379),float2(358,417),float2(287,461),float2(260,502),float2(219,528),float2(182,532),float2(141,520),float2(110,506),float2(76,491),float2(41,469),float2(43,416),float2(51,364),float2(31,310),float2(19,278),float2(10,242),float2(16,183),float2(21,98),float2(25,0)};
@@ -51,7 +57,8 @@ Shader "Escape1829/NativeSurface"
             for(int i=0;i<27;i++){float2 a=(float2(outline[i].x,532-outline[i].y)-float2(10,0))/float2(456,532);float2 b=(float2(outline[i+1].x,532-outline[i+1].y)-float2(10,0))/float2(456,532);float2 edge=(b-a)*float2(1.98857143,2.32),offset=(uv-a)*float2(1.98857143,2.32);distanceToEdge=min(distanceToEdge,length(offset-edge*saturate(dot(offset,edge)/dot(edge,edge))));if((a.y>uv.y)!=(b.y>uv.y)&&uv.x<(b.x-a.x)*(uv.y-a.y)/(b.y-a.y)+a.x)inside=!inside;}
             return inside?smoothstep(0,.1,distanceToEdge):0;
         }
-        void vert(inout appdata_full v){
+        void vert(inout appdata_full v,out Input o){
+            UNITY_INITIALIZE_OUTPUT(Input,o);o.roomFinish=v.texcoord2.xy;o.color=v.color;
 #ifdef _LEAF_WIND
             float phase=v.texcoord1.x,t=_LeafTime*.5;
             float sway=.5*sin(t+phase)+.3*sin(2*t+1.3*phase)+.2*sin(5*t+1.5*phase);
@@ -74,7 +81,9 @@ Shader "Escape1829/NativeSurface"
         void surf(Input IN, inout SurfaceOutputStandard o)
         {
             fixed4 c = finishSample(_MainTex, IN.uv_MainTex) * _Color;
+            if(_VertexColours>.5)c*=IN.color;
             float3 finishNormal=WorldNormalVector(IN,float3(0,0,1));
+            if(_RoomWalls>.5&&IN.roomFinish.x>.5){float y=IN.worldPos.y-_RoomFloor;float2 uv=float2(dot(float2(IN.worldPos.x,-IN.worldPos.z),float2(-finishNormal.z,-finishNormal.x)),y);if(y<IN.roomFinish.y/.4+.001){if(y<IN.roomFinish.y)c.rgb=tex2D(_RoomPaint,uv/1.4).rgb;else{float3 tint=IN.roomFinish.x<1.5?float3(.434154,.318547,.296138):(IN.roomFinish.x<2.5?float3(.304987,.346704,.274677):float3(.234551,.291771,.371238));c.rgb=tex2D(_RoomWallpaper,uv/float2(.95,1.18)).rgb*tint;}}}
             if(_Mural>.5&&abs(IN.worldPos.z+1.39)<.005&&finishNormal.z<-.5){
                 float2 uv=(IN.worldPos.xy-float2(-35.644285715,-2.91))/float2(1.98857143,2.32);
                 if(all(uv>=0)&&all(uv<=1)){fixed4 paint=tex2D(_MuralMap,float2(10.0/475,10.0/542)+uv*float2(456.0/475,532.0/542));c.rgb=lerp(c.rgb,paint.rgb,paint.a*muralMask(uv));}
@@ -96,7 +105,7 @@ Shader "Escape1829/NativeSurface"
             half h = finishSample(_BumpMap, IN.uv_BumpMap).r;
             half dx = finishSample(_BumpMap, IN.uv_BumpMap+float2(_BumpMap_TexelSize.x,0)).r-h;
             half dy = finishSample(_BumpMap, IN.uv_BumpMap+float2(0,_BumpMap_TexelSize.y)).r-h;
-            o.Normal = normalize(half3(-dx*_BumpScale*20,-dy*_BumpScale*20,1));
+            if(_RoomWalls<.5||IN.roomFinish.x<.5)o.Normal = normalize(half3(-dx*_BumpScale*20,-dy*_BumpScale*20,1));
 #endif
         }
         ENDCG

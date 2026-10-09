@@ -2,16 +2,19 @@ import assert from 'node:assert/strict';
 import * as THREE from './dist/vendor/three.module.js';
 import {createEscapeExterior} from './dist/escape-exterior.mjs';
 import {createAerialLayouts} from './dist/aerial-layouts.mjs';
+import {checkServiceGableJoins} from './test-support/service-gable-probes.mjs';
 import {ESCAPE_WATER_TOWER} from './dist/water-tower.mjs';
 import {ESTATE_CHIMNEY} from './dist/estate-chimney.mjs';
 import {HISTORIC_ROADS} from './dist/historic-roads.mjs';
 import {TOWER_RANGES,TOWER_ROOF_CONTACTS,TOWER_SERVICE_FRONT,TOWER_ADMIN_SHIFT,TOWER_BUILDING_VIEWS,TOWER_WORKSHOP_COPY} from './dist/tower-buildings.mjs';
 import {SERVICE_COURT_MOVES} from './dist/service-court-placement.mjs';
 import {IRBY_CORRIDOR} from './dist/irby-corridor.mjs';
+import {checkBlueRoofLanternPanes} from './test-support/blue-roof-lantern-probes.mjs';
 import {exteriorObstacles,obstacleContains,createWalker} from './dist/explore-controls.mjs';
 globalThis.document={createElement:()=>({getContext:()=>({fillRect(){},measureText:t=>({width:t.length*16}),strokeText(){},fillText(){}})})};
 const exterior=createEscapeExterior(THREE,1.5),layouts=createAerialLayouts(THREE,exterior),group=layouts.towerBuildings;
 exterior.model.updateMatrixWorld(true);
+checkServiceGableJoins(THREE,group);
 assert.equal(group.parent,layouts.historic);
 const visible=o=>{for(;o;o=o.parent)if(!o.visible)return false;return true;};
 for(const historic of [false,true])for(const modern of [false,true]){
@@ -92,6 +95,9 @@ for(const x of [150,155,161])for(const z of [-40,-38,-36.6]){
  assert(Math.abs(hit.point.y-9)<1e-5&&hit.face.normal.y>.999,'The red return must have a level roof surface');
 }
 const paired=group.userData.dormers.filter(d=>d.name.startsWith('East range'));
+const lanternOpenings=group.userData.openings.filter(o=>o.label.includes('blue dormer')&&o.label.endsWith('glazing'));
+assert.equal(lanternOpenings.length,12,'All six tower lanterns have two glazed sides');
+assert.equal(checkBlueRoofLanternPanes(THREE,group,lanternOpenings),96);
 const single=group.userData.dormers.filter(d=>d.name.startsWith('Central hall'));
 assert.equal(paired.length,2);assert.equal(single.length,1);
 assert(paired.every(d=>d.axis==='x'),'Both east-range dormer ridges must run east/west');
@@ -104,7 +110,9 @@ for(const d of paired){
  assert(Math.abs(centre.z-hostRidgeCentre.z)<1e-5,'Both protrusions must sit on the host ridge, not alongside it');
  assert(centre.x>hostRidgeBounds.min.x&&centre.x<hostRidgeBounds.max.x,'Protrusions must lie within the host ridge length');
  const glazing=group.userData.openings.find(o=>o.label===d.name+' glazing');
- assert(glazing.y-.5>hostRidgeBounds.max.y,'Ridge placement must keep the blue protrusion glazing above the slate');
+ ray.set(new THREE.Vector3(glazing.x,40,glazing.z),new THREE.Vector3(0,-1,0));
+ const host=ray.intersectObjects(group.children.filter(o=>o.isMesh&&o.name.endsWith('slate roof')&&!o.userData.blueRoofLantern))[0];
+ assert(glazing.y-glazing.h/2>host.point.y,'Tall lantern glazing must clear the host slope at its face');
 }
 for(const d of group.userData.dormers){
  const glazing=group.userData.openings.find(o=>o.label===d.name+' glazing');
@@ -114,7 +122,7 @@ for(const d of group.userData.dormers){
  else assert(glazing.x>d.x&&Math.abs(glazing.z-d.z)<1e-5,'North/south roof vents belong on the east cheeks');
  const oldFront=new THREE.Vector3(d.x,glazing.y,d.z).addScaledVector(ridgeAxis,2.8);
  ray.set(oldFront,ridgeAxis.clone().negate());
- assert.equal(ray.intersectObject(group,true)[0]?.object.name,d.name+' walls','The former ridge-end glazing face must now be plain blue');
+ assert.equal(ray.intersectObject(group,true)[0]?.object.name,d.name+' slate cheeks','Ridge ends are slate-hung; glazing faces down the roof slopes');
 }
 const centralHall=TOWER_RANGES.find(r=>r.name==='Dormered central service hall');
 assert.equal(single[0].x,(centralHall.rect[0]+centralHall.rect[2])/2);assert(Math.abs(single[0].z-(centralHall.rect[1]+centralHall.rect[3])/2)<1e-8,'Keep the single protrusion centred on the reshaped hall');

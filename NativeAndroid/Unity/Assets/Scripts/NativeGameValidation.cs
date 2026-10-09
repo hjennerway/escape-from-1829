@@ -14,6 +14,7 @@ public sealed partial class NativePrototypeGame
         // An exception in a coroutine would otherwise leave a batch player alive.
         Application.logMessageReceived+=(message,trace,type)=>{if(type==LogType.Exception||type==LogType.Error){File.WriteAllText(Path.Combine(directory,"failure.txt"),message+"\n"+trace);Application.Quit(1);}};
         Directory.CreateDirectory(directory);yield return null;paused=true;
+        yield return ExitRenderingSmoke(directory);
         yield return PresentationSmoke(directory);
         yield return NavigationSmoke(directory);
         StartAerial();paused=true;orbitTarget=new Vector3(190,5,30);orbitDistance=590;orbitYaw=192;orbitPitch=55;UpdateOrbit(0);
@@ -31,9 +32,9 @@ public sealed partial class NativePrototypeGame
         foreach(var art in manifest.art)Check(LoadArchive(art.src)!=null,"Wall artwork loads "+art.src);
         StartAerial();paused=true;locationsOpen=true;locationsScroll=Vector2.zero;Check(LocationTouch(101,new Vector2(400,191),0,TouchPhase.Began),"Phone locations accepts touch");LocationTouch(101,new Vector2(400,191),0,TouchPhase.Ended);Check(selectedBuilding>=0&&!locationsOpen,"Phone locations selects a building");CloseBuilding();
         StartInside();paused=false;HandleTap(helpButton.center);Check(help,"Touch opens help in asylum escape");HandleTap(helpResumeButton.center);Check(!help,"Touch closes help");
-        yield return LatestGameplaySmoke(directory);
+        yield return CurrentGameplaySmoke(directory);
         StartOutside();paused=false;yield return new WaitForSecondsRealtime(.5f);
-        File.WriteAllText(Path.Combine(directory,"smoke.json"),JsonUtility.ToJson(new SmokeReport{passed=true,engine=Application.unityVersion,gpu=SystemInfo.graphicsDeviceName,sourceHash=manifest.sourceHash,periods=manifest.periods.Length,archivePictures=73,exitCandidates=23,selectedExits=23,checks=smokeChecks.ToArray(),renderMilliseconds=smoothedFrame*1000},true));
+        File.WriteAllText(Path.Combine(directory,"smoke.json"),JsonUtility.ToJson(new SmokeReport{passed=true,engine=Application.unityVersion,gpu=SystemInfo.graphicsDeviceName,sourceHash=manifest.sourceHash,periods=manifest.periods.Length,archivePictures=73,exitCandidates=24,selectedExits=24,checks=smokeChecks.ToArray(),renderMilliseconds=smoothedFrame*1000},true));
         Debug.Log("NATIVE_FULL_PORT_SMOKE_PASS "+directory);Application.Quit(0);
     }
     void Capture(string directory,string name)

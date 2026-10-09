@@ -20,7 +20,9 @@ export function addEntranceWalks(THREE,{model,material}){
     [-32,27],[-29,27],[-29,33.15],[-27.5,33.15],
     [-27.5,37.85],[-29,37.85],[-29,43.2],[-27,43.2],
     [-27,39.85],[-25.5,39.85],[-25.5,31.15],[-27,31.15],
-    [-27,25],[-30,25],[-30,21.7],[-30.75,21.7],[-30.75,19.7]
+    // Bury the apron edge inside the stair's retaining wall, under its coping.
+    // Its generated gravel side otherwise shares z=21.7 with exposed masonry.
+    [-27,25],[-30,25],[-30,21.78],[-30.75,21.78],[-30.75,19.7]
   ];
   for(const side of [1,-1]){
     const label=side===1?'West':'East';

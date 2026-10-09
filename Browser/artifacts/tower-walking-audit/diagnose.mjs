@@ -1,0 +1,20 @@
+import {readFile,writeFile} from 'node:fs/promises';
+import * as THREE from '../../dist/vendor/three.module.js';
+import {createEscapeExterior} from '../../dist/escape-exterior.mjs';
+import {createAerialLayouts} from '../../dist/aerial-layouts.mjs';
+import {prepareEstateTimeline} from '../../dist/estate-timeline.mjs';
+import {createExploreWalker} from '../../dist/explore-walker.mjs';
+import {createExploreWorkshops} from '../../dist/explore-workshops.mjs';
+import {buildAsylumLayout} from '../../dist/asylum-layout.mjs';
+const context=new Proxy({},{get:(_,key)=>key==='measureText'?text=>({width:text.length*16}):/Gradient$/.test(key)?()=>({addColorStop(){}}):()=>{}});
+globalThis.document={createElement:()=>({getContext:()=>context})};
+const exterior=createEscapeExterior(THREE,1.5),layouts=createAerialLayouts(THREE,exterior),timeline=prepareEstateTimeline(THREE,exterior,layouts);
+const floors=buildAsylumLayout(JSON.parse(await readFile(new URL('../../dist/asylum-plan.json',import.meta.url)))).floors;
+const walker=createExploreWalker(THREE,exterior,floors),controller=createExploreWorkshops(THREE,exterior,walker,timeline);controller.refresh();
+exterior.model.updateMatrixWorld(true);const originals=[],visible=[];
+exterior.model.traverse(o=>{if(o.isMesh&&!o.userData.aerialBatch)originals.push(o);});exterior.model.traverseVisible(o=>{if(o.isMesh)visible.push(o);});
+const near=originals.filter(o=>/Connecting corridor/.test(o.name));
+const records=near.map(o=>{const b=new THREE.Box3().setFromObject(o);return {name:o.name,visible:o.visible,min:b.min.toArray(),max:b.max.toArray(),material:o.material.color?.getHexString()};});
+const trim=[];const matrix=new THREE.Matrix4();exterior.towerBuildings.traverse(o=>{if(o.name!=='Service glazing and trim')return;for(let i=0;i<o.count;i++){o.getMatrixAt(i,matrix);const p=new THREE.Vector3().setFromMatrixPosition(matrix),s=new THREE.Vector3().setFromMatrixScale(matrix);if(p.x<163&&p.z>-51&&p.z<-16&&p.y>6)trim.push({i,position:p.toArray(),size:s.toArray(),material:o.material.color.getHexString()});}});
+const ground=[];for(let x=157;x<191;x+=1)for(let z=-46;z<0;z+=1){const hit=new THREE.Raycaster(new THREE.Vector3(x,1,z),new THREE.Vector3(0,-1,0),0,2).intersectObjects(visible,false)[0];ground.push({x,z,y:hit?.point.y,name:hit?.object.name,color:hit?.object.material.color?.getHexString(),clear:walker.outside.clear(x,z)});}
+await writeFile(new URL('diagnosis.json',import.meta.url),JSON.stringify({records,ground,trim},null,2));console.log(JSON.stringify(records,null,2));

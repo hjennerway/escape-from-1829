@@ -1,4 +1,6 @@
 import {leaveIntro} from './intro-navigation.mjs';
+import {bindViewCache} from './view-cache.mjs';
+bindViewCache({intro:true});
 // The exterior remains available even while the interior game is loading.
 const button=document.createElement('button');
 button.id='explore';button.className='secondary';

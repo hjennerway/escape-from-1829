@@ -164,3 +164,42 @@ interaction markers appear only after discovery. The HUD names the current room.
 Run `npm run test:grounds` for the focused logic and hardware browser checks.
 The existing `test-escape-progress-browser.mjs` walkthrough now uses the pedestrian
 gate and waits for streamed interior sections before accelerated movement.
+
+## Optional water tower climb — 8 October 2026
+
+The porter’s record plants a tower inspection lead. A high lamp marks the
+lookout; the vestibule notice names the crowbar and oil in the adjoining rooms.
+Holding use for three seconds with the crowbar frees the tower entrance. Oil
+quiets the hinge; otherwise the noise can draw the existing outdoor guard to
+the workshop yard. The sound supplies a fixed investigation point, never the
+player's subsequent position. There is no valve puzzle or water diversion.
+
+Twelve flights and corner landings rise continuously to a 26.6-unit lookout
+within the tower silhouette. Normal walking and jumping use the physical
+treads, rails and landings in both directions. The existing small west window
+and all three pairs of narrow arched slits on each of the four sides provide
+views of the grounds, including rows without a walk-up landing. Their original
+surrounds and positions remain, with one masonry surface per jamb, sill and
+curved head. Movement guards contain the player at every opening. A water riser, overhead
+tank, warm lamps, drops and footstep echoes establish the interior. Nearby
+moving security produces yard footsteps and a one-time text cue, including
+when sound is disabled. The outdoor camera range increases from 150 to 600
+so the distant mast can actually appear from the tower; the outdoor near
+plane is .18 to retain depth precision. Interior clipping remains .05–150.
+
+Inspecting the lookout records directions to both gates and the mast, without
+revealing live enemy markers or unexplored map areas. The objective then
+directs the player down the same stairs. There is no countdown or new key;
+both original gate routes still work without climbing. The guard responds to
+a noisy entry while the player ascends and descends, and eventually resumes
+patrol. Oil rewards preparation with a quieter approach.
+
+Capture preserves the freed hatch, oil applied and lookout discovery; carried
+tools still return to their benches. Retry resets tower progress and restores
+the original estate before constructing the next runtime interior. Reading
+and pause suspend progress; ambience runs only during play. These are Browser
+Escape fittings, not historical evidence or changes to Explore/Aerial/native.
+
+Run `npm run test:tower` for physical ascent/descent, both noise branches,
+evidence, pause, capture/retry, original restoration and GPU desktop/touch
+checks. Captures and receipts are in `Browser/artifacts/escape-tower/`.

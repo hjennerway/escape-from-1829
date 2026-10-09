@@ -1,0 +1,24 @@
+{
+  "code": 0,
+  "failures": [
+    {
+      "method": "deepEqual",
+      "actual": {
+        "count": 21634,
+        "digest": "a344c02cd294d9d0c19578b4252404173eb2a52a63e60999e16cabe4a6f105d8"
+      },
+      "expected": {
+        "count": 21634,
+        "digest": "207094ad7ef83c4cc5558f0f1bf081f0a686f08c650333c73393eba78f3501b5"
+      },
+      "message": "Approved annexe local geometry remains unchanged",
+      "stack": [
+        "    at assert.<computed> [as deepEqual] (file:///C:/Users/Harry/Documents/_escape-from-1829/Browser/artifacts/ward-placement-reference/capture-snapshot-mismatches.mjs:9:14)",
+        "    at file:///C:/Users/Harry/Documents/_escape-from-1829/Browser/artifacts/snapshot-annexe-shape.mjs:21:105",
+        "    at ModuleJob.run (node:internal/modules/esm/module_job:561:25)",
+        "    at async node:internal/modules/esm/loader:647:26",
+        "    at async asyncRunEntryPointWithESMLoader (node:internal/modules/run_main:101:5)"
+      ]
+    }
+  ]
+}

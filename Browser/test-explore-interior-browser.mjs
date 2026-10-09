@@ -12,7 +12,7 @@ try{
  page.setDefaultTimeout(120000);page.setDefaultNavigationTimeout(120000);
  page.on('pageerror',e=>errors.push(e.message));page.on('console',m=>{if(m.type()==='error'&&/THREE|WebGL|shader/.test(m.text()))errors.push(m.text());});page.on('request',r=>requests.push(r.url()));
  await page.route('**/explore.mjs',async route=>{const response=await route.fetch();await route.fulfill({response,body:(await response.text()).replace('const clock=new THREE.Timer();','window.exploreTest={walker,exterior,interior,renderer,lighting,floors,input};const clock=new THREE.Timer();')});});
- await page.goto(base+'/explore.html');await page.waitForFunction(()=>window.exploreTest?.renderer.info.render.frame>2&&window.exploreTest.interior.scene.userData.interiorSectionsComplete);
+ await page.goto(base+'/explore.html');await page.waitForFunction(()=>window.exploreTest?.renderer.info.render.frame>2&&window.exploreTest.interior.scene?.userData.interiorSectionsComplete);
  assert.equal(await page.locator('[data-lighting="dusk"]').getAttribute('aria-pressed'),'true');
  assert(!requests.some(url=>/\/(?:game|notebook|security-guard)\.mjs/.test(url)),'Exploration does not load game characters or notebook');
  assert.equal(await page.locator('#notebook,#floorMap,#miniMap,#hud').count(),0);

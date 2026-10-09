@@ -1,0 +1,41 @@
+npm notice run test:interior-loading
+npm notice run node test-interior-loading.mjs && node test-interior-loading-browser.mjs
+PASS: ten contiguous sections, every entrance/stair assigned, compiled bounds/materials and complete source surface-area preservation.
+Hardware GPU: ANGLE (NVIDIA, NVIDIA GeForce RTX 3090 Ti (0x00002203) Direct3D11 vs_5_0 ps_5_0, D3D11)
+Loading check: entry ready 1 sections
+Loading check: entry ready 1 sections
+PASS: assets/worker fallback, desktop/mobile, gated failed entry and retry, every entrance/stair, cached return, replay furniture, frame and memory measurements.
+[
+  {
+    "name": "assets",
+    "initialSections": 1,
+    "frames": {
+      "count": 83,
+      "median": 16.700000000186265,
+      "p99": 64,
+      "maximum": 64
+    },
+    "heapBytes": 231136632,
+    "retainedGeometryBufferBytes": 23437868,
+    "firstReadyMilliseconds": 1663.9000000003725,
+    "maxRestore": 1.7000000001862645,
+    "maxFurniture": 4.300000000279397,
+    "maxUpload": 110.70000000018626
+  },
+  {
+    "name": "worker-mobile",
+    "initialSections": 1,
+    "frames": {
+      "count": 193,
+      "median": 16.699999999720603,
+      "p99": 23.399999999906868,
+      "maximum": 36.39999999990687
+    },
+    "heapBytes": 130619391,
+    "retainedGeometryBufferBytes": 23437868,
+    "firstReadyMilliseconds": 2603.2000000001863,
+    "maxRestore": 1.7999999998137355,
+    "maxFurniture": 4.300000000279397,
+    "maxUpload": 146.89999999990687
+  }
+]

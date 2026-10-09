@@ -1,5 +1,25 @@
 # Jarman lawn frontage — 24 September 2026
 
+## Snapshot reconciliation — 8 October 2026
+
+The owner's request to repair the remaining outdated tests advances the estate
+reference to 818,883 primitives. The independent historical reconstruction again
+matches the `db70a03` count/hash recorded by the 5 October audit; that audit's
+reviewed result matches the previously saved reference. The current comparison
+retains 815,956 records exactly and 262 further records differ only in roof UVs.
+Structural differences remain in the documented 1829 roof/facade/basement and
+ground repairs, church/Churton approach paving, water-tower photo refinements,
+Larkton door strips and approved pipe grouping/clearance. The net change since
+the 5 October reference is minus 65 primitives.
+
+`Browser/artifacts/ward-placement-reference/reviewed-estate-audit.json` records
+the primitive differences and reasons. Its refresh script checks the historical
+audit chain, every changed region, the exact earlier entrance-path translation,
+stable modelling inputs and fresh production fingerprints. Scope exclusions
+and all frontage, glazing, collision and visibility assertions remain enabled.
+An unrelated 0.01-unit annexe-wall movement is rejected by the refreshed check.
+Only test references change; building sources and exports are unchanged.
+
 ## Snapshot reconciliation — 5 October 2026
 
 The owner's request to fix the tests advances the protected estate reference

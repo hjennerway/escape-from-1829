@@ -116,14 +116,26 @@ export function addCourtyardPhotoDetails(THREE,{model,box,mesh,worldUV,white,bri
   }
 
   // Low brick enclosure with a sloping glazed top in the inset right corner.
-  mesh(worldUV(new THREE.BoxGeometry(5.1,3.9,2),1.7),brick,41.3,1.95,5.7,true).name='Courtyard glazed lean-to';
+  // Keep the existing pitch and front eave, extending its high edge into the
+  // inset wall at z=7. The masonry follows the underside of that same plane.
+  const pitch=.72,frontZ=4.7,backZ=7.02,roofFrontZ=5.25-1.4*Math.cos(pitch);
+  const roofBackZ=7.04,roofZ=(roofFrontZ+roofBackZ)/2;
+  const roofY=z=>4.65+(z-5.25)*Math.tan(pitch),thickness=.09;
+  const wallTop=z=>roofY(z)-thickness/(2*Math.cos(pitch))+.003;
+  const height=wallTop(backZ),depth=backZ-frontZ,wallZ=(frontZ+backZ)/2;
+  const walls=new THREE.BoxGeometry(5.1,height,depth),vertices=walls.attributes.position;
+  for(let i=0;i<vertices.count;i++)if(vertices.getY(i)>0)
+    vertices.setY(i,wallTop(wallZ+vertices.getZ(i))-height/2);
+  walls.computeVertexNormals();
+  mesh(worldUV(walls,1.7),brick,41.3,height/2,wallZ,true).name='Courtyard glazed lean-to';
   const leanGlass=material(0xa2aea9,{roughness:.55,metalness:.1});
-  const glazing=mesh(new THREE.BoxGeometry(5.15,.09,2.8),leanGlass,41.3,4.65,5.25);
-  glazing.rotation.x=-.72;
+  const roofLength=(roofBackZ-roofFrontZ)/Math.cos(pitch);
+  const glazing=mesh(new THREE.BoxGeometry(5.15,thickness,roofLength),leanGlass,41.3,roofY(roofZ),roofZ,true);
+  glazing.rotation.x=-pitch;glazing.name='Courtyard lean-to glazed roof';
   for(const x of [38.78,40.45,42.15,43.82]){
-    const bar=mesh(new THREE.BoxGeometry(.075,.12,2.9),frame,x,4.71,5.25);bar.rotation.x=-.72;
+    const bar=mesh(new THREE.BoxGeometry(.075,.12,roofLength+.1),frame,x,roofY(roofZ)+.06,roofZ);bar.rotation.x=-pitch;
   }
-  for(const offset of [-1.4,0,1.4])box(frame,41.3,4.71+offset*Math.sin(.72),5.25+offset*Math.cos(.72),5.25,.09,.09);
+  for(const z of [roofFrontZ,roofZ,roofBackZ])box(frame,41.3,roofY(z)+.06,z,5.25,.09,.09);
   // Gutters, vertical soil pipes and branching waste pipes are distinctive in
   // the photograph, particularly between the paired window groups.
   for(const [x,z,h] of [[45.4,4.1,13.8],[48.1,4.1,13.8],[52.7,4.1,13.8],[66.08,7.08,13.8],[37.23,-3,WING_ROOF_JOIN.wall]])
@@ -131,9 +143,8 @@ export function addCourtyardPhotoDetails(THREE,{model,box,mesh,worldUV,white,bri
   for(const x of [48.1,52.7])for(const y of [4.3,9.1])rod([x,y,4.09],[x+1.65,y,4.09],.04);
   rod([45.4,3.5,4.1],[43.8,3.5,4.1],.045);
   for(const x of [47.5,54.5,62])box(stone,x,7.75,4.19,.36,.28,.12);
-  // Small yellow grit bin and low planting beds, keeping the court open.
-  const yellow=material(0xbda240),soil=material(0x635343),leaf=material(0x536143),rust=material(0x795448);
-  box(yellow,47.9,.54,3.3,1.35,.85,.85);box(yellow,47.9,.99,3.3,1.42,.16,.9);
+  // Low planting beds retain the open court; the marked grit bin is removed.
+  const soil=material(0x635343),leaf=material(0x536143),rust=material(0x795448);
   box(soil,61.2,.23,-2.6,8.5,.25,1.3);
   for(let i=0;i<15;i++){
     const shrub=mesh(new THREE.IcosahedronGeometry(.44,1),i%3?leaf:rust,57.5+i*.52,.56,-2.6+Math.sin(i*2)*.23);

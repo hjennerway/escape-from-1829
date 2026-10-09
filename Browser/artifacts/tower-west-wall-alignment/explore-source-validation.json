@@ -1,0 +1,31 @@
+{
+  "model": {
+    "mode": "procedural",
+    "milliseconds": 3486.9000000003725
+  },
+  "renderer": "ANGLE (NVIDIA, NVIDIA GeForce RTX 3090 Ti (0x00002203) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+  "checks": {
+    "walls": [],
+    "base": [],
+    "roof": [],
+    "windows": []
+  },
+  "movement": [
+    {
+      "z": -72,
+      "x": 143,
+      "blocked": true
+    },
+    {
+      "z": -67,
+      "x": 145.06666666666655,
+      "blocked": true
+    },
+    {
+      "z": -62,
+      "x": 145.06666666666655,
+      "blocked": true
+    }
+  ],
+  "errors": []
+}

@@ -1,0 +1,36 @@
+{
+  "results": {
+    "renderer": "ANGLE (NVIDIA, NVIDIA GeForce RTX 3090 Ti (0x00002203) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+    "model": {
+      "mode": "procedural",
+      "milliseconds": 4833.199999999255
+    },
+    "threshold": [
+      {
+        "name": "inside-down",
+        "samples": 1190,
+        "changed": 0,
+        "maximum": 0
+      },
+      {
+        "name": "inside-left",
+        "samples": 1190,
+        "changed": 1190,
+        "maximum": 78
+      },
+      {
+        "name": "inside-right",
+        "samples": 1190,
+        "changed": 170,
+        "maximum": 67
+      },
+      {
+        "name": "outside-down",
+        "samples": 1190,
+        "changed": 910,
+        "maximum": 77
+      }
+    ]
+  },
+  "errors": []
+}

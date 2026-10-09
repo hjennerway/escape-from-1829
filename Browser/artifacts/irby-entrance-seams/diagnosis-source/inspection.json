@@ -1,0 +1,3683 @@
+{
+  "model": {
+    "mode": "procedural",
+    "milliseconds": 2989.5
+  },
+  "receipts": [
+    {
+      "name": "approach-far",
+      "samples": [
+        {
+          "px": 430,
+          "py": 336,
+          "hits": [
+            {
+              "name": "Workshop arched painted lining",
+              "parent": "Workshop exterior with semicircular windows",
+              "point": [
+                220.2261482851985,
+                0.7759183685146644,
+                -68.16812499821185
+              ]
+            },
+            {
+              "name": "Workshop arched exterior masonry",
+              "parent": "Workshop exterior with semicircular windows",
+              "point": [
+                220.5359081048838,
+                0.7448979556803357,
+                -68.21562500536442
+              ]
+            },
+            {
+              "name": "Aerial batch · Tower corridor and three workshops · 869",
+              "parent": "Tower corridor and three workshops",
+              "point": [
+                221.52999877929688,
+                0.645346299347441,
+                -68.36806347912416
+              ]
+            }
+          ]
+        },
+        {
+          "px": 450,
+          "py": 336,
+          "hits": [
+            {
+              "name": "Aerial batch · Tower corridor and three workshops · 869",
+              "parent": "Tower corridor and three workshops",
+              "point": [
+                221.52999877929688,
+                0.6453462993474406,
+                -67.8869577705188
+              ]
+            },
+            {
+              "name": "Aerial batch · Tower corridor and three workshops · 868",
+              "parent": "Tower corridor and three workshops",
+              "point": [
+                221.6999969482422,
+                0.6283220985097684,
+                -67.90593266103579
+              ]
+            },
+            {
+              "name": "Aerial batch · Period · The Main · 165",
+              "parent": "Period · The Main",
+              "point": [
+                224.57908822967892,
+                0.3400000035762789,
+                -68.22729166268036
+              ]
+            }
+          ]
+        },
+        {
+          "px": 475,
+          "py": 336,
+          "hits": [
+            {
+              "name": "Irby green door leaf",
+              "parent": "Irby green opening door",
+              "point": [
+                221.76799999999997,
+                0.6215120392139446,
+                -67.29972722671656
+              ]
+            },
+            {
+              "name": "Aerial batch · Period · The Main · 165",
+              "parent": "Period · The Main",
+              "point": [
+                224.57908822967894,
+                0.34000000357627846,
+                -67.4668749978764
+              ]
+            },
+            {
+              "name": "Aerial batch · Tower north court lane border · 98",
+              "parent": "Tower north court lane border",
+              "point": [
+                226.67822478605157,
+                0.12978525512870331,
+                -67.59169000476713
+              ]
+            }
+          ]
+        },
+        {
+          "px": 503,
+          "py": 336,
+          "hits": [
+            {
+              "name": "Irby green door leaf",
+              "parent": "Irby green opening door",
+              "point": [
+                221.76799999999997,
+                0.6215120392139443,
+                -66.61227591625827
+              ]
+            },
+            {
+              "name": "Aerial batch · Period · The Main · 165",
+              "parent": "Period · The Main",
+              "point": [
+                224.57908822967892,
+                0.34000000357627913,
+                -66.61520833329621
+              ]
+            },
+            {
+              "name": "Aerial batch · Tower north court lane border · 98",
+              "parent": "Tower north court lane border",
+              "point": [
+                228.24844531403866,
+                -0.02746202461397984,
+                -66.61903606275656
+              ]
+            }
+          ]
+        },
+        {
+          "px": 530,
+          "py": 336,
+          "hits": [
+            {
+              "name": "Irby green door leaf",
+              "parent": "Irby green opening door",
+              "point": [
+                221.76799999999997,
+                0.6215120392139446,
+                -65.94937643831616
+              ]
+            },
+            {
+              "name": "Aerial batch · Period · The Main · 165",
+              "parent": "Period · The Main",
+              "point": [
+                224.57908822967894,
+                0.3400000035762787,
+                -65.79395833530792
+              ]
+            },
+            {
+              "name": "Estate terrain",
+              "parent": "1829 estate · aerial reconstruction",
+              "point": [
+                229.47206994350088,
+                -0.149999999999987,
+                -65.52343750000026
+              ]
+            }
+          ]
+        },
+        {
+          "px": 560,
+          "py": 336,
+          "hits": [
+            {
+              "name": "Aerial batch · Tower corridor and three workshops · 869",
+              "parent": "Tower corridor and three workshops",
+              "point": [
+                221.52999877929688,
+                0.6453462993474406,
+                -65.24087637319018
+              ]
+            },
+            {
+              "name": "Aerial batch · Tower corridor and three workshops · 868",
+              "parent": "Tower corridor and three workshops",
+              "point": [
+                221.6999969482422,
+                0.6283220985097686,
+                -65.22083747012084
+              ]
+            },
+            {
+              "name": "Aerial batch · Period · The Main · 165",
+              "parent": "Period · The Main",
+              "point": [
+                224.57908822967892,
+                0.3400000035762789,
+                -64.88145833754287
+              ]
+            }
+          ]
+        },
+        {
+          "px": 585,
+          "py": 336,
+          "hits": [
+            {
+              "name": "Workshop arched painted lining",
+              "parent": "Workshop exterior with semicircular windows",
+              "point": [
+                219.22235458849164,
+                0.8764417188445399,
+                -65.03187500178814
+              ]
+            },
+            {
+              "name": "Workshop arched exterior masonry",
+              "parent": "Workshop exterior with semicircular windows",
+              "point": [
+                219.50170853630598,
+                0.8484662545092873,
+                -64.98437499463557
+              ]
+            },
+            {
+              "name": "Aerial batch · Tower corridor and three workshops · 868",
+              "parent": "Tower corridor and three workshops",
+              "point": [
+                221.6999969482422,
+                0.6283220985097684,
+                -64.61058856309472
+              ]
+            }
+          ]
+        },
+        {
+          "px": 430,
+          "py": 340,
+          "hits": [
+            {
+              "name": "Workshop arched painted lining",
+              "parent": "Workshop exterior with semicircular windows",
+              "point": [
+                220.22614828519852,
+                0.6905782325575545,
+                -68.16812499821185
+              ]
+            },
+            {
+              "name": "Workshop arched exterior masonry",
+              "parent": "Workshop exterior with semicircular windows",
+              "point": [
+                220.5359081048838,
+                0.6569727853203651,
+                -68.21562500536442
+              ]
+            },
+            {
+              "name": "Aerial batch · Tower corridor and three workshops · 869",
+              "parent": "Tower corridor and three workshops",
+              "point": [
+                221.52999877929688,
+                0.5491251576263962,
+                -68.36806347912416
+              ]
+            }
+          ]
+        },
+        {
+          "px": 450,
+          "py": 340,
+          "hits": [
+            {
+              "name": "Aerial batch · Tower corridor and three workshops · 869",
+              "parent": "Tower corridor and three workshops",
+              "point": [
+                221.52999877929688,
+                0.549125157626396,
+                -67.8869577705188
+              ]
+            },
+            {
+              "name": "Aerial batch · Tower corridor and three workshops · 868",
+              "parent": "Tower corridor and three workshops",
+              "point": [
+                221.6999969482422,
+                0.5306822733855845,
+                -67.90593266103579
+              ]
+            },
+            {
+              "name": "Aerial batch · Period · The Main · 165",
+              "parent": "Period · The Main",
+              "point": [
+                223.45761990431905,
+                0.3400000035762787,
+                -68.10211538093571
+              ]
+            }
+          ]
+        },
+        {
+          "px": 475,
+          "py": 340,
+          "hits": [
+            {
+              "name": "Irby green door leaf",
+              "parent": "Irby green opening door",
+              "point": [
+                221.76799999999997,
+                0.5233047091484414,
+                -67.29972722671656
+              ]
+            },
+            {
+              "name": "Aerial batch · Period · The Main · 165",
+              "parent": "Period · The Main",
+              "point": [
+                223.45761990431905,
+                0.3400000035762787,
+                -67.40019230573206
+              ]
+            },
+            {
+              "name": "Aerial batch · Tower north court lane border · 98",
+              "parent": "Tower north court lane border",
+              "point": [
+                226.67822478605157,
+                -0.00939930694390223,
+                -67.59169000476713
+              ]
+            }
+          ]
+        },
+        {
+          "px": 503,
+          "py": 340,
+          "hits": [
+            {
+              "name": "Irby green door leaf",
+              "parent": "Irby green opening door",
+              "point": [
+                221.76799999999997,
+                0.5233047091484412,
+                -66.61227591625827
+              ]
+            },
+            {
+              "name": "Aerial batch · Period · The Main · 165",
+              "parent": "Period · The Main",
+              "point": [
+                223.45761990431905,
+                0.34000000357627846,
+                -66.6140384615042
+              ]
+            },
+            {
+              "name": "Estate terrain",
+              "parent": "1829 estate · aerial reconstruction",
+              "point": [
+                227.9742184093855,
+                -0.14999999999999075,
+                -66.61875000000016
+              ]
+            }
+          ]
+        },
+        {
+          "px": 530,
+          "py": 340,
+          "hits": [
+            {
+              "name": "Irby green door leaf",
+              "parent": "Irby green opening door",
+              "point": [
+                221.76799999999997,
+                0.5233047091484414,
+                -65.94937643831616
+              ]
+            },
+            {
+              "name": "Aerial batch · Period · The Main · 165",
+              "parent": "Period · The Main",
+              "point": [
+                223.45761990431905,
+                0.34000000357627846,
+                -65.85596154028423
+              ]
+            },
+            {
+              "name": "Estate terrain",
+              "parent": "1829 estate · aerial reconstruction",
+              "point": [
+                227.9742184093855,
+                -0.14999999999999097,
+                -65.60625000000023
+              ]
+            }
+          ]
+        },
+        {
+          "px": 560,
+          "py": 340,
+          "hits": [
+            {
+              "name": "Aerial batch · Tower corridor and three workshops · 869",
+              "parent": "Tower corridor and three workshops",
+              "point": [
+                221.52999877929688,
+                0.5491251576263958,
+                -65.24087637319018
+              ]
+            },
+            {
+              "name": "Aerial batch · Tower corridor and three workshops · 868",
+              "parent": "Tower corridor and three workshops",
+              "point": [
+                221.6999969482422,
+                0.5306822733855843,
+                -65.22083747012084
+              ]
+            },
+            {
+              "name": "Aerial batch · Period · The Main · 165",
+              "parent": "Period · The Main",
+              "point": [
+                223.45761990431905,
+                0.34000000357627846,
+                -65.01365385003956
+              ]
+            }
+          ]
+        },
+        {
+          "px": 585,
+          "py": 340,
+          "hits": [
+            {
+              "name": "Workshop arched painted lining",
+              "parent": "Workshop exterior with semicircular windows",
+              "point": [
+                219.22235458849164,
+                0.7994785287482529,
+                -65.03187500178814
+              ]
+            },
+            {
+              "name": "Workshop arched exterior masonry",
+              "parent": "Workshop exterior with semicircular windows",
+              "point": [
+                219.50170853630598,
+                0.769171775718396,
+                -64.98437499463557
+              ]
+            },
+            {
+              "name": "Aerial batch · Tower corridor and three workshops · 868",
+              "parent": "Tower corridor and three workshops",
+              "point": [
+                221.6999969482422,
+                0.5306822733855843,
+                -64.61058856309472
+              ]
+            }
+          ]
+        },
+        {
+          "px": 430,
+          "py": 342,
+          "hits": [
+            {
+              "name": "Workshop arched painted lining",
+              "parent": "Workshop exterior with semicircular windows",
+              "point": [
+                220.2261482851985,
+                0.6479081645789941,
+                -68.16812499821185
+              ]
+            },
+            {
+              "name": "Workshop arched exterior masonry",
+              "parent": "Workshop exterior with semicircular windows",
+              "point": [
+                220.5359081048838,
+                0.6130102001403737,
+                -68.21562500536442
+              ]
+            },
+            {
+              "name": "Aerial batch · Tower corridor and three workshops · 869",
+              "parent": "Tower corridor and three workshops",
+              "point": [
+                221.52999877929688,
+                0.5010145867658671,
+                -68.36806347912416
+              ]
+            }
+          ]
+        },
+        {
+          "px": 450,
+          "py": 342,
+          "hits": [
+            {
+              "name": "Aerial batch · Tower corridor and three workshops · 869",
+              "parent": "Tower corridor and three workshops",
+              "point": [
+                221.52999877929688,
+                0.5010145867658666,
+                -67.8869577705188
+              ]
+            },
+            {
+              "name": "Aerial batch · Tower corridor and three workshops · 868",
+              "parent": "Tower corridor and three workshops",
+              "point": [
+                221.6999969482422,
+                0.4818623608234853,
+                -67.90593266103579
+              ]
+            },
+            {
+              "name": "Aerial batch · Period · The Main · 165",
+              "parent": "Period · The Main",
+              "point": [
+                222.95918953749234,
+                0.3400000035762787,
+                -68.04648147793809
+              ]
+            }
+          ]
+        },
+        {
+          "px": 475,
+          "py": 342,
+          "hits": [
+            {
+              "name": "Irby green door leaf",
+              "parent": "Irby green opening door",
+              "point": [
+                221.76799999999997,
+                0.4742010441156831,
+                -67.29972722671656
+              ]
+            },
+            {
+              "name": "Aerial batch · Period · The Main · 165",
+              "parent": "Period · The Main",
+              "point": [
+                222.95918953749234,
+                0.34000000357627846,
+                -67.37055555366791
+              ]
+            },
+            {
+              "name": "Aerial batch · Tower north court lane border · 98",
+              "parent": "Tower north court lane border",
+              "point": [
+                226.67822478605157,
+                -0.07899158798021522,
+                -67.59169000476713
+              ]
+            }
+          ]
+        },
+        {
+          "px": 503,
+          "py": 342,
+          "hits": [
+            {
+              "name": "Irby green door leaf",
+              "parent": "Irby green opening door",
+              "point": [
+                221.76799999999997,
+                0.47420104411568365,
+                -66.61227591625827
+              ]
+            },
+            {
+              "name": "Aerial batch · Period · The Main · 165",
+              "parent": "Period · The Main",
+              "point": [
+                222.95918953749234,
+                0.34000000357627846,
+                -66.61351851848552
+              ]
+            },
+            {
+              "name": "Estate terrain",
+              "parent": "1829 estate · aerial reconstruction",
+              "point": [
+                227.30850661644516,
+                -0.14999999999998498,
+                -66.61805555555571
+              ]
+            }
+          ]
+        },
+        {
+          "px": 530,
+          "py": 342,
+          "hits": [
+            {
+              "name": "Irby green door leaf",
+              "parent": "Irby green opening door",
+              "point": [
+                221.76799999999997,
+                0.4742010441156831,
+                -65.94937643831616
+              ]
+            },
+            {
+              "name": "Aerial batch · Period · The Main · 165",
+              "parent": "Period · The Main",
+              "point": [
+                222.95918953749234,
+                0.3400000035762789,
+                -65.88351852027371
+              ]
+            },
+            {
+              "name": "Estate terrain",
+              "parent": "1829 estate · aerial reconstruction",
+              "point": [
+                227.30850661644516,
+                -0.1499999999999852,
+                -65.64305555555578
+              ]
+            }
+          ]
+        },
+        {
+          "px": 560,
+          "py": 342,
+          "hits": [
+            {
+              "name": "Aerial batch · Tower corridor and three workshops · 869",
+              "parent": "Tower corridor and three workshops",
+              "point": [
+                221.52999877929688,
+                0.5010145867658669,
+                -65.24087637319018
+              ]
+            },
+            {
+              "name": "Aerial batch · Tower corridor and three workshops · 868",
+              "parent": "Tower corridor and three workshops",
+              "point": [
+                221.6999969482422,
+                0.48186236082348577,
+                -65.22083747012084
+              ]
+            },
+            {
+              "name": "Aerial batch · Period · The Main · 165",
+              "parent": "Period · The Main",
+              "point": [
+                222.95918953749234,
+                0.3400000035762787,
+                -65.07240741114921
+              ]
+            }
+          ]
+        },
+        {
+          "px": 585,
+          "py": 342,
+          "hits": [
+            {
+              "name": "Workshop arched painted lining",
+              "parent": "Workshop exterior with semicircular windows",
+              "point": [
+                219.22235458849164,
+                0.7609969337001043,
+                -65.03187500178814
+              ]
+            },
+            {
+              "name": "Workshop arched exterior masonry",
+              "parent": "Workshop exterior with semicircular windows",
+              "point": [
+                219.50170853630596,
+                0.729524536322945,
+                -64.98437499463557
+              ]
+            },
+            {
+              "name": "Aerial batch · Tower corridor and three workshops · 868",
+              "parent": "Tower corridor and three workshops",
+              "point": [
+                221.6999969482422,
+                0.48186236082348577,
+                -64.61058856309472
+              ]
+            }
+          ]
+        },
+        {
+          "px": 430,
+          "py": 343,
+          "hits": [
+            {
+              "name": "Workshop arched painted lining",
+              "parent": "Workshop exterior with semicircular windows",
+              "point": [
+                220.2261482851985,
+                0.6265731305897164,
+                -68.16812499821185
+              ]
+            },
+            {
+              "name": "Workshop arched exterior masonry",
+              "parent": "Workshop exterior with semicircular windows",
+              "point": [
+                220.5359081048838,
+                0.5910289075503814,
+                -68.21562500536442
+              ]
+            },
+            {
+              "name": "Aerial batch · Tower corridor and three workshops · 869",
+              "parent": "Tower corridor and three workshops",
+              "point": [
+                221.52999877929688,
+                0.4769593013356057,
+                -68.36806347912416
+              ]
+            }
+          ]
+        },
+        {
+          "px": 450,
+          "py": 343,
+          "hits": [
+            {
+              "name": "Aerial batch · Tower corridor and three workshops · 869",
+              "parent": "Tower corridor and three workshops",
+              "point": [
+                221.52999877929688,
+                0.4769593013356055,
+                -67.8869577705188
+              ]
+            },
+            {
+              "name": "Aerial batch · Tower corridor and three workshops · 868",
+              "parent": "Tower corridor and three workshops",
+              "point": [
+                221.6999969482422,
+                0.45745240454243974,
+                -67.90593266103579
+              ]
+            },
+            {
+              "name": "Aerial batch · Period · The Main · 165",
+              "parent": "Period · The Main",
+              "point": [
+                222.72356790953793,
+                0.3400000035762787,
+                -68.02018181470285
+              ]
+            }
+          ]
+        },
+        {
+          "px": 475,
+          "py": 343,
+          "hits": [
+            {
+              "name": "Irby green door leaf",
+              "parent": "Irby green opening door",
+              "point": [
+                221.76799999999997,
+                0.4496492115993076,
+                -67.29972722671656
+              ]
+            },
+            {
+              "name": "Aerial batch · Period · The Main · 165",
+              "parent": "Period · The Main",
+              "point": [
+                222.72356790953793,
+                0.3400000035762787,
+                -67.35654545269213
+              ]
+            },
+            {
+              "name": "Aerial batch · Tower north court lane border · 98",
+              "parent": "Tower north court lane border",
+              "point": [
+                226.67822478605157,
+                -0.11378772849836594,
+                -67.59169000476713
+              ]
+            }
+          ]
+        },
+        {
+          "px": 503,
+          "py": 343,
+          "hits": [
+            {
+              "name": "Irby green door leaf",
+              "parent": "Irby green opening door",
+              "point": [
+                221.76799999999997,
+                0.4496492115993078,
+                -66.61227591625827
+              ]
+            },
+            {
+              "name": "Aerial batch · Period · The Main · 165",
+              "parent": "Period · The Main",
+              "point": [
+                222.72356790953793,
+                0.3400000035762787,
+                -66.61327272724033
+              ]
+            },
+            {
+              "name": "Estate terrain",
+              "parent": "1829 estate · aerial reconstruction",
+              "point": [
+                226.99380649614616,
+                -0.1499999999999852,
+                -66.61772727272742
+              ]
+            }
+          ]
+        },
+        {
+          "px": 530,
+          "py": 343,
+          "hits": [
+            {
+              "name": "Irby green door leaf",
+              "parent": "Irby green opening door",
+              "point": [
+                221.76799999999997,
+                0.44964921159930726,
+                -65.94937643831616
+              ]
+            },
+            {
+              "name": "Aerial batch · Period · The Main · 165",
+              "parent": "Period · The Main",
+              "point": [
+                222.72356790953793,
+                0.3400000035762787,
+                -65.89654545626873
+              ]
+            },
+            {
+              "name": "Estate terrain",
+              "parent": "1829 estate · aerial reconstruction",
+              "point": [
+                226.9938064961462,
+                -0.14999999999998787,
+                -65.66045454545477
+              ]
+            }
+          ]
+        },
+        {
+          "px": 560,
+          "py": 343,
+          "hits": [
+            {
+              "name": "Aerial batch · Tower corridor and three workshops · 869",
+              "parent": "Tower corridor and three workshops",
+              "point": [
+                221.52999877929688,
+                0.4769593013356057,
+                -65.24087637319018
+              ]
+            },
+            {
+              "name": "Aerial batch · Tower corridor and three workshops · 868",
+              "parent": "Tower corridor and three workshops",
+              "point": [
+                221.6999969482422,
+                0.4574524045424395,
+                -65.22083747012084
+              ]
+            },
+            {
+              "name": "Aerial batch · Period · The Main · 165",
+              "parent": "Period · The Main",
+              "point": [
+                222.72356790953793,
+                0.3400000035762787,
+                -65.1001818218556
+              ]
+            }
+          ]
+        },
+        {
+          "px": 585,
+          "py": 343,
+          "hits": [
+            {
+              "name": "Workshop arched painted lining",
+              "parent": "Workshop exterior with semicircular windows",
+              "point": [
+                219.22235458849164,
+                0.7417561361760325,
+                -65.03187500178814
+              ]
+            },
+            {
+              "name": "Workshop arched exterior masonry",
+              "parent": "Workshop exterior with semicircular windows",
+              "point": [
+                219.50170853630598,
+                0.709700916625222,
+                -64.98437499463557
+              ]
+            },
+            {
+              "name": "Aerial batch · Tower corridor and three workshops · 868",
+              "parent": "Tower corridor and three workshops",
+              "point": [
+                221.6999969482422,
+                0.45745240454243974,
+                -64.61058856309472
+              ]
+            }
+          ]
+        },
+        {
+          "px": 430,
+          "py": 344,
+          "hits": [
+            {
+              "name": "Workshop arched painted lining",
+              "parent": "Workshop exterior with semicircular windows",
+              "point": [
+                220.22614828519852,
+                0.6052380966004385,
+                -68.16812499821185
+              ]
+            },
+            {
+              "name": "Workshop arched exterior masonry",
+              "parent": "Workshop exterior with semicircular windows",
+              "point": [
+                220.5359081048838,
+                0.5690476149603878,
+                -68.21562500536442
+              ]
+            },
+            {
+              "name": "Aerial batch · Tower corridor and three workshops · 869",
+              "parent": "Tower corridor and three workshops",
+              "point": [
+                221.52999877929688,
+                0.4529040159053441,
+                -68.36806347912416
+              ]
+            }
+          ]
+        },
+        {
+          "px": 450,
+          "py": 344,
+          "hits": [
+            {
+              "name": "Aerial batch · Tower corridor and three workshops · 869",
+              "parent": "Tower corridor and three workshops",
+              "point": [
+                221.52999877929688,
+                0.45290401590534457,
+                -67.8869577705188
+              ]
+            },
+            {
+              "name": "Aerial batch · Tower corridor and three workshops · 868",
+              "parent": "Tower corridor and three workshops",
+              "point": [
+                221.6999969482422,
+                0.4330424482613937,
+                -67.90593266103579
+              ]
+            },
+            {
+              "name": "Aerial batch · Period · The Main · 165",
+              "parent": "Period · The Main",
+              "point": [
+                222.49636133972479,
+                0.34000000357627846,
+                -67.99482142515458
+              ]
+            }
+          ]
+        },
+        {
+          "px": 475,
+          "py": 344,
+          "hits": [
+            {
+              "name": "Irby green door leaf",
+              "parent": "Irby green opening door",
+              "point": [
+                221.76799999999997,
+                0.42509737908293177,
+                -67.29972722671656
+              ]
+            },
+            {
+              "name": "Aerial batch · Period · The Main · 165",
+              "parent": "Period · The Main",
+              "point": [
+                222.49636133972476,
+                0.3400000035762787,
+                -67.3430357124655
+              ]
+            },
+            {
+              "name": "Aerial batch · Tower north court lane border · 98",
+              "parent": "Tower north court lane border",
+              "point": [
+                226.67822478605157,
+                -0.148583869016518,
+                -67.59169000476713
+              ]
+            }
+          ]
+        },
+        {
+          "px": 503,
+          "py": 344,
+          "hits": [
+            {
+              "name": "Irby green door leaf",
+              "parent": "Irby green opening door",
+              "point": [
+                221.76799999999997,
+                0.42509737908293155,
+                -66.61227591625827
+              ]
+            },
+            {
+              "name": "Aerial batch · Period · The Main · 165",
+              "parent": "Period · The Main",
+              "point": [
+                222.49636133972479,
+                0.34000000357627846,
+                -66.6130357142539
+              ]
+            },
+            {
+              "name": "Estate terrain",
+              "parent": "1829 estate · aerial reconstruction",
+              "point": [
+                226.69034566585785,
+                -0.1499999999999872,
+                -66.61741071428587
+              ]
+            }
+          ]
+        },
+        {
+          "px": 530,
+          "py": 344,
+          "hits": [
+            {
+              "name": "Irby green door leaf",
+              "parent": "Irby green opening door",
+              "point": [
+                221.76799999999997,
+                0.425097379082932,
+                -65.94937643831616
+              ]
+            },
+            {
+              "name": "Aerial batch · Period · The Main · 165",
+              "parent": "Period · The Main",
+              "point": [
+                222.49636133972479,
+                0.3400000035762787,
+                -65.90910714454965
+              ]
+            },
+            {
+              "name": "Estate terrain",
+              "parent": "1829 estate · aerial reconstruction",
+              "point": [
+                226.69034566585785,
+                -0.14999999999998787,
+                -65.67723214285736
+              ]
+            }
+          ]
+        },
+        {
+          "px": 560,
+          "py": 344,
+          "hits": [
+            {
+              "name": "Aerial batch · Tower corridor and three workshops · 869",
+              "parent": "Tower corridor and three workshops",
+              "point": [
+                221.52999877929688,
+                0.45290401590534435,
+                -65.24087637319018
+              ]
+            },
+            {
+              "name": "Aerial batch · Tower corridor and three workshops · 868",
+              "parent": "Tower corridor and three workshops",
+              "point": [
+                221.6999969482422,
+                0.4330424482613937,
+                -65.22083747012084
+              ]
+            },
+            {
+              "name": "Aerial batch · Period · The Main · 165",
+              "parent": "Period · The Main",
+              "point": [
+                222.49636133972476,
+                0.34000000357627913,
+                -65.12696428932246
+              ]
+            }
+          ]
+        },
+        {
+          "px": 585,
+          "py": 344,
+          "hits": [
+            {
+              "name": "Workshop arched painted lining",
+              "parent": "Workshop exterior with semicircular windows",
+              "point": [
+                219.22235458849164,
+                0.7225153386519609,
+                -65.03187500178814
+              ]
+            },
+            {
+              "name": "Workshop arched exterior masonry",
+              "parent": "Workshop exterior with semicircular windows",
+              "point": [
+                219.50170853630598,
+                0.6898772969274991,
+                -64.98437499463557
+              ]
+            },
+            {
+              "name": "Aerial batch · Tower corridor and three workshops · 868",
+              "parent": "Tower corridor and three workshops",
+              "point": [
+                221.6999969482422,
+                0.4330424482613935,
+                -64.61058856309472
+              ]
+            }
+          ]
+        },
+        {
+          "px": 430,
+          "py": 345,
+          "hits": [
+            {
+              "name": "Workshop arched painted lining",
+              "parent": "Workshop exterior with semicircular windows",
+              "point": [
+                220.22614828519852,
+                0.5839030626111614,
+                -68.16812499821185
+              ]
+            },
+            {
+              "name": "Workshop arched exterior masonry",
+              "parent": "Workshop exterior with semicircular windows",
+              "point": [
+                220.5359081048838,
+                0.5470663223703958,
+                -68.21562500536442
+              ]
+            },
+            {
+              "name": "Aerial batch · Tower corridor and three workshops · 869",
+              "parent": "Tower corridor and three workshops",
+              "point": [
+                221.52999877929688,
+                0.428848730475083,
+                -68.36806347912416
+              ]
+            }
+          ]
+        },
+        {
+          "px": 450,
+          "py": 345,
+          "hits": [
+            {
+              "name": "Aerial batch · Tower corridor and three workshops · 869",
+              "parent": "Tower corridor and three workshops",
+              "point": [
+                221.52999877929688,
+                0.4288487304750832,
+                -67.8869577705188
+              ]
+            },
+            {
+              "name": "Aerial batch · Tower corridor and three workshops · 868",
+              "parent": "Tower corridor and three workshops",
+              "point": [
+                221.6999969482422,
+                0.40863249198034746,
+                -67.90593266103579
+              ]
+            },
+            {
+              "name": "Aerial batch · Period · The Main · 165",
+              "parent": "Period · The Main",
+              "point": [
+                222.27712693025592,
+                0.3400000035762789,
+                -67.97035087383608
+              ]
+            }
+          ]
+        },
+        {
+          "px": 475,
+          "py": 345,
+          "hits": [
+            {
+              "name": "Irby green door leaf",
+              "parent": "Irby green opening door",
+              "point": [
+                221.76799999999997,
+                0.40054554656655594,
+                -67.29972722671656
+              ]
+            },
+            {
+              "name": "Aerial batch · Period · The Main · 165",
+              "parent": "Period · The Main",
+              "point": [
+                222.27712693025592,
+                0.3400000035762787,
+                -67.3299999982117
+              ]
+            },
+            {
+              "name": "Estate terrain",
+              "parent": "1829 estate · aerial reconstruction",
+              "point": [
+                226.39753258400066,
+                -0.1499999999999812,
+                -67.57499999999979
+              ]
+            }
+          ]
+        },
+        {
+          "px": 503,
+          "py": 345,
+          "hits": [
+            {
+              "name": "Irby green door leaf",
+              "parent": "Irby green opening door",
+              "point": [
+                221.76799999999997,
+                0.40054554656655617,
+                -66.61227591625827
+              ]
+            },
+            {
+              "name": "Aerial batch · Period · The Main · 165",
+              "parent": "Period · The Main",
+              "point": [
+                222.27712693025592,
+                0.3400000035762787,
+                -66.6128070175126
+              ]
+            },
+            {
+              "name": "Estate terrain",
+              "parent": "1829 estate · aerial reconstruction",
+              "point": [
+                226.39753258400071,
+                -0.14999999999998898,
+                -66.61710526315804
+              ]
+            }
+          ]
+        },
+        {
+          "px": 530,
+          "py": 345,
+          "hits": [
+            {
+              "name": "Irby green door leaf",
+              "parent": "Irby green opening door",
+              "point": [
+                221.76799999999997,
+                0.40054554656655594,
+                -65.94937643831616
+              ]
+            },
+            {
+              "name": "Aerial batch · Period · The Main · 165",
+              "parent": "Period · The Main",
+              "point": [
+                222.27712693025592,
+                0.34000000357627846,
+                -65.92122807183824
+              ]
+            },
+            {
+              "name": "Estate terrain",
+              "parent": "1829 estate · aerial reconstruction",
+              "point": [
+                226.39753258400071,
+                -0.14999999999998717,
+                -65.69342105263179
+              ]
+            }
+          ]
+        },
+        {
+          "px": 560,
+          "py": 345,
+          "hits": [
+            {
+              "name": "Aerial batch · Tower corridor and three workshops · 869",
+              "parent": "Tower corridor and three workshops",
+              "point": [
+                221.52999877929688,
+                0.4288487304750832,
+                -65.24087637319018
+              ]
+            },
+            {
+              "name": "Aerial batch · Tower corridor and three workshops · 868",
+              "parent": "Tower corridor and three workshops",
+              "point": [
+                221.6999969482422,
+                0.4086324919803477,
+                -65.22083747012084
+              ]
+            },
+            {
+              "name": "Aerial batch · Period · The Main · 165",
+              "parent": "Period · The Main",
+              "point": [
+                222.27712693025592,
+                0.3400000035762787,
+                -65.15280702108873
+              ]
+            }
+          ]
+        },
+        {
+          "px": 585,
+          "py": 345,
+          "hits": [
+            {
+              "name": "Workshop arched painted lining",
+              "parent": "Workshop exterior with semicircular windows",
+              "point": [
+                219.22235458849164,
+                0.7032745411278889,
+                -65.03187500178814
+              ]
+            },
+            {
+              "name": "Workshop arched exterior masonry",
+              "parent": "Workshop exterior with semicircular windows",
+              "point": [
+                219.50170853630598,
+                0.670053677229776,
+                -64.98437499463557
+              ]
+            },
+            {
+              "name": "Aerial batch · Tower corridor and three workshops · 868",
+              "parent": "Tower corridor and three workshops",
+              "point": [
+                221.6999969482422,
+                0.40863249198034746,
+                -64.61058856309472
+              ]
+            }
+          ]
+        },
+        {
+          "px": 430,
+          "py": 346,
+          "hits": [
+            {
+              "name": "Workshop arched painted lining",
+              "parent": "Workshop exterior with semicircular windows",
+              "point": [
+                220.2261482851985,
+                0.5625680286218844,
+                -68.16812499821185
+              ]
+            },
+            {
+              "name": "Workshop arched exterior masonry",
+              "parent": "Workshop exterior with semicircular windows",
+              "point": [
+                220.5359081048838,
+                0.5250850297804035,
+                -68.21562500536442
+              ]
+            },
+            {
+              "name": "Aerial batch · Tower corridor and three workshops · 869",
+              "parent": "Tower corridor and three workshops",
+              "point": [
+                221.52999877929688,
+                0.4047934450448216,
+                -68.36806347912416
+              ]
+            }
+          ]
+        },
+        {
+          "px": 450,
+          "py": 346,
+          "hits": [
+            {
+              "name": "Aerial batch · Tower corridor and three workshops · 869",
+              "parent": "Tower corridor and three workshops",
+              "point": [
+                221.52999877929688,
+                0.4047934450448214,
+                -67.8869577705188
+              ]
+            },
+            {
+              "name": "Aerial batch · Tower corridor and three workshops · 868",
+              "parent": "Tower corridor and three workshops",
+              "point": [
+                221.6999969482422,
+                0.384222535699301,
+                -67.90593266103579
+              ]
+            },
+            {
+              "name": "Aerial batch · Period · The Main · 165",
+              "parent": "Period · The Main",
+              "point": [
+                222.06545232801014,
+                0.34000000357627846,
+                -67.94672413463202
+              ]
+            }
+          ]
+        },
+        {
+          "px": 475,
+          "py": 346,
+          "hits": [
+            {
+              "name": "Irby green door leaf",
+              "parent": "Irby green opening door",
+              "point": [
+                221.76799999999997,
+                0.37599371405018034,
+                -67.29972722671656
+              ]
+            },
+            {
+              "name": "Aerial batch · Period · The Main · 165",
+              "parent": "Period · The Main",
+              "point": [
+                222.06545232801014,
+                0.3400000035762787,
+                -67.31741379134598
+              ]
+            },
+            {
+              "name": "Estate terrain",
+              "parent": "1829 estate · aerial reconstruction",
+              "point": [
+                226.11481650496623,
+                -0.14999999999998856,
+                -67.55818965517221
+              ]
+            }
+          ]
+        },
+        {
+          "px": 503,
+          "py": 346,
+          "hits": [
+            {
+              "name": "Irby green door leaf",
+              "parent": "Irby green opening door",
+              "point": [
+                221.76799999999997,
+                0.37599371405018034,
+                -66.61227591625827
+              ]
+            },
+            {
+              "name": "Aerial batch · Period · The Main · 165",
+              "parent": "Period · The Main",
+              "point": [
+                222.06545232801014,
+                0.3400000035762787,
+                -66.61258620686583
+              ]
+            },
+            {
+              "name": "Estate terrain",
+              "parent": "1829 estate · aerial reconstruction",
+              "point": [
+                226.1148165049662,
+                -0.14999999999998698,
+                -66.61681034482773
+              ]
+            }
+          ]
+        },
+        {
+          "px": 530,
+          "py": 346,
+          "hits": [
+            {
+              "name": "Irby green door leaf",
+              "parent": "Irby green opening door",
+              "point": [
+                221.76799999999997,
+                0.37599371405018034,
+                -65.94937643831616
+              ]
+            },
+            {
+              "name": "Aerial batch · Period · The Main · 165",
+              "parent": "Period · The Main",
+              "point": [
+                222.06545232801014,
+                0.3400000035762787,
+                -65.9329310361169
+              ]
+            },
+            {
+              "name": "Estate terrain",
+              "parent": "1829 estate · aerial reconstruction",
+              "point": [
+                226.1148165049662,
+                -0.1499999999999834,
+                -65.70905172413813
+              ]
+            }
+          ]
+        },
+        {
+          "px": 560,
+          "py": 346,
+          "hits": [
+            {
+              "name": "Aerial batch · Tower corridor and three workshops · 869",
+              "parent": "Tower corridor and three workshops",
+              "point": [
+                221.52999877929688,
+                0.40479344504482206,
+                -65.24087637319018
+              ]
+            },
+            {
+              "name": "Aerial batch · Tower corridor and three workshops · 868",
+              "parent": "Tower corridor and three workshops",
+              "point": [
+                221.6999969482422,
+                0.3842225356993014,
+                -65.22083747012084
+              ]
+            },
+            {
+              "name": "Aerial batch · Period · The Main · 165",
+              "parent": "Period · The Main",
+              "point": [
+                222.06545232801014,
+                0.34000000357627913,
+                -65.1777586241734
+              ]
+            }
+          ]
+        },
+        {
+          "px": 585,
+          "py": 346,
+          "hits": [
+            {
+              "name": "Workshop arched painted lining",
+              "parent": "Workshop exterior with semicircular windows",
+              "point": [
+                219.22235458849164,
+                0.6840337436038173,
+                -65.03187500178814
+              ]
+            },
+            {
+              "name": "Workshop arched exterior masonry",
+              "parent": "Workshop exterior with semicircular windows",
+              "point": [
+                219.50170853630598,
+                0.6502300575320532,
+                -64.98437499463557
+              ]
+            },
+            {
+              "name": "Aerial batch · Tower corridor and three workshops · 868",
+              "parent": "Tower corridor and three workshops",
+              "point": [
+                221.6999969482422,
+                0.3842225356993014,
+                -64.61058856309472
+              ]
+            }
+          ]
+        },
+        {
+          "px": 430,
+          "py": 350,
+          "hits": [
+            {
+              "name": "Workshop arched painted lining",
+              "parent": "Workshop exterior with semicircular windows",
+              "point": [
+                220.22614828519852,
+                0.47722789266477394,
+                -68.16812499821185
+              ]
+            },
+            {
+              "name": "Workshop arched exterior masonry",
+              "parent": "Workshop exterior with semicircular windows",
+              "point": [
+                220.5359081048838,
+                0.43715985942043223,
+                -68.21562500536442
+              ]
+            },
+            {
+              "name": "Aerial batch · Tower corridor and three workshops · 869",
+              "parent": "Tower corridor and three workshops",
+              "point": [
+                221.52999877929688,
+                0.30857230332377683,
+                -68.36806347912416
+              ]
+            }
+          ]
+        },
+        {
+          "px": 450,
+          "py": 350,
+          "hits": [
+            {
+              "name": "Aerial batch · Tower corridor and three workshops · 869",
+              "parent": "Tower corridor and three workshops",
+              "point": [
+                221.52999877929688,
+                0.30857230332377683,
+                -67.8869577705188
+              ]
+            },
+            {
+              "name": "Aerial batch · Tower corridor and three workshops · 868",
+              "parent": "Tower corridor and three workshops",
+              "point": [
+                221.6999969482422,
+                0.28658271057511686,
+                -67.90593266103579
+              ]
+            },
+            {
+              "name": "Estate terrain",
+              "parent": "1829 estate · aerial reconstruction",
+              "point": [
+                225.07515092400067,
+                -0.14999999999998662,
+                -68.28266129032231
+              ]
+            }
+          ]
+        },
+        {
+          "px": 475,
+          "py": 350,
+          "hits": [
+            {
+              "name": "Irby green door leaf",
+              "parent": "Irby green opening door",
+              "point": [
+                221.76799999999997,
+                0.2777863839846777,
+                -67.29972722671656
+              ]
+            },
+            {
+              "name": "Estate terrain",
+              "parent": "1829 estate · aerial reconstruction",
+              "point": [
+                225.07515092400064,
+                -0.149999999999985,
+                -67.49637096774174
+              ]
+            }
+          ]
+        },
+        {
+          "px": 503,
+          "py": 350,
+          "hits": [
+            {
+              "name": "Irby green door leaf",
+              "parent": "Irby green opening door",
+              "point": [
+                221.76799999999997,
+                0.27778638398467725,
+                -66.61227591625827
+              ]
+            },
+            {
+              "name": "Estate terrain",
+              "parent": "1829 estate · aerial reconstruction",
+              "point": [
+                225.07515092400064,
+                -0.14999999999998365,
+                -66.61572580645175
+              ]
+            }
+          ]
+        },
+        {
+          "px": 530,
+          "py": 350,
+          "hits": [
+            {
+              "name": "Irby green door leaf",
+              "parent": "Irby green opening door",
+              "point": [
+                221.76799999999997,
+                0.27778638398467703,
+                -65.94937643831616
+              ]
+            },
+            {
+              "name": "Estate terrain",
+              "parent": "1829 estate · aerial reconstruction",
+              "point": [
+                225.07515092400064,
+                -0.14999999999998295,
+                -65.76653225806471
+              ]
+            }
+          ]
+        },
+        {
+          "px": 560,
+          "py": 350,
+          "hits": [
+            {
+              "name": "Aerial batch · Tower corridor and three workshops · 869",
+              "parent": "Tower corridor and three workshops",
+              "point": [
+                221.52999877929688,
+                0.30857230332377683,
+                -65.24087637319018
+              ]
+            },
+            {
+              "name": "Aerial batch · Tower corridor and three workshops · 868",
+              "parent": "Tower corridor and three workshops",
+              "point": [
+                221.6999969482422,
+                0.2865827105751173,
+                -65.22083747012084
+              ]
+            },
+            {
+              "name": "Estate terrain",
+              "parent": "1829 estate · aerial reconstruction",
+              "point": [
+                225.0751509240007,
+                -0.14999999999998914,
+                -64.8229838709677
+              ]
+            }
+          ]
+        },
+        {
+          "px": 585,
+          "py": 350,
+          "hits": [
+            {
+              "name": "Workshop arched painted lining",
+              "parent": "Workshop exterior with semicircular windows",
+              "point": [
+                219.22235458849164,
+                0.6070705535075303,
+                -65.03187500178814
+              ]
+            },
+            {
+              "name": "Workshop arched exterior masonry",
+              "parent": "Workshop exterior with semicircular windows",
+              "point": [
+                219.50170853630598,
+                0.5709355787411621,
+                -64.98437499463557
+              ]
+            },
+            {
+              "name": "Aerial batch · Tower corridor and three workshops · 868",
+              "parent": "Tower corridor and three workshops",
+              "point": [
+                221.6999969482422,
+                0.2865827105751171,
+                -64.61058856309472
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "outside-wall",
+      "samples": [
+        {
+          "px": 430,
+          "py": 350,
+          "hits": [
+            {
+              "name": "Aerial batch · Explore Irby corridor entrance · 832",
+              "parent": "Explore Irby corridor entrance",
+              "point": [
+                221.74376651001575,
+                0.03999999910592966,
+                -66.25260274107558
+              ]
+            },
+            {
+              "name": "Estate terrain",
+              "parent": "1829 estate · aerial reconstruction",
+              "point": [
+                221.58655948634845,
+                -0.14999999999998573,
+                -66.21509962809176
+              ]
+            }
+          ]
+        },
+        {
+          "px": 450,
+          "py": 350,
+          "hits": [
+            {
+              "name": "Aerial batch · Explore Irby corridor entrance · 832",
+              "parent": "Explore Irby corridor entrance",
+              "point": [
+                221.74376651001575,
+                0.03999999910593077,
+                -66.3471326074496
+              ]
+            },
+            {
+              "name": "Estate terrain",
+              "parent": "1829 estate · aerial reconstruction",
+              "point": [
+                221.58655948634845,
+                -0.14999999999998503,
+                -66.31983442316886
+              ]
+            }
+          ]
+        },
+        {
+          "px": 475,
+          "py": 350,
+          "hits": [
+            {
+              "name": "Aerial batch · Explore Irby corridor entrance · 832",
+              "parent": "Explore Irby corridor entrance",
+              "point": [
+                221.74376651001577,
+                0.03999999910593077,
+                -66.46529494041708
+              ]
+            },
+            {
+              "name": "Estate terrain",
+              "parent": "1829 estate · aerial reconstruction",
+              "point": [
+                221.58655948634845,
+                -0.149999999999985,
+                -66.4507529170152
+              ]
+            }
+          ]
+        },
+        {
+          "px": 503,
+          "py": 350,
+          "hits": [
+            {
+              "name": "Aerial batch · Explore Irby corridor entrance · 832",
+              "parent": "Explore Irby corridor entrance",
+              "point": [
+                221.74376651001575,
+                0.03999999910593033,
+                -66.59763675334062
+              ]
+            },
+            {
+              "name": "Estate terrain",
+              "parent": "1829 estate · aerial reconstruction",
+              "point": [
+                221.58655948634845,
+                -0.1499999999999852,
+                -66.59738163012304
+              ]
+            }
+          ]
+        },
+        {
+          "px": 530,
+          "py": 350,
+          "hits": [
+            {
+              "name": "Aerial batch · Explore Irby corridor entrance · 832",
+              "parent": "Explore Irby corridor entrance",
+              "point": [
+                221.74376651001577,
+                0.03999999910593055,
+                -66.72525207294551
+              ]
+            },
+            {
+              "name": "Estate terrain",
+              "parent": "1829 estate · aerial reconstruction",
+              "point": [
+                221.58655948634845,
+                -0.14999999999998562,
+                -66.73877360347709
+              ]
+            }
+          ]
+        },
+        {
+          "px": 560,
+          "py": 350,
+          "hits": [
+            {
+              "name": "Aerial batch · Explore Irby corridor entrance · 832",
+              "parent": "Explore Irby corridor entrance",
+              "point": [
+                221.74376651001575,
+                0.03999999910593055,
+                -66.86704687250653
+              ]
+            },
+            {
+              "name": "Estate terrain",
+              "parent": "1829 estate · aerial reconstruction",
+              "point": [
+                221.58655948634845,
+                -0.14999999999998515,
+                -66.89587579609274
+              ]
+            }
+          ]
+        },
+        {
+          "px": 585,
+          "py": 350,
+          "hits": [
+            {
+              "name": "Aerial batch · Explore Irby corridor entrance · 832",
+              "parent": "Explore Irby corridor entrance",
+              "point": [
+                221.74376651001575,
+                0.039999999105930106,
+                -66.98520920547402
+              ]
+            },
+            {
+              "name": "Estate terrain",
+              "parent": "1829 estate · aerial reconstruction",
+              "point": [
+                221.58655948634845,
+                -0.1499999999999849,
+                -67.02679428993906
+              ]
+            }
+          ]
+        },
+        {
+          "px": 430,
+          "py": 380,
+          "hits": [
+            {
+              "name": "Aerial batch · Period · The Main · 165",
+              "parent": "Period · The Main",
+              "point": [
+                222.13497351292034,
+                0.34000000357627846,
+                -66.32784733192376
+              ]
+            },
+            {
+              "name": "Aerial batch · Explore Irby corridor entrance · 832",
+              "parent": "Explore Irby corridor entrance",
+              "point": [
+                221.91613245013434,
+                0.039999999105929884,
+                -66.27192554984194
+              ]
+            },
+            {
+              "name": "Estate terrain",
+              "parent": "1829 estate · aerial reconstruction",
+              "point": [
+                221.77753311308737,
+                -0.14999999999998528,
+                -66.23650842188452
+              ]
+            }
+          ]
+        },
+        {
+          "px": 450,
+          "py": 380,
+          "hits": [
+            {
+              "name": "Aerial batch · Period · The Main · 165",
+              "parent": "Period · The Main",
+              "point": [
+                222.13497351292034,
+                0.3400000035762789,
+                -66.40190247969963
+              ]
+            },
+            {
+              "name": "Aerial batch · Explore Irby corridor entrance · 832",
+              "parent": "Explore Irby corridor entrance",
+              "point": [
+                221.91613245013434,
+                0.03999999910593077,
+                -66.36119750906865
+              ]
+            },
+            {
+              "name": "Estate terrain",
+              "parent": "1829 estate · aerial reconstruction",
+              "point": [
+                221.77753311308737,
+                -0.14999999999998548,
+                -66.33541769484114
+              ]
+            }
+          ]
+        },
+        {
+          "px": 475,
+          "py": 380,
+          "hits": [
+            {
+              "name": "Aerial batch · Period · The Main · 165",
+              "parent": "Period · The Main",
+              "point": [
+                222.13497351292034,
+                0.3400000035762787,
+                -66.49447141441944
+              ]
+            },
+            {
+              "name": "Aerial batch · Explore Irby corridor entrance · 832",
+              "parent": "Explore Irby corridor entrance",
+              "point": [
+                221.91613245013434,
+                0.039999999105930106,
+                -66.47278745810199
+              ]
+            },
+            {
+              "name": "Estate terrain",
+              "parent": "1829 estate · aerial reconstruction",
+              "point": [
+                221.77753311308737,
+                -0.14999999999998523,
+                -66.45905428603687
+              ]
+            }
+          ]
+        },
+        {
+          "px": 503,
+          "py": 380,
+          "hits": [
+            {
+              "name": "Aerial batch · Period · The Main · 165",
+              "parent": "Period · The Main",
+              "point": [
+                222.13497351292034,
+                0.3400000035762787,
+                -66.59814862130558
+              ]
+            },
+            {
+              "name": "Aerial batch · Explore Irby corridor entrance · 832",
+              "parent": "Explore Irby corridor entrance",
+              "point": [
+                221.91613245013434,
+                0.03999999910593055,
+                -66.5977682010193
+              ]
+            },
+            {
+              "name": "Estate terrain",
+              "parent": "1829 estate · aerial reconstruction",
+              "point": [
+                221.77753311308737,
+                -0.14999999999998498,
+                -66.59752726817605
+              ]
+            }
+          ]
+        },
+        {
+          "px": 530,
+          "py": 380,
+          "hits": [
+            {
+              "name": "Aerial batch · Period · The Main · 165",
+              "parent": "Period · The Main",
+              "point": [
+                222.13497351292034,
+                0.34000000357627846,
+                -66.69812307080296
+              ]
+            },
+            {
+              "name": "Aerial batch · Explore Irby corridor entrance · 832",
+              "parent": "Explore Irby corridor entrance",
+              "point": [
+                221.91613245013434,
+                0.03999999910593033,
+                -66.71828534597533
+              ]
+            },
+            {
+              "name": "Estate terrain",
+              "parent": "1829 estate · aerial reconstruction",
+              "point": [
+                221.77753311308737,
+                -0.14999999999998517,
+                -66.73105478666746
+              ]
+            }
+          ]
+        },
+        {
+          "px": 560,
+          "py": 380,
+          "hits": [
+            {
+              "name": "Aerial batch · Period · The Main · 165",
+              "parent": "Period · The Main",
+              "point": [
+                222.13497351292034,
+                0.34000000357627846,
+                -66.80920579246677
+              ]
+            },
+            {
+              "name": "Aerial batch · Explore Irby corridor entrance · 832",
+              "parent": "Explore Irby corridor entrance",
+              "point": [
+                221.91613245013434,
+                0.03999999910593077,
+                -66.85219328481539
+              ]
+            },
+            {
+              "name": "Estate terrain",
+              "parent": "1829 estate · aerial reconstruction",
+              "point": [
+                221.77753311308737,
+                -0.14999999999998515,
+                -66.87941869610238
+              ]
+            }
+          ]
+        },
+        {
+          "px": 585,
+          "py": 380,
+          "hits": [
+            {
+              "name": "Aerial batch · Period · The Main · 165",
+              "parent": "Period · The Main",
+              "point": [
+                222.13497351292034,
+                0.3400000035762789,
+                -66.90177472718656
+              ]
+            },
+            {
+              "name": "Aerial batch · Explore Irby corridor entrance · 832",
+              "parent": "Explore Irby corridor entrance",
+              "point": [
+                221.91613245013434,
+                0.039999999105930106,
+                -66.96378323384874
+              ]
+            },
+            {
+              "name": "Estate terrain",
+              "parent": "1829 estate · aerial reconstruction",
+              "point": [
+                221.77753311308737,
+                -0.14999999999998534,
+                -67.00305528729811
+              ]
+            }
+          ]
+        },
+        {
+          "px": 430,
+          "py": 420,
+          "hits": [
+            {
+              "name": "Aerial batch · Period · The Main · 165",
+              "parent": "Period · The Main",
+              "point": [
+                222.30258606261575,
+                0.3400000035762787,
+                -66.34663726943913
+              ]
+            },
+            {
+              "name": "Aerial batch · Explore Irby corridor entrance · 832",
+              "parent": "Explore Irby corridor entrance",
+              "point": [
+                222.1099999964237,
+                0.02668232013222771,
+                -66.29226533518924
+              ]
+            },
+            {
+              "name": "Estate terrain",
+              "parent": "1829 estate · aerial reconstruction",
+              "point": [
+                222.0013991902837,
+                -0.14999999999998484,
+                -66.2616045713672
+              ]
+            }
+          ]
+        },
+        {
+          "px": 450,
+          "py": 420,
+          "hits": [
+            {
+              "name": "Aerial batch · Period · The Main · 165",
+              "parent": "Period · The Main",
+              "point": [
+                222.30258606261575,
+                0.3400000035762787,
+                -66.41557950904755
+              ]
+            },
+            {
+              "name": "Aerial batch · Explore Irby corridor entrance · 832",
+              "parent": "Explore Irby corridor entrance",
+              "point": [
+                222.1099999964237,
+                0.026682320132227266,
+                -66.3760026589473
+              ]
+            },
+            {
+              "name": "Estate terrain",
+              "parent": "1829 estate · aerial reconstruction",
+              "point": [
+                222.0013991902837,
+                -0.14999999999998526,
+                -66.35368496011085
+              ]
+            }
+          ]
+        },
+        {
+          "px": 475,
+          "py": 420,
+          "hits": [
+            {
+              "name": "Aerial batch · Period · The Main · 165",
+              "parent": "Period · The Main",
+              "point": [
+                222.30258606261575,
+                0.34000000357627846,
+                -66.50175730855804
+              ]
+            },
+            {
+              "name": "Aerial batch · Explore Irby corridor entrance · 832",
+              "parent": "Explore Irby corridor entrance",
+              "point": [
+                222.1099999964237,
+                0.026682320132227266,
+                -66.48067431364483
+              ]
+            },
+            {
+              "name": "Estate terrain",
+              "parent": "1829 estate · aerial reconstruction",
+              "point": [
+                222.0013991902837,
+                -0.1499999999999859,
+                -66.46878544604036
+              ]
+            }
+          ]
+        },
+        {
+          "px": 503,
+          "py": 420,
+          "hits": [
+            {
+              "name": "Aerial batch · Period · The Main · 165",
+              "parent": "Period · The Main",
+              "point": [
+                222.30258606261575,
+                0.34000000357627846,
+                -66.59827644400977
+              ]
+            },
+            {
+              "name": "Aerial batch · Explore Irby corridor entrance · 832",
+              "parent": "Explore Irby corridor entrance",
+              "point": [
+                222.1099999964237,
+                0.02668232013222749,
+                -66.59790656690602
+              ]
+            },
+            {
+              "name": "Estate terrain",
+              "parent": "1829 estate · aerial reconstruction",
+              "point": [
+                222.0013991902837,
+                -0.14999999999998542,
+                -66.59769799028139
+              ]
+            }
+          ]
+        },
+        {
+          "px": 530,
+          "py": 420,
+          "hits": [
+            {
+              "name": "Aerial batch · Period · The Main · 165",
+              "parent": "Period · The Main",
+              "point": [
+                222.30258606261575,
+                0.3400000035762789,
+                -66.6913484674811
+              ]
+            },
+            {
+              "name": "Aerial batch · Explore Irby corridor entrance · 832",
+              "parent": "Explore Irby corridor entrance",
+              "point": [
+                222.1099999964237,
+                0.02668232013222771,
+                -66.71095195397936
+              ]
+            },
+            {
+              "name": "Estate terrain",
+              "parent": "1829 estate · aerial reconstruction",
+              "point": [
+                222.0013991902837,
+                -0.14999999999998495,
+                -66.72200651508525
+              ]
+            }
+          ]
+        },
+        {
+          "px": 560,
+          "py": 420,
+          "hits": [
+            {
+              "name": "Aerial batch · Period · The Main · 165",
+              "parent": "Period · The Main",
+              "point": [
+                222.30258606261575,
+                0.3400000035762787,
+                -66.79476182689373
+              ]
+            },
+            {
+              "name": "Aerial batch · Explore Irby corridor entrance · 832",
+              "parent": "Explore Irby corridor entrance",
+              "point": [
+                222.1099999964237,
+                0.02668232013222771,
+                -66.83655793961644
+              ]
+            },
+            {
+              "name": "Estate terrain",
+              "parent": "1829 estate · aerial reconstruction",
+              "point": [
+                222.0013991902837,
+                -0.14999999999998537,
+                -66.86012709820072
+              ]
+            }
+          ]
+        },
+        {
+          "px": 585,
+          "py": 420,
+          "hits": [
+            {
+              "name": "Aerial batch · Period · The Main · 165",
+              "parent": "Period · The Main",
+              "point": [
+                222.30258606261575,
+                0.34000000357627913,
+                -66.88093962640423
+              ]
+            },
+            {
+              "name": "Aerial batch · Explore Irby corridor entrance · 832",
+              "parent": "Explore Irby corridor entrance",
+              "point": [
+                222.1099999964237,
+                0.02668232013222749,
+                -66.94122959431397
+              ]
+            },
+            {
+              "name": "Estate terrain",
+              "parent": "1829 estate · aerial reconstruction",
+              "point": [
+                222.0013991902837,
+                -0.1499999999999849,
+                -66.97522758413024
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "surfaces": [
+    {
+      "name": "Estate terrain",
+      "parent": "1829 estate · aerial reconstruction",
+      "min": [
+        -2000,
+        -0.15000000000044408,
+        -2000
+      ],
+      "max": [
+        2000,
+        -0.1499999999995559,
+        2000
+      ]
+    },
+    {
+      "name": "",
+      "parent": "",
+      "min": [
+        156.12875366210938,
+        0.3199999928474426,
+        -119.15308380126953
+      ],
+      "max": [
+        254.77780151367188,
+        0.3199999928474426,
+        35.88434982299805
+      ]
+    },
+    {
+      "name": " ground contact",
+      "parent": "",
+      "min": [
+        156.12875366210938,
+        -0.17000000178813934,
+        -119.15308380126953
+      ],
+      "max": [
+        254.77780151367188,
+        0.3199999928474426,
+        35.88434982299805
+      ]
+    },
+    {
+      "name": "",
+      "parent": "",
+      "min": [
+        156.72265625,
+        0.3400000035762787,
+        -118.64373779296875
+      ],
+      "max": [
+        254.7437286376953,
+        0.3400000035762787,
+        35.33745193481445
+      ]
+    },
+    {
+      "name": " ground contact",
+      "parent": "",
+      "min": [
+        156.72265625,
+        -0.17000000178813934,
+        -118.64373779296875
+      ],
+      "max": [
+        254.7437286376953,
+        0.3400000035762787,
+        35.33745193481445
+      ]
+    },
+    {
+      "name": "Pebbledash concrete column and curved arm",
+      "parent": "Street lamps · Gerrard Crescent",
+      "min": [
+        170.64410598444354,
+        -0.15000000596046448,
+        -108.67752052679204
+      ],
+      "max": [
+        246.0711794188115,
+        5.90491446852684,
+        3.2929248846793424
+      ],
+      "instanced": true
+    },
+    {
+      "name": "",
+      "parent": "",
+      "min": [
+        200.83070373535156,
+        0.3199999928474426,
+        -70.767578125
+      ],
+      "max": [
+        565.1863403320312,
+        0.3199999928474426,
+        249.98634338378906
+      ]
+    },
+    {
+      "name": " ground contact",
+      "parent": "",
+      "min": [
+        200.83070373535156,
+        -0.17000000178813934,
+        -70.767578125
+      ],
+      "max": [
+        565.1863403320312,
+        0.3199999928474426,
+        249.98634338378906
+      ]
+    },
+    {
+      "name": "",
+      "parent": "",
+      "min": [
+        201.13607788085938,
+        0.3400000035762787,
+        -70.5010757446289
+      ],
+      "max": [
+        564.6487426757812,
+        0.3400000035762787,
+        249.3883819580078
+      ]
+    },
+    {
+      "name": " ground contact",
+      "parent": "",
+      "min": [
+        201.13607788085938,
+        -0.17000000178813934,
+        -70.5010757446289
+      ],
+      "max": [
+        564.6487426757812,
+        0.3400000035762787,
+        249.3883819580078
+      ]
+    },
+    {
+      "name": "Yellow-refined Irby/Ashley walls",
+      "parent": "Irby/Ashley",
+      "min": [
+        211.89999961853027,
+        0.3799999952316284,
+        -102.9
+      ],
+      "max": [
+        263.20000076293945,
+        8.399999618530273,
+        -69.29999961853028
+      ]
+    },
+    {
+      "name": "Weathered brick foundation",
+      "parent": "Irby/Ashley",
+      "min": [
+        211.89999961853027,
+        -0.18000000715255737,
+        -102.9
+      ],
+      "max": [
+        263.20000076293945,
+        0.3799999952316284,
+        -69.29999961853028
+      ]
+    },
+    {
+      "name": "Irby/Ashley sashes, masonry bands and rainwater goods",
+      "parent": "Irby/Ashley",
+      "min": [
+        211.47499923408031,
+        0.04999971389770508,
+        -103.32500038444996
+      ],
+      "max": [
+        263.6249992400408,
+        13.602499809116125,
+        -68.87499923408032
+      ],
+      "instanced": true
+    },
+    {
+      "name": "Irby/Ashley sashes, masonry bands and rainwater goods",
+      "parent": "Irby/Ashley",
+      "min": [
+        211.8149997703731,
+        -0.18000006675720215,
+        -102.99499984607101
+      ],
+      "max": [
+        263.2850006110966,
+        7.335000038146973,
+        -69.21499977037311
+      ],
+      "instanced": true
+    },
+    {
+      "name": "Irby/Ashley sashes, masonry bands and rainwater goods",
+      "parent": "Irby/Ashley",
+      "min": [
+        211.77999946661294,
+        0.6999999284744263,
+        -103.15500015169383
+      ],
+      "max": [
+        263.3200009148568,
+        7.275000095367432,
+        -69.17999946661294
+      ],
+      "instanced": true
+    },
+    {
+      "name": "Irby/Ashley sashes, masonry bands and rainwater goods",
+      "parent": "Irby/Ashley",
+      "min": [
+        211.71500083990395,
+        0.6399999856948853,
+        -103.08499973230064
+      ],
+      "max": [
+        263.3849995415658,
+        7.335000038146973,
+        -69.11500083990396
+      ],
+      "instanced": true
+    },
+    {
+      "name": "Irby/Ashley sashes, masonry bands and rainwater goods",
+      "parent": "Irby/Ashley",
+      "min": [
+        211.60500038415194,
+        -0.1799999475479126,
+        -103.26499965190888
+      ],
+      "max": [
+        263.4949999973178,
+        7.56500019133091,
+        -69.00500038415194
+      ],
+      "instanced": true
+    },
+    {
+      "name": "Corridor brick plinth",
+      "parent": "Corridor north windows",
+      "min": [
+        162.70000038146972,
+        -0.18000001430511475,
+        -69.39000000178814
+      ],
+      "max": [
+        220.99999961853027,
+        0.36000000715255737,
+        -69.29999999821186
+      ]
+    },
+    {
+      "name": "Corridor downpipe",
+      "parent": "Corridor downpipe assembly",
+      "min": [
+        219.85499999821184,
+        0.050000000000000044,
+        -69.54000000074505
+      ],
+      "max": [
+        219.94500000178812,
+        3.55,
+        -69.43999999925494
+      ]
+    },
+    {
+      "name": "Corridor pipe bracket",
+      "parent": "Corridor downpipe assembly",
+      "min": [
+        219.82000000178812,
+        0.5124999985098839,
+        -69.55500000089407
+      ],
+      "max": [
+        219.97999999821184,
+        0.5875000014901162,
+        -69.38499999910593
+      ]
+    },
+    {
+      "name": "Corridor brick plinth",
+      "parent": "Corridor south windows",
+      "min": [
+        162.70000038146972,
+        -0.18000001430511475,
+        -63.90000000178813
+      ],
+      "max": [
+        220.99999961853027,
+        0.36000000715255737,
+        -63.80999999821185
+      ]
+    },
+    {
+      "name": "Corridor downpipe",
+      "parent": "Corridor downpipe assembly",
+      "min": [
+        219.85499999821184,
+        0.050000000000000044,
+        -63.76000000074505
+      ],
+      "max": [
+        219.94500000178812,
+        3.55,
+        -63.659999999254936
+      ]
+    },
+    {
+      "name": "Corridor pipe bracket",
+      "parent": "Corridor downpipe assembly",
+      "min": [
+        219.82000000178812,
+        0.5124999985098839,
+        -63.81500000089406
+      ],
+      "max": [
+        219.97999999821184,
+        0.5875000014901162,
+        -63.64499999910592
+      ]
+    },
+    {
+      "name": "Water tower to Irby corridor walls outside accessible gallery",
+      "parent": "Water tower to Irby corridor",
+      "min": [
+        156.94874954223633,
+        -0.18000001907348628,
+        -69.30000004768371
+      ],
+      "max": [
+        221.70000076293945,
+        3.599999952316284,
+        -68.77562508583068
+      ]
+    },
+    {
+      "name": "Water tower to Irby corridor walls outside accessible gallery",
+      "parent": "Water tower to Irby corridor",
+      "min": [
+        156.94874954223633,
+        -0.18000001907348628,
+        -64.4243749141693
+      ],
+      "max": [
+        221.70000076293945,
+        3.599999952316284,
+        -63.89999995231628
+      ]
+    },
+    {
+      "name": "Rear east gabled workshop walls",
+      "parent": "Tower service buildings",
+      "min": [
+        216,
+        -0.1800001144409178,
+        -63.899999809265125
+      ],
+      "max": [
+        230,
+        6.400000047683716,
+        -47.50000019073485
+      ]
+    },
+    {
+      "name": "Rear east gabled workshop plinth",
+      "parent": "Tower service buildings",
+      "min": [
+        215.96000003814697,
+        -0.17999998927116395,
+        -63.93999977111815
+      ],
+      "max": [
+        230.03999996185303,
+        0.600000011920929,
+        -47.460000228881825
+      ]
+    },
+    {
+      "name": "Twin workshop paved court",
+      "parent": "Tower service buildings",
+      "min": [
+        172,
+        -0.07999999910593034,
+        -63.9
+      ],
+      "max": [
+        232,
+        -8.940696724635266e-10,
+        -32.9
+      ]
+    },
+    {
+      "name": "Service glazing and trim",
+      "parent": "Tower service buildings",
+      "min": [
+        0,
+        -0.18000006675720215,
+        -74.16999847441912
+      ],
+      "max": [
+        228.684994507581,
+        11.575000166893005,
+        2.2800000198185444
+      ],
+      "instanced": true
+    },
+    {
+      "name": "Irby Estates continuous service court outside accessible gallery",
+      "parent": "Period · The Main",
+      "min": [
+        222.02000427246094,
+        0.33999999999999714,
+        -78.0999984741211
+      ],
+      "max": [
+        264,
+        0.34000000000001734,
+        13
+      ]
+    },
+    {
+      "name": "Irby Estates continuous service court outside accessible gallery",
+      "parent": "Period · The Main",
+      "min": [
+        221.6999969482422,
+        0.3400000000000153,
+        -78.0999984741211
+      ],
+      "max": [
+        222.02000427246094,
+        0.34000000000001734,
+        -68.77562713623047
+      ]
+    },
+    {
+      "name": "Irby Estates continuous service court outside accessible gallery",
+      "parent": "Period · The Main",
+      "min": [
+        220.86000061035156,
+        0.3399999999999996,
+        -64.42437744140625
+      ],
+      "max": [
+        222.02000427246094,
+        0.34000000000001435,
+        2.0183334350585938
+      ]
+    },
+    {
+      "name": "Tower service court outside accessible gallery",
+      "parent": "Period · The Main",
+      "min": [
+        180.32000732421875,
+        0.3399999999999961,
+        -63.900001525878906
+      ],
+      "max": [
+        242,
+        0.34000000000001424,
+        17.799999237060547
+      ]
+    },
+    {
+      "name": "Irby Estates continuous service court ground contact outside accessible gallery",
+      "parent": "Period · The Main",
+      "min": [
+        222.02000427246094,
+        -0.1699999904632597,
+        -78.0999984741211
+      ],
+      "max": [
+        264,
+        0.34000000000001734,
+        13
+      ]
+    },
+    {
+      "name": "Irby Estates continuous service court ground contact outside accessible gallery",
+      "parent": "Period · The Main",
+      "min": [
+        221.6999969482422,
+        -0.1699999904632415,
+        -78.0999984741211
+      ],
+      "max": [
+        222.02000427246094,
+        0.34000000000001734,
+        -68.77562713623047
+      ]
+    },
+    {
+      "name": "Irby Estates continuous service court ground contact outside accessible gallery",
+      "parent": "Period · The Main",
+      "min": [
+        220.86000061035156,
+        -0.16999999046325726,
+        -64.42437744140625
+      ],
+      "max": [
+        222.02000427246094,
+        0.34000000000001435,
+        2.0183334350585938
+      ]
+    },
+    {
+      "name": "Tower service court ground contact outside accessible gallery",
+      "parent": "Period · The Main",
+      "min": [
+        180.32000732421875,
+        -0.1699999904632608,
+        -63.900001525878906
+      ],
+      "max": [
+        242,
+        0.34000000000001424,
+        17.799999237060547
+      ]
+    },
+    {
+      "name": "Corridor window reveal",
+      "parent": "Corridor round-headed window",
+      "min": [
+        218.25437498569488,
+        1.45,
+        -68.471625
+      ],
+      "max": [
+        219.4743750143051,
+        2.709999990463257,
+        -68.471625
+      ]
+    },
+    {
+      "name": "Corridor arched glazing",
+      "parent": "Corridor round-headed window",
+      "min": [
+        218.3043749976158,
+        1.48,
+        -68.493625
+      ],
+      "max": [
+        219.42437500238418,
+        2.6900000381469726,
+        -68.493625
+      ]
+    },
+    {
+      "name": "Corridor stone jamb",
+      "parent": "Corridor round-headed window",
+      "min": [
+        219.44437499910592,
+        1.480000011920929,
+        -68.60062499865889
+      ],
+      "max": [
+        219.61437500089406,
+        2.1299999880790708,
+        -68.4806250013411
+      ]
+    },
+    {
+      "name": "Corridor window frame",
+      "parent": "Corridor round-headed window",
+      "min": [
+        219.37237499946355,
+        1.480000011920929,
+        -68.59062499932945
+      ],
+      "max": [
+        219.42437500053643,
+        2.1299999880790708,
+        -68.53062500067055
+      ]
+    },
+    {
+      "name": "Corridor lower frame",
+      "parent": "Corridor round-headed window",
+      "min": [
+        218.3043749976158,
+        1.4799999996274709,
+        -68.59262499932944
+      ],
+      "max": [
+        219.42437500238418,
+        1.530000000372529,
+        -68.53262500067055
+      ]
+    },
+    {
+      "name": "Corridor projecting stone sill",
+      "parent": "Corridor round-headed window",
+      "min": [
+        218.06437498807907,
+        1.2950000017881393,
+        -68.75562499761581
+      ],
+      "max": [
+        219.66437501192092,
+        1.4549999982118607,
+        -68.37562500238418
+      ]
+    },
+    {
+      "name": "Corridor window reveal",
+      "parent": "Corridor round-headed window",
+      "min": [
+        218.25437498569488,
+        1.45,
+        -68.154625
+      ],
+      "max": [
+        219.4743750143051,
+        2.709999990463257,
+        -68.154625
+      ]
+    },
+    {
+      "name": "Corridor arched glazing",
+      "parent": "Corridor round-headed window",
+      "min": [
+        218.3043749976158,
+        1.48,
+        -68.132625
+      ],
+      "max": [
+        219.42437500238418,
+        2.6900000381469726,
+        -68.132625
+      ]
+    },
+    {
+      "name": "Corridor window frame",
+      "parent": "Corridor round-headed window",
+      "min": [
+        219.37237499946355,
+        1.480000011920929,
+        -68.09562499932944
+      ],
+      "max": [
+        219.42437500053643,
+        2.1299999880790708,
+        -68.03562500067055
+      ]
+    },
+    {
+      "name": "Corridor lower frame",
+      "parent": "Corridor round-headed window",
+      "min": [
+        218.3043749976158,
+        1.4799999996274709,
+        -68.09362499932945
+      ],
+      "max": [
+        219.42437500238418,
+        1.530000000372529,
+        -68.03362500067055
+      ]
+    },
+    {
+      "name": "Corridor projecting stone sill",
+      "parent": "Corridor round-headed window",
+      "min": [
+        218.06437498807907,
+        1.2950000017881393,
+        -68.25062499761582
+      ],
+      "max": [
+        219.66437501192092,
+        1.4549999982118607,
+        -67.87062500238419
+      ]
+    },
+    {
+      "name": "Striped window jamb mortar",
+      "parent": "Corridor round-headed window",
+      "min": [
+        219.4263750026226,
+        1.480000011920929,
+        -68.45562499511242
+      ],
+      "max": [
+        219.64437499737738,
+        2.1299999880790708,
+        -68.02662500488758
+      ]
+    },
+    {
+      "name": "Alternating red buff jamb brick",
+      "parent": "Corridor round-headed window",
+      "min": [
+        219.4263750026226,
+        1.4840000001589457,
+        -68.45562500119209
+      ],
+      "max": [
+        219.64437499737738,
+        1.5843333331743876,
+        -68.0206249988079
+      ]
+    },
+    {
+      "name": "Red brick outer jamb edge",
+      "parent": "Corridor round-headed window",
+      "min": [
+        219.65037499959766,
+        1.480000011920929,
+        -68.45562500727176
+      ],
+      "max": [
+        219.68937500040232,
+        2.1299999880790708,
+        -68.01462499272823
+      ]
+    },
+    {
+      "name": "Workshop arched exterior masonry",
+      "parent": "Workshop exterior with semicircular windows",
+      "min": [
+        156.38875000536441,
+        0,
+        -68.455625
+      ],
+      "max": [
+        221.70000091552734,
+        5.150000095367432,
+        -68.21562500536442
+      ]
+    },
+    {
+      "name": "Workshop arched painted lining",
+      "parent": "Workshop exterior with semicircular windows",
+      "min": [
+        156.34125000596046,
+        0,
+        -68.21312499999999
+      ],
+      "max": [
+        221.70000091552734,
+        5.050000190734863,
+        -68.16812499821185
+      ]
+    },
+    {
+      "name": "Workshop arched-wall skirting",
+      "parent": "Workshop exterior with semicircular windows",
+      "min": [
+        156.29624908447266,
+        0.03999999970197678,
+        -68.16812500089407
+      ],
+      "max": [
+        221.70000045776368,
+        0.1800000002980232,
+        -68.12312499910593
+      ]
+    },
+    {
+      "name": "Corridor window reveal",
+      "parent": "Corridor round-headed window",
+      "min": [
+        218.25437498569488,
+        1.45,
+        -64.72837499999999
+      ],
+      "max": [
+        219.4743750143051,
+        2.709999990463257,
+        -64.72837499999999
+      ]
+    },
+    {
+      "name": "Corridor arched glazing",
+      "parent": "Corridor round-headed window",
+      "min": [
+        218.3043749976158,
+        1.48,
+        -64.706375
+      ],
+      "max": [
+        219.42437500238418,
+        2.6900000381469726,
+        -64.706375
+      ]
+    },
+    {
+      "name": "Corridor stone jamb",
+      "parent": "Corridor round-headed window",
+      "min": [
+        219.44437499910592,
+        1.480000011920929,
+        -64.71937499865889
+      ],
+      "max": [
+        219.61437500089406,
+        2.1299999880790708,
+        -64.5993750013411
+      ]
+    },
+    {
+      "name": "Corridor window frame",
+      "parent": "Corridor round-headed window",
+      "min": [
+        219.37237499946355,
+        1.480000011920929,
+        -64.66937499932943
+      ],
+      "max": [
+        219.42437500053643,
+        2.1299999880790708,
+        -64.60937500067054
+      ]
+    },
+    {
+      "name": "Corridor lower frame",
+      "parent": "Corridor round-headed window",
+      "min": [
+        218.3043749976158,
+        1.4799999996274709,
+        -64.66737499932944
+      ],
+      "max": [
+        219.42437500238418,
+        1.530000000372529,
+        -64.60737500067054
+      ]
+    },
+    {
+      "name": "Corridor projecting stone sill",
+      "parent": "Corridor round-headed window",
+      "min": [
+        218.06437498807907,
+        1.2950000017881393,
+        -64.8243749976158
+      ],
+      "max": [
+        219.66437501192092,
+        1.4549999982118607,
+        -64.44437500238418
+      ]
+    },
+    {
+      "name": "Corridor window reveal",
+      "parent": "Corridor round-headed window",
+      "min": [
+        218.25437498569488,
+        1.45,
+        -65.04537499999999
+      ],
+      "max": [
+        219.4743750143051,
+        2.709999990463257,
+        -65.04537499999999
+      ]
+    },
+    {
+      "name": "Corridor arched glazing",
+      "parent": "Corridor round-headed window",
+      "min": [
+        218.3043749976158,
+        1.48,
+        -65.06737499999998
+      ],
+      "max": [
+        219.42437500238418,
+        2.6900000381469726,
+        -65.06737499999998
+      ]
+    },
+    {
+      "name": "Corridor window frame",
+      "parent": "Corridor round-headed window",
+      "min": [
+        219.37237499946355,
+        1.480000011920929,
+        -65.16437499932944
+      ],
+      "max": [
+        219.42437500053643,
+        2.1299999880790708,
+        -65.10437500067054
+      ]
+    },
+    {
+      "name": "Corridor lower frame",
+      "parent": "Corridor round-headed window",
+      "min": [
+        218.3043749976158,
+        1.4799999996274709,
+        -65.16637499932943
+      ],
+      "max": [
+        219.42437500238418,
+        1.530000000372529,
+        -65.10637500067054
+      ]
+    },
+    {
+      "name": "Corridor projecting stone sill",
+      "parent": "Corridor round-headed window",
+      "min": [
+        218.06437498807907,
+        1.2950000017881393,
+        -65.3293749976158
+      ],
+      "max": [
+        219.66437501192092,
+        1.4549999982118607,
+        -64.94937500238417
+      ]
+    },
+    {
+      "name": "Striped window jamb mortar",
+      "parent": "Corridor round-headed window",
+      "min": [
+        219.4263750026226,
+        1.480000011920929,
+        -65.17337499511241
+      ],
+      "max": [
+        219.64437499737738,
+        2.1299999880790708,
+        -64.74437500488757
+      ]
+    },
+    {
+      "name": "Alternating red buff jamb brick",
+      "parent": "Corridor round-headed window",
+      "min": [
+        219.4263750026226,
+        1.4840000001589457,
+        -65.17937500119208
+      ],
+      "max": [
+        219.64437499737738,
+        1.5843333331743876,
+        -64.7443749988079
+      ]
+    },
+    {
+      "name": "Red brick outer jamb edge",
+      "parent": "Corridor round-headed window",
+      "min": [
+        219.65037499959766,
+        1.480000011920929,
+        -65.18537500727176
+      ],
+      "max": [
+        219.68937500040232,
+        2.1299999880790708,
+        -64.74437499272823
+      ]
+    },
+    {
+      "name": "Workshop arched exterior masonry",
+      "parent": "Workshop exterior with semicircular windows",
+      "min": [
+        156.3887512207031,
+        0,
+        -64.98437499463557
+      ],
+      "max": [
+        221.7,
+        5.150000095367432,
+        -64.74437499999998
+      ]
+    },
+    {
+      "name": "Workshop arched painted lining",
+      "parent": "Workshop exterior with semicircular windows",
+      "min": [
+        156.34125061035155,
+        0,
+        -65.03187500178814
+      ],
+      "max": [
+        221.7,
+        5.050000190734863,
+        -64.98687499999998
+      ]
+    },
+    {
+      "name": "Workshop arched-wall skirting",
+      "parent": "Workshop exterior with semicircular windows",
+      "min": [
+        156.29624908447266,
+        0.03999999970197678,
+        -65.07687500089406
+      ],
+      "max": [
+        221.70000045776368,
+        0.1800000002980232,
+        -65.03187499910592
+      ]
+    },
+    {
+      "name": "Continuous escape corridor and workshop floor",
+      "parent": "Tower corridor and three workshops",
+      "min": [
+        38.157649993896484,
+        0.03999999999999813,
+        -200.15562438964844
+      ],
+      "max": [
+        221.6999969482422,
+        0.040000000000012255,
+        30.600000381469727
+      ]
+    },
+    {
+      "name": "Irby entrance door jamb",
+      "parent": "Explore Irby corridor entrance",
+      "min": [
+        221.64,
+        0,
+        -65.81
+      ],
+      "max": [
+        221.95999999999998,
+        2.86,
+        -65.69
+      ]
+    },
+    {
+      "name": "Irby entrance door jamb",
+      "parent": "Explore Irby corridor entrance",
+      "min": [
+        221.64,
+        0,
+        -67.50999999999999
+      ],
+      "max": [
+        221.95999999999998,
+        2.86,
+        -67.38999999999999
+      ]
+    },
+    {
+      "name": "Irby entrance level threshold",
+      "parent": "Explore Irby corridor entrance",
+      "min": [
+        221.48999999999998,
+        -0.04,
+        -67.61999999999999
+      ],
+      "max": [
+        222.10999999999999,
+        0.04,
+        -65.58
+      ]
+    },
+    {
+      "name": "Irby green door leaf",
+      "parent": "Irby green opening door",
+      "min": [
+        220.24499999999998,
+        0.040000000000000036,
+        -65.84199999999998
+      ],
+      "max": [
+        221.79999999999998,
+        2.835,
+        -65.77799999999999
+      ]
+    },
+    {
+      "name": "Irby door handle",
+      "parent": "Irby green opening door",
+      "min": [
+        220.36749999999998,
+        1.2650000000000001,
+        -65.75999999999999
+      ],
+      "max": [
+        220.4125,
+        1.495,
+        -65.67999999999998
+      ]
+    },
+    {
+      "name": "Irby door handle",
+      "parent": "Irby green opening door",
+      "min": [
+        220.36749999999998,
+        1.2650000000000001,
+        -65.94
+      ],
+      "max": [
+        220.4125,
+        1.495,
+        -65.85999999999999
+      ]
+    },
+    {
+      "name": "Irby entrance exterior masonry",
+      "parent": "Tower corridor and three workshops",
+      "min": [
+        221.7000000026822,
+        -0.17999996185302702,
+        -69.30000001192093
+      ],
+      "max": [
+        221.93999999731778,
+        5.149999961853028,
+        -67.44999998807907
+      ]
+    },
+    {
+      "name": "Irby entrance inner jamb wall",
+      "parent": "Tower corridor and three workshops",
+      "min": [
+        221.5300000026822,
+        0.03999988555908196,
+        -68.45562500476836
+      ],
+      "max": [
+        221.76999999731777,
+        5.050000114440918,
+        -67.44999999523162
+      ]
+    },
+    {
+      "name": "Workshop wall skirting",
+      "parent": "Tower corridor and three workshops",
+      "min": [
+        221.4849999991059,
+        0.03999999970197678,
+        -68.45562500476836
+      ],
+      "max": [
+        221.53000000089403,
+        0.1800000002980232,
+        -67.44999999523162
+      ]
+    },
+    {
+      "name": "Workshop wall skirting",
+      "parent": "Tower corridor and three workshops",
+      "min": [
+        221.76999999910592,
+        0.03999999970197678,
+        -68.45562500476836
+      ],
+      "max": [
+        221.81500000089406,
+        0.1800000002980232,
+        -67.44999999523162
+      ]
+    },
+    {
+      "name": "Irby entrance exterior masonry",
+      "parent": "Tower corridor and three workshops",
+      "min": [
+        221.7000000026822,
+        -0.17999996185302702,
+        -65.75000001192092
+      ],
+      "max": [
+        221.93999999731778,
+        5.149999961853028,
+        -63.89999998807906
+      ]
+    },
+    {
+      "name": "Irby entrance inner jamb wall",
+      "parent": "Tower corridor and three workshops",
+      "min": [
+        221.5300000026822,
+        0.03999988555908196,
+        -65.75000000476837
+      ],
+      "max": [
+        221.76999999731777,
+        5.050000114440918,
+        -64.74437499523162
+      ]
+    },
+    {
+      "name": "Workshop wall skirting",
+      "parent": "Tower corridor and three workshops",
+      "min": [
+        221.76999999910592,
+        0.03999999970197678,
+        -65.75000000476837
+      ],
+      "max": [
+        221.81500000089406,
+        0.1800000002980232,
+        -64.74437499523162
+      ]
+    },
+    {
+      "name": "Workshop wall skirting",
+      "parent": "Tower corridor and three workshops",
+      "min": [
+        221.4849999991059,
+        0.03999999970197678,
+        -65.75000000476837
+      ],
+      "max": [
+        221.53000000089403,
+        0.1800000002980232,
+        -64.74437499523162
+      ]
+    }
+  ],
+  "errors": []
+}

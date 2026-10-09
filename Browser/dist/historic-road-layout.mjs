@@ -3,7 +3,7 @@ import {WEST_PARSONS_JUNCTIONS} from './west-parsons-junctions.mjs';
 import {ANNEXE_REAR_SURFACES} from './annexe-rear-roads.mjs';
 import {ANNEXE_LOOP_ROAD,ANNEXE_TRIANGLE_APEX,ANNEXE_TRIANGLE_FORK,ANNEXE_FRONT_OUTER_JOIN,IRBY_ANNEXE_APPROACH} from './annexe-loop-road.mjs';
 import {IRBY_ROUNDING_PAVING,IRBY_ROUNDED_ISLAND,IRBY_ROUNDED_KERB} from './irby-junction-rounding.mjs';
-import {ESTATES_SERVICE_COURT,IRBY_SIDE_ROAD} from './estates-service-court.mjs';
+import {ESTATES_SERVICE_COURT,IRBY_SIDE_ROAD,estatesKerbJoins} from './estates-service-court.mjs';
 import {VIVIENNE_LANE} from './modern-entrance.mjs';
 import {GARAGE_LANE_SHIFT} from './road-centerlines.mjs';
 import {TOWER_ADMIN_SHIFT} from './tower-buildings.mjs';
@@ -173,5 +173,5 @@ export const HISTORIC_GRASS=Object.freeze([
  {name:'Admin semicircular grass island',points:[[-14.2,3.5],...lawnArc.filter(p=>p[1]>=3.5),[14.2,3.5]].map(adminCourtPoint)},
  {name:'Admin teardrop grass island',points:ADMIN_TEARDROP,raisedIsland:true}
 ]);
-export const HISTORIC_KERBS=Object.freeze([IRBY_ROUNDED_KERB,...ANNEXE_ACCESS_KERBS,{name:'Admin smooth teardrop inner kerb',points:ADMIN_TEARDROP}]);
+export const HISTORIC_KERBS=Object.freeze([IRBY_ROUNDED_KERB,...ANNEXE_ACCESS_KERBS,...estatesKerbJoins({points:northService,width:6}),{name:'Admin smooth teardrop inner kerb',points:ADMIN_TEARDROP}]);
 

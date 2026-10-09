@@ -1,0 +1,33 @@
+{
+  "results": [
+    {
+      "mode": "aerial",
+      "width": 1200,
+      "firstMilliseconds": 3866,
+      "returnMilliseconds": 95,
+      "revisitMilliseconds": 67
+    },
+    {
+      "mode": "explore",
+      "width": 1200,
+      "firstMilliseconds": 8111,
+      "returnMilliseconds": 299,
+      "revisitMilliseconds": 279
+    },
+    {
+      "mode": "aerial",
+      "width": 390,
+      "firstMilliseconds": 2926,
+      "returnMilliseconds": 93,
+      "revisitMilliseconds": 118
+    },
+    {
+      "mode": "explore",
+      "width": 390,
+      "firstMilliseconds": 7000,
+      "returnMilliseconds": 293,
+      "revisitMilliseconds": 218
+    }
+  ],
+  "errors": []
+}

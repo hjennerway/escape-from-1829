@@ -1,0 +1,1337 @@
+{
+  "poses": [
+    {
+      "name": "cylinders-west",
+      "actor": {
+        "x": 174,
+        "y": 0,
+        "z": -17,
+        "floor": 0,
+        "outside": true,
+        "stair": null,
+        "verticalTrend": 0
+      },
+      "camera": [
+        174,
+        1.8,
+        -17
+      ],
+      "clear": true
+    },
+    {
+      "name": "cylinders-east",
+      "actor": {
+        "x": 188,
+        "y": 0,
+        "z": -17,
+        "floor": 0,
+        "outside": true,
+        "stair": null,
+        "verticalTrend": 0
+      },
+      "camera": [
+        188,
+        1.8,
+        -17
+      ],
+      "clear": true
+    },
+    {
+      "name": "chimney-south",
+      "actor": {
+        "x": 170,
+        "y": 0,
+        "z": -28,
+        "floor": 0,
+        "outside": true,
+        "stair": null,
+        "verticalTrend": 0
+      },
+      "camera": [
+        170,
+        1.8,
+        -28
+      ],
+      "clear": true
+    },
+    {
+      "name": "chimney-north",
+      "actor": {
+        "x": 163,
+        "y": 0,
+        "z": -39.5,
+        "floor": 0,
+        "outside": true,
+        "stair": null,
+        "verticalTrend": 0
+      },
+      "camera": [
+        163,
+        1.8,
+        -39.5
+      ],
+      "clear": true
+    },
+    {
+      "name": "tower-south",
+      "actor": {
+        "x": 143,
+        "y": 0,
+        "z": -40,
+        "floor": 0,
+        "outside": true,
+        "stair": null,
+        "verticalTrend": 0
+      },
+      "camera": [
+        143,
+        1.8,
+        -40
+      ],
+      "clear": true
+    },
+    {
+      "name": "tower-west",
+      "actor": {
+        "x": 135,
+        "y": 0,
+        "z": -55,
+        "floor": 0,
+        "outside": true,
+        "stair": null,
+        "verticalTrend": 0
+      },
+      "camera": [
+        135,
+        1.8,
+        -55
+      ],
+      "clear": true
+    },
+    {
+      "name": "tower-north",
+      "actor": {
+        "x": 145,
+        "y": 0,
+        "z": -65,
+        "floor": 0,
+        "outside": true,
+        "stair": null,
+        "verticalTrend": 0
+      },
+      "camera": [
+        145,
+        1.8,
+        -65
+      ],
+      "clear": true
+    },
+    {
+      "name": "tower-east",
+      "actor": {
+        "x": 182,
+        "y": 0,
+        "z": -41,
+        "floor": 0,
+        "outside": true,
+        "stair": null,
+        "verticalTrend": 0
+      },
+      "camera": [
+        182,
+        1.8,
+        -41
+      ],
+      "clear": true
+    },
+    {
+      "name": "hall-gap",
+      "actor": {
+        "x": 185,
+        "y": 0,
+        "z": -30,
+        "floor": 0,
+        "outside": true,
+        "stair": null,
+        "verticalTrend": 0
+      },
+      "camera": [
+        185,
+        1.8,
+        -30
+      ],
+      "clear": true
+    },
+    {
+      "name": "workshops-front",
+      "actor": {
+        "x": 201,
+        "y": 0,
+        "z": -44,
+        "floor": 0,
+        "outside": true,
+        "stair": null,
+        "verticalTrend": 0
+      },
+      "camera": [
+        201,
+        1.8,
+        -44
+      ],
+      "clear": true
+    },
+    {
+      "name": "stores-south",
+      "actor": {
+        "x": 230,
+        "y": 0,
+        "z": 4,
+        "floor": 0,
+        "outside": true,
+        "stair": null,
+        "verticalTrend": 0
+      },
+      "camera": [
+        230,
+        1.8,
+        4
+      ],
+      "clear": true
+    },
+    {
+      "name": "stores-east",
+      "actor": {
+        "x": 232,
+        "y": 0,
+        "z": -5,
+        "floor": 0,
+        "outside": true,
+        "stair": null,
+        "verticalTrend": 0
+      },
+      "camera": [
+        232,
+        1.8,
+        -5
+      ],
+      "clear": true
+    },
+    {
+      "name": "court-south",
+      "actor": {
+        "x": 177,
+        "y": 0,
+        "z": 8,
+        "floor": 0,
+        "outside": true,
+        "stair": null,
+        "verticalTrend": 0
+      },
+      "camera": [
+        177,
+        1.8,
+        8
+      ],
+      "clear": true
+    },
+    {
+      "name": "court-east",
+      "actor": {
+        "x": 230,
+        "y": 0,
+        "z": -24,
+        "floor": 0,
+        "outside": true,
+        "stair": null,
+        "verticalTrend": 0
+      },
+      "camera": [
+        230,
+        1.8,
+        -24
+      ],
+      "clear": true
+    },
+    {
+      "name": "tower-ground",
+      "actor": {
+        "x": 164,
+        "y": 0,
+        "z": -39,
+        "floor": 0,
+        "outside": true,
+        "stair": null,
+        "verticalTrend": 0
+      },
+      "camera": [
+        164,
+        1.8,
+        -39
+      ],
+      "clear": true
+    },
+    {
+      "name": "north-gravel",
+      "actor": {
+        "x": 166,
+        "y": 0,
+        "z": -71,
+        "floor": 0,
+        "outside": true,
+        "stair": null,
+        "verticalTrend": 0
+      },
+      "camera": [
+        166,
+        1.8,
+        -71
+      ],
+      "clear": true
+    },
+    {
+      "name": "reported-roof",
+      "actor": {
+        "x": 158,
+        "y": 0,
+        "z": -32,
+        "floor": 0,
+        "outside": true,
+        "stair": null,
+        "verticalTrend": 0
+      },
+      "camera": [
+        158,
+        1.8,
+        -32
+      ],
+      "clear": true
+    },
+    {
+      "name": "reported-ground",
+      "actor": {
+        "x": 158,
+        "y": 0,
+        "z": -32,
+        "floor": 0,
+        "outside": true,
+        "stair": null,
+        "verticalTrend": 0
+      },
+      "camera": [
+        158,
+        1.8,
+        -32
+      ],
+      "clear": true
+    },
+    {
+      "name": "roof-east-edge",
+      "actor": {
+        "x": 160,
+        "y": 0,
+        "z": -29,
+        "floor": 0,
+        "outside": true,
+        "stair": null,
+        "verticalTrend": 0
+      },
+      "camera": [
+        160,
+        1.8,
+        -29
+      ],
+      "clear": true
+    },
+    {
+      "name": "roof-step",
+      "actor": {
+        "x": 161,
+        "y": 0,
+        "z": -38,
+        "floor": 0,
+        "outside": true,
+        "stair": null,
+        "verticalTrend": 0
+      },
+      "camera": [
+        161,
+        1.8,
+        -38
+      ],
+      "clear": true
+    },
+    {
+      "name": "court-grass-seam",
+      "actor": {
+        "x": 158,
+        "y": 0,
+        "z": -29,
+        "floor": 0,
+        "outside": true,
+        "stair": null,
+        "verticalTrend": 0
+      },
+      "camera": [
+        158,
+        1.8,
+        -29
+      ],
+      "clear": true
+    },
+    {
+      "name": "cylinder-lane-roof",
+      "actor": {
+        "x": 158,
+        "y": 0,
+        "z": -20,
+        "floor": 0,
+        "outside": true,
+        "stair": null,
+        "verticalTrend": 0
+      },
+      "camera": [
+        158,
+        1.8,
+        -20
+      ],
+      "clear": true
+    },
+    {
+      "name": "cylinder-lane-ground",
+      "actor": {
+        "x": 158,
+        "y": 0,
+        "z": -20,
+        "floor": 0,
+        "outside": true,
+        "stair": null,
+        "verticalTrend": 0
+      },
+      "camera": [
+        158,
+        1.8,
+        -20
+      ],
+      "clear": true
+    },
+    {
+      "name": "north-cut-roof",
+      "actor": {
+        "x": 164,
+        "y": 0,
+        "z": -62,
+        "floor": 0,
+        "outside": true,
+        "stair": null,
+        "verticalTrend": 0
+      },
+      "camera": [
+        164,
+        1.8,
+        -62
+      ],
+      "clear": true
+    },
+    {
+      "name": "workshop-ground",
+      "actor": {
+        "x": 183,
+        "y": 0,
+        "z": -42,
+        "floor": 0,
+        "outside": true,
+        "stair": null,
+        "verticalTrend": 0
+      },
+      "camera": [
+        183,
+        1.8,
+        -42
+      ],
+      "clear": true
+    }
+  ],
+  "walks": [
+    {
+      "name": "chimney and cylinders",
+      "distance": 183.99999999999451,
+      "samples": 920,
+      "reached": [
+        [
+          163.99999999999991,
+          -39.00000000000001
+        ],
+        [
+          170,
+          -28.000000000000004
+        ],
+        [
+          173.99999999999986,
+          -26.999999999999996
+        ],
+        [
+          174.00000000000003,
+          -17.000000000000032
+        ],
+        [
+          188,
+          -17.00000000000002
+        ],
+        [
+          185,
+          -29.999999999999996
+        ],
+        [
+          182,
+          -41
+        ],
+        [
+          200.9999999999991,
+          -44
+        ],
+        [
+          158.0000000000012,
+          -32
+        ]
+      ]
+    },
+    {
+      "name": "tower west and north",
+      "distance": 71.9999999999983,
+      "samples": 360,
+      "reached": [
+        [
+          135.0000000000002,
+          -55
+        ],
+        [
+          135.00000000000003,
+          -64.99999999999994
+        ],
+        [
+          144.99999999999946,
+          -64.99999999999999
+        ],
+        [
+          143,
+          -40
+        ]
+      ]
+    },
+    {
+      "name": "eastern service lane",
+      "distance": 118.00000000000006,
+      "samples": 590,
+      "reached": [
+        [
+          230.00000000000003,
+          -23.999999999999954
+        ],
+        [
+          232,
+          -44.00000000000001
+        ],
+        [
+          236.00000000000003,
+          -58
+        ],
+        [
+          232,
+          -5.000000000000039
+        ]
+      ]
+    }
+  ],
+  "screenRays": [
+    [
+      {
+        "pixel": [
+          1100,
+          280
+        ],
+        "hits": [
+          {
+            "name": "West projecting pavilion walls",
+            "point": [
+              160.91812060316227,
+              4.399316045744226,
+              6.6000000000000085
+            ],
+            "distance": 45.77788138962218
+          },
+          {
+            "name": "West projecting pavilion stone course",
+            "point": [
+              160.72167740300273,
+              4.564999999105931,
+              9.506606253465634
+            ],
+            "distance": 48.69582604570735
+          },
+          {
+            "name": "Admin entrance pavilion roof return",
+            "point": [
+              160.5,
+              4.751966961925808,
+              12.786581968056105
+            ],
+            "distance": 51.98859664271094
+          }
+        ]
+      },
+      {
+        "pixel": [
+          1100,
+          285
+        ],
+        "hits": [
+          {
+            "name": "West projecting pavilion walls",
+            "point": [
+              160.89102839250558,
+              4.101625384106004,
+              6.6000000000000085
+            ],
+            "distance": 45.763775891691544
+          },
+          {
+            "name": "Admin entrance pavilion roof return",
+            "point": [
+              160.5,
+              4.3911104575391136,
+              12.335303164323221
+            ],
+            "distance": 51.51967783649411
+          }
+        ]
+      },
+      {
+        "pixel": [
+          1100,
+          290
+        ],
+        "hits": [
+          {
+            "name": "West projecting pavilion walls",
+            "point": [
+              160.86389230245575,
+              3.8034525733469216,
+              6.600000000000001
+            ],
+            "distance": 45.751600996077144
+          },
+          {
+            "name": "Admin entrance pavilion roof return",
+            "point": [
+              160.5,
+              4.035919388930775,
+              11.891109423626034
+            ],
+            "distance": 51.06030115345262
+          },
+          {
+            "name": "Admin entrance exterior masonry",
+            "point": [
+              159.20505638873166,
+              4.8631735397898925,
+              30.72000000033528
+            ],
+            "distance": 69.95178994433854
+          }
+        ]
+      },
+      {
+        "pixel": [
+          1145,
+          285
+        ],
+        "hits": [
+          {
+            "name": "Workshop arched exterior masonry",
+            "point": [
+              156.62875,
+              4.954447713729458,
+              25.569729111664074
+            ],
+            "distance": 65.06562675095685
+          },
+          {
+            "name": "Connected escape corridor ceiling",
+            "point": [
+              156.4054653384391,
+              5.049999999999997,
+              27.525629415110373
+            ],
+            "distance": 67.03654843294252
+          }
+        ]
+      },
+      {
+        "pixel": [
+          1150,
+          285
+        ],
+        "hits": [
+          {
+            "name": "Workshop arched exterior masonry",
+            "point": [
+              156.62875,
+              4.813179334268004,
+              22.898122099194275
+            ],
+            "distance": 62.40826944940648
+          },
+          {
+            "name": "Workshop arched painted lining",
+            "point": [
+              156.38625,
+              4.912307160425034,
+              24.934451705306543
+            ],
+            "distance": 64.4613819257818
+          },
+          {
+            "name": "Connected escape corridor ceiling",
+            "point": [
+              156.04940700755876,
+              5.049999999999999,
+              27.763001635696384
+            ],
+            "distance": 67.31324398912486
+          }
+        ]
+      },
+      {
+        "pixel": [
+          1155,
+          285
+        ],
+        "hits": [
+          {
+            "name": "Workshop arched exterior masonry",
+            "point": [
+              156.62875,
+              4.684021679438986,
+              20.4555479175502
+            ],
+            "distance": 59.9801224222332
+          },
+          {
+            "name": "Workshop arched painted lining",
+            "point": [
+              156.38625,
+              4.778900466247734,
+              22.41152151361686
+            ],
+            "distance": 61.95335351429927
+          },
+          {
+            "name": "Connected escape corridor ceiling",
+            "point": [
+              155.69334867667843,
+              5.049999999999999,
+              28.000373856283275
+            ],
+            "distance": 67.5915161324923
+          }
+        ]
+      },
+      {
+        "pixel": [
+          1160,
+          280
+        ],
+        "hits": [
+          {
+            "name": "Workshop arched exterior masonry",
+            "point": [
+              156.62875,
+              4.938277334359129,
+              18.488606456308148
+            ],
+            "distance": 58.044155463561765
+          },
+          {
+            "name": "Workshop arched painted lining",
+            "point": [
+              156.38625,
+              5.041520645002793,
+              20.379871447409393
+            ],
+            "distance": 59.95369695244276
+          },
+          {
+            "name": "Connected escape corridor ceiling",
+            "point": [
+              156.36633351752764,
+              5.049999999999999,
+              20.535200709454116
+            ],
+            "distance": 60.110527260044954
+          }
+        ]
+      },
+      {
+        "pixel": [
+          1160,
+          285
+        ],
+        "hits": [
+          {
+            "name": "Workshop arched exterior masonry",
+            "point": [
+              156.62875,
+              4.565481408969963,
+              18.21376515588463
+            ],
+            "distance": 57.75290587752773
+          },
+          {
+            "name": "Workshop arched painted lining",
+            "point": [
+              156.38625,
+              4.656460448030534,
+              20.095988394860704
+            ],
+            "distance": 59.652865813129
+          },
+          {
+            "name": "Connected escape corridor ceiling",
+            "point": [
+              155.3372903457981,
+              5.049999999999998,
+              28.237746076869243
+            ],
+            "distance": 67.87134547104947
+          }
+        ]
+      },
+      {
+        "pixel": [
+          1165,
+          280
+        ],
+        "hits": [
+          {
+            "name": "Workshop arched exterior masonry",
+            "point": [
+              156.62875,
+              4.813900043215119,
+              16.40495810157121
+            ],
+            "distance": 55.974353969204984
+          },
+          {
+            "name": "Workshop arched painted lining",
+            "point": [
+              156.38625,
+              4.913051579315467,
+              18.227675054548165
+            ],
+            "distance": 57.815802955134444
+          },
+          {
+            "name": "Connected escape corridor ceiling",
+            "point": [
+              156.05130821974973,
+              5.049999999999999,
+              20.74521757464072
+            ],
+            "distance": 60.35921821941182
+          }
+        ]
+      },
+      {
+        "pixel": [
+          1165,
+          285
+        ],
+        "hits": [
+          {
+            "name": "Workshop arched exterior masonry",
+            "point": [
+              156.62875,
+              4.4563010091429405,
+              16.148992254021465
+            ],
+            "distance": 55.70280610748254
+          },
+          {
+            "name": "Workshop arched painted lining",
+            "point": [
+              156.38625,
+              4.543688222263806,
+              17.963288421103115
+            ],
+            "distance": 57.53532168910912
+          },
+          {
+            "name": "Connected escape corridor ceiling",
+            "point": [
+              154.98123201491777,
+              5.049999999999998,
+              28.475118297455253
+            ],
+            "distance": 68.15271282366041
+          }
+        ]
+      },
+      {
+        "pixel": [
+          1170,
+          275
+        ],
+        "hits": [
+          {
+            "name": "Workshop arched exterior masonry",
+            "point": [
+              156.62875,
+              5.045162344631078,
+              14.721071208478953
+            ],
+            "distance": 54.32144969523529
+          },
+          {
+            "name": "Connected escape corridor ceiling",
+            "point": [
+              156.61776146896483,
+              5.049999999999999,
+              14.80115473002784
+            ],
+            "distance": 54.402428217989474
+          }
+        ]
+      },
+      {
+        "pixel": [
+          1170,
+          280
+        ],
+        "hits": [
+          {
+            "name": "Workshop arched exterior masonry",
+            "point": [
+              156.62875,
+              4.699005650095068,
+              14.48017335194887
+            ],
+            "distance": 54.06355983540379
+          },
+          {
+            "name": "Workshop arched painted lining",
+            "point": [
+              156.38625,
+              4.794377380825686,
+              16.239568574990813
+            ],
+            "distance": 55.842147355849534
+          },
+          {
+            "name": "Connected escape corridor ceiling",
+            "point": [
+              155.73628292196867,
+              5.049999999999999,
+              20.9552344398273
+            ],
+            "distance": 60.609253886518026
+          }
+        ]
+      },
+      {
+        "pixel": [
+          1170,
+          285
+        ],
+        "hits": [
+          {
+            "name": "Workshop arched exterior masonry",
+            "point": [
+              156.62875,
+              4.35541400902736,
+              14.241060571057616
+            ],
+            "distance": 53.80962737327828
+          },
+          {
+            "name": "Workshop arched painted lining",
+            "point": [
+              156.38625,
+              4.439482233166977,
+              15.992589441802998
+            ],
+            "distance": 55.57986100231276
+          },
+          {
+            "name": "Corridor lamp housing",
+            "point": [
+              154.893125,
+              4.957108489531778,
+              26.77713189595411
+            ],
+            "distance": 66.4795727027336
+          },
+          {
+            "name": "Connected escape corridor ceiling",
+            "point": [
+              154.62517368404102,
+              5.049999999999998,
+              28.712490518042145
+            ],
+            "distance": 68.43559922007218
+          }
+        ]
+      },
+      {
+        "pixel": [
+          1175,
+          275
+        ],
+        "hits": [
+          {
+            "name": "Workshop arched exterior masonry",
+            "point": [
+              156.62875,
+              4.925566309111891,
+              12.922359258420883
+            ],
+            "distance": 52.53604364886721
+          },
+          {
+            "name": "Workshop arched painted lining",
+            "point": [
+              156.38625,
+              5.02839145138215,
+              14.630505382913661
+            ],
+            "distance": 54.26437881384609
+          },
+          {
+            "name": "Connected escape corridor ceiling",
+            "point": [
+              156.3352889906191,
+              5.049999999999999,
+              14.989469715590971
+            ],
+            "distance": 54.62758584294239
+          }
+        ]
+      },
+      {
+        "pixel": [
+          1175,
+          280
+        ],
+        "hits": [
+          {
+            "name": "Workshop arched exterior masonry",
+            "point": [
+              156.62875,
+              4.592549472932652,
+              12.696751021747517
+            ],
+            "distance": 52.29424179893834
+          },
+          {
+            "name": "Workshop arched painted lining",
+            "point": [
+              156.38625,
+              4.684418999428997,
+              14.397475067570689
+            ],
+            "distance": 54.014622146402175
+          },
+          {
+            "name": "Connected escape corridor ceiling",
+            "point": [
+              155.4212576241876,
+              5.049999999999998,
+              21.165251305014678
+            ],
+            "distance": 60.86061768784581
+          }
+        ]
+      },
+      {
+        "pixel": [
+          1175,
+          285
+        ],
+        "hits": [
+          {
+            "name": "Workshop arched exterior masonry",
+            "point": [
+              156.62875,
+              4.26191002868185,
+              12.472753391933495
+            ],
+            "distance": 52.05612998772215
+          },
+          {
+            "name": "Workshop arched painted lining",
+            "point": [
+              156.38625,
+              4.342902151043101,
+              14.166108344966467
+            ],
+            "distance": 53.76867691287366
+          },
+          {
+            "name": "Corridor lamp housing",
+            "point": [
+              154.7130368787516,
+              4.9017354782703,
+              25.850000000000012
+            ],
+            "distance": 65.58499025686129
+          },
+          {
+            "name": "Connected escape corridor ceiling",
+            "point": [
+              154.2691153531607,
+              5.049999999999999,
+              28.94986273862814
+            ],
+            "distance": 68.71998590081708
+          }
+        ]
+      },
+      {
+        "pixel": [
+          1180,
+          275
+        ],
+        "hits": [
+          {
+            "name": "Workshop arched exterior masonry",
+            "point": [
+              156.62875,
+              4.814472050003326,
+              11.251513142378144
+            ],
+            "distance": 50.87864917036767
+          },
+          {
+            "name": "Workshop arched painted lining",
+            "point": [
+              156.38625,
+              4.913642404030911,
+              12.904691631376231
+            ],
+            "distance": 52.552459232950625
+          },
+          {
+            "name": "Connected escape corridor ceiling",
+            "point": [
+              156.05281651227335,
+              5.049999999999999,
+              15.177784701154778
+            ],
+            "distance": 54.85392037504955
+          }
+        ]
+      },
+      {
+        "pixel": [
+          1180,
+          280
+        ],
+        "hits": [
+          {
+            "name": "Workshop arched exterior masonry",
+            "point": [
+              156.62875,
+              4.493634843996373,
+              11.039669556578275
+            ],
+            "distance": 50.65135264301278
+          },
+          {
+            "name": "Workshop arched painted lining",
+            "point": [
+              156.38625,
+              4.582250268743755,
+              12.68587879754427
+            ],
+            "distance": 52.317685085397855
+          },
+          {
+            "name": "Connected escape corridor ceiling",
+            "point": [
+              155.1062323264065,
+              5.049999999999999,
+              21.375268170201288
+            ],
+            "distance": 61.113293235233016
+          }
+        ]
+      },
+      {
+        "pixel": [
+          1180,
+          285
+        ],
+        "hits": [
+          {
+            "name": "Workshop arched exterior masonry",
+            "point": [
+              156.62875,
+              4.175007229932395,
+              10.829284928379266
+            ],
+            "distance": 50.42750858785645
+          },
+          {
+            "name": "Workshop arched painted lining",
+            "point": [
+              156.38625,
+              4.253140416740416,
+              12.468572918222542
+            ],
+            "distance": 52.08647698976325
+          },
+          {
+            "name": "Connected escape corridor ceiling",
+            "point": [
+              153.91305702228036,
+              5.049999999999999,
+              29.187234959214152
+            ],
+            "distance": 69.00585431699866
+          }
+        ]
+      },
+      {
+        "pixel": [
+          1185,
+          270
+        ],
+        "hits": [
+          {
+            "name": "Workshop arched exterior masonry",
+            "point": [
+              156.62875,
+              5.022600164623008,
+              9.896109654481016
+            ],
+            "distance": 49.553506613826634
+          },
+          {
+            "name": "Connected escape corridor ceiling",
+            "point": [
+              156.5660766846009,
+              5.049999999999999,
+              10.311843933221361
+            ],
+            "distance": 49.97483034442053
+          }
+        ]
+      },
+      {
+        "pixel": [
+          1185,
+          275
+        ],
+        "hits": [
+          {
+            "name": "Workshop arched exterior masonry",
+            "point": [
+              156.62875,
+              4.711004129306446,
+              9.695366363791322
+            ],
+            "distance": 49.33607176202011
+          },
+          {
+            "name": "Workshop arched painted lining",
+            "point": [
+              156.38625,
+              4.8067705870112905,
+              11.297350605706832
+            ],
+            "distance": 50.95913398379935
+          },
+          {
+            "name": "Connected escape corridor ceiling",
+            "point": [
+              155.77034403393043,
+              5.049999999999999,
+              15.36609968671791
+            ],
+            "distance": 55.08141730625687
+          }
+        ]
+      },
+      {
+        "pixel": [
+          1185,
+          280
+        ],
+        "hits": [
+          {
+            "name": "Workshop arched exterior masonry",
+            "point": [
+              156.62875,
+              4.401487792643066,
+              9.495962902572998
+            ],
+            "distance": 49.121904311065826
+          },
+          {
+            "name": "Workshop arched painted lining",
+            "point": [
+              156.38625,
+              4.487071755975738,
+              11.09138715271704
+            ],
+            "distance": 50.73792083410246
+          },
+          {
+            "name": "Connected escape corridor ceiling",
+            "point": [
+              154.7912070286286,
+              5.049999999999998,
+              21.58528503538787
+            ],
+            "distance": 61.36726432560582
+          }
+        ]
+      },
+      {
+        "pixel": [
+          1185,
+          285
+        ],
+        "hits": [
+          {
+            "name": "Workshop arched exterior masonry",
+            "point": [
+              156.62875,
+              4.094030402952393,
+              9.297885901704078
+            ],
+            "distance": 48.91097713832954
+          },
+          {
+            "name": "Workshop arched painted lining",
+            "point": [
+              156.38625,
+              4.169499607322883,
+              10.88679379808034
+            ],
+            "distance": 50.52005456156783
+          },
+          {
+            "name": "Connected escape corridor ceiling",
+            "point": [
+              153.55699869140003,
+              5.049999999999998,
+              29.424607179801015
+            ],
+            "distance": 69.29318612996155
+          }
+        ]
+      }
+    ]
+  ],
+  "errors": []
+}

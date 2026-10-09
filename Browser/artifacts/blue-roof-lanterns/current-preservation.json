@@ -1,0 +1,23 @@
+{
+  "passed": true,
+  "before": {
+    "outside": {
+      "count": 1454558,
+      "hash": "9094161d8ca14539961975ab649704508ca9797f1cacd2c8701f544643716c9e"
+    },
+    "hostRoofs": {
+      "count": 238,
+      "hash": "106b24bb11b2f1696fe6e3d30db8c6782e9caba5538ce3e0e32ba7b3ade8aecd"
+    }
+  },
+  "after": {
+    "outside": {
+      "count": 1454558,
+      "hash": "9094161d8ca14539961975ab649704508ca9797f1cacd2c8701f544643716c9e"
+    },
+    "hostRoofs": {
+      "count": 238,
+      "hash": "106b24bb11b2f1696fe6e3d30db8c6782e9caba5538ce3e0e32ba7b3ade8aecd"
+    }
+  }
+}

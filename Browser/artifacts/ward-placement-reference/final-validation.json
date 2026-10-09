@@ -1,0 +1,40 @@
+{
+  "date": "2026-10-08",
+  "sourceHash": "eeee4b6e1bb47880a1a93ae5b977f274dbddcda4afac4a6d3294d02cef31ad7c",
+  "fullSuite": {
+    "commands": 148,
+    "exitCode": 0,
+    "log": "full-suite-repaired.log"
+  },
+  "gpu": {
+    "renderer": "NVIDIA GeForce RTX 3090 Ti / ANGLE Direct3D11",
+    "passed": true,
+    "log": "gpu-validation.log"
+  },
+  "negativeControls": {
+    "movement": 0.01,
+    "object": "East court back range brick walls",
+    "rejected": [
+      "Jarman",
+      "Leighton/Newton",
+      "Annexe"
+    ]
+  },
+  "annexe": {
+    "referenceFiles": 13,
+    "fingerprints": 14,
+    "countsRootsRangesRetained": true,
+    "pipeFittingRecordsMoved": 63
+  },
+  "estate": {
+    "jarman": {
+      "primitives": 818883,
+      "sha256": "f392269ceedefe03e857b62d13eaa85d7e30e271b240dcd7b321226107e9d83f"
+    },
+    "leighton": {
+      "count": 882930,
+      "sha256": "5108bd00afc2cd6bd9a3dabb69ff3f9ee00647b5ad3b1fabf68efeb2487a1f51"
+    }
+  },
+  "runtimeAndExportsChanged": false
+}

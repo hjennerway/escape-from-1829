@@ -107,7 +107,8 @@ console.log('PASS: one widened coplanar pavilion face, no separate rear tower, e
 
 // The marked low-range join must have only one exposed wall plane. White
 // foundation/trim and the taller service room used to overlap this brick face.
-for(const z of [10.1,10.6,11.4])for(const y of [1,3.5,4.04,4.3]){
+// The shared cornice now starts at 4.21; retain the masonry probes below it.
+for(const z of [10.1,10.6,11.4])for(const y of [1,3.5,4.04,4.2]){
   ray.set(new THREE.Vector3(76,y,z),new THREE.Vector3(1,0,0));
   const hits=ray.intersectObject(model,true);
   assert.equal(hits[0]?.object.name,'Redesmere windowless brick end range','The low range has an uninterrupted brick side');

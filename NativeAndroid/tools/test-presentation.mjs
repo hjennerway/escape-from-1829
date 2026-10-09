@@ -1,22 +1,38 @@
 import assert from 'node:assert/strict';
 import {readFile} from 'node:fs/promises';
 const root=new URL('../Unity/Assets/NativePrototype/',import.meta.url);
-const bytes=await readFile(new URL('Generated/outdoor.glb',root));
-const gltf=JSON.parse(bytes.subarray(20,20+bytes.readUInt32LE(12)));
-const materials=gltf.materials.map(m=>m.extras?.nativeSurface).filter(Boolean);
-assert(materials.filter(m=>m.offsetFactor<0&&m.offsetUnits<0).length>8,'Layered roads retain signed depth bias');
-assert(gltf.nodes.filter(n=>n.extras?.preciseSurface).length>100,'Thin ground surfaces retain full coordinate precision');
-const wind=gltf.materials.map((m,i)=>m.extras?.nativeSurface?.wind?i:-1).filter(i=>i>=0);
-assert.equal(wind.length,2,'Both copper and green lawn foliage retain wind');
-let animated=0;
-for(const mesh of gltf.meshes)for(const primitive of mesh.primitives)if(wind.includes(primitive.material)){
- const a=gltf.accessors[primitive.attributes.TEXCOORD_1],v=gltf.bufferViews[a.bufferView];assert.equal(a.type,'VEC2');
- const start=28+bytes.readUInt32LE(12)+v.byteOffset+(a.byteOffset??0),stride=v.byteStride??8;
- let moving=false;for(let i=0;i<a.count;i++){const amount=bytes.readFloatLE(start+i*stride+4);assert(Number.isFinite(amount));if(amount>0)moving=true;}assert(moving);animated++;
+const manifest=JSON.parse(await readFile(new URL('Generated/manifest.json',root)));
+let animated=0,constantRoadBias=0,precise=0,windMaterials=0;
+const roadDepthLayers=new Set();
+const escapeMeshes=new Set(manifest.escape.meshes);
+for(const filename of manifest.outdoorChunks){
+ const bytes=await readFile(new URL('Generated/'+filename,root));
+ const gltf=JSON.parse(bytes.subarray(20,20+bytes.readUInt32LE(12)));
+ const materials=gltf.materials.map(m=>m.extras?.nativeSurface).filter(Boolean);
+ // Road borders now use constant priorities to avoid pulling buried kerbs
+ // through higher asphalt at shallow angles (Research/historic-roads).
+ for(const m of materials)if(m.offsetFactor===0&&m.offsetUnits<0){constantRoadBias++;roadDepthLayers.add(m.offsetUnits);}
+ precise+=gltf.nodes.filter(n=>n.extras?.preciseSurface).length;
+ for(const node of gltf.nodes.filter(n=>n.name?.startsWith('estate-')&&n.mesh!==undefined)){
+  const id=Number(node.name.slice(7)),flag=manifest.meshFlags[id];
+  if(!flag.tree&&escapeMeshes.has(id))assert(node.extras?.preciseSurface,'Escape building finishes retain uncompressed coordinates: '+node.name);
+ }
+ const wind=gltf.materials.map((m,i)=>m.extras?.nativeSurface?.wind?i:-1).filter(i=>i>=0);windMaterials+=wind.length;
+ for(const mesh of gltf.meshes)for(const primitive of mesh.primitives)if(wind.includes(primitive.material)){
+  const a=gltf.accessors[primitive.attributes.TEXCOORD_1],v=gltf.bufferViews[a.bufferView];assert.equal(a.type,'VEC2');
+  const start=28+bytes.readUInt32LE(12)+v.byteOffset+(a.byteOffset??0),stride=v.byteStride??8;
+  let moving=false;for(let i=0;i<a.count;i++){const amount=bytes.readFloatLE(start+i*stride+4);assert(Number.isFinite(amount));if(amount>0)moving=true;}assert(moving);animated++;
+ }
+ if(filename===manifest.outdoorChunks[0]){
+  const first=gltf.meshes[0].primitives[0],accessor=gltf.accessors[first.attributes.POSITION];
+  assert(Math.max(...accessor.max)>5000&&Math.min(...accessor.min)<-5000,'Countryside extends beyond the estate in both directions');
+ }
 }
+assert(constantRoadBias>8,'Layered roads retain constant depth priorities without slope bias');
+for(const units of [-2,-4,-6,-8,-10,-12,-14,-16])assert(roadDepthLayers.has(units),'Preserved constant road depth layer '+units);
+assert(precise>100,'Thin ground surfaces retain full coordinate precision');
+assert(windMaterials>=2,'Copper and green lawn foliage retain wind across library parts');
 assert(animated>=4,'Front-lawn foliage batches retain animated leaves');
-const first=gltf.meshes[0].primitives[0],accessor=gltf.accessors[first.attributes.POSITION];
-assert(Math.max(...accessor.max)>5000&&Math.min(...accessor.min)<-5000,'Countryside extends beyond the estate in both directions');
 for(const name of ['arial','arial-bold','georgia','georgia-italic']){
  const data=JSON.parse(await readFile(new URL('Presentation/'+name+'.json',root)));const glyphs=new Map(data.glyphs.map(g=>[g.index,g]));
  for(const c of 'CHESHIRE COUNTY ASYLUMTorch: ONOFF○●←→↗')if(c!=='←')assert(glyphs.has(c.codePointAt(0)),name+' glyph '+c);

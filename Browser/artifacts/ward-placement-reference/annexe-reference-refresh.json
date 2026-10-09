@@ -1,0 +1,323 @@
+{
+  "sourceHash": "eeee4b6e1bb47880a1a93ae5b977f274dbddcda4afac4a6d3294d02cef31ad7c",
+  "changes": [
+    {
+      "test": "test-larkton.mjs",
+      "name": "larkton-jodrell/protected-before.json",
+      "keys": [],
+      "before": {
+        "count": 17951,
+        "sha256": "3d225db70a147a1ac6f500cba67c40029ad6736e889b714faa55c528833f9377",
+        "root": [
+          -0.3967056614036031,
+          0,
+          0.38210634411159655,
+          0,
+          0,
+          0.9,
+          0,
+          0,
+          -0.38210634411159655,
+          0,
+          -0.3967056614036031,
+          0,
+          364.7804974623198,
+          0,
+          -9.106516776244462,
+          1
+        ]
+      },
+      "after": {
+        "count": 17951,
+        "sha256": "aa37f73862fa416ab31e2585a47778d3ba57ed36633396cc19e925eae522940e",
+        "root": [
+          -0.3967056614036031,
+          0,
+          0.38210634411159655,
+          0,
+          0,
+          0.9,
+          0,
+          0,
+          -0.38210634411159655,
+          0,
+          -0.3967056614036031,
+          0,
+          364.7804974623198,
+          0,
+          -9.106516776244462,
+          1
+        ]
+      }
+    },
+    {
+      "test": "test-larkton-recess.mjs",
+      "name": "larkton-jodrell/recess-protected-before.json",
+      "keys": [
+        "outside"
+      ],
+      "before": {
+        "count": 18047,
+        "sha256": "35cce4ddfbc39f95bf07daef48d39c51029f2a79e84f0a819076cbce29d52047",
+        "root": [
+          -0.3967056614036031,
+          0,
+          0.38210634411159655,
+          0,
+          0,
+          0.9,
+          0,
+          0,
+          -0.38210634411159655,
+          0,
+          -0.3967056614036031,
+          0,
+          364.7804974623198,
+          0,
+          -9.106516776244462,
+          1
+        ]
+      },
+      "after": {
+        "count": 18047,
+        "sha256": "0b9f0eebdc32598b05e8d6089edc0612bac2aff2f57bb663841305a5bf7ca95b",
+        "root": [
+          -0.3967056614036031,
+          0,
+          0.38210634411159655,
+          0,
+          0,
+          0.9,
+          0,
+          0,
+          -0.38210634411159655,
+          0,
+          -0.3967056614036031,
+          0,
+          364.7804974623198,
+          0,
+          -9.106516776244462,
+          1
+        ]
+      }
+    },
+    {
+      "test": "test-larkton-recess.mjs",
+      "name": "larkton-jodrell/recess-protected-before.json",
+      "keys": [
+        "retained"
+      ],
+      "before": {
+        "count": 20834,
+        "sha256": "1a3ed787fa5a6fcc69f4e1fbb3e1f9a440e0b4ee93f9833c0b100aad8d1efc61"
+      },
+      "after": {
+        "count": 20834,
+        "sha256": "5c4ee232a1d11ec36071caae30d1f02fc83c8d8eace98e0ff9e154b61f965d12"
+      }
+    },
+    {
+      "test": "test-annexe-carden.mjs",
+      "name": "carden-picton/outward-protected-geometry.json",
+      "keys": [],
+      "before": {
+        "primitives": 19568,
+        "sha256": "0111eb4e1767f66d5690d3b5fd136857e7909296c4c811b606331384f421459d",
+        "root": [
+          -0.3967056614036031,
+          0,
+          0.38210634411159655,
+          0,
+          0,
+          0.9,
+          0,
+          0,
+          -0.38210634411159655,
+          0,
+          -0.3967056614036031,
+          0,
+          364.7804974623198,
+          0,
+          -9.106516776244462,
+          1
+        ]
+      },
+      "after": {
+        "primitives": 19568,
+        "sha256": "d2ef3e227f46084acc9ce57ad833b9c3f5f66d4f29a40c6db4646b9df563656a",
+        "root": [
+          -0.3967056614036031,
+          0,
+          0.38210634411159655,
+          0,
+          0,
+          0.9,
+          0,
+          0,
+          -0.38210634411159655,
+          0,
+          -0.3967056614036031,
+          0,
+          364.7804974623198,
+          0,
+          -9.106516776244462,
+          1
+        ]
+      }
+    },
+    {
+      "test": "test-annexe-carden.mjs",
+      "name": "carden-picton/height-extension-before.json",
+      "keys": [
+        "protected"
+      ],
+      "before": {
+        "primitives": 19571,
+        "sha256": "7abf80d0a76f67605561a9cc569246c1f630e8d181d753f98d6f6f88ad2436ba"
+      },
+      "after": {
+        "primitives": 19571,
+        "sha256": "75645721314b177722f2b980356822fd131f91616d28dbdca394158476c6cf85"
+      }
+    },
+    {
+      "test": "test-annexe-front-link.mjs",
+      "name": "annexe-frontage-adjustment/front-link-before.json",
+      "keys": [
+        "sha256"
+      ],
+      "before": "9151c4a27cf51880df32b8b84449963cf3bc753848ad8eee27caec973908af4a",
+      "after": "de0112638af553d8149f22788c5b3b1e78c2edc44a9c62d622b93f1a68798b49"
+    },
+    {
+      "test": "test-annexe-kitchen.mjs",
+      "name": "annexe-kitchen/protected-geometry.json",
+      "keys": [],
+      "before": {
+        "primitives": 20559,
+        "sha256": "a33b7717de17f44f289472478ec266dfc232eed1e34af607c92ecab4a5a7e06c"
+      },
+      "after": {
+        "primitives": 20559,
+        "sha256": "38e7911906ef5569ee7216594afa232cb215b0f709068bd9c8c8d6a2e748f5f4"
+      }
+    },
+    {
+      "test": "test-annexe-rear-stretch.mjs",
+      "name": "annexe-kitchen/rear-stretch-before.json",
+      "keys": [
+        "front"
+      ],
+      "before": {
+        "primitives": 15834,
+        "sha256": "f3a810a88eae2776280329060c40265999892f547d80b51217f4ad9a7675ee1d"
+      },
+      "after": {
+        "primitives": 15834,
+        "sha256": "87cd127cd0f20225ea8eb52859e8cf7be1cfada7ed06cded23f1b5de9eb9861c"
+      }
+    },
+    {
+      "test": "test-annexe-rear-side-alignment.mjs",
+      "name": "annexe-kitchen/side-alignment-before.json",
+      "keys": [
+        "snapshot"
+      ],
+      "before": {
+        "fixed": {
+          "count": 18734,
+          "hash": "5cd3763a5258ba7eee7274e1b92b15cc6bdf850a9dad51cfdabd8f9bf9478ea7"
+        },
+        "head": {
+          "count": 1218,
+          "hash": "5b53d45067f1e5184e7b7dbc056a286a6ba4410ab8065694ea21d0176d8b90e3"
+        },
+        "west": {
+          "count": 1482,
+          "hash": "8aab5120a841b4da848c44323e348223e775231f56fd3d08b1896b3cb68d6bbc"
+        }
+      },
+      "after": {
+        "fixed": {
+          "count": 18734,
+          "hash": "1accf0a14bdc8733b7db9d898ce74bfd791312f1a6865cdb23fe8576ba2ba2d4"
+        },
+        "head": {
+          "count": 1218,
+          "hash": "5b53d45067f1e5184e7b7dbc056a286a6ba4410ab8065694ea21d0176d8b90e3"
+        },
+        "west": {
+          "count": 1482,
+          "hash": "8aab5120a841b4da848c44323e348223e775231f56fd3d08b1896b3cb68d6bbc"
+        }
+      }
+    },
+    {
+      "test": "test-annexe-os-refinement.mjs",
+      "name": "annexe-photo-placement/approved-shape.json",
+      "keys": [],
+      "before": {
+        "count": 21634,
+        "digest": "207094ad7ef83c4cc5558f0f1bf081f0a686f08c650333c73393eba78f3501b5"
+      },
+      "after": {
+        "count": 21634,
+        "digest": "a344c02cd294d9d0c19578b4252404173eb2a52a63e60999e16cabe4a6f105d8"
+      }
+    },
+    {
+      "test": "test-oakmere-court.mjs",
+      "name": "oakmere/court-protected-before.json",
+      "keys": [],
+      "before": {
+        "count": 20929,
+        "sha256": "413ad148102162b2f6c2e51bf14b841e9198a347a1243d82d634f49479b81104"
+      },
+      "after": {
+        "count": 20929,
+        "sha256": "32151a3fa471ce83071db68474e9f17231219058836224dbd82e49ca3166bfad"
+      }
+    },
+    {
+      "test": "test-oakmere-west.mjs",
+      "name": "oakmere/west-protected-geometry.json",
+      "keys": [],
+      "before": {
+        "primitives": 20341,
+        "sha256": "69039948f7187a878331eb241387b4b813cdb36c5528a8a5fc97b0eac805ca56"
+      },
+      "after": {
+        "primitives": 20341,
+        "sha256": "06f096ad0c985eeb68116a425465577435635641c57aefce65c13ee47eac1e73"
+      }
+    },
+    {
+      "test": "test-oakmere-windows.mjs",
+      "name": "oakmere/window-protected-geometry.json",
+      "keys": [],
+      "before": {
+        "primitives": 20837,
+        "sha256": "e6446e4f068b444fd4703dd706116118e39e89faa7ca37fe989e57039d19aa07"
+      },
+      "after": {
+        "primitives": 20837,
+        "sha256": "a19a5de6297ed856529921c5c23d58bf0668d7285ce291896c423124fcc11be6"
+      }
+    },
+    {
+      "test": "test-annexe-access.mjs",
+      "name": "annexe-frontage-adjustment/entrance-alignment-before.json",
+      "keys": [
+        "protectedGeometry"
+      ],
+      "before": {
+        "primitives": 20708,
+        "sha256": "6fe71d9ae22ec6bb79755d9204b1d1dfe1a21c398492dbcb44c4864ab09fe370"
+      },
+      "after": {
+        "primitives": 20708,
+        "sha256": "759e219aff286d85cdac2671041a0e59059732573f4b60e1554831a8eded63be"
+      }
+    }
+  ]
+}

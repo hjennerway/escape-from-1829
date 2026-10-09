@@ -1,0 +1,32 @@
+[
+  {
+    "command": "node vendor-three.mjs --check",
+    "status": 0,
+    "output": "Verified Three.js 0.186.1: three.module.js, GLTFLoader.js, BufferGeometryUtils.js, SkeletonUtils.js, THREE-LICENSE.txt, three.core.js\n"
+  },
+  {
+    "command": "node test.mjs",
+    "status": 0,
+    "output": "WEST REAR · GROUND: reachable in 20 grid steps\nCENTRAL REAR · GROUND: reachable in 13 grid steps\nEAST REAR · GROUND: reachable in 20 grid steps\nWEST GALLERY · GROUND: reachable in 18 grid steps\nEAST GALLERY · GROUND: reachable in 18 grid steps\nWEST FRONT · GROUND: reachable in 16 grid steps\nEAST FRONT · GROUND: reachable in 16 grid steps\nPASS: seven ground-floor candidates, all rooms connected, wall collision and sight obstruction.\nPASS: mirrored reception stair approaches, canonical/browser parity.\nPASS: both stairs up/down, all upper rooms reachable, cross-floor pursuer routes, fourteen reachable escape-route candidates across both floors.\n"
+  },
+  {
+    "command": "node test-escape-routes.mjs",
+    "status": 0,
+    "output": "PASS: exactly five distinct routes per load, all fourteen eligible, varied draws, unchanged candidates, reachability, inactive/old exits disabled and correctly oriented doors, including floors with zero exits.\n"
+  },
+  {
+    "command": "node test-opening-wall.mjs",
+    "status": 0,
+    "output": "PASS: 1829 east end is closed at every storey and up to the roof; wall and collision disappear with the 1849 wing.\n"
+  },
+  {
+    "command": "node test-wall-mitres.mjs",
+    "status": 0,
+    "output": "PASS: 76 exterior right-angle wall/coping joins, 1672 coverage/overlap/normal probes, 90 filled-corner collision probes; rotated unequal-width and original-defect regressions.\n"
+  },
+  {
+    "command": "node test-facade-courses.mjs",
+    "status": 0,
+    "output": "PASS: 92 Redesmere wall-contact and closed lower-band surface probes.\nPASS: 25 facade courses, 138 explicit and 277 shared corner joins, 3316 top/underside and 36 complete-scene west probes, plus Reception overlap and sill-lip regressions.\n"
+  }
+]

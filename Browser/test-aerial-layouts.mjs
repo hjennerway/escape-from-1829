@@ -1,3 +1,4 @@
+import {assertRoadEndSurface} from './test-support/road-end-assertions.mjs';
 import assert from 'node:assert/strict';
 import * as THREE from './dist/vendor/three.module.js';
 import {createEscapeExterior} from './dist/escape-exterior.mjs';
@@ -71,12 +72,20 @@ for(let i=0;i<MODERN_ROAD_PATHS.length;i++){
   assert.deepEqual(road.userData.centerline.slice(12),saved.slice(12),'Retain the rest of the Modern tail');
  }else if(path.name==='Frost drive'){
   assert.deepEqual(road.userData.centerline,saved.slice(0,7),'Frost drive ends at the frontage junction before the removed lawn spur');
+ }else if(path.name==='Parsons Lane'){
+  // The 5 October church-road annotation supersedes the saved survey here.
+  const laneZ=(-82.65-104.45)/2;
+  assert.deepEqual(road.userData.centerline,[...saved.slice(0,6),[saved[6][0],saved[6][1]+(laneZ-saved[7][1])*.5],[saved[7][0],laneZ],[saved[8][0],laneZ]],'Church-front stretch is centred between Churton and the church; the western approach retains its survey');
+  assert.deepEqual(road.userData.coordinates,path.coordinates,'Retain the original Parsons survey');
+ }else if(path.name==='Parsons Lane (Upton Lea)'){
+  assert.deepEqual(road.userData.centerline,[[saved[0][0],(-82.65-104.45)/2],...saved.slice(1)],'Upton Lea starts at the moved T-junction and retains its remaining survey');
+  assert.deepEqual(road.userData.coordinates,path.coordinates,'Retain the original Upton Lea survey');
  }else if(path.name==='Valley drive'){
   assert.deepEqual(road.userData.centerline[0],COUNTESS_ROUNDABOUT_CENTER,'Valley drive must enter the roundabout at its centre');
   assert.deepEqual(road.userData.centerline.slice(-5),saved.slice(3),'Retain the outer Valley drive beyond the adjusted junction');
   assert.deepEqual(road.userData.coordinates,path.coordinates,'Preserve the original survey separately from the refined road');
  }else assert.deepEqual(road.userData.centerline,saved,'Other mapped lanes retain their saved vertices');
- road.traverse(o=>{if(!o.isMesh)return;const normals=o.geometry.attributes.normal;for(let n=0;n<normals.count;n++)assert(o.userData.groundContact?Math.abs(normals.getY(n))<.01:normals.getY(n)>.99,'Road tops face upwards and supporting edges are vertical');const b=new THREE.Box3().setFromObject(o);assert((o.userData.groundContact?b.min.y<exterior.terrain.position.y:b.min.y>.3)&&b.max.y<.4,'Road edges meet terrain without becoming walking obstacles');});
+ road.traverse(o=>{if(!o.isMesh||o.userData.roadEndSide)return;if(o.userData.roadEndFade){assertRoadEndSurface(o);return;}const normals=o.geometry.attributes.normal;for(let n=0;n<normals.count;n++)assert(o.userData.groundContact?Math.abs(normals.getY(n))<.01:normals.getY(n)>.99,'Road tops face upwards and supporting edges are vertical');const b=new THREE.Box3().setFromObject(o);assert((o.userData.groundContact?b.min.y<exterior.terrain.position.y:b.min.y>.3)&&b.max.y<.4,'Road edges meet terrain without becoming walking obstacles');});
 }
 // Each path gets its own text texture; labels are actual road children and inherit Modern visibility.
 assert.deepEqual(drawnRoadNames,MODERN_ROAD_PATHS.map(p=>p.name));

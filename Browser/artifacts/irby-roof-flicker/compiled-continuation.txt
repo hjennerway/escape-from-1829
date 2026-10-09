@@ -1,0 +1,220 @@
+Hardware GPU: ANGLE (NVIDIA, NVIDIA GeForce RTX 3090 Ti (0x00002203) Direct3D11 vs_5_0 ps_5_0, D3D11)
+Checking aerial?models=source
+Checking aerial?models=compiled
+Checking aerial?models=compiled&buildingDetail=full&view=front
+Checking aerial
+Browser: Failed to load resource: the server responded with a status of 404 (Not Found)
+Checking aerial
+Checking aerial
+PASS: compiled estate, shadows, grass shaders, exact draw counts, tree/layout controls, orbit, portrait, full detail and missing/incompatible/damaged model fallback.
+{
+  "source": {
+    "mode": "procedural",
+    "milliseconds": 6840,
+    "triangles": 871353,
+    "calls": 1633,
+    "levels": [
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      1,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      1,
+      1,
+      1,
+      2,
+      2,
+      2,
+      1,
+      1,
+      2,
+      2,
+      1,
+      2,
+      2,
+      1,
+      2
+    ],
+    "readyMilliseconds": 10346.451799999999
+  },
+  "compiled": {
+    "mode": "compiled",
+    "milliseconds": 1629.4000000003725,
+    "triangles": 871353,
+    "calls": 1633,
+    "levels": [
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      1,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      1,
+      1,
+      1,
+      2,
+      2,
+      2,
+      1,
+      1,
+      2,
+      2,
+      1,
+      2,
+      2,
+      1,
+      2
+    ],
+    "readyMilliseconds": 4132.015900000002
+  },
+  "identicalScreenshot": false,
+  "pixels": {
+    "significantFraction": 0.00015714285714285713,
+    "meanChannelError": 0.004384761904761905
+  },
+  "fullDetail": {
+    "mode": "compiled",
+    "milliseconds": 1477.5999999996275,
+    "triangles": 650816,
+    "calls": 471,
+    "readyMilliseconds": 3840.5394000000015
+  }
+}
+Hardware GPU: ANGLE (NVIDIA, NVIDIA GeForce RTX 3090 Ti (0x00002203) Direct3D11 vs_5_0 ps_5_0, D3D11)
+PASS: every timeline stop in source/compiled pages, descriptions, URL reload/navigation, keyboard/endpoints, tree focus, selection, mobile reset and live walking collision refresh.
+npm notice run test:interior-loading
+npm notice run node test-interior-loading.mjs && node test-interior-loading-browser.mjs
+PASS: ten contiguous sections, every entrance/stair assigned, compiled bounds/materials and complete source surface-area preservation.
+Hardware GPU: ANGLE (NVIDIA, NVIDIA GeForce RTX 3090 Ti (0x00002203) Direct3D11 vs_5_0 ps_5_0, D3D11)
+Loading check: entry ready 1 sections
+Loading check: entry ready 1 sections
+PASS: assets/worker fallback, desktop/mobile, gated failed entry and retry, every entrance/stair, cached return, replay furniture, frame and memory measurements.
+[
+  {
+    "name": "assets",
+    "initialSections": 1,
+    "frames": {
+      "count": 88,
+      "median": 16.699999999254942,
+      "p99": 81.59999999962747,
+      "maximum": 81.59999999962747
+    },
+    "heapBytes": 134869265,
+    "retainedGeometryBufferBytes": 23437868,
+    "firstReadyMilliseconds": 1868.7999999988824,
+    "maxRestore": 2.800000000745058,
+    "maxFurniture": 5.400000000372529,
+    "maxUpload": 166.7000000011176
+  },
+  {
+    "name": "worker-mobile",
+    "initialSections": 1,
+    "frames": {
+      "count": 298,
+      "median": 16.699999999254942,
+      "p99": 28.699999999254942,
+      "maximum": 38.20000000111759
+    },
+    "heapBytes": 144849428,
+    "retainedGeometryBufferBytes": 23437868,
+    "firstReadyMilliseconds": 4381.9000000003725,
+    "maxRestore": 2.799999998882413,
+    "maxFurniture": 6.400000000372529,
+    "maxUpload": 135.2999999988824
+  }
+]

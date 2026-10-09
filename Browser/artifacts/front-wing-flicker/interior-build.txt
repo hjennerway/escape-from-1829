@@ -1,0 +1,28 @@
+Hardware GPU: ANGLE (NVIDIA, NVIDIA GeForce RTX 3090 Ti (0x00002203) Direct3D11 vs_5_0 ps_5_0, D3D11)
+{
+  "sections": 10,
+  "bytes": 14,
+  "stats": [
+    {
+      "floor": 0,
+      "sections": 3,
+      "buildMilliseconds": 2975.3000000002794
+    },
+    {
+      "floor": 1,
+      "sections": 3,
+      "buildMilliseconds": 2622.5
+    },
+    {
+      "floor": 2,
+      "sections": 2,
+      "buildMilliseconds": 1291
+    },
+    {
+      "floor": 3,
+      "sections": 2,
+      "buildMilliseconds": 659.1999999997206
+    }
+  ],
+  "compressedBytes": 21027905
+}

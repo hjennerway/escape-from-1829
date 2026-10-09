@@ -1,0 +1,307 @@
+[
+  {
+    "name": "test-ward-corridors.mjs",
+    "passed": true,
+    "exitCode": 0
+  },
+  {
+    "name": "test-ground-contact.mjs",
+    "passed": true,
+    "exitCode": 0
+  },
+  {
+    "name": "test-building-grounding.mjs",
+    "passed": true,
+    "exitCode": 0
+  },
+  {
+    "name": "test-day-night.mjs",
+    "passed": true,
+    "exitCode": 0
+  },
+  {
+    "name": "test-exterior-shadows.mjs",
+    "passed": true,
+    "exitCode": 0
+  },
+  {
+    "name": "test-tree-rendering.mjs",
+    "passed": true,
+    "exitCode": 0
+  },
+  {
+    "name": "test-front-lawn-eztree.mjs",
+    "passed": true,
+    "exitCode": 0
+  },
+  {
+    "name": "test-explore.mjs",
+    "passed": true,
+    "exitCode": 0
+  },
+  {
+    "name": "test-explore-interior.mjs",
+    "passed": true,
+    "exitCode": 0
+  },
+  {
+    "name": "test-front-basement.mjs",
+    "passed": true,
+    "exitCode": 0
+  },
+  {
+    "name": "test-exterior-door-supports.mjs",
+    "passed": true,
+    "exitCode": 0
+  },
+  {
+    "name": "test-explore-input.mjs",
+    "passed": true,
+    "exitCode": 0
+  },
+  {
+    "name": "test-jump.mjs",
+    "passed": true,
+    "exitCode": 0
+  },
+  {
+    "name": "test-annexe.mjs",
+    "passed": true,
+    "exitCode": 0
+  },
+  {
+    "name": "test-larkton.mjs",
+    "passed": false,
+    "exitCode": 1
+  },
+  {
+    "name": "test-larkton-recess.mjs",
+    "passed": false,
+    "exitCode": 1
+  },
+  {
+    "name": "test-annexe-carden.mjs",
+    "passed": false,
+    "exitCode": 1
+  },
+  {
+    "name": "test-annexe-front-link.mjs",
+    "passed": false,
+    "exitCode": 1
+  },
+  {
+    "name": "test-annexe-east-outer.mjs",
+    "passed": true,
+    "exitCode": 0
+  },
+  {
+    "name": "test-annexe-kitchen.mjs",
+    "passed": false,
+    "exitCode": 1
+  },
+  {
+    "name": "test-annexe-rear-stretch.mjs",
+    "passed": false,
+    "exitCode": 1
+  },
+  {
+    "name": "test-annexe-rear-side-alignment.mjs",
+    "passed": false,
+    "exitCode": 1
+  },
+  {
+    "name": "test-annexe-os-refinement.mjs",
+    "passed": false,
+    "exitCode": 1
+  },
+  {
+    "name": "test-annexe-photo-placement.mjs",
+    "passed": true,
+    "exitCode": 0
+  },
+  {
+    "name": "test-annexe-outer-front.mjs",
+    "passed": true,
+    "exitCode": 0
+  },
+  {
+    "name": "test-jarman.mjs",
+    "passed": false,
+    "exitCode": 1
+  },
+  {
+    "name": "test-oakmere-court.mjs",
+    "passed": false,
+    "exitCode": 1
+  },
+  {
+    "name": "test-oakmere.mjs",
+    "passed": true,
+    "exitCode": 0
+  },
+  {
+    "name": "test-oakmere-west.mjs",
+    "passed": false,
+    "exitCode": 1
+  },
+  {
+    "name": "test-oakmere-windows.mjs",
+    "passed": false,
+    "exitCode": 1
+  },
+  {
+    "name": "test-annexe-wards.mjs",
+    "passed": true,
+    "exitCode": 0
+  },
+  {
+    "name": "test-leighton-newton.mjs",
+    "passed": false,
+    "exitCode": 1
+  },
+  {
+    "name": "test-churton.mjs",
+    "passed": true,
+    "exitCode": 0
+  },
+  {
+    "name": "test-upton.mjs",
+    "passed": true,
+    "exitCode": 0
+  },
+  {
+    "name": "test-garages-mortuary.mjs",
+    "passed": true,
+    "exitCode": 0
+  },
+  {
+    "name": "test-greenhouses.mjs",
+    "passed": true,
+    "exitCode": 0
+  },
+  {
+    "name": "test-main-admin.mjs",
+    "passed": true,
+    "exitCode": 0
+  },
+  {
+    "name": "test-main-kitchen.mjs",
+    "passed": true,
+    "exitCode": 0
+  },
+  {
+    "name": "test-main-admin-refine2.mjs",
+    "passed": true,
+    "exitCode": 0
+  },
+  {
+    "name": "test-aerial-controls.mjs",
+    "passed": true,
+    "exitCode": 0
+  },
+  {
+    "name": "test-view-navigation.mjs",
+    "passed": true,
+    "exitCode": 0
+  },
+  {
+    "name": "test-developer-options.mjs",
+    "passed": true,
+    "exitCode": 0
+  },
+  {
+    "name": "test-device-location.mjs",
+    "passed": true,
+    "exitCode": 0
+  },
+  {
+    "name": "test-aerial-layouts.mjs",
+    "passed": false,
+    "exitCode": 1
+  },
+  {
+    "name": "test-kml-imports.mjs",
+    "passed": true,
+    "exitCode": 0
+  },
+  {
+    "name": "test-kml-11.mjs",
+    "passed": true,
+    "exitCode": 0
+  },
+  {
+    "name": "test-modern-entrance.mjs",
+    "passed": true,
+    "exitCode": 0
+  },
+  {
+    "name": "test-modern-car-park.mjs",
+    "passed": true,
+    "exitCode": 0
+  },
+  {
+    "name": "test-parsons-retrace.mjs",
+    "passed": true,
+    "exitCode": 0
+  },
+  {
+    "name": "test-historic-roads.mjs",
+    "passed": true,
+    "exitCode": 0
+  },
+  {
+    "name": "test-road-continuity.mjs",
+    "passed": true,
+    "exitCode": 0
+  },
+  {
+    "name": "test-west-parsons-junctions.mjs",
+    "passed": true,
+    "exitCode": 0
+  },
+  {
+    "name": "test-admin-teardrop.mjs",
+    "passed": true,
+    "exitCode": 0
+  },
+  {
+    "name": "test-annexe-access.mjs",
+    "passed": false,
+    "exitCode": 1
+  },
+  {
+    "name": "test-annexe-rear-roads.mjs",
+    "passed": true,
+    "exitCode": 0
+  },
+  {
+    "name": "test-performance.mjs",
+    "passed": true,
+    "exitCode": 0
+  },
+  {
+    "name": "test-aerial-performance.mjs",
+    "passed": true,
+    "exitCode": 0
+  },
+  {
+    "name": "test-building-detail.mjs",
+    "passed": true,
+    "exitCode": 0
+  },
+  {
+    "name": "test-outhouse.mjs",
+    "passed": true,
+    "exitCode": 0
+  },
+  {
+    "name": "test-willows.mjs",
+    "passed": true,
+    "exitCode": 0
+  },
+  {
+    "name": "test-building-photos.mjs",
+    "passed": true,
+    "exitCode": 0
+  }
+]

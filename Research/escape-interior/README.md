@@ -1,5 +1,24 @@
 # Asylum escape interior finishes
 
+## Animated upper staff gates (9 October 2026)
+
+The owner's request animates opening the gate to the upper floor. Both S1 and
+S5 retain their existing frames and hinge pins. Releasing a grille clears its
+chain and padlock, then swings the visible leaf 90 degrees over the level
+landing in 1.1 seconds, easing at both ends. Opening toward the flight would
+intersect the rising treads. The notice, handle and moving hinge plates travel
+with the leaf; the fixed posts and knuckles remain attached to the stairs.
+
+Walking and jumping respect the leaf throughout the swing and beside the
+landing when open. The staff key opens its selected gate; the basement release
+opens both. Pausing freezes movement, capture retains opened gates, and restart
+restores locked gates. Reduced motion immediately shows the same open pose.
+This supersedes the disappearing released leaf in the earlier attachment note.
+
+These are fictional browser Escape runtime fittings. Shared architecture,
+compiled scene assets, Unity/Android and Blender exports are unchanged. Review
+captures are in `../../Browser/artifacts/staff-gate-animation/`.
+
 ## Victorian timber exit leaves (7 October 2026)
 
 The owner's styling request replaces the modern flat green exit leaves with

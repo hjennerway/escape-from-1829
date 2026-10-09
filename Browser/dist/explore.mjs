@@ -18,27 +18,29 @@ import {GREENHOUSE_VIEWS} from './greenhouses.mjs';
 import {OUTHOUSE_VIEWS} from './outhouse.mjs';
 import {LAUNDRY_VIEWS} from './laundry.mjs';
 import {MAIN_ADMIN_VIEWS} from './main-admin-building.mjs';
-import {createAerialLayouts} from './aerial-layouts.mjs';
-import {prepareEstateTimeline} from './estate-timeline.mjs';
+import {loadAerialScene} from './aerial-scene.mjs';
 import {bindTimelineControls} from './timeline-controls.mjs';
 import {WATER_TOWER_VIEWS} from './water-tower.mjs';
 import {TOWER_BUILDING_VIEWS} from './tower-buildings.mjs';
 import {ANNEXE_VIEWS,ANNEXE_WARD_WALKS} from './annexe.mjs';
 import * as THREE from './vendor/three.module.js';
-import {createEscapeExterior,loadEscapeFrontage} from './escape-exterior.mjs';
+import {loadEscapeFrontage} from './escape-exterior.mjs';
 import {FRONT_STEPS_VIEW} from './front-steps.mjs';
 import {FRONT_WALL_VIEW} from './front-boundary-wall.mjs';
 import {REDESMERE_PASSAGE_VIEW} from './redesmere-passage.mjs';
 import {REDESMERE_CHIMNEY_VIEWS} from './redesmere-edge-chimney.mjs';
 import {createExploreWalker} from './explore-walker.mjs';
-import {buildAsylumLayout} from './asylum-layout.mjs';
+import {createExploreWorkshops} from './explore-workshops.mjs';
+import {loadExploreLayout} from './explore-layout-loading.mjs';
 import {createExploreInterior} from './explore-interior.mjs';
+import {deferExploreInterior} from './deferred-explore-interior.mjs';
 import {createInteriorLoadingStatus} from './interior-loading-status.mjs';
 import {furnishAsylum} from './asylum-furniture.mjs';
 import {loadFurnitureModels,updateFurnitureDetail} from './furniture-models.mjs';
 import {bindExploreInput} from './explore-input.mjs';
 import {sampleLanding} from './aerial-controls.mjs';
 import {beginIntroFlight} from './intro-navigation.mjs';
+import {compileVisibleScene} from './visible-shaders.mjs';
 import {readViewLocation,groundLocationView,bindViewSwitch,viewLighting} from './view-navigation.mjs';
 import {bindDeveloperOptions} from './developer-options.mjs';
 import {EAST_PHOTO_VIEW} from './east-photo-detail.mjs';
@@ -62,25 +64,36 @@ import {CENTRAL_BACK_VIEWS} from './central-back.mjs';
 import {FRONT_LAWN_TREE_VIEW} from './front-lawn-trees.mjs';
 const canvas=document.getElementById('game'),hint=document.getElementById('lookHint'),look=document.getElementById('look');
 try{
+  const handoff=window.viewHandoff??window.introHandoff;
+  await handoff?.paint('Loading the grounds…');
   const renderer=new THREE.WebGLRenderer({canvas,antialias:true});
   renderer.setPixelRatio(Math.min(devicePixelRatio,1.5));renderer.setSize(innerWidth,innerHeight);
   renderer.outputColorSpace=THREE.SRGBColorSpace;renderer.toneMapping=THREE.ACESFilmicToneMapping;renderer.toneMappingExposure=1.25;
   renderer.shadowMap.enabled=true;renderer.shadowMap.type=THREE.PCFShadowMap;
-  const exterior=createEscapeExterior(THREE,innerWidth/innerHeight);
+  const modelOptions=new URLSearchParams(location.search);modelOptions.set('buildingDetail','full');
+  const [{exterior,layouts},{plan:floorPlan,floors}]=await Promise.all([
+    loadAerialScene(THREE,innerWidth/innerHeight,{search:modelOptions.toString()}),loadExploreLayout()
+  ]);
   canvas.addEventListener('webglcontextrestored',exterior.invalidateShadows);
   exterior.camera.near=.1;exterior.camera.updateProjectionMatrix();
-  const layouts=createAerialLayouts(THREE,exterior);
-  const timeline=prepareEstateTimeline(THREE,exterior,layouts);
+  const timeline=exterior.timeline;
+  await handoff?.paint('Preparing paths and doors…');
+  const lighting=createDayNight(THREE,exterior,renderer,{walking:true});lighting.setMode(viewLighting(location.search,'dusk'));bindDayNight(lighting);
   // Road-name sprites are map overlays; keep them out of the walking view.
   layouts.roads.traverse(object=>{if(object.isSprite)object.visible=false;});
-  hint.textContent='Preparing the rooms and stairs…';
-  const response=await fetch('./asylum-plan.json');if(!response.ok)throw Error('Floor plans could not load');
-  const floorPlan=await response.json(),floors=buildAsylumLayout(floorPlan).floors;
-  furnishAsylum(floors);
-  const interior=createExploreInterior(THREE,floors,await loadFurnitureModels(THREE),{streaming:true,renderer,camera:exterior.camera});
-  const walker=createExploreWalker(THREE,exterior,floors,{allowMove:interior.loading.allowMove});
+  hint.textContent='Preparing paths and doors…';
+  const interior=deferExploreInterior(async()=>{
+    const models=await loadFurnitureModels(THREE);
+    furnishAsylum(floors);
+    return createExploreInterior(THREE,floors,models,{streaming:true,renderer,camera:exterior.camera});
+  });
+  let workshops;
+  // The timeline's initial workshop refresh builds collisions before input is
+  // enabled. Avoid scanning the same estate once more before those fittings.
+  const walker=createExploreWalker(THREE,exterior,floors,{deferObstacles:true,allowMove:interior.loading.allowMove,doorInteractions:{nearbyDoor:actor=>workshops?.nearbyDoor(actor),useDoor:door=>workshops.useDoor(door)}});
+  workshops=createExploreWorkshops(THREE,exterior,walker,timeline);
   const loadingStatus=createInteriorLoadingStatus(document,interior.loading);
-  function refreshObstacles(){walker.setObstacles();}
+  function refreshObstacles(){workshops.refresh();}
   applyTreeRenderingDefault(renderer,exterior,refreshObstacles);
   bindTimelineControls(timeline,document.getElementById('layoutControls'),refreshObstacles);
   bindTreeToggle(exterior,document,refreshObstacles);
@@ -143,18 +156,28 @@ try{
   const input=bindExploreInput(walker,{canvas,hint,look,touchControls:document.getElementById('walkTouch')});
   const developer=bindDeveloperOptions({THREE,exterior,plan:async()=>({floors,outsideStairs:floorPlan.outsideStairs}),getMapState:()=>({player:walker.actor,yaw:exterior.camera.rotation.y}),onMapChange:show=>{if(show){input.stop();document.exitPointerLock?.();}}});
   window.addEventListener('resize',()=>{renderer.setSize(innerWidth,innerHeight);exterior.camera.aspect=innerWidth/innerHeight;if(view==='inner-east-photo')exterior.camera.fov=innerEastPhotoView(exterior.camera.aspect).fov;if(view==='central-court-photo')exterior.camera.fov=centralCourtPhotoView(exterior.camera.aspect).fov;exterior.camera.updateProjectionMatrix();});
-  const lighting=createDayNight(THREE,exterior,renderer,{walking:true});lighting.setMode(viewLighting(location.search,'dusk'));bindDayNight(lighting);
-  bindViewSwitch(document.getElementById('switchView'),{camera:exterior.camera,destination:'./aerial.html',period:()=>timeline.period.year,lighting:()=>lighting.mode});
+  bindViewSwitch(document.getElementById('switchView'),{camera:exterior.camera,destination:'./aerial.html',period:()=>timeline.period.year,lighting:()=>lighting.mode,capture:()=>{renderer.render(walker.actor.outside?exterior.scene:interior.scene,exterior.camera);return canvas;}});
   const doorButton=document.getElementById('exploreDoor');
   doorButton.addEventListener('click',()=>{walker.useDoor();canvas.focus({preventScroll:true});});
-  const introFlight=beginIntroFlight(exterior.camera,{fallback:sampleLanding(0,{aspect:exterior.camera.aspect,cinematic:true})});
   const entrances=floors.flatMap(f=>f.exits.map(e=>({...e,floor:f.id}))),entry=entrances.sort((a,b)=>Math.hypot(a.destination[0]-walker.actor.x,a.destination[1]-walker.actor.y,a.destination[2]-walker.actor.z)-Math.hypot(b.destination[0]-walker.actor.x,b.destination[1]-walker.actor.y,b.destination[2]-walker.actor.z))[0];
-  await interior.loading.prepare({...entry.inside,floor:entry.floor});interior.loading.startBackground();
+  await handoff?.paint('Preparing the view…');
+  lighting.update(0);
+  await compileVisibleScene(THREE,renderer,exterior.scene,exterior.camera);
+  const introFlight=beginIntroFlight(exterior.camera,{fallback:sampleLanding(0,{aspect:exterior.camera.aspect,cinematic:true})});
+  let roomsStarted=false;
   const clock=new THREE.Timer();clock.connect(document);
   renderer.setAnimationLoop(()=>{clock.update();const dt=clock.getDelta();if(document.hidden)return;if(introFlight?.active)introFlight.update(dt);else if(input.active)walker.update(dt);lighting.update(dt);interior.update(walker.actor,input.active?dt:0);
-    walker.retryDoor();loadingStatus();const door=walker.nearbyDoor();doorButton.hidden=!door||!!introFlight?.active;
-    if(door)doorButton.textContent=(walker.actor.outside?'Enter building':'Go outside')+' · E';
+    workshops.update(dt,walker.actor);walker.retryDoor();loadingStatus();const door=walker.nearbyDoor();doorButton.hidden=!door||!!introFlight?.active;
+    if(door)doorButton.textContent=(door.action??(walker.actor.outside?'Enter building':'Go outside'))+' · E';
     if(!walker.actor.outside)updateFurnitureDetail(THREE,interior.scene,exterior.camera,innerHeight);
-    renderer.render(walker.actor.outside?exterior.scene:interior.scene,exterior.camera);developer.render(renderer,exterior.camera);introFlight?.afterRender();});
+    renderer.render(walker.actor.outside?exterior.scene:interior.scene,exterior.camera);developer.render(renderer,exterior.camera);introFlight?.afterRender();
+    if(window.viewHandoff){window.viewHandoff.finish();delete window.viewHandoff;}
+    // Yield a painted outdoor frame before starting the indoor work. Failed
+    // rooms keep their retry prompt; they cannot blank or disable the grounds.
+    if(!roomsStarted&&!introFlight?.active){roomsStarted=true;setTimeout(()=>{
+      interior.loading.prepare({...entry.inside,floor:entry.floor}).catch(error=>console.warn('Room preparation failed',error));
+      interior.loading.startBackground();
+    },0);}
+  });
   loadEscapeFrontage(THREE,exterior).catch(error=>console.warn('Frontage photo unavailable',error));
-}catch(error){console.error(error);window.introHandoff?.fail();hint.textContent='The grounds could not load. Reload the page to try again.';look.disabled=false;look.textContent='RELOAD ↗';look.onclick=()=>location.reload();}
+}catch(error){console.error(error);window.introHandoff?.fail();window.viewHandoff?.fail();hint.textContent='The grounds could not load. Reload the page to try again.';look.disabled=false;look.textContent='RELOAD ↗';look.onclick=()=>location.reload();}

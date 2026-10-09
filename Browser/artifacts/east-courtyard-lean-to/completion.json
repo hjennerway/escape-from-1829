@@ -1,0 +1,14 @@
+{
+  "fullSuite": {
+    "command": "npm test",
+    "exitCode": 0,
+    "log": "full-suite.log"
+  },
+  "compiledRoofChecks": true,
+  "compiledComparison": true,
+  "sourceHash": "753f08c156a581736b1b539a0005bfd4b51bd367639a688b60f2b8fe16fbb3ef",
+  "binary": "aerial-da8c9e39f136a451fa81.bin.gz",
+  "binaryHash": "da8c9e39f136a451fa81f712a482117a9b96eb5b892b0d636daccc49ba113592",
+  "renderer": "NVIDIA GeForce RTX 3090 Ti / ANGLE Direct3D11",
+  "scope": "Shared browser sources and compiled aerial asset; native, Blender, interior and packaged exports unchanged"
+}

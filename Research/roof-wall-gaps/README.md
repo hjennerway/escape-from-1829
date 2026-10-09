@@ -64,3 +64,42 @@ capture folder, avoiding Windows locks on shared screenshot files.
 
 Scope: browser model sources and regenerated local compiled aerial assets.
 Unity, Blender and packaged desktop/Android exports are not regenerated.
+
+## Covered fascia areas and texture flicker — 9 October 2026
+
+The later Irby/Ashley reference (`../irby-ashley/roof-flicker-reference.png`)
+revealed automatic fascias sharing the authored gable planes. This correction
+supersedes the earlier claim that every added fascia area was needed. The
+finisher now indexes authored vertical faces, including gables, cornices,
+instanced trim and vertical ends in roof meshes. It subtracts their overlapping
+areas from generated vertical triangles and keeps uncovered fragments. Wall
+infill and masonry are excluded from the name-based roof-skin classification.
+Roof backings, horizontal returns and the original roof/wall definitions remain.
+
+The clipping uses the final world transforms, including reflected and scaled
+parents. A 0.001-unit plane tolerance covers the tiny end cap meeting the east
+entrance cornice; a 0.00001-unit boundary clearance absorbs Float32 edge rounding.
+Disjoint coplanar faces leave triangles intact. Both normal assembly passes
+cache the authored-face records with their actual geometry/transform values.
+The finish still runs before timeline splitting, material batches and shadows.
+
+The independent audit samples three interior points per generated fascia
+triangle, transforms hit normals into world space and compares actual authored
+coverage. The saved original has 444 overlap samples in 37 mesh pairs, including
+Irby, its Grafton copy, Farndon/Witby, Upton, the annexe, both main-wing returns,
+Reception, connecting corridors and tower ranges. The final audit samples
+48,825 points with no overlap. A geometry/transform/material hash preserves all
+8,926 surveyed authored meshes (1,139,114 triangles with instances), excluding
+trees, terrain, transparent and array-material meshes from this overlap survey.
+
+`test-support/roof-wall-flicker-rays.json` freezes all 444 original defect points.
+The roof-wall regression checks retained authored coverage and no generated
+competitor in source and compiled geometry, and fails with the saved original
+finisher. The existing 278 independently frozen open-eave rays still pass.
+Local GPU review uses NVIDIA GeForce RTX 3090 Ti / ANGLE Direct3D11.
+All evidence and the saved original finisher are in
+`Browser/artifacts/irby-roof-flicker/`; reproduce the independent survey with
+`node artifacts/irby-roof-flicker/inspect.mjs review` from `Browser`.
+
+Scope: browser roof finishing and regenerated local compiled aerial/interior
+assets. Unity/Android, Blender and packaged exports are not regenerated.

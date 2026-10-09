@@ -1,0 +1,44 @@
+{
+  "code": 0,
+  "failures": [
+    {
+      "method": "deepEqual",
+      "actual": {
+        "fixed": {
+          "count": 18734,
+          "hash": "1accf0a14bdc8733b7db9d898ce74bfd791312f1a6865cdb23fe8576ba2ba2d4"
+        },
+        "head": {
+          "count": 1218,
+          "hash": "5b53d45067f1e5184e7b7dbc056a286a6ba4410ab8065694ea21d0176d8b90e3"
+        },
+        "west": {
+          "count": 1482,
+          "hash": "8aab5120a841b4da848c44323e348223e775231f56fd3d08b1896b3cb68d6bbc"
+        }
+      },
+      "expected": {
+        "fixed": {
+          "count": 18734,
+          "hash": "5cd3763a5258ba7eee7274e1b92b15cc6bdf850a9dad51cfdabd8f9bf9478ea7"
+        },
+        "head": {
+          "count": 1218,
+          "hash": "5b53d45067f1e5184e7b7dbc056a286a6ba4410ab8065694ea21d0176d8b90e3"
+        },
+        "west": {
+          "count": 1482,
+          "hash": "8aab5120a841b4da848c44323e348223e775231f56fd3d08b1896b3cb68d6bbc"
+        }
+      },
+      "message": "Every retained primitive preserves its shape, material and height; only the marked assemblies move",
+      "stack": [
+        "    at assert.<computed> [as deepEqual] (file:///C:/Users/Harry/Documents/_escape-from-1829/Browser/artifacts/ward-placement-reference/capture-snapshot-mismatches.mjs:9:14)",
+        "    at file:///C:/Users/Harry/Documents/_escape-from-1829/Browser/test-annexe-rear-side-alignment.mjs:14:8",
+        "    at ModuleJob.run (node:internal/modules/esm/module_job:561:25)",
+        "    at async node:internal/modules/esm/loader:647:26",
+        "    at async asyncRunEntryPointWithESMLoader (node:internal/modules/run_main:101:5)"
+      ]
+    }
+  ]
+}

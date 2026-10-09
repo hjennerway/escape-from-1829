@@ -1,0 +1,9 @@
+{
+  "movement": 0.01,
+  "object": "East court back range brick walls",
+  "rejected": [
+    "Jarman",
+    "Leighton/Newton",
+    "Annexe"
+  ]
+}

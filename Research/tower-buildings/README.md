@@ -1,5 +1,54 @@
 # Tower service buildings
 
+## Closed ramp base and lower-end access — 9 October 2026
+
+The owner's `ramp-gap-reference.png` shows the open underside at the raised
+end of the service ramp and reports an invisible wall at its lower approach.
+This identifies a rendering/navigation defect, rather than new historical
+evidence. The original single south retaining face stopped at Y=.18, with
+the other three perimeter edges open. The ramp's sloping top was also indexed
+as one tall rectangular obstacle across its full length.
+
+The ramp now has outward-facing brick sides and end returns extending below
+the terrain. Its stone slope, placement, landing and blue rails retain their
+existing dimensions. The shared exterior walkers sample the transformed
+slope plane for support instead of blocking its enclosing box. The lower
+approach, ascent, descent and jump landing follow the actual ramp height.
+
+Checks and before/after GPU views are in
+`../../Browser/artifacts/service-ramp/`. Browser modelling/navigation sources
+and the local compiled aerial model are updated. Unity/Android, Blender,
+compiled interior assets and packaged exports are unchanged.
+
+## Stores gable flicker and wall slots — 8 October 2026
+
+The owner's `gable-wall-gap-reference.png` marks the east end of South
+cross-gabled stores: blue identifies flickering brick/terracotta near its
+peak, and yellow identifies the horizontal opening below the gable. The
+roof starts .14 units above the wall. Its thin gable previously left that
+strip open, while the automatic roof finisher created coplanar patches and
+false terracotta support beneath the ridge.
+
+The standard pitched service ranges now have one authored masonry enclosure
+from wall top to roof perimeter, with an opaque underside across the .2-unit
+overhang. This includes both stores ends, the North east stepped link,
+central hall, chimney hall, long service range and all three rear workshops.
+Redundant workshop gable-base strips are removed. Slate surfaces, ridges,
+footprints and ground-level walls retain their exact geometry. The high
+stores sash moves .2 units outward to expose its glazing in front of the
+existing gable plane; dimensions and pane divisions are retained.
+
+The survey checks actual geometry from both sides, excluding trees, open
+porches and buried rear caps of extruded gables. It identifies additional
+wall slots at the opposite stores end and the stepped link. After repair,
+435 remaining triangular-gable samples have no unfilled mid-wall slots.
+Separate checks cover 576 wall/roof seam samples, 234 single-face gable
+samples, 192 opaque underside samples and four clear high-sash panes.
+Evidence and repeatable scripts: `../../Browser/artifacts/service-wall-gaps/`.
+
+Scope: shared Browser sources and regenerated local aerial model. Unity,
+Android, Blender, interior models and packaged exports are unchanged.
+
 ## Continuous chimney-yard paving, 25 September 2026
 
 `chimney-yard-paving-reference.png` marks the complete enclosed yard in blue.
@@ -411,3 +460,30 @@ its original coordinates, then moved with its openings, dormers, stairs, ramp,
 trim and collision footprints. The pharmacy and workshop views follow the moves.
 The tower and pharmacy tests check fixed landmarks, workshop/Irby separation,
 chimney clearance, exposed glazing, continuous roofs and actual walking routes.
+
+## Shared blue roof lantern refinement (8 October 2026)
+
+The owner's `blue-roof-lantern-reference.png` shows the pair beside the water
+tower. Their end cheeks and gables are hung with grey slate, edged by pale
+blue bargeboards and corner boards. The long sides have four narrow lights,
+a high transom and a projecting blue sill close to the host roof. This
+supersedes the earlier plain-blue ends and generic three-light masonry sashes.
+
+`Browser/dist/blue-roof-lantern.mjs` now supplies all six tower/workshop
+lanterns and the matching mortuary vent. It fits the lower cheeks and thin
+lead aprons to each host slope. The slate cap, recessed gable, eave band and
+undersides are explicitly enclosed so automatic roof repairs cannot create
+overlapping gables or cover the glass. Slate courses use the estate texture;
+the ridge cap and flashing use a separate lead finish. Window framing has no
+brick lintel or stone sill.
+
+Counts, centres, ridge directions, cap extents and roof heights are retained,
+including the enlarged workshop copy. The mortuary keeps its previously
+requested wider, lower proportions. Hidden elevations share the same design;
+dimensions and colours are visual estimates from the photograph.
+
+Browser source and the local compiled aerial asset are updated. Unity/Android,
+Blender, interior models and packaged exports are not regenerated. Repeatable
+source/compiled views, geometry preservation, GPU receipts and validation logs
+are under `Browser/artifacts/blue-roof-lanterns/`; final test results are in
+`DEVELOPMENT.md`.

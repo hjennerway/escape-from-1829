@@ -1,0 +1,101 @@
+{
+  "build": {
+    "mode": "procedural",
+    "milliseconds": 3008.599999997765
+  },
+  "renderer": "ANGLE (NVIDIA, NVIDIA GeForce RTX 3090 Ti (0x00002203) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+  "errors": [],
+  "views": {
+    "reference": {
+      "position": [
+        258,
+        1.8,
+        6
+      ],
+      "target": [
+        228.36,
+        8.6,
+        -3.65
+      ],
+      "fov": 52
+    },
+    "close": {
+      "position": [
+        240,
+        7,
+        -3.65
+      ],
+      "target": [
+        228.56,
+        10.9,
+        -3.65
+      ],
+      "fov": 48
+    },
+    "shift": {
+      "position": [
+        240,
+        7,
+        -3.25
+      ],
+      "target": [
+        228.56,
+        10.9,
+        -3.65
+      ],
+      "fov": 48
+    },
+    "oblique": {
+      "position": [
+        244,
+        6,
+        8
+      ],
+      "target": [
+        228.4,
+        9,
+        -4
+      ],
+      "fov": 57
+    },
+    "rear": {
+      "position": [
+        195,
+        10,
+        3
+      ],
+      "target": [
+        210,
+        10,
+        -3.65
+      ],
+      "fov": 59
+    },
+    "overview": {
+      "position": [
+        250,
+        50,
+        42
+      ],
+      "target": [
+        194,
+        5,
+        -28
+      ],
+      "fov": 65
+    },
+    "auditLeighton": {
+      "position": [
+        398,
+        6,
+        45
+      ],
+      "target": [
+        381,
+        7.5,
+        40
+      ],
+      "fov": 58
+    }
+  }
+}

@@ -1,0 +1,37 @@
+[
+  {
+    "mode": "/aerial.html",
+    "stage": {
+      "modules": 259.09999999962747,
+      "models": 1109.2999999998137,
+      "setup": 1895.5,
+      "frontage": 1900.5999999996275,
+      "first": 2685.899999999907
+    },
+    "models": {
+      "mode": "compiled",
+      "milliseconds": 841.2999999998137
+    },
+    "draws": 1883,
+    "ready": 5539.199999999721,
+    "clickToReady": 5997
+  },
+  {
+    "mode": "/explore.html",
+    "stage": {
+      "modules": 535.8000000002794,
+      "models": 2002.4000000003725,
+      "paths": 9519.80000000028,
+      "setup": 9571.400000000373,
+      "shaders": 10711.80000000028,
+      "first": 10723.600000000093
+    },
+    "models": {
+      "mode": "compiled",
+      "milliseconds": 1444.8000000002794
+    },
+    "draws": 2090,
+    "ready": 13809.30000000028,
+    "clickToReady": 14347
+  }
+]

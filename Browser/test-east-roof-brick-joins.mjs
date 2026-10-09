@@ -51,10 +51,9 @@ for(const x of [44.85,45.1])for(const z of [7,8,10,12,14,16]){
  assert(!ray.intersectObjects(slate,false).some(h=>h.point.y>14.3101&&h.point.y<14.5299),'Slate does not cross the taller cornice');
  assert(top(x,z)>14.53,'The previously exposed brick lies below slate');
 }
-// Horizontal rays from outside must hit the complete rising walls, including
-// their upper render strip. A roof backing above a hole cannot satisfy these.
+// The short return beyond the lowered garden pitch still meets the high wall.
 let walls=0;
-for(const [z,sign,end] of [[17.4,1,40.6]])for(let x=38.15;x<end-.05;x+=.13){
+for(const [z,sign,end] of [[17.4,1,41.04]])for(let x=40.63;x<end-.05;x+=.05){
  const roofY=top(x,z-sign*.00001);
  for(const y of [13.04+(roofY-13.04)*.5,roofY-.025]){
   ray.set(new T.Vector3(x,y,z+sign*.3),new T.Vector3(0,0,-sign));ray.far=.301;
@@ -89,7 +88,36 @@ for(let z=6.65;z<9.74;z+=.07){
   assert(hits.filter(other=>Math.abs(other.distance-h.distance)<.00001).every(other=>other.object.material===h.object.material),'No competing trim along the split');stepSamples++;
  }
 }
+// Matching garden-side cut: a level wall-top corner and the original upper
+// plane, with the whole stepped return closed to the lower slate.
+const gardenLowerY=z=>13.06+(17.4-z)*2.6/5.4;
+const gardenUpperY=z=>14.55+(17.4-z)*1.11/5.4;
+for(let x=38.05;x<40.6;x+=.13)for(let z=12.01;z<17.39;z+=.17){
+ assert(Math.abs(top(x,z)-gardenLowerY(z))<.00002,'The opposite lower patch matches the entrance pitch: '+[x,z]);lowerSamples++;
+}
+for(let x=40.65;x<46;x+=.17){
+ const far=17.4-(x-40.6);
+ for(const t of [.05,.25,.5,.75,.95]){
+  const z=12+(far-12)*t;
+  assert(Math.abs(top(x,z)-gardenUpperY(z))<.00002,'The opposite upper triangle retains its original slope and height');upperSamples++;
+ }
+}
+for(let z=12.05;z<17.39;z+=.07){
+ const low=gardenLowerY(z),high=gardenUpperY(z);
+ for(const t of [.02,.25,.5,.75,.98]){
+  ray.set(new T.Vector3(40.3,low+(high-low)*t,z),new T.Vector3(1,0,0));ray.far=.3001;
+  const hits=ray.intersectObjects(parts,false),h=hits[0];
+  assert(h?.object.name.startsWith('East garden stepped abutment '),'The opposite split has opaque brick/render down to the lower roof: '+JSON.stringify({z,t,name:h?.object.name,distance:h?.distance}));
+  assert(hits.filter(other=>Math.abs(other.distance-h.distance)<.00001).every(other=>other.object.material===h.object.material),'No competing trim along the opposite split');stepSamples++;
+ }
+}
 ray.far=Infinity;
+// The short white return is below the slate instead of sharing its plane.
+const frontCap=parts.filter(o=>o.name==='East entrance rising front return eave render');
+for(let x=40.65;x<41.03;x+=.07)for(const z of [17.3,17.34,17.38]){
+ const roofY=top(x,z),cap=ray.intersectObjects(frontCap,false)[0];
+ assert(cap&&roofY-cap.point.y>.0004&&roofY-cap.point.y<.02,'Garden return cap stays below the slate to prevent flickering: '+JSON.stringify({x,z,roofY,capY:cap?.point.y}));
+}
 // Timeline splitting can retain several fragments with the same source name.
 const rebuiltNames=['Entrance east recessed slate roof','Redesmere aligned frontage slate roof','East courtyard polygonal bay slate roof','East curved bay slate roof','Garden pavilion slate roof','East courtyard fire-exit corner slate roof'];
 const rebuilt=parts.filter(o=>rebuiltNames.includes(o.name));

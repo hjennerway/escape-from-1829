@@ -1,0 +1,41 @@
+{
+  "manifest": {
+    "format": 1,
+    "revision": "186",
+    "sourceHash": "dbc20a385ca020fc3ff87699ed163f3beb9e84355983162594106d70155e527b",
+    "file": "aerial-082c3b39779e4ea21b08.bin.gz",
+    "bytes": 19746097,
+    "uncompressedBytes": 136964112,
+    "sha256": "082c3b39779e4ea21b0896368cc70f149438a2e71a027031faeaeab886adb475",
+    "stats": {
+      "revision": "186",
+      "buildMilliseconds": 9394.199999999255,
+      "windows": 2999,
+      "geometries": 11192,
+      "geometryBytesSaved": 34056888,
+      "materials": 764,
+      "textures": 65
+    }
+  },
+  "roadPreservation": {
+    "roadMeshes": 32,
+    "roadVertices": 63888,
+    "kerbs": 32,
+    "roadBuffersUnchanged": true,
+    "originalGhostRejected": true
+  },
+  "views": [
+    "central",
+    "central-dusk",
+    "central-night",
+    "central-approach",
+    "central-phone",
+    "church",
+    "annexe-start",
+    "annexe-end"
+  ],
+  "pageErrors": [],
+  "renderer": "ANGLE / NVIDIA GeForce RTX 3090 Ti / Direct3D11",
+  "pavementsPassed": true,
+  "sourceCompiledComparisonPassed": true
+}

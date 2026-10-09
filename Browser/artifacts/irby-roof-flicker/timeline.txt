@@ -1,0 +1,21 @@
+Hardware GPU: ANGLE (NVIDIA, NVIDIA GeForce RTX 3090 Ti (0x00002203) Direct3D11 vs_5_0 ps_5_0, D3D11)
+node:internal/modules/run_main:107
+    triggerUncaughtException(
+    ^
+
+AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
++ actual - expected
+
++ 'procedural'
+- 'compiled'
+
+    at file:///C:/Users/Harry/Documents/_escape-from-1829/Browser/test-timeline-browser.mjs:79:10 {
+  generatedMessage: true,
+  code: 'ERR_ASSERTION',
+  actual: 'procedural',
+  expected: 'compiled',
+  operator: 'strictEqual',
+  diff: 'simple'
+}
+
+Node.js v24.20.0

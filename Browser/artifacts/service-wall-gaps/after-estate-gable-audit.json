@@ -1,0 +1,5969 @@
+{
+  "checked": 435,
+  "gaps": [],
+  "probes": [
+    {
+      "name": "Reception solid pediment backing",
+      "point": [
+        5.55,
+        14.615,
+        19.56
+      ],
+      "normal": [
+        0,
+        0,
+        -0.9999999999999999
+      ],
+      "hit": ""
+    },
+    {
+      "name": "Reception solid pediment backing",
+      "point": [
+        2.8499999999999996,
+        14.615,
+        19.56
+      ],
+      "normal": [
+        0,
+        0,
+        -0.9999999999999999
+      ],
+      "hit": ""
+    },
+    {
+      "name": "Reception solid pediment backing",
+      "point": [
+        -1.049999999999999,
+        14.615,
+        19.56
+      ],
+      "normal": [
+        0,
+        0,
+        -0.9999999999999999
+      ],
+      "hit": ""
+    },
+    {
+      "name": "Reception solid pediment backing",
+      "point": [
+        -4.350000000000001,
+        14.615,
+        19.56
+      ],
+      "normal": [
+        0,
+        0,
+        -0.9999999999999999
+      ],
+      "hit": ""
+    },
+    {
+      "name": "Reception solid pediment backing",
+      "point": [
+        -6.15,
+        14.615,
+        19.56
+      ],
+      "normal": [
+        0,
+        0,
+        -0.9999999999999999
+      ],
+      "hit": ""
+    },
+    {
+      "name": "Reception solid pediment backing",
+      "point": [
+        -5.55,
+        14.615,
+        19.700000000596045
+      ],
+      "normal": [
+        0,
+        0,
+        0.9999999999999999
+      ],
+      "hit": ""
+    },
+    {
+      "name": "Reception solid pediment backing",
+      "point": [
+        -2.8499999999999996,
+        14.615,
+        19.700000000596045
+      ],
+      "normal": [
+        0,
+        0,
+        0.9999999999999999
+      ],
+      "hit": ""
+    },
+    {
+      "name": "Reception solid pediment backing",
+      "point": [
+        1.049999999999999,
+        14.615,
+        19.700000000596045
+      ],
+      "normal": [
+        0,
+        0,
+        0.9999999999999999
+      ],
+      "hit": ""
+    },
+    {
+      "name": "Reception solid pediment backing",
+      "point": [
+        4.350000000000001,
+        14.615,
+        19.700000000596045
+      ],
+      "normal": [
+        0,
+        0,
+        0.9999999999999999
+      ],
+      "hit": ""
+    },
+    {
+      "name": "Reception solid pediment backing",
+      "point": [
+        6.15,
+        14.615,
+        19.700000000596045
+      ],
+      "normal": [
+        0,
+        0,
+        0.9999999999999999
+      ],
+      "hit": ""
+    },
+    {
+      "name": "Mast-side long ward gable infill",
+      "point": [
+        -48.565,
+        5.365,
+        -79.9
+      ],
+      "normal": [
+        0,
+        0,
+        -1
+      ],
+      "hit": "Mast-side long ward gable brick band"
+    },
+    {
+      "name": "Mast-side long ward gable infill",
+      "point": [
+        -51.355,
+        5.365,
+        -79.9
+      ],
+      "normal": [
+        0,
+        0,
+        -1
+      ],
+      "hit": "Mast-side long ward gable brick band"
+    },
+    {
+      "name": "Mast-side long ward gable infill",
+      "point": [
+        -55.385,
+        5.365,
+        -79.9
+      ],
+      "normal": [
+        0,
+        0,
+        -1
+      ],
+      "hit": "Mast-side long ward gable brick band"
+    },
+    {
+      "name": "Mast-side long ward gable infill",
+      "point": [
+        -58.795,
+        5.365,
+        -79.9
+      ],
+      "normal": [
+        0,
+        0,
+        -1
+      ],
+      "hit": "Mast-side long ward gable brick band"
+    },
+    {
+      "name": "Mast-side long ward gable infill",
+      "point": [
+        -60.655,
+        5.365,
+        -79.9
+      ],
+      "normal": [
+        0,
+        0,
+        -1
+      ],
+      "hit": "Mast-side long ward gable brick band"
+    },
+    {
+      "name": "Mast-side long ward gable infill",
+      "point": [
+        -60.035,
+        5.365,
+        -46.900000000000006
+      ],
+      "normal": [
+        0,
+        0,
+        1
+      ],
+      "hit": "Mast-side long ward gable brick band"
+    },
+    {
+      "name": "Mast-side long ward gable infill",
+      "point": [
+        -57.245,
+        5.365,
+        -46.900000000000006
+      ],
+      "normal": [
+        0,
+        0,
+        1
+      ],
+      "hit": "Mast-side long ward gable brick band"
+    },
+    {
+      "name": "Mast-side long ward gable infill",
+      "point": [
+        -53.214999999999996,
+        5.365,
+        -46.900000000000006
+      ],
+      "normal": [
+        0,
+        0,
+        1
+      ],
+      "hit": "Mast-side long ward gable brick band"
+    },
+    {
+      "name": "Mast-side long ward gable infill",
+      "point": [
+        -49.80499999999999,
+        5.365,
+        -46.900000000000006
+      ],
+      "normal": [
+        0,
+        0,
+        1
+      ],
+      "hit": "Mast-side long ward gable brick band"
+    },
+    {
+      "name": "Mast-side long ward gable infill",
+      "point": [
+        -47.94499999999999,
+        5.365,
+        -46.900000000000006
+      ],
+      "normal": [
+        0,
+        0,
+        1
+      ],
+      "hit": "Mast-side long ward gable brick band"
+    },
+    {
+      "name": "Rear oblique wing gable infill",
+      "point": [
+        -40.52746125216016,
+        5.115,
+        -66.73293624845688
+      ],
+      "normal": [
+        -0.49688013784373797,
+        0,
+        -0.8678191796776491
+      ],
+      "hit": "Rear oblique wing walls"
+    },
+    {
+      "name": "Rear oblique wing gable infill",
+      "point": [
+        -41.5740511530572,
+        5.115,
+        -66.13369881927636
+      ],
+      "normal": [
+        -0.49688013784373797,
+        0,
+        -0.8678191796776491
+      ],
+      "hit": "Rear oblique wing walls"
+    },
+    {
+      "name": "Rear oblique wing gable infill",
+      "point": [
+        -43.08579212101959,
+        5.115,
+        -65.26813364379338
+      ],
+      "normal": [
+        -0.49688013784373797,
+        0,
+        -0.8678191796776491
+      ],
+      "hit": "Rear oblique wing walls"
+    },
+    {
+      "name": "Rear oblique wing gable infill",
+      "point": [
+        -44.3649575554493,
+        5.115,
+        -64.53573234146162
+      ],
+      "normal": [
+        -0.49688013784373797,
+        0,
+        -0.8678191796776491
+      ],
+      "hit": "Rear oblique wing walls"
+    },
+    {
+      "name": "Rear oblique wing gable infill",
+      "point": [
+        -45.062684156047325,
+        5.115,
+        -64.13624072200795
+      ],
+      "normal": [
+        -0.49688013784373797,
+        0,
+        -0.8678191796776491
+      ],
+      "hit": "Rear oblique wing walls"
+    },
+    {
+      "name": "Rear oblique wing gable infill",
+      "point": [
+        -38.0725385582951,
+        5.115,
+        -52.467063420496395
+      ],
+      "normal": [
+        0.4968801378437372,
+        -1.7155333838088755e-15,
+        0.8678191796776497
+      ],
+      "hit": "Rear oblique wing gable brick band"
+    },
+    {
+      "name": "Rear oblique wing gable infill",
+      "point": [
+        -37.02594865739806,
+        5.115,
+        -53.06630084967692
+      ],
+      "normal": [
+        0.4968801378437372,
+        -1.7155333838088755e-15,
+        0.8678191796776497
+      ],
+      "hit": "Rear oblique wing gable brick band"
+    },
+    {
+      "name": "Rear oblique wing gable infill",
+      "point": [
+        -35.51420768943567,
+        5.115,
+        -53.93186602515989
+      ],
+      "normal": [
+        0.4968801378437372,
+        -1.7155333838088755e-15,
+        0.8678191796776497
+      ],
+      "hit": "Rear oblique wing gable brick band"
+    },
+    {
+      "name": "Rear oblique wing gable infill",
+      "point": [
+        -34.23504225500596,
+        5.115,
+        -54.664267327491636
+      ],
+      "normal": [
+        0.4968801378437372,
+        -1.7155333838088755e-15,
+        0.8678191796776497
+      ],
+      "hit": "Rear oblique wing gable brick band"
+    },
+    {
+      "name": "Rear oblique wing gable infill",
+      "point": [
+        -33.537315654407934,
+        5.115,
+        -55.06375894694532
+      ],
+      "normal": [
+        0.4968801378437372,
+        -1.7155333838088755e-15,
+        0.8678191796776497
+      ],
+      "hit": "Rear oblique wing gable brick band"
+    },
+    {
+      "name": "Long elevation cross gable gable infill",
+      "point": [
+        -62.3,
+        5.365,
+        -69.4010000705719
+      ],
+      "normal": [
+        -1,
+        0,
+        0
+      ],
+      "hit": "Long elevation cross gable gable brick band"
+    },
+    {
+      "name": "Long elevation cross gable gable infill",
+      "point": [
+        -62.3,
+        5.365,
+        -68.08700003623963
+      ],
+      "normal": [
+        -1,
+        0,
+        0
+      ],
+      "hit": "Long elevation cross gable gable brick band"
+    },
+    {
+      "name": "Long elevation cross gable gable infill",
+      "point": [
+        -62.3,
+        5.365,
+        -66.18899998664857
+      ],
+      "normal": [
+        -1,
+        0,
+        0
+      ],
+      "hit": "Long elevation cross gable gable brick band"
+    },
+    {
+      "name": "Long elevation cross gable gable infill",
+      "point": [
+        -62.3,
+        5.365,
+        -64.58299994468689
+      ],
+      "normal": [
+        -1,
+        0,
+        0
+      ],
+      "hit": "Long elevation cross gable gable brick band"
+    },
+    {
+      "name": "Long elevation cross gable gable infill",
+      "point": [
+        -62.3,
+        5.365,
+        -63.70699992179871
+      ],
+      "normal": [
+        -1,
+        0,
+        0
+      ],
+      "hit": "Long elevation cross gable gable brick band"
+    },
+    {
+      "name": "Long elevation cross gable gable infill",
+      "point": [
+        -59.3,
+        5.365,
+        -63.9989999294281
+      ],
+      "normal": [
+        1,
+        0,
+        0
+      ],
+      "hit": "Long elevation cross gable gable brick band"
+    },
+    {
+      "name": "Long elevation cross gable gable infill",
+      "point": [
+        -59.3,
+        5.365,
+        -65.31299996376038
+      ],
+      "normal": [
+        1,
+        0,
+        0
+      ],
+      "hit": "Long elevation cross gable gable brick band"
+    },
+    {
+      "name": "Long elevation cross gable gable infill",
+      "point": [
+        -59.3,
+        5.365,
+        -67.21100001335144
+      ],
+      "normal": [
+        1,
+        0,
+        0
+      ],
+      "hit": "Long elevation cross gable gable brick band"
+    },
+    {
+      "name": "Long elevation cross gable gable infill",
+      "point": [
+        -59.3,
+        5.365,
+        -68.81700005531312
+      ],
+      "normal": [
+        1,
+        0,
+        0
+      ],
+      "hit": "Long elevation cross gable gable brick band"
+    },
+    {
+      "name": "Long elevation cross gable gable infill",
+      "point": [
+        -59.3,
+        5.365,
+        -69.6930000782013
+      ],
+      "normal": [
+        1,
+        0,
+        0
+      ],
+      "hit": "Long elevation cross gable gable brick band"
+    },
+    {
+      "name": "Outhouse brick gables",
+      "point": [
+        77.51161434631015,
+        3.215,
+        94.12242717523003
+      ],
+      "normal": [
+        -0.9950041652780257,
+        2.731805828141978e-16,
+        0.09983341664682933
+      ],
+      "hit": "Outhouse brick walls"
+    },
+    {
+      "name": "Outhouse brick gables",
+      "point": [
+        77.60326142107819,
+        3.215,
+        95.03584098187488
+      ],
+      "normal": [
+        -0.9950041652780257,
+        2.731805828141978e-16,
+        0.09983341664682933
+      ],
+      "hit": "Outhouse brick walls"
+    },
+    {
+      "name": "Outhouse brick gables",
+      "point": [
+        77.73564052907646,
+        3.215,
+        96.35521648036189
+      ],
+      "normal": [
+        -0.9950041652780257,
+        2.731805828141978e-16,
+        0.09983341664682933
+      ],
+      "hit": "Outhouse brick walls"
+    },
+    {
+      "name": "Outhouse brick gables",
+      "point": [
+        77.84765362045961,
+        3.215,
+        97.47161113292782
+      ],
+      "normal": [
+        -0.9950041652780257,
+        2.731805828141978e-16,
+        0.09983341664682933
+      ],
+      "hit": "Outhouse brick walls"
+    },
+    {
+      "name": "Outhouse brick gables",
+      "point": [
+        77.90875167030497,
+        3.215,
+        98.08055367069105
+      ],
+      "normal": [
+        -0.9950041652780257,
+        2.731805828141978e-16,
+        0.09983341664682933
+      ],
+      "hit": "Outhouse brick walls"
+    },
+    {
+      "name": "Outhouse brick gables",
+      "point": [
+        85.94791977200582,
+        3.215,
+        97.06892211184723
+      ],
+      "normal": [
+        0.9950041652780258,
+        -4.02941359650943e-15,
+        -0.09983341664682684
+      ],
+      "hit": "Outhouse brick walls"
+    },
+    {
+      "name": "Outhouse brick gables",
+      "point": [
+        85.85627269723778,
+        3.215,
+        96.15550830520239
+      ],
+      "normal": [
+        0.9950041652780258,
+        -4.02941359650943e-15,
+        -0.09983341664682684
+      ],
+      "hit": "Outhouse brick walls"
+    },
+    {
+      "name": "Outhouse brick gables",
+      "point": [
+        85.72389358923952,
+        3.215,
+        94.83613280671538
+      ],
+      "normal": [
+        0.9950041652780258,
+        -4.02941359650943e-15,
+        -0.09983341664682684
+      ],
+      "hit": "Outhouse brick walls"
+    },
+    {
+      "name": "Outhouse brick gables",
+      "point": [
+        85.61188049785636,
+        3.215,
+        93.71973815414945
+      ],
+      "normal": [
+        0.9950041652780258,
+        -4.02941359650943e-15,
+        -0.09983341664682684
+      ],
+      "hit": "Outhouse brick walls"
+    },
+    {
+      "name": "Outhouse brick gables",
+      "point": [
+        85.550782448011,
+        3.215,
+        93.11079561638623
+      ],
+      "normal": [
+        0.9950041652780258,
+        -4.02941359650943e-15,
+        -0.09983341664682684
+      ],
+      "hit": "Outhouse brick walls"
+    },
+    {
+      "name": "Willows brick gables",
+      "point": [
+        1303.5804508225913,
+        3.064999904632568,
+        396.28235592701856
+      ],
+      "normal": [
+        0.8351148361854994,
+        0,
+        0.5500756406012418
+      ],
+      "hit": "Willows end brick wall"
+    },
+    {
+      "name": "Willows brick gables",
+      "point": [
+        1304.2141379700065,
+        3.064999904632568,
+        395.32030362139716
+      ],
+      "normal": [
+        0.8351148361854994,
+        0,
+        0.5500756406012418
+      ],
+      "hit": "Willows end brick wall"
+    },
+    {
+      "name": "Willows brick gables",
+      "point": [
+        1305.1294638496065,
+        3.064999904632568,
+        393.9306725132774
+      ],
+      "normal": [
+        0.8351148361854994,
+        0,
+        0.5500756406012418
+      ],
+      "hit": "Willows end brick wall"
+    },
+    {
+      "name": "Willows brick gables",
+      "point": [
+        1305.903970363114,
+        3.064999904632568,
+        392.75483080640674
+      ],
+      "normal": [
+        0.8351148361854994,
+        0,
+        0.5500756406012418
+      ],
+      "hit": "Willows end brick wall"
+    },
+    {
+      "name": "Willows brick gables",
+      "point": [
+        1306.3264284613908,
+        3.064999904632568,
+        392.1134626026592
+      ],
+      "normal": [
+        0.8351148361854994,
+        0,
+        0.5500756406012418
+      ],
+      "hit": "Eave closure: Willows red pitched"
+    },
+    {
+      "name": "Willows brick gables",
+      "point": [
+        1286.1428530268465,
+        3.064999904632568,
+        379.1254366294788
+      ],
+      "normal": [
+        -0.8351148361854994,
+        0,
+        -0.5500756406012418
+      ],
+      "hit": "Willows end brick wall"
+    },
+    {
+      "name": "Willows brick gables",
+      "point": [
+        1285.5091658794313,
+        3.064999904632568,
+        380.0874889351002
+      ],
+      "normal": [
+        -0.8351148361854994,
+        0,
+        -0.5500756406012418
+      ],
+      "hit": "Willows end brick wall"
+    },
+    {
+      "name": "Willows brick gables",
+      "point": [
+        1284.5938399998313,
+        3.064999904632568,
+        381.47712004322
+      ],
+      "normal": [
+        -0.8351148361854994,
+        0,
+        -0.5500756406012418
+      ],
+      "hit": "Willows end brick wall"
+    },
+    {
+      "name": "Willows brick gables",
+      "point": [
+        1283.8193334863238,
+        3.064999904632568,
+        382.65296175009064
+      ],
+      "normal": [
+        -0.8351148361854994,
+        0,
+        -0.5500756406012418
+      ],
+      "hit": "Willows end brick wall"
+    },
+    {
+      "name": "Willows brick gables",
+      "point": [
+        1283.396875388047,
+        3.064999904632568,
+        383.2943299538382
+      ],
+      "normal": [
+        -0.8351148361854994,
+        0,
+        -0.5500756406012418
+      ],
+      "hit": "Eave closure: Willows red pitched"
+    },
+    {
+      "name": "Church front brick gable",
+      "point": [
+        -1.2000000000000004,
+        8.765,
+        -105.185
+      ],
+      "normal": [
+        0,
+        0,
+        -0.9999999999999999
+      ],
+      "hit": "Church front brick facing"
+    },
+    {
+      "name": "Church front brick gable",
+      "point": [
+        -3.0000000000000004,
+        8.765,
+        -105.185
+      ],
+      "normal": [
+        0,
+        0,
+        -0.9999999999999999
+      ],
+      "hit": "Church front brick facing"
+    },
+    {
+      "name": "Church front brick gable",
+      "point": [
+        -5.6,
+        8.765,
+        -105.185
+      ],
+      "normal": [
+        0,
+        0,
+        -0.9999999999999999
+      ],
+      "hit": "Church front brick facing"
+    },
+    {
+      "name": "Church front brick gable",
+      "point": [
+        -7.800000000000001,
+        8.765,
+        -105.185
+      ],
+      "normal": [
+        0,
+        0,
+        -0.9999999999999999
+      ],
+      "hit": "Church front brick facing"
+    },
+    {
+      "name": "Church front brick gable",
+      "point": [
+        -9,
+        8.765,
+        -105.185
+      ],
+      "normal": [
+        0,
+        0,
+        -0.9999999999999999
+      ],
+      "hit": "Church front brick facing"
+    },
+    {
+      "name": "Church front brick gable",
+      "point": [
+        -8.6,
+        8.765,
+        -105.14999999985099
+      ],
+      "normal": [
+        0,
+        0,
+        0.9999999999999999
+      ],
+      "hit": "Church front brick facing"
+    },
+    {
+      "name": "Church front brick gable",
+      "point": [
+        -6.800000000000001,
+        8.765,
+        -105.14999999985099
+      ],
+      "normal": [
+        0,
+        0,
+        0.9999999999999999
+      ],
+      "hit": "Church lancet outer stone moulding"
+    },
+    {
+      "name": "Church front brick gable",
+      "point": [
+        -4.200000000000001,
+        8.765,
+        -105.14999999985099
+      ],
+      "normal": [
+        0,
+        0,
+        0.9999999999999999
+      ],
+      "hit": "Church diamond leaded lancet"
+    },
+    {
+      "name": "Church front brick gable",
+      "point": [
+        -2,
+        8.765,
+        -105.14999999985099
+      ],
+      "normal": [
+        0,
+        0,
+        0.9999999999999999
+      ],
+      "hit": "Church front stepped brick buttress"
+    },
+    {
+      "name": "Church front brick gable",
+      "point": [
+        -0.8000000000000007,
+        8.765,
+        -105.14999999985099
+      ],
+      "normal": [
+        0,
+        0,
+        0.9999999999999999
+      ],
+      "hit": "Church front brick facing"
+    },
+    {
+      "name": "Church clock steep brick pediment",
+      "point": [
+        -3.7530000352859503,
+        16.794999999999998,
+        -105.7
+      ],
+      "normal": [
+        0,
+        0,
+        -1
+      ],
+      "hit": "Church shouldered clock stage"
+    },
+    {
+      "name": "Church clock steep brick pediment",
+      "point": [
+        -4.311000018119812,
+        16.794999999999998,
+        -105.7
+      ],
+      "normal": [
+        0,
+        0,
+        -1
+      ],
+      "hit": "Church shouldered clock stage"
+    },
+    {
+      "name": "Church clock steep brick pediment",
+      "point": [
+        -5.11699999332428,
+        16.794999999999998,
+        -105.7
+      ],
+      "normal": [
+        0,
+        0,
+        -1
+      ],
+      "hit": "Church shouldered clock stage"
+    },
+    {
+      "name": "Church clock steep brick pediment",
+      "point": [
+        -5.798999972343445,
+        16.794999999999998,
+        -105.7
+      ],
+      "normal": [
+        0,
+        0,
+        -1
+      ],
+      "hit": "Church shouldered clock stage"
+    },
+    {
+      "name": "Church clock steep brick pediment",
+      "point": [
+        -6.170999960899353,
+        16.794999999999998,
+        -105.7
+      ],
+      "normal": [
+        0,
+        0,
+        -1
+      ],
+      "hit": "Church clock pediment kneeler"
+    },
+    {
+      "name": "Church clock steep brick pediment",
+      "point": [
+        -6.04699996471405,
+        16.794999999999998,
+        -104.5400000333786
+      ],
+      "normal": [
+        0,
+        0,
+        1
+      ],
+      "hit": "Church shouldered clock stage"
+    },
+    {
+      "name": "Church clock steep brick pediment",
+      "point": [
+        -5.4889999818801885,
+        16.794999999999998,
+        -104.5400000333786
+      ],
+      "normal": [
+        0,
+        0,
+        1
+      ],
+      "hit": "Church shouldered clock stage"
+    },
+    {
+      "name": "Church clock steep brick pediment",
+      "point": [
+        -4.683000006675721,
+        16.794999999999998,
+        -104.5400000333786
+      ],
+      "normal": [
+        0,
+        0,
+        1
+      ],
+      "hit": "Church shouldered clock stage"
+    },
+    {
+      "name": "Church clock steep brick pediment",
+      "point": [
+        -4.001000027656556,
+        16.794999999999998,
+        -104.5400000333786
+      ],
+      "normal": [
+        0,
+        0,
+        1
+      ],
+      "hit": "Church shouldered clock stage"
+    },
+    {
+      "name": "Church clock steep brick pediment",
+      "point": [
+        -3.629000039100647,
+        16.794999999999998,
+        -104.5400000333786
+      ],
+      "normal": [
+        0,
+        0,
+        1
+      ],
+      "hit": "Church clock pediment kneeler"
+    },
+    {
+      "name": "Roadside north wing brick gables",
+      "point": [
+        251.59279949188232,
+        8.364999618530273,
+        -89.78000011444092
+      ],
+      "normal": [
+        0,
+        0,
+        1
+      ]
+    },
+    {
+      "name": "Roadside north wing brick gables",
+      "point": [
+        253.4935997390747,
+        8.364999618530273,
+        -89.78000011444092
+      ],
+      "normal": [
+        0,
+        0,
+        1
+      ]
+    },
+    {
+      "name": "Roadside north wing brick gables",
+      "point": [
+        256.2392000961304,
+        8.364999618530273,
+        -89.78000011444092
+      ],
+      "normal": [
+        0,
+        0,
+        1
+      ]
+    },
+    {
+      "name": "Roadside north wing brick gables",
+      "point": [
+        258.5624003982544,
+        8.364999618530273,
+        -89.78000011444092
+      ],
+      "normal": [
+        0,
+        0,
+        1
+      ]
+    },
+    {
+      "name": "Roadside north wing brick gables",
+      "point": [
+        259.8296005630493,
+        8.364999618530273,
+        -89.78000011444092
+      ],
+      "normal": [
+        0,
+        0,
+        1
+      ]
+    },
+    {
+      "name": "Roadside north wing brick gables",
+      "point": [
+        259.4072005081177,
+        8.364999618530273,
+        -73.82000007629395
+      ],
+      "normal": [
+        0,
+        0,
+        -1
+      ],
+      "hit": "Irby/Ashley sashes, masonry bands and rainwater goods"
+    },
+    {
+      "name": "Roadside north wing brick gables",
+      "point": [
+        257.5064002609253,
+        8.364999618530273,
+        -73.82000007629395
+      ],
+      "normal": [
+        0,
+        0,
+        -1
+      ],
+      "hit": "Irby/Ashley sashes, masonry bands and rainwater goods"
+    },
+    {
+      "name": "Roadside north wing brick gables",
+      "point": [
+        254.76079990386964,
+        8.364999618530273,
+        -73.82000007629395
+      ],
+      "normal": [
+        0,
+        0,
+        -1
+      ],
+      "hit": "Irby/Ashley sashes, masonry bands and rainwater goods"
+    },
+    {
+      "name": "Roadside north wing brick gables",
+      "point": [
+        252.4375996017456,
+        8.364999618530273,
+        -73.82000007629395
+      ],
+      "normal": [
+        0,
+        0,
+        -1
+      ],
+      "hit": "Irby/Ashley sashes, masonry bands and rainwater goods"
+    },
+    {
+      "name": "Roadside north wing brick gables",
+      "point": [
+        251.17039943695067,
+        8.364999618530273,
+        -73.82000007629395
+      ],
+      "normal": [
+        0,
+        0,
+        -1
+      ],
+      "hit": "Irby/Ashley sashes, masonry bands and rainwater goods"
+    },
+    {
+      "name": "Narrow north wing brick gables",
+      "point": [
+        236.08580003976823,
+        8.364999618530273,
+        -83.58000030517579
+      ],
+      "normal": [
+        0,
+        0,
+        0.9999999999999999
+      ]
+    },
+    {
+      "name": "Narrow north wing brick gables",
+      "point": [
+        237.28460005521774,
+        8.364999618530273,
+        -83.58000030517579
+      ],
+      "normal": [
+        0,
+        0,
+        0.9999999999999999
+      ]
+    },
+    {
+      "name": "Narrow north wing brick gables",
+      "point": [
+        239.0162000775337,
+        8.364999618530273,
+        -83.58000030517579
+      ],
+      "normal": [
+        0,
+        0,
+        0.9999999999999999
+      ]
+    },
+    {
+      "name": "Narrow north wing brick gables",
+      "point": [
+        240.48140009641648,
+        8.364999618530273,
+        -83.58000030517579
+      ],
+      "normal": [
+        0,
+        0,
+        0.9999999999999999
+      ]
+    },
+    {
+      "name": "Narrow north wing brick gables",
+      "point": [
+        241.28060010671615,
+        8.364999618530273,
+        -83.58000030517579
+      ],
+      "normal": [
+        0,
+        0,
+        0.9999999999999999
+      ]
+    },
+    {
+      "name": "Narrow north wing brick gables",
+      "point": [
+        241.01420010328292,
+        8.364999618530273,
+        -73.82000007629395
+      ],
+      "normal": [
+        0,
+        0,
+        -0.9999999999999999
+      ],
+      "hit": "Irby/Ashley sashes, masonry bands and rainwater goods"
+    },
+    {
+      "name": "Narrow north wing brick gables",
+      "point": [
+        239.8154000878334,
+        8.364999618530273,
+        -73.82000007629395
+      ],
+      "normal": [
+        0,
+        0,
+        -0.9999999999999999
+      ],
+      "hit": "Irby/Ashley sashes, masonry bands and rainwater goods"
+    },
+    {
+      "name": "Narrow north wing brick gables",
+      "point": [
+        238.08380006551744,
+        8.364999618530273,
+        -73.82000007629395
+      ],
+      "normal": [
+        0,
+        0,
+        -0.9999999999999999
+      ],
+      "hit": "Irby/Ashley sashes, masonry bands and rainwater goods"
+    },
+    {
+      "name": "Narrow north wing brick gables",
+      "point": [
+        236.61860004663467,
+        8.364999618530273,
+        -73.82000007629395
+      ],
+      "normal": [
+        0,
+        0,
+        -0.9999999999999999
+      ],
+      "hit": "Irby/Ashley sashes, masonry bands and rainwater goods"
+    },
+    {
+      "name": "Narrow north wing brick gables",
+      "point": [
+        235.819400036335,
+        8.364999618530273,
+        -73.82000007629395
+      ],
+      "normal": [
+        0,
+        0,
+        -0.9999999999999999
+      ],
+      "hit": "Irby/Ashley sashes, masonry bands and rainwater goods"
+    },
+    {
+      "name": "West garden gable brick gables",
+      "point": [
+        249.58180028915405,
+        8.364999618530273,
+        -103.08000030517579
+      ],
+      "normal": [
+        0,
+        0,
+        1
+      ],
+      "hit": "Irby/Ashley sashes, masonry bands and rainwater goods"
+    },
+    {
+      "name": "West garden gable brick gables",
+      "point": [
+        252.43660005569458,
+        8.364999618530273,
+        -103.08000030517579
+      ],
+      "normal": [
+        0,
+        0,
+        1
+      ],
+      "hit": "Irby/Ashley sashes, masonry bands and rainwater goods"
+    },
+    {
+      "name": "West garden gable brick gables",
+      "point": [
+        256.56019971847536,
+        8.364999618530273,
+        -103.08000030517579
+      ],
+      "normal": [
+        0,
+        0,
+        1
+      ],
+      "hit": "Irby/Ashley sashes, masonry bands and rainwater goods"
+    },
+    {
+      "name": "West garden gable brick gables",
+      "point": [
+        260.049399433136,
+        8.364999618530273,
+        -103.08000030517579
+      ],
+      "normal": [
+        0,
+        0,
+        1
+      ],
+      "hit": "Irby/Ashley sashes, masonry bands and rainwater goods"
+    },
+    {
+      "name": "West garden gable brick gables",
+      "point": [
+        261.95259927749635,
+        8.364999618530273,
+        -103.08000030517579
+      ],
+      "normal": [
+        0,
+        0,
+        1
+      ],
+      "hit": "Irby/Ashley sashes, masonry bands and rainwater goods"
+    },
+    {
+      "name": "East garden gable brick gables",
+      "point": [
+        212.71579941749573,
+        8.364999618530273,
+        -97.38000001907349
+      ],
+      "normal": [
+        0,
+        0,
+        1
+      ],
+      "hit": "Irby/Ashley sashes, masonry bands and rainwater goods"
+    },
+    {
+      "name": "East garden gable brick gables",
+      "point": [
+        214.0945995616913,
+        8.364999618530273,
+        -97.38000001907349
+      ],
+      "normal": [
+        0,
+        0,
+        1
+      ],
+      "hit": "Irby/Ashley sashes, masonry bands and rainwater goods"
+    },
+    {
+      "name": "East garden gable brick gables",
+      "point": [
+        216.08619976997375,
+        8.364999618530273,
+        -97.38000001907349
+      ],
+      "normal": [
+        0,
+        0,
+        1
+      ],
+      "hit": "Irby/Ashley sashes, masonry bands and rainwater goods"
+    },
+    {
+      "name": "East garden gable brick gables",
+      "point": [
+        217.77139994621277,
+        8.364999618530273,
+        -97.38000001907349
+      ],
+      "normal": [
+        0,
+        0,
+        1
+      ],
+      "hit": "Irby/Ashley sashes, masonry bands and rainwater goods"
+    },
+    {
+      "name": "East garden gable brick gables",
+      "point": [
+        218.69060004234314,
+        8.364999618530273,
+        -97.38000001907349
+      ],
+      "normal": [
+        0,
+        0,
+        1
+      ],
+      "hit": "Irby/Ashley sashes, masonry bands and rainwater goods"
+    },
+    {
+      "name": "East garden gable brick gables",
+      "point": [
+        218.38420001029968,
+        8.364999618530273,
+        -83.21999969482422
+      ],
+      "normal": [
+        0,
+        0,
+        -1
+      ]
+    },
+    {
+      "name": "East garden gable brick gables",
+      "point": [
+        217.0053998661041,
+        8.364999618530273,
+        -83.21999969482422
+      ],
+      "normal": [
+        0,
+        0,
+        -1
+      ]
+    },
+    {
+      "name": "East garden gable brick gables",
+      "point": [
+        215.01379965782166,
+        8.364999618530273,
+        -83.21999969482422
+      ],
+      "normal": [
+        0,
+        0,
+        -1
+      ]
+    },
+    {
+      "name": "East garden gable brick gables",
+      "point": [
+        213.32859948158264,
+        8.364999618530273,
+        -83.21999969482422
+      ],
+      "normal": [
+        0,
+        0,
+        -1
+      ]
+    },
+    {
+      "name": "East garden gable brick gables",
+      "point": [
+        212.40939938545228,
+        8.364999618530273,
+        -83.21999969482422
+      ],
+      "normal": [
+        0,
+        0,
+        -1
+      ]
+    },
+    {
+      "name": "Roadside north wing brick gables",
+      "point": [
+        69.95581558508808,
+        8.364999618530273,
+        -169.59692936422704
+      ],
+      "normal": [
+        0.9999999999999999,
+        0,
+        0
+      ],
+      "hit": "Grafton/Edge sashes, masonry bands and rainwater goods"
+    },
+    {
+      "name": "Roadside north wing brick gables",
+      "point": [
+        69.95581558508808,
+        8.364999618530273,
+        -171.08760779537266
+      ],
+      "normal": [
+        0.9999999999999999,
+        0,
+        0
+      ]
+    },
+    {
+      "name": "Roadside north wing brick gables",
+      "point": [
+        69.95581558508808,
+        8.364999618530273,
+        -173.2408099736941
+      ],
+      "normal": [
+        0.9999999999999999,
+        0,
+        0
+      ]
+    },
+    {
+      "name": "Roadside north wing brick gables",
+      "point": [
+        69.95581558508808,
+        8.364999618530273,
+        -175.06275027842764
+      ],
+      "normal": [
+        0.9999999999999999,
+        0,
+        0
+      ]
+    },
+    {
+      "name": "Roadside north wing brick gables",
+      "point": [
+        69.95581558508808,
+        8.364999618530273,
+        -176.05653589919137
+      ],
+      "normal": [
+        0.9999999999999999,
+        0,
+        0
+      ]
+    },
+    {
+      "name": "Roadside north wing brick gables",
+      "point": [
+        87.72031330864552,
+        8.364999618530273,
+        -175.72527402560345
+      ],
+      "normal": [
+        -0.9999999999999999,
+        -2.537652454850797e-15,
+        -1.715966230738656e-15
+      ],
+      "hit": "Grafton/Edge sashes, masonry bands and rainwater goods"
+    },
+    {
+      "name": "Roadside north wing brick gables",
+      "point": [
+        87.72031330864552,
+        8.364999618530273,
+        -174.23459559445783
+      ],
+      "normal": [
+        -0.9999999999999999,
+        -2.537652454850797e-15,
+        -1.715966230738656e-15
+      ],
+      "hit": "Grafton/Edge sashes, masonry bands and rainwater goods"
+    },
+    {
+      "name": "Roadside north wing brick gables",
+      "point": [
+        87.7203133086455,
+        8.364999618530273,
+        -172.0813934161364
+      ],
+      "normal": [
+        -0.9999999999999999,
+        -2.537652454850797e-15,
+        -1.715966230738656e-15
+      ],
+      "hit": "Grafton/Edge sashes, masonry bands and rainwater goods"
+    },
+    {
+      "name": "Roadside north wing brick gables",
+      "point": [
+        87.7203133086455,
+        8.364999618530273,
+        -170.25945311140285
+      ],
+      "normal": [
+        -0.9999999999999999,
+        -2.537652454850797e-15,
+        -1.715966230738656e-15
+      ],
+      "hit": "Grafton/Edge sashes, masonry bands and rainwater goods"
+    },
+    {
+      "name": "Roadside north wing brick gables",
+      "point": [
+        87.7203133086455,
+        8.364999618530273,
+        -169.26566749063912
+      ],
+      "normal": [
+        -0.9999999999999999,
+        -2.537652454850797e-15,
+        -1.715966230738656e-15
+      ],
+      "hit": "Grafton/Edge sashes, masonry bands and rainwater goods"
+    },
+    {
+      "name": "Narrow north wing brick gables",
+      "point": [
+        73.36927188420626,
+        8.364999618530273,
+        -157.43576216678096
+      ],
+      "normal": [
+        1,
+        0,
+        0
+      ]
+    },
+    {
+      "name": "Narrow north wing brick gables",
+      "point": [
+        73.36927188420626,
+        8.364999618530273,
+        -158.375905839914
+      ],
+      "normal": [
+        1,
+        0,
+        0
+      ]
+    },
+    {
+      "name": "Narrow north wing brick gables",
+      "point": [
+        73.36927188420626,
+        8.364999618530273,
+        -159.73389114555061
+      ],
+      "normal": [
+        1,
+        0,
+        0
+      ]
+    },
+    {
+      "name": "Narrow north wing brick gables",
+      "point": [
+        73.36927188420626,
+        8.364999618530273,
+        -160.88295563493546
+      ],
+      "normal": [
+        1,
+        0,
+        0
+      ]
+    },
+    {
+      "name": "Narrow north wing brick gables",
+      "point": [
+        73.36927188420626,
+        8.364999618530273,
+        -161.5097180836908
+      ],
+      "normal": [
+        1,
+        0,
+        0
+      ]
+    },
+    {
+      "name": "Narrow north wing brick gables",
+      "point": [
+        87.7203133086455,
+        8.364999618530273,
+        -161.300797267439
+      ],
+      "normal": [
+        -0.9999999999999999,
+        0,
+        0
+      ],
+      "hit": "Grafton/Edge sashes, masonry bands and rainwater goods"
+    },
+    {
+      "name": "Narrow north wing brick gables",
+      "point": [
+        87.7203133086455,
+        8.364999618530273,
+        -160.36065359430594
+      ],
+      "normal": [
+        -0.9999999999999999,
+        0,
+        0
+      ],
+      "hit": "Grafton/Edge sashes, masonry bands and rainwater goods"
+    },
+    {
+      "name": "Narrow north wing brick gables",
+      "point": [
+        87.7203133086455,
+        8.364999618530273,
+        -159.00266828866935
+      ],
+      "normal": [
+        -0.9999999999999999,
+        0,
+        0
+      ],
+      "hit": "Grafton/Edge sashes, masonry bands and rainwater goods"
+    },
+    {
+      "name": "Narrow north wing brick gables",
+      "point": [
+        87.7203133086455,
+        8.364999618530273,
+        -157.8536037992845
+      ],
+      "normal": [
+        -0.9999999999999999,
+        0,
+        0
+      ],
+      "hit": "Grafton/Edge sashes, masonry bands and rainwater goods"
+    },
+    {
+      "name": "Narrow north wing brick gables",
+      "point": [
+        87.7203133086455,
+        8.364999618530273,
+        -157.22684135052916
+      ],
+      "normal": [
+        -0.9999999999999999,
+        0,
+        0
+      ],
+      "hit": "Grafton/Edge sashes, masonry bands and rainwater goods"
+    },
+    {
+      "name": "Rear office end brick gable",
+      "point": [
+        258.04016824811106,
+        7.564999904632568,
+        -47.879772248770905
+      ],
+      "normal": [
+        -0.3255681544571579,
+        4.224068023875675e-15,
+        0.9455185755993163
+      ],
+      "hit": "Estates glazing, blue doors, brick bands and rainwater goods"
+    },
+    {
+      "name": "Rear office end brick gable",
+      "point": [
+        259.017734297991,
+        7.564999904632568,
+        -47.54316926398274
+      ],
+      "normal": [
+        -0.3255681544571579,
+        4.224068023875675e-15,
+        0.9455185755993163
+      ],
+      "hit": "Estates glazing, blue doors, brick bands and rainwater goods"
+    },
+    {
+      "name": "Rear office end brick gable",
+      "point": [
+        260.42977414781757,
+        7.564999904632568,
+        -47.05696495262206
+      ],
+      "normal": [
+        -0.3255681544571579,
+        4.224068023875675e-15,
+        0.9455185755993163
+      ],
+      "hit": "Estates glazing, blue doors, brick bands and rainwater goods"
+    },
+    {
+      "name": "Rear office end brick gable",
+      "point": [
+        261.6245770976708,
+        7.564999904632568,
+        -46.645561304547634
+      ],
+      "normal": [
+        -0.3255681544571579,
+        4.224068023875675e-15,
+        0.9455185755993163
+      ],
+      "hit": "Estates glazing, blue doors, brick bands and rainwater goods"
+    },
+    {
+      "name": "Rear office end brick gable",
+      "point": [
+        262.2762877975908,
+        7.564999904632568,
+        -46.42115931468886
+      ],
+      "normal": [
+        -0.3255681544571579,
+        4.224068023875675e-15,
+        0.9455185755993163
+      ],
+      "hit": "Estates glazing, blue doors, brick bands and rainwater goods"
+    },
+    {
+      "name": "Photographed tall right brick gable",
+      "point": [
+        242.96123351018804,
+        7.564999904632568,
+        -25.89567673382587
+      ],
+      "normal": [
+        0.9455185755993171,
+        9.82966170067381e-15,
+        0.3255681544571555
+      ],
+      "hit": "Eave closure: Joined rear office and right return"
+    },
+    {
+      "name": "Photographed tall right brick gable",
+      "point": [
+        243.36934550070654,
+        7.564999904632568,
+        -27.08092001599969
+      ],
+      "normal": [
+        0.9455185755993171,
+        9.82966170067381e-15,
+        0.3255681544571555
+      ]
+    },
+    {
+      "name": "Photographed tall right brick gable",
+      "point": [
+        243.9588405981222,
+        7.564999904632568,
+        -28.79293809025076
+      ],
+      "normal": [
+        0.9455185755993171,
+        9.82966170067381e-15,
+        0.3255681544571555
+      ]
+    },
+    {
+      "name": "Photographed tall right brick gable",
+      "point": [
+        244.45764414208926,
+        7.564999904632568,
+        -30.241568768463207
+      ],
+      "normal": [
+        0.9455185755993171,
+        9.82966170067381e-15,
+        0.3255681544571555
+      ]
+    },
+    {
+      "name": "Photographed tall right brick gable",
+      "point": [
+        244.72971880243495,
+        7.564999904632568,
+        -31.03173095657909
+      ],
+      "normal": [
+        0.9455185755993171,
+        9.82966170067381e-15,
+        0.3255681544571555
+      ]
+    },
+    {
+      "name": "Left workshop front brick gable",
+      "point": [
+        241.63434259743786,
+        3.965,
+        -47.25209619623536
+      ],
+      "normal": [
+        0.9455185755993176,
+        2.9360716287397636e-15,
+        0.3255681544571547
+      ],
+      "hit": "Eave closure: Left workshop"
+    },
+    {
+      "name": "Left workshop front brick gable",
+      "point": [
+        242.04487462751516,
+        3.965,
+        -48.44436778362015
+      ],
+      "normal": [
+        0.9455185755993176,
+        2.9360716287397636e-15,
+        0.3255681544571547
+      ]
+    },
+    {
+      "name": "Left workshop front brick gable",
+      "point": [
+        242.63786533762678,
+        3.965,
+        -50.166537854287085
+      ],
+      "normal": [
+        0.9455185755993176,
+        2.9360716287397636e-15,
+        0.3255681544571547
+      ]
+    },
+    {
+      "name": "Left workshop front brick gable",
+      "point": [
+        243.13962670772125,
+        3.965,
+        -51.62375868331295
+      ],
+      "normal": [
+        0.9455185755993176,
+        2.9360716287397636e-15,
+        0.3255681544571547
+      ]
+    },
+    {
+      "name": "Left workshop front brick gable",
+      "point": [
+        243.41331472777279,
+        3.965,
+        -52.41860640823615
+      ],
+      "normal": [
+        0.9455185755993176,
+        2.9360716287397636e-15,
+        0.3255681544571547
+      ]
+    },
+    {
+      "name": "West continuous wing plain brick gable",
+      "point": [
+        193.1054002189636,
+        4.564999904632568,
+        -165.9599994659424
+      ],
+      "normal": [
+        0,
+        0,
+        -1
+      ],
+      "hit": "Farndon sashes, doors, masonry and rainwater goods"
+    },
+    {
+      "name": "West continuous wing plain brick gable",
+      "point": [
+        191.2298002052307,
+        4.564999904632568,
+        -165.9599994659424
+      ],
+      "normal": [
+        0,
+        0,
+        -1
+      ],
+      "hit": "Farndon sashes, doors, masonry and rainwater goods"
+    },
+    {
+      "name": "West continuous wing plain brick gable",
+      "point": [
+        188.52060018539427,
+        4.564999904632568,
+        -165.9599994659424
+      ],
+      "normal": [
+        0,
+        0,
+        -1
+      ],
+      "hit": "Farndon sashes, doors, masonry and rainwater goods"
+    },
+    {
+      "name": "West continuous wing plain brick gable",
+      "point": [
+        186.22820016860962,
+        4.564999904632568,
+        -165.9599994659424
+      ],
+      "normal": [
+        0,
+        0,
+        -1
+      ],
+      "hit": "Farndon sashes, doors, masonry and rainwater goods"
+    },
+    {
+      "name": "West continuous wing plain brick gable",
+      "point": [
+        184.97780015945435,
+        4.564999904632568,
+        -165.9599994659424
+      ],
+      "normal": [
+        0,
+        0,
+        -1
+      ],
+      "hit": "Farndon sashes, doors, masonry and rainwater goods"
+    },
+    {
+      "name": "East continuous wing plain brick gable",
+      "point": [
+        150.31260046958923,
+        4.564999904632568,
+        -163.76000061035157
+      ],
+      "normal": [
+        0,
+        0,
+        1
+      ],
+      "hit": "Single-storey ward walls"
+    },
+    {
+      "name": "East continuous wing plain brick gable",
+      "point": [
+        151.93620038032532,
+        4.564999904632568,
+        -163.76000061035157
+      ],
+      "normal": [
+        0,
+        0,
+        1
+      ],
+      "hit": "Single-storey ward walls"
+    },
+    {
+      "name": "East continuous wing plain brick gable",
+      "point": [
+        154.28140025138853,
+        4.564999904632568,
+        -163.76000061035157
+      ],
+      "normal": [
+        0,
+        0,
+        1
+      ],
+      "hit": "Single-storey ward walls"
+    },
+    {
+      "name": "East continuous wing plain brick gable",
+      "point": [
+        156.26580014228819,
+        4.564999904632568,
+        -163.76000061035157
+      ],
+      "normal": [
+        0,
+        0,
+        1
+      ],
+      "hit": "Single-storey ward walls"
+    },
+    {
+      "name": "East continuous wing plain brick gable",
+      "point": [
+        157.34820008277893,
+        4.564999904632568,
+        -163.76000061035157
+      ],
+      "normal": [
+        0,
+        0,
+        1
+      ],
+      "hit": "Single-storey ward walls"
+    },
+    {
+      "name": "Central garden brick gable",
+      "point": [
+        173.68999999165533,
+        4.564999904632568,
+        -146.41999998092652
+      ],
+      "normal": [
+        0,
+        0,
+        -1
+      ],
+      "hit": "Farndon sashes, doors, masonry and rainwater goods"
+    },
+    {
+      "name": "Central garden brick gable",
+      "point": [
+        172.43000001311302,
+        4.564999904632568,
+        -146.41999998092652
+      ],
+      "normal": [
+        0,
+        0,
+        -1
+      ],
+      "hit": "Farndon sashes, doors, masonry and rainwater goods"
+    },
+    {
+      "name": "Central garden brick gable",
+      "point": [
+        170.61000004410744,
+        4.564999904632568,
+        -146.41999998092652
+      ],
+      "normal": [
+        0,
+        0,
+        -1
+      ],
+      "hit": "Farndon sashes, doors, masonry and rainwater goods"
+    },
+    {
+      "name": "Central garden brick gable",
+      "point": [
+        169.07000007033346,
+        4.564999904632568,
+        -146.41999998092652
+      ],
+      "normal": [
+        0,
+        0,
+        -1
+      ],
+      "hit": "Farndon sashes, doors, masonry and rainwater goods"
+    },
+    {
+      "name": "Central garden brick gable",
+      "point": [
+        168.2300000846386,
+        4.564999904632568,
+        -146.41999998092652
+      ],
+      "normal": [
+        0,
+        0,
+        -1
+      ],
+      "hit": "Farndon sashes, doors, masonry and rainwater goods"
+    },
+    {
+      "name": "West continuous wing plain brick gable",
+      "point": [
+        152.40540021896362,
+        4.564999904632568,
+        -228.05999946594238
+      ],
+      "normal": [
+        0,
+        0,
+        -1
+      ],
+      "hit": "Witby sashes, doors, masonry and rainwater goods"
+    },
+    {
+      "name": "West continuous wing plain brick gable",
+      "point": [
+        150.5298002052307,
+        4.564999904632568,
+        -228.05999946594238
+      ],
+      "normal": [
+        0,
+        0,
+        -1
+      ],
+      "hit": "Witby sashes, doors, masonry and rainwater goods"
+    },
+    {
+      "name": "West continuous wing plain brick gable",
+      "point": [
+        147.82060018539428,
+        4.564999904632568,
+        -228.05999946594238
+      ],
+      "normal": [
+        0,
+        0,
+        -1
+      ],
+      "hit": "Witby sashes, doors, masonry and rainwater goods"
+    },
+    {
+      "name": "West continuous wing plain brick gable",
+      "point": [
+        145.52820016860963,
+        4.564999904632568,
+        -228.05999946594238
+      ],
+      "normal": [
+        0,
+        0,
+        -1
+      ],
+      "hit": "Witby sashes, doors, masonry and rainwater goods"
+    },
+    {
+      "name": "West continuous wing plain brick gable",
+      "point": [
+        144.27780015945436,
+        4.564999904632568,
+        -228.05999946594238
+      ],
+      "normal": [
+        0,
+        0,
+        -1
+      ],
+      "hit": "Witby sashes, doors, masonry and rainwater goods"
+    },
+    {
+      "name": "East continuous wing plain brick gable",
+      "point": [
+        109.61260046958924,
+        4.564999904632568,
+        -225.86000061035156
+      ],
+      "normal": [
+        0,
+        0,
+        1
+      ],
+      "hit": "Single-storey ward walls"
+    },
+    {
+      "name": "East continuous wing plain brick gable",
+      "point": [
+        111.23620038032531,
+        4.564999904632568,
+        -225.86000061035156
+      ],
+      "normal": [
+        0,
+        0,
+        1
+      ],
+      "hit": "Single-storey ward walls"
+    },
+    {
+      "name": "East continuous wing plain brick gable",
+      "point": [
+        113.58140025138854,
+        4.564999904632568,
+        -225.86000061035156
+      ],
+      "normal": [
+        0,
+        0,
+        1
+      ],
+      "hit": "Single-storey ward walls"
+    },
+    {
+      "name": "East continuous wing plain brick gable",
+      "point": [
+        115.56580014228821,
+        4.564999904632568,
+        -225.86000061035156
+      ],
+      "normal": [
+        0,
+        0,
+        1
+      ],
+      "hit": "Single-storey ward walls"
+    },
+    {
+      "name": "East continuous wing plain brick gable",
+      "point": [
+        116.64820008277893,
+        4.564999904632568,
+        -225.86000061035156
+      ],
+      "normal": [
+        0,
+        0,
+        1
+      ],
+      "hit": "Single-storey ward walls"
+    },
+    {
+      "name": "Central garden brick gable",
+      "point": [
+        132.98999999165534,
+        4.564999904632568,
+        -208.5199999809265
+      ],
+      "normal": [
+        0,
+        0,
+        -1
+      ],
+      "hit": "Witby sashes, doors, masonry and rainwater goods"
+    },
+    {
+      "name": "Central garden brick gable",
+      "point": [
+        131.73000001311303,
+        4.564999904632568,
+        -208.5199999809265
+      ],
+      "normal": [
+        0,
+        0,
+        -1
+      ],
+      "hit": "Witby sashes, doors, masonry and rainwater goods"
+    },
+    {
+      "name": "Central garden brick gable",
+      "point": [
+        129.91000004410745,
+        4.564999904632568,
+        -208.5199999809265
+      ],
+      "normal": [
+        0,
+        0,
+        -1
+      ],
+      "hit": "Witby sashes, doors, masonry and rainwater goods"
+    },
+    {
+      "name": "Central garden brick gable",
+      "point": [
+        128.37000007033348,
+        4.564999904632568,
+        -208.5199999809265
+      ],
+      "normal": [
+        0,
+        0,
+        -1
+      ],
+      "hit": "Witby sashes, doors, masonry and rainwater goods"
+    },
+    {
+      "name": "Central garden brick gable",
+      "point": [
+        127.5300000846386,
+        4.564999904632568,
+        -208.5199999809265
+      ],
+      "normal": [
+        0,
+        0,
+        -1
+      ],
+      "hit": "Witby sashes, doors, masonry and rainwater goods"
+    },
+    {
+      "name": "Central stone pediment",
+      "point": [
+        201.2560000705719,
+        14.205,
+        35.575
+      ],
+      "normal": [
+        0,
+        0,
+        -1
+      ]
+    },
+    {
+      "name": "Central stone pediment",
+      "point": [
+        199.67200003623964,
+        14.205,
+        35.575
+      ],
+      "normal": [
+        0,
+        0,
+        -1
+      ]
+    },
+    {
+      "name": "Central stone pediment",
+      "point": [
+        197.38399998664855,
+        14.205,
+        35.575
+      ],
+      "normal": [
+        0,
+        0,
+        -1
+      ]
+    },
+    {
+      "name": "Central stone pediment",
+      "point": [
+        195.4479999446869,
+        14.205,
+        35.575
+      ],
+      "normal": [
+        0,
+        0,
+        -1
+      ]
+    },
+    {
+      "name": "Central stone pediment",
+      "point": [
+        194.3919999217987,
+        14.205,
+        35.575
+      ],
+      "normal": [
+        0,
+        0,
+        -1
+      ]
+    },
+    {
+      "name": "Central stone pediment",
+      "point": [
+        194.7439999294281,
+        14.205,
+        35.92499999403954
+      ],
+      "normal": [
+        0,
+        0,
+        1
+      ],
+      "hit": "Central administration range eaves"
+    },
+    {
+      "name": "Central stone pediment",
+      "point": [
+        196.32799996376036,
+        14.205,
+        35.92499999403954
+      ],
+      "normal": [
+        0,
+        0,
+        1
+      ],
+      "hit": "Central administration range eaves"
+    },
+    {
+      "name": "Central stone pediment",
+      "point": [
+        198.61600001335145,
+        14.205,
+        35.92499999403954
+      ],
+      "normal": [
+        0,
+        0,
+        1
+      ],
+      "hit": "Central administration range eaves"
+    },
+    {
+      "name": "Central stone pediment",
+      "point": [
+        200.5520000553131,
+        14.205,
+        35.92499999403954
+      ],
+      "normal": [
+        0,
+        0,
+        1
+      ],
+      "hit": "Central administration range eaves"
+    },
+    {
+      "name": "Central stone pediment",
+      "point": [
+        201.6080000782013,
+        14.205,
+        35.92499999403954
+      ],
+      "normal": [
+        0,
+        0,
+        1
+      ],
+      "hit": "Central administration range eaves"
+    },
+    {
+      "name": "Main/admin corridor front brick gable",
+      "point": [
+        154.30199996471407,
+        3.564999904632568,
+        30.6
+      ],
+      "normal": [
+        0,
+        0,
+        1
+      ],
+      "hit": "Main/admin front corridor walls"
+    },
+    {
+      "name": "Main/admin corridor front brick gable",
+      "point": [
+        155.2739999818802,
+        3.564999904632568,
+        30.6
+      ],
+      "normal": [
+        0,
+        0,
+        1
+      ],
+      "hit": "Main/admin front corridor walls"
+    },
+    {
+      "name": "Main/admin corridor front brick gable",
+      "point": [
+        156.67800000667575,
+        3.564999904632568,
+        30.6
+      ],
+      "normal": [
+        0,
+        0,
+        1
+      ],
+      "hit": "Main/admin front corridor walls"
+    },
+    {
+      "name": "Main/admin corridor front brick gable",
+      "point": [
+        157.86600002765655,
+        3.564999904632568,
+        30.6
+      ],
+      "normal": [
+        0,
+        0,
+        1
+      ],
+      "hit": "Main/admin front corridor walls"
+    },
+    {
+      "name": "Main/admin corridor front brick gable",
+      "point": [
+        158.51400003910067,
+        3.564999904632568,
+        30.6
+      ],
+      "normal": [
+        0,
+        0,
+        1
+      ],
+      "hit": "Main/admin front corridor walls"
+    },
+    {
+      "name": "Greenhouse glazed gables",
+      "point": [
+        96.61858093329997,
+        2.6150000953674315,
+        118.67064038576878
+      ],
+      "normal": [
+        0.9786534966019711,
+        6.013707401438348e-15,
+        0.20551723428641172
+      ],
+      "hit": "Greenhouse glass walls"
+    },
+    {
+      "name": "Greenhouse glazed gables",
+      "point": [
+        96.7961478307793,
+        2.6150000953674315,
+        117.82508373110528
+      ],
+      "normal": [
+        0.9786534966019711,
+        6.013707401438348e-15,
+        0.20551723428641172
+      ],
+      "hit": "Greenhouse glass walls"
+    },
+    {
+      "name": "Greenhouse glazed gables",
+      "point": [
+        97.05263334936056,
+        2.6150000953674315,
+        116.60372411881355
+      ],
+      "normal": [
+        0.9786534966019711,
+        6.013707401438348e-15,
+        0.20551723428641172
+      ],
+      "hit": "Greenhouse glass walls"
+    },
+    {
+      "name": "Greenhouse glazed gables",
+      "point": [
+        97.26965955739085,
+        2.6150000953674315,
+        115.57026598533594
+      ],
+      "normal": [
+        0.9786534966019711,
+        6.013707401438348e-15,
+        0.20551723428641172
+      ],
+      "hit": "Greenhouse glass walls"
+    },
+    {
+      "name": "Greenhouse glazed gables",
+      "point": [
+        97.38803748904375,
+        2.6150000953674315,
+        115.0065615488936
+      ],
+      "normal": [
+        0.9786534966019711,
+        6.013707401438348e-15,
+        0.20551723428641172
+      ],
+      "hit": "Greenhouse glass walls"
+    },
+    {
+      "name": "Greenhouse glazed gables",
+      "point": [
+        114.18141906670004,
+        2.6150000953674315,
+        118.72935961423123
+      ],
+      "normal": [
+        -0.9786534966019711,
+        6.013707401438348e-15,
+        -0.20551723428641172
+      ],
+      "hit": "Greenhouse glass walls"
+    },
+    {
+      "name": "Greenhouse glazed gables",
+      "point": [
+        114.0038521692207,
+        2.6150000953674315,
+        119.57491626889473
+      ],
+      "normal": [
+        -0.9786534966019711,
+        6.013707401438348e-15,
+        -0.20551723428641172
+      ],
+      "hit": "Greenhouse glass walls"
+    },
+    {
+      "name": "Greenhouse glazed gables",
+      "point": [
+        113.74736665063945,
+        2.6150000953674315,
+        120.79627588118646
+      ],
+      "normal": [
+        -0.9786534966019711,
+        6.013707401438348e-15,
+        -0.20551723428641172
+      ],
+      "hit": "Greenhouse glass walls"
+    },
+    {
+      "name": "Greenhouse glazed gables",
+      "point": [
+        113.53034044260916,
+        2.6150000953674315,
+        121.82973401466407
+      ],
+      "normal": [
+        -0.9786534966019711,
+        6.013707401438348e-15,
+        -0.20551723428641172
+      ],
+      "hit": "Greenhouse glass walls"
+    },
+    {
+      "name": "Greenhouse glazed gables",
+      "point": [
+        113.41196251095626,
+        2.6150000953674315,
+        122.3934384511064
+      ],
+      "normal": [
+        -0.9786534966019711,
+        6.013707401438348e-15,
+        -0.20551723428641172
+      ],
+      "hit": "Greenhouse glass walls"
+    },
+    {
+      "name": "Greenhouse glazed gables",
+      "point": [
+        96.61858093329997,
+        2.6150000953674315,
+        130.22064038576877
+      ],
+      "normal": [
+        0.9786534966019711,
+        6.013707401438348e-15,
+        0.20551723428641172
+      ],
+      "hit": "Greenhouse glass walls"
+    },
+    {
+      "name": "Greenhouse glazed gables",
+      "point": [
+        96.7961478307793,
+        2.6150000953674315,
+        129.37508373110526
+      ],
+      "normal": [
+        0.9786534966019711,
+        6.013707401438348e-15,
+        0.20551723428641172
+      ],
+      "hit": "Greenhouse glass walls"
+    },
+    {
+      "name": "Greenhouse glazed gables",
+      "point": [
+        97.05263334936056,
+        2.6150000953674315,
+        128.15372411881356
+      ],
+      "normal": [
+        0.9786534966019711,
+        6.013707401438348e-15,
+        0.20551723428641172
+      ],
+      "hit": "Greenhouse glass walls"
+    },
+    {
+      "name": "Greenhouse glazed gables",
+      "point": [
+        97.26965955739085,
+        2.6150000953674315,
+        127.12026598533593
+      ],
+      "normal": [
+        0.9786534966019711,
+        6.013707401438348e-15,
+        0.20551723428641172
+      ],
+      "hit": "Greenhouse glass walls"
+    },
+    {
+      "name": "Greenhouse glazed gables",
+      "point": [
+        97.38803748904375,
+        2.6150000953674315,
+        126.5565615488936
+      ],
+      "normal": [
+        0.9786534966019711,
+        6.013707401438348e-15,
+        0.20551723428641172
+      ],
+      "hit": "Greenhouse glass walls"
+    },
+    {
+      "name": "Greenhouse glazed gables",
+      "point": [
+        114.18141906670004,
+        2.6150000953674315,
+        130.27935961423123
+      ],
+      "normal": [
+        -0.9786534966019712,
+        5.0224369506517926e-15,
+        -0.2055172342864111
+      ],
+      "hit": "Greenhouse glass walls"
+    },
+    {
+      "name": "Greenhouse glazed gables",
+      "point": [
+        114.0038521692207,
+        2.6150000953674315,
+        131.12491626889474
+      ],
+      "normal": [
+        -0.9786534966019712,
+        5.0224369506517926e-15,
+        -0.2055172342864111
+      ],
+      "hit": "Greenhouse glass walls"
+    },
+    {
+      "name": "Greenhouse glazed gables",
+      "point": [
+        113.74736665063945,
+        2.6150000953674315,
+        132.34627588118647
+      ],
+      "normal": [
+        -0.9786534966019712,
+        5.0224369506517926e-15,
+        -0.2055172342864111
+      ],
+      "hit": "Greenhouse glass walls"
+    },
+    {
+      "name": "Greenhouse glazed gables",
+      "point": [
+        113.53034044260916,
+        2.6150000953674315,
+        133.37973401466408
+      ],
+      "normal": [
+        -0.9786534966019712,
+        5.0224369506517926e-15,
+        -0.2055172342864111
+      ],
+      "hit": "Greenhouse glass walls"
+    },
+    {
+      "name": "Greenhouse glazed gables",
+      "point": [
+        113.41196251095626,
+        2.6150000953674315,
+        133.94343845110643
+      ],
+      "normal": [
+        -0.9786534966019712,
+        5.0224369506517926e-15,
+        -0.2055172342864111
+      ],
+      "hit": "Greenhouse glass walls"
+    },
+    {
+      "name": "Greenhouse glazed gables",
+      "point": [
+        96.61858093329997,
+        2.6150000953674315,
+        140.37064038576878
+      ],
+      "normal": [
+        0.9786534966019712,
+        4.95635225393269e-15,
+        0.2055172342864111
+      ],
+      "hit": "Greenhouse glass walls"
+    },
+    {
+      "name": "Greenhouse glazed gables",
+      "point": [
+        96.7961478307793,
+        2.6150000953674315,
+        139.52508373110527
+      ],
+      "normal": [
+        0.9786534966019712,
+        4.95635225393269e-15,
+        0.2055172342864111
+      ],
+      "hit": "Greenhouse glass walls"
+    },
+    {
+      "name": "Greenhouse glazed gables",
+      "point": [
+        97.05263334936056,
+        2.6150000953674315,
+        138.30372411881353
+      ],
+      "normal": [
+        0.9786534966019712,
+        4.95635225393269e-15,
+        0.2055172342864111
+      ],
+      "hit": "Greenhouse glass walls"
+    },
+    {
+      "name": "Greenhouse glazed gables",
+      "point": [
+        97.26965955739085,
+        2.6150000953674315,
+        137.27026598533593
+      ],
+      "normal": [
+        0.9786534966019712,
+        4.95635225393269e-15,
+        0.2055172342864111
+      ],
+      "hit": "Greenhouse glass walls"
+    },
+    {
+      "name": "Greenhouse glazed gables",
+      "point": [
+        97.38803748904375,
+        2.6150000953674315,
+        136.70656154889357
+      ],
+      "normal": [
+        0.9786534966019712,
+        4.95635225393269e-15,
+        0.2055172342864111
+      ],
+      "hit": "Greenhouse glass walls"
+    },
+    {
+      "name": "Greenhouse glazed gables",
+      "point": [
+        114.18141906670004,
+        2.6150000953674315,
+        140.42935961423123
+      ],
+      "normal": [
+        -0.9786534966019712,
+        5.0224369506517926e-15,
+        -0.2055172342864111
+      ],
+      "hit": "Greenhouse glass walls"
+    },
+    {
+      "name": "Greenhouse glazed gables",
+      "point": [
+        114.0038521692207,
+        2.6150000953674315,
+        141.27491626889474
+      ],
+      "normal": [
+        -0.9786534966019712,
+        5.0224369506517926e-15,
+        -0.2055172342864111
+      ],
+      "hit": "Greenhouse glass walls"
+    },
+    {
+      "name": "Greenhouse glazed gables",
+      "point": [
+        113.74736665063945,
+        2.6150000953674315,
+        142.49627588118648
+      ],
+      "normal": [
+        -0.9786534966019712,
+        5.0224369506517926e-15,
+        -0.2055172342864111
+      ],
+      "hit": "Greenhouse glass walls"
+    },
+    {
+      "name": "Greenhouse glazed gables",
+      "point": [
+        113.53034044260916,
+        2.6150000953674315,
+        143.5297340146641
+      ],
+      "normal": [
+        -0.9786534966019712,
+        5.0224369506517926e-15,
+        -0.2055172342864111
+      ],
+      "hit": "Greenhouse glass walls"
+    },
+    {
+      "name": "Greenhouse glazed gables",
+      "point": [
+        113.41196251095626,
+        2.6150000953674315,
+        144.09343845110644
+      ],
+      "normal": [
+        -0.9786534966019712,
+        5.0224369506517926e-15,
+        -0.2055172342864111
+      ],
+      "hit": "Greenhouse glass walls"
+    },
+    {
+      "name": "Outer decorated brick gable",
+      "point": [
+        419.35320631960997,
+        7.525,
+        -57.41121713551096
+      ],
+      "normal": [
+        0.6937297460268598,
+        0,
+        0.7202354055984118
+      ]
+    },
+    {
+      "name": "Outer decorated brick gable",
+      "point": [
+        418.46363963690385,
+        7.525,
+        -56.55438773769076
+      ],
+      "normal": [
+        0.6937297460268598,
+        0,
+        0.7202354055984118
+      ]
+    },
+    {
+      "name": "Outer decorated brick gable",
+      "point": [
+        417.1787099841061,
+        7.525,
+        -55.316745274172696
+      ],
+      "normal": [
+        0.6937297460268598,
+        0,
+        0.7202354055984118
+      ]
+    },
+    {
+      "name": "Outer decorated brick gable",
+      "point": [
+        416.0914618163542,
+        7.525,
+        -54.269509343503564
+      ],
+      "normal": [
+        0.6937297460268598,
+        0,
+        0.7202354055984118
+      ]
+    },
+    {
+      "name": "Outer decorated brick gable",
+      "point": [
+        415.49841736121675,
+        7.525,
+        -53.69828974495677
+      ],
+      "normal": [
+        0.6937297460268598,
+        0,
+        0.7202354055984118
+      ]
+    },
+    {
+      "name": "Outer decorated brick gable",
+      "point": [
+        413.1359864135959,
+        7.525,
+        -56.54662413354424
+      ],
+      "normal": [
+        -0.6937297460268639,
+        -7.286995540075189e-15,
+        -0.7202354055984078
+      ],
+      "hit": "Outer projecting gable brick walls"
+    },
+    {
+      "name": "Outer decorated brick gable",
+      "point": [
+        414.025553096302,
+        7.525,
+        -57.40345353136444
+      ],
+      "normal": [
+        -0.6937297460268639,
+        -7.286995540075189e-15,
+        -0.7202354055984078
+      ],
+      "hit": "Outer projecting gable brick walls"
+    },
+    {
+      "name": "Outer decorated brick gable",
+      "point": [
+        415.3104827490997,
+        7.525,
+        -58.641095994882505
+      ],
+      "normal": [
+        -0.6937297460268639,
+        -7.286995540075189e-15,
+        -0.7202354055984078
+      ],
+      "hit": "Outer projecting gable brick walls"
+    },
+    {
+      "name": "Outer decorated brick gable",
+      "point": [
+        416.39773091685163,
+        7.525,
+        -59.68833192555164
+      ],
+      "normal": [
+        -0.6937297460268639,
+        -7.286995540075189e-15,
+        -0.7202354055984078
+      ],
+      "hit": "Outer projecting gable brick walls"
+    },
+    {
+      "name": "Outer decorated brick gable",
+      "point": [
+        416.99077537198906,
+        7.525,
+        -60.25955152409844
+      ],
+      "normal": [
+        -0.6937297460268639,
+        -7.286995540075189e-15,
+        -0.7202354055984078
+      ],
+      "hit": "Outer projecting gable brick walls"
+    },
+    {
+      "name": "Outer decorated brick gable",
+      "point": [
+        436.08090740085976,
+        7.525,
+        -73.52331566955505
+      ],
+      "normal": [
+        0.6937297460268598,
+        0,
+        0.7202354055984118
+      ]
+    },
+    {
+      "name": "Outer decorated brick gable",
+      "point": [
+        435.19134071815364,
+        7.525,
+        -72.66648627173484
+      ],
+      "normal": [
+        0.6937297460268598,
+        0,
+        0.7202354055984118
+      ]
+    },
+    {
+      "name": "Outer decorated brick gable",
+      "point": [
+        433.9064110653559,
+        7.525,
+        -71.42884380821678
+      ],
+      "normal": [
+        0.6937297460268598,
+        0,
+        0.7202354055984118
+      ]
+    },
+    {
+      "name": "Outer decorated brick gable",
+      "point": [
+        432.819162897604,
+        7.525,
+        -70.38160787754764
+      ],
+      "normal": [
+        0.6937297460268598,
+        0,
+        0.7202354055984118
+      ]
+    },
+    {
+      "name": "Outer decorated brick gable",
+      "point": [
+        432.22611844246654,
+        7.525,
+        -69.81038827900085
+      ],
+      "normal": [
+        0.6937297460268598,
+        0,
+        0.7202354055984118
+      ]
+    },
+    {
+      "name": "Outer decorated brick gable",
+      "point": [
+        429.8636874948457,
+        7.525,
+        -72.65872266758831
+      ],
+      "normal": [
+        -0.6937297460268639,
+        -7.286995540075189e-15,
+        -0.7202354055984078
+      ],
+      "hit": "Outer projecting gable brick walls"
+    },
+    {
+      "name": "Outer decorated brick gable",
+      "point": [
+        430.7532541775518,
+        7.525,
+        -73.51555206540851
+      ],
+      "normal": [
+        -0.6937297460268639,
+        -7.286995540075189e-15,
+        -0.7202354055984078
+      ],
+      "hit": "Outer projecting gable brick walls"
+    },
+    {
+      "name": "Outer decorated brick gable",
+      "point": [
+        432.0381838303495,
+        7.525,
+        -74.75319452892657
+      ],
+      "normal": [
+        -0.6937297460268639,
+        -7.286995540075189e-15,
+        -0.7202354055984078
+      ],
+      "hit": "Outer projecting gable brick walls"
+    },
+    {
+      "name": "Outer decorated brick gable",
+      "point": [
+        433.1254319981014,
+        7.525,
+        -75.80043045959572
+      ],
+      "normal": [
+        -0.6937297460268639,
+        -7.286995540075189e-15,
+        -0.7202354055984078
+      ],
+      "hit": "Outer projecting gable brick walls"
+    },
+    {
+      "name": "Outer decorated brick gable",
+      "point": [
+        433.71847645323885,
+        7.525,
+        -76.3716500581425
+      ],
+      "normal": [
+        -0.6937297460268639,
+        -7.286995540075189e-15,
+        -0.7202354055984078
+      ],
+      "hit": "Outer projecting gable brick walls"
+    },
+    {
+      "name": "Jarman decorated brick gable",
+      "point": [
+        382.4180838551354,
+        7.525,
+        -56.41155409513456
+      ],
+      "normal": [
+        0.6937297460268642,
+        0,
+        0.7202354055984077
+      ]
+    },
+    {
+      "name": "Jarman decorated brick gable",
+      "point": [
+        383.48272225178187,
+        7.525,
+        -57.4370123255618
+      ],
+      "normal": [
+        0.6937297460268642,
+        0,
+        0.7202354055984077
+      ]
+    },
+    {
+      "name": "Jarman decorated brick gable",
+      "point": [
+        385.02053326916007,
+        7.525,
+        -58.918229769512266
+      ],
+      "normal": [
+        0.6937297460268642,
+        0,
+        0.7202354055984077
+      ]
+    },
+    {
+      "name": "Jarman decorated brick gable",
+      "point": [
+        386.3217579761724,
+        7.525,
+        -60.171567606701124
+      ],
+      "normal": [
+        0.6937297460268642,
+        0,
+        0.7202354055984077
+      ]
+    },
+    {
+      "name": "Jarman decorated brick gable",
+      "point": [
+        387.03151690727003,
+        7.525,
+        -60.85520642698595
+      ],
+      "normal": [
+        0.6937297460268642,
+        0,
+        0.7202354055984077
+      ]
+    },
+    {
+      "name": "Jarman decorated brick gable",
+      "point": [
+        382.7349326234964,
+        7.525,
+        -64.84244705090977
+      ],
+      "normal": [
+        -0.6937297460268642,
+        0,
+        -0.7202354055984077
+      ],
+      "hit": "Court projecting gable brick walls"
+    },
+    {
+      "name": "Jarman decorated brick gable",
+      "point": [
+        381.67029422684993,
+        7.525,
+        -63.81698882048253
+      ],
+      "normal": [
+        -0.6937297460268642,
+        0,
+        -0.7202354055984077
+      ],
+      "hit": "Court projecting gable brick walls"
+    },
+    {
+      "name": "Jarman decorated brick gable",
+      "point": [
+        380.13248320947173,
+        7.525,
+        -62.335771376532065
+      ],
+      "normal": [
+        -0.6937297460268642,
+        0,
+        -0.7202354055984077
+      ],
+      "hit": "Court projecting gable brick walls"
+    },
+    {
+      "name": "Jarman decorated brick gable",
+      "point": [
+        378.8312585024594,
+        7.525,
+        -61.08243353934321
+      ],
+      "normal": [
+        -0.6937297460268642,
+        0,
+        -0.7202354055984077
+      ],
+      "hit": "Court projecting gable brick walls"
+    },
+    {
+      "name": "Jarman decorated brick gable",
+      "point": [
+        378.12149957136177,
+        7.525,
+        -60.39879471905838
+      ],
+      "normal": [
+        -0.6937297460268642,
+        0,
+        -0.7202354055984077
+      ],
+      "hit": "Court projecting gable brick walls"
+    },
+    {
+      "name": "Jarman decorated brick gable",
+      "point": [
+        367.5928650650883,
+        7.525,
+        -42.13192387136486
+      ],
+      "normal": [
+        0.6937297460268631,
+        0,
+        0.7202354055984086
+      ]
+    },
+    {
+      "name": "Jarman decorated brick gable",
+      "point": [
+        368.42606036163727,
+        7.525,
+        -42.934456428043966
+      ],
+      "normal": [
+        0.6937297460268631,
+        0,
+        0.7202354055984086
+      ]
+    },
+    {
+      "name": "Jarman decorated brick gable",
+      "point": [
+        369.6295646788747,
+        7.525,
+        -44.0936701210249
+      ],
+      "normal": [
+        0.6937297460268631,
+        0,
+        0.7202354055984086
+      ]
+    },
+    {
+      "name": "Jarman decorated brick gable",
+      "point": [
+        370.6479144857679,
+        7.525,
+        -45.07454324585492
+      ],
+      "normal": [
+        0.6937297460268631,
+        0,
+        0.7202354055984086
+      ]
+    },
+    {
+      "name": "Jarman decorated brick gable",
+      "point": [
+        371.20337801680057,
+        7.525,
+        -45.60956495030765
+      ],
+      "normal": [
+        0.6937297460268631,
+        0,
+        0.7202354055984086
+      ]
+    },
+    {
+      "name": "Jarman decorated brick gable",
+      "point": [
+        366.95822553304856,
+        7.525,
+        -49.64634461284217
+      ],
+      "normal": [
+        -0.6937297460268631,
+        0,
+        -0.7202354055984086
+      ],
+      "hit": "Court projecting gable brick walls"
+    },
+    {
+      "name": "Jarman decorated brick gable",
+      "point": [
+        366.1250302364996,
+        7.525,
+        -48.84381205616307
+      ],
+      "normal": [
+        -0.6937297460268631,
+        0,
+        -0.7202354055984086
+      ],
+      "hit": "Court projecting gable brick walls"
+    },
+    {
+      "name": "Jarman decorated brick gable",
+      "point": [
+        364.92152591926214,
+        7.525,
+        -47.68459836318213
+      ],
+      "normal": [
+        -0.6937297460268631,
+        0,
+        -0.7202354055984086
+      ],
+      "hit": "Court projecting gable brick walls"
+    },
+    {
+      "name": "Jarman decorated brick gable",
+      "point": [
+        363.90317611236895,
+        7.525,
+        -46.70372523835211
+      ],
+      "normal": [
+        -0.6937297460268631,
+        0,
+        -0.7202354055984086
+      ],
+      "hit": "Court projecting gable brick walls"
+    },
+    {
+      "name": "Jarman decorated brick gable",
+      "point": [
+        363.3477125813363,
+        7.525,
+        -46.16870353389938
+      ],
+      "normal": [
+        -0.6937297460268631,
+        0,
+        -0.7202354055984086
+      ],
+      "hit": "Court projecting gable brick walls"
+    },
+    {
+      "name": "Leighton Newton outer brick gable",
+      "point": [
+        381.985954766579,
+        7.525,
+        40.10288590105096
+      ],
+      "normal": [
+        0.9130199516975713,
+        0,
+        0.40791490264780056
+      ]
+    },
+    {
+      "name": "Leighton Newton outer brick gable",
+      "point": [
+        382.4316298303906,
+        7.525,
+        39.10534885939648
+      ],
+      "normal": [
+        0.9130199516975713,
+        0,
+        0.40791490264780056
+      ]
+    },
+    {
+      "name": "Leighton Newton outer brick gable",
+      "point": [
+        383.0753827003407,
+        7.525,
+        37.664462021451115
+      ],
+      "normal": [
+        0.9130199516975713,
+        0,
+        0.40791490264780056
+      ]
+    },
+    {
+      "name": "Leighton Newton outer brick gable",
+      "point": [
+        383.6200966672215,
+        7.525,
+        36.445250081651196
+      ],
+      "normal": [
+        0.9130199516975713,
+        0,
+        0.40791490264780056
+      ]
+    },
+    {
+      "name": "Leighton Newton outer brick gable",
+      "point": [
+        383.91721337642923,
+        7.525,
+        35.78022538721488
+      ],
+      "normal": [
+        0.9130199516975713,
+        0,
+        0.40791490264780056
+      ]
+    },
+    {
+      "name": "Leighton Newton outer brick gable",
+      "point": [
+        383.6388786009179,
+        7.525,
+        35.921795290703436
+      ],
+      "normal": [
+        -0.913019951697575,
+        -8.000911461205674e-15,
+        -0.40791490264779234
+      ],
+      "hit": "Leighton Newton projecting bay brick walls"
+    },
+    {
+      "name": "Leighton Newton outer brick gable",
+      "point": [
+        383.19320353710634,
+        7.525,
+        36.91933233235792
+      ],
+      "normal": [
+        -0.913019951697575,
+        -8.000911461205674e-15,
+        -0.40791490264779234
+      ],
+      "hit": "Leighton Newton projecting bay brick walls"
+    },
+    {
+      "name": "Leighton Newton outer brick gable",
+      "point": [
+        382.5494506671563,
+        7.525,
+        38.36021917030328
+      ],
+      "normal": [
+        -0.913019951697575,
+        -8.000911461205674e-15,
+        -0.40791490264779234
+      ],
+      "hit": "Leighton Newton projecting bay brick walls"
+    },
+    {
+      "name": "Leighton Newton outer brick gable",
+      "point": [
+        382.0047367002755,
+        7.525,
+        39.57943111010321
+      ],
+      "normal": [
+        -0.913019951697575,
+        -8.000911461205674e-15,
+        -0.40791490264779234
+      ],
+      "hit": "Leighton Newton projecting bay brick walls"
+    },
+    {
+      "name": "Leighton Newton outer brick gable",
+      "point": [
+        381.70761999106776,
+        7.525,
+        40.24445580453953
+      ],
+      "normal": [
+        -0.913019951697575,
+        -8.000911461205674e-15,
+        -0.40791490264779234
+      ],
+      "hit": "Leighton Newton projecting bay brick walls"
+    },
+    {
+      "name": "Leighton Newton outer brick gable",
+      "point": [
+        373.3340138446867,
+        7.525,
+        59.030535599617274
+      ],
+      "normal": [
+        0.9130199516975713,
+        0,
+        0.40791490264780045
+      ]
+    },
+    {
+      "name": "Leighton Newton outer brick gable",
+      "point": [
+        373.92387789405956,
+        7.525,
+        57.71026599835797
+      ],
+      "normal": [
+        0.9130199516975713,
+        0,
+        0.40791490264780045
+      ]
+    },
+    {
+      "name": "Leighton Newton outer brick gable",
+      "point": [
+        374.77590374315366,
+        7.525,
+        55.80320990765008
+      ],
+      "normal": [
+        0.9130199516975713,
+        0,
+        0.40791490264780045
+      ]
+    },
+    {
+      "name": "Leighton Newton outer brick gable",
+      "point": [
+        375.4968486923872,
+        7.525,
+        54.189547061666474
+      ],
+      "normal": [
+        0.9130199516975713,
+        0,
+        0.40791490264780045
+      ]
+    },
+    {
+      "name": "Leighton Newton outer brick gable",
+      "point": [
+        375.89009139196907,
+        7.525,
+        53.309367327493604
+      ],
+      "normal": [
+        0.9130199516975713,
+        0,
+        0.40791490264780045
+      ]
+    },
+    {
+      "name": "Leighton Newton outer brick gable",
+      "point": [
+        375.57971461966633,
+        7.525,
+        53.52265557756102
+      ],
+      "normal": [
+        -0.9130199516975738,
+        -6.622801137679267e-15,
+        -0.4079149026477949
+      ],
+      "hit": "Leighton Newton projecting bay brick walls"
+    },
+    {
+      "name": "Leighton Newton outer brick gable",
+      "point": [
+        374.9898505702935,
+        7.525,
+        54.84292517882033
+      ],
+      "normal": [
+        -0.9130199516975738,
+        -6.622801137679267e-15,
+        -0.4079149026477949
+      ],
+      "hit": "Leighton Newton projecting bay brick walls"
+    },
+    {
+      "name": "Leighton Newton outer brick gable",
+      "point": [
+        374.13782472119937,
+        7.525,
+        56.74998126952822
+      ],
+      "normal": [
+        -0.9130199516975738,
+        -6.622801137679267e-15,
+        -0.4079149026477949
+      ],
+      "hit": "Leighton Newton projecting bay brick walls"
+    },
+    {
+      "name": "Leighton Newton outer brick gable",
+      "point": [
+        373.4168797719659,
+        7.525,
+        58.36364411551182
+      ],
+      "normal": [
+        -0.9130199516975738,
+        -6.622801137679267e-15,
+        -0.4079149026477949
+      ],
+      "hit": "Leighton Newton projecting bay brick walls"
+    },
+    {
+      "name": "Leighton Newton outer brick gable",
+      "point": [
+        373.023637072384,
+        7.525,
+        59.24382384968469
+      ],
+      "normal": [
+        -0.9130199516975738,
+        -6.622801137679267e-15,
+        -0.4079149026477949
+      ],
+      "hit": "Leighton Newton projecting bay brick walls"
+    },
+    {
+      "name": "Court decorated brick gable",
+      "point": [
+        323.1514283820498,
+        7.525,
+        -6.887591171135316
+      ],
+      "normal": [
+        0.6937297460268675,
+        0,
+        0.7202354055984043
+      ]
+    },
+    {
+      "name": "Court decorated brick gable",
+      "point": [
+        324.1277820581907,
+        7.525,
+        -7.828013680937975
+      ],
+      "normal": [
+        0.6937297460268675,
+        0,
+        0.7202354055984043
+      ]
+    },
+    {
+      "name": "Court decorated brick gable",
+      "point": [
+        325.5380707015052,
+        7.525,
+        -9.186401750652927
+      ],
+      "normal": [
+        0.6937297460268675,
+        0,
+        0.7202354055984043
+      ]
+    },
+    {
+      "name": "Court decorated brick gable",
+      "point": [
+        326.7313918612329,
+        7.525,
+        -10.33580704041173
+      ],
+      "normal": [
+        0.6937297460268675,
+        0,
+        0.7202354055984043
+      ]
+    },
+    {
+      "name": "Court decorated brick gable",
+      "point": [
+        327.38229431199346,
+        7.525,
+        -10.96275538028017
+      ],
+      "normal": [
+        0.6937297460268675,
+        0,
+        0.7202354055984043
+      ]
+    },
+    {
+      "name": "Court decorated brick gable",
+      "point": [
+        324.60521439574,
+        7.525,
+        -13.411700456062563
+      ],
+      "normal": [
+        -0.6937297460268637,
+        -7.338132350882728e-15,
+        -0.7202354055984078
+      ],
+      "hit": "Court projecting gable brick walls"
+    },
+    {
+      "name": "Court decorated brick gable",
+      "point": [
+        323.6288607195991,
+        7.525,
+        -12.471277946259905
+      ],
+      "normal": [
+        -0.6937297460268637,
+        -7.338132350882728e-15,
+        -0.7202354055984078
+      ],
+      "hit": "Court projecting gable brick walls"
+    },
+    {
+      "name": "Court decorated brick gable",
+      "point": [
+        322.21857207628454,
+        7.525,
+        -11.112889876544955
+      ],
+      "normal": [
+        -0.6937297460268637,
+        -7.338132350882728e-15,
+        -0.7202354055984078
+      ],
+      "hit": "Court projecting gable brick walls"
+    },
+    {
+      "name": "Court decorated brick gable",
+      "point": [
+        321.02525091655684,
+        7.525,
+        -9.963484586786148
+      ],
+      "normal": [
+        -0.6937297460268637,
+        -7.338132350882728e-15,
+        -0.7202354055984078
+      ],
+      "hit": "Court projecting gable brick walls"
+    },
+    {
+      "name": "Court decorated brick gable",
+      "point": [
+        320.3743484657963,
+        7.525,
+        -9.33653624691771
+      ],
+      "normal": [
+        -0.6937297460268637,
+        -7.338132350882728e-15,
+        -0.7202354055984078
+      ],
+      "hit": "Court projecting gable brick walls"
+    },
+    {
+      "name": "Court decorated brick gable",
+      "point": [
+        304.7917564636048,
+        7.525,
+        10.796419415010615
+      ],
+      "normal": [
+        0.6937297460268675,
+        0,
+        0.7202354055984043
+      ]
+    },
+    {
+      "name": "Court decorated brick gable",
+      "point": [
+        305.7681101397457,
+        7.525,
+        9.855996905207956
+      ],
+      "normal": [
+        0.6937297460268675,
+        0,
+        0.7202354055984043
+      ]
+    },
+    {
+      "name": "Court decorated brick gable",
+      "point": [
+        307.17839878306023,
+        7.525,
+        8.497608835493004
+      ],
+      "normal": [
+        0.6937297460268675,
+        0,
+        0.7202354055984043
+      ]
+    },
+    {
+      "name": "Court decorated brick gable",
+      "point": [
+        308.37171994278793,
+        7.525,
+        7.3482035457342
+      ],
+      "normal": [
+        0.6937297460268675,
+        0,
+        0.7202354055984043
+      ]
+    },
+    {
+      "name": "Court decorated brick gable",
+      "point": [
+        309.0226223935485,
+        7.525,
+        6.721255205865761
+      ],
+      "normal": [
+        0.6937297460268675,
+        0,
+        0.7202354055984043
+      ]
+    },
+    {
+      "name": "Court decorated brick gable",
+      "point": [
+        306.24554247729503,
+        7.525,
+        4.272310130083367
+      ],
+      "normal": [
+        -0.6937297460268637,
+        -7.338132350882728e-15,
+        -0.7202354055984078
+      ],
+      "hit": "Court projecting gable brick walls"
+    },
+    {
+      "name": "Court decorated brick gable",
+      "point": [
+        305.26918880115414,
+        7.525,
+        5.212732639886026
+      ],
+      "normal": [
+        -0.6937297460268637,
+        -7.338132350882728e-15,
+        -0.7202354055984078
+      ],
+      "hit": "Court projecting gable brick walls"
+    },
+    {
+      "name": "Court decorated brick gable",
+      "point": [
+        303.85890015783957,
+        7.525,
+        6.571120709600977
+      ],
+      "normal": [
+        -0.6937297460268637,
+        -7.338132350882728e-15,
+        -0.7202354055984078
+      ],
+      "hit": "Court projecting gable brick walls"
+    },
+    {
+      "name": "Court decorated brick gable",
+      "point": [
+        302.66557899811187,
+        7.525,
+        7.720525999359782
+      ],
+      "normal": [
+        -0.6937297460268637,
+        -7.338132350882728e-15,
+        -0.7202354055984078
+      ],
+      "hit": "Court projecting gable brick walls"
+    },
+    {
+      "name": "Court decorated brick gable",
+      "point": [
+        302.0146765473513,
+        7.525,
+        8.34747433922822
+      ],
+      "normal": [
+        -0.6937297460268637,
+        -7.338132350882728e-15,
+        -0.7202354055984078
+      ],
+      "hit": "Court projecting gable brick walls"
+    },
+    {
+      "name": "Outer decorated brick gable",
+      "point": [
+        307.96305341724536,
+        7.525,
+        35.007461616193964
+      ],
+      "normal": [
+        0.6937297460268675,
+        -5.360648632950077e-16,
+        0.7202354055984043
+      ]
+    },
+    {
+      "name": "Outer decorated brick gable",
+      "point": [
+        308.91771034502756,
+        7.525,
+        34.08793738438692
+      ],
+      "normal": [
+        0.6937297460268675,
+        -5.360648632950077e-16,
+        0.7202354055984043
+      ]
+    },
+    {
+      "name": "Outer decorated brick gable",
+      "point": [
+        310.29665924071287,
+        7.525,
+        32.75973571622119
+      ],
+      "normal": [
+        0.6937297460268675,
+        -5.360648632950077e-16,
+        0.7202354055984043
+      ]
+    },
+    {
+      "name": "Outer decorated brick gable",
+      "point": [
+        311.46346215244665,
+        7.525,
+        31.635872766234804
+      ],
+      "normal": [
+        0.6937297460268675,
+        -5.360648632950077e-16,
+        0.7202354055984043
+      ]
+    },
+    {
+      "name": "Outer decorated brick gable",
+      "point": [
+        312.0999001043014,
+        7.525,
+        31.022856611696778
+      ],
+      "normal": [
+        0.6937297460268675,
+        -5.360648632950077e-16,
+        0.7202354055984043
+      ]
+    },
+    {
+      "name": "Outer decorated brick gable",
+      "point": [
+        309.3276416876832,
+        7.525,
+        28.569267474137582
+      ],
+      "normal": [
+        -0.6937297460268639,
+        -8.21966123719007e-15,
+        -0.7202354055984077
+      ],
+      "hit": "Outer projecting gable brick walls"
+    },
+    {
+      "name": "Outer decorated brick gable",
+      "point": [
+        308.372984759901,
+        7.525,
+        29.488791705944625
+      ],
+      "normal": [
+        -0.6937297460268639,
+        -8.21966123719007e-15,
+        -0.7202354055984077
+      ],
+      "hit": "Outer projecting gable brick walls"
+    },
+    {
+      "name": "Outer decorated brick gable",
+      "point": [
+        306.9940358642156,
+        7.525,
+        30.816993374110357
+      ],
+      "normal": [
+        -0.6937297460268639,
+        -8.21966123719007e-15,
+        -0.7202354055984077
+      ],
+      "hit": "Outer projecting gable brick walls"
+    },
+    {
+      "name": "Outer decorated brick gable",
+      "point": [
+        305.8272329524819,
+        7.525,
+        31.940856324096742
+      ],
+      "normal": [
+        -0.6937297460268639,
+        -8.21966123719007e-15,
+        -0.7202354055984077
+      ],
+      "hit": "Outer projecting gable brick walls"
+    },
+    {
+      "name": "Outer decorated brick gable",
+      "point": [
+        305.1907950006271,
+        7.525,
+        32.55387247863477
+      ],
+      "normal": [
+        -0.6937297460268639,
+        -8.21966123719007e-15,
+        -0.7202354055984077
+      ],
+      "hit": "Outer projecting gable brick walls"
+    },
+    {
+      "name": "Outer decorated brick gable",
+      "point": [
+        290.0113742080992,
+        7.525,
+        52.29849418931442
+      ],
+      "normal": [
+        0.6937297460268673,
+        0,
+        0.7202354055984046
+      ]
+    },
+    {
+      "name": "Outer decorated brick gable",
+      "point": [
+        290.9660311358814,
+        7.525,
+        51.37896995750738
+      ],
+      "normal": [
+        0.6937297460268673,
+        0,
+        0.7202354055984046
+      ]
+    },
+    {
+      "name": "Outer decorated brick gable",
+      "point": [
+        292.3449800315667,
+        7.525,
+        50.05076828934165
+      ],
+      "normal": [
+        0.6937297460268673,
+        0,
+        0.7202354055984046
+      ]
+    },
+    {
+      "name": "Outer decorated brick gable",
+      "point": [
+        293.5117829433005,
+        7.525,
+        48.92690533935526
+      ],
+      "normal": [
+        0.6937297460268673,
+        0,
+        0.7202354055984046
+      ]
+    },
+    {
+      "name": "Outer decorated brick gable",
+      "point": [
+        294.14822089515525,
+        7.525,
+        48.313889184817235
+      ],
+      "normal": [
+        0.6937297460268673,
+        0,
+        0.7202354055984046
+      ]
+    },
+    {
+      "name": "Outer decorated brick gable",
+      "point": [
+        291.375962478537,
+        7.525,
+        45.860300047258036
+      ],
+      "normal": [
+        -0.6937297460268639,
+        -8.21966123719007e-15,
+        -0.7202354055984077
+      ],
+      "hit": "Outer projecting gable brick walls"
+    },
+    {
+      "name": "Outer decorated brick gable",
+      "point": [
+        290.4213055507548,
+        7.525,
+        46.77982427906508
+      ],
+      "normal": [
+        -0.6937297460268639,
+        -8.21966123719007e-15,
+        -0.7202354055984077
+      ],
+      "hit": "Outer projecting gable brick walls"
+    },
+    {
+      "name": "Outer decorated brick gable",
+      "point": [
+        289.04235665506945,
+        7.525,
+        48.10802594723081
+      ],
+      "normal": [
+        -0.6937297460268639,
+        -8.21966123719007e-15,
+        -0.7202354055984077
+      ],
+      "hit": "Outer projecting gable brick walls"
+    },
+    {
+      "name": "Outer decorated brick gable",
+      "point": [
+        287.87555374333573,
+        7.525,
+        49.231888897217196
+      ],
+      "normal": [
+        -0.6937297460268639,
+        -8.21966123719007e-15,
+        -0.7202354055984077
+      ],
+      "hit": "Outer projecting gable brick walls"
+    },
+    {
+      "name": "Outer decorated brick gable",
+      "point": [
+        287.2391157914809,
+        7.525,
+        49.84490505175523
+      ],
+      "normal": [
+        -0.6937297460268639,
+        -8.21966123719007e-15,
+        -0.7202354055984077
+      ],
+      "hit": "Outer projecting gable brick walls"
+    },
+    {
+      "name": "Hall dormer brick gable",
+      "point": [
+        363.09341895547084,
+        9.955,
+        -17.917233840827464
+      ],
+      "normal": [
+        0.6937297460268713,
+        0,
+        0.7202354055984005
+      ]
+    },
+    {
+      "name": "Hall dormer brick gable",
+      "point": [
+        363.50043895045116,
+        9.955,
+        -18.30927493676738
+      ],
+      "normal": [
+        0.6937297460268713,
+        0,
+        0.7202354055984005
+      ]
+    },
+    {
+      "name": "Hall dormer brick gable",
+      "point": [
+        364.0883567209782,
+        9.955,
+        -18.875556519791708
+      ],
+      "normal": [
+        0.6937297460268713,
+        0,
+        0.7202354055984005
+      ]
+    },
+    {
+      "name": "Hall dormer brick gable",
+      "point": [
+        364.5858256037319,
+        9.955,
+        -19.35471785927383
+      ],
+      "normal": [
+        0.6937297460268713,
+        0,
+        0.7202354055984005
+      ]
+    },
+    {
+      "name": "Hall dormer brick gable",
+      "point": [
+        364.8571722670521,
+        9.955,
+        -19.616078589900443
+      ],
+      "normal": [
+        0.6937297460268713,
+        0,
+        0.7202354055984005
+      ]
+    },
+    {
+      "name": "Hall dormer brick gable",
+      "point": [
+        363.2382980028323,
+        9.955,
+        -21.11578099197265
+      ],
+      "normal": [
+        -0.6937297460268618,
+        1.1708876134418177e-14,
+        -0.7202354055984097
+      ],
+      "hit": "Annexe facade details"
+    },
+    {
+      "name": "Hall dormer brick gable",
+      "point": [
+        362.831278007852,
+        9.955,
+        -20.723739896032733
+      ],
+      "normal": [
+        -0.6937297460268618,
+        1.1708876134418177e-14,
+        -0.7202354055984097
+      ],
+      "hit": "Annexe facade details"
+    },
+    {
+      "name": "Hall dormer brick gable",
+      "point": [
+        362.2433602373249,
+        9.955,
+        -20.15745831300841
+      ],
+      "normal": [
+        -0.6937297460268618,
+        1.1708876134418177e-14,
+        -0.7202354055984097
+      ],
+      "hit": "Annexe facade details"
+    },
+    {
+      "name": "Hall dormer brick gable",
+      "point": [
+        361.74589135457126,
+        9.955,
+        -19.678296973526287
+      ],
+      "normal": [
+        -0.6937297460268618,
+        1.1708876134418177e-14,
+        -0.7202354055984097
+      ],
+      "hit": "Annexe facade details"
+    },
+    {
+      "name": "Hall dormer brick gable",
+      "point": [
+        361.474544691251,
+        9.955,
+        -19.416936242899673
+      ],
+      "normal": [
+        -0.6937297460268618,
+        1.1708876134418177e-14,
+        -0.7202354055984097
+      ],
+      "hit": "Annexe facade details"
+    },
+    {
+      "name": "Hall dormer brick gable",
+      "point": [
+        358.72965668003116,
+        9.955,
+        -13.714064055599902
+      ],
+      "normal": [
+        0.6937297460268713,
+        0,
+        0.7202354055984005
+      ]
+    },
+    {
+      "name": "Hall dormer brick gable",
+      "point": [
+        359.1366766750115,
+        9.955,
+        -14.10610515153982
+      ],
+      "normal": [
+        0.6937297460268713,
+        0,
+        0.7202354055984005
+      ]
+    },
+    {
+      "name": "Hall dormer brick gable",
+      "point": [
+        359.7245944455385,
+        9.955,
+        -14.672386734564146
+      ],
+      "normal": [
+        0.6937297460268713,
+        0,
+        0.7202354055984005
+      ]
+    },
+    {
+      "name": "Hall dormer brick gable",
+      "point": [
+        360.2220633282922,
+        9.955,
+        -15.151548074046268
+      ],
+      "normal": [
+        0.6937297460268713,
+        0,
+        0.7202354055984005
+      ]
+    },
+    {
+      "name": "Hall dormer brick gable",
+      "point": [
+        360.4934099916124,
+        9.955,
+        -15.412908804672881
+      ],
+      "normal": [
+        0.6937297460268713,
+        0,
+        0.7202354055984005
+      ]
+    },
+    {
+      "name": "Hall dormer brick gable",
+      "point": [
+        358.87453572739264,
+        9.955,
+        -16.912611206745087
+      ],
+      "normal": [
+        -0.6937297460268621,
+        1.1315960827894074e-14,
+        -0.7202354055984095
+      ],
+      "hit": "Annexe facade details"
+    },
+    {
+      "name": "Hall dormer brick gable",
+      "point": [
+        358.4675157324123,
+        9.955,
+        -16.52057011080517
+      ],
+      "normal": [
+        -0.6937297460268621,
+        1.1315960827894074e-14,
+        -0.7202354055984095
+      ],
+      "hit": "Annexe facade details"
+    },
+    {
+      "name": "Hall dormer brick gable",
+      "point": [
+        357.8795979618852,
+        9.955,
+        -15.954288527780845
+      ],
+      "normal": [
+        -0.6937297460268621,
+        1.1315960827894074e-14,
+        -0.7202354055984095
+      ],
+      "hit": "Annexe facade details"
+    },
+    {
+      "name": "Hall dormer brick gable",
+      "point": [
+        357.3821290791316,
+        9.955,
+        -15.475127188298723
+      ],
+      "normal": [
+        -0.6937297460268621,
+        1.1315960827894074e-14,
+        -0.7202354055984095
+      ],
+      "hit": "Annexe facade details"
+    },
+    {
+      "name": "Hall dormer brick gable",
+      "point": [
+        357.11078241581134,
+        9.955,
+        -15.21376645767211
+      ],
+      "normal": [
+        -0.6937297460268621,
+        1.1315960827894074e-14,
+        -0.7202354055984095
+      ],
+      "hit": "Annexe facade details"
+    },
+    {
+      "name": "Hall dormer brick gable",
+      "point": [
+        354.36589440459153,
+        9.955,
+        -9.51089427037234
+      ],
+      "normal": [
+        0.6937297460268713,
+        0,
+        0.7202354055984005
+      ]
+    },
+    {
+      "name": "Hall dormer brick gable",
+      "point": [
+        354.77291439957185,
+        9.955,
+        -9.902935366312258
+      ],
+      "normal": [
+        0.6937297460268713,
+        0,
+        0.7202354055984005
+      ]
+    },
+    {
+      "name": "Hall dormer brick gable",
+      "point": [
+        355.3608321700989,
+        9.955,
+        -10.469216949336584
+      ],
+      "normal": [
+        0.6937297460268713,
+        0,
+        0.7202354055984005
+      ]
+    },
+    {
+      "name": "Hall dormer brick gable",
+      "point": [
+        355.8583010528526,
+        9.955,
+        -10.948378288818706
+      ],
+      "normal": [
+        0.6937297460268713,
+        0,
+        0.7202354055984005
+      ]
+    },
+    {
+      "name": "Hall dormer brick gable",
+      "point": [
+        356.12964771617277,
+        9.955,
+        -11.209739019445319
+      ],
+      "normal": [
+        0.6937297460268713,
+        0,
+        0.7202354055984005
+      ]
+    },
+    {
+      "name": "Hall dormer brick gable",
+      "point": [
+        354.510773451953,
+        9.955,
+        -12.709441421517525
+      ],
+      "normal": [
+        -0.6937297460268621,
+        1.1315960827894074e-14,
+        -0.7202354055984095
+      ],
+      "hit": "Annexe facade details"
+    },
+    {
+      "name": "Hall dormer brick gable",
+      "point": [
+        354.1037534569727,
+        9.955,
+        -12.317400325577609
+      ],
+      "normal": [
+        -0.6937297460268621,
+        1.1315960827894074e-14,
+        -0.7202354055984095
+      ],
+      "hit": "Annexe facade details"
+    },
+    {
+      "name": "Hall dormer brick gable",
+      "point": [
+        353.5158356864456,
+        9.955,
+        -11.751118742553283
+      ],
+      "normal": [
+        -0.6937297460268621,
+        1.1315960827894074e-14,
+        -0.7202354055984095
+      ],
+      "hit": "Annexe facade details"
+    },
+    {
+      "name": "Hall dormer brick gable",
+      "point": [
+        353.01836680369195,
+        9.955,
+        -11.271957403071161
+      ],
+      "normal": [
+        -0.6937297460268621,
+        1.1315960827894074e-14,
+        -0.7202354055984095
+      ],
+      "hit": "Annexe facade details"
+    },
+    {
+      "name": "Hall dormer brick gable",
+      "point": [
+        352.7470201403717,
+        9.955,
+        -11.010596672444548
+      ],
+      "normal": [
+        -0.6937297460268621,
+        1.1315960827894074e-14,
+        -0.7202354055984095
+      ],
+      "hit": "Annexe facade details"
+    },
+    {
+      "name": "Entrance pediment brick gable",
+      "point": [
+        351.1383565919237,
+        4.915,
+        -21.419147268261163
+      ],
+      "normal": [
+        0.6937297460268692,
+        0,
+        0.7202354055984026
+      ],
+      "hit": "Entrance pediment base"
+    },
+    {
+      "name": "Entrance pediment brick gable",
+      "point": [
+        351.58822082557515,
+        4.915,
+        -21.852455875602296
+      ],
+      "normal": [
+        0.6937297460268692,
+        0,
+        0.7202354055984026
+      ],
+      "hit": "Entrance pediment base"
+    },
+    {
+      "name": "Entrance pediment brick gable",
+      "point": [
+        352.2380247186273,
+        4.915,
+        -22.47834608620615
+      ],
+      "normal": [
+        0.6937297460268692,
+        0,
+        0.7202354055984026
+      ],
+      "hit": "Entrance pediment base"
+    },
+    {
+      "name": "Entrance pediment brick gable",
+      "point": [
+        352.78785878197914,
+        4.915,
+        -23.007945495178646
+      ],
+      "normal": [
+        0.6937297460268692,
+        0,
+        0.7202354055984026
+      ],
+      "hit": "Entrance pediment base"
+    },
+    {
+      "name": "Entrance pediment brick gable",
+      "point": [
+        353.0877682710801,
+        4.915,
+        -23.296817900072732
+      ],
+      "normal": [
+        0.6937297460268692,
+        0,
+        0.7202354055984026
+      ],
+      "hit": "Entrance pediment base"
+    },
+    {
+      "name": "Entrance pediment brick gable",
+      "point": [
+        352.0325325811008,
+        4.915,
+        -24.192291251950376
+      ],
+      "normal": [
+        -0.6937297460268687,
+        5.576388786353461e-16,
+        -0.7202354055984032
+      ],
+      "hit": "Annexe facade details"
+    },
+    {
+      "name": "Entrance pediment brick gable",
+      "point": [
+        351.5826683474493,
+        4.915,
+        -23.758982644609247
+      ],
+      "normal": [
+        -0.6937297460268687,
+        5.576388786353461e-16,
+        -0.7202354055984032
+      ],
+      "hit": "Annexe facade details"
+    },
+    {
+      "name": "Entrance pediment brick gable",
+      "point": [
+        350.9328644543972,
+        4.915,
+        -23.13309243400539
+      ],
+      "normal": [
+        -0.6937297460268687,
+        5.576388786353461e-16,
+        -0.7202354055984032
+      ],
+      "hit": "Annexe facade details"
+    },
+    {
+      "name": "Entrance pediment brick gable",
+      "point": [
+        350.38303039104534,
+        4.915,
+        -22.603493025032897
+      ],
+      "normal": [
+        -0.6937297460268687,
+        5.576388786353461e-16,
+        -0.7202354055984032
+      ],
+      "hit": "Annexe facade details"
+    },
+    {
+      "name": "Entrance pediment brick gable",
+      "point": [
+        350.08312090194437,
+        4.915,
+        -22.31462062013881
+      ],
+      "normal": [
+        -0.6937297460268687,
+        5.576388786353461e-16,
+        -0.7202354055984032
+      ],
+      "hit": "Annexe facade details"
+    },
+    {
+      "name": "West front pavilion brick gable",
+      "point": [
+        364.0659822465855,
+        11.575000000000001,
+        -25.43401861529506
+      ],
+      "normal": [
+        0.6937297460268609,
+        0,
+        0.7202354055984106
+      ]
+    },
+    {
+      "name": "West front pavilion brick gable",
+      "point": [
+        365.12532812203494,
+        11.575000000000001,
+        -26.454379096628966
+      ],
+      "normal": [
+        0.6937297460268609,
+        0,
+        0.7202354055984106
+      ]
+    },
+    {
+      "name": "West front pavilion brick gable",
+      "point": [
+        366.6554943865729,
+        11.575000000000001,
+        -27.92823312522238
+      ],
+      "normal": [
+        0.6937297460268609,
+        0,
+        0.7202354055984106
+      ]
+    },
+    {
+      "name": "West front pavilion brick gable",
+      "point": [
+        367.95025045656666,
+        11.575000000000001,
+        -29.175340380186043
+      ],
+      "normal": [
+        0.6937297460268609,
+        0,
+        0.7202354055984106
+      ]
+    },
+    {
+      "name": "West front pavilion brick gable",
+      "point": [
+        368.6564810401996,
+        11.575000000000001,
+        -29.85558070107531
+      ],
+      "normal": [
+        0.6937297460268609,
+        0,
+        0.7202354055984106
+      ]
+    },
+    {
+      "name": "West front pavilion brick gable",
+      "point": [
+        366.31948595304146,
+        11.575000000000001,
+        -31.810715065165372
+      ],
+      "normal": [
+        -0.6937297460268643,
+        -6.944400144436282e-15,
+        -0.7202354055984074
+      ],
+      "hit": "Annexe facade details"
+    },
+    {
+      "name": "West front pavilion brick gable",
+      "point": [
+        365.2601400775921,
+        11.575000000000001,
+        -30.790354583831466
+      ],
+      "normal": [
+        -0.6937297460268643,
+        -6.944400144436282e-15,
+        -0.7202354055984074
+      ],
+      "hit": "Annexe facade details"
+    },
+    {
+      "name": "West front pavilion brick gable",
+      "point": [
+        363.7299738130541,
+        11.575000000000001,
+        -29.31650055523805
+      ],
+      "normal": [
+        -0.6937297460268643,
+        -6.944400144436282e-15,
+        -0.7202354055984074
+      ],
+      "hit": "Annexe facade details"
+    },
+    {
+      "name": "West front pavilion brick gable",
+      "point": [
+        362.4352177430604,
+        11.575000000000001,
+        -28.06939330027439
+      ],
+      "normal": [
+        -0.6937297460268643,
+        -6.944400144436282e-15,
+        -0.7202354055984074
+      ],
+      "hit": "Annexe facade details"
+    },
+    {
+      "name": "West front pavilion brick gable",
+      "point": [
+        361.72898715942745,
+        11.575000000000001,
+        -27.38915297938512
+      ],
+      "normal": [
+        -0.6937297460268643,
+        -6.944400144436282e-15,
+        -0.7202354055984074
+      ],
+      "hit": "Annexe facade details"
+    },
+    {
+      "name": "East front pavilion brick gable",
+      "point": [
+        344.13615656811197,
+        11.575000000000001,
+        -6.237638100232952
+      ],
+      "normal": [
+        0.6937297460268609,
+        0,
+        0.7202354055984106
+      ]
+    },
+    {
+      "name": "East front pavilion brick gable",
+      "point": [
+        345.1955024435614,
+        11.575000000000001,
+        -7.257998581566856
+      ],
+      "normal": [
+        0.6937297460268609,
+        0,
+        0.7202354055984106
+      ]
+    },
+    {
+      "name": "East front pavilion brick gable",
+      "point": [
+        346.72566870809936,
+        11.575000000000001,
+        -8.731852610160272
+      ],
+      "normal": [
+        0.6937297460268609,
+        0,
+        0.7202354055984106
+      ]
+    },
+    {
+      "name": "East front pavilion brick gable",
+      "point": [
+        348.0204247780931,
+        11.575000000000001,
+        -9.978959865123933
+      ],
+      "normal": [
+        0.6937297460268609,
+        0,
+        0.7202354055984106
+      ]
+    },
+    {
+      "name": "East front pavilion brick gable",
+      "point": [
+        348.72665536172605,
+        11.575000000000001,
+        -10.659200186013202
+      ],
+      "normal": [
+        0.6937297460268609,
+        0,
+        0.7202354055984106
+      ]
+    },
+    {
+      "name": "East front pavilion brick gable",
+      "point": [
+        346.3896602745679,
+        11.575000000000001,
+        -12.614334550103262
+      ],
+      "normal": [
+        -0.6937297460268643,
+        -6.944400144436282e-15,
+        -0.7202354055984074
+      ],
+      "hit": "Annexe facade details"
+    },
+    {
+      "name": "East front pavilion brick gable",
+      "point": [
+        345.33031439911855,
+        11.575000000000001,
+        -11.59397406876936
+      ],
+      "normal": [
+        -0.6937297460268643,
+        -6.944400144436282e-15,
+        -0.7202354055984074
+      ],
+      "hit": "Annexe facade details"
+    },
+    {
+      "name": "East front pavilion brick gable",
+      "point": [
+        343.8001481345805,
+        11.575000000000001,
+        -10.120120040175943
+      ],
+      "normal": [
+        -0.6937297460268643,
+        -6.944400144436282e-15,
+        -0.7202354055984074
+      ],
+      "hit": "Annexe facade details"
+    },
+    {
+      "name": "East front pavilion brick gable",
+      "point": [
+        342.50539206458683,
+        11.575000000000001,
+        -8.873012785212282
+      ],
+      "normal": [
+        -0.6937297460268643,
+        -6.944400144436282e-15,
+        -0.7202354055984074
+      ],
+      "hit": "Annexe facade details"
+    },
+    {
+      "name": "East front pavilion brick gable",
+      "point": [
+        341.7991614809539,
+        11.575000000000001,
+        -8.192772464323014
+      ],
+      "normal": [
+        -0.6937297460268643,
+        -6.944400144436282e-15,
+        -0.7202354055984074
+      ],
+      "hit": "Annexe facade details"
+    },
+    {
+      "name": "Oakmere west central brick pediment",
+      "point": [
+        402.95595693900304,
+        9.325000000000001,
+        -5.492106739948677
+      ],
+      "normal": [
+        -0.7202354055984088,
+        -1.1501169850325063e-16,
+        0.6937297460268629
+      ],
+      "hit": "Oakmere west five-bay gabled face"
+    },
+    {
+      "name": "Oakmere west central brick pediment",
+      "point": [
+        404.3384941299573,
+        9.325000000000001,
+        -4.056746298530738
+      ],
+      "normal": [
+        -0.7202354055984088,
+        -1.1501169850325063e-16,
+        0.6937297460268629
+      ],
+      "hit": "Oakmere west five-bay gabled face"
+    },
+    {
+      "name": "Oakmere west central brick pediment",
+      "point": [
+        406.33549229466917,
+        9.325000000000001,
+        -1.983447883149272
+      ],
+      "normal": [
+        -0.7202354055984088,
+        -1.1501169850325063e-16,
+        0.6937297460268629
+      ],
+      "hit": "Oakmere west five-bay gabled face"
+    },
+    {
+      "name": "Oakmere west central brick pediment",
+      "point": [
+        408.0252599725022,
+        9.325000000000001,
+        -0.22911845474956838
+      ],
+      "normal": [
+        -0.7202354055984088,
+        -1.1501169850325063e-16,
+        0.6937297460268629
+      ],
+      "hit": "Oakmere west five-bay gabled face"
+    },
+    {
+      "name": "Oakmere west central brick pediment",
+      "point": [
+        408.94695143313845,
+        9.325000000000001,
+        0.7277885061957239
+      ],
+      "normal": [
+        -0.7202354055984088,
+        -1.1501169850325063e-16,
+        0.6937297460268629
+      ],
+      "hit": "Oakmere west five-bay gabled face"
+    },
+    {
+      "name": "Oakmere west central brick pediment",
+      "point": [
+        409.03642660766326,
+        9.325000000000001,
+        0.026713175102362152
+      ],
+      "normal": [
+        0.7202354055984088,
+        0,
+        -0.693729746026863
+      ],
+      "hit": "Oakmere west five-bay gabled face"
+    },
+    {
+      "name": "Oakmere west central brick pediment",
+      "point": [
+        407.653889416709,
+        9.325000000000001,
+        -1.4086472663155765
+      ],
+      "normal": [
+        0.7202354055984088,
+        0,
+        -0.693729746026863
+      ],
+      "hit": "Oakmere west five-bay gabled face"
+    },
+    {
+      "name": "Oakmere west central brick pediment",
+      "point": [
+        405.65689125199714,
+        9.325000000000001,
+        -3.4819456816970424
+      ],
+      "normal": [
+        0.7202354055984088,
+        0,
+        -0.693729746026863
+      ],
+      "hit": "Oakmere west five-bay gabled face"
+    },
+    {
+      "name": "Oakmere west central brick pediment",
+      "point": [
+        403.9671235741641,
+        9.325000000000001,
+        -5.236275110096746
+      ],
+      "normal": [
+        0.7202354055984088,
+        0,
+        -0.693729746026863
+      ],
+      "hit": "Oakmere west five-bay gabled face"
+    },
+    {
+      "name": "Oakmere west central brick pediment",
+      "point": [
+        403.04543211352785,
+        9.325000000000001,
+        -6.193182071042038
+      ],
+      "normal": [
+        0.7202354055984088,
+        0,
+        -0.693729746026863
+      ],
+      "hit": "Oakmere west five-bay gabled face"
+    },
+    {
+      "name": "Rear hall dormer brick gable",
+      "point": [
+        371.04484377171605,
+        9.955,
+        -9.66200518671143
+      ],
+      "normal": [
+        -0.6937297460268713,
+        0,
+        -0.7202354055984005
+      ]
+    },
+    {
+      "name": "Rear hall dormer brick gable",
+      "point": [
+        371.45186376669636,
+        9.955,
+        -10.054046282651347
+      ],
+      "normal": [
+        -0.6937297460268713,
+        0,
+        -0.7202354055984005
+      ]
+    },
+    {
+      "name": "Rear hall dormer brick gable",
+      "point": [
+        372.0397815372234,
+        9.955,
+        -10.620327865675673
+      ],
+      "normal": [
+        -0.6937297460268713,
+        0,
+        -0.7202354055984005
+      ]
+    },
+    {
+      "name": "Rear hall dormer brick gable",
+      "point": [
+        372.5372504199771,
+        9.955,
+        -11.099489205157795
+      ],
+      "normal": [
+        -0.6937297460268713,
+        0,
+        -0.7202354055984005
+      ]
+    },
+    {
+      "name": "Rear hall dormer brick gable",
+      "point": [
+        372.8085970832973,
+        9.955,
+        -11.360849935784408
+      ],
+      "normal": [
+        -0.6937297460268713,
+        0,
+        -0.7202354055984005
+      ]
+    },
+    {
+      "name": "Rear hall dormer brick gable",
+      "point": [
+        374.2465735719703,
+        9.955,
+        -9.686907046627791
+      ],
+      "normal": [
+        0.6937297460268621,
+        1.1315960827894074e-14,
+        0.7202354055984095
+      ],
+      "hit": "Rear hall dormer facade details"
+    },
+    {
+      "name": "Rear hall dormer brick gable",
+      "point": [
+        373.83955357699,
+        9.955,
+        -9.294865950687873
+      ],
+      "normal": [
+        0.6937297460268621,
+        1.1315960827894074e-14,
+        0.7202354055984095
+      ],
+      "hit": "Rear hall dormer facade details"
+    },
+    {
+      "name": "Rear hall dormer brick gable",
+      "point": [
+        373.2516358064629,
+        9.955,
+        -8.728584367663547
+      ],
+      "normal": [
+        0.6937297460268621,
+        1.1315960827894074e-14,
+        0.7202354055984095
+      ],
+      "hit": "Rear hall dormer facade details"
+    },
+    {
+      "name": "Rear hall dormer brick gable",
+      "point": [
+        372.75416692370925,
+        9.955,
+        -8.249423028181425
+      ],
+      "normal": [
+        0.6937297460268621,
+        1.1315960827894074e-14,
+        0.7202354055984095
+      ],
+      "hit": "Rear hall dormer facade details"
+    },
+    {
+      "name": "Rear hall dormer brick gable",
+      "point": [
+        372.482820260389,
+        9.955,
+        -7.988062297554813
+      ],
+      "normal": [
+        0.6937297460268621,
+        1.1315960827894074e-14,
+        0.7202354055984095
+      ],
+      "hit": "Rear hall dormer facade details"
+    },
+    {
+      "name": "Rear hall dormer brick gable",
+      "point": [
+        366.6810814962764,
+        9.955,
+        -5.458835401483868
+      ],
+      "normal": [
+        -0.6937297460268711,
+        0,
+        -0.7202354055984008
+      ]
+    },
+    {
+      "name": "Rear hall dormer brick gable",
+      "point": [
+        367.08810149125674,
+        9.955,
+        -5.850876497423786
+      ],
+      "normal": [
+        -0.6937297460268711,
+        0,
+        -0.7202354055984008
+      ]
+    },
+    {
+      "name": "Rear hall dormer brick gable",
+      "point": [
+        367.6760192617838,
+        9.955,
+        -6.417158080448112
+      ],
+      "normal": [
+        -0.6937297460268711,
+        0,
+        -0.7202354055984008
+      ]
+    },
+    {
+      "name": "Rear hall dormer brick gable",
+      "point": [
+        368.1734881445375,
+        9.955,
+        -6.896319419930234
+      ],
+      "normal": [
+        -0.6937297460268711,
+        0,
+        -0.7202354055984008
+      ]
+    },
+    {
+      "name": "Rear hall dormer brick gable",
+      "point": [
+        368.44483480785766,
+        9.955,
+        -7.157680150556845
+      ],
+      "normal": [
+        -0.6937297460268711,
+        0,
+        -0.7202354055984008
+      ]
+    },
+    {
+      "name": "Rear hall dormer brick gable",
+      "point": [
+        369.8828112965307,
+        9.955,
+        -5.483737261400229
+      ],
+      "normal": [
+        0.6937297460268621,
+        1.1001628582674795e-14,
+        0.7202354055984095
+      ],
+      "hit": "Rear hall dormer facade details"
+    },
+    {
+      "name": "Rear hall dormer brick gable",
+      "point": [
+        369.4757913015504,
+        9.955,
+        -5.091696165460311
+      ],
+      "normal": [
+        0.6937297460268621,
+        1.1001628582674795e-14,
+        0.7202354055984095
+      ],
+      "hit": "Rear hall dormer facade details"
+    },
+    {
+      "name": "Rear hall dormer brick gable",
+      "point": [
+        368.8878735310233,
+        9.955,
+        -4.525414582435985
+      ],
+      "normal": [
+        0.6937297460268621,
+        1.1001628582674795e-14,
+        0.7202354055984095
+      ],
+      "hit": "Rear hall dormer facade details"
+    },
+    {
+      "name": "Rear hall dormer brick gable",
+      "point": [
+        368.3904046482696,
+        9.955,
+        -4.046253242953863
+      ],
+      "normal": [
+        0.6937297460268621,
+        1.1001628582674795e-14,
+        0.7202354055984095
+      ],
+      "hit": "Rear hall dormer facade details"
+    },
+    {
+      "name": "Rear hall dormer brick gable",
+      "point": [
+        368.1190579849494,
+        9.955,
+        -3.784892512327252
+      ],
+      "normal": [
+        0.6937297460268621,
+        1.1001628582674795e-14,
+        0.7202354055984095
+      ],
+      "hit": "Rear hall dormer facade details"
+    },
+    {
+      "name": "Rear hall dormer brick gable",
+      "point": [
+        362.31731922083674,
+        9.955,
+        -1.255665616256307
+      ],
+      "normal": [
+        -0.6937297460268711,
+        0,
+        -0.7202354055984008
+      ]
+    },
+    {
+      "name": "Rear hall dormer brick gable",
+      "point": [
+        362.72433921581705,
+        9.955,
+        -1.6477067121962248
+      ],
+      "normal": [
+        -0.6937297460268711,
+        0,
+        -0.7202354055984008
+      ]
+    },
+    {
+      "name": "Rear hall dormer brick gable",
+      "point": [
+        363.3122569863441,
+        9.955,
+        -2.2139882952205507
+      ],
+      "normal": [
+        -0.6937297460268711,
+        0,
+        -0.7202354055984008
+      ]
+    },
+    {
+      "name": "Rear hall dormer brick gable",
+      "point": [
+        363.8097258690978,
+        9.955,
+        -2.6931496347026727
+      ],
+      "normal": [
+        -0.6937297460268711,
+        0,
+        -0.7202354055984008
+      ]
+    },
+    {
+      "name": "Rear hall dormer brick gable",
+      "point": [
+        364.081072532418,
+        9.955,
+        -2.954510365329284
+      ],
+      "normal": [
+        -0.6937297460268711,
+        0,
+        -0.7202354055984008
+      ]
+    },
+    {
+      "name": "Rear hall dormer brick gable",
+      "point": [
+        365.519049021091,
+        9.955,
+        -1.280567476172668
+      ],
+      "normal": [
+        0.6937297460268621,
+        1.1001628582674795e-14,
+        0.7202354055984095
+      ],
+      "hit": "Rear hall dormer facade details"
+    },
+    {
+      "name": "Rear hall dormer brick gable",
+      "point": [
+        365.1120290261107,
+        9.955,
+        -0.8885263802327501
+      ],
+      "normal": [
+        0.6937297460268621,
+        1.1001628582674795e-14,
+        0.7202354055984095
+      ],
+      "hit": "Rear hall dormer facade details"
+    },
+    {
+      "name": "Rear hall dormer brick gable",
+      "point": [
+        364.5241112555836,
+        9.955,
+        -0.32224479720842436
+      ],
+      "normal": [
+        0.6937297460268621,
+        1.1001628582674795e-14,
+        0.7202354055984095
+      ],
+      "hit": "Rear hall dormer facade details"
+    },
+    {
+      "name": "Rear hall dormer brick gable",
+      "point": [
+        364.02664237282994,
+        9.955,
+        0.15691654227369756
+      ],
+      "normal": [
+        0.6937297460268621,
+        1.1001628582674795e-14,
+        0.7202354055984095
+      ],
+      "hit": "Rear hall dormer facade details"
+    },
+    {
+      "name": "Rear hall dormer brick gable",
+      "point": [
+        363.7552957095097,
+        9.955,
+        0.41827727290030947
+      ],
+      "normal": [
+        0.6937297460268621,
+        1.1001628582674795e-14,
+        0.7202354055984095
+      ],
+      "hit": "Rear hall dormer facade details"
+    },
+    {
+      "name": "Carden tower range brick gable",
+      "point": [
+        361.69026786048244,
+        9.450999999999999,
+        9.92973732939181
+      ],
+      "normal": [
+        0.6937297460268665,
+        -7.426278856631685e-17,
+        0.7202354055984052
+      ],
+      "hit": "Carden tower gabled range brick walls"
+    },
+    {
+      "name": "Carden tower range brick gable",
+      "point": [
+        362.32364811130753,
+        9.450999999999999,
+        9.319666348254383
+      ],
+      "normal": [
+        0.6937297460268665,
+        -7.426278856631685e-17,
+        0.7202354055984052
+      ],
+      "hit": "Carden tower gabled range brick walls"
+    },
+    {
+      "name": "Carden tower range brick gable",
+      "point": [
+        363.2385306958327,
+        9.450999999999999,
+        8.438452708833655
+      ],
+      "normal": [
+        0.6937297460268665,
+        -7.426278856631685e-17,
+        0.7202354055984052
+      ],
+      "hit": "Carden tower gabled range brick walls"
+    },
+    {
+      "name": "Carden tower range brick gable",
+      "point": [
+        364.0126621135078,
+        9.450999999999999,
+        7.6928103985545775
+      ],
+      "normal": [
+        0.6937297460268665,
+        -7.426278856631685e-17,
+        0.7202354055984052
+      ],
+      "hit": "Carden tower gabled range brick walls"
+    },
+    {
+      "name": "Carden tower range brick gable",
+      "point": [
+        364.4349156140579,
+        9.450999999999999,
+        7.286096411129627
+      ],
+      "normal": [
+        0.6937297460268665,
+        -7.426278856631685e-17,
+        0.7202354055984052
+      ],
+      "hit": "Carden tower gabled range brick walls"
+    },
+    {
+      "name": "Carden tower range brick gable",
+      "point": [
+        359.3661216806405,
+        9.450999999999999,
+        2.305336919641402
+      ],
+      "normal": [
+        -0.6937297460268609,
+        8.020381165162152e-15,
+        -0.7202354055984108
+      ],
+      "hit": "Carden tower gabled range brick walls"
+    },
+    {
+      "name": "Carden tower range brick gable",
+      "point": [
+        358.73274142981535,
+        9.450999999999999,
+        2.9154079007788294
+      ],
+      "normal": [
+        -0.6937297460268609,
+        8.020381165162152e-15,
+        -0.7202354055984108
+      ],
+      "hit": "Carden tower gabled range brick walls"
+    },
+    {
+      "name": "Carden tower range brick gable",
+      "point": [
+        357.81785884529023,
+        9.450999999999999,
+        3.796621540199557
+      ],
+      "normal": [
+        -0.6937297460268609,
+        8.020381165162152e-15,
+        -0.7202354055984108
+      ],
+      "hit": "Carden tower gabled range brick walls"
+    },
+    {
+      "name": "Carden tower range brick gable",
+      "point": [
+        357.04372742761507,
+        9.450999999999999,
+        4.542263850478635
+      ],
+      "normal": [
+        -0.6937297460268609,
+        8.020381165162152e-15,
+        -0.7202354055984108
+      ],
+      "hit": "Carden tower gabled range brick walls"
+    },
+    {
+      "name": "Carden tower range brick gable",
+      "point": [
+        356.621473927065,
+        9.450999999999999,
+        4.948977837903586
+      ],
+      "normal": [
+        -0.6937297460268609,
+        8.020381165162152e-15,
+        -0.7202354055984108
+      ],
+      "hit": "Carden tower gabled range brick walls"
+    }
+  ]
+}

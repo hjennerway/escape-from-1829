@@ -1,5 +1,30 @@
 # Front inside corners
 
+## Front-wing roof filler flicker (9 October 2026)
+
+The owner's [yellow-circled walking view](../../Browser/artifacts/front-wing-flicker/reference.png)
+locates white flickering patches on the eastern recess below the lower wing's
+eave. The image identifies the defect; the written request defines the repair.
+The automatic roof-gap finisher added white fascia triangles on the same plane
+as the existing `East inside corner roof junction 3` brick face. At the marked
+patch the two surfaces were separated by only a few millionths of a scene unit.
+
+After automatic roof finishing, `trimFrontCornerRoofClosures` applies the
+existing courtyard cuts with their 0.04-unit masonry clearance to generated
+fascias. Both entrance corners and the western extended back return retain
+their authored brick closures. Slate pitches, roof undersides, coping, windows
+and wall footprints retain their definitions. Finishing precedes batching and
+shadow preparation, and the compiled estate includes the correction.
+
+The shared regression samples all nine authored roof-junction faces: 1,020
+source probes and 1,044 after compiled timeline splitting. The saved original
+builders fail on a competing white fascia. Actual visible source/compiled
+batches also pass twelve rays through the marked patch. Existing window,
+walking and 278 frozen roof-gap checks pass. Hardware-rendered day, dusk,
+moving-camera and portrait evidence is in `Browser/artifacts/front-wing-flicker/`.
+Browser sources and the local compiled aerial are updated; Unity/Android,
+Blender and packaged exports are not regenerated.
+
 ## Reception entrance sill flicker (6 October 2026)
 
 The owner's [red-circled screenshot](entrance-sill-flicker.png) locates pale

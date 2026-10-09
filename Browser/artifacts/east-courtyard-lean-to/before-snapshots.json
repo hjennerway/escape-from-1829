@@ -1,0 +1,10 @@
+{
+  "jarman": {
+    "primitives": 818872,
+    "sha256": "e86f9c472c4388d895841a6659e13a1432e7a058535da4e17cb4265060a7c52d"
+  },
+  "leighton": {
+    "count": 882919,
+    "sha256": "7675c266c1a1387304220b5d47451b920c8545f7dac12ce2a461ada477ef429b"
+  }
+}

@@ -1,3 +1,4 @@
+import {assertRoadEndSurface} from './test-support/road-end-assertions.mjs';
 import assert from 'node:assert/strict';
 import * as THREE from './dist/vendor/three.module.js';
 import {createEscapeExterior} from './dist/escape-exterior.mjs';
@@ -21,14 +22,16 @@ for(const owner of l.superseded.filter(o=>o.isMesh&&o.userData.groundContactClos
  assert(owner.children.some(o=>o.userData.groundContact),'Individually hidden surfaces own their supporting faces: '+owner.name);
 }
 const point=new THREE.Vector3(),matrix=new THREE.Matrix4(),instance=new THREE.Matrix4();
-const ground=[],unsupported=[],roots=[],columns=[],skirts=[];
+const ground=[],unsupported=[],roots=[],columns=[],skirts=[],closed=[];
 e.model.traverse(o=>{
  if(!o.isMesh)return;
  let tree=false;for(let p=o;p;p=p.parent)if(p===e.trees)tree=true;
  const g=o.geometry;if(!g.boundingBox)g.computeBoundingBox();
  const bounds=g.boundingBox.clone().applyMatrix4(o.matrixWorld);
  if(!tree&&!o.isInstancedMesh&&bounds.max.y<.6)ground.push(o);
+ if(o.userData.roadEndFade){assertRoadEndSurface(o);return;}
  if(o.userData.groundContact){skirts.push(o);return;}
+ if(o.userData.groundContactClosed)closed.push(o);
  const mat=o.material;
  if(!tree&&!o.isInstancedMesh&&(mat.userData?.estateSurface==='asphalt'||mat.userData?.estateSurface==='gravel'||mat.color?.getHex()===0xb8b9af)&&bounds.max.y<.6&&bounds.min.y>-.149&&!o.userData.groundContactClosed)unsupported.push({name:o.name,parent:o.parent.name,min:bounds.min.toArray(),max:bounds.max.toArray()});
  if(o.userData.broadleafTree)roots.push({o,index:null,type:'broadleaf',root:o.userData.broadleafTree});
@@ -61,7 +64,11 @@ for(const year of [...PERIODS.map(p=>p.year),'historic','modern','both','hidden'
  states.push({year,trees:treesSeen.size,lamps,issues});
 }
 assert.equal(unsupported.length,0,'Every elevated road/path surface has a ground-contact edge: '+JSON.stringify(unsupported));
-assert(skirts.length>3000,'Inspect the complete estate network');
+ // Surface consolidation changes the mesh count, not support coverage.
+ // Check every marked owner has its own corresponding supporting geometry.
+ assert(closed.length>0,'Inspect elevated surfaces throughout the estate');
+ for(const owner of closed)assert([...owner.children,...owner.parent.children].some(o=>o.userData.groundContact&&o.userData.groundContactOwner===owner.name),'Ground-contact geometry exists for '+owner.name);
+ for(const root of [l.roads,l.historicRoads,l.entrance,l.countessRoundabout,l.carPark]){let found=false;root.traverse(o=>{if(o.userData.groundContact)found=true;});assert(found,'Inspect support coverage for '+root.name);}
 for(const edge of skirts){
  assert.equal(edge.material.polygonOffset,false,'Vertical road faces must not inherit a slope-scaled overlay bias');
  assert(!edge.material.userData.estateGrass&&!edge.material.userData.estateSurface&&!edge.material.userData.mineralFinish,'Compiled sides retain their metre-scaled UVs instead of restoring a top-surface projection');

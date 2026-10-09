@@ -1,0 +1,24 @@
+{
+  "code": 0,
+  "failures": [
+    {
+      "method": "deepEqual",
+      "actual": {
+        "primitives": 20837,
+        "sha256": "a19a5de6297ed856529921c5c23d58bf0668d7285ce291896c423124fcc11be6"
+      },
+      "expected": {
+        "primitives": 20837,
+        "sha256": "e6446e4f068b444fd4703dd706116118e39e89faa7ca37fe989e57039d19aa07"
+      },
+      "message": "Everything except the three marked sets of sash parts stays unchanged",
+      "stack": [
+        "    at assert.<computed> [as deepEqual] (file:///C:/Users/Harry/Documents/_escape-from-1829/Browser/artifacts/ward-placement-reference/capture-snapshot-mismatches.mjs:9:14)",
+        "    at file:///C:/Users/Harry/Documents/_escape-from-1829/Browser/test-oakmere-windows.mjs:18:9",
+        "    at ModuleJob.run (node:internal/modules/esm/module_job:561:25)",
+        "    at async node:internal/modules/esm/loader:647:26",
+        "    at async asyncRunEntryPointWithESMLoader (node:internal/modules/run_main:101:5)"
+      ]
+    }
+  ]
+}

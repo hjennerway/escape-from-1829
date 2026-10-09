@@ -17,6 +17,10 @@ try {
         & node (Join-Path $PSScriptRoot 'export-presentation.mjs')
         if ($LASTEXITCODE -ne 0) { throw 'Native presentation export failed.' }
     }
+    & node (Join-Path $PSScriptRoot 'export-workshop-shader.mjs')
+    if ($LASTEXITCODE -ne 0) { throw 'Native workshop shader export failed.' }
+    & node (Join-Path $PSScriptRoot 'test-navigation-export.mjs')
+    if ($LASTEXITCODE -ne 0) { throw 'Native collision export regression failed.' }
     & node (Join-Path $PSScriptRoot 'test-port.mjs')
     if ($LASTEXITCODE -ne 0) { throw 'Native asset validation failed.' }
     & node (Join-Path $PSScriptRoot 'test-presentation.mjs')
@@ -27,11 +31,15 @@ try {
     $arguments = @('-batchmode','-quit','-projectPath',(Join-Path $nativeRoot 'Unity'),'-executeMethod',$method,'-logFile',$log)
     if ($Target -eq 'Android') { $arguments += @('-buildTarget','Android') }
     if ($Target -eq 'Windows') { $arguments += @('-buildTarget','Win64') }
-    $unityProcess = Start-Process -FilePath $UnityPath -ArgumentList $arguments -WindowStyle Hidden -PassThru -Wait
+    $unityProcess = Start-Process -FilePath $UnityPath -ArgumentList $arguments -WindowStyle Hidden -PassThru
+    # Licensing helpers can outlive the build; wait for Unity, not its process tree.
+    $unityProcess.WaitForExit()
     if ($unityProcess.ExitCode -ne 0) {
         Get-Content -LiteralPath $log -Tail 65
         throw "Unity $Target failed; see $log"
     }
+    if (Select-String -LiteralPath $log -Pattern 'Shader error|error CS[0-9]+' -Quiet) { throw "Unity reported a source or shader compilation error; inspect $log" }
+    if (Select-String -LiteralPath $log -Pattern "Script attached to .* is missing or no valid script is attached" -Quiet) { throw "Unity built a scene with a missing script; inspect $log" }
     if ($Target -eq 'Android' -and !(Test-Path (Join-Path $nativeRoot 'out/escape-1829-native.apk'))) { throw 'Unity exited without producing the APK; inspect its log.' }
     Write-Output "Native $Target completed. Log: $log"
 } finally { Pop-Location }

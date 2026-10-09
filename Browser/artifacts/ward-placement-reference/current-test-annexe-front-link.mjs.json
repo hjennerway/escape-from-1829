@@ -1,0 +1,18 @@
+{
+  "code": 0,
+  "failures": [
+    {
+      "method": "equal",
+      "actual": "de0112638af553d8149f22788c5b3b1e78c2edc44a9c62d622b93f1a68798b49",
+      "expected": "9151c4a27cf51880df32b8b84449963cf3bc753848ad8eee27caec973908af4a",
+      "message": "Every original primitive is unchanged apart from the two rigid translations",
+      "stack": [
+        "    at assert.<computed> [as equal] (file:///C:/Users/Harry/Documents/_escape-from-1829/Browser/artifacts/ward-placement-reference/capture-snapshot-mismatches.mjs:9:14)",
+        "    at file:///C:/Users/Harry/Documents/_escape-from-1829/Browser/test-annexe-front-link.mjs:12:57",
+        "    at ModuleJob.run (node:internal/modules/esm/module_job:561:25)",
+        "    at async node:internal/modules/esm/loader:647:26",
+        "    at async asyncRunEntryPointWithESMLoader (node:internal/modules/run_main:101:5)"
+      ]
+    }
+  ]
+}

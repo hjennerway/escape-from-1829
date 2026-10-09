@@ -1,0 +1,212 @@
+npm notice run test:compiled
+npm notice run node test-roof-tiles.mjs --compiled && node test-roof-wall-joins.mjs --compiled && node test-precompiled-models.mjs && node test-timeline-browser.mjs && npm run test:interior-loading
+PASS: 701 tiled meshes, 9114 sloping triangles, two tile families; horizontal rows and uniform physical scale.
+PASS: 1044 front-wing brick surfaces without competing roof fillers.
+PASS: Redesmere roof protrusions removed; 244 render-top probes remain beneath slate.
+PASS: 45 Redesmere cornice edges share pale stepped trim and a clear slate boundary.
+PASS: 576 service wall joins, 234 single-face gable rays, 192 closed undersides and four clear sash panes.
+PASS: 216 single-face garage/mortuary gable probes, 72 closed underside probes and 12 unobstructed vent panes.
+PASS: 123 lean-to roof/wall contacts, rear attachment and cleared grit-bin footprint.
+PASS: 588 roof meshes surveyed (312 solid undersides), 278 formerly open ground rays closed; slate sources retained.
+Hardware GPU: ANGLE (NVIDIA, NVIDIA GeForce RTX 3090 Ti (0x00002203) Direct3D11 vs_5_0 ps_5_0, D3D11)
+Checking aerial?models=source
+Checking aerial?models=compiled
+Checking aerial?models=compiled&buildingDetail=full&view=front
+Checking aerial
+Browser: Failed to load resource: the server responded with a status of 404 (Not Found)
+Checking aerial
+Checking aerial
+PASS: compiled estate, shadows, grass shaders, exact draw counts, tree/layout controls, orbit, portrait, full detail and missing/incompatible/damaged model fallback.
+{
+  "source": {
+    "mode": "procedural",
+    "milliseconds": 3593.6999999997206,
+    "triangles": 896030,
+    "calls": 1905,
+    "levels": [
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      1,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      1,
+      1,
+      1,
+      2,
+      2,
+      2,
+      1,
+      1,
+      2,
+      2,
+      1,
+      2,
+      2,
+      1,
+      2
+    ],
+    "readyMilliseconds": 5707.6327
+  },
+  "compiled": {
+    "mode": "compiled",
+    "milliseconds": 1111.1000000000931,
+    "triangles": 896030,
+    "calls": 1905,
+    "levels": [
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      1,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      1,
+      1,
+      1,
+      2,
+      2,
+      2,
+      1,
+      1,
+      2,
+      2,
+      1,
+      2,
+      2,
+      1,
+      2
+    ],
+    "readyMilliseconds": 2633.0303000000004
+  },
+  "identicalScreenshot": false,
+  "pixels": {
+    "significantFraction": 0.00015714285714285713,
+    "meanChannelError": 0.004385238095238095
+  },
+  "fullDetail": {
+    "mode": "compiled",
+    "milliseconds": 809.4000000003725,
+    "triangles": 647561,
+    "calls": 515,
+    "readyMilliseconds": 2178.4781999999996
+  }
+}
+Hardware GPU: ANGLE (NVIDIA, NVIDIA GeForce RTX 3090 Ti (0x00002203) Direct3D11 vs_5_0 ps_5_0, D3D11)
+PASS: every timeline stop in source/compiled pages, descriptions, URL reload/navigation, keyboard/endpoints, tree focus, selection, mobile reset and live walking collision refresh.
+npm notice run test:interior-loading
+npm notice run node test-interior-loading.mjs && node test-interior-loading-browser.mjs
+PASS: ten contiguous sections, every entrance/stair assigned, compiled bounds/materials and complete source surface-area preservation.
+Hardware GPU: ANGLE (NVIDIA, NVIDIA GeForce RTX 3090 Ti (0x00002203) Direct3D11 vs_5_0 ps_5_0, D3D11)
+Loading check: entry ready 1 sections
+node:internal/modules/run_main:107
+    triggerUncaughtException(
+    ^
+
+AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+
+'worker' !== 'assets'
+
+    at file:///C:/Users/Harry/Documents/_escape-from-1829/Browser/test-interior-loading-browser.mjs:45:10 {
+  generatedMessage: true,
+  code: 'ERR_ASSERTION',
+  actual: 'worker',
+  expected: 'assets',
+  operator: 'strictEqual',
+  diff: 'simple'
+}
+
+Node.js v24.20.0

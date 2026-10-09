@@ -1,0 +1,72 @@
+{
+  "signs": [
+    {
+      "name": "NIGHT GATE · LOCKED sign",
+      "lines": [
+        "NIGHT GATE · LOCKED",
+        "Pedestrian gate: west path"
+      ],
+      "material": "MeshStandardMaterial",
+      "roughness": 0.94,
+      "geometry": "BoxGeometry",
+      "paint": [
+        1024,
+        320
+      ],
+      "exactDoorPaint": true,
+      "parent": "Escape grounds boundary and tool store"
+    },
+    {
+      "name": "PEDESTRIAN GATE sign",
+      "lines": [
+        "PEDESTRIAN GATE",
+        "Please close quietly"
+      ],
+      "material": "MeshStandardMaterial",
+      "roughness": 0.94,
+      "geometry": "BoxGeometry",
+      "paint": [
+        1024,
+        320
+      ],
+      "exactDoorPaint": true,
+      "parent": "pedestrian boundary gate"
+    },
+    {
+      "name": "Maintenance wicket sign",
+      "lines": [
+        "Maintenance wicket"
+      ],
+      "material": "MeshStandardMaterial",
+      "roughness": 0.94,
+      "geometry": "BoxGeometry",
+      "paint": [
+        1024,
+        320
+      ],
+      "exactDoorPaint": true,
+      "parent": "wicket boundary gate"
+    }
+  ],
+  "renderer": "ANGLE (NVIDIA, NVIDIA GeForce RTX 3090 Ti (0x00002203) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+  "observation": {
+    "kind": "fact",
+    "id": "escape:grounds:wicket",
+    "title": "Boarded maintenance wicket",
+    "text": "Boards need prising off to open this maintenance wicket. A crowbar could prise them off. The work would be noisy. Tools are inside the water tower workshops to the east. Use the blue stores door beside the tower.",
+    "view": "outside",
+    "mapPoint": {
+      "x": 87,
+      "z": -85
+    },
+    "mapLabel": "Boarded maintenance wicket",
+    "source": "Personal observation · fictional escape scenario",
+    "order": 7
+  },
+  "opened": {
+    "rotation": -1.5707963267948966,
+    "boardsVisible": false,
+    "parent": "wicket boundary gate"
+  },
+  "errors": []
+}

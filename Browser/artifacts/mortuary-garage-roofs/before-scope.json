@@ -1,0 +1,14 @@
+{
+  "outside": {
+    "count": 1445408,
+    "hash": "84dd150b240f537c6a40af37f75573d53c5b34c5e93aafaa0e250d778d998f53"
+  },
+  "existingRoofs": {
+    "count": 303,
+    "hash": "b9ac68c06eded250de5b653b60dde5879cc117380f71f7a75d6c68b08d1888c4"
+  },
+  "wallsAndDetails": {
+    "count": 795,
+    "hash": "57f556182ccb4b6984c7c35ed638b96705ae68c8ebe2e0836b42d3fb4683cf71"
+  }
+}

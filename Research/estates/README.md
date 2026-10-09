@@ -72,3 +72,34 @@ siblings and remained visible. Individually toggled surfaces now own their
 supporting sides, so both inherit layout and timeline visibility. The grass,
 current roads, Estates building and walking routes retain their geometry.
 Before/after views use `Browser/artifacts/estates-stray-*`.
+
+## Continuous frontage kerbs — 9 October 2026
+
+The owner's [entrance annotation](kerb-entrance-marked-2026-10-09.png) and
+[workshop annotation](kerb-workshop-marked-2026-10-09.png) connect the pale
+service-road edging along the purple lines. These are visual frontage
+corrections, rather than additional historical survey evidence.
+
+Two 0.6-unit-wide stone strips now bridge the gaps. The long join sweeps out
+of the northern bend, follows the rotated workshop frontage at the courtyard's
+existing setback, and blends into the cobbled entrance edge. The short join
+continues that edge past the low entrance room to the surviving southern kerb.
+Cubic curves follow the adjoining road tangents. Each strip eases from the
+existing 0.32-unit border height to 0.38 over two units, with closed supporting
+sides and no overlapping segment caps. Both follow The Main's existing
+Historic and timeline visibility.
+
+The building, courtyard, asphalt and road centrelines retain their geometry.
+Browser sources and the local compiled aerial model are updated; Unity/Android
+and Blender exports are unchanged. Hardware-rendered source, compiled and
+walking previews are in `Browser/artifacts/estates-kerb/`.
+
+## Pavement edge follow-up — 9 October 2026
+
+The owner's later purple/yellow screenshots in `Research/historic-roads/`
+identify buried road borders appearing through the asphalt and teeth along
+curved kerbs. Continuous road strips and constant drawing-depth priorities
+correct both issues while retaining the two frontage joins described above.
+This supersedes the slope-scaled ground-layer bias; the Estates footprint,
+cobbled court and kerb placement remain in use. Source and compiled close/far
+walking views are saved in `Browser/artifacts/pavement-cleanup/`.

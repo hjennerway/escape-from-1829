@@ -13,6 +13,13 @@ public sealed partial class NativePrototypeGame
         colourGrade=view.gameObject.AddComponent<NativeColourGrade>();colourGrade.material=new Material(gradeShader);view.allowHDR=true;
     }
     void UpdateAtmosphere(float dt){weatherTime+=dt;Shader.SetGlobalFloat("_WeatherTime",weatherTime);Shader.SetGlobalFloat("_LeafTime",weatherTime);}
+    void SetInteriorAmbient(Color colour)
+    {
+        RenderSettings.ambientLight=colour;
+        // Set the shader probe along with the flat colour, so no sky
+        // environment refresh is needed for an interior transition.
+        var probe=new SphericalHarmonicsL2();probe.AddAmbientLight(colour.linear);RenderSettings.ambientProbe=probe;
+    }
     void SetAtmosphere(bool indoors,float titleBlend=0,bool configure=true)
     {
         float twilight=mode==Mode.Title||lightingMode==LightingMode.Dusk?1:Mathf.Clamp01(titleBlend);
@@ -23,13 +30,26 @@ public sealed partial class NativePrototypeGame
         sun.color=Blend(0xffcc8d,0x8ba9e5,0xffe2b7);sun.intensity=BlendNumber(.85f,.24f,1.05f);
         sun.transform.rotation=Quaternion.Slerp(Quaternion.LookRotation(new Vector3(85,-120,60)),Quaternion.LookRotation(new Vector3(100,-85,-260)),twilight);skyMaterial.SetVector("_SunDirection",-sun.transform.forward);
         RenderSettings.ambientMode=indoors?AmbientMode.Flat:AmbientMode.Trilight;
-        RenderSettings.ambientLight=new Color(.23f,.25f,.22f);RenderSettings.ambientSkyColor=Blend(0x7d9da0,0x394357,0x9aafb4);RenderSettings.ambientEquatorColor=Blend(0x687460,0x232d3a,0x748067);RenderSettings.ambientGroundColor=Blend(0x303727,0x1b2430,0x454d37);
+        // Halfway between v0.12's dark fill and v0.11's effective sky fill.
+        // Use the actual former sky colour, not the overwritten ambientLight.
+        float ambientScale=BlendNumber(.7f,.8f,1);
+        // ambientLight and ambientSkyColor share Unity's sky-colour property.
+        // Setting outdoor sky colours after the flat fill overwrites it.
+        if(indoors)SetInteriorAmbient(Color.Lerp(new Color(.075f,.052f,.032f),Blend(0x7d9da0,0x394357,0x9aafb4)*ambientScale,.5f));
+        else {
+            RenderSettings.ambientSkyColor=Blend(0x7d9da0,0x394357,0x9aafb4)*ambientScale;RenderSettings.ambientEquatorColor=Blend(0x687460,0x232d3a,0x748067)*ambientScale;RenderSettings.ambientGroundColor=Blend(0x303727,0x1b2430,0x454d37)*ambientScale;
+            DynamicGI.UpdateEnvironment();
+        }
         RenderSettings.reflectionIntensity=0;
-        view.clearFlags=indoors?CameraClearFlags.SolidColor:CameraClearFlags.Skybox;view.backgroundColor=Hex(0x343731);
-        RenderSettings.fog=true;RenderSettings.fogMode=FogMode.ExponentialSquared;RenderSettings.fogColor=indoors?Hex(0x343731):Blend(0x7b877d,0x111d30,0xb5c7cd);RenderSettings.fogDensity=indoors?.018f:BlendNumber(.0019f,.00065f,.0019f);
+        var interiorFog=Color.Lerp(Hex(0x29231b),Hex(0x343731),.5f);
+        view.clearFlags=indoors?CameraClearFlags.SolidColor:CameraClearFlags.Skybox;view.backgroundColor=interiorFog;
+        RenderSettings.fog=true;RenderSettings.fogMode=FogMode.ExponentialSquared;RenderSettings.fogColor=indoors?interiorFog:Blend(0x7b877d,0x111d30,0xb5c7cd);RenderSettings.fogDensity=indoors?.021f:BlendNumber(.0019f,.00065f,.0019f);
         Shader.SetGlobalFloat("_WeatherEnabled",indoors?0:1);Shader.SetGlobalColor("_WeatherHorizon",horizon.linear);Shader.SetGlobalFloat("_GroundMist",BlendNumber(.014f,.018f,0));Shader.SetGlobalFloat("_CountrysideHaze",BlendNumber(.0008f,.0009f,.00065f));Shader.SetGlobalFloat("_CloudShadow",BlendNumber(.11f,0,.16f));
-        colourGrade.material.SetFloat("_Exposure",indoors?1.1f:BlendNumber(1.15f,1.05f,1.15f));
-        view.nearClipPlane=indoors||mode==Mode.Outside?.08f:mode==Mode.Aerial?1f:.5f;view.farClipPlane=indoors?150:7000;
+        colourGrade.material.SetFloat("_Exposure",indoors?.91f:BlendNumber(1.05f,1.05f,1.15f));
+        // GLES depth precision is especially sensitive to the walking camera's
+        // old .08-to-7000 range. Keep close indoor clearance and distant aerial
+        // scenery, but give facade details a tighter range while on foot.
+        view.nearClipPlane=indoors?.08f:mode==Mode.Outside?.18f:mode==Mode.Aerial?1f:.5f;view.farClipPlane=indoors?150:mode==Mode.Outside?3500:7000;
         view.fieldOfView=mode==Mode.Title?46:mode==Mode.Aerial?55:74;
         if(configure)ConfigureShadows();
     }

@@ -2,6 +2,7 @@
 <html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Explore the asylum · 1829</title><link rel="icon" href="./favicon.svg"><link rel="stylesheet" href="./style.css"><link rel="stylesheet" href="./aerial-layouts.css"><link rel="stylesheet" href="./aerial-locations.css"><link rel="stylesheet" href="./explore.css"><link rel="stylesheet" href="./day-night.css"><link rel="stylesheet" href="./view-ui.css"><link rel="stylesheet" href="./developer-map.css"></head>
 <body>
 <script src="./intro-loading.js"></script>
+<script type="module" src="./view-cache-entry.mjs"></script>
 <canvas id="game" tabindex="0" aria-label="Explore the asylum and grounds in 3D"></canvas>
 <nav class="explore-nav" aria-label="Explore navigation">
   <div class="view-navigation">
@@ -68,7 +69,7 @@
   <div id="periodTicks" aria-hidden="true"></div><div class="period-endpoints" aria-hidden="true"><span>1829</span><span>2021</span></div>
   <p id="periodDescription"></p><p id="periodNote" hidden></p>
 </details>
-<div class="explore-guide"><h1>Explore the asylum</h1><p class="desktop-walk-help">WASD move · Mouse look · Shift walk faster · Space jump · E use door · T show/hide trees · Esc release mouse</p><p class="touch-walk-help">Hold arrows to walk · Drag to look · Tap the door prompt to enter or leave</p><p id="lookHint" role="status">Loading the grounds…</p><button id="look" disabled>START EXPLORING ↗</button>
+<div class="explore-guide"><h1>Explore the asylum</h1><p class="desktop-walk-help">WASD move · Mouse look · Shift walk faster · Space jump · E use door · T show/hide trees · Esc release mouse</p><p class="touch-walk-help">Hold arrows to walk · Drag to look · Tap the prompt to open doors or enter buildings</p><p id="lookHint" role="status">Loading the grounds…</p><button id="look" disabled>START EXPLORING ↗</button>
   <div class="developer-options">
     <button id="developerToggle" type="button" aria-pressed="false" aria-controls="developerShortcuts" aria-keyshortcuts="-" hidden>Developer option · −</button>
     <div id="developerShortcuts" hidden><button id="developerMapToggle" type="button" aria-pressed="false" aria-keyshortcuts="M">M · Full map</button><button id="stairOverlayToggle" type="button" aria-pressed="false" aria-keyshortcuts="Shift+M">Shift+M · Staircase overlay</button><span class="stair-overlay-legend"><span>Exterior</span><span>Interior</span></span><span id="developerStatus" role="status"></span></div>

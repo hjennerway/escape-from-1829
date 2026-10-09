@@ -1,0 +1,411 @@
+{
+  "report": {
+    "build": {
+      "mode": "compiled",
+      "milliseconds": 1737.9000000003725
+    },
+    "samples": [
+      {
+        "x": -30.12,
+        "y": -0.12,
+        "hits": [
+          {
+            "name": "Aerial batch · West semi-basement walk · 6",
+            "z": 21.700000762939453
+          }
+        ]
+      },
+      {
+        "x": -30.12,
+        "y": -0.04,
+        "hits": [
+          {
+            "name": "Aerial batch · West semi-basement walk · 6",
+            "z": 21.700000762939453
+          }
+        ]
+      },
+      {
+        "x": -30.12,
+        "y": 0.04,
+        "hits": [
+          {
+            "name": "Aerial batch · West semi-basement walk · 6",
+            "z": 21.700000762939453
+          }
+        ]
+      },
+      {
+        "x": -30.12,
+        "y": 0.1,
+        "hits": [
+          {
+            "name": "Aerial batch · West semi-basement walk · 6",
+            "z": 21.700000762939453
+          }
+        ]
+      },
+      {
+        "x": -30.12,
+        "y": 0.16,
+        "hits": [
+          {
+            "name": "Aerial batch · West semi-basement walk · 6",
+            "z": 21.700000762939453
+          }
+        ]
+      },
+      {
+        "x": -30.3,
+        "y": -0.12,
+        "hits": [
+          {
+            "name": "Aerial batch · West semi-basement walk · 6",
+            "z": 21.700000762939453
+          }
+        ]
+      },
+      {
+        "x": -30.3,
+        "y": -0.04,
+        "hits": [
+          {
+            "name": "Aerial batch · West semi-basement walk · 6",
+            "z": 21.700000762939453
+          }
+        ]
+      },
+      {
+        "x": -30.3,
+        "y": 0.04,
+        "hits": [
+          {
+            "name": "Aerial batch · West semi-basement walk · 6",
+            "z": 21.700000762939453
+          }
+        ]
+      },
+      {
+        "x": -30.3,
+        "y": 0.1,
+        "hits": [
+          {
+            "name": "Aerial batch · West semi-basement walk · 6",
+            "z": 21.700000762939453
+          }
+        ]
+      },
+      {
+        "x": -30.3,
+        "y": 0.16,
+        "hits": [
+          {
+            "name": "Aerial batch · West semi-basement walk · 6",
+            "z": 21.700000762939453
+          }
+        ]
+      },
+      {
+        "x": -30.5,
+        "y": -0.12,
+        "hits": [
+          {
+            "name": "Aerial batch · West semi-basement walk · 6",
+            "z": 21.700000762939453
+          }
+        ]
+      },
+      {
+        "x": -30.5,
+        "y": -0.04,
+        "hits": [
+          {
+            "name": "Aerial batch · West semi-basement walk · 6",
+            "z": 21.700000762939453
+          }
+        ]
+      },
+      {
+        "x": -30.5,
+        "y": 0.04,
+        "hits": [
+          {
+            "name": "Aerial batch · West semi-basement walk · 6",
+            "z": 21.700000762939453
+          }
+        ]
+      },
+      {
+        "x": -30.5,
+        "y": 0.1,
+        "hits": [
+          {
+            "name": "Aerial batch · West semi-basement walk · 6",
+            "z": 21.700000762939453
+          }
+        ]
+      },
+      {
+        "x": -30.5,
+        "y": 0.16,
+        "hits": [
+          {
+            "name": "Aerial batch · West semi-basement walk · 6",
+            "z": 21.700000762939453
+          }
+        ]
+      },
+      {
+        "x": -30.7,
+        "y": -0.12,
+        "hits": [
+          {
+            "name": "Aerial batch · West semi-basement walk · 6",
+            "z": 21.700000762939453
+          }
+        ]
+      },
+      {
+        "x": -30.7,
+        "y": -0.04,
+        "hits": [
+          {
+            "name": "Aerial batch · West semi-basement walk · 6",
+            "z": 21.700000762939453
+          }
+        ]
+      },
+      {
+        "x": -30.7,
+        "y": 0.04,
+        "hits": [
+          {
+            "name": "Aerial batch · West semi-basement walk · 6",
+            "z": 21.700000762939453
+          }
+        ]
+      },
+      {
+        "x": -30.7,
+        "y": 0.1,
+        "hits": [
+          {
+            "name": "Aerial batch · West semi-basement walk · 6",
+            "z": 21.700000762939453
+          }
+        ]
+      },
+      {
+        "x": -30.7,
+        "y": 0.16,
+        "hits": [
+          {
+            "name": "Aerial batch · West semi-basement walk · 6",
+            "z": 21.700000762939453
+          }
+        ]
+      },
+      {
+        "x": 30.12,
+        "y": -0.12,
+        "hits": [
+          {
+            "name": "Aerial batch · East semi-basement walk · 13",
+            "z": 21.700000762939453
+          }
+        ]
+      },
+      {
+        "x": 30.12,
+        "y": -0.04,
+        "hits": [
+          {
+            "name": "Aerial batch · East semi-basement walk · 13",
+            "z": 21.700000762939453
+          }
+        ]
+      },
+      {
+        "x": 30.12,
+        "y": 0.04,
+        "hits": [
+          {
+            "name": "Aerial batch · East semi-basement walk · 13",
+            "z": 21.700000762939453
+          }
+        ]
+      },
+      {
+        "x": 30.12,
+        "y": 0.1,
+        "hits": [
+          {
+            "name": "Aerial batch · East semi-basement walk · 13",
+            "z": 21.700000762939453
+          }
+        ]
+      },
+      {
+        "x": 30.12,
+        "y": 0.16,
+        "hits": [
+          {
+            "name": "Aerial batch · East semi-basement walk · 13",
+            "z": 21.700000762939453
+          }
+        ]
+      },
+      {
+        "x": 30.3,
+        "y": -0.12,
+        "hits": [
+          {
+            "name": "Aerial batch · East semi-basement walk · 13",
+            "z": 21.700000762939453
+          }
+        ]
+      },
+      {
+        "x": 30.3,
+        "y": -0.04,
+        "hits": [
+          {
+            "name": "Aerial batch · East semi-basement walk · 13",
+            "z": 21.700000762939453
+          }
+        ]
+      },
+      {
+        "x": 30.3,
+        "y": 0.04,
+        "hits": [
+          {
+            "name": "Aerial batch · East semi-basement walk · 13",
+            "z": 21.700000762939453
+          }
+        ]
+      },
+      {
+        "x": 30.3,
+        "y": 0.1,
+        "hits": [
+          {
+            "name": "Aerial batch · East semi-basement walk · 13",
+            "z": 21.700000762939453
+          }
+        ]
+      },
+      {
+        "x": 30.3,
+        "y": 0.16,
+        "hits": [
+          {
+            "name": "Aerial batch · East semi-basement walk · 13",
+            "z": 21.700000762939453
+          }
+        ]
+      },
+      {
+        "x": 30.5,
+        "y": -0.12,
+        "hits": [
+          {
+            "name": "Aerial batch · East semi-basement walk · 13",
+            "z": 21.700000762939453
+          }
+        ]
+      },
+      {
+        "x": 30.5,
+        "y": -0.04,
+        "hits": [
+          {
+            "name": "Aerial batch · East semi-basement walk · 13",
+            "z": 21.700000762939453
+          }
+        ]
+      },
+      {
+        "x": 30.5,
+        "y": 0.04,
+        "hits": [
+          {
+            "name": "Aerial batch · East semi-basement walk · 13",
+            "z": 21.700000762939453
+          }
+        ]
+      },
+      {
+        "x": 30.5,
+        "y": 0.1,
+        "hits": [
+          {
+            "name": "Aerial batch · East semi-basement walk · 13",
+            "z": 21.700000762939453
+          }
+        ]
+      },
+      {
+        "x": 30.5,
+        "y": 0.16,
+        "hits": [
+          {
+            "name": "Aerial batch · East semi-basement walk · 13",
+            "z": 21.700000762939453
+          }
+        ]
+      },
+      {
+        "x": 30.7,
+        "y": -0.12,
+        "hits": [
+          {
+            "name": "Aerial batch · East semi-basement walk · 13",
+            "z": 21.700000762939453
+          }
+        ]
+      },
+      {
+        "x": 30.7,
+        "y": -0.04,
+        "hits": [
+          {
+            "name": "Aerial batch · East semi-basement walk · 13",
+            "z": 21.700000762939453
+          }
+        ]
+      },
+      {
+        "x": 30.7,
+        "y": 0.04,
+        "hits": [
+          {
+            "name": "Aerial batch · East semi-basement walk · 13",
+            "z": 21.700000762939453
+          }
+        ]
+      },
+      {
+        "x": 30.7,
+        "y": 0.1,
+        "hits": [
+          {
+            "name": "Aerial batch · East semi-basement walk · 13",
+            "z": 21.700000762939453
+          }
+        ]
+      },
+      {
+        "x": 30.7,
+        "y": 0.16,
+        "hits": [
+          {
+            "name": "Aerial batch · East semi-basement walk · 13",
+            "z": 21.700000762939453
+          }
+        ]
+      }
+    ]
+  },
+  "errors": []
+}

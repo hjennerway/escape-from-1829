@@ -187,7 +187,9 @@ export function createWaterTower(THREE,{brick,roof,dark,worldUV}){
     }
   }
   mesh(shaftGeometry(),masonry,0,16.9,0,tower,'Square brick shaft');
-  box(soot,0,.25,0,10.35,.5,10.35);
+  // Keep the footing out of the decorative BufferGeometry merge below so
+  // groundBuildingBases can extend its bottom into the lawn before batching.
+  box(soot,0,.25,0,10.35,.5,10.35,tower,'Water tower brick plinth');
   box(dress,0,20.15,0,10.48,.25,10.48,tower,'Upper stage string course');
   box(iron,0,20.32,0,10.58,.1,10.58);
   for(const {number,rotation,label} of WATER_TOWER_SIDES){

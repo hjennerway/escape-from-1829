@@ -9,7 +9,7 @@ import {recessProtected} from './artifacts/larkton-recess-scope.mjs';
 import {larktonProtected} from './artifacts/larkton-scope.mjs';
 globalThis.document={createElement:()=>({getContext:()=>({fillRect(){}})})};
 const e=createEscapeExterior(THREE,1.5),a=e.annexe,before=JSON.parse(readFileSync(new URL('../Research/larkton-jodrell/recess-protected-before.json',import.meta.url)));
-// Isolate the concurrent additive Oakmere task for the immutable pre-edit
+// Isolate the concurrent additive Oakmere task for the approved protected
 // fingerprint; restore it before every live collision/visibility assertion.
 const concurrent=a.getObjectByName('Oakmere rear court additions'),concurrentParent=concurrent?.parent;
 if(concurrent)concurrentParent.remove(concurrent);

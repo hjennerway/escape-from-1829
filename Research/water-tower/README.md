@@ -142,3 +142,26 @@ The checked photograph ruler, count comparison, measured geometry, before/
 after source views and rebuilt compiled views are in
 `Browser/artifacts/water-tower-course-survey/`. Actual geometry measurements
 are read from the scene, rather than inferred from screenshot pixels.
+
+## Footing contact with the lawn, 9 October 2026
+
+The owner's walking screenshot, saved as `ground-contact-reference.png`,
+shows the entrance/1829 corner appearing to float beside the adjoining ranges.
+The tower's authored ground level is Y=0, while the estate lawn is Y=-0.15.
+Its unnamed solid base was merged into decorative `BufferGeometry` before
+the estate foundation pass, which accepts upright architectural primitives.
+That left a real 0.15-unit gap beneath all four footing faces.
+
+The existing 10.35-by-10.35 base is now named `Water tower brick plinth` so it
+retains its box geometry until assembly. The normal foundation pass extends
+only its bottom to Y=-0.18, beneath the lawn. Its top remains Y=0.5, with the
+same material, footprint and texture registration above grade. Tower height,
+position, openings, roof contacts and adjoining buildings retain their geometry.
+This is a ground-contact repair, rather than a new surveyed tower dimension.
+
+`test-building-grounding.mjs` probes 64 footing points across all four faces,
+preserves upper vertices/UVs and checks repeat grounding. The hardware-browser
+inspector in `Browser/artifacts/water-tower-grounding/` also probes the actual
+submitted render geometry and captures the corner, surrounding buildings,
+night lighting and phone framing. Browser source and the local compiled aerial
+estate change; Unity/Android, Blender and packaged exports are not regenerated.

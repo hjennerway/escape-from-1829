@@ -45,13 +45,33 @@ try{
   const deltaAt=(x,y)=>{let sum=0;for(let dy=-2;dy<=2;dy++)for(let dx=-2;dx<=2;dx++)for(let c=0;c<3;c++){const i=((y+dy)*256+x+dx)*4+c;sum+=Math.max(0,on[i]-off[i]);}return sum/75;};
   const apertureLight={window:centre.toArray(),floor:projected.toArray(),throughOpening:deltaAt(128,128),besideOpening:[deltaAt(128,40),deltaAt(128,216)]};
   sun.intensity=sunStrength;w.lighting.uniforms.workshopStrength.value=strength;t.renderer.setRenderTarget(previousTarget);target.dispose();
-  return {renderer:gl.getParameter(info.UNMASKED_RENDERER_WEBGL),cx,ceilings,seams,fittings,floors,daylight,apertureLight,windows:w.lighting.windows.length,signs:w.group.userData.directionSigns,atlasBakes:w.lighting.bakes,joins,farndon};
+  // Sun on/off isolates the reported high-wall fringe from sky and tube fill.
+  // Survey both sides of every run immediately below the finished ceiling.
+  const ceilingLight=[],seamTarget=new THREE.WebGLRenderTarget(64,32),seamCamera=new THREE.OrthographicCamera(-.6,.6,.095,-.095,.05,10);
+  w.lighting.uniforms.workshopStrength.value=0;
+  for(const mode of ['day','dusk','night']){
+   t.exterior.lighting.setMode(mode);const intensity=sun.intensity;
+   for(const run of runs)for(const side of [-1,1]){
+    const dx=run.end[0]-run.start[0],dz=run.end[1]-run.start[1],length=Math.hypot(dx,dz),x=run.start[0]+dx*.4,z=run.start[1]+dz*.4;
+    seamCamera.position.set(x,4.945,z);seamCamera.lookAt(x-side*dz/length,4.945,z+side*dx/length);seamCamera.updateMatrixWorld(true);
+    const draw=value=>{sun.intensity=value;t.renderer.setRenderTarget(seamTarget);t.renderer.render(t.exterior.scene,seamCamera);const pixels=new Uint8Array(64*32*4);t.renderer.readRenderTargetPixels(seamTarget,0,0,64,32,pixels);return pixels;};
+    const dark=draw(0),lit=draw(intensity);let peakRow=0;
+    for(let y=0;y<32;y++){let gain=0;for(let x=0;x<64;x++)for(let c=0;c<3;c++)gain+=Math.max(0,lit[(y*64+x)*4+c]-dark[(y*64+x)*4+c]);peakRow=Math.max(peakRow,gain/(64*3));}
+    ceilingLight.push({mode,run:run.id,side,peakRow});
+   }
+   sun.intensity=intensity;
+  }
+  t.exterior.lighting.setMode('day');w.lighting.uniforms.workshopStrength.value=strength;t.renderer.setRenderTarget(previousTarget);seamTarget.dispose();
+  return {renderer:gl.getParameter(info.UNMASKED_RENDERER_WEBGL),cx,ceilings,seams,fittings,floors,daylight,apertureLight,ceilingLight,windows:w.lighting.windows.length,signs:w.group.userData.directionSigns,atlasBakes:w.lighting.bakes,joins,farndon};
  });
+ assert.deepEqual(errors,[]);
  assert(result.joins.corners>=14&&result.joins.probes>=560);assert.equal(result.joins.failures.length,0,JSON.stringify(result.joins.failures.slice(0,8)));assert(result.farndon.every(p=>Math.abs(p.x-p.expected)<1e-5),'Straight Farndon wall and skirting in the assembled game');
  assert(result.ceilings.every(c=>Math.abs(c.y-5.05)<1e-6));assert(result.fittings.every(l=>l.intensity>0&&l.intensity<=16&&Math.hypot(l.position[0]-l.x,l.position[1]-l.y,l.position[2]-l.z)<1e-6),'Subtle fixed fill matches every ceiling fixture');assert.equal(result.atlasBakes,1);
  assert(result.floors.every(p=>Math.abs(p.y-.04)<1e-5),'One level concrete floor in every passage and the machine shop');
  assert(result.windows>40&&result.daylight[0].total>result.daylight[2].total*2,'Windows share the estate daylight strength');assert.notDeepEqual(result.daylight[0].colours,result.daylight[2].colours,'Windows share the estate sky/sun colour');
  assert(result.apertureLight.throughOpening>3&&result.apertureLight.besideOpening.every(n=>n<result.apertureLight.throughOpening*.25),'Daylight lands along the sun ray through the actual opening, with solid wall on either side: '+JSON.stringify(result.apertureLight));
+ assert.equal(result.ceilingLight.length,48,'Both walls of all eight passages in day/dusk/night');
+ assert(result.ceilingLight.every(p=>p.peakRow<1),'Sunlight stays behind the ceiling/wall join: '+JSON.stringify(result.ceilingLight.filter(p=>p.peakRow>=1)));
  for(const seam of result.seams){assert(seam.samples.every(Boolean));assert(Math.abs(seam.samples[0].x-seam.samples[1].x)<1e-5,'Flush wall at '+seam.z);for(const s of seam.samples)assert(Math.abs(s.u-s.z/CORRIDOR_FINISH.textureWidth)<1e-4,'World-aligned brick courses at '+seam.z);}
  async function shot(name,pose){await page.evaluate(p=>groundsTest.pose(...p),pose);await page.screenshot({path:fileURLToPath(new URL(name+'.png',destination))});}
  for(const sign of result.signs)for(const side of [1,-1]){

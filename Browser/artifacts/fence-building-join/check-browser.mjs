@@ -3,6 +3,7 @@ import {readFile,writeFile,mkdir} from 'node:fs/promises';
 import {fileURLToPath} from 'node:url';
 import {startTestServer} from '../../test-support/server.mjs';
 import {launchHardwareBrowser} from '../../test-support/hardware-browser.mjs';
+import {fenceBaselineSource} from './baseline-loader.mjs';
 
 const phase=process.argv[2]??'before',destination=new URL('./',import.meta.url);
 await mkdir(destination,{recursive:true});
@@ -28,6 +29,10 @@ try{
  browser=await launchHardwareBrowser();const page=await browser.newPage({viewport:{width:1560,height:668}});page.setDefaultTimeout(180000);
  page.on('pageerror',e=>errors.push(e.message));page.on('console',m=>{if(m.type()==='error'&&/THREE|shader|WebGL/i.test(m.text()))errors.push(m.text())});
  await page.route('https://**/*',r=>r.abort());
+ if(phase==='before')await page.route(url=>['/workshop-gallery.mjs','/escape-grounds.mjs','/escape-grounds-state.mjs'].includes(url.pathname),async r=>{
+  const url=new URL(r.request().url()),source=await readFile(new URL('../../dist'+url.pathname,import.meta.url),'utf8');
+  await r.fulfill({contentType:'text/javascript',body:fenceBaselineSource(url.href,source)});
+ });
  await page.route('**/game.mjs',async r=>{const source=(await readFile(new URL('../../dist/game.mjs',import.meta.url),'utf8')).replace('clock.update();const frameDt','if(window.__manual)return;clock.update();const frameDt');await r.fulfill({contentType:'text/javascript',body:source+instrument});});
  await page.goto(base+'/?seed=1829');await page.waitForFunction(()=>window.fenceTest?.ready);await page.evaluate(()=>fenceTest.begin());
  const results=await page.evaluate(()=>fenceTest.inspect());results.barrierFailures=await page.evaluate(()=>fenceTest.audit());
@@ -43,7 +48,7 @@ try{
  for(const [name,x,z,tx,tz] of [['pedestrian',-76,-77,-67,-85],['wicket',82,-76,95,-85],['wall-contact',110,-79,115.14,-85]]){
   await page.evaluate(p=>fenceTest.pose(...p),[x,z,tx,tz]);await page.screenshot({path:fileURLToPath(new URL(phase+'-'+name+'.png',destination))});
  }
- await page.setViewportSize({width:390,height:844});await page.evaluate(()=>fenceTest.pose(110,-79,115.14,-85));await page.screenshot({path:fileURLToPath(new URL(phase+'-wall-contact-phone.png',destination))});
+ await page.setViewportSize({width:390,height:844});await page.evaluate(()=>new Promise(resolve=>requestAnimationFrame(()=>requestAnimationFrame(resolve))));await page.evaluate(()=>fenceTest.pose(110,-79,115.14,-85));await page.screenshot({path:fileURLToPath(new URL(phase+'-wall-contact-phone.png',destination))});
  await writeFile(new URL(phase+'.json',destination),JSON.stringify({results,errors},null,2));
  assert.deepEqual(errors,[]);assert.equal(results.barrierFailures.length,0,JSON.stringify(results.barrierFailures.slice(0,10)));
  console.log(JSON.stringify({phase,rails:results.rails,barrierFailures:results.barrierFailures.length,modelMode:results.modelMode,errors}));

@@ -1,0 +1,393 @@
+{
+  "samples": 48822,
+  "closureMeshes": 311,
+  "overlapSamples": 8,
+  "pairs": [
+    [
+      "1829 estate · aerial reconstruction/Historic layout/The annexe/Eave closure: West front pavilion vs 1829 estate · aerial reconstruction/Historic layout/The annexe/West front pavilion slate roof",
+      4
+    ],
+    [
+      "1829 estate · aerial reconstruction/Historic layout/The annexe/Eave closure: East front pavilion vs 1829 estate · aerial reconstruction/Historic layout/The annexe/East front pavilion slate roof",
+      4
+    ]
+  ],
+  "overlaps": [
+    {
+      "closure": "1829 estate · aerial reconstruction/Historic layout/The annexe/Eave closure: West front pavilion",
+      "authored": "1829 estate · aerial reconstruction/Historic layout/The annexe/West front pavilion slate roof",
+      "point": [
+        366.83002042869737,
+        11.858999805450441,
+        -32.45541152659251
+      ],
+      "normal": [
+        -0.6937297460268265,
+        0,
+        -0.7202354055984437
+      ],
+      "distance": 0.02000023898496379,
+      "triangle": 0,
+      "face": 8,
+      "material": {
+        "color": 12896710,
+        "roof": [
+          60,
+          32
+        ],
+        "side": 0
+      },
+      "vertices": [
+        [
+          367.11724099339375,
+          11.879999828338624,
+          -32.732061977058684
+        ],
+        [
+          366.7582152875233,
+          11.84499979019165,
+          -32.38624891397597
+        ],
+        [
+          366.7582152875233,
+          11.879999828338624,
+          -32.38624891397597
+        ]
+      ],
+      "hitNormal": [
+        0,
+        0,
+        1
+      ]
+    },
+    {
+      "closure": "1829 estate · aerial reconstruction/Historic layout/The annexe/Eave closure: West front pavilion",
+      "authored": "1829 estate · aerial reconstruction/Historic layout/The annexe/West front pavilion slate roof",
+      "point": [
+        361.1933115499396,
+        11.731598224639892,
+        -27.026141334523768
+      ],
+      "normal": [
+        -0.6937297460268265,
+        0,
+        -0.7202354055984437
+      ],
+      "distance": 0.020000238984911566,
+      "triangle": 11,
+      "face": 9,
+      "material": {
+        "color": 12896710,
+        "roof": [
+          60,
+          32
+        ],
+        "side": 0
+      },
+      "vertices": [
+        [
+          361.37282440287487,
+          11.879999828338624,
+          -27.199047866065126
+        ],
+        [
+          361.37282440287487,
+          11.84499979019165,
+          -27.199047866065126
+        ],
+        [
+          361.0137986970044,
+          11.604196643829345,
+          -26.85323480298241
+        ]
+      ],
+      "hitNormal": [
+        0,
+        0,
+        1
+      ]
+    },
+    {
+      "closure": "1829 estate · aerial reconstruction/Historic layout/The annexe/Eave closure: West front pavilion",
+      "authored": "1829 estate · aerial reconstruction/Historic layout/The annexe/West front pavilion slate roof",
+      "point": [
+        361.3010192617008,
+        11.817839183807374,
+        -27.12988525344858
+      ],
+      "normal": [
+        -0.6937297460268265,
+        0,
+        -0.7202354055984437
+      ],
+      "distance": 0.020000238984885975,
+      "triangle": 11,
+      "face": 9,
+      "material": {
+        "color": 12896710,
+        "roof": [
+          60,
+          32
+        ],
+        "side": 0
+      },
+      "vertices": [
+        [
+          361.37282440287487,
+          11.879999828338624,
+          -27.199047866065126
+        ],
+        [
+          361.37282440287487,
+          11.84499979019165,
+          -27.199047866065126
+        ],
+        [
+          361.0137986970044,
+          11.604196643829345,
+          -26.85323480298241
+        ]
+      ],
+      "hitNormal": [
+        0,
+        0,
+        1
+      ]
+    },
+    {
+      "closure": "1829 estate · aerial reconstruction/Historic layout/The annexe/Eave closure: West front pavilion",
+      "authored": "1829 estate · aerial reconstruction/Historic layout/The annexe/West front pavilion slate roof",
+      "point": [
+        361.3010192617008,
+        11.803839168548585,
+        -27.12988525344858
+      ],
+      "normal": [
+        -0.6937297460268265,
+        0,
+        -0.7202354055984437
+      ],
+      "distance": 0.020000238984885975,
+      "triangle": 11,
+      "face": 9,
+      "material": {
+        "color": 12896710,
+        "roof": [
+          60,
+          32
+        ],
+        "side": 0
+      },
+      "vertices": [
+        [
+          361.37282440287487,
+          11.879999828338624,
+          -27.199047866065126
+        ],
+        [
+          361.37282440287487,
+          11.84499979019165,
+          -27.199047866065126
+        ],
+        [
+          361.0137986970044,
+          11.604196643829345,
+          -26.85323480298241
+        ]
+      ],
+      "hitNormal": [
+        0,
+        0,
+        1
+      ]
+    },
+    {
+      "closure": "1829 estate · aerial reconstruction/Historic layout/The annexe/Eave closure: East front pavilion",
+      "authored": "1829 estate · aerial reconstruction/Historic layout/The annexe/East front pavilion slate roof",
+      "point": [
+        346.9001954611719,
+        11.858999805450441,
+        -13.259031696314597
+      ],
+      "normal": [
+        -0.6937297460268835,
+        0,
+        -0.7202354055983888
+      ],
+      "distance": 0.020000238984908776,
+      "triangle": 0,
+      "face": 8,
+      "material": {
+        "color": 12896710,
+        "roof": [
+          60,
+          32
+        ],
+        "side": 0
+      },
+      "vertices": [
+        [
+          347.18741602586823,
+          11.879999828338624,
+          -13.535682146780768
+        ],
+        [
+          346.8283903199978,
+          11.84499979019165,
+          -13.189869083698053
+        ],
+        [
+          346.8283903199978,
+          11.879999828338624,
+          -13.189869083698053
+        ]
+      ],
+      "hitNormal": [
+        0,
+        0,
+        1
+      ]
+    },
+    {
+      "closure": "1829 estate · aerial reconstruction/Historic layout/The annexe/Eave closure: East front pavilion",
+      "authored": "1829 estate · aerial reconstruction/Historic layout/The annexe/East front pavilion slate roof",
+      "point": [
+        341.26348658241415,
+        11.731598224639892,
+        -7.829761504245851
+      ],
+      "normal": [
+        -0.6937297460268854,
+        0,
+        -0.7202354055983871
+      ],
+      "distance": 0.02000023898492244,
+      "triangle": 11,
+      "face": 9,
+      "material": {
+        "color": 12896710,
+        "roof": [
+          60,
+          32
+        ],
+        "side": 0
+      },
+      "vertices": [
+        [
+          341.44299943534935,
+          11.879999828338624,
+          -8.00266803578721
+        ],
+        [
+          341.44299943534935,
+          11.84499979019165,
+          -8.00266803578721
+        ],
+        [
+          341.08397372947894,
+          11.604196643829345,
+          -7.656854972704492
+        ]
+      ],
+      "hitNormal": [
+        0,
+        0,
+        1
+      ]
+    },
+    {
+      "closure": "1829 estate · aerial reconstruction/Historic layout/The annexe/Eave closure: East front pavilion",
+      "authored": "1829 estate · aerial reconstruction/Historic layout/The annexe/East front pavilion slate roof",
+      "point": [
+        341.37119429417527,
+        11.817839183807374,
+        -7.933505423170666
+      ],
+      "normal": [
+        -0.6937297460268854,
+        0,
+        -0.7202354055983871
+      ],
+      "distance": 0.02000023898491476,
+      "triangle": 11,
+      "face": 9,
+      "material": {
+        "color": 12896710,
+        "roof": [
+          60,
+          32
+        ],
+        "side": 0
+      },
+      "vertices": [
+        [
+          341.44299943534935,
+          11.879999828338624,
+          -8.00266803578721
+        ],
+        [
+          341.44299943534935,
+          11.84499979019165,
+          -8.00266803578721
+        ],
+        [
+          341.08397372947894,
+          11.604196643829345,
+          -7.656854972704492
+        ]
+      ],
+      "hitNormal": [
+        0,
+        0,
+        1
+      ]
+    },
+    {
+      "closure": "1829 estate · aerial reconstruction/Historic layout/The annexe/Eave closure: East front pavilion",
+      "authored": "1829 estate · aerial reconstruction/Historic layout/The annexe/East front pavilion slate roof",
+      "point": [
+        341.37119429417527,
+        11.803839168548585,
+        -7.933505423170666
+      ],
+      "normal": [
+        -0.6937297460268854,
+        0,
+        -0.7202354055983871
+      ],
+      "distance": 0.020000238984915403,
+      "triangle": 11,
+      "face": 9,
+      "material": {
+        "color": 12896710,
+        "roof": [
+          60,
+          32
+        ],
+        "side": 0
+      },
+      "vertices": [
+        [
+          341.44299943534935,
+          11.879999828338624,
+          -8.00266803578721
+        ],
+        [
+          341.44299943534935,
+          11.84499979019165,
+          -8.00266803578721
+        ],
+        [
+          341.08397372947894,
+          11.604196643829345,
+          -7.656854972704492
+        ]
+      ],
+      "hitNormal": [
+        0,
+        0,
+        1
+      ]
+    }
+  ]
+}

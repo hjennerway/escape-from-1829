@@ -1,0 +1,62 @@
+{
+  "clickToDraw": 33505,
+  "steps": [
+    {
+      "name": "modules",
+      "ms": 734.8999999985099
+    },
+    {
+      "name": "exterior",
+      "ms": 3613
+    },
+    {
+      "name": "layouts",
+      "ms": 5021.199999999255
+    },
+    {
+      "name": "timeline",
+      "ms": 6316.39999999851
+    },
+    {
+      "name": "lighting",
+      "ms": 6982.5
+    },
+    {
+      "name": "plan",
+      "ms": 8282.10000000149
+    },
+    {
+      "name": "furniture-plan",
+      "ms": 10222.10000000149
+    },
+    {
+      "name": "interior-and-furniture",
+      "ms": 10831.699999999255
+    },
+    {
+      "name": "walker",
+      "ms": 12365.300000000745
+    },
+    {
+      "name": "workshops-controls",
+      "ms": 18235.39999999851
+    },
+    {
+      "name": "pose",
+      "ms": 18239.60000000149
+    },
+    {
+      "name": "entry-ready",
+      "ms": 24048.199999999255
+    },
+    {
+      "name": "first-render-start",
+      "ms": 24052.300000000745
+    },
+    {
+      "name": "first-render-end",
+      "ms": 32809.300000000745
+    }
+  ],
+  "errors": []
+}

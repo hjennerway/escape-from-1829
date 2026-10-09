@@ -1,0 +1,33 @@
+{
+  "passed": true,
+  "before": {
+    "outside": {
+      "count": 1446227,
+      "hash": "cd68ae899c4f2b4a3643f5e2271eee6858526395d551a3b281a11e4bb4ddec77"
+    },
+    "entrance": {
+      "count": 4,
+      "hash": "d429ccd4f5c419d64fc60b2875aff7d6a4674ed131967b91383a4fdbf3da9f08"
+    },
+    "existingRoofs": {
+      "count": 302,
+      "hash": "f8c06b9d233d6209068e4ae812cfe1dd30a8305fa2e1216872478a5ad337b528"
+    },
+    "local": 13
+  },
+  "after": {
+    "outside": {
+      "count": 1446227,
+      "hash": "cd68ae899c4f2b4a3643f5e2271eee6858526395d551a3b281a11e4bb4ddec77"
+    },
+    "entrance": {
+      "count": 2,
+      "hash": "36287930322407d760dfd978e6530b6c8f40476a522ae20541090db750ccd707"
+    },
+    "existingRoofs": {
+      "count": 302,
+      "hash": "f8c06b9d233d6209068e4ae812cfe1dd30a8305fa2e1216872478a5ad337b528"
+    },
+    "local": 11
+  }
+}

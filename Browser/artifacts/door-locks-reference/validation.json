@@ -4,144 +4,168 @@
       {
         "floor": 0,
         "id": "F1",
+        "x": -48.84,
         "visible": true,
         "locked": true
       },
       {
         "floor": 0,
         "id": "F3",
+        "x": 48.84,
         "visible": true,
         "locked": true
       },
       {
         "floor": 0,
         "id": "F6",
+        "x": 82.16,
         "visible": true,
         "locked": true
       },
       {
         "floor": 0,
         "id": "D1",
+        "x": 0,
         "visible": true,
         "locked": true
       },
       {
         "floor": 0,
         "id": "D2",
+        "x": -144.96,
         "visible": true,
         "locked": true
       },
       {
         "floor": 0,
         "id": "D3",
+        "x": -90.4,
         "visible": true,
         "locked": true
       },
       {
         "floor": 0,
         "id": "D4",
+        "x": -90.92,
         "visible": true,
         "locked": true
       },
       {
         "floor": 0,
         "id": "D5",
+        "x": -90.4,
         "visible": true,
         "locked": true
       },
       {
         "floor": 0,
         "id": "D6",
+        "x": -87.74,
         "visible": true,
         "locked": true
       },
       {
         "floor": 0,
         "id": "D7",
+        "x": 114.4,
         "visible": true,
         "locked": true
       },
       {
         "floor": 0,
         "id": "D8",
+        "x": 139.96,
         "visible": true,
         "locked": true
       },
       {
         "floor": 0,
         "id": "D9",
+        "x": -63.08,
         "visible": true,
         "locked": true
       },
       {
         "floor": 0,
         "id": "D10",
+        "x": 63.08,
         "visible": true,
         "locked": true
       },
       {
         "floor": 1,
         "id": "F1",
+        "x": -48.84,
         "visible": true,
         "locked": true
       },
       {
         "floor": 1,
         "id": "F2",
+        "x": 15.94,
         "visible": true,
         "locked": true
       },
       {
         "floor": 1,
         "id": "F3",
+        "x": 48.84,
         "visible": true,
         "locked": true
       },
       {
         "floor": 1,
         "id": "F4",
+        "x": -127.86,
         "visible": true,
         "locked": true
       },
       {
         "floor": 1,
         "id": "F5",
+        "x": -78,
         "visible": true,
         "locked": true
       },
       {
         "floor": 1,
         "id": "F6",
+        "x": 82.16,
         "visible": true,
         "locked": true
       },
       {
         "floor": 1,
         "id": "F7",
+        "x": 136.6,
         "visible": true,
         "locked": true
       },
       {
         "floor": 2,
         "id": "D11",
+        "x": -75.88,
         "visible": true,
         "locked": true
       },
       {
         "floor": 2,
         "id": "D12",
+        "x": -52.3,
         "visible": true,
         "locked": true
       },
       {
         "floor": 2,
         "id": "D13",
+        "x": -23.1,
         "visible": true,
         "locked": true
       },
       {
         "floor": 3,
         "id": "F4",
+        "x": -126,
         "visible": true,
         "locked": true
       }
@@ -149,152 +173,276 @@
     "attempt": {
       "allowed": false,
       "visible": true,
-      "message": "Bolted for the night. A porter’s notice says service arrangements are filed in the upper offices."
+      "message": "Locked · brass service-key fitting."
     },
     "key": [
       {
         "floor": 0,
         "id": "F1",
-        "visible": true,
-        "locked": true
+        "x": -48.84,
+        "visible": false,
+        "locked": false
       },
       {
         "floor": 0,
         "id": "F3",
+        "x": 48.84,
         "visible": true,
         "locked": true
       },
       {
         "floor": 0,
         "id": "F6",
+        "x": 82.16,
         "visible": true,
         "locked": true
       },
       {
         "floor": 0,
         "id": "D1",
+        "x": 0,
         "visible": true,
         "locked": true
       },
       {
         "floor": 0,
         "id": "D2",
-        "visible": true,
-        "locked": true
+        "x": -144.96,
+        "visible": false,
+        "locked": false
       },
       {
         "floor": 0,
         "id": "D3",
-        "visible": true,
-        "locked": true
+        "x": -90.4,
+        "visible": false,
+        "locked": false
       },
       {
         "floor": 0,
         "id": "D4",
-        "visible": true,
-        "locked": true
+        "x": -90.92,
+        "visible": false,
+        "locked": false
       },
       {
         "floor": 0,
         "id": "D5",
-        "visible": true,
-        "locked": true
+        "x": -90.4,
+        "visible": false,
+        "locked": false
       },
       {
         "floor": 0,
         "id": "D6",
-        "visible": true,
-        "locked": true
+        "x": -87.74,
+        "visible": false,
+        "locked": false
       },
       {
         "floor": 0,
         "id": "D7",
+        "x": 114.4,
         "visible": true,
         "locked": true
       },
       {
         "floor": 0,
         "id": "D8",
+        "x": 139.96,
         "visible": false,
         "locked": false
       },
       {
         "floor": 0,
         "id": "D9",
-        "visible": true,
-        "locked": true
+        "x": -63.08,
+        "visible": false,
+        "locked": false
       },
       {
         "floor": 0,
         "id": "D10",
+        "x": 63.08,
         "visible": true,
         "locked": true
       },
       {
         "floor": 1,
         "id": "F1",
-        "visible": true,
-        "locked": true
+        "x": -48.84,
+        "visible": false,
+        "locked": false
       },
       {
         "floor": 1,
         "id": "F2",
+        "x": 15.94,
         "visible": true,
         "locked": true
       },
       {
         "floor": 1,
         "id": "F3",
+        "x": 48.84,
         "visible": true,
         "locked": true
       },
       {
         "floor": 1,
         "id": "F4",
-        "visible": true,
-        "locked": true
+        "x": -127.86,
+        "visible": false,
+        "locked": false
       },
       {
         "floor": 1,
         "id": "F5",
-        "visible": true,
-        "locked": true
+        "x": -78,
+        "visible": false,
+        "locked": false
       },
       {
         "floor": 1,
         "id": "F6",
+        "x": 82.16,
         "visible": true,
         "locked": true
       },
       {
         "floor": 1,
         "id": "F7",
+        "x": 136.6,
         "visible": true,
         "locked": true
       },
       {
         "floor": 2,
         "id": "D11",
-        "visible": true,
-        "locked": true
+        "x": -75.88,
+        "visible": false,
+        "locked": false
       },
       {
         "floor": 2,
         "id": "D12",
-        "visible": true,
-        "locked": true
+        "x": -52.3,
+        "visible": false,
+        "locked": false
       },
       {
         "floor": 2,
         "id": "D13",
-        "visible": true,
-        "locked": true
+        "x": -23.1,
+        "visible": false,
+        "locked": false
       },
       {
         "floor": 3,
         "id": "F4",
-        "visible": true,
-        "locked": true
+        "x": -126,
+        "visible": false,
+        "locked": false
+      }
+    ],
+    "westTrips": [
+      {
+        "floor": 0,
+        "id": "F1",
+        "allowed": true,
+        "outside": true,
+        "returned": true
+      },
+      {
+        "floor": 0,
+        "id": "D2",
+        "allowed": true,
+        "outside": true,
+        "returned": true
+      },
+      {
+        "floor": 0,
+        "id": "D3",
+        "allowed": true,
+        "outside": true,
+        "returned": true
+      },
+      {
+        "floor": 0,
+        "id": "D4",
+        "allowed": true,
+        "outside": true,
+        "returned": true
+      },
+      {
+        "floor": 0,
+        "id": "D5",
+        "allowed": true,
+        "outside": true,
+        "returned": true
+      },
+      {
+        "floor": 0,
+        "id": "D6",
+        "allowed": true,
+        "outside": true,
+        "returned": true
+      },
+      {
+        "floor": 0,
+        "id": "D9",
+        "allowed": true,
+        "outside": true,
+        "returned": true
+      },
+      {
+        "floor": 1,
+        "id": "F1",
+        "allowed": true,
+        "outside": true,
+        "returned": true
+      },
+      {
+        "floor": 1,
+        "id": "F4",
+        "allowed": true,
+        "outside": true,
+        "returned": true
+      },
+      {
+        "floor": 1,
+        "id": "F5",
+        "allowed": true,
+        "outside": true,
+        "returned": true
+      },
+      {
+        "floor": 2,
+        "id": "D11",
+        "allowed": true,
+        "outside": true,
+        "returned": true
+      },
+      {
+        "floor": 2,
+        "id": "D12",
+        "allowed": true,
+        "outside": true,
+        "returned": true
+      },
+      {
+        "floor": 2,
+        "id": "D13",
+        "allowed": true,
+        "outside": true,
+        "returned": true
+      },
+      {
+        "floor": 3,
+        "id": "F4",
+        "allowed": true,
+        "outside": true,
+        "returned": true
       }
     ],
     "corridors": [

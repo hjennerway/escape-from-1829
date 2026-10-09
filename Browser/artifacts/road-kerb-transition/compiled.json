@@ -1,0 +1,147 @@
+{
+  "views": [
+    {
+      "name": "central",
+      "road": "Parsons Lane (1829 Central)",
+      "end": "end",
+      "position": [
+        93.26914367084652,
+        1.65,
+        -52.64909859860152
+      ],
+      "target": [
+        69.29278564617455,
+        0.3400000035762787,
+        -51.31693018882481
+      ]
+    },
+    {
+      "name": "central-dusk",
+      "road": "Parsons Lane (1829 Central)",
+      "end": "end",
+      "position": [
+        93.26914367084652,
+        1.65,
+        -52.64909859860152
+      ],
+      "target": [
+        69.29278564617455,
+        0.3400000035762787,
+        -51.31693018882481
+      ]
+    },
+    {
+      "name": "central-night",
+      "road": "Parsons Lane (1829 Central)",
+      "end": "end",
+      "position": [
+        93.26914367084652,
+        1.65,
+        -52.64909859860152
+      ],
+      "target": [
+        69.29278564617455,
+        0.3400000035762787,
+        -51.31693018882481
+      ]
+    },
+    {
+      "name": "central-approach",
+      "road": "Parsons Lane (1829 Central)",
+      "end": "end",
+      "position": [
+        88.04422944780286,
+        1.65,
+        -62.735681976475526
+      ],
+      "target": [
+        82.28958702073709,
+        0.3400000035762787,
+        -51.60529459399564
+      ]
+    },
+    {
+      "name": "central-phone",
+      "road": "Parsons Lane (1829 Central)",
+      "end": "end",
+      "position": [
+        93.26914367084652,
+        1.65,
+        -52.64909859860152
+      ],
+      "target": [
+        69.29278564617455,
+        0.3400000035762787,
+        -51.31693018882481
+      ]
+    },
+    {
+      "name": "church",
+      "road": "Parsons Lane",
+      "end": "end",
+      "position": [
+        11.578492641448975,
+        1.65,
+        -82.55000305175781
+      ],
+      "target": [
+        5.578492641448975,
+        0.3400000035762787,
+        -93.55000305175781
+      ]
+    },
+    {
+      "name": "annexe-start",
+      "road": "Ross Avenue (Part 2)",
+      "end": "start",
+      "position": [
+        298.90632210476383,
+        1.65,
+        47.027774087292805
+      ],
+      "target": [
+        311.4142614775403,
+        0.3400000035762787,
+        46.28419064786011
+      ]
+    },
+    {
+      "name": "annexe-end",
+      "road": "Ross Avenue (Part 2)",
+      "end": "end",
+      "position": [
+        331.65461798659453,
+        1.65,
+        -55.542370929870295
+      ],
+      "target": [
+        332.07283047768794,
+        0.3400000035762787,
+        -43.01912240312721
+      ]
+    }
+  ],
+  "errors": [],
+  "build": {
+    "mode": "compiled",
+    "milliseconds": 1505.300000000745
+  },
+  "manifest": {
+    "format": 1,
+    "revision": "186",
+    "sourceHash": "dbc20a385ca020fc3ff87699ed163f3beb9e84355983162594106d70155e527b",
+    "file": "aerial-082c3b39779e4ea21b08.bin.gz",
+    "bytes": 19746097,
+    "uncompressedBytes": 136964112,
+    "sha256": "082c3b39779e4ea21b0896368cc70f149438a2e71a027031faeaeab886adb475",
+    "stats": {
+      "revision": "186",
+      "buildMilliseconds": 9394.199999999255,
+      "windows": 2999,
+      "geometries": 11192,
+      "geometryBytesSaved": 34056888,
+      "materials": 764,
+      "textures": 65
+    }
+  }
+}

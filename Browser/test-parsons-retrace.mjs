@@ -179,17 +179,20 @@ assert(Math.abs(baseDistance-3.6)<1e-8,'The outer kerb just touches the square l
 assert(!['black road','stone kerb'].includes(surface(lampOne.x,lampOne.z)),'The fixed lamp centre remains outside the roadway');
 const turn=Math.atan2(roadDz,roadDx)*180/Math.PI;
 assert(turn>.5&&turn<.8,'Keep the requested angle adjustment small');
-// Each visible junction layer must have its own depth bias; centimetre height
-// differences alone are unreliable when the camera is high above the estate.
+// Junctions retain their overlay priority. Pale kerbs use constant depth bias:
+// slope bias would pull buried borders through asphalt at walking distance.
 const resurfacing=layouts.historicRoads.getObjectByName('Annexe triangular island resurfacing');
 const bendSurface=layouts.historicRoads.getObjectByName('Parsons north end junction');
 const ordinary=layouts.historicRoads.getObjectByName('Northern Parsons Lane connection').children.find(o=>o.isMesh);
 const lawn=layouts.historicRoads.getObjectByName('Annexe rounded triangular grass island');
 const innerKerb=layouts.historicRoads.getObjectByName('Annexe rounded triangular inner kerb').children.find(o=>o.isMesh);
 for(const layer of [resurfacing,bendSurface]){
- assert(layer.material.polygonOffsetFactor<ordinary.material.polygonOffsetFactor);
+ assert.equal(layer.material.polygonOffsetFactor,0);
  assert(layer.material.polygonOffsetUnits<ordinary.material.polygonOffsetUnits);
 }
-assert(lawn.material.polygonOffsetFactor<resurfacing.material.polygonOffsetFactor);
-assert(innerKerb.material.polygonOffsetFactor<lawn.material.polygonOffsetFactor);
+assert.equal(ordinary.material.polygonOffsetFactor,0);
+assert.equal(lawn.material.polygonOffsetFactor,0);
+assert(lawn.material.polygonOffsetUnits<resurfacing.material.polygonOffsetUnits);
+assert.equal(innerKerb.material.polygonOffsetFactor,0);
+assert(innerKerb.material.polygonOffsetUnits<lawn.material.polygonOffsetUnits);
 console.log('PASS: fixed lamp-base tangency and distinct road, junction, island and kerb drawing depths.');

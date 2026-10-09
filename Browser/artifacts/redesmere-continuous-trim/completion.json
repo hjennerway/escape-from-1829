@@ -1,0 +1,22 @@
+{
+  "hardware": "NVIDIA GeForce RTX 3090 Ti / ANGLE Direct3D11",
+  "sourceAndCompiledRoofChecks": "passed",
+  "compiledSceneChecks": "passed",
+  "originalSuite": "passed prefix; stopped at obsolete Jarman whole-estate snapshot",
+  "snapshots": "pre-edit match verified; refreshed after independent preservation checks",
+  "remainingSuite": {
+    "checks": 38,
+    "passed": true
+  },
+  "sourceFingerprint": "current",
+  "scope": [
+    "browser model sources",
+    "local compiled aerial model"
+  ],
+  "unchangedExports": [
+    "Unity",
+    "Blender",
+    "packaged desktop/Android",
+    "interior models"
+  ]
+}

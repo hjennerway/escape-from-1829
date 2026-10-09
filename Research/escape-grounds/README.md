@@ -1,5 +1,307 @@
 # Escape grounds and tower workshops
 
+## Matching west tower abutments — 9 October 2026
+
+The owner's [marked walking view](tower-west-wall-alignment-reference.png)
+identifies the north tower range's recessed west wall in blue, the accepted
+south stores facade in green, the lighter base in pink, and the final stacked
+pair of Hale windows in orange. The north facade moves from X=146.3 to X=145.4,
+matching the south wall's distance into the tower face. This is a 0.9-unit
+owner-directed visual correction, superseding the retained north X=146.3
+alignment in the older tower-junction notes.
+
+The north flat deck, coping and two end eaves follow the moved edge; the tower
+and slate contacts stay at their existing coordinates. The north wall receives
+the south facade's flush lighter plinth from Y=-0.18 to 0.6, continuing around
+its exposed end returns while preserving the passage cuts. The two south-facing
+Hale sashes at X=145.70077, Z=-68.865 are retired with their panes, frames, pale
+heads and sills. Their supporting solid brick wall remains; other sashes and
+the adjoining downpipe remain in use.
+
+`tower-wall-alignment.mjs` fits disposable clipped wall geometry and its precise
+walking footprints. The existing workshop construction rebuilds material
+batches, refreshes cached transforms and obstacles, and invalidates shadows.
+Original meshes and instance transforms remain available for exact disposal
+and replay restoration. Explore and Escape share these Browser runtime changes.
+Shared aerial modelling definitions, compiled interior models, Unity/Android,
+Blender and packaged exports are unchanged. The local aerial asset is rebuilt
+for compiled-path verification against the current shared sources.
+
+Before/after images, hardware browser checks and validation receipts are in
+`../../Browser/artifacts/tower-west-wall-alignment/`.
+
+## Level Main/admin yard and solid cross-corridor wall — 9 October 2026
+
+The owner's `admin-yard-surface-reference.png` requests continuous level tarmac
+through the grass and brick patches east of the walking gallery. The green
+outline in `admin-yard-wall-reference.png` closes the bay between that gallery
+and Main/admin's west pavilion. These are owner-directed corrections to the
+walking scene, not new historical survey evidence.
+
+The runtime Tower service court now reaches the actual gallery face at
+X=156.62875, retaining the existing asphalt material and Y=0.34 road level
+through Z=6.6. Obsolete original-gallery plinths and cross-corridor rainwater
+fittings are removed with their old shell. A full masonry face at Z=6.6 spans
+the gallery-to-pavilion gap, with a buried foot, collision and an opaque slate
+roof joining the existing raised entrance pitch at Z=9.8.
+
+Explore and Escape share the correction. The established batch rebuild,
+transform cache, walking-obstacle refresh and shadow invalidation include it;
+disposal restores the original estate. Source/compiled desktop and portrait
+evidence and the saved original builder are in
+`../../Browser/artifacts/admin-yard-surface/`. Shared aerial modelling inputs,
+Unity/Android, Blender and packaged exports are unchanged.
+
+## Chimney-side walking roof gap and floating windows — 9 October 2026
+
+The owner's `chimney-walking-gap-reference.png` shows sky between the stores
+wall and its retained roof beside the gas cylinder near the chimney. The
+walking gallery is narrower than the original estate connector. Its new wall
+stopped at Y=5.15 beneath the stores' Y=8.84 roof underside, while original
+windows and low roof skirts remained outside the moved facade.
+
+The Browser runtime now closes the east gallery face and its southern upper
+return to the retained stores roof. Exposed low gallery roofs follow the new
+wall width, with continuous pitches, brick eave returns and opaque overhangs.
+The old low roof skirts no longer cross the middle of the tall stores wall.
+Original window assemblies are removed with their supporting replaced shells;
+the new arched windows retain real wall apertures. Obsolete gutter rails and
+downpipes belonging to the wider gallery are also removed.
+
+This applies to Explore and Escape runtime fittings, with source and compiled
+estate loading. The surveyed tower/store roofs, shared aerial model inputs and
+compiled assets retain their definitions. Disposal restores the original
+geometry and fittings, and the normal rebuild refreshes batches, cached
+transforms, walking obstacles and shadows. Unity/Android, Blender, interior
+models and packaged exports are not regenerated.
+
+Repeatable baseline/after checks, desktop/night/portrait images and validation
+receipts are under `../../Browser/artifacts/chimney-walking-shell/`. The
+supplied screenshot identifies a rendering defect; it does not add historical
+evidence for changes to the estate architecture.
+
+## Alternate arched corridor windows — 9 October 2026
+
+The owner's [corridor screenshot](corridor-window-spacing-reference.png)
+requests twice the spacing by removing every other semicircular window.
+The connected Explore and Escape passages now retain alternate original
+5.4-unit bays, giving 10.8-unit spacing wherever the wall is exposed. The
+remaining windows retain their positions, dimensions, divided glazing,
+striped inward surrounds and sills. Both faces use the same retained bays;
+opposing walls select from the same world direction to keep matching pairs.
+Removed apertures are filled with the continuous exterior masonry and
+painted interior brick finish, including the existing header band.
+
+This applies to corridor walls throughout the network. Workshop room
+windows and the four rectangular sashes beside the blue stores entrance
+retain their established layout. The spacing is an owner-directed model
+correction, not new evidence of surveyed historical dimensions.
+
+`escape-corridors.mjs` selects alternate bays through the shared
+`workshop-gallery.mjs` and `admin-corridor-detail.mjs` builders. Their default
+retains the existing spacing for the aerial estate and workshop room walls.
+The existing batch rebuild, transform cache, obstacle refresh and shadow
+invalidation include the resulting wall geometry. These are Browser runtime
+fittings shared by source and compiled estate loading. The local aerial
+asset is rebuilt to update its shared-builder fingerprint; interior assets,
+Unity/Android, Blender and packaged exports are not regenerated.
+
+Before/after views and validation are saved in
+`../../Browser/artifacts/corridor-window-spacing/`.
+
+## Irby green entrance and unlocked Explore passages — 8 October 2026
+
+The owner's `corridor-door-roof-reference.png` identifies the green single
+door at the exposed east end of the water-tower-to-Irby corridor, at
+X=221.7, Z=-66.6. It is separate from the Main/admin entrance described below.
+Explore now extends its finished Irby passage 11.7 units in a straight line
+from the former stopping doors at X=210 to this existing facade. The pale
+frame, green lower panel and two upper panes retain the reference's appearance;
+the door swings inward and works from both sides with keyboard or touch.
+
+This correction supersedes the earlier instruction to retain eight locked
+Explore branch ends. Explore has no locked double-door pairs, chains,
+padlocks or lock plaques. Its nine connected corridor runs continue through
+the former stopping lines to the existing estate contacts, including the
+diagonal-to-Upton elbow. The two Hale ends already meet their ward walls.
+Where ward interiors have not been modelled, plain masonry closes the real
+building boundary. Those buildings do not gain invented interiors. The
+Main/admin entrance and four workshop doors remain, making six opening doors.
+Escape retains all nine gameplay lock pairs and its original corridor limits.
+
+The floating roof came from the raised walking corridor meeting the original
+low end gable. Explore now replaces the Irby roof and its automatic closure
+fragments with one continuous slate profile, full-height front masonry and
+side returns. The eaves and gable meet the same roof profile; the front roof
+overhang clears the masonry. Brick scale follows the original corridor.
+The original named geometry is restored when the runtime fittings are removed.
+Batches, cached transforms, walking obstacles and shadows follow the rebuild.
+
+These are Browser Explore runtime changes, shared by source and compiled
+estate loading. No shared aerial modelling input, compiled estate/interior
+asset, Unity/Android or Blender export was changed or regenerated by this
+repair. Before/after walking views, keyboard/touch navigation receipts and
+validation logs are in `../../Browser/artifacts/corridor-door-access/`.
+
+## All tower slit windows open, with single masonry returns — 8 October 2026
+
+The owner's gameplay screenshot, `tower-window-openings-reference.png`, shows
+flickering inside the west lookout openings. The accompanying request opens
+the same three rows of two windows on each of the four sides, including rows
+without a walk-up landing. This supersedes the top-west-pair-only restriction
+below: Escape now clears all 24 existing upper slit infills. The previously
+opened lower rectangular west window remains. Each opening follows its existing
+narrow arched outline, preserving the surrounding brickwork, sills and rings.
+These are gameplay openings in the reconstructed facade, not new historical
+evidence that the photographed bricked recesses were open.
+
+The interior wall lining now contains only the inward-facing masonry skin.
+The dedicated return mesh alone supplies each jamb, sill and curved head;
+the old lining boxes had side caps coplanar with those returns. All openings
+retain movement guards, while their sight openings and exterior shadows follow
+the visible geometry. The staircase, landings and west lookout remain in place.
+Only the Browser Escape runtime changes. Aerial/Explore's reconstructed tower,
+shared compiled assets, Unity/Android and Blender exports are unchanged.
+
+Regression checks raycast every window and its jamb/sill/head, preserve masonry
+samples on all four faces, verify collision and exact retry restoration, and
+walk the complete stairs in both directions. Hardware browser views cover all
+twelve pairs inside, all four exterior faces, moving close-up viewpoints and
+the phone lookout. Evidence: `../../Browser/artifacts/tower-window-openings/`.
+
+## Optional tower inspection route — 8 October 2026
+
+The requested gameplay extension uses the existing tower and workshop tools:
+an upstairs inspection lead, preparation with crowbar/optional oil, a stair
+climb and lookout, and a return past investigating security. It deliberately
+omits the proposed water-diversion puzzle. Both previous boundary routes
+remain available without completing the climb.
+
+`escape-tower-plan.mjs` derives its centre from `ESCAPE_WATER_TOWER`. The new
+interior, twelve 2.2-unit flights, landing lamps, 26.6-unit lookout, tank and
+riser are fictional gameplay fittings, not a survey of the historic tower.
+The current photographed shell dimensions and roof silhouette remain the
+source; see `../water-tower/README.md` for their latest corrections.
+
+The owner's subsequent window correction retains all seven west-facing
+window positions: six arched slits in three paired rows, plus the small lower
+rectangular opening. The initial broad west/north lookout cuts are removed.
+Escape clears only the existing top pair's narrow arched infill and the lower
+rectangular infill, retaining the heads, sills, surrounds and brickwork between
+them. The remaining four west slits and every north slit stay bricked up.
+The inspection lamp sits behind one existing upper slit. No larger window is
+invented. Exact facade ray comparisons protect the retained masonry.
+
+The owner's door/stair follow-up replaces the plain lamp blocks with
+gas-style wall lanterns: dark metal brackets and glazing bars, pitched hoods,
+small brass burners and warm flame cores. These are period-inspired fictional
+fittings, not evidence that this tower used gas lighting. A smaller lantern
+remains inside the existing upper slit. The stair treads, corner landings and
+lookout deck now meet the inner masonry while retaining the inner handrail
+line and stairwell opening. The ground slab supplies the first landing;
+there is no second metal face at the same height.
+
+The existing hatch gains full-depth jambs and overlapping rebates to close
+its side sightlines. Its opening uses the workshop doors' gradual swing and
+shared creak, with the oil/noise gameplay retained. These changes belong to
+the disposable Browser Escape interior and retain the seven-window facade.
+
+Escape also opens the existing southern door. The shaft gains an internal
+lining and masonry returns around the existing windows. Original vertices,
+materials and batches are retained for exact restoration, with new collision
+walls, guarded openings and rendered stair supports. Rebuilt material batches
+and cached transforms precede collision/shadow refresh. Aerial and Explore
+keep the closed reconstructed tower. No shared model inputs, compiled estate,
+Unity/Android or Blender exports are regenerated for these runtime fittings.
+
+The entry notice names the already available tools. The hatch remains open
+after capture. Hinge noise directs security to a reachable point in the yard;
+oil reduces its range. The route has no countdown or irreversible failure.
+Validation and reviewed desktop/phone views are in
+`../../Browser/artifacts/escape-tower/`.
+
+## Explore on foot corridor access — 8 October 2026
+
+The owner requests the existing explorable water-tower passages and animated
+workshop doors in Explore on foot. Explore shares the accepted corridor, room,
+window, finish and lighting construction. Escape retains its nine locked ends.
+
+Explore omits the Main/admin-facing locked pair at Z=24.4 and continues the
+gallery to the existing front-corridor endpoint, Z=30.6. A single hinged timber
+entrance there opens onto the grounds beside Main/admin. It follows the finished
+gallery centre, X=154.773125. The remaining eight branch-end pairs stay locked.
+This is access to the corridor; no Main/admin building interior is invented.
+
+The blue stores entrance, three workshop doors and new corridor entrance all
+use the same reversible swing and swept collision protection. The fittings
+follow The Main's existing date range, appearing from 1896 through 1938 among
+the selectable periods. Tree/date refreshes restore and rebuild the affected
+estate batches, shadows and walking obstacles. These are browser runtime
+fittings; shared compiled models, Unity/Android and Blender exports are unchanged.
+
+Checks and desktop/portrait captures are in
+`../../Browser/artifacts/explore-workshops/`.
+
+## Corridor ceiling light bleed — 7 October 2026
+
+The owner's [gameplay screenshot](corridor-ceiling-light-reference.png) shows
+a bright fringe along the upper corridor walls. The joined ceiling already
+casts shadows, but the estate shadow filter samples beyond the wall's top,
+especially when sunlight grazes a wall. This supplements the eastern-light
+and fixed-illumination corrections below.
+
+The workshop lighting shader now checks each sun ray against the actual joined
+ceiling outline at Y=5.05. A ray crossing the ceiling is blocked; a ray leaving
+through a window before reaching that height retains its normal sunlight and
+geometry shadows. The visible ceiling, wall joins, roofs, lamps and walking
+layout retain their accepted geometry.
+
+Hardware day/dusk/night views, portrait review and measurements are in
+`../../Browser/artifacts/corridor-ceiling-bleed/`. Both walls of all eight
+passages show zero measured upper-wall sunlight gain, while the eastern clear
+pane retains its existing daylight projection. This is an Escape browser
+runtime lighting correction. Shared compiled models, Unity/Android, Blender
+and packaged exports were not regenerated.
+
+## Matching inner service sash panes — 7 October 2026
+
+The owner's [repair-room screenshot](workshop-window-panes-reference.png)
+requests approximately the same pane count inside as outside the rectangular
+windows beside the water tower. The established exterior service sash in
+`tower-buildings.mjs` has three columns and four rows: two thin crossbars and
+a heavier central meeting rail. The former interior fitting had only two
+uninterrupted tall panes.
+
+All four west-facing inner sashes now follow the exterior divider positions,
+including the thicker meeting rail and top/bottom frames. The apertures,
+glazing, sills and exterior fittings retain their established placement.
+This supersedes the two-pane inner fittings described in earlier notes.
+Before/after hardware views and validation are in
+`../../Browser/artifacts/workshop-window-panes/`. The correction changes the
+Escape browser runtime in `tower-workshops.mjs`; shared compiled models,
+Unity/Android, Blender and packaged exports are not regenerated.
+
+## North wicket fence meets Hale ward — 7 October 2026
+
+The owner's [fence-gap screenshot](fence-gap-reference.png) requires the iron
+rail beside the boarded maintenance wicket to reach the visible building.
+The workshop shell clipping had replaced Hale's concave collision footprint
+with its convex hull, treating the western lawn as masonry and cutting off
+the rail at X=98.21 instead of the actual wall at X=115.14 on Z=-85.
+
+Clipped shells now intersect their projected envelopes with triangles of the
+authored footprint, retaining the concave courts. The scenario's north outline
+continues into the placed ward spine, and iron panels fit unpadded masonry
+bounds. The rail ends at X=115.40, slightly embedded in the wall to close its
+join. Thick hedge fitting retains its existing corridor clearance.
+
+The source screenshot and the request govern the gameplay fitting; this does
+not supply new historical fence evidence. Only Escape runtime fittings and
+collision processing change. Shared estate/interior compiled models, Unity,
+Blender and packaged exports were not regenerated. Hardware desktop/phone
+views and the regression receipts are in
+`../../Browser/artifacts/fence-building-join/`.
+
 ## Eastern window light and softer fittings — 7 October 2026
 
 The owner's [circled wall patches](corridor-wall-light-reference.png) and
@@ -580,3 +882,80 @@ packaged exports are unchanged. Exact estate restoration on restart remains
 covered by the workshop regression. The reported desktop angle, close view,
 portrait capture and rendered wall probes are saved in
 `../../Browser/artifacts/tower-corridor-protrusion/`.
+
+## Irby entrance bar, frame gaps and uneven wall edge — 9 October 2026
+
+The owner's [corridor approach](irby-entrance-bar-reference.png) and
+[outside wall](irby-entrance-wall-reference.png) show the Explore green
+entrance added on 8 October. The outdoor service court's aerial depth bias
+pulled its surface through the shut door at longer viewing distances. Explore
+now gives only the clipped court a separate material without that bias; the
+original estate material and its world ground-texture projection are retained.
+
+The court cut formerly ended .08 units beyond the front masonry face, exposing
+an irregular lower edge. Its entrance-end padding is now .20 rather than .32,
+so paving meets beneath the flat wall. Pale jamb stops seal the leaf's side
+clearance, and the head rebate and lintel overlap at their joint. The door's
+position, opening animation and walking route retain their existing definitions.
+
+This is an Explore runtime repair. Shared compiled estate/interior assets,
+Unity/Android, Blender and packaged exports were not regenerated. Captures and
+validation are in `../../Browser/artifacts/irby-entrance-seams/` and the
+source/compiled Explore workshop receipts in `corridor-door-access/`.
+
+## Irby doorway floor flicker — 9 October 2026
+
+The owner's [floor reference](irby-floor-flicker-reference.png) identifies the
+inside of the open Explore green entrance at X=221.7, Z=-66.6. The continuous
+concrete floor extended beneath the stone threshold; both tops were at Y=.04.
+The competing faces exchanged visible pixels as the viewing angle changed.
+
+The concrete now ends at the threshold's inner edge, X=221.49, over its
+2.04-unit width. The stone and concrete meet at the existing level. The floor
+outline alone gains this notch; corridor walls and ceiling retain their
+existing boundary. The original door, inward swing, exterior paving and route
+retain their geometry. Escape does not have this Explore entrance notch.
+
+This changes disposable Browser Explore geometry on both estate loading paths.
+Compiled estate/interior assets, Unity/Android, Blender and packaged exports
+were not regenerated by this floor repair. Before/after captures and floor/pixel
+evidence are in
+`../../Browser/artifacts/irby-floor-flicker/`; implementation and validation
+details are recorded in `../../DEVELOPMENT.md`.
+
+## Tower, chimney and cylinder yard walking survey — 9 October 2026
+
+The owner's [walking reference](tower-chimney-yard-reference.png) shows roof
+fragments above the cylinder lane and uneven paving beside the gallery. The
+walking rooms replace wider estate shells. Their original flat roof decks,
+parapets and instanced gutters still projected past the narrower masonry.
+The old cross-gallery also retained roof skirts outside the passage cut;
+Explore's replaced Main/admin entrance retained a separate roof underside.
+
+The runtime stores decks now follow the actual wall outline, with matching
+parapets and copings. The redundant lower tower link roof and old gutters are
+removed with their shells. The old cross-gallery is cut across its full width,
+and Explore retires the complete replaced entrance roof, including its backing
+and fascia. A .16-unit brick closure fills the south slate/eave gap above the
+gallery corner at X=156.62875..158.2, Z=-40.5.
+
+The continuous asphalt court formerly began at X=159, leaving a grass strip
+beside the walking facade at X=156.62875. Its runtime edge now reaches beneath
+that masonry at the existing Y=.34 surface level. Exact passage and room cuts
+replace the extra .32-unit end clearances that exposed sunken strips. Two old,
+untextured ground-level hardstanding pads are removed from the walking scene.
+The original estate objects, materials and instance transforms remain available
+for exact restoration when the walking interior closes.
+
+The survey physically walks 374 metres around the chimney and cylinders,
+tower west/north sides and eastern service lane in each loading mode. Reviewed
+views cover the roof returns, courtyard, north gravel, grass boundaries and
+the reported lane, plus dusk and a phone-sized view. Before/after captures,
+route receipts and hardware-renderer logs are in
+`../../Browser/artifacts/tower-walking-audit/`.
+
+This repair changes Browser Escape/Explore runtime geometry. The local aerial
+model was regenerated for compiled-path validation against the current shared
+sources. Interior compiled models, Unity/Android, Blender and packaged exports
+were not regenerated. Implementation and regression results are recorded in
+`../../DEVELOPMENT.md`.

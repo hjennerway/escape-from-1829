@@ -1,5 +1,9 @@
+import {navigateView,restoreCachedView} from './view-cache.mjs';
 // Capture only on navigation: ordinary title frames do not retain a GPU buffer.
 export function leaveIntro(destination){
+  // A retained view needs no loading still or new camera flight. Avoid a GPU
+  // readback and JPEG encode on this otherwise immediate history traversal.
+  if(restoreCachedView(destination))return;
   const url=new URL(destination,location.href),detail={};
   document.dispatchEvent(new CustomEvent('capture-intro',{detail}));
   try{
@@ -9,7 +13,7 @@ export function leaveIntro(destination){
     try{sessionStorage.removeItem('1829-intro');}catch{}
   }
   url.searchParams.set('intro','1');
-  location.href=url.href;
+  navigateView(url,{intro:true});
 }
 
 // The camera is already at the destination's normal starting point on entry.
@@ -67,7 +71,7 @@ export function beginIntroFlight(camera,{fallback,target,onComplete=()=>{}}={}){
     source={position:startCamera.position.toArray(),quaternion:startCamera.quaternion.toArray(),fov:startCamera.fov,target:fallback.target};
   }
   const reducedMotion=matchMedia('(prefers-reduced-motion: reduce)').matches;
-  const flight=createIntroFlight(camera,{source,target,reducedMotion});
+  const flight=createIntroFlight(camera,{source,target,duration:.8,reducedMotion});
   let revealed=false,blend=0,finished=false;
   handoff.ready(()=>{flight.finish();});
   function complete(){
@@ -80,12 +84,12 @@ export function beginIntroFlight(camera,{fallback,target,onComplete=()=>{}}={}){
       if(!revealed)return;
       // Blend dusk into the destination's daylight before moving the camera.
       blend+=Math.min(.1,Math.max(0,dt));
-      handoff.preview.style.opacity=String(Math.max(0,1-blend/.35));
-      if(blend>=.35)flight.update(dt);
+      handoff.preview.style.opacity=String(Math.max(0,1-blend/.15));
+      if(blend>=.15)flight.update(dt);
     },
     afterRender(){
       revealed=true;
-      if(blend>=.35&&!flight.active)complete();
+      if(blend>=.15&&!flight.active)complete();
     }
   };
 }

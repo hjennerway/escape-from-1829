@@ -11,6 +11,7 @@ import {bindTreeToggle} from './tree-layer.mjs';
 import {sampleLanding} from './aerial-controls.mjs';
 import {createArrivalCutscene} from './arrival-cutscene.mjs';
 import {createSecurityGuard,updateSecurityGuard,resetSecurityGuard} from './security-guard.mjs';
+import {createAsylumGhost,updateAsylumGhost,resetAsylumGhost} from './asylum-ghost.mjs';
 import {resetEnemyRoomSearch,updateEnemyRoomSearch} from './enemy-room-search.mjs';
 import {FLOOR_HEIGHT,makeFloors,nearStair,changeFloor,routeBetweenFloors} from './floors.mjs';
 import {selectEscapeRoutes,exitDirection} from './escape-routes.mjs';
@@ -20,6 +21,7 @@ import {loadFurnitureModels,createFurnitureFloor,updateFurnitureDetail} from './
 import {furnitureContains} from './furniture-collision.mjs';
 import {createReceptionClockAudio} from './reception-clock-audio.mjs';
 import {createDoorCreakAudio} from './door-creak-audio.mjs';
+import {createTowerAudio} from './tower-audio.mjs';
 import {createAsylumOutside} from './asylum-outside.mjs';
 import {createAsylumJump} from './asylum-jump.mjs';
 import {createNotebook,notebookView} from './notebook.mjs';
@@ -35,6 +37,7 @@ import {createGroundsGuard,GUARD_PATROL,GROUNDS_OUTLINE} from './escape-grounds-
 import {asylumDisplayName} from './asylum-room-numbers.mjs';
 import {createInteriorSectionLoader} from './interior-streaming.mjs';
 import {createInteriorLoadingStatus} from './interior-loading-status.mjs';
+import {createCorridorSightings} from './corridor-sightings.mjs';
 const $=id=>document.getElementById(id),canvas=$('game');
 const furnitureFloors=[];
 const loading=createLoadingProgress(document);
@@ -48,12 +51,14 @@ let layout,renderer,scene,camera,torch,torchTarget,clock,ready=false,state='menu
 let enemies=[],lights=[],audioCtx,audioOn=true,lastStep=0,lastPulse=0,footPhase=0,dragging=false,previousPointer=null,modelLoaded=false;
 const receptionClock=createReceptionClockAudio({getFloors:()=>floors,getContext:()=>audioCtx,enabled:()=>audioOn});
 const doorCreak=createDoorCreakAudio({getContext:()=>audioCtx,enabled:()=>audioOn});
+const towerAudio=createTowerAudio({getContext:()=>audioCtx,enabled:()=>audioOn});
+let lastTowerGuardStep=0;
 const player={x:50,z:27.5,floor:0},mapCanvas=$('map'),mapContext=mapCanvas.getContext('2d'),miniMapCanvas=$('miniMap'),miniMapContext=miniMapCanvas.getContext('2d');
 let mapRefresh=0,floors=[],floorGroups=[],stairHold=0,stairLatch=false,artPanels=[],artViewing=null,placedWallPanels=[];
 let exterior,arrivalCutscene,escapeExterior,interiorLights,landingTime=0;
 let outsideWalker,indoorJump,lastDoor=null,exteriorTorch,exteriorTorchTarget,firstRunPrepared=false;
 let torchEnabled=true;
-let interiorLoader=null,updateLoadingStatus=()=>{};
+let interiorLoader=null,corridorSightings=null,updateLoadingStatus=()=>{};
 const modern=()=>floors[0]?.geometrySource==='asylum-plan';
 const floorHeight=actor=>floors[actor.floor]?.elevation??actor.floor*FLOOR_HEIGHT;
 let notebook,notebookFloor,notebookReadRevision=0;
@@ -76,8 +81,8 @@ const escapeCutscene=createEscapeCutscene($('escapeCutscene'),()=>{
  state='won';$('result').hidden=false;$('retry').focus();
 },{reducedMotion:matchMedia('(prefers-reduced-motion: reduce)').matches,getCamera:()=>escapeExterior?.camera});
 function groupSince(snapshot,height){const group=new THREE.Group();for(const o of [...scene.children])if(!snapshot.has(o))group.add(o);group.position.y=height;scene.add(group);return group;}
-function outsideAreaName(){return escapeGrounds?.workshops.areaAt(player)?.toUpperCase()??'GROUNDS';}
-function showFloor(){layout=floors[player.floor];floorGroups.forEach((g,i)=>g.visible=!player.outside&&(modern()||i===player.floor));interiorLights?.update(player);const name=player.outside?outsideAreaName():modern()?layout.name.toUpperCase():player.floor?'UPPER FLOOR':'GROUND FLOOR';$('floorName').textContent=name;$('floorExits').textContent=modern()?'NOTEBOOK · N':layout.exits.length+' EXITS THIS FLOOR';$('miniFloorName').textContent=name;updateObjective();}
+function outsideAreaName(){return (escapeGrounds?.tower?.areaAt(player)??escapeGrounds?.workshops.areaAt(player))?.toUpperCase()??'GROUNDS';}
+function showFloor(){layout=floors[player.floor];floorGroups.forEach((g,i)=>g.visible=!player.outside&&(modern()||i===player.floor));interiorLights?.update(player);if(camera){camera.near=player.outside?.18:.05;camera.far=player.outside?600:150;camera.updateProjectionMatrix();}const name=player.outside?outsideAreaName():modern()?layout.name.toUpperCase():player.floor?'UPPER FLOOR':'GROUND FLOOR';$('floorName').textContent=name;$('floorExits').textContent=modern()?'NOTEBOOK · N':layout.exits.length+' EXITS THIS FLOOR';$('miniFloorName').textContent=name;updateObjective();}
 function updateObjective(dt=0){
  const next=escapeProgress?.objective(player,dt)??{title:'Find a way outside.',detail:''};
  if($('objectiveTitle').textContent!==next.title)$('objectiveTitle').textContent=next.title;
@@ -104,7 +109,6 @@ function twoSidedTextPlane(geometry,texture,frontPosition,parent){
  return {front,back};
 }
 function label(text,x,y,z,rotate=0,backed=false){const c=document.createElement('canvas');c.width=640;c.height=192;const g=c.getContext('2d');g.clearRect(0,0,640,192);if(backed){g.fillStyle='#163422';g.fillRect(0,0,640,192);g.strokeStyle='#8ab49a';g.lineWidth=8;g.strokeRect(4,4,632,184);}g.textAlign='center';g.fillStyle='#d9f1c7';const title=text.split('|')[0],size=title.length>17?42:title.length>12?50:62;g.font=`bold ${size}px Arial`;g.fillText(title,320,85);g.font='22px Arial';g.fillText(text.split('|')[1]||'',320,141);const signGroup=new THREE.Group();signGroup.position.set(x,y,z);signGroup.rotation.y=rotate;scene.add(signGroup);const texture=new THREE.CanvasTexture(c);twoSidedTextPlane(new THREE.PlaneGeometry(2.35,.72),texture,[0,0,.012],signGroup);}
-function wornSign(group,text,y,color=0x1a2b20){const board=box([.7,.29,.045],[0,y, .285],material(color),group);const c=document.createElement('canvas');c.width=512;c.height=160;const g=c.getContext('2d');g.fillStyle='#dce8c4';g.fillRect(0,0,512,160);g.strokeStyle='#31513e';g.lineWidth=10;g.strokeRect(8,8,496,144);g.fillStyle='#142119';g.font='bold 54px Arial';g.textAlign='center';g.textBaseline='middle';g.fillText(text,256,80);const texture=new THREE.CanvasTexture(c);const signs=twoSidedTextPlane(new THREE.PlaneGeometry(.65,.2),texture,[0,y,.31],group);signs.back.position.z=.26;signs.front.name=text+' sign';signs.back.name=text+' sign (reverse)';return board;}
 const heritageSources=[
  {url:'https://www.whateversleft.co.uk/wp-content/uploads/2008/11/031.jpg',title:'DEVA ASYLUM · CORRIDOR',credit:'Public Deva archive · Whatevers Left'},
  {url:'https://www.whateversleft.co.uk/wp-content/uploads/2008/11/007-1.jpg',title:'DEVA ASYLUM · WARD',credit:'Public Deva archive · Whatevers Left'},
@@ -193,13 +197,7 @@ function openArtViewer(art){
 }
 function closeArtViewer(){if(!artViewing)return;artViewing=null;$('artViewer').hidden=true;}
 function enemyModel(type){
- if(type===1){const guard=createSecurityGuard(THREE);scene.add(guard);return guard;}
- const group=new THREE.Group(),skin=material(type===2?0x91bcad:0xb09a7b),coat=material(type===2?0x577b6e:0x202f42,type===2?{transparent:true,opacity:.68,emissive:0x345e51,emissiveIntensity:.4}:{});
- mesh(new THREE.CylinderGeometry(.23,.37,1.12,8),coat,[0,1.05,0],group);
- mesh(new THREE.SphereGeometry(.21,12,10),skin,[0,1.86,0],group);
- for(const s of [-1,1]){const arm=box([.14,.72,.17],[s*.34,1.2,0],coat,group);arm.rotation.z=s*.13;if(type!==2){box([.15,.58,.17],[s*.15,.31,0],material(0x1e241e),group);box([.19,.12,.32],[s*.15,.06,.08],material(0x11160f),group);}mesh(new THREE.SphereGeometry(.035,6,6),material(0xf5e0b0,{emissive:type===2?0x9cffe1:0xfa694b,emissiveIntensity:2}),[s*.074,1.89,.185],group);}
- if(type===1){box([.48,.12,.4],[0,2.02,0],material(0x151c26),group);box([.14,.16,.035],[-.13,1.44,.24],material(0xb5b783),group);}
- if(type===2){const l=new THREE.PointLight(0x81d6b5,6,5);l.position.y=1.3;group.add(l);wornSign(group,'Deva ghost',1.18,0x1c4a40);}
+ const group=type===1?createSecurityGuard(THREE):createAsylumGhost(THREE);
  scene.add(group);return group;
 }
 function buildProcedural(){
@@ -248,6 +246,7 @@ async function init(){
    interiorLoader=createInteriorSectionLoader(THREE,{scene,floors,models:furnitureModels,renderer,camera,floorGroups});
    furnitureFloors.push(...interiorLoader.furniture);updateLoadingStatus=createInteriorLoadingStatus(document,interiorLoader);
    await interiorLoader.prepare({x:layout.spawn.x*layout.cellSize,z:layout.spawn.z*layout.cellSize,floor:0});
+   corridorSightings=createCorridorSightings(THREE,scene,floors,{isReady:actor=>interiorLoader.isReady(actor)});
   }
   enemies=layout.enemies.map(({name,x,z,type})=>({name,type,floor:0,spawn:{x:x*layout.cellSize,z:z*layout.cellSize,floor:0},x:x*layout.cellSize,z:z*layout.cellSize,mesh:enemyModel(type),path:[],memory:0,rethink:0,route:0,target:null}));
   await loading.step(65,'Preparing the surrounding grounds…');
@@ -312,7 +311,7 @@ function randomizeEnemySpawns(){
   e.spawn=choices[Math.floor(Math.random()*choices.length)]||e.spawn;placed.push(e.spawn);
  }
 }
-function resetPositions(){outsideWalker?.resetJump();indoorJump?.reset();spotted=false;Object.assign(player,{floor:0,y:0,stair:null,outside:false});lastDoor=null;if(torch&&!exteriorTorch)scene.add(torch,torchTarget);if(exteriorTorch)exteriorTorch.intensity=0;showFloor();stairHold=0;stairLatch=false;mapRefresh=0;lastStep=0;lastPulse=0;camera.position.y=1.65;player.x=layout.spawn.x*layout.cellSize;player.z=layout.spawn.z*layout.cellSize;yaw=layout.spawn.yaw??0;pitch=0;enemies.forEach(e=>{Object.assign(e,{...e.spawn,y:0,stair:null,outside:false,path:[],memory:0,rethink:0,route:0,target:null});resetEnemyRoomSearch(e);e.mesh.position.set(e.x,0,e.z);e.mesh.visible=true;if(e.type===1)resetSecurityGuard(e.mesh);});}
+function resetPositions(){outsideWalker?.resetJump();indoorJump?.reset();spotted=false;Object.assign(player,{floor:0,y:0,stair:null,outside:false});lastDoor=null;if(torch&&!exteriorTorch)scene.add(torch,torchTarget);if(exteriorTorch)exteriorTorch.intensity=0;showFloor();stairHold=0;stairLatch=false;mapRefresh=0;lastStep=0;lastPulse=0;camera.position.y=1.65;player.x=layout.spawn.x*layout.cellSize;player.z=layout.spawn.z*layout.cellSize;yaw=layout.spawn.yaw??0;pitch=0;enemies.forEach(e=>{Object.assign(e,{...e.spawn,y:0,stair:null,outside:false,path:[],memory:0,rethink:0,route:0,target:null});resetEnemyRoomSearch(e);e.mesh.position.set(e.x,0,e.z);e.mesh.visible=true;if(e.type===1)resetSecurityGuard(e.mesh);if(e.type===2)resetAsylumGhost(e.mesh);});}
 function uiPlaying(value){document.body.classList.toggle('playing',value);$('menu').hidden=value;$('location').hidden=value;$('hud').hidden=!value;$('pause').hidden=!value;$('touch').hidden=!value||!touch;}
 function lock(){mouseCapture.request(()=>{},()=>pause());}
 function resumeWithMouse(continuePlay){
@@ -336,13 +335,14 @@ function prepareEscapeScenario(){
   const configured=new URLSearchParams(location.search).get('seed');
   escapeProgress=createEscapeProgress({seed:configured!==null&&/^\d+$/.test(configured)?Number(configured)>>>0:Math.floor(Math.random()*4294967296),journal:notebook,floors});
   escapeWorld=createEscapeWorld(THREE,floors,floorGroups,escapeProgress,{reducedMotion:landingReducedMotion});
-  escapeGrounds=createEscapeGrounds(THREE,escapeExterior,outsideWalker,escapeProgress,{noise:groundsNoise,creak:event=>doorCreak.play(event)});
+  escapeGrounds=createEscapeGrounds(THREE,escapeExterior,outsideWalker,escapeProgress,{noise:groundsNoise,creak:event=>doorCreak.play(event),ambience:kind=>towerAudio.play(kind)});
  }
 }
 function start(){
  if(!ready||state==='arrival')return;
+ corridorSightings?.reset();
  mouseCapture.release();
- doorCreak.stop();escapeCutscene.reset();closeArtViewer();closeNotebook(false);
+ doorCreak.stop();towerAudio.stop();escapeCutscene.reset();closeArtViewer();closeNotebook(false);
  if(furnitureFloors.length&&!firstRunPrepared){furnishAsylum(floors,{seed:Math.floor(Math.random()*4294967296)});furnitureFloors.forEach(f=>f.update());}
  notebook.reset();
  const configured=modern()?new URLSearchParams(location.search).get('seed'):null;
@@ -351,7 +351,7 @@ function start(){
  $('resume').disabled=false;$('resume').textContent='RESUME ↗';
  for(const e of enemies)scene.add(e.mesh);
  randomizeEnemySpawns();resetPositions();notebookReadRevision=0;observeNotebook();
- elapsed=0;stamina=1;hold=0;exhausted=false;crouch=false;sprint=false;footPhase=0;dragging=false;previousPointer=null;keys.clear();
+ elapsed=0;lastTowerGuardStep=0;stamina=1;hold=0;exhausted=false;crouch=false;sprint=false;footPhase=0;dragging=false;previousPointer=null;keys.clear();
  state='arrival';torchEnabled=true;torch.visible=true;torch.intensity=20;uiPlaying(true);
  $('hud').hidden=true;$('pause').hidden=true;$('touch').hidden=true;$('instructions').hidden=true;$('result').hidden=true;$('floorMap').hidden=true;
  $('timer').textContent='00:00';$('warning').textContent='';$('interact').hidden=true;
@@ -404,14 +404,18 @@ function updateOutdoorGuard(dt){
  guard.mesh.visible=true;if(elapsed<enemyReleaseAt)return;
  const distance=Math.hypot(guard.x-player.x,guard.z-player.z),line=outdoorSight(guard,player);
  const result=groundsGuard.update(player,dt,{crouch});if(result.seen)spotted=true;else if(groundsGuard.mode==='patrol'||groundsGuard.mode==='return')spotted=false;
+ if(escapeGrounds?.tower?.areaAt(player)&&distance<32&&result.moved>.001&&elapsed-lastTowerGuardStep>.6){
+  lastTowerGuardStep=elapsed;towerAudio.play('yard',Math.max(.2,1-distance/40));
+  if(!escapeProgress.run.towerFootstepsNoted){escapeProgress.run.towerFootstepsNoted=true;announce('Footsteps in the yard below. Listen before leaving the tower.');}
+ }
  guard.mesh.rotation.y=guard.heading;updateSecurityGuard(guard.mesh,result.moved,dt);
  guard.mesh.position.set(guard.x,guard.y,guard.z);
  if(distance<.85&&Math.abs(guard.y-player.y)<1&&line)caught(guard.name);
 }
-function outdoorSight(a,b){const distance=Math.hypot(b.x-a.x,b.z-a.z),count=Math.ceil(distance/.5);for(let i=1;i<count;i++)if(!outsideWalker.clearSight(a.x+(b.x-a.x)*i/count,a.z+(b.z-a.z)*i/count,Math.max(a.y??0,b.y??0)))return false;return true;}
+function outdoorSight(a,b){const distance=Math.hypot(b.x-a.x,b.z-a.z),count=Math.ceil(distance/.5);for(let i=1;i<count;i++)if(!outsideWalker.clearSight(a.x+(b.x-a.x)*i/count,a.z+(b.z-a.z)*i/count,(a.y??0)+((b.y??0)-(a.y??0))*i/count))return false;return true;}
 function groundsNoise(point,radius,kind){
- beep(kind==='pry'?180:420,.25,.08);
- if(groundsGuard?.hear(point,radius))announce('The guard heard that and is coming to investigate.');
+ if(kind!=='tower-hatch')beep(kind==='pry'?180:420,.25,.08);
+ const heard=groundsGuard?.hear(point,radius)??false;if(heard)announce('The guard heard that and is coming to investigate.');return heard;
 }
 function showHelp(){if(state!=='play'&&state!=='paused')return;pause();dragging=false;previousPointer=null;$('result').hidden=true;$('instructions').hidden=false;$('closeHelp').focus();}
 function outsideDoor(){
@@ -461,7 +465,8 @@ function update(dt,interactionDt=dt){
   const target=e.path[0];if(modern()&&target){const vx=target.x-e.x,vz=target.z-e.z,d=Math.hypot(vx,vz),step=Math.min(speed*dt,d);if(d>.001){moveAsylumActor(floors,e,vx/d*step,vz/d*step);e.mesh.rotation.y=Math.atan2(vx,vz);}if(d<.1&&Math.abs(e.y-target.y)<.4)e.path.shift();}
   else if(target&&target.floor!==e.floor){const stair=nearStair(floors,e);if(changeFloor(floors,e,stair))e.path.shift();else e.path=[];}else if(target){const vx=target.x-e.x,vz=target.z-e.z,d=Math.hypot(vx,vz),step=Math.min(speed*dt,d);if(d>.001){e.x+=vx/d*step;e.z+=vz/d*step;e.mesh.rotation.y=Math.atan2(vx,vz);}if(d<.08&&e.path.length)e.path.shift();}
   if(e.type===1)updateSecurityGuard(e.mesh,e.floor===oldFloor?Math.hypot(e.x-oldX,e.z-oldZ):0,dt);
-  e.mesh.position.set(e.x,(modern()?e.y:floorHeight(e))+(e.type===2?Math.sin(elapsed*2)*.11:0),e.z);e.mesh.visible=e.floor===player.floor;
+  if(e.type===2)updateAsylumGhost(e.mesh,dt);
+  e.mesh.position.set(e.x,modern()?e.y:floorHeight(e),e.z);e.mesh.visible=e.floor===player.floor;
   if(e.floor===player.floor&&(!modern()||Math.abs(e.y-player.y)<1)&&Math.hypot(e.x-player.x,e.z-player.z)<.8&&visible(floors[e.floor],e,player)){caught(e.name);break;}
  }
  if(state!=='play')return;
@@ -477,8 +482,8 @@ function update(dt,interactionDt=dt){
   $('interact').querySelector('b').textContent='PRESS E · REACH THE MAST';$('exitName').textContent='Beyond the asylum grounds';$('exitFill').style.width='0%';if(keys.has('KeyE')&&!stairLatch)finish(true,'the radio mast');
  }else if(groundClue){
   escapeGrounds.inspect(groundClue);
-  const prying=groundClue.id==='wicket'&&escapeProgress.run.crowbar;
-  $('interact').querySelector('b').textContent=prying?'HOLD E TO PRISE BOARDS':groundClue.id==='crowbar'||groundClue.id==='oil'?'PRESS E TO TAKE':'PRESS E TO '+escapeGrounds.action(groundClue);$('exitName').textContent=groundClue.title;$('exitFill').style.width=(escapeGrounds.work/3*100)+'%';
+  const prying=['wicket','tower-hatch'].includes(groundClue.id)&&escapeProgress.run.crowbar;
+  $('interact').querySelector('b').textContent=prying?groundClue.id==='tower-hatch'?'HOLD E TO FREE THE HATCH':'HOLD E TO PRISE BOARDS':groundClue.id==='crowbar'||groundClue.id==='oil'?'PRESS E TO TAKE':'PRESS E TO '+escapeGrounds.action(groundClue);$('exitName').textContent=groundClue.title;$('exitFill').style.width=(escapeGrounds.work/3*100)+'%';
   if(keys.has('KeyE')&&!stairLatch&&!prying){announce(escapeGrounds.use(groundClue));stairLatch=true;}
  }else if(clue){
   $('interact').querySelector('b').textContent=clue.id==='staff-key'?'PRESS E TO TAKE':clue.id==='reclaim'?'PRESS E TO RECLAIM':clue.gate||clue.id==='release'?'PRESS E TO USE':clue.id==='plan'&&clue.key.visible?'PRESS E TO TAKE BRASS KEY':'PRESS E TO INSPECT';$('exitName').textContent=clue.title;$('exitFill').style.width='0%';
@@ -505,7 +510,7 @@ function update(dt,interactionDt=dt){
  $('timer').textContent=`${String(Math.floor(elapsed/60)).padStart(2,'0')}:${String(Math.floor(elapsed%60)).padStart(2,'0')}`;$('staminaFill').style.width=stamina*100+'%';$('stance').textContent=sprint?'SPRINTING · LOUD':crouch?'CROUCHING · QUIET':'STAMINA';
  if(escapeProgress&&player.outside){escapeProgress.observeBoundary(player,previousPlayer);if(Math.hypot(player.x-MAST.x,player.z-MAST.z)<18)escapeProgress.discover('mast',{view:'outside'});}
  mapRefresh-=dt;if(mapRefresh<=0){mapRefresh=.12;observeNotebook();drawMap();}
- escapeWorld?.update(elapsed);updateObjective(interactionDt);
+ escapeWorld?.update(elapsed,dt);updateObjective(interactionDt);
 }
 function observeNotebook(){
  notebook.explore(player);
@@ -546,7 +551,7 @@ function renderNotebook(){
 }
 function openNotebook(){
  if(state!=='play')return;
- doorCreak.stop();observeNotebook();closeArtViewer();keys.clear();hold=0;stairHold=0;dragging=false;previousPointer=null;
+ doorCreak.stop();towerAudio.stop();observeNotebook();closeArtViewer();keys.clear();hold=0;stairHold=0;dragging=false;previousPointer=null;
  notebookFloor=notebookView(player);state='notebook';mouseCapture.release();
  $('floorMap').hidden=false;$('touch').hidden=true;$('pause').hidden=true;$('hud').hidden=true;
  notebookReadRevision=notebook.revision;updateNotebookBadge();renderNotebook();drawMap();$('closeNotebook').focus();
@@ -582,7 +587,8 @@ function renderAerialBackdrop(exterior){
  renderer.render(exterior.scene,exterior.camera);
  if(fog)fog.density=fogDensity;
 }
-function animate(){requestAnimationFrame(animate);if(state!=='play'||!audioOn||document.hidden)doorCreak.stop();clock.update();const frameDt=clock.getDelta(),dt=Math.min(frameDt,.04);
+function animate(){requestAnimationFrame(animate);if(state!=='play'||!audioOn||document.hidden){doorCreak.stop();towerAudio.stop();}clock.update();const frameDt=clock.getDelta(),dt=Math.min(frameDt,.04);
+ if(state!=='play'||document.hidden)corridorSightings?.update(player,camera,0);
  if(exteriorTorch)exteriorTorch.intensity=player.outside&&!['menu','arrival','cutscene','won'].includes(state)&&torch.visible&&torch.parent!==exterior.scene?torch.intensity:0;
  if(state==='captured'&&!document.hidden&&recoveryRemaining>0){recoveryRemaining=Math.max(0,recoveryRemaining-Math.min(frameDt,.25));$('resume').disabled=recoveryRemaining>0;$('resume').textContent=recoveryRemaining>0?`OBSERVATION · ${Math.ceil(recoveryRemaining)}s`:'CONTINUE ESCAPE ↗';}
  if(document.hidden)return;
@@ -609,6 +615,7 @@ function animate(){requestAnimationFrame(animate);if(state!=='play'||!audioOn||d
  }
  if(state==='cutscene'){renderAerialBackdrop(escapeExterior);return;}
  renderer.toneMappingExposure=1.25;
+ corridorSightings?.update(player,camera,state==='play'&&!artViewing?frameDt:0);
  interiorLights.update(player);camera.getWorldDirection(tmp);const activeTorch=player.outside&&exteriorTorch&&torch.parent!==exterior.scene?exteriorTorch:torch,activeTorchTarget=activeTorch===exteriorTorch?exteriorTorchTarget:torchTarget;if(exteriorTorch)exteriorTorch.intensity=activeTorch===exteriorTorch&&torch.visible?torch.intensity:0;activeTorch.position.copy(camera.position);activeTorchTarget.position.copy(camera.position).addScaledVector(tmp,12);if(!player.outside)updateFurnitureDetail(THREE,scene,camera,innerHeight);renderer.render(player.outside?exterior.scene:scene,camera);}
 $('start').onclick=start;$('closeHelp').onclick=resume;$('helpPlay').onclick=resume;$('retry').onclick=start;$('resume').onclick=resume;$('pause').onclick=pause;$('audio').onchange=e=>audioOn=e.target.checked;
 function toggleMap(){if(state==='notebook')closeNotebook();else openNotebook();}

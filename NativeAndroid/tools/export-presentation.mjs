@@ -1,12 +1,14 @@
 // Bake the browser's actual Arial / Georgia glyphs as artwork, without shipping
 // operating-system font programs or relying on fonts installed on Android.
-import {chromium} from '../../Browser/node_modules/playwright/index.mjs';
+import {launchHardwareBrowser} from '../../Browser/test-support/hardware-browser.mjs';
 import {copyFile,mkdir,readFile,writeFile} from 'node:fs/promises';
 const output=new URL('../Unity/Assets/NativePrototype/Presentation/',import.meta.url);
 await mkdir(output,{recursive:true});
 const manifest=await readFile(new URL('../Unity/Assets/NativePrototype/Generated/manifest.json',import.meta.url),'utf8');
-const chars=[...new Set([...Array.from({length:224},(_,i)=>String.fromCharCode(i+32)).join(''),...manifest,...'‹›−→↗✓●○–—‘’“”•…'])].filter(c=>c.codePointAt(0)>=32);
-const browser=await chromium.launch({headless:true,executablePath:process.env.MODEL_CHROME_PATH||'C:/Program Files/Google/Chrome/Application/chrome.exe'});
+const glyphCharacters=new Set(Array.from({length:224},(_,i)=>String.fromCharCode(i+32)).join('')+'‹›−→↗✓●○–—‘’“”•…');
+for(const c of manifest)glyphCharacters.add(c);
+const chars=[...glyphCharacters].filter(c=>c.codePointAt(0)>=32);
+const browser=await launchHardwareBrowser({executablePath:process.env.MODEL_CHROME_PATH||'C:/Program Files/Google/Chrome/Application/chrome.exe'});
 try{
  const page=await browser.newPage();
  const lightingSource=await readFile(new URL('../../Browser/dist/day-night.mjs',import.meta.url),'utf8');

@@ -1,0 +1,24 @@
+{
+  "code": 0,
+  "failures": [
+    {
+      "method": "deepEqual",
+      "actual": {
+        "primitives": 20341,
+        "sha256": "06f096ad0c985eeb68116a425465577435635641c57aefce65c13ee47eac1e73"
+      },
+      "expected": {
+        "primitives": 20341,
+        "sha256": "69039948f7187a878331eb241387b4b813cdb36c5528a8a5fc97b0eac805ca56"
+      },
+      "message": "Annexe primitives outside the red-circled low connector must remain unchanged",
+      "stack": [
+        "    at assert.<computed> [as deepEqual] (file:///C:/Users/Harry/Documents/_escape-from-1829/Browser/artifacts/ward-placement-reference/capture-snapshot-mismatches.mjs:9:14)",
+        "    at file:///C:/Users/Harry/Documents/_escape-from-1829/Browser/test-oakmere-west.mjs:54:9",
+        "    at ModuleJob.run (node:internal/modules/esm/module_job:561:25)",
+        "    at async node:internal/modules/esm/loader:647:26",
+        "    at async asyncRunEntryPointWithESMLoader (node:internal/modules/run_main:101:5)"
+      ]
+    }
+  ]
+}

@@ -14,7 +14,7 @@ import {HISTORIC_ROAD_TRACES} from './dist/historic-road-layout.mjs';
 globalThis.document={createElement:()=>({getContext:()=>({fillRect(){},measureText(t){return {width:t.length*16}},strokeText(){},fillText(){}})})};
 const e=createEscapeExterior(THREE,1.5),a=e.annexe,l=createAerialLayouts(THREE,e);e.model.updateMatrixWorld(true);
 // Normalize only the independently requested entrance depth in an isolated
-// process; the original fingerprint remains immutable and live geometry is
+// process; the approved fingerprint remains protected and live geometry is
 // used for every paving, roof, collision and timeline assertion below.
 execFileSync(process.execPath,['--import',new URL('./artifacts/larkton-original-entrance-loader.mjs',import.meta.url).href,fileURLToPath(new URL('./artifacts/check-larkton-original.mjs',import.meta.url))],{windowsHide:true});
 assert(!a.getObjectByName('West rear link brick walls'));assert(!a.getObjectByName('West rear link slate roof'));
@@ -44,5 +44,5 @@ for(const year of [1912,1915,1938,2010]){
  timeline.setPeriod(year);
  for(const name of ['Annexe Larkton paved court','Annexe Larkton Parsons approach','Annexe Larkton Parsons open junction'])assert.equal(visible(l.historicRoads.getObjectByName(name)),year===1915||year===1938,'New surfaces follow annexe dates');
 }
-console.log('PASS: Larkton removal, paving contact, green courtyard, open full-width Parsons connection, walking clearance, timeline and 18,942 protected primitives.');
+console.log('PASS: Larkton removal, paving contact, green courtyard, open full-width Parsons connection, walking clearance, timeline and protected geometry.');
 

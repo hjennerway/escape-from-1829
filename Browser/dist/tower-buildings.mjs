@@ -4,6 +4,7 @@ import {addPharmacyCourt,PHARMACY_VIEWS} from './pharmacy-court.mjs';
 import {SERVICE_COURT_MOVES,moveServiceRect,moveServiceView} from './service-court-placement.mjs';
 import {IRBY_CORRIDOR} from './irby-corridor.mjs';
 import {MAIN_KITCHEN} from './main-kitchen.mjs';
+import {addBlueRoofLantern,blueRoofLanternMaterials} from './blue-roof-lantern.mjs';
 
 import {TOWER_ROOF_CONTACTS} from './tower-roof-profiles.mjs';
 export {TOWER_ROOF_CONTACTS} from './tower-roof-profiles.mjs';
@@ -128,8 +129,23 @@ export function createTowerBuildings(THREE,exterior){
   const faces=alongX?[[0,1,5],[0,5,4],[1,2,5],[2,3,4],[2,4,5],[3,0,4]]:[[0,1,4],[1,2,5],[1,5,4],[2,3,5],[3,0,4],[3,4,5]];
   // Gables are brick; only the slopes receive slate.
   const ends=alongX?[2,5]:[0,3],gableFaces=type==='gable'?ends:type==='hip-gable'?[alongX?(spec.gableEnd==='west'?5:2):(spec.gableEnd==='north'?0:3)]:[];
-  poly(faces.filter((_,i)=>type==='attached-hip'?i!==(spec.attach==='north'?0:3):!gableFaces.includes(i)).flatMap(f=>[...f].reverse().map(i=>[cx+v[i][0],v[i][1],cz+v[i][2]])),roof,name+' slate roof');
-  for(const i of gableFaces)poly([...faces[i]].reverse().map(j=>[cx+v[j][0],v[j][1],cz+v[j][2]]),spec.gableMaterial??brick,name+' brick gable');
+  const cover=poly(faces.filter((_,i)=>type==='attached-hip'?i!==(spec.attach==='north'?0:3):!gableFaces.includes(i)).flatMap(f=>[...f].reverse().map(i=>[cx+v[i][0],v[i][1],cz+v[i][2]])),roof,name+' slate roof');
+  // A single envelope reaches the wall top beneath the raised slate. Thin
+  // floating gables left a .14 gap; inferred roof fill then duplicated their
+  // upper faces and mistook the terracotta ridge for a masonry support.
+  const edge=alongX?
+   [0,1,...(gableFaces.includes(2)?[5]:[]),2,3,...(gableFaces.includes(5)?[4]:[])]:
+   [0,...(gableFaces.includes(0)?[4]:[]),1,2,...(gableFaces.includes(3)?[5]:[]),3];
+  const top=i=>[cx+v[i][0],v[i][1],cz+v[i][2]],bottom=i=>[cx+v[i][0],h,cz+v[i][2]],closed=[];
+  for(let i=0;i<edge.length;i++){
+   const a=edge[i],b=edge[(i+1)%edge.length];
+   closed.push(top(a),top(b),bottom(b),top(a),bottom(b),bottom(a));
+  }
+  for(const i of [0,1,2,0,2,3])closed.push(bottom(i));
+  const enclosure=poly(closed,spec.gableMaterial??brick,name+(gableFaces.length?' brick gable':' eave enclosure'));
+  enclosure.userData.roofWallClosure=true;
+  cover.userData.roofWallJoinsFinished=true;
+  cover.userData.roofWallJoinSummary={closed:edge.length,unsupported:0,solid:true,authored:true};
   line([cx+v[4][0],e+rise+.05,cz+v[4][2]],[cx+v[5][0],e+rise+.05,cz+v[5][2]],red,.10,name+' ridge');
  }
  for(const spec of sourceRanges){
@@ -312,8 +328,7 @@ export function createTowerBuildings(THREE,exterior){
   captureWorkshop=spec.name===TOWER_WORKSHOP_COPY.source;
   const [x0,z0,x1,z1]=spec.rect,cx=(x0+x1)/2,front=z1+.24;
   const west=spec.name.includes('west'),doorWidth=west?2.5:4.1;
-  // Close the eave-height joint beneath the slightly overhanging gable.
-  for(const z of [z0,z1])box(brick,cx,spec.height+.07,z,x1-x0+.4,.14,.42,spec.name+' gable base course');
+  // The authored roof envelope closes both gable bases without a second skin.
   door(cx,1.95,front,doorWidth,3.8,0,workshopBlue,spec.name+' blue door');
   // Recessed timber panels and glazed transom above each blue door.
   detail(dark,cx,3.21,front+.16,doorWidth-.24,.9,.06);
@@ -357,7 +372,8 @@ export function createTowerBuildings(THREE,exterior){
  // img3: blue double doors and a high gable light at the east end, with a
  // repeated high sash rhythm continuing north along the long range.
  door(220.89,2.05,towardsAdmin(-21.9),3.4,3.8,Math.PI/2,blue,'Blue stores double doors');
- sash(220.9,10.55,towardsAdmin(-22.35),1.3,1.9,Math.PI/2,'High stores gable sash');
+ // Mount the sash beyond the gable's .2 overhang, as on the other gables.
+ sash(221.1,10.55,towardsAdmin(-22.35),1.3,1.9,Math.PI/2,'High stores gable sash');
  // main_redfine2/img2: tall upper sashes above a mostly solid ground storey.
  for(const z of [-30.4,-34.9,-39.4,-43.9,-48.4,-52.8])sash(220.89,6.5,towardsAdmin(z),1.3,3.05,Math.PI/2,'Rear lane upper sash');
  for(const z of [-51.1,-42.2])sash(220.89,1.65,towardsAdmin(z),1.45,1.95,Math.PI/2,'Rear lane ground sash');
@@ -406,23 +422,14 @@ export function createTowerBuildings(THREE,exterior){
  }
  group.userData.roundWindow=roundWindow;
  const dormers=[],dormerSupports=group.children.filter(o=>o.isMesh&&o.name.endsWith('slate roof'));
+ const lanternMaterials=blueRoofLanternMaterials(roof,blue);
  group.updateMatrixWorld(true);
  function dormer(name,x,z,bottom,top,axis){
-  // Clip the cheeks to the host slope so blue walls emerge from the slate.
-  const corners=[[x-1.8,z-1.75],[x+1.8,z-1.75],[x+1.8,z+1.75],[x-1.8,z+1.75]];
-  const bases=corners.map(([px,pz])=>{const ray=new THREE.Raycaster(new THREE.Vector3(px,40,pz),new THREE.Vector3(0,-1,0));return Math.min(top-.05,ray.intersectObjects(dormerSupports,false)[0]?.point.y-.06||bottom);});
-  const sides=[];
-  for(let i=0;i<4;i++){const j=(i+1)%4,a=[...corners[i]],b=[...corners[j]];
-   sides.push([a[0],bases[i],a[1]],[a[0],top+.14,a[1]],[b[0],top+.14,b[1]],
-    [a[0],bases[i],a[1]],[b[0],top+.14,b[1]],[b[0],bases[j],b[1]]);
-  }
-  const part=poly(sides,blue,name+' walls');part.userData.roofDormer=name;dormers.push({name,x,z,axis,placement});
-  pitched({name,rect:[x-1.9,z-1.85,x+1.9,z+1.85],height:top,rise:1.1,axis,roof:'gable',gableMaterial:blue});
-  // Matching vents face down both host slopes, perpendicular to the ridge.
-  for(const side of [1,-1]){
-   if(axis==='z')sash(x+side*1.83,top-.6,z,2.6,1.0,side*Math.PI/2,name+' glazing');
-   else sash(x,top-.6,z+side*1.78,2.6,1.0,side===1?0:Math.PI,name+' glazing');
-  }
+  addBlueRoofLantern(THREE,{name,x,z,axis,halfLength:axis==='x'?1.8:1.75,halfWidth:axis==='x'?1.75:1.8,
+   eave:top+.14,rise:1.1,materials:lanternMaterials,
+   baseHeight:(px,pz)=>{const ray=new THREE.Raycaster(new THREE.Vector3(px,40,pz),new THREE.Vector3(0,-1,0));return (ray.intersectObjects(dormerSupports,false)[0]?.point.y??bottom)-.06;},
+   mesh:(g,m,n)=>mesh(g,m,0,0,0,n),detail,opening:o=>openings.push({...o,placement})});
+  dormers.push({name,x,z,axis,placement});
  }
  // Marked ridge correction: both protrusions straddle the east/west crest.
  // Keep their glazing above the higher host roof at this new position.
@@ -449,7 +456,7 @@ export function createTowerBuildings(THREE,exterior){
  copied.position.set(cx-s*sx,0,cz-ds*sz);group.add(copied);
  movingMeshes.push({object:copied,placement});
  const copyName=name=>name.replace(copy.source,copy.name).replace(copy.sourceDormer,copy.dormer);
- for(const original of copyMeshes){const part=original.clone();part.name=copyName(part.name);if(part.userData.roofDormer)part.userData.roofDormer=copy.dormer;copied.add(part);}
+ for(const original of copyMeshes){const part=original.clone();part.name=copyName(part.name);if(part.userData.roofDormer)part.userData.roofDormer=copy.dormer;if(part.userData.blueRoofLantern)part.userData.blueRoofLantern=copy.dormer;copied.add(part);}
  for(const {material,item:b} of copyDetails){
   // Copied facade details use axis-aligned quarter turns; their width runs
   // along Z on the dormer sides, and along X on the workshop gable front.
@@ -466,8 +473,22 @@ export function createTowerBuildings(THREE,exterior){
  const pane=box(glass,storesFrontX(202),8.92,towardsAdmin(-19.96),1.4,.055,1.4,'Stores rooflight glass');pane.rotation.x=light.rotation.x;
  // Ramp shared by img2 and img3: higher entrance at the west, low east landing.
  const x0=185.9,x1=219.4,z0=towardsAdmin(-15.9),z1=towardsAdmin(-12.8),high=1.30,low=.28;
- poly([[x0,high,z0],[x0,high,z1],[x1,low,z1],[x0,high,z0],[x1,low,z1],[x1,low,z0]],stone,'Sloping service ramp');
- poly([[x0,.18,z1],[x1,.18,z1],[x1,low,z1],[x0,.18,z1],[x1,low,z1],[x0,high,z1]],brick,'Ramp brick retaining wall');
+ const ramp=poly([[x0,high,z0],[x0,high,z1],[x1,low,z1],[x0,high,z0],[x1,low,z1],[x1,low,z0]],stone,'Sloping service ramp');
+ // A sloping deck's bounding box would block the whole approach. Keep its
+ // actual plane as walking support, including after the service-group move.
+ const slope=(low-high)/(x1-x0);
+ ramp.userData.noWalkingCollision=true;
+ ramp.userData.walkSurfaces=[{outline:[[x0,z0],[x1,z0],[x1,z1],[x0,z1]],plane:[-slope,1,0,slope*x0-high],grade:0}];
+ // Close every exposed side into the terrain, including the former floating
+ // .18-high retaining wall and the open lower end. The top stays unchanged.
+ const base=exterior.terrain.position.y-.02,edges=[];
+ const perimeter=[[x0,high,z0],[x1,low,z0],[x1,low,z1],[x0,high,z1]];
+ for(let i=0;i<perimeter.length;i++){
+  const a=perimeter[i],b=perimeter[(i+1)%perimeter.length],bottomA=[a[0],base,a[2]],bottomB=[b[0],base,b[2]];
+  edges.push(a,b,bottomA,b,bottomB,bottomA);
+ }
+ const retaining=poly(edges,brick,'Ramp brick retaining wall');
+ retaining.userData.noWalkingCollision=true;
  box(stone,189.5,high-.1,towardsAdmin(-17.6),4,.2,4,'Raised entrance landing');
  for(const z of [z1]){
   for(let i=0;i<=6;i++){const t=i/6,x=x0+(x1-x0)*t,y=high+(low-high)*t;line([x,y,z],[x,y+1.05,z],blue,.055,'Ramp handrail post');}
