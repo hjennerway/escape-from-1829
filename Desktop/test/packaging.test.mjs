@@ -6,7 +6,7 @@ import { join } from 'node:path';
 import { tmpdir } from 'node:os';
 import { contentPath, externalURL, isGameURL } from '../app/content.cjs';
 import { createManifest, previewIdentity, storeVersion, validateIdentity } from '../scripts/store-manifest.mjs';
-import { validateCompiled } from '../scripts/prepare-web.mjs';
+import { validateCompiled, validateInteriorCompiled } from '../scripts/prepare-web.mjs';
 
 test('only packaged game paths can be served; queries and nested assets work', () => {
   const root = join(tmpdir(), 'escape-test-web');
@@ -51,5 +51,40 @@ test('packaging rejects stale, missing and corrupt compiled assets', async () =>
     await assert.rejects(validateCompiled(root, 'source-hash'), /corrupt/);
     await writeFile(join(root, 'compiled/manifest.json'), JSON.stringify({ ...manifest, file: '../../secret' }));
     await assert.rejects(validateCompiled(root, 'source-hash'), /filename/);
+  } finally { await rm(root, { recursive: true, force: true }); }
+});
+
+test('packaging requires current, intact interior sections and their shared floor resources', async () => {
+  const root = await mkdtemp(join(tmpdir(), 'escape-interior-package-test-'));
+  const directory = join(root, 'compiled/interior');
+  const data = Buffer.from('interior model fixture');
+  const sha256 = createHash('sha256').update(data).digest('hex');
+  const resource = { floor: 0, file: `floor-0-${sha256.slice(0, 16)}.bin.gz`, bytes: data.length, sha256 };
+  const section = { ...resource, file: `0-west-${sha256.slice(0, 16)}.bin.gz` };
+  const manifest = { format: 1, sourceHash: 'interior-hash', resources: { 0: resource }, sections: [section] };
+  const saveManifest = value => writeFile(join(directory, 'manifest.json'), JSON.stringify(value));
+  try {
+    await mkdir(directory, { recursive: true });
+    await assert.rejects(validateInteriorCompiled(root, 'interior-hash'), /ENOENT/);
+    await saveManifest(manifest);
+    await assert.rejects(validateInteriorCompiled(root, 'interior-hash'), /ENOENT/);
+    await writeFile(join(directory, resource.file), data);
+    await assert.rejects(validateInteriorCompiled(root, 'interior-hash'), /ENOENT/);
+    await writeFile(join(directory, section.file), data);
+    assert.deepEqual(await validateInteriorCompiled(root, 'interior-hash'), manifest);
+    await assert.rejects(validateInteriorCompiled(root, 'new-interior-hash'), /stale/);
+    for (const asset of [resource, section]) {
+      await writeFile(join(directory, asset.file), Buffer.alloc(data.length));
+      await assert.rejects(validateInteriorCompiled(root, 'interior-hash'), /corrupt/);
+      await writeFile(join(directory, asset.file), data.subarray(1));
+      await assert.rejects(validateInteriorCompiled(root, 'interior-hash'), /corrupt/);
+      await writeFile(join(directory, asset.file), data);
+    }
+    for (const invalid of [{ ...manifest, format: 999 }, { ...manifest, sections: [] }, { ...manifest, resources: {} }]) {
+      await saveManifest(invalid);
+      await assert.rejects(validateInteriorCompiled(root, 'interior-hash'), /incomplete or incompatible/);
+    }
+    await saveManifest({ ...manifest, sections: [{ ...section, file: '../../secret' }] });
+    await assert.rejects(validateInteriorCompiled(root, 'interior-hash'), /filename/);
   } finally { await rm(root, { recursive: true, force: true }); }
 });

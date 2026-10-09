@@ -1,0 +1,389 @@
+{
+  "errors": [],
+  "results": [
+    {
+      "mode": "escape",
+      "framing": "desktop",
+      "floor": 0,
+      "waited": 45.00000000000037,
+      "frames": [
+        {
+          "time": 0,
+          "changed": 0
+        },
+        {
+          "time": 0.05,
+          "changed": 0
+        },
+        {
+          "time": 0.1,
+          "changed": 0
+        },
+        {
+          "time": 0.15000000000000002,
+          "changed": 0
+        },
+        {
+          "time": 0.2,
+          "changed": 0
+        },
+        {
+          "time": 0.25,
+          "changed": 22
+        },
+        {
+          "time": 0.30000000000000004,
+          "changed": 273
+        },
+        {
+          "time": 0.35000000000000003,
+          "changed": 376
+        },
+        {
+          "time": 0.4,
+          "changed": 434
+        },
+        {
+          "time": 0.45,
+          "changed": 482
+        },
+        {
+          "time": 0.5,
+          "changed": 488
+        },
+        {
+          "time": 0.55,
+          "changed": 435
+        },
+        {
+          "time": 0.6000000000000001,
+          "changed": 57
+        },
+        {
+          "time": 0.65,
+          "changed": 0
+        },
+        {
+          "time": 0.7000000000000001,
+          "changed": 0
+        },
+        {
+          "time": 0.75,
+          "changed": 0
+        },
+        {
+          "time": 0.8,
+          "changed": 0
+        },
+        {
+          "time": 0.8500000000000001,
+          "changed": 0
+        },
+        {
+          "time": 0.9,
+          "changed": 0
+        },
+        {
+          "time": 0.9500000000000001,
+          "changed": 0
+        },
+        {
+          "time": 1,
+          "changed": 0
+        }
+      ],
+      "maxChanged": 488,
+      "active": false,
+      "pixels": 960000,
+      "meshes": 20
+    },
+    {
+      "mode": "escape",
+      "framing": "phone",
+      "floor": 1,
+      "waited": 45.00000000000037,
+      "frames": [
+        {
+          "time": 0,
+          "changed": 0
+        },
+        {
+          "time": 0.05,
+          "changed": 0
+        },
+        {
+          "time": 0.1,
+          "changed": 0
+        },
+        {
+          "time": 0.15000000000000002,
+          "changed": 0
+        },
+        {
+          "time": 0.2,
+          "changed": 0
+        },
+        {
+          "time": 0.25,
+          "changed": 16
+        },
+        {
+          "time": 0.30000000000000004,
+          "changed": 219
+        },
+        {
+          "time": 0.35000000000000003,
+          "changed": 292
+        },
+        {
+          "time": 0.4,
+          "changed": 337
+        },
+        {
+          "time": 0.45,
+          "changed": 366
+        },
+        {
+          "time": 0.5,
+          "changed": 351
+        },
+        {
+          "time": 0.55,
+          "changed": 315
+        },
+        {
+          "time": 0.6000000000000001,
+          "changed": 36
+        },
+        {
+          "time": 0.65,
+          "changed": 0
+        },
+        {
+          "time": 0.7000000000000001,
+          "changed": 0
+        },
+        {
+          "time": 0.75,
+          "changed": 0
+        },
+        {
+          "time": 0.8,
+          "changed": 0
+        },
+        {
+          "time": 0.8500000000000001,
+          "changed": 0
+        },
+        {
+          "time": 0.9,
+          "changed": 0
+        },
+        {
+          "time": 0.9500000000000001,
+          "changed": 0
+        },
+        {
+          "time": 1,
+          "changed": 0
+        }
+      ],
+      "maxChanged": 366,
+      "active": false,
+      "pixels": 329160,
+      "meshes": 20
+    },
+    {
+      "mode": "explore",
+      "framing": "desktop",
+      "floor": 0,
+      "waited": 45.00000000000037,
+      "frames": [
+        {
+          "time": 0,
+          "changed": 0
+        },
+        {
+          "time": 0.05,
+          "changed": 0
+        },
+        {
+          "time": 0.1,
+          "changed": 0
+        },
+        {
+          "time": 0.15000000000000002,
+          "changed": 0
+        },
+        {
+          "time": 0.2,
+          "changed": 0
+        },
+        {
+          "time": 0.25,
+          "changed": 41
+        },
+        {
+          "time": 0.30000000000000004,
+          "changed": 651
+        },
+        {
+          "time": 0.35000000000000003,
+          "changed": 881
+        },
+        {
+          "time": 0.4,
+          "changed": 1016
+        },
+        {
+          "time": 0.45,
+          "changed": 1089
+        },
+        {
+          "time": 0.5,
+          "changed": 1074
+        },
+        {
+          "time": 0.55,
+          "changed": 960
+        },
+        {
+          "time": 0.6000000000000001,
+          "changed": 119
+        },
+        {
+          "time": 0.65,
+          "changed": 0
+        },
+        {
+          "time": 0.7000000000000001,
+          "changed": 0
+        },
+        {
+          "time": 0.75,
+          "changed": 0
+        },
+        {
+          "time": 0.8,
+          "changed": 0
+        },
+        {
+          "time": 0.8500000000000001,
+          "changed": 0
+        },
+        {
+          "time": 0.9,
+          "changed": 0
+        },
+        {
+          "time": 0.9500000000000001,
+          "changed": 0
+        },
+        {
+          "time": 1,
+          "changed": 0
+        }
+      ],
+      "maxChanged": 1089,
+      "active": false,
+      "pixels": 960000,
+      "meshes": 20
+    },
+    {
+      "mode": "explore",
+      "framing": "phone",
+      "floor": 1,
+      "waited": 45.00000000000037,
+      "frames": [
+        {
+          "time": 0,
+          "changed": 0
+        },
+        {
+          "time": 0.05,
+          "changed": 0
+        },
+        {
+          "time": 0.1,
+          "changed": 0
+        },
+        {
+          "time": 0.15000000000000002,
+          "changed": 0
+        },
+        {
+          "time": 0.2,
+          "changed": 0
+        },
+        {
+          "time": 0.25,
+          "changed": 44
+        },
+        {
+          "time": 0.30000000000000004,
+          "changed": 636
+        },
+        {
+          "time": 0.35000000000000003,
+          "changed": 865
+        },
+        {
+          "time": 0.4,
+          "changed": 992
+        },
+        {
+          "time": 0.45,
+          "changed": 1060
+        },
+        {
+          "time": 0.5,
+          "changed": 1035
+        },
+        {
+          "time": 0.55,
+          "changed": 911
+        },
+        {
+          "time": 0.6000000000000001,
+          "changed": 108
+        },
+        {
+          "time": 0.65,
+          "changed": 0
+        },
+        {
+          "time": 0.7000000000000001,
+          "changed": 0
+        },
+        {
+          "time": 0.75,
+          "changed": 0
+        },
+        {
+          "time": 0.8,
+          "changed": 0
+        },
+        {
+          "time": 0.8500000000000001,
+          "changed": 0
+        },
+        {
+          "time": 0.9,
+          "changed": 0
+        },
+        {
+          "time": 0.9500000000000001,
+          "changed": 0
+        },
+        {
+          "time": 1,
+          "changed": 0
+        }
+      ],
+      "maxChanged": 1060,
+      "active": false,
+      "pixels": 329160,
+      "meshes": 20
+    }
+  ]
+}

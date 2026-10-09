@@ -17,7 +17,9 @@ concurrency:
 jobs:
   build:
     runs-on: ubuntu-latest
-    timeout-minutes: 20
+    # Checkout plus the complete source/compiled checks exceed 20 minutes on
+    # hosted runners, where browser rendering uses SwiftShader.
+    timeout-minutes: 45
     defaults:
       run:
         working-directory: Browser

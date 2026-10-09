@@ -3,7 +3,9 @@
 ## Animated upper staff gates (9 October 2026)
 
 The owner's request animates opening the gate to the upper floor. Both S1 and
-S5 retain their existing frames and hinge pins. Releasing a grille clears its
+S5 retain their existing frames and hinge fittings. S5 hangs from the opposite
+post so its open leaf clears the approach beside the lower-flight railing.
+Releasing a grille clears its
 chain and padlock, then swings the visible leaf 90 degrees over the level
 landing in 1.1 seconds, easing at both ends. Opening toward the flight would
 intersect the rising treads. The notice, handle and moving hinge plates travel

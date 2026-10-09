@@ -12,7 +12,7 @@ window.staffGateTest={
  get ready(){return ready&&(interiorLoader?.complete??true)},
  begin(){window.__manual=true;start();arrivalCutscene.update(3);enemyReleaseAt=Infinity;state='play';keys.clear();document.getElementById('result').hidden=true;uiPlaying(true)},
  snapshot(id){const g=escapeWorld.gates.find(g=>g.id===id);g.group.updateWorldMatrix(true,true);const from={x:g.x-g.dx*.6,z:g.z-g.dz*.6,y:g.y,floor:1},to={...from,x:g.x+g.dx*.6,z:g.z+g.dz*.6},frame=new THREE.Box3().setFromObject(g.group.getObjectByName('Fixed stair gate frame'));return {angle:g.hinge.rotation.y,visible:g.leaf.visible,locked:g.lock.visible,clear:escapeWorld.allowMove(from,to),hinge:g.hinge.getWorldPosition(new THREE.Vector3()).toArray(),frame:[...frame.min.toArray(),...frame.max.toArray()]}},
- pose(id){const g=escapeWorld.gates.find(g=>g.id===id);Object.assign(player,{x:g.x-g.dx*1.65,z:g.z-g.dz*1.65,y:g.y,floor:1,stair:null,outside:false});showFloor();yaw=Math.atan2(-g.dx,-g.dz);pitch=-.12;this.draw()},
+ pose(id,distance=1.65){const g=escapeWorld.gates.find(g=>g.id===id);Object.assign(player,{x:g.x-g.dx*distance,z:g.z-g.dz*distance,y:g.y,floor:1,stair:null,outside:false});showFloor();yaw=Math.atan2(-g.dx,-g.dz);pitch=-.12;update(0);this.draw()},
  draw(){camera.position.set(player.x,player.y+1.65,player.z);camera.rotation.set(pitch,yaw,0);scene.add(torch,torchTarget);torch.visible=true;torch.position.copy(camera.position);camera.getWorldDirection(tmp);torchTarget.position.copy(camera.position).addScaledVector(tmp,12);renderer.toneMappingExposure=1.25;renderer.render(scene,camera)},
  use(){keys.add('KeyE');update(0);keys.delete('KeyE');update(0);this.draw()},
  takeKey(){escapeProgress.interact('staff-key');syncEscapeWorld()},
@@ -36,28 +36,28 @@ try{
   await page.evaluate(id=>{staffGateTest.begin();staffGateTest.pose(id)},id);
   const closed=await page.evaluate(id=>staffGateTest.snapshot(id),id);assert(closed.locked&&!closed.clear&&closed.angle===0);
   await shot(id+'-closed');await page.evaluate(()=>staffGateTest.use());
-  assert.equal((await page.evaluate(id=>staffGateTest.snapshot(id),id)).angle,0,'E without the key cannot open the gate');
+  assert.equal(Math.abs((await page.evaluate(id=>staffGateTest.snapshot(id),id)).angle),0,'E without the key cannot open the gate');
   await page.evaluate(()=>{staffGateTest.takeKey();staffGateTest.use()});
   const released=await page.evaluate(id=>staffGateTest.snapshot(id),id);assert(released.visible&&!released.locked&&!released.clear&&released.angle===0);
   await page.evaluate(()=>staffGateTest.tick(.275));const early=await page.evaluate(id=>staffGateTest.snapshot(id),id);
-  assert(early.angle>0&&early.angle<Math.PI/4&&!early.clear,'Gate starts smoothly and still blocks passage');
+  assert(Math.abs(early.angle)>0&&Math.abs(early.angle)<Math.PI/4&&!early.clear,'Gate starts smoothly and still blocks passage');
   await page.evaluate(()=>staffGateTest.tick(.275));await shot(id+'-opening');
-  const middle=await page.evaluate(id=>staffGateTest.snapshot(id),id);assert(Math.abs(middle.angle-Math.PI/4)<1e-8);
+  const middle=await page.evaluate(id=>staffGateTest.snapshot(id),id);assert(Math.abs(Math.abs(middle.angle)-Math.PI/4)<1e-8);
   await page.evaluate(()=>{staffGateTest.pause();staffGateTest.tick(2)});
   assert.equal((await page.evaluate(id=>staffGateTest.snapshot(id),id)).angle,middle.angle,'Pause freezes the swing');
   await page.evaluate(()=>{staffGateTest.resume();staffGateTest.tick(.55)});await shot(id+'-open');
-  const open=await page.evaluate(id=>staffGateTest.snapshot(id),id);assert(open.visible&&open.clear&&!open.locked&&open.angle===Math.PI/2);
+  const open=await page.evaluate(id=>staffGateTest.snapshot(id),id);assert(open.visible&&open.clear&&!open.locked&&Math.abs(open.angle)===Math.PI/2);
   assert.deepEqual(open.hinge,closed.hinge,'Hinge stays anchored');assert.deepEqual(open.frame,closed.frame,'Frame stays fixed');
   await page.evaluate(()=>staffGateTest.capture());assert.equal((await page.evaluate(id=>staffGateTest.snapshot(id),id)).angle,open.angle,'Capture retains the open pose');
   results[id]={closed,released,early,middle,open};
  }
  await page.evaluate(()=>{staffGateTest.begin();staffGateTest.release();staffGateTest.tick(.55)});
- for(const id of ['S1','S5'])assert(Math.abs((await page.evaluate(id=>staffGateTest.snapshot(id),id)).angle-Math.PI/4)<1e-8,'Basement release animates both gates');
+ for(const id of ['S1','S5'])assert(Math.abs(Math.abs((await page.evaluate(id=>staffGateTest.snapshot(id),id)).angle)-Math.PI/4)<1e-8,'Basement release animates both gates');
  await page.evaluate(()=>staffGateTest.tick(.55));
  await page.setViewportSize({width:390,height:844});await page.evaluate(()=>new Promise(resolve=>requestAnimationFrame(()=>requestAnimationFrame(resolve))));
- await page.evaluate(()=>staffGateTest.pose('S5'));await shot('S5-open-phone');
+ await page.evaluate(()=>staffGateTest.pose('S5',3.5));await shot('S5-open-phone');
  await page.evaluate(()=>{staffGateTest.begin();staffGateTest.bypass(true);staffGateTest.tick(1.1);staffGateTest.bypass(false);staffGateTest.tick(.55)});
- for(const id of ['S1','S5']){const closing=await page.evaluate(id=>staffGateTest.snapshot(id),id);assert(Math.abs(closing.angle-Math.PI/4)<1e-8&&!closing.locked,'Developer relock closes before restoring chains')}
+ for(const id of ['S1','S5']){const closing=await page.evaluate(id=>staffGateTest.snapshot(id),id);assert(Math.abs(Math.abs(closing.angle)-Math.PI/4)<1e-8&&!closing.locked,'Developer relock closes before restoring chains')}
  await page.evaluate(()=>staffGateTest.tick(.55));
  for(const id of ['S1','S5']){const closed=await page.evaluate(id=>staffGateTest.snapshot(id),id);assert(closed.locked&&!closed.clear&&closed.angle===0)}
  await page.evaluate(()=>staffGateTest.begin());assert((await page.evaluate(id=>staffGateTest.snapshot(id),'S1')).locked,'Restart restores a closed locked gate');

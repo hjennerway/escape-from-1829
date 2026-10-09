@@ -1,3 +1,94 @@
+## GitHub Pages and Windows CI repair (9 October 2026)
+
+The Pages run 37954613176 passed source checks, compilation and the compiled
+estate/fallback comparison, then exceeded its 20-minute job allowance during
+the timeline test. Checkout alone took about five minutes. The build job now
+allows 45 minutes; every existing validation step still runs before deployment.
+
+Windows run 37954613120 failed at model compilation because that step omitted
+the hosted-runner software-rendering opt-in. Both compilation and the packaged
+offline smoke step now set BROWSER_CI_SOFTWARE=1. The Electron smoke harness
+uses the browser launcher's shared rendering-mode gate, requiring CI=true as
+well, selects SwiftShader only in that mode, verifies the actual renderer and
+records it in its JSON receipt. Local tests still require a hardware GPU.
+
+The first local packaged smoke test then exposed four missing-file errors:
+prepare-web discarded compiled/interior when selecting only the aerial binary.
+Packaging now includes the interior manifest, every referenced section and its
+shared floor resources, excluding obsolete binaries. It checks the interior
+source fingerprint, required resources, safe filenames, byte lengths and hashes
+before staging, and checks both source fingerprints again after copying.
+Desktop unit coverage rejects missing, stale, incompatible, truncated and
+corrupted interior assets. Smoke errors now include their resource URL.
+
+Local validation uses NVIDIA GeForce RTX 3090 Ti / ANGLE Direct3D11. The GPU
+smoke, all nine desktop unit tests, both model compilers, the complete
+test:compiled suite (including every timeline stop and prepared/worker interior
+loading), Windows preview MSIX packaging and the rebuilt package's complete
+offline smoke test pass with no runtime errors. Staging contains exactly the
+current ten interior sections, four floor resources and their manifest.
+A non-rendering check covers all five combinations of the two CI flags;
+neither flag alone permits software rendering. Both workflow YAML files parse.
+Build and test logs use the github-actions prefix under Browser/artifacts and
+Desktop/artifacts.
+
+The required full npm test stops at the pre-existing test-jarman.mjs:11
+snapshot mismatch: 818,878 primitives versus 818,879 expected, with the same
+hash mismatch documented by the staff-gate work below. Its receipt is
+Browser/artifacts/github-actions-full-suite.log. Neither hosted workflow runs
+this snapshot test; the snapshot and modelling sources are not changed here,
+and the full browser suite is not reported as passing.
+
+This changes CI configuration, Windows asset staging, tests and build notes.
+Local browser models and the Windows preview package were regenerated for
+validation; modelling sources, Unity/Android and Blender exports are unchanged.
+Hosted CI still needs a run with these changes to confirm its complete result.
+
+## Animated upper staff gates (9 October 2026)
+
+Escape's S1 and S5 grilles now open on attached hinge axes instead of
+disappearing. Their leaves swing 90 degrees over the level landing with a
+1.1-second smoothstep; the chain and padlock clear on release. Fixed frames
+stay attached to the stairs. Runtime collision follows the rotating leaf,
+including its open resting position, with the existing 0.35-unit clearance.
+Someone approached by the swinging leaf can back out of its padding. S5's
+hinges and latch exchange posts so the open leaf clears the side approach
+beside the lower-flight railing; a physical walking regression covers that
+previously pinched approach.
+
+The game advances the animation with active gameplay time, so pause and
+notebook states retain its pose. Repeated synchronisation and capture do not
+restart the swing. Staff-key use opens one gate, basement release opens both,
+and developer relocking closes leaves before restoring their chains. Reduced
+motion applies the final pose immediately. Fresh/reconstructed scenes set
+their pose from the current progression state. Research/escape-interior/README.md
+records the swing direction and scope.
+
+The focused hardware check is Browser/test-staff-gate-animation-browser.mjs,
+included in test:escape and test:door-locks. Review captures and validation
+receipts are saved in Browser/artifacts/staff-gate-animation/. Existing escape,
+lock and developer checks now expect visible open leaves, and the accelerated
+route harness advances the same animation while walking.
+
+Validation passed for the focused progression, hardware-lock and gameplay
+checks, plus GPU browser checks for the staff animation, door locks, developer
+unlocking and complete escape progression. The latter physically walks both
+access branches and record wings, capture/recovery and the grounds ending.
+The local hardware launcher verified NVIDIA GeForce RTX 3090 Ti / ANGLE
+Direct3D11; reviewed desktop and portrait captures include both opening leaves
+and the clear west landing. Reduced-motion checks retain visible open leaves.
+
+The required full `npm test` stopped at the unrelated exterior snapshot in
+Browser/test-jarman.mjs:11: 818,878 outside primitives were found against an
+expected 818,879, with a corresponding hash mismatch. The complete output is
+Browser/artifacts/staff-gate-animation/full-suite.log; this is not a full-suite
+pass. The final gate sources separately pass their progression/lock checks and
+the full GPU escape walkthrough after the S5 hinge correction.
+
+Only browser Escape runtime fittings, gameplay integration, checks and notes
+change. These fittings are not part of the compiled architecture, so no model
+assets need regeneration. Unity/Android and Blender exports are unchanged.
+
 ## Level Main/admin yard and solid bay wall (9 October 2026)
 
 The narrow walking gallery left its original brick plinth beside the road and
@@ -15279,3 +15370,117 @@ browser compiled assets and Blender exports are not regenerated by this task.
 The Android APK is not rebuilt, and no Android-device run is claimed. The
 existing installable package remains the earlier 0.13.0 build; the refreshed
 source and Windows validation preview are local, uncommitted and unpublished.
+
+## Rebuilt Android APK after the source refresh — 9 October 2026
+
+The follow-up Android build packages the refreshed source as version 0.14.0 /
+code 14. `NativeAndroid/tools/build.ps1 -Target Android -SkipExport` passes
+the native export checks, Unity scene/vertex-alpha validation and Android build.
+The existing model export is current and is reused. The earlier Windows smoke
+remains applicable: a source hash comparison confirms that the validated
+importer/shader/check files differ only by the version bump, and the Android
+import has the same model fingerprint and asset counts. No browser models or
+gameplay sources change during this packaging step.
+
+`NativeAndroid/out/escape-1829-native.apk` is 371,693,604 bytes, with SHA-256
+`1D96341BE4442CDFFD3E80EB327473802C26844BB41FDF4A283E3E7B77B68BC7`.
+APK verification passes for version 0.14.0 / code 14, ARM64 IL2CPP, minimum
+API 26, target API 36 and all eight licence notices. Its verified v2 signature
+uses the same certificate as the previous releases, allowing an in-place update.
+The prior 0.13.0 APK is preserved as `out/escape-1829-native-v0.13.apk`.
+This supersedes the preceding source-only note that no APK had been rebuilt.
+
+The source comparison, build and package receipts are
+`NativeAndroid/artifacts/source-refresh-apk-source-check.json`,
+`source-refresh-android.log`, `unity-android.log`,
+`source-refresh-apk-check.log` and `source-refresh-apk-verification.json`.
+The package is local and unpublished. No Android-device installation or
+on-device performance test was performed.
+
+
+## Haunted apparition and removed chest sign — 9 October 2026
+
+The browser ghost now uses `Browser/dist/asylum-ghost.mjs`: a gaunt face with
+sunken, clouded eyes, a subtly parted mouth and a continuous human jaw;
+matted hair falling across the face; long crooked fingers and dark nails; and a stained,
+pleated shroud with torn hems and translucent hanging scraps. The chest board
+and its “Deva ghost” lettering are removed. A restrained local green light
+keeps the figure readable without the previous bright glow.
+
+Child joints animate the suspended body, tilting head, hands and cloth scraps.
+Navigation owns the root position and heading, including stairs and floor
+visibility. Pursuit speed, capture distance, torch slowing and room searching
+are unchanged. The animation shares gameplay pause, head-start and retry
+behavior. Rigid details merge per material and joint: 27 meshes and 15,749
+triangles, with one point light and no downloaded textures or character assets.
+
+`npm run test:ghost` runs the geometry/animation checks, real game-loop checks
+and hardware browser captures. `test-asylum-ghost.mjs` checks floating clearance,
+finite geometry, rendering budget, navigation-root isolation, frame-rate
+independence and reset. `test-game.mjs` additionally checks active ghost
+animation and the existing hold-E/help/artwork/head-start freezes. The visual
+check prepares the corridor before capturing torch-on, torch-off, close-face
+and phone views under `Browser/artifacts/asylum-ghost/`.
+
+The final human-faced model passes the geometry and game-loop checks. Hardware
+visual validation passes on NVIDIA GeForce RTX 3090 Ti / ANGLE Direct3D11,
+including torch-on/off, close and portrait captures, frozen pause animation and
+retry reset; no page or shader errors were reported.
+
+The required `npm test` run passes the character and gameplay checks, then stops
+at the previously documented `test-jarman.mjs:11` protected-estate snapshot
+mismatch (818,878 primitives versus 818,879 expected). The full suite is not
+reported as passing. Its output is `Browser/artifacts/asylum-ghost/full-suite.log`.
+
+This changes browser runtime characters only. The compiled estate and interior
+sections do not include these characters, so their assets need no rebuild.
+Unity/Android and Blender sources and exports are unchanged by this work.
+
+## Fleeting corridor figure — 9 October 2026
+
+Escape and Explore now share `corridor-sightings.mjs`, a silent, featureless
+black silhouette that occasionally runs across a distant interior junction.
+It is separate from pursuers, objectives, notebook entries and collisions.
+Following the owner's visual feedback, `corridor-figure.mjs` uses a shaped
+jacket and trouser profile, sloped shoulders, a continuous jaw/head outline,
+shoes, bent elbows and articulated knees instead of straight capsule limbs.
+A two-bone leg solve keeps planted shoes on the floor as the figure runs;
+its upper body leans forward, with no facial features or clothing highlights.
+The first opportunity follows 45–90 seconds of active corridor time; subsequent
+sightings are separated by 85–180 seconds, with irregular retries when no suitable
+view exists. Available alternative junctions are preferred over the previous one.
+
+Crossings come from the actual plan's intersecting corridor segments. Every
+point must clear walls, stair shafts, doors and furniture; the player must be
+indoors on the same floor, looking obliquely at the crossing, 18–42 metres away.
+The route runs across the sightline, with both ends hidden behind masonry.
+The controller also checks that rooms along the route and sightline have loaded.
+At 8–10 metres per second the whole crossing lasts less than a second, with only
+its middle exposed. The figure has no face, eye highlights, sound or light.
+Its route never follows the player. Approaching within 18 metres, changing floor,
+using stairs, pausing, opening artwork/notebook or a long frame gap cancels it;
+restarting Escape resets its initial delay.
+
+This is a Browser runtime addition; the existing architecture and furniture
+models are unchanged. Both compiled manifests still match their source hashes,
+so no generated model rebuild is needed. Unity/Android, Blender and packaged
+exports are not changed or regenerated by this feature.
+
+The revised figure passes `npm run test:sightings`, the existing game-loop and
+walking/interior logic checks, and the hardware GPU policy check. Visual tests
+use the actual furnished Escape and Explore scenes, ground/first floors and
+1200×800 / 390×844 viewports. The captured silhouette is exposed for about
+0.4 seconds, with no differing pixels at its hidden start or completed end.
+There are no page or rendering errors. Screenshots, per-frame pixel checks and
+the focused test log are in `Browser/artifacts/corridor-sightings/`.
+The renderer is NVIDIA GeForce RTX 3090 Ti through ANGLE Direct3D11. The browser
+check requires local-server access outside this environment's network sandbox;
+no software-rendering fallback is used.
+
+The required `npm test` run passes through the interior, game, walking and
+preceding estate checks, then exits 1 at the already documented
+`test-jarman.mjs` protected-estate snapshot mismatch (818,878 primitives versus
+818,879 expected). That check builds `createEscapeExterior`; it does not import
+or construct either new corridor module. The complete invocation is retained in
+`Browser/artifacts/corridor-sightings/full-suite.log` and is not reported as
+passing. No unrelated snapshot fixtures are changed.

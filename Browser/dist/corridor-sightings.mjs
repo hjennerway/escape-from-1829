@@ -1,5 +1,6 @@
 import {flatWalkable,segmentDistance} from './asylum-layout.mjs';
 import {doorRectangle} from './asylum-doors.mjs';
+import {createCorridorFigure} from './corridor-figure.mjs';
 
 export const SIGHTING_DISTANCE={min:18,max:42};
 const cross=(a,b)=>a[0]*b[1]-a[1]*b[0];
@@ -40,25 +41,15 @@ function clearLine(floor,from,to,{doors=true}={}){
 }
 
 export function createCorridorSightings(THREE,scene,floors,{random=Math.random,isReady=()=>true}={}){
- const routes=buildCorridorCrossings(floors),figure=new THREE.Group(),body=new THREE.Group();
- figure.name='Distant corridor silhouette';figure.visible=false;figure.add(body);scene.add(figure);
- // An unlit, featureless human outline: no face, reflective eyes or light.
- const material=new THREE.MeshBasicMaterial({color:0x020303});
- const sphere=new THREE.SphereGeometry(1,8,6),limb=new THREE.CapsuleGeometry(.085,.48,2,6);
- function shape(geometry,position,scale,parent=body){const mesh=new THREE.Mesh(geometry,material);mesh.position.set(...position);mesh.scale.set(...scale);parent.add(mesh);return mesh;}
- shape(sphere,[0,1.25,0],[.23,.38,.16]);shape(sphere,[0,1.72,.04],[.13,.17,.13]);
- const legs=[],arms=[];
- for(const side of [-1,1]){
-  const leg=new THREE.Group();leg.position.set(side*.12,.85,0);body.add(leg);shape(limb,[0,-.33,0],[1,1.15,1],leg);legs.push(leg);
-  const arm=new THREE.Group();arm.position.set(side*.25,1.48,0);body.add(arm);shape(limb,[0,-.26,.07],[.8,.9,.8],arm);arms.push(arm);
- }
+ const routes=buildCorridorCrossings(floors),rig=createCorridorFigure(THREE),figure=rig.model;
+ figure.visible=false;scene.add(figure);
  const projected=new THREE.Vector3();let remaining=0,active=null,lastRoute=null;
  const delay=(first=false)=>(first?45:85)+random()*(first?45:95);
  function reset(){active=null;lastRoute=null;figure.visible=false;remaining=delay(true);}
  function end(){active=null;figure.visible=false;remaining=delay();}
  function eligible(route,actor,camera){
   const floor=floors[actor.floor],from=[actor.x,actor.z];
-  if(route.floor!==actor.floor||route===lastRoute)return false;
+  if(route.floor!==actor.floor)return false;
   if(segmentDistance(actor.x,actor.z,route.a,route.b)<SIGHTING_DISTANCE.min||Math.max(...[route.a,route.b].map(p=>Math.hypot(p[0]-actor.x,p[1]-actor.z)))>SIGHTING_DISTANCE.max)return false;
   const dx=route.center[0]-actor.x,dz=route.center[1]-actor.z,distance=Math.hypot(dx,dz);
   if(Math.abs((dx*route.direction[0]+dz*route.direction[1])/distance)>.35)return false;
@@ -67,7 +58,7 @@ export function createCorridorSightings(THREE,scene,floors,{random=Math.random,i
   if(!clearLine(floor,from,route.center))return false;
   // The full outline starts and ends behind masonry, never visibly popping
   // into existence at the middle of an open passage or through a glass pane.
-  if(![route.a,route.b].every(p=>[-.45,.45].every(x=>[-.45,.45].every(z=>!clearLine(floor,from,[p[0]+x,p[1]+z],{doors:false})))))return false;
+  if(![route.a,route.b].every(p=>[-.75,.75].every(x=>[-.75,.75].every(z=>!clearLine(floor,from,[p[0]+x,p[1]+z],{doors:false})))))return false;
   if(!samples(route).every(([x,z])=>isReady({x,z,floor:actor.floor})&&flatWalkable(floor,x,z,.28)))return false;
   for(let t=0;t<=1;t+=.1)if(!isReady({x:actor.x+dx*t,z:actor.z+dz*t,floor:actor.floor}))return false;
   return true;
@@ -82,8 +73,7 @@ export function createCorridorSightings(THREE,scene,floors,{random=Math.random,i
    const t=direction>0?active.time/duration:1-active.time/duration;
    figure.position.set(route.a[0]+(route.b[0]-route.a[0])*t,floor.elevation,route.a[1]+(route.b[1]-route.a[1])*t);
    figure.rotation.y=Math.atan2(route.direction[0]*direction,route.direction[1]*direction);
-   const stride=Math.sin(active.time*24);body.position.y=.035+Math.abs(stride)*.035;body.rotation.x=.12;
-   legs.forEach((leg,i)=>leg.rotation.x=stride*(i?-.7:.7));arms.forEach((arm,i)=>arm.rotation.x=stride*(i?.55:-.55)-.25);
+   rig.pose(active.time);
    return;
   }
   if(!inCorridor(floor,actor.x,actor.z))return;
@@ -91,11 +81,12 @@ export function createCorridorSightings(THREE,scene,floors,{random=Math.random,i
   camera.updateMatrixWorld(true);
   const candidates=routes.filter(route=>eligible(route,actor,camera));
   if(!candidates.length){remaining=3+random()*5;return;}
-  const route=candidates[Math.min(candidates.length-1,Math.floor(random()*candidates.length))],direction=random()<.5?-1:1;
+  const alternatives=candidates.filter(route=>route!==lastRoute),choices=alternatives.length?alternatives:candidates;
+  const route=choices[Math.min(choices.length-1,Math.floor(random()*choices.length))],direction=random()<.5?-1:1;
   active={route,direction,time:0,duration:route.length/(8+random()*2)};lastRoute=route;
-  const start=direction>0?route.a:route.b;figure.position.set(start[0],floor.elevation,start[1]);figure.visible=true;
+  const start=direction>0?route.a:route.b;figure.position.set(start[0],floor.elevation,start[1]);rig.pose(0);figure.visible=true;
  }
  reset();
- return {update,reset,dispose(){figure.removeFromParent();sphere.dispose();limb.dispose();material.dispose();},
+ return {update,reset,dispose:rig.dispose,
   get active(){return active!==null;}};
 }

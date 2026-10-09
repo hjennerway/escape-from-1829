@@ -8,9 +8,10 @@ const destination=new URL('./artifacts/asylum-ghost/',import.meta.url);await mkd
 const {server,base}=await startTestServer();let browser;const errors=[];
 const instrument=`
 window.ghostTest={get ready(){return ready},start,update,
-stage({torchOn=true,distance=3.6}={}){
+async stage({torchOn=true,distance=3.6}={}){
  start();arrivalCutscene.update(3);state='paused';
  Object.assign(player,{x:35.8,z:-12,y:0,floor:0,outside:false,stair:null});showFloor();
+ await interiorLoader.prepare(player);
  const ghost=enemies.find(e=>e.type===2);
  enemies.forEach(e=>{e.mesh.visible=e===ghost;});
  Object.assign(ghost,{x:35.8,z:player.z+distance,y:0,floor:0});

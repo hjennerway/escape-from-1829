@@ -56,6 +56,8 @@ jobs:
       - name: Check shared model source
         run: npm run test:models --prefix Browser
       - name: Build shared web assets
+        env:
+          BROWSER_CI_SOFTWARE: '1'
         run: npm run build:models --prefix Browser
       - name: Check compiled scene and timeline
         env:
@@ -79,6 +81,8 @@ jobs:
           if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
       - name: Test packaged game offline
         working-directory: Desktop
+        env:
+          BROWSER_CI_SOFTWARE: '1'
         run: npm run test:desktop -- --packaged
       - name: Upload runnable Windows folder
         uses: actions/upload-artifact@v4

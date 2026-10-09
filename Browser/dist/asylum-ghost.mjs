@@ -8,9 +8,9 @@ export function createAsylumGhost(THREE){
  const body=joint('Suspended shroud',root,[0,0,0]);
  const mat=(color,extra={})=>new THREE.MeshStandardMaterial({color,roughness:1,...extra});
  const cloth=mat(0xffffff,{vertexColors:true,side:THREE.DoubleSide,emissive:0x18241f,emissiveIntensity:.16});
- const skin=mat(0x8f9c89,{emissive:0x38483e,emissiveIntensity:.16});
- const bone=mat(0xb6bba1),dark=mat(0x080d0c),hair=mat(0x151c19);
- const eye=new THREE.MeshBasicMaterial({color:0xcdecd5,toneMapped:false});
+ const skin=mat(0x6b786b,{emissive:0x26372c,emissiveIntensity:.12});
+ const bone=mat(0x9b9f8a),dark=mat(0x030605),hair=mat(0x080e0b);
+ const eye=mat(0x82938a),eyeShade=mat(0x26312b),lip=mat(0x414c42);
  const mist=mat(0x718d81,{transparent:true,opacity:.13,depthWrite:false,side:THREE.DoubleSide});
  function part(name,geometry,material,parent,p=[0,0,0],scale){
   const o=new THREE.Mesh(geometry,material);o.name=name;o.position.set(...p);if(scale)o.scale.set(...scale);parent.add(o);return o;
@@ -29,7 +29,7 @@ export function createAsylumGhost(THREE){
    const rag=j===0?.075+.15*(.5+.5*Math.sin(a*17+phase))**3:0;
    const r=1+fold*.085;
    positions.push(Math.sin(a)*w*r,y+rag,Math.cos(a)*d*r+z);
-   const shade=.34+.2*(fold*.5+.5)+.06*Math.sin(a*7+j*1.7);
+   const shade=(.045+.065*(fold*.5+.5)+.012*Math.sin(a*7+j*1.7))*(.38+.62*j/(rings.length-1));
    tint.setRGB(shade*.83,shade*.94,shade*.85);colors.push(tint.r,tint.g,tint.b);uv.push(i/n,j/(rings.length-1));
    if(j<rings.length-1&&i<n){const k=j*(n+1)+i;indices.push(k,k+1,k+n+1,k+1,k+n+2,k+n+1);}
   }
@@ -47,32 +47,35 @@ export function createAsylumGhost(THREE){
  }
  cord('Exposed sinewy neck',[[0,1.58,-.01],[-.02,1.76,.02],[.015,1.86,.05]],.059,skin,body);
  for(const s of [-1,1]){
-  cord('Neck tendon',[[s*.055,1.61,.065],[s*.038,1.77,.08],[s*.06,1.88,.082]],.011,bone,body);
-  cord('Angular collarbone',[[s*.02,1.58,.13],[s*.13,1.60,.137],[s*.26,1.55,.095]],.015,skin,body);
+  cord('Neck tendon',[[s*.055,1.61,.065],[s*.038,1.77,.08],[s*.06,1.88,.082]],.006,skin,body);
+  cord('Collarbone',[[s*.02,1.58,.13],[s*.13,1.60,.137],[s*.26,1.55,.095]],.010,skin,body);
  }
  const head=joint('Lolling head',body,[.016,1.94,.065]);
- oval('Gaunt cranium',[0,.031,-.005],[.151,.204,.126],skin,head);
- oval('Sunken lower face',[0,-.105,.018],[.105,.13,.083],skin,head);
- oval('Open mouth cavity',[0,-.119,.101],[.063,.102,.032],dark,head);
- for(const s of [-1,1]){
-  const socket=oval('Hollow eye socket',[s*.068,.035,.101],[.052,.043,.038],dark,head);socket.rotation.z=s*.19;
-  oval('Cold pinprick eye',[s*.068,.03,.139],[.009,.012,.004],eye,head);
-  const brow=oval('Heavy orbital ridge',[s*.069,.081,.093],[.065,.019,.033],skin,head);brow.rotation.z=s*.20;
-  const cheek=oval('Sharp cheekbone',[s*.109,-.033,.077],[.036,.033,.05],bone,head);cheek.rotation.z=-s*.45;
-  cord('Hanging jaw rim',[[s*.115,-.064,.03],[s*.081,-.197,.047],[s*.027,-.226,.097]],.017,skin,head);
-  oval('Nostril void',[s*.017,-.036,.14],[.012,.021,.01],dark,head);
-  for(let i=0;i<3;i++){
-   const tooth=part('Uneven exposed tooth',new THREE.ConeGeometry(.009,.024+i%2*.013,5),bone,head,[s*(.012+i*.016),-.046,.133]);tooth.rotation.z=Math.PI+s*.08;
-   part('Lower broken tooth',new THREE.ConeGeometry(.007,.019,5),bone,head,[s*(.012+i*.012),-.202,.124]);
-  }
-  for(let i=0;i<3;i++)cord('Tear stain',[[s*(.059+i*.016),.003,.131],[s*(.065+i*.019),-.035,.117],[s*(.068+i*.018),-.072-i*.014,.091]],.0025,hair,head);
+ // A continuous, tapering human face rather than exposed skull/jaw pieces.
+ const face=new THREE.SphereGeometry(1,32,24),points=face.attributes.position;
+ for(let i=0;i<points.count;i++){
+  const x=points.getX(i),y=points.getY(i),z=points.getZ(i);
+  points.setXYZ(i,x*.145*(y<0?1+y*.30:1),y*.227-.012,z*.119+(z>0&&y<0?.008:0));
  }
- cord('Nose bridge',[[0,.073,.114],[0,-.015,.156],[.013,-.033,.151]],.014,skin,head);
+ face.computeVertexNormals();part('Pallid human face',face,skin,head);
+ oval('Quietly parted mouth',[0,-.116,.117],[.038,.008,.005],dark,head);
+ cord('Lower lip',[[-.034,-.12,.119],[0,-.127,.122],[.034,-.12,.119]],.004,lip,head);
+ for(const s of [-1,1]){
+  const socket=oval('Sunken eye shadow',[s*.058,.031,.098],[.039,.023,.014],eyeShade,head);socket.rotation.z=s*.10;
+  oval('Clouded eye',[s*.058,.034,.112],[.022,.009,.005],eye,head);
+  oval('Dark fixed pupil',[s*.058,.034,.117],[.006,.008,.002],dark,head);
+  const brow=oval('Tired brow',[s*.059,.060,.096],[.042,.009,.016],skin,head);brow.rotation.z=s*.06;
+  cord('Lower eyelid',[[s*.027,.023,.110],[s*.057,.017,.112],[s*.089,.023,.098]],.004,skin,head);
+  oval('Small nostril',[s*.014,-.052,.134],[.006,.003,.003],eyeShade,head);
+ }
+ oval('Nose bridge',[0,-.008,.119],[.017,.054,.026],skin,head);
+ oval('Nose tip',[0,-.042,.137],[.023,.018,.019],skin,head);
  // Matted strands frame the face and break up the smooth skull silhouette.
  for(let i=0;i<17;i++){
   const a=.70+i/16*(Math.PI*2-1.4),x=Math.sin(a),z=Math.cos(a);
   cord('Matted hanging hair',[[x*.07,.188,z*.066],[x*.146,.08,z*.12],[x*(.16+i%3*.007),-.11,z*.126-.015],[x*.13,-.31-i%4*.039,z*.14-.035]],.008+i%3*.003,hair,head);
  }
+ for(let i=0;i<4;i++)cord('Hair across face',[[.055+i*.011,.189,.062],[.035+i*.017,.101,.114],[.038+i*.021,-.015,.127],[.064+i*.016,-.20-i*.026,.095]],.006+i*.001,hair,head);
  const arms=[];
  for(const s of [-1,1]){
   const shoulder=joint('Drooping shoulder',body,[s*.255,1.54,-.015]);
@@ -90,7 +93,7 @@ export function createAsylumGhost(THREE){
   cord('Hooked thumb',[[s*.042,-.016,.01],[s*.096,-.081,.042],[s*.081,-.14,.086]],.013,skin,hand);
   arms.push({shoulder,hand,side:s});
  }
- const light=new THREE.PointLight(0x81b99f,2.2,4);light.position.set(0,1.45,.18);root.add(light);
+ const light=new THREE.PointLight(0x81b99f,.45,4);light.position.set(0,1.35,.45);root.add(light);
  // Merge rigid parts per joint/material to keep this detail inexpensive.
  function batch(parent){
   const groups=new Map();

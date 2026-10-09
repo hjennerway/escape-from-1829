@@ -4,7 +4,7 @@ import {fileURLToPath} from 'node:url';
 import {startTestServer} from './test-support/server.mjs';
 import {launchHardwareBrowser} from './test-support/hardware-browser.mjs';
 
-const destination=new URL('./artifacts/developer-doors/',import.meta.url);
+const destination=new URL(process.env.ESCAPE_ARTIFACT_DIR??'./artifacts/developer-doors/',import.meta.url);
 await mkdir(destination,{recursive:true});
 const {server,base}=await startTestServer();
 const source=await readFile(new URL('./dist/game.mjs',import.meta.url),'utf8');

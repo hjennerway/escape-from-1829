@@ -187,7 +187,10 @@ export function createEscapeWorld(THREE,floors,groups,progress,{reducedMotion=fa
   box(frame,[STAIR_WIDTH+.09,.075,.09],[0,height-.0375,0],metal);
   // Swing back over the level landing: opening into the flight would cut the
   // bottom rail through its rising treads. Keep the existing hinge pins fixed.
-  const hinge=new THREE.Group();hinge.name='Staff stair gate hinge';hinge.position.set(-half+.045,0,-.055);group.add(hinge);
+  // S5 is approached beside the lower flight: hang it from the opposite post
+  // so its open leaf cannot pinch that approach against the existing railing.
+  const hingeSide=stair.id==='S5'?1:-1,openAngle=-hingeSide*Math.PI/2;
+  const hinge=new THREE.Group();hinge.name='Staff stair gate hinge';hinge.position.set(hingeSide*(half-.045),0,-.055);group.add(hinge);
   const leaf=new THREE.Group();leaf.name='Staff stair grille leaf';leaf.position.copy(hinge.position).negate();hinge.add(leaf);
   const leafWidth=STAIR_WIDTH-.14,bottom=.07,top=height-.11;
   for(const side of [-1,1])box(leaf,[.055,top-bottom,.055],[side*(leafWidth/2-.0275),(top+bottom)/2,0],metal);
@@ -195,20 +198,20 @@ export function createEscapeWorld(THREE,floors,groups,progress,{reducedMotion=fa
   for(let k=-4;k<=4;k++)pin(leaf,.013,top-bottom-.06,[k*.12,(top+bottom)/2,0]);
   // Three hinge knuckles bridge the small working gap between post and leaf.
   for(const level of [.35,1.15,2.02]){
-   pin(frame,.025,.14,[-half+.045,level,-.055]);
-   box(frame,[.085,.09,.035],[-half+.015,level,-.055],metal);
-   box(leaf,[.13,.065,.04],[-leafWidth/2+.04,level,-.043],metal);
+   pin(frame,.025,.14,[hingeSide*(half-.045),level,-.055]);
+   box(frame,[.085,.09,.035],[hingeSide*(half-.015),level,-.055],metal);
+   box(leaf,[.13,.065,.04],[hingeSide*(leafWidth/2-.04),level,-.043],metal);
   }
-  box(frame,[.055,.17,.1],[half-.025,1.3,-.015],metal);
-  box(leaf,[.12,.18,.085],[leafWidth/2-.06,1.3,-.01],metal);
-  box(leaf,[.16,.028,.028],[leafWidth/2-.09,1.3,-.064],brass);
+  box(frame,[.055,.17,.1],[-hingeSide*(half-.025),1.3,-.015],metal);
+  box(leaf,[.12,.18,.085],[-hingeSide*(leafWidth/2-.06),1.3,-.01],metal);
+  box(leaf,[.16,.028,.028],[-hingeSide*(leafWidth/2-.09),1.3,-.064],brass);
   text(leaf,'STAFF OFFICES',`Stair key required. Porter’s record + brass outside key: second-floor room ${progress.roomNumber(3,run.office)}, ${run.office==='R41'?'above Reception':'beside the Library'}.`,.72,.32);
   const lock=addDoorLock(leaf,{id:stair.id,width:leafWidth,height:.94,depth:.055});
   for(const sx of [-.32,.32])for(const sy of [1.23,1.47]){
    const rivet=pin(leaf,.011,.012,[sx,sy,-.043],brass);rivet.rotation.x=Math.PI/2;
   }
   groups[1].add(group);
-  gates.push({id:stair.id,x,z,y,dx,dz,height,group,leaf,hinge,lock,leafWidth,opening:0,target:0});
+  gates.push({id:stair.id,x,z,y,dx,dz,height,group,leaf,hinge,lock,leafWidth,openAngle,opening:0,target:0});
  }
  function near(actor){
   if(actor.outside)return null;
@@ -229,7 +232,7 @@ export function createEscapeWorld(THREE,floors,groups,progress,{reducedMotion=fa
     const z=g.hinge.position.z-s*(edge-g.hinge.position.x)-c*g.hinge.position.z;
     return [g.x+g.dz*x+g.dx*z,g.z-g.dx*x+g.dz*z];
    });
-   const [a,b]=ends,from=[actor.x,actor.z],to=[next.x,next.z],radius=.32;
+   const [a,b]=ends,from=[actor.x,actor.z],to=[next.x,next.z],radius=.35;
    const side=p=>(p[0]-a[0])*(b[1]-a[1])-(p[1]-a[1])*(b[0]-a[0]);
    const before=segmentDistance(...from,a,b),after=segmentDistance(...to,a,b);
    // A swinging leaf can approach a stationary player; always let them back
@@ -241,7 +244,7 @@ export function createEscapeWorld(THREE,floors,groups,progress,{reducedMotion=fa
    return segmentDistance(x,z,a,b)>radius;
   });
  }
- function poseGate(g){const t=g.opening;g.hinge.rotation.y=t*t*(3-2*t)*Math.PI/2;g.lock.visible=!g.target&&t===0;}
+ function poseGate(g){const t=g.opening;g.hinge.rotation.y=t*t*(3-2*t)*g.openAngle;g.lock.visible=!g.target&&t===0;}
  function sync({snapGates=false}={}){
   for(const lock of doorLocks)lock.group.visible=progress.doorLocked(lock.exit);
   for(const g of gates){g.target=progress.stairOpen(g.id)?1:0;if(snapGates||reducedMotion)g.opening=g.target;poseGate(g);}

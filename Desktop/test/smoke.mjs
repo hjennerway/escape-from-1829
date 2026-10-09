@@ -6,6 +6,7 @@ import { createRequire } from 'node:module';
 import { chromium } from '../../Browser/node_modules/playwright/index.mjs';
 import { desktop, prepareWeb } from '../scripts/prepare-web.mjs';
 import { isSoftwareRenderer } from '../../Browser/dist/tree-rendering.mjs';
+import { browserUsesHardware } from '../../Browser/test-support/hardware-browser.mjs';
 
 const packaged = process.argv.includes('--packaged');
 const artifacts = join(desktop, 'artifacts');
@@ -20,7 +21,10 @@ delete environment.ELECTRON_RUN_AS_NODE;
 delete environment.NODE_OPTIONS;
 const child = spawn(executable, [
   ...(packaged ? [] : [desktop]), '--remote-debugging-port=0', '--user-data-dir=' + profile,
-  '--enable-gpu', '--disable-software-rasterizer', '--force-device-scale-factor=1',
+  ...(browserUsesHardware
+    ? ['--enable-gpu', '--disable-software-rasterizer']
+    : ['--use-angle=swiftshader', '--enable-unsafe-swiftshader']),
+  '--force-device-scale-factor=1',
   // Match Playwright's browser defaults when launching Electron ourselves.
   '--disable-background-timer-throttling', '--disable-backgrounding-occluded-windows',
   '--disable-renderer-backgrounding',
@@ -77,7 +81,9 @@ try {
     if (!checkingOfflineConsole) return;
     // The existing game paints fallback artwork when optional online archive images fail.
     if ((message.type() === 'error' && !message.text().includes('net::ERR_BLOCKED_BY_CLIENT')) ||
-      message.text().startsWith('Precompiled estate unavailable')) errors.push(message.text());
+      message.text().startsWith('Precompiled estate unavailable')) {
+      errors.push(message.text() + (message.location().url ? ' (' + message.location().url + ')' : ''));
+    }
   });
   // Keep screenshot coordinates independent of the runner's display/DPI.
   await page.setViewportSize({ width: 960, height: 640 });
@@ -93,9 +99,14 @@ try {
     gl?.getExtension('WEBGL_lose_context')?.loseContext();
     return name;
   });
-  assert(gpuRenderer && !isSoftwareRenderer({ getExtension: () => null, getParameter: () => gpuRenderer }),
-    'Desktop smoke test requires verified GPU rendering: ' + gpuRenderer);
-  console.log('Desktop hardware GPU: ' + gpuRenderer);
+  assert(gpuRenderer, 'Desktop smoke test requires a working WebGL renderer');
+  if (browserUsesHardware) {
+    assert(!isSoftwareRenderer({ getExtension: () => null, getParameter: () => gpuRenderer }),
+      'Desktop smoke test requires verified GPU rendering: ' + gpuRenderer);
+  } else {
+    assert.match(gpuRenderer, /swiftshader/i, 'Hosted CI must use its explicitly configured renderer');
+  }
+  console.log(`Desktop ${browserUsesHardware ? 'hardware GPU' : 'CI software renderer'}: ${gpuRenderer}`);
   viewport = await page.evaluate(() => ({ width: innerWidth, height: innerHeight, pixelRatio: devicePixelRatio }));
   assert.deepEqual(viewport, { width: 960, height: 640, pixelRatio: 1 });
   await page.goto('escape1829://game/', { waitUntil: 'domcontentloaded' });
@@ -175,7 +186,7 @@ try {
     ['www.whateversleft.co.uk', 'basedinchurton.co.uk'].includes(new URL(request.url).hostname)),
   'Only the existing optional archive wall images may attempt online access');
   assert.deepEqual(errors, [], 'All game modes should load without runtime errors');
-  await writeFile(join(artifacts, label + '-smoke.json'), JSON.stringify({ passed: true, packaged, offline: true, viewport, navigation, errors, externalRequests, model }, null, 2));
+  await writeFile(join(artifacts, label + '-smoke.json'), JSON.stringify({ passed: true, packaged, offline: true, gpuRenderer, hardware: browserUsesHardware, viewport, navigation, errors, externalRequests, model }, null, 2));
   console.log(`PASS: ${label} Windows game, offline assets, isolated renderer, storage, game/map, compiled aerial timeline, walking and return navigation.`);
 } catch (error) {
   console.error('Desktop smoke failed:', stage, error.message, 'URL:', page?.url(), 'Renderer errors:', errors);

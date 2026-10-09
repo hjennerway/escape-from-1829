@@ -177,7 +177,7 @@ for(let seed=0;seed<8;seed++){
   assert(world.allowMove({...from,y:0},{...to,y:0}),'Lower storey stays clear');
   progress.interact('staff-key');progress.openStair(gate.id);world.sync();
   assert(!world.allowMove(from,to),'Released gate still blocks until its leaf swings clear');
-  world.update(0,.55);assert(Math.abs(gate.hinge.rotation.y-Math.PI/4)<1e-8,'Gate swings through a visible intermediate pose');
+  world.update(0,.55);assert(Math.abs(gate.hinge.rotation.y-gate.openAngle/2)<1e-8,'Gate swings through a visible intermediate pose');
   const paused=gate.hinge.rotation.y;world.sync();world.update(10,0);assert.equal(gate.hinge.rotation.y,paused,'Sync and paused time do not advance the swing');
   world.update(0,.55);assert(world.allowMove(from,to),'Open gate clears the stair route');
   assert(gate.leaf.visible&&!gate.lock.visible,'Open leaf remains visible with its lock released');
@@ -185,13 +185,20 @@ for(let seed=0;seed<8;seed++){
   const centre=gate.leaf.getWorldPosition(new THREE.Vector3());
   const left={...from,x:centre.x+gate.dz*.6,z:centre.z-gate.dx*.6},right={...from,x:centre.x-gate.dz*.6,z:centre.z+gate.dx*.6};
   assert(!world.allowMove(left,right),'Open leaf still blocks walking through its bars beside the landing');
+  if(gate.id==='S5'){
+   // The lower flight's railing leaves no detour around a leaf hung from the
+   // other post. Exercise the actual side approach, rather than only its axis.
+   const actor={x:gate.x+.95,z:gate.z+.42,y:gate.y,floor:1,stair:null},jump=createAsylumJump(floors,{allowMove:world.allowMove});
+   for(let i=0;i<38;i++)jump.update(actor,-.025,0,.01);
+   assert(Math.abs(actor.x-gate.x)<.01,'S5 remains reachable from beside the lower flight with its leaf open');
+  }
  }
  const release=world.anchor(2,'B5');assert(walkable(floors[2],release.x,release.z,.5),'Capture cell has a safe pose');
  world.dispose();
 }
 const stillProgress=createEscapeProgress({seed:1829,floors}),still=createEscapeWorld(THREE,floors,floors.map(()=>new THREE.Group()),stillProgress,{reducedMotion:true});
 still.update(0);const scale=still.nodes[0].beacon.scale.toArray();still.update(.7);assert.deepEqual(still.nodes[0].beacon.scale.toArray(),scale,'Reduced motion keeps a strong steady glow');
-stillProgress.interact('release');still.sync();assert(still.gates.every(g=>g.leaf.visible&&g.hinge.rotation.y===Math.PI/2),'Reduced motion shows the open leaf immediately');still.dispose();
+stillProgress.interact('release');still.sync();assert(still.gates.every(g=>g.leaf.visible&&g.hinge.rotation.y===g.openAngle),'Reduced motion shows the open leaf immediately');still.dispose();
 {
  const progress=createEscapeProgress({seed:1829,floors}),world=createEscapeWorld(THREE,floors,floors.map(()=>new THREE.Group()),progress);
  for(const unlocked of [true,false,true]){

@@ -4,7 +4,7 @@ import {fileURLToPath} from 'node:url';
 import {startTestServer} from './test-support/server.mjs';
 import {launchHardwareBrowser} from './test-support/hardware-browser.mjs';
 
-const destination=new URL('./artifacts/door-locks-reference/',import.meta.url);await mkdir(destination,{recursive:true});
+const destination=new URL(process.env.ESCAPE_ARTIFACT_DIR??'./artifacts/door-locks-reference/',import.meta.url);await mkdir(destination,{recursive:true});
 const {server,base}=await startTestServer();
 const instrument=`
 window.lockTest={get ready(){return ready&&(interiorLoader?.complete??true)},get world(){return escapeWorld},get progress(){return escapeProgress},get grounds(){return escapeGrounds},

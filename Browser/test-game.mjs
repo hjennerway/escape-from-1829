@@ -312,14 +312,18 @@ Object.assign(t.enemies.find(e=>e.type===2),{x:50,z:17.5,floor:0,path:[],memory:
 Object.assign(t.player,{x:10,z:50,floor:0});
 Object.assign(security,{x:70,z:30,floor:0,path:[{x:70,z:40,floor:0}],target:{x:70,z:40,floor:0},memory:0,rethink:10});
 const initialGuardPose=guardPose(),startZ=security.z;
+const ghostRig=t.enemies.find(e=>e.type===2).mesh.userData.ghostRig,initialGhostTime=ghostRig.time;
 for(let i=0;i<8;i++)t.update(.04);
+assert(ghostRig.time>initialGhostTime,'Ghost joints animate during gameplay');
 assert(security.z>startZ,'Security patrol moves');
 assert.notDeepEqual(guardPose(),initialGuardPose,'Patrolling must articulate the legs');
 assert.equal(security.mesh.position.y,0,'Guard root stays on its floor instead of floating');
 const frozenGuardPose=guardPose();
+const frozenGhostTime=ghostRig.time;
 t.keys.add('KeyE');t.update(.04);assert.deepEqual(guardPose(),frozenGuardPose,'Hold-E freezes limbs as well as NPC navigation');t.keys.clear();
 keydown('KeyH');t.update(.04);assert.deepEqual(guardPose(),frozenGuardPose,'Help/pause freezes the walk cycle');keydown('KeyH');
 t.openArtViewer(t.artPanels[0]);t.keys.add('KeyE');t.update(.04);assert.deepEqual(guardPose(),frozenGuardPose,'Artwork inspection freezes the walk cycle');t.closeArtViewer();t.keys.clear();
+assert.equal(ghostRig.time,frozenGhostTime,'Hold-E, help and artwork freeze the ghost joints');
 Object.assign(t.player,{x:70,z:security.z+8,floor:0});
 const chaseStart=security.z,chasePhase=guardRig.phase;t.update(.04);
 assert(Math.abs(security.z-chaseStart-3.85*.04)<1e-8,'Pursuit keeps its existing speed');
@@ -334,6 +338,7 @@ assert.equal(security.mesh.position.y,floors.FLOOR_HEIGHT,'Rig follows the upsta
 assert.equal(security.mesh.visible,false,'The detailed guard remains hidden on another floor');
 startPlaying();assert.equal(guardRig.phase,0);assert.equal(guardRig.amount,0);
 const headStartPose=guardPose();t.update(.04);assert.deepEqual(guardPose(),headStartPose,'Five-second head start leaves the guard still');
+assert.equal(ghostRig.time,0,'Retry resets ghost animation and the head start leaves it still');
 console.log('PASS: guard patrol/chase stride integration, hold-E/help/artwork freeze, stationary routes, floor visibility and restart.');
 
 // Detection latches the warning until both NPCs are outside the clearance radius.
