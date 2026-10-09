@@ -2,6 +2,12 @@
 // Chromium's scroll-into-view acknowledgement can wait behind several very
 // slow SwiftShader frames. Hit-test the visible control, then send a real mouse
 // click directly so user activation (including pointer lock) is preserved.
+export function waitForUi(page, predicate, {timeout = 120000} = {}) {
+  // UI state can change before a slow rendered frame is presented. Poll the
+  // DOM independently of requestAnimationFrame so readiness is seen promptly.
+  return page.waitForFunction(predicate, undefined, {polling: 100, timeout});
+}
+
 export async function clickViewportControl(page, selector, {timeout = 120000} = {}) {
   const target = await page.waitForFunction(selector => {
     const element = document.querySelector(selector);

@@ -46,6 +46,23 @@ that hardware-GPU regression and the complete packaged offline smoke pass
 locally; the smoke log is Desktop/artifacts/ci-viewport-smoke.log. The PR
 tracks verification of this additional interaction fix on hosted Windows.
 
+The next Pages run, 37975027177, also passed. Windows run 37975027182
+confirmed the trusted click reached the game (focused, visible, pointer locked,
+no runtime errors), but the two-minute animation-frame UI wait expired.
+Its subsequent failure screenshot showed the normal reception HUD. The
+arrival advances at most 0.25 seconds per rendered frame, so its three-second
+sequence needs at least twelve frames even on very slow software rendering.
+
+Desktop readiness now polls the DOM every 100 ms rather than waiting for
+animation frames. Hosted software UI/navigation waits allow five minutes;
+local hardware waits remain two minutes. Viewport, rendering quality,
+animation and gameplay assertions are unchanged. Per-stage wait timings
+and arrival/HUD state are recorded for diagnosis. The bounded UI-wait
+regression and complete packaged offline smoke pass locally on the verified
+RTX 3090 Ti, including the three-second arrival and all game modes;
+see Desktop/artifacts/ci-ui-waits-smoke.log. Hosted confirmation is tracked
+in the PR.
+
 ## GitHub Pages and Windows CI repair (9 October 2026)
 
 The Pages run 37954613176 passed source checks, compilation and the compiled

@@ -1,6 +1,6 @@
 import assert from 'node:assert/strict';
 import {launchHardwareBrowser} from '../../Browser/test-support/hardware-browser.mjs';
-import {clickViewportControl} from './viewport-input.mjs';
+import {clickViewportControl, waitForUi} from './viewport-input.mjs';
 
 const browser = await launchHardwareBrowser();
 try {
@@ -24,5 +24,9 @@ try {
   });
   await clickViewportControl(page, '#control');
   assert.deepEqual(await page.evaluate(() => window.clicks), [{trusted: true, active: true}]);
+  await page.evaluate(() => setTimeout(() => { document.querySelector('#control').dataset.ready = 'yes'; }, 150));
+  await waitForUi(page, () => document.querySelector('#control').dataset.ready === 'yes', {timeout: 2000});
+  await assert.rejects(waitForUi(page, () => false, {timeout: 250}), /Timeout/);
   console.log('PASS: viewport clicks reject covered, disabled and off-screen controls and preserve trusted user activation without animation-frame polling.');
+  console.log('PASS: UI readiness advances independently of animation frames and still times out when stalled.');
 } finally { await browser.close(); }
