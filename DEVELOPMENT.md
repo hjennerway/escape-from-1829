@@ -1,3 +1,33 @@
+## Hosted interior-loading deadline repair (9 October 2026)
+
+Runs 37963314690 (Pages) and 37963314744 (Windows) included the first CI
+repair. Both passed the compiled estate comparison and every timeline stop,
+then hit the interior test's fixed 60-second background-loading deadline.
+The worker was still loading floor 1 in both failure reports.
+
+The browser test now uses separate inactivity and overall deadlines, tracking
+section-state changes and completed restore, shader, furniture and upload
+steps. Local hardware validation retains a 60-second inactivity limit and a
+three-minute phase limit; the explicit hosted software mode uses three and
+ten minutes respectively. Actual stalls and endless progress still fail.
+The CPU regression simulates a healthy 450-second load, a stalled section
+and endless progress without real waits or software rendering.
+
+Both workflows allow 60 minutes, including the later Windows package/smoke
+steps, and upload fresh timeline/interior evidence even when checks fail.
+The interior test logs each state transition and saves section states and
+recent preparation steps on failure. All existing rendering, retry, caching,
+entrance/stair, replay and furniture assertions remain enabled.
+
+Local GPU validation passes on NVIDIA GeForce RTX 3090 Ti / ANGLE Direct3D11,
+including prepared interiors and worker/mobile recovery. The required full
+npm test stops in the independently modified corridor-sightings test at
+line 54 (east rear wing, floor 0, speed 5, random 0); that local gameplay
+work is outside this fix. Logs are Browser/artifacts/ci-loading-repair.log
+and Browser/artifacts/ci-loading-full-suite.log. Model source fingerprints
+still match the generated assets; no model, game runtime or export changes
+are made by this repair. Hosted confirmation is tracked in the fix PR.
+
 ## GitHub Pages and Windows CI repair (9 October 2026)
 
 The Pages run 37954613176 passed source checks, compilation and the compiled
