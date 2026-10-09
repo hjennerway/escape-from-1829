@@ -7,6 +7,7 @@ import { chromium } from '../../Browser/node_modules/playwright/index.mjs';
 import { desktop, prepareWeb } from '../scripts/prepare-web.mjs';
 import { isSoftwareRenderer } from '../../Browser/dist/tree-rendering.mjs';
 import { browserUsesHardware } from '../../Browser/test-support/hardware-browser.mjs';
+import { clickViewportControl } from './viewport-input.mjs';
 
 const packaged = process.argv.includes('--packaged');
 const artifacts = join(desktop, 'artifacts');
@@ -35,12 +36,11 @@ const navigation = [];
 const label = packaged ? 'packaged' : 'development';
 
 async function clickToNavigate(selector, destination) {
-  // A rendered frame can delay each click actionability check. Give
-  // input and navigation their own limits instead of starting both clocks at
-  // once. waitForURL also handles a destination reached before the click ends.
+  // Give input and navigation their own limits. waitForURL also handles a
+  // destination reached before the click acknowledgement returns.
   stage = 'clicking ' + selector;
   const started = Date.now();
-  await page.locator(selector).click({ noWaitAfter: true });
+  await clickViewportControl(page, selector);
   const clicked = Date.now();
   console.log(`${selector} click completed in ${clicked - started}ms; waiting for its destination.`);
   stage = 'waiting for navigation from ' + selector;
@@ -123,7 +123,7 @@ try {
 
   stage = 'playing the escape game';
   await page.bringToFront();
-  await page.locator('#start').click();
+  await clickViewportControl(page, '#start');
   await page.waitForFunction(() => document.querySelector('#hud')?.hidden === false);
   await page.keyboard.press('Tab');
   await page.waitForFunction(() => document.querySelector('#floorMap')?.hidden === false);
@@ -170,7 +170,7 @@ try {
   assert.doesNotMatch(await page.locator('#look').innerText(), /RELOAD/);
   stage = 'capturing the mouse for walking';
   await page.bringToFront();
-  await page.locator('#look').click();
+  await clickViewportControl(page, '#look');
   await page.waitForFunction(() => document.pointerLockElement?.id === 'game');
   stage = 'walking and returning to the menu';
   await page.keyboard.down('w');

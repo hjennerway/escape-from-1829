@@ -28,6 +28,24 @@ and Browser/artifacts/ci-loading-full-suite.log. Model source fingerprints
 still match the generated assets; no model, game runtime or export changes
 are made by this repair. Hosted confirmation is tracked in the fix PR.
 
+The first PR run, 37969587163, passed the complete Pages build. Windows
+run 37969587197 also passed all compiled/interior checks and packaging,
+then exposed a later desktop-test timeout: Playwright found the Start
+button visible, enabled and stable, but its scroll-into-view acknowledgement
+did not finish within two minutes under SwiftShader. No renderer errors
+were recorded.
+
+The desktop harness now checks that each fixed-viewport control is visible,
+enabled and unobstructed, then sends a real mouse click directly. It does
+not request scrolling or wait for animation-frame actionability checks.
+Trusted user activation and the existing pointer-lock/navigation assertions
+are retained; both readiness and input remain bounded. A browser regression
+rejects covered, disabled and off-screen controls, then verifies a trusted
+click with animation-frame callbacks withheld. All nine desktop unit tests,
+that hardware-GPU regression and the complete packaged offline smoke pass
+locally; the smoke log is Desktop/artifacts/ci-viewport-smoke.log. The PR
+tracks verification of this additional interaction fix on hosted Windows.
+
 ## GitHub Pages and Windows CI repair (9 October 2026)
 
 The Pages run 37954613176 passed source checks, compilation and the compiled
