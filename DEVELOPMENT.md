@@ -1,3 +1,29 @@
+## Shared desktop input deadline (10 October 2026)
+
+Windows runs 38046824324 and 38047472178 passed model checks, packaging,
+arrival and gameplay, then failed at the Aerial click. The UI/navigation
+budget was five minutes, but clickViewportControl still used its independent
+two-minute default because the callers did not pass the configured budget.
+The failure receipt therefore reported uiTimeout=300000 while the native
+mouse acknowledgement was actually limited to 120000 ms.
+
+createViewportInput now binds one explicit deadline to a page for both UI
+readiness and native mouse input. The smoke harness configures that helper
+once from the same deadline used by navigation: five minutes in explicit
+hosted software mode, two minutes locally. The separate helper defaults are
+removed, and missing or invalid deadline configuration fails immediately.
+All visibility, hit-testing, trusted-input, pointer-lock and gameplay
+assertions remain enabled; no runtime, model, render-quality or export changes
+are made.
+
+A mocked-clock regression accepts a three-minute mouse acknowledgement
+under the five-minute budget, retains the local two-minute failure, and
+rejects a permanently stalled hosted acknowledgement. All 13 desktop unit
+tests and the complete packaged offline smoke pass locally with a verified
+NVIDIA RTX 3090 Ti / ANGLE Direct3D11 renderer. The hardware log is
+Desktop/artifacts/ci-shared-input-smoke.log. Hosted confirmation is tracked
+in the follow-up PR.
+
 ## Confirmed hosted CI and timing headroom (10 October 2026)
 
 Both hosted workflows passed on c0c67e674f1d8144424cf09af93c4cf6b0166f39:
