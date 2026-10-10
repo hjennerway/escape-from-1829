@@ -1,3 +1,19 @@
+## Confirmed hosted CI and timing headroom (10 October 2026)
+
+Both hosted workflows passed on c0c67e674f1d8144424cf09af93c4cf6b0166f39:
+[Pages run 37980729399](https://github.com/hjennerway/escape-from-1829/actions/runs/37980729399)
+and [Windows run 37980729350](https://github.com/hjennerway/escape-from-1829/actions/runs/37980729350).
+Windows passed the full packaged offline smoke and uploaded the runnable
+folder, preview MSIX and diagnostic evidence. The arrival UI wait took
+159195 ms on SwiftShader, confirming that the previous two-minute limit
+was too short. Local validation continues to require the hardware GPU.
+
+The complete successful Windows job took 59 minutes. Its job allowance is
+now 90 minutes to leave room for hosted-runner variation; Pages remains
+60 minutes and the individual test deadlines are unchanged. This final
+headroom adjustment changes only workflow configuration and documentation.
+No gameplay, modelling or exported assets are changed by the CI repair.
+
 ## Hosted interior-loading deadline repair (9 October 2026)
 
 Runs 37963314690 (Pages) and 37963314744 (Windows) included the first CI

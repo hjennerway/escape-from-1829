@@ -25,9 +25,9 @@ concurrency:
 jobs:
   package:
     runs-on: windows-latest
-    # Leave time for worker-built interiors and the packaged offline smoke
-    # after software-rendered timeline validation.
-    timeout-minutes: 60
+    # A complete successful hosted run took 59 minutes. Keep headroom for
+    # runner variation; individual browser checks retain bounded deadlines.
+    timeout-minutes: 90
     env:
       electron_config_cache: ${{ github.workspace }}/Desktop/.cache/electron
     steps:
