@@ -7,7 +7,7 @@ import { chromium } from '../../Browser/node_modules/playwright/index.mjs';
 import { desktop, prepareWeb } from '../scripts/prepare-web.mjs';
 import { isSoftwareRenderer } from '../../Browser/dist/tree-rendering.mjs';
 import { browserUsesHardware } from '../../Browser/test-support/hardware-browser.mjs';
-import { clickViewportControl, waitForUi } from './viewport-input.mjs';
+import { createViewportInput } from './viewport-input.mjs';
 
 const packaged = process.argv.includes('--packaged');
 const artifacts = join(desktop, 'artifacts');
@@ -30,7 +30,7 @@ const child = spawn(executable, [
   '--disable-background-timer-throttling', '--disable-backgrounding-occluded-windows',
   '--disable-renderer-backgrounding',
 ], { windowsHide: true, env: environment, stdio: ['ignore', 'pipe', 'pipe'] });
-let browser, page, viewport, logs = '', stage = 'starting Electron', checkingOfflineConsole = false;
+let browser, page, input, viewport, logs = '', stage = 'starting Electron', checkingOfflineConsole = false;
 const errors = [], externalRequests = [];
 const navigation = [];
 const label = packaged ? 'packaged' : 'development';
@@ -40,7 +40,7 @@ const uiTimeout = browserUsesHardware ? 120000 : 300000;
 const uiWaits = [];
 async function waitUntil(predicate) {
   const started = Date.now();
-  const result = await waitForUi(page, predicate, {timeout: uiTimeout});
+  const result = await input.waitForUi(predicate);
   await result.dispose();
   const milliseconds = Date.now() - started;
   uiWaits.push({stage, milliseconds});
@@ -52,7 +52,7 @@ async function clickToNavigate(selector, destination) {
   // destination reached before the click acknowledgement returns.
   stage = 'clicking ' + selector;
   const started = Date.now();
-  await clickViewportControl(page, selector);
+  await input.click(selector);
   const clicked = Date.now();
   console.log(`${selector} click completed in ${clicked - started}ms; waiting for its destination.`);
   stage = 'waiting for navigation from ' + selector;
@@ -79,6 +79,7 @@ try {
   page = context.pages()[0] || await context.waitForEvent('page');
   page.setDefaultTimeout(uiTimeout);
   page.setDefaultNavigationTimeout(uiTimeout);
+  input = createViewportInput(page, {timeout: uiTimeout});
   const network = await context.newCDPSession(page);
   await network.send('Network.enable');
   await network.send('Network.setBlockedURLs', { urls: ['http://*', 'https://*'] });
@@ -135,7 +136,7 @@ try {
 
   stage = 'playing the escape game';
   await page.bringToFront();
-  await clickViewportControl(page, '#start');
+  await input.click('#start');
   stage = 'waiting for the escape arrival animation';
   await waitUntil(() => document.querySelector('#hud')?.hidden === false);
   stage = 'playing the escape game and opening the map';
@@ -184,7 +185,7 @@ try {
   assert.doesNotMatch(await page.locator('#look').innerText(), /RELOAD/);
   stage = 'capturing the mouse for walking';
   await page.bringToFront();
-  await clickViewportControl(page, '#look');
+  await input.click('#look');
   await waitUntil(() => document.pointerLockElement?.id === 'game');
   stage = 'walking and returning to the menu';
   await page.keyboard.down('w');
