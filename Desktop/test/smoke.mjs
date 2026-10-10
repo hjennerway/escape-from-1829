@@ -7,6 +7,7 @@ import { chromium } from '../../Browser/node_modules/playwright/index.mjs';
 import { desktop, prepareWeb } from '../scripts/prepare-web.mjs';
 import { isSoftwareRenderer } from '../../Browser/dist/tree-rendering.mjs';
 import { browserUsesHardware } from '../../Browser/test-support/hardware-browser.mjs';
+import { clickViewportControl, waitForUi } from './viewport-input.mjs';
 
 const packaged = process.argv.includes('--packaged');
 const artifacts = join(desktop, 'artifacts');
@@ -33,14 +34,25 @@ let browser, page, viewport, logs = '', stage = 'starting Electron', checkingOff
 const errors = [], externalRequests = [];
 const navigation = [];
 const label = packaged ? 'packaged' : 'development';
+// The three-second arrival advances by at most 0.25 seconds per rendered
+// frame. SwiftShader needs over two minutes to present those frames on CI.
+const uiTimeout = browserUsesHardware ? 120000 : 300000;
+const uiWaits = [];
+async function waitUntil(predicate) {
+  const started = Date.now();
+  const result = await waitForUi(page, predicate, {timeout: uiTimeout});
+  await result.dispose();
+  const milliseconds = Date.now() - started;
+  uiWaits.push({stage, milliseconds});
+  console.log(`UI ready: ${stage} (${milliseconds}ms)`);
+}
 
 async function clickToNavigate(selector, destination) {
-  // A rendered frame can delay each click actionability check. Give
-  // input and navigation their own limits instead of starting both clocks at
-  // once. waitForURL also handles a destination reached before the click ends.
+  // Give input and navigation their own limits. waitForURL also handles a
+  // destination reached before the click acknowledgement returns.
   stage = 'clicking ' + selector;
   const started = Date.now();
-  await page.locator(selector).click({ noWaitAfter: true });
+  await clickViewportControl(page, selector);
   const clicked = Date.now();
   console.log(`${selector} click completed in ${clicked - started}ms; waiting for its destination.`);
   stage = 'waiting for navigation from ' + selector;
@@ -65,8 +77,8 @@ try {
   const context = browser.contexts()[0];
   // Simulate unavailable internet without changing the computer's connection.
   page = context.pages()[0] || await context.waitForEvent('page');
-  page.setDefaultTimeout(120000);
-  page.setDefaultNavigationTimeout(120000);
+  page.setDefaultTimeout(uiTimeout);
+  page.setDefaultNavigationTimeout(uiTimeout);
   const network = await context.newCDPSession(page);
   await network.send('Network.enable');
   await network.send('Network.setBlockedURLs', { urls: ['http://*', 'https://*'] });
@@ -90,7 +102,7 @@ try {
   await page.bringToFront();
   stage = 'loading the landing page';
   // Let the initial navigation finish before exercising reloads/navigation.
-  await page.waitForFunction(() => document.querySelector('#start')?.disabled === false);
+  await waitUntil(() => document.querySelector('#start')?.disabled === false);
   const gpuRenderer = await page.evaluate(() => {
     const canvas = document.createElement('canvas');canvas.width = canvas.height = 16;
     const gl = canvas.getContext('webgl2') ?? canvas.getContext('webgl');
@@ -112,21 +124,23 @@ try {
   await page.goto('escape1829://game/', { waitUntil: 'domcontentloaded' });
   checkingOfflineConsole = true;
   console.log('Game page opened; waiting for the start button.');
-  await page.waitForFunction(() => document.querySelector('#start')?.disabled === false);
+  await waitUntil(() => document.querySelector('#start')?.disabled === false);
   assert.deepEqual(await page.evaluate(() => [typeof require, typeof process, window.isSecureContext]), ['undefined', 'undefined', true]);
   await page.evaluate(() => localStorage.setItem('desktop-smoke', 'persistent'));
   await page.reload();
-  await page.waitForFunction(() => document.querySelector('#start')?.disabled === false);
+  await waitUntil(() => document.querySelector('#start')?.disabled === false);
   assert.equal(await page.evaluate(() => localStorage.getItem('desktop-smoke')), 'persistent');
   await page.screenshot({ path: join(artifacts, label + '-landing.png') });
   console.log('Landing, renderer isolation and storage passed.');
 
   stage = 'playing the escape game';
   await page.bringToFront();
-  await page.locator('#start').click();
-  await page.waitForFunction(() => document.querySelector('#hud')?.hidden === false);
+  await clickViewportControl(page, '#start');
+  stage = 'waiting for the escape arrival animation';
+  await waitUntil(() => document.querySelector('#hud')?.hidden === false);
+  stage = 'playing the escape game and opening the map';
   await page.keyboard.press('Tab');
-  await page.waitForFunction(() => document.querySelector('#floorMap')?.hidden === false);
+  await waitUntil(() => document.querySelector('#floorMap')?.hidden === false);
   await page.keyboard.press('Tab');
   await page.keyboard.down('w');
   await page.waitForTimeout(250);
@@ -138,16 +152,16 @@ try {
   await page.goto('escape1829://game/', { waitUntil: 'domcontentloaded' });
   stage = 'waiting for the title frame';
   // The title-frame capture must not race the first complete rendered frame.
-  await page.waitForFunction(() => document.querySelector('#game')?.classList.contains('scene-ready'));
+  await waitUntil(() => document.querySelector('#game')?.classList.contains('scene-ready'));
   console.log('Title scene ready; opening aerial view.');
   // Match both the temporary ?intro=1 handoff and the final aerial URL.
   await clickToNavigate('#aerial', url => url.protocol === 'escape1829:' && url.hostname === 'game' &&
     url.pathname === '/aerial.html');
   console.log('Aerial page opened; waiting for the intro handoff.');
   stage = 'waiting for the aerial handoff and timeline';
-  await page.waitForFunction(() => !document.body.classList.contains('intro-arriving'));
+  await waitUntil(() => !document.body.classList.contains('intro-arriving'));
   // The year change proves scene initialization and the timeline handler finished.
-  await page.waitForFunction(() => {
+  await waitUntil(() => {
     const slider = document.querySelector('#periodSlider');
     if (slider) { slider.value = '0'; slider.dispatchEvent(new Event('input', { bubbles: true })); }
     return document.querySelector('#periodYear')?.textContent === '1829';
@@ -166,12 +180,12 @@ try {
 
   stage = 'exploring on foot';
   await page.goto('escape1829://game/explore.html');
-  await page.waitForFunction(() => document.querySelector('#look')?.disabled === false);
+  await waitUntil(() => document.querySelector('#look')?.disabled === false);
   assert.doesNotMatch(await page.locator('#look').innerText(), /RELOAD/);
   stage = 'capturing the mouse for walking';
   await page.bringToFront();
-  await page.locator('#look').click();
-  await page.waitForFunction(() => document.pointerLockElement?.id === 'game');
+  await clickViewportControl(page, '#look');
+  await waitUntil(() => document.pointerLockElement?.id === 'game');
   stage = 'walking and returning to the menu';
   await page.keyboard.down('w');
   await page.waitForTimeout(250);
@@ -180,24 +194,27 @@ try {
   await page.evaluate(() => document.exitPointerLock());
   await clickToNavigate('#backToIntro', 'escape1829://game/');
   stage = 'checking return to the landing page';
-  await page.waitForFunction(() => document.querySelector('#start')?.disabled === false);
+  await waitUntil(() => document.querySelector('#start')?.disabled === false);
   assert.equal(context.pages().length, 1);
   assert(externalRequests.every(request => request.type === 'image' &&
     ['www.whateversleft.co.uk', 'basedinchurton.co.uk'].includes(new URL(request.url).hostname)),
   'Only the existing optional archive wall images may attempt online access');
   assert.deepEqual(errors, [], 'All game modes should load without runtime errors');
-  await writeFile(join(artifacts, label + '-smoke.json'), JSON.stringify({ passed: true, packaged, offline: true, gpuRenderer, hardware: browserUsesHardware, viewport, navigation, errors, externalRequests, model }, null, 2));
+  await writeFile(join(artifacts, label + '-smoke.json'), JSON.stringify({ passed: true, packaged, offline: true, gpuRenderer, hardware: browserUsesHardware, viewport, uiTimeout, uiWaits, navigation, errors, externalRequests, model }, null, 2));
   console.log(`PASS: ${label} Windows game, offline assets, isolated renderer, storage, game/map, compiled aerial timeline, walking and return navigation.`);
 } catch (error) {
   console.error('Desktop smoke failed:', stage, error.message, 'URL:', page?.url(), 'Renderer errors:', errors);
   const documentState = page && await Promise.race([
     page.evaluate(() => ({ focused: document.hasFocus(), hidden: document.hidden,
       pointerLock: document.pointerLockElement?.id ?? null,
+      hudHidden: document.querySelector('#hud')?.hidden,
+      arrivalHidden: document.querySelector('#arrivalFade')?.hidden,
+      arrivalOpacity: document.querySelector('#arrivalFade')?.style.opacity,
       walkingHint: document.querySelector('#lookHint')?.textContent })).catch(() => null),
     new Promise(resolve => setTimeout(() => resolve(null), 2000)),
   ]);
   if (page) await page.screenshot({ path: join(artifacts, label + '-failure.png'), timeout: 10000 }).catch(() => {});
-  await writeFile(join(artifacts, label + '-failure.json'), JSON.stringify({ stage, message: error.message, url: page?.url(), viewport, navigation, documentState, errors, externalRequests }, null, 2));
+  await writeFile(join(artifacts, label + '-failure.json'), JSON.stringify({ stage, message: error.message, url: page?.url(), viewport, uiTimeout, uiWaits, navigation, documentState, errors, externalRequests }, null, 2));
   throw error;
 } finally {
   await writeFile(join(artifacts, label + '-electron.log'), logs);

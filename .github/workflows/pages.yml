@@ -17,9 +17,9 @@ concurrency:
 jobs:
   build:
     runs-on: ubuntu-latest
-    # Checkout plus the complete source/compiled checks exceed 20 minutes on
-    # hosted runners, where browser rendering uses SwiftShader.
-    timeout-minutes: 45
+    # SwiftShader timeline checks and worker-built interiors need headroom
+    # beyond the 40 minutes already consumed by the hosted validation run.
+    timeout-minutes: 60
     defaults:
       run:
         working-directory: Browser
@@ -45,7 +45,18 @@ jobs:
       - name: Verify compiled scene and browser fallback
         env:
           BROWSER_CI_SOFTWARE: '1'
+          INTERIOR_LOADING_ARTIFACT_DIR: ./artifacts/ci-interior-loading/
+          TIMELINE_ARTIFACT_DIR: ./artifacts/ci-timeline/
         run: npm run test:compiled
+      - name: Upload model test evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: Pages-model-test-evidence
+          path: |
+            Browser/artifacts/ci-interior-loading/
+            Browser/artifacts/ci-timeline/
+          if-no-files-found: ignore
       - name: Upload browser build
         uses: actions/upload-pages-artifact@v3
         with:

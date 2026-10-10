@@ -10,7 +10,7 @@
     "prepare:web": "node scripts/prepare-web.mjs",
     "start": "npm run prepare:web && electron .",
     "test": "node --test test/*.test.mjs",
-    "test:desktop": "node test/smoke.mjs",
+    "test:desktop": "node test/viewport-input-browser.mjs && node test/smoke.mjs",
     "package:windows": "node scripts/package-windows.mjs",
     "package:preview": "node scripts/package-store.mjs --preview",
     "package:store": "node scripts/package-store.mjs"

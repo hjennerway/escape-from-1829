@@ -1,3 +1,84 @@
+## Confirmed hosted CI and timing headroom (10 October 2026)
+
+Both hosted workflows passed on c0c67e674f1d8144424cf09af93c4cf6b0166f39:
+[Pages run 37980729399](https://github.com/hjennerway/escape-from-1829/actions/runs/37980729399)
+and [Windows run 37980729350](https://github.com/hjennerway/escape-from-1829/actions/runs/37980729350).
+Windows passed the full packaged offline smoke and uploaded the runnable
+folder, preview MSIX and diagnostic evidence. The arrival UI wait took
+159195 ms on SwiftShader, confirming that the previous two-minute limit
+was too short. Local validation continues to require the hardware GPU.
+
+The complete successful Windows job took 59 minutes. Its job allowance is
+now 90 minutes to leave room for hosted-runner variation; Pages remains
+60 minutes and the individual test deadlines are unchanged. This final
+headroom adjustment changes only workflow configuration and documentation.
+No gameplay, modelling or exported assets are changed by the CI repair.
+
+## Hosted interior-loading deadline repair (9 October 2026)
+
+Runs 37963314690 (Pages) and 37963314744 (Windows) included the first CI
+repair. Both passed the compiled estate comparison and every timeline stop,
+then hit the interior test's fixed 60-second background-loading deadline.
+The worker was still loading floor 1 in both failure reports.
+
+The browser test now uses separate inactivity and overall deadlines, tracking
+section-state changes and completed restore, shader, furniture and upload
+steps. Local hardware validation retains a 60-second inactivity limit and a
+three-minute phase limit; the explicit hosted software mode uses three and
+ten minutes respectively. Actual stalls and endless progress still fail.
+The CPU regression simulates a healthy 450-second load, a stalled section
+and endless progress without real waits or software rendering.
+
+Both workflows allow 60 minutes, including the later Windows package/smoke
+steps, and upload fresh timeline/interior evidence even when checks fail.
+The interior test logs each state transition and saves section states and
+recent preparation steps on failure. All existing rendering, retry, caching,
+entrance/stair, replay and furniture assertions remain enabled.
+
+Local GPU validation passes on NVIDIA GeForce RTX 3090 Ti / ANGLE Direct3D11,
+including prepared interiors and worker/mobile recovery. The required full
+npm test stops in the independently modified corridor-sightings test at
+line 54 (east rear wing, floor 0, speed 5, random 0); that local gameplay
+work is outside this fix. Logs are Browser/artifacts/ci-loading-repair.log
+and Browser/artifacts/ci-loading-full-suite.log. Model source fingerprints
+still match the generated assets; no model, game runtime or export changes
+are made by this repair. Hosted confirmation is tracked in the fix PR.
+
+The first PR run, 37969587163, passed the complete Pages build. Windows
+run 37969587197 also passed all compiled/interior checks and packaging,
+then exposed a later desktop-test timeout: Playwright found the Start
+button visible, enabled and stable, but its scroll-into-view acknowledgement
+did not finish within two minutes under SwiftShader. No renderer errors
+were recorded.
+
+The desktop harness now checks that each fixed-viewport control is visible,
+enabled and unobstructed, then sends a real mouse click directly. It does
+not request scrolling or wait for animation-frame actionability checks.
+Trusted user activation and the existing pointer-lock/navigation assertions
+are retained; both readiness and input remain bounded. A browser regression
+rejects covered, disabled and off-screen controls, then verifies a trusted
+click with animation-frame callbacks withheld. All nine desktop unit tests,
+that hardware-GPU regression and the complete packaged offline smoke pass
+locally; the smoke log is Desktop/artifacts/ci-viewport-smoke.log. The PR
+tracks verification of this additional interaction fix on hosted Windows.
+
+The next Pages run, 37975027177, also passed. Windows run 37975027182
+confirmed the trusted click reached the game (focused, visible, pointer locked,
+no runtime errors), but the two-minute animation-frame UI wait expired.
+Its subsequent failure screenshot showed the normal reception HUD. The
+arrival advances at most 0.25 seconds per rendered frame, so its three-second
+sequence needs at least twelve frames even on very slow software rendering.
+
+Desktop readiness now polls the DOM every 100 ms rather than waiting for
+animation frames. Hosted software UI/navigation waits allow five minutes;
+local hardware waits remain two minutes. Viewport, rendering quality,
+animation and gameplay assertions are unchanged. Per-stage wait timings
+and arrival/HUD state are recorded for diagnosis. The bounded UI-wait
+regression and complete packaged offline smoke pass locally on the verified
+RTX 3090 Ti, including the three-second arrival and all game modes;
+see Desktop/artifacts/ci-ui-waits-smoke.log. Hosted confirmation is tracked
+in the PR.
+
 ## GitHub Pages and Windows CI repair (9 October 2026)
 
 The Pages run 37954613176 passed source checks, compilation and the compiled
