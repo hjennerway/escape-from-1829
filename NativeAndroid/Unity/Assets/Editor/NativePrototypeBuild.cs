@@ -74,12 +74,15 @@ public static class NativePrototypeBuild
         var selection = cached ? AssetDatabase.LoadAssetAtPath<GameObject>(Baked + "/selection/selection.prefab") : null;
         var escape = cached ? AssetDatabase.LoadAssetAtPath<GameObject>(Baked + "/escape/escape.prefab") : null;
         var fittings = cached ? AssetDatabase.LoadAssetAtPath<GameObject>(Baked + "/fittings/fittings.prefab") : null;
-        if (outdoor && indoor && guard && selection && escape && fittings) stats.AddRange(previous.assets);
-        else { outdoor = ImportOutdoor(stats); indoor = Import("indoor", stats); guard = Import("guard", stats); selection = Import("selection",stats);escape=Import("escape",stats);fittings=Import("fittings",stats); }
+        var ghost = cached ? AssetDatabase.LoadAssetAtPath<GameObject>(Baked + "/ghost/ghost.prefab") : null;
+        var figure = cached ? AssetDatabase.LoadAssetAtPath<GameObject>(Baked + "/figure/figure.prefab") : null;
+        if (outdoor && indoor && guard && selection && escape && fittings && ghost && figure) stats.AddRange(previous.assets);
+        else { outdoor = ImportOutdoor(stats); indoor = Import("indoor", stats); guard = Import("guard", stats); selection = Import("selection",stats);escape=Import("escape",stats);fittings=Import("fittings",stats);ghost=Import("ghost",stats);figure=Import("figure",stats); }
         var scene = EditorSceneManager.NewScene(NewSceneSetup.EmptyScene, NewSceneMode.Single);
         var game = new GameObject("Escape from 1829").AddComponent<NativePrototypeGame>();
         game.outdoorPrefab = outdoor; game.indoorPrefab = indoor; game.guardPrefab = guard;
         game.escapePrefab=escape;game.fittingsPrefab=fittings;
+        game.ghostPrefab=ghost;game.figurePrefab=figure;
         var filters=selection.GetComponentsInChildren<MeshFilter>(true);game.selectionMeshes=new Mesh[filters.Length];
         foreach(var filter in filters)game.selectionMeshes[int.Parse(filter.transform.parent.name.Substring(10))]=filter.sharedMesh;
         game.selectionShader=Shader.Find("Escape1829/BuildingSelection");
@@ -100,7 +103,7 @@ public static class NativePrototypeBuild
         EditorSceneManager.SaveScene(scene, ScenePath);
         PlayerSettings.companyName = "Chester Night Games";
         PlayerSettings.productName = "Escape from 1829";
-        PlayerSettings.bundleVersion="0.14.0";PlayerSettings.Android.bundleVersionCode=14;
+        PlayerSettings.bundleVersion="0.15.0";PlayerSettings.Android.bundleVersionCode=15;
         PlayerSettings.SetApplicationIdentifier(NamedBuildTarget.Android, "org.hjennerway.escape1829.prototype");
         PlayerSettings.defaultScreenWidth = 1280; PlayerSettings.defaultScreenHeight = 720;
         PlayerSettings.defaultIsNativeResolution = false;
@@ -367,6 +370,7 @@ public static class NativePrototypeBuild
         if (layout.cells.Length != layout.width * layout.height || floors.Length!=4) throw new Exception("Unexpected escape layout.");
         var manifest = JsonUtility.FromJson<NativePrototypeGame.Manifest>(game.manifestText.text);
         if (manifest.schema!=4||manifest.escape.variants.Length!=8||manifest.periods.Length!=13||stats[0].triangles != manifest.outdoor.triangles || stats[1].triangles != manifest.indoor.triangles||stats[4].triangles!=manifest.escapeStats.triangles||stats[5].triangles!=manifest.fittings.triangles) throw new Exception("Native geometry or historical periods differ from exported source.");
+        if(!game.ghostPrefab||!game.figurePrefab||stats[6].triangles!=manifest.ghost.triangles||stats[7].triangles!=manifest.figure.triangles||manifest.escape.tower.flights.Length!=12||manifest.sightings.Length<100)throw new Exception("Current apparition, sightings or tower export is missing.");
         if (!NativePrototypeGame.IndoorClear(layout, layout.spawn.x * layout.cellSize, layout.spawn.z * layout.cellSize)) throw new Exception("Player spawn blocked.");
         int exits=0;for(int f=0;f<floors.Length;f++)foreach (var exit in floors[f].exits)
         {

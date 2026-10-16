@@ -24,7 +24,7 @@ const server=http.createServer(async(req,res)=>{
     const path=new URL(req.url,'http://localhost').pathname;
     if(path==='/'){res.setHeader('Content-Type','text/html');res.end('<!doctype html><title>Native port export</title><script type="importmap">{"imports":{"three":"/vendor/three.module.js"}}</script>');return;}
     if(path==='/favicon.ico'){res.writeHead(204).end();return;}
-    if(path==='/native-navigation.mjs'){res.setHeader('Content-Type','text/javascript');res.end(await readFile(resolve(native,'tools/navigation-export.mjs')));return;}
+    if(path==='/native-navigation.mjs'){res.setHeader('Content-Type','text/javascript');res.end((await readFile(resolve(native,'tools/navigation-export.mjs'),'utf8')).replaceAll('../../Browser/dist/','/'));return;}
     const root=path.startsWith('/three/')?three:dist;
     const file=resolve(root,'.'+decodeURIComponent(path.startsWith('/three/')?path.slice(6):path));
     if(!file.startsWith(root+sep)){res.writeHead(403).end();return;}
@@ -55,6 +55,11 @@ try{
     const {exteriorObstacles}=await import('/explore-controls.mjs');
     const {buildArchitecture,interiorWallSurfaces}=await import('/architecture.mjs');
     const {createSecurityGuard}=await import('/security-guard.mjs');
+    const {createAsylumGhost}=await import('/asylum-ghost.mjs');
+    const {createCorridorFigure}=await import('/corridor-figure.mjs');
+    const {buildCorridorCrossings,buildPassageCrossings}=await import('/corridor-sightings.mjs');
+    const {createEscapeTower}=await import('/escape-tower.mjs');
+    const {TOWER_CLIMB,TOWER_FLIGHTS}=await import('/escape-tower-plan.mjs');
     const {buildAsylumLayout,stairRoute,stairDeparture}=await import('/asylum-layout.mjs');
     const {exportNavigation,exportOutside}=await import('/native-navigation.mjs');
     const {createNotebook}=await import('/notebook.mjs');
@@ -300,12 +305,19 @@ try{
     exterior.timeline.setPeriod(1916);for(const e of detail.entries)e.levels.forEach((root,i)=>root.visible=i===0);
     createEscapeLandmark(THREE,exterior);const walker=createAsylumOutside(THREE,exterior),progress=createEscapeProgress({seed:variants[0].seed,floors});
     const grounds=createEscapeGrounds(THREE,exterior,walker,progress),dynamic=[];
+    const tower=createEscapeTower(THREE,exterior,walker,progress);
+    if(!tower)throw Error('Missing Escape tower');
+    const towerPivot=tower.group.getObjectByName('Freed tower maintenance door'),towerBar=tower.group.getObjectByName('Tower retaining timber');
+    dynamic.push({id:'tower-hatch',source:towerPivot,angle:-Math.PI/2,obstacle:tower.obstacles().at(-1)});
+    const towerLamps=[];tower.group.traverse(o=>{if(o.name==='Tower gas wall lantern'){const p=new THREE.Vector3(0,.015,.38).applyMatrix4(o.matrixWorld);towerLamps.push({x:p.x,y:p.y,z:p.z});}});
+    const towerData={...TOWER_CLIMB,flights:TOWER_FLIGHTS,nodes:tower.nodes.map(serializeNode),lamps:towerLamps};
     for(const [id,gate] of Object.entries(grounds.gates)){
       dynamic.push({id,source:gate.pivot,angle:-Math.PI/2,obstacle:{minX:gate.x-gate.width/2,maxX:gate.x+gate.width/2,minZ:gate.z-.12,maxZ:gate.z+.12,minY:0,maxY:3.4}});
       if(id==='wicket'){gate.boards.name='wicket-boards';gate.boards.removeFromParent();}
     }
     for(const door of [{id:'tower-door',pivot:grounds.workshops.pivot,side:1},...grounds.workshops.roomDoors])dynamic.push({id:door.id,source:door.pivot,angle:door.side*Math.PI/2,obstacle:door.id==='tower-door'?grounds.workshops.doorObstacle():grounds.workshops.roomDoorObstacles()[grounds.workshops.roomDoors.findIndex(d=>d.id===door.id)]});
     const moving=new THREE.Group();moving.name='Moving grounds fittings';const movingDefinitions=[];
+    moving.add(bakeGroup(towerBar,'tower-retaining-bar',{local:true}));towerBar.removeFromParent();
     for(const d of dynamic){moving.add(bakeGroup(d.source,d.id,{local:true}));movingDefinitions.push({id:d.id,angle:d.angle,obstacle:nativeFootprint(d.obstacle)});d.source.removeFromParent();}
     const boards=grounds.gates.wicket.boards;grounds.gates.wicket.pivot.add(boards);moving.add(bakeGroup(boards,'wicket-boards',{local:true}));boards.removeFromParent();
     for(const id of ['crowbar','oil']){const source=grounds.group.getObjectByName(id==='crowbar'?'Takeable crowbar':'Takeable oil can');
@@ -318,13 +330,18 @@ try{
     const escapeWalking=exportOutside(THREE,exterior,exteriorObstacles);
     const escapeJumps=escapeWalking.jumpObstacles.map(nativeFootprint);delete escapeWalking.jumpObstacles;
     exterior.trees.visible=false;const escapeNoTrees=exportOutside(THREE,exterior,exteriorObstacles);exterior.trees.visible=true;
-    const escape={meshes:[...escapeMeshes],variants,nodes:grounds.nodes.map(serializeNode),moving:movingDefinitions,solids:grounds.solids.map(nativeFootprint),outline:GROUNDS_OUTLINE.map(([x,z])=>({x,z})),gates:Object.entries(GROUNDS_GATES).map(([id,g])=>({id,...g})),mast:MAST,patrol:GUARD_PATROL,...escapeWalking,jumpObstacles:escapeJumps,obstaclesNoTrees:escapeNoTrees.obstacles,jumpObstaclesNoTrees:escapeNoTrees.jumpObstacles.map(nativeFootprint),lamps:grounds.workshops.lighting.lamps.map(({x,y,z})=>({x,y,z}))};
+    const escape={meshes:[...escapeMeshes],variants,nodes:grounds.nodes.map(serializeNode),tower:towerData,moving:movingDefinitions,solids:[...grounds.solids,...tower.solids].map(nativeFootprint),outline:GROUNDS_OUTLINE.map(([x,z])=>({x,z})),gates:Object.entries(GROUNDS_GATES).map(([id,g])=>({id,...g})),mast:MAST,patrol:GUARD_PATROL,...escapeWalking,jumpObstacles:escapeJumps,obstaclesNoTrees:escapeNoTrees.obstacles,jumpObstaclesNoTrees:escapeNoTrees.jumpObstacles.map(nativeFootprint),lamps:grounds.workshops.lighting.lamps.map(({x,y,z})=>({x,y,z}))};
     function copyRig(source){
       const target=source.isMesh?new THREE.Mesh(source.geometry,materialFor(source.material).material):new THREE.Group();
       target.name=source.name;target.position.copy(source.position);target.quaternion.copy(source.quaternion);target.scale.copy(source.scale);
       for(const child of source.children)target.add(copyRig(child));return target;
     }
     const guard=copyRig(createSecurityGuard(THREE));
+    const ghost=copyRig(createAsylumGhost(THREE));
+    const figureSource=createCorridorFigure(THREE).model;
+    figureSource.children[0].name='Figure pelvis';figureSource.children[0].children[0].name='Figure upper';
+    const figure=copyRig(figureSource);
+    const sightings=[...buildCorridorCrossings(floors),...buildPassageCrossings(floors)].map(r=>({...r,center:{x:r.center[0],z:r.center[1]},a:{x:r.a[0],z:r.a[1]},b:{x:r.b[0],z:r.b[1]},direction:{x:r.direction[0],z:r.direction[1]},exposed:r.exposed?.map(([x,z])=>({x,z}))}));
     async function save(name,object){
       if(metadataOnly&&name!=='selection.glb')return 0;
       await window.__progress('Serializing '+name);
@@ -342,7 +359,7 @@ try{
     for(const [name,paint] of [['room-wallpaper.png',paintRoomWallpaper],['room-paint.png',paintRoomDado]]){const canvas=document.createElement('canvas');canvas.width=canvas.height=512;paint(canvas.getContext('2d'),512);await window.__nativeChunk(name,canvas.toDataURL('image/png').split(',')[1]);}
     await window.__progress('Escape scene: '+JSON.stringify({visible:escapeScene.visible,children:escapeScene.children.length,...stats(escapeScene)}));
     const outdoorStats=stats(estate),outdoorChunks=[];
-    const bytes={escape:await save('escape.glb',escapeScene),fittings:await save('fittings.glb',fittings),outdoor:0,indoor:await save('indoor.glb',interior),guard:await save('guard.glb',guard),selection:await save('selection.glb',selectionLibrary)};
+    const bytes={escape:await save('escape.glb',escapeScene),fittings:await save('fittings.glb',fittings),outdoor:0,indoor:await save('indoor.glb',interior),guard:await save('guard.glb',guard),ghost:await save('ghost.glb',ghost),figure:await save('figure.glb',figure),selection:await save('selection.glb',selectionLibrary)};
     // Chromium cannot reliably create a single Blob for the expanded library.
     // Bounded files preserve every mesh and keep serialization/import memory low.
     const estateMeshes=[...estate.children];for(let start=0;start<estateMeshes.length;start+=384){const root=new THREE.Group();root.name='Estate library part '+outdoorChunks.length;for(const mesh of estateMeshes.slice(start,start+384))root.add(mesh);const name='outdoor-'+outdoorChunks.length+'.glb';outdoorChunks.push(name);bytes.outdoor+=await save(name,root);}
@@ -368,7 +385,7 @@ try{
     const buildings=selection.entries.map(e=>({...BUILDING_CATALOG.find(c=>c.id===e.id),sections:e.sections,dates:e.sections.map(s=>({section:s,...sectionDates(s)}))}));
     const locations=Object.entries(LOCATION_VIEWS).map(([key,view])=>({key,position:view.position,target:view.target,fov:view.fov??60,walkPosition:LOCATION_WALKS[key]?.position??null,walkTarget:LOCATION_WALKS[key]?.target??null}));
     await window.__progress('Serializing navigation and manifest');
-    return JSON.stringify({schema:4,navigation,escape,escapeStats:stats(escapeScene),fittings:stats(fittings),outdoorChunks,jumpBounds:jumpRecords.length,supportLibrary,defaultPeriod:1916,floorHeight:FLOOR_HEIGHT,playBounds:{minX:-400,maxX:950,minZ:-550,maxZ:550},outdoor:outdoorStats,indoor:stats(interior),guard:stats(guard),selection:stats(selectionLibrary),bytes,periods,meshFlags,detailGroups,buildings,locations,art,wallArt,earthAnchor:EARTH_ANCHOR,perimeter:ESTATE_PERIMETER.map(([x,z])=>({x,z})),diagnoses,causes});
+    return JSON.stringify({schema:4,navigation,escape,sightings,ghost:stats(ghost),figure:stats(figure),escapeStats:stats(escapeScene),fittings:stats(fittings),outdoorChunks,jumpBounds:jumpRecords.length,supportLibrary,defaultPeriod:1916,floorHeight:FLOOR_HEIGHT,playBounds:{minX:-400,maxX:950,minZ:-550,maxZ:550},outdoor:outdoorStats,indoor:stats(interior),guard:stats(guard),selection:stats(selectionLibrary),bytes,periods,meshFlags,detailGroups,buildings,locations,art,wallArt,earthAnchor:EARTH_ANCHOR,perimeter:ESTATE_PERIMETER.map(([x,z])=>({x,z})),diagnoses,causes});
   },metadataOnly));
   if(await modelSourceHash()!==sourceHash)throw Error('Source changed during native export. Repeat export.');
   for(const [name,value] of Object.entries(interiorHashes))if(hash(await readFile(resolve(dist,name)))!==value)throw Error('Interior source changed during export: '+name);
@@ -394,7 +411,7 @@ try{
   const packedEscape=packEscapeCollision(report.escape.jumpObstacles,report.escape.jumpObstaclesNoTrees);
   await writeFile(resolve(output,'escape-jump-collision.bytes'),packedEscape.bytes);report.escapeJumpBounds=packedEscape.count;
   delete report.escape.jumpObstacles;delete report.escape.jumpObstaclesNoTrees;
-  const assetHashes={};for(const name of [...report.outdoorChunks,...['indoor','guard','selection','escape','fittings'].map(n=>n+'.glb')]){const file=await readFile(resolve(output,name));assetHashes[name]=createHash('sha256').update(file).digest('hex');}
+  const assetHashes={};for(const name of [...report.outdoorChunks,...['indoor','guard','ghost','figure','selection','escape','fittings'].map(n=>n+'.glb')]){const file=await readFile(resolve(output,name));assetHashes[name]=createHash('sha256').update(file).digest('hex');}
   assetHashes['jump-collision.bytes']=hash(await readFile(resolve(output,'jump-collision.bytes')));
   assetHashes['escape-jump-collision.bytes']=hash(packedEscape.bytes);
   for(const name of ['room-wallpaper.png','room-paint.png'])assetHashes[name]=hash(await readFile(resolve(output,name)));

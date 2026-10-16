@@ -10,7 +10,6 @@ export function createAsylumGhost(THREE){
  const cloth=mat(0xffffff,{vertexColors:true,side:THREE.DoubleSide,emissive:0x18241f,emissiveIntensity:.16});
  const skin=mat(0x6b786b,{emissive:0x26372c,emissiveIntensity:.12});
  const bone=mat(0x9b9f8a),dark=mat(0x030605),hair=mat(0x080e0b);
- const eye=mat(0x82938a),eyeShade=mat(0x26312b),lip=mat(0x414c42);
  const mist=mat(0x718d81,{transparent:true,opacity:.13,depthWrite:false,side:THREE.DoubleSide});
  function part(name,geometry,material,parent,p=[0,0,0],scale){
   const o=new THREE.Mesh(geometry,material);o.name=name;o.position.set(...p);if(scale)o.scale.set(...scale);parent.add(o);return o;
@@ -51,25 +50,64 @@ export function createAsylumGhost(THREE){
   cord('Collarbone',[[s*.02,1.58,.13],[s*.13,1.60,.137],[s*.26,1.55,.095]],.010,skin,body);
  }
  const head=joint('Lolling head',body,[.016,1.94,.065]);
- // A continuous, tapering human face rather than exposed skull/jaw pieces.
- const face=new THREE.SphereGeometry(1,32,24),points=face.attributes.position;
+ // Hollow Eyes: sockets, lids, nose and gaunt cheeks share one continuous
+ // surface. The recessed socket colour stays black under the player's torch;
+ // there are no eyeballs, pupils, glowing eyes or floating facial primitives.
+ const bell=(x,y,cx,cy,rx,ry)=>Math.exp(-(((x-cx)/rx)**2+((y-cy)/ry)**2));
+ const smooth=(a,b,v)=>{const t=THREE.MathUtils.clamp((v-a)/(b-a),0,1);return t*t*(3-2*t);};
+ function facialSurface(x,y){
+  const ax=Math.abs(x),eyeY=y-.033+(ax-.059)*.10;
+  const socket=Math.hypot((ax-.059)/.040,eyeY/.020);
+  const hollow=bell(ax,y,.092,-.079,.031,.041);
+  const temple=bell(ax,y,.117,.067,.029,.057);
+  const cheek=bell(ax,y,.089,-.015,.030,.020);
+  const brow=bell(ax,y,.059,.067,.046,.014);
+  const nose=bell(x,y,0,.003,.018,.066)*.025
+   +bell(x,y,0,-.046,.022,.022)*.030
+   +bell(ax,y,.019,-.053,.012,.013)*.008;
+  const nostril=bell(ax,y,.015,-.061,.006,.0035);
+  const mouthY=-.118+.0015*(1-Math.min(1,(x/.046)**2));
+  const mouthWidth=Math.exp(-((x/.040)**6));
+  const seam=mouthWidth*Math.exp(-(((y-mouthY)/.0025)**2));
+  const upperLip=mouthWidth*Math.exp(-(((y-mouthY-.005)/.0045)**2));
+  const lowerLip=mouthWidth*Math.exp(-(((y-mouthY+.007)/.005)**2));
+  const depth=-.031*Math.exp(-(socket**4)*1.1)
+   +.004*Math.exp(-(((socket-1.12)/.20)**2))
+   +brow*.012+cheek*.015-hollow*.021-temple*.009+nose
+   -nostril*.005+upperLip*.006+lowerLip*.008-seam*.002;
+  const socketShade=.0005+.9995*smooth(.86,1.28,socket);
+  const lowerLid=bell(ax,eyeY,.059,-.025,.040,.007);
+  const noseSide=bell(ax,y,.027,-.006,.012,.050);
+  const shade=socketShade*(1-hollow*.72)*(1-temple*.32)
+   *(1-bell(ax,y,.058,.006,.044,.023)*.36)*(1-lowerLid*.50)
+   *(1-noseSide*.40)*(1-nostril*.90)*(1-seam*.96)
+   *(1-upperLip*.68)*(1-lowerLip*.55);
+  return {depth,shade};
+ }
+ const face=new THREE.SphereGeometry(1,96,64),points=face.attributes.position;
  for(let i=0;i<points.count;i++){
-  const x=points.getX(i),y=points.getY(i),z=points.getZ(i);
-  points.setXYZ(i,x*.145*(y<0?1+y*.30:1),y*.227-.012,z*.119+(z>0&&y<0?.008:0));
+  const sx=points.getX(i),sy=points.getY(i),sz=points.getZ(i);
+  const x=sx*.145*(sy<0?1+sy*.30:1),y=sy*.227-.012;
+  const front=smooth(0,.55,sz),surface=facialSurface(x,y);
+  points.setXYZ(i,x,y,sz*.119+(sz>0&&sy<0?.008:0)+surface.depth*front);
  }
- face.computeVertexNormals();part('Pallid human face',face,skin,head);
- oval('Quietly parted mouth',[0,-.116,.117],[.038,.008,.005],dark,head);
- cord('Lower lip',[[-.034,-.12,.119],[0,-.127,.122],[.034,-.12,.119]],.004,lip,head);
- for(const s of [-1,1]){
-  const socket=oval('Sunken eye shadow',[s*.058,.031,.098],[.039,.023,.014],eyeShade,head);socket.rotation.z=s*.10;
-  oval('Clouded eye',[s*.058,.034,.112],[.022,.009,.005],eye,head);
-  oval('Dark fixed pupil',[s*.058,.034,.117],[.006,.008,.002],dark,head);
-  const brow=oval('Tired brow',[s*.059,.060,.096],[.042,.009,.016],skin,head);brow.rotation.z=s*.06;
-  cord('Lower eyelid',[[s*.027,.023,.110],[s*.057,.017,.112],[s*.089,.023,.098]],.004,skin,head);
-  oval('Small nostril',[s*.014,-.052,.134],[.006,.003,.003],eyeShade,head);
+ face.computeVertexNormals();
+ // Sample the same sculpt in UV space for smooth lid/lip edges independent of
+ // mesh density. Linear diffuse colour and a matte material keep empty sockets
+ // dark even at close torch range, without a specular eyeball-like highlight.
+ const textureSize=512,pixels=new Uint8Array(textureSize*textureSize*4);
+ for(let row=0;row<textureSize;row++)for(let col=0;col<textureSize;col++){
+  const phi=(col+.5)/textureSize*Math.PI*2,theta=(1-(row+.5)/textureSize)*Math.PI;
+  const sy=Math.cos(theta),sz=Math.sin(phi)*Math.sin(theta);
+  const x=-Math.cos(phi)*Math.sin(theta)*.145*(sy<0?1+sy*.30:1),y=sy*.227-.012;
+  const shade=1+(facialSurface(x,y).shade-1)*smooth(0,.55,sz),index=(row*textureSize+col)*4;
+  pixels[index]=pixels[index+1]=pixels[index+2]=Math.round(shade*255);pixels[index+3]=255;
  }
- oval('Nose bridge',[0,-.008,.119],[.017,.054,.026],skin,head);
- oval('Nose tip',[0,-.042,.137],[.023,.018,.019],skin,head);
+ const faceMap=new THREE.DataTexture(pixels,textureSize,textureSize,THREE.RGBAFormat);
+ faceMap.name='Hollow sockets and gaunt facial shading';faceMap.magFilter=THREE.LinearFilter;
+ faceMap.minFilter=THREE.LinearMipmapLinearFilter;faceMap.generateMipmaps=true;faceMap.needsUpdate=true;
+ const faceSkin=new THREE.MeshLambertMaterial({color:0x6b786b,map:faceMap});
+ part('Continuous hollow-eyed face',face,faceSkin,head);
  // Matted strands frame the face and break up the smooth skull silhouette.
  for(let i=0;i<17;i++){
   const a=.70+i/16*(Math.PI*2-1.4),x=Math.sin(a),z=Math.cos(a);

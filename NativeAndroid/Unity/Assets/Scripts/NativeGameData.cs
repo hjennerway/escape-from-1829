@@ -11,7 +11,9 @@ public sealed partial class NativePrototypeGame
     [Serializable] public class Wall { public Point a,b;public float height; }
     [Serializable] public class Doorway : Point { public string roomId;public float dx,dz,width,height,depth; }
     [Serializable] public class Room { public string id,number,name;public Point[] points;public Point label;public float width; }
-    [Serializable] public class Flight { public string id;public int lower,upper;public Point[] route;public Point lowerDeparture,upperDeparture;[NonSerialized] public bool blocked; }
+    [Serializable] public class Flight { public string id;public int lower,upper;public Point[] route;public Wall[] runs;public Deck[] decks;public Point lowerDeparture,upperDeparture;[NonSerialized] public bool blocked; }
+    [Serializable] public class Deck { public Point[] points;public float y; }
+    [Serializable] public class Well : Bounds { public float bottom,top; }
     [Serializable] public class Furnishing : Point {public float width,depth,height,rotation;}
     [Serializable] public class Navigation { public Layout[] floors;public Flight[] flights; }
     [Serializable] public class Spawn : Point { public string name; public int type; }
@@ -23,6 +25,7 @@ public sealed partial class NativePrototypeGame
         public int id;public string name;public float elevation;public Point origin;
         public Polygon[] loops,rails;public Wall[] walls,exitHeaders;public Bounds[] shafts;
         public Doorway[] doorways;public Room[] rooms,corridors;public Point[] safeSpawns,lamps;
+        public Well[] wells;public Bounds[] openings,ceilingOpenings;
         public Furnishing[] furniture,roomDoors;
         [NonSerialized] public Flight[] flights;
     }
@@ -56,6 +59,7 @@ public sealed partial class NativePrototypeGame
         public EarthAnchor earthAnchor; public Point[] perimeter; public Diagnosis[] diagnoses; public Cause[] causes;
         public int jumpBounds,escapeJumpBounds;public Obstacle[] supportLibrary;
         public EscapeScenario escape;public Stats escapeStats,fittings;
+        public SightingRoute[] sightings;public Stats ghost,figure;
         public string[] outdoorChunks;
     }
     public struct Waypoint { public Vector2 position; public int floor;public float y; public Waypoint(Vector2 p,int f,float height=0) { position=p;floor=f;y=height; } }

@@ -1,12 +1,15 @@
 // Serialize the reviewed browser plan into JsonUtility-compatible records.
 // Coordinates stay in browser space; the Unity renderer reflects Z once.
+import {stairConnection,stairFlights,stairLandingPolygons,stairShape,stairOpenings} from '../../Browser/dist/asylum-stairs.mjs';
 export const point = ([x,z]) => ({x,z});
 export const point3 = ([x,y,z]) => ({x,y,z});
 export function exportNavigation(floors, stairRoute, stairDeparture, {roomNumbers,displayName}) {
   const flights=[];
   for(const stair of floors[0].stairs) for(const [lower,upper] of stair.connections)
     {const route=stairRoute(stair,floors[lower].elevation,floors[upper].elevation,lower,upper);
-    flights.push({id:stair.id,lower,upper,route:route.map(point3),lowerDeparture:stairDeparture(floors[lower],route[0]),upperDeparture:stairDeparture(floors[upper],route.at(-1))});}
+    const connection=stairConnection(stair,lower,upper),lo=floors[lower].elevation,hi=floors[upper].elevation,s=stairShape(connection),polygons=stairLandingPolygons(connection);
+    const decks=polygons.length?polygons.map((points,i)=>({points:points.map(point),y:i?hi:(lo+hi)/2})):connection.straightFlight?[]:[{points:[[s.minX,s.back],[s.maxX,s.back],[s.maxX,s.maxZ],[s.minX,s.maxZ]].map(point),y:(lo+hi)/2}];
+    flights.push({id:stair.id,lower,upper,route:route.map(point3),runs:stairFlights(connection,lo,hi).map(([a,b])=>({a:point3(a),b:point3(b)})),decks,lowerDeparture:stairDeparture(floors[lower],route[0]),upperDeparture:stairDeparture(floors[upper],route.at(-1))});}
   return {flights,floors:floors.map(f=>({
     id:f.id,name:f.name,elevation:f.elevation,cellSize:f.cellSize,width:f.width,height:f.height,
     origin:f.origin,cells:Array.from(f.cells),spawn:f.spawn,patrol:f.patrol,enemies:f.enemies,
@@ -14,6 +17,7 @@ export function exportNavigation(floors, stairRoute, stairDeparture, {roomNumber
     furniture:(f.furnitureObstacles??[]).map(i=>({x:i.x,y:i.y,z:i.z,width:i.width,depth:i.depth,height:i.height,rotation:i.rotation})),
     roomDoors:(f.roomDoors??[]).map(i=>({x:i.x,z:i.z,width:i.width,depth:i.depth,height:i.height,rotation:i.rotation})),
     walls:f.walls.map(w=>({a:point(w.a),b:point(w.b)})),shafts:f.shafts,
+    wells:f.stairWells,openings:f.stairs.flatMap(s=>stairOpenings(s,f.id,false)),ceilingOpenings:f.stairs.flatMap(s=>stairOpenings(s,f.id,true)),
     rails:f.stairRails.map(points=>({points:points.map(([x,y,z])=>({x,y:y+f.elevation,z}))})),
     doorways:f.doorways,exitHeaders:f.exitHeaders.map(w=>({...w,a:point(w.a),b:point(w.b)})),
     rooms:f.rooms.map(r=>({id:r.id,number:roomNumbers(f).get(r.id)??'',name:displayName(r.name),points:r.points.map(point),label:point(r.label)})),

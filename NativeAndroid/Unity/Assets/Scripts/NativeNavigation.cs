@@ -71,7 +71,7 @@ public sealed partial class NativePrototypeGame
             foreach(var offset in new[]{Vector2.zero,new Vector2(-.27f,-.27f),new Vector2(-.27f,.27f),new Vector2(.27f,-.27f),new Vector2(.27f,.27f)}){
                 float x=p.x+offset.x,z=p.y+offset.y;if(!InOutline(plan,x,z))continue;
                 for(int side=0;side<2;side++){float height=plan.elevation+(side==0?-.2f:plan.id==2?2.9f:3.8f);if(height<=y+.1f)continue;bool open=false;
-                    foreach(var flight in plan.flights)if((side==0?flight.upper:flight.lower)==plan.id){int si=Array.FindIndex(plan.stairs,s=>s.id==flight.id);if(si<0)continue;var shaft=plan.shafts[si];if(x>shaft.minX&&x<shaft.maxX&&z>shaft.minZ&&z<shaft.maxZ)open=true;}
+                    foreach(var opening in side==0?plan.openings:plan.ceilingOpenings)if(x>opening.minX&&x<opening.maxX&&z>opening.minZ&&z<opening.maxZ)open=true;
                     if(!open)ceiling=Mathf.Min(ceiling,height);
                 }
             }
@@ -79,21 +79,11 @@ public sealed partial class NativePrototypeGame
             foreach(var h in plan.exitHeaders)if(plan.elevation+h.height>y+.1f&&SegmentDistance(p.x,p.y,h.a,h.b)<.5f)ceiling=Mathf.Min(ceiling,plan.elevation+h.height);
         }return ceiling;
     }
-    void ResetJump(){jumpOffset=jumpVelocity=0;jumping=perched=false;playerFlight=null;verticalTrend=0;}
-    void Jump(){if(jumping||paused||map||help||viewingArt!=null)return;if(!Indoors){float support=OutdoorHeight(player,playerY);if(support>=playerY&&support<=playerY+.48f&&HeightClear(player,playerY,support))playerY=support;if(Mathf.Abs(playerY-JumpSupport(player,playerY))>.08f)return;}jumping=true;jumpVelocity=7.8f;}
+    void ResetJump(){freeInteriorJump=false;jumpOffset=jumpVelocity=0;jumping=perched=false;playerFlight=null;verticalTrend=0;}
+    void Jump(){if(jumping||paused||map||help||viewingArt!=null)return;if(!Indoors){float support=OutdoorHeight(player,playerY);if(support>=playerY&&support<=playerY+.48f&&HeightClear(player,playerY,support))playerY=support;if(Mathf.Abs(playerY-JumpSupport(player,playerY))>.08f)return;}jumping=true;if(Indoors)freeInteriorJump=true;jumpVelocity=7.8f;}
     void MovePlayer(Vector2 step,float dt)
     {
-        int previousFloor=floor;
-        if(Indoors){
-            int count=Mathf.Max(1,Mathf.CeilToInt(dt*120),Mathf.CeilToInt(step.magnitude/.08f));float delta=dt/count;
-            for(int i=0;i<count;i++){
-                playerY-=jumpOffset;var next=player;float nextY=playerY;int nextFloor=floor;var flight=playerFlight;
-                MoveInterior(floors,ref next,ref nextY,ref nextFloor,ref flight,step.x/count,step.y/count);
-                if(StaffMoveAllowed(player,playerY,next,nextY)&&(!jumping||nextY+jumpOffset+1.8f<=JumpCeiling(next,nextY)+.001f)){player=next;playerY=nextY;floor=nextFloor;playerFlight=flight;}
-                if(jumping){jumpOffset+=jumpVelocity*delta-9*delta*delta;jumpVelocity-=18*delta;float limit=Mathf.Max(0,JumpCeiling(player,playerY)-playerY-1.8f);if(jumpOffset>limit){jumpOffset=limit;jumpVelocity=Mathf.Min(jumpVelocity,0);}if(jumpOffset<=0){jumpOffset=jumpVelocity=0;jumping=false;}}playerY+=jumpOffset;
-            }
-            if(previousFloor!=floor)ShowFloor();
-        }else {var previous=player;MoveOutside(step,dt);ObserveGroundsBoundary(previous);}
+        if(Indoors)MoveIndoorCurrent(step,dt);else {var previous=player;MoveOutside(step,dt);ObserveGroundsBoundary(previous);}
     }
     class SpatialObstacles
     {

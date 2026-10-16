@@ -3,7 +3,9 @@
 export function createCorridorFigure(THREE){
  const model=new THREE.Group(),pelvis=new THREE.Group(),upper=new THREE.Group();
  model.name='Distant corridor silhouette';model.add(pelvis);pelvis.add(upper);
- const material=new THREE.MeshBasicMaterial({color:0x020303}),geometries=[];
+ // Keep the silhouette black even at the far end of the longest halls;
+ // exponential room fog otherwise erases it. Walls still depth-occlude it.
+ const material=new THREE.MeshBasicMaterial({color:0x020303,fog:false,transparent:true,depthWrite:false}),geometries=[];
  const oval=new THREE.SphereGeometry(1,10,8);geometries.push(oval);
  function mesh(geometry,parent,position=[0,0,0],scale=[1,1,1]){
   const part=new THREE.Mesh(geometry,material);part.position.set(...position);part.scale.set(...scale);parent.add(part);return part;
@@ -47,5 +49,5 @@ export function createCorridorFigure(THREE){
   }
  }
  pose(0);
- return {model,pose,dispose(){model.removeFromParent();geometries.forEach(g=>g.dispose());material.dispose();}};
+ return {model,pose,setOpacity(value){material.opacity=value;},dispose(){model.removeFromParent();geometries.forEach(g=>g.dispose());material.dispose();}};
 }

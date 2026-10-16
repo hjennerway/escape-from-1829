@@ -1,3 +1,110 @@
+## Shared desktop input deadline (10 October 2026)
+
+Windows runs 38046824324 and 38047472178 passed model checks, packaging,
+arrival and gameplay, then failed at the Aerial click. The UI/navigation
+budget was five minutes, but clickViewportControl still used its independent
+two-minute default because the callers did not pass the configured budget.
+The failure receipt therefore reported uiTimeout=300000 while the native
+mouse acknowledgement was actually limited to 120000 ms.
+
+createViewportInput now binds one explicit deadline to a page for both UI
+readiness and native mouse input. The smoke harness configures that helper
+once from the same deadline used by navigation: five minutes in explicit
+hosted software mode, two minutes locally. The separate helper defaults are
+removed, and missing or invalid deadline configuration fails immediately.
+All visibility, hit-testing, trusted-input, pointer-lock and gameplay
+assertions remain enabled; no runtime, model, render-quality or export changes
+are made.
+
+A mocked-clock regression accepts a three-minute mouse acknowledgement
+under the five-minute budget, retains the local two-minute failure, and
+rejects a permanently stalled hosted acknowledgement. All 13 desktop unit
+tests and the complete packaged offline smoke pass locally with a verified
+NVIDIA RTX 3090 Ti / ANGLE Direct3D11 renderer. The hardware log is
+Desktop/artifacts/ci-shared-input-smoke.log. Hosted confirmation is tracked
+in the follow-up PR.
+
+## Confirmed hosted CI and timing headroom (10 October 2026)
+
+Both hosted workflows passed on c0c67e674f1d8144424cf09af93c4cf6b0166f39:
+[Pages run 37980729399](https://github.com/hjennerway/escape-from-1829/actions/runs/37980729399)
+and [Windows run 37980729350](https://github.com/hjennerway/escape-from-1829/actions/runs/37980729350).
+Windows passed the full packaged offline smoke and uploaded the runnable
+folder, preview MSIX and diagnostic evidence. The arrival UI wait took
+159195 ms on SwiftShader, confirming that the previous two-minute limit
+was too short. Local validation continues to require the hardware GPU.
+
+The complete successful Windows job took 59 minutes. Its job allowance is
+now 90 minutes to leave room for hosted-runner variation; Pages remains
+60 minutes and the individual test deadlines are unchanged. This final
+headroom adjustment changes only workflow configuration and documentation.
+No gameplay, modelling or exported assets are changed by the CI repair.
+
+## Hosted interior-loading deadline repair (9 October 2026)
+
+Runs 37963314690 (Pages) and 37963314744 (Windows) included the first CI
+repair. Both passed the compiled estate comparison and every timeline stop,
+then hit the interior test's fixed 60-second background-loading deadline.
+The worker was still loading floor 1 in both failure reports.
+
+The browser test now uses separate inactivity and overall deadlines, tracking
+section-state changes and completed restore, shader, furniture and upload
+steps. Local hardware validation retains a 60-second inactivity limit and a
+three-minute phase limit; the explicit hosted software mode uses three and
+ten minutes respectively. Actual stalls and endless progress still fail.
+The CPU regression simulates a healthy 450-second load, a stalled section
+and endless progress without real waits or software rendering.
+
+Both workflows allow 60 minutes, including the later Windows package/smoke
+steps, and upload fresh timeline/interior evidence even when checks fail.
+The interior test logs each state transition and saves section states and
+recent preparation steps on failure. All existing rendering, retry, caching,
+entrance/stair, replay and furniture assertions remain enabled.
+
+Local GPU validation passes on NVIDIA GeForce RTX 3090 Ti / ANGLE Direct3D11,
+including prepared interiors and worker/mobile recovery. The required full
+npm test stops in the independently modified corridor-sightings test at
+line 54 (east rear wing, floor 0, speed 5, random 0); that local gameplay
+work is outside this fix. Logs are Browser/artifacts/ci-loading-repair.log
+and Browser/artifacts/ci-loading-full-suite.log. Model source fingerprints
+still match the generated assets; no model, game runtime or export changes
+are made by this repair. Hosted confirmation is tracked in the fix PR.
+
+The first PR run, 37969587163, passed the complete Pages build. Windows
+run 37969587197 also passed all compiled/interior checks and packaging,
+then exposed a later desktop-test timeout: Playwright found the Start
+button visible, enabled and stable, but its scroll-into-view acknowledgement
+did not finish within two minutes under SwiftShader. No renderer errors
+were recorded.
+
+The desktop harness now checks that each fixed-viewport control is visible,
+enabled and unobstructed, then sends a real mouse click directly. It does
+not request scrolling or wait for animation-frame actionability checks.
+Trusted user activation and the existing pointer-lock/navigation assertions
+are retained; both readiness and input remain bounded. A browser regression
+rejects covered, disabled and off-screen controls, then verifies a trusted
+click with animation-frame callbacks withheld. All nine desktop unit tests,
+that hardware-GPU regression and the complete packaged offline smoke pass
+locally; the smoke log is Desktop/artifacts/ci-viewport-smoke.log. The PR
+tracks verification of this additional interaction fix on hosted Windows.
+
+The next Pages run, 37975027177, also passed. Windows run 37975027182
+confirmed the trusted click reached the game (focused, visible, pointer locked,
+no runtime errors), but the two-minute animation-frame UI wait expired.
+Its subsequent failure screenshot showed the normal reception HUD. The
+arrival advances at most 0.25 seconds per rendered frame, so its three-second
+sequence needs at least twelve frames even on very slow software rendering.
+
+Desktop readiness now polls the DOM every 100 ms rather than waiting for
+animation frames. Hosted software UI/navigation waits allow five minutes;
+local hardware waits remain two minutes. Viewport, rendering quality,
+animation and gameplay assertions are unchanged. Per-stage wait timings
+and arrival/HUD state are recorded for diagnosis. The bounded UI-wait
+regression and complete packaged offline smoke pass locally on the verified
+RTX 3090 Ti, including the three-second arrival and all game modes;
+see Desktop/artifacts/ci-ui-waits-smoke.log. Hosted confirmation is tracked
+in the PR.
+
 ## GitHub Pages and Windows CI repair (9 October 2026)
 
 The Pages run 37954613176 passed source checks, compilation and the compiled
@@ -15438,49 +15545,169 @@ Unity/Android and Blender sources and exports are unchanged by this work.
 
 ## Fleeting corridor figure — 9 October 2026
 
-Escape and Explore now share `corridor-sightings.mjs`, a silent, featureless
-black silhouette that occasionally runs across a distant interior junction.
+Escape and Explore share `corridor-sightings.mjs`, a silent, featureless black
+silhouette that runs across a distant interior corridor.
 It is separate from pursuers, objectives, notebook entries and collisions.
 Following the owner's visual feedback, `corridor-figure.mjs` uses a shaped
 jacket and trouser profile, sloped shoulders, a continuous jaw/head outline,
 shoes, bent elbows and articulated knees instead of straight capsule limbs.
 A two-bone leg solve keeps planted shoes on the floor as the figure runs;
 its upper body leans forward, with no facial features or clothing highlights.
-The first opportunity follows 45–90 seconds of active corridor time; subsequent
-sightings are separated by 85–180 seconds, with irregular retries when no suitable
-view exists. Available alternative junctions are preferred over the previous one.
+The owner's final follow-up changes the interval to **20 seconds**, superseding
+the original random waits and intermediate 30- and 15-second schedules.
+The first crossing starts at 20 seconds of active indoor play; subsequent
+crossings start 20 seconds apart whenever a suitable corridor
+view is available. Animation time counts toward that interval. Room visits
+advance the timer, but sightings only start in corridors. A due opportunity
+waits for the next clear view and retries every 0.15 seconds. Randomness chooses
+the route, direction and speed; it never skips a due opportunity.
 
-Crossings come from the actual plan's intersecting corridor segments. Every
-point must clear walls, stair shafts, doors and furniture; the player must be
-indoors on the same floor, looking obliquely at the crossing, 18–42 metres away.
-The route runs across the sightline, with both ends hidden behind masonry.
-The controller also checks that rooms along the route and sightline have loaded.
-At 8–10 metres per second the whole crossing lasts less than a second, with only
-its middle exposed. The figure has no face, eye highlights, sound or light.
-Its route never follows the player. Approaching within 18 metres, changing floor,
-using stairs, pausing, opening artwork/notebook or a long frame gap cancels it;
-restarting Escape resets its initial delay.
+The previous junction-only catalogue still left most walks without a sighting.
+The controller now also builds transverse routes along ordinary passage
+segments, in either viewing direction. Short segments can form the far end of
+a longer continuous view. The latest distance instruction places each crossing
+randomly within **80–100% of the clear corridor ahead**, superseding the fixed
+25/30-metre preference and 42-metre maximum. The furthest valid sightline is
+extended to its wall, turn or obstruction to measure the corridor end. Only
+crossings in its far fifth qualify. The **20-metre minimum** remains in force;
+short corridors, a view into a side wall, or standing near the corridor end keep
+the opportunity pending rather than allowing a close appearance.
+
+Natural junction routes retain their masonry-concealed ends. Ordinary passage
+crossings dissolve briefly at their side edges, exposing only the running
+middle without needing another passage on either side. The exposed strip must
+clear walls, stairs, doors and furniture, and its rooms and sightline must have
+loaded. At least 1.2 metres across its middle must be in clear view, excluding
+tiny glimpses through a corner that hide most of the figure. This is a
+nonphysical apparition, not an NPC walking through rooms.
+Depth testing retains normal wall occlusion; zero-opacity geometry does not
+write depth. Its unlit black material excludes room fog, which otherwise nearly
+erases the outline in continuous 80-metre-plus views. No light is added.
+At 8–10 metres per second, the exposed glimpse lasts a fraction of a second.
+Its route stays fixed and never follows the player.
+
+Approaching within 20 metres, changing floor, using stairs, pausing, opening
+artwork/notebook or a long frame gap cancels it. A crossing unseen for at least
+0.05 seconds stays due instead of consuming the interval. Pause, outdoor time
+and stalled frames do not advance the timer; restarting Escape resets it.
+
+The logic regression covers 72 combinations of eligible long corridor, viewing
+direction and random choice on the ground, first and basement floors. Each must
+visibly cross at 20, 40 and 60 seconds, at least 20 metres away. Additional cases
+cover normal walking/sprinting, deferred short upper corridors, room time,
+missed-view retries, loading, occlusion, pause and proximity cancellation.
+Separate 30-, 55- and 100-metre corridors, with and without an intervening wall,
+check the 80–100% band across random choices and removal of the old distance cap.
+The browser regression audits the same 24 corridor views in each game mode
+using paired furnished-scene renders with and without the silhouette. Each of
+three scheduled appearances must expose an outline with measurable contrast;
+the receipt records both faint and strong changed pixels and spawn distance.
+It also exercises
+actual movement on desktop and phone in both directions, concealed start/end,
+brief exposure and cancellation on pause.
 
 This is a Browser runtime addition; the existing architecture and furniture
-models are unchanged. Both compiled manifests still match their source hashes,
+models are unchanged. The figure is not part of the compiled architecture,
 so no generated model rebuild is needed. Unity/Android, Blender and packaged
 exports are not changed or regenerated by this feature.
 
-The revised figure passes `npm run test:sightings`, the existing game-loop and
-walking/interior logic checks, and the hardware GPU policy check. Visual tests
-use the actual furnished Escape and Explore scenes, ground/first floors and
-1200×800 / 390×844 viewports. The captured silhouette is exposed for about
-0.4 seconds, with no differing pixels at its hidden start or completed end.
-There are no page or rendering errors. Screenshots, per-frame pixel checks and
-the focused test log are in `Browser/artifacts/corridor-sightings/`.
+The final proportional-distance implementation passes `npm run test:sightings`
+and the hardware GPU policy check. All 144 scheduled rendered appearances are
+visible, with tested spawn distances of 24.1–78.5 metres and at least 46
+strongly changed pixels. Actual walking exposes the silhouette for 10–11
+frames at 30 FPS, keeping it at least 23.4 metres away in those captures.
+There are no page or shader errors. Screenshots and per-frame pixel checks are in
+`Browser/artifacts/corridor-sightings/`, including `*-scheduled.png`,
+`*-walking.png` and `validation.json`. Intermediate runs are retained in
+`scheduled-focused.log`, `fifteen-second-focused.log` and
+`twenty-second-focused.log`; the final proportional-distance run uses
+`far-corridor-focused.log`.
 The renderer is NVIDIA GeForce RTX 3090 Ti through ANGLE Direct3D11. The browser
 check requires local-server access outside this environment's network sandbox;
 no software-rendering fallback is used.
 
-The required `npm test` run passes through the interior, game, walking and
-preceding estate checks, then exits 1 at the already documented
+The required `npm test` runs, including the availability correction, pass through
+the interior, game, walking and preceding estate checks, then exit 1 at the already documented
 `test-jarman.mjs` protected-estate snapshot mismatch (818,878 primitives versus
 818,879 expected). That check builds `createEscapeExterior`; it does not import
-or construct either new corridor module. The complete invocation is retained in
-`Browser/artifacts/corridor-sightings/full-suite.log` and is not reported as
-passing. No unrelated snapshot fixtures are changed.
+or construct either new corridor module. The invocations are retained in
+`Browser/artifacts/corridor-sightings/full-suite.log` and
+`frequency-full-suite.log` and `scheduled-full-suite.log` and are not reported
+as passing. The final timing/distance revisions also rerun the focused suite.
+No unrelated snapshot fixtures are changed.
+
+## Hollow-eyed ghost face — 9 October 2026
+
+The owner chose face mockup 02, Hollow Eyes. The approved concept and modelling
+constraints are saved in `Research/ghost-face/`. This supersedes the clouded-eye
+face described in the earlier apparition entry.
+
+`Browser/dist/asylum-ghost.mjs` now uses one continuous sculpted head surface
+with concave black eye sockets, raised lids and brows, cheek hollows, a narrow
+nose and thin closed lips. The previous separate eye, pupil, nose and mouth
+primitives are removed. A deterministic 512-square diffuse shading map gives
+the socket/lip boundaries smooth edges; a matte face material keeps specular
+highlights from filling the empty eyes under the torch. The concept image is
+not a runtime asset. Hair, shroud, limbs, animation and pursuit are unchanged.
+
+The complete apparition has 23 meshes and 21,437 triangles, within the existing
+character budgets, and retains its one local light. `npm run test:ghost` passes
+geometry/clearance, animation, the real game-loop checks and hardware browser
+validation. The renderer is NVIDIA GeForce RTX 3090 Ti / ANGLE Direct3D11.
+Reviewed captures cover torch on/off, close approach, phone framing and two
+additional face portraits; there are no page or shader errors. The portraits
+use a diagnostic 35-degree field of view at 1.3 metres, with a turned head and
+torch off in the second view. Gameplay cameras are unchanged. Evidence is in
+`Browser/artifacts/asylum-ghost/`, with the focused run recorded in
+`hollow-eyes-focused.log`. The hardware-launcher policy check also passes.
+
+The required `npm test` run passes its first 118 commands, including the ghost
+and game-loop checks, then stops at the previously documented
+`test-jarman.mjs:11` protected-estate snapshot mismatch (818,878 primitives
+versus 818,879 expected). This check does not construct the ghost. Its output
+is saved as `Browser/artifacts/asylum-ghost/hollow-eyes-full-suite.log`; the
+complete suite is not reported as passing.
+
+Both compiled estate/interior manifests still match their current source
+hashes. This runtime character is outside those assets, so no model rebuild
+is needed. Unity/Android and Blender sources/exports are not changed or
+regenerated by this browser face update.
+
+## Jumping over interior stair railings (9 October 2026)
+
+Space now clears the exposed internal stair railings in Explore and Asylum
+Escape when there is enough headroom. Indoor jumping uses absolute feet height
+instead of subtracting its jump offset before ground navigation. It checks the
+actual rail top, falls onto the floor or flight below a crossing, and supports
+landing on a rail and stepping off again. Ordinary walking retains its guarded
+stair routes. Full-height well masonry, room walls, doors, furniture, slabs,
+headers and runtime gate/loading checks remain part of movement validation.
+
+Airborne support comes from the current connection-specific flight and landing
+footprints, including the straight Library flight. Stair metadata preserves the
+lighting blend during a fall; normal route walking resumes once a landing is
+back within its navigable corridor. Jump reset and single-press input behavior
+are retained. Only browser movement and tests change; no modelling geometry,
+Unity/Android project or Blender export is changed or regenerated. The current
+compiled interior manifest still matches its modelling source fingerprint.
+
+`test-jump.mjs` passes 48 railing crossings across all eight connections at
+120 Hz, 60 Hz and 10 Hz, in both directions where height permits, plus rail-top
+support, step-off, continued stair walking, continuous falling height, well
+walls and runtime barriers. Existing jump, input, stair and exploration checks
+pass. The hardware browser check exercises real Space input in both modes,
+all eight Escape connections, the furnished Explore stairwell, landing on
+flights, exterior wall/hedge jumps, held keys, pause/notebook, restart and door
+transfer. Its manual timing hook now accepts Windows line endings, and its
+pause/notebook checks wait for asynchronous mouse-capture resumption.
+
+GPU validation uses NVIDIA GeForce RTX 3090 Ti / ANGLE Direct3D11. Browser
+captures and the result receipt are in `Browser/artifacts/stair-railing-jump/`;
+the required full-suite log is `Browser/artifacts/stair-railing-jump-suite.log`.
+
+The required `npm test` run passed the jump regression, stair/door routes,
+interior and preceding estate checks, then stopped at the already documented
+`test-jarman.mjs:11` protected-estate snapshot mismatch: 818,878 primitives
+versus 818,879 expected, with the same existing hash mismatch. The full suite
+is therefore not reported as passing; the unrelated snapshot is unchanged.
+The final hardware browser run passed with no page or rendering errors.

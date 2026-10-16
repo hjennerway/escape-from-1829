@@ -8,7 +8,7 @@ const destination=new URL('./artifacts/asylum-ghost/',import.meta.url);await mkd
 const {server,base}=await startTestServer();let browser;const errors=[];
 const instrument=`
 window.ghostTest={get ready(){return ready},start,update,
-async stage({torchOn=true,distance=3.6}={}){
+async stage({torchOn=true,distance=3.6,facePortrait=false,faceTurn=0}={}){
  start();arrivalCutscene.update(3);state='paused';
  Object.assign(player,{x:35.8,z:-12,y:0,floor:0,outside:false,stair:null});showFloor();
  await interiorLoader.prepare(player);
@@ -16,8 +16,10 @@ async stage({torchOn=true,distance=3.6}={}){
  enemies.forEach(e=>{e.mesh.visible=e===ghost;});
  Object.assign(ghost,{x:35.8,z:player.z+distance,y:0,floor:0});
  ghost.mesh.position.set(ghost.x,0,ghost.z);ghost.mesh.rotation.y=Math.PI;resetAsylumGhost(ghost.mesh);updateAsylumGhost(ghost.mesh,1.3);
- camera.position.set(player.x,1.65,player.z);yaw=Math.PI;pitch=0;camera.rotation.set(0,yaw,0);
- torch.visible=torchOn;torch.position.copy(camera.position);torchTarget.position.set(player.x,1.55,ghost.z);interiorLights.update(player);
+ ghost.mesh.userData.ghostRig.head.rotation.y+=faceTurn;
+ camera.position.set(player.x,facePortrait?1.98:1.65,player.z);yaw=Math.PI;pitch=0;camera.rotation.set(0,yaw,0);
+ camera.fov=facePortrait?35:74;camera.updateProjectionMatrix();
+ torch.visible=torchOn;torch.position.copy(camera.position);torchTarget.position.set(player.x,facePortrait?1.98:1.55,ghost.z);interiorLights.update(player);
  renderer.render(scene,camera);
  return {name:ghost.mesh.name,meshes:(()=>{let n=0;ghost.mesh.traverse(o=>{if(o.isMesh)n++;});return n})()};
 },
@@ -31,8 +33,8 @@ try{
  await page.route('**/game.mjs',async r=>r.fulfill({contentType:'text/javascript',body:(await readFile(new URL('./dist/game.mjs',import.meta.url),'utf8'))+instrument}));
  await page.goto(base+'/?seed=1829');await page.waitForFunction(()=>window.ghostTest?.ready);
  const captures=[];
- for(const spec of [{name:'corridor-torch',torchOn:true,distance:3.6},{name:'corridor-dark',torchOn:false,distance:5},{name:'close-face',torchOn:true,distance:1.6}]){
-  captures.push(await page.evaluate(spec=>ghostTest.stage(spec),spec));
+ for(const spec of [{name:'corridor-torch',torchOn:true,distance:3.6},{name:'corridor-dark',torchOn:false,distance:5},{name:'close-face',torchOn:true,distance:1.6},{name:'face-portrait',torchOn:true,distance:1.3,facePortrait:true},{name:'face-three-quarter',torchOn:false,distance:1.3,facePortrait:true,faceTurn:-.38}]){
+  captures.push({view:spec.name,...await page.evaluate(spec=>ghostTest.stage(spec),spec)});
   await page.screenshot({path:fileURLToPath(new URL(spec.name+'.png',destination))});
  }
  await page.setViewportSize({width:390,height:844});await page.evaluate(()=>ghostTest.stage({distance:3.6}));

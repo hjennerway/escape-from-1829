@@ -31,7 +31,7 @@ assert.equal(collisionOffset,collisions.length);assert(manifest.jumpBounds>10000
 const escapeCollision=await readFile(new URL('escape-jump-collision.bytes',generated));assert.equal(sha(escapeCollision),manifest.assetHashes['escape-jump-collision.bytes']);assert.equal(escapeCollision.readUInt32LE(0),0x4a313832);assert.equal(escapeCollision.readUInt32LE(4),manifest.escapeJumpBounds);assert(manifest.escapeJumpBounds>100000);
 const selectionBounds=[],outdoorNames=new Set();let outdoorTriangles=0;
 assert(manifest.outdoorChunks?.length>0,'Outdoor library is exported in bounded parts');
-for(const filename of [...manifest.outdoorChunks,...['indoor','guard','selection','escape','fittings'].map(n=>n+'.glb')]){
+for(const filename of [...manifest.outdoorChunks,...['indoor','guard','ghost','figure','selection','escape','fittings'].map(n=>n+'.glb')]){
   const name=filename.startsWith('outdoor-')?'outdoor':filename.slice(0,-4);
   const bytes=await readFile(new URL(filename,generated));assert.equal(sha(bytes),manifest.assetHashes[filename]);
   assert.equal(bytes.readUInt32LE(0),0x46546c67);assert.equal(bytes.readUInt32LE(4),2);assert.equal(bytes.readUInt32LE(8),bytes.length);
@@ -70,6 +70,8 @@ for(const filename of [...manifest.outdoorChunks,...['indoor','guard','selection
     assert(decorated>0,'Wallpaper materials exist on every floor');
   }
   if(name==='guard')for(const joint of ['Pelvis','Upper body','Head','Key ring','Left hip','Right hip','Left knee','Right knee','Left ankle','Right ankle','Left shoulder','Right shoulder','Left elbow','Right elbow'])assert(names.includes(joint),'Preserve guard joint '+joint);
+  if(name==='ghost'){for(const joint of ['Suspended shroud','Lolling head','Drooping shoulder','Claw hand','Trailing shroud scrap','Continuous hollow-eyed face'])assert(names.includes(joint),'Preserve hollow-eyed ghost '+joint);assert(!names.some(n=>/glowing eye|chest sign/i.test(n??'')));assert(triangles<26000);}
+  if(name==='figure')for(const joint of ['Figure pelvis','Figure upper','Hip','Knee','Ankle','Shoulder','Elbow'])assert(names.includes(joint),'Preserve running silhouette '+joint);
 }
 assert.equal(outdoorTriangles,manifest.outdoor.triangles);
 for(let i=0;i<manifest.meshFlags.length;i++)assert(outdoorNames.has('estate-'+i),'Exported estate mesh '+i);
@@ -100,6 +102,9 @@ for(const [src,hash] of Object.entries(manifest.imageHashes)){
 assert.equal(Object.keys(manifest.imageHashes).length,73);assert(manifest.wallArt.length>=22);assert.equal(manifest.buildings.length,34);
 assert.equal(manifest.escape.variants.length,8);assert.equal(new Set(manifest.escape.variants.map(v=>[v.variant,v.office,v.keyRoom].join(':'))).size,8);
 for(const v of manifest.escape.variants){assert.equal(v.nodes.length,7);assert.equal(v.gates.length,2);for(const n of v.nodes){assert(n.mount&&[n.x,n.z,n.mount.x,n.mount.y,n.mount.z].every(Number.isFinite));assert(n.floor>=0&&n.floor<4);}}
-assert.equal(manifest.escape.moving.length,6);assert.equal(manifest.escape.gates.length,2);assert(manifest.escape.solids.length>=30);assert(manifest.escape.lamps.length>20);assert(manifest.escape.obstaclesNoTrees.length<manifest.escape.obstacles.length);
+assert.equal(manifest.escape.moving.length,7);assert.equal(manifest.escape.gates.length,2);assert(manifest.escape.solids.length>=30);assert(manifest.escape.lamps.length>20);assert(manifest.escape.obstaclesNoTrees.length<manifest.escape.obstacles.length);
+assert.equal(manifest.escape.tower.flights.length,12);assert.equal(manifest.escape.tower.lamps.length,13);assert.equal(manifest.escape.tower.top,26.6);assert.equal(manifest.escape.tower.nodes.length,3);assert(manifest.sightings.length>100);
+for(const flight of navigation.flights){assert(flight.runs.length>0);assert(Array.isArray(flight.decks));}
+for(const floor of navigation.floors){assert(floor.wells.length>0);assert(floor.openings.length+floor.ceilingOpenings.length>0);}
 for(const art of manifest.wallArt)assert(art.floor>=0&&art.floor<floors.length);
 console.log(`PASS: ${triangleTotal.toLocaleString()} finite native triangles, 13 shared periods, four floors / 24 reachable doors, exact navigation, preserved guard rig, collision heights and 73 verified local pictures.`);

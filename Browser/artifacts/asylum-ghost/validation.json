@@ -1,16 +1,29 @@
 {
   "captures": [
     {
+      "view": "corridor-torch",
       "name": "Asylum apparition",
-      "meshes": 27
+      "meshes": 23
     },
     {
+      "view": "corridor-dark",
       "name": "Asylum apparition",
-      "meshes": 27
+      "meshes": 23
     },
     {
+      "view": "close-face",
       "name": "Asylum apparition",
-      "meshes": 27
+      "meshes": 23
+    },
+    {
+      "view": "face-portrait",
+      "name": "Asylum apparition",
+      "meshes": 23
+    },
+    {
+      "view": "face-three-quarter",
+      "name": "Asylum apparition",
+      "meshes": 23
     }
   ],
   "paused": {

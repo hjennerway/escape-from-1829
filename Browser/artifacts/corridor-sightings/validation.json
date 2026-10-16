@@ -5,7 +5,7 @@
       "mode": "escape",
       "framing": "desktop",
       "floor": 0,
-      "waited": 45.00000000000037,
+      "waited": 20.000000000000014,
       "frames": [
         {
           "time": 0,
@@ -29,35 +29,35 @@
         },
         {
           "time": 0.25,
-          "changed": 22
+          "changed": 0
         },
         {
           "time": 0.30000000000000004,
-          "changed": 273
+          "changed": 183
         },
         {
           "time": 0.35000000000000003,
-          "changed": 376
+          "changed": 182
         },
         {
           "time": 0.4,
-          "changed": 434
+          "changed": 201
         },
         {
           "time": 0.45,
-          "changed": 482
+          "changed": 222
         },
         {
           "time": 0.5,
-          "changed": 488
+          "changed": 210
         },
         {
           "time": 0.55,
-          "changed": 435
+          "changed": 175
         },
         {
           "time": 0.6000000000000001,
-          "changed": 57
+          "changed": 46
         },
         {
           "time": 0.65,
@@ -92,16 +92,24 @@
           "changed": 0
         }
       ],
-      "maxChanged": 488,
+      "maxChanged": 222,
       "active": false,
       "pixels": 960000,
-      "meshes": 20
+      "meshes": 20,
+      "walking": {
+        "reverse": false,
+        "framesVisible": 10,
+        "firstAt": 0.26666666666666666,
+        "closest": 35.49338359023751,
+        "walked": 37.19999999999975,
+        "maxChanged": 156
+      }
     },
     {
       "mode": "escape",
       "framing": "phone",
       "floor": 1,
-      "waited": 45.00000000000037,
+      "waited": 20.000000000000014,
       "frames": [
         {
           "time": 0,
@@ -125,35 +133,35 @@
         },
         {
           "time": 0.25,
-          "changed": 16
+          "changed": 0
         },
         {
           "time": 0.30000000000000004,
-          "changed": 219
+          "changed": 212
         },
         {
           "time": 0.35000000000000003,
-          "changed": 292
+          "changed": 213
         },
         {
           "time": 0.4,
-          "changed": 337
+          "changed": 234
         },
         {
           "time": 0.45,
-          "changed": 366
+          "changed": 253
         },
         {
           "time": 0.5,
-          "changed": 351
+          "changed": 239
         },
         {
           "time": 0.55,
-          "changed": 315
+          "changed": 201
         },
         {
           "time": 0.6000000000000001,
-          "changed": 36
+          "changed": 45
         },
         {
           "time": 0.65,
@@ -188,16 +196,24 @@
           "changed": 0
         }
       ],
-      "maxChanged": 366,
+      "maxChanged": 253,
       "active": false,
       "pixels": 329160,
-      "meshes": 20
+      "meshes": 20,
+      "walking": {
+        "reverse": true,
+        "framesVisible": 10,
+        "firstAt": 0.3,
+        "closest": 23.458037239102314,
+        "walked": 35.02999999999977,
+        "maxChanged": 372
+      }
     },
     {
       "mode": "explore",
       "framing": "desktop",
       "floor": 0,
-      "waited": 45.00000000000037,
+      "waited": 20.000000000000014,
       "frames": [
         {
           "time": 0,
@@ -221,35 +237,35 @@
         },
         {
           "time": 0.25,
-          "changed": 41
+          "changed": 0
         },
         {
           "time": 0.30000000000000004,
-          "changed": 651
+          "changed": 546
         },
         {
           "time": 0.35000000000000003,
-          "changed": 881
+          "changed": 537
         },
         {
           "time": 0.4,
-          "changed": 1016
+          "changed": 605
         },
         {
           "time": 0.45,
-          "changed": 1089
+          "changed": 657
         },
         {
           "time": 0.5,
-          "changed": 1074
+          "changed": 620
         },
         {
           "time": 0.55,
-          "changed": 960
+          "changed": 530
         },
         {
           "time": 0.6000000000000001,
-          "changed": 119
+          "changed": 133
         },
         {
           "time": 0.65,
@@ -284,16 +300,24 @@
           "changed": 0
         }
       ],
-      "maxChanged": 1089,
+      "maxChanged": 657,
       "active": false,
       "pixels": 960000,
-      "meshes": 20
+      "meshes": 20,
+      "walking": {
+        "reverse": false,
+        "framesVisible": 10,
+        "firstAt": 0.26666666666666666,
+        "closest": 36.56801735206273,
+        "walked": 29.999999999999847,
+        "maxChanged": 449
+      }
     },
     {
       "mode": "explore",
       "framing": "phone",
       "floor": 1,
-      "waited": 45.00000000000037,
+      "waited": 20.000000000000014,
       "frames": [
         {
           "time": 0,
@@ -317,35 +341,35 @@
         },
         {
           "time": 0.25,
-          "changed": 44
+          "changed": 0
         },
         {
           "time": 0.30000000000000004,
-          "changed": 636
+          "changed": 612
         },
         {
           "time": 0.35000000000000003,
-          "changed": 865
+          "changed": 613
         },
         {
           "time": 0.4,
-          "changed": 992
+          "changed": 681
         },
         {
           "time": 0.45,
-          "changed": 1060
+          "changed": 739
         },
         {
           "time": 0.5,
-          "changed": 1035
+          "changed": 694
         },
         {
           "time": 0.55,
-          "changed": 911
+          "changed": 590
         },
         {
           "time": 0.6000000000000001,
-          "changed": 108
+          "changed": 141
         },
         {
           "time": 0.65,
@@ -380,10 +404,1700 @@
           "changed": 0
         }
       ],
-      "maxChanged": 1060,
+      "maxChanged": 739,
       "active": false,
       "pixels": 329160,
-      "meshes": 20
+      "meshes": 20,
+      "walking": {
+        "reverse": true,
+        "framesVisible": 11,
+        "firstAt": 0.26666666666666666,
+        "closest": 24.527558197079284,
+        "walked": 29.999999999999844,
+        "maxChanged": 1054
+      }
+    }
+  ],
+  "coverage": [
+    {
+      "mode": "escape",
+      "floor": 0,
+      "corridor": "C1",
+      "segment": 6,
+      "reverse": false,
+      "position": [
+        -34.599999999999994,
+        8.2
+      ],
+      "end": [
+        -8.8,
+        8.2
+      ],
+      "events": [
+        {
+          "at": 20,
+          "spawnDistance": 70.49198536003932,
+          "maxChanged": 56,
+          "maxAffected": 56
+        },
+        {
+          "at": 40,
+          "spawnDistance": 64.50054263337634,
+          "maxChanged": 65,
+          "maxAffected": 65
+        },
+        {
+          "at": 60,
+          "spawnDistance": 70.49198536003932,
+          "maxChanged": 56,
+          "maxAffected": 56
+        }
+      ]
+    },
+    {
+      "mode": "escape",
+      "floor": 0,
+      "corridor": "C1",
+      "segment": 6,
+      "reverse": true,
+      "position": [
+        -10,
+        8.2
+      ],
+      "end": [
+        -35.8,
+        8.2
+      ],
+      "events": [
+        {
+          "at": 20,
+          "spawnDistance": 26.04995201531089,
+          "maxChanged": 311,
+          "maxAffected": 333
+        },
+        {
+          "at": 40,
+          "spawnDistance": 25.059928172283332,
+          "maxChanged": 330,
+          "maxAffected": 354
+        },
+        {
+          "at": 60,
+          "spawnDistance": 26.04995201531089,
+          "maxChanged": 311,
+          "maxAffected": 333
+        }
+      ]
+    },
+    {
+      "mode": "escape",
+      "floor": 0,
+      "corridor": "C1",
+      "segment": 10,
+      "reverse": false,
+      "position": [
+        10,
+        8.2
+      ],
+      "end": [
+        43.8,
+        8.2
+      ],
+      "events": [
+        {
+          "at": 20,
+          "spawnDistance": 29.024127893874773,
+          "maxChanged": 259,
+          "maxAffected": 274
+        },
+        {
+          "at": 40,
+          "spawnDistance": 30.01666203960727,
+          "maxChanged": 242,
+          "maxAffected": 255
+        },
+        {
+          "at": 60,
+          "spawnDistance": 29.024127893874773,
+          "maxChanged": 259,
+          "maxAffected": 274
+        }
+      ]
+    },
+    {
+      "mode": "escape",
+      "floor": 0,
+      "corridor": "C1",
+      "segment": 10,
+      "reverse": true,
+      "position": [
+        42.599999999999994,
+        8.2
+      ],
+      "end": [
+        8.8,
+        8.2
+      ],
+      "events": [
+        {
+          "at": 20,
+          "spawnDistance": 78.48260953867423,
+          "maxChanged": 47,
+          "maxAffected": 47
+        },
+        {
+          "at": 40,
+          "spawnDistance": 77.48367570011118,
+          "maxChanged": 46,
+          "maxAffected": 46
+        },
+        {
+          "at": 60,
+          "spawnDistance": 78.48260953867423,
+          "maxChanged": 47,
+          "maxAffected": 47
+        }
+      ]
+    },
+    {
+      "mode": "escape",
+      "floor": 0,
+      "corridor": "C2",
+      "segment": 1,
+      "reverse": false,
+      "position": [
+        -35.8,
+        6.999999999999999
+      ],
+      "end": [
+        -35.8,
+        -34.3
+      ],
+      "events": [
+        {
+          "at": 20,
+          "spawnDistance": 34.985711369071794,
+          "maxChanged": 177,
+          "maxAffected": 186
+        },
+        {
+          "at": 40,
+          "spawnDistance": 35.98055030151707,
+          "maxChanged": 174,
+          "maxAffected": 186
+        },
+        {
+          "at": 60,
+          "spawnDistance": 34.985711369071794,
+          "maxChanged": 177,
+          "maxAffected": 186
+        }
+      ]
+    },
+    {
+      "mode": "escape",
+      "floor": 0,
+      "corridor": "C2",
+      "segment": 1,
+      "reverse": true,
+      "position": [
+        -35.8,
+        -33.099999999999994
+      ],
+      "end": [
+        -35.8,
+        8.2
+      ],
+      "events": [
+        {
+          "at": 20,
+          "spawnDistance": 43.136418811044685,
+          "maxChanged": 128,
+          "maxAffected": 132
+        },
+        {
+          "at": 40,
+          "spawnDistance": 44.1364174157897,
+          "maxChanged": 123,
+          "maxAffected": 126
+        },
+        {
+          "at": 60,
+          "spawnDistance": 43.136418811044685,
+          "maxChanged": 128,
+          "maxAffected": 132
+        }
+      ]
+    },
+    {
+      "mode": "escape",
+      "floor": 0,
+      "corridor": "C3",
+      "segment": 1,
+      "reverse": false,
+      "position": [
+        5.3,
+        5.8
+      ],
+      "end": [
+        5.3,
+        -23.3
+      ],
+      "events": [
+        {
+          "at": 20,
+          "spawnDistance": 26.049952015310893,
+          "maxChanged": 313,
+          "maxAffected": 333
+        },
+        {
+          "at": 40,
+          "spawnDistance": 27.040710049848915,
+          "maxChanged": 286,
+          "maxAffected": 309
+        },
+        {
+          "at": 60,
+          "spawnDistance": 26.049952015310893,
+          "maxChanged": 313,
+          "maxAffected": 333
+        }
+      ]
+    },
+    {
+      "mode": "escape",
+      "floor": 0,
+      "corridor": "C3",
+      "segment": 1,
+      "reverse": true,
+      "position": [
+        5.3,
+        -22.1
+      ],
+      "end": [
+        5.3,
+        7
+      ],
+      "events": [
+        {
+          "at": 20,
+          "spawnDistance": 28.329666429381057,
+          "maxChanged": 261,
+          "maxAffected": 275
+        },
+        {
+          "at": 40,
+          "spawnDistance": 26.347106102948004,
+          "maxChanged": 314,
+          "maxAffected": 322
+        },
+        {
+          "at": 60,
+          "spawnDistance": 28.329666429381057,
+          "maxChanged": 261,
+          "maxAffected": 275
+        }
+      ]
+    },
+    {
+      "mode": "escape",
+      "floor": 0,
+      "corridor": "C4",
+      "segment": 1,
+      "reverse": false,
+      "position": [
+        35.8,
+        6.999999999999999
+      ],
+      "end": [
+        35.8,
+        -34.3
+      ],
+      "events": [
+        {
+          "at": 20,
+          "spawnDistance": 34.985711369071794,
+          "maxChanged": 178,
+          "maxAffected": 186
+        },
+        {
+          "at": 40,
+          "spawnDistance": 35.98055030151707,
+          "maxChanged": 175,
+          "maxAffected": 186
+        },
+        {
+          "at": 60,
+          "spawnDistance": 34.985711369071794,
+          "maxChanged": 178,
+          "maxAffected": 186
+        }
+      ]
+    },
+    {
+      "mode": "escape",
+      "floor": 0,
+      "corridor": "C4",
+      "segment": 1,
+      "reverse": true,
+      "position": [
+        35.8,
+        -33.099999999999994
+      ],
+      "end": [
+        35.8,
+        8.2
+      ],
+      "events": [
+        {
+          "at": 20,
+          "spawnDistance": 43.745173790877175,
+          "maxChanged": 121,
+          "maxAffected": 128
+        },
+        {
+          "at": 40,
+          "spawnDistance": 44.73156541473841,
+          "maxChanged": 117,
+          "maxAffected": 122
+        },
+        {
+          "at": 60,
+          "spawnDistance": 43.745173790877175,
+          "maxChanged": 121,
+          "maxAffected": 128
+        }
+      ]
+    },
+    {
+      "mode": "escape",
+      "floor": 1,
+      "corridor": "C1",
+      "segment": 6,
+      "reverse": false,
+      "position": [
+        -33.8,
+        8.2
+      ],
+      "end": [
+        -8.8,
+        8.2
+      ],
+      "events": [
+        {
+          "at": 20,
+          "spawnDistance": 69.6930412595117,
+          "maxChanged": 58,
+          "maxAffected": 58
+        },
+        {
+          "at": 40,
+          "spawnDistance": 63.701805311937584,
+          "maxChanged": 66,
+          "maxAffected": 66
+        },
+        {
+          "at": 60,
+          "spawnDistance": 69.6930412595117,
+          "maxChanged": 58,
+          "maxAffected": 58
+        }
+      ]
+    },
+    {
+      "mode": "escape",
+      "floor": 1,
+      "corridor": "C1",
+      "segment": 6,
+      "reverse": true,
+      "position": [
+        -10,
+        8.2
+      ],
+      "end": [
+        -35.8,
+        8.2
+      ],
+      "events": [
+        {
+          "at": 20,
+          "spawnDistance": 26.04995201531089,
+          "maxChanged": 311,
+          "maxAffected": 333
+        },
+        {
+          "at": 40,
+          "spawnDistance": 24.070729112347216,
+          "maxChanged": 359,
+          "maxAffected": 381
+        },
+        {
+          "at": 60,
+          "spawnDistance": 26.04995201531089,
+          "maxChanged": 311,
+          "maxAffected": 333
+        }
+      ]
+    },
+    {
+      "mode": "escape",
+      "floor": 1,
+      "corridor": "C1",
+      "segment": 10,
+      "reverse": false,
+      "position": [
+        10,
+        8.2
+      ],
+      "end": [
+        43.8,
+        8.2
+      ],
+      "events": [
+        {
+          "at": 20,
+          "spawnDistance": 29.024127893874773,
+          "maxChanged": 260,
+          "maxAffected": 274
+        },
+        {
+          "at": 40,
+          "spawnDistance": 30.01666203960727,
+          "maxChanged": 245,
+          "maxAffected": 255
+        },
+        {
+          "at": 60,
+          "spawnDistance": 29.024127893874773,
+          "maxChanged": 260,
+          "maxAffected": 274
+        }
+      ]
+    },
+    {
+      "mode": "escape",
+      "floor": 1,
+      "corridor": "C1",
+      "segment": 10,
+      "reverse": true,
+      "position": [
+        42.599999999999994,
+        8.2
+      ],
+      "end": [
+        8.8,
+        8.2
+      ],
+      "events": [
+        {
+          "at": 20,
+          "spawnDistance": 78.48260953867423,
+          "maxChanged": 47,
+          "maxAffected": 47
+        },
+        {
+          "at": 40,
+          "spawnDistance": 76.48476972574343,
+          "maxChanged": 49,
+          "maxAffected": 49
+        },
+        {
+          "at": 60,
+          "spawnDistance": 78.48260953867423,
+          "maxChanged": 47,
+          "maxAffected": 47
+        }
+      ]
+    },
+    {
+      "mode": "escape",
+      "floor": 1,
+      "corridor": "C2",
+      "segment": 1,
+      "reverse": false,
+      "position": [
+        -35.8,
+        6.999999999999999
+      ],
+      "end": [
+        -35.8,
+        -34.3
+      ],
+      "events": [
+        {
+          "at": 20,
+          "spawnDistance": 34.985711369071794,
+          "maxChanged": 177,
+          "maxAffected": 186
+        },
+        {
+          "at": 40,
+          "spawnDistance": 35.98055030151707,
+          "maxChanged": 174,
+          "maxAffected": 186
+        },
+        {
+          "at": 60,
+          "spawnDistance": 34.985711369071794,
+          "maxChanged": 177,
+          "maxAffected": 186
+        }
+      ]
+    },
+    {
+      "mode": "escape",
+      "floor": 1,
+      "corridor": "C2",
+      "segment": 1,
+      "reverse": true,
+      "position": [
+        -35.8,
+        -33.099999999999994
+      ],
+      "end": [
+        -35.8,
+        8.2
+      ],
+      "events": [
+        {
+          "at": 20,
+          "spawnDistance": 48.83595955047715,
+          "maxChanged": 98,
+          "maxAffected": 102
+        },
+        {
+          "at": 40,
+          "spawnDistance": 49.79042462820995,
+          "maxChanged": 93,
+          "maxAffected": 99
+        },
+        {
+          "at": 60,
+          "spawnDistance": 48.83595955047715,
+          "maxChanged": 98,
+          "maxAffected": 102
+        }
+      ]
+    },
+    {
+      "mode": "escape",
+      "floor": 1,
+      "corridor": "C3",
+      "segment": 1,
+      "reverse": false,
+      "position": [
+        5.3,
+        5.8
+      ],
+      "end": [
+        5.3,
+        -23.3
+      ],
+      "events": [
+        {
+          "at": 20,
+          "spawnDistance": 26.049952015310893,
+          "maxChanged": 313,
+          "maxAffected": 333
+        },
+        {
+          "at": 40,
+          "spawnDistance": 27.040710049848915,
+          "maxChanged": 286,
+          "maxAffected": 309
+        },
+        {
+          "at": 60,
+          "spawnDistance": 26.049952015310893,
+          "maxChanged": 313,
+          "maxAffected": 333
+        }
+      ]
+    },
+    {
+      "mode": "escape",
+      "floor": 1,
+      "corridor": "C3",
+      "segment": 1,
+      "reverse": true,
+      "position": [
+        5.3,
+        -22.1
+      ],
+      "end": [
+        5.3,
+        7
+      ],
+      "events": [
+        {
+          "at": 20,
+          "spawnDistance": 28.329666429381057,
+          "maxChanged": 274,
+          "maxAffected": 282
+        },
+        {
+          "at": 40,
+          "spawnDistance": 27.338068695502248,
+          "maxChanged": 287,
+          "maxAffected": 297
+        },
+        {
+          "at": 60,
+          "spawnDistance": 28.329666429381057,
+          "maxChanged": 274,
+          "maxAffected": 282
+        }
+      ]
+    },
+    {
+      "mode": "escape",
+      "floor": 1,
+      "corridor": "C4",
+      "segment": 1,
+      "reverse": false,
+      "position": [
+        35.8,
+        6.999999999999999
+      ],
+      "end": [
+        35.8,
+        -34.3
+      ],
+      "events": [
+        {
+          "at": 20,
+          "spawnDistance": 34.985711369071794,
+          "maxChanged": 178,
+          "maxAffected": 186
+        },
+        {
+          "at": 40,
+          "spawnDistance": 35.98055030151707,
+          "maxChanged": 175,
+          "maxAffected": 186
+        },
+        {
+          "at": 60,
+          "spawnDistance": 34.985711369071794,
+          "maxChanged": 178,
+          "maxAffected": 186
+        }
+      ]
+    },
+    {
+      "mode": "escape",
+      "floor": 1,
+      "corridor": "C4",
+      "segment": 1,
+      "reverse": true,
+      "position": [
+        35.8,
+        -33.099999999999994
+      ],
+      "end": [
+        35.8,
+        8.2
+      ],
+      "events": [
+        {
+          "at": 20,
+          "spawnDistance": 43.745173790877175,
+          "maxChanged": 121,
+          "maxAffected": 128
+        },
+        {
+          "at": 40,
+          "spawnDistance": 44.73156541473841,
+          "maxChanged": 117,
+          "maxAffected": 122
+        },
+        {
+          "at": 60,
+          "spawnDistance": 43.745173790877175,
+          "maxChanged": 121,
+          "maxAffected": 128
+        }
+      ]
+    },
+    {
+      "mode": "escape",
+      "floor": 2,
+      "corridor": "BC1",
+      "segment": 1,
+      "reverse": false,
+      "position": [
+        -31.1,
+        -27.1
+      ],
+      "end": [
+        -31.1,
+        8.2
+      ],
+      "events": [
+        {
+          "at": 20,
+          "spawnDistance": 30.016662039607272,
+          "maxChanged": 243,
+          "maxAffected": 255
+        },
+        {
+          "at": 40,
+          "spawnDistance": 31.00967590930289,
+          "maxChanged": 232,
+          "maxAffected": 240
+        },
+        {
+          "at": 60,
+          "spawnDistance": 30.016662039607272,
+          "maxChanged": 243,
+          "maxAffected": 255
+        }
+      ]
+    },
+    {
+      "mode": "escape",
+      "floor": 2,
+      "corridor": "BC1",
+      "segment": 1,
+      "reverse": true,
+      "position": [
+        -31.1,
+        6.999999999999999
+      ],
+      "end": [
+        -31.1,
+        -28.3
+      ],
+      "events": [
+        {
+          "at": 20,
+          "spawnDistance": 34.48840384825021,
+          "maxChanged": 185,
+          "maxAffected": 194
+        },
+        {
+          "at": 40,
+          "spawnDistance": 33.49402931867111,
+          "maxChanged": 194,
+          "maxAffected": 204
+        },
+        {
+          "at": 60,
+          "spawnDistance": 34.48840384825021,
+          "maxChanged": 185,
+          "maxAffected": 194
+        }
+      ]
+    },
+    {
+      "mode": "escape",
+      "floor": 2,
+      "corridor": "BC1",
+      "segment": 2,
+      "reverse": false,
+      "position": [
+        -29.900000000000002,
+        8.2
+      ],
+      "end": [
+        -2,
+        8.2
+      ],
+      "events": [
+        {
+          "at": 20,
+          "spawnDistance": 24.07072911234722,
+          "maxChanged": 374,
+          "maxAffected": 387
+        },
+        {
+          "at": 40,
+          "spawnDistance": 25.059928172283335,
+          "maxChanged": 346,
+          "maxAffected": 356
+        },
+        {
+          "at": 60,
+          "spawnDistance": 24.07072911234722,
+          "maxChanged": 374,
+          "maxAffected": 387
+        }
+      ]
+    },
+    {
+      "mode": "escape",
+      "floor": 2,
+      "corridor": "BC1",
+      "segment": 2,
+      "reverse": true,
+      "position": [
+        -3.2,
+        8.2
+      ],
+      "end": [
+        -31.1,
+        8.2
+      ],
+      "events": [
+        {
+          "at": 20,
+          "spawnDistance": 27.139823138701548,
+          "maxChanged": 286,
+          "maxAffected": 299
+        },
+        {
+          "at": 40,
+          "spawnDistance": 26.14899615664051,
+          "maxChanged": 315,
+          "maxAffected": 328
+        },
+        {
+          "at": 60,
+          "spawnDistance": 27.139823138701548,
+          "maxChanged": 286,
+          "maxAffected": 299
+        }
+      ]
+    },
+    {
+      "mode": "explore",
+      "floor": 0,
+      "corridor": "C1",
+      "segment": 6,
+      "reverse": false,
+      "position": [
+        -34.599999999999994,
+        8.2
+      ],
+      "end": [
+        -8.8,
+        8.2
+      ],
+      "events": [
+        {
+          "at": 20,
+          "spawnDistance": 70.49198536003932,
+          "maxChanged": 151,
+          "maxAffected": 151
+        },
+        {
+          "at": 40,
+          "spawnDistance": 64.50054263337634,
+          "maxChanged": 179,
+          "maxAffected": 179
+        },
+        {
+          "at": 60,
+          "spawnDistance": 70.49198536003932,
+          "maxChanged": 151,
+          "maxAffected": 151
+        }
+      ]
+    },
+    {
+      "mode": "explore",
+      "floor": 0,
+      "corridor": "C1",
+      "segment": 6,
+      "reverse": true,
+      "position": [
+        -10,
+        8.2
+      ],
+      "end": [
+        -35.8,
+        8.2
+      ],
+      "events": [
+        {
+          "at": 20,
+          "spawnDistance": 26.04995201531089,
+          "maxChanged": 936,
+          "maxAffected": 987
+        },
+        {
+          "at": 40,
+          "spawnDistance": 25.059928172283332,
+          "maxChanged": 1003,
+          "maxAffected": 1046
+        },
+        {
+          "at": 60,
+          "spawnDistance": 26.04995201531089,
+          "maxChanged": 936,
+          "maxAffected": 987
+        }
+      ]
+    },
+    {
+      "mode": "explore",
+      "floor": 0,
+      "corridor": "C1",
+      "segment": 10,
+      "reverse": false,
+      "position": [
+        10,
+        8.2
+      ],
+      "end": [
+        43.8,
+        8.2
+      ],
+      "events": [
+        {
+          "at": 20,
+          "spawnDistance": 29.024127893874773,
+          "maxChanged": 772,
+          "maxAffected": 798
+        },
+        {
+          "at": 40,
+          "spawnDistance": 30.01666203960727,
+          "maxChanged": 715,
+          "maxAffected": 738
+        },
+        {
+          "at": 60,
+          "spawnDistance": 29.024127893874773,
+          "maxChanged": 772,
+          "maxAffected": 798
+        }
+      ]
+    },
+    {
+      "mode": "explore",
+      "floor": 0,
+      "corridor": "C1",
+      "segment": 10,
+      "reverse": true,
+      "position": [
+        42.599999999999994,
+        8.2
+      ],
+      "end": [
+        8.8,
+        8.2
+      ],
+      "events": [
+        {
+          "at": 20,
+          "spawnDistance": 78.48260953867423,
+          "maxChanged": 126,
+          "maxAffected": 126
+        },
+        {
+          "at": 40,
+          "spawnDistance": 77.48367570011118,
+          "maxChanged": 129,
+          "maxAffected": 129
+        },
+        {
+          "at": 60,
+          "spawnDistance": 78.48260953867423,
+          "maxChanged": 126,
+          "maxAffected": 126
+        }
+      ]
+    },
+    {
+      "mode": "explore",
+      "floor": 0,
+      "corridor": "C2",
+      "segment": 1,
+      "reverse": false,
+      "position": [
+        -35.8,
+        6.999999999999999
+      ],
+      "end": [
+        -35.8,
+        -34.3
+      ],
+      "events": [
+        {
+          "at": 20,
+          "spawnDistance": 34.985711369071794,
+          "maxChanged": 536,
+          "maxAffected": 552
+        },
+        {
+          "at": 40,
+          "spawnDistance": 35.98055030151707,
+          "maxChanged": 503,
+          "maxAffected": 520
+        },
+        {
+          "at": 60,
+          "spawnDistance": 34.985711369071794,
+          "maxChanged": 536,
+          "maxAffected": 552
+        }
+      ]
+    },
+    {
+      "mode": "explore",
+      "floor": 0,
+      "corridor": "C2",
+      "segment": 1,
+      "reverse": true,
+      "position": [
+        -35.8,
+        -33.099999999999994
+      ],
+      "end": [
+        -35.8,
+        8.2
+      ],
+      "events": [
+        {
+          "at": 20,
+          "spawnDistance": 43.136418811044685,
+          "maxChanged": 365,
+          "maxAffected": 375
+        },
+        {
+          "at": 40,
+          "spawnDistance": 44.1364174157897,
+          "maxChanged": 348,
+          "maxAffected": 357
+        },
+        {
+          "at": 60,
+          "spawnDistance": 43.136418811044685,
+          "maxChanged": 365,
+          "maxAffected": 375
+        }
+      ]
+    },
+    {
+      "mode": "explore",
+      "floor": 0,
+      "corridor": "C3",
+      "segment": 1,
+      "reverse": false,
+      "position": [
+        5.3,
+        5.8
+      ],
+      "end": [
+        5.3,
+        -23.3
+      ],
+      "events": [
+        {
+          "at": 20,
+          "spawnDistance": 26.049952015310893,
+          "maxChanged": 946,
+          "maxAffected": 987
+        },
+        {
+          "at": 40,
+          "spawnDistance": 27.040710049848915,
+          "maxChanged": 871,
+          "maxAffected": 906
+        },
+        {
+          "at": 60,
+          "spawnDistance": 26.049952015310893,
+          "maxChanged": 946,
+          "maxAffected": 987
+        }
+      ]
+    },
+    {
+      "mode": "explore",
+      "floor": 0,
+      "corridor": "C3",
+      "segment": 1,
+      "reverse": true,
+      "position": [
+        5.3,
+        -22.1
+      ],
+      "end": [
+        5.3,
+        7
+      ],
+      "events": [
+        {
+          "at": 20,
+          "spawnDistance": 28.329666429381057,
+          "maxChanged": 787,
+          "maxAffected": 809
+        },
+        {
+          "at": 40,
+          "spawnDistance": 26.347106102948004,
+          "maxChanged": 926,
+          "maxAffected": 947
+        },
+        {
+          "at": 60,
+          "spawnDistance": 28.329666429381057,
+          "maxChanged": 787,
+          "maxAffected": 809
+        }
+      ]
+    },
+    {
+      "mode": "explore",
+      "floor": 0,
+      "corridor": "C4",
+      "segment": 1,
+      "reverse": false,
+      "position": [
+        35.8,
+        6.999999999999999
+      ],
+      "end": [
+        35.8,
+        -34.3
+      ],
+      "events": [
+        {
+          "at": 20,
+          "spawnDistance": 34.985711369071794,
+          "maxChanged": 537,
+          "maxAffected": 552
+        },
+        {
+          "at": 40,
+          "spawnDistance": 35.98055030151707,
+          "maxChanged": 503,
+          "maxAffected": 520
+        },
+        {
+          "at": 60,
+          "spawnDistance": 34.985711369071794,
+          "maxChanged": 537,
+          "maxAffected": 552
+        }
+      ]
+    },
+    {
+      "mode": "explore",
+      "floor": 0,
+      "corridor": "C4",
+      "segment": 1,
+      "reverse": true,
+      "position": [
+        35.8,
+        -33.099999999999994
+      ],
+      "end": [
+        35.8,
+        8.2
+      ],
+      "events": [
+        {
+          "at": 20,
+          "spawnDistance": 43.745173790877175,
+          "maxChanged": 351,
+          "maxAffected": 368
+        },
+        {
+          "at": 40,
+          "spawnDistance": 44.73156541473841,
+          "maxChanged": 334,
+          "maxAffected": 353
+        },
+        {
+          "at": 60,
+          "spawnDistance": 43.745173790877175,
+          "maxChanged": 351,
+          "maxAffected": 368
+        }
+      ]
+    },
+    {
+      "mode": "explore",
+      "floor": 1,
+      "corridor": "C1",
+      "segment": 6,
+      "reverse": false,
+      "position": [
+        -33.8,
+        8.2
+      ],
+      "end": [
+        -8.8,
+        8.2
+      ],
+      "events": [
+        {
+          "at": 20,
+          "spawnDistance": 69.6930412595117,
+          "maxChanged": 157,
+          "maxAffected": 157
+        },
+        {
+          "at": 40,
+          "spawnDistance": 63.701805311937584,
+          "maxChanged": 187,
+          "maxAffected": 187
+        },
+        {
+          "at": 60,
+          "spawnDistance": 69.6930412595117,
+          "maxChanged": 157,
+          "maxAffected": 157
+        }
+      ]
+    },
+    {
+      "mode": "explore",
+      "floor": 1,
+      "corridor": "C1",
+      "segment": 6,
+      "reverse": true,
+      "position": [
+        -10,
+        8.2
+      ],
+      "end": [
+        -35.8,
+        8.2
+      ],
+      "events": [
+        {
+          "at": 20,
+          "spawnDistance": 26.04995201531089,
+          "maxChanged": 936,
+          "maxAffected": 987
+        },
+        {
+          "at": 40,
+          "spawnDistance": 24.070729112347216,
+          "maxChanged": 1098,
+          "maxAffected": 1137
+        },
+        {
+          "at": 60,
+          "spawnDistance": 26.04995201531089,
+          "maxChanged": 936,
+          "maxAffected": 987
+        }
+      ]
+    },
+    {
+      "mode": "explore",
+      "floor": 1,
+      "corridor": "C1",
+      "segment": 10,
+      "reverse": false,
+      "position": [
+        10,
+        8.2
+      ],
+      "end": [
+        43.8,
+        8.2
+      ],
+      "events": [
+        {
+          "at": 20,
+          "spawnDistance": 29.024127893874773,
+          "maxChanged": 779,
+          "maxAffected": 798
+        },
+        {
+          "at": 40,
+          "spawnDistance": 30.01666203960727,
+          "maxChanged": 717,
+          "maxAffected": 738
+        },
+        {
+          "at": 60,
+          "spawnDistance": 29.024127893874773,
+          "maxChanged": 779,
+          "maxAffected": 798
+        }
+      ]
+    },
+    {
+      "mode": "explore",
+      "floor": 1,
+      "corridor": "C1",
+      "segment": 10,
+      "reverse": true,
+      "position": [
+        42.599999999999994,
+        8.2
+      ],
+      "end": [
+        8.8,
+        8.2
+      ],
+      "events": [
+        {
+          "at": 20,
+          "spawnDistance": 78.48260953867423,
+          "maxChanged": 126,
+          "maxAffected": 126
+        },
+        {
+          "at": 40,
+          "spawnDistance": 76.48476972574343,
+          "maxChanged": 129,
+          "maxAffected": 129
+        },
+        {
+          "at": 60,
+          "spawnDistance": 78.48260953867423,
+          "maxChanged": 126,
+          "maxAffected": 126
+        }
+      ]
+    },
+    {
+      "mode": "explore",
+      "floor": 1,
+      "corridor": "C2",
+      "segment": 1,
+      "reverse": false,
+      "position": [
+        -35.8,
+        6.999999999999999
+      ],
+      "end": [
+        -35.8,
+        -34.3
+      ],
+      "events": [
+        {
+          "at": 20,
+          "spawnDistance": 34.985711369071794,
+          "maxChanged": 536,
+          "maxAffected": 552
+        },
+        {
+          "at": 40,
+          "spawnDistance": 35.98055030151707,
+          "maxChanged": 503,
+          "maxAffected": 520
+        },
+        {
+          "at": 60,
+          "spawnDistance": 34.985711369071794,
+          "maxChanged": 536,
+          "maxAffected": 552
+        }
+      ]
+    },
+    {
+      "mode": "explore",
+      "floor": 1,
+      "corridor": "C2",
+      "segment": 1,
+      "reverse": true,
+      "position": [
+        -35.8,
+        -33.099999999999994
+      ],
+      "end": [
+        -35.8,
+        8.2
+      ],
+      "events": [
+        {
+          "at": 20,
+          "spawnDistance": 48.83595955047715,
+          "maxChanged": 285,
+          "maxAffected": 294
+        },
+        {
+          "at": 40,
+          "spawnDistance": 49.79042462820995,
+          "maxChanged": 278,
+          "maxAffected": 289
+        },
+        {
+          "at": 60,
+          "spawnDistance": 48.83595955047715,
+          "maxChanged": 285,
+          "maxAffected": 294
+        }
+      ]
+    },
+    {
+      "mode": "explore",
+      "floor": 1,
+      "corridor": "C3",
+      "segment": 1,
+      "reverse": false,
+      "position": [
+        5.3,
+        5.8
+      ],
+      "end": [
+        5.3,
+        -23.3
+      ],
+      "events": [
+        {
+          "at": 20,
+          "spawnDistance": 26.049952015310893,
+          "maxChanged": 946,
+          "maxAffected": 987
+        },
+        {
+          "at": 40,
+          "spawnDistance": 27.040710049848915,
+          "maxChanged": 873,
+          "maxAffected": 906
+        },
+        {
+          "at": 60,
+          "spawnDistance": 26.049952015310893,
+          "maxChanged": 946,
+          "maxAffected": 987
+        }
+      ]
+    },
+    {
+      "mode": "explore",
+      "floor": 1,
+      "corridor": "C3",
+      "segment": 1,
+      "reverse": true,
+      "position": [
+        5.3,
+        -22.1
+      ],
+      "end": [
+        5.3,
+        7
+      ],
+      "events": [
+        {
+          "at": 20,
+          "spawnDistance": 28.329666429381057,
+          "maxChanged": 809,
+          "maxAffected": 824
+        },
+        {
+          "at": 40,
+          "spawnDistance": 27.338068695502248,
+          "maxChanged": 865,
+          "maxAffected": 882
+        },
+        {
+          "at": 60,
+          "spawnDistance": 28.329666429381057,
+          "maxChanged": 809,
+          "maxAffected": 824
+        }
+      ]
+    },
+    {
+      "mode": "explore",
+      "floor": 1,
+      "corridor": "C4",
+      "segment": 1,
+      "reverse": false,
+      "position": [
+        35.8,
+        6.999999999999999
+      ],
+      "end": [
+        35.8,
+        -34.3
+      ],
+      "events": [
+        {
+          "at": 20,
+          "spawnDistance": 34.985711369071794,
+          "maxChanged": 537,
+          "maxAffected": 552
+        },
+        {
+          "at": 40,
+          "spawnDistance": 35.98055030151707,
+          "maxChanged": 503,
+          "maxAffected": 520
+        },
+        {
+          "at": 60,
+          "spawnDistance": 34.985711369071794,
+          "maxChanged": 537,
+          "maxAffected": 552
+        }
+      ]
+    },
+    {
+      "mode": "explore",
+      "floor": 1,
+      "corridor": "C4",
+      "segment": 1,
+      "reverse": true,
+      "position": [
+        35.8,
+        -33.099999999999994
+      ],
+      "end": [
+        35.8,
+        8.2
+      ],
+      "events": [
+        {
+          "at": 20,
+          "spawnDistance": 43.745173790877175,
+          "maxChanged": 351,
+          "maxAffected": 368
+        },
+        {
+          "at": 40,
+          "spawnDistance": 44.73156541473841,
+          "maxChanged": 334,
+          "maxAffected": 353
+        },
+        {
+          "at": 60,
+          "spawnDistance": 43.745173790877175,
+          "maxChanged": 351,
+          "maxAffected": 368
+        }
+      ]
+    },
+    {
+      "mode": "explore",
+      "floor": 2,
+      "corridor": "BC1",
+      "segment": 1,
+      "reverse": false,
+      "position": [
+        -31.1,
+        -27.1
+      ],
+      "end": [
+        -31.1,
+        8.2
+      ],
+      "events": [
+        {
+          "at": 20,
+          "spawnDistance": 30.016662039607272,
+          "maxChanged": 715,
+          "maxAffected": 738
+        },
+        {
+          "at": 40,
+          "spawnDistance": 31.00967590930289,
+          "maxChanged": 675,
+          "maxAffected": 700
+        },
+        {
+          "at": 60,
+          "spawnDistance": 30.016662039607272,
+          "maxChanged": 715,
+          "maxAffected": 738
+        }
+      ]
+    },
+    {
+      "mode": "explore",
+      "floor": 2,
+      "corridor": "BC1",
+      "segment": 1,
+      "reverse": true,
+      "position": [
+        -31.1,
+        6.999999999999999
+      ],
+      "end": [
+        -31.1,
+        -28.3
+      ],
+      "events": [
+        {
+          "at": 20,
+          "spawnDistance": 34.48840384825021,
+          "maxChanged": 548,
+          "maxAffected": 563
+        },
+        {
+          "at": 40,
+          "spawnDistance": 33.49402931867111,
+          "maxChanged": 578,
+          "maxAffected": 600
+        },
+        {
+          "at": 60,
+          "spawnDistance": 34.48840384825021,
+          "maxChanged": 548,
+          "maxAffected": 563
+        }
+      ]
+    },
+    {
+      "mode": "explore",
+      "floor": 2,
+      "corridor": "BC1",
+      "segment": 2,
+      "reverse": false,
+      "position": [
+        -29.900000000000002,
+        8.2
+      ],
+      "end": [
+        -2,
+        8.2
+      ],
+      "events": [
+        {
+          "at": 20,
+          "spawnDistance": 24.07072911234722,
+          "maxChanged": 1130,
+          "maxAffected": 1148
+        },
+        {
+          "at": 40,
+          "spawnDistance": 25.059928172283335,
+          "maxChanged": 1048,
+          "maxAffected": 1066
+        },
+        {
+          "at": 60,
+          "spawnDistance": 24.07072911234722,
+          "maxChanged": 1130,
+          "maxAffected": 1148
+        }
+      ]
+    },
+    {
+      "mode": "explore",
+      "floor": 2,
+      "corridor": "BC1",
+      "segment": 2,
+      "reverse": true,
+      "position": [
+        -3.2,
+        8.2
+      ],
+      "end": [
+        -31.1,
+        8.2
+      ],
+      "events": [
+        {
+          "at": 20,
+          "spawnDistance": 27.139823138701548,
+          "maxChanged": 875,
+          "maxAffected": 900
+        },
+        {
+          "at": 40,
+          "spawnDistance": 26.14899615664051,
+          "maxChanged": 951,
+          "maxAffected": 976
+        },
+        {
+          "at": 60,
+          "spawnDistance": 27.139823138701548,
+          "maxChanged": 875,
+          "maxAffected": 900
+        }
+      ]
     }
   ]
 }

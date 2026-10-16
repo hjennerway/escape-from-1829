@@ -4,7 +4,7 @@ import {startTestServer} from './test-support/server.mjs';
 import {launchHardwareBrowser} from './test-support/hardware-browser.mjs';
 
 const destination=new URL('./artifacts/corridor-sightings/',import.meta.url);await mkdir(destination,{recursive:true});
-const {server,base}=await startTestServer();let browser;const errors=[],results=[];
+const {server,base}=await startTestServer();let browser;const errors=[],results=[],coverage=[];
 try{
  browser=await launchHardwareBrowser();
  for(const mode of ['escape','explore']){
@@ -17,11 +17,17 @@ try{
   if(mode==='escape'){
    await page.route('**/game.mjs',async r=>r.fulfill({contentType:'text/javascript',body:(await readFile(new URL('./dist/game.mjs',import.meta.url),'utf8'))+`
 window.sightingTest={get ready(){return ready&&interiorLoader.complete},get scene(){return scene},get camera(){return camera},get renderer(){return renderer},get controller(){return corridorSightings},player,get floors(){return floors},
-prepare(){state='paused';uiPlaying(true);document.getElementById('result').hidden=true;enemies.forEach(e=>e.mesh.visible=false);},pause(){state='paused';},play(){state='play';enemyReleaseAt=Infinity;},get actor(){return player}};`}));
+prepare(){state='paused';uiPlaying(true);document.getElementById('result').hidden=true;enemies.forEach(e=>e.mesh.visible=false);},
+prepareView(){showFloor();enemies.forEach(e=>e.mesh.visible=false);},
+beginWalk(floor,reverse){state='play';enemyReleaseAt=Infinity;keys.clear();keys.add('KeyW');Object.assign(player,{x:35.8,z:reverse?0:-30,y:floors[floor].elevation,floor,outside:false,stair:null});yaw=reverse?0:Math.PI;pitch=0;showFloor();},
+move(dt){update(dt,dt);interiorLights.update(player);enemies.forEach(e=>e.mesh.visible=false);},endWalk(){keys.clear();state='paused';},get actor(){return player}};`}));
    await page.goto(base+'/?seed=1829');
   }else{
    await page.route('**/explore-interior.mjs',async r=>r.fulfill({contentType:'text/javascript',body:(await readFile(new URL('./dist/explore-interior.mjs',import.meta.url),'utf8')).replace('let audioContext;','window.sightingInterior={sightings,scene,loading};let audioContext;')}));
-   await page.route('**/explore.mjs',async r=>r.fulfill({contentType:'text/javascript',body:(await readFile(new URL('./dist/explore.mjs',import.meta.url),'utf8')).replace('const clock=new THREE.Timer();',`window.sightingTest={get ready(){return !!window.sightingInterior?.loading.complete},get scene(){return interior.scene},camera:exterior.camera,renderer,get controller(){return window.sightingInterior.sightings},actor:walker.actor,floors,prepare(){}};const clock=new THREE.Timer();`)}));
+   await page.route('**/explore.mjs',async r=>r.fulfill({contentType:'text/javascript',body:(await readFile(new URL('./dist/explore.mjs',import.meta.url),'utf8')).replace('const clock=new THREE.Timer();',`window.sightingTest={get ready(){return !!window.sightingInterior?.loading.complete},get scene(){return interior.scene},camera:exterior.camera,renderer,get controller(){return window.sightingInterior.sightings},actor:walker.actor,floors,prepare(){},
+prepareView(){interior.update(walker.actor,0);},
+beginWalk(floor,reverse){const y=floors[floor].elevation;walker.setView({position:[35.8,y+1.8,reverse?0:-30],target:[35.8,y+1.8,reverse?-30:0]});Object.assign(walker.actor,{outside:false,floor,y,stair:null});walker.keys.add('KeyW');},
+move(dt){walker.update(dt);interior.update(walker.actor,0);},endWalk(){walker.keys.clear();}};const clock=new THREE.Timer();`)}));
    await page.goto(base+'/explore.html');
   }
   await page.waitForFunction(()=>window.sightingTest?.ready);
@@ -30,13 +36,14 @@ prepare(){state='paused';uiPlaying(true);document.getElementById('result').hidde
    console.log('Checking '+mode+' '+framing);
    await page.setViewportSize({width,height});
    await page.waitForFunction(()=>Math.abs(window.sightingTest.camera.aspect-innerWidth/innerHeight)<.0001);
-   await page.evaluate(floor=>{
+   await page.evaluate(({floor,framing})=>{
     const t=window.sightingTest,y=t.floors[floor].elevation;t.controller.reset();
     Object.assign(t.actor,{x:35.8,z:-18,y,floor,outside:false,stair:null});
+    t.prepareView();
     t.camera.position.set(35.8,y+1.65,-18);
-    const offset=.52*Math.tan(t.camera.fov*Math.PI/360)*t.camera.aspect*26.2;
+    const offset=(framing==='desktop'?0:.52)*Math.tan(t.camera.fov*Math.PI/360)*t.camera.aspect*26.2;
     t.camera.lookAt(35.8+offset,y+1.35,8.2);t.camera.updateMatrixWorld(true);
-   },floor);
+   },{floor,framing});
    await page.evaluate(()=>new Promise(r=>requestAnimationFrame(()=>requestAnimationFrame(r))));
    const capture=await page.evaluate(async()=>{
     const t=window.sightingTest,canvas=document.createElement('canvas');canvas.width=t.renderer.domElement.width;canvas.height=t.renderer.domElement.height;
@@ -59,20 +66,103 @@ prepare(){state='paused';uiPlaying(true);document.getElementById('result').hidde
     let meshes=0;figure.traverse(o=>{if(o.isMesh)meshes++;});
     return {waited,frames,maxChanged,before:before.png,peak,after:render().png,active:t.controller.active,pixels:canvas.width*canvas.height,meshes};
    });
-   assert(capture.waited>=45&&capture.waited<90,'Delayed first sighting');
-   assert.equal(capture.frames[0].changed,0,'Spawn is entirely hidden behind masonry');
+   assert(Math.abs(capture.waited-20)<.001,'First crossing starts at 20 seconds');
+   assert.equal(capture.frames[0].changed,0,'Spawn is entirely concealed');
    assert(capture.maxChanged>12&&capture.maxChanged<capture.pixels*.008,'Small but visible silhouette');
    assert.equal(capture.frames.at(-1).changed,0,'No remaining visible figure after crossing');assert(!capture.active);
    const visible=capture.frames.filter(f=>f.changed>12);assert(visible.length>=2&&visible.length<=12,'Visible for only a fraction of a second');
    for(const name of ['before','peak','after'])await writeFile(new URL(`${mode}-${framing}-${name}.png`,destination),Buffer.from(capture[name],'base64'));
-   const {before,peak,after,...receipt}=capture;results.push({mode,framing,floor,...receipt});
+   const walking=await page.evaluate(floor=>{
+    const t=window.sightingTest,figure=t.scene.getObjectByName('Distant corridor silhouette');t.controller.reset();
+    const idle={x:0,z:14,y:t.floors[floor].elevation,floor,outside:false,stair:null};
+    for(let i=0;i<300;i++)t.advance(idle,t.camera,.1);
+    const reverse=floor===1;t.beginWalk(floor,reverse);const startZ=t.actor.z;
+    const canvas=document.createElement('canvas');canvas.width=t.renderer.domElement.width;canvas.height=t.renderer.domElement.height;
+    const ctx=canvas.getContext('2d',{willReadFrequently:true});
+    let framesVisible=0,closest=Infinity,firstAt=null,peak=null,maxChanged=0;
+    function pixels(){t.renderer.render(t.scene,t.camera);ctx.drawImage(t.renderer.domElement,0,0);return ctx.getImageData(0,0,canvas.width,canvas.height).data;}
+    for(let frame=0;frame<180;frame++){
+     t.move(1/30);t.advance(t.actor,t.camera,1/30);
+     if(!t.controller.active)continue;
+     closest=Math.min(closest,Math.hypot(t.actor.x-figure.position.x,t.actor.z-figure.position.z));
+     const withFigure=pixels(),png=canvas.toDataURL('image/png').split(',')[1];figure.visible=false;const withoutFigure=pixels();figure.visible=true;
+     let changed=0;for(let i=0;i<withFigure.length;i+=4)if(Math.abs(withFigure[i]-withoutFigure[i])+Math.abs(withFigure[i+1]-withoutFigure[i+1])+Math.abs(withFigure[i+2]-withoutFigure[i+2])>30)changed++;
+     if(changed>12){framesVisible++;firstAt??=frame/30;}
+     if(changed>maxChanged){maxChanged=changed;peak=png;}
+    }
+    const walked=Math.abs(t.actor.z-startZ);t.endWalk();return {reverse,framesVisible,firstAt,closest,walked,maxChanged,peak};
+   },floor);
+   assert(walking.walked>18,'Normal movement really travels along the corridor');
+   assert(walking.framesVisible>=3&&walking.framesVisible<=20,'Normal forward walking produces a fleeting visible crossing');
+   assert(walking.firstAt<2&&walking.closest>=20,'A due sighting catches the next safe view and stays at least 20 metres away');
+   await writeFile(new URL(`${mode}-${framing}-walking.png`,destination),Buffer.from(walking.peak,'base64'));
+   const {peak:walkingPeak,...walkingReceipt}=walking;
+   const {before,peak,after,...receipt}=capture;results.push({mode,framing,floor,...receipt,walking:walkingReceipt});
   }
+  // Audit every long stretch in both directions using the furnished rendered
+  // world. A route merely becoming active or passing a 2D wall test is not
+  // enough: each of its 20/40/60-second appearances must change visible pixels.
+  await page.setViewportSize({width:1200,height:800});
+  await page.waitForFunction(()=>Math.abs(window.sightingTest.camera.aspect-1.5)<.0001);
+  const views=await page.evaluate(async()=>{
+   const {flatWalkable}=await import('./asylum-layout.mjs'),{SIGHTING_DISTANCE}=await import('./corridor-sightings.mjs'),views=[];
+   for(const floor of window.sightingTest.floors)for(const c of floor.corridors)for(let i=1;i<c.points.length;i++){
+    const a=c.points[i-1],b=c.points[i],length=Math.hypot(b[0]-a[0],b[1]-a[1]);if(length<SIGHTING_DISTANCE.min+3)continue;
+    for(const reverse of [false,true]){
+     const start=reverse?b:a,end=reverse?a:b,direction=end.map((v,j)=>(v-start[j])/length);
+     const position=[1.2,1.6,2,2.4].map(d=>start.map((v,j)=>v+direction[j]*d)).find(([x,z])=>flatWalkable(floor,x,z,.28));
+     views.push({floor:floor.id,corridor:c.id,segment:i,reverse,position,end});
+    }
+   }
+   return views;
+  });
+  for(const view of views){
+   const receipt=await page.evaluate(view=>{
+    const t=window.sightingTest,y=t.floors[view.floor].elevation,figure=t.scene.getObjectByName('Distant corridor silhouette');
+    t.controller.reset();Object.assign(t.actor,{x:view.position[0],z:view.position[1],y,floor:view.floor,outside:false,stair:null});t.prepareView();
+    t.camera.position.set(t.actor.x,y+1.65,t.actor.z);t.camera.lookAt(view.end[0],y+1.65,view.end[1]);t.camera.updateMatrixWorld(true);
+    const canvas=document.createElement('canvas');canvas.width=t.renderer.domElement.width;canvas.height=t.renderer.domElement.height;
+    const ctx=canvas.getContext('2d',{willReadFrequently:true}),events=[];let previous=false,peak=null,maxChanged=0;
+    function pixels(){t.renderer.render(t.scene,t.camera);ctx.drawImage(t.renderer.domElement,0,0);return ctx.getImageData(0,0,canvas.width,canvas.height).data;}
+    for(let frame=1;frame<=610;frame++){
+     t.advance(t.actor,t.camera,.1);
+     if(t.controller.active&&!previous)events.push({at:frame/10,spawnDistance:Math.hypot(t.actor.x-figure.position.x,t.actor.z-figure.position.z),maxChanged:0,maxAffected:0});
+     previous=t.controller.active;
+     if(!previous)continue;
+     const event=events.at(-1),age=frame/10-event.at;if(age<.25||age>.65)continue;
+     const withFigure=pixels();figure.visible=false;const withoutFigure=pixels();figure.visible=true;
+     let changed=0,affected=0;for(let i=0;i<withFigure.length;i+=4){
+      const contrast=Math.abs(withFigure[i]-withoutFigure[i])+Math.abs(withFigure[i+1]-withoutFigure[i+1])+Math.abs(withFigure[i+2]-withoutFigure[i+2]);
+      if(contrast>30)changed++;if(contrast>6)affected++;
+     }
+     event.maxChanged=Math.max(event.maxChanged,changed);
+     event.maxAffected=Math.max(event.maxAffected,affected);
+     if(changed>maxChanged){maxChanged=changed;pixels();peak=canvas.toDataURL('image/png').split(',')[1];}
+    }
+    return {events,peak};
+   },view);
+   const label=`${mode} floor ${view.floor} ${view.corridor}/${view.segment} reverse ${view.reverse}`;
+   assert.deepEqual(receipt.events.map(e=>e.at),[20,40,60],label+' starts on schedule');
+   // Even at the far end of an 80+ metre view, require a visible outline
+   // with strong contrast, not merely an active controller or invisible mesh.
+   const visible=receipt.events.every(e=>e.maxChanged>12);
+   if(!visible&&receipt.peak)await writeFile(new URL('visibility-failure.png',destination),Buffer.from(receipt.peak,'base64'));
+   assert(visible,label+' is actually visible: '+JSON.stringify(receipt.events));
+   coverage.push({mode,...view,events:receipt.events});
+   if(!view.reverse&&['C3','BC1','C26'].includes(view.corridor)&&view.segment===1){
+    await writeFile(new URL(`${mode}-floor-${view.floor}-${view.corridor}-scheduled.png`,destination),Buffer.from(receipt.peak,'base64'));
+   }
+  }
+  console.log('Verified '+mode+' scheduled visible crossings in '+views.length+' corridor views.');
   // Restore production callbacks and confirm a paused view never freezes an
   // inspectable silhouette, rather than merely testing a manually hidden mesh.
-  await page.evaluate(()=>{const t=window.sightingTest;t.controller.reset();for(let i=0;i<2400&&!t.controller.active;i++)t.advance(t.actor,t.camera,.1);if(!t.controller.active)throw Error('Expected sighting');t.controller.update=t.advance;});
+  await page.evaluate(()=>{
+   const t=window.sightingTest;Object.assign(t.actor,{x:35.8,z:-18,floor:0,y:0});t.prepareView();t.camera.position.set(35.8,1.65,-18);t.camera.lookAt(35.8,1.65,8.2);
+   t.controller.reset();for(let i=0;i<300&&!t.controller.active;i++)t.advance(t.actor,t.camera,.1);if(!t.controller.active)throw Error('Expected sighting');t.controller.update=t.advance;
+  });
   await page.waitForFunction(()=>!window.sightingTest.controller.active);
   await page.close();
  }
- assert.deepEqual(errors,[]);await writeFile(new URL('validation.json',destination),JSON.stringify({errors,results},null,2));
- console.log('PASS: hardware-rendered Escape/Explore, desktop/phone, ground/first-floor crossings, hidden spawn/end, brief visible silhouette, pause cancellation, no rendering errors.');
+ assert.deepEqual(errors,[]);await writeFile(new URL('validation.json',destination),JSON.stringify({errors,results,coverage},null,2));
+ console.log('PASS: hardware-rendered Escape/Explore, desktop/phone walking in both directions, eligible long corridor views visibly cross at 20/40/60 seconds, minimum 20 metres, concealed spawn/end, brief visibility, pause cancellation, no rendering errors.');
 }finally{await browser?.close();server.kill();}

@@ -13,6 +13,7 @@ public sealed partial class NativePrototypeGame
         public int[] meshes;public EscapeVariant[] variants;public EscapeNode[] nodes;public MovingFitting[] moving;
         public Obstacle[] solids,obstacles,obstaclesNoTrees,supports,walkSurfaces;
         public Point[] outline,patrol,lamps;public GroundsGate[] gates;public Point mast;
+        public TowerPlan tower;
     }
     public GameObject escapePrefab,fittingsPrefab;
     GameObject escapeEstate,escapeFittings,groundsGuard;NativeGuardPose groundsGuardPose;
@@ -36,7 +37,7 @@ public sealed partial class NativePrototypeGame
     void InitializeEscapeScenario(){
         escapeMeshSet=new bool[manifest.meshFlags.Length];foreach(var id in manifest.escape.meshes)escapeMeshSet[id]=true;
         escapeEstate=Instantiate(escapePrefab);escapeFittings=Instantiate(fittingsPrefab);
-        foreach(var t in escapeEstate.GetComponentsInChildren<Transform>(true))if(Array.Exists(manifest.escape.moving,d=>d.id==t.name)||t.name=="wicket-boards"||t.name.StartsWith("tool-")||t.name=="escape-trees")movingFittings[t.name]=t;
+        foreach(var t in escapeEstate.GetComponentsInChildren<Transform>(true))if(Array.Exists(manifest.escape.moving,d=>d.id==t.name)||t.name=="wicket-boards"||t.name=="tower-retaining-bar"||t.name.StartsWith("tool-")||t.name=="escape-trees")movingFittings[t.name]=t;
         groundsGuard=Instantiate(guardPrefab);groundsGuard.name="Grounds security patrol";groundsGuardPose=new NativeGuardPose(groundsGuard);
         PrepareWorkshopSurfaceShader();PrepareInteractionGlows();
         escapeEstate.SetActive(false);escapeFittings.SetActive(false);groundsGuard.SetActive(false);
@@ -67,6 +68,7 @@ public sealed partial class NativePrototypeGame
         openStaff.Clear();evidence.Clear();confiscated.Clear();doorAngles.Clear();
         renderedDoorAngles.Clear();foreach(var d in manifest.escape.moving){doorAngles[d.id]=0;renderedDoorAngles[d.id]=0;}
         guardPosition=XZ(manifest.escape.patrol[0]);guardTarget=guardPosition;guardPatrol=0;guardPath.Clear();guardRethink=0;groundsMode=GroundsMode.Patrol;guardHeading=Mathf.PI;guardWait=guardStuck=0;guardRevision=-1;
+        ResetTower();
         foreach(var flight in floors[0].flights)flight.blocked=false;
         SyncEscapeScenario();RefreshScenarioVisibility();
     }
@@ -77,6 +79,7 @@ public sealed partial class NativePrototypeGame
         foreach(var node in arrangement.nodes){var keyName="key-"+node.id;if(node.id=="staff-key"||node.id=="plan"||node.id=="reclaim")Fitting(keyName).gameObject.SetActive(node.id=="staff-key"?!staffKey:node.id=="plan"?!serviceKey:confiscated.Count>0);}
         foreach(var plan in floors)foreach(var exit in plan.exits)Fitting("lock-"+plan.id+"-"+exit.id).gameObject.SetActive(!serviceKey||!ServiceKeyFits(exit));
         movingFittings["tool-crowbar"].gameObject.SetActive(!crowbar);movingFittings["tool-oil"].gameObject.SetActive(!oil);movingFittings["wicket-boards"].gameObject.SetActive(!wicketOpen);
+        movingFittings["tower-retaining-bar"].gameObject.SetActive(!towerHatchOpen);
         foreach(var d in manifest.escape.moving)movingFittings[d.id].localRotation=Quaternion.Euler(0,-renderedDoorAngles[d.id]*Mathf.Rad2Deg,0);
         scenarioRevision++;indexedScenarioRevision=-1;UpdateObjective(0);
     }
@@ -98,6 +101,7 @@ public sealed partial class NativePrototypeGame
     void ScenarioNote(string id,string title,string content){evidence.Add(id);AddNote("escape:"+id,title,content,"Personal observation · fictional escape scenario");}
     bool ScenarioInteract(float dt,bool use){
         if(!Escaping||arrangement==null)return false;
+        if(TowerInteract(dt,use))return true;
         EscapeNode node=null;
         if(Indoors){
             foreach(var gate in arrangement.gates)if(!openStaff.Contains(gate.id)&&Mathf.Abs(playerY-gate.y)<1&&Vector2.Distance(player,XZ(gate))<1.8f){prompt="USE · Staff offices · locked upper grille";if(use&&!stairLatch){stairLatch=true;ScenarioNote("gate","Staff offices","The upper grille needs a staff stair key, or the basement safety release.");if(staffKey){openStaff.Add(gate.id);SyncEscapeScenario();}}return true;}
@@ -137,7 +141,8 @@ public sealed partial class NativePrototypeGame
     }
     void UpdateObjective(float dt){
         if(arrangement==null)return;string id,title,hint;
-        if(escapeOutside){id=beyondBoundary?"mast":"grounds";title=beyondBoundary?"Reach the radio mast":"Find a way through the grounds boundary";hint=beyondBoundary?"USE at the lattice mast northwest of the asylum.":"Follow the north gates. Oil quiets the pedestrian gate; a crowbar from the tower repair workshop opens the boarded wicket.";}
+        if(InsideTower){id=towerSurveyed?"tower-descent":"tower-climb";title=towerSurveyed?"Descend and choose your escape route":"Climb to the water tower lookout";hint=towerSurveyed?"Return down the same stairs. Listen for security, then head for either north gate.":"Follow the stairs and landing lamps. USE at the west lookout to identify the gates and mast.";}
+        else if(escapeOutside){id=beyondBoundary?"mast":"grounds";title=beyondBoundary?"Reach the radio mast":"Find a way through the grounds boundary";hint=beyondBoundary?"USE at the lattice mast northwest of the asylum.":"Follow the north gates. Oil quiets the pedestrian gate; a crowbar from the tower repair workshop opens the boarded wicket.";}
         else if(serviceKey){id="door";title="Unlock any west-side exit";hint="Any floor · USE at a west-side exit with the brass key. It also fits the tagged entrance, "+arrangement.exitId+".";}
         else if(confiscated.Count>0){id="reclaim";title="Recover your keys at Reception";hint="USE the glowing property tray on the Reception desk.";}
         else if(openStaff.Count>0||floor==3){id="record";title="Explore the upper offices";hint="Find the porter’s record and brass key in second-floor room "+RoomNumber(3,arrangement.office)+".";}
@@ -232,5 +237,5 @@ public sealed partial class NativePrototypeGame
         if(!seen&&(groundsMode==GroundsMode.Patrol||groundsMode==GroundsMode.Return))spotted=false;
         if(distance<.85f&&Mathf.Abs(playerY)<1.4f)Finish(false,"Grounds security");
     }
-    void UpdateScenarioLights(){var lights=new List<Point>(manifest.escape.lamps);lights.Sort((a,b)=>(XZ(a)-player).sqrMagnitude.CompareTo((XZ(b)-player).sqrMagnitude));for(int i=0;i<lightPool.Length;i++){bool active=escapeOutside&&i<lights.Count&&Vector2.Distance(player,XZ(lights[i]))<18;lightPool[i].enabled=active;if(active){lightPool[i].transform.position=World(XZ(lights[i]),lights[i].y);lightPool[i].color=Color.white;lightPool[i].intensity=.8f;lightPool[i].range=12;}}}
+    void UpdateScenarioLights(){var lights=new List<Point>(manifest.escape.lamps);lights.Sort((a,b)=>(XZ(a)-player).sqrMagnitude.CompareTo((XZ(b)-player).sqrMagnitude));for(int i=0;i<lightPool.Length;i++){bool active=escapeOutside&&i<lights.Count&&Vector2.Distance(player,XZ(lights[i]))<18;lightPool[i].enabled=active;if(active){lightPool[i].transform.position=World(XZ(lights[i]),lights[i].y);lightPool[i].color=Color.white;lightPool[i].intensity=.8f;lightPool[i].range=12;}}UpdateTowerMood(Time.unscaledDeltaTime);}
 }

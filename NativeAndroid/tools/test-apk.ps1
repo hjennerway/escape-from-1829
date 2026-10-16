@@ -11,7 +11,7 @@ $badging = & "$androidTools/SDK/build-tools/36.0.0/aapt.exe" dump badging $apkPa
 if ($LASTEXITCODE -ne 0) { throw 'APK metadata check failed.' }
 $badging | Set-Content (Join-Path $nativeDirectory 'artifacts/update-apk-badging.txt')
 $metadata = $badging -join "`n"
-foreach ($expected in @("name='org.hjennerway.escape1829.prototype'", "versionCode='14'", "versionName='0.14.0'", "sdkVersion:'26'", "targetSdkVersion:'36'", "native-code: 'arm64-v8a'")) {
+foreach ($expected in @("name='org.hjennerway.escape1829.prototype'", "versionCode='15'", "versionName='0.15.0'", "sdkVersion:'26'", "targetSdkVersion:'36'", "native-code: 'arm64-v8a'")) {
     if (!$metadata.Contains($expected)) { throw "Missing APK metadata: $expected" }
 }
 $signature = & "$androidTools/OpenJDK/bin/java.exe" -jar "$androidTools/SDK/build-tools/36.0.0/lib/apksigner.jar" verify --verbose --print-certs $apkPath
@@ -31,8 +31,8 @@ $package = Get-Item -LiteralPath $apkPath
 $report = [ordered]@{
     passed = $true
     package = 'org.hjennerway.escape1829.prototype'
-    versionName = '0.14.0'
-    versionCode = 14
+    versionName = '0.15.0'
+    versionCode = 15
     bytes = $package.Length
     sha256 = (Get-FileHash -LiteralPath $apkPath -Algorithm SHA256).Hash
     certificateSha256 = $certificate
