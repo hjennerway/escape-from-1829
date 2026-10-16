@@ -136,7 +136,7 @@ public static class NativePrototypeBuild
         var signature = new StringBuilder();
         using (var hash = SHA256.Create())
         {
-            var files=new List<string>{Source+"/manifest.json",Source+"/indoor.glb",Source+"/guard.glb",Source+"/selection.glb",Source+"/escape.glb",Source+"/fittings.glb",Source+"/room-wallpaper.png",Source+"/room-paint.png",Source+"/escape-jump-collision.bytes","Assets/Editor/NativePrototypeBuild.cs","Assets/Shaders/NativeSurface.shader"};foreach(var name in JsonUtility.FromJson<NativePrototypeGame.Manifest>(File.ReadAllText(Source+"/manifest.json")).outdoorChunks)files.Add(Source+"/"+name);
+            var files=new List<string>{Source+"/manifest.json",Source+"/indoor.glb",Source+"/guard.glb",Source+"/ghost.glb",Source+"/figure.glb",Source+"/selection.glb",Source+"/escape.glb",Source+"/fittings.glb",Source+"/room-wallpaper.png",Source+"/room-paint.png",Source+"/escape-jump-collision.bytes","Assets/Editor/NativePrototypeBuild.cs","Assets/Shaders/NativeSurface.shader"};foreach(var name in JsonUtility.FromJson<NativePrototypeGame.Manifest>(File.ReadAllText(Source+"/manifest.json")).outdoorChunks)files.Add(Source+"/"+name);
             foreach (string file in files)
             {
                 using (var stream = File.OpenRead(file)) signature.Append(BitConverter.ToString(hash.ComputeHash(stream)));
@@ -173,7 +173,7 @@ public static class NativePrototypeBuild
             }
         }
         var rawNodes=ArrayValues(Property(json,"nodes"));for(int i=0;i<root.nodes.Length;i++)if(Property(rawNodes[i],"mesh")==null)root.nodes[i].mesh=-1;
-        var rawMeshes=ArrayValues(Property(json,"meshes"));for(int i=0;i<root.meshes.Length;i++){var primitives=ArrayValues(Property(rawMeshes[i],"primitives"));for(int j=0;j<primitives.Count;j++){var attributes=Property(primitives[j],"attributes");if(Property(attributes,"COLOR_0")==null)root.meshes[i].primitives[j].attributes.COLOR_0=-1;if(Property(attributes,"TEXCOORD_2")==null)root.meshes[i].primitives[j].attributes.TEXCOORD_2=-1;}}
+        var rawMeshes=ArrayValues(Property(json,"meshes"));for(int i=0;i<root.meshes.Length;i++){var primitives=ArrayValues(Property(rawMeshes[i],"primitives"));for(int j=0;j<primitives.Count;j++){var attributes=Property(primitives[j],"attributes");if(Property(attributes,"TEXCOORD_0")==null)root.meshes[i].primitives[j].attributes.TEXCOORD_0=-1;if(Property(attributes,"TEXCOORD_1")==null)root.meshes[i].primitives[j].attributes.TEXCOORD_1=-1;if(Property(attributes,"COLOR_0")==null)root.meshes[i].primitives[j].attributes.COLOR_0=-1;if(Property(attributes,"TEXCOORD_2")==null)root.meshes[i].primitives[j].attributes.TEXCOORD_2=-1;}}
         int binaryHeader = 20 + jsonLength;
         if (BitConverter.ToUInt32(bytes, binaryHeader + 4) != 0x004E4942) throw new Exception("GLB binary chunk missing.");
         int start = binaryHeader + 8;
@@ -262,11 +262,12 @@ public static class NativePrototypeBuild
                 if (primitive.mode != 4) throw new Exception("Only triangle meshes are supported.");
                 var position = Floats(root, bytes, start, primitive.attributes.POSITION, 3);
                 var normal = Floats(root, bytes, start, primitive.attributes.NORMAL, 3);
-                var uv = Floats(root, bytes, start, primitive.attributes.TEXCOORD_0, 2);
+                if(primitive.attributes.TEXCOORD_0<0&&materials[primitive.material].mainTexture)throw new Exception("Textured mesh requires UV coordinates.");
+                var uv = primitive.attributes.TEXCOORD_0<0?new float[position.Length/3*2]:Floats(root, bytes, start, primitive.attributes.TEXCOORD_0, 2);
                 int colourWidth=primitive.attributes.COLOR_0<0?0:root.accessors[primitive.attributes.COLOR_0].type=="VEC4"?4:3;
                 float[] colours=colourWidth==0?null:Floats(root,bytes,start,primitive.attributes.COLOR_0,colourWidth);
                 float[] roomFinish=primitive.attributes.TEXCOORD_2<0?null:Floats(root,bytes,start,primitive.attributes.TEXCOORD_2,2);
-                float[] wind=name=="guard"||name=="selection"?null:Floats(root,bytes,start,primitive.attributes.TEXCOORD_1,2);
+                float[] wind=name=="guard"||name=="selection"||primitive.attributes.TEXCOORD_1<0?null:Floats(root,bytes,start,primitive.attributes.TEXCOORD_1,2);
                 var vertices = new Vector3[position.Length / 3]; var normals = new Vector3[vertices.Length]; var uvs = new Vector2[vertices.Length];
                 for (int n = 0; n < vertices.Length; n++)
                 {
@@ -286,10 +287,10 @@ public static class NativePrototypeBuild
                 if(roomFinish!=null){var finish=new Vector2[vertices.Length];for(int k=0;k<finish.Length;k++)finish[k]=new Vector2(roomFinish[k*2],roomFinish[k*2+1]);mesh.uv3=finish;}
                 if(wind!=null){var weights=new Vector2[vertices.Length];for(int w=0;w<weights.Length;w++)weights[w]=new Vector2(wind[w*2],wind[w*2+1]);mesh.uv2=weights;}
                 mesh.RecalculateBounds();if(materials[primitive.material].IsKeywordEnabled("_BUMP"))mesh.RecalculateTangents();
-                bool precise=name=="indoor"||name=="escape"||name=="fittings";foreach(var node in root.nodes)if(node.mesh==i&&node.extras!=null&&node.extras.preciseSurface)precise=true;
+                bool precise=name=="indoor"||name=="escape"||name=="fittings"||name=="ghost"||name=="figure";foreach(var node in root.nodes)if(node.mesh==i&&node.extras!=null&&node.extras.preciseSurface)precise=true;
                 MeshUtility.SetMeshCompression(mesh,precise?ModelImporterMeshCompression.Off:ModelImporterMeshCompression.Low);
                 string path = folder + "/mesh-" + i + "-" + j + ".asset";
-                meshSets[i][j] = (Mesh)SaveAsset(mesh, path); assetStats.meshes++; assetStats.triangles += indices.Length / 3;
+                meshSets[i][j] = (Mesh)SaveAsset(mesh, path);
             }
         }
         } finally { AssetDatabase.StopAssetEditing(); }
@@ -308,6 +309,7 @@ public static class NativePrototypeBuild
                 var part = new GameObject("Surface " + j); part.transform.SetParent(obj.transform, false);
                 part.AddComponent<MeshFilter>().sharedMesh = meshSets[definition.mesh][j];
                 var renderer = part.AddComponent<MeshRenderer>(); renderer.sharedMaterial = materials[primitives[j].material];
+                assetStats.meshes++;assetStats.triangles+=meshSets[definition.mesh][j].GetIndexCount(0)/3;
                 renderer.shadowCastingMode = name == "indoor" ? ShadowCastingMode.Off : ShadowCastingMode.On; renderer.receiveShadows = true;
             }
         }

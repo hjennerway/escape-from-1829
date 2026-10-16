@@ -7,6 +7,8 @@ $manifest = Get-Content (Join-Path $nativeDirectory 'Unity/Assets/NativePrototyp
 $smoke = Get-Content (Join-Path (Join-Path $PSScriptRoot $SmokeDirectory) 'smoke.json') -Raw | ConvertFrom-Json
 $importReport = Get-Content (Join-Path $nativeDirectory 'artifacts/unity-import.json') -Raw | ConvertFrom-Json
 if (!$smoke.passed -or $smoke.sourceHash -ne $manifest.sourceHash -or $importReport.sourceHash -ne $manifest.sourceHash) { throw 'Native validation and imported model hashes do not agree.' }
+$manifestDigest = (Get-FileHash -LiteralPath (Join-Path $nativeDirectory 'Unity/Assets/NativePrototype/Generated/manifest.json') -Algorithm SHA256).Hash
+if ($smoke.manifestSha256 -ne $manifestDigest -or $smoke.version -ne '0.15.0') { throw 'The native smoke must cover this full asset manifest and release version.' }
 $badging = & "$androidTools/SDK/build-tools/36.0.0/aapt.exe" dump badging $apkPath
 if ($LASTEXITCODE -ne 0) { throw 'APK metadata check failed.' }
 $badging | Set-Content (Join-Path $nativeDirectory 'artifacts/update-apk-badging.txt')

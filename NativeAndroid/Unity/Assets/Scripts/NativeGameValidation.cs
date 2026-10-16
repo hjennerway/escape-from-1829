@@ -6,7 +6,7 @@ using UnityEngine;
 
 public sealed partial class NativePrototypeGame
 {
-    [Serializable] class SmokeReport { public bool passed;public string engine,gpu,sourceHash;public int periods,archivePictures,exitCandidates,selectedExits;public string[] checks;public float renderMilliseconds; }
+    [Serializable] class SmokeReport { public bool passed;public string engine,gpu,sourceHash,manifestSha256,version;public int periods,archivePictures,exitCandidates,selectedExits;public string[] checks;public float renderMilliseconds; }
     readonly List<string> smokeChecks=new List<string>();
     void Check(bool condition,string message){if(!condition)throw new Exception("Native smoke failed: "+message);smokeChecks.Add(message);}
     IEnumerator Smoke(string directory)
@@ -14,6 +14,7 @@ public sealed partial class NativePrototypeGame
         // An exception in a coroutine would otherwise leave a batch player alive.
         Application.logMessageReceived+=(message,trace,type)=>{if(type==LogType.Exception||type==LogType.Error){File.WriteAllText(Path.Combine(directory,"failure.txt"),message+"\n"+trace);Application.Quit(1);}};
         Directory.CreateDirectory(directory);yield return null;paused=true;
+        yield return PortRefreshSmoke(directory);
         yield return ExitRenderingSmoke(directory);
         yield return PresentationSmoke(directory);
         yield return NavigationSmoke(directory);
@@ -34,7 +35,8 @@ public sealed partial class NativePrototypeGame
         StartInside();paused=false;HandleTap(helpButton.center);Check(help,"Touch opens help in asylum escape");HandleTap(helpResumeButton.center);Check(!help,"Touch closes help");
         yield return CurrentGameplaySmoke(directory);
         StartOutside();paused=false;yield return new WaitForSecondsRealtime(.5f);
-        File.WriteAllText(Path.Combine(directory,"smoke.json"),JsonUtility.ToJson(new SmokeReport{passed=true,engine=Application.unityVersion,gpu=SystemInfo.graphicsDeviceName,sourceHash=manifest.sourceHash,periods=manifest.periods.Length,archivePictures=73,exitCandidates=24,selectedExits=24,checks=smokeChecks.ToArray(),renderMilliseconds=smoothedFrame*1000},true));
+        string manifestDigest;using(var sha=System.Security.Cryptography.SHA256.Create())manifestDigest=BitConverter.ToString(sha.ComputeHash(System.Text.Encoding.UTF8.GetBytes(manifestText.text))).Replace("-","").ToLowerInvariant();
+        File.WriteAllText(Path.Combine(directory,"smoke.json"),JsonUtility.ToJson(new SmokeReport{passed=true,engine=Application.unityVersion,version=Application.version,gpu=SystemInfo.graphicsDeviceName,sourceHash=manifest.sourceHash,manifestSha256=manifestDigest,periods=manifest.periods.Length,archivePictures=73,exitCandidates=24,selectedExits=24,checks=smokeChecks.ToArray(),renderMilliseconds=smoothedFrame*1000},true));
         Debug.Log("NATIVE_FULL_PORT_SMOKE_PASS "+directory);Application.Quit(0);
     }
     void Capture(string directory,string name)

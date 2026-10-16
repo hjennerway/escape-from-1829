@@ -18,6 +18,12 @@ the north boundary gates, and use the radio mast to finish. Search the workshops
 for useful tools. You have nine lives on Android. Captures return you indoors and
 keep your discoveries and opened gates; the ninth ends the attempt.
 
+Use the workshop crowbar to free the water-tower hatch; oil keeps it quiet.
+Climb to the west lookout to identify the gates and radio mast, then return
+down the same stairs. The hatch stays open after capture. Indoors, jumping can
+clear the exposed stair railings. Watch the far ends of long corridors for a
+fleeting running silhouette and the hollow-eyed Deva ghost.
+
 **NOTES** records places, doors and artwork you discover, with maps that fill
 in as you explore. It pauses the game while open. **PAUSE** offers 30/60 FPS
 and picture quality choices.

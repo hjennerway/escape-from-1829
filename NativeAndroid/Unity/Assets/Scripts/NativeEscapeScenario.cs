@@ -189,8 +189,10 @@ public sealed partial class NativePrototypeGame
     void EnsureScenarioJumps(){if(scenarioJumps==null)scenarioJumps=new CompactJumpIndex(escapeCollisionText.bytes,manifest.escapeJumpBounds);scenarioJumps.trees=trees;}
     void AdvanceGroundsDoors(float dt){
         if(arrangement==null)return;bool changed=false;
-        foreach(var d in manifest.escape.moving){float current=renderedDoorAngles[d.id],next=Mathf.MoveTowards(current,doorAngles[d.id],Mathf.PI/2*dt/.95f);if(next==current)continue;
+        foreach(var d in manifest.escape.moving){float current=renderedDoorAngles[d.id],next=Mathf.MoveTowards(current,doorAngles[d.id],Mathf.PI/2*dt/.95f),nextMotion=towerHatchMotionTime;
+            if(d.id=="tower-hatch"&&towerHatchOpen){nextMotion=Mathf.Min(.95f,towerHatchMotionTime+dt);float t=nextMotion/.95f;next=-Mathf.PI/2*t*t*(3-2*t);}if(next==current)continue;
             var pivot=movingFittings[d.id];float oldAngle=current;renderedDoorAngles[d.id]=next;scenarioRevision++;BuildScenarioObstacles();
+            if(d.id=="tower-hatch"&&escapeOutside){bool blocked=false;int count=Mathf.Max(1,Mathf.CeilToInt(Mathf.Abs(next-current)/.025f));for(int i=1;i<=count;i++){renderedDoorAngles[d.id]=Mathf.Lerp(current,next,(float)i/count);scenarioRevision++;BuildScenarioObstacles();if(!ScenarioClear(player,playerY)){blocked=true;break;}}renderedDoorAngles[d.id]=blocked?current:next;scenarioRevision++;BuildScenarioObstacles();if(blocked)continue;towerHatchMotionTime=nextMotion;}
             if(escapeOutside&&Mathf.Abs(next)<Mathf.Abs(current)&&!ScenarioClear(player,playerY)){renderedDoorAngles[d.id]=oldAngle;scenarioRevision++;BuildScenarioObstacles();continue;}
             pivot.localRotation=Quaternion.Euler(0,-next*Mathf.Rad2Deg,0);changed=true;
         }if(changed){scenarioRevision++;indexedScenarioRevision=-1;}
@@ -214,7 +216,7 @@ public sealed partial class NativePrototypeGame
         if(!escapeOutside||!PrepareGroundsPatrol()||elapsed<enemyReleaseAt)return;
         float distance=Vector2.Distance(player,guardPosition),facing=Vector2.Dot((player-guardPosition).normalized,new Vector2(Mathf.Sin(guardHeading),Mathf.Cos(guardHeading)));
         bool seen=distance<(crouching?12:27)&&(distance<2.5f||facing>.35f);
-        if(seen)for(int i=1;i<Mathf.CeilToInt(distance/.35f);i++)if(!OutsideClearAt(Vector2.Lerp(guardPosition,player,i*.35f/distance),0)){seen=false;break;}
+        if(seen){EnsureOutside();if(indexedScenarioRevision!=scenarioRevision)BuildScenarioObstacles();for(int i=1;i<Mathf.CeilToInt(distance/.35f);i++){float t=i*.35f/distance,y=Mathf.Lerp(1.55f,playerY+1.65f,t);var p=Vector2.Lerp(guardPosition,player,t);foreach(var o in outsideIndex.At(p))if(o.minY<y&&o.maxY>y&&Contains(o,p.x,p.y,0)){seen=false;break;}if(seen)foreach(var o in scenarioSolids.At(p))if(o.minY<y&&o.maxY>y&&Contains(o,p.x,p.y,0)){seen=false;break;}if(!seen)break;}}
         if(seen){if(groundsMode!=GroundsMode.Chase)ChangeGroundsMode(GroundsMode.Chase,player);guardTarget=player;guardMemory=5;spotted=true;}
         else if(groundsMode==GroundsMode.Chase){guardMemory-=dt;if(guardMemory<=0)ChangeGroundsMode(GroundsMode.Investigate,guardTarget);}
         if(groundsMode==GroundsMode.Search){guardWait-=dt;guardHeading=guardSearchAngle+Mathf.Sin((6-guardWait)*1.2f)*1.25f;if(guardWait<=0)ChangeGroundsMode(GroundsMode.Return,XZ(manifest.escape.patrol[guardPatrol]));}
@@ -229,6 +231,7 @@ public sealed partial class NativePrototypeGame
                 if(guardPath.Count==0){if(groundsMode==GroundsMode.Patrol||groundsMode==GroundsMode.Return){guardPatrol=(guardPatrol+1)%manifest.escape.patrol.Length;ChangeGroundsMode(GroundsMode.Patrol,XZ(manifest.escape.patrol[guardPatrol]));guardWait=1;}else{ChangeGroundsMode(GroundsMode.Search,guardPosition);guardWait=6;guardSearchAngle=guardHeading;}}}
             if(guardPath.Count>0){var next=guardPath[0];var delta=Vector2.MoveTowards(guardPosition,next,dt*(groundsMode==GroundsMode.Chase?3.6f:groundsMode==GroundsMode.Investigate?2.8f:2.2f))-guardPosition;
                 bool clear=OutsideClearAt(guardPosition+delta,0);if(clear)guardPosition+=delta;float moved=clear?delta.magnitude:0;groundsGuardPose.Update(moved,dt);
+                float heard=Vector3.Distance(World(player,playerY),World(guardPosition,0));if(moved>.001f&&heard<24){towerGuardStep+=dt;if(towerGuardStep>.48f){towerGuardStep=0;PlaySound(footstep,.12f*(1-heard/24));}}
                 if(delta.sqrMagnitude>.00001f)guardHeading=Mathf.Atan2(delta.x,delta.y);if(Vector2.Distance(guardPosition,next)<.15f)guardPath.RemoveAt(0);
                 guardStuck=moved<.001f?guardStuck+dt:0;if(guardStuck>2){if(groundsMode==GroundsMode.Patrol){guardPatrol=(guardPatrol+1)%manifest.escape.patrol.Length;ChangeGroundsMode(GroundsMode.Patrol,XZ(manifest.escape.patrol[guardPatrol]));}else{ChangeGroundsMode(GroundsMode.Search,guardPosition);guardWait=6;guardSearchAngle=guardHeading;}}
             }

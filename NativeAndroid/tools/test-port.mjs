@@ -39,7 +39,9 @@ for(const filename of [...manifest.outdoorChunks,...['indoor','guard','ghost','f
   let triangles=0;
   for(const mesh of root.meshes)for(const primitive of mesh.primitives){
     assert.equal(primitive.mode??4,4);const count=root.accessors[primitive.attributes.POSITION].count;
-    const attributes=[['POSITION',3],['NORMAL',3],['TEXCOORD_0',2]];
+    const attributes=[['POSITION',3],['NORMAL',3]];
+    if(primitive.attributes.TEXCOORD_0!==undefined)attributes.push(['TEXCOORD_0',2]);
+    else assert(name==='figure'&&!root.materials[primitive.material].pbrMetallicRoughness?.baseColorTexture,'Only untextured silhouette profiles may omit UVs');
     if(primitive.attributes.COLOR_0!==undefined){const color=root.accessors[primitive.attributes.COLOR_0];assert(['VEC3','VEC4'].includes(color.type),'Native colours support RGB and RGBA');attributes.push(['COLOR_0',Number(color.type.slice(3))]);}
     for(const [attribute,width] of attributes){
       const a=root.accessors[primitive.attributes[attribute]],v=root.bufferViews[a.bufferView],start=binary+v.byteOffset+(a.byteOffset??0),stride=v.byteStride??width*4;
@@ -52,6 +54,9 @@ for(const filename of [...manifest.outdoorChunks,...['indoor','guard','ghost','f
     for(let i=0;i<a.count;i++){const index=size===4?bytes.readUInt32LE(start+i*size):size===2?bytes.readUInt16LE(start+i*size):bytes[start+i];assert(index<count);}
     triangles+=a.count/3;
   }
+  // A rig may reuse one mesh at several joints. Count rendered instances,
+  // while validating each stored accessor only once above.
+  triangles=root.nodes.reduce((total,node)=>total+(node.mesh===undefined?0:root.meshes[node.mesh].primitives.reduce((n,p)=>n+root.accessors[p.indices].count/3,0)),0);
   if(name==='outdoor')outdoorTriangles+=triangles;else assert.equal(triangles,manifest[name==='escape'?'escapeStats':name].triangles);triangleTotal+=triangles;
   for(const node of root.nodes)assert.equal(node.matrix,undefined);
   const names=root.nodes.map(n=>n.name);

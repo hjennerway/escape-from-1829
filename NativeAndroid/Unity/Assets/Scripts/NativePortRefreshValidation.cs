@@ -1,0 +1,57 @@
+using System;
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public sealed partial class NativePrototypeGame
+{
+    Color32[] PortFrame(){var target=new RenderTexture(1280,720,24);var old=view.targetTexture;var previous=RenderTexture.active;var image=new Texture2D(1280,720,TextureFormat.RGB24,false);try{view.targetTexture=target;view.Render();RenderTexture.active=target;image.ReadPixels(new Rect(0,0,1280,720),0,0);image.Apply();return image.GetPixels32();}finally{view.targetTexture=old;RenderTexture.active=previous;target.Release();Destroy(target);Destroy(image);}}
+    IEnumerator PortRefreshSmoke(string directory){
+        Check(SystemInfo.graphicsDeviceType!=UnityEngine.Rendering.GraphicsDeviceType.Null&&!SystemInfo.graphicsDeviceName.ToLowerInvariant().Contains("software"),"Current port uses hardware rendering: "+SystemInfo.graphicsDeviceName);
+        StartInside();paused=true;var ghost=enemies.Find(e=>e.type==2);Check(ghost!=null&&ghost.ghostPose!=null,"Hollow-eyed browser ghost rig is active in the native pursuer");
+        foreach(var e in enemies)e.model.SetActive(false);ghost.floor=0;ghost.y=0;ghost.position=new Vector2(35.8f,-18);PositionEnemy(ghost);ghost.model.transform.rotation=Quaternion.identity;ghost.ghostPose.Reset();var root=ghost.model.transform.position;var head=Joint(ghost.model,"Lolling head");var before=head.localRotation;
+        ghost.ghostPose.Update(.4f);Check(Quaternion.Angle(before,head.localRotation)>.1f&&ghost.model.transform.position==root,"Ghost child animation leaves navigation root fixed");var frozen=head.localRotation;ghost.ghostPose.Update(0);Check(Quaternion.Angle(frozen,head.localRotation)<.001f,"Ghost freezes at zero active time");ghost.ghostPose.Reset();Check(Quaternion.Angle(before,head.localRotation)<.001f,"Ghost retry resets the original pose");
+        Check(Joint(ghost.model,"Continuous hollow-eyed face").GetComponentInChildren<MeshRenderer>()!=null,"Native face retains the single sculpted hollow-eye surface");
+        player=new Vector2(35.8f,-15);playerY=0;floor=0;ShowFloor();PositionView();view.transform.LookAt(World(ghost.position,1.4f));UpdateInteriorLights();yield return null;Capture(directory,"current-ghost-corridor.png");
+        view.fieldOfView=35;view.transform.position=World(new Vector2(35.8f,-16.7f),1.94f);view.transform.LookAt(World(ghost.position,1.94f));Capture(directory,"current-ghost-face.png");view.fieldOfView=74;
+        foreach(float dt in new[]{1f/120,1f/60,.1f})foreach(var connection in floors[0].flights){
+            StartInside();paused=false;foreach(var gate in arrangement.gates)openStaff.Add(gate.id);SyncEscapeScenario();var run=connection.runs[connection.runs.Length-1];var a=run.a;var b=run.b;float x=a.x+1.35f,z=(a.z+b.z)/2,hi=floors[connection.upper].elevation;floor=connection.upper;player=new Vector2(x,z);playerY=hi;playerFlight=null;ShowFloor();
+            for(float t=0;t<1;t+=dt)MovePlayer(new Vector2(-3.1f*dt,0),dt);Check(player.x>a.x+.65f,"Ordinary walking retains rail guard "+connection.id+" / "+dt);Jump();float previous=playerY;
+            for(float t=0;t<3;t+=dt){MovePlayer(new Vector2(-Mathf.Min(3.1f*dt,Mathf.Max(0,player.x-a.x)),0),dt);Check(Mathf.Abs(playerY-previous)<18*dt+.001f,"Railing crossing retains continuous feet height");previous=playerY;}
+            Check(Mathf.Abs(player.x-a.x)<.002f&&Mathf.Abs(playerY-(a.y+b.y)/2)<.002f&&!jumping&&playerFlight==connection,"Railing jump lands on actual flight "+connection.id+" / "+dt+" at "+player+" y="+playerY);
+            var targets=new[]{XZ(b),XZ(connection.route[connection.route.Length-1]),XZ(connection.upperDeparture)};foreach(var target in targets){for(int n=0;n<800&&Vector2.Distance(player,target)>.01f;n++)MovePlayer(Vector2.ClampMagnitude(target-player,.04f),1f/120);Check(Vector2.Distance(player,target)<.02f,"Stair walking resumes after railing landing "+connection.id+" / "+dt+" target="+target+" player="+player+" y="+playerY+" floor="+floor+" free="+freeInteriorJump+" flight="+playerFlight?.id);}
+            Check(floor==connection.upper&&playerFlight==null&&Mathf.Abs(playerY-hi)<.002f,"Railing jump returns to connected upper floor");
+            ResetJump();floor=connection.lower;player=new Vector2(a.x,Mathf.Lerp(a.z,b.z,.93f));playerY=Mathf.Lerp(a.y,b.y,.93f);playerFlight=connection;Jump();for(float t=0;t<2;t+=dt)MovePlayer(new Vector2(Mathf.Min(3.1f*dt,Mathf.Max(0,x-player.x)),0),dt);
+            Check(Mathf.Abs(player.x-x)<.002f&&Mathf.Abs(playerY-hi)<.002f&&!jumping,"Reverse rail jump reaches upper floor "+connection.id+" / "+dt);paused=true;
+        }
+        StartInside();paused=false;floor=1;player=new Vector2(35.2f,-29.8f);playerY=4.2f;ShowFloor();Jump();for(int i=0;i<240;i++)MovePlayer(new Vector2(-Mathf.Min(3.1f/120,Mathf.Max(0,player.x-34.5f)),0),1f/120);
+        Check(Mathf.Abs(playerY-5.285f)<.002f&&!jumping,"Rail top supports native feet after landing");for(int i=0;i<300;i++)MovePlayer(new Vector2(-Mathf.Min(3.1f/120,Mathf.Max(0,player.x-33.85f)),0),1f/120);Check(Mathf.Abs(playerY-3.15f)<.002f&&!jumping,"Stepping off rail falls onto flight below");
+        yield return SightingPortSmoke(directory);
+        foreach(bool quiet in new[]{false,true}){
+            StartInside();paused=true;mode=Mode.Outside;escapeOutside=true;crowbar=true;oil=quiet;outside.SetActive(true);inside.SetActive(false);artRoot.SetActive(false);RefreshScenarioVisibility();SetLighting(false);var tower=manifest.escape.tower;player=XZ(tower.entrance);playerY=tower.entrance.y;guardPosition=XZ(tower.noise)+new Vector2(40,0);groundsMode=GroundsMode.Patrol;TowerInteract(.01f,false);TowerInteract(2.9f,true);Check(!towerHatchOpen,"Tower retaining bar requires three seconds");TowerInteract(.11f,true);Check(towerHatchOpen&&towerHatchOiled==quiet,"Tower hatch records oiled/noisy branch");
+            Check(quiet?groundsMode==GroundsMode.Patrol:groundsMode==GroundsMode.Investigate,"Tower noise uses browser hearing radius");player=new Vector2(tower.x,tower.z+6.2f);float angle=renderedDoorAngles["tower-hatch"];AdvanceGroundsDoors(.2f);Check(renderedDoorAngles["tower-hatch"]!=angle&&Mathf.Abs(renderedDoorAngles["tower-hatch"])<Mathf.PI/2,"Tower hatch swings gradually");AdvanceGroundsDoors(1);Check(Mathf.Abs(renderedDoorAngles["tower-hatch"]+Mathf.PI/2)<.001f,"Tower hatch reaches open position");
+            player=new Vector2(tower.x,tower.z+5.75f);playerY=0;hasSafeOutside=false;FollowOutside(new[]{new Vector2(tower.x,tower.z+3.3f),XZ(tower.flights[0].a)});
+            foreach(var flight in tower.flights){FollowOutside(new[]{XZ(flight.b)});Check(Mathf.Abs(playerY-flight.endY)<.03f,"Tower physical ascent reaches landing at "+flight.endY);}
+            FollowOutside(new[]{new Vector2(tower.x+3.3f,tower.z-2),new Vector2(tower.lookout.x,tower.z-2),XZ(tower.lookout)});Check(Mathf.Abs(playerY-tower.top)<.03f&&InsideTower,"All twelve native flights reach the lookout at "+player+" y="+playerY+" inside="+InsideTower);TowerInteract(.01f,false);TowerInteract(.01f,true);Check(towerSurveyed&&objectiveTitle.Contains("Descend"),"Lookout records directions and starts descent objective");
+            PositionView();view.transform.rotation=Quaternion.Euler(.12f*Mathf.Rad2Deg,-1.41f*Mathf.Rad2Deg,0);lodClock=0;UpdateEstateLOD();UpdateScenarioLights();yield return null;Capture(directory,quiet?"tower-lookout-oiled.png":"tower-lookout-noisy.png");
+            FollowOutside(new[]{new Vector2(tower.lookout.x,tower.z-2),new Vector2(tower.x+3.3f,tower.z-2),XZ(tower.flights[tower.flights.Length-1].b)});for(int i=tower.flights.Length-1;i>=0;i--){FollowOutside(new[]{XZ(tower.flights[i].a)});Check(Mathf.Abs(playerY-tower.flights[i].startY)<.03f,"Tower physical descent reaches landing at "+tower.flights[i].startY);}
+            FollowOutside(new[]{new Vector2(tower.x,tower.z+3.3f),new Vector2(tower.x,tower.z+5.75f)});Check(playerY<.4f,"Tower returns to the workshop yard");
+            player=new Vector2(tower.x,tower.z+3.3f);playerY=.2f;PositionView();view.transform.LookAt(World(XZ(tower.flights[1].a),4));lodClock=0;UpdateEstateLOD();towerLightLevel=-1;towerPresence=0;for(int warm=0;warm<60;warm++)UpdateTowerMood(1f/60);UpdateScenarioLights();var stairPixels=PortFrame();int clipped=0;foreach(var pixel in stairPixels)if(pixel.r>245&&pixel.g>245&&pixel.b>245)clipped++;Check(clipped<stairPixels.Length*.2f,"Tower illumination retains surface detail: "+clipped+" clipped pixels");Capture(directory,"tower-stairs.png");
+            Check(RecoverFromCapture("Grounds security")&&towerHatchOpen&&towerSurveyed,"Capture preserves tower hatch and lookout discoveries");StartInside();Check(!towerHatchOpen&&!towerSurveyed&&renderedDoorAngles["tower-hatch"]==0,"Retry restores tower hatch and discoveries");
+        }
+        StartOutside();paused=true;
+    }
+    IEnumerator SightingPortSmoke(string directory){
+        int cases=0;bool captured=false;
+        foreach(var plan in floors)foreach(var c in plan.corridors)for(int segment=1;segment<c.points.Length;segment++){
+            var a=XZ(c.points[segment-1]);var b=XZ(c.points[segment]);float length=Vector2.Distance(a,b);if(length<23)continue;
+            foreach(bool reverse in new[]{false,true}){StartOutside();paused=true;mode=Mode.Outside;exploreInterior=true;floor=plan.id;var start=reverse?b:a;var end=reverse?a:b;var axis=(end-start).normalized;bool approach=false;foreach(float d in new[]{1.2f,1.6f,2,2.4f}){var p=start+axis*d;if(IndoorClear(plan,p.x,p.y,.28f)){player=p;approach=true;break;}}Check(approach,"Native long corridor has clear approach");playerY=plan.elevation;outside.SetActive(false);inside.SetActive(true);ShowFloor();PositionView();view.transform.LookAt(World(end,playerY+1.35f));UpdateInteriorLights();ResetSightings();
+                for(int frame=1;frame<1200;frame++)UpdateSightings(1f/60);Check(sightingRoute==null,"Silhouette waits twenty active seconds");for(int late=0;late<3&&sightingRoute==null;late++)UpdateSightings(1f/60);Check(sightingRoute!=null,"Silhouette appears when due in long corridor "+plan.id+" / "+c.id+" reverse="+reverse);
+                var route=sightingRoute;Check(SegmentDistance(player.x,player.y,route.a,route.b)>=20,"Silhouette stays at least twenty metres away");
+                for(int frame=0;frame<120&&sightingRoute!=null;frame++){UpdateSightings(1f/120);if(silhouetteMaterial.GetFloat("_Opacity")>.9f&&SightingView(new Vector2(corridorFigure.transform.position.x,-corridorFigure.transform.position.z),.98f)){
+                        if(!captured){var with=PortFrame();corridorFigure.SetActive(false);var without=PortFrame();corridorFigure.SetActive(true);int changed=0;for(int i=0;i<with.Length;i++)if(Mathf.Abs(with[i].r-without[i].r)+Mathf.Abs(with[i].g-without[i].g)+Mathf.Abs(with[i].b-without[i].b)>24)changed++;Check(changed>=20,"Native rendered corridor figure has readable contrast: "+changed+" pixels");Capture(directory,"corridor-silhouette.png");captured=true;}break;}}
+                Check(sightingExposure>=.05f||sightingRoute!=null,"Crossing exposes a visible silhouette");UpdateSightings(0);Check(sightingRoute==null&&!corridorFigure.activeSelf,"Pause cancels active corridor apparition");cases++;
+            }}
+        Check(cases>=20&&captured,"Native sightings cover long corridors in both directions");ResetSightings();float clock=sightingRemaining;UpdateSightings(.6f);Check(sightingRemaining==clock,"Stalled frames do not advance apparition timer");yield return null;
+    }
+}

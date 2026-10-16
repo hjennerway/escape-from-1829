@@ -32,11 +32,14 @@ public sealed partial class NativePrototypeGame
     void ResetSightings(){sightingRemaining=20;sightingCheck=0;sightingRoute=lastSighting=null;if(corridorFigure)corridorFigure.SetActive(false);}
     void EndSighting(){if(sightingRoute!=null&&sightingExposure<.05f)sightingRemaining=0;sightingRoute=null;sightingCheck=0;if(corridorFigure)corridorFigure.SetActive(false);}
     bool InCorridor(Layout plan,Vector2 p){foreach(var c in plan.corridors)for(int i=1;i<c.points.Length;i++)if(SegmentDistance(p.x,p.y,c.points[i-1],c.points[i])<c.width/2-.1f)return true;return false;}
+    static bool SightingIntersection(Vector2 a,Vector2 b,Vector2 c,Vector2 d){var u=b-a;var v=d-c;float cross=u.x*v.y-u.y*v.x;if(Mathf.Abs(cross)<.0000001f)return false;var w=c-a;float t=(w.x*v.y-w.y*v.x)/cross,s=(w.x*u.y-w.y*u.x)/cross;return t>=0&&t<=1&&s>=0&&s<=1;}
+    bool SightingLine(Vector2 a,Vector2 b,bool doors=true){foreach(var wall in layout.walls)if(SightingIntersection(a,b,XZ(wall.a),XZ(wall.b)))return false;
+        if(doors)foreach(var door in layout.roomDoors){float c=Mathf.Cos(door.rotation),s=Mathf.Sin(door.rotation);var corners=new Vector2[4];var signs=new[]{new Vector2(-1,-1),new Vector2(1,-1),new Vector2(1,1),new Vector2(-1,1)};for(int i=0;i<4;i++){float x=signs[i].x*door.width/2,z=signs[i].y*door.depth/2;corners[i]=new Vector2(door.x+c*x+s*z,door.z-s*x+c*z);}for(int i=0;i<4;i++)if(SightingIntersection(a,b,corners[i],corners[(i+1)%4]))return false;}return true;}
     bool SightingView(Vector2 p,float margin=.82f){var v=view.WorldToViewportPoint(World(p,layout.elevation+1.05f));return v.z>=view.nearClipPlane&&v.z<=view.farClipPlane&&Mathf.Abs(v.x-.5f)<=margin*.5f&&Mathf.Abs(v.y-.5f)<=.35f;}
     bool SightingEligible(SightingRoute r){if(r.floor!=floor||SegmentDistance(player.x,player.y,r.a,r.b)<20)return false;var center=XZ(r.center);var direction=XZ(r.direction);var delta=center-player;
         if(Mathf.Abs(Vector2.Dot(delta.normalized,direction))>.35f||!SightingView(center))return false;
-        foreach(float offset in new[]{-.6f,0,.6f})if(!LineOfSight(layout,player,center+direction*offset))return false;
-        if(!r.passage){foreach(var end in new[]{r.a,r.b})foreach(float x in new[]{-.75f,.75f})foreach(float z in new[]{-.75f,.75f})if(LineOfSight(layout,player,XZ(end)+new Vector2(x,z)))return false;}
+        foreach(float offset in new[]{-.6f,0,.6f})if(!SightingLine(player,center+direction*offset))return false;
+        if(!r.passage){foreach(var end in new[]{r.a,r.b})foreach(float x in new[]{-.75f,.75f})foreach(float z in new[]{-.75f,.75f})if(SightingLine(player,XZ(end)+new Vector2(x,z),false))return false;}
         if(r.exposed!=null){foreach(var p in r.exposed)if(!IndoorClear(layout,p.x,p.z,.28f))return false;}
         else for(int i=0;i<=24;i++){var p=Vector2.Lerp(XZ(r.a),XZ(r.b),i/24f);if(!IndoorClear(layout,p.x,p.y,.28f))return false;}return true;
     }
@@ -49,11 +52,11 @@ public sealed partial class NativePrototypeGame
         if(!(dt>0)||dt>.5f||!Indoors||playerFlight!=null){EndSighting();return;}sightingRemaining=Mathf.Max(0,sightingRemaining-dt);
         if(sightingRoute!=null){var r=sightingRoute;if(r.floor!=floor||SegmentDistance(player.x,player.y,r.a,r.b)<20){EndSighting();return;}sightingTime+=dt;if(sightingTime>=sightingDuration){EndSighting();return;}
             float t=sightingDirection>0?sightingTime/sightingDuration:1-sightingTime/sightingDuration;var p=Vector2.Lerp(XZ(r.a),XZ(r.b),t);corridorFigure.transform.position=World(p,layout.elevation);corridorFigure.transform.rotation=Quaternion.Euler(0,-Mathf.Atan2(r.direction.x*sightingDirection,r.direction.z*sightingDirection)*Mathf.Rad2Deg,0);PoseFigure(sightingTime);
-            float opacity=r.passage?Mathf.Clamp01((r.visibleHalf-Mathf.Abs(t-.5f)*r.length)/.6f):1;silhouetteMaterial.SetFloat("_Opacity",opacity);if(opacity>.5f&&SightingView(p,.98f)&&LineOfSight(layout,player,p))sightingExposure+=dt;return;}
+            float opacity=r.passage?Mathf.Clamp01((r.visibleHalf-Mathf.Abs(t-.5f)*r.length)/.6f):1;silhouetteMaterial.SetFloat("_Opacity",opacity);if(opacity>.5f&&SightingView(p,.98f)&&SightingLine(player,p))sightingExposure+=dt;return;}
         if(sightingRemaining>.000001f||!InCorridor(layout,player))return;sightingCheck-=dt;if(sightingCheck>0)return;sightingCheck=.15f;
         var candidates=new List<SightingRoute>();foreach(var r in manifest.sightings)if(SightingEligible(r))candidates.Add(r);if(candidates.Count==0)return;
         candidates.Sort((a,b)=>(XZ(b.center)-player).sqrMagnitude.CompareTo((XZ(a.center)-player).sqrMagnitude));var far=XZ(candidates[0].center);float end=Vector2.Distance(far,player);var axis=(far-player).normalized;var previous=far;
-        for(float d=end+.25f;d<view.farClipPlane;d+=.25f){var next=player+axis*d;end=d;if(!InCorridor(layout,next)||!IndoorClear(layout,next.x,next.y,.1f)||!LineOfSight(layout,previous,next))break;previous=next;}
+        for(float d=end+.25f;d<view.farClipPlane;d+=.25f){var next=player+axis*d;end=d;if(!InCorridor(layout,next)||!IndoorClear(layout,next.x,next.y,.1f)||!SightingLine(previous,next))break;previous=next;}
         candidates.RemoveAll(r=>Vector2.Distance(XZ(r.center),player)<end*.8f);if(candidates.Count==0)return;if(candidates.Count>1)candidates.Remove(lastSighting);
         sightingRoute=candidates[UnityEngine.Random.Range(0,candidates.Count)];lastSighting=sightingRoute;sightingDirection=UnityEngine.Random.value<.5f?-1:1;sightingDuration=sightingRoute.length/UnityEngine.Random.Range(8f,10f);sightingTime=sightingExposure=0;sightingRemaining=20;
         corridorFigure.transform.position=World(XZ(sightingDirection>0?sightingRoute.a:sightingRoute.b),layout.elevation);PoseFigure(0);silhouetteMaterial.SetFloat("_Opacity",sightingRoute.passage?0:1);corridorFigure.SetActive(true);

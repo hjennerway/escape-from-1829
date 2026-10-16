@@ -31,6 +31,7 @@ try {
     $arguments = @('-batchmode','-quit','-projectPath',(Join-Path $nativeRoot 'Unity'),'-executeMethod',$method,'-logFile',$log)
     if ($Target -eq 'Android') { $arguments += @('-buildTarget','Android') }
     if ($Target -eq 'Windows') { $arguments += @('-buildTarget','Win64') }
+    $buildStarted = [DateTime]::UtcNow
     $unityProcess = Start-Process -FilePath $UnityPath -ArgumentList $arguments -WindowStyle Hidden -PassThru
     # Licensing helpers can outlive the build; wait for Unity, not its process tree.
     $unityProcess.WaitForExit()
@@ -40,6 +41,13 @@ try {
     }
     if (Select-String -LiteralPath $log -Pattern 'Shader error|error CS[0-9]+' -Quiet) { throw "Unity reported a source or shader compilation error; inspect $log" }
     if (Select-String -LiteralPath $log -Pattern "Script attached to .* is missing or no valid script is attached" -Quiet) { throw "Unity built a scene with a missing script; inspect $log" }
-    if ($Target -eq 'Android' -and !(Test-Path (Join-Path $nativeRoot 'out/escape-1829-native.apk'))) { throw 'Unity exited without producing the APK; inspect its log.' }
+    if (!(Select-String -LiteralPath $log -Pattern 'NATIVE_PROTOTYPE_PREPARED' -Quiet)) { throw 'Unity exited without preparing the current scene; inspect its log.' }
+    if ($Target -ne 'Prepare') {
+        $relativeOutput = if ($Target -eq 'Android') { 'out/escape-1829-native.apk' } else { 'out/windows/Escape1829Prototype.exe' }
+        $builtOutput = Get-Item -LiteralPath (Join-Path $nativeRoot $relativeOutput) -ErrorAction SilentlyContinue
+        # Unity can retain the unchanged Windows launcher during an incremental
+        # build. The APK is always newly packaged; require its fresh timestamp.
+        if (!(Select-String -LiteralPath $log -Pattern 'NATIVE_BUILD_SUCCESS' -Quiet) -or !$builtOutput -or ($Target -eq 'Android' -and $builtOutput.LastWriteTimeUtc -lt $buildStarted.AddSeconds(-2))) { throw 'Unity did not produce a successful current build; inspect its log.' }
+    }
     Write-Output "Native $Target completed. Log: $log"
 } finally { Pop-Location }

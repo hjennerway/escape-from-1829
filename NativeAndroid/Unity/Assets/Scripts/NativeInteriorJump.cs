@@ -37,7 +37,7 @@ public sealed partial class NativePrototypeGame
                 bool on=IndoorSupportAt(player,playerY,out var below);if(jumping&&on&&below.flight!=null)playerFlight=below.flight;
                 if(!jumping&&(!on||below.y<playerY-.025f)){jumping=true;jumpVelocity=0;}
                 if(!jumping&&on&&!below.rail){if(below.flight==null&&IndoorClear(floors[below.floor],player.x,player.y))freeInteriorJump=false;
-                    else if(below.flight!=null){var p=player;float y=playerY;int f=floor;var flight=playerFlight;MoveInterior(floors,ref p,ref y,ref f,ref flight,.000001f,0);if(p.x>player.x&&Mathf.Abs(y-playerY)<.025f)freeInteriorJump=false;}}
+                    else if(below.flight!=null){var p=player;float y=playerY;int f=floor;var flight=playerFlight;MoveInterior(floors,ref p,ref y,ref f,ref flight,.0001f,0);if(p.x>player.x&&Mathf.Abs(y-playerY)<.025f)freeInteriorJump=false;}}
             }}
         if(previousFloor!=floor)ShowFloor();
     }

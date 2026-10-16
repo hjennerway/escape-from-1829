@@ -15711,3 +15711,104 @@ interior and preceding estate checks, then stopped at the already documented
 versus 818,879 expected, with the same existing hash mismatch. The full suite
 is therefore not reported as passing; the unrelated snapshot is unchanged.
 The final hardware browser run passed with no page or rendering errors.
+
+## Windows Store refresh and native gameplay parity — 16 October 2026
+
+The Windows release is 1.0.1 (MSIX version 1.0.1.0). The local Store submission
+file is `Desktop/out/EscapeFrom1829-1.0.1-x64-store.msix`. Partner Center accepts
+this MSIX; `EscapeFrom1829-Windows-x64.zip` is the runnable folder archive and
+is not a Store submission package. MakeAppx semantic validation passes and the
+MSIX identity matches the configured local Partner Center identity. The package
+is unsigned for Microsoft to sign after certification; it has not been uploaded
+or published by this refresh.
+
+All 13 desktop unit checks and the packaged offline test pass on NVIDIA GeForce
+RTX 3090 Ti / ANGLE Direct3D11. The latter covers the isolated renderer, storage,
+Escape/notebook, compiled aerial timeline, walking and return navigation. All
+452 files in the packaged game archive match the current browser source bytes;
+the MSIX embeds that exact validated archive. The current estate and interior
+compiled fingerprints pass staging validation. Evidence is in
+`Desktop/artifacts/current-store-build.log`, `current-packaged-test.log`,
+`packaged-smoke.json` and `current-release-verification.json`.
+
+The separate Unity port now includes the newer hollow-eyed apparition,
+20-second distant corridor sightings in Escape and peaceful indoor Explore,
+the optional water-tower inspection route, and jumps over exposed stair rails.
+This supersedes the earlier entries limiting those features to the browser.
+`NativeAndroid/tools/export-port.mjs` exports the actual browser ghost and
+silhouette rigs, the Escape-only converted tower, its moving hatch and retaining
+bar, all twelve stair flights, thirteen landing lamps and the existing narrow
+window openings. Aerial/peaceful tower modelling remains separate from the
+fictional Escape climb. The export also carries 788 generated crossing routes.
+
+Native animation preserves navigation roots, the sculpted matte face and empty
+sockets, articulated shroud/hands and the running silhouette's two-bone legs.
+The silhouette has its own depth-tested, unlit shader without room haze or depth
+writes. Eligible crossings remain at least 20 metres away in the far fifth of
+the clear corridor, defer when a view is unavailable, and cancel on pause,
+reading, floor/stair changes and proximity. The tower uses the existing crowbar,
+optional oil, three seconds of held use, a gradual swept-collision hatch swing,
+quiet/noisy guard-hearing branches, lookout notes, descent objective and
+capture persistence. Retry closes the hatch and clears the discovery. New
+sounds stop on pause, reading, mute and scene changes. Landing fills use native
+light units rather than copying the browser's point-light intensity.
+
+`navigation-export.mjs` now includes each connection's physical flight and
+landing footprints, slab/ceiling openings and full-height well walls. Native
+indoor jumps use absolute feet height, land on flights or rails, fall after
+stepping off, and return to ordinary guarded stair navigation. The navigation
+resumption probe is 0.0001 metres: the browser's 0.000001 displacement can round
+to zero in Unity's single-precision coordinates. Export validation retains
+exact furnished navigation and tests the new data. The bounded importer now
+accepts absent UVs only for untextured meshes and counts shared rig meshes at
+each rendered node. Apparition meshes retain full import precision.
+
+The refreshed export contains 14,812,541 triangles across the complete historical,
+LOD, furnished and scenario libraries; this is not a visible-frame count. It
+retains 13 periods, four floors, all 24 reachable exterior doors and 73 archive
+images. The build entry point requires an actual successful Unity build marker;
+Android additionally requires a newly written APK. Package verification requires
+the native smoke's full manifest hash and matching release version, as well as
+asset/import fingerprints, metadata, ARM64 IL2CPP, attribution and signing checks.
+The final native Windows build and full smoke pass on NVIDIA GeForce RTX 3090 Ti /
+Direct3D11: 73,211 assertions and 3,679 distinct checks. New coverage includes
+48 rail crossings at 120/60/10 Hz, continued stair walking, rail support and
+step-off, long-corridor sightings in both directions, a rendered 38-pixel
+contrast check, both tower noise branches, all twelve flights up and down,
+lookout notes, gradual opening, capture and retry. Reviewed captures include
+the continuous ghost face, full figure, distant silhouette, tower stairs and
+restored arched lookout. The calibrated tower renders contain no clipped-white
+pixels in the lighting probes. Final evidence is in
+NativeAndroid/artifacts/current-port-smoke-5/, current-port-smoke-5.log,
+current-gameplay-windows-build-round5.log and current-native-sources.json.
+The latter records all 55 native source/tool hashes for comparison after the
+Android build.
+
+The signed Android release passes package verification as 0.15.0 / version code 15.
+
+The required `npm test` in Browser passes through the changed gameplay and
+preceding estate checks, then stops at the previously documented
+`test-jarman.mjs:11` protected-estate snapshot mismatch: 818,878 primitives versus
+818,879 expected, with the same existing hash mismatch. The full suite is not
+reported as passing and its fixture is unchanged. Output is retained in
+`NativeAndroid/artifacts/current-browser-suite.log`. The browser GPU policy check
+passes on RTX 3090 Ti / ANGLE Direct3D11.
+
+This work refreshes Windows packaging, Unity gameplay/import/validation sources,
+native generated assets and the Unity scene. Browser modelling/gameplay sources,
+browser compiled assets and Blender exports are unchanged by this refresh.
+No Android device is connected; desktop correctness/rendering checks do not
+establish phone performance or on-device compatibility.
+
+The final `NativeAndroid/out/escape-1829-native.apk` is 373,669,590 bytes,
+SHA-256 `503162264E8360140A222930062D482FEC6D5DF1930FDB7AD9BDD2CD3190EE1D`.
+It contains ARM64 IL2CPP, minimum API 26, target API 36 and all eight required
+licence notices. Its verified APK v2 signature uses the existing certificate,
+allowing an in-place update. The prior 0.14 APK is preserved in
+`NativeAndroid/out/escape-1829-native-v0.14.apk`. The build and verification logs
+are `current-android-build.log`, `unity-android.log` and
+`current-apk-verification.log` under `NativeAndroid/artifacts/`; the stable
+receipts are `current-apk-verification.json` and `current-source-verification.json`.
+All 55 native source/tool files, 339 browser inputs and the full exported manifest
+match the hardware-tested implementation after Android compilation. The APK is
+local and unpublished, and no physical-phone run is claimed.
