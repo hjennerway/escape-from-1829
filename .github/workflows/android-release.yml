@@ -1,0 +1,89 @@
+name: Build Android APK and Play Store bundle
+
+on:
+  workflow_dispatch:
+    inputs:
+      version_name:
+        description: 'Release version (major.minor.patch)'
+        required: true
+        type: string
+        default: '0.16.0'
+      version_code:
+        description: 'Unused Play version code, higher than every previous upload'
+        required: true
+        type: string
+
+permissions:
+  contents: read
+
+concurrency:
+  group: android-release
+  cancel-in-progress: false
+
+jobs:
+  package:
+    # Licensed Unity + Android modules and a real GPU are required for exports.
+    runs-on: [self-hosted, Windows, X64, unity-android]
+    environment: android-release
+    timeout-minutes: 180
+    defaults:
+      run:
+        shell: pwsh
+    env:
+      ANDROID_VERSION_NAME: ${{ inputs.version_name }}
+      ANDROID_VERSION_CODE: ${{ inputs.version_code }}
+      UNITY_EDITOR_PATH: ${{ vars.UNITY_EDITOR_PATH || 'C:/Program Files/Unity/Hub/Editor/6000.6.3f1/Editor/Unity.exe' }}
+      MODEL_CHROME_PATH: ${{ vars.MODEL_CHROME_PATH || 'C:/Program Files/Google/Chrome/Application/chrome.exe' }}
+    steps:
+      - name: Check out source
+        uses: actions/checkout@v4
+      - name: Set up Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+          cache: npm
+          cache-dependency-path: Browser/package-lock.json
+      - name: Check release inputs and runner
+        run: |
+          if ($env:ANDROID_VERSION_NAME -notmatch '^\d+\.\d+\.\d+$') { throw 'Use major.minor.patch for version_name.' }
+          $code = 0
+          if (![int]::TryParse($env:ANDROID_VERSION_CODE, [ref]$code) -or $code -lt 1 -or $code -gt 2100000000) { throw 'Invalid version_code.' }
+          if (!(Test-Path -LiteralPath $env:UNITY_EDITOR_PATH)) { throw 'Install the project Unity editor and Android modules on this runner.' }
+          if ($env:BROWSER_CI_SOFTWARE -eq '1') { throw 'This release runner must use hardware rendering.' }
+      - name: Install export tools
+        run: npm ci --prefix Browser
+      - name: Verify hardware GPU and launcher policy
+        run: npm run test:gpu --prefix Browser
+      - name: Export, validate and build signed APK and AAB
+        env:
+          ANDROID_KEYSTORE_BASE64: ${{ secrets.ANDROID_KEYSTORE_BASE64 }}
+          ANDROID_KEYSTORE_PASSWORD: ${{ secrets.ANDROID_KEYSTORE_PASSWORD }}
+          ANDROID_KEY_ALIAS: ${{ secrets.ANDROID_KEY_ALIAS }}
+          ANDROID_KEY_PASSWORD: ${{ secrets.ANDROID_KEY_PASSWORD }}
+        run: |
+          $ErrorActionPreference = 'Stop'
+          foreach ($name in @('ANDROID_KEYSTORE_BASE64','ANDROID_KEYSTORE_PASSWORD','ANDROID_KEY_ALIAS','ANDROID_KEY_PASSWORD')) {
+            if (![Environment]::GetEnvironmentVariable($name)) { throw "Missing secret: $name" }
+          }
+          $env:ANDROID_KEYSTORE_PATH = Join-Path $env:RUNNER_TEMP "android-upload-$env:GITHUB_RUN_ID.keystore"
+          try {
+            [IO.File]::WriteAllBytes($env:ANDROID_KEYSTORE_PATH, [Convert]::FromBase64String($env:ANDROID_KEYSTORE_BASE64))
+            ./NativeAndroid/tools/build.ps1 -Target AndroidRelease -UnityPath $env:UNITY_EDITOR_PATH
+            if ($LASTEXITCODE -ne 0) { throw 'Android release build failed.' }
+            ./NativeAndroid/tools/verify-release.ps1 -UnityPath $env:UNITY_EDITOR_PATH
+          } finally {
+            Remove-Item -LiteralPath $env:ANDROID_KEYSTORE_PATH -Force -ErrorAction SilentlyContinue
+          }
+      - name: Upload signed Android packages
+        uses: actions/upload-artifact@v4
+        with:
+          name: EscapeFrom1829-Android-${{ inputs.version_name }}-${{ inputs.version_code }}
+          path: |
+            NativeAndroid/out/escape-1829-native.apk
+            NativeAndroid/out/escape-1829-native.aab
+            NativeAndroid/out/android-release.json
+          if-no-files-found: error
+          retention-days: 14
+      - name: Explain downloads
+        run: |
+          'Download the Android artifact from this run. Upload escape-1829-native.aab to Play Console; use the APK for direct installation tests. Both use the configured upload key. No automatic Play Store submission is performed.' >> $env:GITHUB_STEP_SUMMARY

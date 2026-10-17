@@ -1,3 +1,54 @@
+## Android release workflow (17 October 2026)
+
+`.github/workflows/android-release.yml` adds the manual **Build Android APK and
+Play Store bundle** action. It calls `NativeAndroid/tools/build.ps1 -Target
+AndroidRelease`, regenerates native exports, runs their validators and prepares
+the Unity scene before building signed APK and AAB files. Existing local Android
+builds remain APK-only. No generated assets or Blender exports are changed here.
+
+Setup:
+
+- Register a self-hosted Windows x64 runner with the extra label `unity-android`.
+  Use a dedicated checkout and trusted release refs. Pull requests do not trigger
+  this workflow.
+- Install and activate Unity **6000.6.3f1** for the runner account, with Android
+  Build Support, SDK/NDK Tools and OpenJDK, including SDK build-tools **36.0.0**.
+  Install PowerShell 7 and Chrome. Provide a usable hardware GPU session and
+  sufficient memory/disk for the native export and IL2CPP build. The workflow
+  verifies hardware rendering before export; it does not enable software mode.
+- Create the GitHub environment `android-release` and configure any desired
+  branch restrictions. Optional variables `UNITY_EDITOR_PATH` and
+  `MODEL_CHROME_PATH` override the default installation paths.
+- Add secrets `ANDROID_KEYSTORE_BASE64` (base64 of the existing upload keystore),
+  `ANDROID_KEYSTORE_PASSWORD`, `ANDROID_KEY_ALIAS` and `ANDROID_KEY_PASSWORD`.
+  Use the upload key registered for this Play app; retain it between releases.
+  Passwords travel through environment variables. The temporary decoded keystore
+  is removed in a finally block; build logs and project settings are not uploaded.
+
+In Actions, select this workflow and **Run workflow** on the release ref. Enter
+`version_name` as major.minor.patch and an unused positive `version_code` higher
+than all previous Play uploads (maximum 2100000000). The application ID remains
+`org.hjennerway.escape1829.prototype`; confirm it matches the intended listing
+before the first upload. Both packages retain ARM64 IL2CPP and existing SDK levels.
+
+Download `EscapeFrom1829-Android-<version>-<code>` from the run's artifacts:
+`escape-1829-native.aab` is for Play Console; `escape-1829-native.apk` is for direct
+installation tests; `android-release.json` records versions, signing certificate,
+file sizes and SHA-256 hashes. Packages are retained for 14 days. Verification
+checks APK metadata/signature, AAB signature and ARM64 contents, and matching
+signers against the supplied key. No automatic Play submission, version-code
+reservation, phone testing or Play acceptance is claimed. With Play App Signing,
+the direct APK's upload key can differ from the Play-distributed app signing key.
+
+Signing uses [Unity's custom-keystore API](https://docs.unity.com/en-us/engine/6000.6/script-reference/unityeditor/playersettings/android/usecustomkeystore).
+`test-apk.ps1` remains the historical fixed-version smoke receipt; the workflow
+uses `verify-release.ps1` for the selected release version.
+
+Validation: workflow YAML and both PowerShell scripts parse; native navigation,
+port and presentation checks pass. The GPU launcher check passes on NVIDIA
+GeForce RTX 3090 Ti / ANGLE Direct3D11. A signed release build and hosted workflow
+run have not been performed; they require the configured runner and secrets.
+
 ## Shared desktop input deadline (10 October 2026)
 
 Windows runs 38046824324 and 38047472178 passed model checks, packaging,

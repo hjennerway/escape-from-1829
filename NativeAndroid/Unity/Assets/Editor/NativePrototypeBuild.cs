@@ -403,6 +403,49 @@ public static class NativePrototypeBuild
         EditorUserBuildSettings.androidBuildSystem = AndroidBuildSystem.Gradle;
         Build(BuildTarget.Android, "../out/escape-1829-native.apk");
     }
+    // Release-only entry point: never fall back to a debug signing key.
+    public static void AndroidRelease()
+    {
+        string Required(string name) => Environment.GetEnvironmentVariable(name) is string value && !string.IsNullOrWhiteSpace(value)
+            ? value : throw new Exception("Missing release setting: " + name);
+        var version = Required("ANDROID_VERSION_NAME");
+        if (!System.Text.RegularExpressions.Regex.IsMatch(version, @"^\d+\.\d+\.\d+$")) throw new Exception("Version must be major.minor.patch.");
+        if (!int.TryParse(Required("ANDROID_VERSION_CODE"), out var code) || code < 1 || code > 2100000000)
+            throw new Exception("Version code must be between 1 and 2100000000.");
+        var keystore = Required("ANDROID_KEYSTORE_PATH");
+        if (!File.Exists(keystore)) throw new Exception("Release keystore does not exist.");
+        var storePassword = Required("ANDROID_KEYSTORE_PASSWORD");
+        var alias = Required("ANDROID_KEY_ALIAS");
+        var keyPassword = Required("ANDROID_KEY_PASSWORD");
+        if (!BuildPipeline.IsBuildTargetSupported(BuildTargetGroup.Android, BuildTarget.Android)) throw new Exception("Install Android Build Support, SDK/NDK and OpenJDK.");
+        Prepare();
+        PlayerSettings.bundleVersion = version;
+        PlayerSettings.Android.bundleVersionCode = code;
+        PlayerSettings.Android.useCustomKeystore = true;
+        PlayerSettings.Android.keystoreName = keystore;
+        PlayerSettings.Android.keystorePass = storePassword;
+        PlayerSettings.Android.keyaliasName = alias;
+        PlayerSettings.Android.keyaliasPass = keyPassword;
+        EditorUserBuildSettings.androidBuildSystem = AndroidBuildSystem.Gradle;
+        EditorUserBuildSettings.exportAsGoogleAndroidProject = false;
+        EditorUserBuildSettings.development = false;
+        try
+        {
+            EditorUserBuildSettings.buildAppBundle = false;
+            Build(BuildTarget.Android, "../out/escape-1829-native.apk");
+            EditorUserBuildSettings.buildAppBundle = true;
+            Build(BuildTarget.Android, "../out/escape-1829-native.aab");
+        }
+        finally
+        {
+            PlayerSettings.Android.keystorePass = "";
+            PlayerSettings.Android.keyaliasPass = "";
+            PlayerSettings.Android.keystoreName = "";
+            PlayerSettings.Android.keyaliasName = "";
+            PlayerSettings.Android.useCustomKeystore = false;
+            EditorUserBuildSettings.buildAppBundle = false;
+        }
+    }
     static void Build(BuildTarget target, string output)
     {
         Directory.CreateDirectory(Path.GetDirectoryName(output));
