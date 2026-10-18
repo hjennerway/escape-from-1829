@@ -3,14 +3,23 @@
 Run 39135511949 failed before executing the release input checks. The runner's
 worker log shows `WhichUtil.Which` throwing while searching for `pwsh` through
 the stale `C:\Users\Harry\AppData\Local\Programs\OpenAI\Codex\bin` PATH entry.
-The workflow now invokes the built-in Windows PowerShell executable by absolute
-path, avoiding PATH-based shell discovery. PowerShell 7 is no longer required.
+The initial absolute-path shell repair was incomplete: run 39137306822 created
+extensionless temporary scripts because Actions did not recognize the shell name.
+Those scripts did not execute, and artifact upload failed. The workflow now uses
+the recognized `powershell` shell, which resolves the built-in Windows executable
+without probing for optional `pwsh`. Actions supplies the `.ps1` extension,
+terminating-error preference and native exit-status handling. PowerShell 7 is no
+longer required.
 The AAB certificate hash uses the .NET Framework-compatible SHA256 API with
 disposal; the expected SHA-256 and signer checks are unchanged.
 
-Validation: workflow YAML and release scripts parse, the configured shell runs
-with the stale PATH entry present, and its certificate hash matches a known SHA-256 vector
-under Windows PowerShell 5.1. A full signed release and Actions rerun remain
+Validation: workflow YAML parses; the installed runner's ScriptHandlerHelpers
+recognizes the configured shell, supplies `.ps1` and wraps error/exit handling.
+Windows PowerShell 5.1 executes a temporary script and reports both thrown errors
+and failed native commands as nonzero exits. The earlier certificate SHA-256
+compatibility check still applies. The second run also shows all four signing
+secret values empty; configure them in the repository or `android-release`
+environment before building. A full signed release and Actions rerun remain
 unverified. No game models or generated exports changed.
 
 ## Android release workflow (17 October 2026)
