@@ -1,3 +1,20 @@
+## Android release signature verifier repair (18 October 2026)
+
+Run 39138496648 completed the hardware GPU checks, exports, native validators
+and signed Unity APK/AAB build, then failed in `verify-release.ps1`. PowerShell
+split the unquoted JVM option `-J-Duser.language=en`; jarsigner tried to open
+`.language=en` as the archive. Quoting that argument fixes the invocation.
+Verification failures now print the final 25 lines of verifier output before
+throwing. Certificate matching and signature checks remain unchanged.
+
+Validation: reproduced the incorrect archive path, then ran the complete fixed
+release verifier under Windows PowerShell 5.1 against the runner's actual version
+0.16.0 / code 4 APK and AAB. APK metadata/signature, AAB signature, both upload
+certificate comparisons and required ARM64 bundle entries passed; the release
+receipt was generated in the runner's `NativeAndroid/out` directory. No rebuild
+or model/export changes were needed. The workflow fix still needs pushing and
+confirmation in Actions; no Play upload or acceptance is claimed.
+
 ## Self-hosted Android shell discovery repair (18 October 2026)
 
 Run 39135511949 failed before executing the release input checks. The runner's

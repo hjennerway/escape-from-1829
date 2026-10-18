@@ -22,8 +22,13 @@ try {
     }
     # Self-signed upload keys are normal. Verify the archive, then separately
     # compare its signing certificate with the configured upload key.
-    $verification = & $jarsigner -J-Duser.language=en -verify -verbose -certs $aab
-    if ($LASTEXITCODE -ne 0 -or !(($verification -join "`n") -match 'jar verified\.')) { throw 'AAB signature verification failed.' }
+    # Quote the dotted JVM property: PowerShell otherwise splits it into
+    # -J-Duser and .language=en, which jarsigner treats as the archive path.
+    $verification = & $jarsigner '-J-Duser.language=en' -verify -verbose -certs $aab
+    if ($LASTEXITCODE -ne 0 -or !(($verification -join "`n") -match 'jar verified\.')) {
+        $verification | Select-Object -Last 25 | Write-Output
+        throw 'AAB signature verification failed.'
+    }
     $bundleCertificate = & $keytool -printcert -jarfile $aab -rfc
     if ($LASTEXITCODE -ne 0) { throw 'Cannot read AAB signing certificate.' }
     $pem = ($bundleCertificate -join "`n")
