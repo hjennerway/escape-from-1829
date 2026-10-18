@@ -29,7 +29,11 @@ try {
     $pem = ($bundleCertificate -join "`n")
     $match = [regex]::Match($pem, '-----BEGIN CERTIFICATE-----\s*([A-Za-z0-9+/=\s]+)-----END CERTIFICATE-----')
     if (!$match.Success) { throw 'AAB has no signing certificate.' }
-    $bundleDigest = [Convert]::ToHexString([Security.Cryptography.SHA256]::HashData([Convert]::FromBase64String($match.Groups[1].Value))).ToLowerInvariant()
+    # Keep verification compatible with the runner's built-in Windows PowerShell.
+    $sha256 = [Security.Cryptography.SHA256]::Create()
+    try {
+        $bundleDigest = [BitConverter]::ToString($sha256.ComputeHash([Convert]::FromBase64String($match.Groups[1].Value))).Replace('-', '').ToLowerInvariant()
+    } finally { $sha256.Dispose() }
     if ($bundleDigest -ne $expectedDigest) { throw 'AAB signer differs from the upload key.' }
     Add-Type -AssemblyName System.IO.Compression.FileSystem
     $archive = [IO.Compression.ZipFile]::OpenRead($aab)

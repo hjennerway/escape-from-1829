@@ -28,7 +28,9 @@ jobs:
     timeout-minutes: 180
     defaults:
       run:
-        shell: pwsh
+        # Use the built-in shell directly: runner PATH discovery can fail on
+        # stale entries before any script (including PATH repair) can run.
+        shell: C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe -NoLogo -NoProfile -NonInteractive -ExecutionPolicy Bypass -Command ". '{0}'"
     env:
       ANDROID_VERSION_NAME: ${{ inputs.version_name }}
       ANDROID_VERSION_CODE: ${{ inputs.version_code }}

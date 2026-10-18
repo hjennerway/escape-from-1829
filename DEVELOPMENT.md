@@ -1,3 +1,18 @@
+## Self-hosted Android shell discovery repair (18 October 2026)
+
+Run 39135511949 failed before executing the release input checks. The runner's
+worker log shows `WhichUtil.Which` throwing while searching for `pwsh` through
+the stale `C:\Users\Harry\AppData\Local\Programs\OpenAI\Codex\bin` PATH entry.
+The workflow now invokes the built-in Windows PowerShell executable by absolute
+path, avoiding PATH-based shell discovery. PowerShell 7 is no longer required.
+The AAB certificate hash uses the .NET Framework-compatible SHA256 API with
+disposal; the expected SHA-256 and signer checks are unchanged.
+
+Validation: workflow YAML and release scripts parse, the configured shell runs
+with the stale PATH entry present, and its certificate hash matches a known SHA-256 vector
+under Windows PowerShell 5.1. A full signed release and Actions rerun remain
+unverified. No game models or generated exports changed.
+
 ## Android release workflow (17 October 2026)
 
 `.github/workflows/android-release.yml` adds the manual **Build Android APK and
@@ -13,7 +28,7 @@ Setup:
   this workflow.
 - Install and activate Unity **6000.6.3f1** for the runner account, with Android
   Build Support, SDK/NDK Tools and OpenJDK, including SDK build-tools **36.0.0**.
-  Install PowerShell 7 and Chrome. Provide a usable hardware GPU session and
+  Install Chrome. The workflow uses built-in Windows PowerShell. Provide a usable hardware GPU session and
   sufficient memory/disk for the native export and IL2CPP build. The workflow
   verifies hardware rendering before export; it does not enable software mode.
 - Create the GitHub environment `android-release` and configure any desired
