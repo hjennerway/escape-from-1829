@@ -1,3 +1,14 @@
+## Android Play package name (19 October 2026)
+
+Set the Unity Android application identifier and the build preparation override to
+`com.hjennerway.escape_from_1829`. APK validation and the release verification
+receipt now require the same identifier. Both APK and AAB builds use these Unity
+settings. Earlier prototype identifiers in historical notes describe older builds.
+
+Validation: checked identifier consistency across settings, build preparation and
+verification scripts; both PowerShell verification scripts parse successfully.
+Existing APK/AAB files have not been rebuilt by this settings change.
+
 ## Android release signature verifier repair (18 October 2026)
 
 Run 39138496648 completed the hardware GPU checks, exports, native validators
@@ -68,9 +79,8 @@ Setup:
 
 In Actions, select this workflow and **Run workflow** on the release ref. Enter
 `version_name` as major.minor.patch and an unused positive `version_code` higher
-than all previous Play uploads (maximum 2100000000). The application ID remains
-`org.hjennerway.escape1829.prototype`; confirm it matches the intended listing
-before the first upload. Both packages retain ARM64 IL2CPP and existing SDK levels.
+than all previous Play uploads (maximum 2100000000). The application ID is
+`com.hjennerway.escape_from_1829`, matching the required Play listing. Both packages retain ARM64 IL2CPP and existing SDK levels.
 
 Download `EscapeFrom1829-Android-<version>-<code>` from the run's artifacts:
 `escape-1829-native.aab` is for Play Console; `escape-1829-native.apk` is for direct

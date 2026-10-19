@@ -104,7 +104,7 @@ public static class NativePrototypeBuild
         PlayerSettings.companyName = "Chester Night Games";
         PlayerSettings.productName = "Escape from 1829";
         PlayerSettings.bundleVersion="0.15.0";PlayerSettings.Android.bundleVersionCode=15;
-        PlayerSettings.SetApplicationIdentifier(NamedBuildTarget.Android, "org.hjennerway.escape1829.prototype");
+        PlayerSettings.SetApplicationIdentifier(NamedBuildTarget.Android, "com.hjennerway.escape_from_1829");
         PlayerSettings.defaultScreenWidth = 1280; PlayerSettings.defaultScreenHeight = 720;
         PlayerSettings.defaultIsNativeResolution = false;
         PlayerSettings.defaultInterfaceOrientation = UIOrientation.LandscapeLeft;

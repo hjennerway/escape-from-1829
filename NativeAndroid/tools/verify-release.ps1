@@ -17,7 +17,7 @@ try {
     if ($LASTEXITCODE -ne 0 -or !(($signature -join "`n").Contains("certificate SHA-256 digest: $expectedDigest"))) { throw 'APK signature does not match the upload key.' }
     $badging = & "$buildTools/aapt.exe" dump badging $apk
     if ($LASTEXITCODE -ne 0) { throw 'Cannot read APK metadata.' }
-    foreach ($expected in @("name='org.hjennerway.escape1829.prototype'", "versionCode='$env:ANDROID_VERSION_CODE'", "versionName='$env:ANDROID_VERSION_NAME'", "native-code: 'arm64-v8a'")) {
+    foreach ($expected in @("name='com.hjennerway.escape_from_1829'", "versionCode='$env:ANDROID_VERSION_CODE'", "versionName='$env:ANDROID_VERSION_NAME'", "native-code: 'arm64-v8a'")) {
         if (!(($badging -join "`n").Contains($expected))) { throw "APK metadata mismatch: $expected" }
     }
     # Self-signed upload keys are normal. Verify the archive, then separately
@@ -50,7 +50,7 @@ try {
     [ordered]@{
         versionName = $env:ANDROID_VERSION_NAME
         versionCode = [int]$env:ANDROID_VERSION_CODE
-        applicationId = 'org.hjennerway.escape1829.prototype'
+        applicationId = 'com.hjennerway.escape_from_1829'
         certificateSha256 = $expectedDigest
         packages = @($apk, $aab) | ForEach-Object { @{ file = Split-Path $_ -Leaf; bytes = (Get-Item -LiteralPath $_).Length; sha256 = (Get-FileHash -LiteralPath $_ -Algorithm SHA256).Hash } }
     } | ConvertTo-Json -Depth 4 | Set-Content (Join-Path $nativeRoot 'out/android-release.json')
